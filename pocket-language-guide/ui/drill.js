@@ -24,6 +24,7 @@ import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
 import { t } from './i18n.js';
+import { dialogHead } from './dialog.js';
 import { speech } from './platform/speech.js';
 
 /** How many options a multiple-choice question offers, and the fewest it can be
@@ -494,6 +495,8 @@ export function openDrill({ blocks, corpus, spec }) {
       resolve(undefined);
     };
     dialog.addEventListener('cancel', done);
+    // The header stays through all three phases; each phase replaces what is under it.
+    const head = dialogHead({ title: t('drill.heading'), close: t('gallery.previewClose'), onClose: done });
     setup();
 
     // --- setup ------------------------------------------------------------
@@ -602,7 +605,6 @@ export function openDrill({ blocks, corpus, spec }) {
       }
 
       const form = el('form', { class: 'drill-setup', method: 'dialog' }, [
-        el('h2', { text: t('drill.heading') }),
         el('p', { class: 'lede', text: t('drill.lede') }),
         el('div', { class: 'field' }, [
           el('label', { for: 'drill-kind' }, [el('span', { text: t('drill.kind') })]), kind,
@@ -646,7 +648,7 @@ export function openDrill({ blocks, corpus, spec }) {
         }), shownFields, used);
       });
 
-      dialog.replaceChildren(form);
+      dialog.replaceChildren(head, form);
       refresh();
       kind.focus();
     }
@@ -955,7 +957,7 @@ export function openDrill({ blocks, corpus, spec }) {
           form.requestSubmit(action);
         });
 
-        dialog.replaceChildren(form);
+        dialog.replaceChildren(head, form);
         panel.focus()?.focus();
       }
 
@@ -965,7 +967,7 @@ export function openDrill({ blocks, corpus, spec }) {
         again.addEventListener('click', setup);
         const close = el('button', { type: 'button', class: 'primary', text: t('studio.close') });
         close.addEventListener('click', done);
-        dialog.replaceChildren(el('div', { class: 'drill-summary' }, [
+        dialog.replaceChildren(head, el('div', { class: 'drill-summary' }, [
           el('h2', { text: t('drill.summaryHeading') }),
           el('p', {
             text: t('drill.summary', {

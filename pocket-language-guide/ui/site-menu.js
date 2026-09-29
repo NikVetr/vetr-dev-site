@@ -8,7 +8,7 @@
 // bars open it instead, so there is never a second settings screen beside the first.
 
 import { t } from './i18n.js';
-import { settingsCorner } from './speaker-settings.js';
+import { dialogHead } from './dialog.js';
 import { isNative, readResume, RESUME_DEPTHS, writeResume } from './platform/shell.js';
 
 /**
@@ -47,10 +47,9 @@ export function wireSiteMenu(open = () => openAppearance()) {
 export function openAppearance(extra = []) {
   const panel = document.createElement('dialog');
   panel.className = 'speaker-settings site-settings';
-  const head = document.createElement('h2');
-  head.className = 'speaker-title';
-  head.textContent = t('settings.title');
-  panel.append(settingsCorner(panel), head, ...resumeSection(), ...extra);
+  panel.setAttribute('aria-label', t('settings.title'));
+  panel.append(dialogHead({ title: t('settings.title'), close: t('gallery.previewClose'), onClose: () => panel.close(), theme: true }),
+    ...resumeSection(), ...extra);
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();

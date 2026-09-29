@@ -239,12 +239,6 @@
   overflow-y: auto;
 }
 .board-editor::backdrop { background: rgb(0 0 0 / 0.45); }
-.board-editor-head { display: flex; align-items: baseline; gap: var(--space-2); }
-.board-editor-head h2 { margin: 0; font-size: var(--fs-2); flex: 1 1 auto; }
-.board-editor-close {
-  border: none; background: none; font-size: var(--fs-2);
-  line-height: 1; color: var(--muted); cursor: pointer;
-}
 .board-editor-status:empty { display: none; }
 .board-editor-status { margin: var(--space-2) 0 0; font-size: var(--fs--1); }
 .board-editor-error { color: var(--alert); font-weight: 600; }

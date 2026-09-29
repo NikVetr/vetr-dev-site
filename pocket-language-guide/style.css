@@ -2099,27 +2099,32 @@ dialog.speaker-settings {
   font: inherit; color: var(--ink); background: var(--paper);
   max-height: calc(100dvh - 4rem); overflow: auto;
 }
-/* Closing from the corner, which is placed against the dialog because a modal dialog
-   is fixed to the screen -- and must stay so: given `position: relative` for the corner's
-   sake, a dialog in the top layer is laid out against the document instead, and opening
-   one on a scrolled page scrolled it back to the top, or drew it off the screen. Small
-   and quiet, so as not to read as a control the form needs. */
+/* Every dialog's header (`ui/dialog.js`): its name, then whatever belongs to the
+   dialog's own chrome -- the dark-mode switch, in a settings dialog -- then the cross,
+   held at the top while the body scrolls under it, the dialog's width on its paper.
+   The dialog itself stays fixed to the screen: given `position: relative`, a dialog in
+   the top layer is laid out against the document instead, and opening one on a
+   scrolled page scrolled it back to the top or drew it off the screen. */
+.dialog-head {
+  position: sticky; inset-block-start: calc(-1 * var(--space-3)); z-index: 2;
+  display: flex; align-items: center; gap: var(--space-2);
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--paper); border-block-end: 1px solid var(--line-soft);
+}
+.dialog-head .dialog-title {
+  flex: 1 1 auto; min-inline-size: 0; margin: 0;
+  font-size: var(--fs-1); line-height: 1.25; overflow-wrap: break-word;
+}
 /* The cross is drawn, not typed: a × glyph sits on the font's math axis, below the
    middle of the circle, and differently in every face. Two bars about the centre are
-   centred by construction. */
+   centred by construction. Small and quiet, so as not to read as a control the form
+   needs. */
 .speaker-close {
-  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+  position: relative; flex: none;
   inline-size: 1.6rem; block-size: 1.6rem; padding: 0; border: 0; border-radius: 50%;
   background: var(--surface); color: var(--ink); cursor: pointer;
 }
-/* A settings dialog's corner: the dark-mode switch, then the cross. The title under it
-   leaves the corner its room. */
-.speaker-corner {
-  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
-  display: flex; align-items: center; gap: var(--space-1);
-}
-.speaker-corner .speaker-close { position: relative; inset: auto; }
-dialog.speaker-settings:has(> .speaker-corner) > h2 { padding-inline-end: 8.5rem; }
 .speaker-close::before, .speaker-close::after {
   content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: 50%;
   inline-size: 0.75rem; block-size: 2px; border-radius: 1px; background: currentColor;
@@ -2138,6 +2143,9 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
   padding: var(--space-2); margin: 0 0 var(--space-2);
 }
 .speaker-block legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
+/* A section with nothing to offer on this device -- the voice list, where there is no
+   voice -- is not drawn as an empty frame. */
+.speaker-block:empty { display: none; }
 /* Why the question is being asked, next to the question. A form that asks someone
    their gender without saying what it changes has not earned the answer. */
 .speaker-why { margin: 0 0 var(--space-2); font-size: var(--fs--1); color: var(--muted); }
@@ -2161,9 +2169,9 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
    then a key per sound -- a syllable in the owner's letters over its IPA -- sized as a
    phone sizes its keyboard's keys. */
 .about-sounds summary { cursor: pointer; margin-block: var(--space-1); }
-/* Pinned to the top of the dialog as it scrolls, on the dialog's own paper. */
+/* Pinned under the dialog's header as it scrolls, on the dialog's own paper. */
 .sound-head {
-  position: sticky; inset-block-start: calc(-1 * var(--space-3)); z-index: 1;
+  position: sticky; inset-block-start: calc(var(--dialog-head, 0px) - var(--space-3)); z-index: 1;
   background: var(--paper); padding-block: var(--space-2) var(--space-1); border-block-end: 1px solid var(--line-soft);
 }
 .sound-built { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3em; min-block-size: 2.2rem; }
@@ -2197,8 +2205,6 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .sound-key > span { white-space: nowrap; }
 .sound-key small { color: var(--muted); font-size: 0.72em; }
 .sound-vowels .sound-key { background: var(--accent-soft); border-color: var(--accent); }
-/* Only the first row shares the dialog's corner with the cross. */
-.about-ask form > :first-child { padding-inline-end: 2.25rem; }
 
 /* The settings dialog's own action row: three chips that do different-sized things,
    so they wrap rather than squeeze on a phone. */

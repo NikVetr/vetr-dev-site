@@ -27,6 +27,7 @@ import { buildButtons, readButtons } from '../core/personal.js';
 import { answerMark } from './conversation-view.js';
 import { soundGrid } from './board-menu.js';
 import { t } from './i18n.js';
+import { dialogHead } from './dialog.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -400,13 +401,9 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     }
   }
 
-  const close = el('button', { type: 'button', class: 'board-editor-close', text: '×' });
-  close.setAttribute('aria-label', t('quiz.cancel'));
-  close.addEventListener('click', () => panel.close());
-
+  panel.setAttribute('aria-label', t('editor.open'));
   panel.append(
-    el('div', { class: 'board-editor-head' },
-      [el('h2', { text: t('editor.open') }), close]),
+    dialogHead({ title: t('editor.open'), close: t('gallery.previewClose'), onClose: () => panel.close() }),
     status, body,
   );
   panel.addEventListener('close', () => panel.remove());

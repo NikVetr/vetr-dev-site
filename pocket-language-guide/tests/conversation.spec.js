@@ -582,7 +582,7 @@ test('a screen of your own holds buttons, and what is on it travels as a file', 
   await box.locator('.board-editor-screen button').click();
   await expect(box.locator('.board-editor-list li')).toHaveCount(1);
   await expect(box.locator('.board-editor-list li')).toContainText('buttons: 0');
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
 
   const opener = page.locator('.board-cell', { hasText: 'Allergies' });
   await expect(opener).toHaveClass(/board-cell-more/);
@@ -592,7 +592,7 @@ test('a screen of your own holds buttons, and what is on it travels as a file', 
   await expect(page.locator('.board-cell')).toHaveCount(1);
   await expect(page.locator('.board-cell-add')).toHaveCount(1);
   await addOwn(page, 'no peanuts', 'No peanuts, please', '请不要放花生');
-  await page.locator('.board-editor-close').click();
+  await page.locator('dialog.board-editor .dialog-head .speaker-close').click();
   await expect(page.locator('.board-cell')).toHaveCount(1);
   await page.locator('.board-cell').click();
   await expect(page.locator('.board-message-text')).toHaveText('请不要放花生');
@@ -636,7 +636,7 @@ test('a phrase you write appears on the board and survives a reload', async ({ p
   const before = await page.locator('.board-cell').count();
 
   const box = await addOwn(page, 'No peanuts', 'I cannot eat peanuts', '我不能吃花生');
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
   await expect(page.locator('.board-cell')).toHaveCount(before + 1);
 
   // Placement is the reader's and is kept. Nothing reorders by use.
@@ -665,7 +665,7 @@ test('the app does not pretend to translate, and says so', async ({ page }) => {
   await fields.nth(1).fill('Only my side');
   await page.locator('.board-editor').getByRole('button', { name: 'Save', exact: true }).click();
   await expect(page.locator('.board-editor-list li')).toHaveCount(1);
-  await page.locator('.board-editor-close').click();
+  await page.locator('dialog.board-editor .dialog-head .speaker-close').click();
   // Drawn, and drawn unavailable -- the same treatment an author's button gets when
   // the corpus cannot supply it, because the rule is the same: a grid that hides a
   // gap is a grid whose buttons have moved. `resolvePhrase` refuses a half-written
@@ -693,7 +693,7 @@ test('removing a button from a screen is not deleting the phrase', async ({ page
 
   await box.getByRole('button', { name: 'Remove from this screen' }).click();
   await expect(box.locator('.board-editor-list li')).toHaveCount(0);
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
   await expect(page.locator('.board-cell')).toHaveCount(before);
 
   // The sentence itself is still stored -- losing a placement must not lose words
@@ -748,7 +748,7 @@ test('a board button never changes what a sheet prints', async ({ page }) => {
   await expect(page.locator('.board-cell').first()).toBeVisible();
   const box = await addOwn(page, 'No peanuts', 'I cannot eat peanuts', '我不能吃花生');
   await box.getByRole('button', { name: 'Remove from this screen' }).click();
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
 
   expect(await page.evaluate(() => localStorage.getItem('plg.edits.zh-Hans__en'))).toBe(before);
 });
@@ -2133,7 +2133,7 @@ test('a button of your own can carry the answers a stranger might give', async (
   await rows.nth(2).getByRole('button', { name: 'Remove this answer' }).click();
   await expect(rows).toHaveCount(2);
   await form.getByRole('button', { name: 'Save', exact: true }).click();
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
 
   await page.locator('.board-cell', { hasText: 'water' }).click();
   await expect(page.locator('.board-message-text')).toHaveText('有水吗？');
@@ -2354,7 +2354,7 @@ test('a button dropped on the bin is taken off the screen, asked once, and comes
   // A board's own button is switched off, not deleted: the editor switches it back on.
   await page.locator('#board-add-bar').click();
   await page.locator('.board-editor-shipped label', { hasText: 'Goodbye' }).locator('input').check();
-  await page.locator('.board-editor-close').click();
+  await page.locator('dialog.board-editor .dialog-head .speaker-close').click();
   await expect(page.locator('[data-button="bye"]')).toBeVisible();
   // Escape leaves the screen as it was, a removal included.
   await arrangeMode();
@@ -2434,7 +2434,7 @@ test('a context of one\'s own starts as a plus, and can be made of the boards\' 
   await pick.locator('label', { hasText: 'Is a table available?' }).locator('input').check();
   await pick.getByRole('button', { name: 'Save' }).click();
   await expect(page.locator('dialog.board-editor .board-editor-row')).toContainText('Is a table available?');
-  await page.locator('dialog.board-editor .board-editor-close').click();
+  await page.locator('dialog.board-editor .dialog-head .speaker-close').click();
   const taken = page.locator('#board-grid .board-cell').first();
   await expect(taken.locator('.board-cell-label')).toHaveText('Is a table available?');
   await taken.click();
@@ -2723,7 +2723,7 @@ test('a context of your own is made from the list, filled like a board, and dele
   await expect(page).toHaveURL(/board=own%3A|board=own:/);
   await expect(page.locator('#board-title')).toHaveText('Hotel check-in');
   const box = await addOwn(page, 'breakfast', 'When is breakfast?', '早餐几点？');
-  await box.locator('.board-editor-close').click();
+  await box.locator('.dialog-head .speaker-close').click();
   await expect(page.locator('.board-cell', { hasText: 'breakfast' })).toBeVisible();
   // On the list, after the shipped ones, in its own colour.
   await page.locator('#board-up').click();

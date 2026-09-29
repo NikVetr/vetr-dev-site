@@ -4,6 +4,7 @@
 // not at a ticket counter with no signal.
 
 import { el } from './board-menu.js';
+import { dialogHead } from './dialog.js';
 
 /**
  * @typedef {{state: 'pass'|'warn'|'fail', detail: string,
@@ -23,11 +24,9 @@ const GLYPH = { running: '…', pass: '✓', warn: '!', fail: '✕' };
  *   reader says for each mark
  */
 export function openTravelCheck({ title, intro, close, checks, words }) {
-  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings travel-check' }));
-  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
-  corner.addEventListener('click', () => panel.close());
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings travel-check', 'aria-label': title }));
   const list = el('ol', { class: 'travel-check-list' });
-  panel.append(corner, el('h2', { class: 'speaker-title', text: title }), el('p', { class: 'speaker-why', text: intro }), list);
+  panel.append(dialogHead({ title, close, onClose: () => panel.close() }), el('p', { class: 'speaker-why', text: intro }), list);
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();

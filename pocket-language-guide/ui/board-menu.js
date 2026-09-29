@@ -10,6 +10,8 @@
 // off while it is open. All three of those come free from the element and would each
 // have to be written by hand for a bare `<div>` pretending to be a popup.
 
+import { dialogHead } from './dialog.js';
+
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 export function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
@@ -114,22 +116,21 @@ export function openBoardMenu(anchor, items, aside) {
 }
 
 /**
- * A dialog holding one small form -- the corner control, what is asked, and Save --
- * that hands the answer on only when Save (or Enter) is pressed: closing it any other
- * way, its corner, Escape, a press outside it, is changing one's mind.
- * @param {{kind:string, close:string, save:string, body:Node[], onSubmit:() => void, focus?:HTMLElement}} config
+ * A dialog holding one small form -- a header naming what is asked, the field, and
+ * Save -- that hands the answer on only when Save (or Enter) is pressed: closing it any
+ * other way, its cross, Escape, a press outside it, is changing one's mind.
+ * @param {{kind:string, title:string, close:string, save:string, body:Node[], onSubmit:() => void,
+ *   focus?:HTMLElement}} config
  */
-function formDialog({ kind, close, save, body, onSubmit, focus }) {
-  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: `speaker-settings ${kind}` }));
-  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
-  corner.addEventListener('click', () => panel.close());
+function formDialog({ kind, title, close, save, body, onSubmit, focus }) {
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: `speaker-settings ${kind}`, 'aria-label': title }));
   const form = el('form', {}, [...body, el('button', { class: 'btn primary form-save', text: save })]);
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     onSubmit();
     panel.close();
   });
-  panel.append(corner, form);
+  panel.append(dialogHead({ title, close, onClose: () => panel.close() }), form);
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();
@@ -140,26 +141,26 @@ function formDialog({ kind, close, save, body, onSubmit, focus }) {
 const hintLine = (hint) => (hint ? [el('p', { class: 'speaker-why', text: hint })] : []);
 
 /**
- * A yes-or-no question in a dialog of its own, with a box for not being asked it again.
- * Closing it any other way is a no, and the safe answer has the focus.
- * @param {{title: string, body: string, yes: string, no: string, again: string, close: string}} config
+ * A yes-or-no question in a dialog of its own, with -- where `again` is given -- a box
+ * for not being asked it again. Closing it any other way is a no, and the safe answer
+ * has the focus.
+ * @param {{title: string, body: string, yes: string, no: string, again?: string, close: string}} config
  * @returns {Promise<{ok: boolean, askAgain: boolean}>}
  */
 export function askConfirm({ title, body, yes, no, again, close }) {
-  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings confirm-ask' }));
-  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings confirm-ask', 'aria-label': title }));
   const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
   const accept = el('button', { type: 'button', class: 'btn primary', text: yes });
   const keep = el('button', { type: 'button', class: 'btn', text: no });
-  panel.append(corner, el('p', { class: 'speaker-title', text: title }), el('p', { class: 'speaker-why', text: body }),
-    el('label', { class: 'speaker-option' }, [box, again]), el('div', { class: 'confirm-actions' }, [keep, accept]));
+  panel.append(dialogHead({ title, close, onClose: () => panel.close() }), el('p', { class: 'speaker-why', text: body }),
+    ...(again ? [el('label', { class: 'speaker-option' }, [box, again])] : []),
+    el('div', { class: 'confirm-actions' }, [keep, accept]));
   document.body.append(panel);
   panel.showModal();
   keep.focus();
   let ok = false;
   accept.addEventListener('click', () => { ok = true; panel.close(); });
   keep.addEventListener('click', () => panel.close());
-  corner.addEventListener('click', () => panel.close());
   return new Promise((resolve) => {
     panel.addEventListener('close', () => { panel.remove(); resolve({ ok, askAgain: !box.checked }); });
   });
@@ -168,9 +169,9 @@ export function askConfirm({ title, body, yes, no, again, close }) {
 /**
  * Ask for one line of text in a dialog of its own, and hand it back on Save.
  * @param {object} config
- * @param {string} config.label  what the field is, above it
+ * @param {string} config.label  what the field is: the dialog's title
  * @param {string} config.save   the button's word
- * @param {string} config.close  the corner control's accessible name
+ * @param {string} config.close  the cross's accessible name
  * @param {(value:string) => void} config.onSave  given the text, trimmed
  * @param {string} [config.value]  what is in the field to begin with
  * @param {string} [config.hint]   a line under the field
@@ -182,10 +183,10 @@ export function askText({ label, save, close, onSave, value = '', hint, autocomp
   const input = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
   input.value = value;
   if (autocomplete) input.setAttribute('autocomplete', autocomplete);
+  input.setAttribute('aria-label', label);
   formDialog({
-    kind, close, save, focus: input,
-    body: [el('label', { class: 'about-field' }, [el('span', { text: label }), input]), ...hintLine(hint),
-      ...(more ? [more] : [])],
+    kind, title: label, close, save, focus: input,
+    body: [el('label', { class: 'about-field' }, [input]), ...hintLine(hint), ...(more ? [more] : [])],
     onSubmit: () => onSave(input.value.trim()),
   });
 }
@@ -215,8 +216,9 @@ export function askChoices({ label, options = [], groups, chosen, save, close, o
     ? groups.map((g) => el('details', { class: 'speaker-group' }, [el('summary', { text: g.label }), ...rows(g.options)]))
     : rows(options);
   formDialog({
-    kind, close, save, focus: groups ? undefined : boxes[0],
-    body: [el('fieldset', { class: 'speaker-block' }, [el('legend', { text: label }), ...held]), ...hintLine(hint)],
+    kind, title: label, close, save, focus: groups ? undefined : boxes[0],
+    body: [el('fieldset', { class: 'speaker-block' }, [el('legend', { class: 'visually-hidden', text: label }), ...held]),
+      ...hintLine(hint)],
     onSubmit: () => onSave(boxes.filter((b) => b.checked).map((b) => b.value)),
   });
 }
@@ -234,9 +236,10 @@ export function askChoices({ label, options = [], groups, chosen, save, close, o
 export function askSelect({ label, options, value = '', save, close, onSave, hint, kind = '' }) {
   const select = /** @type {HTMLSelectElement} */ (el('select'));
   select.append(...options.map((o) => new Option(o.label, o.value, false, o.value === value)));
+  select.setAttribute('aria-label', label);
   formDialog({
-    kind, close, save, focus: select,
-    body: [el('label', { class: 'about-field' }, [el('span', { text: label }), select]), ...hintLine(hint)],
+    kind, title: label, close, save, focus: select,
+    body: [el('label', { class: 'about-field' }, [select]), ...hintLine(hint)],
     onSubmit: () => onSave(select.value),
   });
 }

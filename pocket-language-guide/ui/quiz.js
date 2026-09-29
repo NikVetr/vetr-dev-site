@@ -8,6 +8,7 @@
 import { defaultSelection } from '../core/pack.js';
 import { headBands } from '../core/solve/index.js';
 import { t } from './i18n.js';
+import { dialogHead } from './dialog.js';
 
 // Keys rather than words: this is module scope, evaluated before a catalogue is
 // loaded, so each option is named where it is built.
@@ -78,8 +79,9 @@ export function openQuiz() {
     new Option(t('quiz.print.large'), 'large'),
   );
 
+  dialog.setAttribute('aria-label', t('quiz.heading'));
   dialog.append(
-    el('h2', { text: t('quiz.heading') }),
+    dialogHead({ title: t('quiz.heading'), close: t('gallery.previewClose'), onClose: () => cancel.click() }),
     el('p', { class: 'lede', text: t('quiz.lede') }),
     el('fieldset', {}, [
       el('legend', { text: t('quiz.doing') }),

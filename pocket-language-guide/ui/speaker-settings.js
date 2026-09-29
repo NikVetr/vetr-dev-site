@@ -26,7 +26,7 @@
 import { axesFor, unanswered } from '../core/speaker.js';
 import { t } from './i18n.js';
 import * as store from './platform/store.js';
-import { themeControl } from './theme.js';
+import { dialogHead } from './dialog.js';
 
 const KEY = 'plg.speaker';
 
@@ -101,23 +101,6 @@ function el(tag, attrs = {}, kids = []) {
   return node;
 }
 
-/**
- * A settings dialog's top corner: the dark-mode switch, then the small cross that
- * closes it. The switch is a setting of the whole app, the one every page's settings
- * share, so it sits with the dialog's own chrome rather than as a section of its own.
- * @param {HTMLDialogElement} panel
- */
-export function settingsCorner(panel) {
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.className = 'speaker-close';
-  close.setAttribute('aria-label', t('gallery.previewClose'));
-  close.addEventListener('click', () => panel.close());
-  const corner = document.createElement('div');
-  corner.className = 'speaker-corner';
-  corner.append(themeControl(), close);
-  return corner;
-}
 
 /**
  * Open the settings screen for the axes this reader's languages actually declare.
@@ -176,11 +159,11 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   // **The dialog is the settings screen, not only the voice question.** It holds the
   // reader's own phrases too, and those exist whether or not their languages inflect
   // -- so the heading is the general one and the voice part introduces itself.
-  // Every change is committed as it is made, so closing is closing: the corner
-  // control and Done do the same thing, and the corner is where a thumb looks for it.
+  // Every change is committed as it is made, so closing is closing: the header's cross
+  // and Done do the same thing.
+  panel.setAttribute('aria-label', t('settings.title'));
   panel.append(
-    settingsCorner(panel),
-    el('h2', { text: t('settings.title') }),
+    dialogHead({ title: t('settings.title'), close: t('gallery.previewClose'), onClose: () => panel.close(), theme: true }),
     ...(fields.length
       ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]
       : []),

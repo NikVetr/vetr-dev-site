@@ -241,7 +241,7 @@ test.describe('quiz mode', () => {
     expect(said.lang).toBe('zh-CN');
 
     // Target text asked: Speak waits for the grade.
-    await drill.getByRole('button', { name: /Close/ }).click();
+    await drill.getByText('Close', { exact: true }).click();
     const again = await openDrill(page, 'speak-2');
     await again.locator('select#drill-kind').selectOption('blank');
     const asked2 = again.locator('fieldset').nth(1);
