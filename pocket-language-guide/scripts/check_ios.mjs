@@ -238,10 +238,21 @@ check('resume-launch', resumed === '/conversation.html?target=zh-Hans&source=en'
 await p.open(SPA, '.board-cell');
 check('persist-relaunch', await p.evaluate(`!!document.querySelector('[data-button="p1"]')`), 'a phrase written through Preferences, then terminate and launch');
 p.close();
+// **On disk before the reinstall.** `UserDefaults` hands a write to the preferences
+// daemon, which puts it on disk seconds later, and installing over the app drops what
+// the daemon has not yet written: measured, the phrase was not in the container's plist
+// just after the relaunch and was eight seconds on, and a reinstall in between lost it.
+// An update comes long after the last write, so the check waits for the state an update
+// finds -- and a value that never reaches the disk still fails it.
+const plist = `${run('xcrun', ['simctl', 'get_app_container', UDID, APP, 'data'])}/Library/Preferences/${APP}.plist`;
+const onDisk = () => { try { return run('plutil', ['-p', plist]).includes('CapacitorStorage.plg.boards'); } catch { return false; } };
+let waited = 0;
+for (; waited < 30_000 && !onDisk(); waited += 500) await sleep(500);
 run('xcrun', ['simctl', 'install', UDID, BUILT]);
 p = await launch();
 await p.open(SPA, '.board-cell');
-check('persist-reinstall', await p.evaluate(`!!document.querySelector('[data-button="p1"]')`), 'the same after installing the build over itself');
+check('persist-reinstall', await p.evaluate(`!!document.querySelector('[data-button="p1"]')`),
+  `the same after installing the build over itself, once on disk (${waited}ms)`);
 
 // --- 3. speech, from a real touch ------------------------------------------------
 await p.touch(`document.querySelector('[data-button="stop"]')`);
