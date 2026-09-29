@@ -20,6 +20,7 @@
 import { chipToggle, swatchRow } from './chips.js';
 import { itemEditForm } from './content-tree.js';
 import { t } from './i18n.js';
+import { dialogHead } from './dialog.js';
 
 /** Margin kept between the popup and the edge of the viewport, in px. */
 const EDGE = 8;
@@ -87,19 +88,30 @@ export function openItemPopup(config) {
   panel.setAttribute('aria-modal', 'false');
   panel.setAttribute('aria-label', t('popup.editing', { row: config.title }));
 
-  const head = document.createElement('p');
-  head.className = 'item-popup-title';
-  head.textContent = config.title;
-  head.lang = config.target;
+  // Which row this is, before what to do with it: its own words as the header, what
+  // they mean under them, and the section it belongs to beside a dot of its colour.
+  const head = dialogHead({ title: config.title, close: t('gallery.previewClose'), onClose: closeItemPopup });
+  const name = /** @type {HTMLElement} */ (head.querySelector('.dialog-title'));
+  name.classList.add('item-popup-title');
+  name.lang = config.target;
+  const about = document.createElement('div');
+  about.className = 'item-popup-about';
+  if (config.values.gloss && config.values.gloss !== config.title) {
+    const meaning = document.createElement('p');
+    meaning.className = 'item-popup-meaning';
+    meaning.lang = config.source;
+    meaning.textContent = config.values.gloss;
+    about.append(meaning);
+  }
+  const section = document.createElement('p');
+  section.className = 'item-popup-section';
+  const dot = document.createElement('span');
+  dot.className = 'item-popup-dot';
+  dot.style.background = config.colours.find((c) => c.key === config.role)?.hex ?? 'var(--line)';
+  section.append(dot, config.sectionTitle);
+  about.append(section);
 
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.className = 'item-popup-close';
-  close.setAttribute('aria-label', t('quiz.cancel'));
-  close.textContent = '×';
-  close.addEventListener('click', closeItemPopup);
-
-  /** A labelled toggle, as a chip. @param {string} label @param {boolean} on
+  /** A labelled toggle, as a row. @param {string} label @param {boolean} on
    * @param {(value:boolean)=>void} set */
   const toggle = (label, on, set) => {
     const chip = chipToggle({ label, checked: on, onChange: set, title: label });
@@ -107,12 +119,9 @@ export function openItemPopup(config) {
     return chip.label;
   };
 
-  // Chips rather than two checkbox rows, wrapping and so sharing one line whenever
-  // the section's name is short enough -- "Toilets" does, "Social + basics" does
-  // not. Not really a saving in English either way: it is here because this panel
-  // sits over the card at arm's length on a phone, and "is this row on the sheet"
-  // is the question in it a reader wants answered from a glance rather than from
-  // finding a 13px tick.
+  // Two rows of one group, each with its box at the end, rather than two chips that
+  // wrapped wherever the section's name ran long: "is this row on the sheet" is the
+  // question this panel is opened for, and it should read as one at arm's length.
   const rows = document.createElement('div');
   rows.className = 'item-popup-rows';
   rows.append(
@@ -125,23 +134,29 @@ export function openItemPopup(config) {
   // The section's colour, as the five swatches rather than a cycling button: the
   // colour is the sheet's whole category encoding, so the choice should be in front
   // of you. The same row the format panel's band uses, from `chips.js`.
+  const colour = document.createElement('div');
+  colour.className = 'item-popup-colour';
   if (config.colours.length) {
+    const said = t('tree.recolour', { section: config.sectionTitle });
     const palette = swatchRow({
       colours: config.colours,
-      label: t('tree.recolour', { section: config.sectionTitle }),
+      label: said,
       onPick: (key) => {
         config.onToggle({ sectionColors: { [config.sectionId]: key } });
         closeItemPopup();
       },
     });
     palette.paint(config.role);
-    rows.append(palette.row);
+    const caption = document.createElement('p');
+    caption.textContent = said;
+    colour.append(caption, palette.row);
   }
 
   const actions = document.createElement('div');
-  actions.className = 'row';
+  actions.className = 'item-popup-actions';
   const edit = document.createElement('button');
   edit.type = 'button';
+  edit.className = 'primary';
   edit.textContent = t('popup.editText');
   edit.addEventListener('click', () => {
     if (panel.querySelector('.item-edit')) return;
@@ -169,7 +184,7 @@ export function openItemPopup(config) {
   });
   actions.append(edit, list);
 
-  panel.append(close, head, rows, actions);
+  panel.append(head, about, rows, ...(config.colours.length ? [colour] : []), actions);
   document.body.append(panel);
   open = panel;
   place(panel, config.anchor.getBoundingClientRect());

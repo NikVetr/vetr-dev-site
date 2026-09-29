@@ -2055,39 +2055,57 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
    `ui/item-popup.js`, which measures it: the height depends on how many columns the
    sheet shows, so there is no constant to place it by. */
 .item-popup {
-  position: fixed; z-index: 40; inline-size: min(17rem, calc(100vw - 1rem));
-  display: flex; flex-direction: column; gap: var(--space-1);
+  position: fixed; z-index: 40; inline-size: min(19rem, calc(100vw - 1rem));
+  max-block-size: calc(100dvh - 1rem); overflow: auto;
+  display: flex; flex-direction: column; gap: var(--space-2);
   background: var(--paper); color: var(--ink);
-  border: 1px solid var(--muted); border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgb(17 24 32 / 22%);
-  padding: var(--space-2); font-size: var(--fs--1);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgb(17 24 32 / 24%);
+  padding: var(--space-3); font-size: var(--fs--1);
 }
-.item-popup-title {
-  margin: 0 1.4em 0 0; font-weight: 700; line-height: 1.25;
-  /* A long phrase must not push the panel wider than the screen. */
-  overflow-wrap: anywhere;
+/* The header's name is the row's own words: set as a phrase, not as a dialog title, and
+   wrapped rather than widening the panel past the row it is anchored to. */
+.item-popup .dialog-head { margin-block-end: 0; }
+.item-popup .item-popup-title { font-size: var(--fs-0); overflow-wrap: anywhere; }
+.item-popup-about { display: grid; gap: 0.25em; }
+.item-popup-meaning { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+.item-popup-section { margin: 0; display: flex; align-items: center; gap: 0.45em; font-weight: 600; }
+.item-popup-dot { flex: none; inline-size: 0.75em; block-size: 0.75em; border-radius: 50%; }
+/* Two rows of one group, each with its box at the end: the row tints and the box fills
+   with a tick when it is on, so the state reads from either. */
+.item-popup-rows {
+  display: grid; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden;
 }
-.item-popup-close {
-  position: absolute; inset-block-start: 2px; inset-inline-end: 2px;
-  border: 0; background: none; color: var(--muted);
-  font-size: 1.1rem; line-height: 1; padding: 0.2em 0.35em; cursor: pointer;
+.item-popup .item-popup-toggle {
+  display: flex; justify-content: space-between; gap: var(--space-2);
+  max-inline-size: none; padding: 0.6em 0.75em; border: 0; border-radius: 0;
+  font-size: inherit;
 }
-.item-popup-close:hover, .item-popup-close:focus-visible { color: var(--ink); }
-/* Two chips, then the palette on its own line. Wrapped rather than a column: "Show
-   this row" sits beside "Show all of Toilets" in English and will not in German,
-   and both of those are the right answer for their own reader. */
-.item-popup-rows { display: flex; flex-wrap: wrap; gap: 0.25em; }
-/* The chip idiom carries the look. All this adds is that a long section name wraps
-   inside the chip rather than widening the panel past the row it is anchored to. */
-.item-popup-toggle { max-inline-size: 100%; }
-/* The shared swatch row, on its own line under the two chips rather than trailing
-   them: it is a different question from "is this row on the sheet". */
-.item-popup .swatch-row { flex: 1 0 100%; margin-block-start: 0.2em; }
-/* The shared row editor, which the tree lays out in a wide panel and this one has
-   to fit into 17rem: one field per line rather than side by side. */
-.item-popup .item-edit { display: flex; flex-direction: column; gap: 0.3em; }
-.item-popup .item-edit label { display: flex; flex-direction: column; gap: 0.1em; }
-.item-popup .item-edit input { inline-size: 100%; }
+.item-popup .item-popup-toggle + .item-popup-toggle { border-block-start: 1px solid var(--line-soft); }
+.item-popup .item-popup-toggle::after {
+  content: ''; flex: none; display: grid; place-items: center;
+  inline-size: 1.15em; block-size: 1.15em; border: 1.5px solid var(--muted); border-radius: 4px;
+}
+.item-popup .item-popup-toggle:has(> input:checked)::after {
+  content: '\2713'; background: var(--accent); border-color: var(--accent); color: var(--paper);
+  font-weight: 700; line-height: 1;
+}
+.item-popup-colour { display: grid; gap: 0.35em; }
+.item-popup-colour > p { margin: 0; color: var(--muted); }
+.item-popup-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.item-popup-actions > button { flex: 1 1 auto; justify-content: center; }
+/* The shared row editor, fitted to the popup: each field's name small over a compact
+   box, one per line, and Save as the primary action. */
+.item-popup .item-edit {
+  display: grid; grid-template-columns: 1fr; gap: var(--space-2); margin: 0;
+  padding: var(--space-2) 0 0; background: none; border: 0; border-radius: 0;
+  border-block-start: 1px solid var(--line-soft);
+}
+.item-popup .item-edit label { display: grid; gap: 0.2em; }
+.item-popup .item-edit input { inline-size: 100%; font: inherit; padding: 0.4em 0.55em; }
+.item-popup .item-edit .row { justify-content: flex-end; }
+.item-popup .item-edit button { font-size: inherit; padding: 0.4em 0.9em; }
+.item-popup .item-edit button[type="submit"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
 
 /* --- how you speak --------------------------------------------------------
    Shared by the conversation board and the cheat sheet, because it is one fact
