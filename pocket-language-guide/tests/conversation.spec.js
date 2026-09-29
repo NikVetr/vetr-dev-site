@@ -1002,6 +1002,22 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   await expect(page.locator('.board-rate')).toHaveText('0.5×');
 });
 
+test('a copy can be saved of the counts alone', async ({ page }) => {
+  // The counts go into the backup, so a reader whose only history is what they
+  // pressed still gets a file: the check for "nothing to save" once left them out,
+  // and said so to a phone that had counts and nothing else.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await page.locator('[data-button="stronger"]').click();
+  await page.locator('.board-message').click();
+  await fromMenu(page, 'Settings');
+  const save = page.waitForEvent('download');
+  await page.locator('dialog.speaker-settings').getByRole('button', { name: 'Save a copy' }).click();
+  const stream = await (await save).createReadStream();
+  let text = '';
+  for await (const chunk of stream) text += chunk;
+  expect(Object.keys(JSON.parse(text).usage.items)).toEqual(['c:massage-spa.stronger-pressure']);
+});
+
 test('Most used gathers the buttons pressed most, from every context, most first', async ({ page }) => {
   // Counted by what was said, so a press anywhere counts; shown by the button it was
   // last pressed on. Empty, the screen says how it fills.
