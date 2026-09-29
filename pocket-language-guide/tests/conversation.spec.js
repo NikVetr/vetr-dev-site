@@ -155,6 +155,35 @@ test('a message with no answers offers no reply, and gaps are reported', async (
   await expect(page.locator('#board-status')).toBeEmpty();
 });
 
+test('a name is answered with a name: its blank drawn to fill, and no yes or no', async ({ page }) => {
+  // "What is your name?" once offered yes, no and "One more time, please?" -- a set
+  // written for another question. The listener gives their name into a blank, drawn as
+  // a space to fill rather than braces, or declines.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro&screen=about');
+  await page.locator('[data-button="yourname"]').click();
+  await page.locator('.board-reply').click();
+  const answers = page.locator('.board-answer');
+  await expect(answers).toHaveCount(3);
+  await expect(answers.first().locator('.board-blank')).toHaveCount(1);
+  await expect(page.locator('.board-answers')).not.toContainText('{}');
+  await expect(page.locator('.board-answers')).not.toContainText('是');
+  await answers.first().click();
+  const said = page.locator('.board-message-text');
+  await expect(said).toContainText('My name is');
+  await expect(said.locator('.board-blank')).toHaveCount(1);
+  await expect(said).not.toContainText('{}');
+});
+
+test('the taxi screen is for someone already in the taxi', async ({ page }) => {
+  // Where to turn, rather than calling a taxi or asking where to be picked up.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  for (const id of ['straight', 'left', 'right', 'uturn', 'stophere']) {
+    await expect(page.locator(`[data-button="${id}"]`)).toBeVisible();
+  }
+  for (const id of ['calltaxi', 'meter', 'pickup']) await expect(page.locator(`[data-button="${id}"]`)).toHaveCount(0);
+  await expect(page.locator('[data-button="uturn"]')).toContainText('Please turn around');
+});
+
 test('a board refuses a language it cannot say, and names it', async ({ page }) => {
   // A board needs text on *both* sides, so one whose phrases have no Quenya is not a
   // board for a Quenya listener -- better a clear refusal than letting every button
@@ -2805,7 +2834,7 @@ test('turned, Reply keeps a size for its sentence, and stays inside the frame', 
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('#board-turn-bar').click();
-  await page.locator('[data-button="gentler"]').click();
+  await page.locator('[data-button="hurts"]').click();
   await expect(page.locator('.board-reply')).toBeVisible();
   const sizes = () => page.evaluate(() => {
     const px = (/** @type {string} */ sel) => Number.parseFloat(getComputedStyle(/** @type {HTMLElement} */ (document.querySelector(sel))).fontSize);

@@ -13,7 +13,8 @@
             "kind": "corpus",
             "id": "taxi.please-stop-here"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "drive"
         },
         {
           "id": "hurry",
@@ -31,7 +32,8 @@
             "kind": "corpus",
             "id": "taxi.please-take-me-here"
           },
-          "colour": "move"
+          "colour": "move",
+          "replySetId": "take-me"
         },
         {
           "id": "subway",
@@ -83,17 +85,58 @@
             "kind": "corpus",
             "id": "taxi.please-take-me-here"
           },
-          "colour": "move"
+          "colour": "move",
+          "replySetId": "take-me"
         },
         {
-          "id": "meter",
+          "id": "straight",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "taxi.please-use-the-meter"
+            "id": "quick-directions.go-straight"
           },
-          "colour": "money",
-          "replySetId": "yes-no-fact"
+          "colour": "move",
+          "replySetId": "drive"
+        },
+        {
+          "id": "left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-left"
+          },
+          "colour": "move",
+          "replySetId": "drive"
+        },
+        {
+          "id": "right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-right"
+          },
+          "colour": "move",
+          "replySetId": "drive"
+        },
+        {
+          "id": "uturn",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-turn-around"
+          },
+          "colour": "move",
+          "replySetId": "drive"
+        },
+        {
+          "id": "stophere",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-stop-here"
+          },
+          "colour": "alert",
+          "replySetId": "drive"
         },
         {
           "id": "waitforme",
@@ -113,7 +156,7 @@
             "id": "taxi.could-you-make-it-colder"
           },
           "colour": "stay",
-          "replySetId": "yes-no-fact"
+          "replySetId": "acknowledge"
         },
         {
           "id": "warmer",
@@ -123,7 +166,7 @@
             "id": "taxi.could-you-make-it-warmer"
           },
           "colour": "stay",
-          "replySetId": "yes-no-fact"
+          "replySetId": "acknowledge"
         },
         {
           "id": "window",
@@ -133,36 +176,7 @@
             "id": "taxi.may-i-open-the-window"
           },
           "colour": "stay",
-          "replySetId": "yes-no-fact"
-        },
-        {
-          "id": "stophere",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "taxi.please-stop-here"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "calltaxi",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "pickup-meeting.please-call-a-taxi"
-          },
-          "colour": "move",
-          "replySetId": "wait-for-me"
-        },
-        {
-          "id": "pickup",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "pickup-meeting.where-is-the-pickup-point"
-          },
-          "colour": "move",
-          "replySetId": "point-it-out"
+          "replySetId": "acknowledge"
         }
       ]
     },
@@ -207,7 +221,7 @@
             "id": "transit-rides.is-it-delayed"
           },
           "colour": "stay",
-          "replySetId": "yes-no-fact"
+          "replySetId": "delay"
         },
         {
           "id": "fare",
@@ -217,7 +231,7 @@
             "id": "transit-rides.where-do-i-pay-the-fare"
           },
           "colour": "money",
-          "replySetId": "point-it-out"
+          "replySetId": "pay-where"
         },
         {
           "id": "validate",
@@ -267,7 +281,7 @@
             "id": "transit-rides.please-tell-me-where-to-get-off"
           },
           "colour": "move",
-          "replySetId": "acknowledge"
+          "replySetId": "get-off"
         },
         {
           "id": "nextstop",
@@ -286,7 +300,7 @@
             "id": "transit-rides.i-went-past-my-stop"
           },
           "colour": "alert",
-          "replySetId": "point-it-out"
+          "replySetId": "get-off"
         }
       ]
     },
@@ -350,7 +364,7 @@
             "id": "transit-rides.is-it-delayed"
           },
           "colour": "stay",
-          "replySetId": "yes-no-fact"
+          "replySetId": "delay"
         },
         {
           "id": "window",
@@ -360,7 +374,7 @@
             "id": "air-travel.i-would-like-a-window-seat"
           },
           "colour": "stay",
-          "replySetId": "acknowledge"
+          "replySetId": "seat"
         },
         {
           "id": "aisle",
@@ -370,7 +384,7 @@
             "id": "air-travel.i-would-like-an-aisle-seat"
           },
           "colour": "stay",
-          "replySetId": "acknowledge"
+          "replySetId": "seat"
         },
         {
           "id": "baggage",
@@ -380,7 +394,7 @@
             "id": "border-customs.where-do-i-collect-my-baggage"
           },
           "colour": "move",
-          "replySetId": "point-it-out"
+          "replySetId": "platform"
         },
         {
           "id": "lostbag",
@@ -390,7 +404,7 @@
             "id": "air-travel.my-luggage-did-not-arrive"
           },
           "colour": "alert",
-          "replySetId": "acknowledge"
+          "replySetId": "lost-bag"
         }
       ]
     },
@@ -405,7 +419,7 @@
             "id": "hitchhiking.can-you-give-me-a-ride"
           },
           "colour": "move",
-          "replySetId": "yes-no-fact"
+          "replySetId": "hitch"
         },
         {
           "id": "whereto",
@@ -415,7 +429,7 @@
             "id": "hitchhiking.where-are-you-going"
           },
           "colour": "move",
-          "replySetId": "point-it-out"
+          "replySetId": "heading"
         },
         {
           "id": "nexttown",
@@ -435,7 +449,7 @@
             "id": "hitchhiking.is-there-room-for-two"
           },
           "colour": "move",
-          "replySetId": "yes-no-fact"
+          "replySetId": "hitch"
         },
         {
           "id": "fuel",
@@ -454,7 +468,8 @@
             "kind": "corpus",
             "id": "taxi.please-stop-here"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "drive"
         },
         {
           "id": "thanks",
@@ -472,27 +487,35 @@
     "point-it-out": {
       "buttons": [
         {
-          "id": "this-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.this-way"
-          }
-        },
-        {
-          "id": "that-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.that-way"
-          }
-        },
-        {
           "id": "go-straight",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-directions.go-straight"
+          }
+        },
+        {
+          "id": "turn-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-left"
+          }
+        },
+        {
+          "id": "turn-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-right"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
           }
         },
         {
@@ -509,22 +532,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-directions.on-the-right"
-          }
-        },
-        {
-          "id": "it-is-over-there",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.it-is-over-there"
-          }
-        },
-        {
-          "id": "i-will-write-it-down",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.i-will-write-it-down"
           }
         },
         {
@@ -555,14 +562,6 @@
     },
     "how-soon": {
       "buttons": [
-        {
-          "id": "nowait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.there-is-no-wait"
-          }
-        },
         {
           "id": "d5m",
           "kind": "value",
@@ -628,11 +627,11 @@
           "entry": "clock"
         },
         {
-          "id": "i-will-write-it-down",
+          "id": "tomorrow",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.i-will-write-it-down"
+            "id": "time-words.tomorrow"
           }
         },
         {
@@ -656,35 +655,24 @@
     "tickets": {
       "buttons": [
         {
+          "id": "where-to",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.where-to"
+          }
+        },
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
           "id": "card-or-cash",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.card-or-cash"
-          }
-        },
-        {
-          "id": "how-many",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.how-many"
-          }
-        },
-        {
-          "id": "ticket-office",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "rail-station-words.ticket-office"
-          }
-        },
-        {
-          "id": "it-is-over-there",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.it-is-over-there"
           }
         },
         {
@@ -696,19 +684,19 @@
           }
         },
         {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
           }
         },
         {
@@ -792,22 +780,6 @@
           }
         },
         {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
           "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
@@ -828,11 +800,11 @@
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "no-not",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "quick-responses.no-not"
           }
         },
         {
@@ -853,19 +825,19 @@
           "entry": "count"
         },
         {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
           "id": "this-way",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-directions.this-way"
-          }
-        },
-        {
-          "id": "that-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.that-way"
           }
         },
         {
@@ -898,6 +870,392 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "drive": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "take-me": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "hitch": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "where-to",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.where-to"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "delay": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 10,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d1h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 1,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d2h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 2,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "seat": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "get-off": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "at-the-next-stop",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.at-the-next-stop"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "lost-bag": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "what-is-your-name",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.what-is-your-name"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "pay-where": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "pay-on-board",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.pay-on-board"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "heading": {
+      "buttons": [
+        {
+          "id": "this-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.this-way"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
           }
         },
         {

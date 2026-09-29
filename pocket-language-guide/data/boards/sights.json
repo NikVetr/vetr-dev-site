@@ -74,7 +74,7 @@
             "id": "attractions-tickets.may-i-take-photos"
           },
           "colour": "comm",
-          "replySetId": "yes-no"
+          "replySetId": "photos"
         },
         {
           "id": "photo-for-us",
@@ -83,8 +83,7 @@
             "kind": "corpus",
             "id": "attractions-tickets.could-you-take-a-photo-for-us"
           },
-          "colour": "comm",
-          "replySetId": "yes-no"
+          "colour": "comm"
         },
         {
           "id": "lockers",
@@ -94,7 +93,7 @@
             "id": "attractions-tickets.are-there-lockers"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "have"
         },
         {
           "id": "entrance",
@@ -141,7 +140,7 @@
             "id": "in-a-building.is-this-the-correct-entrance"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "entrance"
         },
         {
           "id": "step-free",
@@ -151,7 +150,7 @@
             "id": "accessibility.step-free"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "have"
         }
       ]
     },
@@ -186,7 +185,7 @@
             "id": "payment-receipt.can-we-pay-separately"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "permission"
         },
         {
           "id": "receipt",
@@ -196,7 +195,7 @@
             "id": "payment-receipt.a-receipt-please"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "permission"
         },
         {
           "id": "card-declined",
@@ -206,7 +205,7 @@
             "id": "payment-receipt.my-card-was-declined"
           },
           "colour": "money",
-          "replySetId": "permission"
+          "replySetId": "declined"
         },
         {
           "id": "bill-wrong",
@@ -216,7 +215,7 @@
             "id": "payment-receipt.the-bill-is-wrong"
           },
           "colour": "money",
-          "replySetId": "permission"
+          "replySetId": "dispute"
         },
         {
           "id": "already-paid",
@@ -226,7 +225,7 @@
             "id": "payment-receipt.i-already-paid"
           },
           "colour": "money",
-          "replySetId": "permission"
+          "replySetId": "dispute"
         }
       ]
     }
@@ -303,14 +302,6 @@
           }
         },
         {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
           "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
@@ -364,7 +355,7 @@
     "price": {
       "buttons": [
         {
-          "id": "amount",
+          "id": "number",
           "kind": "entry",
           "entry": "count"
         },
@@ -374,6 +365,22 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "it-is-free",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-free"
           }
         },
         {
@@ -405,6 +412,14 @@
     "location": {
       "buttons": [
         {
+          "id": "here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "question-words.here"
+          }
+        },
+        {
           "id": "it-is-over-there",
           "kind": "message",
           "phraseRef": {
@@ -413,11 +428,43 @@
           }
         },
         {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
           "id": "i-will-show-you",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "it-is-free",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-free"
+          }
+        },
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
           }
         },
         {
@@ -441,13 +488,121 @@
     "payment": {
       "buttons": [
         {
-          "id": "card-or-cash",
+          "id": "okay-can",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.card-or-cash"
+            "id": "quick-responses.okay-can"
           }
         },
+        {
+          "id": "cash-only",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "atm-cash.cash-only"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "photos": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "no-photography",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "common-signs.no-photography"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "have": {
+      "buttons": [
+        {
+          "id": "we-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "entrance": {
+      "buttons": [
         {
           "id": "yes-right",
           "kind": "message",
@@ -465,11 +620,11 @@
           }
         },
         {
-          "id": "please-wait",
+          "id": "it-is-over-there",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.it-is-over-there"
           }
         },
         {
@@ -478,6 +633,78 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "dispute": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "declined": {
+      "buttons": [
+        {
+          "id": "card-or-cash",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.card-or-cash"
+          }
+        },
+        {
+          "id": "cash-only",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "atm-cash.cash-only"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
           }
         },
         {

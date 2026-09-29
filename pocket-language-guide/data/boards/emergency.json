@@ -74,7 +74,7 @@
             "id": "emergency-medical.it-hurts-here"
           },
           "colour": "alert",
-          "replySetId": "hurt"
+          "replySetId": "hurt-here"
         },
         {
           "id": "medical",
@@ -252,7 +252,7 @@
             "id": "medical-conditions.i-need-insulin"
           },
           "colour": "alert",
-          "replySetId": "will-you"
+          "replySetId": "need"
         },
         {
           "id": "low-sugar",
@@ -270,7 +270,8 @@
             "kind": "corpus",
             "id": "medical-conditions.please-give-me-sugar-or-juice"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "need"
         }
       ]
     },
@@ -440,7 +441,7 @@
             "id": "police-consulate.i-want-to-report-a-theft"
           },
           "colour": "alert",
-          "replySetId": "will-you"
+          "replySetId": "desk"
         },
         {
           "id": "station",
@@ -470,7 +471,7 @@
             "id": "police-consulate.i-want-to-contact-my-embassy"
           },
           "colour": "comm",
-          "replySetId": "will-you"
+          "replySetId": "desk"
         },
         {
           "id": "whereami",
@@ -490,7 +491,7 @@
             "id": "police-consulate.i-need-an-interpreter"
           },
           "colour": "comm",
-          "replySetId": "will-you"
+          "replySetId": "desk"
         }
       ]
     }
@@ -520,14 +521,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-directions.turn-right"
-          }
-        },
-        {
-          "id": "this-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.this-way"
           }
         },
         {
@@ -623,14 +616,6 @@
           }
         },
         {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
           "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
@@ -659,6 +644,14 @@
           }
         },
         {
+          "id": "stay-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.stay-here"
+          }
+        },
+        {
           "id": "i-do-not-have-a-phone",
           "kind": "message",
           "phraseRef": {
@@ -672,14 +665,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-find-someone"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
           }
         },
         {
@@ -700,6 +685,14 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.where-does-it-hurt"
+          }
+        },
+        {
+          "id": "what-happened",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.what-happened"
           }
         },
         {
@@ -735,11 +728,11 @@
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "i-will-find-someone",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.i-will-find-someone"
           }
         },
         {
@@ -815,11 +808,11 @@
     "help": {
       "buttons": [
         {
-          "id": "yes-right",
+          "id": "what-happened",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "quick-responses.yes-right"
+            "id": "board-answers.what-happened"
           }
         },
         {
@@ -871,22 +864,6 @@
           }
         },
         {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
           "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
@@ -923,11 +900,11 @@
           }
         },
         {
-          "id": "i-will-find-someone",
+          "id": "i-am-calling-an-ambulance",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.i-will-find-someone"
+            "id": "board-answers.i-am-calling-an-ambulance"
           }
         },
         {
@@ -939,11 +916,11 @@
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "i-will-find-someone",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.i-will-find-someone"
           }
         },
         {
@@ -980,14 +957,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.it-is-over-there"
-          }
-        },
-        {
-          "id": "this-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.this-way"
           }
         },
         {
@@ -1064,14 +1033,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-write-it-down"
-          }
-        },
-        {
-          "id": "this-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.this-way"
           }
         },
         {
@@ -1164,6 +1125,162 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "hurt-here": {
+      "buttons": [
+        {
+          "id": "what-happened",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.what-happened"
+          }
+        },
+        {
+          "id": "can-you-walk",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.can-you-walk"
+          }
+        },
+        {
+          "id": "stay-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.stay-here"
+          }
+        },
+        {
+          "id": "i-am-calling-an-ambulance",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-am-calling-an-ambulance"
+          }
+        },
+        {
+          "id": "help-is-coming",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.help-is-coming"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "need": {
+      "buttons": [
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "i-am-calling-an-ambulance",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-am-calling-an-ambulance"
+          }
+        },
+        {
+          "id": "the-hospital-is-close",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.the-hospital-is-close"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "desk": {
+      "buttons": [
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "what-is-your-name",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.what-is-your-name"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
           }
         },
         {

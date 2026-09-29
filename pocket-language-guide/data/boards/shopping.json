@@ -43,7 +43,7 @@
             "id": "color-size-returns.may-i-try-it-on"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "permission"
         },
         {
           "id": "size",
@@ -63,7 +63,7 @@
             "id": "shopping.that-is-too-expensive"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "haggle"
         },
         {
           "id": "cheaper",
@@ -73,7 +73,7 @@
             "id": "shopping.can-it-be-a-little-cheaper"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "haggle"
         },
         {
           "id": "take",
@@ -83,7 +83,7 @@
             "id": "shopping.i-will-take-this"
           },
           "colour": "money",
-          "replySetId": "in-stock"
+          "replySetId": "take"
         },
         {
           "id": "where-pay",
@@ -113,7 +113,7 @@
             "id": "payment-receipt.a-receipt-please"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "permission"
         },
         {
           "id": "bag",
@@ -129,50 +129,6 @@
     }
   },
   "replySets": {
-    "yes-no": {
-      "buttons": [
-        {
-          "id": "yes-right",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.yes-right"
-          }
-        },
-        {
-          "id": "no-not",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.no-not"
-          }
-        },
-        {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
-          "id": "none-of-these",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.none-of-these"
-          }
-        }
-      ]
-    },
     "which-way": {
       "buttons": [
         {
@@ -200,19 +156,19 @@
           }
         },
         {
-          "id": "this-way",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-directions.this-way"
-          }
-        },
-        {
           "id": "it-is-over-there",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "question-words.here"
           }
         },
         {
@@ -260,11 +216,19 @@
     "in-stock": {
       "buttons": [
         {
-          "id": "yes-right",
+          "id": "we-have-it",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "quick-responses.yes-right"
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
           }
         },
         {
@@ -276,19 +240,11 @@
           }
         },
         {
-          "id": "how-many",
+          "id": "i-will-check",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.how-many"
-          }
-        },
-        {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -312,11 +268,11 @@
     "payment": {
       "buttons": [
         {
-          "id": "card-or-cash",
+          "id": "okay-can",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.card-or-cash"
+            "id": "quick-responses.okay-can"
           }
         },
         {
@@ -328,35 +284,11 @@
           }
         },
         {
-          "id": "yes-right",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.yes-right"
-          }
-        },
-        {
-          "id": "no-not",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.no-not"
-          }
-        },
-        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
           }
         },
         {
@@ -406,6 +338,132 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "take": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "card-or-cash",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.card-or-cash"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "haggle": {
+      "buttons": [
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "permission": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
           }
         },
         {

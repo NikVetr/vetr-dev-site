@@ -630,6 +630,12 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
      fitter shrinks the text until none of them do, so in practice nothing breaks. */
   overflow-wrap: break-word;
 }
+/* A blank the listener fills by saying or writing it: a space ruled underneath in a
+   softer tone than the words around it. */
+.board-blank {
+  display: inline-block; inline-size: 2.6em; margin-inline: 0.2em;
+  border-block-end: clamp(2px, 0.05em, 4px) solid color-mix(in oklab, currentColor 55%, transparent);
+}
 /* The owner's own wording: a confirmation that the right button was pressed, not
    part of what is being said to anyone, so it is small and grey. */
 .board-message-gloss {

@@ -14,7 +14,7 @@
             "id": "hotel-basics.i-have-a-reservation"
           },
           "colour": "stay",
-          "replySetId": "stock"
+          "replySetId": "check-in"
         },
         {
           "id": "rooms-available",
@@ -24,7 +24,7 @@
             "id": "hotel-basics.are-any-rooms-available"
           },
           "colour": "stay",
-          "replySetId": "stock"
+          "replySetId": "rooms"
         },
         {
           "id": "check-in-early",
@@ -34,7 +34,7 @@
             "id": "hotel-requests.can-i-check-in-early"
           },
           "colour": "stay",
-          "replySetId": "permission"
+          "replySetId": "early-late"
         },
         {
           "id": "check-out-later",
@@ -44,7 +44,7 @@
             "id": "hotel-requests.can-i-check-out-later"
           },
           "colour": "stay",
-          "replySetId": "permission"
+          "replySetId": "early-late"
         },
         {
           "id": "checkout-time",
@@ -129,7 +129,7 @@
             "id": "hotel-requests.another-towel-please"
           },
           "colour": "comm",
-          "replySetId": "stock"
+          "replySetId": "permission"
         },
         {
           "id": "blanket",
@@ -139,7 +139,7 @@
             "id": "hotel-requests.another-blanket"
           },
           "colour": "comm",
-          "replySetId": "stock"
+          "replySetId": "permission"
         },
         {
           "id": "safe",
@@ -149,7 +149,7 @@
             "id": "hotel-requests.is-there-a-safe"
           },
           "colour": "comm",
-          "replySetId": "yes-no"
+          "replySetId": "have"
         },
         {
           "id": "luggage",
@@ -159,7 +159,7 @@
             "id": "hotel-requests.can-i-store-my-luggage"
           },
           "colour": "comm",
-          "replySetId": "stock"
+          "replySetId": "permission"
         },
         {
           "id": "non-smoking",
@@ -169,7 +169,7 @@
             "id": "hotel-basics.i-would-like-a-non-smoking-room"
           },
           "colour": "comm",
-          "replySetId": "stock"
+          "replySetId": "permission"
         },
         {
           "id": "quiet-room",
@@ -179,7 +179,7 @@
             "id": "hotel-basics.i-would-like-a-quiet-room"
           },
           "colour": "comm",
-          "replySetId": "stock"
+          "replySetId": "permission"
         },
         {
           "id": "washing-machine",
@@ -189,7 +189,7 @@
             "id": "hotel-basics.is-there-a-washing-machine"
           },
           "colour": "comm",
-          "replySetId": "yes-no"
+          "replySetId": "have"
         },
         {
           "id": "ac",
@@ -199,7 +199,7 @@
             "id": "hotel-basics.is-there-air-conditioning"
           },
           "colour": "comm",
-          "replySetId": "yes-no"
+          "replySetId": "have"
         },
         {
           "id": "breakfast-included",
@@ -228,8 +228,7 @@
             "kind": "corpus",
             "id": "hotel-requests.no-housekeeping"
           },
-          "colour": "comm",
-          "replySetId": "permission"
+          "colour": "comm"
         },
         {
           "id": "another-night",
@@ -239,7 +238,7 @@
             "id": "hotel-requests.another-night"
           },
           "colour": "comm",
-          "replySetId": "permission"
+          "replySetId": "stay"
         }
       ]
     },
@@ -254,7 +253,7 @@
             "id": "room-problems.there-is-a-problem-with-the-room"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "ac-broken",
@@ -264,7 +263,7 @@
             "id": "room-problems.the-air-conditioning-is-broken"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "no-hot-water",
@@ -274,7 +273,7 @@
             "id": "room-problems.there-is-no-hot-water"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "noisy",
@@ -284,7 +283,7 @@
             "id": "room-problems.the-room-is-too-noisy"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "change-rooms",
@@ -294,7 +293,7 @@
             "id": "room-problems.can-i-change-rooms"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "stay"
         },
         {
           "id": "key-broken",
@@ -304,7 +303,7 @@
             "id": "room-problems.the-key-does-not-work"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "toilet-broken",
@@ -314,7 +313,7 @@
             "id": "room-problems.the-toilet-will-not-flush"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "light-broken",
@@ -324,7 +323,7 @@
             "id": "room-problems.the-light-does-not-work"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "heating-broken",
@@ -334,7 +333,7 @@
             "id": "room-problems.the-heating-does-not-work"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         },
         {
           "id": "send-someone",
@@ -344,7 +343,7 @@
             "id": "room-problems.please-send-someone"
           },
           "colour": "alert",
-          "replySetId": "permission"
+          "replySetId": "problem"
         }
       ]
     },
@@ -379,7 +378,7 @@
             "id": "laundry.when-will-it-be-ready"
           },
           "colour": "move",
-          "replySetId": "clock"
+          "replySetId": "ready"
         },
         {
           "id": "price-per-kilo",
@@ -399,7 +398,7 @@
             "id": "laundry.can-it-be-ready-today"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "ready"
         },
         {
           "id": "no-bleach",
@@ -408,8 +407,7 @@
             "kind": "corpus",
             "id": "laundry.please-do-not-use-bleach"
           },
-          "colour": "move",
-          "replySetId": "permission"
+          "colour": "move"
         },
         {
           "id": "iron-this",
@@ -425,50 +423,6 @@
     }
   },
   "replySets": {
-    "stock": {
-      "buttons": [
-        {
-          "id": "okay-can",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.okay-can"
-          }
-        },
-        {
-          "id": "we-do-not-have-it",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.we-do-not-have-it"
-          }
-        },
-        {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
-          }
-        },
-        {
-          "id": "none-of-these",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.none-of-these"
-          }
-        }
-      ]
-    },
     "permission": {
       "buttons": [
         {
@@ -493,14 +447,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
           }
         },
         {
@@ -529,6 +475,14 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
           }
         },
         {
@@ -634,6 +588,46 @@
     "location": {
       "buttons": [
         {
+          "id": "go-straight",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.go-straight"
+          }
+        },
+        {
+          "id": "turn-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-left"
+          }
+        },
+        {
+          "id": "turn-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-right"
+          }
+        },
+        {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
           "id": "it-is-over-there",
           "kind": "message",
           "phraseRef": {
@@ -648,6 +642,300 @@
             "kind": "corpus",
             "id": "board-answers.i-will-show-you"
           }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "check-in": {
+      "buttons": [
+        {
+          "id": "what-is-your-name",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.what-is-your-name"
+          }
+        },
+        {
+          "id": "passport",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-words.passport"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "rooms": {
+      "buttons": [
+        {
+          "id": "we-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "we-are-full",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-are-full"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "early-late": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "have": {
+      "buttons": [
+        {
+          "id": "we-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "stay": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-are-full",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-are-full"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "problem": {
+      "buttons": [
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "ready": {
+      "buttons": [
+        {
+          "id": "today",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.today"
+          }
+        },
+        {
+          "id": "tomorrow",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.tomorrow"
+          }
+        },
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
         },
         {
           "id": "i-do-not-know",

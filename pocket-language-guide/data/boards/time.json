@@ -54,7 +54,7 @@
             "id": "time-scheduling.what-time-does-it-close"
           },
           "colour": "stay",
-          "replySetId": "when"
+          "replySetId": "closes"
         },
         {
           "id": "meet",
@@ -282,6 +282,11 @@
           }
         },
         {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {
@@ -369,14 +374,6 @@
           "id": "at",
           "kind": "entry",
           "entry": "clock"
-        },
-        {
-          "id": "i-will-write-it-down",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.i-will-write-it-down"
-          }
         },
         {
           "id": "please-wait",
@@ -672,11 +669,76 @@
           "entry": "clock"
         },
         {
-          "id": "i-will-write-it-down",
+          "id": "i-do-not-know",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.i-will-write-it-down"
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "closes": {
+      "buttons": [
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "morning",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.morning"
+          }
+        },
+        {
+          "id": "afternoon",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.afternoon"
+          }
+        },
+        {
+          "id": "evening",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.evening"
+          }
+        },
+        {
+          "id": "night",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.night"
+          }
+        },
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
           }
         },
         {

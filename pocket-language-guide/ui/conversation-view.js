@@ -691,7 +691,7 @@ export function renderMessage(stage, phrase,
   // is a sliver, and hung it sat against the edge of the screen looking dropped.
   const trailing = /[\u3000-\u303f\uff01-\uff60]+$/u.exec(phrase.listener.text);
   const body = trailing ? phrase.listener.text.slice(0, -trailing[0].length) : phrase.listener.text;
-  big.append(document.createTextNode(body));
+  big.append(...blanked(body));
   if (trailing) {
     const punct = document.createElement('span');
     punct.className = 'board-message-punct';
@@ -715,7 +715,7 @@ export function renderMessage(stage, phrase,
   const part = (text, lang, dir, cls) => {
     const span = document.createElement('span');
     span.className = cls;
-    span.textContent = text;
+    span.append(...blanked(text));
     span.lang = lang;
     span.dir = dir;
     return span;

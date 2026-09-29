@@ -27,16 +27,6 @@
           "replySetId": "stock"
         },
         {
-          "id": "all-night-pharmacy",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "pharmacy-symptoms.where-is-an-all-night-pharmacy"
-          },
-          "colour": "move",
-          "replySetId": "location"
-        },
-        {
           "id": "which-pharmacy-open",
           "kind": "message",
           "phraseRef": {
@@ -82,7 +72,7 @@
             "id": "pharmacy-symptoms.the-pain-is-severe"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "infected",
@@ -92,7 +82,7 @@
             "id": "pharmacy-symptoms.i-think-it-is-infected"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "pregnancy-safe",
@@ -102,7 +92,7 @@
             "id": "pharmacy-symptoms.is-this-safe-during-pregnancy"
           },
           "colour": "comm",
-          "replySetId": "yes-no"
+          "replySetId": "safe"
         },
         {
           "id": "thanks",
@@ -126,7 +116,7 @@
             "id": "pharmacy-symptoms.i-have-a-fever"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "headache",
@@ -136,7 +126,7 @@
             "id": "pharmacy-symptoms.i-have-a-headache"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "cough",
@@ -146,7 +136,7 @@
             "id": "pharmacy-symptoms.i-have-a-cough"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "sore-throat",
@@ -156,7 +146,7 @@
             "id": "pharmacy-symptoms.i-have-a-sore-throat"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "stomach-ache",
@@ -166,7 +156,7 @@
             "id": "pharmacy-symptoms.i-have-a-stomach-ache"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "diarrhea",
@@ -176,7 +166,7 @@
             "id": "pharmacy-symptoms.i-have-diarrhea"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "vomiting",
@@ -186,7 +176,7 @@
             "id": "pharmacy-symptoms.i-am-vomiting"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "nauseous",
@@ -196,7 +186,7 @@
             "id": "pharmacy-symptoms.i-feel-nauseous"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "dizzy",
@@ -206,7 +196,7 @@
             "id": "pharmacy-symptoms.i-feel-dizzy"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "rash",
@@ -216,7 +206,7 @@
             "id": "pharmacy-symptoms.i-have-a-rash"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "cut",
@@ -226,7 +216,7 @@
             "id": "pharmacy-symptoms.i-have-a-cut"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         },
         {
           "id": "burn",
@@ -236,7 +226,7 @@
             "id": "pharmacy-symptoms.i-have-a-burn"
           },
           "colour": "alert",
-          "replySetId": "noted"
+          "replySetId": "symptom"
         }
       ]
     },
@@ -301,7 +291,7 @@
             "id": "pharmacy-symptoms.rehydration-salts"
           },
           "colour": "money",
-          "replySetId": "stock"
+          "replySetId": "supplies"
         },
         {
           "id": "motion-sickness",
@@ -331,7 +321,7 @@
             "id": "pharmacy-symptoms.bandage"
           },
           "colour": "money",
-          "replySetId": "stock"
+          "replySetId": "supplies"
         },
         {
           "id": "antiseptic",
@@ -341,7 +331,7 @@
             "id": "pharmacy-symptoms.antiseptic"
           },
           "colour": "money",
-          "replySetId": "stock"
+          "replySetId": "supplies"
         },
         {
           "id": "antacid",
@@ -386,7 +376,7 @@
             "id": "pharmacy-symptoms.before-or-after-food"
           },
           "colour": "stay",
-          "replySetId": "noted"
+          "replySetId": "meal"
         }
       ]
     },
@@ -496,11 +486,11 @@
           }
         },
         {
-          "id": "please-wait",
+          "id": "i-will-check",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -524,11 +514,19 @@
     "stock": {
       "buttons": [
         {
-          "id": "okay-can",
+          "id": "we-have-it",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "quick-responses.okay-can"
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
           }
         },
         {
@@ -540,19 +538,27 @@
           }
         },
         {
-          "id": "please-wait",
+          "id": "prescription-only",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.prescription-only"
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "how-many",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -568,6 +574,46 @@
     "location": {
       "buttons": [
         {
+          "id": "go-straight",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.go-straight"
+          }
+        },
+        {
+          "id": "turn-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-left"
+          }
+        },
+        {
+          "id": "turn-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-right"
+          }
+        },
+        {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
           "id": "it-is-over-there",
           "kind": "message",
           "phraseRef": {
@@ -581,6 +627,14 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
           }
         },
         {
@@ -604,27 +658,11 @@
     "noted": {
       "buttons": [
         {
-          "id": "please-wait",
+          "id": "understood",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.please-wait"
-          }
-        },
-        {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
-          }
-        },
-        {
-          "id": "i-do-not-know",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.understood"
           }
         },
         {
@@ -658,6 +696,182 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "symptom": {
+      "buttons": [
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "see-a-doctor",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.see-a-doctor"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "supplies": {
+      "buttons": [
+        {
+          "id": "we-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-have-it"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "safe": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "cannot-not-allowed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.cannot-not-allowed"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
+          }
+        },
+        {
+          "id": "see-a-doctor",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.see-a-doctor"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "meal": {
+      "buttons": [
+        {
+          "id": "before-food",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.before-food"
+          }
+        },
+        {
+          "id": "after-food",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.after-food"
+          }
+        },
+        {
+          "id": "it-does-not-matter",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-does-not-matter"
           }
         },
         {

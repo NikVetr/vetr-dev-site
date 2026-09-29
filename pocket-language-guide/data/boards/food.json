@@ -14,7 +14,7 @@
             "id": "food-ordering.is-a-table-available"
           },
           "colour": "money",
-          "replySetId": "seating"
+          "replySetId": "table"
         },
         {
           "id": "menu",
@@ -24,7 +24,7 @@
             "id": "food-ordering.menu-please"
           },
           "colour": "money",
-          "replySetId": "kitchen"
+          "replySetId": "order"
         },
         {
           "id": "recommend",
@@ -43,7 +43,7 @@
             "id": "food-ordering.i-want-this"
           },
           "colour": "money",
-          "replySetId": "kitchen"
+          "replySetId": "order"
         },
         {
           "id": "veg",
@@ -87,7 +87,7 @@
             "id": "food-ordering.water-please"
           },
           "colour": "money",
-          "replySetId": "kitchen"
+          "replySetId": "order"
         },
         {
           "id": "togo",
@@ -132,7 +132,8 @@
             "kind": "diet",
             "id": "diet"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "kitchen"
         },
         {
           "id": "no-meat",
@@ -240,16 +241,6 @@
           "replySetId": "fact"
         },
         {
-          "id": "vegcan",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "food-ordering.can-a-vegetarian-eat-this"
-          },
-          "colour": "alert",
-          "replySetId": "fact"
-        },
-        {
           "id": "fish-stock",
           "kind": "message",
           "phraseRef": {
@@ -304,14 +295,6 @@
           }
         },
         {
-          "id": "we-do-not-have-it",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.we-do-not-have-it"
-          }
-        },
-        {
           "id": "not-possible",
           "kind": "message",
           "phraseRef": {
@@ -320,19 +303,11 @@
           }
         },
         {
-          "id": "how-many",
+          "id": "i-will-check",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.how-many"
-          }
-        },
-        {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -356,14 +331,6 @@
     "seating": {
       "buttons": [
         {
-          "id": "yes-right",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "quick-responses.yes-right"
-          }
-        },
-        {
           "id": "there-is-no-wait",
           "kind": "message",
           "phraseRef": {
@@ -372,27 +339,68 @@
           }
         },
         {
-          "id": "please-wait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.please-wait"
+          "id": "d5m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 5,
+            "unit": "minute"
           }
         },
         {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 10,
+            "unit": "minute"
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "we-are-full",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.we-are-full"
+          }
+        },
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -424,11 +432,11 @@
           }
         },
         {
-          "id": "please-wait",
+          "id": "i-will-check",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.please-wait"
+            "id": "board-answers.i-will-check"
           }
         },
         {
@@ -452,6 +460,11 @@
     "pay": {
       "buttons": [
         {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
           "id": "card-or-cash",
           "kind": "message",
           "phraseRef": {
@@ -468,6 +481,14 @@
           }
         },
         {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {
@@ -476,11 +497,148 @@
           }
         },
         {
-          "id": "i-do-not-know",
+          "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.i-do-not-know"
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "order": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "table": {
+      "buttons": [
+        {
+          "id": "there-is-no-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.there-is-no-wait"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
+          }
+        },
+        {
+          "id": "d5m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 5,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 10,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "we-are-full",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-are-full"
+          }
+        },
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "i-will-check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-check"
           }
         },
         {
