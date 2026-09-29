@@ -135,3 +135,22 @@ change only the named keys, one substring on one line, and record old, new and w
    Other likely carry-overs are in the notes (*kolom*, *Pakai*, *meski*, *setidaknya*,
    *Alfabet Fonetis*, *tabel*, *kode*, *acuan*). Check each value's words in Kamus Dewan
    through DBP's PRPM and correct those that are not Malay; shared vocabulary stays.
+
+## A third list: found while working the second
+
+Same rules; the record goes to `tmp/agent-notes/strings-ah-fixes-3.md`.
+
+1. **Inserted names that still take a suffix or the wrong case**: cs `gallery.spokenIn`
+   ("Jazykem angličtina"); kn `check.phrases`, `quick.subtitle` and `studio.pair`; and uz
+   `quick.subtitle`, `check.phrases` and `field.title.respell` ("inglizcha tiliga").
+2. **fr `_note`** still records `editor.confirmDeleteScreen`'s plain space as a leftover,
+   which the second list fixed: correct that sentence.
+3. **Malay leftovers the audit could not touch**: `board.unit` *Menit* where the file's
+   own `board.minutes` says *Minit*; *usulan* and *berbasis*, neither in Kamus Dewan;
+   *setelan* and *ditumpuk* in `preview.duplexNote`, *ditumpuk* in `preview.cardPair`,
+   and *lebih dulu* in `cut.hint.longEdge`. The note's sentence that the grid "is not
+   named" is out of date, and its claim that Malay does not use *lembar* this way is
+   contradicted by Kamus Dewan, which lists *lembar* as a classifier: keep *helai* as the
+   file's choice and say why correctly. And if the corpus pass changes the Malay section
+   titles, `boards.lodging.laundry*` and `quiz.interest.transit.hint` follow them.
+   The audit's record is `tmp/agent-notes/strings-ms-audit.md`.

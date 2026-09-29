@@ -4,13 +4,13 @@ trail-words.trailhead,Awal jalur,Basecamp,ˈawal dʒˈalor,,2,ms-agent-v1;ipa=es
 trail-words.summit,Puncak,,pˈuntʃaʔ,,2,ms-agent-v1;ipa=espeak
 trail-words.viewpoint,Titik pandang,Spot pemandangan,tˈiteʔ pˈandaŋ,,2,ms-agent-v1;ipa=espeak
 trail-words.cableway,Kereta gantung,Gondola,kərˈɛtə ɡˈantoŋ,,2,ms-agent-v1;ipa=espeak
-trail-words.shuttle-bus,Bas antar-jemput,Shuttle,bˈas ˈantardʒəmpot,,2,ms-agent-v1;ipa=espeak
-trail-words.park-shuttle,Shuttle taman,Bas pelancongan,ʃˈuttle tˈaman,,2,ms-agent-v1;ipa=espeak
+trail-words.shuttle-bus,Bas ulang-alik,,bˈas ˈulaŋaleʔ,,2,ms-agent-v1;fix=DBP antar-jemput absent;fix=DBP shuttle absent;fix=KIMD shuttle (n 1a) perkhidmatan bas ulang-alik;fix=DBP ulang-alik;row-corrections-v3;ipa=espeak
+trail-words.park-shuttle,Bas ulang-alik taman,Bas pelancongan,bˈas ˈulaŋaleʔ tˈaman,,2,ms-agent-v1;fix=DBP shuttle absent;fix=KIMD shuttle (n 1b) approp n + ulang-alik;fix=DBP ulang-alik;row-corrections-v3;ipa=espeak
 trail-words.steps,Tangga,Anak tangga,tˈaŋɡə,,2,ms-agent-v1;ipa=espeak
 trail-words.up-uphill,Naik,Tanjakan,nˈaɪʔ,,2,ms-agent-v1;ipa=espeak
 trail-words.down-downhill,Turun,Turunan,tˈuron,,2,ms-agent-v1;ipa=espeak
 trail-words.one-way,Sekali jalan,,səkˈali dʒˈalan,jalan sehala means a one-way street,2,ms-agent-v1;ipa=espeak
-trail-words.round-trip,Pulang-pergi,PP,pˈulaŋpəɾrɡi,,2,ms-agent-v1;ipa=espeak
+trail-words.round-trip,Pulang-pergi,PP,pˈulaŋpərɡi,,2,ms-agent-v1;ipa=espeak
 weather.forecast,Ramalan cuacanya bagaimana?,,ramˈalan tʃˌuatʃˈəɲə bˌaɡaɪmˈanə,,2,ms-agent-v1;fix=MABBIM ramalan cuaca;row-corrections-v1;ipa=espeak
 weather.will-it-rain,Hari ini akan hujan?,,hˈari ˈini ˈakan hˈudʒan,,2,ms-agent-v1;ipa=espeak
 weather.is-it-safe-today,Hari ini aman?,,hˈari ˈini ˈaman,,2,ms-agent-v1;ipa=espeak
@@ -24,7 +24,7 @@ weather.fog,Kabut,,kˈabot,,2,ms-agent-v1;ipa=espeak
 weather.heat,Panas,,pˈanas,,2,ms-agent-v1;ipa=espeak
 weather.cold,Dingin,,dˈiŋen,,2,ms-agent-v1;ipa=espeak
 weather.humid,Lembap,Lembab,lˈɛmbap,,2,ms-agent-v1;ipa=espeak
-weather.sunrise,Matahari terbit,,mˌatahˈari tˈəɾrbet,,2,ms-agent-v1;ipa=espeak
+weather.sunrise,Matahari terbit,,mˌatahˈari tˈərbet,,2,ms-agent-v1;ipa=espeak
 weather.flood,Banjir,,bˈandʒer,,2,ms-agent-v1;ipa=espeak
 weather.avalanche-risk,Risiko salji runtuh,,risˈiko sˈaldʒi rˈuntoh,no Malaysian signage uses this,1,ms-agent-v1;fix=MABBIM salji runtuh;fix=DBP risiko;row-corrections-v1;ipa=espeak
 hiking-parks.is-this-the-way-to,Ini jalan ke {}?,,ˈini dʒˈalan kə {},,2,ms-agent-v1;ipa=espeak
@@ -37,10 +37,10 @@ trail-conditions.how-long-is-the-full-route,Total jalurnya berapa jauh?,,tˈotal
 trail-conditions.can-we-return-the-same-way,Boleh kembali lewat jalur yang sama?,,bˈoleh kəmbˈali lˈɛwat dʒˈalor jaŋ sˈamə,,2,ms-agent-v1;ipa=espeak
 trail-conditions.can-we-return-before-dark,Boleh kembali sebelum gelap?,,bˈoleh kəmbˈali səbˈəlom ɡˈɛlap,,2,ms-agent-v1;ipa=espeak
 trail-conditions.is-the-trail-open,Jalurnya buka?,,dʒalˈorɲə bˈukə,,2,ms-agent-v1;ipa=espeak
-trail-conditions.is-the-route-steep,Jalurnya terjal?,,dʒalˈorɲə tˈəɾrdʒal,,2,ms-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,Jalurnya terjal?,,dʒalˈorɲə tˈərdʒal,,2,ms-agent-v1;ipa=espeak
 trail-conditions.is-the-path-slippery,Jalannya licin?,,dʒalˈanɲə lˈitʃen,,2,ms-agent-v1;ipa=espeak
 trail-transport.how-long-is-the-queue,Berapa panjang barisannya?,,bərˈapə pˈandʒaŋ bˌarisˈanɲə,,2,ms-agent-v1;ipa=espeak
-trail-transport.what-time-is-the-last-shuttle,Shuttle terakhir jam berapa?,,ʃˈuttle təɾrˈaxer dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Bas ulang-alik terakhir jam berapa?,,bˈas ˈulaŋaleʔ tərˈaxer dʒˈam bərˈapə,,2,ms-agent-v1;fix=DBP shuttle absent;fix=KIMD shuttle (n 1b) approp n + ulang-alik;fix=DBP ulang-alik;row-corrections-v3;ipa=espeak
 trail-transport.when-does-the-cableway-stop,Kereta gantung tutup jam berapa?,,kərˈɛtə ɡˈantoŋ tˈutop dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 trail-transport.where-can-we-buy-water,Di mana boleh beli air?,,dimˈanə bˈoleh bˈəli ˈaer,,2,ms-agent-v1;ipa=espeak
 trail-transport.where-can-we-refill-water,Di mana boleh isi ulang air?,,dimˈanə bˈoleh ˈisi ˈulaŋ ˈaɪr,,2,ms-agent-v1;ipa=espeak
@@ -50,19 +50,19 @@ trail-transport.how-long-is-the-wait,Berapa lama menunggu?,,bərˈapə lˈamə m
 trail-warnings.open,Buka,,bˈukə,,2,ms-agent-v1;ipa=espeak
 trail-warnings.closed,Tutup,,tˈutop,,2,ms-agent-v1;ipa=espeak
 trail-warnings.maintenance,Pembaikan,Sedang dalam pembaikan,pəmbˈaɪkan,,2,ms-agent-v1;fix=MABBIM pembaikan;row-corrections-v1;ipa=espeak
-trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,tandʒˈəkan tˈəɾrdʒal,,2,ms-agent-v1;ipa=espeak
+trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,tandʒˈəkan tˈərdʒal,,2,ms-agent-v1;ipa=espeak
 trail-warnings.caution-slippery,Awas licin,Hati-hati licin,ˈawas lˈitʃen,,2,ms-agent-v1;ipa=espeak
 trail-warnings.danger,Bahaya,,bahˈajə,,2,ms-agent-v1;ipa=espeak
 trail-warnings.beware-falling-rocks,Awas batu jatuh,Awas tanah runtuh,ˈawas bˈatu dʒˈatoh,,2,ms-agent-v1;fix=MABBIM tanah runtuh;row-corrections-v1;ipa=espeak
 trail-warnings.first-aid-station,Pusat bantuan kecemasan,,pˈusat bantˈuan kətʃəmˈasan,Malaysia has no fixed abbreviation the way Indonesia's P3K is; trail signage spells the words out,2,ms-agent-v1;ipa=espeak
 trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,tˈidaʔ bərˌopərˈasi,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.trail-marker,Penanda jalur,,pənˈandə dʒˈalor,,2,ms-agent-v1;ipa=espeak
-trail-landmarks.fork-junction,Percabangan,Persimpangan,pəɾrtʃabˈaŋan,,2,ms-agent-v1;ipa=espeak
+trail-landmarks.fork-junction,Percabangan,Persimpangan,pərtʃabˈaŋan,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.boardwalk-cliff-path,Jalan papan,Jalur tebing,dʒˈalan pˈapan,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.start,Awal,Mulai,ˈawal,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.end,Akhir,Selesai,ˈaxer,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.elevation,Ketinggian,,kətiŋɡˈian,,2,ms-agent-v1;ipa=espeak
-trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari təɾrbˈɛnam,,2,ms-agent-v1;ipa=espeak
+trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari tərbˈɛnam,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.water-point,Titik air,Sumber air,tˈiteʔ ˈaɪr,,2,ms-agent-v1;ipa=espeak
 outdoors.can-we-camp-here,Kami boleh berkhemah di sini?,,kˈami bˈoleh bərxˈɛmah di sˈini,"berkhemah (PRPM), the Malaysian spelling, distinct from Indonesian berkemah; boleh matches taxi.may-i-open-the-window",2,ms-agent-v1;src=prpm.dbp.gov.my berkhemah;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
 outdoors.is-it-safe-to-swim-here,Selamat berenang di sini?,,səlˈamat bərˈɛnaŋ di sˈini,"selamat, the Malaysian word for physically safe, rather than aman (peaceful/secure)",2,ms-agent-v1;ipa=espeak

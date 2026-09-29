@@ -173,3 +173,33 @@ notes go to `tmp/agent-notes/row-corrections-2.md`.
 Not in this pass, because it is a design question rather than a wrong row: Arabic's 55
 traveller rows that say `من فضلك` to one person the traveller can see. The letters serve
 either listener; the romanisation and the IPA say *min faḍlak*, to a man.
+
+## A third pass: what the second pass saw beside its items
+
+Same rules as both passes above; notes go to `tmp/agent-notes/row-corrections-3.md`.
+
+- **Malay (`ms`) IPA: a coda r comes back as a tap and a trill.** 112 cells write `ɾr`
+  where the text has one r before a consonant -- `percuma` `pəɾrtʃˈumə`, `perhentian`
+  `pəɾrhəntˈian` -- as Nepali's voice doubled its coda r. Establish from a source how
+  a coda r is said in Standard Malay (a JIPA Illustration, a grammar of record); if the
+  build is wrong, make the smallest change to the `ms` route in `scripts/build_ipa.py`,
+  run `python3 scripts/build_ipa.py --only ms`, and report every cell it changed.
+- **Malay words the corpus still takes from Indonesian.** `hike.csv`'s "Bas
+  antar-jemput" and "Shuttle…" rows (PRPM has no *antar-jemput*; Malaysian bodies write
+  *bas ulang-alik*), and the *Binatu* alternative of `laundry.laundromat`, which Kamus
+  Dewan does not list. And `data/registry/section-titles/ms.csv`: "Darurat + perubatan"
+  against the catalogue's *Kecemasan*, "Laundry" (*dobi*), "Rambu umum" (Kamus Dewan's
+  *rambu* is a fringe or a marker post), *Kondisi* (marked Indonesian) and *mobilitas*
+  (no entry). The strings that must keep matching a changed title are in the third list
+  of `content/PROMPTS/usage-and-tap-strings.md`.
+- **Drivers still addressed as a man.** `hitchhiking.can-you-give-me-a-ride` in Urdu,
+  Arabic and Hausa, and Hausa's `taxi.please-stop-here` and `taxi.please-turn-around`.
+  Reword each as the second pass did the others, keeping the reply each row's set
+  expects.
+- **Companions whose gender is parked in `text_alt`.** Masculine and feminine pairs for
+  a friend, a partner or a colleague sit in `text_alt` in Ukrainian, Polish, Croatian and
+  Arabic, and Czech writes them with a slash. `content/PROMPTS/speaker-variants.md`'s rule
+  that a companion has no axis decides them, as it decided Russian's in the second pass.
+- **Marathi (`mr`) writes the eyelash RA `ṟ`**, where ISO 15919:2001 has `r̆` (letter 048a,
+  "used in Marathi and Nepali") and Nepali now follows it. Check which system the pack's
+  column claims and bring the cells into it.

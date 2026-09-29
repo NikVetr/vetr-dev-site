@@ -19,8 +19,8 @@ AT,Austria,,,ostrˈiə
 AU,Australia,,,ɒstɹˈeɪliə
 AW,Aruba,,,arˈubə
 AX,Kepulauan Aland,,,kəpulˈaʊan ˈaland
-AZ,Azerbaijan,,,ˌazəɾrbˈaɪdʒan
-BA,Bosnia dan Herzegovina,,,bosnˈiə dan hˌɛɾrzəɡovˈinə
+AZ,Azerbaijan,,,ˌazərbˈaɪdʒan
+BA,Bosnia dan Herzegovina,,,bosnˈiə dan hˌɛrzəɡovˈinə
 BB,Barbados,,,barbˈados
 BD,Bangladesh,,,baŋlˈadəʃ
 BE,Belgium,,,bəlɡˈiom
@@ -45,7 +45,7 @@ CC,Kepulauan Cocos (Keeling),Kepulauan Cocos,,kəpulˈaʊan tʃˈotʃos
 CD,Congo - Kinshasa,Republik Demokratik Congo,,ripˈabliʔ dˌɛmokrˈateʔ tʃˈoŋo
 CF,Republik Afrika Tengah,,,ripˈabliʔ afrˈikə tˈəŋah
 CG,Congo - Brazzaville,Republik Congo,,ripˈabliʔ tʃˈoŋo
-CH,Switzerland,,,switzˈɛɾrland
+CH,Switzerland,,,switzˈɛrland
 CI,Cote d’Ivoire,,,tʃˈote dˈiː ivoˈire
 CK,Kepulauan Cook,,,kəpulˈaʊan tʃˈooʔ
 CL,Chile,,,tʃˈile
@@ -54,12 +54,12 @@ CN,China,,,tʃˈinə
 CO,Colombia,,,tʃˌolombˈiə
 CR,Costa Rica,,,tʃˈostə rˈitʃə
 CU,Cuba,,,tʃˈubə
-CV,Cape Verde,,,tʃˈape vˈɛɾrde
+CV,Cape Verde,,,tʃˈape vˈɛrde
 CW,Curacao,,,tʃˌuratʃˈao
 CX,Pulau Krismas,,,pˈulaʊ krˈismas
 CY,Cyprus,,,tʃjprˈus
 CZ,Czechia,,,tʃzətʃˈiə
-DE,Jerman,,,dʒˈɛɾrman
+DE,Jerman,,,dʒˈɛrman
 DJ,Djibouti,,,dʒˌiboˈuti
 DK,Denmark,,,dˈɛnmɑːk
 DM,Dominica,,,dˌominˈitʃə
@@ -83,7 +83,7 @@ GB,United Kingdom,,,juːnˈaɪtɪd kˈɪŋdəm
 GD,Grenada,,,ɡrənˈadə
 GE,Georgia,,,ɡˌɛɔrɡˈiə
 GF,Guiana Perancis,,,ɡˌuiˈanə pərˈantʃes
-GG,Guernsey,,,ɡuˈɛɾrnsəj
+GG,Guernsey,,,ɡuˈɛrnsəj
 GH,Ghana,,,ɡhˈanə
 GI,Gibraltar,,,ɡibrˈaltar
 GL,Greenland,,,ɡrəˈɛnland
@@ -111,7 +111,7 @@ IQ,Iraq,,,ˈirak
 IR,Iran,,,ˈiran
 IS,Iceland,,,itʃˈɛland
 IT,Itali,,,itˈali
-JE,Jersey,,,dʒˈɛɾrsəj
+JE,Jersey,,,dʒˈɛrsəj
 JM,Jamaica,,,dʒɐmˈeɪkə
 JO,Jordan,,,dʒˈɔrdan
 JP,Jepun,,,dʒˈəpon
@@ -152,7 +152,7 @@ MO,Macau,,,mˈakaʊ
 MP,Kepulauan Mariana Utara,,,kəpulˈaʊan mˌariˈanə utˈarə
 MQ,Martinique,,,mˌartinˈikwe
 MR,Mauritania,,,mˌaʊritanˈiə
-MS,Montserrat,,,montsˈɛɾrrat
+MS,Montserrat,,,montsˈɛrrat
 MT,Malta,,,mˈaltə
 MU,Mauritius,,,mˌaʊritˈios
 MV,Maldives,,,maldˈivəs
@@ -162,7 +162,7 @@ MY,Malaysia,,,məlˈesiə
 MZ,Mozambique,,,mˌozambˈikwe
 NA,Namibia,,,nˌamibˈiə
 NC,New Caledonia,,,njˈuː tʃˌalədonˈiə
-NE,Niger,,,nˈiɡəɾr
+NE,Niger,,,nˈiɡər
 NF,Pulau Norfolk,,,pˈulaʊ nˈɔrfolʔ
 NG,Nigeria,,,naɪdʒˈiəɹɪə
 NI,Nicaragua,,,nˌitʃaraɡˈuə
@@ -180,9 +180,9 @@ PG,Papua New Guinea,,,papˈuə njˈuː ɡˈɪni
 PH,Filipina,,,fˌilipˈinə
 PK,Pakistan,,,pakˈistan
 PL,Poland,,,pˈoland
-PM,Saint Pierre dan Miquelon,,,sˈaɪnt piˈɛɾrre dan mikwˈɛlon
+PM,Saint Pierre dan Miquelon,,,sˈaɪnt piˈɛrre dan mikwˈɛlon
 PN,Kepulauan Pitcairn,,,kəpulˈaʊan pˈittʃaɪrn
-PR,Puerto Rico,,,puˈɛɾrto rˈitʃo
+PR,Puerto Rico,,,puˈɛrto rˈitʃo
 PS,Palestin,,,palˈəsten
 PT,Portugal,,,pɔrtˈuɡal
 PW,Palau,,,pˈalaʊ
@@ -190,7 +190,7 @@ PY,Paraguay,,,pˌaraɡˈuaj
 QA,Qatar,,,kˈatar
 RE,Reunion,,,rˌɛunˈion
 RO,Romania,,,rˌomanˈiə
-RS,Serbia,,,səɾrbˈiə
+RS,Serbia,,,sərbˈiə
 RU,Rusia,,,rusˈiə
 RW,Rwanda,,,rwˈandə
 SA,Arab Saudi,,,ˈarab sˈaʊdi
@@ -203,7 +203,7 @@ SH,Saint Helena,,,sˈaɪnt helˈɛnə
 SI,Slovenia,,,slˌovənˈiə
 SJ,Svalbard dan Jan Mayen,,,svˈalbard dan dʒˈan mˈajən
 SK,Slovakia,,,slˌovakˈiə
-SL,Sierra Leone,,,siˈɛɾrrə ləˈone
+SL,Sierra Leone,,,siˈɛrrə ləˈone
 SM,San Marino,,,sˈan marˈino
 SN,Senegal,,,sənˈɛɡal
 SO,Somalia,,,sˌomalˈiə

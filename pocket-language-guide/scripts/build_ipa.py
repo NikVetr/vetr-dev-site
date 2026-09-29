@@ -1285,7 +1285,22 @@ REPAIR = {
     # read the acronym letter by letter with lowercase context on either side and as
     # one unknown syllable, `ˈatm`, when the cell is the acronym alone; the reading
     # given is the one the same pack uses for `ATM di mana?` and `ATM iko wapi?`.
-    "ms": [("ˈatm", "ˌeːtˌiːˈɛm")],
+    #
+    # **And one written r came back as two rhotics, a tap and then a trill**, `ɾr`:
+    # `perlu` pˈəɾrlu, `terima` təɾrˈimə, `kaunter` kˈaʊntəɾr, on 127 cells (112 in the
+    # pack, 13 country names, 2 language names) -- before a consonant, after ter-
+    # before a vowel, and word-finally after e. The voice's own mnemonics show two
+    # phonemes, `p'@*rlu` and `t@*R'im@`, where it gives one for the same r in `kerja`
+    # `k'@RdZ@` and `serta` `s'@rt@`. Malay has one rhotic: Clynes & Deterding's
+    # Illustration (Standard Malay (Brunei), JIPA 41(2), 2011) charts a single /r/, in
+    # an inventory "the same as that in Peninsular Standard Malay" (p. 260), with "both
+    # trill [r] and tap [ɾ] realisations", possibly "in free variation", and [r] in the
+    # codas of sinarnya and bertengkar (p. 262); a non-final syllable closes on one
+    # consonant, "/r/ before any consonant except /h/, /w/ or /j/ ... bersih /bərsih/
+    # 'clean', terbang /tərbaŋ/ 'fly'" (p. 264). So the pair is one /r/, written `r` as
+    # the column writes every other one. Every `ɾ` the column held was in this pair, so
+    # none is left, and a written rr (Montserrat, Pierre, Sierra) keeps two.
+    "ms": [("ˈatm", "ˌeːtˌiːˈɛm"), ("ɾr", "r")],
     "sw": [("ˈatm", "ˌatˌiˈem")],
 
     # espeak writes the trill as a doubled tap, gives <ll>/<y> as `jj` in some
@@ -6033,8 +6048,8 @@ GRADE = {
            "hand-patched, since both readings are things a Dutch speaker might actually "
            "say and neither is wrong, only inconsistent"),
     "ms": ("A-", "system espeak-ng-data 1.50, no loader needed (see the `VOICES` comment). "
-           "829 of 836 rows filled -- 6 note rows and 1 bare-symbol row (the yen sign) need "
-           "none. Malay orthography is near-phonemic and the derivation reads correctly on "
+           "955 of 1011 rows filled -- the rest are Morse rows, notes and bare symbols, "
+           "which need none. Malay orthography is near-phonemic and the derivation reads correctly on "
            "every spot-check for this pack, including a real allophonic rule this voice "
            "models rather than glosses over: word-final short vowels reduce in the standard "
            "broadcast pronunciation this voice implements -- `saya` sˈajə (not sˈaja), `dia` "
@@ -6042,14 +6057,10 @@ GRADE = {
            "rˈiŋɡet, `panggil` pˈaŋɡel) -- which is a genuine feature of standard spoken "
            "Malay (the 'Johor-Riau'/kelainan-pepet pronunciation Wikipedia's own Malay- "
            "phonology article names) and not an error, though it reads as a surprise next "
-           "to Indonesian's more open `saya` sˈaja for the identical spelling. One pattern "
-           "flagged rather than silently accepted: coda `r` before a following consonant "
-           "comes back as the two-character sequence `ɾr` (`perlu` pˈəɾrlu, `berdarah` "
-           "bərdarˈahan) rather than a single rhotic -- both `ɾ` and `r` already carry a "
-           "rule in every reader table this corpus has, so it costs no reader a new symbol "
-           "and `--gaps` cannot see it either way, but it reads as an espeak dictionary "
-           "quirk rather than a real gemination and is worth a fluent speaker's second look "
-           "before it is trusted as phonetic fact."),
+           "to Indonesian's more open `saya` sˈaja for the identical spelling. The voice's "
+           "one real fault here was a written r read as two rhotics, `ɾr` (`perlu` "
+           "pˈəɾrlu), where Malay has one; `REPAIR['ms']` folds it, on the sources beside "
+           "it."),
     "mr": ("B", "espeak has an `mr` voice only via `espeakng_loader`'s newer bundled data -- "
            "this build's system espeak-ng-data 1.50 predates it, the same situation Ukrainian "
            "was in. Probed directly rather than trusted, on words chosen to force the question "

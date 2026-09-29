@@ -11,9 +11,9 @@ hotel-basics.can-i-charge-my-phone,Boleh saya cas telefon?,Boleh saya isi bateri
 hotel-basics.i-would-like-a-non-smoking-room,Minta bilik bebas rokok,Minta bilik non-smoking,mˈintə bˈileʔ bˈɛbas rˈokoʔ,,2,ms-agent-v1;ipa=espeak
 hotel-basics.i-would-like-a-quiet-room,Minta bilik yang tenang,,mˈintə bˈileʔ jaŋ tˈənaŋ,,2,ms-agent-v1;ipa=espeak
 hotel-basics.is-there-a-washing-machine,Ada mesin cuci?,,ˈadə mˈəsen tʃˈutʃi,,2,ms-agent-v1;ipa=espeak
-hotel-basics.is-wi-fi-free,Wi-Fi-nya percuma?,,wˈifiɲa pəɾrtʃˈumə,,2,ms-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,Wi-Fi-nya percuma?,,wˈifiɲa pərtʃˈumə,,2,ms-agent-v1;ipa=espeak
 hotel-basics.how-much-per-night,Berapa per malam?,,bərˈapə pər mˈalam,,2,ms-agent-v1;ipa=espeak
-hotel-basics.is-breakfast-included,Termasuk sarapan?,,təɾrmˈasoʔ sarˈapan,,2,ms-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Termasuk sarapan?,,tərmˈasoʔ sarˈapan,,2,ms-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Boleh lihat biliknya?,,bˈoleh lˈihat bilˈekɲə,,2,ms-agent-v1;ipa=espeak
 hotel-basics.for-nights,Untuk {} malam,,ˈuntoʔ {} mˈalam,,2,ms-agent-v1;ipa=espeak
 hotel-basics.two-beds,Minta dua tempat tidur,Minta twin bed,mˈintə dˈuə tˈəmpat tˈidor,,2,ms-agent-v1;ipa=espeak
@@ -21,7 +21,7 @@ hotel-basics.is-there-air-conditioning,Ada AC?,,ˈadə ˈatʃ,,2,ms-agent-v1;ipa
 hotel-requests.can-i-check-out-later,Boleh late check-out?,Boleh check-out lebih lewat?,bˈoleh lˈate tʃˈɛtʃʔoot,,2,ms-agent-v1;ipa=espeak
 hotel-requests.what-time-does-breakfast-start,Sarapan mulai jam berapa?,,sarˈapan mulˈai dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 hotel-requests.can-i-store-my-luggage,Boleh titip beg?,,bˈoleh tˈitep bˈɛɡ,titip = leave in your care,2,ms-agent-v1;ipa=espeak
-hotel-requests.no-housekeeping,Tidak perlu dibersihkan,,tˈidaʔ pˈəɾrlu dˌibəɾrsˈihkan,,2,ms-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,Tidak perlu dibersihkan,,tˈidaʔ pˈərlu dˌibərsˈihkan,,2,ms-agent-v1;ipa=espeak
 hotel-requests.another-towel-please,Minta tuala lagi,,mˈintə tuˈalə lˈaɡi,,2,ms-agent-v1;fix=DBP tuala;row-corrections-v1;ipa=espeak
 hotel-requests.what-time-is-check-out,Check-out jam berapa?,,tʃˈɛtʃʔoot dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,Boleh early check-in?,Boleh check-in lebih awal?,bˈoleh ˈɛarlj tʃˈɛtʃʔin,,2,ms-agent-v1;ipa=espeak
@@ -33,7 +33,7 @@ room-problems.there-is-a-problem-with-the-room,Ada masalah dengan biliknya,,ˈad
 room-problems.the-air-conditioning-is-broken,AC-nya rosak,,ˌeːsˈiːɲa rˈosaʔ,,2,ms-agent-v1;fix=DBP rosak;row-corrections-v1;ipa=espeak
 room-problems.there-is-no-hot-water,Tidak ada air panas,,tˈidaʔ ˈadə ˈaer pˈanas,,2,ms-agent-v1;ipa=espeak
 room-problems.can-i-change-rooms,Boleh pindah bilik?,,bˈoleh pˈindah bˈileʔ,,2,ms-agent-v1;ipa=espeak
-room-problems.the-room-is-too-noisy,Biliknya terlalu bising,,bilˈekɲə təɾrlˈalu bˈiseŋ,,2,ms-agent-v1;fix=DBP bising;row-corrections-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,Biliknya terlalu bising,,bilˈekɲə tərlˈalu bˈiseŋ,,2,ms-agent-v1;fix=DBP bising;row-corrections-v1;ipa=espeak
 room-problems.the-key-does-not-work,Kuncinya tidak berfungsi,,kuntʃˈiɲə tˈidaʔ bərfˈuŋsi,,2,ms-agent-v1;ipa=espeak
 room-problems.the-toilet-will-not-flush,Tandasnya tidak boleh disiram,,tandˈasɲə tˈidaʔ bˈoleh disˈiram,,2,ms-agent-v1;ipa=espeak
 room-problems.the-light-does-not-work,Lampunya tidak menyala,,lampˈuɲə tˈidaʔ məɲˈalə,,2,ms-agent-v1;ipa=espeak
@@ -45,24 +45,24 @@ laundry.when-will-it-be-ready,Bila selesai?,,bˈilə səlˈəsaɪ,,2,ms-agent-v1
 laundry.how-much-per-kilo,Berapa per kilo?,,bərˈapə pər kˈilo,laundry kiloan = priced by weight,2,ms-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,Boleh selesai hari ini?,,bˈoleh səlˈəsaɪ hˈari ˈini,,2,ms-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,Tolong jangan pakai peluntur,,tˈoloŋ dʒˈaŋan pˈakaɪ pəlˈuntor,,2,ms-agent-v1;fix=MABBIM peluntur;row-corrections-v1;ipa=espeak
-laundry.laundromat,Laundry,Binatu,lˈaʊndrj,,2,ms-agent-v1;ipa=espeak
+laundry.laundromat,Kedai dobi layan diri,,kˈədaɪ dˈobi lˈajan dˈiri,,2,ms-agent-v1;fix=DBP laundry absent;fix=KIMD laundromat kedai dobi layan diri;fix=DBP binatu absent (DBP benatu is the washerman);row-corrections-v3;ipa=espeak
 laundry.please-iron-this,Tolong seterika ini,,tˈoloŋ sətərˈikə ˈini,,2,ms-agent-v1;fix=DBP seterika;row-corrections-v1;ipa=espeak
-laundry.detergent,Detergen,Sabun cuci,detˈɛɾrɡen,,2,ms-agent-v1;fix=DBP detergen;row-corrections-v1;ipa=espeak
+laundry.detergent,Detergen,Sabun cuci,detˈɛrɡen,,2,ms-agent-v1;fix=DBP detergen;row-corrections-v1;ipa=espeak
 laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaneŋ,cuci kering here means wash-and-dry,2,ms-agent-v1;ipa=espeak
 laundry.dryer,Mesin pengering,,mˈəsen pəŋˈəreŋ,,2,ms-agent-v1;ipa=espeak
 laundry.coin-operated,Pakai syiling,Self-service,pˈakaɪ ʃˈileŋ,,2,ms-agent-v1;fix=DBP syiling;row-corrections-v1;ipa=espeak
-massage-spa.please-stop,"Berhenti, jangan teruskan",,"bərhˈənti, dʒˈaŋan təɾrˈuskan",stop; do not continue,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.please-stop,"Berhenti, jangan teruskan",,"bərhˈənti, dʒˈaŋan tərˈuskan",stop; do not continue,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.please-pause,Rehat sekejap dulu,,rˈɛhat səkˈɛdʒap dˈulu,a short rest first,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.please-avoid-this-area,Tolong jangan urut bahagian ini,,tˈoloŋ dʒˈaŋan ˈurot bˌahaɡˈian ˈini,please do not massage this part,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.stronger-pressure,Tolong tekan kuat sedikit,,tˈoloŋ tˈəkan kˈuat sədˈiket,please press a little harder,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.more-gently,Kurangkan tekanan,Perlahan sedikit,kurˈaŋkan təkˈanan,"reduce the pressure; the alt is the spoken form -- perlahan in this sense is Kamus Dewan's 'tidak dgn tenaga yg banyak', not the speed sense",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.that-pressure-is-good,"Tekanan ini sesuai, kekalkan begini",,"təkˈanan ˈini səsˈuaɪ, kəkˈalkan bəɡˈini",this pressure is right; keep it like this,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
-massage-spa.focus-on-shoulders,Tolong urut bahu terutamanya,,tˈoloŋ ˈurot bˈahu təɾrˌutamˈəɲə,please massage especially the shoulders,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
-massage-spa.focus-on-back,Tolong urut belakang terutamanya,,tˈoloŋ ˈurot bəlˈakaŋ təɾrˌutamˈəɲə,"please massage especially the back -- belakang, not punggung, which in Malaysian Malay is the buttocks",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
-massage-spa.focus-on-neck,Tolong urut leher terutamanya,Tolong urut tengkuk terutamanya,tˈoloŋ ˈurot lˈeheɾr təɾrˌutamˈəɲə,"please massage especially the neck; the alt names the nape, which is the part the trade works",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
-massage-spa.focus-on-feet,Tolong urut kaki terutamanya,,tˈoloŋ ˈurot kˈaki təɾrˌutamˈəɲə,please massage especially the feet,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-shoulders,Tolong urut bahu terutamanya,,tˈoloŋ ˈurot bˈahu tərˌutamˈəɲə,please massage especially the shoulders,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-back,Tolong urut belakang terutamanya,,tˈoloŋ ˈurot bəlˈakaŋ tərˌutamˈəɲə,"please massage especially the back -- belakang, not punggung, which in Malaysian Malay is the buttocks",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-neck,Tolong urut leher terutamanya,Tolong urut tengkuk terutamanya,tˈoloŋ ˈurot lˈeher tərˌutamˈəɲə,"please massage especially the neck; the alt names the nape, which is the part the trade works",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-feet,Tolong urut kaki terutamanya,,tˈoloŋ ˈurot kˈaki tərˌutamˈəɲə,please massage especially the feet,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.reply-i-will-avoid-that-area,"Baik, saya tidak akan urut bahagian itu",,"bˈaɪʔ, sˈajə tˈidaʔ ˈakan ˈurot bˌahaɡˈian ˈitu",fine; I will not massage that part,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.reply-which-area-exactly,Bahagian mana tepatnya?,,bˌahaɡˈian mˈanə təpˈatɲə,which part exactly?,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.reply-cannot-avoid-this-treatment,Rawatan ini tidak boleh tanpa bahagian itu,,rawˈatan ˈini tˈidaʔ bˈoleh tˈanpə bˌahaɡˈian ˈitu,this treatment is not possible without that part,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
 massage-spa.reply-does-it-hurt-there,Bahagian ini sakit?,,bˌahaɡˈian ˈini sˈaket,does this part hurt?,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
-massage-spa.reply-ask-supervisor,"Saya kurang pasti, saya perlu tanya penyelia",,"sˈajə kˈuraŋ pˈasti, sˈajə pˈəɾrlu tˈaɲə pəɲəlˈiə",I am not quite sure; I need to ask the supervisor,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-ask-supervisor,"Saya kurang pasti, saya perlu tanya penyelia",,"sˈajə kˈuraŋ pˈasti, sˈajə pˈərlu tˈaɲə pəɲəlˈiə",I am not quite sure; I need to ask the supervisor,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak

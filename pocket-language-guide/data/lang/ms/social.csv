@@ -4,9 +4,9 @@ social-basics.hello-polite,Selamat tengah hari,Selamat pagi · Selamat petang,s�
 social-basics.good-morning,Selamat pagi,,səlˈamat pˈaɡi,,2,ms-agent-v1;ipa=espeak
 social-basics.good-evening,Selamat malam,,səlˈamat mˈalam,,2,ms-agent-v1;ipa=espeak
 social-basics.goodbye,Sampai jumpa,Selamat tinggal,sˈampaɪ dʒˈumpə,,2,ms-agent-v1;ipa=espeak
-social-basics.thank-you,Terima kasih,,təɾrˈimə kˈaseh,,2,ms-agent-v1;ipa=espeak
+social-basics.thank-you,Terima kasih,,tərˈimə kˈaseh,,2,ms-agent-v1;ipa=espeak
 social-basics.you-are-welcome,Sama-sama,,sˈaməsamə,,2,ms-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,Permisi,Maaf,pəɾrmˈisi,permisi to pass or get attention,2,ms-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,Permisi,Maaf,pərmˈisi,permisi to pass or get attention,2,ms-agent-v1;ipa=espeak
 social-basics.sorry,Maaf,,mˈaaf,,2,ms-agent-v1;ipa=espeak
 social-basics.no-problem,Tidak apa-apa,Tak apa,tˈidaʔ ˈapəapə,,2,ms-agent-v1;fix=DBP tak apa;row-corrections-v1;ipa=espeak
 social-basics.i-do-not-know,Saya tidak tahu,,sˈajə tˈidaʔ tˈahu,,2,ms-agent-v1;ipa=espeak
@@ -24,7 +24,7 @@ communication.please-wait-a-moment,"Tunggu sebentar, ya",Mohon tunggu sebentar,"
 communication.can-you-help-me,Boleh bantu saya?,,bˈoleh bˈantu sˈajə,,2,ms-agent-v1;ipa=espeak
 communication.please-show-me-the-text,Tolong tunjukkan tulisannya dalam bahasa {target},,tˈoloŋ tundʒˈukkan tˌulisˈanɲə dˈalam bahˈasə {target},,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,Saya tidak menangkap ucapannya,,sˈajə tˈidaʔ mənˈaŋkap ˌutʃapˈanɲə,,2,ms-agent-v1;ipa=espeak
-communication.i-do-not-understand,Saya tidak mengerti,,sˈajə tˈidaʔ məŋˈəɾrti,,2,ms-agent-v1;ipa=espeak
+communication.i-do-not-understand,Saya tidak mengerti,,sˈajə tˈidaʔ məŋˈərti,,2,ms-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Saya tidak boleh membacanya,,sˈajə tˈidaʔ bˈoleh məmbatʃˈəɲə,,2,ms-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Tolong tuliskan dengan huruf Latin,,tˈoloŋ tulˈiskan dˈəŋan hˈurof lˈaten,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Sila,,sˈilə,"an offer, not a request",2,ms-agent-v1;ipa=espeak
@@ -38,28 +38,28 @@ quick-responses.can-possible,Dapat,,dˈapat,,2,ms-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,Tidak dapat,,tˈidaʔ dˈapat,,2,ms-agent-v1;ipa=espeak
 quick-responses.okay-fine,Baik,Okey,bˈaɪʔ,,2,ms-agent-v1;fix=DBP okey;row-corrections-v1;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,Tidak boleh,Jangan,tˈidaʔ bˈoleh,,2,ms-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,Saya pakai penterjemah di telefon,,sˈajə pˈakaɪ pəntəɾrdʒˈɛmah di telˈifon,,2,ms-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,Saya pakai penterjemah di telefon,,sˈajə pˈakaɪ pəntərdʒˈɛmah di telˈifon,,2,ms-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Tolong bicara ke arah telefon,,tˈoloŋ bitʃˈarə kə ˈarah telˈifon,,2,ms-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,Tolong tulis nama tempatnya dalam bahasa {target},,tˈoloŋ tˈules nˈamə təmpˈatɲə dˈalam bahˈasə {target},,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,Tolong satu ayat dulu,,tˈoloŋ sˈatu ˈajat dˈulu,,2,ms-agent-v1;fix=MABBIM ayat;row-corrections-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Tolong ketik dan tunjukkan,,tˈoloŋ kˈəteʔ dan tundʒˈukkan,,2,ms-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,Tolong lihat layarnya,,tˈoloŋ lˈihat lajˈarɲə,,2,ms-agent-v1;ipa=espeak
 phone-text-power.please-type-it-for-me,Tolong ketik untuk saya,,tˈoloŋ kˈəteʔ ˈuntoʔ sˈajə,,2,ms-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,Tolong pakai kata sederhana,,tˈoloŋ pˈakaɪ kˈatə sədəɾrhˈanə,,2,ms-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,Tolong pakai kata sederhana,,tˈoloŋ pˈakaɪ kˈatə sədərhˈanə,,2,ms-agent-v1;ipa=espeak
 phone-text-power.my-phone-battery-is-low,Bateri telefon saya hampir habis,,batˈəri telˈifon sˈajə hˈamper hˈabes,,2,ms-agent-v1;fix=DBP bateri;row-corrections-v1;ipa=espeak
 phone-text-power.do-you-have-a-power-bank,Ada power bank?,,ˈadə pˈaʊə bˈɛnk,,2,ms-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,Terjemahannya mungkin tidak tepat,,təɾrdʒˌɛmahˈanɲə mˈuŋken tˈidaʔ tˈəpat,,2,ms-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,Terjemahannya mungkin tidak tepat,,tərdʒˌɛmahˈanɲə mˈuŋken tˈidaʔ tˈəpat,,2,ms-agent-v1;ipa=espeak
 phone-text-power.please-confirm,Tolong sahkan,,tˈoloŋ sˈahkan,,2,ms-agent-v1;fix=DBP mengesahkan;row-corrections-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Boleh cas telefon di sini?,,bˈoleh tʃˈas telˈifon di sˈini,,2,ms-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,Minta kad perdana pelancong,,mˈintə kˈad pəɾrdˈanə pəlˈantʃoŋ,kad perdana = new prepaid SIM,2,ms-agent-v1;fix=DBP pelancong;row-corrections-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,Minta kad perdana pelancong,,mˈintə kˈad pərdˈanə pəlˈantʃoŋ,kad perdana = new prepaid SIM,2,ms-agent-v1;fix=DBP pelancong;row-corrections-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,Boleh pakai Wi-Fi-nya?,,bˈoleh pˈakaɪ wˈifiɲa,,2,ms-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,Dapat kuota berapa?,,dˈapat kuˈotə bərˈapə,kuota = data allowance,2,ms-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,Perlu pasport saya?,,pˈəɾrlu pˈaspɔrt sˈajə,,2,ms-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Perlu pasport saya?,,pˈərlu pˈaspɔrt sˈajə,,2,ms-agent-v1;ipa=espeak
 sim-data.how-long-is-it-valid,Berlaku berapa lama?,,bərlˈaku bərˈapə lˈamə,,2,ms-agent-v1;ipa=espeak
 sim-data.please-activate-it,Tolong aktifkan,,tˈoloŋ aktˈifkan,,2,ms-agent-v1;ipa=espeak
 sim-data.do-you-have-an-esim,Ada eSIM?,,ˈadə ˈiː sˈim,,2,ms-agent-v1;ipa=espeak
 sim-data.my-data-is-not-working,Data saya tidak jalan,,dˈatə sˈajə tˈidaʔ dʒˈalan,,2,ms-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,Perlu pendaftaran?,,pˈəɾrlu pəndaftˈaran,,2,ms-agent-v1;fix=DBP pendaftaran;row-corrections-v1;ipa=espeak
+sim-data.does-it-need-registration,Perlu pendaftaran?,,pˈərlu pəndaftˈaran,,2,ms-agent-v1;fix=DBP pendaftaran;row-corrections-v1;ipa=espeak
 sim-data.i-have-no-signal,Tidak ada isyarat,,tˈidaʔ ˈadə iʃˈarat,,2,ms-agent-v1;fix=DBP isyarat;fix=MABBIM isyarat;row-corrections-v1;ipa=espeak
 sim-data.please-write-the-wifi-password,Tolong tulis password Wi-Fi,,tˈoloŋ tˈules pˈaswɔrd wˈifi,,2,ms-agent-v1;ipa=espeak
 sim-data.sim-card,Kad SIM,Kad perdana,kˈad sˈim,,2,ms-agent-v1;ipa=espeak
@@ -73,17 +73,17 @@ sim-data.esim,eSIM,,ˈiː sˈim,,2,ms-agent-v1;ipa=espeak
 sim-data.prepaid,Prabayar,Prepaid,prabˈajar,,2,ms-agent-v1;ipa=espeak
 sim-data.roaming,Roaming,,roˈameŋ,,2,ms-agent-v1;ipa=espeak
 etiquette.is-this-allowed,Ini boleh?,,ˈini bˈoleh,,2,ms-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,Perlu memberi tip?,,pˈəɾrlu məmbˈəri tˈip,,2,ms-agent-v1;ipa=espeak
-etiquette.is-service-included,Sudah termasuk servis?,Sudah termasuk service charge?,sˈudah təɾrmˈasoʔ sˈəɾrves,,2,ms-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,Perlu memberi tip?,,pˈərlu məmbˈəri tˈip,,2,ms-agent-v1;ipa=espeak
+etiquette.is-service-included,Sudah termasuk servis?,Sudah termasuk service charge?,sˈudah tərmˈasoʔ sˈərves,,2,ms-agent-v1;ipa=espeak
 etiquette.may-i-enter,Boleh masuk?,,bˈoleh mˈasoʔ,,2,ms-agent-v1;ipa=espeak
-etiquette.remove-shoes,Perlu lepas kasut?,,pˈəɾrlu lˈəpas kˈasot,,2,ms-agent-v1;ipa=espeak
+etiquette.remove-shoes,Perlu lepas kasut?,,pˈərlu lˈəpas kˈasot,,2,ms-agent-v1;ipa=espeak
 etiquette.photo-of-you,Boleh saya foto anda?,Boleh saya foto Bapak / Ibu?,bˈoleh sˈajə fˈoto ˈanda,,2,ms-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Boleh saya duduk di sini?,,bˈoleh sˈajə dˈudoʔ di sˈini,,2,ms-agent-v1;ipa=espeak
 etiquette.queue-for,Ini barisan untuk {}?,,ˈini barˈisan ˈuntoʔ {},,2,ms-agent-v1;ipa=espeak
 etiquette.dressed-appropriately,Pakaian saya sudah pantas?,,pakˈaɪan sˈajə sˈudah pˈantas,,2,ms-agent-v1;ipa=espeak
 etiquette.did-not-mean-to-offend,"Maaf, bukan maksud saya menyinggung",,"mˈaaf, bˈukan mˈaksod sˈajə məɲˈiŋɡoŋ",,2,ms-agent-v1;ipa=espeak
 etiquette.what-is-customary,Kebiasaan di sini bagaimana?,,kəbˌiasˈaan di sˈini bˌaɡaɪmˈanə,,2,ms-agent-v1;ipa=espeak
-etiquette.keep-the-change,Tidak perlu baki,Ambil saja bakinya,tˈidaʔ pˈəɾrlu bˈaki,,2,ms-agent-v1;fix=DBP baki;row-corrections-v1;ipa=espeak
+etiquette.keep-the-change,Tidak perlu baki,Ambil saja bakinya,tˈidaʔ pˈərlu bˈaki,,2,ms-agent-v1;fix=DBP baki;row-corrections-v1;ipa=espeak
 children.cannot-find-my-child,Saya tidak menemukan anak saya,,sˈajə tˈidaʔ mənəmˈukan ˈanaʔ sˈajə,,2,ms-agent-v1;ipa=espeak
 children.make-an-announcement,Tolong buat pengumuman,,tˈoloŋ bˈuat pəŋumˈuman,,2,ms-agent-v1;ipa=espeak
 children.child-age,Anak saya {} tahun,,ˈanaʔ sˈajə {} tˈahon,,2,ms-agent-v1;ipa=espeak
@@ -95,8 +95,8 @@ children.minimum-age,Usia minimalnya berapa?,,usˈiə mˌinimˈalɲə bərˈapə
 children.do-children-pay,Anak bayar juga?,,ˈanaʔ bˈajar dʒˈuɡə,,2,ms-agent-v1;ipa=espeak
 children.crib,Ada tempat tidur bayi?,Ada baby cot?,ˈadə tˈəmpat tˈidor bˈaji,,2,ms-agent-v1;ipa=espeak
 children.warm-this-bottle,Tolong hangatkan botol susu ini,,tˈoloŋ haŋˈatkan bˈotol sˈusu ˈini,,2,ms-agent-v1;ipa=espeak
-children.car-seat,Kami perlu car seat anak,Kami perlu kerusi kereta anak,kˈami pˈəɾrlu tʃˈar sˈɛat ˈanaʔ,,2,ms-agent-v1;ipa=espeak
-children.stroller,Stroller,Kereta bayi,strˈoleɾr,,2,ms-agent-v1;ipa=espeak
+children.car-seat,Kami perlu car seat anak,Kami perlu kerusi kereta anak,kˈami pˈərlu tʃˈar sˈɛat ˈanaʔ,,2,ms-agent-v1;ipa=espeak
+children.stroller,Stroller,Kereta bayi,strˈoler,,2,ms-agent-v1;ipa=espeak
 children.playground,Ada taman bermain?,,ˈadə tˈaman bərmˈaɪn,,2,ms-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Kesantunan bahasa Thai terletak di hujung ayat: penutur lelaki menutup hampir semua ucapan dengan khrap, penutur perempuan dengan kha. Perempuan yang bertanya menyebut kha dengan nada menaik. Baris-baris di sini sengaja tidak menyertakan zarah itu kerana pilihannya bergantung kepada anda, jadi tambahkan sendiri.",,,,2,ms-notes-v1
 board-answers.can-you-walk,Boleh jalan?,,bˈoleh dʒˈalan,,2,ms-agent-v1;ipa=espeak
@@ -117,18 +117,18 @@ board-answers.please-wait,"Tunggu sebentar, ya",,"tˈuŋɡu səbˈəntar, jˈa",
 board-answers.say-it-again,Tolong ulangi,,tˈoloŋ ulˈaŋi,,2,ms-agent-v1;ipa=espeak
 board-answers.stay-here,Sebaiknya di sini saja,,səbˈaɪkɲə di sˈini sˈadʒə,,2,ms-agent-v1;ipa=espeak
 board-answers.the-hospital-is-close,Hospital dekat dari sini,,hospˈital dˈəkat dˌari sˈini,,2,ms-agent-v1;fix=MABBIM hospital;row-corrections-v1;ipa=espeak
-board-answers.there-is-no-wait,"Tidak perlu tunggu, sudah boleh masuk",,"tˈidaʔ pˈəɾrlu tˈuŋɡu, sˈudah bˈoleh mˈasoʔ",,2,ms-agent-v1;ipa=espeak
+board-answers.there-is-no-wait,"Tidak perlu tunggu, sudah boleh masuk",,"tˈidaʔ pˈərlu tˈuŋɡu, sˈudah bˈoleh mˈasoʔ",,2,ms-agent-v1;ipa=espeak
 board-answers.we-do-not-have-it,Kami tidak punya,,kˈami tˈidaʔ pˈuɲə,kami = exclusive we; excludes the customer being spoken to,2,ms-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Namanya siapa?,,namˈəɲə siˈapə,,2,ms-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Sakitnya di mana?,,sakˈetɲə dimˈanə,,2,ms-agent-v1;ipa=espeak
 kind-words.you-are-very-kind,Anda sangat baik.,,ˈanda sˈaŋat bˈaɪʔ,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-your-help,Terima kasih atas bantuan anda.,,təɾrˈimə kˈaseh ˈatas bantˈuan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,Terima kasih atas bantuan anda.,,tərˈimə kˈaseh ˈatas bantˈuan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.this-is-delicious,Ini sangat sedap.,,ˈini sˈaŋat sˈɛdap,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.it-is-beautiful-here,Di sini sangat cantik.,,di sˈini sˈaŋat tʃˈanteʔ,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.i-like-it-very-much,Saya sangat suka ini.,,sˈajə sˈaŋat sˈukə ˈini,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.i-had-a-wonderful-time,Saya sangat menikmati masa saya di sini.,,sˈajə sˈaŋat mənikmˈati mˈasə sˈajə di sˈini,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,təɾrˈimə kˈaseh ˈatas səmuˈəɲə,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan anda.,,təɾrˈimə kˈaseh ˈatas kəramˈahan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,tərˈimə kˈaseh ˈatas səmuˈəɲə,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan anda.,,tərˈimə kˈaseh ˈatas kəramˈahan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 board-answers.my-name-is-blank,Nama saya {},,nˈamə sˈajə {},my name [is] {},2,ms-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=espeak
 board-answers.i-would-rather-not-say,"Maaf, saya kurang selesa untuk memberitahu",,"mˈaaf, sˈajə kˈuraŋ səlˈɛsə ˈuntoʔ məmbˌəritˈahu","sorry, I am not comfortable telling",2,ms-agent-v1;src=DBP selesa;answers-audit-v1;ipa=espeak
 board-answers.what-happened,Apa yang berlaku?,,ˈapə jaŋ bərlˈaku,what has happened?,2,ms-agent-v1;src=DBP berlaku;answers-audit-v1;ipa=espeak
@@ -136,13 +136,13 @@ board-answers.understood,"Baik, saya faham",,"bˈaɪʔ, sˈajə fˈaham","all ri
 board-answers.i-will-check,Saya semak dulu,,sˈajə sˈɛmaʔ dˈulu,I will check first,2,ms-agent-v1;src=DBP semak (3);answers-audit-v1;ipa=espeak
 board-answers.we-have-it,Ada,,ˈadə,[it] is there: the question's own Ada echoed,2,ms-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=espeak
 board-answers.we-are-full,Sudah penuh,,sˈudah pˈənoh,already full,2,ms-agent-v1;src=DBP penuh (1);answers-audit-v1;ipa=espeak
-board-answers.it-is-free,Percuma,,pəɾrtʃˈumə,,2,ms-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Percuma,,pərtʃˈumə,,2,ms-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
 board-answers.it-does-not-matter,Mana-mana pun boleh,,mˈanəmanə pˈun bˈoleh,either one is fine,2,ms-agent-v1;src=DBP mana-mana;in-pack-neighbour=quick-responses.okay-can;answers-audit-v1;ipa=espeak
 board-answers.only-for-customers,Untuk pelanggan saja,,ˈuntoʔ pəlˈaŋɡan sˈadʒə,for customers only,2,ms-agent-v1;src=DBP pelanggan;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
 board-answers.where-to,Mahu ke mana?,,mˈahu kə mˈanə,wanting [to go] where?,2,ms-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,Di perhentian seterusnya,,di pəɾrhəntˈian sətərˈosɲə,at the next stop,2,ms-agent-v1;src=DBP perhentian;src=DBP seterusnya;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Di perhentian seterusnya,,di pərhəntˈian sətərˈosɲə,at the next stop,2,ms-agent-v1;src=DBP perhentian;src=DBP seterusnya;answers-audit-v1;ipa=espeak
 board-answers.pay-on-board,Bayar selepas naik,,bˈajar səlˈəpas nˈaɪʔ,pay after boarding,2,ms-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;answers-audit-v1;ipa=espeak
 board-answers.see-a-doctor,Lebih baik berjumpa doktor,,lˈəbeh bˈaɪʔ bərdʒˈumpə dˈoktər,it is better to see a doctor,2,ms-agent-v1;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=espeak
-board-answers.prescription-only,Perlu preskripsi doktor,,pˈəɾrlu prəskrˈipsi dˈoktər,a doctor's prescription is needed,2,ms-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Perlu preskripsi doktor,,pˈərlu prəskrˈipsi dˈoktər,a doctor's prescription is needed,2,ms-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
 board-answers.before-food,Sebelum makan,,səbˈəlom mˈakan,before eating,2,ms-agent-v1;src=mmgazette.com Waktu Terbaik Pengambilan Ubat-ubatan (Pegawai Farmasi);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
 board-answers.after-food,Selepas makan,,səlˈəpas mˈakan,"after eating: selepas as Malaysian labels write it, where the pack's question has sesudah",2,ms-agent-v1;src=mmgazette.com Waktu Terbaik Pengambilan Ubat-ubatan (Pegawai Farmasi);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

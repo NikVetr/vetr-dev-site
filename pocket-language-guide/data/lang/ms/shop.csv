@@ -5,14 +5,14 @@ payment-receipt.pay-by-qr-code,Bayar pakai DuitNow QR?,,bˈajar pˈakaɪ dˈuet 
 payment-receipt.a-receipt-please,Minta resit,,mˈintə rˈəset,,2,ms-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈules aŋkˈəɲə,,2,ms-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
-payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,bˈoleh bˈajar təɾrpˈisah,,2,ms-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,Sudah termasuk cukai?,,sˈudah təɾrmˈasoʔ tʃˈukaɪ,,2,ms-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,bˈoleh bˈajar tərpˈisah,,2,ms-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,Sudah termasuk cukai?,,sˈudah tərmˈasoʔ tʃˈukaɪ,,2,ms-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,Kad saya ditolak,,kˈad sˈajə ditˈolaʔ,,2,ms-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,Nampaknya bilnya keliru,,nampˈakɲə bˈilɲə kəlˈiru,,2,ms-agent-v1;fix=DBP nampaknya;fix=MABBIM bil;row-corrections-v1;ipa=espeak
 payment-receipt.i-already-paid,Saya sudah bayar,,sˈajə sˈudah bˈajar,,2,ms-agent-v1;ipa=espeak
 shopping.i-am-just-looking,Saya lihat-lihat dulu,,sˈajə lˈihatlihat dˈulu,,2,ms-agent-v1;ipa=espeak
 shopping.how-much-is-this,Ini berapa?,,ˈini bərˈapə,,2,ms-agent-v1;ipa=espeak
-shopping.that-is-too-expensive,Terlalu mahal,,təɾrlˈalu mˈahal,,2,ms-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,Terlalu mahal,,tərlˈalu mˈahal,,2,ms-agent-v1;ipa=espeak
 shopping.can-it-be-a-little-cheaper,Boleh kurang sedikit?,,bˈoleh kˈuraŋ sədˈiket,,2,ms-agent-v1;ipa=espeak
 shopping.is-there-a-discount,Ada diskaun?,,ˈadə dˈiskaʊn,,2,ms-agent-v1;ipa=espeak
 shopping.where-do-i-pay,Bayar di mana?,,bˈajar dimˈanə,,2,ms-agent-v1;ipa=espeak
