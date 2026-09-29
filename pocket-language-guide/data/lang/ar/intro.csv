@@ -3,7 +3,7 @@ introductions.my-name-is,اسمي {},,ismī {},ˈismiːj {},,2,ar-agent-v1;ipa=e
 introductions.nice-to-meet-you,تشرّفنا,سعيد بمعرفتك,tasharrafnā,tʃrrfnˈaː,we are honoured,2,ar-agent-v1;ipa=espeak
 introductions.what-is-your-name,ما اسمك؟,,mā ismak?,mˈaː ˈismka,,2,ar-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,نحن نسافر معاً,,naḥnu nusāfir maʿan,nˈaħnu nsˈaːfr mʕˈaː,,2,ar-agent-v1;ipa=espeak
-introductions.this-is-my-friend,هذا صديقي,هذه صديقتي,hādhā ṣadīqī,haˈaðaˌa s̪ˈidːiːqˌiː,,2,ar-agent-v1;ipa=espeak
+introductions.this-is-my-friend,هذا صديقي,,hādhā ṣadīqī,haˈaðaˌa s̪ˈidːiːqˌiː,,2,ar-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Arabic has no sex-neutral word for a friend (صديق or صديقة) so the masculine stays and the doubled form goes);row-corrections-v3;ipa=espeak
 introductions.i-am-from,أنا من {},,anā min {},ˈana mˈin {},,2,ar-agent-v1;ipa=espeak
 introductions.where-are-you-from,من أي بلد؟,,min ayy balad?,mˈin ʔˈajj bˈalad,from which country?,2,ar-agent-v1;src=Wehr-1976 بلد;reply-neutrality-rule;rule=verbless-question-drops-gendered-pronoun;answers-audit-v1;ipa=espeak
 introductions.how-are-you,كيف الحال؟,,kayf al-ḥāl?,kˈajfa ʔalħˈaːl,how are things?,2,ar-agent-v1;src=Wehr-1976 حال;reply-neutrality-rule;rule=definite-article-replaces-gendered-possessive;answers-audit-v1;ipa=espeak
@@ -27,5 +27,5 @@ family-intros.this-is-my-mother,هذه أمي,,hādhihi ummī,haˈaðihˌi ʔˈu
 family-intros.this-is-my-father,هذا أبي,,hādhā abī,haˈaðaˌa ʔˈabiː,,2,ar-agent-v1;ipa=espeak
 family-intros.this-is-my-brother,هذا أخي,,hādhā akhī,haˈaðaˌa ʔxˈiː,,2,ar-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,هذه أختي,,hādhihi ukhtī,haˈaðihˌi ʔxtˈiː,,2,ar-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,هذا شريك حياتي,هذه شريكة حياتي,hādhā sharīk ḥayātī,haˈaðaˌa ʃˈaɹiːk ħˈajaːtˌiːj,"sharīk hayātī = life partner (masc.); the feminine in text_alt is for a female partner, not the speaker -- ""life"" avoids the business-partner reading bare sharīk risks",2,ar-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,هذا زميلي,هذه زميلتي,hādhā zamīlī,haˈaðaˌa zmˈiːliː,"feminine in text_alt is for a female colleague, not the speaker",2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,هذا شريك حياتي,,hādhā sharīk ḥayātī,haˈaðaˌa ʃˈaɹiːk ħˈajaːtˌiːj,"sharīk hayātī = life partner -- ""life"" avoids the business-partner reading bare sharīk risks; masculine generic, as sharīk/sharīkah has no sex-neutral form",2,ar-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Arabic has no sex-neutral word for a partner (شريك حياة or شريكة حياة) so the masculine stays and the doubled form goes);row-corrections-v3;ipa=espeak
+family-intros.this-is-my-colleague,هذا زميلي,,hādhā zamīlī,haˈaðaˌa zmˈiːliː,"masculine generic -- zamīl/zamīlah has no sex-neutral form, so the masculine stands for the colleague whatever their sex; the colleague's gender, not the speaker's",2,ar-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Arabic has no sex-neutral word for a colleague (زميل or زميلة) so the masculine stays and the doubled form goes);row-corrections-v3;ipa=espeak

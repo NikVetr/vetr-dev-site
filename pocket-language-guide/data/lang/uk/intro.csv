@@ -3,7 +3,7 @@ introductions.my-name-is,Мене звати {}.,,Mene zvaty {}.,mˈɛnɛ zʋˈa
 introductions.nice-to-meet-you,Дуже приємно.,,Duzhe pryiemno.,dˈuʒɛ prɪjˈɛmno,,2,uk-agent-v1;ipa=espeak
 introductions.what-is-your-name,Як вас звати?,,Yak vas zvaty?,jˈaɡ ʋˈaz zʋˈatɪ,,2,uk-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Ми подорожуємо разом.,,My podorozhuiemo razom.,mˈɪ podorˈoʒujɛmo rˈazom,,2,uk-agent-v1;ipa=espeak
-introductions.this-is-my-friend,Це мій друг.,Це моя подруга.,Tse mii druh.,tsˈɛ mˈiːj drˈuh,,2,uk-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Це мій друг.,,Tse mii druh.,tsˈɛ mˈiːj drˈuh,,2,uk-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Ukrainian has no sex-neutral word for a friend (друг or подруга) so the masculine stays and the doubled form goes);fix=СУМ-20 ПОДРУГА ж. (жінка яка дружить з ким-небудь);row-corrections-v3;ipa=espeak
 introductions.i-am-from,Моя країна — {}.,,Moya krayina — {}.,mˈoja krajˈiːna {},"'My country is {}'; predicate nominative (zero-copula), so the slot needs no case -- unlike з (+genitive), the same defect Russian's из has",2,"uk-agent-v1;rewritten-for-fill-in=z governs the genitive; predicate nominative with an em dash needs no case, the same repair as ru;ipa=espeak"
 introductions.where-are-you-from,Звідки ви?,,Zvidky vy?,zʋˈiːtkɪ ʋˈɪ,,2,uk-agent-v1;ipa=espeak
 introductions.how-are-you,Як справи?,,Yak spravy?,jˈak sprˈaʋɪ,,2,uk-agent-v1;ipa=espeak
@@ -27,5 +27,5 @@ family-intros.this-is-my-mother,Це моя мама.,,Tse moia mama.,tsˈɛ mˈ
 family-intros.this-is-my-father,Це мій тато.,,Tse mii tato.,tsˈɛ mˈiːj tˈato,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-brother,Це мій брат.,,Tse mii brat.,tsˈɛ mˈiːj brˈat,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Це моя сестра.,,Tse moia sestra.,tsˈɛ mˈoja sˈɛstra,,2,uk-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,Це мій партнер.,Це моя партнерка.,Tse mii partner.,tsˈɛ mˈiːj pˈartnɛr,"male partner; a female partner is Це моя партнерка. -- the neutral word for an unmarried life partner, not a business partner",2,uk-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,Це мій колега.,Це моя колега.,Tse mii koleha.,tsˈɛ mˈiːj kolˈɛha,колега is common-gender; only the possessive мій/моя changes for a female colleague,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Це мій партнер.,,Tse mii partner.,tsˈɛ mˈiːj pˈartnɛr,"the neutral word for an unmarried life partner, not a business partner",2,uk-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Ukrainian has no sex-neutral word for a partner (партнер or партнерка) so the masculine stays and the doubled form goes);fix=СУМ-20 ПАРТНЕРКА ж. (жін. до партнер);row-corrections-v3;ipa=espeak
+family-intros.this-is-my-colleague,Це колега.,,Tse koleha.,tsˈɛ kolˈɛha,"this is a colleague -- колега is common-gender, so with no possessive nothing in the sentence takes the colleague's sex",2,uk-agent-v1;fix=СУМ-20 КОЛЕГА ч. і ж.;fix=СУМ-11 КОЛЕГА ч. і ж.;fix=speaker-variants.md third-party gender (a grammatically fixed wording: the possessive dropped);row-corrections-v3;ipa=espeak

@@ -105,7 +105,7 @@ lost-rescue.my-companion-is-missing,Пропав мій супутник.,,Propa
 lost-rescue.please-look-at-my-current-location,"Подивіться, де я перебуваю.",,"Podyvitsia, de ya perebuvaiu.","podˈɪʋiːtsja, dˈɛ jˈa pɛrɪbˈuʋaju",,2,uk-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Пропала моя дитина.,,Propala moia dytyna.,propˈala mˈoja dɪtˈɪna,,2,uk-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,"Я не знаю, де я.",,"Ya ne znaiu, de ya.","jˈa nˈɛ znˈaju, dˈɛ jˈa",,2,uk-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Мій друг поранений.,Моя подруга поранена.,Mii druh poranenyi.,mˈiːj drˈuh poranˈɛnɪj,,2,uk-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Мій друг поранений.,,Mii druh poranenyi.,mˈiːj drˈuh poranˈɛnɪj,,2,uk-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Ukrainian has no sex-neutral word for a friend (друг or подруга) so the masculine stays and the doubled form goes);fix=СУМ-20 ПОДРУГА ж. (жінка яка дружить з ким-небудь);row-corrections-v3;ipa=espeak
 lost-rescue.i-lost-my-wallet,У мене пропав гаманець.,,U mene propav hamanets.,ˈu mˈɛnɛ prˈopaf hamˈanɛts,,2,uk-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,У мене пропала сумка.,,U mene propala sumka.,ˈu mˈɛnɛ propˈala sˈumka,,2,uk-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Де бюро знахідок?,,De biuro znakhidok?,dˈɛ bjˈuro znaxiːdˈok,,2,uk-agent-v1;ipa=espeak

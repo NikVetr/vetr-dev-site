@@ -3,11 +3,11 @@ building-help.what-room-number-is-this,या खोलीचा क्रमा
 building-help.i-am-lost,मला वाट सापडत नाही,,malā vāṭa sāpaḍata nāhī,mˈʌlaː vˈaːʈ sˈaːpəɖˌət nˈaːhi,"I can't find the way -- invariant, no gender",2,mr-agent-v1;ipa=espeak
 building-help.where-is-reception,रिसेप्शन कुठे आहे?,,risēpśana kuṭhē āhē?,ɾɪsˈeːpʃən kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,प्लग पॉईंट कुठे आहे?,,plaga pôīṁṭa kuṭhē āhē?,plˈʌɡ pɔˈiːɳʈ kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
-accessibility.step-free,पायऱ्याविना प्रवेश आहे का?,,pāyaṟyāvinā pravēśa āhē kā?,pˌaːjrjˈaːvɪnˌaː pɾəvˈeːʃ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+accessibility.step-free,पायऱ्याविना प्रवेश आहे का?,,pāyar̆yāvinā pravēśa āhē kā?,pˌaːjrjˈaːvɪnˌaː pɾəvˈeːʃ ˈaːheː kˈaː,,2,mr-agent-v1;fix=ISO-15919-2001 Table 1 ref 048a eyelash RA r̆ (Used in Marathi and Nepali);fix=Unicode 16.0 ch.12 Devanagari rule R5 (RRA + VIRAMA is the eyelash-RA commonly used in writing Marathi);row-corrections-v3;ipa=espeak
 accessibility.wheelchair-access,व्हीलचेअरसाठी प्रवेश आहे का?,,vhīlacēarasāṭhī pravēśa āhē kā?,vhˌiːlcˌeːəɾsˈaːʈʰi pɾəvˈeːʃ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 accessibility.elevator,लिफ्ट आहे का?,,liphṭa āhē kā?,lˈɪpʰʈ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 accessibility.ramp,रॅम्प आहे का?,,rêmpa āhē kā?,ɾˈɛmp ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-accessibility.how-many-steps,किती पायऱ्या आहेत?,,kitī pāyaṟyā āhēta?,kˈɪti paːjˈʌrjaː aːhˈeːt,,2,mr-agent-v1;ipa=espeak
+accessibility.how-many-steps,किती पायऱ्या आहेत?,,kitī pāyar̆yā āhēta?,kˈɪti paːjˈʌrjaː aːhˈeːt,,2,mr-agent-v1;fix=ISO-15919-2001 Table 1 ref 048a eyelash RA r̆ (Used in Marathi and Nepali);fix=Unicode 16.0 ch.12 Devanagari rule R5 (RRA + VIRAMA is the eyelash-RA commonly used in writing Marathi);row-corrections-v3;ipa=espeak
 accessibility.cannot-climb-stairs,मला जिना चढता येत नाही,,malā jinā caḍhatā yēta nāhī,mˈʌlaː ɟˈɪɪnˌaː cˈʌɖʰtˌaː jˈeːt nˈaːhi,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,मला बसायला हवे,,malā basāyalā havē,mˈʌlaː bəsˈaːjlˌaː hˈʌveː,,2,mr-agent-v1;ipa=espeak
 accessibility.accessible-restroom,दिव्यांगांसाठी स्वच्छतागृह आहे का?,,divyāṁgāṁsāṭhī svacchatāgr̥ha āhē kā?,dˌɪvjãɡãsˈaːʈʰi svˌəcʰcʰtˈaːɡɾʊh ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak

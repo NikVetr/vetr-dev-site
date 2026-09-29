@@ -107,7 +107,7 @@ lost-rescue.my-companion-is-missing,Osoba s kojom putujem je nestala,,osoba s k�
 lost-rescue.please-look-at-my-current-location,"Molim vas, pogledajte gdje se sada nalazim",,"mˈolim vˈas, poɡledajte ɡdjˈe sˈe sˈada nalazim",,2,hr-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Moje dijete je nestalo,,mˈoje dijete je nestalo,,2,hr-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,Ne znam gdje se nalazim,,nˈe znˈam ɡdjˈe sˈe nalazim,,2,hr-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Moj prijatelj je povrijeđen,Moja prijateljica je povrijeđena,mˈoj prijateʎ je povrijedʑen,male friend / female friend,2,hr-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Moj prijatelj je povrijeđen,,mˈoj prijateʎ je povrijedʑen,"masculine generic -- prijatelj/prijateljica has no sex-neutral form, so the masculine stands for the friend whatever their sex; the friend's gender, not the speaker's",2,hr-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Croatian has no sex-neutral word for a friend (prijatelj or prijateljica) so the masculine stays and the doubled form goes);fix=HJP prijatelj m;row-corrections-v3;ipa=espeak
 lost-rescue.i-lost-my-wallet,Izgubio sam novčanik,Izgubila sam novčanik,izɡubio sam noftʃanik,,2,hr-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Izgubio sam torbu,Izgubila sam torbu,izɡubio sam tˈorbu,,2,hr-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Gdje je ured za izgubljene stvari?,,ɡdjˈe je ˈured zˈa izɡubʎene stvˈari,,2,hr-agent-v1;ipa=espeak

@@ -107,7 +107,7 @@ lost-rescue.my-companion-is-missing,"Zaginęła osoba, z którą podróżuję",,
 lost-rescue.please-look-at-my-current-location,"Proszę spojrzeć, gdzie teraz jestem",,"prˈɔʃɛ spˈɔjʒɛtɕ, ɡdʑˈɛ tˈɛras jˈɛstɛm",please look at where I am now,2,pl-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Zaginęło moje dziecko,,zˌaɡʲinˈɛwɔ mˈɔjɛ dʑˈɛtskɔ,,2,pl-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,"Nie wiem, gdzie jestem",,"ɲˈɛvʲɛm, ɡdʑˈɛ jˈɛstɛm",,2,pl-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Mój znajomy jest ranny,Moja znajoma jest ranna,mˈuj znajˈɔmɨ jɛst rˈannɨ,"masculine; for a woman, Moja znajoma jest ranna",2,pl-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Mój znajomy jest ranny,,mˈuj znajˈɔmɨ jɛst rˈannɨ,"masculine generic -- znajomy/znajoma has no sex-neutral form, so the masculine stands for the friend whatever their sex; the friend's gender, not the speaker's",2,pl-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Polish has no sex-neutral word for a friend (znajomy or znajoma) so the masculine stays and the doubled form goes);fix=PWN SJP znajomy II osoba znajoma (fem. znajoma);row-corrections-v3;ipa=espeak
 lost-rescue.i-lost-my-wallet,Zginął mi portfel,,zɡʲˈinɔw mi pˈɔrtfɛl,,2,pl-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Zginęła mi torba,,zɡʲinˈɛwa mi tˈɔrba,,2,pl-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Gdzie jest biuro rzeczy znalezionych?,,ɡdʑˈɛ jɛzd bjˈurɔ ʒˈɛtʃɨ znˌalɛʑˈɔnɨx,,2,pl-agent-v1;ipa=espeak

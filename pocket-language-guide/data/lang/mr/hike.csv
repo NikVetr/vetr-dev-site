@@ -6,7 +6,7 @@ trail-words.viewpoint,दृश्यस्थळ,,dr̥śyasthaḷa,dɾʊʃjˈʌ
 trail-words.cableway,रोपवे,,rōpavē,ɾˈoːpvˌeː,,2,mr-agent-v1;ipa=espeak
 trail-words.shuttle-bus,शटल बस,,śaṭala basa,ʃˈʌʈəl bˈʌs,,2,mr-agent-v1;ipa=espeak
 trail-words.park-shuttle,उद्यानाची शटल बस,,udyānācī śaṭala basa,ˌʊdjaːnˈaːci ʃˈʌʈəl bˈʌs,,2,mr-agent-v1;ipa=espeak
-trail-words.steps,पायऱ्या,,pāyaṟyā,paːjˈʌrjaː,,2,mr-agent-v1;ipa=espeak
+trail-words.steps,पायऱ्या,,pāyar̆yā,paːjˈʌrjaː,,2,mr-agent-v1;fix=ISO-15919-2001 Table 1 ref 048a eyelash RA r̆ (Used in Marathi and Nepali);fix=Unicode 16.0 ch.12 Devanagari rule R5 (RRA + VIRAMA is the eyelash-RA commonly used in writing Marathi);row-corrections-v3;ipa=espeak
 trail-words.up-uphill,वर / चढ,,vara / caḍha,vˈʌɾ / cˈʌɖʰ,,2,mr-agent-v1;ipa=espeak
 trail-words.down-downhill,खाली / उतार,,khālī / utāra,kʰˈaːli / ʊtˈaːɾ,,2,mr-agent-v1;ipa=espeak
 trail-words.one-way,एकेरी,,ēkērī,eːkˈeːɾi,,2,mr-agent-v1;ipa=espeak

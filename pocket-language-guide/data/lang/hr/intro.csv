@@ -3,7 +3,7 @@ introductions.my-name-is,Zovem se {},,zˈovem sˈe {},'I call myself {}',2,hr-ag
 introductions.nice-to-meet-you,Drago mi je,,drˈaɡo mˈi je,'it is dear to me',2,hr-agent-v1;ipa=espeak
 introductions.what-is-your-name,Kako se zovete?,,kˈako sˈe zovete,,2,hr-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Putujemo zajedno,,putujemo zajedno,,2,hr-agent-v1;ipa=espeak
-introductions.this-is-my-friend,Ovo je moj prijatelj,Ovo je moja prijateljica,ˈovo je mˈoj prijateʎ,male friend / female friend,2,hr-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Ovo je moj prijatelj,,ˈovo je mˈoj prijateʎ,"masculine generic -- prijatelj/prijateljica has no sex-neutral form, so the masculine stands for the friend whatever their sex; the friend's gender, not the speaker's",2,hr-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Croatian has no sex-neutral word for a friend (prijatelj or prijateljica) so the masculine stays and the doubled form goes);fix=HJP prijatelj m;row-corrections-v3;ipa=espeak
 introductions.i-am-from,Ja sam iz ovog mjesta: {},,jˈaː sam ˈiz ˈovoɡ mjˈesta {},"'I am from this place:' -- iz takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
 introductions.where-are-you-from,Odakle ste?,,odakle ste,,2,hr-agent-v1;ipa=espeak
 introductions.how-are-you,Kako ste?,,kˈako ste,,2,hr-agent-v1;ipa=espeak
@@ -27,5 +27,5 @@ family-intros.this-is-my-mother,Ovo je moja mama,,ˈovo je mˈoja mˈama,,2,hr-a
 family-intros.this-is-my-father,Ovo je moj tata,,ˈovo je mˈoj tˈata,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-brother,Ovo je moj brat,,ˈovo je mˈoj brˈat,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Ovo je moja sestra,,ˈovo je mˈoja sˈestra,,2,hr-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,Ovo je moj partner,Ovo je moja partnerica,ˈovo je mˈoj pˈartner,"male partner; a female partner is moja partnerica -- the neutral word for an unmarried life partner, not a business partner",2,hr-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,Ovo je moj kolega s posla,Ovo je moja kolegica s posla,ˈovo je mˈoj koleɡa s pˈosla,male colleague; a female colleague is moja kolegica s posla,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ovo je moj partner,,ˈovo je mˈoj pˈartner,"the neutral word for an unmarried life partner, not a business partner; masculine generic -- partner/partnerica has no sex-neutral form, so the masculine stands for the partner whatever their sex; the partner's gender, not the speaker's",2,hr-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Croatian has no sex-neutral word for a partner (partner or partnerica) so the masculine stays and the doubled form goes);fix=HJP partner m (2 bračni suputnik);row-corrections-v3;ipa=espeak
+family-intros.this-is-my-colleague,Ovo je moj kolega s posla,,ˈovo je mˈoj koleɡa s pˈosla,"a colleague from work; masculine generic -- kolega/kolegica has no sex-neutral form, so the masculine stands for the colleague whatever their sex; the colleague's gender, not the speaker's",2,hr-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Croatian has no sex-neutral word for a colleague (kolega or kolegica) so the masculine stays and the doubled form goes);fix=HJP kolega m (moj kolega);row-corrections-v3;ipa=espeak
