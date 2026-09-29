@@ -132,12 +132,17 @@ export function openSearch({ bar, lang, placeholder, closeLabel, onQuery, onClos
   close.title = closeLabel;
   close.append(icon('M6 6l12 12M18 6L6 18'));
   form.append(input, close);
+  // **The row keeps its height**, the field fitted inside it: a taller row took its
+  // difference from the grid under it, and every button changed size as the search opened.
+  const height = bar.style.blockSize;
+  bar.style.blockSize = `${bar.getBoundingClientRect().height}px`;
   bar.classList.add('board-searching');
   bar.append(form);
 
   const end = () => {
     form.remove();
     bar.classList.remove('board-searching');
+    bar.style.blockSize = height;
     onClose();
   };
   input.addEventListener('input', () => onQuery(input.value));

@@ -39,7 +39,8 @@ const STEP = /** @type {Record<string, number>} */ ({ ArrowLeft: -1, ArrowUp: -1
  * Let the reader rearrange a grid's buttons until they press Done, or Escape to leave it
  * as it was. The cell that makes something new is not moved and stays last. While
  * rearranging, a press only picks a button up: nothing is said, and a hold clears no
- * detail. The bar holds the bin and Done, and the status line says what to do. A
+ * detail. The bar holds the bin and Done, and the status line says what to do, to a
+ * screen reader. A
  * button taken off is gone from the grid at once and from the screen on Done --
  * Escape brings it back with the order -- once `onRemove` has agreed to it.
  * @param {HTMLElement} grid  its cells carry `data-button`
@@ -51,8 +52,11 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cells = () => /** @type {HTMLElement[]} */ ([...grid.querySelectorAll('[data-button]:not(.board-cell-add)')]);
   const maker = grid.querySelector('.board-cell-add');
+  // The hint is for a screen reader only: to the eye, a grid of lifted buttons and a
+  // bin say what to do, and the line under the grid cost the grid its last row.
   const said = status.textContent;
   status.textContent = hint;
+  status.classList.add('visually-hidden');
   grid.classList.add('board-grid-arranging');
   bar.classList.add('board-bar-arranging');
   const trash = el('div', { class: 'board-arrange-bin' });
@@ -186,6 +190,7 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
     bar.classList.remove('board-bar-arranging');
     finish.remove();
     trash.remove();
+    status.classList.remove('visually-hidden');
     status.textContent = said;
     const ids = cells().map((c) => /** @type {string} */ (c.dataset.button));
     if (keep) onDone(ids, removed);

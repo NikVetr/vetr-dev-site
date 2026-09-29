@@ -40,7 +40,10 @@ export function openBoardMenu(anchor, items, aside) {
    */
   const entry = (item) => {
     const button = el('button', { type: 'button', class: 'board-menu-item', text: item.label });
-    if (item.own && item.own.text !== item.label) {
+    // In its own name as well, even where the two are spelled alike: a column that
+    // skips "Hausa" beside "Hausa" reads as a language that has no name of its own.
+    if (item.own?.text) {
+      button.classList.add('board-menu-item-own');
       button.append(el('span', { class: 'board-menu-own', lang: item.own.lang, text: item.own.text }));
     }
     if (item.current) {

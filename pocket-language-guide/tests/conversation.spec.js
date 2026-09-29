@@ -174,10 +174,10 @@ test('a board refuses a language it cannot say, and names it', async ({ page }) 
   // actually takes: a board they cannot use is absent rather than broken.
   await page.goto('/conversation.html?target=qya&source=en');
   await expect(page.locator('#board-title')).toHaveText('Context');
-  // The one cell left is the one that makes a context of the reader's own, which any
-  // pair can have: its sentences are theirs to write.
-  await expect(page.locator('.board-cell:not(.board-cell-add)')).toHaveCount(0);
-  await expect(page.locator('.board-cell-add')).toHaveCount(1);
+  // No cell at all; the plus in the footer still makes a context of the reader's own,
+  // which any pair can have: its sentences are theirs to write.
+  await expect(page.locator('.board-cell')).toHaveCount(0);
+  await expect(page.locator('#board-add-bar')).toBeVisible();
   await expect(page.locator('#board-status')).not.toBeEmpty();
 });
 
@@ -1209,16 +1209,11 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
     'Emergency', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
     'Lodging', 'Sights and tickets', 'Outdoors', 'Pharmacy',
-    // And last, the cell that makes one of the reader's own: a plus, and its name
-    // for a screen reader only.
-    '',
   ]);
-  await expect(topics.last()).toHaveAccessibleName('Your own context');
-  // Nothing on this screen is a board's own chrome: there is no board to add to -- a
-  // class's `display` once outranked its `hidden`, and the plus sat here doing
-  // nothing. Settings is the header's, as on every page, and Turn is here, because
-  // the list turns with the boards.
-  await expect(page.locator('#board-add-bar')).toBeHidden();
+  // A context of the reader's own is made with the plus in the bar, as a board's
+  // buttons are, and not with a cell of the grid's. Settings is the header's, as on
+  // every page, and Turn is here, because the list turns with the boards.
+  await expect(page.locator('#board-add-bar')).toHaveAccessibleName('Your own context');
   await expect(page.locator('#board-turn-bar')).toBeVisible();
 
   await page.locator('[data-button="time"]').click();
@@ -1978,17 +1973,17 @@ test('the emergency topic is the red one, across the top when the count is odd',
   // Every topic wears the silhouette of what it is about, drawn rather than fetched.
   expect(odd.mark).toBe(true);
   await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(12);
-  // Twelve contexts and the cell that makes one: odd, and the emergency one takes the
-  // first row rather than leaving a gap at the foot.
-  expect(odd.wide).toBeGreaterThan(odd.grid * 0.9);
-  // One of the reader's own makes it even, and the emergency one is a cell like the rest.
-  await page.locator('[data-button="add-context"]').click();
+  // Twelve contexts: even, so the emergency one is a cell like the rest.
+  expect(odd.wide).toBeLessThan(odd.grid * 0.6);
+  // One of the reader's own makes it odd, and the emergency one takes the first row
+  // rather than leaving a gap at the foot.
+  await page.locator('#board-add-bar').click();
   await page.locator('dialog.context-ask input').fill('Hotel');
   await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
   await expect(page.locator('#board-title')).toHaveText('Hotel');
   await page.locator('#board-up').click();
   await expect(page.locator('.board-cell-own')).toBeVisible();
-  expect((await look()).wide).toBeLessThan(odd.grid * 0.6);
+  expect((await look()).wide).toBeGreaterThan(odd.grid * 0.9);
 });
 
 test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
@@ -2376,7 +2371,7 @@ test('turned, the settings dialog turns with the board and fits the screen it li
   expect(Math.abs(box.left - (390 - box.right))).toBeLessThanOrEqual(2);
 });
 
-test('the list of contexts is rearranged from the header\'s settings, the plus staying last', async ({ page }) => {
+test('the list of contexts is rearranged from the header\'s settings', async ({ page }) => {
   await page.goto('/conversation.html?target=zh-Hans&source=en');
   const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
   await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
@@ -2390,17 +2385,13 @@ test('the list of contexts is rearranged from the header\'s settings, the plus s
   await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
   const after = await ids();
   expect(after[1]).toBe(first);
-  expect(after.at(-1)).toBe('add-context');
 });
 
 test('a context of one\'s own starts as a plus, and can be made of the boards\' own buttons', async ({ page }) => {
   // Mix and match: a new context can take any board's sentences, which keep their
   // translations and the answers they had there, beside the reader's own.
   await page.goto('/conversation.html?target=zh-Hans&source=en');
-  const maker = page.locator('[data-button="add-context"]');
-  await expect(maker.locator('.board-cell-label')).toHaveText('');
-  await expect(maker).toHaveAccessibleName('Your own context');
-  await maker.click();
+  await page.locator('#board-add-bar').click();
   await page.locator('dialog.context-ask input').fill('Hotel desk');
   await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
   // Empty, the screen offers its first button as a dashed plus.
@@ -2682,13 +2673,11 @@ test('turned, Reply keeps a size for its sentence, and stays inside the frame', 
 
 test('a context of your own is made from the list, filled like a board, and deleted from inside', async ({ page }) => {
   // For what the shipped contexts do not cover -- a hotel's check-in, a clinic -- the
-  // list ends in a cell that makes one: set apart by colour and, itself, by a dashed
-  // edge and a plus. It opens as a board of the reader's own buttons.
+  // plus in the bar makes one, set apart on the list by colour. It opens as a board of
+  // the reader's own buttons.
   page.on('dialog', (d) => d.accept());
   await page.goto('/conversation.html?target=zh-Hans&source=en');
-  const make = page.locator('[data-button="add-context"]');
-  await expect(make).toHaveClass(/board-cell-add/);
-  await make.click();
+  await page.locator('#board-add-bar').click();
   const ask = page.locator('dialog.context-ask');
   await ask.locator('input').fill('Hotel check-in');
   await ask.getByRole('button', { name: 'Save' }).click();

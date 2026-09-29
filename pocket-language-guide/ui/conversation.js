@@ -434,24 +434,38 @@ async function showPicker(owner, listener, index, nameOf) {
   });
   onBack(closeSearch, './');
   if (!topics.size) $('board-status').textContent = t('board.noBoards');
-  // **Contexts of the reader's own** after the board's, and a last cell that makes one:
-  // a hotel's check-in, a clinic, whatever the shipped contexts do not cover. Each is a
-  // screen of theirs kept for this pair, opened as a board of the buttons they put on it.
+  // **Contexts of the reader's own** after the board's, made with the plus in the bar, as
+  // a board's own buttons are: a hotel's check-in, a clinic, whatever the shipped
+  // contexts do not cover. Each is a screen of theirs kept for this pair, opened as a
+  // board of the buttons they put on it.
   const pair = `${listener}__${owner}`;
+  const make = $('board-add-bar');
+  make.hidden = false;
+  make.setAttribute('aria-label', t('board.addContext'));
+  make.title = t('board.addContext');
+  make.addEventListener('click', () => askText({
+    label: t('board.contextName'),
+    save: t('editor.save'),
+    close: t('gallery.previewClose'),
+    kind: 'context-ask',
+    onSave: async (label) => {
+      if (!label) return;
+      const made = addPhrase(readPersonal().data, { label, owner: '', listener: '', pair, screen: true }, CONTEXTS);
+      await writePersonal(made.data);
+      goTo({ board: `${OWN}${made.id}`, screen: null });
+    },
+  }));
   function drawTopics() {
   const personal = readPersonal();
   const mine = placedOn(personal.data, CONTEXTS, pair).filter((p) => p.screen);
   const off = personal.data.hidden?.[CONTEXTS] ?? [];
   /** @type {import('../core/conversation.js').BoardButton[]} */
-  const buttons = [
-    // In the reader's order where they have dragged one, the maker last whatever it is.
-    ...arranged([
-      ...[...topics].filter(([id]) => !off.includes(id))
-        .map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
-      ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
-    ], /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).order?.[CONTEXTS]),
-    { id: 'add-context', kind: 'submenu', add: true },
-  ];
+  // In the reader's order where they have dragged one.
+  const buttons = arranged([
+    ...[...topics].filter(([id]) => !off.includes(id))
+      .map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
+    ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
+  ], /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).order?.[CONTEXTS]);
   // Every button here goes deeper, so the dash that says so on a mixed grid has
   // nothing to contrast with and is just twelve dashed boxes. They stay submenus --
   // that is what they do -- and the stylesheet drops the marking for this one grid.
@@ -459,23 +473,9 @@ async function showPicker(owner, listener, index, nameOf) {
   renderGrid($('board-grid'), { buttons }, {
     lang: owner,
     label: (button) => topics.get(button.id)?.title
-      ?? mine.find((p) => `${OWN}${p.id}` === button.id)?.label ?? t('board.addContext'),
+      ?? /** @type {{label: string}} */ (mine.find((p) => `${OWN}${p.id}` === button.id)).label,
     available: () => true,
-    onPick: (button) => {
-      if (!button.add) { goTo({ board: button.id, screen: null }); return; }
-      askText({
-        label: t('board.contextName'),
-        save: t('editor.save'),
-        close: t('gallery.previewClose'),
-        kind: 'context-ask',
-        onSave: async (label) => {
-          if (!label) return;
-          const made = addPhrase(personal.data, { label, owner: '', listener: '', pair, screen: true }, CONTEXTS);
-          await writePersonal(made.data);
-          goTo({ board: `${OWN}${made.id}`, screen: null });
-        },
-      });
-    },
+    onPick: (button) => goTo({ board: button.id, screen: null }),
   });
   // The emergency topic across the top when an odd count would leave a gap at the foot.
   if (buttons.length % 2) $('board-grid').querySelector('.board-cell-alert')?.classList.add('board-cell-wide');

@@ -509,7 +509,9 @@
    field's own close is the way out -- and comes back when it closes. */
 .board-searching > :not(.board-search) { display: none; }
 .board-search-open[hidden] { display: none; }
-.board-search { flex: 1 1 auto; display: flex; align-items: center; gap: var(--space-2); min-inline-size: 0; }
+.board-search { flex: 1 1 auto; display: flex; align-items: center; gap: var(--space-2); min-inline-size: 0; block-size: 100%; }
+.board-searching { box-sizing: border-box; }
+.board-search > * { max-block-size: 100%; }
 /* 1rem at least, or iOS zooms the page in to type. The browser's own clear is
    hidden: it sat beside the close, two crosses doing different things. */
 .board-search-input::-webkit-search-cancel-button { display: none; }
@@ -766,8 +768,9 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
 .board-menu-column:last-child .board-menu-item { white-space: normal; overflow-wrap: break-word; }
 .board-menu-title { margin: 0 0 var(--space-1); padding-inline: var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .board-menu-current::after { content: ' \2713'; }
-/* A language's own name beside the reader's word for it, set apart in colour and face. */
-.board-menu-own { margin-inline-start: 0.6em; color: var(--accent); font-family: var(--serif, Georgia, serif); }
+/* A language's own name beside the reader's word for it, set apart in colour and face:
+   the reader's word at the start of the row, the language's own at its end. */
+.board-menu-own { color: var(--accent); font-family: var(--serif, Georgia, serif); text-align: end; }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
    other button on this row is the owner's -- Speak, the speed, the turn -- and they
@@ -1197,6 +1200,8 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
   cursor: pointer;
 }
 .board-menu-item:hover { background: var(--surface); }
+/* The reader's word at the start of the row and the language's own at its end. */
+.board-menu-item.board-menu-item-own { display: flex; justify-content: space-between; align-items: baseline; gap: 1.2em; }
 .board-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
 /* **A statement that is also a control.** The topic's name and the pair already say
@@ -1326,6 +1331,8 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
   outline: 2px dashed var(--line); outline-offset: -5px;
 }
 .board-grid-arranging .board-cell-lifted { cursor: grabbing; z-index: 3; box-shadow: 0 10px 24px rgb(0 0 0 / 25%); }
+/* The plus that makes a button is not one of the buttons being arranged. */
+.board-grid-arranging .board-cell-add { display: none; }
 /* The bin takes the topic's place in the bar: a wide target at the thumb, dashed while
    it waits and solid red with a button over it -- two cues, not a tint alone. */
 .board-bar-arranging > :not(.board-arrange-bin, .board-arrange-done) { display: none; }
