@@ -1510,7 +1510,7 @@ test('the beacon is seen from across a road, and stays under the flash limit', a
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   // The signals are on the first screen, together at its end, away from the sentences.
-  await expect(page.locator('.board-cell-beacon')).toHaveCount(3);
+  await expect(page.locator('.board-cell-beacon')).toHaveCount(2);
 
   await page.locator('[data-button="sos"]').click();
   await expect(page.locator('.beacon')).toBeVisible();
@@ -2779,14 +2779,29 @@ test('changing a language keeps the screen the reader was on', async ({ page }) 
   await expect(page).not.toHaveURL(/screen=/);
 });
 
-test('red and blue lights turn the screen from one to the other, slowly', async ({ page }) => {
+test('the attention screen switches to red and blue and lights the lamp, and neither stops it', async ({ page }) => {
+  // A lamp that records what it is told, and that a later phone does not have.
+  await page.addInitScript(() => {
+    const log = /** @type {any} */ (globalThis).lampLog = { torch: [], stops: 0, none: false };
+    const track = {
+      getCapabilities: () => ({ torch: !log.none }),
+      applyConstraints: (/** @type {any} */ c) => { log.torch.push(c.advanced[0].torch); return Promise.resolve(); },
+      stop: () => { log.stops += 1; },
+    };
+    Object.defineProperty(navigator, 'mediaDevices', {
+      value: { getUserMedia: () => Promise.resolve({ getVideoTracks: () => [track] }) },
+    });
+  });
+  const lampLog = () => page.evaluate(() => /** @type {any} */ (globalThis).lampLog);
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await page.locator('[data-button="attention"]').click();
+  const beacon = page.locator('.beacon');
+  const lights = page.getByRole('button', { name: 'Red and blue lights' });
+  await lights.click();
+  await expect(lights).toHaveAttribute('aria-pressed', 'true');
   // The colours a passer-by reads as "help is needed here" -- held long enough each
   // that the change is well under one a second, far from the three-per-second line.
-  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
-  await page.locator('[data-button="lights"]').click();
-  const lights = page.locator('.beacon-lights');
-  await expect(lights).toBeVisible();
-  const changes = await lights.evaluate(async (el) => {
+  const changes = await beacon.evaluate(async (el) => {
     let n = 0;
     let was = el.classList.contains('beacon-blue');
     const until = performance.now() + 2100;
@@ -2799,8 +2814,32 @@ test('red and blue lights turn the screen from one to the other, slowly', async 
   });
   expect(changes).toBeGreaterThanOrEqual(2);
   expect(changes).toBeLessThanOrEqual(3);
+  // Off again is the travelling light again.
   await lights.click();
-  await expect(lights).toHaveCount(0);
+  await expect(page.locator('.beacon-attention .beacon-light').first()).toBeVisible();
+
+  // The lamp stays lit until it is switched off, and the camera goes with it.
+  const lamp = page.getByRole('button', { name: 'Flashlight' });
+  await lamp.click();
+  await expect.poll(async () => (await lampLog()).torch).toEqual([true]);
+  await lamp.click();
+  await expect.poll(async () => (await lampLog()).stops).toBe(1);
+  await expect(lamp).toHaveAttribute('aria-pressed', 'false');
+
+  // A switch is not "anywhere": none of those taps stopped the beacon, and one off
+  // them does.
+  await expect(beacon).toBeVisible();
+  await beacon.click({ position: { x: 30, y: 120 } });
+  await expect(beacon).toHaveCount(0);
+
+  // A phone with no lamp to lend strikes the switch out instead of leaving it dead.
+  await page.evaluate(() => { /** @type {any} */ (globalThis).lampLog.none = true; });
+  await page.locator('[data-button="attention"]').click();
+  await lamp.click();
+  await expect(lamp).toBeDisabled();
+  await expect(lamp).toHaveAttribute('aria-pressed', 'false');
+  await expect(lamp).toHaveAttribute('title', /flashlight/);
+  await expect(beacon).toBeVisible();
 });
 
 test('Reply stays inside the frame when the sentence fills it', async ({ page }) => {
@@ -2863,17 +2902,25 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   await page.locator('[data-button="attention"]').click();
   await expect(page.locator('.beacon-attention')).toBeVisible();
   expect((await log()).started).toBe(0);
+  // The switch on the screen sounds it and silences it, and the screen stays up.
+  const siren = page.getByRole('button', { name: 'Siren' });
+  await expect(siren).toHaveAttribute('aria-pressed', 'false');
+  await siren.click();
+  expect((await log()).started).toBe(2);
+  await siren.click();
+  expect((await log()).stopped).toBe(2);
+  await expect(page.locator('.beacon-attention')).toBeVisible();
   await page.locator('.beacon').click();
-  // Turned on in the settings, it sounds -- and stops with the beacon.
+  // Turned on in the settings, it sounds from the start -- and stops with the beacon.
   await page.locator('#site-menu').click();
   await page.getByRole('checkbox', { name: 'Attract attention also sounds a siren' }).check();
   await page.keyboard.press('Escape');
   await page.locator('[data-button="attention"]').click();
-  await expect(page.locator('.beacon-attention')).toBeVisible();
-  expect((await log()).started).toBe(2);
+  await expect(siren).toHaveAttribute('aria-pressed', 'true');
+  expect((await log()).started).toBe(4);
   await page.locator('.beacon').click();
   await expect(page.locator('.beacon')).toHaveCount(0);
-  expect((await log()).stopped).toBe(2);
+  expect((await log()).stopped).toBe(4);
 });
 
 test('turned, Reply beside the last line is as far from the line before as from the frame', async ({ page }) => {

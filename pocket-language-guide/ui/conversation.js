@@ -1417,8 +1417,12 @@ async function main() {
       // to know how to stop it.
       const help = ctx.listenerRows['emergency-medical.help'];
       startBeacon({
-        mode: button.beacon === 'sos' || button.beacon === 'lights' ? button.beacon : 'attention',
+        mode: button.beacon === 'sos' ? 'sos' : 'attention',
         siren: display.siren,
+        switches: {
+          siren: t('beacon.siren'), torch: t('beacon.torch'),
+          lights: t('boards.emergency.lights'), noTorch: t('beacon.noTorch'),
+        },
         label: button.beacon === 'sos'
           ? theirs.t('beacon.sos')
           : (help?.text || theirs.t('beacon.help')),

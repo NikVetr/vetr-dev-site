@@ -1042,9 +1042,9 @@ time (Chinese, Japanese kana, Korean Hangul), the topic's letters each on their 
 turned the phone, at no more height than the upright label took -- so no control moves.
 Every other label stays one upright line. The silhouettes behind the words and a
 fill-in's box turn with the grid, since a writing mode turns only text. Another
-display setting makes Attract attention sound a siren as it flashes: an oscillator wail
-between about 650 and 1500 Hz, started in the tap, played through the silent switch
-where Safari allows it, and stopped with the beacon. **The list of contexts ends in the
+display setting opens Attract attention with its siren already sounding: an oscillator
+wail between about 650 and 1500 Hz, started in the tap, played through the silent
+switch where Safari allows it, and stopped with the beacon. **The list of contexts ends in the
 reader's own**, each a screen of theirs kept for the pair and placed under `contexts`,
 opened as a board built on the spot (`own:<id>`, one node, the reader's buttons on it),
 and made with the small plus in the footer, as a button is made inside one; a context is
@@ -1118,10 +1118,9 @@ corpus's own "thank you" and "you are welcome".
 
 **Colour says what a button does.** Cells are neutral with dark type, so the contrast
 is spent on the words. A button that opens more buttons is filled in the message's
-blue with white type and a double chevron in that same white; one the listener can
+blue with white type and comes to a point at its trailing end; one the listener can
 answer is tinted and carries a faint pair of speech bubbles; the emergency context and
-the signals are red, except the red and blue lights, which are red and blue either side
-of the diagonal, each half glowing from its middle; and a dashed outline with a drawn
+the signals are red; and a dashed outline with a drawn
 plus is kept for what the reader has still to make -- a first button on an empty
 screen. Every hover tint is scoped to `(hover: hover)`: a touch leaves `:hover` set, and
 the last button pressed came back highlighted from its message. A context's silhouette
@@ -1313,10 +1312,18 @@ to be seen. **And the word on it is the listener's**, taken from
 Only "tap anywhere to stop" stays in the reader's language, because the reader is the
 one who has to stop it.
 
-**Red and blue lights** are the third signal: the screen turning between the colours an
-emergency vehicle's lights use, each held 700ms -- under one change a second -- with
-the siren where the reader has turned it on. The three are on the emergency board's
-first screen, together at its end, away from the sentences a thumb reaches for.
+**Three switches sit at the foot of the Attention screen** -- the siren, the lamp, and
+red and blue -- because what reaches a stranger depends on where the reader is, and a
+reader who wants the sound as well as the light should not have to leave the screen
+for it. A tap on a switch is not a tap "anywhere", so it does not stop the beacon.
+Each is on when filled and its icon gives off its waves or rays, off when outlined and
+quiet. The siren is the oscillator above. The lamp is held on steadily through the
+camera, as SOS reaches it, released when switched off or with the beacon, and struck
+out on a phone that will not lend one. Red and blue turns the screen between the
+colours an emergency vehicle's lights use, each held 700ms -- under one change a
+second -- and the switch itself is red and blue either side of the diagonal while on,
+its lamp's two halves while off. SOS and Attention are on the emergency board's first
+screen, together at its end, away from the sentences a thumb reaches for.
 
 **Turned, the dialogs turn too**: a phone laid on the counter is read from its side for
 the whole conversation, settings included, so a board's dialogs take a quarter turn

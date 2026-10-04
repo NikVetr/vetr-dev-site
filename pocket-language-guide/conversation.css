@@ -459,18 +459,6 @@
   color: #fff;
 }
 @media (hover: hover) { .board-cell-beacon:hover { background: var(--alert); filter: brightness(0.93); } }
-/* **The red and blue lights look like lights.** Red and blue either side of the
-   diagonal, each half glowing from its middle, as a lamp does -- so the button is read
-   as the signal it starts before its words are. */
-.board-cell.board-cell-beacon-lights,
-.board-cell.board-cell-beacon-lights:hover {
-  background:
-    radial-gradient(circle at 28% 30%, rgb(255 140 140 / 0.85), transparent 42%),
-    radial-gradient(circle at 72% 70%, rgb(140 175 255 / 0.85), transparent 42%),
-    linear-gradient(135deg, #d0021b 50%, #0038c7 50%);
-  border-color: transparent;
-  text-shadow: 0 1px 3px rgb(0 0 0 / 55%);
-}
 
 @media (hover: hover) { .board-cell:hover { background: var(--surface-2); } }
 @media (hover: hover) { .board-cell-asks:hover { background: var(--accent-soft); filter: brightness(0.97); } }
@@ -1182,6 +1170,74 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
   translate: calc(var(--beacon-x2, 0) * 1px) calc(var(--beacon-y2, 0) * 1px);
   rotate: calc(var(--beacon-rot2, 0) * 1deg);
 }
+.beacon-lights .beacon-light { display: none; }
+
+/* The attention screen's switches -- siren, lamp, red and blue -- at its foot, with how
+   to stop it just above them; the word keeps the middle of what is left. Clear of the
+   travelling light, whose streak reaches 2rem in from the edge, and in the reader's
+   language, since the reader is the one pressing them. Equal columns sharing the row,
+   so a long label wraps between its words instead of breaking one.
+
+   **On and off are two cues, not one:** a switch that is on is filled and its icon
+   gives off its waves or rays; one that is off is an outline and its icon is quiet. A
+   phone with no lamp to lend strikes the lamp's icon out and greys the switch. */
+:is(.beacon-attention, .beacon-lights) .beacon-word { margin-block: auto; }
+.beacon-switches {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--space-2);
+  max-inline-size: 100%;
+  margin-block-end: 1.5rem;
+}
+.beacon-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-inline-size: 5.5rem;
+  padding: 0.55rem 0.5rem;
+  border: 2px solid rgb(255 255 255 / 0.8);
+  border-radius: var(--radius);
+  background: rgb(0 0 0 / 0.4);
+  color: #fff;
+  font: inherit;
+  font-size: var(--fs--1);
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+}
+.beacon-switch svg {
+  inline-size: 2rem;
+  block-size: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Before the states, which it must not outrank; `button:hover` would grey the switch
+   white-on-white under a pointer left where the beacon's own button was. */
+@media (hover: hover) { .beacon-switch:hover { background: rgb(255 255 255 / 0.15); } }
+.beacon-switch[aria-pressed="true"] { background: #fff; border-color: #fff; color: #0b0d10; }
+.beacon-switch[aria-pressed="false"] .beacon-emit { visibility: hidden; }
+.beacon-switch:not(:disabled) .beacon-strike { display: none; }
+.beacon-switch:disabled { opacity: 0.45; cursor: default; }
+/* **The red and blue switch is red and blue**, whichever way it is set: the two halves
+   of its lamp while it is off, and the whole switch split between them while it is
+   on -- so it is read as the signal it starts before its word is. */
+.beacon-dome-red { fill: #ff4d5e; }
+.beacon-dome-blue { fill: #4d7cff; }
+.beacon-switch-lights[aria-pressed="true"] {
+  background:
+    radial-gradient(circle at 28% 30%, rgb(255 140 140 / 0.85), transparent 42%),
+    radial-gradient(circle at 72% 70%, rgb(140 175 255 / 0.85), transparent 42%),
+    linear-gradient(135deg, #d0021b 50%, #0038c7 50%);
+  color: #fff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 55%);
+}
+.beacon-switch-lights[aria-pressed="true"] .beacon-dome { fill: #fff; }
 
 
 

@@ -15,7 +15,8 @@
 // cannot read a word of the screen. **Attention** is the one to use when someone is
 // looking and needs to be drawn closer: a word, very large, and a light running
 // around the edge of the display, which reads as movement in the corner of an eye at
-// a distance where text does not.
+// a distance where text does not -- with three switches at its foot for the siren,
+// the lamp, and the screen turning red and blue.
 //
 // **Timing is a safety constraint, not a style.** WCAG puts the photosensitive
 // seizure threshold at three flashes per second; the dot below is 300ms, so SOS
@@ -118,6 +119,23 @@ async function acquireTorch() {
 const LIGHTS_MS = 700;
 
 /**
+ * The attention screen's switches, drawn in the stroke of the app's other icons. The
+ * waves and rays (`beacon-emit`) show only while a switch is on, and the lamp's
+ * strike only once the phone has turned out to have none to lend.
+ */
+const SWITCH_ICONS = {
+  siren: '<path d="M3 10v4h3l7 4V6l-7 4z"/>'
+    + '<path class="beacon-emit" d="M16.5 9.5a3.5 3.5 0 0 1 0 5M19 7a7 7 0 0 1 0 10"/>',
+  torch: '<path d="M7 7h10l-2 5H9zM9 12h6v10H9z"/><circle cx="12" cy="15.5" r="0.6"/>'
+    + '<path class="beacon-emit" d="M12 1.5V4M6 3l1.5 1.5M18 3l-1.5 1.5"/>'
+    + '<path class="beacon-strike" d="M3 3l18 18"/>',
+  lights: '<path class="beacon-dome beacon-dome-red" d="M7 17v-4a5 5 0 0 1 5-5v9z"/>'
+    + '<path class="beacon-dome beacon-dome-blue" d="M12 8a5 5 0 0 1 5 5v4h-5z"/>'
+    + '<path d="M5 17h14v3H5z"/>'
+    + '<path class="beacon-emit" d="M12 2v3M4.9 4.9 7 7M19.1 4.9 17 7"/>',
+};
+
+/**
  * Run a beacon over the whole screen until it is dismissed.
  *
  * Takes over the display deliberately — it is not an indicator on a page, it is the
@@ -125,8 +143,7 @@ const LIGHTS_MS = 700;
  * just been found should not have to hunt for a control.
  *
  * @param {object} config
- * @param {'sos'|'attention'|'lights'|'morse'} config.mode  `morse` flashes `config.units`;
- *   `lights` is the screen turning red and blue, as a police light does
+ * @param {'sos'|'attention'|'morse'} config.mode  `morse` flashes `config.units`
  * @param {number[]} [config.units]  the unit list to flash: 1 and 3 lit, 0 dark
  * @param {number} [config.unitMs]   how long a unit lasts; SOS keeps its own
  * @param {string} config.label      the word to show, in the *listener's* language
@@ -145,9 +162,11 @@ const LIGHTS_MS = 700;
  * @param {HTMLElement} [config.foot]  drawn at the foot, over the flash
  * @param {boolean} [config.fast]  the reader has been warned and has chosen a unit
  *   under the photosensitive ceiling; only then is it not clamped
- * @param {boolean} [config.siren]  Attention sounds a siren too; the reader's choice
+ * @param {boolean} [config.siren]  the attention screen opens with its siren on
+ * @param {{siren:string, torch:string, lights:string, noTorch:string}} [config.switches]
+ *   the attention screen's switches, labelled in the owner's language
  */
-export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs, onBeat, foot, fast, siren }) {
+export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs, onBeat, foot, fast, siren, switches }) {
   // SOS is Morse with its pattern and speed fixed; the signaller supplies its own.
   const flashing = mode === 'sos' || mode === 'morse';
   const pattern = mode === 'morse' && units ? units : SOS;
@@ -197,7 +216,11 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   /** @type {ReturnType<typeof setTimeout>|undefined} */ let timer;
   /** @type {number|undefined} */ let frame;
   let at = 0;
+  let stopped = false;
   /** @type {{set:(on:boolean)=>void, release:()=>void}|null} */ let torch = null;
+  // Started inside the tap that raised the beacon or pressed the switch, which is the
+  // gesture a browser asks for before it makes a sound.
+  /** @type {{stop:()=>void}|null} */ let sound = siren && mode === 'attention' ? startSiren() : null;
   const step = () => {
     onBeat?.(at % pattern.length);
     const beat = pattern[at % pattern.length];
@@ -248,22 +271,77 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
     frame = requestAnimationFrame(travel);
   };
 
+  // **Three switches, not three screens.** What reaches a stranger depends on where the
+  // reader is -- a siren carries round a corner, the lamp across a dark car park, and
+  // red and blue read as "help is needed here" to someone already looking -- and a
+  // reader who wants the sound as well as the light should not have to leave the
+  // screen to get it. A tap on a switch is not a tap "anywhere", so it does not stop
+  // the beacon.
+  if (switches && mode === 'attention') {
+    // **Red and blue, slowly.** A colour held for LIGHTS_MS before the other takes over
+    // is under one change of colour a second -- far below the three-per-second
+    // threshold at which a flash can bring on a seizure, the saturated-red one included.
+    const turn = () => {
+      root.classList.toggle('beacon-blue');
+      timer = setTimeout(turn, LIGHTS_MS);
+    };
+    const lights = (/** @type {boolean} */ on) => {
+      clearTimeout(timer);
+      if (frame !== undefined) cancelAnimationFrame(frame);
+      frame = undefined;
+      root.className = `beacon beacon-${on ? 'lights' : 'attention'}`;
+      if (on) turn(); else travel();
+    };
+    // The lamp is held on, steadily, until switched off or the beacon stops. The camera
+    // answers late, so a lamp that arrives after the switch went off again, or after a
+    // second press already lit one, is let go at once; a phone with no lamp to lend has
+    // its switch struck out rather than left as a switch that does nothing.
+    const lamp = (/** @type {boolean} */ on, /** @type {HTMLButtonElement} */ button) => {
+      if (!on) { torch?.release(); torch = null; return; }
+      acquireTorch().then((got) => {
+        if (!got) {
+          button.disabled = true;
+          button.setAttribute('aria-pressed', 'false');
+          button.title = switches.noTorch;
+        } else if (stopped || torch || button.getAttribute('aria-pressed') !== 'true') got.release();
+        else { torch = got; got.set(true); }
+      });
+    };
+    const row = document.createElement('div');
+    row.className = 'beacon-switches';
+    row.addEventListener('click', (event) => event.stopPropagation());
+    /** @param {'siren'|'torch'|'lights'} name @param {boolean} on @param {(on: boolean, button: HTMLButtonElement) => void} flip */
+    const add = (name, on, flip) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `beacon-switch beacon-switch-${name}`;
+      button.setAttribute('aria-pressed', String(on));
+      button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${SWITCH_ICONS[name]}</svg>`;
+      const text = document.createElement('span');
+      text.textContent = switches[name];
+      button.append(text);
+      button.addEventListener('click', () => {
+        const next = button.getAttribute('aria-pressed') !== 'true';
+        button.setAttribute('aria-pressed', String(next));
+        flip(next, button);
+      });
+      row.append(button);
+    };
+    add('siren', Boolean(sound), (on) => {
+      sound?.stop();
+      sound = on ? startSiren() : null;
+    });
+    add('torch', false, lamp);
+    add('lights', false, lights);
+    root.append(row);
+  }
+
   // A fixed `vw` size is blind to how long the word is: three Han characters were
   // being set at 86px on a 390px screen with room for twice that, and a ten-letter
   // Ukrainian imperative would have broken across two lines at the same setting.
   fit?.(word, root);
 
-  let stopped = false;
-  // **Red and blue, slowly.** A colour held for LIGHTS_MS before the other takes over is
-  // under one change of colour a second -- far below the three-per-second threshold at
-  // which a flash can bring on a seizure, the saturated-red one included.
-  if (mode === 'lights') {
-    const turn = () => {
-      root.classList.toggle('beacon-blue', !root.classList.contains('beacon-blue'));
-      timer = setTimeout(turn, LIGHTS_MS);
-    };
-    turn();
-  } else if (flashing) {
+  if (flashing) {
     step();
     // The screen starts at once; the lamp joins when the camera answers -- unless
     // the beacon has already been dismissed by then, when the camera is let go at
@@ -286,7 +364,6 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // after a trip to Settings that way. A page cannot come back without having left.
   document.addEventListener('visibilitychange', stopBeacon);
   addEventListener('pagehide', stopBeacon);
-  const sound = siren && (mode === 'attention' || mode === 'lights') ? startSiren() : null;
 
   const stop = () => {
     stopped = true;

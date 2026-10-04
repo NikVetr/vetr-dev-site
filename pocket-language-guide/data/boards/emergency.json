@@ -103,13 +103,6 @@
           "beacon": "attention",
           "labelKey": "boards.emergency.attention",
           "colour": "alert"
-        },
-        {
-          "id": "lights",
-          "kind": "beacon",
-          "beacon": "lights",
-          "labelKey": "boards.emergency.lights",
-          "colour": "alert"
         }
       ]
     },
