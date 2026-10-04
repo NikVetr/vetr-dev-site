@@ -1355,9 +1355,6 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 .board-word { white-space: nowrap; }
 /* Laid out from the right, which is down the page for whoever has turned the phone. */
 .board-letters { display: inline-block; direction: rtl; }
-/* The arrow's centring shift is physical, so it moves to the other axis; the glyph
-   itself turns with the line and points down it. */
-.board-main-turned .board-cell-more::after { translate: 50% 0; }
 /* The reader's own contexts are set apart from the shipped ones by colour, and the
    cell that makes one by a dashed edge and a plus as well: two signals, not one. */
 .board-grid-topics .board-cell.board-cell-own { background: var(--accent-soft); border-color: var(--accent); }
@@ -1405,23 +1402,22 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 @media (hover: hover) { .board-cell-alert:hover { background: #b3261e; filter: brightness(0.93); } }
 .board-cell-alert .board-cell-mark { color: #fff; opacity: 0.22; }
 .board-cell-wide { grid-column: 1 / -1; }
-/* **A button that opens more buttons says so twice**: the dashed edge, and an arrow
-   at its trailing end -- a dash alone reads as "provisional" to a reader who has not
-   been told what it means. Drawn, not written, so it is not part of the label, with
-   room kept for it on both sides so the centred label never runs under it. The
-   context list, where every button goes deeper, has neither. */
-.board-cell-more { padding-inline: 1.5em; }
-/* A double chevron in the button's own type colour -- white on the filled blue and the
-   alert red, where a muted grey was dark on dark -- and large enough to read as the
-   way in. The cell keeps room for it, so the fitted label never runs under it. */
-.board-cell-more { padding-inline-end: calc(var(--space-2) + 1.5em); }
-.board-cell-more::after {
-  content: '\00bb' / ''; position: absolute; inset-inline-end: 0.35em; inset-block-start: 50%;
-  translate: 0 -50%; font-size: 3.2em; line-height: 1; color: inherit; opacity: 0.9; pointer-events: none;
+/* **A button that opens more buttons is shaped like the way in**: its trailing end
+   comes to a shallow point, `[     >`, where it used to carry a double chevron -- the
+   shape says it without a symbol for the label to make room for, and with the fill it
+   is still two cues. Shallow, so the label loses almost nothing; the other end is the
+   cell's own. It points left on a right-to-left board and down a turned one, the way
+   the line runs. The context list, where every button goes deeper, is not pointed. */
+.board-cell-more {
+  --point: 0.8rem;
+  padding-inline-end: calc(var(--space-2) + var(--point));
+  clip-path: polygon(0 0, calc(100% - var(--point)) 0, 100% 50%, calc(100% - var(--point)) 100%, 0 100%);
 }
-[dir="rtl"] .board-cell-more::after { transform: scaleX(-1); }
-.board-grid-topics .board-cell-more { padding-inline: var(--space-2); }
-.board-grid-topics .board-cell-more::after { content: none; }
+[dir="rtl"] .board-cell-more { clip-path: polygon(var(--point) 0, 100% 0, 100% 100%, var(--point) 100%, 0 50%); }
+.board-main-turned .board-cell-more {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--point)), 50% 100%, 0 calc(100% - var(--point)));
+}
+.board-grid-topics .board-cell-more { padding-inline: var(--space-2); clip-path: none; }
 /* The link out to a translator, under the answer that had none. */
 .board-links { margin: 0; padding: var(--space-2); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .board-links .btn { font-weight: 600; }

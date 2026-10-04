@@ -2131,14 +2131,17 @@ test('the emergency topic is the red one, across the top when the count is odd',
   expect((await look()).wide).toBeLessThan(odd.grid * 0.6);
 });
 
-test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
-  const arrowOf = (/** @type {import('@playwright/test').Locator} */ cell) => cell.evaluate(
-    (el) => getComputedStyle(el, '::after').content);
+test('a button that opens more buttons comes to a point, and the list of contexts does not', async ({ page }) => {
+  // The shape is the arrow now: no chevron for the label to make room for.
+  const shapeOf = (/** @type {import('@playwright/test').Locator} */ cell) => cell.evaluate(
+    (el) => ({ clip: getComputedStyle(el).clipPath, after: getComputedStyle(el, '::after').content }));
   await page.goto(BOARD);
-  await expect(arrowOf(page.locator('[data-button="focus"]'))).resolves.toContain('»');
+  const more = await shapeOf(page.locator('[data-button="focus"]'));
+  expect(more.clip).toMatch(/^polygon\(/);
+  expect(more.after).toBe('none');
   await page.goto('/conversation.html?target=zh-Hans&source=en');
   await expect(page.locator('[data-button="time"]')).toBeVisible();
-  expect(await arrowOf(page.locator('[data-button="time"]'))).toBe('none');
+  expect((await shapeOf(page.locator('[data-button="time"]'))).clip).toBe('none');
 });
 
 test('turning turns what is on the bar in place, and moves nothing', async ({ page }) => {
