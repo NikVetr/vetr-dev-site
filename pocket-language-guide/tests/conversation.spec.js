@@ -2657,6 +2657,29 @@ test('on a board the search goes deeper in place, and Escape closes only the sea
   await expect(page).toHaveURL(/screen=lost/);
 });
 
+test('a sentence pressed from the search comes back to the search', async ({ page }) => {
+  // The results are where the reader was: closing the message goes back to them as
+  // typed, here and on another board, and Back leaves the message before the search.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-search').click();
+  await page.getByRole('searchbox').fill('turn left');
+  const found = page.locator('#board-grid .board-cell', { hasText: 'Turn left' });
+  await found.first().click();
+  await expect(page.locator('.board-message')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('searchbox')).toHaveValue('turn left');
+  await expect(found.first()).toBeVisible();
+  // On another board: that board opens to the press with the search behind it.
+  await page.getByRole('searchbox').fill('where is the toilet');
+  await page.locator('#board-grid .board-cell').first().click();
+  await expect(page).toHaveURL(/board=(?!transport)/);
+  await expect(page.locator('.board-message')).toBeVisible();
+  await page.locator('.board-message').click();
+  await expect(page.getByRole('searchbox')).toHaveValue('where is the toilet');
+  await expect(page).not.toHaveURL(/[?&]q=/);
+});
+
 test('the pre-travel check tries every part of the pair and marks each one', async ({ page }) => {
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();

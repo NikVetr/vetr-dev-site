@@ -497,15 +497,16 @@ async function showPicker(owner, listener, index, nameOf) {
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
   /** @type {Promise<import('../core/conversation.js').ResolveContext>|undefined} */ let pairing;
-  const closeSearch = wireSearch({
+  const searching = wireSearch({
     owner,
     // The corpus only when the search is opened: this list is the screen a reader
     // lands on, and the one most likely to be opened with no signal.
     entries: async () => searchEntries(await (pairing ??= pairContext(listener, owner)), index, {}),
-    pick: visit,
+    // A screen or a context found is a place to go; a sentence keeps the search behind it.
+    pick: (found, query) => visit(found, found.button.kind === 'submenu' ? '' : query),
     back: () => drawTopics(),
   });
-  onBack(closeSearch, './');
+  onBack(searching.close, './');
   if (!topics.size) $('board-status').textContent = t('board.noBoards');
   // **Contexts of the reader's own** after the board's, made with the plus in the bar, as
   // a board's own buttons are: a hotel's check-in, a clinic, whatever the shipped
@@ -813,12 +814,14 @@ async function searchEntries(ctx, index, loaded) {
 }
 
 /** A found button, where it is: its context, its screen, and pressed there -- except a
- * beacon, which is not started for anyone who has not pressed the beacon itself.
- * @param {Findable} found */
-const visit = (found) => goTo({
+ * beacon, which is not started for anyone who has not pressed the beacon itself -- with
+ * the search it was found by, open again behind it.
+ * @param {Findable} found @param {string} [query] */
+const visit = (found, query = '') => goTo({
   board: found.board,
   screen: found.path.slice(1).join('/') || null,
   open: found.path.length && found.button.kind !== 'beacon' ? found.button.id : null,
+  q: query.trim() || null,
 });
 
 /** How many found buttons are drawn at once; past this the reader is asked to type more. */
@@ -827,11 +830,16 @@ const FOUND_MAX = 48;
 /**
  * The header's search, on the context list and on every board: typing finds buttons on
  * all of this pair's contexts, marked where they match, and pressing one goes there.
- * @param {{owner: string, entries: () => Promise<Findable[]>, pick: (found: Findable) => void,
- *   back: () => void}} config  `back` draws the screen the search was opened over
- * @returns {() => boolean} closes an open search, and says whether one was open
+ * **The search stays open behind the press**, so closing the message it made comes back
+ * to the results, as typed, rather than to the board under them; `query` reopens one
+ * carried here from another board.
+ * @param {{owner: string, entries: () => Promise<Findable[]>,
+ *   pick: (found: Findable, query: string) => void, back: () => void, query?: string}} config
+ *   `back` draws the screen the search was opened over
+ * @returns {{close: () => boolean, again: () => boolean}} `close` closes an open search and
+ *   says whether one was open; `again` draws its results back over the grid, if there are any
  */
-function wireSearch({ owner, entries, pick, back }) {
+function wireSearch({ owner, entries, pick, back, query: reopen = '' }) {
   const open = $('board-search');
   open.hidden = false;
   open.setAttribute('aria-label', t('search.open'));
@@ -840,6 +848,8 @@ function wireSearch({ owner, entries, pick, back }) {
   const status = $('board-status');
   /** @type {null | (() => void)} */ let close = null;
   let said = '';
+  /** @type {Findable[]} */ let all = [];
+  let query = '';
   /** @param {(Findable & {at: [number, number]})[]} found */
   const show = (found) => {
     const byId = new Map(found.slice(0, FOUND_MAX).map((f, i) => [`found-${i}`, f]));
@@ -851,7 +861,7 @@ function wireSearch({ owner, entries, pick, back }) {
       label: (b) => of(b).label,
       mark: (b) => of(b).at,
       available: () => true,
-      onPick: (b) => { const f = of(b); close?.(); pick(f); },
+      onPick: (b) => pick(of(b), query),
     });
     status.textContent = !found.length ? t('search.none')
       : found.length > FOUND_MAX ? t('search.more', { shown: String(FOUND_MAX), count: String(found.length) }) : '';
@@ -861,22 +871,33 @@ function wireSearch({ owner, entries, pick, back }) {
     status.textContent = said;
     back();
   };
-  open.addEventListener('click', async () => {
-    const all = await entries();
+  /** @param {string} [value] */
+  const start = async (value = '') => {
+    all = await entries();
     said = status.textContent ?? '';
     close = openSearch({
       bar: /** @type {HTMLElement} */ (open.closest('.board-header')),
       lang: owner,
       placeholder: t('search.open'),
       closeLabel: t('search.close'),
-      onQuery: (query) => { if (query.trim()) show(find(all, query, owner)); else restore(); },
-      onClose: () => { close = null; restore(); open.focus(); },
+      value,
+      onQuery: (typed) => { query = typed; if (typed.trim()) show(find(all, typed, owner)); else restore(); },
+      onClose: () => { close = null; query = ''; restore(); open.focus(); },
     });
-  });
-  return () => {
-    if (!close) return false;
-    close();
-    return true;
+  };
+  open.addEventListener('click', () => start());
+  if (reopen) start(reopen);
+  return {
+    close: () => {
+      if (!close) return false;
+      close();
+      return true;
+    },
+    again: () => {
+      if (!close || !query.trim()) return false;
+      show(find(all, query, owner));
+      return true;
+    },
   };
 }
 
@@ -1415,6 +1436,9 @@ async function main() {
     keepAwake(state.view !== 'grid' || (display.tapSpeaks && canSpeak));
   }
 
+  /** The header's search, once it is wired; a press made from it leaves it open. */
+  let searching = { close: () => false, again: () => false };
+
   function paint() {
     const stage = $('board-stage');
     const shown = withOwn(nodeHere());
@@ -1438,6 +1462,9 @@ async function main() {
     // way from the first tap to the last -- and the bar under it turns with it, so
     // its arrow points back and its topic reads the same way as the buttons.
     document.querySelector('.board-main')?.classList.toggle('board-main-turned', display.turned);
+    // A search left open behind a message is the owner's; the stranger reading the
+    // message does not see it.
+    document.querySelector('.board-header')?.classList.toggle('board-header-quiet', state.view !== 'grid');
     turnLetters(/** @type {HTMLElement} */ ($('board-title').firstElementChild ?? $('board-title')), display.turned);
     if (state.view === 'grid') {
       clearStage(stage);
@@ -1485,6 +1512,8 @@ async function main() {
           .querySelector(`[data-button="${CSS.escape(openedFrom)}"]`))?.focus();
         openedFrom = null;
       }
+      // A search left open behind a message draws its results back over the board.
+      searching.again();
       return;
     }
 
@@ -1783,12 +1812,24 @@ async function main() {
     },
   });
 
-  // Found on this board, the press is made here; on another, that board opens to it.
-  const closeSearch = wireSearch({
+  // Found on this board, the press is made here; on another, that board opens to it,
+  // with the search open behind the press. The address forgets the search once read.
+  const carried = params.get('q') ?? '';
+  if (carried) {
+    const here = new URL(location.href);
+    here.searchParams.delete('q');
+    history.replaceState(history.state, '', here);
+  }
+  searching = wireSearch({
     owner,
     entries: () => searchEntries(ctx, index, { [boardId]: board }),
-    pick: (found) => {
-      if (found.board !== boardId || !found.path.length) { visit(found); return; }
+    query: carried,
+    pick: (found, query) => {
+      // A screen found is a place to go, and the search ends there; a sentence or a
+      // beacon is said and the search waits behind it.
+      const place = found.button.kind === 'submenu';
+      if (found.board !== boardId || !found.path.length) { visit(found, place ? '' : query); return; }
+      if (place) searching.close();
       state = { ...state, view: 'grid', path: found.path };
       if (found.button.kind === 'beacon') paint();
       else pickButton(found.button);
@@ -1820,9 +1861,11 @@ async function main() {
     // A beacon first: it is over the whole screen, so it is what "back" means while
     // one is running, and it is not part of the board's own state.
     if (document.querySelector('.beacon')) { stopBeacon(); return true; }
-    if (closeSearch()) return true;
     if (state.view === 'reply') { dispatch({ type: 'cancelReply' }); return true; }
+    // Out of a message first and then the search behind it: the message came from the
+    // results, and closing it is the way back to them.
     if (state.view !== 'grid') { dispatch({ type: 'dismiss' }); return true; }
+    if (searching.close()) return true;
     if (state.path.length > 1) { dispatch({ type: 'up' }); return true; }
     return false;
   };

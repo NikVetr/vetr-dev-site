@@ -521,6 +521,7 @@
 /* **Searching, the header is the field.** Everything else in it steps aside -- the
    field's own close is the way out -- and comes back when it closes. */
 .board-searching > :not(.board-search) { display: none; }
+.board-header-quiet .board-search { visibility: hidden; }
 .board-search-open[hidden] { display: none; }
 .board-search { flex: 1 1 auto; display: flex; align-items: center; gap: var(--space-2); min-inline-size: 0; block-size: 100%; }
 .board-searching { box-sizing: border-box; }

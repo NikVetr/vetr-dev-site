@@ -109,12 +109,13 @@ function icon(d) {
 
 /**
  * A row as a search field until it is closed: the field takes the whole row, and
- * each change of what is typed is handed on for the grid to show.
+ * each change of what is typed is handed on for the grid to show. Given a `value`, it
+ * opens on that search already made and leaves the keyboard down.
  * @param {{bar: HTMLElement, lang: string, placeholder: string, closeLabel: string,
- *   onQuery: (query: string) => void, onClose: () => void}} config
+ *   onQuery: (query: string) => void, onClose: () => void, value?: string}} config
  * @returns {() => void} closes it
  */
-export function openSearch({ bar, lang, placeholder, closeLabel, onQuery, onClose }) {
+export function openSearch({ bar, lang, placeholder, closeLabel, onQuery, onClose, value = '' }) {
   const form = document.createElement('form');
   form.className = 'board-search';
   form.setAttribute('role', 'search');
@@ -125,6 +126,7 @@ export function openSearch({ bar, lang, placeholder, closeLabel, onQuery, onClos
   input.setAttribute('aria-label', placeholder);
   input.setAttribute('enterkeyhint', 'search');
   input.lang = lang;
+  input.value = value;
   const close = document.createElement('button');
   close.type = 'button';
   close.className = 'board-turn-bar board-search-close';
@@ -153,6 +155,6 @@ export function openSearch({ bar, lang, placeholder, closeLabel, onQuery, onClos
     if (event.key === 'Escape') { event.stopPropagation(); end(); }
   });
   close.addEventListener('click', end);
-  input.focus();
+  if (value) onQuery(value); else input.focus();
   return end;
 }
