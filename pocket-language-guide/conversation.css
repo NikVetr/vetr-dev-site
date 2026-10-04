@@ -1458,3 +1458,18 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 .travel-check-label { margin: 0; font-weight: 600; }
 .travel-check-detail { margin: 0.15rem 0 0; color: var(--muted); font-size: var(--fs--1); }
 .travel-check-detail:empty { display: none; }
+
+/* A context's own mark after its name in the bar and beside it in the menu of
+   contexts: the watermark its cell carries on the list, small and solid enough to
+   read -- in the bar in the name's own colour, in the menu in the colour a
+   language's own name takes there. */
+.board-title-mark {
+  display: inline-block;
+  block-size: 0.8em;
+  inline-size: auto;
+  margin-inline-start: 0.3em;
+  vertical-align: -0.06em;
+  color: currentColor;
+  opacity: 0.75;
+}
+.board-menu-mark { flex: none; block-size: 1.3em; inline-size: auto; color: var(--accent); align-self: center; }

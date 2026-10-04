@@ -11,6 +11,7 @@
 // have to be written by hand for a bare `<div>` pretending to be a popup.
 
 import { dialogHead } from './dialog.js';
+import { centreMark, topicMark } from './topic-marks.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 export function el(tag, attrs = {}, kids = []) {
@@ -35,10 +36,13 @@ export function el(tag, attrs = {}, kids = []) {
  */
 export function openBoardMenu(anchor, items, aside) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-menu-panel' }));
+  /** @type {SVGSVGElement[]} */ const marks = [];
   /**
    * An item may carry its name in its own language beside the reader's word for it --
-   * a language's endonym, so someone handed the phone can find their own.
-   * @param {{label:string, run:()=>void, current?:boolean, own?:{text:string, lang:string}}} item
+   * a language's endonym, so someone handed the phone can find their own -- or, for a
+   * context, its mark, at the same end and in the same colour.
+   * @param {{label:string, run:()=>void, current?:boolean, own?:{text:string, lang:string},
+   *   mark?:{name:string, lang:string}|''}} item
    */
   const entry = (item) => {
     const button = el('button', { type: 'button', class: 'board-menu-item', text: item.label });
@@ -47,6 +51,13 @@ export function openBoardMenu(anchor, items, aside) {
     if (item.own?.text) {
       button.classList.add('board-menu-item-own');
       button.append(el('span', { class: 'board-menu-own', lang: item.own.lang, text: item.own.text }));
+    }
+    if (item.mark) {
+      const mark = topicMark(item.mark.name, `plg-menu-mark-${marks.length}`, item.mark.lang);
+      mark.setAttribute('class', 'board-menu-mark');
+      marks.push(mark);
+      button.classList.add('board-menu-item-own');
+      button.append(mark);
     }
     if (item.current) {
       button.classList.add('board-menu-current');
@@ -88,6 +99,8 @@ export function openBoardMenu(anchor, items, aside) {
   // on one of its children came from outside the panel.
   panel.addEventListener('click', (event) => { if (event.target === panel) panel.close(); });
   panel.showModal();
+  // Fitted to their ink once the panel is drawn: a closed dialog's contents measure nothing.
+  for (const mark of marks) centreMark(mark);
   // **Against the control that opened it.** The stylesheet's default hangs the panel
   // under the header's own corner, which is right for the menu behind the three
   // bars and wrong for everything else that now opens one -- the speed control at

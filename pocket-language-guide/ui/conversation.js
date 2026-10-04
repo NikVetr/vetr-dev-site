@@ -35,6 +35,7 @@ import {
 } from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
+import { centreMark, topicMark } from './topic-marks.js';
 import {
   readDisplay, writeDisplay, displaySection, readVoice, writeVoice, voiceSection,
 } from './board-display.js';
@@ -895,7 +896,7 @@ async function main() {
   const named = Object.fromEntries(languages.map((l) => [l.bcp47, l]));
   /** @param {string} code */
   const nameOf = (code) => languageName(code, named[code]?.exonym_en ?? code);
-  /** @type {{boards:{id:string, titleKey:string, listeners:string[], owners:string[]}[]}} */
+  /** @type {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string}[]}} */
   const index = JSON.parse(await loadText('data/boards/index.json'));
 
   // **The pair is the switcher for the pair.** Both names were already on screen
@@ -1097,16 +1098,25 @@ async function main() {
   // list and then a second tap, which is two navigations to change one thing.
   const others = index.boards
     .filter((b) => b.id !== boardId && serves(b, listener, owner))
-    .map((b) => ({ id: b.id, label: t(b.titleKey) }))
+    .map((b) => ({ id: b.id, label: t(b.titleKey), icon: b.icon }))
     .sort((a, b) => a.label.localeCompare(b.label));
+  // After the name, the context's own mark -- the watermark its cell carries on the
+  // list, small and solid enough to read -- and each context's mark in the menu.
+  const icon = boardId === MOST_USED ? 'most-used' : listed?.icon;
+  const titleMark = icon ? topicMark(icon, 'plg-title-mark', owner) : null;
+  titleMark?.setAttribute('class', 'board-title-mark');
   $('board-title').replaceChildren(
     inlineControl(title, t('board.switchTopic'), (button) => {
       openBoardMenu(button, [
-        ...others.map((o) => ({ label: o.label, run: () => goTo({ board: o.id, screen: null }) })),
+        ...others.map((o) => ({
+          label: o.label, mark: o.icon && { name: o.icon, lang: owner }, run: () => goTo({ board: o.id, screen: null }),
+        })),
         { label: t('board.allTopics'), run: () => goTo({ board: null, screen: null }) },
       ]);
     }),
+    ...(titleMark ? [titleMark] : []),
   );
+  if (titleMark) centreMark(titleMark);
   $('board-title').title = title;
   document.title = `${title} \u2014 ${t('nav.brand')}`;
 
