@@ -1132,6 +1132,25 @@ test('with the setting on, holding a button says it and a tap still opens it', a
   await expect(page.locator('.board-message')).toBeVisible();
 });
 
+test('holding the eye shows what each button says and what can come back, and letting go puts the grid back', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  const left = page.locator('[data-button="left"]');
+  await expect(left).toBeVisible();
+  await expect(page.locator('.board-cell-sub')).toHaveCount(0);
+  const eye = await page.locator('#board-peek-bar').boundingBox();
+  await page.mouse.move(eye.x + eye.width / 2, eye.y + eye.height / 2);
+  await page.mouse.down();
+  await expect(page.locator('#board-peek-bar')).toHaveAttribute('aria-pressed', 'true');
+  await expect(left.locator('.board-cell-sub-words')).toHaveText('左转');
+  await expect(left.locator('.board-cell-sub-say')).not.toBeEmpty();
+  // A question's answers in the reader's words, without the "none of these" every set ends in.
+  const answers = page.locator('[data-button="waitforme"] .board-cell-sub-answers');
+  await expect(answers).toContainText('yes');
+  await expect(answers).not.toContainText('None of these');
+  await page.mouse.up();
+  await expect(page.locator('.board-cell-sub')).toHaveCount(0);
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

@@ -40,6 +40,11 @@ const KEY = 'plg.board-display';
  * @property {boolean} cellWords  under each button's words, the other language's
  * @property {boolean} cellSay    ...how to say them, in the reader's own letters
  * @property {boolean} cellIpa    ...and in IPA
+ * @property {boolean} peekOwner   holding the eye shows each button's whole sentence in the reader's words
+ * @property {boolean} peekWords   ...the other language's
+ * @property {boolean} peekSay     ...how to say it
+ * @property {boolean} peekIpa     ...its IPA
+ * @property {boolean} peekAnswers ...and, on a question, the answers the stranger can give, in the reader's words
  * @property {string} usedOver    the window the Most used screen counts over
  * @property {boolean} usedPooled ...and whether it counts every language or this one
  */
@@ -74,6 +79,13 @@ export const DEFAULTS = {
   cellWords: false,
   cellSay: false,
   cellIpa: false,
+  // What holding the bar's eye shows on every button: what it will say, and what can
+  // come back, at a glance and only while held.
+  peekOwner: true,
+  peekWords: true,
+  peekSay: true,
+  peekIpa: false,
+  peekAnswers: true,
   usedOver: 'month',
   usedPooled: false,
 };
@@ -85,7 +97,7 @@ export const DEFAULTS = {
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa', labelKey:string, group:'message'|'buttons'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'message'|'buttons'|'peek'}[]} */ ([
   { id: 'owner', labelKey: 'display.owner', group: 'message' },
   { id: 'roman', labelKey: 'display.roman', group: 'message' },
   { id: 'ipa', labelKey: 'display.ipa', group: 'message' },
@@ -100,6 +112,11 @@ export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'poli
   { id: 'cellWords', labelKey: 'display.cellWords', group: 'buttons' },
   { id: 'cellSay', labelKey: 'display.roman', group: 'buttons' },
   { id: 'cellIpa', labelKey: 'display.ipa', group: 'buttons' },
+  { id: 'peekOwner', labelKey: 'display.peekOwner', group: 'peek' },
+  { id: 'peekWords', labelKey: 'display.cellWords', group: 'peek' },
+  { id: 'peekSay', labelKey: 'display.roman', group: 'peek' },
+  { id: 'peekIpa', labelKey: 'display.ipa', group: 'peek' },
+  { id: 'peekAnswers', labelKey: 'display.peekAnswers', group: 'peek' },
 ]);
 
 /** The lines a button can carry under its words. */
@@ -170,8 +187,8 @@ export function displaySection(current, onChange, voice) {
     answers.closest('label')?.classList.toggle('display-option-off', !held.tapSpeaks);
   };
 
-  for (const group of /** @type {const} */ (['message', 'buttons'])) {
-    box.append(heading(group === 'message' ? 'display.heading' : 'display.buttonsHeading'));
+  for (const group of /** @type {const} */ (['message', 'buttons', 'peek'])) {
+    box.append(heading({ message: 'display.heading', buttons: 'display.buttonsHeading', peek: 'display.peekHeading' }[group]));
     for (const option of OPTIONS.filter((o) => o.group === group)) {
       // The three lines a button can carry are introduced once, rather than each
       // label saying "under each button".
@@ -195,6 +212,7 @@ export function displaySection(current, onChange, voice) {
         row.classList.add('display-option-cell');
         input.setAttribute('aria-label', `${t('display.cellsCaption')} ${t(option.labelKey)}`);
       }
+      if (option.group === 'peek') input.setAttribute('aria-label', `${t('display.peekHeading')} ${t(option.labelKey)}`);
       // Merged into what is stored rather than written from this dialog's copy: the
       // Most used section writes the same record, and neither may undo the other.
       input.addEventListener('change', () => {

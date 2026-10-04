@@ -60,6 +60,10 @@
     <!-- Speak on tap: a button says its sentence where it is, for a listener who cannot
          look -- a driver, given one direction a tap. The waves are drawn only while it
          is on, as well as the fill. -->
+    <!-- The eye: held, every button shows what it will say and what can come back. -->
+    <button type="button" id="board-peek-bar" class="board-turn-bar board-peek-bar" hidden aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
     <button type="button" id="board-tap-bar" class="board-turn-bar board-tap-bar" hidden aria-pressed="false">
       <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4Z" fill="currentColor"/><path class="tap-waves" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
     </button>

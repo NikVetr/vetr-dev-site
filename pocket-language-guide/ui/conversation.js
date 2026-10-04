@@ -1258,11 +1258,12 @@ async function main() {
    * @param {{say?:string, ipa?:string}} spoken  the listener's side, whose sound it is
    * @returns {import('./conversation-view.js').SubLine[]}
    */
-  const linesOf = (other, spoken) => /** @type {import('./conversation-view.js').SubLine[]} */ ([
-    display.cellWords && { text: other.text, lang: other.lang, dir: other.dir, kind: 'words' },
-    display.cellSay && spoken.say && { text: spoken.say, lang: owner, kind: 'say' },
-    display.cellIpa && spoken.ipa && { text: `/${spoken.ipa}/`, lang: 'und-fonipa', dir: 'ltr', kind: 'ipa' },
-  ].filter(Boolean));
+  const linesOf = (other, spoken, show = { words: display.cellWords, say: display.cellSay, ipa: display.cellIpa }) => (
+    /** @type {import('./conversation-view.js').SubLine[]} */ ([
+      show.words && { text: other.text, lang: other.lang, dir: other.dir, kind: 'words' },
+      show.say && spoken.say && { text: spoken.say, lang: owner, kind: 'say' },
+      show.ipa && spoken.ipa && { text: `/${spoken.ipa}/`, lang: 'und-fonipa', dir: 'ltr', kind: 'ipa' },
+    ].filter(Boolean)));
 
 
   /**
@@ -1453,6 +1454,22 @@ async function main() {
 
   /** The header's search, once it is wired; a press made from it leaves it open. */
   let searching = { close: () => false, again: () => false };
+  /** Whether the bar's eye is held, and every button shows what the peek settings name. */
+  let peeking = false;
+
+  /**
+   * A question's answers in the reader's words, for the eye: what the stranger can say
+   * back, read the way the answer grid reads each kind.
+   * @param {import('../core/conversation.js').BoardButton} button
+   */
+  const answersOf = (button) => {
+    const set = button.replySetId ? board.replySets?.[button.replySetId] ?? ownSets[button.replySetId] : null;
+    // "None of these" ends every set, so it says nothing about this one.
+    return (set?.buttons ?? []).filter((/** @type {any} */ b) => b.phraseRef?.id !== 'board-answers.none-of-these')
+      .map((/** @type {any} */ b) => (b.kind === 'value' ? resolveValue(b.value, ctx)?.owner.text
+      : b.kind === 'entry' ? t(ENTRY_LABEL[b.entry] ?? 'board.otherAmount') : phraseOf(b, true)?.owner.text))
+      .filter(Boolean).join(' \u00b7 ');
+  };
 
   function paint() {
     const stage = $('board-stage');
@@ -1470,7 +1487,7 @@ async function main() {
     applyUpdateIfIdle();
 
     if (state.view !== 'grid') {
-      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar']) $(id).hidden = true;
+      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar', 'board-peek-bar']) $(id).hidden = true;
     }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
@@ -1496,7 +1513,7 @@ async function main() {
       // The arrow says "out of here" wherever you are: up a submenu, or back to the
       // context list from a board's root. Its accessible name says which.
       const atRoot = state.path.length < 2;
-      for (const id of ['board-up', 'site-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = false;
+      for (const id of ['board-up', 'site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-peek-bar']) $(id).hidden = false;
       // Nothing is made on Most used; it is what the other screens' presses make.
       if (boardId === MOST_USED) $('board-add-bar').hidden = true;
       paintTap();
@@ -1516,9 +1533,19 @@ async function main() {
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onHoldSay: display.holdSpeaks && canSpeak ? (button) => { countPress(button); sayOnTap(button, false); } : undefined,
         onPick: pickButton,
-        sub: (display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
+        sub: (peeking || display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
           const phrase = button.kind === 'message' ? phraseOf(button) : null;
-          return phrase ? linesOf(phrase.listener, phrase.listener) : [];
+          if (!phrase) return [];
+          if (!peeking) return linesOf(phrase.listener, phrase.listener);
+          // Held, the eye's lines instead: the reader's whole sentence where the label
+          // is a short form of it, the other side's, and what can come back.
+          const answers = display.peekAnswers ? answersOf(button) : '';
+          return [
+            ...(display.peekOwner && phrase.owner.text !== labelOf(button)
+              ? [{ text: phrase.owner.text, lang: owner, dir: ctx.ownerDir, kind: /** @type {const} */ ('own') }] : []),
+            ...linesOf(phrase.listener, phrase.listener, { words: display.peekWords, say: display.peekSay, ipa: display.peekIpa }),
+            ...(answers ? [{ text: answers, lang: owner, dir: ctx.ownerDir, kind: /** @type {const} */ ('answers') }] : []),
+          ];
         } : undefined,
       });
       // Back to the cell that opened the message, for whoever is not using a finger.
@@ -1732,6 +1759,28 @@ async function main() {
     paintTap();
     holdAwake();
   });
+
+  // **The eye: held, every button shows what it will say** -- the reader's whole
+  // sentence, the other side's, how to say it, and on a question the answers the
+  // stranger can give -- and let go, the grid is as it was. What it shows is a setting.
+  // Held by pointer or by key, so a reader at a keyboard can peek too.
+  const peekButton = $('board-peek-bar');
+  peekButton.setAttribute('aria-label', t('board.peek'));
+  peekButton.title = t('board.peek');
+  /** @param {boolean} on */
+  const peek = (on) => {
+    if (peeking === on) return;
+    peeking = on;
+    peekButton.setAttribute('aria-pressed', String(on));
+    paint();
+  };
+  peekButton.addEventListener('pointerdown', (event) => { event.preventDefault(); peek(true); });
+  for (const end of ['pointerup', 'pointerleave', 'pointercancel']) peekButton.addEventListener(end, () => peek(false));
+  peekButton.addEventListener('keydown', (event) => {
+    if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); peek(true); }
+  });
+  peekButton.addEventListener('keyup', () => peek(false));
+  peekButton.addEventListener('contextmenu', (event) => event.preventDefault());
 
   const turnButton = $('board-turn-bar');
   turnButton.setAttribute('aria-label', t('board.turn'));

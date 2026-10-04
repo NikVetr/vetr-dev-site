@@ -1461,14 +1461,15 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
    read -- in the bar in the name's own colour, in the menu in the colour a
    language's own name takes there. */
 .board-title-mark {
-  display: inline-block;
+  flex: none;
   block-size: 0.8em;
   inline-size: auto;
-  margin-inline-start: 0.3em;
-  vertical-align: -0.06em;
   color: currentColor;
   opacity: 0.75;
 }
+/* The name and its mark as one row, so a name that wraps keeps its mark beside it
+   rather than leaving it alone on a line of its own. */
+.board-title:has(.board-title-mark) { display: flex; align-items: center; gap: 0.3em; }
 .board-menu-mark { flex: none; block-size: 1.3em; inline-size: auto; color: var(--accent); align-self: center; }
 /* Speaking on tap, the switch pulses: a ring that swells out from it and fades, once a
    second, for as long as the sentence is being said -- motion that is the message, for
@@ -1481,3 +1482,7 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 @media (prefers-reduced-motion: reduce) {
   .board-tap-bar.board-tap-speaking { animation: none; box-shadow: 0 0 0 3px var(--accent); }
 }
+/* The eye's two lines of its own: the reader's whole sentence, set upright like the
+   label it completes, and a question's answers, smaller, since they are a list. */
+.board-cell-sub-own { font-style: normal; opacity: 0.9; }
+.board-cell-sub-answers { font-size: 0.5em; opacity: 0.75; }

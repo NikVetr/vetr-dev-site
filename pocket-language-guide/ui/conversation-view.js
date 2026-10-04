@@ -169,7 +169,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
 }
 
 /**
- * @typedef {{text:string, lang:string, dir?:string, kind:'words'|'say'|'ipa'}} SubLine
+ * @typedef {{text:string, lang:string, dir?:string, kind:'words'|'say'|'ipa'|'own'|'answers'}} SubLine
  */
 
 /**
