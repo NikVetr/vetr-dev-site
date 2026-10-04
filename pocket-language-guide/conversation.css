@@ -1470,3 +1470,14 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
   opacity: 0.75;
 }
 .board-menu-mark { flex: none; block-size: 1.3em; inline-size: auto; color: var(--accent); align-self: center; }
+/* Speaking on tap, the switch pulses: a ring that swells out from it and fades, once a
+   second, for as long as the sentence is being said -- motion that is the message, for
+   an owner whose phone may be on mute. Without motion it is a steady ring. */
+@keyframes tap-pulse {
+  from { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent); }
+  to { box-shadow: 0 0 0 0.6rem color-mix(in oklab, var(--accent) 0%, transparent); }
+}
+.board-tap-bar.board-tap-speaking { animation: tap-pulse 1s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .board-tap-bar.board-tap-speaking { animation: none; box-shadow: 0 0 0 3px var(--accent); }
+}

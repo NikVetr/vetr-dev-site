@@ -36,6 +36,7 @@ const KEY = 'plg.board-display';
  * @property {boolean} askRemove  rearranging asks before it takes a button off a screen
  * @property {boolean} tapSpeaks  a button says its sentence where it is, without opening it
  * @property {boolean} tapAnswers  ...and a question then opens its answers
+ * @property {boolean} holdSpeaks  holding a button says its sentence, whatever a tap does
  * @property {boolean} cellWords  under each button's words, the other language's
  * @property {boolean} cellSay    ...how to say them, in the reader's own letters
  * @property {boolean} cellIpa    ...and in IPA
@@ -65,6 +66,10 @@ export const DEFAULTS = {
   // sentence is what most exchanges need, and the bar's own switch turns it on in one tap.
   tapSpeaks: false,
   tapAnswers: false,
+  // Holding a button says it where it is while a tap still opens it: a check of how a
+  // sentence sounds, or one quick word, without leaving the grid. Off by default, since
+  // a hold on a button the reader has filled in is how it is cleared.
+  holdSpeaks: false,
   // The other side's words under each button, for the reader who is learning them.
   cellWords: false,
   cellSay: false,
@@ -80,7 +85,7 @@ export const DEFAULTS = {
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'cellWords'|'cellSay'|'cellIpa', labelKey:string, group:'message'|'buttons'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa', labelKey:string, group:'message'|'buttons'}[]} */ ([
   { id: 'owner', labelKey: 'display.owner', group: 'message' },
   { id: 'roman', labelKey: 'display.roman', group: 'message' },
   { id: 'ipa', labelKey: 'display.ipa', group: 'message' },
@@ -91,6 +96,7 @@ export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'poli
   { id: 'askRemove', labelKey: 'display.askRemove', group: 'message' },
   { id: 'tapSpeaks', labelKey: 'display.tapSpeaks', group: 'buttons' },
   { id: 'tapAnswers', labelKey: 'display.tapAnswers', group: 'buttons' },
+  { id: 'holdSpeaks', labelKey: 'display.holdSpeaks', group: 'buttons' },
   { id: 'cellWords', labelKey: 'display.cellWords', group: 'buttons' },
   { id: 'cellSay', labelKey: 'display.roman', group: 'buttons' },
   { id: 'cellIpa', labelKey: 'display.ipa', group: 'buttons' },

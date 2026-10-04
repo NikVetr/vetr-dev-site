@@ -28,6 +28,7 @@ import {
 } from '../core/conversation.js';
 import {
   renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage, translatorLinks,
+  holdable, openRateMenu,
 } from './conversation-view.js';
 import { resolveValue } from '../core/conversation.js';
 import {
@@ -1346,11 +1347,18 @@ async function main() {
    * the reader asked for that.
    * @param {import('../core/conversation.js').BoardButton} button
    */
-  const sayOnTap = (button) => {
+  /** Which tap is speaking, so one that was cut off does not end the next one's signs. */
+  let speaking = 0;
+  /**
+   * @param {import('../core/conversation.js').BoardButton} button
+   * @param {boolean} [opens]  a question opens its answers once said, where the settings ask;
+   *   a hold only says it
+   */
+  const sayOnTap = (button, opens = true) => {
     const phrase = phraseOf(button);
     if (!phrase) return;
     const shown = display.polite && boardId !== 'emergency' && !phrase.custom ? politely(phrase) : phrase;
-    const answers = Boolean(button.replySetId && display.tapAnswers && state.replies);
+    const answers = opens && Boolean(button.replySetId && display.tapAnswers && state.replies);
     if (answers) {
       openedFrom = button.id;
       dispatch({ type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId });
@@ -1362,7 +1370,14 @@ async function main() {
     for (const lit of grid.querySelectorAll('.board-cell-speaking')) lit.classList.remove('board-cell-speaking');
     const cell = answers ? null : grid.querySelector(`[data-button="${CSS.escape(button.id)}"]`);
     cell?.classList.add('board-cell-speaking');
-    const done = () => cell?.classList.remove('board-cell-speaking');
+    // **And the switch pulses while it speaks**: a phone on mute says nothing, and the
+    // owner, eyes on the road with the driver, should see that it is speaking anyway.
+    const token = ++speaking;
+    tapButton.classList.add('board-tap-speaking');
+    const done = () => {
+      cell?.classList.remove('board-cell-speaking');
+      if (token === speaking) tapButton.classList.remove('board-tap-speaking');
+    };
     speech.speakPhrase(shown, { rate: display.rate, voiceId: chosenVoice || undefined }).then(done, (err) => {
       done();
       $('board-status').textContent = speechTrouble(err?.reason ?? 'synthesis-failed');
@@ -1499,6 +1514,7 @@ async function main() {
           return fill ? (ctx.details?.[fill] ? 'set' : 'unset') : null;
         },
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
+        onHoldSay: display.holdSpeaks && canSpeak ? (button) => { countPress(button); sayOnTap(button, false); } : undefined,
         onPick: pickButton,
         sub: (display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
           const phrase = button.kind === 'message' ? phraseOf(button) : null;
@@ -1697,7 +1713,20 @@ async function main() {
     tapButton.setAttribute('aria-pressed', String(display.tapSpeaks));
     tapButton.hidden = !canSpeak || state.view !== 'grid';
   }
+  // **Held, it opens how the voice reads** -- the speeds and voices the message screen's
+  // speed control offers -- since the reader who has just turned taps to speech is the one
+  // who will want it slower, and has no message screen to set it from.
+  const tapHeld = holdable(tapButton, () => openRateMenu(tapButton, {
+    rate: display.rate,
+    onRate: (r) => { display = { ...display, rate: r }; writeDisplay(display); },
+    voices: speech.getCapabilities(listener).voices,
+    voiceId: chosenVoice,
+    onVoice: (id) => { chosenVoice = id; writeVoice(listener, id); },
+    voiceLabel: t('display.voice'),
+    voiceAutoLabel: t('display.voiceAuto'),
+  }));
   tapButton.addEventListener('click', () => {
+    if (tapHeld()) return;
     display = { ...display, tapSpeaks: !display.tapSpeaks };
     writeDisplay(display);
     paintTap();

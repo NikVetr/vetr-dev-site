@@ -45,13 +45,15 @@ const TAP_SLOP_PX = 10;
  * @param {(button:import('../core/conversation.js').BoardButton)=>'set'|'unset'|null} [config.detail]
  *   for a button that says one of the reader's details, whether they have given it
  * @param {(button:import('../core/conversation.js').BoardButton)=>void} [config.onHold]
+ * @param {(button:import('../core/conversation.js').BoardButton)=>void} [config.onHoldSay]  a hold on a
+ *   sentence's button says it, where the setting asks for that; a filled-in button keeps its hold for clearing
  *   what holding a button whose detail is set does
  * @param {(button:import('../core/conversation.js').BoardButton)=>[number, number]|undefined} [config.mark]
  *   where in its label a search matched, for the found buttons
  * @param {(button:import('../core/conversation.js').BoardButton)=>SubLine[]} [config.sub]
  *   the lines a button carries under its words, where the settings ask for them
  */
-export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, mark, sub }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, onHoldSay, mark, sub }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
@@ -149,6 +151,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
       cell.title = word;
       if (state === 'set' && onHold) wasHeld = holdable(cell, () => onHold(button));
     }
+    if (onHoldSay && button.kind === 'message' && detail?.(button) !== 'set') wasHeld = holdable(cell, () => onHoldSay(button));
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
     // Removing it would move every button after it, and a grid that rearranges
     // itself when content is incomplete is the one thing the layout must never do.
@@ -194,7 +197,7 @@ const HOLD_MS = 600;
  * the press that just ended was a hold, so the click that ends it is not a tap too.
  * @param {HTMLElement} cell @param {() => void} act
  */
-function holdable(cell, act) {
+export function holdable(cell, act) {
   let timer = 0;
   let held = false;
   const fire = () => { if (!held) { held = true; act(); } };
@@ -852,18 +855,10 @@ export function renderMessage(stage, phrase,
       rateButton.textContent = `${rate}\u00d7`;
       if (rateLabel) rateButton.setAttribute('aria-label', rateLabel);
       rateButton.setAttribute('aria-haspopup', 'menu');
-      // The voices beside the speeds, when there is a choice: the two are the same
-      // decision -- how this voice reads -- and a reader who wants a different one
-      // should not have to find the settings dialog to say so. All of them, the
-      // automatic pick first, in a column that scrolls -- the desktop offers five
-      // hundred, and a reader who wants the ninth should not need another screen.
-      const aside = onVoice && voices.length > 1 ? {
-        title: voiceLabel,
-        items: [{ label: voiceAutoLabel, current: !voiceId, run: () => onVoice('') },
-          ...voices.map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
-      } : undefined;
-      rateButton.addEventListener('click', () => openBoardMenu(rateButton,
-        RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) })), aside));
+      // The voices beside the speeds, when there is a choice: `openRateMenu`.
+      rateButton.addEventListener('click', () => openRateMenu(rateButton, {
+        rate, onRate, voices, voiceId, onVoice, voiceLabel, voiceAutoLabel,
+      }));
       controls.append(rateButton);
     }
   }
@@ -1249,6 +1244,26 @@ function placeReply(text, reply, box, read, below) {
   reply.style.left = `${at.left - origin.left}px`;
   reply.style.top = `${at.top - origin.top}px`;
 }
+/**
+ * The speeds Speak can take, against `anchor`, and the voices beside them when there is
+ * a choice: the two are one decision -- how this voice reads -- and a reader who wants a
+ * different voice should not have to find the settings dialog to say so. All of them,
+ * the automatic pick first, in a column that scrolls -- the desktop offers five
+ * hundred, and a reader who wants the ninth should not need another screen. The
+ * message's speed control opens it, and so does a hold on the grid's speak-on-tap switch.
+ * @param {HTMLElement} anchor
+ * @param {{rate:number, onRate:(r:number)=>void, voices:{id:string, name:string}[], voiceId?:string,
+ *   onVoice?:(id:string)=>void, voiceLabel?:string, voiceAutoLabel?:string}} choice
+ */
+export function openRateMenu(anchor, { rate, onRate, voices, voiceId, onVoice, voiceLabel = '', voiceAutoLabel = '' }) {
+  const aside = onVoice && voices.length > 1 ? {
+    title: voiceLabel,
+    items: [{ label: voiceAutoLabel, current: !voiceId, run: () => onVoice('') },
+      ...voices.map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
+  } : undefined;
+  openBoardMenu(anchor, RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) })), aside);
+}
+
 /** @type {ResizeObserver|null} */ let shape = null;
 
 /** Google Translate's own codes where they differ from ours. */

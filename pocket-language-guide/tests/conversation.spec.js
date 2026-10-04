@@ -1101,6 +1101,37 @@ test('speaking on tap says the sentence where the button is, for a listener who 
   await expect(page.locator('.board-answers')).toBeVisible();
 });
 
+test('speaking on tap: the switch pulses while it speaks, and held it offers the speeds and voices', async ({ page }) => {
+  await fakeVoice(page, 'zh-CN');
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  const tap = page.locator('#board-tap-bar');
+  await tap.click();
+  await page.locator('[data-button="left"]').click();
+  // The fake voice ends a sentence 300ms after it starts: the pulse is on for it, then off.
+  await expect(tap).toHaveClass(/board-tap-speaking/);
+  await expect(tap).not.toHaveClass(/board-tap-speaking/, { timeout: 2000 });
+  // A hold opens how the voice reads, and does not also flip the switch.
+  await tap.click({ button: 'right' });
+  const menu = page.locator('dialog.board-menu-panel');
+  await expect(menu).toBeVisible();
+  await expect(menu.getByRole('button', { name: '0.5×' })).toBeVisible();
+  await expect(tap).toHaveAttribute('aria-pressed', 'true');
+  await menu.getByRole('button', { name: '0.5×' }).click();
+  await page.locator('[data-button="right"]').click();
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).said.at(-1)?.rate)).toBe(0.5);
+});
+
+test('with the setting on, holding a button says it and a tap still opens it', async ({ page }) => {
+  await fakeVoice(page, 'zh-CN');
+  await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ holdSpeaks: true })));
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  await page.locator('[data-button="left"]').click({ button: 'right' });
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).said.map((/** @type {any} */ u) => u.text))).toEqual(['左转']);
+  await expect(page.locator('.board-message')).toHaveCount(0);
+  await page.locator('[data-button="left"]').click();
+  await expect(page.locator('.board-message')).toBeVisible();
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

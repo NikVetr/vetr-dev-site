@@ -687,6 +687,7 @@
   "display.buttonsHeading": "The buttons",
   "display.tapSpeaks": "Speak on tap: a button says its sentence and the grid stays",
   "display.tapAnswers": "…and a question then opens its answers",
+  "display.holdSpeaks": "Hold a button to hear it, wherever a tap takes you",
   "display.tapNoVoice": "Speak on tap needs a voice for {language} on this device.",
   "display.cellsCaption": "Under each button’s words:",
   "display.cellWords": "The other language’s words",
