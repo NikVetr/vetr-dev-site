@@ -1022,10 +1022,11 @@ function fitFoot(box) {
     // its columns; but a sentence that fills one column of three has two columns of
     // room, and a one-line sentence upright has most of the screen below it.
     const along = vertical(reply) ? 'scrollHeight' : 'scrollWidth';
-    // The surface's own padding kept clear on both sides, as it is round the sentence:
+    // A line's space kept clear of the frame on both sides, as everything inside it is:
     // a Reply the whole width of the read area ran to within a few pixels of the frame.
-    const inset = (/** @type {'Left'|'Top'} */ side) => 2 * Number.parseFloat(getComputedStyle(box)[`padding${side}`]);
-    const room = vertical(reply) ? read.clientHeight - inset('Top') : read.clientWidth - inset('Left');
+    const edge = box.getBoundingClientRect();
+    const drawn = Math.max(0, -Number.parseFloat(getComputedStyle(box).outlineOffset) || 0);
+    const room = (vertical(reply) ? edge.height : edge.width) - 2 * drawn - 2 * leading(text).gap;
     const along2 = vertical(reply) ? 'width' : 'height';
     const across = vertical(reply) ? 'offsetWidth' : 'offsetHeight';
     const readAcross = vertical(reply) ? read.clientWidth : read.clientHeight;
@@ -1062,13 +1063,12 @@ function fitFoot(box) {
     if (reply[along] > room) reply.classList.remove('board-reply-line');
     // The sentence's box has just changed shape by however much Reply grew, so it
     // is fitted again -- now, not a frame later when the observer notices, or the
-    // text is drawn overflowing for that frame. **With the buffer Reply will sit at
-    // held open between them**, which grows with the sentence: held open only as the
-    // row's own small gap, the pair came out taller than the frame, and Reply ran over
-    // its edge or shrank to a sliver once it was made to fit. The buffer is the
-    // sentence's size over three, so it is re-read as the sentence settles.
-    const buffer = () => Math.max(
-      Number.parseFloat(pad[vertical(reply) ? 'paddingLeft' : 'paddingTop']), textSize() / 3);
+    // text is drawn overflowing for that frame. **With the space Reply will sit at held
+    // open between them**, which grows with the sentence: held open only as the row's
+    // own small gap, the pair came out taller than the frame, and Reply ran over its
+    // edge or shrank to a sliver once it was made to fit. It is a line's space, so it
+    // is re-read as the sentence settles.
+    const buffer = () => leading(text).gap;
     for (let k = 0; k < 3; k += 1) {
       const held = buffer();
       read.style.gap = `${held}px`;
@@ -1129,6 +1129,26 @@ function axes(text) {
   return { turned, uv, screen, sv };
 }
 
+/** How much of an em a line's ink fills: a CJK ideograph inks about 0.88 of it, and so,
+ * near enough, does a line of Latin from its capitals to its descenders. */
+const INK_SHARE = 0.88;
+
+/**
+ * **The space between two of the sentence's lines, as the eye sees it**: the owner's
+ * measure for every space inside the frame -- from the sentence to Reply, from the
+ * sentence to the frame and from Reply to the frame -- so that they read as one rhythm
+ * with the lines themselves. `inset` is how much of a line's box is empty above and
+ * below its ink, half of `gap`, since a box's distance is not its ink's.
+ * @param {HTMLElement} text
+ */
+function leading(text) {
+  const style = getComputedStyle(text);
+  const size = Number.parseFloat(style.fontSize);
+  const line = Number.parseFloat(style.lineHeight) || size * 1.15;
+  const gap = Math.max(0, line - INK_SHARE * size);
+  return { gap, inset: gap / 2 };
+}
+
 /**
  * Reply in whichever of the sentence's two empty rectangles lets it be larger, and in
  * the middle of it: as far from the sentence as from the frame, along the line and
@@ -1161,31 +1181,35 @@ function placeReply(text, reply, box, read, below) {
   read.style.gap = '';
   const { turned, uv, screen, sv } = axes(text);
   const style = getComputedStyle(box);
-  const pad = {
-    u: Number.parseFloat(turned ? style.paddingTop : style.paddingLeft),
-    v: Number.parseFloat(turned ? style.paddingLeft : style.paddingTop),
-  };
-  const gap = { u: Math.max(pad.u, size / 3), v: Math.max(pad.v, size / 3) };
+  const { gap: lead, inset } = leading(text);
   const line = Math.max(0, -Number.parseFloat(style.outlineOffset) || 0);
   const edge = uv(box.getBoundingClientRect());
   const frame = { u0: edge.u0 + line, u1: edge.u1 - line, v0: edge.v0 + line, v1: edge.v1 - line };
   const lines = lineRects(text).map(uv).sort((m, n) => m.v0 - n.v0);
   let last = lines[lines.length - 1];
   const before = lines[lines.length - 2];
-  // The last line ends where its ink does, the hanging mark included.
-  const hang = text.querySelector(':scope > .board-message-punct');
-  if (hang && !text.classList.contains('board-punct-inline')) {
+  // The last line ends where its ink does: at the end mark's own ink where there is one,
+  // hung or in the line, rather than at the end of its em -- a full-width ？ inks a part of
+  // its square, and down a turned line the rest read as space above Reply.
+  const hang = /** @type {HTMLElement|null} */ (text.querySelector(':scope > .board-message-punct'));
+  if (hang) {
     const range = document.createRange();
     range.selectNodeContents(hang);
-    last = { ...last, u1: Math.max(last.u1, uv(range.getBoundingClientRect()).u1) };
+    const mark = range.getBoundingClientRect();
+    const ink = markInk(hang);
+    // Turned, every glyph lies a quarter turn clockwise, so the mark's ink down the line is
+    // its ink along a horizontal line, from the top of its box.
+    const end = turned ? mark.top + ink.right
+      : getComputedStyle(text).direction === 'rtl' ? -(mark.left + ink.left) : mark.left + ink.right;
+    last = { ...last, u1: text.classList.contains('board-punct-inline') ? Math.min(last.u1, end) : Math.max(last.u1, end) };
   }
   const block = { v0: lines[0].v0, v1: Math.max(...lines.map((l) => l.v1)) };
   const extent = () => (turned ? { u: reply.offsetHeight, v: reply.offsetWidth } : { u: reply.offsetWidth, v: reply.offsetHeight });
 
-  // The corner: from the last line's end to the frame, and from the line before (or the
-  // frame's top) to the frame's foot.
-  const top = before ? before.v1 : frame.v0;
-  const room = { u: frame.u1 - pad.u - (last.u1 + gap.u), v: frame.v1 - pad.v - (top + (before ? gap.v : pad.v)) };
+  // The corner: from the last line's ink to the frame, and from the line before's ink (or
+  // the frame's top) to the frame's foot -- each a line's space clear of both.
+  const top = before ? before.v1 - inset : frame.v0;
+  const room = { u: frame.u1 - last.u1 - 2 * lead, v: frame.v1 - top - 2 * lead };
   let beside = 0;
   if (room.u > 0 && room.v > 0) {
     let px = size * 0.8;
@@ -1206,9 +1230,16 @@ function placeReply(text, reply, box, read, below) {
     u0 = (last.u1 + frame.u1 - r.u) / 2;
     v0 = (top + frame.v1 - r.v) / 2;
   } else {
+    // Each space at a line's, measured to ink -- the frame to the sentence, the sentence
+    // to Reply, Reply to the frame -- and whatever is left over shared equally by the
+    // three; short of room, all three give way alike.
     const free = frame.v1 - frame.v0 - (block.v1 - block.v0) - r.v;
-    const between = Math.max(free / 3, Math.min(gap.v, free));
-    const shift = frame.v0 + (free - between) / 2 - block.v0;
+    const want = 3 * lead - 2 * inset;
+    const spare = free >= want ? (free - want) / 3 : 0;
+    const k = free >= want ? 1 : Math.max(0, free) / want;
+    const above = (lead - inset) * k + spare;
+    const between = (lead - inset) * k + spare;
+    const shift = frame.v0 + above - block.v0;
     text.style.translate = turned ? `${shift * sv}px 0` : `0 ${shift * sv}px`;
     u0 = (frame.u0 + frame.u1 - r.u) / 2;
     v0 = block.v1 + shift + between;

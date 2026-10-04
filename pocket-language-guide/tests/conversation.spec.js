@@ -2212,9 +2212,11 @@ test('a message keeps white type on a dark fill in the dark', async ({ browser }
 test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ page }) => {
   // Reported: a band above and below its words, the far corner with a hand's width of
   // nothing before it, and a gulf between it and a short sentence. Its words sit
-  // inside its padding with the space round them even, it keeps a buffer from the
-  // sentence and the frame, and the height left over is shared evenly: above the
-  // sentence, between the two, and under Reply.
+  // inside its padding with the space round them even, and the three spaces in the
+  // frame -- above the sentence, between the two, under Reply -- read as one: each the
+  // space between two of the sentence's lines, measured to ink, the owner's measure.
+  // A line's box is its ink and `inset` more above and below, so to boxes the two
+  // spaces at the sentence are short of the one under Reply by exactly that.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=en&source=es&board=food');
   await expect(page.locator('.board-cell').first()).toBeVisible();
@@ -2241,6 +2243,8 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
       inside: ink.left >= box.left && ink.right <= box.right,
       gapToText: box.top - textBottom, toFrameSide: Math.min(box.left - frame.left, frame.right - box.right),
       above: textTop - (frame.top + line), below: frame.bottom - line - box.bottom,
+      inset: (Number.parseFloat(getComputedStyle(text).lineHeight)
+        - 0.88 * Number.parseFloat(getComputedStyle(text).fontSize)) / 2,
     };
   });
   expect(m.inside).toBe(true);
@@ -2251,8 +2255,8 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
   expect(m.side).toBeLessThan(m.top * 3 + 4);
   expect(m.gapToText).toBeGreaterThan(12);
   expect(m.toFrameSide).toBeGreaterThan(12);
-  expect(Math.abs(m.above - m.below)).toBeLessThan(2);
-  expect(Math.abs(m.gapToText - m.below)).toBeLessThan(2);
+  expect(Math.abs(m.above + m.inset - m.below)).toBeLessThan(2);
+  expect(Math.abs(m.gapToText + m.inset - m.below)).toBeLessThan(2);
 });
 
 test('a button of your own can carry the answers a stranger might give', async ({ page }) => {
@@ -2850,15 +2854,18 @@ test('turned, Reply beside the last line is as far from the line before as from 
     const frame = box.getBoundingClientRect();
     const line = -Number.parseFloat(getComputedStyle(box).outlineOffset);
     const [before, last] = cols.slice(-2);
+    const style = getComputedStyle(text);
     return { cols: cols.length, toLine: before.left - reply.right, toFrame: reply.left - (frame.left + line),
       toEnd: reply.top - last.bottom, toFoot: frame.bottom - line - reply.bottom,
-      pad: Number.parseFloat(getComputedStyle(box).paddingLeft) };
+      inset: (Number.parseFloat(style.lineHeight) - 0.88 * Number.parseFloat(style.fontSize)) / 2 };
   });
   await expect.poll(async () => (await gaps()).cols).toBe(2);
   const g = await gaps();
-  expect(Math.abs(g.toLine - g.toFrame)).toBeLessThanOrEqual(3);
+  // Measured to ink, as the eye measures it: the column before is its box less the
+  // empty band at its edge, and Reply sits midway between that ink and the frame.
+  expect(Math.abs(g.toLine + g.inset - g.toFrame)).toBeLessThanOrEqual(3);
   expect(Math.abs(g.toEnd - g.toFoot)).toBeLessThanOrEqual(3);
-  expect(g.toLine).toBeGreaterThanOrEqual(g.pad);
+  expect(g.toFrame).toBeGreaterThanOrEqual(2 * g.inset);
 });
 
 test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {
