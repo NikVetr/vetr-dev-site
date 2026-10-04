@@ -223,3 +223,35 @@ board, all said to a driver the traveller cannot choose. Same rules; notes to
 - **Urdu**: `taxi.could-you-make-it-colder` and `-warmer`.
 
 Each row keeps the kind of answer its reply set expects: a request stays a request.
+
+## A fifth pass: who a row addresses, on the boards a traveller uses in the street
+
+Four passes have fixed rows said to a driver, a passer-by or the traveller in the
+masculine, one list at a time, and each found more. This pass takes the class instead:
+**every corpus row the `transport` and `directions` boards show** -- their message
+buttons and the answers of every reply set those buttons use, 49 concepts as the boards
+stand -- in each language whose verbs, pronouns or adjectives mark the gender of the
+person spoken to. The taxi screen is the one a traveller uses without looking at the
+phone, so it goes first.
+
+For each language:
+
+1. **State how it marks the listener's gender** -- imperatives, second-person verbs or
+   pronouns, participles and futures that agree with the listener, adjectives in "are you
+   ready?" -- from the pack's own notes and a grammar of record, and write those markers
+   down before reading a row.
+2. **Read every one of the boards' rows** for them, the answers included: an answer is
+   the stranger's words to the traveller, and `content/PROMPTS/board-answers.md` requires
+   those to be neutral about the traveller's gender as well.
+3. **Reword a marked row** so it addresses nobody's gender, with the pack's own neutral
+   patterns where it has them (Arabic's أرجو with a verbal noun, Hausa's bare imperative
+   and impersonal *a*, the Indic passive and "can I get…?"), and keep each row the kind of
+   utterance its reply set expects. A direction given as an answer can be a phrase with
+   no verb ("straight on", "to the left") where the language says it that way.
+4. **Count, and list, marked rows elsewhere** in the pack without changing them, so the
+   size of what is left is known.
+
+The languages, in two groups: Arabic, Hebrew, Hausa and Amharic; and Hindi, Urdu,
+Punjabi, Marathi, Czech and Polish, with a check of the same rows in Russian, Ukrainian,
+French, Spanish, Italian and Portuguese for adjectives that agree with the listener.
+Notes go to `tmp/agent-notes/row-corrections-5-<group>.md`.
