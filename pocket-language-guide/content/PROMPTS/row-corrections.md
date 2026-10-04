@@ -255,3 +255,12 @@ The languages, in two groups: Arabic, Hebrew, Hausa and Amharic; and Hindi, Urdu
 Punjabi, Marathi, Czech and Polish, with a check of the same rows in Russian, Ukrainian,
 French, Spanish, Italian and Portuguese for adjectives that agree with the listener.
 Notes go to `tmp/notes/agents/row-corrections-5-<group>.md`.
+
+**And keep the natural forms.** The owner wants a switch for the listener's gender on the
+boards, neutral by default, so a gendered wording is not thrown away when its row is made
+neutral. For each row you reword, write its masculine and its feminine form as listener
+variants, one line each in `tmp/notes/agents/listener-variants-<code>.csv`, with the columns
+of `data/lang/<code>/variants.csv` and `variant` set to `listener_gender=masculine` or
+`listener_gender=feminine`; leave `ipa` empty and record the source in `provenance`. The
+masculine is often the row's old text. Where the neutral form is what people naturally say
+anyway, write no variants and say so. The coordinator merges the file once the axis exists.

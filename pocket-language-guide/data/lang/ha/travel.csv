@@ -3,14 +3,14 @@ directions.where-is,Ina {} yake?,,ina {} jake,where {} it-is(m) -- masculine agr
 directions.how-do-i-get-to,Ta yaya zan je {}?,,ta jaja zan dʒe {},,2,ha-agent-v1;ipa=ha-g2p
 directions.is-it-far,Yana da nisa?,,jana da nisa,it-is with distance,2,ha-agent-v1;ipa=ha-g2p
 directions.how-long-on-foot,Tsawon lokaci nawa a ƙafa?,,tsʼawon lokatʃi nawa a kʼafa,,2,ha-agent-v1;ipa=ha-g2p
-directions.please-show-me-on-the-map,Don Allah ka nuna mini a taswira,,don allah ka nuna mini a taswira,,2,ha-agent-v1;ipa=ha-g2p
+directions.please-show-me-on-the-map,Don Allah nuna mini a taswira,,don allah nuna mini a taswira,"please show me on the map -- the imperative, which takes no pronoun and is said to a man or a woman, in place of ka (ki to a woman), as in transit-rides.please-tell-me-where-to-get-off",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Caron 2013 Hausa Grammatical Sketch (HAL halshs-00647533) 14.2 (the Imperative is insensitive to gender and number; Table 18 grade 1 before a benefactive pronoun: kàːmaː minì ɓàɽaːwòː! Catch the thief for me!);fix=Bargery nuna I.1 (show; point out -- plus dative);in-pack-frame=transit-rides.please-tell-me-where-to-get-off;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
 directions.where-is-the-nearest,Ina {} mafi kusa yake?,,ina {} mafi kusa jake,,2,ha-agent-v1;ipa=ha-g2p
 directions.where-am-i,Ina nake?,,ina nake,where I-am,2,ha-agent-v1;ipa=ha-g2p
 directions.which-way,Wace hanya?,,watʃe hanja,,2,ha-agent-v1;ipa=ha-g2p
 directions.can-i-walk-there,Zan iya tafiya can da ƙafa?,,zan ija tafija tʃan da kʼafa,,2,ha-agent-v1;ipa=ha-g2p
 directions.how-far-is-it,Wane nisa ne?,,wane nisa ne,,2,ha-agent-v1;ipa=ha-g2p
 directions.which-exit,Wace ƙofa?,,watʃe kʼofa,,2,ha-agent-v1;ipa=ha-g2p
-directions.can-you-show-me-the-way,Za ka iya nuna mini hanya?,Za ki iya nuna mini hanya?,za ka ija nuna mini hanja,ki to a woman,2,ha-agent-v1;ipa=ha-g2p
+directions.can-you-show-me-the-way,Za a iya nuna mini hanya?,,za a ija nuna mini hanja,"will one be able to show me the way? -- the impersonal a after za in place of ka (ki to a woman), as in taxi.can-you-wait-for-me-here",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=taxi.can-you-wait-for-me-here;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
 directions.north,arewa,,arewa,,2,ha-agent-v1;ipa=ha-g2p
 directions.south,kudu,,kudu,,2,ha-agent-v1;ipa=ha-g2p
 directions.east,gabas,,ɡabas,,2,ha-agent-v1;ipa=ha-g2p
