@@ -2138,6 +2138,7 @@ dialog.speaker-settings {
   flex: 1 1 auto; min-inline-size: 0; margin: 0;
   font-size: var(--fs-1); line-height: 1.25; overflow-wrap: break-word;
 }
+.dialog-head .dialog-title:focus { outline: none; }
 /* The cross is drawn, not typed: a × glyph sits on the font's math axis, below the
    middle of the circle, and differently in every face. Two bars about the centre are
    centred by construction. Small and quiet, so as not to read as a control the form

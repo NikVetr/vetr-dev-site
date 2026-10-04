@@ -982,7 +982,7 @@ test('the logo slot draws the mark as paths and takes its width from the band', 
   });
   const face = plan.faces[0];
   const greens = new Set(LOGO_SHAPES.map((s) => s.fill));
-  const marks = (face.paths ?? []).filter((p) => greens.has(p.fill));
+  const marks = (face.paths ?? []).filter((p) => greens.has(p.fill ?? ''));
   assert.equal(marks.length, LOGO_SHAPES.length, 'the mark is drawn whole, each shape in its own green');
   const folio = face.runs.find((r) => /^\s?1 \/ \d+$/.test(r.text));
   assert.ok(folio, 'the folio still prints beside it');
@@ -1004,7 +1004,7 @@ test('the logo slot draws the mark as paths and takes its width from the band', 
   const mono = await buildSheet(ctx, {
     ...base, inkMode: 'mono', head: { span: 'full', left: ['logo'] },
   });
-  assert.ok(!(mono.plan.faces[0].paths ?? []).some((p) => greens.has(p.fill)));
+  assert.ok(!(mono.plan.faces[0].paths ?? []).some((p) => greens.has(p.fill ?? '')));
 });
 
 test('the head band is never set below the reader script’s own floor', async () => {

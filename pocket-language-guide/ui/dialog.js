@@ -23,6 +23,13 @@ export function dialogHead({ title, close, onClose, theme = false }) {
   const name = document.createElement('h2');
   name.className = 'dialog-title';
   name.textContent = title;
+  // **Opened on its name, not on a control.** A modal dialog focuses its first
+  // focusable element, which in a settings dialog is the light switch -- drawn with a
+  // focus ring as the dialog opened, as if it had been chosen. The title takes the
+  // focus instead: a screen reader says what opened, nothing looks selected, and Tab
+  // goes on to the controls.
+  name.tabIndex = -1;
+  name.autofocus = true;
   const cross = document.createElement('button');
   cross.type = 'button';
   cross.className = 'speaker-close';
