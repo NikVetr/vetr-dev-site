@@ -5725,3 +5725,62 @@ with one skipped, and WebKit 253 of 262 with one skipped -- the seven above, and
 put the same amount of ink", whose Latin face failed to load once under the whole suite's load
 and loaded in both of two runs of that spec alone. The Android and iOS apps are built from the
 pushed commit and recorded below.
+
+## Batch AH, continued: four correction passes, a backup of the counts, and native evidence
+
+**What the research agents saw beside their items, corrected in four passes.** Each pass
+fixed the rows the previous one had reported and left, checked against a source; the
+briefs are the later sections of `content/PROMPTS/row-corrections.md` and
+`content/PROMPTS/usage-and-tap-strings.md`.
+
+- **Two voices said one r as two.** Nepali's espeak voice emits two r phonemes for every
+  र् before a consonant (`गर्नु` `ɡˈʌrrnu`), and Malay's reads a coda or *ter-* r as a tap
+  and then a trill (`perlu` `pˈəɾrlu`). Neither language has the geminate -- Khatiwada's
+  and Clynes and Deterding's JIPA Illustrations (2009, 2011), and Schmidt's Nepali
+  dictionary -- so one entry in each voice's repair list folds it: 203 Nepali cells and
+  127 Malay ones, packs, country names and language names together, with no symbol added.
+- **A romanisation that printed a blank.** Three Nepali rows write the eyelash RA with a
+  zero-width joiner, which the transliterator had turned into `{}`, the engine's own
+  blank-slot marker. ISO 15919 writes the letter `r̆`, which Marathi's column now uses
+  too, and `validate_data.py` fails a romanisation whose `{}` count differs from its
+  concept's slots.
+- **Malay that was Indonesian**, in the corpus (*kelewatan*, *argo*, *antar-jemput*, an
+  English launderette), in six section titles, and in 113 interface strings -- *lembar*,
+  *kolom*, *tinta*, *darurat* and their like -- each against Kamus Dewan through PRPM.
+- **Drivers asked as a man**, in Hindi, Punjabi, Urdu, Hebrew, Arabic and Hausa -- the ride
+  request, "where are you going?", and the taxi screen's requests in Arabic, Hausa and
+  Urdu, which use each pack's own neutral pattern (Arabic's أرجو with a verbal noun, the
+  Hausa bare imperative and impersonal *a*, the Urdu passive) -- and
+  **companions parked in `text_alt`** in Russian, Ukrainian, Polish, Croatian, Arabic and
+  Czech, settled by `speaker-variants.md`'s rule that a companion has no axis: a common-
+  gender noun where the language has one (*коллега*, *колега*), the masculine elsewhere.
+- **Romanisations out of their pack's system** in Bengali and Amharic, and **strings** whose
+  inserted language name could not take its frame's case or article, in Polish, French,
+  Italian, Kannada, Uzbek and Czech (whose headings now name *jazyk* in the nominative); 50 French keys against the file's own punctuation rule;
+  and the header's "I speak", which assumed a man in Hindi, Urdu and Marathi and said "I"
+  in Thai.
+
+**A copy can be saved of the counts alone.** "Save a copy" declines a device with nothing to
+back up, and its test for nothing still left out the Most used counts, which the backup has
+carried since they were added: a phone whose only history was what it had pressed was told
+there was nothing to save. The iOS check found it, and a browser test now saves a copy that
+holds nothing else.
+
+## Native evidence for Batches AG and AH
+
+**Android**, on the emulator, from the pushed aaf8f06e: `check:android` 9 of 9; the debug
+package is 44.0MB and carries the commit's own files. **iOS**, on the Mac from a clean
+checkout of the same commit with the generated project deleted: the first `check:ios`
+stopped at the editor's close control, a class that went when every dialog took the shared
+header -- the script's fault, fixed -- and `persist-reinstall` failed again, as it did after
+the last clean build. Measured this time on the app container's plist: the phrase written
+through Preferences was not on disk just after the relaunch and was eight seconds later,
+because `UserDefaults` hands a write to a daemon that saves it on its own schedule, and
+installing over the app drops what it has not saved. No update comes seconds after a write,
+so the check waits, up to 30 seconds, for the phrase to be on disk, which is the state an
+update finds, and a value that never gets there still fails it. With both changes
+`check:ios` passes 16 of 16 against that build.
+
+On the committed code (1a1ed7fe): the gate 11 of 11, unit 711 of 711, and Chromium 262 of
+263 with one skipped; the four specs this batch added or changed for the counts and speaking
+on tap pass in WebKit as well. The packs were re-rendered whole: 213 pairs changed.
