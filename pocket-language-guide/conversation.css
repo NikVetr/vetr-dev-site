@@ -833,9 +833,11 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
   border-color: rgb(255 255 255 / 0.45);
   color: #fff;
 }
+/* Pressed, it is the screen's colour on white: `--ink` is the near-white text colour
+   in the dark scheme, and as the arrow's colour it all but vanished into the fill. */
 .board-stage[class*="board-role-"] .board-turn[aria-pressed="true"] {
   background: #fff;
-  color: var(--ink);
+  color: var(--role);
 }
 /* An incoming answer is on paper whatever its role colour is, so the white-on-white
    pair above has to be undone for it. */
