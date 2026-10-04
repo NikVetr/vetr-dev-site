@@ -1391,7 +1391,7 @@ async function main() {
         fit: fitMessage,
         // The screen is the signal, so it must not sleep while one is running
         // -- and the lock goes back to following the message view afterwards.
-        onStop: () => keepAwake(state.view !== 'grid'),
+        onStop: holdAwake,
       });
       keepAwake(true);
       return;
@@ -1404,6 +1404,17 @@ async function main() {
     });
   };
 
+  /**
+   * The screen stays on while a sentence is being read by someone else -- a stranger
+   * reading an unfamiliar script off a phone held at arm's length will often take
+   * longer than the display timeout, and the screen going dark means starting the
+   * exchange over -- and while taps speak, between one direction to a driver and the
+   * next, so the phone is not locked again each time it is wanted.
+   */
+  function holdAwake() {
+    keepAwake(state.view !== 'grid' || (display.tapSpeaks && canSpeak));
+  }
+
   function paint() {
     const stage = $('board-stage');
     const shown = withOwn(nodeHere());
@@ -1415,11 +1426,7 @@ async function main() {
       : { ...shown, buttons: [{ id: 'add-button', kind: /** @type {const} */ ('submenu'), add: /** @type {const} */ (true) }] };
     usedEmpty = boardId === MOST_USED && !shown.buttons.length;
     sayStatus();
-    // Held for exactly as long as a sentence is being read by someone else. A
-    // stranger reading an unfamiliar script off a phone held at arm's length will
-    // often take longer than the display timeout, and the screen going dark means
-    // starting the exchange over.
-    keepAwake(state.view !== 'grid');
+    holdAwake();
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
@@ -1665,6 +1672,7 @@ async function main() {
     display = { ...display, tapSpeaks: !display.tapSpeaks };
     writeDisplay(display);
     paintTap();
+    holdAwake();
   });
 
   const turnButton = $('board-turn-bar');
