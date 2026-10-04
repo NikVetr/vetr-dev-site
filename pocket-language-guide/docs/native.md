@@ -227,8 +227,8 @@ account in Accounts settings". What is left is the owner's:
 1. **Sign in to Xcode** (Settings > Accounts > + > Apple ID) on the Mac. A free Apple
    ID gives a Personal Team, enough to put the app on your own iPhone for seven days
    at a time; TestFlight needs the paid **Apple Developer Program** membership.
-2. **Settle the identity** before any upload: `dev.vetr.pocketlanguageguide` and the
-   name "Phraselet" are provisional, and a bundle identifier is effectively permanent
+2. **Settle the identity** before any upload: `dev.vetr.pocketlanguageguide` is
+   provisional (the name is Wanderwart; "Phraselet" was taken by a browser extension), and a bundle identifier is effectively permanent
    once an App Store Connect record exists. Then create that record (App Store
    Connect > Apps > +).
 3. **Prepare the iPhone**: connect it by cable once, trust the Mac, and turn on
@@ -262,7 +262,7 @@ start without all four of `ANDROID_KEYSTORE`, `ANDROID_KEYSTORE_PASSWORD`,
 1. **A Play Console developer account**, and the same identity decision as iOS: the
    application ID is effectively permanent once a listing exists.
 2. **An upload key**, kept outside the repository and backed up:
-   `keytool -genkeypair -keystore ~/keys/phraselet-upload.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000`.
+   `keytool -genkeypair -keystore ~/keys/wanderwart-upload.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000`.
    Play App Signing holds the key the store actually signs with; this one only
    proves an upload is the owner's.
 3. **The internal testing track** first: upload the bundle there and install it on a

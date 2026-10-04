@@ -123,7 +123,7 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     out.disabled = !placedOn(state.data, at, pair).length;
     out.addEventListener('click', () => deliver(
       new Blob([JSON.stringify(buildButtons(pair, screenContents(state.data, at, pair)), null, 2)], { type: 'application/json' }),
-      `phraselet-buttons-${pair}.json`,
+      `wanderwart-buttons-${pair}.json`,
     ));
     const file = /** @type {HTMLInputElement} */ (el('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden' }));
     const load = el('button', { type: 'button', class: 'ghost', text: t('editor.importButtons') });

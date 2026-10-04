@@ -1,9 +1,19 @@
-# Pocket Language Guide
+# Wanderwart
+
+The app is Wanderwart -- a *Wanderwort* is a loanword that travels from language to
+language, a wart is the thing everyone notices, as a tourist is, and a *Wanderwart*
+is the person who leads a hiking club. The repository folder and the package keep the
+working name, `pocket-language-guide`. The mark is a phrase card and a landscape card
+overlapping, drawn once as flat paths in `data/brand/mark.svg` (green, with a sun) and
+`data/brand/mark-dark.svg` (blue, with a crescent moon); the favicon carries both and
+follows the system's scheme, the header shows whichever the page's scheme asks for,
+`scripts/build_app_icons.mjs` draws every launcher icon from the green one, and
+`scripts/build_logo.mjs` writes it as the path data the cards print.
 
 ## Content, practice and page controls
 
-The app includes 23 ready target languages, including Persian, with vocabulary,
-regional emergency details, pronunciation columns and localized interface catalogues.
+The app includes 54 ready target languages with vocabulary, regional emergency
+details, pronunciation columns and localized interface catalogues.
 CSV registries connect the concept bank to each language pack; build scripts validate
 the data, generate pronunciation columns and subset fonts for the scripts in use.
 Optional profanity content is a separate section that starts disabled.

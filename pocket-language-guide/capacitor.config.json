@@ -1,6 +1,6 @@
 {
   "appId": "dev.vetr.pocketlanguageguide",
-  "appName": "Phraselet",
+  "appName": "Wanderwart",
   "webDir": "dist/mobile",
   "plugins": {
     "SystemBars": {

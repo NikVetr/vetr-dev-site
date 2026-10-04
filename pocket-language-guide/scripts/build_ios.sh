@@ -47,7 +47,7 @@ npm run mobile -- --quiet
 [ -d ios ] || npx cap add ios --packagemanager SPM
 # The beacon reaches the phone's lamp through the camera, as it does in Safari, and a
 # WebView may ask for the camera only if the app says why. Nothing is recorded or shown.
-plutil -replace NSCameraUsageDescription -string "Phraselet uses the camera's flash only to flash an SOS or a Morse message. Nothing is recorded or shown." ios/App/App/Info.plist
+plutil -replace NSCameraUsageDescription -string "Wanderwart uses the camera's flash only to flash an SOS or a Morse message. Nothing is recorded or shown." ios/App/App/Info.plist
 # Between the launch screen and the page's first paint the WebView is transparent, and
 # the window behind it is black by default: a black flash on every launch, in light
 # mode too. The window takes the system background, so light and dark each start in
@@ -104,7 +104,7 @@ if [ "$MODE" = "--device" ]; then
 fi
 
 if [ "$MODE" = "--archive" ]; then
-  ARCHIVE="$DERIVED/Phraselet-$VERSION-$BUILD.xcarchive"
+  ARCHIVE="$DERIVED/Wanderwart-$VERSION-$BUILD.xcarchive"
   xcodebuild "${PROJECT[@]}" -configuration Release -destination "generic/platform=iOS" \
     -archivePath "$ARCHIVE" "${NUMBERS[@]}" "${SIGNING[@]}" -quiet archive
   # Uploaded straight to App Store Connect when an API key is given; otherwise the

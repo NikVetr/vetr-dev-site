@@ -153,7 +153,9 @@ function checkButtons(phrases, placements, where, problems) {
 }
 
 /** What a file of one screen's buttons says it is, so a backup is not mistaken for one. */
-export const BUTTONS_KIND = 'phraselet-buttons';
+export const BUTTONS_KIND = 'wanderwart-buttons';
+/** What a file of buttons was called before the app was renamed; still read. */
+const BUTTONS_KIND_BEFORE = 'phraselet-buttons';
 
 /**
  * A screen's worth of the reader's own buttons, as a file: to hand to someone else,
@@ -183,7 +185,7 @@ export function readButtons(text, pair) {
   } catch (err) {
     return { ok: false, problems: [`not readable as JSON: ${/** @type {Error} */ (err).message}`] };
   }
-  if (!plain(raw) || raw.kind !== BUTTONS_KIND) return { ok: false, problems: ['not a file of buttons'] };
+  if (!plain(raw) || (raw.kind !== BUTTONS_KIND && raw.kind !== BUTTONS_KIND_BEFORE)) return { ok: false, problems: ['not a file of buttons'] };
   if (raw.version !== PACKAGE_VERSION) {
     return { ok: false, problems: [`version ${raw.version}, and this build reads ${PACKAGE_VERSION}`] };
   }

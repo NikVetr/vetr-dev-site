@@ -10,6 +10,7 @@ import { breakColumns } from '../core/solve/columnbreak.js';
 import { distribute } from '../core/solve/justify.js';
 import { contentBox, COMFORT, LOOSE_FRACTION } from '../core/solve/index.js';
 import { referenceSpec } from '../scripts/spec.mjs';
+import { LOGO_SHAPES } from '../core/logo-shapes.js';
 
 const ctx = await createSheetContext({
   loadText: (rel) => readFile(rel, 'utf8'),
@@ -980,8 +981,9 @@ test('the logo slot draws the mark as paths and takes its width from the band', 
     ...base, head: { span: 'full', left: ['logo', 'page'] },
   });
   const face = plan.faces[0];
-  const marks = (face.paths ?? []).filter((p) => p.fill === '#158560');
-  assert.equal(marks.length, 1, 'the front bubble is drawn once, in its own green');
+  const greens = new Set(LOGO_SHAPES.map((s) => s.fill));
+  const marks = (face.paths ?? []).filter((p) => greens.has(p.fill));
+  assert.equal(marks.length, LOGO_SHAPES.length, 'the mark is drawn whole, each shape in its own green');
   const folio = face.runs.find((r) => /^\s?1 \/ \d+$/.test(r.text));
   assert.ok(folio, 'the folio still prints beside it');
   // To the right of the mark with half an em of air, and the mark centred on the
@@ -1002,7 +1004,7 @@ test('the logo slot draws the mark as paths and takes its width from the band', 
   const mono = await buildSheet(ctx, {
     ...base, inkMode: 'mono', head: { span: 'full', left: ['logo'] },
   });
-  assert.ok(!(mono.plan.faces[0].paths ?? []).some((p) => p.fill === '#158560'));
+  assert.ok(!(mono.plan.faces[0].paths ?? []).some((p) => greens.has(p.fill)));
 });
 
 test('the head band is never set below the reader script’s own floor', async () => {

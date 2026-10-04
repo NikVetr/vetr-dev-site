@@ -155,9 +155,10 @@ const files = [...new Set([
   ...(await boardCorpus()),
   ...(await Promise.all(CODE_DIRS.map(walk))).flat(),
   ...(await Promise.all(DATA_DIRS.map(async (dir) => (await readdir(join(ROOT, dir)))
-    // `.png` for `data/brand`, the launcher icons the manifest names: an icon the
-    // worker never cached is a broken install prompt offline.
-    .filter((f) => f.endsWith('.csv') || f.endsWith('.json') || f.endsWith('.png'))
+    // `.png` and `.svg` for `data/brand`: the launcher icons the manifest names, and
+    // the header's two marks -- an icon the worker never cached is a broken install
+    // prompt offline, and a mark it never cached is a hole in every page's header.
+    .filter((f) => f.endsWith('.csv') || f.endsWith('.json') || f.endsWith('.png') || f.endsWith('.svg'))
     .map((f) => `${dir}/${f}`)))).flat(),
 ])].sort();
 

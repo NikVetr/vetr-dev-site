@@ -636,7 +636,7 @@ test('a screen of your own holds buttons, and what is on it travels as a file', 
   await box.getByRole('button', { name: 'Save these buttons' }).click();
   const file = await saving;
   const written = JSON.parse(await (await import('node:fs/promises')).readFile(/** @type {string} */ (await file.path()), 'utf8'));
-  expect(written.kind).toBe('phraselet-buttons');
+  expect(written.kind).toBe('wanderwart-buttons');
   expect(Object.keys(written.phrases)).toHaveLength(2);
 
   // Loaded back onto the same screen, it adds a second copy under new ids -- and a
