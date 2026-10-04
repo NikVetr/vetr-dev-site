@@ -7,7 +7,7 @@
   "deviations": [
     {
       "rule": "ə is written ă, a dedicated Romanian letter.",
-      "why": "Italian has no schwa letter and folds /ə/ to a or e by context; Romanian spells it exactly. This is the concrete reason this table is worth having rather than a copy of Italian's -- see tmp/romanian.md section 5 for real corpus rows this recovers."
+      "why": "Italian has no schwa letter and folds /ə/ to a or e by context; Romanian spells it exactly. This is the concrete reason this table is worth having rather than a copy of Italian's -- see tmp/notes/romanian.md section 5 for real corpus rows this recovers."
     },
     {
       "rule": "ɨ is written â, a dedicated Romanian letter.",

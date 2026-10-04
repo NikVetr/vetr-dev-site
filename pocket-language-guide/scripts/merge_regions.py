@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fold verified emergency numbers into the region registry.
 
-    python3 scripts/merge_regions.py tmp/regions/*.json
+    python3 scripts/merge_regions.py tmp/data/regions/*.json
 
 `data/registry/regions.csv` prints a region's numbers only at `confidence >= 2`, so
 raising a row is a claim that an authoritative source confirms it. This script keeps

@@ -96,7 +96,7 @@ not load. Reuse `settings.*`, `display.voice` and `gallery.*`'s words for *voice
 ## Report
 
 Per language: any key left out and why, any string reworded, and every choice a
-native reviewer might question. Write it to `tmp/agent-notes/strings-af-<group>.md`
+native reviewer might question. Write it to `tmp/notes/agents/strings-af-<group>.md`
 after each language, not at the end.
 
 ## A second pass: thirteen more keys, one changed

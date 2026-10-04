@@ -78,4 +78,4 @@ shared by every language, and do not commit.
 
 Per language: the four sentences, where each came from (the combined row, or a
 source for anything the combined row did not settle), and the title. Write it to
-`tmp/agent-notes/family-intros-<group>.md` **after each language**, not at the end.
+`tmp/notes/agents/family-intros-<group>.md` **after each language**, not at the end.

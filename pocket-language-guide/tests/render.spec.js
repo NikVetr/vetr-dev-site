@@ -26,7 +26,7 @@ test.describe('renderers', () => {
     const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
     const icons = JSON.parse(await readFile('data/icons.json', 'utf8'));
     const stacks = stacksFor(ctx.corpus, spec.target, spec.source);
-    await mkdir('tmp/spec', { recursive: true });
+    await mkdir('tmp/out/spec', { recursive: true });
 
     // Same plan through both renderers. A glyph the PDF font subset dropped, or a
     // font the page failed to load, shows up as a difference in ink.
@@ -46,24 +46,24 @@ test.describe('renderers', () => {
       () => [...document.fonts].filter((f) => f.status !== 'loaded').map((f) => f.family),
     );
     expect(missing, 'every declared face should load').toEqual([]);
-    await page.locator('svg').screenshot({ path: 'tmp/spec/svg-face-1.png' });
+    await page.locator('svg').screenshot({ path: 'tmp/out/spec/svg-face-1.png' });
 
     const pdf = await planToPdf(plan, {
       loadFont: (file) => readFile(`data/fonts/${file}`), icons, date: new Date(0),
     });
-    await writeFile('tmp/spec/sheet.pdf', pdf);
+    await writeFile('tmp/out/spec/sheet.pdf', pdf);
     execFileSync('pdftoppm', ['-r', '96', '-png', '-f', '1', '-l', '1',
-      'tmp/spec/sheet.pdf', 'tmp/spec/pdf-face']);
+      'tmp/out/spec/sheet.pdf', 'tmp/out/spec/pdf-face']);
 
-    const svgInk = meanInk('tmp/spec/svg-face-1.png');
-    const pdfInk = meanInk('tmp/spec/pdf-face-1.png');
+    const svgInk = meanInk('tmp/out/spec/svg-face-1.png');
+    const pdfInk = meanInk('tmp/out/spec/pdf-face-1.png');
     expect(Math.abs(svgInk - pdfInk), `svg ${svgInk} vs pdf ${pdfInk}`).toBeLessThan(0.02);
     // A blank or near-blank page would pass an equality check, so assert real ink.
     expect(svgInk).toBeLessThan(0.95);
   });
 
   test('the exported PDF is vector, selectable and exactly the requested size', async () => {
-    const info = execFileSync('pdfinfo', ['tmp/spec/sheet.pdf']).toString();
+    const info = execFileSync('pdfinfo', ['tmp/out/spec/sheet.pdf']).toString();
     expect(info).toContain('Page size:       504 x 360 pts');
     // One PDF page per face, however many the content needed, and always an even
     // number because a sheet is printed on both sides.
@@ -71,11 +71,11 @@ test.describe('renderers', () => {
     expect(pages).toBeGreaterThanOrEqual(4);
     expect(pages % 2).toBe(0);
 
-    const fonts = execFileSync('pdffonts', ['tmp/spec/sheet.pdf']).toString();
+    const fonts = execFileSync('pdffonts', ['tmp/out/spec/sheet.pdf']).toString();
     expect(fonts).toContain('CID TrueType');
     expect(fonts.split('\n').filter((l) => l.includes('yes')).length).toBeGreaterThan(2);
 
-    const text = execFileSync('pdftotext', ['-f', '1', '-l', '1', 'tmp/spec/sheet.pdf', '-']).toString();
+    const text = execFileSync('pdftotext', ['-f', '1', '-l', '1', 'tmp/out/spec/sheet.pdf', '-']).toString();
     expect(text).toContain('你好');
     expect(text).toContain('nǐ hǎo');
     expect(text).toContain('Social + basics');

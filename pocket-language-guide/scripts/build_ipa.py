@@ -172,7 +172,7 @@ Greek letters, and `LATIN_RANGES` in `scripts/subset_fonts.py` has no Greek bloc
 so U+03B2 β, U+03B8 θ and U+03C7 χ are in none of them -- nor is U+1D00-1D7F, all
 128 codepoints of it. β and χ are avoidable and are avoided (see `FOLD`); θ is not,
 because it is the only symbol for a phoneme that English, Swahili and Arabic all
-contrast. Every source face in `tmp/fonts-src` has all three, and
+contrast. Every source face in `tmp/data/fonts-src` has all three, and
 `subset_fonts.py` unions `corpus_chars`, so one run of it picks them up from this
 column -- until then `npm run validate` warns on the θ cells and they print as an
 empty box in the PDF.
@@ -376,7 +376,7 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # library and data tree that does carry it; point `phonemizer` at it with
           # `PHONEMIZER_ESPEAK_LIBRARY`/`PHONEMIZER_ESPEAK_DATA_PATH` (both read by
           # `EspeakWrapper` itself, so nothing in this file has to know) before
-          # running this script for `uk`. See tmp/ukrainian.md.
+          # running this script for `uk`. See tmp/notes/ukrainian.md.
           #
           # **Point those two variables at the loader for `uk` alone, and never for a
           # `--only` list that includes another language.** The two libraries do not
@@ -1708,7 +1708,7 @@ REPAIR = {
     # hole after it has already reached a page. Two symbols had no rule anywhere --
     # `ʰ` and `ʲ`, both missing in `pl` and `ta` -- and they are the two this list
     # has to answer. `ʲ` is dropped; `ʰ` is *kept*, because a bare `ʰ` never reaches
-    # a table (see `--units` in tmp/telugu.md) and the aspirated units it forms all
+    # a table (see `--units` in tmp/notes/telugu.md) and the aspirated units it forms all
     # have rules of their own.
     #
     #   `ʲ`  espeak inserts a y-onglide before a word-initial front vowel -- ఎక్కడ
@@ -1870,7 +1870,7 @@ REPAIR = {
     "pl": [("ɲʲ", "ɲ"), ("ç", "x"), ("ː", "")],
     # **Three folds, and two of them are chosen by which symbols the other
     # twenty-six reader tables already have a rule for rather than by taste.** The
-    # census that decided them is in tmp/tamil.md: every symbol espeak's Tamil voice
+    # census that decided them is in tmp/notes/tamil.md: every symbol espeak's Tamil voice
     # emits was looked up in all twenty-six shipped tables *before* the column was
     # generated, because `--gaps` only reports a hole after it has already reached
     # the page.
@@ -1919,7 +1919,7 @@ REPAIR = {
     # **Eight lexical repairs after the three folds, and they are dictionary entries
     # rather than a broken rule.** Every one of the four voicing environments was
     # probed and espeak's rule is right in all of them (see `VOICES["ta"]`), so what
-    # is left is individual words its Tamil lexicon has wrong. `tmp/ta/audit.py`
+    # is left is individual words its Tamil lexicon has wrong. `tmp/lang/ta/audit.py`
     # finds them mechanically rather than by sampling: it walks `text` and `ipa` word
     # by word and flags a word whose Tamil letter is க ச ட த ப and whose ipa opens
     # with a voiced stop, which Tamil's own rule forbids word-initially, and a word
@@ -1964,7 +1964,7 @@ REPAIR = {
     # reader tables are `policy.tone: "drop"` and strip U+02E5..02E9 in `respell()`
     # before anything is looked up, and the three that keep tone all have rules for
     # the bare bars already. So the tone costs **no symbol and no rule anywhere**,
-    # which is the opposite of Klingon's `/ɬ/`. See tmp/punjabi.md for the two
+    # which is the opposite of Klingon's `/ɬ/`. See tmp/notes/punjabi.md for the two
     # notations refused (combining acute/grave, which appears in no `ipa` column in
     # the corpus, and two-bar contours, of which `˩˧` has a rule in none of the three
     # tone-keeping tables).
@@ -2042,7 +2042,7 @@ REPAIR = {
     # સિકો against સિક્કો, પતા against પત્તા. A spurious geminate is a different
     # word, not a shade, and it tells all thirty-six readers to double a consonant.
     # Reported for `hi` and `mr` rather than edited there, which is the precedent
-    # `tmp/punjabi.md` set for Czech's `r̝` in four Indic tables.
+    # `tmp/notes/punjabi.md` set for Czech's `r̝` in four Indic tables.
     #
     # **The real geminates are written two ways and the doubled one wins.** સિક્કો
     # comes back `sɪkːoː` with a length mark and છેલ્લો `cʰeːlloː` with a doubled
@@ -2139,7 +2139,7 @@ REPAIR = {
     # before the vowel.
     "ne": [("ʌ̃", "ã"), ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj"), ("rr", "r")],
     # Malayalam. Every entry was counted over the finished column first and audited
-    # against all forty-one reader tables' rule keys (`tmp/ml/audit.py`), and **not
+    # against all forty-one reader tables' rule keys (`tmp/lang/ml/audit.py`), and **not
     # one adds a symbol the corpus did not already carry** -- which is Gujarati's and
     # Kannada's result and this brief's hardest constraint. Two of the six repair a
     # defect rather than settling a disagreement.
@@ -2282,7 +2282,7 @@ REPAIR = {
 # `NON_LATIN` and **not** in `ROMANISED`.
 #
 # Lao orthography is shallow and was reformed to be read directly, so the parse is a
-# rhyme table over four orthogonal slots. See tmp/lao.md section 6 for the sources
+# rhyme table over four orthogonal slots. See tmp/notes/lao.md section 6 for the sources
 # and for the one contested cell of the tone rule, which `GRADE["lo"]` names.
 
 # ---------------------------------------------------------------- consonants
@@ -2363,7 +2363,7 @@ LAO_FINALS = {
     # Sanskrit-style doubled forms `kkha`, `tcha`, `tsa`, `tta`, `ttha`, `ppa`,
     # `ppha`, `pfa`; that column is for a consonant *within* a word carrying an
     # inherent vowel, not for a coda, so the plain coda letter is used here and the
-    # departure is recorded in tmp/lao.md.
+    # departure is recorded in tmp/notes/lao.md.
     "ຂ": ("k", "k", False), "ຄ": ("k", "k", False),
     "ຈ": ("t", "t", False), "ສ": ("t", "s", False), "ຊ": ("t", "s", False),
     "ຕ": ("t", "t", False), "ຖ": ("t", "t", False), "ທ": ("t", "t", False),
@@ -2589,7 +2589,7 @@ def lao_parse_word(w):
     Returns the first parse that consumes the whole word, which is why `_lao_parses`
     yields in preference order. Raises rather than returning a partial parse: a
     string this cannot read is a string that is wrong, and that is the round-trip
-    check `tmp/lo/write.py` runs over every authored cell.
+    check `tmp/lang/lo/write.py` runs over every authored cell.
     """
     best_reach = [0]
 
@@ -4814,7 +4814,7 @@ def yo_to_ipa(word):
 # Georgian Mkhedruli, one letter to one phoneme. **No espeak route, and the voice
 # exists** -- which is the unusual part: `ka` *is* in this system's espeak-ng-data
 # 1.50, and it was measured against this table over 3,649 real Georgian Wikipedia
-# tokens before being refused (`tmp/ka/probe_espeak.py`). Two findings:
+# tokens before being refused (`tmp/lang/ka/probe_espeak.py`). Two findings:
 #
 # - It agrees with this table on **98.96%** of them (3,611 of 3,649), so it adds
 #   almost nothing a table does not. What it adds in the other 38 is an
@@ -4893,7 +4893,7 @@ def ka_to_ipa(word):
 # Georgian's situation rather than Filipino's. `EspeakBackend.supported_languages()
 # ['uz'] == 'Uzbek'` against the plain system library, no `PHONEMIZER_ESPEAK_*` set,
 # so 1.50's own tree has it. Measured against this table over the pack's own 1,046
-# word types and 2,067 tokens (`tmp/uz/probe_espeak.py`), it agrees on **157 of the
+# word types and 2,067 tokens (`tmp/lang/uz/probe_espeak.py`), it agrees on **157 of the
 # 1,046 (15.0%)**, and the disagreements are four defects rather than a long tail:
 #
 # - **The voice does not read `ʻ` U+02BB at all.** `oʻzbek` and `ozbek` both come
@@ -5202,7 +5202,7 @@ def thai_syllables():
 # **`e` is [ə] and the diacritic is authoritative.** `é` is /e/ and `è` is /ɛ/, as
 # every Javanese dictionary marks them (Poerwadarminta, *Baoesastra Djawa*, 1939;
 # Robson & Wibisono, *Javanese-English Dictionary*, 2002) and as the pack's `text`
-# column writes them -- the decision recorded in tmp/jv/decisions.md section 2. It
+# column writes them -- the decision recorded in tmp/lang/jv/decisions.md section 2. It
 # has to be marked, because the three-way /ə e ɛ/ contrast is not recoverable from
 # a bare `e`: `sèwu` [sɛwu] and `télu` [telu] are both open syllables. Rule 1
 # still applies on top, so a closed syllable is [ɛ] whichever of the two was
@@ -5343,7 +5343,7 @@ def jv_to_ipa(word):
 
 # The one pack whose `ipa` column is written by hand rather than derived, so this
 # script neither fills it nor owns it. Khmer's column is the broad phonemic analysis
-# `tmp/km/SPEC.md` asked its author for, tagged `ipa=km-analysis`; the orthographic
+# `tmp/lang/km/SPEC.md` asked its author for, tagged `ipa=km-analysis`; the orthographic
 # G2P that would otherwise be its route disagrees with that analysis on 194 of the
 # first 277 rows, because Khmer writes no word boundaries and does not write its
 # inherent vowel, so the length of that vowel and a long tail of irregular everyday
@@ -5351,7 +5351,7 @@ def jv_to_ipa(word):
 # got. A route built on the rules alone would replace a hand-written column with a
 # worse one, so there is none -- and `route()` below raises on an unknown code
 # *before* `build()` looks at whether any row is left to transcribe, which is why
-# this is a skip in `main` rather than a branch in `route`. See tmp/khmer.md §9.
+# this is a skip in `main` rather than a branch in `route`. See tmp/notes/khmer.md §9.
 AUTHORED = {"km"}
 # Languages with nothing to pronounce. Morse is dots and dashes: its `text` is not
 # speech, no route exists for it, and every row leaves `ipa` empty by design.
@@ -6017,7 +6017,7 @@ GRADE = {
            "keeps ர /ɾ/ apart from ற /r/ and ழ /ɻ/ apart from ள /ɭ/, which are the two "
            "distinctions a romanisation route off `romanization_iso15919` would have "
            "preserved and the voicing is the one it could not. Four weaknesses, in order. "
-           "**Eight lexical defects, found mechanically and repaired**: `tmp/ta/audit.py` "
+           "**Eight lexical defects, found mechanically and repaired**: `tmp/lang/ta/audit.py` "
            "walks text against ipa word by word, and over 2,026 word pairs found 17 "
            "word-initial stops wrongly voiced and 4 dropped initial vowels -- of which four "
            "are English loans espeak is right about (பஸ், பில், பேங்க், போர்டிங்) and eight "
@@ -6300,7 +6300,7 @@ GRADE = {
            "phoneme, no allophony worth writing, no vowel reduction, no schwa "
            "deletion, no orthographic gemination -- so a table is not an "
            "approximation here, it is the mapping. The voice was measured against it "
-           "over 3,649 real Wikipedia tokens (`tmp/ka/probe_espeak.py`) and refused "
+           "over 3,649 real Wikipedia tokens (`tmp/lang/ka/probe_espeak.py`) and refused "
            "on two counts: it agrees on 98.96% of them, and in the other 38 it "
            "inserts an **epenthetic `ə` into consonant clusters** that Georgian does "
            "not have (`ხანგრძლივი` -> `xanɡrədzlivi`), and it leaves **every ejective "
@@ -6941,7 +6941,7 @@ def main():
     if undrawable:
         print("\nnot drawable by the shipped Latin faces: "
               + ", ".join(f"U+{ord(c):04X} {c}" for c in undrawable)
-              + "\n  every source face in tmp/fonts-src has them and subset_fonts.py"
+              + "\n  every source face in tmp/data/fonts-src has them and subset_fonts.py"
               " unions corpus_chars,\n  so one run of it closes the gap;"
               " until then validate warns on those cells.")
     if args.check:

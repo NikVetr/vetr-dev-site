@@ -154,7 +154,7 @@ console error, and a tap on Converse opens the board picker at
 `https://localhost/conversation.html?target=am&source=en`. Screenshots taken through
 the protocol match the browser's. Playwright cannot attach to an Android WebView
 (`Browser.setDownloadBehavior` is refused), so the probe speaks the protocol
-directly; `tmp/android-cdp.mjs` is that probe.
+directly; `tmp/scripts/android-cdp.mjs` is that probe.
 
 ## Reproducible build, and what the emulator has shown since
 

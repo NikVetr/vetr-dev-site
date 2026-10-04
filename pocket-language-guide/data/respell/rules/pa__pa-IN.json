@@ -3,7 +3,7 @@
  "accent": "pa-IN",
  "status": "ready",
  "version": "1",
- "derives_from": "Punjabi has no published pronunciation key of the kind Bhargava's dictionary gives Hindi, so this table adapts the mechanism rather than a book: it is generated from `hi__hi-IN.json` -- which follows Bhargava's page layout and the *Rapidex English Speaking Course*'s letter-for-sound choices -- with every Devanagari letter mapped to its Gurmukhi counterpart and five overrides that are facts about Gurmukhi rather than preferences. See content/RESPELL-SYSTEMS.md and tmp/punjabi.md. The layout is the one an Indian reader has met: hyphens dividing syllables, a prime after the stressed one, ordinary Gurmukhi letters, a one-line legend.",
+ "derives_from": "Punjabi has no published pronunciation key of the kind Bhargava's dictionary gives Hindi, so this table adapts the mechanism rather than a book: it is generated from `hi__hi-IN.json` -- which follows Bhargava's page layout and the *Rapidex English Speaking Course*'s letter-for-sound choices -- with every Devanagari letter mapped to its Gurmukhi counterpart and five overrides that are facts about Gurmukhi rather than preferences. See content/RESPELL-SYSTEMS.md and tmp/notes/punjabi.md. The layout is the one an Indian reader has met: hyphens dividing syllables, a prime after the stressed one, ordinary Gurmukhi letters, a one-line legend.",
  "deviations": [
   {
    "rule": "Gurmukhi writes the virama only before a subjoined ਹ ਰ ਵ",

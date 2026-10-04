@@ -51,7 +51,7 @@ says why.
 ## What to write
 
 For each board, as you finish it -- not at the end -- write
-`tmp/audit/<board>.json`:
+`tmp/archive/audit/<board>.json`:
 
 ```json
 {
@@ -83,7 +83,7 @@ For each board, as you finish it -- not at the end -- write
 moves a button to another set (or `"to": null` for none); `remove` is for answers or
 buttons that repeat another; `newConcepts` is only what no existing concept says. Keep
 ids short and in the board's style. Then add a few lines to
-`tmp/agent-notes/answers-audit-<group>.md`: what you changed on that board and why, in
+`tmp/notes/agents/answers-audit-<group>.md`: what you changed on that board and why, in
 plain words, and anything you were unsure of.
 
 ## What not to do

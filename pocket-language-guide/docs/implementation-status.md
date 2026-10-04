@@ -1,7 +1,7 @@
 # Conversation boards and native mobile: execution log
 
 This file is the execution log for the plan in
-`tmp/extension-mobile-convoboard/IMPLEMENTATION_PLAN.md`. It records what was done,
+`tmp/archive/extension-mobile-convoboard/IMPLEMENTATION_PLAN.md`. It records what was done,
 what was measured, and what is not yet verified. `summary.md` stays a description of
 the architecture as it actually is; this file is the running account of getting
 there, and the two should not duplicate each other.
@@ -4577,7 +4577,7 @@ app's cache directory and hands the URI to the share sheet; `download` in
 a device without any caller changing. A dismissed sheet is `true`: the reader
 declined, and a browser download must not follow.
 
-**Emulator evidence** (Android 15 x86_64 under KVM, `tmp/android-native.mjs`;
+**Emulator evidence** (Android 15 x86_64 under KVM, `tmp/scripts/android-native.mjs`;
 this is an emulator, not a phone):
 
 | check | result |

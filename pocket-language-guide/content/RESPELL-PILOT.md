@@ -3,8 +3,8 @@
 A measured feasibility study, not a feature. Nothing under `core/`, `ui/`, `data/`
 or `tests/` was touched. The prototype is `scripts/respell_pilot.py`,
 `scripts/respell_pilot_ipa.py` and `scripts/respell_pilot_rules.en-US.yaml`; all
-output lands in `tmp/respell-pilot/` (gitignored), with the full transcript in
-`tmp/respell-pilot/RESULTS.txt`.
+output lands in `tmp/data/respell-pilot/` (gitignored), with the full transcript in
+`tmp/data/respell-pilot/RESULTS.txt`.
 
 `content/RESPELL-SYSTEMS.md` answers the neighbouring question — which *source*
 languages have a system to borrow. This file answers whether the machine half
@@ -126,7 +126,7 @@ supports exactly the predicates the corpus turned out to need: `word_initial`,
 `after_nucleus`, and `if_inventory`/`unless_inventory`.
 
 **Every rule was read off the corpus, not off a published key.** The evidence tables
-in `tmp/respell-pilot/*-evidence.tsv` list, for each IPA syllable / onset / rime,
+in `tmp/data/respell-pilot/*-evidence.tsv` list, for each IPA syllable / onset / rime,
 what the humans actually wrote and how often. Three examples of rules that no
 published key would have given:
 
@@ -229,7 +229,7 @@ removes it.
 
 Each mismatch is attributed to one cause by applying normalisations cheapest-first
 and recording which one makes the two strings equal. Full lists in
-`tmp/respell-pilot/{es,zh-Hans}-taxonomy.tsv`.
+`tmp/data/respell-pilot/{es,zh-Hans}-taxonomy.tsv`.
 
 ### Spanish, 758 rows
 

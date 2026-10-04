@@ -70,11 +70,11 @@ Provenance records the correction and its source, as the pack's rows do.
   romanised `Aystegh e.`, which spells "here"; it is `Ayntegh e.`. Four more of the older
   `board-answers.*` romanisations are wrong letter for letter, the eighteen older answers
   that differ use an ASCII `'` where the pack writes `’` (U+2019), and three rows outside
-  that section disagree with the pack's own romaniser, `tmp/hy/hy.py`. Run the romaniser
+  that section disagree with the pack's own romaniser, `tmp/lang/hy/hy.py`. Run the romaniser
   over the pack, read every row whose cell it would change, and correct those that are
   wrong -- it is a lead, not an authority, where a row's own spelling is deliberate.
 - **Georgian (`ka`) romanisations.** Eight disagree with the pack's own routine,
-  `tmp/ka/ka.py`: `aq` for აქ in three outdoors rows, `kondicioneri` in two taxi rows,
+  `tmp/lang/ka/ka.py`: `aq` for აქ in three outdoors rows, `kondicioneri` in two taxi rows,
   `bizinesi`, and a `p'roch'uli` with apostrophes the column never uses. Same method.
 - **Persian (`fa`) romanisations.** Eight cells contain the zero-width non-joiner (U+200C)
   inside the Latin text, `kojā mi‌ravid?` among them. The joiner belongs to the script,
@@ -94,24 +94,24 @@ Provenance records the correction and its source, as the pack's rows do.
   `kind-words.*` rows write `valare` for `വളരെ` (`vaḷare`), `about-me.i-am-a-teacher`
   writes `ṭīcaṟāṇŭ` (`ṭīccaṟāṇŭ`), and `board-answers.what-is-your-name` writes `pēru`
   where the pack's other `പേര്` cells write `pērŭ`. The notes are in
-  `tmp/agent-notes/answers-concepts-south.md`; the packs' romanisers are under `tmp/<code>/`.
+  `tmp/notes/agents/answers-concepts-south.md`; the packs' romanisers are under `tmp/lang/<code>/`.
 
-- **Khmer (`km`) IPA against the pack's own spec** (`tmp/km/SPEC.md`). Khmer's `ipa` is
+- **Khmer (`km`) IPA against the pack's own spec** (`tmp/lang/km/SPEC.md`). Khmer's `ipa` is
   authored, not built -- `scripts/build_ipa.py` never fills it -- so a fix is written by
   hand in the spec's notation. Seventeen cells use letters outside its symbol list: seven
   write `c` for `tɕ` (the `air-travel.*` and `hitchhiking.*` rows), eight `v` for `w`, and
   one each `ɗ`, `ɤ`/`y` and `ɪ`, mostly in `about-me.*`. Four rows claim `ipa=km-analysis`
   with an empty cell -- three `taxi.*` rows and `medical-conditions.i-am-allergic-to-sulfa-drugs`,
-  whose provenance (`km-med-v1`) names no source and which `tmp/khmer.md` §15 says was
+  whose provenance (`km-med-v1`) names no source and which `tmp/notes/khmer.md` §15 says was
   left out for lack of one: on a safety row, source it or take its text out, never guess.
   `ពេញ` is read `peɲ` in two hike rows and in the spec's example but `pɨɲ` in Headley; and
   `toilets.is-it-only-for-customers` and `toilets.is-it-free` lack the `?` that makes them
-  questions. The notes are the Khmer section of `tmp/agent-notes/answers-concepts-south.md`.
+  questions. The notes are the Khmer section of `tmp/notes/agents/answers-concepts-south.md`.
 
 ## What to write
 
 Fix one item at a time and write it to disk before the next. Notes go to
-`tmp/agent-notes/row-corrections.md` as you go: per row, old and new text, the source,
+`tmp/notes/agents/row-corrections.md` as you go: per row, old and new text, the source,
 and anything left unchanged and why. Keep helper scripts in `scratchpad/corrections/`.
 Run `python3 scripts/validate_data.py` after each item. Touch only the rows named here
 (and the Hebrew route); do not edit boards, concepts or catalogues, and do not commit.
@@ -121,7 +121,7 @@ Run `python3 scripts/validate_data.py` after each item. Touch only the rows name
 The first pass's agents did as asked: they fixed their items and reported what they saw
 next to them without touching it. These are those rows. Everything above holds -- the
 source policy, one item at a time, the notes, clearing a changed row's `ipa` -- and the
-notes go to `tmp/agent-notes/row-corrections-2.md`.
+notes go to `tmp/notes/agents/row-corrections-2.md`.
 
 - **Nepali (`ne`) romanisations that print a blank.** Three rows write the eyelash RA,
   र + ् + U+200D + य, and their `romanization_iso15919` carries `{}` where the joiner is:
@@ -161,7 +161,7 @@ notes go to `tmp/agent-notes/row-corrections-2.md`.
   with, among them the eight `kind-words.*` rows (`ē`/`ō`, `khub` for খুব, `jan'ya` for
   জন্য, `y` for য়), `numbers-money.som` `sōma`, `dietary-needs.is-this-kosher` `eṭā kōśāra
   ki?`, and hand spellings such as `cek-ina`, `lifaṭa` and `peṭrolera`. The notes are the
-  `bn` section of `tmp/agent-notes/row-corrections.md`. Run the romaniser, read every
+  `bn` section of `tmp/notes/agents/row-corrections.md`. Run the romaniser, read every
   row it would change, and correct those that are wrong, listing each -- a deliberate
   spelling stays, with the reason.
 - **Amharic (`am`) ኝ written `gn`.** `about-me.i-have-my-own-business` `āllegn`,
@@ -176,7 +176,7 @@ either listener; the romanisation and the IPA say *min faḍlak*, to a man.
 
 ## A third pass: what the second pass saw beside its items
 
-Same rules as both passes above; notes go to `tmp/agent-notes/row-corrections-3.md`.
+Same rules as both passes above; notes go to `tmp/notes/agents/row-corrections-3.md`.
 
 - **Malay (`ms`) IPA: a coda r comes back as a tap and a trill.** 112 cells write `ɾr`
   where the text has one r before a consonant -- `percuma` `pəɾrtʃˈumə`, `perhentian`
@@ -208,7 +208,7 @@ Same rules as both passes above; notes go to `tmp/agent-notes/row-corrections-3.
 
 The third pass fixed the rows its brief named and found more of the same on the transport
 board, all said to a driver the traveller cannot choose. Same rules; notes to
-`tmp/agent-notes/row-corrections-4.md`.
+`tmp/notes/agents/row-corrections-4.md`.
 
 - **Arabic** addresses the driver with a masculine imperative in `taxi.please-stop-here`
   (توقّف), `taxi.please-take-me-here` (خذني), `taxi.could-you-make-it-colder` and
@@ -254,4 +254,4 @@ For each language:
 The languages, in two groups: Arabic, Hebrew, Hausa and Amharic; and Hindi, Urdu,
 Punjabi, Marathi, Czech and Polish, with a check of the same rows in Russian, Ukrainian,
 French, Spanish, Italian and Portuguese for adjectives that agree with the listener.
-Notes go to `tmp/agent-notes/row-corrections-5-<group>.md`.
+Notes go to `tmp/notes/agents/row-corrections-5-<group>.md`.

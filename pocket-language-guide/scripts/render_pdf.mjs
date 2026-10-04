@@ -1,7 +1,7 @@
 // Solve a sheet and write a vector PDF.
 //
 //   node scripts/render_pdf.mjs [--target zh-Hans] [--source en] [--scale auto]
-//                               [--geometry card-7x5-4col] [--out tmp/sheet.pdf]
+//                               [--geometry card-7x5-4col] [--out tmp/out/sheet.pdf]
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { createSheetContext, buildSheet } from '../core/sheet.js';
@@ -16,7 +16,7 @@ function parseArgs(argv) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const out = args.out ?? 'tmp/sheet.pdf';
+const out = args.out ?? 'tmp/out/sheet.pdf';
 
 const ctx = await createSheetContext({
   loadText: (rel) => readFile(rel, 'utf8'),

@@ -375,7 +375,7 @@ def main():
                 # invisible to anyone editing one column: pointing the *defective*
                 # spelling, which is what the Academy prescribes for prose, gives
                 # `תִּקְוָה` for `תקווה` -- one vav against two -- and nothing else
-                # here would notice. See tmp/hebrew.md for why this pack points the
+                # here would notice. See tmp/notes/hebrew.md for why this pack points the
                 # full spelling instead.
                 if code == "he" and row["text_alt"].strip():
                     bare = "".join(c for c in row["text_alt"] if c not in NIQQUD)

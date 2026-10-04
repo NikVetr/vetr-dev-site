@@ -19,7 +19,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 const APP = 'dev.vetr.pocketlanguageguide';
 const SIM = process.env.SIM ?? 'iPhone 17';
 const BUILT = process.env.APP_PATH ?? 'build/ios/Build/Products/Debug-iphonesimulator/App.app';
-const OUT = 'tmp/ios';
+const OUT = 'tmp/out/ios';
 mkdirSync(OUT, { recursive: true });
 const env = { ...process.env, PATH: `/opt/homebrew/bin:${process.env.HOME}/Library/Python/3.9/bin:${process.env.PATH}` };
 const run = (/** @type {string} */ cmd, /** @type {string[]} */ args) => execFileSync(cmd, args,

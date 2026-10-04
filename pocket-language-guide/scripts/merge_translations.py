@@ -7,13 +7,13 @@
 Two kinds of output need folding in, and neither is written straight into the
 corpus by the agent that produced it.
 
-**Additions** (`tmp/expansion/add-<code>/<group>.csv`) extend a pack that already
+**Additions** (`tmp/data/expansion/add-<code>/<group>.csv`) extend a pack that already
 exists and was reviewed by a fluent speaker. Those files are the most valuable
 data here, so an agent writes its new rows somewhere else and this merges them,
 appending only concepts the pack does not already have. An existing row is never
 overwritten: the reviewed original wins.
 
-**Respellings** (`tmp/expansion/respell-<code>.csv`) become
+**Respellings** (`tmp/data/expansion/respell-<code>.csv`) become
 `data/respell/overrides/<code>__en__en-US.csv`, merged the same way -- curated
 rows already on file are left alone.
 """
@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-SRC = ROOT / "tmp/expansion"
+SRC = ROOT / "tmp/data/expansion"
 
 
 def rows_of(path):
@@ -56,7 +56,7 @@ def merge_additions(code, concepts):
     """Append new rows to an existing pack, in concept order, never overwriting."""
     src_dir = SRC / f"add-{code}"
     if not src_dir.exists():
-        print(f"  {code}: no tmp/expansion/add-{code}/ -- nothing to merge")
+        print(f"  {code}: no tmp/data/expansion/add-{code}/ -- nothing to merge")
         return 0
     added = skipped = unknown = 0
     for src in sorted(src_dir.glob("*.csv")):
@@ -91,7 +91,7 @@ def merge_additions(code, concepts):
 def merge_respell(code, concepts):
     src = SRC / f"respell-{code}.csv"
     if not src.exists():
-        print(f"  {code}: no tmp/expansion/respell-{code}.csv")
+        print(f"  {code}: no tmp/data/expansion/respell-{code}.csv")
         return 0
     dest = DATA / f"respell/overrides/{code}__en__en-US.csv"
     have = rows_of(dest)

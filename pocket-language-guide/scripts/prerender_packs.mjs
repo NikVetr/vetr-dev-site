@@ -91,8 +91,8 @@ if (jobs > 1) {
   await Promise.all(Array.from({ length: jobs }, (_, k) => run(k)));
   /** @type {any[]} */ const rendered = [];
   for (let k = 0; k < jobs; k += 1) {
-    rendered.push(...JSON.parse(await readFile(`tmp/prerender-shard-${k}.json`, 'utf8')));
-    await rm(`tmp/prerender-shard-${k}.json`);
+    rendered.push(...JSON.parse(await readFile(`tmp/out/prerender-shard-${k}.json`, 'utf8')));
+    await rm(`tmp/out/prerender-shard-${k}.json`);
   }
   await writeIndex(rendered);
   process.exit(0);
@@ -160,8 +160,8 @@ for (const { target, source } of pairs.filter((_, i) => i % n === k)) {
 
 await local.close();
 if (shard) {
-  await mkdir('tmp', { recursive: true });
-  await writeFile(`tmp/prerender-shard-${k}.json`, JSON.stringify(index));
+  await mkdir('tmp/out', { recursive: true });
+  await writeFile(`tmp/out/prerender-shard-${k}.json`, JSON.stringify(index));
 } else {
   await writeIndex(index);
 }

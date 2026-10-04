@@ -46,7 +46,7 @@ does not mean to be said, or says it wrongly. Candidates, none confirmed:
 
 ## How to report
 
-Write findings to `tmp/pronunciation-audit-<your range>.md` **as you go** — one
+Write findings to `tmp/notes/pronunciation-audit-<your range>.md` **as you go** — one
 section per class, each with: the languages it occurs in, the count per language, two
 or three example rows (`concept_id`, `text`, `ipa`), what the row *should* say, and a
 proposed rule stated precisely enough to implement in `spoken()` (or, where the

@@ -62,7 +62,7 @@ language's words, and how to say them. The last two reuse the existing `display.
 ## Report
 
 Per language: any key left out and why, any string reworded, and every choice a native
-reviewer might question. Write it to `tmp/agent-notes/strings-ah-<group>.md` after each
+reviewer might question. Write it to `tmp/notes/agents/strings-ah-<group>.md` after each
 language, not at the end.
 
 ## Found while writing these: existing keys to fix
@@ -70,7 +70,7 @@ language, not at the end.
 The agents that wrote this batch read their files' neighbouring keys and found these
 wrong. Check each against the file's own words and rules, fix it in place (one line
 each, nothing re-serialised), and record old and new values in
-`tmp/agent-notes/strings-ah-fixes.md`. A finding is a lead, not an instruction: where
+`tmp/notes/agents/strings-ah-fixes.md`. A finding is a lead, not an instruction: where
 it does not hold up, leave the key and say why.
 
 - **hi, ur `gallery.wantLabel`** ("…and I want to speak") is masculine (चाहता हूँ /
@@ -100,8 +100,8 @@ it does not hold up, leave the key and say why.
 The agent that fixed the list above found more of the same kind, outside it, and left
 them. The same rules hold: check each against the file's own words and `_note` first,
 change only the named keys, one substring on one line, and record old, new and why in
-`tmp/agent-notes/strings-ah-fixes-2.md` as you go. Its notes, with proposed fixes, are
-`tmp/agent-notes/strings-ah-fixes.md`.
+`tmp/notes/agents/strings-ah-fixes-2.md` as you go. Its notes, with proposed fixes, are
+`tmp/notes/agents/strings-ah-fixes.md`.
 
 1. **"I speak" in the registry.** The header's first half is `speak_label` in
    `data/registry/languages.csv`, beside `gallery.wantLabel`. It assumes a man in Hindi
@@ -138,7 +138,7 @@ change only the named keys, one substring on one line, and record old, new and w
 
 ## A third list: found while working the second
 
-Same rules; the record goes to `tmp/agent-notes/strings-ah-fixes-3.md`.
+Same rules; the record goes to `tmp/notes/agents/strings-ah-fixes-3.md`.
 
 1. **Inserted names that still take a suffix or the wrong case**: cs `gallery.spokenIn`
    ("Jazykem angličtina"); kn `check.phrases`, `quick.subtitle` and `studio.pair`; and uz
@@ -153,11 +153,11 @@ Same rules; the record goes to `tmp/agent-notes/strings-ah-fixes-3.md`.
    contradicted by Kamus Dewan, which lists *lembar* as a classifier: keep *helai* as the
    file's choice and say why correctly. And if the corpus pass changes the Malay section
    titles, `boards.lodging.laundry*` and `quiz.interest.transit.hint` follow them.
-   The audit's record is `tmp/agent-notes/strings-ms-audit.md`.
+   The audit's record is `tmp/notes/agents/strings-ms-audit.md`.
 
 ## A fourth list
 
 - cs `quick.heading` and `gallery.thumbAlt` have the shape the third list fixed in
   `gallery.spokenIn`: *průvodce jazykem {language}*, an instrumental head noun before
   ICU's nominative name ("průvodce jazykem angličtina"). Give them the file's corrected
-  frame. The record goes to `tmp/agent-notes/strings-ah-fixes-4.md`.
+  frame. The record goes to `tmp/notes/agents/strings-ah-fixes-4.md`.

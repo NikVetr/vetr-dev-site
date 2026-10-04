@@ -276,7 +276,7 @@ orthography. That is what makes the respelling column O(N) rather than O(N²).
 **`languages.csv`, `scripts.csv`, `regions.csv`, `romanizations.csv` and
 `language-names.csv` are shared with every other agent working at the same time.** Do
 not edit them in the middle of your work. Write your intended rows to
-`tmp/registry-<code>.md` as literal CSV lines and let the coordinating session apply
+`tmp/notes/registry-<code>.md` as literal CSV lines and let the coordinating session apply
 them — that removes the conflict rather than racing on it.
 
 The same holds for every other file more than one language touches:
@@ -423,7 +423,7 @@ neither a currency of its own:
 
 **Georgian went in as language 47 and is the counter-example the last three
 script attempts needed**, so its numbers are here rather than only in
-tmp/ka/georgian.md. Burmese and Sinhala were both refused on fontkit, and the
+tmp/lang/ka/georgian.md. Burmese and Sinhala were both refused on fontkit, and the
 method this file prescribes -- compare glyph *runs* against HarfBuzz before
 writing anything -- is what refused them. Run the same way, Mkhedruli comes back
 **exactly clean**: 0 throws, 0 glyph-run differences, 0 GPOS-offset differences
@@ -449,7 +449,7 @@ end -- which is the right place to insert it.
 - ~~**Urdu is Nastaliq**~~ — **settled, and by a crash rather than a preference.**
   `fontkit` throws on Noto Nastaliq Urdu for 84 of 86 real Urdu rows, in both copies of
   the shaper this project measures and prints with, so Urdu reuses `Arab` at Naskh,
-  which is what most Urdu on a phone or a street sign is set in anyway. See tmp/urdu.md.
+  which is what most Urdu on a phone or a street sign is set in anyway. See tmp/notes/urdu.md.
   The general lesson is that a script decision can sometimes be closed by measuring the
   toolchain rather than by weighing the typography.
 - **`zh-Hant` is a variant, not a new script**, and the corpus already carries
@@ -525,7 +525,7 @@ end -- which is the right place to insert it.
   Noto Sans Sinhala or **1.40** with Yaldevi — **Kannada's tier, not Khmer's**,
   because Sinhala has no vertical stack — `min_size_pt` **5.0**, `word_break`
   **space** with 1,770 real rows giving 1,770 atoms and zero violations. See
-  tmp/si/sinhala.md.
+  tmp/lang/si/sinhala.md.
 
 - **And one that is *shipping*: Thai's `ห้องน้ำ` renders with a detached
   nikhahit.** `thai` and `lao ` are both absent from fontkit's shaper map, and
@@ -559,7 +559,7 @@ end -- which is the right place to insert it.
      exactly why no shipped script found it; Khmer OpenType is built on two-glyph
      backtracks, so `ថា` is right and `ថ្នា` is wrong. In Battambang Bold it costs
      5.99% of clusters an advance error up to 8.3%; reversing the array at its three
-     call sites takes that to 0.01%. Reproducer and patch in `tmp/km/patch-fk.py`,
+     call sites takes that to 0.01%. Reproducer and patch in `tmp/lang/km/patch-fk.py`,
      deliberately unapplied.
   2. **Shaping is order-dependent inside one solve.** `getGlyph` caches a `Glyph` by
      id *together with whatever codepoints asked for it first*, and the Indic shaper
@@ -594,7 +594,7 @@ end -- which is the right place to insert it.
   shaper being exercised is the one the script actually needs.
 
 **Armenian went in as language 49 and closes batch 6, and three of its findings are
-here rather than only in tmp/hy/armenian.md** because each one generalises.
+here rather than only in tmp/lang/hy/armenian.md** because each one generalises.
 
 **The non-vacuity of a clean cube can be a *substitution* and not only a kern, and
 Armenian is where that first happened.** Run Georgian's way, `armn` comes back
@@ -769,7 +769,7 @@ along an undrawn contour) is named against `jali`, `bandhani`, `kolam` and
 
 **Odia went in as language 54, the ninth Brahmic script, and it is the first
 *Indic* script attempt to pass** — so its numbers are here rather than only in
-tmp/or/odia.md, because Burmese and Sinhala left the impression that a complex
+tmp/lang/or/odia.md, because Burmese and Sinhala left the impression that a complex
 script cannot. Run Georgian's way, `orya` comes back with **0 throws and an
 advance identical to 0 font units** over 12,454 real tokens, a 49,442-string NFC
 cube and 39,191 reader-table strings, in both weights and in the shipped subset.
@@ -789,12 +789,12 @@ Four findings from it generalise.
   of the 12,454 tokens pick a different subjoined-ra alternate, and Noto Sans
   Oriya's 30 copies of that glyph are **outline-identical** — same contour, same
   bbox, same advance — so the entire observable effect is **6 font units of
-  vertical offset, 0.006em, with no advance change at all**. `tmp/or/bound.py`
+  vertical offset, 0.006em, with no advance change at all**. `tmp/lang/or/bound.py`
   reports max |dx|, max |dy| and max |d-advance| in font units rather than a
   count, which is what turned a scary 931-string cube number into a verdict. And
   it is a **fifth** fontkit finding rather than the first one again: the selector
   is a format-2 class chain context with `IgnoreMarks` and a *one*-glyph
-  backtrack, so tmp/km/patch-fk.py's reversal is a no-op here — applied, measured,
+  backtrack, so tmp/lang/km/patch-fk.py's reversal is a no-op here — applied, measured,
   still 20.
 - **The reader column can be taller than the pack, and for Odia it is.** Every
   script before this measured `leading_factor` on its own rows; Odia's respellings
@@ -807,11 +807,11 @@ Four findings from it generalise.
 - **The XOR ratio cannot pick a floor for a dot.** `calibrate.py`'s
   differing-pixels-over-ink fraction is **scale-invariant** where the contrast is a
   mark and its base, so Odia's ଢ/ଢ଼ reads 0.036–0.045 at every candidate size and
-  says nothing. `tmp/or/floor2.py` measures the feature once at 1000px per em and
+  says nothing. `tmp/lang/or/floor2.py` measures the feature once at 1000px per em and
   multiplies: the nukta dot is **0.099em**, against Gujarati's 0.109, Devanagari's
   0.110 and Bengali's 0.120, all three of which ship **5.4** — so Odia takes 5.4,
   where at 0.535 × 0.540pt the dot is 2.7× the 0.20pt this paper holds. (Rendering
-  each candidate point size directly, as tmp/si/floor.py does, is unstable on a
+  each candidate point size directly, as tmp/lang/si/floor.py does, is unstable on a
   subset at 37–50px per em and reported two contradictory numbers for one pair.)
 - **"Prefer the repair that adds no new symbol" is worth reading before choosing
   an IPA notation, not after.** espeak's Odia gives `ɟ` for ଜ and `dʒ` for the

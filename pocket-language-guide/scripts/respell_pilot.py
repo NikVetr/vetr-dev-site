@@ -7,7 +7,7 @@
     python3 scripts/respell_pilot.py stress   [codes...]   # does IPA stress survive
     python3 scripts/respell_pilot.py length                # vowel-length notation
 
-Everything it writes lands in tmp/respell-pilot/. It reads data/ but never
+Everything it writes lands in tmp/data/respell-pilot/. It reads data/ but never
 writes there.
 """
 import collections, csv, glob, json, os, random, re, sys

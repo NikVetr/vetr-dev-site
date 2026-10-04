@@ -2034,7 +2034,7 @@ that is worth knowing independently, because **the shipped `thai` faces carry no
 superscript glyph at all** (checked with `getBestCmap()`), so if one ever survived
 the chain it would print as a box.
 
-`tmp/lo/build_respell.py` is the transposition and is the audit trail: every rule is
+`tmp/lang/lo/build_respell.py` is the transposition and is the audit trail: every rule is
 the Thai rule with its Thai characters replaced. **Six places Lao forces a different
 answer**, each in the table's own `deviations`:
 
@@ -2070,7 +2070,7 @@ information rather than noise.
 **And one verification worth copying.** Zero gaps says every IPA symbol had a rule;
 it does *not* say the output is Lao, because `IPA_ONLY` in `respell_check.mjs` does
 not count plain ASCII — so a missing rule for `a`, `i` or `u` leaks a **Latin**
-letter into the middle of a Lao word and reports nothing. `tmp/lo/checkrespell.py`
+letter into the middle of a Lao word and reports nothing. `tmp/lang/lo/checkrespell.py`
 reads all 36,338 respellings back through the Lao parser in `scripts/build_ipa.py`
 (`lao_parse_word`), which is a different question and caught two real defects the
 gap count could not see: the 49 rules a too-aggressive dedup had dropped
@@ -2105,7 +2105,7 @@ Chao letters this corpus's Lao `ipa` column writes.
   class: a syllable with an onset cluster or a bare consonant Lao orthography cannot
   write (`ກເດ` for Czech *gde*, `ວ` for Czech *v*, `ຟ່ດກະ` for Arabic *fadlka*).
   Verified to be **inherited rather than introduced**: the Thai table produces the
-  identical shapes in Thai (`กเด`, `ว`, `ฟั่ด-กะ`), and `tmp/lo/cmp-all.mjs` shows
+  identical shapes in Thai (`กเด`, `ว`, `ฟั่ด-กะ`), and `tmp/lang/lo/cmp-all.mjs` shows
   every divergence between the two outputs is one of the six deviations above.
 
 ## The forty-sixth reader: Croatian, and the alphabet that was built for this
@@ -2226,7 +2226,7 @@ already carries**, and both are gains rather than preferences:
   explaining that. Javanese spends no line on it: `é` `è` `e` are ordinary
   spelling, and the reader gets three vowels where the Indonesian reader gets
   two. It is also why the `jv` pack's own `text` column is written with the
-  marks -- see `GRADE["jv"]` and tmp/jv/decisions.md §2.
+  marks -- see `GRADE["jv"]` and tmp/lang/jv/decisions.md §2.
 - **The retroflex stops come out apart from the dentals**, because `th` and `dh`
   are Javanese letters. `ʈ` is 3,158 cells of this corpus and `ɖ` 1,853, nearly
   all of them the nine Indic packs, and every other Latin reader here folds both

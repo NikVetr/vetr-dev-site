@@ -70,4 +70,4 @@ Do not run `build_board_index.mjs` or `build_shell.mjs`, and do not commit.
 
 Per language: the eight sentences (and any variant rows), the register chosen, a source
 for anything that needed deciding, and the title. Write it to
-`tmp/agent-notes/kind-words-<group>.md` after each language, not at the end.
+`tmp/notes/agents/kind-words-<group>.md` after each language, not at the end.

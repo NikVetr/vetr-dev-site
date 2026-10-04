@@ -351,7 +351,7 @@ Three things that came out of doing it, all of which would otherwise be rediscov
   and ILS in `regions.csv`, so **the Hebrew pack has no currency concept at all** --
   the Arabic case again. `numbers-money.shekel` is not added, because the target rows
   have to be Hebrew and that pack belongs to another author; the note is in
-  `tmp/new-concepts.md` for them. `₪` U+20AA is in none of the shipped faces today.
+  `tmp/notes/new-concepts.md` for them. `₪` U+20AA is in none of the shipped faces today.
 
 **Left staged, with the reading recorded so nobody has to redo it:**
 

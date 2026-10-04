@@ -66,10 +66,10 @@ const UPDATE = process.env.UPDATE_GOLDEN === '1';
  * input against 3KB of the facts about it worth comparing -- so the digest is committed
  * and the PDF is named on the command line when it changes:
  *
- *   unzip -j tmp/mandarin_travel_cheatsheets_*_v2_bundle.zip \
- *     'mandarin_travel_cheatsheet_generic_full_verified_v2.*' -d tmp/golden-work
+ *   unzip -j tmp/inbox/originals/mandarin_travel_cheatsheets_*_v2_bundle.zip \
+ *     'mandarin_travel_cheatsheet_generic_full_verified_v2.*' -d tmp/data/golden-work
  *   env UPDATE_GOLDEN=1 \
- *     GOLDEN_REFERENCE_PDF=tmp/golden-work/mandarin_travel_cheatsheet_generic_full_verified_v2.pdf \
+ *     GOLDEN_REFERENCE_PDF=tmp/data/golden-work/mandarin_travel_cheatsheet_generic_full_verified_v2.pdf \
  *     npm run test:unit
  */
 const REFERENCE_PDF = process.env.GOLDEN_REFERENCE_PDF ?? '';

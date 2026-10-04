@@ -35,7 +35,7 @@
     },
     {
       "rule": "A bare, unattached palatalisation mark ʲ (one with no consonant of its own to attach to) is dropped.",
-      "why": "Romanian's espeak voice writes a genuinely doubled palatalisation on a word-final consonant before an asyllabic final -i (vorbiti \"you speak\" is vorbˈitsʲʲ) -- the first ʲ completes the tsʲ combination this table already has a rule for, and the second is left over with nothing to bind to. Every other reader table in this corpus already has exactly this fallback (`{\"slot\": \"any\", \"ipa\": \"ʲ\", \"out\": \"\"}`); this table had specific consonant+ʲ combinations but never needed the bare fallback until Romanian, the first source to double the mark, landed as a target. Added by the ro addition, twice -- this file was found rewritten from an older snapshot mid-session, dropping the same fix once already; see tmp/romanian.md."
+      "why": "Romanian's espeak voice writes a genuinely doubled palatalisation on a word-final consonant before an asyllabic final -i (vorbiti \"you speak\" is vorbˈitsʲʲ) -- the first ʲ completes the tsʲ combination this table already has a rule for, and the second is left over with nothing to bind to. Every other reader table in this corpus already has exactly this fallback (`{\"slot\": \"any\", \"ipa\": \"ʲ\", \"out\": \"\"}`); this table had specific consonant+ʲ combinations but never needed the bare fallback until Romanian, the first source to double the mark, landed as a target. Added by the ro addition, twice -- this file was found rewritten from an older snapshot mid-session, dropping the same fix once already; see tmp/notes/romanian.md."
     }
   ],
   "approximations": [

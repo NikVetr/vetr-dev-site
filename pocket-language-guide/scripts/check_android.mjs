@@ -16,7 +16,7 @@ const ADB = `${SDK}/platform-tools/adb`;
 const AVD = process.env.AVD ?? 'phraselet';
 const APK = 'android/app/build/outputs/apk/debug/app-debug.apk';
 const APP = 'dev.vetr.pocketlanguageguide';
-const OUT = 'tmp/android';
+const OUT = 'tmp/out/android';
 mkdirSync(OUT, { recursive: true });
 const adb = (/** @type {string[]} */ ...a) => execFileSync(ADB, a, { encoding: 'utf8', timeout: 120_000 }).trim();
 const sleep = (/** @type {number} */ ms) => new Promise((r) => { setTimeout(r, ms); });

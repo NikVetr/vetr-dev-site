@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download upstream font sources into tmp/fonts-src/ (untracked).
+"""Download upstream font sources into tmp/data/fonts-src/ (untracked).
 
 Only the subset outputs under data/fonts/ are committed; this step exists so the
 subsetting in subset_fonts.py is reproducible from named upstream releases.
@@ -55,9 +55,9 @@ SOURCES = {
     # Supplement and all 32 of Extended-A, and both carry 283 codepoints of
     # U+0020..024F including the whole of ASCII and `·` U+00B7 -- so this is the
     # Bengali case and not the Arabic one: no `LATIN_DONOR` graft. **Neither throws
-    # on any of the 129,628 strings `tmp/am/shapecheck.mjs` lays through this
-    # project's own fontkit**, which is the check tmp/telugu.md, tmp/punjabi.md and
-    # tmp/gujarati.md all tell the next addition to run first; Ethiopic has no
+    # on any of the 129,628 strings `tmp/lang/am/shapecheck.mjs` lays through this
+    # project's own fontkit**, which is the check tmp/notes/telugu.md, tmp/notes/punjabi.md and
+    # tmp/notes/gujarati.md all tell the next addition to run first; Ethiopic has no
     # MarkBasePos lookup for a syllable to reach, so the NULL-base-anchor crash
     # cannot be entered. Abyssinica SIL 2.300 covers the block too and is refused for
     # being single-weight and for carrying a Reserved Font Name.
@@ -72,13 +72,13 @@ SOURCES = {
     # reordering, no stacking and **no combining marks at all**, so the two defects
     # that refused Noto elsewhere cannot be entered. Measured rather than reasoned:
     # both faces hold **zero NULL anchors** across every GPOS lookup type, read
-    # directly with fontTools through the Extension subtables (tmp/ka/nullanchors.py),
+    # directly with fontTools through the Extension subtables (tmp/lang/ka/nullanchors.py),
     # and `vendor/fontkit.esm.js` reproduces HarfBuzz's glyph run, glyph ids, GPOS
     # offsets and advances **exactly** -- 0 divergences over 3,370 real tokens, 1,389
     # real strings and a 38,241-string exhaustive cube, in all five candidate files.
     # That is not a vacuous pass: `kern` changes advances on 2,567 of the 3,370 tokens
     # in the sans and 2,904 in the serif, and fontkit matches every one. See
-    # tmp/ka/georgian.md.
+    # tmp/lang/ka/georgian.md.
     #
     # **The variable files, not the hinted statics, and the difference is the whole
     # Latin repertoire.** `NotoSansGeorgian-Regular.ttf` from notofonts.github.io has
@@ -106,7 +106,7 @@ SOURCES = {
     # needs. Nor is that pass vacuous: `liga` changes the glyph run on **761 of
     # 2,496** tokens, reaching 943 ligature glyphs (783 of them the ու digraph
     # `uni05780582`, which has no codepoint at all), and `kern` moves an advance on
-    # 522 to 1,061 depending on the face. See tmp/hy/armenian.md section 1.
+    # 522 to 1,061 depending on the face. See tmp/lang/hy/armenian.md section 1.
     #
     # **The qualification is 8 NULL MarkBasePos base anchors, and unlike Georgian's
     # zero they are reachable.** They sit on the seven Armenian vowel letters Ա Ո Օ
@@ -147,7 +147,7 @@ SOURCES = {
     # of 95 ASCII against the variable's 95, and the pack writes `eSIM`, `ATM`,
     # `ORS` and `QR`. There is **no serif**: Noto Serif Oriya holds 688 NULL
     # MarkBasePos base anchors and throws on 17 real tokens, which is Telugu's,
-    # Gurmukhi's, Gujarati's and Malayalam's outcome. See tmp/or/odia.md.
+    # Gurmukhi's, Gujarati's and Malayalam's outcome. See tmp/lang/or/odia.md.
     "NotoSansOriya-var.ttf":
         f"{GFONTS}/notosansoriya/NotoSansOriya%5Bwdth,wght%5D.ttf",
     "NotoSansArmenian-var.ttf":
@@ -163,7 +163,7 @@ SOURCES = {
     # ຫ້ອງນ້ຳ "toilet") wrong in the PDF while the browser draws it right. Phetsarath
     # does the whole job in **GSUB** `rlig` -- `ນ ້(lowered) ໍ າ`, zero GPOS offsets
     # -- which fontkit applies, so preview and export agree by construction.
-    # See tmp/lao.md sections 3 and 5. It also has **no GPOS table at all**, so the
+    # See tmp/notes/lao.md sections 3 and 5. It also has **no GPOS table at all**, so the
     # NULL-MarkBasePos crash that killed both Noto Malayalam faces cannot be entered;
     # it is the most compact of the candidates at an equal letter body (cluster-set
     # ink span 1.2773em against Noto Sans Lao's 1.5550em, median consonant height
@@ -191,14 +191,14 @@ SOURCES = {
     # it positions every vowel sign, subscript and register shifter in **GSUB** and
     # its GPOS table holds zero features and zero lookups, so neither the NULL anchor
     # nor `render/pdf.js`'s dropped-offset path exists, and it substitutes the
-    # shifters to unencoded glyphs rather than to `uni17BB`. See tmp/khmer.md.
+    # shifters to unencoded glyphs rather than to `uni17BB`. See tmp/notes/khmer.md.
     #
     # Real static Regular and Bold, so the stack needs no instancing -- Siemreap is
     # the same design and exact on all 260,015 clusters, and is refused for being
     # single-weight. upem 2048, which `scale_upem` handles for the Latin graft.
     #
     # OFL 1.1, "Copyright (c) 2010, Danh Hong (khmertype.blogspot.com)" -- and the
-    # Reserved Font Name needs stating, because tmp/khmer.md says there is none and
+    # Reserved Font Name needs stating, because tmp/notes/khmer.md says there is none and
     # the file says otherwise **twice, inconsistently**. It carries two nameID 0
     # records: the Macintosh one, which upstream left alone, reserves "Khmer OS
     # Content"; the Windows one, which Google Fonts rewrote when it renamed the
@@ -249,8 +249,8 @@ SOURCES = {
     # ra-subscript plus ి ీ ె ే, which is ప్ర, ప్రే, క్రి and శ్రీ -- so ప్రయాణం,
     # ప్రవేశం and Sri Lanka's own ICU name శ్రీలంక could not be measured. Instancing
     # and subsetting change nothing; the var file, Noto's static release and this
-    # script's own subset all throw the same 340. See tmp/telugu.md, and run
-    # tmp/te/shapecheck.mjs before choosing a face for pa, gu, si, kn, ml or ne.
+    # script's own subset all throw the same 340. See tmp/notes/telugu.md, and run
+    # tmp/lang/te/shapecheck.mjs before choosing a face for pa, gu, si, kn, ml or ne.
     #
     # Every other OFL Telugu face on Google Fonts throws on none of the 49,140,
     # because none of them has a MarkBasePos base anchor at all -- so the choice was
@@ -268,7 +268,7 @@ SOURCES = {
     # What it costs: 76 of the Telugu block against Anek's 96, and the 20 it lacks
     # are the nukta, the Vedic marks, ౚ, the fraction and weight signs and the
     # **Telugu digits ౦-౯**. No row and no reader rule reaches any of them -- the
-    # pack writes numbers in ASCII, for the reason tmp/te/g_num.py gives -- but a
+    # pack writes numbers in ASCII, for the reason tmp/lang/te/g_num.py gives -- but a
     # reader typing ౧ into the add-your-own-term editor would get a box, which is the
     # concern `LATIN_EXTRA_RANGES` states for Greek and Cyrillic. It also lacks
     # U+00A0, which only the French rows contain and which draws in `latin`.
@@ -277,8 +277,8 @@ SOURCES = {
     # Serif that throws, so `telu` ships sans-only and `stackFor` falls back the way
     # it does for `arabic`, which has no serif either.
     # Gurmukhi, and this is Telugu's finding a second time -- **run
-    # tmp/pa/shapecheck.mjs before choosing a Brahmic face**, which is what
-    # tmp/telugu.md tells the next addition to do. Over the 59,280 aksharas
+    # tmp/lang/pa/shapecheck.mjs before choosing a Brahmic face**, which is what
+    # tmp/notes/telugu.md tells the next addition to do. Over the 59,280 aksharas
     # Gurmukhi can write (38 consonants x 10 vowel signs x {bare, bindi, tippi,
     # addak} x {no subjoined, each of the 38}), through the same
     # `vendor/fontkit.esm.js` this project measures and prints with:
@@ -319,7 +319,7 @@ SOURCES = {
     # Devanagari's and Thai's tier. The nukta is not decoration in Punjabi: it is
     # ਸ/ਸ਼ *sa/sha*, ਜ/ਜ਼ *ja/za* and ਫ/ਫ਼ *pha/fa*, three live phonemic contrasts
     # in a pack full of Perso-Arabic loans. Anek (0.043 at 5.4) and Baloo (a
-    # display design) fall to the same measurement. See tmp/punjabi.md.
+    # display design) fall to the same measurement. See tmp/notes/punjabi.md.
     #
     # The serif needs no graft: 284 codepoints of U+0020..024F including ASCII,
     # `·` and `₹`, so this half of the stack is the Bengali case and the sans half
@@ -328,7 +328,7 @@ SOURCES = {
         f"{GFONTS}/notosansgurmukhiui/NotoSansGurmukhiUI%5Bwdth,wght%5D.ttf",
     "NotoSerifGurmukhi-var.ttf":
         f"{GFONTS}/notoserifgurmukhi/NotoSerifGurmukhi%5Bwght%5D.ttf",
-    # Gujarati, and Telugu's finding a third time -- **run tmp/gu/shapecheck.mjs
+    # Gujarati, and Telugu's finding a third time -- **run tmp/lang/gu/shapecheck.mjs
     # before choosing a Brahmic face.** Over the 53,352 aksharas Gujarati can write
     # (34 consonants + 4 nukta sequences, x 12 vowel signs, x {bare, anusvara,
     # candrabindu}, x {no subjoined, each of the 38}), through the same
@@ -352,11 +352,11 @@ SOURCES = {
     #
     # **Noto Serif Gujarati's 183 looked unreachable and three of them were not**,
     # which is the sharpest lesson here and the one the si/kn/ml/ne additions should
-    # read. `tmp/gu/throws.mjs` enumerates all 183: 75 are `C્રૃ`, which Gujarati cannot
+    # read. `tmp/lang/gu/throws.mjs` enumerates all 183: 75 are `C્રૃ`, which Gujarati cannot
     # write because ૃ *is* a vowel, and 108 are a nukta letter plus a subjoined ર, and
     # this pack writes no nukta. Both classes are genuinely out of reach. **But the
     # matrix tests one subjoined consonant and the corpus produces two**: shaping the
-    # real 27,644 rows with `node tmp/gu/throwrows.mjs` -- the pack's own strings plus
+    # real 27,644 rows with `node tmp/lang/gu/throwrows.mjs` -- the pack's own strings plus
     # every respelling `gu__gu-IN.json` generates over the whole corpus -- found three
     # throws on a **double subjoined ર**, `હ્ર્ર`, `ચ્ર્ર્ફ્ના` and `ત્ફ્ર્ર્જ ફ’-કત`,
     # all of them Arabic's shadda-geminated ر (حرّ, تشرّفنا, أتفرّج) arriving as `rr`.
@@ -369,7 +369,7 @@ SOURCES = {
     # no letter of either case and no `·` U+00B7, so it would be the third source here
     # to need a `LATIN_DONOR`; Mukta Vaani carries **326** including the whole of
     # ASCII, `·` and `₹`, and needs none. It is Ek Type's Mukta superfamily -- the same
-    # family as the Mukta Mahee tmp/punjabi.md measured and refused for Gurmukhi, and
+    # family as the Mukta Mahee tmp/notes/punjabi.md measured and refused for Gurmukhi, and
     # refused there on the *nukta*, which Gujarati does not write. Gujarati's binding
     # pair is the anusvara instead: ક/કં differ by 0.078 of the smaller letter's ink at
     # 5.4pt in Mukta Vaani against 0.070 in Noto Sans Gujarati UI, both in
@@ -383,7 +383,7 @@ SOURCES = {
     # digits ૦-૯, ઌ, ૄ and ૠ ૡ ૢ ૣ -- and on the measurement: its worst pair at 5.4 is
     # 0.060, below Devanagari's. Anek Gujarati is refused on the same measurement its
     # Telugu and Gurmukhi siblings were, `ઇ`/`ઈ` at 0.051 and 0.044 at 4.4. Baloo Bhai
-    # 2 is a heavy rounded display design. See tmp/gujarati.md.
+    # 2 is a heavy rounded display design. See tmp/notes/gujarati.md.
     "MuktaVaani-Regular.ttf": f"{GFONTS}/muktavaani/MuktaVaani-Regular.ttf",
     "MuktaVaani-Bold.ttf": f"{GFONTS}/muktavaani/MuktaVaani-Bold.ttf",
     "HindGuntur-Regular.ttf": f"{GFONTS}/hindguntur/HindGuntur-Regular.ttf",
@@ -392,8 +392,8 @@ SOURCES = {
     # pair** -- the shaper defect that refused Noto for Telugu, Gurmukhi and Gujarati
     # is absent from Noto Sans Kannada, which has **zero** NULL MarkBasePos base
     # anchors of 667, so the code path `vendor/fontkit.esm.js` crashes on cannot be
-    # entered at all. Run tmp/kn/shapecheck.mjs before choosing a Brahmic face, which
-    # is what tmp/telugu.md, tmp/punjabi.md and tmp/gujarati.md all say. Over the
+    # entered at all. Run tmp/lang/kn/shapecheck.mjs before choosing a Brahmic face, which
+    # is what tmp/notes/telugu.md, tmp/notes/punjabi.md and tmp/notes/gujarati.md all say. Over the
     # 123,760 aksharas Kannada can write (34 consonants x 13 vowel signs x {bare,
     # anusvara, visarga, candrabindu} x {no subjoined, each of the 34} x {no
     # arkavattu, ರ್}):
@@ -420,7 +420,7 @@ SOURCES = {
     # the cube missed it: every `್` in the cube was followed by a consonant and
     # consumed into a conjunct. **So Kannada ships sans-only**, which is `telu`'s,
     # `gujr`'s and `arabic`'s shape, and the harness to run on the next Brahmic
-    # addition is `tmp/kn/throwrows.mjs` over real rows rather than either matrix.
+    # addition is `tmp/lang/kn/throwrows.mjs` over real rows rather than either matrix.
     # Tiro Kannada is the replacement if the sans ever has to go: a real text serif,
     # 0 NULL anchors, 0 throws and 6 notdefs over the same 30,659 rows -- refused
     # here only because it has Regular and Italic and no bold, so a serif stack built
@@ -431,7 +431,7 @@ SOURCES = {
     # Kannada block (89 of 89) and 274 codepoints of U+0020..024F including ASCII,
     # `·` U+00B7 and `₹`, so this is the Bengali case and needs no `LATIN_DONOR`
     # graft -- unlike Noto Sans Kannada **UI**, which has 43 and no letter of either
-    # case. See tmp/kannada.md.
+    # case. See tmp/notes/kannada.md.
     "NotoSansKannada-var.ttf":
         f"{GFONTS}/notosanskannada/NotoSansKannada%5Bwdth,wght%5D.ttf",
     # Malayalam, and **the first script here where neither half of the Noto pair can
@@ -439,7 +439,7 @@ SOURCES = {
     # Malayalam both throw in `vendor/fontkit.esm.js` on `ക്`, a single consonant
     # plus a word-final chandrakkala, which is how most Malayalam consonant-final
     # words are spelt -- 52,001 and 51,967 throws of the 61,704 aksharas
-    # `tmp/ml/shapecheck.mjs` lays through it. `tmp/ml/nullanchors.py` names the
+    # `tmp/lang/ml/shapecheck.mjs` lays through it. `tmp/lang/ml/nullanchors.py` names the
     # cause: 227 NULL MarkBasePos base anchors of 1,189 in the sans, and a second
     # NULL class in the serif whose mark list includes `viramamlym` itself.
     #
@@ -467,7 +467,7 @@ SOURCES = {
     # every count except `·` U+00B7, which it lacks and which `core/pack.js` joins
     # the emergency numbers with, so it would need the graft Gurmukhi pays. There is
     # **no `mlym-serif`**: the only OFL Malayalam serif is the blocker above.
-    # See tmp/malayalam.md.
+    # See tmp/notes/malayalam.md.
     "Manjari-Regular.ttf": f"{GFONTS}/manjari/Manjari-Regular.ttf",
     "Manjari-Bold.ttf": f"{GFONTS}/manjari/Manjari-Bold.ttf",
     # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode

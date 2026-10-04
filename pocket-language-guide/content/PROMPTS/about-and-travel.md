@@ -101,4 +101,4 @@ rewrite, `build_board_index.mjs` or `build_shell.mjs`, and do not commit.
 
 Per language: the twenty-nine sentences (and any variant rows), the register chosen, a
 source for anything that needed deciding, and the four titles. Write it to
-`tmp/agent-notes/about-travel-<group>.md` after each language, not at the end.
+`tmp/notes/agents/about-travel-<group>.md` after each language, not at the end.

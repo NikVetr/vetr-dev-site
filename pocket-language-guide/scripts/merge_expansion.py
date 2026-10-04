@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Merge agent-designed concept proposals into the corpus.
 
-    python3 scripts/merge_expansion.py tmp/expansion/*.json
+    python3 scripts/merge_expansion.py tmp/data/expansion/*.json
 
 The proposals name sections and items but deliberately do not assign `concept_id`
 or `rank`: identity and ordering are global properties, and letting three

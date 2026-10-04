@@ -3,7 +3,7 @@
   "accent": "lo-LA",
   "status": "ready",
   "version": 1,
-  "derives_from": "the Thai reader table in this repository, transposed letter for letter -- and through it the Royal Institute's หลักเกณฑ์การทับศัพท์. Lao has no published foreign-name transcription standard at all, and Thai's is the only one in this corpus written for a script with the same three consonant classes, the same deterministic tone rule and the same cognate vowel signs, so the two-stage tone device is borrowed rather than reinvented. Built by tmp/lo/build_respell.py, which is the audit trail: every rule here is the Thai rule with its Thai characters replaced, and the four places Lao forces a different answer are in `approximations` below.",
+  "derives_from": "the Thai reader table in this repository, transposed letter for letter -- and through it the Royal Institute's หลักเกณฑ์การทับศัพท์. Lao has no published foreign-name transcription standard at all, and Thai's is the only one in this corpus written for a script with the same three consonant classes, the same deterministic tone rule and the same cognate vowel signs, so the two-stage tone device is borrowed rather than reinvented. Built by tmp/lang/lo/build_respell.py, which is the audit trail: every rule here is the Thai rule with its Thai characters replaced, and the four places Lao forces a different answer are in `approximations` below.",
   "deviations": [
     {
       "rule": "Thai's ช/ฉ pair for /tɕʰ/ and its ซ/ส pair for /s/",

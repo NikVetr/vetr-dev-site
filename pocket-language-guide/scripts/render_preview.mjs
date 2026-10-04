@@ -1,7 +1,7 @@
 // Solve a sheet and rasterise each face to PNG via headless Chromium.
 //
 //   node scripts/render_preview.mjs [--target zh-Hans] [--source en] [--scale auto]
-//                                   [--out tmp/preview] [--dpi 200]
+//                                   [--out tmp/out/preview] [--dpi 200]
 //                                   [--geometry phone-1col] [--priority minimum]
 //                                   [--head bottom:region,page]
 //
@@ -24,7 +24,7 @@ function parseArgs(argv) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const outDir = args.out ?? 'tmp/preview';
+const outDir = args.out ?? 'tmp/out/preview';
 const dpi = Number(args.dpi ?? 200);
 const geometry = args.geometry;
 

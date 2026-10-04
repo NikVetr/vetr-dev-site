@@ -185,4 +185,4 @@ out and reported, never guessed. Do not run the builders; run
 `python3 scripts/validate_data.py` after each language and fix what it reports about
 your rows. Write each language's rows as you finish it, and add its notes -- choices a
 native reviewer might question, forms avoided and why, anything left out -- to
-`tmp/agent-notes/answers-concepts-<group>.md` then, not at the end.
+`tmp/notes/agents/answers-concepts-<group>.md` then, not at the end.

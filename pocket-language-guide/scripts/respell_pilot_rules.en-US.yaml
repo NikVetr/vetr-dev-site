@@ -1,7 +1,7 @@
 # PROTOTYPE rule table for the respelling feasibility pilot.
 # Shape deliberately mirrors the planned data/respell/<src>/rules.yaml: one file
 # per (source language, accent), keyed on IPA, target-language-agnostic.
-# Every entry below was read off tmp/respell-pilot/*-evidence.tsv, i.e. derived
+# Every entry below was read off tmp/data/respell-pilot/*-evidence.tsv, i.e. derived
 # from what the 12,001 curated en-US respellings actually do, not from a
 # published pronunciation key.
 source: en

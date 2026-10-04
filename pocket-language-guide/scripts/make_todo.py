@@ -3,7 +3,7 @@
 
     python3 scripts/make_todo.py hi id sw
 
-One TSV per language at `tmp/expansion/todo-<code>.tsv`: every concept that belongs
+One TSV per language at `tmp/data/expansion/todo-<code>.tsv`: every concept that belongs
 on that language's sheet, with the English rendering and the translator's note
 beside it. TSV rather than CSV because several English glosses contain commas and
 none contains a tab, so the file survives being pasted around.
@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-OUT = ROOT / "tmp/expansion"
+OUT = ROOT / "tmp/data/expansion"
 
 HEADER = ["group", "concept_id", "section", "template", "kind", "slots",
           "register", "applies_to", "english", "notes"]
