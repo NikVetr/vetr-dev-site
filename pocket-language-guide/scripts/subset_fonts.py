@@ -23,7 +23,7 @@ from fontTools.ttLib.scaleUpem import scale_upem
 from fontTools.varLib import instancer
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "tmp" / "fonts-src"
+SRC = ROOT / "tmp" / "data" / "fonts-src"
 OUT = ROOT / "data" / "fonts"
 
 # Latin, IPA extensions, combining marks, general punctuation, currency. Every

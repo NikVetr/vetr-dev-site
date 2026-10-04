@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import respell_pilot_ipa as P
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, 'tmp', 'respell-pilot')
+OUT = os.path.join(ROOT, 'tmp', 'data', 'respell-pilot')
 RULES = os.path.join(ROOT, 'scripts', 'respell_pilot_rules.en-US.yaml')
 VOWELS = 'aeiou'
 

@@ -488,7 +488,7 @@ SOURCES = {
         "/Constructium/Constructium.ttf",
 }
 
-DEST = Path(__file__).resolve().parent.parent / "tmp" / "fonts-src"
+DEST = Path(__file__).resolve().parent.parent / "tmp" / "data" / "fonts-src"
 
 
 def main() -> int:
