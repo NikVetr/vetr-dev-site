@@ -1792,10 +1792,15 @@ svg.glyph .g-count {
 svg.glyph .g-letter { fill: #55606b; font-weight: 700; text-anchor: middle; font-family: var(--ui); }
 svg.glyph .g-bracket { stroke: var(--accent); stroke-width: 1; fill: none; }
 
-/* The section's own pictogram, beside its colour chip. 13px was too small to read as
-   a picture at all -- and these are the marks the sheet prints at the head of each
-   section, so the tree is where you match one to the other. */
-.tree-icon { width: 17px; height: 17px; flex: none; }
+/* The section's own pictogram, beside its colour chip -- the mark the sheet prints
+   at the head of each section, so the tree is where you match one to the other. In
+   the tree it is sized in ems, so it stands as tall as the name beside it: a line
+   icon keeps a sixth of its box as margin, and at a fixed 17px its ink reached only
+   the name's capitals and read as smaller than the word it labels. The phone's
+   section chips keep 17px, because there the mark shares a half-width chip with the
+   name, and any more of it broke "Communication" mid-word. */
+.tree-icon { inline-size: 17px; block-size: 17px; flex: none; }
+.tree summary .tree-icon { inline-size: 1.65em; block-size: 1.65em; }
 
 /* --- add a term ---------------------------------------------------------- */
 
