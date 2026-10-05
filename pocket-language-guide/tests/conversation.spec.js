@@ -1157,6 +1157,31 @@ test('holding the eye shows what each button says and what can come back, and le
   await expect(page.locator('.board-cell-sub')).toHaveCount(0);
 });
 
+test('the buttons can share one size of type, or be sized to their words', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const sizes = () => page.locator('#board-grid .board-cell-label').evaluateAll((labels) => labels.map((l) => getComputedStyle(l).fontSize));
+  const heights = () => page.locator('#board-grid .board-cell').evaluateAll((cells) => cells.map((c) => Math.round(c.getBoundingClientRect().height)));
+  // As drawn: one size of button, each label as large as its own fits.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  expect(new Set(await sizes()).size).toBeGreaterThan(1);
+  expect(new Set(await heights()).size).toBe(1);
+  // One size of type: the smallest any label needed, on every one, the grid unmoved.
+  await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ evenType: true })));
+  await page.reload();
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await expect.poll(async () => new Set(await sizes()).size).toBe(1);
+  expect(new Set(await heights()).size).toBe(1);
+  // Sized to their words: one size of type, the rows as tall as their words, and the
+  // whole grid still on the screen.
+  await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ sizedToWords: true })));
+  await page.reload();
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await expect.poll(async () => new Set(await sizes()).size).toBe(1);
+  expect(new Set(await heights()).size).toBeGreaterThan(1);
+  expect(await page.locator('#board-grid').evaluate((g) => g.scrollHeight <= g.clientHeight + 1)).toBe(true);
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

@@ -1556,6 +1556,8 @@ async function main() {
       if (boardId === MOST_USED) $('board-add-bar').hidden = true;
       paintTap();
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
+      $('board-grid').classList.toggle('board-grid-words', display.sizedToWords);
+      $('board-grid').classList.toggle('board-grid-even', display.evenType);
       renderGrid($('board-grid'), node, {
         lang: owner,
         title: node.titleKey ? t(node.titleKey) : node.title,

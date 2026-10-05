@@ -544,6 +544,10 @@ const LOWER = 'M133 57H219C235 57 248 70 248 86V142C248 157.4 236.1 170 221 171L
  * @param {HTMLElement} root
  */
 function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label') {
+  if (root.classList.contains('board-grid-words') && !root.classList.contains('board-grid-results')) {
+    fitWords(root, labelSel);
+    return;
+  }
   for (const node of root.querySelectorAll(cellSel)) {
     const cell = /** @type {HTMLElement} */ (node);
     const label = /** @type {HTMLElement} */ (cell.querySelector(labelSel));
@@ -602,12 +606,42 @@ function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label')
   // **The topics are one list at one size.** Each cell fitted alone set "Time" at
   // the ceiling and "Sights and tickets" at half of it, which read as eleven
   // unrelated buttons; the smallest size any of them needed is the size they all
-  // take, and the shorter words are still the shorter words.
-  if (root.classList.contains('board-grid-topics')) {
+  // take, and the shorter words are still the shorter words. A board takes the same
+  // rule where the reader has asked for one size of type.
+  if (root.classList.contains('board-grid-topics') || root.classList.contains('board-grid-even')) {
     const labels = [...root.querySelectorAll(labelSel)].map((n) => /** @type {HTMLElement} */ (n));
     const least = Math.min(...labels.map((l) => Number.parseFloat(l.style.fontSize) || MAX_CELL_PX));
     for (const label of labels) label.style.fontSize = `${least}px`;
   }
+}
+
+/**
+ * Buttons sized to their words: every label at one size, the largest at which the
+ * whole grid still fits its screen, and each row as tall as its words need -- the
+ * rows are `auto` here, and share what is left over. For a reader who would rather
+ * read one size of type than see the buttons line up. The same tests as a cell's
+ * own fit: nothing may overflow the grid along its block axis, and no word may be
+ * broken to make a size fit.
+ * @param {HTMLElement} root @param {string} labelSel
+ */
+function fitWords(root, labelSel) {
+  const labels = [...root.querySelectorAll(labelSel)].map((n) => /** @type {HTMLElement} */ (n));
+  for (const label of labels) label.style.overflowWrap = 'normal';
+  const fits = (/** @type {number} */ px) => {
+    for (const label of labels) label.style.fontSize = `${px}px`;
+    const blocked = vertical(root) ? root.scrollWidth <= root.clientWidth + 1 : root.scrollHeight <= root.clientHeight + 1;
+    return blocked && labels.every((label) => widestLine(label) <= lineRoom(label));
+  };
+  let lo = MIN_CELL_PX;
+  let hi = MAX_CELL_PX;
+  if (!fits(hi)) {
+    for (let i = 0; i < 8; i += 1) {
+      const mid = (lo + hi) / 2;
+      if (fits(mid)) lo = mid; else hi = mid;
+    }
+    fits(lo);
+  }
+  for (const label of labels) label.style.overflowWrap = '';
 }
 
 /**

@@ -1458,7 +1458,11 @@ the explanation a section used to open with is behind a (?) at the end of its le
 (`helpTip`), opened inline under it. What the message screen shows is a grid of tiles over
 a small drawing of that screen whose parts come and go with the tiles; the buttons'
 behaviours stay sentences with a checkbox each, and the lines a button carries and what
-the eye shows are tiles again. The
+the eye shows are tiles again. The buttons' size is a choice too: all one size, each
+label as large as its own cell allows or -- ticked -- every label at the smallest of
+those; or sized to their words (`fitWords` in `ui/conversation-view.js`), every label at
+one size, the largest at which the whole grid still fits the screen, with the rows
+`auto` so each is as tall as its words need. The
 studio's own switch is the card's: it sits under the palette, turns the card to the
 `dark` theme and back to the reference, and stays in step with the palette either way
 (`lightSwitch` in `ui/theme.js` draws both switches).

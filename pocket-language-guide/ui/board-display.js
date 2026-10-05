@@ -19,6 +19,7 @@
 
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
+import { pills } from './dialog.js';
 
 const KEY = 'plg.board-display';
 
@@ -37,6 +38,8 @@ const KEY = 'plg.board-display';
  * @property {boolean} tapSpeaks  a button says its sentence where it is, without opening it
  * @property {boolean} tapAnswers  ...and a question then opens its answers
  * @property {boolean} holdSpeaks  holding a button says its sentence, whatever a tap does
+ * @property {boolean} sizedToWords  each row of buttons as tall as its words, at one size of type
+ * @property {boolean} evenType  with the buttons all one size, the same size of type on every one
  * @property {boolean} cellWords  under each button's words, the other language's
  * @property {boolean} cellSay    ...how to say them, in the reader's own letters
  * @property {boolean} cellIpa    ...and in IPA
@@ -75,6 +78,11 @@ export const DEFAULTS = {
   // sentence sounds, or one quick word, without leaving the grid. Off by default, since
   // a hold on a button the reader has filled in is how it is cleared.
   holdSpeaks: false,
+  // The buttons all one size, each label as large as its own fits, is the board as it
+  // was drawn: a grid that never moves. One size of type, or buttons sized to their
+  // words, is a reader's choice to trade that for evenness.
+  sizedToWords: false,
+  evenType: false,
   // The other side's words under each button, for the reader who is learning them.
   cellWords: false,
   cellSay: false,
@@ -103,12 +111,14 @@ export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
  * fourth are parts of a screen, each a short name in a grid of tiles; the second are
  * behaviours, each a sentence.
  */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'buttons'|'cells'|'peek'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
   { id: 'owner', labelKey: 'display.ownerShort', group: 'screen' },
   { id: 'roman', labelKey: 'display.romanShort', group: 'screen' },
   { id: 'ipa', labelKey: 'display.ipaShort', group: 'screen' },
   { id: 'speak', labelKey: 'display.speakShort', group: 'screen' },
   { id: 'turn', labelKey: 'display.turnShort', group: 'screen' },
+  { id: 'sizedToWords', labelKey: 'display.buttonSize', group: 'size' },
+  { id: 'evenType', labelKey: 'display.evenType', group: 'buttons' },
   { id: 'tapSpeaks', labelKey: 'display.tapSpeaks', group: 'buttons' },
   { id: 'tapAnswers', labelKey: 'display.tapAnswers', group: 'buttons' },
   { id: 'holdSpeaks', labelKey: 'display.holdSpeaks', group: 'buttons' },
@@ -211,12 +221,24 @@ export function displaySection(current, onChange, voice) {
     box.append(legend, ...body);
     return box;
   };
-  /** Only while speaking on tap is on can a question open its answers from it. */
+  /** A follow-on setting is out of play while the one it depends on says so. */
   const follow = () => {
-    const answers = inputs.tapAnswers;
-    if (!answers) return;
-    answers.disabled = !held.tapSpeaks;
-    answers.closest('label')?.classList.toggle('display-option-off', !held.tapSpeaks);
+    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords]])) {
+      const input = /** @type {HTMLInputElement} */ (inputs[id]);
+      input.disabled = off;
+      input.closest('label')?.classList.toggle('display-option-off', off);
+    }
+  };
+  /** Write one setting and tell everyone. @param {keyof BoardDisplay} id @param {boolean} on */
+  const set = (id, on) => {
+    held[id] = /** @type {never} */ (on);
+    // Merged into what is stored rather than written from this dialog's copy: the
+    // Most used section writes the same record, and neither may undo the other.
+    const next = { ...readDisplay(), [id]: on };
+    writeDisplay(next);
+    follow();
+    drawing.paint(held);
+    onChange(next);
   };
   /** @param {typeof OPTIONS[number]} option @param {string} [context]  what the name means without its heading */
   const checkbox = (option, context) => {
@@ -231,16 +253,7 @@ export function displaySection(current, onChange, voice) {
     // message screen's, so their accessible names carry the heading too: two checkboxes
     // both called "IPA" would be one question twice to a screen reader.
     if (context) input.setAttribute('aria-label', `${context} ${t(option.labelKey)}`);
-    // Merged into what is stored rather than written from this dialog's copy: the
-    // Most used section writes the same record, and neither may undo the other.
-    input.addEventListener('change', () => {
-      held[option.id] = input.checked;
-      const next = { ...readDisplay(), [option.id]: input.checked };
-      writeDisplay(next);
-      follow();
-      drawing.paint(held);
-      onChange(next);
-    });
+    input.addEventListener('change', () => set(option.id, input.checked));
     const text = document.createElement('span');
     text.textContent = t(option.labelKey);
     row.append(input, text);
@@ -254,7 +267,13 @@ export function displaySection(current, onChange, voice) {
     return grid;
   };
 
-  /** @type {Node[]} */ const buttons = [];
+  /** @type {Node[]} */ const buttons = [pills({
+    name: 'display-size',
+    label: t('display.buttonSize'),
+    options: [{ value: 'equal', label: t('display.sizeEqual') }, { value: 'words', label: t('display.sizeWords') }],
+    value: held.sizedToWords ? 'words' : 'equal',
+    onChange: (value) => set('sizedToWords', value === 'words'),
+  })];
   for (const option of OPTIONS.filter((o) => o.group === 'buttons')) {
     const row = checkbox(option);
     buttons.push(row);

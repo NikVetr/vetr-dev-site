@@ -525,6 +525,9 @@
 /* **Found buttons scroll**: a search can find more than one screen holds. Rows as tall
    as a phone's board gives its cells, so the fitter still has a box to fill. */
 .board-grid.board-grid-results { grid-auto-rows: 6.5rem; overflow-y: auto; align-content: start; }
+/* Buttons sized to their words (`fitWords`): each row as tall as its words at the one
+   size they all share, and the rows sharing whatever is left of the screen. */
+.board-grid.board-grid-words:not(.board-grid-results) { grid-auto-rows: auto; }
 /* The letters that matched, marked twice -- heavier, and in another colour -- so the
    mark survives a screen in sun and a reader who does not see the colour. */
 mark.board-cell-found { background: none; color: var(--accent); font-weight: 700; }
