@@ -2416,8 +2416,10 @@ carries a hint a phone cannot put in a tooltip, and onboarding is where clarity
 beats density.
 
 **The header is 73pt rather than 156**, sticky, so that was 83pt off every screen:
-brand, Export PDF and a `☰` disclosure, then the info line. Export PDF stays out of
-the menu because burying a primary action is a real cost. **Scroll boxes fade at the
+a back arrow, the brand, PNG and a `☰` disclosure, then the info line. PNG stays out
+of the menu because burying a primary action is a real cost, and so does the way back
+to the languages, which leads the header at every width -- a way out that has to be
+found behind a menu read as no way out at all. **Scroll boxes fade at the
 bottom and stop fading when they reach it** -- a 1pt sentinel watched by an
 `IntersectionObserver` rooted on the scroll box, asked of the last row rather than
 computed from heights, because the tree opens and closes underneath and a measured

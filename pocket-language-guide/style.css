@@ -1651,6 +1651,14 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 /* Back to the gallery. Rightmost in the header, but quiet: the export button beside
    it is the loud one. */
 .back-link { white-space: nowrap; }
+/* Except in the studio, where it is an arrow at the head of the header -- where a
+   way back is looked for, and the conversation board's shape for the same thing --
+   and stays there on a phone, where the rest of the actions fold into a menu. The
+   arrow is set larger than the buttons' type so it reads at their height. */
+.studio-header .back-link { justify-content: center; min-inline-size: 2.4em; }
+.back-arrow { font-size: 1.3em; line-height: 1; }
+/* A glyph gets no bidi treatment, and back is the other way on a right-to-left page. */
+[dir="rtl"] .back-arrow { display: inline-block; transform: scaleX(-1); }
 
 /* The "I speak" control. Collapsed it is just the endonym; the list is the board's
    language menu, the reader's word for each language at the start of its row and the

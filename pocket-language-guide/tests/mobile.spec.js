@@ -214,7 +214,12 @@ test.describe('the studio\'s chrome on a phone', () => {
     // PNG is the phone's primary action and stays out of the menu; the rest are in
     // it, and there is one of each rather than a visible copy and a hidden one.
     await expect(page.locator('.site-header .container > #png')).toBeVisible();
-    for (const sel of ['#banner', '#drill-open', '#pdf', '.back-link']) {
+    // **Except the way back, which leads line one.** It was in the menu with the rest,
+    // and a way out that has to be found behind three bars was reported as missing.
+    const back = await box('.site-header .container > .back-link');
+    expect(back.x).toBeLessThan(brand.x);
+    expect(Math.abs((back.y + back.height / 2) - (png.y + png.height / 2))).toBeLessThan(2);
+    for (const sel of ['#banner', '#drill-open', '#pdf']) {
       await expect(page.locator(`#header-menu > ${sel}`)).toHaveCount(1);
       await expect(page.locator(sel)).toHaveCount(1);
     }
@@ -348,7 +353,8 @@ test('the phone\'s chrome is built and taken down at the breakpoint', async ({ p
   const order = () => page.evaluate(() => [...document.querySelectorAll('.site-header .container > *')]
     .map((el) => el.id || el.className.replace(/\s+/g, '.')).join(' '));
   const laid = await order();
-  expect(laid).toContain('drill-open pdf png btn.ghost.back-link');
+  expect(laid).toContain('drill-open pdf png');
+  expect(laid).toMatch(/^btn\.ghost\.back-link brand /);
   await expect(page.locator('.panel-toggle')).toHaveCount(0);
 
   await page.setViewportSize({ width: 390, height: 844 });
@@ -376,6 +382,23 @@ test('none of the phone\'s chrome is on a desktop', async ({ page }) => {
   const panels = page.locator('.studio > section:nth-of-type(1), .studio > section:nth-of-type(3)');
   expect(await panels.evaluateAll((all) => all.map((s) => getComputedStyle(s).maskImage)))
     .toEqual(['none', 'none']);
+});
+
+test('the studio has a way back to the languages at every width', async ({ page }) => {
+  // The header's back link sat at the far end of the desktop header and, on a phone,
+  // inside the menu with the actions -- and was reported as no back button at all.
+  // It is an arrow at the head of the header now, outside the menu at both widths.
+  for (const viewport of [{ width: 1680, height: 1000 }, PHONE]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused svg')).toBeVisible();
+    const back = page.locator('.site-header').getByRole('link', { name: 'All languages' });
+    await expect(back).toBeVisible();
+    await expect(back).toHaveCount(1);
+    await back.click();
+    await expect(page.locator('.card').first()).toBeVisible();
+    expect(new URL(page.url()).pathname).toMatch(/\/(index\.html)?$/);
+  }
 });
 
 test('on a desktop a picked row still reveals itself in the list', async ({ page }) => {

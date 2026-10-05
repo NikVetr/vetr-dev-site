@@ -143,13 +143,13 @@ const SLOP = 6;
 const ROWS_KEY = 'plg.studio-rows';
 
 /**
- * Everything in the header but the brand, the info line and Export PDF, in one
- * disclosure.
+ * Everything in the header but the way back, the brand, the info line and PNG, in
+ * one disclosure.
  *
- * Export PDF stays out of it on purpose: it is what the page is for, and a menu in
- * front of the primary action is a real cost where the other four are one tap either
- * way. Dismissal follows `ui/item-popup.js` -- Escape, a pointer outside, and focus
- * handed back rather than left on something that is no longer rendered.
+ * The primary export stays out of it on purpose: it is what the page is for, and a
+ * menu in front of the primary action is a real cost where the other three are one
+ * tap either way. Dismissal follows `ui/item-popup.js` -- Escape, a pointer outside,
+ * and focus handed back rather than left on something that is no longer rendered.
  * @returns {() => void} puts the header back
  */
 function headerMenu() {
@@ -157,8 +157,10 @@ function headerMenu() {
   const menu = /** @type {HTMLElement|null} */ (document.getElementById('header-menu'));
   if (!toggle || !menu) return () => {};
 
+  // Not the way back: it leads the header's own line at every width, because a way
+  // out that has to be found in a menu is the thing a reader reported missing.
   const moved = [...document.querySelectorAll(
-    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link',
+    '.site-header #banner, .site-header #drill-open, .site-header #pdf',
   )];
   // **PNG is the export that stays out on a phone, and PDF is the one that folds
   // away.** It is the other way round on a desktop and both are right: a PDF is what
