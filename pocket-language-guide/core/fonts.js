@@ -1,8 +1,10 @@
 // Font resolution and metrics. fontkit does the OpenType shaping, so the same
 // advances feed the solver, the DOM preview and the PDF -- there is no second
 // measurement path to keep in sync.
-
-import * as fontkit from '../vendor/fontkit.esm.js';
+//
+// fontkit is a megabyte of script, so it is imported by the first face loaded rather
+// than with this module: a page that only borrows the field rules below -- the quiz,
+// by way of the solver's helpers -- never downloads it.
 
 /** Which script a field is written in, given the sheet's language pair. */
 // Which language a field belongs to, and so which font stack draws it. Two of
@@ -74,7 +76,8 @@ export function createFontRegistry(loadBytes, manifest) {
         const { stack, weight, italic } = pick(w.stack, w.weight, w.italic);
         const file = `${stack}-${weight}${italic ? 'i' : ''}`;
         if (loaded.has(file)) continue;
-        const font = fontkit.create(await loadBytes(`${file}.ttf`));
+        const { create } = await import('../vendor/fontkit.esm.js');
+        const font = create(await loadBytes(`${file}.ttf`));
         loaded.set(file, {
           font, key: file, upem: font.unitsPerEm, ascent: font.ascent, descent: font.descent,
         });

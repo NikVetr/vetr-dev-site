@@ -52,6 +52,14 @@ test.describe('quiz mode', () => {
     await expect(page.locator('#drill .drill-setup')).toBeVisible();
   });
 
+  test('the quiz page sets no type, so it never downloads the font engine', async ({ page }) => {
+    const fetched = [];
+    page.on('request', (request) => fetched.push(request.url()));
+    await openDrill(page, 'seed-1');
+    await page.waitForLoadState('networkidle');
+    expect(fetched.filter((url) => url.includes('fontkit'))).toEqual([]);
+  });
+
   test('the setup names the pool and the pair\'s columns', async ({ page }) => {
     const drill = await openDrill(page, 'seed-1');
     // It says how much of the card can be asked about before anything is chosen,
