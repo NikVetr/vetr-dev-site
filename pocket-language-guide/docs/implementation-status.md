@@ -5846,3 +5846,20 @@ hands-free mode, the lock-screen override, saved configurations, save to Photos,
 per-section format overrides, the warnings modal, "How you speak" inline, drag to reorder); the
 rest of the key words and strings; the register and name-letter research; the "loading /
 typesetting animation" the owner mentioned, which no message in the record describes.
+
+## Native evidence for Batch AI
+
+Built from the pushed commit `0ae73b955`. **Android** (the project regenerated, so the
+launcher now reads Wanderwart): `scripts/build_android.sh` built a 43.5MB debug APK and
+`scripts/check_android.mjs` passed every check on the emulator -- launch with the plugins
+App, AppLauncher, Filesystem, Preferences and Share; persistence across a relaunch and a
+reinstall; resuming and Back; an offline start (53 cards); the share sheet and its cancel; and
+Back at the top leaving the app. The manifest carries the translators' `<queries>`.
+**iOS** (`npm run ios -- --run` then `npm run check:ios` on the Mac, after installing the new
+plugin): every check passed on the simulator, including the new `safe-area-top` (insets 62
+and 34, the brand at 73) and `safe-area-bottom`, an offline start with nothing outside the
+bundle, speech, the keyboard, the share sheet and the PDF export, and a backgrounded beacon
+stopping. AppLauncher is registered. Neither the emulator nor the simulator has the
+translator apps or a torch -- the simulator refuses `translate://` outright -- so which
+translator opens, the lamp switch, and the register and key-word displays on a real screen
+remain device checks.
