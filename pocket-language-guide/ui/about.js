@@ -8,6 +8,7 @@
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
 import { askChoices, askSelect, askText, soundGrid } from './board-menu.js';
+import { helpTip } from './dialog.js';
 
 const KEY = 'plg.about';
 
@@ -151,15 +152,12 @@ export function askCountry(names, lang, onChange) {
  * @param {() => void} [askFrom]  where the pair can say which country
  */
 export function aboutSection(onChange, diet, sounds, askFrom) {
-  const box = document.createElement('section');
+  const box = document.createElement('fieldset');
   box.className = 'speaker-block';
-  const heading = document.createElement('h3');
-  heading.className = 'speaker-heading';
-  heading.textContent = t('about.heading');
-  const kept = document.createElement('p');
-  kept.className = 'speaker-why';
-  kept.textContent = t('about.kept');
-  box.append(heading, detailField('name', onChange).label);
+  const legend = document.createElement('legend');
+  const kept = helpTip(t('about.kept'));
+  legend.append(t('about.heading'), kept.button);
+  box.append(legend, kept.tip, detailField('name', onChange).label);
   if (sounds) {
     const build = document.createElement('button');
     build.type = 'button';
@@ -184,6 +182,5 @@ export function aboutSection(onChange, diet, sounds, askFrom) {
     choose.addEventListener('click', () => askDiet(diet, onChange));
     box.append(choose);
   }
-  box.append(kept);
   return box;
 }

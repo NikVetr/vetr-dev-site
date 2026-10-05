@@ -8,7 +8,7 @@
 // bars open it instead, so there is never a second settings screen beside the first.
 
 import { t } from './i18n.js';
-import { dialogHead } from './dialog.js';
+import { dialogHead, pills } from './dialog.js';
 import { isNative, readResume, RESUME_DEPTHS, writeResume } from './platform/shell.js';
 
 /**
@@ -61,22 +61,14 @@ export function openAppearance(extra = []) {
  */
 export function resumeSection() {
   if (!isNative()) return [];
-  const box = document.createElement('fieldset');
+  const box = document.createElement('div');
   box.className = 'speaker-block';
-  const legend = document.createElement('legend');
-  legend.textContent = t('resume.heading');
-  box.append(legend);
-  const held = readResume();
-  for (const depth of RESUME_DEPTHS) {
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = 'resume';
-    input.checked = depth === held;
-    input.addEventListener('change', () => writeResume(depth));
-    const label = document.createElement('label');
-    label.className = 'speaker-option';
-    label.append(input, t(`resume.${depth}`));
-    box.append(label);
-  }
+  box.append(pills({
+    name: 'resume',
+    label: t('resume.heading'),
+    options: RESUME_DEPTHS.map((depth) => ({ value: depth, label: t(`resume.${depth}`) })),
+    value: readResume(),
+    onChange: (depth) => writeResume(/** @type {typeof RESUME_DEPTHS[number]} */ (depth)),
+  }));
   return [box];
 }

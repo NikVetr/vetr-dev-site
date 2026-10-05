@@ -1436,7 +1436,15 @@ that closes it, which every page's header opens. **Every dialog opens with that 
 (`dialogHead` in `ui/dialog.js`): its name, the switch where it is a settings dialog, and
 the cross, held at the top while the body scrolls under it -- what the dialog is and the
 way out of it never scroll away, and anything else that sticks in a dialog (the keyboard
-of sounds' tiles) sits under it by the header's measured height. The
+of sounds' tiles) sits under it by the header's measured height. **The settings read as a
+form, not a manual**: every section is a framed fieldset under a small legend, a one-of-a-few
+choice is a row of pills (`pills` in `ui/dialog.js` -- radios laid invisibly over the pills,
+the chosen one filled and bold, each holding its bold width so choosing moves nothing), and
+the explanation a section used to open with is behind a (?) at the end of its legend
+(`helpTip`), opened inline under it. What the message screen shows is a grid of tiles over
+a small drawing of that screen whose parts come and go with the tiles; the buttons'
+behaviours stay sentences with a checkbox each, and the lines a button carries and what
+the eye shows are tiles again. The
 studio's own switch is the card's: it sits under the palette, turns the card to the
 `dark` theme and back to the reference, and stays in step with the palette either way
 (`lightSwitch` in `ui/theme.js` draws both switches).

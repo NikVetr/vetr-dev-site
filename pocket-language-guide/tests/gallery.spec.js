@@ -434,7 +434,7 @@ test('the landing page settings hold what is personal in every language, over th
   const diet = page.locator('dialog[open]').last();
   await diet.getByRole('checkbox', { name: 'I am vegetarian' }).check();
   await diet.getByRole('button', { name: 'Save' }).click();
-  await expect(dialog.getByRole('checkbox', { name: 'Your own wording, under the sentence' })).toBeChecked();
+  await expect(dialog.getByRole('checkbox', { name: 'Your wording', exact: true })).toBeChecked();
   await expect(dialog.getByRole('button', { name: 'Save a copy' })).toBeVisible();
   expect(JSON.parse(await page.evaluate(() => localStorage.getItem('plg.speaker') ?? '')))
     .toEqual({ speaker_gender: 'feminine' });

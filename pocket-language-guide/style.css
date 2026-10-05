@@ -2175,6 +2175,44 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .speaker-option {
   display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
 }
+/* A (?) at the end of a heading, and what it opens under it (`helpTip` in
+   `ui/dialog.js`): small and round, quiet until pressed, filled while its explanation
+   is open. The hit area reaches past the circle, so a thumb finds it. */
+.help-toggle {
+  position: relative; display: inline-grid; place-items: center; vertical-align: middle;
+  inline-size: 1.15rem; block-size: 1.15rem; margin-inline-start: 0.4em; padding: 0;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: transparent; color: var(--muted); font-size: 0.7rem; font-weight: 700; line-height: 1;
+}
+.help-toggle::after { content: ''; position: absolute; inset: -0.5rem; }
+.help-toggle[aria-expanded="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.help-tip {
+  margin: 0 0 var(--space-2); padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm); background: var(--surface); font-size: var(--fs--1);
+}
+.help-tip p { margin: 0; }
+.help-tip p + p { margin-block-start: 0.4em; }
+/* One choice of a few (`pills` in `ui/dialog.js`): its name, then the choices in one
+   rounded track that wraps on a narrow screen rather than squeezing. The chosen one
+   is filled and bold, and every pill holds its bold width, so choosing one does not
+   move the others. The radios lie invisibly over them and keep the keyboard's arrows,
+   so focus is drawn on the pill. */
+.pill-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35em 0.6em; margin-block: 0 var(--space-2); }
+.pill-row:last-child { margin-block-end: 0; }
+.pill-name { font-size: var(--fs--1); font-weight: 600; }
+.pills {
+  display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; max-inline-size: 100%;
+  border-radius: 1.1em; background: var(--surface-2);
+}
+.pill {
+  position: relative; display: inline-flex; max-inline-size: 100%; padding: 0.3em 0.8em; border-radius: 1em;
+  font-size: var(--fs--1); line-height: 1.3; text-align: center; cursor: pointer;
+}
+.pill-input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.pill > span { display: inline-grid; }
+.pill > span::after { content: attr(data-label); font-weight: 700; block-size: 0; visibility: hidden; overflow: hidden; }
+.pill:has(input:checked) { background: var(--accent); color: var(--paper); font-weight: 700; }
+.pill:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
 /* One of the reader's details: its name above a field the width of the dialog. */
 .about-field { display: grid; gap: 0.3em; margin-block: 0 var(--space-1); }
 /* The way into rearranging a screen, set apart from the settings around it. */
@@ -2228,6 +2266,69 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .sound-key > span { white-space: nowrap; }
 .sound-key small { color: var(--muted); font-size: 0.72em; }
 .sound-vowels .sound-key { background: var(--accent-soft); border-color: var(--accent); }
+
+/* --- the settings' sections ------------------------------------------------
+   Here rather than with the board's own rules, because the same sections open from
+   every page's settings: the landing page's too, which loads no other stylesheet. */
+/* One behaviour, one checkbox, the label the whole hit target. */
+.display-option { display: flex; align-items: baseline; gap: var(--space-2); padding: 0.3rem 0; cursor: pointer; }
+.display-option input { flex: none; }
+/* The follow-on setting sits under the one it depends on, and is dimmed while that is off. */
+.display-option-sub { padding-inline-start: 1.6em; }
+.display-option-off { opacity: 0.55; }
+.display-caption { margin: var(--space-2) 0 var(--space-1); }
+/* A part of a screen, as a tile: the checkbox and a short name, outlined, filled while
+   ticked. As many to a row as fit, each wide enough for its name on a line or two. */
+.display-tiles {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); gap: var(--space-1);
+  margin-block: var(--space-1) var(--space-2);
+}
+.display-tile {
+  display: flex; align-items: center; gap: 0.4em; padding: 0.35em 0.5em;
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  font-size: var(--fs--1); line-height: 1.25; cursor: pointer;
+}
+.display-tile input { flex: none; margin: 0; }
+.display-tile:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); }
+/* The message screen in miniature (`cartoon` in `ui/board-display.js`): the sentence
+   in its outlined frame, Reply under it, and the reader's lines and controls along the
+   foot -- each of those last only while its tile is ticked, so the drawing changes
+   as the tiles do. A phone's proportions, small enough to sit under the tiles, in one
+   blue whatever the theme, as the message screen keeps its colours in both. */
+.display-cartoon {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  inline-size: 7rem; aspect-ratio: 9 / 14; margin: 0 auto var(--space-2); padding: 0.35rem;
+  border-radius: 0.6rem; background: #1d5e8f; color: #fff;
+}
+.cartoon-frame {
+  flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+  border: 1.5px solid rgb(255 255 255 / 0.9); border-radius: 0.3rem;
+}
+.cartoon-big { display: block; inline-size: 70%; block-size: 0.65rem; border-radius: 0.15rem; background: #fff; }
+.cartoon-big-end { inline-size: 40%; }
+.cartoon-reply { display: block; inline-size: 50%; block-size: 0.6rem; margin-block-start: 0.2rem; border-radius: 0.2rem; background: rgb(0 0 0 / 0.3); }
+.cartoon-foot { display: flex; align-items: center; gap: 0.2rem; }
+.cartoon-lines { flex: 1 1 auto; display: grid; gap: 0.18rem; }
+.cartoon-lines i { display: block; block-size: 0.18rem; border-radius: 0.1rem; background: #fff; }
+.cartoon-lines [data-part="roman"] { inline-size: 80%; opacity: 0.75; }
+.cartoon-lines [data-part="ipa"] { inline-size: 60%; opacity: 0.55; }
+.cartoon-control {
+  display: grid; place-items: center; inline-size: 0.9rem; block-size: 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.75); border-radius: 0.2rem; font-size: 0.5rem; line-height: 1;
+}
+.display-cartoon [data-part][hidden] { display: none; }
+/* Most used: its two choices, its two actions, and the counts in a table of their own. */
+.usage-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.usage-table { inline-size: 100%; border-collapse: collapse; font-size: var(--fs--1); }
+.usage-table th, .usage-table td {
+  padding: 0.35em 0.45em; border-block-end: 1px solid var(--line-soft);
+  text-align: end; font-variant-numeric: tabular-nums;
+}
+.usage-table thead th { font-weight: 600; color: var(--muted); }
+.usage-table tbody th, .usage-table thead th:first-child { text-align: start; font-weight: 400; overflow-wrap: break-word; }
+/* The voice is one line, not a block: a label and the platform's own select. */
+.display-voice { display: flex; align-items: baseline; gap: var(--space-2); padding: 0.3rem 0; }
+.display-voice select { flex: 1 1 auto; min-inline-size: 0; }
 
 /* The settings dialog's own action row: three chips that do different-sized things,
    so they wrap rather than squeeze on a phone. */

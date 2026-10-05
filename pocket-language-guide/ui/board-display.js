@@ -96,31 +96,34 @@ export const DEFAULTS = {
 // sounded exactly like 0.25 on an iPhone.
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
-/** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'message'|'buttons'|'peek'}[]} */ ([
-  { id: 'owner', labelKey: 'display.owner', group: 'message' },
-  { id: 'roman', labelKey: 'display.roman', group: 'message' },
-  { id: 'ipa', labelKey: 'display.ipa', group: 'message' },
-  { id: 'speak', labelKey: 'display.speak', group: 'message' },
-  { id: 'turn', labelKey: 'display.turn', group: 'message' },
-  { id: 'polite', labelKey: 'display.polite', group: 'message' },
-  { id: 'siren', labelKey: 'display.siren', group: 'message' },
-  { id: 'askRemove', labelKey: 'display.askRemove', group: 'message' },
+/**
+ * The order they are offered in, which is the order they appear on screen, in four
+ * groups: what the message screen shows, how the buttons behave, the lines a button
+ * carries under its words, and what holding the eye shows. The first, third and
+ * fourth are parts of a screen, each a short name in a grid of tiles; the second are
+ * behaviours, each a sentence.
+ */
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'buttons'|'cells'|'peek'}[]} */ ([
+  { id: 'owner', labelKey: 'display.ownerShort', group: 'screen' },
+  { id: 'roman', labelKey: 'display.romanShort', group: 'screen' },
+  { id: 'ipa', labelKey: 'display.ipaShort', group: 'screen' },
+  { id: 'speak', labelKey: 'display.speakShort', group: 'screen' },
+  { id: 'turn', labelKey: 'display.turnShort', group: 'screen' },
   { id: 'tapSpeaks', labelKey: 'display.tapSpeaks', group: 'buttons' },
   { id: 'tapAnswers', labelKey: 'display.tapAnswers', group: 'buttons' },
   { id: 'holdSpeaks', labelKey: 'display.holdSpeaks', group: 'buttons' },
-  { id: 'cellWords', labelKey: 'display.cellWords', group: 'buttons' },
-  { id: 'cellSay', labelKey: 'display.roman', group: 'buttons' },
-  { id: 'cellIpa', labelKey: 'display.ipa', group: 'buttons' },
-  { id: 'peekOwner', labelKey: 'display.peekOwner', group: 'peek' },
-  { id: 'peekWords', labelKey: 'display.cellWords', group: 'peek' },
-  { id: 'peekSay', labelKey: 'display.roman', group: 'peek' },
-  { id: 'peekIpa', labelKey: 'display.ipa', group: 'peek' },
-  { id: 'peekAnswers', labelKey: 'display.peekAnswers', group: 'peek' },
+  { id: 'polite', labelKey: 'display.polite', group: 'buttons' },
+  { id: 'siren', labelKey: 'display.siren', group: 'buttons' },
+  { id: 'askRemove', labelKey: 'display.askRemove', group: 'buttons' },
+  { id: 'cellWords', labelKey: 'display.wordsShort', group: 'cells' },
+  { id: 'cellSay', labelKey: 'display.romanShort', group: 'cells' },
+  { id: 'cellIpa', labelKey: 'display.ipaShort', group: 'cells' },
+  { id: 'peekOwner', labelKey: 'display.peekOwnerShort', group: 'peek' },
+  { id: 'peekWords', labelKey: 'display.wordsShort', group: 'peek' },
+  { id: 'peekSay', labelKey: 'display.romanShort', group: 'peek' },
+  { id: 'peekIpa', labelKey: 'display.ipaShort', group: 'peek' },
+  { id: 'peekAnswers', labelKey: 'display.answersShort', group: 'peek' },
 ]);
-
-/** The lines a button can carry under its words. */
-const CELL_LINES = new Set(['cellWords', 'cellSay', 'cellIpa']);
 
 /** The windows the Most used screen can count over, as `ui/usage.js` defines them. */
 const USED_OVER = ['week', 'month', 'year', 'all'];
@@ -156,12 +159,40 @@ export function writeDisplay(next) {
 }
 
 /**
- * The settings section, a checkbox each, in two groups: what the message screen shows,
- * and how the buttons behave and what they carry.
+ * The message screen in miniature, drawn under its tiles: the sentence in its frame,
+ * then the reader's lines and the controls, each part there only while its tile is
+ * ticked. Nothing on it does anything; it is there so a reader can see what a tile
+ * changes before they go and open a sentence to find out.
+ */
+function cartoon() {
+  const box = document.createElement('div');
+  box.className = 'display-cartoon';
+  box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = '<div class="cartoon-frame"><i class="cartoon-big"></i><i class="cartoon-big cartoon-big-end"></i>'
+    + '<b class="cartoon-reply"></b></div><div class="cartoon-foot"><div class="cartoon-lines">'
+    + '<i data-part="owner"></i><i data-part="roman"></i><i data-part="ipa"></i></div>'
+    + '<span class="cartoon-control" data-part="speak">\u25B6</span><span class="cartoon-control" data-part="turn">\u21BB</span></div>';
+  return {
+    box,
+    /** @param {BoardDisplay} held */
+    paint: (held) => {
+      for (const part of /** @type {NodeListOf<HTMLElement>} */ (box.querySelectorAll('[data-part]'))) {
+        part.hidden = !held[/** @type {keyof BoardDisplay} */ (part.dataset.part)];
+      }
+    },
+  };
+}
+
+/**
+ * The settings' three sections about the board: what the message screen shows, as a
+ * grid of tiles over a small drawing of that screen; how the buttons behave, a
+ * checkbox each, with the lines a button can carry as tiles again; and what holding
+ * the eye shows, tiles too.
  *
- * Checkboxes rather than a row of chips: these are independent yes/no answers, which
- * is the control the platform already has and the one a screen reader announces
- * without being told how.
+ * Checkboxes throughout, the tiles included: these are independent yes/no answers,
+ * which is the control the platform already has and the one a screen reader announces
+ * without being told how. A tile is the checkbox and its short name, outlined, and
+ * filled while ticked -- the tick and the fill, two cues rather than one.
  * @param {BoardDisplay} current
  * @param {(next:BoardDisplay)=>void} onChange
  * @param {{canSpeak:boolean, language:string}} [voice]  the listener's voice on this
@@ -169,15 +200,16 @@ export function writeDisplay(next) {
  */
 export function displaySection(current, onChange, voice) {
   const held = { ...current };
-  const box = document.createElement('section');
-  box.className = 'speaker-block';
   /** @type {Partial<Record<keyof BoardDisplay, HTMLInputElement>>} */ const inputs = {};
-  /** @param {string} key */
-  const heading = (key) => {
-    const h = document.createElement('h3');
-    h.className = 'speaker-heading';
-    h.textContent = t(key);
-    return h;
+  const drawing = cartoon();
+  /** One framed section under its legend. @param {string} key @param {Node[]} body */
+  const section = (key, body) => {
+    const box = document.createElement('fieldset');
+    box.className = 'speaker-block';
+    const legend = document.createElement('legend');
+    legend.textContent = t(key);
+    box.append(legend, ...body);
+    return box;
   };
   /** Only while speaking on tap is on can a question open its answers from it. */
   const follow = () => {
@@ -186,68 +218,80 @@ export function displaySection(current, onChange, voice) {
     answers.disabled = !held.tapSpeaks;
     answers.closest('label')?.classList.toggle('display-option-off', !held.tapSpeaks);
   };
+  /** @param {typeof OPTIONS[number]} option @param {string} [context]  what the name means without its heading */
+  const checkbox = (option, context) => {
+    const row = document.createElement('label');
+    row.className = option.group === 'buttons' ? 'display-option' : 'display-tile';
+    if (option.id === 'tapAnswers') row.classList.add('display-option-sub');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = held[option.id];
+    inputs[option.id] = input;
+    // The tiles under a button and under the eye share their short names with the
+    // message screen's, so their accessible names carry the heading too: two checkboxes
+    // both called "IPA" would be one question twice to a screen reader.
+    if (context) input.setAttribute('aria-label', `${context} ${t(option.labelKey)}`);
+    // Merged into what is stored rather than written from this dialog's copy: the
+    // Most used section writes the same record, and neither may undo the other.
+    input.addEventListener('change', () => {
+      held[option.id] = input.checked;
+      const next = { ...readDisplay(), [option.id]: input.checked };
+      writeDisplay(next);
+      follow();
+      drawing.paint(held);
+      onChange(next);
+    });
+    const text = document.createElement('span');
+    text.textContent = t(option.labelKey);
+    row.append(input, text);
+    return row;
+  };
+  /** @param {'screen'|'cells'|'peek'} group @param {string} [context] */
+  const tiles = (group, context) => {
+    const grid = document.createElement('div');
+    grid.className = 'display-tiles';
+    grid.append(...OPTIONS.filter((o) => o.group === group).map((o) => checkbox(o, context)));
+    return grid;
+  };
 
-  for (const group of /** @type {const} */ (['message', 'buttons', 'peek'])) {
-    box.append(heading({ message: 'display.heading', buttons: 'display.buttonsHeading', peek: 'display.peekHeading' }[group]));
-    for (const option of OPTIONS.filter((o) => o.group === group)) {
-      // The three lines a button can carry are introduced once, rather than each
-      // label saying "under each button".
-      if (option.id === 'cellWords') {
-        const caption = document.createElement('p');
-        caption.className = 'speaker-why display-caption';
-        caption.textContent = t('display.cellsCaption');
-        box.append(caption);
-      }
-      const row = document.createElement('label');
-      row.className = 'display-option';
-      if (option.id === 'tapAnswers') row.classList.add('display-option-sub');
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.checked = held[option.id];
-      inputs[option.id] = input;
-      // The lines under the buttons share their words with the message screen's own
-      // lines, so their names carry the caption too: two checkboxes both called "How to
-      // say it, in IPA" would be one question twice to a screen reader.
-      if (CELL_LINES.has(option.id)) {
-        row.classList.add('display-option-cell');
-        input.setAttribute('aria-label', `${t('display.cellsCaption')} ${t(option.labelKey)}`);
-      }
-      if (option.group === 'peek') input.setAttribute('aria-label', `${t('display.peekHeading')} ${t(option.labelKey)}`);
-      // Merged into what is stored rather than written from this dialog's copy: the
-      // Most used section writes the same record, and neither may undo the other.
-      input.addEventListener('change', () => {
-        held[option.id] = input.checked;
-        const next = { ...readDisplay(), [option.id]: input.checked };
-        writeDisplay(next);
-        follow();
-        onChange(next);
+  /** @type {Node[]} */ const buttons = [];
+  for (const option of OPTIONS.filter((o) => o.group === 'buttons')) {
+    const row = checkbox(option);
+    buttons.push(row);
+    // A wink for one country, from the device's own locale rather than a question
+    // nobody was asked: a Canadian phone with the softening off is told, once, that
+    // it might want it on.
+    if (option.id === 'polite' && /-CA$/i.test(navigator.language ?? '')) {
+      const hint = document.createElement('p');
+      hint.className = 'speaker-why display-hint';
+      hint.textContent = t('display.politeCanada');
+      hint.hidden = held.polite;
+      row.querySelector('input')?.addEventListener('change', (event) => {
+        hint.hidden = /** @type {HTMLInputElement} */ (event.target).checked;
       });
-      const text = document.createElement('span');
-      text.textContent = t(option.labelKey);
-      row.append(input, text);
-      box.append(row);
-      // A wink for one country, from the device's own locale rather than a question
-      // nobody was asked: a Canadian phone with the softening off is told, once, that
-      // it might want it on.
-      if (option.id === 'polite' && /-CA$/i.test(navigator.language ?? '')) {
-        const hint = document.createElement('p');
-        hint.className = 'speaker-why display-hint';
-        hint.textContent = t('display.politeCanada');
-        hint.hidden = held.polite;
-        input.addEventListener('change', () => { hint.hidden = input.checked; });
-        box.append(hint);
-      }
-      // Said where it applies, not left to a tap that silently opens the sentence.
-      if (option.id === 'tapSpeaks' && voice && !voice.canSpeak) {
-        const hint = document.createElement('p');
-        hint.className = 'speaker-why display-hint';
-        hint.textContent = t('display.tapNoVoice', { language: voice.language });
-        box.append(hint);
-      }
+      buttons.push(hint);
+    }
+    // Said where it applies, not left to a tap that silently opens the sentence.
+    if (option.id === 'tapSpeaks' && voice && !voice.canSpeak) {
+      const hint = document.createElement('p');
+      hint.className = 'speaker-why display-hint';
+      hint.textContent = t('display.tapNoVoice', { language: voice.language });
+      buttons.push(hint);
     }
   }
+  const caption = document.createElement('p');
+  caption.className = 'speaker-why display-caption';
+  caption.textContent = t('display.cellsCaption');
+  const all = document.createElement('div');
+  all.className = 'display-sections';
+  all.append(
+    section('display.heading', [tiles('screen'), drawing.box]),
+    section('display.buttonsHeading', [...buttons, caption, tiles('cells', t('display.cellsCaption'))]),
+    section('display.peekHeading', [tiles('peek', t('display.peekHeading'))]),
+  );
   follow();
-  return box;
+  drawing.paint(held);
+  return all;
 }
 
 /** @param {string} lang */

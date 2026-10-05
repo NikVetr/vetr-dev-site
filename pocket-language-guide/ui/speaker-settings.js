@@ -26,7 +26,7 @@
 import { axesFor, unanswered } from '../core/speaker.js';
 import { t } from './i18n.js';
 import * as store from './platform/store.js';
-import { dialogHead } from './dialog.js';
+import { dialogHead, helpTip, pills } from './dialog.js';
 
 const KEY = 'plg.speaker';
 
@@ -125,36 +125,26 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
     onChange({ ...held });
   };
 
-  const fields = asked.map((axis) => {
-    const name = `speaker-${axis.axis}`;
-    const options = axis.values.map((value) => {
-      const input = /** @type {HTMLInputElement} */ (el('input', { type: 'radio', name, value }));
-      input.checked = held[axis.axis] === value;
-      input.addEventListener('change', () => { held[axis.axis] = value; commit(); });
-      return el('label', { class: 'speaker-option' }, [input, words(axis.axis, value)]);
-    });
-    // Declining is on the form, because it is a state the reader can choose and not
-    // only one they can fail out of. Someone who would rather not answer should be
-    // able to say so and have the app stop mentioning it — the wording is the one the
-    // corpus has always shipped either way, so it costs them nothing. Stored as an
-    // empty value rather than by deleting the key, so that "asked and declined" and
-    // "never asked" stay different facts: nothing is pre-selected on a form nobody
-    // has filled in, which is the whole difference between a default and a choice.
-    const none = /** @type {HTMLInputElement} */ (el('input', { type: 'radio', name, value: '' }));
-    none.checked = axis.axis in held && !axis.values.includes(held[axis.axis]);
-    none.addEventListener('change', () => { held[axis.axis] = ''; commit(); });
-    options.push(el('label', { class: 'speaker-option' }, [none, t('speaker.unspecified')]));
-
-    // An axis that landed without its explanation gets no explanation, rather than a
-    // paragraph reading `speaker.x.why`. The label falls back to the slug because an
-    // ugly label is still a usable question; a raw key as prose is not.
-    const why = t(`speaker.${axis.axis}.why`);
-    return el('fieldset', { class: 'speaker-block speaker-axis' }, [
-      el('legend', { text: words(axis.axis) }),
-      ...(why === `speaker.${axis.axis}.why` ? [] : [el('p', { class: 'speaker-why', text: why })]),
-      ...options,
-    ]);
-  });
+  // Declining is on the form, because it is a state the reader can choose and not only
+  // one they can fail out of. Someone who would rather not answer should be able to say
+  // so and have the app stop mentioning it — the wording is the one the corpus has
+  // always shipped either way, so it costs them nothing. Stored as an empty value
+  // rather than by deleting the key, so that "asked and declined" and "never asked"
+  // stay different facts: nothing is pre-selected on a form nobody has filled in,
+  // which is the whole difference between a default and a choice.
+  const fields = asked.map((axis) => el('div', { class: 'speaker-axis' }, [pills({
+    name: `speaker-${axis.axis}`,
+    label: words(axis.axis),
+    options: [...axis.values.map((value) => ({ value, label: words(axis.axis, value) })),
+      { value: '', label: t('speaker.rather') }],
+    value: axis.axis in held && !axis.values.includes(held[axis.axis]) ? '' : held[axis.axis],
+    onChange: (value) => { held[axis.axis] = value; commit(); },
+  })]));
+  // One (?) for the section, its first paragraph what the question is for and then each
+  // axis's own why. An axis that landed without its explanation gets none, rather than
+  // a paragraph reading `speaker.x.why`.
+  const whys = asked.map((axis) => t(`speaker.${axis.axis}.why`)).filter((why) => !why.startsWith('speaker.'));
+  const help = helpTip(t('speaker.tip'), ...whys);
 
   // **The dialog is the settings screen, not only the voice question.** It holds the
   // reader's own phrases too, and those exist whether or not their languages inflect
@@ -165,7 +155,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   panel.append(
     dialogHead({ title: t('settings.title'), close: t('gallery.previewClose'), onClose: () => panel.close(), theme: true }),
     ...(fields.length
-      ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]
+      ? [el('fieldset', { class: 'speaker-block' }, [el('legend', {}, [t('speaker.title'), help.button]), help.tip, ...fields])]
       : []),
     ...(extra ? [extra].flat() : []),
     el('form', { method: 'dialog' }, [el('button', { text: t('speaker.done') })]),
@@ -325,9 +315,10 @@ export function personalSection({ gather, apply, forget, read, save }) {
     }
   });
 
+  const help = helpTip(t('personal.lede'));
   return el('fieldset', { class: 'speaker-block' }, [
-    el('legend', { text: t('personal.heading') }),
-    el('p', { class: 'speaker-why', text: t('personal.lede') }),
+    el('legend', {}, [t('personal.heading'), help.button]),
+    help.tip,
     el('div', { class: 'speaker-actions' }, [download, upload, wipe, file]),
     status,
   ]);

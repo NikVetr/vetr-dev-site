@@ -8,6 +8,7 @@
 // `ui/site-menu.js` registers its listeners on the document as it loads.
 
 import { themeControl } from './theme.js';
+import { t } from './i18n.js';
 
 /**
  * @param {object} config
@@ -42,4 +43,84 @@ export function dialogHead({ title, close, onClose, theme = false }) {
     head.parentElement?.style.setProperty('--dialog-head', `${head.offsetHeight}px`);
   }).observe(head);
   return head;
+}
+
+let tips = 0;
+
+/**
+ * A (?) for the end of a heading, and the explanation it opens under that heading.
+ *
+ * Settings used to explain themselves in a paragraph under every heading, and a dialog
+ * of them read as a manual; behind a (?) the form is the form and the why is one tap
+ * away. Inline rather than floating, so it is never cut off by the dialog's edge and
+ * never covers the control it explains -- and open is filled as well as announced,
+ * two cues rather than one.
+ * @param {...string} texts  the explanation, a paragraph each
+ * @returns {{button: HTMLButtonElement, tip: HTMLElement}}
+ */
+export function helpTip(...texts) {
+  const tip = document.createElement('div');
+  tip.className = 'help-tip';
+  tip.id = `help-tip-${tips += 1}`;
+  tip.hidden = true;
+  for (const text of texts) {
+    const p = document.createElement('p');
+    p.textContent = text;
+    tip.append(p);
+  }
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'help-toggle';
+  button.textContent = '?';
+  button.setAttribute('aria-label', t('settings.why'));
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', tip.id);
+  button.addEventListener('click', () => {
+    tip.hidden = !tip.hidden;
+    button.setAttribute('aria-expanded', String(!tip.hidden));
+  });
+  return { button, tip };
+}
+
+/**
+ * One choice of a few, as a row of pills: `Count over past ( week | month | year | all )`.
+ *
+ * A list of radio buttons spent a line on every option and read as a questionnaire.
+ * The radios are still there, laid invisibly over the pills, so the platform's keyboard
+ * and screen reader handling of a one-of-many choice comes with them, and the radio is
+ * what a press lands on. The chosen pill is filled
+ * and bold; each reserves its bold width, so choosing one does not widen the row.
+ * Nothing is chosen where `value` matches no option, which is how a question nobody
+ * has answered yet stays unanswered.
+ * @param {{name: string, label: string, options: {value: string, label: string}[],
+ *   value: string|undefined, onChange: (value: string) => void}} config
+ */
+export function pills({ name, label, options, value, onChange }) {
+  const row = document.createElement('div');
+  row.className = 'pill-row';
+  const title = document.createElement('span');
+  title.className = 'pill-name';
+  title.textContent = label;
+  const group = document.createElement('div');
+  group.className = 'pills';
+  group.setAttribute('role', 'radiogroup');
+  group.setAttribute('aria-label', label);
+  for (const option of options) {
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = name;
+    input.value = option.value;
+    input.checked = option.value === value;
+    input.className = 'pill-input';
+    input.addEventListener('change', () => onChange(option.value));
+    const text = document.createElement('span');
+    text.textContent = option.label;
+    text.dataset.label = option.label;
+    const pill = document.createElement('label');
+    pill.className = 'pill';
+    pill.append(input, text);
+    group.append(pill);
+  }
+  row.append(title, group);
+  return row;
 }

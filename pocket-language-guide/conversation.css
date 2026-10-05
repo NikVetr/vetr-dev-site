@@ -1323,42 +1323,6 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .gloss-say { font-style: italic; }
 .gloss-ipa { opacity: 0.85; }
 
-/* One question, one checkbox, the label the whole hit target. */
-.display-option {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: 0.3rem 0;
-  cursor: pointer;
-}
-.display-option input { flex: none; }
-/* The follow-on setting sits under the one it depends on, and is dimmed while that is off. */
-.display-option-sub { padding-inline-start: 1.6em; }
-.display-option-off { opacity: 0.55; }
-.display-caption { margin: var(--space-1) 0 0; }
-
-/* Most used, in the settings: its two choices as rows of radios, its two actions, and
-   the counts in a table of their own. */
-.usage-choice { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1em 0.9em; margin-block-end: var(--space-2); }
-.usage-choice-name { flex: 1 0 100%; font-size: var(--fs--1); font-weight: 600; }
-.usage-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); }
-.usage-table { inline-size: 100%; border-collapse: collapse; font-size: var(--fs--1); }
-.usage-table th, .usage-table td {
-  padding: 0.35em 0.45em; border-block-end: 1px solid var(--line-soft);
-  text-align: end; font-variant-numeric: tabular-nums;
-}
-.usage-table thead th { font-weight: 600; color: var(--muted); }
-.usage-table tbody th, .usage-table thead th:first-child { text-align: start; font-weight: 400; overflow-wrap: break-word; }
-
-/* The voice is one line, not a block: a label and the platform's own select. */
-.display-voice {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: 0.3rem 0;
-}
-.display-voice select { flex: 1 1 auto; min-inline-size: 0; }
-
 /* Trailing punctuation weighs nothing in the centring and sits where it fell: a
    zero-width box whose glyph overflows visibly after the last character. `nowrap` so
    a mark cannot be broken onto a line of its own. */

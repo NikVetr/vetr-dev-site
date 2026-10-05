@@ -734,9 +734,9 @@ test('removing a button from a screen is not deleting the phrase', async ({ page
 test('the menu panels hold the longest language, not only English', async ({ page }) => {
   // Every panel behind the menu was laid out against English and then translated
   // into 51 languages, several of which run half as long again. Javanese is the
-  // worst case in this catalogue on all six of the long strings -- `personal.lede`
-  // 191 characters against English's 116, `speaker.lede` 307 against 238 -- so it
-  // is the one that says whether the panels were sized or merely fitted. Re-derive
+  // worst case in this catalogue on the long strings -- `personal.lede` 191
+  // characters against English's 116 -- so it is the one that says whether the
+  // panels were sized or merely fitted. Re-derive
   // with a max over `data/i18n/*.json` if the catalogues change shape.
   for (const [w, h] of /** @type {[number,number][]} */ ([[390, 844], [360, 640], [1440, 900]])) {
     for (const item of [0, 1]) {
@@ -883,11 +883,17 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   await fromMenu(page, 'Settings');
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
-  const option = (/** @type {string} */ text) =>
-    dialog.locator('.display-option:not(.display-option-cell)', { hasText: text }).locator('input');
+  // The message screen's parts are tiles, named for the part; the same short names
+  // under the buttons and the eye carry their heading in their accessible names.
+  const option = (/** @type {string} */ name) => dialog.getByRole('checkbox', { name, exact: true });
   await option('IPA').check();
-  await option('sideways').uncheck();
-  await option('half-speed').uncheck();
+  await option('Turn sideways').uncheck();
+  await option('Speak').uncheck();
+  // The drawing under the tiles follows them: the IPA line on, the controls off.
+  const drawn = dialog.locator('.display-cartoon');
+  await expect(drawn.locator('[data-part="ipa"]')).toBeVisible();
+  await expect(drawn.locator('[data-part="turn"]')).toBeHidden();
+  await expect(drawn.locator('[data-part="speak"]')).toBeHidden();
   await page.keyboard.press('Escape');
 
   await page.locator('[data-button="stop"]').click();

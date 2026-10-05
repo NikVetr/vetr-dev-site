@@ -16,7 +16,7 @@
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
 import { askConfirm, el } from './board-menu.js';
-import { dialogHead } from './dialog.js';
+import { dialogHead, helpTip, pills } from './dialog.js';
 
 const KEY = 'plg.usage';
 const DAY = 86_400_000;
@@ -125,24 +125,23 @@ export function ranked(usage, window, lang) {
 export function usageSection({ current, onChange, language, lang, label, onReset }) {
   let held = { ...current };
   const box = el('fieldset', { class: 'speaker-block usage-block' });
-  box.append(el('legend', { text: t('boards.mostUsed.title') }), el('p', { class: 'speaker-why', text: t('usage.lede') }));
-  /** @param {string} name @param {string} legend @param {[string, string][]} options @param {string} value
-   * @param {(value:string) => void} set */
-  const radios = (name, legend, options, value, set) => {
-    const group = el('div', { class: 'usage-choice', role: 'radiogroup', 'aria-label': legend }, [el('span', { class: 'usage-choice-name', text: legend })]);
-    for (const [v, text] of options) {
-      const input = /** @type {HTMLInputElement} */ (el('input', { type: 'radio', name, value: v }));
-      input.checked = v === value;
-      input.addEventListener('change', () => set(v));
-      group.append(el('label', { class: 'speaker-option' }, [input, text]));
-    }
-    return group;
-  };
+  const help = helpTip(t('usage.lede'));
   box.append(
-    radios('usage-window', t('usage.window'), Object.keys(WINDOWS).map((w) => [w, t(`usage.${w}`)]), held.usedOver,
-      (v) => { held = { ...held, usedOver: v }; onChange(held); }),
-    radios('usage-scope', t('usage.scope'), [['one', t('usage.scopeOne', { language })], ['all', t('usage.scopeAll')]],
-      held.usedPooled ? 'all' : 'one', (v) => { held = { ...held, usedPooled: v === 'all' }; onChange(held); }),
+    el('legend', {}, [t('boards.mostUsed.title'), help.button]), help.tip,
+    pills({
+      name: 'usage-window',
+      label: t('usage.over'),
+      options: Object.keys(WINDOWS).map((w) => ({ value: w, label: t(`usage.${w}Short`) })),
+      value: held.usedOver,
+      onChange: (v) => { held = { ...held, usedOver: v }; onChange(held); },
+    }),
+    pills({
+      name: 'usage-scope',
+      label: t('usage.scope'),
+      options: [{ value: 'one', label: t('usage.scopeOne', { language }) }, { value: 'all', label: t('usage.scopeAll') }],
+      value: held.usedPooled ? 'all' : 'one',
+      onChange: (v) => { held = { ...held, usedPooled: v === 'all' }; onChange(held); },
+    }),
   );
   const see = el('button', { type: 'button', class: 'chip', text: t('usage.stats') });
   see.addEventListener('click', () => openStats({ lang: held.usedPooled ? null : lang, label }));
