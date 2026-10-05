@@ -2590,6 +2590,26 @@ test('a context taken off the list comes back from the list\'s settings', async 
   await expect(page.locator('[data-button="spa"]')).toBeVisible();
 });
 
+test('the list\'s settings hold what a context\'s do, and what only the list has', async ({ page }) => {
+  // The list's dialog had only the list's own sections; how you speak, the message
+  // screen, the voice and the reader's own data were a context away.
+  await page.goto('/conversation.html?target=ru&source=en');
+  await expect(page.locator('[data-button="spa"]')).toBeVisible();
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog.speaker-settings');
+  await expect(settings.locator('.speaker-axis')).toHaveCount(1);
+  for (const legend of ['How you speak', 'About you', 'What the message screen shows', 'The buttons', 'Most used',
+    'Before you travel', 'Your own phrases and settings']) {
+    await expect(settings.locator('legend', { hasText: legend })).toHaveCount(1);
+  }
+  await expect(settings.getByText('Contexts on the list')).toBeVisible();
+  await expect(settings.getByRole('button', { name: 'Rearrange buttons' })).toBeVisible();
+  // And an answer given here is the one a context reads.
+  await settings.getByRole('radio', { name: 'A woman' }).check();
+  expect(JSON.parse(await page.evaluate(() => localStorage.getItem('plg.speaker') ?? '{}')))
+    .toEqual({ speaker_gender: 'feminine' });
+});
+
 test('turned, the settings dialog turns with the board and fits the screen it lies across', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');

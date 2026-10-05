@@ -11,7 +11,7 @@
 // view over language content, and `core/pack.js` is a data-only join. What this page
 // downloads is the corpus rows for two languages and a JSON file.
 
-import { openAppearance, resumeSection, wireSiteMenu } from './site-menu.js';
+import { resumeSection, wireSiteMenu } from './site-menu.js';
 import { aboutSection, askCountry, askDetail, askDiet, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
@@ -374,6 +374,33 @@ async function nameSpellers(corpus, listener, owner, ownerRows) {
   return spellOwner && spellListener ? { spellOwner, spellListener } : undefined;
 }
 
+/**
+ * What the name's sounds are built with, for a dialog about to open: its keys, and the
+ * whole name spoken only where this device has a voice for the listener.
+ * @param {Awaited<ReturnType<typeof nameSpellers>>} spellers
+ * @param {string} listener @param {string} voiceId  the reader's chosen voice, or `''`
+ * @returns {import('./about.js').Sounds|undefined}
+ */
+function soundsFor(spellers, listener, voiceId) {
+  return spellers && {
+    ...spellers,
+    say: speech.getCapabilities(listener).voices.length ? (text) => {
+      speech.speak({ text, locale: listener, voiceId: voiceId || undefined }).catch((error) => console.warn(error));
+    } : undefined,
+  };
+}
+
+/**
+ * The diet sentences a pair can say, in the reader's own words, for the checklist.
+ * @param {import('../core/conversation.js').ResolveContext} ctx
+ */
+function dietChoices(ctx) {
+  return DIET
+    .map((id) => ({ id, said: resolvePhrase({ kind: 'corpus', id }, ctx) }))
+    .filter(({ said }) => said)
+    .map(({ id, said }) => ({ value: id, label: /** @type {any} */ (said).owner.text }));
+}
+
 /** The scripts the languages here are written in, to tell whether two strings share one. */
 const SCRIPTS = ['Latin', 'Cyrillic', 'Greek', 'Armenian', 'Georgian', 'Hebrew', 'Arabic', 'Ethiopic',
   'Devanagari', 'Bengali', 'Gurmukhi', 'Gujarati', 'Oriya', 'Tamil', 'Telugu', 'Kannada', 'Malayalam',
@@ -483,11 +510,40 @@ async function showPicker(owner, listener, index, nameOf) {
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
-  // The header's bars open the plain settings here -- the board's fuller dialog needs a
-  // board -- with the way into rearranging the contexts.
-  wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
-    contextsSection(topics, () => drawTopics()), mostUsedSection(listener, owner, nameOf, () => {}),
-    travelSection(() => travelChecks(listener, owner, index, nameOf))]));
+  /** @type {Promise<Awaited<ReturnType<typeof pairContext>>>|undefined} */ let pairing;
+  // **The same settings as a context's**, less what only a context has -- rearranging its
+  // screen -- and with what only the list has: which contexts are on it, and their order.
+  // The pair's sentences are read when the bars are pressed rather than with the list,
+  // which is the screen a reader lands on and the one most likely opened with no signal.
+  wireSiteMenu(() => {
+    (async () => {
+      const ctx = await (pairing ??= pairContext(listener, owner));
+      const { corpus } = ctx;
+      const [spellers, countries] = await Promise.all([
+        nameSpellers(corpus, listener, owner, ctx.ownerRows),
+        corpus.countries.has(owner) && corpus.countries.has(listener) ? loadCountries(loadText, owner) : null,
+      ]);
+      const nothing = () => {};
+      openSpeakerSettings({
+        axes: corpus.speakerAxes,
+        languages: [listener, owner],
+        profile: readProfile(),
+        onChange: nothing,
+        extra: [arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
+          contextsSection(topics, () => drawTopics()),
+          aboutSection(nothing, dietChoices(ctx), soundsFor(spellers, listener, readVoice(listener)),
+            countries ? () => askCountry(countries, owner, nothing) : undefined),
+          displaySection(readDisplay(), nothing,
+            { canSpeak: speech.getCapabilities(listener).voices.length > 0, language: nameOf(listener) }),
+          mostUsedSection(listener, owner, nameOf, nothing),
+          voiceSection({ lang: listener, voices: speech.getCapabilities(listener).voices, current: readVoice(listener), onChange: nothing }),
+          ...resumeSection(),
+          travelSection(() => travelChecks(listener, owner, index, nameOf)),
+          // An import can bring contexts of the reader's own, so the list is drawn again.
+          personalSection(personalWiring({ save: download, onChanged: () => drawTopics() }))],
+      });
+    })().catch(showFatal);
+  });
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -497,7 +553,6 @@ async function showPicker(owner, listener, index, nameOf) {
   out.setAttribute('aria-label', t('board.toGallery'));
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
-  /** @type {Promise<import('../core/conversation.js').ResolveContext>|undefined} */ let pairing;
   const searching = wireSearch({
     owner,
     // The corpus only when the search is opened: this list is the screen a reader
@@ -1011,11 +1066,6 @@ async function main() {
   /** @param {import('../core/conversation.js').BoardButton} button */
   const fillOf = (button) => (button.phraseRef?.kind === 'diet' ? 'diet'
     : button.phraseRef && 'fill' in button.phraseRef ? button.phraseRef.fill : undefined);
-  /** The diet sentences this pair can say, in the reader's own words, for the checklist. */
-  const dietChoices = () => DIET
-    .map((id) => ({ id, said: resolvePhrase({ kind: 'corpus', id }, ctx) }))
-    .filter(({ said }) => said)
-    .map(({ id, said }) => ({ value: id, label: /** @type {any} */ (said).owner.text }));
 
   // What the message screen carries, which is the reader's own choice. Re-read
   // rather than captured when it changes, so the dialog's checkbox and the screen
@@ -1023,17 +1073,7 @@ async function main() {
   let display = readDisplay();
   // Which voice reads the listener's sentence, when the reader has opinions.
   let chosenVoice = readVoice(listener);
-  /**
-   * What the name's sounds are built with, asked for when a dialog opens: its keys and
-   * the whole name speak only where this device has a voice for the listener.
-   * @returns {import('./about.js').Sounds|undefined}
-   */
-  const sounds = () => spellers && {
-    ...spellers,
-    say: canSpeak ? (text) => {
-      speech.speak({ text, locale: listener, voiceId: chosenVoice || undefined }).catch((error) => console.warn(error));
-    } : undefined,
-  };
+  const sounds = () => soundsFor(spellers, listener, chosenVoice);
 
   // **Whose voice the outgoing messages are in.** Fetched for whichever of the two
   // languages declares an axis at all — usually neither, and never more than two
@@ -1395,7 +1435,7 @@ async function main() {
     // Not given yet: the first press asks for the detail rather than showing a
     // sentence with a hole in it.
     const unfilled = phraseOf(button)?.unfilled;
-    if (unfilled === 'diet') { askDiet(dietChoices(), detailsChanged); return; }
+    if (unfilled === 'diet') { askDiet(dietChoices(ctx), detailsChanged); return; }
     if (unfilled === 'country') { askFrom?.(); return; }
     if (unfilled) { askDetail(unfilled, detailsChanged, sounds()); return; }
     // **Not a state change, and deliberately not part of the board's own
@@ -1805,7 +1845,7 @@ async function main() {
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
     extra: [arrangeRow(() => arrangeGrid(`${boardId}/${state.path.at(-1)}`, () => { personal = readPersonal(); paint(); })),
-      aboutSection(detailsChanged, dietChoices(), sounds(), askFrom),
+      aboutSection(detailsChanged, dietChoices(ctx), sounds(), askFrom),
       displaySection(display, (next) => { display = next; paint(); }, { canSpeak, language: nameOf(listener) }),
       // Most used is built from these choices when it opens, so on that screen a change
       // is a fresh build; anywhere else it only has to be remembered.
