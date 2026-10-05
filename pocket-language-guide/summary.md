@@ -537,6 +537,17 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   eight, and it is the default reader so it is never in its own grid. Saving a
   language for offline use is in the settings' Before you travel, below.
 
+  The footer is Donate with, on the web, a badge for each app store beside it and a
+  smaller button that opens both stores' QR codes (`ui/app-stores.js`): in the corner on
+  a desktop, where the gallery leaves its last row room for it, and in the flow on a
+  phone. The apps are not listed yet, so a badge links nowhere and says "Coming soon",
+  with a dashed edge as the second cue, and the dialog holds a labelled dashed square
+  for each code. The module's `STORES` table is all that changes when they are listed:
+  a store's `href` makes its badge a link, and its `qr` -- a static SVG under
+  `data/brand/`, which the shell already precaches -- takes the square's place. The
+  marks are drawn inline, so nothing is fetched, and inside the apps none of it is
+  shown.
+
   Clicking a thumbnail opens the lightbox (`ui/lightbox.js`) on the whole sheet:
   every face, one arrow key or one thumbnail click apart, at whatever size the
   window allows. The card is the only opaque thing on screen — no panel, no title,

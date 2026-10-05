@@ -1915,7 +1915,10 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
    The label is just "Donate" now. Where it goes is in the `title` and the accessible
    name rather than the visible text, which is what the requester asked for and is
    ordinary practice for an external link. */
-.donate {
+/* The corner: the pill alone on the working pages, and on the landing page its footer
+   -- the pill with the apps' stores beside it, `ui/app-stores.js` -- which holds the
+   corner with the pill in it. */
+.donate, .site-footer {
   /* Fixed, so it escapes the body's safe-area padding and has to carry its own --
      otherwise it sits under the home indicator on a notched phone, which is the one
      place a small pill is hardest to hit. */
@@ -1923,20 +1926,44 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   inset-block-end: calc(env(safe-area-inset-bottom) + var(--space-2));
   inset-inline-end: calc(env(safe-area-inset-right) + var(--space-2));
   z-index: 20;
+}
+.site-footer { display: flex; align-items: center; gap: var(--space-1); }
+.site-footer .donate { position: static; }
+/* Room at the end of the cards for the footer in the corner: it is a row of badges now,
+   and at the end of the page the last row's buttons would have stayed under it. */
+@media (min-width: 641px) { .gallery { padding-block-end: calc(var(--space-4) + 2.5rem); } }
+.donate, .store-badge, .store-codes-open {
   display: inline-flex; align-items: center;
   font-size: var(--fs--1); line-height: 1;
   color: var(--muted); text-decoration: none;
   border: 1px solid var(--line); border-radius: 999px;
   padding: 0.3em 0.8em;
   /* Translucent, because it sits over the sheet: at rest it reads as chrome and on
-     hover it comes forward. */
-  background: rgb(255 255 255 / 82%);
+     hover it comes forward. The page's own paper, not white, which in the dark was a
+     white pill with pale grey words on it. */
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
   backdrop-filter: blur(2px);
 }
-.donate:hover, .donate:focus-visible {
+.donate:hover, .donate:focus-visible, .store-badge[href]:hover, .store-badge[href]:focus-visible,
+.store-codes-open:hover, .store-codes-open:focus-visible {
   color: var(--ink); border-color: var(--muted); background: var(--paper);
   outline: none;
 }
+/* A store's badge: its mark, and its name under a caption -- "Coming soon" until the
+   app is listed, said twice: in words, and by a dashed edge where a live badge will
+   have a solid one. */
+.store-badge { gap: 0.45em; padding: 0.2em 0.75em 0.2em 0.5em; border-radius: var(--radius); color: var(--ink); }
+.store-badge:not([href]) { border-style: dashed; cursor: default; }
+.store-badge > svg { inline-size: 1.25rem; block-size: 1.25rem; flex: none; }
+.store-badge-words { display: grid; gap: 0.1em; }
+.store-soon { font-size: 0.66rem; color: var(--muted); }
+.store-name { font-weight: 600; }
+/* The codes button, square and smaller than the badges beside it. */
+.store-codes-open {
+  justify-content: center; inline-size: 1.75rem; block-size: 1.75rem; padding: 0;
+  border-radius: var(--radius-sm); color: var(--ink); cursor: pointer;
+}
+.store-codes-open > svg { inline-size: 1rem; block-size: 1rem; }
 /* On a narrow screen it would sit on top of the last row of content, so it goes back
    into the flow at the end of the page. */
 @media (max-width: 640px) {
@@ -1951,6 +1978,29 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
     margin: var(--space-2) auto var(--space-3);
     background: var(--paper);
   }
+  /* The footer wraps rather than squeezing its badges, centred as the pill alone was. */
+  .site-footer {
+    position: static; flex-wrap: wrap; justify-content: center;
+    margin: var(--space-2) 1rem var(--space-3);
+  }
+  .site-footer .donate { margin: 0; }
+}
+
+/* Both stores' QR codes, side by side where there is room and stacked where not, each
+   under its store's mark, name and what it is for. A code is drawn on white whatever
+   the theme, since a camera reads dark on light. */
+.store-codes-lede { margin: 0 0 var(--space-3); font-size: var(--fs--1); color: var(--muted); }
+.store-codes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-3); }
+.store-code { display: grid; justify-items: center; gap: var(--space-2); margin: 0; text-align: center; }
+.store-code figcaption { display: grid; justify-items: center; gap: 0.2em; }
+.store-code-name { display: inline-flex; align-items: center; gap: 0.4em; font-weight: 600; }
+.store-code-name > svg { inline-size: 1.4rem; block-size: 1.4rem; }
+.store-code-note { font-size: var(--fs--1); color: var(--muted); }
+.store-code-image, .store-code-soon { inline-size: min(100%, 11rem); aspect-ratio: 1; border-radius: var(--radius); }
+.store-code-image { padding: 0.5rem; background: #fff; }
+.store-code-soon {
+  display: grid; place-items: center; padding: var(--space-2);
+  border: 2px dashed var(--line); color: var(--muted); font-size: var(--fs--1);
 }
 
 

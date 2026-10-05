@@ -100,19 +100,20 @@ test('on a phone the donate link is centred, not shoved against the edge', async
   // end of the page, because fixed it would sit on the last row of content. It was
   // meant to centre there and did not: `display: inline-flex` with `margin: … auto`
   // centres nothing, because auto side margins only centre a *block-level* box. It
-  // sat at `left: 0` on a 390px phone.
+  // sat at `left: 0` on a 390px phone. On the landing page the pill ends a footer of
+  // the app stores' badges (`tests/gallery-footer.spec.js`), and it is that row which
+  // goes into the flow and is centred.
   for (const [w, h] of /** @type {[number,number][]} */ ([[390, 844], [360, 640]])) {
     await page.setViewportSize({ width: w, height: h });
     for (const path of ['/', '/sheet.html?target=es&source=en']) {
       await page.goto(path);
-      const link = page.locator('a.donate');
-      await expect(link).toBeVisible();
-      const where = await link.evaluate((el) => {
-        const box = el.getBoundingClientRect();
+      await expect(page.locator('a.donate')).toBeVisible();
+      const where = await page.locator(path === '/' ? '.site-footer' : 'a.donate').evaluate((el) => {
+        const boxes = (el.matches('.site-footer') ? [...el.children] : [el]).map((n) => n.getBoundingClientRect());
         return {
           position: getComputedStyle(el).position,
-          left: Math.round(box.left),
-          right: Math.round(innerWidth - box.right),
+          left: Math.round(Math.min(...boxes.map((b) => b.left))),
+          right: Math.round(innerWidth - Math.max(...boxes.map((b) => b.right))),
         };
       });
       // In the flow, and the same distance from both edges.

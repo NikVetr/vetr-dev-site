@@ -24,6 +24,7 @@ import { loadCountries } from '../core/pack.js';
 import { regionRow, setFlagColours } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
+import { storeLinks } from './app-stores.js';
 import {
   applyStatic, languageName, loadUiLanguage, regionList, setLanguageNames, t,
 } from './i18n.js';
@@ -662,6 +663,7 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
+  /** @type {HTMLElement} */ (document.querySelector('.site-footer')).prepend(...storeLinks());
   /** @param {string} code */
   const nameOf = (code) => languageName(code, languages.find((l) => l.bcp47 === code)?.exonym_en ?? code);
   wireSiteMenu(() => { openSettings(readerLanguage(languages, coverage), nameOf).catch(showFatal); });
