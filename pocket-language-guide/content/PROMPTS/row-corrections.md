@@ -298,6 +298,19 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-6.md`.
   and reword them the way the fifth pass did, keeping the natural forms as listener
   variants in `tmp/notes/agents/listener-variants-<code>.csv`.
 
+- **What the key-words passes noticed** (each checked against a source before changing
+  anything): Spanish `time-words.evening` and `time-words.night` are both *la noche*, side
+  by side on the same screens; Spanish `Viajamos juntos` and other "we" rows are
+  `speaker-variants.md`'s third-party case and stay masculine plural, so confirm only;
+  Portuguese `Sem gergelim` uses the Brazilian word in a European pack (*sésamo*);
+  Russian `Я по работе` and `Я к родственникам` lack the final full stop every other ru
+  label has, and `Туалет не смывается.` should be checked for naturalness; Korean
+  brother and sister are the *younger* forms where Japanese has the elder -- the concept's
+  notes decide which; four Hindi replies are worded as obligation ("I have to show the
+  way") where an offer is meant; Hindi's room safe and lockers are both `लॉकर`; and the
+  slash alternatives on French, Italian, Russian and Hindi reply labels (`oui / c'est ça`)
+  are the slash-pair item above.
+
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
