@@ -2504,7 +2504,8 @@ test('a name built from its sounds goes into a button of the reader\'s own, in t
   const key = (/** @type {string} */ sound) => box.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
   for (const sound of ['n', 'i', 'k', 'ə', 'l', 'aɪ']) await key(sound).click();
   await box.getByRole('button', { name: 'Add it to their sentence' }).click();
-  await expect(box.locator('.board-editor-field input').nth(2)).toHaveValue('ニカライ');
+  // The listener's sentence: the one field written in their language.
+  await expect(box.locator('.board-editor-field input[lang="ja"]').first()).toHaveValue('ニカライ');
 });
 
 test('a name built from its sounds is written in the listener\'s letters, and as typed for the owner', async ({ page }) => {
