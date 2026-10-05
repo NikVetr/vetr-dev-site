@@ -684,16 +684,17 @@ async function main() {
 
   const mount = /** @type {HTMLElement} */ (document.getElementById('reader'));
   // Collapsed it shows only the endonym -- "Deutsch", not "Deutsch (German)" --
-  // because that is the word you scan for. The name in the reader's own language
-  // earns its place only in the open list, set grey and to the trailing edge.
-  // The `aside` is each language's name *in the reader's language*, so the whole
-  // list has to be rebuilt when the reader changes -- not just its selection.
+  // because that is the word you scan for. The open list is the board's language
+  // menu: the name in the reader's own language at the start of each row, the
+  // language's own at its end in the second colour. The `label` is each language's
+  // name *in the reader's language*, so the whole list has to be rebuilt when the
+  // reader changes -- not just its selection.
   const pickerOptions = () => languages
     .filter((l) => l.status !== 'planned' && isSpoken(l))
     .map((l) => ({
       value: l.bcp47,
-      name: l.endonym,
-      aside: languageName(l.bcp47, l.exonym_en),
+      label: languageName(l.bcp47, l.exonym_en),
+      own: l.endonym,
     }));
   const header = languagePicker({
     mount,

@@ -1,10 +1,14 @@
 // The "I speak" control in the header.
 //
 // A native `<select>` shows the selected option's own text when closed, so it
-// cannot say "English" collapsed and "English · English" in the list -- and it
+// cannot say "Deutsch" collapsed and "German · Deutsch" in the list -- and it
 // cannot align or colour half of an option either. Both are worth having: the
 // endonym is what you recognise at a glance, and the name in your own language is
 // what you need only while choosing. So this is a listbox rather than a select.
+//
+// **Its rows are the board's language menu's rows**: the reader's word for the
+// language at the start, and the language's own name at the end in the second colour
+// and face -- one rule in `style.css` draws both menus, so the two cannot drift.
 //
 // It keeps the keyboard contract the rest of the app uses (see `ui/keys.js`), so
 // arrows, Home, End, Enter and Escape all behave the way they do in the settings
@@ -14,9 +18,9 @@ import { nextIndex } from './keys.js';
 
 /**
  * @typedef {Object} PickerOption
- * @property {string} value
- * @property {string} name    the language's own name, shown collapsed and in the list
- * @property {string} aside   the name in the reader's language, shown only in the list
+ * @property {string} value   the language's code
+ * @property {string} label   its name in the reader's language, leading its row in the list
+ * @property {string} own     its own name: the closed control's text, and the end of its row
  */
 
 /**
@@ -52,7 +56,7 @@ export function languagePicker({ mount, options, value, label, onChange }) {
 
   const paint = () => {
     const chosen = shown.find((o) => o.value === current) ?? shown[0];
-    button.textContent = chosen ? chosen.name : '';
+    button.textContent = chosen ? chosen.own : '';
     items.forEach((li, i) => {
       const on = options[i].value === current;
       li.setAttribute('aria-selected', String(on));
@@ -61,7 +65,7 @@ export function languagePicker({ mount, options, value, label, onChange }) {
   };
 
   /**
-   * Build the list. Separate from the constructor because every option's `aside`
+   * Build the list. Separate from the constructor because every option's `label`
    * is a language name *in the reader's language*, so changing the reader changes
    * all of them -- and the reader can be changed from a control that sits next to
    * this one.
@@ -79,11 +83,12 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     li.tabIndex = -1;
     const name = document.createElement('span');
     name.className = 'lang-picker-name';
-    name.textContent = option.name;
-    const aside = document.createElement('span');
-    aside.className = 'lang-picker-aside';
-    aside.textContent = option.aside;
-    li.append(name, aside);
+    name.textContent = option.label;
+    const own = document.createElement('span');
+    own.className = 'lang-picker-own';
+    own.lang = option.value;
+    own.textContent = option.own;
+    li.append(name, own);
     li.addEventListener('click', () => {
       current = option.value;
       paint();

@@ -77,16 +77,19 @@ test.describe('gallery', () => {
     await expect(heading).toHaveText(english ?? '');
   });
 
-  test('the header names a language by its own name, and glosses it only in the list', async ({ page }) => {
+  test('the header names a language by its own name, and the list names it both ways', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.card').first()).toBeVisible();
     // Collapsed it is the endonym alone: "Deutsch", not "Deutsch (German)".
     await expect(page.locator('.lang-picker-button')).toHaveText('English');
 
+    // Open, each row is the board's language menu's: the reader's word for the
+    // language first, its own name after it, marked as being in that language.
     await page.locator('.lang-picker-button').click();
     const german = page.locator('.lang-picker-option').filter({ hasText: 'Deutsch' });
-    await expect(german.locator('.lang-picker-name')).toHaveText('Deutsch');
-    await expect(german.locator('.lang-picker-aside')).toHaveText('German');
+    await expect(german.locator('.lang-picker-name')).toHaveText('German');
+    await expect(german.locator('.lang-picker-own')).toHaveText('Deutsch');
+    await expect(german.locator('.lang-picker-own')).toHaveAttribute('lang', 'de');
   });
 
   test('a thumbnail opens every face, one arrow key or one thumbnail apart', async ({ page }) => {
@@ -453,4 +456,53 @@ test('a press outside a dialog closes it, as its close control does', async ({ p
   // On the backdrop, it closes.
   await page.mouse.click(5, 5);
   await expect(page.locator('dialog[open]')).toHaveCount(0);
+});
+
+test('the "I speak" list is drawn as the board’s language menu is, in both themes', async ({ browser }) => {
+  // The owner liked the board's language menu -- the reader's word for a language at the
+  // start of the row, its own name at the end in a second colour -- and asked for the
+  // landing page's to match. One rule draws both, so this compares the two pages rather
+  // than restating the colours: the menus agree, and the two halves of a row differ.
+  for (const colorScheme of /** @type {const} */ (['light', 'dark'])) {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme });
+    const page = await context.newPage();
+    try {
+      await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+      await page.locator('#board-pair button').last().click();
+      const board = await page.locator('.board-menu-own').first().evaluate((n) => {
+        const css = getComputedStyle(n);
+        return { color: css.color, serif: /Georgia|serif/.test(css.fontFamily) };
+      });
+
+      await page.goto('/');
+      await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+      await page.locator('.lang-picker-button').click();
+      const row = page.locator('#reader .lang-picker-option').filter({ hasText: 'Deutsch' });
+      const seen = await row.evaluate((li) => {
+        const name = /** @type {HTMLElement} */ (li.querySelector('.lang-picker-name'));
+        const own = /** @type {HTMLElement} */ (li.querySelector('.lang-picker-own'));
+        const box = li.getBoundingClientRect();
+        const pad = parseFloat(getComputedStyle(li).paddingInlineStart);
+        return {
+          name: getComputedStyle(name).color,
+          own: getComputedStyle(own).color,
+          serif: /Georgia|serif/.test(getComputedStyle(own).fontFamily),
+          start: name.getBoundingClientRect().left - box.left - pad,
+          end: box.right - own.getBoundingClientRect().right - pad,
+        };
+      });
+      expect(seen.own, `${colorScheme}: the own name in the board menu's colour`).toBe(board.color);
+      expect(seen.serif && board.serif, `${colorScheme}: and in its face`).toBe(true);
+      expect(seen.name, `${colorScheme}: the two halves of a row in two colours`).not.toBe(seen.own);
+      // The reader's word against the start of the row, the language's own against its end.
+      expect(Math.abs(seen.start)).toBeLessThanOrEqual(1);
+      expect(Math.abs(seen.end)).toBeLessThanOrEqual(1);
+      // The language in force is marked twice: bold, and ticked.
+      const current = page.locator('#reader .lang-picker-option.current .lang-picker-name');
+      expect(await current.evaluate((n) => getComputedStyle(n, '::after').content)).toContain('✓');
+      expect(Number(await current.evaluate((n) => getComputedStyle(n).fontWeight))).toBeGreaterThanOrEqual(600);
+    } finally {
+      await context.close();
+    }
+  }
 });

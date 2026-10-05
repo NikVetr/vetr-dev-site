@@ -522,7 +522,10 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   language auto-detected from
   `navigator.languages`, with the picker's label cycling through "I speak" in each
   language we can gloss into so a visitor who reads none of the others still finds
-  it. Each card carries a script-glyph badge and the flags of the countries the
+  it. Open, the picker (`ui/language-picker.js`, also the lightbox's pair) is the
+  board's language menu: the reader's word for each language at the start of its row
+  and the language's own name at the end, in the accent colour and a serif led by the
+  conscript face -- one rule in `style.css` draws both menus. Each card carries a script-glyph badge and the flags of the countries the
   language is spoken in — Windows draws no glyph for regional-indicator pairs, so
   `ui/flags.js` detects support and falls back to country-code chips rather than a
   row of letter boxes. The grid holds six, because French, Spanish and Arabic are

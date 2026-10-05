@@ -267,7 +267,7 @@ export function setLanguageNames(rows) {
  * It takes no `'title' | 'slot'` argument because there is nothing to disambiguate:
  * all seventeen calls to this function want a standalone name. Seven are drawn with
  * no sentence around them at all -- the gallery card, the `#want` button, the
- * picker's `aside` here and in the lightbox, the collator key the grid is sorted on,
+ * picker's `label` here and in the lightbox, the collator key the grid is sorted on,
  * and the two column captions in the format panel. Four more are headings:
  * `quick.heading` on the page and again on the exported PDF, and both halves of
  * `studio.pair`. The remaining six are inserts into catalogue templates that were

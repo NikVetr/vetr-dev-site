@@ -289,7 +289,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   close.setAttribute('aria-label', t('gallery.previewClose'));
 
   // Reads the way the pair is spoken -- the language you read, then the one you are
-  // learning -- rather than the way the code names it. Each `aside` is a language
+  // learning -- rather than the way the code names it. Each `label` is a language
   // name in the *reader's* language, and the reader can be changed from inside this
   // dialog, so the list is a function rather than a value.
   /** @param {(l: Record<string,string>) => boolean} keep */
@@ -297,8 +297,8 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     .filter((l) => l.status !== 'planned' && keep(l))
     .map((l) => ({
       value: l.bcp47,
-      name: l.endonym,
-      aside: languageName(l.bcp47, l.exonym_en),
+      label: languageName(l.bcp47, l.exonym_en),
+      own: l.endonym,
     }));
 
   const sourcePicker = languagePicker({

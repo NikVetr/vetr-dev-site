@@ -1636,9 +1636,10 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    it is the loud one. */
 .back-link { white-space: nowrap; }
 
-/* The "I speak" control. Collapsed it is just the endonym; the list adds the name
-   in the reader's own language, greyed and pushed to the trailing edge so the two
-   read as a name and a gloss rather than as one long string. */
+/* The "I speak" control. Collapsed it is just the endonym; the list is the board's
+   language menu, the reader's word for each language at the start of its row and the
+   language's own name at the end, so the two read as a name and its original rather
+   than as one long string. */
 .lang-picker { position: relative; }
 .lang-picker-button {
   font: inherit; color: var(--ink); background: var(--paper);
@@ -1662,8 +1663,18 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 }
 .lang-picker-option:hover { background: var(--surface-2); }
 .lang-picker-option:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* The language in force is bold and ticked, as the board's menus mark theirs. */
 .lang-picker-option.current { font-weight: 600; }
-.lang-picker-aside { color: var(--muted); font-size: var(--fs--1); text-align: end; }
+.lang-picker-option.current .lang-picker-name::after { content: ' \2713'; }
+/* A language's own name beside the reader's word for it, set apart in colour and face:
+   the reader's word at the start of the row, the language's own at its end. One rule
+   for both language menus -- the board's switcher and the "I speak" list -- so the
+   app has one language menu rather than two that look alike. The conscript face leads,
+   as it leads `--ui`: Klingon's own name is pIqaD, and a serif stack alone drew it as
+   a row of boxes. */
+.board-menu-own, .lang-picker-own {
+  color: var(--accent); font-family: "plg-conscript", var(--serif, Georgia, serif); text-align: end;
+}
 
 /* A static collage: the reader's own label leads, the rest recede. No motion.
    **One line, always**: the header does not wrap, and `ui/gallery.js` drops the

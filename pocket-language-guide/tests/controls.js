@@ -1,8 +1,8 @@
 // Driving the app's custom controls from a spec.
 //
 // The header's language chooser stopped being a `<select>` when it had to show the
-// endonym collapsed and a greyed gloss in the list, which a native select cannot
-// do. `page.selectOption` therefore no longer reaches it, and every spec that
+// endonym collapsed and two names in two colours in the list, which a native select
+// cannot do. `page.selectOption` therefore no longer reaches it, and every spec that
 // changes the reader's language goes through here instead -- so the next time the
 // control is rebuilt there is one place to fix rather than four.
 
