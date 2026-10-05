@@ -1669,6 +1669,9 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   margin: 0; padding: 0.25rem; list-style: none; min-width: 100%; max-height: 60vh;
   overflow-y: auto; background: var(--paper); border: 1px solid var(--line);
   border-radius: var(--radius-sm); box-shadow: 0 4px 16px rgb(17 24 32 / 14%);
+  /* Its own ink: the lightbox sets its header's type in the paper colour, and the
+     list inherited it -- every reader's-language name drawn white on white. */
+  color: var(--ink);
 }
 .lang-picker-option {
   display: flex; gap: var(--space-3); align-items: baseline; justify-content: space-between;

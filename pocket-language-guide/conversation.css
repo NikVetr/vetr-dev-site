@@ -783,9 +783,6 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
 .board-menu-column:last-child .board-menu-item { white-space: normal; overflow-wrap: break-word; }
 .board-menu-title { margin: 0 0 var(--space-1); padding-inline: var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .board-menu-current::after { content: ' \2713'; }
-/* A language's own name beside the reader's word for it, set apart in colour and face:
-   the reader's word at the start of the row, the language's own at its end. */
-.board-menu-own { color: var(--accent); font-family: var(--serif, Georgia, serif); text-align: end; }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
    other button on this row is the owner's -- Speak, the speed, the turn -- and they
