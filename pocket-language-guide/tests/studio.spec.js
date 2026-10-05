@@ -176,6 +176,47 @@ test.describe('studio', () => {
     await expect(reset).toBeDisabled();
   });
 
+  test('a section\'s rows are dragged into order, on the card as in the list', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    const section = page.locator('#tree > li').filter({ has: page.locator('summary', { hasText: 'Social + basics' }) });
+    const rows = section.locator('.items > li');
+    const order = () => rows.evaluateAll((all) => all.map((li) => /** @type {HTMLElement} */ (li).dataset.concept));
+    const before = await order();
+    const drag = async (/** @type {number} */ from, /** @type {number} */ to) => {
+      const a = await rows.nth(from).boundingBox();
+      const b = await rows.nth(to).boundingBox();
+      if (!a || !b) throw new Error('rows not laid out');
+      await page.mouse.move(a.x + 30, a.y + a.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(b.x + 30, b.y + b.height * 0.75, { steps: 10 });
+      await page.mouse.up();
+    };
+
+    // Escape puts it back as it was.
+    await section.getByRole('button', { name: /in order/ }).click();
+    await expect(section.locator('.tree-arrange-bar')).toBeVisible();
+    await drag(0, 2);
+    expect((await order())[0]).not.toBe(before[0]);
+    await page.keyboard.press('Escape');
+    await expect(section.locator('.tree-arrange-bar')).toHaveCount(0);
+    expect(await order()).toEqual(before);
+
+    // Done keeps it, and the card follows: its first row of the section is the list's.
+    await section.getByRole('button', { name: /in order/ }).click();
+    await drag(0, 2);
+    await section.getByRole('button', { name: 'Done' }).click();
+    const after = await order();
+    expect(after[2]).toBe(before[0]);
+    await expect(page.locator('.face.focused .hit[data-concept^="social-basics."]').first())
+      .toHaveAttribute('data-concept', after[0]);
+    // And it holds through a re-solve.
+    const { included } = await counts(page);
+    await page.locator('.tree summary input[type=checkbox]').nth(1).uncheck();
+    await expectIncludedNot(page, included);
+    expect(await order()).toEqual(after);
+  });
+
   test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();

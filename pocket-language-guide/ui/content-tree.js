@@ -28,6 +28,7 @@
 import { createSectionPicker } from './chips.js';
 import { number, t } from './i18n.js';
 import { nextIndex } from './keys.js';
+import { arrange } from './arrange.js';
 
 /** A pencil, for the button that opens a row's editor. Inline rather than an entry in
  * `data/icons.json`, because that file is the set the *sheet* can draw and this is
@@ -58,13 +59,26 @@ function slidersGlyph() {
   return svg;
 }
 
+/** Two arrows, up and down, for the button that puts a section's rows in order. */
+function arrowsGlyph() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('class', 'sliders');
+  const path = document.createElementNS(NS, 'path');
+  path.setAttribute('d', 'M5 13V3M2.5 5.5 5 3l2.5 2.5M11 3v10M8.5 10.5 11 13l2.5-2.5');
+  svg.append(path);
+  return svg;
+}
+
 /** The sheet's own field order, so a tree row reads the way the printed row does. */
 const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
   'script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell',
 ]);
 /** Which of them are the target language's, and so take its font and lang tag. */
 const TARGET_FIELDS = new Set(['script', 'script_alt', 'roman', 'ipa', 'literal']);
-import { appliesTo } from '../core/pack.js';
+import { appliesTo, sectionOrder } from '../core/pack.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -119,6 +133,8 @@ function el(tag, attrs = {}, kids = []) {
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>})=>void} onToggle
  * @property {(conceptId:string)=>void} onPick  bring this row into view on the card
  * @property {(sectionId:string, title:string)=>void} onFormat  open the section's own format
+ * @property {(sectionId:string, ids:string[])=>void} onReorder  the section's rows, in the
+ *   order the reader dragged them into
  * @property {(conceptId:string, values:Record<string,string>)=>void} [onEdit]  what
  *   the reader typed into a row, to go in the same `overrides` layer the CSV import
  *   writes
@@ -190,6 +206,7 @@ export function createTree(input) {
 
   /** @type {{sectionId:string, title:string, box:HTMLInputElement, count:HTMLElement,
    *          swatch:HTMLElement, menu:HTMLElement, format:HTMLElement, icon:Element|null,
+   *          place:(spec:import('../core/types.js').SheetSpec)=>void,
    *          chipIcon:Element|null, role:string,
    *          items:{conceptId:string, box:HTMLInputElement,
    *                  cells:Record<string,HTMLElement>, row:HTMLElement}[]}[]} */
@@ -220,14 +237,23 @@ export function createTree(input) {
       // `importance` comes with it, because the tree is where the priority ladder's
       // effect is legible: the ladder is a floor on this number, so a reader who
       // wonders why a row vanished at "Core" can see which side of the line it was.
-      .map((c) => ({ conceptId: c.concept_id, custom: false, weight: Number(c.importance) }));
+      .map((c) => ({
+        conceptId: c.concept_id, custom: false, weight: Number(c.importance), template: c.default_template,
+      }));
     // Terms the reader added live in the same list as the corpus ones, marked so
     // they can be told apart and removed.
     const custom = input.edits.extras
       .filter((e) => e.sectionId === section.section_id)
-      .map((e) => ({ conceptId: e.conceptId, custom: true, weight: 1 }));
-    const concepts = [...own, ...custom];
-    if (!concepts.length) continue;
+      .map((e) => ({ conceptId: e.conceptId, custom: true, weight: 1, template: e.template }));
+    const byId = new Map([...own, ...custom].map((c) => [c.conceptId, c]));
+    if (!byId.size) continue;
+    // **In the order the card prints them**, which is the order the reader drags them
+    // into: the same `sectionOrder` the sheet's blocks are built in.
+    const shapes = [...byId.values()].map((c) => ({ concept_id: c.conceptId, default_template: c.template }));
+    const orderOf = (/** @type {import('../core/types.js').SheetSpec} */ at) => sectionOrder(
+      shapes, at.itemOrder?.[section.section_id],
+    ).map((c) => c.concept_id);
+    const concepts = orderOf(spec).map((id) => /** @type {typeof own[number]} */ (byId.get(id)));
 
     // Named with aria-label rather than a <label>: a label around the title would
     // make clicking the title toggle the checkbox instead of opening the section.
@@ -328,12 +354,17 @@ export function createTree(input) {
       event.stopPropagation();
       input.onFormat(section.section_id, title);
     });
+    const reorderName = t('tree.reorder', { section: title });
+    const reorder = el('button', {
+      type: 'button', class: 'tree-format', 'aria-label': reorderName, title: reorderName,
+    }, [arrowsGlyph()]);
     const summary = el('summary', {}, [
       sectionBox,
       el('span', { class: 'tree-color-wrap' }, [swatch, menu]),
       ...(icon ? [icon] : []),
       el('span', { text: title }),
       count,
+      reorder,
       format,
     ]);
 
@@ -364,7 +395,8 @@ export function createTree(input) {
         type: 'button', class: 'item-edit-open',
         'aria-label': t('tree.editRow'), title: t('tree.editRow'),
       }, [pencilGlyph()]);
-      const li = el('li', { 'data-concept': concept.conceptId }, [
+      // `data-button` is what `arrange` picks up.
+      const li = el('li', { 'data-concept': concept.conceptId, 'data-button': concept.conceptId }, [
         el('label', {}, [
           box,
           pencil,
@@ -429,9 +461,54 @@ export function createTree(input) {
       return li;
     }));
 
+    const details = /** @type {HTMLDetailsElement} */ (el('details', { open: '' }, [summary, list]));
+    let arranging = false;
+    /** The rows in the spec's order, unless the reader has some in hand. @param {import('../core/types.js').SheetSpec} at */
+    const place = (at) => {
+      if (arranging) return;
+      const ids = orderOf(at);
+      if (ids.join('\n') === items.map((item) => item.conceptId).join('\n')) return;
+      items.sort((a, b) => ids.indexOf(a.conceptId) - ids.indexOf(b.conceptId));
+      list.append(...items.map((item) => item.row));
+    };
+    // **Picked up and put down, as the board's buttons are** (`ui/arrange.js`): the
+    // section opens, its rows lift, a press only picks one up, the arrow keys move the
+    // one with the focus, Done keeps the order and Escape puts it back. A mode rather
+    // than a handle on every row, because a press on a row already means "show me
+    // this on the card".
+    reorder.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (arranging) return;
+      arranging = true;
+      details.open = true;
+      const hint = t('tree.reorderHint');
+      const status = el('span', { role: 'status' });
+      const bar = el('div', { class: 'tree-arrange-bar' }, [
+        el('span', { class: 'small muted', 'aria-hidden': 'true', text: hint }), status,
+      ]);
+      list.before(bar);
+      for (const item of items) item.row.tabIndex = -1;
+      const finish = () => {
+        arranging = false;
+        bar.remove();
+        for (const item of items) item.row.removeAttribute('tabindex');
+      };
+      arrange(list, {
+        bar, status, hint, done: t('speaker.done'),
+        onDone: (ids) => {
+          finish();
+          items.sort((a, b) => ids.indexOf(a.conceptId) - ids.indexOf(b.conceptId));
+          input.onReorder(section.section_id, ids);
+        },
+        onCancel: () => { finish(); list.append(...items.map((item) => item.row)); },
+      });
+    });
+
     sections.push({
       sectionId: section.section_id,
       title,
+      place,
       box: sectionBox,
       count,
       items,
@@ -445,7 +522,7 @@ export function createTree(input) {
     pickerSections.push({
       sectionId: section.section_id, title, icon: chipIcon, items: concepts,
     });
-    nodes.push(el('li', {}, [el('details', { open: '' }, [summary, list])]));
+    nodes.push(el('li', {}, [details]));
   }
 
   root.replaceChildren(...nodes);
@@ -495,6 +572,7 @@ export function createTree(input) {
       const named = t(own ? 'tree.formatOwn' : 'tree.format', { section: section.title });
       section.format.setAttribute('aria-label', named);
       section.format.title = named;
+      section.place(nextSpec);
       let included = 0;
       for (const item of section.items) {
         const row = shown.get(item.conceptId);

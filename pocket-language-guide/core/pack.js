@@ -633,6 +633,52 @@ export async function loadEmergencyLabels(loadText, code) {
 }
 
 /**
+ * A section's rows in the order the card prints them.
+ *
+ * **One shape at a time inside a section**, unless the reader has said otherwise. A
+ * row's template comes from its concept, and a section mixes them freely -- `toilets`
+ * is fifteen phrases and ten words -- so in rank order the two shapes alternate row by
+ * row: a phrase laid out in two columns with its respelling underneath, then a word in
+ * a three-column grid with the respelling beside it, then another phrase. The run loop
+ * in `buildBlocks` already groups *consecutive* rows of one template, so all that was
+ * needed was to stop rank order from interleaving them.
+ *
+ * A stable sort by template, phrases first. Rank still orders the rows inside each
+ * group, so nothing about the priority ladder changes; the section simply reads as a
+ * block of phrases followed by a block of reference words instead of the two shuffled
+ * together. Forcing one template on the whole section was the other option and it is
+ * worse both ways: the reference grid is much the more compact of the two, and a long
+ * phrase does not fit it. Grouped by the *whole* template name, not just
+ * entry-versus-rest: `toilets` and `pharmacy-symptoms` alternate `refphrase` with
+ * `ref`, which are two different grids and read as two different shapes. `entry` leads
+ * because the phrases are the substance of a section and the reference words are its
+ * appendix; the rest keep the order they first appear in, so the arrangement is still
+ * the corpus's and not this function's.
+ *
+ * **The reader's own order wins** (`spec.itemOrder`, set by dragging rows in the
+ * studio's list), shapes and all: it is the order they put the rows in, and a row
+ * quietly put back where it came from would be a drag that did nothing. A row it does
+ * not name -- a term added since -- follows the ones it does, in the default order.
+ * Exported for the content list, which shows the rows in this same order.
+ * @template {Record<string, string>} C
+ * @param {C[]} concepts  in rank order
+ * @param {string[]} [order]  the reader's, by concept id
+ * @returns {C[]}
+ */
+export function sectionOrder(concepts, order) {
+  const shape = new Map([['entry', 0]]);
+  for (const c of concepts) {
+    if (!shape.has(c.default_template)) shape.set(c.default_template, shape.size);
+  }
+  const sorted = [...concepts].sort((a, b) => (shape.get(a.default_template) ?? 0)
+    - (shape.get(b.default_template) ?? 0));
+  if (!order) return sorted;
+  const at = new Map(order.map((id, i) => [id, i]));
+  return sorted.sort((a, b) => (at.get(a.concept_id) ?? order.length)
+    - (at.get(b.concept_id) ?? order.length));
+}
+
+/**
  * Assemble ordered blocks for the sheet. A section contributes one heading plus
  * one block per contiguous run of concepts sharing a template, which is how the
  * reference mixes a phrase grid and phrase rows under a single heading.
@@ -679,39 +725,14 @@ export function buildBlocks({
         || selection.items[c.concept_id] === true)
       .filter((c) => c.custom === '1' || (targetRows[c.concept_id] && sourceRows[c.concept_id]));
 
-    // **One shape at a time inside a section.** A row's template comes from its
-    // concept, and a section mixes them freely -- `toilets` is fifteen phrases and
-    // ten words -- so in rank order the two shapes alternate row by row: a phrase
-    // laid out in two columns with its respelling underneath, then a word in a
-    // three-column grid with the respelling beside it, then another phrase. The run
-    // loop below already groups *consecutive* rows of one template, so all that was
-    // needed was to stop rank order from interleaving them.
-    //
-    // A stable sort by template, phrases first. Rank still orders the rows inside
-    // each group, so nothing about the priority ladder changes; the section simply
-    // reads as a block of phrases followed by a block of reference words instead of
-    // the two shuffled together. Forcing one template on the whole section was the
-    // other option and it is worse both ways: the reference grid is much the more
-    // compact of the two, and a long phrase does not fit it.
-    // Grouped by the *whole* template name, not just entry-versus-rest: `toilets`
-    // and `pharmacy-symptoms` alternate `refphrase` with `ref`, which are two
-    // different grids and read as two different shapes. `entry` leads because the
-    // phrases are the substance of a section and the reference words are its
-    // appendix; the rest keep the order they first appear in, so the arrangement is
-    // still the corpus's and not this function's.
-    const order = new Map([['entry', 0]]);
-    for (const c of concepts) {
-      if (!order.has(c.default_template)) order.set(c.default_template, order.size);
-    }
-    concepts.sort((a, b) => (order.get(a.default_template) ?? 0)
-      - (order.get(b.default_template) ?? 0));
+    const ordered = sectionOrder(concepts, spec.itemOrder?.[section.section_id]);
 
     // No rows, no heading. A section is only as wide as the concepts that survive
     // every filter above, and importance is not spread evenly across them --
     // `emergency-medical` is dense with high-importance rows where `hike` has
     // none -- so a priority step empties whole sections. This is the line that
     // stops their headings printing over nothing.
-    if (!concepts.length) continue;
+    if (!ordered.length) continue;
 
     blocks.push({
       kind: 'heading',
@@ -741,7 +762,7 @@ export function buildBlocks({
     }
 
     /** @type {import('./types.js').Block|null} */ let run = null;
-    for (const concept of concepts) {
+    for (const concept of ordered) {
       const template = concept.default_template;
       if (template === 'note') {
         run = null;

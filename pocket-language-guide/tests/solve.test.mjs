@@ -359,6 +359,21 @@ test('solving twice gives byte-identical output', async () => {
   assert.equal(JSON.stringify(a.plan), JSON.stringify(b.plan));
 });
 
+test('a section\'s rows come in the reader\'s own order, where they have set one', () => {
+  const id = 'social-basics';
+  const rowsOf = (/** @type {typeof blocks} */ list, /** @type {(s:string)=>boolean} */ which) => list
+    .filter((b) => b.kind === 'items' && which(b.sectionId)).flatMap((b) => (b.rows ?? []).map((r) => r.conceptId));
+  const mine = (/** @type {string} */ s) => s === id;
+  const reversed = rowsOf(blocks, mine).reverse();
+  assert.ok(reversed.length > 3);
+  const again = buildBlocks({
+    corpus: ctx.corpus, targetRows, sourceRows, respell, spec: { ...spec, itemOrder: { [id]: reversed } },
+  });
+  assert.deepEqual(rowsOf(again, mine), reversed);
+  const others = (/** @type {string} */ s) => s !== id;
+  assert.deepEqual(rowsOf(again, others), rowsOf(blocks, others));
+});
+
 test('a section set two across halves its lines, and every row keeps its own hit box', () => {
   const id = 'numbers-money';
   const across = buildAtoms({

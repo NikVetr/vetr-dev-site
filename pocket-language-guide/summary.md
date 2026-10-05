@@ -857,6 +857,16 @@ so the priority ladder is untouched. Forcing one template on a whole section was
 other option and is worse both ways: the reference grid is much the more compact, and
 a long phrase does not fit it.
 
+**The reader's own order wins.** `sectionOrder` in `core/pack.js` is that sort, and where
+`spec.itemOrder` names a section's rows it puts them in the reader's order instead,
+shapes and all -- a row quietly put back where it came from would be a drag that did
+nothing -- with any row it does not name, such as a term added since, after the ones it
+does. The content list shows every section in the same order, and each section's row
+has a button that hands its rows to `ui/arrange.js`, the board's own drag: they lift, a
+press only picks one up, the arrow keys move the focused one, Done keeps the order and
+Escape puts it back. The board's bin is optional there, since a row is switched off by
+its own tick rather than thrown away.
+
 **The outermost columns hug the item's edges.** In every grid the leftmost column that
 carries anything in its table is set flush left and the rightmost flush right, whatever
 the theme's field says, and the columns between keep the theme's alignment

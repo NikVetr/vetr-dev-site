@@ -725,6 +725,22 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   inline-size: 6px; block-size: 6px; border-radius: 50%;
   background: var(--paper); border: 1.5px solid var(--accent);
 }
+/* A section's rows being put in order (`arrange` in `ui/arrange.js`, the board's own
+   drag): every row is dashed, so it reads as something to pick up, and the one in hand
+   is lifted over the rest, on the paper so the rows under it do not show through. */
+.items.board-grid-arranging > li {
+  cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none;
+  outline: 1px dashed var(--line); outline-offset: -1px; background: var(--paper);
+}
+.items.board-grid-arranging > li.board-cell-lifted {
+  position: relative; z-index: 3; cursor: grabbing; box-shadow: 0 6px 16px rgb(0 0 0 / 22%);
+}
+.tree-arrange-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2);
+  padding: var(--space-1) var(--space-2); margin-block-end: var(--space-1);
+  background: var(--accent-soft); border-radius: var(--radius-sm);
+}
+.tree-arrange-bar > .small { flex: 1 1 12rem; }
 /* The four bulk actions, small enough to share a line on a phone. */
 .bulk-actions { gap: var(--space-1); margin-block-end: var(--space-2); }
 .bulk-actions > button { font-size: var(--fs--1); padding: 0.25em 0.6em; }

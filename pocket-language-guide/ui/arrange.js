@@ -6,7 +6,9 @@
 // aside to show where it will land, which is the one place motion here is the
 // feature; with reduced motion asked for, they jump. The arrow keys do the same for
 // a keyboard, one place at a time. A button dropped on the bin in the bar, or given
-// Delete, is taken off the screen.
+// Delete, is taken off the screen -- where there is a bin: the studio's content list
+// uses the same drag to put a section's rows in order, and a row there is switched off
+// by its own tick rather than thrown away.
 
 /** @param {string} tag @param {Record<string,string>} attrs */
 function el(tag, attrs = {}) {
@@ -44,9 +46,10 @@ const STEP = /** @type {Record<string, number>} */ ({ ArrowLeft: -1, ArrowUp: -1
  * button taken off is gone from the grid at once and from the screen on Done --
  * Escape brings it back with the order -- once `onRemove` has agreed to it.
  * @param {HTMLElement} grid  its cells carry `data-button`
- * @param {{bar: HTMLElement, status: HTMLElement, done: string, hint: string, bin: string,
- *   onRemove: (cell: HTMLElement) => Promise<boolean>,
+ * @param {{bar: HTMLElement, status: HTMLElement, done: string, hint: string, bin?: string,
+ *   onRemove?: (cell: HTMLElement) => Promise<boolean>,
  *   onDone: (ids: string[], removed: string[]) => void, onCancel: () => void}} config
+ *   no `bin`, no bin: the cells can be put in order and not taken off
  */
 export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, onCancel }) {
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -59,20 +62,23 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
   status.classList.add('visually-hidden');
   grid.classList.add('board-grid-arranging');
   bar.classList.add('board-bar-arranging');
-  const trash = el('div', { class: 'board-arrange-bin' });
-  trash.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  trash.append(el('span', { text: bin }));
+  const trash = bin ? el('div', { class: 'board-arrange-bin' }) : null;
+  if (trash) {
+    trash.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    trash.append(el('span', { text: /** @type {string} */ (bin) }));
+  }
   const finish = el('button', { type: 'button', class: 'btn primary board-arrange-done', text: done });
-  bar.append(trash, finish);
+  bar.append(...(trash ? [trash] : []), finish);
   /** @type {string[]} */ const removed = [];
   /** @param {PointerEvent} event */
   const onBin = (event) => {
+    if (!trash) return false;
     const r = trash.getBoundingClientRect();
     return event.clientX >= r.left && event.clientX < r.right && event.clientY >= r.top && event.clientY < r.bottom;
   };
   /** Off the grid if `onRemove` agrees, and whether it went. @param {HTMLElement} cell */
   const take = async (cell) => {
-    if (!(await onRemove(cell))) return false;
+    if (!trash || !onRemove || !(await onRemove(cell))) return false;
     removed.push(/** @type {string} */ (cell.dataset.button));
     cell.remove();
     return true;
@@ -131,14 +137,14 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
     if (under) place(cell, list.indexOf(under) > list.indexOf(cell) ? under.nextElementSibling : under);
     const home = cell.getBoundingClientRect();
     cell.style.translate = `${event.clientX - held.x - home.left}px ${event.clientY - held.y - home.top}px`;
-    trash.classList.toggle('board-arrange-bin-over', onBin(event));
+    trash?.classList.toggle('board-arrange-bin-over', onBin(event));
   };
   /** @param {PointerEvent} [event] */
   const up = async (event) => {
     if (!held) return;
     const { cell } = held;
     held = null;
-    trash.classList.remove('board-arrange-bin-over');
+    trash?.classList.remove('board-arrange-bin-over');
     cell.classList.remove('board-cell-lifted');
     if (event && onBin(event) && await take(cell)) return;
     cell.style.transition = calm ? 'none' : 'translate 160ms ease-out';
@@ -146,11 +152,12 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
   };
   /** @param {KeyboardEvent} event */
   const key = (event) => {
-    // A question about removing a button is answered in its own dialog, Escape included.
-    if (document.querySelector('dialog[open]')) return;
+    // A question about removing a button is answered in its own dialog, Escape included
+    // -- a modal one: a notice that is not modal takes no keys from anything.
+    if (document.querySelector('dialog:modal')) return;
     if (event.key === 'Escape') { event.stopPropagation(); event.preventDefault(); end(false); return; }
     const cell = /** @type {HTMLElement|null} */ ((/** @type {Element} */ (event.target)).closest?.('[data-button]'));
-    if (cell && cell !== maker && (event.key === 'Delete' || event.key === 'Backspace')) {
+    if (trash && cell && cell !== maker && (event.key === 'Delete' || event.key === 'Backspace')) {
       event.preventDefault();
       const next = /** @type {HTMLElement|null} */ (cell.nextElementSibling ?? cell.previousElementSibling);
       take(cell).then((gone) => { if (gone) next?.focus(); else cell.focus(); });
@@ -189,7 +196,7 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
     grid.classList.remove('board-grid-arranging');
     bar.classList.remove('board-bar-arranging');
     finish.remove();
-    trash.remove();
+    trash?.remove();
     status.classList.remove('visually-hidden');
     status.textContent = said;
     const ids = cells().map((c) => /** @type {string} */ (c.dataset.button));

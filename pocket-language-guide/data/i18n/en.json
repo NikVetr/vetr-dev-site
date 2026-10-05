@@ -426,6 +426,8 @@
   "tree.include": "Include {section}",
   "tree.mine": "mine",
   "tree.recolour": "Change the colour of {section}",
+  "tree.reorder": "Put the rows of {section} in order",
+  "tree.reorderHint": "Drag the rows into the order you want, or move one with the arrow keys. Done keeps it; Escape puts it back.",
   "tree.saveEdit": "Save",
   "warn.break-failed": "At {scale}x the content does not fit. Columns in total: {columns}.",
   "warn.card-too-small": "Even {faces} faces of this card leave the type near its smallest readable size. A larger card, or fewer sections, would read better.",

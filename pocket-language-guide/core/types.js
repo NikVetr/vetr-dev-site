@@ -259,6 +259,9 @@
  * @property {Record<string,string>} [sectionColors]  section id -> colour role,
  *   overriding the registry's own. Colour is how the sheet codes its sections, so
  *   which section takes which is an editorial choice rather than a fact.
+ * @property {Record<string, string[]>} [itemOrder]  section id -> its rows in the order
+ *   the reader dragged them into, by concept id. Absent is the default order; see
+ *   `sectionOrder` in `core/pack.js`.
  * @property {Record<string, SectionFormat>} [sectionFormats]  section id -> the format
  *   that section keeps in place of the card's. Absent, or a section absent from it,
  *   is the card's own format.

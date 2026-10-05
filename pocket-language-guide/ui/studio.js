@@ -373,6 +373,10 @@ async function main() {
             schedule();
           },
         }),
+        onReorder: (sectionId, ids) => {
+          spec = { ...spec, itemOrder: { ...spec.itemOrder, [sectionId]: ids } };
+          schedule();
+        },
         onHover: (id) => highlight($('face-area'), id),
         // The mirror of the canvas's own `onPick`, which brings a row in the tree
         // into view: a click in the tree brings the row on the *card* into view.
