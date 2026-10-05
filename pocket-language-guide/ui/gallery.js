@@ -334,10 +334,11 @@ function setWantOpen(open, chosen) {
 /**
  * On a phone, the language grid folds away as the reader scrolls past it and its
  * toggle floats under the header as a bar -- fifty buttons are a screen and a half,
- * and the thing the page is for is below them. Scrolling back to the top puts the
- * bar back in its own place, still folded; a tap on the floating bar drops the grid
- * down under it, over the cards; scrolling on folds it again. Nothing of this on a
- * desktop, where the grid sits beside the sentence and there is room for all of it.
+ * and the thing the page is for is below them. Scrolling back up puts the bar back in
+ * its own place, and a grid that a choice folded opens again once the page is back at
+ * its top; a tap on the floating bar drops the grid down under it, over the cards;
+ * scrolling on folds it again. Nothing of this on a desktop, where the grid sits
+ * beside the sentence and there is room for all of it.
  * @param {HTMLElement} toggle
  */
 function foldOnScroll(toggle) {
@@ -391,12 +392,30 @@ function foldOnScroll(toggle) {
       setWantOpen(true);
       want.style.minHeight = '';
       foldedByScroll = false;
+      foldedByChoice = false;
+    } else if (foldedByChoice && scrollY < 1) {
+      // **A choice's fold comes undone at the top.** It folded the grid so the chosen
+      // card was the next thing on the screen; all the way back up, the reader has come
+      // back to the question, and a bar that stayed shut there read as the grid having
+      // gone. It grows open rather than appearing, because the growing is what says
+      // where it went -- briefly, and not at all for a reader who asked for less motion.
+      foldedByChoice = false;
+      setWantOpen(true);
+      const grid = document.getElementById('want');
+      if (grid && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        grid.animate([{ maxBlockSize: '0px', opacity: 0 }, { maxBlockSize: `${grid.offsetHeight}px`, opacity: 1 }],
+          { duration: UNFOLD_MS, easing: 'ease-out' });
+      }
     }
   };
   addEventListener('scroll', check, { passive: true });
   narrow.addEventListener('change', check);
 }
 const want = /** @type {HTMLElement|null} */ (document.querySelector('.want'));
+/** Whether the grid is shut because a language was chosen from it, rather than by the reader. */
+let foldedByChoice = false;
+/** Long enough to see the grid come back, short enough not to be a wait. */
+const UNFOLD_MS = 180;
 document.getElementById('want')?.addEventListener('scroll', markGridEnd, { passive: true });
 addEventListener('resize', markGridEnd);
 const headerHeight = () => Number.parseFloat(
@@ -794,6 +813,7 @@ async function main() {
       // means scrolling past the question to reach its answer.
       const row = languages.find((l) => l.bcp47 === code);
       setWantOpen(false, languageName(code, row?.exonym_en ?? code));
+      foldedByChoice = true;
       if (!chosen) return;
       if (narrow) chosen.scrollIntoView({ block: 'start' });
     });
@@ -816,6 +836,8 @@ async function main() {
         }) ?? toggle;
         const before = anchor.getBoundingClientRect().top;
         const opening = toggle.getAttribute('aria-expanded') === 'false';
+        // The reader's own tap: from here the grid stays as they leave it.
+        foldedByChoice = false;
         want?.classList.toggle('want-dropped', opening && want.classList.contains('want-floating'));
         setWantOpen(opening);
         const moved = anchor.getBoundingClientRect().top - before;

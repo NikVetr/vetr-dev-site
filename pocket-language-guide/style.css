@@ -776,7 +776,8 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      `ui/gallery.js` folds the grid once the reader has scrolled past it and pins the
      toggle under the header as a bar; a tap on the bar drops the grid down under it,
      and scrolling on folds it again. Near the top the bar sits in its own place,
-     folded or open as the reader last left it. */
+     folded or open as the reader last left it -- except that the fold a choice made
+     comes undone at the very top. */
   .want-toggle { position: static; }
   /* A card scrolled to from the language grid stops under the floating bar, not
      behind it. */

@@ -464,3 +464,54 @@ test('a name that wraps leaves the rest of its row centred, not hanging from the
     expect(Math.abs(above - below), `${lang}: ${above.toFixed(1)}px above, ${below.toFixed(1)}px below`).toBeLessThanOrEqual(1);
   }
 });
+
+test('on a phone, a grid a choice folded grows open again at the top; one the reader folded stays shut', async ({ page }) => {
+  // A choice folds the grid and the page goes to the card. Coming all the way back up,
+  // the bar stayed shut, which read as the grid having gone. It opens again at the very
+  // top -- not on the way, among the cards -- and grows open rather than appearing,
+  // because the growing is what says where it went.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  const toggle = page.locator('#want-toggle');
+  /** Scroll to `y` and report the grid's animations a frame or two later, while they run. */
+  const scrollAndWatch = (/** @type {number} */ y) => page.evaluate(async (top) => {
+    scrollTo(0, top);
+    await new Promise((r) => { requestAnimationFrame(() => requestAnimationFrame(r)); });
+    return document.getAnimations()
+      .filter((a) => /** @type {KeyframeEffect} */ (a.effect)?.target?.id === 'want')
+      .map((a) => /** @type {KeyframeEffect} */ (a.effect).getTiming().duration);
+  }, y);
+
+  await page.locator('#want .want-btn[data-lang="ja"]').click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(await scrollAndWatch(600)).toEqual([]);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(await scrollAndWatch(0)).toEqual([180]);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  // Still the reader's choice.
+  await expect(page.locator('#want .want-btn[data-lang="ja"]')).toHaveAttribute('aria-pressed', 'true');
+
+  // Shut by the reader's own tap, it is theirs: the top does not open it.
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await scrollAndWatch(1500);
+  expect(await scrollAndWatch(0)).toEqual([]);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('the grid a choice folded opens at the top without travelling, for a reader who asked for less motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await page.locator('#want .want-btn[data-lang="ja"]').click();
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'false');
+  const running = await page.evaluate(async () => {
+    scrollTo(0, 0);
+    await new Promise((r) => { requestAnimationFrame(() => requestAnimationFrame(r)); });
+    return document.getAnimations().length;
+  });
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'true');
+  expect(running).toBe(0);
+});

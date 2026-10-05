@@ -554,13 +554,15 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   On a phone the "…and I want to speak" grid folds as the page scrolls past it and
   its bar floats under the header, but not before: it folds only once the whole grid
   has gone under the header, not on the first nudge, and what the scroll folded the
-  scroll back unfolds, while a grid the reader closed, or that closed because they
-  chose, stays closed until they tap it. A grid the scroll folded keeps its room until
+  scroll back unfolds. A grid the reader closed stays closed until they tap it; one that
+  closed because they chose opens again once the page is back at its very top, where the
+  reader has come back to the question. A grid the scroll folded keeps its room until
   the scroll unfolds it, so nothing under it moves mid-scroll -- a phone without scroll
   anchoring would otherwise show the page jumping by the grid's height -- and the floating
-  bar's placeholder is the bar's own measured height. The fold and unfold travel — `max-block-size`
-  and opacity transition, `display` transitions discretely with `allow-discrete`, and
-  `@starting-style` gives the unfold a height to grow from.
+  bar's placeholder is the bar's own measured height. Folds and unfolds are instant, with
+  one exception: the unfold at the top grows open over 180ms (`animate()` on
+  `max-block-size` and opacity), because the growing is what says where the grid went;
+  a reader who asks for less motion gets it open at once.
 
   Nothing that floats is drawn in a box, and that is a constraint rather than a
   preference: a panel over the card is a panel over the words, and the caret panels
