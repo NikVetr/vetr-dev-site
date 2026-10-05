@@ -658,6 +658,51 @@ def main():
                                 "`text` but inherit the other gender's pointed "
                                 "spelling in `text_alt`")
 
+    # --- key words ------------------------------------------------------
+    #
+    # `data/lang/<code>/emphasis.csv` names, per concept, the words of the sentence a
+    # board sets in bold so the reader finds it at a glance; `key-tones.csv` gives some
+    # concepts a colour for them too. A key that is not in the sentence can never be
+    # drawn, so it is an error; one a variant's wording loses is a warning, because the
+    # base form still shows it and the variant needs a reader of the language.
+    TONES = {"cold", "warm", "stop", "go"}
+    for line, row in enumerate(load("registry/key-tones.csv"), start=2):
+        if row["concept_id"] not in concepts:
+            errors.append(f"key-tones.csv:{line}: unknown concept_id {row['concept_id']!r}")
+        if row["tone"] not in TONES:
+            errors.append(f"key-tones.csv:{line}: tone {row['tone']!r} is not one of {sorted(TONES)}")
+    keyed = []
+    for path in sorted(DATA.glob("lang/*/emphasis.csv")):
+        code = path.parent.name
+        rel = path.relative_to(DATA)
+        keyed.append(code)
+        base_rows = {}
+        for group in groups:
+            src = DATA / f"lang/{code}/{group}.csv"
+            if src.exists():
+                for r in load(src.relative_to(DATA)):
+                    base_rows[r["concept_id"]] = r
+        varied = defaultdict(list)
+        if (DATA / f"lang/{code}/variants.csv").exists():
+            for r in load(f"lang/{code}/variants.csv"):
+                varied[r["concept_id"]].append(r)
+        for line, row in enumerate(load(rel), start=2):
+            where = f"{rel}:{line}"
+            text = (base_rows.get(row["concept_id"]) or {}).get("text", "")
+            if not text:
+                errors.append(f"{where}: {code} has no sentence for {row['concept_id']!r}")
+                continue
+            keys = [k.strip() for k in row["key"].split("|") if k.strip()]
+            if not keys:
+                errors.append(f"{where}: no key word")
+            for key in keys:
+                if key not in text:
+                    errors.append(f"{where}: {key!r} is not in {text!r}")
+                for variant in varied[row["concept_id"]]:
+                    if variant.get("text") and key not in variant["text"]:
+                        warnings.append(f"{where}: {key!r} is not in the {variant['variant']} "
+                                        f"wording {variant['text']!r}, which shows no key word")
+
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):
             if row["concept_id"] not in concepts:
@@ -758,7 +803,9 @@ def main():
 
     # Coverage drives the gallery. Declared status is intent; this is fact, and a
     # language with no rows must not offer a button that produces an empty sheet.
-    coverage = {"total": len(concepts), "languages": {}}
+    # `emphasis`: the languages with key words, so a board asks only for files that
+    # exist -- offline, asking for one that does not is a failed load.
+    coverage = {"total": len(concepts), "languages": {}, "emphasis": sorted(keyed)}
     for code in languages:
         have = 0
         for group in groups:

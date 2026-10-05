@@ -129,6 +129,9 @@ function checkButtons(phrases, placements, where, problems) {
     if (p.answers !== undefined && !(Array.isArray(p.answers) && p.answers.every((/** @type {unknown} */ a) => typeof a === 'string'))) {
       problems.push(`phrase ${id}: answers are not a list of concepts`);
     }
+    if (p.keys !== undefined && !(Array.isArray(p.keys) && p.keys.every((/** @type {unknown} */ k) => typeof k === 'string'))) {
+      problems.push(`phrase ${id}: keys are not a list of words`);
+    }
     if (p.replies !== undefined && (!Array.isArray(p.replies) || !p.replies.every(
       (/** @type {any} */ r) => plain(r) && typeof r.owner === 'string' && typeof r.listener === 'string'))) {
       problems.push(`phrase ${id}: replies are not a list of answers`);

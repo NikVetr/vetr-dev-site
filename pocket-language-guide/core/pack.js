@@ -59,6 +59,10 @@ export async function loadCorpus(loadText) {
   // Who the reader is speaking to, where a language words a request differently for
   // a man and a woman: a switch on the board, never a question in the settings.
   const listenerAxes = readAxes(await read('data/registry/listener-axes.csv'));
+  // The key word of a sentence may carry a colour as well as a weight -- colder in a
+  // cold blue, stop in red -- and the colour is the concept's, whatever the language.
+  const keyTones = Object.fromEntries((await read('data/registry/key-tones.csv'))
+    .map((row) => [row.concept_id, row.tone]));
   const sectionRows = await read('data/registry/sections.csv');
   // The five colour roles' own names, for a super-section label: a face's sections
   // are all of a theme far more often than not, and the role is already the colour
@@ -134,6 +138,7 @@ export async function loadCorpus(loadText) {
     languages,
     speakerAxes,
     listenerAxes,
+    keyTones,
     coverage,
     respellOverrides,
     respellRules,
@@ -288,6 +293,24 @@ export async function loadVariants(loadText, bcp47) {
     const { variant, ...fields } = row;
     if (!variant || !row.concept_id) continue;
     (out[variant] ??= {})[row.concept_id] = fields;
+  }
+  return out;
+}
+
+/**
+ * One language's key words: for each concept, the words of its sentence that carry
+ * its meaning, which a board sets in bold so the reader finds "colder" among six
+ * requests at a glance. Sparse, and absent for a language nobody has marked yet --
+ * `coverage.json` lists the ones that have a file, so none is asked for that does not
+ * exist, which offline would be a failed load rather than an empty one.
+ * @param {LoadText} loadText @param {string} bcp47
+ * @returns {Promise<Record<string, string[]>>}
+ */
+export async function loadKeys(loadText, bcp47) {
+  const rel = `data/lang/${bcp47}/emphasis.csv`;
+  /** @type {Record<string, string[]>} */ const out = {};
+  for (const row of parseTable(await loadText(rel), rel)) {
+    out[row.concept_id] = row.key.split('|').map((key) => key.trim()).filter(Boolean);
   }
   return out;
 }

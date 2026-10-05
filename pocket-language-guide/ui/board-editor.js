@@ -155,9 +155,13 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
    */
   const form = (existing) => {
     const label = el('input', { type: 'text', maxlength: '40' });
+    // The words a board's own buttons set in bold, chosen by the reader for theirs:
+    // a list of words from the label, because that is the text on the button.
+    const keys = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
     const own = el('input', { type: 'text' });
     const theirs = el('input', { type: 'text', lang: listener, dir: listenerDir });
     if (existing) {
+      keys.value = (existing.keys ?? []).join(', ');
       /** @type {HTMLInputElement} */ (label).value = existing.label;
       /** @type {HTMLInputElement} */ (own).value = existing.owner;
       /** @type {HTMLInputElement} */ (theirs).value = existing.listener;
@@ -234,19 +238,21 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
         pair,
         replies: replies.length ? replies : undefined,
       };
+      const words = keys.value.split(',').map((w) => w.trim()).filter(Boolean);
       if (!values.label && !values.owner) return;
       if (existing) {
         // Editing the wording invalidates any clip recorded against the old words.
         // §6.4: a stale clip must never play against new text.
-        await commit(editPhrase(state.data, existing.id, values));
+        await commit(editPhrase(state.data, existing.id, { ...values, keys: words.length ? words : undefined }));
       } else {
-        await commit(addPhrase(state.data, values, at).data);
+        await commit(addPhrase(state.data, { ...values, ...(words.length ? { keys: words } : {}) }, at).data);
       }
       draw();
     });
 
     return el('div', { class: 'board-editor-form' }, [
       field('editor.label', label),
+      field('editor.keys', keys),
       field('editor.owner', own),
       field('editor.listener', theirs),
       ...(spelled ? [spelled] : []),

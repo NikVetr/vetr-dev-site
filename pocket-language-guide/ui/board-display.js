@@ -40,6 +40,8 @@ const KEY = 'plg.board-display';
  * @property {boolean} holdSpeaks  holding a button says its sentence, whatever a tap does
  * @property {boolean} sizedToWords  each row of buttons as tall as its words, at one size of type
  * @property {boolean} evenType  with the buttons all one size, the same size of type on every one
+ * @property {boolean} boldKeys  the words that carry a button's sentence, in bold
+ * @property {boolean} colourKeys  ...and in a colour where the sentence has one: colder in blue, stop in red
  * @property {boolean} addressSwitch  a switch on the board for saying the sentences to a man or a woman
  * @property {'masculine'|'feminine'} addressee  ...and which way it is set
  * @property {boolean} cellWords  under each button's words, the other language's
@@ -91,6 +93,10 @@ export const DEFAULTS = {
   // whoever is in front of them. Never a question about the stranger in advance.
   addressSwitch: false,
   addressee: 'masculine',
+  // The key words in bold by default, which costs nothing and finds a button sooner;
+  // their colours are the reader's to turn on, being a louder change to the grid.
+  boldKeys: true,
+  colourKeys: false,
   // The other side's words under each button, for the reader who is learning them.
   cellWords: false,
   cellSay: false,
@@ -119,7 +125,7 @@ export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
  * fourth are parts of a screen, each a short name in a grid of tiles; the second are
  * behaviours, each a sentence.
  */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'addressSwitch'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'addressSwitch'|'boldKeys'|'colourKeys'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
   { id: 'owner', labelKey: 'display.ownerShort', group: 'screen' },
   { id: 'roman', labelKey: 'display.romanShort', group: 'screen' },
   { id: 'ipa', labelKey: 'display.ipaShort', group: 'screen' },
@@ -127,6 +133,8 @@ export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'poli
   { id: 'turn', labelKey: 'display.turnShort', group: 'screen' },
   { id: 'sizedToWords', labelKey: 'display.buttonSize', group: 'size' },
   { id: 'evenType', labelKey: 'display.evenType', group: 'buttons' },
+  { id: 'boldKeys', labelKey: 'display.boldKeys', group: 'buttons' },
+  { id: 'colourKeys', labelKey: 'display.colourKeys', group: 'buttons' },
   { id: 'tapSpeaks', labelKey: 'display.tapSpeaks', group: 'buttons' },
   { id: 'tapAnswers', labelKey: 'display.tapAnswers', group: 'buttons' },
   { id: 'holdSpeaks', labelKey: 'display.holdSpeaks', group: 'buttons' },
@@ -233,7 +241,7 @@ export function displaySection(current, onChange, voice) {
   };
   /** A follow-on setting is out of play while the one it depends on says so. */
   const follow = () => {
-    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords]])) {
+    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords], ['colourKeys', !held.boldKeys]])) {
       const input = /** @type {HTMLInputElement} */ (inputs[id]);
       input.disabled = off;
       input.closest('label')?.classList.toggle('display-option-off', off);

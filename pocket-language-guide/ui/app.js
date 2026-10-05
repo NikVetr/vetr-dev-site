@@ -516,10 +516,11 @@ export function forgetOffline(urls) {
  * who is speaking, which is 22 of 53. Asking for one that does not exist would have
  * the worker report a failed save, and leaving one out cost the German board its
  * offline visit -- `LoadError: data/lang/de/variants.csv: HTTP 504`.
- * `countries` likewise: the languages whose country names the page loaded.
- * @param {{groups:string[], target:string, source:string, variants?:string[], countries?:string[]}} pair
+ * `countries` likewise: the languages whose country names the page loaded, and `keys`
+ * the ones whose key words it did.
+ * @param {{groups:string[], target:string, source:string, variants?:string[], countries?:string[], keys?:string[]}} pair
  */
-export function keepBoardOffline({ groups, target, source, variants = [], countries = [] }) {
+export function keepBoardOffline({ groups, target, source, variants = [], countries = [], keys = [] }) {
   return keepOffline([
     ...groups.flatMap((group) => [
       `data/lang/${target}/${group}.csv`,
@@ -527,6 +528,7 @@ export function keepBoardOffline({ groups, target, source, variants = [], countr
     ]),
     ...variants.map((code) => `data/lang/${code}/variants.csv`),
     ...countries.map((code) => `data/countries/${code}.csv`),
+    ...keys.map((code) => `data/lang/${code}/emphasis.csv`),
   ], true);
 }
 

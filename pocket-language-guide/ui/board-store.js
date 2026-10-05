@@ -44,6 +44,7 @@ const KEY = 'plg.boards';
  *   corpus concept it says, in both languages from the corpus, so `owner` and
  *   `listener` stay empty and it keeps every translation, variant and pronunciation
  * @property {string[]} [answers]  the concepts of the answers it had on its board
+ * @property {string[]} [keys]  the words of its label the reader wants in bold
  */
 
 /**

@@ -529,6 +529,14 @@
 /* **Found buttons scroll**: a search can find more than one screen holds. Rows as tall
    as a phone's board gives its cells, so the fitter still has a box to fill. */
 .board-grid.board-grid-results { grid-auto-rows: 6.5rem; overflow-y: auto; align-content: start; }
+/* **The words that carry a button**, heavier than the rest of its label -- and, where
+   the reader asked and the sentence has one, in its colour: cold blue, warm orange,
+   stop red, go green, each a shade that holds its contrast on the cell in both themes. */
+.board-key { font-weight: 800; }
+.board-key-cold { color: light-dark(#1559a8, #7db7f5); }
+.board-key-warm { color: light-dark(#b34700, #ffab70); }
+.board-key-stop { color: light-dark(#b3141f, #ff8a8a); }
+.board-key-go { color: light-dark(#18703a, #79d69a); }
 /* Buttons sized to their words (`fitWords`): each row as tall as its words at the one
    size they all share, and the rows sharing whatever is left of the screen. */
 .board-grid.board-grid-words:not(.board-grid-results) { grid-auto-rows: auto; }

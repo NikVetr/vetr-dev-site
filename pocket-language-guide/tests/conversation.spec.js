@@ -1212,6 +1212,29 @@ test('a request is neutral until the reader turns on the switch for whom it is s
   await expect(page.locator('#board-addressee')).toBeHidden();
 });
 
+test('a button\'s key words are set in bold, and the reader marks their own', async ({ page }) => {
+  // The reader's own button, with the word they chose to find it by.
+  await page.addInitScript(() => localStorage.setItem('plg.boards', JSON.stringify({
+    schemaVersion: 1,
+    phrases: {
+      mine: {
+        id: 'mine', label: 'Please stop by the gate', owner: 'Please stop by the gate', listener: '请在门口停',
+        pair: 'zh-Hans__en', created: '2026-10-05T00:00:00.000Z', keys: ['gate'],
+      },
+    },
+    placements: { 'spa/main': ['mine'] },
+  })));
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  const cell = page.locator('[data-button="mine"]');
+  await expect(cell.locator('.board-key')).toHaveText('gate');
+  // The words are unchanged around it, and the bold is a setting.
+  await expect(cell.locator('.board-cell-label')).toHaveText('Please stop by the gate');
+  await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ boldKeys: false })));
+  await page.reload();
+  await expect(cell).toBeVisible();
+  await expect(cell.locator('.board-key')).toHaveCount(0);
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

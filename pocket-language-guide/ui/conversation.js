@@ -18,7 +18,7 @@ import {
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, keepOffline, accentFor,
 } from './app.js';
 import {
-  loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
+  loadCorpus, loadLanguage, loadVariants, loadKeys, fillLanguageSlots,
   loadRespellRules, loadRespellOverrides, loadCountries,
 } from '../core/pack.js';
 import { createRespeller, nameRespeller } from '../core/respell.js';
@@ -705,6 +705,8 @@ async function pairContext(listener, owner, load = loadText) {
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
     respell: await respellerFor(corpus, listener, owner, listenerRows, load),
+    // The words of the reader's sentences that carry them, for the buttons' labels.
+    ownerKeys: corpus.coverage.emphasis?.includes(owner) ? await loadKeys(load, owner) : {},
   };
 }
 
@@ -1366,6 +1368,21 @@ async function main() {
   /** @param {import('../core/conversation.js').BoardButton} button */
   const labelOf = (button) => (button.add ? t('editor.open')
     : wording(button, ctx, personal.data.phrases) ?? button.id);
+  /**
+   * The words of a button's label to set in bold, and their colour where the reader
+   * asked for colour: the owner's key words for a sentence the boards supply, the
+   * reader's own for one of theirs -- only those the label as drawn contains, since a
+   * short label or a variant's wording may not.
+   * @param {import('../core/conversation.js').BoardButton} button
+   */
+  const keysOf = (button) => {
+    const said = labelOf(button);
+    const own = personal.data.phrases[button.id];
+    const concept = button.phraseRef?.kind === 'corpus' ? button.phraseRef.id : own?.concept;
+    const words = ((concept ? pairing.ownerKeys[concept] : own?.keys) ?? []).filter((/** @type {string} */ w) => said.includes(w));
+    if (!words.length) return null;
+    return { words, tone: display.colourKeys && concept ? corpus.keyTones[concept] : undefined };
+  };
 
   /**
    * What the reader is told when the voice fails, in their language. An unfamiliar
@@ -1613,6 +1630,7 @@ async function main() {
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onHoldSay: display.holdSpeaks && canSpeak ? (button) => { countPress(button); sayOnTap(button, false); } : undefined,
         onPick: pickButton,
+        keys: display.boldKeys ? keysOf : undefined,
         sub: (peeking || display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
           const phrase = button.kind === 'message' ? phraseOf(button) : null;
           if (!phrase) return [];
@@ -2100,6 +2118,7 @@ async function main() {
     // were really fetched rather than a guess at which languages have one.
     variants: Object.keys(variants),
     countries: worded ? [listener, owner] : [],
+    keys: corpus.coverage.emphasis?.includes(owner) ? [owner] : [],
   }).catch(() => {});
 }
 

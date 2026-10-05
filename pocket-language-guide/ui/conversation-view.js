@@ -52,8 +52,10 @@ const TAP_SLOP_PX = 10;
  *   where in its label a search matched, for the found buttons
  * @param {(button:import('../core/conversation.js').BoardButton)=>SubLine[]} [config.sub]
  *   the lines a button carries under its words, where the settings ask for them
+ * @param {(button:import('../core/conversation.js').BoardButton)=>{words:string[], tone?:string}|null} [config.keys]
+ *   the words of its label to set in bold, and their colour, where the settings ask for them
  */
-export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, onHoldSay, mark, sub }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, onHoldSay, mark, sub, keys }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
@@ -113,6 +115,10 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
       found.textContent = said.slice(at[0], at[1]);
       text.replaceChildren(said.slice(0, at[0]), found, said.slice(at[1]));
     }
+    // The words that carry the sentence, in bold -- and in their colour where the reader
+    // asked for one -- so "colder" is found among six requests without reading them.
+    const key = !at && keys?.(button);
+    if (key) text.replaceChildren(...emphasised(label(button), key));
     if (button.add) {
       const plus = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       plus.setAttribute('viewBox', '0 0 24 24');
@@ -1296,6 +1302,27 @@ export function openRateMenu(anchor, { rate, onRate, voices, voiceId, onVoice, v
       ...voices.map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
   } : undefined;
   openBoardMenu(anchor, RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) })), aside);
+}
+
+/**
+ * A label with its key words set apart: each word's first place in it, in order.
+ * @param {string} said @param {{words: string[], tone?: string}} key
+ * @returns {(string|HTMLElement)[]}
+ */
+function emphasised(said, { words, tone }) {
+  /** @type {(string|HTMLElement)[]} */ const out = [];
+  let from = 0;
+  for (const [at, word] of words.map((w) => /** @type {[number, string]} */ ([said.indexOf(w), w]))
+    .filter(([at]) => at >= 0).sort((a, b) => a[0] - b[0])) {
+    if (at < from) continue;
+    const b = document.createElement('b');
+    b.className = tone ? `board-key board-key-${tone}` : 'board-key';
+    b.textContent = word;
+    out.push(said.slice(from, at), b);
+    from = at + word.length;
+  }
+  out.push(said.slice(from));
+  return out;
 }
 
 /** @type {ResizeObserver|null} */ let shape = null;
