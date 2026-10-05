@@ -70,7 +70,7 @@ transit-rides.please-tell-me-where-to-get-off,"Dígame dónde bajarme, por favor
 transit-rides.is-this-direct,¿Es directo?,,ˈes diɾˈekto,,2,es-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-transfer,¿Tengo que hacer transbordo?,¿Tengo que cambiar?,tˈeŋɡo ke asˈeɾ tɾansbˈoɾdo,,2,es-agent-v1;ipa=espeak
 transit-rides.is-it-delayed,¿Va con retraso?,¿Está demorado?,bˈa kon retɾˈaso,,2,es-agent-v1;ipa=espeak
-transit-rides.i-am-in-a-hurry,Tengo prisa,Estoy apurado/a,tˈeŋɡo pɾˈisa,,2,es-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,Tengo prisa,Estoy apurado,tˈeŋɡo pɾˈisa,"tengo prisa is said everywhere; estoy apurado is the Latin American second wording (apurarse, to hurry, chiefly in the Americas) and agrees with the speaker -- apurada from a woman",2,"es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 apurar (apremiar, dar prisa; más c. prnl. -- se usa sobre todo en América: apúrese, que llegamos tarde);rule=speaker-variants.md (a slash for the speaker's gender: the masculine stays, the feminine is a variant row);row-corrections-v6;ipa=espeak"
 transit-rides.which-platform,¿Qué andén?,,kˈe andˈen,,2,es-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,¿A qué hora es el próximo?,,a kˈe ˈoɾa ˈes el pɾˈoksimo,,2,es-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,Me pasé de parada,,me pasˈe de paɾˈada,,2,es-agent-v1;ipa=espeak

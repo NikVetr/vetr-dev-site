@@ -15,3 +15,4 @@ speaker_gender=feminine,about-me.i-am-a-teacher,Soy profesora,,sˈoɪ pɾˌofes�
 speaker_gender=feminine,about-me.i-am-a-doctor,Soy médica,,sˈoɪ mˈedika,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
 speaker_gender=feminine,about-me.i-am-a-nurse,Soy enfermera,,sˈoɪ ˌemfeɾmˈeɾa,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
 speaker_gender=feminine,about-me.i-am-an-engineer,Soy ingeniera,,sˈoɪ ˌiŋxenjˈeɾa,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,transit-rides.i-am-in-a-hurry,Tengo prisa,Estoy apurada,tˈeŋɡo pɾˈisa,,2,"es-variants-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 apurado, da;rule=predicative-adjective-agrees-with-speaker (the text is the same for either speaker; only the second wording changes);row-corrections-v6;ipa=espeak"

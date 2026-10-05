@@ -4,7 +4,7 @@ laundry.where-is-a-laundromat,أين مغسلة؟,محل غسيل,ayna maghsalah
 laundry.when-will-it-be-ready,متى تكون جاهزة؟,,matá takūn jāhizah?,mˈataː tˈakawwˌan dʒˈaːhzt,,2,ar-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,بكم الكيلو؟,,bikam al-kīlū?,bˈakam ʔalkˈiːluː,,2,ar-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,هل تكون جاهزة اليوم؟,,hal takūn jāhizah al-yawm?,hˈal tˈakawwˌan dʒˈaːhzt ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
-laundry.please-do-not-use-bleach,من فضلك بدون كلور,بدون مبيّض,min faḍlak bidūn klūr,mˈin fˈadˤlka budːˈuːna kˈalwar,,2,ar-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,بدون كلور لطفًا,بدون مبيّض,bidūn klūr luṭfan,budːˈuːna kˈalwar lˈut̪fan,"without chlorine bleach, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=espeak
 laundry.laundromat,مغسلة,,maghsalah,mˈaɣsalˌa,,2,ar-agent-v1;ipa=espeak
 laundry.please-iron-this,أريد كيّ هذا,,urīd kayy hādhā,ʔɹˈiːd kiː haˈaðaˌa,,2,ar-agent-v1;ipa=espeak
 laundry.detergent,مسحوق غسيل,صابون غسيل,masḥūq ghasīl,mˈasħuːq ɣˈasiːl,,2,ar-agent-v1;ipa=espeak
@@ -34,12 +34,12 @@ hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟
 hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,mˈataː jbdʔ ʔalfˈat̪uːr,,2,ar-agent-v1;ipa=espeak
 hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,hˈal jmkˈunna ħˈifð ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
 hotel-requests.no-housekeeping,لا حاجة للتنظيف,الرجاء عدم الإزعاج,lā ḥājah lil-tanẓīf,lˈaː ħˈaːdʒa lltnðiːf,,2,ar-agent-v1;ipa=espeak
-hotel-requests.another-towel-please,منشفة أخرى من فضلك,فوطة أخرى,minshafah ukhrá min faḍlak,mˈinʃafˌa ʔˈuxɹaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,منشفة أخرى لطفًا,فوطة أخرى,minshafah ukhrá luṭfan,mˈinʃafˌa ʔˈuxɹaː lˈut̪fan,"another towel, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=espeak
 hotel-requests.what-time-is-check-out,متى موعد المغادرة؟,,matá mawʿid al-mughādarah?,mˈataː mˈawʕid ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,هل يمكن تسجيل الوصول مبكراً؟,,hal yumkin tasjīl al-wuṣūl mubakkiran?,hˈal jmkˈunna tˈasdʒiːl ʔalwˈus̪uːl mbkɹˈaː,,2,ar-agent-v1;ipa=espeak
 hotel-requests.another-night,أريد ليلة أخرى,,urīd laylah ukhrá,ʔɹˈiːd lˈajla ʔˈuxɹaː,,2,ar-agent-v1;ipa=espeak
 hotel-requests.is-there-a-safe,هل توجد خزنة؟,خزينة,hal tūjad khaznah?,hˈal tˈuːdʒd xˈazna,,2,ar-agent-v1;ipa=espeak
-hotel-requests.another-blanket,بطانية أخرى من فضلك,,baṭṭānīyah ukhrá min faḍlak,bat̪t̪ˈaːniːjˌa ʔˈuxɹaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+hotel-requests.another-blanket,بطانية أخرى لطفًا,,baṭṭānīyah ukhrá luṭfan,bat̪t̪ˈaːniːjˌa ʔˈuxɹaː lˈut̪fan,"another blanket, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=espeak
 hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},ʔrdʒˈuː ʔˈiːqaːðˌi ʔassˈaːʕa {},,2,ar-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,hˈunaːkˌa mˈuʃkilˌa fˈiː ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
 room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,ʔattˈakjiːf mʕt̪ːl,,2,ar-agent-v1;ipa=espeak

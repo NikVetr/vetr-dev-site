@@ -40,12 +40,12 @@ room-problems.the-light-does-not-work,Lampan fungerar inte.,,lˈampan fˈɵnɡe�
 room-problems.please-send-someone,Kan ni skicka någon för att laga det?,,kan niː sxˈɪkːa nˌoːɡɔn føːr at lˈɑːɡa deːt,,2,sv-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,Värmen fungerar inte.,,vˈɛrmən fˈɵnɡeːrˌar ˈɪntɛ,,2,sv-agent-v1;ipa=espeak
 laundry.please-wash-these-clothes,Kan ni tvätta de här kläderna?,,kan niː tvˈɛtːa deː hˈɛːr klˈɛːdərnˌa,,2,sv-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,Var finns en tvättstuga?,,vɑːr fˈɪns ɛn tvˈɛtstʉɡˌa,,2,sv-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Var finns en tvättomat?,,vɑːr fˈɪns ɛn tvˈɛtːuːmˌɑːt,,2,sv-agent-v1;fix=Svensk ordbok tvättstuga (rum med tvättmaskin och andra anordningar för textiltvätt; särsk. om gemensamt utrymme i flerfamiljshus);fix=Svensk ordbok tvättomat (tvättinrättning för självbetjäning -- marked delvis historiskt);row-corrections-v6;ipa=espeak
 laundry.when-will-it-be-ready,När är den klar?,,nˈɛːr ɛːr dɛn klˈɑːr,,2,sv-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,Hur mycket kostar det per kilo?,,hˈʉr mˈykət kˈɔstar deːt pˈɛːr ɕˈiːluː,,2,sv-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,Kan den bli klar idag?,,kan dɛn blˈiː klˈɑːr ˈɪdˌɑːɡ,,2,sv-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,"Använd inte blekmedel, tack.",,"ˈanvənd ˈɪntɛ blˈɛkmeːdˌɛl, tˈak",,2,sv-agent-v1;ipa=espeak
-laundry.laundromat,tvättstuga,,tvˈɛtstʉɡˌa,,2,sv-agent-v1;ipa=espeak
+laundry.laundromat,tvättomat,,tvˈɛtːuːmˌɑːt,,2,sv-agent-v1;fix=Svensk ordbok tvättstuga (rum med tvättmaskin och andra anordningar för textiltvätt; särsk. om gemensamt utrymme i flerfamiljshus);fix=Svensk ordbok tvättomat (tvättinrättning för självbetjäning -- marked delvis historiskt);row-corrections-v6;ipa=espeak
 laundry.please-iron-this,Kan ni stryka den här?,,kan niː strˈyːka dɛn hˈɛːr,,2,sv-agent-v1;ipa=espeak
 laundry.detergent,tvättmedel,,tvˈɛtmeːdˌɛl,,2,sv-agent-v1;ipa=espeak
 laundry.dry-cleaning,kemtvätt,,ɕˈɛmtvət,,2,sv-agent-v1;ipa=espeak

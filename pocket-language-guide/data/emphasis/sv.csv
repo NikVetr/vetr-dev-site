@@ -54,7 +54,7 @@ board-answers.what-is-your-name,Vad heter
 board-answers.where-does-it-hurt,ont
 border-customs.here-is-my-passport,pass
 border-customs.i-am-here-for-business,affärer
-border-customs.i-am-visiting-family,familj
+border-customs.i-am-visiting-family,släkt
 border-customs.i-have-a-connecting-flight,anslutande flyg
 border-customs.where-do-i-collect-my-baggage,hämtar
 color-size-returns.do-you-have-a-bag,påse
@@ -95,7 +95,7 @@ emergency-medical.i-need-a-doctor,läkare
 emergency-medical.i-think-a-bone-is-broken,brutit ett ben
 emergency-medical.it-hurts-here,ont
 emergency-medical.please-call-an-ambulance,ambulans
-emergency-medical.please-call-my-emergency-contact,anhörig
+emergency-medical.please-call-my-emergency-contact,anhöriga
 emergency-medical.please-take-me-to-a-hospital,sjukhuset
 emergency-medical.this-is-an-emergency,nödläge
 emergency-medical.this-person-is-unconscious,medvetslös
@@ -169,7 +169,7 @@ laundry.please-do-not-use-bleach,blekmedel
 laundry.please-iron-this,stryka
 laundry.please-wash-these-clothes,tvätta
 laundry.when-will-it-be-ready,När
-laundry.where-is-a-laundromat,tvättstuga
+laundry.where-is-a-laundromat,tvättomat
 lost-rescue.i-do-not-know-where-i-am,var jag är
 lost-rescue.i-lost-my-bag,väska
 lost-rescue.i-lost-my-passport,pass

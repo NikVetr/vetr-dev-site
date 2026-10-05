@@ -59,9 +59,9 @@ border-customs.here-is-my-passport,Ось мій паспорт.,,Os mii pasport
 border-customs.i-am-staying-for-days,Я на {} днів.,,Ya na {} dniv.,jˈa nˈa {} dɲˈiːʋ,,2,uk-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Нічого декларувати,Зелений коридор,Nichoho deklaruvaty,ɲiːtʃˈoho dɛklarˈuʋatɪ,,2,uk-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Моя адреса: {},,Moia adresa: {},mˈoja adrˈɛsa {},,2,uk-agent-v1;ipa=espeak
-border-customs.i-am-here-for-business,Я у справах,,Ya u spravakh,jˈa ˈu sprˈaʋax,,2,uk-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,Я у справах.,,Ya u spravakh.,jˈa ˈu sprˈaʋax,,2,"uk-agent-v1;fix=uk.wikipedia Крапка rev 48854960 (знак пунктуації, який ставиться в кінці речення);in-pack-frame=introductions.i-am-a-tourist (Я турист.) beside it on the intro board's about screen;row-corrections-v6;ipa=espeak"
 border-customs.i-have-a-return-ticket,У мене є зворотний квиток.,,U mene ye zvorotnyi kvytok.,ˈu mˈɛnɛ jˈɛ zʋorˈotnɪj ɡʋɪtˈok,,2,uk-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,Я до родичів,,Ya do rodychiv,jˈa dˈo rodˈɪtʃiːʋ,,2,uk-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Я до родичів.,,Ya do rodychiv.,jˈa dˈo rodˈɪtʃiːʋ,,2,"uk-agent-v1;fix=uk.wikipedia Крапка rev 48854960 (знак пунктуації, який ставиться в кінці речення);in-pack-frame=introductions.i-am-a-tourist (Я турист.) beside it on the intro board's about screen;row-corrections-v6;ipa=espeak"
 border-customs.this-is-for-personal-use,Це для особистого користування,,Tse dlia osobystoho korystuvannia,tsˈɛ dʎˈa osobˈɪstoho korɪstˈuʋanɲa,,2,uk-agent-v1;ipa=espeak
 border-customs.i-am-in-transit,Я транзитом,,Ya tranzytom,jˈa tranzˈɪtom,,2,uk-agent-v1;ipa=espeak
 border-customs.i-have-in-cash,У мене {} готівкою.,,U mene {} hotivkoiu.,ˈu mˈɛnɛ {} hotˈiːfkoju,,2,uk-agent-v1;ipa=espeak
@@ -129,7 +129,7 @@ air-travel.i-would-like-an-aisle-seat,Я хотів би місце біля п�
 hitchhiking.can-you-give-me-a-ride,Можете мене підвезти?,,Mozhete mene pidvezty?,moʒˈɛtɛ mˈɛnɛ piːdʋˈɛstɪ,"formal ви, matching the pack's taxi register",2,uk-agent-v1;ipa=espeak
 hitchhiking.where-are-you-going,Куди ви їдете?,,Kudy vy yidete?,kˈudɪ ʋˈɪ jiːdˈɛtɛ,,2,uk-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Мені потрібно тільки до наступного міста.,,Meni potribno tilky do nastupnoho mista.,mˈɛɲiː potrˈiːbno tˈiːʎkɪ dˈo nastˈupnoho mˈiːsta,,2,uk-agent-v1;ipa=espeak
-hitchhiking.is-there-room-for-two,Є місце для двох?,,Ie mistse dlia dvokh?,jˈɛ mˈiːstsɛ dʎˈa dʋˈox,,2,uk-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Є місце для двох?,,Ye mistse dlia dvokh?,jˈɛ mˈiːstsɛ dʎˈa dʋˈox,,2,"uk-agent-v1;fix=uk.wikipedia Латинізація української мови rev 48212974 (КМУ 2010 table: там, де подано два варіанти, другий вживається на початку слова -- Є ye initially, ie elsewhere);rule=tmp/lang/uk/translit.py;row-corrections-v6;ipa=espeak"
 hitchhiking.i-can-pay-for-fuel,Я можу заплатити за бензин.,,Ya mozhu zaplatyty za benzyn.,jˈa mˈoʒu zaplˈatɪtɪ zˈa bˈɛnzɪn,"бензин, the word drivers use",2,uk-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,"Дякую, що підвезли.",,"Diakuiu, shcho pidvezly.","djˈakuju, ʃtʃˈo piːdʋˈɛzlɪ",,2,uk-agent-v1;ipa=espeak
 taxi.please-turn-around,"Розверніться, будь ласка.",,"Rozvernitsia, bud laska.","rozʋˈɛrɲiːtsja, bˈud lˈaska",,2,uk-agent-v1;src=СУМ-20 розвертатися 2 (розм. розвертати свій транспортний засіб);src=ПДР України п. 10.7 + знак 3.24 Розворот заборонено;in-pack-frame;answers-audit-v1;ipa=espeak

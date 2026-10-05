@@ -61,7 +61,7 @@ border-customs.nothing-to-declare,Inget att förtulla.,,ˈɪŋət at fˈœtɵlˌ
 border-customs.i-am-staying-at,Jag bor på {}.,,jɑːɡ bˈuːr poː {},,2,sv-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Jag är här i affärer.,,jɑːɡ ɛːr hˈɛːr iː afˈɛːrər,,2,sv-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Jag har en returbiljett.,,jɑːɡ hɑːr ɛn rətˈɵrbɪljˌɛt,,2,sv-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,Jag hälsar på familj.,,jɑːɡ hˈɛlsar poː famˈɪlj,,2,sv-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Jag hälsar på släkt.,,jɑːɡ hˈɛlsar poː slˈɛkt,"I am visiting relatives -- släkt as a mass noun, as in ha släkt i Medelpad; a bare familj is the household of parents and children and does not stand without a possessive",2,sv-agent-v1;fix=Svensk ordbok hälsa på (göra ett kortare besök hos någon -- han skulle hälsa på sin faster);fix=Svensk ordbok släkt (alla som härstammar från en person i ett tidigare släktled -- ha släkt i Medelpad);fix=Svensk ordbok familj (hushåll som består av föräldrar och deras barn);in-pack-neighbour=ru border-customs.i-am-visiting-family Я к родственникам.;row-corrections-v6;ipa=espeak
 border-customs.this-is-for-personal-use,Det här är för personligt bruk.,,deːt hˈɛːr ɛːr føːr pˈɛʂɔnlˌɪkt brˈʉk,,2,sv-agent-v1;ipa=espeak
 border-customs.i-am-in-transit,Jag är på genomresa.,,jɑːɡ ɛːr poː jˈeːnɔmrəsˌa,,2,sv-agent-v1;ipa=espeak
 border-customs.i-have-in-cash,Jag har {} kontant.,,jɑːɡ hɑːr {} kˈɔntant,,2,sv-agent-v1;ipa=espeak
@@ -109,7 +109,7 @@ common-signs.no-smoking,rökning förbjuden,,rˈœknɪŋ fˈœrbjʉdən,,2,sv-ag
 common-signs.no-photography,fotografering förbjuden,,fˈuːtɔɡrˌafeːrˌɪŋ fˈœrbjʉdən,,2,sv-agent-v1;ipa=espeak
 common-signs.do-not-touch,vidrör ej,,vˈɪdrøːr ˈɛj,,2,sv-agent-v1;ipa=espeak
 common-signs.temporarily-closed,tillfälligt stängt,,tˈɪlfəlˌɪkt stˈɛŋt,,2,sv-agent-v1;ipa=espeak
-common-signs.open-operating,öppet / i drift,,ˈœpət / iː drˈɪft,,2,sv-agent-v1;ipa=espeak
+common-signs.open-operating,öppet,,ˈœpət,,2,"sv-agent-v1;fix=Svensk ordbok öppen (tillgänglig för användning eller utnyttjande, om inrättning -- butiken är öppen 9-18 på vardagar);rule=one-reading-on-a-board (i drift was the gloss of the range, operating);row-corrections-v6;ipa=espeak"
 common-signs.closed,stängt,,stˈɛŋt,,2,sv-agent-v1;ipa=espeak
 common-signs.stopped-stop,stoppad / stopp,,stˈɔpad / stˈɔp,,2,sv-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,"Kör mig dit i tid för shinkansen, tack.",,"ɕˈøːr mˈɛj dˈiːt iː tˈiːd føːr sxˈɪŋkansən, tˈak",,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak

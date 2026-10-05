@@ -3,7 +3,7 @@ time-scheduling.what-time-is-it,كم الساعة؟,,kam al-sāʿah?,kˈam ʔass
 time-scheduling.how-many-minutes,كم دقيقة؟,,kam daqīqah?,kˈam dˈaqiːqˌa,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-time-should-we-meet,في أيّ ساعة نتقابل؟,,fī ayy sāʿah nataqābal?,fˈiː ʔˈiː sˈaːʕa ntqˈaːbl,,2,ar-agent-v1;ipa=espeak
 time-scheduling.can-we-change-the-time,هل يمكن تغيير الموعد؟,,hal yumkin taghyīr al-mawʿid?,hˈal jmkˈunna tˈaɣjiːr ʔalmˈawʕid,,2,ar-agent-v1;ipa=espeak
-time-scheduling.when-is-convenient,متى يناسبك؟,,matá yunāsibuk?,mˈataː jnˈaːsbka,,2,ar-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,ما الوقت المناسب؟,,mā al-waqt al-munāsib?,mˈaː ʔalwˈaqt ʔalmˈunaːsˌib,"what is the suitable time? -- al-waqt al-munāsib, so nothing addresses the listener; yunāsibuk was the -ka of a man (yunāsibuki to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 مناسب (ملائم، لائق -- جاء في الوقت المناسب);rule=no-second-person;row-corrections-v6;ipa=espeak
 time-scheduling.what-is-today-s-date,ما تاريخ اليوم؟,,mā tārīkh al-yawm?,mˈaː tˈaːɹiːx ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-day-is-it-today,أيّ يوم اليوم؟,,ayy yawm al-yawm?,ʔˈiː jˈawm ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-open,متى يفتح؟,,matá yaftaḥ?,mˈataː jftħ,,2,ar-agent-v1;ipa=espeak

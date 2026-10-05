@@ -22,10 +22,10 @@ communication.please-wait-a-moment,እባክዎ ጥቂት ይጠብቁ,,ibakwo t
 communication.can-you-help-me,ሊረዱኝ ይችላሉ?,,līredunny yichilallu?,lirəduɲː jɨtʃɨlalːu,,2,am-agent-v1;ipa=bgn-am
 communication.please-show-me-the-text,እባክዎ በ{target} የተጻፈውን ያሳዩኝ,,ibakwo be{target} yetetsʼafewin yasayunny,ʔɨbakwo bə {target} jətəsʼafəwɨn jasajuɲː,please show me what is written in {target},2,am-agent-v1;ipa=bgn-am
 quick-responses.please-go-ahead,እባክዎ / ይለፉ,,ibakwo / yilefu,ʔɨbakwo / jɨləfu,please / pass,2,am-agent-v1;ipa=bgn-am
-quick-responses.yes-right,አዎ / ልክ,,āwo / lik,ʔawo / lɨk,yes / exactly,2,am-agent-v1;ipa=bgn-am
-quick-responses.no-not,አይ / አይደለም,,āy / āydellem,ʔaj / ʔajdəlːəm,no / it is not,2,am-agent-v1;ipa=bgn-am
-quick-responses.okay-can,እሺ / ይቻላል,,isshī / yichalal,ʔɨʃːi / jɨtʃalal,okay / it is possible,2,am-agent-v1;ipa=bgn-am
-quick-responses.cannot-not-allowed,አይቻልም / አይፈቀድም,,āyichalim / āyifekʼedim,ʔajɨtʃalɨm / ʔajɨfəkʼədɨm,not possible / not permitted,2,am-agent-v1;ipa=bgn-am
+quick-responses.yes-right,አዎ,,āwo,ʔawo,yes,2,"am-agent-v1;fix=abyssinica-dict=yes (አዎ፣ አዎን፣ እሺ) and አዎ (yea);rule=one-reading-on-a-board (ልክ, exactly, was the gloss of the range, right);row-corrections-v6;ipa=bgn-am"
+quick-responses.no-not,አይ,,āy,ʔaj,no,2,"am-agent-v1;in-pack-frame=police-consulate.no-thank-you-i-am-not-interested (አይ አመሰግናለሁ -- āy, no);fix=abyssinica-dict=no (የለም፣ አይደለም -- the copula's negative, kept out as the gloss of the range, not);rule=one-reading-on-a-board;row-corrections-v6;ipa=bgn-am"
+quick-responses.okay-can,እሺ,,isshī,ʔɨʃːi,okay,2,"am-agent-v1;fix=abyssinica-dict=እሺ (ok, yea);rule=one-reading-on-a-board (ይቻላል, it is possible, was the gloss of the range, can);row-corrections-v6;ipa=bgn-am"
+quick-responses.cannot-not-allowed,አይፈቀድም,,āyifekʼedim,ʔajɨfəkʼədɨm,it is not permitted,2,"am-agent-v1;fix=abyssinica-dict=permit (አመቸ፣ ፈቀደ -- አይፈቀድም its negative passive);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is አይቻልም);row-corrections-v6;ipa=bgn-am"
 quick-responses.works-okay,ይሰራል / ደህና,,yiseral / dehna,jɨsəral / dəhna,it works / fine,2,am-agent-v1;ipa=bgn-am
 quick-responses.does-not-work-no,አይሰራም / አይ,,āyiseram / āy,ʔajɨsəram / ʔaj,it does not work / no,2,am-agent-v1;ipa=bgn-am
 phone-translation.i-am-using-phone-translation,በስልክ ትርጉም እየተጠቀምኩ ነው,,beslik tirgum iyyetetʼekʼemku new,bəslɨk tɨrɡum ʔɨjːətətʼəkʼəmku nəw,,2,am-agent-v1;ipa=bgn-am
@@ -106,7 +106,7 @@ board-answers.how-many,ስንት?,,sint?,sɨnt,,2,am-agent-v1;ipa=bgn-am
 board-answers.i-am-calling-an-ambulance,አምቡላንስ እየጠራሁ ነው,,āmbulans iyyetʼerahu new,ʔambulans ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
 board-answers.i-am-calling-the-police,ፖሊስ እየጠራሁ ነው,,polīs iyyetʼerahu new,polis ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
 board-answers.i-do-not-have-a-phone,ስልክ የለኝም,,silk yellenyim,sɨlk jəlːəɲɨm,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-will-find-someone,የሚረዳ ሰው ማግኘት እፈልጋለሁ,,yemīredda sew magnyet ichilallehu,jəmirədːa səw maɡɲət ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-find-someone,የሚረዳ ሰው ማግኘት እችላለሁ,,yemīredda sew magnyet ichilallehu,jəmirədːa səw maɡɲət ʔɨtʃɨlalːəhu,"I can find someone who will help -- the bystander's offer, ማግኘት እችላለሁ as in hitchhiking.i-can-pay-for-fuel; the text's እፈልጋለሁ (I want) read as the speaker needing help, and the romanisation already said እችላለሁ",2,"am-agent-v1;fix=abyssinica-dict=ቻለ (became capable);fix=abyssinica-dict=ፈለገ (look about for -- እፈልጋለሁ, I want or I look for);fix=abyssinica-dict=ረዳ (help out, extend help);in-pack-frame=hitchhiking.i-can-pay-for-fuel (የነዳጅ ገንዘብ መክፈል እችላለሁ);rule=first-person-verb-invariant-for-gender;row-corrections-v6;ipa=bgn-am"
 board-answers.i-will-show-you,መንገዱን አሳያለሁ,,mengedun asayallehu,mənɡədun ʔasajalːəhu,,2,am-agent-v1;ipa=bgn-am
 board-answers.i-will-write-it-down,ይህን እጻፋለሁ,,yihin itsʼafallehu,jɨhɨn ʔɨsʼafalːəhu,,2,am-agent-v1;ipa=bgn-am
 board-answers.it-is-closed,ዝግ ነው,,zig new,zɨɡ nəw,,2,am-agent-v1;ipa=bgn-am

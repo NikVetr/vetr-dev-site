@@ -63,9 +63,9 @@ border-customs.here-is-my-passport,Вот мой паспорт.,,Vot moy paspor
 border-customs.i-am-staying-for-days,Я на {} дней.,,Ya na {} dney.,ˈja nˈɑ {} dnʲˈej,,2,ru-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Нечего декларировать,Зелёный коридор,Nechego deklarirovatʼ,nʲˈetʃʲivʌ dʲikɭarʲˈirʌvʌtʲ,,2,ru-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Мой адрес: {},,Moy adres: {},mˈoj ˈɑdrʲis {},,2,ru-agent-v1;ipa=espeak
-border-customs.i-am-here-for-business,Я по работе,,Ya po rabote,ˈja pˈo rabˈotʲi,,2,ru-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,Я по работе.,,Ya po rabote.,ˈja pˈo rabˈotʲi,,2,ru-agent-v1;fix=ru.wikipedia Точка (знак препинания) rev 153627728 (точка употребляется для завершения предложения);in-pack-frame=introductions.i-am-a-tourist (Я турист.) beside it on the intro board's about screen;row-corrections-v6;ipa=espeak
 border-customs.i-have-a-return-ticket,У меня есть обратный билет.,,U menya yestʼ obratnyy bilet.,ˈu mʲinʲˈɑ jestʲ ʌbrˈɑtnɨj bʲiɭʲˈet,,2,ru-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,Я к родственникам,,Ya k rodstvennikam,ˈja kˈɑ rˈodstvʲinnʲikʌm,,2,ru-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Я к родственникам.,,Ya k rodstvennikam.,ˈja kˈɑ rˈodstvʲinnʲikʌm,,2,ru-agent-v1;fix=ru.wikipedia Точка (знак препинания) rev 153627728 (точка употребляется для завершения предложения);in-pack-frame=introductions.i-am-a-tourist (Я турист.) beside it on the intro board's about screen;row-corrections-v6;ipa=espeak
 border-customs.this-is-for-personal-use,Это для личного пользования,,Eto dlya lichnogo polʼzovaniya,ˈɛtʌ dɭʲɑ ɭʲˈitʃʲnʌvʌ pˈoɭzʌvʌnʲija,,2,ru-agent-v1;ipa=espeak
 border-customs.i-am-in-transit,Я транзитом,,Ya tranzitom,ˈja tranʑˈitʌm,,2,ru-agent-v1;ipa=espeak
 border-customs.i-have-in-cash,У меня {} наличными.,,U menya {} nalichnymi.,ˈu mʲinʲˈɑ {} naɭʲˈitʃʲnɨmʲɪ,,2,ru-agent-v1;ipa=espeak

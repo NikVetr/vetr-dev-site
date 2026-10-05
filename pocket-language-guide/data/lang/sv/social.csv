@@ -27,10 +27,10 @@ communication.i-cannot-make-out-what-you-are-saying,Jag uppfattar inte vad du s�
 communication.i-do-not-understand,Jag förstår inte.,,jɑːɡ fˈœʂtoːr ˈɪntɛ,,2,sv-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Jag kan inte läsa det.,,jɑːɡ kan ˈɪntɛ lˈɛːsa deːt,,2,sv-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,varsågod / sätt igång,,vˈaʂoːɡˌuːd / sˈɛt ˈiːɡɔŋ,,2,sv-agent-v1;ipa=espeak
-quick-responses.yes-right,ja / rätt,,jˈɑː / rˈɛt,,2,sv-agent-v1;ipa=espeak
-quick-responses.no-not,nej / inte,,nˈɛj / ˈɪntɛ,,2,sv-agent-v1;ipa=espeak
-quick-responses.okay-can,okej / kan,,ˈuːkəj / kan,,2,sv-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,kan inte / inte tillåtet,,kan ˈɪntɛ / ˈɪntɛ tˈɪloːtət,,2,sv-agent-v1;ipa=espeak
+quick-responses.yes-right,ja,,jˈɑː,,2,"sv-agent-v1;fix=Svensk ordbok ja (uttryck för bekräftelse av ett påstående el. som svar på en fråga -- Han har väl kommit? Ja, det har han);rule=one-reading-on-a-board (rätt was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,nej,,nˈɛj,,2,"sv-agent-v1;fix=Svensk ordbok nej (uttryck för att bestrida påstående, ge nekande svar på en fråga -- Spelar du något instrument? Nej);rule=one-reading-on-a-board (inte was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,okej,,ˈuːkəj,,2,"sv-agent-v1;fix=Svensk ordbok okej (uttryck för accepterande -- okej, vi gör som du säger);rule=one-reading-on-a-board (kan was the gloss of the range, can);row-corrections-v6;ipa=espeak"
+quick-responses.cannot-not-allowed,inte tillåtet,,ˈɪntɛ tˈɪloːtət,,2,sv-agent-v1;fix=Svensk ordbok tillåten (som tillåts -- rökning tillåten);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible; kan inte was the cannot half);row-corrections-v6;ipa=espeak
 quick-responses.works-okay,fungerar / okej,,fˈɵnɡeːrˌar / ˈuːkəj,,2,sv-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,fungerar inte / nej,,fˈɵnɡeːrˌar ˈɪntɛ / nˈɛj,,2,sv-agent-v1;ipa=espeak
 quick-responses.can-possible,kan / möjligt,,kan / mˈœjlɪkt,,2,sv-agent-v1;ipa=espeak

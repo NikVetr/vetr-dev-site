@@ -16,7 +16,7 @@ time-words.this-week,esta semana,,ˈesta semˈana,,2,es-agent-v1;ipa=espeak
 time-words.next-week,la semana que viene,la próxima semana,la semˈana ke bjˈene,,2,es-agent-v1;ipa=espeak
 time-words.morning,la mañana,,la maɲˈana,,2,es-agent-v1;ipa=espeak
 time-words.afternoon,la tarde,,la tˈaɾde,,2,es-agent-v1;ipa=espeak
-time-words.evening,la noche,la tarde-noche,la nˈotʃe,,2,es-agent-v1;ipa=espeak
+time-words.evening,el atardecer,la tarde-noche,el ˌataɾdesˈeɾ,,2,es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 atardecer 2 (m. final de la tarde: un frío atardecer);fix=Espasa-Calpe 2005 noche (periodo de tiempo comprendido entre la puesta y la salida del Sol -- the word time-words.night already has);in-pack-neighbour=pt time-words.evening o fim da tarde;row-corrections-v6;ipa=espeak
 time-words.spring,la primavera,,la pɾˌimabˈeɾa,,2,es-agent-v1;ipa=espeak
 time-words.summer,el verano,,el beɾˈano,,2,es-agent-v1;ipa=espeak
 time-words.fall,el otoño,,el otˈoɲo,,2,es-agent-v1;ipa=espeak

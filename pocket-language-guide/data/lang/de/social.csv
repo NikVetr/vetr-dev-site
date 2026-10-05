@@ -75,10 +75,10 @@ communication.i-do-not-understand,Ich verstehe nicht.,,ɪç fɛɾʃtˈeːə nˈ�
 communication.i-cannot-read-it,Ich kann es nicht lesen.,,ɪç kˌan ɛs nˈɪçt lˈeːzən,,2,de-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Bitte in Druckbuchstaben schreiben.,Bitte in lateinischen Buchstaben schreiben.,bˈɪtə ɪn dɾˈʊkbuːxʃtˌɑːbən ʃrˈaɪbən,,2,de-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,bitte,bitte sehr,bˈɪtə,,2,de-agent-v1;ipa=espeak
-quick-responses.yes-right,ja / richtig,,jˈɑː / rˈɪçtɪç,,2,de-agent-v1;ipa=espeak
-quick-responses.no-not,nein / nicht,,nˈaɪn / nˈɪçt,,2,de-agent-v1;ipa=espeak
-quick-responses.okay-can,okay / geht,,ˈoːkɛɪ / ɡˈeːt,,2,de-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,geht nicht / verboten,,ɡˈeːt nˈɪçt / fɛɾbˈoːtən,,2,de-agent-v1;ipa=espeak
+quick-responses.yes-right,ja,,jˈɑː,,2,"de-agent-v1;fix=Duden online ja (Partikel) 1 (drückt eine zustimmende Antwort auf eine Entscheidungsfrage aus: Kommst du? -- Ja);rule=one-reading-on-a-board (richtig was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,nein,,nˈaɪn,,2,"de-agent-v1;fix=Duden online nein 1 (drückt eine verneinende Antwort auf eine Entscheidungsfrage aus: Bist du fertig? -- Nein);rule=one-reading-on-a-board (nicht, the negator of a verb, was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,okay,,ˈoːkɛɪ,,2,"de-agent-v1;fix=Duden online okay (umgangssprachlich: abgemacht, einverstanden);rule=one-reading-on-a-board (geht was the gloss of the range, can);row-corrections-v6;ipa=espeak"
+quick-responses.cannot-not-allowed,verboten,,fɛɾbˈoːtən,,2,"de-agent-v1;fix=Duden online verbieten (etwas für nicht erlaubt erklären; untersagen -- Betreten verboten!);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, kann nicht / unmöglich; geht nicht was the cannot half);row-corrections-v6;ipa=espeak"
 quick-responses.works-okay,passt / geht,,pˈast / ɡˈeːt,,2,de-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,funktioniert nicht / nein,,fʊŋktsjˌoːnˈiːɾt nˈɪçt / nˈaɪn,,2,de-agent-v1;ipa=espeak
 quick-responses.can-possible,kann / möglich,,kˌan / mˈøːklɪç,,2,de-agent-v1;ipa=espeak

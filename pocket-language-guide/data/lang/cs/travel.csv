@@ -109,7 +109,7 @@ common-signs.no-smoking,kouření zakázáno,,kˈoʊr̝eɲiː zˈakaːzˌaːno,,
 common-signs.no-photography,fotografování zakázáno,,fˈotoɡrˌafovˌaːɲiː zˈakaːzˌaːno,,2,cs-agent-v1;ipa=espeak
 common-signs.do-not-touch,nedotýkat se,,nˈedotˌiːkat se,,2,cs-agent-v1;ipa=espeak
 common-signs.temporarily-closed,dočasně zavřeno,,dˈotʃasɲe zˈavr̝eno,,2,cs-agent-v1;ipa=espeak
-common-signs.open-operating,otevřeno / v provozu,,ˈotevr̝ˌeno / v prˈovozu,,2,cs-agent-v1;ipa=espeak
+common-signs.open-operating,otevřeno,,ˈotevr̝ˌeno,,2,"cs-agent-v1;fix=SSJČ otevříti 2 (otevřeli (obchod) už v 7 hodin; mají otevřeno, je otevřeno);rule=one-reading-on-a-board (v provozu was the gloss of the range, operating);row-corrections-v6;ipa=espeak"
 common-signs.closed,zavřeno,,zˈavr̝eno,,2,cs-agent-v1;ipa=espeak
 common-signs.stopped-stop,zastaveno / stop,,zˈastavˌeno / stˈop,,2,cs-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Dovezte mě tam prosím včas na shinkansen,,dˈoveste mɲˈe tˈam prˈosiːm ftʃˈas nˈashiŋkˌansen,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak

@@ -40,12 +40,12 @@ room-problems.the-light-does-not-work,Světlo nefunguje,,svjˈetlo nˈefuŋɡˌu
 room-problems.please-send-someone,"Pošlete prosím někoho, aby to opravil",,"pˈoʃlete prˈosiːm ɲˈekoho, ˈabi tˈo ˈopravil",,2,cs-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,Topení nefunguje,,tˈopeɲiː nˈefuŋɡˌuje,,2,cs-agent-v1;ipa=espeak
 laundry.please-wash-these-clothes,Vyperte prosím tyto věci,,vˈiperte prˈosiːm tˈito vjˈetsi,,2,cs-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,Kde je prádelna?,,ɡdˈe je prˈaːdelna,,2,cs-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Kde je samoobslužná prádelna?,,ɡdˈe je sˈamoˌopsluʒnaː prˈaːdelna,,2,"cs-agent-v1;fix=cs.wikipedia Prádelna rev 25939158 (prádelna je místnost nebo budova, kde se pere prádlo ... samoobslužné prádelny jsou velmi oblíbené ve velkých městech);fix=cs.wikipedia Laundromat rev 24853962 (laundromat může být: samoobslužná prádelna -- veřejná prádelna);row-corrections-v6;ipa=espeak"
 laundry.when-will-it-be-ready,Kdy to bude hotové?,,ɡdˈi tˈo bˌude hˈotoveː,,2,cs-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,Kolik to stojí za kilo?,,kˈolik tˈo stˈojiː zˈakilo,,2,cs-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,Může to být hotové dnes?,,mˈuːʒe tˈo biːt hˈotoveː dnˈes,,2,cs-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,Nepoužívejte prosím bělidlo,,nˈepoʊʒˌiːveɪte prˈosiːm bjˈelidlo,,2,cs-agent-v1;ipa=espeak
-laundry.laundromat,prádelna,,prˈaːdelna,,2,cs-agent-v1;ipa=espeak
+laundry.laundromat,samoobslužná prádelna,,sˈamoˌopsluʒnaː prˈaːdelna,,2,"cs-agent-v1;fix=cs.wikipedia Prádelna rev 25939158 (samoobslužné prádelny jsou velmi oblíbené ve velkých městech -- a prádelna alone is any laundry room, building or firm);fix=cs.wikipedia Laundromat rev 24853962 (laundromat může být: samoobslužná prádelna -- veřejná prádelna);row-corrections-v6;ipa=espeak"
 laundry.please-iron-this,"Vyžehlete mi to, prosím",,"vˈiʒehlˌete mi tˈo, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 laundry.detergent,prací prášek,,prˈatsiː prˈaːʃek,,2,cs-agent-v1;ipa=espeak
 laundry.dry-cleaning,chemické čištění,,xˈemitskeː tʃˈiʃceɲiː,,2,cs-agent-v1;ipa=espeak

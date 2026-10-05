@@ -7,7 +7,7 @@ payment-receipt.please-write-the-number,Don Allah ku rubuta lambar,,don allah ku
 payment-receipt.how-much-in-total,Nawa duka?,,nawa duka,,2,ha-agent-v1;ipa=ha-g2p
 payment-receipt.can-we-pay-separately,Za mu iya biya daban-daban?,,za mu ija bija dabandaban,,2,ha-agent-v1;ipa=ha-g2p
 payment-receipt.is-tax-included,An haɗa da haraji?,,an haɗa da haradʒi,,2,ha-agent-v1;ipa=ha-g2p
-payment-receipt.my-card-was-declined,An ki katina,,an ki katina,,2,ha-agent-v1;ipa=ha-g2p
+payment-receipt.my-card-was-declined,An ƙi katina,,an kʼi katina,,2,"ha-agent-v1;fix=Bargery k'i I (v.tr. Dislike; hate; reject; refuse -- the hooked k', where ki I is the pers. pron. 2nd fem sing.);fix=ha.wikipedia usage (An ƙi, 343 hits);row-corrections-v6;ipa=ha-g2p"
 payment-receipt.the-bill-is-wrong,Ina ganin lissafin ba daidai ba ne,,ina ɡanin lissafin ba daidai ba ne,I see the bill is not correct,2,ha-agent-v1;ipa=ha-g2p
 payment-receipt.i-already-paid,Na riga na biya,,na riɡa na bija,,2,ha-agent-v1;ipa=ha-g2p
 shopping.i-am-just-looking,Ina kallo ne kawai,,ina kallo ne kawai,,2,ha-agent-v1;ipa=ha-g2p

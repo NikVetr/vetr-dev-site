@@ -44,7 +44,7 @@ transit-rides.is-it-delayed,Heeft het vertraging?,,heːft hət vərtrˈaːɣɪŋ
 transit-rides.i-am-in-a-hurry,Ik heb haast.,,ɪk hɛp hˈaːst,,2,nl-agent-v1;ipa=espeak
 transit-rides.which-platform,Welk perron?,,ʋˈɛlk pɛɾrˈɔn,,2,nl-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Hoe laat is de volgende?,,hˈu lˈaːt ɪs də vˈɔlɣəndə,,2,nl-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Ik ben mijn halte voorbij gereden.,,ɪk bɛn mɛɪn hˈɑltə vˈɔːrbˌɛɪ ɣərˈeːdən,,2,nl-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Ik ben mijn halte voorbijgereden.,,ɪk bɛn mɛɪn hˈɑltə vˈɔːrbɛɪɣˌɪːreːdən,,2,"nl-agent-v1;fix=Woordenlijst Nederlandse Taal voorbijrijden (hoofdwerkwoord, scheidbaar: voltooid deelwoord voor|bij|ge|re|den; hebben/zijn);row-corrections-v6;ipa=espeak"
 transit-rides.can-i-use-this-ticket,Kan ik dit kaartje gebruiken?,,kɑn ɪk dɪt kˈaːrtʲə ɣəbrˈœykən,,2,nl-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Moet ik dit kaartje afstempelen?,,mˈut ɪk dɪt kˈaːrtʲə ˈɑfstˌɛmpələn,"asks about validating, not buying",2,nl-agent-v1;ipa=espeak
 place-words.visitor-center,bezoekerscentrum,,bəzˈukərssˌɛntrʏm,,2,nl-agent-v1;ipa=espeak
@@ -109,7 +109,7 @@ common-signs.no-smoking,verboden te roken,,vərbˈoːdən tə rˈoːkən,,2,nl-a
 common-signs.no-photography,fotograferen verboden,,fˌoːtɔɣraːfˈɪːrən vərbˈoːdən,,2,nl-agent-v1;ipa=espeak
 common-signs.do-not-touch,niet aanraken,,nˌit ˈaːnrˌaːkən,,2,nl-agent-v1;ipa=espeak
 common-signs.temporarily-closed,tijdelijk gesloten,,tˈɛɪdələk ɣəslˈoːtən,,2,nl-agent-v1;ipa=espeak
-common-signs.open-operating,open / in bedrijf,,ˈoːpən / ɪn bədrˈɛɪf,,2,nl-agent-v1;ipa=espeak
+common-signs.open-operating,open,,ˈoːpən,,2,"nl-agent-v1;fix=Woordenlijst Nederlandse Taal open;rule=one-reading-on-a-board (in bedrijf was the gloss of the range, operating);row-corrections-v6;ipa=espeak"
 common-signs.closed,gesloten,,ɣəslˈoːtən,,2,nl-agent-v1;ipa=espeak
 common-signs.stopped-stop,gestopt / stop,,ɣəstˈɔpt / stˈɔp,,2,nl-agent-v1;ipa=espeak
 place-words.scenic-area,natuurgebied,,naːtˈyrɣəbˌit,,2,nl-agent-v1;ipa=espeak

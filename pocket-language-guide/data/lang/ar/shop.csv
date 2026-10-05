@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,أدفع بالبطاقة؟,,adfaʿ bi-al-biṭāqah?,ʔdfʕ bilbˈit̪aːqˌa,,2,ar-agent-v1;ipa=espeak
 payment-receipt.pay-cash,أدفع نقداً؟,,adfaʿ naqdan?,ʔdfʕ nqdˈaː,,2,ar-agent-v1;ipa=espeak
 payment-receipt.pay-by-qr-code,أدفع بالرمز؟,أدفع بكود كيو آر؟,adfaʿ bi-al-ramz?,ʔdfʕ birɹˈamz,pay by the code,2,ar-agent-v1;ipa=espeak
-payment-receipt.a-receipt-please,إيصال من فضلك,فاتورة من فضلك,īṣāl min faḍlak,ʔˈiːs̪aːl mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,إيصال لطفًا,فاتورة من فضلك,īṣāl luṭfan,ʔˈiːs̪aːl lˈut̪fan,"a receipt, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=espeak
 payment-receipt.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ˈaktb ʔarɹˈaqm mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,kˈam ʔalmˈadʒmuːʕ,,2,ar-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,هل ندفع بشكل منفصل؟,,hal nadfaʿ bi-shakl munfaṣil?,hˈal ndfʕ bʃkl mˈunfas̪ˌil,,2,ar-agent-v1;ipa=espeak
@@ -27,7 +27,7 @@ color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal
 color-size-returns.may-i-try-it-on,هل أقيسه؟,هل يمكنني قياسه؟,hal aqīsuh?,hˈal ʔqˈish,,2,ar-agent-v1;ipa=espeak
 color-size-returns.can-i-return-it,هل يمكن إرجاعه؟,,hal yumkin irjāʿuh?,hˈal jmkˈunna ʔˈirdʒaːʕh,,2,ar-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumkin istibdāluh?,hˈal jmkˈunna ˈistibdˌaːlh,,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-a-bag,هل لديك كيس؟,,hal ladayk kīs?,hˈal ldiːkˌa kˈajs,,2,ar-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,هل لديكم كيس؟,,hal ladaykum kīs?,hˈal ldiːkm kˈajs,"do you (plural) have a bag? -- ladaykum, the plural to the shop, as in food-ordering.do-you-have-drinking-water, so no one listener's gender shows; ladayk was the -ka of a man (ladayki to a woman)",2,ar-agent-v1;fix=en.wikipedia Arabic grammar rev 1375067122 (suffix 2nd m. -ka -- f. -ki; short vowels are not usually written);in-pack-frame=food-ordering.do-you-have-drinking-water (هل لديكم ماء للشرب؟);rule=generic-plural-to-the-house;row-corrections-v6;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,هل يمكنني استرداد الضريبة؟,,hal yumkinunī istirdād al-ḍarībah?,hˈal jmknnˈiː ˈistirdˌaːd ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,هل هناك تسوّق معفى من الضريبة؟,,hal hunāk tasawwuq muʿfá min al-ḍarībah?,hˈal hˈunaːkˌa tsˈuːq mˈuʕfaː mˈin ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
 payment-receipt.can-i-pay-by-mobile-money,أدفع بمحفظة الهاتف؟,,adfaʿ bi-maḥfaẓat al-hātif?,ʔdfʕ bmħfðt ʔalhˈaːtif,pay by the phone wallet,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

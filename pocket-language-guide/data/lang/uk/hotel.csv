@@ -35,7 +35,7 @@ room-problems.there-is-no-hot-water,Немає гарячої води.,,Nemaie 
 room-problems.can-i-change-rooms,Можна поміняти номер?,,Mozhna pominiaty nomer?,mˈoʒna pomˈiːɲatɪ nˈomɛr,,2,uk-agent-v1;ipa=espeak
 room-problems.the-room-is-too-noisy,У номері дуже шумно.,,U nomeri duzhe shumno.,ˈu nomˈɛriː dˈuʒɛ ʃˈumno,,2,uk-agent-v1;ipa=espeak
 room-problems.the-key-does-not-work,Ключ не працює.,,Kliuch ne pratsiuie.,kʎˈutʃ nˈɛ pratsjˈujɛ,,2,uk-agent-v1;ipa=espeak
-room-problems.the-toilet-will-not-flush,Туалет не змивається.,,Tualet ne zmyvaietsia.,tualˈɛt nˈɛ zmɪʋˈajɛtsja,,2,uk-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,Злив у туалеті не працює.,,Zlyv u tualeti ne pratsiuie.,zlˈɪʋ ˈu tualˈɛtiː nˈɛ pratsjˈujɛ,,2,"uk-agent-v1;fix=СУМ-11 ЗЛИВ 2 (пристрій для стоку води або іншої рідини);fix=СУМ-11 ЗМИВАТИСЯ 1 and 6 (видалятися, зникати з поверхні після миття; пас. до змивати -- so не змивається said the toilet would not wash off);in-pack-frame=room-problems.the-light-does-not-work (Світло не працює.);row-corrections-v6;ipa=espeak"
 room-problems.the-light-does-not-work,Світло не працює.,,Svitlo ne pratsiuie.,zʋˈiːtlo nˈɛ pratsjˈujɛ,,2,uk-agent-v1;ipa=espeak
 room-problems.please-send-someone,"Пришліть, будь ласка, майстра.",,"Pryshlit, bud laska, maistra.","prˈɪʃʎiːt, bˈud lˈaska, mˈajstra",,2,uk-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,Опалення не працює.,,Opalennia ne pratsiuie.,opˈalɛnɲa nˈɛ pratsjˈujɛ,,2,uk-agent-v1;ipa=espeak

@@ -1,12 +1,12 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 social-basics.hello,Hello,,həlˈoʊ,,2,latex-reference-v2;ipa=espeak
-social-basics.hello-polite,Hello (polite),,həlˈoʊ,,2,latex-reference-v2;ipa=espeak
+social-basics.hello-polite,Hello,,həlˈoʊ,,2,latex-reference-v2;fix=OALD hello exclamation (used as a greeting when you meet somebody -- Express Yourself: Greetings -- Hello is used in all situations);rule=register-is-the-concept's-not-a-tag-on-the-text;row-corrections-v6;ipa=espeak
 social-basics.good-morning,Good morning,,ɡˈʊd mˈɔːɹnɪŋ,,2,latex-reference-v2;ipa=espeak
 social-basics.good-evening,Good evening,,ɡˈʊd ˈiːvnɪŋ,,2,latex-reference-v2;ipa=espeak
 social-basics.goodbye,Goodbye,,ɡʊdbˈaɪ,,2,latex-reference-v2;ipa=espeak
 social-basics.thank-you,Thank you,,θˈæŋk juː,,2,latex-reference-v2;ipa=espeak
 social-basics.you-are-welcome,You are welcome,,juː ɑːɹ wˈɛlkʌm,,2,latex-reference-v2;ipa=espeak
-social-basics.excuse-me-sorry,Excuse me / sorry,,ɛkskjˈuːs mˌiː / sˈɑːɹi,,2,latex-reference-v2;ipa=espeak
+social-basics.excuse-me-sorry,Excuse me,,ɛkskjˈuːs mˌiː,,2,"latex-reference-v2;fix=OALD excuse verb idiom excuse me (used to politely get somebody's attention, especially somebody you do not know -- NAmE: used to say sorry for pushing somebody or doing something wrong);rule=one-reading-on-a-board (sorry alone is social-basics.sorry);row-corrections-v6;ipa=espeak"
 social-basics.sorry,Sorry,,sˈɑːɹi,,2,latex-reference-v2;ipa=espeak
 social-basics.no-problem,No problem,,nˈoʊ pɹˈɑːbləm,,2,latex-reference-v2;ipa=espeak
 social-basics.i-do-not-know,I do not know,,aɪ duːnˌɑːt nˈoʊ,,2,latex-reference-v2;ipa=espeak
@@ -22,10 +22,10 @@ communication.please-wait-a-moment,Please wait a moment,,plˈiːz wˈeɪt ɐ mˈ
 communication.can-you-help-me,Can you help me?,,kæn juː hˈɛlp mˌiː,,2,latex-reference-v2;ipa=espeak
 communication.please-show-me-the-text,Please show me the text in {target},,plˈiːz ʃˈoʊ mˌiː ðə tˈɛkst ˈɪn {target},,2,language-slots-v1;ipa=espeak
 quick-responses.please-go-ahead,please / go ahead,,plˈiːz / ɡˌoʊ ɐhˈɛd,,2,latex-reference-v2;ipa=espeak
-quick-responses.yes-right,yes / right,,jˈɛs / ɹˈaɪt,,2,latex-reference-v2;ipa=espeak
-quick-responses.no-not,no / not,,nˈoʊ / nˈɑːt,,2,latex-reference-v2;ipa=espeak
-quick-responses.okay-can,okay / can,,oʊkˈeɪ / kˈæn,,2,latex-reference-v2;ipa=espeak
-quick-responses.cannot-not-allowed,cannot / not allowed,,kænˈɑːt / nˌɑːt ɐlˈaʊd,,2,latex-reference-v2;ipa=espeak
+quick-responses.yes-right,yes,,jˈɛs,,2,latex-reference-v2;fix=OALD yes exclamation (used to answer a question and say that something is correct or true);rule=one-reading-on-a-board;row-corrections-v6;ipa=espeak
+quick-responses.no-not,no,,nˈoʊ,,2,latex-reference-v2;fix=OALD no exclamation (used to give a negative reply or statement);rule=one-reading-on-a-board;row-corrections-v6;ipa=espeak
+quick-responses.okay-can,okay,,oʊkˈeɪ,,2,latex-reference-v2;fix=OALD OK exclamation also okay (yes; all right -- 'Shall we go for a walk?' 'OK.' -- Topics Permission and obligation);rule=one-reading-on-a-board;row-corrections-v6;ipa=espeak
+quick-responses.cannot-not-allowed,not allowed,,nˌɑːt ɐlˈaʊd,,2,latex-reference-v2;fix=OALD allow verb (be allowed -- Eating is not allowed in the classrooms -- Topics Permission and obligation);rule=one-reading-on-a-board (the prohibition is what sets this concept apart from quick-responses.cannot-not-possible);row-corrections-v6;ipa=espeak
 quick-responses.works-okay,works / okay,,wˈɜːks / oʊkˈeɪ,,2,latex-reference-v2;ipa=espeak
 quick-responses.does-not-work-no,does not work / no,,dʌznˌɑːt wˈɜːk / nˈoʊ,,2,latex-reference-v2;ipa=espeak
 phone-translation.i-am-using-phone-translation,I am using phone translation,,aɪɐm jˈuːzɪŋ fˈoʊn tɹænslˈeɪʃən,,2,latex-reference-v2;ipa=espeak

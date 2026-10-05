@@ -74,7 +74,7 @@ transit-rides.can-i-use-this-ticket,Can I use this ticket?,,kæn aɪ jˈuːz ð�
 taxi.i-will-get-off-here,I will get off here,,aɪ wɪl ɡɛt ˈɔf hˈɪɹ,,2,japanese-reviewed-v6;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Please get me there in time for the Shinkansen,,plˈiːz ɡɛt mˌiː ðɛɹ ɪn tˈaɪm fɚðə ʃˈɪŋkænsən,,2,japanese-reviewed-v6;ipa=espeak
 pickup-meeting.please-call-a-taxi,Please call a taxi,,plˈiːz kˈɔːl ɐ tˈæksi,,2,japanese-reviewed-v6;ipa=espeak
-common-signs.open-operating,open / operating,,ˈoʊpən / ˈɑːpɚɹˌeɪɾɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+common-signs.open-operating,open,,ˈoʊpən,,2,"japanese-reviewed-v6;fix=OALD open adjective (for customers/visitors: if a shop, bank, business, etc. is open, it is ready for business and will allow customers or visitors to come in);rule=one-reading-on-a-board;row-corrections-v6;ipa=espeak"
 common-signs.closed,closed,,klˈoʊzd,,2,japanese-reviewed-v6;ipa=espeak
 common-signs.stopped-stop,stopped / stop,,stˈɑːpt / stˈɑːp,,2,japanese-reviewed-v6;ipa=espeak
 place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,tˈʊɹɹɪst spˈɑːt / sˈaɪtsiːɪŋ ˈɛɹiə,,2,japanese-reviewed-v6;ipa=espeak

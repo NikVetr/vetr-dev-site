@@ -75,9 +75,9 @@ communication.i-do-not-understand,Je ne comprends pas,,ʒə nə kɔ̃pʁɑ̃ pˈ
 communication.i-cannot-read-it,Je ne peux pas le lire,,ʒə nə pø pa lə lˈiʁ,,2,fr-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Écrivez-le en alphabet latin,,ekʁivelə ɑ̃n alfabɛ latˈɛ̃,,2,fr-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,s'il vous plaît / allez-y,,sil vu plˈɛ / aleziɡʁˈɛk,,2,fr-agent-v1;ipa=espeak
-quick-responses.yes-right,oui / c'est ça,,wˈi / sɛ sˈa,,2,fr-agent-v1;ipa=espeak
-quick-responses.no-not,non / pas,,nˈɔ̃ / pˈa,,2,fr-agent-v1;ipa=espeak
-quick-responses.okay-can,d'accord / possible,,dakˈɔʁ / pɔsˈibl,,2,fr-agent-v1;ipa=espeak
+quick-responses.yes-right,oui,,wˈi,,2,"fr-agent-v1;fix=Larousse oui adv. 1 (exprime une réponse positive à une interrogation non négative -- Venez-vous ? Oui.);rule=one-reading-on-a-board (c'est ça was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,non,,nˈɔ̃,,2,"fr-agent-v1;fix=Larousse non adv. 1 (indique une réponse négative -- Viendrez-vous ? Non.);rule=one-reading-on-a-board (pas was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,d'accord,,dakˈɔʁ,,2,"fr-agent-v1;fix=Dictionnaire de l'Académie française 9e éd. accord n. m. 2 (loc. fam. D'accord, c'est entendu, j'y consens, j'en conviens);rule=one-reading-on-a-board (possible was the gloss of the range, can -- quick-responses.can-possible is c'est possible);row-corrections-v6;ipa=espeak"
 quick-responses.cannot-not-allowed,interdit,,ɛ̃tɛʁdˈi,,2,fr-agent-v1;ipa=espeak
 quick-responses.works-okay,ça marche,,sa mˈaʁʃ,,2,fr-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,ça ne marche pas,,sa nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak

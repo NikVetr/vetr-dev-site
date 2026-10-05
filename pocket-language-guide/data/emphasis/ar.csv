@@ -91,7 +91,7 @@ food-ordering.i-want-this,أريد
 food-ordering.is-a-table-available,طاولة
 food-ordering.is-this-vegetarian,نباتي
 food-ordering.table-for-two,لشخصين
-food-ordering.what-do-you-recommend,تنصح
+food-ordering.what-do-you-recommend,تنصحون | تنصحين | تنصح
 hiking-parks.how-long-to-the-summit,القمة
 hiking-parks.how-long-to-the-viewpoint,المطلّ
 hiking-parks.is-this-trail-suitable-for-beginners,للمبتدئين
@@ -255,7 +255,7 @@ time-scheduling.what-time-does-it-close,يغلق
 time-scheduling.what-time-does-it-open,يفتح
 time-scheduling.what-time-is-it,الساعة
 time-scheduling.what-time-should-we-meet,نتقابل
-time-scheduling.when-is-convenient,يناسبك
+time-scheduling.when-is-convenient,المناسب | يناسبك
 toilets.it-is-out-of-order,معطّل
 toilets.where-toilet,الحمّام
 trail-conditions.can-we-return-before-dark,قبل الغروب

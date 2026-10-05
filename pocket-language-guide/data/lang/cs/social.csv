@@ -27,10 +27,10 @@ communication.i-cannot-make-out-what-you-are-saying,"Nerozumím, co říkáte",,
 communication.i-do-not-understand,Nerozumím,,nˈerozˌumiːm,,2,cs-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Neumím to přečíst,,nˈeʊmiːm tˈo pr̝ˈetʃiːst,,2,cs-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,prosím / jen do toho,,prˈosiːm / jˈen dˈotoho,,2,cs-agent-v1;ipa=espeak
-quick-responses.yes-right,ano / přesně tak,,ˈano / pr̝ˈesɲe tˈak,,2,cs-agent-v1;ipa=espeak
-quick-responses.no-not,ne / není,,nˈe / nˈeɲiː,,2,cs-agent-v1;ipa=espeak
-quick-responses.okay-can,dobře / lze,,dˈobr̝e / ˈl̩ze,,2,cs-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,nelze / není dovoleno,,nˈelze / nˈeɲiː dˈovolˌeno,,2,cs-agent-v1;ipa=espeak
+quick-responses.yes-right,ano,,ˈano,,2,"cs-agent-v1;fix=SSJČ ano 1 (přísl. s významem přisvědčovacím: jsi hotov s prací? Ano);rule=one-reading-on-a-board (přesně tak was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,ne,,nˈe,,2,"cs-agent-v1;fix=SSJČ ne 1 (záp. částice: popírá obsah věty v záp. odpovědi -- máš hlad? Ne);rule=one-reading-on-a-board (není was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,dobře,,dˈobr̝e,,2,"cs-agent-v1;fix=SSJČ dobře 6 (s významem přisvědčovacím; ano, budiž: d., máš pravdu);rule=one-reading-on-a-board (lze was the gloss of the range, can);row-corrections-v6;ipa=espeak"
+quick-responses.cannot-not-allowed,není dovoleno,,nˈeɲiː dˈovolˌeno,,2,"cs-agent-v1;fix=SSJČ dovoliti (dát svolení, souhlas někomu k něčemu -- není dovoleno, its passive negated: no permission is given);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, nemůže / není možné; nelze was the cannot half);row-corrections-v6;ipa=espeak"
 quick-responses.works-okay,funguje / v pořádku,,fˈuŋɡuje / v pˈor̝aːtku,,2,cs-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,nefunguje / ne,,nˈefuŋɡˌuje / nˈe,,2,cs-agent-v1;ipa=espeak
 quick-responses.can-possible,může / je možné,,mˈuːʒe / je mˈoʒneː,,2,cs-agent-v1;ipa=espeak

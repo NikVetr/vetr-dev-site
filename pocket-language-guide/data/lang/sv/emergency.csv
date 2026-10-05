@@ -18,7 +18,7 @@ emergency-medical.where-is-the-nearest-hospital,Var ligger närmaste sjukhus?,,v
 emergency-medical.what-is-the-emergency-number,Vad är larmnumret?,,vɑːd ɛːr lˈarmnɵmrət,,2,sv-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Finns det en läkare som talar {source}?,,fˈɪns deːt ɛn lˈɛːkarə sɔm tˈɑːlar {source},,2,sv-agent-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Jag tror att jag har brutit ett ben.,,jɑːɡ trˈuːr at jɑːɡ hɑːr brˈʉtiːt ˈɛt bˈeːn,,2,sv-agent-v1;ipa=espeak
-emergency-medical.please-call-my-emergency-contact,Ring min anhörig.,,rˈɪŋ mɪn ˈanhøːrˌɪɡ,,2,sv-agent-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Ring min anhöriga.,,rˈɪŋ mɪn ˈanhøːrˌiːɡa,"call my next of kin -- the weak form anhöriga after the possessive, which does not show the relative's sex (anhörige is for a man)",2,"sv-agent-v1;fix=SAOL anhörig (nära släkting: en anhörig, mina anhöriga -- böjning: den anhörige + maskulint substantiv, anhöriga otherwise);fix=Svensk ordbok anhörig (ofta substantiverat: sorgen när en nära anhörig dör);rule=weak-adjective-after-possessive;row-corrections-v6;ipa=espeak"
 emergency-medical.i-have-travel-insurance,Jag har reseförsäkring.,,jɑːɡ hɑːr rˌeːsəfˈœʂəkrˌɪŋ,,2,sv-agent-v1;ipa=espeak
 medical-conditions.i-am-diabetic,Jag är diabetiker.,,jɑːɡ ɛːr dˈiːabətˌiːkər,,2,sv-agent-v1;ipa=espeak
 medical-conditions.i-need-insulin,Jag behöver insulin.,,jɑːɡ bəhˈøːvər ˌɪnsʉlˈiːn,,2,sv-agent-v1;ipa=espeak

@@ -28,10 +28,10 @@ communication.i-do-not-understand,Anlamadım.,,anɫˈamadɯm,,2,tr-agent-v1;ipa=
 communication.i-cannot-read-it,Bunu okuyamıyorum.,,bunˈʊ okujamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Latin harfleriyle yazar mısınız?,,ɫatˈɪn harfleɾˈɪjlɛ jazˈar mˈɯsɯnɯz,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Buyurun,,bujuɾˈʊn,,2,tr-agent-v1;ipa=espeak
-quick-responses.yes-right,evet / doğru,,evˈɛt / doːɾˈʊ,,2,tr-agent-v1;ipa=espeak
-quick-responses.no-not,hayır / değil,,hajˈɯr / dˈejɪl,,2,tr-agent-v1;ipa=espeak
-quick-responses.okay-can,tamam / olur,,tamˈam / oɫˈʊr,,2,tr-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,olmaz / yasak,,ɔɫmˈaz / jˈasak,,2,tr-agent-v1;ipa=espeak
+quick-responses.yes-right,evet,,evˈɛt,,2,"tr-agent-v1;fix=TDK Güncel Türkçe Sözlük evet 1 (ünlem: Öyledir anlamında kullanılan bir doğrulama veya onaylama sözü);rule=one-reading-on-a-board (doğru was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,hayır,,hajˈɯr,,2,"tr-agent-v1;fix=TDK Güncel Türkçe Sözlük hayır 1 (Yok, öyle değil, olmaz anlamlarında onamama, inkâr bildiren bir söz -- Para var mı? Hayır);rule=one-reading-on-a-board (değil, the negative copula, was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,olur,,oɫˈʊr,,2,"tr-agent-v1;fix=TDK Güncel Türkçe Sözlük olur 3 (ünlem: evet -- Gazeteyi okur musun? Olur);fix=TDK tamam 5 (ünlem, teklifsiz konuşmada: evet -- marked informal, and quick-responses.okay-fine is tamam);rule=one-reading-on-a-board;row-corrections-v6;ipa=espeak"
+quick-responses.cannot-not-allowed,yasak,,jˈasak,,2,"tr-agent-v1;fix=TDK Güncel Türkçe Sözlük yasak 2 (yapılmaması istenmiş olan; yok, memnu, haram);fix=TDK olmaz 1 (imkânsız, gerçekleşemez -- quick-responses.cannot-not-possible's own word);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible);row-corrections-v6;ipa=espeak"
 quick-responses.works-okay,çalışıyor / tamam,,tʃaɫɯʃˈɯjɔr / tamˈam,,2,tr-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,çalışmıyor / hayır,,tʃaɫɯʃmˈɯjɔr / hajˈɯr,,2,tr-agent-v1;ipa=espeak
 quick-responses.can-possible,olur / mümkün,,oɫˈʊr / mømkˈøn,,2,tr-agent-v1;ipa=espeak
@@ -111,7 +111,7 @@ board-answers.i-will-show-you,Yolu göstereceğim.,,joɫˈʊ ɟœsteɾedʒˈejɪ
 board-answers.i-will-write-it-down,Yazacağım.,,jazadʒˈaːɯm,,2,tr-agent-v1;ipa=espeak
 board-answers.it-is-closed,Kapalı.,,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
 board-answers.it-is-over-there,Orada.,,ˈoɾada,,2,tr-agent-v1;ipa=espeak
-board-answers.none-of-these,Bunlardan hiçbirini demek istemiyorum.,,bʊnɫardˈan hɪtʃbiɾinˈɪ demˈɛk ɪstemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+board-answers.none-of-these,Söylemek istediğim bunlardan hiçbiri değil.,,sœjlemˈɛk ɪstedˈijɪm bʊnɫardˈan hɪtʃbiɾˈɪ dˈejɪl,"what I want to say is none of these -- the answer is not on the board; bunlardan hiçbirini demek istemiyorum said 'I do not want to say any of these', which reads as declining to answer (that is board-answers.i-would-rather-not-say)",2,"tr-agent-v1;fix=TDK Güncel Türkçe Sözlük söylemek 1 (düşündüğünü veya bildiğini sözle anlatmak);fix=TDK istemek 1 (istek duymak, arzulamak);fix=TDK hiçbiri (zamir: bir teki, biri bile);in-pack-neighbour=board-answers.i-would-rather-not-say (Söylememeyi tercih ederim);rule=no-grammatical-gender;row-corrections-v6;ipa=espeak"
 board-answers.not-possible,Bu mümkün değil.,,bʊ mømkˈøn dˈejɪl,,2,tr-agent-v1;ipa=espeak
 board-answers.please-wait,"Bir dakika, lütfen.",,"bɪr dakikˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 board-answers.say-it-again,"Bir daha, lütfen?",,"bɪr dahˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak

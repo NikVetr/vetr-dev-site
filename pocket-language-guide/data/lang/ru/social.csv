@@ -28,9 +28,9 @@ communication.i-do-not-understand,Я не понимаю.,,Ya ne ponimayu.,ˈja 
 communication.i-cannot-read-it,Я не могу это прочитать.,,Ya ne mogu eto prochitatʼ.,ˈja nʲe mʌɡˌu ˈɛtʌ prʌtʃʲitˈɑtʲ,,2,ru-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Напишите латинскими буквами.,,,nʌpʲiʃˈɨtʲi ɭatʲˈinskʲimʲɪ bˈukvʌmʲɪ,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,пожалуйста,,pozhaluysta,pʌʒˈɑɭujsta,,2,ru-agent-v1;ipa=espeak
-quick-responses.yes-right,да / верно,,da / verno,dˈɑ / vʲˈernʌ,,2,ru-agent-v1;ipa=espeak
-quick-responses.no-not,нет / не,,net / ne,nʲˈet / nʲe,,2,ru-agent-v1;ipa=espeak
-quick-responses.okay-can,хорошо / можно,,khorosho / mozhno,xʌrʌʃˈo / mˈoʒnʌ,,2,ru-agent-v1;ipa=espeak
+quick-responses.yes-right,да,,da,dˈɑ,,2,"ru-agent-v1;fix=Ozhegov-Shvedova ДА 5 (употр. при ответе для выражения утверждения, согласия -- Все здесь? Да.);rule=one-reading-on-a-board (верно was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,нет,,net,nʲˈet,,2,"ru-agent-v1;fix=Ozhegov-Shvedova НЕТ 1 (частица: употр. при отрицательном ответе на вопрос -- Мы остаёмся? Нет.);rule=one-reading-on-a-board (не was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,хорошо,,khorosho,xʌrʌʃˈo,,2,"ru-agent-v1;fix=Ushakov ХОРОШО 4 (утвердительная частица: да, так, пусть будет так, согласен -- Ты сходишь? Хорошо.);rule=one-reading-on-a-board (можно is quick-responses.can-possible's own row);row-corrections-v6;ipa=espeak"
 quick-responses.cannot-not-allowed,нельзя,,nelʼzya,nʲiɭʑˈɑ,,2,ru-agent-v1;ipa=espeak
 quick-responses.works-okay,работает,,rabotayet,rabˈotʌjit,,2,ru-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,не работает,,ne rabotayet,nʲe rabˈotʌjit,,2,ru-agent-v1;ipa=espeak

@@ -18,7 +18,7 @@ atm-cash.where-is-an-atm,Ina na'urar ATM take?,,ina naʔurar eːtiːɛm take,whe
 atm-cash.does-this-atm-take-foreign-cards,Wannan na'urar ATM za ta karɓi katin waje?,,wannan naʔurar eːtiːɛm za ta karbi katin wadʒe,,2,ha-agent-v1;ipa=ha-g2p+loan
 atm-cash.the-atm-kept-my-card,Na'urar ta kama katina,,naʔurar ta kama katina,the-machine it-caught card-my,2,ha-agent-v1;ipa=ha-g2p
 atm-cash.is-there-a-fee,Akwai kuɗin sabis?,,akwai kuɗin sabis,is-there money-of service,2,ha-agent-v1;ipa=ha-g2p
-atm-cash.the-card-was-declined,An ki katin,,an ki katin,impersonal: (they/it) refused the-card,2,ha-agent-v1;ipa=ha-g2p
+atm-cash.the-card-was-declined,An ƙi katin,,an kʼi katin,impersonal: (they/it) refused the-card,2,"ha-agent-v1;fix=Bargery k'i I (v.tr. Dislike; hate; reject; refuse -- the hooked k', where ki I is the pers. pron. 2nd fem sing.);fix=ha.wikipedia usage (An ƙi, 343 hits);row-corrections-v6;ipa=ha-g2p"
 atm-cash.what-is-the-exchange-rate,Menene farashin canjin kuɗi?,,menene faraʃin tʃandʒin kuɗi,,2,ha-agent-v1;ipa=ha-g2p
 atm-cash.no-money-came-out,Kuɗi bai fito ba,,kuɗi bai fito ba,money it-did-not come-out,2,ha-agent-v1;ipa=ha-g2p
 atm-cash.where-can-i-change-money,Ina zan iya canza kuɗi?,,ina zan ija tʃanza kuɗi,,2,ha-agent-v1;ipa=ha-g2p

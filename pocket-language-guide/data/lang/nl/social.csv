@@ -28,10 +28,10 @@ communication.i-do-not-understand,Ik begrijp het niet.,,ɪk bəɣrˈɛɪp hət n
 communication.i-cannot-read-it,Ik kan het niet lezen.,,ɪk kɑn hət nˌit lˈeːzən,,2,nl-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Schrijf het alstublieft in Latijnse letters.,Schrijf het alstublieft in het Romeinse alfabet.,sxrˈɛɪf hət ˌɑlstʏblˈift ɪn lˈaːtɛɪnsə lˈɛtərs,,2,nl-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,alstublieft / ga uw gang,,ˌɑlstʏblˈift / ɣˈaː yʊ ɣˈɑŋ,,2,nl-agent-v1;ipa=espeak
-quick-responses.yes-right,ja / klopt,,jˈaː / klˈɔpt,,2,nl-agent-v1;ipa=espeak
-quick-responses.no-not,nee / niet,,nˈeː / nˈit,,2,nl-agent-v1;ipa=espeak
-quick-responses.okay-can,oké / kan,,oːkˈeː / kɑn,,2,nl-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,kan niet / niet toegestaan,,kɑn nˈit / nˌi tˈuɣəstˌaːn,,2,nl-agent-v1;ipa=espeak
+quick-responses.yes-right,ja,,jˈaː,,2,"nl-agent-v1;fix=ANW (Algemeen Nederlands Woordenboek, INT) ja tussenwerpsel;rule=one-reading-on-a-board (klopt was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,nee,,nˈeː,,2,"nl-agent-v1;fix=ANW (INT) nee tussenwerpsel (officiële variant neen);rule=one-reading-on-a-board (niet, the negator of a verb, was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,oké,,oːkˈeː,,2,"nl-agent-v1;fix=ANW (INT) oké tussenwerpsel;fix=Woordenlijst Nederlandse Taal oké;rule=one-reading-on-a-board (kan was the gloss of the range, can);row-corrections-v6;ipa=espeak"
+quick-responses.cannot-not-allowed,niet toegestaan,,nˌi tˈuɣəstˌaːn,,2,nl-agent-v1;fix=Woordenlijst Nederlandse Taal toegestaan (bijvoeglijk naamwoord / bijwoord);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible; kan niet was the cannot half);row-corrections-v6;ipa=espeak
 quick-responses.works-okay,werkt / oké,,ʋˈɛrkt / oːkˈeː,,2,nl-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,werkt niet / nee,,ʋˈɛrkt nˈit / nˈeː,,2,nl-agent-v1;ipa=espeak
 quick-responses.can-possible,kan / mogelijk,,kɑn / mˈoːɣələk,,2,nl-agent-v1;ipa=espeak

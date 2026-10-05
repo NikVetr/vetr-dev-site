@@ -35,7 +35,7 @@ room-problems.there-is-no-hot-water,Нет горячей воды.,,Net goryach
 room-problems.can-i-change-rooms,Можно поменять номер?,,Mozhno pomenyatʼ nomer?,mˈoʒnʌ pʌmʲinʲˈɑtʲ nˈomʲir,,2,ru-agent-v1;ipa=espeak
 room-problems.the-room-is-too-noisy,В номере очень шумно.,,V nomere ochenʼ shumno.,v nˈomʲirʲi ˈotʃʲin ʃˈumnʌ,,2,ru-agent-v1;ipa=espeak
 room-problems.the-key-does-not-work,Ключ не работает.,,Klyuch ne rabotayet.,kɭʲˈʉtʃʲ nʲe rabˈotʌjit,,2,ru-agent-v1;ipa=espeak
-room-problems.the-toilet-will-not-flush,Туалет не смывается.,,Tualet ne smyvayetsya.,tuaɭʲˈet nʲe smɨvˈɑjitsʌ,,2,ru-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,Слив в туалете не работает.,,Sliv v tualete ne rabotayet.,sɭʲˈif f tuaɭʲˈetʲi nʲe rabˈotʌjit,,2,ru-agent-v1;fix=Ozhegov-Shvedova СЛИВ 2 (устройство для стока жидкости);fix=ru.wikipedia Слив rev 146246581 (слив в сантехнике -- часть сантехнического устройства: слив унитаза);fix=Efremova СМЫВАТЬСЯ 1 and 3 (исчезать с поверхности в результате мытья; страд. к смывать -- so не смывается said the toilet would not wash off);in-pack-frame=room-problems.the-light-does-not-work (Свет не работает.);row-corrections-v6;ipa=espeak
 room-problems.the-light-does-not-work,Свет не работает.,,Svet ne rabotayet.,svʲˈet nʲe rabˈotʌjit,,2,ru-agent-v1;ipa=espeak
 room-problems.please-send-someone,"Пришлите, пожалуйста, мастера.",,"Prishlite, pozhaluysta, mastera.","prʲiʃɭʲˈitʲi, pʌʒˈɑɭujsta, masʲtʲˈera",,2,ru-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,Отопление не работает.,,Otopleniye ne rabotayet.,ʌtʌpɭʲˈenʲijɪ nʲe rabˈotʌjit,,2,ru-agent-v1;ipa=espeak

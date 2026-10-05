@@ -28,9 +28,9 @@ communication.i-do-not-understand,Я не розумію.,,Ya ne rozumiiu.,jˈa 
 communication.i-cannot-read-it,Я не можу це прочитати.,,Ya ne mozhu tse prochytaty.,jˈa nˈɛ mˈoʒu tsˈɛ protʃˈɪtatɪ,,2,uk-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,"Напишіть, будь ласка, латинськими літерами.",,"Napyshit, bud laska, latynskymy literamy.","napˈɪʃiːt, bˈud lˈaska, latˈɪnskɪmɪ ʎiːtˈɛramɪ",,2,uk-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,будь ласка,,bud laska,bˈud lˈaska,,2,uk-agent-v1;ipa=espeak
-quick-responses.yes-right,так / правильно,,tak / pravylno,tˈak / praʋˈɪʎno,,2,uk-agent-v1;ipa=espeak
-quick-responses.no-not,ні / не,,ni / ne,ɲˈiː / nˈɛ,,2,uk-agent-v1;ipa=espeak
-quick-responses.okay-can,добре / можна,,dobre / mozhna,dˈobrɛ / mˈoʒna,,2,uk-agent-v1;ipa=espeak
+quick-responses.yes-right,так,,tak,tˈak,,2,"uk-agent-v1;fix=СУМ-11 ТАК II част. 1 ствердж. (уживається під час відповіді, що підтверджує правильність думки, наявність факту; протилежне ні);rule=one-reading-on-a-board (правильно was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,ні,,ni,ɲˈiː,,2,"uk-agent-v1;fix=СУМ-11 НІ 1 част. 2 заперечна (уживається у значенні неповного речення при заперечних відповідях);rule=one-reading-on-a-board (не was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,добре,,dobre,dˈobrɛ,,2,uk-agent-v1;fix=СУМ-11 ДОБРЕ 4 (у знач. част. уживається на означення згоди; гаразд);rule=one-reading-on-a-board (можна is quick-responses.can-possible's own row);row-corrections-v6;ipa=espeak
 quick-responses.cannot-not-allowed,не можна,,ne mozhna,nˈɛ mˈoʒna,,2,uk-agent-v1;ipa=espeak
 quick-responses.works-okay,працює,,pratsiuie,pratsjˈujɛ,,2,uk-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,не працює,,ne pratsiuie,nˈɛ pratsjˈujɛ,,2,uk-agent-v1;ipa=espeak

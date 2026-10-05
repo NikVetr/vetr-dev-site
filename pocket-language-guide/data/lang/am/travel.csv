@@ -74,7 +74,7 @@ taxi.could-you-make-it-colder,እባክዎ የአየር ማቀዝቀዣውን �
 taxi.could-you-make-it-warmer,እባክዎ የአየር ማቀዝቀዣውን ይቀንሱ,,ibakwo yeāyer makʼezkʼezhawin yikʼensu,ʔɨbakwo jəʔajər makʼəzkʼəʒawɨn jɨkʼənsu,please decrease the air conditioner,2,am-agent-v1;ipa=bgn-am
 taxi.may-i-open-the-window,መስኮቱን ልክፈት?,,meskotun likifet?,məskotun lɨkɨfət,,2,am-agent-v1;ipa=bgn-am
 pickup-meeting.please-call-a-taxi,እባክዎ ታክሲ ይጥሩ,,ibakwo taksī yitʼiru,ʔɨbakwo taksi jɨtʼɨru,,2,am-agent-v1;ipa=bgn-am
-common-signs.open-operating,ክፍት / በስራ ላይ,,kift / besira lay,kɨft / bəsɨra laj,open / at work,2,am-agent-v1;ipa=bgn-am
+common-signs.open-operating,ክፍት,,kift,kɨft,open,2,"am-agent-v1;fix=abyssinica-dict=ክፍት (unclosed, open);rule=one-reading-on-a-board (በስራ ላይ, at work, was the gloss of the range, operating);row-corrections-v6;ipa=bgn-am"
 common-signs.closed,ዝግ,,zig,zɨɡ,,2,am-agent-v1;ipa=bgn-am
 common-signs.stopped-stop,ቆሟል / ማቆሚያ,,kʼomwal / makʼomīya,kʼomwal / makʼomija,it has stopped / a stop,2,am-agent-v1;ipa=bgn-am
 place-words.tourist-spot-sightseeing-area,የቱሪስት መስህብ,,yeturīst mesihib,jəturist məsɨhɨb,,2,am-agent-v1;ipa=bgn-am

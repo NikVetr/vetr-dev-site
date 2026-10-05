@@ -28,9 +28,9 @@ communication.i-do-not-understand,Δεν καταλαβαίνω,,Den katalavaino
 communication.i-cannot-read-it,Δεν μπορώ να το διαβάσω,,Den boro na to diavaso,ðˈen boɾˈo na to ðˌiavˈaso,,2,el-agent-v1;roman=elot743;ipa=espeak
 communication.please-write-it-in-roman-letters,Γράψτε το λατινικά,,,ɣɾˈapste to lˌatinikˈa,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Παρακαλώ,,Parakalo,pˌaɾakalˈo,"Please; also ""go ahead"", ""you're welcome""",2,el-agent-v1;roman=elot743;ipa=espeak
-quick-responses.yes-right,Ναι / σωστά,,Nai / sosta,nˈe / sostˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
-quick-responses.no-not,Όχι / δεν,,Ochi / den,ˈoçi / ðˈen,The second word negates a verb,2,el-agent-v1;roman=elot743;ipa=espeak
-quick-responses.okay-can,Εντάξει / γίνεται,,Entaxei / ginetai,edˈaksi / jˈinetˌe,Okay / it can be done,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.yes-right,Ναι,,Nai,nˈe,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis Λεξικό της κοινής νεοελληνικής ναι 1α (ως σύντομη καταφατική απάντηση σε ερώτηση: Θα έρθεις μαζί μας; -- Ναι);rule=one-reading-on-a-board (σωστά was the gloss of the range, right);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,Όχι,,Ochi,ˈoçi,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis όχι I.1α (ως σύντομη αρνητική απάντηση: Να πάω μαζί τους; -- Όχι);rule=one-reading-on-a-board (δεν, which negates a verb, was the gloss of the range, not);row-corrections-v6;ipa=espeak"
+quick-responses.okay-can,Εντάξει,,Entaxei,edˈaksi,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis εντάξει 1α (ως απάντηση απόλυτης συμφωνίας, συγκατάθεσης του ομιλητή στην πρόταση που του έγινε προηγουμένως);rule=one-reading-on-a-board (γίνεται was the gloss of the range, can);row-corrections-v6;ipa=espeak"
 quick-responses.cannot-not-allowed,Απαγορεύεται,Δεν επιτρέπεται,Apagorevetai,ˌapaɣoɾˈevetˌe,It is forbidden,2,el-agent-v1;roman=elot743;ipa=espeak
 quick-responses.works-okay,Δουλεύει / εντάξει,Λειτουργεί,Doulevei / entaxei,ðulˈevi / edˈaksi,,2,el-agent-v1;roman=elot743;ipa=espeak
 quick-responses.does-not-work-no,Δεν δουλεύει / όχι,Δεν λειτουργεί,Den doulevei / ochi,ðˈen ðulˈevi / ˈoçi,,2,el-agent-v1;roman=elot743;ipa=espeak
