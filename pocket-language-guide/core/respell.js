@@ -780,6 +780,38 @@ export function nameRespeller(rules, ownerIpa) {
 }
 
 /**
+ * A first guess at the sounds of a typed name, for the sound keyboard to start from.
+ *
+ * Letters do not map to sounds one-to-one in any orthography -- English least -- so this
+ * is a starting point the reader hears in the listener's voice and corrects tile by
+ * tile, never an answer. `table` is `data/registry/name-letters.csv`: per script, the
+ * sounds of a letter or a run of letters, with a language's own reading of a run taking
+ * the place of the script's default. The longest run that reads wins at each point
+ * (`sch` before `s`). A letter the table does not read -- a space, a hyphen, an
+ * apostrophe -- adds no sound.
+ * @param {string} name
+ * @param {Record<string,string>[]} table  rows of `language,script,letters,sound`
+ * @param {string} language  the reader's, whose own readings come first
+ * @param {string} script    the script the name is typed in
+ * @returns {string} the sounds, joined as the keyboard keeps them
+ */
+export function guessSounds(name, table, language, script) {
+  /** @type {Map<string, string>} */ const read = new Map();
+  for (const row of table) if (row.script === script && !row.language) read.set(row.letters, row.sound);
+  for (const row of table) if (row.script === script && row.language === language) read.set(row.letters, row.sound);
+  const longest = Math.max(0, ...[...read.keys()].map((letters) => letters.length));
+  const text = name.normalize('NFC').toLocaleLowerCase(language);
+  /** @type {string[]} */ const sounds = [];
+  for (let i = 0; i < text.length;) {
+    let n = Math.min(longest, text.length - i);
+    while (n > 0 && !read.has(text.slice(i, i + n))) n -= 1;
+    if (n) sounds.push(.../** @type {string} */ (read.get(text.slice(i, i + n))).split(' ').filter(Boolean));
+    i += n || 1;
+  }
+  return sounds.join('');
+}
+
+/**
  * A respeller for one reader's language, bound to one language being learned.
  *
  * The binding matters: the rule table is target-independent, but three of its

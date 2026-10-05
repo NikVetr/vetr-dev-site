@@ -37,7 +37,8 @@ export function setDetail(fact, value) {
 
 /**
  * What the name's sounds are built with, from the page that knows both languages.
- * @typedef {{spellOwner:(ipa:string)=>string, spellListener:(ipa:string)=>string, say?:(text:string)=>void}} Sounds
+ * @typedef {{spellOwner:(ipa:string)=>string, spellListener:(ipa:string)=>string, say?:(text:string)=>void,
+ *   guess?:(name:string)=>string}} Sounds  `guess` reads a typed name's letters as sounds, for a start
  */
 
 /**
@@ -72,6 +73,21 @@ export function askDetail(fact, onChange, sounds) {
   const grid = fact === 'name' && sounds ? soundGrid({
     ipa: about.name_ipa ?? '', ...sounds, speakLabel: t('board.speak'), deleteLabel: t('editor.delete'),
   }) : null;
+  // **A guess from the letters, while the reader has not built the name themselves**:
+  // the tiles start from how the name's letters are usually read and follow the field
+  // as it is typed, so a listener sees 尼古拉 rather than "Nikolai" without anyone
+  // learning a keyboard of sounds first -- and once a tile is touched, the reader's own
+  // work stands and the guess stops following.
+  const hint = document.createElement('p');
+  hint.className = 'speaker-why';
+  hint.textContent = t('about.soundsHint');
+  const guess = (/** @type {string} */ name) => {
+    if (!grid || !sounds?.guess || grid.touched()) return;
+    const guessed = sounds.guess(name);
+    grid.fill(guessed);
+    if (guessed) hint.textContent = t('about.soundsGuess');
+  };
+  if (grid && !about.name_ipa && about.name) guess(about.name);
   let more;
   if (grid) {
     more = document.createElement('details');
@@ -80,9 +96,6 @@ export function askDetail(fact, onChange, sounds) {
     more.open = true;
     const summary = document.createElement('summary');
     summary.textContent = t('about.sounds');
-    const hint = document.createElement('p');
-    hint.className = 'speaker-why';
-    hint.textContent = t('about.soundsHint');
     more.append(summary, hint, grid.element);
   }
   askText({
@@ -94,6 +107,7 @@ export function askDetail(fact, onChange, sounds) {
     autocomplete: fact === 'name' ? 'name' : undefined,
     kind: 'about-ask',
     more,
+    onInput: fact === 'name' && !about.name_ipa ? guess : undefined,
     onSave: (value) => {
       setDetail(fact, value);
       if (grid && value) setDetail(`${fact}_ipa`, grid.value());

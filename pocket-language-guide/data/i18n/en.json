@@ -552,6 +552,7 @@
   "about.country": "Where you are from",
   "about.sounds": "How it sounds",
   "about.soundsHint": "Tap its sounds in order. Someone who reads another script then sees your name in their own letters, and their phone can say it.",
+  "about.soundsGuess": "Guessed from the letters you typed: listen, and change any sound that is wrong.",
   "board.noBoards": "No conversation boards have been written for this pair yet.",
   "boards.time.title": "Time",
   "boards.time.when": "When…",

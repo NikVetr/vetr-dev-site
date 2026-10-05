@@ -63,6 +63,8 @@ export async function loadCorpus(loadText) {
   // cold blue, stop in red -- and the colour is the concept's, whatever the language.
   const keyTones = Object.fromEntries((await read('data/registry/key-tones.csv'))
     .map((row) => [row.concept_id, row.tone]));
+  // How letters are read in a typed name, for the first guess at its sounds.
+  const nameLetters = await read('data/registry/name-letters.csv');
   const sectionRows = await read('data/registry/sections.csv');
   // The five colour roles' own names, for a super-section label: a face's sections
   // are all of a theme far more often than not, and the role is already the colour
@@ -139,6 +141,7 @@ export async function loadCorpus(loadText) {
     speakerAxes,
     listenerAxes,
     keyTones,
+    nameLetters,
     coverage,
     respellOverrides,
     respellRules,

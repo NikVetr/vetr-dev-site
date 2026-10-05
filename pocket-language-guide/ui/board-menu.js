@@ -191,10 +191,12 @@ export function askConfirm({ title, body, yes, no, again, close }) {
  * @param {string} [config.autocomplete]
  * @param {string} [config.kind]   a class for the dialog, for tests and styles
  * @param {HTMLElement} [config.more]  more of the form, above Save
+ * @param {(value:string) => void} [config.onInput]  told of each change as it is typed
  */
-export function askText({ label, save, close, onSave, value = '', hint, autocomplete, kind = '', more }) {
+export function askText({ label, save, close, onSave, value = '', hint, autocomplete, kind = '', more, onInput }) {
   const input = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
   input.value = value;
+  if (onInput) input.addEventListener('input', () => onInput(input.value));
   if (autocomplete) input.setAttribute('autocomplete', autocomplete);
   input.setAttribute('aria-label', label);
   formDialog({
@@ -259,7 +261,7 @@ export function askSelect({ label, options, value = '', save, close, onSave, hin
 
 /** The sounds a name is built from: most names' sounds in most languages, not IPA's whole chart,
  * each plain sound before the ones some languages' letters write the same way. */
-const SOUNDS = ['p', 'b', 't', 'd', 'k', 'ɡ', 'm', 'n', 'ŋ', 'f', 'v', 's', 'z', 'ʃ', 'ʒ', 'h', 'x',
+export const SOUNDS = ['p', 'b', 't', 'd', 'k', 'ɡ', 'm', 'n', 'ŋ', 'f', 'v', 's', 'z', 'ʃ', 'ʒ', 'h', 'x',
   'tʃ', 'dʒ', 'ts', 'l', 'r', 'ɾ', 'j', 'w', 'θ', 'ð',
   'i', 'ɪ', 'e', 'ɛ', 'a', 'ɑ', 'o', 'ɔ', 'u', 'ʊ', 'ə', 'y', 'ø', 'aɪ', 'aʊ', 'eɪ', 'oʊ', 'ɔɪ'];
 const VOWEL = /^[iɪeɛaɑɔoʊuəyø]/u;
@@ -310,11 +312,14 @@ function keysFor(spellOwner) {
  * @param {(ipa:string) => string} config.spellOwner  @param {(ipa:string) => string} config.spellListener
  * @param {(text:string) => void} [config.say]  the listener's voice, where this device has one
  * @param {string} config.speakLabel  @param {string} config.deleteLabel
- * @returns {{element: HTMLElement, value: () => string}}
+ * @returns {{element: HTMLElement, value: () => string, fill: (ipa: string) => void, touched: () => boolean}}
+ *   `fill` replaces the tiles -- with a guess -- and `touched` says whether the reader
+ *   has changed any since, so a guess never overwrites their own work
  */
 export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, deleteLabel }) {
   const sounds = soundsOf(ipa);
   let picked = -1;
+  let edited = false;
   const built = el('div', { class: 'sound-built' });
   const heard = el('span', { class: 'sound-heard' });
   const reading = el('span', { class: 'sound-reading' });
@@ -334,6 +339,7 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
     erase.disabled = !sounds.length;
   };
   erase.addEventListener('click', () => {
+    edited = true;
     sounds.splice(picked >= 0 ? picked : sounds.length - 1, 1);
     picked = -1;
     draw();
@@ -341,6 +347,7 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
   const key = (/** @type {{label:string, sound:string}} */ { label, sound }) => {
     const button = el('button', { type: 'button', class: 'sound-key' }, [el('span', { text: label }), el('small', { text: sound })]);
     button.addEventListener('click', () => {
+      edited = true;
       if (picked >= 0) sounds[picked] = sound;
       else sounds.push(sound);
       picked = -1;
@@ -366,5 +373,10 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
     const fits = labels.map((label) => (/** @type {HTMLElement} */ (label.parentElement).clientWidth - 4) / label.offsetWidth);
     labels.forEach((label, k) => { if (fits[k] < 1) label.style.fontSize = `${fits[k]}em`; });
   }).observe(element);
-  return { element, value: () => sounds.join('') };
+  return {
+    element,
+    value: () => sounds.join(''),
+    fill: (next) => { sounds.splice(0, sounds.length, ...soundsOf(next)); picked = -1; draw(); },
+    touched: () => edited,
+  };
 }

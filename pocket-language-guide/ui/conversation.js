@@ -21,7 +21,7 @@ import {
   loadCorpus, loadLanguage, loadVariants, loadKeys, fillLanguageSlots,
   loadRespellRules, loadRespellOverrides, loadCountries,
 } from '../core/pack.js';
-import { createRespeller, nameRespeller } from '../core/respell.js';
+import { createRespeller, guessSounds, nameRespeller } from '../core/respell.js';
 import { joinKeys, variantKey } from '../core/speaker.js';
 import { lightSwitch } from './theme.js';
 import {
@@ -406,16 +406,26 @@ async function nameSpellers(corpus, listener, owner, ownerRows) {
   return spellOwner && spellListener ? { spellOwner, spellListener } : undefined;
 }
 
+/** The scripts a typed name is guessed from, by the letters it is typed in. */
+const NAME_SCRIPTS = [['Latn', /\p{Script=Latin}/u], ['Cyrl', /\p{Script=Cyrillic}/u], ['Grek', /\p{Script=Greek}/u]];
+
 /**
- * What the name's sounds are built with, for a dialog about to open: its keys, and the
- * whole name spoken only where this device has a voice for the listener.
+ * What the name's sounds are built with, for a dialog about to open: its keys, the whole
+ * name spoken only where this device has a voice for the listener, and a first guess
+ * at a typed name's sounds, read as the owner's language reads its letters.
  * @param {Awaited<ReturnType<typeof nameSpellers>>} spellers
  * @param {string} listener @param {string} voiceId  the reader's chosen voice, or `''`
+ * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus @param {string} owner
  * @returns {import('./about.js').Sounds|undefined}
  */
-function soundsFor(spellers, listener, voiceId) {
+function soundsFor(spellers, listener, voiceId, corpus, owner) {
   return spellers && {
     ...spellers,
+    guess: (name) => {
+      const script = NAME_SCRIPTS.find(([, test]) => /** @type {RegExp} */ (test).test(name))?.[0]
+        ?? corpus.languages[owner].script;
+      return guessSounds(name, corpus.nameLetters, owner, /** @type {string} */ (script));
+    },
     say: speech.getCapabilities(listener).voices.length ? (text) => {
       speech.speak({ text, locale: listener, voiceId: voiceId || undefined }).catch((error) => console.warn(error));
     } : undefined,
@@ -563,7 +573,7 @@ async function showPicker(owner, listener, index, nameOf) {
         onChange: nothing,
         extra: [arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
           contextsSection(topics, () => drawTopics()),
-          aboutSection(nothing, dietChoices(ctx), soundsFor(spellers, listener, readVoice(listener)),
+          aboutSection(nothing, dietChoices(ctx), soundsFor(spellers, listener, readVoice(listener), corpus, owner),
             countries ? () => askCountry(countries, owner, nothing) : undefined),
           displaySection(readDisplay(), nothing,
             { canSpeak: speech.getCapabilities(listener).voices.length > 0, language: nameOf(listener) }),
@@ -1102,7 +1112,7 @@ async function main() {
   let display = readDisplay();
   // Which voice reads the listener's sentence, when the reader has opinions.
   let chosenVoice = readVoice(listener);
-  const sounds = () => soundsFor(spellers, listener, chosenVoice);
+  const sounds = () => soundsFor(spellers, listener, chosenVoice, corpus, owner);
 
   // **Whose voice the outgoing messages are in.** Fetched for whichever of the two
   // languages declares an axis at all — usually neither, and never more than two
