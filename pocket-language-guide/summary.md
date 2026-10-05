@@ -241,7 +241,10 @@ with byte-identical output.
 The solver needs advance widths; the PDF needs glyph ids. Both come from the same
 `@pdf-lib/fontkit`, in the browser and in Node, so preview and export agree by
 construction rather than being held in sync by a test. Arabic really is shaped
-(GSUB/GPOS), which `tests/measure.test.mjs` asserts.
+(GSUB/GPOS), which `tests/measure.test.mjs` asserts. The font registry
+(`core/fonts.js`) imports fontkit when it loads its first face, not with the module, so a
+page that borrows only its field rules -- the quiz, by way of the solver's helpers --
+never downloads the megabyte; `tests/drill.spec.js` counts the requests.
 
 ## The data model
 

@@ -5863,3 +5863,50 @@ stopping. AppLauncher is registered. Neither the emulator nor the simulator has 
 translator apps or a torch -- the simulator refuses `translate://` outright -- so which
 translator opens, the lamp switch, and the register and key-word displays on a real screen
 remain device checks.
+
+## Batch AI, continued — Card, Converse and Quiz; the studio's second and third bundles; key words for 40 languages
+
+**Card, Converse and Quiz.** The studio is called Card wherever a reader sees it, and every
+language card on the landing page offers Card, Converse (where a board exists) and Quiz. The
+quiz is a page of its own (`drill.html`): the reader ticks the sections and rows to practise
+(by default the rows their card carries), and a record kept on the device (`ui/drill-store.js`,
+in the usage record's shape) shows the week, month, year and all time, with the rows to
+practise. **Hands-free** reads each question aloud in the board's voices and listens for the
+number of an answer, the answer itself, or skip / repeat / stop, through the browser's own
+recognition; the word lists are per catalogue and were checked against every pack, so that no
+answer can be heard as a command, and a Turkish capital İ is now compared as an i. It is greyed
+with the reason where it cannot run (Firefox, Android's WebView, the conlangs, no voice). The
+page builds its rows without a layout solve, and fontkit is now imported by the first face
+loaded, so the quiz page never downloads it.
+
+**The studio.** Warnings appear in a dialog and fly into a Warnings menu; the item count sits in
+each section bar; a section can keep a format of its own, with one press to reset them all, and
+the bulk buttons no longer float; "How you speak" is asked inline; the reader's own details are
+in the settings; each page is framed with its name and Save / Open above it (Open works in the
+app); a section's rows can be dragged into the reader's order. A screen card can be a **lock
+screen** for a beginner, an intermediate or an advanced reader: one face, filled with that
+level's everyday essentials at full size. **Saved cards** are kept under names, loaded,
+exported, imported, and binned for two weeks with restore. In the app a PNG offers **Save
+image**, the share sheet that puts it in Photos on an iPhone. A saved copy now carries the quiz
+record and the saved cards with everything else.
+
+**Research.** Key words for 40 languages; the sixth, seventh and eighth row-correction passes
+(slash pairs on the boards, Hebrew's standard spelling across 66 rows, rows said only to a man,
+and what each key-words batch noticed); the new interface strings, group by group.
+
+## Native evidence for Batch AI, continued
+
+Built from the pushed commit `26242886e`. **Android**: `scripts/build_android.sh` built a
+44.0MB debug APK and `scripts/check_android.mjs` passed every check on the emulator -- launch
+with App, AppLauncher, Filesystem, Preferences and Share; persistence across a relaunch and a
+reinstall; resuming and Back; an offline start (53 cards); the share sheet and its cancel; Back
+at the top leaving the app. **iOS** (`npm run ios -- --run` then `npm run check:ios` on the
+Mac): every check passed on the simulator -- launch, an offline start with nothing outside the
+bundle, both safe areas, persistence, speech (68 voices), the keyboard and its dismissal, the
+share sheet and the PDF export, a backgrounded beacon stopping and a page kept across a trip to
+another app. The built `Info.plist` carries the microphone and speech-recognition descriptions
+hands-free needs. **Not checked by either:** hands-free listening in WKWebView (it starts after
+the question is read, not inside a tap), whether the iPhone share sheet offers Save Image for
+the PNG, the translator apps and the torch -- all device checks. In the WebKit browser suite,
+the quiz's stubbed Speak test is intermittent on this host (the voice stub sometimes misses a
+reload), beside the three host failures already known.
