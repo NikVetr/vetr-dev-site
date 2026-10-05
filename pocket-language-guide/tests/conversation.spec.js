@@ -1397,6 +1397,26 @@ test('a keypad refuses what is not an amount, rather than showing it to a strang
   await expect(confirm).toBeEnabled();
 });
 
+test('a price is typed in a currency the listener chooses, and read back in the owner\'s writing', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=shopping');
+  await page.locator('[data-button="howmuch"]').click();
+  await page.locator(EXCHANGE).first().click();
+  await page.locator('.board-answer-entry').click();
+  // The currencies of the countries that speak Chinese, the first in force.
+  const units = page.locator('.board-entry-unit');
+  await expect(units.first()).toHaveText('¥ CNY');
+  await expect(units.first()).toHaveClass(/board-entry-unit-on/);
+  await page.locator('.board-entry-amount').fill('250');
+  await expect(page.locator('.board-entry-preview')).toHaveText('¥250');
+  // Every other currency is behind the menu, and the one chosen joins the row.
+  await page.locator('.board-entry-more').click();
+  await page.locator('.board-menu-item', { hasText: 'USD' }).click();
+  await expect(page.locator('.board-entry-unit-on')).toContainText('USD');
+  await expect(page.locator('.board-entry-preview')).toContainText('250');
+  await page.locator('.board-entry-confirm').click();
+  await expect(page.locator('.board-message')).toContainText('$250');
+});
+
 test('the keypad’s own text is legible on the coloured stage', async ({ page }) => {
   // The preview was left at the body ink and drawn dark on a saturated fill -- the
   // same miss as the question, which had already been given white type.

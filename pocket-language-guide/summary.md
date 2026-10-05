@@ -1184,12 +1184,17 @@ reads *can* in Chinese and Thai; *We have it*, which many languages answer by ec
 verb; *Before food* and *After food* in a medicine label's words; *Please turn around* for
 the taxi, whose screen is now for someone already in one.
 
-**And there are three kinds of number, not one.** A duration answers *how long*, a
-clock answers *when*, and a bare count is a platform, a price, a how-many. Until the
+**And there are four kinds of number, not one.** A duration answers *how long*, a
+clock answers *when*, a bare count is a platform or a how-many, and a price is an
+amount in a currency: the price keypad offers the currencies of the countries that
+speak the listener's language (from `regions.csv`'s `currency` column), the first in
+force, with every other currency the registry knows in a menu behind a `…`, named by
+`Intl.DisplayNames`, and takes cents after a point or a comma. Until the
 audits, only the first existed — which is how the answer space for "what time does it
 open?" came to contain no time, and why *What time is it?* had no reply set at all.
 Each needs no translation: `Intl` carries the plural rules for a duration, whether a
-locale writes twelve- or twenty-four-hour clocks, and which digits it uses. The clock
+locale writes twelve- or twenty-four-hour clocks, which digits it uses, and where a
+currency's sign goes (`¥250`, `12,50 €`). The clock
 is asked for with the platform's own `<input type="time">`, so the stranger is shown
 the control their phone always shows them and one unambiguous `HH:MM` crosses back.
 

@@ -966,7 +966,9 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
    empty screen, and pushing them under the question left most of it blank. */
 .board-stage-entry { justify-content: center; gap: var(--space-3); }
 .board-entry-row { display: flex; gap: var(--space-2); align-items: stretch; flex-wrap: wrap; }
-.board-entry-amount {
+/* `input.` to outrank the sheet's `input[type="text"] { font: inherit }`, which had the
+   keypad's digits at body size in a field drawn for three times that. */
+input.board-entry-amount {
   flex: 1 1 6rem;
   min-inline-size: 5rem;
   font-size: clamp(1.6rem, 8vw, 3rem);
@@ -975,9 +977,12 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
   border-radius: var(--radius);
   border: 1px solid var(--line);
 }
-.board-entry-units { display: flex; gap: var(--space-1); flex: 2 1 12rem; }
+/* A price's currencies can outnumber a row -- Spanish is spoken in six countries with
+   six of them -- so the choices wrap rather than run off the screen. */
+.board-entry-units { display: flex; flex-wrap: wrap; gap: var(--space-1); flex: 2 1 12rem; }
 .board-entry-unit {
-  flex: 1 1 0;
+  flex: 1 0 3.5rem;
+  justify-content: center;
   min-block-size: 3.5rem;
   font-size: var(--fs-1);
   border-radius: var(--radius);
@@ -986,6 +991,7 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
   color: var(--ink);
   cursor: pointer;
 }
+.board-entry-unit.board-entry-more { flex-grow: 0; }
 /* Which unit is in force, marked rather than merely tinted -- the number beside it
    means something different for each, so this is not decoration. */
 .board-entry-unit-on {

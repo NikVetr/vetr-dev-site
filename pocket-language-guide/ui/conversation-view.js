@@ -1608,12 +1608,14 @@ function settle(text, box) {
  * of it is formatted from that value in their own language, so the two sides cannot
  * drift and no wording has to exist for it in any of the fifty-one.
  *
- * **Three keypads, because there are three things a number can be here.** *How long*
+ * **Four keypads, because there are four things a number can be here.** *How long*
  * is a duration and needs its unit chosen; *when* is a time of day, which the
- * platform's own picker already knows how to ask for in the reader's convention; and
- * a bare *count* is a platform number, a price, a how-many. The last two were the
- * gap every tree audit found independently — with only a duration to offer, a board
- * asked "what time does it open?" and had nowhere to put "ten".
+ * platform's own picker already knows how to ask for in the reader's convention; a
+ * bare *count* is a platform number or a how-many; and a *price* needs its currency
+ * chosen -- the ones of the countries that speak the listener's language first, and
+ * every other in a menu behind them. The clock and the count were the gap every tree
+ * audit found independently — with only a duration to offer, a board asked "what
+ * time does it open?" and had nowhere to put "ten".
  *
  * `check` both validates and parses, and hands back the value it parsed. The view
  * used to re-derive it from the raw string after `check` had already done the work,
@@ -1622,17 +1624,20 @@ function settle(text, box) {
  * @param {HTMLElement} stage
  * @param {import('../core/conversation.js').ResolvedPhrase} question
  * @param {object} config
- * @param {'duration'|'clock'|'count'} config.kind  which keypad
+ * @param {'duration'|'clock'|'count'|'price'} config.kind  which keypad
  * @param {(value:import('../core/quantity.js').Quantity)=>void} config.onConfirm
  * @param {()=>void} config.onCancel
- * @param {(raw:string, unit:'minute'|'hour'|'day') =>
+ * @param {(raw:string, choice:string) =>
  *   {value:import('../core/quantity.js').Quantity, said:string}|null} config.check
+ *   `choice` is the unit a duration is in, or the currency a price is in
  * @param {Record<string,string>} config.words  labels, in the listener's language
+ * @param {{shown:{code:string, label:string}[], more:{code:string, label:string}[]}} [config.currencies]
+ *   for a price: the listener's own currencies, and every other
  * @param {boolean} [config.turned]  set sideways, as the sentence and the answers are
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
  */
 export function renderEntry(stage, question,
-  { kind = 'duration', onConfirm, onCancel, check, words, colour, turned = false }) {
+  { kind = 'duration', onConfirm, onCancel, check, words, colour, turned = false, currencies }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage board-stage-entry';
@@ -1665,32 +1670,57 @@ export function renderEntry(stage, question,
     amount.inputMode = 'numeric';
   }
   amount.className = 'board-entry-amount';
+  if (kind === 'price') amount.inputMode = 'decimal';
   amount.setAttribute('aria-label', kind === 'clock' ? words.time
-    : kind === 'count' ? words.number : words.amount);
+    : kind === 'count' || kind === 'price' ? words.number : words.amount);
 
-  /** @type {'minute'|'hour'|'day'} */ let unit = 'minute';
+  // **What the number is in**: a unit for a duration, a currency for a price -- one
+  // choice of a few, the one in force marked, and the menu of the rest behind it
+  // where a price has more currencies than a row can hold.
   const units = document.createElement('div');
   units.className = 'board-entry-units';
   units.setAttribute('role', 'group');
-  units.setAttribute('aria-label', words.unit);
-  /** @type {HTMLButtonElement[]} */ const unitButtons = [];
-  for (const which of /** @type {const} */ (['minute', 'hour', 'day'])) {
+  units.setAttribute('aria-label', kind === 'price' ? words.currency : words.unit);
+  const options = kind === 'price'
+    ? /** @type {NonNullable<typeof currencies>} */ (currencies).shown
+    : /** @type {const} */ (['minute', 'hour', 'day']).map((code) => ({ code, label: words[code] }));
+  let choice = options[0].code;
+  /** @param {{code:string, label:string}} option */
+  const unitButton = (option) => {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'board-entry-unit';
-    b.textContent = words[which];
-    b.dataset.unit = which;
-    b.addEventListener('click', () => {
-      unit = which;
-      for (const other of unitButtons) {
-        other.classList.toggle('board-entry-unit-on', other.dataset.unit === which);
-      }
-      sync();
-    });
-    unitButtons.push(b);
-    units.append(b);
+    b.textContent = option.label;
+    b.dataset.unit = option.code;
+    b.addEventListener('click', () => choose(option));
+    return b;
+  };
+  /** @param {{code:string, label:string}} option */
+  const choose = (option) => {
+    choice = option.code;
+    // A currency from the menu takes its place in the row, so what is in force is
+    // always one of the buttons on screen.
+    if (![...units.children].some((b) => /** @type {HTMLElement} */ (b).dataset.unit === option.code)) {
+      units.insertBefore(unitButton(option), more);
+    }
+    for (const b of /** @type {HTMLElement[]} */ ([...units.children])) {
+      b.classList.toggle('board-entry-unit-on', b.dataset.unit === choice);
+    }
+    sync();
+  };
+  units.append(...options.map(unitButton));
+  const more = document.createElement('button');
+  if (kind === 'price' && currencies?.more.length) {
+    more.type = 'button';
+    more.className = 'board-entry-unit board-entry-more';
+    more.textContent = '\u2026';
+    more.setAttribute('aria-label', words.moreCurrencies);
+    more.addEventListener('click', () => openBoardMenu(more, currencies.more.map((option) => ({
+      label: option.label, current: option.code === choice, run: () => choose(option),
+    }))));
+    units.append(more);
   }
-  unitButtons[0].classList.add('board-entry-unit-on');
+  /** @type {HTMLElement} */ (units.firstElementChild).classList.add('board-entry-unit-on');
 
   // The exact text the owner will be shown, updating as it is typed. The same rule
   // the custom-phrase editor follows: a preview that is not the thing itself has
@@ -1706,7 +1736,7 @@ export function renderEntry(stage, question,
   confirm.textContent = words.confirm;
 
   const sync = () => {
-    const read = check(amount.value, unit);
+    const read = check(amount.value, choice);
     preview.textContent = read?.said ?? words.invalid;
     preview.classList.toggle('board-entry-preview-empty', !read);
     confirm.disabled = !read;
@@ -1715,7 +1745,7 @@ export function renderEntry(stage, question,
   sync();
 
   confirm.addEventListener('click', () => {
-    const read = check(amount.value, unit);
+    const read = check(amount.value, choice);
     if (read) onConfirm(read.value);
   });
   // Enter confirms, which is what a numeric keypad's own key will send.
@@ -1733,9 +1763,9 @@ export function renderEntry(stage, question,
   row.className = 'board-entry-row';
   row.lang = question.listener.lang;
   row.dir = question.listener.dir;
-  // A unit is a question only a duration has: a time of day and a bare number are
-  // each one thing, and three greyed buttons beside them would be furniture.
-  row.append(amount, ...(kind === 'duration' ? [units] : []));
+  // A unit is a question only a duration and a price have: a time of day and a bare
+  // number are each one thing, and three greyed buttons beside them would be furniture.
+  row.append(amount, ...(kind === 'duration' || kind === 'price' ? [units] : []));
 
   const actions = document.createElement('div');
   actions.className = 'board-controls';

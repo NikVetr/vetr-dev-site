@@ -32,7 +32,7 @@ import {
 } from './conversation-view.js';
 import { resolveValue } from '../core/conversation.js';
 import {
-  parseAmount, parseClock, parseCount, formatQuantity, unitName,
+  parseAmount, parseClock, parseCount, parsePrice, formatQuantity, unitName, currencySign, supports,
 } from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
@@ -65,6 +65,7 @@ const ENTRY_LABEL = /** @type {Record<string,string>} */ ({
   duration: 'board.otherAmount',
   clock: 'board.atTime',
   count: 'board.otherNumber',
+  price: 'board.otherPrice',
 });
 
 /** What the keypad says when what has been typed is not a time, a number or a length. */
@@ -72,7 +73,31 @@ const ENTRY_INVALID = /** @type {Record<string,string>} */ ({
   duration: 'board.notAnAmount',
   clock: 'board.notATime',
   count: 'board.notANumber',
+  price: 'board.notAPrice',
 });
+
+/**
+ * The currencies a price can be given in, for the listener's keypad: those of the
+ * countries that speak the listener's language first, in the registry's order, then
+ * every other currency the registry knows, in a menu. Each is its sign and code as the
+ * listener writes them -- the code is kept beside the sign, because `$` alone is a
+ * dozen currencies -- and in the menu its name too.
+ * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus @param {string} listener
+ */
+function currenciesFor(corpus, listener) {
+  const all = [...new Set(Object.values(corpus.regions).map((r) => r.currency).filter(Boolean))].sort();
+  const own = [...new Set((corpus.languages[listener]?.regions ?? '').split(';')
+    .map((r) => corpus.regions[r]?.currency).filter(Boolean))];
+  const named = supports(listener) ? new Intl.DisplayNames([listener], { type: 'currency' }) : null;
+  /** @param {string} code */
+  const sign = (code) => { const s = currencySign(code, listener) ?? code; return s === code ? code : `${s} ${code}`; };
+  return {
+    // A listener whose language no country speaks still needs one to start from.
+    shown: (own.length ? own : all.slice(0, 1)).map((code) => ({ code, label: sign(code) })),
+    more: all.filter((code) => !own.includes(code))
+      .map((code) => ({ code, label: named ? `${sign(code)} \u00b7 ${named.of(code)}` : sign(code) })),
+  };
+}
 
 /**
  * Which grid cell opened the message on screen.
@@ -1704,10 +1729,11 @@ async function main() {
         // Validated, parsed and previewed in one call, so the button's enabled state,
         // the text under it and the value that is confirmed cannot disagree about
         // what was typed.
-        check: (raw, unit) => {
+        check: (raw, choice) => {
           const read = kind === 'clock' ? parseClock(raw)
             : kind === 'count' ? parseCount(raw)
-              : parseAmount(raw, unit);
+              : kind === 'price' ? parsePrice(raw, choice)
+                : parseAmount(raw, /** @type {'minute'|'hour'|'day'} */ (choice));
           if (!read.ok) return null;
           const said = formatQuantity(read.value, listener);
           return said ? { value: read.value, said } : null;
@@ -1724,10 +1750,13 @@ async function main() {
           minute: unitName('minute', listener) ?? theirs.t('board.minutes'),
           hour: unitName('hour', listener) ?? theirs.t('board.hours'),
           day: unitName('day', listener) ?? theirs.t('board.days'),
+          currency: theirs.t('board.currency'),
+          moreCurrencies: theirs.t('board.moreCurrencies'),
           confirm: theirs.t('board.confirm'),
           cancel: theirs.t('board.close'),
           invalid: theirs.t(ENTRY_INVALID[kind] ?? 'board.notAnAmount'),
         },
+        currencies: kind === 'price' ? currenciesFor(corpus, listener) : undefined,
         colour: button.colour,
       });
       return;

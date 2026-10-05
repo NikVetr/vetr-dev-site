@@ -55,7 +55,17 @@ export const UNITS = /** @type {const} */ (['minute', 'hour', 'day']);
  * @property {number} amount
  */
 
-/** @typedef {Duration|Clock|Count} Quantity */
+/**
+ * An amount of money in a currency. Like a count it needs nobody to translate it:
+ * CLDR writes the currency's sign, which side of the number it sits and with what
+ * space, and the digits, in every language it knows -- `¥250`, `250 ¥`, `٢٥٠ ¥`.
+ * @typedef {Object} Price
+ * @property {'price'} kind
+ * @property {number} amount  with at most two decimals, which is what a price has
+ * @property {string} currency  its ISO 4217 code
+ */
+
+/** @typedef {Duration|Clock|Count|Price} Quantity */
 
 /**
  * A duration in one language, or `null` where that language has no formatter.
@@ -125,7 +135,33 @@ export function formatCount({ amount }, locale) {
 }
 
 /**
- * Whichever of the three this is, in one language.
+ * An amount of money in one language, or `null` where it has no formatter. A whole
+ * amount is written whole -- 250 yuan is not 250.00 -- and one with cents keeps them.
+ * @param {Price} price @param {string} locale
+ * @returns {string|null}
+ */
+export function formatPrice({ amount, currency }, locale) {
+  if (!supports(locale)) return null;
+  const digits = Number.isInteger(amount) ? 0 : 2;
+  return new Intl.NumberFormat(locale, {
+    style: 'currency', currency, minimumFractionDigits: digits, maximumFractionDigits: digits,
+  }).format(amount);
+}
+
+/**
+ * The sign a currency is written with in a language -- `¥`, `€`, `$` -- or its code
+ * where the language has no shorter one.
+ * @param {string} currency @param {string} locale
+ * @returns {string|null}
+ */
+export function currencySign(currency, locale) {
+  if (!supports(locale)) return null;
+  return new Intl.NumberFormat(locale, { style: 'currency', currency, currencyDisplay: 'narrowSymbol' })
+    .formatToParts(1).find((part) => part.type === 'currency')?.value ?? currency;
+}
+
+/**
+ * Whichever of these this is, in one language.
  *
  * One entry point so a caller never has to know which kind it is holding -- the whole
  * reason the value is tagged rather than discriminated by which fields it happens to
@@ -136,6 +172,7 @@ export function formatCount({ amount }, locale) {
 export function formatQuantity(value, locale) {
   if (value.kind === 'clock') return formatClock(value, locale);
   if (value.kind === 'count') return formatCount(value, locale);
+  if (value.kind === 'price') return formatPrice(value, locale);
   return formatDuration(value, locale);
 }
 
@@ -199,6 +236,24 @@ export function parseCount(raw) {
   const amount = Number(text);
   if (amount > COUNT_CEILING) return { ok: false, reason: 'too-large' };
   return { ok: true, value: { kind: 'count', amount } };
+}
+
+/**
+ * Read a typed price, or say why it is not one: whole units, or with one or two
+ * decimals after a point or a comma, whichever the listener's keypad writes. A
+ * thousands separator is refused rather than read as decimals -- `1,250` is not
+ * one and a quarter.
+ * @param {string} raw @param {string} currency
+ * @returns {{ok:true, value:Price} | {ok:false, reason:'empty'|'not-a-number'|'too-large'}}
+ */
+export function parsePrice(raw, currency) {
+  const text = raw.trim();
+  if (!text) return { ok: false, reason: 'empty' };
+  const at = /^(\d+)(?:[.,](\d{1,2}))?$/.exec(text);
+  if (!at) return { ok: false, reason: 'not-a-number' };
+  const amount = Number(`${at[1]}.${at[2] ?? '0'}`);
+  if (amount > COUNT_CEILING) return { ok: false, reason: 'too-large' };
+  return { ok: true, value: { kind: 'price', amount, currency } };
 }
 
 /**

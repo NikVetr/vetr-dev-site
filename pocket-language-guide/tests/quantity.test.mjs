@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { formatDuration, supports, parseAmount, COMMON_WAITS, UNITS } from '../core/quantity.js';
+import { formatDuration, supports, parseAmount, parsePrice, formatPrice, COMMON_WAITS, UNITS } from '../core/quantity.js';
 
 /** Every language the registry calls ready. */
 async function ready() {
@@ -104,4 +104,19 @@ test('the same value reads correctly to both people at once', () => {
   assert.equal(formatDuration(wait, 'en'), '30 minutes');
   assert.equal(formatDuration(wait, 'ru'), '30 минут');
   assert.equal(formatDuration(wait, 'ja'), '30 分');
+});
+
+test('a price is read with cents or without, and refuses a thousands separator', () => {
+  assert.deepEqual(parsePrice('250', 'CNY'), { ok: true, value: { kind: 'price', amount: 250, currency: 'CNY' } });
+  assert.deepEqual(parsePrice('12,50', 'EUR'), { ok: true, value: { kind: 'price', amount: 12.5, currency: 'EUR' } });
+  assert.deepEqual(parsePrice(' 3.5 ', 'USD'), { ok: true, value: { kind: 'price', amount: 3.5, currency: 'USD' } });
+  assert.equal(parsePrice('1,250', 'USD').ok, false);
+  assert.equal(parsePrice('', 'USD').ok, false);
+  assert.equal(parsePrice('-3', 'USD').ok, false);
+});
+
+test('a price is written by CLDR in each language, whole where it is whole', () => {
+  assert.equal(formatPrice({ kind: 'price', amount: 250, currency: 'CNY' }, 'zh-Hans'), '¥250');
+  assert.equal(formatPrice({ kind: 'price', amount: 12.5, currency: 'EUR' }, 'de').replace(/\s/g, ' '), '12,50 €');
+  assert.equal(formatPrice({ kind: 'price', amount: 250, currency: 'CNY' }, 'tlh'), null);
 });

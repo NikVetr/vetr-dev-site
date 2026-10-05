@@ -41,7 +41,7 @@ const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 /** @type {Set<string>} Units a structured answer may be counted in. */
 const UNITS = new Set(['minute', 'hour', 'day']);
 /** @type {Set<string>} The keypads a board may open. Each needs no translation. */
-const ENTRIES = new Set(['duration', 'clock', 'count']);
+const ENTRIES = new Set(['duration', 'clock', 'count', 'price']);
 /**
  * The reader's own details a button can say, in the slot its row leaves for one, and
  * how each reaches the listener. A name is `typed`: it goes in as written, since a
@@ -86,11 +86,11 @@ const BLANK = '____';
  *   phrase and not spoken -- the one button on a board that is about being *seen*
  *   rather than read, for when nobody is looking at the screen yet.
  * @property {import('./quantity.js').Quantity} [value]  for `value`: what it answers
- * @property {'duration'|'clock'|'count'} [entry]  for `entry`: which keypad it opens.
+ * @property {'duration'|'clock'|'count'|'price'} [entry]  for `entry`: which keypad it opens.
  *   A duration is *how long*, a clock is *when*, a count is a bare number -- a
- *   platform, a price, how many. All three are answers that need no translation,
- *   which is what makes a keypad worth having where a phrase would cost fifty-one
- *   rows.
+ *   platform, how many -- and a price is an amount in a currency. All four are answers
+ *   that need no translation, which is what makes a keypad worth having where a phrase
+ *   would cost fifty-one rows.
  * @property {string} [nodeId]      for `submenu`: the child node
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
@@ -543,7 +543,8 @@ export function resolveValue(value, ctx) {
   return {
     id: value.kind === 'clock' ? `clock:${value.hour}:${value.minute}`
       : value.kind === 'count' ? `count:${value.amount}`
-        : `duration:${value.amount}:${value.unit}`,
+        : value.kind === 'price' ? `price:${value.amount}:${value.currency}`
+          : `duration:${value.amount}:${value.unit}`,
     listener: { text: listener, lang: ctx.listener, dir: ctx.listenerDir },
     owner: { text: owner, lang: ctx.owner, dir: ctx.ownerDir },
     // CLDR, through the runtime. Not a translation anybody made, and not one that
