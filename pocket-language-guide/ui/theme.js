@@ -57,7 +57,7 @@ export function themeControl() {
     label: t('theme.dark'),
     dark: isDark,
     flip: () => writeTheme(isDark() ? 'light' : 'dark'),
-  });
+  }).button;
 }
 
 /**
@@ -77,7 +77,7 @@ export function lightSwitch({ label, dark, flip, marks = [SUN, MOON] }) {
   const show = () => button.setAttribute('aria-checked', String(dark()));
   button.addEventListener('click', () => { flip(); show(); });
   show();
-  return button;
+  return { button, show };
 }
 
 /** The board dialog's section: a heading and the control. */
