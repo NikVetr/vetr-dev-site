@@ -64,10 +64,22 @@ Gradle 8.14.3.
 `SystemBars.insetsHandling` is **`native`** (Capacitor 8's replacement for
 Capacitor 7's `adjustMarginsForEdgeToEdge`), and the safe area is handled entirely
 in CSS — `viewport-fit=cover` in all four pages' viewport meta, and
-`env(safe-area-inset-*)` padding on `body` in `style.css`, plus the three
+`env(safe-area-inset-*)` padding on `body` in `style.css`, plus the
 `position: fixed` overlays that escape that box (`.board-stage`, `dialog.lightbox`,
-`.donate`). Letting Capacitor adjust margins *as well* is the "padding twice" the plan
-warns about, and it shows up as a two-notch gap at the top of every screen.
+`.donate`, the landing page's `.site-footer`). Letting Capacitor adjust margins *as
+well* is the "padding twice" the plan warns about, and it shows up as a two-notch gap
+at the top of every screen.
+
+The landing page is the exception to "on `body`": its header is sticky at `top: 0`,
+which under `viewport-fit=cover` is behind the status bar, so padded down by the body it
+slid up under the clock as soon as the page scrolled. The header carries the top inset
+as its own padding (`.page-gallery .site-header`), so its paper fills the status bar's
+strip and the brand stays below it; the footer carries the bottom inset as
+`max(margin, inset)` rather than a margin on top of the body's padding, which left 52pt
+under it on an iPhone. Chrome can be given an iPhone's insets
+(`Emulation.setSafeAreaInsetsOverride`, 62 and 34), and `tests/gallery.spec.js` runs the
+page under them; on a device, scroll the landing page and check the header stays clear of
+the status bar, and that the footer ends just above the home indicator.
 
 `native` either lays the WebView out inside the bars and reports zero insets (an
 older WebView) or draws edge to edge and reports the real ones (Chromium 140 and

@@ -2461,7 +2461,10 @@ for the beacon's lamp, the devtools socket in a debug Android build -- the scrip
 write in on every run. `npm run check:android` and `npm run check:ios` drive the
 emulator and the simulator through launch, an offline start, persistence, the share
 sheet and its cancellation, and (on iOS) speech, the keyboard, safe areas and a trip
-to another app.
+to another app. The safe-area insets are the body's padding on every page but the
+landing page, whose sticky header and footer carry them as their own -- a header stuck at
+`top: 0` sits behind the status bar -- and Chrome's emulated insets let a spec check that
+without a phone (`docs/native.md`).
 
 Three seams keep platform detail out of the pages. `ui/platform/store.js` is
 `localStorage` on the web and, on a device, an in-memory mirror hydrated once from

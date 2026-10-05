@@ -506,3 +506,38 @@ test('the "I speak" list is drawn as the board’s language menu is, in both the
     }
   }
 });
+
+test('under an iPhone’s insets the header stays below the status bar when scrolled, and nothing pads the footer twice', async ({ page }) => {
+  // The native shell draws edge to edge (`viewport-fit=cover`), so `env(safe-area-inset-*)`
+  // reports an iPhone's 62 points of status bar and 34 of home indicator; Chrome can be
+  // told the same. The header is sticky at `top: 0`, which is behind the status bar:
+  // padded down by the body, it slid up under the clock as soon as the page scrolled.
+  await page.setViewportSize({ width: 390, height: 844 });
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 62, bottom: 34, left: 0, right: 0 } });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  const at = (/** @type {number} */ y) => page.evaluate(async (top) => {
+    scrollTo(0, top);
+    await new Promise((r) => { requestAnimationFrame(() => requestAnimationFrame(r)); });
+    const box = (/** @type {string} */ sel) => /** @type {HTMLElement} */ (document.querySelector(sel)).getBoundingClientRect();
+    const items = [...document.querySelectorAll('.site-footer > *')].map((n) => n.getBoundingClientRect().bottom + scrollY);
+    return {
+      header: box('.site-header').top, brand: box('.site-header .brand').top,
+      headerBottom: box('.site-header').bottom, bar: box('#want-toggle').top,
+      belowFooter: document.documentElement.scrollHeight - Math.max(...items),
+    };
+  }, y);
+  const top = await at(0);
+  for (const seen of [top, await at(1500)]) {
+    // The header's own paper fills the status bar's strip, and its contents sit below it.
+    expect(seen.header).toBe(0);
+    expect(seen.brand).toBeGreaterThanOrEqual(62);
+    expect(seen.brand).toBe(top.brand);
+  }
+  // The bar that floats under the header floats under all of it, inset included.
+  const scrolled = await at(1500);
+  expect(Math.abs(scrolled.bar - scrolled.headerBottom)).toBeLessThanOrEqual(1);
+  // Clear of the home indicator, and by that much rather than that plus a margin.
+  expect(Math.round((await at(1e6)).belowFooter)).toBe(34);
+});

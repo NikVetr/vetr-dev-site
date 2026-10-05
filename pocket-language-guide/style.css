@@ -62,7 +62,8 @@ body {
      than each component guessing. Zero on every desktop browser and on any phone
      without a cutout, so this costs nothing where it is not needed. The three
      `position: fixed` overlays escape this box and carry their own; see
-     `.board-stage`, `.lightbox` and `.item-popup`. */
+     `.board-stage`, `.lightbox` and `.item-popup`. The landing page hands the top and
+     bottom insets to its sticky header and its footer instead (`.page-gallery`). */
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
            env(safe-area-inset-bottom) env(safe-area-inset-left);
   font-family: var(--ui);
@@ -321,6 +322,17 @@ label { display: block; }
   font-size: 1rem;
   min-block-size: 2.25rem;
 }
+/* **The landing page's header carries the top inset itself**, and its footer the
+   bottom one, in place of the body's padding. The header is sticky at `top: 0`, and with
+   `viewport-fit=cover` the top of the viewport is behind the status bar: padded down by
+   the body it started below the clock, but once scrolled it stuck at the very top with
+   the brand under the time and the battery, and the cards slid past behind both. As its
+   own padding, its paper fills that strip, and `--header-h` -- measured off the header --
+   includes it, so the bar that floats under the header floats under both. At the foot,
+   the footer's own margin and the body's inset stacked, 18px and then 34 more on an
+   iPhone; it is the larger of the two now. Nothing changes where the insets are zero. */
+body.page-gallery { padding-block: 0; }
+.page-gallery .site-header { padding-block-start: calc(env(safe-area-inset-top) + var(--space-2)); }
 /* One inset on a phone whatever the page's own container does -- the gallery's is
    wider, the studio's is full-bleed -- so the mark is in the same place on every
    screen. */
@@ -1981,7 +1993,7 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   /* The footer wraps rather than squeezing its badges, centred as the pill alone was. */
   .site-footer {
     position: static; flex-wrap: wrap; justify-content: center;
-    margin: var(--space-2) 1rem var(--space-3);
+    margin: var(--space-2) 1rem max(var(--space-3), env(safe-area-inset-bottom));
   }
   .site-footer .donate { margin: 0; }
 }
