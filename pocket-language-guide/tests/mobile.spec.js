@@ -712,6 +712,33 @@ test.describe('the section picker on a phone', () => {
   });
 });
 
+test('a lock-screen level opens the content list beside the format panel, to a third of the column', async ({ page }) => {
+  // So the reader can press the levels in turn and watch which sections light up.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/customize.html?target=zh-Hans&source=en&geometry=phone-19-5x9');
+  await expect(page.locator('.face.focused svg').first()).toBeVisible({ timeout: 90_000 });
+  const format = page.locator('.studio > section').filter({ has: page.locator('#format-body') });
+  const content = page.locator('.studio > section').filter({ has: page.locator('#content-body') });
+  // Folded, as a reader working in the format panel may have left it.
+  await content.locator('.panel-toggle').click();
+  await expect(content).toHaveClass(/collapsed/);
+  const lock = page.locator('.panel-field').filter({ has: page.locator('.panel-field-title', { hasText: 'Lock screen' }) });
+  await lock.getByRole('radio', { name: 'Beginner' }).click();
+  await expect(content).not.toHaveClass(/collapsed/);
+  await expect(format).not.toHaveClass(/collapsed/);
+  const share = await page.evaluate(() => {
+    const rows = [...document.querySelectorAll('.studio > section')];
+    const total = rows.reduce((sum, row) => sum + row.getBoundingClientRect().height, 0);
+    return /** @type {HTMLElement} */ (document.querySelector('#content-body')).closest('section')
+      .getBoundingClientRect().height / total;
+  });
+  expect(share).toBeGreaterThan(0.3);
+  await expect(page.locator('#section-picker .chip-toggle', { hasText: 'Social + basics' })).toBeInViewport();
+  // And for a level whose sections are further down the grid, the grid comes to them.
+  await lock.getByRole('radio', { name: 'Intermediate' }).click();
+  await expect(page.locator('#section-picker .chip-toggle', { hasText: 'Dietary needs' })).toBeInViewport();
+});
+
 test('the section picker is a phone control only', async ({ page }) => {
   // On a desktop the content panel is a resizable column with every section's own
   // tick already in front of you, so a second way to say the same thing would only

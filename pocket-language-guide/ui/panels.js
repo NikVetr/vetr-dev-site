@@ -145,6 +145,14 @@ const ROWS_KEY = 'plg.studio-rows';
 const OPEN_SHARE = 1 / 3;
 
 /**
+ * Open a stacked panel without folding the others, at no less than a share of the
+ * column. Set while the phone's seams are built, which is the only time a panel can be
+ * folded or short.
+ * @type {((section: HTMLElement, share: number) => void)|null}
+ */
+let widen = null;
+
+/**
  * Everything in the header but the way back, the brand, the info line and PNG, in
  * one disclosure.
  *
@@ -401,7 +409,24 @@ function panelSeams(studio) {
   const save = () => store.set(ROWS_KEY, JSON.stringify(held));
   if (Object.keys(held).length) apply();
 
-  /** @type {(() => void)[]} */ const undo = [];
+  /** Give a row at least `share` of the column beside the rows still open, and keep it.
+   * @param {HTMLElement} row @param {number} share */
+  const atLeast = (row, share) => {
+    const others = rows.filter((r) => r !== row && !folded(r))
+      .reduce((sum, r) => sum + held[nameOf(r)], 0);
+    held[nameOf(row)] = Math.max(held[nameOf(row)], (others * share) / (1 - share));
+    apply();
+    save();
+  };
+  widen = (row, share) => {
+    setOpen(row, true);
+    // Shares mean something only for every row at once, so the stylesheet's are read
+    // off the screen the first time.
+    if (!Object.keys(held).length) for (const r of rows) held[nameOf(r)] = r.getBoundingClientRect().height;
+    atLeast(row, share);
+  };
+
+  /** @type {(() => void)[]} */ const undo = [() => { widen = null; }];
   for (const [i, row] of rows.entries()) {
     const bar = /** @type {HTMLElement|null} */ (row.querySelector(':scope > .panel-title'));
     if (!bar) continue;
@@ -476,11 +501,7 @@ function panelSeams(studio) {
      * nothing. Until a bar has been dragged the stylesheet's shares already do this. */
     const onTapped = () => {
       if (folded(row) || !Object.keys(held).length) return;
-      const others = rows.filter((r) => r !== row && !folded(r))
-        .reduce((sum, r) => sum + held[nameOf(r)], 0);
-      held[nameOf(row)] = Math.max(held[nameOf(row)], (others * OPEN_SHARE) / (1 - OPEN_SHARE));
-      apply();
-      save();
+      atLeast(row, OPEN_SHARE);
     };
 
     bar.addEventListener('pointerdown', onDown);
@@ -510,6 +531,18 @@ function panelSeams(studio) {
 export function revealPanel(el) {
   /** @type {HTMLElement|null} */
   (el.closest('section.collapsed')?.querySelector('.panel-toggle'))?.click();
+}
+
+/**
+ * Open the stacked panel `el` is in to at least `share` of the column, leaving the
+ * others open: something has just changed in it that the reader should watch while
+ * they go on with the panel they are in. A no-op on a desktop, where every panel is a
+ * full-height column.
+ * @param {Element} el @param {number} share
+ */
+export function widenPanel(el, share) {
+  const section = /** @type {HTMLElement|null} */ (el.closest('.studio > section'));
+  if (section) widen?.(section, share);
 }
 
 /**

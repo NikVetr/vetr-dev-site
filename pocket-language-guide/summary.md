@@ -1964,6 +1964,29 @@ carry importance 1, so nothing a reader typed is ever cut. And `buildBlocks` alr
 declined to push a heading with no rows under it, which is what stops a cut section
 leaving its heading behind — that line is load-bearing and now says so.
 
+**A screen card can be set up as a lock screen for a level of the language.** Beside
+the phone and its clock band, *Lock screen* is Off, Beginner, Intermediate or Advanced.
+A level sets one face -- a phone has one lock screen -- and a selection of that level's
+everyday essentials (`LOCK_LEVELS` and `lockScreenSelection` in `ui/chips.js`): what is
+essential is what the reader does not have yet, so a beginner gets hello and thank you,
+yes and no, "I don't speak it", help and the toilet; an intermediate reader the meals,
+what they cannot eat, the way, the fare and paying; an advanced one the emergency, a
+condition and its medicine, the pharmacy and the police, which a fluent visitor does
+not have the words for until they need them. Each level is its sections in order of
+need, a row from each in turn -- one greedy over all of them was tried, and filled every
+level with the emergency rows, which carry the bank's highest importance -- at most one
+section for every two rows, and `chooseItems` picks the rows inside a section. How many
+rows is the screen's content area over 4,400 pt², which is measured: on every screen
+preset and eight pairs every level fits its one face, at full type except the advanced
+level's longer medical sentences in the denser scripts and Tamil. The rows are the
+content list's own (`sectionConcepts`, shared with it), the reader's terms included.
+What a level replaces -- the selection and the face count -- rides on the spec as
+`lockScreen.kept`, a second level keeps the first's, and Off puts it back, as does
+leaving the screen for paper. Choosing a level opens the content list on a phone to a
+little over a third of the column without folding the format panel (`widenPanel` in
+`ui/panels.js`) and brings the first section it lit into view, so pressing the levels
+in turn shows which sections light up and how many of their rows came.
+
 ## Print and paper
 
 `data/registry/paper.csv` carries per-preset facts that change the layout:

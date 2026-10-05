@@ -1170,3 +1170,44 @@ test('on a phone the studio\'s one menu holds its settings, not a door to them',
   await expect(menu).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('dark');
 });
+
+test('a phone screen can be a lock screen for a level, and Off puts the card back', async ({ page }) => {
+  // Once per test, not per page: the reload below asks whether the override was kept.
+  await page.addInitScript(() => {
+    if (sessionStorage.getItem('cleared')) return;
+    localStorage.clear();
+    sessionStorage.setItem('cleared', '1');
+  });
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const lock = field(page, 'Lock screen');
+  // A card for paper has no lock screen to be.
+  await expect(lock).toBeHidden();
+  await page.getByRole('radio', { name: 'Phone screen' }).click();
+  await expect(lock).toBeVisible();
+  await expect(lock.getByRole('radio', { name: 'Off' })).toHaveAttribute('aria-checked', 'true');
+  const before = await settledCounts(page);
+  const section = (/** @type {string} */ name) => page.locator('.tree > li', { hasText: name }).locator('summary input').first();
+
+  await lock.getByRole('radio', { name: 'Beginner' }).click();
+  await expect(page.locator('#status')).toContainText('Faces: 1', { timeout: 90_000 });
+  const beginner = await settledCounts(page);
+  // A handful of rows, the beginner's sections on and the rest off.
+  expect(beginner.included).toBeLessThan(20);
+  await expect(section('Social + basics')).toBeChecked();
+  await expect(section('Introductions')).not.toBeChecked();
+  await expect(section('Conditions + medication')).not.toBeChecked();
+
+  // Another level is another set of sections, on the same one face.
+  await lock.getByRole('radio', { name: 'Advanced' }).click();
+  await expect(section('Conditions + medication')).toBeChecked({ timeout: 90_000 });
+  await expect(section('Social + basics')).not.toBeChecked();
+
+  // Kept with the card, and so is what it set aside.
+  await page.reload();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect(lock.getByRole('radio', { name: 'Advanced' })).toHaveAttribute('aria-checked', 'true');
+  await lock.getByRole('radio', { name: 'Off' }).click();
+  await expect.poll(async () => (await settledCounts(page)).included, { timeout: 90_000 }).toBe(before.included);
+  await expect(section('Introductions')).toBeChecked();
+});

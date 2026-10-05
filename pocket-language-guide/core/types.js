@@ -265,6 +265,12 @@
  * @property {Record<string, SectionFormat>} [sectionFormats]  section id -> the format
  *   that section keeps in place of the card's. Absent, or a section absent from it,
  *   is the card's own format.
+ * @property {{level:'beginner'|'intermediate'|'advanced',
+ *   kept:{selection:{sections:Record<string,boolean>, items:Record<string,boolean>},
+ *   autoFaces:boolean, faces:number}}} [lockScreen]  a screen card set up as a lock
+ *   screen for a level of the language (`lockScreenSelection` in `ui/chips.js`), and
+ *   what it set aside to be, so Off puts it back. Absent is off. Nothing in `core/`
+ *   reads it: the selection and the face count it chose are the spec's own fields.
  * @property {RunningHead} [head]  a line of furniture along the top or bottom
  * @property {number} scale
  * @property {number} priority  keep only concepts whose `importance` reaches this,

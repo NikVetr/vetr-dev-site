@@ -16,8 +16,9 @@ import {
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl, foldControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
-  headControl, setCaption, flushGlyph,
+  headControl, setCaption, flushGlyph, lockGlyph,
 } from './glyphs.js';
+import { helpTip } from './dialog.js';
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
 import { ornamentControl } from './ornament-control.js';
@@ -256,6 +257,9 @@ function sampleValues(targetRows, sourceRows, respell, spec) {
  * @property {(finish:''|'cut'|'fold')=>void} onFinishChange  redraw: with a cut or a
  *   fold selected the canvas shows the imposed sheet rather than a single face
  * @property {(dpi:number)=>void} onDpiChange
+ * @property {(level:''|'beginner'|'intermediate'|'advanced')=>void} onLockScreen  set the
+ *   screen up as a lock screen for a level, or put it back with ''; the studio chooses
+ *   the rows, which this panel cannot see
  * @property {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish  what is
  *   done to the paper, which the panel holds rather than the spec
  * @property {number} dpi  the PNG resolution, likewise
@@ -587,6 +591,23 @@ export function createFormatPanel(input) {
   const reserve = reserveControl({ value: spec.geometry, onChange: emit });
   const reserveField = panelField(t('format.reserve'), [reserve.group, reserve.custom]);
 
+  // **A lock screen for a level of the language**, beside the phone it is for. Off by
+  // default; a level sets one face and the everyday essentials for that level.
+  const LOCK_CHOICES = /** @type {const} */ (['', 'beginner', 'intermediate', 'advanced']);
+  const lock = segmented({
+    label: t('format.lockScreen'),
+    value: spec.lockScreen?.level ?? '',
+    options: LOCK_CHOICES.map((level, bars) => ({
+      value: level,
+      caption: t(`format.lockScreen.${level || 'off'}`),
+      title: t(`format.lockScreenTitle.${level || 'off'}`),
+      glyph: lockGlyph(bars),
+    })),
+    onChange: (level) => input.onLockScreen(/** @type {typeof LOCK_CHOICES[number]} */ (level)),
+  });
+  const lockHelp = helpTip(t('format.lockScreenHelp'));
+  const lockField = panelField(t('format.lockScreen'), [lockHelp.tip, lock.group], lockHelp.button);
+
   /**
    * A cut needs two things the phone card has not got: paper, and a back to print
    * on. Offering it there would offer an operation with no meaning -- and
@@ -608,6 +629,7 @@ export function createFormatPanel(input) {
     flipField.hidden = !finishable || !finish;
     reserveField.hidden = !screen;
     phoneField.hidden = !screen;
+    lockField.hidden = !screen;
     if (finishable || !finish) return;
     finish = '';
     finishControl.select('');
@@ -753,6 +775,7 @@ export function createFormatPanel(input) {
     // choosing a phone revealed two controls at opposite ends of a long panel and
     // only one of them looked related to the choice.
     reserveField,
+    lockField,
     panelField(t('format.columns'), [columns.group]),
     // Where the card folds, if it does: a wider gutter and a dashed line there.
     panelField(t('format.fold'), [fold.group]),
@@ -799,6 +822,7 @@ export function createFormatPanel(input) {
       size.sync(next.geometry);
       reserve.sync(next.geometry);
       phone.sync(next.geometry);
+      lock.select(next.lockScreen?.level ?? '');
       fold.sync(next.geometry);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);

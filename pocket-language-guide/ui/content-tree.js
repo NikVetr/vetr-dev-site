@@ -175,6 +175,39 @@ export function itemEditForm({ conceptId, values, target, source, onSave, onClos
 }
 
 /**
+ * The rows a pair can put in one section: its own concepts that the sheet would
+ * print, and the terms the reader added to it. Shared with the lock-screen override,
+ * which chooses among the same rows the list shows.
+ * @param {Pick<TreeInput, 'corpus'|'spec'|'targetRows'|'sourceRows'|'edits'>} input
+ * @param {Record<string,string>} section  a `sections.csv` row
+ * @returns {{conceptId:string, custom:boolean, weight:number, template:string}[]}
+ */
+export function sectionConcepts(input, section) {
+  const own = (input.corpus.conceptsByGroup[section.group] ?? [])
+    .filter((c) => c.section_id === section.section_id)
+    // The same scope the sheet applies. 32 concepts mean something for one
+    // target only -- Chinese measure words, the yuan, Japanese counters, the
+    // Thai politeness note -- and the tree was listing all of them for every
+    // target, ticked, and counting them in the section total. So a Spanish
+    // sheet offered a paragraph about Thai politeness particles, said it was
+    // included, and then correctly did not print it.
+    .filter((c) => appliesTo(c, input.spec.target))
+    .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
+    // `importance` comes with it, because the tree is where the priority ladder's
+    // effect is legible: the ladder is a floor on this number, so a reader who
+    // wonders why a row vanished at "Core" can see which side of the line it was.
+    .map((c) => ({
+      conceptId: c.concept_id, custom: false, weight: Number(c.importance), template: c.default_template,
+    }));
+  // Terms the reader added live in the same list as the corpus ones, marked so
+  // they can be told apart and removed.
+  const custom = input.edits.extras
+    .filter((e) => e.sectionId === section.section_id)
+    .map((e) => ({ conceptId: e.conceptId, custom: true, weight: 1, template: e.template }));
+  return [...new Map([...own, ...custom].map((c) => [c.conceptId, c])).values()];
+}
+
+/**
  * Build the tree. Returns an updater to call after each solve.
  * @param {TreeInput} input
  * @returns {(spec:import('../core/types.js').SheetSpec,
@@ -204,28 +237,7 @@ export function createTree(input) {
 
   for (const section of corpus.sections) {
     const title = input.sectionTitles?.[section.section_id] || section.title_en;
-    const own = (corpus.conceptsByGroup[section.group] ?? [])
-      .filter((c) => c.section_id === section.section_id)
-      // The same scope the sheet applies. 32 concepts mean something for one
-      // target only -- Chinese measure words, the yuan, Japanese counters, the
-      // Thai politeness note -- and the tree was listing all of them for every
-      // target, ticked, and counting them in the section total. So a Spanish
-      // sheet offered a paragraph about Thai politeness particles, said it was
-      // included, and then correctly did not print it.
-      .filter((c) => appliesTo(c, input.spec.target))
-      .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
-      // `importance` comes with it, because the tree is where the priority ladder's
-      // effect is legible: the ladder is a floor on this number, so a reader who
-      // wonders why a row vanished at "Core" can see which side of the line it was.
-      .map((c) => ({
-        conceptId: c.concept_id, custom: false, weight: Number(c.importance), template: c.default_template,
-      }));
-    // Terms the reader added live in the same list as the corpus ones, marked so
-    // they can be told apart and removed.
-    const custom = input.edits.extras
-      .filter((e) => e.sectionId === section.section_id)
-      .map((e) => ({ conceptId: e.conceptId, custom: true, weight: 1, template: e.template }));
-    const byId = new Map([...own, ...custom].map((c) => [c.conceptId, c]));
+    const byId = new Map(sectionConcepts(input, section).map((c) => [c.conceptId, c]));
     if (!byId.size) continue;
     // **In the order the card prints them**, which is the order the reader drags them
     // into: the same `sectionOrder` the sheet's blocks are built in.
@@ -233,7 +245,8 @@ export function createTree(input) {
     const orderOf = (/** @type {import('../core/types.js').SheetSpec} */ at) => sectionOrder(
       shapes, at.itemOrder?.[section.section_id],
     ).map((c) => c.concept_id);
-    const concepts = orderOf(spec).map((id) => /** @type {typeof own[number]} */ (byId.get(id)));
+    const concepts = orderOf(spec)
+      .map((id) => /** @type {ReturnType<typeof sectionConcepts>[number]} */ (byId.get(id)));
 
     // Named with aria-label rather than a <label>: a label around the title would
     // make clicking the title toggle the checkbox instead of opening the section.

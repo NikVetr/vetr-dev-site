@@ -1319,6 +1319,29 @@ export function reserveGlyph(reserve) {
 }
 
 /**
+ * A lock screen and a level meter on it: three rising bars, as many filled as the
+ * level is high -- none for Off, whose screen is the reader's own card.
+ * @param {number} bars  0 to 3
+ */
+export function lockGlyph(bars) {
+  const box = 30;
+  const svg = frame(box, box);
+  const w = 15;
+  const x = (box - w) / 2;
+  svg.append(svgEl('rect', { x, y: 2, width: w, height: box - 4, rx: 2, class: 'g-page' }));
+  // The clock, so the shape reads as a lock screen rather than as a page.
+  svg.append(svgEl('rect', { x: x + 3, y: 5, width: w - 6, height: 2.8, rx: 0.6, class: 'g-ink faint' }));
+  for (let i = 0; i < 3; i += 1) {
+    const h = 4 + i * 3;
+    svg.append(svgEl('rect', {
+      x: x + 2.8 + i * 3.6, y: 24 - h, width: 2.4, height: h, rx: 0.5,
+      class: i < bars ? 'g-accent' : 'g-ink faint',
+    }));
+  }
+  return svg;
+}
+
+/**
  * The lock-screen reserve ladder, with a Custom row of two percent boxes.
  *
  * Shared by both panels, and shown only on a `screen` preset: reserving a third of

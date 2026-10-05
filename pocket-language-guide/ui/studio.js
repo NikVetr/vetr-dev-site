@@ -20,7 +20,8 @@ import {
   showSavedImages, reportExportError,
 } from './export.js';
 import { createFormatPanel } from './format-panel.js';
-import { createTree, revealItem } from './content-tree.js';
+import { createTree, revealItem, sectionConcepts } from './content-tree.js';
+import { lockScreenSelection } from './chips.js';
 import { renderFaces, highlight } from './preview.js';
 import { openItemPopup, closeItemPopup } from './item-popup.js';
 import {
@@ -28,7 +29,7 @@ import {
 } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
-import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
+import { attachPanelResizers, attachPhoneChrome, revealPanel, widenPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
 import { readerSections } from './personal-data.js';
 import { createWarnings } from './warnings.js';
@@ -44,6 +45,9 @@ const BANNER_KEY = 'plg.banner-hidden';
 // solve rather than queueing one per click.
 const SOLVE_DEBOUNCE_MS = 260;
 const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark', 'parchment'];
+/** How much of a phone's column the content list opens to when a lock-screen level is
+ * chosen: enough to see which sections lit up and how many of their rows came. */
+const LOCK_SHARE = 0.36;
 
 /**
  * An edit the disk refused. The studio has no "saved" message to make a liar of --
@@ -191,7 +195,27 @@ async function main() {
       marked = null;
       const readerChanged = Boolean(patch.source) && patch.source !== spec.source;
       spec = { ...spec, ...patch };
+      // Off a screen there is no lock screen, so what one set aside comes back.
+      if (spec.lockScreen && !spec.geometry.screen) {
+        const { lockScreen: { kept }, ...rest } = spec;
+        spec = { ...rest, selection: kept.selection, autoFaces: kept.autoFaces };
+      }
       if (readerChanged) await retranslate();
+      schedule();
+    },
+    /** @param {''|'beginner'|'intermediate'|'advanced'} level */
+    onLockScreen: (level) => {
+      marked = null;
+      spec = lockScreen(level);
+      // **The list opens beside the panel the choice was made in**, so the reader can
+      // press the other levels and watch which sections light up and how many of
+      // their rows came, then go on to change any of them there.
+      if (level) {
+        widenPanel($('tree'), LOCK_SHARE);
+        const first = ctx.corpus.sections.find((section) => spec.selection.sections[section.section_id]);
+        $('section-picker').querySelector(`[data-section="${first?.section_id}"]`)
+          ?.scrollIntoView({ block: 'center' });
+      }
       schedule();
     },
     onFinishChange: () => { persist(); renderCanvas(); },
@@ -234,6 +258,39 @@ async function main() {
     url.searchParams.set('source', spec.source);
     history.replaceState(history.state, '', url);
     quizLink();
+  }
+
+  /**
+   * The screen set up as a lock screen for a level of the language, or -- given no
+   * level -- put back as it was before. One face, because a phone has one lock screen,
+   * and the level's essentials as the selection (`lockScreenSelection`), out of the
+   * rows the content list itself offers. What it replaces is kept on the spec, and a
+   * second level keeps the first one's, so Off is always the reader's own card.
+   * @param {''|'beginner'|'intermediate'|'advanced'} level
+   * @returns {import('../core/types.js').SheetSpec}
+   */
+  function lockScreen(level) {
+    const { lockScreen: held, ...rest } = spec;
+    const kept = held?.kept ?? { selection: spec.selection, autoFaces: spec.autoFaces, faces: spec.geometry.faces };
+    if (!level) {
+      return {
+        ...rest, selection: kept.selection, autoFaces: kept.autoFaces,
+        geometry: { ...spec.geometry, faces: kept.faces },
+      };
+    }
+    if (!built || !plan) throw new Error('a lock screen is chosen from a solved card, and there is none yet');
+    const rows = { corpus: ctx.corpus, spec, targetRows: built.targetRows, sourceRows: built.sourceRows, edits };
+    const sections = ctx.corpus.sections.map((section) => ({
+      sectionId: section.section_id, title: section.title_en, icon: null, items: sectionConcepts(rows, section),
+    }));
+    const box = contentBox(spec.geometry, spec.paper, plan.bands, elvenInset(spec));
+    return {
+      ...rest,
+      lockScreen: { level, kept },
+      autoFaces: false,
+      geometry: { ...spec.geometry, faces: 1 },
+      selection: lockScreenSelection({ corpus: ctx.corpus, level, sections, area: box.width * box.height }),
+    };
   }
 
   // --- banner and quiz ----------------------------------------------------

@@ -253,6 +253,83 @@ export function chooseItems({ corpus, sections, on, budget }) {
   return items;
 }
 
+/* --- a lock screen for a level of the language ----------------------------- */
+
+/**
+ * What each level keeps on a lock screen, as sections in the order a reader at that
+ * level needs them.
+ *
+ * **Everyday essentials are different for each level, because what is essential is
+ * what you do not already have.** A beginner has nothing, so their screen is the
+ * survival basics: hello and thank you, yes and no, "I don't speak it", help, the
+ * toilet, a number. An intermediate reader has those, and reaches for the everyday
+ * transactions -- ordering, what they cannot eat, the way, the fare, paying. An
+ * advanced reader gets by in conversation and is caught out by what never comes up
+ * until it does: the emergency, a condition and its medicine, the pharmacy, the police,
+ * a lost passport -- vocabulary a fluent visitor does not have to hand.
+ */
+export const LOCK_LEVELS = /** @type {const} */ ({
+  beginner: ['social-basics', 'quick-responses', 'communication', 'emergency-medical', 'toilets',
+    'numbers-money', 'directions'],
+  intermediate: ['food-ordering', 'dietary-needs', 'directions', 'transit-rides', 'payment-receipt',
+    'shopping', 'emergency-medical', 'time-scheduling'],
+  advanced: ['emergency-medical', 'medical-conditions', 'pharmacy-symptoms', 'police-consulate',
+    'lost-rescue', 'dietary-needs', 'body-parts'],
+});
+
+/**
+ * The content area one row of a lock screen needs, heading and all, in square points.
+ *
+ * Measured rather than chosen. Every level, solved at one face on every screen preset
+ * for Chinese, Japanese, Arabic, Hindi, Tamil, Thai and German glossed in English and
+ * English glossed in Chinese, fits that face: at full nominal type for the beginner and
+ * intermediate levels in all of them but Tamil, and at 0.8 or more for the advanced
+ * level's longer medical sentences, with Tamil -- the script the priority ladder already
+ * names as the exception -- down to about half. One row more is where the denser
+ * scripts start to shrink. It is eight rows under an iPhone's clock, thirteen on a
+ * screen with none.
+ */
+const LOCK_ROW_AREA = 4400;
+
+/**
+ * The selection for a lock screen at a level: the level's sections, a row from each
+ * in turn, as many as fit the screen.
+ *
+ * **In turn, and not by one greedy over all of them**, which was tried: the emergency
+ * rows carry the highest importance in the bank, so the greedy filled every level's
+ * screen with them and three levels came out as one. Each section is given a row in
+ * the level's order, then a second, until the screen is full -- and at most one
+ * section for every two rows, because a heading over a single row is a quarter of a
+ * small screen spent on a label. Inside a section the rows are `chooseItems`' own pick,
+ * so a section's second row is not a near-copy of its first.
+ * @param {Object} config
+ * @param {Corpus} config.corpus
+ * @param {keyof typeof LOCK_LEVELS} config.level
+ * @param {ChipSection[]} config.sections  every section the pair can show, as the grid has them
+ * @param {number} config.area  the screen's content area, in square points
+ * @returns {{sections:Record<string,boolean>, items:Record<string,boolean>}}
+ */
+export function lockScreenSelection({ corpus, level, sections, area }) {
+  const budget = Math.max(1, Math.floor(area / LOCK_ROW_AREA));
+  const used = LOCK_LEVELS[level]
+    .flatMap((id) => sections.filter((section) => section.sectionId === id && section.items.length))
+    .slice(0, Math.max(1, Math.floor(budget / 2)));
+  const quota = used.map(() => 0);
+  for (let left = budget; left > 0;) {
+    const before = left;
+    used.forEach((section, i) => {
+      if (left && quota[i] < section.items.length) { quota[i] += 1; left -= 1; }
+    });
+    if (left === before) break;
+  }
+  /** @type {Record<string,boolean>} */ const items = {};
+  used.forEach((section, i) => Object.assign(items, chooseItems({
+    corpus, sections: [section], on: new Set([section.sectionId]), budget: quota[i],
+  })));
+  const on = new Set(used.map((section) => section.sectionId));
+  return { sections: Object.fromEntries(corpus.sections.map((s) => [s.section_id, on.has(s.section_id)])), items };
+}
+
 /* --- the grid ------------------------------------------------------------ */
 
 /**
@@ -351,6 +428,7 @@ export function createSectionPicker({ root, corpus, sections, onToggle }) {
     const count = document.createElement('span');
     count.className = 'chip-count';
     chip.label.append(count);
+    chip.label.dataset.section = section.sectionId;
     grid.append(chip.label);
     chips.push({ sectionId: section.sectionId, box: chip.box, count, conceptIds });
   }
