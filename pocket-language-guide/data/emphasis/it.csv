@@ -1,0 +1,311 @@
+concept_id,key
+about-me.i-am-a-doctor,medico | medica
+about-me.i-am-a-nurse,infermiere | infermiera
+about-me.i-am-a-student,studentessa | studente
+about-me.i-am-a-teacher,insegnante
+about-me.i-am-an-engineer,ingegnere | ingegnera
+about-me.i-am-retired,pensionato | pensionata
+about-me.i-have-my-own-business,attività in proprio
+about-me.i-work-in-an-office,ufficio
+accessibility.step-free,senza scalini
+air-travel.i-would-like-a-window-seat,finestrino
+air-travel.i-would-like-an-aisle-seat,corridoio
+air-travel.my-luggage-did-not-arrive,non è arrivato
+air-travel.where-is-check-in,check-in
+air-travel.where-is-the-security-check,sicurezza
+air-travel.which-gate,gate
+attractions-tickets.are-there-lockers,armadietti
+attractions-tickets.could-you-take-a-photo-for-us,farci
+attractions-tickets.do-i-need-a-reservation,prenotazione
+attractions-tickets.may-i-take-photos,foto
+attractions-tickets.what-is-the-latest-entry-time,ultimo ingresso
+attractions-tickets.where-can-i-buy-tickets,biglietti
+board-answers.after-food,Dopo
+board-answers.at-the-next-stop,prossima fermata
+board-answers.before-food,Prima
+board-answers.can-you-walk,camminare
+board-answers.help-is-coming,aiuto
+board-answers.how-many,Quanti
+board-answers.i-am-calling-an-ambulance,ambulanza
+board-answers.i-am-calling-the-police,polizia
+board-answers.i-do-not-have-a-phone,telefono
+board-answers.i-will-check,controllare
+board-answers.i-will-find-someone,cercare qualcuno
+board-answers.i-will-show-you,Mostro
+board-answers.i-will-write-it-down,scrivo
+board-answers.i-would-rather-not-say,non dirlo
+board-answers.it-is-closed,chiuso
+board-answers.it-is-free,gratis
+board-answers.it-is-over-there,là
+board-answers.my-name-is-blank,chiamo
+board-answers.none-of-these,Nessuna
+board-answers.not-possible,non è possibile
+board-answers.only-for-customers,clienti
+board-answers.pay-on-board,a bordo
+board-answers.prescription-only,ricetta
+board-answers.see-a-doctor,medico
+board-answers.stay-here,restare
+board-answers.the-hospital-is-close,ospedale | vicino
+board-answers.there-is-no-wait,Non c'è attesa
+board-answers.we-are-full,completo
+board-answers.what-happened,successo
+board-answers.what-is-your-name,chiama
+board-answers.where-does-it-hurt,male
+border-customs.here-is-my-passport,passaporto
+border-customs.i-am-here-for-business,lavoro
+border-customs.i-am-visiting-family,parenti
+border-customs.i-have-a-connecting-flight,coincidenza
+border-customs.where-do-i-collect-my-baggage,ritiro
+color-size-returns.do-you-have-a-bag,sacchetto
+color-size-returns.do-you-have-another-size,taglia
+color-size-returns.may-i-try-it-on,provarlo
+communication.can-you-help-me,aiutare
+communication.please-speak-more-slowly,lentamente
+dietary-needs.does-it-contain-fish-stock,brodo di pesce
+dietary-needs.does-it-contain-pork-fat,strutto | lardo
+dietary-needs.does-it-contain-pork-stock,brodo di maiale
+dietary-needs.i-am-vegan,vegano | vegana
+dietary-needs.i-am-vegetarian,vegetariano | vegetariana
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,uova
+dietary-needs.no-meat,carne
+dietary-needs.no-nuts,frutta a guscio | noci
+dietary-needs.no-peanuts,arachidi
+dietary-needs.no-pork,maiale
+dietary-needs.no-seafood,pesce | frutti di mare
+dietary-needs.no-sesame,sesamo
+directions.can-i-walk-there,a piedi
+directions.can-you-show-me-the-way,strada
+directions.how-long-on-foot,Quanto ci vuole
+directions.is-it-far,lontano
+directions.please-show-me-on-the-map,mappa
+emergency-medical.i-am-bleeding-badly,sangue
+emergency-medical.i-am-having-a-severe-allergic-reaction,shock anafilattico
+emergency-medical.i-am-injured,ferito | ferita
+emergency-medical.i-cannot-breathe,respirare
+emergency-medical.i-feel-unwell,Non | bene
+emergency-medical.i-have-chest-pain,dolore | petto
+emergency-medical.i-have-travel-insurance,assicurazione
+emergency-medical.i-need-a-doctor,medico
+emergency-medical.i-think-a-bone-is-broken,frattura
+emergency-medical.it-hurts-here,male
+emergency-medical.please-call-an-ambulance,ambulanza
+emergency-medical.please-call-my-emergency-contact,contatto di emergenza
+emergency-medical.please-take-me-to-a-hospital,ospedale
+emergency-medical.this-is-an-emergency,emergenza
+emergency-medical.this-person-is-unconscious,perso conoscenza
+emergency-medical.where-is-the-nearest-hospital,più vicino
+family-intros.this-is-my-brother,fratello
+family-intros.this-is-my-colleague,collega
+family-intros.this-is-my-daughter,figlia
+family-intros.this-is-my-father,padre
+family-intros.this-is-my-husband,marito
+family-intros.this-is-my-mother,madre
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,sorella
+family-intros.this-is-my-son,figlio
+family-intros.this-is-my-wife,moglie
+food-ordering.i-want-this,Vorrei
+food-ordering.is-a-table-available,tavolo libero
+food-ordering.is-this-vegetarian,vegetariano
+food-ordering.table-for-two,tavolo | due
+food-ordering.to-go-please,portare via
+food-ordering.what-do-you-recommend,consiglia
+hiking-parks.how-long-to-the-summit,cima
+hiking-parks.how-long-to-the-viewpoint,punto panoramico
+hiking-parks.is-this-trail-suitable-for-beginners,principianti
+hiking-parks.where-is-the-trailhead,inizia
+hiking-parks.which-route-is-easier,facile
+hitchhiking.can-you-give-me-a-ride,passaggio
+hitchhiking.i-can-pay-for-fuel,benzina
+hitchhiking.i-only-need-to-go-to-the-next-town,prossimo paese
+hitchhiking.is-there-room-for-two,posto | due
+hitchhiking.thank-you-for-the-ride,Grazie
+hitchhiking.where-are-you-going,Dove
+hotel-basics.are-any-rooms-available,camere
+hotel-basics.how-much-per-night,a notte
+hotel-basics.i-have-a-reservation,prenotazione
+hotel-basics.i-would-like-a-non-smoking-room,non fumatori
+hotel-basics.i-would-like-a-quiet-room,tranquilla
+hotel-basics.is-breakfast-included,colazione
+hotel-basics.is-there-a-washing-machine,lavatrice
+hotel-basics.is-there-air-conditioning,aria condizionata
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,vedere
+hotel-requests.another-blanket,coperta
+hotel-requests.another-night,altra notte
+hotel-requests.another-towel-please,asciugamano
+hotel-requests.can-i-check-in-early,prima
+hotel-requests.can-i-check-out-later,più tardi
+hotel-requests.can-i-store-my-luggage,bagagli
+hotel-requests.is-there-a-safe,cassaforte
+hotel-requests.no-housekeeping,pulizia
+hotel-requests.what-time-does-breakfast-start,colazione
+hotel-requests.what-time-is-check-out,check-out
+in-a-building.is-this-the-correct-entrance,giusta
+introductions.i-am-a-tourist,turista
+introductions.i-am-from,Vengo da
+introductions.i-am-traveling-alone,solo | sola
+introductions.my-name-is,chiamo
+introductions.this-is-my-friend,amico
+introductions.we-are-traveling-together,insieme
+introductions.what-is-your-name,chiama
+kind-words.i-had-a-wonderful-time,fantastici
+kind-words.i-like-it-very-much,piace
+kind-words.it-is-beautiful-here,bellissimo
+kind-words.thank-you-for-everything,tutto
+kind-words.thank-you-for-your-help,aiuto
+kind-words.thank-you-for-your-hospitality,ospitalità
+kind-words.this-is-delicious,delizioso
+kind-words.you-are-very-kind,gentile
+laundry.can-it-be-ready-today,oggi
+laundry.how-much-per-kilo,chilo
+laundry.please-do-not-use-bleach,candeggina
+laundry.please-iron-this,Stiri
+laundry.please-wash-these-clothes,Lavi
+laundry.when-will-it-be-ready,Quando
+laundry.where-is-a-laundromat,lavanderia
+lost-rescue.i-do-not-know-where-i-am,dove mi trovo
+lost-rescue.i-lost-my-bag,borsa
+lost-rescue.i-lost-my-passport,passaporto
+lost-rescue.i-lost-my-phone,telefono
+lost-rescue.i-lost-my-wallet,portafoglio
+lost-rescue.my-child-is-missing,figlio
+lost-rescue.please-call-the-police,polizia
+lost-rescue.we-are-here,qui
+massage-spa.focus-on-back,schiena
+massage-spa.focus-on-feet,piedi
+massage-spa.focus-on-neck,collo
+massage-spa.focus-on-shoulders,spalle
+massage-spa.more-gently,delicato
+massage-spa.please-avoid-this-area,Non prema
+massage-spa.please-stop,Basta
+massage-spa.reply-ask-supervisor,direzione
+massage-spa.reply-cannot-avoid-this-treatment,non si può
+massage-spa.reply-does-it-hurt-there,male
+massage-spa.reply-i-will-avoid-that-area,evito
+massage-spa.reply-which-area-exactly,Quale zona
+massage-spa.stronger-pressure,forte
+massage-spa.that-pressure-is-good,bene
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirina | ibuprofene
+medical-conditions.i-am-allergic-to-penicillin,penicillina
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfamidici
+medical-conditions.i-am-diabetic,diabete
+medical-conditions.i-am-pregnant,incinta
+medical-conditions.i-carry-an-adrenaline-injector,adrenalina
+medical-conditions.i-have-a-heart-condition,cardiaca
+medical-conditions.i-have-asthma,asma
+medical-conditions.i-have-epilepsy,epilessia
+medical-conditions.i-need-insulin,insulina
+medical-conditions.i-need-my-inhaler,inalatore
+medical-conditions.i-take-blood-thinners,anticoagulanti
+medical-conditions.inject-it-into-my-outer-thigh,coscia
+medical-conditions.my-blood-sugar-is-low,glicemia bassa
+medical-conditions.my-injector-is-in-my-bag,autoiniettore | borsa
+medical-conditions.please-give-me-sugar-or-juice,zucchero | succo
+medical-conditions.this-card-lists-my-conditions,scheda
+medical-conditions.this-is-my-medicine,farmaco
+outdoors.are-there-dangerous-animals-here,animali pericolosi
+outdoors.can-we-camp-here,campeggiare
+outdoors.is-it-safe-to-swim-here,nuotare
+payment-receipt.can-we-pay-separately,separatamente
+payment-receipt.how-much-in-total,in tutto
+payment-receipt.i-already-paid,già pagato
+payment-receipt.is-tax-included,IVA
+payment-receipt.my-card-was-declined,rifiutata
+payment-receipt.pay-by-card,carta
+payment-receipt.the-bill-is-wrong,errore
+pharmacy-symptoms.before-or-after-food,pasti
+pharmacy-symptoms.can-i-get-this-medicine-here,farmaco
+pharmacy-symptoms.cough-medicine,tosse
+pharmacy-symptoms.do-i-need-a-prescription,ricetta
+pharmacy-symptoms.how-many-times-a-day,volte al giorno
+pharmacy-symptoms.how-much-should-i-take,Quanto
+pharmacy-symptoms.i-am-vomiting,vomitando
+pharmacy-symptoms.i-feel-dizzy,vertigini
+pharmacy-symptoms.i-feel-nauseous,nausea
+pharmacy-symptoms.i-have-a-burn,ustione
+pharmacy-symptoms.i-have-a-cough,tosse
+pharmacy-symptoms.i-have-a-cut,taglio
+pharmacy-symptoms.i-have-a-fever,febbre
+pharmacy-symptoms.i-have-a-headache,testa
+pharmacy-symptoms.i-have-a-rash,eruzione cutanea
+pharmacy-symptoms.i-have-a-sore-throat,gola
+pharmacy-symptoms.i-have-a-stomach-ache,stomaco
+pharmacy-symptoms.i-have-diarrhea,diarrea
+pharmacy-symptoms.i-think-it-is-infected,infetto
+pharmacy-symptoms.is-this-safe-during-pregnancy,gravidanza
+pharmacy-symptoms.motion-sickness-tablets,mal d'auto
+pharmacy-symptoms.the-pain-is-severe,dolore | forte
+pharmacy-symptoms.which-pharmacy-is-open-now,aperta adesso
+police-consulate.i-need-an-interpreter,interprete
+police-consulate.i-want-to-contact-my-embassy,ambasciata
+police-consulate.i-want-to-report-a-theft,denunciare
+police-consulate.my-bag-was-stolen,rubato
+police-consulate.someone-is-following-me,seguendo
+police-consulate.where-is-the-police-station,commissariato
+quick-directions.on-the-left,sinistra
+quick-directions.on-the-right,destra
+quick-directions.turn-left,sinistra
+quick-directions.turn-right,destra
+room-problems.can-i-change-rooms,cambiare
+room-problems.please-send-someone,Mandi qualcuno
+room-problems.the-air-conditioning-is-broken,aria condizionata
+room-problems.the-heating-does-not-work,riscaldamento
+room-problems.the-key-does-not-work,chiave
+room-problems.the-light-does-not-work,luce
+room-problems.the-room-is-too-noisy,rumorosa
+room-problems.the-toilet-will-not-flush,sciacquone
+room-problems.there-is-a-problem-with-the-room,problema
+room-problems.there-is-no-hot-water,acqua calda
+shopping.can-it-be-a-little-cheaper,sconto
+shopping.do-you-have-this-in-stock,disponibile
+shopping.how-much-is-this,costa
+shopping.i-am-just-looking,occhiata
+shopping.i-will-take-this,Prendo
+shopping.that-is-too-expensive,caro
+shopping.where-do-i-pay,paga
+taxi.can-you-wait-for-me-here,aspettare
+taxi.could-you-make-it-colder,abbassare
+taxi.could-you-make-it-warmer,alzare
+taxi.may-i-open-the-window,finestrino
+taxi.please-stop-here,fermi
+taxi.please-take-me-here,porti
+taxi.please-turn-around,inversione
+time-scheduling.can-we-change-the-time,cambiare
+time-scheduling.how-long-does-it-take,tempo
+time-scheduling.what-day-is-it-today,giorno
+time-scheduling.what-time-does-it-close,chiude
+time-scheduling.what-time-does-it-open,apre
+time-scheduling.what-time-is-it,ore
+time-scheduling.what-time-should-we-meet,vediamo
+time-scheduling.when-is-convenient,va bene
+toilets.where-toilet,bagno
+trail-conditions.can-we-return-before-dark,buio
+trail-conditions.can-we-return-the-same-way,stessa strada
+trail-conditions.how-long-is-the-full-route,percorso completo
+trail-conditions.is-the-path-slippery,scivoloso
+trail-conditions.is-the-route-steep,ripido
+trail-conditions.is-the-trail-open,aperto
+trail-transport.do-you-have-a-map,mappa
+trail-transport.how-long-is-the-wait,aspettare
+trail-transport.is-there-cell-signal-here,campo
+trail-transport.what-time-is-the-last-shuttle,ultima navetta
+trail-transport.when-does-the-cableway-stop,funivia
+trail-transport.where-can-we-buy-water,comprare
+trail-transport.where-can-we-refill-water,riempire
+transit-rides.can-i-use-this-ticket,usare
+transit-rides.do-i-need-to-transfer,cambiare
+transit-rides.do-i-need-to-validate,convalidare
+transit-rides.i-am-in-a-hurry,fretta
+transit-rides.i-went-past-my-stop,passato
+transit-rides.is-it-delayed,ritardo
+transit-rides.is-this-direct,diretto
+transit-rides.please-tell-me-where-to-get-off,scendere
+transit-rides.what-is-the-next-stop,prossima fermata
+transit-rides.what-time-is-the-next-one,prossimo
+transit-rides.where-do-i-pay-the-fare,paga
+transit-rides.where-is-the-subway-station,metro
+weather.how-cold-at-night,freddo | notte
+weather.is-it-safe-today,sicuro
+weather.will-it-rain,Pioverà

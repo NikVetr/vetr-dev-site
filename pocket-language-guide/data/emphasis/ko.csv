@@ -1,0 +1,300 @@
+concept_id,key
+about-me.i-am-a-doctor,의사
+about-me.i-am-a-nurse,간호사
+about-me.i-am-a-student,학생
+about-me.i-am-a-teacher,선생님
+about-me.i-am-an-engineer,엔지니어
+about-me.i-am-retired,은퇴
+about-me.i-have-my-own-business,자영업
+about-me.i-work-in-an-office,회사원
+accessibility.step-free,계단 없는
+air-travel.i-would-like-a-window-seat,창가
+air-travel.i-would-like-an-aisle-seat,통로
+air-travel.my-luggage-did-not-arrive,안 왔어요
+air-travel.where-is-check-in,체크인
+air-travel.where-is-the-security-check,보안 검색대
+air-travel.which-gate,게이트
+attractions-tickets.are-there-lockers,사물함
+attractions-tickets.could-you-take-a-photo-for-us,찍어 주시겠어요
+attractions-tickets.do-i-need-a-reservation,예약
+attractions-tickets.may-i-take-photos,사진
+attractions-tickets.what-is-the-latest-entry-time,입장 마감
+attractions-tickets.where-can-i-buy-tickets,표
+board-answers.after-food,식후
+board-answers.at-the-next-stop,다음 정거장
+board-answers.before-food,식전
+board-answers.can-you-walk,걸을
+board-answers.help-is-coming,도움
+board-answers.how-many,몇 개
+board-answers.i-am-calling-an-ambulance,구급차
+board-answers.i-am-calling-the-police,경찰
+board-answers.i-do-not-have-a-phone,휴대폰
+board-answers.i-will-check,확인
+board-answers.i-will-find-someone,찾을게요
+board-answers.i-will-show-you,알려드릴게요
+board-answers.it-is-closed,닫았어요
+board-answers.it-is-free,무료
+board-answers.it-is-over-there,저기
+board-answers.none-of-these,여기 없어요
+board-answers.not-possible,안 돼요
+board-answers.only-for-customers,손님
+board-answers.pay-on-board,차 안
+board-answers.prescription-only,처방전
+board-answers.see-a-doctor,병원
+board-answers.stay-here,여기 있는
+board-answers.the-hospital-is-close,가까워요
+board-answers.there-is-no-wait,대기 없이
+board-answers.what-is-your-name,이름
+board-answers.where-does-it-hurt,아파요
+border-customs.here-is-my-passport,여권
+border-customs.i-am-here-for-business,출장
+border-customs.i-am-visiting-family,가족
+border-customs.i-have-a-connecting-flight,연결편
+border-customs.where-do-i-collect-my-baggage,수하물
+color-size-returns.do-you-have-a-bag,봉투
+color-size-returns.do-you-have-another-size,사이즈
+color-size-returns.may-i-try-it-on,입어
+communication.can-you-help-me,도와주실
+communication.please-speak-more-slowly,천천히
+dietary-needs.does-it-contain-fish-stock,생선 육수
+dietary-needs.does-it-contain-pork-fat,돼지기름
+dietary-needs.does-it-contain-pork-stock,돼지 육수
+dietary-needs.i-am-vegan,비건
+dietary-needs.i-am-vegetarian,채식주의자
+dietary-needs.is-this-halal,할랄
+dietary-needs.no-eggs,계란
+dietary-needs.no-meat,고기
+dietary-needs.no-nuts,견과류
+dietary-needs.no-peanuts,땅콩
+dietary-needs.no-pork,돼지고기
+dietary-needs.no-seafood,해산물
+dietary-needs.no-sesame,참깨 | 참기름
+directions.can-i-walk-there,걸어갈
+directions.can-you-show-me-the-way,길
+directions.how-long-on-foot,얼마나
+directions.please-show-me-on-the-map,지도
+directions.which-exit,출구
+emergency-medical.i-am-bleeding-badly,피
+emergency-medical.i-am-having-a-severe-allergic-reaction,아나필락시스
+emergency-medical.i-cannot-breathe,숨
+emergency-medical.i-feel-unwell,안 좋습니다
+emergency-medical.i-have-chest-pain,가슴
+emergency-medical.i-have-travel-insurance,보험
+emergency-medical.i-need-a-doctor,의사
+emergency-medical.i-think-a-bone-is-broken,뼈 | 부러진
+emergency-medical.it-hurts-here,아픕니다
+emergency-medical.please-call-an-ambulance,구급차
+emergency-medical.please-call-my-emergency-contact,비상 연락처
+emergency-medical.please-take-me-to-a-hospital,병원
+emergency-medical.this-is-an-emergency,응급
+emergency-medical.this-person-is-unconscious,의식이 없습니다
+emergency-medical.where-is-the-nearest-hospital,가까운
+family-intros.this-is-my-brother,남동생
+family-intros.this-is-my-colleague,동료
+family-intros.this-is-my-daughter,딸
+family-intros.this-is-my-father,아버지
+family-intros.this-is-my-husband,남편
+family-intros.this-is-my-mother,어머니
+family-intros.this-is-my-partner,애인
+family-intros.this-is-my-sister,여동생
+family-intros.this-is-my-son,아들
+family-intros.this-is-my-wife,아내
+food-ordering.check-please,계산
+food-ordering.is-a-table-available,자리
+food-ordering.is-this-vegetarian,채식
+food-ordering.to-go-please,포장
+food-ordering.what-do-you-recommend,추천
+hiking-parks.how-long-to-the-summit,정상
+hiking-parks.how-long-to-the-viewpoint,전망대
+hiking-parks.is-this-trail-suitable-for-beginners,초보자
+hiking-parks.where-is-the-trailhead,입구
+hiking-parks.which-route-is-easier,쉬워요
+hitchhiking.can-you-give-me-a-ride,태워
+hitchhiking.i-can-pay-for-fuel,기름값
+hitchhiking.i-only-need-to-go-to-the-next-town,다음 마을
+hitchhiking.is-there-room-for-two,두 명
+hitchhiking.thank-you-for-the-ride,감사합니다
+hitchhiking.where-are-you-going,어디까지
+hotel-basics.are-any-rooms-available,빈 방
+hotel-basics.how-much-per-night,1박
+hotel-basics.i-have-a-reservation,예약
+hotel-basics.i-would-like-a-non-smoking-room,금연
+hotel-basics.i-would-like-a-quiet-room,조용한
+hotel-basics.is-breakfast-included,조식
+hotel-basics.is-there-a-washing-machine,세탁기
+hotel-basics.is-there-air-conditioning,에어컨
+hotel-basics.is-wi-fi-free,와이파이
+hotel-basics.may-i-see-the-room,볼
+hotel-requests.another-blanket,이불
+hotel-requests.another-night,하루 더
+hotel-requests.another-towel-please,수건
+hotel-requests.can-i-check-in-early,일찍
+hotel-requests.can-i-check-out-later,늦게
+hotel-requests.can-i-store-my-luggage,짐
+hotel-requests.is-there-a-safe,금고
+hotel-requests.no-housekeeping,청소
+hotel-requests.what-time-does-breakfast-start,조식
+hotel-requests.what-time-is-check-out,체크아웃
+in-a-building.is-this-the-correct-entrance,맞아요
+introductions.i-am-a-tourist,관광객
+introductions.i-am-from,왔어요
+introductions.i-am-traveling-alone,혼자
+introductions.this-is-my-friend,친구
+introductions.we-are-traveling-together,같이
+introductions.what-is-your-name,이름
+introductions.where-are-you-from,어디서
+kind-words.i-had-a-wonderful-time,좋은 시간
+kind-words.i-like-it-very-much,마음에 들어요
+kind-words.it-is-beautiful-here,아름다워요
+kind-words.thank-you-for-everything,모든 것
+kind-words.thank-you-for-your-help,도와주셔서
+kind-words.thank-you-for-your-hospitality,환대
+kind-words.this-is-delicious,맛있어요
+kind-words.you-are-very-kind,친절
+laundry.can-it-be-ready-today,오늘
+laundry.how-much-per-kilo,1킬로
+laundry.please-do-not-use-bleach,표백제
+laundry.please-iron-this,다려
+laundry.please-wash-these-clothes,세탁
+laundry.when-will-it-be-ready,언제
+laundry.where-is-a-laundromat,빨래방
+lost-rescue.i-do-not-know-where-i-am,어딘지
+lost-rescue.i-lost-my-bag,가방
+lost-rescue.i-lost-my-passport,여권
+lost-rescue.i-lost-my-phone,휴대폰
+lost-rescue.i-lost-my-wallet,지갑
+lost-rescue.my-child-is-missing,아이
+lost-rescue.please-call-the-police,경찰
+lost-rescue.we-are-here,여기
+massage-spa.focus-on-back,등
+massage-spa.focus-on-feet,발
+massage-spa.focus-on-neck,목
+massage-spa.focus-on-shoulders,어깨
+massage-spa.more-gently,살살
+massage-spa.please-avoid-this-area,피해
+massage-spa.please-pause,잠깐만
+massage-spa.please-stop,그만
+massage-spa.reply-ask-supervisor,실장님
+massage-spa.reply-cannot-avoid-this-treatment,피할 수 없어요
+massage-spa.reply-does-it-hurt-there,아프세요
+massage-spa.reply-i-will-avoid-that-area,피할게요
+massage-spa.reply-which-area-exactly,어느 부위
+massage-spa.stronger-pressure,세게
+massage-spa.that-pressure-is-good,딱 좋아요
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,아스피린 | 이부프로펜
+medical-conditions.i-am-allergic-to-penicillin,페니실린
+medical-conditions.i-am-allergic-to-sulfa-drugs,설파제
+medical-conditions.i-am-diabetic,당뇨병
+medical-conditions.i-am-pregnant,임신
+medical-conditions.i-carry-an-adrenaline-injector,에피네프린
+medical-conditions.i-have-a-heart-condition,심장병
+medical-conditions.i-have-asthma,천식
+medical-conditions.i-have-epilepsy,뇌전증
+medical-conditions.i-need-insulin,인슐린
+medical-conditions.i-need-my-inhaler,흡입기
+medical-conditions.i-take-blood-thinners,항응고제
+medical-conditions.inject-it-into-my-outer-thigh,허벅지 바깥쪽
+medical-conditions.my-blood-sugar-is-low,저혈당
+medical-conditions.my-injector-is-in-my-bag,주사기 | 가방
+medical-conditions.please-give-me-sugar-or-juice,설탕 | 주스
+medical-conditions.this-card-lists-my-conditions,카드
+medical-conditions.this-is-my-medicine,약
+outdoors.are-there-dangerous-animals-here,위험한 동물
+outdoors.can-we-camp-here,캠핑
+outdoors.is-it-safe-to-swim-here,수영
+payment-receipt.can-we-pay-separately,따로
+payment-receipt.how-much-in-total,다
+payment-receipt.is-tax-included,세금
+payment-receipt.my-card-was-declined,안 됐어요
+payment-receipt.pay-by-card,카드
+payment-receipt.the-bill-is-wrong,잘못된
+pharmacy-symptoms.can-i-get-this-medicine-here,약
+pharmacy-symptoms.do-i-need-a-prescription,처방전
+pharmacy-symptoms.how-many-times-a-day,하루에
+pharmacy-symptoms.how-much-should-i-take,얼마나
+pharmacy-symptoms.i-have-a-burn,화상
+pharmacy-symptoms.i-have-a-cough,기침
+pharmacy-symptoms.i-have-a-fever,열
+pharmacy-symptoms.i-have-a-headache,머리
+pharmacy-symptoms.i-have-a-rash,발진
+pharmacy-symptoms.i-have-a-sore-throat,목
+pharmacy-symptoms.i-have-a-stomach-ache,배
+pharmacy-symptoms.i-have-diarrhea,설사
+pharmacy-symptoms.i-think-it-is-infected,감염
+pharmacy-symptoms.is-this-safe-during-pregnancy,임신 중
+pharmacy-symptoms.the-pain-is-severe,많이
+pharmacy-symptoms.which-pharmacy-is-open-now,지금 문 연
+police-consulate.i-need-an-interpreter,통역사
+police-consulate.i-want-to-contact-my-embassy,대사관
+police-consulate.i-want-to-report-a-theft,신고
+police-consulate.my-bag-was-stolen,도난당
+police-consulate.someone-is-following-me,따라와요
+police-consulate.where-is-the-police-station,경찰서
+quick-directions.across-from-here,건너편
+quick-directions.go-straight,쭉
+quick-directions.on-the-left,왼쪽
+quick-directions.on-the-right,오른쪽
+quick-directions.this-way,이쪽
+quick-directions.turn-left,왼쪽
+quick-directions.turn-right,오른쪽
+room-problems.can-i-change-rooms,바꿀
+room-problems.please-send-someone,보내
+room-problems.the-air-conditioning-is-broken,에어컨
+room-problems.the-heating-does-not-work,난방
+room-problems.the-key-does-not-work,카드키
+room-problems.the-light-does-not-work,불
+room-problems.the-room-is-too-noisy,시끄러워요
+room-problems.the-toilet-will-not-flush,내려가요
+room-problems.there-is-a-problem-with-the-room,문제
+room-problems.there-is-no-hot-water,온수
+shopping.can-it-be-a-little-cheaper,싸게
+shopping.do-you-have-this-in-stock,재고
+shopping.how-much-is-this,얼마
+shopping.i-am-just-looking,그냥
+shopping.that-is-too-expensive,비싸요
+shopping.where-do-i-pay,계산
+taxi.can-you-wait-for-me-here,기다려
+taxi.could-you-make-it-colder,낮춰
+taxi.could-you-make-it-warmer,높여
+taxi.may-i-open-the-window,창문
+taxi.please-stop-here,세워
+taxi.please-take-me-here,여기로
+taxi.please-turn-around,유턴
+time-scheduling.can-we-change-the-time,바꿀
+time-scheduling.how-long-does-it-take,걸려요
+time-scheduling.what-day-is-it-today,요일
+time-scheduling.what-time-does-it-close,닫아요
+time-scheduling.what-time-does-it-open,열어요
+time-scheduling.what-time-should-we-meet,만날까요
+time-scheduling.when-is-convenient,좋으세요
+toilets.it-is-out-of-order,고장
+toilets.where-toilet,화장실
+trail-conditions.can-we-return-before-dark,해 지기 전
+trail-conditions.can-we-return-the-same-way,같은 길
+trail-conditions.how-long-is-the-full-route,전체 거리
+trail-conditions.is-the-path-slippery,미끄러워요
+trail-conditions.is-the-route-steep,가팔라요
+trail-conditions.is-the-trail-open,열려
+trail-transport.do-you-have-a-map,지도
+trail-transport.how-long-is-the-wait,기다려요
+trail-transport.is-there-cell-signal-here,휴대폰
+trail-transport.what-time-is-the-last-shuttle,막차 셔틀
+trail-transport.when-does-the-cableway-stop,케이블카
+trail-transport.where-can-we-buy-water,사요
+trail-transport.where-can-we-refill-water,채워요
+transit-rides.can-i-use-this-ticket,쓸
+transit-rides.do-i-need-to-transfer,환승
+transit-rides.do-i-need-to-validate,개찰
+transit-rides.i-went-past-my-stop,지났어요
+transit-rides.is-it-delayed,연착
+transit-rides.is-this-direct,바로
+transit-rides.please-tell-me-where-to-get-off,내릴
+transit-rides.two-tickets,표 | 두 장
+transit-rides.what-is-the-next-stop,다음 역
+transit-rides.what-time-is-the-next-one,다음 건
+transit-rides.where-do-i-pay-the-fare,요금
+transit-rides.where-is-the-subway-station,지하철역
+transit-rides.which-platform,승강장
+weather.how-cold-at-night,밤 | 추워요
+weather.is-it-safe-today,안전
+weather.will-it-rain,비

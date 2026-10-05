@@ -1,0 +1,317 @@
+concept_id,key
+about-me.i-am-a-doctor,médico | médica
+about-me.i-am-a-nurse,enfermeiro | enfermeira
+about-me.i-am-a-student,estudante
+about-me.i-am-a-teacher,professora | professor
+about-me.i-am-an-engineer,engenheiro | engenheira
+about-me.i-am-retired,reformado | reformada
+about-me.i-have-my-own-business,próprio negócio
+about-me.i-work-in-an-office,escritório
+accessibility.step-free,sem degraus
+air-travel.i-would-like-a-window-seat,janela
+air-travel.i-would-like-an-aisle-seat,coxia
+air-travel.my-luggage-did-not-arrive,não chegou
+air-travel.where-is-check-in,check-in
+air-travel.where-is-the-security-check,segurança
+air-travel.which-gate,porta de embarque
+attractions-tickets.are-there-lockers,cacifos
+attractions-tickets.could-you-take-a-photo-for-us,nos | foto
+attractions-tickets.do-i-need-a-reservation,reservar
+attractions-tickets.may-i-take-photos,fotografias
+attractions-tickets.what-is-the-latest-entry-time,última | entrada
+attractions-tickets.where-can-i-buy-tickets,bilhetes
+board-answers.after-food,Depois
+board-answers.at-the-next-stop,próxima paragem
+board-answers.before-food,Antes
+board-answers.can-you-walk,andar
+board-answers.help-is-coming,ajuda
+board-answers.how-many,Quantos
+board-answers.i-am-calling-an-ambulance,ambulância
+board-answers.i-am-calling-the-police,polícia
+board-answers.i-do-not-have-a-phone,telemóvel
+board-answers.i-will-check,verificar
+board-answers.i-will-find-someone,procurar alguém
+board-answers.i-will-show-you,mostrar
+board-answers.i-will-write-it-down,escrevê-lo
+board-answers.i-would-rather-not-say,não dizer
+board-answers.it-is-closed,fechado
+board-answers.it-is-free,grátis
+board-answers.it-is-over-there,ali
+board-answers.my-name-is-blank,Chamo
+board-answers.none-of-these,Nenhuma
+board-answers.not-possible,não é possível
+board-answers.only-for-customers,clientes
+board-answers.pay-on-board,a bordo
+board-answers.prescription-only,receita
+board-answers.see-a-doctor,médico
+board-answers.stay-here,ficar
+board-answers.the-hospital-is-close,hospital | perto
+board-answers.there-is-no-wait,Não há espera
+board-answers.we-are-full,cheio
+board-answers.we-do-not-have-it,Não temos
+board-answers.we-have-it,Temos
+board-answers.what-happened,aconteceu
+board-answers.what-is-your-name,chama
+board-answers.where-does-it-hurt,dói
+border-customs.here-is-my-passport,passaporte
+border-customs.i-am-here-for-business,negócios
+border-customs.i-am-visiting-family,familiares
+border-customs.i-have-a-connecting-flight,ligação
+border-customs.where-do-i-collect-my-baggage,recolho
+color-size-returns.do-you-have-a-bag,saco
+color-size-returns.do-you-have-another-size,tamanho
+color-size-returns.may-i-try-it-on,experimentar
+communication.can-you-help-me,ajudar
+communication.please-speak-more-slowly,devagar
+dietary-needs.does-it-contain-fish-stock,caldo de peixe
+dietary-needs.does-it-contain-pork-fat,banha de porco
+dietary-needs.does-it-contain-pork-stock,caldo de porco
+dietary-needs.i-am-vegan,vegano | vegana
+dietary-needs.i-am-vegetarian,vegetariano | vegetariana
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,ovos
+dietary-needs.no-meat,carne
+dietary-needs.no-nuts,frutos de casca rija
+dietary-needs.no-peanuts,amendoim
+dietary-needs.no-pork,porco
+dietary-needs.no-seafood,marisco | peixe
+dietary-needs.no-sesame,gergelim
+directions.can-i-walk-there,a pé
+directions.can-you-show-me-the-way,caminho
+directions.how-long-on-foot,Quanto tempo
+directions.is-it-far,longe
+directions.please-show-me-on-the-map,mapa
+emergency-medical.i-am-bleeding-badly,sangrar
+emergency-medical.i-am-having-a-severe-allergic-reaction,reação alérgica
+emergency-medical.i-am-injured,ferido | ferida
+emergency-medical.i-cannot-breathe,respirar
+emergency-medical.i-feel-unwell,mal
+emergency-medical.i-have-chest-pain,dor | peito
+emergency-medical.i-have-travel-insurance,seguro
+emergency-medical.i-need-a-doctor,médico
+emergency-medical.i-think-a-bone-is-broken,parti um osso
+emergency-medical.it-hurts-here,Dói
+emergency-medical.please-call-an-ambulance,ambulância
+emergency-medical.please-call-my-emergency-contact,contacto de emergência
+emergency-medical.please-take-me-to-a-hospital,hospital
+emergency-medical.this-is-an-emergency,emergência
+emergency-medical.this-person-is-unconscious,inconsciente
+emergency-medical.where-is-the-nearest-hospital,mais próximo
+family-intros.this-is-my-brother,irmão
+family-intros.this-is-my-colleague,colega
+family-intros.this-is-my-daughter,filha
+family-intros.this-is-my-father,pai
+family-intros.this-is-my-husband,marido
+family-intros.this-is-my-mother,mãe
+family-intros.this-is-my-partner,companheiro
+family-intros.this-is-my-sister,irmã
+family-intros.this-is-my-son,filho
+family-intros.this-is-my-wife,mulher
+food-ordering.i-want-this,Quero
+food-ordering.is-a-table-available,mesa livre
+food-ordering.is-this-vegetarian,vegetariano
+food-ordering.table-for-two,Mesa | dois
+food-ordering.to-go-please,levar
+food-ordering.what-do-you-recommend,recomenda
+hiking-parks.how-long-to-the-summit,cume
+hiking-parks.how-long-to-the-viewpoint,miradouro
+hiking-parks.is-this-trail-suitable-for-beginners,principiantes
+hiking-parks.where-is-the-trailhead,começa
+hiking-parks.which-route-is-easier,fácil
+hitchhiking.can-you-give-me-a-ride,boleia
+hitchhiking.i-can-pay-for-fuel,gasolina
+hitchhiking.i-only-need-to-go-to-the-next-town,próxima cidade
+hitchhiking.is-there-room-for-two,lugar | dois
+hitchhiking.thank-you-for-the-ride,Obrigado | Obrigada
+hitchhiking.where-are-you-going,Para onde
+hotel-basics.are-any-rooms-available,quartos
+hotel-basics.how-much-per-night,por noite
+hotel-basics.i-have-a-reservation,reserva
+hotel-basics.i-would-like-a-non-smoking-room,não fumadores
+hotel-basics.i-would-like-a-quiet-room,silencioso
+hotel-basics.is-breakfast-included,pequeno-almoço
+hotel-basics.is-there-a-washing-machine,máquina de lavar
+hotel-basics.is-there-air-conditioning,ar condicionado
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,ver
+hotel-requests.another-blanket,cobertor
+hotel-requests.another-night,mais uma noite
+hotel-requests.another-towel-please,toalha
+hotel-requests.can-i-check-in-early,mais cedo
+hotel-requests.can-i-check-out-later,mais tarde
+hotel-requests.can-i-store-my-luggage,bagagem
+hotel-requests.is-there-a-safe,cofre
+hotel-requests.no-housekeeping,limpar
+hotel-requests.what-time-does-breakfast-start,pequeno-almoço
+hotel-requests.what-time-is-check-out,check-out
+in-a-building.is-this-the-correct-entrance,certa
+introductions.i-am-a-tourist,turista
+introductions.i-am-from,Venho
+introductions.i-am-traveling-alone,sozinho | sozinha
+introductions.my-name-is,Chamo
+introductions.this-is-my-friend,amigo
+introductions.we-are-traveling-together,juntos
+introductions.what-is-your-name,chama
+introductions.where-are-you-from,De onde
+kind-words.i-had-a-wonderful-time,maravilhosos
+kind-words.i-like-it-very-much,Gosto
+kind-words.it-is-beautiful-here,lindo
+kind-words.thank-you-for-everything,tudo
+kind-words.thank-you-for-your-help,ajuda
+kind-words.thank-you-for-your-hospitality,hospitalidade
+kind-words.this-is-delicious,delicioso
+kind-words.you-are-very-kind,amável
+laundry.can-it-be-ready-today,hoje
+laundry.how-much-per-kilo,quilo
+laundry.please-do-not-use-bleach,lixívia
+laundry.please-iron-this,Passe | a ferro
+laundry.please-wash-these-clothes,Lave
+laundry.when-will-it-be-ready,Quando
+laundry.where-is-a-laundromat,lavandaria
+lost-rescue.i-do-not-know-where-i-am,onde estou
+lost-rescue.i-lost-my-bag,mala
+lost-rescue.i-lost-my-passport,passaporte
+lost-rescue.i-lost-my-phone,telemóvel
+lost-rescue.i-lost-my-wallet,carteira
+lost-rescue.my-child-is-missing,filho
+lost-rescue.please-call-the-police,polícia
+lost-rescue.we-are-here,aqui
+massage-spa.focus-on-back,costas
+massage-spa.focus-on-feet,pés
+massage-spa.focus-on-neck,pescoço
+massage-spa.focus-on-shoulders,ombros
+massage-spa.more-gently,suave
+massage-spa.please-avoid-this-area,Não carregue
+massage-spa.please-stop,Pare
+massage-spa.reply-ask-supervisor,responsável
+massage-spa.reply-cannot-avoid-this-treatment,não pode evitar
+massage-spa.reply-does-it-hurt-there,dói
+massage-spa.reply-i-will-avoid-that-area,vou evitar
+massage-spa.reply-which-area-exactly,Que zona
+massage-spa.stronger-pressure,mais pressão
+massage-spa.that-pressure-is-good,boa
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirina | ibuprofeno
+medical-conditions.i-am-allergic-to-penicillin,penicilina
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfamidas
+medical-conditions.i-am-diabetic,diabetes
+medical-conditions.i-am-pregnant,grávida
+medical-conditions.i-carry-an-adrenaline-injector,adrenalina
+medical-conditions.i-have-a-heart-condition,cardíaco
+medical-conditions.i-have-asthma,asma
+medical-conditions.i-have-epilepsy,epilepsia
+medical-conditions.i-need-insulin,insulina
+medical-conditions.i-need-my-inhaler,inalador
+medical-conditions.i-take-blood-thinners,anticoagulantes
+medical-conditions.inject-it-into-my-outer-thigh,coxa
+medical-conditions.my-blood-sugar-is-low,açúcar | baixo
+medical-conditions.my-injector-is-in-my-bag,caneta | mala
+medical-conditions.please-give-me-sugar-or-juice,açúcar | sumo
+medical-conditions.this-card-lists-my-conditions,cartão
+medical-conditions.this-is-my-medicine,medicamento
+outdoors.are-there-dangerous-animals-here,animais perigosos
+outdoors.can-we-camp-here,acampar
+outdoors.is-it-safe-to-swim-here,nadar
+payment-receipt.can-we-pay-separately,separado
+payment-receipt.how-much-in-total,ao todo
+payment-receipt.is-tax-included,IVA
+payment-receipt.my-card-was-declined,recusado
+payment-receipt.pay-by-card,cartão
+payment-receipt.the-bill-is-wrong,conta | errada
+pharmacy-symptoms.before-or-after-food,refeições
+pharmacy-symptoms.can-i-get-this-medicine-here,medicamento
+pharmacy-symptoms.cough-medicine,tosse
+pharmacy-symptoms.do-i-need-a-prescription,receita
+pharmacy-symptoms.how-many-times-a-day,vezes por dia
+pharmacy-symptoms.how-much-should-i-take,quantidade
+pharmacy-symptoms.i-am-vomiting,vomitar
+pharmacy-symptoms.i-feel-dizzy,tonturas
+pharmacy-symptoms.i-feel-nauseous,náuseas
+pharmacy-symptoms.i-have-a-burn,queimadura
+pharmacy-symptoms.i-have-a-cough,tosse
+pharmacy-symptoms.i-have-a-cut,corte
+pharmacy-symptoms.i-have-a-fever,febre
+pharmacy-symptoms.i-have-a-headache,cabeça
+pharmacy-symptoms.i-have-a-rash,erupção
+pharmacy-symptoms.i-have-a-sore-throat,garganta
+pharmacy-symptoms.i-have-a-stomach-ache,barriga
+pharmacy-symptoms.i-have-diarrhea,diarreia
+pharmacy-symptoms.i-think-it-is-infected,infetado
+pharmacy-symptoms.is-this-safe-during-pregnancy,gravidez
+pharmacy-symptoms.motion-sickness-tablets,enjoo
+pharmacy-symptoms.rehydration-salts,reidratação
+pharmacy-symptoms.the-pain-is-severe,dor | forte
+pharmacy-symptoms.which-pharmacy-is-open-now,aberta agora
+police-consulate.i-need-an-interpreter,intérprete
+police-consulate.i-want-to-contact-my-embassy,embaixada
+police-consulate.i-want-to-report-a-theft,denunciar
+police-consulate.my-bag-was-stolen,Roubaram
+police-consulate.someone-is-following-me,seguir
+police-consulate.where-is-the-police-station,esquadra
+quick-directions.go-straight,em frente
+quick-directions.on-the-left,esquerda
+quick-directions.on-the-right,direita
+quick-directions.turn-left,esquerda
+quick-directions.turn-right,direita
+room-problems.can-i-change-rooms,mudar
+room-problems.please-send-someone,mandar alguém
+room-problems.the-air-conditioning-is-broken,ar condicionado
+room-problems.the-heating-does-not-work,aquecimento
+room-problems.the-key-does-not-work,cartão
+room-problems.the-light-does-not-work,luz
+room-problems.the-room-is-too-noisy,barulhento
+room-problems.the-toilet-will-not-flush,autoclismo
+room-problems.there-is-a-problem-with-the-room,problema
+room-problems.there-is-no-hot-water,água quente
+shopping.can-it-be-a-little-cheaper,barato
+shopping.do-you-have-this-in-stock,em stock
+shopping.how-much-is-this,custa
+shopping.i-am-just-looking,só a ver
+shopping.i-will-take-this,Levo
+shopping.that-is-too-expensive,caro
+shopping.where-do-i-pay,paga
+taxi.can-you-wait-for-me-here,esperar
+taxi.could-you-make-it-colder,frio
+taxi.could-you-make-it-warmer,quente
+taxi.may-i-open-the-window,janela
+taxi.please-stop-here,Pare
+taxi.please-take-me-here,Leve-me
+taxi.please-turn-around,volta
+time-scheduling.can-we-change-the-time,mudar
+time-scheduling.how-long-does-it-take,demora
+time-scheduling.what-day-is-it-today,dia
+time-scheduling.what-time-does-it-close,fecha
+time-scheduling.what-time-does-it-open,abre
+time-scheduling.what-time-is-it,horas
+time-scheduling.what-time-should-we-meet,encontramos
+time-scheduling.when-is-convenient,melhor
+toilets.it-is-out-of-order,avariado
+toilets.where-toilet,casa de banho
+trail-conditions.can-we-return-before-dark,escurecer
+trail-conditions.can-we-return-the-same-way,mesmo caminho
+trail-conditions.how-long-is-the-full-route,percurso todo
+trail-conditions.is-the-path-slippery,escorregadio
+trail-conditions.is-the-route-steep,íngreme
+trail-conditions.is-the-trail-open,aberto
+trail-transport.do-you-have-a-map,mapa
+trail-transport.how-long-is-the-wait,espera
+trail-transport.is-there-cell-signal-here,rede
+trail-transport.what-time-is-the-last-shuttle,último autocarro
+trail-transport.when-does-the-cableway-stop,teleférico
+trail-transport.where-can-we-buy-water,comprar água
+trail-transport.where-can-we-refill-water,encher
+transit-rides.can-i-use-this-ticket,usar
+transit-rides.do-i-need-to-transfer,transbordo
+transit-rides.do-i-need-to-validate,validar
+transit-rides.i-am-in-a-hurry,pressa
+transit-rides.i-went-past-my-stop,Passei
+transit-rides.is-it-delayed,atrasado
+transit-rides.is-this-direct,direto
+transit-rides.please-tell-me-where-to-get-off,sair
+transit-rides.what-is-the-next-stop,próxima paragem
+transit-rides.what-time-is-the-next-one,próximo
+transit-rides.where-do-i-pay-the-fare,passagem
+transit-rides.where-is-the-subway-station,metro
+transit-rides.which-platform,plataforma
+weather.how-cold-at-night,frio | noite
+weather.is-it-safe-today,seguro
+weather.will-it-rain,chover

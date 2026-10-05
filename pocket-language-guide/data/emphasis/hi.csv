@@ -1,0 +1,322 @@
+concept_id,key
+about-me.i-am-a-doctor,डॉक्टर
+about-me.i-am-a-nurse,नर्स
+about-me.i-am-a-student,छात्रा | छात्र
+about-me.i-am-a-teacher,शिक्षक | शिक्षिका
+about-me.i-am-an-engineer,इंजीनियर
+about-me.i-am-retired,सेवानिवृत्त
+about-me.i-have-my-own-business,अपना व्यापार
+about-me.i-work-in-an-office,दफ़्तर
+accessibility.step-free,बिना सीढ़ी
+air-travel.i-would-like-a-window-seat,खिड़की
+air-travel.i-would-like-an-aisle-seat,गलियारे
+air-travel.my-luggage-did-not-arrive,नहीं आया
+air-travel.where-is-check-in,चेक-इन
+air-travel.where-is-the-security-check,सुरक्षा जाँच
+air-travel.which-gate,गेट
+attractions-tickets.are-there-lockers,लॉकर
+attractions-tickets.could-you-take-a-photo-for-us,हमारी
+attractions-tickets.do-i-need-a-reservation,बुकिंग
+attractions-tickets.may-i-take-photos,फ़ोटो
+attractions-tickets.what-is-the-latest-entry-time,आखिरी समय
+attractions-tickets.where-can-i-buy-tickets,टिकट
+board-answers.after-food,बाद
+board-answers.at-the-next-stop,अगले स्टॉप
+board-answers.before-food,पहले
+board-answers.can-you-walk,चलना
+board-answers.help-is-coming,मदद
+board-answers.how-many,कितने
+board-answers.i-am-calling-an-ambulance,एंबुलेंस
+board-answers.i-am-calling-the-police,पुलिस
+board-answers.i-do-not-have-a-phone,फ़ोन
+board-answers.i-will-check,देख
+board-answers.i-will-find-someone,कोई मिल जाएगा
+board-answers.i-will-show-you,दिखाना
+board-answers.i-will-write-it-down,लिख
+board-answers.i-would-rather-not-say,न बताऊँ
+board-answers.it-is-closed,बंद
+board-answers.it-is-free,मुफ़्त
+board-answers.it-is-over-there,वहाँ
+board-answers.my-name-is-blank,मेरा नाम
+board-answers.none-of-these,इनमें
+board-answers.not-possible,नहीं हो सकता
+board-answers.only-for-customers,ग्राहकों
+board-answers.pay-on-board,गाड़ी में
+board-answers.prescription-only,पर्चे
+board-answers.see-a-doctor,डॉक्टर
+board-answers.stay-here,रुकना
+board-answers.the-hospital-is-close,पास ही
+board-answers.there-is-no-wait,इंतज़ार नहीं
+board-answers.we-are-full,जगह नहीं
+board-answers.what-is-your-name,नाम
+board-answers.where-does-it-hurt,दर्द
+border-customs.here-is-my-passport,पासपोर्ट
+border-customs.i-am-here-for-business,काम
+border-customs.i-am-visiting-family,परिवार
+border-customs.i-have-a-connecting-flight,आगे की फ़्लाइट
+border-customs.where-do-i-collect-my-baggage,मिलेगा
+color-size-returns.do-you-have-a-bag,थैली
+color-size-returns.do-you-have-another-size,साइज़
+color-size-returns.may-i-try-it-on,पहन
+common-signs.no-photography,मना
+communication.can-you-help-me,मदद
+communication.do-you-speak-english,आपको
+communication.i-do-not-speak-this-language,नहीं आती
+communication.i-do-not-understand,समझ नहीं
+communication.please-speak-more-slowly,धीरे
+dietary-needs.does-it-contain-fish-stock,मछली का शोरबा
+dietary-needs.does-it-contain-pork-fat,सूअर की चर्बी
+dietary-needs.does-it-contain-pork-stock,सूअर का शोरबा
+dietary-needs.i-am-vegan,वीगन
+dietary-needs.i-am-vegetarian,शाकाहारी
+dietary-needs.is-this-halal,हलाल
+dietary-needs.no-eggs,अंडा
+dietary-needs.no-meat,मांस
+dietary-needs.no-nuts,मेवे
+dietary-needs.no-peanuts,मूंगफली
+dietary-needs.no-pork,सूअर
+dietary-needs.no-seafood,मछली | झींगा
+dietary-needs.no-sesame,तिल
+directions.can-i-walk-there,जाने लायक
+directions.can-you-show-me-the-way,रास्ता
+directions.how-long-on-foot,कितनी देर
+directions.is-it-far,दूर
+directions.please-show-me-on-the-map,नक्शे
+emergency-medical.i-am-bleeding-badly,खून
+emergency-medical.i-am-having-a-severe-allergic-reaction,गंभीर एलर्जी
+emergency-medical.i-am-injured,घायल
+emergency-medical.i-cannot-breathe,साँस
+emergency-medical.i-feel-unwell,ठीक नहीं
+emergency-medical.i-have-chest-pain,सीने
+emergency-medical.i-have-travel-insurance,बीमा
+emergency-medical.i-need-a-doctor,डॉक्टर
+emergency-medical.i-think-a-bone-is-broken,हड्डी टूट
+emergency-medical.it-hurts-here,दर्द
+emergency-medical.please-call-an-ambulance,एंबुलेंस
+emergency-medical.please-call-my-emergency-contact,इमरजेंसी नंबर
+emergency-medical.please-take-me-to-a-hospital,अस्पताल
+emergency-medical.this-is-an-emergency,इमरजेंसी
+emergency-medical.this-person-is-unconscious,बेहोश
+emergency-medical.where-is-the-nearest-hospital,सबसे नज़दीकी
+family-intros.this-is-my-brother,भाई
+family-intros.this-is-my-colleague,सहकर्मी
+family-intros.this-is-my-daughter,बेटी
+family-intros.this-is-my-father,पिता
+family-intros.this-is-my-husband,पति
+family-intros.this-is-my-mother,माँ
+family-intros.this-is-my-partner,जीवनसाथी
+family-intros.this-is-my-sister,बहन
+family-intros.this-is-my-son,बेटा
+family-intros.this-is-my-wife,पत्नी
+food-ordering.i-want-this,चाहिए
+food-ordering.is-a-table-available,टेबल खाली
+food-ordering.is-this-vegetarian,शाकाहारी
+food-ordering.table-for-two,दो लोगों
+food-ordering.to-go-please,पैक
+food-ordering.what-do-you-recommend,अच्छा
+hiking-parks.how-long-to-the-summit,चोटी
+hiking-parks.how-long-to-the-viewpoint,व्यू पॉइंट
+hiking-parks.is-this-trail-suitable-for-beginners,नए लोगों
+hiking-parks.where-is-the-trailhead,शुरू
+hiking-parks.which-route-is-easier,आसान
+hitchhiking.can-you-give-me-a-ride,लिफ़्ट
+hitchhiking.i-can-pay-for-fuel,पेट्रोल
+hitchhiking.i-only-need-to-go-to-the-next-town,अगले शहर
+hitchhiking.is-there-room-for-two,दो लोगों | जगह
+hitchhiking.thank-you-for-the-ride,धन्यवाद
+hitchhiking.where-are-you-going,कहाँ
+hotel-basics.are-any-rooms-available,कमरा
+hotel-basics.how-much-per-night,एक रात
+hotel-basics.i-have-a-reservation,बुकिंग
+hotel-basics.i-would-like-a-non-smoking-room,नो-स्मोकिंग
+hotel-basics.i-would-like-a-quiet-room,शांत
+hotel-basics.is-breakfast-included,नाश्ता
+hotel-basics.is-there-a-washing-machine,वॉशिंग मशीन
+hotel-basics.is-there-air-conditioning,एसी
+hotel-basics.is-wi-fi-free,वाई-फ़ाई
+hotel-basics.may-i-see-the-room,देख
+hotel-requests.another-blanket,कंबल
+hotel-requests.another-night,एक रात और
+hotel-requests.another-towel-please,तौलिया
+hotel-requests.can-i-check-in-early,जल्दी
+hotel-requests.can-i-check-out-later,देर से
+hotel-requests.can-i-store-my-luggage,सामान
+hotel-requests.is-there-a-safe,लॉकर
+hotel-requests.no-housekeeping,सफ़ाई
+hotel-requests.what-time-does-breakfast-start,नाश्ता
+hotel-requests.what-time-is-check-out,चेक-आउट
+in-a-building.is-this-the-correct-entrance,सही
+introductions.i-am-a-tourist,पर्यटक
+introductions.i-am-traveling-alone,अकेले
+introductions.my-name-is,मेरा नाम
+introductions.this-is-my-friend,दोस्त
+introductions.we-are-traveling-together,साथ
+introductions.what-is-your-name,आपका नाम
+introductions.where-are-you-from,कहाँ से
+kind-words.i-had-a-wonderful-time,अच्छा समय
+kind-words.i-like-it-very-much,पसंद
+kind-words.it-is-beautiful-here,सुंदर
+kind-words.thank-you-for-everything,सबके
+kind-words.thank-you-for-your-help,मदद
+kind-words.thank-you-for-your-hospitality,आतिथ्य
+kind-words.this-is-delicious,स्वादिष्ट
+kind-words.you-are-very-kind,दयालु
+laundry.can-it-be-ready-today,आज
+laundry.how-much-per-kilo,एक किलो
+laundry.please-do-not-use-bleach,ब्लीच
+laundry.please-iron-this,प्रेस
+laundry.please-wash-these-clothes,धुलवा
+laundry.when-will-it-be-ready,कब
+laundry.where-is-a-laundromat,लॉन्ड्री
+lost-rescue.i-do-not-know-where-i-am,मैं कहाँ हूँ
+lost-rescue.i-lost-my-bag,बैग
+lost-rescue.i-lost-my-passport,पासपोर्ट
+lost-rescue.i-lost-my-phone,फ़ोन
+lost-rescue.i-lost-my-wallet,बटुआ
+lost-rescue.my-child-is-missing,बच्चा
+lost-rescue.please-call-the-police,पुलिस
+lost-rescue.we-are-here,यहाँ
+massage-spa.focus-on-back,पीठ
+massage-spa.focus-on-feet,पैरों
+massage-spa.focus-on-neck,गर्दन
+massage-spa.focus-on-shoulders,कंधों
+massage-spa.more-gently,हल्के
+massage-spa.please-avoid-this-area,न कीजिए
+massage-spa.please-pause,थोड़ी देर
+massage-spa.please-stop,रोक
+massage-spa.reply-ask-supervisor,मैनेजर
+massage-spa.reply-cannot-avoid-this-treatment,छोड़ा नहीं जा सकता
+massage-spa.reply-does-it-hurt-there,दर्द
+massage-spa.reply-i-will-avoid-that-area,हाथ नहीं लगाना
+massage-spa.reply-which-area-exactly,कौन सा हिस्सा
+massage-spa.stronger-pressure,ज़ोर से
+massage-spa.that-pressure-is-good,ठीक
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,एस्पिरिन | आइबुप्रोफ़ेन
+medical-conditions.i-am-allergic-to-penicillin,पेनिसिलिन
+medical-conditions.i-am-allergic-to-sulfa-drugs,सल्फ़ा
+medical-conditions.i-am-diabetic,डायबिटीज़
+medical-conditions.i-am-pregnant,गर्भवती
+medical-conditions.i-carry-an-adrenaline-injector,एड्रेनालिन
+medical-conditions.i-have-a-heart-condition,दिल
+medical-conditions.i-have-asthma,दमा
+medical-conditions.i-have-epilepsy,मिर्गी
+medical-conditions.i-need-insulin,इंसुलिन
+medical-conditions.i-need-my-inhaler,इनहेलर
+medical-conditions.i-take-blood-thinners,खून पतला
+medical-conditions.inject-it-into-my-outer-thigh,जाँघ
+medical-conditions.my-blood-sugar-is-low,शुगर कम
+medical-conditions.my-injector-is-in-my-bag,इंजेक्टर | बैग
+medical-conditions.please-give-me-sugar-or-juice,चीनी | जूस
+medical-conditions.this-card-lists-my-conditions,कार्ड
+medical-conditions.this-is-my-medicine,दवा
+outdoors.are-there-dangerous-animals-here,खतरनाक जानवर
+outdoors.can-we-camp-here,कैंप
+outdoors.is-it-safe-to-swim-here,तैरना
+payment-receipt.can-we-pay-separately,अलग-अलग
+payment-receipt.how-much-in-total,कुल
+payment-receipt.i-already-paid,दे दिए
+payment-receipt.is-tax-included,टैक्स
+payment-receipt.my-card-was-declined,नहीं चला
+payment-receipt.pay-by-card,कार्ड
+payment-receipt.the-bill-is-wrong,गलती
+pharmacy-symptoms.antacid,एसिडिटी
+pharmacy-symptoms.anti-diarrhea-medicine,दस्त
+pharmacy-symptoms.antihistamine,एलर्जी
+pharmacy-symptoms.before-or-after-food,खाने
+pharmacy-symptoms.can-i-get-this-medicine-here,दवा
+pharmacy-symptoms.cough-medicine,खाँसी
+pharmacy-symptoms.do-i-need-a-prescription,पर्चा
+pharmacy-symptoms.how-many-times-a-day,कितनी बार
+pharmacy-symptoms.how-much-should-i-take,खुराक
+pharmacy-symptoms.i-am-vomiting,उल्टी
+pharmacy-symptoms.i-feel-dizzy,चक्कर
+pharmacy-symptoms.i-feel-nauseous,जी मिचला
+pharmacy-symptoms.i-have-a-burn,जल गया
+pharmacy-symptoms.i-have-a-cough,खाँसी
+pharmacy-symptoms.i-have-a-cut,कट
+pharmacy-symptoms.i-have-a-fever,बुखार
+pharmacy-symptoms.i-have-a-headache,सिर
+pharmacy-symptoms.i-have-a-rash,रैश
+pharmacy-symptoms.i-have-a-sore-throat,गला
+pharmacy-symptoms.i-have-a-stomach-ache,पेट
+pharmacy-symptoms.i-have-diarrhea,दस्त
+pharmacy-symptoms.i-think-it-is-infected,इन्फ़ेक्शन
+pharmacy-symptoms.is-this-safe-during-pregnancy,गर्भावस्था
+pharmacy-symptoms.motion-sickness-tablets,उल्टी
+pharmacy-symptoms.painkiller,दर्द
+pharmacy-symptoms.the-pain-is-severe,दर्द | तेज़
+pharmacy-symptoms.which-pharmacy-is-open-now,अभी | खुली
+police-consulate.i-need-an-interpreter,दुभाषिया
+police-consulate.i-want-to-contact-my-embassy,दूतावास
+police-consulate.i-want-to-report-a-theft,रिपोर्ट
+police-consulate.my-bag-was-stolen,चोरी
+police-consulate.someone-is-following-me,पीछा
+police-consulate.where-is-the-police-station,पुलिस स्टेशन
+quick-directions.across-from-here,उस पार
+quick-directions.go-straight,सीधे
+quick-directions.on-the-left,बाईं
+quick-directions.on-the-right,दाईं
+quick-directions.turn-left,बाएँ
+quick-directions.turn-right,दाएँ
+room-problems.can-i-change-rooms,बदला
+room-problems.please-send-someone,भेजिए
+room-problems.the-air-conditioning-is-broken,एसी
+room-problems.the-heating-does-not-work,हीटर
+room-problems.the-key-does-not-work,चाबी
+room-problems.the-light-does-not-work,बत्ती
+room-problems.the-room-is-too-noisy,शोर
+room-problems.the-toilet-will-not-flush,फ़्लश
+room-problems.there-is-a-problem-with-the-room,दिक्कत
+room-problems.there-is-no-hot-water,गरम पानी
+shopping.can-it-be-a-little-cheaper,कम
+shopping.do-you-have-this-in-stock,स्टॉक
+shopping.how-much-is-this,कितने का
+shopping.i-am-just-looking,बस देखना
+shopping.i-will-take-this,लेना
+shopping.that-is-too-expensive,महंगा
+shopping.where-do-i-pay,पैसे
+social-basics.i-do-not-know,नहीं पता
+taxi.can-you-wait-for-me-here,रुक
+taxi.could-you-make-it-colder,तेज़
+taxi.could-you-make-it-warmer,कम
+taxi.may-i-open-the-window,खिड़की
+taxi.please-stop-here,रोक
+taxi.please-take-me-here,ले चलिए
+taxi.please-turn-around,यू-टर्न
+time-scheduling.can-we-change-the-time,बदला
+time-scheduling.how-long-does-it-take,समय
+time-scheduling.what-day-is-it-today,दिन
+time-scheduling.what-time-does-it-close,बंद
+time-scheduling.what-time-does-it-open,खुलता
+time-scheduling.what-time-should-we-meet,मिलें
+time-scheduling.when-is-convenient,ठीक रहेगा
+toilets.it-is-out-of-order,खराब
+toilets.where-toilet,बाथरूम
+trail-conditions.can-we-return-before-dark,अंधेरे से पहले
+trail-conditions.can-we-return-the-same-way,इसी रास्ते
+trail-conditions.how-long-is-the-full-route,पूरा रास्ता
+trail-conditions.is-the-path-slippery,फिसलन
+trail-conditions.is-the-route-steep,चढ़ाई तेज़
+trail-conditions.is-the-trail-open,खुला
+trail-transport.do-you-have-a-map,नक्शा
+trail-transport.how-long-is-the-wait,देर
+trail-transport.is-there-cell-signal-here,सिग्नल
+trail-transport.what-time-is-the-last-shuttle,आखिरी शटल
+trail-transport.when-does-the-cableway-stop,रोपवे
+trail-transport.where-can-we-buy-water,पानी
+trail-transport.where-can-we-refill-water,पानी भरने
+transit-rides.can-i-use-this-ticket,चलेगा
+transit-rides.do-i-need-to-transfer,बदलनी
+transit-rides.do-i-need-to-validate,पंच
+transit-rides.i-am-in-a-hurry,जल्दी
+transit-rides.i-went-past-my-stop,निकल गया
+transit-rides.is-it-delayed,देर से
+transit-rides.is-this-direct,सीधी
+transit-rides.please-tell-me-where-to-get-off,उतरना
+transit-rides.what-is-the-next-stop,अगला स्टॉप
+transit-rides.what-time-is-the-next-one,अगली
+transit-rides.where-do-i-pay-the-fare,किराया
+transit-rides.where-is-the-subway-station,मेट्रो
+weather.how-cold-at-night,रात | ठंड
+weather.is-it-safe-today,सुरक्षित
+weather.will-it-rain,बारिश
