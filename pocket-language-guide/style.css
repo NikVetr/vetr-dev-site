@@ -1758,6 +1758,13 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   max-width: 9em; overflow-wrap: break-word;
 }
 .segment.current .segment-caption { color: var(--accent); font-weight: 600; }
+/* The same words again in the chosen weight, unseen and with no height, so a caption
+   is as wide in regular as it will be in bold and choosing a segment cannot widen it
+   and reflow its row. `setCaption` in `ui/glyphs.js` keeps `data-text` in step. */
+.segment-caption::after {
+  content: attr(data-text); display: block; block-size: 0; overflow: hidden;
+  visibility: hidden; font-weight: 600;
+}
 /* A fact rather than a name, so it is set apart from the caption and stays a fact
    when the caption goes bold on selection. Tabular figures because these are read
    against each other -- 2.17:1 and 2.22:1 differ in one digit. */

@@ -16,7 +16,7 @@ import {
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl, foldControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
-  headControl,
+  headControl, setCaption,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
@@ -794,9 +794,9 @@ export function createFormatPanel(input) {
       setFinishable(resolvedFaces ?? next.geometry.faces);
       // Auto is only useful if it says what it decided.
       if (autoFacesCaption) {
-        autoFacesCaption.textContent = next.autoFaces && resolvedFaces
+        setCaption(autoFacesCaption, next.autoFaces && resolvedFaces
           ? t('format.faces.autoResolved', { faces: resolvedFaces })
-          : t('format.faces.auto');
+          : t('format.faces.auto'));
       }
       typefaceControl.select(next.typeface);
       typeSize.select(next.scale);

@@ -553,6 +553,21 @@ export function fieldGlyph(field, sample) {
 }
 
 /**
+ * Write a segment's caption.
+ *
+ * The words go in twice: as the caption, and in `data-text`, which `style.css` sets
+ * again unseen and with no height in the bold a chosen caption takes. So every
+ * caption is already as wide as its bold, and choosing a segment cannot widen it --
+ * "Phone screen" grew ten pixels in bold, and in a full row that was enough to push
+ * the last segment onto a line of its own.
+ * @param {Element} caption @param {string} text
+ */
+export function setCaption(caption, text) {
+  caption.textContent = text;
+  /** @type {HTMLElement} */ (caption).dataset.text = text;
+}
+
+/**
  * One glyph button: the icon, the caption underneath, and an optional tooltip.
  * Shared by the radio group and the multi-select group below, which differ only in
  * their ARIA role and in whether choosing one clears the others.
@@ -574,7 +589,7 @@ function glyphButton(option, role) {
   button.append(option.glyph);
   const caption = document.createElement('span');
   caption.className = 'segment-caption';
-  caption.textContent = option.caption;
+  setCaption(caption, option.caption);
   button.append(caption);
   if (option.sub) {
     const sub = document.createElement('span');
@@ -1186,7 +1201,7 @@ export function relabelGlyphs(group, labels) {
     const label = labels[i];
     if (!label) return;
     const caption = button.querySelector('.segment-caption');
-    if (caption) caption.textContent = label.caption;
+    if (caption) setCaption(caption, label.caption);
     if (label.title) /** @type {HTMLElement} */ (button).title = label.title;
   });
 }

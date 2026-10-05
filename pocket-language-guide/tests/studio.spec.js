@@ -913,6 +913,24 @@ test('a dark card is the Dark palette, and it darkens the card, not the app', as
   await expect.poll(darkPaper, { timeout: 60_000 }).toBe(false);
 });
 
+test('choosing a segment does not widen it, so its row cannot reflow', async ({ page }) => {
+  // A chosen caption goes bold, and bold is wider: "Phone screen" grew ten pixels
+  // when picked, which in a full row pushed the last segment onto a line of its own.
+  // Every caption now carries its bold width unseen, so no segment changes size.
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const cards = page.getByRole('radiogroup', { name: 'Card size' });
+  const boxes = () => cards.locator(':scope > .segment').evaluateAll(
+    (all) => all.map((b) => { const r = b.getBoundingClientRect(); return [r.width, r.top]; }),
+  );
+  const before = await boxes();
+  for (const name of ['Phone screen', 'Credit card']) {
+    await cards.getByRole('radio', { name, exact: true }).click();
+    await expect(cards.getByRole('radio', { name, exact: true })).toHaveAttribute('aria-checked', 'true');
+    expect(await boxes(), `after choosing ${name}`).toEqual(before);
+  }
+});
+
 test('a folded card\'s size can be the folded card or the unfolded sheet', async ({ page }) => {
   // Bifold used to mean one thing: the size chosen is the folded card, and the sheet
   // is twice as wide. The reader can now say the size is the unfolded sheet instead.
