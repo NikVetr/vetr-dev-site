@@ -1,0 +1,309 @@
+concept_id,key
+about-me.i-am-a-doctor,doctor
+about-me.i-am-a-nurse,nurse
+about-me.i-am-a-student,student
+about-me.i-am-a-teacher,teacher
+about-me.i-am-an-engineer,engineer
+about-me.i-am-retired,retired
+about-me.i-have-my-own-business,own business
+about-me.i-work-in-an-office,office
+accessibility.step-free,step-free
+air-travel.i-would-like-a-window-seat,window
+air-travel.i-would-like-an-aisle-seat,aisle
+air-travel.my-luggage-did-not-arrive,luggage | not arrive
+air-travel.where-is-check-in,check-in
+air-travel.where-is-the-security-check,security
+attractions-tickets.are-there-lockers,lockers
+attractions-tickets.could-you-take-a-photo-for-us,photo for us
+attractions-tickets.do-i-need-a-reservation,reservation
+attractions-tickets.may-i-take-photos,photos
+attractions-tickets.what-is-the-latest-entry-time,latest entry
+attractions-tickets.where-can-i-buy-tickets,tickets
+board-answers.at-the-next-stop,next stop
+board-answers.can-you-walk,walk
+board-answers.help-is-coming,Help
+board-answers.i-am-calling-an-ambulance,ambulance
+board-answers.i-am-calling-the-police,police
+board-answers.i-do-not-have-a-phone,phone
+board-answers.i-will-check,check
+board-answers.i-will-find-someone,find someone
+board-answers.i-will-show-you,show
+board-answers.i-will-write-it-down,write
+board-answers.i-would-rather-not-say,rather not say
+board-answers.it-does-not-matter,not matter
+board-answers.it-is-closed,closed
+board-answers.it-is-free,free
+board-answers.it-is-over-there,over there
+board-answers.my-name-is-blank,My name
+board-answers.none-of-these,None of these
+board-answers.not-possible,not possible
+board-answers.only-for-customers,customers
+board-answers.pay-on-board,on board
+board-answers.please-wait,moment
+board-answers.prescription-only,prescription
+board-answers.see-a-doctor,doctor
+board-answers.stay-here,Staying here
+board-answers.the-hospital-is-close,hospital | close by
+board-answers.there-is-no-wait,no wait
+board-answers.we-are-full,full
+board-answers.we-do-not-have-it,not have
+board-answers.we-have-it,have
+board-answers.what-is-your-name,name
+board-answers.where-does-it-hurt,hurt
+border-customs.here-is-my-passport,passport
+border-customs.i-am-here-for-business,business
+border-customs.i-am-visiting-family,family
+border-customs.i-have-a-connecting-flight,connecting flight
+border-customs.where-do-i-collect-my-baggage,baggage
+color-size-returns.do-you-have-a-bag,bag
+color-size-returns.do-you-have-another-size,size
+color-size-returns.may-i-try-it-on,try it on
+communication.can-you-help-me,help
+communication.do-you-speak-english,speak
+communication.i-do-not-speak-this-language,not speak
+communication.i-do-not-understand,not understand
+communication.please-speak-more-slowly,slowly
+communication.please-write-it-down,write
+dietary-needs.does-it-contain-fish-stock,fish stock
+dietary-needs.does-it-contain-pork-fat,pork fat
+dietary-needs.does-it-contain-pork-stock,pork stock
+dietary-needs.i-am-vegan,vegan
+dietary-needs.i-am-vegetarian,vegetarian
+dietary-needs.is-this-halal,halal
+directions.can-i-walk-there,walk
+directions.can-you-show-me-the-way,way
+directions.how-long-on-foot,on foot
+directions.is-it-far,far
+directions.please-show-me-on-the-map,map
+emergency-medical.i-am-bleeding-badly,bleeding
+emergency-medical.i-am-having-a-severe-allergic-reaction,allergic reaction
+emergency-medical.i-am-injured,injured
+emergency-medical.i-cannot-breathe,breathe
+emergency-medical.i-feel-unwell,unwell
+emergency-medical.i-have-chest-pain,chest pain
+emergency-medical.i-have-travel-insurance,insurance
+emergency-medical.i-need-a-doctor,doctor
+emergency-medical.i-think-a-bone-is-broken,bone | broken
+emergency-medical.it-hurts-here,hurts
+emergency-medical.please-call-an-ambulance,ambulance
+emergency-medical.please-call-my-emergency-contact,emergency contact
+emergency-medical.please-take-me-to-a-hospital,hospital
+emergency-medical.this-is-an-emergency,emergency
+emergency-medical.this-person-is-unconscious,unconscious
+emergency-medical.where-is-the-nearest-hospital,nearest hospital
+family-intros.this-is-my-brother,brother
+family-intros.this-is-my-colleague,colleague
+family-intros.this-is-my-daughter,daughter
+family-intros.this-is-my-father,father
+family-intros.this-is-my-husband,husband
+family-intros.this-is-my-mother,mother
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,sister
+family-intros.this-is-my-son,son
+family-intros.this-is-my-wife,wife
+food-ordering.i-want-this,want
+food-ordering.is-a-table-available,table
+food-ordering.is-this-vegetarian,vegetarian
+food-ordering.table-for-two,Table | two
+food-ordering.to-go-please,To go
+food-ordering.what-do-you-recommend,recommend
+hiking-parks.how-long-to-the-summit,summit
+hiking-parks.how-long-to-the-viewpoint,viewpoint
+hiking-parks.is-this-trail-suitable-for-beginners,beginners
+hiking-parks.where-is-the-trailhead,trailhead
+hiking-parks.which-route-is-easier,easier
+hitchhiking.can-you-give-me-a-ride,ride
+hitchhiking.i-can-pay-for-fuel,fuel
+hitchhiking.i-only-need-to-go-to-the-next-town,next town
+hitchhiking.is-there-room-for-two,room | two
+hitchhiking.thank-you-for-the-ride,Thank you
+hitchhiking.where-are-you-going,going
+hotel-basics.are-any-rooms-available,rooms
+hotel-basics.how-much-per-night,per night
+hotel-basics.i-have-a-reservation,reservation
+hotel-basics.i-would-like-a-non-smoking-room,non-smoking
+hotel-basics.i-would-like-a-quiet-room,quiet
+hotel-basics.is-breakfast-included,breakfast
+hotel-basics.is-there-a-washing-machine,washing machine
+hotel-basics.is-there-air-conditioning,air conditioning
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,see the room
+hotel-requests.another-blanket,blanket
+hotel-requests.another-night,another night
+hotel-requests.another-towel-please,towel
+hotel-requests.can-i-check-in-early,check in early
+hotel-requests.can-i-check-out-later,check out later
+hotel-requests.can-i-store-my-luggage,luggage
+hotel-requests.is-there-a-safe,safe
+hotel-requests.what-time-does-breakfast-start,breakfast
+hotel-requests.what-time-is-check-out,check-out
+in-a-building.is-this-the-correct-entrance,correct
+introductions.i-am-a-tourist,tourist
+introductions.i-am-from,from
+introductions.i-am-traveling-alone,alone
+introductions.my-name-is,My name
+introductions.nice-to-meet-you,meet
+introductions.this-is-my-friend,friend
+introductions.we-are-traveling-together,together
+introductions.what-is-your-name,your name
+introductions.where-are-you-from,from
+kind-words.i-had-a-wonderful-time,wonderful
+kind-words.i-like-it-very-much,like
+kind-words.it-is-beautiful-here,beautiful
+kind-words.thank-you-for-everything,everything
+kind-words.thank-you-for-your-help,help
+kind-words.thank-you-for-your-hospitality,hospitality
+kind-words.this-is-delicious,delicious
+kind-words.you-are-very-kind,kind
+laundry.can-it-be-ready-today,today
+laundry.how-much-per-kilo,per kilo
+laundry.please-do-not-use-bleach,bleach
+laundry.please-iron-this,iron
+laundry.please-wash-these-clothes,wash
+laundry.when-will-it-be-ready,ready
+laundry.where-is-a-laundromat,laundromat
+lost-rescue.i-do-not-know-where-i-am,where I am
+lost-rescue.i-lost-my-bag,bag
+lost-rescue.i-lost-my-passport,passport
+lost-rescue.i-lost-my-phone,phone
+lost-rescue.i-lost-my-wallet,wallet
+lost-rescue.my-child-is-missing,child | missing
+lost-rescue.please-call-the-police,police
+lost-rescue.we-are-here,here
+massage-spa.focus-on-back,back
+massage-spa.focus-on-feet,feet
+massage-spa.focus-on-neck,neck
+massage-spa.focus-on-shoulders,shoulders
+massage-spa.more-gently,gently
+massage-spa.please-avoid-this-area,avoid
+massage-spa.reply-ask-supervisor,supervisor
+massage-spa.reply-cannot-avoid-this-treatment,cannot avoid
+massage-spa.reply-does-it-hurt-there,hurt
+massage-spa.reply-i-will-avoid-that-area,will avoid
+massage-spa.reply-which-area-exactly,Which area
+massage-spa.stronger-pressure,Stronger
+massage-spa.that-pressure-is-good,good
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicillin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,diabetic
+medical-conditions.i-am-pregnant,pregnant
+medical-conditions.i-carry-an-adrenaline-injector,adrenaline
+medical-conditions.i-have-a-heart-condition,heart
+medical-conditions.i-have-asthma,asthma
+medical-conditions.i-have-epilepsy,epilepsy
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,inhaler
+medical-conditions.i-take-blood-thinners,blood thinners
+medical-conditions.inject-it-into-my-outer-thigh,outer thigh
+medical-conditions.my-blood-sugar-is-low,blood sugar | low
+medical-conditions.my-injector-is-in-my-bag,injector | bag
+medical-conditions.please-give-me-sugar-or-juice,sugar | juice
+medical-conditions.this-card-lists-my-conditions,card
+medical-conditions.this-is-my-medicine,medicine
+outdoors.are-there-dangerous-animals-here,dangerous animals
+outdoors.can-we-camp-here,camp
+outdoors.is-it-safe-to-swim-here,swim
+payment-receipt.a-receipt-please,receipt
+payment-receipt.can-we-pay-separately,separately
+payment-receipt.how-much-in-total,total
+payment-receipt.i-already-paid,already paid
+payment-receipt.is-tax-included,tax
+payment-receipt.my-card-was-declined,declined
+payment-receipt.pay-by-card,card
+payment-receipt.the-bill-is-wrong,bill | wrong
+pharmacy-symptoms.before-or-after-food,food
+pharmacy-symptoms.can-i-get-this-medicine-here,medicine
+pharmacy-symptoms.do-i-need-a-prescription,prescription
+pharmacy-symptoms.how-many-times-a-day,times a day
+pharmacy-symptoms.how-much-should-i-take,How much
+pharmacy-symptoms.i-am-vomiting,vomiting
+pharmacy-symptoms.i-feel-dizzy,dizzy
+pharmacy-symptoms.i-feel-nauseous,nauseous
+pharmacy-symptoms.i-have-a-burn,burn
+pharmacy-symptoms.i-have-a-cough,cough
+pharmacy-symptoms.i-have-a-cut,cut
+pharmacy-symptoms.i-have-a-fever,fever
+pharmacy-symptoms.i-have-a-headache,headache
+pharmacy-symptoms.i-have-a-rash,rash
+pharmacy-symptoms.i-have-a-sore-throat,sore throat
+pharmacy-symptoms.i-have-a-stomach-ache,stomach ache
+pharmacy-symptoms.i-have-diarrhea,diarrhea
+pharmacy-symptoms.i-think-it-is-infected,infected
+pharmacy-symptoms.is-this-safe-during-pregnancy,pregnancy
+pharmacy-symptoms.the-pain-is-severe,pain | severe
+pharmacy-symptoms.which-pharmacy-is-open-now,open now
+police-consulate.i-need-an-interpreter,interpreter
+police-consulate.i-want-to-contact-my-embassy,embassy
+police-consulate.i-want-to-report-a-theft,theft
+police-consulate.my-bag-was-stolen,stolen
+police-consulate.someone-is-following-me,following
+police-consulate.where-is-the-police-station,police station
+quick-directions.across-from-here,Across
+quick-directions.on-the-left,left
+quick-directions.on-the-right,right
+room-problems.can-i-change-rooms,change
+room-problems.please-send-someone,send someone
+room-problems.the-air-conditioning-is-broken,air conditioning
+room-problems.the-heating-does-not-work,heating
+room-problems.the-key-does-not-work,key
+room-problems.the-light-does-not-work,light
+room-problems.the-room-is-too-noisy,noisy
+room-problems.the-toilet-will-not-flush,toilet
+room-problems.there-is-a-problem-with-the-room,problem
+room-problems.there-is-no-hot-water,hot water
+shopping.can-it-be-a-little-cheaper,cheaper
+shopping.do-you-have-this-in-stock,in stock
+shopping.how-much-is-this,How much
+shopping.i-am-just-looking,just looking
+shopping.i-will-take-this,take
+shopping.that-is-too-expensive,expensive
+shopping.where-do-i-pay,pay
+social-basics.i-do-not-know,not know
+social-basics.you-are-welcome,welcome
+taxi.can-you-wait-for-me-here,wait
+taxi.could-you-make-it-colder,colder
+taxi.could-you-make-it-warmer,warmer
+taxi.may-i-open-the-window,window
+taxi.please-stop-here,stop
+taxi.please-take-me-here,take me
+taxi.please-turn-around,turn around
+time-scheduling.can-we-change-the-time,change
+time-scheduling.how-long-does-it-take,How long
+time-scheduling.how-many-minutes,minutes
+time-scheduling.what-day-is-it-today,day
+time-scheduling.what-time-does-it-close,close
+time-scheduling.what-time-does-it-open,open
+time-scheduling.what-time-is-it,time
+time-scheduling.what-time-should-we-meet,meet
+time-scheduling.when-is-convenient,convenient
+toilets.it-is-out-of-order,out of order
+toilets.where-toilet,toilet
+trail-conditions.can-we-return-before-dark,before dark
+trail-conditions.can-we-return-the-same-way,same way
+trail-conditions.how-long-is-the-full-route,full route
+trail-conditions.is-the-path-slippery,slippery
+trail-conditions.is-the-route-steep,steep
+trail-conditions.is-the-trail-open,open
+trail-transport.do-you-have-a-map,map
+trail-transport.how-long-is-the-wait,wait
+trail-transport.is-there-cell-signal-here,cell signal
+trail-transport.what-time-is-the-last-shuttle,last shuttle
+trail-transport.when-does-the-cableway-stop,cableway
+trail-transport.where-can-we-buy-water,buy water
+trail-transport.where-can-we-refill-water,refill water
+transit-rides.can-i-use-this-ticket,ticket
+transit-rides.do-i-need-to-transfer,transfer
+transit-rides.do-i-need-to-validate,validate
+transit-rides.i-am-in-a-hurry,hurry
+transit-rides.i-went-past-my-stop,went past
+transit-rides.is-it-delayed,delayed
+transit-rides.is-this-direct,direct
+transit-rides.please-tell-me-where-to-get-off,get off
+transit-rides.what-is-the-next-stop,next stop
+transit-rides.what-time-is-the-next-one,next one
+transit-rides.where-do-i-pay-the-fare,fare
+transit-rides.where-is-the-subway-station,subway
+weather.how-cold-at-night,cold | night
+weather.is-it-safe-today,safe
+weather.will-it-rain,rain

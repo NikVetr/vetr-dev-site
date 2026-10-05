@@ -56,5 +56,11 @@
     "or": 1010,
     "morse": 49
   },
-  "emphasis": []
+  "emphasis": [
+    "ar",
+    "de",
+    "en",
+    "ja",
+    "zh-Hans"
+  ]
 }

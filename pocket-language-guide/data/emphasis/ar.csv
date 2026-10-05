@@ -1,0 +1,288 @@
+concept_id,key
+about-me.i-am-a-doctor,طبيب
+about-me.i-am-a-nurse,ممرّض
+about-me.i-am-a-student,طالب
+about-me.i-am-a-teacher,معلّم
+about-me.i-am-an-engineer,مهندس
+about-me.i-am-retired,متقاعد
+about-me.i-have-my-own-business,مشروعي الخاص
+about-me.i-work-in-an-office,مكتب
+accessibility.step-free,خالٍ من العوائق
+air-travel.i-would-like-a-window-seat,النافذة
+air-travel.i-would-like-an-aisle-seat,الممر
+air-travel.my-luggage-did-not-arrive,لم تصل
+air-travel.where-is-check-in,تسجيل الوصول
+air-travel.where-is-the-security-check,التفتيش
+attractions-tickets.are-there-lockers,خزائن
+attractions-tickets.do-i-need-a-reservation,الحجز
+attractions-tickets.may-i-take-photos,التصوير
+attractions-tickets.what-is-the-latest-entry-time,آخر | للدخول
+attractions-tickets.where-can-i-buy-tickets,التذاكر
+board-answers.at-the-next-stop,المحطة القادمة
+board-answers.can-you-walk,المشي
+board-answers.help-is-coming,المساعدة
+board-answers.i-am-calling-an-ambulance,بالإسعاف
+board-answers.i-am-calling-the-police,بالشرطة
+board-answers.i-do-not-have-a-phone,هاتف
+board-answers.i-will-find-someone,سأجد شخصًا
+board-answers.i-will-show-you,سأدلّ
+board-answers.i-would-rather-not-say,ألّا أقول
+board-answers.none-of-these,ليس هذا
+board-answers.not-possible,غير ممكن
+board-answers.only-for-customers,للزبائن
+board-answers.pay-on-board,داخل المركبة
+board-answers.prescription-only,بوصفة طبية
+board-answers.see-a-doctor,الطبيب
+board-answers.stay-here,البقاء هنا
+board-answers.the-hospital-is-close,قريب
+board-answers.there-is-no-wait,لا انتظار
+board-answers.we-do-not-have-it,ليس لدينا
+board-answers.we-have-it,لدينا
+board-answers.what-is-your-name,الاسم
+board-answers.where-does-it-hurt,الألم
+border-customs.here-is-my-passport,جواز سفري
+border-customs.i-am-here-for-business,للعمل
+border-customs.i-am-visiting-family,عائلتي
+border-customs.i-have-a-connecting-flight,رحلة متّصلة
+border-customs.where-do-i-collect-my-baggage,أمتعتي
+color-size-returns.do-you-have-a-bag,كيس
+color-size-returns.do-you-have-another-size,مقاس
+communication.please-speak-more-slowly,ببطء
+dietary-needs.does-it-contain-fish-stock,مرق سمك
+dietary-needs.does-it-contain-pork-fat,شحم الخنزير
+dietary-needs.does-it-contain-pork-stock,مرق لحم الخنزير
+dietary-needs.i-am-vegan,صرف
+dietary-needs.i-am-vegetarian,نباتي
+dietary-needs.is-this-halal,حلال
+dietary-needs.no-meat,لحم
+dietary-needs.no-seafood,أسماك | قشريات
+dietary-needs.no-sesame,سمسم | طحينة
+directions.can-i-walk-there,المشي
+directions.can-you-show-me-the-way,الطريق
+directions.how-long-on-foot,سيراً
+directions.is-it-far,بعيد
+directions.please-show-me-on-the-map,الخريطة
+emergency-medical.i-am-bleeding-badly,أنزف
+emergency-medical.i-am-having-a-severe-allergic-reaction,حساسية مفرطة
+emergency-medical.i-am-injured,مصاب
+emergency-medical.i-cannot-breathe,التنفس
+emergency-medical.i-have-chest-pain,الصدر
+emergency-medical.i-have-travel-insurance,تأمين
+emergency-medical.i-need-a-doctor,طبيب
+emergency-medical.i-think-a-bone-is-broken,كسراً
+emergency-medical.it-hurts-here,يؤلمني
+emergency-medical.please-call-an-ambulance,بالإسعاف
+emergency-medical.please-call-my-emergency-contact,للطوارئ
+emergency-medical.please-take-me-to-a-hospital,المستشفى
+emergency-medical.this-is-an-emergency,حالة طارئة
+emergency-medical.this-person-is-unconscious,فاقد للوعي
+emergency-medical.where-is-the-nearest-hospital,أقرب مستشفى
+family-intros.this-is-my-brother,أخي
+family-intros.this-is-my-colleague,زميلي
+family-intros.this-is-my-daughter,ابنتي
+family-intros.this-is-my-father,أبي
+family-intros.this-is-my-husband,زوجي
+family-intros.this-is-my-mother,أمي
+family-intros.this-is-my-partner,شريك حياتي
+family-intros.this-is-my-sister,أختي
+family-intros.this-is-my-son,ابني
+family-intros.this-is-my-wife,زوجتي
+food-ordering.i-want-this,أريد
+food-ordering.is-a-table-available,طاولة
+food-ordering.is-this-vegetarian,نباتي
+food-ordering.table-for-two,لشخصين
+food-ordering.what-do-you-recommend,تنصح
+hiking-parks.how-long-to-the-summit,القمة
+hiking-parks.how-long-to-the-viewpoint,المطلّ
+hiking-parks.is-this-trail-suitable-for-beginners,للمبتدئين
+hiking-parks.where-is-the-trailhead,بداية المسار
+hiking-parks.which-route-is-easier,أسهل
+hitchhiking.can-you-give-me-a-ride,توصيلة
+hitchhiking.i-can-pay-for-fuel,البنزين
+hitchhiking.i-only-need-to-go-to-the-next-town,البلدة التالية
+hitchhiking.is-there-room-for-two,مكان | لشخصين
+hitchhiking.thank-you-for-the-ride,شكرًا
+hitchhiking.where-are-you-going,تذهب
+hotel-basics.are-any-rooms-available,غرف
+hotel-basics.how-much-per-night,الليلة
+hotel-basics.i-have-a-reservation,حجز
+hotel-basics.i-would-like-a-non-smoking-room,بدون تدخين
+hotel-basics.i-would-like-a-quiet-room,هادئة
+hotel-basics.is-breakfast-included,الفطور
+hotel-basics.is-there-a-washing-machine,غسّالة
+hotel-basics.is-there-air-conditioning,تكييف
+hotel-basics.is-wi-fi-free,الواي فاي
+hotel-basics.may-i-see-the-room,رؤية الغرفة
+hotel-requests.another-blanket,بطانية
+hotel-requests.another-night,ليلة أخرى
+hotel-requests.another-towel-please,منشفة
+hotel-requests.can-i-check-in-early,تسجيل الوصول مبكراً
+hotel-requests.can-i-check-out-later,تأخير المغادرة
+hotel-requests.can-i-store-my-luggage,أمتعتي
+hotel-requests.is-there-a-safe,خزنة
+hotel-requests.what-time-does-breakfast-start,الفطور
+hotel-requests.what-time-is-check-out,موعد المغادرة
+in-a-building.is-this-the-correct-entrance,الصحيح
+introductions.i-am-a-tourist,سائح
+introductions.i-am-from,من
+introductions.i-am-traveling-alone,وحدي
+introductions.this-is-my-friend,صديقي
+introductions.we-are-traveling-together,معاً
+introductions.what-is-your-name,اسمك
+introductions.where-are-you-from,بلد
+kind-words.i-had-a-wonderful-time,رائعاً
+kind-words.i-like-it-very-much,أعجبني
+kind-words.it-is-beautiful-here,جميل
+kind-words.thank-you-for-everything,كلّ شيء
+kind-words.thank-you-for-your-help,مساعدتك
+kind-words.thank-you-for-your-hospitality,ضيافتك
+kind-words.this-is-delicious,لذيذ
+kind-words.you-are-very-kind,لطيف
+laundry.can-it-be-ready-today,اليوم
+laundry.how-much-per-kilo,الكيلو
+laundry.please-do-not-use-bleach,كلور
+laundry.please-iron-this,كيّ
+laundry.please-wash-these-clothes,غسل
+laundry.when-will-it-be-ready,متى
+laundry.where-is-a-laundromat,مغسلة
+lost-rescue.i-do-not-know-where-i-am,أين أنا
+lost-rescue.i-lost-my-bag,حقيبتي
+lost-rescue.i-lost-my-passport,جواز سفري
+lost-rescue.i-lost-my-phone,هاتفي
+lost-rescue.i-lost-my-wallet,محفظتي
+lost-rescue.my-child-is-missing,طفلي
+lost-rescue.please-call-the-police,بالشرطة
+lost-rescue.we-are-here,هنا
+massage-spa.focus-on-back,الظهر
+massage-spa.focus-on-feet,القدمين
+massage-spa.focus-on-neck,الرقبة
+massage-spa.focus-on-shoulders,الكتفين
+massage-spa.more-gently,برفق
+massage-spa.please-avoid-this-area,تجنّب
+massage-spa.please-stop,التوقّف
+massage-spa.reply-ask-supervisor,المسؤول
+massage-spa.reply-cannot-avoid-this-treatment,لا تتمّ دون
+massage-spa.reply-does-it-hurt-there,تؤلم
+massage-spa.reply-i-will-avoid-that-area,سأتجنّب
+massage-spa.reply-which-area-exactly,أي منطقة
+massage-spa.stronger-pressure,أقوى
+massage-spa.that-pressure-is-good,مناسب
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,الأسبرين | الإيبوبروفين
+medical-conditions.i-am-allergic-to-penicillin,البنسلين
+medical-conditions.i-am-allergic-to-sulfa-drugs,السلفا
+medical-conditions.i-am-diabetic,بالسكري
+medical-conditions.i-am-pregnant,حامل
+medical-conditions.i-carry-an-adrenaline-injector,أدرينالين
+medical-conditions.i-have-a-heart-condition,القلب
+medical-conditions.i-have-asthma,ربو
+medical-conditions.i-have-epilepsy,صرع
+medical-conditions.i-need-insulin,الأنسولين
+medical-conditions.i-need-my-inhaler,بخاخ
+medical-conditions.i-take-blood-thinners,مسيلة للدم
+medical-conditions.inject-it-into-my-outer-thigh,الفخذ الخارجي
+medical-conditions.my-blood-sugar-is-low,هبوط
+medical-conditions.my-injector-is-in-my-bag,حقيبتي
+medical-conditions.please-give-me-sugar-or-juice,سكراً | عصيراً
+medical-conditions.this-card-lists-my-conditions,بطاقة
+medical-conditions.this-is-my-medicine,دوائي
+outdoors.are-there-dangerous-animals-here,حيوانات خطيرة
+outdoors.can-we-camp-here,نخيّم
+outdoors.is-it-safe-to-swim-here,السباحة
+payment-receipt.can-we-pay-separately,منفصل
+payment-receipt.how-much-in-total,المجموع
+payment-receipt.is-tax-included,الضريبة
+payment-receipt.my-card-was-declined,رُفضت
+payment-receipt.pay-by-card,بالبطاقة
+payment-receipt.the-bill-is-wrong,الحساب | خطأ
+pharmacy-symptoms.can-i-get-this-medicine-here,الدواء
+pharmacy-symptoms.do-i-need-a-prescription,وصفة طبية
+pharmacy-symptoms.how-many-times-a-day,كم مرة
+pharmacy-symptoms.how-much-should-i-take,الجرعة
+pharmacy-symptoms.i-feel-dizzy,بدوار
+pharmacy-symptoms.i-feel-nauseous,بالغثيان
+pharmacy-symptoms.i-have-a-burn,حرق
+pharmacy-symptoms.i-have-a-cough,سعال
+pharmacy-symptoms.i-have-a-cut,جرح
+pharmacy-symptoms.i-have-a-fever,حمّى
+pharmacy-symptoms.i-have-a-headache,صداع
+pharmacy-symptoms.i-have-a-rash,طفح جلدي
+pharmacy-symptoms.i-have-a-sore-throat,الحلق
+pharmacy-symptoms.i-have-a-stomach-ache,المعدة
+pharmacy-symptoms.i-have-diarrhea,إسهال
+pharmacy-symptoms.i-think-it-is-infected,ملتهب
+pharmacy-symptoms.is-this-safe-during-pregnancy,للحامل
+pharmacy-symptoms.the-pain-is-severe,شديد
+pharmacy-symptoms.which-pharmacy-is-open-now,مفتوحة الآن
+police-consulate.i-need-an-interpreter,مترجم
+police-consulate.i-want-to-contact-my-embassy,بسفارتي
+police-consulate.i-want-to-report-a-theft,سرقة
+police-consulate.my-bag-was-stolen,سُرقت
+police-consulate.someone-is-following-me,يتبعني
+police-consulate.where-is-the-police-station,مركز الشرطة
+quick-directions.across-from-here,المقابلة
+quick-directions.go-straight,مباشرة
+quick-directions.on-the-left,اليسار
+quick-directions.on-the-right,اليمين
+room-problems.can-i-change-rooms,تغيير
+room-problems.please-send-someone,إرسال أحد
+room-problems.the-air-conditioning-is-broken,التكييف
+room-problems.the-heating-does-not-work,التدفئة
+room-problems.the-key-does-not-work,المفتاح
+room-problems.the-light-does-not-work,الضوء
+room-problems.the-room-is-too-noisy,ضجيج
+room-problems.the-toilet-will-not-flush,السيفون
+room-problems.there-is-a-problem-with-the-room,مشكلة
+room-problems.there-is-no-hot-water,ماء ساخن
+shopping.can-it-be-a-little-cheaper,أرخص
+shopping.do-you-have-this-in-stock,متوفّر
+shopping.how-much-is-this,بكم
+shopping.i-am-just-looking,أتفرّج
+shopping.i-will-take-this,سآخذ
+shopping.that-is-too-expensive,غالي
+shopping.where-do-i-pay,أدفع
+taxi.can-you-wait-for-me-here,انتظاري
+taxi.could-you-make-it-colder,رفع
+taxi.could-you-make-it-warmer,تخفيف
+taxi.may-i-open-the-window,النافذة
+taxi.please-stop-here,التوقّف
+taxi.please-take-me-here,توصيلي
+taxi.please-turn-around,الدوران للخلف
+time-scheduling.can-we-change-the-time,تغيير
+time-scheduling.how-long-does-it-take,يستغرق
+time-scheduling.how-many-minutes,دقيقة
+time-scheduling.what-day-is-it-today,يوم
+time-scheduling.what-time-does-it-close,يغلق
+time-scheduling.what-time-does-it-open,يفتح
+time-scheduling.what-time-is-it,الساعة
+time-scheduling.what-time-should-we-meet,نتقابل
+time-scheduling.when-is-convenient,يناسبك
+toilets.it-is-out-of-order,معطّل
+toilets.where-toilet,الحمّام
+trail-conditions.can-we-return-before-dark,قبل الغروب
+trail-conditions.can-we-return-the-same-way,نفس الطريق
+trail-conditions.how-long-is-the-full-route,المسار كاملاً
+trail-conditions.is-the-path-slippery,زلق
+trail-conditions.is-the-route-steep,شديد الانحدار
+trail-conditions.is-the-trail-open,مفتوح
+trail-transport.do-you-have-a-map,خريطة
+trail-transport.how-long-is-the-wait,الانتظار
+trail-transport.is-there-cell-signal-here,إرسال
+trail-transport.what-time-is-the-last-shuttle,آخر حافلة
+trail-transport.when-does-the-cableway-stop,التلفريك
+trail-transport.where-can-we-buy-water,نشتري الماء
+trail-transport.where-can-we-refill-water,نملأ الماء
+transit-rides.can-i-use-this-ticket,تصلح
+transit-rides.do-i-need-to-transfer,أبدّل
+transit-rides.do-i-need-to-validate,تمرير
+transit-rides.i-am-in-a-hurry,مستعجل
+transit-rides.i-went-past-my-stop,تجاوزت
+transit-rides.is-it-delayed,متأخّر
+transit-rides.is-this-direct,مباشر
+transit-rides.please-tell-me-where-to-get-off,أنزل
+transit-rides.what-is-the-next-stop,المحطة القادمة
+transit-rides.what-time-is-the-next-one,القادم
+transit-rides.where-do-i-pay-the-fare,الأجرة
+transit-rides.where-is-the-subway-station,المترو
+weather.how-cold-at-night,تنخفض | ليلاً
+weather.is-it-safe-today,آمن
+weather.will-it-rain,ستمطر

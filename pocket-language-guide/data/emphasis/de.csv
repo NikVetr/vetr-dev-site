@@ -1,0 +1,314 @@
+concept_id,key
+about-me.i-am-a-doctor,Arzt | Ärztin
+about-me.i-am-a-nurse,Krankenpfleger | Krankenschwester
+about-me.i-am-a-student,Student
+about-me.i-am-a-teacher,Lehrer
+about-me.i-am-an-engineer,Ingenieur
+about-me.i-am-retired,Rentner
+about-me.i-have-my-own-business,eigenes Unternehmen
+about-me.i-work-in-an-office,Büro
+accessibility.step-free,stufenlosen
+air-travel.i-would-like-a-window-seat,Fensterplatz
+air-travel.i-would-like-an-aisle-seat,Gangplatz
+air-travel.my-luggage-did-not-arrive,Gepäck | nicht angekommen
+air-travel.where-is-check-in,Check-in
+air-travel.where-is-the-security-check,Sicherheitskontrolle
+attractions-tickets.are-there-lockers,Schließfächer
+attractions-tickets.could-you-take-a-photo-for-us,Foto von uns
+attractions-tickets.do-i-need-a-reservation,Reservierung
+attractions-tickets.may-i-take-photos,fotografieren
+attractions-tickets.what-is-the-latest-entry-time,letzte Einlass
+attractions-tickets.where-can-i-buy-tickets,Karten
+board-answers.after-food,Nach
+board-answers.at-the-next-stop,nächsten Haltestelle
+board-answers.before-food,Vor
+board-answers.can-you-walk,gehen
+board-answers.help-is-coming,Hilfe
+board-answers.i-am-calling-an-ambulance,Rettungswagen
+board-answers.i-am-calling-the-police,Polizei
+board-answers.i-do-not-have-a-phone,Handy
+board-answers.i-will-check,schaue nach
+board-answers.i-will-find-someone,finde jemanden
+board-answers.i-will-show-you,zeige
+board-answers.i-will-write-it-down,schreibe
+board-answers.i-would-rather-not-say,lieber nicht sagen
+board-answers.it-does-not-matter,egal
+board-answers.it-is-closed,zu
+board-answers.it-is-free,kostenlos
+board-answers.it-is-over-there,dort drüben
+board-answers.my-name-is-blank,heiße
+board-answers.none-of-these,Nichts davon
+board-answers.not-possible,geht nicht
+board-answers.only-for-customers,Kunden
+board-answers.pay-on-board,an Bord
+board-answers.prescription-only,Rezept
+board-answers.see-a-doctor,Arzt
+board-answers.stay-here,Bleiben
+board-answers.the-hospital-is-close,Krankenhaus | ganz nah
+board-answers.there-is-no-wait,Keine Wartezeit
+board-answers.we-are-full,ausgebucht
+board-answers.we-do-not-have-it,haben | nicht
+board-answers.we-have-it,haben
+board-answers.what-happened,passiert
+board-answers.what-is-your-name,Wie heißen
+board-answers.where-does-it-hurt,weh
+border-customs.here-is-my-passport,Pass
+border-customs.i-am-here-for-business,geschäftlich
+border-customs.i-am-visiting-family,Familie
+border-customs.i-have-a-connecting-flight,Anschlussflug
+border-customs.where-do-i-collect-my-baggage,Gepäckausgabe
+color-size-returns.do-you-have-a-bag,Tüte
+color-size-returns.do-you-have-another-size,Größe
+color-size-returns.may-i-try-it-on,anprobieren
+communication.can-you-help-me,helfen
+communication.do-you-speak-english,Sprechen
+communication.i-do-not-speak-this-language,spreche kein
+communication.i-do-not-understand,verstehe nicht
+communication.please-speak-more-slowly,langsamer
+communication.please-write-it-down,schreiben
+dietary-needs.does-it-contain-fish-stock,Fischbrühe
+dietary-needs.does-it-contain-pork-fat,Schweineschmalz
+dietary-needs.does-it-contain-pork-stock,Schweinebrühe
+dietary-needs.i-am-vegan,vegan
+dietary-needs.i-am-vegetarian,vegetarisch
+dietary-needs.is-this-halal,halal
+dietary-needs.no-pork,Schweinefleisch
+dietary-needs.no-seafood,Fisch | Meeresfrüchte
+directions.can-i-walk-there,zu Fuß gehen
+directions.can-you-show-me-the-way,Weg
+directions.how-long-on-foot,Wie lange
+directions.is-it-far,weit
+directions.please-show-me-on-the-map,Karte
+directions.which-way,Richtung
+emergency-medical.i-am-bleeding-badly,blute
+emergency-medical.i-am-having-a-severe-allergic-reaction,anaphylaktischen Schock
+emergency-medical.i-am-injured,verletzt
+emergency-medical.i-cannot-breathe,atmen
+emergency-medical.i-feel-unwell,nicht gut
+emergency-medical.i-have-chest-pain,Brustschmerzen
+emergency-medical.i-have-travel-insurance,Reiseversicherung
+emergency-medical.i-need-a-doctor,Arzt
+emergency-medical.i-think-a-bone-is-broken,gebrochen
+emergency-medical.it-hurts-here,weh
+emergency-medical.please-call-an-ambulance,Rettungswagen
+emergency-medical.please-call-my-emergency-contact,Notfallkontakt
+emergency-medical.please-take-me-to-a-hospital,Krankenhaus
+emergency-medical.this-is-an-emergency,Notfall
+emergency-medical.this-person-is-unconscious,bewusstlos
+emergency-medical.where-is-the-nearest-hospital,nächste Krankenhaus
+family-intros.this-is-my-brother,Bruder
+family-intros.this-is-my-colleague,Kollege
+family-intros.this-is-my-daughter,Tochter
+family-intros.this-is-my-father,Vater
+family-intros.this-is-my-husband,Mann
+family-intros.this-is-my-mother,Mutter
+family-intros.this-is-my-partner,Partner
+family-intros.this-is-my-sister,Schwester
+family-intros.this-is-my-son,Sohn
+family-intros.this-is-my-wife,Frau
+food-ordering.i-want-this,möchte
+food-ordering.is-a-table-available,Tisch
+food-ordering.is-this-vegetarian,vegetarisch
+food-ordering.menu-please,Karte
+food-ordering.table-for-two,Tisch | zwei
+food-ordering.to-go-please,Mitnehmen
+food-ordering.what-do-you-recommend,empfehlen
+hiking-parks.how-long-to-the-summit,Gipfel
+hiking-parks.how-long-to-the-viewpoint,Aussichtspunkt
+hiking-parks.is-this-trail-suitable-for-beginners,Anfänger
+hiking-parks.where-is-the-trailhead,Ausgangspunkt
+hiking-parks.which-route-is-easier,leichter
+hitchhiking.can-you-give-me-a-ride,mitnehmen
+hitchhiking.i-can-pay-for-fuel,Benzin
+hitchhiking.i-only-need-to-go-to-the-next-town,nächsten Stadt
+hitchhiking.is-there-room-for-two,Platz | zwei
+hitchhiking.thank-you-for-the-ride,Danke
+hitchhiking.where-are-you-going,Wohin
+hotel-basics.are-any-rooms-available,Zimmer
+hotel-basics.how-much-per-night,pro Nacht
+hotel-basics.i-have-a-reservation,Reservierung
+hotel-basics.i-would-like-a-non-smoking-room,Nichtraucherzimmer
+hotel-basics.i-would-like-a-quiet-room,ruhiges
+hotel-basics.is-breakfast-included,Frühstück
+hotel-basics.is-there-a-washing-machine,Waschmaschine
+hotel-basics.is-there-air-conditioning,Klimaanlage
+hotel-basics.is-wi-fi-free,WLAN
+hotel-basics.may-i-see-the-room,Zimmer sehen
+hotel-requests.another-blanket,Decke
+hotel-requests.another-night,noch eine Nacht
+hotel-requests.another-towel-please,Handtuch
+hotel-requests.can-i-check-in-early,früher einchecken
+hotel-requests.can-i-check-out-later,später auschecken
+hotel-requests.can-i-store-my-luggage,Gepäck
+hotel-requests.is-there-a-safe,Safe
+hotel-requests.no-housekeeping,nicht reinigen
+hotel-requests.what-time-does-breakfast-start,Frühstück
+hotel-requests.what-time-is-check-out,Check-out
+in-a-building.is-this-the-correct-entrance,richtige
+introductions.i-am-a-tourist,Tourist
+introductions.i-am-from,komme aus
+introductions.i-am-traveling-alone,allein
+introductions.my-name-is,heiße
+introductions.this-is-my-friend,Freund
+introductions.we-are-traveling-together,zusammen
+introductions.what-is-your-name,Wie heißen
+introductions.where-are-you-from,Woher
+kind-words.i-had-a-wonderful-time,wunderbare
+kind-words.i-like-it-very-much,gefällt
+kind-words.it-is-beautiful-here,wunderschön
+kind-words.thank-you-for-everything,alles
+kind-words.thank-you-for-your-help,Hilfe
+kind-words.thank-you-for-your-hospitality,Gastfreundschaft
+kind-words.this-is-delicious,köstlich
+kind-words.you-are-very-kind,freundlich
+laundry.can-it-be-ready-today,heute
+laundry.how-much-per-kilo,pro Kilo
+laundry.please-do-not-use-bleach,Bleichmittel
+laundry.please-iron-this,bügeln
+laundry.please-wash-these-clothes,waschen
+laundry.when-will-it-be-ready,fertig
+laundry.where-is-a-laundromat,Waschsalon
+lost-rescue.i-do-not-know-where-i-am,wo ich bin
+lost-rescue.i-lost-my-bag,Tasche
+lost-rescue.i-lost-my-passport,Pass
+lost-rescue.i-lost-my-phone,Handy
+lost-rescue.i-lost-my-wallet,Geldbörse
+lost-rescue.my-child-is-missing,Kind | vermisst
+lost-rescue.please-call-the-police,Polizei
+lost-rescue.we-are-here,hier
+massage-spa.focus-on-back,Rücken
+massage-spa.focus-on-feet,Füße
+massage-spa.focus-on-neck,Nacken
+massage-spa.focus-on-shoulders,Schultern
+massage-spa.please-avoid-this-area,nicht massieren
+massage-spa.please-pause,Pause
+massage-spa.reply-ask-supervisor,Leitung
+massage-spa.reply-cannot-avoid-this-treatment,geht nicht
+massage-spa.reply-does-it-hurt-there,weh
+massage-spa.reply-i-will-avoid-that-area,lasse | aus
+massage-spa.reply-which-area-exactly,Welche Stelle
+massage-spa.stronger-pressure,fester
+massage-spa.that-pressure-is-good,genau richtig
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Aspirin | Ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,Penicillin
+medical-conditions.i-am-allergic-to-sulfa-drugs,Sulfonamide
+medical-conditions.i-am-diabetic,Diabetes
+medical-conditions.i-am-pregnant,schwanger
+medical-conditions.i-carry-an-adrenaline-injector,Adrenalin
+medical-conditions.i-have-a-heart-condition,Herzerkrankung
+medical-conditions.i-have-asthma,Asthma
+medical-conditions.i-have-epilepsy,Epilepsie
+medical-conditions.i-need-insulin,Insulin
+medical-conditions.i-need-my-inhaler,Asthmaspray
+medical-conditions.i-take-blood-thinners,Blutverdünner
+medical-conditions.inject-it-into-my-outer-thigh,äußeren Oberschenkel
+medical-conditions.my-blood-sugar-is-low,Blutzucker | niedrig
+medical-conditions.my-injector-is-in-my-bag,Autoinjektor | Tasche
+medical-conditions.please-give-me-sugar-or-juice,Zucker | Saft
+medical-conditions.this-card-lists-my-conditions,Karte
+medical-conditions.this-is-my-medicine,Medikament
+outdoors.are-there-dangerous-animals-here,gefährliche Tiere
+outdoors.can-we-camp-here,zelten
+outdoors.is-it-safe-to-swim-here,schwimmen
+payment-receipt.a-receipt-please,Bon
+payment-receipt.can-we-pay-separately,getrennt
+payment-receipt.how-much-in-total,zusammen
+payment-receipt.i-already-paid,schon bezahlt
+payment-receipt.is-tax-included,MwSt.
+payment-receipt.my-card-was-declined,abgelehnt
+payment-receipt.pay-by-card,Karte
+payment-receipt.the-bill-is-wrong,Rechnung
+pharmacy-symptoms.anti-diarrhea-medicine,Durchfall
+pharmacy-symptoms.before-or-after-food,Essen
+pharmacy-symptoms.can-i-get-this-medicine-here,Medikament
+pharmacy-symptoms.do-i-need-a-prescription,Rezept
+pharmacy-symptoms.how-many-times-a-day,Wie oft
+pharmacy-symptoms.how-much-should-i-take,Wie viel
+pharmacy-symptoms.i-am-vomiting,erbreche
+pharmacy-symptoms.i-feel-dizzy,schwindelig
+pharmacy-symptoms.i-feel-nauseous,übel
+pharmacy-symptoms.i-have-a-burn,Verbrennung
+pharmacy-symptoms.i-have-a-cough,Husten
+pharmacy-symptoms.i-have-a-cut,Schnittwunde
+pharmacy-symptoms.i-have-a-fever,Fieber
+pharmacy-symptoms.i-have-a-headache,Kopfschmerzen
+pharmacy-symptoms.i-have-a-rash,Hautausschlag
+pharmacy-symptoms.i-have-a-sore-throat,Halsschmerzen
+pharmacy-symptoms.i-have-a-stomach-ache,Bauchschmerzen
+pharmacy-symptoms.i-have-diarrhea,Durchfall
+pharmacy-symptoms.i-think-it-is-infected,infiziert
+pharmacy-symptoms.is-this-safe-during-pregnancy,Schwangerschaft
+pharmacy-symptoms.the-pain-is-severe,Schmerzen | stark
+pharmacy-symptoms.which-pharmacy-is-open-now,jetzt offen
+police-consulate.i-need-an-interpreter,Dolmetscher
+police-consulate.i-want-to-contact-my-embassy,Botschaft
+police-consulate.i-want-to-report-a-theft,Diebstahl
+police-consulate.my-bag-was-stolen,gestohlen
+police-consulate.someone-is-following-me,folgt
+police-consulate.where-is-the-police-station,Polizeiwache
+quick-directions.on-the-left,linken
+quick-directions.on-the-right,rechten
+room-problems.can-i-change-rooms,wechseln
+room-problems.please-send-someone,schicken | jemanden
+room-problems.the-air-conditioning-is-broken,Klimaanlage
+room-problems.the-heating-does-not-work,Heizung
+room-problems.the-key-does-not-work,Schlüssel
+room-problems.the-light-does-not-work,Licht
+room-problems.the-room-is-too-noisy,laut
+room-problems.the-toilet-will-not-flush,Toilettenspülung
+room-problems.there-is-a-problem-with-the-room,Problem
+room-problems.there-is-no-hot-water,warmes Wasser
+shopping.can-it-be-a-little-cheaper,günstiger
+shopping.do-you-have-this-in-stock,vorrätig
+shopping.how-much-is-this,kostet
+shopping.i-am-just-looking,schaue nur
+shopping.i-will-take-this,nehme
+shopping.that-is-too-expensive,teuer
+shopping.where-do-i-pay,zahlen
+social-basics.i-do-not-know,weiß nicht
+taxi.can-you-wait-for-me-here,warten
+taxi.could-you-make-it-colder,kühler
+taxi.could-you-make-it-warmer,wärmer
+taxi.may-i-open-the-window,Fenster
+taxi.please-stop-here,Halten
+taxi.please-take-me-here,fahren | hierhin
+taxi.please-turn-around,wenden
+time-scheduling.can-we-change-the-time,ändern
+time-scheduling.how-long-does-it-take,dauert
+time-scheduling.how-many-minutes,Minuten
+time-scheduling.what-day-is-it-today,Tag
+time-scheduling.what-time-does-it-close,schließt
+time-scheduling.what-time-does-it-open,öffnet
+time-scheduling.what-time-is-it,Uhr
+time-scheduling.what-time-should-we-meet,treffen
+time-scheduling.when-is-convenient,passt
+toilets.it-is-out-of-order,außer Betrieb
+toilets.where-toilet,Toilette
+trail-conditions.can-we-return-before-dark,vor Dunkelheit
+trail-conditions.can-we-return-the-same-way,denselben Weg
+trail-conditions.how-long-is-the-full-route,ganze Strecke
+trail-conditions.is-the-path-slippery,rutschig
+trail-conditions.is-the-route-steep,steil
+trail-conditions.is-the-trail-open,offen
+trail-transport.do-you-have-a-map,Karte
+trail-transport.how-long-is-the-wait,warten
+trail-transport.is-there-cell-signal-here,Handyempfang
+trail-transport.what-time-is-the-last-shuttle,Shuttle
+trail-transport.when-does-the-cableway-stop,Seilbahn
+trail-transport.where-can-we-buy-water,Wasser kaufen
+trail-transport.where-can-we-refill-water,Wasser auffüllen
+transit-rides.can-i-use-this-ticket,Fahrkarte
+transit-rides.do-i-need-to-transfer,umsteigen
+transit-rides.do-i-need-to-validate,entwerten
+transit-rides.i-am-in-a-hurry,Eile
+transit-rides.i-went-past-my-stop,zu weit
+transit-rides.is-it-delayed,Verspätung
+transit-rides.is-this-direct,direkt
+transit-rides.please-tell-me-where-to-get-off,aussteigen
+transit-rides.what-is-the-next-stop,nächste Station
+transit-rides.what-time-is-the-next-one,nächste
+transit-rides.where-do-i-pay-the-fare,Fahrpreis
+transit-rides.where-is-the-subway-station,U-Bahn
+weather.how-cold-at-night,kalt | nachts
+weather.is-it-safe-today,sicher
+weather.will-it-rain,Regnet
