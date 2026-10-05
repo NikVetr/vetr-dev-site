@@ -102,7 +102,9 @@ columns, printed double-sided on 5×7 photo paper; cut each sheet down the middl
 and you have double-sided 3½×5in cards.
 
 **How many faces is mostly a consequence, not a setting.** `spec.autoFaces` lets the
-solver move the count, in pairs, because a double-sided sheet is two faces. It is
+solver move the count, in pairs on paper, because a double-sided sheet is two faces,
+and one at a time on a screen, which has no back -- in twos from a phone's one, a card
+a little longer than one face came out as three sparse ones. It is
 anchored on the card's natural count rather than minimised — with each field able to
 shrink toward its own floor, "fewest faces" is always achievable by making
 everything tiny, which nobody wants. So it moves off the anchor only for a reason:

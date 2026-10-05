@@ -54,11 +54,17 @@ const SCALE_STEP = 0.01;
 
 // A sheet is printed double-sided, so faces come in pairs: one sheet is two faces,
 // and an odd count means running a sheet with a blank back. Auto therefore steps in
-// twos -- from the card's own count, which carries the parity rather than imposing
-// it. The phone preset's natural count is one, because a screen has no back, and
-// stepping in twos from there gives 1, 3, 5: still one image per face, none of them
-// half-used.
+// twos on paper -- from the card's own count, which carries the parity rather than
+// imposing it.
 const FACE_STEP = 2;
+/**
+ * **A screen steps in ones.** It has no back, so there is no pair to keep: its
+ * natural count is one, and stepping in twos from there went 1, 3, 5. Twenty-five
+ * rows that needed a little over one phone face came out as three -- eleven rows,
+ * nine, and two -- every one of them sparse, when two faces held them at 0.91.
+ * @param {import('../types.js').Geometry} g
+ */
+const faceStep = (g) => (g.screen ? 1 : FACE_STEP);
 /** The ceiling on the auto face search.
  *
  * It was 24, which is generous for paper -- twelve sheets for one card set -- and far
@@ -1384,7 +1390,8 @@ function findFixes(input, box, scaleFloor) {
   };
 
   if (spec.autoFaces === false) {
-    for (let extra = FACE_STEP; extra <= MAX_AUTO_FACES; extra += FACE_STEP) {
+    const step = faceStep(spec.geometry);
+    for (let extra = step; extra <= MAX_AUTO_FACES; extra += step) {
       const faces = spec.geometry.faces + extra;
       if (!fitsWith({ ...spec.geometry, faces })) continue;
       fixes.push({
@@ -1506,13 +1513,14 @@ function solveFaces(build, box, spec, scaleFloor,
   };
 
   const anchor = Math.max(1, spec.geometry.faces || FACE_STEP);
+  const step = faceStep(spec.geometry);
   let faces = anchor;
 
   // Give up paper only when it is free. The floor is one face, not one sheet: for
   // an even anchor the step lands on two either way, and for the phone's anchor of
   // one there is nothing to give back.
-  while (faces - FACE_STEP >= 1 && fitsAt(faces - FACE_STEP, 1)) {
-    faces -= FACE_STEP;
+  while (faces - step >= 1 && fitsAt(faces - step, 1)) {
+    faces -= step;
   }
 
   // **And give up paper the glue cannot fill.** The rule above only sheds a pair
@@ -1533,10 +1541,10 @@ function solveFaces(build, box, spec, scaleFloor,
   // is the second: the anchor exists precisely because fewest-faces is always
   // reachable by making everything tiny, so a pair is only given back when keeping it
   // was buying almost no type size.
-  while (faces - FACE_STEP >= 1) {
+  while (faces - step >= 1) {
     const fitted = fittedAt(faces);
     if (fitted === null || blankFraction(faces, fitted) < BLANK_GIVEBACK) break;
-    const smaller = fittedAt(faces - FACE_STEP);
+    const smaller = fittedAt(faces - step);
     // A sheet pinned at the ceiling is not spending paper on type size, because it
     // has none left to spend it on -- so the proportional test is the wrong one and
     // `CEILING_GIVEBACK` says why.
@@ -1544,13 +1552,13 @@ function solveFaces(build, box, spec, scaleFloor,
       ? CEILING_GIVEBACK
       : fitted * KEEP_GIVEBACK;
     if (smaller === null || smaller < worth) break;
-    faces -= FACE_STEP;
+    faces -= step;
   }
 
   if (spec.scale > 0) {
     // An explicit type size is the reader's decision; only add paper if it is
     // needed to honour it.
-    while (faces < MAX_AUTO_FACES && !fitsAt(faces, spec.scale)) faces += FACE_STEP;
+    while (faces < MAX_AUTO_FACES && !fitsAt(faces, spec.scale)) faces += step;
     return { faces, scale: fitsAt(faces, spec.scale) ? spec.scale : null };
   }
 
@@ -1570,7 +1578,7 @@ function solveFaces(build, box, spec, scaleFloor,
   // search -- and it is a measurement at the *same* scale for every candidate face
   // count, so after the first it is free. That took the fully translated Japanese
   // sheet from 3.3s to well under a second.
-  while (faces < MAX_AUTO_FACES && !fitsAt(faces, COMFORT)) faces += FACE_STEP;
+  while (faces < MAX_AUTO_FACES && !fitsAt(faces, COMFORT)) faces += step;
   return { faces, scale: fittedAt(faces) };
 }
 

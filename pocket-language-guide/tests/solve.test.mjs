@@ -698,6 +698,31 @@ test('auto faces follows the card\'s own parity, so a screen can be one face', a
   assert.equal(morse.plan.faces[0].hits.filter((h) => h.conceptId).length, 49);
 });
 
+test('a screen takes faces one at a time, so a short card is not spread thin', async () => {
+  // A screen has no back, and auto stepped in twos from its count of one: twenty-five
+  // rows that needed a little more than one phone face came out as three, holding
+  // eleven rows, nine and two. Two faces hold them at 0.91.
+  const base = await referenceSpec('es', 'en');
+  const presets = JSON.parse(await readFile('data/presets.json', 'utf8'));
+  /** @type {Record<string,boolean>} */ const sections = {};
+  /** @type {Record<string,boolean>} */ const items = {};
+  let taken = 0;
+  for (const section of ctx.corpus.sections) {
+    const own = (ctx.corpus.conceptsByGroup[section.group] ?? [])
+      .filter((c) => c.section_id === section.section_id);
+    sections[section.section_id] = taken < 25 && own.length > 0;
+    for (const c of own) items[c.concept_id] = sections[section.section_id] && taken++ < 25;
+  }
+  const { plan } = await buildSheet(ctx, {
+    ...base, geometry: { ...presets.geometry['phone-19-5x9'] }, selection: { sections, items },
+  });
+  assert.equal(plan.faces.length, 2, `${plan.faces.length} wallpapers for a short card`);
+  const rows = plan.faces.map((f) => f.hits.filter((h) => h.conceptId).length);
+  const total = rows.reduce((a, b) => a + b, 0);
+  for (const n of rows) assert.ok(n >= total / 3, `a face holds ${n} of ${total} rows`);
+  assert.ok(plan.scale >= COMFORT, `and reads at ${plan.scale}`);
+});
+
 test('a priority step nests, and never leaves a heading over nothing', async () => {
   // Sections are not uniform: `emergency-medical` is dense with high-importance
   // rows and `hike` has none above 0.8, so a global threshold empties whole
