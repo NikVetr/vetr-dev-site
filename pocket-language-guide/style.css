@@ -714,7 +714,7 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   padding: 2px; border: 1px solid var(--line); border-radius: 4px;
   background: var(--paper); color: var(--muted); cursor: pointer;
 }
-.tree-format .sliders {
+.tree-format .tree-glyph {
   inline-size: 0.95em; block-size: 0.95em; fill: none; stroke: currentColor;
   stroke-width: 1.6; stroke-linecap: round;
 }

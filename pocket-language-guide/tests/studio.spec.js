@@ -154,7 +154,8 @@ test.describe('studio', () => {
     await expect(page.locator('.face.focused')).toBeVisible();
     const reset = page.locator('#reset-formats');
     await expect(reset).toBeDisabled();
-    const numbers = page.locator('.tree summary').filter({ hasText: 'Numbers + money' }).locator('.tree-format');
+    const numbers = page.locator('.tree summary').filter({ hasText: 'Numbers + money' })
+      .getByRole('button', { name: /^Format for/ });
     await numbers.click();
     const dialog = page.locator('dialog.section-format');
     await expect(dialog.getByRole('radiogroup', { name: 'How each entry is laid out' })

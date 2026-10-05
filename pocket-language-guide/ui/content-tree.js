@@ -30,47 +30,27 @@ import { number, t } from './i18n.js';
 import { nextIndex } from './keys.js';
 import { arrange } from './arrange.js';
 
-/** A pencil, for the button that opens a row's editor. Inline rather than an entry in
- * `data/icons.json`, because that file is the set the *sheet* can draw and this is
- * interface chrome. */
-function pencilGlyph() {
+/**
+ * A line drawing for one of the list's own buttons: the pencil that opens a row's
+ * editor, and a section's sliders and arrows. Inline rather than entries in
+ * `data/icons.json`, because that file is the set the *sheet* can draw and these are
+ * interface chrome.
+ * @param {string} name  its class @param {string} d
+ */
+function chromeGlyph(name, d) {
   const NS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('viewBox', '0 0 16 16');
   svg.setAttribute('aria-hidden', 'true');
-  svg.setAttribute('class', 'pencil');
+  svg.setAttribute('class', name);
   const path = document.createElementNS(NS, 'path');
-  path.setAttribute('d', 'M11.2 1.8a1.7 1.7 0 0 1 2.4 2.4L5.3 12.5l-3 .8.8-3z');
+  path.setAttribute('d', d);
   svg.append(path);
   return svg;
 }
-
-/** Two sliders, for the button that opens a section's own format. Inline for the
- * reason the pencil is. */
-function slidersGlyph() {
-  const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', '0 0 16 16');
-  svg.setAttribute('aria-hidden', 'true');
-  svg.setAttribute('class', 'sliders');
-  const path = document.createElementNS(NS, 'path');
-  path.setAttribute('d', 'M2 4.5h12M2 11.5h12M5.5 2.5v4M10.5 9.5v4');
-  svg.append(path);
-  return svg;
-}
-
-/** Two arrows, up and down, for the button that puts a section's rows in order. */
-function arrowsGlyph() {
-  const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', '0 0 16 16');
-  svg.setAttribute('aria-hidden', 'true');
-  svg.setAttribute('class', 'sliders');
-  const path = document.createElementNS(NS, 'path');
-  path.setAttribute('d', 'M5 13V3M2.5 5.5 5 3l2.5 2.5M11 3v10M8.5 10.5 11 13l2.5-2.5');
-  svg.append(path);
-  return svg;
-}
+const pencilGlyph = () => chromeGlyph('pencil', 'M11.2 1.8a1.7 1.7 0 0 1 2.4 2.4L5.3 12.5l-3 .8.8-3z');
+const slidersGlyph = () => chromeGlyph('tree-glyph', 'M2 4.5h12M2 11.5h12M5.5 2.5v4M10.5 9.5v4');
+const arrowsGlyph = () => chromeGlyph('tree-glyph', 'M5 13V3M2.5 5.5 5 3l2.5 2.5M11 3v10M8.5 10.5 11 13l2.5-2.5');
 
 /** The sheet's own field order, so a tree row reads the way the printed row does. */
 const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
@@ -356,7 +336,7 @@ export function createTree(input) {
     });
     const reorderName = t('tree.reorder', { section: title });
     const reorder = el('button', {
-      type: 'button', class: 'tree-format', 'aria-label': reorderName, title: reorderName,
+      type: 'button', class: 'tree-format tree-reorder', 'aria-label': reorderName, title: reorderName,
     }, [arrowsGlyph()]);
     const summary = el('summary', {}, [
       sectionBox,

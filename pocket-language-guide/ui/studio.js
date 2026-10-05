@@ -368,12 +368,14 @@ async function main() {
           spec,
           format: spec.sectionFormats?.[sectionId] ?? {},
           onChange: (format) => {
+            marked = null;
             const { [sectionId]: _, ...rest } = spec.sectionFormats ?? {};
             spec = { ...spec, sectionFormats: Object.keys(format).length ? { ...rest, [sectionId]: format } : rest };
             schedule();
           },
         }),
         onReorder: (sectionId, ids) => {
+          marked = null;
           spec = { ...spec, itemOrder: { ...spec.itemOrder, [sectionId]: ids } };
           schedule();
         },
@@ -605,6 +607,7 @@ async function main() {
 
   // Every section back on the card's own format, in one press.
   $('reset-formats').addEventListener('click', () => {
+    marked = null;
     spec = { ...spec, sectionFormats: {} };
     schedule();
   });
