@@ -598,7 +598,6 @@
   "about.kept": "Csak ezen az eszközön és a biztonsági mentéseiben marad meg, sehol máshol.",
   "about.unset": "Még nincs kitöltve: kitöltés koppintással",
   "about.set": "Kitöltve: törlés hosszan tartott érintéssel",
-  "format.darkCard": "Sötét kártya",
   "format.foldSize": "Hajtásméret",
   "format.foldSize.folded": "Hajtott kártya",
   "format.foldSize.unfolded": "Hajtatlan lap",

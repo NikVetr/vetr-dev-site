@@ -598,7 +598,6 @@
   "about.kept": "শুধু এই ডিভাইসে আর আপনার ব্যাকআপে থাকে, আর কোথাও নয়।",
   "about.unset": "এখনো ভরা হয়নি: ভরতে চাপুন",
   "about.set": "ভরা আছে: মুছতে ধরে রাখুন",
-  "format.darkCard": "ডার্ক কার্ড",
   "format.foldSize": "ভাঁজের আকার",
   "format.foldSize.folded": "ভাঁজ করা কার্ড",
   "format.foldSize.unfolded": "না ভাঁজ করা শীট",

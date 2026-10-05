@@ -601,7 +601,6 @@
   "format.foldSize": "サイズ",
   "format.foldSize.folded": "折ったカード",
   "format.foldSize.unfolded": "折る前のシート",
-  "format.darkCard": "ダークカード",
   "display.siren": "「注意を引く」はサイレンも鳴らします",
   "board.addContext": "自分の場面",
   "board.contextName": "この場面の名前",
