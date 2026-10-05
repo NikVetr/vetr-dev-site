@@ -619,7 +619,7 @@ async function main() {
         adds: [],
         removes: [],
         slack: 0,
-        note: t('studio.balanceBlocked'),
+        note: t('studio.balanceWarnings'),
       });
       return;
     }

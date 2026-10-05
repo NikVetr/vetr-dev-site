@@ -388,7 +388,7 @@
   "studio.allOff": "All off",
   "studio.allOn": "All on",
   "studio.balance": "Balance columns",
-  "studio.balanceBlocked": "The sheet does not fit yet, so there is no whitespace to fill. Clear the errors under Warnings first.",
+  "studio.balanceWarnings": "The sheet does not fit yet, so there is no whitespace to fill. Clear the errors under Warnings first.",
   "studio.bannerQuestion": "Too many options?",
   "studio.close": "Close",
   "studio.contentPanel": "Content",
