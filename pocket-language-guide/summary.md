@@ -2452,10 +2452,13 @@ back to the zip -- it has a button of its own now, so its click is its activatio
 
 **The lock screen is drawn over the space the card leaves for it.** Reserved space is
 invisible, so a phone preset looked like it had merely made the sheet smaller. The
-date, clock, widget tiles, corner controls and home indicator are drawn dashed and
-unfilled -- the sheet's own ink is solid, so an outline reads as a guide -- and they
-cannot reach an export because they are not in the `LayoutPlan` at all, but a DOM
-overlay the preview adds afterwards.
+date, clock, widget tiles, corner controls and home indicator are drawn unfilled --
+the sheet's own ink is solid, so an outline reads as a guide -- and they cannot reach
+an export because they are not in the `LayoutPlan` at all, but a DOM overlay the
+preview adds afterwards. The shapes are dashed and the date and clock are hollow
+letters in a solid hairline, measured on a canvas and shrunk to the screen's width:
+dashes on 12pt type ran each glyph into the next, and "9:41 AM" at its band's size ran
+off both edges of every phone.
 
 ## The native shell
 

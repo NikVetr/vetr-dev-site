@@ -91,8 +91,8 @@ test('the lock screen furniture is drawn in the preview and never in an export',
   // Reserved space is invisible, so a phone preset showed a card with a wide empty
   // margin and nothing to say why -- the setting looked like it had just made the
   // sheet smaller. The clock, date, widgets and buttons that are going to be there
-  // are drawn over the reserved bands instead, dashed and unfilled, which is how
-  // they say "not yours": the sheet's own ink is solid.
+  // are drawn over the reserved bands instead, unfilled, which is how they say "not
+  // yours": the sheet's own ink is solid.
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/customize.html?target=es&source=en');
@@ -109,9 +109,22 @@ test('the lock screen furniture is drawn in the preview and never in an export',
   const lock = page.locator('.face.focused > svg[aria-hidden="true"]');
   await expect(lock).toHaveCount(1, { timeout: 90_000 });
   await expect(lock.locator('text')).toHaveCount(2);
-  // Dashed, which is the whole of how it reads as a guide rather than as ink.
+  // The shapes dashed, the words hollow. A dash longer than a 12pt letter's strokes
+  // ran each glyph into its neighbour, and the date read as overlapping outlines.
   const dashed = await lock.locator('[stroke-dasharray]').count();
   expect(dashed).toBeGreaterThan(4);
+  await expect(lock.locator('text[stroke-dasharray]')).toHaveCount(0);
+  await expect(lock.locator('text[fill="none"]')).toHaveCount(2);
+  // And the words fit across the screen: "9:41 AM" at a quarter of the width ran off
+  // both edges of every phone.
+  const spill = await lock.evaluate((el) => {
+    const face = el.getBoundingClientRect();
+    return [...el.querySelectorAll('text')].map((t) => {
+      const r = t.getBoundingClientRect();
+      return Math.max(face.left - r.left, r.right - face.right);
+    });
+  });
+  for (const px of spill) expect(px).toBeLessThan(0);
   // It must not eat a tap meant for a row underneath it.
   expect(await lock.evaluate((el) => getComputedStyle(el).pointerEvents)).toBe('none');
 

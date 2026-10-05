@@ -143,11 +143,18 @@ function lockSample() {
  * setting looked like it had simply made the sheet smaller. This draws what is going
  * to be there.
  *
- * Everything is dashed and unfilled, which is the whole of how it says "not yours":
- * the sheet's own ink is solid, so an outline in a dashed stroke reads as a guide at
- * a glance and cannot be mistaken for something that will print. It never reaches
- * the export because it is not in the `LayoutPlan` at all — the renderers draw the
- * plan, and this is a DOM overlay the preview adds on top.
+ * Everything is unfilled, which is the whole of how it says "not yours": the sheet's
+ * own ink is solid, so an outline reads as a guide at a glance and cannot be mistaken
+ * for something that will print. It never reaches the export because it is not in the
+ * `LayoutPlan` at all — the renderers draw the plan, and this is a DOM overlay the
+ * preview adds on top.
+ *
+ * **The shapes are dashed and the words are not.** A dash a few points long is a
+ * fine way to draw a tile, and on a 12pt date it was longer than the strokes of the
+ * letters, so each glyph's dashes ran into its neighbour's and the date read as a
+ * tangle of overlapping outlines. Hollow letters in a solid hairline say "guide" just
+ * as plainly and stay letters. The words are also measured and shrunk to the width:
+ * "9:41 AM" at a quarter of the screen's width ran off both edges of every phone.
  *
  * In page units against the plan's own `pageW`/`pageH`, so it lines up with the
  * reserved bands exactly rather than approximately.
@@ -171,9 +178,9 @@ export function lockScreenPreview(plan) {
   svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
 
   const W = plan.pageW;
-  /** Dash length scales with the page so it reads the same on a 180pt phone and a
-   * 448pt tablet. @param {SVGElement} node */
-  const dashed = (node) => {
+  /** An unfilled guide stroke. Dash length scales with the page so it reads the same
+   * on a 180pt phone and a 448pt tablet. @param {SVGElement} node */
+  const guide = (node) => {
     node.setAttribute('fill', 'none');
     node.setAttribute('stroke', '#8a97a4');
     node.setAttribute('stroke-width', String(W / 260));
@@ -187,21 +194,31 @@ export function lockScreenPreview(plan) {
     rect.setAttribute('x', String(x)); rect.setAttribute('y', String(y));
     rect.setAttribute('width', String(w)); rect.setAttribute('height', String(h));
     rect.setAttribute('rx', String(r));
-    return dashed(rect);
+    return guide(rect);
   };
-  /** Outlined glyphs, not filled ones: the dashes have to read *through* the
-   * numerals, and a filled 9:41 would be a solid mark on a sheet whose own marks are
-   * solid. @param {string} text @param {number} y @param {number} size */
+  // The words' width per point of size, from a canvas: synchronous, and good before
+  // the overlay is in the document, which is when it is drawn.
+  const FONT = 'system-ui, sans-serif';
+  const pen = /** @type {CanvasRenderingContext2D} */ (
+    document.createElement('canvas').getContext('2d'));
+  pen.font = `600 100px ${FONT}`;
+  /** The size `text` is drawn at: `size`, or smaller where that would not fit across.
+   * @param {string} text @param {number} size */
+  const fit = (text, size) => Math.min(size, (W * 0.88) / (pen.measureText(text).width / 100));
+  /** Hollow letters, so they read through as a guide over the sheet's solid ones.
+   * @param {string} text @param {number} y baseline @param {number} size */
   const label = (text, y, size) => {
     const node = document.createElementNS(NS, 'text');
     node.setAttribute('x', String(W / 2));
     node.setAttribute('y', String(y));
     node.setAttribute('text-anchor', 'middle');
     node.setAttribute('font-size', String(size));
-    node.setAttribute('font-family', 'system-ui, sans-serif');
+    node.setAttribute('font-family', FONT);
     node.setAttribute('font-weight', '600');
     node.textContent = text;
-    return dashed(node);
+    guide(node).removeAttribute('stroke-dasharray');
+    node.setAttribute('stroke-width', String(size * 0.03));
+    return node;
   };
 
   if (top > 0) {
@@ -209,14 +226,20 @@ export function lockScreenPreview(plan) {
     // clock under it at several times the size, then a widget row. Sized off the
     // band rather than off the page, so a bigger reserve draws a bigger clock and
     // the preview keeps telling the truth about how much room it took.
-    const dateY = top * 0.26;
     const lock = lockSample();
-    label(lock.date, dateY, Math.min(top * 0.13, W / 16));
-    label(lock.time, top * 0.66, Math.min(top * 0.42, W / 4));
+    const dateSize = fit(lock.date, Math.min(top * 0.13, W / 16));
+    const timeSize = fit(lock.time, Math.min(top * 0.42, W / 4));
     // Two widget tiles on the row under the clock, which is where iOS puts them.
     const tileH = top * 0.17;
     const tileW = W * 0.3;
     const tileY = top - tileH - top * 0.06;
+    // The date and the clock as one group, centred in the room above the tiles, each
+    // line by its cap height (about 0.72 of the size in a system face) -- so a clock
+    // shrunk to the width stays with its date rather than leaving a hole.
+    const gap = top * 0.06;
+    const dateY = (tileY - (dateSize + timeSize) * 0.72 - gap) / 2 + dateSize * 0.72;
+    label(lock.date, dateY, dateSize);
+    label(lock.time, dateY + gap + timeSize * 0.72, timeSize);
     box(W / 2 - tileW - W * 0.02, tileY, tileW, tileH, tileH * 0.28);
     box(W / 2 + W * 0.02, tileY, tileW, tileH, tileH * 0.28);
   }
@@ -231,11 +254,14 @@ export function lockScreenPreview(plan) {
       circle.setAttribute('cx', String(cx));
       circle.setAttribute('cy', String(y0 + bottom * 0.42));
       circle.setAttribute('r', String(r));
-      dashed(circle);
+      guide(circle);
     }
+    // The home indicator is one dashed rule with round ends. It was a hollow box
+    // thinner than its own stroke, so its top and bottom dashes lay over each other.
     const barW = W * 0.34;
-    const barH = Math.max(bottom * 0.05, W / 160);
-    box(W / 2 - barW / 2, plan.pageH - bottom * 0.28, barW, barH, barH / 2);
+    const bar = document.createElementNS(NS, 'path');
+    bar.setAttribute('d', `M${W / 2 - barW / 2} ${plan.pageH - bottom * 0.25}h${barW}`);
+    guide(bar).setAttribute('stroke-linecap', 'round');
   }
 
   return svg;
