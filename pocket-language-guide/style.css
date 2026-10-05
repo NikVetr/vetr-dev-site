@@ -2512,9 +2512,11 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 }
 .theme-switch[aria-checked="true"] .theme-switch-track { background: var(--accent); border-color: var(--accent); }
 .theme-switch[aria-checked="true"] .theme-switch-knob { inset-inline-start: calc(100% - 1.3rem); }
-.theme-switch[aria-checked="false"] svg:first-child, .theme-switch[aria-checked="true"] svg:last-child { color: var(--ink); }
+.theme-switch[aria-checked="false"] > :first-child, .theme-switch[aria-checked="true"] > :last-child { color: var(--ink); }
 .theme-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .theme-switch[hidden] { display: none; }
+/* A switch whose ends are words rather than marks -- the register's `Sie` and `du`. */
+.theme-switch .switch-word { font-size: 0.85rem; font-weight: 600; line-height: 1; white-space: nowrap; }
 
 /* --- the site menu ---------------------------------------------------------- */
 /* Three bars at the end of every header: Settings, wherever the reader is. Drawn

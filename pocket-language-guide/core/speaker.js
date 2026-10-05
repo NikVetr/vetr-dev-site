@@ -33,6 +33,8 @@
  * @property {string} axis      a stable slug: `speaker_gender`, `politeness`, ...
  * @property {string[]} values  every permitted value, in the order to offer them
  * @property {string} fallback  the one used when the reader has not chosen
+ * @property {Record<string, string>} labels  what a switch shows for each value, in the
+ *   language itself -- `Sie` and `du` -- where the registry gives one
  */
 
 /**
@@ -58,8 +60,9 @@ export function readAxes(rows) {
     const value = row.value?.trim();
     if (!language || !axis || !value) continue;
     const forLanguage = (byLanguage[language] ??= {});
-    const held = (forLanguage[axis] ??= { language, axis, values: [], fallback: value });
+    const held = (forLanguage[axis] ??= { language, axis, values: [], fallback: value, labels: {} });
     held.values.push(value);
+    if (row.label?.trim()) held.labels[value] = row.label.trim();
     if (row.default === '1') held.fallback = value;
   }
   return Object.fromEntries(

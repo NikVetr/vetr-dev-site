@@ -1468,7 +1468,14 @@ for whoever is at the counter. Its key joins the speaker's (`joinKeys`), and
 `variantOf` tries the whole key and then each part, so a sentence that changes only
 with its listener is found whoever says it. It reaches the listener's side of what the
 traveller says and nothing else: the reader's own gloss is said to nobody, and an
-incoming reply is refused as always.
+incoming reply is refused as always. **The register is the same kind of switch**: a
+`register` axis whose default is the polite base row a stranger is owed and whose other
+value is `familiar` -- *du* for *Sie*, plain for *desu/masu* -- drawn as a second light
+switch whose two ends are the language's own words for the two (the registry's `label`
+column), behind its own setting. Both switches may be on at once; the key then joins
+both parts, and a sentence written for only one of them is found by that part. The
+familiar forms are a research pass (`content/PROMPTS/register-variants.md`), and until
+a language declares the axis its switch is not drawn.
 
 One setting, four surfaces: the board, the quick page and the studio open the same
 dialog, the profile rides in `SheetSpec.speaker` so an exported sheet carries the

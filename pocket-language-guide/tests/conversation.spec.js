@@ -1212,6 +1212,32 @@ test('a request is neutral until the reader turns on the switch for whom it is s
   await expect(page.locator('#board-addressee')).toBeHidden();
 });
 
+test('the register switch says a request familiarly, and is labelled in the language', async ({ page }) => {
+  // No language has familiar rows yet, so the registry and the table are stood in for:
+  // German, Sie and du, and one request in its familiar form.
+  await page.route('**/data/registry/listener-axes.csv', async (route) => {
+    const body = await (await route.fetch()).text();
+    await route.fulfill({ body: `${body}de,register,polite,1,Sie,\r\nde,register,familiar,0,du,\r\n` });
+  });
+  await page.route('**/data/lang/de/variants.csv', async (route) => {
+    const body = await (await route.fetch()).text();
+    await route.fulfill({ body: `${body}register=familiar,taxi.could-you-make-it-colder,Kannst du die Klimaanlage bitte kühler stellen?,,,,2,test\r\n` });
+  });
+  await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ registerSwitch: true })));
+  await page.goto('/conversation.html?target=de&source=en&board=transport&screen=taxi');
+  const toggle = page.locator('#board-register');
+  await expect(toggle).toBeVisible();
+  await expect(toggle).toHaveText(/Sie\s*du/);
+  await expect(toggle).toHaveAttribute('aria-checked', 'false');
+  await page.locator('[data-button="colder"]').click();
+  await expect(page.locator('.board-message-text')).toContainText('Könnten Sie');
+  await dismiss(page);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-checked', 'true');
+  await page.locator('[data-button="colder"]').click();
+  await expect(page.locator('.board-message-text')).toContainText('Kannst du');
+});
+
 test('a button\'s key words are set in bold, and the reader marks their own', async ({ page }) => {
   // The reader's own button, with the word they chose to find it by.
   await page.addInitScript(() => localStorage.setItem('plg.boards', JSON.stringify({

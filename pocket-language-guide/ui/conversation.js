@@ -1124,14 +1124,17 @@ async function main() {
       .map(async (code) => [code, await loadVariants(loadText, code)]),
   ));
   let profile = readProfile();
-  // Whether the listener's language words a request differently to a man and to a
-  // woman, which is when the board's switch for it is drawn at all.
-  const addressable = Boolean(corpus.listenerAxes[listener]?.length);
+  // Which of the listener's language's axes about whom it is said to -- a man or a woman,
+  // a stranger or a friend -- it declares, each drawn as a switch only where it does.
+  const listenerAxis = (/** @type {string} */ name) => corpus.listenerAxes[listener]?.find((a) => a.axis === name);
   const voice = () => {
     // **To whom, as well as by whom**, on the listener's side only: the reader's own
-    // gloss is not said to anyone. Neutral unless the reader has the switch on.
-    const to = display.addressSwitch && addressable
-      ? variantKey(corpus.listenerAxes[listener], { listener_gender: display.addressee }) : null;
+    // gloss is not said to anyone. Neutral and polite unless the reader has the
+    // switches on; `variantKey` leaves out a value it is not given.
+    const to = variantKey(corpus.listenerAxes[listener] ?? [], {
+      listener_gender: display.addressSwitch ? display.addressee : '',
+      register: display.registerSwitch ? display.register : '',
+    });
     for (const [code, side] of /** @type {const} */ ([[listener, 'listenerVoice'], [owner, 'ownerVoice']])) {
       const table = variants[code];
       const by = variantKey(corpus.speakerAxes[code] ?? [], profile);
@@ -1591,7 +1594,7 @@ async function main() {
     applyUpdateIfIdle();
 
     if (state.view !== 'grid') {
-      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar', 'board-peek-bar', 'board-addressee']) $(id).hidden = true;
+      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar', 'board-peek-bar', 'board-addressee', 'board-register']) $(id).hidden = true;
     }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
@@ -1888,10 +1891,35 @@ async function main() {
     marks: [MARS, VENUS],
   });
   addressee.button.id = 'board-addressee';
-  $('board-peek-bar').before(addressee.button);
+  // **Polite or familiar**, the same kind of switch, its two ends the language's own
+  // words for the two -- `Sie` and `du`, `vous` and `tu` -- from the registry.
+  const registerAxis = listenerAxis('register');
+  /** One end of the register switch: the language's own word for it. @param {string} value */
+  const word = (value) => {
+    const span = document.createElement('span');
+    span.className = 'switch-word';
+    span.lang = listener;
+    span.textContent = registerAxis?.labels[value] ?? value;
+    return span.outerHTML;
+  };
+  const register = lightSwitch({
+    label: t('board.register'),
+    dark: () => display.register === 'familiar',
+    flip: () => {
+      display = { ...display, register: display.register === 'familiar' ? 'polite' : 'familiar' };
+      writeDisplay(display);
+      voice();
+      paint();
+    },
+    marks: [word('polite'), word('familiar')],
+  });
+  register.button.id = 'board-register';
+  $('board-peek-bar').before(addressee.button, register.button);
   function paintAddressee() {
-    addressee.button.hidden = !(display.addressSwitch && addressable) || state.view !== 'grid';
+    addressee.button.hidden = !(display.addressSwitch && listenerAxis('listener_gender')) || state.view !== 'grid';
     addressee.show();
+    register.button.hidden = !(display.registerSwitch && registerAxis) || state.view !== 'grid';
+    register.show();
   }
 
   // **The eye: held, every button shows what it will say** -- the reader's whole

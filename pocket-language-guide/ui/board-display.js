@@ -44,6 +44,8 @@ const KEY = 'plg.board-display';
  * @property {boolean} colourKeys  ...and in a colour where the sentence has one: colder in blue, stop in red
  * @property {boolean} addressSwitch  a switch on the board for saying the sentences to a man or a woman
  * @property {'masculine'|'feminine'} addressee  ...and which way it is set
+ * @property {boolean} registerSwitch  a switch on the board for speaking familiarly, to a friend or a child
+ * @property {'polite'|'familiar'} register  ...and which way it is set
  * @property {boolean} cellWords  under each button's words, the other language's
  * @property {boolean} cellSay    ...how to say them, in the reader's own letters
  * @property {boolean} cellIpa    ...and in IPA
@@ -93,6 +95,10 @@ export const DEFAULTS = {
   // whoever is in front of them. Never a question about the stranger in advance.
   addressSwitch: false,
   addressee: 'masculine',
+  // The same for the register: the polite form a stranger is owed is what the boards
+  // say, and a reader talking to a child or a friend may switch to the familiar one.
+  registerSwitch: false,
+  register: 'polite',
   // The key words in bold by default, which costs nothing and finds a button sooner;
   // their colours are the reader's to turn on, being a louder change to the grid.
   boldKeys: true,
@@ -125,7 +131,7 @@ export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
  * fourth are parts of a screen, each a short name in a grid of tiles; the second are
  * behaviours, each a sentence.
  */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'addressSwitch'|'boldKeys'|'colourKeys'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'addressSwitch'|'registerSwitch'|'boldKeys'|'colourKeys'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
   { id: 'owner', labelKey: 'display.ownerShort', group: 'screen' },
   { id: 'roman', labelKey: 'display.romanShort', group: 'screen' },
   { id: 'ipa', labelKey: 'display.ipaShort', group: 'screen' },
@@ -140,6 +146,7 @@ export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'poli
   { id: 'holdSpeaks', labelKey: 'display.holdSpeaks', group: 'buttons' },
   { id: 'polite', labelKey: 'display.polite', group: 'buttons' },
   { id: 'addressSwitch', labelKey: 'display.addressSwitch', group: 'buttons' },
+  { id: 'registerSwitch', labelKey: 'display.registerSwitch', group: 'buttons' },
   { id: 'siren', labelKey: 'display.siren', group: 'buttons' },
   { id: 'askRemove', labelKey: 'display.askRemove', group: 'buttons' },
   { id: 'cellWords', labelKey: 'display.wordsShort', group: 'cells' },
@@ -175,6 +182,7 @@ export function readDisplay() {
     if (USED_OVER.includes(held?.usedOver)) out.usedOver = held.usedOver;
     if (typeof held?.usedPooled === 'boolean') out.usedPooled = held.usedPooled;
     if (held?.addressee === 'masculine' || held?.addressee === 'feminine') out.addressee = held.addressee;
+    if (held?.register === 'polite' || held?.register === 'familiar') out.register = held.register;
     return out;
   } catch {
     return { ...DEFAULTS };
