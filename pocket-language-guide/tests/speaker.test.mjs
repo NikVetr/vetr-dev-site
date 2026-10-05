@@ -2,9 +2,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  readAxes, axesFor, variantKey, variantOf, applyVariants, unanswered,
-} from '../core/speaker.js';
+import { readAxes, axesFor, variantKey, variantOf, applyVariants, unanswered, joinKeys } from '../core/speaker.js';
 
 /** A registry with two languages that inflect and one that does not. */
 const ROWS = [
@@ -189,7 +187,12 @@ test('every shipped variant file is reachable, and none of it empties a row', as
   const { loadVariants } = await import('../core/pack.js');
 
   const load = (/** @type {string} */ rel) => readFile(rel, 'utf8');
-  const shipped = readAxes(parseTable(await load('data/registry/speaker-axes.csv'), 'axes'));
+  // Who speaks and, where a language words it differently, whom it is said to: a key
+  // may come from either registry, or join one of each.
+  const speakers = readAxes(parseTable(await load('data/registry/speaker-axes.csv'), 'axes'));
+  const listeners = readAxes(parseTable(await load('data/registry/listener-axes.csv'), 'listener axes'));
+  const shipped = Object.fromEntries([...new Set([...Object.keys(speakers), ...Object.keys(listeners)])]
+    .map((language) => [language, [...(speakers[language] ?? []), ...(listeners[language] ?? [])]]));
 
   for (const [language, list] of Object.entries(shipped)) {
     const variants = await loadVariants(load, language);
@@ -231,4 +234,19 @@ test('every shipped variant file is reachable, and none of it empties a row', as
     }
     assert.ok(changed > 0, `${language} ships a variants file that changes nothing`);
   }
+});
+
+test('whom a sentence is said to joins who says it, and either part alone still finds its row', () => {
+  assert.equal(joinKeys(null, null), null);
+  assert.equal(joinKeys('speaker_gender=feminine', 'listener_gender=masculine'),
+    'listener_gender=masculine|speaker_gender=feminine');
+  const variants = {
+    'listener_gender=feminine': { 'taxi.stop': { text: 'to her' } },
+    'speaker_gender=feminine': { 'help.lost': { text: 'lost, as her' } },
+  };
+  const key = joinKeys('speaker_gender=feminine', 'listener_gender=feminine');
+  assert.equal(variantOf({ conceptId: 'taxi.stop', row: { text: 'neutral' }, variants, key }).row.text, 'to her');
+  assert.equal(variantOf({ conceptId: 'help.lost', row: { text: 'lost' }, variants, key }).row.text, 'lost, as her');
+  // And never on what the listener says back.
+  assert.equal(variantOf({ conceptId: 'taxi.stop', row: { text: 'neutral' }, variants, key, incoming: true }).row.text, 'neutral');
 });

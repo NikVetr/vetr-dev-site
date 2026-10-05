@@ -119,6 +119,17 @@ export function variantKey(axes, profile) {
 }
 
 /**
+ * Two variant keys as one -- who speaks, and to whom -- sorted as `variantKey` sorts
+ * its own parts, or `null` when neither says anything.
+ * @param {...(string|null)} keys
+ * @returns {string|null}
+ */
+export function joinKeys(...keys) {
+  const parts = keys.filter(Boolean).flatMap((k) => /** @type {string} */ (k).split('|'));
+  return parts.length ? parts.sort().join('|') : null;
+}
+
+/**
  * One concept's row as this speaker says it, falling back to the row on disk.
  *
  * A whole row rather than just `text`, because a wording that changes changes with
@@ -145,7 +156,9 @@ export function variantKey(axes, profile) {
  */
 export function variantOf({ conceptId, row, variants, key, incoming }) {
   if (incoming || !key) return { row, varied: false };
-  const said = variants[key]?.[conceptId];
+  // The whole key first, then each of its parts: a sentence that changes only with
+  // whom it is said to has its rows under the listener's part alone, whoever says it.
+  const said = [key, ...key.split('|')].map((k) => variants[k]?.[conceptId]).find(Boolean);
   if (!said) return { row, varied: false };
   const merged = { ...row };
   for (const [field, value] of Object.entries(said)) if (value) merged[field] = value;

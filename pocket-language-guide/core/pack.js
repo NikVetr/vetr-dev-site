@@ -56,6 +56,9 @@ export async function loadCorpus(loadText) {
   // whose languages have no first-person gender agreement is never asked their
   // gender. See `core/speaker.js` and `data/registry/NOTES.md`.
   const speakerAxes = readAxes(await read('data/registry/speaker-axes.csv'));
+  // Who the reader is speaking to, where a language words a request differently for
+  // a man and a woman: a switch on the board, never a question in the settings.
+  const listenerAxes = readAxes(await read('data/registry/listener-axes.csv'));
   const sectionRows = await read('data/registry/sections.csv');
   // The five colour roles' own names, for a super-section label: a face's sections
   // are all of a theme far more often than not, and the role is already the colour
@@ -130,6 +133,7 @@ export async function loadCorpus(loadText) {
     scripts,
     languages,
     speakerAxes,
+    listenerAxes,
     coverage,
     respellOverrides,
     respellRules,

@@ -22,7 +22,8 @@ import {
   loadRespellRules, loadRespellOverrides, loadCountries,
 } from '../core/pack.js';
 import { createRespeller, nameRespeller } from '../core/respell.js';
-import { variantKey } from '../core/speaker.js';
+import { joinKeys, variantKey } from '../core/speaker.js';
+import { lightSwitch } from './theme.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences, MAX_BUTTONS,
 } from '../core/conversation.js';
@@ -61,6 +62,12 @@ import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 /** What the cell that opens each keypad says, in whichever language is reading it. */
+/** The two marks of the board's switch for whom its sentences are said to. */
+const MARS = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+  + '<circle cx="10" cy="14" r="5"/><path d="M13.5 10.5 19 5M14.5 5H19v4.5"/></svg>';
+const VENUS = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+  + '<circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg>';
+
 const ENTRY_LABEL = /** @type {Record<string,string>} */ ({
   duration: 'board.otherAmount',
   clock: 'board.atTime',
@@ -744,7 +751,8 @@ function travelChecks(listener, owner, index, nameOf) {
         const { corpus } = pairing;
         await Promise.all([
           loadCatalogue(listener, load), loadCatalogue(owner, load),
-          ...[listener, owner].filter((code) => corpus.speakerAxes[code]?.length).map((code) => loadVariants(load, code)),
+          ...[listener, owner].filter((code) => corpus.speakerAxes[code]?.length || corpus.listenerAxes[code]?.length)
+            .map((code) => loadVariants(load, code)),
         ]);
         // The country names, given to the sentences that say one as a board gives them.
         if (corpus.countries.has(owner) && corpus.countries.has(listener)) {
@@ -1100,16 +1108,22 @@ async function main() {
   // reload. `variantKey` is recomputed on every change; the tables are not.
   const variants = Object.fromEntries(await Promise.all(
     [listener, owner]
-      .filter((code) => corpus.speakerAxes[code]?.length)
+      .filter((code) => corpus.speakerAxes[code]?.length || corpus.listenerAxes[code]?.length)
       .map(async (code) => [code, await loadVariants(loadText, code)]),
   ));
   let profile = readProfile();
+  // Whether the listener's language words a request differently to a man and to a
+  // woman, which is when the board's switch for it is drawn at all.
+  const addressable = Boolean(corpus.listenerAxes[listener]?.length);
   const voice = () => {
+    // **To whom, as well as by whom**, on the listener's side only: the reader's own
+    // gloss is not said to anyone. Neutral unless the reader has the switch on.
+    const to = display.addressSwitch && addressable
+      ? variantKey(corpus.listenerAxes[listener], { listener_gender: display.addressee }) : null;
     for (const [code, side] of /** @type {const} */ ([[listener, 'listenerVoice'], [owner, 'ownerVoice']])) {
       const table = variants[code];
-      ctx[side] = table
-        ? { key: variantKey(corpus.speakerAxes[code] ?? [], profile), variants: table }
-        : undefined;
+      const by = variantKey(corpus.speakerAxes[code] ?? [], profile);
+      ctx[side] = table ? { key: side === 'listenerVoice' ? joinKeys(by, to) : by, variants: table } : undefined;
     }
   };
   voice();
@@ -1550,7 +1564,7 @@ async function main() {
     applyUpdateIfIdle();
 
     if (state.view !== 'grid') {
-      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar', 'board-peek-bar']) $(id).hidden = true;
+      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar', 'board-peek-bar', 'board-addressee']) $(id).hidden = true;
     }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
@@ -1580,6 +1594,7 @@ async function main() {
       // Nothing is made on Most used; it is what the other screens' presses make.
       if (boardId === MOST_USED) $('board-add-bar').hidden = true;
       paintTap();
+      paintAddressee();
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       $('board-grid').classList.toggle('board-grid-words', display.sizedToWords);
       $('board-grid').classList.toggle('board-grid-even', display.evenType);
@@ -1829,6 +1844,28 @@ async function main() {
     holdAwake();
   });
 
+  // **To a man or to a woman**, where the listener's language words a request
+  // differently and the reader has asked for the switch: a light switch with Mars and
+  // Venus for its sun and moon, set for whoever is in front of them, in the bar where
+  // the moment it changes -- a new person at the counter -- is not a moment for a dialog.
+  const addressee = lightSwitch({
+    label: t('board.addressee'),
+    dark: () => display.addressee === 'feminine',
+    flip: () => {
+      display = { ...display, addressee: display.addressee === 'feminine' ? 'masculine' : 'feminine' };
+      writeDisplay(display);
+      voice();
+      paint();
+    },
+    marks: [MARS, VENUS],
+  });
+  addressee.button.id = 'board-addressee';
+  $('board-peek-bar').before(addressee.button);
+  function paintAddressee() {
+    addressee.button.hidden = !(display.addressSwitch && addressable) || state.view !== 'grid';
+    addressee.show();
+  }
+
   // **The eye: held, every button shows what it will say** -- the reader's whole
   // sentence, the other side's, how to say it, and on a question the answers the
   // stranger can give -- and let go, the grid is as it was. What it shows is a setting.
@@ -1871,7 +1908,7 @@ async function main() {
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
     extra: [arrangeRow(() => arrangeGrid(`${boardId}/${state.path.at(-1)}`, () => { personal = readPersonal(); paint(); })),
       aboutSection(detailsChanged, dietChoices(ctx), sounds(), askFrom),
-      displaySection(display, (next) => { display = next; paint(); }, { canSpeak, language: nameOf(listener) }),
+      displaySection(display, (next) => { display = next; voice(); paint(); }, { canSpeak, language: nameOf(listener) }),
       // Most used is built from these choices when it opens, so on that screen a change
       // is a fresh build; anywhere else it only has to be remembered.
       mostUsedSection(listener, owner, nameOf, () => {

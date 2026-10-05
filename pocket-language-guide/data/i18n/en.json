@@ -523,6 +523,8 @@
   "board.switchLanguage": "Change the language",
   "display.heading": "What the message screen shows",
   "display.polite": "Say \u201cexcuse me\u201d first, before every request",
+  "display.addressSwitch": "A switch on the board for speaking to a man or a woman, where their language words it differently",
+  "board.addressee": "Speaking to a woman",
   "display.siren": "Attract attention also sounds a siren",
   "display.politeCanada": "In Canada? You may want this on.",
   "display.voice": "Voice",

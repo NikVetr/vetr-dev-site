@@ -1399,6 +1399,20 @@ asked for. Supplied replies are written naturally neutral in both languages inst
 languages (Amharic, Hausa) whose first person is ungendered and whose *second* person
 is not — no axis, real hazard.
 
+**Whom a request is said to is a switch, never a question.** The boards word what the
+traveller says so it is right to anyone. Where a language has a more natural form to a
+man or to a woman -- Arabic and Hebrew imperatives, Czech polite address, the Hausa
+second person, some Punjabi requests -- `data/registry/listener-axes.csv` declares a
+`listener_gender` axis whose default is that neutral base row, and `variants.csv`
+carries the two forms under `listener_gender=masculine|feminine`. A reader who wants
+them turns on a setting, and the board's bar then holds a light switch with Mars and
+Venus for its marks, drawn only where the listener's language declares the axis, set
+for whoever is at the counter. Its key joins the speaker's (`joinKeys`), and
+`variantOf` tries the whole key and then each part, so a sentence that changes only
+with its listener is found whoever says it. It reaches the listener's side of what the
+traveller says and nothing else: the reader's own gloss is said to nobody, and an
+incoming reply is refused as always.
+
 One setting, four surfaces: the board, the quick page and the studio open the same
 dialog, the profile rides in `SheetSpec.speaker` so an exported sheet carries the
 voice it was built in, and the drill inherits it because it drills the blocks the

@@ -1182,6 +1182,36 @@ test('the buttons can share one size of type, or be sized to their words', async
   expect(await page.locator('#board-grid').evaluate((g) => g.scrollHeight <= g.clientHeight + 1)).toBe(true);
 });
 
+test('a request is neutral until the reader turns on the switch for whom it is said to', async ({ page }) => {
+  // Czech says "could you" to one person with a participle that agrees with them:
+  // the board's own row is worded for anyone, and the switch gives the natural form.
+  await page.goto('/conversation.html?target=cs&source=en&board=transport');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const said = async () => {
+    await page.locator('[data-button="taxi"]').click();
+    await page.locator('[data-button="colder"]').click();
+    const text = await page.locator('.board-message-text').textContent();
+    await dismiss(page);
+    await page.locator('#board-up').click();
+    return text;
+  };
+  await expect(page.locator('#board-addressee')).toBeHidden();
+  expect(await said()).toContain('Můžete');
+  await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ addressSwitch: true })));
+  await page.reload();
+  const toggle = page.locator('#board-addressee');
+  await expect(toggle).toBeVisible();
+  await expect(toggle).toHaveAttribute('aria-checked', 'false');
+  expect(await said()).toContain('Mohl byste');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-checked', 'true');
+  expect(await said()).toContain('Mohla byste');
+  // A language that says it the same to anyone draws no switch.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await expect(page.locator('#board-addressee')).toBeHidden();
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

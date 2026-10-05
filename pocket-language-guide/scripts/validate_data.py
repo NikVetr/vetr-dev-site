@@ -542,19 +542,41 @@ def main():
             if re.search(r"listener|addressee|hearer", axis, re.I):
                 errors.append(f"speaker-axes.csv: {code}/{axis} is about the listener, "
                               "which must never be asked -- write the reply neutral")
+    # **Who is being spoken to**, in a registry of its own: never a question about the
+    # reader, only a switch the reader may turn on the board, and only for what the
+    # reader says -- the listener's own replies stay neutral. Its default is the base
+    # row, worded so it is right to anyone, and the other values are the natural forms
+    # to a man or to a woman.
+    listener_axes = defaultdict(dict)
+    for row in load("registry/listener-axes.csv"):
+        held = listener_axes[row["language"]].setdefault(row["axis"], {"values": [], "default": None})
+        held["values"].append(row["value"])
+        if row["default"] == "1":
+            held["default"] = row["value"]
+    for code, declared in sorted(listener_axes.items()):
+        if code not in languages:
+            errors.append(f"listener-axes.csv: unknown language {code!r}")
+        for axis, held in sorted(declared.items()):
+            if held["default"] not in held["values"] or len(held["values"]) < 3:
+                errors.append(f"listener-axes.csv: {code}/{axis} needs a neutral default "
+                              "and at least two forms to switch between")
     for path in sorted(DATA.glob("lang/*/variants.csv")):
         code = path.parent.name
         rel = path.relative_to(DATA)
-        declared = axes.get(code, {})
+        declared = {**axes.get(code, {}), **listener_axes.get(code, {})}
         if not declared:
-            errors.append(f"{rel}: {code} declares no axis in speaker-axes.csv, "
-                          "so no variant of it can ever be selected")
-        # Every key the registry can actually produce. Sorted `axis=value` pairs,
+            errors.append(f"{rel}: {code} declares no axis in speaker-axes.csv or "
+                          "listener-axes.csv, so no variant of it can ever be selected")
+        # Every key the registries can actually produce. Sorted `axis=value` pairs,
         # matching `variantKey` in core/speaker.js, and never the all-defaults one --
-        # that is the base row, which lives in the section file.
-        keys = {f"{axis}={value}"
-                for axis, held in declared.items()
-                for value in held["values"] if value != held["default"]}
+        # that is the base row, which lives in the section file. A speaker axis and a
+        # listener axis may combine, for a sentence that changes with both.
+        singles = {axis: [f"{axis}={value}" for value in held["values"] if value != held["default"]]
+                   for axis, held in declared.items()}
+        keys = {key for options in singles.values() for key in options}
+        names = sorted(singles)
+        keys |= {"|".join(sorted((a, b))) for i, x in enumerate(names) for y in names[i + 1:]
+                 for a in singles[x] for b in singles[y]}
         base_rows = {}
         for group in groups:
             src = DATA / f"lang/{code}/{group}.csv"

@@ -61,17 +61,18 @@ export function themeControl() {
 }
 
 /**
- * The switch itself, for whatever it turns dark: the app here, a card in the studio.
- * `show` re-reads `dark` when something else has changed it.
- * @param {{label:string, dark:() => boolean, flip:() => void}} config
+ * The switch itself, for whatever it turns dark: the app here, a card in the studio --
+ * or, with its own two marks, anything else that is one of two: whom the board's
+ * sentences are said to. `show` re-reads `dark` when something else has changed it.
+ * @param {{label:string, dark:() => boolean, flip:() => void, marks?:[string, string]}} config
  */
-export function lightSwitch({ label, dark, flip }) {
+export function lightSwitch({ label, dark, flip, marks = [SUN, MOON] }) {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'theme-switch';
   button.setAttribute('role', 'switch');
   button.setAttribute('aria-label', label);
-  button.innerHTML = `${SUN}<span class="theme-switch-track"><span class="theme-switch-knob"></span></span>${MOON}`;
+  button.innerHTML = `${marks[0]}<span class="theme-switch-track"><span class="theme-switch-knob"></span></span>${marks[1]}`;
   const show = () => button.setAttribute('aria-checked', String(dark()));
   button.addEventListener('click', () => { flip(); show(); });
   show();
