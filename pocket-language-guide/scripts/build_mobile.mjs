@@ -43,7 +43,7 @@ const PACK_SOURCES = ['en'];
 const DIRS = [
   'core', 'render', 'ui', 'vendor',
   'data/concepts', 'data/lang', 'data/registry', 'data/themes', 'data/i18n',
-  'data/respell', 'data/boards', 'data/fonts', 'data/countries',
+  'data/respell', 'data/boards', 'data/fonts', 'data/countries', 'data/emphasis',
 ];
 
 /** Individual files, each of which some page names directly. */
