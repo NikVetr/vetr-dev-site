@@ -264,3 +264,39 @@ of `data/lang/<code>/variants.csv` and `variant` set to `listener_gender=masculi
 `listener_gender=feminine`; leave `ipa` empty and record the source in `provenance`. The
 masculine is often the row's old text. Where the neutral form is what people naturally say
 anyway, write no variants and say so. The coordinator merges the file once the axis exists.
+
+## A sixth pass: what the earlier passes saw beside their items
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-6.md`.
+
+- **Slash pairs a reader is shown.** `quick-responses.*` and other answer rows in
+  Russian, Ukrainian, French, Italian, Hindi and Czech show two alternatives joined by a
+  slash ("Хорошо / ладно"). The owner does not want internal alternative glosses on the
+  boards: a user-facing label carries one reading. For each, keep the one a stranger would
+  most naturally say for the concept's meaning (read the English and the concept's
+  `notes`), move a genuinely different second wording to `text_alt` only where the column
+  already means "a second wording" in that pack, and say which you kept and why. A slash
+  that is a gender pair is `speaker-variants.md`'s business, as the second pass found.
+- **Hausa ƙ spellings.** Rows that write the hooked ƙ as a plain k (or the reverse) in
+  words Bargery or the Hausa Wikipedia spell otherwise; check every `ƙi`/`ki` the pass
+  can find and correct the ones a dictionary of record settles.
+- **Amharic `i-will-find-someone`**: the row's text and its `literal` disagree about who
+  will find whom. Settle it from the concept's English and notes, and fix whichever is
+  wrong.
+- **Ukrainian 'Ie' / 'Ye'**: romanised cells that write the initial Є inconsistently;
+  bring them into the system the pack's column claims (the national 2010 table writes
+  *Ye* word-initially and *ie* elsewhere).
+- **Urdu `maiṁ` / `maiñ`**: the romanisation of میں is written two ways; bring every cell
+  into the one system the column claims.
+- **Spanish `apurado/a`**: a gender slash in a Spanish row the second pass did not reach;
+  apply `speaker-variants.md` (or `board-answers.md` if it is an answer: answers are
+  written neutral about the traveller).
+- **Arabic and Hausa marked rows elsewhere**: the fifth pass counted rows outside the two
+  street boards that still mark the listener's gender (Arabic 87, Hausa 38). Take the
+  ones on the boards a traveller uses most -- `food`, `shopping`, `lodging`, `time` --
+  and reword them the way the fifth pass did, keeping the natural forms as listener
+  variants in `tmp/notes/agents/listener-variants-<code>.csv`.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
