@@ -868,6 +868,22 @@ drawn order, so on a right-to-left sheet the numerals hug the right edge. Every
 renderer draws the plan, so the PDF, the SVG and the studio's preview agree by
 construction.
 
+### A section's own format
+
+`spec.sectionFormats` maps a section to the options that shape an *item* -- `across`
+(how many items stand side by side in one column), `arrangement` and `split` -- and to
+nothing that belongs to the card as a whole. `itemAtoms` lays the section's choices
+over the card's spec and narrows the column to one item's share, so the table solve and
+the painting read the section's format without knowing there is a difference; a line of
+items is one atom, as tall as its tallest item, with every item's box drawn to it and a
+hit box of its own, and the shading alternates by line. A section absent from the table
+is set exactly as before, which the golden signatures hold. The balance probe shares a
+line's height between its items. In the studio each section's row in the content list
+ends in a sliders button that opens the choices in a dialog
+(`ui/section-format.js`), each ladder leading with *As the card*, drawn as the card's
+own choice; the button fills and takes a dot while the section keeps a format of its
+own, and *Reset formats* beside *All on* puts every section back.
+
 ## Conversation boards
 
 A fourth surface, and the only one that is not about paper. `conversation.html` is a

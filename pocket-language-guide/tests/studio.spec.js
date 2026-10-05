@@ -146,6 +146,36 @@ test.describe('studio', () => {
     await expect(record.locator('li').filter({ hasText: 'Margins were widened' })).toBeVisible();
   });
 
+  test('a section keeps a format of its own, and one press puts every section back', async ({ page }) => {
+    // The number line fits two to a column where a phrase needs the whole width, so a
+    // section can set how many of its items stand side by side -- and the entry layout
+    // and the divider with it -- apart from the card.
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    const reset = page.locator('#reset-formats');
+    await expect(reset).toBeDisabled();
+    const numbers = page.locator('.tree summary').filter({ hasText: 'Numbers + money' }).locator('.tree-format');
+    await numbers.click();
+    const dialog = page.locator('dialog.section-format');
+    await expect(dialog.getByRole('radiogroup', { name: 'How each entry is laid out' })
+      .getByRole('radio', { name: 'As the card' })).toHaveAttribute('aria-checked', 'true');
+    await dialog.getByRole('radiogroup', { name: 'Columns' }).getByRole('radio', { name: '2', exact: true }).click();
+    await dialog.locator('.speaker-close').click();
+    await expect(numbers).toHaveClass(/own/);
+    await expect(reset).toBeEnabled();
+
+    // Two numbers to a line on the card: side by side, so rows share a top.
+    await page.locator('.tree li[data-concept^="numbers-money."] label').first().click();
+    const hits = page.locator('.face.focused .hit[data-concept^="numbers-money."]');
+    await expect.poll(() => hits.count()).toBeGreaterThan(2);
+    const tops = await hits.evaluateAll((all) => all.map((b) => /** @type {HTMLElement} */ (b).style.top));
+    expect(new Set(tops).size).toBeLessThan(tops.length);
+
+    await reset.click();
+    await expect(numbers).not.toHaveClass(/own/);
+    await expect(reset).toBeDisabled();
+  });
+
   test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();

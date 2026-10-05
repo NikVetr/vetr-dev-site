@@ -359,6 +359,29 @@ test('solving twice gives byte-identical output', async () => {
   assert.equal(JSON.stringify(a.plan), JSON.stringify(b.plan));
 });
 
+test('a section set two across halves its lines, and every row keeps its own hit box', () => {
+  const id = 'numbers-money';
+  const across = buildAtoms({
+    blocks, theme, corpus: ctx.corpus, measurer: ctx.measurer, registry: ctx.registry,
+    spec: { ...spec, geometry: solved.geometry, sectionFormats: { [id]: { across: 2 } } },
+    colWidth: box.colWidth, scale: solved.scale, withPaint: true,
+  });
+  const items = (/** @type {typeof atoms} */ list, /** @type {boolean} */ mine) => list
+    .filter((a) => a.kind === 'item' && (a.sectionId === id) === mine);
+  const lines = blocks.filter((b) => b.kind === 'items' && b.sectionId === id)
+    .reduce((n, b) => n + Math.ceil((b.rows ?? []).length / 2), 0);
+  assert.ok(lines > 2, 'the reference sheet carries the numbers');
+  assert.equal(items(across, true).length, lines);
+  const hits = (/** @type {typeof atoms} */ list) => list.flatMap((a) => a.paint?.hits ?? []);
+  assert.deepEqual(hits(items(across, true)).map((h) => h.conceptId),
+    hits(items(atoms, true)).map((h) => h.conceptId));
+  for (const hit of hits(items(across, true))) {
+    assert.ok(hit.x >= 0 && hit.x + hit.w <= box.colWidth + 1e-6, `${hit.conceptId} leaves its column`);
+  }
+  // Every other section is set exactly as the card sets it.
+  assert.deepEqual(items(across, false).map((a) => a.height), items(atoms, false).map((a) => a.height));
+});
+
 test('auto faces picks the fewest pairs that hold the content legibly', async () => {
   const { plan } = await buildSheet(ctx, spec);
   // Not a fixed number: the corpus grows, and the point of auto is that the count

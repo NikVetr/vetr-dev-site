@@ -706,6 +706,31 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .tree-color .chip-fill {
   inline-size: 0.85em; block-size: 0.85em; border-radius: 2px; display: block;
 }
+/* The section's own format, after its count: the swatch's frame around two sliders.
+   Filled, with a dot at its corner, while the section keeps a format apart from the
+   card's -- the fill and the dot are two cues, so neither has to be seen in colour. */
+.tree-format {
+  position: relative; flex: none; display: inline-grid; place-items: center;
+  padding: 2px; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--paper); color: var(--muted); cursor: pointer;
+}
+.tree-format .sliders {
+  inline-size: 0.95em; block-size: 0.95em; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round;
+}
+.tree-format:hover, .tree-format:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.tree-format.own { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.tree-format.own::after {
+  content: ''; position: absolute; inset-block-start: -3px; inset-inline-end: -3px;
+  inline-size: 6px; block-size: 6px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--accent);
+}
+/* The four bulk actions, small enough to share a line on a phone. */
+.bulk-actions { gap: var(--space-1); margin-block-end: var(--space-2); }
+.bulk-actions > button { font-size: var(--fs--1); padding: 0.25em 0.6em; }
+/* A section's own format: three ladders of the format panel's own glyphs. */
+dialog.section-format { max-width: 30rem; }
+dialog.section-format .panel-field:last-child { margin-block-end: 0; }
 
 /* --- the phone's section grid -------------------------------------------- */
 

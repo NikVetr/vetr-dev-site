@@ -357,9 +357,11 @@ function measureHeights(input, candidates, liveSections) {
       })),
     }]);
     // With no heading in the probe there is nothing to fuse, so this is one atom
-    // per row, in order.
+    // per line, in order -- a row each, unless the section sets its items side by side,
+    // when the items of a line share its height.
+    const across = spec.sectionFormats?.[section.section_id]?.across ?? 1;
     atoms.forEach((atom, i) => {
-      if (group[i]) height.set(group[i].concept_id, atom.height);
+      for (const c of group.slice(i * across, (i + 1) * across)) height.set(c.concept_id, atom.height / across);
     });
   }
   return { height, headingHeight };

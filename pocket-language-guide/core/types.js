@@ -200,6 +200,16 @@
  * @typedef {{text:string, bold:boolean, latin?:boolean, sep?:boolean, logo?:boolean}} HeadPart */
 
 /**
+ * What a section may set apart from the card: the options that shape an item rather
+ * than the card as a whole. A key that is absent follows the card.
+ * @typedef {Object} SectionFormat
+ * @property {number} [across]  how many items stand side by side in one column; 1, the
+ *   card's own, when absent
+ * @property {SheetSpec['arrangement']} [arrangement]
+ * @property {SheetSpec['split']} [split]
+ */
+
+/**
  * @typedef {Object} SheetSpec
  * @property {string} target
  * @property {string} source
@@ -249,6 +259,9 @@
  * @property {Record<string,string>} [sectionColors]  section id -> colour role,
  *   overriding the registry's own. Colour is how the sheet codes its sections, so
  *   which section takes which is an editorial choice rather than a fact.
+ * @property {Record<string, SectionFormat>} [sectionFormats]  section id -> the format
+ *   that section keeps in place of the card's. Absent, or a section absent from it,
+ *   is the card's own format.
  * @property {RunningHead} [head]  a line of furniture along the top or bottom
  * @property {number} scale
  * @property {number} priority  keep only concepts whose `importance` reaches this,

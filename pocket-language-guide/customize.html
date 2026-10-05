@@ -115,10 +115,14 @@
       <!-- Where the rendered images go on a touch device with no share sheet, so they
            can be saved by pressing and holding. A zip is unopenable there. -->
       <figure class="saved-images" id="saved-images" hidden></figure>
-      <div class="row small" style="margin-bottom: .5rem;">
+      <!-- Small, and in the panel's flow rather than held in view: they are used once in
+           a while, and the list below is what the panel's room is for. -->
+      <div class="row bulk-actions">
         <button type="button" class="ghost" id="all-on" data-i18n="studio.allOn">All on</button>
         <button type="button" class="ghost" id="all-off" data-i18n="studio.allOff">All off</button>
         <button type="button" class="ghost" id="balance" data-i18n="studio.balance">Balance columns</button>
+        <button type="button" class="ghost" id="reset-formats" data-i18n="studio.resetFormats"
+                data-i18n-title="studio.resetFormatsTitle" disabled>Reset formats</button>
       </div>
       <!-- The phone's section grid, hidden by CSS above 700px: on a desktop the
            tree below is already a resizable panel with every section's own tick in

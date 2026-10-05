@@ -32,6 +32,7 @@ import { attachHandles } from './handles.js';
 import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
 import { createWarnings } from './warnings.js';
+import { openSectionFormat } from './section-format.js';
 import * as store from './platform/store.js';
 import {
   applyStatic, languageName, loadUiLanguage, number, t,
@@ -301,6 +302,7 @@ async function main() {
       (k, r) => k + 1 + (r.mergedFrom?.length ?? 0), 0,
     ), 0);
     $('counts').textContent = t('studio.counts', { included: shown, total });
+    /** @type {HTMLButtonElement} */ ($('reset-formats')).disabled = !Object.keys(spec.sectionFormats ?? {}).length;
 
     // Rebuilt only when its shape changes -- a term added or removed, or a column
     // switched on. Otherwise only checkboxes and counts change, so scroll position
@@ -353,6 +355,18 @@ async function main() {
           };
           schedule();
         },
+        // Only the keys the section sets apart are kept, and a section that sets none
+        // is dropped, so "has its own format" is simply "is in the table".
+        onFormat: (sectionId, title) => openSectionFormat({
+          title,
+          spec,
+          format: spec.sectionFormats?.[sectionId] ?? {},
+          onChange: (format) => {
+            const { [sectionId]: _, ...rest } = spec.sectionFormats ?? {};
+            spec = { ...spec, sectionFormats: Object.keys(format).length ? { ...rest, [sectionId]: format } : rest };
+            schedule();
+          },
+        }),
         onHover: (id) => highlight($('face-area'), id),
         // The mirror of the canvas's own `onPick`, which brings a row in the tree
         // into view: a click in the tree brings the row on the *card* into view.
@@ -576,6 +590,12 @@ async function main() {
     /** @type {Record<string,boolean>} */ const off = {};
     for (const s of ctx.corpus.sections) off[s.section_id] = false;
     spec = { ...spec, selection: { sections: off, items: {} } };
+    schedule();
+  });
+
+  // Every section back on the card's own format, in one press.
+  $('reset-formats').addEventListener('click', () => {
+    spec = { ...spec, sectionFormats: {} };
     schedule();
   });
 

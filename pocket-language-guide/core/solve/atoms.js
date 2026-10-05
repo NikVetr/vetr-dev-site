@@ -40,6 +40,10 @@ const BREAK_IN_GROUP = 12;
 const MAX_STRETCH_ROW = 3;
 const MAX_STRETCH_SECTION = 7;
 
+// Between items a section sets side by side in one column, in points at nominal type
+// size: enough that each item's accent rule reads as the start of the next.
+const ACROSS_GAP = 4;
+
 /** @typedef {import('../types.js').Rect} Rect */
 /** @typedef {import('../types.js').TextRun} TextRun */
 /** @typedef {import('../types.js').IconMark} IconMark */
@@ -536,8 +540,19 @@ function chooseTableShape(ctx, template, rows) {
 function itemAtoms(ctx, block, rows, withPaint) {
   const base = ctx.theme.templates[block.templateId ?? 'entry'];
   if (!base) throw new Error(`unknown template ${block.templateId}`);
+  // **A section may keep a format of its own** (`spec.sectionFormats`): its entry
+  // layout, its divider, and how many of its items stand side by side in a column. It
+  // is the card's spec with the section's choices laid over it, and a column narrowed
+  // to one item's share, so everything below reads the section's format and none of it
+  // has to know there is a difference. A section without one is the card, unchanged.
+  const own = ctx.spec.sectionFormats?.[block.sectionId];
+  const across = own?.across ?? 1;
+  const gap = ACROSS_GAP * ctx.spacingRatio;
+  const at = own
+    ? { ...ctx, spec: { ...ctx.spec, ...own }, colWidth: (ctx.colWidth - gap * (across - 1)) / across }
+    : ctx;
   const table = chooseTableShape(
-    ctx, arrangeTemplate(base, ctx.spec.arrangement ?? 'mixed', ctx.shown), rows,
+    at, arrangeTemplate(base, at.spec.arrangement ?? 'mixed', at.shown), rows,
   );
   const { template, pad, rowGap, colGap, centred } = table;
   // **The outermost columns hug the item's edges.** The leftmost column that carries
@@ -557,13 +572,40 @@ function itemAtoms(ctx, block, rows, withPaint) {
     : j === first ? 'start' : j === last ? 'end' : align);
 
   const startRow = ctx.rowIndex;
-  return rows.map((row, i) => {
-    const { grid, widths, stacks, ascent, gridHeight, height } = table.rows[i];
+  /** @type {Atom[]} */ const atoms = [];
+  for (let line = 0; line * across < rows.length; line += 1) {
+    const from = line * across;
+    const items = rows.slice(from, from + across);
+    // The line is as tall as its tallest item, and every item's box is drawn to it.
+    const height = Math.max(...items.map((_, k) => table.rows[from + k].height));
+    const atom = atomShell(ctx, block, height, line, template);
+    atoms.push(atom);
+    if (!withPaint) continue;
+    /** @type {Paint} */ const paint = { rects: [], runs: [], icons: [], hits: [] };
+    items.forEach((row, k) => {
+      // In drawn order, so a mirrored sheet starts its line from the right.
+      const x0 = (ctx.mirror ? across - 1 - k : k) * (at.colWidth + gap);
+      const painted = paintItem(row, table.rows[from + k], height, line);
+      for (const r of [...painted.rects, ...painted.runs, ...painted.hits]) r.x += x0;
+      paint.rects.push(...painted.rects);
+      paint.runs.push(...painted.runs);
+      paint.hits.push(...painted.hits);
+    });
+    atom.paint = paint;
+  }
+  return atoms;
 
-    if (!withPaint) {
-      return atomShell(ctx, block, height, i, template);
-    }
-
+  /**
+   * One item, in its own box at the line's height, from the column's left edge.
+   * @param {import('../types.js').ItemRow} row
+   * @param {typeof table.rows[number]} solved
+   * @param {number} height  the line's
+   * @param {number} line  which line of the block, for the shading
+   */
+  function paintItem(row, solved, height, line) {
+    const { grid, widths, stacks, ascent, gridHeight } = solved;
+    // A centred table stays centred in a line taller than itself.
+    const lift = (height - solved.height) / 2;
     /** @type {Rect[]} */ const rects = [];
     /** @type {TextRun[]} */ const runs = [];
     // **Both halves of the alternation are painted, not just the dark one.**
@@ -598,13 +640,13 @@ function itemAtoms(ctx, block, rows, withPaint) {
     const washed = (ctx.spec.background?.mode ?? 'none') !== 'none'
       && ctx.spec.inkMode === 'full';
     if (alternating && alpha > 0) {
-      const shaded = (startRow + i) % 2 === 1;
+      const shaded = (startRow + line) % 2 === 1;
       const fill = shaded ? ctx.palette.shade : ctx.palette.paper;
       if (shaded || washed) {
         rects.push({
           x: 0,
           y: 0,
-          w: ctx.colWidth,
+          w: at.colWidth,
           h: height,
           fill,
           ...(alpha < 1 ? { opacity: alpha } : {}),
@@ -613,7 +655,7 @@ function itemAtoms(ctx, block, rows, withPaint) {
     }
     const elven = isElven(ctx.spec);
     if (!elven) rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });
-    rects.push({ x: 0, y: height - template.rulePt, w: ctx.colWidth, h: template.rulePt,
+    rects.push({ x: 0, y: height - template.rulePt, w: at.colWidth, h: template.rulePt,
       fill: elven ? elvenColours(ctx.spec, ctx.palette.ink).rule : ctx.palette.rule });
 
     let x = pad[3];
@@ -623,13 +665,13 @@ function itemAtoms(ctx, block, rows, withPaint) {
       // one is dropped by just the difference between the row's ascent and its own,
       // which is what puts every column's first line on one baseline: the deepest
       // first line does not move, and the rest come down to meet it.
-      let y = pad[0] + (centred ? (gridHeight - stackHeight) / 2 : ascent - cellAscent);
+      let y = pad[0] + (centred ? (gridHeight - stackHeight) / 2 + lift : ascent - cellAscent);
       live.forEach((cell, k) => {
         if (k > 0) y += rowGap;
-        const painted = paintField(ctx, cell.text, cell.style, {
+        const painted = paintField(at, cell.text, cell.style, {
           x, y, w: widths[j],
           align: edgeAlign(j, resolveAlign(cell.fs.align, ctx.mirror)),
-          fill: ctx.colorFor(cell.fs, block.colorRole),
+          fill: at.colorFor(cell.fs, block.colorRole),
         });
         rects.push(...painted.rects);
         runs.push(...painted.runs);
@@ -638,15 +680,12 @@ function itemAtoms(ctx, block, rows, withPaint) {
       x += widths[j] + colGap;
     });
 
-    const atom = atomShell(ctx, block, height, i, template);
-    atom.paint = {
+    return {
       rects,
       runs,
-      icons: [],
-      hits: [{ x: 0, y: 0, w: ctx.colWidth, h: height, conceptId: row.conceptId, sectionId: block.sectionId }],
+      hits: [{ x: 0, y: 0, w: at.colWidth, h: height, conceptId: row.conceptId, sectionId: block.sectionId }],
     };
-    return atom;
-  });
+  }
 }
 
 /**
@@ -753,9 +792,11 @@ export function buildAtoms({
     } else if (block.kind === 'note') {
       atoms.push(noteAtom(ctx, block, withPaint));
     } else {
-      const rows = block.rows ?? [];
-      atoms.push(...itemAtoms(ctx, block, rows, withPaint));
-      ctx.rowIndex += rows.length;
+      // One per line of the section, which is one per row unless it sets its items
+      // side by side: the shading alternates by line.
+      const made = itemAtoms(ctx, block, block.rows ?? [], withPaint);
+      atoms.push(...made);
+      ctx.rowIndex += made.length;
     }
   }
 

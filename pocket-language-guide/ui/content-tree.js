@@ -44,6 +44,20 @@ function pencilGlyph() {
   return svg;
 }
 
+/** Two sliders, for the button that opens a section's own format. Inline for the
+ * reason the pencil is. */
+function slidersGlyph() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('class', 'sliders');
+  const path = document.createElementNS(NS, 'path');
+  path.setAttribute('d', 'M2 4.5h12M2 11.5h12M5.5 2.5v4M10.5 9.5v4');
+  svg.append(path);
+  return svg;
+}
+
 /** The sheet's own field order, so a tree row reads the way the printed row does. */
 const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
   'script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell',
@@ -104,6 +118,7 @@ function el(tag, attrs = {}, kids = []) {
  * @property {any} theme
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>})=>void} onToggle
  * @property {(conceptId:string)=>void} onPick  bring this row into view on the card
+ * @property {(sectionId:string, title:string)=>void} onFormat  open the section's own format
  * @property {(conceptId:string, values:Record<string,string>)=>void} [onEdit]  what
  *   the reader typed into a row, to go in the same `overrides` layer the CSV import
  *   writes
@@ -173,8 +188,8 @@ export function itemEditForm({ conceptId, values, target, source, onSave, onClos
 export function createTree(input) {
   const { root, corpus, theme, spec } = input;
 
-  /** @type {{sectionId:string, box:HTMLInputElement, count:HTMLElement,
-   *          swatch:HTMLElement, menu:HTMLElement, icon:Element|null,
+  /** @type {{sectionId:string, title:string, box:HTMLInputElement, count:HTMLElement,
+   *          swatch:HTMLElement, menu:HTMLElement, format:HTMLElement, icon:Element|null,
    *          chipIcon:Element|null, role:string,
    *          items:{conceptId:string, box:HTMLInputElement,
    *                  cells:Record<string,HTMLElement>, row:HTMLElement}[]}[]} */
@@ -304,12 +319,22 @@ export function createTree(input) {
       event.preventDefault();
       /** @type {HTMLElement} */ (options[to]).focus();
     });
+    // **Its own format**, set apart from the card's in a dialog (`ui/section-format.js`),
+    // from the end of the row where the section's other controls are not crowded.
+    const format = el('button', { type: 'button', class: 'tree-format' }, [slidersGlyph()]);
+    format.addEventListener('click', (event) => {
+      // Inside a <summary>, like the swatch.
+      event.preventDefault();
+      event.stopPropagation();
+      input.onFormat(section.section_id, title);
+    });
     const summary = el('summary', {}, [
       sectionBox,
       el('span', { class: 'tree-color-wrap' }, [swatch, menu]),
       ...(icon ? [icon] : []),
       el('span', { text: title }),
       count,
+      format,
     ]);
 
     /** @type {{conceptId:string, box:HTMLInputElement,
@@ -406,11 +431,13 @@ export function createTree(input) {
 
     sections.push({
       sectionId: section.section_id,
+      title,
       box: sectionBox,
       count,
       items,
       swatch,
       menu,
+      format,
       icon,
       chipIcon,
       role: section.color_role,
@@ -461,6 +488,13 @@ export function createTree(input) {
         option.classList.toggle('current', on);
         option.setAttribute('aria-checked', String(on));
       }
+      // A section on a format of its own says so twice -- the button fills and takes
+      // a dot -- and its name says the format is the section's.
+      const own = Boolean(nextSpec.sectionFormats?.[section.sectionId]);
+      section.format.classList.toggle('own', own);
+      const named = t(own ? 'tree.formatOwn' : 'tree.format', { section: section.title });
+      section.format.setAttribute('aria-label', named);
+      section.format.title = named;
       let included = 0;
       for (const item of section.items) {
         const row = shown.get(item.conceptId);
