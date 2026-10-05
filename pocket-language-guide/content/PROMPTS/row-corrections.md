@@ -271,7 +271,8 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-6.md`.
 
 - **Slash pairs a reader is shown.** `quick-responses.*` and other answer rows in
   Russian, Ukrainian, French, Italian, Hindi and Czech show two alternatives joined by a
-  slash ("Хорошо / ладно"). The owner does not want internal alternative glosses on the
+  slash ("Хорошо / ладно"), and so do six English board labels (`yes / right`, `okay /
+  can`); English's `Hello (polite)` shows its register tag as text on a button. The owner does not want internal alternative glosses on the
   boards: a user-facing label carries one reading. For each, keep the one a stranger would
   most naturally say for the concept's meaning (read the English and the concept's
   `notes`), move a genuinely different second wording to `text_alt` only where the column
