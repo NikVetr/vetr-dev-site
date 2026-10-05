@@ -1663,7 +1663,8 @@ test('a bad import changes nothing, and does not pretend to translate why', asyn
     })),
   });
 
-  const status = dialog.locator('[role="status"]');
+  // The data section's own line: Before you travel has a status line of its own.
+  const status = dialog.locator('fieldset', { hasText: 'Your own phrases and settings' }).locator('[role="status"]');
   await expect(status).toContainText('Not loaded');
   // The sentence is translated; the diagnostic under it names a key out of the
   // reader's own file and is not. It has to say which it is, or a right-to-left
@@ -1712,7 +1713,7 @@ test('personal data can be carried off the device, and deleted from it', async (
   // Deleting is confirmed, because the saved copy is the only way back.
   page.once('dialog', (d) => d.accept());
   await dialog.getByRole('button', { name: 'Delete everything' }).click();
-  await expect(dialog.locator('[role="status"]')).toHaveText('Deleted.');
+  await expect(dialog.locator('fieldset', { hasText: 'Your own phrases and settings' }).locator('[role="status"]')).toHaveText('Deleted.');
   await page.keyboard.press('Escape');
   await expect(page.locator('[data-button="p1"]')).toHaveCount(0);
 });
@@ -2032,14 +2033,21 @@ test('a time of day and a bare number are answers, not only a duration', async (
   // ...and the owner reads theirs, from the same structured value.
   await expect(page.locator('.board-message-text')).toHaveText('2:30 PM');
 
-  // A bare number, for a price. Same keypad shape, no units.
-  await keypad('shopping', 'howmuch');
+  // A bare number, for how many. Same keypad shape, no units.
+  await keypad('pharmacy&screen=dosage', 'how-much');
   await page.locator('.board-answer-entry').click();
   await expect(page.locator('.board-entry-units')).toHaveCount(0);
-  await page.locator('.board-entry-amount').fill('250');
-  await expect(page.locator('.board-entry-preview')).toHaveText('250');
+  await page.locator('.board-entry-amount').fill('2');
+  await expect(page.locator('.board-entry-preview')).toHaveText('2');
   await page.locator('.board-entry-confirm').click();
-  await expect(page.locator('.board-message-text')).toHaveText('250');
+  await expect(page.locator('.board-message-text')).toHaveText('2');
+
+  // A price is a number in a currency, so its keypad has the currencies as its units.
+  await keypad('shopping', 'howmuch');
+  await page.locator('.board-answer-entry').click();
+  await expect(page.locator('.board-entry-units')).toHaveCount(1);
+  await page.locator('.board-entry-amount').fill('250');
+  await expect(page.locator('.board-entry-preview')).toHaveText('¥250');
 
   // A duration still has its units, and still refuses what is not one.
   await keypad('time', 'wait');

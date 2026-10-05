@@ -86,7 +86,7 @@ test('the settings save a language for offline, and delete it again', async ({ p
   await german.getByRole('button', { name: 'Save' }).click();
   await expect(german.locator('.travel-lang-state')).toContainText('Saved');
   page.once('dialog', (dialog) => dialog.accept());
-  await settings.getByRole('button', { name: 'Delete everything saved' }).click();
+  await settings.getByRole('button', { name: 'Delete all saved languages' }).click();
   await expect(german.getByRole('button', { name: 'Save' })).toBeVisible();
   expect(await kept()).toBe(false);
 });

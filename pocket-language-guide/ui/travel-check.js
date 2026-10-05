@@ -139,7 +139,7 @@ export function travelSection({ nameOf, loadText, checks, pair, suggestions = []
  */
 async function drawSaved(box, index, builtIn, nameOf, pair) {
   const codes = Object.keys(index.languages).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
-  const used = el('p', { class: 'speaker-why', role: 'status' });
+  const used = el('p', { class: 'speaker-why' });
   const status = el('p', { class: 'speaker-why', role: 'status' });
   const fonts = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
   fonts.checked = true;

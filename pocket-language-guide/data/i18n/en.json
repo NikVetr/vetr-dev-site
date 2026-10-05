@@ -691,7 +691,7 @@
   "offline.saving": "Saving… {done} of {total}",
   "offline.delete": "Delete",
   "offline.partly": "Partly saved: {count} files did not arrive. Try again with a better connection.",
-  "offline.clear": "Delete everything saved",
+  "offline.clear": "Delete all saved languages",
   "offline.clearAsk": "Delete every language saved on this device? The app keeps working with a connection, and anything can be saved again.",
   "offline.cleared": "Deleted. Everything can be saved again with a connection.",
   "boards.emergency.diabetes": "Diabetes…",
