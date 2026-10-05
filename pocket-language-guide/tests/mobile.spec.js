@@ -321,6 +321,64 @@ test.describe('the studio\'s chrome on a phone', () => {
     await expect(format).not.toHaveClass(/at-end/);
   });
 
+  test('the bars fold, open and drag the column as a whole', async ({ page }) => {
+    // Three faults from one model. A folded list left its room empty at the foot of
+    // the screen; opened again it flipped its caret and stayed a sliver when the rows
+    // above had taken the room; and a folded panel's bar could not be dragged at all,
+    // because a drag only traded with the bar's own panel. Rows are shares of the
+    // column now, and a drag pushes through whatever has no room left.
+    await studio(page);
+    const column = page.locator('.studio');
+    const row = (/** @type {string} */ id) => page.locator(`.studio > section:has(> #${id})`);
+    const canvas = page.locator('.studio > .canvas');
+    const height = async (/** @type {import('@playwright/test').Locator} */ at) => (await at.boundingBox()).height;
+    /** The column's foot against the lowest row's: nothing may be left over. */
+    const gap = () => column.evaluate((c) => c.getBoundingClientRect().bottom
+      - Math.max(...[...c.querySelectorAll(':scope > section')].map((s) => s.getBoundingClientRect().bottom)));
+    const bars = page.locator('.panel-toggle');
+
+    // Folding the list gives its room to the rows above it.
+    const before = await height(canvas);
+    await bars.nth(1).click();
+    await expect(row('content-body')).toHaveClass(/collapsed/);
+    expect(await gap()).toBeLessThan(2);
+    expect(await height(canvas)).toBeGreaterThan(before);
+
+    // Opened again, it is a real share of the column, not a caret that flipped.
+    await bars.nth(1).click();
+    await expect(row('content-body')).not.toHaveClass(/collapsed/);
+    const studioHeight = await height(column);
+    expect(await height(row('content-body'))).toBeGreaterThan(studioHeight * 0.25);
+    expect(await gap()).toBeLessThan(2);
+
+    // The format panel was folded by that; its bar still drags, and the seam it sits
+    // on takes the room from the list below it.
+    await expect(row('format-body')).toHaveClass(/collapsed/);
+    /** @param {string} id @param {number} dy */
+    const drag = async (id, dy) => {
+      const b = await row(id).locator(':scope > .panel-title').boundingBox();
+      await page.mouse.move(b.x + b.width / 3, b.y + b.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(b.x + b.width / 3, b.y + b.height / 2 + dy, { steps: 8 });
+      await page.mouse.up();
+    };
+    const canvasBefore = await height(canvas);
+    const listBefore = await height(row('content-body'));
+    await drag('format-body', 80);
+    expect(await height(canvas)).toBeGreaterThan(canvasBefore + 60);
+    expect(await height(row('content-body'))).toBeLessThan(listBefore - 60);
+    await expect(row('format-body')).toHaveClass(/collapsed/);
+
+    // With both panels folded the list's bar still opens it, pushing past the folded
+    // format panel to take room from the preview.
+    await bars.nth(1).click();
+    await expect(row('content-body')).toHaveClass(/collapsed/);
+    await drag('content-body', -200);
+    await expect(row('content-body')).not.toHaveClass(/collapsed/);
+    expect(await height(row('content-body'))).toBeGreaterThan(150);
+    expect(await gap()).toBeLessThan(2);
+  });
+
   test('a folded list is opened by the things that put something in it', async ({ page }) => {
     // "Show in list" on the card's row popup scrolls the content list to that row.
     // With the list folded into its bar that would move nothing anyone can see.

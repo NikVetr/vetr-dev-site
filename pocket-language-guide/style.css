@@ -874,19 +874,20 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     overflow: hidden;
   }
   .studio > section { border-inline-end: none; border-bottom: 1px solid var(--line); }
-  /* The preview leads, and its default is the height a face already wants: on a
-     phone the card is width-bound, so a full-width face plus its filmstrip comes to
-     about this, and anything more is empty paper. */
-  .studio > .canvas { order: -1; flex: 0 0 42svh; min-block-size: 6rem; }
-  .studio > section:has(> .panel-body) { flex: 0 0 22svh; min-block-size: 0; }
-  /* One of them absorbs whatever the others are not using, or the column would have
-     to add up to exactly the viewport by arithmetic. The content list is the one that
-     always has more to show, so it is the one that gets the slack. */
-  .studio > section:has(> .panel-body):last-of-type { flex: 1 1 auto; }
-  /* **Beats a dragged height on purpose.** A folded panel is its bar and nothing
-     else, whatever it was sized to before folding -- and the room it gives up has to
-     reach the panel that was just opened. An inline style would otherwise hold the
-     empty box open. */
+  /* **Each row is a share of the column, not a height.** The preview leads, with the
+     room a full-width face and its filmstrip want on a phone; the two panels split
+     the rest. Shares rather than heights because the column always has to add up:
+     with fixed heights and the content list absorbing the slack, folding that list
+     left its room empty at the foot of the screen, and a preview dragged tall left
+     the list nothing to open into. `ui/panels.js` replaces these with the reader's
+     own shares, in points, once a bar has been dragged. */
+  .studio > .canvas { order: -1; flex: 42 1 0; min-block-size: 6rem; }
+  .studio > section:has(> .panel-body) { flex: 22 1 0; min-block-size: 0; }
+  .studio > section:has(> .panel-body):last-of-type { flex: 20 1 0; }
+  /* **Beats a share on purpose.** A folded panel is its bar and nothing else, and the
+     rows still open divide what it gave up between them in proportion -- so folding
+     the list hands its room to the panels above it. Its share is kept for when it
+     opens again. */
   .studio > section.collapsed { flex: 0 0 auto !important; }
   .face-grid { grid-template-columns: 1fr; }
 

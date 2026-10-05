@@ -141,6 +141,8 @@ const PREVIEW_MIN = 96;
 const SLOP = 6;
 /** Where the reader put the seams, so they are not re-placed on every visit. */
 const ROWS_KEY = 'plg.studio-rows';
+/** The least of the column a panel opens to from its bar, beside the preview. */
+const OPEN_SHARE = 1 / 3;
 
 /**
  * Everything in the header but the way back, the brand, the info line and PNG, in
@@ -307,7 +309,34 @@ function panelBars(studio) {
 }
 
 /**
- * Drag a panel's bar to hand its room to the panel above it.
+ * Move the seam on top of row `at` by `dy`, pushing through whatever has no room.
+ *
+ * The rows above the seam take what the rows below give up, and the nearest gives
+ * first: dragging a bar down shrinks its own panel, and once that is down to its bar
+ * the panel under it -- which is what lets a folded panel's bar be dragged at all. A
+ * row stops at its floor, so the seam stops where nothing below or above has room.
+ * @param {number[]} heights  each row's height, in screen order
+ * @param {number[]} floors   the least each row may be
+ * @param {number} at  the row whose top is the seam
+ * @param {number} dy  how far it moved, down positive
+ */
+export function moveSeam(heights, floors, at, dy) {
+  const next = [...heights];
+  const [giving, taking] = dy > 0
+    ? [Array.from({ length: next.length - at }, (_, k) => at + k), at - 1]
+    : [Array.from({ length: at }, (_, k) => at - 1 - k), at];
+  let left = Math.abs(dy);
+  for (const j of giving) {
+    const give = Math.min(left, Math.max(0, next[j] - floors[j]));
+    next[j] -= give;
+    left -= give;
+  }
+  next[taking] += Math.abs(dy) - left;
+  return next;
+}
+
+/**
+ * Drag a panel's bar to move the seam it sits on.
  *
  * **The bar is the seam.** On a desktop each panel has a visible seam beside it and
  * the pointer has room to find one; on a phone the panels are rows of a column, and
@@ -316,11 +345,16 @@ function panelBars(studio) {
  * control than the one already there — so the bar does both jobs: a tap folds the
  * panel, and a drag moves the seam it sits on.
  *
- * What a drag means is the physical thing: the bar follows the finger, so the panel
- * *above* grows by as much as this one loses. Nothing below moves, which is what
- * makes it feel like a seam rather than a reflow. Dragging down onto the bar's own
- * panel until nothing is left of it is the same as folding it, and says so — the
- * panel collapses and the room goes where a fold sends it.
+ * What a drag means is the physical thing: the bar follows the finger, the row above
+ * it grows by what the rows below give up (`moveSeam`), and a panel dragged down to
+ * nothing but its bar is folded, and drawn that way -- or opened, dragged up out of
+ * it. It used to trade only with its own panel, so a folded panel's bar had nothing
+ * to give and could not be dragged at all, and with the list folded too neither bar
+ * moved.
+ *
+ * Each row's height is kept as its share of the column (`style.css`), so the rows
+ * always fill it: a folded panel's room goes to the rows still open, in proportion,
+ * and a panel opened from its bar gets at least a third of the column back.
  *
  * Tap and drag are told apart by distance, the way the message surface tells a scroll
  * from a tap: under {@link SLOP} pixels the press was a tap and the button's own
@@ -335,61 +369,53 @@ function panelSeams(studio) {
   const rows = /** @type {HTMLElement[]} */ ([...studio.querySelectorAll(':scope > section')])
     .sort((a, b) => Number(getComputedStyle(a).order) - Number(getComputedStyle(b).order));
 
-  /** @type {Record<string, number>} */ let held = {};
-  try {
-    held = JSON.parse(store.get(ROWS_KEY) ?? '{}');
-  } catch {
-    // A corrupt value is the same as none: fall back to the CSS defaults.
-  }
-  /** What a row is called in the record. Its label, so the record survives a
-   * reordering of the markup. @param {HTMLElement} row */
-  const nameOf = (row) => row.getAttribute('aria-label') ?? '';
+  /** What a row is called in the record: its body's id, or the preview's class, so
+   * the record survives a reordering of the markup and a change of language.
+   * @param {HTMLElement} row */
+  const nameOf = (row) => bodyOf(row)?.id ?? 'canvas';
   /** The least a row may be: a panel keeps its bar, the preview keeps enough to be
    * one. @param {HTMLElement} row */
   const floorOf = (row) => {
     const bar = /** @type {HTMLElement|null} */ (row.querySelector(':scope > .panel-title'));
     return bar ? bar.getBoundingClientRect().height : PREVIEW_MIN;
   };
-  /** @param {HTMLElement} row @param {number} px */
-  const size = (row, px) => {
-    held[nameOf(row)] = Math.round(px);
-    row.style.flex = `0 0 ${Math.round(px)}px`;
-  };
+  const folded = (/** @type {HTMLElement} */ row) => row.classList.contains('collapsed');
 
-  // The panel the stylesheet gave the slack to has no height of its own to restore,
-  // and giving it one would stop it absorbing. Read with the selector the stylesheet
-  // uses rather than as "the last row", so the two cannot come to disagree about
-  // which panel that is -- they only coincide because the preview is pulled to the
-  // top of the column by `order` from the middle of the markup.
-  const absorber = /** @type {HTMLElement|null} */ (
-    studio.querySelector(':scope > section:has(> .panel-body):last-of-type'));
-  for (const row of rows) {
-    if (row !== absorber && held[nameOf(row)]) size(row, held[nameOf(row)]);
+  /** Each row's share of the column, in points, for every row or for none: a share
+   * means something only beside the others. A folded panel's is what it opens to.
+   * @type {Record<string, number>} */
+  let held = {};
+  try {
+    held = JSON.parse(store.get(ROWS_KEY) ?? '{}');
+  } catch {
+    // A corrupt value is the same as none: fall back to the CSS shares.
   }
+  if (!rows.every((row) => held[nameOf(row)] > 0)) held = {};
+  const apply = () => {
+    for (const row of rows) row.style.flex = `${held[nameOf(row)]} 1 0px`;
+  };
+  const save = () => store.set(ROWS_KEY, JSON.stringify(held));
+  if (Object.keys(held).length) apply();
 
   /** @type {(() => void)[]} */ const undo = [];
   for (const [i, row] of rows.entries()) {
     const bar = /** @type {HTMLElement|null} */ (row.querySelector(':scope > .panel-title'));
-    const above = rows[i - 1];
     if (!bar) continue;
-    if (!above) { bar.classList.add('no-seam'); continue; }
+    if (i === 0) { bar.classList.add('no-seam'); continue; }
 
     let dragged = false;
     /** @param {PointerEvent} event */
     const onDown = (event) => {
       if (event.button !== 0) return;
       const startY = event.clientY;
-      const startAbove = above.getBoundingClientRect().height;
-      const startOwn = row.getBoundingClientRect().height;
-      // Clamped as a pair: a drag past either floor stops there rather than
-      // overshooting and snapping back when the finger comes the other way.
-      const lowest = floorOf(above) - startAbove;
-      const highest = startOwn - floorOf(row);
+      const start = rows.map((r) => r.getBoundingClientRect().height);
+      const floors = rows.map(floorOf);
+      const wasOpen = rows.map((r) => !folded(r));
+      const total = start.reduce((a, b) => a + b, 0);
       dragged = false;
 
       /** @param {PointerEvent} move */
       const onMove = (move) => {
-        const dy = Math.max(lowest, Math.min(move.clientY - startY, highest));
         if (!dragged && Math.abs(move.clientY - startY) < SLOP) return;
         if (!dragged) {
           dragged = true;
@@ -401,16 +427,20 @@ function panelSeams(studio) {
           // should not have happened.
           bar.setPointerCapture(move.pointerId);
         }
-        // Nothing left of this panel but its bar is a folded panel, and is drawn as
-        // one -- a body with no height is not a state anybody asked for. Its dragged
-        // height goes with it, so that opening it again opens it to something.
-        const folded = startOwn - dy <= floorOf(row) + 2;
-        size(above, startAbove + dy);
-        if (row !== absorber) {
-          if (folded) { delete held[nameOf(row)]; row.style.flex = ''; }
-          else size(row, startOwn - dy);
-        }
-        setOpen(row, !folded);
+        const next = moveSeam(start, floors, i, move.clientY - startY);
+        rows.forEach((r, j) => {
+          // Nothing left of a panel but its bar is a folded panel, and is drawn as
+          // one -- a body with no height is not a state anybody asked for. It keeps
+          // the height it had before this drag, so opening it again opens it to
+          // something.
+          const panel = bodyOf(r) !== null;
+          const shut = panel && next[j] <= floors[j] + 2;
+          if (panel) setOpen(r, !shut);
+          if (!shut) held[nameOf(r)] = next[j];
+          else if (wasOpen[j]) held[nameOf(r)] = start[j];
+          else held[nameOf(r)] ??= total * OPEN_SHARE;
+        });
+        apply();
       };
       const onUp = () => {
         bar.classList.remove('dragging');
@@ -418,7 +448,7 @@ function panelSeams(studio) {
         removeEventListener('pointerup', onUp);
         removeEventListener('pointercancel', onUp);
         if (!dragged) return;
-        store.set(ROWS_KEY, JSON.stringify(held));
+        save();
         // **Cleared a turn later, not here.** The click that has to be swallowed is
         // dispatched after this handler returns, and a drag that ended off the bar
         // produces no click on it at all -- so clearing the flag in the click
@@ -436,17 +466,30 @@ function panelSeams(studio) {
       e.stopPropagation();
       e.preventDefault();
     };
+    /** After the button has opened or folded the panel. Opened, it gets at least
+     * `OPEN_SHARE` of the column beside the rows still open: its kept share could be
+     * a sliver, and an opened panel that stays a sliver looks like a tap that did
+     * nothing. Until a bar has been dragged the stylesheet's shares already do this. */
+    const onTapped = () => {
+      if (folded(row) || !Object.keys(held).length) return;
+      const others = rows.filter((r) => r !== row && !folded(r))
+        .reduce((sum, r) => sum + held[nameOf(r)], 0);
+      held[nameOf(row)] = Math.max(held[nameOf(row)], (others * OPEN_SHARE) / (1 - OPEN_SHARE));
+      apply();
+      save();
+    };
 
     bar.addEventListener('pointerdown', onDown);
     bar.addEventListener('click', onClick, true);
+    bar.addEventListener('click', onTapped);
     undo.push(() => {
       bar.removeEventListener('pointerdown', onDown);
       bar.removeEventListener('click', onClick, true);
+      bar.removeEventListener('click', onTapped);
       bar.classList.remove('dragging', 'no-seam');
-      row.style.flex = '';
-      above.style.flex = '';
     });
   }
+  undo.push(() => { for (const row of rows) row.style.flex = ''; });
   return () => { for (const fn of undo) fn(); };
 }
 

@@ -2354,12 +2354,21 @@ rather than captions -- the same model the desktop uses, turned through ninety d
 phone the boundary between two rows is exactly where the lower one's bar already is,
 and a second grabbable strip a few pixels tall under a finger would be a worse control
 than the one already there. So a tap folds the panel, a drag moves the seam -- the
-panel above grows by what this one gives up, and nothing below it moves -- and dragging
-a bar down onto its own panel until only the bar is left *is* folding it, and is drawn
-that way. Told apart by six pixels of travel, the same way the message surface tells a
-scroll from a tap. The pointer capture is taken when the drag starts rather than on the
-press, because capturing early retargets the click to the bar, which is where the
-toggle button is not.
+row above grows by what the rows below give up, nearest first, so a folded panel's bar
+pushes the panel under it (`moveSeam` in `ui/panels.js`) -- and dragging a bar down onto
+its own panel until only the bar is left *is* folding it, and is drawn that way. Told
+apart by six pixels of travel, the same way the message surface tells a scroll from a
+tap. The pointer capture is taken when the drag starts rather than on the press,
+because capturing early retargets the click to the bar, which is where the toggle
+button is not.
+
+**Every row is a share of the column, not a height.** Each row's `flex-grow` is its
+share, in points once a bar has been dragged and kept under `plg.studio-rows`, so the
+rows always add up to the screen: a folded panel is its bar, its room goes to the rows
+still open in proportion, and its share is kept for when it opens -- at least a third
+of the column beside the preview when it is opened from its bar. With fixed heights and
+the list absorbing the slack, folding the list left its room empty at the foot of the
+screen and opening it again could leave it nothing to open into.
 
 **The focused face had no size at all.** `.face-fit` is a `container-type: size` and
 the focused face sizes itself with `min(100%, calc(100cqh * aspect))`; the stacked
