@@ -18,13 +18,35 @@ CSV registries connect the concept bank to each language pack; build scripts val
 the data, generate pronunciation columns and subset fonts for the scripts in use.
 Optional profanity content is a separate section that starts disabled.
 
+A language offers three things to do with it, as three buttons on its card on the
+landing page: **Card** (the studio, `customize.html`, which keeps its file name),
+**Converse** where a board covers the pair, and **Quiz**.
+
 `ui/drill.js` builds seeded practice sessions from the selected content, with multiple
 choice, matching and typed answers. Grading distinguishes correct answers, differences
 in diacritics and incorrect answers, with a length-dependent tolerance for typos.
 A missed multiple-choice question shows, beside each wrong option, the prompt that option
 does answer, since each option keeps the card it came from; a template's slot is drawn as
-`____` and graded as the same slot as the stored `{}`. The same module supplies the
-practice dialog and its keyboard controls.
+`____` and graded as the same slot as the stored `{}`. The same module draws the setup,
+the questions and the summary, one at a time, into the quiz page, with their keyboard
+controls.
+
+The quiz page (`drill.html`, `ui/drill-page.js`) is one pair. Its rows are a card's
+rows without the card: `buildContent` in `core/content.js` is everything `buildSheet`
+does before it solves -- both packs in the reader's voice, the language slots, the
+respellings, the reader's own terms and corrections, and `buildBlocks`' decision about
+which rows exist -- so the page loads no font and lays nothing out, and `buildSheet`
+calls the same function before its solve. It is built once with every section on; what
+to practise is a filter over it, a section's tick and its rows' ticks in a list folded to
+one line, kept per pair under `plg.drill.<target>__<source>`. Until the reader chooses,
+it is the rows their card carries -- its sections, its ticks, and its priority floor as
+ticks off -- and *Same as my card* puts that back. Card's own Quiz is a link to this page
+for the same pair. `ui/drill-store.js` keeps the record under `plg.drill-record`, in
+`ui/usage.js`'s shape: per pair, a tally (right, right but for the marks, missed) for
+each day of the last year and one for all time, and per concept its tally and how it
+went last. The page shows the four windows' tallies and share right, and the rows to
+practise -- missed or half-known the last time, the most missed first -- with a reset
+that asks; Delete everything clears both stores.
 
 Header and footer bands can be configured independently, with multiple information
 slots, custom text, colour and full-width or tab placement. The solver reserves their
@@ -520,8 +542,9 @@ always produces the same sheet, and the committed packs never churn.
 
 ## Pages
 
-Four separate HTML entry points rather than one SPA, so the gallery loads fast
-and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
+Separate HTML entry points rather than one SPA, so the gallery loads fast and offline
+on a phone without paying for the solver, `pdf-lib` or a CJK font: the gallery, the
+quick sheet, the studio, the conversation boards, the Morse signaller and the quiz.
 
 - **`index.html`** — gallery. Cards keep a fixed header: the flags sit in a grid to
   the right of the name, which is already two lines tall, and are capped at four
@@ -659,7 +682,8 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   ladder is here for a positive reason rather than for completeness: the phone card
   plus its top step is a lock screen, and that is the one thing the quick path does
   better than the studio.
-- **`customize.html`** — the studio: format (20%) · faces (50%) · content (30%).
+- **`customize.html`** — the studio, called **Card** wherever a reader sees it: format
+  (20%) · faces (50%) · content (30%).
   Faces open as a grid, click one to focus it with the rest as a thumbnail strip.
   Clicking a row on a face reveals it in the content tree and vice versa. The
   tree is built once and updated in place so scroll position and expanded
@@ -1513,9 +1537,9 @@ the saved copy -- is in every page's settings in the same sections (`readerSecti
 `ui/personal-data.js` for the two sheet pages; the studio's phone menu carries them too,
 its bars being hidden there), so no sheet page has a second settings dialog or a second
 light switch. The profile rides in `SheetSpec.speaker` so an exported sheet carries the
-voice it was built in, and the drill inherits it because it drills the blocks the
-sheet solved. `buildSheet` applies it **before anything is measured**, since the
-solver decides what fits by measuring these exact strings.
+voice it was built in, and the quiz inherits it because its rows come from the same
+`buildContent`. That applies it **before anything is measured**, since the solver
+decides what fits by measuring these exact strings.
 
 ## Typeface, and what "font options" costs
 

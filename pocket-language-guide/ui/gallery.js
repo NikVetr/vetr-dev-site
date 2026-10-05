@@ -119,13 +119,13 @@ function card(lang, gallery) {
   if (!have) {
     actions.push(el('span', { class: 'tag planned', text: t('gallery.helpTranslate') }));
   } else {
-    // **No Export here.** Exporting is what you do once you have decided what is on
-    // the card, and deciding is the customise page -- which carries Export PDF and
-    // PNG in its own header. Two buttons on a card is a choice a reader can make at a
-    // glance; three was one of them asking them to commit to a default they had not
-    // seen yet.
+    // **Three things to do with a language: its card, a conversation, a quiz.** No
+    // Export here: exporting is what you do once you have decided what is on the card,
+    // and deciding is Card -- which carries Export PDF and PNG in its own header. A
+    // fourth button asking a reader to commit to a default they had not seen yet is
+    // not a choice anyone makes at a glance.
     actions.push(el('a', {
-      class: 'btn primary', href: `customize.html${query}`, text: t('gallery.customise'),
+      class: 'btn primary', href: `customize.html${query}`, text: t('gallery.card'),
     }));
     // **Only where a board exists for this pair.** A conversation board is authored
     // content, not a view the corpus can generate, and it needs text on both sides --
@@ -146,13 +146,17 @@ function card(lang, gallery) {
         class: 'btn', href: `signal.html${query}`, text: t('gallery.signal'),
       }));
     }
+    // On every card with words to ask about: the quiz needs no board and no layout,
+    // only the rows a card would carry.
+    actions.push(el('a', {
+      class: 'btn', href: `drill.html${query}`, text: t('gallery.quiz'),
+    }));
     // **No "Offline" button here.** It said "Offline" and did something that needs a
     // sentence to explain -- fetch this pair's data and its subset fonts into the
     // service worker cache -- so it read as a state ("this is offline") rather than
-    // an action, and sat beside two buttons that navigate. Export and Customise are
-    // the two things to do with a card. The capability is unchanged: `sw.js` still
-    // precaches the shell, and `app.js` still exports `saveForOffline` for a surface
-    // that can afford to explain itself.
+    // an action, and sat beside buttons that navigate. The capability is unchanged:
+    // `sw.js` still precaches the shell, and `app.js` still exports `saveForOffline`
+    // for a surface that can afford to explain itself.
   }
 
   if (thumb instanceof HTMLButtonElement) {

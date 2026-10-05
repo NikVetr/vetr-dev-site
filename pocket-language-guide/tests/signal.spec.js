@@ -60,7 +60,7 @@ test('the gallery offers Signal for Morse, and no board', async ({ page }) => {
   await expect(card).toBeVisible({ timeout: 30_000 });
   await expect(card.getByRole('link', { name: 'Signal' })).toHaveAttribute('href', /signal\.html\?target=morse/);
   await expect(card.getByRole('link', { name: 'Converse' })).toHaveCount(0);
-  await expect(card.getByRole('link', { name: 'Customise' })).toBeVisible();
+  await expect(card.getByRole('link', { name: 'Card' })).toBeVisible();
 });
 
 test('Morse is a language to learn, not a language to speak', async ({ page }) => {

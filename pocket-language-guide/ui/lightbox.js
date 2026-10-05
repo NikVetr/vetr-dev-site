@@ -271,7 +271,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   // so on an Arabic card these say تصدير and تخصيص, and anything looking for the
   // English word stops finding them.
   const exportLink = el('a', { class: 'btn primary lightbox-export', text: t('gallery.export') });
-  const customiseLink = el('a', { class: 'btn lightbox-customise', text: t('gallery.customise') });
+  const customiseLink = el('a', { class: 'btn lightbox-customise', text: t('gallery.card') });
   const foot = el('div', { class: 'lightbox-foot' }, [
     strip,
     el('div', { class: 'lightbox-do' }, [exportLink, customiseLink]),
@@ -405,7 +405,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
       .catch((err) => {
         console.warn('[plg]', err);
         if (pair === wanted) {
-          face.append(el('p', { class: 'lightbox-failed', text: t('gallery.previewFailed') }));
+          face.append(el('p', { class: 'lightbox-failed', text: t('gallery.previewFailedCard') }));
         }
       });
   }
@@ -424,7 +424,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     next.setAttribute('aria-label', t('gallery.previewNext'));
     strip.setAttribute('aria-label', t('gallery.previewStrip'));
     exportLink.textContent = t('gallery.export');
-    customiseLink.textContent = t('gallery.customise');
+    customiseLink.textContent = t('gallery.card');
     swap.setAttribute('aria-label', t('gallery.previewSwap'));
     close.setAttribute('aria-label', t('gallery.previewClose'));
     sourcePicker.relabel({ label: t('gallery.previewReading'), options: options(isSpoken) });

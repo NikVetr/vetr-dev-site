@@ -34,8 +34,8 @@ export const WINDOWS = { week: 7, month: 30, year: 365, all: Infinity };
  * @typedef {{items: Record<string, UsedItem>}} Usage
  */
 
-/** Today, counted in the reader's own days rather than UTC's. */
-const today = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 60_000) / DAY);
+/** Today, counted in the reader's own days rather than UTC's. Shared with the quiz's record. */
+export const today = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 60_000) / DAY);
 
 /** @returns {Usage} */
 export function readUsage() {

@@ -1,11 +1,10 @@
-// Quiz mode: drill the card that has just been built.
+// Quiz mode: drill the rows a card carries.
 //
 // The sheet is a printed artifact and this is its screen counterpart -- the same
-// content, drilled instead of typeset. Three question shapes over the rows that are
-// on the card, with the reader choosing which columns the question hands them and
-// which they have to supply.
+// content, drilled instead of typeset. Three question shapes over the rows, with the
+// reader choosing which columns the question hands them and which they have to supply.
 //
-// **It reads the solved `blocks`, not `spec.selection`.** Those differ, and the
+// **It reads built `blocks`, not `spec.selection`.** Those differ, and the
 // difference is the whole point: `buildBlocks` is where `applies_to`, the priority
 // floor, an `include: false` override and the existence of a row on *both* sides are
 // decided, and a row the reader ticked that could not render is not on the card. The
@@ -14,6 +13,10 @@
 // It also gets `mergeIdenticalRows` for free: where Spanish answers two concepts with
 // `Buenos días`, the card carries one row with both glosses in it, and so does the
 // quiz.
+//
+// **A page of its own** (`drill.html`, `ui/drill-page.js`), the third thing to do with
+// a language beside its card and its conversation. The page chooses which rows may be
+// asked about and keeps the record of how the reader did; this module asks.
 //
 // `ui/quiz.js` is the onboarding questionnaire -- "Too many options? Help me decide."
 // -- and is a different thing entirely. Separate module, separate `drill.*` message
@@ -24,7 +27,6 @@ import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
 import { t } from './i18n.js';
-import { dialogHead } from './dialog.js';
 import { speech } from './platform/speech.js';
 
 /** How many options a multiple-choice question offers, and the fewest it can be
@@ -434,7 +436,7 @@ export function buildDrill({ blocks, concepts, kind, prompt, answer, seed, count
   return questions;
 }
 
-// --- the dialog ------------------------------------------------------------
+// --- the page --------------------------------------------------------------
 
 /** A template's slot as the blank a reader fills, not the `{}` it is stored as. @param {string} text */
 const blank = (text) => text.replaceAll('{}', '____');
@@ -453,16 +455,22 @@ function el(tag, attrs = {}, kids = []) {
 
 /**
  * @typedef {Object} DrillInput
- * @property {import('../core/types.js').Block[]} blocks  the solved card
- * @property {Awaited<ReturnType<import('../core/sheet.js').createSheetContext>>['corpus']} corpus
+ * @property {HTMLElement} root  where the quiz is drawn, one phase at a time
+ * @property {() => import('../core/types.js').Block[]} blocks  the rows it may ask
+ *   about, read when they are counted: the page's choice of rows can change under it
+ * @property {Awaited<ReturnType<import('../core/pack.js').loadCorpus>>} corpus
  * @property {import('../core/types.js').SheetSpec} spec
+ * @property {Node} [choose]  the page's choice of rows, at the head of the setup
+ * @property {(conceptId:string, verdict:Verdict) => void} onAnswer  each row as it is graded
+ * @property {(phase:'setup'|'run'|'summary') => void} [onPhase]
  */
 
 /**
- * Open the quiz. Resolves when it closes.
+ * Draw the quiz into the page: its setup, then its questions, then how it went.
  * @param {DrillInput} input
+ * @returns {{refresh: () => void}}  counts the rows again, after the page's choice moved
  */
-export function openDrill({ blocks, corpus, spec }) {
+export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPhase }) {
   // The same columns the format panel offers, named the way that control names them
   // -- "Japanese", "Hepburn", "English" rather than "Their script" -- because this is
   // the same vocabulary asked about the same cells. `numeral` is excluded there and
@@ -477,512 +485,510 @@ export function openDrill({ blocks, corpus, spec }) {
     lang: TARGET_CELLS.has(field) ? spec.target : spec.source,
     dir: LATIN_CELLS.has(field) ? 'ltr' : direction(TARGET_CELLS.has(field) ? spec.target : spec.source),
   });
+  /** What the setup does when the rows change; nothing once a quiz is running. */
+  let recount = () => {};
+  setup(false);
+  return { refresh: () => recount() };
 
-  // Named on the element rather than by `aria-labelledby`, because the dialog's
-  // contents are replaced across its three phases and only the first and last carry
-  // a heading -- a label pointing at a node that a question removes is worse than no
-  // label.
-  const dialog = /** @type {HTMLDialogElement} */ (el('dialog', {
-    class: 'drill', 'aria-label': t('drill.heading'),
-  }));
-  document.body.append(dialog);
-  dialog.showModal();
+  /** @param {'setup'|'run'|'summary'} phase @param {Node[]} nodes */
+  function show(phase, nodes) {
+    root.replaceChildren(...nodes);
+    onPhase?.(phase);
+  }
 
-  return new Promise((resolve) => {
-    const done = () => {
-      dialog.close();
-      dialog.remove();
-      resolve(undefined);
-    };
-    dialog.addEventListener('cancel', done);
-    // The header stays through all three phases; each phase replaces what is under it.
-    const head = dialogHead({ title: t('drill.heading'), close: t('gallery.previewClose'), onClose: done });
-    setup();
+  // --- setup ------------------------------------------------------------
 
-    // --- setup ------------------------------------------------------------
+  /** @param {boolean} [focus]  coming back to it from a quiz, rather than opening the page */
+  function setup(focus = true) {
+    /** @type {Set<FieldId>} */ const prompt = new Set(
+      columns.includes('gloss') ? ['gloss'] : columns.slice(-1));
+    /** @type {Set<FieldId>} */ const answer = new Set(
+      columns.filter((f) => !prompt.has(f)).slice(0, 1));
 
-    function setup() {
-      /** @type {Set<FieldId>} */ const prompt = new Set(
-        columns.includes('gloss') ? ['gloss'] : columns.slice(-1));
-      /** @type {Set<FieldId>} */ const answer = new Set(
-        columns.filter((f) => !prompt.has(f)).slice(0, 1));
+    const kind = /** @type {HTMLSelectElement} */ (el('select', { id: 'drill-kind' }));
+    for (const item of KINDS) kind.append(new Option(t(item.captionKey), item.value));
+    const length = /** @type {HTMLSelectElement} */ (el('select', { id: 'drill-length' }));
+    for (const n of LENGTHS) length.append(new Option(String(n), String(n)));
+    const seed = /** @type {HTMLInputElement} */ (el('input', {
+      type: 'text', id: 'drill-seed', class: 'drill-seed', value: freshSeed(),
+      autocomplete: 'off', spellcheck: 'false',
+    }));
+    const note = el('p', { class: 'small muted drill-note' });
+    const start = /** @type {HTMLButtonElement} */ (el('button', {
+      type: 'submit', class: 'primary', text: t('drill.start'),
+    }));
 
-      const kind = /** @type {HTMLSelectElement} */ (el('select', { id: 'drill-kind' }));
-      for (const item of KINDS) kind.append(new Option(t(item.captionKey), item.value));
-      const length = /** @type {HTMLSelectElement} */ (el('select', { id: 'drill-length' }));
-      for (const n of LENGTHS) length.append(new Option(String(n), String(n)));
-      const seed = /** @type {HTMLInputElement} */ (el('input', {
-        type: 'text', id: 'drill-seed', class: 'drill-seed', value: freshSeed(),
-        autocomplete: 'off', spellcheck: 'false',
-      }));
-      const note = el('p', { class: 'small muted drill-note' });
-      const start = /** @type {HTMLButtonElement} */ (el('button', {
-        type: 'submit', class: 'primary', text: t('drill.start'),
-      }));
-
-      /**
-       * One of the two column lists, built once and synced afterwards.
-       *
-       * **A column is shown or entered, never both** -- one that is both prints the
-       * answer beside the question -- so ticking it on one side unticks it on the
-       * other rather than being refused, which is what the reader meant. That is
-       * also why the boxes are synced rather than rebuilt: rebuilding destroys the
-       * box that was just ticked and drops a keyboard reader back to the top of the
-       * dialog, which is the same reason the content tree updates in place.
-       * @param {Set<FieldId>} own @param {Set<FieldId>} other
-       * @param {string} legend @param {string} hint
-       */
-      function columnGroup(own, other, legend, hint) {
-        /** @type {HTMLInputElement[]} */ const boxes = [];
-        // Chips rather than a column of checkboxes. Seven column names -- "Japanese",
-        // "Hepburn", "English" -- are exactly the short labels `ui/chips.js` is for,
-        // and the two lists were fourteen full-width rows above the fold in a dialog
-        // whose point is the question below them.
-        const options = columns.map((field) => {
-          const chip = chipToggle({
-            label: labels[field].caption,
-            title: labels[field].title,
-            checked: own.has(field),
-            onChange: (on) => {
-              if (on) {
-                own.add(field);
-                other.delete(field);
-              } else {
-                own.delete(field);
-              }
-              refresh();
-            },
-          });
-          // Which cell this is, for the specs that drive the dialog by column.
-          chip.box.value = field;
-          boxes.push(chip.box);
-          return chip.label;
+    /**
+     * One of the two column lists, built once and synced afterwards.
+     *
+     * **A column is shown or entered, never both** -- one that is both prints the
+     * answer beside the question -- so ticking it on one side unticks it on the
+     * other rather than being refused, which is what the reader meant. That is
+     * also why the boxes are synced rather than rebuilt: rebuilding destroys the
+     * box that was just ticked and drops a keyboard reader back to the top of the
+     * setup, which is the same reason the content tree updates in place.
+     * @param {Set<FieldId>} own @param {Set<FieldId>} other
+     * @param {string} legend @param {string} hint
+     */
+    function columnGroup(own, other, legend, hint) {
+      /** @type {HTMLInputElement[]} */ const boxes = [];
+      // Chips rather than a column of checkboxes. Seven column names -- "Japanese",
+      // "Hepburn", "English" -- are exactly the short labels `ui/chips.js` is for,
+      // and the two lists were fourteen full-width rows above the fold in a form
+      // whose point is the question below them.
+      const options = columns.map((field) => {
+        const chip = chipToggle({
+          label: labels[field].caption,
+          title: labels[field].title,
+          checked: own.has(field),
+          onChange: (on) => {
+            if (on) {
+              own.add(field);
+              other.delete(field);
+            } else {
+              own.delete(field);
+            }
+            refresh();
+          },
         });
-        return {
-          node: el('fieldset', {}, [
-            el('legend', { text: legend }),
-            el('p', { class: 'small muted', text: hint, style: 'margin:0 0 .2em' }),
-            el('div', { class: 'chip-grid' }, options),
-          ]),
-          sync: () => boxes.forEach((box, i) => { box.checked = own.has(columns[i]); }),
-        };
-      }
-
-      const shown = columnGroup(prompt, answer, t('drill.shown'), t('drill.shownHint'));
-      const asked = columnGroup(answer, prompt, t('drill.asked'), t('drill.askedHint'));
-
-      /**
-       * What is possible with the columns currently ticked, and why not otherwise.
-       *
-       * Said here rather than discovered after pressing Start. Multiple choice needs
-       * a second distinct answer to offer and matching needs a second row to match,
-       * so on a card trimmed to one row in the asked column neither exists -- and the
-       * reader is entitled to know that before choosing rather than after.
-       */
-      function refresh() {
-        shown.sync();
-        asked.sync();
-        const fields = [...prompt, ...answer];
-        const pool = prompt.size && answer.size ? drillPool(blocks, fields) : [];
-        const distinct = new Set(pool.flatMap(
-          (row) => [...answer].map((f) => normalise(row.values[f] ?? '')),
-        ));
-        for (const option of kind.options) {
-          const value = /** @type {DrillKind} */ (option.value);
-          option.disabled = (value === 'match' && pool.length < 2)
-            || (value === 'choice' && distinct.size < MIN_OPTIONS);
-        }
-        if (kind.selectedOptions[0]?.disabled) {
-          kind.value = [...kind.options].find((o) => !o.disabled)?.value ?? '';
-        }
-        const sections = new Set(pool.map((row) => row.sectionId));
-        note.textContent = !prompt.size || !answer.size
-          ? t('drill.needBoth')
-          : pool.length
-            ? t('drill.pool', { count: pool.length, sections: sections.size })
-            : t('drill.poolEmpty');
-        start.disabled = !pool.length || !kind.value;
-      }
-
-      const form = el('form', { class: 'drill-setup', method: 'dialog' }, [
-        el('p', { class: 'lede', text: t('drill.lede') }),
-        el('div', { class: 'field' }, [
-          el('label', { for: 'drill-kind' }, [el('span', { text: t('drill.kind') })]), kind,
-        ]),
-        shown.node,
-        asked.node,
-        el('div', { class: 'field' }, [
-          el('label', { for: 'drill-length' }, [el('span', { text: t('drill.length') })]), length,
-        ]),
-        el('div', { class: 'field' }, [
-          el('label', { for: 'drill-seed' }, [
-            el('span', { text: t('drill.seed') }),
-            el('span', { class: 'small muted', text: t('drill.seedHint') }),
-          ]), seed,
-        ]),
-        note,
-      ]);
-      const cancel = el('button', { type: 'button', text: t('quiz.cancel') });
-      cancel.addEventListener('click', done);
-      form.append(el('div', { class: 'row', style: 'justify-content:flex-end' }, [cancel, start]));
-      kind.addEventListener('change', refresh);
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        if (start.disabled) return;
-        // Shown in the sheet's own column order rather than in tick order, so a
-        // question reads the way the printed row does.
-        const shownFields = columns.filter((field) => prompt.has(field));
-        const askedFields = columns.filter((field) => answer.has(field));
-        // The seed the drill actually ran on, which is the one worth showing: a box
-        // left empty gets a fresh one rather than an empty string, and the reader has
-        // to be able to read back what they were given.
-        const used = seed.value.trim() || freshSeed();
-        run(buildDrill({
-          blocks,
-          concepts: corpus.concepts,
-          kind: /** @type {DrillKind} */ (kind.value),
-          prompt: shownFields,
-          answer: askedFields,
-          seed: used,
-          count: Number(length.value),
-        }), shownFields, used);
+        // Which cell this is, for the specs that drive the setup by column.
+        chip.box.value = field;
+        boxes.push(chip.box);
+        return chip.label;
       });
-
-      dialog.replaceChildren(head, form);
-      refresh();
-      kind.focus();
+      return {
+        node: el('fieldset', {}, [
+          el('legend', { text: legend }),
+          el('p', { class: 'small muted', text: hint, style: 'margin:0 0 .2em' }),
+          el('div', { class: 'chip-grid' }, options),
+        ]),
+        sync: () => boxes.forEach((box, i) => { box.checked = own.has(columns[i]); }),
+      };
     }
 
-    // --- running ----------------------------------------------------------
+    const shown = columnGroup(prompt, answer, t('drill.shown'), t('drill.shownHint'));
+    const asked = columnGroup(answer, prompt, t('drill.asked'), t('drill.askedHint'));
 
     /**
-     * One question's own controls: its body, how to grade what is in them, and
-     * where the keyboard should land.
-     * @typedef {{body:(Node|string)[], check:(revealed?:boolean)=>void, focus:()=>HTMLElement|null}} Panel
+     * What is possible with the columns currently ticked, and why not otherwise.
+     *
+     * Said here rather than discovered after pressing Start. Multiple choice needs
+     * a second distinct answer to offer and matching needs a second row to match,
+     * so on a card trimmed to one row in the asked column neither exists -- and the
+     * reader is entitled to know that before choosing rather than after.
      */
+    function refresh() {
+      shown.sync();
+      asked.sync();
+      const fields = [...prompt, ...answer];
+      const pool = prompt.size && answer.size ? drillPool(blocks(), fields) : [];
+      const distinct = new Set(pool.flatMap(
+        (row) => [...answer].map((f) => normalise(row.values[f] ?? '')),
+      ));
+      for (const option of kind.options) {
+        const value = /** @type {DrillKind} */ (option.value);
+        option.disabled = (value === 'match' && pool.length < 2)
+          || (value === 'choice' && distinct.size < MIN_OPTIONS);
+      }
+      if (kind.selectedOptions[0]?.disabled) {
+        kind.value = [...kind.options].find((o) => !o.disabled)?.value ?? '';
+      }
+      const sections = new Set(pool.map((row) => row.sectionId));
+      note.textContent = !prompt.size || !answer.size
+        ? t('drill.needBoth')
+        : pool.length
+          ? t('drill.pool', { count: pool.length, sections: sections.size })
+          : t('drill.poolEmpty');
+      start.disabled = !pool.length || !kind.value;
+    }
+
+    const form = el('form', { class: 'drill-setup' }, [
+      ...(choose ? [choose] : []),
+      el('div', { class: 'field' }, [
+        el('label', { for: 'drill-kind' }, [el('span', { text: t('drill.kind') })]), kind,
+      ]),
+      shown.node,
+      asked.node,
+      el('div', { class: 'field' }, [
+        el('label', { for: 'drill-length' }, [el('span', { text: t('drill.length') })]), length,
+      ]),
+      el('div', { class: 'field' }, [
+        el('label', { for: 'drill-seed' }, [
+          el('span', { text: t('drill.seed') }),
+          el('span', { class: 'small muted', text: t('drill.seedHint') }),
+        ]), seed,
+      ]),
+      note,
+    ]);
+    form.append(el('div', { class: 'row', style: 'justify-content:flex-end' }, [start]));
+    kind.addEventListener('change', refresh);
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (start.disabled) return;
+      // Shown in the sheet's own column order rather than in tick order, so a
+      // question reads the way the printed row does.
+      const shownFields = columns.filter((field) => prompt.has(field));
+      const askedFields = columns.filter((field) => answer.has(field));
+      // The seed the drill actually ran on, which is the one worth showing: a box
+      // left empty gets a fresh one rather than an empty string, and the reader has
+      // to be able to read back what they were given.
+      const used = seed.value.trim() || freshSeed();
+      run(buildDrill({
+        blocks: blocks(),
+        concepts: corpus.concepts,
+        kind: /** @type {DrillKind} */ (kind.value),
+        prompt: shownFields,
+        answer: askedFields,
+        seed: used,
+        count: Number(length.value),
+      }), shownFields, used);
+    });
+
+    show('setup', [form]);
+    recount = refresh;
+    refresh();
+    if (focus) kind.focus();
+  }
+
+  // --- running ----------------------------------------------------------
+
+  /**
+   * One question's own controls: its body, how to grade what is in them, and
+   * where the keyboard should land.
+   * @typedef {{body:(Node|string)[], check:(revealed?:boolean)=>void, focus:()=>HTMLElement|null}} Panel
+   */
+
+  /**
+   * @param {Question[]} questions
+   * @param {FieldId[]} prompt  the columns the question hands the reader
+   * @param {string} seed
+   */
+  function run(questions, prompt, seed) {
+    let at = 0;
+    /** @type {Record<Verdict, number>} */
+    const tally = { right: 0, marks: 0, wrong: 0 };
+
+    /** One cell of a prompt, in its own language and direction. */
+    const cell = (/** @type {FieldId} */ field, /** @type {string} */ value) => el(
+      'div', { class: 'drill-cell' }, [
+        el('span', { class: 'small muted', text: labels[field].caption }),
+        el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir, text: blank(value) }),
+      ]);
+
+    /** Every shown column of a row. `drillPool` has already guaranteed all of
+     * them are filled, which is why there is nothing to skip here. */
+    const promptOf = (/** @type {Card} */ row) => el('div', { class: 'drill-prompt' },
+      prompt.map((field) => cell(field, /** @type {string} */ (row.values[field]))));
 
     /**
-     * @param {Question[]} questions
-     * @param {FieldId[]} prompt  the columns the question hands the reader
-     * @param {string} seed
+     * Multiple choice. A selection is right or it is not: the three-valued grade
+     * exists for a *typed* answer, and picking the wrong label off a list is not a
+     * near miss.
+     * @param {Question} question @returns {Panel}
      */
-    function run(questions, prompt, seed) {
-      let at = 0;
-      /** @type {Record<Verdict, number>} */
-      const tally = { right: 0, marks: 0, wrong: 0 };
-
-      /** One cell of a prompt, in its own language and direction. */
-      const cell = (/** @type {FieldId} */ field, /** @type {string} */ value) => el(
-        'div', { class: 'drill-cell' }, [
-          el('span', { class: 'small muted', text: labels[field].caption }),
-          el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir, text: blank(value) }),
-        ]);
-
-      /** Every shown column of a row. `drillPool` has already guaranteed all of
-       * them are filled, which is why there is nothing to skip here. */
-      const promptOf = (/** @type {Card} */ row) => el('div', { class: 'drill-prompt' },
-        prompt.map((field) => cell(field, /** @type {string} */ (row.values[field]))));
-
-      /**
-       * Multiple choice. A selection is right or it is not: the three-valued grade
-       * exists for a *typed* answer, and picking the wrong label off a list is not a
-       * near miss.
-       * @param {Question} question @returns {Panel}
-       */
-      function choicePanel(question) {
-        const row = question.rows[0];
-        const field = question.asks[0];
-        const options = /** @type {string[]} */ (question.options);
-        const { lang, dir } = locale(field);
-        const group = el('div', {
-          class: 'drill-options', role: 'radiogroup',
-          'aria-label': t('drill.pick', { field: labels[field].caption }),
+    function choicePanel(question) {
+      const row = question.rows[0];
+      const field = question.asks[0];
+      const options = /** @type {string[]} */ (question.options);
+      const { lang, dir } = locale(field);
+      const group = el('div', {
+        class: 'drill-options', role: 'radiogroup',
+        'aria-label': t('drill.pick', { field: labels[field].caption }),
+      });
+      /** @type {HTMLButtonElement[]} */ const buttons = [];
+      let chosen = -1;
+      /** @param {number} i */
+      const choose = (i) => {
+        chosen = i;
+        buttons.forEach((button, k) => {
+          button.setAttribute('aria-checked', String(k === i));
+          button.tabIndex = k === i ? 0 : -1;
+          button.classList.toggle('chosen', k === i);
         });
-        /** @type {HTMLButtonElement[]} */ const buttons = [];
-        let chosen = -1;
-        /** @param {number} i */
-        const choose = (i) => {
-          chosen = i;
-          buttons.forEach((button, k) => {
-            button.setAttribute('aria-checked', String(k === i));
-            button.tabIndex = k === i ? 0 : -1;
-            button.classList.toggle('chosen', k === i);
-          });
-          buttons[i].focus();
-        };
-        options.forEach((value, i) => {
-          const button = /** @type {HTMLButtonElement} */ (el('button', {
-            type: 'button', class: 'drill-option', role: 'radio', 'aria-checked': 'false',
-            tabindex: i ? '-1' : '0',
-          }, [
-            el('span', { class: 'drill-key small muted', text: String(i + 1) }),
-            el('span', { lang, dir, text: blank(value) }),
-          ]));
-          button.addEventListener('click', () => choose(i));
-          buttons.push(button);
-          group.append(button);
-        });
-        // The same keys the settings groups, the face chooser and the rows on a face
-        // answer -- `nextIndex` is shared for exactly that reason -- plus the digits,
-        // because a numbered list of four invites them.
-        group.addEventListener('keydown', (event) => {
-          const digit = Number(event.key);
-          if (digit >= 1 && digit <= options.length) {
-            event.preventDefault();
-            choose(digit - 1);
-            return;
-          }
-          const to = nextIndex(event.key, chosen < 0 ? 0 : chosen, options.length);
-          if (to < 0) return;
+        buttons[i].focus();
+      };
+      options.forEach((value, i) => {
+        const button = /** @type {HTMLButtonElement} */ (el('button', {
+          type: 'button', class: 'drill-option', role: 'radio', 'aria-checked': 'false',
+          tabindex: i ? '-1' : '0',
+        }, [
+          el('span', { class: 'drill-key small muted', text: String(i + 1) }),
+          el('span', { lang, dir, text: blank(value) }),
+        ]));
+        button.addEventListener('click', () => choose(i));
+        buttons.push(button);
+        group.append(button);
+      });
+      // The same keys the settings groups, the face chooser and the rows on a face
+      // answer -- `nextIndex` is shared for exactly that reason -- plus the digits,
+      // because a numbered list of four invites them.
+      group.addEventListener('keydown', (event) => {
+        const digit = Number(event.key);
+        if (digit >= 1 && digit <= options.length) {
           event.preventDefault();
-          choose(to);
-        });
-        // **The verdict is words, not a colour on the option.** Marking the right
-        // and the chosen option with a rule and a hue says nothing to a screen
-        // reader, and this is the one shape where the grade has no text of its own
-        // -- the other two print theirs beside each row. `mark` is inserted empty
-        // and filled on grading, so the live region exists before it changes.
-        const mark = el('span', { class: 'drill-mark', role: 'status' });
-        return {
-          body: [promptOf(row), group, mark],
-          focus: () => buttons[chosen < 0 ? 0 : chosen],
-          check: (revealed = false) => {
-            const want = /** @type {string} */ (row.values[field]);
-            const right = !revealed && chosen >= 0 && normalise(options[chosen]) === normalise(want);
-            tally[right ? 'right' : 'wrong'] += 1;
-            buttons.forEach((button, k) => {
-              const correct = normalise(options[k]) === normalise(want);
-              button.disabled = true;
-              button.classList.toggle('right', correct);
-              button.classList.toggle('wrong', !revealed && k === chosen && !right);
-              // **Missed, every wrong option says what it does answer** -- the prompt
-              // it is the right answer to, Jeopardy's way round -- so a miss teaches
-              // four words rather than one.
-              const source = question.choices?.[k];
-              if (!right && !correct && source) {
-                button.append(el('span', { class: 'drill-answers small muted' },
-                  prompt.map((f) => el('span', { ...locale(f), text: blank(/** @type {string} */ (source.values[f])) }))));
-              }
-            });
-            mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
-            // Revealed is not a miss and is not told it is one: it counts as wrong
-            // in the tally, because the reader did not know it, and shows the answer.
-            mark.textContent = right ? t('drill.right')
-              : revealed ? t('drill.expected', { answer: blank(want) })
-                : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
-          },
-        };
-      }
-
-      /**
-       * Matching: a menu per prompt, holding the group's own answers shuffled. A
-       * menu rather than a drag, because assigning a label to a row is genuinely
-       * list-shaped -- which is the house rule for when a menu is the right control
-       * -- and because dragging is the one gesture a keyboard cannot reach.
-       * @param {Question} question @returns {Panel}
-       */
-      function matchPanel(question) {
-        const field = question.asks[0];
-        const { lang, dir } = locale(field);
-        /** @type {{row:Card, pick:HTMLSelectElement, mark:HTMLElement}[]} */ const lines = [];
-        const body = question.rows.map((row) => {
-          const pick = /** @type {HTMLSelectElement} */ (el('select', {
-            lang, dir, 'aria-label': t('drill.matchFor'),
-          }));
-          pick.append(new Option(t('drill.matchChoose'), ''));
-          for (const label of /** @type {string[]} */ (question.labels)) {
-            pick.append(new Option(blank(label), label));
-          }
-          const mark = el('span', { class: 'drill-mark', role: 'status' });
-          lines.push({ row, pick, mark });
-          return el('div', { class: 'drill-line' }, [promptOf(row), pick, mark]);
-        });
-        return {
-          body: [
-            el('p', { class: 'lede', text: t('drill.matchLede', { field: labels[field].caption }) }),
-            ...body,
-          ],
-          focus: () => lines[0].pick,
-          check: (revealed = false) => {
-            for (const line of lines) {
-              const want = /** @type {string} */ (line.row.values[field]);
-              const right = !revealed && normalise(line.pick.value) === normalise(want);
-              tally[right ? 'right' : 'wrong'] += 1;
-              if (revealed) line.pick.value = want;
-              line.pick.disabled = true;
-              line.mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
-              line.mark.textContent = right ? t('drill.right')
-                : revealed ? t('drill.expected', { answer: blank(want) })
-                  : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
-            }
-          },
-        };
-      }
-
-      /**
-       * Fill in the blank: one box per answer column, each graded on its own.
-       * @param {Question} question @returns {Panel}
-       */
-      function blankPanel(question) {
-        const row = question.rows[0];
-        /** @type {{field:FieldId, box:HTMLInputElement, mark:HTMLElement}[]} */ const boxes = [];
-        const body = question.asks.map((field) => {
-          const { lang, dir } = locale(field);
-          const id = `drill-answer-${field}`;
-          const box = /** @type {HTMLInputElement} */ (el('input', {
-            type: 'text', id, lang, dir, class: 'drill-answer',
-            autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
-          }));
-          const mark = el('span', { class: 'drill-mark', role: 'status' });
-          boxes.push({ field, box, mark });
-          return el('div', { class: 'field drill-blank' }, [
-            el('label', { for: id }, [
-              el('span', { text: t('drill.type', { field: labels[field].caption }) }),
-            ]),
-            box,
-            mark,
-          ]);
-        });
-        return {
-          body: [promptOf(row), ...body],
-          focus: () => boxes[0].box,
-          check: (revealed = false) => {
-            for (const entry of boxes) {
-              const want = /** @type {string} */ (row.values[entry.field]);
-              const verdict = revealed ? 'wrong' : grade(entry.box.value, want);
-              tally[verdict] += 1;
-              // Revealed, the answer goes into the box itself, where the reader
-              // would have typed it: the spelling is what they came to see.
-              if (revealed) entry.box.value = want;
-              entry.box.readOnly = true;
-              entry.mark.className = `drill-mark ${verdict}`;
-              // The expected string prints on every outcome, not only on a miss: a
-              // typo inside the budget is graded right, and the reader still has to
-              // see the spelling they nearly had.
-              entry.mark.textContent = revealed
-                ? t('drill.expected', { answer: blank(want) })
-                : `${verdictText(verdict)} ${t('drill.expected', { answer: blank(want) })}`;
-            }
-          },
-        };
-      }
-
-      function ask() {
-        if (at >= questions.length) {
-          summarise();
+          choose(digit - 1);
           return;
         }
-        const question = questions[at];
-        const panel = question.kind === 'choice' ? choicePanel(question)
-          : question.kind === 'match' ? matchPanel(question)
-            : blankPanel(question);
-        const action = /** @type {HTMLButtonElement} */ (el('button', {
-          type: 'submit', class: 'primary', text: t('drill.check'),
-        }));
-        const quit = el('button', { type: 'button', class: 'ghost', text: t('studio.close') });
-        quit.addEventListener('click', done);
-        let graded = false;
-
-        /** Grade the question, by answer or by giving up on it, and turn Check into Next. */
-        const settle = (/** @type {boolean} */ revealed) => {
-          graded = true;
-          panel.check(revealed);
-          // Gone rather than hidden: it is used once per question, and the house button
-          // rule sets a display that outranks `[hidden]`.
-          reveal.remove();
-          if (speak) speak.disabled = false;
-          action.textContent = at + 1 < questions.length ? t('drill.next') : t('drill.finish');
-          action.focus();
-        };
-
-        // **Not knowing is an answer.** A learner stuck on a row could only guess or
-        // close the quiz; either way they left without the one thing they wanted, the
-        // answer. This shows it, in place, and counts the question as missed -- which
-        // is what it was.
-        const reveal = el('button', { type: 'button', class: 'ghost', text: t('drill.reveal') });
-        reveal.addEventListener('click', () => { if (!graded) settle(true); });
-
-        // **Hearing it is part of learning it**, and the engine is the board's own.
-        // The target text of the row is what is read out -- in a matching question
-        // there are several rows, so no Speak there. Enabled at once when the target
-        // text is one of the columns shown, and only after grading when it is the
-        // column being asked for: a learner typing the word should not be able to
-        // have the answer read to them first.
-        const target = question.rows.length === 1 ? question.rows[0] : null;
-        const canSpeak = target && typeof target.values.script === 'string'
-          && speech.getCapabilities(spec.target).voices.length > 0;
-        const speak = canSpeak
-          ? /** @type {HTMLButtonElement} */ (el('button', { type: 'button', text: t('board.speak') }))
-          : null;
-        if (speak && target) {
-          speak.disabled = question.asks.includes('script');
-          speak.addEventListener('click', () => {
-            speech.speak({ text: sayable(/** @type {string} */ (target.values.script)), locale: spec.target })
-              .catch(() => {});
+        const to = nextIndex(event.key, chosen < 0 ? 0 : chosen, options.length);
+        if (to < 0) return;
+        event.preventDefault();
+        choose(to);
+      });
+      // **The verdict is words, not a colour on the option.** Marking the right
+      // and the chosen option with a rule and a hue says nothing to a screen
+      // reader, and this is the one shape where the grade has no text of its own
+      // -- the other two print theirs beside each row. `mark` is inserted empty
+      // and filled on grading, so the live region exists before it changes.
+      const mark = el('span', { class: 'drill-mark', role: 'status' });
+      return {
+        body: [promptOf(row), group, mark],
+        focus: () => buttons[chosen < 0 ? 0 : chosen],
+        check: (revealed = false) => {
+          const want = /** @type {string} */ (row.values[field]);
+          const right = !revealed && chosen >= 0 && normalise(options[chosen]) === normalise(want);
+          tally[right ? 'right' : 'wrong'] += 1;
+          onAnswer(row.conceptId, right ? 'right' : 'wrong');
+          buttons.forEach((button, k) => {
+            const correct = normalise(options[k]) === normalise(want);
+            button.disabled = true;
+            button.classList.toggle('right', correct);
+            button.classList.toggle('wrong', !revealed && k === chosen && !right);
+            // **Missed, every wrong option says what it does answer** -- the prompt
+            // it is the right answer to, Jeopardy's way round -- so a miss teaches
+            // four words rather than one.
+            const source = question.choices?.[k];
+            if (!right && !correct && source) {
+              button.append(el('span', { class: 'drill-answers small muted' },
+                prompt.map((f) => el('span', { ...locale(f), text: blank(/** @type {string} */ (source.values[f])) }))));
+            }
           });
-        }
-
-        const form = /** @type {HTMLFormElement} */ (el('form', { class: 'drill-run' }, [
-          el('div', { class: 'row drill-head' }, [
-            el('span', {
-              class: 'small muted',
-              text: t('drill.progress', { at: at + 1, total: questions.length }),
-            }),
-            el('span', { class: 'spacer' }),
-            el('span', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
-          ]),
-          ...panel.body,
-          el('div', { class: 'row', style: 'justify-content:flex-end' }, [
-            ...(speak ? [speak] : []), reveal, quit, action,
-          ]),
-        ]));
-        form.addEventListener('submit', (event) => {
-          event.preventDefault();
-          if (!graded) { settle(false); return; }
-          at += 1;
-          ask();
-        });
-        // **Enter means the same thing in all three shapes**, which needs saying
-        // because none of them gets it for free. A lone text input submits
-        // implicitly; a form of `<select>`s does not; and a chosen multiple-choice
-        // option leaves focus on a `<button>`, whose own default for Enter is to
-        // click itself -- so Enter re-picked the option the reader had just picked
-        // and the question never graded. The two real buttons are the exception,
-        // because pressing Enter on Check or Close should do what pressing them
-        // does. Space still selects an option, which is the radio convention.
-        form.addEventListener('keydown', (event) => {
-          if (event.key !== 'Enter') return;
-          if (event.target === action || event.target === quit) return;
-          event.preventDefault();
-          form.requestSubmit(action);
-        });
-
-        dialog.replaceChildren(head, form);
-        panel.focus()?.focus();
-      }
-
-      function summarise() {
-        const total = tally.right + tally.marks + tally.wrong;
-        const again = el('button', { type: 'button', text: t('drill.again') });
-        again.addEventListener('click', setup);
-        const close = el('button', { type: 'button', class: 'primary', text: t('studio.close') });
-        close.addEventListener('click', done);
-        dialog.replaceChildren(head, el('div', { class: 'drill-summary' }, [
-          el('h2', { text: t('drill.summaryHeading') }),
-          el('p', {
-            text: t('drill.summary', {
-              right: tally.right, marks: tally.marks, wrong: tally.wrong, total,
-            }),
-          }),
-          el('p', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
-          el('div', { class: 'row', style: 'justify-content:flex-end' }, [again, close]),
-        ]));
-        close.focus();
-      }
-
-      ask();
+          mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
+          // Revealed is not a miss and is not told it is one: it counts as wrong
+          // in the tally, because the reader did not know it, and shows the answer.
+          mark.textContent = right ? t('drill.right')
+            : revealed ? t('drill.expected', { answer: blank(want) })
+              : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
+        },
+      };
     }
-  });
+
+    /**
+     * Matching: a menu per prompt, holding the group's own answers shuffled. A
+     * menu rather than a drag, because assigning a label to a row is genuinely
+     * list-shaped -- which is the house rule for when a menu is the right control
+     * -- and because dragging is the one gesture a keyboard cannot reach.
+     * @param {Question} question @returns {Panel}
+     */
+    function matchPanel(question) {
+      const field = question.asks[0];
+      const { lang, dir } = locale(field);
+      /** @type {{row:Card, pick:HTMLSelectElement, mark:HTMLElement}[]} */ const lines = [];
+      const body = question.rows.map((row) => {
+        const pick = /** @type {HTMLSelectElement} */ (el('select', {
+          lang, dir, 'aria-label': t('drill.matchFor'),
+        }));
+        pick.append(new Option(t('drill.matchChoose'), ''));
+        for (const label of /** @type {string[]} */ (question.labels)) {
+          pick.append(new Option(blank(label), label));
+        }
+        const mark = el('span', { class: 'drill-mark', role: 'status' });
+        lines.push({ row, pick, mark });
+        return el('div', { class: 'drill-line' }, [promptOf(row), pick, mark]);
+      });
+      return {
+        body: [
+          el('p', { class: 'lede', text: t('drill.matchLede', { field: labels[field].caption }) }),
+          ...body,
+        ],
+        focus: () => lines[0].pick,
+        check: (revealed = false) => {
+          for (const line of lines) {
+            const want = /** @type {string} */ (line.row.values[field]);
+            const right = !revealed && normalise(line.pick.value) === normalise(want);
+            tally[right ? 'right' : 'wrong'] += 1;
+            onAnswer(line.row.conceptId, right ? 'right' : 'wrong');
+            if (revealed) line.pick.value = want;
+            line.pick.disabled = true;
+            line.mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
+            line.mark.textContent = right ? t('drill.right')
+              : revealed ? t('drill.expected', { answer: blank(want) })
+                : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
+          }
+        },
+      };
+    }
+
+    /**
+     * Fill in the blank: one box per answer column, each graded on its own.
+     * @param {Question} question @returns {Panel}
+     */
+    function blankPanel(question) {
+      const row = question.rows[0];
+      /** @type {{field:FieldId, box:HTMLInputElement, mark:HTMLElement}[]} */ const boxes = [];
+      const body = question.asks.map((field) => {
+        const { lang, dir } = locale(field);
+        const id = `drill-answer-${field}`;
+        const box = /** @type {HTMLInputElement} */ (el('input', {
+          type: 'text', id, lang, dir, class: 'drill-answer',
+          autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
+        }));
+        const mark = el('span', { class: 'drill-mark', role: 'status' });
+        boxes.push({ field, box, mark });
+        return el('div', { class: 'field drill-blank' }, [
+          el('label', { for: id }, [
+            el('span', { text: t('drill.type', { field: labels[field].caption }) }),
+          ]),
+          box,
+          mark,
+        ]);
+      });
+      return {
+        body: [promptOf(row), ...body],
+        focus: () => boxes[0].box,
+        check: (revealed = false) => {
+          /** @type {Verdict[]} */ const verdicts = [];
+          for (const entry of boxes) {
+            const want = /** @type {string} */ (row.values[entry.field]);
+            const verdict = revealed ? 'wrong' : grade(entry.box.value, want);
+            verdicts.push(verdict);
+            tally[verdict] += 1;
+            // Revealed, the answer goes into the box itself, where the reader
+            // would have typed it: the spelling is what they came to see.
+            if (revealed) entry.box.value = want;
+            entry.box.readOnly = true;
+            entry.mark.className = `drill-mark ${verdict}`;
+            // The expected string prints on every outcome, not only on a miss: a
+            // typo inside the budget is graded right, and the reader still has to
+            // see the spelling they nearly had.
+            entry.mark.textContent = revealed
+              ? t('drill.expected', { answer: blank(want) })
+              : `${verdictText(verdict)} ${t('drill.expected', { answer: blank(want) })}`;
+          }
+          // One row asked for in two columns is one row known or not: the record
+          // keeps the worse of its answers.
+          onAnswer(row.conceptId, verdicts.includes('wrong') ? 'wrong'
+            : verdicts.includes('marks') ? 'marks' : 'right');
+        },
+      };
+    }
+
+    function ask() {
+      if (at >= questions.length) {
+        summarise();
+        return;
+      }
+      const question = questions[at];
+      const panel = question.kind === 'choice' ? choicePanel(question)
+        : question.kind === 'match' ? matchPanel(question)
+          : blankPanel(question);
+      const action = /** @type {HTMLButtonElement} */ (el('button', {
+        type: 'submit', class: 'primary', text: t('drill.check'),
+      }));
+      // Stopping early still says how it went, over the questions answered so far.
+      const quit = el('button', { type: 'button', class: 'ghost', text: t('drill.stop') });
+      quit.addEventListener('click', summarise);
+      let graded = false;
+
+      /** Grade the question, by answer or by giving up on it, and turn Check into Next. */
+      const settle = (/** @type {boolean} */ revealed) => {
+        graded = true;
+        panel.check(revealed);
+        // Gone rather than hidden: it is used once per question, and the house button
+        // rule sets a display that outranks `[hidden]`.
+        reveal.remove();
+        if (speak) speak.disabled = false;
+        action.textContent = at + 1 < questions.length ? t('drill.next') : t('drill.finish');
+        action.focus();
+      };
+
+      // **Not knowing is an answer.** A learner stuck on a row could only guess or
+      // close the quiz; either way they left without the one thing they wanted, the
+      // answer. This shows it, in place, and counts the question as missed -- which
+      // is what it was.
+      const reveal = el('button', { type: 'button', class: 'ghost', text: t('drill.reveal') });
+      reveal.addEventListener('click', () => { if (!graded) settle(true); });
+
+      // **Hearing it is part of learning it**, and the engine is the board's own.
+      // The target text of the row is what is read out -- in a matching question
+      // there are several rows, so no Speak there. Enabled at once when the target
+      // text is one of the columns shown, and only after grading when it is the
+      // column being asked for: a learner typing the word should not be able to
+      // have the answer read to them first.
+      const target = question.rows.length === 1 ? question.rows[0] : null;
+      const canSpeak = target && typeof target.values.script === 'string'
+        && speech.getCapabilities(spec.target).voices.length > 0;
+      const speak = canSpeak
+        ? /** @type {HTMLButtonElement} */ (el('button', { type: 'button', text: t('board.speak') }))
+        : null;
+      if (speak && target) {
+        speak.disabled = question.asks.includes('script');
+        speak.addEventListener('click', () => {
+          speech.speak({ text: sayable(/** @type {string} */ (target.values.script)), locale: spec.target })
+            .catch(() => {});
+        });
+      }
+
+      const form = /** @type {HTMLFormElement} */ (el('form', { class: 'drill-run' }, [
+        el('div', { class: 'row drill-head' }, [
+          el('span', {
+            class: 'small muted',
+            text: t('drill.progress', { at: at + 1, total: questions.length }),
+          }),
+          el('span', { class: 'spacer' }),
+          el('span', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
+        ]),
+        ...panel.body,
+        el('div', { class: 'row', style: 'justify-content:flex-end' }, [
+          ...(speak ? [speak] : []), reveal, quit, action,
+        ]),
+      ]));
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!graded) { settle(false); return; }
+        at += 1;
+        ask();
+      });
+      // **Enter means the same thing in all three shapes**, which needs saying
+      // because none of them gets it for free. A lone text input submits
+      // implicitly; a form of `<select>`s does not; and a chosen multiple-choice
+      // option leaves focus on a `<button>`, whose own default for Enter is to
+      // click itself -- so Enter re-picked the option the reader had just picked
+      // and the question never graded. The two real buttons are the exception,
+      // because pressing Enter on Check or Stop should do what pressing them
+      // does. Space still selects an option, which is the radio convention.
+      form.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        if (event.target === action || event.target === quit) return;
+        event.preventDefault();
+        form.requestSubmit(action);
+      });
+
+      show('run', [form]);
+      panel.focus()?.focus();
+    }
+
+    function summarise() {
+      const total = tally.right + tally.marks + tally.wrong;
+      const again = el('button', { type: 'button', class: 'primary', text: t('drill.again') });
+      again.addEventListener('click', () => setup());
+      show('summary', [el('div', { class: 'drill-summary' }, [
+        el('h2', { text: t('drill.summaryHeading') }),
+        el('p', {
+          text: t('drill.summary', {
+            right: tally.right, marks: tally.marks, wrong: tally.wrong, total,
+          }),
+        }),
+        el('p', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
+        el('div', { class: 'row', style: 'justify-content:flex-end' }, [again]),
+      ])]);
+      again.focus();
+    }
+
+    recount = () => {};
+    ask();
+    // The setup above it may have been a long form; the question starts where it did.
+    root.scrollIntoView({ block: 'start' });
+  }
 }
 
 /** @param {Verdict} verdict */

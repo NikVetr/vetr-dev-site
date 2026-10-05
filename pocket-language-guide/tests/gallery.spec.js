@@ -24,10 +24,11 @@ test.describe('gallery', () => {
     // Chinese has a corpus, so it gets a real thumbnail and working buttons.
     const chinese = page.locator('.card', { hasText: translatedEndonym('zh-Hans') });
     await expect(chinese.locator('img.card-thumb')).toBeVisible();
-    // Customise, not Export: the card offers the two things you do *next*, and
-    // exporting is what the customise page's own header is for. The lightbox still
-    // links straight to the quick page for a reader who wants the default.
-    await expect(chinese.getByRole('link', { name: 'Customise' })).toBeVisible();
+    // Card, not Export: the card offers the things you do *next* -- its card, a
+    // conversation, a quiz -- and exporting is what Card's own header is for. The
+    // lightbox still links straight to the quick page for a reader who wants the default.
+    await expect(chinese.getByRole('link', { name: 'Card' })).toHaveAttribute('href', /customize\.html\?target=zh-Hans/);
+    await expect(chinese.getByRole('link', { name: 'Quiz' })).toHaveAttribute('href', /drill\.html\?target=zh-Hans&source=en/);
 
     // And a language with no corpus must not offer a button that yields an empty
     // sheet, whatever its declared status says.
@@ -67,8 +68,10 @@ test.describe('gallery', () => {
     // Static markup, a card built in JS, and the picker's own accessible name --
     // three different mechanisms, all of which used to be left behind.
     await expect(page.locator('.skip-link')).toHaveText('Zu den Sprachen springen');
-    await expect(page.locator('.card').first().getByRole('link', { name: 'Anpassen' }))
-      .toBeVisible();
+    // The thumbnail's name rather than the Card link's: that word is new and has not
+    // reached the German catalogue yet, so it is English there by design.
+    await expect(page.locator('.card').first().locator('.card-thumb-button'))
+      .toHaveAttribute('aria-label', /genauer ansehen/);
     await expect(page.locator('.lang-picker-button'))
       .toHaveAttribute('aria-label', /wählen Sie die Sprache/);
     // And it survives a second change, rather than sticking on the first.

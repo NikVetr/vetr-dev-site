@@ -48,7 +48,7 @@ const DIRS = [
 
 /** Individual files, each of which some page names directly. */
 const FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
   'style.css', 'conversation.css', 'favicon.svg', 'manifest.webmanifest',
   'data/presets.json', 'data/icons.json', 'data/coverage.json',
   // The header's two marks. The launcher PNGs beside them are the web's; an app has

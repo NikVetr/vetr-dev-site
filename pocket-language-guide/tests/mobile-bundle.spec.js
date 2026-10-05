@@ -52,6 +52,7 @@ for (const [name, path, ready] of /** @type {[string,string,string][]} */ ([
   ['the quick page', '/sheet.html?target=zh-Hans&source=en', '.sheet-preview svg, .face'],
   ['the studio', '/customize.html?target=zh-Hans&source=en', '.face.focused'],
   ['a conversation board', '/conversation.html?target=zh-Hans&source=en&board=spa', '.board-cell'],
+  ['the quiz', '/drill.html?target=zh-Hans&source=en', '.drill-setup'],
 ])) {
   test(`${name} opens from the bundle with the network cut`, async ({ page }) => {
     const { failed, offsite, errors } = await openOffline(page, path);

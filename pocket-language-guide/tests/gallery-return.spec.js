@@ -79,7 +79,7 @@ test('on a desktop, the studio’s way back keeps the reeled card in the top row
   expect(left).toMatchObject({ open: 'false', pressed: [pick], ringed: pick });
   expect(left.y).toBeGreaterThan(0);
 
-  await page.locator('#gallery .card.chosen a', { hasText: 'Customise' }).click();
+  await page.locator('#gallery .card.chosen a', { hasText: 'Card' }).click();
   await expect(page).toHaveURL(/customize\.html/);
   await page.locator('a.back-link').click();
   await ready(page);

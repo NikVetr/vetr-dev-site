@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem('plg.theme');if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="drill.docTitle">Quiz — Wanderwart</title>
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body class="page-drill">
+<header class="site-header">
+  <div class="container">
+    <!-- The way back to the languages at the head of the line, an arrow and its name,
+         as in Card and on the conversation boards. -->
+    <a class="btn ghost back-link" href="./" data-i18n-label="board.toGallery"
+       data-i18n-title="board.toGallery" aria-label="All languages" title="All languages"
+    ><span class="back-arrow" aria-hidden="true">←</span></a>
+    <a class="brand" href="./"><img class="brand-mark brand-mark-light" src="data/brand/mark.svg" alt="" width="29" height="20"><img class="brand-mark brand-mark-dark" src="data/brand/mark-dark.svg" alt="" width="29" height="20"><span data-i18n="nav.brand">Wanderwart</span></a>
+    <span class="muted small" id="pair"></span>
+    <div class="spacer"></div>
+    <!-- The same pair's card, the mode beside this one. Its address is the page's own
+         pair, set by `ui/drill-page.js`. -->
+    <a class="btn" id="to-card" href="customize.html" data-i18n="gallery.card">Card</a>
+    <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<main class="container drill-page">
+  <h1 data-i18n="drill.heading">Quiz</h1>
+  <p class="lede" data-i18n="drill.pageLede">Choose what to practise, then answer. Nothing here changes your card.</p>
+  <!-- The setup, the questions and the summary, one at a time (`ui/drill.js`). -->
+  <section class="drill" id="drill">
+    <p class="muted loading" data-i18n="studio.loadingTree">Loading the phrase list…</p>
+  </section>
+  <section id="drill-record"></section>
+</main>
+
+<script type="module" src="ui/drill-page.js"></script>
+</body>
+</html>

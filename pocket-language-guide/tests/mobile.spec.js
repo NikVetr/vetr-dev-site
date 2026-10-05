@@ -694,13 +694,14 @@ test.describe('the section picker on a phone', () => {
   });
 
   test('the drill\'s column lists use the same chips', async ({ page }) => {
-    // Fourteen full-width checkbox rows above the fold, in a dialog whose point is
-    // the question underneath them.
+    // Fourteen full-width checkbox rows above the fold, in a form whose point is the
+    // question underneath them. The quiz is reached from the menu, as a page.
     await studio(page);
     await page.locator('#header-more').click();
     await page.locator('#header-menu #drill-open').click();
-    const drill = page.locator('dialog.drill');
-    await expect(drill).toBeVisible();
+    await expect(page).toHaveURL(/drill\.html/);
+    const drill = page.locator('#drill');
+    await expect(drill.locator('.drill-setup')).toBeVisible();
     await expect(drill.locator('fieldset .chip-grid')).toHaveCount(2);
     await expect(drill.locator('fieldset .chip-toggle').first()).toBeVisible();
     // And a column is still shown or filled in, never both.

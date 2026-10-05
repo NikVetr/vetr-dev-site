@@ -8,7 +8,7 @@
      the home indicator and pads itself back out in `style.css`. Still no
      `user-scalable=no` and no `maximum-scale` anywhere: disabling zoom is forbidden. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-i18n="studio.docTitle">Customise a pocket guide</title>
+<title data-i18n="studio.docTitleCard">Card — Wanderwart</title>
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">
 <!-- The conscript face, ahead of first layout. `font-display: block` hides pIqaD and
@@ -42,11 +42,11 @@
          the action line, so the header is two short rows rather than four. -->
     <div class="spacer header-break"></div>
     <span class="status" id="status"></span>
-    <!-- The study side of the card. Deliberately not next to the banner's "Help me
-         decide", which is the onboarding questionnaire and a different thing: this
-         one sits with the actions, because it acts on the sheet you have built. -->
-    <button type="button" id="drill-open" data-i18n="drill.open"
-            data-i18n-title="drill.openTitle">Quiz</button>
+    <!-- The quiz, the mode beside this one, for the same pair: a page of its own,
+         whose address `ui/studio.js` sets. Deliberately not next to the banner's "Help
+         me decide", which is the onboarding questionnaire and a different thing. -->
+    <a class="btn" id="drill-open" href="drill.html" data-i18n="drill.open"
+       data-i18n-title="drill.openPage">Quiz</a>
     <button type="button" class="primary" id="pdf" data-i18n="common.exportPdf">Export PDF</button>
     <button type="button" id="png" data-i18n="common.png">PNG</button>
     <!-- Phone only, hidden by CSS above 700px. `ui/panels.js` moves the banner, the
@@ -75,7 +75,7 @@
 </header>
 
 <main class="studio">
-  <h1 class="visually-hidden" data-i18n="studio.heading">Customise a pocket language guide</h1>
+  <h1 class="visually-hidden" data-i18n="studio.headingCard">Card: lay out a pocket language guide</h1>
   <section data-i18n-label="studio.formattingLabel" aria-label="Formatting">
     <h2 class="panel-title"><span data-i18n="studio.formatPanel">Format</span></h2>
     <!-- Everything the panel's title bar collapses on a phone, in one region so the

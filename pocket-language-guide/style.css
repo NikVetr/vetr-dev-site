@@ -463,15 +463,17 @@ body.page-gallery { padding-block-end: 0; }
   display: grid; place-items: center; color: var(--muted); font-size: var(--fs--1); text-align: center;
   padding: var(--space-2);
 }
-/* One row, always: three buttons that wrap make the cards different heights. */
+/* One row, always: three buttons that wrap make the cards different heights. A label
+   too long for its share of the row takes a second line inside its button rather than
+   being cut short, and the row's buttons stay one height. */
 .card-actions {
   display: flex; gap: 4px; padding: var(--space-2); flex-wrap: nowrap;
   align-items: stretch;
 }
 .card-actions > * { min-width: 0; }
 .card-actions .btn, .card-actions button {
-  padding: 0.35em 0.5em; font-size: var(--fs--1); white-space: nowrap;
-  overflow: hidden; text-overflow: ellipsis; justify-content: center; flex: 1 1 auto;
+  padding: 0.35em 0.5em; font-size: var(--fs--1); justify-content: center; flex: 1 1 auto;
+  text-align: center; overflow-wrap: break-word; hyphens: auto;
 }
 .card-actions .tag { flex: 0 0 auto; align-self: center; white-space: nowrap; }
 .tag {
@@ -1225,28 +1227,49 @@ dialog.quiz legend { font-size: var(--fs--1); color: var(--muted); padding-inlin
   display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
 }
 
-/* --- the drill (quiz mode) ------------------------------------------------
-   The study side of the card, so it borrows the onboarding dialog's frame and
-   differs only where a question needs something a form does not. It is wider than
-   `dialog.quiz`, because a prompt cell holds a whole phrase in its own script and a
-   matching question shows five of them at once. */
-dialog.drill {
-  border: 1px solid var(--line); border-radius: var(--radius);
-  padding: var(--space-3); max-width: 44rem; width: calc(100% - 2rem);
-  font: inherit; color: var(--ink);
-  /* Long enough to be scrolled rather than clipped: a matching question is five
-     prompts, five menus and five verdicts. */
-  max-height: calc(100dvh - 4rem); overflow: auto;
-}
-dialog.drill::backdrop { background: rgb(17 24 32 / 45%); }
-dialog.drill fieldset {
+/* --- the quiz (`drill.html`) ----------------------------------------------
+   One column the width the dialog it used to be had, because a prompt cell holds a
+   whole phrase in its own script and a matching question shows five of them at once.
+   The setup, the questions and the summary take turns in `#drill`. */
+.drill-page { max-width: 44rem; padding-block: var(--space-3) var(--space-4); }
+.drill-page > h1 { margin-bottom: var(--space-1); }
+.drill-page > .lede { margin-bottom: var(--space-3); }
+/* Under the sticky header when a question scrolls it into view, not behind it. */
+.drill { scroll-margin-top: 5rem; }
+.page-drill .back-link { justify-content: center; min-inline-size: 2.4em; }
+.drill fieldset {
   border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
   padding: var(--space-2); margin: 0 0 var(--space-2);
 }
-dialog.drill legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
-dialog.drill h2 { margin-bottom: var(--space-1); }
-dialog.drill .lede { margin-bottom: var(--space-2); }
-dialog.drill .field { margin-bottom: var(--space-2); }
+.drill legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
+.drill h2 { margin-bottom: var(--space-1); }
+.drill .field { margin-bottom: var(--space-2); }
+/* A field's name and its hint on one line, apart, wrapping before they would run on. */
+.drill .field > label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.6em; }
+/* What to practise: one line until it is opened, with what is chosen on that line. */
+.drill-pick {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2); margin: 0 0 var(--space-2);
+}
+.drill-pick > summary {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-2);
+  cursor: pointer; padding-block: 0.2em;
+}
+.drill-pick-name { font-weight: 600; }
+/* Its caret as well as its contents say it is open. */
+.drill-pick > summary::before { content: '▸'; color: var(--muted); }
+.drill-pick[open] > summary::before { content: '▾'; }
+.drill-pick > .bulk-actions { margin-block: var(--space-1); }
+.drill-pick .tree { max-block-size: 26rem; overflow: auto; }
+.drill-record h3 { font-size: var(--fs-0); margin: var(--space-2) 0 var(--space-1); }
+.drill-practise { list-style: none; margin: 0; padding: 0; }
+.drill-practise li {
+  display: flex; flex-wrap: wrap; gap: 0 var(--space-2); align-items: baseline;
+  padding-block: 0.2em; border-bottom: 1px solid var(--line-soft);
+}
+.drill-practise-said { font-weight: 600; overflow-wrap: anywhere; }
+.drill-practise-count { margin-inline-start: auto; }
+.drill-record .usage-actions { margin-block-start: var(--space-2); }
 .drill-seed { width: 8em; font-variant-numeric: tabular-nums; }
 .drill-note { margin: 0 0 var(--space-2); }
 .drill-head { margin-bottom: var(--space-2); }

@@ -219,7 +219,8 @@ export function accentFor(corpus, source) {
 
 /**
  * A sheet spec with everything resolved. `scale: 0` means auto-fit.
- * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
+ * @param {{corpus: Awaited<ReturnType<typeof import('../core/pack.js').loadCorpus>>}} ctx  only
+ *   the corpus is read, so the quiz page, which loads nothing else, can make one too
  * @param {any} presets
  * @param {{target:string, source:string, geometry?:string, paper?:string, region?:string}} choice
  * @returns {import('../core/types.js').SheetSpec}
