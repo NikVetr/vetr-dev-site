@@ -1,0 +1,324 @@
+concept_id,key
+about-me.i-am-a-doctor,Dókítà
+about-me.i-am-a-nurse,Nọ́ọ̀sì
+about-me.i-am-a-student,Akẹ́kọ̀ọ́
+about-me.i-am-a-teacher,Olùkọ́
+about-me.i-am-an-engineer,Ẹlẹ́rọ̀
+about-me.i-am-retired,fẹ̀yìntì
+about-me.i-have-my-own-business,òwò tèmi
+about-me.i-work-in-an-office,ọ́fíìsì
+accessibility.step-free,kò ní àtẹ̀gùn
+air-travel.i-would-like-a-window-seat,fèrèsé
+air-travel.i-would-like-an-aisle-seat,ọ̀nà
+air-travel.my-luggage-did-not-arrive,kò dé
+air-travel.where-is-check-in,forúkọsílẹ̀
+air-travel.where-is-the-security-check,ààbò
+attractions-tickets.are-there-lockers,àpótí
+attractions-tickets.could-you-take-a-photo-for-us,yà wá
+attractions-tickets.do-i-need-a-reservation,ìfipamọ́
+attractions-tickets.may-i-take-photos,fọ́tò
+attractions-tickets.what-is-the-latest-entry-time,ìwọlé
+attractions-tickets.where-can-i-buy-tickets,tikẹ́tì
+board-answers.after-food,Lẹ́yìn
+board-answers.at-the-next-stop,ibùdókọ̀ tó kàn
+board-answers.before-food,Ṣáájú
+board-answers.can-you-walk,rìn
+board-answers.help-is-coming,Ìrànlọ́wọ́
+board-answers.how-many,Mélòó
+board-answers.i-am-calling-an-ambulance,ọkọ̀ aláìsàn
+board-answers.i-am-calling-the-police,ọlọ́pàá
+board-answers.i-do-not-have-a-phone,fóònù
+board-answers.i-will-check,béèrè
+board-answers.i-will-find-someone,wá ẹnìkan
+board-answers.i-will-show-you,fi ọ̀nà hàn
+board-answers.i-will-write-it-down,kọ
+board-answers.i-would-rather-not-say,ò fẹ́ sọ
+board-answers.it-is-closed,ti
+board-answers.it-is-free,Ọ̀fẹ́
+board-answers.it-is-over-there,níbẹ̀
+board-answers.my-name-is-blank,Orúkọ mi
+board-answers.none-of-these,Kò sí ọ̀kan
+board-answers.not-possible,kò ṣeéṣe
+board-answers.only-for-customers,oníbàárà
+board-answers.pay-on-board,nínú ọkọ̀
+board-answers.prescription-only,ìwé ìlànà
+board-answers.see-a-doctor,dókítà
+board-answers.stay-here,dúró síbí
+board-answers.the-hospital-is-close,nítòsí
+board-answers.there-is-no-wait,Kò sí dídúró
+board-answers.we-do-not-have-it,kò ní
+board-answers.we-have-it,wà
+board-answers.what-happened,ṣẹlẹ̀
+board-answers.what-is-your-name,orúkọ yín
+board-answers.where-does-it-hurt,dùn
+board-answers.where-to,ń lọ
+border-customs.here-is-my-passport,páàsípọ́ọ̀tù
+border-customs.i-am-here-for-business,Iṣẹ́
+border-customs.i-am-visiting-family,ẹbí
+border-customs.i-have-a-connecting-flight,ọkọ̀ òfurufú mìíràn
+border-customs.where-do-i-collect-my-baggage,gbà
+color-size-returns.do-you-have-a-bag,àpò
+color-size-returns.do-you-have-another-size,ìwọ̀n
+color-size-returns.may-i-try-it-on,wọ̀ ọ́ wò
+communication.can-you-help-me,ràn | lọ́wọ́
+communication.do-you-speak-english,sọ
+communication.i-do-not-speak-this-language,ò lè sọ
+communication.i-do-not-understand,Kò yé
+communication.please-speak-more-slowly,jẹ́ẹ́jẹ́
+dietary-needs.does-it-contain-fish-stock,omi ẹja
+dietary-needs.does-it-contain-pork-fat,ọ̀rá ẹlẹ́dẹ̀
+dietary-needs.does-it-contain-pork-stock,omi ẹran ẹlẹ́dẹ̀
+dietary-needs.i-am-vegan,Ajewéwe pátápátá
+dietary-needs.i-am-vegetarian,Ajewéwe
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,ẹyin
+dietary-needs.no-meat,ẹran
+dietary-needs.no-nuts,èso
+dietary-needs.no-peanuts,ẹ̀pà
+dietary-needs.no-pork,ẹlẹ́dẹ̀
+dietary-needs.no-seafood,ẹja òkun
+dietary-needs.no-sesame,benne
+directions.can-i-walk-there,rìn
+directions.can-you-show-me-the-way,ọ̀nà
+directions.how-long-on-foot,Àsìkò mélòó
+directions.is-it-far,jìnnà
+directions.please-show-me-on-the-map,màápù
+emergency-medical.i-am-bleeding-badly,Ẹ̀jẹ̀
+emergency-medical.i-am-having-a-severe-allergic-reaction,Aleji
+emergency-medical.i-am-injured,fara pa
+emergency-medical.i-cannot-breathe,mí
+emergency-medical.i-feel-unwell,ò yá
+emergency-medical.i-have-chest-pain,Àyà
+emergency-medical.i-have-travel-insurance,ìnṣọ́rànsì
+emergency-medical.i-need-a-doctor,dókítà
+emergency-medical.i-think-a-bone-is-broken,egungun | ṣẹ́
+emergency-medical.it-hurts-here,dùn
+emergency-medical.please-call-an-ambulance,ọkọ̀ aláìsàn
+emergency-medical.please-call-my-emergency-contact,olùbá
+emergency-medical.please-take-me-to-a-hospital,ilé ìwòsàn
+emergency-medical.this-is-an-emergency,pàjáwìrì
+emergency-medical.this-person-is-unconscious,dákú
+emergency-medical.where-is-the-nearest-hospital,súnmọ́ jùlọ
+family-intros.this-is-my-brother,arákùnrin
+family-intros.this-is-my-colleague,alábàáṣiṣẹ́
+family-intros.this-is-my-daughter,ọmọbìnrin
+family-intros.this-is-my-father,bàbá
+family-intros.this-is-my-husband,ọkọ
+family-intros.this-is-my-mother,ìyá
+family-intros.this-is-my-partner,olùfẹ́
+family-intros.this-is-my-sister,arábìnrin
+family-intros.this-is-my-son,ọmọkùnrin
+family-intros.this-is-my-wife,aya
+food-ordering.i-want-this,fẹ́
+food-ordering.is-a-table-available,tábìlì
+food-ordering.is-this-vegetarian,ajewéwe
+food-ordering.table-for-two,méjì
+food-ordering.to-go-please,gbé lọ
+food-ordering.what-do-you-recommend,ìmọ̀ràn
+hiking-parks.how-long-to-the-summit,orí òkè
+hiking-parks.how-long-to-the-viewpoint,ibi ìwòye
+hiking-parks.is-this-trail-suitable-for-beginners,tuntun
+hiking-parks.where-is-the-trailhead,ìbẹ̀rẹ̀ ọ̀nà
+hiking-parks.which-route-is-easier,rọrùn
+hitchhiking.can-you-give-me-a-ride,gbé mi lọ
+hitchhiking.i-can-pay-for-fuel,epo
+hitchhiking.i-only-need-to-go-to-the-next-town,ìlú tó kàn
+hitchhiking.is-there-room-for-two,àyè | ẹ̀ni méjì
+hitchhiking.thank-you-for-the-ride,Ẹ ṣé
+hitchhiking.where-are-you-going,ń lọ
+hotel-basics.are-any-rooms-available,yàrá
+hotel-basics.how-much-per-night,òru
+hotel-basics.i-have-a-reservation,ìfipamọ́
+hotel-basics.i-would-like-a-non-smoking-room,kò fi mu sìgá
+hotel-basics.i-would-like-a-quiet-room,dákẹ́
+hotel-basics.is-breakfast-included,oúnjẹ àárọ̀
+hotel-basics.is-there-a-washing-machine,ẹ̀rọ ìfọṣọ
+hotel-basics.is-there-air-conditioning,amúlétutù
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,wo yàrá
+hotel-requests.another-blanket,ìbora
+hotel-requests.another-night,òru mìíràn
+hotel-requests.another-towel-please,aṣọ ìnú omi
+hotel-requests.can-i-check-in-early,kété
+hotel-requests.can-i-check-out-later,nígbà tí ó yá
+hotel-requests.can-i-store-my-luggage,ẹrù
+hotel-requests.is-there-a-safe,àpótí ìfipamọ́
+hotel-requests.no-housekeeping,má ṣe wẹ̀
+hotel-requests.what-time-does-breakfast-start,oúnjẹ àárọ̀
+hotel-requests.what-time-is-check-out,jíjáde
+in-a-building.is-this-the-correct-entrance,tó tọ́
+introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́
+introductions.i-am-from,wá láti
+introductions.i-am-traveling-alone,nìkan
+introductions.my-name-is,Orúkọ mi
+introductions.this-is-my-friend,ọ̀rẹ́
+introductions.we-are-traveling-together,papọ̀
+introductions.what-is-your-name,orúkọ rẹ
+introductions.where-are-you-from,ti wá
+kind-words.i-had-a-wonderful-time,ìgbà dídùn
+kind-words.i-like-it-very-much,nífẹ̀ẹ́
+kind-words.it-is-beautiful-here,lẹ́wà
+kind-words.thank-you-for-everything,ohun gbogbo
+kind-words.thank-you-for-your-help,ìrànlọ́wọ́
+kind-words.thank-you-for-your-hospitality,tọ́jú
+kind-words.this-is-delicious,dùn
+kind-words.you-are-very-kind,onínúure
+laundry.can-it-be-ready-today,lónìí
+laundry.how-much-per-kilo,kìlógíráàmù
+laundry.please-do-not-use-bleach,bilíṣì
+laundry.please-iron-this,fọ́n
+laundry.please-wash-these-clothes,fọ
+laundry.when-will-it-be-ready,Ìgbà wo
+laundry.where-is-a-laundromat,ibi ìfọṣọ
+lost-rescue.i-do-not-know-where-i-am,ibi tí mo wà
+lost-rescue.i-lost-my-bag,àpò
+lost-rescue.i-lost-my-passport,páàsípọ́ọ̀tù
+lost-rescue.i-lost-my-phone,fóònù
+lost-rescue.i-lost-my-wallet,àpò owó
+lost-rescue.my-child-is-missing,ọmọ
+lost-rescue.please-call-the-police,ọlọ́pàá
+lost-rescue.we-are-here,níbí
+massage-spa.focus-on-back,ẹ̀yìn
+massage-spa.focus-on-feet,àtẹ́lẹ̀sẹ̀
+massage-spa.focus-on-neck,ọrùn
+massage-spa.focus-on-shoulders,èjìká
+massage-spa.more-gently,rọra
+massage-spa.please-avoid-this-area,má ṣe fọwọ́ kàn
+massage-spa.please-pause,ìṣẹ́jú kan
+massage-spa.please-stop,dúró
+massage-spa.reply-ask-supervisor,ọ̀gá
+massage-spa.reply-cannot-avoid-this-treatment,kò ṣeé ṣe
+massage-spa.reply-does-it-hurt-there,dùn
+massage-spa.reply-i-will-avoid-that-area,ò fọwọ́ kàn
+massage-spa.reply-which-area-exactly,Ibi wo
+massage-spa.stronger-pressure,agbára
+massage-spa.that-pressure-is-good,dára
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,pẹnisílíìnì
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,àtọ̀gbẹ́
+medical-conditions.i-am-pregnant,lóyún
+medical-conditions.i-carry-an-adrenaline-injector,adrenaline
+medical-conditions.i-have-a-heart-condition,ọkàn
+medical-conditions.i-have-asthma,ikọ́ ẹ́fẹ́
+medical-conditions.i-have-epilepsy,wárápá
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,ẹ̀rọ mímí
+medical-conditions.i-take-blood-thinners,dí dídì ẹ̀jẹ̀
+medical-conditions.inject-it-into-my-outer-thigh,ìta itan
+medical-conditions.my-blood-sugar-is-low,súgà | dín kù
+medical-conditions.my-injector-is-in-my-bag,Abẹ́rẹ́ | àpò
+medical-conditions.please-give-me-sugar-or-juice,súgà | omi èso
+medical-conditions.this-card-lists-my-conditions,Káàdì
+medical-conditions.this-is-my-medicine,oògùn
+outdoors.are-there-dangerous-animals-here,ẹranko | léwu
+outdoors.can-we-camp-here,pàgọ́
+outdoors.is-it-safe-to-swim-here,wẹ̀
+payment-receipt.can-we-pay-separately,ọ̀tọ̀ọ̀tọ̀
+payment-receipt.how-much-in-total,lápapọ̀
+payment-receipt.i-already-paid,ti san | tẹ́lẹ̀
+payment-receipt.is-tax-included,owó orí
+payment-receipt.my-card-was-declined,kò gba
+payment-receipt.pay-by-card,káàdì
+payment-receipt.the-bill-is-wrong,kò tọ̀nà
+pharmacy-symptoms.antacid,ọkàn-jíjó
+pharmacy-symptoms.anti-diarrhea-medicine,ìgbẹ́ gbuuru
+pharmacy-symptoms.antihistamine,aleji
+pharmacy-symptoms.antiseptic,apakòkòrò
+pharmacy-symptoms.before-or-after-food,oúnjẹ
+pharmacy-symptoms.can-i-get-this-medicine-here,oògùn
+pharmacy-symptoms.cough-medicine,ikọ́
+pharmacy-symptoms.do-i-need-a-prescription,ìwé ìlànà
+pharmacy-symptoms.how-many-times-a-day,ọjọ́ kan
+pharmacy-symptoms.how-much-should-i-take,Mélòó
+pharmacy-symptoms.i-am-vomiting,bì
+pharmacy-symptoms.i-feel-dizzy,yí
+pharmacy-symptoms.i-feel-nauseous,rirú
+pharmacy-symptoms.i-have-a-burn,jó
+pharmacy-symptoms.i-have-a-cough,ikọ́
+pharmacy-symptoms.i-have-a-cut,ojú egbò
+pharmacy-symptoms.i-have-a-fever,ìbà
+pharmacy-symptoms.i-have-a-headache,Orí
+pharmacy-symptoms.i-have-a-rash,ẹyún
+pharmacy-symptoms.i-have-a-sore-throat,Ọ̀fun
+pharmacy-symptoms.i-have-a-stomach-ache,rún
+pharmacy-symptoms.i-have-diarrhea,ìgbẹ́ gbuuru
+pharmacy-symptoms.i-think-it-is-infected,kòkòrò àìsàn
+pharmacy-symptoms.is-this-safe-during-pregnancy,lóyún
+pharmacy-symptoms.motion-sickness-tablets,ìrora ìrìn-àjò
+pharmacy-symptoms.painkiller,ìtura ìrora
+pharmacy-symptoms.rehydration-salts,ìmúpadà omi ara
+pharmacy-symptoms.the-pain-is-severe,le koko
+pharmacy-symptoms.which-pharmacy-is-open-now,nísinsin yìí
+police-consulate.i-need-an-interpreter,ògbufọ̀
+police-consulate.i-want-to-contact-my-embassy,ẹ́ńbásì
+police-consulate.i-want-to-report-a-theft,jábọ̀
+police-consulate.my-bag-was-stolen,jí
+police-consulate.someone-is-following-me,tọ̀ | lẹ́yìn
+police-consulate.where-is-the-police-station,ilé ìṣọ́ ọlọ́pàá
+quick-directions.across-from-here,ìdojúkọ
+quick-directions.go-straight,tààrà
+quick-directions.on-the-left,òsì
+quick-directions.on-the-right,ọ̀tún
+quick-directions.turn-left,òsì
+quick-directions.turn-right,ọ̀tún
+room-problems.can-i-change-rooms,yí | padà
+room-problems.please-send-someone,rán ẹnìkan
+room-problems.the-air-conditioning-is-broken,Amúlétutù
+room-problems.the-heating-does-not-work,Ẹ̀rọ ìgbóná
+room-problems.the-key-does-not-work,Kọ́kọ́rọ́
+room-problems.the-light-does-not-work,Iná
+room-problems.the-room-is-too-noisy,pariwo
+room-problems.the-toilet-will-not-flush,Ìgbọ̀nsẹ̀
+room-problems.there-is-a-problem-with-the-room,Ìṣòro
+room-problems.there-is-no-hot-water,Omi gbígbóná
+shopping.can-it-be-a-little-cheaper,dín kúrò
+shopping.do-you-have-this-in-stock,ilé ìtajà
+shopping.how-much-is-this,Èló
+shopping.i-am-just-looking,kàn ń wo
+shopping.i-will-take-this,gbà
+shopping.that-is-too-expensive,wọ́n
+shopping.where-do-i-pay,san owó
+social-basics.i-do-not-know,ò mọ̀
+taxi.can-you-wait-for-me-here,dúró de
+taxi.could-you-make-it-colder,tutù sí i
+taxi.could-you-make-it-warmer,gbóná sí i
+taxi.may-i-open-the-window,fèrèsé
+taxi.please-stop-here,dúró
+taxi.please-take-me-here,gbé mi lọ
+time-scheduling.can-we-change-the-time,yí | padà
+time-scheduling.how-long-does-it-take,Ìgbà mélòó
+time-scheduling.what-day-is-it-today,Ọjọ́
+time-scheduling.what-time-does-it-close,ti
+time-scheduling.what-time-does-it-open,ṣí
+time-scheduling.what-time-should-we-meet,pàdé
+time-scheduling.when-is-convenient,yẹ
+toilets.where-toilet,ìgbọ̀nsẹ̀
+trail-conditions.can-we-return-before-dark,kí ó tó ṣú
+trail-conditions.can-we-return-the-same-way,ọ̀nà kan náà
+trail-conditions.how-long-is-the-full-route,lápapọ̀
+trail-conditions.is-the-path-slippery,yọ̀
+trail-conditions.is-the-route-steep,le fún gígun
+trail-conditions.is-the-trail-open,ṣí sílẹ̀
+trail-transport.do-you-have-a-map,màápù
+trail-transport.how-long-is-the-wait,dídúró
+trail-transport.is-there-cell-signal-here,nẹ́tíwọ́ọ̀kì
+trail-transport.what-time-is-the-last-shuttle,ọkọ̀ akérò
+trail-transport.when-does-the-cableway-stop,kébù
+trail-transport.where-can-we-buy-water,ra omi
+trail-transport.where-can-we-refill-water,kún omi
+transit-rides.can-i-use-this-ticket,lo
+transit-rides.do-i-need-to-transfer,ọkọ̀ mìíràn
+transit-rides.do-i-need-to-validate,fi àmì sí
+transit-rides.i-am-in-a-hurry,kánjú
+transit-rides.i-went-past-my-stop,ré | kọjá
+transit-rides.is-it-delayed,pẹ́
+transit-rides.is-this-direct,taara
+transit-rides.please-tell-me-where-to-get-off,sọ̀kalẹ̀
+transit-rides.what-is-the-next-stop,ibùdókọ̀ tó kàn
+transit-rides.what-time-is-the-next-one,tó kàn
+transit-rides.where-do-i-pay-the-fare,owó ọkọ̀
+transit-rides.where-is-the-subway-station,abẹ́lẹ̀
+weather.how-cold-at-night,òtútù | alẹ́
+weather.is-it-safe-today,ààbò
+weather.will-it-rain,òjò

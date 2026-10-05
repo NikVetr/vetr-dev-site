@@ -1,0 +1,299 @@
+concept_id,key
+about-me.i-am-a-doctor,daktari
+about-me.i-am-a-nurse,muuguzi
+about-me.i-am-a-student,mwanafunzi
+about-me.i-am-a-teacher,mwalimu
+about-me.i-am-an-engineer,mhandisi
+about-me.i-have-my-own-business,biashara
+about-me.i-work-in-an-office,ofisini
+accessibility.step-free,isiyo na ngazi
+air-travel.i-would-like-a-window-seat,dirisha
+air-travel.i-would-like-an-aisle-seat,njia
+air-travel.my-luggage-did-not-arrive,haijafika
+air-travel.where-is-check-in,kuandikishwa
+air-travel.where-is-the-security-check,usalama
+attractions-tickets.are-there-lockers,makabati
+attractions-tickets.could-you-take-a-photo-for-us,kutupiga
+attractions-tickets.do-i-need-a-reservation,kuweka nafasi
+attractions-tickets.may-i-take-photos,picha
+attractions-tickets.what-is-the-latest-entry-time,Kuingia kwa mwisho
+attractions-tickets.where-can-i-buy-tickets,tiketi
+board-answers.after-food,Baada
+board-answers.before-food,Kabla
+board-answers.can-you-walk,kutembea
+board-answers.help-is-coming,Msaada
+board-answers.how-many,ngapi
+board-answers.i-am-calling-an-ambulance,ambulensi
+board-answers.i-am-calling-the-police,polisi
+board-answers.i-do-not-have-a-phone,simu
+board-answers.i-will-find-someone,Nitatafuta mtu
+board-answers.i-will-show-you,Nitaonyesha
+board-answers.i-would-rather-not-say,afadhali nisiseme
+board-answers.it-is-free,bure
+board-answers.it-is-over-there,pale
+board-answers.none-of-these,kati ya hizi
+board-answers.not-possible,haiwezekani
+board-answers.only-for-customers,wateja
+board-answers.pay-on-board,ndani ya gari
+board-answers.prescription-only,agizo la daktari
+board-answers.see-a-doctor,daktari
+board-answers.stay-here,ukae hapa
+board-answers.the-hospital-is-close,karibu
+board-answers.there-is-no-wait,Hakuna kusubiri
+board-answers.we-do-not-have-it,Hatuna
+board-answers.we-have-it,tunayo
+board-answers.what-is-your-name,Jina lako
+board-answers.where-does-it-hurt,Unaumwa
+board-answers.where-to,Unaenda
+border-customs.here-is-my-passport,pasipoti
+border-customs.i-am-here-for-business,biashara
+border-customs.i-am-visiting-family,familia
+border-customs.i-have-a-connecting-flight,ndege ya kuunganisha
+border-customs.where-do-i-collect-my-baggage,Nachukua
+color-size-returns.do-you-have-a-bag,mfuko
+color-size-returns.do-you-have-another-size,saizi
+color-size-returns.may-i-try-it-on,nijaribu
+communication.can-you-help-me,kunisaidia
+communication.please-speak-more-slowly,polepole
+dietary-needs.does-it-contain-fish-stock,supu ya samaki
+dietary-needs.does-it-contain-pork-fat,mafuta ya nguruwe
+dietary-needs.does-it-contain-pork-stock,supu ya nguruwe
+dietary-needs.i-am-vegan,mayai wala maziwa
+dietary-needs.i-am-vegetarian,nyama wala samaki
+dietary-needs.is-this-halal,halali
+dietary-needs.no-eggs,mayai
+dietary-needs.no-meat,nyama
+dietary-needs.no-nuts,korosho | kokwa
+dietary-needs.no-peanuts,karanga
+dietary-needs.no-pork,nguruwe
+dietary-needs.no-seafood,samaki | kamba
+dietary-needs.no-sesame,ufuta
+directions.can-i-walk-there,kwa miguu
+directions.can-you-show-me-the-way,njia
+directions.how-long-on-foot,muda gani
+directions.is-it-far,mbali
+directions.please-show-me-on-the-map,ramani
+emergency-medical.i-am-bleeding-badly,damu
+emergency-medical.i-am-having-a-severe-allergic-reaction,mzio
+emergency-medical.i-cannot-breathe,kupumua
+emergency-medical.i-have-chest-pain,kifua
+emergency-medical.i-have-travel-insurance,bima
+emergency-medical.i-need-a-doctor,daktari
+emergency-medical.i-think-a-bone-is-broken,mfupa umevunjika
+emergency-medical.it-hurts-here,Inauma
+emergency-medical.please-call-an-ambulance,ambulensi
+emergency-medical.please-call-my-emergency-contact,dharura
+emergency-medical.please-take-me-to-a-hospital,hospitali
+emergency-medical.this-is-an-emergency,dharura
+emergency-medical.this-person-is-unconscious,amepoteza fahamu
+emergency-medical.where-is-the-nearest-hospital,karibu
+family-intros.this-is-my-brother,kaka
+family-intros.this-is-my-colleague,mfanyakazi mwenzangu
+family-intros.this-is-my-daughter,mtoto | kike
+family-intros.this-is-my-father,baba
+family-intros.this-is-my-husband,mume
+family-intros.this-is-my-mother,mama
+family-intros.this-is-my-partner,mpenzi
+family-intros.this-is-my-sister,dada
+family-intros.this-is-my-son,mtoto | kiume
+family-intros.this-is-my-wife,mke
+food-ordering.i-want-this,Nataka
+food-ordering.is-a-table-available,meza
+food-ordering.is-this-vegetarian,haina nyama
+food-ordering.table-for-two,watu wawili
+food-ordering.what-do-you-recommend,Unapendekeza
+hiking-parks.how-long-to-the-summit,kileleni
+hiking-parks.how-long-to-the-viewpoint,mahali pa kutazama
+hiking-parks.is-this-trail-suitable-for-beginners,wanaoanza
+hiking-parks.where-is-the-trailhead,Mwanzo wa njia
+hiking-parks.which-route-is-easier,rahisi
+hitchhiking.can-you-give-me-a-ride,lifti
+hitchhiking.i-can-pay-for-fuel,mafuta
+hitchhiking.i-only-need-to-go-to-the-next-town,mji unaofuata
+hitchhiking.is-there-room-for-two,nafasi | watu wawili
+hitchhiking.thank-you-for-the-ride,Asante
+hitchhiking.where-are-you-going,Unaenda
+hotel-basics.are-any-rooms-available,chumba
+hotel-basics.how-much-per-night,kwa usiku
+hotel-basics.i-would-like-a-non-smoking-room,bila sigara
+hotel-basics.i-would-like-a-quiet-room,utulivu
+hotel-basics.is-breakfast-included,kifungua kinywa
+hotel-basics.is-there-a-washing-machine,mashine ya kufua
+hotel-basics.is-there-air-conditioning,kiyoyozi
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,nione
+hotel-requests.another-blanket,Blanketi
+hotel-requests.another-night,usiku mmoja zaidi
+hotel-requests.another-towel-please,Taulo
+hotel-requests.can-i-check-in-early,mapema
+hotel-requests.can-i-check-out-later,baadaye
+hotel-requests.can-i-store-my-luggage,mizigo
+hotel-requests.is-there-a-safe,sefu
+hotel-requests.no-housekeeping,Msisafishe
+hotel-requests.what-time-does-breakfast-start,Kifungua kinywa
+hotel-requests.what-time-is-check-out,Kuondoka
+in-a-building.is-this-the-correct-entrance,sahihi
+introductions.i-am-a-tourist,mtalii
+introductions.i-am-traveling-alone,peke yangu
+introductions.my-name-is,Jina langu
+introductions.this-is-my-friend,rafiki
+introductions.we-are-traveling-together,pamoja
+introductions.what-is-your-name,Jina lako
+introductions.where-are-you-from,Unatoka
+kind-words.i-had-a-wonderful-time,Nimefurahia
+kind-words.i-like-it-very-much,Nimependa
+kind-words.it-is-beautiful-here,pazuri
+kind-words.thank-you-for-everything,kila kitu
+kind-words.thank-you-for-your-help,msaada
+kind-words.thank-you-for-your-hospitality,ukarimu
+kind-words.this-is-delicious,tamu
+kind-words.you-are-very-kind,mwema
+laundry.can-it-be-ready-today,leo
+laundry.how-much-per-kilo,kwa kilo
+laundry.please-do-not-use-bleach,jiki
+laundry.please-iron-this,piga pasi
+laundry.please-wash-these-clothes,fua
+laundry.when-will-it-be-ready,lini
+laundry.where-is-a-laundromat,Dobi
+lost-rescue.i-do-not-know-where-i-am,niko wapi
+lost-rescue.i-lost-my-bag,mkoba
+lost-rescue.i-lost-my-passport,pasipoti
+lost-rescue.i-lost-my-phone,simu
+lost-rescue.i-lost-my-wallet,pochi
+lost-rescue.my-child-is-missing,Mtoto
+lost-rescue.please-call-the-police,polisi
+lost-rescue.we-are-here,hapa
+massage-spa.focus-on-back,mgongo
+massage-spa.focus-on-feet,miguu
+massage-spa.focus-on-neck,shingo
+massage-spa.focus-on-shoulders,mabega
+massage-spa.more-gently,Punguza
+massage-spa.please-avoid-this-area,usiguse
+massage-spa.please-pause,Sitisha
+massage-spa.please-stop,acha
+massage-spa.reply-ask-supervisor,msimamizi
+massage-spa.reply-cannot-avoid-this-treatment,haiwezi kuepuka
+massage-spa.reply-does-it-hurt-there,inauma
+massage-spa.reply-i-will-avoid-that-area,sitagusa
+massage-spa.reply-which-area-exactly,sehemu gani
+massage-spa.stronger-pressure,nguvu zaidi
+massage-spa.that-pressure-is-good,sawa
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirini | ibuprofeni
+medical-conditions.i-am-allergic-to-penicillin,penisilini
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,kisukari
+medical-conditions.i-am-pregnant,mimba
+medical-conditions.i-carry-an-adrenaline-injector,adrenalini
+medical-conditions.i-have-a-heart-condition,moyo
+medical-conditions.i-have-asthma,pumu
+medical-conditions.i-have-epilepsy,kifafa
+medical-conditions.i-need-insulin,insulini
+medical-conditions.i-need-my-inhaler,pumu
+medical-conditions.i-take-blood-thinners,kuzuia damu kuganda
+medical-conditions.inject-it-into-my-outer-thigh,paja
+medical-conditions.my-blood-sugar-is-low,Sukari | imeshuka
+medical-conditions.my-injector-is-in-my-bag,Sindano | mkobani
+medical-conditions.please-give-me-sugar-or-juice,sukari | juisi
+medical-conditions.this-card-lists-my-conditions,Kadi
+medical-conditions.this-is-my-medicine,dawa
+outdoors.are-there-dangerous-animals-here,wanyama hatari
+outdoors.can-we-camp-here,kupiga kambi
+outdoors.is-it-safe-to-swim-here,kuogelea
+payment-receipt.can-we-pay-separately,kila mmoja
+payment-receipt.how-much-in-total,Jumla
+payment-receipt.is-tax-included,kodi
+payment-receipt.my-card-was-declined,imekataliwa
+payment-receipt.pay-by-card,kadi
+payment-receipt.the-bill-is-wrong,bili | makosa
+pharmacy-symptoms.antacid,kiungulia
+pharmacy-symptoms.anti-diarrhea-medicine,kuhara
+pharmacy-symptoms.antihistamine,mzio
+pharmacy-symptoms.antiseptic,kuua vijidudu
+pharmacy-symptoms.before-or-after-food,chakula
+pharmacy-symptoms.can-i-get-this-medicine-here,dawa
+pharmacy-symptoms.cough-medicine,kikohozi
+pharmacy-symptoms.do-i-need-a-prescription,agizo la daktari
+pharmacy-symptoms.how-many-times-a-day,kwa siku
+pharmacy-symptoms.how-much-should-i-take,kiasi gani
+pharmacy-symptoms.i-feel-dizzy,kizunguzungu
+pharmacy-symptoms.i-feel-nauseous,kichefuchefu
+pharmacy-symptoms.i-have-a-cough,kikohozi
+pharmacy-symptoms.i-have-a-fever,homa
+pharmacy-symptoms.i-have-a-headache,kichwa
+pharmacy-symptoms.i-have-a-rash,vipele
+pharmacy-symptoms.i-have-a-sore-throat,Koo
+pharmacy-symptoms.i-have-a-stomach-ache,tumbo
+pharmacy-symptoms.i-have-diarrhea,kuhara
+pharmacy-symptoms.i-think-it-is-infected,imeambukizwa
+pharmacy-symptoms.is-this-safe-during-pregnancy,mjamzito
+pharmacy-symptoms.motion-sickness-tablets,kichefuchefu cha safari
+pharmacy-symptoms.painkiller,maumivu
+pharmacy-symptoms.the-pain-is-severe,makali
+pharmacy-symptoms.which-pharmacy-is-open-now,wazi sasa
+police-consulate.i-need-an-interpreter,mkalimani
+police-consulate.i-want-to-contact-my-embassy,ubalozi
+police-consulate.i-want-to-report-a-theft,wizi
+police-consulate.my-bag-was-stolen,umeibiwa
+police-consulate.someone-is-following-me,ananifuata
+police-consulate.where-is-the-police-station,Kituo cha polisi
+quick-directions.go-straight,moja kwa moja
+quick-directions.turn-left,kushoto
+quick-directions.turn-right,kulia
+room-problems.can-i-change-rooms,kubadilisha
+room-problems.please-send-someone,tuma mtu
+room-problems.the-air-conditioning-is-broken,Kiyoyozi
+room-problems.the-heating-does-not-work,Hita
+room-problems.the-key-does-not-work,Ufunguo
+room-problems.the-light-does-not-work,Taa
+room-problems.the-room-is-too-noisy,kelele
+room-problems.the-toilet-will-not-flush,Choo
+room-problems.there-is-a-problem-with-the-room,tatizo
+room-problems.there-is-no-hot-water,maji ya moto
+shopping.can-it-be-a-little-cheaper,Punguza
+shopping.do-you-have-this-in-stock,dukani
+shopping.how-much-is-this,bei gani
+shopping.i-will-take-this,Nachukua
+shopping.that-is-too-expensive,ghali
+shopping.where-do-i-pay,Nalipa
+taxi.can-you-wait-for-me-here,kunisubiri
+taxi.could-you-make-it-colder,baridi
+taxi.could-you-make-it-warmer,joto
+taxi.may-i-open-the-window,dirisha
+taxi.please-stop-here,simama
+taxi.please-take-me-here,nipeleke
+taxi.please-turn-around,geuza
+time-scheduling.can-we-change-the-time,kubadilisha
+time-scheduling.how-long-does-it-take,muda gani
+time-scheduling.what-day-is-it-today,siku
+time-scheduling.what-time-does-it-close,Inafungwa
+time-scheduling.what-time-does-it-open,Inafunguliwa
+time-scheduling.what-time-should-we-meet,Tukutane
+time-scheduling.when-is-convenient,inafaa
+toilets.where-toilet,Choo
+trail-conditions.can-we-return-before-dark,kabla ya giza
+trail-conditions.can-we-return-the-same-way,njia hii
+trail-conditions.how-long-is-the-full-route,Njia yote
+trail-conditions.is-the-path-slippery,inateleza
+trail-conditions.is-the-route-steep,inapanda
+trail-conditions.is-the-trail-open,wazi
+trail-transport.do-you-have-a-map,ramani
+trail-transport.how-long-is-the-wait,Kusubiri
+trail-transport.is-there-cell-signal-here,mtandao
+trail-transport.what-time-is-the-last-shuttle,Basi la mwisho
+trail-transport.when-does-the-cableway-stop,Gari la kebo
+trail-transport.where-can-we-buy-water,kununua maji
+trail-transport.where-can-we-refill-water,kujaza maji
+transit-rides.can-i-use-this-ticket,kutumia
+transit-rides.do-i-need-to-transfer,kubadilisha gari
+transit-rides.do-i-need-to-validate,kugonga
+transit-rides.i-am-in-a-hurry,haraka
+transit-rides.i-went-past-my-stop,Nimepita
+transit-rides.is-this-direct,moja kwa moja
+transit-rides.please-tell-me-where-to-get-off,nishuke
+transit-rides.what-is-the-next-stop,Kituo kijacho
+transit-rides.what-time-is-the-next-one,Ijayo
+transit-rides.where-do-i-pay-the-fare,nauli
+transit-rides.where-is-the-subway-station,treni
+weather.how-cold-at-night,Usiku | baridi
+weather.is-it-safe-today,salama
+weather.will-it-rain,mvua

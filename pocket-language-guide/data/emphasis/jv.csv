@@ -1,0 +1,309 @@
+concept_id,key
+about-me.i-am-a-doctor,dokter
+about-me.i-am-a-nurse,perawat
+about-me.i-am-a-student,siswa
+about-me.i-am-a-teacher,guru
+about-me.i-am-an-engineer,insinyur
+about-me.i-am-retired,pènsiun
+about-me.i-have-my-own-business,usaha piyambak
+about-me.i-work-in-an-office,kantor
+accessibility.step-free,tanpa undhak-undhakan
+air-travel.i-would-like-a-window-seat,cendhela
+air-travel.i-would-like-an-aisle-seat,margi
+air-travel.my-luggage-did-not-arrive,dèrèng dumugi
+air-travel.where-is-check-in,check-in
+air-travel.where-is-the-security-check,keamanan
+attractions-tickets.are-there-lockers,lokeripun
+attractions-tickets.could-you-take-a-photo-for-us,kula sedaya
+attractions-tickets.do-i-need-a-reservation,pesen
+attractions-tickets.may-i-take-photos,motrèt
+attractions-tickets.what-is-the-latest-entry-time,Mlebet pungkasan
+attractions-tickets.where-can-i-buy-tickets,tikèt
+board-answers.after-food,Sasampunipun
+board-answers.at-the-next-stop,pamandhegan salajengipun
+board-answers.before-food,Sadèrèngipun
+board-answers.can-you-walk,mlampah
+board-answers.help-is-coming,Pitulungan
+board-answers.i-am-calling-an-ambulance,ambulan
+board-answers.i-am-calling-the-police,polisi
+board-answers.i-do-not-have-a-phone,HP
+board-answers.i-will-check,priksa
+board-answers.i-will-find-someone,pados tiyang
+board-answers.i-will-show-you,nedahaken
+board-answers.i-will-write-it-down,nyerat
+board-answers.i-would-rather-not-say,mboten saged matur
+board-answers.it-is-over-there,mrika
+board-answers.my-name-is-blank,kula
+board-answers.none-of-these,Mboten wonten
+board-answers.only-for-customers,ingkang tumbas
+board-answers.pay-on-board,ing lebet
+board-answers.prescription-only,resép
+board-answers.see-a-doctor,dhokter
+board-answers.stay-here,mriki
+board-answers.the-hospital-is-close,caket
+board-answers.there-is-no-wait,Mboten perlu ngentosi
+board-answers.what-is-your-name,Asma panjenengan
+board-answers.where-does-it-hurt,Sakitipun
+board-answers.where-to,dhateng pundi
+border-customs.here-is-my-passport,paspor
+border-customs.i-am-here-for-business,bisnis
+border-customs.i-am-visiting-family,sedhèrèk
+border-customs.i-have-a-connecting-flight,penerbangan lajengan
+border-customs.where-do-i-collect-my-baggage,Mendhet
+color-size-returns.do-you-have-a-bag,kanthonganipun
+color-size-returns.do-you-have-another-size,ukuran
+color-size-returns.may-i-try-it-on,dipuncoba
+communication.can-you-help-me,mbiyantu
+communication.do-you-speak-english,saged
+communication.i-do-not-speak-this-language,mboten saged
+communication.i-do-not-understand,mboten mangertos
+communication.please-speak-more-slowly,alon
+dietary-needs.does-it-contain-fish-stock,kaldu ulam
+dietary-needs.does-it-contain-pork-fat,gajih babi
+dietary-needs.does-it-contain-pork-stock,kaldu babi
+dietary-needs.i-am-vegan,vegan
+dietary-needs.i-am-vegetarian,vegetarian
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,tigan
+dietary-needs.no-meat,daging
+dietary-needs.no-nuts,kacang-kacangan
+dietary-needs.no-peanuts,kacang tanah
+dietary-needs.no-pork,babi
+dietary-needs.no-seafood,ulam seganten
+dietary-needs.no-sesame,wijèn
+directions.can-i-walk-there,mlampah
+directions.can-you-show-me-the-way,margi
+directions.how-long-on-foot,pinten dangunipun
+directions.please-show-me-on-the-map,péta
+emergency-medical.i-am-bleeding-badly,Rah
+emergency-medical.i-am-having-a-severe-allergic-reaction,rèaksi alergi
+emergency-medical.i-am-injured,tatu
+emergency-medical.i-cannot-breathe,ambegan
+emergency-medical.i-feel-unwell,mboten sekéca
+emergency-medical.i-have-chest-pain,Jaja
+emergency-medical.i-have-travel-insurance,asuransi
+emergency-medical.i-need-a-doctor,dhokter
+emergency-medical.i-think-a-bone-is-broken,balung | tugel
+emergency-medical.it-hurts-here,Sakitipun
+emergency-medical.please-call-an-ambulance,ambulan
+emergency-medical.please-call-my-emergency-contact,kontak darurat
+emergency-medical.please-take-me-to-a-hospital,rumah sakit
+emergency-medical.this-is-an-emergency,darurat
+emergency-medical.this-person-is-unconscious,mboten sadhar
+emergency-medical.where-is-the-nearest-hospital,paling caket
+family-intros.this-is-my-brother,sedherek jaler
+family-intros.this-is-my-colleague,mitra damel
+family-intros.this-is-my-daughter,laré èstri
+family-intros.this-is-my-father,rama
+family-intros.this-is-my-husband,garwa kakung
+family-intros.this-is-my-mother,ibu
+family-intros.this-is-my-partner,pasangan
+family-intros.this-is-my-sister,sedherek èstri
+family-intros.this-is-my-son,laré jaler
+family-intros.this-is-my-wife,garwa putri
+food-ordering.i-want-this,badhé
+food-ordering.is-a-table-available,méja kothong
+food-ordering.is-this-vegetarian,vegetarian
+food-ordering.table-for-two,tiyang kalih
+food-ordering.what-do-you-recommend,éca
+hiking-parks.how-long-to-the-summit,pucak
+hiking-parks.how-long-to-the-viewpoint,papan panyawangan
+hiking-parks.is-this-trail-suitable-for-beginners,nembé wiwit
+hiking-parks.where-is-the-trailhead,Wiwitan jaluripun
+hiking-parks.which-route-is-easier,gampil
+hitchhiking.can-you-give-me-a-ride,ngeteraken
+hitchhiking.i-can-pay-for-fuel,bensin
+hitchhiking.i-only-need-to-go-to-the-next-town,kitha salajengipun
+hitchhiking.is-there-room-for-two,papan | tiyang kalih
+hitchhiking.thank-you-for-the-ride,Matur nuwun
+hitchhiking.where-are-you-going,dhateng pundi
+hotel-basics.are-any-rooms-available,kamar kothong
+hotel-basics.how-much-per-night,Saben dalu
+hotel-basics.i-have-a-reservation,pesen
+hotel-basics.i-would-like-a-non-smoking-room,bébas rokok
+hotel-basics.i-would-like-a-quiet-room,tentrem
+hotel-basics.is-breakfast-included,sarapan
+hotel-basics.is-there-a-washing-machine,mesin umbah-umbah
+hotel-basics.is-there-air-conditioning,AC
+hotel-basics.is-wi-fi-free,Wi-Fi-nipun
+hotel-basics.may-i-see-the-room,ningali
+hotel-requests.another-blanket,kemul
+hotel-requests.another-night,nambah setunggal dalu
+hotel-requests.another-towel-please,andhuk
+hotel-requests.can-i-check-in-early,langkung énjing
+hotel-requests.can-i-check-out-later,langkung siyang
+hotel-requests.can-i-store-my-luggage,koper
+hotel-requests.is-there-a-safe,lemari wesi
+hotel-requests.no-housekeeping,dipunresiki
+hotel-requests.what-time-does-breakfast-start,Sarapan
+hotel-requests.what-time-is-check-out,Check-out
+in-a-building.is-this-the-correct-entrance,leres
+introductions.i-am-a-tourist,wisatawan
+introductions.i-am-traveling-alone,piyambakan
+introductions.my-name-is,kula
+introductions.this-is-my-friend,kanca
+introductions.we-are-traveling-together,sesarengan
+introductions.what-is-your-name,Asma panjenengan
+introductions.where-are-you-from,saking pundi
+kind-words.i-had-a-wonderful-time,bingah
+kind-words.i-like-it-very-much,remen
+kind-words.it-is-beautiful-here,endah
+kind-words.thank-you-for-everything,sedayanipun
+kind-words.thank-you-for-your-help,tulungipun
+kind-words.thank-you-for-your-hospitality,nampi
+kind-words.this-is-delicious,éca
+kind-words.you-are-very-kind,sae
+laundry.can-it-be-ready-today,dinten menika
+laundry.how-much-per-kilo,Saben kilo
+laundry.please-do-not-use-bleach,pemutih
+laundry.please-iron-this,dipunseterika
+laundry.please-wash-these-clothes,dipunumbah
+laundry.when-will-it-be-ready,Kapan
+laundry.where-is-a-laundromat,Laundry
+lost-rescue.i-do-not-know-where-i-am,kula wonten pundi
+lost-rescue.i-lost-my-bag,Tas
+lost-rescue.i-lost-my-passport,Paspor
+lost-rescue.i-lost-my-phone,HP
+lost-rescue.i-lost-my-wallet,Dompèt
+lost-rescue.my-child-is-missing,Laré
+lost-rescue.please-call-the-police,polisi
+lost-rescue.we-are-here,mriki
+massage-spa.focus-on-back,geger
+massage-spa.focus-on-feet,suku
+massage-spa.focus-on-neck,gulu
+massage-spa.focus-on-shoulders,pundhak
+massage-spa.please-avoid-this-area,ampun dipunpijet
+massage-spa.please-pause,kèndel
+massage-spa.please-stop,Cekap
+massage-spa.reply-ask-supervisor,pangageng
+massage-spa.reply-cannot-avoid-this-treatment,mboten saged tanpa
+massage-spa.reply-does-it-hurt-there,sakit
+massage-spa.reply-i-will-avoid-that-area,mboten kula pijet
+massage-spa.reply-which-area-exactly,Ingkang pundi
+massage-spa.stronger-pressure,kiyat
+massage-spa.that-pressure-is-good,Sae
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofèn
+medical-conditions.i-am-allergic-to-penicillin,pénisilin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,diabètes
+medical-conditions.i-am-pregnant,ngandhut
+medical-conditions.i-carry-an-adrenaline-injector,adrénalin
+medical-conditions.i-have-a-heart-condition,jantung
+medical-conditions.i-have-asthma,asma
+medical-conditions.i-have-epilepsy,épilèpsi
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,inhaler
+medical-conditions.i-take-blood-thinners,pengencer rah
+medical-conditions.inject-it-into-my-outer-thigh,pupu njawi
+medical-conditions.my-blood-sugar-is-low,Gula rah | andhap
+medical-conditions.my-injector-is-in-my-bag,Suntikan | tas
+medical-conditions.please-give-me-sugar-or-juice,gendhis | jus
+medical-conditions.this-card-lists-my-conditions,daftar
+medical-conditions.this-is-my-medicine,obat
+outdoors.are-there-dangerous-animals-here,kewan | bebaya
+outdoors.can-we-camp-here,kemah
+outdoors.is-it-safe-to-swim-here,Ngelangi
+payment-receipt.can-we-pay-separately,piyambak-piyambak
+payment-receipt.how-much-in-total,Sedayanipun
+payment-receipt.i-already-paid,sampun mbayar
+payment-receipt.is-tax-included,pajeg
+payment-receipt.my-card-was-declined,mboten dipuntampi
+payment-receipt.pay-by-card,kertu
+payment-receipt.the-bill-is-wrong,tagihanipun kirang leres
+pharmacy-symptoms.anti-diarrhea-medicine,diaré
+pharmacy-symptoms.before-or-after-food,nedha
+pharmacy-symptoms.can-i-get-this-medicine-here,Obat
+pharmacy-symptoms.cough-medicine,watuk
+pharmacy-symptoms.do-i-need-a-prescription,resép
+pharmacy-symptoms.how-many-times-a-day,Sedinten kaping
+pharmacy-symptoms.how-much-should-i-take,Dosisipun
+pharmacy-symptoms.i-am-vomiting,mutah
+pharmacy-symptoms.i-feel-dizzy,mumet
+pharmacy-symptoms.i-feel-nauseous,mual
+pharmacy-symptoms.i-have-a-burn,tatu kobong
+pharmacy-symptoms.i-have-a-cough,watuk
+pharmacy-symptoms.i-have-a-cut,tatu iris
+pharmacy-symptoms.i-have-a-fever,benter
+pharmacy-symptoms.i-have-a-headache,Sirah
+pharmacy-symptoms.i-have-a-rash,ruam
+pharmacy-symptoms.i-have-a-sore-throat,Tenggak
+pharmacy-symptoms.i-have-a-stomach-ache,Padharan
+pharmacy-symptoms.i-have-diarrhea,diaré
+pharmacy-symptoms.i-think-it-is-infected,infèksi
+pharmacy-symptoms.is-this-safe-during-pregnancy,tiyang ngandhut
+pharmacy-symptoms.motion-sickness-tablets,mabuk lelampahan
+pharmacy-symptoms.painkiller,pereda sakit
+pharmacy-symptoms.the-pain-is-severe,awrat
+pharmacy-symptoms.which-pharmacy-is-open-now,bikak sapunika
+police-consulate.i-need-an-interpreter,juru basa
+police-consulate.i-want-to-contact-my-embassy,kedhutaan
+police-consulate.i-want-to-report-a-theft,kemalingan
+police-consulate.my-bag-was-stolen,dipunpandung
+police-consulate.someone-is-following-me,ngetutaken
+police-consulate.where-is-the-police-station,Kantor polisi
+quick-directions.across-from-here,sabrangipun
+quick-directions.on-the-left,kiwa
+quick-directions.on-the-right,tengen
+quick-directions.turn-left,ngiwa
+quick-directions.turn-right,nengen
+room-problems.can-i-change-rooms,pindhah
+room-problems.please-send-someone,ngutus petugas
+room-problems.the-air-conditioning-is-broken,AC-nipun
+room-problems.the-heating-does-not-work,Pemanasipun
+room-problems.the-key-does-not-work,Kuncinipun
+room-problems.the-light-does-not-work,Lampunipun
+room-problems.the-room-is-too-noisy,rame
+room-problems.the-toilet-will-not-flush,Klosetipun
+room-problems.there-is-a-problem-with-the-room,masalah
+room-problems.there-is-no-hot-water,toya anget
+shopping.can-it-be-a-little-cheaper,kirang
+shopping.do-you-have-this-in-stock,stokipun
+shopping.how-much-is-this,pinten
+shopping.i-am-just-looking,namung ningali
+shopping.i-will-take-this,mendhet
+shopping.that-is-too-expensive,Awis
+shopping.where-do-i-pay,Mbayar
+social-basics.i-do-not-know,mboten ngertos
+taxi.can-you-wait-for-me-here,ngentosi
+taxi.could-you-make-it-colder,dipunasrepaken
+taxi.could-you-make-it-warmer,dipunbenteraken
+taxi.may-i-open-the-window,cendhela
+taxi.please-stop-here,mandheg
+taxi.please-take-me-here,dipunterakaken
+time-scheduling.can-we-change-the-time,ngéwahi
+time-scheduling.how-long-does-it-take,dangunipun
+time-scheduling.what-day-is-it-today,dinten menapa
+time-scheduling.what-time-does-it-close,Tutup
+time-scheduling.what-time-does-it-open,Bikak
+time-scheduling.what-time-is-it,Sapunika
+time-scheduling.what-time-should-we-meet,pinanggih
+time-scheduling.when-is-convenient,sekéca
+toilets.it-is-out-of-order,risak
+toilets.where-toilet,WC
+trail-conditions.can-we-return-before-dark,sadèrèngipun peteng
+trail-conditions.can-we-return-the-same-way,jalur ingkang sami
+trail-conditions.how-long-is-the-full-route,Sedaya jaluripun
+trail-conditions.is-the-path-slippery,lunyu
+trail-conditions.is-the-route-steep,jejeg
+trail-conditions.is-the-trail-open,bikak
+trail-transport.do-you-have-a-map,pétanipun
+trail-transport.how-long-is-the-wait,Ngentosi
+trail-transport.is-there-cell-signal-here,sinyal
+trail-transport.what-time-is-the-last-shuttle,Bis antar-jemput
+trail-transport.when-does-the-cableway-stop,Krèta gantung
+trail-transport.where-can-we-buy-water,Tumbas toya
+trail-transport.where-can-we-refill-water,Ngisi toya
+transit-rides.can-i-use-this-ticket,dipunangge
+transit-rides.do-i-need-to-transfer,ganti kéndaraan
+transit-rides.do-i-need-to-validate,tap in
+transit-rides.i-am-in-a-hurry,kesesa
+transit-rides.i-went-past-my-stop,kelangkungan
+transit-rides.is-this-direct,langsung
+transit-rides.please-tell-me-where-to-get-off,mandhapipun
+transit-rides.what-is-the-next-stop,Pamandhegan salajengipun
+transit-rides.what-time-is-the-next-one,Salajengipun
+transit-rides.where-do-i-pay-the-fare,Ongkosipun
+transit-rides.where-is-the-subway-station,MRT
+weather.how-cold-at-night,asrepipun | dalu
+weather.is-it-safe-today,aman
+weather.will-it-rain,jawah

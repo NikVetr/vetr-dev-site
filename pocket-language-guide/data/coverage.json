@@ -57,6 +57,7 @@
     "morse": 49
   },
   "emphasis": [
+    "am",
     "ar",
     "bn",
     "cs",
@@ -66,22 +67,28 @@
     "es",
     "fa",
     "fr",
+    "gu",
+    "ha",
     "he",
     "hi",
     "id",
     "it",
     "ja",
+    "jv",
     "ko",
+    "ms",
     "nl",
     "pl",
     "pt",
     "ru",
     "sv",
+    "sw",
     "th",
     "tr",
     "uk",
     "ur",
     "vi",
+    "yo",
     "zh-Hans"
   ]
 }

@@ -1,0 +1,305 @@
+concept_id,key
+about-me.i-am-a-doctor,ሐኪም
+about-me.i-am-a-nurse,ነርስ
+about-me.i-am-a-student,ተማሪ
+about-me.i-am-a-teacher,አስተማሪ
+about-me.i-am-an-engineer,መሀንዲስ
+about-me.i-am-retired,ጡረተኛ
+about-me.i-have-my-own-business,የግል ስራ
+about-me.i-work-in-an-office,ቢሮ
+accessibility.step-free,ደረጃ የሌለው
+air-travel.i-would-like-a-window-seat,የመስኮት
+air-travel.i-would-like-an-aisle-seat,የመተላለፊያ
+air-travel.my-luggage-did-not-arrive,አልደረሰም
+air-travel.where-is-check-in,ምዝገባ
+air-travel.where-is-the-security-check,የፀጥታ
+attractions-tickets.are-there-lockers,ዕቃ ማስቀመጫ
+attractions-tickets.could-you-take-a-photo-for-us,ሊያነሱልን
+attractions-tickets.do-i-need-a-reservation,ቦታ ማስያዝ
+attractions-tickets.may-i-take-photos,ፎቶ
+attractions-tickets.what-is-the-latest-entry-time,መግቢያ
+attractions-tickets.where-can-i-buy-tickets,ቲኬት
+board-answers.after-food,በኋላ
+board-answers.before-food,በፊት
+board-answers.can-you-walk,መራመድ
+board-answers.help-is-coming,እርዳታ
+board-answers.i-am-calling-an-ambulance,አምቡላንስ
+board-answers.i-am-calling-the-police,ፖሊስ
+board-answers.i-do-not-have-a-phone,ስልክ
+board-answers.i-will-find-someone,ሰው ማግኘት
+board-answers.i-will-show-you,አሳያለሁ
+board-answers.i-will-write-it-down,እጻፋለሁ
+board-answers.i-would-rather-not-say,ባልናገር እመርጣለሁ
+board-answers.it-is-closed,ዝግ
+board-answers.it-is-free,በነጻ
+board-answers.it-is-over-there,እዚያ
+board-answers.my-name-is-blank,ስሜ
+board-answers.none-of-these,ከእነዚህ
+board-answers.not-possible,አይቻልም
+board-answers.only-for-customers,ለደንበኞች
+board-answers.pay-on-board,በመኪናው ውስጥ
+board-answers.prescription-only,በሐኪም ማዘዣ
+board-answers.see-a-doctor,ሐኪም
+board-answers.stay-here,እዚህ
+board-answers.the-hospital-is-close,በቅርብ
+board-answers.there-is-no-wait,የመጠበቅ ጊዜ የለም
+board-answers.we-do-not-have-it,የለንም
+board-answers.we-have-it,አለ
+board-answers.what-happened,ሆነ
+board-answers.what-is-your-name,ስም
+board-answers.where-does-it-hurt,ያማል
+border-customs.here-is-my-passport,ፓስፖርቴ
+border-customs.i-am-here-for-business,ለስራ
+border-customs.i-am-visiting-family,ቤተሰብ
+border-customs.i-have-a-connecting-flight,የሚያገናኝ በረራ
+border-customs.where-do-i-collect-my-baggage,እወስዳለሁ
+color-size-returns.do-you-have-a-bag,ከረጢት
+color-size-returns.do-you-have-another-size,ቁጥር
+color-size-returns.may-i-try-it-on,ልሞክር
+communication.can-you-help-me,ሊረዱኝ
+communication.please-speak-more-slowly,ቀስ ብለው
+dietary-needs.does-it-contain-fish-stock,የዓሳ መረቅ
+dietary-needs.does-it-contain-pork-fat,የአሳማ ስብ
+dietary-needs.does-it-contain-pork-stock,የአሳማ መረቅ
+dietary-needs.i-am-vegan,ወተትና እንቁላል
+dietary-needs.i-am-vegetarian,ስጋ
+dietary-needs.is-this-halal,ሐላል
+dietary-needs.no-eggs,እንቁላል
+dietary-needs.no-meat,ስጋ ዶሮና ዓሳ
+dietary-needs.no-nuts,ለውዝ
+dietary-needs.no-peanuts,ኦቾሎኒ
+dietary-needs.no-pork,የአሳማ
+dietary-needs.no-seafood,ዓሳና የባህር ምግብ
+dietary-needs.no-sesame,ሰሊጥ
+directions.can-i-walk-there,በእግር
+directions.can-you-show-me-the-way,መንገዱን
+directions.how-long-on-foot,ምን ያህል ጊዜ
+directions.is-it-far,ሩቅ
+directions.please-show-me-on-the-map,በካርታው
+emergency-medical.i-am-bleeding-badly,ደም
+emergency-medical.i-am-having-a-severe-allergic-reaction,አናፊላክሲስ
+emergency-medical.i-cannot-breathe,መተንፈስ
+emergency-medical.i-have-chest-pain,ደረቴ
+emergency-medical.i-have-travel-insurance,ኢንሹራንስ
+emergency-medical.i-need-a-doctor,ሐኪም
+emergency-medical.i-think-a-bone-is-broken,አጥንት የተሰበረ
+emergency-medical.it-hurts-here,ያማል
+emergency-medical.please-call-an-ambulance,አምቡላንስ
+emergency-medical.please-call-my-emergency-contact,የአስቸኳይ ጊዜ ሰዌን
+emergency-medical.please-take-me-to-a-hospital,ሆስፒታል
+emergency-medical.this-is-an-emergency,አስቸኳይ
+emergency-medical.this-person-is-unconscious,ራሱን አያውቅም
+emergency-medical.where-is-the-nearest-hospital,በቅርብ ያለው
+family-intros.this-is-my-brother,ወንድሜ
+family-intros.this-is-my-colleague,የስራ ባልደረባዬ
+family-intros.this-is-my-daughter,ሴት ልጄ
+family-intros.this-is-my-father,አባቴ
+family-intros.this-is-my-husband,ባሌ
+family-intros.this-is-my-mother,እናቴ
+family-intros.this-is-my-partner,ፍቅረኛዬ
+family-intros.this-is-my-sister,እህቴ
+family-intros.this-is-my-son,ወንድ ልጄ
+family-intros.this-is-my-wife,ሚስቴ
+food-ordering.i-want-this,እፈልጋለሁ
+food-ordering.is-a-table-available,ጠረጴዛ
+food-ordering.is-this-vegetarian,የጾም ምግብ
+food-ordering.table-for-two,ለሁለት ሰው
+food-ordering.to-go-please,ጥቅል
+food-ordering.what-do-you-recommend,ይመክሩኛል
+hiking-parks.how-long-to-the-summit,ጫፉ
+hiking-parks.how-long-to-the-viewpoint,መመልከቻው
+hiking-parks.is-this-trail-suitable-for-beginners,ለጀማሪዎች
+hiking-parks.where-is-the-trailhead,የመንገዱ መጀመሪያ
+hiking-parks.which-route-is-easier,ይቀላል
+hitchhiking.i-can-pay-for-fuel,የነዳጅ
+hitchhiking.i-only-need-to-go-to-the-next-town,የሚቀጥለው ከተማ
+hitchhiking.is-there-room-for-two,ለሁለት ሰው ቦታ
+hitchhiking.thank-you-for-the-ride,አመሰግናለሁ
+hitchhiking.where-are-you-going,ይሄዳሉ
+hotel-basics.are-any-rooms-available,ክፍል
+hotel-basics.how-much-per-night,በአንድ ሌሊት
+hotel-basics.i-would-like-a-non-smoking-room,ሲጋራ የማይጨስበት
+hotel-basics.i-would-like-a-quiet-room,ጸጥ ያለ
+hotel-basics.is-breakfast-included,ቁርስ
+hotel-basics.is-there-a-washing-machine,ማጠቢያ ማሺን
+hotel-basics.is-there-air-conditioning,ኤር ኮንዲሽን
+hotel-basics.is-wi-fi-free,ዋይፋይ
+hotel-basics.may-i-see-the-room,ማየት
+hotel-requests.another-blanket,ብርድ ልብስ
+hotel-requests.another-night,ሌላ ሌሊት
+hotel-requests.another-towel-please,ፎጣ
+hotel-requests.can-i-check-in-early,ቀድሜ
+hotel-requests.can-i-check-out-later,ዘግይቼ
+hotel-requests.can-i-store-my-luggage,ሻንጣዬን
+hotel-requests.is-there-a-safe,ካዝና
+hotel-requests.no-housekeeping,አይጸዳ
+hotel-requests.what-time-does-breakfast-start,ቁርስ
+hotel-requests.what-time-is-check-out,ቼክ አውት
+in-a-building.is-this-the-correct-entrance,ትክክለኛው
+introductions.i-am-a-tourist,ጎብኚ
+introductions.i-am-traveling-alone,ብቻዬን
+introductions.my-name-is,ስሜ
+introductions.this-is-my-friend,ጓደኛዬ
+introductions.we-are-traveling-together,አንድ ላይ
+introductions.what-is-your-name,ስምዎ
+introductions.where-are-you-from,ከየት
+kind-words.i-had-a-wonderful-time,ጊዜዬ
+kind-words.i-like-it-very-much,ደስ ብሎኛል
+kind-words.it-is-beautiful-here,ቆንጆ
+kind-words.thank-you-for-everything,ሁሉም ነገር
+kind-words.thank-you-for-your-help,እርዳታዎ
+kind-words.thank-you-for-your-hospitality,ግብዣዎ
+kind-words.this-is-delicious,ጣዕሙ ጥሩ
+kind-words.you-are-very-kind,ደግ
+laundry.can-it-be-ready-today,ዛሬ
+laundry.how-much-per-kilo,በኪሎ
+laundry.please-do-not-use-bleach,ብሊች
+laundry.please-iron-this,ይተኩሱት
+laundry.please-wash-these-clothes,ያጥቡ
+laundry.when-will-it-be-ready,መቼ
+laundry.where-is-a-laundromat,ልብስ ማጠቢያ
+lost-rescue.i-do-not-know-where-i-am,የት እንዳለሁ
+lost-rescue.i-lost-my-bag,ሻንጣዬ
+lost-rescue.i-lost-my-passport,ፓስፖርቴ
+lost-rescue.i-lost-my-phone,ስልኬ
+lost-rescue.i-lost-my-wallet,የኪስ ቦርሳዬ
+lost-rescue.my-child-is-missing,ልጄ
+lost-rescue.please-call-the-police,ፖሊስ
+lost-rescue.we-are-here,እዚህ
+massage-spa.focus-on-back,ጀርባዬን
+massage-spa.focus-on-feet,እግሬን
+massage-spa.focus-on-neck,አንገቴን
+massage-spa.focus-on-shoulders,ትከሻዬን
+massage-spa.more-gently,ቀለል
+massage-spa.please-avoid-this-area,አይጫኑ
+massage-spa.please-pause,ለጥቂት ጊዜ
+massage-spa.please-stop,ያቁሙ
+massage-spa.reply-ask-supervisor,ስራ አስኪያጅ
+massage-spa.reply-cannot-avoid-this-treatment,ማስቀረት አይቻልም
+massage-spa.reply-does-it-hurt-there,ያማል
+massage-spa.reply-i-will-avoid-that-area,አልነካውም
+massage-spa.reply-which-area-exactly,የትኛው ቦታ
+massage-spa.stronger-pressure,ጠበቅ
+massage-spa.that-pressure-is-good,ጥሩ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ለአስፕሪና ለአይቡፕሮፌን
+medical-conditions.i-am-allergic-to-penicillin,ለፔኒሲሊን
+medical-conditions.i-am-allergic-to-sulfa-drugs,ለሰልፋ
+medical-conditions.i-am-diabetic,የስኳር በሽታ
+medical-conditions.i-am-pregnant,ነፍሰ ጡር
+medical-conditions.i-carry-an-adrenaline-injector,የአድሬናሊን
+medical-conditions.i-have-a-heart-condition,የልብ
+medical-conditions.i-have-asthma,አስም
+medical-conditions.i-have-epilepsy,የሚጥል በሽታ
+medical-conditions.i-need-insulin,ኢንሱሊን
+medical-conditions.i-need-my-inhaler,ኢንሄለሬን
+medical-conditions.i-take-blood-thinners,ደም የሚያሳሳ
+medical-conditions.inject-it-into-my-outer-thigh,በጭኔ ውጫዊ
+medical-conditions.my-blood-sugar-is-low,ወርዷል
+medical-conditions.my-injector-is-in-my-bag,መርፌዬ በሻንጣዬ
+medical-conditions.please-give-me-sugar-or-juice,ስኳር | ጭማቂ
+medical-conditions.this-card-lists-my-conditions,ካርድ
+medical-conditions.this-is-my-medicine,መድኃኒት
+outdoors.are-there-dangerous-animals-here,አደገኛ እንስሳት
+outdoors.can-we-camp-here,ካምፕ
+outdoors.is-it-safe-to-swim-here,መዋኘት
+payment-receipt.can-we-pay-separately,ለየብቻ
+payment-receipt.how-much-in-total,በጠቅላላው
+payment-receipt.is-tax-included,ታክስ
+payment-receipt.my-card-was-declined,አልሰራም
+payment-receipt.pay-by-card,በካርድ
+payment-receipt.the-bill-is-wrong,ተሳስቷል
+pharmacy-symptoms.antacid,የሆድ ቃር
+pharmacy-symptoms.anti-diarrhea-medicine,የተቅማጥ
+pharmacy-symptoms.antihistamine,የአለርጂ
+pharmacy-symptoms.before-or-after-food,ከምግብ
+pharmacy-symptoms.can-i-get-this-medicine-here,መድኃኒት
+pharmacy-symptoms.cough-medicine,የሳል
+pharmacy-symptoms.do-i-need-a-prescription,የሐኪም ማዘዣ
+pharmacy-symptoms.how-many-times-a-day,በቀን
+pharmacy-symptoms.how-much-should-i-take,ምን ያህል
+pharmacy-symptoms.i-am-vomiting,እያስመለሰኝ
+pharmacy-symptoms.i-feel-dizzy,ይዞረኛል
+pharmacy-symptoms.i-feel-nauseous,ማቅለሽለሽ
+pharmacy-symptoms.i-have-a-cough,ሳል
+pharmacy-symptoms.i-have-a-fever,ትኩሳት
+pharmacy-symptoms.i-have-a-headache,ራስ ምታት
+pharmacy-symptoms.i-have-a-rash,ሽፍታ
+pharmacy-symptoms.i-have-a-sore-throat,ጉሮሮዬ
+pharmacy-symptoms.i-have-a-stomach-ache,ሆዴ
+pharmacy-symptoms.i-have-diarrhea,ተቅማጥ
+pharmacy-symptoms.i-think-it-is-infected,ኢንፌክሽን
+pharmacy-symptoms.is-this-safe-during-pregnancy,በእርግዝና
+pharmacy-symptoms.motion-sickness-tablets,የመኪና ማዞር
+pharmacy-symptoms.painkiller,የህመም
+pharmacy-symptoms.the-pain-is-severe,ከባድ
+pharmacy-symptoms.which-pharmacy-is-open-now,አሁን | ክፍት
+police-consulate.i-need-an-interpreter,አስተርጓሚ
+police-consulate.i-want-to-contact-my-embassy,ኤምባሴዬን
+police-consulate.i-want-to-report-a-theft,ማሳወቅ
+police-consulate.my-bag-was-stolen,ተሰርቋል
+police-consulate.someone-is-following-me,ይከተለኛል
+police-consulate.where-is-the-police-station,ፖሊስ ጣቢያ
+quick-directions.across-from-here,ፊት ለፊት
+quick-directions.go-straight,ቀጥታ
+quick-directions.on-the-left,በግራ
+quick-directions.on-the-right,በቀኝ
+quick-directions.turn-left,ግራ
+quick-directions.turn-right,ቀኝ
+room-problems.can-i-change-rooms,መቀየር
+room-problems.please-send-someone,ሰው ይላኩ
+room-problems.the-air-conditioning-is-broken,ኤር ኮንዲሽኑ
+room-problems.the-heating-does-not-work,ማሞቂያው
+room-problems.the-key-does-not-work,ቁልፉ
+room-problems.the-light-does-not-work,መብራቱ
+room-problems.the-room-is-too-noisy,ጫጫታ
+room-problems.the-toilet-will-not-flush,መጸዳጃው
+room-problems.there-is-a-problem-with-the-room,ችግር
+room-problems.there-is-no-hot-water,ሙቅ ውሃ
+shopping.can-it-be-a-little-cheaper,ሊቀንስ
+shopping.do-you-have-this-in-stock,በክምችት
+shopping.how-much-is-this,ስንት
+shopping.i-am-just-looking,እየተመለከትኩ
+shopping.i-will-take-this,እወስዳለሁ
+shopping.that-is-too-expensive,ውድ
+shopping.where-do-i-pay,እከፍላለሁ
+taxi.can-you-wait-for-me-here,ሊጠብቁኝ
+taxi.could-you-make-it-colder,ይጨምሩ
+taxi.could-you-make-it-warmer,ይቀንሱ
+taxi.may-i-open-the-window,መስኮቱን
+taxi.please-stop-here,ያቁሙ
+taxi.please-take-me-here,ያድርሱኝ
+taxi.please-turn-around,ኋላ
+time-scheduling.can-we-change-the-time,መቀየር
+time-scheduling.how-long-does-it-take,ምን ያህል ጊዜ
+time-scheduling.what-day-is-it-today,ቀን
+time-scheduling.what-time-does-it-close,ይዘጋል
+time-scheduling.what-time-does-it-open,ይከፈታል
+time-scheduling.what-time-should-we-meet,እንገናኝ
+time-scheduling.when-is-convenient,ይሻልዎታል
+toilets.where-toilet,መጸዳጃ ቤት
+trail-conditions.can-we-return-before-dark,ከመምሸቱ በፊት
+trail-conditions.can-we-return-the-same-way,በዚያው መንገድ
+trail-conditions.how-long-is-the-full-route,ሙሉ መንገዱ
+trail-conditions.is-the-path-slippery,አዳላጭ
+trail-conditions.is-the-route-steep,ዳገታማ
+trail-conditions.is-the-trail-open,ክፍት
+trail-transport.do-you-have-a-map,ካርታ
+trail-transport.how-long-is-the-wait,መጠበቅ
+trail-transport.is-there-cell-signal-here,ሲግናል
+trail-transport.what-time-is-the-last-shuttle,የመጨረሻው አውቶቢስ
+trail-transport.when-does-the-cableway-stop,የገመድ መጓጓዣው
+trail-transport.where-can-we-buy-water,መግዛት
+trail-transport.where-can-we-refill-water,መሙላት
+transit-rides.can-i-use-this-ticket,መጠቀም
+transit-rides.do-i-need-to-transfer,መቀየር
+transit-rides.do-i-need-to-validate,መታተም
+transit-rides.i-went-past-my-stop,አለፍኩ
+transit-rides.is-this-direct,ቀጥታ
+transit-rides.please-tell-me-where-to-get-off,እንደምወርድ
+transit-rides.what-is-the-next-stop,የሚቀጥለው ማቆሚያ
+transit-rides.what-time-is-the-next-one,የሚቀጥለው
+transit-rides.where-do-i-pay-the-fare,የመጓጓዣ ክፍያ
+transit-rides.where-is-the-subway-station,የምድር ውስጥ ባቡር
+weather.how-cold-at-night,ሌሊት | ይቀዘቅዛል
+weather.is-it-safe-today,አስተማማኝ
+weather.will-it-rain,ዝናብ

@@ -1,0 +1,314 @@
+concept_id,key
+about-me.i-am-a-doctor,likita
+about-me.i-am-a-nurse,ma'aikacin jinya
+about-me.i-am-a-student,dalibi
+about-me.i-am-a-teacher,malami
+about-me.i-am-an-engineer,injiniya
+about-me.i-am-retired,ritaya
+about-me.i-have-my-own-business,kasuwancin kaina
+about-me.i-work-in-an-office,ofis
+accessibility.step-free,babu matakala
+air-travel.i-would-like-a-window-seat,taga
+air-travel.i-would-like-an-aisle-seat,hanya
+air-travel.my-luggage-did-not-arrive,bai zo
+air-travel.where-is-check-in,wurin shiga
+air-travel.where-is-the-security-check,tsaro
+attractions-tickets.are-there-lockers,akwatunan ajiya
+attractions-tickets.could-you-take-a-photo-for-us,mana
+attractions-tickets.do-i-need-a-reservation,ajiya
+attractions-tickets.may-i-take-photos,hotuna
+attractions-tickets.what-is-the-latest-entry-time,ƙarshe na shiga
+attractions-tickets.where-can-i-buy-tickets,tikiti
+board-answers.after-food,Bayan
+board-answers.at-the-next-stop,tasha ta gaba
+board-answers.before-food,Kafin
+board-answers.can-you-walk,tafiya
+board-answers.help-is-coming,Taimako
+board-answers.i-am-calling-an-ambulance,motar asibiti
+board-answers.i-am-calling-the-police,'yan sanda
+board-answers.i-do-not-have-a-phone,waya
+board-answers.i-will-check,duba
+board-answers.i-will-find-someone,nemo wanda
+board-answers.i-will-show-you,nuna
+board-answers.i-will-write-it-down,rubuta
+board-answers.i-would-rather-not-say,gara kada in faɗa
+board-answers.it-is-closed,rufe
+board-answers.it-is-free,Kyauta
+board-answers.it-is-over-there,can
+board-answers.none-of-these,Babu
+board-answers.not-possible,ba zai yiwu ba
+board-answers.only-for-customers,abokan ciniki
+board-answers.pay-on-board,A cikin mota
+board-answers.prescription-only,takardar likita
+board-answers.see-a-doctor,likita
+board-answers.stay-here,Zama a nan
+board-answers.the-hospital-is-close,kusa
+board-answers.there-is-no-wait,Babu jira
+board-answers.we-do-not-have-it,Ba mu da
+board-answers.we-have-it,akwai
+board-answers.what-happened,faru
+board-answers.what-is-your-name,suna
+board-answers.where-does-it-hurt,ciwon
+border-customs.here-is-my-passport,fasfo
+border-customs.i-am-here-for-business,kasuwanci
+border-customs.i-am-visiting-family,iyali
+border-customs.i-have-a-connecting-flight,jirgi mai haɗewa
+border-customs.where-do-i-collect-my-baggage,ɗauki
+color-size-returns.do-you-have-a-bag,jaka
+color-size-returns.do-you-have-another-size,girma
+color-size-returns.may-i-try-it-on,gwada
+communication.can-you-help-me,taimaka
+communication.do-you-speak-english,jin
+communication.i-do-not-speak-this-language,Ba | jin
+communication.i-do-not-understand,Ba | fahimta
+communication.please-speak-more-slowly,a hankali
+dietary-needs.does-it-contain-fish-stock,romon kifi
+dietary-needs.does-it-contain-pork-fat,kitsen alade
+dietary-needs.does-it-contain-pork-stock,romon alade
+dietary-needs.i-am-vegan,daga dabba
+dietary-needs.i-am-vegetarian,nama
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,ƙwai
+dietary-needs.no-meat,nama
+dietary-needs.no-nuts,goro
+dietary-needs.no-peanuts,gyaɗa
+dietary-needs.no-pork,alade
+dietary-needs.no-seafood,kifi | kayan teku
+dietary-needs.no-sesame,riɗi
+directions.can-i-walk-there,da ƙafa
+directions.can-you-show-me-the-way,hanya
+directions.how-long-on-foot,Tsawon lokaci
+directions.is-it-far,nisa
+directions.please-show-me-on-the-map,taswira
+emergency-medical.i-am-bleeding-badly,zubar da jini
+emergency-medical.i-am-having-a-severe-allergic-reaction,anaphylaxis
+emergency-medical.i-am-injured,rauni
+emergency-medical.i-cannot-breathe,numfashi
+emergency-medical.i-feel-unwell,Ba | jin daɗi
+emergency-medical.i-have-chest-pain,ƙirji
+emergency-medical.i-have-travel-insurance,inshorar
+emergency-medical.i-need-a-doctor,likita
+emergency-medical.i-think-a-bone-is-broken,ƙashi ya karye
+emergency-medical.it-hurts-here,ciwo
+emergency-medical.please-call-an-ambulance,motar asibiti
+emergency-medical.please-call-my-emergency-contact,tuntuɓa
+emergency-medical.please-take-me-to-a-hospital,asibiti
+emergency-medical.this-is-an-emergency,gaggawa
+emergency-medical.this-person-is-unconscious,suma
+emergency-medical.where-is-the-nearest-hospital,mafi kusa
+family-intros.this-is-my-brother,ɗan'uwana
+family-intros.this-is-my-colleague,abokin aikina
+family-intros.this-is-my-daughter,ɗiyata
+family-intros.this-is-my-father,mahaifina
+family-intros.this-is-my-husband,mijina
+family-intros.this-is-my-mother,mahaifiyata
+family-intros.this-is-my-partner,abokin zamana
+family-intros.this-is-my-sister,'yar'uwata
+family-intros.this-is-my-son,ɗana
+family-intros.this-is-my-wife,matata
+food-ordering.i-want-this,son
+food-ordering.is-a-table-available,tebur
+food-ordering.is-this-vegetarian,ba shi da nama
+food-ordering.table-for-two,mutum biyu
+food-ordering.what-do-you-recommend,shawarta
+hiking-parks.how-long-to-the-summit,ƙololuwar dutse
+hiking-parks.how-long-to-the-viewpoint,wurin kallo
+hiking-parks.is-this-trail-suitable-for-beginners,masu farawa
+hiking-parks.where-is-the-trailhead,farkon hanya
+hiking-parks.which-route-is-easier,mafi sauƙi
+hitchhiking.can-you-give-me-a-ride,ɗauke ni
+hitchhiking.i-can-pay-for-fuel,man fetur
+hitchhiking.i-only-need-to-go-to-the-next-town,gari na gaba
+hitchhiking.is-there-room-for-two,wuri | mutum biyu
+hitchhiking.thank-you-for-the-ride,Na gode
+hotel-basics.are-any-rooms-available,ɗakuna
+hotel-basics.how-much-per-night,kowane dare
+hotel-basics.i-have-a-reservation,ajiyar ɗaki
+hotel-basics.i-would-like-a-non-smoking-room,ba a shan taba
+hotel-basics.i-would-like-a-quiet-room,shiru
+hotel-basics.is-breakfast-included,ƙarin kumallo
+hotel-basics.is-there-a-washing-machine,injin wanki
+hotel-basics.is-there-air-conditioning,AC
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,ganin
+hotel-requests.another-blanket,bargo
+hotel-requests.another-night,wata dare
+hotel-requests.another-towel-please,tawul
+hotel-requests.can-i-check-in-early,da wuri
+hotel-requests.can-i-check-out-later,daga baya
+hotel-requests.can-i-store-my-luggage,kayana
+hotel-requests.is-there-a-safe,akwatin ajiya
+hotel-requests.no-housekeeping,share
+hotel-requests.what-time-does-breakfast-start,ƙarin kumallo
+hotel-requests.what-time-is-check-out,fita
+in-a-building.is-this-the-correct-entrance,daidai
+introductions.i-am-a-tourist,mai yawon shakatawa
+introductions.i-am-traveling-alone,kaɗai
+introductions.this-is-my-friend,abokina
+introductions.we-are-traveling-together,tare
+introductions.what-is-your-name,sunanka
+kind-words.i-had-a-wonderful-time,farin ciki
+kind-words.i-like-it-very-much,son
+kind-words.it-is-beautiful-here,kyau
+kind-words.thank-you-for-everything,komai
+kind-words.thank-you-for-your-help,taimako
+kind-words.thank-you-for-your-hospitality,karimci
+kind-words.this-is-delicious,daɗi
+kind-words.you-are-very-kind,mai kirki
+laundry.can-it-be-ready-today,yau
+laundry.how-much-per-kilo,kowane kilo
+laundry.please-do-not-use-bleach,bleach
+laundry.please-iron-this,bugu
+laundry.please-wash-these-clothes,wanke
+laundry.when-will-it-be-ready,Yaushe
+laundry.where-is-a-laundromat,wurin wanki
+lost-rescue.i-do-not-know-where-i-am,inda nake
+lost-rescue.i-lost-my-bag,Jakata
+lost-rescue.i-lost-my-passport,Fasfo
+lost-rescue.i-lost-my-phone,Wayata
+lost-rescue.i-lost-my-wallet,Jakar kuɗina
+lost-rescue.my-child-is-missing,Ɗana
+lost-rescue.please-call-the-police,'yan sanda
+lost-rescue.we-are-here,nan
+massage-spa.focus-on-back,baya
+massage-spa.focus-on-feet,tafin ƙafa
+massage-spa.focus-on-neck,wuya
+massage-spa.focus-on-shoulders,kafaɗa
+massage-spa.more-gently,sassauta
+massage-spa.please-avoid-this-area,kada ku taɓa
+massage-spa.please-pause,dakata
+massage-spa.please-stop,tsaya
+massage-spa.reply-ask-supervisor,shugaba
+massage-spa.reply-cannot-avoid-this-treatment,Ba a iya barin
+massage-spa.reply-does-it-hurt-there,ciwo
+massage-spa.reply-i-will-avoid-that-area,ba zan taɓa
+massage-spa.reply-which-area-exactly,Wane wuri
+massage-spa.stronger-pressure,ƙara ƙarfi
+massage-spa.that-pressure-is-good,daidai
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,fenisilin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,ciwon suga
+medical-conditions.i-am-pregnant,ciki
+medical-conditions.i-carry-an-adrenaline-injector,adrenaline
+medical-conditions.i-have-a-heart-condition,zuciya
+medical-conditions.i-have-asthma,asma
+medical-conditions.i-have-epilepsy,farfaɗiya
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,na'urar shaka
+medical-conditions.i-take-blood-thinners,rage kaurin jini
+medical-conditions.inject-it-into-my-outer-thigh,wajen cinyata
+medical-conditions.my-blood-sugar-is-low,Sukarin jinina | sauka
+medical-conditions.my-injector-is-in-my-bag,Allurata | jakata
+medical-conditions.please-give-me-sugar-or-juice,sukari | ruwan 'ya'yan itace
+medical-conditions.this-card-lists-my-conditions,katin
+medical-conditions.this-is-my-medicine,maganina
+outdoors.are-there-dangerous-animals-here,dabbobi masu haɗari
+outdoors.can-we-camp-here,sansani
+outdoors.is-it-safe-to-swim-here,iyo
+payment-receipt.can-we-pay-separately,daban-daban
+payment-receipt.i-already-paid,riga na biya
+payment-receipt.is-tax-included,haraji
+payment-receipt.my-card-was-declined,ƙi
+payment-receipt.pay-by-card,kati
+payment-receipt.the-bill-is-wrong,lissafin ba daidai ba
+pharmacy-symptoms.antacid,ƙunar ciki
+pharmacy-symptoms.anti-diarrhea-medicine,gudawa
+pharmacy-symptoms.antihistamine,rashin jurewa
+pharmacy-symptoms.antiseptic,kashe ƙwayoyin cuta
+pharmacy-symptoms.before-or-after-food,abinci
+pharmacy-symptoms.can-i-get-this-medicine-here,maganin
+pharmacy-symptoms.cough-medicine,tari
+pharmacy-symptoms.do-i-need-a-prescription,takardar likita
+pharmacy-symptoms.how-many-times-a-day,a rana
+pharmacy-symptoms.how-much-should-i-take,Nawa
+pharmacy-symptoms.i-am-vomiting,amai
+pharmacy-symptoms.i-feel-dizzy,jiri
+pharmacy-symptoms.i-feel-nauseous,tashin zuciya
+pharmacy-symptoms.i-have-a-burn,ƙuna
+pharmacy-symptoms.i-have-a-cough,tari
+pharmacy-symptoms.i-have-a-cut,yanke
+pharmacy-symptoms.i-have-a-fever,zazzabi
+pharmacy-symptoms.i-have-a-headache,kai
+pharmacy-symptoms.i-have-a-rash,ƙurji
+pharmacy-symptoms.i-have-a-sore-throat,maƙogwaro
+pharmacy-symptoms.i-have-a-stomach-ache,ciki
+pharmacy-symptoms.i-have-diarrhea,gudawa
+pharmacy-symptoms.i-think-it-is-infected,ƙwayoyin cuta
+pharmacy-symptoms.is-this-safe-during-pregnancy,mai ciki
+pharmacy-symptoms.motion-sickness-tablets,suman tafiya
+pharmacy-symptoms.painkiller,ciwo
+pharmacy-symptoms.rehydration-salts,maido da ruwan jiki
+pharmacy-symptoms.the-pain-is-severe,tsanani
+pharmacy-symptoms.which-pharmacy-is-open-now,buɗe yanzu
+police-consulate.i-need-an-interpreter,mai fassara
+police-consulate.i-want-to-contact-my-embassy,ofishin jakadancina
+police-consulate.i-want-to-report-a-theft,rahoton
+police-consulate.my-bag-was-stolen,sace
+police-consulate.someone-is-following-me,bina
+police-consulate.where-is-the-police-station,ofishin 'yan sanda
+quick-directions.across-from-here,Ɗaura
+quick-directions.go-straight,gaba
+quick-directions.on-the-left,hagu
+quick-directions.on-the-right,dama
+quick-directions.turn-left,hagu
+quick-directions.turn-right,dama
+room-problems.can-i-change-rooms,canza
+room-problems.please-send-someone,aiko wani
+room-problems.the-air-conditioning-is-broken,AC
+room-problems.the-heating-does-not-work,Na'urar ɗumama
+room-problems.the-key-does-not-work,Makullin
+room-problems.the-light-does-not-work,Fitila
+room-problems.the-room-is-too-noisy,hayaniya
+room-problems.the-toilet-will-not-flush,Ruwan bayan gida
+room-problems.there-is-a-problem-with-the-room,matsala
+room-problems.there-is-no-hot-water,ruwan zafi
+shopping.can-it-be-a-little-cheaper,rangwame
+shopping.do-you-have-this-in-stock,ma'ajiya
+shopping.how-much-is-this,Nawa
+shopping.i-am-just-looking,kallo ne kawai
+shopping.i-will-take-this,ɗauki
+shopping.that-is-too-expensive,tsada
+shopping.where-do-i-pay,biya
+taxi.can-you-wait-for-me-here,jira
+taxi.could-you-make-it-colder,ƙara
+taxi.could-you-make-it-warmer,rage
+taxi.may-i-open-the-window,taga
+taxi.please-stop-here,tsaya
+taxi.please-take-me-here,kai ni
+time-scheduling.can-we-change-the-time,canza
+time-scheduling.how-long-does-it-take,Tsawon lokaci
+time-scheduling.what-day-is-it-today,rana
+time-scheduling.what-time-does-it-close,rufewa
+time-scheduling.what-time-does-it-open,buɗe
+time-scheduling.what-time-should-we-meet,haɗu
+time-scheduling.when-is-convenient,dacewa
+toilets.where-toilet,bayan gida
+trail-conditions.can-we-return-before-dark,kafin dare
+trail-conditions.can-we-return-the-same-way,wannan hanyar
+trail-conditions.how-long-is-the-full-route,dukan hanyar
+trail-conditions.is-the-path-slippery,santsi
+trail-conditions.is-the-route-steep,tudu
+trail-conditions.is-the-trail-open,buɗe
+trail-transport.do-you-have-a-map,taswira
+trail-transport.how-long-is-the-wait,jira
+trail-transport.is-there-cell-signal-here,sigina
+trail-transport.what-time-is-the-last-shuttle,bas na ƙarshe
+trail-transport.when-does-the-cableway-stop,jirgin igiya
+trail-transport.where-can-we-buy-water,sayan ruwa
+trail-transport.where-can-we-refill-water,cika ruwa
+transit-rides.can-i-use-this-ticket,amfani
+transit-rides.do-i-need-to-transfer,canja jirgi
+transit-rides.do-i-need-to-validate,tantance
+transit-rides.i-am-in-a-hurry,gaggawa
+transit-rides.i-went-past-my-stop,wuce
+transit-rides.is-it-delayed,jinkiri
+transit-rides.is-this-direct,kai tsaye
+transit-rides.please-tell-me-where-to-get-off,sauka
+transit-rides.what-is-the-next-stop,tasha ta gaba
+transit-rides.what-time-is-the-next-one,na gaba
+transit-rides.where-do-i-pay-the-fare,kuɗin sufuri
+transit-rides.where-is-the-subway-station,jirgin ƙarƙashin ƙasa
+weather.how-cold-at-night,sanyi | dare
+weather.is-it-safe-today,lafiya
+weather.will-it-rain,ruwan sama
