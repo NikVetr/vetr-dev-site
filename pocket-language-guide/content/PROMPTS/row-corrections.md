@@ -309,7 +309,17 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-6.md`.
   notes decide which; four Hindi replies are worded as obligation ("I have to show the
   way") where an offer is meant; Hindi's room safe and lockers are both `लॉकर`; and the
   slash alternatives on French, Italian, Russian and Hindi reply labels (`oui / c'est ça`)
-  are the slash-pair item above.
+  are the slash-pair item above. The third key-words batch adds: Greek
+  `introductions.this-is-my-friend` shows "ο φίλος μου / η φίλη μου" (a companion, so one
+  neutral form or the masculine, as `speaker-variants.md` rules); the laundromat is the wrong
+  thing in Swedish (*tvättstuga* is a building's laundry room), Greek (*καθαριστήριο* is a dry
+  cleaner) and Czech (*prádelna* is a laundry, not self-service); Polish `Jak się pan
+  nazywa?` and Czech `Mohl byste nás vyfotit?` address a man (Czech declares the listener
+  axis, so write its neutral form and keep the two as listener variants); Dutch `voorbij
+  gereden` is one word; Swedish `Ring min anhörig` and `Jag hälsar på familj`, Czech `Moje
+  dítě se pohřešuje` and Polish `Czy mogę prosić o zdjęcie?` (which loses "of us") need a
+  reader's check; Ukrainian (and Russian) `time-words.afternoon` is the word for "day"; and
+  Turkish `none-of-these` can read as a refusal to answer.
 
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
