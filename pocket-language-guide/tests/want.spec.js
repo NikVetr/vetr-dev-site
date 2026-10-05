@@ -431,3 +431,36 @@ test('on a phone the floating bar drops the grid down, without leaving the cards
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   expect(await y()).toBe(at);
 });
+
+test('a name that wraps leaves the rest of its row centred, not hanging from the top', async ({ page }) => {
+  // A row is as tall as its tallest button, and "Simplified Chinese" takes two lines at
+  // a phone's width: its neighbours were stretched to match and kept their badge and
+  // name at the top, 6px from it and 20px from the bottom.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  const gaps = await page.evaluate(() => {
+    /** @type {Map<number, HTMLElement[]>} */ const rows = new Map();
+    for (const b of /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('#want .want-btn'))) {
+      const top = Math.round(b.getBoundingClientRect().top);
+      rows.set(top, [...(rows.get(top) ?? []), b]);
+    }
+    const lines = (/** @type {HTMLElement} */ b) => {
+      const name = /** @type {HTMLElement} */ (b.querySelector('.want-name'));
+      return Math.round(name.getBoundingClientRect().height / parseFloat(getComputedStyle(name).lineHeight));
+    };
+    return [...rows.values()].filter((row) => row.some((b) => lines(b) > 1)).flat().map((b) => {
+      const box = b.getBoundingClientRect();
+      return {
+        lang: b.dataset.lang,
+        above: /** @type {HTMLElement} */ (b.querySelector('.want-badge')).getBoundingClientRect().top - box.top,
+        below: box.bottom - /** @type {HTMLElement} */ (b.querySelector('.want-name')).getBoundingClientRect().bottom,
+      };
+    });
+  });
+  // A wrapped name and at least one neighbour, or there is nothing to check.
+  expect(gaps.length).toBeGreaterThan(1);
+  for (const { lang, above, below } of gaps) {
+    expect(Math.abs(above - below), `${lang}: ${above.toFixed(1)}px above, ${below.toFixed(1)}px below`).toBeLessThanOrEqual(1);
+  }
+});
