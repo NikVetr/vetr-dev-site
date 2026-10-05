@@ -4,7 +4,7 @@
 // told to sync afterwards, so no control ever has to read a value back out of the
 // DOM -- which is how a dragged margin used to get overwritten by a dropdown.
 
-import { wireSiteMenu } from './site-menu.js';
+import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy,
@@ -31,9 +31,10 @@ import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
 import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
+import { createWarnings } from './warnings.js';
 import * as store from './platform/store.js';
 import {
-  warningText, fixText, applyStatic, languageName, loadUiLanguage, number, t,
+  applyStatic, languageName, loadUiLanguage, number, t,
 } from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
@@ -86,7 +87,13 @@ async function main() {
   // own -- so it is loaded before anything is drawn, static markup included.
   await loadUiLanguage(choice.source, loadText);
   applyStatic();
-  wireSiteMenu();
+  // **The settings borrow the warnings while they are open.** The record is parked in
+  // the phone's menu, which a desktop never shows, so on a desktop it is handed to the
+  // settings dialog -- the bars it flies into -- and taken back when that closes.
+  wireSiteMenu(() => {
+    const record = $('warnings-menu');
+    openAppearance([record]).addEventListener('close', () => $('header-menu').append(record));
+  });
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -284,7 +291,7 @@ async function main() {
     $('status').textContent = plan.faces.length
       ? t('studio.status', { faces: plan.faces.length, scale: number(plan.scale, 2) })
       : t('studio.nothingToLayOut');
-    $('warnings').replaceChildren(...plan.warnings.map(renderWarning));
+    showWarnings(plan.warnings);
 
     const total = Object.keys(ctx.corpus.concepts).length;
     // Concepts, not rows: two that came out as the same target text share one row,
@@ -399,32 +406,16 @@ async function main() {
     renderCanvas();
   }
 
-  /**
-   * A warning plus, where the solver found one, a button that actually fixes it.
-   * @param {import('../core/types.js').Warning} warning
-   */
-  function renderWarning(warning) {
-    const li = document.createElement('li');
-    li.className = warning.severity;
-    li.append(document.createTextNode(warningText(warning)));
-    if (!warning.fixes?.length) return li;
-
-    const row = document.createElement('div');
-    row.className = 'row fixes';
-    for (const fix of warning.fixes) {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'fix';
-      button.textContent = fixText(fix);
-      button.addEventListener('click', () => {
-        spec = { ...spec, ...fix.patch };
-        schedule();
-      });
-      row.append(button);
-    }
-    li.append(row);
-    return li;
-  }
+  const showWarnings = createWarnings({
+    menu: $('warnings-menu'),
+    list: $('warnings'),
+    count: $('warnings-count'),
+    buttons: [$('site-menu'), $('header-more')],
+    onFix: (fix) => {
+      spec = { ...spec, ...fix.patch };
+      schedule();
+    },
+  });
 
   // --- canvas -------------------------------------------------------------
 

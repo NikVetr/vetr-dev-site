@@ -43,7 +43,7 @@ export function wireSiteMenu(open = () => openAppearance()) {
 }
 
 /** The plain settings: appearance, where the app opens, and whatever the page adds.
- * @param {HTMLElement[]} [extra] */
+ * @param {HTMLElement[]} [extra] @returns {HTMLDialogElement} */
 export function openAppearance(extra = []) {
   const panel = document.createElement('dialog');
   panel.className = 'speaker-settings site-settings';
@@ -53,6 +53,7 @@ export function openAppearance(extra = []) {
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();
+  return panel;
 }
 
 /**

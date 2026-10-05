@@ -2475,6 +2475,21 @@ bottom and stop fading when they reach it** -- a 1pt sentinel watched by an
 computed from heights, because the tree opens and closes underneath and a measured
 height would be wrong within a tap.
 
+**A warning is said once and then kept, not pinned over the list.** The solver's
+warnings sat at the head of the content panel for as long as they held, which on a
+phone is that panel's most valuable room spent on a sentence already read.
+`ui/warnings.js` says what a solve produced that the last one did not in a dialog: one
+that offers a decision -- a fix to press, or a sheet that did not fit -- is modal and
+waits; one that only reports what was done for the reader, such as margins widened to
+the printer's safe area, is not modal, leaves after a moment and shrinks into the menu
+button on its way out. That flight is the one motion in the studio, and it is the
+message -- it says where the warning went -- so it is short and a reader who asks for
+less motion gets the dialog closed in place. The record lives in an expandable
+*Warnings* item of the phone's menu, which a desktop's settings dialog borrows while it
+is open, and both menu buttons carry the count on an amber disc. The item count rides in
+the content panel's bar, in the app's blue, beside the caret on a phone; the bars are the
+panel's own titles with their children moved into a button, so the count comes along.
+
 **A text field is never under 16px under a finger.** iOS zooms the page when a
 smaller field takes focus and leaves it zoomed after the keyboard has gone, which put
 the board's editor back at 111% with its header off the screen. Zoom stays enabled --

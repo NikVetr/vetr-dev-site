@@ -92,7 +92,12 @@ test.describe('studio', () => {
     await page.getByRole('radiogroup', { name: 'Faces' })
       .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
-    // One message in the reader's terms, not that plus the breaker's internals.
+    // One message in the reader's terms, not that plus the breaker's internals -- said
+    // in a dialog that waits, because the reader has a decision to make, and kept in
+    // the record behind the menu.
+    const said = page.locator('dialog.warning-dialog:modal');
+    await expect(said.locator('li.error')).toHaveCount(1);
+    await expect(said.locator('li.error')).toContainText('will not fit');
     await expect(page.locator('#warnings li.error')).toHaveCount(1);
     await expect(page.locator('#warnings li.error')).toContainText('will not fit');
   });
@@ -105,13 +110,40 @@ test.describe('studio', () => {
       .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
 
-    const fix = page.locator('button.fix').first();
+    // Offered in the dialog that says it, which waits for the decision.
+    const fix = page.locator('dialog.warning-dialog:modal button.fix').first();
     await expect(fix).toContainText('faces instead of 2');
     await fix.click();
 
     // The remedy was verified before being offered, so it has to clear the error.
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
     await expect(page.locator('.face.focused')).toBeVisible();
+  });
+
+  test('a warning that asks nothing is said once, then kept behind the menu', async ({ page }) => {
+    // It used to sit at the head of the content panel for as long as it held. Now it
+    // is said in a dialog that leaves on its own -- into the bars, which count it --
+    // and a re-solve that says the same thing does not say it again.
+    await page.goto('/customize.html?target=ru&source=en');
+    const said = page.locator('dialog.warning-dialog');
+    await expect(said).toBeVisible();
+    await expect(said).toContainText('Margins were widened');
+    // Not modal: nothing was asked, so nothing is blocked.
+    await expect(page.locator('dialog.warning-dialog:modal')).toHaveCount(0);
+    await expect(said).toHaveCount(0, { timeout: 5_000 });
+    await expect(page.locator('#site-menu')).toHaveAttribute('data-warnings', /^\d+$/);
+    await expect(page.locator('#warnings li').filter({ hasText: 'Margins were widened' })).toHaveCount(1);
+
+    const before = await counts(page);
+    await page.locator('.tree summary input[type=checkbox]').first().uncheck();
+    await expectIncludedNot(page, before.included);
+    await expect(said).toHaveCount(0);
+
+    // The bars open the settings, and the record is in them.
+    await page.locator('#site-menu').click();
+    const record = page.locator('dialog.site-settings #warnings-menu');
+    await record.locator('summary').click();
+    await expect(record.locator('li').filter({ hasText: 'Margins were widened' })).toBeVisible();
   });
 
   test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
@@ -121,6 +153,9 @@ test.describe('studio', () => {
     await page.getByRole('radiogroup', { name: 'Faces' })
       .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
+    // The warning waits for a decision; declining it sends it to the menu.
+    await page.locator('dialog.warning-dialog:modal .speaker-close').click();
+    await expect(page.locator('dialog.warning-dialog')).toHaveCount(0);
     await page.locator('#balance').click();
     await expect(page.locator('#diff p')).toContainText('does not fit yet');
   });

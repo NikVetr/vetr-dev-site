@@ -181,7 +181,8 @@ function headerMenu() {
     el.before(mark);
     return mark;
   });
-  menu.append(...moved);
+  // Ahead of the warnings, which the markup already parks in here.
+  menu.prepend(...moved);
   // **The settings themselves, not a door to them.** The header's own bars beside this
   // menu's three lines were two buttons that looked the same, and moved in here they
   // became an item opening a dialog that held one switch. So the menu carries what that
@@ -253,21 +254,16 @@ function panelBars(studio) {
   for (const section of sections) {
     const title = /** @type {HTMLElement} */ (section.querySelector(':scope > .panel-title'));
     const body = /** @type {HTMLElement} */ (bodyOf(section));
-    const key = title.dataset.i18n;
 
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'panel-toggle';
-    button.textContent = title.textContent;
     button.setAttribute('aria-expanded', 'true');
     button.setAttribute('aria-controls', body.id);
-    // **The translation key moves to the button.** `applyStatic` writes `textContent`
-    // on whatever carries `data-i18n`, so leaving the key on the heading would have
-    // deleted the button the first time the reader changed the interface language.
-    if (key) {
-      button.dataset.i18n = key;
-      title.removeAttribute('data-i18n');
-    }
+    // **The title's own children move into the button**, not its text: the name keeps
+    // its translation key on its own span, so `applyStatic` rewrites the name and not
+    // the button, and the content panel's item count comes along to sit by the caret.
+    button.append(...title.childNodes);
     title.replaceChildren(button);
 
     button.addEventListener('click', () => {
@@ -299,10 +295,7 @@ function panelBars(studio) {
       sentinel.remove();
       body.hidden = false;
       section.classList.remove('collapsed', 'at-end');
-      // The button's text, not the text it was built from: the reader may have
-      // changed the interface language since.
-      title.textContent = button.textContent;
-      if (key) title.dataset.i18n = key;
+      title.replaceChildren(...button.childNodes);
     });
   }
   return () => { for (const fn of undo) fn(); };

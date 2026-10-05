@@ -60,7 +60,16 @@
         <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>
       </svg>
     </button>
-    <div class="header-menu" id="header-menu" hidden></div>
+    <!-- The record of what the last solve said, as an expandable item of the menu: the
+         warnings themselves arrive in a dialog and then fly here (`ui/warnings.js`).
+         Parked in the phone's menu, which a desktop never shows; a desktop's settings
+         dialog borrows it while it is open. -->
+    <div class="header-menu" id="header-menu" hidden>
+      <details class="warnings-menu" id="warnings-menu" hidden>
+        <summary><span data-i18n="studio.warnings">Warnings</span> <span class="warnings-count" id="warnings-count"></span></summary>
+        <ul class="warnings" id="warnings"></ul>
+      </details>
+    </div>
     <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
   </div>
 </header>
@@ -68,7 +77,7 @@
 <main class="studio">
   <h1 class="visually-hidden" data-i18n="studio.heading">Customise a pocket language guide</h1>
   <section data-i18n-label="studio.formattingLabel" aria-label="Formatting">
-    <h2 class="panel-title" data-i18n="studio.formatPanel">Format</h2>
+    <h2 class="panel-title"><span data-i18n="studio.formatPanel">Format</span></h2>
     <!-- Everything the panel's title bar collapses on a phone, in one region so the
          bar can name it with `aria-controls`. A plain block on a desktop. -->
     <div class="panel-body" id="format-body">
@@ -99,18 +108,17 @@
        tabindex="0" data-i18n-label="studio.resizeContent" aria-label="Resize the content panel"></div>
 
   <section data-i18n-label="studio.contentPanel" aria-label="Content">
-    <h2 class="panel-title" data-i18n="studio.contentPanel">Content</h2>
+    <!-- The count rides in the bar, beside the caret on a phone, so it is in view while
+         the list scrolls under it. -->
+    <h2 class="panel-title"><span data-i18n="studio.contentPanel">Content</span><span class="panel-count" id="counts"></span></h2>
     <div class="panel-body" id="content-body">
       <!-- Where the rendered images go on a touch device with no share sheet, so they
            can be saved by pressing and holding. A zip is unopenable there. -->
       <figure class="saved-images" id="saved-images" hidden></figure>
-      <ul class="warnings" id="warnings"></ul>
       <div class="row small" style="margin-bottom: .5rem;">
         <button type="button" class="ghost" id="all-on" data-i18n="studio.allOn">All on</button>
         <button type="button" class="ghost" id="all-off" data-i18n="studio.allOff">All off</button>
         <button type="button" class="ghost" id="balance" data-i18n="studio.balance">Balance columns</button>
-        <span class="spacer"></span>
-        <span class="muted" id="counts"></span>
       </div>
       <!-- The phone's section grid, hidden by CSS above 700px: on a desktop the
            tree below is already a resizable panel with every section's own tick in

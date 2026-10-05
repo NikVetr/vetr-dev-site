@@ -518,7 +518,15 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .panel-title {
   font-size: var(--fs--1); text-transform: uppercase; letter-spacing: 0.06em;
   color: var(--muted); margin: 0 0 var(--space-2);
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-2);
 }
+/* How much of the corpus is on the card, at the bar's far end: in the app's own blue,
+   so it reads as a figure about the panel rather than as part of its name. */
+.panel-count {
+  margin-inline-start: auto; color: var(--accent); font-weight: 600;
+  text-transform: none; letter-spacing: 0; font-variant-numeric: tabular-nums;
+}
+.panel-count:empty { display: none; }
 
 .banner {
   display: flex; align-items: center; gap: var(--space-2);
@@ -707,9 +715,11 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    front of you, and a second way to say the same thing would only be a second thing
    to keep in step. Switched on in the 700px block further down. */
 .section-picker { display: none; }
-.picker-budget > span { display: block; margin-block-end: 2px; }
+/* The caption, the slider and its box on one line where the panel is wide enough,
+   wrapping rather than squeezing where it is not. */
+.picker-budget { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2em var(--space-2); }
 /* The panel's own padding is the margin here; the slider brought its own. */
-.picker-budget .numeric-custom { margin-block-start: 0; padding: 0; }
+.picker-budget .numeric-custom { flex: 1 1 10rem; margin: 0; padding: 0; }
 /* Capped and scrolled, the same treatment and the same reason as the gallery's
    language grid: sixty chips are 25 rows of wall in front of the list they filter,
    and a box that visibly scrolls reads as a list you are looking into rather than
@@ -750,6 +760,35 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .fit-notice[hidden] { display: none; }
 
 .warnings { list-style: none; margin: 0 0 var(--space-2); padding: 0; font-size: var(--fs--1); }
+/* The record behind the menu (`ui/warnings.js`): an item that opens in place, its
+   name and how many, then the list. A dialog's own frame when a desktop's settings
+   borrow it. */
+.warnings-menu > summary { cursor: pointer; padding: 0.4em 0.7em; font-weight: 600; }
+.warnings-menu[open] > summary { margin-block-end: var(--space-1); }
+.warnings-menu > .warnings { margin: 0; }
+.warnings-count {
+  display: inline-block; min-inline-size: 1.4em; padding: 0 0.35em; border-radius: 0.7em;
+  background: #fdf4e3; color: #7a5209; font-size: 0.85em; text-align: center;
+}
+.site-settings .warnings-menu {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2); margin: 0 0 var(--space-2);
+}
+.site-settings .warnings-menu > summary { padding-inline: 0; }
+/* The menu buttons say how many warnings they hold: a number, on a disc of the
+   warnings' own amber, so the count is legible without the colour. */
+#site-menu, #header-more { position: relative; }
+#site-menu[data-warnings]::after, #header-more[data-warnings]::after {
+  content: attr(data-warnings); position: absolute; inset-block-start: -0.45em; inset-inline-end: -0.45em;
+  min-inline-size: 1.35em; padding: 0 0.3em; border-radius: 0.7em; border: 1.5px solid var(--paper);
+  background: #b26a00; color: #fff; font-size: 0.68rem; font-weight: 700; line-height: 1.3; text-align: center;
+}
+/* A notice that asks nothing is not modal, so the page stays usable for the moment it
+   is there -- and is placed by hand where a modal dialog is placed for it. */
+dialog.warning-dialog:not(:modal) {
+  position: fixed; inset: 0; margin: auto; block-size: fit-content; z-index: 50;
+  box-shadow: 0 10px 28px rgb(17 24 32 / 24%);
+}
 .warnings li { padding: 0.3em 0.5em; border-radius: var(--radius-sm); margin-bottom: 2px; }
 .warnings li.error { background: #fdecea; color: #7d1b15; }
 .warnings li.warn { background: #fdf4e3; color: #7a5209; }
@@ -1056,6 +1095,8 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   .panel-toggle[aria-expanded="true"]::after {
     transform: rotate(-135deg); margin-block: 0.2em 0;
   }
+  /* The count takes the free space, so the caret follows it rather than splitting it. */
+  .panel-toggle:has(> .panel-count:not(:empty))::after { margin-inline-start: var(--space-2); }
 
   /* A fade at the foot of a panel that has more below the cut, which is the commonest
      reason a reader misses content: a box that ends where the viewport ends looks
