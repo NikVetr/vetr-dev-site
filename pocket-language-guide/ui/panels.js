@@ -391,8 +391,18 @@ function panelSeams(studio) {
     // A corrupt value is the same as none: fall back to the CSS shares.
   }
   if (!rows.every((row) => held[nameOf(row)] > 0)) held = {};
+  /** A row's padding and border, which flex adds a share to rather than counting --
+   * so a share is the height less these, or the padded preview took ten points more
+   * than it was given each time a bar moved. @param {HTMLElement} row */
+  const edges = (row) => {
+    const style = getComputedStyle(row);
+    return ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
+      .reduce((sum, key) => sum + parseFloat(style[/** @type {any} */ (key)]), 0);
+  };
   const apply = () => {
-    for (const row of rows) row.style.flex = `${held[nameOf(row)]} 1 0px`;
+    for (const row of rows) {
+      row.style.flex = `${Math.max(0, held[nameOf(row)] - edges(row))} 1 0px`;
+    }
   };
   const save = () => store.set(ROWS_KEY, JSON.stringify(held));
   if (Object.keys(held).length) apply();
