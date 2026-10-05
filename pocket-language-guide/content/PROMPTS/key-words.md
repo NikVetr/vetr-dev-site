@@ -11,7 +11,7 @@ shown to the stranger, spoken or printed.
 
 ## What you write
 
-`data/lang/<bcp47>/emphasis.csv`, one row per concept that has a key word:
+`data/emphasis/<bcp47>.csv`, one row per concept that has a key word:
 
 ```
 concept_id,key
@@ -30,7 +30,8 @@ directions.where-is-the-toilet,toilet
 - **Skip a concept whose label is already one or two words** (`Thank you`, `Taxi`):
   everything on the button is the key, and bolding all of it says nothing.
 - Rows sorted by `concept_id`, header exactly `concept_id,key`, UTF-8, **CRLF** like
-  the rest of `data/lang/**`. The file need not list every concept: absent means no
+  the packs. The files sit in `data/emphasis/`, beside the packs rather than in them:
+  every tool that reads a pack reads each of its files as a section of rows. The file need not list every concept: absent means no
   key word, and that is a fine answer for a sentence with no single essence.
 
 ## Which concepts
@@ -54,6 +55,10 @@ except *colder* and *warmer*, so those are the keys -- not *make*, not *could*.
   `taxi.please-stop-here` is the word for *stop* in each pack, wherever its grammar
   puts it: German `Halten`, Japanese `止め`. Do not translate the English key; find
   the word in that language's own sentence that carries the same meaning.
+- **A key may belong to one wording.** The board bolds the keys a label contains, so
+  where a variant changes the very word that carries the sentence, list both:
+  German `Arzt | Ärztin`. The validator wants every key in some wording, and warns
+  about a wording that contains none.
 - **Present in every wording of the sentence.** Where the concept has rows in
   `variants.csv` (a woman speaking, or said to a man or a woman), the validator warns
   if the key is missing from a variant's text. Prefer a span every form shares -- a
@@ -92,5 +97,5 @@ Before you finish a language:
    already be on disk.
 
 Do not commit; the coordinator reviews and commits. Do not edit any file other than
-your languages' `emphasis.csv`, your notes, and -- for the English pilot only --
+your languages' files in `data/emphasis/`, your notes, and -- for the English pilot only --
 `data/registry/key-tones.csv`.

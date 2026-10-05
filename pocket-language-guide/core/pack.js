@@ -310,7 +310,9 @@ export async function loadVariants(loadText, bcp47) {
  * @returns {Promise<Record<string, string[]>>}
  */
 export async function loadKeys(loadText, bcp47) {
-  const rel = `data/lang/${bcp47}/emphasis.csv`;
+  // Beside the packs rather than in them, as the country names are: every tool that reads
+  // a pack reads each of its files as a section of rows.
+  const rel = `data/emphasis/${bcp47}.csv`;
   /** @type {Record<string, string[]>} */ const out = {};
   for (const row of parseTable(await loadText(rel), rel)) {
     out[row.concept_id] = row.key.split('|').map((key) => key.trim()).filter(Boolean);

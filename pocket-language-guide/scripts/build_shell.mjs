@@ -133,8 +133,8 @@ async function boardCorpus() {
     } catch { /* this language asks nothing about the speaker, or has no wordings yet */ }
     // Its key words, which the board sets in bold, where someone has marked them.
     try {
-      await stat(join(ROOT, `data/lang/${code}/emphasis.csv`));
-      out.push(`data/lang/${code}/emphasis.csv`);
+      await stat(join(ROOT, `data/emphasis/${code}.csv`));
+      out.push(`data/emphasis/${code}.csv`);
     } catch { /* not marked yet */ }
     // Its word for every country, for "I am from", where CLDR speaks the language.
     try {
@@ -175,7 +175,8 @@ async function offlineIndex() {
   /** @type {Record<string, {files: string[], bytes: number, fonts: string[], fontBytes: number}>} */
   const languages = {};
   for (const { bcp47, script } of parseTable(await read('data/registry/languages.csv'), 'languages.csv')) {
-    const candidates = [...groups, 'variants.csv', 'emphasis.csv'].map((f) => `data/lang/${bcp47}/${f}`).concat(`data/countries/${bcp47}.csv`);
+    const candidates = [...groups, 'variants.csv'].map((f) => `data/lang/${bcp47}/${f}`)
+      .concat(`data/countries/${bcp47}.csv`, `data/emphasis/${bcp47}.csv`);
     const sizes = await Promise.all(candidates.map(size));
     languages[bcp47] = {
       files: candidates.filter((_, i) => sizes[i] !== null),

@@ -1540,7 +1540,7 @@ those; or sized to their words (`fitWords` in `ui/conversation-view.js`), every 
 one size, the largest at which the whole grid still fits the screen, with the rows
 `auto` so each is as tall as its words need. **A button's key words are bold by
 default** -- *colder*, *stop*, *toilet* -- so the one that differs is found without
-reading the rest: `data/lang/<code>/emphasis.csv` names them per concept, as exact
+reading the rest: `data/emphasis/<code>.csv` names them per concept, as exact
 substrings of that language's sentence (the validator fails one that is not there and
 warns where a variant's wording loses it), `coverage.json`'s `emphasis` list says which
 languages have a file so none is asked for offline that does not exist, and

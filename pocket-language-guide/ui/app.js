@@ -528,7 +528,7 @@ export function keepBoardOffline({ groups, target, source, variants = [], countr
     ]),
     ...variants.map((code) => `data/lang/${code}/variants.csv`),
     ...countries.map((code) => `data/countries/${code}.csv`),
-    ...keys.map((code) => `data/lang/${code}/emphasis.csv`),
+    ...keys.map((code) => `data/emphasis/${code}.csv`),
   ], true);
 }
 

@@ -660,7 +660,7 @@ def main():
 
     # --- key words ------------------------------------------------------
     #
-    # `data/lang/<code>/emphasis.csv` names, per concept, the words of the sentence a
+    # `data/emphasis/<code>.csv` names, per concept, the words of the sentence a
     # board sets in bold so the reader finds it at a glance; `key-tones.csv` gives some
     # concepts a colour for them too. A key that is not in the sentence can never be
     # drawn, so it is an error; one a variant's wording loses is a warning, because the
@@ -672,8 +672,11 @@ def main():
         if row["tone"] not in TONES:
             errors.append(f"key-tones.csv:{line}: tone {row['tone']!r} is not one of {sorted(TONES)}")
     keyed = []
-    for path in sorted(DATA.glob("lang/*/emphasis.csv")):
-        code = path.parent.name
+    for path in sorted(DATA.glob("emphasis/*.csv")):
+        code = path.stem
+        if code not in languages:
+            errors.append(f"{path.relative_to(DATA)}: unknown language {code!r}")
+            continue
         rel = path.relative_to(DATA)
         keyed.append(code)
         base_rows = {}
@@ -695,13 +698,17 @@ def main():
             keys = [k.strip() for k in row["key"].split("|") if k.strip()]
             if not keys:
                 errors.append(f"{where}: no key word")
+            # A key may belong to one wording only -- German `Arzt | Ärztin` -- since the
+            # board bolds the keys a label contains; each must be in some wording, and
+            # every wording should contain one.
+            wordings = [("base", text)] + [(v["variant"], v["text"]) for v in varied[row["concept_id"]] if v.get("text")]
             for key in keys:
-                if key not in text:
-                    errors.append(f"{where}: {key!r} is not in {text!r}")
-                for variant in varied[row["concept_id"]]:
-                    if variant.get("text") and key not in variant["text"]:
-                        warnings.append(f"{where}: {key!r} is not in the {variant['variant']} "
-                                        f"wording {variant['text']!r}, which shows no key word")
+                if not any(key in said for _, said in wordings):
+                    errors.append(f"{where}: {key!r} is in none of its wordings ({text!r})")
+            for name, said in wordings:
+                if keys and not any(key in said for key in keys):
+                    warnings.append(f"{where}: the {name} wording {said!r} contains none of "
+                                    f"{keys}, so it shows no key word")
 
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):
