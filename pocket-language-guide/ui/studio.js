@@ -34,9 +34,10 @@ import { createAddTerm } from './add-term.js';
 import { readerSections } from './personal-data.js';
 import { createWarnings } from './warnings.js';
 import { openSectionFormat } from './section-format.js';
+import { savedCardsSection } from './saved-cards.js';
 import * as store from './platform/store.js';
 import {
-  applyStatic, languageName, loadUiLanguage, number, t,
+  applyStatic, languageName, loadUiLanguage, number, t, uiLanguage,
 } from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
@@ -102,7 +103,7 @@ async function main() {
   // settings dialog -- the bars it flies into -- and taken back when that closes.
   wireSiteMenu(() => {
     const record = $('warnings-menu');
-    openAppearance([record, ...reader()]).addEventListener('close', () => $('header-menu').append(record));
+    openAppearance([record, savedCards(), ...reader()]).addEventListener('close', () => $('header-menu').append(record));
   });
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -293,6 +294,42 @@ async function main() {
     };
   }
 
+  /**
+   * The card as a saved card would keep it: the spec fields that differ from a fresh
+   * card of this pair -- the paper as its preset's id, which is all the studio reads
+   * back of it -- with the finish, the resolution, the pair's own edits, and what the
+   * list says about it, counted off the solve in front of the reader.
+   */
+  const cardSnapshot = () => {
+    if (!plan) throw new Error('a card is saved from a solved sheet, and there is none yet');
+    const fresh = /** @type {Record<string, unknown>} */ (makeSpec(ctx, presets, { target: spec.target, source: spec.source }));
+    const { target, source, speaker, ...kept } = spec;
+    const differs = Object.fromEntries(Object.entries(kept)
+      .filter(([key, value]) => JSON.stringify(value) !== JSON.stringify(fresh[key])));
+    if (differs.paper) differs.paper = { presetId: spec.paper.presetId };
+    const sections = new Set(blocks.filter((b) => b.rows?.length).map((b) => b.sectionId));
+    return {
+      target, source, spec: differs, finish: format.finish(), dpi: pngDpi,
+      ...(edits.extras.length || Object.keys(edits.overrides).length ? { edits } : {}),
+      summary: {
+        sections: sections.size, items: shownItems(), faces: plan.faces.length,
+        width: spec.geometry.pageW, height: spec.geometry.pageH,
+      },
+    };
+  };
+  /** @param {string} code */
+  const nameOf = (code) => languageName(code, ctx.corpus.languages[code]?.exonym_en ?? code);
+  const savedCards = () => savedCardsSection({
+    snapshot: cardSnapshot,
+    name: t('cards.defaultName', {
+      language: nameOf(spec.target),
+      date: new Intl.DateTimeFormat(uiLanguage(), { dateStyle: 'medium' }).format(Date.now()),
+    }),
+    pairName: (target, source) => t('studio.pair', { target: nameOf(target), source: nameOf(source) }),
+    known: (code) => Boolean(ctx.corpus.languages[code]),
+    save: download,
+  });
+
   // --- banner and quiz ----------------------------------------------------
 
   const studio = /** @type {HTMLElement} */ (document.querySelector('.studio'));
@@ -300,7 +337,7 @@ async function main() {
   // The header's overflow menu and the panels' collapse bars, at the stacked width
   // only. See `ui/panels.js` for why both are built rather than written in the
   // markup: the markup is the desktop's, and this is taken down again above 700px.
-  attachPhoneChrome(studio, () => reader());
+  attachPhoneChrome(studio, () => [savedCards(), ...reader()]);
 
   // **The banner does not hide any more, and the stored flag is cleared.** It lives
   // in the header rather than in a bar of its own, so it is one line among the
@@ -359,13 +396,7 @@ async function main() {
     showWarnings(plan.warnings);
 
     const total = Object.keys(ctx.corpus.concepts).length;
-    // Concepts, not rows: two that came out as the same target text share one row,
-    // and both are on the card. Counting rows made the number drop when a pack got
-    // *better* at collapsing a distinction its language does not make.
-    const shown = blocks.reduce((n, b) => n + (b.rows ?? []).reduce(
-      (k, r) => k + 1 + (r.mergedFrom?.length ?? 0), 0,
-    ), 0);
-    $('counts').textContent = t('studio.counts', { included: shown, total });
+    $('counts').textContent = t('studio.counts', { included: shownItems(), total });
     /** @type {HTMLButtonElement} */ ($('reset-formats')).disabled = !Object.keys(spec.sectionFormats ?? {}).length;
 
     // Rebuilt only when its shape changes -- a term added or removed, or a column
@@ -500,6 +531,17 @@ async function main() {
       schedule();
     },
   });
+
+  /**
+   * How many items the card carries. Concepts, not rows: two that came out as the same
+   * target text share one row, and both are on the card. Counting rows made the number
+   * drop when a pack got *better* at collapsing a distinction its language does not make.
+   */
+  function shownItems() {
+    return blocks.reduce((n, b) => n + (b.rows ?? []).reduce(
+      (k, r) => k + 1 + (r.mergedFrom?.length ?? 0), 0,
+    ), 0);
+  }
 
   // --- canvas -------------------------------------------------------------
 

@@ -2543,6 +2543,21 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .display-cartoon [data-part][hidden] { display: none; }
 /* Most used: its two choices, its two actions, and the counts in a table of their own. */
 .usage-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+
+/* Saved cards: each card's name and what it is, its three buttons beside it -- under it
+   where the dialog is narrow -- and the recycle bin at the foot of the list. */
+.saved-card-list { list-style: none; margin: var(--space-2) 0; padding: 0; }
+.saved-card {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2);
+  padding-block: var(--space-2); border-bottom: 1px solid var(--line-soft);
+}
+.saved-card-facts { display: flex; flex-direction: column; flex: 1 1 14rem; min-width: 0; overflow-wrap: anywhere; }
+.saved-card-name { font-weight: 600; }
+.saved-card-do { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center; }
+.saved-card-bin { padding: 0.3em 0.45em; }
+.saved-card-bin svg, .saved-cards-to-bin svg { inline-size: 1.15em; block-size: 1.15em; }
+.saved-cards-foot { display: flex; justify-content: flex-end; }
+.saved-cards-bin-title { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
 .usage-table { inline-size: 100%; border-collapse: collapse; font-size: var(--fs--1); }
 .usage-table th, .usage-table td {
   padding: 0.35em 0.45em; border-block-end: 1px solid var(--line-soft);

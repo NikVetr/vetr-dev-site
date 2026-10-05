@@ -716,6 +716,20 @@ quick sheet, the studio, the conversation boards, the Morse signaller and the qu
   preset id, its printer facts coming from the registry; a change of reader rewrites
   the address, so a reload opens the pair on screen; and Delete everything clears
   these with the edits.
+
+  **Saved cards** are any number of others, named, for any pair (`ui/saved-cards.js`,
+  under `plg.cards`), saved and opened from the studio's settings -- the desktop's
+  dialog and the phone's menu alike. A saved card is the spec fields that differ from a
+  fresh card of its pair, the paper as its preset's id, the finish, the resolution and
+  the pair's own terms and corrections, with what the list shows -- its pair, sections,
+  items, page size and faces -- counted off the solve when it was saved. Loading one
+  makes it the pair's current card and reloads the studio onto it, asking first only
+  where it would replace terms of the pair's own that it does not carry. Export writes
+  it as a `wanderwart-card` file and Import reads one back, checked as far as the studio
+  needs and refused with the reasons otherwise. The recycle bin keeps a card two weeks
+  -- it is dropped the next time the list is read after that -- with Restore, Delete for
+  good, and Delete all for good. A dialog opened from the phone's menu no longer closes
+  the menu under it, so what a setting said is still there when the dialog shuts.
   - **`ui/quiz.js`** — the banner's *Help me decide*. Three questions set the
     things a newcomer cannot guess at: which sections earn their space, whether
     romanisation and respelling are useful or noise (a reader who knows the script

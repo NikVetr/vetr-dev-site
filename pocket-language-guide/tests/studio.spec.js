@@ -1211,3 +1211,110 @@ test('a phone screen can be a lock screen for a level, and Off puts the card bac
   await expect.poll(async () => (await settledCounts(page)).included, { timeout: 90_000 }).toBe(before.included);
   await expect(section('Introductions')).toBeChecked();
 });
+
+test.describe('saved cards', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      if (sessionStorage.getItem('cleared')) return;
+      localStorage.clear();
+      sessionStorage.setItem('cleared', '1');
+    });
+  });
+
+  /** The settings, opened, and the saved-cards dialog from them. @param {import('@playwright/test').Page} page */
+  const settings = async (page) => {
+    await page.locator('#site-menu').click();
+    return page.locator('dialog.site-settings');
+  };
+
+  test('a card saved under a name loads again, exports what differs, and imports back', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+    await page.getByRole('radio', { name: 'Phone screen' }).click();
+    await expect(page.locator('#status')).toContainText('Faces', { timeout: 90_000 });
+    await expect(page.locator('#status')).not.toContainText('Faces: 8');
+    let box = await settings(page);
+    await box.getByRole('button', { name: 'Save this card' }).click();
+    await page.locator('dialog.cards-name input').fill('For the phone');
+    await page.locator('dialog.cards-name').getByRole('button', { name: 'Save' }).click();
+    await expect(box.locator('.saved-cards-block [role=status]')).toHaveText(/Saved as .+For the phone/);
+    await box.locator('.dialog-head .speaker-close').click();
+
+    // Something else, then back to the saved card.
+    await page.getByRole('radio', { name: '7×5in' }).click();
+    await expect(page.locator('#status')).toContainText('Faces: 8', { timeout: 90_000 });
+    box = await settings(page);
+    await box.getByRole('button', { name: 'Load a saved card…' }).click();
+    const list = page.locator('dialog.saved-cards');
+    const card = list.locator('.saved-card', { hasText: 'For the phone' });
+    // What it is, without opening it: the pair, its size and its faces.
+    await expect(card).toContainText(/Simplified Chinese\W* to \W*English/);
+    await expect(card).toContainText('2.5 × 5.5 in');
+
+    // Exported, it is the card's own decisions and not the defaults it shares with every card.
+    const download = page.waitForEvent('download');
+    await card.getByRole('button', { name: 'Export' }).click();
+    const file = await (await download).path();
+    const text = (await import('node:fs')).readFileSync(file, 'utf8');
+    const exported = JSON.parse(text);
+    expect(exported.kind).toBe('wanderwart-card');
+    expect(exported.card.target).toBe('zh-Hans');
+    expect(exported.card.spec.geometry.pageW).toBe(180);
+    expect(Object.keys(exported.card.spec)).not.toContain('selection');
+    expect(Object.keys(exported.card.spec)).not.toContain('themeId');
+    expect(Object.keys(exported.card.spec)).not.toContain('paper');
+
+    await card.getByRole('button', { name: 'Load' }).click();
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+    // The studio opens on it: the phone's shape, which the face carries as its aspect.
+    await expect.poll(() => page.locator('.face.focused')
+      .evaluate((el) => Number(getComputedStyle(el).getPropertyValue('--face-aspect'))), { timeout: 90_000 })
+      .toBeCloseTo(180 / 396, 2);
+
+    // Imported, it is a second card of the same name.
+    box = await settings(page);
+    await box.getByRole('button', { name: 'Load a saved card…' }).click();
+    await list.locator('input[type=file]').setInputFiles({ name: 'card.json', mimeType: 'application/json', buffer: Buffer.from(text) });
+    await expect(list.locator('[role=status]')).toHaveText(/Imported .+For the phone/);
+    await expect(list.locator('.saved-card', { hasText: 'For the phone' })).toHaveCount(2);
+    // And a file that is not a card is refused, saying why.
+    await list.locator('input[type=file]').setInputFiles({ name: 'x.json', mimeType: 'application/json', buffer: Buffer.from('{"kind":"other"}') });
+    await expect(list.locator('[role=status]')).toContainText('Not imported');
+    await expect(list.locator('.saved-card')).toHaveCount(2);
+  });
+
+  test('the recycle bin restores and deletes, and forgets a card after two weeks', async ({ page }) => {
+    // Two cards already saved: one binned yesterday, one binned fifteen days ago.
+    await page.addInitScript(() => {
+      if (localStorage.getItem('plg.cards')) return;
+      const card = (/** @type {string} */ id, /** @type {string} */ name, /** @type {number|undefined} */ binned) => ({
+        id, name, at: Date.now() - 20 * 86_400_000, target: 'zh-Hans', source: 'en', spec: {},
+        finish: { mode: '', flip: 'short-edge' }, dpi: 600,
+        summary: { sections: 2, items: 9, faces: 1, width: 180, height: 396 }, binned,
+      });
+      localStorage.setItem('plg.cards', JSON.stringify([
+        card('a', 'Kept', undefined), card('b', 'Binned', Date.now() - 86_400_000),
+        card('c', 'Long gone', Date.now() - 15 * 86_400_000),
+      ]));
+    });
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+    const box = await settings(page);
+    await box.getByRole('button', { name: 'Load a saved card…' }).click();
+    const list = page.locator('dialog.saved-cards');
+    await expect(list.locator('.saved-card')).toHaveText([/Kept/]);
+    await list.getByRole('button', { name: 'Recycle bin (1)' }).click();
+    await expect(list.locator('.saved-card')).toHaveText([/Binned/]);
+    await expect(list.locator('.saved-card')).toContainText('Deleted for good on');
+    await list.getByRole('button', { name: 'Restore' }).click();
+    await expect(list.locator('.saved-card')).toHaveCount(0);
+    await list.getByRole('button', { name: 'Back to saved cards' }).click();
+    await expect(list.locator('.saved-card')).toHaveCount(2);
+    await list.getByRole('button', { name: /^Move .+Kept.+ to the recycle bin$/ }).click();
+    await list.getByRole('button', { name: 'Recycle bin (1)' }).click();
+    await list.getByRole('button', { name: /^Delete .+Kept.+ for good$/ }).click();
+    await expect(list).toContainText('The recycle bin is empty.');
+    const held = await page.evaluate(() => JSON.parse(localStorage.getItem('plg.cards') ?? '[]').map((c) => c.name));
+    expect(held).toEqual(['Binned']);
+  });
+});

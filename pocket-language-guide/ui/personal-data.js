@@ -16,6 +16,7 @@ import { personalSection, readProfile, writeProfile } from './speaker-settings.j
 import { aboutSection, askCountry, dietOptions, readAbout, writeAbout } from './about.js';
 import { readUsage, writeUsage, forgetUsage } from './usage.js';
 import { forgetDrill } from './drill-store.js';
+import { forgetCards } from './saved-cards.js';
 import { buildPackage, readPackage } from '../core/personal.js';
 import { loadCountries } from '../core/pack.js';
 
@@ -89,9 +90,10 @@ export function personalWiring({ onChanged, save, boards }) {
       try {
         // The studio's saved card settings go too: "your settings and your saved card
         // edits" is what the confirmation promises, and a band can carry the reader's
-        // own text -- a name, a number to call. So does the quiz's record of them.
+        // own text -- a name, a number to call. So do the saved cards, and the quiz's
+        // record of them.
         await Promise.all([forgetEdits(), forgetConfigs(), writeProfile({}), writeAbout({}),
-          forgetAll(), forgetUsage(), forgetDrill()]);
+          forgetAll(), forgetUsage(), forgetDrill(), forgetCards()]);
       } finally {
         onChanged();
       }

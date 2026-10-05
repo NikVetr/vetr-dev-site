@@ -10,6 +10,9 @@
 // uses the same drag to put a section's rows in order, and a row there is switched off
 // by its own tick rather than thrown away.
 
+/** A bin, drawn: where a button is taken off a board, and where a saved card is thrown away. */
+export const BIN_MARK = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 /** @param {string} tag @param {Record<string,string>} attrs */
 function el(tag, attrs = {}) {
   const node = document.createElement(tag);
@@ -64,7 +67,7 @@ export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, 
   bar.classList.add('board-bar-arranging');
   const trash = bin ? el('div', { class: 'board-arrange-bin' }) : null;
   if (trash) {
-    trash.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    trash.innerHTML = BIN_MARK;
     trash.append(el('span', { text: /** @type {string} */ (bin) }));
   }
   const finish = el('button', { type: 'button', class: 'btn primary board-arrange-done', text: done });

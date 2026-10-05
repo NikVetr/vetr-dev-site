@@ -209,10 +209,11 @@ function headerMenu(extra) {
   };
   const onToggle = () => show(menu.hidden);
   /** The toggle is excluded: closing on its own pointerdown would let its click
-   * reopen what it just closed. @param {Event} event */
+   * reopen what it just closed. So is a dialog one of its settings opened -- naming a
+   * card to save -- which is over the menu, and comes back to it. @param {Event} event */
   const onDown = (event) => {
-    const target = /** @type {Node} */ (event.target);
-    if (menu.hidden || menu.contains(target) || toggle.contains(target)) return;
+    const target = /** @type {Element} */ (event.target);
+    if (menu.hidden || menu.contains(target) || toggle.contains(target) || target.closest?.('dialog[open]')) return;
     show(false);
   };
   /** @param {KeyboardEvent} event */
