@@ -117,6 +117,6 @@ test('a price is read with cents or without, and refuses a thousands separator',
 
 test('a price is written by CLDR in each language, whole where it is whole', () => {
   assert.equal(formatPrice({ kind: 'price', amount: 250, currency: 'CNY' }, 'zh-Hans'), '¥250');
-  assert.equal(formatPrice({ kind: 'price', amount: 12.5, currency: 'EUR' }, 'de').replace(/\s/g, ' '), '12,50 €');
+  assert.equal((formatPrice({ kind: 'price', amount: 12.5, currency: 'EUR' }, 'de') ?? '').replace(/\s/g, ' '), '12,50 €');
   assert.equal(formatPrice({ kind: 'price', amount: 250, currency: 'CNY' }, 'tlh'), null);
 });
