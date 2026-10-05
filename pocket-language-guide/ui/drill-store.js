@@ -32,8 +32,8 @@ const SLOT = /** @type {const} */ ({ right: 0, marks: 1, wrong: 2 });
  * @typedef {{sections: Record<string, boolean>, items: Record<string, boolean>}} Pick
  */
 
-/** @returns {{pairs: Record<string, PairRecord>}} */
-function readRecord() {
+/** The whole record, every pair's, as a backup carries it. @returns {{pairs: Record<string, PairRecord>}} */
+export function readRecord() {
   try {
     const held = JSON.parse(store.get(RECORD_KEY) ?? '{}');
     return held && typeof held.pairs === 'object' && held.pairs ? held : { pairs: {} };
@@ -41,6 +41,11 @@ function readRecord() {
     // A corrupt record is the same as none, as every personal store here treats it.
     return { pairs: {} };
   }
+}
+
+/** @param {{pairs: Record<string, PairRecord>}} record */
+export function writeRecord(record) {
+  return store.set(RECORD_KEY, JSON.stringify(record));
 }
 
 /** The record of one pair, `target__source`, empty where it has none. @param {string} pair @returns {PairRecord} */
@@ -62,7 +67,7 @@ export function recordAnswer(pair, conceptId, verdict) {
   const row = (held.rows[conceptId] ??= { n: [0, 0, 0], last: verdict });
   row.n[SLOT[verdict]] += 1;
   row.last = verdict;
-  return store.set(RECORD_KEY, JSON.stringify(record));
+  return writeRecord(record);
 }
 
 /** A pair's tallies added up over a window of days. @param {PairRecord} record @param {string} window @returns {Tally} */
@@ -133,7 +138,7 @@ export function recordSection({ pair, row }) {
     if (!ok) return;
     const record = readRecord();
     delete record.pairs[pair];
-    await store.set(RECORD_KEY, JSON.stringify(record));
+    await writeRecord(record);
     update();
   });
   const actions = el('div', { class: 'usage-actions' });

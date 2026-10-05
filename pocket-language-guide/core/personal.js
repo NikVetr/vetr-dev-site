@@ -43,6 +43,8 @@ const MAX_DEPTH = 8;
  * @property {Record<string,unknown>} [edits]  per-pair sheet edits, keyed by pair
  * @property {Record<string,string>} [about]  details a button says, such as their name
  * @property {{items: Record<string, unknown>}} [usage]  how often they pressed each button
+ * @property {{pairs: Record<string, unknown>}} [quiz]  how they have done in each pair's quiz
+ * @property {Record<string, unknown>[]} [cards]  the cards they saved in the studio
  */
 
 /**
@@ -53,7 +55,8 @@ const MAX_DEPTH = 8;
  * carrying them to another phone would be presumptuous rather than helpful.
  * @param {{boards?:BoardPersonal, speaker?:Record<string,string>,
  *          edits?:Record<string,unknown>, about?:Record<string,string>,
- *          usage?:{items: Record<string, unknown>}}} parts
+ *          usage?:{items: Record<string, unknown>}, quiz?:{pairs: Record<string, unknown>},
+ *          cards?:Record<string, unknown>[]}} parts
  * @returns {PersonalPackage}
  */
 export function buildPackage(parts) {
@@ -66,6 +69,8 @@ export function buildPackage(parts) {
   // The counts behind Most used travel with the rest: on a new phone it should know
   // what the reader reaches for, not start again.
   if (parts.usage && Object.keys(parts.usage.items ?? {}).length) out.usage = parts.usage;
+  if (parts.quiz && Object.keys(parts.quiz.pairs ?? {}).length) out.quiz = parts.quiz;
+  if (parts.cards?.length) out.cards = parts.cards;
   return out;
 }
 
@@ -277,6 +282,11 @@ export function readPackage(text, known = {}) {
     }
   }
   if (raw.usage !== undefined && !(plain(raw.usage) && plain(raw.usage.items))) problems.push('usage: not a set of counts');
+  if (raw.quiz !== undefined && !(plain(raw.quiz) && plain(raw.quiz.pairs))) problems.push('quiz: not a record of answers');
+  if (raw.cards !== undefined && !(Array.isArray(raw.cards) && raw.cards.every((/** @type {unknown} */ card) => plain(card)
+    && ['id', 'name', 'target', 'source'].every((k) => typeof card[k] === 'string') && plain(card.spec)))) {
+    problems.push('cards: not a list of saved cards');
+  }
   if (raw.edits !== undefined && !plain(raw.edits)) problems.push('edits: not a set of pairs');
   else if (raw.edits) {
     for (const [pair, value] of Object.entries(raw.edits)) {

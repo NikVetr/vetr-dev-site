@@ -43,7 +43,7 @@ const KIND = 'wanderwart-card';
  */
 
 /** Every saved card, the recycle bin's past its two weeks gone. @returns {SavedCard[]} */
-function readCards() {
+export function readCards() {
   /** @type {SavedCard[]} */ let cards;
   try {
     cards = JSON.parse(store.get(KEY) ?? '[]');
@@ -57,7 +57,7 @@ function readCards() {
 }
 
 /** @param {SavedCard[]} cards */
-function writeCards(cards) {
+export function writeCards(cards) {
   return store.set(KEY, JSON.stringify(cards));
 }
 

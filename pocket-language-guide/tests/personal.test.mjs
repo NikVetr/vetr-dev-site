@@ -212,3 +212,18 @@ test('the details a button says travel in a backup, and must be text', () => {
   const bad = readPackage(JSON.stringify({ version: PACKAGE_VERSION, created: 'x', about: { name: 7 } }));
   assert.ok(!bad.ok && bad.problems.includes('about name: not text'));
 });
+
+test('the quiz record and the saved cards travel in a backup, and must have their shape', () => {
+  const quiz = { pairs: { ja__en: { n: [3, 0, 1], days: {}, rows: {} } } };
+  const cards = [{ id: 'a1', name: 'Tokyo', target: 'ja', source: 'en', spec: { faces: 2 } }];
+  const got = round({ quiz, cards }, KNOWN);
+  assert.equal(got.ok, true);
+  assert.deepEqual(got.ok && [got.data.quiz, got.data.cards], [quiz, cards]);
+  // An empty record and no cards are nothing to save.
+  assert.deepEqual(Object.keys(buildPackage({ quiz: { pairs: {} }, cards: [] })), ['version', 'created']);
+  const bad = readPackage(JSON.stringify({
+    version: PACKAGE_VERSION, created: 'x', quiz: { pairs: [] }, cards: [{ id: 'a1', name: 'Tokyo' }],
+  }));
+  assert.ok(!bad.ok && bad.problems.includes('quiz: not a record of answers')
+    && bad.problems.includes('cards: not a list of saved cards'));
+});

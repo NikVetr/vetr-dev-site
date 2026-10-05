@@ -46,7 +46,8 @@ for the same pair. `ui/drill-store.js` keeps the record under `plg.drill-record`
 each day of the last year and one for all time, and per concept its tally and how it
 went last. The page shows the four windows' tallies and share right, and the rows to
 practise -- missed or half-known the last time, the most missed first -- with a reset
-that asks; Delete everything clears both stores.
+that asks; the record travels in the reader's backup, and Delete everything clears both
+stores.
 
 **Hands-free** reads each question aloud and listens for the answer: the prompt in its
 own voice, then each option's number in the reader's voice and the option in its own --
@@ -728,7 +729,8 @@ quick sheet, the studio, the conversation boards, the Morse signaller and the qu
   it as a `wanderwart-card` file and Import reads one back, checked as far as the studio
   needs and refused with the reasons otherwise. The recycle bin keeps a card two weeks
   -- it is dropped the next time the list is read after that -- with Restore, Delete for
-  good, and Delete all for good. A dialog opened from the phone's menu no longer closes
+  good, and Delete all for good. The saved cards, binned ones too, travel in the reader's
+  backup. A dialog opened from the phone's menu no longer closes
   the menu under it, so what a setting said is still there when the dialog shuts.
   - **`ui/quiz.js`** — the banner's *Help me decide*. Three questions set the
     things a newcomer cannot guess at: which sections earn their space, whether
