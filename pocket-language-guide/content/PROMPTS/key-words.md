@@ -26,7 +26,9 @@ directions.where-is-the-toilet,toilet
   Lao, Khmer, Burmese) the key is simply the characters that carry the meaning.
 - **Usually one key, at most two**, separated by ` | ` when the sentence genuinely
   turns on two words ("two tickets" might be `two | tickets` in a language where the
-  number and the noun are apart). Never the whole sentence.
+  number and the noun are apart). Never the whole sentence. The limit counts the words
+  one wording shows bold: the forms of one word across its variants (below) are listed
+  beside each other and do not count against it.
 - **Skip a concept whose label is already one or two words** (`Thank you`, `Taxi`):
   everything on the button is the key, and bolding all of it says nothing.
 - Rows sorted by `concept_id`, header exactly `concept_id,key`, UTF-8, **CRLF** like

@@ -1,0 +1,316 @@
+concept_id,key
+about-me.i-am-a-doctor,bác sĩ
+about-me.i-am-a-nurse,y tá
+about-me.i-am-a-student,sinh viên
+about-me.i-am-a-teacher,giáo viên
+about-me.i-am-an-engineer,kỹ sư
+about-me.i-am-retired,nghỉ hưu
+about-me.i-have-my-own-business,tự kinh doanh
+about-me.i-work-in-an-office,văn phòng
+accessibility.step-free,không bậc thang
+air-travel.i-would-like-a-window-seat,cửa sổ
+air-travel.i-would-like-an-aisle-seat,lối đi
+air-travel.my-luggage-did-not-arrive,chưa đến
+air-travel.where-is-check-in,Làm thủ tục
+air-travel.where-is-the-security-check,an ninh
+attractions-tickets.are-there-lockers,tủ gửi đồ
+attractions-tickets.could-you-take-a-photo-for-us,giúp
+attractions-tickets.do-i-need-a-reservation,đặt trước
+attractions-tickets.may-i-take-photos,Chụp ảnh
+attractions-tickets.what-is-the-latest-entry-time,muộn nhất
+attractions-tickets.where-can-i-buy-tickets,vé
+board-answers.after-food,Sau
+board-answers.at-the-next-stop,trạm sau
+board-answers.before-food,Trước
+board-answers.can-you-walk,Đi lại
+board-answers.help-is-coming,Cứu hộ
+board-answers.i-am-calling-an-ambulance,xe cấp cứu
+board-answers.i-am-calling-the-police,công an
+board-answers.i-do-not-have-a-phone,điện thoại
+board-answers.i-will-check,kiểm tra
+board-answers.i-will-find-someone,tìm người
+board-answers.i-will-show-you,chỉ đường
+board-answers.i-will-write-it-down,viết
+board-answers.i-would-rather-not-say,không tiện
+board-answers.it-is-over-there,đằng kia
+board-answers.my-name-is-blank,Tôi tên
+board-answers.none-of-these,không có
+board-answers.only-for-customers,khách hàng
+board-answers.pay-on-board,trên xe
+board-answers.prescription-only,đơn thuốc
+board-answers.see-a-doctor,bác sĩ
+board-answers.stay-here,Ở đây
+board-answers.the-hospital-is-close,gần đây
+board-answers.there-is-no-wait,Không cần chờ
+board-answers.what-is-your-name,tên gì
+board-answers.where-does-it-hurt,Đau
+board-answers.where-to,đâu
+border-customs.here-is-my-passport,Hộ chiếu
+border-customs.i-am-here-for-business,công tác
+border-customs.i-am-visiting-family,gia đình
+border-customs.i-have-a-connecting-flight,chuyến bay nối
+border-customs.where-do-i-collect-my-baggage,Lấy
+color-size-returns.do-you-have-another-size,cỡ
+color-size-returns.may-i-try-it-on,mặc thử
+communication.can-you-help-me,Giúp
+communication.do-you-speak-english,nói được
+communication.i-do-not-speak-this-language,không nói được
+communication.i-do-not-understand,không hiểu
+communication.please-speak-more-slowly,chậm hơn
+dietary-needs.does-it-contain-fish-stock,nước mắm
+dietary-needs.does-it-contain-pork-fat,mỡ lợn
+dietary-needs.does-it-contain-pork-stock,Nước dùng | xương lợn
+dietary-needs.i-am-vegan,thuần chay
+dietary-needs.i-am-vegetarian,chay
+dietary-needs.is-this-halal,Halal
+dietary-needs.no-eggs,trứng
+dietary-needs.no-meat,thịt
+dietary-needs.no-nuts,các loại hạt
+dietary-needs.no-peanuts,đậu phộng
+dietary-needs.no-pork,lợn
+dietary-needs.no-seafood,hải sản
+dietary-needs.no-sesame,mè
+directions.can-i-walk-there,Đi bộ
+directions.can-you-show-me-the-way,Chỉ đường
+directions.how-long-on-foot,bao lâu
+directions.is-it-far,xa
+directions.please-show-me-on-the-map,bản đồ
+directions.which-way,hướng nào
+emergency-medical.i-am-bleeding-badly,chảy máu
+emergency-medical.i-am-having-a-severe-allergic-reaction,sốc phản vệ
+emergency-medical.i-am-injured,bị thương
+emergency-medical.i-cannot-breathe,thở
+emergency-medical.i-feel-unwell,không khỏe
+emergency-medical.i-have-chest-pain,ngực
+emergency-medical.i-have-travel-insurance,bảo hiểm
+emergency-medical.i-need-a-doctor,bác sĩ
+emergency-medical.i-think-a-bone-is-broken,gãy xương
+emergency-medical.it-hurts-here,đau
+emergency-medical.please-call-an-ambulance,xe cấp cứu
+emergency-medical.please-call-my-emergency-contact,người liên hệ khẩn cấp
+emergency-medical.please-take-me-to-a-hospital,bệnh viện
+emergency-medical.this-is-an-emergency,khẩn cấp
+emergency-medical.this-person-is-unconscious,bất tỉnh
+emergency-medical.where-is-the-nearest-hospital,gần nhất
+family-intros.this-is-my-brother,anh trai
+family-intros.this-is-my-colleague,đồng nghiệp
+family-intros.this-is-my-daughter,con gái
+family-intros.this-is-my-father,cha
+family-intros.this-is-my-husband,chồng
+family-intros.this-is-my-mother,mẹ
+family-intros.this-is-my-partner,người yêu
+family-intros.this-is-my-sister,chị gái
+family-intros.this-is-my-son,con trai
+family-intros.this-is-my-wife,vợ
+food-ordering.i-want-this,muốn
+food-ordering.is-a-table-available,bàn trống
+food-ordering.is-this-vegetarian,món chay
+food-ordering.table-for-two,hai người
+food-ordering.to-go-please,mang về
+food-ordering.what-do-you-recommend,Nên gọi
+hiking-parks.how-long-to-the-summit,đỉnh
+hiking-parks.how-long-to-the-viewpoint,điểm ngắm cảnh
+hiking-parks.is-this-trail-suitable-for-beginners,người mới
+hiking-parks.where-is-the-trailhead,Điểm xuất phát
+hiking-parks.which-route-is-easier,dễ đi hơn
+hitchhiking.can-you-give-me-a-ride,đi nhờ
+hitchhiking.i-can-pay-for-fuel,tiền xăng
+hitchhiking.i-only-need-to-go-to-the-next-town,thị trấn sau
+hitchhiking.is-there-room-for-two,chỗ | hai người
+hitchhiking.thank-you-for-the-ride,Cảm ơn
+hitchhiking.where-are-you-going,đâu
+hotel-basics.are-any-rooms-available,phòng trống
+hotel-basics.how-much-per-night,Một đêm
+hotel-basics.i-have-a-reservation,đặt phòng
+hotel-basics.i-would-like-a-non-smoking-room,không hút thuốc
+hotel-basics.i-would-like-a-quiet-room,yên tĩnh
+hotel-basics.is-breakfast-included,bữa sáng
+hotel-basics.is-there-a-washing-machine,máy giặt
+hotel-basics.is-there-air-conditioning,điều hòa
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,xem phòng
+hotel-requests.another-blanket,chăn
+hotel-requests.another-night,thêm một đêm
+hotel-requests.another-towel-please,khăn tắm
+hotel-requests.can-i-check-in-early,sớm
+hotel-requests.can-i-check-out-later,muộn
+hotel-requests.can-i-store-my-luggage,hành lý
+hotel-requests.is-there-a-safe,két sắt
+hotel-requests.no-housekeeping,dọn phòng
+hotel-requests.what-time-does-breakfast-start,bữa sáng
+hotel-requests.what-time-is-check-out,trả phòng
+in-a-building.is-this-the-correct-entrance,đúng
+introductions.i-am-a-tourist,khách du lịch
+introductions.i-am-from,đến từ
+introductions.i-am-traveling-alone,một mình
+introductions.my-name-is,Tôi tên
+introductions.this-is-my-friend,bạn
+introductions.we-are-traveling-together,cùng nhau
+introductions.what-is-your-name,tên gì
+introductions.where-are-you-from,Quê
+kind-words.i-had-a-wonderful-time,vui
+kind-words.i-like-it-very-much,thích
+kind-words.it-is-beautiful-here,đẹp
+kind-words.thank-you-for-everything,mọi thứ
+kind-words.thank-you-for-your-help,giúp đỡ
+kind-words.thank-you-for-your-hospitality,lòng mến khách
+kind-words.this-is-delicious,ngon
+kind-words.you-are-very-kind,tốt bụng
+laundry.can-it-be-ready-today,Hôm nay
+laundry.how-much-per-kilo,một ký
+laundry.please-do-not-use-bleach,thuốc tẩy
+laundry.please-iron-this,ủi
+laundry.please-wash-these-clothes,giặt
+laundry.when-will-it-be-ready,Khi nào
+laundry.where-is-a-laundromat,Tiệm giặt
+lost-rescue.i-do-not-know-where-i-am,mình đang ở đâu
+lost-rescue.i-lost-my-bag,túi xách
+lost-rescue.i-lost-my-passport,hộ chiếu
+lost-rescue.i-lost-my-phone,điện thoại
+lost-rescue.i-lost-my-wallet,ví
+lost-rescue.my-child-is-missing,Con
+lost-rescue.please-call-the-police,công an
+lost-rescue.we-are-here,ở đây
+massage-spa.focus-on-back,lưng
+massage-spa.focus-on-feet,bàn chân
+massage-spa.focus-on-neck,cổ
+massage-spa.focus-on-shoulders,vai
+massage-spa.more-gently,Nhẹ tay
+massage-spa.please-avoid-this-area,đừng xoa bóp
+massage-spa.please-pause,Nghỉ
+massage-spa.please-stop,Dừng lại
+massage-spa.reply-ask-supervisor,quản lý
+massage-spa.reply-cannot-avoid-this-treatment,không thể tránh
+massage-spa.reply-does-it-hurt-there,đau
+massage-spa.reply-i-will-avoid-that-area,sẽ tránh
+massage-spa.reply-which-area-exactly,chỗ nào
+massage-spa.stronger-pressure,mạnh hơn
+massage-spa.that-pressure-is-good,vừa
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicillin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,tiểu đường
+medical-conditions.i-am-pregnant,mang thai
+medical-conditions.i-carry-an-adrenaline-injector,adrenalin
+medical-conditions.i-have-a-heart-condition,bệnh tim
+medical-conditions.i-have-asthma,hen suyễn
+medical-conditions.i-have-epilepsy,động kinh
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,bình xịt
+medical-conditions.i-take-blood-thinners,chống đông máu
+medical-conditions.inject-it-into-my-outer-thigh,mặt ngoài đùi
+medical-conditions.my-blood-sugar-is-low,hạ đường huyết
+medical-conditions.my-injector-is-in-my-bag,Bút tiêm | túi
+medical-conditions.please-give-me-sugar-or-juice,đường | nước ngọt
+medical-conditions.this-card-lists-my-conditions,Thẻ
+medical-conditions.this-is-my-medicine,thuốc
+outdoors.are-there-dangerous-animals-here,động vật nguy hiểm
+outdoors.can-we-camp-here,cắm trại
+outdoors.is-it-safe-to-swim-here,Bơi
+payment-receipt.can-we-pay-separately,riêng
+payment-receipt.how-much-in-total,Tổng cộng
+payment-receipt.i-already-paid,trả rồi
+payment-receipt.is-tax-included,thuế
+payment-receipt.my-card-was-declined,từ chối
+payment-receipt.pay-by-card,Quẹt thẻ
+payment-receipt.the-bill-is-wrong,Hóa đơn | nhầm
+pharmacy-symptoms.antacid,dạ dày
+pharmacy-symptoms.anti-diarrhea-medicine,tiêu chảy
+pharmacy-symptoms.antihistamine,dị ứng
+pharmacy-symptoms.antiseptic,sát trùng
+pharmacy-symptoms.before-or-after-food,khi ăn
+pharmacy-symptoms.can-i-get-this-medicine-here,thuốc
+pharmacy-symptoms.cough-medicine,ho
+pharmacy-symptoms.do-i-need-a-prescription,đơn thuốc
+pharmacy-symptoms.how-many-times-a-day,mấy lần
+pharmacy-symptoms.how-much-should-i-take,bao nhiêu
+pharmacy-symptoms.i-am-vomiting,nôn
+pharmacy-symptoms.i-feel-dizzy,chóng mặt
+pharmacy-symptoms.i-feel-nauseous,buồn nôn
+pharmacy-symptoms.i-have-a-burn,bỏng
+pharmacy-symptoms.i-have-a-cough,ho
+pharmacy-symptoms.i-have-a-cut,vết cắt
+pharmacy-symptoms.i-have-a-fever,sốt
+pharmacy-symptoms.i-have-a-headache,đầu
+pharmacy-symptoms.i-have-a-rash,nổi mẩn
+pharmacy-symptoms.i-have-a-sore-throat,họng
+pharmacy-symptoms.i-have-a-stomach-ache,bụng
+pharmacy-symptoms.i-have-diarrhea,tiêu chảy
+pharmacy-symptoms.i-think-it-is-infected,nhiễm trùng
+pharmacy-symptoms.is-this-safe-during-pregnancy,mang thai
+pharmacy-symptoms.motion-sickness-tablets,say xe
+pharmacy-symptoms.painkiller,giảm đau
+pharmacy-symptoms.the-pain-is-severe,dữ dội
+pharmacy-symptoms.which-pharmacy-is-open-now,đang mở cửa
+police-consulate.i-need-an-interpreter,phiên dịch
+police-consulate.i-want-to-contact-my-embassy,đại sứ quán
+police-consulate.i-want-to-report-a-theft,trình báo
+police-consulate.my-bag-was-stolen,lấy cắp
+police-consulate.someone-is-following-me,bám theo
+police-consulate.where-is-the-police-station,Đồn công an
+quick-directions.across-from-here,Đối diện
+quick-directions.go-straight,thẳng
+quick-directions.on-the-left,trái
+quick-directions.on-the-right,phải
+quick-directions.turn-left,trái
+quick-directions.turn-right,phải
+room-problems.can-i-change-rooms,Đổi phòng
+room-problems.please-send-someone,cho người đến
+room-problems.the-air-conditioning-is-broken,Điều hòa
+room-problems.the-heating-does-not-work,Máy sưởi
+room-problems.the-key-does-not-work,Thẻ phòng
+room-problems.the-light-does-not-work,Đèn
+room-problems.the-room-is-too-noisy,ồn
+room-problems.the-toilet-will-not-flush,Bồn cầu
+room-problems.there-is-a-problem-with-the-room,vấn đề
+room-problems.there-is-no-hot-water,nước nóng
+shopping.can-it-be-a-little-cheaper,Bớt
+shopping.how-much-is-this,bao nhiêu
+shopping.i-am-just-looking,xem thôi
+shopping.i-will-take-this,lấy
+shopping.that-is-too-expensive,Đắt
+shopping.where-do-i-pay,Trả tiền
+social-basics.i-do-not-know,không biết
+taxi.can-you-wait-for-me-here,Chờ
+taxi.could-you-make-it-colder,lạnh hơn
+taxi.could-you-make-it-warmer,ấm hơn
+taxi.may-i-open-the-window,cửa sổ
+taxi.please-stop-here,dừng
+taxi.please-take-me-here,chở
+time-scheduling.can-we-change-the-time,Đổi giờ
+time-scheduling.how-long-does-it-take,bao lâu
+time-scheduling.what-day-is-it-today,thứ mấy
+time-scheduling.what-time-does-it-close,đóng cửa
+time-scheduling.what-time-does-it-open,mở cửa
+time-scheduling.what-time-should-we-meet,gặp nhau
+time-scheduling.when-is-convenient,tiện
+toilets.it-is-out-of-order,hỏng
+toilets.where-toilet,Nhà vệ sinh
+trail-conditions.can-we-return-before-dark,trước tối
+trail-conditions.can-we-return-the-same-way,đường cũ
+trail-conditions.how-long-is-the-full-route,Cả tuyến
+trail-conditions.is-the-path-slippery,trơn
+trail-conditions.is-the-route-steep,dốc
+trail-conditions.is-the-trail-open,mở
+trail-transport.do-you-have-a-map,bản đồ
+trail-transport.how-long-is-the-wait,chờ
+trail-transport.is-there-cell-signal-here,sóng
+trail-transport.what-time-is-the-last-shuttle,Chuyến xe cuối
+trail-transport.when-does-the-cableway-stop,Cáp treo
+trail-transport.where-can-we-buy-water,Mua nước
+trail-transport.where-can-we-refill-water,Lấy thêm nước
+transit-rides.can-i-use-this-ticket,dùng
+transit-rides.do-i-need-to-transfer,đổi xe
+transit-rides.do-i-need-to-validate,quét vé
+transit-rides.i-am-in-a-hurry,vội
+transit-rides.i-went-past-my-stop,đi quá
+transit-rides.is-it-delayed,trễ
+transit-rides.is-this-direct,đi thẳng
+transit-rides.please-tell-me-where-to-get-off,xuống
+transit-rides.what-is-the-next-stop,Trạm sau
+transit-rides.what-time-is-the-next-one,Chuyến sau
+transit-rides.where-do-i-pay-the-fare,tiền vé
+transit-rides.where-is-the-subway-station,tàu điện ngầm
+weather.how-cold-at-night,Ban đêm lạnh
+weather.is-it-safe-today,an toàn
+weather.will-it-rain,mưa

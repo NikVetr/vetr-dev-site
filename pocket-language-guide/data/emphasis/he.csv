@@ -1,0 +1,312 @@
+concept_id,key
+about-me.i-am-a-doctor,רופאה | רופא
+about-me.i-am-a-nurse,אחות | אח
+about-me.i-am-a-student,סטודנטית | סטודנט
+about-me.i-am-a-teacher,מורה
+about-me.i-am-an-engineer,מהנדסת | מהנדס
+about-me.i-am-retired,גמלאית | גמלאי
+about-me.i-have-my-own-business,עסק משלי
+about-me.i-work-in-an-office,במשרד
+accessibility.step-free,בלי מדרגות
+air-travel.i-would-like-a-window-seat,החלון
+air-travel.i-would-like-an-aisle-seat,המעבר
+air-travel.my-luggage-did-not-arrive,לא הגיעה
+air-travel.where-is-check-in,הצ'ק-אין
+air-travel.where-is-the-security-check,הביטחונית
+attractions-tickets.are-there-lockers,תאי אחסנה
+attractions-tickets.could-you-take-a-photo-for-us,אותנו
+attractions-tickets.do-i-need-a-reservation,הזמנה
+attractions-tickets.may-i-take-photos,לצלם
+attractions-tickets.what-is-the-latest-entry-time,הכניסה האחרונה
+attractions-tickets.where-can-i-buy-tickets,כרטיסים
+board-answers.after-food,אחרי
+board-answers.before-food,לפני
+board-answers.can-you-walk,ללכת
+board-answers.help-is-coming,העזרה
+board-answers.i-am-calling-an-ambulance,לאמבולנס
+board-answers.i-am-calling-the-police,למשטרה
+board-answers.i-do-not-have-a-phone,טלפון
+board-answers.i-will-check,אבדוק
+board-answers.i-will-find-someone,אמצא מישהו
+board-answers.i-will-show-you,אראה
+board-answers.i-will-write-it-down,אכתוב
+board-answers.i-would-rather-not-say,לא להגיד
+board-answers.it-is-free,בחינם
+board-answers.it-is-over-there,שם
+board-answers.my-name-is-blank,לי
+board-answers.none-of-these,אין כאן
+board-answers.not-possible,אי אפשר
+board-answers.only-for-customers,ללקוחות
+board-answers.pay-on-board,אחרי שעולים
+board-answers.prescription-only,מרשם
+board-answers.see-a-doctor,לרופא
+board-answers.stay-here,להישאר כאן
+board-answers.the-hospital-is-close,קרוב
+board-answers.there-is-no-wait,אין תור
+board-answers.we-do-not-have-it,אין לנו
+board-answers.we-have-it,יש
+board-answers.what-happened,קרה
+board-answers.what-is-your-name,השם
+board-answers.where-does-it-hurt,כואב
+border-customs.i-am-here-for-business,לעסקים
+border-customs.i-am-visiting-family,משפחה
+border-customs.i-have-a-connecting-flight,טיסת המשך
+border-customs.where-do-i-collect-my-baggage,אוספים
+color-size-returns.do-you-have-a-bag,שקית
+color-size-returns.do-you-have-another-size,מידה
+color-size-returns.may-i-try-it-on,למדוד
+communication.can-you-help-me,לעזר
+communication.do-you-speak-english,מדברים
+communication.i-do-not-speak-this-language,לא מדברת | לא מדבר
+communication.i-do-not-understand,לא מבינה | לא מבין
+communication.please-speak-more-slowly,לאט
+communication.please-write-it-down,לכתב
+dietary-needs.does-it-contain-fish-stock,מרק דגים
+dietary-needs.does-it-contain-pork-fat,שמן חזיר
+dietary-needs.does-it-contain-pork-stock,ציר חזיר
+dietary-needs.i-am-vegan,טבעונית | טבעוני
+dietary-needs.i-am-vegetarian,צמחונית | צמחוני
+dietary-needs.is-this-halal,חלאל
+dietary-needs.no-eggs,ביצים
+dietary-needs.no-meat,בשר
+dietary-needs.no-nuts,אגוזים
+dietary-needs.no-peanuts,בוטנים
+dietary-needs.no-pork,חזיר
+dietary-needs.no-seafood,דגים | פירות ים
+dietary-needs.no-sesame,שומשום
+directions.can-i-walk-there,ברגל
+directions.can-you-show-me-the-way,הדרך
+directions.how-long-on-foot,כמה זמן
+directions.is-it-far,רחוק
+directions.please-show-me-on-the-map,במפה
+emergency-medical.i-am-bleeding-badly,דמום
+emergency-medical.i-am-having-a-severe-allergic-reaction,תגובה אנפילקטית
+emergency-medical.i-cannot-breathe,לנשם
+emergency-medical.i-feel-unwell,לא | טוב
+emergency-medical.i-have-chest-pain,כאבים בחזה
+emergency-medical.i-have-travel-insurance,ביטוח
+emergency-medical.i-need-a-doctor,רופא
+emergency-medical.i-think-a-bone-is-broken,שבר
+emergency-medical.it-hurts-here,כואב
+emergency-medical.please-call-an-ambulance,לאמבולנס
+emergency-medical.please-call-my-emergency-contact,לאיש הקשר
+emergency-medical.please-take-me-to-a-hospital,לבית חולים
+emergency-medical.this-is-an-emergency,מצב חרום
+emergency-medical.this-person-is-unconscious,מחסר הכרה
+emergency-medical.where-is-the-nearest-hospital,בסביבה
+family-intros.this-is-my-brother,אח
+family-intros.this-is-my-colleague,עמית
+family-intros.this-is-my-daughter,הבת
+family-intros.this-is-my-father,אבא
+family-intros.this-is-my-husband,בעלי
+family-intros.this-is-my-mother,אמא
+family-intros.this-is-my-partner,בן הזוג
+family-intros.this-is-my-sister,אחות
+family-intros.this-is-my-son,הבן
+family-intros.this-is-my-wife,אשתי
+food-ordering.i-want-this,רוצה
+food-ordering.is-a-table-available,שלחן פנוי
+food-ordering.is-this-vegetarian,צמחוני
+food-ordering.table-for-two,לשנים
+food-ordering.what-do-you-recommend,ממליצים
+hiking-parks.how-long-to-the-summit,לפסגה
+hiking-parks.how-long-to-the-viewpoint,לתצפית
+hiking-parks.is-this-trail-suitable-for-beginners,למתחילים
+hiking-parks.where-is-the-trailhead,תחילת השביל
+hiking-parks.which-route-is-easier,קל
+hitchhiking.can-you-give-me-a-ride,טרמפ
+hitchhiking.i-can-pay-for-fuel,הדלק
+hitchhiking.i-only-need-to-go-to-the-next-town,לעיר הבאה
+hitchhiking.is-there-room-for-two,מקום לשניים
+hitchhiking.thank-you-for-the-ride,תודה
+hitchhiking.where-are-you-going,לאן
+hotel-basics.are-any-rooms-available,חדרים
+hotel-basics.how-much-per-night,ללילה
+hotel-basics.i-have-a-reservation,הזמנה
+hotel-basics.i-would-like-a-non-smoking-room,ללא עישון
+hotel-basics.i-would-like-a-quiet-room,שקט
+hotel-basics.is-breakfast-included,ארוחת בוקר
+hotel-basics.is-there-a-washing-machine,מכונת כביסה
+hotel-basics.is-there-air-conditioning,מזגן
+hotel-basics.is-wi-fi-free,ה-Wi-Fi
+hotel-basics.may-i-see-the-room,לראות
+hotel-requests.another-blanket,שמיכה
+hotel-requests.another-night,עוד לילה
+hotel-requests.another-towel-please,מגבת
+hotel-requests.can-i-check-in-early,מקדם
+hotel-requests.can-i-check-out-later,יותר מאוחר
+hotel-requests.can-i-store-my-luggage,המזוודות
+hotel-requests.is-there-a-safe,כספת
+hotel-requests.no-housekeeping,ניקיון
+hotel-requests.what-time-does-breakfast-start,ארוחת הבוקר
+hotel-requests.what-time-is-check-out,הצ׳ק-אאוט
+in-a-building.is-this-the-correct-entrance,הנכונה
+introductions.i-am-a-tourist,תיירת | תייר
+introductions.i-am-traveling-alone,לבד
+introductions.my-name-is,לי
+introductions.this-is-my-friend,חבר
+introductions.we-are-traveling-together,ביחד
+introductions.what-is-your-name,לך
+kind-words.i-had-a-wonderful-time,נהדר
+kind-words.i-like-it-very-much,מצא חן
+kind-words.it-is-beautiful-here,יפה
+kind-words.thank-you-for-everything,הכל
+kind-words.thank-you-for-your-help,העזרה
+kind-words.thank-you-for-your-hospitality,האירוח
+kind-words.this-is-delicious,טעים
+kind-words.you-are-very-kind,אדיב
+laundry.can-it-be-ready-today,היום
+laundry.how-much-per-kilo,לקילו
+laundry.please-do-not-use-bleach,אקונה
+laundry.please-iron-this,לגהץ
+laundry.please-wash-these-clothes,לכבס
+laundry.when-will-it-be-ready,מתי
+laundry.where-is-a-laundromat,מכבסה
+lost-rescue.i-do-not-know-where-i-am,איפה אני
+lost-rescue.i-lost-my-bag,התיק
+lost-rescue.i-lost-my-passport,הדרכון
+lost-rescue.i-lost-my-phone,הטלפון
+lost-rescue.i-lost-my-wallet,הארנק
+lost-rescue.my-child-is-missing,הילד
+lost-rescue.please-call-the-police,למשטרה
+lost-rescue.we-are-here,כאן
+massage-spa.focus-on-back,בגב
+massage-spa.focus-on-feet,בכפות הרגליים
+massage-spa.focus-on-neck,בצוואר
+massage-spa.focus-on-shoulders,בכתפיים
+massage-spa.please-avoid-this-area,לא לגעת
+massage-spa.please-pause,הפסקה
+massage-spa.please-stop,מספיק
+massage-spa.reply-ask-supervisor,האחראי
+massage-spa.reply-cannot-avoid-this-treatment,אי אפשר לדלג
+massage-spa.reply-does-it-hurt-there,כואב
+massage-spa.reply-i-will-avoid-that-area,לא אגע
+massage-spa.reply-which-area-exactly,איזה אזור
+massage-spa.stronger-pressure,חזק
+massage-spa.that-pressure-is-good,טוב
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,לאספירין | ולאיבופרופן
+medical-conditions.i-am-allergic-to-penicillin,לפניצילין
+medical-conditions.i-am-allergic-to-sulfa-drugs,לסולפה
+medical-conditions.i-am-diabetic,סכרת
+medical-conditions.i-am-pregnant,בהריון
+medical-conditions.i-carry-an-adrenaline-injector,אדרנלין
+medical-conditions.i-have-a-heart-condition,בלב
+medical-conditions.i-have-asthma,אסתמה
+medical-conditions.i-have-epilepsy,אפילפסיה
+medical-conditions.i-need-insulin,אינסולין
+medical-conditions.i-need-my-inhaler,המשאף
+medical-conditions.i-take-blood-thinners,מדללי דם
+medical-conditions.inject-it-into-my-outer-thigh,הירך
+medical-conditions.my-blood-sugar-is-low,הסכר בדם | נמוך
+medical-conditions.my-injector-is-in-my-bag,המזרק | בתיק
+medical-conditions.please-give-me-sugar-or-juice,סכר | מיץ
+medical-conditions.this-card-lists-my-conditions,בכרטיס
+medical-conditions.this-is-my-medicine,התרופה
+outdoors.are-there-dangerous-animals-here,חיות מסוכנות
+outdoors.can-we-camp-here,אוהל
+outdoors.is-it-safe-to-swim-here,לשחות
+payment-receipt.can-we-pay-separately,בנפרד
+payment-receipt.how-much-in-total,בסך הכל
+payment-receipt.is-tax-included,מע״ם
+payment-receipt.my-card-was-declined,נדחה
+payment-receipt.pay-by-card,בכרטיס
+payment-receipt.the-bill-is-wrong,טעות בחשבון
+pharmacy-symptoms.antacid,צרבת
+pharmacy-symptoms.anti-diarrhea-medicine,שלשול
+pharmacy-symptoms.antiseptic,חיטוי
+pharmacy-symptoms.before-or-after-food,האוכל
+pharmacy-symptoms.can-i-get-this-medicine-here,התרופה
+pharmacy-symptoms.cough-medicine,שיעול
+pharmacy-symptoms.do-i-need-a-prescription,מרשם
+pharmacy-symptoms.how-many-times-a-day,פעמים ביום
+pharmacy-symptoms.how-much-should-i-take,כמה
+pharmacy-symptoms.i-am-vomiting,מקיאה | מקיא
+pharmacy-symptoms.i-feel-dizzy,סחרחורת
+pharmacy-symptoms.i-feel-nauseous,בחילה
+pharmacy-symptoms.i-have-a-burn,כוויה
+pharmacy-symptoms.i-have-a-cough,שיעול
+pharmacy-symptoms.i-have-a-cut,חתך
+pharmacy-symptoms.i-have-a-fever,חום
+pharmacy-symptoms.i-have-a-headache,ראש
+pharmacy-symptoms.i-have-a-rash,פריחה
+pharmacy-symptoms.i-have-a-sore-throat,הגרון
+pharmacy-symptoms.i-have-a-stomach-ache,בטן
+pharmacy-symptoms.i-have-diarrhea,שלשול
+pharmacy-symptoms.i-think-it-is-infected,נדבק
+pharmacy-symptoms.is-this-safe-during-pregnancy,בהריון
+pharmacy-symptoms.motion-sickness-tablets,מחלת נסיעה
+pharmacy-symptoms.painkiller,כאבים
+pharmacy-symptoms.rehydration-salts,החזרת נוזלים
+pharmacy-symptoms.the-pain-is-severe,חזק
+pharmacy-symptoms.which-pharmacy-is-open-now,פתוח עכשיו
+police-consulate.i-need-an-interpreter,מתרגמן
+police-consulate.i-want-to-contact-my-embassy,לשגרירות
+police-consulate.i-want-to-report-a-theft,תלונה
+police-consulate.my-bag-was-stolen,גנבו
+police-consulate.someone-is-following-me,עוקב
+police-consulate.where-is-the-police-station,תחנת המשטרה
+quick-directions.on-the-left,השמאלי
+quick-directions.on-the-right,הימני
+room-problems.can-i-change-rooms,להחליף
+room-problems.please-send-someone,לשלוח מישהו
+room-problems.the-air-conditioning-is-broken,המזגן
+room-problems.the-heating-does-not-work,החימום
+room-problems.the-key-does-not-work,הכרטיס
+room-problems.the-light-does-not-work,האור
+room-problems.the-room-is-too-noisy,רעשן
+room-problems.the-toilet-will-not-flush,ההדחה
+room-problems.there-is-a-problem-with-the-room,בעיה
+room-problems.there-is-no-hot-water,מים חמים
+shopping.can-it-be-a-little-cheaper,בזול
+shopping.do-you-have-this-in-stock,במלאי
+shopping.how-much-is-this,עולה
+shopping.i-am-just-looking,רק מסתכלת | רק מסתכל
+shopping.i-will-take-this,אקח
+shopping.that-is-too-expensive,יקר
+shopping.where-do-i-pay,משלמים
+social-basics.i-do-not-know,לא יודעת | לא יודע
+taxi.can-you-wait-for-me-here,לחכות
+taxi.could-you-make-it-colder,להעלות
+taxi.could-you-make-it-warmer,להוריד
+taxi.may-i-open-the-window,החלון
+taxi.please-stop-here,לעצור | עצור | עצרי
+taxi.please-take-me-here,לקחת | קחי | קח
+taxi.please-turn-around,פרסה
+time-scheduling.can-we-change-the-time,לשנות
+time-scheduling.how-long-does-it-take,כמה זמן
+time-scheduling.what-day-is-it-today,יום
+time-scheduling.what-time-does-it-close,סוגרים
+time-scheduling.what-time-does-it-open,פותחים
+time-scheduling.what-time-is-it,השעה
+time-scheduling.what-time-should-we-meet,ניפגש
+time-scheduling.when-is-convenient,נוח
+toilets.it-is-out-of-order,מקולקל
+toilets.where-toilet,השירותים
+trail-conditions.can-we-return-before-dark,לפני החשכה
+trail-conditions.can-we-return-the-same-way,באותה דרך
+trail-conditions.how-long-is-the-full-route,כל המסלול
+trail-conditions.is-the-path-slippery,חלקלק
+trail-conditions.is-the-route-steep,תלול
+trail-conditions.is-the-trail-open,פתוח
+trail-transport.do-you-have-a-map,מפה
+trail-transport.how-long-is-the-wait,מחכים
+trail-transport.is-there-cell-signal-here,קלט
+trail-transport.what-time-is-the-last-shuttle,ההיסע האחרון
+trail-transport.when-does-the-cableway-stop,הרכבל
+trail-transport.where-can-we-buy-water,לקנות מים
+trail-transport.where-can-we-refill-water,למלא מים
+transit-rides.can-i-use-this-ticket,להשתמש
+transit-rides.do-i-need-to-transfer,להחליף
+transit-rides.do-i-need-to-validate,להעביר
+transit-rides.i-am-in-a-hurry,ממהרת | ממהר
+transit-rides.i-went-past-my-stop,עברתי
+transit-rides.is-it-delayed,איחור
+transit-rides.is-this-direct,ישיר
+transit-rides.please-tell-me-where-to-get-off,לרדת
+transit-rides.what-is-the-next-stop,התחנה הבאה
+transit-rides.what-time-is-the-next-one,הבא
+transit-rides.where-do-i-pay-the-fare,דמי הנסיעה
+transit-rides.where-is-the-subway-station,הרכבת הקלה
+weather.how-cold-at-night,קר בלילה
+weather.is-it-safe-today,בטוח
+weather.will-it-rain,גשם

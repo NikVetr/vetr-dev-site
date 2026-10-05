@@ -1,0 +1,320 @@
+concept_id,key
+about-me.i-am-a-doctor,ডাক্তার
+about-me.i-am-a-nurse,নার্স
+about-me.i-am-a-student,শিক্ষার্থী
+about-me.i-am-a-teacher,শিক্ষক
+about-me.i-am-an-engineer,ইঞ্জিনিয়ার
+about-me.i-am-retired,অবসরপ্রাপ্ত
+about-me.i-have-my-own-business,নিজের ব্যবসা
+about-me.i-work-in-an-office,অফিসে
+accessibility.step-free,সিঁড়ি ছাড়া
+air-travel.i-would-like-a-window-seat,জানালার
+air-travel.i-would-like-an-aisle-seat,আইল
+air-travel.my-luggage-did-not-arrive,আসেনি
+air-travel.where-is-check-in,চেক-ইন
+air-travel.where-is-the-security-check,নিরাপত্তা তল্লাশি
+attractions-tickets.are-there-lockers,লকার
+attractions-tickets.could-you-take-a-photo-for-us,আমাদের
+attractions-tickets.do-i-need-a-reservation,বুকিং
+attractions-tickets.may-i-take-photos,ছবি
+attractions-tickets.what-is-the-latest-entry-time,শেষ সময়
+attractions-tickets.where-can-i-buy-tickets,টিকিট
+board-answers.after-food,পরে
+board-answers.before-food,আগে
+board-answers.can-you-walk,হাঁটতে
+board-answers.help-is-coming,সাহায্য
+board-answers.how-many,কতগুলো
+board-answers.i-am-calling-an-ambulance,অ্যাম্বুলেন্স
+board-answers.i-am-calling-the-police,পুলিশ
+board-answers.i-do-not-have-a-phone,ফোন
+board-answers.i-will-check,দেখে
+board-answers.i-will-find-someone,কাউকে খুঁজব
+board-answers.i-will-show-you,দেখিয়ে
+board-answers.i-will-write-it-down,লিখে
+board-answers.i-would-rather-not-say,বলতে চাই না
+board-answers.it-is-closed,বন্ধ
+board-answers.it-is-free,ফ্রি
+board-answers.it-is-over-there,ওখানে
+board-answers.my-name-is-blank,আমার
+board-answers.none-of-these,এর মধ্যে
+board-answers.not-possible,সম্ভব নয়
+board-answers.only-for-customers,ক্রেতাদের
+board-answers.pay-on-board,গাড়িতেই
+board-answers.prescription-only,প্রেসক্রিপশন
+board-answers.see-a-doctor,ডাক্তার
+board-answers.stay-here,এখানে থাকাই
+board-answers.the-hospital-is-close,কাছেই
+board-answers.there-is-no-wait,অপেক্ষা করতে হবে না
+board-answers.what-is-your-name,নাম
+board-answers.where-does-it-hurt,ব্যথা
+board-answers.where-to,কোথায়
+border-customs.here-is-my-passport,পাসপোর্ট
+border-customs.i-am-here-for-business,কাজে
+border-customs.i-am-visiting-family,আত্মীয়দের
+border-customs.i-have-a-connecting-flight,কানেক্টিং ফ্লাইট
+border-customs.where-do-i-collect-my-baggage,পাব
+color-size-returns.do-you-have-a-bag,ব্যাগ
+color-size-returns.do-you-have-another-size,মাপ
+color-size-returns.may-i-try-it-on,পরে দেখতে
+common-signs.no-photography,নিষেধ
+communication.can-you-help-me,সাহায্য
+communication.do-you-speak-english,বলতে পারেন
+communication.i-do-not-speak-this-language,বলতে পারি না
+communication.i-do-not-understand,বুঝতে পারছি না
+communication.please-speak-more-slowly,ধীরে
+dietary-needs.does-it-contain-fish-stock,মাছ
+dietary-needs.does-it-contain-pork-fat,শুকরের চর্বি
+dietary-needs.does-it-contain-pork-stock,শুকরের মাংস
+dietary-needs.i-am-vegan,"দুধ, ডিম"
+dietary-needs.i-am-vegetarian,নিরামিষ
+dietary-needs.is-this-halal,হালাল
+dietary-needs.no-eggs,ডিম
+dietary-needs.no-meat,মাংস
+dietary-needs.no-nuts,বাদাম
+dietary-needs.no-peanuts,চিনাবাদাম
+dietary-needs.no-pork,শুকরের
+dietary-needs.no-seafood,মাছ ও চিংড়ি
+dietary-needs.no-sesame,তিল
+directions.can-i-walk-there,হেঁটে
+directions.can-you-show-me-the-way,পথটা
+directions.how-long-on-foot,কত সময়
+directions.is-it-far,দূরে
+directions.please-show-me-on-the-map,ম্যাপে
+directions.which-exit,বেরোব
+emergency-medical.i-am-bleeding-badly,রক্ত
+emergency-medical.i-am-having-a-severe-allergic-reaction,মারাত্মক অ্যালার্জি
+emergency-medical.i-am-injured,আহত
+emergency-medical.i-cannot-breathe,শ্বাস
+emergency-medical.i-feel-unwell,ভালো লাগছে না
+emergency-medical.i-have-chest-pain,বুকে
+emergency-medical.i-have-travel-insurance,বিমা
+emergency-medical.i-need-a-doctor,ডাক্তার
+emergency-medical.i-think-a-bone-is-broken,হাড় ভেঙে
+emergency-medical.it-hurts-here,ব্যথা
+emergency-medical.please-call-an-ambulance,অ্যাম্বুলেন্স
+emergency-medical.please-call-my-emergency-contact,জরুরি নম্বরে
+emergency-medical.please-take-me-to-a-hospital,হাসপাতালে
+emergency-medical.this-is-an-emergency,জরুরি অবস্থা
+emergency-medical.this-person-is-unconscious,অজ্ঞান
+emergency-medical.where-is-the-nearest-hospital,সবচেয়ে কাছের
+family-intros.this-is-my-brother,ভাই
+family-intros.this-is-my-colleague,সহকর্মী
+family-intros.this-is-my-daughter,মেয়ে
+family-intros.this-is-my-father,বাবা
+family-intros.this-is-my-husband,স্বামী
+family-intros.this-is-my-mother,আমার মা
+family-intros.this-is-my-partner,জীবনসঙ্গী
+family-intros.this-is-my-sister,বোন
+family-intros.this-is-my-son,ছেলে
+family-intros.this-is-my-wife,স্ত্রী
+food-ordering.i-want-this,চাই
+food-ordering.is-a-table-available,টেবিল খালি
+food-ordering.is-this-vegetarian,নিরামিষ
+food-ordering.table-for-two,দুজনের
+food-ordering.to-go-please,প্যাক
+food-ordering.what-do-you-recommend,খেতে বলবেন
+hiking-parks.how-long-to-the-summit,চূড়ায়
+hiking-parks.how-long-to-the-viewpoint,ভিউ পয়েন্টে
+hiking-parks.is-this-trail-suitable-for-beginners,নতুনদের
+hiking-parks.where-is-the-trailhead,পথের শুরু
+hiking-parks.which-route-is-easier,সহজ
+hitchhiking.can-you-give-me-a-ride,লিফট
+hitchhiking.i-can-pay-for-fuel,পেট্রলের
+hitchhiking.i-only-need-to-go-to-the-next-town,পরের শহর
+hitchhiking.is-there-room-for-two,দুজনের | জায়গা
+hitchhiking.thank-you-for-the-ride,ধন্যবাদ
+hitchhiking.where-are-you-going,কোথায়
+hotel-basics.are-any-rooms-available,রুম খালি
+hotel-basics.how-much-per-night,প্রতি রাতে
+hotel-basics.i-have-a-reservation,বুকিং
+hotel-basics.i-would-like-a-non-smoking-room,ধূমপানমুক্ত
+hotel-basics.i-would-like-a-quiet-room,শান্ত
+hotel-basics.is-breakfast-included,সকালের নাস্তা
+hotel-basics.is-there-a-washing-machine,ওয়াশিং মেশিন
+hotel-basics.is-there-air-conditioning,এসি
+hotel-basics.is-wi-fi-free,ওয়াই-ফাই
+hotel-basics.may-i-see-the-room,দেখতে
+hotel-requests.another-blanket,কম্বল
+hotel-requests.another-night,আরেক রাত
+hotel-requests.another-towel-please,তোয়ালে
+hotel-requests.can-i-check-in-early,আগে
+hotel-requests.can-i-check-out-later,দেরিতে
+hotel-requests.can-i-store-my-luggage,লাগেজ
+hotel-requests.is-there-a-safe,সেফ
+hotel-requests.no-housekeeping,পরিষ্কার
+hotel-requests.what-time-does-breakfast-start,সকালের নাস্তা
+hotel-requests.what-time-is-check-out,চেক-আউট
+in-a-building.is-this-the-correct-entrance,ঠিক
+introductions.i-am-a-tourist,পর্যটক
+introductions.i-am-traveling-alone,একা
+introductions.my-name-is,আমার
+introductions.this-is-my-friend,বন্ধু
+introductions.we-are-traveling-together,একসাথে
+introductions.what-is-your-name,আপনার
+introductions.where-are-you-from,কোথা থেকে
+kind-words.i-had-a-wonderful-time,ভালো সময়
+kind-words.i-like-it-very-much,ভালো লেগেছে
+kind-words.it-is-beautiful-here,সুন্দর
+kind-words.thank-you-for-everything,সব কিছুর
+kind-words.thank-you-for-your-help,সাহায্যের
+kind-words.thank-you-for-your-hospitality,আতিথেয়তার
+kind-words.this-is-delicious,সুস্বাদু
+kind-words.you-are-very-kind,দয়ালু
+laundry.can-it-be-ready-today,আজকেই
+laundry.how-much-per-kilo,কেজি প্রতি
+laundry.please-do-not-use-bleach,ব্লিচ
+laundry.please-iron-this,ইস্তিরি
+laundry.please-wash-these-clothes,ধুয়ে
+laundry.when-will-it-be-ready,কখন
+laundry.where-is-a-laundromat,লন্ড্রি
+lost-rescue.i-do-not-know-where-i-am,কোথায় আছি
+lost-rescue.i-lost-my-bag,ব্যাগ
+lost-rescue.i-lost-my-passport,পাসপোর্ট
+lost-rescue.i-lost-my-phone,ফোন
+lost-rescue.i-lost-my-wallet,মানিব্যাগ
+lost-rescue.my-child-is-missing,বাচ্চা
+lost-rescue.please-call-the-police,পুলিশ
+lost-rescue.we-are-here,এখানে
+massage-spa.focus-on-back,পিঠে
+massage-spa.focus-on-feet,পায়ের পাতায়
+massage-spa.focus-on-neck,ঘাড়ে
+massage-spa.focus-on-shoulders,কাঁধে
+massage-spa.more-gently,কমান
+massage-spa.please-avoid-this-area,দেবেন না
+massage-spa.please-pause,সাময়িকভাবে
+massage-spa.please-stop,থামুন
+massage-spa.reply-ask-supervisor,ম্যানেজারকে
+massage-spa.reply-cannot-avoid-this-treatment,বাদ দেওয়া যায় না
+massage-spa.reply-does-it-hurt-there,ব্যথা
+massage-spa.reply-i-will-avoid-that-area,হাত দেব না
+massage-spa.reply-which-area-exactly,কোন জায়গায়
+massage-spa.stronger-pressure,জোরে
+massage-spa.that-pressure-is-good,ঠিক
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,অ্যাসপিরিন | আইবুপ্রোফেন
+medical-conditions.i-am-allergic-to-penicillin,পেনিসিলিন
+medical-conditions.i-am-allergic-to-sulfa-drugs,সালফা
+medical-conditions.i-am-diabetic,ডায়াবেটিস
+medical-conditions.i-am-pregnant,গর্ভবতী
+medical-conditions.i-carry-an-adrenaline-injector,অ্যাড্রেনালিন
+medical-conditions.i-have-a-heart-condition,হৃদরোগ
+medical-conditions.i-have-asthma,হাঁপানি
+medical-conditions.i-have-epilepsy,মৃগীরোগ
+medical-conditions.i-need-insulin,ইনসুলিন
+medical-conditions.i-need-my-inhaler,ইনহেলার
+medical-conditions.i-take-blood-thinners,রক্ত পাতলা
+medical-conditions.inject-it-into-my-outer-thigh,উরুর বাইরের
+medical-conditions.my-blood-sugar-is-low,চিনি কমে
+medical-conditions.my-injector-is-in-my-bag,ইনজেক্টর | ব্যাগে
+medical-conditions.please-give-me-sugar-or-juice,চিনি | জুস
+medical-conditions.this-card-lists-my-conditions,কার্ডে
+medical-conditions.this-is-my-medicine,ওষুধ
+outdoors.are-there-dangerous-animals-here,বিপজ্জনক প্রাণী
+outdoors.can-we-camp-here,ক্যাম্প
+outdoors.is-it-safe-to-swim-here,সাঁতার
+payment-receipt.can-we-pay-separately,আলাদা আলাদা
+payment-receipt.how-much-in-total,সব মিলিয়ে
+payment-receipt.i-already-paid,দিয়ে দিয়েছি
+payment-receipt.is-tax-included,ভ্যাট
+payment-receipt.my-card-was-declined,কাজ করেনি
+payment-receipt.pay-by-card,কার্ডে
+payment-receipt.the-bill-is-wrong,ঠিক নেই
+pharmacy-symptoms.antacid,গ্যাসের
+pharmacy-symptoms.anti-diarrhea-medicine,ডায়রিয়ার
+pharmacy-symptoms.antihistamine,অ্যালার্জির
+pharmacy-symptoms.before-or-after-food,খাবার
+pharmacy-symptoms.can-i-get-this-medicine-here,ওষুধ
+pharmacy-symptoms.cough-medicine,কাশির
+pharmacy-symptoms.do-i-need-a-prescription,প্রেসক্রিপশন
+pharmacy-symptoms.how-many-times-a-day,দিনে
+pharmacy-symptoms.how-much-should-i-take,কতটুকু
+pharmacy-symptoms.i-am-vomiting,বমি হচ্ছে
+pharmacy-symptoms.i-feel-dizzy,মাথা ঘুরছে
+pharmacy-symptoms.i-feel-nauseous,বমি বমি ভাব
+pharmacy-symptoms.i-have-a-burn,পুড়ে
+pharmacy-symptoms.i-have-a-cough,কাশি
+pharmacy-symptoms.i-have-a-cut,কেটে
+pharmacy-symptoms.i-have-a-fever,জ্বর
+pharmacy-symptoms.i-have-a-headache,মাথাব্যথা
+pharmacy-symptoms.i-have-a-rash,ফুসকুড়ি
+pharmacy-symptoms.i-have-a-sore-throat,গলাব্যথা
+pharmacy-symptoms.i-have-a-stomach-ache,পেটে
+pharmacy-symptoms.i-have-diarrhea,ডায়রিয়া
+pharmacy-symptoms.i-think-it-is-infected,সংক্রমণ
+pharmacy-symptoms.is-this-safe-during-pregnancy,গর্ভাবস্থায়
+pharmacy-symptoms.motion-sickness-tablets,গাড়িতে বমির
+pharmacy-symptoms.painkiller,ব্যথার
+pharmacy-symptoms.the-pain-is-severe,ব্যথা | বেশি
+pharmacy-symptoms.which-pharmacy-is-open-now,এখন | খোলা
+police-consulate.i-need-an-interpreter,দোভাষী
+police-consulate.i-want-to-contact-my-embassy,দূতাবাসে
+police-consulate.i-want-to-report-a-theft,অভিযোগ
+police-consulate.my-bag-was-stolen,চুরি
+police-consulate.someone-is-following-me,পিছু
+police-consulate.where-is-the-police-station,থানা
+quick-directions.across-from-here,উল্টো দিকে
+quick-directions.go-straight,সোজা
+quick-directions.on-the-left,বাঁ
+quick-directions.on-the-right,ডান
+quick-directions.turn-left,বাঁ
+quick-directions.turn-right,ডান
+room-problems.can-i-change-rooms,বদল
+room-problems.please-send-someone,কাউকে পাঠান
+room-problems.the-air-conditioning-is-broken,এসি
+room-problems.the-heating-does-not-work,হিটার
+room-problems.the-key-does-not-work,চাবিটা
+room-problems.the-light-does-not-work,বাতি
+room-problems.the-room-is-too-noisy,শব্দ
+room-problems.the-toilet-will-not-flush,ফ্লাশ
+room-problems.there-is-a-problem-with-the-room,সমস্যা
+room-problems.there-is-no-hot-water,গরম পানি
+shopping.can-it-be-a-little-cheaper,কম
+shopping.do-you-have-this-in-stock,স্টকে
+shopping.how-much-is-this,দাম
+shopping.i-will-take-this,নেব
+shopping.that-is-too-expensive,অনেক বেশি
+shopping.where-do-i-pay,টাকা
+social-basics.i-do-not-know,জানি না
+taxi.can-you-wait-for-me-here,অপেক্ষা
+taxi.could-you-make-it-colder,বাড়িয়ে
+taxi.could-you-make-it-warmer,কমিয়ে
+taxi.may-i-open-the-window,জানালাটা
+taxi.please-stop-here,থামুন
+taxi.please-take-me-here,নিয়ে চলুন
+taxi.please-turn-around,ইউটার্ন
+time-scheduling.can-we-change-the-time,বদলানো
+time-scheduling.how-long-does-it-take,কত সময়
+time-scheduling.what-day-is-it-today,বার
+time-scheduling.what-time-does-it-close,বন্ধ
+time-scheduling.what-time-does-it-open,খোলে
+time-scheduling.what-time-should-we-meet,দেখা করব
+time-scheduling.when-is-convenient,সুবিধা
+toilets.it-is-out-of-order,কাজ করছে না
+toilets.where-toilet,টয়লেট
+trail-conditions.can-we-return-before-dark,অন্ধকার
+trail-conditions.can-we-return-the-same-way,একই পথে
+trail-conditions.how-long-is-the-full-route,পুরো পথ
+trail-conditions.is-the-path-slippery,পিছল
+trail-conditions.is-the-route-steep,খাড়া
+trail-conditions.is-the-trail-open,খোলা
+trail-transport.do-you-have-a-map,ম্যাপ
+trail-transport.how-long-is-the-wait,অপেক্ষা
+trail-transport.is-there-cell-signal-here,নেটওয়ার্ক
+trail-transport.what-time-is-the-last-shuttle,শেষ শাটল
+trail-transport.when-does-the-cableway-stop,রোপওয়ে
+trail-transport.where-can-we-buy-water,পানি | কিনতে
+trail-transport.where-can-we-refill-water,পানি | ভরে
+transit-rides.can-i-use-this-ticket,চলবে
+transit-rides.do-i-need-to-transfer,বদল
+transit-rides.do-i-need-to-validate,পাঞ্চ
+transit-rides.i-am-in-a-hurry,তাড়া
+transit-rides.i-went-past-my-stop,পেরিয়ে
+transit-rides.is-it-delayed,দেরি
+transit-rides.is-this-direct,সোজা
+transit-rides.please-tell-me-where-to-get-off,নামতে
+transit-rides.what-is-the-next-stop,পরের স্টপ
+transit-rides.what-time-is-the-next-one,পরেরটা
+transit-rides.where-do-i-pay-the-fare,ভাড়া
+transit-rides.where-is-the-subway-station,মেট্রো
+weather.how-cold-at-night,রাতে | ঠান্ডা
+weather.is-it-safe-today,নিরাপদ
+weather.will-it-rain,বৃষ্টি

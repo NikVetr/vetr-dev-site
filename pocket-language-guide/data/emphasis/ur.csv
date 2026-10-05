@@ -1,0 +1,321 @@
+concept_id,key
+about-me.i-am-a-doctor,ڈاکٹر
+about-me.i-am-a-nurse,نرس
+about-me.i-am-a-student,طالب علم | طالبہ
+about-me.i-am-a-teacher,استاد | استانی
+about-me.i-am-an-engineer,انجینئر
+about-me.i-am-retired,ریٹائرڈ
+about-me.i-have-my-own-business,اپنا کاروبار
+about-me.i-work-in-an-office,دفتر
+accessibility.step-free,بغیر سیڑھیوں
+air-travel.i-would-like-a-window-seat,کھڑکی
+air-travel.i-would-like-an-aisle-seat,راستے
+air-travel.my-luggage-did-not-arrive,نہیں پہنچا
+air-travel.where-is-check-in,چیک ان
+air-travel.where-is-the-security-check,سیکیورٹی چیک
+attractions-tickets.are-there-lockers,لاکر
+attractions-tickets.could-you-take-a-photo-for-us,ہماری
+attractions-tickets.do-i-need-a-reservation,بکنگ
+attractions-tickets.may-i-take-photos,تصویر
+attractions-tickets.what-is-the-latest-entry-time,آخری وقت
+attractions-tickets.where-can-i-buy-tickets,ٹکٹ
+board-answers.after-food,بعد
+board-answers.at-the-next-stop,اگلے اسٹاپ
+board-answers.before-food,پہلے
+board-answers.can-you-walk,چلنا
+board-answers.help-is-coming,مدد
+board-answers.how-many,کتنے
+board-answers.i-am-calling-an-ambulance,ایمبولینس
+board-answers.i-am-calling-the-police,پولیس
+board-answers.i-do-not-have-a-phone,فون
+board-answers.i-will-check,معلوم
+board-answers.i-will-find-someone,کوئی مل جائے گا
+board-answers.i-will-show-you,دکھانا
+board-answers.i-will-write-it-down,لکھ
+board-answers.i-would-rather-not-say,نہ بتاؤں
+board-answers.it-is-closed,بند
+board-answers.it-is-free,مفت
+board-answers.it-is-over-there,وہاں
+board-answers.my-name-is-blank,میرا نام
+board-answers.none-of-these,ان میں
+board-answers.not-possible,نہیں ہو سکتا
+board-answers.only-for-customers,گاہکوں
+board-answers.pay-on-board,گاڑی میں
+board-answers.prescription-only,نسخے
+board-answers.see-a-doctor,ڈاکٹر
+board-answers.stay-here,یہیں رکنا
+board-answers.the-hospital-is-close,پاس ہی
+board-answers.there-is-no-wait,انتظار نہیں
+board-answers.we-are-full,جگہ نہیں
+board-answers.what-is-your-name,نام
+board-answers.where-does-it-hurt,درد
+border-customs.here-is-my-passport,پاسپورٹ
+border-customs.i-am-here-for-business,کاروبار
+border-customs.i-am-visiting-family,خاندان
+border-customs.i-have-a-connecting-flight,آگے کی فلائٹ
+border-customs.where-do-i-collect-my-baggage,ملے گا
+color-size-returns.do-you-have-a-bag,شاپر
+color-size-returns.do-you-have-another-size,سائز
+color-size-returns.may-i-try-it-on,پہن
+common-signs.no-photography,منع
+communication.can-you-help-me,مدد
+communication.do-you-speak-english,آپ کو
+communication.i-do-not-speak-this-language,نہیں آتی
+communication.i-do-not-understand,سمجھ نہیں
+communication.please-speak-more-slowly,آہستہ
+dietary-needs.does-it-contain-fish-stock,مچھلی کا شوربہ
+dietary-needs.does-it-contain-pork-fat,سؤر کی چربی
+dietary-needs.does-it-contain-pork-stock,سؤر کا شوربہ
+dietary-needs.i-am-vegan,ویگن
+dietary-needs.i-am-vegetarian,سبزی خور
+dietary-needs.is-this-halal,حلال
+dietary-needs.no-eggs,انڈا
+dietary-needs.no-meat,گوشت، مرغی اور مچھلی
+dietary-needs.no-nuts,بادام، اخروٹ، پستہ، کاجو
+dietary-needs.no-peanuts,مونگ پھلی
+dietary-needs.no-pork,سؤر
+dietary-needs.no-seafood,مچھلی اور جھینگا
+dietary-needs.no-sesame,تل
+directions.can-i-walk-there,پیدل
+directions.can-you-show-me-the-way,راستہ
+directions.how-long-on-foot,کتنی دیر
+directions.is-it-far,دور
+directions.please-show-me-on-the-map,نقشے
+emergency-medical.i-am-bleeding-badly,خون
+emergency-medical.i-am-having-a-severe-allergic-reaction,شدید الرجی
+emergency-medical.i-am-injured,چوٹ
+emergency-medical.i-cannot-breathe,سانس
+emergency-medical.i-feel-unwell,ٹھیک نہیں
+emergency-medical.i-have-chest-pain,سینے
+emergency-medical.i-have-travel-insurance,بیمہ
+emergency-medical.i-need-a-doctor,ڈاکٹر
+emergency-medical.i-think-a-bone-is-broken,ہڈی ٹوٹ
+emergency-medical.it-hurts-here,درد
+emergency-medical.please-call-an-ambulance,ایمبولینس
+emergency-medical.please-call-my-emergency-contact,ایمرجنسی نمبر
+emergency-medical.please-take-me-to-a-hospital,ہسپتال
+emergency-medical.this-is-an-emergency,ایمرجنسی
+emergency-medical.this-person-is-unconscious,بے ہوش
+emergency-medical.where-is-the-nearest-hospital,قریب ترین
+family-intros.this-is-my-brother,بھائی
+family-intros.this-is-my-colleague,ساتھی
+family-intros.this-is-my-daughter,بیٹی
+family-intros.this-is-my-father,والد
+family-intros.this-is-my-husband,شوہر
+family-intros.this-is-my-mother,ماں
+family-intros.this-is-my-partner,پارٹنر
+family-intros.this-is-my-sister,بہن
+family-intros.this-is-my-son,بیٹا
+family-intros.this-is-my-wife,بیوی
+food-ordering.i-want-this,چاہیے
+food-ordering.is-a-table-available,میز خالی
+food-ordering.is-this-vegetarian,سبزی والا
+food-ordering.table-for-two,دو لوگوں
+food-ordering.to-go-please,پیک
+food-ordering.what-do-you-recommend,اچھا
+hiking-parks.how-long-to-the-summit,چوٹی
+hiking-parks.how-long-to-the-viewpoint,ویو پوائنٹ
+hiking-parks.is-this-trail-suitable-for-beginners,نئے لوگوں
+hiking-parks.where-is-the-trailhead,شروع
+hiking-parks.which-route-is-easier,آسان
+hitchhiking.can-you-give-me-a-ride,لفٹ
+hitchhiking.i-can-pay-for-fuel,پیٹرول
+hitchhiking.i-only-need-to-go-to-the-next-town,اگلے شہر
+hitchhiking.is-there-room-for-two,دو لوگوں | جگہ
+hitchhiking.thank-you-for-the-ride,شکریہ
+hitchhiking.where-are-you-going,کہاں
+hotel-basics.are-any-rooms-available,کمرہ
+hotel-basics.how-much-per-night,ایک رات
+hotel-basics.i-have-a-reservation,بکنگ
+hotel-basics.i-would-like-a-non-smoking-room,نو سموکنگ
+hotel-basics.i-would-like-a-quiet-room,پرسکون
+hotel-basics.is-breakfast-included,ناشتہ
+hotel-basics.is-there-a-washing-machine,واشنگ مشین
+hotel-basics.is-there-air-conditioning,اے سی
+hotel-basics.is-wi-fi-free,وائی فائی
+hotel-basics.may-i-see-the-room,دیکھ
+hotel-requests.another-blanket,کمبل
+hotel-requests.another-night,ایک رات اور
+hotel-requests.another-towel-please,تولیہ
+hotel-requests.can-i-check-in-early,جلدی
+hotel-requests.can-i-check-out-later,دیر سے
+hotel-requests.can-i-store-my-luggage,سامان
+hotel-requests.is-there-a-safe,لاکر
+hotel-requests.no-housekeeping,صفائی
+hotel-requests.what-time-does-breakfast-start,ناشتہ
+hotel-requests.what-time-is-check-out,چیک آؤٹ
+in-a-building.is-this-the-correct-entrance,یہی
+introductions.i-am-a-tourist,سیاح
+introductions.i-am-traveling-alone,اکیلا | اکیلی
+introductions.my-name-is,میرا نام
+introductions.this-is-my-friend,دوست
+introductions.we-are-traveling-together,ساتھ
+introductions.what-is-your-name,آپ کا نام
+introductions.where-are-you-from,کہاں سے
+kind-words.i-had-a-wonderful-time,اچھا وقت
+kind-words.i-like-it-very-much,پسند
+kind-words.it-is-beautiful-here,خوبصورت
+kind-words.thank-you-for-everything,ہر چیز
+kind-words.thank-you-for-your-help,مدد
+kind-words.thank-you-for-your-hospitality,مہمان نوازی
+kind-words.this-is-delicious,مزیدار
+kind-words.you-are-very-kind,مہربان
+laundry.can-it-be-ready-today,آج
+laundry.how-much-per-kilo,ایک کلو
+laundry.please-do-not-use-bleach,بلیچ
+laundry.please-iron-this,پریس
+laundry.please-wash-these-clothes,دھلوا
+laundry.when-will-it-be-ready,کب
+laundry.where-is-a-laundromat,لانڈری
+lost-rescue.i-do-not-know-where-i-am,میں کہاں ہوں
+lost-rescue.i-lost-my-bag,بیگ
+lost-rescue.i-lost-my-passport,پاسپورٹ
+lost-rescue.i-lost-my-phone,فون
+lost-rescue.i-lost-my-wallet,بٹوہ
+lost-rescue.my-child-is-missing,بچہ
+lost-rescue.please-call-the-police,پولیس
+lost-rescue.we-are-here,یہاں
+massage-spa.focus-on-back,کمر
+massage-spa.focus-on-feet,پاؤں
+massage-spa.focus-on-neck,گردن
+massage-spa.focus-on-shoulders,کندھوں
+massage-spa.more-gently,ہلکے
+massage-spa.please-avoid-this-area,نہ کیجیے
+massage-spa.please-pause,تھوڑی دیر
+massage-spa.please-stop,روک
+massage-spa.reply-ask-supervisor,منیجر
+massage-spa.reply-cannot-avoid-this-treatment,چھوڑا نہیں جا سکتا
+massage-spa.reply-does-it-hurt-there,درد
+massage-spa.reply-i-will-avoid-that-area,مالش نہیں کرنی
+massage-spa.reply-which-area-exactly,کون سے حصے
+massage-spa.stronger-pressure,زور سے
+massage-spa.that-pressure-is-good,ٹھیک
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,اسپرین | آئبوپروفین
+medical-conditions.i-am-allergic-to-penicillin,پینسلین
+medical-conditions.i-am-allergic-to-sulfa-drugs,سلفا
+medical-conditions.i-am-diabetic,شوگر
+medical-conditions.i-am-pregnant,حاملہ
+medical-conditions.i-carry-an-adrenaline-injector,ایڈرینالین
+medical-conditions.i-have-a-heart-condition,دل
+medical-conditions.i-have-asthma,دمہ
+medical-conditions.i-have-epilepsy,مرگی
+medical-conditions.i-need-insulin,انسولین
+medical-conditions.i-need-my-inhaler,انہیلر
+medical-conditions.i-take-blood-thinners,خون پتلا
+medical-conditions.inject-it-into-my-outer-thigh,ران
+medical-conditions.my-blood-sugar-is-low,شوگر کم
+medical-conditions.my-injector-is-in-my-bag,انجیکٹر | بیگ
+medical-conditions.please-give-me-sugar-or-juice,چینی | جوس
+medical-conditions.this-card-lists-my-conditions,کارڈ
+medical-conditions.this-is-my-medicine,دوا
+outdoors.are-there-dangerous-animals-here,خطرناک جانور
+outdoors.can-we-camp-here,کیمپ
+outdoors.is-it-safe-to-swim-here,تیرنا
+payment-receipt.can-we-pay-separately,الگ الگ
+payment-receipt.how-much-in-total,کُل
+payment-receipt.i-already-paid,دے دیے
+payment-receipt.is-tax-included,ٹیکس
+payment-receipt.my-card-was-declined,نہیں چلا
+payment-receipt.pay-by-card,کارڈ
+payment-receipt.the-bill-is-wrong,غلطی
+pharmacy-symptoms.antacid,تیزابیت
+pharmacy-symptoms.anti-diarrhea-medicine,دستوں
+pharmacy-symptoms.antihistamine,الرجی
+pharmacy-symptoms.before-or-after-food,کھانے
+pharmacy-symptoms.can-i-get-this-medicine-here,دوا
+pharmacy-symptoms.cough-medicine,کھانسی
+pharmacy-symptoms.do-i-need-a-prescription,نسخہ
+pharmacy-symptoms.how-many-times-a-day,کتنی بار
+pharmacy-symptoms.how-much-should-i-take,خوراک
+pharmacy-symptoms.i-am-vomiting,قے
+pharmacy-symptoms.i-feel-dizzy,چکر
+pharmacy-symptoms.i-feel-nauseous,جی متلا
+pharmacy-symptoms.i-have-a-burn,جل گیا
+pharmacy-symptoms.i-have-a-cough,کھانسی
+pharmacy-symptoms.i-have-a-cut,کٹ
+pharmacy-symptoms.i-have-a-fever,بخار
+pharmacy-symptoms.i-have-a-headache,سر
+pharmacy-symptoms.i-have-a-rash,دانے
+pharmacy-symptoms.i-have-a-sore-throat,گلا
+pharmacy-symptoms.i-have-a-stomach-ache,پیٹ
+pharmacy-symptoms.i-have-diarrhea,دست
+pharmacy-symptoms.i-think-it-is-infected,انفیکشن
+pharmacy-symptoms.is-this-safe-during-pregnancy,حمل
+pharmacy-symptoms.motion-sickness-tablets,متلی
+pharmacy-symptoms.painkiller,درد
+pharmacy-symptoms.the-pain-is-severe,درد | شدید
+pharmacy-symptoms.which-pharmacy-is-open-now,ابھی | کھلا
+police-consulate.i-need-an-interpreter,ترجمان
+police-consulate.i-want-to-contact-my-embassy,سفارت خانے
+police-consulate.i-want-to-report-a-theft,رپورٹ
+police-consulate.my-bag-was-stolen,چوری
+police-consulate.someone-is-following-me,پیچھا
+police-consulate.where-is-the-police-station,تھانہ
+quick-directions.across-from-here,اُس پار
+quick-directions.go-straight,سیدھے
+quick-directions.on-the-left,بائیں
+quick-directions.on-the-right,دائیں
+quick-directions.turn-left,بائیں
+quick-directions.turn-right,دائیں
+room-problems.can-i-change-rooms,بدلا
+room-problems.please-send-someone,بھیجیے
+room-problems.the-air-conditioning-is-broken,اے سی
+room-problems.the-heating-does-not-work,ہیٹر
+room-problems.the-key-does-not-work,چابی
+room-problems.the-light-does-not-work,بتی
+room-problems.the-room-is-too-noisy,شور
+room-problems.the-toilet-will-not-flush,فلش
+room-problems.there-is-a-problem-with-the-room,مسئلہ
+room-problems.there-is-no-hot-water,گرم پانی
+shopping.can-it-be-a-little-cheaper,کم
+shopping.do-you-have-this-in-stock,اسٹاک
+shopping.how-much-is-this,کتنے کا
+shopping.i-am-just-looking,بس دیکھ
+shopping.i-will-take-this,لینا
+shopping.that-is-too-expensive,مہنگا
+shopping.where-do-i-pay,پیسے
+social-basics.i-do-not-know,نہیں معلوم
+taxi.can-you-wait-for-me-here,رک
+taxi.could-you-make-it-colder,ٹھنڈا
+taxi.could-you-make-it-warmer,گرم
+taxi.may-i-open-the-window,کھڑکی
+taxi.please-stop-here,روک
+taxi.please-take-me-here,لے چلیے
+taxi.please-turn-around,یو ٹرن
+time-scheduling.can-we-change-the-time,بدلا
+time-scheduling.how-long-does-it-take,وقت
+time-scheduling.what-day-is-it-today,دن
+time-scheduling.what-time-does-it-close,بند
+time-scheduling.what-time-does-it-open,کھلتا
+time-scheduling.what-time-should-we-meet,ملیں
+time-scheduling.when-is-convenient,ٹھیک رہے گا
+toilets.it-is-out-of-order,خراب
+toilets.where-toilet,واش روم
+trail-conditions.can-we-return-before-dark,اندھیرے سے پہلے
+trail-conditions.can-we-return-the-same-way,اسی راستے
+trail-conditions.how-long-is-the-full-route,پورا راستہ
+trail-conditions.is-the-path-slippery,پھسلنے
+trail-conditions.is-the-route-steep,چڑھائی کھڑی
+trail-conditions.is-the-trail-open,کھلا
+trail-transport.do-you-have-a-map,نقشہ
+trail-transport.how-long-is-the-wait,دیر
+trail-transport.is-there-cell-signal-here,سگنل
+trail-transport.what-time-is-the-last-shuttle,آخری شٹل
+trail-transport.when-does-the-cableway-stop,کیبل کار
+trail-transport.where-can-we-buy-water,پانی
+trail-transport.where-can-we-refill-water,پانی بھرنے
+transit-rides.can-i-use-this-ticket,چلے گا
+transit-rides.do-i-need-to-transfer,بدلنی
+transit-rides.do-i-need-to-validate,پنچ
+transit-rides.i-am-in-a-hurry,جلدی
+transit-rides.i-went-past-my-stop,نکل گیا
+transit-rides.is-it-delayed,لیٹ
+transit-rides.is-this-direct,سیدھی
+transit-rides.please-tell-me-where-to-get-off,اترنا
+transit-rides.what-is-the-next-stop,اگلا اسٹاپ
+transit-rides.what-time-is-the-next-one,اگلی
+transit-rides.where-do-i-pay-the-fare,کرایہ
+transit-rides.where-is-the-subway-station,میٹرو
+weather.how-cold-at-night,رات | سردی
+weather.is-it-safe-today,محفوظ
+weather.will-it-rain,بارش
