@@ -5784,3 +5784,65 @@ update finds, and a value that never gets there still fails it. With both change
 On the committed code (1a1ed7fe): the gate 11 of 11, unit 711 of 711, and Chromium 262 of
 263 with one skipped; the four specs this batch added or changed for the counts and speaking
 on tap pass in WebKit as well. The packs were re-rendered whole: 213 pairs changed.
+
+## Batch AI — the owner's long note: a new name and mark, settings that read as a form, offline on purpose, and two switches for whom a sentence is said to
+
+The owner explored the app at length and wrote 140 lines of requests (`tmp/inbox/long-note.txt`,
+untracked). This batch answers them; what is still open is listed at the end.
+
+**Wanderwart.** The app is renamed (Phraselet is taken by a browser extension), with the
+owner's new mark: the green card with a sun for light screens and a blue one with a crescent
+moon for dark, cleaned up within a percent or two of the drawing, larger inside the app icon.
+A backup written under the old name is still read.
+
+**The board.** Speak on tap pulses its switch while it speaks and, held, offers the speeds and
+voices; a hold on a button can say it; the eye, held, shows what every button says and what can
+come back; a button that opens more buttons comes to a point instead of carrying a chevron; the
+footer names the context with its mark; search returns to its results after a press. Attract
+attention carries three switches -- siren, flashlight, red and blue -- and the separate red-and-
+blue button is gone. The buttons can share one size of type or be sized to their words. A
+price is answered on a keypad with the listener's currencies first and every other behind a
+menu. A button's **key words** are bold (and may be coloured -- cold, warm, stop, go), from
+per-language files the research pass writes (`data/emphasis/`, 12 languages so far), and a
+reader marks their own in the editor. The bar's controls move to a row of their own before the
+topic breaks a word. "None of these" opens the translator apps the phone has, and Apple's on an
+iPhone.
+
+**Whom a sentence is said to.** Neutral by default, and two optional switches in the bar where
+the listener's language asks: a man or a woman (Arabic, Czech, Hausa, Hebrew, Punjabi -- the
+fifth row-correction pass's natural forms, merged as variants) and polite or familiar (the
+mechanism, with its research brief; no language has the data yet). Both are listener axes in
+`data/registry/listener-axes.csv`; the settings never ask about the stranger.
+
+**Settings.** One-of-a-few choices are pills; explanations are behind a (?); the message screen's
+parts are tiles over a small drawing that follows them; every section is a framed fieldset; the
+contexts list's settings hold what a context's do. **Before you travel** opens inside the
+settings: the check, links to make a lock-screen card or a pocket card, and on the web every
+language with what saving it costs and a button to save or delete it, save-all and delete-all,
+from `data/offline.json` which the shell build writes.
+
+**The landing page.** The want panel reopens at the top; the "I speak" list is the two-colour
+language menu; a wrapped name leaves its row centred; coming back returns to the same place;
+the footer carries placeholder store badges and a QR dialog. Every page's sticky header now
+stays below the iPhone status bar.
+
+**The studio** (eleven requests, by an agent in a worktree): a section's toggle no longer resets
+other sections' rows; the card autosaves per pair; a chosen format button keeps its width; the
+Dark card switch is gone (the Colours ladder's Dark is the control); the back control leads the
+header; the phone's bars fold, open and drag the whole column; the lock-screen clock preview
+fits; section marks stand as tall as their names; a table's first and last columns sit flush to
+their edges; auto faces steps one at a time on a screen; columns end level at the foot by default.
+
+**A typed name's sounds are guessed** from its letters (`guessSounds`), so the sound keyboard
+starts from a guess the reader hears and corrects; the letter table is a research brief.
+
+**Research** this batch: the fifth row-correction pass, key words for twelve languages (two
+batches; a third running), and the new interface strings in nine catalogues (a second group
+running). Briefs written for what is next: `register-variants.md`, `name-letters.md`, and a sixth
+row-correction pass.
+
+**Still open:** the studio's second bundle (Card/Converse/Quiz as three modes, quiz tracking and
+hands-free mode, the lock-screen override, saved configurations, save to Photos, page N of M,
+per-section format overrides, the warnings modal, "How you speak" inline, drag to reorder); the
+rest of the key words and strings; the register and name-letter research; the "loading /
+typesetting animation" the owner mentioned, which no message in the record describes.
