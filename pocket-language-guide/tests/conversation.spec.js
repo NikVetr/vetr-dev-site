@@ -1245,14 +1245,15 @@ test('a button\'s key words are set in bold, and the reader marks their own', as
     phrases: {
       mine: {
         id: 'mine', label: 'Please stop by the gate', owner: 'Please stop by the gate', listener: '请在门口停',
-        pair: 'zh-Hans__en', created: '2026-10-05T00:00:00.000Z', keys: ['gate'],
+        pair: 'zh-Hans__en', created: '2026-10-05T00:00:00.000Z', keys: ['gate', 'by the'],
       },
     },
     placements: { 'spa/main': ['mine'] },
   })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   const cell = page.locator('[data-button="mine"]');
-  await expect(cell.locator('.board-key')).toHaveText('gate');
+  // Two keys a space apart are one bold run, in the order they stand in the label.
+  await expect(cell.locator('.board-key')).toHaveText('by the gate');
   // The words are unchanged around it, and the bold is a setting.
   await expect(cell.locator('.board-cell-label')).toHaveText('Please stop by the gate');
   await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ boldKeys: false })));

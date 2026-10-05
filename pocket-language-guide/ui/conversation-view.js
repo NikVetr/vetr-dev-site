@@ -1316,10 +1316,18 @@ function emphasised(said, { words, tone }) {
   for (const [at, word] of words.map((w) => /** @type {[number, string]} */ ([said.indexOf(w), w]))
     .filter(([at]) => at >= 0).sort((a, b) => a[0] - b[0])) {
     if (at < from) continue;
-    const b = document.createElement('b');
-    b.className = tone ? `board-key board-key-${tone}` : 'board-key';
-    b.textContent = word;
-    out.push(said.slice(from, at), b);
+    const gap = said.slice(from, at);
+    const last = out.at(-1);
+    // Two keys a space apart -- `two | tickets` -- are one bold run, not two either side
+    // of a plain space.
+    if (last instanceof HTMLElement && !gap.trim()) {
+      last.textContent += gap + word;
+    } else {
+      const b = document.createElement('b');
+      b.className = tone ? `board-key board-key-${tone}` : 'board-key';
+      b.textContent = word;
+      out.push(gap, b);
+    }
     from = at + word.length;
   }
   out.push(said.slice(from));
