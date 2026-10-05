@@ -36,6 +36,9 @@ test('normalise drops case and the punctuation around a phrase', () => {
   // expected answer, which accepts anything, so the strip is discarded.
   assert.equal(normalise('¥'), '¥');
   assert.equal(normalise('₹'), '₹');
+  // Turkish İ is a capital, not a mark.
+  assert.equal(normalise('İki'), 'iki');
+  assert.equal(grade('istanbul', 'İstanbul'), 'right');
 });
 
 test('a mark-only difference is its own verdict, not a pass and not a failure', () => {

@@ -97,7 +97,9 @@ export function normalise(value) {
   // bank grew past the seed that had been picking a different one.
   // The blank a template is *shown* with, `____`, is the same slot, and a reader who
   // types what they see must not be marked down for it.
-  const nfc = value.normalize('NFC').toLowerCase()
+  // Outside a Turkish locale `İ` lowercases to `i` and a combining dot, so a recogniser's
+  // `İki` was not the catalogue's `iki`, and a typed `istanbul` only half-matched.
+  const nfc = value.normalize('NFC').toLowerCase().replace(/i\u0307/gu, 'i')
     .replace(/\{\}|_{2,}/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
