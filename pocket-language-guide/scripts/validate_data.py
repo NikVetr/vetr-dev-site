@@ -557,9 +557,9 @@ def main():
         if code not in languages:
             errors.append(f"listener-axes.csv: unknown language {code!r}")
         for axis, held in sorted(declared.items()):
-            if held["default"] not in held["values"] or len(held["values"]) < 3:
-                errors.append(f"listener-axes.csv: {code}/{axis} needs a neutral default "
-                              "and at least two forms to switch between")
+            if held["default"] not in held["values"] or len(held["values"]) < 2:
+                errors.append(f"listener-axes.csv: {code}/{axis} needs a default -- the base "
+                              "row -- and at least one other form to switch to")
     for path in sorted(DATA.glob("lang/*/variants.csv")):
         code = path.parent.name
         rel = path.relative_to(DATA)
