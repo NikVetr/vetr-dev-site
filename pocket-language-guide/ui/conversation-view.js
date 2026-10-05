@@ -13,6 +13,7 @@ import { t } from './i18n.js';
 import { openBoardMenu } from './board-menu.js';
 import { centreMark, topicMark } from './topic-marks.js';
 import { RATES } from './board-display.js';
+import { installedApp, openApp } from './platform/shell.js';
 
 /** Below this, stop shrinking and let the text scroll instead. */
 const MIN_MESSAGE_PX = 28;
@@ -1344,15 +1345,30 @@ const PAPAGO = /** @type {Record<string,string>} */ ({
 const EAST_ASIAN = new Set(['ja', 'ko', 'zh-Hans']);
 
 /**
+ * The translators' own apps, where the phone has them: an iOS URL scheme or an Android
+ * package each, asked for by `installedApp`. An app found opens in place of its web
+ * page -- set to the pair where its scheme takes one (Google's does) -- because a link
+ * from inside an app went to the browser, not to the app the reader had installed.
+ * Apple's Translate is offered only on an iPhone that has it; it publishes no page.
+ */
+const TRANSLATOR_APPS = /** @type {Record<string, (from: string, to: string) => {ios: string[], android: string[]}>} */ ({
+  'board.openTranslator': (from, to) => ({
+    ios: [`googletranslate://?sl=${GOOGLE[from] ?? from}&tl=${GOOGLE[to] ?? to}`],
+    android: ['com.google.android.apps.translate'],
+  }),
+  'board.openDeepL': () => ({ ios: ['deepl://'], android: ['com.deepl.mobiletranslator'] }),
+  'board.openPapago': () => ({ ios: ['papago://'], android: ['com.naver.labs.translator'] }),
+  'board.openApple': () => ({ ios: ['translate://'], android: [] }),
+});
+
+/**
  * Links that open a translator set from one language to the other: Google's for any
  * pair, DeepL's where it has both languages, and Papago's where one side is Chinese,
  * Japanese or Korean -- the languages it is strongest in -- and it has the other.
  *
- * Web addresses, on purpose: on a phone with the app installed the system hands one
- * to the app, and everywhere else it is the site -- a link that does the right thing
- * on each platform without asking which it is on. Apple's Translate publishes no
- * address a page can open; the share sheet on an iPhone offers it for any text the
- * reader copies.
+ * Web addresses in a browser, where a page cannot know what is installed. Inside the
+ * app each is then checked against the phone's own apps and opens the app where there
+ * is one, and an iPhone with Apple's Translate is offered that too.
  * @param {string} from @param {string} to
  * @param {(key: string) => string} say  the reader's own catalogue: it is their hand on the phone
  */
@@ -1368,15 +1384,30 @@ export function translatorLinks(from, to, say) {
   }
   const p = document.createElement('p');
   p.className = 'board-links';
-  for (const [key, href] of links) {
+  /** @param {string} key @param {string} href */
+  const link = (key, href) => {
     const a = document.createElement('a');
     a.className = 'btn';
     a.href = href;
     a.target = '_blank';
     a.rel = 'noopener';
     a.textContent = `${say(key)} \u2197`;
+    return a;
+  };
+  for (const [key, href] of links) {
+    const a = link(key, href);
     p.append(a);
+    installedApp(TRANSLATOR_APPS[key](from, to)).then((app) => {
+      if (app) a.addEventListener('click', (event) => { event.preventDefault(); openApp(app); });
+    });
   }
+  // No web page to fall back to, so drawn only once the phone says it has the app.
+  installedApp(TRANSLATOR_APPS['board.openApple'](from, to)).then((app) => {
+    if (!app) return;
+    const a = link('board.openApple', app);
+    a.addEventListener('click', (event) => { event.preventDefault(); openApp(app); });
+    p.append(a);
+  });
   return p;
 }
 

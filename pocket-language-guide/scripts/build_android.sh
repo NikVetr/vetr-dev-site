@@ -39,6 +39,12 @@ node -e '
     m = m.replace("</manifest>", "    <uses-permission android:name=\"android.permission.CAMERA\" />\n    <uses-feature android:name=\"android.hardware.camera\" android:required=\"false\" />\n</manifest>");
     fs.writeFileSync(p, m);
   }
+  // "None of these" opens the translator apps themselves where the phone has them, and
+  // Android 11 shows an app only the packages its manifest says it will look for.
+  if (!m.includes("<queries>")) {
+    m = m.replace("</manifest>", "    <queries>\n        <package android:name=\"com.google.android.apps.translate\" />\n        <package android:name=\"com.deepl.mobiletranslator\" />\n        <package android:name=\"com.naver.labs.translator\" />\n    </queries>\n</manifest>");
+    fs.writeFileSync(p, m);
+  }
 '
 # The mark over the template's placeholders (scripts/build_app_icons.mjs draws them),
 # and a launch screen that centres it rather than eleven stretched bitmaps: one

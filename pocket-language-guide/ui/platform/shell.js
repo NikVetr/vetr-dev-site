@@ -22,6 +22,31 @@ export function isNative() {
   return Boolean(/** @type {any} */ (globalThis).Capacitor?.isNativePlatform?.());
 }
 
+/**
+ * The first of these apps this phone has installed, or `null`: asked of the system
+ * through the app launcher, so a browser -- which cannot see the apps -- always gets
+ * `null`. Each candidate is an iOS URL scheme or an Android package name, whichever the
+ * platform asks by; iOS answers only for schemes the app declares it will ask about
+ * (`LSApplicationQueriesSchemes`, in `scripts/build_ios.sh`), Android only for packages
+ * in the manifest's `<queries>` (`scripts/build_android.sh`).
+ * @param {{ios: string[], android: string[]}} candidates
+ * @returns {Promise<string|null>}
+ */
+export async function installedApp(candidates) {
+  const cap = /** @type {any} */ (globalThis).Capacitor;
+  const launcher = cap?.Plugins?.AppLauncher;
+  if (!isNative() || !launcher) return null;
+  for (const url of candidates[/** @type {'ios'|'android'} */ (cap.getPlatform())] ?? []) {
+    if ((await launcher.canOpenUrl({ url })).value) return url;
+  }
+  return null;
+}
+
+/** Open an app `installedApp` found. @param {string} url */
+export function openApp(url) {
+  return /** @type {any} */ (globalThis).Capacitor.Plugins.AppLauncher.openUrl({ url });
+}
+
 /** @type {(() => boolean)|null} the page's own handler, if it registered one */
 let consume = null;
 

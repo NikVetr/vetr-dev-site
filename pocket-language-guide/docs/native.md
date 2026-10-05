@@ -44,6 +44,7 @@ Only what an implemented feature uses, all at Capacitor 8:
 | `@capacitor/preferences` | `ui/platform/store.js` | durable personal data |
 | `@capacitor/share` | `ui/platform/shell.js` | one-way handoff of a sentence, and delivering a file |
 | `@capacitor/filesystem` | `ui/platform/shell.js` | writing an export or a backup where the share sheet can take it |
+| `@capacitor/app-launcher` | `ui/platform/shell.js` | "None of these" opening the translators' own apps (Google Translate, DeepL, Papago, and Apple's Translate on an iPhone) where the phone has them; the schemes and packages it may ask about are declared by `build_ios.sh` (`LSApplicationQueriesSchemes`) and `build_android.sh` (`<queries>`) |
 
 No location, no notifications, no background service. The camera is declared, not
 pluginned: the beacon asks the WebView for it the way it asks a browser, only to

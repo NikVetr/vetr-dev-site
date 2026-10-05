@@ -48,6 +48,9 @@ npm run mobile -- --quiet
 # The beacon reaches the phone's lamp through the camera, as it does in Safari, and a
 # WebView may ask for the camera only if the app says why. Nothing is recorded or shown.
 plutil -replace NSCameraUsageDescription -string "Wanderwart uses the camera's flash only to flash an SOS or a Morse message. Nothing is recorded or shown." ios/App/App/Info.plist
+# "None of these" opens the translators' own apps where the phone has them, and iOS
+# answers whether an app is installed only for the schemes an app declares up front.
+plutil -replace LSApplicationQueriesSchemes -json '["googletranslate","deepl","papago","translate"]' ios/App/App/Info.plist
 # Between the launch screen and the page's first paint the WebView is transparent, and
 # the window behind it is black by default: a black flash on every launch, in light
 # mode too. The window takes the system background, so light and dark each start in
