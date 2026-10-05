@@ -161,8 +161,9 @@
    topic shrinks to fit rather than pushing anything onto a second line. */
 .board-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1) var(--space-2);
   min-inline-size: 0;
   /* **At the foot.** Back, the topic, Turn and the menu are the owner's, and the
      foot of a phone is where the thumb is; the grid gets the top of the screen, where
@@ -176,7 +177,10 @@
      screen is. */
   container-type: inline-size;
 }
-.board-bar .spacer { flex: 1 1 auto; }
+/* The controls keep to the row's end, and go to a row of their own as a group when the
+   topic needs the width -- five of them and a 1.6x text size leave a long name less
+   than its longest word. */
+.board-bar-controls { display: flex; align-items: center; gap: var(--space-2); margin-inline-start: auto; }
 
 /* The topic, stated once. Bold and at the reading size rather than a heading size:
    it has to be unmistakable at a glance -- someone opening the app in a taxi needs
@@ -189,13 +193,13 @@
    a row it needs more. `clamp` against the container rather than a fixed size, so a
    long name like "Massage and spa" comes down instead of pushing the menu off. */
 .board-title {
-  flex: 1 1 auto;
-  min-inline-size: 0;
+  flex: 1 1 6em;
+  /* Never narrower than its longest word: where the controls leave less, they move to
+     the next row instead (`flex-wrap` above). A word wider than a whole row still
+     breaks rather than clips, because clipping a topic is not on offer. */
+  min-inline-size: min-content;
   margin: 0;
-  /* Four controls share the bar now, and at an enlarged text size the topic's
-     longest word can be wider than what they leave it: it breaks inside the word
-     before it clips, because clipping a topic is not on offer. */
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   /* `--fs-3` is the page-heading size, which is what this is: taking the two named
      buttons out of the bar is what made the room for the topic to be set like one.
      `min`, not `clamp`, because a floor is what turns "as large as fits" into "large
