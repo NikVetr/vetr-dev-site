@@ -57,10 +57,8 @@ item     social-basics.excuse-me-sorry      box 119.66 x 12.99
   run     1.78   11.69    6.40  latin-400i 5.53  #111820 ltr  "bù"
   run     9.62   11.69    9.46  latin-400i 5.53  #111820 ltr  "hǎo"
   run    20.52   11.69    7.82  latin-400i 5.53  #111820 ltr  "yìsi"
-  run    57.44    6.08   23.71  latin-700 7.01  #111820 ltr  "Excuse"
-  run    82.98    6.08   11.02  latin-700 7.01  #111820 ltr  "me"
-  run    95.82    6.08    2.91  latin-700 7.01  #111820 ltr  "/"
-  run   100.55    6.08   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run    82.17    6.08   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run   107.70    6.08   11.02  latin-700 7.01  #111820 ltr  "me"
   run    82.33   11.50    8.90  latin-400i 5.22  #3F4A55 ltr  "boo"
   run    92.59   11.50    9.63  latin-400i 5.22  #3F4A55 ltr  "how"
   run   103.58   11.50    6.84  latin-400i 5.22  #3F4A55 ltr  "ee-"
@@ -78,8 +76,6 @@ item     quick-responses.yes-right          box 119.66 x 7.30
   run     1.72    5.69    6.60  cjk-sc-700 6.60  #111820 ltr  "是"
   run    21.78    5.23    6.16  latin-cond-400i 5.40  #111820 ltr  "shì"
   run    38.98    5.55    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
-  run    50.39    5.55    2.67  latin-cond-700 6.50  #111820 ltr  "/"
-  run    54.56    5.55   14.72  latin-cond-700 6.50  #111820 ltr  "right"
   run   111.05    5.17    7.76  latin-cond-400i 5.20  #3F4A55 ltr  "shir"
 
 item     heading:payment-receipt            box 119.66 x 8.97

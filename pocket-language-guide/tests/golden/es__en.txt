@@ -47,10 +47,8 @@ item     social-basics.excuse-me-sorry      box 119.66 x 12.62
   rect    0.00    0.00  0.92 x 12.62  #0B67A3
   rect    0.00   12.40  119.66 x 0.22  #BCC6CF
   run     1.78    5.96   25.93  latin-700 7.30  #111820 ltr  "Perdón"
-  run    57.44    5.96   23.71  latin-700 7.01  #111820 ltr  "Excuse"
-  run    82.98    5.96   11.02  latin-700 7.01  #111820 ltr  "me"
-  run    95.82    5.96    2.91  latin-700 7.01  #111820 ltr  "/"
-  run   100.55    5.96   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run    82.17    5.96   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run   107.70    5.96   11.02  latin-700 7.01  #111820 ltr  "me"
   run    98.45   11.38    9.34  latin-400i 5.22  #3F4A55 ltr  "per-"
   run   107.79   11.38   10.94  latin-400i 5.22  #3F4A55 ltr  "DON"
 
@@ -65,8 +63,6 @@ item     quick-responses.yes-right          box 119.66 x 7.30
   rect    0.00    7.08  119.66 x 0.22  #BCC6CF
   run     1.72    5.58    5.17  latin-cond-700 6.60  #111820 ltr  "Sí"
   run    43.11    5.55    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
-  run    54.52    5.55    2.67  latin-cond-700 6.50  #111820 ltr  "/"
-  run    58.68    5.55   14.72  latin-cond-700 6.50  #111820 ltr  "right"
   run   112.05    5.17    6.77  latin-cond-400i 5.20  #3F4A55 ltr  "see"
 
 item     heading:payment-receipt            box 119.66 x 8.97
@@ -144,14 +140,10 @@ glyphs   latin-400i 5.22   1 block   +0.00  "la"
 glyphs   latin-700 7.30   1 block   +0.00  "Perdón"
 glyphs   latin-700 7.01   1 block   +0.00  "Excuse"
 glyphs   latin-700 7.01   1 block   +0.00  "me"
-glyphs   latin-700 7.01   1 block   +0.00  "/"
-glyphs   latin-700 7.01   1 block   +0.00  "sorry"
 glyphs   latin-400i 5.22   1 block   +0.00  "per-"
 glyphs   latin-400i 5.22   1 block   +0.00  "DON"
 glyphs   latin-cond-700 6.60   1 block   +0.00  "Sí"
 glyphs   latin-cond-700 6.50   1 block   +0.00  "yes"
-glyphs   latin-cond-700 6.50   1 block   +0.00  "/"
-glyphs   latin-cond-700 6.50   1 block   +0.00  "right"
 glyphs   latin-cond-400i 5.20   1 block   +0.00  "see"
 glyphs   latin-cond-700 6.85   1 block   +0.00  "¿Cuánto"
 glyphs   latin-cond-700 6.85   1 block   +0.00  "es"

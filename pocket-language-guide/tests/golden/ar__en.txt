@@ -51,8 +51,6 @@ item     social-basics.excuse-me-sorry      box 119.66 x 15.01
   rect    0.00   14.79  119.66 x 0.22  #BCC6CF
   run     1.78    6.27   23.71  latin-700 7.01  #111820 ltr  "Excuse"
   run    27.32    6.27   11.02  latin-700 7.01  #111820 ltr  "me"
-  run    40.16    6.27    2.91  latin-700 7.01  #111820 ltr  "/"
-  run    44.89    6.27   18.17  latin-700 7.01  #111820 ltr  "sorry"
   run     1.78   11.69    7.96  latin-400i 5.22  #3F4A55 ltr  "low"
   run    11.09   11.69    6.85  latin-400i 5.22  #3F4A55 ltr  "sa-"
   run    17.95   11.69   13.49  latin-400i 5.22  #3F4A55 ltr  "MAHT"
@@ -72,9 +70,7 @@ item     quick-responses.yes-right          box 119.66 x 9.14
   rect    0.00    8.92  119.66 x 0.22  #BCC6CF
   run     1.72    6.09    7.45  latin-cond-400i 5.20  #3F4A55 ltr  "NA-"
   run     9.17    6.09    6.73  latin-cond-400i 5.20  #3F4A55 ltr  "am"
-  run    36.21    6.47    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
-  run    47.62    6.47    2.67  latin-cond-700 6.50  #111820 ltr  "/"
-  run    51.79    6.47   14.72  latin-cond-700 6.50  #111820 ltr  "right"
+  run    56.60    6.47    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
   run    76.34    6.15   13.48  latin-cond-400i 5.40  #111820 ltr  "naʿam"
   run   108.71    5.85   10.10  arabic-700 6.60  #111820 rtl  "نعم"
 
@@ -85,23 +81,23 @@ item     heading:payment-receipt            box 119.66 x 8.97
   run    36.36    5.66    3.51  latin-700 6.14  #111820 ltr  "+"
   run    41.47    5.66   21.50  latin-700 6.14  #111820 ltr  "receipt"
 
-item     payment-receipt.how-much-in-total  box 119.66 x 18.39
-  rect    0.00    0.00  119.66 x 18.39  #F4F6F8
-  rect    0.00    0.00  0.92 x 18.39  #B45100
-  rect    0.00   18.17  119.66 x 0.22  #BCC6CF
-  run     1.72    5.27    9.22  latin-cond-400i 5.30  #3F4A55 ltr  "kam"
-  run    12.15    5.27    5.52  latin-cond-400i 5.30  #3F4A55 ltr  "al-"
-  run     1.72   10.74    9.65  latin-cond-400i 5.30  #3F4A55 ltr  "maj-"
-  run     1.72   16.21   10.85  latin-cond-400i 5.30  #3F4A55 ltr  "MOO"
-  run    25.54    7.68   13.83  latin-cond-700 6.75  #111820 ltr  "How"
-  run    40.92    7.68   17.24  latin-cond-700 6.75  #111820 ltr  "much"
-  run    32.95   14.65    5.90  latin-cond-700 6.75  #111820 ltr  "in"
-  run    40.41   14.65   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
-  run    71.11    7.96    9.57  latin-cond-400i 5.50  #111820 ltr  "kam"
-  run    81.93    7.96    5.73  latin-cond-400i 5.50  #111820 ltr  "al-"
-  run    69.10   13.64   18.56  latin-cond-400i 5.50  #111820 ltr  "majmūʿ?"
-  run   111.17    6.07    7.64  arabic-700 6.85  #111820 rtl  "كم"
-  run    90.88   14.98   27.93  arabic-700 6.85  #111820 rtl  "المجموع؟"
+item     payment-receipt.how-much-in-total  box 119.66 x 15.10
+  rect    0.00    0.00  119.66 x 15.10  #F4F6F8
+  rect    0.00    0.00  0.92 x 15.10  #B45100
+  rect    0.00   14.88  119.66 x 0.22  #BCC6CF
+  run     1.72    5.89   13.83  latin-cond-700 6.75  #111820 ltr  "How"
+  run    17.10    5.89   17.24  latin-cond-700 6.75  #111820 ltr  "much"
+  run    35.90    5.89    5.90  latin-cond-700 6.75  #111820 ltr  "in"
+  run    43.35    5.89   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
+  run     1.72   11.69    9.22  latin-cond-400i 5.30  #3F4A55 ltr  "kam"
+  run    12.15   11.69    5.52  latin-cond-400i 5.30  #3F4A55 ltr  "al-"
+  run    17.66   11.69    9.65  latin-cond-400i 5.30  #3F4A55 ltr  "maj-"
+  run    27.31   11.69   10.85  latin-cond-400i 5.30  #3F4A55 ltr  "MOO"
+  run   111.17    5.89    7.64  arabic-700 6.85  #111820 rtl  "كم"
+  run    81.46    5.89   27.93  arabic-700 6.85  #111820 rtl  "المجموع؟"
+  run    83.71   13.46    9.57  latin-cond-400i 5.50  #111820 ltr  "kam"
+  run    94.53   13.46    5.73  latin-cond-400i 5.50  #111820 ltr  "al-"
+  run   100.26   13.46   18.56  latin-cond-400i 5.50  #111820 ltr  "majmūʿ?"
 
 item     numbers-money.s-n                  box 119.66 x 9.16
   rect    0.00    0.00  119.66 x 9.16  #F4F6F8
