@@ -322,17 +322,19 @@ label { display: block; }
   font-size: 1rem;
   min-block-size: 2.25rem;
 }
-/* **The landing page's header carries the top inset itself**, and its footer the
-   bottom one, in place of the body's padding. The header is sticky at `top: 0`, and with
-   `viewport-fit=cover` the top of the viewport is behind the status bar: padded down by
-   the body it started below the clock, but once scrolled it stuck at the very top with
-   the brand under the time and the battery, and the cards slid past behind both. As its
-   own padding, its paper fills that strip, and `--header-h` -- measured off the header --
-   includes it, so the bar that floats under the header floats under both. At the foot,
-   the footer's own margin and the body's inset stacked, 18px and then 34 more on an
-   iPhone; it is the larger of the two now. Nothing changes where the insets are zero. */
-body.page-gallery { padding-block: 0; }
-.page-gallery .site-header { padding-block-start: calc(env(safe-area-inset-top) + var(--space-2)); }
+/* **A page's sticky header carries the top inset itself**, in place of the body's
+   padding. The header is sticky at `top: 0`, and with `viewport-fit=cover` the top of
+   the viewport is behind the status bar: padded down by the body it started below the
+   clock, but once scrolled it stuck at the very top with the brand under the time and the
+   battery, and the page slid past behind both -- on the landing page, the sheet and the
+   signaller alike. As its own padding, its paper fills that strip, and `--header-h` --
+   measured off the header -- includes it, so the bar that floats under the landing
+   page's header floats under both. The landing page's footer takes the bottom inset
+   too: its own margin and the body's inset stacked, 18px and then 34 more on an iPhone,
+   and it is the larger of the two now. Nothing changes where the insets are zero. */
+body:has(> .site-header) { padding-block-start: 0; }
+body.page-gallery { padding-block-end: 0; }
+.site-header { padding-block-start: calc(env(safe-area-inset-top) + var(--space-2)); }
 /* One inset on a phone whatever the page's own container does -- the gallery's is
    wider, the studio's is full-bleed -- so the mark is in the same place on every
    screen. */
@@ -938,8 +940,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      a brand and a language picker and the sheet page's is a brand and two links, and
      neither of them has the problem this block is here to solve. */
   /* The same vertical padding as every other header: 5px less here put the brand
-     5px higher than on every other screen. */
-  .studio-header { padding: var(--space-2) 0; }
+     5px higher than on every other screen. The top is the shared rule's, which carries
+     the status bar's inset. */
+  .studio-header { padding-block-end: var(--space-2); padding-inline: 0; }
   .studio-header .container { gap: var(--space-1) var(--space-2); }
   /* `order` rather than a different source order, so the desktop header keeps the
      one it is built for. */
