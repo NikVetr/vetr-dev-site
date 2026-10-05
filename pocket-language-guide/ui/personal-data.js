@@ -11,7 +11,7 @@
 // solved layout built from the old edits and has to start again.
 
 import { read as readPersonal, replaceAll, forgetAll } from './board-store.js';
-import { allEdits, restoreEdits, forgetEdits } from './io.js';
+import { allEdits, restoreEdits, forgetEdits, forgetConfigs } from './io.js';
 import { readProfile, writeProfile } from './speaker-settings.js';
 import { readAbout, writeAbout } from './about.js';
 import { readUsage, writeUsage, forgetUsage } from './usage.js';
@@ -59,7 +59,11 @@ export function personalWiring({ onChanged, save, boards }) {
     },
     forget: async () => {
       try {
-        await Promise.all([forgetEdits(), writeProfile({}), writeAbout({}), forgetAll(), forgetUsage()]);
+        // The studio's saved card settings go too: "your settings and your saved card
+        // edits" is what the confirmation promises, and a band can carry the reader's
+        // own text -- a name, a number to call.
+        await Promise.all([forgetEdits(), forgetConfigs(), writeProfile({}), writeAbout({}),
+          forgetAll(), forgetUsage()]);
       } finally {
         onChanged();
       }

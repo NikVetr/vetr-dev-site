@@ -10,6 +10,7 @@ import {
   pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
+import { paperSpec } from '../core/pack.js';
 import { contentBox } from '../core/solve/index.js';
 import { elvenInset, isElven } from '../core/elven-frame.js';
 import { proposeBalance } from '../core/solve/weights.js';
@@ -22,7 +23,9 @@ import { createFormatPanel } from './format-panel.js';
 import { createTree, revealItem } from './content-tree.js';
 import { renderFaces, highlight } from './preview.js';
 import { openItemPopup, closeItemPopup } from './item-popup.js';
-import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
+import {
+  exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits, loadConfig, saveConfig,
+} from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
@@ -47,6 +50,9 @@ const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark', 'parchment'];
  * @param {Error} err
  */
 const unsaved = (err) => console.warn('[plg] card edits not saved:', err.message);
+/** The same for the card's settings, which are kept as they change for the same reason.
+ * @param {Error} err */
+const unkept = (err) => console.warn('[plg] card settings not saved:', err.message);
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
@@ -89,6 +95,18 @@ async function main() {
 
   /** @type {import('../core/types.js').SheetSpec} */
   let spec = makeSpec(ctx, presets, choice);
+  // **The card comes back as it was left.** Every change below is saved as it is
+  // made (`persist`), and a phone closes an app without asking -- so what the studio
+  // opens on is the reader's own card for this pair where there is one, over the
+  // defaults, which still fill in anything a card saved by an older build lacks.
+  const saved = loadConfig(spec.target, spec.source);
+  // The paper's facts are the registry's rather than the reader's, so only which paper
+  // it was comes back: a printer margin corrected in `paper.csv` reaches a saved card.
+  if (saved) {
+    spec = {
+      ...spec, ...saved.spec, paper: paperSpec(ctx.corpus, (saved.spec.paper ?? spec.paper).presetId),
+    };
+  }
   let edits = loadEdits(spec.target, spec.source);
   /** @type {number|null} */ let focused = 0;
   // Grid view is either something the reader asked for or a consequence of there
@@ -104,7 +122,7 @@ async function main() {
   /** @type {ReturnType<typeof createAddTerm>|null} */ let addTerm = null;
   /** @type {(()=>void)|null} */ let detachHandles = null;
   /** @type {ReturnType<typeof setTimeout>|undefined} */ let pending;
-  let pngDpi = 600;
+  let pngDpi = saved?.dpi ?? 600;
 
   let solving = false;
   let dirty = false;
@@ -115,6 +133,7 @@ async function main() {
    * pile up a queue of them.
    */
   function schedule() {
+    persist();
     if (solving) {
       dirty = true;
       return;
@@ -134,13 +153,27 @@ async function main() {
     }, SOLVE_DEBOUNCE_MS);
   }
 
-  const formatConfig = () => ({
+  /**
+   * Keep the card as it stands. Every spec change goes through `schedule`, which
+   * calls this, and the two settings the panel holds itself call it directly. The
+   * pair is left out because the address names it, and the voice because it is the
+   * reader's, read afresh by `makeSpec` wherever a card is made.
+   */
+  function persist() {
+    const { target, source, speaker, ...kept } = spec;
+    saveConfig(target, source, { spec: kept, finish: format.finish(), dpi: pngDpi }).catch(unkept);
+  }
+
+  /** @param {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish */
+  const formatConfig = (finish) => ({
     root: $('format'),
     spec,
     presets,
     corpus: ctx.corpus,
     languages,
     themes,
+    finish,
+    dpi: pngDpi,
     /** @param {Partial<import('../core/types.js').SheetSpec>} patch */
     onChange: async (patch) => {
       marked = null;
@@ -149,11 +182,11 @@ async function main() {
       if (readerChanged) await retranslate();
       schedule();
     },
-    onFinishChange: () => renderCanvas(),
+    onFinishChange: () => { persist(); renderCanvas(); },
     /** @param {number} dpi */
-    onDpiChange: (dpi) => { pngDpi = dpi; },
+    onDpiChange: (dpi) => { pngDpi = dpi; persist(); },
   });
-  let format = createFormatPanel(formatConfig());
+  let format = createFormatPanel(formatConfig(saved?.finish ?? { mode: '', flip: 'short-edge' }));
 
   /**
    * The language the sheet is glossed into is also the language of the interface,
@@ -178,9 +211,15 @@ async function main() {
     // then switching to French silently filed that correction against French and
     // could overwrite what was there.
     edits = loadEdits(spec.target, spec.source);
-    format = createFormatPanel(formatConfig());
+    format = createFormatPanel(formatConfig(format.finish()));
     updateTree = null;
     addTerm = null;
+    // The address names the pair and a reload reads it back from there, so it has to
+    // name the pair on screen -- or a reload after changing the reader would open the
+    // old pair's saved card instead of this one.
+    const url = new URL(location.href);
+    url.searchParams.set('source', spec.source);
+    history.replaceState(history.state, '', url);
   }
 
   // --- banner and quiz ----------------------------------------------------

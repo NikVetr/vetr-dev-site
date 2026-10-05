@@ -360,6 +360,48 @@ test('Custom takes a card size and a palette of your own', async ({ page }) => {
   expect(await painted('#0b67a3')).toBe(0);
 });
 
+test('the card being worked on comes back after a reload', async ({ page }) => {
+  // Every setting is kept as it is made. A phone closes an app without asking, and
+  // the studio used to reopen on the defaults with only the text edits kept.
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const cards = page.getByRole('radiogroup', { name: 'Card size' });
+  const row = (/** @type {string} */ id) => page.locator(`#tree li[data-concept="${id}"] input[type="checkbox"]`);
+  const toilets = page.locator('#tree > li')
+    .filter({ has: page.locator('li[data-concept^="toilets."]') })
+    .locator('summary input[type="checkbox"]');
+  const checked = (/** @type {import('@playwright/test').Locator} */ at) => expect(at).toHaveAttribute('aria-checked', 'true');
+
+  await cards.getByRole('radio', { name: '5×7in', exact: true }).click();
+  await field(page, 'Colours').getByRole('radio', { name: 'Parchment', exact: true }).click();
+  await field(page, 'PNG resolution').getByRole('radio', { name: 'Print', exact: true }).click();
+  await row('social-basics.hello').uncheck();
+  await toilets.uncheck();
+  await expect(row('toilets.where-toilet')).toBeDisabled();
+  await page.getByRole('radio', { name: 'Cut', exact: true }).click();
+  await expect(page.locator('#face-area .duplex')).toBeVisible({ timeout: 60_000 });
+
+  await page.reload();
+  // Cut is part of the card, so the canvas opens on the paired sides it shows.
+  await expect(page.locator('#face-area .duplex')).toBeVisible({ timeout: 90_000 });
+  await checked(cards.getByRole('radio', { name: '5×7in', exact: true }));
+  await checked(field(page, 'Colours').getByRole('radio', { name: 'Parchment', exact: true }));
+  await checked(field(page, 'PNG resolution').getByRole('radio', { name: 'Print', exact: true }));
+  await checked(page.getByRole('radio', { name: 'Cut', exact: true }));
+  await expect(row('social-basics.hello')).not.toBeChecked();
+  await expect(toilets).not.toBeChecked();
+
+  // A change of reader is a change of pair, and the address follows it -- so the
+  // reload after one opens the card on screen, not the old pair's.
+  await page.selectOption('#source', 'de');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  await expect(page).toHaveURL(/source=de/);
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  await checked(page.getByRole('radiogroup', { name: 'Kartengröße' })
+    .getByRole('radio', { name: '5×7in', exact: true }));
+});
+
 test('the gloss menu offers only languages with rows on file', async ({ page }) => {
   // Every registered language has a pack now, so the negative half of this is
   // served rather than found: one language is hollowed out in the coverage report

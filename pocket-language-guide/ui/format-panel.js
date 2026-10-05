@@ -257,6 +257,9 @@ function sampleValues(targetRows, sourceRows, respell, spec) {
  * @property {(finish:''|'cut'|'fold')=>void} onFinishChange  redraw: with a cut or a
  *   fold selected the canvas shows the imposed sheet rather than a single face
  * @property {(dpi:number)=>void} onDpiChange
+ * @property {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish  what is
+ *   done to the paper, which the panel holds rather than the spec
+ * @property {number} dpi  the PNG resolution, likewise
  */
 
 /**
@@ -281,8 +284,8 @@ function flagColoursFor(corpus, target) {
 export function createFormatPanel(input) {
   const { root, presets, corpus, languages, themes } = input;
   let spec = input.spec;
-  let finish = /** @type {''|'cut'|'fold'} */ ('');
-  let flip = /** @type {'short-edge'|'long-edge'} */ ('short-edge');
+  let finish = input.finish.mode;
+  let flip = input.finish.flip;
 
   /** Which geometry preset the current page size corresponds to, if any. */
   const presetOf = () => Object.entries(presets.geometry).find(
@@ -499,7 +502,7 @@ export function createFormatPanel(input) {
 
   const dpi = numericChoice({
     label: t('format.pngResolution'),
-    value: 600,
+    value: input.dpi,
     min: 72,
     max: 1200,
     step: 6,
@@ -518,7 +521,7 @@ export function createFormatPanel(input) {
 
   // --- cutting ------------------------------------------------------------
 
-  const finishNote = el('p', { class: 'small muted panel-note', text: t(FINISH_NOTE_KEYS['']) });
+  const finishNote = el('p', { class: 'small muted panel-note', text: t(FINISH_NOTE_KEYS[finish]) });
   const flipNote = el('p', { class: 'small muted panel-note', text: t(FLIP_NOTE_KEYS[flip]) });
   const flipControl = segmented({
     label: t('format.printerFlip'),
@@ -554,7 +557,6 @@ export function createFormatPanel(input) {
     },
   });
   const cutField = panelField(t('format.finish'), [finishControl.group, finishNote]);
-  flipField.hidden = true;
 
   // The mirror image of the cut control: meaningless off a screen, where the cut is
   // meaningless on one. A phone's operating system draws its clock over the top of

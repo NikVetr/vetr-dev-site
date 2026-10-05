@@ -11,6 +11,7 @@ import { download } from './app.js';
 import * as store from './platform/store.js';
 
 const EDIT_KEY = 'plg.edits';
+const CONFIG_KEY = 'plg.studio';
 
 export const CSV_HEADER = [
   'concept_id', 'section_id', 'template', 'include',
@@ -45,6 +46,48 @@ export function saveEdits(target, source, edits) {
 /** @param {string} target @param {string} source @returns {Promise<void>} */
 export function clearEdits(target, source) {
   return store.remove(`${EDIT_KEY}.${target}__${source}`);
+}
+
+/**
+ * The studio's card as the reader left it: every setting, plus the two things the
+ * format panel holds outside the spec -- what is done to the paper, and the PNG
+ * resolution. `spec` leaves out the pair, which the address names, and the voice,
+ * which is the reader's own setting and is read afresh wherever a card is made.
+ * @typedef {Object} StudioConfig
+ * @property {Partial<import('../core/types.js').SheetSpec>} spec
+ * @property {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish
+ * @property {number} dpi
+ */
+
+/**
+ * Keyed by pair, as the edits are, so each card a reader is working on comes back
+ * as it was left: the app closing mid-card is the commonest way a phone ends a
+ * session, and the settings are most of the work in one.
+ * @param {string} target @param {string} source @returns {StudioConfig|null}
+ */
+export function loadConfig(target, source) {
+  const raw = store.get(`${CONFIG_KEY}.${target}__${source}`);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    // The same rule as a corrupt edit: start from the defaults rather than not at all.
+    console.warn(`[plg] the saved settings for ${target}__${source} are unreadable; starting fresh`);
+    return null;
+  }
+}
+
+/**
+ * @param {string} target @param {string} source @param {StudioConfig} config
+ * @returns {Promise<void>} settled when the settings are on disk, or refused
+ */
+export function saveConfig(target, source, config) {
+  return store.set(`${CONFIG_KEY}.${target}__${source}`, JSON.stringify(config));
+}
+
+/** Drop every pair's saved settings. @returns {Promise<void>} */
+export async function forgetConfigs() {
+  await Promise.all(store.keys(`${CONFIG_KEY}.`).map((key) => store.remove(key)));
 }
 
 /**

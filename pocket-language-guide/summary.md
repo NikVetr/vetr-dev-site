@@ -651,7 +651,14 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   Faces open as a grid, click one to focus it with the rest as a thumbnail strip.
   Clicking a row on a face reveals it in the content tree and vice versa. The
   tree is built once and updated in place so scroll position and expanded
-  sections survive a re-solve.
+  sections survive a re-solve. **The card being worked on is kept as it changes**,
+  per pair, under `plg.studio.<target>__<source>` beside the pair's text edits:
+  every spec field but the pair (the address names it) and the voice (the reader's
+  own setting), plus the finish and the PNG resolution the format panel holds, so a
+  reload or a relaunch reopens the card as it was left. The paper is restored by its
+  preset id, its printer facts coming from the registry; a change of reader rewrites
+  the address, so a reload opens the pair on screen; and Delete everything clears
+  these with the edits.
   - **`ui/quiz.js`** — the banner's *Help me decide*. Three questions set the
     things a newcomer cannot guess at: which sections earn their space, whether
     romanisation and respelling are useful or noise (a reader who knows the script
