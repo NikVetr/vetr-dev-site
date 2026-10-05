@@ -1,4 +1,5 @@
-// Reading a board's message aloud, where the device happens to have a voice for it.
+// Reading a board's message aloud, where the device happens to have a voice for it --
+// and, for the quiz's hands-free mode, hearing an answer (`createListening`, at the foot).
 //
 // A conversation board is a *text* feature and this module is an accessory to it.
 // Nothing here is awaited before a message is drawn, nothing here is fetched to open
@@ -449,3 +450,95 @@ export function createSpeech(
  * calls it.
  */
 export const speech = createSpeech();
+
+/**
+ * Why nothing can be heard in a language, when it cannot: the browser has no
+ * recogniser at all, or the language is one no recogniser has.
+ * @typedef {'unsupported'|'unmapped'} ListenReason
+ */
+
+/**
+ * Hearing an answer, where the platform can: the other half of the Web Speech API.
+ *
+ * **The app hands the microphone to the browser and takes back text; it keeps no
+ * audio and sends none.** What the browser's recogniser does with the audio is the
+ * browser's: Chrome sends it to Google's servers to be transcribed, and Safari uses
+ * Apple's recognition, on the device where it can. The quiz says so where hands-free
+ * is switched on. Android's WebView has no recogniser, so in the Android app this
+ * answers `unsupported`, as it does in Firefox.
+ *
+ * One recognition at a time, each a single utterance: the quiz asks one question and
+ * waits for one answer. The same spoken locales as speaking, and for the same reason
+ * -- `tlh` and `qya` resolve to nothing rather than to a recogniser that would hear
+ * them as something else.
+ * @param {any} [Recognition]  `SpeechRecognition`, or WebKit's prefixed one
+ */
+export function createListening(
+  Recognition = /** @type {any} */ (globalThis).SpeechRecognition
+    ?? /** @type {any} */ (globalThis).webkitSpeechRecognition,
+) {
+  /** @type {any} */ let live = null;
+
+  /**
+   * Whether an answer in this language can be heard, and why not.
+   * @param {string} code @returns {ListenReason|null}
+   */
+  function unavailable(code) {
+    if (!Recognition) return 'unsupported';
+    return spokenFor(code) ? null : 'unmapped';
+  }
+
+  /**
+   * Hear one utterance: what the recogniser thinks was said, its best guess first,
+   * or nothing when nothing was said or the listening was stopped. A refusal -- the
+   * microphone not allowed, no network for a recogniser that needs one -- rejects with
+   * the recogniser's own error name, because the reader has to be told it stopped.
+   * @param {{locale: string}} request  a language code, as `speak` takes one
+   * @returns {Promise<string[]>}
+   */
+  function listen({ locale }) {
+    stop();
+    const spoken = spokenFor(locale);
+    if (!Recognition || !spoken) return Promise.reject(failure(Recognition ? 'unmapped' : 'unsupported', locale));
+    return new Promise((resolve, reject) => {
+      const recognition = new Recognition();
+      live = recognition;
+      recognition.lang = spoken.locale;
+      recognition.interimResults = false;
+      recognition.continuous = false;
+      recognition.maxAlternatives = 5;
+      /** @type {string[]} */ let heard = [];
+      recognition.onresult = (/** @type {any} */ event) => {
+        const result = event.results[event.results.length - 1];
+        heard = [...result].map((alternative) => String(alternative.transcript).trim()).filter(Boolean);
+      };
+      recognition.onerror = (/** @type {any} */ event) => {
+        // Silence and a stop are answers -- nothing heard -- and the end event that
+        // follows resolves them. Anything else is the recogniser refusing.
+        if (event.error === 'no-speech' || event.error === 'aborted') return;
+        live = null;
+        reject(Object.assign(new Error(`listening failed: ${event.error}`), { reason: String(event.error) }));
+      };
+      recognition.onend = () => {
+        if (live === recognition) live = null;
+        resolve(heard);
+      };
+      recognition.start();
+    });
+  }
+
+  /** Stop listening; what is pending resolves with whatever was heard, which is usually nothing. */
+  function stop() {
+    live?.abort();
+    live = null;
+  }
+
+  // A page in the background is not listening to anyone, for the reason it stops speaking.
+  globalThis.document?.addEventListener('visibilitychange', () => { if (globalThis.document.hidden) stop(); });
+  globalThis.addEventListener?.('pagehide', () => stop());
+
+  return { unavailable, listen, stop };
+}
+
+/** The page's ears, over the real browser API. Nothing listens until `listen` is called. */
+export const listening = createListening();

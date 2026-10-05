@@ -48,6 +48,11 @@ npm run mobile -- --quiet
 # The beacon reaches the phone's lamp through the camera, as it does in Safari, and a
 # WebView may ask for the camera only if the app says why. Nothing is recorded or shown.
 plutil -replace NSCameraUsageDescription -string "Wanderwart uses the camera's flash only to flash an SOS or a Morse message. Nothing is recorded or shown." ios/App/App/Info.plist
+# The quiz's hands-free mode hears an answer through the WebView's speech recognition,
+# which asks for the microphone and for Apple's recogniser; an app that has not said
+# why is stopped by iOS the moment a page asks. The app keeps no audio.
+plutil -replace NSMicrophoneUsageDescription -string "Wanderwart listens only while a hands-free quiz waits for your answer. Nothing is recorded or kept." ios/App/App/Info.plist
+plutil -replace NSSpeechRecognitionUsageDescription -string "Hands-free quizzes turn your spoken answer into text with Apple's speech recognition to check it. Wanderwart keeps nothing you say." ios/App/App/Info.plist
 # "None of these" opens the translators' own apps where the phone has them, and iOS
 # answers whether an app is installed only for the schemes an app declares up front.
 plutil -replace LSApplicationQueriesSchemes -json '["googletranslate","deepl","papago","translate"]' ios/App/App/Info.plist

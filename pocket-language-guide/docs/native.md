@@ -49,7 +49,13 @@ Only what an implemented feature uses, all at Capacitor 8:
 No location, no notifications, no background service. The camera is declared, not
 pluginned: the beacon asks the WebView for it the way it asks a browser, only to
 switch the lamp on and off, so `NSCameraUsageDescription` (iOS) and an optional
-`CAMERA` permission (Android) go into the generated projects. The keep-awake path in `ui/platform/wake.js` uses the
+`CAMERA` permission (Android) go into the generated projects. So are the microphone and
+speech recognition on iOS (`NSMicrophoneUsageDescription`,
+`NSSpeechRecognitionUsageDescription`): the quiz's hands-free mode hears an answer
+through WKWebView's own `SpeechRecognition`, which is Apple's recogniser, and iOS stops
+an app whose page asks for either without the app having said why. Android's WebView has
+no recogniser, so there the quiz says hands-free is not available rather than asking for
+a microphone it could not use. The keep-awake path in `ui/platform/wake.js` uses the
 browser's own `navigator.wakeLock`, which the WebView supports.
 
 **Capacitor 8, because iOS 27 requires it.** An app built with the iOS 27 SDK must
@@ -283,6 +289,9 @@ start without all four of `ANDROID_KEYSTORE`, `ANDROID_KEYSTORE_PASSWORD`,
 
 ## Not done
 
+- **Hands-free listening is not device-proven.** The quiz reads questions through the
+  same speech engine the boards use; whether WKWebView starts a recognition after a
+  question has been read, rather than only inside a tap, is for a phone to say.
 - **Not yet on a real phone.** Both apps are verified on an emulator and a simulator,
   not on a device. The lamp is the clearest case: neither has a torch to reach, so
   whether the beacon's camera request lights one -- which it does in Safari on an

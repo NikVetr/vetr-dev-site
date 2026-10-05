@@ -20,7 +20,7 @@ import { mountDrill } from './drill.js';
 import { loadPick, recordAnswer, recordSection, savePick } from './drill-store.js';
 import { readerSections } from './personal-data.js';
 import { el } from './board-menu.js';
-import { applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
+import { applyStatic, languageName, loadCatalogue, loadUiLanguage, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
@@ -167,7 +167,11 @@ async function main() {
     ...makeSpec({ corpus }, presets, choice), ...card,
     target, source, selection: { sections: {}, items: {} }, priority: 0,
   };
-  const { blocks } = await buildContent({ corpus, loadText }, spec, loadEdits(target, source));
+  const [{ blocks }, targetCatalogue] = await Promise.all([
+    buildContent({ corpus, loadText }, spec, loadEdits(target, source)),
+    // Hands-free hears an answer in the target language, and a command said in it.
+    loadCatalogue(target, loadText),
+  ]);
   const sections = sectionsOf(blocks);
   const rows = new Map(sections.flatMap((s) => s.rows.map((row) => [row.conceptId, row])));
 
@@ -222,6 +226,7 @@ async function main() {
     corpus,
     spec,
     choose: picker.node,
+    targetWords: (key) => targetCatalogue.t(key),
     onAnswer: (conceptId, verdict) => { recordAnswer(pair, conceptId, verdict).catch(unkept); },
     // The record is the setup's and the summary's; a question has the page to itself.
     onPhase: (phase) => {

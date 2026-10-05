@@ -12,7 +12,9 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseTable } from '../core/csv.js';
-import { buildDrill, drillPool, grade, normalise } from '../ui/drill.js';
+import {
+  buildDrill, commandIn, drillPool, grade, heardVerdict, normalise, numberIn,
+} from '../ui/drill.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
@@ -343,4 +345,42 @@ test('a template\'s blank, shown or stored, is never part of the answer', () => 
   // The quiz shows a slot as `____`; a reader may type what they see, or nothing there.
   assert.equal(grade('zhù ____ wǎn', 'zhù {} wǎn'), 'right');
   assert.equal(grade('zhù wǎn', 'zhù {} wǎn'), 'right');
+});
+
+// --- hands-free ------------------------------------------------------------------
+
+const NUMBERS = [['one', 'won', 'first'], ['two', 'to', 'too', 'second'], ['three', 'tree', 'third'], ['four', 'for', 'fore', 'fourth']];
+
+test('an option is chosen by its digit, its word or a word a recogniser writes for it', () => {
+  assert.equal(numberIn(['2'], NUMBERS, ['1', '2', '3', '4']), 2);
+  assert.equal(numberIn(['number three.'], NUMBERS, ['1', '2', '3', '4']), 3);
+  // English hears "two" as "to" as often as not, and the recogniser's second guess counts.
+  assert.equal(numberIn(['to'], NUMBERS, ['1', '2', '3', '4']), 2);
+  assert.equal(numberIn(['hello', 'four'], NUMBERS, ['1', '2', '3', '4']), 4);
+  // The reader's own figures, as a reader of Arabic is given them.
+  assert.equal(numberIn(['٣'], NUMBERS, ['١', '٢', '٣', '٤']), 3);
+  assert.equal(numberIn(['five'], NUMBERS, ['1', '2', '3', '4']), 0);
+  assert.equal(numberIn([], NUMBERS, ['1', '2', '3', '4']), 0);
+});
+
+test('a command is a whole word of what was heard, in a spaced script or an unspaced one', () => {
+  const commands = { skip: ['skip', 'next'], repeat: ['repeat', 'again'], stop: ['stop', '停止'] };
+  assert.equal(commandIn(['Skip it'], commands), 'skip');
+  assert.equal(commandIn(['say that again'], commands), 'repeat');
+  assert.equal(commandIn(['停止。'], commands), 'stop');
+  // Inside another word is not the word.
+  assert.equal(commandIn(['nonstop'], commands), null);
+  assert.equal(commandIn(['谢谢'], commands), null);
+});
+
+test('a spoken answer is graded as a typed one, against every way of saying it', () => {
+  // A recogniser's punctuation and its second guess.
+  assert.deepEqual(heardVerdict(['谢谢。'], ['谢谢']), { text: '谢谢。', verdict: 'right' });
+  assert.equal(heardVerdict(['thank you', 'tank you'], ['Thank you'])?.verdict, 'right');
+  // Nobody says the label in brackets, and a merged row is answered by either of its glosses.
+  assert.equal(heardVerdict(['hello'], ['Hello (polite)'])?.verdict, 'right');
+  assert.equal(heardVerdict(['good morning'], ['Hello (polite) / Good morning'])?.verdict, 'right');
+  // The best of the guesses wins, and a wrong answer is still an answer.
+  assert.equal(heardVerdict(['goodbye', 'good bye'], ['Thank you'])?.verdict, 'wrong');
+  assert.equal(heardVerdict([], ['Thank you']), null);
 });

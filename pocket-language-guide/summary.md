@@ -48,6 +48,27 @@ went last. The page shows the four windows' tallies and share right, and the row
 practise -- missed or half-known the last time, the most missed first -- with a reset
 that asks; Delete everything clears both stores.
 
+**Hands-free** reads each question aloud and listens for the answer: the prompt in its
+own voice, then each option's number in the reader's voice and the option in its own --
+a romanisation, respelling or IPA is said as its row's script, being a way of writing
+those sounds -- then the verdict, and on to the next. Speaking is the boards' engine
+(`ui/platform/speech.js`); hearing is `createListening` beside it, over the Web Speech
+API's `SpeechRecognition`, one utterance at a time, in the same spoken locales. A choice
+is a number, heard in the reader's language as a digit (theirs or Latin) or one of the
+catalogue's words for it (`drill.voice.one` lists `one, won, first`); a typed answer is
+heard in its own language and graded by `grade`, against each way of saying it -- each
+gloss of a merged row, with and without its bracketed label -- and the best of the
+recogniser's guesses wins. The answer is tried first and only then the commands --
+skip, repeat, stop -- in the reader's catalogue and the target's, so a gloss that is
+itself "stop" is an answer. Silence or a choice that is not a number is listened for
+once more, then waits for Listen again. Matching is not offered hands-free. Where it
+cannot run -- no recogniser (Firefox, Android's WebView), a language no recogniser hears
+(`tlh`, `qya`), no voice for a language it must read -- the switch is greyed and the
+reason is said under it; a refused microphone stops it with a sentence. The app keeps
+and sends no audio; the help under the switch says what the browser's recogniser does,
+which for Chrome is sending it to Google and for Safari is Apple's recognition, on the
+device where it can.
+
 Header and footer bands can be configured independently, with multiple information
 slots, custom text, colour and full-width or tab placement. The solver reserves their
 space before fitting vocabulary and supports saved specs using the earlier single-band

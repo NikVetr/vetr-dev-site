@@ -1270,6 +1270,14 @@ dialog.quiz legend { font-size: var(--fs--1); color: var(--muted); padding-inlin
 .drill-practise-said { font-weight: 600; overflow-wrap: anywhere; }
 .drill-practise-count { margin-inline-start: auto; }
 .drill-record .usage-actions { margin-block-start: var(--space-2); }
+/* Hands-free: why it cannot run, or what to say, under its switch; and in a question's
+   head what it is doing, as a word and a mark beside it -- a filled dot while it
+   listens, a triangle while it reads. Still, because the word already says it. */
+.drill-voice-note { margin: 0.3em 0 0; }
+.drill-voice-note:empty { display: none; }
+.drill-voice-state[data-state]:not([data-state=""])::before { margin-inline-end: 0.35em; }
+.drill-voice-state[data-state="listening"]::before { content: '●'; color: var(--alert); }
+.drill-voice-state[data-state="speaking"]::before { content: '▶'; color: var(--accent); }
 .drill-seed { width: 8em; font-variant-numeric: tabular-nums; }
 .drill-note { margin: 0 0 var(--space-2); }
 .drill-head { margin-bottom: var(--space-2); }

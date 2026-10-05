@@ -14,7 +14,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createSpeech, resolveSpokenLocale } from '../ui/platform/speech.js';
+import { createListening, createSpeech, resolveSpokenLocale } from '../ui/platform/speech.js';
 
 /** Flush the microtask queue, so an outcome that will arrive has arrived. */
 const flush = () => new Promise((resolve) => { setImmediate(resolve); });
@@ -392,4 +392,68 @@ test('asking what the device can do never makes a sound', () => {
   synth.arrive([voice('Tingting', 'zh-CN'), voice('Samantha', 'en-US')]);
   speech.stop();
   assert.deepEqual(synth.spoken, [], 'only a reader\'s tap speaks');
+});
+
+// --- listening ---------------------------------------------------------------------
+
+/**
+ * A recogniser that hears what the test says it heard. `started` is every instance, so
+ * a test can deliver a result, an error, or the end to the one that is listening.
+ */
+function fakeRecognition() {
+  /** @type {any[]} */ const started = [];
+  class Recognition {
+    constructor() {
+      this.lang = '';
+      /** @type {any} */ this.onresult = null;
+      /** @type {any} */ this.onerror = null;
+      /** @type {any} */ this.onend = null;
+      this.aborted = false;
+    }
+    start() { started.push(this); }
+    abort() { this.aborted = true; this.onerror?.({ error: 'aborted' }); this.onend?.(); }
+    /** @param {string[]} guesses */
+    hear(guesses) {
+      this.onresult?.({ results: [guesses.map((transcript) => ({ transcript }))] });
+      this.onend?.();
+    }
+  }
+  return { Recognition, started };
+}
+
+test('what is heard comes back as the recogniser\'s guesses, best first, in the spoken locale', async () => {
+  const { Recognition, started } = fakeRecognition();
+  const ears = createListening(Recognition);
+  const heard = ears.listen({ locale: 'zh-Hans' });
+  // The same spoken locale speaking uses: Simplified Mandarin is heard as zh-CN.
+  assert.equal(started[0].lang, 'zh-CN');
+  started[0].hear([' 谢谢 ', '谢谢你']);
+  assert.deepEqual(await heard, ['谢谢', '谢谢你']);
+});
+
+test('silence and a stop are nothing heard; a refused microphone is a failure', async () => {
+  const { Recognition, started } = fakeRecognition();
+  const ears = createListening(Recognition);
+  const silent = ears.listen({ locale: 'en' });
+  started[0].onerror({ error: 'no-speech' });
+  started[0].onend();
+  assert.deepEqual(await silent, []);
+
+  const stopped = ears.listen({ locale: 'en' });
+  ears.stop();
+  assert.equal(started[1].aborted, true);
+  assert.deepEqual(await stopped, []);
+
+  const refused = ears.listen({ locale: 'en' });
+  started[2].onerror({ error: 'not-allowed' });
+  started[2].onend();
+  await assert.rejects(refused, (err) => /** @type {any} */ (err).reason === 'not-allowed');
+});
+
+test('a browser with no recogniser, or a language none hears, is said rather than tried', async () => {
+  const { Recognition } = fakeRecognition();
+  assert.equal(createListening(null).unavailable('en'), 'unsupported');
+  assert.equal(createListening(Recognition).unavailable('tlh'), 'unmapped');
+  assert.equal(createListening(Recognition).unavailable('ja'), null);
+  await assert.rejects(createListening(null).listen({ locale: 'en' }));
 });

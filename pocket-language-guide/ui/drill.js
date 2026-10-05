@@ -26,8 +26,9 @@ import { sayable } from '../core/pack.js';
 import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
-import { t } from './i18n.js';
-import { speech } from './platform/speech.js';
+import { languageName, t } from './i18n.js';
+import { helpTip, pills } from './dialog.js';
+import { listening, speech } from './platform/speech.js';
 
 /** How many options a multiple-choice question offers, and the fewest it can be
  * asked with. Below two there is no question, so such a row is dropped. */
@@ -436,6 +437,81 @@ export function buildDrill({ blocks, concepts, kind, prompt, answer, seed, count
   return questions;
 }
 
+// --- hearing an answer ----------------------------------------------------
+
+/** Best first, for choosing among what a recogniser offers. */
+const RANK = { right: 0, marks: 1, wrong: 2 };
+
+/**
+ * The ways an answer may be said aloud: each gloss of a merged row on its own, with
+ * and without what its brackets add -- nobody says "hello (polite)", and a row that
+ * means two things is answered by saying either.
+ * @param {string} answer
+ */
+function sayings(answer) {
+  return answer.split(' / ').flatMap((part) => [part.trim(), sayable(part)]).filter(Boolean);
+}
+
+/**
+ * How well what was heard answers a typed-answer question: the best verdict any of
+ * the recogniser's guesses earns against any way of saying the answer, graded as a
+ * typed answer is -- the same typo budget and the same three outcomes, so a word the
+ * recogniser spelled a letter wrong is still right.
+ * @param {string[]} heard  the recogniser's guesses @param {string[]} answers
+ * @returns {{text:string, verdict:Verdict}|null}  null when nothing was heard
+ */
+export function heardVerdict(heard, answers) {
+  /** @type {{text:string, verdict:Verdict}|null} */ let best = null;
+  for (const text of heard) {
+    for (const answer of answers.flatMap(sayings)) {
+      const verdict = grade(text, answer);
+      if (!best || RANK[verdict] < RANK[best.verdict]) best = { text, verdict };
+    }
+  }
+  return best;
+}
+
+/** What was heard, as words: lower case, punctuation gone. @param {string} text */
+const wordsHeard = (text) => normalise(text).replace(/[\p{P}\p{S}]/gu, ' ').split(/\s+/u).filter(Boolean);
+
+/**
+ * Which option was said: its digit, in Latin figures or the reader's own, or its
+ * number as a word. The words come from the catalogue, where each number is a list of
+ * what a recogniser writes for it -- English hears "two" as `to` as often as not.
+ * @param {string[]} heard @param {string[][]} words  the words for one, two, three, four
+ * @param {string[]} digits  the reader's own figures for one to four
+ * @returns {number}  1-based, or 0 for none
+ */
+export function numberIn(heard, words, digits) {
+  for (const text of heard) {
+    for (const word of wordsHeard(text)) {
+      const at = words.findIndex((list, i) => list.includes(word) || word === String(i + 1) || word === digits[i]);
+      if (at >= 0) return at + 1;
+    }
+  }
+  return 0;
+}
+
+/**
+ * Which command was said, if any: one of its words, as a whole word of what was heard,
+ * or the whole of it in a script that does not space its words.
+ * @param {string[]} heard @param {Record<string, string[]>} commands
+ * @returns {string|null}
+ */
+export function commandIn(heard, commands) {
+  for (const text of heard) {
+    const words = wordsHeard(text);
+    const whole = words.join('');
+    for (const [command, list] of Object.entries(commands)) {
+      if (list.some((word) => words.includes(word) || whole === word.replace(/\s+/gu, ''))) return command;
+    }
+  }
+  return null;
+}
+
+/** A catalogue's list of words, `one, won`, as the words. @param {string} list */
+const listed = (list) => list.split(',').map((word) => normalise(word)).filter(Boolean);
+
 // --- the page --------------------------------------------------------------
 
 /** A template's slot as the blank a reader fills, not the `{}` it is stored as. @param {string} text */
@@ -463,6 +539,8 @@ function el(tag, attrs = {}, kids = []) {
  * @property {Node} [choose]  the page's choice of rows, at the head of the setup
  * @property {(conceptId:string, verdict:Verdict) => void} onAnswer  each row as it is graded
  * @property {(phase:'setup'|'run'|'summary') => void} [onPhase]
+ * @property {(key: string) => string} targetWords  the target language's catalogue, for
+ *   the spoken commands of an answer heard in that language
  */
 
 /**
@@ -470,7 +548,7 @@ function el(tag, attrs = {}, kids = []) {
  * @param {DrillInput} input
  * @returns {{refresh: () => void}}  counts the rows again, after the page's choice moved
  */
-export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPhase }) {
+export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPhase, targetWords }) {
   // The same columns the format panel offers, named the way that control names them
   // -- "Japanese", "Hepburn", "English" rather than "Their script" -- because this is
   // the same vocabulary asked about the same cells. `numeral` is excluded there and
@@ -485,10 +563,52 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
     lang: TARGET_CELLS.has(field) ? spec.target : spec.source,
     dir: LATIN_CELLS.has(field) ? 'ltr' : direction(TARGET_CELLS.has(field) ? spec.target : spec.source),
   });
+  /** @param {string} code */
+  const nameOf = (code) => languageName(code, corpus.languages[code]?.exonym_en ?? code);
+
+  /**
+   * The language a cell is said in. A romanisation, a respelling or IPA is a way of
+   * writing the target's sounds, so what is said for one is its row's own script, in
+   * the target's voice; the literal reading is the reader's own words.
+   * @param {FieldId} field
+   */
+  const saidIn = (field) => (TARGET_CELLS.has(field) && field !== 'literal' ? spec.target : spec.source);
+  /**
+   * A cell as it is said, and in which language.
+   * @param {Card} card @param {FieldId} field @returns {[string, string]}
+   */
+  const spoken = (card, field) => [
+    (saidIn(field) === spec.target ? card.values.script : card.values[field]) ?? '', saidIn(field),
+  ];
+
+  /**
+   * Why hands-free cannot run on these columns, or '' when it can: it needs a
+   * recogniser for the language the answer is said in, and a voice for every language
+   * it reads aloud -- the reader's, for the numbers and the verdicts, and the target's
+   * wherever a question or an answer is in it.
+   */
+  const voiceBlocked = (
+    /** @type {DrillKind} */ kind, /** @type {FieldId[]} */ shown, /** @type {FieldId[]} */ asked,
+  ) => {
+    const hearIn = kind === 'choice' ? spec.source : saidIn(asked[0]);
+    const ear = listening.unavailable(hearIn);
+    if (ear === 'unsupported') return t('drill.voice.noListening');
+    if (ear) return t('drill.voice.noLanguage', { language: nameOf(hearIn) });
+    const said = new Set([spec.source]);
+    for (const field of [...shown, ...asked]) said.add(saidIn(field));
+    for (const code of said) {
+      if (speech.getCapabilities(code).reason) return t('drill.voice.noVoice', { language: nameOf(code) });
+    }
+    return '';
+  };
+
   /** What the setup does when the rows change; nothing once a quiz is running. */
   let recount = () => {};
+  // Voices arrive late in Chrome, and whether hands-free can read a question is theirs.
+  speech.onVoicesChanged(() => recount());
   setup(false);
   return { refresh: () => recount() };
+
 
   /** @param {'setup'|'run'|'summary'} phase @param {Node[]} nodes */
   function show(phase, nodes) {
@@ -517,6 +637,22 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
     const start = /** @type {HTMLButtonElement} */ (el('button', {
       type: 'submit', class: 'primary', text: t('drill.start'),
     }));
+
+    // **Hands-free: the question read aloud, the answer heard.** Offered only where it
+    // can work for the columns chosen, and where it cannot, the reason is said beside
+    // the switch rather than found out after pressing Start.
+    let handsFree = false;
+    const voice = pills({
+      name: 'drill-voice',
+      label: t('drill.voice.label'),
+      options: [{ value: 'off', label: t('drill.voice.off') }, { value: 'on', label: t('drill.voice.on') }],
+      value: 'off',
+      onChange: (value) => { handsFree = value === 'on'; refresh(); },
+    });
+    const [voiceOff, voiceOn] = /** @type {HTMLInputElement[]} */ ([...voice.querySelectorAll('input')]);
+    const voiceHelp = helpTip(t('drill.voice.help'), t('drill.voice.privacy'));
+    voice.querySelector('.pill-name')?.append(voiceHelp.button);
+    const voiceNote = el('p', { class: 'small muted drill-voice-note' });
 
     /**
      * One of the two column lists, built once and synced afterwards.
@@ -587,12 +723,26 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       ));
       for (const option of kind.options) {
         const value = /** @type {DrillKind} */ (option.value);
-        option.disabled = (value === 'match' && pool.length < 2)
+        // Five menus are not a question anyone can answer out loud.
+        option.disabled = (value === 'match' && (pool.length < 2 || handsFree))
           || (value === 'choice' && distinct.size < MIN_OPTIONS);
       }
       if (kind.selectedOptions[0]?.disabled) {
         kind.value = [...kind.options].find((o) => !o.disabled)?.value ?? '';
       }
+      const blocked = kind.value && answer.size
+        ? voiceBlocked(/** @type {DrillKind} */ (kind.value), [...prompt], columns.filter((f) => answer.has(f)))
+        : '';
+      // Unavailable, it is greyed and says why; a switch left on is put back off.
+      voiceOn.disabled = Boolean(blocked);
+      if (blocked && handsFree) {
+        handsFree = false;
+        voiceOff.checked = true;
+      }
+      voiceNote.textContent = blocked || (handsFree ? t('drill.voice.say', {
+        skip: listed(t('drill.voice.skip'))[0], repeat: listed(t('drill.voice.repeat'))[0],
+        stop: listed(t('drill.voice.stop'))[0],
+      }) : '');
       const sections = new Set(pool.map((row) => row.sectionId));
       note.textContent = !prompt.size || !answer.size
         ? t('drill.needBoth')
@@ -607,6 +757,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       el('div', { class: 'field' }, [
         el('label', { for: 'drill-kind' }, [el('span', { text: t('drill.kind') })]), kind,
       ]),
+      el('div', { class: 'field drill-voice' }, [voice, voiceHelp.tip, voiceNote]),
       shown.node,
       asked.node,
       el('div', { class: 'field' }, [
@@ -641,7 +792,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
         answer: askedFields,
         seed: used,
         count: Number(length.value),
-      }), shownFields, used);
+      }), shownFields, used, handsFree);
     });
 
     show('setup', [form]);
@@ -654,19 +805,68 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
 
   /**
    * One question's own controls: its body, how to grade what is in them, and
-   * where the keyboard should land.
-   * @typedef {{body:(Node|string)[], check:(revealed?:boolean)=>void, focus:()=>HTMLElement|null}} Panel
+   * where the keyboard should land -- and, for hands-free, how to choose an option
+   * by its number, or grade an answer that was said rather than typed.
+   * `check` answers with how the row went, for hands-free to say.
+   * @typedef {{body:(Node|string)[], focus:()=>HTMLElement|null, pick?:(i:number)=>void,
+   *   check:(revealed?:boolean, said?:{text:string, verdict:Verdict})=>Verdict}} Panel
    */
 
   /**
    * @param {Question[]} questions
    * @param {FieldId[]} prompt  the columns the question hands the reader
    * @param {string} seed
+   * @param {boolean} handsFree  read each question aloud and listen for its answer
    */
-  function run(questions, prompt, seed) {
+  function run(questions, prompt, seed, handsFree) {
     let at = 0;
     /** @type {Record<Verdict, number>} */
     const tally = { right: 0, marks: 0, wrong: 0 };
+
+    // What hands-free is doing, in words beside a mark that says the same, carried
+    // from one question's head to the next.
+    const voiceState = el('span', { class: 'small drill-voice-state', role: 'status' });
+    /** @param {'speaking'|'listening'|''} state @param {string} text */
+    const voiceSays = (state, text) => {
+      voiceState.dataset.state = state;
+      voiceState.textContent = text;
+    };
+    /** Which hands-free turn is current; anything an older one was waiting on is dropped. */
+    let turn = 0;
+    const interrupt = () => {
+      turn += 1;
+      speech.stop();
+      listening.stop();
+    };
+    /**
+     * Say each part in its own language, in turn. False when the turn was overtaken
+     * or a voice failed -- a failure also ends hands-free, and says so.
+     * @param {[string, string][]} parts @param {number} mine
+     */
+    const sayAll = async (parts, mine) => {
+      for (const [text, code] of parts) {
+        if (mine !== turn) return false;
+        if (!text.trim()) continue;
+        try {
+          if (await speech.speak({ text: sayable(text.replaceAll('{}', ' ')), locale: code }) !== 'completed') return false;
+        } catch (err) {
+          stopHandsFree(t('drill.voice.error', { error: String(/** @type {any} */ (err).reason ?? err) }));
+          return false;
+        }
+      }
+      return mine === turn;
+    };
+    /** @param {string} why */
+    const stopHandsFree = (why) => {
+      handsFree = false;
+      interrupt();
+      voiceSays('', why);
+    };
+    const commands = () => Object.fromEntries(['skip', 'repeat', 'stop'].map((name) => [name, [
+      ...listed(t(`drill.voice.${name}`)), ...listed(targetWords(`drill.voice.${name}`)),
+    ]]));
+    const numberWords = () => ['one', 'two', 'three', 'four'].map((n) => listed(t(`drill.voice.${n}`)));
+    const digits = [1, 2, 3, 4].map((n) => new Intl.NumberFormat(spec.source).format(n));
 
     /** One cell of a prompt, in its own language and direction. */
     const cell = (/** @type {FieldId} */ field, /** @type {string} */ value) => el(
@@ -743,6 +943,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       return {
         body: [promptOf(row), group, mark],
         focus: () => buttons[chosen < 0 ? 0 : chosen],
+        pick: choose,
         check: (revealed = false) => {
           const want = /** @type {string} */ (row.values[field]);
           const right = !revealed && chosen >= 0 && normalise(options[chosen]) === normalise(want);
@@ -768,6 +969,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
           mark.textContent = right ? t('drill.right')
             : revealed ? t('drill.expected', { answer: blank(want) })
               : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
+          return right ? 'right' : 'wrong';
         },
       };
     }
@@ -802,6 +1004,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
         ],
         focus: () => lines[0].pick,
         check: (revealed = false) => {
+          let missed = false;
           for (const line of lines) {
             const want = /** @type {string} */ (line.row.values[field]);
             const right = !revealed && normalise(line.pick.value) === normalise(want);
@@ -813,7 +1016,9 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
             line.mark.textContent = right ? t('drill.right')
               : revealed ? t('drill.expected', { answer: blank(want) })
                 : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
+            missed ||= !right;
           }
+          return missed ? 'wrong' : 'right';
         },
       };
     }
@@ -845,11 +1050,14 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       return {
         body: [promptOf(row), ...body],
         focus: () => boxes[0].box,
-        check: (revealed = false) => {
+        check: (revealed = false, said = undefined) => {
+          // Said rather than typed, the answer is one utterance, graded once against the
+          // row's spoken form, and what was heard goes into the first box in its language.
+          if (said) (boxes.find((b) => saidIn(b.field) === saidIn(question.asks[0])) ?? boxes[0]).box.value = said.text;
           /** @type {Verdict[]} */ const verdicts = [];
           for (const entry of boxes) {
             const want = /** @type {string} */ (row.values[entry.field]);
-            const verdict = revealed ? 'wrong' : grade(entry.box.value, want);
+            const verdict = revealed ? 'wrong' : said?.verdict ?? grade(entry.box.value, want);
             verdicts.push(verdict);
             tally[verdict] += 1;
             // Revealed, the answer goes into the box itself, where the reader
@@ -866,8 +1074,9 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
           }
           // One row asked for in two columns is one row known or not: the record
           // keeps the worse of its answers.
-          onAnswer(row.conceptId, verdicts.includes('wrong') ? 'wrong'
-            : verdicts.includes('marks') ? 'marks' : 'right');
+          const worst = verdicts.includes('wrong') ? 'wrong' : verdicts.includes('marks') ? 'marks' : 'right';
+          onAnswer(row.conceptId, worst);
+          return worst;
         },
       };
     }
@@ -886,19 +1095,23 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       }));
       // Stopping early still says how it went, over the questions answered so far.
       const quit = el('button', { type: 'button', class: 'ghost', text: t('drill.stop') });
-      quit.addEventListener('click', summarise);
+      quit.addEventListener('click', () => { interrupt(); summarise(); });
       let graded = false;
 
-      /** Grade the question, by answer or by giving up on it, and turn Check into Next. */
-      const settle = (/** @type {boolean} */ revealed) => {
+      /**
+       * Grade the question, by answer or by giving up on it, and turn Check into Next.
+       * @param {boolean} revealed @param {{text:string, verdict:Verdict}} [said]
+       */
+      const settle = (revealed, said) => {
         graded = true;
-        panel.check(revealed);
+        const verdict = panel.check(revealed, said);
         // Gone rather than hidden: it is used once per question, and the house button
         // rule sets a display that outranks `[hidden]`.
         reveal.remove();
         if (speak) speak.disabled = false;
         action.textContent = at + 1 < questions.length ? t('drill.next') : t('drill.finish');
         action.focus();
+        return verdict;
       };
 
       // **Not knowing is an answer.** A learner stuck on a row could only guess or
@@ -906,7 +1119,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       // answer. This shows it, in place, and counts the question as missed -- which
       // is what it was.
       const reveal = el('button', { type: 'button', class: 'ghost', text: t('drill.reveal') });
-      reveal.addEventListener('click', () => { if (!graded) settle(true); });
+      reveal.addEventListener('click', () => { if (!graded) { interrupt(); settle(true); } });
 
       // **Hearing it is part of learning it**, and the engine is the board's own.
       // The target text of the row is what is read out -- in a matching question
@@ -935,6 +1148,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
             text: t('drill.progress', { at: at + 1, total: questions.length }),
           }),
           el('span', { class: 'spacer' }),
+          ...(handsFree ? [voiceState] : []),
           el('span', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
         ]),
         ...panel.body,
@@ -944,7 +1158,8 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       ]));
       form.addEventListener('submit', (event) => {
         event.preventDefault();
-        if (!graded) { settle(false); return; }
+        // An answer typed or picked while hands-free is reading or listening is the answer.
+        if (!graded) { interrupt(); settle(false); return; }
         at += 1;
         ask();
       });
@@ -965,23 +1180,101 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
 
       show('run', [form]);
       panel.focus()?.focus();
+      if (handsFree) converse(question, panel, settle, () => form.requestSubmit(action), form);
+    }
+
+    /**
+     * One question, hands-free: read it out, listen, and do what was said -- answer it,
+     * or skip, repeat or stop. A choice that was not a number, or silence, is listened
+     * for once more; after that the reader is asked to press Listen again, rather than
+     * the quiz listening for ever to a room.
+     * @param {Question} question @param {Panel} panel
+     * @param {(revealed:boolean, said?:{text:string, verdict:Verdict}) => Verdict} settle
+     * @param {() => void} next @param {HTMLFormElement} form
+     * @param {boolean} [again]  listening again, without reading the question again
+     * @param {number} [tries]
+     */
+    async function converse(question, panel, settle, next, form, again = false, tries = 0) {
+      const mine = (turn += 1);
+      const row = question.rows[0];
+      const field = question.asks[0];
+      if (!again) {
+        voiceSays('speaking', t('drill.voice.speaking'));
+        /** @type {[string, string][]} */ const parts = [];
+        for (const shown of prompt) {
+          const part = spoken(row, shown);
+          if (!parts.some(([text]) => text === part[0])) parts.push(part);
+        }
+        (question.choices ?? []).forEach((card, i) => {
+          parts.push([digits[i], spec.source], spoken(card, field));
+        });
+        if (!await sayAll(parts, mine)) return;
+      }
+      voiceSays('listening', t('drill.voice.listening'));
+      /** @type {string[]} */ let heard;
+      try {
+        heard = await listening.listen({ locale: question.kind === 'choice' ? spec.source : saidIn(field) });
+      } catch (err) {
+        if (mine !== turn) return;
+        const reason = String(/** @type {any} */ (err).reason ?? err);
+        stopHandsFree(reason === 'not-allowed' || reason === 'service-not-allowed'
+          ? t('drill.voice.denied') : t('drill.voice.error', { error: reason }));
+        return;
+      }
+      if (mine !== turn) return;
+
+      // The answer first: a gloss that is itself "stop" is an answer, not a command.
+      const n = question.kind === 'choice' ? numberIn(heard, numberWords(), digits) : 0;
+      const said = question.kind === 'blank'
+        ? heardVerdict(heard, saidIn(field) === spec.target
+          ? [row.values.script ?? '', row.values.script_alt ?? ''].filter(Boolean)
+          : [row.values[field] ?? ''])
+        : null;
+      const command = (n || (said && said.verdict !== 'wrong')) ? null : commandIn(heard, commands());
+      if (command === 'stop') { interrupt(); summarise(); return; }
+      if (command === 'repeat') { converse(question, panel, settle, next, form); return; }
+      /** @type {Verdict} */ let verdict;
+      if (command === 'skip') {
+        verdict = settle(true);
+      } else if (n && n <= (question.options?.length ?? 0)) {
+        panel.pick?.(n - 1);
+        verdict = settle(false);
+      } else if (said) {
+        verdict = settle(false, said);
+      } else {
+        // Nothing heard, or a choice that was not one of its numbers.
+        if (tries < 1) { converse(question, panel, settle, next, form, true, tries + 1); return; }
+        voiceSays('', heard.length ? t('drill.voice.unclear', { heard: heard[0] }) : t('drill.voice.silent'));
+        const listen = el('button', { type: 'button', text: t('drill.voice.again') });
+        listen.addEventListener('click', () => {
+          listen.remove();
+          converse(question, panel, settle, next, form, true);
+        });
+        form.querySelector('.drill-run > .row:last-child')?.prepend(listen);
+        return;
+      }
+      // Then what it was, out loud, and on to the next question.
+      voiceSays('speaking', t('drill.voice.speaking'));
+      /** @type {[string, string][]} */ const told = command === 'skip' ? [] : [[verdictText(verdict), spec.source]];
+      if (verdict !== 'right') told.push(spoken(row, field));
+      if (await sayAll(told, mine)) next();
     }
 
     function summarise() {
       const total = tally.right + tally.marks + tally.wrong;
+      const summary = t('drill.summary', {
+        right: tally.right, marks: tally.marks, wrong: tally.wrong, total,
+      });
       const again = el('button', { type: 'button', class: 'primary', text: t('drill.again') });
       again.addEventListener('click', () => setup());
       show('summary', [el('div', { class: 'drill-summary' }, [
         el('h2', { text: t('drill.summaryHeading') }),
-        el('p', {
-          text: t('drill.summary', {
-            right: tally.right, marks: tally.marks, wrong: tally.wrong, total,
-          }),
-        }),
+        el('p', { text: summary }),
         el('p', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
         el('div', { class: 'row', style: 'justify-content:flex-end' }, [again]),
       ])]);
       again.focus();
+      if (handsFree) sayAll([[summary, spec.source]], (turn += 1));
     }
 
     recount = () => {};

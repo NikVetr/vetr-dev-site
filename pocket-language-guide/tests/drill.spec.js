@@ -417,3 +417,146 @@ test.describe('quiz mode', () => {
     await expect(record).toContainText('Nothing answered');
   });
 });
+
+test.describe('hands-free', () => {
+  /**
+   * A voice for both languages, which says each utterance in a few milliseconds and
+   * keeps what it said -- or, while `__hold` is set, holds it until `__release()`, so a
+   * graded question can be looked at before hands-free moves on; and a recogniser that
+   * hears, in turn, whatever the test has put in `__heard` -- `null` is silence.
+   * Neither touches a microphone or a speaker.
+   * @param {import('@playwright/test').Page} page @param {{listen?: boolean}} [options]
+   */
+  const fakeSpeech = (page, { listen = true } = {}) => page.addInitScript((canListen) => {
+    const voices = [
+      { name: 'Zh', lang: 'zh-CN', localService: true, default: false, voiceURI: 'zh' },
+      { name: 'En', lang: 'en-US', localService: true, default: true, voiceURI: 'en' },
+    ];
+    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => voices });
+    const g = /** @type {any} */ (globalThis);
+    g.__spoken = [];
+    g.__heard = [];
+    g.__listened = [];
+    g.__hold = false;
+    /** @type {any[]} */ const held = [];
+    g.__release = () => { g.__hold = false; for (const u of held.splice(0)) u.onend?.(); };
+    class FakeUtterance { constructor(/** @type {string} */ text) { this.text = text; } }
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: FakeUtterance, configurable: true });
+    Object.defineProperty(speechSynthesis, 'speak', {
+      configurable: true,
+      value: (/** @type {any} */ u) => {
+        g.__spoken.push({ text: u.text, lang: u.lang });
+        if (g.__hold) held.push(u);
+        else setTimeout(() => u.onend && u.onend(), 5);
+      },
+    });
+    Object.defineProperty(speechSynthesis, 'cancel', { configurable: true, value: () => {} });
+    if (!canListen) {
+      Object.defineProperty(window, 'SpeechRecognition', { value: undefined, configurable: true });
+      Object.defineProperty(window, 'webkitSpeechRecognition', { value: undefined, configurable: true });
+      return;
+    }
+    class FakeRecognition {
+      start() {
+        g.__listened.push(this.lang);
+        // Heard once the test has said something: it waits, as a recogniser does.
+        const poll = setInterval(() => {
+          if (!g.__heard.length) return;
+          clearInterval(poll);
+          const next = g.__heard.shift();
+          if (next === null) this.onerror?.({ error: 'no-speech' });
+          else this.onresult?.({ results: [[{ transcript: next }]] });
+          this.onend?.();
+        }, 20);
+        this.stop = () => clearInterval(poll);
+      }
+      abort() { this.stop?.(); this.onerror?.({ error: 'aborted' }); this.onend?.(); }
+    }
+    Object.defineProperty(window, 'SpeechRecognition', { value: FakeRecognition, configurable: true });
+    Object.defineProperty(window, 'webkitSpeechRecognition', { value: FakeRecognition, configurable: true });
+  }, listen);
+
+  /**
+   * Say something to the recogniser; `hold` keeps hands-free on what it heard until released.
+   * @param {import('@playwright/test').Page} page @param {string|null} said @param {boolean} [hold]
+   */
+  const say = (page, said, hold = false) => page.evaluate(([text, stay]) => {
+    const g = /** @type {any} */ (globalThis);
+    g.__hold = stay;
+    g.__heard.push(text);
+  }, /** @type {[string|null, boolean]} */ ([said, hold]));
+  /** @param {import('@playwright/test').Page} page */
+  const release = (page) => page.evaluate(() => /** @type {any} */ (globalThis).__release());
+
+  test('it reads the question and the numbered options, and an option is chosen by saying its number', async ({ page }) => {
+    await fakeSpeech(page);
+    const drill = await openDrill(page, 'voice-choice');
+    await drill.locator('input[name="drill-voice"][value="on"]').check();
+    await expect(drill.locator('.drill-voice-note')).toContainText('skip');
+    await drill.getByRole('button', { name: 'Start' }).click();
+    await expect(drill.locator('.drill-voice-state')).toHaveText('Listening');
+    await expect(drill.locator('.drill-voice-state')).toHaveAttribute('data-state', 'listening');
+    // The prompt in the reader's voice, then each number in it and each option in the target's.
+    const spoken = await page.evaluate(() => /** @type {any} */ (globalThis).__spoken);
+    const prompt = await drill.locator('.drill-prompt .drill-value').innerText();
+    expect(spoken[0]).toEqual({ text: prompt, lang: 'en-US' });
+    expect(spoken.slice(1, 9).map((/** @type {any} */ u) => u.lang)).toEqual(
+      ['en-US', 'zh-CN', 'en-US', 'zh-CN', 'en-US', 'zh-CN', 'en-US', 'zh-CN']);
+    expect(spoken[1].text).toBe('1');
+    // A number is listened for in the reader's own language.
+    expect(await page.evaluate(() => /** @type {any} */ (globalThis).__listened)).toEqual(['en']);
+    await say(page, 'two', true);
+    await expect(drill.locator('.drill-option').nth(1)).toHaveAttribute('aria-checked', 'true');
+    await expect(drill.locator('.drill-mark')).not.toBeEmpty();
+    // Then it says how that went, in the reader's voice, and moves on by itself.
+    await expect.poll(() => page.evaluate(() => /** @type {any} */ (globalThis).__spoken.at(-1).text))
+      .toMatch(/^(Right\.|Not quite\.)$/);
+    await release(page);
+    await expect(drill.locator('.drill-head')).toContainText('2 of 10');
+    await say(page, 'skip');
+    await expect(drill.locator('.drill-head')).toContainText('3 of 10');
+    await say(page, 'stop');
+    await expect(drill.locator('.drill-summary')).toContainText('Out of 2');
+  });
+
+  test('a spoken answer is heard in the target language and graded, and silence is asked about', async ({ page }) => {
+    await fakeSpeech(page);
+    // Learn the answer from a first pass, as the typed tests do, then say it.
+    const setUp = async () => {
+      const drill = await openDrill(page, 'voice-blank');
+      await drill.locator('select#drill-kind').selectOption('blank');
+      await drill.locator('input[name="drill-voice"][value="on"]').check();
+      await drill.getByRole('button', { name: 'Start' }).click();
+      await expect(drill.locator('.drill-voice-state')).toHaveText('Listening');
+      return drill;
+    };
+    let drill = await setUp();
+    expect((await page.evaluate(() => /** @type {any} */ (globalThis).__listened))[0]).toBe('zh-CN');
+    // Silence twice: it listens once more, then asks to be told to listen again.
+    await say(page, null);
+    await say(page, null);
+    const again = drill.getByRole('button', { name: 'Listen again' });
+    await expect(again).toBeVisible();
+    await expect(drill.locator('.drill-voice-state')).toHaveText('Nothing heard.');
+    await again.click();
+    await say(page, '不对', true);
+    await expect(drill.locator('.drill-mark.wrong')).toHaveCount(1);
+    const verdict = await drill.locator('.drill-mark').innerText();
+    const want = verdict.replace(/^.*?Answer:\s*/s, '').replace(/[⁨⁩]/g, '').trim();
+
+    await release(page);
+    drill = await setUp();
+    await say(page, `${want}。`, true);
+    await expect(drill.locator('.drill-mark.right')).toHaveCount(1);
+    await expect(drill.locator('.drill-answer')).toHaveValue(`${want}。`);
+    await release(page);
+    await expect(drill.locator('.drill-head')).toContainText('2 of 10');
+  });
+
+  test('where the browser cannot listen, it says so and the switch stays off', async ({ page }) => {
+    await fakeSpeech(page, { listen: false });
+    const drill = await openDrill(page, 'voice-none');
+    await expect(drill.locator('.drill-voice-note')).toHaveText(/cannot listen/);
+    await expect(drill.locator('input[name="drill-voice"][value="on"]')).toBeDisabled();
+  });
+});
