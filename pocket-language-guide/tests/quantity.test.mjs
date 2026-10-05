@@ -120,3 +120,10 @@ test('a price is written by CLDR in each language, whole where it is whole', () 
   assert.equal((formatPrice({ kind: 'price', amount: 12.5, currency: 'EUR' }, 'de') ?? '').replace(/\s/g, ' '), '12,50 €');
   assert.equal(formatPrice({ kind: 'price', amount: 250, currency: 'CNY' }, 'tlh'), null);
 });
+
+test('an amount typed in a keypad\'s own digits is read as the same number', () => {
+  assert.deepEqual(parsePrice('٢٥٠', 'EGP'), { ok: true, value: { kind: 'price', amount: 250, currency: 'EGP' } });
+  assert.deepEqual(parsePrice('۱۲,۵۰', 'IRR'), { ok: true, value: { kind: 'price', amount: 12.5, currency: 'IRR' } });
+  assert.deepEqual(parsePrice('২০০', 'BDT'), { ok: true, value: { kind: 'price', amount: 200, currency: 'BDT' } });
+  assert.deepEqual(parseAmount('१५', 'minute'), { ok: true, value: { kind: 'duration', amount: 15, unit: 'minute' } });
+});

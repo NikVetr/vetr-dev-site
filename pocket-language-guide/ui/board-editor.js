@@ -239,8 +239,8 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
         replies: replies.length ? replies : undefined,
       };
       // A comma in whichever script the reader types: Latin, the full-width and the
-      // ideographic one of Chinese and Japanese, and Arabic's.
-      const words = keys.value.split(/[,，、،]/u).map((w) => w.trim()).filter(Boolean);
+      // ideographic one of Chinese and Japanese, Arabic's, and Ethiopic's.
+      const words = keys.value.split(/[,，、،፣]/u).map((w) => w.trim()).filter(Boolean);
       if (!values.label && !values.owner) return;
       if (existing) {
         // Editing the wording invalidates any clip recorded against the old words.

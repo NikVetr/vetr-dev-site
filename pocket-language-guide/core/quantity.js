@@ -193,6 +193,23 @@ export const COMMON_WAITS = /** @type {Duration[]} */ ([
   { kind: 'duration', amount: 2, unit: 'hour' },
 ]);
 
+/**
+ * The zero of each run of decimal digits a phone's keypad may type: a Persian, Arabic,
+ * Bengali or Devanagari keyboard sends its own digits, and `\d` matches only 0-9, so an
+ * amount typed in them was refused as not a number.
+ */
+const ZEROS = [0x660, 0x6f0, 0x7c0, 0x966, 0x9e6, 0xa66, 0xae6, 0xb66, 0xbe6, 0xc66, 0xce6,
+  0xd66, 0xde6, 0xe50, 0xed0, 0xf20, 0x1040, 0x1090, 0x17e0, 0x1810, 0xff10];
+
+/** A typed amount with any script's digits as 0-9, before it is read. @param {string} raw */
+function asciiDigits(raw) {
+  return raw.replace(/\p{Nd}/gu, (d) => {
+    const cp = /** @type {number} */ (d.codePointAt(0));
+    const zero = ZEROS.find((z) => cp >= z && cp <= z + 9);
+    return zero === undefined ? d : String(cp - zero);
+  });
+}
+
 /** The most a keypad will accept, per unit. Past these the answer is a different unit. */
 const CEILING = { minute: 600, hour: 48, day: 30 };
 
@@ -207,7 +224,7 @@ const CEILING = { minute: 600, hour: 48, day: 30 };
  * @returns {{ok:true, value:Duration} | {ok:false, reason:'empty'|'not-a-number'|'too-small'|'too-large'}}
  */
 export function parseAmount(raw, unit) {
-  const text = raw.trim();
+  const text = asciiDigits(raw).trim();
   if (!text) return { ok: false, reason: 'empty' };
   if (!/^\d+$/.test(text)) return { ok: false, reason: 'not-a-number' };
   const amount = Number(text);
@@ -230,7 +247,7 @@ const COUNT_CEILING = 1_000_000;
  * @returns {{ok:true, value:Count} | {ok:false, reason:'empty'|'not-a-number'|'too-large'}}
  */
 export function parseCount(raw) {
-  const text = raw.trim();
+  const text = asciiDigits(raw).trim();
   if (!text) return { ok: false, reason: 'empty' };
   if (!/^\d+$/.test(text)) return { ok: false, reason: 'not-a-number' };
   const amount = Number(text);
@@ -247,7 +264,7 @@ export function parseCount(raw) {
  * @returns {{ok:true, value:Price} | {ok:false, reason:'empty'|'not-a-number'|'too-large'}}
  */
 export function parsePrice(raw, currency) {
-  const text = raw.trim();
+  const text = asciiDigits(raw).trim();
   if (!text) return { ok: false, reason: 'empty' };
   const at = /^(\d+)(?:[.,](\d{1,2}))?$/.exec(text);
   if (!at) return { ok: false, reason: 'not-a-number' };
