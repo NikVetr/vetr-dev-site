@@ -91,17 +91,44 @@ test.describe('a multi-page export', () => {
     await expect(panel).toBeVisible({ timeout: 120_000 });
     const pages = panel.locator('.saved-page');
     expect(await pages.count()).toBeGreaterThan(1);
-    // Every page has its own picture, its own save and its own open.
+    // Every page has its own picture, its own save and its own open -- named and
+    // offered above the picture, in the frame they share.
     await expect(pages.first().locator('img')).toBeVisible();
     await expect(pages.first().locator('button')).toHaveCount(1);
     const open = pages.first().locator('a[target="_blank"]');
     await expect(open).toHaveAttribute('href', /^blob:/);
+    expect(await pages.first().evaluate((p) => [...p.children].map((c) => c.tagName)))
+      .toEqual(['DIV', 'IMG']);
+    await expect(pages.first().locator('.saved-page-label')).toHaveText(/^Page 1 of \d+$/);
     // And nothing was downloaded without being asked for -- least of all a zip.
     expect(await page.evaluate(() => window.__downloads)).toEqual([]);
 
     // The zip is still one click for whoever wants it.
     await expect(panel.getByRole('button', { name: /zip/i })).toBeVisible();
   });
+});
+
+test('in the app, Open shows the page over the app, which has no tabs to open it in', async ({ page }) => {
+  // The shell hands a `target="_blank"` link to the system, which cannot open a
+  // `blob:` address -- so on a phone Open did nothing at all.
+  await page.setViewportSize(PHONE);
+  await page.addInitScript(() => { /** @type {any} */ (window).Capacitor = { isNativePlatform: () => true, Plugins: {} }; });
+  await page.goto('/sheet.html?target=es&source=en');
+  await expect(page.locator('.sheet-preview .face svg').first()).toBeVisible();
+  await page.evaluate(() => {
+    [...document.querySelectorAll('#controls button')]
+      .find((b) => /phone screen/i.test(b.textContent || ''))?.click();
+  });
+  await expect(page.locator('#status')).toContainText('Images:');
+  await page.locator('#png').click();
+  const first = page.locator('#saved-images .saved-page').first();
+  await expect(first).toBeVisible({ timeout: 120_000 });
+  await expect(first.locator('a[target="_blank"]')).toHaveCount(0);
+  await first.getByRole('button', { name: 'Open' }).click();
+  const viewer = page.locator('dialog.page-viewer');
+  await expect(viewer).toBeVisible();
+  await expect(viewer.locator('img')).toHaveAttribute('src', /^blob:/);
+  await expect(viewer.locator('.dialog-title')).toHaveText(/^Page 1 of \d+$/);
 });
 
 test.describe('editing a row on a phone', () => {

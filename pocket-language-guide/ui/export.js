@@ -8,6 +8,8 @@ import { planToSvg } from '../render/svg.js';
 import { planToPdf } from '../render/pdf.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
 import { loadBytes, loadText, download } from './app.js';
+import { isNative } from './platform/shell.js';
+import { dialogHead } from './dialog.js';
 import { t } from './i18n.js';
 
 /** @type {Map<string,string>} */ const dataUriCache = new Map();
@@ -193,7 +195,11 @@ export function showSavedImages(box, files, name) {
     const url = URL.createObjectURL(new Blob([/** @type {BlobPart} */ (file.bytes.slice())],
       { type: file.type }));
     shownUrls.push(url);
+    const name = t('quick.imageOf', { n: i + 1, total: files.length });
 
+    // **Each page in a frame with its own name and buttons, above it.** Under the
+    // picture, a page's buttons sat nearer the top of the next page than the bottom of
+    // their own, so which page "Save" saved was a guess.
     const row = document.createElement('div');
     row.className = 'saved-page';
 
@@ -201,33 +207,63 @@ export function showSavedImages(box, files, name) {
     // holding it -- the route that needs no button at all.
     const img = document.createElement('img');
     img.src = url;
-    img.alt = t('quick.imageOf', { n: i + 1, total: files.length });
+    img.alt = name;
 
     const label = document.createElement('span');
     label.className = 'saved-page-label';
-    label.textContent = t('quick.imageOf', { n: i + 1, total: files.length });
+    label.textContent = name;
 
     const save = document.createElement('button');
     save.type = 'button';
     save.textContent = t('export.savePage');
     save.addEventListener('click', () => downloadOne(file));
 
-    // A real link rather than a scripted `window.open`, so it is middle-clickable,
-    // long-pressable and not eaten by a popup blocker.
+    const buttons = document.createElement('div');
+    buttons.className = 'row';
+    buttons.append(label, save, openControl(url, name));
+    row.append(buttons, img);
+    box.append(row);
+  }
+  box.hidden = false;
+}
+
+/**
+ * Open one page on its own.
+ *
+ * In a browser, a real link to a new tab rather than a scripted `window.open`, so it is
+ * middle-clickable, long-pressable and not eaten by a popup blocker. **An app has no
+ * tabs**: the shell hands a `target="_blank"` link to the system, which cannot open a
+ * `blob:` address, so on a phone Open did nothing. There the page opens over the app
+ * instead, the screen's width, where pinching zooms it.
+ * @param {string} url @param {string} name
+ */
+function openControl(url, name) {
+  if (!isNative()) {
     const open = document.createElement('a');
     open.className = 'btn ghost';
     open.href = url;
     open.target = '_blank';
     open.rel = 'noopener';
     open.textContent = t('export.openPage');
-
-    const buttons = document.createElement('div');
-    buttons.className = 'row';
-    buttons.append(label, save, open);
-    row.append(img, buttons);
-    box.append(row);
+    return open;
   }
-  box.hidden = false;
+  const open = document.createElement('button');
+  open.type = 'button';
+  open.className = 'ghost';
+  open.textContent = t('export.openPage');
+  open.addEventListener('click', () => {
+    const panel = /** @type {HTMLDialogElement} */ (document.createElement('dialog'));
+    panel.className = 'speaker-settings page-viewer';
+    panel.setAttribute('aria-label', name);
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = name;
+    panel.append(dialogHead({ title: name, close: t('gallery.previewClose'), onClose: () => panel.close() }), img);
+    panel.addEventListener('close', () => panel.remove());
+    document.body.append(panel);
+    panel.showModal();
+  });
+  return open;
 }
 
 /**

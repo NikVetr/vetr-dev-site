@@ -2522,8 +2522,12 @@ text field at 16px or more wherever the pointer is coarse.
 
 **A multi-page PNG is laid out, not zipped.** Neither mobile OS unzips, and the
 phone-screen preset produces twenty-five images, so the archive was a file the reader
-could not open. One row per page with its own save and open, plus save-all and
-download-as-zip for the set. The share sheet alone was not enough:
+could not open. One frame per page -- its name, its own save and open above the
+picture, in one outline, so the buttons belong to the page under them rather than to
+the next one down -- plus save-all and download-as-zip for the set. Open is a link to a
+new tab in a browser; the app has no tabs, and the shell hands a `target="_blank"` link
+to the system, which cannot open a `blob:` address, so there it opens the page over the
+app in a dialog instead. The share sheet alone was not enough:
 `navigator.share` needs transient user activation and rasterising twenty-five faces
 outlasts the activation from the export button, so it threw and dropped the reader
 back to the zip -- it has a button of its own now, so its click is its activation.

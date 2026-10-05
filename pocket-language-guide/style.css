@@ -760,14 +760,21 @@ dialog.section-format .panel-field:last-child { margin-block-end: 0; }
 }
 .saved-images[hidden] { display: none; }
 .saved-images figcaption { font-size: var(--fs--1); color: var(--muted); }
-/* One page per row: the picture, then its own save and open. Big enough to press
-   and hold, which is the route that needs no button at all on either mobile OS. */
-.saved-page { display: flex; flex-direction: column; gap: var(--space-1); }
+/* One page per frame: its name with its own save and open, then the picture, in one
+   outline so the buttons belong to the page under them. Big enough to press and hold,
+   which is the route that needs no button at all on either mobile OS. */
+.saved-page {
+  display: flex; flex-direction: column; gap: var(--space-1);
+  border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
+}
 .saved-page img {
   display: block; width: 100%; height: auto;
-  border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff;
+  border: 1px solid var(--line-soft); background: #fff;
 }
 .saved-page .row { align-items: center; gap: var(--space-1); }
+/* A page opened over the app, the screen's width (`openControl` in `ui/export.js`). */
+dialog.page-viewer { max-width: min(96vw, 60rem); }
+dialog.page-viewer img { display: block; width: 100%; height: auto; background: #fff; }
 .saved-page-label {
   font-size: var(--fs--1); color: var(--muted); margin-inline-end: auto;
 }
