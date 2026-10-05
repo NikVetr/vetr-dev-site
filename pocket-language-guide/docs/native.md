@@ -135,6 +135,15 @@ holding the only copy of someone's own phrases is not acceptable. An install tha
 predates the adapter is migrated forward on first launch, never backward, and the
 source copy is not deleted.
 
+**A picture to Photos.** Every export goes through `deliver()`, a file in the cache
+handed to the share sheet as a file URL, for which iOS offers Save to Files and not Save
+Image. So in the app a PNG is shown first, even a single one, with Save image beside
+Save as a file: Save image hands the picture itself to the WebView's Web Share API from
+its own press -- the render outlasts the export button's activation -- and the sheet that
+opens is the one in which iOS offers Save Image. Shown only where the WebView can share
+a file; Android's WebView has no Web Share, so there the page keeps its one Save, whose
+chooser offers the gallery apps. Not yet seen on a phone (below).
+
 **Handoff.** `handOff(text)` opens the native share sheet with one sentence and
 nothing else. One way: no result is captured and nothing is promised about what the
 other application does. A cancelled sheet is not a failure and must not trigger a
@@ -289,6 +298,8 @@ start without all four of `ANDROID_KEYSTORE`, `ANDROID_KEYSTORE_PASSWORD`,
 
 ## Not done
 
+- **Save image is not device-proven.** That WKWebView's Web Share offers Save Image for a
+  shared PNG, as Safari's does, is for an iPhone to confirm.
 - **Hands-free listening is not device-proven.** The quiz reads questions through the
   same speech engine the boards use; whether WKWebView starts a recognition after a
   question has been read, rather than only inside a tap, is for a phone to say.

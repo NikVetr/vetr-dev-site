@@ -131,6 +131,35 @@ test('in the app, Open shows the page over the app, which has no tabs to open it
   await expect(viewer.locator('.dialog-title')).toHaveText(/^Page 1 of \d+$/);
 });
 
+test('in the app, one picture is shown with Save image, which hands the image itself to the share sheet', async ({ page }) => {
+  // A file handed to the share sheet is a file, which iOS offers Save to Files for and
+  // not Save Image -- so the picture itself is shared, from a press of its own.
+  await page.setViewportSize(PHONE);
+  await page.addInitScript(() => {
+    const g = /** @type {any} */ (window);
+    g.Capacitor = { isNativePlatform: () => true, Plugins: {} };
+    g.__shared = [];
+    Object.defineProperty(navigator, 'canShare', { configurable: true, value: (/** @type {any} */ d) => Boolean(d?.files?.length) });
+    Object.defineProperty(navigator, 'share', {
+      configurable: true,
+      value: async (/** @type {any} */ d) => { g.__shared.push(d.files.map((/** @type {File} */ f) => `${f.type} ${f.name}`)); },
+    });
+  });
+  await page.goto('/customize.html?target=zh-Hans&source=en&geometry=phone-19-5x9');
+  await expect(page.locator('.face.focused svg').first()).toBeVisible({ timeout: 90_000 });
+  const lock = page.locator('.panel-field').filter({ has: page.locator('.panel-field-title', { hasText: 'Lock screen' }) });
+  await lock.getByRole('radio', { name: 'Beginner' }).click();
+  await expect(page.locator('#status')).toContainText('Faces: 1', { timeout: 90_000 });
+  await page.locator('#png').click();
+  const shown = page.locator('#saved-images .saved-page');
+  await expect(shown).toHaveCount(1, { timeout: 120_000 });
+  // One picture is its own set: no Save all, no zip.
+  await expect(page.locator('#saved-images').getByRole('button', { name: /zip/i })).toHaveCount(0);
+  await expect(shown.getByRole('button', { name: 'Save as a file' })).toBeVisible();
+  await shown.getByRole('button', { name: 'Save image' }).click();
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).__shared)).toEqual([[expect.stringMatching(/^image\/png .*\.png$/)]]);
+});
+
 test.describe('editing a row on a phone', () => {
   test.use({ viewport: PHONE, hasTouch: true, isMobile: true });
 

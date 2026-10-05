@@ -2623,6 +2623,12 @@ app in a dialog instead. The share sheet alone was not enough:
 `navigator.share` needs transient user activation and rasterising twenty-five faces
 outlasts the activation from the export button, so it threw and dropped the reader
 back to the zip -- it has a button of its own now, so its click is its activation.
+**In the app a picture is shown before it is saved, even one**, for the same reason: a
+file handed to the share sheet through `deliver()` is a file, which iOS offers Save to
+Files for and not Save Image, so each page in the app has a Save image that shares the
+picture itself through the Web Share API, from its own press -- the sheet in which iOS
+offers Save Image, to Photos -- beside Save as a file. Where the WebView cannot share a
+file, as Android's cannot, the page has its one Save, as before.
 
 **The lock screen is drawn over the space the card leaves for it.** Reserved space is
 invisible, so a phone preset looked like it had merely made the sheet smaller. The

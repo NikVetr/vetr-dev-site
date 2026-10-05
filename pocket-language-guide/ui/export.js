@@ -85,8 +85,7 @@ export class NothingToExport extends Error {}
  * @param {ZipEntry[]} files @param {string} name
  */
 export async function shareFiles(files, name) {
-  const list = files.map((f) => new File([/** @type {BlobPart} */ (f.bytes.slice())], f.name,
-    { type: f.type }));
+  const list = files.map(asFile);
   if (!navigator.canShare?.({ files: list })) return false;
   try {
     await navigator.share({ files: list, title: name });
@@ -97,6 +96,9 @@ export async function shareFiles(files, name) {
     return /** @type {any} */ (err)?.name === 'AbortError';
   }
 }
+
+/** An export as a `File`, which is what the share sheet takes. @param {ZipEntry} file */
+const asFile = (file) => new File([/** @type {BlobPart} */ (file.bytes.slice())], file.name, { type: file.type });
 
 /** One file as a download. @param {ZipEntry} file */
 export function downloadOne(file) {
@@ -130,7 +132,13 @@ export function downloadZip(files, name) {
  */
 async function deliver(files, name, present) {
   if (!files.length) throw new NothingToExport('the solve produced no pages');
-  if (files.length === 1) {
+  // **In the app a picture is shown before it is saved, even one.** A file handed to
+  // the share sheet is a file -- iOS offers Save to Files for it and not Save Image --
+  // and the image itself can only be handed over from a press of its own, since the
+  // render outlasts the export button's (`shareFiles`). So the page goes up with its own
+  // Save image beside Save as a file.
+  const picture = isNative() && present && files[0].type === 'image/png';
+  if (files.length === 1 && !picture) {
     downloadOne(files[0]);
     return;
   }
@@ -167,7 +175,7 @@ export function showSavedImages(box, files, name) {
   shownUrls = [];
 
   const caption = document.createElement('figcaption');
-  caption.textContent = t('export.pages', { count: files.length });
+  caption.textContent = files.length > 1 ? t('export.pages', { count: files.length }) : t('export.onePage');
   box.replaceChildren(caption);
 
   // The whole set. `shareFiles` is on a button of its own precisely so its click is
@@ -189,7 +197,8 @@ export function showSavedImages(box, files, name) {
   asZip.textContent = t('export.asZip');
   asZip.addEventListener('click', () => downloadZip(files, name));
   all.append(asZip);
-  box.append(all);
+  // One picture is its own set: an archive of one is no use to anybody.
+  if (files.length > 1) box.append(all);
 
   for (const [i, file] of files.entries()) {
     const url = URL.createObjectURL(new Blob([/** @type {BlobPart} */ (file.bytes.slice())],
@@ -213,14 +222,25 @@ export function showSavedImages(box, files, name) {
     label.className = 'saved-page-label';
     label.textContent = name;
 
+    // **Save image, in the app, where the platform can share the picture itself**: on an
+    // iPhone that is the share sheet with the image in it, which offers Save Image to put
+    // it in Photos. The other save is then the file, and says so.
+    const asImage = isNative() && navigator.canShare?.({ files: [asFile(file)] });
+    const photo = document.createElement('button');
+    photo.type = 'button';
+    photo.textContent = t('export.saveImage');
+    photo.addEventListener('click', async () => {
+      if (!await shareFiles([file], name)) caption.textContent = t('export.shareFailed');
+    });
+
     const save = document.createElement('button');
     save.type = 'button';
-    save.textContent = t('export.savePage');
+    save.textContent = t(asImage ? 'export.saveFile' : 'export.savePage');
     save.addEventListener('click', () => downloadOne(file));
 
     const buttons = document.createElement('div');
     buttons.className = 'row';
-    buttons.append(label, save, openControl(url, name));
+    buttons.append(label, ...(asImage ? [photo] : []), save, openControl(url, name));
     row.append(buttons, img);
     box.append(row);
   }
