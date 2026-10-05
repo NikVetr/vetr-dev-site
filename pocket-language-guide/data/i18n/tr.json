@@ -601,7 +601,6 @@
   "format.foldSize": "Boyutun temeli",
   "format.foldSize.folded": "Katlanmış kart",
   "format.foldSize.unfolded": "Katlanmamış kâğıt",
-  "format.darkCard": "Koyu kart",
   "display.siren": "Dikkat çek: bir siren de çalar",
   "board.addContext": "Kendi durumunuz",
   "board.contextName": "Bu duruma ne ad verilsin",

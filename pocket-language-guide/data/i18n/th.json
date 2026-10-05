@@ -601,7 +601,6 @@
   "format.foldSize": "ขนาดคือ",
   "format.foldSize.folded": "การ์ดที่พับแล้ว",
   "format.foldSize.unfolded": "แผ่นที่ยังไม่พับ",
-  "format.darkCard": "การ์ดมืด",
   "display.siren": "เรียกความสนใจ: ไซเรนก็ดังด้วย",
   "board.addContext": "หัวข้อของคุณเอง",
   "board.contextName": "จะเรียกหัวข้อนี้ว่าอะไร",
