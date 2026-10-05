@@ -252,9 +252,9 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
 
     return el('div', { class: 'board-editor-form' }, [
       field('editor.label', label),
-      field('editor.keys', keys),
       field('editor.owner', own),
       field('editor.listener', theirs),
+      field('editor.keys', keys),
       ...(spelled ? [spelled] : []),
       // Said once, plainly, where someone is about to wonder why the third box is
       // empty. Not an apology: it is the reason the box exists.
