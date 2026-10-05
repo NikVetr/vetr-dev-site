@@ -21,9 +21,8 @@ import {
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
 import { ornamentControl } from './ornament-control.js';
-import { speakerControl, personalSection } from './speaker-settings.js';
-import { personalWiring } from './personal-data.js';
-import { download, isSpoken } from './app.js';
+import { speakerFields } from './speaker-settings.js';
+import { isSpoken } from './app.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 /** Theme colour keys a furniture band may be set in, named as the theme files key them. */
@@ -733,25 +732,19 @@ export function createFormatPanel(input) {
   });
 
   // The same one setting as the quick page and the conversation board: one fact
-  // about the reader, asked once, wherever they happen to be when they answer it.
-  const voice = speakerControl({
+  // about the reader, asked once, wherever they happen to be when they answer it --
+  // and here asked in the panel itself, because it changes the words on the card. It
+  // was a button opening the settings dialog, which carried a second light switch and
+  // hid a two-pill question behind a popup.
+  const voice = speakerFields({
     axes: corpus.speakerAxes,
     languages: [spec.target, spec.source],
     profile: spec.speaker ?? {},
     onChange: (next) => emit({ speaker: next }),
-    // The same settings dialog the board opens, so the reader's own phrases and
-    // their saved card edits can be carried off a machine that only ever prints.
-    // A reload afterwards, because this page holds a solved layout built from the
-    // edits that just changed underneath it -- re-deriving that by hand would be a
-    // second, quieter copy of `buildSheet`.
-    extra: () => personalSection(personalWiring({
-      save: download,
-      onChanged: () => location.reload(),
-    })),
   });
 
   root.replaceChildren(
-    ...(voice ? [panelField(t('speaker.title'), [voice.button, voice.note])] : []),
+    ...(voice ? [panelField(t('speaker.title'), voice.body, voice.help)] : []),
     panelField(t('format.card'), [size.group, size.custom]),
     phoneField,
     // Beside the phone it belongs to. It was sixteen fields further down, between

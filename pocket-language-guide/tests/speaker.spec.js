@@ -2,7 +2,7 @@
 //
 // `tests/speaker.test.mjs` proves the resolution rules and `validate_data.py` proves
 // the data is reachable. Neither can prove the thing that actually matters: that
-// answering a question in a dialog changes the sentence on the card. So this asks a
+// answering the question beside the card changes the sentence on it. So this asks a
 // browser to solve a real Russian sheet twice.
 
 import { test, expect } from '@playwright/test';
@@ -28,19 +28,19 @@ test('answering once changes the wording on the card', async ({ page }) => {
   await expect(notice).toHaveText(/not set/);
   expect(await drawn(page)).toContain('\u0437\u0430\u0431\u043b\u0443\u0434\u0438\u043b\u0441\u044f');
 
-  await page.locator('button.chip', { hasText: 'Settings' }).click();
-  const dialog = page.locator('dialog.speaker-settings');
-  await expect(dialog).toBeVisible();
+  // **Asked in the controls, not behind a button.** It was a Settings chip opening a
+  // dialog that carried a second light switch; the question is the controls' own now.
+  const controls = page.locator('#controls');
+  await expect(page.locator('dialog.speaker-settings')).toHaveCount(0);
   // Only the question Russian actually asks. A settings screen that asks everyone
   // everything is the thing this replaces.
-  await expect(dialog.locator('.speaker-axis')).toHaveCount(1);
-  await expect(dialog.getByText('Speaking as')).toBeVisible();
+  await expect(controls.locator('.speaker-axis')).toHaveCount(1);
+  await expect(controls.getByRole('radiogroup', { name: 'Speaking as' })).toBeVisible();
   // Nothing is preselected on a form nobody has filled in -- a default the reader
   // never chose must not be displayed back to them as their choice.
-  await expect(dialog.locator('input[type=radio]:checked')).toHaveCount(0);
+  await expect(controls.locator('.speaker-axis input[type=radio]:checked')).toHaveCount(0);
 
-  await dialog.getByRole('radio', { name: 'A woman' }).check();
-  await dialog.getByRole('button', { name: 'Done' }).click();
+  await controls.getByRole('radio', { name: 'A woman' }).check();
 
   // The card is re-solved in her voice, and the notice goes away because she has
   // been asked and has answered.
@@ -55,21 +55,20 @@ test('answering once changes the wording on the card', async ({ page }) => {
   expect(await drawn(page)).toContain('\u0437\u0430\u0431\u043b\u0443\u0434\u0438\u043b\u0430\u0441\u044c');
 });
 
-test('a pair that asks nothing still offers settings, and asks nothing', async ({ page }) => {
+test('a pair that asks nothing asks nothing, and still offers the saved copy', async ({ page }) => {
   // Thirty-one of the fifty-three languages declare no axis, and for those pairs
-  // there is no voice question to put. **The control is still there**, because the
-  // same dialog holds the reader's own phrases and a Save-a-copy button that only
-  // appears for Russian readers is a backup nobody can find. The dialog says for
-  // itself that there is nothing to ask.
+  // there is no voice question to put, so the controls carry no heading over nothing.
+  // **The saved copy is in the page's settings**, behind the bars, with the reader's
+  // other details: a Save-a-copy button that only appeared for Russian readers would
+  // be a backup nobody can find.
   await page.goto('/sheet.html?target=zh-Hans&source=en');
   await expect(page.locator('.face').first()).toBeVisible({ timeout: 120_000 });
-  await page.locator('button.chip', { hasText: 'Settings' }).click();
-  const dialog = page.locator('dialog.speaker-settings');
+  await expect(page.locator('#controls .speaker-axis')).toHaveCount(0);
+  await expect(page.locator('#controls').getByText('How you speak')).toHaveCount(0);
+  await page.locator('#site-menu').click();
+  const dialog = page.locator('dialog.site-settings');
   await expect(dialog).toBeVisible();
-  // No axis question at all -- but the dialog still exists, for the section below.
   await expect(dialog.locator('.speaker-axis')).toHaveCount(0);
-  // And it no longer says so in a sentence: a dialog that opens on "there is
-  // nothing to set" was clutter over the sections that are there.
-  await expect(dialog.getByText(/does not change a phrase|nothing to set/i)).toHaveCount(0);
   await expect(dialog.getByRole('button', { name: 'Save a copy' })).toBeVisible();
+  await expect(dialog.getByText('Your name')).toBeVisible();
 });

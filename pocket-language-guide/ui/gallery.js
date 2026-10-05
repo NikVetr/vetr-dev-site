@@ -608,15 +608,14 @@ function fitHeader() {
  */
 async function openSettings(reader, nameOf) {
   const read = async (/** @type {string} */ rel) => parseTable(await loadText(rel), rel);
-  const [[{ personalWiring }, { aboutSection, askCountry }, { displaySection, readDisplay }, { DIET }, { travelSection }],
-    [axes, food, listed]] = await Promise.all([
+  const [[{ personalWiring }, { aboutSection, askCountry, dietOptions }, { displaySection, readDisplay }, { travelSection }],
+    [axes, listed]] = await Promise.all([
     Promise.all([import('./personal-data.js'), import('./about.js'), import('./board-display.js'),
-      import('../core/conversation.js'), import('./travel-check.js')]),
-    Promise.all([read('data/registry/speaker-axes.csv').then(readAxes), read(`data/lang/${reader}/food.csv`),
+      import('./travel-check.js')]),
+    Promise.all([read('data/registry/speaker-axes.csv').then(readAxes),
       loadText('data/countries/index.json').then((text) => JSON.parse(text))]),
   ]);
-  const said = new Map(food.map((row) => [row.concept_id, row.text]));
-  const diet = DIET.filter((id) => said.has(id)).map((id) => ({ value: id, label: /** @type {string} */ (said.get(id)) }));
+  const diet = await dietOptions(loadText, reader);
   const countries = listed.includes(reader) ? await loadCountries(loadText, reader) : undefined;
   // Nothing on this page shows what these change; the boards and sheets read them when opened.
   const nothing = () => {};

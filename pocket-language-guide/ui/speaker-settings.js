@@ -101,6 +101,44 @@ function el(tag, attrs = {}, kids = []) {
   return node;
 }
 
+/**
+ * One row of pills per axis asked, and the (?) that says what the answers change.
+ *
+ * Shared by the settings dialog and the sheet pages, which ask the same question in
+ * the same words: the dialog on the boards and the languages, inline where a card is
+ * set up.
+ *
+ * Declining is on the form, because it is a state the reader can choose and not only
+ * one they can fail out of. Someone who would rather not answer should be able to say
+ * so and have the app stop mentioning it — the wording is the one the corpus has
+ * always shipped either way, so it costs them nothing. Stored as an empty value
+ * rather than by deleting the key, so that "asked and declined" and "never asked"
+ * stay different facts: nothing is pre-selected on a form nobody has filled in,
+ * which is the whole difference between a default and a choice.
+ * @param {import('../core/speaker.js').SpeakerAxis[]} asked
+ * @param {import('../core/speaker.js').SpeakerProfile} held  answered in place
+ * @param {() => void} commit  after each answer
+ */
+function axisRows(asked, held, commit) {
+  const rows = asked.map((axis) => el('div', { class: 'speaker-axis' }, [pills({
+    name: `speaker-${axis.axis}`,
+    label: words(axis.axis),
+    options: [...axis.values.map((value) => ({ value, label: words(axis.axis, value) })),
+      { value: '', label: t('speaker.rather') }],
+    value: axis.axis in held && !axis.values.includes(held[axis.axis]) ? '' : held[axis.axis],
+    onChange: (value) => { held[axis.axis] = value; commit(); },
+  })]));
+  // One (?) for the section, its first paragraph what the question is for and then each
+  // axis's own why. An axis that landed without its explanation gets none, rather than
+  // a paragraph reading `speaker.x.why`.
+  const whys = asked.map((axis) => t(`speaker.${axis.axis}.why`)).filter((why) => !why.startsWith('speaker.'));
+  return { rows, help: helpTip(t('speaker.tip'), ...whys) };
+}
+
+/** @param {import('../core/speaker.js').SpeakerProfile} profile */
+function keep(profile) {
+  writeProfile(profile).catch((err) => console.warn('[plg] speaker profile not saved:', err.message));
+}
 
 /**
  * Open the settings screen for the axes this reader's languages actually declare.
@@ -120,31 +158,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   /** @type {import('../core/speaker.js').SpeakerProfile} */ let held = { ...profile };
 
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings' }));
-  const commit = () => {
-    writeProfile(held).catch((err) => console.warn('[plg] speaker profile not saved:', err.message));
-    onChange({ ...held });
-  };
-
-  // Declining is on the form, because it is a state the reader can choose and not only
-  // one they can fail out of. Someone who would rather not answer should be able to say
-  // so and have the app stop mentioning it — the wording is the one the corpus has
-  // always shipped either way, so it costs them nothing. Stored as an empty value
-  // rather than by deleting the key, so that "asked and declined" and "never asked"
-  // stay different facts: nothing is pre-selected on a form nobody has filled in,
-  // which is the whole difference between a default and a choice.
-  const fields = asked.map((axis) => el('div', { class: 'speaker-axis' }, [pills({
-    name: `speaker-${axis.axis}`,
-    label: words(axis.axis),
-    options: [...axis.values.map((value) => ({ value, label: words(axis.axis, value) })),
-      { value: '', label: t('speaker.rather') }],
-    value: axis.axis in held && !axis.values.includes(held[axis.axis]) ? '' : held[axis.axis],
-    onChange: (value) => { held[axis.axis] = value; commit(); },
-  })]));
-  // One (?) for the section, its first paragraph what the question is for and then each
-  // axis's own why. An axis that landed without its explanation gets none, rather than
-  // a paragraph reading `speaker.x.why`.
-  const whys = asked.map((axis) => t(`speaker.${axis.axis}.why`)).filter((why) => !why.startsWith('speaker.'));
-  const help = helpTip(t('speaker.tip'), ...whys);
+  const { rows: fields, help } = axisRows(asked, held, () => { keep(held); onChange({ ...held }); });
 
   // **The dialog is the settings screen, not only the voice question.** It holds the
   // reader's own phrases too, and those exist whether or not their languages inflect
@@ -167,45 +181,33 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
 }
 
 /**
- * The cheat sheet's half of the same setting: a button and the line beside it.
+ * The sheet pages' half of the same setting, asked where the card is set up rather
+ * than behind a button: the pills themselves, the (?) for the heading, and the line
+ * under them that says when a default wording is standing in for an answer.
  *
- * **Always returned, unlike the voice question inside it.** It used to be `null` when
- * neither language declared an axis -- which was right while the dialog only asked
- * about voice, and wrong the moment it also held the reader's own phrases: on a pair
- * that asks nothing, the way to save a copy of them disappeared. The dialog says so
- * itself when there is no axis to offer. The wrapper is
- * the caller's — the studio and the quick page each have their own field chrome, and
- * this module stays free of the studio's control library so the conversation board
- * does not have to download it.
+ * `null` for a pair that declares no axis -- 31 of the 53 languages -- because there
+ * is then nothing to ask, and a heading over nothing is clutter. The reader's own
+ * phrases and saved copy are not here: they are in the page's settings, with the
+ * reader's other details, as on every other page. The heading is the caller's, since
+ * the studio and the quick page each have their own field chrome and this module
+ * stays free of the studio's control library so the conversation board does not have
+ * to download it.
  * @param {object} config
  * @param {Record<string, import('../core/speaker.js').SpeakerAxis[]>} config.axes
  * @param {string[]} config.languages
  * @param {import('../core/speaker.js').SpeakerProfile} config.profile
  * @param {(next:import('../core/speaker.js').SpeakerProfile)=>void} config.onChange
- * @param {() => HTMLElement} [config.extra]  built on open, so it reads current state
+ * @returns {{help: HTMLButtonElement, body: HTMLElement[]}|null}
  */
-export function speakerControl({ axes, languages, profile, onChange, extra }) {
-  let held = profile;
-
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'chip';
-  button.textContent = t('settings.open');
-
-  const note = document.createElement('p');
-  note.className = 'speaker-why';
+export function speakerFields({ axes, languages, profile, onChange }) {
+  const asked = axesFor(axes, languages);
+  if (!asked.length) return null;
+  /** @type {import('../core/speaker.js').SpeakerProfile} */ const held = { ...profile };
+  const note = el('p', { class: 'speaker-why' });
   const say = () => { note.textContent = noticeFor(axes, languages, held) ?? ''; };
   say();
-
-  button.addEventListener('click', () => openSpeakerSettings({
-    axes,
-    languages,
-    profile: held,
-    onChange: (next) => { held = next; say(); onChange(next); },
-    extra: extra?.(),
-  }));
-
-  return { button, note };
+  const { rows, help } = axisRows(asked, held, () => { keep(held); say(); onChange({ ...held }); });
+  return { help: help.button, body: [help.tip, ...rows, note] };
 }
 
 /**

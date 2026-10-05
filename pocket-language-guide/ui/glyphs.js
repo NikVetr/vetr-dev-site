@@ -834,13 +834,18 @@ export function numericChoice(config) {
   };
 }
 
-/** A labelled block wrapping any control. @param {string} title @param {Node[]} kids */
-export function panelField(title, kids) {
+/**
+ * A labelled block wrapping any control, with a (?) at the end of its heading where
+ * the control explains itself (`helpTip` in `ui/dialog.js`).
+ * @param {string} title @param {Node[]} kids @param {HTMLElement} [help]
+ */
+export function panelField(title, kids, help) {
   const wrap = document.createElement('div');
   wrap.className = 'panel-field';
   const heading = document.createElement('span');
   heading.className = 'panel-field-title';
   heading.textContent = title;
+  if (help) heading.append(help);
   wrap.append(heading, ...kids);
   return wrap;
 }

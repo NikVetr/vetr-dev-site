@@ -1092,6 +1092,26 @@ test('a folded card\'s size can be the folded card or the unfolded sheet', async
   await expect.poll(width).toBe(1008);
 });
 
+test('how the reader speaks is asked in the panel, and the rest of them is in the settings', async ({ page }) => {
+  // It was a Settings button in the format panel opening a dialog with a second light
+  // switch in its header. The question that changes the card is the panel's own now;
+  // the reader's details and saved copy are behind the bars, as on the boards.
+  await page.addInitScript(() => localStorage.clear());
+  await page.goto('/customize.html?target=ru&source=en');
+  const panel = page.locator('#format');
+  await expect(panel.locator('.speaker-axis')).toHaveCount(1);
+  await expect(panel.getByRole('switch')).toHaveCount(0);
+  await panel.getByRole('radio', { name: 'A woman' }).check();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('plg.speaker'))).toContain('feminine');
+
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog.site-settings');
+  await expect(settings.getByRole('switch')).toHaveCount(1);
+  await expect(settings.getByText('Your name')).toBeVisible();
+  await expect(settings.getByRole('button', { name: 'Save a copy' })).toBeVisible();
+  await expect(settings.locator('.speaker-axis')).toHaveCount(0);
+});
+
 test('on a phone the studio\'s one menu holds its settings, not a door to them', async ({ page }) => {
   // The header had two buttons of three bars, and folded together the settings became
   // an item opening a dialog that held one switch. The menu carries the switch itself.

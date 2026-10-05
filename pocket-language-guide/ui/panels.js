@@ -152,9 +152,10 @@ const OPEN_SHARE = 1 / 3;
  * menu in front of the primary action is a real cost where the other three are one
  * tap either way. Dismissal follows `ui/item-popup.js` -- Escape, a pointer outside,
  * and focus handed back rather than left on something that is no longer rendered.
+ * @param {() => HTMLElement[]} extra  the page's own settings, after the appearance
  * @returns {() => void} puts the header back
  */
-function headerMenu() {
+function headerMenu(extra) {
   const toggle = /** @type {HTMLElement|null} */ (document.getElementById('header-more'));
   const menu = /** @type {HTMLElement|null} */ (document.getElementById('header-menu'));
   if (!toggle || !menu) return () => {};
@@ -189,7 +190,7 @@ function headerMenu() {
   // dialog did, and the bars are hidden at this width (`style.css`).
   const settings = document.createElement('div');
   settings.className = 'header-settings';
-  settings.append(themeSection(), ...resumeSection());
+  settings.append(themeSection(), ...resumeSection(), ...extra());
   menu.append(settings);
 
   /** @param {boolean} open */
@@ -514,8 +515,10 @@ export function revealPanel(el) {
 /**
  * Build the phone's chrome, and take it down again above the breakpoint.
  * @param {HTMLElement} studio
+ * @param {() => HTMLElement[]} settings  the page's own settings, which the menu carries
+ *   because the bars that open them on a desktop are not drawn at this width
  */
-export function attachPhoneChrome(studio) {
+export function attachPhoneChrome(studio, settings) {
   // The same 700px the layout uses -- and watched rather than read once, because
   // turning a phone to landscape crosses it, and what belongs at 844px wide is the
   // desktop header and the three-panel grid.
@@ -528,7 +531,7 @@ export function attachPhoneChrome(studio) {
       undo = null;
       return;
     }
-    const parts = [headerMenu(), panelBars(studio), panelSeams(studio)];
+    const parts = [headerMenu(settings), panelBars(studio), panelSeams(studio)];
     undo = () => { for (const part of parts) part(); };
   };
   stacked.addEventListener('change', sync);

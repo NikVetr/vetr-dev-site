@@ -7,7 +7,7 @@
 import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
-  pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy,
+  pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy, download,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { paperSpec } from '../core/pack.js';
@@ -31,6 +31,7 @@ import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
 import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
+import { readerSections } from './personal-data.js';
 import { createWarnings } from './warnings.js';
 import { openSectionFormat } from './section-format.js';
 import * as store from './platform/store.js';
@@ -88,14 +89,18 @@ async function main() {
   // own -- so it is loaded before anything is drawn, static markup included.
   await loadUiLanguage(choice.source, loadText);
   applyStatic();
+  const ctx = await browserSheetContext();
+  // **The reader's own details and their saved copy are in the settings**, as on the
+  // boards and the languages -- the same sections, in the same words -- while the one
+  // fact about them that changes the card, how they speak, is in the format panel.
+  let reader = await readerSections({ corpus: ctx.corpus, reader: choice.source, loadText, save: download });
   // **The settings borrow the warnings while they are open.** The record is parked in
   // the phone's menu, which a desktop never shows, so on a desktop it is handed to the
   // settings dialog -- the bars it flies into -- and taken back when that closes.
   wireSiteMenu(() => {
     const record = $('warnings-menu');
-    openAppearance([record]).addEventListener('close', () => $('header-menu').append(record));
+    openAppearance([record, ...reader()]).addEventListener('close', () => $('header-menu').append(record));
   });
-  const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
   /** @type {Record<string,any>} */ const themes = {};
@@ -219,6 +224,7 @@ async function main() {
     // then switching to French silently filed that correction against French and
     // could overwrite what was there.
     edits = loadEdits(spec.target, spec.source);
+    reader = await readerSections({ corpus: ctx.corpus, reader: spec.source, loadText, save: download });
     format = createFormatPanel(formatConfig(format.finish()));
     updateTree = null;
     addTerm = null;
@@ -237,7 +243,7 @@ async function main() {
   // The header's overflow menu and the panels' collapse bars, at the stacked width
   // only. See `ui/panels.js` for why both are built rather than written in the
   // markup: the markup is the desktop's, and this is taken down again above 700px.
-  attachPhoneChrome(studio);
+  attachPhoneChrome(studio, () => reader());
 
   // **The banner does not hide any more, and the stored flag is cleared.** It lives
   // in the header rather than in a bar of its own, so it is one line among the

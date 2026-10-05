@@ -12,10 +12,37 @@
 
 import { read as readPersonal, replaceAll, forgetAll } from './board-store.js';
 import { allEdits, restoreEdits, forgetEdits, forgetConfigs } from './io.js';
-import { readProfile, writeProfile } from './speaker-settings.js';
-import { readAbout, writeAbout } from './about.js';
+import { personalSection, readProfile, writeProfile } from './speaker-settings.js';
+import { aboutSection, askCountry, dietOptions, readAbout, writeAbout } from './about.js';
 import { readUsage, writeUsage, forgetUsage } from './usage.js';
 import { buildPackage, readPackage } from '../core/personal.js';
+import { loadCountries } from '../core/pack.js';
+
+/**
+ * The reader's own sections of a sheet page's settings: their details and their saved
+ * copy, the two the boards and the languages carry as well, so all three ask the same
+ * things in the same place. A card prints none of the details, so nothing is redrawn
+ * when they change; a loaded or deleted copy changes the card's edits underneath a
+ * solved layout, so the page starts again rather than re-deriving it by hand.
+ * @param {object} config
+ * @param {{countries: Set<string>}} config.corpus
+ * @param {string} config.reader  the language the details are asked in
+ * @param {(rel:string) => Promise<string>} config.loadText
+ * @param {(blob:Blob, name:string) => void} config.save
+ * @returns {Promise<() => HTMLElement[]>}  the sections, built afresh each time
+ */
+export async function readerSections({ corpus, reader, loadText, save }) {
+  const diet = await dietOptions(loadText, reader);
+  const nothing = () => {};
+  // The countries' names are read when the question is asked, as the board reads them.
+  const askFrom = corpus.countries.has(reader)
+    ? () => { loadCountries(loadText, reader).then((names) => askCountry(names, reader, nothing)); }
+    : undefined;
+  return () => [
+    aboutSection(nothing, diet, undefined, askFrom),
+    personalSection(personalWiring({ save, onChanged: () => location.reload() })),
+  ];
+}
 
 /**
  * The five things `personalSection` needs, wired to this app's own storage.

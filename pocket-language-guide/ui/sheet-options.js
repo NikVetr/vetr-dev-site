@@ -3,7 +3,7 @@
 // Deliberately a subset of the studio, sharing its controls so the two pages read
 // as one app rather than two. Everything not offered here is a studio decision.
 
-import { wireSiteMenu } from './site-menu.js';
+import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy, download,
@@ -23,8 +23,8 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
-import { speakerControl, personalSection } from './speaker-settings.js';
-import { personalWiring } from './personal-data.js';
+import { speakerFields } from './speaker-settings.js';
+import { readerSections } from './personal-data.js';
 import {
   warningText, fixText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
 } from './i18n.js';
@@ -63,8 +63,10 @@ async function main() {
   // own -- so it is loaded before anything is drawn, static markup included.
   await loadUiLanguage(choice.source, loadText);
   applyStatic();
-  wireSiteMenu();
   const ctx = await browserSheetContext();
+  // The reader's own details and saved copy, in the settings as on every page.
+  const reader = await readerSections({ corpus: ctx.corpus, reader: choice.source, loadText, save: download });
+  wireSiteMenu(() => openAppearance(reader()));
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
   // Both, because the palette ladder offers both -- and the CVD-safe one is the
@@ -273,26 +275,18 @@ async function main() {
   };
 
   // **Whose voice the card is in**, on the page someone prints from rather than
-  // buried in the studio. Absent for the 31 languages that decline to ask, which is
-  // the point: a control that opens onto an empty form is worse than no control.
-  const voice = speakerControl({
+  // buried in the studio, and asked in the controls themselves as the studio asks it.
+  // Absent for the 31 languages that decline to ask, which is the point: a heading
+  // over nothing is worse than no heading.
+  const voice = speakerFields({
     axes: ctx.corpus.speakerAxes,
     languages: [choice.target, choice.source],
     profile: spec.speaker ?? {},
     onChange: (next) => set({ speaker: next }),
-    // The same settings dialog the board opens, so the reader's own phrases and
-    // their saved card edits can be carried off a machine that only ever prints.
-    // A reload afterwards, because this page holds a solved layout built from the
-    // edits that just changed underneath it -- re-deriving that by hand would be a
-    // second, quieter copy of `buildSheet`.
-    extra: () => personalSection(personalWiring({
-      save: download,
-      onChanged: () => location.reload(),
-    })),
   });
 
   $('controls').replaceChildren(
-    ...(voice ? [panelField(t('speaker.title'), [voice.button, voice.note])] : []),
+    ...(voice ? [panelField(t('speaker.title'), voice.body, voice.help)] : []),
     panelField(t('format.cardSize'), [card.group, card.custom]),
     reserveField,
     panelField(t('format.priority'), [priority.group]),

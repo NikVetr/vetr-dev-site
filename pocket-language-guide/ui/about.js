@@ -9,6 +9,8 @@ import * as store from './platform/store.js';
 import { t } from './i18n.js';
 import { askChoices, askSelect, askText, soundGrid } from './board-menu.js';
 import { helpTip } from './dialog.js';
+import { DIET } from '../core/conversation.js';
+import { parseTable } from '../core/csv.js';
 
 const KEY = 'plg.about';
 
@@ -114,6 +116,18 @@ export function askDetail(fact, onChange, sounds) {
       onChange();
     },
   });
+}
+
+/**
+ * The diet sentences in the reader's own words, read from their food rows: what a
+ * page with no board loaded offers as the diet's choices.
+ * @param {(rel:string) => Promise<string>} loadText @param {string} reader
+ * @returns {Promise<{value:string, label:string}[]>}
+ */
+export async function dietOptions(loadText, reader) {
+  const file = `data/lang/${reader}/food.csv`;
+  const said = new Map(parseTable(await loadText(file), file).map((row) => [row.concept_id, row.text]));
+  return DIET.filter((id) => said.get(id)).map((id) => ({ value: id, label: /** @type {string} */ (said.get(id)) }));
 }
 
 /**

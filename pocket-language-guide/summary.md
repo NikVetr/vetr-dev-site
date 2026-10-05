@@ -1493,8 +1493,16 @@ both parts, and a sentence written for only one of them is found by that part. T
 familiar forms are a research pass (`content/PROMPTS/register-variants.md`), and until
 a language declares the axis its switch is not drawn.
 
-One setting, four surfaces: the board, the quick page and the studio open the same
-dialog, the profile rides in `SheetSpec.speaker` so an exported sheet carries the
+One setting, four surfaces, and one set of rows for the question: `axisRows` in
+`ui/speaker-settings.js` draws the pills for the board's and the languages' settings
+dialog and, through `speakerFields`, inline in the studio's format panel and the quick
+page's controls -- the sheet pages ask where the card is set up, because the answer
+changes its words, and ask nothing at all for a pair that declares no axis. The rest
+of what the reader has told the app -- their name, where they are from, their diet, and
+the saved copy -- is in every page's settings in the same sections (`readerSections` in
+`ui/personal-data.js` for the two sheet pages; the studio's phone menu carries them too,
+its bars being hidden there), so no sheet page has a second settings dialog or a second
+light switch. The profile rides in `SheetSpec.speaker` so an exported sheet carries the
 voice it was built in, and the drill inherits it because it drills the blocks the
 sheet solved. `buildSheet` applies it **before anything is measured**, since the
 solver decides what fits by measuring these exact strings.
