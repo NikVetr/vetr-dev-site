@@ -109,7 +109,7 @@ common-signs.no-smoking,fumatul interzis,,fumˈatul ˌinterzˈis,,2,ro-agent-v1;
 common-signs.no-photography,fotografiatul interzis,,fˌotoɡrafjˈatul ˌinterzˈis,,2,ro-agent-v1;ipa=espeak
 common-signs.do-not-touch,a nu se atinge,,a nu se atˈiŋdʒe,,2,ro-agent-v1;ipa=espeak
 common-signs.temporarily-closed,temporar închis,,tˌempoɾˈar ɨnkˈis,,2,ro-agent-v1;ipa=espeak
-common-signs.open-operating,deschis / în funcțiune,,deskˈis / ɨn funktsjˈune,,2,ro-agent-v1;ipa=espeak
+common-signs.open-operating,deschis,,deskˈis,,2,"ro-agent-v1;fix=DEX '09 deschis 2 (Despre încăperi ... Cu ușa sau capacul neînchise sau neîncuiate), read on dexonline.ro;rule=one-reading-on-a-board (în funcțiune, in operation, was the gloss of the range);row-corrections-v7;ipa=espeak"
 common-signs.closed,închis,,ɨnkˈis,,2,ro-agent-v1;ipa=espeak
 common-signs.stopped-stop,oprit / stop,,oprˈit / stˈop,,2,ro-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Duceți-mă acolo la timp pentru Shinkansen,,dˈutʃetsʲimə akˈolo la tˈimp pˌentru ʃˌiŋkansˈen,,1,reader-gloss-v1;ipa=espeak

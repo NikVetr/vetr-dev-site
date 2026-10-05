@@ -55,7 +55,7 @@ pharmacy-symptoms.how-much-should-i-take,چقدر بخورم؟,,cheqadr bekhoram
 pharmacy-symptoms.i-am-vomiting,بالا می‌آورم,,bālā miyāvaram,bɑlɑ miɑvaram,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.rehydration-salts,پودرِ او آر اس,سرمِ خوراکی,pudr-e u ār es,pudre u ɑr es,the WHO oral rehydration salts are asked for by the three letters O-R-S in Iran,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.how-many-times-a-day,روزی چند بار؟,,ruzi chand bār?,ruzi tʃand bɑr,,2,fa-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-a-stomach-ache,دلِ درد دارم,,del-e dard dāram,dele dard dɑram,,2,fa-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,دل‌درد دارم,,del-dard dāram,deldard dɑram,"I have a stomach ache -- del-dard, the compound, as sardard and golu-dard beside it; del-e dard was an ezafe, ""the belly of pain""",2,fa-agent-v1;fix=fa.wikipedia درد شکمی rev 43087700 (درد شکمی یا شکم درد یا دل درد -- Abdominal pain) and انسداد روده rev 43971524 (دل‌درد کولیکی);fix=fa.wikipedia نقش‌نمای اضافه rev 43257768 (کسرهٔ پس از حرف پایانی واژهٔ «کتاب» نقش‌نمای اضافه است -- the kasra makes دل the possessed noun);in-pack-frame=pharmacy-symptoms.i-have-a-headache (sardard dāram);rule=word-for-the-concept;row-corrections-v7;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,سرفه دارم,,sorfe dāram,sorfe dɑram,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,آنتی‌هیستامین,,ānti-histāmin,ɑntihistɑmin,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.anti-diarrhea-medicine,داروی اسهال,لوپرامید,dāru-ye es·hāl,dɑruje eshɑl,luperāmid is the generic on the box,2,fa-med-v1;ipa=espeak

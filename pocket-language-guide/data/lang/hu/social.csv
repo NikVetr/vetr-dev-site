@@ -28,10 +28,10 @@ communication.i-do-not-understand,Nem értem,,nˈɛm ˈeːrtɛm,,2,hu-agent-v1;i
 communication.i-cannot-read-it,Nem tudom elolvasni,,nˈɛm tˈudom ˈɛlolvɑʃni,,2,hu-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,"Kérem, írja le latin betűkkel",,"kˈeːrɛm, ˈiːrjɑ lˈɛ lˈɑtin bˈɛtyːkkɛl",,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,kérem / tessék,,kˈeːrɛm / tˈɛʃʃeːk,tessék also answers a knock or hands something over,2,hu-agent-v1;ipa=espeak
-quick-responses.yes-right,igen / így van,,ˈiɡɛn / ˈiːɟ vˈɑn,,2,hu-agent-v1;ipa=espeak
+quick-responses.yes-right,igen,,ˈiɡɛn,,2,"hu-agent-v1;fix=the kept half is the row's own wording and source (no Hungarian dictionary page could be read: the ÉrtSz database on mek.oszk.hu returns its front page to plain fetches);rule=one-reading-on-a-board (így van, that is so, was the gloss of the range);row-corrections-v7;ipa=espeak"
 quick-responses.no-not,nem,,nˈɛm,,2,hu-agent-v1;ipa=espeak
-quick-responses.okay-can,rendben / lehet,,rˈɛndbɛn / lˈɛhɛt,,2,hu-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,nem lehet / tilos,,nˈɛm lˈɛhɛt / tˈiloʃ,,2,hu-agent-v1;ipa=espeak
+quick-responses.okay-can,rendben,,rˈɛndbɛn,,2,"hu-agent-v1;fix=the kept half is the row's own wording and source (as above);rule=one-reading-on-a-board (lehet, possible, was the can gloss and is quick-responses.can-possible's first half);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,tilos,,tˈiloʃ,,2,"hu-agent-v1;fix=the kept half is the row's own wording and source (as above);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, whose first half is nem lehet);row-corrections-v7;ipa=espeak"
 quick-responses.works-okay,működik / rendben,,mˈyːkødik / rˈɛndbɛn,,2,hu-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,nem működik / nem,,nˈɛm mˈyːkødik / nˈɛm,,2,hu-agent-v1;ipa=espeak
 quick-responses.can-possible,lehet / lehetséges,,lˈɛhɛt / lˈɛhɛtʃtʃeːɡɛʃ,,2,hu-agent-v1;ipa=espeak

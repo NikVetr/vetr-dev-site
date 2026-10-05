@@ -35,7 +35,7 @@ medical-conditions.i-take-blood-thinners,Tôi dùng thuốc chống đông máu,
 medical-conditions.medicine-allergy,Dị ứng thuốc: {},,zi˨˩ˀ yŋ˧˥ tuə̯c˧˥ {},,2,vi-agent-v1;ipa=espeak
 medical-conditions.this-card-lists-my-conditions,Thẻ này ghi bệnh của tôi,,tɛ˧˩˧ naj˨˩ ɣi˧ beɲ˨˩ˀ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Đây là thuốc của tôi,,ɗəɪ˧ laː˨˩ tuə̯c˧˥ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
-medical-conditions.please-give-me-sugar-or-juice,Xin cho tôi đường hoặc nước ngọt,,sin˧ tʃɔ˧ t̪oj˧ ɗyə̯ŋ˨˩ hwac˨˩ˀ nyə̯c˧˥ ŋɔt̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Xin cho tôi đường hoặc nước ép,,sin˧ tʃɔ˧ t̪oj˧ ɗyə̯ŋ˨˩ hwac˨˩ˀ nyə̯c˧˥ ɛp˧˥,"please give me sugar or juice -- nước ép, fruit juice; nước ngọt, the old row, is a soft drink, which can be sugar-free",2,vi-agent-v1;fix=vi.wikipedia Nước ép rev 74705694 (Nước ép ... là một dung dịch tự nhiên chứa các mô từ trái cây hoặc các loại rau -- ví dụ nước cam);fix=vi.wikipedia Nước ngọt có ga rev 74689521 (Nước giải khát có ga (còn gọi là nước ngọt có ga hay nước ngọt) ... chất làm ngọt có thể là đường ... chất làm ngọt thay thế ... không đường);rule=word-for-the-concept;row-corrections-v7;ipa=espeak
 medical-conditions.inject-it-into-my-outer-thigh,Tiêm vào mặt ngoài đùi tôi,,t̪iɛ̯m˧ vaːw˨˩ mat̪˨˩ˀ ŋwaːj˨˩ ɗuj˨˩ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Nhóm máu của tôi là {},,ɲɔm˧˥ maw˧˥ kuə̯˧˩˧ t̪oj˧ laː˨˩ {},,2,vi-agent-v1;ipa=espeak
 medical-conditions.do-not-give-me,Đừng cho tôi dùng {},,ɗyŋ˨˩ tʃɔ˧ t̪oj˧ zuŋ˨˩ {},,2,vi-agent-v1;ipa=espeak

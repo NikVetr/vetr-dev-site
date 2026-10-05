@@ -15,11 +15,11 @@ time-words.yesterday,אתמול,אֶתְמוֹל,etmol,etmˈol,,2,he-agent-v1;ip
 time-words.this-week,השבוע,הַשָּׁבוּעַ,hashavúa‘,haʃavˈua,,2,he-agent-v1;ipa=bgn
 time-words.next-week,שבוע הבא,שָׁבוּעַ הַבָּא,shavúa‘ haba,ʃavˈua habˈa,the coming week,2,he-agent-v1;ipa=bgn
 time-words.morning,בוקר,בּוֹקֶר,bóqer,bˈokeʁ,,2,he-agent-v1;ipa=bgn
-time-words.afternoon,אחרי הצהריים,אַחֲרֵי הַצׇּהֳרַיִים,aẖarey hatsohoráyim,axaʁˈej hatsohoʁˈajim,after noon,2,he-agent-v1;ipa=bgn
+time-words.afternoon,אחרי הצוהריים,אַחֲרֵי הַצּוֹהֳרַיִים,aẖarey hatsohoráyim,axaʁˈej hatsohoʁˈajim,after noon,2,he-agent-v1;fix=Kedem 2023 עיקר כללי הכתיב המלא החדשים (language-editing.co.il: בכללים החדשים ו' מתווספת אחרי צ' והיא נכתבת צוהריים);fix=Academy terms DB מתמטיקה 1940 (קַו צָהֳרַיִם קו צוהריים);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 time-words.evening,ערב,עֶרֶב,‘érev,ˈeʁev,,2,he-agent-v1;ipa=bgn
 time-words.spring,אביב,אָבִיב,aviv,avˈiv,,2,he-agent-v1;ipa=bgn
 time-words.summer,קיץ,קַיִץ,qáyits,kˈajits,,2,he-agent-v1;ipa=bgn
-time-words.fall,סתו,סְתָו,sétav,sˈetav,,2,he-agent-v1;ipa=bgn
+time-words.fall,סתיו,סְתָיו,sétav,sˈetav,,2,he-agent-v1;fix=Kedem 2023 עיקר כללי הכתיב המלא החדשים (language-editing.co.il: י' מתווספת לציון a ... סתו- סתיו);fix=he.wikipedia סתיו rev 43801699 (הסתיו (בכתיב חסר: סְתָו));rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 time-words.winter,חורף,חוֹרֶף,ẖóref,xˈoʁef,,2,he-agent-v1;ipa=bgn
 time-words.night,לילה,לַיְלָה,láyla,lˈajla,,2,he-agent-v1;ipa=bgn
 days-of-week.monday,יום שני,יוֹם שֵׁנִי,yom sheni,jˈom ʃenˈi,second day,2,he-agent-v1;ipa=bgn
@@ -41,5 +41,5 @@ months.september,ספטמבר,סֶפְּטֶמְבֶּר,septémber,septˈembeʁ
 months.october,אוקטובר,אוֹקְטוֹבֶּר,oqtóber,oktˈobeʁ,,2,he-agent-v1;ipa=bgn
 months.november,נובמבר,נוֹבֶמְבֶּר,novémber,novˈembeʁ,,2,he-agent-v1;ipa=bgn
 months.december,דצמבר,דֶּצֶמְבֶּר,detsémber,detsˈembeʁ,,2,he-agent-v1;ipa=bgn
-time-words.clock-offset,"השעון בסווהילית מתחיל עם הזריחה ומראה שש שעות פחות מהשעון שלכם: הוסיפו שש למספר שאתם שומעים, והפחיתו שש כשאתם אומרים שעה. saa moja היא שבע בבוקר, saa sita היא שתים עשרה בצהריים ו-saa kumi היא ארבע אחר הצהריים. בטוח יותר לנקוב במספר או לשאול saa ngapi za kizungu, השעה בשעון המערבי.",,,,,2,he-notes-v1
+time-words.clock-offset,"השעון בסווהילית מתחיל עם הזריחה ומראה שש שעות פחות מהשעון שלכם: הוסיפו שש למספר שאתם שומעים, והפחיתו שש כשאתם אומרים שעה. saa moja היא שבע בבוקר, saa sita היא שתים עשרה בצוהריים ו-saa kumi היא ארבע אחר הצוהריים. בטוח יותר לנקוב במספר או לשאול saa ngapi za kizungu, השעה בשעון המערבי.",,,,,2,he-notes-v1;fix=Kedem 2023 עיקר כללי הכתיב המלא החדשים (language-editing.co.il: בכללים החדשים ו' מתווספת אחרי צ' והיא נכתבת צוהריים);fix=Academy terms DB מתמטיקה 1940 (קַו צָהֳרַיִם קו צוהריים);rule=academy-full-spelling;row-corrections-v7
 time-scheduling.what-time-do-you-reopen,באיזו שעה פותחים שוב?,בְּאֵיזוֹ שָׁעָה פּוֹתְחִים שׁוּב?,be’éyzo sha‘a potẖim shuv?,beˈejzo ʃaˈa potxˈim ʃˈuv,at what hour do they open again?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn

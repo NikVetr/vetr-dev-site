@@ -34,7 +34,7 @@ common-signs.no-smoking,bawal manigarilyo,,bawal maniɡaɾiljo,,2,fil-agent-v1;i
 common-signs.no-photography,bawal kumuha ng litrato,,bawal kumuha naŋ litɾato,,2,fil-agent-v1;ipa=fil-g2p
 common-signs.do-not-touch,huwag hawakan,,huwaɡ hawakan,,2,fil-agent-v1;ipa=fil-g2p
 common-signs.temporarily-closed,pansamantalang sarado,,pansamantalaŋ saɾado,,2,fil-agent-v1;ipa=fil-g2p
-common-signs.open-operating,bukas / gumagana,,bukas / ɡumaɡana,,2,fil-agent-v1;ipa=fil-g2p
+common-signs.open-operating,bukas,,bukas,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) bukás (Pang-uri -- 1. Walang takip. 2. May anyong nagpapahintulot ng pagdaan);rule=one-reading-on-a-board (gumagana, working, was the gloss of the range);row-corrections-v7;ipa=fil-g2p"
 common-signs.closed,sarado,,saɾado,,2,fil-agent-v1;ipa=fil-g2p
 common-signs.stopped-stop,hinto / tumigil,,hinto / tumiɡil,,2,fil-agent-v1;ipa=fil-g2p
 directions.where-is,Nasaan po ang {}?,,nasaan po aŋ {},,2,fil-agent-v1;ipa=fil-g2p

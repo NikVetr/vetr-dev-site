@@ -67,7 +67,7 @@ border-customs.i-am-in-transit,אני במעבר,אֲנִי בְּמַעֲבָר
 border-customs.i-have-in-cash,יש לי {} במזומן,יֵשׁ לִי {} בִּמְזוּמָּן,yesh li {} bimzuman,jˈeʃ lˈi {} bimzumˈan,I have {} in cash,2,he-agent-v1;ipa=bgn
 border-customs.this-is-a-gift,זה מתנה,זֶה מַתָּנָה,ze matana,zˈe matanˈa,this is a gift,2,he-agent-v1;ipa=bgn
 border-customs.where-do-i-collect-my-baggage,איפה אוספים את המזוודות?,אֵיפֹה אוֹסְפִים אֶת הַמִּזְוָודוֹת?,éyfo osfim et hamizvadot?,ˈejfo osfˈim ˈet hamizvadˈot,where does one collect the suitcases?,2,he-agent-v1;ipa=bgn
-border-customs.how-long-may-i-stay,כמה זמן מתר לי להישאר?,כַּמָּה זְמַן מֻתָּר לִי לְהִישָּׁאֵר?,káma zeman mutar li lehisha’er?,kˈama zemˈan mutˈaʁ lˈi lehiʃaˈeʁ,how long am I permitted to stay?,2,he-agent-v1;ipa=bgn
+border-customs.how-long-may-i-stay,כמה זמן מותר לי להישאר?,כַּמָּה זְמַן מוּתָּר לִי לְהִישָּׁאֵר?,káma zeman mutar li lehisha’er?,kˈama zemˈan mutˈaʁ lˈi lehiʃaˈeʁ,how long am I permitted to stay?,2,he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (כל תנועת u תסומן באות ו' כולל אות המנוקדת בקובוץ);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 border-customs.i-have-a-connecting-flight,יש לי טיסת המשך,יֵשׁ לִי טִיסַת הֶמְשֵׁךְ,yesh li tisat hemshekh,jˈeʃ lˈi tisˈat hemʃˈex,I have a continuing flight,2,he-agent-v1;ipa=bgn
 border-customs.may-i-have-an-entry-stamp,אפשר לקבל חותמת כניסה?,אֶפְשָׁר לְקַבֵּל חוֹתֶמֶת כְּנִיסָה?,efshar leqabel ẖotémet kenisa?,efʃˈaʁ lekabˈel xotˈemet kenisˈa,may I have an entry stamp?,2,he-agent-v1;ipa=bgn
 border-customs.visa,ויזה,וִיזָה,víza,vˈiza,,2,he-agent-v1;ipa=bgn
@@ -120,7 +120,7 @@ place-words.scenic-area,אתר נוף,אֲתַר נוֹף,atar nof,atˈaʁ nˈof
 rail-station-words.maglev,רכבת מרחפת,רַכֶּבֶת מְרַחֶפֶת,rakévet meraẖefet,ʁakˈevet meʁaxefˈet,levitating train,2,he-gloss-v1;ipa=bgn
 common-signs.pork-code,קודים לחזיר על שלטים,קוֹדִים לְחֲזִיר עַל שְׁלָטִים,qodim leẖazir ‘al shelatim,kodˈim lexazˈiʁ ˈal ʃelatˈim,pork codes on signs,2,he-gloss-v1;ipa=bgn
 transit-rides.where-do-i-pay-the-fare,איפה משלמים את דמי הנסיעה?,אֵיפֹה מְשַׁלְּמִים אֶת דְּמֵי הַנְּסִיעָה?,éyfo meshalmim et demey hanesi‘a?,ˈejfo meʃalmˈim ˈet demˈej hanesiˈa,where does one pay the travel fee?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn
-air-travel.where-is-check-in,איפה הצ'ק-אין?,אֵיפֹה הַצֶ'ק-אִין?,éyfo ha-čeq-in?,ˈejfo hatʃekˈin,,2,he-agent-v1;ipa=bgn
+air-travel.where-is-check-in,איפה הצ׳ק-אין?,אֵיפֹה הַצֶ׳ק-אִין?,éyfo ha-čeq-in?,ˈejfo hatʃekˈin,,2,he-agent-v1;fix=he.wikipedia גרש rev 41899439 (גרש (׳) הוא סימן פיסוק בעברית ... הגרש דומה במראהו למירכה בודדת ולאפוסטרוף);in-pack-neighbour=hotel-requests.what-time-is-check-out (הַצֶ׳ק-אַאוּט);rule=geresh-not-apostrophe;row-corrections-v7;ipa=bgn
 air-travel.which-gate,איזה שער?,אֵיזֶה שַׁעַר?,éyze sha‘ar?,ˈejze ʃaˈaʁ,,2,he-agent-v1;ipa=bgn
 air-travel.where-is-the-security-check,איפה הביקורת הביטחונית?,אֵיפֹה הַבִּיקוֹרֶת הַבִּיטְחוֹנִית?,éyfo habiqoret habitẖonit?,ˈejfo habikoʁˈet habitxonˈit,,2,he-agent-v1;ipa=bgn
 air-travel.my-luggage-did-not-arrive,המזוודה שלי לא הגיעה,הַמִּזְוָודָה שֶׁלִּי לֹא הִגִּיעָה,hamizvada sheli lo higi‘a,hamizvadˈa ʃelˈi lˈo hiɡiˈa,,2,he-agent-v1;ipa=bgn

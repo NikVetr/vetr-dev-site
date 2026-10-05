@@ -66,7 +66,7 @@ pharmacy-symptoms.i-feel-dizzy,Saya pusing,Kepala saya berputar,sˈaja pˈusiŋ,
 pharmacy-symptoms.ibuprofen,Ibuprofen,Proris,ˌibuprˈofən,,2,id-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,Tenggorokan saya sakit,Radang tenggorokan,tˌɛŋɡɔrˈokan sˈaja sˈakit,,2,id-agent-v1;ipa=espeak
 pharmacy-symptoms.can-i-get-this-medicine-here,Obat ini ada di sini?,,ˈobat ˈini ˈada di sˈini,,2,id-agent-v1;ipa=espeak
-pharmacy-symptoms.bandage,Plester,Kain kasa,plˈɛstər,"not pembalut, which is a sanitary pad",2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,Perban,Plester · Kain kasa,pˈɛrban,"bandage -- perban, the cloth for binding a wound; plester, the old text, is the adhesive strip and moves to text_alt beside gauze. Not pembalut alone, which is said for a sanitary pad",2,"id-agent-v1;fix=KBBI perban (n kain pembalut (luka dan sebagainya)) and plester 1 (perekat untuk menampal (menutup) luka), read on kbbi.web.id;in-pack-frame=the other packs' bandage rows (de Verband / Pflaster, ru бинт / пластырь, th ผ้าพันแผล / พลาสเตอร์: the cloth in text, the plaster in text_alt);rule=word-for-the-concept;row-corrections-v7;ipa=espeak"
 pharmacy-symptoms.the-pain-is-severe,Sakitnya parah,,sakˈitɲa pˈarah,,2,id-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,Antiseptik,Betadine,ˌantisˈɛptik,,2,id-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,Saya mual,,sˈaja mˈual,,2,id-agent-v1;ipa=espeak

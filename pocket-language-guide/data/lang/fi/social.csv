@@ -27,9 +27,9 @@ communication.i-cannot-make-out-what-you-are-saying,"En saa selvää, mitä sano
 communication.i-do-not-understand,En ymmärrä.,,ˈen ˈymmærræ,,2,fi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,En saa tästä selvää.,,ˈen sˈaː tˈæstæ sˈelvæː,,2,fi-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,ole hyvä,,ˈole hˈyvæ,,2,fi-agent-v1;ipa=espeak
-quick-responses.yes-right,kyllä / joo,,kˈyllæ / jˈoː,,2,fi-agent-v1;ipa=espeak
+quick-responses.yes-right,kyllä,joo,kˈyllæ,,2,"fi-agent-v1;fix=en.wikipedia Yes and no rev 1377067994 (Finnish also has particle words for yes: Kyllä (formal) and joo (colloquial));rule=one-reading-on-a-board (joo, the colloquial yes, is a second wording and moves to text_alt, as the pack writes Hei!/Moi! and Näkemiin./Moikka!);row-corrections-v7;ipa=espeak"
 quick-responses.no-not,ei,,ˈei,,2,fi-agent-v1;ipa=espeak
-quick-responses.okay-can,selvä / sopii,,sˈelvæ / sˈopiː,,2,fi-agent-v1;ipa=espeak
+quick-responses.okay-can,selvä,,sˈelvæ,,2,"fi-agent-v1;fix=the kept half is the row's own wording and source;rule=one-reading-on-a-board (sopii, it suits, was the can gloss, quick-responses.can-possible is onnistuu);row-corrections-v7;ipa=espeak"
 quick-responses.cannot-not-allowed,ei saa,,ˈei sˈaː,,2,fi-agent-v1;ipa=espeak
 quick-responses.works-okay,toimii,,tˈoimiː,,2,fi-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,ei toimi,,ˈei tˈoimi,,2,fi-agent-v1;ipa=espeak

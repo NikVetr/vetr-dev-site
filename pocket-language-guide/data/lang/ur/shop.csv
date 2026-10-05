@@ -24,7 +24,7 @@ shopping.two-of-these,یہ دو دے دیجیے,,yah do de dījiye,jeːh dˈoː 
 shopping.what-is-it-made-of,یہ کس چیز کا بنا ہے؟,,yah kis chīz kā banā hai?,jeːh kɪs cˈiːz kaː bˈʌnaː hɛ,,2,ur-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-color,کیا کوئی دوسرا رنگ ہے؟,,kyā ko’ī dūsrā rang hai?,kjˈaː kˈoːi dˈuːsɾaː ɾˈʌnɡ hɛ,,2,ur-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-size,کیا کوئی دوسرا سائز ہے؟,,kyā ko’ī dūsrā sā’iz hai?,kjˈaː kˈoːi dˈuːsɾaː sˈaɪz hɛ,,2,ur-agent-v1;ipa=espeak
-color-size-returns.may-i-try-it-on,کیا پہن کر دیکھ سکتا ہوں؟,کیا ٹرائل کر سکتا ہوں؟,kyā pahan kar dekh saktā hūñ?,kjˈaː pˈɛhɛn kaɾ dˈeːkʰ sˈʌktˌaː hũː,سکتی ہوں if the speaker is a woman,2,ur-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,کیا پہن کر دیکھ سکتا ہوں؟,کیا ٹرائل کر سکتا ہوں؟,kyā pahan kar dekh saktā hūñ?,kjˈaː pˈɛhɛn kaɾ dˈeːkʰ sˈʌktˌaː hũː,,2,ur-agent-v1;fix=the woman's wording is now a speaker_gender=feminine row in variants.csv;row-corrections-v7;ipa=espeak
 color-size-returns.can-i-return-it,کیا یہ واپس ہو سکتا ہے؟,,kyā yah wāpas ho saktā hai?,kjˈaː jeːh ʋˈaːpəs hˈoː sˈʌktˌaː hɛ,,2,ur-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,کیا یہ تبدیل ہو سکتا ہے؟,کیا یہ بدلا جا سکتا ہے؟,kyā yah tabdīl ho saktā hai?,kjˈaː jeːh tˌəbdˈiːl hˈoː sˈʌktˌaː hɛ,,2,ur-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,کیا شاپر مل جائے گا؟,کیا تھیلا مل جائے گا؟,kyā shāpar mil jā’e gā?,kjˈaː ʃˈaːpəɾ mˈɪl ɟˈaːeː ɡaː,"شاپر, from 'shopper', is the ordinary Pakistani word for a plastic carrier bag; تھیلا is a cloth or larger bag",2,ur-agent-v1;ipa=espeak

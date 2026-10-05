@@ -109,7 +109,7 @@ common-signs.no-smoking,tupakointi kielletty,,tˈupakˌointi kˈielletty,,2,fi-a
 common-signs.no-photography,valokuvaus kielletty,,vˈalokuvaus kˈielletty,,2,fi-agent-v1;ipa=espeak
 common-signs.do-not-touch,älä koske,,ˈælæ kˈoske,,2,fi-agent-v1;ipa=espeak
 common-signs.temporarily-closed,tilapäisesti suljettu,,tˈilapˌæisesti sˈuljettu,,2,fi-agent-v1;ipa=espeak
-common-signs.open-operating,auki / toiminnassa,,ˈauki / tˈoiminnˌassa,,2,fi-agent-v1;ipa=espeak
+common-signs.open-operating,auki,,ˈauki,,2,"fi-agent-v1;fix=the kept half is the row's own wording and source;rule=one-reading-on-a-board (toiminnassa, in operation, was the gloss of the range);row-corrections-v7;ipa=espeak"
 common-signs.closed,suljettu,,sˈuljettu,,2,fi-agent-v1;ipa=espeak
 common-signs.stopped-stop,pysähtynyt / seis,,pˈysæhtynyt / sˈeis,,2,fi-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Viekää minut ajoissa Shinkansen-junaan.,,vˈiekæː mˈinut ˈajoissa ʃˈiŋkansenjunaːn,,2,fi-agent-v1;ipa=espeak

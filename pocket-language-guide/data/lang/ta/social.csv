@@ -28,10 +28,10 @@ communication.i-do-not-understand,எனக்குப் புரியவி
 communication.i-cannot-read-it,என்னால் இதைப் படிக்க முடியவில்லை,,eṉṉāl itaip paṭikka muṭiyavillai,ennaːl idaɪp pʌɖikkʌ muɖijʌvillaɪ,,2,ta-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,இதை ஆங்கில எழுத்தில் எழுதுங்கள்,,itai āṅkila eḻuttil eḻutuṅkaḷ,idaɪ aːŋɡilʌ eɻɯttil eɻɯdɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,தயவுசெய்து / சொல்லுங்கள்,,tayavuceytu / colluṅkaḷ,tʌjʌvɯsejdɯ / sollɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
-quick-responses.yes-right,ஆம் / சரி,ஆமாம்,ām / cari,aːm / sʌɾi,,2,ta-agent-v1;ipa=espeak
+quick-responses.yes-right,ஆம்,ஆமாம்,ām,aːm,,2,"ta-agent-v1;fix=Tamil Lexicon (DSAL) ஆம்⁴ (adv. Yes, so, expressing assent);rule=one-reading-on-a-board (சரி, right, was the gloss of the range, ஆமாம் stays in text_alt);row-corrections-v7;ipa=espeak"
 quick-responses.no-not,இல்லை,,illai,illaɪ,,2,ta-agent-v1;ipa=espeak
-quick-responses.okay-can,சரி / முடியும்,,cari / muṭiyum,sʌɾi / muɖijɯm,,2,ta-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,முடியாது / அனுமதி இல்லை,,muṭiyātu / aṉumati illai,muɖijaːdɯ / anɯmʌdi illaɪ,,2,ta-agent-v1;ipa=espeak
+quick-responses.okay-can,சரி,,cari,sʌɾi,,2,"ta-agent-v1;fix=Tamil Lexicon (DSAL) சரி⁷ 5 (A term of approbation meaning 'yes', 'right');rule=one-reading-on-a-board (முடியும், it is possible, was the can gloss and is quick-responses.can-possible's own row);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,அனுமதி இல்லை,,aṉumati illai,anɯmʌdi illaɪ,,2,"ta-agent-v1;fix=Tamil Lexicon (DSAL) அனுமதி 1 (Permission, assent, approval);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is முடியாது);row-corrections-v7;ipa=espeak"
 quick-responses.works-okay,வேலை செய்கிறது,,vēlai ceykiṟatu,veːlaɪ sejɡirʌdɯ,,2,ta-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,வேலை செய்யவில்லை / இல்லை,,vēlai ceyyavillai / illai,veːlaɪ sejjʌvillaɪ / illaɪ,,2,ta-agent-v1;ipa=espeak
 quick-responses.can-possible,முடியும்,,muṭiyum,muɖijɯm,,2,ta-agent-v1;ipa=espeak

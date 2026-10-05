@@ -53,10 +53,10 @@ phone-translation.one-sentence-at-a-time-please,Isang pangungusap muna po,,isaŋ
 phone-translation.please-type-it-and-show-me,Paki-type po at ipakita sa akin,,pakitjpɛ po at ipakita sa akin,,2,fil-agent-v1;ipa=fil-g2p
 phone-translation.please-look-at-the-screen,Pakitingnan po ang screen,,pakitiŋnan po aŋ skɾɛɛn,,2,fil-agent-v1;ipa=fil-g2p
 quick-responses.please-go-ahead,sige / puwede na,,siɡɛ / puwɛdɛ na,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.yes-right,oo / tama,,oo / tama,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.yes-right,oo,,oo,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) oo (Pang-abay -- Sagot ng pagsang-ayon);rule=one-reading-on-a-board (tama, right, was the gloss of the range);row-corrections-v7;ipa=fil-g2p"
 quick-responses.no-not,hindi,,hindi,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.okay-can,okay / puwede,,okaj / puwɛdɛ,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.cannot-not-allowed,hindi puwede / bawal,,hindi puwɛdɛ / bawal,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.okay-can,okay,,okaj,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) ókey (okay Ingles -- 1. Nauukol sa kalagayang naayos o ipinagtibay na (kung sa isang kahilingan ...));rule=one-reading-on-a-board (puwede, can, was the can gloss, quick-responses.can-possible is puwede / maaari);row-corrections-v7;ipa=fil-g2p"
+quick-responses.cannot-not-allowed,bawal,,bawal,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) bawal (Pang-uri -- Hindi pinahihintulutang gawin);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is hindi puwede / hindi maaari);row-corrections-v7;ipa=fil-g2p"
 quick-responses.works-okay,gumagana / ayos,,ɡumaɡana / ajos,,2,fil-agent-v1;ipa=fil-g2p
 quick-responses.does-not-work-no,hindi gumagana / hindi,,hindi ɡumaɡana / hindi,,2,fil-agent-v1;ipa=fil-g2p
 quick-responses.can-possible,puwede / maaari,,puwɛdɛ / maaaɾi,,2,fil-agent-v1;ipa=fil-g2p

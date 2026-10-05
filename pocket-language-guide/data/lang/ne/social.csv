@@ -28,7 +28,7 @@ communication.i-do-not-understand,मलाई बुझिएन,,malāī bujhi
 communication.i-cannot-read-it,मलाई यो पढ्न आउँदैन,,malāī yō paḍhna āum̐daina,məlˈaːi jˈoː pˈʌɖʰnə ˌaːũdˈɛːnə,,2,ne-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,रोमन अक्षरमा लेखिदिनुहोस्,,rōmana akṣaramā lēkhidinuhōs,ɾˈoːmən ˈʌkʂəɾˌəmaː lˌeːkʰɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,भन्नुहोस्,,bhannuhōs,bʰənnˌuhˈoːs,,2,ne-agent-v1;ipa=espeak
-quick-responses.yes-right,हो / हजुर,,hō / hajura,hoː / hˈʌɟuɾˌə,,2,ne-agent-v1;ipa=espeak
+quick-responses.yes-right,हो,,hō,hoː,,2,"ne-agent-v1;fix=Turner Nepali Dictionary (DSAL) हो 2 (3rd sg. pres. of hunu -- Yes), en.wikipedia Yes and no rev 1377067994 (the words most commonly translated as equivalents are हो and होइन);rule=one-reading-on-a-board (the reader's choice: हजुर is a term of respectful address -- Turner हजुर् (Your Majesty, Your Honour, Sir) -- used as the honorific yes, as हाँ / जी हाँ in Hindi, हो is the plain yes and pairs with quick-responses.no-not होइन, and the Nepali pack writes no text_alt, so हजुर is dropped);row-corrections-v7;ipa=espeak"
 quick-responses.no-not,होइन,,hōina,hˈoinˌə,,2,ne-agent-v1;ipa=espeak
 quick-responses.okay-can,हुन्छ,,huncha,hˈuncʰə,,2,ne-agent-v1;ipa=espeak
 quick-responses.cannot-not-allowed,मिल्दैन,,mildaina,mɪldˈɛːnə,,2,ne-agent-v1;ipa=espeak

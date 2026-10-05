@@ -324,3 +324,45 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-6.md`.
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A seventh pass: Hebrew spelling, the slash rows left, and the fourth key-words batch
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-7.md`. Where a row
+whose concept has a key in `data/emphasis/<code>.csv` changes, update the key so it is
+still in the sentence (the validator fails one that is not) and list it.
+
+- **Hebrew standard spelling.** Some of the pack's base `text` cells are the pointed
+  `text_alt` with the points stripped, so they are in defective spelling where a Hebrew
+  reader expects the standard unpointed spelling of the Academy of the Hebrew Language
+  (כללי הכתיב המלא): `מתר` for מותר, `חרום` for חירום, `לנשם`, `דמום`, `מחסר`, `סכרת`,
+  `סכר`, `לכתב`, `לעזר`, `לחזר`, `מקדם`, `להשאר`, `להכנס`, `שלחן`, `לשנים` -- and the pack
+  already writes some of the same words in full elsewhere (`להישאר`, `לשניים`). Those are
+  the leads; find every such cell, not only these (a cell identical to its `text_alt` with
+  the points removed is the place to look), and respell by the Academy's rules. The
+  pointed `text_alt` and the romanisation stay as they are unless they are wrong too.
+- **Hebrew word choices**: `trail-transport.is-there-cell-signal-here` uses `קלט`
+  ("input") where reception is `קליטה`; `pharmacy-symptoms.i-think-it-is-infected` uses
+  `נדבק` where an infected wound is `הזדהם`; `air-travel.where-is-check-in` writes
+  `הצ'ק-אין` with an ASCII apostrophe where the lodging rows use the geresh `׳`.
+- **The slash rows left in the packs the sixth pass did not name**: the 54 cells in 17
+  packs listed under "Slash rows left in the languages the brief does not name" in
+  `tmp/notes/agents/row-corrections-6.md`, by the sixth pass's slash rule. Three need a
+  choice rather than the rule, and the choice is to be made from the concept's English
+  and `notes` and a source, and recorded: `ka` okay-can, `ne` `हो / हजुर`, `fi`
+  `kyllä / joo`. `pharmacy-symptoms.paracetamol-acetaminophen` stays as it is everywhere.
+- **What the fourth key-words batch noticed** (`tmp/notes/agents/key-words-4.md`, each
+  language's "Rows to check"): Persian `دلِ درد` (one word, `دل‌درد`), `i-will-take-this`
+  and `i-want-this` with the same text, the laundromat as `خشکشویی` (a dry cleaner), and
+  the name reply missing the ezafe its neighbours write; Urdu's five board requests
+  worded for a man with no feminine variant (`speaker-variants.md`), `which-exit` with
+  which-gate's text, and replies worded as obligation (the Hindi case); Bengali
+  `you-are-welcome` as the greeting `স্বাগতম`, and the fish- and pork-stock questions
+  asking about the meat; Thai and Vietnamese fish stock as fish sauce, Thai `ฉันชื่อ`
+  against the pack's own `ผม` and `กินเจ` beside vegan, Vietnamese juice as `nước ngọt`,
+  and both packs' photo request losing "us"; Indonesian `vegetarian murni` beside
+  `Saya vegan`, the bandage as `Plester`, the conditions-card label, and the polite hello
+  `Selamat siang` (a midday greeting).
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.

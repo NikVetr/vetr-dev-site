@@ -6,7 +6,7 @@ dietary-needs.less-spicy,Jangan terlalu pedas,,dʒˈaŋan tərlˈalu pˈɛdas,,2
 dietary-needs.no-peanuts,Tanpa kacang tanah,,tˈanpa kˈatʃaŋ tˈanah,kacang alone = any bean or nut,2,id-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,tˈanpa kˈatʃaŋkatʃaŋan,,2,id-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,tˈanpa makˈanan lˈaʊt,,2,id-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",sˈaja vˌɛɡətarˈian mˈurni,"murni signals strict, not ""less meat""",2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Saya vegetarian,"Tanpa daging, ayam, ikan",sˈaja vˌɛɡətarˈian,"I am vegetarian -- vegetarian already means no meat, poultry or fish; murni ('pure'), the old row's last word, read as the stricter diet of Saya vegan beside it. text_alt spells the three out",2,"id-agent-v1;fix=KBBI vegetarian (orang yang ... tidak makan daging, tetapi makan sayuran dan hasil tumbuhan), read on kbbi.web.id;fix=id.wikipedia Vegetarianisme rev 30016165 (menolak ... makanan yang berasal dari hewan seperti daging, unggas, dan ikan ... terkadang masih mungkin mengonsumsi ... telur, keju ... susu);fix=KBBI murni 1 (tidak bercampur dengan unsur lain; tulen);rule=distinct-concepts-distinct-text (beside dietary-needs.i-am-vegan);row-corrections-v7;ipa=espeak"
 dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈaja vˈɛɡan,,2,id-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈaja tˈidak mˈakan {},,2,id-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,Saya alergi {},,sˈaja alˈɛrɡi {},,2,id-agent-v1;ipa=espeak

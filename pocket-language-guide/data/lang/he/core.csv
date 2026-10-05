@@ -43,5 +43,5 @@ question-words.some,מעט,מְעַט,me‘at,meˈat,,2,he-agent-v1;ipa=bgn
 question-words.very,מאוד,מְאוֹד,meod,meˈod,,2,he-agent-v1;ipa=bgn
 question-words.too,יותר מדי,יוֹתֵר מִדַּי,yoter miday,jotˈeʁ midˈaj,more than needed,2,he-agent-v1;ipa=bgn
 question-words.also,גם,גַּם,gam,ɡˈam,,2,he-agent-v1;ipa=bgn
-question-words.all-both,הכל / שניהם,הַכֹּל / שְׁנֵיהֶם,hakol / sheneyhem,hakˈol / ʃenejhˈem,everything / both of them,2,he-agent-v1;ipa=bgn
+question-words.all-both,הכול / שניהם,הַכּוֹל / שְׁנֵיהֶם,hakol / sheneyhem,hakˈol / ʃenejhˈem,everything / both of them,2,he-agent-v1;fix=Academy כל או כול? (hebrew-academy.org.il: כשהמילה עומדת לעצמה היא תיכתב ב־ו' -- הכול);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 question-words.how-much-what-price,כמה זה עולה?,כַּמָּה זֶה עוֹלֶה?,káma ze ‘ole?,kˈama zˈe olˈe,how much does it cost?,2,he-agent-v1;ipa=bgn

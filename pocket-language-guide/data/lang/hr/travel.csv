@@ -112,7 +112,7 @@ common-signs.no-smoking,zabranjeno pušenje,,zabraɲeno puʃeɲe,,2,hr-agent-v1;
 common-signs.no-photography,zabranjeno fotografiranje,,zabraɲeno fotoɡrafiraɲe,,2,hr-agent-v1;ipa=espeak
 common-signs.do-not-touch,ne dirati,,nˈe dirati,,2,hr-agent-v1;ipa=espeak
 common-signs.temporarily-closed,privremeno zatvoreno,,privremeno zatvoreno,,2,hr-agent-v1;ipa=espeak
-common-signs.open-operating,otvoreno / u pogonu,,otvoreno / u poɡonu,,2,hr-agent-v1;ipa=espeak
+common-signs.open-operating,otvoreno,,otvoreno,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) otvoren 1 (koji ... ima otvorena vrata ... opr. zatvoren);rule=one-reading-on-a-board (u pogonu, in operation, was the gloss of the range);row-corrections-v7;ipa=espeak"
 common-signs.closed,zatvoreno,,zatvoreno,,2,hr-agent-v1;ipa=espeak
 common-signs.stopped-stop,zaustavljeno / stop,,zaustavljeno / stˈop,,2,hr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Moram li poništiti ovu kartu?,,mˈoram li poniʃtiti ˈovu kˈartu,,2,hr-agent-v1;ipa=espeak

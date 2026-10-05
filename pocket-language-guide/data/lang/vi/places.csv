@@ -5,4 +5,4 @@ attractions-tickets.what-is-the-latest-entry-time,Vào cửa muộn nhất lúc 
 attractions-tickets.are-there-lockers,Có tủ gửi đồ không ạ?,,kɔ˧˥ t̪u˧˩˧ ɣyj˧˩˧ ɗo˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 attractions-tickets.may-i-take-photos,Chụp ảnh được không ạ?,Chụp hình được không ạ?,tʃup˨˩ˀ aɲ˧˩˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 attractions-tickets.please-take-a-photo-of-us,Chụp giúp chúng tôi một tấm ạ,,tʃup˨˩ˀ zup˧˥ tʃuŋ˧˥ t̪oj˧ mot̪˨˩ˀ t̪əm˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-attractions-tickets.could-you-take-a-photo-for-us,Chụp giúp một tấm được không ạ?,,tʃup˨˩ˀ zup˧˥ mot̪˨˩ˀ t̪əm˧˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Chụp giúp chúng tôi một tấm được không ạ?,,tʃup˨˩ˀ zup˧˥ tʃuŋ˧˥ t̪oj˧ mot̪˨˩ˀ t̪əm˧˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,"could you take one for us? -- chúng tôi, us; the old row did not say whom the photo was for",2,vi-agent-v1;in-pack-neighbour=attractions-tickets.please-take-a-photo-of-us (Chụp giúp chúng tôi một tấm ạ);in-pack-neighbour=pronouns-verbs.we-us (chúng tôi);rule=say-what-the-concept-says;row-corrections-v7;ipa=espeak

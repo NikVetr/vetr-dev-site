@@ -12,7 +12,7 @@ accessibility.cannot-climb-stairs,אני לא יכול לעלות במדרגות
 accessibility.need-to-sit-down,אני צריך לשבת,אֲנִי צָרִיךְ לָשֶׁבֶת,ani tsarikh lashévet,anˈi tsaʁˈix laʃˈevet,I need to sit,2,he-agent-v1;ipa=bgn
 accessibility.accessible-restroom,יש שירותים לנכים?,יֵשׁ שֵׁירוּתִים לְנָכִים?,yesh sheyrutim lenakhim?,jˈeʃ ʃejʁutˈim lenaxˈim,is there a toilet for the disabled?,2,he-agent-v1;ipa=bgn
 accessibility.station-assistance,יש סיוע בתחנה?,יֵשׁ סִיּוּעַ בַּתַּחֲנָה?,yesh siyúa‘ bataẖana?,jˈeʃ sijˈua bataxanˈa,is there assistance at the station?,2,he-agent-v1;ipa=bgn
-accessibility.help-me-carry,אפשר לעזר לי לשאת את זה?,אֶפְשָׁר לַעֲזֹר לִי לָשֵׂאת אֶת זֶה?,efshar la‘azor li laset et ze?,efʃˈaʁ laazˈoʁ lˈi lasˈet ˈet zˈe,can you help me carry this?,2,he-agent-v1;ipa=bgn
+accessibility.help-me-carry,אפשר לעזור לי לשאת את זה?,אֶפְשָׁר לַעֲזוֹר לִי לָשֵׂאת אֶת זֶה?,efshar la‘azor li laset et ze?,efʃˈaʁ laazˈoʁ lˈi lasˈet ˈet zˈe,can you help me carry this?,2,he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (ברוב המקרים תנועת o תסומן באות ו' כולל אות המנוקדת בחולם חסר למשל: בוקר ישמור);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 accessibility.board-first,אפשר לעלות ראשון?,אֶפְשָׁר לַעֲלוֹת רִאשׁוֹן?,efshar la‘alot rishon?,efʃˈaʁ laalˈot ʁiʃˈon,may I board first?,2,he-agent-v1;ipa=bgn
 accessibility.door-width,מה רוחב הדלת?,מָה רוֹחַב הַדֶּלֶת?,ma róẖav hadélet?,mˈa ʁˈoxav hadˈelet,what is the width of the door?,2,he-agent-v1;ipa=bgn
 accessibility.wheelchair-width,כיסא הגלגלים שלי ברוחב {} סנטימטר,כִּיסֵּא הַגַּלְגַּלִּים שֶׁלִּי בְּרוֹחַב {} סֶנְטִימֶטֶר,kise hagalgalim sheli beróẖav {} sentiméter,kisˈe haɡalɡalˈim ʃelˈi beʁˈoxav {} sentimˈeteʁ,my wheelchair is {} centimetres wide,2,he-agent-v1;ipa=bgn
@@ -42,7 +42,7 @@ toilets.womens-toilet,שירותי נשים,שֵׁירוּתֵי נָשִׁים,
 toilets.drinking-water,מים לשתייה,מַיִם לִשְׁתִּיָּיה,máyim lishtiya,mˈajim liʃtijˈa,water for drinking,2,he-agent-v1;ipa=bgn
 toilets.not-for-drinking,מים לא ראויים לשתייה,מַיִם לֹא רְאוּיִים לִשְׁתִּיָּיה,máyim lo reuyim lishtiya,mˈajim lˈo ʁeujˈim liʃtijˈa,water not fit for drinking -- the sign on a non-potable tap,2,he-agent-v1;ipa=bgn
 toilets.accessible-toilet,שירותים לנכים,שֵׁירוּתִים לְנָכִים,sheyrutim lenakhim,ʃejʁutˈim lenaxˈim,toilet for the disabled,2,he-agent-v1;ipa=bgn
-toilets.where-can-i-wash-my-hands,איפה אפשר לשטוף ידים?,אֵיפֹה אֶפְשָׁר לִשְׁטוֹף יָדַיִם?,éyfo efshar lishtof yadáyim?,ˈejfo efʃˈaʁ liʃtˈof jadˈajim,where is it possible to wash hands?,2,he-agent-v1;ipa=bgn
+toilets.where-can-i-wash-my-hands,איפה אפשר לשטוף ידיים?,אֵיפֹה אֶפְשָׁר לִשְׁטוֹף יָדַיִים?,éyfo efshar lishtof yadáyim?,ˈejfo efʃˈaʁ liʃtˈof jadˈajim,where is it possible to wash hands?,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (י' עיצורית נכפלת כשהיא באמצע מילה או בסופה למשל: בניין הייתה בניי ... היו""ד נכפלת במילה שמיים);fix=Academy terms DB חקלאות 1942 (יָדַיִם ידיים);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
 toilets.can-i-flush-the-paper,אפשר להוריד את הנייר באסלה?,אֶפְשָׁר לְהוֹרִיד אֶת הַנְּייָר בָּאַסְלָה?,efshar lehorid et haneyar ba’asla?,efʃˈaʁ lehoʁˈid ˈet hanejˈaʁ baaslˈa,can the paper go down the bowl?,2,he-agent-v1;ipa=bgn
 toilets.is-there-a-toilet-on-board,יש שירותים בנסיעה?,יֵשׁ שֵׁירוּתִים בַּנְּסִיעָה?,yesh sheyrutim bansi‘a?,jˈeʃ ʃejʁutˈim bansiˈa,is there a toilet on the ride?,2,he-agent-v1;ipa=bgn
 toilets.the-toilet-will-not-flush,ההדחה לא עובדת,הַהֲדָחָה לֹא עוֹבֶדֶת,hahadaẖa lo ‘ovédet,hahadaxˈa lˈo ovˈedet,the flush does not work,2,he-agent-v1;ipa=bgn

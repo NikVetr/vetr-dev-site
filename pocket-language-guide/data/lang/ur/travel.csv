@@ -7,9 +7,9 @@ directions.please-show-me-on-the-map,نقشے پر دکھائیے,,naqshe par di
 directions.where-is-the-nearest,سب سے قریبی {} کہاں ہے؟,سب سے نزدیکی {} کہاں ہے؟,sab se qarībī {} kahāñ hai?,sˈʌb seː qəɾˈiːbi {} kˈʌhãː hɛ,,2,ur-agent-v1;ipa=espeak
 directions.where-am-i,میں کہاں ہوں؟,,maiñ kahāñ hūñ?,mˈẽ kˈʌhãː hũː,,2,ur-agent-v1;ipa=espeak
 directions.which-way,کدھر؟,کس طرف؟,kidhar?,kɪdʰˈaɾ,,2,ur-agent-v1;ipa=espeak
-directions.can-i-walk-there,کیا پیدل جا سکتا ہوں؟,,kyā paidal jā saktā hūñ?,kjˈaː pˈeːdəl ɟˈaː sˈʌktˌaː hũː,سکتی ہوں if the speaker is a woman,2,ur-agent-v1;ipa=espeak
+directions.can-i-walk-there,کیا پیدل جا سکتا ہوں؟,,kyā paidal jā saktā hūñ?,kjˈaː pˈeːdəl ɟˈaː sˈʌktˌaː hũː,,2,ur-agent-v1;fix=the woman's wording is now a speaker_gender=feminine row in variants.csv;row-corrections-v7;ipa=espeak
 directions.how-far-is-it,کتنی دور ہے؟,,kitnī dūr hai?,kˈɪtni dˈuːɾ hɛ,,2,ur-agent-v1;ipa=espeak
-directions.which-exit,کون سا گیٹ؟,کون سا دروازہ؟,kaun sā geṭ?,kˈoːn sˈaː ɡˈeːʈ,which gate -- station and metro exits in Pakistan are numbered gates,2,ur-agent-v1;ipa=espeak
+directions.which-exit,کس گیٹ سے باہر جاؤں؟,کون سا دروازہ؟,kis geṭ se bāhar jā’ūñ?,kɪs ɡˈeːʈ seː bˈaːhəɾ ɟaːˈoːn,"through which gate do I go out? -- station exits in Pakistan are numbered gates; the verb of leaving keeps it apart from air-travel.which-gate (کون سا گیٹ؟), whose text it had",2,"ur-agent-v1;fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive);in-pack-frame=directions.how-do-i-get-to ({} کیسے جاؤں؟);in-pack-neighbour=building-words.exit (باہر جانے کا راستہ);rule=distinct-concepts-distinct-text;row-corrections-v7;ipa=espeak"
 directions.can-you-show-me-the-way,راستہ دکھا دیجیے,,rāsta dikhā dījiye,ɾˈaːstˌa dˈʌkʰaː diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
 directions.north,شمال,,shumāl,ʃəmˈaːl,Perso-Arabic set throughout; the Hindi uttar / dakshin series is not used in Urdu,2,ur-agent-v1;ipa=espeak
 directions.south,جنوب,,junūb,ɟʊnˈuːb,,2,ur-agent-v1;ipa=espeak

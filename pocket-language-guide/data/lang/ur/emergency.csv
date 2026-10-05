@@ -27,7 +27,7 @@ medical-conditions.i-have-a-heart-condition,مجھے دل کی بیماری ہے
 medical-conditions.i-am-allergic-to-penicillin,مجھے پینسلین سے الرجی ہے,,mujhe pinsilin se alarjī hai,mˌʊɟʰeː pˈeːnsəlˌiːn seː alɾˈʌɟi hɛ,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-have-epilepsy,مجھے مرگی ہے,,mujhe mirgī hai,mˌʊɟʰeː mˈʌɾɡˌiː hɛ,,2,ur-med-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,میری شوگر کم ہو گئی ہے,,merī shugar kam ho ga’ī hai,mˈeːɾi ʃˈoːɡəɾ kˈʌm hˈoː ɡˈai hɛ,,2,ur-med-v1;ipa=espeak
-medical-conditions.i-need-my-inhaler,مجھے میرا انہیلر چاہیے,,mujhe merā inhelar chāhiye,mˌʊɟʰeː mˈeːɾaː ˌanhˈiːləɾ cˈaːhjeː,,2,ur-med-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,مجھے اپنا انہیلر چاہیے,,mujhe apnā inhelar chāhiye,mˌʊɟʰeː ˈapnˌaː ˌanhˈiːləɾ cˈaːhjeː,"I need my (own) inhaler -- apnā, the reflexive possessive, refers back to the dative subject mujhe",2,ur-med-v1;fix=en.wikipedia Hindustani grammar rev 1365420047 (apnā is a (genitive) reflexive pronoun: my/your/etc. (own));in-pack-frame=lost-rescue.i-cannot-find-my-hotel (مجھے اپنا ہوٹل نہیں مل رہا);rule=reflexive-possessive-with-dative-subject;row-corrections-v7;ipa=espeak
 medical-conditions.i-am-pregnant,میں حاملہ ہوں,میں امید سے ہوں,maiñ hāmila hūñ,mˈẽ hˈaːməla hũː,the alternative is the everyday euphemism; the clinical word is in text because this is a medical row,2,ur-med-v1;ipa=espeak
 medical-conditions.i-carry-an-adrenaline-injector,میرے پاس ایڈرینالین انجیکٹر ہے,,mere pās aiḍrenālīn injekṭar hai,mˈeːɾeː pˈaːs ˌeːɖɾˌiːnaːlˈiːn anɟˈeːkʈəɾ hɛ,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,مجھے {} کی دوا لینی پڑتی ہے,,mujhe {} kī dawā lenī paṛtī hai,mˌʊɟʰeː {} ki dˈaʋaː lˈeːni pˈʌɽtˌiː hɛ,,2,ur-med-v1;ipa=espeak

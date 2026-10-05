@@ -27,8 +27,8 @@ communication.i-cannot-make-out-what-you-are-saying,حرفتان را متوجه
 communication.i-do-not-understand,نمی‌فهمم,,nemifahmam,nemifahmam,,2,fa-agent-v1;ipa=espeak
 communication.i-cannot-read-it,نمی‌توانم بخوانم,,nemitavānam bekhānam,nemitavɑnam bexɑnam,,2,fa-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,بفرمایید,,befarmāyid,befarmɑid,'go ahead' and 'here you are' and 'please sit' -- one word for all of them,2,fa-agent-v1;ipa=espeak
-quick-responses.yes-right,بله / درست,,bale / dorost,bale / dorost,,2,fa-agent-v1;ipa=espeak
-quick-responses.no-not,نه / خیر,,na / kheyr,na / xejr,kheyr is the formal no,2,fa-agent-v1;ipa=espeak
+quick-responses.yes-right,بله,,bale,bale,,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) بله (Yes. Yea. -- the form بله is more common in ordinary conversation than بلی);rule=one-reading-on-a-board (درست, right, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,نه,خیر,na,na,kheyr is the formal no,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) نه 1 (No -- Opposed to بله) and خیر (No. Nay. Often نه خیر);rule=one-reading-on-a-board (خیر, the formal no, is a second wording and moves to text_alt);row-corrections-v7;ipa=espeak"
 quick-responses.okay-can,می‌شود,,mishavad,miʃavad,it is possible,2,fa-agent-v1;ipa=espeak
 quick-responses.cannot-not-allowed,ممنوع است,,mamnu‘ ast,mamnuʔ ast,it is forbidden,2,fa-agent-v1;ipa=espeak
 quick-responses.works-okay,کار می‌کند,,kār mikonad,kɑr mikonad,,2,fa-agent-v1;ipa=espeak
@@ -119,7 +119,7 @@ board-answers.stay-here,بهتر است اینجا بمانید,,behtar ast inj�
 board-answers.the-hospital-is-close,بیمارستان نزدیک است,,bimārestān nazdik ast,bimɑrestɑn nazdik ast,,2,fa-agent-v1;ipa=espeak
 board-answers.there-is-no-wait,صف نیست، می‌توانید الان وارد شوید,,"saf nist, mitavānid alān vāred shavid",saf nist mitavɑnid alɑn vɑred ʃavid,,2,fa-agent-v1;ipa=espeak
 board-answers.we-do-not-have-it,این را نداریم,,in rā nadārim,in rɑ nadɑrim,,2,fa-agent-v1;ipa=espeak
-board-answers.what-is-your-name,اسم شما چیست؟,,esm-e shomā chist?,esm ʃomɑ tʃist,,2,fa-agent-v1;ipa=espeak
+board-answers.what-is-your-name,اسمِ شما چیست؟,,esm-e shomā chist?,esme ʃomɑ tʃist,,2,fa-agent-v1;fix=fa.wikipedia نقش‌نمای اضافه rev 43257768 (در ترکیب اضافیِ «کتابِ من» ... کسرهٔ پس از حرف پایانی واژهٔ «کتاب» نقش‌نمای اضافه است);in-pack-neighbour=introductions.what-is-your-name (اسمِ شما چیست؟);rule=ezafe-written-as-the-pack-writes-it;row-corrections-v7;ipa=espeak
 board-answers.where-does-it-hurt,کجا درد می‌کند؟,,kojā dard mikonad?,kodʒɑ dard mikonad,,2,fa-agent-v1;ipa=espeak
 kind-words.you-are-very-kind,شما خیلی مهربان هستید.,,shomā kheyli mehrabān hastid.,ʃomɑ xejli mehrbɑn hastid,,2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-your-help,برای کمکتان متشکرم.,,barāye komaketān motashakkeram.,barɑje komaketɑn moteʃakkeram,,2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"

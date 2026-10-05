@@ -46,7 +46,7 @@ board-answers.there-is-no-wait,صف نیست
 board-answers.we-do-not-have-it,نداریم
 board-answers.we-have-it,داریم
 board-answers.what-happened,شده
-board-answers.what-is-your-name,اسم
+board-answers.what-is-your-name,اسمِ
 board-answers.where-does-it-hurt,درد
 board-answers.where-to,کجا
 border-customs.here-is-my-passport,گذرنامهٔ
@@ -162,7 +162,7 @@ laundry.please-do-not-use-bleach,وایتکس
 laundry.please-iron-this,اتو
 laundry.please-wash-these-clothes,بشورید
 laundry.when-will-it-be-ready,کی
-laundry.where-is-a-laundromat,خشکشویی
+laundry.where-is-a-laundromat,لباسشوییِ سلف‌سرویس
 lost-rescue.i-do-not-know-where-i-am,کجا هستم
 lost-rescue.i-lost-my-bag,کیفم
 lost-rescue.i-lost-my-passport,گذرنامه‌ام
@@ -231,7 +231,7 @@ pharmacy-symptoms.i-have-a-fever,تب
 pharmacy-symptoms.i-have-a-headache,سردرد
 pharmacy-symptoms.i-have-a-rash,جوش
 pharmacy-symptoms.i-have-a-sore-throat,گُلودرد
-pharmacy-symptoms.i-have-a-stomach-ache,دلِ درد
+pharmacy-symptoms.i-have-a-stomach-ache,دل‌درد
 pharmacy-symptoms.i-have-diarrhea,اسهال
 pharmacy-symptoms.i-think-it-is-infected,عفونت
 pharmacy-symptoms.is-this-safe-during-pregnancy,بارداری
@@ -264,7 +264,7 @@ shopping.can-it-be-a-little-cheaper,ارزان‌تر
 shopping.do-you-have-this-in-stock,موجود
 shopping.how-much-is-this,چند
 shopping.i-am-just-looking,فقط نگاه
-shopping.i-will-take-this,می‌خواهم
+shopping.i-will-take-this,برمی‌دارم
 shopping.that-is-too-expensive,گران
 shopping.where-do-i-pay,پرداخت
 taxi.can-you-wait-for-me-here,منتظرم

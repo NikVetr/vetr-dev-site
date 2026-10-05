@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-introductions.my-name-is,ฉันชื่อ {},,chan chue {},tɕʰan˩˩˦ tɕʰɯː˥˩ {},,2,th-agent-v1;ipa=thaig2p
+introductions.my-name-is,ผมชื่อ {},,phom chue {},pʰom˩˩˦ tɕʰɯː˥˩ {},"my name is {} -- phom, the polite first person a man uses; a woman's dichan is the variant row. chan, the old row, is said to an equal or a junior",2,"th-agent-v1;fix=RID-2554 ผม ๒ (คำใช้แทนตัวผู้พูด เพศชาย ใช้พูดโดยสุภาพ) and ฉัน ๑ (คำใช้แทนตัวผู้พูด พูดกับผู้ที่เสมอกันหรือผู้ใหญ่พูดกับผู้น้อย), read on dictionary.orst.go.th;in-pack-neighbour=pronouns-verbs.i-me (ผม, feminine variant ดิฉัน);rule=polite-particle-or-pronoun-selected-by-speaker-sex;row-corrections-v7;ipa=thaig2p"
 introductions.nice-to-meet-you,ยินดีที่ได้รู้จัก,,yindi thi dai ruchak,jin˧diː˧ tʰiː˥˩ daːj˥˩ ruː˦˥tɕak˨˩,,2,th-agent-v1;ipa=thaig2p
 introductions.what-is-your-name,คุณชื่ออะไร,,khun chue arai,kʰun˧na˦˥ tɕʰɯː˥˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
 introductions.we-are-traveling-together,เราเที่ยวด้วยกัน,,rao thiao duai kan,raw˧ tʰia̯w˥˩ dua̯j˥˩kan˧,,2,th-agent-v1;ipa=thaig2p

@@ -5,7 +5,7 @@ hotel-words.check-in,צ׳ק-אין,צֶ׳ק-אִין,čeq-in,tʃekˈin,"the Engl
 hotel-words.check-out,צ׳ק-אאוט,צֶ׳ק-אַאוּט,čeq-aut,tʃekaˈut,,2,he-agent-v1;ipa=bgn
 hotel-words.luggage-storage,שמירת מזוודות,שְׁמִירַת מִזְוָודוֹת,shemirat mizvadot,ʃemiʁˈat mizvadˈot,keeping of suitcases,2,he-agent-v1;ipa=bgn
 hotel-basics.are-any-rooms-available,יש חדרים פנויים?,יֵשׁ חֲדָרִים פְּנוּיִים?,yesh ẖadarim penuyim?,jˈeʃ xadaʁˈim penujˈim,are there free rooms?,2,he-agent-v1;ipa=bgn
-hotel-basics.there-are-two-of-us,אנחנו שנים,אֲנַחְנוּ שְׁנַיִם,anáẖnu shenáyim,anˈaxnu ʃenˈajim,we are two,2,he-agent-v1;ipa=bgn
+hotel-basics.there-are-two-of-us,אנחנו שניים,אֲנַחְנוּ שְׁנַיִים,anáẖnu shenáyim,anˈaxnu ʃenˈajim,we are two,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (י' עיצורית נכפלת כשהיא באמצע מילה או בסופה למשל: בניין הייתה בניי ... היו""ד נכפלת במילה שמיים);fix=in-pack shopping.two-of-these (שְׁנַיִים);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
 hotel-basics.i-have-a-reservation,יש לי הזמנה,יֵשׁ לִי הַזְמָנָה,yesh li hazmana,jˈeʃ lˈi hazmanˈa,I have a reservation,2,he-agent-v1;ipa=bgn
 hotel-basics.can-i-charge-my-phone,אפשר להטעין את הטלפון?,אֶפְשָׁר לְהַטְעִין אֶת הַטֶּלֶפוֹן?,efshar lehat‘in et hatélefon?,efʃˈaʁ lehatˈin ˈet hatˈelefon,,2,he-agent-v1;ipa=bgn
 hotel-basics.i-would-like-a-non-smoking-room,אני רוצה חדר ללא עישון,אֲנִי רוֹצֶה חֶדֶר לְלֹא עִישּׁוּן,ani rotse ẖéder lelo ‘ishun,anˈi ʁotsˈe xˈedeʁ lelˈo iʃˈun,a room without smoking,2,he-agent-v1;ipa=bgn
@@ -24,8 +24,8 @@ hotel-requests.can-i-store-my-luggage,אפשר להשאיר את המזוודו�
 hotel-requests.no-housekeeping,"לא צריך ניקיון, תודה","לֹא צָרִיךְ נִיקָּיוֹן, תּוֹדָה","lo tsarikh niqayon, toda","lˈo tsaʁˈix nikajˈon, todˈa","no cleaning needed, thank you",2,he-agent-v1;ipa=bgn
 hotel-requests.another-towel-please,"עוד מגבת, בבקשה","עוֹד מַגֶּבֶת, בְּבַקָּשָׁה","‘od magévet, bevaqasha","ˈod maɡˈevet, bevakaʃˈa","another towel, please",2,he-agent-v1;ipa=bgn
 hotel-requests.what-time-is-check-out,באיזו שעה הצ׳ק-אאוט?,בְּאֵיזוֹ שָׁעָה הַצֶ׳ק-אַאוּט?,be’éyzo sha‘a hačeq-aut?,beˈejzo ʃaˈa hatʃekaˈut,,2,he-agent-v1;ipa=bgn
-hotel-requests.can-i-check-in-early,אפשר לעשות צ׳ק-אין מקדם?,אֶפְשָׁר לַעֲשׂוֹת צֶ׳ק-אִין מֻקְדָּם?,efshar la‘asot čeq-in muqdam?,efʃˈaʁ laasˈot tʃekˈin mukdˈam,can check-in be done early?,2,he-agent-v1;ipa=bgn
-hotel-requests.another-night,אפשר להשאר עוד לילה?,אֶפְשָׁר לְהִשָּׁאֵר עוֹד לַיְלָה?,efshar lehisha’er ‘od láyla?,efʃˈaʁ lehiʃaˈeʁ ˈod lˈajla,can I stay another night?,2,he-agent-v1;ipa=bgn
+hotel-requests.can-i-check-in-early,אפשר לעשות צ׳ק-אין מוקדם?,אֶפְשָׁר לַעֲשׂוֹת צֶ׳ק-אִין מוּקְדָּם?,efshar la‘asot čeq-in muqdam?,efʃˈaʁ laasˈot tʃekˈin mukdˈam,can check-in be done early?,2,he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (כל תנועת u תסומן באות ו' כולל אות המנוקדת בקובוץ);fix=Academy terms DB חשבונאות 1945 (מֻקְדָּם מוקדם);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
+hotel-requests.another-night,אפשר להישאר עוד לילה?,אֶפְשָׁר לְהִישָּׁאֵר עוֹד לַיְלָה?,efshar lehisha’er ‘od láyla?,efʃˈaʁ lehiʃaˈeʁ ˈod lˈajla,can I stay another night?,2,he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (ברוב המקרים תנועת i תסומן באות י' -- לא לפני שווא נח);fix=in-pack board-answers.stay-here (לְהִישָּׁאֵר);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 hotel-requests.is-there-a-safe,יש כספת?,יֵשׁ כַּסֶּפֶת?,yesh kaséfet?,jˈeʃ kasˈefet,is there a safe?,2,he-agent-v1;ipa=bgn
 hotel-requests.another-blanket,"עוד שמיכה, בבקשה","עוֹד שְׂמִיכָה, בְּבַקָּשָׁה","‘od semikha, bevaqasha","ˈod semixˈa, bevakaʃˈa","another blanket, please",2,he-agent-v1;ipa=bgn
 hotel-requests.wake-up-call,אפשר להעיר אותי בשעה {}?,אֶפְשָׁר לְהָעִיר אוֹתִי בְּשָׁעָה {}?,efshar leha‘ir oti besha‘a {}?,efʃˈaʁ lehaˈiʁ otˈi beʃaˈa {},can I be woken at the hour {}?,2,he-agent-v1;ipa=bgn

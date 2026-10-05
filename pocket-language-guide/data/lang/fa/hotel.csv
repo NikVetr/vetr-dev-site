@@ -40,12 +40,12 @@ room-problems.the-light-does-not-work,چراغ کار نمی‌کند,,cherāgh 
 room-problems.please-send-someone,لطفاً کسی را بفرستید درستش کند,,lotfan kasi rā beferestid dorostash konad,lotfan kasi rɑ beferestid dorostaʃ konad,,2,fa-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,شوفاژ کار نمی‌کند,بخاری,shufāzh kār nemikonad,ʃufɑʒ kɑr nemikonad,bokhāri is the other kind of heater,2,fa-agent-v1;ipa=espeak
 laundry.please-wash-these-clothes,لطفاً این لباس‌ها را بشورید,,lotfan in lebās-hā rā beshurid,lotfan in lebɑshɑ rɑ beʃurid,,2,fa-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,خشکشویی کجاست؟,,khoshkshuyi kojāst?,xoʃkʃui kodʒɑst,the Iranian shop does washing and dry cleaning both,2,fa-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,لباسشوییِ سلف‌سرویس کجاست؟,,lebāsshuyi-ye self-servis kojāst?,lebɑsʃuie selfservis kodʒɑst,"where is a self-service laundry? -- khoshkshuyi, the old row, is dry cleaning",2,fa-agent-v1;fix=fa.wikipedia رختشوی‌خانه سلف‌سرویس rev 44048916 (فروشگاه‌های با تعداد زیادی ماشین لباسشویی ... که هر کس می‌تواند با انداختن سکه در آن‌ها لباس‌های کثیف خود را بشوید -- از دلایل رواج لباسشویی‌های عمومی);fix=fa.wikipedia خشک‌شویی rev 44384162 (از آنجا که در این روش از آب استفاده نمی‌شود خشک‌شویی نام گرفته‌است);rule=word-for-the-concept;row-corrections-v7;ipa=espeak
 laundry.when-will-it-be-ready,کی آماده می‌شود؟,,key āmāde mishavad?,kej ɑmɑde miʃavad,,2,fa-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,کیلویی چند است؟,,kiluyi chand ast?,kilui tʃand ast,,2,fa-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,امروز آماده می‌شود؟,,emruz āmāde mishavad?,emruz ɑmɑde miʃavad,,2,fa-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,لطفاً وایتکس نزنید,,lotfan vāytks nazanid,lotfan vɑjtkas nazanid,vāytks is a brand name and it is the everyday word for bleach in Iran,2,fa-agent-v1;ipa=espeak
-laundry.laundromat,خشکشویی,,khoshkshuyi,xoʃkʃui,,2,fa-agent-v1;ipa=espeak
+laundry.laundromat,لباسشوییِ سلف‌سرویس,,lebāsshuyi-ye self-servis,lebɑsʃuie selfservis,self-service laundry,2,fa-agent-v1;fix=fa.wikipedia رختشوی‌خانه سلف‌سرویس rev 44048916 (فروشگاه‌های با تعداد زیادی ماشین لباسشویی ... که هر کس می‌تواند با انداختن سکه در آن‌ها لباس‌های کثیف خود را بشوید -- از دلایل رواج لباسشویی‌های عمومی);fix=fa.wikipedia خشک‌شویی rev 44384162 (از آنجا که در این روش از آب استفاده نمی‌شود خشک‌شویی نام گرفته‌است);rule=word-for-the-concept;row-corrections-v7;ipa=espeak
 laundry.please-iron-this,لطفاً این را اتو کنید,,lotfan in rā otu konid,lotfan in rɑ otu konid,,2,fa-agent-v1;ipa=espeak
 laundry.detergent,پودرِ لباسشویی,,pudr-e lebāsshuyi,pudre lebɑsʃui,,2,fa-agent-v1;ipa=espeak
 laundry.dry-cleaning,خشکشویی,,khoshkshuyi,xoʃkʃui,,2,fa-agent-v1;ipa=espeak

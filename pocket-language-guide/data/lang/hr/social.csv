@@ -29,10 +29,10 @@ communication.i-do-not-understand,Ne razumijem,,nˈe razumijem,,2,hr-agent-v1;ip
 communication.i-cannot-read-it,Ne znam ovo pročitati,,nˈe znˈam ˈovo protʃitati,,2,hr-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,"Molim vas, napišite to latinicom",,"mˈolim vˈas, napiʃite tˈo latinitsom","latinica is the Latin alphabet, which Croatian itself is written in",2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,molim / samo naprijed,,mˈolim / sˈamo naprijed,,2,hr-agent-v1;ipa=espeak
-quick-responses.yes-right,da / tako je,,dˈa / tˈako je,,2,hr-agent-v1;ipa=espeak
-quick-responses.no-not,ne / nije,,nˈe / nˈije,,2,hr-agent-v1;ipa=espeak
-quick-responses.okay-can,dobro / može,,dˈobro / mˈoʒe,,2,hr-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,ne može / nije dopušteno,,nˈe mˈoʒe / nije dopuʃteno,,2,hr-agent-v1;ipa=espeak
+quick-responses.yes-right,da,,dˈa,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) da 2 (u samostalnoj upotrebi znači odobravanje ili potvrđivanje -- Je li tako? — da);rule=one-reading-on-a-board (tako je, that is so, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,ne,,nˈe,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) ne (riječ za odricanje);rule=one-reading-on-a-board (nije, it is not, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.okay-can,dobro,,dˈobro,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dobro! (riječ za odobravanje onoga što se čulo ili onoga što se radi);rule=one-reading-on-a-board (može, can, was the can gloss and is quick-responses.can-possible's first half);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,nije dopušteno,,nije dopuʃteno,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dopušten (koji je odobren, dozvoljen);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, whose first half is ne može);row-corrections-v7;ipa=espeak"
 quick-responses.works-okay,radi / u redu,,rˈadi / u rˈedu,,2,hr-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,ne radi / ne,,nˈe rˈadi / nˈe,,2,hr-agent-v1;ipa=espeak
 quick-responses.can-possible,može / moguće je,,mˈoʒe / moɡutɕe je,,2,hr-agent-v1;ipa=espeak

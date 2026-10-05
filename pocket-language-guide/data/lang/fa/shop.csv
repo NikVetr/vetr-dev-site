@@ -16,7 +16,7 @@ shopping.that-is-too-expensive,خیلی گران است,,kheyli gerān ast,xejli
 shopping.can-it-be-a-little-cheaper,کمی ارزان‌تر نمی‌شود؟,,kami arzān-tar nemishavad?,kami arzɑntar nemiʃavad,,2,fa-agent-v1;ipa=espeak
 shopping.is-there-a-discount,تخفیف دارید؟,,takhfif dārid?,taxfif dɑrid,,2,fa-agent-v1;ipa=espeak
 shopping.where-do-i-pay,کجا پرداخت کنم؟,,kojā pardākht konam?,kodʒɑ pardɑxt konam,,2,fa-agent-v1;ipa=espeak
-shopping.i-will-take-this,همین را می‌خواهم,,hamin rā mikhāham,hamin rɑ mixɑham,,2,fa-agent-v1;ipa=espeak
+shopping.i-will-take-this,همین را برمی‌دارم,,hamin rā barmidāram,hamin rɑ barmidɑram,I'll take this one -- closes the sale; food-ordering.i-want-this keeps hamin rā mikhāham,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) برداشتن 1 (To take (up), to pick up -- Ex. کتاب را از روی میز بردار Take up the book from the desk);rule=distinct-concepts-distinct-text (food-ordering.i-want-this had the same words);row-corrections-v7;ipa=espeak"
 shopping.what-is-this,این چیست؟,,in chist?,in tʃist,,2,fa-agent-v1;ipa=espeak
 shopping.where-can-i-buy,کجا می‌توانم {} بخرم؟,,kojā mitavānam {} bekharam?,kodʒɑ mitavɑnam {} bexaram,,2,fa-agent-v1;ipa=espeak
 shopping.do-you-have-this-in-stock,از این موجود دارید؟,,az in mowjud dārid?,az in modʒud dɑrid,,2,fa-agent-v1;ipa=espeak

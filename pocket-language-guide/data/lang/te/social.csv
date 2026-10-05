@@ -28,10 +28,10 @@ communication.i-do-not-understand,నాకు అర్థం కాలేద�
 communication.i-cannot-read-it,నేను ఇది చదవలేను,,nēnu idi cadavalēnu,neːnu idi tʃadaʋaleːnu,,2,te-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,ఇంగ్లీషు అక్షరాలలో రాయండి,,iṁglīṣu akṣarālalō rāyaṁḍi,iŋɡliːʂu akʂaraːlaloː raːjaɳɖi,in English letters -- which is what Telugu calls the Roman alphabet,2,te-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,చెప్పండి,దయచేసి,ceppaṁḍi,tʃeppaɳɖi,go ahead / please,2,te-agent-v1;ipa=espeak
-quick-responses.yes-right,అవును / సరే,,avunu / sarē,aʋunu / sareː,,2,te-agent-v1;ipa=espeak
-quick-responses.no-not,కాదు / లేదు,,kādu / lēdu,kaːdu / leːdu,kādu denies identity; lēdu denies existence,2,te-agent-v1;ipa=espeak
-quick-responses.okay-can,సరే / అవుతుంది,,sarē / avutuṁdi,sareː / aʋutundi,,2,te-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,కూడదు / అనుమతి లేదు,,kūḍadu / anumati lēdu,kuːɖadu / anumati leːdu,kūḍadu = it must not be done,2,te-agent-v1;ipa=espeak
+quick-responses.yes-right,అవును,,avunu,aʋunu,,2,"te-agent-v1;fix=Brown Telugu-English Dictionary 1903 (DSAL) అవును (or ఔను -- It is so, yes);rule=one-reading-on-a-board (సరే, all right, was the okay word, not the yes);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,కాదు,,kādu,kaːdu,kādu denies identity; lēdu denies existence,2,"te-agent-v1;fix=Brown Telugu-English Dictionary 1903 (DSAL) కాదు (It is not (so) ... It is opposed to అవును, i.e., yes -- అవునా కాదా yes or no?);rule=one-reading-on-a-board (లేదు, there is not, is the other negation, the literal keeps the difference);row-corrections-v7;ipa=espeak"
+quick-responses.okay-can,సరే,,sarē,sareː,,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) సరే (in reply to a demand or request yes!, all right!);rule=one-reading-on-a-board (అవుతుంది, it will happen, was the can gloss and is quick-responses.can-possible's own row);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,కూడదు,,kūḍadu,kuːɖadu,kūḍadu = it must not be done,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) కూడదు 1 (impersonal use following an infinitive must not, should not);rule=one-reading-on-a-board (both halves were prohibitions, కూడదు, must not, is kept as the first and as what the board showed, and అనుమతి లేదు, there is no permission, is dropped);row-corrections-v7;ipa=espeak"
 quick-responses.works-okay,పని చేస్తుంది,,pani cēstuṁdi,pani tʃeːstundi,,2,te-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,పని చేయదు / లేదు,,pani cēyadu / lēdu,pani tʃeːjadu / leːdu,,2,te-agent-v1;ipa=espeak
 quick-responses.can-possible,అవుతుంది,సాధ్యం,avutuṁdi,aʋutundi,,2,te-agent-v1;ipa=espeak
