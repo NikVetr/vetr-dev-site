@@ -394,7 +394,11 @@ const PAIRS = [
  * original's 1.662in columns exactly; the app's default keeps 8.5pt clear of the
  * ET-8550's bordered edge, which is a safety decision and tests/solve.test.mjs's
  * subject rather than this file's. `scale: 1` sets every field at the theme's own
- * authored size, so a baseline reads in the theme's numbers.
+ * authored size, so a baseline reads in the theme's numbers. `flush: false`, because
+ * flush columns grow each row by a share of whatever its column has spare, which is a
+ * fact about the rows around a probe rather than about the probe -- left on, a
+ * signature would move whenever the corpus moved a neighbour, which is the churn these
+ * files exist to avoid. `tests/solve.test.mjs` covers flushing.
  * @param {typeof PAIRS[number]} pair
  */
 async function solvePinned(pair) {
@@ -407,6 +411,7 @@ async function solvePinned(pair) {
     scale: 1,
     padding: 0,
     split: 'adaptive',
+    flush: false,
     fieldSet: [...base.fieldSet, ...pair.fields],
     selection: {
       sections: Object.fromEntries(

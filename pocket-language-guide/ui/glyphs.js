@@ -1189,6 +1189,30 @@ export function splitGlyph(even) {
 }
 
 /**
+ * Three columns of rows on a page: ending level at the foot, or wherever their rows
+ * run out.
+ * @param {boolean} flush
+ */
+export function flushGlyph(flush) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 2, y: 2, width: box - 4, height: box - 4, rx: 1.5, class: 'g-page' }));
+  // Rows per column. Ragged, they keep their pitch and each column stops where its
+  // rows run out; flush, the same rows are spaced to reach the foot.
+  const counts = [6, 4, 5];
+  counts.forEach((n, c) => {
+    const x = 4.5 + c * 7.4;
+    const pitch = flush ? (box - 11) / (n - 1) : 3.4;
+    for (let r = 0; r < n; r += 1) {
+      svg.append(svgEl('rect', { x, y: 5 + r * pitch, width: 6, height: 1.8, rx: 0.6, class: 'g-ink' }));
+    }
+  });
+  // The foot of the face, which the flush columns meet.
+  svg.append(svgEl('line', { x1: 4, y1: box - 4.2, x2: box - 4, y2: box - 4.2, class: 'g-accent-line' }));
+  return svg;
+}
+
+/**
  * Re-set a glyph group's captions and tooltips, the same way `redrawGlyphs`
  * re-sets its drawings. Needed by any group whose labels name something the reader
  * chose, rather than naming a fixed setting -- the column list names the two

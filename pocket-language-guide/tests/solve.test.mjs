@@ -171,6 +171,42 @@ test('a column too loose to flush is reported rather than quietly left ragged', 
     `${loose} loose column(s) went unreported`);
 });
 
+test('a short column is brought to the foot by its rows, within a quarter of them', async () => {
+  // The gap ceilings stay: an underfull column must not open into a ladder of
+  // canyons. What they leave used to sit at the foot of the column, so columns ended
+  // at different heights; with `flush` (the default) the rows take it, each up to a
+  // quarter of its own height. Under-filled the same way as the loose-column test, so
+  // there are short columns to bring down.
+  const sections = Object.fromEntries(
+    ctx.corpus.sections.filter((_, i) => i % 8).map((s) => [s.section_id, false]),
+  );
+  const under = { ...spec, selection: { sections, items: {} } };
+  const flushed = (await buildSheet(ctx, under)).plan;
+  const ragged = (await buildSheet(ctx, { ...under, flush: false })).plan;
+  // The room is the same either way: dressing it does not make it smaller, and
+  // "Balance columns" still has it to propose into.
+  assert.deepEqual(flushed.looseness, ragged.looseness);
+
+  const box = contentBox(flushed.geometry, spec.paper, flushed.bands);
+  const foot = box.top + box.height;
+  const cols = flushed.geometry.columns;
+  /** Each column's hits on one face. @param {import('../core/types.js').Face} face @param {number} c */
+  const column = (face, c) => face.hits.filter((h) => Math.abs(h.x - box.colX(c)) < 0.5);
+  let brought = 0;
+  ragged.looseness.forEach((room, bin) => {
+    const face = Math.floor(bin / cols);
+    const c = bin % cols;
+    const items = column(ragged.faces[face], c).filter((h) => h.conceptId);
+    const itemHeight = items.reduce((sum, h) => sum + h.h, 0);
+    if (room < 0.5 || !items.length || room > itemHeight * 0.25) return;
+    const bottom = Math.max(...column(flushed.faces[face], c).map((h) => h.y + h.h));
+    assert.ok(Math.abs(foot - bottom) < 0.5,
+      `column ${bin} ends ${(foot - bottom).toFixed(1)}pt above the foot with ${room.toFixed(1)}pt to share`);
+    brought += 1;
+  });
+  assert.ok(brought > 0, 'this selection was supposed to leave columns short');
+});
+
 test('a note in a spaceless script wraps inside its own box', async () => {
   // A note is prose in the reader's language, and its break class was hardcoded
   // to 'space'. Japanese and Chinese have none, so the whole paragraph was a
@@ -812,6 +848,10 @@ test('a column with no neighbour centres what the glue could not absorb', async 
   // content is a single face and ends about a fifth of the way early, so 71pt sat
   // under the last row -- between a band reserved for the clock above it and one
   // reserved for widgets below, which made the sheet look cut off.
+  //
+  // Asked with `flush: false`, because flush columns -- the default since -- give
+  // most of that leftover to the rows themselves, each up to a quarter of its own
+  // height, and what is centred is only what they could not take. Both are pinned.
   const presets = JSON.parse(await readFile('data/presets.json', 'utf8'));
   const phone = {
     ...(await referenceSpec('zh-Hans', 'en')),
@@ -819,15 +859,22 @@ test('a column with no neighbour centres what the glue could not absorb', async 
     priority: PRIORITY_STEPS.minimum,
     autoFaces: true,
   };
-  const built = await buildSheet(ctx, phone);
   const box = contentBox(phone.geometry, phone.paper);
-  assert.equal(built.plan.faces.length, 1, 'the minimum step is one wallpaper');
-  const ys = built.plan.faces[0].runs.map((r) => r.y);
-  const above = Math.min(...ys) - box.top;
-  const below = box.top + box.height - Math.max(...ys);
-  assert.ok(above > 20, `expected the block to sit off the top, ${above.toFixed(0)}pt`);
-  assert.ok(Math.abs(above - below) < 12,
-    `expected the leftover split evenly, ${above.toFixed(0)}pt above and ${below.toFixed(0)}pt below`);
+  /** Room above the first row's words and below the last's. @param {boolean} flush */
+  const margins = async (flush) => {
+    const built = await buildSheet(ctx, { ...phone, flush });
+    assert.equal(built.plan.faces.length, 1, 'the minimum step is one wallpaper');
+    const ys = built.plan.faces[0].runs.map((r) => r.y);
+    return { above: Math.min(...ys) - box.top, below: box.top + box.height - Math.max(...ys) };
+  };
+  const ragged = await margins(false);
+  assert.ok(ragged.above > 20, `expected the block to sit off the top, ${ragged.above.toFixed(0)}pt`);
+  assert.ok(Math.abs(ragged.above - ragged.below) < 12,
+    `expected the leftover split evenly, ${ragged.above.toFixed(0)}pt above and ${ragged.below.toFixed(0)}pt below`);
+  const flush = await margins(true);
+  assert.ok(flush.above < ragged.above - 10, `the rows should take most of it, ${flush.above.toFixed(0)}pt left above`);
+  assert.ok(Math.abs(flush.above - flush.below) < 12,
+    `and what they leave is still split evenly, ${flush.above.toFixed(0)}pt above and ${flush.below.toFixed(0)}pt below`);
 
   // And the multi-column card is untouched, because there its columns must agree.
   const card = await referenceSpec('zh-Hans', 'en');

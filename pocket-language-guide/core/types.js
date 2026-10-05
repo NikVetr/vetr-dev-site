@@ -243,6 +243,9 @@
  *   item's two halves is solved once per section or once per row. Defaults to
  *   `consistent`; per row is worth 5-23% of type size and is what the hand-built
  *   reference sheets do
+ * @property {boolean} [flush]  whether a column the glue leaves short is brought to the
+ *   foot of the face by sharing the rest of the room between its items. On unless
+ *   `false`; see `placeColumn` in `core/solve/justify.js`
  * @property {Record<string,string>} [sectionColors]  section id -> colour role,
  *   overriding the registry's own. Colour is how the sheet codes its sections, so
  *   which section takes which is an editorial choice rather than a fact.

@@ -992,6 +992,23 @@ test('choosing a segment does not widen it, so its row cannot reflow', async ({ 
   }
 });
 
+test('columns end flush by default, and Ragged leaves them where their rows end', async ({ page }) => {
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const ends = field(page, 'Column ends');
+  await expect(ends.getByRole('radio', { name: 'Flush', exact: true })).toHaveAttribute('aria-checked', 'true');
+  // The credit card has dozens of short columns, so there is room to dress either way.
+  await page.getByRole('radio', { name: 'Credit card', exact: true }).click();
+  await expect.poll(() => page.locator('.face.focused svg').first().getAttribute('viewBox'),
+    { timeout: 120_000 }).toMatch(/^0 0 242\.65 /);
+  const faces = () => page.locator('.face-strip .face svg').evaluateAll((all) => all.map((svg) => svg.innerHTML).join(''));
+  const flush = await faces();
+  await ends.getByRole('radio', { name: 'Ragged', exact: true }).click();
+  await expect.poll(faces, { timeout: 120_000 }).not.toBe(flush);
+  await ends.getByRole('radio', { name: 'Flush', exact: true }).click();
+  await expect.poll(faces, { timeout: 120_000 }).toBe(flush);
+});
+
 test('a folded card\'s size can be the folded card or the unfolded sheet', async ({ page }) => {
   // Bifold used to mean one thing: the size chosen is the folded card, and the sheet
   // is twice as wide. The reader can now say the size is the unfolded sheet instead.

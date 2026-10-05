@@ -12,7 +12,7 @@ import { breakColumns } from './columnbreak.js';
 import { backgroundRects } from './background.js';
 import { cornerOrnaments, gutterOrnaments, motifFor, ornamentRule } from '../ornaments.js';
 import { elvenInset, elvenFrame, elvenHeading } from '../elven-frame.js';
-import { placeColumn } from './justify.js';
+import { placeColumn, grownPaint } from './justify.js';
 
 // Scale 0 puts every field at the smallest size its own script can carry, so the
 // search has no separate floor to respect.
@@ -903,10 +903,13 @@ export function layout(input) {
       const indices = broken.columns[bin] ?? [];
       const x = box.colX(c);
       const columnAtoms = indices.map((i) => atoms[i]);
-      const { offsets, residual } = placeColumn(
-        columnAtoms, faceCols.tops[bin], broken.slack[bin],
+      const { offsets, grow, residual, room } = placeColumn(
+        columnAtoms, faceCols.tops[bin], broken.slack[bin], spec.flush !== false,
       );
-      looseness.push(residual);
+      // What the gaps could not take, not what is left after the rows were grown into
+      // it: that is still room a row could have, which is what "Balance columns" and
+      // the loose-columns note are asking about.
+      looseness.push(room);
       // Slack the glue could not absorb without opening a canyon is left over, and
       // it has to go *somewhere*. Against a neighbour it goes at the bottom, because
       // a short column whose first row no longer lines up with the column beside it
@@ -921,12 +924,13 @@ export function layout(input) {
         const dy = offsets[k] + drop;
         if (atom.colorRole) {
           placed.push({
-            colorRole: atom.colorRole, x, y: dy, w: box.colWidth, h: atom.height,
+            colorRole: atom.colorRole, x, y: dy, w: box.colWidth, h: atom.height + grow[k],
           });
         }
         if (!atom.paint) return;
-        for (const r of atom.paint.rects) face.rects.push({ ...r, x: r.x + x, y: r.y + dy });
-        for (const p of atom.paint.paths ?? []) {
+        const paint = grow[k] ? grownPaint(atom.paint, atom.height, grow[k]) : atom.paint;
+        for (const r of paint.rects) face.rects.push({ ...r, x: r.x + x, y: r.y + dy });
+        for (const p of paint.paths ?? []) {
           const mark = { ...p, x: p.x + x, y: p.y + dy };
           const cut = spec.geometry.pageW / 2;
           if (mark.x < cut && mark.x + mark.w > cut) {
@@ -943,9 +947,9 @@ export function layout(input) {
             }
           } else (face.paths ??= []).push(mark);
         }
-        for (const r of atom.paint.runs) face.runs.push({ ...r, x: r.x + x, y: r.y + dy });
-        for (const i of atom.paint.icons) face.icons.push({ ...i, x: i.x + x, y: i.y + dy });
-        for (const h of atom.paint.hits) face.hits.push({ ...h, x: h.x + x, y: h.y + dy });
+        for (const r of paint.runs) face.runs.push({ ...r, x: r.x + x, y: r.y + dy });
+        for (const i of paint.icons) face.icons.push({ ...i, x: i.x + x, y: i.y + dy });
+        for (const h of paint.hits) face.hits.push({ ...h, x: h.x + x, y: h.y + dy });
       });
     }
     // The running head, drawn after the columns so it is never something the

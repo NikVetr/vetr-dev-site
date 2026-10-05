@@ -16,7 +16,7 @@ import {
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl, foldControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
-  headControl, setCaption,
+  headControl, setCaption, flushGlyph,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
@@ -466,7 +466,23 @@ export function createFormatPanel(input) {
   // light switch under this ladder as well, a shortcut to the same palette and back,
   // and it came out as a second control for a choice this one already makes. The
   // app's own appearance is in the settings, with the rest of the app's.
-  const theme = paletteControl({
+  // Whether a column the glue leaves short is brought to the foot of the face by
+  // giving its rows the rest of the room. On by default, because columns that end at
+  // different heights read as a layout that ran out rather than one that was set --
+  // and a choice, because the rows it grows are a little airier than the rest.
+  const flush = segmented({
+    label: t('format.columnEnds'),
+    value: spec.flush !== false,
+    options: [true, false].map((on) => ({
+      value: on,
+      caption: t(on ? 'format.columnEnds.flush' : 'format.columnEnds.ragged'),
+      title: t(on ? 'format.columnEndsTitle.flush' : 'format.columnEndsTitle.ragged'),
+      glyph: flushGlyph(on),
+    })),
+    onChange: (on) => emit({ flush: on }),
+  });
+
+    const theme = paletteControl({
     themes,
     themeId: spec.themeId,
     themeColors: spec.themeColors,
@@ -755,6 +771,7 @@ export function createFormatPanel(input) {
     panelField(t('format.split'), [split.group]),
     headField,
     panelField(t('format.textPadding'), [padding.group]),
+    panelField(t('format.columnEnds'), [flush.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
     ornaments.root,
     panelField(t('format.background'),
@@ -803,6 +820,7 @@ export function createFormatPanel(input) {
       typefaceControl.select(next.typeface);
       typeSize.select(next.scale);
       padding.select(next.padding);
+      flush.select(next.flush !== false);
       arrangement.select(next.arrangement);
       split.select(next.split ?? 'consistent');
       head.sync(next);

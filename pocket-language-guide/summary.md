@@ -144,8 +144,9 @@ line of type on every entry that used to have two. Eight is the same answer as f
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
 
-Every column is flush at the top *and* the bottom, an item never splits across a
-column, and a section heading is never stranded at the foot of one.
+Every column is flush at the top *and* the bottom -- the sheet's last column may run
+short -- an item never splits across a column, and a section heading is never
+stranded at the foot of one.
 
 PDF is one file. PNG and SVG are one file *per face*, so a multi-face export is a
 single zip (`core/zip.js`, store-only — the payload is already-compressed PNG, and
@@ -449,7 +450,16 @@ The gallery card offers Signal in place of Converse.
   level up, so it is solved the same way rather than by a greedy fill.
 - **`justify.js`** — clamped water-filling distributes each column's slack across
   its interior gaps in proportion to their stretch weights, with a per-gap
-  ceiling so a loose column spreads evenly instead of opening one canyon.
+  ceiling so a loose column spreads evenly instead of opening one canyon. What the
+  ceilings leave is then shared between the column's rows and notes (`spec.flush`,
+  the format panel's *Column ends*, on by default): each grows by an equal share, up
+  to a quarter of its own height, its shading and rule moving with it and the room
+  split above and below its words, so the columns of a face end level without any gap
+  widening past its ceiling. A quarter because every column measured in the middle of
+  a sheet ended short by at most 22% of its items, and the ones short by more were the
+  last of a sheet, which the breaker lets run short on purpose -- stretching those
+  would be the canyon again, drawn as rows. `looseness` still reports the room before
+  the rows took it, which is what "Balance columns" proposes into.
 - **`index.js`** — resolves the two free variables. With a fixed face count,
   auto-fit binary-searches the largest type scale that still fits, seeded
   analytically (content height rises roughly with the square of the scale, since
