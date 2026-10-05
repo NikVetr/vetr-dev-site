@@ -122,7 +122,7 @@ item     numbers-money.s-n                  box 119.66 x 8.48
   run    13.32    5.75   10.98  latin-cond-400i 5.20  #3F4A55 ltr  "LOSH"
   run    42.24    5.81   16.56  latin-cond-400i 5.40  #111820 ltr  "shalosh"
   run    71.01    6.48   16.29  hebrew-700 6.60  #111820 rtl  "שלוש"
-  run   107.40    6.16    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+  run   115.31    6.16    3.50  latin-cond-700 6.60  #111820 ltr  "3"
 
 item     heading:emergency-medical          box 119.66 x 10.20
   rect    0.00    8.68  119.66 x 0.90  #B3261E

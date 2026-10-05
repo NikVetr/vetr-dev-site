@@ -99,7 +99,7 @@ item     numbers-money.s-n                  box 119.66 x 7.32
   rect    0.00    0.00  119.66 x 7.32  #F4F6F8
   rect    0.00    0.00  0.92 x 7.32  #B45100
   rect    0.00    7.10  119.66 x 0.22  #BCC6CF
-  run    15.14    5.58    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+  run     1.72    5.58    3.50  latin-cond-700 6.60  #111820 ltr  "3"
   run    45.30    5.58   11.82  latin-cond-700 6.60  #111820 ltr  "tres"
   run   111.11    5.17    7.70  latin-cond-400i 5.20  #3F4A55 ltr  "tres"
 

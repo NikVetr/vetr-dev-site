@@ -845,6 +845,17 @@ so the priority ladder is untouched. Forcing one template on a whole section was
 other option and is worse both ways: the reference grid is much the more compact, and
 a long phrase does not fit it.
 
+**The outermost columns hug the item's edges.** In every grid the leftmost column that
+carries anything in its table is set flush left and the rightmost flush right, whatever
+the theme's field says, and the columns between keep the theme's alignment
+(`edgeAlign` in `atoms.js`). The number table centred its numerals, which read as
+floating in their cells beside the left-hanging tables around them, and a table whose
+respelling is switched off left its last column hanging left at the right edge. It is
+decided over the whole table, so one row's empty cell cannot realign its column, and in
+drawn order, so on a right-to-left sheet the numerals hug the right edge. Every
+renderer draws the plan, so the PDF, the SVG and the studio's preview agree by
+construction.
+
 ## Conversation boards
 
 A fourth surface, and the only one that is not about paper. `conversation.html` is a

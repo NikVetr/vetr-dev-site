@@ -540,6 +540,21 @@ function itemAtoms(ctx, block, rows, withPaint) {
     ctx, arrangeTemplate(base, ctx.spec.arrangement ?? 'mixed', ctx.shown), rows,
   );
   const { template, pad, rowGap, colGap, centred } = table;
+  // **The outermost columns hug the item's edges.** The leftmost column that carries
+  // anything in this table is set flush left and the rightmost flush right, whatever
+  // the theme says, and the ones between keep the theme's own alignment. The number
+  // table centred its numerals, so the column read as floating in its cell beside the
+  // left-hanging tables either side of it; and a table whose respelling is switched
+  // off left its gloss hanging left at the right edge. Asked of the whole table, so a
+  // row with an empty cell cannot align its column differently from the rest, and of
+  // the drawn order, so on a right-to-left sheet it is the visual edges that hold.
+  const live = (table.rows[0]?.grid ?? [])
+    .map((_, j) => table.rows.some((r) => r.stacks[j].live.length > 0));
+  const first = live.indexOf(true);
+  const last = live.lastIndexOf(true);
+  /** @param {number} j @param {'start'|'end'|'center'} align */
+  const edgeAlign = (j, align) => (first === last ? align
+    : j === first ? 'start' : j === last ? 'end' : align);
 
   const startRow = ctx.rowIndex;
   return rows.map((row, i) => {
@@ -613,7 +628,7 @@ function itemAtoms(ctx, block, rows, withPaint) {
         if (k > 0) y += rowGap;
         const painted = paintField(ctx, cell.text, cell.style, {
           x, y, w: widths[j],
-          align: resolveAlign(cell.fs.align, ctx.mirror),
+          align: edgeAlign(j, resolveAlign(cell.fs.align, ctx.mirror)),
           fill: ctx.colorFor(cell.fs, block.colorRole),
         });
         rects.push(...painted.rects);
