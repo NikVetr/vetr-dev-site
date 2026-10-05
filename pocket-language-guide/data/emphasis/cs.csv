@@ -1,0 +1,306 @@
+concept_id,key
+about-me.i-am-a-doctor,lékařka | lékař
+about-me.i-am-a-nurse,zdravotní bratr | zdravotní sestra
+about-me.i-am-a-student,studentka | student
+about-me.i-am-a-teacher,učitelka | učitel
+about-me.i-am-an-engineer,inženýrka | inženýr
+about-me.i-am-retired,důchodu
+about-me.i-have-my-own-business,vlastní firmu
+about-me.i-work-in-an-office,kanceláři
+accessibility.step-free,bezbariérový
+air-travel.i-would-like-a-window-seat,okna
+air-travel.i-would-like-an-aisle-seat,uličky
+air-travel.my-luggage-did-not-arrive,nedorazilo
+air-travel.where-is-check-in,odbavení
+air-travel.where-is-the-security-check,bezpečnostní kontrola
+attractions-tickets.are-there-lockers,skříňky
+attractions-tickets.could-you-take-a-photo-for-us,nás vyfotit
+attractions-tickets.do-i-need-a-reservation,rezervaci
+attractions-tickets.may-i-take-photos,fotografovat
+attractions-tickets.what-is-the-latest-entry-time,poslední možný vstup
+attractions-tickets.where-can-i-buy-tickets,vstupenky
+board-answers.after-food,Po
+board-answers.at-the-next-stop,příští zastávce
+board-answers.before-food,Před
+board-answers.can-you-walk,chodit
+board-answers.help-is-coming,Pomoc
+board-answers.i-am-calling-an-ambulance,záchranku
+board-answers.i-am-calling-the-police,policii
+board-answers.i-do-not-have-a-phone,telefon
+board-answers.i-will-find-someone,Najdu někoho
+board-answers.i-will-show-you,Ukážu
+board-answers.i-will-write-it-down,Zapíšu
+board-answers.i-would-rather-not-say,nechám pro sebe
+board-answers.it-is-closed,zavřeno
+board-answers.it-is-free,zdarma
+board-answers.it-is-over-there,tam
+board-answers.my-name-is-blank,Jmenuji
+board-answers.none-of-these,Není tu
+board-answers.not-possible,není možné
+board-answers.only-for-customers,zákazníky
+board-answers.pay-on-board,ve vozidle
+board-answers.prescription-only,předpis
+board-answers.see-a-doctor,lékaři
+board-answers.stay-here,zůstat
+board-answers.the-hospital-is-close,Nemocnice | blízko
+board-answers.there-is-no-wait,Není tu fronta
+board-answers.we-are-full,plno
+board-answers.we-do-not-have-it,nemáme
+board-answers.we-have-it,máme
+board-answers.what-happened,stalo
+board-answers.what-is-your-name,jmenujete
+board-answers.where-does-it-hurt,bolí
+board-answers.where-to,Kam
+border-customs.here-is-my-passport,pas
+border-customs.i-am-here-for-business,služebně
+border-customs.i-am-visiting-family,rodinu
+border-customs.i-have-a-connecting-flight,navazující let
+border-customs.where-do-i-collect-my-baggage,vyzvednu
+color-size-returns.do-you-have-a-bag,tašku
+color-size-returns.do-you-have-another-size,velikosti
+color-size-returns.may-i-try-it-on,zkusit
+communication.can-you-help-me,pomoct
+communication.please-speak-more-slowly,pomaleji
+dietary-needs.does-it-contain-fish-stock,rybí vývar
+dietary-needs.does-it-contain-pork-fat,sádlo
+dietary-needs.does-it-contain-pork-stock,vepřový vývar
+dietary-needs.i-am-vegan,veganka | vegan
+dietary-needs.i-am-vegetarian,vegetariánka | vegetarián
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,vajec
+dietary-needs.no-meat,masa
+dietary-needs.no-nuts,ořechů
+dietary-needs.no-peanuts,arašídů
+dietary-needs.no-pork,vepřového masa
+dietary-needs.no-seafood,mořských plodů
+dietary-needs.no-sesame,sezamu
+directions.can-i-walk-there,dojít pěšky
+directions.can-you-show-me-the-way,cestu
+directions.how-long-on-foot,Jak dlouho
+directions.is-it-far,daleko
+directions.please-show-me-on-the-map,mapě
+emergency-medical.i-am-bleeding-badly,krvácím
+emergency-medical.i-am-having-a-severe-allergic-reaction,anafylaktický šok
+emergency-medical.i-am-injured,zraněný | zraněná
+emergency-medical.i-cannot-breathe,dýchat
+emergency-medical.i-feel-unwell,Necítím | dobře
+emergency-medical.i-have-chest-pain,Bolí | hrudi
+emergency-medical.i-have-travel-insurance,pojištění
+emergency-medical.i-need-a-doctor,doktora
+emergency-medical.i-think-a-bone-is-broken,zlomenou kost
+emergency-medical.it-hurts-here,bolí
+emergency-medical.please-call-an-ambulance,sanitku
+emergency-medical.please-call-my-emergency-contact,nouzovému kontaktu
+emergency-medical.please-take-me-to-a-hospital,nemocnice
+emergency-medical.this-is-an-emergency,nouzová situace
+emergency-medical.this-person-is-unconscious,bezvědomí
+emergency-medical.where-is-the-nearest-hospital,nejbližší
+family-intros.this-is-my-brother,bratr
+family-intros.this-is-my-colleague,kolega z práce
+family-intros.this-is-my-daughter,dcera
+family-intros.this-is-my-father,táta
+family-intros.this-is-my-husband,manžel
+family-intros.this-is-my-mother,máma
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,sestra
+family-intros.this-is-my-son,syn
+family-intros.this-is-my-wife,manželka
+food-ordering.i-want-this,Dám si
+food-ordering.is-a-table-available,volný stůl
+food-ordering.is-this-vegetarian,vegetariánské
+food-ordering.table-for-two,Stůl | dva
+food-ordering.what-do-you-recommend,doporučujete
+hiking-parks.how-long-to-the-summit,vrchol
+hiking-parks.how-long-to-the-viewpoint,vyhlídku
+hiking-parks.is-this-trail-suitable-for-beginners,začátečníky
+hiking-parks.where-is-the-trailhead,začátek
+hiking-parks.which-route-is-easier,snazší
+hitchhiking.can-you-give-me-a-ride,vzít
+hitchhiking.i-can-pay-for-fuel,benzín
+hitchhiking.i-only-need-to-go-to-the-next-town,nejbližšího města
+hitchhiking.is-there-room-for-two,místo | dva
+hitchhiking.thank-you-for-the-ride,Děkuji
+hitchhiking.where-are-you-going,Kam
+hotel-basics.are-any-rooms-available,pokoje
+hotel-basics.how-much-per-night,za noc
+hotel-basics.i-have-a-reservation,rezervaci
+hotel-basics.i-would-like-a-non-smoking-room,nekuřácký
+hotel-basics.i-would-like-a-quiet-room,tichý
+hotel-basics.is-breakfast-included,snídaně
+hotel-basics.is-there-a-washing-machine,pračka
+hotel-basics.is-there-air-conditioning,klimatizace
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,podívat
+hotel-requests.another-blanket,deku
+hotel-requests.another-night,ještě jednu noc
+hotel-requests.another-towel-please,ručník
+hotel-requests.can-i-check-in-early,dříve
+hotel-requests.can-i-check-out-later,později
+hotel-requests.can-i-store-my-luggage,zavazadla
+hotel-requests.is-there-a-safe,trezor
+hotel-requests.what-time-does-breakfast-start,snídaně
+hotel-requests.what-time-is-check-out,check-out
+in-a-building.is-this-the-correct-entrance,správný
+introductions.i-am-a-tourist,turista | turistka
+introductions.i-am-from,země
+introductions.i-am-traveling-alone,sám | sama
+introductions.my-name-is,Jmenuji
+introductions.this-is-my-friend,kamarád
+introductions.we-are-traveling-together,spolu
+introductions.what-is-your-name,jmenujete
+introductions.where-are-you-from,Odkud
+kind-words.i-had-a-wonderful-time,skvěle
+kind-words.i-like-it-very-much,líbí
+kind-words.it-is-beautiful-here,krásně
+kind-words.thank-you-for-everything,všechno
+kind-words.thank-you-for-your-help,pomoc
+kind-words.thank-you-for-your-hospitality,pohostinnost
+kind-words.this-is-delicious,chutné
+kind-words.you-are-very-kind,milé
+laundry.can-it-be-ready-today,dnes
+laundry.how-much-per-kilo,za kilo
+laundry.please-do-not-use-bleach,bělidlo
+laundry.please-iron-this,Vyžehlete
+laundry.please-wash-these-clothes,Vyperte
+laundry.when-will-it-be-ready,Kdy
+laundry.where-is-a-laundromat,prádelna
+lost-rescue.i-do-not-know-where-i-am,kde jsem
+lost-rescue.i-lost-my-bag,tašku
+lost-rescue.i-lost-my-passport,pas
+lost-rescue.i-lost-my-phone,telefon
+lost-rescue.i-lost-my-wallet,peněženku
+lost-rescue.my-child-is-missing,dítě
+lost-rescue.please-call-the-police,policii
+lost-rescue.we-are-here,tady
+massage-spa.focus-on-back,záda
+massage-spa.focus-on-feet,chodidla
+massage-spa.focus-on-neck,krk
+massage-spa.focus-on-shoulders,ramena
+massage-spa.please-avoid-this-area,vyhněte
+massage-spa.please-pause,přerušte
+massage-spa.please-stop,Přestaňte
+massage-spa.reply-ask-supervisor,vedoucí
+massage-spa.reply-cannot-avoid-this-treatment,vyhnout nedá
+massage-spa.reply-does-it-hurt-there,Bolí
+massage-spa.reply-i-will-avoid-that-area,vyhnu
+massage-spa.reply-which-area-exactly,Které místo
+massage-spa.stronger-pressure,víc
+massage-spa.that-pressure-is-good,akorát
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicilin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfonamidy
+medical-conditions.i-am-diabetic,diabetik | diabetička
+medical-conditions.i-am-pregnant,těhotná
+medical-conditions.i-carry-an-adrenaline-injector,adrenalinový
+medical-conditions.i-have-a-heart-condition,srdeční
+medical-conditions.i-have-asthma,astma
+medical-conditions.i-have-epilepsy,epilepsii
+medical-conditions.i-need-insulin,inzulín
+medical-conditions.i-need-my-inhaler,inhalátor
+medical-conditions.i-take-blood-thinners,ředění krve
+medical-conditions.inject-it-into-my-outer-thigh,stehna
+medical-conditions.my-blood-sugar-is-low,nízkou | cukru
+medical-conditions.my-injector-is-in-my-bag,autoinjektor | tašce
+medical-conditions.please-give-me-sugar-or-juice,cukr | šťávu
+medical-conditions.this-card-lists-my-conditions,karta
+medical-conditions.this-is-my-medicine,léky
+outdoors.are-there-dangerous-animals-here,nebezpečná zvířata
+outdoors.can-we-camp-here,stanovat
+outdoors.is-it-safe-to-swim-here,koupání
+payment-receipt.can-we-pay-separately,zvlášť
+payment-receipt.how-much-in-total,celkem
+payment-receipt.is-tax-included,daň
+payment-receipt.my-card-was-declined,odmítnuta
+payment-receipt.pay-by-card,kartou
+payment-receipt.the-bill-is-wrong,účet nesouhlasí
+pharmacy-symptoms.anti-diarrhea-medicine,průjmu
+pharmacy-symptoms.before-or-after-food,jídlem
+pharmacy-symptoms.can-i-get-this-medicine-here,lék
+pharmacy-symptoms.cough-medicine,kašli
+pharmacy-symptoms.do-i-need-a-prescription,recept
+pharmacy-symptoms.how-much-should-i-take,Kolik
+pharmacy-symptoms.i-feel-dizzy,Točí
+pharmacy-symptoms.i-have-a-burn,popáleninu
+pharmacy-symptoms.i-have-a-cough,kašel
+pharmacy-symptoms.i-have-a-cut,řeznou ránu
+pharmacy-symptoms.i-have-a-fever,horečku
+pharmacy-symptoms.i-have-a-headache,hlava
+pharmacy-symptoms.i-have-a-rash,vyrážku
+pharmacy-symptoms.i-have-a-sore-throat,krku
+pharmacy-symptoms.i-have-a-stomach-ache,břicho
+pharmacy-symptoms.i-have-diarrhea,průjem
+pharmacy-symptoms.i-think-it-is-infected,infikované
+pharmacy-symptoms.is-this-safe-during-pregnancy,těhotenství
+pharmacy-symptoms.motion-sickness-tablets,cestovní nevolnost
+pharmacy-symptoms.painkiller,bolesti
+pharmacy-symptoms.the-pain-is-severe,Bolest | silná
+pharmacy-symptoms.which-pharmacy-is-open-now,teď otevřeno
+police-consulate.i-need-an-interpreter,tlumočníka
+police-consulate.i-want-to-contact-my-embassy,velvyslanectví
+police-consulate.i-want-to-report-a-theft,nahlásit
+police-consulate.my-bag-was-stolen,Ukradli
+police-consulate.someone-is-following-me,sleduje
+police-consulate.where-is-the-police-station,policejní stanice
+quick-directions.go-straight,rovně
+quick-directions.turn-left,doleva
+quick-directions.turn-right,doprava
+room-problems.can-i-change-rooms,jiný pokoj
+room-problems.please-send-someone,Pošlete | někoho
+room-problems.the-air-conditioning-is-broken,Klimatizace
+room-problems.the-heating-does-not-work,Topení
+room-problems.the-key-does-not-work,Klíč
+room-problems.the-light-does-not-work,Světlo
+room-problems.the-room-is-too-noisy,hlučný
+room-problems.the-toilet-will-not-flush,Záchod
+room-problems.there-is-a-problem-with-the-room,problém
+room-problems.there-is-no-hot-water,teplá voda
+shopping.can-it-be-a-little-cheaper,levnější
+shopping.do-you-have-this-in-stock,skladem
+shopping.how-much-is-this,stojí
+shopping.i-am-just-looking,dívám
+shopping.i-will-take-this,Vezmu
+shopping.that-is-too-expensive,drahé
+shopping.where-do-i-pay,zaplatit
+taxi.can-you-wait-for-me-here,počkat
+taxi.could-you-make-it-colder,snížit
+taxi.could-you-make-it-warmer,zvýšit
+taxi.may-i-open-the-window,okno
+taxi.please-stop-here,Zastavte
+taxi.please-take-me-here,Odvezte
+time-scheduling.can-we-change-the-time,změnit
+time-scheduling.how-long-does-it-take,trvá
+time-scheduling.what-day-is-it-today,den
+time-scheduling.what-time-does-it-close,zavírají
+time-scheduling.what-time-does-it-open,otevírají
+time-scheduling.what-time-is-it,hodin
+time-scheduling.what-time-should-we-meet,sejdeme
+time-scheduling.when-is-convenient,hodí
+toilets.it-is-out-of-order,mimo provoz
+toilets.where-toilet,záchod
+trail-conditions.can-we-return-before-dark,před setměním
+trail-conditions.can-we-return-the-same-way,stejnou cestou
+trail-conditions.how-long-is-the-full-route,celá trasa
+trail-conditions.is-the-path-slippery,kluzká
+trail-conditions.is-the-route-steep,strmá
+trail-conditions.is-the-trail-open,otevřená
+trail-transport.do-you-have-a-map,mapu
+trail-transport.how-long-is-the-wait,čekání
+trail-transport.is-there-cell-signal-here,signál
+trail-transport.what-time-is-the-last-shuttle,poslední autobus
+trail-transport.when-does-the-cableway-stop,lanovky
+trail-transport.where-can-we-buy-water,koupit vodu
+trail-transport.where-can-we-refill-water,doplnit vodu
+transit-rides.can-i-use-this-ticket,použít
+transit-rides.do-i-need-to-transfer,přestupovat
+transit-rides.do-i-need-to-validate,označit
+transit-rides.i-went-past-my-stop,Přejela | Přejel
+transit-rides.is-it-delayed,zpoždění
+transit-rides.is-this-direct,přímý
+transit-rides.please-tell-me-where-to-get-off,vystoupit
+transit-rides.what-is-the-next-stop,příští zastávka
+transit-rides.what-time-is-the-next-one,další
+transit-rides.where-do-i-pay-the-fare,jízdné
+transit-rides.where-is-the-subway-station,metra
+weather.how-cold-at-night,noci zima
+weather.is-it-safe-today,bezpečné
+weather.will-it-rain,pršet

@@ -1,0 +1,317 @@
+concept_id,key
+about-me.i-am-a-doctor,arts
+about-me.i-am-a-nurse,verpleegkundige
+about-me.i-am-a-student,student
+about-me.i-am-a-teacher,leraar
+about-me.i-am-an-engineer,ingenieur
+about-me.i-am-retired,gepensioneerd
+about-me.i-have-my-own-business,eigen bedrijf
+about-me.i-work-in-an-office,kantoor
+accessibility.step-free,traploze
+air-travel.i-would-like-a-window-seat,raamstoel
+air-travel.i-would-like-an-aisle-seat,gangpadstoel
+air-travel.my-luggage-did-not-arrive,niet aangekomen
+air-travel.where-is-check-in,incheckbalie
+air-travel.where-is-the-security-check,veiligheidscontrole
+attractions-tickets.are-there-lockers,kluisjes
+attractions-tickets.could-you-take-a-photo-for-us,foto van ons
+attractions-tickets.do-i-need-a-reservation,reserveren
+attractions-tickets.may-i-take-photos,foto's
+attractions-tickets.what-is-the-latest-entry-time,naar binnen
+attractions-tickets.where-can-i-buy-tickets,kaartjes
+board-answers.after-food,Na
+board-answers.at-the-next-stop,volgende halte
+board-answers.before-food,Vóór
+board-answers.can-you-walk,lopen
+board-answers.help-is-coming,Hulp
+board-answers.i-am-calling-an-ambulance,ambulance
+board-answers.i-am-calling-the-police,politie
+board-answers.i-do-not-have-a-phone,telefoon
+board-answers.i-will-check,kijk | na
+board-answers.i-will-find-someone,iemand zoeken
+board-answers.i-will-show-you,wijs
+board-answers.i-will-write-it-down,schrijf
+board-answers.i-would-rather-not-say,liever niet
+board-answers.it-does-not-matter,maakt niet uit
+board-answers.it-is-closed,dicht
+board-answers.it-is-free,gratis
+board-answers.it-is-over-there,daar
+board-answers.my-name-is-blank,heet
+board-answers.none-of-these,Niets hiervan
+board-answers.not-possible,kan niet
+board-answers.only-for-customers,klanten
+board-answers.pay-on-board,aan boord
+board-answers.prescription-only,recept
+board-answers.see-a-doctor,dokter
+board-answers.stay-here,blijft
+board-answers.the-hospital-is-close,ziekenhuis | dichtbij
+board-answers.there-is-no-wait,Geen wachttijd
+board-answers.we-are-full,vol
+board-answers.we-do-not-have-it,hebben | niet
+board-answers.we-have-it,hebben
+board-answers.what-happened,gebeurd
+board-answers.what-is-your-name,Hoe heet
+board-answers.where-does-it-hurt,pijn
+board-answers.where-to,Waar | naartoe
+border-customs.here-is-my-passport,paspoort
+border-customs.i-am-here-for-business,zaken
+border-customs.i-am-visiting-family,familiebezoek
+border-customs.i-have-a-connecting-flight,aansluitende vlucht
+border-customs.where-do-i-collect-my-baggage,ophalen
+color-size-returns.do-you-have-a-bag,tas
+color-size-returns.do-you-have-another-size,maat
+color-size-returns.may-i-try-it-on,passen
+communication.can-you-help-me,helpen
+communication.do-you-speak-english,Spreekt
+communication.i-do-not-speak-this-language,spreek geen
+communication.i-do-not-understand,begrijp het niet
+communication.please-speak-more-slowly,langzamer
+communication.please-write-it-down,opschrijven
+dietary-needs.does-it-contain-fish-stock,visbouillon
+dietary-needs.does-it-contain-pork-fat,reuzel
+dietary-needs.does-it-contain-pork-stock,varkensbouillon
+dietary-needs.i-am-vegan,veganist
+dietary-needs.i-am-vegetarian,vegetariër
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,eieren
+dietary-needs.no-meat,vlees
+dietary-needs.no-nuts,noten
+dietary-needs.no-peanuts,pinda's
+dietary-needs.no-pork,varkensvlees
+dietary-needs.no-seafood,zeevruchten
+dietary-needs.no-sesame,sesam
+directions.can-i-walk-there,lopend
+directions.can-you-show-me-the-way,weg
+directions.how-long-on-foot,Hoe lang
+directions.is-it-far,ver
+directions.please-show-me-on-the-map,kaart
+emergency-medical.i-am-bleeding-badly,bloed
+emergency-medical.i-am-having-a-severe-allergic-reaction,anafylactische shock
+emergency-medical.i-am-injured,gewond
+emergency-medical.i-cannot-breathe,ademen
+emergency-medical.i-feel-unwell,niet lekker
+emergency-medical.i-have-chest-pain,pijn | borst
+emergency-medical.i-have-travel-insurance,reisverzekering
+emergency-medical.i-need-a-doctor,dokter
+emergency-medical.i-think-a-bone-is-broken,bot gebroken
+emergency-medical.it-hurts-here,pijn
+emergency-medical.please-call-an-ambulance,ambulance
+emergency-medical.please-call-my-emergency-contact,noodcontact
+emergency-medical.please-take-me-to-a-hospital,ziekenhuis
+emergency-medical.this-is-an-emergency,noodgeval
+emergency-medical.this-person-is-unconscious,bewusteloos
+emergency-medical.where-is-the-nearest-hospital,dichtstbijzijnde
+family-intros.this-is-my-brother,broer
+family-intros.this-is-my-colleague,collega
+family-intros.this-is-my-daughter,dochter
+family-intros.this-is-my-father,vader
+family-intros.this-is-my-husband,man
+family-intros.this-is-my-mother,moeder
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,zus
+family-intros.this-is-my-son,zoon
+family-intros.this-is-my-wife,vrouw
+food-ordering.i-want-this,wil
+food-ordering.is-a-table-available,tafel vrij
+food-ordering.is-this-vegetarian,vegetarisch
+food-ordering.table-for-two,tafel | twee
+food-ordering.to-go-please,mee te nemen
+food-ordering.what-do-you-recommend,raadt | aan
+hiking-parks.how-long-to-the-summit,top
+hiking-parks.how-long-to-the-viewpoint,uitzichtpunt
+hiking-parks.is-this-trail-suitable-for-beginners,beginners
+hiking-parks.where-is-the-trailhead,startpunt
+hiking-parks.which-route-is-easier,makkelijker
+hitchhiking.can-you-give-me-a-ride,lift
+hitchhiking.i-can-pay-for-fuel,benzine
+hitchhiking.i-only-need-to-go-to-the-next-town,volgende plaats
+hitchhiking.is-there-room-for-two,plaats | twee
+hitchhiking.thank-you-for-the-ride,Bedankt
+hitchhiking.where-are-you-going,Waar | naartoe
+hotel-basics.are-any-rooms-available,kamers
+hotel-basics.how-much-per-night,per nacht
+hotel-basics.i-have-a-reservation,reservering
+hotel-basics.i-would-like-a-non-smoking-room,niet-rokerskamer
+hotel-basics.i-would-like-a-quiet-room,rustige
+hotel-basics.is-breakfast-included,ontbijt
+hotel-basics.is-there-a-washing-machine,wasmachine
+hotel-basics.is-there-air-conditioning,airconditioning
+hotel-basics.is-wi-fi-free,wifi
+hotel-basics.may-i-see-the-room,zien
+hotel-requests.another-blanket,deken
+hotel-requests.another-night,nog een nacht
+hotel-requests.another-towel-please,handdoek
+hotel-requests.can-i-check-in-early,vroeg
+hotel-requests.can-i-check-out-later,later
+hotel-requests.can-i-store-my-luggage,bagage
+hotel-requests.is-there-a-safe,kluis
+hotel-requests.no-housekeeping,niet schoonmaken
+hotel-requests.what-time-does-breakfast-start,ontbijt
+hotel-requests.what-time-is-check-out,uitchecken
+in-a-building.is-this-the-correct-entrance,juiste
+introductions.i-am-a-tourist,toerist
+introductions.i-am-from,kom uit
+introductions.i-am-traveling-alone,alleen
+introductions.my-name-is,heet
+introductions.this-is-my-friend,vriend
+introductions.we-are-traveling-together,samen
+introductions.what-is-your-name,Hoe heet
+introductions.where-are-you-from,Waar | vandaan
+kind-words.i-had-a-wonderful-time,fantastische
+kind-words.i-like-it-very-much,leuk
+kind-words.it-is-beautiful-here,prachtig
+kind-words.thank-you-for-everything,alles
+kind-words.thank-you-for-your-help,hulp
+kind-words.thank-you-for-your-hospitality,gastvrijheid
+kind-words.this-is-delicious,heerlijk
+kind-words.you-are-very-kind,vriendelijk
+laundry.can-it-be-ready-today,vandaag
+laundry.how-much-per-kilo,per kilo
+laundry.please-do-not-use-bleach,bleekmiddel
+laundry.please-iron-this,strijken
+laundry.please-wash-these-clothes,wassen
+laundry.when-will-it-be-ready,Wanneer
+laundry.where-is-a-laundromat,wasserette
+lost-rescue.i-do-not-know-where-i-am,waar ik ben
+lost-rescue.i-lost-my-bag,tas
+lost-rescue.i-lost-my-passport,paspoort
+lost-rescue.i-lost-my-phone,telefoon
+lost-rescue.i-lost-my-wallet,portemonnee
+lost-rescue.my-child-is-missing,kind | vermist
+lost-rescue.please-call-the-police,politie
+lost-rescue.we-are-here,hier
+massage-spa.focus-on-back,rug
+massage-spa.focus-on-feet,voeten
+massage-spa.focus-on-neck,nek
+massage-spa.focus-on-shoulders,schouders
+massage-spa.more-gently,zachter
+massage-spa.please-avoid-this-area,niet masseren
+massage-spa.please-pause,pauzeren
+massage-spa.please-stop,Stop
+massage-spa.reply-ask-supervisor,leidinggevende
+massage-spa.reply-cannot-avoid-this-treatment,kan niet zonder
+massage-spa.reply-does-it-hurt-there,pijn
+massage-spa.reply-i-will-avoid-that-area,laat | met rust
+massage-spa.reply-which-area-exactly,Welk gebied
+massage-spa.stronger-pressure,steviger
+massage-spa.that-pressure-is-good,goed
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirine | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicilline
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfamedicijnen
+medical-conditions.i-am-diabetic,diabetes
+medical-conditions.i-am-pregnant,zwanger
+medical-conditions.i-carry-an-adrenaline-injector,adrenaline
+medical-conditions.i-have-a-heart-condition,hartaandoening
+medical-conditions.i-have-asthma,astma
+medical-conditions.i-have-epilepsy,epilepsie
+medical-conditions.i-need-insulin,insuline
+medical-conditions.i-need-my-inhaler,inhalator
+medical-conditions.i-take-blood-thinners,bloedverdunners
+medical-conditions.inject-it-into-my-outer-thigh,dijbeen
+medical-conditions.my-blood-sugar-is-low,bloedsuiker | laag
+medical-conditions.my-injector-is-in-my-bag,auto-injector | tas
+medical-conditions.please-give-me-sugar-or-juice,suiker | sap
+medical-conditions.this-card-lists-my-conditions,kaart
+medical-conditions.this-is-my-medicine,medicijn
+outdoors.are-there-dangerous-animals-here,gevaarlijke dieren
+outdoors.can-we-camp-here,kamperen
+outdoors.is-it-safe-to-swim-here,zwemmen
+payment-receipt.can-we-pay-separately,apart
+payment-receipt.how-much-in-total,totaal
+payment-receipt.i-already-paid,al betaald
+payment-receipt.is-tax-included,belasting
+payment-receipt.my-card-was-declined,geweigerd
+payment-receipt.pay-by-card,kaart
+payment-receipt.the-bill-is-wrong,rekening niet klopt
+pharmacy-symptoms.before-or-after-food,eten
+pharmacy-symptoms.can-i-get-this-medicine-here,medicijn
+pharmacy-symptoms.do-i-need-a-prescription,recept
+pharmacy-symptoms.how-many-times-a-day,Hoe vaak
+pharmacy-symptoms.how-much-should-i-take,Hoeveel
+pharmacy-symptoms.i-am-vomiting,overgeven
+pharmacy-symptoms.i-feel-dizzy,duizelig
+pharmacy-symptoms.i-feel-nauseous,misselijk
+pharmacy-symptoms.i-have-a-burn,brandwond
+pharmacy-symptoms.i-have-a-cough,hoest
+pharmacy-symptoms.i-have-a-cut,snee
+pharmacy-symptoms.i-have-a-fever,koorts
+pharmacy-symptoms.i-have-a-headache,hoofdpijn
+pharmacy-symptoms.i-have-a-rash,huiduitslag
+pharmacy-symptoms.i-have-a-sore-throat,keelpijn
+pharmacy-symptoms.i-have-a-stomach-ache,buikpijn
+pharmacy-symptoms.i-have-diarrhea,diarree
+pharmacy-symptoms.i-think-it-is-infected,geïnfecteerd
+pharmacy-symptoms.is-this-safe-during-pregnancy,zwangerschap
+pharmacy-symptoms.the-pain-is-severe,pijn | hevig
+pharmacy-symptoms.which-pharmacy-is-open-now,nu open
+police-consulate.i-need-an-interpreter,tolk
+police-consulate.i-want-to-contact-my-embassy,ambassade
+police-consulate.i-want-to-report-a-theft,diefstal
+police-consulate.my-bag-was-stolen,gestolen
+police-consulate.someone-is-following-me,volgt
+police-consulate.where-is-the-police-station,politiebureau
+quick-directions.across-from-here,overkant
+quick-directions.on-the-left,linkerkant
+quick-directions.on-the-right,rechterkant
+room-problems.can-i-change-rooms,wisselen
+room-problems.please-send-someone,iemand sturen
+room-problems.the-air-conditioning-is-broken,airconditioning
+room-problems.the-heating-does-not-work,verwarming
+room-problems.the-key-does-not-work,sleutel
+room-problems.the-light-does-not-work,licht
+room-problems.the-room-is-too-noisy,lawaaiig
+room-problems.the-toilet-will-not-flush,toilet
+room-problems.there-is-a-problem-with-the-room,probleem
+room-problems.there-is-no-hot-water,warm water
+shopping.can-it-be-a-little-cheaper,goedkoper
+shopping.do-you-have-this-in-stock,voorraad
+shopping.how-much-is-this,kost
+shopping.i-am-just-looking,kijk
+shopping.i-will-take-this,neem
+shopping.that-is-too-expensive,duur
+shopping.where-do-i-pay,betalen
+social-basics.i-do-not-know,weet het niet
+taxi.can-you-wait-for-me-here,wachten
+taxi.could-you-make-it-colder,kouder
+taxi.could-you-make-it-warmer,warmer
+taxi.may-i-open-the-window,raam
+taxi.please-stop-here,Stopt
+taxi.please-take-me-here,Breng
+taxi.please-turn-around,keren
+time-scheduling.can-we-change-the-time,veranderen
+time-scheduling.how-long-does-it-take,duurt
+time-scheduling.what-day-is-it-today,dag
+time-scheduling.what-time-does-it-close,dicht
+time-scheduling.what-time-does-it-open,open
+time-scheduling.what-time-should-we-meet,spreken | af
+time-scheduling.when-is-convenient,komt | uit
+toilets.it-is-out-of-order,buiten gebruik
+toilets.where-toilet,toilet
+trail-conditions.can-we-return-before-dark,donker
+trail-conditions.can-we-return-the-same-way,dezelfde weg
+trail-conditions.how-long-is-the-full-route,hele route
+trail-conditions.is-the-path-slippery,glad
+trail-conditions.is-the-route-steep,steil
+trail-conditions.is-the-trail-open,open
+trail-transport.do-you-have-a-map,kaart
+trail-transport.how-long-is-the-wait,wachttijd
+trail-transport.is-there-cell-signal-here,mobiel bereik
+trail-transport.what-time-is-the-last-shuttle,laatste pendelbus
+trail-transport.when-does-the-cableway-stop,kabelbaan
+trail-transport.where-can-we-buy-water,water kopen
+trail-transport.where-can-we-refill-water,water bijvullen
+transit-rides.can-i-use-this-ticket,gebruiken
+transit-rides.do-i-need-to-transfer,overstappen
+transit-rides.do-i-need-to-validate,afstempelen
+transit-rides.i-am-in-a-hurry,haast
+transit-rides.i-went-past-my-stop,voorbij gereden
+transit-rides.is-it-delayed,vertraging
+transit-rides.is-this-direct,rechtstreeks
+transit-rides.please-tell-me-where-to-get-off,uitstappen
+transit-rides.what-is-the-next-stop,volgende halte
+transit-rides.what-time-is-the-next-one,volgende
+transit-rides.where-do-i-pay-the-fare,betaal
+transit-rides.where-is-the-subway-station,metrostation
+weather.how-cold-at-night,koud | nachts
+weather.is-it-safe-today,veilig
+weather.will-it-rain,regenen

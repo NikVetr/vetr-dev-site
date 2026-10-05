@@ -1,0 +1,309 @@
+concept_id,key
+about-me.i-am-a-doctor,лікарка | лікар
+about-me.i-am-a-nurse,медбрат | медсестра
+about-me.i-am-a-student,студентка | студент
+about-me.i-am-a-teacher,вчителька | вчитель
+about-me.i-am-an-engineer,інженерка | інженер
+about-me.i-am-retired,пенсії
+about-me.i-have-my-own-business,своя справа
+about-me.i-work-in-an-office,офісі
+accessibility.step-free,без сходинок
+air-travel.i-would-like-a-window-seat,вікна
+air-travel.i-would-like-an-aisle-seat,проходу
+air-travel.my-luggage-did-not-arrive,не прибув
+air-travel.where-is-check-in,реєстрація
+air-travel.where-is-the-security-check,безпеки
+attractions-tickets.are-there-lockers,шафки
+attractions-tickets.could-you-take-a-photo-for-us,нас
+attractions-tickets.do-i-need-a-reservation,бронювання
+attractions-tickets.may-i-take-photos,фотографувати
+attractions-tickets.what-is-the-latest-entry-time,останнього входу
+attractions-tickets.where-can-i-buy-tickets,квитки
+board-answers.after-food,Після
+board-answers.at-the-next-stop,наступній зупинці
+board-answers.before-food,Перед
+board-answers.can-you-walk,йти
+board-answers.help-is-coming,Допомога
+board-answers.i-am-calling-an-ambulance,швидку
+board-answers.i-am-calling-the-police,поліцію
+board-answers.i-do-not-have-a-phone,телефону
+board-answers.i-will-check,перевірю
+board-answers.i-will-find-someone,знайду когось
+board-answers.i-will-show-you,Покажу
+board-answers.i-will-write-it-down,Запишу
+board-answers.i-would-rather-not-say,не казати
+board-answers.it-is-closed,закрито
+board-answers.it-is-free,безкоштовно
+board-answers.it-is-over-there,там
+board-answers.my-name-is-blank,Мене
+board-answers.none-of-these,Тут немає
+board-answers.not-possible,неможливо
+board-answers.only-for-customers,клієнтів
+board-answers.pay-on-board,в салоні
+board-answers.prescription-only,рецептом
+board-answers.see-a-doctor,лікаря
+board-answers.stay-here,залишитися
+board-answers.the-hospital-is-close,близько
+board-answers.there-is-no-wait,Черги немає
+board-answers.we-do-not-have-it,немає
+board-answers.we-have-it,є
+board-answers.what-happened,сталося
+board-answers.what-is-your-name,Як вас
+board-answers.where-does-it-hurt,болить
+border-customs.here-is-my-passport,паспорт
+border-customs.i-am-here-for-business,справах
+border-customs.i-am-visiting-family,родичів
+border-customs.i-have-a-connecting-flight,стикувальний
+border-customs.where-do-i-collect-my-baggage,отримати
+color-size-returns.do-you-have-a-bag,Пакет
+color-size-returns.do-you-have-another-size,розмір
+color-size-returns.may-i-try-it-on,поміряти
+communication.can-you-help-me,допомогти
+communication.do-you-speak-english,розмовляєте
+communication.i-do-not-speak-this-language,не розмовляю
+communication.i-do-not-understand,не розумію
+communication.please-speak-more-slowly,повільніше
+dietary-needs.does-it-contain-fish-stock,рибний бульйон
+dietary-needs.does-it-contain-pork-fat,свинячий жир | сало
+dietary-needs.does-it-contain-pork-stock,свинячий бульйон
+dietary-needs.i-am-vegan,веганка | веган
+dietary-needs.i-am-vegetarian,вегетаріанець | вегетаріанка
+dietary-needs.is-this-halal,халяль
+dietary-needs.no-eggs,яєць
+dietary-needs.no-meat,м'яса
+dietary-needs.no-nuts,горіхів
+dietary-needs.no-peanuts,арахісу
+dietary-needs.no-pork,свинини
+dietary-needs.no-seafood,морепродуктів
+dietary-needs.no-sesame,кунжуту
+directions.can-i-walk-there,дійти пішки
+directions.can-you-show-me-the-way,дорогу
+directions.how-long-on-foot,Скільки йти
+directions.is-it-far,далеко
+directions.please-show-me-on-the-map,карті
+emergency-medical.i-am-bleeding-badly,кровотеча
+emergency-medical.i-am-having-a-severe-allergic-reaction,анафілактичний шок
+emergency-medical.i-am-injured,травма
+emergency-medical.i-cannot-breathe,дихати
+emergency-medical.i-feel-unwell,погано
+emergency-medical.i-have-chest-pain,біль у грудях
+emergency-medical.i-have-travel-insurance,страховка
+emergency-medical.i-need-a-doctor,лікар
+emergency-medical.i-think-a-bone-is-broken,перелом
+emergency-medical.it-hurts-here,Болить
+emergency-medical.please-call-an-ambulance,швидку
+emergency-medical.please-call-my-emergency-contact,екстрений контакт
+emergency-medical.please-take-me-to-a-hospital,лікарні
+emergency-medical.this-is-an-emergency,надзвичайна
+emergency-medical.this-person-is-unconscious,без свідомості
+emergency-medical.where-is-the-nearest-hospital,найближча
+family-intros.this-is-my-brother,брат
+family-intros.this-is-my-colleague,колега
+family-intros.this-is-my-daughter,донька
+family-intros.this-is-my-father,тато
+family-intros.this-is-my-husband,чоловік
+family-intros.this-is-my-mother,мама
+family-intros.this-is-my-partner,партнер
+family-intros.this-is-my-sister,сестра
+family-intros.this-is-my-son,син
+family-intros.this-is-my-wife,дружина
+food-ordering.i-want-this,хочу
+food-ordering.is-a-table-available,вільний столик
+food-ordering.is-this-vegetarian,вегетаріанське
+food-ordering.table-for-two,Столик | двох
+food-ordering.what-do-you-recommend,порадите
+hiking-parks.how-long-to-the-summit,вершини
+hiking-parks.how-long-to-the-viewpoint,оглядового майданчика
+hiking-parks.is-this-trail-suitable-for-beginners,новачків
+hiking-parks.where-is-the-trailhead,початок
+hiking-parks.which-route-is-easier,легший
+hitchhiking.can-you-give-me-a-ride,підвезти
+hitchhiking.i-can-pay-for-fuel,бензин
+hitchhiking.i-only-need-to-go-to-the-next-town,наступного міста
+hitchhiking.is-there-room-for-two,місце | двох
+hitchhiking.thank-you-for-the-ride,Дякую
+hitchhiking.where-are-you-going,Куди
+hotel-basics.are-any-rooms-available,номери
+hotel-basics.how-much-per-night,за ніч
+hotel-basics.i-have-a-reservation,бронювання
+hotel-basics.i-would-like-a-non-smoking-room,некурців
+hotel-basics.i-would-like-a-quiet-room,тихий
+hotel-basics.is-breakfast-included,Сніданок
+hotel-basics.is-there-a-washing-machine,пральна машина
+hotel-basics.is-there-air-conditioning,кондиціонер
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,подивитися
+hotel-requests.another-blanket,ковдру
+hotel-requests.another-night,ще на одну ніч
+hotel-requests.another-towel-please,рушник
+hotel-requests.can-i-check-in-early,раніше
+hotel-requests.can-i-check-out-later,пізніше
+hotel-requests.can-i-store-my-luggage,багаж
+hotel-requests.is-there-a-safe,сейф
+hotel-requests.no-housekeeping,Прибирання
+hotel-requests.what-time-does-breakfast-start,сніданок
+hotel-requests.what-time-is-check-out,виселення
+in-a-building.is-this-the-correct-entrance,правильний
+introductions.i-am-a-tourist,туристка | турист
+introductions.i-am-from,країна
+introductions.i-am-traveling-alone,сама | сам
+introductions.my-name-is,Мене
+introductions.this-is-my-friend,друг
+introductions.we-are-traveling-together,разом
+introductions.what-is-your-name,Як вас
+introductions.where-are-you-from,Звідки
+kind-words.i-had-a-wonderful-time,чудово
+kind-words.i-like-it-very-much,подобається
+kind-words.it-is-beautiful-here,красиво
+kind-words.thank-you-for-everything,все
+kind-words.thank-you-for-your-help,допомогу
+kind-words.thank-you-for-your-hospitality,гостинність
+kind-words.this-is-delicious,смачно
+kind-words.you-are-very-kind,добрі
+laundry.can-it-be-ready-today,сьогодні
+laundry.how-much-per-kilo,кілограм
+laundry.please-do-not-use-bleach,відбілювача
+laundry.please-iron-this,Попрасуйте
+laundry.please-wash-these-clothes,Виперіть
+laundry.when-will-it-be-ready,Коли
+laundry.where-is-a-laundromat,пральня
+lost-rescue.i-do-not-know-where-i-am,де я
+lost-rescue.i-lost-my-bag,сумка
+lost-rescue.i-lost-my-passport,паспорт
+lost-rescue.i-lost-my-phone,телефон
+lost-rescue.i-lost-my-wallet,гаманець
+lost-rescue.my-child-is-missing,дитина
+lost-rescue.please-call-the-police,поліцію
+lost-rescue.we-are-here,тут
+massage-spa.focus-on-back,спиною
+massage-spa.focus-on-feet,стопами
+massage-spa.focus-on-neck,шиєю
+massage-spa.focus-on-shoulders,плечима
+massage-spa.please-avoid-this-area,Не натискайте
+massage-spa.please-pause,паузу
+massage-spa.please-stop,Зупиніться
+massage-spa.reply-ask-supervisor,адміністратора
+massage-spa.reply-cannot-avoid-this-treatment,не обійтися
+massage-spa.reply-does-it-hurt-there,болить
+massage-spa.reply-i-will-avoid-that-area,не чіпаю
+massage-spa.reply-which-area-exactly,Яку
+massage-spa.stronger-pressure,сильніше
+massage-spa.that-pressure-is-good,добре
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,аспірин | ібупрофен
+medical-conditions.i-am-allergic-to-penicillin,пеніцилін
+medical-conditions.i-am-allergic-to-sulfa-drugs,сульфаніламіди
+medical-conditions.i-am-diabetic,діабет
+medical-conditions.i-am-pregnant,вагітна
+medical-conditions.i-carry-an-adrenaline-injector,адреналіном
+medical-conditions.i-have-a-heart-condition,серця
+medical-conditions.i-have-asthma,астма
+medical-conditions.i-have-epilepsy,епілепсія
+medical-conditions.i-need-insulin,інсулін
+medical-conditions.i-need-my-inhaler,інгалятор
+medical-conditions.i-take-blood-thinners,антикоагулянти
+medical-conditions.inject-it-into-my-outer-thigh,стегна
+medical-conditions.my-blood-sugar-is-low,низький цукор
+medical-conditions.my-injector-is-in-my-bag,ін'єктор | сумці
+medical-conditions.please-give-me-sugar-or-juice,цукор | сік
+medical-conditions.this-card-lists-my-conditions,картці
+medical-conditions.this-is-my-medicine,ліки
+outdoors.are-there-dangerous-animals-here,небезпечні тварини
+outdoors.can-we-camp-here,табором
+outdoors.is-it-safe-to-swim-here,плавати
+payment-receipt.can-we-pay-separately,окремо
+payment-receipt.i-already-paid,вже оплачено
+payment-receipt.is-tax-included,Податок
+payment-receipt.my-card-was-declined,не прийняли
+payment-receipt.the-bill-is-wrong,помилка
+pharmacy-symptoms.antacid,печії
+pharmacy-symptoms.anti-diarrhea-medicine,діареї
+pharmacy-symptoms.antihistamine,алергії
+pharmacy-symptoms.before-or-after-food,їжі
+pharmacy-symptoms.can-i-get-this-medicine-here,ліки
+pharmacy-symptoms.cough-medicine,кашлю
+pharmacy-symptoms.do-i-need-a-prescription,рецепт
+pharmacy-symptoms.how-many-times-a-day,разів на день
+pharmacy-symptoms.how-much-should-i-take,Скільки
+pharmacy-symptoms.i-am-vomiting,блювота
+pharmacy-symptoms.i-feel-dizzy,паморочиться
+pharmacy-symptoms.i-feel-nauseous,нудить
+pharmacy-symptoms.i-have-a-burn,опік
+pharmacy-symptoms.i-have-a-cough,кашель
+pharmacy-symptoms.i-have-a-cut,поріз
+pharmacy-symptoms.i-have-a-fever,температура
+pharmacy-symptoms.i-have-a-headache,голова
+pharmacy-symptoms.i-have-a-rash,висип
+pharmacy-symptoms.i-have-a-sore-throat,горло
+pharmacy-symptoms.i-have-a-stomach-ache,живіт
+pharmacy-symptoms.i-have-diarrhea,діарея
+pharmacy-symptoms.i-think-it-is-infected,запалилося
+pharmacy-symptoms.is-this-safe-during-pregnancy,вагітності
+pharmacy-symptoms.motion-sickness-tablets,укачування
+pharmacy-symptoms.the-pain-is-severe,Біль | сильний
+pharmacy-symptoms.which-pharmacy-is-open-now,зараз відкрита
+police-consulate.i-need-an-interpreter,перекладач
+police-consulate.i-want-to-contact-my-embassy,посольством
+police-consulate.i-want-to-report-a-theft,заявити
+police-consulate.my-bag-was-stolen,вкрали
+police-consulate.someone-is-following-me,За мною
+police-consulate.where-is-the-police-station,відділення поліції
+room-problems.can-i-change-rooms,поміняти
+room-problems.please-send-someone,майстра
+room-problems.the-air-conditioning-is-broken,Кондиціонер
+room-problems.the-heating-does-not-work,Опалення
+room-problems.the-key-does-not-work,Ключ
+room-problems.the-light-does-not-work,Світло
+room-problems.the-room-is-too-noisy,шумно
+room-problems.the-toilet-will-not-flush,Туалет
+room-problems.there-is-a-problem-with-the-room,проблема
+room-problems.there-is-no-hot-water,гарячої води
+shopping.can-it-be-a-little-cheaper,дешевше
+shopping.do-you-have-this-in-stock,в наявності
+shopping.how-much-is-this,коштує
+shopping.i-am-just-looking,просто дивлюся
+shopping.i-will-take-this,візьму
+shopping.that-is-too-expensive,дорого
+shopping.where-do-i-pay,платити
+social-basics.i-do-not-know,не знаю
+taxi.can-you-wait-for-me-here,зачекати
+taxi.could-you-make-it-colder,холоднішим
+taxi.could-you-make-it-warmer,теплішим
+taxi.may-i-open-the-window,вікно
+taxi.please-stop-here,Зупиніться
+taxi.please-take-me-here,Відвезіть
+time-scheduling.can-we-change-the-time,змінити
+time-scheduling.how-long-does-it-take,триває
+time-scheduling.what-day-is-it-today,день
+time-scheduling.what-time-does-it-close,закривається
+time-scheduling.what-time-does-it-open,відкривається
+time-scheduling.what-time-should-we-meet,зустрінемось
+time-scheduling.when-is-convenient,зручно
+toilets.where-toilet,туалет
+trail-conditions.can-we-return-before-dark,до темряви
+trail-conditions.can-we-return-the-same-way,тим самим шляхом
+trail-conditions.how-long-is-the-full-route,довжина
+trail-conditions.is-the-path-slippery,слизька
+trail-conditions.is-the-route-steep,крутий
+trail-conditions.is-the-trail-open,відкрита
+trail-transport.do-you-have-a-map,карта
+trail-transport.how-long-is-the-wait,чекати
+trail-transport.is-there-cell-signal-here,зв'язок
+trail-transport.what-time-is-the-last-shuttle,останній шатл
+trail-transport.when-does-the-cableway-stop,канатка
+trail-transport.where-can-we-buy-water,купити воду
+trail-transport.where-can-we-refill-water,набрати води
+transit-rides.can-i-use-this-ticket,підійде
+transit-rides.do-i-need-to-transfer,пересадку
+transit-rides.do-i-need-to-validate,компостувати
+transit-rides.i-am-in-a-hurry,поспішаю
+transit-rides.i-went-past-my-stop,проїхала | проїхав
+transit-rides.is-it-delayed,затримка
+transit-rides.is-this-direct,без пересадок
+transit-rides.please-tell-me-where-to-get-off,виходити
+transit-rides.what-is-the-next-stop,наступна зупинка
+transit-rides.what-time-is-the-next-one,наступний
+transit-rides.where-do-i-pay-the-fare,проїзд
+transit-rides.where-is-the-subway-station,метро
+weather.how-cold-at-night,градусів вночі
+weather.is-it-safe-today,безпечно
+weather.will-it-rain,дощ

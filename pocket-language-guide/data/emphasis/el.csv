@@ -1,0 +1,306 @@
+concept_id,key
+about-me.i-am-a-doctor,γιατρός
+about-me.i-am-a-nurse,νοσοκόμος | νοσοκόμα
+about-me.i-am-a-student,φοιτητής | φοιτήτρια
+about-me.i-am-a-teacher,δάσκαλος | δασκάλα
+about-me.i-am-an-engineer,μηχανικός
+about-me.i-am-retired,συνταξιούχος
+about-me.i-have-my-own-business,δική μου επιχείρηση
+about-me.i-work-in-an-office,γραφείο
+accessibility.step-free,χωρίς σκαλιά
+air-travel.i-would-like-a-window-seat,παράθυρο
+air-travel.i-would-like-an-aisle-seat,διάδρομο
+air-travel.my-luggage-did-not-arrive,δεν έφτασαν
+air-travel.where-is-check-in,εισιτηρίων
+air-travel.where-is-the-security-check,ασφαλείας
+attractions-tickets.are-there-lockers,θυρίδες
+attractions-tickets.could-you-take-a-photo-for-us,μας | φωτογραφία
+attractions-tickets.do-i-need-a-reservation,κράτηση
+attractions-tickets.may-i-take-photos,φωτογράφιση
+attractions-tickets.what-is-the-latest-entry-time,είσοδος
+attractions-tickets.where-can-i-buy-tickets,εισιτήρια
+board-answers.after-food,Μετά
+board-answers.at-the-next-stop,επόμενη στάση
+board-answers.before-food,Πριν
+board-answers.can-you-walk,περπατήσετε
+board-answers.help-is-coming,βοήθεια
+board-answers.how-many,Πόσα
+board-answers.i-am-calling-an-ambulance,ασθενοφόρο
+board-answers.i-am-calling-the-police,αστυνομία
+board-answers.i-do-not-have-a-phone,κινητό
+board-answers.i-will-check,ελέγξω
+board-answers.i-will-find-someone,βρω κάποιον
+board-answers.i-will-show-you,δείξω
+board-answers.i-will-write-it-down,σημειώσω
+board-answers.i-would-rather-not-say,μην το πω
+board-answers.it-is-free,δωρεάν
+board-answers.it-is-over-there,εκεί πέρα
+board-answers.my-name-is-blank,Με
+board-answers.none-of-these,Κανένα
+board-answers.only-for-customers,πελάτες
+board-answers.pay-on-board,όταν ανεβείτε
+board-answers.prescription-only,συνταγή
+board-answers.see-a-doctor,γιατρός
+board-answers.stay-here,μείνετε
+board-answers.the-hospital-is-close,νοσοκομείο | κοντά
+board-answers.there-is-no-wait,Δεν υπάρχει αναμονή
+board-answers.we-are-full,πλήρεις
+board-answers.what-happened,έγινε
+board-answers.what-is-your-name,Πώς σας
+board-answers.where-does-it-hurt,πονάτε
+border-customs.here-is-my-passport,διαβατήριο
+border-customs.i-am-here-for-business,δουλειά
+border-customs.i-am-visiting-family,συγγενείς
+border-customs.i-have-a-connecting-flight,ανταπόκρισης
+border-customs.where-do-i-collect-my-baggage,παραλαμβάνω
+color-size-returns.do-you-have-a-bag,σακούλα
+color-size-returns.do-you-have-another-size,μέγεθος
+color-size-returns.may-i-try-it-on,δοκιμάσω
+communication.can-you-help-me,βοηθήσετε
+communication.please-speak-more-slowly,πιο αργά
+dietary-needs.does-it-contain-fish-stock,ζωμό ψαριού
+dietary-needs.does-it-contain-pork-fat,χοιρινό λίπος | λαρδί
+dietary-needs.does-it-contain-pork-stock,ζωμό χοιρινού
+dietary-needs.i-am-vegan,βίγκαν
+dietary-needs.i-am-vegetarian,χορτοφάγος
+dietary-needs.is-this-halal,χαλάλ
+dietary-needs.no-eggs,αυγά
+dietary-needs.no-meat,κρέας
+dietary-needs.no-nuts,ξηρούς καρπούς
+dietary-needs.no-peanuts,αράπικα φιστίκια
+dietary-needs.no-pork,χοιρινό
+dietary-needs.no-seafood,ψάρι | θαλασσινά
+dietary-needs.no-sesame,σουσάμι | ταχίνι
+directions.can-i-walk-there,πάω με τα πόδια
+directions.can-you-show-me-the-way,δρόμο
+directions.how-long-on-foot,Πόση ώρα
+directions.is-it-far,μακριά
+directions.please-show-me-on-the-map,χάρτη
+emergency-medical.i-am-bleeding-badly,Αιμορραγώ
+emergency-medical.i-am-having-a-severe-allergic-reaction,αναφυλαξία
+emergency-medical.i-am-injured,τραυματιστεί
+emergency-medical.i-cannot-breathe,αναπνεύσω
+emergency-medical.i-feel-unwell,Δεν | καλά
+emergency-medical.i-have-chest-pain,πόνο | στήθος
+emergency-medical.i-have-travel-insurance,ασφάλιση
+emergency-medical.i-need-a-doctor,γιατρό
+emergency-medical.i-think-a-bone-is-broken,σπάσει | κόκαλο
+emergency-medical.it-hurts-here,Πονάει
+emergency-medical.please-call-an-ambulance,ασθενοφόρο
+emergency-medical.please-call-my-emergency-contact,άτομο επικοινωνίας
+emergency-medical.please-take-me-to-a-hospital,νοσοκομείο
+emergency-medical.this-is-an-emergency,επείγον
+emergency-medical.this-person-is-unconscious,αναίσθητο
+emergency-medical.where-is-the-nearest-hospital,πλησιέστερο
+family-intros.this-is-my-brother,αδελφός
+family-intros.this-is-my-colleague,συνάδελφός
+family-intros.this-is-my-daughter,κόρη
+family-intros.this-is-my-father,μπαμπάς
+family-intros.this-is-my-husband,άντρας
+family-intros.this-is-my-mother,μαμά
+family-intros.this-is-my-partner,σύντροφός
+family-intros.this-is-my-sister,αδελφή
+family-intros.this-is-my-son,γιος
+family-intros.this-is-my-wife,γυναίκα
+food-ordering.i-want-this,Θέλω
+food-ordering.is-a-table-available,ελεύθερο τραπέζι
+food-ordering.is-this-vegetarian,χορτοφαγικό
+food-ordering.table-for-two,τραπέζι | δύο
+food-ordering.to-go-please,πακέτο
+food-ordering.what-do-you-recommend,προτείνετε
+hiking-parks.how-long-to-the-summit,κορυφή
+hiking-parks.how-long-to-the-viewpoint,σημείο θέασης
+hiking-parks.is-this-trail-suitable-for-beginners,αρχάριους
+hiking-parks.where-is-the-trailhead,αρχή
+hiking-parks.which-route-is-easier,πιο εύκολη
+hitchhiking.can-you-give-me-a-ride,πάρετε
+hitchhiking.i-can-pay-for-fuel,βενζίνη
+hitchhiking.i-only-need-to-go-to-the-next-town,επόμενη πόλη
+hitchhiking.is-there-room-for-two,χώρος | δύο
+hitchhiking.thank-you-for-the-ride,ευχαριστώ
+hitchhiking.where-are-you-going,πηγαίνετε
+hotel-basics.are-any-rooms-available,δωμάτια
+hotel-basics.how-much-per-night,διανυκτέρευση
+hotel-basics.i-have-a-reservation,κράτηση
+hotel-basics.i-would-like-a-non-smoking-room,μη καπνιστές
+hotel-basics.i-would-like-a-quiet-room,ήσυχο
+hotel-basics.is-breakfast-included,πρωινό
+hotel-basics.is-there-a-washing-machine,πλυντήριο ρούχων
+hotel-basics.is-there-air-conditioning,κλιματισμός
+hotel-basics.is-wi-fi-free,ασύρματο δίκτυο
+hotel-basics.may-i-see-the-room,δω το δωμάτιο
+hotel-requests.another-blanket,κουβέρτα
+hotel-requests.another-night,μία νύχτα ακόμα
+hotel-requests.another-towel-please,πετσέτα
+hotel-requests.can-i-check-in-early,πιο νωρίς
+hotel-requests.can-i-check-out-later,αργότερα
+hotel-requests.can-i-store-my-luggage,αποσκευές
+hotel-requests.is-there-a-safe,χρηματοκιβώτιο
+hotel-requests.no-housekeeping,καθαριότητα
+hotel-requests.what-time-does-breakfast-start,πρωινό
+hotel-requests.what-time-is-check-out,αναχώρηση
+in-a-building.is-this-the-correct-entrance,σωστή
+introductions.i-am-a-tourist,τουρισμό
+introductions.i-am-from,χώρα
+introductions.i-am-traveling-alone,μόνος | μόνη
+introductions.my-name-is,Με
+introductions.this-is-my-friend,φίλος | φίλη
+introductions.we-are-traveling-together,μαζί
+introductions.what-is-your-name,Πώς σας
+introductions.where-are-you-from,Από πού
+kind-words.i-had-a-wonderful-time,υπέροχα
+kind-words.i-like-it-very-much,αρέσει
+kind-words.it-is-beautiful-here,όμορφα
+kind-words.thank-you-for-everything,όλα
+kind-words.thank-you-for-your-help,βοήθειά
+kind-words.thank-you-for-your-hospitality,φιλοξενία
+kind-words.this-is-delicious,νόστιμο
+kind-words.you-are-very-kind,ευγενικό
+laundry.can-it-be-ready-today,σήμερα
+laundry.how-much-per-kilo,κιλό
+laundry.please-do-not-use-bleach,χλωρίνη
+laundry.please-wash-these-clothes,Πλύνετε
+laundry.when-will-it-be-ready,Πότε
+laundry.where-is-a-laundromat,καθαριστήριο
+lost-rescue.i-do-not-know-where-i-am,πού βρίσκομαι
+lost-rescue.i-lost-my-bag,τσάντα
+lost-rescue.i-lost-my-passport,διαβατήριό
+lost-rescue.i-lost-my-phone,κινητό
+lost-rescue.i-lost-my-wallet,πορτοφόλι
+lost-rescue.my-child-is-missing,παιδί
+lost-rescue.please-call-the-police,αστυνομία
+lost-rescue.we-are-here,εδώ
+massage-spa.focus-on-back,πλάτη
+massage-spa.focus-on-feet,πέλματα
+massage-spa.focus-on-neck,αυχένα
+massage-spa.focus-on-shoulders,ώμους
+massage-spa.more-gently,απαλά
+massage-spa.please-avoid-this-area,Μην πιέζετε
+massage-spa.please-pause,παύση
+massage-spa.please-stop,Σταματήστε
+massage-spa.reply-ask-supervisor,αφεντικό
+massage-spa.reply-cannot-avoid-this-treatment,δεν γίνεται χωρίς
+massage-spa.reply-does-it-hurt-there,Πονάει
+massage-spa.reply-i-will-avoid-that-area,δεν θα πιέσω
+massage-spa.reply-which-area-exactly,Ποια περιοχή
+massage-spa.stronger-pressure,δυνατή
+massage-spa.that-pressure-is-good,καλή
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ασπιρίνη | ιβουπροφαίνη
+medical-conditions.i-am-allergic-to-penicillin,πενικιλίνη
+medical-conditions.i-am-allergic-to-sulfa-drugs,σουλφοναμίδες
+medical-conditions.i-am-diabetic,διαβήτη
+medical-conditions.i-am-pregnant,έγκυος
+medical-conditions.i-carry-an-adrenaline-injector,αδρεναλίνης
+medical-conditions.i-have-a-heart-condition,καρδιακή
+medical-conditions.i-have-asthma,άσθμα
+medical-conditions.i-have-epilepsy,επιληψία
+medical-conditions.i-need-insulin,ινσουλίνη
+medical-conditions.i-need-my-inhaler,σπρέι
+medical-conditions.i-take-blood-thinners,αντιπηκτικά
+medical-conditions.inject-it-into-my-outer-thigh,μηρού
+medical-conditions.my-blood-sugar-is-low,σάκχαρό | υπογλυκαιμία
+medical-conditions.my-injector-is-in-my-bag,σύριγγα | τσάντα
+medical-conditions.please-give-me-sugar-or-juice,ζάχαρη | χυμό
+medical-conditions.this-card-lists-my-conditions,κάρτα
+medical-conditions.this-is-my-medicine,φάρμακό
+outdoors.are-there-dangerous-animals-here,επικίνδυνα ζώα
+outdoors.can-we-camp-here,κατασκηνώσουμε
+outdoors.is-it-safe-to-swim-here,μπάνιο
+payment-receipt.can-we-pay-separately,Χωριστοί
+payment-receipt.how-much-in-total,συνολικά
+payment-receipt.i-already-paid,πληρώσει ήδη
+payment-receipt.is-tax-included,ΦΠΑ
+payment-receipt.my-card-was-declined,απορρίφθηκε
+payment-receipt.pay-by-card,κάρτα
+payment-receipt.the-bill-is-wrong,λογαριασμός | λάθος
+pharmacy-symptoms.anti-diarrhea-medicine,διάρροια
+pharmacy-symptoms.before-or-after-food,φαγητό
+pharmacy-symptoms.can-i-get-this-medicine-here,φάρμακο
+pharmacy-symptoms.cough-medicine,βήχα
+pharmacy-symptoms.do-i-need-a-prescription,συνταγή
+pharmacy-symptoms.how-many-times-a-day,φορές την ημέρα
+pharmacy-symptoms.how-much-should-i-take,Πόσο
+pharmacy-symptoms.i-am-vomiting,εμετό
+pharmacy-symptoms.i-feel-nauseous,ναυτία
+pharmacy-symptoms.i-have-a-burn,έγκαυμα
+pharmacy-symptoms.i-have-a-cough,βήχα
+pharmacy-symptoms.i-have-a-fever,πυρετό
+pharmacy-symptoms.i-have-a-headache,πονοκέφαλο
+pharmacy-symptoms.i-have-a-rash,εξάνθημα
+pharmacy-symptoms.i-have-a-sore-throat,πονόλαιμο
+pharmacy-symptoms.i-have-a-stomach-ache,στομαχόπονο
+pharmacy-symptoms.i-have-diarrhea,διάρροια
+pharmacy-symptoms.i-think-it-is-infected,μόλυνση
+pharmacy-symptoms.is-this-safe-during-pregnancy,εγκυμοσύνη
+pharmacy-symptoms.motion-sickness-tablets,ναυτία
+pharmacy-symptoms.the-pain-is-severe,πόνος | έντονος
+pharmacy-symptoms.which-pharmacy-is-open-now,ανοιχτό τώρα
+police-consulate.i-need-an-interpreter,διερμηνέα
+police-consulate.i-want-to-contact-my-embassy,πρεσβεία
+police-consulate.i-want-to-report-a-theft,δήλωση κλοπής
+police-consulate.my-bag-was-stolen,έκλεψαν
+police-consulate.someone-is-following-me,ακολουθεί
+police-consulate.where-is-the-police-station,αστυνομικό τμήμα
+quick-directions.on-the-left,αριστερά
+quick-directions.on-the-right,δεξιά
+quick-directions.turn-left,αριστερά
+quick-directions.turn-right,δεξιά
+room-problems.can-i-change-rooms,αλλάξω
+room-problems.please-send-someone,Στείλτε κάποιον
+room-problems.the-air-conditioning-is-broken,κλιματισμός
+room-problems.the-heating-does-not-work,θέρμανση
+room-problems.the-key-does-not-work,κλειδί
+room-problems.the-light-does-not-work,φως
+room-problems.the-room-is-too-noisy,θόρυβο
+room-problems.the-toilet-will-not-flush,καζανάκι
+room-problems.there-is-a-problem-with-the-room,πρόβλημα
+room-problems.there-is-no-hot-water,ζεστό νερό
+shopping.can-it-be-a-little-cheaper,φθηνότερα
+shopping.do-you-have-this-in-stock,διαθέσιμο
+shopping.how-much-is-this,Πόσο
+shopping.i-am-just-looking,κοιτάζω
+shopping.i-will-take-this,πάρω
+shopping.that-is-too-expensive,ακριβό
+shopping.where-do-i-pay,πληρώνω
+taxi.can-you-wait-for-me-here,περιμένετε
+taxi.could-you-make-it-colder,πιο κρύο
+taxi.could-you-make-it-warmer,πιο ζεστό
+taxi.may-i-open-the-window,παράθυρο
+taxi.please-stop-here,Σταματήστε
+taxi.please-take-me-here,Πάμε
+taxi.please-turn-around,αναστροφή
+time-scheduling.can-we-change-the-time,αλλάξουμε
+time-scheduling.how-long-does-it-take,Πόση ώρα
+time-scheduling.what-day-is-it-today,μέρα
+time-scheduling.what-time-does-it-close,κλείνει
+time-scheduling.what-time-does-it-open,ανοίγει
+time-scheduling.what-time-should-we-meet,συναντηθούμε
+time-scheduling.when-is-convenient,βολεύει
+toilets.where-toilet,τουαλέτα
+trail-conditions.can-we-return-before-dark,πριν νυχτώσει
+trail-conditions.can-we-return-the-same-way,ίδιο δρόμο
+trail-conditions.how-long-is-the-full-route,διαρκεί
+trail-conditions.is-the-path-slippery,Γλιστράει
+trail-conditions.is-the-route-steep,απότομη
+trail-conditions.is-the-trail-open,ανοιχτό
+trail-transport.do-you-have-a-map,χάρτη
+trail-transport.how-long-is-the-wait,περιμένουμε
+trail-transport.is-there-cell-signal-here,σήμα
+trail-transport.what-time-is-the-last-shuttle,τελευταίο λεωφορείο
+trail-transport.when-does-the-cableway-stop,τελεφερίκ
+trail-transport.where-can-we-buy-water,αγοράζουμε νερό
+trail-transport.where-can-we-refill-water,γεμίζουμε νερό
+transit-rides.can-i-use-this-ticket,χρησιμοποιήσω
+transit-rides.do-i-need-to-transfer,αλλάξω γραμμή
+transit-rides.do-i-need-to-validate,ακυρώσω
+transit-rides.i-went-past-my-stop,Πέρασα
+transit-rides.is-it-delayed,καθυστέρηση
+transit-rides.is-this-direct,απευθείας
+transit-rides.please-tell-me-where-to-get-off,κατεβώ
+transit-rides.what-is-the-next-stop,επόμενη στάση
+transit-rides.what-time-is-the-next-one,επόμενο
+transit-rides.where-do-i-pay-the-fare,κόμιστρο
+transit-rides.where-is-the-subway-station,μετρό
+weather.how-cold-at-night,κρύο | νύχτα
+weather.is-it-safe-today,ασφαλές
+weather.will-it-rain,βρέξει

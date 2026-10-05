@@ -58,7 +58,9 @@
   },
   "emphasis": [
     "ar",
+    "cs",
     "de",
+    "el",
     "en",
     "es",
     "fr",
@@ -66,8 +68,13 @@
     "it",
     "ja",
     "ko",
+    "nl",
+    "pl",
     "pt",
     "ru",
+    "sv",
+    "tr",
+    "uk",
     "zh-Hans"
   ]
 }

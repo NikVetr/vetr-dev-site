@@ -1,0 +1,299 @@
+concept_id,key
+about-me.i-am-a-doctor,Doktor
+about-me.i-am-a-nurse,Hemşire
+about-me.i-am-a-student,Öğrenci
+about-me.i-am-a-teacher,Öğretmen
+about-me.i-am-an-engineer,Mühendis
+about-me.i-am-retired,Emekli
+about-me.i-have-my-own-business,Kendi işim
+about-me.i-work-in-an-office,Ofiste
+accessibility.step-free,Basamaksız
+air-travel.i-would-like-a-window-seat,Pencere
+air-travel.i-would-like-an-aisle-seat,Koridor
+air-travel.my-luggage-did-not-arrive,gelmedi
+air-travel.where-is-check-in,Check-in
+air-travel.where-is-the-security-check,Güvenlik kontrolü
+attractions-tickets.are-there-lockers,Emanet dolabı
+attractions-tickets.could-you-take-a-photo-for-us,Fotoğrafımızı
+attractions-tickets.do-i-need-a-reservation,Rezervasyon
+attractions-tickets.may-i-take-photos,Fotoğraf
+attractions-tickets.what-is-the-latest-entry-time,Son giriş
+attractions-tickets.where-can-i-buy-tickets,Bilet
+board-answers.after-food,sonra
+board-answers.before-food,önce
+board-answers.help-is-coming,Yardım
+board-answers.i-am-calling-an-ambulance,Ambulans
+board-answers.i-am-calling-the-police,Polisi
+board-answers.i-do-not-have-a-phone,Telefonum
+board-answers.i-will-find-someone,birini bulacağım
+board-answers.i-will-show-you,göstereceğim
+board-answers.i-would-rather-not-say,Söylememeyi
+board-answers.none-of-these,hiçbirini
+board-answers.not-possible,mümkün değil
+board-answers.only-for-customers,müşteriler
+board-answers.pay-on-board,Araçta
+board-answers.prescription-only,reçeteyle
+board-answers.see-a-doctor,Doktora
+board-answers.stay-here,kalmak
+board-answers.the-hospital-is-close,yakın
+board-answers.there-is-no-wait,Sıra yok
+board-answers.we-are-full,Dolu
+board-answers.we-do-not-have-it,yok
+board-answers.we-have-it,var
+board-answers.what-happened,oldu
+board-answers.what-is-your-name,Adınız
+board-answers.where-does-it-hurt,ağrıyor
+border-customs.here-is-my-passport,Pasaportum
+border-customs.i-am-here-for-business,İş
+border-customs.i-am-visiting-family,Aile ziyaretine
+border-customs.i-have-a-connecting-flight,Aktarmalı
+border-customs.where-do-i-collect-my-baggage,alacağım
+color-size-returns.do-you-have-a-bag,Poşet
+color-size-returns.do-you-have-another-size,beden
+communication.can-you-help-me,Yardım
+communication.please-speak-more-slowly,yavaş
+dietary-needs.does-it-contain-fish-stock,balık suyu
+dietary-needs.does-it-contain-pork-fat,domuz yağı
+dietary-needs.does-it-contain-pork-stock,domuz eti suyu
+dietary-needs.i-am-vegan,Vegan
+dietary-needs.i-am-vegetarian,Vejetaryen
+dietary-needs.is-this-halal,helal
+dietary-needs.no-eggs,Yumurta
+dietary-needs.no-meat,Et
+dietary-needs.no-nuts,Sert kabuklu yemiş
+dietary-needs.no-peanuts,Yer fıstığı
+dietary-needs.no-pork,Domuz eti
+dietary-needs.no-seafood,Deniz ürünü
+dietary-needs.no-sesame,Susam | tahin
+directions.can-i-walk-there,Yürüyerek gidebilir
+directions.can-you-show-me-the-way,Yolu
+directions.how-long-on-foot,ne kadar
+directions.please-show-me-on-the-map,Haritada
+emergency-medical.i-am-bleeding-badly,kanamam
+emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaksi
+emergency-medical.i-cannot-breathe,Nefes
+emergency-medical.i-feel-unwell,iyi hissetmiyorum
+emergency-medical.i-have-chest-pain,Göğsümde ağrı
+emergency-medical.i-have-travel-insurance,sigortam
+emergency-medical.i-need-a-doctor,Doktora
+emergency-medical.i-think-a-bone-is-broken,kemiğim kırıldı
+emergency-medical.it-hurts-here,ağrıyor
+emergency-medical.please-call-an-ambulance,ambulans
+emergency-medical.please-call-my-emergency-contact,Yakınımı
+emergency-medical.please-take-me-to-a-hospital,hastaneye
+emergency-medical.this-is-an-emergency,acil
+emergency-medical.this-person-is-unconscious,bilinci kapalı
+emergency-medical.where-is-the-nearest-hospital,En yakın
+family-intros.this-is-my-brother,erkek kardeşim
+family-intros.this-is-my-colleague,iş arkadaşım
+family-intros.this-is-my-daughter,kızım
+family-intros.this-is-my-father,babam
+family-intros.this-is-my-husband,kocam
+family-intros.this-is-my-mother,annem
+family-intros.this-is-my-partner,partnerim
+family-intros.this-is-my-sister,kız kardeşim
+family-intros.this-is-my-son,oğlum
+family-intros.this-is-my-wife,karım
+food-ordering.i-want-this,istiyorum
+food-ordering.is-a-table-available,Boş masa
+food-ordering.is-this-vegetarian,vejetaryen
+food-ordering.table-for-two,İki kişilik
+food-ordering.to-go-please,Paket
+food-ordering.what-do-you-recommend,tavsiye
+hiking-parks.how-long-to-the-summit,Zirveye
+hiking-parks.how-long-to-the-viewpoint,Seyir terasına
+hiking-parks.is-this-trail-suitable-for-beginners,yeni başlayanlara
+hiking-parks.where-is-the-trailhead,başlangıcı
+hiking-parks.which-route-is-easier,kolay
+hitchhiking.can-you-give-me-a-ride,arabanıza
+hitchhiking.i-can-pay-for-fuel,Benzin
+hitchhiking.i-only-need-to-go-to-the-next-town,sonraki kasabaya
+hitchhiking.is-there-room-for-two,İki kişilik yer
+hitchhiking.thank-you-for-the-ride,teşekkürler
+hitchhiking.where-are-you-going,Nereye
+hotel-basics.are-any-rooms-available,Boş odanız
+hotel-basics.how-much-per-night,Geceliği
+hotel-basics.i-have-a-reservation,Rezervasyonum
+hotel-basics.i-would-like-a-non-smoking-room,Sigara içilmeyen
+hotel-basics.i-would-like-a-quiet-room,Sessiz
+hotel-basics.is-breakfast-included,Kahvaltı
+hotel-basics.is-there-a-washing-machine,Çamaşır makinesi
+hotel-basics.is-there-air-conditioning,Klima
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,görebilir
+hotel-requests.another-blanket,battaniye
+hotel-requests.another-night,Bir gece daha
+hotel-requests.another-towel-please,havlu
+hotel-requests.can-i-check-in-early,Erken
+hotel-requests.can-i-check-out-later,geç
+hotel-requests.can-i-store-my-luggage,Bagajımı
+hotel-requests.is-there-a-safe,Kasa
+hotel-requests.no-housekeeping,Oda temizliği
+hotel-requests.what-time-does-breakfast-start,Kahvaltı
+hotel-requests.what-time-is-check-out,Çıkış
+in-a-building.is-this-the-correct-entrance,burası
+introductions.i-am-a-tourist,Turist
+introductions.i-am-traveling-alone,Yalnız
+introductions.this-is-my-friend,arkadaşım
+introductions.we-are-traveling-together,Birlikte
+introductions.what-is-your-name,Adınız
+kind-words.i-had-a-wonderful-time,güzel zaman
+kind-words.i-like-it-very-much,beğendim
+kind-words.it-is-beautiful-here,güzel
+kind-words.thank-you-for-everything,Her şey
+kind-words.thank-you-for-your-help,Yardımınız
+kind-words.thank-you-for-your-hospitality,Misafirperverliğiniz
+kind-words.this-is-delicious,lezzetli
+kind-words.you-are-very-kind,naziksiniz
+laundry.can-it-be-ready-today,Bugün
+laundry.how-much-per-kilo,Kilosu
+laundry.please-do-not-use-bleach,Çamaşır suyu
+laundry.please-iron-this,ütüleyin
+laundry.please-wash-these-clothes,yıkayın
+laundry.when-will-it-be-ready,Ne zaman
+laundry.where-is-a-laundromat,Çamaşırhane
+lost-rescue.i-do-not-know-where-i-am,Nerede olduğumu
+lost-rescue.i-lost-my-bag,Çantamı
+lost-rescue.i-lost-my-passport,Pasaportumu
+lost-rescue.i-lost-my-phone,Telefonumu
+lost-rescue.i-lost-my-wallet,Cüzdanımı
+lost-rescue.my-child-is-missing,Çocuğum
+lost-rescue.please-call-the-police,Polis
+lost-rescue.we-are-here,Burada
+massage-spa.focus-on-back,sırta
+massage-spa.focus-on-feet,ayaklara
+massage-spa.focus-on-neck,boyna
+massage-spa.focus-on-shoulders,omuzlara
+massage-spa.please-avoid-this-area,dokunmayın
+massage-spa.please-pause,ara verin
+massage-spa.please-stop,durun
+massage-spa.reply-ask-supervisor,sorumluya
+massage-spa.reply-cannot-avoid-this-treatment,atlanamaz
+massage-spa.reply-does-it-hurt-there,ağrıyor
+massage-spa.reply-i-will-avoid-that-area,dokunmayacağım
+massage-spa.reply-which-area-exactly,hangi bölge
+massage-spa.stronger-pressure,sert
+massage-spa.that-pressure-is-good,iyi
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,Penisilin
+medical-conditions.i-am-allergic-to-sulfa-drugs,Sülfonamid
+medical-conditions.i-am-diabetic,Şeker hastası
+medical-conditions.i-am-pregnant,Hamile
+medical-conditions.i-carry-an-adrenaline-injector,Adrenalin
+medical-conditions.i-have-a-heart-condition,Kalp
+medical-conditions.i-have-asthma,Astımım
+medical-conditions.i-have-epilepsy,Epilepsi
+medical-conditions.i-need-insulin,İnsüline
+medical-conditions.i-need-my-inhaler,spreyim
+medical-conditions.i-take-blood-thinners,Kan sulandırıcı
+medical-conditions.inject-it-into-my-outer-thigh,Uyluğumun
+medical-conditions.my-blood-sugar-is-low,Kan şekerim
+medical-conditions.my-injector-is-in-my-bag,çantamda
+medical-conditions.please-give-me-sugar-or-juice,şeker | meyve suyu
+medical-conditions.this-card-lists-my-conditions,kartta
+medical-conditions.this-is-my-medicine,ilacım
+outdoors.are-there-dangerous-animals-here,tehlikeli hayvan
+outdoors.can-we-camp-here,kamp
+outdoors.is-it-safe-to-swim-here,yüzmek
+payment-receipt.can-we-pay-separately,Ayrı ayrı
+payment-receipt.how-much-in-total,Toplam
+payment-receipt.i-already-paid,ödedim
+payment-receipt.is-tax-included,KDV
+payment-receipt.my-card-was-declined,geçmedi
+payment-receipt.pay-by-card,Kartla
+payment-receipt.the-bill-is-wrong,Hesapta | yanlışlık
+pharmacy-symptoms.antacid,mide
+pharmacy-symptoms.anti-diarrhea-medicine,ishal
+pharmacy-symptoms.before-or-after-food,Yemekten
+pharmacy-symptoms.can-i-get-this-medicine-here,ilacı
+pharmacy-symptoms.cough-medicine,öksürük
+pharmacy-symptoms.do-i-need-a-prescription,Reçete
+pharmacy-symptoms.how-many-times-a-day,Günde
+pharmacy-symptoms.how-much-should-i-take,Ne kadar
+pharmacy-symptoms.i-feel-dizzy,dönüyor
+pharmacy-symptoms.i-feel-nauseous,bulanıyor
+pharmacy-symptoms.i-have-a-burn,Yanığım
+pharmacy-symptoms.i-have-a-cough,Öksürüğüm
+pharmacy-symptoms.i-have-a-cut,Kesiğim
+pharmacy-symptoms.i-have-a-fever,Ateşim
+pharmacy-symptoms.i-have-a-headache,Başım
+pharmacy-symptoms.i-have-a-rash,Döküntüm
+pharmacy-symptoms.i-have-a-sore-throat,Boğazım
+pharmacy-symptoms.i-have-a-stomach-ache,Karnım
+pharmacy-symptoms.i-have-diarrhea,İshalim
+pharmacy-symptoms.i-think-it-is-infected,enfeksiyon
+pharmacy-symptoms.is-this-safe-during-pregnancy,Hamilelikte
+pharmacy-symptoms.motion-sickness-tablets,araç tutması
+pharmacy-symptoms.painkiller,ağrı
+pharmacy-symptoms.rehydration-salts,rehidrasyon
+pharmacy-symptoms.the-pain-is-severe,Ağrı | şiddetli
+pharmacy-symptoms.which-pharmacy-is-open-now,Nöbetçi
+police-consulate.i-need-an-interpreter,Tercüman
+police-consulate.i-want-to-contact-my-embassy,Büyükelçiliğimi
+police-consulate.i-want-to-report-a-theft,Hırsızlığı
+police-consulate.my-bag-was-stolen,çalındı
+police-consulate.someone-is-following-me,takip ediyor
+police-consulate.where-is-the-police-station,Karakol
+quick-directions.across-from-here,karşıda
+quick-directions.go-straight,Düz
+quick-directions.turn-left,Sola
+quick-directions.turn-right,Sağa
+room-problems.can-i-change-rooms,değiştirebilir
+room-problems.please-send-someone,birini gönderin
+room-problems.the-air-conditioning-is-broken,Klima
+room-problems.the-heating-does-not-work,Isıtma
+room-problems.the-key-does-not-work,Kart
+room-problems.the-light-does-not-work,Işık
+room-problems.the-room-is-too-noisy,gürültülü
+room-problems.the-toilet-will-not-flush,Sifon
+room-problems.there-is-a-problem-with-the-room,sorun
+room-problems.there-is-no-hot-water,Sıcak su
+shopping.can-it-be-a-little-cheaper,indirim
+shopping.do-you-have-this-in-stock,Stokta
+shopping.how-much-is-this,ne kadar
+shopping.i-am-just-looking,bakıyorum
+shopping.i-will-take-this,alıyorum
+shopping.that-is-too-expensive,pahalı
+shopping.where-do-i-pay,Kasa
+taxi.can-you-wait-for-me-here,bekler
+taxi.could-you-make-it-colder,soğuk
+taxi.could-you-make-it-warmer,sıcak
+taxi.may-i-open-the-window,Camı
+taxi.please-stop-here,durun
+taxi.please-take-me-here,götürün
+taxi.please-turn-around,U dönüşü
+time-scheduling.can-we-change-the-time,değiştirebilir
+time-scheduling.how-long-does-it-take,sürer
+time-scheduling.what-day-is-it-today,günlerden
+time-scheduling.what-time-does-it-close,kapanıyor
+time-scheduling.what-time-does-it-open,açılıyor
+time-scheduling.what-time-should-we-meet,buluşalım
+time-scheduling.when-is-convenient,uygun
+toilets.where-toilet,Tuvalet
+trail-conditions.can-we-return-before-dark,Karanlıktan önce
+trail-conditions.can-we-return-the-same-way,Aynı yoldan
+trail-conditions.how-long-is-the-full-route,Tüm yol
+trail-conditions.is-the-path-slippery,kaygan
+trail-conditions.is-the-route-steep,dik
+trail-conditions.is-the-trail-open,açık
+trail-transport.do-you-have-a-map,Haritanız
+trail-transport.how-long-is-the-wait,beklenir
+trail-transport.is-there-cell-signal-here,telefon çekiyor
+trail-transport.what-time-is-the-last-shuttle,Son servis
+trail-transport.when-does-the-cableway-stop,Teleferik
+trail-transport.where-can-we-buy-water,su alabiliriz
+trail-transport.where-can-we-refill-water,su doldurabiliriz
+transit-rides.can-i-use-this-ticket,geçerli
+transit-rides.do-i-need-to-transfer,Aktarma
+transit-rides.do-i-need-to-validate,okutmam
+transit-rides.i-am-in-a-hurry,Acelem
+transit-rides.i-went-past-my-stop,geçtim
+transit-rides.is-it-delayed,Gecikme
+transit-rides.please-tell-me-where-to-get-off,ineceğimi
+transit-rides.what-is-the-next-stop,Sonraki durak
+transit-rides.what-time-is-the-next-one,Sonraki
+transit-rides.where-do-i-pay-the-fare,Ücreti
+transit-rides.where-is-the-subway-station,Metro
+weather.how-cold-at-night,Geceleri | dereceye
+weather.is-it-safe-today,güvenli
+weather.will-it-rain,yağmur

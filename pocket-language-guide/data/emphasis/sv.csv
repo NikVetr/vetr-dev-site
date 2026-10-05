@@ -1,0 +1,318 @@
+concept_id,key
+about-me.i-am-a-doctor,läkare
+about-me.i-am-a-nurse,sjuksköterska
+about-me.i-am-a-student,student
+about-me.i-am-a-teacher,lärare
+about-me.i-am-an-engineer,ingenjör
+about-me.i-am-retired,pensionär
+about-me.i-have-my-own-business,eget företag
+about-me.i-work-in-an-office,kontor
+accessibility.step-free,utan trappsteg
+air-travel.i-would-like-a-window-seat,fönsterplats
+air-travel.i-would-like-an-aisle-seat,gångplats
+air-travel.my-luggage-did-not-arrive,kom inte fram
+air-travel.where-is-check-in,incheckningen
+air-travel.where-is-the-security-check,säkerhetskontrollen
+attractions-tickets.are-there-lockers,förvaringsskåp
+attractions-tickets.could-you-take-a-photo-for-us,foto åt oss
+attractions-tickets.do-i-need-a-reservation,boka
+attractions-tickets.may-i-take-photos,foton
+attractions-tickets.what-is-the-latest-entry-time,sista insläpp
+attractions-tickets.where-can-i-buy-tickets,biljetter
+board-answers.after-food,Efter
+board-answers.at-the-next-stop,nästa hållplats
+board-answers.before-food,Före
+board-answers.can-you-walk,gå
+board-answers.help-is-coming,Hjälpen
+board-answers.i-am-calling-an-ambulance,ambulans
+board-answers.i-am-calling-the-police,polisen
+board-answers.i-do-not-have-a-phone,telefon
+board-answers.i-will-check,kolla
+board-answers.i-will-find-someone,hitta någon
+board-answers.i-will-show-you,visar
+board-answers.i-will-write-it-down,skriver ner
+board-answers.i-would-rather-not-say,helst inte
+board-answers.it-does-not-matter,spelar ingen roll
+board-answers.it-is-closed,stängt
+board-answers.it-is-free,gratis
+board-answers.it-is-over-there,där borta
+board-answers.my-name-is-blank,heter
+board-answers.none-of-these,Inget
+board-answers.not-possible,går inte
+board-answers.only-for-customers,kunder
+board-answers.pay-on-board,ombord
+board-answers.prescription-only,receptbelagt
+board-answers.see-a-doctor,läkare
+board-answers.stay-here,stannar
+board-answers.the-hospital-is-close,Sjukhuset | nära
+board-answers.there-is-no-wait,Ingen väntetid
+board-answers.we-are-full,fullt
+board-answers.we-do-not-have-it,har | inte
+board-answers.we-have-it,har
+board-answers.what-happened,hänt
+board-answers.what-is-your-name,Vad heter
+board-answers.where-does-it-hurt,ont
+border-customs.here-is-my-passport,pass
+border-customs.i-am-here-for-business,affärer
+border-customs.i-am-visiting-family,familj
+border-customs.i-have-a-connecting-flight,anslutande flyg
+border-customs.where-do-i-collect-my-baggage,hämtar
+color-size-returns.do-you-have-a-bag,påse
+color-size-returns.do-you-have-another-size,storlek
+color-size-returns.may-i-try-it-on,prova
+communication.can-you-help-me,hjälpa
+communication.do-you-speak-english,Talar
+communication.i-do-not-speak-this-language,talar inte
+communication.i-do-not-understand,förstår inte
+communication.please-speak-more-slowly,långsammare
+communication.please-write-it-down,skriva ner
+dietary-needs.does-it-contain-fish-stock,fiskbuljong
+dietary-needs.does-it-contain-pork-fat,ister | flott
+dietary-needs.does-it-contain-pork-stock,buljong på fläsk
+dietary-needs.i-am-vegan,vegan
+dietary-needs.i-am-vegetarian,vegetarian
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,ägg
+dietary-needs.no-meat,kött
+dietary-needs.no-nuts,nötter
+dietary-needs.no-peanuts,jordnötter
+dietary-needs.no-pork,fläsk
+dietary-needs.no-seafood,skaldjur | fisk
+dietary-needs.no-sesame,sesamfrön
+directions.can-i-walk-there,gå
+directions.can-you-show-me-the-way,vägen
+directions.how-long-on-foot,till fots
+directions.is-it-far,långt
+directions.please-show-me-on-the-map,kartan
+emergency-medical.i-am-bleeding-badly,blöder
+emergency-medical.i-am-having-a-severe-allergic-reaction,anafylaktisk chock
+emergency-medical.i-am-injured,skadad
+emergency-medical.i-cannot-breathe,andas
+emergency-medical.i-feel-unwell,inte bra
+emergency-medical.i-have-chest-pain,ont i bröstet
+emergency-medical.i-have-travel-insurance,reseförsäkring
+emergency-medical.i-need-a-doctor,läkare
+emergency-medical.i-think-a-bone-is-broken,brutit ett ben
+emergency-medical.it-hurts-here,ont
+emergency-medical.please-call-an-ambulance,ambulans
+emergency-medical.please-call-my-emergency-contact,anhörig
+emergency-medical.please-take-me-to-a-hospital,sjukhuset
+emergency-medical.this-is-an-emergency,nödläge
+emergency-medical.this-person-is-unconscious,medvetslös
+emergency-medical.where-is-the-nearest-hospital,närmaste
+family-intros.this-is-my-brother,bror
+family-intros.this-is-my-colleague,kollega
+family-intros.this-is-my-daughter,dotter
+family-intros.this-is-my-father,pappa
+family-intros.this-is-my-husband,man
+family-intros.this-is-my-mother,mamma
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,syster
+family-intros.this-is-my-son,son
+family-intros.this-is-my-wife,fru
+food-ordering.i-want-this,vill ha
+food-ordering.is-a-table-available,ledigt bord
+food-ordering.is-this-vegetarian,vegetariskt
+food-ordering.table-for-two,bord | två
+food-ordering.to-go-please,ta med
+food-ordering.what-do-you-recommend,rekommenderar
+hiking-parks.how-long-to-the-summit,toppen
+hiking-parks.how-long-to-the-viewpoint,utsiktsplatsen
+hiking-parks.is-this-trail-suitable-for-beginners,nybörjare
+hiking-parks.where-is-the-trailhead,startpunkt
+hiking-parks.which-route-is-easier,lättare
+hitchhiking.can-you-give-me-a-ride,skjuts
+hitchhiking.i-can-pay-for-fuel,bensinen
+hitchhiking.i-only-need-to-go-to-the-next-town,nästa ort
+hitchhiking.is-there-room-for-two,plats | två
+hitchhiking.thank-you-for-the-ride,Tack
+hitchhiking.where-are-you-going,Vart
+hotel-basics.are-any-rooms-available,rum
+hotel-basics.how-much-per-night,per natt
+hotel-basics.i-have-a-reservation,bokning
+hotel-basics.i-would-like-a-non-smoking-room,rökfritt
+hotel-basics.i-would-like-a-quiet-room,tyst
+hotel-basics.is-breakfast-included,frukost
+hotel-basics.is-there-a-washing-machine,tvättmaskin
+hotel-basics.is-there-air-conditioning,luftkonditionering
+hotel-basics.is-wi-fi-free,wifin
+hotel-basics.may-i-see-the-room,se rummet
+hotel-requests.another-blanket,filt
+hotel-requests.another-night,en natt till
+hotel-requests.another-towel-please,handduk
+hotel-requests.can-i-check-in-early,tidigare
+hotel-requests.can-i-check-out-later,senare
+hotel-requests.can-i-store-my-luggage,bagage
+hotel-requests.is-there-a-safe,kassaskåp
+hotel-requests.no-housekeeping,städning
+hotel-requests.what-time-does-breakfast-start,frukosten
+hotel-requests.what-time-is-check-out,utcheckningen
+in-a-building.is-this-the-correct-entrance,rätt
+introductions.i-am-a-tourist,turist
+introductions.i-am-traveling-alone,ensam
+introductions.my-name-is,heter
+introductions.this-is-my-friend,vän
+introductions.we-are-traveling-together,tillsammans
+introductions.what-is-your-name,Vad heter
+introductions.where-are-you-from,Var | ifrån
+kind-words.i-had-a-wonderful-time,fantastisk
+kind-words.i-like-it-very-much,tycker | om
+kind-words.it-is-beautiful-here,vackert
+kind-words.thank-you-for-everything,allt
+kind-words.thank-you-for-your-help,hjälp
+kind-words.thank-you-for-your-hospitality,gästfrihet
+kind-words.this-is-delicious,gott
+kind-words.you-are-very-kind,vänlig
+laundry.can-it-be-ready-today,idag
+laundry.how-much-per-kilo,per kilo
+laundry.please-do-not-use-bleach,blekmedel
+laundry.please-iron-this,stryka
+laundry.please-wash-these-clothes,tvätta
+laundry.when-will-it-be-ready,När
+laundry.where-is-a-laundromat,tvättstuga
+lost-rescue.i-do-not-know-where-i-am,var jag är
+lost-rescue.i-lost-my-bag,väska
+lost-rescue.i-lost-my-passport,pass
+lost-rescue.i-lost-my-phone,telefon
+lost-rescue.i-lost-my-wallet,plånbok
+lost-rescue.my-child-is-missing,barn saknas
+lost-rescue.please-call-the-police,polisen
+lost-rescue.we-are-here,här
+massage-spa.focus-on-back,ryggen
+massage-spa.focus-on-feet,fötterna
+massage-spa.focus-on-neck,nacken
+massage-spa.focus-on-shoulders,axlarna
+massage-spa.more-gently,lättare
+massage-spa.please-avoid-this-area,Undvik
+massage-spa.please-pause,Pausa
+massage-spa.reply-ask-supervisor,chefen
+massage-spa.reply-cannot-avoid-this-treatment,går det inte
+massage-spa.reply-does-it-hurt-there,ont
+massage-spa.reply-i-will-avoid-that-area,undviker
+massage-spa.reply-which-area-exactly,Vilket ställe
+massage-spa.stronger-pressure,Hårdare
+massage-spa.that-pressure-is-good,lagom
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicillin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,diabetiker
+medical-conditions.i-am-pregnant,gravid
+medical-conditions.i-carry-an-adrenaline-injector,adrenalinpenna
+medical-conditions.i-have-a-heart-condition,hjärtsjukdom
+medical-conditions.i-have-asthma,astma
+medical-conditions.i-have-epilepsy,epilepsi
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,inhalator
+medical-conditions.i-take-blood-thinners,blodförtunnande
+medical-conditions.inject-it-into-my-outer-thigh,yttre lår
+medical-conditions.my-blood-sugar-is-low,blodsocker | lågt
+medical-conditions.my-injector-is-in-my-bag,adrenalinpenna | väska
+medical-conditions.please-give-me-sugar-or-juice,socker | juice
+medical-conditions.this-card-lists-my-conditions,kortet
+medical-conditions.this-is-my-medicine,medicin
+outdoors.are-there-dangerous-animals-here,farliga djur
+outdoors.can-we-camp-here,tälta
+outdoors.is-it-safe-to-swim-here,simma
+payment-receipt.can-we-pay-separately,var för sig
+payment-receipt.how-much-in-total,totalt
+payment-receipt.i-already-paid,redan betalat
+payment-receipt.is-tax-included,moms
+payment-receipt.my-card-was-declined,nekat
+payment-receipt.pay-by-card,kort
+payment-receipt.the-bill-is-wrong,notan | fel
+pharmacy-symptoms.before-or-after-food,maten
+pharmacy-symptoms.can-i-get-this-medicine-here,medicinen
+pharmacy-symptoms.do-i-need-a-prescription,recept
+pharmacy-symptoms.how-many-times-a-day,gånger om dagen
+pharmacy-symptoms.how-much-should-i-take,Hur mycket
+pharmacy-symptoms.i-am-vomiting,kräks
+pharmacy-symptoms.i-feel-dizzy,yr
+pharmacy-symptoms.i-feel-nauseous,illa
+pharmacy-symptoms.i-have-a-burn,brännsår
+pharmacy-symptoms.i-have-a-cough,hosta
+pharmacy-symptoms.i-have-a-cut,skärsår
+pharmacy-symptoms.i-have-a-fever,feber
+pharmacy-symptoms.i-have-a-headache,huvudvärk
+pharmacy-symptoms.i-have-a-rash,utslag
+pharmacy-symptoms.i-have-a-sore-throat,halsen
+pharmacy-symptoms.i-have-a-stomach-ache,magen
+pharmacy-symptoms.i-have-diarrhea,diarré
+pharmacy-symptoms.i-think-it-is-infected,infekterat
+pharmacy-symptoms.is-this-safe-during-pregnancy,graviditet
+pharmacy-symptoms.the-pain-is-severe,Smärtan | svår
+pharmacy-symptoms.which-pharmacy-is-open-now,öppet nu
+police-consulate.i-need-an-interpreter,tolk
+police-consulate.i-want-to-contact-my-embassy,ambassad
+police-consulate.i-want-to-report-a-theft,stöld
+police-consulate.my-bag-was-stolen,stulen
+police-consulate.someone-is-following-me,följer efter
+police-consulate.where-is-the-police-station,polisstationen
+quick-directions.across-from-here,Mitt emot
+quick-directions.go-straight,rakt fram
+quick-directions.on-the-left,vänster
+quick-directions.on-the-right,höger
+quick-directions.turn-left,vänster
+quick-directions.turn-right,höger
+room-problems.can-i-change-rooms,byta
+room-problems.please-send-someone,skicka någon
+room-problems.the-air-conditioning-is-broken,Luftkonditioneringen
+room-problems.the-heating-does-not-work,Värmen
+room-problems.the-key-does-not-work,Nyckeln
+room-problems.the-light-does-not-work,Lampan
+room-problems.the-room-is-too-noisy,bullrigt
+room-problems.the-toilet-will-not-flush,Toaletten
+room-problems.there-is-a-problem-with-the-room,problem
+room-problems.there-is-no-hot-water,varmvatten
+shopping.can-it-be-a-little-cheaper,billigare
+shopping.do-you-have-this-in-stock,lager
+shopping.how-much-is-this,kostar
+shopping.i-am-just-looking,tittar
+shopping.i-will-take-this,tar
+shopping.that-is-too-expensive,dyrt
+shopping.where-do-i-pay,betalar
+social-basics.i-do-not-know,vet inte
+taxi.can-you-wait-for-me-here,vänta
+taxi.could-you-make-it-colder,kallare
+taxi.could-you-make-it-warmer,varmare
+taxi.may-i-open-the-window,fönstret
+taxi.please-stop-here,Stanna
+taxi.please-take-me-here,Kör
+taxi.please-turn-around,vända
+time-scheduling.can-we-change-the-time,ändra
+time-scheduling.how-long-does-it-take,lång tid
+time-scheduling.what-day-is-it-today,dag
+time-scheduling.what-time-does-it-close,stänger
+time-scheduling.what-time-does-it-open,öppnar
+time-scheduling.what-time-is-it,klockan
+time-scheduling.what-time-should-we-meet,träffas
+time-scheduling.when-is-convenient,passar
+toilets.it-is-out-of-order,trasig
+toilets.where-toilet,toaletten
+trail-conditions.can-we-return-before-dark,mörkt
+trail-conditions.can-we-return-the-same-way,samma väg
+trail-conditions.how-long-is-the-full-route,hela leden
+trail-conditions.is-the-path-slippery,hal
+trail-conditions.is-the-route-steep,brant
+trail-conditions.is-the-trail-open,öppen
+trail-transport.do-you-have-a-map,karta
+trail-transport.how-long-is-the-wait,väntetiden
+trail-transport.is-there-cell-signal-here,mobiltäckning
+trail-transport.what-time-is-the-last-shuttle,sista bussen
+trail-transport.when-does-the-cableway-stop,linbanan
+trail-transport.where-can-we-buy-water,köpa vatten
+trail-transport.where-can-we-refill-water,fylla på vatten
+transit-rides.can-i-use-this-ticket,använda
+transit-rides.do-i-need-to-transfer,byta
+transit-rides.do-i-need-to-validate,stämpla
+transit-rides.i-am-in-a-hurry,bråttom
+transit-rides.i-went-past-my-stop,åkte förbi
+transit-rides.is-it-delayed,försenat
+transit-rides.is-this-direct,direkt
+transit-rides.please-tell-me-where-to-get-off,gå av
+transit-rides.what-is-the-next-stop,nästa hållplats
+transit-rides.what-time-is-the-next-one,nästa
+transit-rides.where-do-i-pay-the-fare,betalar
+transit-rides.where-is-the-subway-station,tunnelbanestationen
+weather.how-cold-at-night,kallt | natten
+weather.is-it-safe-today,säkert
+weather.will-it-rain,regna
