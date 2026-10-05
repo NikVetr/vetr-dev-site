@@ -17,11 +17,13 @@ import { readFile, writeFile, readdir, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseTable } from '../core/csv.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const CHECK = process.argv.includes('--check');
 const INDEX_PATH = 'data/respell/overrides/index.json';
 const RULES_INDEX_PATH = 'data/respell/rules/index.json';
+const OFFLINE_PATH = 'data/offline.json';
 
 /** Directories whose contents belong in the shell, searched recursively. */
 const CODE_DIRS = ['core', 'render', 'ui'];
@@ -46,6 +48,8 @@ const ENTRY_FILES = [
   'data/fonts/latin-400.woff2',
   'packs/index.json',
   'data/respell/overrides/index.json',
+  // What each language needs saved to work with no connection, for the settings.
+  OFFLINE_PATH,
   // Which languages name every country: `loadCorpus` reads it on every page.
   'data/countries/index.json',
 ];
@@ -136,6 +140,48 @@ async function boardCorpus() {
   return out;
 }
 
+/**
+ * What each language needs to work with no connection, for the settings' downloads:
+ * its rows, the wordings that depend on who is speaking and its country names where
+ * it has them, and -- for making a card -- the faces of its script, each with its
+ * size, so a reader is told what a save costs before pressing it. Generated because
+ * which group files a language carries and which faces its script uses are facts
+ * about the disk; asking for a file a language does not have would leave a save
+ * "partly done" for good.
+ */
+async function offlineIndex() {
+  const read = async (/** @type {string} */ rel) => readFile(join(ROOT, rel), 'utf8');
+  const size = (/** @type {string} */ rel) => stat(join(ROOT, rel)).then((s) => s.size, () => null);
+  const groups = (await readdir(join(ROOT, 'data/concepts'))).filter((f) => f.endsWith('.csv'));
+  const stackOf = Object.fromEntries(parseTable(await read('data/registry/scripts.csv'), 'scripts.csv')
+    .map((row) => [row.iso15924, row.font_stack]));
+  const faces = JSON.parse(await read('data/fonts/manifest.json')).faces;
+  // A card's faces are its two scripts' and, whatever they are, the Latin and the
+  // condensed Latin its tables are set in -- which every saved language shares, so
+  // they are listed once rather than counted against each.
+  const fontsOf = (/** @type {string[]} */ stacks) => {
+    const own = faces.filter((/** @type {any} */ f) => stacks.includes(f.stack));
+    return {
+      fonts: own.flatMap((/** @type {any} */ f) => [`data/fonts/${f.file}.woff2`, `data/fonts/${f.file}.ttf`]),
+      fontBytes: own.reduce((/** @type {number} */ n, /** @type {any} */ f) => n + f.woff2Bytes + f.ttfBytes, 0),
+    };
+  };
+  const common = ['latin', 'latin-cond'];
+  /** @type {Record<string, {files: string[], bytes: number, fonts: string[], fontBytes: number}>} */
+  const languages = {};
+  for (const { bcp47, script } of parseTable(await read('data/registry/languages.csv'), 'languages.csv')) {
+    const candidates = [...groups, 'variants.csv'].map((f) => `data/lang/${bcp47}/${f}`).concat(`data/countries/${bcp47}.csv`);
+    const sizes = await Promise.all(candidates.map(size));
+    languages[bcp47] = {
+      files: candidates.filter((_, i) => sizes[i] !== null),
+      bytes: sizes.reduce((/** @type {number} */ n, b) => n + (b ?? 0), 0),
+      ...fontsOf(common.includes(stackOf[script]) ? [] : [stackOf[script]]),
+    };
+  }
+  return `${JSON.stringify({ common: fontsOf(common), languages })}\n`;
+}
+const offline = await offlineIndex();
+
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {
   /** @type {string[]} */ const out = [];
@@ -196,6 +242,7 @@ const rulesIndex = `${JSON.stringify(ready.filter(Boolean), null, 2)}\n`;
 if (!CHECK) {
   await writeFile(join(ROOT, INDEX_PATH), overrideIndex);
   await writeFile(join(ROOT, RULES_INDEX_PATH), rulesIndex);
+  await writeFile(join(ROOT, OFFLINE_PATH), offline);
 }
 
 // Fail loudly rather than shipping a worker that precaches a 404.
@@ -237,8 +284,9 @@ if (CHECK) {
   const onDisk = await readFile(join(ROOT, 'data/shell.json'), 'utf8').catch(() => '');
   const indexOnDisk = await readFile(join(ROOT, INDEX_PATH), 'utf8').catch(() => '');
   const rulesOnDisk = await readFile(join(ROOT, RULES_INDEX_PATH), 'utf8').catch(() => '');
+  const offlineOnDisk = await readFile(join(ROOT, OFFLINE_PATH), 'utf8').catch(() => '');
   if (onDisk !== manifest || nextSw !== sw || indexOnDisk !== overrideIndex
-    || rulesOnDisk !== rulesIndex) {
+    || rulesOnDisk !== rulesIndex || offlineOnDisk !== offline) {
     throw new Error('data/shell.json is stale -- run `npm run shell` and commit the result');
   }
   console.log(`shell manifest current  ${files.length} files, version plg-${version}`);

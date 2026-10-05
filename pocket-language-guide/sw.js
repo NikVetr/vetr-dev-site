@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-981b53f40916';
+const VERSION = 'plg-17eb13ded8ad';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -160,8 +160,24 @@ self.addEventListener('fetch', (event) => {
   })());
 });
 
-// The gallery asks for a language's data and fonts explicitly, so a reader
-// chooses what to carry rather than downloading every script.
+// The settings ask for a language's data and fonts explicitly, so a reader chooses
+// what to carry rather than downloading every script -- and can let it go again, one
+// language's files or every saved file at once, to give the space back. Only the pack
+// cache is ever emptied: the shell is what the app runs on.
+self.addEventListener('message', (event) => {
+  const data = event.data;
+  if (data?.type !== 'forget-urls') return;
+  event.waitUntil((async () => {
+    if (data.urls) {
+      const cache = await caches.open(PACK_CACHE);
+      await Promise.all(data.urls.map((/** @type {string} */ url) => cache.delete(url, { ignoreSearch: true })));
+    } else {
+      await caches.delete(PACK_CACHE);
+    }
+    event.source?.postMessage({ type: 'forget-urls-done' });
+  })());
+});
+
 self.addEventListener('message', (event) => {
   const data = event.data;
   if (!data || data.type !== 'cache-urls') return;

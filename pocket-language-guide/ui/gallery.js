@@ -581,14 +581,14 @@ function fitHeader() {
  * own settings add what only its pair needs. The sections' modules arrive when the
  * bars are pressed, as the lightbox's engine does, so the grid stays the small page
  * the note above describes.
- * @param {string} reader
+ * @param {string} reader @param {(code: string) => string} nameOf
  */
-async function openSettings(reader) {
+async function openSettings(reader, nameOf) {
   const read = async (/** @type {string} */ rel) => parseTable(await loadText(rel), rel);
-  const [[{ personalWiring }, { aboutSection, askCountry }, { displaySection, readDisplay }, { DIET }],
+  const [[{ personalWiring }, { aboutSection, askCountry }, { displaySection, readDisplay }, { DIET }, { travelSection }],
     [axes, food, listed]] = await Promise.all([
     Promise.all([import('./personal-data.js'), import('./about.js'), import('./board-display.js'),
-      import('../core/conversation.js')]),
+      import('../core/conversation.js'), import('./travel-check.js')]),
     Promise.all([read('data/registry/speaker-axes.csv').then(readAxes), read(`data/lang/${reader}/food.csv`),
       loadText('data/countries/index.json').then((text) => JSON.parse(text))]),
   ]);
@@ -606,6 +606,7 @@ async function openSettings(reader) {
       aboutSection(nothing, diet, undefined, countries && (() => askCountry(countries, reader, nothing))),
       displaySection(readDisplay(), nothing),
       ...resumeSection(),
+      travelSection({ nameOf, loadText }),
       personalSection(personalWiring({ save: download, onChanged: nothing })),
     ],
   });
@@ -639,7 +640,9 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
-  wireSiteMenu(() => { openSettings(readerLanguage(languages, coverage)).catch(showFatal); });
+  /** @param {string} code */
+  const nameOf = (code) => languageName(code, languages.find((l) => l.bcp47 === code)?.exonym_en ?? code);
+  wireSiteMenu(() => { openSettings(readerLanguage(languages, coverage), nameOf).catch(showFatal); });
   trackHeaderHeight();
   const headerRow = document.querySelector('.site-header .container');
   if (headerRow) new ResizeObserver(fitHeader).observe(headerRow);

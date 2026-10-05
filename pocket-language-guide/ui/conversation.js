@@ -49,7 +49,7 @@ import {
 } from './board-store.js';
 import { arrange } from './arrange.js';
 import { find, openSearch, ownButton, reachable } from './board-search.js';
-import { openTravelCheck, undrawable } from './travel-check.js';
+import { travelSection, undrawable } from './travel-check.js';
 import { askChoices, askConfirm, askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
@@ -538,7 +538,7 @@ async function showPicker(owner, listener, index, nameOf) {
           mostUsedSection(listener, owner, nameOf, nothing),
           voiceSection({ lang: listener, voices: speech.getCapabilities(listener).voices, current: readVoice(listener), onChange: nothing }),
           ...resumeSection(),
-          travelSection(() => travelChecks(listener, owner, index, nameOf)),
+          travelFor(listener, owner, index, nameOf),
           // An import can bring contexts of the reader's own, so the list is drawn again.
           personalSection(personalWiring({ save: download, onChanged: () => drawTopics() }))],
       });
@@ -801,30 +801,24 @@ function travelChecks(listener, owner, index, nameOf) {
 }
 
 /**
- * The settings' way into the pre-travel check for the pair on screen.
- * @param {() => import('./travel-check.js').Check[]} checks
+ * The settings' Before you travel for the pair on screen: its check, its two languages
+ * saved first, and the cards worth making before going, opened set up for this pair.
+ * @param {string} listener @param {string} owner
+ * @param {{boards:{id:string, listeners:string[], owners:string[]}[]}} index
+ * @param {(code: string) => string} nameOf
  */
-function travelSection(checks) {
-  const box = document.createElement('fieldset');
-  box.className = 'speaker-block';
-  const legend = document.createElement('legend');
-  legend.textContent = t('check.title');
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'btn board-arrange';
-  button.textContent = t('check.open');
-  button.addEventListener('click', () => {
-    button.closest('dialog')?.close();
-    openTravelCheck({
-      title: t('check.title'),
-      intro: t('check.intro'),
-      close: t('gallery.previewClose'),
-      checks,
-      words: { running: t('check.running'), pass: t('check.pass'), warn: t('check.warn'), fail: t('check.fail') },
-    });
+function travelFor(listener, owner, index, nameOf) {
+  const pair = `target=${encodeURIComponent(listener)}&source=${encodeURIComponent(owner)}`;
+  return travelSection({
+    nameOf,
+    loadText,
+    pair: [listener, owner],
+    checks: () => travelChecks(listener, owner, index, nameOf),
+    suggestions: [
+      { href: `customize.html?${pair}&geometry=phone-1col`, label: t('check.lockScreen') },
+      { href: `customize.html?${pair}`, label: t('check.pocketCard') },
+    ],
   });
-  box.append(legend, button);
-  return box;
 }
 
 /** @typedef {import('./board-search.js').Reached & {label: string}} Findable */
@@ -1860,7 +1854,7 @@ async function main() {
         onChange: (id) => { chosenVoice = id; },
       }),
       ...resumeSection(),
-      travelSection(() => travelChecks(listener, owner, index, nameOf)),
+      travelFor(listener, owner, index, nameOf),
       personalSection(personalWiring({
       save: download,
       // **What this build can actually show**, so an import naming a screen that is

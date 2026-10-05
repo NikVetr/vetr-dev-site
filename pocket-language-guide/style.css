@@ -2330,6 +2330,38 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .display-voice { display: flex; align-items: baseline; gap: var(--space-2); padding: 0.3rem 0; }
 .display-voice select { flex: 1 1 auto; min-inline-size: 0; }
 
+/* **The pre-travel check**: a row per check, each marked with a glyph *and* a colour
+   as it finishes, so the result reads in sun and without colour. Nothing moves while
+   it runs: a row not yet finished carries an ellipsis. */
+.travel-check-list { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+.travel-check-row { display: grid; grid-template-columns: 1.75rem 1fr; gap: var(--space-2); align-items: start; }
+.travel-check-row > .btn { grid-column: 2; justify-self: start; }
+.travel-check-mark {
+  inline-size: 1.5rem; block-size: 1.5rem; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 700; color: #fff; background: var(--muted);
+}
+.travel-check-pass .travel-check-mark { background: #237547; }
+.travel-check-warn .travel-check-mark { background: #b45100; }
+.travel-check-fail .travel-check-mark { background: #b3261e; }
+.travel-check-label { margin: 0; font-weight: 600; }
+.travel-check-detail { margin: 0.15rem 0 0; color: var(--muted); font-size: var(--fs--1); }
+.travel-check-detail:empty { display: none; }
+
+/* What is saved for use without a connection: a row per language -- its name, what
+   saving it costs or that it is saved, and the one button that changes that -- under
+   the buttons that act on all of them. */
+.travel-langs > summary { cursor: pointer; margin-block: var(--space-1); }
+.travel-langs ul { list-style: none; margin: var(--space-1) 0 0; padding: 0; }
+.travel-lang {
+  display: flex; align-items: center; gap: var(--space-2); min-block-size: 2.6rem;
+  padding-block: 0.2rem; border-block-end: 1px solid var(--line-soft);
+}
+.travel-lang-name { flex: 1 1 auto; min-inline-size: 0; overflow-wrap: break-word; }
+.travel-lang-state { font-size: var(--fs--1); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.travel-lang > [hidden] { display: none; }
+.travel-suggest-name { margin: var(--space-2) 0 0.2rem; font-size: var(--fs--1); font-weight: 600; }
+.travel-suggest { margin: 0 0 var(--space-2); padding-inline-start: 1.2em; }
+
 /* The settings dialog's own action row: three chips that do different-sized things,
    so they wrap rather than squeeze on a phone. */
 .speaker-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-block-end: var(--space-2); }

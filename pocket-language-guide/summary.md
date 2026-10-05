@@ -531,8 +531,8 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   count, so the block is two rows tall whether that is one column or three — which is
   the constraint that matters, since the title beside it is two lines and a third row
   would make one card taller than its neighbours. Only English overflows now, at
-  eight, and it is the default reader so it is never in its own grid. Per-card
-  *Save offline*.
+  eight, and it is the default reader so it is never in its own grid. Saving a
+  language for offline use is in the settings' Before you travel, below.
 
   Clicking a thumbnail opens the lightbox (`ui/lightbox.js`) on the whole sheet:
   every face, one arrow key or one thumbnail click apart, at whatever size the
@@ -1228,9 +1228,10 @@ side is free and why this cannot shadow a shipped file. It includes the speaker-
 where the language has one, which is the file whose absence cost the German board its
 offline visit.
 
-**And it can be checked before leaving.** "Check that everything works offline", in the
-settings, loads what the pair needs the way a board does and tries each part
-(`ui/travel-check.js`): the sentences with their variants and country names; every
+**And it can be checked, and saved, before leaving.** The settings' Before you travel
+(`ui/travel-check.js`) opens inline in the settings, not as a dialog of its own. "Check
+that everything works offline" loads what the pair needs the way a board does and tries
+each part, the rows appearing under the button: the sentences with their variants and country names; every
 context, validated, with its sentences resolved; the listener's writing, each letter
 the boards use drawn beside a character no font has, so any this device would show as
 an empty box is named -- boards draw in the system's fonts, so that is a fact about the
@@ -1240,6 +1241,19 @@ Each row is marked with a glyph and a colour as it finishes. The installed apps 
 everything -- 67MB of files, 45MB of them fonts, in a 44MB Android package -- so there
 only the voice can be missing, and a voice is the operating system's to install. A
 browser keeps what a pair has used, and the check offers to save anything it has not.
+Under the check, on the web, every language is listed with what saving it still costs,
+or that it is saved, and the one button that changes that -- plus saving this pair,
+saving every language, and deleting everything saved to give the space back, and how
+much the app is using (`navigator.storage.estimate`). A save takes the language's rows
+and, unless the reader unticks it, the faces its script is set in on a card, with the
+shared Latin faces said once beside the box rather than added to every row; a delete
+takes the language's own files and faces, never the shell, so the pair the app opens
+with is "part of the app" with no button. What each language needs is
+`data/offline.json`, written by `scripts/build_shell.mjs` from the disk alongside the
+shell manifest, so a save never asks for a group file a language does not have. The
+worker keeps and forgets through one message protocol (`keepOffline`, `forgetOffline`
+in `ui/app.js`); forgetting only ever empties the pack cache. Two links after the check
+open the studio set up for this pair: a lock-screen card and a pocket card to print.
 
 **Speech refuses to guess.** `ui/platform/speech.js` maps `zh-Hans` to `zh-CN` and
 excludes Cantonese outright; Klingon and Quenya map to no voice at all rather than

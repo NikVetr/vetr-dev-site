@@ -8,7 +8,6 @@ import { deliver } from './platform/shell.js';
 import { parseTable } from '../core/csv.js';
 import {
   DEFAULT_PADDING, defaultFieldSet, defaultSelection, hasContent, isSpoken, paperSpec,
-  respellOverrideFile,
 } from '../core/pack.js';
 
 export { isSpoken };
@@ -447,31 +446,50 @@ function registerWorker() {
 }
 
 /**
- * Hand the worker a list of URLs to keep, and wait for it to say whether it did.
+ * Hand the worker a message about what to keep, and wait for its answer.
  *
- * The protocol, once, for the two callers that use it: a sheet being saved for
- * offline, which needs fonts and the solver's inputs, and a board that has just
- * opened, which needs neither. What they share is this -- and a timeout, because a
- * worker that never answers must not leave a button spinning forever.
- * @param {string[]} urls
- * @param {boolean} [onlyMissing] skip what is already kept, instead of refreshing it
- * @returns {Promise<{ok:boolean, failed:string[], total:number}>}
+ * The protocol, once, for everything that asks: a board that has just opened keeping
+ * its rows, and the settings saving or deleting a language. What they share is this
+ * -- and a timeout, because a worker that never answers must not leave a button
+ * spinning forever.
+ * @param {object} message @param {string} done  the type of the answer to wait for
+ * @returns {Promise<any>}
  */
-export async function keepOffline(urls, onlyMissing = false) {
+async function askWorker(message, done) {
   if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
   const registration = await navigator.serviceWorker.ready;
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('saving for offline timed out')), 120000);
+    const timer = setTimeout(() => reject(new Error('the offline store did not answer')), 120000);
     /** @param {MessageEvent} event */
     const onMessage = (event) => {
-      if (event.data?.type !== 'cache-urls-done') return;
+      if (event.data?.type !== done) return;
       clearTimeout(timer);
       navigator.serviceWorker.removeEventListener('message', onMessage);
       resolve(event.data);
     };
     navigator.serviceWorker.addEventListener('message', onMessage);
-    registration.active?.postMessage({ type: 'cache-urls', urls, onlyMissing });
+    registration.active?.postMessage(message);
   });
+}
+
+/**
+ * Have the worker keep a list of URLs, and say whether it did.
+ * @param {string[]} urls
+ * @param {boolean} [onlyMissing] skip what is already kept, instead of refreshing it
+ * @returns {Promise<{ok:boolean, failed:string[], total:number}>}
+ */
+export function keepOffline(urls, onlyMissing = false) {
+  return askWorker({ type: 'cache-urls', urls, onlyMissing }, 'cache-urls-done');
+}
+
+/**
+ * Have the worker let go of saved files -- these, or with `null` every one -- to give
+ * the space back. The app itself, the shell, is never among them.
+ * @param {string[]|null} urls
+ * @returns {Promise<void>}
+ */
+export function forgetOffline(urls) {
+  return askWorker({ type: 'forget-urls', urls }, 'forget-urls-done');
 }
 
 /**
@@ -490,8 +508,8 @@ export async function keepOffline(urls, onlyMissing = false) {
  * finds in the shell cache, which is where the reader's own side of most pairs already
  * is, and that is also what stops this shadowing a shipped file.
  *
- * No fonts and no solver, unlike `saveForOffline`: a board draws in the system stack
- * and has never loaded either.
+ * No fonts and no solver: a board draws in the system stack and has never loaded
+ * either.
  *
  * `variants` is named by the caller rather than guessed at, because the caller has
  * already fetched exactly those files: it is the languages that declare an axis about
@@ -510,33 +528,6 @@ export function keepBoardOffline({ groups, target, source, variants = [], countr
     ...variants.map((code) => `data/lang/${code}/variants.csv`),
     ...countries.map((code) => `data/countries/${code}.csv`),
   ], true);
-}
-
-/**
- * Ask the worker to cache everything one language pair needs, so the sheet can be
- * rebuilt and exported with no network at all.
- * @param {{corpus:any, target:string, source:string, manifest:any}} args
- */
-export async function saveForOffline({ corpus, target, source, manifest }) {
-  const { stacksFor } = await sheetModule();
-  const stacks = stacksFor(corpus, target, source);
-  /** @type {string[]} */ const urls = [];
-  for (const group of corpus.groups) {
-    urls.push(`data/concepts/${group}.csv`);
-    urls.push(`data/lang/${target}/${group}.csv`);
-    urls.push(`data/lang/${source}/${group}.csv`);
-  }
-  // Only the curated files that exist: asking for one that was never written made
-  // the worker report a partial save and the button stop at "Partly saved".
-  const accent = accentFor(corpus, source);
-  if (corpus.respellOverrides.has(`${target}__${source}__${accent}`)) {
-    urls.push(respellOverrideFile(target, source, accent));
-  }
-  for (const face of manifest.faces.filter((/** @type {any} */ f) => stacks.includes(f.stack))) {
-    urls.push(`data/fonts/${face.file}.woff2`, `data/fonts/${face.file}.ttf`);
-  }
-
-  return keepOffline(urls);
 }
 
 /** @param {unknown} err */

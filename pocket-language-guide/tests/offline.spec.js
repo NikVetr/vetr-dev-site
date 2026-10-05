@@ -33,7 +33,7 @@ async function offlineHarness(browserName, context) {
  * `data/shell.json` names `packs/index.json`, and `sw.js` fails its install *whole*
  * rather than half -- deliberately, so a partial shell never becomes the active one.
  * So while `npm run prerender` is mid-rebuild, no worker ever takes charge, and
- * every test here that saves a pack waits out `saveForOffline`'s own 120-second
+ * every test here that saves a pack waits out `keepOffline`'s own 120-second
  * timeout before failing. Three minutes each, for a reason that has nothing to do
  * with the code under test. Skipped with a sentence instead.
  */
@@ -44,26 +44,52 @@ import { faceCount } from './counts.js';
 import { pickReader } from './controls.js';
 
 /**
- * Save one pair for offline, the way the gallery's Offline button used to.
- *
- * The button is hidden: it said "Offline" and did something that needs a sentence
- * to explain, so it read as a state rather than an action beside two buttons that
- * navigate. `saveForOffline` is what the primary use case rests on, though, so it
- * stays under test through the function rather than through a control that is no
- * longer on the page -- and if the button returns, this is still what it calls.
- * These three tests failed silently for exactly as long as they asserted on the
- * control instead.
+ * Save one pair for offline, as the settings' Before you travel saves a language: the
+ * files `data/offline.json` lists for each of the two, with the faces for making
+ * cards. Through the list rather than through the buttons, because what these tests
+ * rest on is that the list is enough -- a card exported with the network off is the
+ * proof -- and the buttons have their own test below.
  * @param {import('@playwright/test').Page} page
  * @param {string} target @param {string} source
  */
 async function save(page, target, source) {
-  return page.evaluate(async (pair) => {
-    const app = await import('./ui/app.js');
-    const ctx = await app.browserSheetContext();
-    const manifest = await app.fontManifest();
-    return app.saveForOffline({ corpus: ctx.corpus, ...pair, manifest });
-  }, { target, source });
+  return page.evaluate(async (codes) => {
+    const { keepOffline } = await import('./ui/app.js');
+    const index = await (await fetch('data/offline.json')).json();
+    return keepOffline([...index.common.fonts,
+      ...codes.flatMap((/** @type {string} */ code) => [...index.languages[code].files, ...index.languages[code].fonts])]);
+  }, [target, source]);
 }
+
+test('the settings save a language for offline, and delete it again', async ({ page }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog.speaker-settings');
+  await settings.getByText('Languages on this device').click();
+  // The rows alone, which is what a reader who only wants to talk takes; the faces
+  // are what the exports below prove.
+  await settings.getByRole('checkbox', { name: 'With the fonts for making cards' }).uncheck();
+  const german = settings.locator('.travel-lang', { hasText: 'German' });
+  const kept = () => page.evaluate(() => caches.match('data/lang/de/core.csv', { ignoreSearch: true }).then(Boolean));
+  // What it costs is said before it is pressed.
+  await expect(german.locator('.travel-lang-state')).toContainText('MB');
+  await german.getByRole('button', { name: 'Save' }).click();
+  await expect(german.locator('.travel-lang-state')).toContainText('Saved');
+  expect(await kept()).toBe(true);
+  await german.getByRole('button', { name: 'Delete' }).click();
+  await expect(german.getByRole('button', { name: 'Save' })).toBeVisible();
+  expect(await kept()).toBe(false);
+  // And everything at once, after asking.
+  await german.getByRole('button', { name: 'Save' }).click();
+  await expect(german.locator('.travel-lang-state')).toContainText('Saved');
+  page.once('dialog', (dialog) => dialog.accept());
+  await settings.getByRole('button', { name: 'Delete everything saved' }).click();
+  await expect(german.getByRole('button', { name: 'Save' })).toBeVisible();
+  expect(await kept()).toBe(false);
+});
 
 // The primary use case: abroad, no data, still needs to produce a printable file.
 test('saves a language for offline, then exports with the network off', async ({ page, context }) => {
