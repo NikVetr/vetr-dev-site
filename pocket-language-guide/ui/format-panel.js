@@ -24,7 +24,6 @@ import { ornamentControl } from './ornament-control.js';
 import { speakerControl, personalSection } from './speaker-settings.js';
 import { personalWiring } from './personal-data.js';
 import { download, isSpoken } from './app.js';
-import { lightSwitch } from './theme.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 /** Theme colour keys a furniture band may be set in, named as the theme files key them. */
@@ -460,24 +459,15 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ split: value }),
   });
 
+  // **A dark card is the Dark palette, chosen here like any other.** There was a
+  // light switch under this ladder as well, a shortcut to the same palette and back,
+  // and it came out as a second control for a choice this one already makes. The
+  // app's own appearance is in the settings, with the rest of the app's.
   const theme = paletteControl({
     themes,
     themeId: spec.themeId,
     themeColors: spec.themeColors,
-    onChange: (patch) => { emit(patch); cardDark.show(); },
-  });
-  // **The card's light or dark**, beside its colours: a shortcut to the dark palette
-  // and back. It was the app's own switch, which darkened the panel and not the card
-  // -- the app's appearance is in the settings, with the rest of the app's.
-  const isDarkCard = () => spec.themeId === 'dark' && !spec.themeColors;
-  const cardDark = lightSwitch({
-    label: t('format.darkCard'),
-    dark: isDarkCard,
-    flip: () => {
-      const next = { themeId: isDarkCard() ? 'latex-reference' : 'dark', themeColors: undefined };
-      theme.sync(next);
-      emit(next);
-    },
+    onChange: emit,
   });
 
   // The paper's own colour. After the palette, because `sections` washes with the
@@ -764,7 +754,6 @@ export function createFormatPanel(input) {
     headField,
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
-    panelField(t('format.darkCard'), [cardDark.button]),
     ornaments.root,
     panelField(t('format.background'),
       [background.group, background.custom, background.rowsField]),
@@ -816,7 +805,6 @@ export function createFormatPanel(input) {
       split.select(next.split ?? 'consistent');
       head.sync(next);
       theme.sync(next);
-      cardDark.show();
       ink.select(next.inkMode);
       ornaments.sync(next);
       background.sync(next.background);

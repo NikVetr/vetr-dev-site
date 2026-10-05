@@ -1516,10 +1516,9 @@ warns where a variant's wording loses it), `coverage.json`'s `emphasis` list say
 languages have a file so none is asked for offline that does not exist, and
 `data/registry/key-tones.csv` gives a few concepts a colour for theirs -- cold, warm,
 stop, go -- which the reader may turn on. The reader marks their own buttons' key
-words in the editor. The research brief is `content/PROMPTS/key-words.md`. The
-studio's own switch is the card's: it sits under the palette, turns the card to the
-`dark` theme and back to the reference, and stays in step with the palette either way
-(`lightSwitch` in `ui/theme.js` draws both switches).
+words in the editor. The research brief is `content/PROMPTS/key-words.md`. A dark *card* is not
+that switch: it is the Colours ladder's Dark choice in the studio, the one control for
+it, since a second switch under the palette would only restate the ladder.
 
 `data/themes/parchment.json` is the reference scale on cream paper with navy ink,
 gold rules and the five roles pulled toward earth: the palette of the owner's

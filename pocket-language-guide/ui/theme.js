@@ -50,20 +50,21 @@ const MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.
  * **No "match the device" position.** Until it is flipped the page follows the device
  * and the switch shows where the device has it; the first flip is a choice, kept from
  * then on. A three-way menu asked every reader to understand a setting most never
- * need. One element, so the dialogs and the studio's panel can each place it.
+ * need. One element, so the dialogs and the studio's phone menu can each place it.
  */
 export function themeControl() {
   return lightSwitch({
     label: t('theme.dark'),
     dark: isDark,
     flip: () => writeTheme(isDark() ? 'light' : 'dark'),
-  }).button;
+  });
 }
 
 /**
- * The switch itself, for whatever it turns dark: the app here, a card in the studio --
- * or, with its own two marks, anything else that is one of two: whom the board's
- * sentences are said to. `show` re-reads `dark` when something else has changed it.
+ * The switch itself, for whatever is one of two: the app's light and dark, or -- with its
+ * own two marks -- whom the board's sentences are said to. A card's dark is not this:
+ * it is its palette, chosen in the studio's Colours ladder like any other. `show`
+ * re-reads `dark` when something else has changed it.
  * @param {{label:string, dark:() => boolean, flip:() => void, marks?:[string, string]}} config
  */
 export function lightSwitch({ label, dark, flip, marks = [SUN, MOON] }) {
@@ -76,7 +77,7 @@ export function lightSwitch({ label, dark, flip, marks = [SUN, MOON] }) {
   const show = () => button.setAttribute('aria-checked', String(dark()));
   button.addEventListener('click', () => { flip(); show(); });
   show();
-  return { button, show };
+  return button;
 }
 
 /** The board dialog's section: a heading and the control. */
