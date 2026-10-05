@@ -564,6 +564,17 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   `max-block-size` and opacity), because the growing is what says where the grid went;
   a reader who asks for less motion gets it open at once.
 
+  **Coming back to the page is coming back to the same place.** Converse's and the
+  studio's way back are links to `./`, a fresh load, and a browser's Back may load it
+  afresh too, so on `pagehide` the page keeps where the reader was in session storage
+  and puts it back once its cards are built: the language chosen from the grid --
+  pressed, folded if it still was, reeled into the top row on a desktop, without the
+  travel -- and how far down the cards they were. That distance is measured from the
+  cards rather than from the top of the page, because the grid above them, open, folded
+  or holding its room, need not be the height it was. `history.scrollRestoration` is
+  manual, so the browser does not aim at a page still loading and then jump. It is
+  "where I was", not a preference: a new session starts at the top, on the question.
+
   Nothing that floats is drawn in a box, and that is a constraint rather than a
   preference: a panel over the card is a panel over the words, and the caret panels
   were sitting on two rows of the sheet. The carets are bare glyphs, ink rather than

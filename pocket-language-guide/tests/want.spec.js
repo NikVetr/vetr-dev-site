@@ -250,19 +250,26 @@ test('the picker opens expanded, and its label stays above the list', async ({ p
   await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
 
-  // Picking folds it, and the fold does not survive a reload. Nothing about the
-  // picker does: which card was reeled to the top row is this visit's reordering
-  // rather than a setting, and the reader's own language is the header's business.
+  // Picking folds it. A reload within the session is the reader coming back to the
+  // page, which keeps the visit as it was (`tests/gallery-return.spec.js`); a new visit
+  // -- a new tab, so a new session -- opens on the question again. Which card was
+  // reeled to the top row is a reordering of the visit rather than a setting, and the
+  // reader's own language is the header's business.
   await page.locator('#want .want-btn[data-lang="ja"]').click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('#want-chosen')).not.toBeEmpty();
   await page.reload();
   await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
-  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  const visit = await page.context().newPage();
+  await visit.setViewportSize({ width: 1280, height: 800 });
+  await visit.goto('/');
+  await expect(visit.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await expect(visit.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'true');
 
   // Stuck under the site header, whose height is not a constant and so is published
   // by a `ResizeObserver` as `--header-h`.
-  const stuck = await page.evaluate(async () => {
+  const stuck = await visit.evaluate(async () => {
     const label = /** @type {HTMLElement} */ (document.getElementById('want-toggle'));
     const header = /** @type {HTMLElement} */ (document.querySelector('.site-header'));
     scrollTo(0, Math.round(label.getBoundingClientRect().top + scrollY
@@ -491,6 +498,8 @@ test('on a phone, a grid a choice folded grows open again at the top; one the re
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   // Still the reader's choice.
   await expect(page.locator('#want .want-btn[data-lang="ja"]')).toHaveAttribute('aria-pressed', 'true');
+  // Done growing, so what is watched below is only what happens next.
+  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished)));
 
   // Shut by the reader's own tap, it is theirs: the top does not open it.
   await toggle.click();

@@ -202,11 +202,12 @@ const REEL_MS = 420;
  * without motion the grid simply looks different afterwards. It is measured with
  * FLIP -- positions before, reorder, positions after, animate the difference -- so
  * the layout is the real one and only the paint is offset. `prefers-reduced-motion`
- * gets the reorder with no travel, since the ring is what says "this one".
- * @param {HTMLElement} grid @param {string} code
+ * gets the reorder with no travel, since the ring is what says "this one", and so does
+ * a reader coming back to the page, who is not watching it happen.
+ * @param {HTMLElement} grid @param {string} code @param {boolean} [travel]
  * @returns {HTMLElement|null} the chosen card
  */
-function reelToTopRow(grid, code) {
+function reelToTopRow(grid, code, travel = true) {
   const cards = /** @type {HTMLElement[]} */ ([...grid.children]
     .filter((n) => n instanceof HTMLElement && n.classList.contains('card')));
   const index = cards.findIndex((c) => c.dataset.lang === code);
@@ -225,7 +226,7 @@ function reelToTopRow(grid, code) {
     // offsets FLIP measured would be stale before they were used. One instant jump
     // to the top of the grid, only when the card would otherwise arrive off-screen,
     // then the reel turns where it can be seen.
-    if (chosen.getBoundingClientRect().top < 0) {
+    if (travel && chosen.getBoundingClientRect().top < 0) {
       grid.scrollIntoView({ block: 'start' });
     }
     const before = new Map(cards.map((c) => [c, c.getBoundingClientRect()]));
@@ -240,7 +241,7 @@ function reelToTopRow(grid, code) {
     column.forEach((i, k) => { order[i] = turned[k]; });
     grid.replaceChildren(...order);
 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (travel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       for (const cardEl of order) {
         const from = before.get(cardEl);
         const to = cardEl.getBoundingClientRect();
@@ -311,9 +312,11 @@ function markGridEnd() {
  * it; a reader who wanted to change language and found it folded has to work out
  * that the grey line is a button.
  *
- * Nothing else about the picker is remembered either: which card was reeled to the
- * top row is a reordering of this visit, not a setting. The one thing that does
- * persist is the reader's *own* language, which is the site header's business.
+ * Nothing else about the picker is a setting either: which card was reeled to the top
+ * row is a reordering of this visit. Coming back to the page within the session puts
+ * the visit back as it was (`returnToPlace`), which is "where I was", not a
+ * preference. The one thing that persists beyond it is the reader's *own* language,
+ * which is the site header's business.
  * @param {boolean} open @param {string} [chosen] the language name, when shut
  */
 function setWantOpen(open, chosen) {
@@ -795,28 +798,7 @@ async function main() {
 
     // The language grid takes the same order as the cards, so the two read as one
     // list seen twice rather than two lists.
-    renderWantGrid(shown, coverage, readerCode, (code) => {
-      // On a phone the cards are one column and the grid above them folds: reeling
-      // a card to the top row moved it out from under the reader's scroll position,
-      // and reopening the grid lost the place again. So the card stays where it is
-      // and the page goes to it, after the fold so the offsets are the final ones.
-      const narrow = matchMedia('(max-width: 1080px)').matches;
-      const chosen = narrow
-        ? /** @type {HTMLElement|null} */ (grid.querySelector(`.card[data-lang="${code}"]`))
-        : reelToTopRow(grid, code);
-      for (const button of document.querySelectorAll('#want .want-btn')) {
-        button.setAttribute('aria-pressed',
-          String(button.getAttribute('data-lang') === code));
-      }
-      // **Folded the moment it has been used.** The card is now in the top row and
-      // the three things to do with it are on it; leaving fifty buttons above them
-      // means scrolling past the question to reach its answer.
-      const row = languages.find((l) => l.bcp47 === code);
-      setWantOpen(false, languageName(code, row?.exonym_en ?? code));
-      foldedByChoice = true;
-      if (!chosen) return;
-      if (narrow) chosen.scrollIntoView({ block: 'start' });
-    });
+    renderWantGrid(shown, coverage, readerCode, (code) => choose(code));
 
     const toggle = document.getElementById('want-toggle');
     if (toggle && !toggle.dataset.wired) {
@@ -847,7 +829,81 @@ async function main() {
     }
   }
 
+  /**
+   * Want a language: press its button, bring its card up, and fold the grid away.
+   * Coming back to the page chooses it again without the travel or the scroll, since
+   * the place restored after it is where the reader had got to.
+   * @param {string} code @param {boolean} [returning]
+   */
+  function choose(code, returning = false) {
+    const grid = /** @type {HTMLElement} */ (document.getElementById('gallery'));
+    // On a phone the cards are one column and the grid above them folds: reeling
+    // a card to the top row moved it out from under the reader's scroll position,
+    // and reopening the grid lost the place again. So the card stays where it is
+    // and the page goes to it, after the fold so the offsets are the final ones.
+    const narrow = matchMedia('(max-width: 1080px)').matches;
+    const chosen = narrow
+      ? /** @type {HTMLElement|null} */ (grid.querySelector(`.card[data-lang="${code}"]`))
+      : reelToTopRow(grid, code, !returning);
+    for (const button of document.querySelectorAll('#want .want-btn')) {
+      button.setAttribute('aria-pressed',
+        String(button.getAttribute('data-lang') === code));
+    }
+    // **Folded the moment it has been used.** The card is now in the top row and
+    // the three things to do with it are on it; leaving fifty buttons above them
+    // means scrolling past the question to reach its answer.
+    const row = languages.find((l) => l.bcp47 === code);
+    setWantOpen(false, languageName(code, row?.exonym_en ?? code));
+    foldedByChoice = true;
+    if (chosen && narrow && !returning) chosen.scrollIntoView({ block: 'start' });
+  }
+
+  /**
+   * Put the page back as the reader left it this session: the language they chose,
+   * folded or not, and how far down the cards they were.
+   *
+   * **Measured from the cards, not from the top of the page**, because what is above
+   * them -- the grid, open, folded, or holding its room -- need not be the height it
+   * was, and the cards are what the reader was looking at.
+   */
+  function returnToPlace() {
+    const held = sessionStorage.getItem(PLACE_KEY);
+    if (!held) return;
+    const place = JSON.parse(held);
+    // A language that has since become the reader's own is no longer offered.
+    if (place.want && document.querySelector(`#want .want-btn[data-lang="${place.want}"]`)) {
+      choose(place.want, true);
+      if (!place.folded) {
+        setWantOpen(true);
+        foldedByChoice = false;
+      }
+    }
+    const cards = /** @type {HTMLElement} */ (document.getElementById('gallery'));
+    scrollTo({ top: cards.getBoundingClientRect().top + scrollY + place.into, behavior: 'instant' });
+  }
+
   render(reader);
+  returnToPlace();
+  addEventListener('pagehide', () => {
+    const pressed = document.querySelector('#want .want-btn[aria-pressed="true"]');
+    const cards = /** @type {HTMLElement} */ (document.getElementById('gallery'));
+    sessionStorage.setItem(PLACE_KEY, JSON.stringify({
+      want: pressed?.getAttribute('data-lang') ?? null,
+      folded: foldedByChoice,
+      into: -cards.getBoundingClientRect().top,
+    }));
+  });
 }
+
+/**
+ * Where the reader was on this page, for coming back to it: Converse's and the
+ * studio's way back are links to `./`, a fresh load, and a browser's Back may load the
+ * page afresh too. Session storage, because this is "where I was" and not a
+ * preference: a new visit starts at the top.
+ */
+const PLACE_KEY = 'plg.galleryPlace';
+// The page puts itself back once its cards exist; the browser's own restoration aimed
+// at a page still saying "Loading languages…" and would fight it.
+history.scrollRestoration = 'manual';
 
 main().catch(showFatal);
