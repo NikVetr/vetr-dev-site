@@ -591,6 +591,25 @@ test('a section can be recoloured, and every term shows its importance', async (
   await expect(page.locator('.tree details').first()).toHaveAttribute('open', '');
 });
 
+test('switching a section off keeps the rows another section had switched off', async ({ page }) => {
+  // The other half of the phone's chip fix, pinned where it already held: a section's
+  // own tick in the list touches that section and no other.
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const row = (/** @type {string} */ id) => page.locator(`#tree li[data-concept="${id}"] input[type="checkbox"]`);
+  await row('social-basics.hello').uncheck();
+  await expect(row('social-basics.hello')).not.toBeChecked();
+  const toilets = page.locator('#tree > li')
+    .filter({ has: page.locator('li[data-concept^="toilets."]') })
+    .locator('summary input[type="checkbox"]');
+  await toilets.uncheck();
+  await expect(row('toilets.where-toilet')).toBeDisabled();
+  await expect(row('social-basics.hello')).not.toBeChecked();
+  await toilets.check();
+  await expect(row('toilets.where-toilet')).toBeChecked();
+  await expect(row('social-basics.hello')).not.toBeChecked();
+});
+
 test('balancing marks what it changed, until the next interaction', async ({ page }) => {
   // Balancing can move a dozen rows at once and the only feedback was the total
   // changing, so the answer to "what did that do" was to compare two numbers.

@@ -2382,8 +2382,12 @@ label, saturated when on and `saturate(0.12)` when off, keeping its solid border
 fill so "off" never reads as "unavailable", which is a state the tree separately
 has. The section grid picks rows with the same greedy the balance button uses, via
 `substitutesOf()` from `weights.js` rather than a second scorer, against a budget in
-rows that defaults to what the card already carries -- so a chip tap gives a
-different card rather than a smaller one. On an unrated section the cluster prior is
+rows that defaults to what the card already carries. **A chip decides its own section
+and nothing else**: off, it switches the section off and touches no row; on, it brings
+back the rows of that section the whole card would keep at the budget, and writes only
+those -- so a row the reader switched off in one section stays off whatever they do to
+another. Moving the budget is the bulk control, and re-chooses the rows of every picked
+section. On an unrated section the cluster prior is
 charged **once per cluster** rather than once per cluster-mate: the prior is a single
 guess about a flat group and compounding it *k* times claims *k* observations where
 there is one. Neither form can hole a cluster -- after *k* mates are on the card

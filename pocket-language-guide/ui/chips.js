@@ -17,8 +17,9 @@
 // The grid in the second half is the idiom's own reason for existing. Someone
 // making a lock-screen wallpaper wants three sections on it, and until now that
 // meant scrolling the content list and ticking sections one at a time. Switching a
-// section on here does not take all of it: it re-chooses the whole card's rows by
-// marginal value, the measure `core/solve/weights.js` fills whitespace by.
+// section on here does not take all of it: it takes the rows of it the whole card
+// would keep at the budget, by marginal value -- the measure `core/solve/weights.js`
+// fills whitespace by -- and leaves every other section as the reader set it.
 
 import { substitutesOf, CLUSTER_KEEP } from '../core/solve/weights.js';
 import { t } from './i18n.js';
@@ -262,15 +263,18 @@ export function chooseItems({ corpus, sections, on, budget }) {
  * "All off" -- which is how a reader gets to three sections in two taps rather than
  * fifty-six.
  *
- * The budget starts at the number of rows the card is already carrying, so the
- * first chip a reader taps gives them a *different* card rather than a smaller one;
- * after that the control is theirs. The solver still has the last word on what
- * fits -- this decides which rows are offered to it, not how many survive.
+ * **A chip decides its own section and nothing else.** Off, it switches the section
+ * off and touches no row; on, it brings the section back with the rows of it that
+ * the whole card would keep at the budget, and writes only those. Every press used
+ * to re-choose the rows of *every* picked section, so a row a reader had switched off
+ * in one section came back the moment they switched another section off -- a tick
+ * in the list below is a decision, and an unrelated tap was overruling it.
  *
- * It is a bulk control, like "All on" and the questionnaire and unlike a tick in
- * the list below: every press rewrites the row choices across all the picked
- * sections rather than layering on the ones a reader made by hand. The list is
- * where a row is decided one at a time, and it shows what this chose.
+ * The budget is the bulk control. It starts at the number of rows the card already
+ * carries, so a section switched back on returns at the card's own density; moving
+ * it re-chooses the rows across all the picked sections, because how many rows the
+ * card carries is a question about all of them. The solver still has the last word
+ * on what fits -- this decides which rows are offered to it, not how many survive.
  * @param {Object} config
  * @param {HTMLElement} config.root
  * @param {Corpus} config.corpus
@@ -308,23 +312,38 @@ export function createSectionPicker({ root, corpus, sections, onToggle }) {
    *          conceptIds:string[]}[]} */
   const chips = [];
 
-  /** Re-choose the card: which sections are on, and which of their rows. */
-  const apply = () => {
-    /** @type {Record<string,boolean>} */ const picked = {};
-    /** @type {Set<string>} */ const on = new Set();
-    for (const chip of chips) {
-      picked[chip.sectionId] = chip.box.checked;
-      if (chip.box.checked) on.add(chip.sectionId);
+  /** The sections whose chips are on. */
+  const picked = () => new Set(chips.filter((c) => c.box.checked).map((c) => c.sectionId));
+
+  /** Re-choose the rows of every picked section against the budget. */
+  const rechoose = () => onToggle({
+    sections: Object.fromEntries(chips.map((c) => [c.sectionId, c.box.checked])),
+    items: chooseItems({ corpus, sections, on: picked(), budget }),
+  });
+
+  /**
+   * One chip pressed: its section on with the rows the card would keep, or off.
+   * @param {string} sectionId @param {string[]} conceptIds @param {boolean} on
+   */
+  const choose = (sectionId, conceptIds, on) => {
+    if (!on) {
+      onToggle({ sections: { [sectionId]: false } });
+      return;
     }
-    onToggle({ sections: picked, items: chooseItems({ corpus, sections, on, budget }) });
+    const chosen = chooseItems({ corpus, sections, on: picked(), budget });
+    onToggle({
+      sections: { [sectionId]: true },
+      items: Object.fromEntries(conceptIds.map((id) => [id, chosen[id]])),
+    });
   };
 
   for (const section of sections) {
+    const conceptIds = section.items.map((item) => item.conceptId);
     const chip = chipToggle({
       label: section.title,
       checked: true,
       mark: section.icon ?? undefined,
-      onChange: apply,
+      onChange: (on) => choose(section.sectionId, conceptIds, on),
     });
     // How much of the section is actually on the card, which is the thing the reader
     // cannot otherwise see the prioritiser doing. Same figure the tree's own section
@@ -333,12 +352,7 @@ export function createSectionPicker({ root, corpus, sections, onToggle }) {
     count.className = 'chip-count';
     chip.label.append(count);
     grid.append(chip.label);
-    chips.push({
-      sectionId: section.sectionId,
-      box: chip.box,
-      count,
-      conceptIds: section.items.map((item) => item.conceptId),
-    });
+    chips.push({ sectionId: section.sectionId, box: chip.box, count, conceptIds });
   }
 
   /** @param {number} next */
@@ -351,8 +365,8 @@ export function createSectionPicker({ root, corpus, sections, onToggle }) {
   // choosing is a few milliseconds and a solve behind it, and a slider that stutters
   // under the thumb is worse than one that answers when you let go.
   range.addEventListener('input', () => setBudget(Number(range.value)));
-  range.addEventListener('change', apply);
-  box.addEventListener('change', () => { setBudget(Number(box.value)); apply(); });
+  range.addEventListener('change', rechoose);
+  box.addEventListener('change', () => { setBudget(Number(box.value)); rechoose(); });
 
   const caption = document.createElement('span');
   caption.className = 'small muted';

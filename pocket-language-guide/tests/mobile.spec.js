@@ -586,6 +586,28 @@ test.describe('the section picker on a phone', () => {
     expect(Number(await rows.inputValue())).toBe(before);
   });
 
+  test('a section switched off or on leaves every other section\'s rows as they were', async ({ page }) => {
+    // A chip used to re-choose the rows of every picked section on each press, so a
+    // row the reader had switched off in one section came back the moment they
+    // switched a different section off. A chip decides its own section now.
+    await studio(page);
+    const hello = item(page, 'social-basics.hello');
+    await hello.uncheck();
+    await expect(hello).not.toBeChecked();
+
+    await chip(page, 'Toilets').uncheck();
+    // The list follows a solve, and a switched-off section's rows go out of service
+    // when it lands -- which is the moment the other section's row was undone.
+    await expect(item(page, 'toilets.where-toilet')).toBeDisabled();
+    await expect(hello).not.toBeChecked();
+
+    // And back on: that section's rows return, and the other section's choice stands.
+    await chip(page, 'Toilets').check();
+    await expect(item(page, 'toilets.where-toilet')).toBeChecked();
+    await expect(hello).not.toBeChecked();
+    await expect(page.locator('.face.focused svg')).not.toContainText('Hola');
+  });
+
   test('the drill\'s column lists use the same chips', async ({ page }) => {
     // Fourteen full-width checkbox rows above the fold, in a dialog whose point is
     // the question underneath them.
