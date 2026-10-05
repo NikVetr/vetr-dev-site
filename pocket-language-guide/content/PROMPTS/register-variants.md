@@ -28,8 +28,7 @@ listener-gender variants that came before it (read `speaker-variants.md` and the
    *vous / tu*, *usted / tú*, *вы / ты*), or the shortest marker that tells the two
    apart where it does not (Japanese *です / だ*, Korean *요 / 반말*-style endings
    written as the language writes them). Keep it to a word or two; it sits on a switch.
-   If the registry has no `label` column yet, add it (empty for the existing
-   `listener_gender` rows).
+   (The `listener_gender` rows leave `label` empty: their switch shows Mars and Venus.)
 
 2. **The rows**, in `data/lang/<code>/variants.csv`, keyed `register=familiar`:
 
