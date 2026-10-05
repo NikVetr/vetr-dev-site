@@ -507,7 +507,8 @@ test('the "I speak" list is drawn as the board’s language menu is, in both the
   }
 });
 
-test('under an iPhone’s insets the header stays below the status bar when scrolled, and nothing pads the footer twice', async ({ page }) => {
+test('under an iPhone’s insets the header stays below the status bar when scrolled, and nothing pads the footer twice', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'the insets are stood in for through Chrome’s devtools protocol');
   // The native shell draws edge to edge (`viewport-fit=cover`), so `env(safe-area-inset-*)`
   // reports an iPhone's 62 points of status bar and 34 of home indicator; Chrome can be
   // told the same. The header is sticky at `top: 0`, which is behind the status bar:

@@ -15,7 +15,8 @@ const PAGES = [
 ];
 
 for (const [name, url] of PAGES) {
-  test(`under an iPhone's insets ${name}'s header stays below the status bar when scrolled`, async ({ page }) => {
+  test(`under an iPhone's insets ${name}'s header stays below the status bar when scrolled`, async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium', 'the insets are stood in for through Chrome\'s devtools protocol');
     await page.setViewportSize({ width: 390, height: 844 });
     const cdp = await page.context().newCDPSession(page);
     await cdp.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 62, bottom: 34, left: 0, right: 0 } });
