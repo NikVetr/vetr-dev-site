@@ -420,7 +420,7 @@
   "studio.loadingTree": "বাক্য-তালিকা লোড হচ্ছে…",
   "studio.nothingToLayOut": "সাজানোর কিছু নেই",
   "studio.pagesLabel": "পাতা",
-  "studio.pair": "{source} থেকে {target}",
+  "studio.pair": "{target} থেকে {source}",
   "studio.rejectAll": "সব বাতিল করুন",
   "studio.resetFormats": "কাঠামো আগের মতো করুন",
   "studio.resetFormatsTitle": "প্রতিটি বিভাগকে আবার কার্ডের নিজের কাঠামোয় ফিরিয়ে আনুন",

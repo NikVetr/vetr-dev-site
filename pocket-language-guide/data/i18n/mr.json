@@ -411,7 +411,7 @@
   "studio.loadingTree": "वाक्यांची यादी लोड होत आहे…",
   "studio.nothingToLayOut": "मांडण्यासारखे काही नाही",
   "studio.pagesLabel": "पाने",
-  "studio.pair": "{source} पासून {target}",
+  "studio.pair": "{target} पासून {source}",
   "studio.rejectAll": "सर्व नाकारा",
   "studio.resetFormats": "स्वरूप पूर्वीसारखे करा",
   "studio.resetFormatsTitle": "प्रत्येक विभाग पुन्हा कार्डाच्या स्वतःच्या स्वरूपावर आणा",
