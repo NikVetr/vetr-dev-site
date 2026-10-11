@@ -161,8 +161,8 @@ kind-words.you-are-very-kind,amable
 laundry.can-it-be-ready-today,hoy
 laundry.how-much-per-kilo,kilo
 laundry.please-do-not-use-bleach,blanqueador | lejía
-laundry.please-iron-this,Planche
-laundry.please-wash-these-clothes,Lave
+laundry.please-iron-this,Planche | Plancha
+laundry.please-wash-these-clothes,Lave | Lava
 laundry.when-will-it-be-ready,Cuándo
 laundry.where-is-a-laundromat,lavandería
 lost-rescue.i-do-not-know-where-i-am,dónde estoy
@@ -179,7 +179,7 @@ massage-spa.focus-on-neck,cuello
 massage-spa.focus-on-shoulders,hombros
 massage-spa.more-gently,suave
 massage-spa.please-avoid-this-area,No presione
-massage-spa.please-stop,Pare
+massage-spa.please-stop,Pare | Para
 massage-spa.reply-ask-supervisor,superior
 massage-spa.reply-cannot-avoid-this-treatment,no puede evitar
 massage-spa.reply-does-it-hurt-there,duele
@@ -250,7 +250,7 @@ quick-directions.on-the-right,derecha
 quick-directions.turn-left,izquierda
 quick-directions.turn-right,derecha
 room-problems.can-i-change-rooms,cambiar
-room-problems.please-send-someone,Envíe a alguien
+room-problems.please-send-someone,Envíe a alguien | Envía a alguien
 room-problems.the-air-conditioning-is-broken,aire acondicionado
 room-problems.the-heating-does-not-work,calefacción
 room-problems.the-key-does-not-work,llave
@@ -270,8 +270,8 @@ taxi.can-you-wait-for-me-here,esperar
 taxi.could-you-make-it-colder,bajar
 taxi.could-you-make-it-warmer,subir
 taxi.may-i-open-the-window,ventana
-taxi.please-stop-here,Pare
-taxi.please-take-me-here,Lléveme
+taxi.please-stop-here,Pare | Para
+taxi.please-take-me-here,Lléveme | Llévame
 taxi.please-turn-around,vuelta
 time-scheduling.can-we-change-the-time,cambiar
 time-scheduling.how-long-does-it-take,tiempo

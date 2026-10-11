@@ -1569,8 +1569,12 @@ value is `familiar` -- *du* for *Sie*, plain for *desu/masu* -- drawn as a secon
 switch whose two ends are the language's own words for the two (the registry's `label`
 column), behind its own setting. Both switches may be on at once; the key then joins
 both parts, and a sentence written for only one of them is found by that part. The
-familiar forms are a research pass (`content/PROMPTS/register-variants.md`), and until
-a language declares the axis its switch is not drawn.
+familiar forms come from a research pass (`content/PROMPTS/register-variants.md`):
+German (Sie / du), French (vous / tu), Spanish (usted / tú), Russian (вы / ты) and
+Korean (해요 / 해) have them, on the outgoing buttons of every board but the emergency
+and pharmacy ones -- a concept that also stands on those, or is also a reply, gets
+none, since a variant belongs to the concept wherever it appears. A language that
+declares no register axis draws no switch.
 
 One setting, four surfaces, and one set of rows for the question: `axisRows` in
 `ui/speaker-settings.js` draws the pills for the board's and the languages' settings

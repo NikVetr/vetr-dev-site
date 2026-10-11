@@ -14,3 +14,13 @@ he,listener_gender,feminine,0,,"Said to a woman. Imperatives and second-person v
 pa,listener_gender,neutral,1,,"The base row: worded so it is right to anyone, which is what is shown unless the reader turns the switch on. Polite requests to one person take a participle agreeing with the listener where the base row is not already neutral. e.g. taxi.could-you-make-it-colder."
 pa,listener_gender,masculine,0,,Said to a man. Polite requests to one person take a participle agreeing with the listener where the base row is not already neutral. e.g. taxi.could-you-make-it-colder.
 pa,listener_gender,feminine,0,,Said to a woman. Polite requests to one person take a participle agreeing with the listener where the base row is not already neutral. e.g. taxi.could-you-make-it-colder.
+de,register,polite,1,Sie,"The base rows: Sie with the third-person plural verb, as to any adult stranger."
+de,register,familiar,0,du,"du with the second-person singular verb and imperative, to a child, a friend or a fellow traveller; ihr, its plural, where a question is put to a whole shop, restaurant or house (Habt ihr einen Tisch frei?). e.g. taxi.please-stop-here."
+fr,register,polite,1,vous,"The base rows: vous with the second-person plural verb, as to any adult stranger."
+fr,register,familiar,0,tu,"tu with the second-person singular verb and imperative and s'il te plaît, to a child, a friend or a fellow traveller; a question put to a whole shop or restaurant keeps vous, which is the plural of tu too. e.g. taxi.please-stop-here."
+es,register,polite,1,usted,"The base rows: usted with the third-person singular verb, as to any adult stranger."
+es,register,familiar,0,tú,"tú with the second-person singular verb and imperative, to a child, a friend or a fellow traveller (tuteo; regional vos is not written). The plural stays ustedes, which is the familiar plural too in the Latin-American Spanish of these rows. e.g. taxi.please-stop-here."
+ru,register,polite,1,вы,"The base rows: вы with the second-person plural verb, as to any adult stranger."
+ru,register,familiar,0,ты,"ты with the second-person singular verb and imperative, to a child, a friend or a fellow traveller. A ты past tense or short adjective agrees with the listener's gender, which this axis does not ask, so such sentences keep their base row or take an ungendered wording. e.g. taxi.please-stop-here."
+ko,register,polite,1,해요,"The base rows: 해요체 (합쇼체 in set phrases such as 감사합니다), with the honorific -시- toward the listener, as to any adult stranger."
+ko,register,familiar,0,해,"해체 (반말): the -요 dropped, and the honorific -시- with it, to a child or a friend of one's own age. Korean marks the hearer in every sentence ending, so this covers sentences about the speaker too. e.g. taxi.please-stop-here."

@@ -62,7 +62,7 @@ color-size-returns.do-you-have-a-bag,sac
 color-size-returns.do-you-have-another-size,taille
 color-size-returns.may-i-try-it-on,essayer
 communication.can-you-help-me,aider
-communication.do-you-speak-english,Parlez
+communication.do-you-speak-english,Parlez | parles
 communication.i-do-not-speak-this-language,ne parle pas
 communication.i-do-not-understand,ne comprends pas
 communication.please-speak-more-slowly,lentement
@@ -115,7 +115,7 @@ food-ordering.is-a-table-available,table de libre
 food-ordering.is-this-vegetarian,végétarien
 food-ordering.table-for-two,table | deux
 food-ordering.to-go-please,emporter
-food-ordering.what-do-you-recommend,recommandez
+food-ordering.what-do-you-recommend,recommandez | recommandes
 hiking-parks.how-long-to-the-summit,sommet
 hiking-parks.how-long-to-the-viewpoint,point de vue
 hiking-parks.is-this-trail-suitable-for-beginners,débutants
@@ -126,7 +126,7 @@ hitchhiking.i-can-pay-for-fuel,essence
 hitchhiking.i-only-need-to-go-to-the-next-town,prochaine ville
 hitchhiking.is-there-room-for-two,place | deux
 hitchhiking.thank-you-for-the-ride,Merci
-hitchhiking.where-are-you-going,Où
+hitchhiking.where-are-you-going,Où | où
 hotel-basics.are-any-rooms-available,chambre
 hotel-basics.how-much-per-night,par nuit
 hotel-basics.i-have-a-reservation,réservation
@@ -154,7 +154,7 @@ introductions.i-am-traveling-alone,seule | seul
 introductions.my-name-is,appelle
 introductions.this-is-my-friend,ami
 introductions.we-are-traveling-together,ensemble
-introductions.what-is-your-name,appelez
+introductions.what-is-your-name,appelez | appelles
 introductions.where-are-you-from,D'où
 kind-words.i-had-a-wonderful-time,merveilleux
 kind-words.i-like-it-very-much,plaît
@@ -167,8 +167,8 @@ kind-words.you-are-very-kind,aimable
 laundry.can-it-be-ready-today,aujourd'hui
 laundry.how-much-per-kilo,kilo
 laundry.please-do-not-use-bleach,javel
-laundry.please-iron-this,Repassez
-laundry.please-wash-these-clothes,Lavez
+laundry.please-iron-this,Repassez | Repasse
+laundry.please-wash-these-clothes,Lavez | Lave
 laundry.when-will-it-be-ready,Quand
 laundry.where-is-a-laundromat,laverie
 lost-rescue.i-do-not-know-where-i-am,où je suis
@@ -184,9 +184,9 @@ massage-spa.focus-on-feet,pieds
 massage-spa.focus-on-neck,nuque
 massage-spa.focus-on-shoulders,épaules
 massage-spa.more-gently,Moins
-massage-spa.please-avoid-this-area,Évitez
+massage-spa.please-avoid-this-area,Évitez | Évite
 massage-spa.please-pause,pause
-massage-spa.please-stop,Arrêtez
+massage-spa.please-stop,Arrêtez | Arrête
 massage-spa.reply-ask-supervisor,responsable
 massage-spa.reply-cannot-avoid-this-treatment,ne peut pas
 massage-spa.reply-does-it-hurt-there,mal
@@ -257,7 +257,7 @@ quick-directions.on-the-right,droite
 quick-directions.turn-left,gauche
 quick-directions.turn-right,droite
 room-problems.can-i-change-rooms,changer
-room-problems.please-send-someone,Envoyez quelqu'un
+room-problems.please-send-someone,Envoyez quelqu'un | Envoie quelqu'un
 room-problems.the-air-conditioning-is-broken,climatisation
 room-problems.the-heating-does-not-work,chauffage
 room-problems.the-key-does-not-work,clé
@@ -278,8 +278,8 @@ taxi.can-you-wait-for-me-here,attendre
 taxi.could-you-make-it-colder,monter
 taxi.could-you-make-it-warmer,baisser
 taxi.may-i-open-the-window,fenêtre
-taxi.please-stop-here,Arrêtez
-taxi.please-take-me-here,Emmenez
+taxi.please-stop-here,Arrêtez | Arrête
+taxi.please-take-me-here,Emmenez | Emmène
 taxi.please-turn-around,demi-tour
 time-scheduling.can-we-change-the-time,changer
 time-scheduling.how-long-does-it-take,temps

@@ -10,12 +10,12 @@ about-me.i-work-in-an-office,회사원
 accessibility.step-free,계단 없는
 air-travel.i-would-like-a-window-seat,창가
 air-travel.i-would-like-an-aisle-seat,통로
-air-travel.my-luggage-did-not-arrive,안 왔어요
+air-travel.my-luggage-did-not-arrive,안 왔어요 | 안 왔어
 air-travel.where-is-check-in,체크인
 air-travel.where-is-the-security-check,보안 검색대
 air-travel.which-gate,게이트
 attractions-tickets.are-there-lockers,사물함
-attractions-tickets.could-you-take-a-photo-for-us,찍어 주시겠어요
+attractions-tickets.could-you-take-a-photo-for-us,찍어 주시겠어요 | 찍어 줄래
 attractions-tickets.do-i-need-a-reservation,예약
 attractions-tickets.may-i-take-photos,사진
 attractions-tickets.what-is-the-latest-entry-time,입장 마감
@@ -54,7 +54,7 @@ border-customs.where-do-i-collect-my-baggage,수하물
 color-size-returns.do-you-have-a-bag,봉투
 color-size-returns.do-you-have-another-size,사이즈
 color-size-returns.may-i-try-it-on,입어
-communication.can-you-help-me,도와주실
+communication.can-you-help-me,도와주실 | 도와줄
 communication.please-speak-more-slowly,천천히
 dietary-needs.does-it-contain-fish-stock,생선 육수
 dietary-needs.does-it-contain-pork-fat,돼지기름
@@ -108,12 +108,12 @@ hiking-parks.how-long-to-the-summit,정상
 hiking-parks.how-long-to-the-viewpoint,전망대
 hiking-parks.is-this-trail-suitable-for-beginners,초보자
 hiking-parks.where-is-the-trailhead,입구
-hiking-parks.which-route-is-easier,쉬워요
+hiking-parks.which-route-is-easier,쉬워요 | 쉬워
 hitchhiking.can-you-give-me-a-ride,태워
 hitchhiking.i-can-pay-for-fuel,기름값
 hitchhiking.i-only-need-to-go-to-the-next-town,다음 마을
 hitchhiking.is-there-room-for-two,두 명
-hitchhiking.thank-you-for-the-ride,감사합니다
+hitchhiking.thank-you-for-the-ride,감사합니다 | 고마워
 hitchhiking.where-are-you-going,어디까지
 hotel-basics.are-any-rooms-available,빈 방
 hotel-basics.how-much-per-night,1박
@@ -135,21 +135,21 @@ hotel-requests.is-there-a-safe,금고
 hotel-requests.no-housekeeping,청소
 hotel-requests.what-time-does-breakfast-start,조식
 hotel-requests.what-time-is-check-out,체크아웃
-in-a-building.is-this-the-correct-entrance,맞아요
+in-a-building.is-this-the-correct-entrance,맞아요 | 맞아
 introductions.i-am-a-tourist,관광객
-introductions.i-am-from,왔어요
+introductions.i-am-from,왔어요 | 왔어
 introductions.i-am-traveling-alone,혼자
 introductions.this-is-my-friend,친구
 introductions.we-are-traveling-together,같이
 introductions.what-is-your-name,이름
 introductions.where-are-you-from,어디서
 kind-words.i-had-a-wonderful-time,좋은 시간
-kind-words.i-like-it-very-much,마음에 들어요
-kind-words.it-is-beautiful-here,아름다워요
-kind-words.thank-you-for-everything,모든 것
-kind-words.thank-you-for-your-help,도와주셔서
+kind-words.i-like-it-very-much,마음에 들어요 | 마음에 들어
+kind-words.it-is-beautiful-here,아름다워요 | 아름다워
+kind-words.thank-you-for-everything,모든 것 | 모든 게
+kind-words.thank-you-for-your-help,도와주셔서 | 도와줘서
 kind-words.thank-you-for-your-hospitality,환대
-kind-words.this-is-delicious,맛있어요
+kind-words.this-is-delicious,맛있어요 | 맛있어
 kind-words.you-are-very-kind,친절
 laundry.can-it-be-ready-today,오늘
 laundry.how-much-per-kilo,1킬로
@@ -180,7 +180,7 @@ massage-spa.reply-does-it-hurt-there,아프세요
 massage-spa.reply-i-will-avoid-that-area,피할게요
 massage-spa.reply-which-area-exactly,어느 부위
 massage-spa.stronger-pressure,세게
-massage-spa.that-pressure-is-good,딱 좋아요
+massage-spa.that-pressure-is-good,딱 좋아요 | 딱 좋아
 medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,아스피린 | 이부프로펜
 medical-conditions.i-am-allergic-to-penicillin,페니실린
 medical-conditions.i-am-allergic-to-sulfa-drugs,설파제
@@ -205,7 +205,7 @@ outdoors.is-it-safe-to-swim-here,수영
 payment-receipt.can-we-pay-separately,따로
 payment-receipt.how-much-in-total,다
 payment-receipt.is-tax-included,세금
-payment-receipt.my-card-was-declined,안 됐어요
+payment-receipt.my-card-was-declined,안 됐어요 | 안 됐어
 payment-receipt.pay-by-card,카드
 payment-receipt.the-bill-is-wrong,잘못된
 pharmacy-symptoms.can-i-get-this-medicine-here,약
@@ -243,15 +243,15 @@ room-problems.the-air-conditioning-is-broken,에어컨
 room-problems.the-heating-does-not-work,난방
 room-problems.the-key-does-not-work,카드키
 room-problems.the-light-does-not-work,불
-room-problems.the-room-is-too-noisy,시끄러워요
-room-problems.the-toilet-will-not-flush,내려가요
+room-problems.the-room-is-too-noisy,시끄러워요 | 시끄러워
+room-problems.the-toilet-will-not-flush,내려가요 | 내려가
 room-problems.there-is-a-problem-with-the-room,문제
 room-problems.there-is-no-hot-water,온수
 shopping.can-it-be-a-little-cheaper,싸게
 shopping.do-you-have-this-in-stock,재고
 shopping.how-much-is-this,얼마
 shopping.i-am-just-looking,그냥
-shopping.that-is-too-expensive,비싸요
+shopping.that-is-too-expensive,비싸요 | 비싸
 shopping.where-do-i-pay,계산
 taxi.can-you-wait-for-me-here,기다려
 taxi.could-you-make-it-colder,낮춰
@@ -261,31 +261,31 @@ taxi.please-stop-here,세워
 taxi.please-take-me-here,여기로
 taxi.please-turn-around,유턴
 time-scheduling.can-we-change-the-time,바꿀
-time-scheduling.how-long-does-it-take,걸려요
+time-scheduling.how-long-does-it-take,걸려요 | 걸려
 time-scheduling.what-day-is-it-today,요일
-time-scheduling.what-time-does-it-close,닫아요
-time-scheduling.what-time-does-it-open,열어요
-time-scheduling.what-time-should-we-meet,만날까요
-time-scheduling.when-is-convenient,좋으세요
+time-scheduling.what-time-does-it-close,닫아요 | 닫아
+time-scheduling.what-time-does-it-open,열어요 | 열어
+time-scheduling.what-time-should-we-meet,만날까요 | 만날까
+time-scheduling.when-is-convenient,좋으세요 | 좋아
 toilets.it-is-out-of-order,고장
 toilets.where-toilet,화장실
 trail-conditions.can-we-return-before-dark,해 지기 전
 trail-conditions.can-we-return-the-same-way,같은 길
 trail-conditions.how-long-is-the-full-route,전체 거리
-trail-conditions.is-the-path-slippery,미끄러워요
-trail-conditions.is-the-route-steep,가팔라요
+trail-conditions.is-the-path-slippery,미끄러워요 | 미끄러워
+trail-conditions.is-the-route-steep,가팔라요 | 가팔라
 trail-conditions.is-the-trail-open,열려
 trail-transport.do-you-have-a-map,지도
-trail-transport.how-long-is-the-wait,기다려요
+trail-transport.how-long-is-the-wait,기다려요 | 기다려
 trail-transport.is-there-cell-signal-here,휴대폰
 trail-transport.what-time-is-the-last-shuttle,막차 셔틀
 trail-transport.when-does-the-cableway-stop,케이블카
-trail-transport.where-can-we-buy-water,사요
-trail-transport.where-can-we-refill-water,채워요
+trail-transport.where-can-we-buy-water,사요 | 사
+trail-transport.where-can-we-refill-water,채워요 | 채워
 transit-rides.can-i-use-this-ticket,쓸
 transit-rides.do-i-need-to-transfer,환승
 transit-rides.do-i-need-to-validate,개찰
-transit-rides.i-went-past-my-stop,지났어요
+transit-rides.i-went-past-my-stop,지났어요 | 지났어
 transit-rides.is-it-delayed,연착
 transit-rides.is-this-direct,바로
 transit-rides.please-tell-me-where-to-get-off,내릴
@@ -295,6 +295,6 @@ transit-rides.what-time-is-the-next-one,다음 건
 transit-rides.where-do-i-pay-the-fare,요금
 transit-rides.where-is-the-subway-station,지하철역
 transit-rides.which-platform,승강장
-weather.how-cold-at-night,밤 | 추워요
+weather.how-cold-at-night,밤 | 추워요 | 추워
 weather.is-it-safe-today,안전
 weather.will-it-rain,비

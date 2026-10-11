@@ -61,11 +61,11 @@ color-size-returns.do-you-have-a-bag,Tüte
 color-size-returns.do-you-have-another-size,Größe
 color-size-returns.may-i-try-it-on,anprobieren
 communication.can-you-help-me,helfen
-communication.do-you-speak-english,Sprechen
+communication.do-you-speak-english,Sprechen | Sprichst
 communication.i-do-not-speak-this-language,spreche kein
 communication.i-do-not-understand,verstehe nicht
 communication.please-speak-more-slowly,langsamer
-communication.please-write-it-down,schreiben
+communication.please-write-it-down,schreiben | schreib
 dietary-needs.does-it-contain-fish-stock,Fischbrühe
 dietary-needs.does-it-contain-pork-fat,Schweineschmalz
 dietary-needs.does-it-contain-pork-stock,Schweinebrühe
@@ -112,7 +112,7 @@ food-ordering.is-this-vegetarian,vegetarisch
 food-ordering.menu-please,Karte
 food-ordering.table-for-two,Tisch | zwei
 food-ordering.to-go-please,Mitnehmen
-food-ordering.what-do-you-recommend,empfehlen
+food-ordering.what-do-you-recommend,empfehlen | empfiehlst
 hiking-parks.how-long-to-the-summit,Gipfel
 hiking-parks.how-long-to-the-viewpoint,Aussichtspunkt
 hiking-parks.is-this-trail-suitable-for-beginners,Anfänger
@@ -151,7 +151,7 @@ introductions.i-am-traveling-alone,allein
 introductions.my-name-is,heiße
 introductions.this-is-my-friend,Freund
 introductions.we-are-traveling-together,zusammen
-introductions.what-is-your-name,Wie heißen
+introductions.what-is-your-name,Wie heißen | Wie heißt
 introductions.where-are-you-from,Woher
 kind-words.i-had-a-wonderful-time,wunderbare
 kind-words.i-like-it-very-much,gefällt
@@ -249,7 +249,7 @@ police-consulate.where-is-the-police-station,Polizeiwache
 quick-directions.on-the-left,linken
 quick-directions.on-the-right,rechten
 room-problems.can-i-change-rooms,wechseln
-room-problems.please-send-someone,schicken | jemanden
+room-problems.please-send-someone,schicken | schick | jemanden
 room-problems.the-air-conditioning-is-broken,Klimaanlage
 room-problems.the-heating-does-not-work,Heizung
 room-problems.the-key-does-not-work,Schlüssel
@@ -270,8 +270,8 @@ taxi.can-you-wait-for-me-here,warten
 taxi.could-you-make-it-colder,kühler
 taxi.could-you-make-it-warmer,wärmer
 taxi.may-i-open-the-window,Fenster
-taxi.please-stop-here,Halten
-taxi.please-take-me-here,fahren | hierhin
+taxi.please-stop-here,Halten | Halt
+taxi.please-take-me-here,fahren | fahr | hierhin
 taxi.please-turn-around,wenden
 time-scheduling.can-we-change-the-time,ändern
 time-scheduling.how-long-does-it-take,dauert

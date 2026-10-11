@@ -58,7 +58,7 @@ color-size-returns.do-you-have-a-bag,Пакет
 color-size-returns.do-you-have-another-size,размер
 color-size-returns.may-i-try-it-on,померить
 communication.can-you-help-me,помочь
-communication.do-you-speak-english,говорите
+communication.do-you-speak-english,говорите | говоришь
 communication.i-do-not-speak-this-language,не говорю
 communication.i-do-not-understand,не понимаю
 communication.please-speak-more-slowly,медленнее
@@ -110,7 +110,7 @@ food-ordering.i-want-this,хочу
 food-ordering.is-a-table-available,свободный столик
 food-ordering.is-this-vegetarian,вегетарианское
 food-ordering.table-for-two,Столик | двоих
-food-ordering.what-do-you-recommend,посоветуете
+food-ordering.what-do-you-recommend,посоветуете | посоветуешь
 hiking-parks.how-long-to-the-summit,вершины
 hiking-parks.how-long-to-the-viewpoint,смотровой площадки
 hiking-parks.is-this-trail-suitable-for-beginners,новичкам
@@ -149,7 +149,7 @@ introductions.i-am-traveling-alone,один | одна
 introductions.my-name-is,Меня
 introductions.this-is-my-friend,друг
 introductions.we-are-traveling-together,вместе
-introductions.what-is-your-name,Как вас
+introductions.what-is-your-name,Как вас | Как тебя
 introductions.where-are-you-from,Откуда
 kind-words.i-had-a-wonderful-time,прекрасно
 kind-words.i-like-it-very-much,нравится
@@ -162,8 +162,8 @@ kind-words.you-are-very-kind,добры
 laundry.can-it-be-ready-today,сегодня
 laundry.how-much-per-kilo,килограмм
 laundry.please-do-not-use-bleach,отбеливателя
-laundry.please-iron-this,Погладьте
-laundry.please-wash-these-clothes,Постирайте
+laundry.please-iron-this,Погладьте | Погладь
+laundry.please-wash-these-clothes,Постирайте | Постирай
 laundry.when-will-it-be-ready,Когда
 laundry.where-is-a-laundromat,прачечная
 lost-rescue.i-do-not-know-where-i-am,где я
@@ -178,9 +178,9 @@ massage-spa.focus-on-back,спиной
 massage-spa.focus-on-feet,стопами
 massage-spa.focus-on-neck,шеей
 massage-spa.focus-on-shoulders,плечами
-massage-spa.please-avoid-this-area,Не надавливайте
+massage-spa.please-avoid-this-area,Не надавливайте | Не надавливай
 massage-spa.please-pause,паузу
-massage-spa.please-stop,Остановитесь
+massage-spa.please-stop,Остановитесь | Остановись
 massage-spa.reply-ask-supervisor,администратора
 massage-spa.reply-cannot-avoid-this-treatment,не обойтись
 massage-spa.reply-does-it-hurt-there,болит
@@ -268,8 +268,8 @@ taxi.can-you-wait-for-me-here,подождать
 taxi.could-you-make-it-colder,холоднее
 taxi.could-you-make-it-warmer,теплее
 taxi.may-i-open-the-window,окно
-taxi.please-stop-here,Остановитесь
-taxi.please-take-me-here,Отвезите
+taxi.please-stop-here,Остановитесь | Остановись
+taxi.please-take-me-here,Отвезите | Отвези
 time-scheduling.can-we-change-the-time,перенести
 time-scheduling.how-long-does-it-take,займёт
 time-scheduling.what-day-is-it-today,день
