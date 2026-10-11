@@ -747,7 +747,7 @@
   "search.close": "Qidiruvni yopish",
   "search.none": "Buni aytadigan tugma yoʻq.",
   "search.more": "Koʻrsatilgan: {shown}/{count}. Toraytish uchun yozishda davom eting.",
-  "sectionFormat.across": "Ustunlar",
+  "sectionFormat.across": "Qatordagi yozuvlar",
   "sectionFormat.acrossTitle": "Ustunning bir qatorida {count} ta yozuv",
   "sectionFormat.asCard": "Kartadagidek",
   "sectionFormat.title": "{section} boʻlimining koʻrinishi",

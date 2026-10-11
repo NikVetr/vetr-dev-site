@@ -65,7 +65,7 @@
   "drill.openPage": "Si metta alla prova su questa coppia di lingue, in una pagina a parte",
   "drill.pick": "Scelga questa colonna: {field}",
   "drill.pool": "Voci che si possono chiedere: {count} · sezioni: {sections}.",
-  "drill.poolEmpty": "Nessuna voce della carta riempie tutte quelle colonne, quindi non c’è nulla da chiedere.",
+  "drill.poolEmpty": "Nessuna voce della scheda riempie tutte quelle colonne, quindi non c’è nulla da chiedere.",
   "drill.progress": "{at} di {total}",
   "drill.right": "Giusto.",
   "drill.seed": "Seme",

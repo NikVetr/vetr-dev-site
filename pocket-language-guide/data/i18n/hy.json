@@ -747,7 +747,7 @@
   "search.close": "Փակել որոնումը",
   "search.none": "Ոչ մի կոճակ դա չի ասում։",
   "search.more": "Ցուցադրված՝ {shown}/{count}։ Փոքրացնելու համար շարունակեք մուտքագրել։",
-  "sectionFormat.across": "Սյունակներ",
+  "sectionFormat.across": "Տարրեր տողում",
   "sectionFormat.acrossTitle": "Տարրեր սյունակի մեկ տողում՝ {count}",
   "sectionFormat.asCard": "Ինչպես քարտում",
   "sectionFormat.title": "Ձևաչափ՝ {section}",

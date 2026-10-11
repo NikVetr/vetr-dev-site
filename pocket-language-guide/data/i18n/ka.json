@@ -747,7 +747,7 @@
   "search.close": "ძებნის დახურვა",
   "search.none": "ასეთი ღილაკი არ არსებობს.",
   "search.more": "ნაჩვენებია: {shown}/{count}. შესავიწროებლად ბეჭდვა გააგრძელეთ.",
-  "sectionFormat.across": "სვეტები",
+  "sectionFormat.across": "ჩანაწერები ხაზზე",
   "sectionFormat.acrossTitle": "ჩანაწერი სვეტის ერთ ხაზზე: {count}",
   "sectionFormat.asCard": "როგორც ბარათზე",
   "sectionFormat.title": "ფორმატი: {section}",

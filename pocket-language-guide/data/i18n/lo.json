@@ -747,7 +747,7 @@
   "search.close": "ປິດການຄົ້ນຫາ",
   "search.none": "ບໍ່ມີປຸ່ມໃດເວົ້າແບບນັ້ນ.",
   "search.more": "ສະແດງ {shown} ຈາກ {count}. ພິມເພີ່ມເພື່ອຈຳກັດໃຫ້ແຄບລົງ.",
-  "sectionFormat.across": "ຫຼັກ",
+  "sectionFormat.across": "ລາຍການຕໍ່ແຖວ",
   "sectionFormat.acrossTitle": "{count} ລາຍການຕໍ່ແຖວຂອງຫຼັກ",
   "sectionFormat.asCard": "ຕາມບັດ",
   "sectionFormat.title": "ຮູບແບບຂອງພາກ {section}",
