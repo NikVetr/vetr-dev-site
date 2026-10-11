@@ -1149,7 +1149,14 @@ row on a phone, and a label too wide for its key is set smaller rather than brok
 `core/respell.js`, the listener's rule table bound to the owner's IPA with no syllable
 breaks or stress -- and `detailsFor` in `ui/conversation.js` gives the listener that
 spelling (ニコライ) wherever it is in another script from the typed name, and its IPA; the
-owner's gloss and respelling line keep the name as typed. **The country is chosen**
+owner's gloss and respelling line keep the name as typed. **The grid starts from a
+guess**: `guessSounds` in `core/respell.js` reads the typed name through
+`data/registry/name-letters.csv` -- per script, the sounds of a letter or run of letters,
+the reader's own language's readings over the script's defaults, longest run first, and
+a run marked `^` or `$` only at a word's start or end (English silent final *e*, German
+initial *st*) -- for Latin, Cyrillic and Greek. It is a starting point the reader hears
+and corrects tile by tile; over ten common names in each of 27 languages, 239 of 270
+need no correction. **The country is chosen**
 from every inhabited country and territory and the six continents, in
 `data/countries/<code>.csv` (CLDR's names, written by `scripts/build_countries.mjs`, with
 the form the language's "I am from" frame takes where it is not the bare name, the
