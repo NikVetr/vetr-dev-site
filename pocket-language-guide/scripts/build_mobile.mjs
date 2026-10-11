@@ -51,9 +51,10 @@ const FILES = [
   'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
   'style.css', 'conversation.css', 'favicon.svg', 'manifest.webmanifest',
   'data/presets.json', 'data/icons.json', 'data/coverage.json',
-  // The header's two marks. The launcher PNGs beside them are the web's; an app has
-  // its own icon, built into the native project.
+  // The header's two marks and the two that move while a page loads. The launcher
+  // PNGs beside them are the web's; an app has its own icon, built into the native project.
   'data/brand/mark.svg', 'data/brand/mark-dark.svg',
+  'data/brand/mark-loading.svg', 'data/brand/mark-loading-dark.svg',
   // `data/native.json` is not here: it is written below, overwriting the web's copy.
 ];
 

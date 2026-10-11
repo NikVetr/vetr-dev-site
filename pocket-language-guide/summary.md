@@ -8,7 +8,12 @@ overlapping, drawn once as flat paths in `data/brand/mark.svg` (green, with a su
 `data/brand/mark-dark.svg` (blue, with a crescent moon); the favicon carries both and
 follows the system's scheme, the header shows whichever the page's scheme asks for,
 `scripts/build_app_icons.mjs` draws every launcher icon from the green one, and
-`scripts/build_logo.mjs` writes it as the path data the cards print.
+`scripts/build_logo.mjs` writes it as the path data the cards print. The same script
+writes `data/brand/mark-loading.svg` and `-dark.svg`, the mark that moves while a page is
+loading or typesetting: the two bubbles rock in turn, the back one anticlockwise and the
+front one clockwise, while the back one's three lines write themselves in, on a three-second
+loop. Any `.loading` placeholder shows it through `style.css` alone, so it is there before
+a script arrives; a reader who asked for less motion sees the still mark.
 
 ## Content, practice and page controls
 
@@ -2483,10 +2488,10 @@ No bullet is set beside it; a mark is its own separator. The `pair` slot reads
 `Chinese (Simplified) – English`, with an en dash, because the Latin face has no
 arrow and a glyph a face lacks is measured at one width and drawn from another font
 at another; and SVG text keeps its spaces (`xml:space`), since a band part's leading
-space is part of its measured width. The shapes are generated from `favicon.svg` by
-`scripts/build_logo.mjs`, which flattens the favicon's rotated rounded rectangles
-into absolute cubic curves in a box one point tall, because neither renderer applies
-a transform to a path and pdf-lib's `drawSvgPath` would draw them unrotated. In mono
+space is part of its measured width. The shapes are generated from `data/brand/mark.svg`
+by `scripts/build_logo.mjs`, as absolute curves in a box one point tall, because
+neither renderer applies a transform to a path and pdf-lib's `drawSvgPath` would draw
+a transformed one wrongly. In mono
 the greens become ink and the light card paper, two tones like the rest of the sheet.
 
 ## The phone

@@ -356,6 +356,27 @@ body.page-gallery { padding-block-end: 0; }
   :root:not([data-theme="light"]) .brand-mark-light { display: none; }
   :root:not([data-theme="light"]) .brand-mark-dark { display: inline; }
 }
+/* **While a page loads or typesets**, the mark above the words says so: its bubbles
+   rock in turn and the back one's lines write themselves in (the motion is the
+   message, so it is allowed). In the stylesheet, not a script, because it has to be
+   there before any script has arrived. A reader who asked for less motion sees the
+   mark standing still. */
+.loading { --loading-mark: url(data/brand/mark-loading.svg); text-align: center; }
+.loading::before {
+  content: ''; display: block; inline-size: 4.5rem; block-size: 3.3rem; margin: var(--space-2) auto;
+  background: var(--loading-mark) center / contain no-repeat;
+}
+:root[data-theme="dark"] .loading { --loading-mark: url(data/brand/mark-loading-dark.svg); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .loading { --loading-mark: url(data/brand/mark-loading-dark.svg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading { --loading-mark: url(data/brand/mark.svg); }
+  :root[data-theme="dark"] .loading { --loading-mark: url(data/brand/mark-dark.svg); }
+}
+@media (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .loading { --loading-mark: url(data/brand/mark-dark.svg); }
+}
 .reader-picker { display: flex; align-items: center; gap: var(--space-1); font-size: var(--fs--1); min-width: 0; }
 /* A long endonym must not set the header's width. */
 .reader-picker select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }
