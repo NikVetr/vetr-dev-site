@@ -5,12 +5,12 @@ building-help.where-is-reception,Unde este recepția?,,ˈunde jˌeste retʃˈept
 building-help.where-is-a-power-outlet,Unde este o priză?,,ˈunde jˌeste o prˈizə,,2,ro-agent-v1;ipa=espeak
 accessibility.step-free,Există acces fără trepte?,,eɡzˌistə aktʃˈes fˈərə trˈepte,,2,ro-agent-v1;ipa=espeak
 accessibility.wheelchair-access,Este accesibil pentru scaune cu rotile?,,jˌeste ˌaktʃesˈibil pˌentru skˈaʊne ku rotʲˈile,,2,ro-agent-v1;ipa=espeak
-accessibility.elevator,Este un lift?,,jˌeste un lˈift,,2,ro-agent-v1;ipa=espeak
-accessibility.ramp,Este o rampă?,,jˌeste o rˈampə,,2,ro-agent-v1;ipa=espeak
+accessibility.elevator,Există un lift?,,eɡzˌistə un lˈift,"is there a lift? -- există, the existential verb; este with no place named reads first as the copula, 'is it a lift?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=hotel-requests.is-there-a-safe (Există un seif?) and accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v10;ipa=espeak"
+accessibility.ramp,Există o rampă?,,eɡzˌistə o rˈampə,"is there a ramp? -- există, as the lift row; este o ... reads first as 'is it a ramp?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=hotel-requests.is-there-a-safe (Există un seif?) and accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v10;ipa=espeak"
 accessibility.how-many-steps,Câte trepte sunt?,,kˈɨte trˈepte sˈunt,,2,ro-agent-v1;ipa=espeak
 accessibility.cannot-climb-stairs,Nu pot urca scările,,nu pot urkˈa skəɾʲˈile,,2,ro-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,Trebuie să mă așez,,trˈebwiˌe sə mə aʃˈez,,2,ro-agent-v1;ipa=espeak
-accessibility.accessible-restroom,Este o toaletă accesibilă?,,jˌeste o tɔalˈetə ˌaktʃesibˈilə,,2,ro-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Există o toaletă accesibilă?,,eɡzˌistə o tɔalˈetə ˌaktʃesibˈilə,"is there an accessible toilet? -- există, as the lift row; este o ... reads first as 'is it an accessible toilet?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=hotel-requests.is-there-a-safe (Există un seif?) and accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v10;ipa=espeak"
 accessibility.station-assistance,Este asistență la stație?,,jˌeste ˌasistˈentsə la stˈatsje,,2,ro-agent-v1;ipa=espeak
 accessibility.help-me-carry,Vă rog ajutați-mă să car asta,,və rˈoɡ ˌaʒutˈatsʲimə sə kˈar ˈasta,,2,ro-agent-v1;ipa=espeak
 accessibility.board-first,Pot urca primul?,Pot urca prima?,pot urkˈa prˈimul,,2,ro-agent-v1;ipa=espeak

@@ -28,7 +28,7 @@ atm-cash.do-you-have-change,Aveți mărunt?,,avˌetsʲ məɾˈunt,,2,ro-agent-v1
 atm-cash.may-i-pay-in,Pot plăti în {}?,,pot plətʲˈi ɨn {},,2,ro-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,"Taxați în moneda locală, vă rog",,"taksˈatsʲ ɨn monˈeda lokˈalə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,De unde pot obține monede?,,de ˈunde pot obtsˈine monˈede,,2,ro-agent-v1;ipa=espeak
-atm-cash.is-there-a-minimum-for-cards,Este o sumă minimă pentru card?,,jˌeste o sˈumə mˈinimˌə pˌentru kˈard,,2,ro-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Există o sumă minimă pentru card?,,eɡzˌistə o sˈumə mˈinimˌə pˌentru kˈard,"is there a minimum amount for a card? -- există, as the lift row; este o ... reads first as 'is it a minimum amount?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=hotel-requests.is-there-a-safe (Există un seif?) and accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v10;ipa=espeak"
 atm-cash.atm,bancomat,,bˌankomˈat,,2,ro-agent-v1;ipa=espeak
 atm-cash.banknote,bancnotă,,banknˈotə,,2,ro-agent-v1;ipa=espeak
 atm-cash.coin,monedă,,monˈedə,,2,ro-agent-v1;ipa=espeak

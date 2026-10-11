@@ -489,3 +489,27 @@ the "Rows to check" of `tmp/notes/agents/key-words-6.md`, `-7.md` or `-8.md` (an
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A tenth pass: the same cases the ninth pass saw beside its items
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-10.md`. Each lead is
+in the "Seen, not touched" of `tmp/notes/agents/row-corrections-9-a.md` or `-9-b.md`.
+
+- **Punjabi**: the 20 further first-person requests worded only for a man (`… ਸਕਦਾ ਹਾਂ`)
+  that the ninth pass listed -- feminine speaker variants, as it wrote the first eight.
+- **Romanian**: the six further `Este un/o X?` rows that read first as "is it a ...?" --
+  `Există`, as the ninth pass settled.
+- **Telugu**: `border-customs.i-am-a-tourist`, the twin of the row the ninth pass reworded.
+- **Tamil**: the no-smoking and do-not-touch signs worded as requests -- prohibitives, as
+  the photography sign now is.
+- **Hindi**: the traveller's police row keeps the obligative the Gujarati one lost.
+- **Malayalam**: the brother and sister `literal`s claim there is no sibling term
+  unmarked for age, which Kannada's did and was corrected.
+- **Nepali**: the kind-words labels end in "." rather than the danda, as Odia's did.
+- **Odia**: the kind-words romanisation writes *y* where the pack's romaniser writes *ẏ*.
+- **Quenya**: `i-do-not-understand-spoken` still has `i-do-not-know`'s text (`lá istan`);
+  the ninth pass gave the written row `lá hanyan`.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
