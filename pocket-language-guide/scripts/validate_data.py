@@ -710,6 +710,35 @@ def main():
                     warnings.append(f"{where}: the {name} wording {said!r} contains none of "
                                     f"{keys}, so it shows no key word")
 
+    # --- the letters a typed name is guessed from ------------------------------
+    #
+    # `name-letters.csv` fills the sound keyboard's tiles (`guessSounds` in
+    # core/respell.js), so every sound must be one of its keys -- a tile the keyboard
+    # does not have cannot be corrected -- read from `SOUNDS` in ui/board-menu.js rather
+    # than copied here. Letters are matched lower case and NFC, so a row in any other
+    # form could never match.
+    menu = (ROOT / "ui/board-menu.js").read_text(encoding="utf-8")
+    found = re.search(r"export const SOUNDS = \[([^\]]+)\]", menu)
+    if not found:
+        errors.append("ui/board-menu.js: no SOUNDS array to check name-letters.csv against")
+    sounds = set(re.findall(r"'([^']+)'", found.group(1))) if found else set()
+    seen_letters = set()
+    for line, row in enumerate(load("registry/name-letters.csv"), start=2):
+        where = f"name-letters.csv:{line}"
+        if row["script"] not in scripts:
+            errors.append(f"{where}: unknown script {row['script']!r}")
+        if row["language"] and row["language"] not in languages:
+            errors.append(f"{where}: unknown language {row['language']!r}")
+        letters = row["letters"]
+        if not letters or letters != unicodedata.normalize("NFC", letters).lower():
+            errors.append(f"{where}: letters {letters!r} are not lower-case NFC")
+        if (row["language"], row["script"], letters) in seen_letters:
+            errors.append(f"{where}: {letters!r} is read twice for {row['language'] or row['script']}")
+        seen_letters.add((row["language"], row["script"], letters))
+        stray = [s for s in row["sound"].split() if s not in sounds]
+        if stray:
+            errors.append(f"{where}: {stray} are not keys of the sound keyboard")
+
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):
             if row["concept_id"] not in concepts:
