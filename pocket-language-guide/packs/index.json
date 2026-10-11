@@ -2850,7 +2850,7 @@
     {
       "target": "zh-Hans",
       "source": "sw",
-      "scale": 0.59,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3603,7 +3603,7 @@
     {
       "target": "zh-Hans",
       "source": "yo",
-      "scale": 0.68,
+      "scale": 0.69,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3785,7 +3785,7 @@
     {
       "target": "zh-Hans",
       "source": "jv",
-      "scale": 0.54,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4722,7 +4722,7 @@
     {
       "target": "ja",
       "source": "gu",
-      "scale": 0.83,
+      "scale": 0.81,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -6442,14 +6442,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -7727,7 +7719,7 @@
     {
       "target": "fr",
       "source": "jv",
-      "scale": 0.53,
+      "scale": 0.52,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -10063,7 +10055,7 @@
     {
       "target": "pt",
       "source": "ha",
-      "scale": 0.49,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -10309,8 +10301,8 @@
     {
       "target": "pt",
       "source": "jv",
-      "scale": 0.45,
-      "faces": 8,
+      "scale": 0.78,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 632,
@@ -10641,7 +10633,7 @@
     {
       "target": "ko",
       "source": "sw",
-      "scale": 0.5,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -11929,7 +11921,7 @@
     {
       "target": "hi",
       "source": "sw",
-      "scale": 0.57,
+      "scale": 0.55,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -12896,7 +12888,7 @@
     {
       "target": "hi",
       "source": "jv",
-      "scale": 0.53,
+      "scale": 0.54,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -14164,7 +14156,7 @@
     {
       "target": "th",
       "source": "am",
-      "scale": 0.82,
+      "scale": 0.81,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -15501,7 +15493,7 @@
     {
       "target": "ru",
       "source": "ms",
-      "scale": 0.79,
+      "scale": 0.8,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -16866,9 +16858,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -16976,7 +16968,7 @@
     {
       "target": "id",
       "source": "ha",
-      "scale": 0.56,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -17376,7 +17368,7 @@
     {
       "target": "sw",
       "source": "fr",
-      "scale": 0.79,
+      "scale": 0.78,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -17396,7 +17388,7 @@
     {
       "target": "sw",
       "source": "de",
-      "scale": 0.78,
+      "scale": 0.77,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -17410,14 +17402,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -17464,7 +17448,7 @@
     {
       "target": "sw",
       "source": "hi",
-      "scale": 0.58,
+      "scale": 0.57,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -17586,7 +17570,7 @@
     {
       "target": "sw",
       "source": "vi",
-      "scale": 0.53,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -17965,7 +17949,7 @@
     {
       "target": "sw",
       "source": "mr",
-      "scale": 0.55,
+      "scale": 0.54,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -17990,6 +17974,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -18036,7 +18028,7 @@
     {
       "target": "sw",
       "source": "pa",
-      "scale": 0.51,
+      "scale": 0.5,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -18061,14 +18053,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -18275,7 +18259,7 @@
     {
       "target": "sw",
       "source": "ha",
-      "scale": 0.49,
+      "scale": 0.47,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -18314,9 +18298,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 1
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -18382,7 +18366,7 @@
     {
       "target": "sw",
       "source": "km",
-      "scale": 0.54,
+      "scale": 0.53,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -18413,7 +18397,7 @@
     {
       "target": "sw",
       "source": "hr",
-      "scale": 0.5,
+      "scale": 0.48,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -18865,7 +18849,7 @@
     {
       "target": "tr",
       "source": "sw",
-      "scale": 0.56,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -21079,7 +21063,7 @@
     {
       "target": "vi",
       "source": "jv",
-      "scale": 0.6,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -21447,7 +21431,7 @@
     {
       "target": "it",
       "source": "sw",
-      "scale": 0.49,
+      "scale": 0.48,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -24594,7 +24578,7 @@
     {
       "target": "hu",
       "source": "ms",
-      "scale": 0.5,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -27693,6 +27677,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -28059,7 +28051,7 @@
     {
       "target": "he",
       "source": "sw",
-      "scale": 0.73,
+      "scale": 0.74,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -35723,7 +35715,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35751,7 +35743,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35766,9 +35758,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 4
+            "count": 5
           },
-          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "5 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -35779,7 +35771,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35807,7 +35799,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35835,7 +35827,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -35874,7 +35866,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35902,7 +35894,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35930,7 +35922,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35945,9 +35937,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 5
+            "count": 6
           },
-          "message": "5 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "6 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -35958,7 +35950,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -35974,11 +35966,11 @@
     {
       "target": "ta",
       "source": "hi",
-      "scale": 0.54,
+      "scale": 0.53,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36004,9 +35996,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 4
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -36017,7 +36009,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36056,7 +36048,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36084,7 +36076,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36112,7 +36104,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36136,11 +36128,11 @@
     {
       "target": "ta",
       "source": "tr",
-      "scale": 0.67,
+      "scale": 0.66,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36168,7 +36160,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36196,7 +36188,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36224,7 +36216,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36252,7 +36244,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36280,7 +36272,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 426,
+      "items": 427,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36300,7 +36292,7 @@
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 261,
+      "items": 262,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36339,7 +36331,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36363,11 +36355,11 @@
     {
       "target": "ta",
       "source": "fa",
-      "scale": 0.66,
+      "scale": 0.67,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36393,9 +36385,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -36406,7 +36398,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36445,7 +36437,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36484,7 +36476,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36512,7 +36504,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36527,9 +36519,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 3
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -36540,7 +36532,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36564,11 +36556,11 @@
     {
       "target": "ta",
       "source": "te",
-      "scale": 0.53,
+      "scale": 0.49,
       "faces": 18,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36594,9 +36586,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 10
+            "count": 13
           },
-          "message": "10 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "13 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -36607,7 +36599,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36642,11 +36634,11 @@
     {
       "target": "ta",
       "source": "ro",
-      "scale": 0.68,
+      "scale": 0.67,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36661,9 +36653,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 4
+            "count": 3
           },
-          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -36674,7 +36666,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36702,7 +36694,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36737,39 +36729,11 @@
     {
       "target": "ta",
       "source": "fil",
-      "scale": 0.6,
+      "scale": 0.59,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 5
-          },
-          "message": "5 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ta",
-      "source": "sv",
-      "scale": 0.6,
-      "faces": 14,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36792,12 +36756,40 @@
     },
     {
       "target": "ta",
+      "source": "sv",
+      "scale": 0.6,
+      "faces": 14,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 631,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ta",
       "source": "ms",
       "scale": 0.63,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -36825,7 +36817,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36864,7 +36856,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36903,7 +36895,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36942,7 +36934,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36981,7 +36973,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37009,7 +37001,7 @@
       "faces": 18,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37024,9 +37016,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 13
+            "count": 12
           },
-          "message": "13 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "12 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -37037,7 +37029,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37065,7 +37057,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -37100,11 +37092,11 @@
     {
       "target": "ta",
       "source": "km",
-      "scale": 0.65,
+      "scale": 0.64,
       "faces": 18,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -37143,7 +37135,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37158,9 +37150,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -37171,7 +37163,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37199,7 +37191,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37227,7 +37219,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37255,7 +37247,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37279,11 +37271,11 @@
     {
       "target": "ta",
       "source": "jv",
-      "scale": 0.6,
+      "scale": 0.59,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -37311,7 +37303,7 @@
       "faces": 18,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -38216,7 +38208,7 @@
     {
       "target": "uk",
       "source": "gu",
-      "scale": 0.82,
+      "scale": 0.81,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -38594,7 +38586,7 @@
     {
       "target": "uk",
       "source": "jv",
-      "scale": 0.69,
+      "scale": 0.7,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -38657,7 +38649,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38672,9 +38664,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -38685,7 +38677,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38713,35 +38705,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 2
-          },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "te",
-      "source": "ja",
-      "scale": 0.73,
-      "faces": 14,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38764,12 +38728,40 @@
     },
     {
       "target": "te",
+      "source": "ja",
+      "scale": 0.71,
+      "faces": 14,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 633,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 2
+          },
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "te",
       "source": "ar",
       "scale": 0.6,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -38800,7 +38792,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38820,7 +38812,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38840,7 +38832,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38868,7 +38860,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -38896,7 +38888,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -38922,20 +38914,20 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "te",
       "source": "th",
-      "scale": 0.51,
+      "scale": 0.49,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -38956,14 +38948,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -38974,7 +38958,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39002,7 +38986,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39030,7 +39014,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39058,7 +39042,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39086,7 +39070,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39106,7 +39090,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39126,7 +39110,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39141,9 +39125,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -39154,7 +39138,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39182,7 +39166,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 430,
+      "items": 431,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39202,7 +39186,7 @@
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 264,
+      "items": 265,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39241,7 +39225,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39261,7 +39245,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39300,7 +39284,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39339,7 +39323,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39378,7 +39362,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39398,7 +39382,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39426,7 +39410,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39441,9 +39425,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 6
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "6 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -39454,7 +39438,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39470,11 +39454,11 @@
     {
       "target": "te",
       "source": "mr",
-      "scale": 0.79,
+      "scale": 0.77,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39513,7 +39497,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39541,7 +39525,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39569,7 +39553,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39608,95 +39592,8 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 2
-          },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "te",
-      "source": "sv",
-      "scale": 0.52,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 632,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "te",
-      "source": "ms",
-      "scale": 0.56,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 632,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 2
-          },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "te",
-      "source": "gu",
-      "scale": 0.78,
-      "faces": 14,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 632,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Gujarati",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Gujarati text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -39718,12 +39615,91 @@
     },
     {
       "target": "te",
+      "source": "sv",
+      "scale": 0.52,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 633,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "te",
+      "source": "ms",
+      "scale": 0.56,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 633,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "te",
+      "source": "gu",
+      "scale": 0.78,
+      "faces": 14,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 633,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Gujarati",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Gujarati text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "te",
       "source": "ne",
       "scale": 0.82,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39762,7 +39738,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39793,7 +39769,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39832,7 +39808,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39852,7 +39828,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39867,9 +39843,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 8
+            "count": 7
           },
-          "message": "8 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -39880,7 +39856,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 631,
+      "items": 632,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -39908,7 +39884,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39934,9 +39910,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -39947,7 +39923,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 631,
+      "items": 632,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39986,7 +39962,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40014,7 +39990,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40042,7 +40018,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40062,7 +40038,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40077,9 +40053,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 4
+            "count": 3
           },
-          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -40090,7 +40066,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40106,11 +40082,11 @@
     {
       "target": "te",
       "source": "jv",
-      "scale": 0.51,
+      "scale": 0.5,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -40130,7 +40106,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 632,
+      "items": 633,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -41048,7 +41024,7 @@
     {
       "target": "mr",
       "source": "gu",
-      "scale": 0.8,
+      "scale": 0.78,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -41078,9 +41054,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 2
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -41434,7 +41410,7 @@
     {
       "target": "mr",
       "source": "jv",
-      "scale": 0.46,
+      "scale": 0.45,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -41448,14 +41424,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -43810,7 +43778,7 @@
     {
       "target": "cs",
       "source": "ha",
-      "scale": 0.56,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -45154,7 +45122,7 @@
     {
       "target": "pa",
       "source": "ha",
-      "scale": 0.46,
+      "scale": 0.47,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -45800,7 +45768,7 @@
     {
       "target": "fil",
       "source": "sw",
-      "scale": 0.72,
+      "scale": 0.7,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -46520,9 +46488,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 2
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -48070,7 +48038,7 @@
     {
       "target": "sv",
       "source": "jv",
-      "scale": 0.47,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -49069,7 +49037,7 @@
     {
       "target": "ms",
       "source": "am",
-      "scale": 0.88,
+      "scale": 0.89,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -49381,7 +49349,7 @@
     {
       "target": "ms",
       "source": "or",
-      "scale": 0.55,
+      "scale": 0.56,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -49551,7 +49519,7 @@
     {
       "target": "gu",
       "source": "de",
-      "scale": 0.47,
+      "scale": 0.46,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -50540,9 +50508,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 4
+            "count": 3
           },
-          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -50569,7 +50537,7 @@
     {
       "target": "gu",
       "source": "ka",
-      "scale": 0.79,
+      "scale": 0.78,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -52409,7 +52377,7 @@
     {
       "target": "am",
       "source": "vi",
-      "scale": 0.68,
+      "scale": 0.67,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -52449,7 +52417,7 @@
     {
       "target": "am",
       "source": "el",
-      "scale": 0.57,
+      "scale": 0.56,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -52729,7 +52697,7 @@
     {
       "target": "am",
       "source": "uk",
-      "scale": 0.66,
+      "scale": 0.64,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -52774,6 +52742,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -53075,7 +53051,7 @@
     {
       "target": "am",
       "source": "ha",
-      "scale": 0.69,
+      "scale": 0.68,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -53165,9 +53141,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 4
+            "count": 3
           },
-          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -54481,14 +54457,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -54844,7 +54812,7 @@
     {
       "target": "ha",
       "source": "zh-Hans",
-      "scale": 0.67,
+      "scale": 0.64,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55085,7 +55053,7 @@
     {
       "target": "ha",
       "source": "id",
-      "scale": 0.54,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55125,7 +55093,7 @@
     {
       "target": "ha",
       "source": "tr",
-      "scale": 0.55,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55145,7 +55113,7 @@
     {
       "target": "ha",
       "source": "vi",
-      "scale": 0.52,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55185,7 +55153,7 @@
     {
       "target": "ha",
       "source": "el",
-      "scale": 0.76,
+      "scale": 0.77,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -55409,7 +55377,7 @@
     {
       "target": "ha",
       "source": "nl",
-      "scale": 0.47,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55547,7 +55515,7 @@
     {
       "target": "ha",
       "source": "ro",
-      "scale": 0.54,
+      "scale": 0.52,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55658,7 +55626,7 @@
     {
       "target": "ha",
       "source": "ms",
-      "scale": 0.53,
+      "scale": 0.52,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55830,7 +55798,7 @@
     {
       "target": "ha",
       "source": "yo",
-      "scale": 0.52,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -55880,9 +55848,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -56000,7 +55968,7 @@
     {
       "target": "ha",
       "source": "uz",
-      "scale": 0.51,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -56070,9 +56038,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -57119,7 +57087,7 @@
     {
       "target": "ml",
       "source": "am",
-      "scale": 0.53,
+      "scale": 0.51,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -57144,6 +57112,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -58379,7 +58355,7 @@
     {
       "target": "yo",
       "source": "ne",
-      "scale": 0.75,
+      "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -58710,7 +58686,7 @@
     {
       "target": "yo",
       "source": "or",
-      "scale": 0.61,
+      "scale": 0.6,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -58735,14 +58711,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 2
-          },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -59979,7 +59947,7 @@
     {
       "target": "lo",
       "source": "ms",
-      "scale": 0.45,
+      "scale": 0.46,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -60488,6 +60456,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -60968,6 +60944,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -61723,7 +61707,7 @@
     {
       "target": "km",
       "source": "ms",
-      "scale": 0.87,
+      "scale": 0.88,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -61931,7 +61915,7 @@
     {
       "target": "km",
       "source": "ha",
-      "scale": 0.78,
+      "scale": 0.77,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
@@ -62610,7 +62594,7 @@
     {
       "target": "hr",
       "source": "sw",
-      "scale": 0.5,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -63612,7 +63596,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63632,7 +63616,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63652,7 +63636,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63672,7 +63656,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63692,7 +63676,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -63723,7 +63707,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63743,7 +63727,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63763,7 +63747,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63791,7 +63775,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63811,7 +63795,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -63842,7 +63826,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -63873,7 +63857,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63889,11 +63873,11 @@
     {
       "target": "ka",
       "source": "id",
-      "scale": 0.69,
+      "scale": 0.68,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63913,7 +63897,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63929,11 +63913,11 @@
     {
       "target": "ka",
       "source": "tr",
-      "scale": 0.69,
+      "scale": 0.68,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63943,6 +63927,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -63953,7 +63945,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63969,11 +63961,11 @@
     {
       "target": "ka",
       "source": "it",
-      "scale": 0.66,
+      "scale": 0.64,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -63989,11 +63981,11 @@
     {
       "target": "ka",
       "source": "el",
-      "scale": 0.6,
+      "scale": 0.59,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64013,7 +64005,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64033,7 +64025,7 @@
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 429,
+      "items": 430,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64053,7 +64045,7 @@
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
-      "items": 263,
+      "items": 264,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64084,7 +64076,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64104,7 +64096,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64135,7 +64127,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64156,6 +64148,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64166,7 +64166,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64205,7 +64205,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64225,7 +64225,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64245,7 +64245,7 @@
       "faces": 16,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64273,7 +64273,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64289,11 +64289,11 @@
     {
       "target": "ka",
       "source": "te",
-      "scale": 0.55,
+      "scale": 0.54,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64319,9 +64319,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 3
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64332,7 +64332,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64363,7 +64363,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64383,7 +64383,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64403,7 +64403,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64442,7 +64442,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64452,6 +64452,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64462,7 +64470,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64482,7 +64490,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64502,7 +64510,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64541,7 +64549,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64568,11 +64576,11 @@
     {
       "target": "ka",
       "source": "am",
-      "scale": 0.47,
+      "scale": 0.45,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64603,7 +64611,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64624,6 +64632,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64634,7 +64650,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64654,7 +64670,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64682,7 +64698,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64702,7 +64718,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64733,7 +64749,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64754,14 +64770,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64772,7 +64780,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64782,14 +64790,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -64800,7 +64800,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64820,7 +64820,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64840,7 +64840,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64856,11 +64856,11 @@
     {
       "target": "ka",
       "source": "jv",
-      "scale": 0.6,
+      "scale": 0.59,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -64880,7 +64880,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -65208,8 +65208,8 @@
     {
       "target": "fi",
       "source": "sw",
-      "scale": 0.77,
-      "faces": 10,
+      "scale": 0.45,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 626,
@@ -66957,9 +66957,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 3
+            "count": 2
           },
-          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -67549,7 +67549,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67569,7 +67569,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67589,7 +67589,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67609,7 +67609,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67629,7 +67629,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -67660,7 +67660,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67680,7 +67680,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67700,7 +67700,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67720,7 +67720,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67740,7 +67740,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -67771,7 +67771,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -67810,7 +67810,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67830,7 +67830,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67850,7 +67850,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67870,7 +67870,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67890,7 +67890,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67910,7 +67910,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67930,7 +67930,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67950,7 +67950,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67970,7 +67970,7 @@
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 428,
+      "items": 429,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -67990,7 +67990,7 @@
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
-      "items": 262,
+      "items": 263,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68021,7 +68021,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68041,7 +68041,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68080,7 +68080,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68119,7 +68119,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68150,7 +68150,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68170,7 +68170,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68198,7 +68198,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68213,9 +68213,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 8
+            "count": 7
           },
-          "message": "8 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -68226,7 +68226,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68242,11 +68242,11 @@
     {
       "target": "uz",
       "source": "te",
-      "scale": 0.67,
+      "scale": 0.66,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68272,9 +68272,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -68285,7 +68285,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68316,7 +68316,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68336,7 +68336,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68356,7 +68356,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68395,7 +68395,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68415,7 +68415,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68435,7 +68435,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68455,7 +68455,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68494,7 +68494,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68529,11 +68529,11 @@
     {
       "target": "uz",
       "source": "am",
-      "scale": 0.66,
+      "scale": 0.63,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68564,7 +68564,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68590,9 +68590,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -68603,7 +68603,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68623,7 +68623,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68638,9 +68638,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 5
+            "count": 4
           },
-          "message": "5 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "4 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -68651,7 +68651,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 622,
+      "items": 623,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68671,7 +68671,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68702,7 +68702,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 622,
+      "items": 623,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68741,7 +68741,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68757,11 +68757,11 @@
     {
       "target": "uz",
       "source": "ka",
-      "scale": 0.64,
+      "scale": 0.63,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68781,7 +68781,7 @@
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68801,7 +68801,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68821,7 +68821,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -68841,7 +68841,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -69009,14 +69009,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -69241,7 +69233,7 @@
     {
       "target": "jv",
       "source": "vi",
-      "scale": 0.46,
+      "scale": 0.45,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -69679,7 +69671,7 @@
     {
       "target": "jv",
       "source": "cs",
-      "scale": 0.78,
+      "scale": 0.79,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -69978,7 +69970,7 @@
     {
       "target": "jv",
       "source": "yo",
-      "scale": 0.45,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -70068,7 +70060,7 @@
     {
       "target": "jv",
       "source": "hr",
-      "scale": 0.75,
+      "scale": 0.76,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -70198,9 +70190,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 2
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
