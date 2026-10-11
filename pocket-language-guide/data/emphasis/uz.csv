@@ -1,0 +1,302 @@
+concept_id,key
+about-me.i-am-a-doctor,shifokorman
+about-me.i-am-a-nurse,hamshiraman
+about-me.i-am-a-student,talabaman
+about-me.i-am-a-teacher,oʻqituvchiman
+about-me.i-am-an-engineer,muhandisman
+about-me.i-am-retired,nafaqadaman
+about-me.i-have-my-own-business,oʻz biznesim
+about-me.i-work-in-an-office,ofisda
+accessibility.step-free,Zinasiz
+air-travel.i-would-like-a-window-seat,Deraza
+air-travel.i-would-like-an-aisle-seat,Yoʻlak
+air-travel.my-luggage-did-not-arrive,kelmadi
+air-travel.where-is-check-in,Registratsiya
+air-travel.where-is-the-security-check,Xavfsizlik tekshiruvi
+attractions-tickets.are-there-lockers,Omonat shkaflari
+attractions-tickets.could-you-take-a-photo-for-us,Bizni
+attractions-tickets.do-i-need-a-reservation,buyurtma
+attractions-tickets.may-i-take-photos,Rasmga
+attractions-tickets.what-is-the-latest-entry-time,Eng kech kirish
+attractions-tickets.where-can-i-buy-tickets,Chiptani
+board-answers.after-food,keyin
+board-answers.before-food,oldin
+board-answers.can-you-walk,Yura
+board-answers.help-is-coming,Yordam
+board-answers.i-am-calling-an-ambulance,tez yordamga
+board-answers.i-am-calling-the-police,politsiyaga
+board-answers.i-do-not-have-a-phone,Telefonim
+board-answers.i-will-find-someone,birovni topaman
+board-answers.i-will-show-you,koʻrsataman
+board-answers.i-would-rather-not-say,aytmaganim
+board-answers.none-of-these,hech birini
+board-answers.not-possible,mumkin emas
+board-answers.only-for-customers,mijozlar
+board-answers.pay-on-board,Chiqqaningizdan keyin
+board-answers.prescription-only,retsept
+board-answers.see-a-doctor,Shifokorga
+board-answers.stay-here,qolish
+board-answers.the-hospital-is-close,Shifoxona
+board-answers.there-is-no-wait,Navbat yoʻq
+board-answers.we-do-not-have-it,yoʻq
+board-answers.we-have-it,bor
+board-answers.what-happened,boʻldi
+board-answers.what-is-your-name,Ismingiz
+board-answers.where-does-it-hurt,ogʻriyapti
+border-customs.here-is-my-passport,pasportim
+border-customs.i-am-here-for-business,Ish
+border-customs.i-am-visiting-family,Qarindoshlarimni
+border-customs.i-have-a-connecting-flight,Ulanish reysim
+border-customs.where-do-i-collect-my-baggage,olaman
+color-size-returns.do-you-have-a-bag,Paket
+color-size-returns.do-you-have-another-size,oʻlchami
+color-size-returns.may-i-try-it-on,Kiyib
+communication.can-you-help-me,yordam
+communication.do-you-speak-english,bilasizmi
+communication.i-do-not-speak-this-language,bilmayman
+communication.please-speak-more-slowly,Sekinroq
+dietary-needs.does-it-contain-fish-stock,baliq bulyoni
+dietary-needs.does-it-contain-pork-fat,choʻchqa yogʻi
+dietary-needs.does-it-contain-pork-stock,choʻchqa goʻshti bulyoni
+dietary-needs.i-am-vegan,veganman
+dietary-needs.i-am-vegetarian,vegetarianman
+dietary-needs.is-this-halal,halolmi
+dietary-needs.no-eggs,Tuxumsiz
+dietary-needs.no-meat,Goʻshtsiz
+dietary-needs.no-nuts,Yongʻoqsiz
+dietary-needs.no-peanuts,Yeryongʻoqsiz
+dietary-needs.no-pork,Choʻchqa
+dietary-needs.no-seafood,Dengiz mahsulotlari
+dietary-needs.no-sesame,Kunjutsiz
+directions.can-i-walk-there,piyoda bora
+directions.can-you-show-me-the-way,Yoʻlni
+directions.how-long-on-foot,qancha vaqt
+directions.please-show-me-on-the-map,Xaritada
+emergency-medical.i-am-bleeding-badly,qon
+emergency-medical.i-am-having-a-severe-allergic-reaction,allergik reaksiya
+emergency-medical.i-am-injured,jarohatlandim
+emergency-medical.i-cannot-breathe,Nafas
+emergency-medical.i-feel-unwell,yomon
+emergency-medical.i-have-chest-pain,Koʻkragim
+emergency-medical.i-have-travel-insurance,sugʻurtam
+emergency-medical.i-need-a-doctor,shifokor
+emergency-medical.i-think-a-bone-is-broken,Suyagim singan
+emergency-medical.it-hurts-here,ogʻriyapti
+emergency-medical.please-call-an-ambulance,Tez yordam
+emergency-medical.please-call-my-emergency-contact,Yaqinimga
+emergency-medical.please-take-me-to-a-hospital,shifoxonaga
+emergency-medical.this-is-an-emergency,shoshilinch
+emergency-medical.this-person-is-unconscious,hushidan ketgan
+emergency-medical.where-is-the-nearest-hospital,Eng yaqin
+family-intros.this-is-my-brother,akam
+family-intros.this-is-my-colleague,hamkasbim
+family-intros.this-is-my-daughter,qizim
+family-intros.this-is-my-father,otam
+family-intros.this-is-my-husband,erim
+family-intros.this-is-my-mother,onam
+family-intros.this-is-my-partner,yorim
+family-intros.this-is-my-sister,opam
+family-intros.this-is-my-son,oʻgʻlim
+family-intros.this-is-my-wife,xotinim
+food-ordering.i-want-this,kerak
+food-ordering.is-a-table-available,Boʻsh stol
+food-ordering.is-this-vegetarian,vegetarian
+food-ordering.table-for-two,Ikki kishilik
+food-ordering.what-do-you-recommend,tavsiya
+hiking-parks.how-long-to-the-summit,Choʻqqigacha
+hiking-parks.how-long-to-the-viewpoint,Manzara maydonchasigacha
+hiking-parks.is-this-trail-suitable-for-beginners,yangi boshlovchilarga
+hiking-parks.where-is-the-trailhead,Yoʻl boshi
+hiking-parks.which-route-is-easier,osonroq
+hitchhiking.can-you-give-me-a-ride,olib ketasizmi
+hitchhiking.i-can-pay-for-fuel,Benzin
+hitchhiking.i-only-need-to-go-to-the-next-town,keyingi shaharchagacha
+hitchhiking.is-there-room-for-two,Ikki kishiga joy
+hitchhiking.thank-you-for-the-ride,rahmat
+hitchhiking.where-are-you-going,Qayerga
+hotel-basics.are-any-rooms-available,Boʻsh xonangiz
+hotel-basics.how-much-per-night,Bir kechasi
+hotel-basics.i-have-a-reservation,buyurtmam
+hotel-basics.i-would-like-a-non-smoking-room,Chekilmaydigan
+hotel-basics.i-would-like-a-quiet-room,Tinch
+hotel-basics.is-breakfast-included,Nonushta
+hotel-basics.is-there-a-washing-machine,Kir yuvish mashinasi
+hotel-basics.is-there-air-conditioning,Konditsioner
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,koʻrsam
+hotel-requests.another-blanket,koʻrpa
+hotel-requests.another-night,Yana bir kecha
+hotel-requests.another-towel-please,sochiq
+hotel-requests.can-i-check-in-early,Erta
+hotel-requests.can-i-check-out-later,Kechroq
+hotel-requests.can-i-store-my-luggage,Yukimni
+hotel-requests.is-there-a-safe,Seyf
+hotel-requests.no-housekeeping,tozalash
+hotel-requests.what-time-does-breakfast-start,Nonushta
+hotel-requests.what-time-is-check-out,Chiqish
+in-a-building.is-this-the-correct-entrance,shu yerdanmi
+introductions.i-am-a-tourist,turistman
+introductions.i-am-from,shu yerdanman
+introductions.i-am-traveling-alone,yolgʻiz
+introductions.my-name-is,ismim
+introductions.this-is-my-friend,doʻstim
+introductions.we-are-traveling-together,birga
+introductions.what-is-your-name,Ismingiz
+kind-words.i-had-a-wonderful-time,Ajoyib
+kind-words.i-like-it-very-much,yoqdi
+kind-words.it-is-beautiful-here,chiroyli
+kind-words.thank-you-for-everything,Hammasi
+kind-words.thank-you-for-your-help,Yordamingiz
+kind-words.thank-you-for-your-hospitality,Mehmondoʻstligingiz
+kind-words.this-is-delicious,mazali
+kind-words.you-are-very-kind,mehribonsiz
+laundry.can-it-be-ready-today,Bugun
+laundry.how-much-per-kilo,Bir kilosi
+laundry.please-do-not-use-bleach,Oqartirgich
+laundry.please-iron-this,dazmollang
+laundry.please-wash-these-clothes,yuving
+laundry.when-will-it-be-ready,Qachon
+laundry.where-is-a-laundromat,Kir yuvish shoxobchasi
+lost-rescue.i-do-not-know-where-i-am,Qayerdaligimni
+lost-rescue.i-lost-my-bag,Sumkamni
+lost-rescue.i-lost-my-passport,Pasportimni
+lost-rescue.i-lost-my-phone,Telefonimni
+lost-rescue.i-lost-my-wallet,Hamyonimni
+lost-rescue.my-child-is-missing,Bolam
+lost-rescue.please-call-the-police,Politsiya
+lost-rescue.we-are-here,shu yerdamiz
+massage-spa.focus-on-back,orqamni
+massage-spa.focus-on-feet,oyoqlarimni
+massage-spa.focus-on-neck,boʻynimni
+massage-spa.focus-on-shoulders,yelkamni
+massage-spa.more-gently,Yumshoqroq
+massage-spa.please-avoid-this-area,tegmang
+massage-spa.please-pause,Bir ozga
+massage-spa.please-stop,toʻxtating
+massage-spa.reply-ask-supervisor,rahbardan
+massage-spa.reply-cannot-avoid-this-treatment,chetlab oʻtib boʻlmaydi
+massage-spa.reply-does-it-hurt-there,ogʻriyaptimi
+massage-spa.reply-i-will-avoid-that-area,tegmayman
+massage-spa.reply-which-area-exactly,qaysi joyni
+massage-spa.stronger-pressure,kuchaytiring
+massage-spa.that-pressure-is-good,ayni joyida
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofenga
+medical-conditions.i-am-allergic-to-penicillin,penitsillinga
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfanilamid
+medical-conditions.i-am-diabetic,qandli diabet
+medical-conditions.i-am-pregnant,homiladorman
+medical-conditions.i-carry-an-adrenaline-injector,adrenalin
+medical-conditions.i-have-a-heart-condition,yurak
+medical-conditions.i-have-asthma,astma
+medical-conditions.i-have-epilepsy,epilepsiya
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,ingalatorim
+medical-conditions.i-take-blood-thinners,qon suyultiruvchi
+medical-conditions.inject-it-into-my-outer-thigh,Sonimning
+medical-conditions.my-blood-sugar-is-low,Qonimdagi shakar
+medical-conditions.my-injector-is-in-my-bag,sumkamda
+medical-conditions.please-give-me-sugar-or-juice,shakar | sharbat
+medical-conditions.this-card-lists-my-conditions,kartada
+medical-conditions.this-is-my-medicine,dorim
+outdoors.are-there-dangerous-animals-here,xavfli hayvonlar
+outdoors.can-we-camp-here,lager
+outdoors.is-it-safe-to-swim-here,suzish
+payment-receipt.can-we-pay-separately,Alohida-alohida
+payment-receipt.how-much-in-total,Hammasi
+payment-receipt.i-already-paid,allaqachon toʻladim
+payment-receipt.is-tax-included,soliq
+payment-receipt.my-card-was-declined,oʻtmadi
+payment-receipt.pay-by-card,Karta
+payment-receipt.the-bill-is-wrong,Hisobda xatolik
+pharmacy-symptoms.antacid,kislotalikni
+pharmacy-symptoms.anti-diarrhea-medicine,ich ketishiga
+pharmacy-symptoms.antihistamine,antigistamin
+pharmacy-symptoms.before-or-after-food,Ovqatdan
+pharmacy-symptoms.can-i-get-this-medicine-here,dorini
+pharmacy-symptoms.cough-medicine,yoʻtalga
+pharmacy-symptoms.do-i-need-a-prescription,Retsept
+pharmacy-symptoms.how-many-times-a-day,Kuniga
+pharmacy-symptoms.how-much-should-i-take,Qancha
+pharmacy-symptoms.i-feel-dizzy,aylanyapti
+pharmacy-symptoms.i-feel-nauseous,aynayapti
+pharmacy-symptoms.i-have-a-burn,kuygan
+pharmacy-symptoms.i-have-a-cut,kesilgan
+pharmacy-symptoms.i-have-a-fever,isitma
+pharmacy-symptoms.i-have-a-headache,Boshim
+pharmacy-symptoms.i-have-a-rash,toshma
+pharmacy-symptoms.i-have-a-sore-throat,Tomogʻim
+pharmacy-symptoms.i-have-a-stomach-ache,Qornim
+pharmacy-symptoms.i-have-diarrhea,ich ketishi
+pharmacy-symptoms.i-think-it-is-infected,yiringlagan
+pharmacy-symptoms.is-this-safe-during-pregnancy,Homiladorlikda
+pharmacy-symptoms.motion-sickness-tablets,harakat kasalligiga
+pharmacy-symptoms.painkiller,ogʻriq
+pharmacy-symptoms.rehydration-salts,regidratatsiya
+pharmacy-symptoms.the-pain-is-severe,Ogʻriq | kuchli
+pharmacy-symptoms.which-pharmacy-is-open-now,Hozir | ochiq
+police-consulate.i-need-an-interpreter,tarjimon
+police-consulate.i-want-to-contact-my-embassy,Elchixonam
+police-consulate.i-want-to-report-a-theft,xabar bermoqchiman
+police-consulate.my-bag-was-stolen,oʻgʻirlandi
+police-consulate.someone-is-following-me,kuzatib yuribdi
+police-consulate.where-is-the-police-station,Politsiya boʻlimi
+quick-directions.go-straight,Toʻgʻriga
+quick-directions.turn-left,Chapga
+quick-directions.turn-right,Oʻngga
+room-problems.can-i-change-rooms,almashtirsam
+room-problems.please-send-someone,odam yuboring
+room-problems.the-air-conditioning-is-broken,Konditsioner
+room-problems.the-heating-does-not-work,Isitish
+room-problems.the-key-does-not-work,Karta
+room-problems.the-light-does-not-work,Chiroq
+room-problems.the-room-is-too-noisy,shovqinli
+room-problems.the-toilet-will-not-flush,Suv tushirgich
+room-problems.there-is-a-problem-with-the-room,muammo
+room-problems.there-is-no-hot-water,Issiq suv
+shopping.can-it-be-a-little-cheaper,arzonroq
+shopping.do-you-have-this-in-stock,Omborda
+shopping.how-much-is-this,qancha
+shopping.i-am-just-looking,koʻryapman
+shopping.i-will-take-this,olaman
+shopping.that-is-too-expensive,qimmat
+shopping.where-do-i-pay,Kassa
+taxi.can-you-wait-for-me-here,kutib
+taxi.could-you-make-it-colder,sovuqroq
+taxi.could-you-make-it-warmer,issiqroq
+taxi.may-i-open-the-window,Derazani
+taxi.please-stop-here,toʻxtang
+taxi.please-take-me-here,olib boring
+time-scheduling.can-we-change-the-time,oʻzgartirsak
+time-scheduling.how-long-does-it-take,vaqt oladi
+time-scheduling.what-day-is-it-today,kun
+time-scheduling.what-time-does-it-close,yopiladi
+time-scheduling.what-time-does-it-open,ochiladi
+time-scheduling.what-time-should-we-meet,uchrashamiz
+time-scheduling.when-is-convenient,qulay
+toilets.where-toilet,Hojatxona
+trail-conditions.can-we-return-before-dark,Qorongʻi tushguncha
+trail-conditions.can-we-return-the-same-way,Shu yoʻldan
+trail-conditions.how-long-is-the-full-route,Butun yoʻl
+trail-conditions.is-the-path-slippery,sirpanchiqmi
+trail-conditions.is-the-route-steep,tikmi
+trail-conditions.is-the-trail-open,ochiqmi
+trail-transport.do-you-have-a-map,Xaritangiz
+trail-transport.how-long-is-the-wait,kutish
+trail-transport.is-there-cell-signal-here,aloqa
+trail-transport.what-time-is-the-last-shuttle,Oxirgi avtobus
+trail-transport.when-does-the-cableway-stop,Osma yoʻl
+trail-transport.where-can-we-buy-water,suv sotib olsak
+trail-transport.where-can-we-refill-water,suv toʻldirsak
+transit-rides.can-i-use-this-ticket,amal qiladimi
+transit-rides.do-i-need-to-transfer,Almashtirishim
+transit-rides.do-i-need-to-validate,tasdiqlatishim
+transit-rides.i-went-past-my-stop,oʻtib ketdim
+transit-rides.is-this-direct,toʻgʻri
+transit-rides.please-tell-me-where-to-get-off,tushishimni
+transit-rides.what-is-the-next-stop,Keyingi bekat
+transit-rides.what-time-is-the-next-one,Keyingisi
+transit-rides.where-do-i-pay-the-fare,Yoʻlkirani
+transit-rides.where-is-the-subway-station,Metro
+weather.how-cold-at-night,Kechasi | darajagacha
+weather.is-it-safe-today,xavfsizmi
+weather.will-it-rain,yomgʻir

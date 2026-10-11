@@ -1,0 +1,47 @@
+concept_id,key
+board-answers.can-you-walk,
+board-answers.i-will-find-someone, 
+board-answers.i-will-show-you,
+board-answers.stay-here, 
+board-answers.what-is-your-name,
+communication.can-you-help-me,
+communication.please-speak-more-slowly,
+directions.can-i-walk-there,
+directions.can-you-show-me-the-way,
+directions.is-it-far,
+family-intros.this-is-my-daughter,
+family-intros.this-is-my-husband,
+family-intros.this-is-my-son,
+family-intros.this-is-my-wife,
+food-ordering.i-want-this,
+food-ordering.is-a-table-available, 
+hiking-parks.how-long-to-the-summit,
+hiking-parks.where-is-the-trailhead,
+hiking-parks.which-route-is-easier,
+hotel-basics.are-any-rooms-available, 
+hotel-basics.may-i-see-the-room,
+in-a-building.is-this-the-correct-entrance,
+introductions.i-am-traveling-alone,
+introductions.my-name-is,
+introductions.this-is-my-friend,
+introductions.what-is-your-name,
+introductions.where-are-you-from,
+quick-directions.go-straight,
+quick-directions.turn-left,
+quick-directions.turn-right,
+room-problems.the-light-does-not-work,
+room-problems.there-is-no-hot-water, 
+time-scheduling.can-we-change-the-time,
+time-scheduling.what-day-is-it-today,
+time-scheduling.what-time-does-it-close,
+time-scheduling.what-time-does-it-open,
+time-scheduling.what-time-should-we-meet,
+toilets.it-is-out-of-order,
+trail-conditions.can-we-return-before-dark, 
+trail-conditions.can-we-return-the-same-way, 
+trail-conditions.how-long-is-the-full-route,
+trail-conditions.is-the-route-steep,
+trail-conditions.is-the-trail-open,
+trail-transport.where-can-we-refill-water, 
+weather.how-cold-at-night, 
+weather.is-it-safe-today,

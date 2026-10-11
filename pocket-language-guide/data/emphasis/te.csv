@@ -1,0 +1,320 @@
+concept_id,key
+about-me.i-am-a-doctor,డాక్టర్
+about-me.i-am-a-nurse,నర్స్
+about-me.i-am-a-student,విద్యార్థిని
+about-me.i-am-a-teacher,ఉపాధ్యాయుడిని
+about-me.i-am-an-engineer,ఇంజనీర్
+about-me.i-am-retired,ఉద్యోగ విరమణ
+about-me.i-have-my-own-business,స్వంత వ్యాపారం
+about-me.i-work-in-an-office,ఆఫీసులో
+accessibility.step-free,మెట్లు లేని
+air-travel.i-would-like-a-window-seat,కిటికీ
+air-travel.i-would-like-an-aisle-seat,ఐల్
+air-travel.my-luggage-did-not-arrive,రాలేదు
+air-travel.where-is-check-in,చెక్-ఇన్
+air-travel.where-is-the-security-check,భద్రతా తనిఖీ
+attractions-tickets.are-there-lockers,లాకర్లు
+attractions-tickets.could-you-take-a-photo-for-us,మా
+attractions-tickets.do-i-need-a-reservation,రిజర్వేషన్
+attractions-tickets.may-i-take-photos,ఫోటోలు
+attractions-tickets.what-is-the-latest-entry-time,చివరి ప్రవేశం
+attractions-tickets.where-can-i-buy-tickets,టికెట్లు
+board-answers.after-food,తరవాత
+board-answers.before-food,ముందు
+board-answers.can-you-walk,నడవగలరా
+board-answers.help-is-coming,సహాయం
+board-answers.how-many,ఎన్ని
+board-answers.i-am-calling-an-ambulance,అంబులెన్స్
+board-answers.i-am-calling-the-police,పోలీసులకు
+board-answers.i-do-not-have-a-phone,ఫోన్
+board-answers.i-will-check,చూసి
+board-answers.i-will-find-someone,వ్యక్తిని | వెతుకుతాను
+board-answers.i-will-show-you,చూపిస్తాను
+board-answers.i-will-write-it-down,రాస్తాను
+board-answers.i-would-rather-not-say,చెప్పదలచుకోలేదు
+board-answers.it-is-over-there,అక్కడ
+board-answers.my-name-is-blank,నా
+board-answers.none-of-these,వీటిలో
+board-answers.not-possible,సాధ్యం కాదు
+board-answers.only-for-customers,కొనేవాళ్ళకు
+board-answers.pay-on-board,బండిలోనే
+board-answers.prescription-only,చీటీ
+board-answers.see-a-doctor,డాక్టర్
+board-answers.stay-here,ఉండటం
+board-answers.the-hospital-is-close,ఆసుపత్రి
+board-answers.there-is-no-wait,ఆగాల్సిన అవసరం లేదు
+board-answers.what-is-your-name,పేరు
+board-answers.where-does-it-hurt,నొప్పిగా
+board-answers.where-to,ఎక్కడికి
+border-customs.here-is-my-passport,పాస్పోర్ట్
+border-customs.i-am-here-for-business,వ్యాపారం
+border-customs.i-am-visiting-family,కుటుంబాన్ని
+border-customs.i-have-a-connecting-flight,కనెక్టింగ్ విమానం
+border-customs.where-do-i-collect-my-baggage,తీసుకోవాలి
+color-size-returns.do-you-have-a-bag,సంచి
+color-size-returns.do-you-have-another-size,సైజు
+color-size-returns.may-i-try-it-on,వేసుకుని
+communication.can-you-help-me,సహాయం
+communication.do-you-speak-english,మీకు
+communication.i-do-not-speak-this-language,రాదు
+communication.i-do-not-understand,అర్థం కాలేదు
+communication.please-speak-more-slowly,నెమ్మదిగా
+dietary-needs.does-it-contain-fish-stock,చేపల రసం
+dietary-needs.does-it-contain-pork-fat,పంది కొవ్వు
+dietary-needs.does-it-contain-pork-stock,పంది ఎముకల రసం
+dietary-needs.i-am-vegan,"పాలు, పెరుగు, నెయ్యి, గుడ్డు"
+dietary-needs.i-am-vegetarian,శాకాహారి
+dietary-needs.is-this-halal,హలాల్
+dietary-needs.no-eggs,గుడ్డు
+dietary-needs.no-meat,మాంసం
+dietary-needs.no-nuts,"జీడిపప్పు, బాదం"
+dietary-needs.no-peanuts,పల్లీలు
+dietary-needs.no-pork,పంది
+dietary-needs.no-seafood,"చేపలు, రొయ్యలు"
+dietary-needs.no-sesame,నువ్వులు
+directions.can-i-walk-there,వెళ్ళవచ్చా
+directions.can-you-show-me-the-way,దారి
+directions.how-long-on-foot,ఎంత సమయం
+directions.please-show-me-on-the-map,పటంలో
+emergency-medical.i-am-bleeding-badly,రక్తం
+emergency-medical.i-am-having-a-severe-allergic-reaction,తీవ్రమైన అలర్జీ
+emergency-medical.i-am-injured,గాయం
+emergency-medical.i-cannot-breathe,ఊపిరి
+emergency-medical.i-feel-unwell,నలతగా
+emergency-medical.i-have-chest-pain,ఛాతీ
+emergency-medical.i-have-travel-insurance,బీమా
+emergency-medical.i-need-a-doctor,డాక్టర్
+emergency-medical.i-think-a-bone-is-broken,ఎముక
+emergency-medical.it-hurts-here,నొప్పిగా
+emergency-medical.please-call-an-ambulance,అంబులెన్స్
+emergency-medical.please-call-my-emergency-contact,అత్యవసర నంబరుకు
+emergency-medical.please-take-me-to-a-hospital,ఆసుపత్రికి
+emergency-medical.this-is-an-emergency,అత్యవసరం
+emergency-medical.this-person-is-unconscious,స్పృహ కోల్పోయారు
+emergency-medical.where-is-the-nearest-hospital,దగ్గరి
+family-intros.this-is-my-brother,సోదరుడు
+family-intros.this-is-my-colleague,సహోద్యోగి
+family-intros.this-is-my-daughter,కూతురు
+family-intros.this-is-my-father,నాన్న
+family-intros.this-is-my-husband,భర్త
+family-intros.this-is-my-mother,అమ్మ
+family-intros.this-is-my-partner,జీవిత భాగస్వామి
+family-intros.this-is-my-sister,సోదరి
+family-intros.this-is-my-son,కొడుకు
+family-intros.this-is-my-wife,భార్య
+food-ordering.i-want-this,కావాలి
+food-ordering.is-a-table-available,టేబుల్ ఖాళీ
+food-ordering.is-this-vegetarian,శాకాహారమా
+food-ordering.table-for-two,ఇద్దరికి
+food-ordering.to-go-please,పార్సెల్
+food-ordering.what-do-you-recommend,బాగుంటుంది
+hiking-parks.how-long-to-the-summit,శిఖరానికి
+hiking-parks.how-long-to-the-viewpoint,వ్యూ పాయింటుకి
+hiking-parks.is-this-trail-suitable-for-beginners,కొత్తవాళ్ళకు
+hiking-parks.where-is-the-trailhead,మొదలవుతుంది
+hiking-parks.which-route-is-easier,సులభం
+hitchhiking.can-you-give-me-a-ride,లిఫ్ట్
+hitchhiking.i-can-pay-for-fuel,పెట్రోల్
+hitchhiking.i-only-need-to-go-to-the-next-town,తరవాత ఊరు
+hitchhiking.is-there-room-for-two,ఇద్దరికి స్థలం
+hitchhiking.thank-you-for-the-ride,ధన్యవాదాలు
+hitchhiking.where-are-you-going,ఎక్కడికి
+hotel-basics.are-any-rooms-available,గదులు
+hotel-basics.how-much-per-night,రాత్రికి
+hotel-basics.i-have-a-reservation,బుక్
+hotel-basics.i-would-like-a-non-smoking-room,పొగ తాగని
+hotel-basics.i-would-like-a-quiet-room,నిశ్శబ్దమైన
+hotel-basics.is-breakfast-included,టిఫిన్
+hotel-basics.is-there-a-washing-machine,వాషింగ్ మెషిన్
+hotel-basics.is-there-air-conditioning,ఏసీ
+hotel-basics.is-wi-fi-free,వైఫై
+hotel-basics.may-i-see-the-room,చూడవచ్చా
+hotel-requests.another-blanket,దుప్పటి
+hotel-requests.another-night,ఇంకో రాత్రి
+hotel-requests.another-towel-please,టవల్
+hotel-requests.can-i-check-in-early,ముందే
+hotel-requests.can-i-check-out-later,ఆలస్యంగా
+hotel-requests.can-i-store-my-luggage,సామాను
+hotel-requests.is-there-a-safe,లాకర్
+hotel-requests.no-housekeeping,శుభ్రం
+hotel-requests.what-time-does-breakfast-start,టిఫిన్
+hotel-requests.what-time-is-check-out,చెక్-అవుట్
+in-a-building.is-this-the-correct-entrance,సరైన
+introductions.i-am-a-tourist,పర్యాటకుడిని
+introductions.i-am-from,నుంచి వచ్చాను
+introductions.i-am-traveling-alone,ఒంటరిగా
+introductions.my-name-is,నా
+introductions.this-is-my-friend,స్నేహితుడు
+introductions.we-are-traveling-together,కలిసి
+introductions.what-is-your-name,మీ
+introductions.where-are-you-from,ఎక్కడి నుంచి
+kind-words.i-had-a-wonderful-time,బాగా సమయం
+kind-words.i-like-it-very-much,ఇష్టం
+kind-words.it-is-beautiful-here,అందంగా
+kind-words.thank-you-for-everything,అన్నింటికీ
+kind-words.thank-you-for-your-help,సహాయానికి
+kind-words.thank-you-for-your-hospitality,ఆతిథ్యానికి
+kind-words.this-is-delicious,రుచిగా
+kind-words.you-are-very-kind,దయగలవారు
+laundry.can-it-be-ready-today,ఈ రోజే
+laundry.how-much-per-kilo,కిలోకు
+laundry.please-do-not-use-bleach,బ్లీచ్
+laundry.please-iron-this,ఇస్త్రీ
+laundry.please-wash-these-clothes,ఉతకండి
+laundry.when-will-it-be-ready,ఎప్పుడు
+laundry.where-is-a-laundromat,బట్టలు ఉతికే షాపు
+lost-rescue.i-do-not-know-where-i-am,ఎక్కడ ఉన్నానో
+lost-rescue.i-lost-my-bag,బ్యాగు
+lost-rescue.i-lost-my-passport,పాస్పోర్ట్
+lost-rescue.i-lost-my-phone,ఫోన్
+lost-rescue.i-lost-my-wallet,పర్సు
+lost-rescue.my-child-is-missing,బిడ్డ
+lost-rescue.please-call-the-police,పోలీసులకు
+lost-rescue.we-are-here,ఇక్కడ
+massage-spa.focus-on-back,వీపుకు
+massage-spa.focus-on-feet,పాదాలకు
+massage-spa.focus-on-neck,మెడకు
+massage-spa.focus-on-shoulders,భుజాలకు
+massage-spa.more-gently,తేలికగా
+massage-spa.please-avoid-this-area,ఒత్తవద్దు
+massage-spa.please-pause,కాసేపు
+massage-spa.please-stop,ఆపండి
+massage-spa.reply-ask-supervisor,మేనేజరును
+massage-spa.reply-cannot-avoid-this-treatment,వదలడం కుదరదు
+massage-spa.reply-does-it-hurt-there,నొప్పిగా
+massage-spa.reply-i-will-avoid-that-area,వదిలేస్తాను
+massage-spa.reply-which-area-exactly,ఏ భాగం
+massage-spa.stronger-pressure,గట్టిగా
+massage-spa.that-pressure-is-good,సరిగ్గా
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ఆస్పిరిన్ | ఐబుప్రొఫెన్
+medical-conditions.i-am-allergic-to-penicillin,పెన్సిలిన్
+medical-conditions.i-am-allergic-to-sulfa-drugs,సల్ఫా
+medical-conditions.i-am-diabetic,మధుమేహం
+medical-conditions.i-am-pregnant,గర్భవతిని
+medical-conditions.i-carry-an-adrenaline-injector,అడ్రినలిన్
+medical-conditions.i-have-a-heart-condition,గుండె
+medical-conditions.i-have-asthma,ఆస్తమా
+medical-conditions.i-have-epilepsy,మూర్ఛ వ్యాధి
+medical-conditions.i-need-insulin,ఇన్సులిన్
+medical-conditions.i-need-my-inhaler,ఇన్హేలర్
+medical-conditions.i-take-blood-thinners,రక్తం పలచన
+medical-conditions.inject-it-into-my-outer-thigh,తొడ
+medical-conditions.my-blood-sugar-is-low,చక్కెర తగ్గింది
+medical-conditions.my-injector-is-in-my-bag,ఇంజెక్షన్ | బ్యాగులో
+medical-conditions.please-give-me-sugar-or-juice,చక్కెర | జ్యూస్
+medical-conditions.this-card-lists-my-conditions,కార్డులో
+medical-conditions.this-is-my-medicine,మందు
+outdoors.are-there-dangerous-animals-here,ప్రమాదకరమైన జంతువులు
+outdoors.can-we-camp-here,క్యాంప్
+outdoors.is-it-safe-to-swim-here,ఈత
+payment-receipt.can-we-pay-separately,వేరు వేరుగా
+payment-receipt.how-much-in-total,మొత్తం
+payment-receipt.i-already-paid,ఇప్పటికే కట్టాను
+payment-receipt.is-tax-included,పన్ను
+payment-receipt.my-card-was-declined,పని చేయలేదు
+payment-receipt.pay-by-card,కార్డుతో
+payment-receipt.the-bill-is-wrong,బిల్లులో | పొరపాటు
+pharmacy-symptoms.antacid,ఎసిడిటీ
+pharmacy-symptoms.anti-diarrhea-medicine,విరేచనాల
+pharmacy-symptoms.antihistamine,అలర్జీ
+pharmacy-symptoms.antiseptic,క్రిమిసంహారక
+pharmacy-symptoms.before-or-after-food,భోజనానికి
+pharmacy-symptoms.can-i-get-this-medicine-here,మందు
+pharmacy-symptoms.cough-medicine,దగ్గు
+pharmacy-symptoms.do-i-need-a-prescription,చీటీ
+pharmacy-symptoms.how-many-times-a-day,రోజుకు | సార్లు
+pharmacy-symptoms.how-much-should-i-take,ఎంత
+pharmacy-symptoms.i-am-vomiting,వాంతులు
+pharmacy-symptoms.i-feel-dizzy,తిరుగుతోంది
+pharmacy-symptoms.i-feel-nauseous,వికారంగా
+pharmacy-symptoms.i-have-a-burn,కాలిన
+pharmacy-symptoms.i-have-a-cough,దగ్గు
+pharmacy-symptoms.i-have-a-cut,కోత
+pharmacy-symptoms.i-have-a-fever,జ్వరం
+pharmacy-symptoms.i-have-a-headache,తలనొప్పి
+pharmacy-symptoms.i-have-a-rash,దద్దుర్లు
+pharmacy-symptoms.i-have-a-sore-throat,గొంతు
+pharmacy-symptoms.i-have-a-stomach-ache,కడుపు
+pharmacy-symptoms.i-have-diarrhea,విరేచనాలు
+pharmacy-symptoms.i-think-it-is-infected,చీము
+pharmacy-symptoms.is-this-safe-during-pregnancy,గర్భవతికి
+pharmacy-symptoms.motion-sickness-tablets,ప్రయాణ వాంతుల
+pharmacy-symptoms.painkiller,నొప్పి
+pharmacy-symptoms.rehydration-salts,ఓఆర్ఎస్
+pharmacy-symptoms.the-pain-is-severe,నొప్పి | ఎక్కువ
+pharmacy-symptoms.which-pharmacy-is-open-now,ఇప్పుడు | తెరిచి
+police-consulate.i-need-an-interpreter,దుబాసీ
+police-consulate.i-want-to-contact-my-embassy,రాయబార కార్యాలయాన్ని
+police-consulate.i-want-to-report-a-theft,ఫిర్యాదు
+police-consulate.my-bag-was-stolen,దొంగిలించారు
+police-consulate.someone-is-following-me,వెంట వస్తున్నారు
+police-consulate.where-is-the-police-station,పోలీస్ స్టేషన్
+quick-directions.across-from-here,ఎదురుగా
+quick-directions.go-straight,నేరుగా
+quick-directions.on-the-left,ఎడమ
+quick-directions.on-the-right,కుడి
+quick-directions.turn-left,ఎడమకు
+quick-directions.turn-right,కుడికి
+room-problems.can-i-change-rooms,మార్చవచ్చా
+room-problems.please-send-someone,ఒకరిని పంపండి
+room-problems.the-air-conditioning-is-broken,ఏసీ
+room-problems.the-heating-does-not-work,హీటర్
+room-problems.the-key-does-not-work,తాళం చెవి
+room-problems.the-light-does-not-work,లైట్
+room-problems.the-room-is-too-noisy,గోల
+room-problems.the-toilet-will-not-flush,టాయిలెట్ ఫ్లష్
+room-problems.there-is-a-problem-with-the-room,సమస్య
+room-problems.there-is-no-hot-water,వేడి నీళ్ళు
+shopping.can-it-be-a-little-cheaper,తగ్గించండి
+shopping.do-you-have-this-in-stock,స్టాక్
+shopping.how-much-is-this,ఎంత
+shopping.i-am-just-looking,చూస్తున్నానంతే
+shopping.i-will-take-this,తీసుకుంటాను
+shopping.that-is-too-expensive,ఎక్కువ
+shopping.where-do-i-pay,కట్టాలి
+social-basics.i-do-not-know,తెలియదు
+taxi.can-you-wait-for-me-here,ఆగుతారా
+taxi.could-you-make-it-colder,చల్లగా
+taxi.could-you-make-it-warmer,వేడిగా
+taxi.may-i-open-the-window,కిటికీ
+taxi.please-stop-here,ఆపండి
+taxi.please-take-me-here,తీసుకెళ్ళండి
+taxi.please-turn-around,వెనక్కి
+time-scheduling.can-we-change-the-time,మార్చవచ్చా
+time-scheduling.how-long-does-it-take,సమయం
+time-scheduling.what-day-is-it-today,వారం
+time-scheduling.what-time-does-it-close,మూసేస్తారు
+time-scheduling.what-time-does-it-open,తెరుస్తారు
+time-scheduling.what-time-is-it,ఇప్పుడు
+time-scheduling.what-time-should-we-meet,కలుద్దాం
+time-scheduling.when-is-convenient,కుదురుతుంది
+toilets.it-is-out-of-order,పని చేయడం లేదు
+toilets.where-toilet,టాయిలెట్
+trail-conditions.can-we-return-before-dark,చీకటి పడకముందే
+trail-conditions.can-we-return-the-same-way,అదే దారిలో
+trail-conditions.how-long-is-the-full-route,మొత్తం దారి
+trail-conditions.is-the-path-slippery,జారుతుందా
+trail-conditions.is-the-route-steep,నిటారుగా
+trail-conditions.is-the-trail-open,తెరిచి
+trail-transport.do-you-have-a-map,పటం
+trail-transport.how-long-is-the-wait,ఆగాలి
+trail-transport.is-there-cell-signal-here,సిగ్నల్
+trail-transport.what-time-is-the-last-shuttle,చివరి బస్
+trail-transport.when-does-the-cableway-stop,రోప్ వే
+trail-transport.where-can-we-buy-water,నీళ్ళు
+trail-transport.where-can-we-refill-water,నీళ్ళు | నింపుకోవచ్చు
+transit-rides.can-i-use-this-ticket,పని చేస్తుందా
+transit-rides.do-i-need-to-transfer,మారాలా
+transit-rides.do-i-need-to-validate,ముద్ర
+transit-rides.i-am-in-a-hurry,తొందర
+transit-rides.i-went-past-my-stop,దాటిపోయాను
+transit-rides.is-it-delayed,ఆలస్యం
+transit-rides.is-this-direct,నేరుగా
+transit-rides.please-tell-me-where-to-get-off,దిగాలో
+transit-rides.what-is-the-next-stop,తరవాత స్టాప్
+transit-rides.what-time-is-the-next-one,తరవాతి
+transit-rides.where-do-i-pay-the-fare,ఛార్జీ
+transit-rides.where-is-the-subway-station,మెట్రో
+weather.how-cold-at-night,రాత్రి | చలిగా
+weather.is-it-safe-today,సురక్షితమా
+weather.will-it-rain,వర్షం

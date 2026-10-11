@@ -1,0 +1,119 @@
+concept_id,key
+attractions-tickets.could-you-take-a-photo-for-us,
+attractions-tickets.do-i-need-a-reservation,
+attractions-tickets.may-i-take-photos,
+attractions-tickets.where-can-i-buy-tickets, 
+board-answers.help-is-coming,
+board-answers.i-am-calling-an-ambulance, 
+board-answers.i-am-calling-the-police,
+board-answers.i-do-not-have-a-phone,
+board-answers.i-will-find-someone, 
+board-answers.i-will-show-you,
+board-answers.none-of-these,
+board-answers.stay-here,
+board-answers.the-hospital-is-close, 
+board-answers.there-is-no-wait,
+board-answers.what-is-your-name,
+board-answers.where-does-it-hurt,
+border-customs.here-is-my-passport, 
+border-customs.i-am-here-for-business,
+border-customs.i-am-visiting-family,
+border-customs.where-do-i-collect-my-baggage, 
+color-size-returns.do-you-have-a-bag,
+communication.please-speak-more-slowly,
+directions.can-i-walk-there,
+directions.can-you-show-me-the-way,
+directions.how-long-on-foot, 
+directions.please-show-me-on-the-map,
+family-intros.this-is-my-daughter,
+family-intros.this-is-my-husband,
+family-intros.this-is-my-son,
+family-intros.this-is-my-wife,
+food-ordering.check-please,
+food-ordering.i-want-this,
+food-ordering.is-a-table-available, 
+food-ordering.table-for-two, 
+food-ordering.to-go-please,
+food-ordering.what-do-you-recommend,
+hiking-parks.how-long-to-the-summit, 
+hiking-parks.how-long-to-the-viewpoint,
+hiking-parks.is-this-trail-suitable-for-beginners,
+hiking-parks.where-is-the-trailhead,
+hiking-parks.which-route-is-easier, 
+hotel-basics.are-any-rooms-available,
+hotel-basics.how-much-per-night, 
+hotel-basics.i-have-a-reservation,
+hotel-basics.i-would-like-a-non-smoking-room, 
+hotel-basics.i-would-like-a-quiet-room,
+hotel-basics.is-breakfast-included,
+hotel-basics.is-there-a-washing-machine, 
+hotel-basics.is-there-air-conditioning,
+hotel-basics.is-wi-fi-free,
+hotel-basics.may-i-see-the-room,
+hotel-requests.another-blanket,
+hotel-requests.another-night, 
+hotel-requests.another-towel-please, 
+hotel-requests.can-i-store-my-luggage, 
+hotel-requests.is-there-a-safe,  
+hotel-requests.no-housekeeping,
+hotel-requests.what-time-does-breakfast-start,
+hotel-requests.what-time-is-check-out,
+in-a-building.is-this-the-correct-entrance,
+introductions.i-am-from,
+introductions.i-am-traveling-alone,
+introductions.my-name-is,
+introductions.this-is-my-friend,
+introductions.what-is-your-name,
+introductions.where-are-you-from,
+laundry.can-it-be-ready-today,
+laundry.please-iron-this,
+laundry.please-wash-these-clothes,
+laundry.when-will-it-be-ready,
+laundry.where-is-a-laundromat,  
+lost-rescue.i-do-not-know-where-i-am,
+payment-receipt.how-much-in-total,
+payment-receipt.my-card-was-declined,
+payment-receipt.the-bill-is-wrong,
+quick-directions.turn-left,
+quick-directions.turn-right,
+room-problems.can-i-change-rooms, 
+room-problems.please-send-someone,
+room-problems.the-air-conditioning-is-broken,
+room-problems.the-heating-does-not-work,
+room-problems.the-key-does-not-work,
+room-problems.the-light-does-not-work,
+room-problems.the-room-is-too-noisy,
+room-problems.there-is-a-problem-with-the-room,
+room-problems.there-is-no-hot-water, 
+shopping.how-much-is-this, 
+shopping.i-will-take-this,
+shopping.where-do-i-pay,
+taxi.can-you-wait-for-me-here,
+taxi.may-i-open-the-window,
+taxi.please-stop-here,
+taxi.please-take-me-here,
+time-scheduling.can-we-change-the-time,
+time-scheduling.how-long-does-it-take, 
+time-scheduling.what-day-is-it-today,
+time-scheduling.what-time-does-it-close,
+time-scheduling.what-time-does-it-open,
+time-scheduling.what-time-should-we-meet,
+toilets.where-toilet,
+trail-conditions.can-we-return-before-dark,
+trail-conditions.how-long-is-the-full-route,
+trail-conditions.is-the-path-slippery,
+trail-conditions.is-the-trail-open,
+trail-transport.do-you-have-a-map,
+trail-transport.how-long-is-the-wait,
+trail-transport.what-time-is-the-last-shuttle, 
+trail-transport.where-can-we-buy-water, 
+trail-transport.where-can-we-refill-water, 
+transit-rides.can-i-use-this-ticket,
+transit-rides.i-went-past-my-stop,
+transit-rides.please-tell-me-where-to-get-off,
+transit-rides.what-is-the-next-stop, 
+transit-rides.what-time-is-the-next-one,
+transit-rides.where-do-i-pay-the-fare,
+transit-rides.where-is-the-subway-station,
+weather.how-cold-at-night,
+weather.is-it-safe-today,
