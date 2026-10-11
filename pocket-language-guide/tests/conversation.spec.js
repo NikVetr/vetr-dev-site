@@ -2538,6 +2538,12 @@ test('a name built from its sounds is written in the listener\'s letters, and as
   await ask.locator('input').fill('Nikolai');
   // Open from the start: folded, it was not found.
   await expect(ask.locator('.sound-key').first()).toBeVisible();
+  // The tiles start from a guess at the typed letters, to be heard and corrected; this
+  // reader clears it and builds the name tile by tile.
+  await expect(ask.locator('.sound-heard')).not.toHaveText('');
+  const chips = ask.locator('.sound-chip');
+  for (let n = await chips.count(); n > 0; n -= 1) await ask.getByRole('button', { name: 'Delete' }).click();
+  await expect(chips).toHaveCount(0);
   const key = (/** @type {string} */ sound) => ask.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
   for (const sound of ['n', 'i', 'k', 'ə', 'l', 'aɪ']) await key(sound).click();
   await expect(ask.locator('.sound-heard')).toHaveText('ニカライ');
