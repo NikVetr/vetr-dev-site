@@ -9,7 +9,7 @@ directions.where-am-i,Ina nake?,,ina nake,where I-am,2,ha-agent-v1;ipa=ha-g2p
 directions.which-way,Wace hanya?,,watʃe hanja,,2,ha-agent-v1;ipa=ha-g2p
 directions.can-i-walk-there,Zan iya tafiya can da ƙafa?,,zan ija tafija tʃan da kʼafa,,2,ha-agent-v1;ipa=ha-g2p
 directions.how-far-is-it,Wane nisa ne?,,wane nisa ne,,2,ha-agent-v1;ipa=ha-g2p
-directions.which-exit,Wace ƙofa?,,watʃe kʼofa,,2,ha-agent-v1;ipa=ha-g2p
+directions.which-exit,Wace ƙofar fita?,,watʃe kʼofar fita,"which exit door? -- ƙofar fita, the pack's exit (building-words.exit), so the row no longer reads as air-travel.which-gate's Wace ƙofa?",2,"ha-agent-v1;fix=R. M. Newman An English-Hausa Dictionary (Yale 1990; ERIC ED356616) s.v. exit (v fita: you should exit by the back door, sai ka fita ta ƙofar baya);fix=Bargery ƙofa I.1(a) (a doorway; gateway);in-pack-neighbour=building-words.exit;row-corrections-v8;ipa=ha-g2p"
 directions.can-you-show-me-the-way,Za a iya nuna mini hanya?,,za a ija nuna mini hanja,"will one be able to show me the way? -- the impersonal a after za in place of ka (ki to a woman), as in taxi.can-you-wait-for-me-here",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=taxi.can-you-wait-for-me-here;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
 directions.north,arewa,,arewa,,2,ha-agent-v1;ipa=ha-g2p
 directions.south,kudu,,kudu,,2,ha-agent-v1;ipa=ha-g2p

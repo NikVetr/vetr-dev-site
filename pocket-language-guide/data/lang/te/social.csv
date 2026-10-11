@@ -36,7 +36,7 @@ quick-responses.works-okay,పని చేస్తుంది,,pani cēstuṁ
 quick-responses.does-not-work-no,పని చేయదు / లేదు,,pani cēyadu / lēdu,pani tʃeːjadu / leːdu,,2,te-agent-v1;ipa=espeak
 quick-responses.can-possible,అవుతుంది,సాధ్యం,avutuṁdi,aʋutundi,,2,te-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,సాధ్యం కాదు,,sādhyaṁ kādu,saːdʰjam kaːdu,,2,te-agent-v1;ipa=espeak
-quick-responses.okay-fine,సరే,,sarē,sareː,,2,te-agent-v1;ipa=espeak
+quick-responses.okay-fine,అలాగే,,alāgē,alaːɡeː,"all right, as you wish; సరే, the old text, is quick-responses.okay-can",2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) అలాగే p. 35 (minor sentence, in reply to a request all right, as you wish);rule=distinct-concepts-distinct-text (quick-responses.okay-can has the old text since row-corrections-v7);row-corrections-v8;ipa=espeak"
 quick-responses.no-good-not-allowed-will-not-work,కుదరదు,,kudaradu,kudaradu,it will not work out,2,te-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,నేను ఫోన్ అనువాదం వాడుతున్నాను,,nēnu phōn anuvādaṁ vāḍutunnānu,neːnu pʰoːn anuʋaːdam ʋaːɖutunnaːnu,,2,te-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,ఫోన్ వైపు మాట్లాడండి,,phōn vaipu māṭlāḍaṁḍi,pʰoːn ʋaɪpu maːʈlaːɖaɳɖi,,2,te-agent-v1;ipa=espeak

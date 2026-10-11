@@ -46,7 +46,7 @@ laundry.how-much-per-kilo,Nawa a kowane kilo?,,nawa a kowane kilo,,2,ha-agent-v1
 laundry.can-it-be-ready-today,Zai iya gama yau?,,zai ija ɡama jau,,2,ha-agent-v1;ipa=ha-g2p
 laundry.please-do-not-use-bleach,Don Allah kada ku yi amfani da bleach,,don allah kada ku ji amfani da bleatʃh,bleach kept as the common loanword,2,ha-agent-v1;ipa=ha-g2p
 laundry.laundromat,wurin wanki,,wurin wanki,,2,ha-agent-v1;ipa=ha-g2p
-laundry.please-iron-this,Don Allah ku bugu wannan,,don allah ku buɡu wannan,iron/press this -- the everyday word for a flatiron varies by region; flag for a fluent speaker,1,ha-agent-v1;ipa=ha-g2p
+laundry.please-iron-this,Don Allah ku goge mini wannan,,don allah ku ɡoɡe mini wannan,"please iron this for me -- goge, to iron clothes (the ironing itself is guga, the flatiron dutsen guga); bugu was the beating of cloth in lieu of ironing",1,"ha-agent-v1;fix=R. M. Newman An English-Hausa Dictionary (Yale 1990; ERIC ED356616) s.v. iron² (n for ironing: dutsen guga; v goge v4, yi guga: iron these pants for me, goge mini wandon nan) and s.v. press¹ (iron clothes: goge, yi guga);fix=Bargery bugu I.1 (act or occupation of beating cloth or clothes in lieu of ironing);in-pack-frame=laundry.please-wash-these-clothes (Don Allah ku wanke);row-corrections-v8;ipa=ha-g2p"
 laundry.detergent,sabulun wanki,,sabulun wanki,soap of washing,2,ha-agent-v1;ipa=ha-g2p
 laundry.dry-cleaning,wanki busasshe,,wanki busasʃe,dry washing,2,ha-agent-v1;ipa=ha-g2p
 laundry.dryer,na'urar bushewa,,naʔurar buʃewa,machine of drying,2,ha-agent-v1;ipa=ha-g2p

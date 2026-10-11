@@ -10,6 +10,6 @@ slang.no-worries,סמוך עלי,סְמוֹךְ עָלַי,semokh ‘alay,semˈo
 slang.youre-welcome,בכיף!,בְּכֵיף!,bekheyf!,bexˈejf,with pleasure!,2,he-agent-v1;ipa=bgn
 slang.seriously,חי בקופסה?,חַי בְּקוּפְסָה?,ẖay bequfsa?,xˈaj bekufsˈa,living in a box? -- said to news you disbelieve,2,he-agent-v1;ipa=bgn
 slang.im-good-thanks,"לא, תודה, אני בסדר","לֹא, תּוֹדָה, אֲנִי בְּסֵדֶר","lo, toda, ani beséder","lˈo, todˈa, anˈi besˈedeʁ","no thanks, I am fine",2,he-agent-v1;ipa=bgn
-slang.lets-go,"יאללה, נזוז!","יַאלְלָה, נִזּוּז!","yálla, nizuz!","jˈalla, nizˈuz","come on, let us move",2,he-agent-v1;ipa=bgn
+slang.lets-go,"יאללה, נזוז!","יַאלְלָה, נָזוּז!","yálla, nazuz!","jˈalla, nazˈuz","come on, let us move",2,"he-agent-v1;fix=he.wikipedia גזרת נעו""י rev 43903237 (qal table: ק-ו-ם קָם, future יָקוּם, imperative קוּם -- the prefix takes qamats and the vav is a shuruk);derived=ז-ו-ז qal future 1pl נָזוּז on that pattern;rule=נִזּוּז is not a qal form of זָז;row-corrections-v8;ipa=bgn"
 slang.cheers,לחיים!,לְחַיִּים!,leẖáyim!,lexˈajim,to life!,2,he-agent-v1;ipa=bgn
 slang.see-you,נתראה!,נִתְרָאֶה!,nitra’e!,nitʁaˈe,we shall see each other,2,he-agent-v1;ipa=bgn

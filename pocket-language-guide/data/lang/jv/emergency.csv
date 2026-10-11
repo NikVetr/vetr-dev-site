@@ -66,7 +66,7 @@ pharmacy-symptoms.i-feel-dizzy,Kula mumet,Sirah kula muter,ˈkulɔ ˈmumət,"mum
 pharmacy-symptoms.ibuprofen,Ibuprofèn,Proris,ibuˈprɔfɛn,,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.i-have-a-sore-throat,Tenggak kula sakit,Gorokan kula lara,təŋˈɡaʔ ˈkulɔ ˈsakɪt,tenggak is the krama word for the throat,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.can-i-get-this-medicine-here,Obat menika wonten mriki?,,ˈɔbat məˈnikɔ ˈwɔntən ˈmriki,,2,jv-agent-v1;ipa=jv-g2p
-pharmacy-symptoms.bandage,Plèster,Kain kasa,ˈplɛstər,,2,jv-agent-v1;ipa=jv-g2p
+pharmacy-symptoms.bandage,Perban,Plèster · Kain kasa,pərˈban,"bandage -- perban, the cloth for binding a wound; plèster, the old text, is the adhesive strip and moves to text_alt beside gauze, as the Indonesian row (row-corrections-7)",2,"jv-agent-v1;fix=jv.wikipedia Florence Nightingale rev 1730173 (krama: perban dipun-gantos kanthi rutin -- the bandages were changed regularly);fix=KBBI perban (n kain pembalut (luka dan sebagainya)), read on kbbi.web.id;in-pack-frame=the pack's own text_alt joiner ( · );rule=word-for-the-concept, as id row-corrections-v7;row-corrections-v8;ipa=jv-g2p"
 pharmacy-symptoms.the-pain-is-severe,Sakitipun awrat sanget,,sakiˈtipʊn ˈawrat ˈsaŋət,,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.antiseptic,Antisèptik,Bètadin,antiˈsɛptɪʔ,,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.i-feel-nauseous,Kula mual,Kula enek,ˈkulɔ ˈmual,,2,jv-agent-v1;ipa=jv-g2p

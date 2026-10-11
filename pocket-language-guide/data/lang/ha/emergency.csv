@@ -44,7 +44,7 @@ medical-conditions.my-injector-is-in-my-bag,Allurata tana cikin jakata,,allurata
 medical-conditions.i-am-allergic-to-sulfa-drugs,Ina da rashin jurewa ga magungunan sulfa,,ina da raʃin dʒurewa ɡa maɡunɡunan sulfa,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.which-pharmacy-is-open-now,Wane kantin magani ne a buɗe yanzu?,,wane kantin maɡani ne a buɗe janzu,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.i-need-medicine-for,Ina buƙatar magani don {},,ina bukʼatar maɡani don {},,2,ha-agent-v1;ipa=ha-g2p
-pharmacy-symptoms.i-have-a-fever,Ina zazzabi,,ina zazzabi,,2,ha-agent-v1;ipa=ha-g2p
+pharmacy-symptoms.i-have-a-fever,Ina zazzaɓi,,ina zazzabi,,2,ha-agent-v1;fix=Bargery zazza'bi (n.m. any feverishness);fix=ha.wikipedia Zazzaɓi rev 949381 (the article title; Zazzabi redirects to it) and Cutar zazzaɓin cizon sauro rev 910287 (malaria);rule=hooked ɓ;row-corrections-v8;ipa=ha-g2p
 pharmacy-symptoms.i-have-diarrhea,Ina gudawa,,ina ɡudawa,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Ina kantin magani mai buɗe dare duka yake?,,ina kantin maɡani mai buɗe dare duka jake,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.painkiller,maganin ciwo,,maɡanin tʃiwo,,2,ha-agent-v1;ipa=ha-g2p
@@ -136,6 +136,6 @@ police-consulate.may-i-have-a-copy-of-the-report,Zan iya samun kwafin rahoton?,,
 police-consulate.i-will-not-sign-anything-i-cannot-read,Ba zan sa hannu kan abin da ba na iya karantawa ba,,ba zan sa hannu kan abin da ba na ija karantawa ba,will not put my hand (sign) on a thing I cannot read,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.am-i-free-to-go,Zan iya tafiya?,,zan ija tafija,,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.i-do-not-want-to-go-with-you,Ba na son zuwa tare da kai,Ba na son zuwa tare da ke,ba na son zuwa tare da kai,ke to a woman,2,ha-agent-v1;ipa=ha-g2p
-pharmacy-symptoms.i-think-i-have-malaria,Ina tsammanin ina da zazzabin cizon sauro,,ina tsʼammanin ina da zazzabin tʃizon sauro,I think I have fever-of-mosquito-bite -- the standard Hausa descriptive term for malaria,2,ha-disease-v1;ipa=ha-g2p
-pharmacy-symptoms.i-need-a-malaria-test,Ina buƙatar gwajin zazzabin cizon sauro,,ina bukʼatar ɡwadʒin zazzabin tʃizon sauro,,2,ha-disease-v1;ipa=ha-g2p
-pharmacy-symptoms.i-think-i-have-dengue,Ina tsammanin ina da zazzabin dengue,,ina tsʼammanin ina da zazzabin denɡue,"dengue kept as the international clinical name, framed with the same zazzabin-X (fever of X) pattern as malaria",2,ha-disease-v1;ipa=ha-g2p
+pharmacy-symptoms.i-think-i-have-malaria,Ina tsammanin ina da zazzaɓin cizon sauro,,ina tsʼammanin ina da zazzabin tʃizon sauro,I think I have fever-of-mosquito-bite -- the standard Hausa descriptive term for malaria,2,ha-disease-v1;fix=Bargery zazza'bi (n.m. any feverishness);fix=ha.wikipedia Zazzaɓi rev 949381 (the article title; Zazzabi redirects to it) and Cutar zazzaɓin cizon sauro rev 910287 (malaria);rule=hooked ɓ;row-corrections-v8;ipa=ha-g2p
+pharmacy-symptoms.i-need-a-malaria-test,Ina buƙatar gwajin zazzaɓin cizon sauro,,ina bukʼatar ɡwadʒin zazzabin tʃizon sauro,,2,ha-disease-v1;fix=Bargery zazza'bi (n.m. any feverishness);fix=ha.wikipedia Zazzaɓi rev 949381 (the article title; Zazzabi redirects to it) and Cutar zazzaɓin cizon sauro rev 910287 (malaria);rule=hooked ɓ;row-corrections-v8;ipa=ha-g2p
+pharmacy-symptoms.i-think-i-have-dengue,Ina tsammanin ina da zazzaɓin dengue,,ina tsʼammanin ina da zazzabin denɡue,"dengue kept as the international clinical name, framed with the same zazzaɓin-X (fever of X) pattern as malaria",2,ha-disease-v1;fix=Bargery zazza'bi (n.m. any feverishness);fix=ha.wikipedia Zazzaɓi rev 949381 (the article title; Zazzabi redirects to it) and Cutar zazzaɓin cizon sauro rev 910287 (malaria);rule=hooked ɓ;row-corrections-v8;ipa=ha-g2p

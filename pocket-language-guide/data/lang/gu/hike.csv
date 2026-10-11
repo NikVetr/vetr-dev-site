@@ -46,7 +46,7 @@ trail-transport.where-can-we-buy-water,પાણી ક્યાં મળશે
 trail-transport.where-can-we-refill-water,પાણી ભરવાની જગ્યા ક્યાં છે?,,pāṇī bharavānī jagyā kyāṁ chē?,paːɳi bʰəɾʋaːni ɟʌɡjaː kjã cʰeː,where is the place for filling water?,2,gu-agent-v1;ipa=espeak
 trail-transport.is-there-cell-signal-here,અહીં સિગ્નલ આવે છે?,,ahīṁ signal āvē chē?,ɛhĩ sɪɡnʌl aːʋeː cʰeː,does signal come here?,2,gu-agent-v1;ipa=espeak
 trail-transport.do-you-have-a-map,નકશો છે?,,nakaśō chē?,nəkʌʃoː cʰeː,is there a map?,2,gu-agent-v1;ipa=espeak
-trail-transport.how-long-is-the-wait,કેટલી વાર લાગશે?,,kēṭalī vār lāgaśē?,keːʈʌli ʋaːɾ laːɡʌʃeː,how long will it take?,2,gu-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-wait,કેટલી વાર રાહ જોવાની છે?,,kēṭalī vār rāh jōvānī chē?,keːʈʌli ʋaːɾ ɾaːh ɟoːʋaːni cʰeː,"how long is there to wait? -- રાહ જોવી, to wait; the old row, કેટલી વાર લાગશે?, was ""how long will it take?"", a second time-scheduling.how-long-does-it-take",2,gu-agent-v1;fix=Bhagavadgomandal રાહ 7 (स्त्री. વાટ; ... ઢીલ; પ્રતીક્ષા -- waiting);in-pack-frame=board-answers.there-is-no-wait (કોઈ રાહ જોવાની નથી);rule=the row named no wait;row-corrections-v8;ipa=espeak
 trail-warnings.open,ખુલ્લું,,khulluṁ,kʰullũ,open,2,gu-agent-v1;ipa=espeak
 trail-warnings.closed,બંધ,,baṁdh,bʌndʰ,closed,2,gu-agent-v1;ipa=espeak
 trail-warnings.maintenance,મરામત,,marāmat,məɾaːmʌt,repair,2,gu-agent-v1;ipa=espeak

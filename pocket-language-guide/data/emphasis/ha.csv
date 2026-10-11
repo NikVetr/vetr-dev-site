@@ -1,7 +1,7 @@
 concept_id,key
 about-me.i-am-a-doctor,likita
 about-me.i-am-a-nurse,ma'aikacin jinya
-about-me.i-am-a-student,dalibi
+about-me.i-am-a-student,ɗalibi
 about-me.i-am-a-teacher,malami
 about-me.i-am-an-engineer,injiniya
 about-me.i-am-retired,ritaya
@@ -70,7 +70,7 @@ dietary-needs.i-am-vegetarian,nama
 dietary-needs.is-this-halal,halal
 dietary-needs.no-eggs,ƙwai
 dietary-needs.no-meat,nama
-dietary-needs.no-nuts,goro
+dietary-needs.no-nuts,kanju
 dietary-needs.no-peanuts,gyaɗa
 dietary-needs.no-pork,alade
 dietary-needs.no-seafood,kifi | kayan teku
@@ -146,7 +146,7 @@ introductions.i-am-a-tourist,mai yawon shakatawa
 introductions.i-am-traveling-alone,kaɗai
 introductions.this-is-my-friend,abokina
 introductions.we-are-traveling-together,tare
-introductions.what-is-your-name,sunanka
+introductions.what-is-your-name,sunanka | sunanki | suna
 kind-words.i-had-a-wonderful-time,farin ciki
 kind-words.i-like-it-very-much,son
 kind-words.it-is-beautiful-here,kyau
@@ -154,11 +154,11 @@ kind-words.thank-you-for-everything,komai
 kind-words.thank-you-for-your-help,taimako
 kind-words.thank-you-for-your-hospitality,karimci
 kind-words.this-is-delicious,daɗi
-kind-words.you-are-very-kind,mai kirki
+kind-words.you-are-very-kind,aikin kirki | mai kirki
 laundry.can-it-be-ready-today,yau
 laundry.how-much-per-kilo,kowane kilo
 laundry.please-do-not-use-bleach,bleach
-laundry.please-iron-this,bugu
+laundry.please-iron-this,goge
 laundry.please-wash-these-clothes,wanke
 laundry.when-will-it-be-ready,Yaushe
 laundry.where-is-a-laundromat,wurin wanki
@@ -228,7 +228,7 @@ pharmacy-symptoms.i-feel-nauseous,tashin zuciya
 pharmacy-symptoms.i-have-a-burn,ƙuna
 pharmacy-symptoms.i-have-a-cough,tari
 pharmacy-symptoms.i-have-a-cut,yanke
-pharmacy-symptoms.i-have-a-fever,zazzabi
+pharmacy-symptoms.i-have-a-fever,zazzaɓi
 pharmacy-symptoms.i-have-a-headache,kai
 pharmacy-symptoms.i-have-a-rash,ƙurji
 pharmacy-symptoms.i-have-a-sore-throat,maƙogwaro

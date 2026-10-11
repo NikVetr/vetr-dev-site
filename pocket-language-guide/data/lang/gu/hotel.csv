@@ -26,7 +26,7 @@ hotel-requests.another-towel-please,એક વધુ ટુવાલ આપો,,
 hotel-requests.what-time-is-check-out,ચેક-આઉટ કેટલા વાગ્યે છે?,,cēk-āuṭ kēṭalā vāgyē chē?,ceːkaːʊʈ keːʈʌlaː ʋaːɡjeː cʰeː,at how many o clock is check-out?,2,gu-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,વહેલું ચેક-ઇન થઈ શકે?,,vahēluṁ cēk-in thaī śakē?,ʋəheːlũ ceːkɪn tʰʌi ʃʌkeː,can an early check-in be done?,2,gu-agent-v1;ipa=espeak
 hotel-requests.another-night,એક રાત વધુ મળી શકે?,,ēk rāt vadhu maḷī śakē?,eːk ɾaːt ʋʌdʰu mʌɭi ʃʌkeː,may one more night be got?,2,gu-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,લૉકર છે?,,lôkar chē?,lɔkəɾ cʰeː,is there a locker?,2,gu-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,તિજોરી છે?,લૉકર છે?,tijōrī chē?,tɪɟoːɾi cʰeː,"is there a safe? -- તિજોરી, the strongbox for valuables; લૉકર, the old text and the word for attractions-tickets.are-there-lockers, is the second wording",2,"gu-agent-v1;fix=Bhagavadgomandal તિજોરી 4 (રોકડ નાણાં, દાગીના અને દસ્તાવેજ વગેરે કીમતી માલમત્તા રાખવાની મજબૂત લોખંડની પેટી -- the strong iron box for cash, jewellery and documents);rule=distinct-concepts-distinct-text (attractions-tickets.are-there-lockers is લૉકર છે? too);row-corrections-v8;ipa=espeak"
 hotel-requests.another-blanket,એક વધુ ધાબળો આપો,,ēk vadhu dhābaḷō āpō,eːk ʋʌdʰu dʰaːbʌɭoː aːpoː,give one more blanket,2,gu-agent-v1;ipa=espeak
 hotel-requests.wake-up-call,મને {} વાગ્યે ઉઠાડી દો,,manē {} vāgyē uṭhāḍī dō,mʌneː {} ʋaːɡjeː ʊʈʰaːɖi doː,wake me at {} o clock,2,gu-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,ઓરડામાં એક તકલીફ છે,,ōraḍāmāṁ ēk takalīph chē,oːɾɖaːmã eːk təkliːpʰ cʰeː,there is one trouble in the room,2,gu-agent-v1;ipa=espeak

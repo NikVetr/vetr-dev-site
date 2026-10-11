@@ -42,7 +42,7 @@ transit-rides.where-is-the-subway-station,Níbo ni ibùdókọ̀ abẹ́lẹ̀ w
 transit-rides.does-this-bus-train-go-to,Ṣé ọkọ̀ yìí ń lọ sí {}?,,ʃe˥ ɔkɔ˩ ji˩i˥ n̩˥ lɔ si˥ {},,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.what-is-the-next-stop,Kí ni ibùdókọ̀ tó kàn?,,ki˥ ni ibu˩do˥kɔ˩ to˥ kã˩,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.please-tell-me-where-to-get-off,"Ẹ jọ̀wọ́, sọ ibi tí mo ti lè sọ̀kalẹ̀ fún mi",,"ɛ dʒɔ˩wɔ˥, sɔ ibi ti˥ mo ti le˩ sɔ˩kalɛ˩ fũ˥ mi",,2,yo-agent-v1;ipa=yo-g2p
-transit-rides.is-this-direct,Ṣé taara ni?,,ʃe˥ taara ni,,2,yo-agent-v1;ipa=yo-g2p
+transit-rides.is-this-direct,Ṣé tààrà ni?,,ʃe˥ ta˩a˩ra˩ ni,"is it direct? -- tààrà, toned as in quick-directions.go-straight",2,yo-agent-v1;fix=yo.wikipedia Ààrẹ ilẹ̀ Àngólà rev 576964 (kò ní jẹ́ dídìbòyàn tààrà -- it will not be a direct election);in-pack-neighbour=quick-directions.go-straight (Tẹ̀síwájú tààrà);rule=tone marks from a source;row-corrections-v8;ipa=yo-g2p
 transit-rides.do-i-need-to-transfer,Ṣé mo nílò láti yí padà sí ọkọ̀ mìíràn?,,ʃe˥ mo ni˥lo˩ la˥ti ji˥ kpada˩ si˥ ɔkɔ˩ mi˩i˥rã˩,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.is-it-delayed,Ṣé ó pẹ́?,,ʃe˥ o˥ kpɛ˥,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.i-am-in-a-hurry,Mo wà nínú kánjú,,mo wa˩ ni˥nu˥ kã˥dʒu˥,,2,yo-agent-v1;ipa=yo-g2p

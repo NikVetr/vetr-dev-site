@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 social-basics.hello,Habari,Hujambo,habˈari,reply: nzuri,2,sw-agent-v1;ipa=espeak
-social-basics.hello-polite,Shikamoo,Marahaba,ʃˌikamˈoo,to an elder; reply: marahaba,2,sw-agent-v1;ipa=espeak
+social-basics.hello-polite,Hujambo,Shikamoo,huɟˈambo,"are you well? (reply: sijambo) -- shikamoo, the alternative, is only for greeting an elder (reply: marahaba)",2,"sw-agent-v1;fix=TUKI-KKK hujambo (salamu: how are you?), shikamoo (respectful greeting to an elder) and marahaba (response to greeting shikamoo);fix=sw.wikipedia Shikamoo rev 1435118 (salamu inayotumiwa na wadogo kwa wale wanaowazidi umri, hasa wazee -- the young to their elders; otherwise greetings like habari are used);rule=Shikamoo is wrong as the polite hello to a stranger of one's own age or younger; Marahaba in text_alt was the elder's reply, not a hello;row-corrections-v8;ipa=espeak"
 social-basics.good-morning,Habari za asubuhi,,habˈari za ˌasubˈuhi,,2,sw-agent-v1;ipa=espeak
 social-basics.good-evening,Habari za jioni,,habˈari za ɟiˈoni,,2,sw-agent-v1;ipa=espeak
 social-basics.goodbye,Kwaheri,Kwaherini,kwahˈeri,kwaherini to more than one,2,sw-agent-v1;ipa=espeak
@@ -100,7 +100,7 @@ children.stroller,Kigari cha mtoto,Stroller,kiɡˈari tʃa mtˈoto,,1,sw-agent-v
 children.playground,"Je, kuna sehemu ya kuchezea watoto?",,"ɟˈe, kˈuna sehˈemu ja kˌutʃezˈea watˈoto",,2,sw-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Adabu ya Kithai: maliza karibu kila sentensi na khrap ukiwa mwanaume, kha ukiwa mwanamke. Mwanamke anayeuliza swali husema kha kwa toni inayopanda. Safu zilizo hapa hazina neno hili, kwa hiyo liongeze mwenyewe.",,,,2,sw-notes-v1
 board-answers.there-is-no-wait,"Hakuna kusubiri, unaweza kuingia sasa",,"hakˈuna kˌusubˈiri, ˌunawˈeza kˌuiŋɡˈia sˈasa",,2,sw-agent-v1;board-answers-v1;ipa=espeak
-board-answers.none-of-these,Sitaki kusema chochote kati ya hizi,,sitˈaki kusˈema tʃotʃˈote kˈati ja hˈizi,,2,sw-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Ninachotaka kusema hakipo kati ya hizi,,nˌinatʃotˈaka kusˈema hakˈipo kˈati ja hˈizi,what I want to say is not among these -- the board's my-answer-is-not-here; declining to answer is board-answers.i-would-rather-not-say,2,"sw-agent-v1;board-answers-v1;fix=en.wikipedia Swahili grammar rev 1358530625 (present relative SUBJ-na-REL-verb, class 7 relative -cho; locative copula kipo, negative hakipo);fix=TUKI-KKK taka (want) and sema (say);in-pack-frame=communication.i-cannot-make-out-what-you-are-saying (Sipati unachosema);rule=Sitaki kusema chochote kati ya hizi (I do not want to say anything of these) read as a refusal, as the Turkish row did (row-corrections-6);row-corrections-v8;ipa=espeak"
 board-answers.it-is-closed,Tumefunga,,tˌumefˈuŋɡa,we are closed,2,sw-agent-v1;board-answers-v1;matches common-signs.closed;ipa=espeak
 board-answers.we-do-not-have-it,Hatuna hiyo,,hatˈuna hˈijo,,2,sw-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kadi au taslimu?,,kˈadi ˌau taslˈimu,,2,sw-agent-v1;board-answers-v1;ipa=espeak

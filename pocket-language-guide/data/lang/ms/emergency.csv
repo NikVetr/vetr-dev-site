@@ -66,7 +66,7 @@ pharmacy-symptoms.i-feel-dizzy,Saya pening,Kepala saya berputar,sˈajə pˈəne�
 pharmacy-symptoms.ibuprofen,Ibuprofen,Nurofen,ˌibuprˈofen,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,Tekak saya sakit,Radang tekak,tˈəkak sˈajə sˈaket,,2,ms-agent-v1;fix=MABBIM tekak;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.can-i-get-this-medicine-here,Ubat ini ada di sini?,,ˈubat ˈini ˈadə di sˈini,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.bandage,Plaster,Kain kasa,plˈastər,"not pembalut, which is a sanitary pad",2,ms-agent-v1;fix=DBP plaster (3);row-corrections-v1;ipa=espeak
+pharmacy-symptoms.bandage,Perban,Plaster · Kain kasa,pˈɛrban,"bandage -- perban, the cloth for binding a wound; plaster, the old text, is the adhesive strip and moves to text_alt beside gauze, as the Indonesian row (row-corrections-7). Not pembalut alone, which is said for a sanitary pad",2,"ms-agent-v1;fix=DBP plaster (3);row-corrections-v1;fix=Kamus Dewan Edisi Keempat (PRPM) perban (kain pembalut (luka dll): hampir seluruh kepalanya terbungkus ~ putih; ~ kasa perban drpd kain kasa) and plaster 3 (sejalur bahan drpd kain dsb yg berperekat dan berubat utk menampal luka pd kulit);in-pack-frame=the pack's text_alt joiner ( · ), as social-basics.hello-polite;rule=word-for-the-concept, as id row-corrections-v7;row-corrections-v8;ipa=espeak"
 pharmacy-symptoms.the-pain-is-severe,Sakitnya parah,,sakˈetɲə pˈarah,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,Antiseptik,Betadine,ˌantisˈəpteʔ,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,Saya mual,,sˈajə mˈual,,2,ms-agent-v1;ipa=espeak

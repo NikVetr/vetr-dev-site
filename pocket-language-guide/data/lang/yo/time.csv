@@ -8,7 +8,7 @@ time-scheduling.what-is-today-s-date,Ọjọ́ mélòó ni lónìí?,,ɔdʒɔ˥ 
 time-scheduling.what-day-is-it-today,Ọjọ́ kíní ni lónìí?,,ɔdʒɔ˥ ki˥ni˥ ni lo˥ni˩i˥,,2,yo-agent-v1;ipa=yo-g2p
 time-scheduling.what-time-does-it-open,Wákàtí mélòó ni wọ́n máa ṣí i?,,wa˥ka˩ti˥ me˥lo˩o˥ ni wɔ̃˥ ma˥a ʃi˥ i,,2,yo-agent-v1;ipa=yo-g2p
 time-scheduling.what-time-does-it-close,Wákàtí mélòó ni wọ́n máa ti i?,,wa˥ka˩ti˥ me˥lo˩o˥ ni wɔ̃˥ ma˥a ti i,,2,yo-agent-v1;ipa=yo-g2p
-time-scheduling.how-long-does-it-take,Ìgbà mélòó ni yóò gbà?,,i˩ɡba˩ me˥lo˩o˥ ni jo˥o˩ ɡba˩,,2,yo-agent-v1;ipa=yo-g2p
+time-scheduling.how-long-does-it-take,Àsìkò mélòó ni yóò gbà?,,a˩si˩ko˩ me˥lo˩o˥ ni jo˥o˩ ɡba˩,"how long will it take? -- àsìkò mélòó, as the pack's other how-long rows; ìgbà mélòó is how many times (pharmacy-symptoms.how-many-times-a-day)",2,"yo-agent-v1;fix=Yorùbá Yé Mi (COERLL, UT Austin) p. 278 (Àsìkò mélòó ni a le rí -- the tones of àsìkò mélòó);in-pack-frame=directions.how-long-on-foot (Àsìkò mélòó ni …), trail-transport.how-long-is-the-wait, hiking-parks.how-long-to-the-summit, border-customs.how-long-may-i-stay;rule=Ìgbà mélòó is the pack's how-many-times;row-corrections-v8;ipa=yo-g2p"
 time-words.today,òní,,o˩ni˥,,2,yo-agent-v1;ipa=yo-g2p
 time-words.tomorrow,ọ̀la,,ɔ˩la,,2,yo-agent-v1;ipa=yo-g2p
 time-words.yesterday,àná,,a˩na˥,,2,yo-agent-v1;ipa=yo-g2p

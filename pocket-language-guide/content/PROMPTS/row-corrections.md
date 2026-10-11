@@ -366,3 +366,51 @@ still in the sentence (the validator fails one that is not) and list it.
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## An eighth pass: what the seventh pass and the fifth key-words batch saw
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-8.md`, and keys in
+`data/emphasis/<code>.csv` follow any word they name that changes, as in the seventh pass.
+
+- **Hausa rows said only to a man.** Hausa declares the listener axis, yet six board rows
+  address a man with no other wording: `can-you-help-me` (`ka`), `do-you-speak-english`
+  (`Kana`), `please-write-it-down` (`ka`), `what-is-your-name` (`sunanka`),
+  `nice-to-meet-you` (`kai`), `you-are-very-kind` (`Kai`). Reword each the way the fifth
+  pass did the street boards -- a neutral base row where Hausa has one (the plural of
+  respect, as the pack does elsewhere), and the forms to a man and to a woman as listener
+  variants in `variants.csv`. Also: `which-exit` has `which-gate`'s text; ironing is
+  usually *guga*, not *bugu*; `no-nuts` lists *goro*, the kola nut; fever is *zazzaɓi* and
+  a student *ɗalibi* (check the hooked letters against Bargery or the Hausa Wikipedia, in
+  every row that writes them).
+- **Amharic `ዪህች`**: four family rows (wife, daughter, mother, sister) write U+12EA where
+  the demonstrative is `ይህች` (U+12ED), eight occurrences; `you-are-very-kind` is in the
+  third person; `nice-to-meet-you` has the words of `i-like-it-very-much`.
+- **Hebrew pointing the seventh pass saw**: `sim-data.how-much-data-is-included` pointed
+  and romanised *kolul* (כָּלוּל, *kalul*); `slang.lets-go` *nizuz* (נָזוּז, *nazuz*);
+  `lost-rescue.i-sprained-my-ankle` pointed as a nif'al that cannot take את (נָקַעְתִּי).
+  The text cells are right; the pointing, romanisation and IPA follow.
+- **Swahili**: `board-answers.none-of-these` reads as a refusal to answer (the Turkish
+  case); `please-call-my-emergency-contact` can read as the emergency services' number;
+  `hello-polite` *Shikamoo* is said only to an elder.
+- **Yoruba**: ironing is usually *lọ aṣọ*; `how-long-does-it-take` uses *Ìgbà mélòó*, which
+  the pack uses for "how many times"; `is-this-direct` writes *taara* where go-straight
+  writes *tààrà*.
+- **Javanese** (a krama pack): ngoko *dibayar* in `where-do-i-pay-the-fare` and *utawa* in
+  `card-or-cash`; *AC-ipun* / *AC-nipun*, *sedhèrèk* / *sedherek*, *kangge* / *kanggé*,
+  *kémawon* / *kemawon*, *saé* / *sae* written both ways -- bring each into the pack's own
+  system; and Indonesian's four (`vegetarian murni`, `Sugeng siyang`, *Plèster*, the
+  conditions card's "list") as the seventh pass settled them for id.
+- **Malay**: `outdoors.is-it-safe-to-swim-here` *Selamat berenang di sini?* reads first as
+  "happy swimming"; and id's four, as above.
+- **Gujarati**: four replies worded as obligation (`… પડશે`), as Hindi's were;
+  `how-long-is-the-wait` has no word for waiting; `i-can-pay-for-fuel` *આપી શકતો/શકતી
+  છું* where present ability is *આપી શકું છું* (which needs no variant); the in-room safe
+  and the lockers are both *લૉકર*; `which-exit` is "which door?".
+- **`okay-can` printing as `okay-fine`**: after the seventh pass the two rows have the same
+  text in hu, hy, ka, ta, te and uz, and both print on the sheet. Give `okay-fine` its own
+  wording where the language has one ("all right", "fine"), from a dictionary of record,
+  and say where it has none.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.

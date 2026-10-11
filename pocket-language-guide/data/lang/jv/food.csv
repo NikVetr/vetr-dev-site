@@ -6,7 +6,7 @@ dietary-needs.less-spicy,Pedhesipun sekedhik kémawon,,pəɖəˈsipʊn səkəˈ�
 dietary-needs.no-peanuts,Tanpa kacang tanah,,ˈtanpɔ ˈkatʃaŋ ˈtanah,kacang alone is any bean or nut,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.no-nuts,Tanpa sedaya kacang-kacangan,,ˈtanpɔ səˈdɔjɔ katʃaŋkaˈtʃaŋan,,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.no-seafood,Tanpa ulam seganten,Tanpa urang lan kerang,ˈtanpɔ ˈulam səˈɡantən,ulam is the krama word for fish,2,jv-agent-v1;ipa=jv-g2p
-dietary-needs.i-am-vegetarian,Kula vegetarian murni,"Tanpa daging, ayam, ulam",ˈkulɔ fəɡətaˈrian ˈmʊrni,"murni signals strict, not less meat",2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-am-vegetarian,Kula vegetarian,"Tanpa daging, ayam, ulam",ˈkulɔ fəɡətaˈrian,"I am vegetarian -- vegetarian already means no meat; murni (pure), the old row's last word, read as the stricter diet of Kula vegan beside it, as the Indonesian row was found to (row-corrections-7). text_alt spells the three out",2,"jv-agent-v1;fix=jv.wikipedia Vegetarian rev 1737496 (Vegetarian yaiku istilah kanggo manungsa kang ora mangan utawa anti konsumsi daging);in-pack-frame=dietary-needs.i-am-vegan (Kula vegan);rule=distinct-concepts-distinct-text, as id row-corrections-v7;row-corrections-v8;ipa=jv-g2p"
 dietary-needs.i-am-vegan,Kula vegan,"Tanpa daging, tigan, susu",ˈkulɔ fəˈɡan,,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.i-do-not-eat,Kula mboten nedha {},,ˈkulɔ ˈmbɔtən nəˈɖɔ {},nedha is the krama word for eating,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.i-am-allergic-to,Kula alergi {},,ˈkulɔ alərˈɡi {},,2,jv-agent-v1;ipa=jv-g2p

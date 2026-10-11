@@ -4,7 +4,7 @@ dietary-needs.no-eggs,Babu ƙwai,,babu kʼwai,,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.not-spicy,Ba mai yaji ba,,ba mai jadʒi ba,not that-has spice,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.less-spicy,Rage yaji,,raɡe jadʒi,reduce the spice,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.no-peanuts,Babu gyaɗa,,babu ɡjaɗa,,2,ha-agent-v1;ipa=ha-g2p
-dietary-needs.no-nuts,Babu gyaɗa ko goro,,babu ɡjaɗa ko ɡoro,"no peanuts or kola-nuts -- Hausa has no single generic word covering every tree nut a traveller might mean; the two named foods are sourced and correct, so the gap is coverage rather than confidence",2,ha-agent-v1;ipa=ha-g2p
+dietary-needs.no-nuts,Babu gyaɗa ko kanju,,babu ɡjaɗa ko kandʒu,"no groundnuts or cashews -- Hausa has no general word for a nut, so the row names the two its kitchens use; goro, written here before, is the kola nut",2,"ha-agent-v1;fix=R. M. Newman An English-Hausa Dictionary (Yale 1990; ERIC ED356616) s.v. nut (hard-shelled fruit, no gen'l term, see specific nouns), cashew (kanju m, yazawa f), kolanut (goro m) and groundnut (gyaɗa f);fix=ha.wikipedia Goro rev 789240 (Goro, suna ne na ɗan itaciya -- the kola tree);row-corrections-v8;ipa=ha-g2p"
 dietary-needs.no-seafood,Babu kifi ko kayan teku,,babu kifi ko kajan teku,no fish or sea-goods,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.i-am-vegetarian,Ba na cin nama,,ba na tʃin nama,I do not eat meat -- Hausa has no separate word for vegetarian,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.i-am-vegan,Ba na cin wani abu daga dabba,,ba na tʃin wani abu daɡa dabba,I do not eat anything from an animal,2,ha-agent-v1;ipa=ha-g2p
