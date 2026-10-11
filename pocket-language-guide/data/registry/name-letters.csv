@@ -203,7 +203,7 @@ en,Latn,aw,ɔ,Shawn -- Wikipedia: English orthography
 en,Latn,ar,ɑ r,"Charles, Martin; Mary and Sarah have ɛr -- Wikipedia: English orthography"
 en,Latn,er,ə r,"Peter, Jennifer -- Wikipedia: English orthography"
 en,Latn,or,ɔ r,"Jordan, Victoria -- Wikipedia: English orthography"
-en,Latn,ah,ə,"final -ah: Sarah, Hannah, Noah -- Wikipedia: English orthography"
+en,Latn,ah$,ə,"final -ah: Sarah, Hannah, Noah; Ahmed keeps its a -- Wikipedia: English orthography"
 en,Latn,ge,dʒ e,"soft g: Gemma, Angela; Gertrude reads ɡ -- Wikipedia: English orthography"
 en,Latn,geor,dʒ ɔ r,"George, Georgia: the e only softens the g -- Wikipedia: English orthography"
 en,Latn,gi,dʒ ɪ,"Gillian, Virginia; Gilbert reads ɡ -- Wikipedia: English orthography"
@@ -212,6 +212,16 @@ en,Latn,gh,,"silent: Hugh, Leigh, Vaughan -- Wikipedia: English orthography"
 en,Latn,igh,aɪ,"Dwight, Knight -- Wikipedia: English orthography"
 en,Latn,ohn,ɑ n,"John, Johnson: the h is silent -- Wikipedia: English orthography"
 en,Latn,chael,k ə l,Michael; Rachael reads tʃ and is rarer -- Wikipedia: English orthography
+en,Latn,e$,,"silent final e: Jane, Kate, Mike, Steve; Chloe, Jesse lose their last vowel -- Wikipedia: English orthography (word-final e silent: smile, discipline)"
+en,Latn,es$,z,"the silent e stays silent before s: Charles, Jones, Miles; Agnes, Moses read ɪz -- Wikipedia: English orthography (recites)"
+en,Latn,ames$,eɪ m z,"James: a before consonant + silent e is eɪ (mate, gave) -- Wikipedia: English orthography"
+en,Latn,ce$,s,"Grace, Bruce, Florence: the e only softens the c -- Wikipedia: English orthography"
+en,Latn,ge$,dʒ,"George, Paige: the e only softens the g -- Wikipedia: English orthography"
+en,Latn,as$,ə s,"unstressed final -as: Thomas, Lucas, Nicholas, Douglas -- Wikipedia: English orthography (unstressed a /ə/)"
+en,Latn,^thom,t ɑ m,"Thomas, Thompson: th is t -- Wikipedia: Pronunciation of English ⟨th⟩"
+en,Latn,ary$,ɛ r i,"Mary, Gary, Rosemary: a before r + vowel is ɛr (vary) -- Wikipedia: English orthography"
+en,Latn,arah$,ɛ r ə,"Sarah, Tarah; Farah reads ɑr -- Wikipedia: English orthography"
+en,Latn,^eli,ɪ l ɪ,"unstressed first e: Elizabeth, Elijah, Eliza, Elias; Elinor and Eliot read ɛ -- Wikipedia: English orthography (unstressed e /ɪ/: express, believe)"
 de,Latn,j,j,"German j is a glide: Jonas, Jürgen -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
 de,Latn,w,v,Wolfgang -- Duden Aussprachewörterbuch; Wikipedia: German orthography
 de,Latn,z,ts,"Heinz, Lorenz -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
@@ -225,6 +235,8 @@ de,Latn,ie,i,"Dieter, Sophie -- Duden Aussprachewörterbuch; Wikipedia: German o
 de,Latn,ch,x,"Heinrich, Joachim; [ç] after front vowels, which the keyboard writes x -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
 de,Latn,ng,ŋ,"Wolfgang, Inge -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
 de,Latn,dt,t,"Schmidt, Brandt -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,^st,ʃ t,"st and sp begin a word as ʃt ʃp: Stefan, Stephanie; inside it, Sebastian and Christian keep s -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,^sp,ʃ p,"Spengler, Sprenger -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
 fr,Latn,j,ʒ,"Jean, Julien -- Académie française; Wikipedia: French orthography"
 fr,Latn,ge,ʒ ə,soft g: Geneviève -- Wikipedia: French orthography
 fr,Latn,gé,ʒ e,Gérard -- Wikipedia: French orthography
@@ -262,6 +274,17 @@ fr,Latn,ier,j e,"Olivier, Didier -- Wikipedia: French orthography"
 fr,Latn,ierre,j ɛ r,Pierre -- Wikipedia: French orthography
 fr,Latn,elle,ɛ l,"Isabelle, Michelle -- Wikipedia: French orthography"
 fr,Latn,ette,ɛ t,"Juliette, Colette -- Wikipedia: French orthography"
+fr,Latn,o,ɔ,"o is ɔ except as a word's last sound or before a z sound: Thomas, Nicolas, Simon, Olivier; Joseph and Rose read o -- Wikipedia: French orthography"
+fr,Latn,o$,o,"final o: Hugo, Léo, Bruno -- Wikipedia: French orthography"
+fr,Latn,ot$,o,"the t is silent, so the o is final: Margot -- Wikipedia: French orthography"
+fr,Latn,e$,,"final e muet is silent: Marie, Nathalie, Claire -- Wikipedia: French orthography"
+fr,Latn,es$,,"Charles, Jacques, Jules, Gilles -- Wikipedia: French orthography"
+fr,Latn,s$,,"final consonants d p s t x z are silent: Thomas, Nicolas, Louis, Lucas; Alexis, Iris, Boris sound theirs -- Wikipedia: French orthography"
+fr,Latn,t$,,"Laurent, Vincent, Benoît, Robert -- Wikipedia: French orthography"
+fr,Latn,ès$,ɛ s,"the s of -ès is sounded in names: Agnès [aɲɛs], Inès -- Wikipedia: Agnès Varda"
+fr,Latn,ïs$,i s,Anaïs [anais] -- Wikipedia: Anaïs Nin
+fr,Latn,ce$,s,"Florence, Clémence, Alice -- Wikipedia: French orthography"
+fr,Latn,ge$,ʒ,"Serge, Solange -- Wikipedia: French orthography"
 es,Latn,j,x,Spanish j is the velar fricative: Juan -- RAE Ortografía (2010); Wikipedia: Spanish orthography
 es,Latn,ge,x e,"Jorge, Ángel -- RAE Ortografía; Wikipedia: Spanish orthography"
 es,Latn,gi,x i,Gisela -- RAE Ortografía; Wikipedia: Spanish orthography
@@ -315,6 +338,14 @@ pt,Latn,x,ʃ,"Xavier, Alexandre -- Wikipedia: Portuguese orthography"
 pt,Latn,é,ɛ,"open e: José, André -- Wikipedia: Portuguese orthography"
 pt,Latn,ó,ɔ,open o -- Wikipedia: Portuguese orthography
 pt,Latn,ou,o,"Sousa, Lourenço -- Wikipedia: Portuguese phonology"
+pt,Latn,o$,u,"unstressed final o is u, in Brazil and Portugal: Paulo, Antônio, Francisco -- Wikipedia: Portuguese phonology"
+pt,Latn,os$,u s,"final also before a word-final s: Carlos, Marcos -- Wikipedia: Portuguese phonology"
+pt,Latn,e$,i,"unstressed final e is i in Brazil ([ɨ] in Portugal): Felipe, Guilherme -- Wikipedia: Portuguese phonology"
+pt,Latn,es$,i s,"Gomes, Fernandes, Soares -- Wikipedia: Portuguese phonology"
+pt,Latn,ce$,s i,"Alice, Clarice -- Wikipedia: Portuguese phonology"
+pt,Latn,ge$,ʒ i,Jorge -- Wikipedia: Portuguese phonology
+pt,Latn,l$,w,"final l is w in most of Brazil: Gabriel, Rafael, Daniel -- Wikipedia: Portuguese phonology"
+pt,Latn,^r,h,"initial r is the strong r, [h] or [x] in Brazil ([ʁ] in Portugal): Rafael, Ricardo -- Wikipedia: Portuguese phonology"
 nl,Latn,g,x,"Dutch g is a fricative: Geert, Gerrit -- Taalunie (taaladvies.net); Wikipedia: Dutch orthography"
 nl,Latn,ch,x,Dutch ch: Michiel -- Taalunie; Wikipedia: Dutch orthography
 nl,Latn,sch,s x,Schouten -- Taalunie; Wikipedia: Dutch orthography
@@ -333,6 +364,8 @@ nl,Latn,ie,i,"Pieter, Lieke -- Taalunie; Wikipedia: Dutch orthography"
 nl,Latn,ou,aʊ,Wouter -- Taalunie; Wikipedia: Dutch orthography
 nl,Latn,au,aʊ,Claus -- Taalunie; Wikipedia: Dutch orthography
 nl,Latn,ng,ŋ,de Jong -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,e$,ə,"a word-final single e is almost always schwa: Sanne, Femke, Lieke -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,er$,ə r,"unstressed final -er: Pieter, Wouter, Jasper -- Taalunie; Wikipedia: Dutch orthography"
 pl,Latn,c,ts,Polish c: Cezary -- Rada Języka Polskiego / PWN; Wikipedia: Polish orthography
 pl,Latn,ce,ts e,Cecylia -- Wikipedia: Polish orthography
 pl,Latn,ci,tʃ i,"[tɕ], nearest as cz: Marcin -- Wikipedia: Polish orthography"
@@ -407,18 +440,21 @@ ro,Latn,â,ə,"[ɨ], nearest the keyboard's schwa, which a Romanian reader write
 ro,Latn,î,ə,"[ɨ], as â: Înger -- DOOM; Wikipedia: Romanian alphabet"
 ro,Latn,io,j o,"i before a vowel is a glide: Ion, Ioana -- DOOM; Wikipedia: Romanian alphabet"
 ro,Latn,iu,j u,"Iulia, Iulian -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,ai$,a j,"final ai is the diphthong [aj]: Mihai, Nicolai -- DOOM; Wikipedia: Romanian phonology (mai /maj/)"
+ro,Latn,ei$,e j,"final ei is [ej]: Andrei, Matei -- DOOM; Wikipedia: Romanian phonology (trei /trej/)"
 sv,Latn,j,j,"Swedish j is a glide: Johan, Jonas -- Svenska skrivregler (Språkrådet); Wikipedia: Swedish alphabet"
 sv,Latn,ng,ŋ,"Ingrid, Inga -- Språkrådet; Wikipedia: Swedish phonology"
 sv,Latn,rs,ʃ,"r + s fuse to [ʂ] in central Swedish, nearest as sj: Lars, Andersson -- Wikipedia: Swedish phonology"
-sv,Latn,ge,j e,soft g before e i y ä ö: Gerda -- Språkrådet; Wikipedia: Swedish alphabet
-sv,Latn,gi,j i,Birgitta -- Wikipedia: Swedish alphabet
-sv,Latn,gö,j ø,Göran -- Wikipedia: Swedish alphabet
+sv,Latn,^ge,j e,"soft g before e i y ä ö, at a word's start: Gerda; inside a word g stays hard (Tage, Helge), softening there is Norrland dialect -- Språkrådet; Wikipedia: Swedish alphabet; sv.wikipedia: Mjuk vokal"
+sv,Latn,^gi,j i,Gisela -- Wikipedia: Swedish alphabet
+sv,Latn,rgi,r j i,"Birgitta, Birgit: soft g in the stressed syllable after r -- Wikipedia: Swedish alphabet"
+sv,Latn,^gö,j ø,"Göran, Göte -- Wikipedia: Swedish alphabet"
 sv,Latn,y,y,"Ylva, Sylvia -- Wikipedia: Swedish alphabet"
 sv,Latn,sj,ʃ,"[ɧ], nearest as sh: Sjöberg -- Wikipedia: Swedish phonology"
 sv,Latn,kj,ʃ,[ɕ]: Kjell -- Wikipedia: Swedish phonology
 sv,Latn,tj,ʃ,[ɕ]: Tjörn -- Wikipedia: Swedish phonology
-sv,Latn,ke,ʃ e,soft k before e i y ä ö: Kerstin -- Wikipedia: Swedish alphabet
-sv,Latn,ki,ʃ i,Kicki -- Wikipedia: Swedish alphabet
+sv,Latn,^ke,ʃ e,"soft k before e i y ä ö, at a word's start: Kerstin; Viking, Erika keep k (cykel [ˈsʏkel]) -- Wikipedia: Swedish alphabet; sv.wikipedia: Mjuk vokal"
+sv,Latn,^ki,ʃ i,Kicki -- Wikipedia: Swedish alphabet
 fi,Latn,j,j,"Finnish j is a glide: Juha, Jukka -- Kotus (Kotimaisten kielten keskus); Wikipedia: Finnish orthography"
 fi,Latn,ä,a,"[æ], nearer a than e to most listeners: Päivi, Mäkinen -- Kotus; Wikipedia: Finnish phonology"
 fi,Latn,y,y,"Yrjö, Pyry -- Kotus; Wikipedia: Finnish orthography"
@@ -462,6 +498,7 @@ vi,Latn,ó,ɔ,o under the sharp tone -- Wikipedia: Vietnamese alphabet
 vi,Latn,õ,ɔ,o under the tilde tone -- Wikipedia: Vietnamese alphabet
 vi,Latn,â,ə,Vietnamese â [ə]: Tuấn -- Wikipedia: Vietnamese alphabet
 vi,Latn,uy,w i,"Nguyễn, Huy, Thúy -- Wikipedia: Vietnamese phonology"
+vi,Latn,^nh,n j,"initial nh is [ɲ], nearest as n + y: Nhung, Nhi -- Wikipedia: Vietnamese alphabet"
 fil,Latn,ng,ŋ,"Filipino ng: Bong, Luningning -- Komisyon sa Wikang Filipino, Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
 fil,Latn,nge,n dʒ e,"Spanish- and English-derived names: Angel, Angelica, Evangeline -- KWF Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
 fil,Latn,qu,k,"Spanish-derived names: Enrique, Quezon -- KWF Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
@@ -494,7 +531,7 @@ uz,Latn,y,j,Gʻayrat -- Wikipedia: Uzbek alphabet
 ,Cyrl,в,v,
 ,Cyrl,г,ɡ,Russian; Ukrainian reads h
 ,Cyrl,д,d,
-,Cyrl,е,e,"after a consonant; word-initial Е is je (Елена), which needs an anchor"
+,Cyrl,е,e,after a consonant or at a word's start; Russian reads ^е as jɪ (ru row)
 ,Cyrl,ае,a j e,"е after a vowel is je: Николаев, Николаевич -- Wikipedia: Russian alphabet"
 ,Cyrl,ее,e j e,"Алексеев, Сергеевна -- Wikipedia: Russian alphabet"
 ,Cyrl,ие,i j e,Wikipedia: Russian alphabet
@@ -530,6 +567,7 @@ uz,Latn,y,j,Gʻayrat -- Wikipedia: Uzbek alphabet
 ,Cyrl,і,i,"Ukrainian, Belarusian: Іван -- Wikipedia: Ukrainian alphabet"
 ,Cyrl,ї,j i,Ukrainian: Ївга -- Wikipedia: Ukrainian alphabet
 ,Cyrl,ґ,ɡ,Ukrainian: Ґалаґан -- Wikipedia: Ukrainian alphabet
+ru,Cyrl,^е,j ɪ,"word-initial Е is iotated, and reduced in the unstressed first syllable of nearly every Е- name: Елена, Екатерина, Евгений, Егор; Ева reads je -- Wikipedia: Russian alphabet; Vowel reduction in Russian (ежи [jɪˈʐɨ])"
 uk,Cyrl,г,h,"Ukrainian г is [ɦ], nearest as h: Ольга, Сергій -- Український правопис (2019); Wikipedia: Ukrainian alphabet"
 uk,Cyrl,и,ɪ,"Ukrainian и is [ɪ]: Дмитро, Микола -- Український правопис; Wikipedia: Ukrainian alphabet"
 uk,Cyrl,щ,ʃ tʃ,Ukrainian щ is [ʃtʃ]: Щербак -- Український правопис; Wikipedia: Ukrainian alphabet

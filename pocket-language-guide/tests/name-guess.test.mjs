@@ -58,6 +58,13 @@ test('the shipped table reads j as a Spanish reader does, and a doubled letter o
   assert.equal(guessSounds('Matteo', table, 'it', 'Latn'), 'matteo');
 });
 
+test('the shipped table reads German st as ʃt only where it begins a word', async () => {
+  const rel = 'data/registry/name-letters.csv';
+  const table = parseTable(await readFile(rel, 'utf8'), rel);
+  assert.equal(guessSounds('Stefan', table, 'de', 'Latn'), 'ʃtefan');
+  assert.equal(guessSounds('Sebastian', table, 'de', 'Latn'), 'sebastian');
+});
+
 test('the shipped table reads only into the keyboard\'s own sounds, for scripts and languages there are', async () => {
   const { SOUNDS } = await import('../ui/board-menu.js');
   const read = async (/** @type {string} */ rel) => parseTable(await readFile(rel, 'utf8'), rel);
