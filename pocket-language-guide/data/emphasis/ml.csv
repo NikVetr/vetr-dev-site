@@ -1,0 +1,312 @@
+concept_id,key
+about-me.i-am-a-doctor,ഡോക്ടറാണ്
+about-me.i-am-a-nurse,നഴ്സാണ്
+about-me.i-am-a-student,വിദ്യാർത്ഥിയാണ്
+about-me.i-am-a-teacher,ടീച്ചറാണ്
+about-me.i-am-an-engineer,എഞ്ചിനീയറാണ്
+about-me.i-am-retired,വിരമിച്ചു
+about-me.i-have-my-own-business,സ്വന്തം വ്യാപാരം
+about-me.i-work-in-an-office,ഓഫീസിൽ
+accessibility.step-free,പടികളില്ലാത്ത
+air-travel.i-would-like-a-window-seat,ജനാലയുടെ
+air-travel.i-would-like-an-aisle-seat,ഇടനാഴിയുടെ
+air-travel.my-luggage-did-not-arrive,വന്നില്ല
+air-travel.where-is-check-in,ചെക്ക് ഇൻ
+air-travel.where-is-the-security-check,സുരക്ഷാ പരിശോധന
+attractions-tickets.are-there-lockers,ലോക്കർ
+attractions-tickets.could-you-take-a-photo-for-us,ഞങ്ങൾക്കായി
+attractions-tickets.do-i-need-a-reservation,ബുക്ക്
+attractions-tickets.may-i-take-photos,ഫോട്ടോ
+attractions-tickets.what-is-the-latest-entry-time,അവസാന പ്രവേശനം
+attractions-tickets.where-can-i-buy-tickets,ടിക്കറ്റ്
+board-answers.after-food,ശേഷം
+board-answers.before-food,മുൻപ്
+board-answers.can-you-walk,നടക്കാൻ
+board-answers.help-is-coming,സഹായം
+board-answers.how-many,എത്ര
+board-answers.i-am-calling-an-ambulance,ആംബുലൻസ്
+board-answers.i-am-calling-the-police,പോലീസിനെ
+board-answers.i-do-not-have-a-phone,ഫോൺ
+board-answers.i-will-check,നോക്കിയിട്ട്
+board-answers.i-will-find-someone,ഒരാളെ | കണ്ടെത്തും
+board-answers.i-will-show-you,കാണിക്കാം
+board-answers.i-will-write-it-down,എഴുതും
+board-answers.i-would-rather-not-say,പറയാൻ താൽപ്പര്യമില്ല
+board-answers.it-is-over-there,അവിടെ
+board-answers.my-name-is-blank,എന്റെ
+board-answers.none-of-these,ഇവയിൽ
+board-answers.not-possible,സാധ്യമല്ല
+board-answers.only-for-customers,ഉപഭോക്താക്കൾക്ക്
+board-answers.pay-on-board,വാഹനത്തിൽ
+board-answers.prescription-only,കുറിപ്പടി
+board-answers.see-a-doctor,ഡോക്ടറെ
+board-answers.stay-here,ഇവിടെ ഇരിക്കുന്നത്
+board-answers.the-hospital-is-close,അടുത്താണ്
+board-answers.there-is-no-wait,കാത്തിരിപ്പ് വേണ്ട
+board-answers.what-is-your-name,പേര്
+board-answers.where-does-it-hurt,വേദനയുണ്ട്
+border-customs.here-is-my-passport,പാസ്പോർട്ടാണ്
+border-customs.i-am-here-for-business,ബിസിനസ്
+border-customs.i-am-visiting-family,കുടുംബത്തെ
+border-customs.i-have-a-connecting-flight,അടുത്ത വിമാനമുണ്ട്
+border-customs.where-do-i-collect-my-baggage,എടുക്കണം
+color-size-returns.do-you-have-a-bag,കവർ
+color-size-returns.do-you-have-another-size,സൈസ്
+common-signs.no-photography,എടുക്കരുത്
+communication.can-you-help-me,സഹായിക്കാമോ
+communication.do-you-speak-english,നിങ്ങൾക്ക്
+communication.i-do-not-speak-this-language,അറിയില്ല
+communication.i-do-not-understand,മനസ്സിലാകില്ല
+communication.please-speak-more-slowly,പതുക്കെ
+dietary-needs.does-it-contain-fish-stock,മീൻ ചാറ്
+dietary-needs.does-it-contain-pork-fat,പന്നിക്കൊഴുപ്പ്
+dietary-needs.does-it-contain-pork-stock,പന്നിയെല്ലിന്റെ ചാറ്
+dietary-needs.i-am-vegan,"പാൽ, തൈര്, നെയ്യ്, മുട്ട"
+dietary-needs.i-am-vegetarian,സസ്യാഹാരിയാണ്
+dietary-needs.is-this-halal,ഹലാൽ
+dietary-needs.no-eggs,മുട്ട
+dietary-needs.no-meat,മാംസം
+dietary-needs.no-nuts,ഉണക്കപ്പഴം
+dietary-needs.no-peanuts,കപ്പലണ്ടി
+dietary-needs.no-pork,പന്നിമാംസം
+dietary-needs.no-seafood,"മീൻ, ചെമ്മീൻ, ഞണ്ട്"
+dietary-needs.no-sesame,എള്ള്
+directions.can-i-walk-there,പോകാമോ
+directions.can-you-show-me-the-way,വഴി
+directions.how-long-on-foot,എത്ര സമയം
+directions.please-show-me-on-the-map,ഭൂപടത്തിൽ
+emergency-medical.i-am-bleeding-badly,രക്തം
+emergency-medical.i-am-having-a-severe-allergic-reaction,തീവ്ര അലർജി
+emergency-medical.i-am-injured,പരിക്കുണ്ട്
+emergency-medical.i-cannot-breathe,ശ്വാസം
+emergency-medical.i-feel-unwell,വയ്യ
+emergency-medical.i-have-chest-pain,നെഞ്ചുവേദനയുണ്ട്
+emergency-medical.i-have-travel-insurance,ഇൻഷുറൻസ്
+emergency-medical.i-need-a-doctor,ഡോക്ടർ
+emergency-medical.i-think-a-bone-is-broken,എല്ല് പൊട്ടിയെന്ന്
+emergency-medical.it-hurts-here,വേദനയുണ്ട്
+emergency-medical.please-call-an-ambulance,ആംബുലൻസ്
+emergency-medical.please-call-my-emergency-contact,അത്യാഹിത നമ്പറിൽ
+emergency-medical.please-take-me-to-a-hospital,ആശുപത്രിയിൽ
+emergency-medical.this-is-an-emergency,അത്യാഹിതമാണ്
+emergency-medical.this-person-is-unconscious,ബോധമില്ല
+emergency-medical.where-is-the-nearest-hospital,അടുത്തുള്ള
+family-intros.this-is-my-brother,ചേട്ടനാണ്
+family-intros.this-is-my-colleague,സഹകാരിയാണ്
+family-intros.this-is-my-daughter,മകളാണ്
+family-intros.this-is-my-father,അച്ഛനാണ്
+family-intros.this-is-my-husband,ഭർത്താവാണ്
+family-intros.this-is-my-mother,അമ്മയാണ്
+family-intros.this-is-my-partner,പങ്കാളിയാണ്
+family-intros.this-is-my-sister,ചേച്ചിയാണ്
+family-intros.this-is-my-son,മകനാണ്
+family-intros.this-is-my-wife,ഭാര്യയാണ്
+food-ordering.i-want-this,വേണം
+food-ordering.is-a-table-available,ടേബിൾ
+food-ordering.is-this-vegetarian,സസ്യാഹാരമാണോ
+food-ordering.table-for-two,രണ്ടു പേർക്ക്
+food-ordering.what-do-you-recommend,നല്ലത്
+hiking-parks.how-long-to-the-summit,കൊടുമുടിയിലേക്ക്
+hiking-parks.how-long-to-the-viewpoint,വ്യൂ പോയിന്റിലേക്ക്
+hiking-parks.is-this-trail-suitable-for-beginners,തുടക്കക്കാർക്ക്
+hiking-parks.where-is-the-trailhead,പാതയുടെ തുടക്കം
+hiking-parks.which-route-is-easier,എളുപ്പം
+hitchhiking.can-you-give-me-a-ride,കൂടെ കൊണ്ടുപോകാമോ
+hitchhiking.i-can-pay-for-fuel,പെട്രോൾ
+hitchhiking.i-only-need-to-go-to-the-next-town,അടുത്ത പട്ടണം
+hitchhiking.is-there-room-for-two,രണ്ട് പേർക്ക് സ്ഥലം
+hitchhiking.thank-you-for-the-ride,നന്ദി
+hitchhiking.where-are-you-going,എവിടേക്കാണ്
+hotel-basics.are-any-rooms-available,റൂം
+hotel-basics.how-much-per-night,രാത്രിക്ക്
+hotel-basics.i-have-a-reservation,ബുക്ക്
+hotel-basics.i-would-like-a-non-smoking-room,പുകവലിയില്ലാത്ത
+hotel-basics.i-would-like-a-quiet-room,ശാന്തമായ
+hotel-basics.is-breakfast-included,പ്രഭാതഭക്ഷണം
+hotel-basics.is-there-a-washing-machine,വാഷിംഗ് മെഷീൻ
+hotel-basics.is-there-air-conditioning,എ.സി.
+hotel-basics.is-wi-fi-free,വൈ-ഫൈ
+hotel-basics.may-i-see-the-room,കാണാമോ
+hotel-requests.another-blanket,പുതപ്പ്
+hotel-requests.another-night,ഒരു രാത്രി കൂടി
+hotel-requests.another-towel-please,ടവൽ
+hotel-requests.can-i-check-in-early,നേരത്തെ
+hotel-requests.can-i-check-out-later,വൈകി
+hotel-requests.can-i-store-my-luggage,ലഗേജ്
+hotel-requests.is-there-a-safe,സേഫ്
+hotel-requests.no-housekeeping,വൃത്തിയാക്കേണ്ട
+hotel-requests.what-time-does-breakfast-start,പ്രഭാതഭക്ഷണം
+hotel-requests.what-time-is-check-out,ചെക്ക്-ഔട്ട്
+in-a-building.is-this-the-correct-entrance,ശരിയായ
+introductions.i-am-a-tourist,വിനോദസഞ്ചാരിയാണ്
+introductions.i-am-from,നാട്
+introductions.i-am-traveling-alone,ഒറ്റയ്ക്ക്
+introductions.my-name-is,എന്റെ
+introductions.this-is-my-friend,സുഹൃത്താണ്
+introductions.we-are-traveling-together,ഒരുമിച്ച്
+introductions.what-is-your-name,നിങ്ങളുടെ
+introductions.where-are-you-from,എവിടെ നിന്നാണ്
+kind-words.i-had-a-wonderful-time,അത്ഭുതകരമായ
+kind-words.i-like-it-very-much,ഇഷ്ടമായി
+kind-words.it-is-beautiful-here,ഭംഗിയുണ്ട്
+kind-words.thank-you-for-everything,എല്ലാത്തിനും
+kind-words.thank-you-for-your-help,സഹായത്തിന്
+kind-words.thank-you-for-your-hospitality,ആതിഥ്യത്തിന്
+kind-words.this-is-delicious,രുചിയാണ്
+kind-words.you-are-very-kind,നല്ലവരാണ്
+laundry.can-it-be-ready-today,ഇന്നുതന്നെ
+laundry.how-much-per-kilo,കിലോയ്ക്ക്
+laundry.please-do-not-use-bleach,ബ്ലീച്ച്
+laundry.please-iron-this,ഇസ്തിരിയിടൂ
+laundry.please-wash-these-clothes,കഴുകൂ
+laundry.when-will-it-be-ready,എപ്പോൾ
+laundry.where-is-a-laundromat,അലക്കുകട
+lost-rescue.i-do-not-know-where-i-am,എവിടെയാണെന്ന്
+lost-rescue.i-lost-my-bag,ബാഗ്
+lost-rescue.i-lost-my-passport,പാസ്പോർട്ട്
+lost-rescue.i-lost-my-phone,ഫോൺ
+lost-rescue.i-lost-my-wallet,പഴ്സ്
+lost-rescue.my-child-is-missing,കുട്ടിയെ
+lost-rescue.please-call-the-police,പോലീസിനെ
+lost-rescue.we-are-here,ഇവിടെയാണ്
+massage-spa.focus-on-back,മുതുകിൽ
+massage-spa.focus-on-feet,പാദങ്ങളിൽ
+massage-spa.focus-on-neck,കഴുത്തിൽ
+massage-spa.focus-on-shoulders,തോളിൽ
+massage-spa.more-gently,മൃദുവായി
+massage-spa.please-avoid-this-area,തിരുമ്മരുത്
+massage-spa.please-pause,കുറച്ചു നേരത്തേക്ക്
+massage-spa.please-stop,നിർത്തൂ
+massage-spa.reply-ask-supervisor,മാനേജരോട്
+massage-spa.reply-cannot-avoid-this-treatment,ഒഴിവാക്കാൻ കഴിയില്ല
+massage-spa.reply-does-it-hurt-there,വേദനയുണ്ടോ
+massage-spa.reply-i-will-avoid-that-area,ഒഴിവാക്കാം
+massage-spa.reply-which-area-exactly,ഏത് ഭാഗം
+massage-spa.stronger-pressure,കുറച്ചുകൂടി
+massage-spa.that-pressure-is-good,ശരിയാണ്
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ആസ്പിരിൻ | ഐബുപ്രൊഫെൻ
+medical-conditions.i-am-allergic-to-penicillin,പെൻസിലിൻ
+medical-conditions.i-am-allergic-to-sulfa-drugs,സൾഫാ
+medical-conditions.i-am-diabetic,പ്രമേഹമുണ്ട്
+medical-conditions.i-am-pregnant,ഗർഭിണിയാണ്
+medical-conditions.i-carry-an-adrenaline-injector,അഡ്രിനാലിൻ
+medical-conditions.i-have-a-heart-condition,ഹൃദയസംബന്ധമായ
+medical-conditions.i-have-asthma,ആസ്ത്മ
+medical-conditions.i-have-epilepsy,അപസ്മാരം
+medical-conditions.i-need-insulin,ഇൻസുലിൻ
+medical-conditions.i-need-my-inhaler,ഇൻഹേലർ
+medical-conditions.i-take-blood-thinners,രക്തം കട്ടപിടിക്കാതിരിക്കാനുള്ള
+medical-conditions.inject-it-into-my-outer-thigh,തുടയുടെ
+medical-conditions.my-blood-sugar-is-low,പഞ്ചസാര കുറവാണ്
+medical-conditions.my-injector-is-in-my-bag,ഇൻജക്ടർ | ബാഗിലുണ്ട്
+medical-conditions.please-give-me-sugar-or-juice,പഞ്ചസാരയോ | ജ്യൂസോ
+medical-conditions.this-card-lists-my-conditions,കാർഡിൽ
+medical-conditions.this-is-my-medicine,മരുന്നാണ്
+outdoors.are-there-dangerous-animals-here,അപകടകരമായ മൃഗങ്ങൾ
+outdoors.can-we-camp-here,ക്യാമ്പ്
+outdoors.is-it-safe-to-swim-here,നീന്തുന്നത്
+payment-receipt.can-we-pay-separately,വേറെ വേറെ
+payment-receipt.how-much-in-total,ആകെ
+payment-receipt.i-already-paid,നേരത്തെ കൊടുത്തു
+payment-receipt.is-tax-included,നികുതി
+payment-receipt.my-card-was-declined,ആയില്ല
+payment-receipt.pay-by-card,കാർഡ്
+payment-receipt.the-bill-is-wrong,ബില്ല് തെറ്റിയെന്ന്
+pharmacy-symptoms.antacid,അസിഡിറ്റി
+pharmacy-symptoms.anti-diarrhea-medicine,വയറിളക്കത്തിനുള്ള
+pharmacy-symptoms.antihistamine,അലർജി
+pharmacy-symptoms.before-or-after-food,ഭക്ഷണത്തിന്
+pharmacy-symptoms.can-i-get-this-medicine-here,മരുന്ന്
+pharmacy-symptoms.cough-medicine,ചുമയ്ക്കുള്ള
+pharmacy-symptoms.do-i-need-a-prescription,കുറിപ്പടി
+pharmacy-symptoms.how-many-times-a-day,ദിവസത്തിൽ | തവണ
+pharmacy-symptoms.how-much-should-i-take,എത്ര
+pharmacy-symptoms.i-am-vomiting,ഛർദ്ദിക്കുന്നു
+pharmacy-symptoms.i-feel-dizzy,തലകറങ്ങുന്നു
+pharmacy-symptoms.i-feel-nauseous,ഓക്കാനം
+pharmacy-symptoms.i-have-a-burn,പൊള്ളലുണ്ട്
+pharmacy-symptoms.i-have-a-cough,ചുമയുണ്ട്
+pharmacy-symptoms.i-have-a-cut,മുറിവുണ്ട്
+pharmacy-symptoms.i-have-a-fever,പനിയുണ്ട്
+pharmacy-symptoms.i-have-a-headache,തലവേദനയുണ്ട്
+pharmacy-symptoms.i-have-a-rash,തിണർപ്പ്
+pharmacy-symptoms.i-have-a-sore-throat,തൊണ്ടവേദനയുണ്ട്
+pharmacy-symptoms.i-have-a-stomach-ache,വയറുവേദനയുണ്ട്
+pharmacy-symptoms.i-have-diarrhea,വയറിളക്കമുണ്ട്
+pharmacy-symptoms.i-think-it-is-infected,അണുബാധ
+pharmacy-symptoms.is-this-safe-during-pregnancy,ഗർഭിണികൾക്ക്
+pharmacy-symptoms.motion-sickness-tablets,യാത്രാ ഓക്കാനത്തിനുള്ള
+pharmacy-symptoms.rehydration-salts,ഒ.ആർ.എസ്.
+pharmacy-symptoms.the-pain-is-severe,വേദന | കൂടുതലാണ്
+pharmacy-symptoms.which-pharmacy-is-open-now,ഇപ്പോൾ | തുറന്നിട്ടുണ്ട്
+police-consulate.i-need-an-interpreter,ദ്വിഭാഷി
+police-consulate.i-want-to-contact-my-embassy,എംബസി
+police-consulate.i-want-to-report-a-theft,പരാതി
+police-consulate.my-bag-was-stolen,കളവുപോയി
+police-consulate.someone-is-following-me,പിന്നാലെ വരുന്നു
+police-consulate.where-is-the-police-station,പോലീസ് സ്റ്റേഷൻ
+quick-directions.across-from-here,എതിർവശത്ത്
+quick-directions.go-straight,നേരെ
+quick-directions.turn-left,ഇടത്തോട്ട്
+quick-directions.turn-right,വലത്തോട്ട്
+room-problems.can-i-change-rooms,മാറ്റാമോ
+room-problems.please-send-someone,ആരെയെങ്കിലും അയക്കൂ
+room-problems.the-air-conditioning-is-broken,എ.സി.
+room-problems.the-heating-does-not-work,ഹീറ്റർ
+room-problems.the-key-does-not-work,താക്കോൽ
+room-problems.the-light-does-not-work,ലൈറ്റ്
+room-problems.the-room-is-too-noisy,ബഹളമാണ്
+room-problems.the-toilet-will-not-flush,ഫ്ലഷ്
+room-problems.there-is-a-problem-with-the-room,പ്രശ്നമുണ്ട്
+room-problems.there-is-no-hot-water,ചൂടുവെള്ളം
+shopping.can-it-be-a-little-cheaper,കുറയ്ക്കാമോ
+shopping.do-you-have-this-in-stock,സ്റ്റോക്ക്
+shopping.how-much-is-this,എത്രയാണ്
+shopping.i-am-just-looking,വെറുതെ നോക്കുന്നു
+shopping.i-will-take-this,എടുക്കാം
+shopping.that-is-too-expensive,വിലയാണ്
+shopping.where-do-i-pay,കൊടുക്കണം
+social-basics.i-do-not-know,അറിയില്ല
+taxi.can-you-wait-for-me-here,കാത്തിരിക്കാമോ
+taxi.could-you-make-it-colder,തണുപ്പിക്കാമോ
+taxi.could-you-make-it-warmer,ചൂടാക്കാമോ
+taxi.may-i-open-the-window,ജനാല
+taxi.please-stop-here,നിർത്തൂ
+taxi.please-take-me-here,കൊണ്ടുപോകൂ
+taxi.please-turn-around,വണ്ടി തിരിക്കൂ
+time-scheduling.can-we-change-the-time,മാറ്റാമോ
+time-scheduling.how-long-does-it-take,സമയം
+time-scheduling.what-day-is-it-today,ദിവസമാണ്
+time-scheduling.what-time-does-it-close,അടയ്ക്കും
+time-scheduling.what-time-does-it-open,തുറക്കും
+time-scheduling.what-time-is-it,ഇപ്പോൾ
+time-scheduling.what-time-should-we-meet,കാണാം
+time-scheduling.when-is-convenient,സൗകര്യം
+toilets.where-toilet,ടോയ്ലറ്റ്
+trail-conditions.can-we-return-before-dark,ഇരുട്ടാകുന്നതിന് മുൻപ്
+trail-conditions.can-we-return-the-same-way,അതേ വഴിയിൽ
+trail-conditions.how-long-is-the-full-route,മുഴുവൻ വഴി
+trail-conditions.is-the-path-slippery,വഴുക്കുമോ
+trail-conditions.is-the-route-steep,കുത്തനെയാണോ
+trail-conditions.is-the-trail-open,തുറന്നിട്ടുണ്ടോ
+trail-transport.do-you-have-a-map,ഭൂപടം
+trail-transport.how-long-is-the-wait,കാത്തിരിക്കണം
+trail-transport.is-there-cell-signal-here,സിഗ്നൽ
+trail-transport.what-time-is-the-last-shuttle,അവസാന ഷട്ടിൽ
+trail-transport.when-does-the-cableway-stop,റോപ് വേ
+trail-transport.where-can-we-buy-water,വെള്ളം
+trail-transport.where-can-we-refill-water,വെള്ളം | നിറയ്ക്കാം
+transit-rides.can-i-use-this-ticket,ഉപയോഗിക്കാമോ
+transit-rides.do-i-need-to-transfer,മാറേണ്ടതുണ്ടോ
+transit-rides.do-i-need-to-validate,പരിശോധിപ്പിക്കണോ
+transit-rides.i-am-in-a-hurry,തിരക്കുണ്ട്
+transit-rides.i-went-past-my-stop,കടന്നുപോയി
+transit-rides.is-this-direct,നേരിട്ട്
+transit-rides.please-tell-me-where-to-get-off,ഇറങ്ങണമെന്ന്
+transit-rides.what-is-the-next-stop,അടുത്ത സ്റ്റോപ്പ്
+transit-rides.what-time-is-the-next-one,അടുത്തത്
+transit-rides.where-do-i-pay-the-fare,നിരക്ക്
+transit-rides.where-is-the-subway-station,മെട്രോ
+weather.how-cold-at-night,രാത്രി | തണുപ്പാകും
+weather.is-it-safe-today,സുരക്ഷിതമാണോ
+weather.will-it-rain,മഴ

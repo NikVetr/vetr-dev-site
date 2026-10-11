@@ -1,0 +1,317 @@
+concept_id,key
+about-me.i-am-a-doctor,மருத்துவர்
+about-me.i-am-a-nurse,தாதி
+about-me.i-am-a-student,மாணவர்
+about-me.i-am-a-teacher,ஆசிரியர்
+about-me.i-am-an-engineer,பொறியாளர்
+about-me.i-am-retired,பணி ஓய்வு
+about-me.i-have-my-own-business,சொந்த தொழில்
+about-me.i-work-in-an-office,அலுவலகத்தில்
+accessibility.step-free,படிக்கட்டு இல்லாத
+air-travel.i-would-like-a-window-seat,ஜன்னல்
+air-travel.i-would-like-an-aisle-seat,ஐல்
+air-travel.my-luggage-did-not-arrive,வரவில்லை
+air-travel.where-is-check-in,செக்-இன்
+air-travel.where-is-the-security-check,பாதுகாப்பு சோதனை
+attractions-tickets.are-there-lockers,பொருள் வைக்கும் பெட்டிகள்
+attractions-tickets.could-you-take-a-photo-for-us,எங்களுக்கு
+attractions-tickets.do-i-need-a-reservation,முன்பதிவு
+attractions-tickets.may-i-take-photos,புகைப்படம்
+attractions-tickets.what-is-the-latest-entry-time,கடைசி நேரம்
+attractions-tickets.where-can-i-buy-tickets,டிக்கெட்
+board-answers.after-food,பின்
+board-answers.before-food,முன்
+board-answers.can-you-walk,நடக்க
+board-answers.help-is-coming,உதவி
+board-answers.how-many,எத்தனை
+board-answers.i-am-calling-an-ambulance,ஆம்புலன்ஸ்
+board-answers.i-am-calling-the-police,காவல்துறையை
+board-answers.i-do-not-have-a-phone,ஃபோன்
+board-answers.i-will-check,பார்த்துச்
+board-answers.i-will-find-someone,ஒருவரை | கண்டுபிடிப்பேன்
+board-answers.i-will-show-you,காட்டுவேன்
+board-answers.i-will-write-it-down,எழுதுவேன்
+board-answers.i-would-rather-not-say,சொல்ல விரும்பவில்லை
+board-answers.it-is-over-there,அங்கே
+board-answers.my-name-is-blank,என்
+board-answers.none-of-these,இவற்றில்
+board-answers.not-possible,முடியாது
+board-answers.only-for-customers,வாடிக்கையாளர்களுக்கு
+board-answers.pay-on-board,வண்டியிலேயே
+board-answers.prescription-only,சீட்டு
+board-answers.see-a-doctor,மருத்துவரைப்
+board-answers.stay-here,இருப்பது
+board-answers.the-hospital-is-close,அருகில்
+board-answers.there-is-no-wait,காத்திருக்க வேண்டாம்
+board-answers.what-is-your-name,பெயர்
+board-answers.where-does-it-hurt,வலிக்கிறது
+board-answers.where-to,எங்கே
+border-customs.here-is-my-passport,கடவுச்சீட்டு
+border-customs.i-am-here-for-business,வணிகத்திற்காக
+border-customs.i-am-visiting-family,குடும்பத்தைப்
+border-customs.i-have-a-connecting-flight,இணைப்பு விமானம்
+border-customs.where-do-i-collect-my-baggage,பெறுவது
+color-size-returns.do-you-have-a-bag,பை
+color-size-returns.do-you-have-another-size,அளவு
+color-size-returns.may-i-try-it-on,போட்டுப்
+common-signs.no-photography,எடுக்க வேண்டாம்
+communication.can-you-help-me,உதவ
+communication.do-you-speak-english,உங்களுக்கு
+communication.i-do-not-speak-this-language,தெரியாது
+communication.i-do-not-understand,புரியவில்லை
+communication.please-speak-more-slowly,மெதுவாகப்
+dietary-needs.does-it-contain-fish-stock,மீன் சாறு
+dietary-needs.does-it-contain-pork-fat,பன்றிக் கொழுப்பு
+dietary-needs.does-it-contain-pork-stock,பன்றி இறைச்சிச் சாறு
+dietary-needs.i-am-vegan,விகன்
+dietary-needs.i-am-vegetarian,சைவம்
+dietary-needs.is-this-halal,ஹலாலா
+dietary-needs.no-eggs,முட்டை
+dietary-needs.no-meat,இறைச்சி
+dietary-needs.no-nuts,கொட்டை வகைகள்
+dietary-needs.no-peanuts,வேர்க்கடலை
+dietary-needs.no-pork,பன்றி
+dietary-needs.no-seafood,கடல் உணவு
+dietary-needs.no-sesame,எள்
+directions.can-i-walk-there,போக முடியுமா
+directions.can-you-show-me-the-way,வழியைக்
+directions.how-long-on-foot,எவ்வளவு நேரம்
+directions.please-show-me-on-the-map,வரைபடத்தில்
+emergency-medical.i-am-bleeding-badly,இரத்தம்
+emergency-medical.i-am-having-a-severe-allergic-reaction,கடுமையான ஒவ்வாமை
+emergency-medical.i-am-injured,அடிபட்டிருக்கிறது
+emergency-medical.i-cannot-breathe,மூச்சு
+emergency-medical.i-feel-unwell,சரியில்லை
+emergency-medical.i-have-chest-pain,நெஞ்சு வலி
+emergency-medical.i-have-travel-insurance,காப்பீடு
+emergency-medical.i-need-a-doctor,மருத்துவர்
+emergency-medical.i-think-a-bone-is-broken,எலும்பு உடைந்திருக்கிறது
+emergency-medical.it-hurts-here,வலிக்கிறது
+emergency-medical.please-call-an-ambulance,ஆம்புலன்ஸ்
+emergency-medical.please-call-my-emergency-contact,அவசரத் தொடர்பு
+emergency-medical.please-take-me-to-a-hospital,மருத்துவமனைக்குக்
+emergency-medical.this-is-an-emergency,அவசர
+emergency-medical.this-person-is-unconscious,மயக்கமாக
+emergency-medical.where-is-the-nearest-hospital,அருகில்
+family-intros.this-is-my-brother,சகோதரன்
+family-intros.this-is-my-colleague,சக ஊழியர்
+family-intros.this-is-my-daughter,மகள்
+family-intros.this-is-my-father,அப்பா
+family-intros.this-is-my-husband,கணவர்
+family-intros.this-is-my-mother,அம்மா
+family-intros.this-is-my-partner,துணை
+family-intros.this-is-my-sister,சகோதரி
+family-intros.this-is-my-son,மகன்
+family-intros.this-is-my-wife,மனைவி
+food-ordering.i-want-this,வேண்டும்
+food-ordering.is-a-table-available,மேசை காலியாக
+food-ordering.is-this-vegetarian,சைவமா
+food-ordering.table-for-two,இரண்டு பேருக்கு
+food-ordering.to-go-please,பார்சல்
+food-ordering.what-do-you-recommend,நல்லா
+hiking-parks.how-long-to-the-summit,உச்சிக்குப்
+hiking-parks.how-long-to-the-viewpoint,காட்சி மேடைக்குப்
+hiking-parks.is-this-trail-suitable-for-beginners,புதியவர்களுக்கு
+hiking-parks.where-is-the-trailhead,தொடங்குகிறது
+hiking-parks.which-route-is-easier,எளிதாக
+hitchhiking.can-you-give-me-a-ride,லிஃப்ட்
+hitchhiking.i-can-pay-for-fuel,பெட்ரோலுக்கு
+hitchhiking.i-only-need-to-go-to-the-next-town,அடுத்த ஊர்
+hitchhiking.is-there-room-for-two,இரண்டு பேருக்கு இடம்
+hitchhiking.thank-you-for-the-ride,நன்றி
+hitchhiking.where-are-you-going,எங்கே
+hotel-basics.are-any-rooms-available,அறை
+hotel-basics.how-much-per-night,இரவுக்கு
+hotel-basics.i-have-a-reservation,முன்பதிவு
+hotel-basics.i-would-like-a-non-smoking-room,புகைபிடிக்காத
+hotel-basics.i-would-like-a-quiet-room,அமைதியான
+hotel-basics.is-breakfast-included,காலை உணவு
+hotel-basics.is-there-a-washing-machine,துணி துவைக்கும் இயந்திரம்
+hotel-basics.is-there-air-conditioning,குளிரூட்டி
+hotel-basics.is-wi-fi-free,வைஃபை
+hotel-basics.may-i-see-the-room,பார்க்கலாமா
+hotel-requests.another-blanket,கம்பளி
+hotel-requests.another-night,இன்னொரு இரவு
+hotel-requests.another-towel-please,துண்டு
+hotel-requests.can-i-check-in-early,முன்னதாகச்
+hotel-requests.can-i-check-out-later,தாமதமாகச்
+hotel-requests.can-i-store-my-luggage,பெட்டிகளை
+hotel-requests.is-there-a-safe,பாதுகாப்புப் பெட்டி
+hotel-requests.no-housekeeping,சுத்தம்
+hotel-requests.what-time-does-breakfast-start,காலை உணவு
+hotel-requests.what-time-is-check-out,செக் அவுட்
+in-a-building.is-this-the-correct-entrance,சரியான
+introductions.i-am-a-tourist,சுற்றுலாப் பயணி
+introductions.i-am-from,ஊர்
+introductions.i-am-traveling-alone,தனியாகப்
+introductions.my-name-is,என்
+introductions.this-is-my-friend,நண்பர்
+introductions.we-are-traveling-together,சேர்ந்து
+introductions.what-is-your-name,உங்கள்
+introductions.where-are-you-from,எந்த ஊர்
+kind-words.i-had-a-wonderful-time,அருமையான
+kind-words.i-like-it-very-much,பிடிக்கும்
+kind-words.it-is-beautiful-here,அழகாக
+kind-words.thank-you-for-everything,எல்லாவற்றுக்கும்
+kind-words.thank-you-for-your-help,உதவிக்கு
+kind-words.thank-you-for-your-hospitality,விருந்தோம்பலுக்கு
+kind-words.this-is-delicious,ருசியாக
+kind-words.you-are-very-kind,அன்பானவர்
+laundry.can-it-be-ready-today,இன்றே
+laundry.how-much-per-kilo,கிலோவுக்கு
+laundry.please-do-not-use-bleach,பிளீச்
+laundry.please-iron-this,இஸ்திரி
+laundry.please-wash-these-clothes,துவைத்துக்
+laundry.when-will-it-be-ready,எப்போது
+laundry.where-is-a-laundromat,துணி துவைக்கும் கடை
+lost-rescue.i-do-not-know-where-i-am,எங்கே இருக்கிறேன்
+lost-rescue.i-lost-my-bag,பையைத்
+lost-rescue.i-lost-my-passport,கடவுச்சீட்டைத்
+lost-rescue.i-lost-my-phone,தொலைபேசியைத்
+lost-rescue.i-lost-my-wallet,பணப்பையைத்
+lost-rescue.my-child-is-missing,குழந்தையைக்
+lost-rescue.please-call-the-police,காவல்துறையை
+lost-rescue.we-are-here,இங்கே
+massage-spa.focus-on-back,முதுகை
+massage-spa.focus-on-feet,பாதங்களை
+massage-spa.focus-on-neck,கழுத்தை
+massage-spa.focus-on-shoulders,தோள்களை
+massage-spa.more-gently,குறையுங்கள்
+massage-spa.please-avoid-this-area,செய்ய வேண்டாம்
+massage-spa.please-pause,இடைவேளை
+massage-spa.please-stop,நிறுத்துங்கள்
+massage-spa.reply-ask-supervisor,மேலாளரிடம்
+massage-spa.reply-cannot-avoid-this-treatment,விட முடியாது
+massage-spa.reply-does-it-hurt-there,வலிக்கிறதா
+massage-spa.reply-i-will-avoid-that-area,விட்டுவிடுகிறேன்
+massage-spa.reply-which-area-exactly,எந்த இடத்தைச்
+massage-spa.stronger-pressure,பலமாக
+massage-spa.that-pressure-is-good,சரியாக
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ஆஸ்பிரின் | இபுபுரூஃபன்
+medical-conditions.i-am-allergic-to-penicillin,பென்சிலின்
+medical-conditions.i-am-allergic-to-sulfa-drugs,சல்ஃபா
+medical-conditions.i-am-diabetic,சர்க்கரை நோய்
+medical-conditions.i-am-pregnant,கர்ப்பிணி
+medical-conditions.i-carry-an-adrenaline-injector,அட்ரினலின்
+medical-conditions.i-have-a-heart-condition,இதய
+medical-conditions.i-have-asthma,ஆஸ்துமா
+medical-conditions.i-have-epilepsy,வலிப்பு
+medical-conditions.i-need-insulin,இன்சுலின்
+medical-conditions.i-need-my-inhaler,இன்ஹேலர்
+medical-conditions.i-take-blood-thinners,இரத்தம் உறைவதைத் தடுக்கும்
+medical-conditions.inject-it-into-my-outer-thigh,தொடையின்
+medical-conditions.my-blood-sugar-is-low,சர்க்கரை குறைவாக
+medical-conditions.my-injector-is-in-my-bag,ஊசி | பையில்
+medical-conditions.please-give-me-sugar-or-juice,சர்க்கரை | பழச்சாறு
+medical-conditions.this-card-lists-my-conditions,அட்டையில்
+medical-conditions.this-is-my-medicine,மருந்து
+outdoors.are-there-dangerous-animals-here,ஆபத்தான விலங்குகள்
+outdoors.can-we-camp-here,முகாம்
+outdoors.is-it-safe-to-swim-here,நீந்துவது
+payment-receipt.can-we-pay-separately,தனித்தனியாகச்
+payment-receipt.how-much-in-total,மொத்தம்
+payment-receipt.i-already-paid,ஏற்கெனவே செலுத்திவிட்டேன்
+payment-receipt.is-tax-included,வரி
+payment-receipt.my-card-was-declined,ஏற்கப்படவில்லை
+payment-receipt.pay-by-card,அட்டையில்
+payment-receipt.the-bill-is-wrong,பில் தவறாக
+pharmacy-symptoms.antacid,அமிலம்
+pharmacy-symptoms.anti-diarrhea-medicine,வயிற்றுப்போக்கு
+pharmacy-symptoms.antihistamine,ஒவ்வாமை
+pharmacy-symptoms.antiseptic,கிருமி
+pharmacy-symptoms.before-or-after-food,உணவுக்கு
+pharmacy-symptoms.can-i-get-this-medicine-here,மருந்து
+pharmacy-symptoms.cough-medicine,இருமல்
+pharmacy-symptoms.do-i-need-a-prescription,சீட்டு
+pharmacy-symptoms.how-many-times-a-day,நாளுக்கு | முறை
+pharmacy-symptoms.how-much-should-i-take,எவ்வளவு
+pharmacy-symptoms.i-am-vomiting,வாந்தி
+pharmacy-symptoms.i-feel-dizzy,சுற்றுகிறது
+pharmacy-symptoms.i-feel-nauseous,குமட்டல்
+pharmacy-symptoms.i-have-a-burn,தீக்காயம்
+pharmacy-symptoms.i-have-a-cough,இருமல்
+pharmacy-symptoms.i-have-a-cut,வெட்டுக்
+pharmacy-symptoms.i-have-a-fever,காய்ச்சல்
+pharmacy-symptoms.i-have-a-headache,தலைவலி
+pharmacy-symptoms.i-have-a-rash,தடிப்பு
+pharmacy-symptoms.i-have-a-sore-throat,தொண்டை வலி
+pharmacy-symptoms.i-have-a-stomach-ache,வயிற்று வலி
+pharmacy-symptoms.i-have-diarrhea,வயிற்றுப்போக்கு
+pharmacy-symptoms.i-think-it-is-infected,கிருமித் தொற்று
+pharmacy-symptoms.is-this-safe-during-pregnancy,கர்ப்ப காலத்தில்
+pharmacy-symptoms.motion-sickness-tablets,பயண மயக்க
+pharmacy-symptoms.painkiller,வலி
+pharmacy-symptoms.rehydration-salts,நீரிழப்பு
+pharmacy-symptoms.the-pain-is-severe,வலி | கடுமையாக
+pharmacy-symptoms.which-pharmacy-is-open-now,இப்போது | திறந்திருக்கும்
+police-consulate.i-need-an-interpreter,மொழிபெயர்ப்பாளர்
+police-consulate.i-want-to-contact-my-embassy,தூதரகத்தைத்
+police-consulate.i-want-to-report-a-theft,புகார்
+police-consulate.my-bag-was-stolen,திருடப்பட்டது
+police-consulate.someone-is-following-me,பின்தொடர்கிறார்
+police-consulate.where-is-the-police-station,காவல் நிலையம்
+quick-directions.across-from-here,எதிரே
+quick-directions.go-straight,நேராகப்
+quick-directions.turn-left,இடதுபுறம்
+quick-directions.turn-right,வலதுபுறம்
+room-problems.can-i-change-rooms,மாற்ற
+room-problems.please-send-someone,ஒருவரை அனுப்புங்கள்
+room-problems.the-air-conditioning-is-broken,குளிரூட்டி
+room-problems.the-heating-does-not-work,வெப்பமூட்டி
+room-problems.the-key-does-not-work,சாவி
+room-problems.the-light-does-not-work,விளக்கு
+room-problems.the-room-is-too-noisy,சத்தம்
+room-problems.the-toilet-will-not-flush,கழிவறையில்
+room-problems.there-is-a-problem-with-the-room,பிரச்சினை
+room-problems.there-is-no-hot-water,சூடான தண்ணீர்
+shopping.can-it-be-a-little-cheaper,குறைக்க
+shopping.do-you-have-this-in-stock,கையிருப்பில்
+shopping.how-much-is-this,எவ்வளவு
+shopping.i-will-take-this,எடுத்துக் கொள்கிறேன்
+shopping.that-is-too-expensive,விலை அதிகம்
+shopping.where-do-i-pay,பணம் செலுத்த
+social-basics.i-do-not-know,தெரியாது
+taxi.can-you-wait-for-me-here,காத்திருக்க
+taxi.could-you-make-it-colder,குளிராக
+taxi.could-you-make-it-warmer,சூடாக
+taxi.may-i-open-the-window,ஜன்னலைத்
+taxi.please-stop-here,நிறுத்துங்கள்
+taxi.please-take-me-here,கொண்டு போங்கள்
+taxi.please-turn-around,யு டர்ன்
+time-scheduling.can-we-change-the-time,மாற்ற
+time-scheduling.how-long-does-it-take,நேரம்
+time-scheduling.what-day-is-it-today,கிழமை
+time-scheduling.what-time-does-it-close,மூடும்
+time-scheduling.what-time-does-it-open,திறக்கும்
+time-scheduling.what-time-is-it,இப்போது
+time-scheduling.what-time-should-we-meet,சந்திக்கலாம்
+time-scheduling.when-is-convenient,வசதியாக
+toilets.it-is-out-of-order,வேலை செய்யவில்லை
+toilets.where-toilet,கழிவறை
+trail-conditions.can-we-return-before-dark,இருட்டுவதற்கு முன்
+trail-conditions.can-we-return-the-same-way,இதே வழியில்
+trail-conditions.how-long-is-the-full-route,முழுப் பாதை
+trail-conditions.is-the-path-slippery,வழுக்குகிறதா
+trail-conditions.is-the-route-steep,செங்குத்தாக
+trail-conditions.is-the-trail-open,திறந்திருக்கிறதா
+trail-transport.do-you-have-a-map,வரைபடம்
+trail-transport.how-long-is-the-wait,காத்திருக்க
+trail-transport.is-there-cell-signal-here,சிக்னல்
+trail-transport.what-time-is-the-last-shuttle,கடைசி இணைப்பு வண்டி
+trail-transport.when-does-the-cableway-stop,கம்பி வழி வண்டி
+trail-transport.where-can-we-buy-water,தண்ணீர் | வாங்கலாம்
+trail-transport.where-can-we-refill-water,தண்ணீர் | நிரப்பலாம்
+transit-rides.can-i-use-this-ticket,பயன்படுத்தலாமா
+transit-rides.do-i-need-to-transfer,வண்டி மாற
+transit-rides.do-i-need-to-validate,உறுதிப்படுத்த
+transit-rides.i-am-in-a-hurry,அவசரம்
+transit-rides.i-went-past-my-stop,தாண்டிவிட்டேன்
+transit-rides.is-this-direct,நேரடியா
+transit-rides.please-tell-me-where-to-get-off,இறங்க
+transit-rides.what-is-the-next-stop,அடுத்த நிறுத்தம்
+transit-rides.what-time-is-the-next-one,அடுத்தது
+transit-rides.where-do-i-pay-the-fare,கட்டணம்
+transit-rides.where-is-the-subway-station,மெட்ரோ
+weather.how-cold-at-night,இரவில் | குளிர்
+weather.is-it-safe-today,பாதுகாப்பானதா
+weather.will-it-rain,மழை

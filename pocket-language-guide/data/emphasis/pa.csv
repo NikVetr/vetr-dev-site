@@ -1,0 +1,323 @@
+concept_id,key
+about-me.i-am-a-doctor,ਡਾਕਟਰ
+about-me.i-am-a-nurse,ਨਰਸ
+about-me.i-am-a-student,ਵਿਦਿਆਰਥੀ | ਵਿਦਿਆਰਥਣ
+about-me.i-am-a-teacher,ਅਧਿਆਪਕ | ਅਧਿਆਪਿਕਾ
+about-me.i-am-an-engineer,ਇੰਜੀਨੀਅਰ
+about-me.i-am-retired,ਸੇਵਾਮੁਕਤ
+about-me.i-have-my-own-business,ਆਪਣਾ ਕਾਰੋਬਾਰ
+about-me.i-work-in-an-office,ਦਫ਼ਤਰ
+accessibility.step-free,ਪੌੜੀਆਂ ਤੋਂ ਬਿਨਾਂ
+air-travel.i-would-like-a-window-seat,ਖਿੜਕੀ
+air-travel.i-would-like-an-aisle-seat,ਆਇਲ
+air-travel.my-luggage-did-not-arrive,ਨਹੀਂ ਆਇਆ
+air-travel.where-is-check-in,ਚੈੱਕ-ਇਨ
+air-travel.where-is-the-security-check,ਸੁਰੱਖਿਆ ਜਾਂਚ
+air-travel.which-gate,ਗੇਟ
+attractions-tickets.are-there-lockers,ਅਲਮਾਰੀਆਂ
+attractions-tickets.could-you-take-a-photo-for-us,ਸਾਡੀ
+attractions-tickets.do-i-need-a-reservation,ਬੁਕਿੰਗ
+attractions-tickets.may-i-take-photos,ਫ਼ੋਟੋ
+attractions-tickets.what-is-the-latest-entry-time,ਆਖ਼ਰੀ ਵੇਲਾ
+attractions-tickets.where-can-i-buy-tickets,ਟਿਕਟਾਂ
+board-answers.after-food,ਬਾਅਦ
+board-answers.at-the-next-stop,ਅਗਲੇ ਸਟਾਪ
+board-answers.before-food,ਪਹਿਲਾਂ
+board-answers.can-you-walk,ਤੁਰਨਾ
+board-answers.help-is-coming,ਮਦਦ
+board-answers.how-many,ਕਿੰਨੇ
+board-answers.i-am-calling-an-ambulance,ਐਂਬੂਲੈਂਸ
+board-answers.i-am-calling-the-police,ਪੁਲਿਸ
+board-answers.i-do-not-have-a-phone,ਫ਼ੋਨ
+board-answers.i-will-check,ਦੇਖ
+board-answers.i-will-find-someone,ਕੋਈ ਮਿਲ ਜਾਵੇਗਾ
+board-answers.i-will-show-you,ਦਿਖਾਉਣਾ
+board-answers.i-will-write-it-down,ਲਿਖ
+board-answers.i-would-rather-not-say,ਨਾ ਦੱਸਾਂ
+board-answers.it-is-closed,ਬੰਦ
+board-answers.it-is-free,ਮੁਫ਼ਤ
+board-answers.it-is-over-there,ਉੱਥੇ
+board-answers.my-name-is-blank,ਮੇਰਾ ਨਾਂ
+board-answers.none-of-these,ਇਨ੍ਹਾਂ ਵਿੱਚੋਂ
+board-answers.not-possible,ਨਹੀਂ ਹੋ ਸਕਦਾ
+board-answers.only-for-customers,ਗਾਹਕਾਂ
+board-answers.pay-on-board,ਗੱਡੀ ਵਿੱਚ
+board-answers.prescription-only,ਪਰਚੀ
+board-answers.see-a-doctor,ਡਾਕਟਰ
+board-answers.stay-here,ਰੁਕਣਾ
+board-answers.the-hospital-is-close,ਨੇੜੇ ਹੀ
+board-answers.there-is-no-wait,ਇੰਤਜ਼ਾਰ ਨਹੀਂ
+board-answers.we-are-full,ਜਗ੍ਹਾ ਨਹੀਂ
+board-answers.what-is-your-name,ਨਾਂ
+board-answers.where-does-it-hurt,ਦਰਦ
+border-customs.here-is-my-passport,ਪਾਸਪੋਰਟ
+border-customs.i-am-here-for-business,ਕੰਮ
+border-customs.i-am-visiting-family,ਪਰਿਵਾਰ
+border-customs.i-have-a-connecting-flight,ਅਗਲੀ ਫ਼ਲਾਈਟ
+border-customs.where-do-i-collect-my-baggage,ਮਿਲੇਗਾ
+building-words.entrance,ਅੰਦਰ
+building-words.exit,ਬਾਹਰ
+color-size-returns.do-you-have-a-bag,ਲਿਫ਼ਾਫ਼ਾ
+color-size-returns.do-you-have-another-size,ਸਾਈਜ਼
+color-size-returns.may-i-try-it-on,ਪਾ ਕੇ
+common-signs.no-photography,ਮਨ੍ਹਾ
+communication.can-you-help-me,ਮਦਦ
+communication.do-you-speak-english,ਤੁਹਾਨੂੰ
+communication.i-do-not-speak-this-language,ਨਹੀਂ ਆਉਂਦੀ
+communication.i-do-not-understand,ਸਮਝ ਨਹੀਂ
+communication.please-speak-more-slowly,ਹੌਲੀ
+dietary-needs.does-it-contain-fish-stock,ਮੱਛੀ ਦਾ ਸ਼ੋਰਬਾ
+dietary-needs.does-it-contain-pork-fat,ਸੂਰ ਦੀ ਚਰਬੀ
+dietary-needs.does-it-contain-pork-stock,ਸੂਰ ਦਾ ਸ਼ੋਰਬਾ
+dietary-needs.i-am-vegan,"ਦੁੱਧ, ਦਹੀਂ, ਪਨੀਰ, ਘਿਓ"
+dietary-needs.i-am-vegetarian,ਸ਼ਾਕਾਹਾਰੀ
+dietary-needs.is-this-halal,ਹਲਾਲ
+dietary-needs.no-eggs,ਆਂਡੇ
+dietary-needs.no-meat,ਮੀਟ
+dietary-needs.no-nuts,ਸੁੱਕੇ ਮੇਵੇ
+dietary-needs.no-peanuts,ਮੂੰਗਫਲੀ
+dietary-needs.no-pork,ਸੂਰ
+dietary-needs.no-seafood,ਮੱਛੀ | ਸਮੁੰਦਰੀ ਜੀਵ
+dietary-needs.no-sesame,ਤਿਲ
+directions.can-i-walk-there,ਜਾ ਸਕਦੇ
+directions.can-you-show-me-the-way,ਰਾਹ
+directions.how-long-on-foot,ਕਿੰਨਾ ਵੇਲਾ
+directions.is-it-far,ਦੂਰ
+directions.please-show-me-on-the-map,ਨਕਸ਼ੇ
+emergency-medical.i-am-bleeding-badly,ਖ਼ੂਨ
+emergency-medical.i-am-having-a-severe-allergic-reaction,ਤੇਜ਼ ਐਲਰਜੀ
+emergency-medical.i-am-injured,ਜ਼ਖ਼ਮੀ
+emergency-medical.i-cannot-breathe,ਸਾਹ
+emergency-medical.i-feel-unwell,ਠੀਕ ਨਹੀਂ
+emergency-medical.i-have-chest-pain,ਛਾਤੀ
+emergency-medical.i-have-travel-insurance,ਬੀਮਾ
+emergency-medical.i-need-a-doctor,ਡਾਕਟਰ
+emergency-medical.i-think-a-bone-is-broken,ਹੱਡੀ ਟੁੱਟ
+emergency-medical.it-hurts-here,ਦਰਦ
+emergency-medical.please-call-an-ambulance,ਐਂਬੂਲੈਂਸ
+emergency-medical.please-call-my-emergency-contact,ਐਮਰਜੈਂਸੀ ਨੰਬਰ
+emergency-medical.please-take-me-to-a-hospital,ਹਸਪਤਾਲ
+emergency-medical.this-is-an-emergency,ਐਮਰਜੈਂਸੀ
+emergency-medical.this-person-is-unconscious,ਬੇਹੋਸ਼
+emergency-medical.where-is-the-nearest-hospital,ਸਭ ਤੋਂ ਨੇੜੇ
+family-intros.this-is-my-brother,ਭਰਾ
+family-intros.this-is-my-colleague,ਸਹਿਕਰਮੀ
+family-intros.this-is-my-daughter,ਧੀ
+family-intros.this-is-my-father,ਪਿਤਾ
+family-intros.this-is-my-husband,ਪਤੀ
+family-intros.this-is-my-mother,ਮਾਂ
+family-intros.this-is-my-partner,ਜੀਵਨ ਸਾਥੀ
+family-intros.this-is-my-sister,ਭੈਣ
+family-intros.this-is-my-son,ਪੁੱਤਰ
+family-intros.this-is-my-wife,ਪਤਨੀ
+food-ordering.i-want-this,ਚਾਹੀਦਾ
+food-ordering.is-a-table-available,ਮੇਜ਼ ਖ਼ਾਲੀ
+food-ordering.is-this-vegetarian,ਸ਼ਾਕਾਹਾਰੀ
+food-ordering.table-for-two,ਦੋ ਜਣਿਆਂ
+food-ordering.to-go-please,ਪੈਕ
+food-ordering.what-do-you-recommend,ਦੱਸੋਗੇ
+hiking-parks.how-long-to-the-summit,ਚੋਟੀ
+hiking-parks.how-long-to-the-viewpoint,ਨਜ਼ਾਰੇ ਵਾਲੀ ਥਾਂ
+hiking-parks.is-this-trail-suitable-for-beginners,ਨਵਿਆਂ
+hiking-parks.where-is-the-trailhead,ਸ਼ੁਰੂ
+hiking-parks.which-route-is-easier,ਸੌਖਾ
+hitchhiking.can-you-give-me-a-ride,ਲਿਫ਼ਟ
+hitchhiking.i-can-pay-for-fuel,ਪੈਟਰੋਲ
+hitchhiking.i-only-need-to-go-to-the-next-town,ਅਗਲੇ ਸ਼ਹਿਰ
+hitchhiking.is-there-room-for-two,ਦੋ ਬੰਦਿਆਂ | ਜਗ੍ਹਾ
+hitchhiking.thank-you-for-the-ride,ਧੰਨਵਾਦ
+hitchhiking.where-are-you-going,ਕਿੱਥੇ
+hotel-basics.are-any-rooms-available,ਕਮਰਾ
+hotel-basics.how-much-per-night,ਇੱਕ ਰਾਤ
+hotel-basics.i-have-a-reservation,ਬੁਕਿੰਗ
+hotel-basics.i-would-like-a-non-smoking-room,ਸਿਗਰਟ ਤੋਂ ਬਿਨਾਂ
+hotel-basics.i-would-like-a-quiet-room,ਸ਼ਾਂਤ
+hotel-basics.is-breakfast-included,ਨਾਸ਼ਤਾ
+hotel-basics.is-there-a-washing-machine,ਕੱਪੜੇ ਧੋਣ ਵਾਲੀ ਮਸ਼ੀਨ
+hotel-basics.is-there-air-conditioning,ਏਸੀ
+hotel-basics.is-wi-fi-free,ਵਾਈ-ਫ਼ਾਈ
+hotel-basics.may-i-see-the-room,ਦੇਖ
+hotel-requests.another-blanket,ਕੰਬਲ
+hotel-requests.another-night,ਇੱਕ ਹੋਰ ਰਾਤ
+hotel-requests.another-towel-please,ਤੌਲੀਆ
+hotel-requests.can-i-check-in-early,ਪਹਿਲਾਂ
+hotel-requests.can-i-check-out-later,ਲੇਟ
+hotel-requests.can-i-store-my-luggage,ਸਮਾਨ
+hotel-requests.is-there-a-safe,ਤਿਜੌਰੀ
+hotel-requests.no-housekeeping,ਸਾਫ਼
+hotel-requests.what-time-does-breakfast-start,ਨਾਸ਼ਤਾ
+hotel-requests.what-time-is-check-out,ਛੱਡਣਾ
+in-a-building.is-this-the-correct-entrance,ਸਹੀ
+introductions.i-am-a-tourist,ਸੈਲਾਨੀ
+introductions.i-am-traveling-alone,ਇਕੱਲਾ | ਇਕੱਲੀ
+introductions.my-name-is,ਮੇਰਾ ਨਾਂ
+introductions.this-is-my-friend,ਦੋਸਤ
+introductions.we-are-traveling-together,ਇਕੱਠੇ
+introductions.what-is-your-name,ਤੁਹਾਡਾ ਨਾਂ
+introductions.where-are-you-from,ਕਿੱਥੋਂ
+kind-words.i-had-a-wonderful-time,ਵਧੀਆ ਸਮਾਂ
+kind-words.i-like-it-very-much,ਪਸੰਦ
+kind-words.it-is-beautiful-here,ਸੋਹਣਾ
+kind-words.thank-you-for-everything,ਸਭ ਕੁਝ
+kind-words.thank-you-for-your-help,ਮਦਦ
+kind-words.thank-you-for-your-hospitality,ਮਹਿਮਾਨ-ਨਵਾਜ਼ੀ
+kind-words.this-is-delicious,ਸੁਆਦੀ
+kind-words.you-are-very-kind,ਦਿਆਲੂ
+laundry.can-it-be-ready-today,ਅੱਜ
+laundry.how-much-per-kilo,ਇੱਕ ਕਿੱਲੋ
+laundry.please-do-not-use-bleach,ਬਲੀਚ
+laundry.please-iron-this,ਪਰੈੱਸ
+laundry.please-wash-these-clothes,ਧੋ
+laundry.when-will-it-be-ready,ਕਦੋਂ
+laundry.where-is-a-laundromat,ਕੱਪੜੇ ਧੋਣ ਵਾਲੀ ਦੁਕਾਨ
+lost-rescue.i-do-not-know-where-i-am,ਮੈਂ ਕਿੱਥੇ ਹਾਂ
+lost-rescue.i-lost-my-bag,ਬੈਗ
+lost-rescue.i-lost-my-passport,ਪਾਸਪੋਰਟ
+lost-rescue.i-lost-my-phone,ਫ਼ੋਨ
+lost-rescue.i-lost-my-wallet,ਬਟੂਆ
+lost-rescue.my-child-is-missing,ਬੱਚਾ
+lost-rescue.please-call-the-police,ਪੁਲਿਸ
+lost-rescue.we-are-here,ਇੱਥੇ
+massage-spa.focus-on-back,ਪਿੱਠ
+massage-spa.focus-on-feet,ਪੈਰਾਂ
+massage-spa.focus-on-neck,ਗਰਦਨ
+massage-spa.focus-on-shoulders,ਮੋਢਿਆਂ
+massage-spa.more-gently,ਘੱਟ
+massage-spa.please-avoid-this-area,ਨਾ ਦਬਾਓ
+massage-spa.please-pause,ਥੋੜ੍ਹੀ ਦੇਰ
+massage-spa.please-stop,ਬੱਸ
+massage-spa.reply-ask-supervisor,ਮੈਨੇਜਰ
+massage-spa.reply-cannot-avoid-this-treatment,ਨਹੀਂ ਛੱਡੀ ਜਾ ਸਕਦੀ
+massage-spa.reply-does-it-hurt-there,ਦਰਦ
+massage-spa.reply-i-will-avoid-that-area,ਛੱਡਣੀ
+massage-spa.reply-which-area-exactly,ਕਿਹੜੀ ਥਾਂ
+massage-spa.stronger-pressure,ਜ਼ੋਰ ਨਾਲ
+massage-spa.that-pressure-is-good,ਠੀਕ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ਐਸਪਰੀਨ | ਆਈਬਿਊਪ੍ਰੋਫ਼ੈਨ
+medical-conditions.i-am-allergic-to-penicillin,ਪੈਨਿਸਿਲਿਨ
+medical-conditions.i-am-allergic-to-sulfa-drugs,ਸਲਫ਼ਾ
+medical-conditions.i-am-diabetic,ਸ਼ੂਗਰ
+medical-conditions.i-am-pregnant,ਗਰਭਵਤੀ
+medical-conditions.i-carry-an-adrenaline-injector,ਐਡਰੀਨਲਿਨ
+medical-conditions.i-have-a-heart-condition,ਦਿਲ
+medical-conditions.i-have-asthma,ਦਮਾ
+medical-conditions.i-have-epilepsy,ਮਿਰਗੀ
+medical-conditions.i-need-insulin,ਇਨਸੁਲਿਨ
+medical-conditions.i-need-my-inhaler,ਇਨਹੇਲਰ
+medical-conditions.i-take-blood-thinners,ਖ਼ੂਨ ਪਤਲਾ
+medical-conditions.inject-it-into-my-outer-thigh,ਪੱਟ
+medical-conditions.my-blood-sugar-is-low,ਘੱਟ ਗਈ
+medical-conditions.my-injector-is-in-my-bag,ਟੀਕਾ | ਬੈਗ
+medical-conditions.please-give-me-sugar-or-juice,ਖੰਡ | ਜੂਸ
+medical-conditions.this-card-lists-my-conditions,ਕਾਰਡ
+medical-conditions.this-is-my-medicine,ਦਵਾਈ
+outdoors.are-there-dangerous-animals-here,ਖ਼ਤਰਨਾਕ ਜਾਨਵਰ
+outdoors.can-we-camp-here,ਕੈਂਪ
+outdoors.is-it-safe-to-swim-here,ਤਰਨਾ
+payment-receipt.can-we-pay-separately,ਵੱਖ-ਵੱਖ
+payment-receipt.how-much-in-total,ਕੁੱਲ
+payment-receipt.i-already-paid,ਦੇ ਚੁੱਕਾ | ਦੇ ਚੁੱਕੀ
+payment-receipt.is-tax-included,ਟੈਕਸ
+payment-receipt.my-card-was-declined,ਨਹੀਂ ਚੱਲਿਆ
+payment-receipt.pay-by-card,ਕਾਰਡ
+payment-receipt.the-bill-is-wrong,ਗ਼ਲਤੀ
+pharmacy-symptoms.antacid,ਤੇਜ਼ਾਬ
+pharmacy-symptoms.anti-diarrhea-medicine,ਦਸਤ
+pharmacy-symptoms.antihistamine,ਐਲਰਜੀ
+pharmacy-symptoms.antiseptic,ਜ਼ਖ਼ਮ ਧੋਣ
+pharmacy-symptoms.before-or-after-food,ਖਾਣੇ
+pharmacy-symptoms.can-i-get-this-medicine-here,ਦਵਾਈ
+pharmacy-symptoms.cough-medicine,ਖੰਘ
+pharmacy-symptoms.do-i-need-a-prescription,ਪਰਚੀ
+pharmacy-symptoms.how-many-times-a-day,ਦਿਨ | ਵਾਰ
+pharmacy-symptoms.how-much-should-i-take,ਕਿੰਨੀ
+pharmacy-symptoms.i-am-vomiting,ਉਲਟੀਆਂ
+pharmacy-symptoms.i-feel-dizzy,ਚੱਕਰ
+pharmacy-symptoms.i-feel-nauseous,ਜੀ ਕੱਚਾ
+pharmacy-symptoms.i-have-a-burn,ਸੜ ਗਿਆ
+pharmacy-symptoms.i-have-a-cough,ਖੰਘ
+pharmacy-symptoms.i-have-a-cut,ਕੱਟ
+pharmacy-symptoms.i-have-a-fever,ਬੁਖ਼ਾਰ
+pharmacy-symptoms.i-have-a-headache,ਸਿਰ
+pharmacy-symptoms.i-have-a-rash,ਧੱਫੜ
+pharmacy-symptoms.i-have-a-sore-throat,ਗਲਾ
+pharmacy-symptoms.i-have-a-stomach-ache,ਪੇਟ
+pharmacy-symptoms.i-have-diarrhea,ਦਸਤ
+pharmacy-symptoms.i-think-it-is-infected,ਇਨਫ਼ੈਕਸ਼ਨ
+pharmacy-symptoms.is-this-safe-during-pregnancy,ਗਰਭ ਵੇਲੇ
+pharmacy-symptoms.motion-sickness-tablets,ਉਲਟੀ
+pharmacy-symptoms.painkiller,ਦਰਦ
+pharmacy-symptoms.the-pain-is-severe,ਦਰਦ | ਤੇਜ਼
+pharmacy-symptoms.which-pharmacy-is-open-now,ਹੁਣ | ਖੁੱਲ੍ਹੀ
+police-consulate.i-need-an-interpreter,ਦੁਭਾਸ਼ੀਏ
+police-consulate.i-want-to-contact-my-embassy,ਅੰਬੈਸੀ
+police-consulate.i-want-to-report-a-theft,ਰਿਪੋਰਟ
+police-consulate.my-bag-was-stolen,ਚੋਰੀ
+police-consulate.someone-is-following-me,ਪਿੱਛੇ ਪਿਆ
+police-consulate.where-is-the-police-station,ਥਾਣਾ
+quick-directions.go-straight,ਸਿੱਧੇ
+quick-directions.on-the-left,ਖੱਬੇ
+quick-directions.on-the-right,ਸੱਜੇ
+quick-directions.turn-left,ਖੱਬੇ
+quick-directions.turn-right,ਸੱਜੇ
+room-problems.can-i-change-rooms,ਬਦਲ
+room-problems.please-send-someone,ਭੇਜੋ
+room-problems.the-air-conditioning-is-broken,ਏਸੀ
+room-problems.the-heating-does-not-work,ਹੀਟਰ
+room-problems.the-key-does-not-work,ਚਾਬੀ
+room-problems.the-light-does-not-work,ਲਾਈਟ
+room-problems.the-room-is-too-noisy,ਰੌਲਾ
+room-problems.the-toilet-will-not-flush,ਫ਼ਲੱਸ਼
+room-problems.there-is-a-problem-with-the-room,ਮਸਲਾ
+room-problems.there-is-no-hot-water,ਗਰਮ ਪਾਣੀ
+shopping.can-it-be-a-little-cheaper,ਘੱਟ
+shopping.how-much-is-this,ਕਿੰਨੇ ਦਾ
+shopping.i-am-just-looking,ਬੱਸ ਦੇਖ
+shopping.i-will-take-this,ਲੈ ਲੈਂਦਾ | ਲੈ ਲੈਂਦੀ
+shopping.that-is-too-expensive,ਮਹਿੰਗਾ
+shopping.where-do-i-pay,ਪੈਸੇ
+social-basics.i-do-not-know,ਨਹੀਂ ਪਤਾ
+taxi.can-you-wait-for-me-here,ਇੰਤਜ਼ਾਰ
+taxi.could-you-make-it-colder,ਠੰਡਾ
+taxi.could-you-make-it-warmer,ਗਰਮ
+taxi.may-i-open-the-window,ਖਿੜਕੀ
+taxi.please-stop-here,ਰੋਕ
+taxi.please-take-me-here,ਲੈ ਚੱਲੋ
+taxi.please-turn-around,ਯੂ-ਟਰਨ
+time-scheduling.can-we-change-the-time,ਬਦਲ
+time-scheduling.how-long-does-it-take,ਵੇਲਾ
+time-scheduling.what-day-is-it-today,ਦਿਨ
+time-scheduling.what-time-does-it-close,ਬੰਦ
+time-scheduling.what-time-does-it-open,ਖੁੱਲ੍ਹਦਾ
+time-scheduling.what-time-should-we-meet,ਮਿਲੀਏ
+time-scheduling.when-is-convenient,ਸੌਖਾ ਰਹੇਗਾ
+toilets.it-is-out-of-order,ਖ਼ਰਾਬ
+toilets.where-toilet,ਟਾਇਲਟ
+trail-conditions.can-we-return-before-dark,ਹਨੇਰਾ ਹੋਣ ਤੋਂ ਪਹਿਲਾਂ
+trail-conditions.can-we-return-the-same-way,ਇਸੇ ਰਾਹ
+trail-conditions.how-long-is-the-full-route,ਸਾਰਾ ਰਾਹ
+trail-conditions.is-the-path-slippery,ਤਿਲਕਣਾ
+trail-conditions.is-the-route-steep,ਚੜ੍ਹਾਈ ਤੇਜ਼
+trail-conditions.is-the-trail-open,ਖੁੱਲ੍ਹਾ
+trail-transport.do-you-have-a-map,ਨਕਸ਼ਾ
+trail-transport.how-long-is-the-wait,ਇੰਤਜ਼ਾਰ
+trail-transport.is-there-cell-signal-here,ਸਿਗਨਲ
+trail-transport.what-time-is-the-last-shuttle,ਆਖ਼ਰੀ ਬੱਸ
+trail-transport.when-does-the-cableway-stop,ਰੱਸੀ ਵਾਲੀ ਗੱਡੀ
+trail-transport.where-can-we-buy-water,ਪਾਣੀ
+trail-transport.where-can-we-refill-water,ਬੋਤਲ | ਭਰ
+transit-rides.can-i-use-this-ticket,ਚੱਲੇਗੀ
+transit-rides.do-i-need-to-transfer,ਬਦਲਣੀ
+transit-rides.do-i-need-to-validate,ਪੰਚ
+transit-rides.i-am-in-a-hurry,ਕਾਹਲੀ
+transit-rides.i-went-past-my-stop,ਲੰਘ ਗਿਆ
+transit-rides.is-it-delayed,ਲੇਟ
+transit-rides.is-this-direct,ਸਿੱਧੀ
+transit-rides.please-tell-me-where-to-get-off,ਉੱਤਰਨਾ
+transit-rides.what-is-the-next-stop,ਅਗਲਾ ਸਟਾਪ
+transit-rides.what-time-is-the-next-one,ਅਗਲੀ
+transit-rides.where-do-i-pay-the-fare,ਕਿਰਾਇਆ
+transit-rides.where-is-the-subway-station,ਮੈਟਰੋ
+weather.how-cold-at-night,ਰਾਤੀਂ | ਠੰਢ
+weather.is-it-safe-today,ਠੀਕ
+weather.will-it-rain,ਮੀਂਹ

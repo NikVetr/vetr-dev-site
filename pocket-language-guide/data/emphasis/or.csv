@@ -1,0 +1,320 @@
+concept_id,key
+about-me.i-am-a-doctor,ଡାକ୍ତର
+about-me.i-am-a-nurse,ନର୍ସ
+about-me.i-am-a-student,ବିଦ୍ୟାର୍ଥୀ
+about-me.i-am-a-teacher,ଶିକ୍ଷକ
+about-me.i-am-an-engineer,ଇଞ୍ଜିନିୟର
+about-me.i-am-retired,ଅବସର
+about-me.i-have-my-own-business,ନିଜର ବ୍ୟବସାୟ
+about-me.i-work-in-an-office,ଅଫିସରେ
+accessibility.step-free,ପାହାଚ ବିନା
+air-travel.i-would-like-a-window-seat,ଝରକା
+air-travel.i-would-like-an-aisle-seat,ଆଇଲ
+air-travel.my-luggage-did-not-arrive,ପହଞ୍ଚିଲା ନାହିଁ
+air-travel.where-is-check-in,ଚେକ୍-ଇନ୍
+air-travel.where-is-the-security-check,ସୁରକ୍ଷା ଯାଞ୍ଚ
+attractions-tickets.are-there-lockers,ଲକର
+attractions-tickets.could-you-take-a-photo-for-us,ଆମ ପାଇଁ
+attractions-tickets.do-i-need-a-reservation,ବୁକିଂ
+attractions-tickets.may-i-take-photos,ଫଟୋ
+attractions-tickets.what-is-the-latest-entry-time,ଶେଷ ପ୍ରବେଶ
+attractions-tickets.where-can-i-buy-tickets,ଟିକେଟ
+board-answers.after-food,ପରେ
+board-answers.before-food,ଆଗରୁ
+board-answers.can-you-walk,ଚାଲିପାରିବେ
+board-answers.help-is-coming,ସାହାଯ୍ୟ
+board-answers.how-many,କେତେ
+board-answers.i-am-calling-an-ambulance,ଆମ୍ବୁଲାନ୍ସ
+board-answers.i-am-calling-the-police,ପୋଲିସ୍
+board-answers.i-do-not-have-a-phone,ଫୋନ୍
+board-answers.i-will-check,ଦେଖି
+board-answers.i-will-find-someone,ଜଣଙ୍କୁ ଖୋଜିବି
+board-answers.i-will-show-you,ଦେଖାଇବି
+board-answers.i-will-write-it-down,ଲେଖିବି
+board-answers.i-would-rather-not-say,ନ କହିବା
+board-answers.it-is-closed,ବନ୍ଦ
+board-answers.it-is-free,ମାଗଣା
+board-answers.it-is-over-there,ସେଠାରେ
+board-answers.my-name-is-blank,ମୋ
+board-answers.none-of-these,ଏଥିରେ
+board-answers.not-possible,ସମ୍ଭବ ନୁହେଁ
+board-answers.only-for-customers,ଗ୍ରାହକଙ୍କ
+board-answers.pay-on-board,ଗାଡ଼ି ଭିତରେ
+board-answers.prescription-only,ଚିଠି
+board-answers.see-a-doctor,ଡାକ୍ତରଙ୍କୁ
+board-answers.stay-here,ରହିବା
+board-answers.the-hospital-is-close,ପାଖରେ
+board-answers.there-is-no-wait,ଅପେକ୍ଷା କରିବାର ଦରକାର ନାହିଁ
+board-answers.what-is-your-name,ନାମ
+board-answers.where-does-it-hurt,ଯନ୍ତ୍ରଣା
+board-answers.where-to,କେଉଁଠିକୁ
+border-customs.here-is-my-passport,ପାସପୋର୍ଟ
+border-customs.i-am-here-for-business,ବ୍ୟବସାୟ
+border-customs.i-am-visiting-family,ପରିବାରକୁ
+border-customs.i-have-a-connecting-flight,ଆଉ ଏକ ଉଡ଼ାଣ
+border-customs.where-do-i-collect-my-baggage,ମିଳିବ
+color-size-returns.do-you-have-a-bag,ବ୍ୟାଗ
+color-size-returns.do-you-have-another-size,ସାଇଜ
+color-size-returns.may-i-try-it-on,ପିନ୍ଧି
+common-signs.no-photography,ନିଷେଧ
+communication.can-you-help-me,ସାହାଯ୍ୟ
+communication.do-you-speak-english,କହିପାରନ୍ତି
+communication.i-do-not-speak-this-language,କହିପାରେ ନାହିଁ
+communication.i-do-not-understand,ବୁଝିଲି ନାହିଁ
+communication.please-speak-more-slowly,ଧୀରେ
+dietary-needs.does-it-contain-fish-stock,ମାଛ ରସ
+dietary-needs.does-it-contain-pork-fat,ଘୁଷୁରି ଚର୍ବି
+dietary-needs.does-it-contain-pork-stock,ଘୁଷୁରି ମାଂସର ରସ
+dietary-needs.i-am-vegan,"ଅଣ୍ଡା, ଦୁଧ ଓ ଘିଅ"
+dietary-needs.i-am-vegetarian,ନିରାମିଷ
+dietary-needs.is-this-halal,ହାଲାଲ୍
+dietary-needs.no-eggs,ଅଣ୍ଡା
+dietary-needs.no-meat,ମାଂସ
+dietary-needs.no-nuts,ବାଦାମ
+dietary-needs.no-peanuts,ଚିନାବାଦାମ
+dietary-needs.no-pork,ଘୁଷୁରି
+dietary-needs.no-seafood,ସାମୁଦ୍ରିକ ଖାଦ୍ୟ
+dietary-needs.no-sesame,ତିଳ
+directions.can-i-walk-there,ଯାଇପାରିବି
+directions.can-you-show-me-the-way,ବାଟ
+directions.how-long-on-foot,କେତେ ସମୟ
+directions.is-it-far,ଦୂର
+directions.please-show-me-on-the-map,ମାନଚିତ୍ରରେ
+emergency-medical.i-am-bleeding-badly,ରକ୍ତ
+emergency-medical.i-am-having-a-severe-allergic-reaction,ଭୟଙ୍କର ଆଲର୍ଜି
+emergency-medical.i-am-injured,ଆହତ
+emergency-medical.i-cannot-breathe,ନିଶ୍ୱାସ
+emergency-medical.i-feel-unwell,ଭଲ ଲାଗୁନାହିଁ
+emergency-medical.i-have-chest-pain,ଛାତିରେ
+emergency-medical.i-have-travel-insurance,ବୀମା
+emergency-medical.i-need-a-doctor,ଡାକ୍ତର
+emergency-medical.i-think-a-bone-is-broken,ହାଡ଼ ଭାଙ୍ଗିଛି
+emergency-medical.it-hurts-here,ଯନ୍ତ୍ରଣା
+emergency-medical.please-call-an-ambulance,ଆମ୍ବୁଲାନ୍ସ
+emergency-medical.please-call-my-emergency-contact,ଜରୁରୀ ନମ୍ବରକୁ
+emergency-medical.please-take-me-to-a-hospital,ଡାକ୍ତରଖାନା
+emergency-medical.this-is-an-emergency,ଜରୁରୀ ଅବସ୍ଥା
+emergency-medical.this-person-is-unconscious,ଅଚେତ
+emergency-medical.where-is-the-nearest-hospital,ପାଖ
+family-intros.this-is-my-brother,ଭାଇ
+family-intros.this-is-my-colleague,ସହକର୍ମୀ
+family-intros.this-is-my-daughter,ଝିଅ
+family-intros.this-is-my-father,ବାପା
+family-intros.this-is-my-husband,ସ୍ୱାମୀ
+family-intros.this-is-my-mother,ମା
+family-intros.this-is-my-partner,ଜୀବନସାଥୀ
+family-intros.this-is-my-sister,ଭଉଣୀ
+family-intros.this-is-my-son,ପୁଅ
+family-intros.this-is-my-wife,ସ୍ତ୍ରୀ
+food-ordering.is-a-table-available,ଟେବୁଲ ଖାଲି
+food-ordering.is-this-vegetarian,ନିରାମିଷ
+food-ordering.table-for-two,ଦୁଇ ଜଣଙ୍କ
+food-ordering.to-go-please,ପ୍ୟାକ୍
+food-ordering.what-do-you-recommend,ଖାଇବାକୁ କହିବେ
+hiking-parks.how-long-to-the-summit,ଶିଖର
+hiking-parks.how-long-to-the-viewpoint,ଦୃଶ୍ୟ ସ୍ଥଳ
+hiking-parks.is-this-trail-suitable-for-beginners,ନୂଆ ଲୋକଙ୍କ
+hiking-parks.where-is-the-trailhead,ଆରମ୍ଭ
+hiking-parks.which-route-is-easier,ସହଜ
+hitchhiking.can-you-give-me-a-ride,ଲିଫ୍ଟ
+hitchhiking.i-can-pay-for-fuel,ପେଟ୍ରୋଲ
+hitchhiking.i-only-need-to-go-to-the-next-town,ପରବର୍ତ୍ତୀ ସହରକୁ
+hitchhiking.is-there-room-for-two,ଦୁଇ ଜଣ | ଜାଗା
+hitchhiking.thank-you-for-the-ride,ଧନ୍ୟବାଦ
+hitchhiking.where-are-you-going,କେଉଁଠିକୁ
+hotel-basics.are-any-rooms-available,କୋଠରୀ ଖାଲି
+hotel-basics.how-much-per-night,ଗୋଟିଏ ରାତି
+hotel-basics.i-have-a-reservation,ବୁକିଂ
+hotel-basics.i-would-like-a-non-smoking-room,ଧୂମପାନ ମୁକ୍ତ
+hotel-basics.i-would-like-a-quiet-room,ଶାନ୍ତ
+hotel-basics.is-breakfast-included,ଜଳଖିଆ
+hotel-basics.is-there-a-washing-machine,ୱାସିଂ ମେସିନ୍
+hotel-basics.is-there-air-conditioning,ଏସି
+hotel-basics.is-wi-fi-free,ୱାଇ-ଫାଇ
+hotel-basics.may-i-see-the-room,ଦେଖିପାରିବି
+hotel-requests.another-blanket,କମ୍ବଳ
+hotel-requests.another-night,ଆଉ ଗୋଟିଏ ରାତି
+hotel-requests.another-towel-please,ତଉଲିଆ
+hotel-requests.can-i-check-in-early,ଆଗେ
+hotel-requests.can-i-check-out-later,ଡେରିରେ
+hotel-requests.can-i-store-my-luggage,ଜିନିଷ
+hotel-requests.is-there-a-safe,ଲକର
+hotel-requests.no-housekeeping,ସଫା
+hotel-requests.what-time-does-breakfast-start,ଜଳଖିଆ
+hotel-requests.what-time-is-check-out,ଚେକ୍-ଆଉଟ୍
+in-a-building.is-this-the-correct-entrance,ଠିକ୍
+introductions.i-am-a-tourist,ପର୍ଯ୍ୟଟକ
+introductions.i-am-from,ଦେଶରୁ
+introductions.i-am-traveling-alone,ଏକା
+introductions.my-name-is,ମୋ
+introductions.this-is-my-friend,ସାଙ୍ଗ
+introductions.we-are-traveling-together,ଏକାଠି
+introductions.what-is-your-name,ଆପଣଙ୍କ
+introductions.where-are-you-from,କେଉଁଠାରୁ
+kind-words.i-had-a-wonderful-time,ଭଲ ସମୟ
+kind-words.i-like-it-very-much,ଭଲ ଲାଗିଲା
+kind-words.it-is-beautiful-here,ସୁନ୍ଦର
+kind-words.thank-you-for-everything,ସବୁ କିଛି
+kind-words.thank-you-for-your-help,ସାହାଯ୍ୟ
+kind-words.thank-you-for-your-hospitality,ଆତିଥ୍ୟ
+kind-words.this-is-delicious,ସୁଆଦିଆ
+kind-words.you-are-very-kind,ଦୟାଳୁ
+laundry.can-it-be-ready-today,ଆଜି
+laundry.how-much-per-kilo,କିଲୋ ପିଛା
+laundry.please-do-not-use-bleach,ବ୍ଲିଚ୍
+laundry.please-iron-this,ଇସ୍ତ୍ରୀ
+laundry.please-wash-these-clothes,ଧୋଇ
+laundry.when-will-it-be-ready,କେବେ
+laundry.where-is-a-laundromat,ଲଣ୍ଡ୍ରି
+lost-rescue.i-do-not-know-where-i-am,କେଉଁଠି ଅଛି
+lost-rescue.i-lost-my-bag,ବ୍ୟାଗ
+lost-rescue.i-lost-my-passport,ପାସପୋର୍ଟ
+lost-rescue.i-lost-my-phone,ଫୋନ୍
+lost-rescue.i-lost-my-wallet,ପର୍ସ
+lost-rescue.my-child-is-missing,ପିଲା
+lost-rescue.please-call-the-police,ପୋଲିସ୍
+lost-rescue.we-are-here,ଏଠାରେ
+massage-spa.focus-on-back,ପିଠିରେ
+massage-spa.focus-on-feet,ପାଦରେ
+massage-spa.focus-on-neck,ବେକରେ
+massage-spa.focus-on-shoulders,କାନ୍ଧରେ
+massage-spa.more-gently,ହାଲୁକା ହାତରେ
+massage-spa.please-avoid-this-area,କରନ୍ତୁ ନାହିଁ
+massage-spa.please-pause,ବିରାମ
+massage-spa.please-stop,ବନ୍ଦ କରନ୍ତୁ
+massage-spa.reply-ask-supervisor,ପରିଚାଳକଙ୍କୁ
+massage-spa.reply-cannot-avoid-this-treatment,ଛାଡ଼ି ହେବ ନାହିଁ
+massage-spa.reply-does-it-hurt-there,ଯନ୍ତ୍ରଣା
+massage-spa.reply-i-will-avoid-that-area,ଛାଡ଼ିଦେବି
+massage-spa.reply-which-area-exactly,କେଉଁ ଜାଗାର
+massage-spa.stronger-pressure,ଜୋରରେ
+massage-spa.that-pressure-is-good,ଠିକ୍
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ଆସପିରିନ୍ | ଆଇବୁପ୍ରୋଫେନରେ
+medical-conditions.i-am-allergic-to-penicillin,ପେନିସିଲିନରେ
+medical-conditions.i-am-allergic-to-sulfa-drugs,ସଲଫା
+medical-conditions.i-am-diabetic,ମଧୁମେହ
+medical-conditions.i-am-pregnant,ଗର୍ଭବତୀ
+medical-conditions.i-carry-an-adrenaline-injector,ଆଡ୍ରିନାଲିନ୍
+medical-conditions.i-have-a-heart-condition,ହୃଦରୋଗ
+medical-conditions.i-have-asthma,ହାଁପାଣି
+medical-conditions.i-have-epilepsy,ମୃଗୀ ରୋଗ
+medical-conditions.i-need-insulin,ଇନସୁଲିନ୍
+medical-conditions.i-need-my-inhaler,ଇନହେଲର
+medical-conditions.i-take-blood-thinners,ରକ୍ତ ପତଳା
+medical-conditions.inject-it-into-my-outer-thigh,ଜଙ୍ଘର
+medical-conditions.my-blood-sugar-is-low,ଶର୍କରା କମିଯାଇଛି
+medical-conditions.my-injector-is-in-my-bag,ଇଞ୍ଜେକ୍ସନ | ବ୍ୟାଗରେ
+medical-conditions.please-give-me-sugar-or-juice,ଚିନି | ରସ
+medical-conditions.this-card-lists-my-conditions,କାର୍ଡରେ
+medical-conditions.this-is-my-medicine,ଔଷଧ
+outdoors.are-there-dangerous-animals-here,ବିପଜ୍ଜନକ ପ୍ରାଣୀ
+outdoors.can-we-camp-here,କ୍ୟାମ୍ପ
+outdoors.is-it-safe-to-swim-here,ପହଁରିବା
+payment-receipt.can-we-pay-separately,ଅଲଗା ଅଲଗା
+payment-receipt.how-much-in-total,ସବୁ ମିଶାଇ
+payment-receipt.i-already-paid,ଆଗରୁ ଦେଇସାରିଛି
+payment-receipt.is-tax-included,କର
+payment-receipt.my-card-was-declined,ହେଲା ନାହିଁ
+payment-receipt.pay-by-card,କାର୍ଡରେ
+payment-receipt.the-bill-is-wrong,ଭୁଲ
+pharmacy-symptoms.antacid,ଏସିଡିଟି
+pharmacy-symptoms.anti-diarrhea-medicine,ଝାଡ଼ା
+pharmacy-symptoms.antihistamine,ଆଲର୍ଜି
+pharmacy-symptoms.antiseptic,ଜୀବାଣୁ
+pharmacy-symptoms.before-or-after-food,ଖାଇବା
+pharmacy-symptoms.can-i-get-this-medicine-here,ଔଷଧ
+pharmacy-symptoms.cough-medicine,କାଶ
+pharmacy-symptoms.do-i-need-a-prescription,ଚିଠି
+pharmacy-symptoms.how-many-times-a-day,ଦିନକୁ
+pharmacy-symptoms.how-much-should-i-take,କେତେ
+pharmacy-symptoms.i-am-vomiting,ବାନ୍ତି ହେଉଛି
+pharmacy-symptoms.i-feel-dizzy,ବୁଲାଉଛି
+pharmacy-symptoms.i-feel-nauseous,ବାନ୍ତି ଲାଗୁଛି
+pharmacy-symptoms.i-have-a-burn,ପୋଡ଼ିଯାଇଛି
+pharmacy-symptoms.i-have-a-cough,କାଶ
+pharmacy-symptoms.i-have-a-cut,କଟା
+pharmacy-symptoms.i-have-a-fever,ଜ୍ୱର
+pharmacy-symptoms.i-have-a-headache,ମୁଣ୍ଡ
+pharmacy-symptoms.i-have-a-rash,ଦାନା
+pharmacy-symptoms.i-have-a-sore-throat,ତଣ୍ଟି
+pharmacy-symptoms.i-have-a-stomach-ache,ପେଟ
+pharmacy-symptoms.i-have-diarrhea,ଝାଡ଼ା
+pharmacy-symptoms.i-think-it-is-infected,ସଂକ୍ରମଣ
+pharmacy-symptoms.is-this-safe-during-pregnancy,ଗର୍ଭାବସ୍ଥାରେ
+pharmacy-symptoms.motion-sickness-tablets,ଗାଡ଼ିରେ ବାନ୍ତି
+pharmacy-symptoms.painkiller,ଯନ୍ତ୍ରଣା
+pharmacy-symptoms.the-pain-is-severe,ଯନ୍ତ୍ରଣା | ବେଶୀ
+pharmacy-symptoms.which-pharmacy-is-open-now,ଏବେ | ଖୋଲା
+police-consulate.i-need-an-interpreter,ଅନୁବାଦକ
+police-consulate.i-want-to-contact-my-embassy,ଦୂତାବାସ
+police-consulate.i-want-to-report-a-theft,ଅଭିଯୋଗ
+police-consulate.my-bag-was-stolen,ଚୋରି
+police-consulate.someone-is-following-me,ପଛରେ ଆସୁଛି
+police-consulate.where-is-the-police-station,ଥାନା
+quick-directions.across-from-here,ଆରପଟେ
+quick-directions.go-straight,ସିଧା
+quick-directions.on-the-left,ବାମ
+quick-directions.on-the-right,ଡାହାଣ
+quick-directions.turn-left,ବାମକୁ
+quick-directions.turn-right,ଡାହାଣକୁ
+room-problems.can-i-change-rooms,ବଦଳାଇ
+room-problems.please-send-someone,ଜଣକୁ ପଠାନ୍ତୁ
+room-problems.the-air-conditioning-is-broken,ଏସି
+room-problems.the-heating-does-not-work,ହିଟର
+room-problems.the-key-does-not-work,ଚାବି
+room-problems.the-light-does-not-work,ଲାଇଟ୍
+room-problems.the-room-is-too-noisy,ଚିଲ୍ଲାବୁଲା
+room-problems.the-toilet-will-not-flush,ଫ୍ଲସ୍
+room-problems.there-is-a-problem-with-the-room,ଅସୁବିଧା
+room-problems.there-is-no-hot-water,ଗରମ ପାଣି
+shopping.can-it-be-a-little-cheaper,କମ୍
+shopping.how-much-is-this,ଦାମ
+shopping.i-am-just-looking,ଖାଲି ଦେଖୁଛି
+shopping.i-will-take-this,ନେବି
+shopping.that-is-too-expensive,ମହଙ୍ଗା
+shopping.where-do-i-pay,ଟଙ୍କା
+social-basics.i-do-not-know,ଜଣା ନାହିଁ
+taxi.can-you-wait-for-me-here,ଅପେକ୍ଷା
+taxi.could-you-make-it-colder,ଥଣ୍ଡା
+taxi.could-you-make-it-warmer,ଗରମ
+taxi.may-i-open-the-window,ଝରକା
+taxi.please-stop-here,ରୁହନ୍ତୁ
+taxi.please-take-me-here,ନେଇଯାଆନ୍ତୁ
+taxi.please-turn-around,ଗାଡ଼ି ବୁଲାନ୍ତୁ
+time-scheduling.can-we-change-the-time,ବଦଳାଇ
+time-scheduling.how-long-does-it-take,କେତେ ସମୟ
+time-scheduling.what-day-is-it-today,ବାର
+time-scheduling.what-time-does-it-close,ବନ୍ଦ
+time-scheduling.what-time-does-it-open,ଖୋଲେ
+time-scheduling.what-time-should-we-meet,ଭେଟିବା
+time-scheduling.when-is-convenient,ସୁବିଧା
+toilets.it-is-out-of-order,ଖରାପ
+toilets.where-toilet,ଟଏଲେଟ୍
+trail-conditions.can-we-return-before-dark,ଅନ୍ଧାର ହେବା ଆଗରୁ
+trail-conditions.can-we-return-the-same-way,ସେଇ ବାଟରେ
+trail-conditions.how-long-is-the-full-route,ପୂରା ବାଟ
+trail-conditions.is-the-path-slippery,ଖସଡ଼ା
+trail-conditions.is-the-route-steep,ଖଡ଼ା
+trail-conditions.is-the-trail-open,ଖୋଲା
+trail-transport.do-you-have-a-map,ମାନଚିତ୍ର
+trail-transport.how-long-is-the-wait,ଅପେକ୍ଷା
+trail-transport.is-there-cell-signal-here,ମୋବାଇଲ୍ ସିଗନାଲ୍
+trail-transport.what-time-is-the-last-shuttle,ଶେଷ ସଟଲ୍
+trail-transport.when-does-the-cableway-stop,ରୋପୱେ
+trail-transport.where-can-we-buy-water,ପାଣି
+trail-transport.where-can-we-refill-water,ପାଣି | ଭରିପାରିବୁ
+transit-rides.can-i-use-this-ticket,ବ୍ୟବହାର
+transit-rides.do-i-need-to-transfer,ବଦଳାଇବାକୁ
+transit-rides.do-i-need-to-validate,ମୋହର
+transit-rides.i-am-in-a-hurry,ତରବର
+transit-rides.i-went-past-my-stop,ଛାଡ଼ି ଆସିଲି
+transit-rides.is-it-delayed,ବିଳମ୍ବ
+transit-rides.is-this-direct,ସିଧା
+transit-rides.please-tell-me-where-to-get-off,ଓହ୍ଲାଇବି
+transit-rides.what-is-the-next-stop,ପରବର୍ତ୍ତୀ ଷ୍ଟପ୍
+transit-rides.what-time-is-the-next-one,ପରବର୍ତ୍ତୀଟି
+transit-rides.where-do-i-pay-the-fare,ଭଡ଼ା
+transit-rides.where-is-the-subway-station,ମେଟ୍ରୋ
+weather.how-cold-at-night,ରାତିରେ | ଥଣ୍ଡା
+weather.is-it-safe-today,ନିରାପଦ
+weather.will-it-rain,ବର୍ଷା

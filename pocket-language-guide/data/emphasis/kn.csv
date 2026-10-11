@@ -1,0 +1,315 @@
+concept_id,key
+about-me.i-am-a-doctor,ಡಾಕ್ಟರ್
+about-me.i-am-a-nurse,ನರ್ಸ್
+about-me.i-am-a-student,ವಿದ್ಯಾರ್ಥಿ
+about-me.i-am-a-teacher,ಶಿಕ್ಷಕ
+about-me.i-am-an-engineer,ಇಂಜಿನಿಯರ್
+about-me.i-am-retired,ನಿವೃತ್ತ
+about-me.i-have-my-own-business,ಸ್ವಂತ ವ್ಯಾಪಾರ
+about-me.i-work-in-an-office,ಆಫೀಸಿನಲ್ಲಿ
+accessibility.step-free,ಮೆಟ್ಟಿಲು ಇಲ್ಲದ
+air-travel.i-would-like-a-window-seat,ಕಿಟಕಿ
+air-travel.i-would-like-an-aisle-seat,ದಾರಿ
+air-travel.my-luggage-did-not-arrive,ಬರಲಿಲ್ಲ
+air-travel.where-is-check-in,ಚೆಕ್-ಇನ್
+air-travel.where-is-the-security-check,ಭದ್ರತಾ ತಪಾಸಣೆ
+attractions-tickets.are-there-lockers,ಲಾಕರ್
+attractions-tickets.could-you-take-a-photo-for-us,ನಮಗಾಗಿ
+attractions-tickets.do-i-need-a-reservation,ಕಾಯ್ದಿರಿಸಬೇಕೇ
+attractions-tickets.may-i-take-photos,ಫೋಟೋ
+attractions-tickets.what-is-the-latest-entry-time,ಕೊನೆಯ ಪ್ರವೇಶ
+attractions-tickets.where-can-i-buy-tickets,ಟಿಕೆಟ್
+board-answers.after-food,ನಂತರ
+board-answers.before-food,ಮೊದಲು
+board-answers.can-you-walk,ನಡೆಯಲು
+board-answers.help-is-coming,ಸಹಾಯ
+board-answers.how-many,ಎಷ್ಟು
+board-answers.i-am-calling-an-ambulance,ಆಂಬ್ಯುಲೆನ್ಸ್
+board-answers.i-am-calling-the-police,ಪೊಲೀಸರನ್ನು
+board-answers.i-do-not-have-a-phone,ಫೋನ್
+board-answers.i-will-check,ನೋಡಿ
+board-answers.i-will-find-someone,ಒಬ್ಬರನ್ನು | ಹುಡುಕುತ್ತೇನೆ
+board-answers.i-will-show-you,ತೋರಿಸುತ್ತೇನೆ
+board-answers.i-will-write-it-down,ಬರೆಯುತ್ತೇನೆ
+board-answers.i-would-rather-not-say,ಹೇಳಲು ಇಷ್ಟವಿಲ್ಲ
+board-answers.it-is-over-there,ಅಲ್ಲಿ
+board-answers.my-name-is-blank,ನನ್ನ
+board-answers.none-of-these,ಇವುಗಳಲ್ಲಿ
+board-answers.not-possible,ಸಾಧ್ಯವಿಲ್ಲ
+board-answers.only-for-customers,ಗ್ರಾಹಕರಿಗೆ
+board-answers.pay-on-board,ಗಾಡಿಯಲ್ಲೇ
+board-answers.prescription-only,ಚೀಟಿ
+board-answers.see-a-doctor,ವೈದ್ಯರನ್ನು
+board-answers.stay-here,ಇಲ್ಲಿ ಇರುವುದು
+board-answers.the-hospital-is-close,ಹತ್ತಿರದಲ್ಲಿ
+board-answers.there-is-no-wait,ಕಾಯುವ ಅಗತ್ಯ ಇಲ್ಲ
+board-answers.what-is-your-name,ಹೆಸರು
+board-answers.where-does-it-hurt,ನೋವಿದೆ
+board-answers.where-to,ಎಲ್ಲಿಗೆ
+border-customs.here-is-my-passport,ಪಾಸ್ಪೋರ್ಟ್
+border-customs.i-am-here-for-business,ವ್ಯಾಪಾರಕ್ಕಾಗಿ
+border-customs.i-am-visiting-family,ಕುಟುಂಬವನ್ನು
+border-customs.i-have-a-connecting-flight,ಮುಂದಿನ ವಿಮಾನ
+border-customs.where-do-i-collect-my-baggage,ತೆಗೆದುಕೊಳ್ಳಬೇಕು
+color-size-returns.do-you-have-a-bag,ಚೀಲ
+color-size-returns.do-you-have-another-size,ಅಳತೆ
+color-size-returns.may-i-try-it-on,ಹಾಕಿ
+communication.can-you-help-me,ಸಹಾಯ
+communication.do-you-speak-english,ನಿಮಗೆ
+communication.i-do-not-speak-this-language,ಬರುವುದಿಲ್ಲ
+communication.i-do-not-understand,ಅರ್ಥವಾಗುವುದಿಲ್ಲ
+communication.please-speak-more-slowly,ನಿಧಾನವಾಗಿ
+dietary-needs.does-it-contain-fish-stock,ಮೀನಿನ ಸಾರು
+dietary-needs.does-it-contain-pork-fat,ಹಂದಿ ಕೊಬ್ಬು
+dietary-needs.does-it-contain-pork-stock,ಹಂದಿ ಮೂಳೆ ಸಾರು
+dietary-needs.i-am-vegan,"ಹಾಲು, ಮೊಸರು, ತುಪ್ಪ, ಮೊಟ್ಟೆ"
+dietary-needs.i-am-vegetarian,ಸಸ್ಯಾಹಾರಿ
+dietary-needs.is-this-halal,ಹಲಾಲ್
+dietary-needs.no-eggs,ಮೊಟ್ಟೆ
+dietary-needs.no-meat,ಮಾಂಸ
+dietary-needs.no-nuts,ಒಣಹಣ್ಣು
+dietary-needs.no-peanuts,ಕಡಲೆಕಾಯಿ
+dietary-needs.no-pork,ಹಂದಿ
+dietary-needs.no-seafood,"ಮೀನು, ಸಿಗಡಿ, ಏಡಿ"
+dietary-needs.no-sesame,ಎಳ್ಳು
+directions.can-i-walk-there,ಹೋಗಬಹುದೇ
+directions.can-you-show-me-the-way,ದಾರಿ
+directions.how-long-on-foot,ಎಷ್ಟು ಸಮಯ
+directions.is-it-far,ದೂರ
+directions.please-show-me-on-the-map,ನಕ್ಷೆಯಲ್ಲಿ
+emergency-medical.i-am-bleeding-badly,ರಕ್ತ
+emergency-medical.i-am-having-a-severe-allergic-reaction,ತೀವ್ರ ಅಲರ್ಜಿ
+emergency-medical.i-am-injured,ಗಾಯವಾಗಿದೆ
+emergency-medical.i-cannot-breathe,ಉಸಿರಾಡಲು
+emergency-medical.i-feel-unwell,ಸರಿಯಾಗಿಲ್ಲ
+emergency-medical.i-have-chest-pain,ಎದೆ
+emergency-medical.i-have-travel-insurance,ವಿಮೆ
+emergency-medical.i-need-a-doctor,ವೈದ್ಯರು
+emergency-medical.i-think-a-bone-is-broken,ಮೂಳೆ ಮುರಿದಿದೆ
+emergency-medical.it-hurts-here,ನೋವಿದೆ
+emergency-medical.please-call-an-ambulance,ಆಂಬ್ಯುಲೆನ್ಸ್
+emergency-medical.please-call-my-emergency-contact,ತುರ್ತು ಸಂಪರ್ಕಕ್ಕೆ
+emergency-medical.please-take-me-to-a-hospital,ಆಸ್ಪತ್ರೆಗೆ
+emergency-medical.this-is-an-emergency,ತುರ್ತು
+emergency-medical.this-person-is-unconscious,ಪ್ರಜ್ಞೆ ಇಲ್ಲ
+emergency-medical.where-is-the-nearest-hospital,ಹತ್ತಿರದ
+family-intros.this-is-my-brother,ಅಣ್ಣ
+family-intros.this-is-my-colleague,ಸಹೋದ್ಯೋಗಿ
+family-intros.this-is-my-daughter,ಮಗಳು
+family-intros.this-is-my-father,ಅಪ್ಪ
+family-intros.this-is-my-husband,ಗಂಡ
+family-intros.this-is-my-mother,ಅಮ್ಮ
+family-intros.this-is-my-partner,ಸಂಗಾತಿ
+family-intros.this-is-my-sister,ಅಕ್ಕ
+family-intros.this-is-my-son,ಮಗ
+family-intros.this-is-my-wife,ಹೆಂಡತಿ
+food-ordering.i-want-this,ಬೇಕು
+food-ordering.is-a-table-available,ಟೇಬಲ್ ಖಾಲಿ
+food-ordering.is-this-vegetarian,ಸಸ್ಯಾಹಾರಿಯೇ
+food-ordering.table-for-two,ಇಬ್ಬರಿಗೆ
+food-ordering.what-do-you-recommend,ಚೆನ್ನಾಗಿದೆ
+hiking-parks.how-long-to-the-summit,ಶಿಖರಕ್ಕೆ
+hiking-parks.how-long-to-the-viewpoint,ವೀಕ್ಷಣಾ ಸ್ಥಳಕ್ಕೆ
+hiking-parks.is-this-trail-suitable-for-beginners,ಆರಂಭಿಕರಿಗೆ
+hiking-parks.where-is-the-trailhead,ಚಾರಣ ಆರಂಭ
+hiking-parks.which-route-is-easier,ಸುಲಭ
+hitchhiking.can-you-give-me-a-ride,ಕರೆದುಕೊಂಡು ಹೋಗುತ್ತೀರಾ
+hitchhiking.i-can-pay-for-fuel,ಪೆಟ್ರೋಲ್
+hitchhiking.i-only-need-to-go-to-the-next-town,ಮುಂದಿನ ಪಟ್ಟಣದವರೆಗೆ
+hitchhiking.is-there-room-for-two,ಇಬ್ಬರಿಗೆ ಜಾಗ
+hitchhiking.thank-you-for-the-ride,ಧನ್ಯವಾದ
+hitchhiking.where-are-you-going,ಎಲ್ಲಿಗೆ
+hotel-basics.are-any-rooms-available,ಕೊಠಡಿ
+hotel-basics.how-much-per-night,ರಾತ್ರಿಗೆ
+hotel-basics.i-have-a-reservation,ಕಾಯ್ದಿರಿಸಿದ್ದೇನೆ
+hotel-basics.i-would-like-a-non-smoking-room,ಧೂಮಪಾನ ಇಲ್ಲದ
+hotel-basics.i-would-like-a-quiet-room,ಶಾಂತವಾದ
+hotel-basics.is-breakfast-included,ಬೆಳಗಿನ ಉಪಾಹಾರ
+hotel-basics.is-there-a-washing-machine,ವಾಷಿಂಗ್ ಮಷೀನ್
+hotel-basics.is-there-air-conditioning,ಎ.ಸಿ.
+hotel-basics.is-wi-fi-free,ವೈ-ಫೈ
+hotel-basics.may-i-see-the-room,ನೋಡಬಹುದೇ
+hotel-requests.another-blanket,ಹೊದಿಕೆ
+hotel-requests.another-night,ಇನ್ನೊಂದು ರಾತ್ರಿ
+hotel-requests.another-towel-please,ಟವೆಲ್
+hotel-requests.can-i-check-in-early,ಬೇಗ
+hotel-requests.can-i-check-out-later,ತಡವಾಗಿ
+hotel-requests.can-i-store-my-luggage,ಸಾಮಾನು
+hotel-requests.is-there-a-safe,ಸೇಫ್
+hotel-requests.no-housekeeping,ಸ್ವಚ್ಛ
+hotel-requests.what-time-does-breakfast-start,ಬೆಳಗಿನ ಉಪಾಹಾರ
+hotel-requests.what-time-is-check-out,ಚೆಕ್-ಔಟ್
+in-a-building.is-this-the-correct-entrance,ಸರಿಯಾದ
+introductions.i-am-a-tourist,ಪ್ರವಾಸಿ
+introductions.i-am-from,ದೇಶದಿಂದ
+introductions.i-am-traveling-alone,ಒಂಟಿಯಾಗಿ
+introductions.my-name-is,ನನ್ನ
+introductions.this-is-my-friend,ಸ್ನೇಹಿತ
+introductions.we-are-traveling-together,ಒಟ್ಟಿಗೆ
+introductions.what-is-your-name,ನಿಮ್ಮ
+introductions.where-are-you-from,ಎಲ್ಲಿಂದ
+kind-words.i-had-a-wonderful-time,ಅದ್ಭುತ
+kind-words.i-like-it-very-much,ಇಷ್ಟವಾಗಿದೆ
+kind-words.it-is-beautiful-here,ಸುಂದರವಾಗಿದೆ
+kind-words.thank-you-for-everything,ಎಲ್ಲದಕ್ಕೂ
+kind-words.thank-you-for-your-help,ಸಹಾಯಕ್ಕೆ
+kind-words.thank-you-for-your-hospitality,ಆತಿಥ್ಯಕ್ಕೆ
+kind-words.this-is-delicious,ರುಚಿಯಾಗಿದೆ
+kind-words.you-are-very-kind,ಒಳ್ಳೆಯವರು
+laundry.can-it-be-ready-today,ಇಂದೇ
+laundry.how-much-per-kilo,ಕಿಲೋಗೆ
+laundry.please-do-not-use-bleach,ಬ್ಲೀಚ್
+laundry.please-iron-this,ಇಸ್ತ್ರಿ
+laundry.please-wash-these-clothes,ತೊಳೆಯಿರಿ
+laundry.when-will-it-be-ready,ಯಾವಾಗ
+laundry.where-is-a-laundromat,ಬಟ್ಟೆ ತೊಳೆಯುವ ಅಂಗಡಿ
+lost-rescue.i-do-not-know-where-i-am,ಎಲ್ಲಿದ್ದೇನೆ
+lost-rescue.i-lost-my-bag,ಚೀಲ
+lost-rescue.i-lost-my-passport,ಪಾಸ್ಪೋರ್ಟ್
+lost-rescue.i-lost-my-phone,ಫೋನ್
+lost-rescue.i-lost-my-wallet,ಪರ್ಸ್
+lost-rescue.my-child-is-missing,ಮಗು
+lost-rescue.please-call-the-police,ಪೊಲೀಸರನ್ನು
+lost-rescue.we-are-here,ಇಲ್ಲಿದ್ದೇವೆ
+massage-spa.focus-on-back,ಬೆನ್ನಿಗೆ
+massage-spa.focus-on-feet,ಪಾದಗಳಿಗೆ
+massage-spa.focus-on-neck,ಕುತ್ತಿಗೆಗೆ
+massage-spa.focus-on-shoulders,ಭುಜಗಳಿಗೆ
+massage-spa.more-gently,ಮೆಲ್ಲಗೆ
+massage-spa.please-avoid-this-area,ಮುಟ್ಟಬೇಡಿ
+massage-spa.please-pause,ವಿರಾಮ
+massage-spa.please-stop,ನಿಲ್ಲಿಸಿ
+massage-spa.reply-ask-supervisor,ಮೇಲಧಿಕಾರಿಯನ್ನು
+massage-spa.reply-cannot-avoid-this-treatment,ಬಿಡಲು ಆಗುವುದಿಲ್ಲ
+massage-spa.reply-does-it-hurt-there,ನೋವಿದೆಯೇ
+massage-spa.reply-i-will-avoid-that-area,ಮುಟ್ಟುವುದಿಲ್ಲ
+massage-spa.reply-which-area-exactly,ಯಾವ ಭಾಗ
+massage-spa.stronger-pressure,ಜೋರಾಗಿ
+massage-spa.that-pressure-is-good,ಸರಿಯಾಗಿದೆ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ಆಸ್ಪಿರಿನ್ | ಐಬುಪ್ರೊಫೇನ್
+medical-conditions.i-am-allergic-to-penicillin,ಪೆನ್ಸಿಲಿನ್
+medical-conditions.i-am-allergic-to-sulfa-drugs,ಸಲ್ಫಾ
+medical-conditions.i-am-diabetic,ಸಕ್ಕರೆ ಕಾಯಿಲೆ
+medical-conditions.i-am-pregnant,ಗರ್ಭಿಣಿ
+medical-conditions.i-carry-an-adrenaline-injector,ಅಡ್ರಿನಾಲಿನ್
+medical-conditions.i-have-a-heart-condition,ಹೃದಯದ
+medical-conditions.i-have-asthma,ಅಸ್ತಮಾ
+medical-conditions.i-have-epilepsy,ಮೂರ್ಛೆ ರೋಗ
+medical-conditions.i-need-insulin,ಇನ್ಸುಲಿನ್
+medical-conditions.i-need-my-inhaler,ಇನ್ಹೇಲರ್
+medical-conditions.i-take-blood-thinners,ರಕ್ತ ತೆಳುವಾಗಿಸುವ
+medical-conditions.inject-it-into-my-outer-thigh,ತೊಡೆಯ
+medical-conditions.my-blood-sugar-is-low,ಸಕ್ಕರೆ ಕಡಿಮೆ
+medical-conditions.my-injector-is-in-my-bag,ಚುಚ್ಚುಮದ್ದು | ಚೀಲದಲ್ಲಿದೆ
+medical-conditions.please-give-me-sugar-or-juice,ಸಕ್ಕರೆ | ಜ್ಯೂಸ್
+medical-conditions.this-card-lists-my-conditions,ಕಾರ್ಡಿನಲ್ಲಿ
+medical-conditions.this-is-my-medicine,ಔಷಧ
+outdoors.are-there-dangerous-animals-here,ಅಪಾಯಕಾರಿ ಪ್ರಾಣಿಗಳು
+outdoors.can-we-camp-here,ಕ್ಯಾಂಪ್
+outdoors.is-it-safe-to-swim-here,ಈಜುವುದು
+payment-receipt.can-we-pay-separately,ಬೇರೆ ಬೇರೆಯಾಗಿ
+payment-receipt.how-much-in-total,ಒಟ್ಟು
+payment-receipt.i-already-paid,ಆಗಲೇ ಕೊಟ್ಟಿದ್ದೇನೆ
+payment-receipt.is-tax-included,ತೆರಿಗೆ
+payment-receipt.my-card-was-declined,ಆಗಲಿಲ್ಲ
+payment-receipt.pay-by-card,ಕಾರ್ಡ್
+payment-receipt.the-bill-is-wrong,ಬಿಲ್ ತಪ್ಪಾಗಿದೆ
+pharmacy-symptoms.antacid,ಆಸಿಡಿಟಿ
+pharmacy-symptoms.anti-diarrhea-medicine,ಭೇದಿ
+pharmacy-symptoms.antihistamine,ಅಲರ್ಜಿ
+pharmacy-symptoms.antiseptic,ಸೋಂಕು
+pharmacy-symptoms.before-or-after-food,ಊಟದ
+pharmacy-symptoms.can-i-get-this-medicine-here,ಔಷಧ
+pharmacy-symptoms.cough-medicine,ಕೆಮ್ಮಿನ
+pharmacy-symptoms.do-i-need-a-prescription,ಚೀಟಿ
+pharmacy-symptoms.how-many-times-a-day,ದಿನಕ್ಕೆ | ಸಲ
+pharmacy-symptoms.how-much-should-i-take,ಎಷ್ಟು
+pharmacy-symptoms.i-am-vomiting,ವಾಂತಿ
+pharmacy-symptoms.i-feel-dizzy,ಸುತ್ತುತ್ತಿದೆ
+pharmacy-symptoms.i-feel-nauseous,ವಾಕರಿಕೆ
+pharmacy-symptoms.i-have-a-burn,ಸುಟ್ಟ
+pharmacy-symptoms.i-have-a-cough,ಕೆಮ್ಮು
+pharmacy-symptoms.i-have-a-cut,ಕತ್ತರಿಸಿದ
+pharmacy-symptoms.i-have-a-fever,ಜ್ವರ
+pharmacy-symptoms.i-have-a-headache,ತಲೆನೋವು
+pharmacy-symptoms.i-have-a-rash,ದದ್ದು
+pharmacy-symptoms.i-have-a-sore-throat,ಗಂಟಲು
+pharmacy-symptoms.i-have-a-stomach-ache,ಹೊಟ್ಟೆ
+pharmacy-symptoms.i-have-diarrhea,ಭೇದಿ
+pharmacy-symptoms.i-think-it-is-infected,ಸೋಂಕು
+pharmacy-symptoms.is-this-safe-during-pregnancy,ಗರ್ಭಿಣಿಯರಿಗೆ
+pharmacy-symptoms.motion-sickness-tablets,ಪ್ರಯಾಣದ ವಾಕರಿಕೆ
+pharmacy-symptoms.painkiller,ನೋವು
+pharmacy-symptoms.rehydration-salts,ಒ.ಆರ್.ಎಸ್.
+pharmacy-symptoms.the-pain-is-severe,ನೋವು | ಜಾಸ್ತಿ
+pharmacy-symptoms.which-pharmacy-is-open-now,ಈಗ | ತೆರೆದಿದೆ
+police-consulate.i-need-an-interpreter,ಭಾಷಾಂತರಕಾರರು
+police-consulate.i-want-to-contact-my-embassy,ರಾಯಭಾರ ಕಚೇರಿಯನ್ನು
+police-consulate.i-want-to-report-a-theft,ದೂರು
+police-consulate.my-bag-was-stolen,ಕಳವಾಗಿದೆ
+police-consulate.someone-is-following-me,ಹಿಂದೆ ಬರುತ್ತಿದ್ದಾರೆ
+police-consulate.where-is-the-police-station,ಪೊಲೀಸ್ ಠಾಣೆ
+quick-directions.across-from-here,ಎದುರಿಗೆ
+quick-directions.go-straight,ನೇರವಾಗಿ
+quick-directions.turn-left,ಎಡಕ್ಕೆ
+quick-directions.turn-right,ಬಲಕ್ಕೆ
+room-problems.can-i-change-rooms,ಬದಲಿಸಬಹುದೇ
+room-problems.please-send-someone,ಯಾರನ್ನಾದರೂ ಕಳುಹಿಸಿ
+room-problems.the-air-conditioning-is-broken,ಎ.ಸಿ.
+room-problems.the-heating-does-not-work,ಹೀಟರ್
+room-problems.the-key-does-not-work,ಕೀ
+room-problems.the-light-does-not-work,ದೀಪ
+room-problems.the-room-is-too-noisy,ಗದ್ದಲ
+room-problems.the-toilet-will-not-flush,ಫ್ಲಶ್
+room-problems.there-is-a-problem-with-the-room,ಸಮಸ್ಯೆ
+room-problems.there-is-no-hot-water,ಬಿಸಿ ನೀರು
+shopping.can-it-be-a-little-cheaper,ಕಡಿಮೆ
+shopping.do-you-have-this-in-stock,ಸ್ಟಾಕ್
+shopping.how-much-is-this,ಎಷ್ಟು
+shopping.i-will-take-this,ತೆಗೆದುಕೊಳ್ಳುತ್ತೇನೆ
+shopping.that-is-too-expensive,ದುಬಾರಿ
+shopping.where-do-i-pay,ಕೊಡಬೇಕು
+social-basics.i-do-not-know,ಗೊತ್ತಿಲ್ಲ
+taxi.can-you-wait-for-me-here,ಕಾಯುತ್ತೀರಾ
+taxi.could-you-make-it-colder,ಜಾಸ್ತಿ
+taxi.could-you-make-it-warmer,ಕಡಿಮೆ
+taxi.may-i-open-the-window,ಕಿಟಕಿ
+taxi.please-stop-here,ನಿಲ್ಲಿಸಿ
+taxi.please-take-me-here,ಕರೆದುಕೊಂಡು ಹೋಗಿ
+taxi.please-turn-around,ಯು-ಟರ್ನ್
+time-scheduling.can-we-change-the-time,ಬದಲಿಸಬಹುದೇ
+time-scheduling.how-long-does-it-take,ಸಮಯ
+time-scheduling.what-day-is-it-today,ವಾರ
+time-scheduling.what-time-does-it-close,ಮುಚ್ಚುತ್ತದೆ
+time-scheduling.what-time-does-it-open,ತೆರೆಯುತ್ತದೆ
+time-scheduling.what-time-is-it,ಈಗ
+time-scheduling.what-time-should-we-meet,ಸಿಗೋಣ
+time-scheduling.when-is-convenient,ಅನುಕೂಲ
+toilets.where-toilet,ಟಾಯ್ಲೆಟ್
+trail-conditions.can-we-return-before-dark,ಕತ್ತಲಾಗುವ ಮೊದಲು
+trail-conditions.can-we-return-the-same-way,ಅದೇ ದಾರಿಯಲ್ಲಿ
+trail-conditions.how-long-is-the-full-route,ಪೂರ್ತಿ ಮಾರ್ಗ
+trail-conditions.is-the-path-slippery,ಜಾರುತ್ತದೆಯೇ
+trail-conditions.is-the-route-steep,ಕಡಿದಾಗಿದೆಯೇ
+trail-conditions.is-the-trail-open,ತೆರೆದಿದೆಯೇ
+trail-transport.do-you-have-a-map,ನಕ್ಷೆ
+trail-transport.how-long-is-the-wait,ಕಾಯಬೇಕು
+trail-transport.is-there-cell-signal-here,ಸಿಗ್ನಲ್
+trail-transport.what-time-is-the-last-shuttle,ಕೊನೆಯ ಶಟಲ್
+trail-transport.when-does-the-cableway-stop,ರೋಪ್ ವೇ
+trail-transport.where-can-we-buy-water,ನೀರು
+trail-transport.where-can-we-refill-water,ನೀರು | ತುಂಬಿಸಿಕೊಳ್ಳಬಹುದು
+transit-rides.can-i-use-this-ticket,ಬಳಸಬಹುದೇ
+transit-rides.do-i-need-to-transfer,ಬೇರೆ ಗಾಡಿ
+transit-rides.do-i-need-to-validate,ಮುದ್ರೆ
+transit-rides.i-am-in-a-hurry,ಅವಸರದಲ್ಲಿದ್ದೇನೆ
+transit-rides.i-went-past-my-stop,ದಾಟಿಹೋಯಿತು
+transit-rides.is-this-direct,ನೇರವಾಗಿ
+transit-rides.please-tell-me-where-to-get-off,ಇಳಿಯಬೇಕು
+transit-rides.what-is-the-next-stop,ಮುಂದಿನ ನಿಲ್ದಾಣ
+transit-rides.what-time-is-the-next-one,ಮುಂದಿನದು
+transit-rides.where-do-i-pay-the-fare,ಪ್ರಯಾಣ ದರ
+transit-rides.where-is-the-subway-station,ಮೆಟ್ರೋ
+weather.how-cold-at-night,ರಾತ್ರಿ | ಚಳಿ
+weather.is-it-safe-today,ಸುರಕ್ಷಿತವೇ
+weather.will-it-rain,ಮಳೆ
