@@ -732,6 +732,9 @@ def main():
         letters = row["letters"]
         if not letters or letters != unicodedata.normalize("NFC", letters).lower():
             errors.append(f"{where}: letters {letters!r} are not lower-case NFC")
+        # `^` and `$` mark a word's start and end, so only first and last, around letters.
+        if not letters.strip("^$") or "^" in letters[1:] or "$" in letters[:-1]:
+            errors.append(f"{where}: {letters!r} may have ^ only first and $ only last, around letters")
         if (row["language"], row["script"], letters) in seen_letters:
             errors.append(f"{where}: {letters!r} is read twice for {row['language'] or row['script']}")
         seen_letters.add((row["language"], row["script"], letters))

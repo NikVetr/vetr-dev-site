@@ -36,7 +36,9 @@ fr,Latn,h,,"silent in French names: Hélène"
   rows first, then the script's defaults, matching the **longest** letter sequence at
   each point (so `sch` beats `s`).
 - **`letters`** are lower case, NFC; a letter with a diacritic is its own row where it
-  reads differently (`ñ`, `ø`, `ł`, `č`).
+  reads differently (`ñ`, `ø`, `ł`, `č`). A leading `^` reads the run only at a word's
+  start and a trailing `$` only at its end: English `e$` silent (Jane), German `^st`
+  as ʃ t (Stefan), French `s$` silent (Thomas).
 - **`sound`** is one or more keys of the sound keyboard, space-separated, from exactly
   this set (`SOUNDS` in `ui/board-menu.js`):
 

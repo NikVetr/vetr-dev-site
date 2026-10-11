@@ -36,6 +36,15 @@ test('a language reads a letter its own way, and a silent one adds nothing', () 
   assert.equal(guessSounds('Hanna', TABLE, 'fr', 'Latn'), 'anna');
 });
 
+test('a run may be read only at a word\'s start or end', () => {
+  const edges = [...TABLE, { language: '', script: 'Latn', letters: 'e$', sound: '' },
+    { language: 'de', script: 'Latn', letters: '^s', sound: 'ʃ' }];
+  assert.equal(guessSounds('Jane', edges, 'en', 'Latn'), 'dʒan');
+  assert.equal(guessSounds('Jane Lee', edges, 'en', 'Latn'), 'dʒanle');
+  assert.equal(guessSounds('Elena', edges, 'en', 'Latn'), 'elena');
+  assert.equal(guessSounds('Sissel', edges, 'de', 'Latn'), 'ʃissel');
+});
+
 test('what the table does not read adds no sound, and another script reads nothing here', () => {
   assert.equal(guessSounds('Ana-Lou', TABLE, 'en', 'Latn'), 'analou');
   assert.equal(guessSounds('Ника', TABLE, 'ru', 'Latn'), '');

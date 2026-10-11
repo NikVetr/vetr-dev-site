@@ -787,8 +787,9 @@ export function nameRespeller(rules, ownerIpa) {
  * tile, never an answer. `table` is `data/registry/name-letters.csv`: per script, the
  * sounds of a letter or a run of letters, with a language's own reading of a run taking
  * the place of the script's default. The longest run that reads wins at each point
- * (`sch` before `s`). A letter the table does not read -- a space, a hyphen, an
- * apostrophe -- adds no sound.
+ * (`sch` before `s`). A run may be read only at a word's start (`^st`) or end (`e$`):
+ * each word is read between those two marks, which add no sound themselves. A letter
+ * the table does not read -- a space, a hyphen, an apostrophe -- adds no sound.
  * @param {string} name
  * @param {Record<string,string>[]} table  rows of `language,script,letters,sound`
  * @param {string} language  the reader's, whose own readings come first
@@ -800,7 +801,7 @@ export function guessSounds(name, table, language, script) {
   for (const row of table) if (row.script === script && !row.language) read.set(row.letters, row.sound);
   for (const row of table) if (row.script === script && row.language === language) read.set(row.letters, row.sound);
   const longest = Math.max(0, ...[...read.keys()].map((letters) => letters.length));
-  const text = name.normalize('NFC').toLocaleLowerCase(language);
+  const text = name.normalize('NFC').toLocaleLowerCase(language).replace(/[\p{L}\p{M}]+/gu, (word) => `^${word}$`);
   /** @type {string[]} */ const sounds = [];
   for (let i = 0; i < text.length;) {
     let n = Math.min(longest, text.length - i);
