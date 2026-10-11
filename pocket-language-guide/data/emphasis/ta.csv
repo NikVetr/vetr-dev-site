@@ -1,6 +1,6 @@
 concept_id,key
 about-me.i-am-a-doctor,மருத்துவர்
-about-me.i-am-a-nurse,தாதி
+about-me.i-am-a-nurse,செவிலியர்
 about-me.i-am-a-student,மாணவர்
 about-me.i-am-a-teacher,ஆசிரியர்
 about-me.i-am-an-engineer,பொறியாளர்
@@ -54,7 +54,7 @@ border-customs.where-do-i-collect-my-baggage,பெறுவது
 color-size-returns.do-you-have-a-bag,பை
 color-size-returns.do-you-have-another-size,அளவு
 color-size-returns.may-i-try-it-on,போட்டுப்
-common-signs.no-photography,எடுக்க வேண்டாம்
+common-signs.no-photography,எடுக்கக் கூடாது
 communication.can-you-help-me,உதவ
 communication.do-you-speak-english,உங்களுக்கு
 communication.i-do-not-speak-this-language,தெரியாது
@@ -63,7 +63,7 @@ communication.please-speak-more-slowly,மெதுவாகப்
 dietary-needs.does-it-contain-fish-stock,மீன் சாறு
 dietary-needs.does-it-contain-pork-fat,பன்றிக் கொழுப்பு
 dietary-needs.does-it-contain-pork-stock,பன்றி இறைச்சிச் சாறு
-dietary-needs.i-am-vegan,விகன்
+dietary-needs.i-am-vegan,வீகன்
 dietary-needs.i-am-vegetarian,சைவம்
 dietary-needs.is-this-halal,ஹலாலா
 dietary-needs.no-eggs,முட்டை

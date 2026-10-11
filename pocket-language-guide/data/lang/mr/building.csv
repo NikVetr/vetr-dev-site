@@ -53,7 +53,7 @@ toilets.squat-toilet,भारतीय पद्धतीचे टॉयले
 building-words.elevator,लिफ्ट,,liphṭa,lˈɪpʰʈ,,2,mr-agent-v1;ipa=espeak
 building-words.stairs,जिना,,jinā,ɟˈɪɪnˌaː,,2,mr-agent-v1;ipa=espeak
 building-words.entrance,प्रवेशद्वार,,pravēśadvāra,pɾˌəveːʃdvˈaːɾ,,2,mr-agent-v1;ipa=espeak
-building-words.exit,बाहेर,,bāhēra,baːhˈeːɾ,,2,mr-agent-v1;ipa=espeak
+building-words.exit,निर्गमन द्वार,,nirgamana dvāra,nˈɪɾɡəmˌən dvˈaːɾ,exit gate -- the pair of प्रवेशद्वार (entrance); the old बाहेर was the adverb outside,2,mr-agent-v1;fix=mr.wikipedia बैय्यप्पनहळ्ळी मेट्रो स्थानक (प्रवेश/निर्गमन द्वार अ) and ला कारोलिना मेट्रो स्थानक (या स्थानकाला चार निर्गमन द्वार आहेत) and Date Maharashtra Shabdakosh (DSAL) p.1867 निर्गम 3 निर्गमन -- पुढें अथवा बाहेर जाणें;rule=a sign noun not the adverb (Berntsen A Basic Marathi-English Dictionary (DSAL) p.103 बाहेर adv. out outside);row-corrections-v9;ipa=espeak
 building-words.men,पुरुष,,puruṣa,pˈʊɾʊʂ,,2,mr-agent-v1;ipa=espeak
 building-words.women,स्त्रिया,,striyā,stɾˈɪjaː,,2,mr-agent-v1;ipa=espeak
 building-words.door,दरवाजा,,daravājā,dˌəɾvˈaːzaː,,2,mr-agent-v1;ipa=espeak

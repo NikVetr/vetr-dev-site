@@ -7,7 +7,7 @@ dietary-needs.no-peanuts,வேர்க்கடலை வேண்டாம்
 dietary-needs.no-nuts,"முந்திரி, பாதாம், கொட்டை வகைகள் வேண்டாம்",,"muntiri, pātām, koṭṭai vakaikaḷ vēṇṭām","mundiɾi, paːdaːm, koʈʈaɪ vʌɡaɪɡʌɭ veːɳɖaːm","no cashew, almond or other tree nuts",2,ta-agent-v1;ipa=espeak
 dietary-needs.no-seafood,"மீன், இறால், கடல் உணவு வேண்டாம்",,"mīṉ, iṟāl, kaṭal uṇavu vēṇṭām","miːn, iraːl, kʌɖʌl uɳʌvɯ veːɳɖaːm","no fish, prawn or other seafood",2,ta-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,நான் சைவம்,நான் சுத்த சைவம்,nāṉ caivam,naːn saɪvʌm,"saivam -- no meat, fish or egg; milk is allowed",2,ta-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,நான் விகன்,"பால், முட்டை, தேன் எதுவும் சாப்பிட மாட்டேன்",nāṉ vikaṉ,naːn viɡʌn,"Tamil saivam still allows milk, so this row spells out the difference",2,ta-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,நான் வீகன்,"பால், முட்டை, தேன் எதுவும் சாப்பிட மாட்டேன்",nāṉ vīkaṉ,naːn viːɡʌn,"Tamil saivam still allows milk, so this row spells out the difference",2,ta-agent-v1;fix=ta.wikipedia உலக நனிசைவ நாள் rev 4464168 (உலக வீகன் தினம்) -- the loan with the long ī of English vegan -- where விகன் is the Philippine town Vigan;row-corrections-v9;ipa=espeak
 dietary-needs.i-do-not-eat,நான் {} சாப்பிட மாட்டேன்,,nāṉ {} cāppiṭa māṭṭēṉ,naːn {} saːppiɖʌ maːʈʈeːn,,2,ta-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,எனக்கு {} ஒவ்வாமை,,eṉakku {} ovvāmai,enʌkkɯ {} ovvaːmaɪ,,2,ta-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,இதில் மீன் சாறு உள்ளதா?,,itil mīṉ cāṟu uḷḷatā?,idil miːn saːrɯ uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak

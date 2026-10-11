@@ -70,7 +70,7 @@ pharmacy-symptoms.bandage,पट्टी,,paṭṭī,pˈʌʈʈˌiː,,2,ne-agent
 pharmacy-symptoms.the-pain-is-severe,दुखाइ धेरै छ,,dukhāi dhērai cha,dukʰˈaːɪ dʰˈeːɾɛː cʰˈə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,एन्टिसेप्टिक,,ēnṭisēpṭika,ˌeːnʈɪsˈeːpʈɪkˌə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,मलाई वाकवाकी लागिरहेको छ,,malāī vākavākī lāgirahēkō cha,məlˈaːi wˌaːkəwˈaːki lˌaːɡɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-a-rash,मेरो छालामा दाग देखिएको छ,,mērō chālāmā dāga dēkhiēkō cha,mˈeːɾoː cʰaːlˈaːmaː dˈaːɡ dˌeːkʰɪˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,मेरो छालामा बिमिरा आएका छन्,,mērō chālāmā bimirā āēkā chan,mˈeːɾoː cʰaːlˈaːmaː bˈɪmɪɾˌaː aːˈeːkaː cʰˈʌn,rashes have come out on my skin,2,ne-agent-v1;fix=ne.wikipedia जिका भाइरस rev 1385455 (caption of Zika.Virus.Rash.Arm.2014.jpg: जिका भाइरसका कारण पाखुरामा आएका बिमिरा) and जनै खटिरा rev 1311722 (मसिना बिमिरा निस्कने) -- बिमिरा is the rash -- where Schmidt A Practical Dictionary of Modern Nepali (DSAL) p.308 दाग is a stain spot or scar;row-corrections-v9;ipa=espeak
 pharmacy-symptoms.before-or-after-food,खानुअघि कि पछि?,,khānuaghi ki pachi?,kʰˈaːnuˌəɡʰɪ kˈɪ pˈʌcʰɪ,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-it-is-infected,यसमा संक्रमण भएको जस्तो छ,,yasamā saṁkramaṇa bhaēkō jastō cha,jˈʌsəmˌaː sˈʌŋkɾəmˌəɳ bʰəˈeːkoː ɟˈʌstoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.motion-sickness-tablets,बाटोमा हुने वाकवाकीको चक्की,,bāṭōmā hunē vākavākīkō cakkī,baːʈˈoːmaː hˈuneː wˌaːkəwˈaːkɪːkˌoː cˈʌkkˌiː,,2,ne-agent-v1;ipa=espeak

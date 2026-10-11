@@ -43,7 +43,7 @@ transit-rides.does-this-bus-train-go-to,ఈ బస్సు / రైలు {} �
 transit-rides.what-is-the-next-stop,తరవాత స్టాప్ ఏది?,,taravāta sṭāp ēdi?,taraʋaːta sʈaːp eːdi,,2,te-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,ఎక్కడ దిగాలో చెప్పండి,,ekkaḍa digālō ceppaṁḍi,ekkaɖa diɡaːloː tʃeppaɳɖi,,2,te-agent-v1;ipa=espeak
 transit-rides.is-this-direct,ఇది నేరుగా వెళ్తుందా?,,idi nērugā veḷtuṁdā?,idi neːruɡaː ʋeɭtundaː,,2,te-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-transfer,రైలు మారాలా?,,railu mārālā?,raɪlu maːraːlaː,must I change trains,2,te-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,బండి మారాలా?,,baṁḍi mārālā?,baɳɖi maːraːlaː,"must I change vehicles? -- బండి is any conveyance, so it serves the bus and metro rows on the same screen",2,te-agent-v1;fix=Gwynn A Telugu-English Dictionary (DSAL) p.373 బండి 1 any conveyance that moves on land -- cart carriage car train bicycle etc. -- where p.458 రైలు is railway or train;in-pack-word=board-answers.pay-on-board (బండిలోనే కట్టాలి);row-corrections-v9;ipa=espeak
 transit-rides.is-it-delayed,ఆలస్యం అయిందా?,,ālasyaṁ ayiṁdā?,aːlasjam ajindaː,,2,te-agent-v1;ipa=espeak
 transit-rides.i-am-in-a-hurry,నాకు తొందర ఉంది,,nāku toṁdara uṁdi,naːku tondara undi,,2,te-agent-v1;ipa=espeak
 transit-rides.which-platform,ఏ ప్లాట్ఫారం?,ఏ ప్లాట్ఫాం?,ē plāṭphāraṁ?,eː plaːʈpʰaːram,,2,te-agent-v1;ipa=espeak
@@ -115,7 +115,7 @@ common-signs.no-smoking,ధూమపానం నిషేధం,,dhūmapānaṁ
 common-signs.no-photography,ఫోటోలు నిషేధం,,phōṭōlu niṣēdhaṁ,pʰoːʈoːlu niʂeːdʰam,,2,te-agent-v1;ipa=espeak
 common-signs.do-not-touch,ముట్టుకోకండి,,muṭṭukōkaṁḍi,muʈʈukoːkaɳɖi,,2,te-agent-v1;ipa=espeak
 common-signs.temporarily-closed,తాత్కాలికంగా మూసివేశారు,,tātkālikaṁgā mūsivēśāru,taːtkaːlikaŋɡaː muːsiʋeːʃaːru,,2,te-agent-v1;ipa=espeak
-common-signs.open-operating,పని చేస్తోంది,,pani cēstōṁdi,pani tʃeːstoːndi,,2,te-agent-v1;ipa=espeak
+common-signs.open-operating,తెరిచి ఉంది,,terici uṁdi,teritʃi undi,"it is open -- the answer to 'when does it open?'; the old పని చేస్తోంది was it is working, as a machine does",2,te-agent-v1;fix=Gwynn A Telugu-English Dictionary (DSAL) p.244 తెరచు తెరుచు to open unfasten unlock -- where p.317 పని is work task job;in-pack-frame=common-signs.open-on (తెరిచి ఉంది) and board-answers.it-is-closed (మూసివేశారు) beside it in the time~when set;row-corrections-v9;ipa=espeak
 common-signs.closed,మూసివేశారు,,mūsivēśāru,muːsiʋeːʃaːru,,2,te-agent-v1;ipa=espeak
 common-signs.stopped-stop,ఆగింది / ఆపండి,,āgiṁdi / āpaṁḍi,aːɡindi / aːpaɳɖi,,2,te-agent-v1;ipa=espeak
 common-signs.pork-code,"ఇండోనేషియాలో పంది మాంసం అమ్మే చోట ఆ మాట రాయకుండా సంకేతాలు పెడతారు: B2 (babi నుంచి), BPK, samcan, bakut, cu nyuk, siobak, saksang. కానీ B1 అంటే కుక్క మాంసం, పంది కాదు; bakso, bakmi, bakpao లోని bak- అంటే హొక్కియన్ భాషలో మాంసం అని మాత్రమే — ఇండోనేషియాలో ఎక్కువ bakso గొడ్డు మాంసంతోనే చేస్తారు.",,"iṁḍōnēṣiyālō paṁdi māṁsaṁ ammē cōṭa ā māṭa rāyakuṁḍā saṁkētālu peḍatāru: B2 (babi nuṁci), BPK, samcan, bakut, cu nyuk, siobak, saksang. kānī B1 aṁṭē kukka māṁsaṁ, paṁdi kādu; bakso, bakmi, bakpao lōni bak- aṁṭē hokkiyan bhāṣalō māṁsaṁ ani mātramē — iṁḍōnēṣiyālō ekkuva bakso goḍḍu māṁsaṁtōnē cēstāru.",,,2,te-notes-v1

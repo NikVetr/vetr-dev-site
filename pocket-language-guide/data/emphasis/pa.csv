@@ -31,7 +31,7 @@ board-answers.i-am-calling-the-police,ਪੁਲਿਸ
 board-answers.i-do-not-have-a-phone,ਫ਼ੋਨ
 board-answers.i-will-check,ਦੇਖ
 board-answers.i-will-find-someone,ਕੋਈ ਮਿਲ ਜਾਵੇਗਾ
-board-answers.i-will-show-you,ਦਿਖਾਉਣਾ
+board-answers.i-will-show-you,ਦਿਖਾ
 board-answers.i-will-write-it-down,ਲਿਖ
 board-answers.i-would-rather-not-say,ਨਾ ਦੱਸਾਂ
 board-answers.it-is-closed,ਬੰਦ
@@ -189,7 +189,7 @@ massage-spa.please-stop,ਬੱਸ
 massage-spa.reply-ask-supervisor,ਮੈਨੇਜਰ
 massage-spa.reply-cannot-avoid-this-treatment,ਨਹੀਂ ਛੱਡੀ ਜਾ ਸਕਦੀ
 massage-spa.reply-does-it-hurt-there,ਦਰਦ
-massage-spa.reply-i-will-avoid-that-area,ਛੱਡਣੀ
+massage-spa.reply-i-will-avoid-that-area,ਛੱਡੀ ਜਾਵੇਗੀ
 massage-spa.reply-which-area-exactly,ਕਿਹੜੀ ਥਾਂ
 massage-spa.stronger-pressure,ਜ਼ੋਰ ਨਾਲ
 massage-spa.that-pressure-is-good,ਠੀਕ
@@ -319,5 +319,5 @@ transit-rides.what-time-is-the-next-one,ਅਗਲੀ
 transit-rides.where-do-i-pay-the-fare,ਕਿਰਾਇਆ
 transit-rides.where-is-the-subway-station,ਮੈਟਰੋ
 weather.how-cold-at-night,ਰਾਤੀਂ | ਠੰਢ
-weather.is-it-safe-today,ਠੀਕ
+weather.is-it-safe-today,ਸੁਰੱਖਿਅਤ
 weather.will-it-rain,ਮੀਂਹ

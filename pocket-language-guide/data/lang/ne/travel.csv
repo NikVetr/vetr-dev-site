@@ -9,7 +9,7 @@ directions.where-am-i,म कहाँ छु?,,ma kahām̐ chu?,mə kˈʌhã c�
 directions.which-way,कुन बाटो?,,kuna bāṭō?,kˈun bˈaːʈoː,,2,ne-agent-v1;ipa=espeak
 directions.can-i-walk-there,के त्यहाँ पैदल जान मिल्छ?,,kē tyahām̐ paidala jāna milcha?,kˈeː tjˈʌhã pˈɛːdəl ɟˈaːn mˈɪlcʰə,,2,ne-agent-v1;ipa=espeak
 directions.how-far-is-it,कति टाढा छ?,,kati ṭāḍhā cha?,kˈʌtɪ ʈˈaːɖʰaː cʰˈə,,2,ne-agent-v1;ipa=espeak
-directions.which-exit,कुन गेट?,,kuna gēṭa?,kˈun ɡˈeːʈ,,2,ne-agent-v1;ipa=espeak
+directions.which-exit,कुन गेटबाट निस्कने?,,kuna gēṭabāṭa niskanē?,kˈun ɡˌeːʈəbˈaːʈ nˈɪskənˌeː,by which gate does one go out? -- the old कुन गेट? was the opening of air-travel.which-gate (कुन गेट हो?),2,ne-agent-v1;fix=Schmidt A Practical Dictionary of Modern Nepali (DSAL) p.352 निस्कनु to come out go out;in-pack-frame=board-answers.where-to (कहाँ जाने?) -- the -ने infinitive question has no gender;rule=distinct-from-air-travel.which-gate (the ur and gu repair: keep the pack's gate and add the verb of leaving);row-corrections-v9;ipa=espeak
 directions.can-you-show-me-the-way,बाटो देखाइदिनुहोस्?,,bāṭō dēkhāidinuhōs?,bˈaːʈoː dˌeːkʰaːˌɪdɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 directions.north,उत्तर,,uttara,ˈʊttˌəɾə,,2,ne-agent-v1;ipa=espeak
 directions.south,दक्षिण,,dakṣiṇa,dˈʌkʂɪɳ,,2,ne-agent-v1;ipa=espeak
@@ -128,7 +128,7 @@ air-travel.i-would-like-a-window-seat,मलाई झ्यालको सि�
 air-travel.i-would-like-an-aisle-seat,मलाई आइल सिट चाहियो,,malāī āila sit cāhiyō,məlˈaːi ˈaːɪl sˈɪʈ cˈaːhɪjˌoː,"no natural native calque for 'aisle' on a plane, unlike झ्यालको for window; loanword",2,ne-agent-v1;ipa=espeak
 hitchhiking.can-you-give-me-a-ride,तपाईं मलाई लिफ्ट दिनुहुन्छ?,,tapāīṁ malāī lifṭa dinuhuncha?,tˌəpaːˈɪːn məlˈaːi lˈɪpʰʈə dˌɪnuhˈuncʰə,"honorific -हुन्छ form, invariant for addressee gender",2,ne-agent-v1;ipa=espeak
 hitchhiking.where-are-you-going,तपाईं कहाँ जानुहुन्छ?,,tapāīṁ kahām̐ jānuhuncha?,tˌəpaːˈɪːn kˈʌhã ɟˌaːnuhˈuncʰə,"honorific -हुन्छ form, invariant",2,ne-agent-v1;ipa=espeak
-hitchhiking.i-only-need-to-go-to-the-next-town,मलाई पछिल्लो सहरसम्म मात्र जानु छ,,malāī pachillō saharasamma mātra jānu cha,məlˈaːi pəcʰˈɪllloː sˌəhəɾəsˈʌmmˌə mˈaːtɾə ɟˈaːnuʲˌu cʰˈə,जानु छ (infinitive-obligation) is invariant,2,ne-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,मलाई अर्को सहरसम्म मात्र जानु छ,,malāī arkō saharasamma mātra jānu cha,məlˈaːi ˈʌrkoː sˌəhəɾəsˈʌmmˌə mˈaːtɾə ɟˈaːnuʲˌu cʰˈə,जानु छ (infinitive-obligation) is invariant,2,ne-agent-v1;fix=Schmidt A Practical Dictionary of Modern Nepali (DSAL) p.22 अर्को 2b next another (arko din the next day) -- where p.360 पछिल्लो is later latter (pachillo bas a later bus);row-corrections-v9;ipa=espeak
 hitchhiking.is-there-room-for-two,दुई जनाको लागि ठाउँ छ?,,duī janākō lāgi ṭhāum̐ cha?,dˈui ɟənˈaːkoː lˈaːɡɪ ʈʰˈaːũ cʰˈə,"ठाउँ, already this pack's word for 'place' in border-customs.baggage-claim",2,ne-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,म पेट्रोलको लागि पैसा तिर्न सक्छु,,ma pēṭrōlakō lāgi paisā tirna sakchu,mə pˈeːʈɾoːlˌəkoː lˈaːɡɪ pˈɛːsaː tˈɪrnə sˈʌkcʰu,"सक्छु, simple present, invariant -- not the -एको/-एकी participle, so single form; पेट्रोल is the pump word across South Asia",2,ne-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,लिफ्ट दिनुभएकोमा धन्यवाद,,lifṭa dinubhaēkōmā dhanyavād,lˈɪpʰʈə dˌɪnubʰˌəeːkˈoːmaː dʰˌənjəwˈaːd,,2,ne-agent-v1;ipa=espeak

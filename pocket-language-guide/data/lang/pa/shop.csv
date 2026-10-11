@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,ਕਾਰਡ ਨਾਲ ਪੈਸੇ ਦੇ ਸਕਦੇ ਹਾਂ?,,kāraḍ nāl paisē dē sakadē hāṁ?,kaɾəɖ nal pɛse de sʌkəde hã,can one pay with a card?,2,pa-agent-v1;ipa=espeak
 payment-receipt.pay-cash,ਨਗਦ ਦੇ ਸਕਦੇ ਹਾਂ?,,nagad dē sakadē hāṁ?,nʌɡəd de sʌkəde hã,can one pay cash?,2,pa-agent-v1;ipa=espeak
 payment-receipt.pay-by-qr-code,ਕਿਊਆਰ ਕੋਡ ਨਾਲ ਪੈਸੇ ਦੇ ਸਕਦੇ ਹਾਂ?,,kiūār kōḍ nāl paisē dē sakadē hāṁ?,kɪuaɾ koɖ nal pɛse de sʌkəde hã,can one pay with a QR code?,2,pa-agent-v1;ipa=espeak
-payment-receipt.a-receipt-please,ਬਿੱਲ ਦਿਓ ਜੀ,,bill diō jī,bɪl dɪo ɟi,give the bill,2,pa-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,ਰਸੀਦ ਦਿਓ ਜੀ,,rasīd diō jī,ɾəsid dɪo ɟi,give the receipt,2,pa-agent-v1;fix=Punjabi University Patiala Punjabi-English Dictionary (dic.learnpunjabi.org) ਰਸੀਦ n.f. receipt acknowledgement and Maya Singh Panjabi Dictionary (DSAL) p.958 ਰਸੀਦ A receipt a written acknowledgment of money received;rule=distinct-from-food-ordering.check-please (ਬਿੱਲ);row-corrections-v9;ipa=espeak
 payment-receipt.please-write-the-number,ਰਕਮ ਲਿਖ ਦਿਓ ਜੀ,,rakam likh diō jī,ɾʌkəm lɪkʰ dɪo ɟi,write the amount,2,pa-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,ਕੁੱਲ ਕਿੰਨੇ ਪੈਸੇ?,,kull kiṁnē paisē?,kʊl kɪnne pɛse,how much money in total?,2,pa-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,ਅਸੀਂ ਵੱਖ-ਵੱਖ ਪੈਸੇ ਦੇ ਸਕਦੇ ਹਾਂ?,,asīṁ vakkh-vakkh paisē dē sakadē hāṁ?,əsĩ ʋʌkʰʋʌkʰ pɛse de sʌkəde hã,can we pay separately?,2,pa-agent-v1;ipa=espeak

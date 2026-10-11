@@ -13,7 +13,7 @@ trail-words.one-way,ਇੱਕ ਪਾਸੇ ਦਾ,,ikk pāsē dā,ɪk pase da,of
 trail-words.round-trip,ਆਉਣ-ਜਾਣ ਦਾ,,āuṇ-jāṇ dā,aʊɳɟaɳ da,of going and coming,2,pa-agent-v1;ipa=espeak
 weather.forecast,ਮੌਸਮ ਦਾ ਹਾਲ ਕੀ ਹੈ?,,mausam dā hāl kī hai?,mɔsəm da hal ki hɛ,what is the weather's condition?,2,pa-agent-v1;ipa=espeak
 weather.will-it-rain,ਅੱਜ ਮੀਂਹ ਪਵੇਗਾ?,,ajj mīṁh pavēgā?,ʌɟ mĩ˥ pəʋeɡa,will rain fall today?,2,pa-agent-v1;ipa=espeak
-weather.is-it-safe-today,ਅੱਜ ਜਾਣਾ ਠੀਕ ਹੈ?,,ajj jāṇā ṭhīk hai?,ʌɟ ɟaɳa ʈʰik hɛ,is it right to go today?,2,pa-agent-v1;ipa=espeak
+weather.is-it-safe-today,ਅੱਜ ਜਾਣਾ ਸੁਰੱਖਿਅਤ ਹੈ?,,ajj jāṇā surakkhiat hai?,ʌɟ ɟaɳa sʊɾʌkkʰɪət hɛ,is it safe to go today?,2,pa-agent-v1;fix=Punjabi University Patiala Punjabi-English Dictionary (dic.learnpunjabi.org) ਸੁਰੱਖਿਅਤ adj. safe secure protected;in-pack-word=outdoors.is-it-safe-to-swim-here (ਸੁਰੱਖਿਅਤ);row-corrections-v9;ipa=espeak
 weather.how-cold-at-night,ਰਾਤੀਂ ਕਿੰਨੀ ਠੰਢ ਹੁੰਦੀ ਹੈ?,,rātīṁ kiṁnī ṭhaṁḍh huṁdī hai?,ɾatĩ kɪnni ʈʰʌ˥nɖ hʊndi hɛ,how much cold is there at night?,2,pa-agent-v1;ipa=espeak
 weather.rain,ਮੀਂਹ,,mīṁh,mĩ˥,,2,pa-agent-v1;ipa=espeak
 weather.snow,ਬਰਫ਼,,baraf,bʌɾəf,,2,pa-agent-v1;ipa=espeak

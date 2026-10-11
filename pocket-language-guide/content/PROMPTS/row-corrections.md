@@ -414,3 +414,78 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-8.md`, and ke
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A ninth pass: what the last three key-words batches saw
+
+Same rules as above, in two halves run side by side: notes go to
+`tmp/notes/agents/row-corrections-9-a.md` and `-9-b.md`. Each language's full lead is in
+the "Rows to check" of `tmp/notes/agents/key-words-6.md`, `-7.md` or `-8.md` (and
+`key-words-5.md` / `strings-batch-ak-3.md` for Malay and Javanese). Keys in
+`data/emphasis/<code>.csv` follow any word they name that changes.
+
+**Half a** -- Europe, the Caucasus, South-East Asia and the conlangs:
+
+- **Hungarian**: `kind-words.thank-you-for-everything` *Köszönöm mindent* (the indefinite
+  object takes *Köszönök*); `fitestvérem` against the usual *fiútestvérem*; *Csak nézek
+  körül* against the set phrase *Csak körülnézek* (its key follows).
+- **Croatian**: *U penziji sam* is colloquial and regional (standard *U mirovini sam*);
+  *povezani let* reads as a calque.
+- **Romanian**: *Este un seif?* and the washing-machine row read first as "is it a ...?";
+  *Nu este așteptare* is unidiomatic.
+- **Filipino**: *kasintahan* is a sweetheart, not a partner; the chest-pain row reads as
+  "my chest has an illness"; `time-words.evening` and `night` are both *gabi*.
+- **Armenian**: `hitchhiking.thank-you-for-the-ride` writes *տարիք* ("age") for the verb
+  *տարաք*; the emergency-contact row can read as the emergency services' number.
+- **Georgian**: *ბანაკი გავაშენოთ* for pitching a camp; the motion-sickness tablets read
+  as anti-nausea tablets.
+- **Malay and Javanese**: `social-basics.hello` *Halo* -- Kamus Dewan gives the greeting as
+  *helo* (its *halo* is the ring round the sun); check Javanese against its own sources.
+- **Khmer**: the nurse row is feminine only though the pack declares a speaker axis; the
+  laundromat is a clothes-ironing shop; motion-sickness tablets read as dizziness
+  medicine; *ឥវ៉ាន់ / អីវ៉ាន់* and *ឱ្យ / អោយ* alternate across rows (one spelling, by the
+  Chuon Nath dictionary).
+- **Lao**: `dietary-needs.no-nuts` *ໝາກນັດ* is pineapple; `trail-conditions.is-the-route-steep`
+  writes *ຄັນ* where steep is *ຊັນ*; check *ມືນ* (slippery) and *ຂາ* for the thigh.
+- **Uzbek**: `none-of-these` reads as a refusal (the Turkish case); *Benzin puli* likely
+  wants the accusative *pulini*.
+- **Klingon and Quenya**: `weather.is-it-safe-today` asks "is it dangerous?", so a "yes" on
+  the reply screen means unsafe -- reword to ask about safety, or say why it cannot be;
+  Klingon `none-of-these` reads as a refusal; Quenya `i-do-not-understand` has
+  `i-do-not-know`'s text and `okay-can` is a bare stem. Check every word against the
+  lexicons the packs cite (boQwI' / klingon-assistant-data, Eldamo), as the strings
+  passes did.
+- **French and Hebrew** give `okay-can` and `okay-fine` the same text (both print on the
+  sheet): give `okay-fine` its own wording, as the eighth pass did for four packs.
+
+**Half b** -- South Asia:
+
+- **Punjabi**: eight first-person requests are masculine only with no feminine variant
+  (check-in-early, check-out-later, store-luggage, see-room, another-night, change-rooms,
+  open-window, try-it-on) -- add the speaker variants, as the seventh pass did for Urdu;
+  the receipt row has the check's text; "not allowed" reads "can't be done"; "is it safe
+  today?" asks if it is *ਠੀਕ*; five replies are worded as obligation (the Hindi case).
+- **Kannada**: the aisle seat as *ದಾರಿ* ("road"); *ಎ.ಸಿ.* and *ಎಸಿ* both written; brother and
+  sister as the elder forms (the concepts' notes decide).
+- **Malayalam**: the receipt row has the check's text; `i-do-not-understand` reads as
+  future or habitual; the colleague as *സഹകാരി*; `building-words.exit` *പുറത്തേക്ക്*;
+  `board-answers.stay-here` reads as "sitting here".
+- **Marathi**: the `introductions.i-am-from` feminine variant rewrites the sentence and
+  leaves no content word (the one key-word warning); `you-are-welcome` is "welcome to a
+  place"; `hello` is the casual *हाय*; `none-of-these` reads as a refusal;
+  `building-words.exit` is "outside".
+- **Nepali**: *पछिल्लो* ("last") for the next town; "it is beautiful here" shares
+  *राम्रो* with the wonderful-time row; the rash as *दाग*; safe and lockers both *लकर*;
+  `which-exit` is *कुन गेट?*.
+- **Odia**: `taxi.please-stop-here` uses *ରୁହନ୍ତୁ* ("stay"); both prescription rows say
+  "doctor's letter"; the in-stock row has no word for stock; the kind-words labels end in
+  "." rather than the danda.
+- **Tamil**: the nurse as *தாதி* (the Sri Lankan word); vegan spelled *விகன்*; the
+  no-photography sign worded as a request.
+- **Telugu**: `open-operating` reads as a machine working; `do-i-need-to-transfer` says
+  "change trains" on a screen for buses and metro too; the tourist row is masculine only.
+- **Gujarati**: `police-consulate.i-am-calling-the-police` keeps the obligation wording the
+  eighth pass removed from the four replies.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.

@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
-social-basics.hello,हाय,,hāya,hˈaːj,"casual, among friends",2,mr-agent-v1;ipa=espeak
+social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,the everyday greeting; नमस्कार is the polite row,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.75 नमस्ते word used in greeting -- where its हाय (p.168) is an exclamation of pain and the English hi has no entry in Berntsen Date or Molesworth;rule=register-neutral (the concept is neutral and social-basics.hello-polite is नमस्कार -- the hi ne and gu pairing);row-corrections-v9;ipa=espeak
 social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,2,mr-agent-v1;ipa=espeak
 social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,2,mr-agent-v1;ipa=espeak
 social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,2,mr-agent-v1;ipa=espeak
@@ -111,7 +111,7 @@ board-answers.i-will-show-you,मी वाट दाखवीन,,mī vāṭa d
 board-answers.i-will-write-it-down,मी हे लिहून घेईन,,mī hē lihūna ghēīna,mˈi hˈeː lɪhˈuːn ɡʰeːˈiːn,"future tense, invariant",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
 board-answers.it-is-closed,बंद आहे,,baṁda āhē,bˈʌnd ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
 board-answers.it-is-over-there,तिथे आहे,,tithē āhē,tˈɪtʰeː ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.none-of-these,यातलं काहीच मला म्हणायचं नाही,,yātalaṁ kāhīca malā mhaṇāyacaṁ nāhī,jˈaːtəlˌən kaːhˈiːc mˈʌlaː mhəɳˈaːjəcˌən nˈaːhi,"'mhaṇāyacaṁ' agrees with the neuter 'kāhīca' (nothing), not with the speaker",2,mr-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.none-of-these,मला जे म्हणायचं आहे ते यात नाही,,malā jē mhaṇāyacaṁ āhē tē yāta nāhī,mˈʌlaː zˈeː mhəɳˈaːjəcˌən ˈaːheː tˈeː jˈaːt nˈaːhi,"what I want to say is not in this -- 'mhaṇāyacaṁ' agrees with the neuter relative 'jē', not with the speaker; the old यातलं काहीच मला म्हणायचं नाही was I do not want to say any of this, the refusal board-answers.i-would-rather-not-say already gives",2,mr-board-answers-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.51 जे 3rd p. sg. n. rel. pron. that which and p.123 म्हणणे to say;rule=none-of-these is not a refusal (board-answers.md -- the sw and tr repair: what I want to say is not among these);rule=obligative-agrees-with-object-not-speaker;row-corrections-v9;ipa=espeak
 board-answers.not-possible,असं शक्य नाही,,asaṁ śakya nāhī,ˈʌsən ʃˈʌkjə nˈaːhi,"that is not possible -- 'śakya' is an invariant adjective, no verb agreement at all",2,mr-board-answers-v1;ipa=espeak
 board-answers.please-wait,एक मिनिट,,ēka miniṭa,ˈeːk mˈɪnɪʈ,,2,mr-board-answers-v1;ipa=espeak
 board-answers.say-it-again,परत एकदा?,,parata ēkadā?,pˈʌɾət ˈeːkdˌaː,,2,mr-board-answers-v1;ipa=espeak
