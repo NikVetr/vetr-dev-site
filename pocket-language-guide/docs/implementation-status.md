@@ -5910,3 +5910,52 @@ the question is read, not inside a tap), whether the iPhone share sheet offers S
 the PNG, the translator apps and the torch -- all device checks. In the WebKit browser suite,
 the quiz's stubbed Speak test is intermittent on this host (the voice stub sometimes misses a
 reload), beside the three host failures already known.
+
+## Batch AI, concluded — every language's strings and key words, the register switch with data, a name's sounds guessed, and the loading mark
+
+**The loading mark.** The owner's loading / typesetting animation: the mark's two bubbles
+rock in turn, the back one anticlockwise and the front one clockwise, while the back one's
+three lines write themselves in, on a three-second loop. `scripts/build_logo.mjs` writes it
+from the light and dark drawings (`data/brand/mark-loading*.svg`); every `.loading`
+placeholder shows it through `style.css` alone, before any script arrives, and the still
+mark to a reader who asked for less motion.
+
+**Language coverage.** The interface strings for Card, Converse and Quiz, the quiz page and
+its record, hands-free, the lock-screen levels, saved cards and Save image are in every
+catalogue: 49 at 870 of 872 keys (the two lock-preview keys are absent by design), Yoruba at
+866 (four keys no source gives a word for), Klingon and Quenya at what their lexicons can
+say. Each catalogue's hands-free word lists were checked against every pack and every
+catalogue's numbers. Key words cover all 53 languages with boards.
+
+**Whom a sentence is said to.** The register switch has real data: German, French, Spanish,
+Russian and Korean write familiar forms for the outgoing buttons (Korean on every allowed
+button, since its endings mark the hearer), never on the emergency or pharmacy boards and
+never on a reply.
+
+**A typed name's sounds.** `data/registry/name-letters.csv` (642 rows) gives the guess a
+default Latin, Cyrillic and Greek reading and each Latin-script language's own, with runs
+read only at a word's start or end where that is what decides the sound; 239 of 270 common
+names need no correction. The validator checks the table.
+
+**Corrections.** The eighth, ninth and tenth row-correction passes: Hausa requests said to
+anyone with the gendered forms as variants, Amharic's demonstrative, Hebrew pointing,
+Punjabi's masculine-only requests given feminine variants, Lao's pineapple for nuts,
+Klingon's and Quenya's "is it safe?" with the right polarity, and the rows every key-words
+batch noticed. Bengali and Marathi name a pair target first.
+
+## Native evidence for Batch AI, concluded
+
+Built from the pushed commit `71efce09f`, after the gate, the unit tests (741) and the
+Chromium suite (315 passed, one skipped) passed on it; the WebKit subset showed only the
+three host failures already known. **Android**: `scripts/build_android.sh` built a 44.2MB
+debug APK and `scripts/check_android.mjs` passed every check on the emulator -- launch with
+App, AppLauncher, Filesystem, Preferences and Share; persistence across a relaunch and a
+reinstall; resuming and Back; an offline start (53 cards); the share sheet and its cancel;
+Back at the top leaving the app. **iOS** (`npm run ios -- --run` then `npm run check:ios` on
+the Mac): every check passed on the simulator -- launch, an offline start with nothing
+outside the bundle (85 requests, the loading marks among them), both safe areas,
+persistence, speech (68 voices), the keyboard and its dismissal, the share sheet and the
+PDF export, a backgrounded beacon stopping and a page kept across a trip to another app.
+Still device checks: hands-free listening in WKWebView, Save Image in the iPhone share
+sheet, the translator apps, the torch, and how the register and key words read on a real
+screen.
