@@ -16,12 +16,12 @@ time-words.this-week,ngayong linggo,,ŋajoŋ liŋɡo,,2,fil-agent-v1;ipa=fil-g2p
 time-words.next-week,sa susunod na linggo,,sa susunod na liŋɡo,,2,fil-agent-v1;ipa=fil-g2p
 time-words.morning,umaga,,umaɡa,,2,fil-agent-v1;ipa=fil-g2p
 time-words.afternoon,hapon,,hapon,,2,fil-agent-v1;ipa=fil-g2p
-time-words.evening,gabi,,ɡabi,,2,fil-agent-v1;ipa=fil-g2p
+time-words.evening,takipsilim,,takipsilim,"dusk, the time the sun is going down -- Filipino divides the day umaga / hapon / gabi, so gabi (time-words.night) covers the whole evening; the end of the day is the Spanish pack's answer too (el atardecer)",2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (Komisyon sa Wikang Filipino, kwfdiksiyonaryo.ph) s.v. takipsílim (oras na nása pagitan ng liwanag at dilim kung kailan papalubog na ang araw, = dápithápon) and s.v. gabí (bahagi ng magdamag búhat sa paglubog ng araw hanggang bago sumapit ang hatinggabi);rule=distinct-concepts-distinct-text (time-words.night is gabi, side by side on the time board), as es row-corrections-v6;row-corrections-v9;ipa=fil-g2p"
 time-words.spring,tagsibol,,taɡsibol,,2,fil-agent-v1;ipa=fil-g2p
 time-words.summer,tag-init,,taɡinit,,2,fil-agent-v1;ipa=fil-g2p
 time-words.fall,taglagas,,taɡlaɡas,,2,fil-agent-v1;ipa=fil-g2p
 time-words.winter,taglamig,,taɡlamiɡ,,2,fil-agent-v1;ipa=fil-g2p
-time-words.night,gabi,,ɡabi,same word as evening,2,fil-agent-v1;ipa=fil-g2p
+time-words.night,gabi,,ɡabi,"night -- gabi runs from sunset to before midnight (KWF); time-words.evening is takipsilim, dusk, so the two buttons differ",2,"fil-agent-v1;fix=literal only, after time-words.evening changed (it said same word as evening);row-corrections-v9;ipa=fil-g2p"
 days-of-week.monday,Lunes,,lunɛs,,2,fil-agent-v1;ipa=fil-g2p
 days-of-week.tuesday,Martes,,maɾtɛs,,2,fil-agent-v1;ipa=fil-g2p
 days-of-week.wednesday,Miyerkules,,mijɛɾkulɛs,,2,fil-agent-v1;ipa=fil-g2p

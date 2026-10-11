@@ -16,7 +16,7 @@ family-intros.this-is-my-son,Ovo je moj sin,,ˈovo je mˈoj sˈin,,2,hr-agent-v1
 family-intros.this-is-my-daughter,Ovo je moja kći,,ˈovo je mˈoja ktɕˈi,,2,hr-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,,2,hr-agent-v1;ipa=espeak
 about-me.i-am-a-student,Student sam,,stˈudent sam,masculine; a woman says Studentica sam,2,hr-agent-v1;ipa=espeak
-about-me.i-am-retired,U penziji sam,,u penziji sam,"invariant, no gender marking",2,hr-agent-v1;ipa=espeak
+about-me.i-am-retired,U mirovini sam,,u mirovini sam,"I am retired, lit. 'I am in retirement' -- invariant, no gender marking; mirovina is the standard word, penzija (the old text) is marked colloquial",2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) s.v. mirovina 1 (stanje osobe koja je prestala obavljati svoj profesionalni posao ... [liječnik u mirovini, biti u mirovini], mir, penzija) and s.v. penzija (razg. 1. v. mirovina ... 2. ... [biti u penziji]);rule=the standard word, not the colloquial one;row-corrections-v9;ipa=espeak"
 about-me.i-am-a-teacher,Učitelj sam,,utʃiteʎ sam,masculine; a woman says Učiteljica sam,2,hr-agent-v1;ipa=espeak
 about-me.i-am-a-doctor,Liječnik sam,,lijetʃnik sam,masculine; a woman says Liječnica sam,2,hr-agent-v1;ipa=espeak
 about-me.i-am-a-nurse,Medicinski tehničar sam,,meditsinski texnitʃar sam,masculine; a woman says Medicinska sestra sam -- the Croatian Employment Service (HZZ) lists these as the male/female job-title pair,2,hr-agent-v1;source=hzz.hr;ipa=espeak

@@ -83,7 +83,7 @@ quick-responses.works-okay,ça marche,,sa mˈaʁʃ,,2,fr-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,ça ne marche pas,,sa nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak
 quick-responses.can-possible,c'est possible,,sɛ pɔsˈibl,,2,fr-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,ce n'est pas possible,,sə nɛ pa pɔsˈibl,,2,fr-agent-v1;ipa=espeak
-quick-responses.okay-fine,d'accord,,dakˈɔʁ,,2,fr-agent-v1;ipa=espeak
+quick-responses.okay-fine,très bien,,tʁɛ bjˈɛ̃,"all right, fine -- approval; d'accord, the old text, is quick-responses.okay-can",2,"fr-agent-v1;fix=Dictionnaire de l'Académie française 9e éd. (dictionnaire-academie.fr A9B1034) bien IV (Bien, employé comme interjection, marque ... l'approbation: Bien, fort bien, je n'y vois aucun empêchement) and V (C'est bien, c'est très bien. Tout est bien ainsi);rule=distinct-concepts-distinct-text (quick-responses.okay-can is d'accord), as row-corrections-v8 for hu, hy, ka, ta, te, uz;row-corrections-v9;ipa=espeak"
 quick-responses.no-good-not-allowed-will-not-work,ça ne va pas,interdit,sa nə va pˈa,,2,fr-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,J'utilise une traduction automatique,,ʒytiliz yn tʁadyksjɔ̃ otomatˈik,,2,fr-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Parlez vers le téléphone,,paʁle vɛʁ lə telefˈɔn,,2,fr-agent-v1;ipa=espeak

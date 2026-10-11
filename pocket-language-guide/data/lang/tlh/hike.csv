@@ -8,7 +8,7 @@ trail-words.up-uphill,,,Dung,ɖuŋ,the area above,3,tlh-attested-v1;src
 trail-words.down-downhill,,,bIng,bɪŋ,the area below,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 weather.forecast,  ,,nuq muD Dotlh,nuqʰ muɖ ɖotɬ,what is the weather?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 weather.will-it-rain,,,SIS'a',ʂɪʂʔɑʔ,will it rain?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-weather.is-it-safe-today, ,,DaHjaj Qob'a',ɖɑxdʒɑdʒ qxobʔɑʔ,is today dangerous?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+weather.is-it-safe-today, ,,DaHjaj Qobbe''a',ɖɑxdʒɑdʒ qxobbɛʔʔɑʔ,"is today not dangerous? -- asks after safety, so HIja' (true) means safe; Qob'a', the old row, asked 'is today dangerous?', where a yes meant unsafe. Not QaD 'be safe', which KGT gives only as slang",1,"tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;fix=klingon-assistant-data (De7vID, main, 6,531 entries, the boQwI' database): Qob v. be dangerous (TKD), -be' not (TKD 4.3), -'a' interrogative (TKD 4.2.9), HIja' yes, true (TKD), QaD 2 be safe, be protected (KGT, tagged slang);rule=the question asks after safety, so its yes/no polarity matches every other pack;row-corrections-v9;ipa=okrand"
 weather.rain,,,SIS,ʂɪʂ,it rains,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 weather.snow, ,,chal chuch,tʃɑl tʃutʃ,sky ice,3,tlh-attested-v1;src=qep'a' 24 (2017);native=piqad-csur;ipa=okrand
 weather.wind,,,SuS,ʂuʂ,wind / breeze,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand

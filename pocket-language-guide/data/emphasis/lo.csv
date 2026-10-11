@@ -64,7 +64,7 @@ dietary-needs.i-am-vegetarian,ເຈ
 dietary-needs.is-this-halal,ຮາລານ
 dietary-needs.no-eggs,ໄຂ່
 dietary-needs.no-meat,ຊີ້ນ
-dietary-needs.no-nuts,ໝາກນັດ
+dietary-needs.no-nuts,ໝາກມ່ວງຫິມະພານ
 dietary-needs.no-peanuts,ໝາກຖົ່ວດິນ
 dietary-needs.no-pork,ໝູ
 dietary-needs.no-seafood,ປາ ກຸ້ງ ປູ ຫອຍ
@@ -194,7 +194,7 @@ medical-conditions.i-have-epilepsy,ລົມຊັກ
 medical-conditions.i-need-insulin,ອິນຊູລິນ
 medical-conditions.i-need-my-inhaler,ຢາພົ່ນ
 medical-conditions.i-take-blood-thinners,ລະລາຍເລືອດ
-medical-conditions.inject-it-into-my-outer-thigh,ດ້ານນອກຂາ
+medical-conditions.inject-it-into-my-outer-thigh,ດ້ານນອກກົກຂາ
 medical-conditions.my-blood-sugar-is-low,ຕ່ຳ
 medical-conditions.my-injector-is-in-my-bag,ເຂັມສີດ | ກະເປົາ
 medical-conditions.please-give-me-sugar-or-juice,ນ້ຳຕານ | ນ້ຳໝາກໄມ້
@@ -284,8 +284,8 @@ toilets.where-toilet,ຫ້ອງນ້ຳ
 trail-conditions.can-we-return-before-dark,ກ່ອນຄ່ຳ
 trail-conditions.can-we-return-the-same-way,ທາງເກົ່າ
 trail-conditions.how-long-is-the-full-route,ເສັ້ນທາງທັງໝົດ
-trail-conditions.is-the-path-slippery,ມືນ
-trail-conditions.is-the-route-steep,ຄັນ
+trail-conditions.is-the-path-slippery,ມື່ນ
+trail-conditions.is-the-route-steep,ຊັນ
 trail-conditions.is-the-trail-open,ເປີດ
 trail-transport.do-you-have-a-map,ແຜນທີ່
 trail-transport.how-long-is-the-wait,ຖ້າ

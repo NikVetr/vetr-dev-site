@@ -9,7 +9,7 @@ board-answers.i-am-calling-the-police,
 board-answers.i-do-not-have-a-phone,
 board-answers.i-will-find-someone, 
 board-answers.i-will-show-you,
-board-answers.none-of-these,
+board-answers.none-of-these,
 board-answers.stay-here,
 board-answers.the-hospital-is-close, 
 board-answers.there-is-no-wait,
@@ -116,4 +116,4 @@ transit-rides.what-time-is-the-next-one,
 transit-rides.where-do-i-pay-the-fare,
 transit-rides.where-is-the-subway-station,
 weather.how-cold-at-night,
-weather.is-it-safe-today,
+weather.is-it-safe-today,

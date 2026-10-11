@@ -10,7 +10,7 @@ hotel-basics.i-have-a-reservation,Am o rezervare,,am o rezervˈaɾe,,2,ro-agent-
 hotel-basics.can-i-charge-my-phone,Îmi pot încărca telefonul?,,ˌɨmʲ pot ˌɨnkərkˈa tˌelefˈonul,,2,ro-agent-v1;ipa=espeak
 hotel-basics.i-would-like-a-non-smoking-room,Aș dori o cameră pentru nefumători,,ˈaʃ doɾʲˈi o kˈameɾˌə pˌentru nˌefumətˈoɾʲ,,2,ro-agent-v1;ipa=espeak
 hotel-basics.i-would-like-a-quiet-room,Aș dori o cameră liniștită,,ˈaʃ doɾʲˈi o kˈameɾˌə lˌiniʃtˈitə,,2,ro-agent-v1;ipa=espeak
-hotel-basics.is-there-a-washing-machine,Este o mașină de spălat?,,jˌeste o maʃˈinə de spəlˈat,,2,ro-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Există o mașină de spălat?,,eɡzˌistə o maʃˈinə de spəlˈat,"is there a washing machine? -- există, as hotel-requests.is-there-a-safe; este o ... reads first as 'is it a washing machine?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista and s.v. fi, as hotel-requests.is-there-a-safe;in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
 hotel-basics.is-wi-fi-free,Wi-Fi-ul este gratuit?,,wˈifiul jˌeste ɡratwˈit,,2,ro-agent-v1;ipa=espeak
 hotel-basics.how-much-per-night,Cât costă pe noapte?,,kˈɨt kˈostə pe nˈɔapte,,2,ro-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Micul dejun este inclus?,,mˈikul deʒˈun jˌeste inklˈus,,2,ro-agent-v1;ipa=espeak
@@ -26,7 +26,7 @@ hotel-requests.another-towel-please,"Încă un prosop, vă rog",,"ˈɨnkə un pr
 hotel-requests.what-time-is-check-out,La ce oră este check-out-ul?,,la tʃe ˈorə jˌeste kˈekkoʊtul,,2,ro-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,Pot face check-in mai devreme?,,pot fˌatʃe kˈekkin maɪ devrˈeme,,2,ro-agent-v1;ipa=espeak
 hotel-requests.another-night,Pot rămâne încă o noapte?,,pot rəmˈɨne ˈɨnkə o nˈɔapte,,2,ro-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,Este un seif?,,jˌeste un seˈif,,2,ro-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Există un seif?,,eɡzˌistə un seˈif,"is there a safe? -- există, the existential verb; este without a place named reads first as the copula, 'is it a safe?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
 hotel-requests.another-blanket,"Încă o pătură, vă rog",,"ˈɨnkə o pˈətuɾˌə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
 hotel-requests.wake-up-call,Vă rog treziți-mă la {},,və rˈoɡ trezˈitsʲimə la {},,2,ro-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,Este o problemă cu camera,,jˌeste o problˈemə ku kˈameɾˌa,,2,ro-agent-v1;ipa=espeak

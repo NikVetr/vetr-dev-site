@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.hello,Halo,,hˈalo,,2,ms-agent-v1;ipa=espeak
+social-basics.hello,Helo,,hˈɛlo,hello -- Kamus Dewan spells the greeting helo; halo is listed only as its colloquial form (bp) and as the ring of light round the sun or moon,2,"ms-agent-v1;fix=Kamus Dewan Edisi Keempat (PRPM) helo [hé.lo] (kata utk menyapa seseorang, semasa awal pertemuan atau memulai perbualan telefon) and halo I (bp helo), halo II (Fiz, lingkaran cahaya ... di keliling ... matahari dan bulan);rule=the dictionary spelling of the greeting;row-corrections-v9;ipa=espeak"
 social-basics.hello-polite,Selamat tengah hari,Selamat pagi · Selamat petang,səlˈamat tˈəŋah hˈari,"pagi to 11, tengah hari to 2, petang to dusk",2,ms-agent-v1;ipa=espeak
 social-basics.good-morning,Selamat pagi,,səlˈamat pˈaɡi,,2,ms-agent-v1;ipa=espeak
 social-basics.good-evening,Selamat malam,,səlˈamat mˈalam,,2,ms-agent-v1;ipa=espeak

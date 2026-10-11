@@ -1,6 +1,6 @@
 concept_id,key
 about-me.i-am-a-doctor,គ្រូពេទ្យ
-about-me.i-am-a-nurse,គិលានុប្បដ្ឋាយិកា
+about-me.i-am-a-nurse,គិលានុបដ្ឋាយិកា | គិលានុបដ្ឋាក
 about-me.i-am-a-student,និស្សិត
 about-me.i-am-a-teacher,គ្រូ
 about-me.i-am-an-engineer,វិស្វករ
@@ -13,7 +13,7 @@ air-travel.i-would-like-an-aisle-seat,ច្រកដើរ
 air-travel.my-luggage-did-not-arrive,មិនមកដល់
 air-travel.where-is-check-in,ចុះឈ្មោះ
 air-travel.where-is-the-security-check,សុវត្ថិភាព
-attractions-tickets.are-there-lockers,ទូដាក់ឥវ៉ាន់
+attractions-tickets.are-there-lockers,ទូដាក់អីវ៉ាន់
 attractions-tickets.could-you-take-a-photo-for-us,យើង
 attractions-tickets.do-i-need-a-reservation,កក់
 attractions-tickets.may-i-take-photos,ថតរូប
@@ -131,7 +131,7 @@ hotel-requests.another-night,មួយយប់ទៀត
 hotel-requests.another-towel-please,កន្សែង
 hotel-requests.can-i-check-in-early,ឆាប់
 hotel-requests.can-i-check-out-later,យឺត
-hotel-requests.can-i-store-my-luggage,ឥវ៉ាន់
+hotel-requests.can-i-store-my-luggage,អីវ៉ាន់
 hotel-requests.is-there-a-safe,ទូសុវត្ថិភាព
 hotel-requests.no-housekeeping,សម្អាត
 hotel-requests.what-time-does-breakfast-start,អាហារពេលព្រឹក
@@ -157,7 +157,7 @@ laundry.can-it-be-ready-today,ថ្ងៃនេះ
 laundry.how-much-per-kilo,មួយគីឡូ
 laundry.please-do-not-use-bleach,ថ្នាំបំបាត់ពណ៌
 laundry.when-will-it-be-ready,ពេលណា
-laundry.where-is-a-laundromat,ហាងអ៊ុតសម្លៀកបំពាក់
+laundry.where-is-a-laundromat,ហាងបោកខោអាវ
 lost-rescue.i-do-not-know-where-i-am,នៅឯណា
 lost-rescue.i-lost-my-bag,កាបូប
 lost-rescue.i-lost-my-passport,លិខិតឆ្លងដែន
@@ -231,7 +231,7 @@ pharmacy-symptoms.i-have-a-stomach-ache,ពោះ
 pharmacy-symptoms.i-have-diarrhea,ចុះរាគ
 pharmacy-symptoms.i-think-it-is-infected,រលាក
 pharmacy-symptoms.is-this-safe-during-pregnancy,ស្ត្រីមានផ្ទៃពោះ
-pharmacy-symptoms.motion-sickness-tablets,វិលមុខ
+pharmacy-symptoms.motion-sickness-tablets,ពុលឡាន
 pharmacy-symptoms.painkiller,ការឈឺចាប់
 pharmacy-symptoms.rehydration-salts,អូរ៉ាលីត្រ
 pharmacy-symptoms.the-pain-is-severe,ឈឺខ្លាំង

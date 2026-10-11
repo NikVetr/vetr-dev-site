@@ -12,7 +12,7 @@ emergency-medical.this-is-an-emergency,Emergency po ito!,,ɛmɛɾɡɛnkj po ito,
 emergency-medical.i-am-having-a-severe-allergic-reaction,May matinding allergic reaction po ako,,maj matindiŋ allɛɾɡik ɾɛaktion po ako,,2,fil-agent-v1;ipa=fil-g2p
 emergency-medical.i-cannot-breathe,Hindi po ako makahinga,,hindi po ako makahiŋa,,2,fil-agent-v1;ipa=fil-g2p
 emergency-medical.i-am-bleeding-badly,Matindi po ang pagdurugo ko,,matindi po aŋ paɡduɾuɡo ko,,2,fil-agent-v1;ipa=fil-g2p
-emergency-medical.i-have-chest-pain,May sakit po ang dibdib ko,,maj sakit po aŋ dibdib ko,,2,fil-agent-v1;ipa=fil-g2p
+emergency-medical.i-have-chest-pain,Masakit po ang dibdib ko,,masakit po aŋ dibdib ko,"my chest hurts -- masakit, as the pack's other pain rows (Masakit po ang ulo ko); may sakit, the old wording, also reads 'my chest has an illness', sakit being both pain and illness",2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (Komisyon sa Wikang Filipino, kwfdiksiyonaryo.ph) s.v. masakít (nagdudulot ng hindi kaaya-ayang pakiramdam ... bunga ng sakit) and s.v. sakít (1. hindi kanais-nais na pakiramdam ng katawan, 2. anumang karamdaman, and the derived maysakít);in-pack=pharmacy-symptoms.i-have-a-headache (Masakit po ang ulo ko), -stomach-ache, -sore-throat;rule=the pain, not the illness;row-corrections-v9;ipa=fil-g2p"
 emergency-medical.this-person-is-unconscious,Nawalan po ng malay ang taong ito,,nawalan po naŋ malaj aŋ taoŋ ito,,2,fil-agent-v1;ipa=fil-g2p
 emergency-medical.where-is-the-nearest-hospital,Nasaan po ang pinakamalapit na ospital?,,nasaan po aŋ pinakamalapit na ospital,,2,fil-agent-v1;ipa=fil-g2p
 emergency-medical.what-is-the-emergency-number,Ano po ang numero para sa emergency?,,ano po aŋ numɛɾo paɾa sa ɛmɛɾɡɛnkj,,2,fil-agent-v1;ipa=fil-g2p

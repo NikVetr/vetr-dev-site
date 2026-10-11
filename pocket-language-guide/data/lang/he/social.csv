@@ -35,7 +35,7 @@ quick-responses.works-okay,עובד,עוֹבֵד,‘oved,ovˈed,it works,2,he-ag
 quick-responses.does-not-work-no,לא עובד,לֹא עוֹבֵד,lo ‘oved,lˈo ovˈed,,2,he-agent-v1;ipa=bgn
 quick-responses.can-possible,אפשר,אֶפְשָׁר,efshar,efʃˈaʁ,it is possible,2,he-agent-v1;ipa=bgn
 quick-responses.cannot-not-possible,אי אפשר,אִי אֶפְשָׁר,i efshar,ˈi efʃˈaʁ,not possible,2,he-agent-v1;ipa=bgn
-quick-responses.okay-fine,בסדר,בְּסֵדֶר,beséder,besˈedeʁ,,2,he-agent-v1;ipa=bgn
+quick-responses.okay-fine,טוב,טוֹב,tov,tˈov,"all right, fine -- tov as a word of agreement; beseder, the old text, is quick-responses.okay-can, and lo tov is quick-responses.no-good-not-allowed-will-not-work",2,"he-agent-v1;fix=he.wiktionary טוֹב, the sense marked מילות קריאה: מילת הסכמה (טוב, אעשה את מה שביקשת), its synonyms listing בסדר;in-pack=quick-responses.no-good-not-allowed-will-not-work (לא טוב);rule=distinct-concepts-distinct-text (quick-responses.okay-can is בסדר), as row-corrections-v8 for hu, hy, ka, ta, te, uz;romanization=tmp/lang/he/bgn.py translit;row-corrections-v9;ipa=bgn"
 quick-responses.no-good-not-allowed-will-not-work,לא טוב,לֹא טוֹב,lo tov,lˈo tˈov,not good,2,he-agent-v1;ipa=bgn
 phone-translation.i-am-using-phone-translation,אני משתמש בתרגום מהטלפון,אֲנִי מִשְׁתַּמֵּשׁ בְּתַרְגּוּם מֵהַטֶּלֶפוֹן,ani mishtamesh betargum mehatélefon,anˈi miʃtamˈeʃ betaʁɡˈum mehatˈelefon,I am using translation from the phone,2,he-agent-v1;ipa=bgn
 phone-translation.please-speak-toward-the-phone,אפשר לדבר לתוך הטלפון?,אֶפְשָׁר לְדַבֵּר לְתוֹךְ הַטֶּלֶפוֹן?,efshar ledaber letokh hatélefon?,efʃˈaʁ ledabˈeʁ letˈox hatˈelefon,,2,he-agent-v1;ipa=bgn

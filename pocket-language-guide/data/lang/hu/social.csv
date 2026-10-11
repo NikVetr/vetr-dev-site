@@ -127,7 +127,7 @@ kind-words.this-is-delicious,Ez nagyon finom.,,ˈɛz nˈɑɟon fˈinom,,2,hu-kin
 kind-words.it-is-beautiful-here,Itt nagyon szép.,,ˈitt nˈɑɟon sˈeːp,,2,hu-kind-words-v1;ipa=espeak
 kind-words.i-like-it-very-much,Nagyon tetszik nekem.,,nˈɑɟon tˈɛtstsik nˈɛkɛm,,2,hu-kind-words-v1;ipa=espeak
 kind-words.i-had-a-wonderful-time,Csodálatosan éreztem magam.,,tʃˈodaːlɑtoʃɑn ˈeːrɛstɛm mˈɑɡɑm,,2,hu-kind-words-v1;ipa=espeak
-kind-words.thank-you-for-everything,Köszönöm mindent.,,kˈøsønøm mˈindɛnt,,2,hu-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Köszönök mindent.,,kˈøsønøk mˈindɛnt,"thank you for everything -- köszönök, the indefinite conjugation, because mindent is an indefinite object (köszönöm takes a definite one: Köszönöm a segítséget)",2,"hu-kind-words-v1;fix=en.wikipedia Hungarian verbs rev 1364369256 (an object is indefinite if it is an indefinite pronoun such as something, anything, everyone ... Látsz mindent/mindenkit, indefinite) and hu.wikipedia's grammar articles (Itt mindent megkapunk, Mindent egyedül csinálnék, Vegyetek el mindent), and hu.wikipedia usage (Köszönök mindent 10 articles, Köszönöm mindent none);rule=indefinite object takes the indefinite conjugation;row-corrections-v9;ipa=espeak"
 kind-words.thank-you-for-your-hospitality,Köszönöm a vendégszeretetet.,,kˈøsønøm ˈɑ vˈɛndeːɡsɛrɛtɛtɛt,,2,hu-kind-words-v1;ipa=espeak
 board-answers.my-name-is-blank,A nevem: {},,ˈɑ nˈɛvɛm {},,2,hu-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
 board-answers.i-would-rather-not-say,Inkább nem mondanám meg,,ˈinkaːbb nˈɛm mˈondɑnaːm mˈɛɡ,,2,hu-agent-v1;src=ÉrtSz inkább + megmond;answers-audit-v1;ipa=espeak

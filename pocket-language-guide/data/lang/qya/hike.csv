@@ -5,7 +5,7 @@ trail-words.summit,,,ingor,ˈiŋɡor,summit of a mountain,3,qya-a
 trail-words.up-uphill,,,or,or,above,3,qya-attested-v1;src=UT/305.1605;eldamo=q;native=quenya-classical;ipa=appendix-e
 trail-words.down-downhill,,,nu,nu,under / beneath,3,qya-attested-v1;src=LotR/0377.3301;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.will-it-rain,,,uluva,ˈuluva,it will rain,1,qya-composed-v1;lex=PE22/167.2806;grammar=PE22;native=quenya-classical;ipa=appendix-e
-weather.is-it-safe-today,  ,,raxë ëa síra,rˈakse ˈea sˈiːra,is there danger today?,1,qya-composed-v1;lex=VT44/09.2401 + VT43/18.0702;grammar=PE22;native=quenya-classical;ipa=appendix-e
+weather.is-it-safe-today,  ,,ma varna síra,ma vˈarna sˈiːra,"is today safe? -- varna, safe, protected, is the Etymologies word (eldamo=mq); raxë ëa síra, the old row, asked 'is there danger today?', where a yes meant unsafe",1,"qya-composed-v1;lex=VT44/09.2401 + VT43/18.0702;grammar=PE22;native=quenya-classical;fix=eldamo-data.xml 0.8.13: varna adj. safe, protected, secure (Ety/BAR.015, l=mq, the earlier tier this pack admits at confidence 1), ma interrogative particle (PE17/068.0102, as the pack's other ma questions), síra today (VT43/18.0702);rule=the question asks after safety, in the pack's ma + adjective + subject frame (trail-conditions.is-the-trail-open ma latina i tië);row-corrections-v9;ipa=appendix-e"
 weather.rain,,rossë,ulo,ˈulo,,3,qya-attested-v1;src=PE22/167.2714;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.snow,,,hrissë,rˈisse,fall of snow,3,qya-attested-v1;src=PE17/168.1904;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.wind,,váva,súrë,sˈuːre,,3,qya-attested-v1;src=LotR/0377.2805;eldamo=q;native=quenya-classical;ipa=appendix-e

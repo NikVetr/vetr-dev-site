@@ -10,7 +10,7 @@ payment-receipt.is-tax-included,Az áfa benne van?,,ˈɑz ˈaːfɑ bˈɛnnɛ vˈ
 payment-receipt.my-card-was-declined,A kártyámat elutasította,,ˈɑ kˈaːrcaːmɑt ˈɛlutɑʃiːtottɑ,,2,hu-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,Szerintem hibás a számla,,sˈɛrintɛm hˈibaːʃ ˈɑ sˈaːmlɑ,,2,hu-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,Már fizettem,,mˈaːr fˈizɛttɛm,,2,hu-agent-v1;ipa=espeak
-shopping.i-am-just-looking,Csak nézek körül,,tʃˈɑk nˈeːzɛk kˈøryl,,2,hu-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Csak körülnézek,,tʃˈɑk kˈørylneːzɛk,I am just looking around -- the preverb stays on the verb; after the verb (nézek körül) it reads as an ongoing action or a focus,2,"hu-agent-v1;fix=A magyar nyelv értelmező szótára (MTA NYI 1959-62, ertelmezo.oszk.hu) s.v. körülnéz 3 (Jól körülnézett a vásártéren, mert lovat akart venni ... tessék csak körülnézni, Mikszáth) and en.wikipedia Hungarian verbs rev 1364369256 (a particle after the verb may indicate continuity, Ment le a lépcsőn, or follows a focus);rule=neutral order of a preverb verb;row-corrections-v9;ipa=espeak"
 shopping.how-much-is-this,Mennyibe kerül ez?,,mˈɛɲɲibɛ kˈɛryl ˈɛz,,2,hu-agent-v1;ipa=espeak
 shopping.that-is-too-expensive,Ez túl drága,,ˈɛz tˈuːl drˈaːɡɑ,,2,hu-agent-v1;ipa=espeak
 shopping.can-it-be-a-little-cheaper,Egy kicsit engedne az árból?,,ˈɛɟ kˈitʃit ˈɛnɡɛdnɛ ˈɑz ˈaːrboːl,,2,hu-agent-v1;ipa=espeak
