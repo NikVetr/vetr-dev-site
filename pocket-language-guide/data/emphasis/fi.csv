@@ -1,0 +1,306 @@
+concept_id,key
+about-me.i-am-a-doctor,lääkäri
+about-me.i-am-a-nurse,sairaanhoitaja
+about-me.i-am-a-student,opiskelija
+about-me.i-am-a-teacher,opettaja
+about-me.i-am-an-engineer,insinööri
+about-me.i-am-retired,eläkkeellä
+about-me.i-have-my-own-business,oma yritys
+about-me.i-work-in-an-office,toimistossa
+accessibility.step-free,ilman portaita
+air-travel.i-would-like-a-window-seat,ikkunapaikan
+air-travel.i-would-like-an-aisle-seat,käytäväpaikan
+air-travel.my-luggage-did-not-arrive,ei saapunut
+air-travel.where-is-check-in,lähtöselvitys
+air-travel.where-is-the-security-check,turvatarkastus
+attractions-tickets.are-there-lockers,säilytyslokeroita
+attractions-tickets.could-you-take-a-photo-for-us,meistä kuvan
+attractions-tickets.do-i-need-a-reservation,varata
+attractions-tickets.may-i-take-photos,kuvata
+attractions-tickets.what-is-the-latest-entry-time,sisään pääsee
+attractions-tickets.where-can-i-buy-tickets,lippuja
+board-answers.after-food,jälkeen
+board-answers.before-food,Ennen
+board-answers.can-you-walk,kävelemään
+board-answers.help-is-coming,Apua
+board-answers.how-many,Kuinka monta
+board-answers.i-am-calling-an-ambulance,ambulanssin
+board-answers.i-am-calling-the-police,poliisille
+board-answers.i-do-not-have-a-phone,puhelinta
+board-answers.i-will-find-someone,Etsin jonkun
+board-answers.i-will-show-you,Näytän
+board-answers.i-will-write-it-down,Kirjoitan
+board-answers.i-would-rather-not-say,En haluaisi
+board-answers.it-is-closed,kiinni
+board-answers.it-is-free,ilmainen
+board-answers.it-is-over-there,tuolla
+board-answers.my-name-is-blank,Nimeni
+board-answers.none-of-these,Näiden joukossa
+board-answers.not-possible,ei onnistu
+board-answers.only-for-customers,asiakkaille
+board-answers.pay-on-board,kyydissä
+board-answers.prescription-only,reseptillä
+board-answers.see-a-doctor,lääkärissä
+board-answers.stay-here,jäädä tähän
+board-answers.the-hospital-is-close,Sairaala | lähellä
+board-answers.there-is-no-wait,Ei jonoa
+board-answers.we-are-full,täyttä
+board-answers.we-do-not-have-it,ei ole
+board-answers.we-have-it,on
+board-answers.what-happened,tapahtui
+board-answers.what-is-your-name,nimi
+board-answers.where-does-it-hurt,sattuu
+border-customs.here-is-my-passport,passini
+border-customs.i-am-here-for-business,työmatkalla
+border-customs.i-am-visiting-family,sukulaisvierailulla
+border-customs.i-have-a-connecting-flight,jatkolento
+border-customs.where-do-i-collect-my-baggage,noudetaan
+color-size-returns.do-you-have-another-size,koossa
+color-size-returns.may-i-try-it-on,sovittaa
+communication.can-you-help-me,auttaa
+communication.do-you-speak-english,Puhutko
+communication.i-do-not-speak-this-language,En puhu
+communication.please-speak-more-slowly,hitaammin
+communication.please-write-it-down,Kirjoittaisitko
+dietary-needs.does-it-contain-fish-stock,kalalientä
+dietary-needs.does-it-contain-pork-fat,sianrasvaa | laardia
+dietary-needs.does-it-contain-pork-stock,sianlihalientä
+dietary-needs.i-am-vegan,vegaani
+dietary-needs.i-am-vegetarian,kasvissyöjä
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,kananmunaa
+dietary-needs.no-meat,lihaa
+dietary-needs.no-nuts,pähkinöitä
+dietary-needs.no-peanuts,maapähkinää
+dietary-needs.no-pork,sianlihaa
+dietary-needs.no-seafood,kalaa | äyriäisiä
+dietary-needs.no-sesame,seesaminsiemeniä
+directions.can-i-walk-there,kävellä
+directions.can-you-show-me-the-way,tien
+directions.how-long-on-foot,Kuinka kauan
+directions.is-it-far,pitkä matka
+directions.please-show-me-on-the-map,kartalta
+emergency-medical.i-am-bleeding-badly,Vuodan | verta
+emergency-medical.i-am-having-a-severe-allergic-reaction,anafylaktinen reaktio
+emergency-medical.i-am-injured,loukkaantunut
+emergency-medical.i-cannot-breathe,henkeä
+emergency-medical.i-feel-unwell,huono olo
+emergency-medical.i-have-chest-pain,rintakipua
+emergency-medical.i-have-travel-insurance,matkavakuutus
+emergency-medical.i-need-a-doctor,lääkäriä
+emergency-medical.i-think-a-bone-is-broken,luu | murtunut
+emergency-medical.it-hurts-here,sattuu
+emergency-medical.please-call-an-ambulance,ambulanssi
+emergency-medical.please-call-my-emergency-contact,yhteyshenkilölleni
+emergency-medical.please-take-me-to-a-hospital,sairaalaan
+emergency-medical.this-is-an-emergency,hätätilanne
+emergency-medical.this-person-is-unconscious,tajuton
+emergency-medical.where-is-the-nearest-hospital,lähin
+family-intros.this-is-my-brother,veljeni
+family-intros.this-is-my-colleague,työkaverini
+family-intros.this-is-my-daughter,tyttäreni
+family-intros.this-is-my-father,isäni
+family-intros.this-is-my-husband,mieheni
+family-intros.this-is-my-mother,äitini
+family-intros.this-is-my-partner,avopuolisoni
+family-intros.this-is-my-sister,siskoni
+family-intros.this-is-my-son,poikani
+family-intros.this-is-my-wife,vaimoni
+food-ordering.i-want-this,Haluaisin
+food-ordering.is-a-table-available,pöytää vapaana
+food-ordering.is-this-vegetarian,kasvisruokaa
+food-ordering.table-for-two,kahdelle
+food-ordering.what-do-you-recommend,suosittelet
+hiking-parks.how-long-to-the-summit,huipulle
+hiking-parks.how-long-to-the-viewpoint,näköalapaikalle
+hiking-parks.is-this-trail-suitable-for-beginners,aloittelijalle
+hiking-parks.where-is-the-trailhead,alkaa
+hiking-parks.which-route-is-easier,helpompi
+hitchhiking.can-you-give-me-a-ride,kyydin
+hitchhiking.i-can-pay-for-fuel,bensat
+hitchhiking.i-only-need-to-go-to-the-next-town,seuraavaan kaupunkiin
+hitchhiking.is-there-room-for-two,tilaa kahdelle
+hitchhiking.thank-you-for-the-ride,Kiitos
+hitchhiking.where-are-you-going,Minne
+hotel-basics.are-any-rooms-available,huoneita
+hotel-basics.how-much-per-night,yö
+hotel-basics.i-have-a-reservation,varaus
+hotel-basics.i-would-like-a-non-smoking-room,savuttoman
+hotel-basics.i-would-like-a-quiet-room,rauhallisen
+hotel-basics.is-breakfast-included,aamiainen
+hotel-basics.is-there-a-washing-machine,pesukone
+hotel-basics.is-there-air-conditioning,ilmastointi
+hotel-basics.is-wi-fi-free,wifi
+hotel-basics.may-i-see-the-room,nähdä
+hotel-requests.another-blanket,peiton
+hotel-requests.another-night,vielä yhden yön
+hotel-requests.another-towel-please,pyyhkeen
+hotel-requests.can-i-check-in-early,aikaisemmin
+hotel-requests.can-i-check-out-later,myöhemmin
+hotel-requests.can-i-store-my-luggage,matkatavarat
+hotel-requests.is-there-a-safe,tallelokero
+hotel-requests.no-housekeeping,siivousta
+hotel-requests.what-time-does-breakfast-start,aamiainen
+hotel-requests.what-time-is-check-out,uloskirjautuminen
+in-a-building.is-this-the-correct-entrance,oikea
+introductions.i-am-a-tourist,turisti
+introductions.i-am-from,kotoisin
+introductions.i-am-traveling-alone,yksin
+introductions.my-name-is,Nimeni
+introductions.this-is-my-friend,ystäväni
+introductions.we-are-traveling-together,yhdessä
+introductions.what-is-your-name,sinun nimesi
+introductions.where-are-you-from,kotoisin
+kind-words.i-had-a-wonderful-time,ihana
+kind-words.i-like-it-very-much,Pidän
+kind-words.it-is-beautiful-here,kaunista
+kind-words.thank-you-for-everything,kaikesta
+kind-words.thank-you-for-your-help,avusta
+kind-words.thank-you-for-your-hospitality,vieraanvaraisuudesta
+kind-words.this-is-delicious,herkullista
+kind-words.you-are-very-kind,ystävällinen
+laundry.can-it-be-ready-today,tänään
+laundry.how-much-per-kilo,kilo
+laundry.please-do-not-use-bleach,valkaisuainetta
+laundry.please-iron-this,Silittäisittekö
+laundry.please-wash-these-clothes,Pesisittekö
+laundry.when-will-it-be-ready,Milloin
+laundry.where-is-a-laundromat,itsepalvelupesula
+lost-rescue.i-do-not-know-where-i-am,missä olen
+lost-rescue.i-lost-my-bag,Laukkuni
+lost-rescue.i-lost-my-passport,Passini
+lost-rescue.i-lost-my-phone,Puhelimeni
+lost-rescue.i-lost-my-wallet,Lompakkoni
+lost-rescue.my-child-is-missing,Lapseni
+lost-rescue.please-call-the-police,poliisi
+lost-rescue.we-are-here,täällä
+massage-spa.focus-on-back,selkään
+massage-spa.focus-on-feet,jalkateriin
+massage-spa.focus-on-neck,niskaan
+massage-spa.focus-on-shoulders,hartioihin
+massage-spa.please-avoid-this-area,Älkää hieroko
+massage-spa.please-pause,tauko
+massage-spa.reply-ask-supervisor,esihenkilöltä
+massage-spa.reply-cannot-avoid-this-treatment,ei voi
+massage-spa.reply-does-it-hurt-there,Sattuuko
+massage-spa.reply-i-will-avoid-that-area,jätän | väliin
+massage-spa.reply-which-area-exactly,Mikä kohta
+massage-spa.stronger-pressure,kovempaa
+massage-spa.that-pressure-is-good,hyvä
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspiriinille | ibuprofeenille
+medical-conditions.i-am-allergic-to-penicillin,penisilliinille
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfalääkkeille
+medical-conditions.i-am-diabetic,diabetes
+medical-conditions.i-am-pregnant,raskaana
+medical-conditions.i-carry-an-adrenaline-injector,adrenaliinikynä
+medical-conditions.i-have-a-heart-condition,sydänsairaus
+medical-conditions.i-have-asthma,astma
+medical-conditions.i-have-epilepsy,epilepsia
+medical-conditions.i-need-insulin,insuliinia
+medical-conditions.i-need-my-inhaler,inhalaattorini
+medical-conditions.i-take-blood-thinners,verenohennuslääkettä
+medical-conditions.inject-it-into-my-outer-thigh,reiden ulkosyrjään
+medical-conditions.my-blood-sugar-is-low,Verensokerini | matala
+medical-conditions.my-injector-is-in-my-bag,laukussani
+medical-conditions.please-give-me-sugar-or-juice,sokeria | mehua
+medical-conditions.this-card-lists-my-conditions,kortissa
+medical-conditions.this-is-my-medicine,lääkkeeni
+outdoors.are-there-dangerous-animals-here,vaarallisia eläimiä
+outdoors.can-we-camp-here,leiriytyä
+outdoors.is-it-safe-to-swim-here,uida
+payment-receipt.can-we-pay-separately,erikseen
+payment-receipt.i-already-paid,jo maksanut
+payment-receipt.is-tax-included,vero
+payment-receipt.my-card-was-declined,ei mennyt läpi
+payment-receipt.pay-by-card,kortilla
+payment-receipt.the-bill-is-wrong,virhe laskussa
+pharmacy-symptoms.before-or-after-food,ruokaa
+pharmacy-symptoms.can-i-get-this-medicine-here,lääkettä
+pharmacy-symptoms.do-i-need-a-prescription,resepti
+pharmacy-symptoms.how-many-times-a-day,kertaa päivässä
+pharmacy-symptoms.how-much-should-i-take,Kuinka paljon
+pharmacy-symptoms.i-feel-dizzy,huimaa
+pharmacy-symptoms.i-feel-nauseous,pahoinvointia
+pharmacy-symptoms.i-have-a-burn,palovamma
+pharmacy-symptoms.i-have-a-cough,yskää
+pharmacy-symptoms.i-have-a-cut,haava
+pharmacy-symptoms.i-have-a-fever,kuumetta
+pharmacy-symptoms.i-have-a-headache,päänsärkyä
+pharmacy-symptoms.i-have-a-rash,ihottumaa
+pharmacy-symptoms.i-have-a-sore-throat,Kurkkuni
+pharmacy-symptoms.i-have-a-stomach-ache,vatsakipua
+pharmacy-symptoms.i-have-diarrhea,ripulia
+pharmacy-symptoms.i-think-it-is-infected,tulehtunut
+pharmacy-symptoms.is-this-safe-during-pregnancy,raskauden
+pharmacy-symptoms.the-pain-is-severe,Kipu | kova
+pharmacy-symptoms.which-pharmacy-is-open-now,nyt auki
+police-consulate.i-need-an-interpreter,tulkin
+police-consulate.i-want-to-contact-my-embassy,suurlähetystöön
+police-consulate.i-want-to-report-a-theft,rikosilmoituksen
+police-consulate.my-bag-was-stolen,varastettiin
+police-consulate.someone-is-following-me,seuraa
+police-consulate.where-is-the-police-station,poliisiasema
+quick-directions.turn-left,vasemmalle
+quick-directions.turn-right,oikealle
+room-problems.can-i-change-rooms,vaihtaa
+room-problems.please-send-someone,lähettää jonkun
+room-problems.the-air-conditioning-is-broken,Ilmastointi
+room-problems.the-heating-does-not-work,Lämmitys
+room-problems.the-key-does-not-work,Avain
+room-problems.the-light-does-not-work,Valo
+room-problems.the-room-is-too-noisy,meluisa
+room-problems.the-toilet-will-not-flush,Vessa
+room-problems.there-is-a-problem-with-the-room,ongelma
+room-problems.there-is-no-hot-water,Kuumaa vettä
+shopping.can-it-be-a-little-cheaper,halvemmalla
+shopping.do-you-have-this-in-stock,varastossa
+shopping.how-much-is-this,Paljonko
+shopping.i-am-just-looking,Katselen
+shopping.i-will-take-this,Otan
+shopping.that-is-too-expensive,kallis
+shopping.where-do-i-pay,maksaa
+taxi.can-you-wait-for-me-here,odottaa
+taxi.could-you-make-it-colder,viileämmälle
+taxi.could-you-make-it-warmer,lämpimämmälle
+taxi.may-i-open-the-window,ikkunan
+taxi.please-stop-here,Pysähtyisittekö
+taxi.please-take-me-here,Viekää minut
+taxi.please-turn-around,U-käännöksen
+time-scheduling.can-we-change-the-time,muuttaa
+time-scheduling.how-long-does-it-take,Kuinka kauan
+time-scheduling.what-day-is-it-today,päivä
+time-scheduling.what-time-does-it-close,suljetaan
+time-scheduling.what-time-does-it-open,avataan
+time-scheduling.what-time-is-it,kello
+time-scheduling.what-time-should-we-meet,tavataan
+time-scheduling.when-is-convenient,sopii
+toilets.it-is-out-of-order,epäkunnossa
+toilets.where-toilet,vessa
+trail-conditions.can-we-return-before-dark,ennen pimeää
+trail-conditions.can-we-return-the-same-way,samaa reittiä
+trail-conditions.how-long-is-the-full-route,koko reitti
+trail-conditions.is-the-path-slippery,liukas
+trail-conditions.is-the-route-steep,jyrkkä
+trail-conditions.is-the-trail-open,avoinna
+trail-transport.do-you-have-a-map,karttaa
+trail-transport.how-long-is-the-wait,odottamaan
+trail-transport.is-there-cell-signal-here,kuuluvuutta
+trail-transport.what-time-is-the-last-shuttle,viimeinen bussi
+trail-transport.when-does-the-cableway-stop,köysirata
+trail-transport.where-can-we-buy-water,ostaa vettä
+trail-transport.where-can-we-refill-water,täyttää vesipullon
+transit-rides.can-i-use-this-ticket,Käykö
+transit-rides.do-i-need-to-transfer,vaihtaa
+transit-rides.do-i-need-to-validate,leimata
+transit-rides.i-am-in-a-hurry,kiire
+transit-rides.i-went-past-my-stop,Menin | ohi
+transit-rides.is-it-delayed,myöhässä
+transit-rides.is-this-direct,suoraan
+transit-rides.please-tell-me-where-to-get-off,jäädä pois
+transit-rides.what-is-the-next-stop,seuraava pysäkki
+transit-rides.what-time-is-the-next-one,seuraava
+transit-rides.where-do-i-pay-the-fare,maksetaan
+transit-rides.where-is-the-subway-station,metroasema
+weather.how-cold-at-night,kylmä yöllä
+weather.is-it-safe-today,turvallista
+weather.will-it-rain,sadetta

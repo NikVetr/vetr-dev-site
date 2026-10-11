@@ -1,0 +1,299 @@
+concept_id,key
+about-me.i-am-a-doctor,Orvos
+about-me.i-am-a-nurse,Ápoló
+about-me.i-am-a-student,Diák
+about-me.i-am-a-teacher,Tanár
+about-me.i-am-an-engineer,Mérnök
+about-me.i-am-retired,Nyugdíjas
+about-me.i-have-my-own-business,Saját vállalkozásom
+about-me.i-work-in-an-office,Irodában
+accessibility.step-free,lépcsőmentes
+air-travel.i-would-like-a-window-seat,Ablak
+air-travel.i-would-like-an-aisle-seat,Folyosó
+air-travel.my-luggage-did-not-arrive,Nem érkezett meg
+air-travel.where-is-check-in,utasfelvétel
+air-travel.where-is-the-security-check,biztonsági ellenőrzés
+attractions-tickets.are-there-lockers,csomagmegőrző szekrény
+attractions-tickets.could-you-take-a-photo-for-us,minket
+attractions-tickets.do-i-need-a-reservation,helyfoglalás
+attractions-tickets.what-is-the-latest-entry-time,bemenni
+attractions-tickets.where-can-i-buy-tickets,jegyet
+board-answers.after-food,után
+board-answers.before-food,előtt
+board-answers.can-you-walk,járni
+board-answers.help-is-coming,segítség
+board-answers.how-many,Hányat
+board-answers.i-am-calling-an-ambulance,mentőt
+board-answers.i-am-calling-the-police,rendőrséget
+board-answers.i-do-not-have-a-phone,telefonom
+board-answers.i-will-find-someone,Keresek valakit
+board-answers.i-will-show-you,Megmutatom
+board-answers.i-would-rather-not-say,Inkább nem
+board-answers.it-is-closed,Zárva
+board-answers.it-is-over-there,Ott
+board-answers.my-name-is-blank,nevem
+board-answers.none-of-these,Ezek között
+board-answers.not-possible,nem lehetséges
+board-answers.only-for-customers,vendégeknek
+board-answers.pay-on-board,járművön
+board-answers.prescription-only,receptre
+board-answers.see-a-doctor,orvoshoz
+board-answers.stay-here,itt maradni
+board-answers.the-hospital-is-close,kórház | közel
+board-answers.there-is-no-wait,Nincs várakozás
+board-answers.we-are-full,Tele
+board-answers.we-do-not-have-it,nincs
+board-answers.we-have-it,van
+board-answers.what-happened,történt
+board-answers.what-is-your-name,neve
+board-answers.where-does-it-hurt,fáj
+border-customs.here-is-my-passport,útlevelem
+border-customs.i-am-here-for-business,Üzleti
+border-customs.i-am-visiting-family,Családi
+border-customs.i-have-a-connecting-flight,Csatlakozó repülőjáratom
+border-customs.where-do-i-collect-my-baggage,vehetem át
+color-size-returns.do-you-have-another-size,méretben
+communication.can-you-help-me,segíteni
+communication.do-you-speak-english,Beszél
+communication.i-do-not-speak-this-language,Nem beszélek
+communication.please-speak-more-slowly,lassabban
+dietary-needs.does-it-contain-fish-stock,halalaplé
+dietary-needs.does-it-contain-pork-fat,sertészsír | szalonna
+dietary-needs.does-it-contain-pork-stock,sertésalaplé
+dietary-needs.i-am-vegan,Vegán
+dietary-needs.i-am-vegetarian,Vegetáriánus
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,Tojás
+dietary-needs.no-meat,Hús
+dietary-needs.no-nuts,Csonthéjas
+dietary-needs.no-peanuts,Földimogyoró
+dietary-needs.no-pork,Sertéshús
+dietary-needs.no-seafood,Hal | tenger gyümölcsei
+dietary-needs.no-sesame,Szezámmag
+directions.can-i-walk-there,gyalog
+directions.can-you-show-me-the-way,az utat
+directions.how-long-on-foot,Mennyi idő
+directions.is-it-far,Messze
+directions.please-show-me-on-the-map,térképen
+emergency-medical.i-am-bleeding-badly,vérzem
+emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaxiás reakcióm
+emergency-medical.i-cannot-breathe,levegőt
+emergency-medical.i-feel-unwell,Nem | jól
+emergency-medical.i-have-chest-pain,Mellkasi fájdalmam
+emergency-medical.i-have-travel-insurance,utasbiztosításom
+emergency-medical.i-need-a-doctor,Orvosra
+emergency-medical.i-think-a-bone-is-broken,eltört | csontom
+emergency-medical.it-hurts-here,fáj
+emergency-medical.please-call-an-ambulance,mentőt
+emergency-medical.please-call-my-emergency-contact,hozzátartozómat
+emergency-medical.please-take-me-to-a-hospital,kórházba
+emergency-medical.this-is-an-emergency,vészhelyzet
+emergency-medical.this-person-is-unconscious,eszméletlen
+emergency-medical.where-is-the-nearest-hospital,legközelebbi
+family-intros.this-is-my-brother,fitestvérem
+family-intros.this-is-my-colleague,munkatársam
+family-intros.this-is-my-daughter,lányom
+family-intros.this-is-my-father,apám
+family-intros.this-is-my-husband,férjem
+family-intros.this-is-my-mother,anyám
+family-intros.this-is-my-partner,élettársam
+family-intros.this-is-my-sister,nőtestvérem
+family-intros.this-is-my-son,fiam
+family-intros.this-is-my-wife,feleségem
+food-ordering.is-a-table-available,szabad asztal
+food-ordering.is-this-vegetarian,vegetáriánus
+food-ordering.table-for-two,két főre
+food-ordering.what-do-you-recommend,ajánl
+hiking-parks.how-long-to-the-summit,csúcsig
+hiking-parks.how-long-to-the-viewpoint,kilátóig
+hiking-parks.is-this-trail-suitable-for-beginners,kezdőknek
+hiking-parks.where-is-the-trailhead,kiindulópontja
+hiking-parks.which-route-is-easier,könnyebb
+hitchhiking.can-you-give-me-a-ride,El | vinni
+hitchhiking.i-can-pay-for-fuel,benzint
+hitchhiking.i-only-need-to-go-to-the-next-town,következő városig
+hitchhiking.is-there-room-for-two,hely kettőnknek
+hitchhiking.thank-you-for-the-ride,Köszönöm
+hitchhiking.where-are-you-going,Hova
+hotel-basics.are-any-rooms-available,szabad szobájuk
+hotel-basics.how-much-per-night,éjszaka
+hotel-basics.i-have-a-reservation,szobafoglalásom
+hotel-basics.i-would-like-a-non-smoking-room,Nemdohányzó
+hotel-basics.i-would-like-a-quiet-room,Csendes
+hotel-basics.is-breakfast-included,reggeli
+hotel-basics.is-there-a-washing-machine,mosógép
+hotel-basics.is-there-air-conditioning,légkondicionáló
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,Megnézhetem
+hotel-requests.another-blanket,takarót
+hotel-requests.another-night,még egy éjszakát
+hotel-requests.another-towel-please,törölközőt
+hotel-requests.can-i-check-in-early,korábban
+hotel-requests.can-i-check-out-later,később
+hotel-requests.can-i-store-my-luggage,csomagomat
+hotel-requests.is-there-a-safe,széf
+hotel-requests.no-housekeeping,szobatakarítást
+hotel-requests.what-time-does-breakfast-start,reggeli
+hotel-requests.what-time-is-check-out,kijelentkezni
+in-a-building.is-this-the-correct-entrance,jó
+introductions.i-am-a-tourist,Turista
+introductions.i-am-from,jöttem
+introductions.i-am-traveling-alone,Egyedül
+introductions.my-name-is,nevem
+introductions.this-is-my-friend,barátom
+introductions.we-are-traveling-together,Együtt
+introductions.what-is-your-name,hívják
+introductions.where-are-you-from,honnan
+kind-words.i-had-a-wonderful-time,Csodálatosan
+kind-words.i-like-it-very-much,tetszik
+kind-words.it-is-beautiful-here,szép
+kind-words.thank-you-for-everything,mindent
+kind-words.thank-you-for-your-help,segítséget
+kind-words.thank-you-for-your-hospitality,vendégszeretetet
+kind-words.this-is-delicious,finom
+kind-words.you-are-very-kind,kedves
+laundry.can-it-be-ready-today,Ma
+laundry.how-much-per-kilo,kilónként
+laundry.please-do-not-use-bleach,fehérítőt
+laundry.please-iron-this,vasalja ki
+laundry.please-wash-these-clothes,mossa ki
+laundry.when-will-it-be-ready,Mikor
+laundry.where-is-a-laundromat,önkiszolgáló mosoda
+lost-rescue.i-do-not-know-where-i-am,hol vagyok
+lost-rescue.i-lost-my-bag,táskámat
+lost-rescue.i-lost-my-passport,útlevelemet
+lost-rescue.i-lost-my-phone,telefonomat
+lost-rescue.i-lost-my-wallet,pénztárcámat
+lost-rescue.my-child-is-missing,gyermekem
+lost-rescue.please-call-the-police,rendőrséget
+lost-rescue.we-are-here,Itt
+massage-spa.focus-on-back,hátamat
+massage-spa.focus-on-feet,talpamat
+massage-spa.focus-on-neck,nyakamat
+massage-spa.focus-on-shoulders,vállamat
+massage-spa.please-avoid-this-area,ne érintse
+massage-spa.please-pause,szünetet
+massage-spa.reply-ask-supervisor,vezetőt
+massage-spa.reply-cannot-avoid-this-treatment,nem lehet
+massage-spa.reply-does-it-hurt-there,fáj
+massage-spa.reply-i-will-avoid-that-area,kihagyom
+massage-spa.reply-which-area-exactly,melyik részre
+massage-spa.stronger-pressure,erősebben
+massage-spa.that-pressure-is-good,jó
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aszpirinre | ibuprofénre
+medical-conditions.i-am-allergic-to-penicillin,penicillinre
+medical-conditions.i-am-allergic-to-sulfa-drugs,szulfonamidokra
+medical-conditions.i-am-diabetic,Cukorbeteg
+medical-conditions.i-am-pregnant,Terhes
+medical-conditions.i-carry-an-adrenaline-injector,Adrenalin
+medical-conditions.i-have-a-heart-condition,Szívbetegségem
+medical-conditions.i-have-asthma,Asztmás
+medical-conditions.i-have-epilepsy,Epilepsziás
+medical-conditions.i-need-insulin,Inzulinra
+medical-conditions.i-need-my-inhaler,inhalátoromra
+medical-conditions.i-take-blood-thinners,Véralvadásgátlót
+medical-conditions.inject-it-into-my-outer-thigh,comb külső oldalába
+medical-conditions.my-blood-sugar-is-low,vércukorszintem
+medical-conditions.my-injector-is-in-my-bag,injekciós tollam | táskámban
+medical-conditions.please-give-me-sugar-or-juice,cukrot | gyümölcslevet
+medical-conditions.this-card-lists-my-conditions,kártya
+medical-conditions.this-is-my-medicine,gyógyszerem
+outdoors.are-there-dangerous-animals-here,veszélyes állatok
+outdoors.can-we-camp-here,Kempingezhetünk
+outdoors.is-it-safe-to-swim-here,úszni
+payment-receipt.can-we-pay-separately,külön
+payment-receipt.how-much-in-total,összesen
+payment-receipt.is-tax-included,áfa
+payment-receipt.my-card-was-declined,elutasította
+payment-receipt.pay-by-card,Kártyával
+payment-receipt.the-bill-is-wrong,hibás | számla
+pharmacy-symptoms.anti-diarrhea-medicine,hasmenés
+pharmacy-symptoms.before-or-after-food,Étkezés
+pharmacy-symptoms.can-i-get-this-medicine-here,gyógyszert
+pharmacy-symptoms.cough-medicine,köhögés
+pharmacy-symptoms.do-i-need-a-prescription,recept
+pharmacy-symptoms.how-many-times-a-day,Napi
+pharmacy-symptoms.how-much-should-i-take,Mennyit
+pharmacy-symptoms.i-feel-nauseous,Hányingerem
+pharmacy-symptoms.i-have-a-burn,Megégettem
+pharmacy-symptoms.i-have-a-cut,Megvágtam
+pharmacy-symptoms.i-have-a-fever,Lázam
+pharmacy-symptoms.i-have-a-headache,fejem
+pharmacy-symptoms.i-have-a-rash,Kiütésem
+pharmacy-symptoms.i-have-a-sore-throat,torkom
+pharmacy-symptoms.i-have-a-stomach-ache,hasam
+pharmacy-symptoms.i-have-diarrhea,Hasmenésem
+pharmacy-symptoms.i-think-it-is-infected,elfertőződött
+pharmacy-symptoms.is-this-safe-during-pregnancy,Terhesség
+pharmacy-symptoms.motion-sickness-tablets,utazási betegség
+pharmacy-symptoms.the-pain-is-severe,fájdalom
+pharmacy-symptoms.which-pharmacy-is-open-now,most nyitva
+police-consulate.i-need-an-interpreter,Tolmácsra
+police-consulate.i-want-to-contact-my-embassy,nagykövetségemmel
+police-consulate.i-want-to-report-a-theft,bejelenteni
+police-consulate.my-bag-was-stolen,Ellopták
+police-consulate.someone-is-following-me,követ
+police-consulate.where-is-the-police-station,rendőrség
+quick-directions.go-straight,egyenesen
+quick-directions.on-the-left,Bal
+quick-directions.on-the-right,Jobb
+quick-directions.turn-left,balra
+quick-directions.turn-right,jobbra
+room-problems.can-i-change-rooms,másik szobát
+room-problems.please-send-someone,küldjenek valakit
+room-problems.the-air-conditioning-is-broken,légkondicionáló
+room-problems.the-heating-does-not-work,fűtés
+room-problems.the-key-does-not-work,kulcs
+room-problems.the-light-does-not-work,lámpa
+room-problems.the-room-is-too-noisy,zajos
+room-problems.the-toilet-will-not-flush,vécét
+room-problems.there-is-a-problem-with-the-room,Probléma
+room-problems.there-is-no-hot-water,meleg víz
+shopping.can-it-be-a-little-cheaper,engedne
+shopping.do-you-have-this-in-stock,készleten
+shopping.how-much-is-this,Mennyibe
+shopping.i-am-just-looking,nézek körül
+shopping.i-will-take-this,megveszem
+shopping.that-is-too-expensive,drága
+shopping.where-do-i-pay,fizetni
+taxi.can-you-wait-for-me-here,várni
+taxi.could-you-make-it-colder,hidegebbre
+taxi.could-you-make-it-warmer,melegebbre
+taxi.may-i-open-the-window,ablakot
+taxi.please-stop-here,álljon meg
+taxi.please-take-me-here,vigyen
+time-scheduling.can-we-change-the-time,másik időpontra
+time-scheduling.how-long-does-it-take,Meddig
+time-scheduling.what-day-is-it-today,nap
+time-scheduling.what-time-does-it-close,zár
+time-scheduling.what-time-does-it-open,nyit
+time-scheduling.what-time-is-it,óra
+time-scheduling.what-time-should-we-meet,találkozzunk
+time-scheduling.when-is-convenient,alkalmas
+toilets.where-toilet,mosdó
+trail-conditions.can-we-return-before-dark,sötétedés előtt
+trail-conditions.can-we-return-the-same-way,Ugyanezen az úton
+trail-conditions.how-long-is-the-full-route,teljes útvonal
+trail-conditions.is-the-path-slippery,Csúszós
+trail-conditions.is-the-route-steep,Meredek
+trail-conditions.is-the-trail-open,Nyitva
+trail-transport.do-you-have-a-map,térképük
+trail-transport.how-long-is-the-wait,várni
+trail-transport.is-there-cell-signal-here,térerő
+trail-transport.what-time-is-the-last-shuttle,utolsó ingajárat
+trail-transport.when-does-the-cableway-stop,kötélpálya
+trail-transport.where-can-we-buy-water,vizet vásárolni
+trail-transport.where-can-we-refill-water,vizet utántölteni
+transit-rides.can-i-use-this-ticket,Használhatom
+transit-rides.do-i-need-to-transfer,Át | szállnom
+transit-rides.do-i-need-to-validate,érvényesíteni
+transit-rides.i-went-past-my-stop,Túlmentem
+transit-rides.is-this-direct,közvetlen
+transit-rides.please-tell-me-where-to-get-off,leszállnom
+transit-rides.what-is-the-next-stop,következő megálló
+transit-rides.what-time-is-the-next-one,következő
+transit-rides.where-do-i-pay-the-fare,viteldíjat
+transit-rides.where-is-the-subway-station,metróállomás
+weather.how-cold-at-night,hűl le éjszaka
+weather.is-it-safe-today,biztonságos
+weather.will-it-rain,esni

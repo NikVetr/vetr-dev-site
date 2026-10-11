@@ -1,0 +1,313 @@
+concept_id,key
+about-me.i-am-a-doctor,Liječnik | Liječnica
+about-me.i-am-a-nurse,Medicinski tehničar | Medicinska sestra
+about-me.i-am-a-student,Studentica | Student
+about-me.i-am-a-teacher,Učiteljica | Učitelj
+about-me.i-am-an-engineer,Inženjerka | Inženjer
+about-me.i-am-retired,penziji
+about-me.i-have-my-own-business,svoju tvrtku
+about-me.i-work-in-an-office,uredu
+accessibility.step-free,bez stepenica
+air-travel.i-would-like-a-window-seat,prozor
+air-travel.i-would-like-an-aisle-seat,prolaz
+air-travel.my-luggage-did-not-arrive,nije stigla
+air-travel.where-is-check-in,prijava na let
+air-travel.where-is-the-security-check,sigurnosna kontrola
+attractions-tickets.are-there-lockers,ormarića
+attractions-tickets.could-you-take-a-photo-for-us,nas
+attractions-tickets.do-i-need-a-reservation,rezervacija
+attractions-tickets.may-i-take-photos,fotografirati
+attractions-tickets.what-is-the-latest-entry-time,ulaz
+attractions-tickets.where-can-i-buy-tickets,karte
+board-answers.after-food,Poslije
+board-answers.at-the-next-stop,sljedećoj stanici
+board-answers.before-food,Prije
+board-answers.can-you-walk,hodati
+board-answers.help-is-coming,Pomoć
+board-answers.i-am-calling-an-ambulance,hitnu pomoć
+board-answers.i-am-calling-the-police,policiju
+board-answers.i-do-not-have-a-phone,telefon
+board-answers.i-will-check,Provjerit
+board-answers.i-will-find-someone,Pronaći | nekoga
+board-answers.i-will-show-you,Pokazat
+board-answers.i-will-write-it-down,Zapisat
+board-answers.i-would-rather-not-say,neću reći
+board-answers.it-is-closed,Zatvoreno
+board-answers.it-is-free,Besplatno
+board-answers.it-is-over-there,tamo
+board-answers.my-name-is-blank,Zovem
+board-answers.none-of-these,Ovdje nema
+board-answers.not-possible,nije moguće
+board-answers.only-for-customers,goste
+board-answers.pay-on-board,u vozilu
+board-answers.prescription-only,recept
+board-answers.see-a-doctor,liječniku
+board-answers.stay-here,ostati
+board-answers.the-hospital-is-close,Bolnica | blizu
+board-answers.there-is-no-wait,Nema reda
+board-answers.we-are-full,popunjeno
+board-answers.we-do-not-have-it,Nemamo
+board-answers.we-have-it,imamo
+board-answers.what-happened,dogodilo
+board-answers.what-is-your-name,zovete
+board-answers.where-does-it-hurt,boli
+board-answers.where-to,Kamo
+border-customs.here-is-my-passport,putovnica
+border-customs.i-am-here-for-business,poslovno
+border-customs.i-am-visiting-family,rodbini
+border-customs.i-have-a-connecting-flight,povezani let
+border-customs.where-do-i-collect-my-baggage,preuzeti
+color-size-returns.do-you-have-a-bag,vrećicu
+color-size-returns.do-you-have-another-size,veličinu
+color-size-returns.may-i-try-it-on,probati
+communication.can-you-help-me,pomoći
+communication.please-speak-more-slowly,sporije
+dietary-needs.does-it-contain-fish-stock,ribljeg temeljca
+dietary-needs.does-it-contain-pork-fat,svinjske masti
+dietary-needs.does-it-contain-pork-stock,svinjskog temeljca
+dietary-needs.i-am-vegan,Veganka | Vegan
+dietary-needs.i-am-vegetarian,Vegetarijanac | Vegetarijanka
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,jaja
+dietary-needs.no-meat,mesa
+dietary-needs.no-nuts,orašastih plodova
+dietary-needs.no-peanuts,arašida
+dietary-needs.no-pork,svinjetine
+dietary-needs.no-seafood,plodova mora
+dietary-needs.no-sesame,sezama
+directions.can-i-walk-there,pješke
+directions.can-you-show-me-the-way,put
+directions.how-long-on-foot,Koliko
+directions.is-it-far,daleko
+directions.please-show-me-on-the-map,karti
+emergency-medical.i-am-bleeding-badly,krvarim
+emergency-medical.i-am-having-a-severe-allergic-reaction,anafilaktički šok
+emergency-medical.i-am-injured,Povrijeđena | Povrijeđen
+emergency-medical.i-cannot-breathe,disati
+emergency-medical.i-feel-unwell,Ne | dobro
+emergency-medical.i-have-chest-pain,Boli | prsima
+emergency-medical.i-have-travel-insurance,osiguranje
+emergency-medical.i-need-a-doctor,liječnika
+emergency-medical.i-think-a-bone-is-broken,slomljenu kost
+emergency-medical.it-hurts-here,boli
+emergency-medical.please-call-an-ambulance,hitnu pomoć
+emergency-medical.please-call-my-emergency-contact,kontakt u nuždi
+emergency-medical.please-take-me-to-a-hospital,bolnicu
+emergency-medical.this-is-an-emergency,hitan slučaj
+emergency-medical.this-person-is-unconscious,bez svijesti
+emergency-medical.where-is-the-nearest-hospital,najbliža
+family-intros.this-is-my-brother,brat
+family-intros.this-is-my-colleague,kolega s posla
+family-intros.this-is-my-daughter,kći
+family-intros.this-is-my-father,tata
+family-intros.this-is-my-husband,muž
+family-intros.this-is-my-mother,mama
+family-intros.this-is-my-partner,partner
+family-intros.this-is-my-sister,sestra
+family-intros.this-is-my-son,sin
+family-intros.this-is-my-wife,žena
+food-ordering.i-want-this,Želim
+food-ordering.is-a-table-available,slobodnog stola
+food-ordering.is-this-vegetarian,vegetarijansko
+food-ordering.table-for-two,Stol | dvoje
+food-ordering.what-do-you-recommend,preporučujete
+hiking-parks.how-long-to-the-summit,vrha
+hiking-parks.how-long-to-the-viewpoint,vidikovca
+hiking-parks.is-this-trail-suitable-for-beginners,početnike
+hiking-parks.where-is-the-trailhead,početak
+hiking-parks.which-route-is-easier,lakša
+hitchhiking.can-you-give-me-a-ride,povesti
+hitchhiking.i-can-pay-for-fuel,benzin
+hitchhiking.i-only-need-to-go-to-the-next-town,sljedećeg grada
+hitchhiking.is-there-room-for-two,mjesta | dvoje
+hitchhiking.thank-you-for-the-ride,Hvala
+hitchhiking.where-are-you-going,Kamo
+hotel-basics.are-any-rooms-available,slobodnih soba
+hotel-basics.how-much-per-night,noćenje
+hotel-basics.i-have-a-reservation,rezervaciju
+hotel-basics.i-would-like-a-non-smoking-room,nepušače
+hotel-basics.i-would-like-a-quiet-room,tihu
+hotel-basics.is-breakfast-included,doručak
+hotel-basics.is-there-a-washing-machine,perilica
+hotel-basics.is-there-air-conditioning,klima uređaj
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,vidjeti
+hotel-requests.another-blanket,deku
+hotel-requests.another-night,još jednu noć
+hotel-requests.another-towel-please,ručnik
+hotel-requests.can-i-check-in-early,ranije
+hotel-requests.can-i-check-out-later,kasnije
+hotel-requests.can-i-store-my-luggage,prtljagu
+hotel-requests.is-there-a-safe,sef
+hotel-requests.no-housekeeping,ne spremati
+hotel-requests.what-time-does-breakfast-start,doručak
+hotel-requests.what-time-is-check-out,odjava
+in-a-building.is-this-the-correct-entrance,pravi
+introductions.i-am-a-tourist,Turistkinja | Turist
+introductions.i-am-from,mjesta
+introductions.i-am-traveling-alone,sama | sam
+introductions.my-name-is,Zovem
+introductions.this-is-my-friend,prijatelj
+introductions.we-are-traveling-together,zajedno
+introductions.what-is-your-name,zovete
+introductions.where-are-you-from,Odakle
+kind-words.i-had-a-wonderful-time,divno
+kind-words.i-like-it-very-much,sviđa
+kind-words.it-is-beautiful-here,lijepo
+kind-words.thank-you-for-everything,svemu
+kind-words.thank-you-for-your-help,pomoći
+kind-words.thank-you-for-your-hospitality,gostoljubivosti
+kind-words.this-is-delicious,ukusno
+kind-words.you-are-very-kind,ljubazni
+laundry.can-it-be-ready-today,danas
+laundry.how-much-per-kilo,po kilogramu
+laundry.please-do-not-use-bleach,izbjeljivač
+laundry.please-iron-this,izglačajte
+laundry.please-wash-these-clothes,operite
+laundry.when-will-it-be-ready,Kada
+laundry.where-is-a-laundromat,samoposlužna praonica
+lost-rescue.i-do-not-know-where-i-am,gdje se nalazim
+lost-rescue.i-lost-my-bag,torbu
+lost-rescue.i-lost-my-passport,putovnicu
+lost-rescue.i-lost-my-phone,mobitel
+lost-rescue.i-lost-my-wallet,novčanik
+lost-rescue.my-child-is-missing,dijete
+lost-rescue.please-call-the-police,policiju
+lost-rescue.we-are-here,ovdje
+massage-spa.focus-on-back,leđa
+massage-spa.focus-on-feet,stopala
+massage-spa.focus-on-neck,vrat
+massage-spa.focus-on-shoulders,ramena
+massage-spa.please-avoid-this-area,izbjegavajte
+massage-spa.please-pause,pauza
+massage-spa.please-stop,Prestanite
+massage-spa.reply-ask-supervisor,nadređenu osobu
+massage-spa.reply-cannot-avoid-this-treatment,ne ide bez
+massage-spa.reply-does-it-hurt-there,Boli
+massage-spa.reply-i-will-avoid-that-area,izbjegavat
+massage-spa.reply-which-area-exactly,Koje
+massage-spa.stronger-pressure,jači
+massage-spa.that-pressure-is-good,dobar
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicilin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfonamide
+medical-conditions.i-am-diabetic,dijabetes
+medical-conditions.i-am-pregnant,Trudna
+medical-conditions.i-carry-an-adrenaline-injector,adrenalina
+medical-conditions.i-have-a-heart-condition,srčanu
+medical-conditions.i-have-asthma,astmu
+medical-conditions.i-have-epilepsy,epilepsiju
+medical-conditions.i-need-insulin,inzulin
+medical-conditions.i-need-my-inhaler,inhalator
+medical-conditions.i-take-blood-thinners,razrjeđivanje krvi
+medical-conditions.inject-it-into-my-outer-thigh,stegna
+medical-conditions.my-blood-sugar-is-low,Šećer u krvi | nizak
+medical-conditions.my-injector-is-in-my-bag,autoinjektor | torbi
+medical-conditions.please-give-me-sugar-or-juice,šećer | sok
+medical-conditions.this-card-lists-my-conditions,kartici
+medical-conditions.this-is-my-medicine,lijekovi
+outdoors.are-there-dangerous-animals-here,opasnih životinja
+outdoors.can-we-camp-here,kampirati
+outdoors.is-it-safe-to-swim-here,plivanje
+payment-receipt.can-we-pay-separately,odvojeno
+payment-receipt.how-much-in-total,ukupno
+payment-receipt.is-tax-included,PDV
+payment-receipt.my-card-was-declined,odbijena
+payment-receipt.pay-by-card,karticom
+payment-receipt.the-bill-is-wrong,račun nije točan
+pharmacy-symptoms.antacid,žgaravicu
+pharmacy-symptoms.anti-diarrhea-medicine,proljev
+pharmacy-symptoms.before-or-after-food,jela
+pharmacy-symptoms.can-i-get-this-medicine-here,lijek
+pharmacy-symptoms.cough-medicine,kašalj
+pharmacy-symptoms.do-i-need-a-prescription,recept
+pharmacy-symptoms.how-many-times-a-day,puta na dan
+pharmacy-symptoms.how-much-should-i-take,Koliko
+pharmacy-symptoms.i-feel-dizzy,Vrti
+pharmacy-symptoms.i-feel-nauseous,Muka
+pharmacy-symptoms.i-have-a-burn,opekotinu
+pharmacy-symptoms.i-have-a-cough,kašalj
+pharmacy-symptoms.i-have-a-cut,posjekotinu
+pharmacy-symptoms.i-have-a-fever,temperaturu
+pharmacy-symptoms.i-have-a-headache,glava
+pharmacy-symptoms.i-have-a-rash,osip
+pharmacy-symptoms.i-have-a-sore-throat,grlo
+pharmacy-symptoms.i-have-a-stomach-ache,trbuh
+pharmacy-symptoms.i-have-diarrhea,proljev
+pharmacy-symptoms.i-think-it-is-infected,inficirano
+pharmacy-symptoms.is-this-safe-during-pregnancy,trudnoći
+pharmacy-symptoms.motion-sickness-tablets,mučnine pri putovanju
+pharmacy-symptoms.painkiller,bolove
+pharmacy-symptoms.rehydration-salts,rehidraciju
+pharmacy-symptoms.the-pain-is-severe,Bol | jaka
+pharmacy-symptoms.which-pharmacy-is-open-now,sada otvorena
+police-consulate.i-need-an-interpreter,prevoditelja
+police-consulate.i-want-to-contact-my-embassy,veleposlanstvo
+police-consulate.i-want-to-report-a-theft,prijaviti
+police-consulate.my-bag-was-stolen,Ukradena
+police-consulate.someone-is-following-me,prati
+police-consulate.where-is-the-police-station,policijska stanica
+quick-directions.go-straight,pravo
+quick-directions.turn-left,lijevo
+quick-directions.turn-right,desno
+room-problems.can-i-change-rooms,drugu sobu
+room-problems.please-send-someone,pošaljite nekoga
+room-problems.the-air-conditioning-is-broken,Klima uređaj
+room-problems.the-heating-does-not-work,Grijanje
+room-problems.the-key-does-not-work,Ključ
+room-problems.the-light-does-not-work,Svjetlo
+room-problems.the-room-is-too-noisy,bučno
+room-problems.the-toilet-will-not-flush,Vodokotlić
+room-problems.there-is-a-problem-with-the-room,problem
+room-problems.there-is-no-hot-water,tople vode
+shopping.can-it-be-a-little-cheaper,jeftinije
+shopping.do-you-have-this-in-stock,na zalihi
+shopping.how-much-is-this,košta
+shopping.i-am-just-looking,gledam
+shopping.i-will-take-this,Uzet
+shopping.that-is-too-expensive,preskupo
+shopping.where-do-i-pay,plaća
+taxi.can-you-wait-for-me-here,pričekati
+taxi.could-you-make-it-colder,pojačati
+taxi.could-you-make-it-warmer,smanjiti
+taxi.may-i-open-the-window,prozor
+taxi.please-stop-here,stanite
+taxi.please-take-me-here,odvezite
+time-scheduling.can-we-change-the-time,promijeniti
+time-scheduling.how-long-does-it-take,traje
+time-scheduling.what-day-is-it-today,danas dan
+time-scheduling.what-time-does-it-close,zatvara
+time-scheduling.what-time-does-it-open,otvara
+time-scheduling.what-time-is-it,sati
+time-scheduling.what-time-should-we-meet,nalazimo
+time-scheduling.when-is-convenient,odgovara
+toilets.it-is-out-of-order,U kvaru
+toilets.where-toilet,WC
+trail-conditions.can-we-return-before-dark,prije mraka
+trail-conditions.can-we-return-the-same-way,istim putem
+trail-conditions.how-long-is-the-full-route,cijela staza
+trail-conditions.is-the-path-slippery,skliska
+trail-conditions.is-the-route-steep,strma
+trail-conditions.is-the-trail-open,otvorena
+trail-transport.do-you-have-a-map,kartu
+trail-transport.how-long-is-the-wait,čeka
+trail-transport.is-there-cell-signal-here,signala
+trail-transport.what-time-is-the-last-shuttle,zadnji autobus
+trail-transport.when-does-the-cableway-stop,uspinjača
+trail-transport.where-can-we-buy-water,kupiti vodu
+trail-transport.where-can-we-refill-water,natočiti vodu
+transit-rides.can-i-use-this-ticket,koristiti
+transit-rides.do-i-need-to-transfer,presjedati
+transit-rides.do-i-need-to-validate,poništiti
+transit-rides.i-am-in-a-hurry,žurbi
+transit-rides.i-went-past-my-stop,Prošao | Prošla
+transit-rides.is-it-delayed,kašnjenja
+transit-rides.is-this-direct,direktna
+transit-rides.please-tell-me-where-to-get-off,izaći
+transit-rides.what-is-the-next-stop,sljedeća stanica
+transit-rides.what-time-is-the-next-one,sljedeći
+transit-rides.where-do-i-pay-the-fare,vožnja
+transit-rides.where-is-the-subway-station,podzemne željeznice
+weather.how-cold-at-night,hladno noću
+weather.is-it-safe-today,sigurno
+weather.will-it-rain,kiša

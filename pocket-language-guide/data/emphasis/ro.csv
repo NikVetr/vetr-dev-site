@@ -1,0 +1,313 @@
+concept_id,key
+about-me.i-am-a-doctor,medică | medic
+about-me.i-am-a-nurse,asistentă medicală | asistent medical
+about-me.i-am-a-student,studentă | student
+about-me.i-am-a-teacher,profesor | profesoară
+about-me.i-am-an-engineer,ingineră | inginer
+about-me.i-am-retired,pensionară | pensionar
+about-me.i-have-my-own-business,propria afacere
+about-me.i-work-in-an-office,birou
+accessibility.step-free,fără trepte
+air-travel.i-would-like-a-window-seat,fereastră
+air-travel.i-would-like-an-aisle-seat,culoar
+air-travel.my-luggage-did-not-arrive,nu a ajuns
+air-travel.where-is-check-in,check-in-ul
+air-travel.where-is-the-security-check,controlul de securitate
+air-travel.which-gate,poarta de îmbarcare
+attractions-tickets.are-there-lockers,dulapuri
+attractions-tickets.could-you-take-a-photo-for-us,Ne | fotografie
+attractions-tickets.do-i-need-a-reservation,rezervare
+attractions-tickets.may-i-take-photos,fotografii
+attractions-tickets.what-is-the-latest-entry-time,ultima | intrare
+attractions-tickets.where-can-i-buy-tickets,bilete
+board-answers.after-food,După
+board-answers.at-the-next-stop,următoarea stație
+board-answers.before-food,Înainte
+board-answers.can-you-walk,merge
+board-answers.help-is-coming,ajutorul
+board-answers.how-many,Câți
+board-answers.i-am-calling-an-ambulance,ambulanță
+board-answers.i-am-calling-the-police,poliție
+board-answers.i-do-not-have-a-phone,telefon
+board-answers.i-will-check,Verific
+board-answers.i-will-find-someone,Găsesc pe cineva
+board-answers.i-will-show-you,Arăt
+board-answers.i-will-write-it-down,Notez
+board-answers.i-would-rather-not-say,nu spun
+board-answers.it-is-closed,închis
+board-answers.it-is-free,gratuit
+board-answers.it-is-over-there,acolo
+board-answers.my-name-is-blank,numesc
+board-answers.none-of-these,Niciuna
+board-answers.not-possible,nu este posibil
+board-answers.only-for-customers,clienți
+board-answers.pay-on-board,la urcare
+board-answers.prescription-only,rețetă
+board-answers.see-a-doctor,medic
+board-answers.stay-here,rămâneți
+board-answers.the-hospital-is-close,Spitalul | aproape
+board-answers.there-is-no-wait,Nu este așteptare
+board-answers.we-are-full,locuri
+board-answers.we-do-not-have-it,Nu avem
+board-answers.we-have-it,avem
+board-answers.what-happened,întâmplat
+board-answers.what-is-your-name,numele
+board-answers.where-does-it-hurt,doare
+border-customs.here-is-my-passport,pașaportul
+border-customs.i-am-here-for-business,afaceri
+border-customs.i-am-visiting-family,familie
+border-customs.i-have-a-connecting-flight,cursă de legătură
+border-customs.where-do-i-collect-my-baggage,iau
+color-size-returns.do-you-have-a-bag,pungă
+color-size-returns.do-you-have-another-size,mărime
+color-size-returns.may-i-try-it-on,probez
+communication.can-you-help-me,ajuta
+communication.please-speak-more-slowly,rar
+dietary-needs.does-it-contain-fish-stock,fond de pește
+dietary-needs.does-it-contain-pork-fat,untură | slănină
+dietary-needs.does-it-contain-pork-stock,fond de porc
+dietary-needs.i-am-vegan,vegană | vegan
+dietary-needs.i-am-vegetarian,vegetariană | vegetarian
+dietary-needs.is-this-halal,halal
+dietary-needs.no-eggs,ouă
+dietary-needs.no-meat,carne
+dietary-needs.no-nuts,fructe cu coajă lemnoasă
+dietary-needs.no-peanuts,arahide
+dietary-needs.no-pork,porc
+dietary-needs.no-seafood,pește | fructe de mare
+dietary-needs.no-sesame,susan
+directions.can-i-walk-there,pe jos
+directions.can-you-show-me-the-way,drumul
+directions.how-long-on-foot,Cât durează
+directions.is-it-far,departe
+directions.please-show-me-on-the-map,hartă
+emergency-medical.i-am-bleeding-badly,Sângerez
+emergency-medical.i-am-having-a-severe-allergic-reaction,șoc anafilactic
+emergency-medical.i-am-injured,rănită | rănit
+emergency-medical.i-cannot-breathe,respira
+emergency-medical.i-feel-unwell,rău
+emergency-medical.i-have-chest-pain,dureri | piept
+emergency-medical.i-have-travel-insurance,asigurare
+emergency-medical.i-need-a-doctor,doctor
+emergency-medical.i-think-a-bone-is-broken,os rupt
+emergency-medical.it-hurts-here,doare
+emergency-medical.please-call-an-ambulance,ambulanță
+emergency-medical.please-call-my-emergency-contact,contact
+emergency-medical.please-take-me-to-a-hospital,spital
+emergency-medical.this-is-an-emergency,urgență
+emergency-medical.this-person-is-unconscious,inconștientă
+emergency-medical.where-is-the-nearest-hospital,cel mai apropiat
+family-intros.this-is-my-brother,fratele
+family-intros.this-is-my-colleague,colegul
+family-intros.this-is-my-daughter,fiica
+family-intros.this-is-my-father,tatăl
+family-intros.this-is-my-husband,soțul
+family-intros.this-is-my-mother,mama
+family-intros.this-is-my-partner,partenerul
+family-intros.this-is-my-sister,sora
+family-intros.this-is-my-son,fiul
+family-intros.this-is-my-wife,soția
+food-ordering.i-want-this,Aș vrea
+food-ordering.is-a-table-available,masă liberă
+food-ordering.is-this-vegetarian,vegetarian
+food-ordering.table-for-two,masă | doi
+food-ordering.what-do-you-recommend,recomandați
+hiking-parks.how-long-to-the-summit,vârf
+hiking-parks.how-long-to-the-viewpoint,punctul panoramic
+hiking-parks.is-this-trail-suitable-for-beginners,începători
+hiking-parks.where-is-the-trailhead,începutul
+hiking-parks.which-route-is-easier,ușor
+hitchhiking.can-you-give-me-a-ride,duce
+hitchhiking.i-can-pay-for-fuel,benzina
+hitchhiking.i-only-need-to-go-to-the-next-town,orașul următor
+hitchhiking.is-there-room-for-two,loc | doi
+hitchhiking.thank-you-for-the-ride,Mulțumesc
+hitchhiking.where-are-you-going,Unde
+hotel-basics.are-any-rooms-available,camere
+hotel-basics.how-much-per-night,pe noapte
+hotel-basics.i-have-a-reservation,rezervare
+hotel-basics.i-would-like-a-non-smoking-room,nefumători
+hotel-basics.i-would-like-a-quiet-room,liniștită
+hotel-basics.is-breakfast-included,Micul dejun
+hotel-basics.is-there-a-washing-machine,mașină de spălat
+hotel-basics.is-there-air-conditioning,aer condiționat
+hotel-basics.is-wi-fi-free,Wi-Fi-ul
+hotel-basics.may-i-see-the-room,vedea
+hotel-requests.another-blanket,pătură
+hotel-requests.another-night,încă o noapte
+hotel-requests.another-towel-please,prosop
+hotel-requests.can-i-check-in-early,devreme
+hotel-requests.can-i-check-out-later,târziu
+hotel-requests.can-i-store-my-luggage,bagajele
+hotel-requests.is-there-a-safe,seif
+hotel-requests.no-housekeeping,curățenie
+hotel-requests.what-time-does-breakfast-start,micul dejun
+hotel-requests.what-time-is-check-out,check-out-ul
+in-a-building.is-this-the-correct-entrance,corectă
+introductions.i-am-a-tourist,turistă | turist
+introductions.i-am-traveling-alone,singură | singur
+introductions.my-name-is,numesc
+introductions.this-is-my-friend,prietenul
+introductions.we-are-traveling-together,împreună
+introductions.what-is-your-name,numiți
+introductions.where-are-you-from,De unde
+kind-words.i-had-a-wonderful-time,minunate
+kind-words.i-like-it-very-much,place
+kind-words.it-is-beautiful-here,frumos
+kind-words.thank-you-for-everything,tot
+kind-words.thank-you-for-your-help,ajutor
+kind-words.thank-you-for-your-hospitality,ospitalitate
+kind-words.this-is-delicious,delicios
+kind-words.you-are-very-kind,drăguț
+laundry.can-it-be-ready-today,astăzi
+laundry.how-much-per-kilo,pe kilogram
+laundry.please-do-not-use-bleach,înălbitor
+laundry.please-iron-this,călcați
+laundry.please-wash-these-clothes,spălați
+laundry.when-will-it-be-ready,Când
+laundry.where-is-a-laundromat,spălătorie
+lost-rescue.i-do-not-know-where-i-am,unde sunt
+lost-rescue.i-lost-my-bag,geanta
+lost-rescue.i-lost-my-passport,pașaportul
+lost-rescue.i-lost-my-phone,telefonul
+lost-rescue.i-lost-my-wallet,portofelul
+lost-rescue.my-child-is-missing,Copilul
+lost-rescue.please-call-the-police,poliția
+lost-rescue.we-are-here,aici
+massage-spa.focus-on-back,spate
+massage-spa.focus-on-feet,tălpi
+massage-spa.focus-on-neck,ceafă
+massage-spa.focus-on-shoulders,umeri
+massage-spa.more-gently,ușor
+massage-spa.please-avoid-this-area,evitați
+massage-spa.please-pause,pauză
+massage-spa.please-stop,Opriți
+massage-spa.reply-ask-supervisor,persoana responsabilă
+massage-spa.reply-cannot-avoid-this-treatment,nu poate fi ocolită
+massage-spa.reply-does-it-hurt-there,doare
+massage-spa.reply-i-will-avoid-that-area,evit
+massage-spa.reply-which-area-exactly,Care zonă
+massage-spa.stronger-pressure,tare
+massage-spa.that-pressure-is-good,bună
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirină | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicilină
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfamide
+medical-conditions.i-am-diabetic,diabetică | diabetic
+medical-conditions.i-am-pregnant,însărcinată
+medical-conditions.i-carry-an-adrenaline-injector,adrenalină
+medical-conditions.i-have-a-heart-condition,cardiacă
+medical-conditions.i-have-asthma,astm
+medical-conditions.i-have-epilepsy,epilepsie
+medical-conditions.i-need-insulin,insulină
+medical-conditions.i-need-my-inhaler,inhalatorul
+medical-conditions.i-take-blood-thinners,anticoagulante
+medical-conditions.inject-it-into-my-outer-thigh,coapsei
+medical-conditions.my-blood-sugar-is-low,glicemia scăzută
+medical-conditions.my-injector-is-in-my-bag,Autoinjectorul | geantă
+medical-conditions.please-give-me-sugar-or-juice,zahăr | suc
+medical-conditions.this-card-lists-my-conditions,card
+medical-conditions.this-is-my-medicine,medicamentul
+outdoors.are-there-dangerous-animals-here,animale periculoase
+outdoors.can-we-camp-here,campa
+outdoors.is-it-safe-to-swim-here,înoți
+payment-receipt.can-we-pay-separately,separat
+payment-receipt.how-much-in-total,total
+payment-receipt.i-already-paid,plătit deja
+payment-receipt.is-tax-included,TVA-ul
+payment-receipt.my-card-was-declined,refuzat
+payment-receipt.pay-by-card,cardul
+payment-receipt.the-bill-is-wrong,nota de plată | greșită
+pharmacy-symptoms.before-or-after-food,masă
+pharmacy-symptoms.can-i-get-this-medicine-here,medicament
+pharmacy-symptoms.cough-medicine,tuse
+pharmacy-symptoms.do-i-need-a-prescription,rețetă
+pharmacy-symptoms.how-many-times-a-day,ori pe zi
+pharmacy-symptoms.how-much-should-i-take,Cât
+pharmacy-symptoms.i-feel-dizzy,amețită | amețit
+pharmacy-symptoms.i-feel-nauseous,greață
+pharmacy-symptoms.i-have-a-burn,arsură
+pharmacy-symptoms.i-have-a-cough,tuse
+pharmacy-symptoms.i-have-a-cut,tăietură
+pharmacy-symptoms.i-have-a-fever,febră
+pharmacy-symptoms.i-have-a-headache,cap
+pharmacy-symptoms.i-have-a-rash,erupție cutanată
+pharmacy-symptoms.i-have-a-sore-throat,gâtul
+pharmacy-symptoms.i-have-a-stomach-ache,stomac
+pharmacy-symptoms.i-have-diarrhea,diaree
+pharmacy-symptoms.i-think-it-is-infected,infectat
+pharmacy-symptoms.is-this-safe-during-pregnancy,sarcinii
+pharmacy-symptoms.motion-sickness-tablets,rău de mișcare
+pharmacy-symptoms.rehydration-salts,rehidratare
+pharmacy-symptoms.the-pain-is-severe,Durerea | severă
+pharmacy-symptoms.which-pharmacy-is-open-now,deschisă acum
+police-consulate.i-need-an-interpreter,interpret
+police-consulate.i-want-to-contact-my-embassy,ambasada
+police-consulate.i-want-to-report-a-theft,raportez
+police-consulate.my-bag-was-stolen,furată
+police-consulate.someone-is-following-me,urmărește
+police-consulate.where-is-the-police-station,secția de poliție
+quick-directions.on-the-left,stânga
+quick-directions.on-the-right,dreapta
+quick-directions.turn-left,stânga
+quick-directions.turn-right,dreapta
+room-problems.can-i-change-rooms,schimba
+room-problems.please-send-someone,trimiteți pe cineva
+room-problems.the-air-conditioning-is-broken,Aerul condiționat
+room-problems.the-heating-does-not-work,Încălzirea
+room-problems.the-key-does-not-work,Cheia
+room-problems.the-light-does-not-work,Lumina
+room-problems.the-room-is-too-noisy,zgomotoasă
+room-problems.the-toilet-will-not-flush,Toaleta
+room-problems.there-is-a-problem-with-the-room,problemă
+room-problems.there-is-no-hot-water,apă caldă
+shopping.can-it-be-a-little-cheaper,ieftin
+shopping.do-you-have-this-in-stock,pe stoc
+shopping.how-much-is-this,costă
+shopping.i-am-just-looking,uit
+shopping.i-will-take-this,Iau
+shopping.that-is-too-expensive,scump
+shopping.where-do-i-pay,plătesc
+taxi.can-you-wait-for-me-here,așteptați
+taxi.could-you-make-it-colder,rece
+taxi.could-you-make-it-warmer,cald
+taxi.may-i-open-the-window,fereastra
+taxi.please-stop-here,opriți
+taxi.please-take-me-here,duceți-mă
+taxi.please-turn-around,întoarceți
+time-scheduling.can-we-change-the-time,schimba
+time-scheduling.how-long-does-it-take,durează
+time-scheduling.what-day-is-it-today,zi
+time-scheduling.what-time-does-it-close,închide
+time-scheduling.what-time-does-it-open,deschide
+time-scheduling.what-time-is-it,ceasul
+time-scheduling.what-time-should-we-meet,întâlnim
+time-scheduling.when-is-convenient,convenabil
+toilets.where-toilet,toaleta
+trail-conditions.can-we-return-before-dark,înainte de întuneric
+trail-conditions.can-we-return-the-same-way,același drum
+trail-conditions.how-long-is-the-full-route,traseul complet
+trail-conditions.is-the-path-slippery,alunecoasă
+trail-conditions.is-the-route-steep,abrupt
+trail-conditions.is-the-trail-open,deschis
+trail-transport.do-you-have-a-map,hartă
+trail-transport.how-long-is-the-wait,așteptarea
+trail-transport.is-there-cell-signal-here,semnal
+trail-transport.what-time-is-the-last-shuttle,ultima navetă
+trail-transport.when-does-the-cableway-stop,telecabina
+trail-transport.where-can-we-buy-water,cumpăra
+trail-transport.where-can-we-refill-water,reumple
+transit-rides.can-i-use-this-ticket,folosi
+transit-rides.do-i-need-to-transfer,schimb
+transit-rides.do-i-need-to-validate,validez
+transit-rides.i-am-in-a-hurry,grăbită | grăbit
+transit-rides.i-went-past-my-stop,trecut
+transit-rides.is-it-delayed,întârziere
+transit-rides.is-this-direct,direct
+transit-rides.please-tell-me-where-to-get-off,cobor
+transit-rides.what-is-the-next-stop,următoarea stație
+transit-rides.what-time-is-the-next-one,următorul
+transit-rides.where-do-i-pay-the-fare,călătoria
+transit-rides.where-is-the-subway-station,metrou
+weather.how-cold-at-night,frig | noaptea
+weather.is-it-safe-today,sigur
+weather.will-it-rain,ploua

@@ -1,0 +1,315 @@
+concept_id,key
+about-me.i-am-a-doctor,բժիշկ
+about-me.i-am-a-nurse,բուժքույր
+about-me.i-am-a-student,ուսանող
+about-me.i-am-a-teacher,ուսուցիչ
+about-me.i-am-an-engineer,ինժեներ
+about-me.i-am-retired,թոշակառու
+about-me.i-have-my-own-business,սեփական բիզնեսն
+about-me.i-work-in-an-office,գրասենյակում
+accessibility.step-free,Առանց աստիճանների
+air-travel.i-would-like-a-window-seat,պատուհանի
+air-travel.i-would-like-an-aisle-seat,միջանցքի
+air-travel.my-luggage-did-not-arrive,չհասավ
+air-travel.where-is-check-in,Գրանցման կետը
+air-travel.where-is-the-security-check,Անվտանգության ստուգումը
+attractions-tickets.are-there-lockers,Պահարաններ
+attractions-tickets.could-you-take-a-photo-for-us,մեզ
+attractions-tickets.do-i-need-a-reservation,ամրագրում
+attractions-tickets.may-i-take-photos,լուսանկարել
+attractions-tickets.what-is-the-latest-entry-time,վերջին մուտքը
+attractions-tickets.where-can-i-buy-tickets,տոմս
+board-answers.after-food,հետո
+board-answers.before-food,առաջ
+board-answers.can-you-walk,քայլել
+board-answers.help-is-coming,Օգնությունը
+board-answers.how-many,Քանի՞ հատ
+board-answers.i-am-calling-an-ambulance,շտապօգնություն
+board-answers.i-am-calling-the-police,ոստիկանություն
+board-answers.i-do-not-have-a-phone,Հեռախոս
+board-answers.i-will-find-someone,կգտնեմ մեկին
+board-answers.i-will-show-you,ցույց կտամ
+board-answers.i-will-write-it-down,կգրեմ
+board-answers.i-would-rather-not-say,Չէի ուզենա
+board-answers.it-is-closed,Փակ
+board-answers.it-is-free,Անվճար
+board-answers.it-is-over-there,Այնտեղ
+board-answers.none-of-these,սրանց մեջ
+board-answers.not-possible,հնարավոր չէ
+board-answers.only-for-customers,հաճախորդների
+board-answers.pay-on-board,նստելուց հետո
+board-answers.prescription-only,դեղատոմսով
+board-answers.see-a-doctor,բժշկի
+board-answers.stay-here,Այստեղ մնալը
+board-answers.the-hospital-is-close,Հիվանդանոցը
+board-answers.there-is-no-wait,Հերթ չկա
+board-answers.we-are-full,տեղ չկա
+board-answers.we-do-not-have-it,չունենք
+board-answers.we-have-it,ունենք
+board-answers.what-happened,պատահել
+board-answers.what-is-your-name,անունը
+board-answers.where-does-it-hurt,ցավում
+board-answers.where-to,Ո՞ւր
+border-customs.here-is-my-passport,անձնագիրը
+border-customs.i-am-here-for-business,գործով
+border-customs.i-am-visiting-family,ընտանիքիս
+border-customs.i-have-a-connecting-flight,կապակցված չվերթ
+border-customs.where-do-i-collect-my-baggage,ստանամ
+color-size-returns.do-you-have-a-bag,Տոպրակ
+color-size-returns.do-you-have-another-size,չափս
+color-size-returns.may-i-try-it-on,փորձել
+communication.can-you-help-me,օգնել
+communication.do-you-speak-english,խոսո՞ւմ
+communication.i-do-not-speak-this-language,չեմ խոսում
+communication.i-do-not-understand,չեմ հասկանում
+communication.please-speak-more-slowly,դանդաղ
+dietary-needs.does-it-contain-fish-stock,ձկան արգանակ
+dietary-needs.does-it-contain-pork-fat,խոզի ճարպ
+dietary-needs.does-it-contain-pork-stock,խոզի մսի արգանակ
+dietary-needs.i-am-vegan,վեգան
+dietary-needs.i-am-vegetarian,բուսակեր
+dietary-needs.is-this-halal,հալա՞լ
+dietary-needs.no-eggs,ձվի
+dietary-needs.no-meat,մսի
+dietary-needs.no-nuts,ընկուզեղենի
+dietary-needs.no-peanuts,գետնանուշի
+dietary-needs.no-pork,խոզի
+dietary-needs.no-seafood,ծովամթերքի
+dietary-needs.no-sesame,քունջութի
+directions.can-i-walk-there,ոտքով գնալ
+directions.can-you-show-me-the-way,ճանապարհը
+directions.how-long-on-foot,որքա՞ն
+directions.is-it-far,Հեռո՞ւ
+directions.please-show-me-on-the-map,քարտեզի
+emergency-medical.i-am-bleeding-badly,արյունահոսում
+emergency-medical.i-am-having-a-severe-allergic-reaction,ալերգիկ ռեակցիա
+emergency-medical.i-am-injured,վնասվել
+emergency-medical.i-cannot-breathe,շնչել
+emergency-medical.i-feel-unwell,վատ
+emergency-medical.i-have-chest-pain,Կրծքավանդակս
+emergency-medical.i-have-travel-insurance,ապահովագրություն
+emergency-medical.i-need-a-doctor,բժիշկ
+emergency-medical.i-think-a-bone-is-broken,ոսկր | կոտրվել
+emergency-medical.it-hurts-here,ցավում
+emergency-medical.please-call-an-ambulance,շտապօգնություն
+emergency-medical.please-call-my-emergency-contact,շտապ կապի
+emergency-medical.please-take-me-to-a-hospital,հիվանդանոց
+emergency-medical.this-is-an-emergency,շտապ դեպք
+emergency-medical.this-person-is-unconscious,գիտակցությունը կորցրել
+emergency-medical.where-is-the-nearest-hospital,ամենամոտ
+family-intros.this-is-my-brother,եղբայրն
+family-intros.this-is-my-colleague,գործընկերն
+family-intros.this-is-my-daughter,դուստրն
+family-intros.this-is-my-father,հայրն
+family-intros.this-is-my-husband,ամուսինն
+family-intros.this-is-my-mother,մայրն
+family-intros.this-is-my-partner,կողակիցն
+family-intros.this-is-my-sister,քույրն
+family-intros.this-is-my-son,որդին
+family-intros.this-is-my-wife,կինն
+food-ordering.i-want-this,ուզում
+food-ordering.is-a-table-available,Ազատ սեղան
+food-ordering.is-this-vegetarian,բուսակերակա՞ն
+food-ordering.table-for-two,Սեղան | երկու հոգու
+food-ordering.what-do-you-recommend,խորհուրդ
+hiking-parks.how-long-to-the-summit,Գագաթը
+hiking-parks.how-long-to-the-viewpoint,Դիտակետը
+hiking-parks.is-this-trail-suitable-for-beginners,սկսնակների
+hiking-parks.where-is-the-trailhead,սկիզբը
+hiking-parks.which-route-is-easier,հեշտ
+hitchhiking.can-you-give-me-a-ride,տանել
+hitchhiking.i-can-pay-for-fuel,բենզինի
+hitchhiking.i-only-need-to-go-to-the-next-town,հաջորդ քաղաքն
+hitchhiking.is-there-room-for-two,Երկու հոգու | տեղ
+hitchhiking.thank-you-for-the-ride,Շնորհակալ
+hitchhiking.where-are-you-going,Ո՞ւր
+hotel-basics.are-any-rooms-available,Ազատ սենյակ
+hotel-basics.how-much-per-night,գիշերը
+hotel-basics.i-have-a-reservation,ամրագրում
+hotel-basics.i-would-like-a-non-smoking-room,չծխողների
+hotel-basics.i-would-like-a-quiet-room,հանգիստ
+hotel-basics.is-breakfast-included,Նախաճաշը
+hotel-basics.is-there-a-washing-machine,Լվացքի մեքենա
+hotel-basics.is-there-air-conditioning,Օդորակիչ
+hotel-basics.is-wi-fi-free,Վայ-ֆայը
+hotel-basics.may-i-see-the-room,տեսնել
+hotel-requests.another-blanket,վերմակ
+hotel-requests.another-night,ևս մեկ գիշեր
+hotel-requests.another-towel-please,սրբիչ
+hotel-requests.can-i-check-in-early,շուտ
+hotel-requests.can-i-check-out-later,ուշ
+hotel-requests.can-i-store-my-luggage,ուղեբեռս
+hotel-requests.is-there-a-safe,Սեյֆ
+hotel-requests.no-housekeeping,մաքրելու
+hotel-requests.what-time-does-breakfast-start,Նախաճաշը
+hotel-requests.what-time-is-check-out,հանձնումը
+in-a-building.is-this-the-correct-entrance,ճի՞շտ
+introductions.i-am-a-tourist,զբոսաշրջիկ
+introductions.i-am-traveling-alone,մենակ
+introductions.my-name-is,Իմ
+introductions.this-is-my-friend,ընկերն
+introductions.we-are-traveling-together,միասին
+introductions.what-is-your-name,Ձեր
+introductions.where-are-you-from,Որտեղի՞ց
+kind-words.i-had-a-wonderful-time,հիանալի
+kind-words.i-like-it-very-much,հավանեցի
+kind-words.it-is-beautiful-here,գեղեցիկ
+kind-words.thank-you-for-everything,ամեն ինչի
+kind-words.thank-you-for-your-help,օգնության
+kind-words.thank-you-for-your-hospitality,հյուրընկալության
+kind-words.this-is-delicious,համեղ
+kind-words.you-are-very-kind,բարի
+laundry.can-it-be-ready-today,Այսօր
+laundry.how-much-per-kilo,կիլոգրամը
+laundry.please-do-not-use-bleach,սպիտակեցնող
+laundry.please-iron-this,արդուկե՛ք
+laundry.please-wash-these-clothes,լվացե՛ք
+laundry.when-will-it-be-ready,Ե՞րբ
+laundry.where-is-a-laundromat,լվացքատունը
+lost-rescue.i-do-not-know-where-i-am,որտեղ եմ
+lost-rescue.i-lost-my-bag,պայուսակս
+lost-rescue.i-lost-my-passport,անձնագիրս
+lost-rescue.i-lost-my-phone,հեռախոսս
+lost-rescue.i-lost-my-wallet,դրամապանակս
+lost-rescue.my-child-is-missing,երեխան
+lost-rescue.please-call-the-police,ոստիկանություն
+lost-rescue.we-are-here,այստեղ
+massage-spa.focus-on-back,մեջքը
+massage-spa.focus-on-feet,ոտքերը
+massage-spa.focus-on-neck,վիզը
+massage-spa.focus-on-shoulders,ուսերը
+massage-spa.more-gently,Մեղմ
+massage-spa.please-avoid-this-area,մի՛ մերսեք
+massage-spa.please-pause,Մի պահ
+massage-spa.please-stop,Դադարեցրե՛ք
+massage-spa.reply-ask-supervisor,ղեկավարին
+massage-spa.reply-cannot-avoid-this-treatment,հնարավոր չէ
+massage-spa.reply-does-it-hurt-there,ցավո՞ւմ
+massage-spa.reply-i-will-avoid-that-area,չեմ դիպչի
+massage-spa.stronger-pressure,ուժեղ
+massage-spa.that-pressure-is-good,լավ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ասպիրինի | իբուպրոֆենի
+medical-conditions.i-am-allergic-to-penicillin,պենիցիլինի
+medical-conditions.i-am-allergic-to-sulfa-drugs,սուլֆանիլամիդային
+medical-conditions.i-am-diabetic,շաքարախտ
+medical-conditions.i-am-pregnant,հղի
+medical-conditions.i-carry-an-adrenaline-injector,ադրենալինի
+medical-conditions.i-have-a-heart-condition,սրտի
+medical-conditions.i-have-asthma,ասթմա
+medical-conditions.i-have-epilepsy,էպիլեպսիա
+medical-conditions.i-need-insulin,ինսուլին
+medical-conditions.i-need-my-inhaler,ինհալյատորը
+medical-conditions.i-take-blood-thinners,հակամակարդիչ
+medical-conditions.inject-it-into-my-outer-thigh,ազդրիս
+medical-conditions.my-blood-sugar-is-low,արյան շաքարը
+medical-conditions.my-injector-is-in-my-bag,ներարկիչը | պայուսակիս
+medical-conditions.please-give-me-sugar-or-juice,շաքար | հյութ
+medical-conditions.this-card-lists-my-conditions,քարտում
+medical-conditions.this-is-my-medicine,դեղն
+outdoors.are-there-dangerous-animals-here,վտանգավոր կենդանիներ
+outdoors.can-we-camp-here,ճամբար
+outdoors.is-it-safe-to-swim-here,լողալը
+payment-receipt.can-we-pay-separately,առանձին
+payment-receipt.how-much-in-total,Ընդհանուրը
+payment-receipt.i-already-paid,արդեն վճարել
+payment-receipt.is-tax-included,Հարկը
+payment-receipt.my-card-was-declined,մերժվեց
+payment-receipt.pay-by-card,Քարտով
+payment-receipt.the-bill-is-wrong,հաշիվը | սխալ
+pharmacy-symptoms.antacid,հակաթթվային
+pharmacy-symptoms.anti-diarrhea-medicine,փորլուծության
+pharmacy-symptoms.antihistamine,հակահիստամինային
+pharmacy-symptoms.before-or-after-food,Ուտելուց
+pharmacy-symptoms.can-i-get-this-medicine-here,դեղը
+pharmacy-symptoms.cough-medicine,հազի
+pharmacy-symptoms.do-i-need-a-prescription,Դեղատոմս
+pharmacy-symptoms.how-many-times-a-day,Օրական
+pharmacy-symptoms.how-much-should-i-take,Որքա՞ն
+pharmacy-symptoms.i-am-vomiting,փսխում
+pharmacy-symptoms.i-feel-dizzy,պտտվում
+pharmacy-symptoms.i-feel-nauseous,Սրտխառնոց
+pharmacy-symptoms.i-have-a-burn,այրվածք
+pharmacy-symptoms.i-have-a-cough,հազ
+pharmacy-symptoms.i-have-a-cut,կտրվածք
+pharmacy-symptoms.i-have-a-fever,ջերմություն
+pharmacy-symptoms.i-have-a-headache,Գլուխս
+pharmacy-symptoms.i-have-a-rash,ցան
+pharmacy-symptoms.i-have-a-sore-throat,Կոկորդս
+pharmacy-symptoms.i-have-a-stomach-ache,Ստամոքսս
+pharmacy-symptoms.i-have-diarrhea,փորլուծություն
+pharmacy-symptoms.i-think-it-is-infected,վարակվել
+pharmacy-symptoms.is-this-safe-during-pregnancy,հղիության
+pharmacy-symptoms.motion-sickness-tablets,ճանապարհային հիվանդության
+pharmacy-symptoms.the-pain-is-severe,Ցավը
+pharmacy-symptoms.which-pharmacy-is-open-now,հիմա բաց
+police-consulate.i-need-an-interpreter,թարգմանիչ
+police-consulate.i-want-to-contact-my-embassy,դեսպանատան
+police-consulate.i-want-to-report-a-theft,հայտնել
+police-consulate.my-bag-was-stolen,գողացել
+police-consulate.someone-is-following-me,հետևում
+police-consulate.where-is-the-police-station,ոստիկանության բաժանմունքը
+quick-directions.go-straight,Ուղիղ
+quick-directions.on-the-left,Ձախ
+quick-directions.on-the-right,Աջ
+quick-directions.turn-left,ձախ
+quick-directions.turn-right,աջ
+room-problems.can-i-change-rooms,փոխել
+room-problems.please-send-someone,մարդ ուղարկե՛ք
+room-problems.the-air-conditioning-is-broken,Օդորակիչը
+room-problems.the-heating-does-not-work,Ջեռուցումը
+room-problems.the-key-does-not-work,Բանալին
+room-problems.the-light-does-not-work,Լույսը
+room-problems.the-room-is-too-noisy,աղմկոտ
+room-problems.the-toilet-will-not-flush,Զուգարանի
+room-problems.there-is-a-problem-with-the-room,խնդիր
+room-problems.there-is-no-hot-water,Տաք ջուր
+shopping.can-it-be-a-little-cheaper,էժան
+shopping.do-you-have-this-in-stock,պահեստում
+shopping.how-much-is-this,արժե
+shopping.i-am-just-looking,նայում
+shopping.i-will-take-this,կվերցնեմ
+shopping.that-is-too-expensive,թանկ
+shopping.where-do-i-pay,վճարեմ
+taxi.can-you-wait-for-me-here,սպասել
+taxi.could-you-make-it-colder,պաղ
+taxi.could-you-make-it-warmer,տաքացնել
+taxi.may-i-open-the-window,պատուհանը
+taxi.please-stop-here,կանգնե՛ք
+taxi.please-take-me-here,տարե՛ք
+taxi.please-turn-around,ետ դարձե՛ք
+time-scheduling.can-we-change-the-time,փոխել
+time-scheduling.how-long-does-it-take,Որքա՞ն ժամանակ
+time-scheduling.what-day-is-it-today,ի՞նչ օր
+time-scheduling.what-time-does-it-close,փակվում
+time-scheduling.what-time-does-it-open,բացվում
+time-scheduling.what-time-should-we-meet,հանդիպենք
+time-scheduling.when-is-convenient,հարմար
+toilets.where-toilet,զուգարանը
+trail-conditions.can-we-return-before-dark,մինչև մութն ընկնելը
+trail-conditions.can-we-return-the-same-way,նույն ճանապարհով
+trail-conditions.how-long-is-the-full-route,Ամբողջ ճանապարհը
+trail-conditions.is-the-path-slippery,սահո՞ւն
+trail-conditions.is-the-route-steep,զառիթա՞փ
+trail-conditions.is-the-trail-open,բա՞ց
+trail-transport.do-you-have-a-map,Քարտեզ
+trail-transport.how-long-is-the-wait,սպասել
+trail-transport.is-there-cell-signal-here,բջջային կապ
+trail-transport.what-time-is-the-last-shuttle,Վերջին ավտոբուսը
+trail-transport.when-does-the-cableway-stop,Ճոպանուղին
+trail-transport.where-can-we-buy-water,ջուր գնել
+trail-transport.where-can-we-refill-water,ջուր լցնել
+transit-rides.can-i-use-this-ticket,օգտագործել
+transit-rides.do-i-need-to-transfer,փոխեմ
+transit-rides.do-i-need-to-validate,վավերացնել
+transit-rides.i-am-in-a-hurry,շտապում
+transit-rides.i-went-past-my-stop,անցա
+transit-rides.is-it-delayed,Ուշանո՞ւմ
+transit-rides.is-this-direct,ուղի՞ղ
+transit-rides.please-tell-me-where-to-get-off,իջնեմ
+transit-rides.what-is-the-next-stop,հաջորդ կանգառը
+transit-rides.what-time-is-the-next-one,Հաջորդը
+transit-rides.where-do-i-pay-the-fare,Ուղեվարձը
+transit-rides.where-is-the-subway-station,մետրոյի
+weather.how-cold-at-night,Գիշերը | ցուրտ
+weather.is-it-safe-today,անվտա՞նգ
+weather.will-it-rain,անձրև

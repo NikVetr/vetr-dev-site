@@ -1,0 +1,306 @@
+concept_id,key
+about-me.i-am-a-doctor,Doktor
+about-me.i-am-a-nurse,Nurse
+about-me.i-am-a-student,Estudyante
+about-me.i-am-a-teacher,Guro
+about-me.i-am-an-engineer,Inhinyero
+about-me.i-am-retired,Nagretiro
+about-me.i-have-my-own-business,sariling negosyo
+about-me.i-work-in-an-office,opisina
+accessibility.step-free,walang hagdan
+air-travel.i-would-like-a-window-seat,bintana
+air-travel.i-would-like-an-aisle-seat,pasilyo
+air-travel.my-luggage-did-not-arrive,Hindi | dumating
+air-travel.where-is-check-in,check-in
+air-travel.where-is-the-security-check,security check
+attractions-tickets.are-there-lockers,lockers
+attractions-tickets.could-you-take-a-photo-for-us,kaming
+attractions-tickets.do-i-need-a-reservation,reserbasyon
+attractions-tickets.may-i-take-photos,litrato
+attractions-tickets.what-is-the-latest-entry-time,huling | pagpasok
+attractions-tickets.where-can-i-buy-tickets,tiket
+board-answers.after-food,Pagkatapos
+board-answers.at-the-next-stop,susunod na hintuan
+board-answers.before-food,Bago
+board-answers.can-you-walk,lumakad
+board-answers.help-is-coming,tulong
+board-answers.i-am-calling-an-ambulance,ambulansya
+board-answers.i-am-calling-the-police,pulisya
+board-answers.i-do-not-have-a-phone,cellphone
+board-answers.i-will-check,Titingnan
+board-answers.i-will-find-someone,Maghahanap
+board-answers.i-will-show-you,Ituturo
+board-answers.i-will-write-it-down,Isusulat
+board-answers.i-would-rather-not-say,Hindi | sasabihin
+board-answers.none-of-these,sa mga ito
+board-answers.only-for-customers,customer
+board-answers.pay-on-board,sasakyan
+board-answers.prescription-only,reseta
+board-answers.see-a-doctor,doktor
+board-answers.stay-here,Dito
+board-answers.the-hospital-is-close,Malapit | ospital
+board-answers.there-is-no-wait,Hindi | maghintay
+board-answers.what-happened,nangyari
+board-answers.what-is-your-name,pangalan niyo
+board-answers.where-does-it-hurt,masakit
+board-answers.where-to,punta
+border-customs.here-is-my-passport,pasaporte
+border-customs.i-am-here-for-business,negosyo
+border-customs.i-am-visiting-family,pamilya
+border-customs.i-have-a-connecting-flight,connecting flight
+border-customs.where-do-i-collect-my-baggage,makukuha
+color-size-returns.do-you-have-a-bag,bag
+color-size-returns.do-you-have-another-size,ibang sukat
+color-size-returns.may-i-try-it-on,isukat
+communication.can-you-help-me,tulungan
+communication.do-you-speak-english,Marunong
+communication.i-do-not-speak-this-language,Hindi | marunong
+communication.i-do-not-understand,Hindi | maintindihan
+communication.please-speak-more-slowly,Pakibagalan
+dietary-needs.does-it-contain-fish-stock,sabaw ng isda
+dietary-needs.does-it-contain-pork-fat,manteca ng baboy
+dietary-needs.does-it-contain-pork-stock,sabaw ng baboy
+dietary-needs.i-am-vegan,Vegan
+dietary-needs.i-am-vegetarian,Vegetarian
+dietary-needs.is-this-halal,Halal
+dietary-needs.no-eggs,itlog
+dietary-needs.no-meat,karne
+dietary-needs.no-nuts,nuts
+dietary-needs.no-peanuts,mani
+dietary-needs.no-pork,baboy
+dietary-needs.no-seafood,pagkaing-dagat
+dietary-needs.no-sesame,linga
+directions.can-i-walk-there,lakarin
+directions.can-you-show-me-the-way,daan
+directions.how-long-on-foot,katagal
+directions.please-show-me-on-the-map,mapa
+emergency-medical.i-am-bleeding-badly,pagdurugo
+emergency-medical.i-am-having-a-severe-allergic-reaction,allergic reaction
+emergency-medical.i-am-injured,Nasugatan
+emergency-medical.i-cannot-breathe,makahinga
+emergency-medical.i-feel-unwell,Masama | pakiramdam
+emergency-medical.i-have-chest-pain,dibdib
+emergency-medical.i-have-travel-insurance,insurance
+emergency-medical.i-need-a-doctor,doktor
+emergency-medical.i-think-a-bone-is-broken,baling buto
+emergency-medical.it-hurts-here,Masakit
+emergency-medical.please-call-an-ambulance,ambulansya
+emergency-medical.please-call-my-emergency-contact,emergency contact
+emergency-medical.please-take-me-to-a-hospital,ospital
+emergency-medical.this-is-an-emergency,Emergency
+emergency-medical.this-person-is-unconscious,Nawalan | malay
+emergency-medical.where-is-the-nearest-hospital,pinakamalapit
+family-intros.this-is-my-brother,kapatid | lalaki
+family-intros.this-is-my-colleague,katrabaho
+family-intros.this-is-my-daughter,anak | babae
+family-intros.this-is-my-father,tatay
+family-intros.this-is-my-husband,asawa | lalaki
+family-intros.this-is-my-mother,nanay
+family-intros.this-is-my-partner,kasintahan
+family-intros.this-is-my-sister,kapatid | babae
+family-intros.this-is-my-son,anak | lalaki
+family-intros.this-is-my-wife,asawa | babae
+food-ordering.i-want-this,Gusto
+food-ordering.is-a-table-available,bakanteng mesa
+food-ordering.is-this-vegetarian,Vegetarian
+food-ordering.table-for-two,Mesa | dalawa
+food-ordering.what-do-you-recommend,irerekomenda
+hiking-parks.how-long-to-the-summit,tuktok
+hiking-parks.how-long-to-the-viewpoint,tanawan
+hiking-parks.is-this-trail-suitable-for-beginners,baguhan
+hiking-parks.where-is-the-trailhead,simula
+hiking-parks.which-route-is-easier,madali
+hitchhiking.can-you-give-me-a-ride,makisakay
+hitchhiking.i-can-pay-for-fuel,gasolina
+hitchhiking.i-only-need-to-go-to-the-next-town,susunod na bayan
+hitchhiking.is-there-room-for-two,puwang | dalawa
+hitchhiking.thank-you-for-the-ride,Salamat
+hitchhiking.where-are-you-going,pupunta
+hotel-basics.are-any-rooms-available,bakanteng kwarto
+hotel-basics.how-much-per-night,bawat gabi
+hotel-basics.i-have-a-reservation,reserbasyon
+hotel-basics.i-would-like-a-non-smoking-room,bawal manigarilyo
+hotel-basics.i-would-like-a-quiet-room,tahimik
+hotel-basics.is-breakfast-included,almusal
+hotel-basics.is-there-a-washing-machine,washing machine
+hotel-basics.is-there-air-conditioning,aircon
+hotel-basics.is-wi-fi-free,Wi-Fi
+hotel-basics.may-i-see-the-room,makita
+hotel-requests.another-blanket,kumot
+hotel-requests.another-night,isa pang gabi
+hotel-requests.another-towel-please,tuwalya
+hotel-requests.can-i-check-in-early,maaga
+hotel-requests.can-i-check-out-later,huli
+hotel-requests.can-i-store-my-luggage,bagahe
+hotel-requests.is-there-a-safe,safe
+hotel-requests.no-housekeeping,Huwag | linisin
+hotel-requests.what-time-does-breakfast-start,almusal
+hotel-requests.what-time-is-check-out,check-out
+in-a-building.is-this-the-correct-entrance,tamang
+introductions.i-am-a-tourist,Turista
+introductions.i-am-traveling-alone,Nag-iisa
+introductions.my-name-is,pangalan ko
+introductions.this-is-my-friend,kaibigan
+introductions.we-are-traveling-together,Magkasama
+introductions.what-is-your-name,pangalan niyo
+introductions.where-are-you-from,Taga-saan
+kind-words.i-had-a-wonderful-time,karanasan
+kind-words.i-like-it-very-much,Gustong-gusto
+kind-words.it-is-beautiful-here,Maganda
+kind-words.thank-you-for-everything,lahat
+kind-words.thank-you-for-your-help,tulong
+kind-words.thank-you-for-your-hospitality,pagtanggap
+kind-words.this-is-delicious,Masarap
+kind-words.you-are-very-kind,Mabait
+laundry.can-it-be-ready-today,ngayong araw
+laundry.how-much-per-kilo,bawat kilo
+laundry.please-do-not-use-bleach,bleach
+laundry.please-iron-this,Pakiplantsa
+laundry.please-wash-these-clothes,Pakilaba
+laundry.when-will-it-be-ready,Kailan
+laundry.where-is-a-laundromat,labahan
+lost-rescue.i-do-not-know-where-i-am,nasaan ako
+lost-rescue.i-lost-my-bag,bag
+lost-rescue.i-lost-my-passport,pasaporte
+lost-rescue.i-lost-my-phone,cellphone
+lost-rescue.i-lost-my-wallet,pitaka
+lost-rescue.my-child-is-missing,anak
+lost-rescue.please-call-the-police,pulis
+lost-rescue.we-are-here,Narito
+massage-spa.focus-on-back,likod
+massage-spa.focus-on-feet,paa
+massage-spa.focus-on-neck,leeg
+massage-spa.focus-on-shoulders,balikat
+massage-spa.more-gently,Mahina
+massage-spa.please-avoid-this-area,Huwag | diinan
+massage-spa.please-pause,sandali
+massage-spa.please-stop,Tigil
+massage-spa.reply-ask-supervisor,supervisor
+massage-spa.reply-cannot-avoid-this-treatment,hindi maiiwasan
+massage-spa.reply-does-it-hurt-there,Masakit
+massage-spa.reply-i-will-avoid-that-area,hindi | didiinan
+massage-spa.stronger-pressure,Pakidiinan
+massage-spa.that-pressure-is-good,Tama
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofen
+medical-conditions.i-am-allergic-to-penicillin,penicillin
+medical-conditions.i-am-allergic-to-sulfa-drugs,sulfa
+medical-conditions.i-am-diabetic,diabetis
+medical-conditions.i-am-pregnant,Buntis
+medical-conditions.i-carry-an-adrenaline-injector,adrenaline
+medical-conditions.i-have-a-heart-condition,puso
+medical-conditions.i-have-asthma,hika
+medical-conditions.i-have-epilepsy,epilepsya
+medical-conditions.i-need-insulin,insulin
+medical-conditions.i-need-my-inhaler,inhaler
+medical-conditions.i-take-blood-thinners,pampanipis ng dugo
+medical-conditions.inject-it-into-my-outer-thigh,labas | hita
+medical-conditions.my-blood-sugar-is-low,Mababa | dugo
+medical-conditions.my-injector-is-in-my-bag,bag | iniksyon
+medical-conditions.please-give-me-sugar-or-juice,asukal | juice
+medical-conditions.this-card-lists-my-conditions,kard
+medical-conditions.this-is-my-medicine,gamot
+outdoors.are-there-dangerous-animals-here,mapanganib | hayop
+outdoors.can-we-camp-here,magkampo
+outdoors.is-it-safe-to-swim-here,lumangoy
+payment-receipt.can-we-pay-separately,maghiwalay
+payment-receipt.i-already-paid,Nakabayad
+payment-receipt.is-tax-included,buwis
+payment-receipt.my-card-was-declined,Hindi | tinanggap
+payment-receipt.pay-by-card,card
+payment-receipt.the-bill-is-wrong,mali | kuwenta
+pharmacy-symptoms.anti-diarrhea-medicine,pagtatae
+pharmacy-symptoms.before-or-after-food,kumain
+pharmacy-symptoms.can-i-get-this-medicine-here,gamot
+pharmacy-symptoms.cough-medicine,ubo
+pharmacy-symptoms.do-i-need-a-prescription,reseta
+pharmacy-symptoms.how-many-times-a-day,beses | isang araw
+pharmacy-symptoms.how-much-should-i-take,karami
+pharmacy-symptoms.i-am-vomiting,Nagsusuka
+pharmacy-symptoms.i-feel-dizzy,Nahihilo
+pharmacy-symptoms.i-feel-nauseous,Naduduwal
+pharmacy-symptoms.i-have-a-burn,paso
+pharmacy-symptoms.i-have-a-cough,ubo
+pharmacy-symptoms.i-have-a-cut,sugat
+pharmacy-symptoms.i-have-a-fever,lagnat
+pharmacy-symptoms.i-have-a-headache,ulo
+pharmacy-symptoms.i-have-a-rash,pantal
+pharmacy-symptoms.i-have-a-sore-throat,lalamunan
+pharmacy-symptoms.i-have-a-stomach-ache,tiyan
+pharmacy-symptoms.i-have-diarrhea,pagtatae
+pharmacy-symptoms.i-think-it-is-infected,naiimpeksyon
+pharmacy-symptoms.is-this-safe-during-pregnancy,buntis
+pharmacy-symptoms.motion-sickness-tablets,hilo sa biyahe
+pharmacy-symptoms.painkiller,sakit
+pharmacy-symptoms.rehydration-salts,pang-rehidrasyon
+pharmacy-symptoms.the-pain-is-severe,Matindi
+pharmacy-symptoms.which-pharmacy-is-open-now,bukas ngayon
+police-consulate.i-need-an-interpreter,tagapagsalin
+police-consulate.i-want-to-contact-my-embassy,embahada
+police-consulate.i-want-to-report-a-theft,ireport
+police-consulate.my-bag-was-stolen,Ninakaw
+police-consulate.someone-is-following-me,sumusunod
+police-consulate.where-is-the-police-station,istasyon ng pulisya
+quick-directions.across-from-here,kabila
+quick-directions.on-the-left,kaliwa
+quick-directions.on-the-right,kanan
+room-problems.can-i-change-rooms,lumipat
+room-problems.please-send-someone,Pakipadalhan | tao
+room-problems.the-air-conditioning-is-broken,aircon
+room-problems.the-heating-does-not-work,heater
+room-problems.the-key-does-not-work,susi
+room-problems.the-light-does-not-work,ilaw
+room-problems.the-room-is-too-noisy,Napakaingay
+room-problems.the-toilet-will-not-flush,flush
+room-problems.there-is-a-problem-with-the-room,problema
+room-problems.there-is-no-hot-water,mainit na tubig
+shopping.can-it-be-a-little-cheaper,tawaran
+shopping.do-you-have-this-in-stock,stock
+shopping.how-much-is-this,Magkano
+shopping.i-am-just-looking,Tumitingin
+shopping.i-will-take-this,Kukunin
+shopping.that-is-too-expensive,mahal
+shopping.where-do-i-pay,magbabayad
+social-basics.i-do-not-know,Hindi | alam
+taxi.can-you-wait-for-me-here,hintayin
+taxi.could-you-make-it-colder,lakasan
+taxi.could-you-make-it-warmer,hinaan
+taxi.may-i-open-the-window,bintana
+taxi.please-stop-here,Para
+taxi.please-take-me-here,Pakidala
+time-scheduling.can-we-change-the-time,baguhin
+time-scheduling.how-long-does-it-take,katagal
+time-scheduling.what-day-is-it-today,araw
+time-scheduling.what-time-does-it-close,nagsasara
+time-scheduling.what-time-does-it-open,bumubukas
+time-scheduling.what-time-should-we-meet,magkikita
+time-scheduling.when-is-convenient,libre
+toilets.it-is-out-of-order,Sira
+toilets.where-toilet,banyo
+trail-conditions.can-we-return-before-dark,bago dumilim
+trail-conditions.can-we-return-the-same-way,parehong daan
+trail-conditions.how-long-is-the-full-route,buong ruta
+trail-conditions.is-the-path-slippery,Madulas
+trail-conditions.is-the-route-steep,Matarik
+trail-conditions.is-the-trail-open,Bukas
+trail-transport.do-you-have-a-map,mapa
+trail-transport.how-long-is-the-wait,paghihintay
+trail-transport.is-there-cell-signal-here,signal
+trail-transport.what-time-is-the-last-shuttle,huling shuttle
+trail-transport.when-does-the-cableway-stop,cable car
+trail-transport.where-can-we-buy-water,bumili
+trail-transport.where-can-we-refill-water,magpuno
+transit-rides.can-i-use-this-ticket,gamitin
+transit-rides.do-i-need-to-transfer,lumipat
+transit-rides.do-i-need-to-validate,i-validate
+transit-rides.i-am-in-a-hurry,Nagmamadali
+transit-rides.i-went-past-my-stop,Nalagpasan
+transit-rides.is-it-delayed,Naantala
+transit-rides.is-this-direct,Diretso
+transit-rides.please-tell-me-where-to-get-off,bababa
+transit-rides.what-is-the-next-stop,susunod na hintuan
+transit-rides.what-time-is-the-next-one,susunod
+transit-rides.where-do-i-pay-the-fare,pamasahe
+transit-rides.where-is-the-subway-station,subway
+weather.how-cold-at-night,kalamig | gabi
+weather.is-it-safe-today,Ligtas
+weather.will-it-rain,Uulan

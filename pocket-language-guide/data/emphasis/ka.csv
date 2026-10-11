@@ -1,0 +1,301 @@
+concept_id,key
+about-me.i-am-a-doctor,ექიმი
+about-me.i-am-a-nurse,ექთანი
+about-me.i-am-a-student,სტუდენტი
+about-me.i-am-a-teacher,მასწავლებელი
+about-me.i-am-an-engineer,ინჟინერი
+about-me.i-am-retired,პენსიონერი
+about-me.i-have-my-own-business,საკუთარი ბიზნესი
+about-me.i-work-in-an-office,ოფისში
+accessibility.step-free,საფეხურების გარეშე
+air-travel.i-would-like-a-window-seat,ფანჯარასთან
+air-travel.i-would-like-an-aisle-seat,დერეფანთან
+air-travel.my-luggage-did-not-arrive,არ მოვიდა
+air-travel.where-is-check-in,რეგისტრაცია
+air-travel.where-is-the-security-check,უსაფრთხოების შემოწმება
+attractions-tickets.are-there-lockers,ბარგის შესანახი
+attractions-tickets.could-you-take-a-photo-for-us,გადაგვიღოთ
+attractions-tickets.do-i-need-a-reservation,დავჯავშნო
+attractions-tickets.may-i-take-photos,ფოტოს გადაღება
+attractions-tickets.what-is-the-latest-entry-time,უშვებენ
+attractions-tickets.where-can-i-buy-tickets,ბილეთები
+board-answers.can-you-walk,სიარული
+board-answers.help-is-coming,დახმარება
+board-answers.how-many,რამდენი
+board-answers.i-am-calling-an-ambulance,სასწრაფოს
+board-answers.i-am-calling-the-police,პოლიციას
+board-answers.i-do-not-have-a-phone,ტელეფონი
+board-answers.i-will-find-someone,ვიპოვი ვინმეს
+board-answers.i-will-show-you,გაჩვენებთ
+board-answers.i-would-rather-not-say,არ ვთქვა
+board-answers.it-is-over-there,იქ
+board-answers.my-name-is-blank,მქვია
+board-answers.none-of-these,აქ | არ არის
+board-answers.not-possible,შეუძლებელია
+board-answers.only-for-customers,კლიენტებისთვისაა
+board-answers.pay-on-board,ჩაჯდომის შემდეგ
+board-answers.prescription-only,რეცეპტით
+board-answers.see-a-doctor,ექიმს
+board-answers.stay-here,აქ დარჩენა
+board-answers.the-hospital-is-close,საავადმყოფო
+board-answers.there-is-no-wait,რიგი არ არის
+board-answers.we-are-full,ადგილი აღარ არის
+board-answers.we-do-not-have-it,არ გვაქვს
+board-answers.we-have-it,გვაქვს
+board-answers.what-happened,მოხდა
+board-answers.what-is-your-name,სახელი
+board-answers.where-does-it-hurt,გტკივა
+board-answers.where-to,მიდიხართ
+border-customs.here-is-my-passport,პასპორტი
+border-customs.i-am-here-for-business,საქმიანი
+border-customs.i-am-visiting-family,ნათესავებთან
+border-customs.i-have-a-connecting-flight,გადასაჯდომი ფრენა
+border-customs.where-do-i-collect-my-baggage,ავიღო
+color-size-returns.do-you-have-a-bag,პარკი
+color-size-returns.do-you-have-another-size,ზომა
+color-size-returns.may-i-try-it-on,მოვიზომო
+communication.please-speak-more-slowly,ნელა
+dietary-needs.does-it-contain-fish-stock,თევზის ნახარში
+dietary-needs.does-it-contain-pork-fat,ღორის ქონი
+dietary-needs.does-it-contain-pork-stock,ღორის ნახარში
+dietary-needs.i-am-vegan,ვეგანი
+dietary-needs.i-am-vegetarian,ვეგეტარიანელი
+dietary-needs.is-this-halal,ჰალალია
+dietary-needs.no-eggs,კვერცხის
+dietary-needs.no-meat,ხორცის
+dietary-needs.no-nuts,თხილეულის
+dietary-needs.no-peanuts,არაქისის
+dietary-needs.no-pork,ღორის
+dietary-needs.no-seafood,ზღვის პროდუქტების
+dietary-needs.no-sesame,სეზამის
+directions.can-i-walk-there,ფეხით
+directions.can-you-show-me-the-way,გზას
+directions.how-long-on-foot,რამდენი ხანია
+directions.is-it-far,შორს
+directions.please-show-me-on-the-map,რუკაზე
+emergency-medical.i-am-bleeding-badly,სისხლი მდის
+emergency-medical.i-am-having-a-severe-allergic-reaction,ალერგიული რეაქცია
+emergency-medical.i-am-injured,დაშავებული
+emergency-medical.i-cannot-breathe,ვსუნთქავ
+emergency-medical.i-feel-unwell,ცუდად
+emergency-medical.i-have-chest-pain,გულმკერდში
+emergency-medical.i-have-travel-insurance,დაზღვევა
+emergency-medical.i-need-a-doctor,ექიმი
+emergency-medical.i-think-a-bone-is-broken,ძვალი | მოტეხილია
+emergency-medical.it-hurts-here,მტკივა
+emergency-medical.please-call-an-ambulance,სასწრაფო
+emergency-medical.please-call-my-emergency-contact,საკონტაქტო პირს
+emergency-medical.please-take-me-to-a-hospital,საავადმყოფოში
+emergency-medical.this-is-an-emergency,გადაუდებელი შემთხვევაა
+emergency-medical.this-person-is-unconscious,გონს არ არის
+emergency-medical.where-is-the-nearest-hospital,უახლოესი
+family-intros.this-is-my-brother,ძმაა
+family-intros.this-is-my-colleague,კოლეგაა
+family-intros.this-is-my-daughter,ქალიშვილია
+family-intros.this-is-my-father,მამაა
+family-intros.this-is-my-husband,ქმარია
+family-intros.this-is-my-mother,დედაა
+family-intros.this-is-my-partner,პარტნიორია
+family-intros.this-is-my-sister,დაა
+family-intros.this-is-my-son,ვაჟია
+family-intros.this-is-my-wife,ცოლია
+food-ordering.i-want-this,მინდა
+food-ordering.is-a-table-available,თავისუფალი მაგიდა
+food-ordering.is-this-vegetarian,ვეგეტარიანულია
+food-ordering.table-for-two,ორზე
+food-ordering.what-do-you-recommend,მირჩევთ
+hiking-parks.how-long-to-the-summit,მწვერვალამდე
+hiking-parks.how-long-to-the-viewpoint,სახედავ ადგილამდე
+hiking-parks.is-this-trail-suitable-for-beginners,დამწყებთათვის
+hiking-parks.where-is-the-trailhead,იწყება
+hiking-parks.which-route-is-easier,ადვილია
+hitchhiking.i-can-pay-for-fuel,ბენზინის
+hitchhiking.i-only-need-to-go-to-the-next-town,შემდეგ ქალაქამდე
+hitchhiking.is-there-room-for-two,ადგილი
+hitchhiking.thank-you-for-the-ride,გმადლობთ
+hitchhiking.where-are-you-going,მიდიხართ
+hotel-basics.are-any-rooms-available,თავისუფალი ოთახი
+hotel-basics.how-much-per-night,ღამე
+hotel-basics.i-have-a-reservation,ჯავშანი
+hotel-basics.i-would-like-a-non-smoking-room,არამწეველთა
+hotel-basics.i-would-like-a-quiet-room,წყნარი
+hotel-basics.is-breakfast-included,საუზმე
+hotel-basics.is-there-a-washing-machine,სარეცხი მანქანა
+hotel-basics.is-there-air-conditioning,კონდიციონერი
+hotel-basics.is-wi-fi-free,ვაი-ფაი
+hotel-basics.may-i-see-the-room,ვნახო
+hotel-requests.another-blanket,საბანი
+hotel-requests.another-night,კიდევ ერთი ღამე
+hotel-requests.another-towel-please,პირსახოცი
+hotel-requests.can-i-check-in-early,ადრე
+hotel-requests.can-i-check-out-later,გვიან
+hotel-requests.can-i-store-my-luggage,ბარგი
+hotel-requests.is-there-a-safe,სეიფი
+hotel-requests.no-housekeeping,დალაგება
+hotel-requests.what-time-does-breakfast-start,საუზმე
+hotel-requests.what-time-is-check-out,გასვლა
+in-a-building.is-this-the-correct-entrance,სწორი
+introductions.i-am-a-tourist,ტურისტი
+introductions.i-am-from,ქვეყანა
+introductions.i-am-traveling-alone,მარტო
+introductions.my-name-is,მქვია
+introductions.this-is-my-friend,მეგობარია
+introductions.we-are-traveling-together,ერთად
+introductions.what-is-your-name,გქვიათ
+introductions.where-are-you-from,საიდან
+kind-words.i-had-a-wonderful-time,საუცხოო
+kind-words.i-like-it-very-much,მომეწონა
+kind-words.it-is-beautiful-here,ლამაზია
+kind-words.thank-you-for-everything,ყველაფრისთვის
+kind-words.thank-you-for-your-help,დახმარებისთვის
+kind-words.thank-you-for-your-hospitality,სტუმართმოყვარეობისთვის
+kind-words.this-is-delicious,გემრიელია
+kind-words.you-are-very-kind,კეთილი
+laundry.can-it-be-ready-today,დღეს
+laundry.how-much-per-kilo,კილო
+laundry.please-do-not-use-bleach,მათეთრებელი
+laundry.please-iron-this,დააუთოვეთ
+laundry.please-wash-these-clothes,გარეცხეთ
+laundry.when-will-it-be-ready,როდის
+laundry.where-is-a-laundromat,სამრეცხაო
+lost-rescue.i-do-not-know-where-i-am,სად ვარ
+lost-rescue.i-lost-my-bag,ჩანთა
+lost-rescue.i-lost-my-passport,პასპორტი
+lost-rescue.i-lost-my-phone,ტელეფონი
+lost-rescue.i-lost-my-wallet,საფულე
+lost-rescue.my-child-is-missing,ბავშვი
+lost-rescue.please-call-the-police,პოლიცია
+lost-rescue.we-are-here,აქ
+massage-spa.focus-on-back,ზურგს
+massage-spa.focus-on-feet,ტერფებს
+massage-spa.focus-on-neck,კისერს
+massage-spa.focus-on-shoulders,მხრებს
+massage-spa.more-gently,ნაკლები
+massage-spa.please-avoid-this-area,ნუ შეეხებით
+massage-spa.please-pause,შეისვენეთ
+massage-spa.please-stop,შეწყვიტეთ
+massage-spa.reply-ask-supervisor,უფროსს
+massage-spa.reply-cannot-avoid-this-treatment,გარეშე არ კეთდება
+massage-spa.reply-does-it-hurt-there,გტკივათ
+massage-spa.reply-i-will-avoid-that-area,არ შევეხები
+massage-spa.stronger-pressure,ძლიერად
+massage-spa.that-pressure-is-good,კარგია
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ასპირინზე | იბუპროფენზე
+medical-conditions.i-am-allergic-to-penicillin,პენიცილინზე
+medical-conditions.i-am-allergic-to-sulfa-drugs,სულფონამიდებზე
+medical-conditions.i-am-diabetic,დიაბეტი
+medical-conditions.i-am-pregnant,ორსული
+medical-conditions.i-carry-an-adrenaline-injector,ადრენალინის
+medical-conditions.i-have-a-heart-condition,გულის
+medical-conditions.i-have-asthma,ასთმა
+medical-conditions.i-have-epilepsy,ეპილეფსია
+medical-conditions.i-need-insulin,ინსულინი
+medical-conditions.i-need-my-inhaler,ინჰალატორი
+medical-conditions.i-take-blood-thinners,სისხლის გამათხელებელს
+medical-conditions.inject-it-into-my-outer-thigh,ბარძაყის
+medical-conditions.my-blood-sugar-is-low,სისხლში შაქარი
+medical-conditions.my-injector-is-in-my-bag,ჩანთაშია
+medical-conditions.please-give-me-sugar-or-juice,შაქარი | წვენი
+medical-conditions.this-card-lists-my-conditions,ბარათზე
+medical-conditions.this-is-my-medicine,წამალია
+outdoors.are-there-dangerous-animals-here,საშიში ცხოველები
+outdoors.can-we-camp-here,ბანაკი
+outdoors.is-it-safe-to-swim-here,ცურვა
+payment-receipt.can-we-pay-separately,ცალ-ცალკე
+payment-receipt.is-tax-included,დღგ
+payment-receipt.my-card-was-declined,არ გაიარა
+payment-receipt.pay-by-card,ბარათით
+payment-receipt.the-bill-is-wrong,ანგარიში | არასწორია
+pharmacy-symptoms.antacid,მჟავიანობის
+pharmacy-symptoms.anti-diarrhea-medicine,ფაღარათის
+pharmacy-symptoms.antihistamine,ანტიჰისტამინური
+pharmacy-symptoms.can-i-get-this-medicine-here,წამალი
+pharmacy-symptoms.cough-medicine,ხველის
+pharmacy-symptoms.do-i-need-a-prescription,რეცეპტი
+pharmacy-symptoms.how-many-times-a-day,დღეში
+pharmacy-symptoms.how-much-should-i-take,რამდენი
+pharmacy-symptoms.i-am-vomiting,ღებინება
+pharmacy-symptoms.i-feel-dizzy,თავბრუ
+pharmacy-symptoms.i-feel-nauseous,მერევა
+pharmacy-symptoms.i-have-a-burn,დამწვრობა
+pharmacy-symptoms.i-have-a-cough,ხველა
+pharmacy-symptoms.i-have-a-cut,ჭრილობა
+pharmacy-symptoms.i-have-a-fever,სიცხე
+pharmacy-symptoms.i-have-a-headache,თავი
+pharmacy-symptoms.i-have-a-rash,გამონაყარი
+pharmacy-symptoms.i-have-a-sore-throat,ყელი
+pharmacy-symptoms.i-have-a-stomach-ache,მუცელი
+pharmacy-symptoms.i-have-diarrhea,ფაღარათი
+pharmacy-symptoms.i-think-it-is-infected,დაინფიცირდა
+pharmacy-symptoms.is-this-safe-during-pregnancy,ორსულობისას
+pharmacy-symptoms.motion-sickness-tablets,გულისრევის
+pharmacy-symptoms.rehydration-salts,რეჰიდრატაციის
+pharmacy-symptoms.the-pain-is-severe,ტკივილი
+pharmacy-symptoms.which-pharmacy-is-open-now,მუშაობს ახლა
+police-consulate.i-need-an-interpreter,თარჯიმანი
+police-consulate.i-want-to-contact-my-embassy,საელჩოსთან
+police-consulate.i-want-to-report-a-theft,განცხადება
+police-consulate.my-bag-was-stolen,მომპარეს
+police-consulate.someone-is-following-me,მომდევს
+police-consulate.where-is-the-police-station,პოლიციის განყოფილება
+quick-directions.across-from-here,მოპირდაპირე
+quick-directions.turn-left,მარცხნივ
+quick-directions.turn-right,მარჯვნივ
+room-problems.can-i-change-rooms,გავცვალო
+room-problems.please-send-someone,გამოგზავნეთ ვინმე
+room-problems.the-air-conditioning-is-broken,კონდიციონერი
+room-problems.the-heating-does-not-work,გათბობა
+room-problems.the-key-does-not-work,გასაღები
+room-problems.the-light-does-not-work,შუქი
+room-problems.the-room-is-too-noisy,ხმაურია
+room-problems.the-toilet-will-not-flush,ტუალეტი
+room-problems.there-is-a-problem-with-the-room,პრობლემაა
+room-problems.there-is-no-hot-water,ცხელი წყალი
+shopping.can-it-be-a-little-cheaper,იაფად
+shopping.do-you-have-this-in-stock,მარაგში
+shopping.how-much-is-this,ღირს
+shopping.i-am-just-looking,ვათვალიერებ
+shopping.i-will-take-this,ვიყიდი
+shopping.that-is-too-expensive,ძვირია
+shopping.where-do-i-pay,გადავიხადო
+taxi.can-you-wait-for-me-here,დამელოდოთ
+taxi.could-you-make-it-colder,გააგრილოთ
+taxi.could-you-make-it-warmer,გაათბოთ
+taxi.may-i-open-the-window,ფანჯარა
+taxi.please-stop-here,გაჩერდით
+taxi.please-take-me-here,წამიყვანეთ
+time-scheduling.can-we-change-the-time,შეცვლა
+time-scheduling.how-long-does-it-take,რამდენი ხანი
+time-scheduling.what-day-is-it-today,დღეა
+time-scheduling.what-time-does-it-close,იკეტება
+time-scheduling.what-time-does-it-open,იხსნება
+time-scheduling.what-time-is-it,საათია
+time-scheduling.what-time-should-we-meet,შევხვდეთ
+time-scheduling.when-is-convenient,მოსახერხებელი
+toilets.where-toilet,ტუალეტი
+trail-conditions.can-we-return-before-dark,დაბნელებამდე
+trail-conditions.can-we-return-the-same-way,იმავე გზით
+trail-conditions.how-long-is-the-full-route,სრული მარშრუტი
+trail-conditions.is-the-path-slippery,მოლიპულია
+trail-conditions.is-the-route-steep,ციცაბოა
+trail-conditions.is-the-trail-open,ღიაა
+trail-transport.do-you-have-a-map,რუკა
+trail-transport.how-long-is-the-wait,მოვიცადოთ
+trail-transport.is-there-cell-signal-here,ქსელი
+trail-transport.what-time-is-the-last-shuttle,ბოლო ავტობუსი
+trail-transport.when-does-the-cableway-stop,საბაგირო
+trail-transport.where-can-we-buy-water,ვიყიდოთ
+trail-transport.where-can-we-refill-water,შევავსოთ
+transit-rides.can-i-use-this-ticket,გამოდგება
+transit-rides.do-i-need-to-transfer,გადასხდომა
+transit-rides.do-i-need-to-validate,გავააქტიურო
+transit-rides.i-went-past-my-stop,გამომრჩა
+transit-rides.is-this-direct,პირდაპირ
+transit-rides.please-tell-me-where-to-get-off,ჩავიდე
+transit-rides.what-is-the-next-stop,შემდეგი გაჩერება
+transit-rides.what-time-is-the-next-one,შემდეგი
+transit-rides.where-do-i-pay-the-fare,მგზავრობის ფასი
+transit-rides.where-is-the-subway-station,მეტროს
+weather.how-cold-at-night,ღამით | ცივა
+weather.is-it-safe-today,უსაფრთხოა
+weather.will-it-rain,იწვიმებს
