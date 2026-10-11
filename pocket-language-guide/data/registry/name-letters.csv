@@ -1,1 +1,605 @@
 language,script,letters,sound,notes
+,Latn,a,a,default Latin reading: vowels as Italian or Spanish read them; consonants and digraphs as most Latin orthographies and romanizations read them in names
+,Latn,b,b,
+,Latn,c,k,
+,Latn,ce,s e,"soft c before e i y, as English, French, Spanish, Portuguese and Dutch read it in names: Cecilia, Lucy"
+,Latn,cé,s e,Céline
+,Latn,ci,s i,
+,Latn,cí,s i,Lucía
+,Latn,cy,s i,
+,Latn,ch,tʃ,"English, Spanish and most romanizations; de fr pt it nl pl cs ro read it their own way"
+,Latn,chr,k r,"Greek-derived ch is k in every orthography here: Christian, Christina"
+,Latn,chl,k l,Chloe
+,Latn,ck,k,
+,Latn,d,d,
+,Latn,bh,b,romanized Indic names: Abhishek
+,Latn,dh,d,"romanized Indic and Javanese names: Dharma, Siddharth"
+,Latn,dj,dʒ,French-style transliteration: Djamila
+,Latn,e,e,
+,Latn,f,f,
+,Latn,g,ɡ,
+,Latn,gh,ɡ,"romanized names: Ghulam, Raghav"
+,Latn,h,h,
+,Latn,i,i,
+,Latn,j,dʒ,"English and most romanizations; a glide in German, Dutch, Scandinavian and Slavic orthographies"
+,Latn,k,k,
+,Latn,kh,x,"romanized Arabic, Persian and Russian names: Khalid, Mikhail"
+,Latn,l,l,
+,Latn,m,m,
+,Latn,n,n,
+,Latn,o,o,
+,Latn,p,p,
+,Latn,ph,f,
+,Latn,q,k,
+,Latn,qu,k w,
+,Latn,r,r,
+,Latn,s,s,
+,Latn,sch,ʃ,"German-origin names, as most readers say them: Schneider"
+,Latn,sh,ʃ,
+,Latn,t,t,
+,Latn,tch,tʃ,
+,Latn,th,t,"Thomas, Theodor in most orthographies; English reads θ"
+,Latn,tth,t,"Matthias, Matthäus: a doubled t before h"
+,Latn,ts,ts,
+,Latn,tz,ts,
+,Latn,u,u,
+,Latn,v,v,
+,Latn,w,w,
+,Latn,wh,w,English-only digraph: Whitney
+,Latn,x,k s,
+,Latn,y,i,"a vowel in most names; the glide before a vowel, below"
+,Latn,ya,j a,
+,Latn,ye,j e,
+,Latn,yo,j o,
+,Latn,yō,j o,Hepburn: Ryō
+,Latn,yu,j u,
+,Latn,yū,j u,Hepburn: Yūko
+,Latn,z,z,
+,Latn,zh,ʒ,"romanized Russian, Persian and Chinese names: Zhanna"
+,Latn,bb,b,"a doubled letter reads once, as most orthographies here spell names (Anna, Emma); it fi hu read it long"
+,Latn,cc,k,
+,Latn,dd,d,
+,Latn,ff,f,
+,Latn,gg,ɡ,
+,Latn,kk,k,
+,Latn,ll,l,
+,Latn,mm,m,
+,Latn,nn,n,
+,Latn,pp,p,
+,Latn,rr,r,
+,Latn,ss,s,
+,Latn,tt,t,
+,Latn,zz,z,
+,Latn,á,a,
+,Latn,à,a,
+,Latn,â,a,
+,Latn,ã,a,"the nasal vowel without its nasality, which the keyboard has no key for"
+,Latn,ä,ɛ,"German, Swedish"
+,Latn,å,o,"Swedish, Danish, Norwegian"
+,Latn,æ,ɛ,"Danish, Norwegian"
+,Latn,ā,a,"macron: Hepburn, Māori, Latvian"
+,Latn,é,e,
+,Latn,è,ɛ,
+,Latn,ê,e,
+,Latn,ë,e,
+,Latn,ē,e,
+,Latn,ě,j e,Czech: Zdeněk
+,Latn,í,i,
+,Latn,ì,i,
+,Latn,î,i,
+,Latn,ï,i,
+,Latn,ī,i,
+,Latn,ı,ə,"Turkish dotless i [ɯ], nearest the keyboard's schwa, which a Turkish reader writes ı: Işık"
+,Latn,ó,o,
+,Latn,ò,ɔ,"Italian, Catalan"
+,Latn,ô,o,
+,Latn,õ,o,
+,Latn,ö,ø,
+,Latn,ø,ø,
+,Latn,ō,o,
+,Latn,ő,ø,Hungarian
+,Latn,ú,u,
+,Latn,ù,u,
+,Latn,û,u,
+,Latn,ü,y,
+,Latn,ū,u,
+,Latn,ű,y,Hungarian
+,Latn,ů,u,Czech
+,Latn,ý,i,
+,Latn,ç,s,"French, Portuguese; Turkish reads tʃ"
+,Latn,č,tʃ,
+,Latn,ć,tʃ,"Polish, Croatian"
+,Latn,đ,d,Vietnamese; Croatian reads dʒ
+,Latn,ď,d j,Czech
+,Latn,ğ,,Turkish soft g lengthens the vowel before it: Doğan
+,Latn,ł,w,Polish: Łukasz
+,Latn,ñ,n j,"Spanish, Filipino [ɲ], nearest as n + y"
+,Latn,ń,n j,Polish [ɲ]
+,Latn,ň,n j,Czech [ɲ]
+,Latn,ř,r ʒ,"Czech ř, nearest as r + ž: Dvořák"
+,Latn,š,ʃ,
+,Latn,ś,ʃ,Polish
+,Latn,ş,ʃ,Turkish
+,Latn,ș,ʃ,Romanian
+,Latn,ť,t j,Czech
+,Latn,ţ,ts,"Romanian, cedilla form"
+,Latn,ț,ts,Romanian
+,Latn,ž,ʒ,
+,Latn,ź,ʒ,Polish
+,Latn,ż,ʒ,Polish
+,Latn,ß,s,German
+,Latn,ƙ,k,"Hausa ejective, nearest plain k"
+,Latn,ɓ,b,Hausa implosive
+,Latn,ɗ,d,Hausa implosive
+,Latn,ƴ,j,Hausa (Niger) glottalized y
+,Latn,ẹ,ɛ,Yoruba ẹ; Vietnamese e under the heavy tone
+,Latn,ọ,ɔ,Yoruba ọ; Vietnamese o under the heavy tone
+,Latn,ṣ,ʃ,Yoruba
+,Latn,ă,a,Vietnamese short a; Romanian reads ə
+,Latn,ắ,a,Vietnamese vowels under tone marks read as their base vowel; the keyboard has no tones
+,Latn,ằ,a,
+,Latn,ẳ,a,
+,Latn,ẵ,a,
+,Latn,ặ,a,
+,Latn,ả,a,
+,Latn,ạ,a,
+,Latn,ấ,ə,Vietnamese â [ə]
+,Latn,ầ,ə,
+,Latn,ẩ,ə,
+,Latn,ẫ,ə,
+,Latn,ậ,ə,
+,Latn,ẻ,ɛ,Vietnamese e [ɛ]
+,Latn,ẽ,ɛ,
+,Latn,ế,e,Vietnamese ê [e]
+,Latn,ề,e,
+,Latn,ể,e,
+,Latn,ễ,e,
+,Latn,ệ,e,
+,Latn,ỉ,i,
+,Latn,ĩ,i,
+,Latn,ị,i,
+,Latn,ỏ,ɔ,Vietnamese o [ɔ]
+,Latn,ố,o,Vietnamese ô [o]
+,Latn,ồ,o,
+,Latn,ổ,o,
+,Latn,ỗ,o,
+,Latn,ộ,o,
+,Latn,ơ,ə,Vietnamese ơ [əː]
+,Latn,ớ,ə,
+,Latn,ờ,ə,
+,Latn,ở,ə,
+,Latn,ỡ,ə,
+,Latn,ợ,ə,
+,Latn,ủ,u,
+,Latn,ũ,u,
+,Latn,ụ,u,
+,Latn,ư,u,"Vietnamese ư [ɨ], nearest the keyboard's u, as Duong and Hung spell it without marks"
+,Latn,ứ,u,
+,Latn,ừ,u,
+,Latn,ử,u,
+,Latn,ữ,u,
+,Latn,ự,u,
+,Latn,ỳ,i,
+,Latn,ỷ,i,
+,Latn,ỹ,i,
+,Latn,ỵ,i,
+en,Latn,th,θ,"English th is θ in most names (Matthew, Thatcher); Thomas and Thompson read t and are rarer -- Wikipedia: English orthography"
+en,Latn,tth,θ,Matthew -- Wikipedia: English orthography
+en,Latn,i,ɪ,"short i, the commonest reading in names: Chris, Emily, William -- Wikipedia: English orthography"
+en,Latn,ia,i ə,"Olivia, Sophia, Julian, Ian -- Wikipedia: English orthography"
+en,Latn,ci,s ɪ,soft c with the English short i: Cindy -- Wikipedia: English orthography
+en,Latn,cia,ʃ ə,"Patricia, Marcia -- Wikipedia: English orthography"
+en,Latn,ee,i,"Lee, Kathleen -- Wikipedia: English orthography"
+en,Latn,ea,i,"Dean, Jean -- Wikipedia: English orthography"
+en,Latn,eah,i ə,Leah -- Wikipedia: English orthography
+en,Latn,ie,i,"Katie, Sophie, Charlie -- Wikipedia: English orthography"
+en,Latn,ey,i,"Ashley, Audrey -- Wikipedia: English orthography"
+en,Latn,oo,u,"Boone, Brooke -- Wikipedia: English orthography"
+en,Latn,ew,u,"Matthew, Andrew -- Wikipedia: English orthography"
+en,Latn,ay,eɪ,"Jay, Kayla -- Wikipedia: English orthography"
+en,Latn,ai,eɪ,"Aidan, Blaine -- Wikipedia: English orthography"
+en,Latn,au,ɔ,"Paul, Claudia -- Wikipedia: English orthography"
+en,Latn,aw,ɔ,Shawn -- Wikipedia: English orthography
+en,Latn,ar,ɑ r,"Charles, Martin; Mary and Sarah have ɛr -- Wikipedia: English orthography"
+en,Latn,er,ə r,"Peter, Jennifer -- Wikipedia: English orthography"
+en,Latn,or,ɔ r,"Jordan, Victoria -- Wikipedia: English orthography"
+en,Latn,ah,ə,"final -ah: Sarah, Hannah, Noah -- Wikipedia: English orthography"
+en,Latn,ge,dʒ e,"soft g: Gemma, Angela; Gertrude reads ɡ -- Wikipedia: English orthography"
+en,Latn,geor,dʒ ɔ r,"George, Georgia: the e only softens the g -- Wikipedia: English orthography"
+en,Latn,gi,dʒ ɪ,"Gillian, Virginia; Gilbert reads ɡ -- Wikipedia: English orthography"
+en,Latn,dg,dʒ,"Bridget, Hodges -- Wikipedia: English orthography"
+en,Latn,gh,,"silent: Hugh, Leigh, Vaughan -- Wikipedia: English orthography"
+en,Latn,igh,aɪ,"Dwight, Knight -- Wikipedia: English orthography"
+en,Latn,ohn,ɑ n,"John, Johnson: the h is silent -- Wikipedia: English orthography"
+en,Latn,chael,k ə l,Michael; Rachael reads tʃ and is rarer -- Wikipedia: English orthography
+de,Latn,j,j,"German j is a glide: Jonas, Jürgen -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,w,v,Wolfgang -- Duden Aussprachewörterbuch; Wikipedia: German orthography
+de,Latn,z,ts,"Heinz, Lorenz -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,ei,aɪ,Heinrich -- Duden Aussprachewörterbuch; Wikipedia: German orthography
+de,Latn,ai,aɪ,"Maier, Kai -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,ey,aɪ,Meyer -- Duden Aussprachewörterbuch; Wikipedia: German orthography
+de,Latn,ay,aɪ,"Bayer, Mayer -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,eu,ɔɪ,"Eugen, Neumann -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,äu,ɔɪ,Bräuer -- Duden Aussprachewörterbuch; Wikipedia: German orthography
+de,Latn,ie,i,"Dieter, Sophie -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,ch,x,"Heinrich, Joachim; [ç] after front vowels, which the keyboard writes x -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,ng,ŋ,"Wolfgang, Inge -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+de,Latn,dt,t,"Schmidt, Brandt -- Duden Aussprachewörterbuch; Wikipedia: German orthography"
+fr,Latn,j,ʒ,"Jean, Julien -- Académie française; Wikipedia: French orthography"
+fr,Latn,ge,ʒ ə,soft g: Geneviève -- Wikipedia: French orthography
+fr,Latn,gé,ʒ e,Gérard -- Wikipedia: French orthography
+fr,Latn,gi,ʒ i,"Gilles, Ginette -- Wikipedia: French orthography"
+fr,Latn,geo,ʒ o,"Georges, Georgette: the e only softens the g -- Wikipedia: French orthography"
+fr,Latn,gue,ɡ ə,the u only hardens the g -- Wikipedia: French orthography
+fr,Latn,gui,ɡ i,"Guillaume, Guy -- Wikipedia: French orthography"
+fr,Latn,guill,ɡ i j,Guillaume: ill after gu is [ij] -- Wikipedia: French orthography
+fr,Latn,gn,n j,[ɲ]: Agnès -- Wikipedia: French orthography
+fr,Latn,ch,ʃ,"Charles, Michel -- Wikipedia: French orthography"
+fr,Latn,h,,"silent: Hélène, Henri -- Académie française; Wikipedia: French orthography"
+fr,Latn,qu,k,"Jacques, Quentin -- Wikipedia: French orthography"
+fr,Latn,u,y,"Julien, Lucas -- Wikipedia: French orthography"
+fr,Latn,ou,u,Louis -- Wikipedia: French orthography
+fr,Latn,au,o,"Claude, Paul -- Wikipedia: French orthography"
+fr,Latn,eau,o,Rousseau -- Wikipedia: French orthography
+fr,Latn,ai,ɛ,"Claire, Germaine -- Wikipedia: French orthography"
+fr,Latn,ei,ɛ,Reine -- Wikipedia: French orthography
+fr,Latn,eu,ø,Eugène -- Wikipedia: French orthography
+fr,Latn,oi,w a,"François, Antoine -- Wikipedia: French orthography"
+fr,Latn,oî,w a,Benoît -- Wikipedia: French orthography
+fr,Latn,e,ə,"e muet, unaccented; silent at the end of a name: Denis, Marie -- Wikipedia: French orthography"
+fr,Latn,ce,s ə,"soft c with the e muet: Florence, Clémence -- Wikipedia: French orthography"
+fr,Latn,cen,s ɑ n,"Vincent, Innocent -- Wikipedia: French orthography"
+fr,Latn,ë,ɛ,"Noël, Gaël -- Wikipedia: French orthography"
+fr,Latn,ea,a,"Jean, Jeanne: the e only softens the g or j -- Wikipedia: French orthography"
+fr,Latn,en,ɑ n,"nasal [ɑ̃], nearest as ɑ + n: Vincent, Florence -- Wikipedia: French orthography"
+fr,Latn,ien,j ɛ n,"Julien, Sébastien -- Wikipedia: French orthography"
+fr,Latn,ienne,j ɛ n,"Étienne, Fabienne -- Wikipedia: French orthography"
+fr,Latn,in,ɛ n,"nasal [ɛ̃]: Martin, Valentin -- Wikipedia: French orthography"
+fr,Latn,ine,i n,"Céline, Pauline: final e silent, i not nasal -- Wikipedia: French orthography"
+fr,Latn,inn,i n,Corinne: no nasal before a double n -- Wikipedia: French orthography
+fr,Latn,ain,ɛ n,"Alain, Romain -- Wikipedia: French orthography"
+fr,Latn,ier,j e,"Olivier, Didier -- Wikipedia: French orthography"
+fr,Latn,ierre,j ɛ r,Pierre -- Wikipedia: French orthography
+fr,Latn,elle,ɛ l,"Isabelle, Michelle -- Wikipedia: French orthography"
+fr,Latn,ette,ɛ t,"Juliette, Colette -- Wikipedia: French orthography"
+es,Latn,j,x,Spanish j is the velar fricative: Juan -- RAE Ortografía (2010); Wikipedia: Spanish orthography
+es,Latn,ge,x e,"Jorge, Ángel -- RAE Ortografía; Wikipedia: Spanish orthography"
+es,Latn,gi,x i,Gisela -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,gue,ɡ e,Miguel: the u is silent -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,gui,ɡ i,Guillermo -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,güe,ɡ w e,Argüello: the diaeresis sounds the u -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,güi,ɡ w i,RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,h,,silent: Héctor -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,ll,j,"yeísmo, the majority reading: Guillermo; Río de la Plata reads ʃ -- RAE Ortografía; Wikipedia: Spanish orthography"
+es,Latn,v,b,"Valentina, Víctor -- RAE Ortografía; Wikipedia: Spanish orthography"
+es,Latn,z,s,seseo (Americas): Lorenzo; central and northern Spain reads θ -- RAE Ortografía; Wikipedia: Spanish orthography
+es,Latn,qu,k,"Joaquín, Enrique -- RAE Ortografía; Wikipedia: Spanish orthography"
+it,Latn,ce,tʃ e,Francesco -- DOP (Dizionario d'ortografia e di pronunzia); Wikipedia: Italian orthography
+it,Latn,ci,tʃ i,"Cinzia, Ciro -- DOP; Wikipedia: Italian orthography"
+it,Latn,cia,tʃ a,the i only softens the c: Luciano -- DOP; Wikipedia: Italian orthography
+it,Latn,cio,tʃ o,Lucio -- DOP; Wikipedia: Italian orthography
+it,Latn,cci,t tʃ i,"Ricci, Puccini -- DOP; Wikipedia: Italian orthography"
+it,Latn,ch,k,"Chiara, Michele -- DOP; Wikipedia: Italian orthography"
+it,Latn,ge,dʒ e,Gennaro -- DOP; Wikipedia: Italian orthography
+it,Latn,gi,dʒ i,Luigi -- DOP; Wikipedia: Italian orthography
+it,Latn,gia,dʒ a,"Gianluca, Giacomo -- DOP; Wikipedia: Italian orthography"
+it,Latn,gio,dʒ o,"Giovanni, Giorgio -- DOP; Wikipedia: Italian orthography"
+it,Latn,giu,dʒ u,"Giuseppe, Giulia -- DOP; Wikipedia: Italian orthography"
+it,Latn,gn,n j,[ɲ]: Agnese -- DOP; Wikipedia: Italian orthography
+it,Latn,z,ts,"Lorenzo, Vincenzo; some names read dz -- DOP; Wikipedia: Italian orthography"
+it,Latn,zz,t ts,Rizzo -- DOP; Wikipedia: Italian orthography
+it,Latn,j,j,Jacopo -- DOP; Wikipedia: Italian orthography
+it,Latn,h,,"silent: Hannah, and after c and g -- DOP; Wikipedia: Italian orthography"
+it,Latn,ll,l l,double consonants are long in Italian: Isabella -- DOP; Wikipedia: Italian orthography
+it,Latn,nn,n n,Giovanni -- DOP; Wikipedia: Italian orthography
+it,Latn,tt,t t,Matteo -- DOP; Wikipedia: Italian orthography
+it,Latn,ss,s s,Alessandro -- DOP; Wikipedia: Italian orthography
+it,Latn,pp,p p,Giuseppe -- DOP; Wikipedia: Italian orthography
+it,Latn,mm,m m,"Emma, Tommaso -- DOP; Wikipedia: Italian orthography"
+it,Latn,rr,r r,Ferrari -- DOP; Wikipedia: Italian orthography
+it,Latn,ff,f f,Raffaele -- DOP; Wikipedia: Italian orthography
+it,Latn,cc,k k,Rocco -- DOP; Wikipedia: Italian orthography
+pt,Latn,j,ʒ,"João, Juliana -- Wikipedia: Portuguese orthography"
+pt,Latn,ge,ʒ e,"soft g: Jorge, Ângela -- Wikipedia: Portuguese orthography"
+pt,Latn,gi,ʒ i,Gisele -- Wikipedia: Portuguese orthography
+pt,Latn,gue,ɡ e,the u only hardens the g -- Wikipedia: Portuguese orthography
+pt,Latn,gui,ɡ i,Guilherme -- Wikipedia: Portuguese orthography
+pt,Latn,ch,ʃ,Chico -- Wikipedia: Portuguese orthography
+pt,Latn,lh,l j,"[ʎ], nearest as l + y: Guilherme -- Wikipedia: Portuguese orthography"
+pt,Latn,nh,n j,[ɲ]: Toninho -- Wikipedia: Portuguese orthography
+pt,Latn,h,,"silent: Henrique, Helena -- Wikipedia: Portuguese orthography"
+pt,Latn,ão,aʊ,"nasal diphthong without its nasality: João, Simão -- Wikipedia: Portuguese orthography"
+pt,Latn,qu,k,Henrique -- Wikipedia: Portuguese orthography
+pt,Latn,rr,h,Brazil [h]: Serra -- Wikipedia: Portuguese phonology
+pt,Latn,x,ʃ,"Xavier, Alexandre -- Wikipedia: Portuguese orthography"
+pt,Latn,é,ɛ,"open e: José, André -- Wikipedia: Portuguese orthography"
+pt,Latn,ó,ɔ,open o -- Wikipedia: Portuguese orthography
+pt,Latn,ou,o,"Sousa, Lourenço -- Wikipedia: Portuguese phonology"
+nl,Latn,g,x,"Dutch g is a fricative: Geert, Gerrit -- Taalunie (taaladvies.net); Wikipedia: Dutch orthography"
+nl,Latn,ch,x,Dutch ch: Michiel -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,sch,s x,Schouten -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,j,j,"Jan, Joost -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,ij,eɪ,"[ɛi], nearest the keyboard's ei: Thijs, Rijk -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,ei,eɪ,Reinier -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,ui,ø y,"[œy]: Huib, Ruiter -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,oe,u,"Jeroen, Koen -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,eu,ø,Teun -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,aa,a,"long vowels are written double: Daan, Maarten -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,ee,e,"Geert, Kees -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,oo,o,"Joost, Floor -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,uu,y,"Ruud, Huub -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,u,y,"Ruben, Lucas -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,ie,i,"Pieter, Lieke -- Taalunie; Wikipedia: Dutch orthography"
+nl,Latn,ou,aʊ,Wouter -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,au,aʊ,Claus -- Taalunie; Wikipedia: Dutch orthography
+nl,Latn,ng,ŋ,de Jong -- Taalunie; Wikipedia: Dutch orthography
+pl,Latn,c,ts,Polish c: Cezary -- Rada Języka Polskiego / PWN; Wikipedia: Polish orthography
+pl,Latn,ce,ts e,Cecylia -- Wikipedia: Polish orthography
+pl,Latn,ci,tʃ i,"[tɕ], nearest as cz: Marcin -- Wikipedia: Polish orthography"
+pl,Latn,cia,tʃ a,"before a vowel ci is ć and the i is not read; so si, zi, ni below -- Wikipedia: Polish orthography"
+pl,Latn,cie,tʃ e,"Maciej, Wojciech -- Wikipedia: Polish orthography"
+pl,Latn,cio,tʃ o,as cia -- Wikipedia: Polish orthography
+pl,Latn,ciu,tʃ u,Kościuszko -- Wikipedia: Polish orthography
+pl,Latn,si,ʃ i,"[ɕ], nearest as sz: Sikorski -- Wikipedia: Polish orthography"
+pl,Latn,sia,ʃ a,"Kasia, Zosia -- Wikipedia: Polish orthography"
+pl,Latn,sie,ʃ e,Stasiek -- Wikipedia: Polish orthography
+pl,Latn,sio,ʃ o,Stasio -- Wikipedia: Polish orthography
+pl,Latn,siu,ʃ u,as sia -- Wikipedia: Polish orthography
+pl,Latn,zi,ʒ i,"[ʑ], nearest as ż: Kazimierz -- Wikipedia: Polish orthography"
+pl,Latn,zia,ʒ a,Józia -- Wikipedia: Polish orthography
+pl,Latn,zie,ʒ e,Zieliński -- Wikipedia: Polish orthography
+pl,Latn,zio,ʒ o,Kazio -- Wikipedia: Polish orthography
+pl,Latn,ziu,ʒ u,as zia -- Wikipedia: Polish orthography
+pl,Latn,nia,n j a,"[ɲ], nearest as n + j: Ania -- Wikipedia: Polish orthography"
+pl,Latn,nie,n j e,"Agnieszka, Zbigniew -- Wikipedia: Polish orthography"
+pl,Latn,nio,n j o,Franio -- Wikipedia: Polish orthography
+pl,Latn,niu,n j u,as nia -- Wikipedia: Polish orthography
+pl,Latn,cz,tʃ,Czesław -- Wikipedia: Polish orthography
+pl,Latn,sz,ʃ,Tomasz -- Wikipedia: Polish orthography
+pl,Latn,rz,ʒ,"Grzegorz, Andrzej -- Wikipedia: Polish orthography"
+pl,Latn,ch,x,"Michał, Wojciech -- Wikipedia: Polish orthography"
+pl,Latn,h,x,"Henryk, Hanna -- Wikipedia: Polish orthography"
+pl,Latn,w,v,"Wojciech, Paweł -- Wikipedia: Polish orthography"
+pl,Latn,j,j,"Jan, Maja -- Wikipedia: Polish orthography"
+pl,Latn,ó,u,Józef -- Wikipedia: Polish orthography
+cs,Latn,c,ts,"Czech c: Lucie, Vincenc -- ÚJČ Internetová jazyková příručka; Wikipedia: Czech orthography"
+cs,Latn,ce,ts e,Cecílie -- ÚJČ; Wikipedia: Czech orthography
+cs,Latn,ci,ts i,Lucie -- ÚJČ; Wikipedia: Czech orthography
+cs,Latn,cí,ts i,ÚJČ; Wikipedia: Czech orthography
+cs,Latn,cy,ts i,Cyril -- ÚJČ; Wikipedia: Czech orthography
+cs,Latn,ch,x,"Michal, Chalupa -- ÚJČ; Wikipedia: Czech orthography"
+cs,Latn,j,j,"Jan, Jiří -- ÚJČ; Wikipedia: Czech orthography"
+cs,Latn,w,v,ÚJČ; Wikipedia: Czech orthography
+cs,Latn,ie,i j e,"a glide between: Marie, Julie -- ÚJČ; Wikipedia: Czech orthography"
+cs,Latn,cie,ts i j e,Lucie -- ÚJČ; Wikipedia: Czech orthography
+hr,Latn,c,ts,"Croatian c: Ljubica, Ivica -- Institut za hrvatski jezik (Hrvatski pravopis); Wikipedia: Gaj's Latin alphabet"
+hr,Latn,ce,ts e,Cecilija -- Hrvatski pravopis; Wikipedia: Gaj's Latin alphabet
+hr,Latn,ci,ts i,Ivica -- Hrvatski pravopis; Wikipedia: Gaj's Latin alphabet
+hr,Latn,j,j,"Josip, Marija -- Hrvatski pravopis; Wikipedia: Gaj's Latin alphabet"
+hr,Latn,h,x,Hrvoje -- Hrvatski pravopis; Wikipedia: Gaj's Latin alphabet
+hr,Latn,đ,dʒ,"[dʑ], nearest as dž: Đuro -- Hrvatski pravopis; Wikipedia: Gaj's Latin alphabet"
+hu,Latn,a,ɑ,"Hungarian a is [ɒ], nearest the keyboard's ɑ: Katalin, Éva -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,s,ʃ,"Hungarian s: István, János -- A magyar helyesírás szabályai (MTA, 12th ed.); Wikipedia: Hungarian alphabet"
+hu,Latn,sz,s,László -- MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,zs,ʒ,"Zsuzsanna, Erzsébet -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,cs,tʃ,"Csaba, Kovács -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,c,ts,Cecília -- MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,ce,ts e,MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,ci,ts i,MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,gy,dʒ,"[ɟ], nearest as dzs: György, Nagy -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,ny,n j,[ɲ]: Kónya -- MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,ly,j,"Mihály, Károly -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,ty,tʃ,"[c], nearest as cs -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,j,j,"József, János -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,ss,ʃ ʃ,double consonants are long in Hungarian: Bessenyei -- MTA helyesírás; Wikipedia: Hungarian alphabet
+hu,Latn,ll,l l,"Gellért, Csilla -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,nn,n n,"Zsuzsanna, Anna -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,tt,t t,"Attila, Ottó -- MTA helyesírás; Wikipedia: Hungarian alphabet"
+hu,Latn,mm,m m,Emma -- MTA helyesírás; Wikipedia: Hungarian alphabet
+ro,Latn,ce,tʃ e,Romanian ce: Ceaușescu -- Academia Română (DOOM); Wikipedia: Romanian alphabet
+ro,Latn,ci,tʃ i,"Ciprian, Lucian -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,ch,k,"che, chi: Chiriac -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,ge,dʒ e,"George, Gelu -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,gi,dʒ i,"Gigel, Virgil -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,j,ʒ,Jean -- DOOM; Wikipedia: Romanian alphabet
+ro,Latn,ă,ə,Bălan -- DOOM; Wikipedia: Romanian alphabet
+ro,Latn,â,ə,"[ɨ], nearest the keyboard's schwa, which a Romanian reader writes ă: Sânziana -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,î,ə,"[ɨ], as â: Înger -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,io,j o,"i before a vowel is a glide: Ion, Ioana -- DOOM; Wikipedia: Romanian alphabet"
+ro,Latn,iu,j u,"Iulia, Iulian -- DOOM; Wikipedia: Romanian alphabet"
+sv,Latn,j,j,"Swedish j is a glide: Johan, Jonas -- Svenska skrivregler (Språkrådet); Wikipedia: Swedish alphabet"
+sv,Latn,ng,ŋ,"Ingrid, Inga -- Språkrådet; Wikipedia: Swedish phonology"
+sv,Latn,rs,ʃ,"r + s fuse to [ʂ] in central Swedish, nearest as sj: Lars, Andersson -- Wikipedia: Swedish phonology"
+sv,Latn,ge,j e,soft g before e i y ä ö: Gerda -- Språkrådet; Wikipedia: Swedish alphabet
+sv,Latn,gi,j i,Birgitta -- Wikipedia: Swedish alphabet
+sv,Latn,gö,j ø,Göran -- Wikipedia: Swedish alphabet
+sv,Latn,y,y,"Ylva, Sylvia -- Wikipedia: Swedish alphabet"
+sv,Latn,sj,ʃ,"[ɧ], nearest as sh: Sjöberg -- Wikipedia: Swedish phonology"
+sv,Latn,kj,ʃ,[ɕ]: Kjell -- Wikipedia: Swedish phonology
+sv,Latn,tj,ʃ,[ɕ]: Tjörn -- Wikipedia: Swedish phonology
+sv,Latn,ke,ʃ e,soft k before e i y ä ö: Kerstin -- Wikipedia: Swedish alphabet
+sv,Latn,ki,ʃ i,Kicki -- Wikipedia: Swedish alphabet
+fi,Latn,j,j,"Finnish j is a glide: Juha, Jukka -- Kotus (Kotimaisten kielten keskus); Wikipedia: Finnish orthography"
+fi,Latn,ä,a,"[æ], nearer a than e to most listeners: Päivi, Mäkinen -- Kotus; Wikipedia: Finnish phonology"
+fi,Latn,y,y,"Yrjö, Pyry -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,kk,k k,"double letters are long in Finnish: Mikko, Jukka -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,tt,t t,"Matti, Pertti -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,pp,p p,"Seppo, Teppo -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,ll,l l,"Ville, Elli -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,nn,n n,"Anna, Hannu -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,mm,m m,"Emmi, Hemmo -- Kotus; Wikipedia: Finnish orthography"
+fi,Latn,ss,s s,"Jussi, Essi -- Kotus; Wikipedia: Finnish orthography"
+tr,Latn,c,dʒ,"Turkish c: Cem, Hatice -- Türk Dil Kurumu (Yazım Kılavuzu); Wikipedia: Turkish alphabet"
+tr,Latn,ce,dʒ e,"Hatice, Cemal -- TDK; Wikipedia: Turkish alphabet"
+tr,Latn,ci,dʒ i,Cihan -- TDK; Wikipedia: Turkish alphabet
+tr,Latn,ç,tʃ,"Çağla, Gençay -- TDK; Wikipedia: Turkish alphabet"
+tr,Latn,j,ʒ,Jale -- TDK; Wikipedia: Turkish alphabet
+tr,Latn,y,j,"Ayşe, Zeynep, Hüseyin -- TDK; Wikipedia: Turkish alphabet"
+id,Latn,c,tʃ,"Indonesian c: Cahya, Cecep -- Badan Bahasa, EYD (Ejaan yang Disempurnakan); Wikipedia: Indonesian orthography"
+id,Latn,ce,tʃ e,Cecep -- EYD; Wikipedia: Indonesian orthography
+id,Latn,ci,tʃ i,Cinta -- EYD; Wikipedia: Indonesian orthography
+id,Latn,ng,ŋ,"Bambang, Agung -- EYD; Wikipedia: Indonesian orthography"
+id,Latn,ngg,ŋ ɡ,"Anggun, Angga -- EYD; Wikipedia: Indonesian orthography"
+id,Latn,sy,ʃ,"Syahrini, Syaiful -- EYD; Wikipedia: Indonesian orthography"
+ms,Latn,c,tʃ,"Malay c: Cempaka, Che -- Dewan Bahasa dan Pustaka, Ejaan Rumi; Wikipedia: Malay alphabet"
+ms,Latn,ce,tʃ e,Cempaka -- DBP; Wikipedia: Malay alphabet
+ms,Latn,ci,tʃ i,Cik -- DBP; Wikipedia: Malay alphabet
+ms,Latn,ng,ŋ,"Chong, Bujang -- DBP; Wikipedia: Malay alphabet"
+ms,Latn,ngg,ŋ ɡ,Tunggal -- DBP; Wikipedia: Malay alphabet
+ms,Latn,sy,ʃ,"Syafiq, Syahirah -- DBP; Wikipedia: Malay alphabet"
+vi,Latn,d,z,"Hanoi [z]; the south reads j: Dũng, Dương -- Wikipedia: Vietnamese alphabet"
+vi,Latn,gi,z,Giang -- Wikipedia: Vietnamese alphabet
+vi,Latn,r,z,Hanoi [z]; the south reads r -- Wikipedia: Vietnamese alphabet
+vi,Latn,x,s,Xuân -- Wikipedia: Vietnamese alphabet
+vi,Latn,tr,tʃ,"Hanoi merges tr with ch: Trần, Trung -- Wikipedia: Vietnamese alphabet"
+vi,Latn,nh,ŋ,"final in names: Minh, Anh, Linh; [ɲ] at the start (Nhung) -- Wikipedia: Vietnamese phonology"
+vi,Latn,ng,ŋ,"Nguyễn, Hoàng -- Wikipedia: Vietnamese alphabet"
+vi,Latn,ngh,ŋ,Nghiêm -- Wikipedia: Vietnamese alphabet
+vi,Latn,e,ɛ,Vietnamese e [ɛ]; ê is [e] -- Wikipedia: Vietnamese alphabet
+vi,Latn,é,ɛ,e under the sharp tone -- Wikipedia: Vietnamese alphabet
+vi,Latn,o,ɔ,Vietnamese o [ɔ]; ô is [o] -- Wikipedia: Vietnamese alphabet
+vi,Latn,ó,ɔ,o under the sharp tone -- Wikipedia: Vietnamese alphabet
+vi,Latn,õ,ɔ,o under the tilde tone -- Wikipedia: Vietnamese alphabet
+vi,Latn,â,ə,Vietnamese â [ə]: Tuấn -- Wikipedia: Vietnamese alphabet
+vi,Latn,uy,w i,"Nguyễn, Huy, Thúy -- Wikipedia: Vietnamese phonology"
+fil,Latn,ng,ŋ,"Filipino ng: Bong, Luningning -- Komisyon sa Wikang Filipino, Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
+fil,Latn,nge,n dʒ e,"Spanish- and English-derived names: Angel, Angelica, Evangeline -- KWF Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
+fil,Latn,qu,k,"Spanish-derived names: Enrique, Quezon -- KWF Ortograpiyang Pambansa; Wikipedia: Filipino orthography"
+sw,Latn,ng',ŋ,"Swahili ng' is [ŋ]; plain ng is [ŋɡ]: Ng'ang'a, Achieng' -- Wikipedia: Swahili language (Orthography)"
+sw,Latn,ng’,ŋ,"the same, with a typographic apostrophe -- Wikipedia: Swahili language (Orthography)"
+ha,Latn,c,tʃ,Hausa c: Ciroma -- Wikipedia: Hausa language (Boko orthography)
+ha,Latn,ce,tʃ e,Wikipedia: Hausa language (Boko orthography)
+ha,Latn,ci,tʃ i,Wikipedia: Hausa language (Boko orthography)
+yo,Latn,y,j,"Yoruba y is the glide: Ìyábọ̀, Yẹmí -- Wikipedia: Yoruba language (Orthography)"
+yo,Latn,è,e,"a grave accent marks low tone, not an open vowel: Adépèjú -- Wikipedia: Yoruba language (Orthography)"
+yo,Latn,ò,o,low tone on o: Táíwò -- Wikipedia: Yoruba language (Orthography)
+yo,Latn,p,k p,"Yoruba p is [k͡p], nearest as k + p: Ọpẹ́yẹmí -- Wikipedia: Yoruba language (Orthography)"
+jv,Latn,c,tʃ,Javanese c: Cahyono -- Wikipedia: Javanese language (Orthography)
+jv,Latn,ce,tʃ ə,Wikipedia: Javanese language (Orthography)
+jv,Latn,ci,tʃ i,Wikipedia: Javanese language (Orthography)
+jv,Latn,e,ə,"unmarked e is mostly the pepet [ə]: Slamet, Retno; é and è mark e and ɛ -- Wikipedia: Javanese language (Phonology)"
+jv,Latn,ng,ŋ,Bambang -- Wikipedia: Javanese language (Phonology)
+jv,Latn,ngg,ŋ ɡ,Anggoro -- Wikipedia: Javanese language (Phonology)
+uz,Latn,o,ɔ,"Uzbek o is [ɒ], which an Uzbek reader writes o: Dilshod, Gulnora -- Wikipedia: Uzbek alphabet (1995 Latin alphabet)"
+uz,Latn,oʻ,o,Oʻtkir -- Wikipedia: Uzbek alphabet
+uz,Latn,o',o,"oʻ typed with a plain apostrophe, as most keyboards give it -- Wikipedia: Uzbek alphabet"
+uz,Latn,o’,o,oʻ typed with a typographic apostrophe -- Wikipedia: Uzbek alphabet
+uz,Latn,gʻ,ɡ,"[ʁ], nearest as g, as Russian Г and most romanizations write it: Gʻayrat -- Wikipedia: Uzbek alphabet"
+uz,Latn,g',ɡ,gʻ typed with a plain apostrophe -- Wikipedia: Uzbek alphabet
+uz,Latn,g’,ɡ,gʻ typed with a typographic apostrophe -- Wikipedia: Uzbek alphabet
+uz,Latn,x,x,Uzbek x is [χ]: Xurshid -- Wikipedia: Uzbek alphabet
+uz,Latn,y,j,Gʻayrat -- Wikipedia: Uzbek alphabet
+,Cyrl,а,a,"default Cyrillic reading is Russian's, the larger readership, without vowel reduction (stress is not written); Ukrainian rows below -- Wikipedia: Russian alphabet"
+,Cyrl,б,b,
+,Cyrl,в,v,
+,Cyrl,г,ɡ,Russian; Ukrainian reads h
+,Cyrl,д,d,
+,Cyrl,е,e,"after a consonant; word-initial Е is je (Елена), which needs an anchor"
+,Cyrl,ае,a j e,"е after a vowel is je: Николаев, Николаевич -- Wikipedia: Russian alphabet"
+,Cyrl,ее,e j e,"Алексеев, Сергеевна -- Wikipedia: Russian alphabet"
+,Cyrl,ие,i j e,Wikipedia: Russian alphabet
+,Cyrl,ое,o j e,Wikipedia: Russian alphabet
+,Cyrl,ё,j o,"Пётр, Семён"
+,Cyrl,ж,ʒ,
+,Cyrl,з,z,
+,Cyrl,и,i,Russian; Ukrainian reads ɪ
+,Cyrl,й,j,
+,Cyrl,к,k,
+,Cyrl,л,l,
+,Cyrl,м,m,
+,Cyrl,н,n,
+,Cyrl,о,o,
+,Cyrl,п,p,
+,Cyrl,р,r,
+,Cyrl,с,s,
+,Cyrl,т,t,
+,Cyrl,у,u,
+,Cyrl,ф,f,
+,Cyrl,х,x,
+,Cyrl,ц,ts,
+,Cyrl,ч,tʃ,
+,Cyrl,ш,ʃ,
+,Cyrl,щ,ʃ,"Russian [ɕː], nearest as sh; Ukrainian reads ʃ tʃ"
+,Cyrl,ъ,,"hard sign, no sound of its own"
+,Cyrl,ы,i,Russian [ɨ]; a Russian reader's keyboard labels ɪ and i alike
+,Cyrl,ь,,"soft sign: palatalizes, and before я ю е ё the glide is in the vowel"
+,Cyrl,э,e,
+,Cyrl,ю,j u,
+,Cyrl,я,j a,
+,Cyrl,є,j e,Ukrainian: Євген -- Wikipedia: Ukrainian alphabet
+,Cyrl,і,i,"Ukrainian, Belarusian: Іван -- Wikipedia: Ukrainian alphabet"
+,Cyrl,ї,j i,Ukrainian: Ївга -- Wikipedia: Ukrainian alphabet
+,Cyrl,ґ,ɡ,Ukrainian: Ґалаґан -- Wikipedia: Ukrainian alphabet
+uk,Cyrl,г,h,"Ukrainian г is [ɦ], nearest as h: Ольга, Сергій -- Український правопис (2019); Wikipedia: Ukrainian alphabet"
+uk,Cyrl,и,ɪ,"Ukrainian и is [ɪ]: Дмитро, Микола -- Український правопис; Wikipedia: Ukrainian alphabet"
+uk,Cyrl,щ,ʃ tʃ,Ukrainian щ is [ʃtʃ]: Щербак -- Український правопис; Wikipedia: Ukrainian alphabet
+,Grek,α,a,"Greek is read as Modern Greek, the one Greek-script language here, so its rows are the script's default -- Wikipedia: Greek alphabet; Modern Greek phonology"
+,Grek,ά,a,
+,Grek,β,v,
+,Grek,γ,ɡ,"[ɣ], nearest the keyboard's g"
+,Grek,γε,j e,"before e and i sounds γ is [ʝ], nearest as y: Γεώργιος"
+,Grek,γέ,j e,Ευγένιος
+,Grek,γι,j,"before a vowel the ι only marks [ʝ]: Γιάννης, Γιώργος, Παναγιώτης"
+,Grek,γί,j i,Αγία
+,Grek,γγ,ŋ ɡ,"Άγγελος, Ευάγγελος"
+,Grek,γκ,ɡ,Γκίκας
+,Grek,δ,ð,
+,Grek,ε,e,
+,Grek,έ,e,
+,Grek,ζ,z,
+,Grek,η,i,
+,Grek,ή,i,
+,Grek,θ,θ,
+,Grek,ι,i,
+,Grek,ί,i,
+,Grek,ϊ,i,
+,Grek,ΐ,i,
+,Grek,κ,k,
+,Grek,λ,l,
+,Grek,μ,m,
+,Grek,μπ,b,"[b] at the start, [mb] or [b] inside: Μπάμπης"
+,Grek,ν,n,
+,Grek,ντ,n d,"[nd] inside a name, [d] at the start: Αντώνης, Κωνσταντίνος"
+,Grek,ξ,k s,
+,Grek,ο,o,
+,Grek,ό,o,
+,Grek,π,p,
+,Grek,ρ,r,
+,Grek,σ,s,
+,Grek,ς,s,
+,Grek,τ,t,
+,Grek,τσ,ts,Τσακίρης
+,Grek,τζ,d z,[dz]: Τζένη
+,Grek,υ,i,
+,Grek,ύ,i,
+,Grek,ϋ,i,
+,Grek,ΰ,i,
+,Grek,φ,f,
+,Grek,χ,x,"[x], [ç] before e and i, which the keyboard writes x"
+,Grek,ψ,p s,
+,Grek,ω,o,
+,Grek,ώ,o,
+,Grek,αι,e,Αικατερίνη
+,Grek,αί,e,
+,Grek,ει,i,Ειρήνη
+,Grek,εί,i,
+,Grek,οι,i,
+,Grek,οί,i,
+,Grek,υι,i,
+,Grek,ου,u,Κουτσός
+,Grek,ού,u,
+,Grek,αυ,a v,Παύλος; af before a voiceless consonant
+,Grek,αύ,a v,
+,Grek,ευ,e v,"Ευάγγελος, Ευγενία"
+,Grek,εύ,e v,
+,Grek,ευθ,e f θ,ef before a voiceless consonant: Ευθύμιος
+,Grek,ευσ,e f s,Ευστάθιος
+,Grek,ευτ,e f t,Ευτυχία
+,Grek,λλ,l,a doubled letter reads once in Modern Greek: Αχιλλέας
+,Grek,μμ,m,
+,Grek,νν,n,Γιάννης
+,Grek,ππ,p,
+,Grek,ρρ,r,
+,Grek,σσ,s,
+,Grek,ττ,t,
+,Grek,κκ,k,

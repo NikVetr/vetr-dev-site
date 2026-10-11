@@ -41,6 +41,14 @@ test('what the table does not read adds no sound, and another script reads nothi
   assert.equal(guessSounds('Ника', TABLE, 'ru', 'Latn'), '');
 });
 
+test('the shipped table reads j as a Spanish reader does, and a doubled letter once unless the reader\'s language makes it long', async () => {
+  const rel = 'data/registry/name-letters.csv';
+  const table = parseTable(await readFile(rel, 'utf8'), rel);
+  assert.equal(guessSounds('Jorge', table, 'es', 'Latn'), 'xorxe');
+  assert.equal(guessSounds('Matteo', table, 'en', 'Latn'), 'mateo');
+  assert.equal(guessSounds('Matteo', table, 'it', 'Latn'), 'matteo');
+});
+
 test('the shipped table reads only into the keyboard\'s own sounds, for scripts and languages there are', async () => {
   const { SOUNDS } = await import('../ui/board-menu.js');
   const read = async (/** @type {string} */ rel) => parseTable(await readFile(rel, 'utf8'), rel);
