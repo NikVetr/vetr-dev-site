@@ -101,10 +101,14 @@ After each language:
 2. `python3 scripts/build_ipa.py --only <code>` to fill the IPA of your rows (for
    `uk` and `mr` the espeak library environment in `add-a-language.md` is needed),
    then the validator again.
-3. A paragraph in `tmp/notes/agents/register-<group>.md`: the register system in one
+3. **Key words.** Where `data/emphasis/<code>.csv` keys a concept you gave a familiar
+   row, check the familiar wording still contains a key; where the familiar form
+   changes the key word itself, add that form to the key with ` | ` (see
+   `key-words.md`). The validator warns about a wording with no key.
+4. A paragraph in `tmp/notes/agents/register-<group>.md`: the register system in one
    sentence, how many rows, the judgement calls, anything skipped and why.
 
 A session limit can stop you mid-batch, so each finished language and its notes must
 be on disk before you start the next. Do not commit; the coordinator reviews and
 commits. Touch only `data/registry/listener-axes.csv`, your languages'
-`variants.csv`, and your notes.
+`variants.csv` and `data/emphasis/<code>.csv`, and your notes.

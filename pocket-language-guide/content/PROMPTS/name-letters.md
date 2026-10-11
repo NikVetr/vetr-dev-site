@@ -69,8 +69,11 @@ for each language-specific row.
 ## Checks, and writing as you go
 
 - Every `sound` token is in the set above; every `script` is in `scripts.csv`; every
-  `language` is in `languages.csv`. (`scripts/validate_data.py` will check this once
-  the engine lands; until then check it yourself with a few lines of Python.)
+  `language` is in `languages.csv`; letters are lower case and NFC, and no run is read
+  twice for the same language or script. `python3 scripts/validate_data.py` checks all
+  of it: 0 errors after each script's rows.
+- Run the guess itself over your test names (`guessSounds` in `core/respell.js`, which
+  reads the table exactly as the app does) rather than working the table by hand.
 - For each language, try ten common names of that country through your table by hand
   and write the guesses in `tmp/notes/agents/name-letters.md` with what a speaker
   would actually say, so the coordinator can see how good the starting point is.
