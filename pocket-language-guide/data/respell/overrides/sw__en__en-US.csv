@@ -149,7 +149,7 @@ phone-translation.one-sentence-at-a-time-please,"sehn-TEHN-see MOH-jah kwah wah-
 phone-text-power.please-use-simple-words,tah-fah-THAH-lee too-MEE-ah mah-NEH-noh rah-HEE-see,Tafadhali tumia maneno rahisi
 sim-data.how-much-data-is-included,KOO-nah DAH-tah kee-AH-see GAH-nee?,Kuna data kiasi gani?
 etiquette.is-service-included,jeh hoo-DOO-mah EE-moh?,"Je, huduma imo?"
-children.child-age,m-TOH-toh WAHN-goo AH-nah mee-AH-kah {},Mtoto wangu ana miaka {}
+children.child-age,OOM-ree wah m-TOH-toh WAHN-goo: {},Umri wa mtoto wangu: {}
 time-scheduling.what-time-should-we-meet,too-koo-TAH-neh sah ng-GAH-pee?,Tukutane saa ngapi?
 time-words.yesterday,JAH-nah,Jana
 days-of-week.wednesday,joo-mah-TAH-noh,Jumatano
@@ -645,7 +645,7 @@ pharmacy-symptoms.motion-sickness-tablets,DAH-wah yah kee-cheh-foo-CHEH-foo chah
 pharmacy-symptoms.i-have-a-cut,nee-meh-jee-KAH-tah,Nimejikata
 pharmacy-symptoms.antacid,DAH-wah yah kee-oon-goo-LEE-ah,Dawa ya kiungulia
 pharmacy-symptoms.i-have-a-burn,nee-meh-oon-GOO-ah,Nimeungua
-pharmacy-symptoms.it-started-days-ago,ee-lee-AHN-zah SEE-koo {} zee-lee-zoh-PEE-tah,Ilianza siku {} zilizopita
+pharmacy-symptoms.it-started-days-ago,SEE-koo TAHN-goo ee-lee-poh-AHN-zah: {},Siku tangu ilipoanza: {}
 pharmacy-symptoms.cough-medicine,DAH-wah yah kee-koh-HOH-zee,Dawa ya kikohozi
 pharmacy-symptoms.is-this-safe-during-pregnancy,jeh nee sah-LAH-mah kwah m-jahm-ZEE-toh?,"Je, ni salama kwa mjamzito?"
 trail-transport.how-long-is-the-wait,koo-soo-BEE-ree nee MOO-dah GAH-nee?,Kusubiri ni muda gani?

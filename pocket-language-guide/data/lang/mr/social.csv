@@ -86,7 +86,7 @@ etiquette.what-is-customary,इथली पद्धत काय आहे?,,i
 etiquette.keep-the-change,उरलेले पैसे ठेवा,,uralēlē paisē ṭhēvā,ˌʊɾlˈeːleː pˈaɪseː ʈʰˈeːvaː,,2,mr-agent-v1;ipa=espeak
 children.cannot-find-my-child,माझे मूल सापडत नाही,,mājhē mūla sāpaḍata nāhī,mˈaːɟʰeː mˈuːl sˈaːpəɖˌət nˈaːhi,SAFETY-CRITICAL wording; flagged for fluent-speaker review,2,mr-agent-v1;ipa=espeak
 children.make-an-announcement,कृपया जाहीर सूचना द्या,,kr̥payā jāhīra sūcanā dyā,kɾˈʊpjˌaː zaːhˈiːɾ sˈuːcnˌaː djˈaː,,2,mr-agent-v1;ipa=espeak
-children.child-age,माझे मूल {} वर्षांचे आहे,,mājhē mūla {} varṣāṁcē āhē,mˈaːɟʰeː mˈuːl {} vərʂˈãceː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+children.child-age,माझ्या मुलाचे वय: {},,mājhyā mulācē vaya: {},mˈaːɟʰjaː mʊlˈaːceː vˈʌɛj {},my child's age: {},2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 135 वय (n. age);fix=mr.wikipedia महाराष्ट्रातील शिक्षण व्यवस्था rev 2546612 (पहिल्या वर्गात जाणाऱ्या मुलाचे वय सहा असले पाहिजे);was=माझे मूल {} वर्षांचे आहे (mājhē mūla {} varṣāṁcē āhē: the oblique plural -- wrong for one: एका वर्षाचे);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames औषधाची ऍलर्जी: {} and रात्रींची संख्या: {});row-corrections-v14;ipa=espeak
 children.high-chair,लहान मुलांची खुर्ची आहे का?,,lahāna mulāṁcī khurcī āhē kā?,ləhˈaːn mʊlˈãci kʰˈʊɾci ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 children.baby-changing-room,बाळाचे कपडे बदलण्याची खोली कुठे आहे?,,bāḷācē kapaḍē badalaṇyācī khōlī kuṭhē āhē?,baːɭˈaːceː kˈʌpɖˌeː bˌədəlɳjˈaːci kʰˈoːli kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 children.childrens-menu,मुलांसाठी मेनू आहे का?,,mulāṁsāṭhī mēnū āhē kā?,mˌʊlãsˈaːʈʰi mˈeːnuː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak

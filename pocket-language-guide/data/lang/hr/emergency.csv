@@ -77,7 +77,7 @@ pharmacy-symptoms.motion-sickness-tablets,tablete protiv mučnine pri putovanju,
 pharmacy-symptoms.i-have-a-cut,Imam posjekotinu,,imam posjekotinu,,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,lijek za žgaravicu,,lˈijek zˈa ʒɡaravitsu,,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Imam opekotinu,,imam opekotinu,,2,hr-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Počelo je prije {} dana,,potʃelo je prˈije {} dˈana,"dana is both the paucal and the genitive plural of dan, so the frame is right from two days up",2,hr-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Broj dana od početka: {},,brˈoj dˈana ˈot potʃetka {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=Hrvatski jezični portal početak 2 (prvo razdoblje);fix=hr.wikipedia Moždani udar rev 7576040 (unutar 8 sati od početka simptoma);fix=hr.wikipedia Tjedan rev 7251464 (fiksni broj dana);was=Počelo je prije {} dana (right from two -- wrong for one: prije jednog dana);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,sirup za kašalj,,sˈirub zˈa kˈaʃaʎ,,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Je li ovo sigurno u trudnoći?,,je li ˈovo siɡurno u trudnotɕi,,2,hr-agent-v1;ipa=espeak
 body-parts.head,glava,,ɡlˈava,,2,hr-agent-v1;ipa=espeak

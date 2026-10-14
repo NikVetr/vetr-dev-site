@@ -77,7 +77,7 @@ pharmacy-symptoms.motion-sickness-tablets,tabletki na chorobę lokomocyjną,,tab
 pharmacy-symptoms.i-have-a-cut,Mam ranę ciętą,,mˈam rˈanɛ tɕˈɛntɔ̃,,2,pl-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,lek na zgagę,,lˈɛk na zɡˈaɡɛ,,2,pl-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Mam oparzenie,,mˈam ˌɔpaʒˈɛɲɛ,,2,pl-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Zaczęło się {} dni temu,,zatʃˈɛwɔ ɕɛ {} dɲˈi tˈɛmu,,2,pl-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Liczba dni od początku: {},,lˈidʒba dɲˈi ɔt pɔtʃˈɔntku {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,pl-agent-v1;fix=Słownik języka polskiego PWN początek (to -- od czego się coś zaczyna w czasie lub przestrzeni) and dzień 2 (okres 24 godzin);was=Zaczęło się {} dni temu (wrong for one: dzień temu);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia na lek: {} and Liczba nocy: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,syrop na kaszel,,sˈɨrɔp na kˈaʃɛl,"cough syrup, which is what a Polish pharmacy hands over",2,pl-med-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Czy to jest bezpieczne w ciąży?,,tʃɨ tɔ jɛzd bɛspʲˈɛtʃnɛ f tɕˈɔ̃ʒɨ,,2,pl-agent-v1;ipa=espeak
 body-parts.head,głowa,,ɡwˈɔva,,2,pl-agent-v1;ipa=espeak

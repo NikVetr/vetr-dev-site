@@ -85,7 +85,7 @@ etiquette.what-is-customary,Ce este obișnuit aici?,,tʃe jˌeste ˌobiʃnwˈit 
 etiquette.keep-the-change,"Păstrați restul, vă rog",,"pəstrˈatsʲ rˈestul, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
 children.cannot-find-my-child,Nu îmi găsesc copilul,,nu ˌɨmʲ ɡəsˈesk kopˈilul,not an idiom for bereavement -- a plain search verb,2,ro-agent-v1;ipa=espeak
 children.make-an-announcement,Vă rog faceți un anunț,,və rˈoɡ fˈatʃetsʲ un anˈunts,,2,ro-agent-v1;ipa=espeak
-children.child-age,Copilul meu are {} ani,,kopˈilul mˌeu ˈaɾe {} ˈanʲ,,2,ro-agent-v1;ipa=espeak
+children.child-age,Vârsta copilului meu: {},,vˈɨrsta kopˈiluluɪ mˈeu {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,ro-agent-v1;fix=DEX '09 vârstă 1 (Timpul scurs de la nașterea unei ființe până la un anumit moment din viața ei -- numărul de ani ... prin care se exprimă acest timp);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni);was=Copilul meu are {} ani (the plural -- wrong for one: un an -- and from twenty: 20 de ani);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie la medicamente: {} and Număr de nopți: {});row-corrections-v14;ipa=espeak
 children.high-chair,Aveți un scaun înalt pentru copii?,,avˌetsʲ un skˈaʊn ɨnˈalt pˌentru kˈopiɪ,,2,ro-agent-v1;ipa=espeak
 children.baby-changing-room,Unde este camera de înfășat?,,ˈunde jˌeste kˈameɾˌa de ˌɨnfəʃˈat,,2,ro-agent-v1;ipa=espeak
 children.childrens-menu,Aveți meniu pentru copii?,,avˌetsʲ mˈeniʊ pˌentru kˈopiɪ,,2,ro-agent-v1;ipa=espeak

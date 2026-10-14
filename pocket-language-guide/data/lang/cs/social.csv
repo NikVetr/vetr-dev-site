@@ -85,7 +85,7 @@ etiquette.what-is-customary,Co je tady zvykem?,,tsˈo je tˈadi zvˈikem,,2,cs-a
 etiquette.keep-the-change,"Nechte si drobné, prosím",,"nˈexte si drˈobneː, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 children.cannot-find-my-child,Nemohu najít své dítě,,nˈemohu nˈajiːt svˈeː ɟˈiːce,"SAFETY-CRITICAL, see the concept's own note. Deliberately not built on ztratit ('lose'), which risks the same bereavement reading English 'I lost my child' has -- nemohu najít ('I cannot find') has no such reading",2,cs-agent-v1;ipa=espeak
 children.make-an-announcement,Můžete to prosím vyhlásit rozhlasem?,,mˈuːʒete tˈo prˈosiːm vˈihlaːsit rˈoshlasem,,2,cs-agent-v1;ipa=espeak
-children.child-age,Moje dítě má {} let,,mˈoje ɟˈiːce mˈaː {} lˈet,"dítě is grammatically neuter, so this needs no gendered pronoun the way 'my child is X' does in English",2,cs-agent-v1;ipa=espeak
+children.child-age,Věk mého dítěte: {},,vjˈek mˈeːho ɟˈiːcete {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,cs-agent-v1;fix=Internetová jazyková příručka věk (SSČ 4 (fyzické) stáří: od útlého věku -- školní věk -- 5 doba života) and rok (SSČ tři roky po svatbě);was=Moje dítě má {} let (the genitive plural -- wrong for one: rok -- and two to four: roky);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie na lék: {} and Počet nocí: {});row-corrections-v14;ipa=espeak
 children.high-chair,Máte dětskou židličku?,,mˌaːte ɟˈetskoʊ ʒˈidlitʃku,,2,cs-agent-v1;ipa=espeak
 children.baby-changing-room,Kde je přebalovací pult?,,ɡdˈe je pr̝ˈebalˌovatsiː pˈult,,2,cs-agent-v1;ipa=espeak
 children.childrens-menu,Máte dětské menu?,,mˌaːte ɟˈetskeː mˈenu,,2,cs-agent-v1;ipa=espeak

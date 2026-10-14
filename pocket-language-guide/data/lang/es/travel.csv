@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 border-customs.i-am-a-tourist,Vengo de turismo,Soy turista,bˈeŋɡo de tuɾˈismo,,2,es-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Aquí está mi pasaporte,,akˈi estˈa mi pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Me quedo {} días,,me kˈedo {} dˈias,,2,es-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Duración de la estancia (días): {},,dˌuɾasjˈon de la estˈansja dˈias {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) estancia (Tiempo que permanece alguien en un lugar);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Spanish text read through the Publications Office's cellar) field 25 (Duración prevista de la estancia o tránsito -- Indíquese el número de días);was=Me quedo {} días (the plural -- wrong for one: un día);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noches: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nada que declarar,Sin nada que declarar,nˈada ke dˌeklaɾˈaɾ,,2,es-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Me alojo en {},,me alˈoxo ˈen {},,2,es-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Vengo por negocios,,bˈeŋɡo poɾ neɡˈosjos,,2,es-agent-v1;ipa=espeak

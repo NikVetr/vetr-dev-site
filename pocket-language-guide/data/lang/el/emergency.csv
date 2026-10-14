@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,χάπια για τη ναυτία,,c
 pharmacy-symptoms.i-have-a-cut,Κόπηκα,Έχω ένα κόψιμο,Kopika,kˈopikˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.antacid,αντιόξινο,για τις καούρες,antioxino,ˌadiˈoksinˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Έχω έγκαυμα,Κάηκα,Echo egkavma,ˈexo ˈeŋɡavmˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Άρχισε πριν από {} μέρες,,Archise prin apo {} meres,ˈaɾçisˌe pɾˈin apˈo {} mˈeɾes,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Μέρες από την έναρξη: {},,Meres apo tin enarxi: {},mˈeɾes apˈo tin ˈenaɾksˌi {},Days since onset: {} (label; write a figure),2,el-agent-v1;roman=elot743;fix=Triantafyllidis Λεξικό της κοινής νεοελληνικής (greek-language.gr) έναρξη α (η αρχή -- το ξεκίνημα μιας δραστηριότητας -- ενέργειας -- κατάστασης);was=Άρχισε πριν από {} μέρες (Archise prin apo {} meres: the plural -- wrong for one: μία μέρα);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Αλλεργία σε φάρμακο: {} and Μέρες παραμονής: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,σιρόπι για τον βήχα,,siropi gia ton vicha,siɾˈopi jˈa ton vˈixa,cough syrup,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Είναι ασφαλές στην εγκυμοσύνη;,,Einai asfales stin egkymosyni;,ˈine ˌasfalˈes stin ˌeŋɡimosˈini,,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,Νομίζω ότι έχω ελονοσία,,,nomˈizo ˈoti ˈexo ˌelonosˈia,,2,malaria-reader-v1;ipa=espeak

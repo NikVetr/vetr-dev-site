@@ -56,7 +56,7 @@ place-words.luggage-storage,úschovna zavazadel,,ˈuːsxovna zˈavazˌadel,,2,cs
 place-words.tourist-spot-sightseeing-area,turistická atrakce / oblast,,tˈuristˌitskaː ˈatraktse / ˈoblast,,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-a-tourist,Jsem turista,,jsem tˈurista,,2,cs-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Tady je můj pas,,tˈadi je mˈuːj pˈas,,2,cs-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Zůstávám {} dní,,zˈuːstaːvaːm {} dɲˈiː,,2,cs-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Doba pobytu (počet dnů): {},,dˈoba pˈobitu pˈotʃed dnˈuː {},"'length of stay (number of days): {}' -- a label, so the number agrees with nothing",2,cs-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Czech text read through the Publications Office's cellar) field 25 (Předpokládaná doba trvání pobytu nebo průjezdu -- Uveďte počet dnů);fix=Internetová jazyková příručka den (1. pád mn. dni -- dny -- 2. pád mn. dní -- dnů);was=Zůstávám {} dní (the genitive plural -- wrong for one: jeden den -- and two to four: dva dny);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie na lék: {} and Počet nocí: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nic k proclení,,ɲˈits k prˈotsleɲiː,,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Bydlím v {},,bˈidliːm vˈeː {},the place name takes the locative case after v,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Jsem tu služebně,,jsem tˈu slˈuʒebɲe,,2,cs-agent-v1;ipa=espeak

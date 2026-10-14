@@ -74,7 +74,7 @@ sim-data.prepaid,prepaid,,pɹɪpˈeɪd,,2,expansion-v1;ipa=espeak
 sim-data.roaming,roaming,,ɹˈoʊmɪŋ,,2,expansion-v1;ipa=espeak
 children.cannot-find-my-child,I cannot find my child,,aɪ kænˈɑːt fˈaɪnd maɪ tʃˈaɪld,,2,expansion-v1;ipa=espeak
 children.make-an-announcement,Please make an announcement,,plˈiːz mˌeɪk ɐn ɐnˈaʊnsmənt,,2,expansion-v1;ipa=espeak
-children.child-age,My child is {} years old,,maɪ tʃˈaɪld ɪz {} jˈɪɹz ˈoʊld,,2,expansion-v1;ipa=espeak
+children.child-age,My child's age: {},,maɪ tʃˈaɪldz ˈeɪdʒ {},,2,expansion-v1;fix=OALD age 1 (the number of years that a person has lived or a thing has existed);was=My child is {} years old (the plural -- wrong for one: one year old);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Medicine allergy: {} and Number of nights: {});row-corrections-v14;ipa=espeak
 children.high-chair,Do you have a high chair?,,dˈuː juː hæv ɐ hˈaɪ tʃˈɛɹ,,2,expansion-v1;ipa=espeak
 children.baby-changing-room,Where is the baby changing room?,,wˌɛɹ ɪz ðə bˈeɪbi tʃˈeɪndʒɪŋ ɹˈuːm,,2,expansion-v1;ipa=espeak
 children.childrens-menu,Is there a children's menu?,,ɪz ðɛɹ ɐ tʃˈɪldɹənz mˈɛnjuː,,2,expansion-v1;ipa=espeak

@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,åksjuketabletter,,ˈoːksxʉkˌɛtabl
 pharmacy-symptoms.i-have-a-cut,Jag har ett skärsår.,,jɑːɡ hɑːr ˈɛt sxˈɛʂoːr,,2,sv-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,syraneutraliserande medel,,sˈyːranəˌʉtralˌiːseːrˌandə mˈeːdəl,,2,sv-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Jag har ett brännsår.,,jɑːɡ hɑːr ˈɛt brˈɛnsoːr,,2,sv-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Det började för {} dagar sedan.,,deːt bˈœrjadə føːr {} dˈɑːɡar sˈeːdan,,2,sv-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Dagar sedan det började: {},,dˈɑːɡar sˈeːdan deːt bˈœrjadə {},"'days since it began: {}' -- a label, so the number agrees with nothing",2,sv-agent-v1;fix=Svenska Akademiens ordböcker (svenska.se) SO sedan 2 subjunktion (under den tid eller vid en tidpunkt som följde efter det att viss händelse etc. inträffat);was=Det började för {} dagar sedan. (the plural -- wrong for one: en dag);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Läkemedelsallergi: {} and Antal nätter: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,hostmedicin,,hˌɔstmədiːsˈiːn,,2,sv-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Är det säkert under graviditet?,,ɛːr deːt sˈɛːkət ˈɵndər ɡrˈɑːviːdˌiːteːt,,2,sv-agent-v1;ipa=espeak
 body-parts.head,huvud,,hˈʉvʉd,,2,sv-agent-v1;ipa=espeak

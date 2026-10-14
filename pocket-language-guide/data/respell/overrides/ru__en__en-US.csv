@@ -146,7 +146,7 @@ phone-translation.one-sentence-at-a-time-please,pa ad-na-MOO pryid-la-ZHEH-ni-yo
 phone-text-power.please-use-simple-words,ga-va-REE-tye PROS-ti-mi sla-VAH-mi,Говорите простыми словами.
 sim-data.how-much-data-is-included,SKOL-ka gi-ga-BAYT fklyoo-chi-NOH,Сколько гигабайт включено?
 etiquette.is-service-included,ap-SLOO-zhi-va-ni-ye fklyoo-chi-NOH,Обслуживание включено?
-children.child-age,ma-yi-MOO ryi-BYON-koo {} lyet,Моему ребёнку {} лет.
+children.child-age,VOZ-rast ma-yi-VOH ryi-BYON-ka: {},Возраст моего ребёнка: {}
 time-scheduling.what-time-should-we-meet,va SKOL-ka FSTRYEH-tim-sya,Во сколько встретимся?
 time-words.yesterday,fchi-RAH,вчера
 days-of-week.wednesday,sryi-DAH,среда
@@ -156,7 +156,7 @@ quick-directions.turn-right,na-PRAH-va,Направо
 taxi.we-need-the-east-gate-not-the-south-gate,nam noozh-NIH vas-TOCH-ni-ye va-ROH-ta nyi YOOZH-ni-ye,"Нам нужны восточные ворота, не южные."
 transit-rides.does-this-bus-train-go-to,EH-tat af-TOH-boos i-DYOT da {},Этот автобус идёт до {} ?
 place-words.railway-station,vag-ZAL,вокзал
-border-customs.i-am-staying-for-days,yah na {} dnyey,Я на {} дней.
+border-customs.i-am-staying-for-days,srok pryi-bih-VAH-nee-ya (v dnyakh): {},Срок пребывания (в днях): {}
 pickup-meeting.please-pick-us-up-here,za-byi-REE-tye nas zdyes,Заберите нас здесь.
 rail-station-words.transfer,pyi-ryi-SAT-ka,пересадка
 common-signs.occupied,ZAH-nya-ta,занято
@@ -623,7 +623,7 @@ pharmacy-symptoms.motion-sickness-tablets,ta-BLYET-ki at oo-KAH-chi-va-ni-ya,т�
 pharmacy-symptoms.i-have-a-cut,oo myi-NYAH pa-RYES,У меня порез.
 pharmacy-symptoms.antacid,SRYET-stva at i-ZHOH-gi,средство от изжоги
 pharmacy-symptoms.i-have-a-burn,oo myi-NYAH a-ZHOK,У меня ожог.
-pharmacy-symptoms.it-started-days-ago,EH-ta na-cha-LOS {} dnyey na-ZAT,Это началось {} дней назад.
+pharmacy-symptoms.it-started-days-ago,ka-LEE-chist-va dnyey s na-CHAH-la: {},Количество дней с начала: {}
 pharmacy-symptoms.cough-medicine,SRYET-stva at KAH-shlya,средство от кашля
 pharmacy-symptoms.is-this-safe-during-pregnancy,EH-ta MOZH-na pri byi-RYEH-mye-nas-ti,Это можно при беременности?
 trail-transport.how-long-is-the-wait,SKOL-ka zhdat,Сколько ждать?

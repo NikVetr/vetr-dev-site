@@ -6,7 +6,7 @@ utility-templates.please-do-not-add,"Sin {}, por favor",,"sˈin {}, poɾ fabˈo�
 utility-templates.do-you-have,¿Tiene {}?,,tjˈene {},,2,es-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,"Escriba el número, por favor",,"eskɾˈiba el nˈumeɾo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 utility-templates.i-need,Necesito {},,nˌesesˈito {},,2,es-agent-v1;ipa=espeak
-utility-templates.is-there-nearby,¿Hay un {} cerca?,,ˈaɪ ˈun {} sˈeɾka,,2,es-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,¿Hay {} cerca?,,ˈaɪ {} sˈeɾka,"'is there {} nearby?' -- hay takes the bare noun, as in ¿Hay ascensor?, so no article has to agree",2,es-agent-v1;fix=es.wikipedia Onil rev 175069253 (Hay farmacia y mesones) and Villagatón rev 175220642 (Aunque no hay farmacia);fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) haber 1 intr. impers. (Existir -- estar ... esta noche no hay función);was=¿Hay un {} cerca? (the masculine article -- wrong for a feminine place: una farmacia -- una parada);rule=a frame that leaves the filler bare so nothing has to agree with it (the pack's own ¿Hay ascensor? -- ¿Hay lavadora? -- ¿Hay caja fuerte?);row-corrections-v14;ipa=espeak
 utility-templates.how-much-is,¿Cuánto cuesta {}?,,kwˈanto kwˈesta {},,2,es-agent-v1;ipa=espeak
 utility-templates.is-this,¿Esto es {}?,,ˈesto ˈes {},,2,es-agent-v1;ipa=espeak
 utility-templates.please,"{}, por favor",,"{}, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak

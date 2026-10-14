@@ -93,7 +93,7 @@ pharmacy-symptoms.motion-sickness-tablets,Reisetabletten,Mittel gegen Reisekrank
 pharmacy-symptoms.i-have-a-cut,Ich habe eine Schnittwunde.,,ɪç hɑːbə ˌaɪnə ʃnˈɪtvʊndə,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,Antazidum,Mittel gegen Sodbrennen,ˈantˌɑtsiːdˌʊm,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Ich habe eine Verbrennung.,,ɪç hɑːbə ˌaɪnə fɛɾbɾˈɛnʊŋ,,2,de-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Es hat vor {} Tagen angefangen.,,ɛs hat fˈɔɾ {} tˈɑːɡən ˈanɡəfˌaŋən,,2,de-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Tage seit Beginn: {},,tˈɑːɡə zaɪt bəɡˈɪn {},"'days since it began: {}' -- a label, so the number agrees with nothing",2,de-agent-v1;fix=Duden Beginn (Augenblick -- in dem etwas einsetzt -- beginnt: Beginn des Konzerts: 20 Uhr -- seit ... Beginn);was=Es hat vor {} Tagen angefangen. (the plural -- wrong for one: vor einem Tag);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Medikamentenallergie: {} and Anzahl der Nächte: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,Hustensaft,Hustenmittel,hˈʊstənzˌaft,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Ist das in der Schwangerschaft sicher?,,ɪst das ɪn dɛɾ ʃvˈaŋɜʃˌaft zˈɪçɜ,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,"Ich glaube, ich habe Malaria.",,"ɪç ɡlˈaʊbə, ɪç hɑːbə mˈɑlarˌiːɑː",,2,malaria-reader-v1;ipa=espeak

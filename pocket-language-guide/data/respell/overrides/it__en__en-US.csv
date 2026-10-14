@@ -199,7 +199,7 @@ pharmacy-symptoms.motion-sickness-tablets,pas-TEE-lyeh KON-troh eel mal DOW-toh,
 pharmacy-symptoms.i-have-a-cut,oh oon TAH-lyoh,Ho un taglio
 pharmacy-symptoms.antacid,oon an-tee-AH-chee-doh,un antiacido
 pharmacy-symptoms.i-have-a-burn,oh oo-noos-tee-OH-neh,Ho un'ustione
-pharmacy-symptoms.it-started-days-ago,eh ee-nee-tsee-AH-toh {} JOR-nee fah,È iniziato {} giorni fa
+pharmacy-symptoms.it-started-days-ago,JOR-nee dal-lee-NEE-tsee-oh: {},Giorni dall'inizio: {}
 pharmacy-symptoms.cough-medicine,OO-noh shee-ROP-poh per lah TOS-seh,uno sciroppo per la tosse
 pharmacy-symptoms.is-this-safe-during-pregnancy,see pwoh PREN-deh-reh een grah-vee-DAN-tsah,Si può prendere in gravidanza?
 police-consulate.where-is-the-police-station,doh-VEH eel kom-mees-sah-ree-AH-toh,Dov'è il commissariato?
@@ -380,7 +380,7 @@ hotel-requests.can-i-check-in-early,POS-soh FAH-reh eel chek-EEN PREE-mah,Posso 
 hotel-requests.another-night,POS-soh res-TAH-reh oo-NAL-trah NOT-teh,Posso restare un'altra notte?
 hotel-requests.is-there-a-safe,cheh OO-nah kas-sah-FOR-teh,C'è una cassaforte?
 hotel-requests.another-blanket,"oo-NAL-trah koh-PER-tah, per fah-VOH-reh","Un'altra coperta, per favore"
-hotel-requests.wake-up-call,"mee ZVEH-lyee AL-leh {}, per fah-VOH-reh","Mi svegli alle {}, per favore"
+hotel-requests.wake-up-call,"mee ZVEH-lyee, per fah-VOH-reh. OH-rah: {}","Mi svegli, per favore. Ora: {}"
 room-problems.the-key-does-not-work,lah kee-AH-veh non foon-tsee-OH-nah,La chiave non funziona
 room-problems.the-toilet-will-not-flush,loh shak-KWOH-neh non foon-tsee-OH-nah,Lo sciacquone non funziona
 room-problems.the-light-does-not-work,lah LOO-cheh non foon-tsee-OH-nah,La luce non funziona
@@ -548,7 +548,7 @@ sim-data.prepaid,preh-pah-GAH-tah,prepagata
 sim-data.roaming,eel ROH-meeng,il roaming
 children.cannot-find-my-child,non TROH-voh MEE-oh FEE-lyoh / MEE-ah FEE-lyah,Non trovo mio figlio
 children.make-an-announcement,pwoh FAH-reh oon an-NOON-choh al-lal-toh-par-LAN-teh,Può fare un annuncio all'altoparlante?
-children.child-age,MEE-oh FEE-lyoh ah {} AN-nee,Mio figlio ha {} anni
+children.child-age,eh-TAH dee MEE-oh FEE-lyoh: {},Età di mio figlio: {}
 children.high-chair,ah-VEH-teh oon sed-joh-LOH-neh,Avete un seggiolone?
 children.baby-changing-room,doh-VEH eel fah-shah-TOH-yoh,Dov'è il fasciatoio?
 children.childrens-menu,cheh oon meh-NOO per bam-BEE-nee,C'è un menù per bambini?
@@ -688,7 +688,7 @@ common-signs.stopped-stop,FER-moh,Fermo
 place-words.tourist-spot-sightseeing-area,DZOH-nah too-REES-tee-kah,zona turistica
 border-customs.i-am-a-tourist,VEN-goh per too-REEZ-moh,Vengo per turismo
 border-customs.here-is-my-passport,EK-koh eel MEE-oh pas-sah-POR-toh,Ecco il mio passaporto
-border-customs.i-am-staying-for-days,RES-toh {} JOR-nee,Resto {} giorni
+border-customs.i-am-staying-for-days,doo-RAH-tah del soj-JOR-noh (JOR-nee): {},Durata del soggiorno (giorni): {}
 border-customs.nothing-to-declare,nee-EN-teh dah dee-kee-ah-RAH-reh,Niente da dichiarare
 border-customs.i-am-staying-at,al-LOD-joh PRES-soh {},Alloggio presso {}
 border-customs.i-am-here-for-business,VEN-goh per lah-VOH-roh,Vengo per lavoro

@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,pastile pentru rău de mișcare,,past�
 pharmacy-symptoms.i-have-a-cut,Am o tăietură,,am o tˌəjetˈuɾə,,2,ro-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,antiacid,,antiatʃˈid,,2,ro-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Am o arsură,,am o arsˈuɾə,,2,ro-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,A început acum {} zile,,a ˌɨntʃepˈut akˈum {} zˈile,,2,ro-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Număr de zile de la început: {},,nˈumər de zˈile dˌela ˌɨntʃepˈut {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,ro-agent-v1;fix=DEX '09 început 2 (Punct de plecare -- moment inițial ... De la (bun) început = din primele momente);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni);was=A început acum {} zile (the plural -- wrong for one: o zi -- and from twenty: 20 de zile);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie la medicamente: {} and Număr de nopți: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,sirop de tuse,,siɾˈop de tˈuse,,2,ro-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Este sigur în timpul sarcinii?,,jˌeste sˈiɡur ɨn tˈimpul sˈartʃinˌiɪ,,2,ro-agent-v1;ipa=espeak
 body-parts.head,cap,,kˈap,,2,ro-agent-v1;ipa=espeak

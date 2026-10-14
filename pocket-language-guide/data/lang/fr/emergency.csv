@@ -93,7 +93,7 @@ pharmacy-symptoms.motion-sickness-tablets,comprimés contre le mal des transport
 pharmacy-symptoms.i-have-a-cut,J'ai une coupure,,ʒe yn kupˈyʁ,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,antiacide,Gaviscon,ɑ̃tjasˈid,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,J'ai une brûlure,,ʒe yn bʁylˈyʁ,,2,fr-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Ça a commencé il y a {} jours,,sa a kɔmɑ̃se il i ˈa {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Nombre de jours depuis le début : {},,nɔ̃bʁ də ʒuʁ dəpyi lə debˈy {},"'number of days since it began: {}' -- a label, so the number agrees with nothing",2,fr-agent-v1;fix=Larousse début 1 (Fait de commencer ... -- commencement d'un état ... : Le début d'une maladie);was=Ça a commencé il y a {} jours (the plural -- wrong for one: un jour);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie médicamenteuse : {} and Nombre de nuits : {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,sirop contre la toux,,siʁo kɔ̃tʁ la tˈu,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Est-ce sans danger pendant la grossesse ?,,ɛs sɑ̃ dɑ̃ʒe pɑ̃dɑ̃ la ɡʁosˈɛs,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,Je pense que j'ai le paludisme,,ʒə pɑ̃s kə ʒe lə palydˈism,,2,malaria-reader-v1;ipa=espeak

@@ -78,7 +78,7 @@ pharmacy-symptoms.motion-sickness-tablets,ప్రయాణ వాంతుల 
 pharmacy-symptoms.i-have-a-cut,నాకు కోత గాయం అయింది,,nāku kōta gāyaṁ ayiṁdi,naːku koːta ɡaːjam ajindi,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.antacid,ఎసిడిటీ మందు,,esiḍiṭī maṁdu,esiɖiʈiː mandu,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,నాకు కాలిన గాయం అయింది,,nāku kālina gāyaṁ ayiṁdi,naːku kaːlina ɡaːjam ajindi,,2,te-med-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,{} రోజుల ముందు మొదలైంది,,{} rōjula muṁdu modalaiṁdi,{} roːdʒula mundu modalaɪndi,,2,te-med-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,మొదలైనప్పటి నుంచి రోజుల సంఖ్య: {},,modalainappaṭi nuṁci rōjula saṁkhya: {},modalaɪnappaʈi nuɲtʃi roːdʒula saŋkʰja {},number of days since it began: {},2,te-med-v1;fix=Gwynn A Telugu-English Dictionary (DSAL) p. 440 మొదలు (n. 1 beginning) and p. 524 సంఖ్య (n. number);fix=te.wikipedia శ్రుతి హాసన్ rev 4909412 (సినిమా షూటింగ్ మొదలైనప్పటి నుంచి);fix=te.wikipedia ఒలింపిక్ క్రీడలు rev 4848299 (పోటీలు నిర్వహించే రోజుల సంఖ్య);was={} రోజుల ముందు మొదలైంది ({} rōjula muṁdu modalaiṁdi: the plural -- wrong for one);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames మందు అలర్జీ: {} and రాత్రుల సంఖ్య: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,దగ్గు మందు,,daggu maṁdu,daɡɡu mandu,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,గర్భవతికి ఇది సురక్షితమా?,,garbhavatiki idi surakṣitamā?,ɡarbʰaʋatiki idi surakʂitamaː,,2,te-med-v1;ipa=espeak
 body-parts.head,తల,,tala,tala,,2,te-agent-v1;ipa=espeak

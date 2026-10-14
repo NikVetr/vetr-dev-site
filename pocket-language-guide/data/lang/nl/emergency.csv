@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,reisziektetabletten,,rˈɛɪsiktˌeːt
 pharmacy-symptoms.i-have-a-cut,Ik heb een snee.,,ɪk hɛp ən snˈeː,,2,nl-med-v1;ipa=espeak
 pharmacy-symptoms.antacid,maagzuurremmer,,mˈaːɣzyɾrˌɛmər,,2,nl-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Ik heb een brandwond.,,ɪk hɛp ən brˈɑndʋɔnt,,2,nl-med-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Het begon {} dagen geleden.,,hət bəɣˈɔn {} dˈaːɣən ɣəlˈeːdən,,2,nl-med-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Dagen sinds het begon: {},,dˈaːɣən sˈɪnts hət bəɣˈɔn {},"'days since it began: {}' -- a label, so the number agrees with nothing",2,nl-med-v1;fix=ANW Algemeen Nederlands Woordenboek (anw.ivdnt.org) sinds (voegwoord -- onderschikkend);was=Het begon {} dagen geleden. (the plural -- wrong for one: één dag);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie voor medicijnen: {} and Aantal nachten: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,hoestdrank,,hˈustrɑŋk,,2,nl-med-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Is dit veilig tijdens de zwangerschap?,,ɪs dɪt vˈɛɪləx tˈɛɪdəns də zʋˈɑŋərsxˌɑp,,2,nl-med-v1;ipa=espeak
 body-parts.head,hoofd,,hˈoːft,,2,nl-agent-v1;ipa=espeak

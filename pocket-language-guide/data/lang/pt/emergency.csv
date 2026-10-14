@@ -77,7 +77,7 @@ pharmacy-symptoms.motion-sickness-tablets,comprimidos para o enjoo,,kˌomprimˈi
 pharmacy-symptoms.i-have-a-cut,Tenho um corte,,tˌeɲʊ ũŋ kˈɔɾətʃy,,2,pt-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,antiácido,,ˌɐ̃ŋtʃiˈasidʊ,,2,pt-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Tenho uma queimadura,,tˌeɲʊ ˌumæ kˌeɪmadˈuɾæ,,2,pt-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Começou há {} dias,,kˌomesˈow ˈa {} dʒˈiæs,,2,pt-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Dias desde o início: {},,dʒˈiæz dˌezdʒj u ˌinˈisjʊ {},"'days since it began: {}' -- a label, so the number agrees with nothing",2,pt-agent-v1;fix=Priberam DPLP início 2 (Começo ou inauguração de algo);was=Começou há {} dias (the plural -- wrong for one: um dia);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noites: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,xarope para a tosse,,ʃˌaɾˈɔpy pˌaɾæ a tˈɔsy,,2,pt-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Posso tomar isto na gravidez?,,pˌɔsʊ tomˈaɾ ˈistʊ na ɡrˌavidˈes,,2,pt-agent-v1;ipa=espeak
 body-parts.head,a cabeça,,a kˌabˈesæ,,2,pt-agent-v1;ipa=espeak

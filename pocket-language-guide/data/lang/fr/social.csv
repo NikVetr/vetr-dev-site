@@ -6,7 +6,7 @@ sim-data.may-i-use-your-wifi,Puis-je utiliser votre wifi ?,,pyiʒ ytilize votʁ
 children.make-an-announcement,Pourriez-vous faire une annonce ?,,puʁjevu fɛʁ yn anˈɔ̃s,,2,fr-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,Faut-il laisser un pourboire ?,,fotil lɛse œ̃ puʁbwˈaʁ,,2,fr-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,Combien de données sont incluses ?,,kɔ̃bjɛ̃ də dɔne sɔ̃t ɛ̃klˈyz,,2,fr-agent-v1;ipa=espeak
-children.child-age,Mon enfant a {} ans,,mɔ̃n ɑ̃fɑ̃ ˈa {} ˈɑ̃,,2,fr-agent-v1;ipa=espeak
+children.child-age,Âge de mon enfant : {},,aːʒ də mɔ̃n ɑ̃fˈɑ̃ {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,fr-agent-v1;fix=Larousse âge 1 (Durée écoulée entre la naissance d'une personne ou d'un animal et une date donnée);was=Mon enfant a {} ans (the plural -- wrong for one: un an);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie médicamenteuse : {} and Nombre de nuits : {});row-corrections-v14;ipa=espeak
 etiquette.is-service-included,Le service est-il compris ?,,lə sɛʁvis ɛtil kɔ̃pʁˈi,,2,fr-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,Avez-vous besoin de mon passeport ?,,avevu bəzwɛ̃ də mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
 children.high-chair,Avez-vous une chaise haute ?,,avevuz yn ʃɛz ˈot,,2,fr-agent-v1;ipa=espeak

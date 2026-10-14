@@ -79,7 +79,7 @@ place-words.tourist-spot-sightseeing-area,zona turistica,,dzˈɔna tʊrˈistika,
 place-words.scenic-area,area panoramica,,ˈarea panorˈamika,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Vengo per turismo,Sono un turista,vˈeŋɡo per tʊrˈizmo,,2,it-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Ecco il mio passaporto,,ˈɛkko il mˌio passapˈɔrto,,2,it-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Resto {} giorni,,rˈɛsto {} dʒˈornɪ,,2,it-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Durata del soggiorno (giorni): {},,dʊrˈata del sodʒdʒˈorno dʒˈornɪ {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,it-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Italian text read through the Publications Office's cellar) field 25 (Durata del soggiorno o del transito previsto -- Indicare il numero dei giorni);was=Resto {} giorni (the plural -- wrong for one: un giorno);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergia ai farmaci: {} and Numero di notti: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Niente da dichiarare,,njˈɛnte da dikjaɾˈare,,2,it-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Alloggio presso {},,allˈɔdʒdʒo prˈɛsso {},,2,it-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Vengo per lavoro,,vˈeŋɡo per lavˈɔro,,2,it-agent-v1;ipa=espeak

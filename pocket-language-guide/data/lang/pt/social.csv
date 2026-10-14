@@ -86,7 +86,7 @@ etiquette.what-is-customary,O que é costume aqui?,,ʊ ky ɛ kˌostˈumj akˈi,,
 etiquette.keep-the-change,Fique com o troco,,fˈiky koŋ ʊ trˈokʊ,,2,pt-agent-v1;ipa=espeak
 children.cannot-find-my-child,Não consigo encontrar o meu filho,a minha filha,nˌɐ̃ʊ̃ kˌoŋsˈiɡw ˌeɪŋkoŋtrˈaɾ ʊ meʊ fˈiljʊ,filha if a girl,2,pt-agent-v1;ipa=espeak
 children.make-an-announcement,"Podem fazer um anúncio, por favor?",,"pˌɔdeɪŋ fazˌeɾ ũŋ ˌænˈũŋsjʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
-children.child-age,O meu filho tem {} anos,A minha filha tem {} anos,ʊ meʊ fˈiljʊ teɪŋ {} ˈɐ̃nʊs,,2,pt-agent-v1;ipa=espeak
+children.child-age,Idade do meu filho: {},Idade da minha filha: {},ˌidˈadʒy dʊ meʊ fˈiljʊ {},"'my son's age: {}' -- a label, so the number agrees with nothing",2,pt-agent-v1;fix=Priberam DPLP idade 1 (Tempo transcorrido desde o nascimento ou desde o princípio);was=O meu filho tem {} anos (and text_alt A minha filha tem {} anos: the plural -- wrong for one: um ano);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noites: {});row-corrections-v14;ipa=espeak
 children.high-chair,Tem cadeira alta para crianças?,cadeirão,teɪŋ kˌadˈeɪɾæ ˈaʊtæ pˌaɾæ krˌiˈɐ̃ŋsæs,,2,pt-agent-v1;ipa=espeak
 children.baby-changing-room,Onde fica o fraldário?,o muda-fraldas,ˌoŋdʒy fˈikæ ʊ frˌaʊdˈaɾjʊ,,2,pt-agent-v1;ipa=espeak
 children.childrens-menu,Há menu para crianças?,cardápio infantil,a menˈu pˌaɾæ krˌiˈɐ̃ŋsæs,,2,pt-agent-v1;ipa=espeak

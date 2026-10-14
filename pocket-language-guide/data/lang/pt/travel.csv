@@ -60,7 +60,7 @@ place-words.tourist-spot-sightseeing-area,a zona turística,,a zˈonæ tˌuɾˈi
 place-words.scenic-area,a zona panorâmica,,a zˈonæ pˌænoɾˈɐ̃mikæ,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Aqui está o meu passaporte,,akˈi estˌa ʊ meʊ pˌasapˈɔɾətʃy,,2,pt-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Fico {} dias,,fˈikʊ {} dʒˈiæs,,2,pt-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Duração da estada (dias): {},,dˌuɾasˈɐ̃ʊ̃ da ˌestˈadæ dʒˈiæs {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,pt-agent-v1;fix=Priberam DPLP estada 2 (Demora ou permanência. = ESTADIA);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Portuguese text read through the Publications Office's cellar) field 25 (Duração da estada ou do trânsito prevista -- Indicar o número de dias);was=Fico {} dias (the plural -- wrong for one: um dia);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noites: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nada a declarar,,nˈadæ a dˌeklaɾˈar,,2,pt-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Fico em {},,fˈikw ˈeɪŋ {},,2,pt-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Venho em negócios,,vˈeɲw ˈeɪŋ nˌeɡˈɔsjʊs,,2,pt-agent-v1;ipa=espeak

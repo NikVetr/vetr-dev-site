@@ -6,7 +6,7 @@ utility-templates.please-do-not-add,"Lägg inte i {}, tack.",,"lˈɛɡ ˈɪntɛ 
 utility-templates.do-you-have,Har ni {}?,,hɑːr niː {},,2,sv-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,Kan du skriva numret?,,kan dʉ skrˈiːva nˈɵmrət,,2,sv-agent-v1;ipa=espeak
 utility-templates.i-need,Jag behöver {}.,,jɑːɡ bəhˈøːvər {},,2,sv-agent-v1;ipa=espeak
-utility-templates.is-there-nearby,Finns det en {} i närheten?,,fˈɪns deːt ɛn {} iː nˈɛrheːtən,,2,sv-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Finns det {} i närheten?,,fˈɪns deːt {} iː nˈɛrheːtən,"'is there {} nearby?' -- finns det takes the bare noun, so no en or ett has to agree",2,sv-agent-v1;fix=sv.wikipedia Sävja rev 58949972 (I byggnaden finns apotek) and Lillpite rev 54632192 (På ortens Ica-butik finns apotek);fix=Svenska Akademiens ordböcker (svenska.se) SAOL apotek (~et -- pl. ~: an ett-word);was=Finns det en {} i närheten? (the common-gender article -- wrong for an ett-word: ett apotek -- ett sjukhus -- ett hotell);rule=a frame that leaves the filler bare so nothing has to agree with it (the pack's own Finns det rabatt? -- Finns det förvaringsskåp?);row-corrections-v14;ipa=espeak
 utility-templates.how-much-is,Hur mycket kostar {}?,,hˈʉr mˈykət kˈɔstar {},,2,sv-agent-v1;ipa=espeak
 utility-templates.is-this,Är det här {}?,,ɛːr deːt hˈɛːr {},,2,sv-agent-v1;ipa=espeak
 utility-templates.please,"{}, tack.",,"{}, tˈak",,2,sv-agent-v1;ipa=espeak

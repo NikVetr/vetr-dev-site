@@ -60,7 +60,7 @@ place-words.luggage-storage,przechowalnia bagażu,,pʃˌɛxɔvˈalɲa baɡˈaʒu
 place-words.tourist-spot-sightseeing-area,atrakcja turystyczna,,atrˈaktsja tˌurɨstˈɨtʃna,,2,pl-agent-v1;ipa=espeak
 border-customs.i-am-a-tourist,Jestem tu na wakacjach,,jˌɛstɛm tˈu na vakˈatsjax,I am here on holiday; carries no speaker gender,2,pl-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Oto mój paszport,,ˈɔtɔ mˈuj pˈaʃpɔrt,,2,pl-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Zostaję na {} dni,,zɔstˈajɛ nˈa {} dɲˈi,,2,pl-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Czas pobytu (liczba dni): {},,tʃˈas pɔbˈɨtu lˈidʒba dɲˈi {},"'length of stay (number of days): {}' -- a label, so the number agrees with nothing",2,pl-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Polish text read through the Publications Office's cellar) field 25 (Planowany czas trwania pobytu lub tranzytu -- Proszę podać liczbę dni);fix=Słownik języka polskiego PWN dzień 2 (okres 24 godzin);was=Zostaję na {} dni (wrong for one: na jeden dzień);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia na lek: {} and Liczba nocy: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nic do zgłoszenia,,ɲˈidʑ dɔ zɡwɔʃˈɛɲa,also the wording on the Polish green channel,2,pl-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Zatrzymuję się tutaj: {},,zˌatʃɨmˈujɛ ɕɛ tˈutaj {},I am staying here: {},2,pl-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Jestem tu w sprawach służbowych,,jˌɛstɛm tˈu f sprˈavax swuʒbˈɔvɨx,,2,pl-agent-v1;ipa=espeak

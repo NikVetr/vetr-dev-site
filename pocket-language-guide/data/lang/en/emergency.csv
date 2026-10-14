@@ -96,7 +96,7 @@ pharmacy-symptoms.motion-sickness-tablets,motion-sickness tablets,,mˈoʊʃəns�
 pharmacy-symptoms.i-have-a-cut,I have a cut,,aɪ hæv ɐ kˈʌt,,2,expansion-v1;ipa=espeak
 pharmacy-symptoms.antacid,antacid,,æntˈæsɪd,,2,expansion-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,I have a burn,,aɪ hæv ɐ bˈɜːn,,2,expansion-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,It started {} days ago,,ɪt stˈɑːɹɾɪd {} dˈeɪz ɐɡˈoʊ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Days since it started: {},,dˈeɪz sˈɪns ɪt stˈɑːɹɾɪd {},,2,expansion-v1;fix=OALD since (from a time in the past until a later past time -- or until now);was=It started {} days ago (the plural -- wrong for one: one day ago);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Medicine allergy: {} and Number of nights: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,cough medicine,,kˈɔf mˈɛdəsən,,2,expansion-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Is this safe during pregnancy?,,ɪz ðɪs sˈeɪf dˈʊɹɹɪŋ pɹˈɛɡnənsi,,2,expansion-v1;ipa=espeak
 police-consulate.where-is-the-police-station,Where is the police station?,,wˌɛɹ ɪz ðə pəlˈiːs stˈeɪʃən,,2,expansion-v1;ipa=espeak

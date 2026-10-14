@@ -86,7 +86,7 @@ etiquette.what-is-customary,Jak się tu robi?,,jˈak ɕɛ tˈu rˈɔbʲi,how is 
 etiquette.keep-the-change,Proszę zatrzymać resztę,,prˈɔʃɛ zatʃˈɨmatɕ rˈɛʃtɛ,,2,pl-agent-v1;ipa=espeak
 children.cannot-find-my-child,Nie mogę znaleźć mojego dziecka,,ɲɛ mˈɔɡɛ znˈalɛɕtɕ mɔjˈɛɡɔ dʑˈɛtska,I cannot find my child; not an idiom for bereavement,2,pl-agent-v1;ipa=espeak
 children.make-an-announcement,Proszę ogłosić przez głośniki,,prˈɔʃɛ ɔɡwˈɔɕitɕ pʃˈɛz ɡwɔɕɲˈiki,please announce it over the loudspeakers,2,pl-agent-v1;ipa=espeak
-children.child-age,Moje dziecko ma {} lat,,mˈɔjɛ dʑˈɛtskɔ mˈa {} lˈat,,2,pl-agent-v1;ipa=espeak
+children.child-age,Wiek mojego dziecka: {},,vʲˈɛk mɔjˈɛɡɔ dʑˈɛtska {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,pl-agent-v1;fix=Słownik języka polskiego PWN wiek 1 (długość życia człowieka od urodzenia do danej chwili) and rok (pl. lata);was=Moje dziecko ma {} lat (the genitive plural -- wrong for one: rok -- and two to four: lata);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia na lek: {} and Liczba nocy: {});row-corrections-v14;ipa=espeak
 children.high-chair,Czy jest krzesełko dla dziecka?,,tʃɨ jɛst kʃɛsˈɛwkɔ dla dʑˈɛtska,,2,pl-agent-v1;ipa=espeak
 children.baby-changing-room,Gdzie jest przewijak?,,ɡdʑˈɛ jɛst pʃɛvˈijak,where is the changing table?,2,pl-agent-v1;ipa=espeak
 children.childrens-menu,Czy jest menu dla dzieci?,,tʃɨ jɛst mˈɛnu dla dʑˈɛtɕi,,2,pl-agent-v1;ipa=espeak

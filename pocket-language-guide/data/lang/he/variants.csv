@@ -4,7 +4,6 @@ speaker_gender=feminine,accessibility.hard-of-hearing,אני כבדת שמיעה
 speaker_gender=feminine,accessibility.need-to-sit-down,אני צריכה לשבת,אֲנִי צְרִיכָה לָשֶׁבֶת,ani tsrikha lashévet,anˈi tsʁixˈa laʃˈevet,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,border-customs.i-am-a-tourist,אני תיירת,אֲנִי תַּיֶּירֶת,ani tayeret,anˈi tajeʁˈet,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,border-customs.i-am-staying-at,אני מתאכסנת ב{},אֲנִי מִתְאַכְסֶנֶת בְּ{},ani mit’akhsenet be{},anˈi mitaxsenˈet bˈe {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
-speaker_gender=feminine,border-customs.i-am-staying-for-days,אני נשארת {} ימים,אֲנִי נִשְׁאֶרֶת {} יָמִים,ani nish’eret {} yamim,anˈi niʃeʁˈet {} jamˈim,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,border-customs.i-am-visiting-family,אני מבקרת משפחה,אֲנִי מְבַקֶּרֶת מִשְׁפָּחָה,ani mevaqeret mishpaẖa,anˈi mevakeʁˈet miʃpaxˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,communication.i-cannot-read-it,אני לא יכולה לקרא את זה,אֲנִי לֹא יְכוֹלָה לִקְרֹא אֶת זֶה,ani lo yekhola liqro et ze,anˈi lˈo jexolˈa likʁˈo ˈet zˈe,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,communication.i-cannot-read-understand,אני לא יודעת לקרא,אֲנִי לֹא יוֹדַעַת לִקְרֹא,ani lo yoda‘at liqro,anˈi lˈo jodaˈat likʁˈo,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn

@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,matkapahoinvointilääke,,mˈatkapahˌ
 pharmacy-symptoms.i-have-a-cut,Minulla on haava.,,mˈinulla ˈon hˈaːva,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,närästyslääke,antasidi,nˈæræstˌyslæːke,"närästyslääke is the everyday word, antasidi the technical one",2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Minulla on palovamma.,,mˈinulla ˈom pˈalovˌamma,,2,fi-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Se alkoi {} päivää sitten.,,sˈe ˈalkoi {} pˈæivæː sˈitten,"the numeral governs the partitive singular, right from two up",2,fi-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Päiviä oireiden alkamisesta: {},,pˈæiviæ ˈoireiden ˈalkamisˌesta {},"'days since the symptoms began: {}' -- a label, so the number agrees with nothing",2,fi-agent-v1;fix=Kielitoimiston sanakirja päivä (Vuodessa on 365 päivää);fix=fi.wikipedia Aivokalvontulehdus rev 24023810 (muutaman tunnin kuluessa ensimmäisten oireiden alkamisesta);was=Se alkoi {} päivää sitten. (the partitive a numeral from two governs -- wrong for one: päivä sitten);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,yskänlääke,,ˈyskænlˌæːke,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Sopiiko tämä raskauden aikana?,,sˈopiːko tˈæmæ rˈaskauden ˈaikana,,2,fi-agent-v1;ipa=espeak
 body-parts.head,pää,,pˈæː,,2,fi-agent-v1;ipa=espeak

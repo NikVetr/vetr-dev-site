@@ -145,7 +145,7 @@ payment-receipt.pay-by-qr-code,mit koo-air-KOHT TSAH-len?,Mit QR-Code zahlen?
 shopping.that-is-too-expensive,dahs ist tsoo TOY-er,Das ist zu teuer.
 color-size-returns.may-i-try-it-on,dahrf ikh dahs AHN-proh-bee-ren?,Darf ich das anprobieren?
 sim-data.how-much-data-is-included,vee feel DAH-ten-voh-loo-men ist dah-BY?,Wie viel Datenvolumen ist dabei?
-children.child-age,mine kint ist {} YAH-ruh ahlt,Mein Kind ist {} Jahre alt.
+children.child-age,AHL-ter MY-nes KIN-des: {},Alter meines Kindes: {}
 etiquette.is-service-included,ist dee buh-DEE-noong in-kloo-ZEE-vuh?,Ist die Bedienung inklusive?
 social-basics.good-morning,GOO-ten MOR-gen,Guten Morgen
 communication.do-you-speak-english,SHPREKH-en zee ENG-lish?,Sprechen Sie {source}?
@@ -155,7 +155,7 @@ time-scheduling.what-time-should-we-meet,vahn TREF-en veer oons?,Wann treffen wi
 time-words.yesterday,GES-tern,gestern
 days-of-week.wednesday,MIT-vokh,Mittwoch
 months.march,mairts,März
-border-customs.i-am-staying-for-days,ikh BLY-buh {} TAH-guh,Ich bleibe {} Tage.
+border-customs.i-am-staying-for-days,OWF-ent-hahlts-dow-er (TAH-guh): {},Aufenthaltsdauer (Tage): {}
 directions.is-it-far,ist es vite?,Ist es weit?
 quick-directions.turn-right,rekhts AHP-bee-gen,Rechts abbiegen.
 taxi.we-need-the-east-gate-not-the-south-gate,"veer BROW-khen dahs OST-tor, nikht dahs ZEWT-tor","Wir brauchen das Osttor, nicht das Südtor."
@@ -645,7 +645,7 @@ pharmacy-symptoms.motion-sickness-tablets,RY-zuh-tah-blet-ten,Reisetabletten
 pharmacy-symptoms.i-have-a-cut,ikh HAH-buh EYE-nuh SHNIT-voon-duh,Ich habe eine Schnittwunde.
 pharmacy-symptoms.antacid,ahn-tah-TSEE-doom,Antazidum
 pharmacy-symptoms.i-have-a-burn,ikh HAH-buh EYE-nuh fair-BREN-oong,Ich habe eine Verbrennung.
-pharmacy-symptoms.it-started-days-ago,es haht for {} TAH-gen AHN-guh-fahng-en,Es hat vor {} Tagen angefangen.
+pharmacy-symptoms.it-started-days-ago,TAH-guh zite buh-GIN: {},Tage seit Beginn: {}
 pharmacy-symptoms.cough-medicine,HOOS-ten-zahft,Hustensaft
 pharmacy-symptoms.is-this-safe-during-pregnancy,ist dahs in dair SHVAHNG-er-shahft ZIKH-er?,Ist das in der Schwangerschaft sicher?
 trail-transport.how-long-is-the-wait,vee LAHNG-uh mooss mahn VAHR-ten?,Wie lange muss man warten?

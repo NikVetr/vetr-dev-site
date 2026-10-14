@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 border-customs.i-am-a-tourist,Ich bin Tourist.,,ɪç bɪn tuːrˈɪst,,2,de-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Hier ist mein Pass.,,hˈiːɾ ɪst maɪn pˈas,,2,de-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Ich bleibe {} Tage.,,ɪç blˈaɪbə {} tˈɑːɡə,,2,de-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Aufenthaltsdauer (Tage): {},,ˈaʊfənthˌaltsdaʊɜ tˈɑːɡə {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,de-agent-v1;fix=Duden Aufenthaltsdauer (Dauer des Aufenthalts an einem Ort);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the German text read through the Publications Office's cellar) field 25 (Dauer des geplanten Aufenthalts oder der Durchreise -- Anzahl der Tage angeben);was=Ich bleibe {} Tage. (the plural -- wrong for one: einen Tag);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Medikamentenallergie: {} and Anzahl der Nächte: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nichts zu verzollen.,Anmeldefreie Waren,nˈɪçts tsuː fɛɾtsˈɔlən,,2,de-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Ich wohne im {}.,,ɪç vˈoːnə ˈɪm {},,2,de-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Ich bin geschäftlich hier.,,ɪç bɪn ɡəʃˈɛftlɪç hˈiːɾ,,2,de-agent-v1;ipa=espeak

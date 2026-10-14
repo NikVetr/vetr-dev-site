@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 border-customs.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Voici mon passeport,,vwasi mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Je reste {} jours,,ʒə ʁˈɛst {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Durée du séjour (jours) : {},,dyʁe dy seʒuʁ ʒˈuʁ {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,fr-agent-v1;fix=Larousse durée 1 (Espace de temps -- période mesurable pendant lequel a lieu un événement);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the French text read through the Publications Office's cellar) field 25 (Durée du séjour ou du transit prévu -- Indiquer le nombre de jours);was=Je reste {} jours (the plural -- wrong for one: un jour);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie médicamenteuse : {} and Nombre de nuits : {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Rien à déclarer,,ʁiɛ̃n a deklaʁˈe,,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Je viens pour affaires,,ʒə vjɛ̃ puʁ afˈɛʁ,,2,fr-agent-v1;ipa=espeak

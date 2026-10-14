@@ -80,7 +80,7 @@ common-signs.stopped-stop,stopped / stop,,stˈɑːpt / stˈɑːp,,2,japanese-rev
 place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,tˈʊɹɹɪst spˈɑːt / sˈaɪtsiːɪŋ ˈɛɹiə,,2,japanese-reviewed-v6;ipa=espeak
 border-customs.i-am-a-tourist,I am a tourist,,aɪɐm ɐ tˈʊɹɹɪst,,2,expansion-v1;ipa=espeak
 border-customs.here-is-my-passport,Here is my passport,,hˈɪɹ ɪz maɪ pˈæspoːɹt,,2,expansion-v1;ipa=espeak
-border-customs.i-am-staying-for-days,I am staying for {} days,,aɪɐm stˈeɪɪŋ fɔːɹ {} dˈeɪz,,2,expansion-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Length of stay (days): {},,lˈɛŋθ ʌv stˈeɪ dˈeɪz {},,2,expansion-v1;fix=OALD length 3 (the amount of time that something lasts);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the English text read through the Publications Office's cellar) field 25 (Duration of the intended stay or transit -- Indicate number of days);was=I am staying for {} days (the plural -- wrong for one: for one day);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Medicine allergy: {} and Number of nights: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nothing to declare,,nˈʌθɪŋ tə dɪklˈɛɹ,,2,expansion-v1;ipa=espeak
 border-customs.i-am-staying-at,I am staying at {},,aɪɐm stˈeɪɪŋ æt {},,2,expansion-v1;ipa=espeak
 border-customs.i-am-here-for-business,I am here for business,,aɪɐm hˈɪɹ fɔːɹ bˈɪznəs,,2,expansion-v1;ipa=espeak

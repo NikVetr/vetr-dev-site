@@ -139,7 +139,7 @@ payment-receipt.pay-by-qr-code,AD-fa bir-RAMZ,أدفع بالرمز؟
 shopping.that-is-too-expensive,HAA-tha GHAA-lee JID-dan,هذا غالي جدّاً
 color-size-returns.may-i-try-it-on,hal a-KEE-soh,هل أقيسه؟
 sim-data.how-much-data-is-included,kam HAJM al-ba-yaa-NAAT,كم حجم البيانات؟
-children.child-age,OOMR TIF-lee … sa-na-WAAT,عمر طفلي {} سنوات
+children.child-age,OOMR TIF-lee: {},عمر طفلي: {}
 etiquette.is-service-included,hal al-KHID-ma mash-MOO-la,هل الخدمة مشمولة؟
 social-basics.good-morning,sa-BAAH al-KHAYR,صباح الخير
 communication.do-you-speak-english,hal ta-ta-HAD-dath al-in-ji-lee-ZEE-ya,هل تتحدث {source}؟
@@ -150,7 +150,7 @@ time-scheduling.what-time-should-we-meet,fee ay SAA-a na-ta-KAA-bal,في أيّ 
 time-words.yesterday,AMS,أمس
 days-of-week.wednesday,al-ar-bi-AA,الأربعاء
 months.march,MAA-ris,مارس
-border-customs.i-am-staying-for-days,sa-AB-ka … ay-YAAM,سأبقى {} أيام
+border-customs.i-am-staying-for-days,MOOD-dat al-i-KAA-ma bil-ay-YAAM: {},مدة الإقامة بالأيام: {}
 directions.is-it-far,hal HOO-wa ba-EED,هل هو بعيد؟
 taxi.we-need-the-east-gate-not-the-south-gate,noo-REED al-baw-WAA-ba ash-shar-KEE-ya laa al-ja-noo-BEE-ya,نريد البوابة الشرقية لا الجنوبية
 transit-rides.does-this-bus-train-go-to,hal YATH-hab HAA-tha i-la,هل يذهب هذا إلى {}؟
@@ -377,7 +377,7 @@ quick-directions.across-from-here,fil-JI-ha al-moo-KAA-bi-la,في الجهة ا�
 transit-rides.is-it-delayed,hal HOO-wa moo-ta-AKH-khir,هل هو متأخّر؟
 rail-station-words.train-number,RAKM al-ki-TAAR,رقم القطار
 common-signs.no-photography,mam-NOO at-tas-WEER,ممنوع التصوير
-utility-templates.is-there-nearby,hal YOO-jad … ka-REEB,هل يوجد {} قريب؟
+utility-templates.is-there-nearby,hal YOO-jad {} bil-KURB min HOO-na,هل يوجد {} بالقرب من هنا؟
 toilets.it-is-urgent,al-AMR AA-jil,الأمر عاجل
 accessibility.station-assistance,hal TOO-jad moo-SAA-a-da li-tha-WEE al-i-AA-ka fil-ma-HAT-ta,هل توجد مساعدة لذوي الإعاقة في المحطة؟
 pronouns-verbs.your-yours,LAK,لك
@@ -626,7 +626,7 @@ pharmacy-symptoms.motion-sickness-tablets,ak-RAAS li-doo-WAAR al-HA-ra-ka,أقر
 pharmacy-symptoms.i-have-a-cut,IN-dee JOORH,عندي جرح
 pharmacy-symptoms.antacid,moo-DAAD lil-hoo-MOO-da,مضاد للحموضة
 pharmacy-symptoms.i-have-a-burn,IN-dee HARK,عندي حرق
-pharmacy-symptoms.it-started-days-ago,BA-da KABL … ay-YAAM,بدأ قبل {} أيام
+pharmacy-symptoms.it-started-days-ago,A-dad al-ay-YAAM MOON-thu BAD al-a-RAAD: {},عدد الأيام منذ بدء الأعراض: {}
 pharmacy-symptoms.cough-medicine,da-WAA lis-soo-AAL,دواء للسعال
 pharmacy-symptoms.is-this-safe-during-pregnancy,hal HAA-tha AA-min lil-HAA-mil,هل هذا آمن للحامل؟
 trail-transport.how-long-is-the-wait,kam MOOD-dat al-in-ti-ZAAR,كم مدة الانتظار؟

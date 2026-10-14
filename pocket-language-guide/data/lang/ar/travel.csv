@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
 border-customs.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,ˈana sˈaːʔiħ,,2,ar-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,هذا جواز سفري,,hādhā jawāz safarī,haˈaðaˌa dʒˈawaːz sˈafaɹˌiːj,,2,ar-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,سأبقى {} أيام,,saʾabqá {} ayyām,sʔbqa {} ʔˈiːaːm,,2,ar-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,مدة الإقامة بالأيام: {},,muddat al-iqāmah bi-al-ayyām: {},mˈudːa ʔalʔˈiqaːmˌa bilʔˈiːaːm {},length of stay in days: {},2,ar-agent-v1;fix=ar.wikipedia سياسة التأشيرات في إسرائيل rev 74227109 (على ألا تتجاوز مدة الإقامة 3 أشهر);fix=ar.wikipedia تاريخ يولياني rev 75012349 (الوقت بالأيام);fix=ar.wikipedia العدد والمعدود rev 76218556 (تمييز الأعداد من 11 إلى 99 مفرد منصوب);was=سأبقى {} أيام (saʾabqá {} ayyām: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames حساسية دوائية: {} and عدد الليالي: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,لا شيء للتصريح,لا شيء للإفصاح عنه,lā shayʾ lil-taṣrīḥ,lˈaː ʃˈajʔ llts̪ɹiːħ,,1,ar-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,أنا مقيم في {},,anā muqīm fī {},ˈana mˈuqiːm fˈiː {},,2,ar-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,أنا هنا للعمل,,anā hunā lil-ʿamal,ˈana hˈunaː llʕml,,2,ar-agent-v1;ipa=espeak

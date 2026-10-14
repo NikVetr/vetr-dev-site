@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,ƙwayoyin hana suman tafiya,,kʼwajoji
 pharmacy-symptoms.i-have-a-cut,Na samu yanke,,na samu janke,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.antacid,maganin ƙunar ciki,,maɡanin kʼunar tʃiki,medicine for stomach-burn,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.i-have-a-burn,Na samu ƙuna,,na samu kʼuna,,2,ha-agent-v1;ipa=ha-g2p
-pharmacy-symptoms.it-started-days-ago,Ya fara kwana {} da suka wuce,,ja fara kwana {} da suka wutʃe,,2,ha-agent-v1;ipa=ha-g2p
+pharmacy-symptoms.it-started-days-ago,Adadin kwanaki tun da ya fara: {},,adadin kwanaki tun da ja fara {},"number-of days since it-started: {} -- a label, so the number agrees with nothing",2,ha-agent-v1;fix=ha.wikipedia Mayu rev 718338 (Yana da adadin kwanaki 31);fix=ha.wikipedia Aruna Dindane rev 510913 (tun da ya fara buga wasa);fix=ha.wikipedia Mujitaba Mohammed Mallam rev 237811 (a shekarar da ta wuce -- one takes the singular) and Danny Lotz rev 818155 (kwanaki biyu da suka wuce);was=Ya fara kwana {} da suka wuce (the plural suka -- wrong for one);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Rashin jurewar magani: {});row-corrections-v14;ipa=ha-g2p
 pharmacy-symptoms.cough-medicine,maganin tari,,maɡanin tari,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.is-this-safe-during-pregnancy,Wannan yana da lafiya ga mai ciki?,,wannan jana da lafija ɡa mai tʃiki,safe for one who is pregnant,2,ha-agent-v1;ipa=ha-g2p
 body-parts.head,kai,,kai,,2,ha-agent-v1;ipa=ha-g2p

@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,tablety na cestovní nevolnost,,tˈabl
 pharmacy-symptoms.i-have-a-cut,Mám řeznou ránu,,maːm r̝ˈeznoʊ rˈaːnu,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,antacidum,,ˈantatsˌidum,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Mám popáleninu,,maːm pˈopaːlˌeɲinu,,2,cs-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Začalo to před {} dny,,zˈatʃalo tˈo pr̝et {} dnˈi,,2,cs-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Počet dnů od začátku: {},,pˈotʃed dnˈuː ˈodzatʃˌaːtku {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,cs-agent-v1;fix=Internetová jazyková příručka začátek (SSČ 1 doba -- kdy něco začíná: od začátku do konce) and den (7. pád jedn. dnem -- mn. dny -- 2. pád mn. dní -- dnů);was=Začalo to před {} dny (the instrumental plural -- wrong for one: před jedním dnem);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie na lék: {} and Počet nocí: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,lék proti kašli,,lˈeːk prˌoci kˈaʃli,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Je to bezpečné v těhotenství?,,je tˈo bˈespetʃneː v cˈehotˌenstviː,,2,cs-agent-v1;ipa=espeak
 body-parts.head,hlava,,hlˈava,,2,cs-agent-v1;ipa=espeak

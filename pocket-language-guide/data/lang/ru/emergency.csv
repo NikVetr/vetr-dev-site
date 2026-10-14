@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,таблетки от укачиван
 pharmacy-symptoms.i-have-a-cut,У меня порез.,,U menya porez.,ˈu mʲinʲˈɑ pʌrʲˈes,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,средство от изжоги,антацид,sredstvo ot izzhogi,srʲˈedstvʌ ot ɪʒʒˈoɡʲɪ,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,У меня ожог.,,U menya ozhog.,ˈu mʲinʲˈɑ ʌʒˈok,,2,ru-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Это началось {} дней назад.,,Eto nachalosʼ {} dney nazad.,ˈɛtʌ nʌtʃʲaɭˈosʲ {} dnʲˈej nazˈɑt,,2,ru-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Количество дней с начала: {},,Kolichestvo dney s nachala: {},kʌɭʲˈitʃʲistvʌ dnʲˈej s natʃʲˈɑɭa {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,ru-agent-v1;fix=ru.wikipedia Линия Молотова rev 149646665 (в первые десять дней с начала войны);fix=ru.wikipedia Множественное число rev 151903523 (числительные два -- три -- четыре ... требуют родительного падежа единственного числа);was=Это началось {} дней назад. (Eto nachalosʼ {} dney nazad.: the genitive plural -- right from five only: день -- дня);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Аллергия на лекарства: {} and Количество ночей: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,средство от кашля,,sredstvo ot kashlya,srʲˈedstvʌ ot kˈɑʃɭʲʌ,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Это можно при беременности?,,Eto mozhno pri beremennosti?,ˈɛtʌ mˈoʒnʌ prʲˈi bʲirʲˈemʲinnʌsʲtʲɪ,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,"Кажется, у меня малярия.",,,"kˈɑʒɨtsʌ, ˈu mʲinʲˈɑ mʌɭʲarʲˈija",,2,malaria-reader-v1;ipa=espeak

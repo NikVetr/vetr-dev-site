@@ -86,7 +86,7 @@ etiquette.what-is-customary,Ni desturi gani hapa?,,ni destˈuri ɡˈani hˈapa,,
 etiquette.keep-the-change,Chenji ni yako,,tʃˈeɲɟi ni jˈako,the change is yours,2,sw-agent-v1;ipa=espeak
 children.cannot-find-my-child,Simuoni mtoto wangu!,,sˌimuˈoni mtˈoto wˈaŋɡu,I do not see my child,2,sw-agent-v1;ipa=espeak
 children.make-an-announcement,Tafadhali tangaza kwa spika,,tˌafaðˈali taŋɡˈaza kwa spˈika,,2,sw-agent-v1;ipa=espeak
-children.child-age,Mtoto wangu ana miaka {},,mtˈoto wˈaŋɡu ˈana miˈaka {},,2,sw-agent-v1;ipa=espeak
+children.child-age,Umri wa mtoto wangu: {},,ˈumri wa mtˈoto wˈaŋɡu {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,sw-agent-v1;fix=sw.wikipedia Mfupa rev 1073305 (Katika umri wa mtoto);fix=sw.wikipedia Noni Jabavu rev 1122581 (Tangu umri wa miaka 13);fix=sw.wikipedia Ab urbe condita rev 1097043 (kwa mwaka mmoja -- one year is singular);was=Mtoto wangu ana miaka {} (miaka is the plural of mwaka -- wrong for one: mwaka mmoja);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Mzio wa dawa: {});row-corrections-v14;ipa=espeak
 children.high-chair,"Je, mna kiti cha juu cha mtoto?",,"ɟˈe, ˈm̩na kˈiti tʃa ɟˈuu tʃa mtˈoto",raised child's chair,2,sw-agent-v1;ipa=espeak
 children.baby-changing-room,Chumba cha kubadilisha nepi ni wapi?,,tʃˈumba tʃa kˌubadilˈiʃa nˈepi ni wˈapi,,2,sw-agent-v1;ipa=espeak
 children.childrens-menu,"Je, kuna menyu ya watoto?",,"ɟˈe, kˈuna mˈeɲu ja watˈoto",,2,sw-agent-v1;ipa=espeak

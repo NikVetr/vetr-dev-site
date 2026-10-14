@@ -87,7 +87,7 @@ etiquette.what-is-customary,Što je ovdje običaj?,,ʃto je ˈovdje obitʃaj,,2,
 etiquette.keep-the-change,"Zadržite ostatak, molim",,"zadrʒite ostatak, mˈolim",,2,hr-agent-v1;ipa=espeak
 children.cannot-find-my-child,Ne mogu naći svoje dijete,,nˈe mˈoɡu nˈatɕi svˈoje dijete,"'I cannot find my child' -- deliberately not izgubio sam dijete, which in Croatian as in English can be read as bereavement",2,hr-agent-v1;ipa=espeak
 children.make-an-announcement,Možete li to objaviti preko zvučnika?,,moʒete li tˈo objaviti prˈeko zvutʃnika,,2,hr-agent-v1;ipa=espeak
-children.child-age,Moje dijete ima {} godina,,mˈoje dijete ˈima {} ɡodina,"two to four years take godine rather than godina, so the frame is right from five up",2,hr-agent-v1;ipa=espeak
+children.child-age,Dob mog djeteta: {},,dˈob mˈoɡ djeteta {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=Hrvatski jezični portal dob (razdoblje u ljudskom životu);fix=hr.wikipedia Dojenje rev 7576467 (gestacijsku dob -- dob djeteta -- dob majke);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Moje dijete ima {} godina (right from five -- wrong for one: godinu -- and two to four: godine);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
 children.high-chair,Imate li dječju stolicu za hranjenje?,,imate li djˈetʃju stolitsu zˈa xraɲeɲe,,2,hr-agent-v1;ipa=espeak
 children.baby-changing-room,Gdje je prostor za promjenu pelena?,,ɡdjˈe je prˈostor zˈa promjenu pelena,,2,hr-agent-v1;ipa=espeak
 children.childrens-menu,Imate li dječji meni?,,imate li djˈetʃji mˈeni,,2,hr-agent-v1;ipa=espeak

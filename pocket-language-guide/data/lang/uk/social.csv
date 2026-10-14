@@ -86,7 +86,7 @@ etiquette.what-is-customary,Як тут прийнято?,,Yak tut pryiniato?,j�
 etiquette.keep-the-change,Решти не треба.,,Reshty ne treba.,rˈɛʃtɪ nˈɛ trˈɛba,,2,uk-agent-v1;ipa=espeak
 children.cannot-find-my-child,Я не можу знайти свою дитину.,,Ya ne mozhu znaity svoiu dytynu.,jˈa nˈɛ mˈoʒu znˈajtɪ zʋˈoju dɪtˈɪnu,,2,uk-agent-v1;ipa=espeak
 children.make-an-announcement,"Зробіть оголошення, будь ласка.",,"Zrobit oholoshennia, bud laska.","zrˈobiːt oholˈoʃɛnɲa, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
-children.child-age,Моїй дитині {} років.,,Moii dytyni {} rokiv.,mˈojiːj dɪtˈɪɲiː {} rˈokiːʋ,,2,uk-agent-v1;ipa=espeak
+children.child-age,Вік моєї дитини: {},,Vik moiei dytyny: {},ʋˈiːk mojˈɛjiː dɪtˈɪnɪ {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,uk-agent-v1;fix=СУМ-11 ВІК 1 (Тривалість життя людини ... // Період -- ступінь у рості -- розвитку людини -- літа) read on slovnyk.ua;fix=uk.wikipedia Резистентність (біологія) rev 48201462 (Вік дитини (у роках));fix=uk.wikipedia Числівник rev 48957764 (два слова -- три жінки ... п'ять слуг);was=Моїй дитині {} років. (Moii dytyni {} rokiv.: the genitive plural -- wrong for one: рік -- and two to four: роки);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Алергія на ліки: {} and Кількість ночей: {});row-corrections-v14;ipa=espeak
 children.high-chair,Є дитячий стільчик?,,Ye dytiachyi stilchyk?,jˈɛ dɪtjˈatʃɪj stiːʎtʃˈɪk,,2,uk-agent-v1;ipa=espeak
 children.baby-changing-room,Де кімната матері і дитини?,Де пеленальна кімната?,De kimnata materi i dytyny?,dˈɛ kiːmnˈata matˈɛriː ˈiː dɪtˈɪnɪ,,2,uk-agent-v1;ipa=espeak
 children.childrens-menu,Є дитяче меню?,,Ye dytiache meniu?,jˈɛ dɪtjˈatʃɛ mˈɛɲu,,2,uk-agent-v1;ipa=espeak

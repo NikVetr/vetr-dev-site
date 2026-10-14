@@ -77,7 +77,7 @@ pharmacy-symptoms.motion-sickness-tablets,प्रवासातील मळ�
 pharmacy-symptoms.i-have-a-cut,मला कापले आहे,,malā kāpalē āhē,mˈʌlaː kˈaːplˌeː ˈaːheː,impersonal idiom,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,अँटासिड,,am̐ṭāsiḍa,ʌnʈˈaːsɪɖ,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,मला भाजले आहे,,malā bhājalē āhē,mˈʌlaː bʰˈaːzlˌeː ˈaːheː,impersonal idiom,2,mr-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,हे {} दिवसांपूर्वी सुरू झाले,,hē {} divasāṁpūrvī surū jhālē,hˈeː {} dˌɪvsãpˈuːrvi sˈʊɾuː ɟʰˈaːleː,,2,mr-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,सुरू झाल्यापासून गेलेल्या दिवसांची संख्या: {},,surū jhālyāpāsūna gēlēlyā divasāṁcī saṁkhyā: {},sˈʊɾuː ɟʰˈaːljaːpˌaːsuːn ɡeːlˈeːljaː dˌɪvsˈãci sˈʌŋkʰjaː {},number of days passed since it began: {},2,mr-agent-v1;fix=mr.wikipedia मित्रो बाहिनी rev 2103227 (युद्ध सुरू झाल्यापासून फक्त १३ दिवसांतच);fix=mr.wikipedia चंद्र rev 2719809 (नव्या चंद्रानंतर गेलेल्या दिवसांची संख्या);fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 150 संख्या (f. number);was=हे {} दिवसांपूर्वी सुरू झाले (hē {} divasāṁpūrvī surū jhālē: the oblique plural -- wrong for one: एका दिवसापूर्वी);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames औषधाची ऍलर्जी: {} and रात्रींची संख्या: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,खोकल्याचे औषध,,khōkalyācē auṣadha,kʰˌoːkljˈaːceː ˈaʊʂədʰ,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,गरोदरपणात हे सुरक्षित आहे का?,,garōdarapaṇāta hē surakṣita āhē kā?,ɡˌəɾoːdˌəɾəpɳˈaːt hˈeː sʊɾˈʌkʃɪt ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 body-parts.head,डोके,,ḍōkē,ɖˈoːkeː,,2,mr-agent-v1;ipa=espeak

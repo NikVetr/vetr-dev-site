@@ -150,13 +150,13 @@ time-words.yesterday,YAIR,hier
 days-of-week.wednesday,mair-kruh-DEE,mercredi
 months.march,MARSS,mars
 sim-data.how-much-data-is-included,kohm-byehn duh doh-nay sohn tehn-KLEWZ,Combien de données sont incluses ?
-children.child-age,mohn nahn-fahn AH {} ahn,Mon enfant a {} ans
+children.child-age,ahzh duh mohn nahn-FAHN : {},Âge de mon enfant : {}
 etiquette.is-service-included,luh sair-vees eh-teel kohm-PREE,Le service est-il compris ?
 social-basics.good-morning,bohn-ZHOOR,Bonjour
 communication.do-you-speak-english,par-lay voo zahn-GLEH,Parlez-vous {source} ?
 phone-translation.one-sentence-at-a-time-please,ewn frahz ah lah FWAH seel voo PLEH,"Une phrase à la fois, s'il vous plaît"
 phone-text-power.please-use-simple-words,ahm-plwah-yay day moh SEHM-pluh,Employez des mots simples
-border-customs.i-am-staying-for-days,zhuh REST {} zhoor,Je reste {} jours
+border-customs.i-am-staying-for-days,dew-ray dew say-ZHOOR (ZHOOR) : {},Durée du séjour (jours) : {}
 directions.is-it-far,say LWEHN,C'est loin ?
 quick-directions.turn-right,toor-nay ah DRWAT,Tournez à droite
 taxi.we-need-the-east-gate-not-the-south-gate,"noo voo-lohn lah port EST, pah lah port SEWD","Nous voulons la porte est, pas la porte sud"
@@ -647,7 +647,7 @@ pharmacy-symptoms.motion-sickness-tablets,kohm-pree-may kohn-truh luh mal day tr
 pharmacy-symptoms.i-have-a-cut,zhay ewn koo-PEWR,J'ai une coupure
 pharmacy-symptoms.antacid,ahn-tee-ah-SEED,antiacide
 pharmacy-symptoms.i-have-a-burn,zhay ewn brew-LEWR,J'ai une brûlure
-pharmacy-symptoms.it-started-days-ago,sah ah koh-mahn-say eel yah {} ZHOOR,Ça a commencé il y a {} jours
+pharmacy-symptoms.it-started-days-ago,nohm-bruh duh zhoor duh-pwee luh day-BEW : {},Nombre de jours depuis le début : {}
 pharmacy-symptoms.cough-medicine,see-roh kohn-truh lah TOO,sirop contre la toux
 pharmacy-symptoms.is-this-safe-during-pregnancy,ess suh sahn dahn-zhay pahn-dahn lah groh-SESS,Est-ce sans danger pendant la grossesse ?
 tax-refund.is-tax-free-shopping-available,fet voo lah day-TAKS,Faites-vous la détaxe ?

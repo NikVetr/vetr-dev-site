@@ -75,7 +75,7 @@ pharmacy-symptoms.motion-sickness-tablets,таблетки від укачува
 pharmacy-symptoms.i-have-a-cut,У мене поріз.,,U mene poriz.,ˈu mˈɛnɛ pˈoriːz,,2,uk-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,засіб від печії,антацид,zasib vid pechii,zˈasiːb ʋˈiːt pɛtʃˈiːjiː,,2,uk-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,У мене опік.,,U mene opik.,ˈu mˈɛnɛ opˈiːk,,2,uk-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Це почалося {} днів тому.,,Tse pochalosia {} dniv tomu.,tsˈɛ potʃˈalosja {} dɲˈiːf tomˈu,,2,uk-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Кількість днів від початку: {},,Kilkist dniv vid pochatku: {},kˈiːʎkiːst dɲˈiːʋ ʋˈiːt potʃˈatku {},"'number of days since the start: {}' -- a label, so the number agrees with nothing",2,uk-agent-v1;fix=uk.wikipedia Зоряна дата rev 48009536 (кількість днів від початку календаря);fix=uk.wikipedia Числівник rev 48957764 (два слова -- три жінки ... п'ять слуг);was=Це почалося {} днів тому. (Tse pochalosia {} dniv tomu.: the genitive plural -- right from five only: день -- дні);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Алергія на ліки: {} and Кількість ночей: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,засіб від кашлю,,zasib vid kashliu,zˈasiːb ʋˈiːt kˈaʃʎu,,2,uk-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Це можна при вагітності?,,Tse mozhna pry vahitnosti?,tsˈɛ mˈoʒna prˈɪ ʋahiːtnˈostiː,,2,uk-agent-v1;ipa=espeak
 body-parts.head,голова,,holova,holˈoʋa,,2,uk-agent-v1;ipa=espeak

@@ -146,7 +146,7 @@ payment-receipt.pay-by-qr-code,PWEH-doh pah-GAR kon KO-dee-go koo-EH-reh,¿Puedo
 shopping.that-is-too-expensive,es deh-mah-see-AH-doh KAH-ro,Es demasiado caro
 color-size-returns.may-i-try-it-on,meh lo PWEH-doh pro-BAR,¿Me lo puedo probar?
 sim-data.how-much-data-is-included,KWAN-tos DAH-tos een-KLOO-yeh,¿Cuántos datos incluye?
-children.child-age,mee EE-ho tee-EH-neh {} AH-nyos,Mi hijo tiene {} años
+children.child-age,eh-DAD deh mee EE-ho: {},Edad de mi hijo: {}
 etiquette.is-service-included,el ser-VEE-see-oh es-TA een-kloo-EE-doh,¿El servicio está incluido?
 social-basics.good-morning,BWEH-nos DEE-as,Buenos días
 communication.do-you-speak-english,AH-bla een-GLES,¿Habla {source}?
@@ -157,7 +157,7 @@ time-scheduling.what-time-should-we-meet,a keh O-ra nos VEH-mos,¿A qué hora no
 time-words.yesterday,ah-YER,ayer
 days-of-week.wednesday,mee-ER-ko-les,miércoles
 months.march,MAR-so,marzo
-border-customs.i-am-staying-for-days,meh KEH-doh {} DEE-as,Me quedo {} días
+border-customs.i-am-staying-for-days,doo-rah-see-ON deh la es-TAN-see-ah (DEE-as): {},Duración de la estancia (días): {}
 directions.is-it-far,es-TA LEH-hos,¿Está lejos?
 quick-directions.turn-right,HEE-reh a la deh-REH-cha,Gire a la derecha
 taxi.we-need-the-east-gate-not-the-south-gate,"neh-seh-see-TAH-mos la PWER-ta ES-teh, no la PWER-ta soor","Necesitamos la puerta este, no la puerta sur"
@@ -397,7 +397,7 @@ quick-directions.across-from-here,en-FREN-teh,Enfrente
 transit-rides.is-it-delayed,va kon reh-TRAH-so,¿Va con retraso?
 rail-station-words.train-number,NOO-meh-ro deh tren,número de tren
 common-signs.no-photography,pro-ee-BEE-doh ah-SER FOH-tos,Prohibido hacer fotos
-utility-templates.is-there-nearby,eye oon {} SER-ka,¿Hay un {} cerca?
+utility-templates.is-there-nearby,eye {} SER-ka,¿Hay {} cerca?
 toilets.it-is-urgent,es oor-HEN-teh,Es urgente
 accessibility.station-assistance,eye ah-sees-TEN-see-ah en la es-tah-see-ON,¿Hay asistencia en la estación?
 pronouns-verbs.your-yours,soo / SOO-yo,su / suyo
@@ -647,7 +647,7 @@ pharmacy-symptoms.motion-sickness-tablets,pas-TEE-yas PAH-ra el mah-REH-oh,pasti
 pharmacy-symptoms.i-have-a-cut,TEN-go oon KOR-teh,Tengo un corte
 pharmacy-symptoms.antacid,oon an-tee-AH-see-doh,un antiácido
 pharmacy-symptoms.i-have-a-burn,TEN-go OO-na keh-mah-DOO-ra,Tengo una quemadura
-pharmacy-symptoms.it-started-days-ago,em-peh-SO AH-seh {} DEE-as,Empezó hace {} días
+pharmacy-symptoms.it-started-days-ago,DEE-as DES-deh keh em-peh-SO: {},Días desde que empezó: {}
 pharmacy-symptoms.cough-medicine,hah-RAH-beh PAH-ra la tos,jarabe para la tos
 pharmacy-symptoms.is-this-safe-during-pregnancy,es seh-GOO-ro en el em-bah-RAH-so,¿Es seguro en el embarazo?
 trail-transport.how-long-is-the-wait,KWAN-toh eye keh es-peh-RAR,¿Cuánto hay que esperar?
@@ -725,7 +725,7 @@ emergency-medical.this-person-is-unconscious,ES-ta per-SO-na es-TA een-kon-see-E
 lost-rescue.i-lost-my-bag,per-DEE mee BOL-so,Perdí mi bolso
 food-ordering.can-a-vegetarian-eat-this,oon veh-heh-tah-ree-AH-no PWEH-deh ko-MER ES-to,¿Un vegetariano puede comer esto?
 hotel-basics.is-there-air-conditioning,eye AY-reh ah-kon-dee-see-oh-NAH-doh,¿Hay aire acondicionado?
-hotel-requests.wake-up-call,"des-pee-ER-teh-meh a las {}, por fah-VOR","Despiérteme a las {}, por favor"
+hotel-requests.wake-up-call,"des-pee-ER-teh-meh, por fah-VOR. O-ra: {}","Despiérteme, por favor. Hora: {}"
 payment-receipt.the-bill-is-wrong,KREH-oh keh la KWEN-ta es-TA mal,Creo que la cuenta está mal
 shopping.two-of-these,"dos deh ES-tos, por fah-VOR","Dos de estos, por favor"
 social-basics.okay-fine-i-am-okay,es-TOY bee-EN,Estoy bien

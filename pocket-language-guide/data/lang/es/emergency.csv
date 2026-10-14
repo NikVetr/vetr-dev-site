@@ -95,7 +95,7 @@ pharmacy-symptoms.motion-sickness-tablets,pastillas para el mareo,,pastˈiʝas p
 pharmacy-symptoms.i-have-a-cut,Tengo un corte,,tˈeŋɡo ˈun kˈoɾte,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,un antiácido,,ˈun antjˈasido,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Tengo una quemadura,,tˈeŋɡo ˈuna kˌemadˈuɾa,,2,es-agent-v1;ipa=espeak
-pharmacy-symptoms.it-started-days-ago,Empezó hace {} días,,ˌempesˈo ˈase {} dˈias,,2,es-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Días desde que empezó: {},,dˈias dˌesde ke ˌempesˈo {},"'days since it began: {}' -- a label, so the number agrees with nothing",2,es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) desde (Indica el punto -- procedencia u origen en el tiempo y en el espacio: lo esperaba desde ayer);was=Empezó hace {} días (the plural -- wrong for one: un día);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noches: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,jarabe para la tos,,xaɾˈabe pˌaɾa la tˈos,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,¿Es seguro en el embarazo?,,ˈes seɡˈuɾo en el ˌembaɾˈaso,,2,es-agent-v1;ipa=espeak
 emergency-medical.help,¡Auxilio!,¡Socorro!,aʊksˈiljo,,2,es-agent-v1;ipa=espeak

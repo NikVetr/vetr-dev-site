@@ -86,7 +86,7 @@ etiquette.what-is-customary,Как здесь принято?,,Kak zdesʼ prinya
 etiquette.keep-the-change,Сдачи не надо.,,Sdachi ne nado.,zdˈɑtʃʲɪ nʲe nˈɑdʌ,,2,ru-agent-v1;ipa=espeak
 children.cannot-find-my-child,Я не могу найти ребёнка.,,Ya ne mogu nayti rebënka.,ˈja nʲe mʌɡˌu najtʲˈi rʲibʲˈɵnka,,2,ru-agent-v1;ipa=espeak
 children.make-an-announcement,"Сделайте объявление, пожалуйста.",,"Sdelayte obˮyavleniye, pozhaluysta.","ʑdʲˈeɭʌjtʲi ʌbjjavɭʲˈenʲijɪ, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-children.child-age,Моему ребёнку {} лет.,,Moyemu rebënku {} let.,mʌjˈemu rʲibʲˈɵnku {} ɭʲˈet,,2,ru-agent-v1;ipa=espeak
+children.child-age,Возраст моего ребёнка: {},,Vozrast moyego rebënka: {},vˈozrʌst mʌjivˈo rʲibʲˈɵnka {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,ru-agent-v1;fix=ru.wikipedia Аннапрашана rev 110053954 (когда возраст ребёнка достигает шести месяцев);fix=ru.wikipedia Множественное число rev 151903523 (числительные два -- три -- четыре ... требуют родительного падежа единственного числа);was=Моему ребёнку {} лет. (Moyemu rebënku {} let.: the genitive plural -- wrong for one: год -- and two to four: года);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Аллергия на лекарства: {} and Количество ночей: {});row-corrections-v14;ipa=espeak
 children.high-chair,Есть детский стульчик?,,Yestʼ detskiy stulʼchik?,jestʲ dʲˈetskʲij stˈuɭtʃʲik,,2,ru-agent-v1;ipa=espeak
 children.baby-changing-room,Где комната матери и ребёнка?,Где пеленальная комната?,Gde komnata materi i rebënka?,ɡdʲˈe kˈomnʌta mˈɑtʲirʲɪ ˈi rʲibʲˈɵnka,,2,ru-agent-v1;ipa=espeak
 children.childrens-menu,Есть детское меню?,,Yestʼ detskoye menyu?,jestʲ dʲˈetskʌjɪ mʲinʲˈʉ,,2,ru-agent-v1;ipa=espeak

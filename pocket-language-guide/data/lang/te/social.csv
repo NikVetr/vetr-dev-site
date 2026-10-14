@@ -86,7 +86,7 @@ etiquette.what-is-customary,ఇక్కడ ఆచారం ఏమిటి?,,ik
 etiquette.keep-the-change,చిల్లర ఉంచుకోండి,,cillara uṁcukōṁḍi,tʃillara uɲtʃukoːɳɖi,,2,te-agent-v1;ipa=espeak
 children.cannot-find-my-child,నా బిడ్డ కనిపించడం లేదు,,nā biḍḍa kanipiṁcaḍaṁ lēdu,naː biɖɖa kanipiɲtʃaɖam leːdu,my child is not to be seen -- not a word for bereavement,2,te-agent-v1;ipa=espeak
 children.make-an-announcement,ప్రకటన చేయండి,అనౌన్స్ చేయండి,prakaṭana cēyaṁḍi,prakaʈana tʃeːjaɳɖi,,2,te-agent-v1;ipa=espeak
-children.child-age,నా బిడ్డకు {} ఏళ్ళు,,nā biḍḍaku {} ēḷḷu,naː biɖɖaku {} eːɭɭu,,2,te-agent-v1;ipa=espeak
+children.child-age,నా బిడ్డ వయస్సు: {},,nā biḍḍa vayassu: {},naː biɖɖa ʋajassu {},my child's age: {},2,te-agent-v1;fix=Gwynn A Telugu-English Dictionary (DSAL) p. 472 వయసు -- వయస్సు (n. 1 age -- atani ~ enta? how old is he?);was=నా బిడ్డకు {} ఏళ్ళు (nā biḍḍaku {} ēḷḷu: the plural -- wrong for one);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames మందు అలర్జీ: {} and రాత్రుల సంఖ్య: {});row-corrections-v14;ipa=espeak
 children.high-chair,పిల్లల కుర్చీ ఉందా?,,pillala kurcī uṁdā?,pillala kurtʃiː undaː,,2,te-agent-v1;ipa=espeak
 children.baby-changing-room,బేబీ ఛేంజింగ్ రూమ్ ఎక్కడ ఉంది?,,bēbī chēṁjiṁg rūm ekkaḍa uṁdi?,beːbiː tʃʰeːɲdʒiŋɡ ruːm ekkaɖa undi,,2,te-agent-v1;ipa=espeak
 children.childrens-menu,పిల్లల మెనూ ఉందా?,,pillala menū uṁdā?,pillala menuː undaː,,2,te-agent-v1;ipa=espeak

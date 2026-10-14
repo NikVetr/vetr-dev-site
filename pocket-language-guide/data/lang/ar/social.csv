@@ -6,7 +6,7 @@ sim-data.may-i-use-your-wifi,هل يمكنني استخدام الواي فاي�
 children.make-an-announcement,أرجو الإعلان في مكبّر الصوت,,arjū al-iʿlān fī mukabbir al-ṣawt,ʔrdʒˈuː ʔalʔˈiʕlaːn fˈiː mkbːr ʔas̪s̪ˈawt,,2,ar-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,هل البقشيش متوقع؟,هل الإكرامية معتادة؟,hal al-baqshīsh mutawaqqaʿ?,hˈal ʔalbˈaqʃiːʃ mutˈawaqːˌaʕ,,2,ar-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,كم حجم البيانات؟,كم جيجا؟,kam ḥajm al-bayānāt?,kˈam ħˈadʒm ʔalbiːˌaːnaːt,,2,ar-agent-v1;ipa=espeak
-children.child-age,عمر طفلي {} سنوات,,ʿumr ṭiflī {} sanawāt,ʕˈumr t̪ˈafliːj {} snuːˌaːt,,2,ar-agent-v1;ipa=espeak
+children.child-age,عمر طفلي: {},,ʿumr ṭiflī: {},ʕˈumr t̪ˈafliːj {},my child's age: {},2,ar-agent-v1;fix=ar.wikipedia التعليم في أيرلندا الشمالية rev 68307904 (ويحدد عمر الطفل في الأول من يوليو);fix=ar.wikipedia العدد والمعدود rev 76218556 (تمييز الأعداد من 11 إلى 99 مفرد منصوب);was=عمر طفلي {} سنوات (ʿumr ṭiflī {} sanawāt: the plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames حساسية دوائية: {} and عدد الليالي: {});row-corrections-v14;ipa=espeak
 etiquette.is-service-included,هل الخدمة مشمولة؟,,hal al-khidmah mashmūlah?,hˈal ʔalxˈidma mʃmˈuːlt,,2,ar-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,هل تحتاج جواز سفري؟,,hal taḥtāj jawāz safarī?,hˈal tħtˈaːdʒ dʒˈawaːz sˈafaɹˌiːj,,2,ar-agent-v1;ipa=espeak
 children.high-chair,هل لديكم كرسي أطفال؟,,hal ladaykum kursī aṭfāl?,hˈal ldiːkm kˈursiːj ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak

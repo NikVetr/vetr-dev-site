@@ -150,7 +150,7 @@ phone-translation.one-sentence-at-a-time-please,"OO-mah FRAH-zuh duh KAH-dah VES
 phone-text-power.please-use-simple-words,"OO-zuh pah-LAH-vrahsh SEENG-plish, poor fah-VOR","Use palavras simples, por favor"
 sim-data.how-much-data-is-included,KWANG-toosh DAH-doosh shtowng eeng-KLWEE-doosh,Quantos dados estão incluídos?
 etiquette.is-service-included,oo ser-VEE-soo shtah eeng-KLWEE-doo,O serviço está incluído?
-children.child-age,oo MEH-oo FEE-lyoo teng {} AH-noosh,O meu filho tem {} anos
+children.child-age,ee-DAH-duh doo MEH-oo FEE-lyoo: {},Idade do meu filho: {}
 time-scheduling.what-time-should-we-meet,ah kee OH-rahsh noosh eng-kong-TRAH-moosh,A que horas nos encontramos?
 time-words.yesterday,ONG-teng,ontem
 days-of-week.wednesday,KWAR-tah-FAY-rah,quarta-feira
@@ -160,7 +160,7 @@ quick-directions.turn-right,VEE-ruh ah dee-RAY-tah,Vire à direita
 taxi.we-need-the-east-gate-not-the-south-gate,"kuh-REH-moosh ah POR-tah LESH-tuh, nowng ah POR-tah SOOL","Queremos a Porta Leste, não a Porta Sul"
 transit-rides.does-this-bus-train-go-to,ESH-tuh ow-too-KAH-hoo oh kong-BOY-oo VY PAH-rah {},Este autocarro ou comboio vai para {}?
 place-words.railway-station,ah shtah-SOWNG duh kong-BOY-oosh,a estação de comboios
-border-customs.i-am-staying-for-days,FEE-koo {} DEE-ahsh,Fico {} dias
+border-customs.i-am-staying-for-days,doo-ruh-SOWNG dah sh-TAH-dah (DEE-ahsh): {},Duração da estada (dias): {}
 pickup-meeting.please-pick-us-up-here,VEH-nyah boosh-KAR-noosh ah-KEE,Venha buscar-nos aqui
 rail-station-words.transfer,oo trangzh-BOR-doo,o transbordo
 common-signs.occupied,oh-koo-PAH-doo,Ocupado
@@ -646,7 +646,7 @@ pharmacy-symptoms.motion-sickness-tablets,kong-pree-MEE-doosh PAH-rah oo eng-ZHO
 pharmacy-symptoms.i-have-a-cut,TEH-nyoo oong KOR-tuh,Tenho um corte
 pharmacy-symptoms.antacid,ang-tee-AH-see-doo,antiácido
 pharmacy-symptoms.i-have-a-burn,TEH-nyoo OO-mah kay-mah-DOO-rah,Tenho uma queimadura
-pharmacy-symptoms.it-started-days-ago,koo-muh-SOH ah {} DEE-ahsh,Começou há {} dias
+pharmacy-symptoms.it-started-days-ago,DEE-ahsh DEZH-duh oo ee-NEE-syoo: {},Dias desde o início: {}
 pharmacy-symptoms.cough-medicine,shah-ROH-puh PAH-rah ah TOH-suh,xarope para a tosse
 pharmacy-symptoms.is-this-safe-during-pregnancy,POH-soo too-MAR EESH-too nah grah-vee-DESH,Posso tomar isto na gravidez?
 trail-transport.how-long-is-the-wait,KWANG-too TENG-poo suh shPEH-rah,Quanto tempo se espera?
@@ -723,7 +723,7 @@ emergency-medical.this-person-is-unconscious,ESH-tah puh-SOH-ah shtah eeng-kong-
 lost-rescue.i-lost-my-bag,per-DEE ah MEE-nyah MAH-lah,Perdi a minha mala
 food-ordering.can-a-vegetarian-eat-this,oong vuh-zhuh-tah-RYAH-noo POH-duh koo-MER EESH-too,Um vegetariano pode comer isto?
 hotel-basics.is-there-air-conditioning,ah AR kong-dee-syoo-NAH-doo,Há ar condicionado?
-hotel-requests.wake-up-call,"ah-KOR-duh-muh ahzh {}, poor fah-VOR","Acorde-me às {}, por favor"
+hotel-requests.wake-up-call,"ah-KOR-duh-muh, poor fah-VOR. OH-rah: {}","Acorde-me, por favor. Hora: {}"
 payment-receipt.the-bill-is-wrong,AH-shoo kuh ah KONG-tah shtah ee-HAH-dah,Acho que a conta está errada
 shopping.two-of-these,"DOYZH DESH-tish, poor fah-VOR","Dois destes, por favor"
 social-basics.okay-fine-i-am-okay,shtoh BENG,Estou bem

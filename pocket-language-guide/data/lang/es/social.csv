@@ -6,7 +6,7 @@ sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,me peɾmˈite usˈaɾ s
 children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,"abˈise poɾ el ˌaltabˈos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,¿Se acostumbra dejar propina?,,se ˌakostˈumbɾa dexˈaɾ pɾopˈina,,2,es-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,¿Cuántos datos incluye?,,kwˈantos dˈatos inklˈuʝe,,2,es-agent-v1;ipa=espeak
-children.child-age,Mi hijo tiene {} años,,mi ˈixo tjˈene {} ˈaɲos,,2,es-agent-v1;src=RAE-DLE;ipa=espeak
+children.child-age,Edad de mi hijo: {},,edˈad de mi ˈixo {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,es-agent-v1;src=RAE-DLE;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) edad (Tiempo de existencia desde el nacimiento: tiene más edad de la que aparenta);was=Mi hijo tiene {} años (the plural -- wrong for one: un año);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia a medicamentos: {} and Número de noches: {});row-corrections-v14;ipa=espeak
 etiquette.is-service-included,¿El servicio está incluido?,,el seɾbˈisjo estˈa ˌinkluˈido,,2,es-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,¿Necesita mi pasaporte?,,nˌesesˈita mi pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
 children.high-chair,¿Tienen silla alta para niños?,trona · periquera,tjˈenen sˈiʝa ˈalta pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak

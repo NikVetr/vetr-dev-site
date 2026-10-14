@@ -45,7 +45,7 @@ hotel-requests.can-i-check-in-early,Posso fare il check-in prima?,,pˈɔsso fˈa
 hotel-requests.another-night,Posso restare un'altra notte?,,pˈɔsso restˈare ʊnˈaltra nˈɔtte,,2,it-agent-v1;ipa=espeak
 hotel-requests.is-there-a-safe,C'è una cassaforte?,,tʃe ˌʊna kassafˈɔrte,,2,it-agent-v1;ipa=espeak
 hotel-requests.another-blanket,"Un'altra coperta, per favore",,"ʊnˈaltra kopˈɛrta, per favˈore",,2,it-agent-v1;ipa=espeak
-hotel-requests.wake-up-call,"Mi svegli alle {}, per favore",,"mɪ zvˈeʎɪ ˈalle {}, per favˈore",,2,it-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,"Mi svegli, per favore. Ora: {}",,"mɪ zvˈeʎɪ, per favˈore ˈora {}","'please wake me. Time: {}' -- a label, so the time agrees with nothing",2,"it-agent-v1;fix=Treccani Vocabolario ora 2 (la parola ora è per lo più taciuta: è l'una -- sono le due -- le diciotto ... per l'una e la mezza);was=Mi svegli alle {}, per favore (alle is a + le -- wrong for one o'clock: all'una);rule=the request and then a label whose filler agrees with nothing -- the shape of the Greek pack's Παρακαλώ ξυπνήστε με. Ώρα: {} and the Turkish Uyandırma saati: {} (the pack's frame Allergia ai farmaci: {});row-corrections-v14;ipa=espeak"
 room-problems.the-key-does-not-work,La chiave non funziona,La tessera non funziona,la kjˈave non fʊntsiˈona,,2,it-agent-v1;ipa=espeak
 room-problems.the-toilet-will-not-flush,Lo sciacquone non funziona,,lo ʃakkwˈone non fʊntsiˈona,,2,it-agent-v1;ipa=espeak
 room-problems.the-light-does-not-work,La luce non funziona,,la lˈutʃe non fʊntsiˈona,,2,it-agent-v1;ipa=espeak

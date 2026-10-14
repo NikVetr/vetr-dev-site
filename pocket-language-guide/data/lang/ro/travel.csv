@@ -56,7 +56,7 @@ place-words.luggage-storage,depozit de bagaje,,depˈozit de baɡˈaʒe,,2,ro-age
 place-words.tourist-spot-sightseeing-area,obiectiv turistic / zonă turistică,,ˌobjektˈiv tuɾˈistik / zˈonə tˌuɾistˈikə,,2,ro-agent-v1;ipa=espeak
 border-customs.i-am-a-tourist,Sunt în vizită turistică,,sunt ɨn vˈizitˌə tˌuɾistˈikə,,2,ro-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Poftiți pașaportul meu,,poftˈitsʲ pˌaʃapˈortul mˈeu,,2,ro-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Rămân {} zile,,rəmˈɨn {} zˈile,,2,ro-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Durata șederii (zile): {},,duɾˈata ʃˈedeɾˌiɪ zˈile {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,ro-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Romanian text read through the Publications Office's cellar) field 25 (Durata șederii sau a tranzitului preconizat -- Specificați numărul de zile);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni -- from twenty a numeral takes de);was=Rămân {} zile (the plural -- wrong for one: o zi -- and from twenty: 20 de zile);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie la medicamente: {} and Număr de nopți: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nimic de declarat,,nimˈik de dˌeklaɾˈat,,2,ro-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Stau la {},,stˈaʊ la {},,2,ro-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Sunt în interes de afaceri,,sunt ɨn ˌinteɾˈes de afˈatʃeɾʲ,,2,ro-agent-v1;ipa=espeak

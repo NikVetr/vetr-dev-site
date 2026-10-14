@@ -40,7 +40,7 @@ hotel-requests.can-i-check-in-early,¿Puedo hacer el check-in más temprano?,,pw
 hotel-requests.another-night,¿Puedo quedarme otra noche?,,pwˈedo kedˈaɾme ˈotɾa nˈotʃe,,2,es-agent-v1;ipa=espeak
 hotel-requests.is-there-a-safe,¿Hay caja fuerte?,,ˈaɪ kˈaxa fwˈeɾte,,2,es-agent-v1;ipa=espeak
 hotel-requests.another-blanket,"Otra manta, por favor",Otra cobija · frazada,"ˈotɾa mˈanta, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
-hotel-requests.wake-up-call,"Despiérteme a las {}, por favor",,"despjˈeɾteme a lˈas {}, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,"Despiérteme, por favor. Hora: {}",,"despjˈeɾteme, poɾ fabˈoɾ ˈoɾa {}","'please wake me. Time: {}' -- a label, so the time agrees with nothing",2,"es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) hora (Momento del día referido a una hora o fracción de hora);fix=es.wikipedia Crisóstomo Royo de Castellví rev 156435372 (Murió el 31 de julio de 1691 -- a la una de la madrugada);was=Despiérteme a las {}, por favor (a las -- wrong for one o'clock: a la una);rule=the request and then a label whose filler agrees with nothing -- the shape of the Greek pack's Παρακαλώ ξυπνήστε με. Ώρα: {} and the Turkish Uyandırma saati: {} (the pack's frame Alergia a medicamentos: {});row-corrections-v14;ipa=espeak"
 room-problems.there-is-a-problem-with-the-room,Hay un problema con la habitación,,ˈaɪ ˈum pɾoblˈema kon la ˌabitasjˈon,,2,es-agent-v1;ipa=espeak
 room-problems.the-air-conditioning-is-broken,El aire acondicionado no funciona,,el ˈaɪɾe ˌakondˌisjonˈado nˈo funsjˈona,,2,es-agent-v1;ipa=espeak
 room-problems.there-is-no-hot-water,No hay agua caliente,,nˈo ˈaɪ ˈaɡwa kaljˈente,,2,es-agent-v1;ipa=espeak
