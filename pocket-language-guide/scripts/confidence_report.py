@@ -70,13 +70,14 @@ def checked(code):
     """concept_id -> (verdict, reference text), from a cross-check where there is one.
 
     A disagreement its reader put down to the reference ("Reference wrong: ...") is no
-    mark against the row.
+    mark against the row. The text compared is kept beside each verdict, so a row
+    reworded since is read as unchecked rather than judged by its old wording.
     """
     path = ROOT / f"tmp/out/crosscheck/{code}.csv"
     if not path.exists():
         return {}
-    return {r["concept_id"]: ("" if r["reason"].startswith("Reference wrong") else r["verdict"], r["reference_text"])
-            for r in rows(path)}
+    return {r["concept_id"]: ("" if r["reason"].startswith("Reference wrong") else r["verdict"],
+                              r["reference_text"], r["app_text"]) for r in rows(path)}
 
 
 def score(code, english):
@@ -107,7 +108,9 @@ def score(code, english):
         if not r.get("ipa"):
             value -= 5
             reasons.append("no IPA")
-        verdict, said = reference.get(cid, ("", ""))
+        verdict, said, compared = reference.get(cid, ("", "", ""))
+        if compared != r["text"]:
+            verdict = ""
         if verdict == "agree":
             value += 10
         elif verdict == "disagree":
