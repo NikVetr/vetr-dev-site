@@ -5959,3 +5959,56 @@ PDF export, a backgrounded beacon stopping and a page kept across a trip to anot
 Still device checks: hands-free listening in WKWebView, Save Image in the iPhone share
 sheet, the translator apps, the torch, and how the register and key words read on a real
 screen.
+
+## Batch AJ — the two switches across the languages, a confidence score, a name's sounds in nineteen scripts, the mosaic, and three more correction passes
+
+**Whom a sentence is said to.** The register switch has familiar wordings in 37 languages:
+German, French, Spanish, Russian and Korean, then Italian, Portuguese, Turkish, Japanese,
+Hindi, Urdu, Ukrainian, Polish, Czech, Dutch, Greek, Romanian, Hungarian, Persian,
+Indonesian, Malay, Bengali, Vietnamese, Thai, Georgian, Armenian, Uzbek, Yoruba, and
+Marathi, Nepali, Gujarati, Punjabi, Tamil, Telugu, Kannada, Malayalam and Odia -- the
+familiar being the form for a friend of one's age, never an intimate or a rude one, and
+never on the emergency or pharmacy boards or on a reply. Amharic has none: every familiar
+form marks the listener's sex, and Amharic has no listener axis. A survey of 45 languages
+for requests that change with the listener's gender added Polish, Urdu and Gujarati to
+Arabic, Czech, Hausa, Hebrew and Punjabi. A variant key may combine every axis a language
+declares; a key finds a row written for any of its parts, the whole first, and the
+validator requires the combined row wherever a concept has rows on two axes, so which
+part is tried first never decides a wording.
+
+**A confidence score.** `scripts/confidence_report.py` scores every phrase row from 0 to
+100 from its recorded confidence, citation and correction history, less the patterns the
+correction passes kept finding behind real errors (a text shared with a concept glossed
+differently, a multi-word English text, no IPA), and moves it with a phrasebook
+cross-check against Wikivoyage where one has been read (14 languages; a verdict counts
+only while the row still says what was compared, and a disagreement put down to the
+reference counts for nothing). It writes a per-language audit list under
+`tmp/out/confidence/` for a fluent reader: triage, not a verdict, and nothing of it ships.
+
+**A typed name's sounds** are guessed in nineteen scripts (`data/registry/name-letters.csv`,
+about 2,700 rows): the Indic scripts read with their inherent vowel, Hangul by jamo, and
+the script a name is typed in detected from the name itself.
+
+**The mosaic.** The buttons can be a mosaic, each as wide as its words; a turned
+button's watermark is square so a turned grid still fits. The size pill names it in every
+catalogue, in words that say what it does where the language's word for mosaic is the
+blur that hides part of a picture.
+
+**Corrections.** Five more row-correction passes, the eleventh to the fifteenth. The
+open-for-business sign in 25 packs had written a machine running, and the closed sign in
+three a machine out of order; both concepts now carry a note saying which sign they are.
+Templates are worded for any filler, since only a name and a country are filled in by the
+app: 22 packs ask for the number of nights as a label (*Number of nights: {}*), and the
+length of stay, a child's age and how long ago a symptom started follow wherever a plural
+after the number was wrong for one, as does the wake-up call wherever one o'clock took
+another form. Thai men no longer say ฉัน; Yoruba asks a stranger in the honorific; *please
+go ahead* offers rather than asks in eight more packs; Italian *I need* agrees with any
+filler. Curated respellings record the wording they spell and the validator holds them to
+it, and a curated respelling is never shown under a speaker variant -- a woman's Spanish
+card had printed *Soy vegana* over *soy veh-GAH-no*.
+
+**IPA.** Lao's reader takes ແ…ວ as a final /w/ (BGN note 6, Kerr), which moved four phrase
+rows and four country names. French spelt a one-letter word ending a chunk -- *Je suis
+allergique à {}* said "a accent grave" on ten rows -- and Arabic read يوجد "there is" as
+bare consonants on twenty; both are repaired in the builder, with three more Arabic words
+and Swahili *tangu*, each measured as the whole of its occurrences.
