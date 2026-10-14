@@ -590,3 +590,59 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-12.md`. The l
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A thirteenth pass: what the twelfth pass and the cross-check saw beside their items
+
+Same rules as above, in two halves for two agents: items 1-3 write their notes to
+`tmp/notes/agents/row-corrections-13a.md`, items 4-7 to `row-corrections-13b.md`. The leads
+are in `tmp/notes/agents/row-corrections-12.md` ("Seen, not touched") and
+`tmp/out/crosscheck/<code>.csv`.
+
+1. **"For N nights" in fifteen more packs.** `hotel-basics.for-nights` puts a plural noun
+   after the slot, wrong for one night (the commonest stay) and in some for two to four: el
+   *Για {} νύχτες*, es *Por {} noches*, fr *Pour {} nuits*, it *Per {} notti*, nl *Voor {}
+   nachten*, pt *Para {} noites*, ro *Pentru {} nopți*, sv *I {} nätter.*, he *ל{} לילות*,
+   hr *Na {} noći*, pa *{} ਰਾਤਾਂ ਲਈ*, mr *{} रात्रींसाठी*, ta *{} இரவுகளுக்கு*, te *{}
+   రాత్రులకు*, ar *لمدة {} ليال* (the broken plural, right for three to ten only). Check
+   each against the language's grammar; where it fails for a number a traveller would
+   type, use the label form the twelfth pass gave Ukrainian, Czech, German and English
+   (*Number of nights: {}*), in the pack's own colon frame. Where it is right for every
+   number, leave it and say why.
+2. **Italian `utility-templates.i-need`** *Mi serve {}* agrees with a singular filler only
+   (*mi servono due biglietti*); *Ho bisogno di {}* takes either. Check it, and every other
+   template (`{}` row) of the it, es and pt packs whose verb agrees with its filler.
+3. **Portuguese `time-words.evening`** *o fim da tarde* ("the end of the afternoon"), with
+   *o serão* as its alternative: check it against the pack's dictionaries of record for the
+   word a speaker of the pack's variety uses for "evening" and the concept's other packs.
+4. **Machine-sense alternatives on the shop signs.** Turkish `common-signs.closed` keeps
+   *hizmet dışı* ("out of service") in `text_alt`, and Greek's `common-signs.open-operating`
+   and `common-signs.closed` keep *Λειτουργεί* / *Δεν λειτουργεί* ("working / not
+   working"): a machine's state, which the eleventh pass took out of the texts. Write
+   `common-signs.closed`'s `notes` in `data/concepts/travel.csv` to match open-operating's
+   (the closed sign on a shop, office or counter door; not a machine out of order, which is
+   `toilets.out-of-order`, and not `common-signs.temporarily-closed`), clear the
+   machine-sense alternatives, and check every pack's `common-signs.closed` text and
+   `text_alt` against the note.
+5. **`quick-responses.please-go-ahead`** has no concept note, and its rows read it two
+   ways: the offering *please* -- after you, here you are, go ahead (de *bitte*, ja *どうぞ*,
+   tr *Buyurun*, ar *تفضّل*) -- and narrower readings (hi *कहिए*, "say it"). Write its
+   `notes` in `data/concepts/social.csv` for the offering sense, and check every pack's row
+   against it. These two notes are the only concept cells this pass may touch.
+6. **Korean `social-basics.hello-polite`** *안녕하십니까* is the deferential *hasipsio* form of
+   announcements and formal address; `social-basics.hello` is *안녕하세요*. Check against
+   the National Institute of Korean Language's *표준 언어 예절* and the Standard Korean
+   Language Dictionary which a traveller should say to a stranger for the polite concept,
+   and change it only if the source says so.
+7. **Ten Yoruba rows off the boards** address the listener with the non-honorific *o / rẹ
+   / ọ́*, the case the twelfth pass fixed on the board requests: `accessibility.take-your-arm`,
+   `introductions.where-are-you-from`, `atm-cash.do-you-have-change`,
+   `phone-text-power.do-you-have-a-power-bank`, `sim-data.do-you-have-an-esim`,
+   `sim-data.do-you-need-my-passport`, `communication.i-do-not-understand-spoken`,
+   `communication.i-cannot-make-out-what-you-are-saying`,
+   `phone-translation.please-type-it-and-show-me` and `etiquette.photo-of-you`. Make each
+   honorific (*ẹ / yín*), with tones from the twelfth pass's sources; no `register=familiar`
+   rows, since the register switch acts on the boards only.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
