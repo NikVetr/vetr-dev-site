@@ -1390,6 +1390,14 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
    mode turns text and not images, so they are turned the same quarter by hand. */
 .board-main-turned .board-cell-mark, .board-stage-turned .board-cell-mark,
 .board-main-turned .board-cell-box { rotate: 90deg; }
+/* **Square while turned, so the turn leaves it inside its button.** As long as its
+   button and as wide, a mark turned a quarter stuck out of a long button's sides, which
+   the fit counts as the grid overflowing: a turned grid sized to its words was set at
+   the floor whatever its words. Square, at the button's shorter side, the turn moves
+   nothing, and the drawing is the size it was -- it is letterboxed to that side anyway. */
+.board-main-turned .board-cell-mark, .board-stage-turned .board-cell-mark {
+  inline-size: auto; block-size: auto; aspect-ratio: 1; max-inline-size: 74%; max-block-size: 74%;
+}
 .board-word { white-space: nowrap; }
 /* Laid out from the right, which is down the page for whoever has turned the phone. */
 .board-letters { display: inline-block; direction: rtl; }
