@@ -1655,11 +1655,19 @@ the explanation a section used to open with is behind a (?) at the end of its le
 (`helpTip`), opened inline under it. What the message screen shows is a grid of tiles over
 a small drawing of that screen whose parts come and go with the tiles; the buttons'
 behaviours stay sentences with a checkbox each, and the lines a button carries and what
-the eye shows are tiles again. The buttons' size is a choice too: all one size, each
-label as large as its own cell allows or -- ticked -- every label at the smallest of
-those; or sized to their words (`fitWords` in `ui/conversation-view.js`), every label at
-one size, the largest at which the whole grid still fits the screen, with the rows
-`auto` so each is as tall as its words need. **A button's key words are bold by
+the eye shows are tiles again. The buttons' size is a choice too, of three pills: all one
+size, each label as large as its own cell allows or -- ticked -- every label at the
+smallest of those; sized to their words (`fitWords` in `ui/conversation-view.js`), every
+label at one size, the largest at which the whole grid still fits the screen, with the
+rows `auto` so each is as tall as its words need; or a mosaic (`fitMosaic`), the buttons
+in their order wrapping into the rows of a flex box, a row of short ones beside a row
+with one long one. There each label is as wide as its words set in one, two or three
+lines, never narrower than its longest word -- in `em`, so the width follows every size
+`fitWords`' search tries -- and grows with its row to fill the screen; the line count
+that allows the largest type is kept, since a width that followed a label's whole
+length would hold every label to one line and leave the height unused. Turned, a
+button's watermark is a square at its shorter side, so the quarter turn keeps it inside
+its button and the overflow test sees only the words. **A button's key words are bold by
 default** -- *colder*, *stop*, *toilet* -- so the one that differs is found without
 reading the rest: `data/emphasis/<code>.csv` names them per concept, as exact
 substrings of that language's sentence (the validator fails one that is not there and
