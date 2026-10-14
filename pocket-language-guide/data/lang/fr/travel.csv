@@ -3,7 +3,7 @@ border-customs.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v
 border-customs.here-is-my-passport,Voici mon passeport,,vwasi mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Durée du séjour (jours) : {},,dyʁe dy seʒuʁ ʒˈuʁ {},"'length of stay (days): {}' -- a label, so the number agrees with nothing",2,fr-agent-v1;fix=Larousse durée 1 (Espace de temps -- période mesurable pendant lequel a lieu un événement);fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the French text read through the Publications Office's cellar) field 25 (Durée du séjour ou du transit prévu -- Indiquer le nombre de jours);was=Je reste {} jours (the plural -- wrong for one: un jour);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie médicamenteuse : {} and Nombre de nuits : {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Rien à déclarer,,ʁiɛ̃n a deklaʁˈe,,2,fr-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ a {},,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Je viens pour affaires,,ʒə vjɛ̃ puʁ afˈɛʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,J'ai un billet de retour,,ʒe œ̃ bijɛ də ʁətˈuʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Je viens voir ma famille,,ʒə vjɛ̃ vwaʁ ma famˈij,,2,fr-agent-v1;ipa=espeak
@@ -25,7 +25,7 @@ border-customs.arrival-card,fiche de débarquement,,fiʃ də debaʁkəmˈɑ̃,,2
 border-customs.transit,Transit,,tʁɑ̃zˈit,,2,fr-agent-v1;ipa=espeak
 border-customs.boarding-pass,carte d'embarquement,,kaʁt dɑ̃baʁkəmˈɑ̃,,2,fr-agent-v1;ipa=espeak
 directions.where-is,Où est {} ?,,u ˈɛ {},,2,fr-agent-v1;ipa=espeak
-directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale a {},,2,fr-agent-v1;ipa=espeak
 directions.is-it-far,C'est loin ?,,sɛ lwˈɛ̃,,2,fr-agent-v1;ipa=espeak
 directions.how-long-on-foot,Combien de temps à pied ?,,kɔ̃bjɛ̃ də tɑ̃ a pjˈe,,2,fr-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Montrez-moi sur la carte, s'il vous plaît",,"mɔ̃tʁemwa syʁ la kˈaʁt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
@@ -64,7 +64,7 @@ taxi.could-you-make-it-warmer,"Pourriez-vous baisser la climatisation, s'il vous
 taxi.may-i-open-the-window,Puis-je ouvrir la fenêtre ?,,pyiʒ uvʁiʁ la fənˈɛtʁ,,2,fr-agent-v1;ipa=espeak
 transit-rides.two-tickets,Deux billets,,dø bijˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Où est la station de métro ?,,u ɛ la stasjɔ̃ də metʁˈo,,2,fr-agent-v1;ipa=espeak
-transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil a {},,2,fr-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,Quel est le prochain arrêt ?,,kɛl ɛ lə pʁoʃɛ̃n aʁˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,"Dites-moi où descendre, s'il vous plaît",,"ditmwa u dɛsˈɑ̃dʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 transit-rides.is-this-direct,C'est direct ?,,sɛ diʁˈɛkt,,2,fr-agent-v1;ipa=espeak
@@ -86,7 +86,7 @@ place-words.tourist-spot-sightseeing-area,site touristique,,sit tuʁistˈik,,2,f
 pickup-meeting.where-is-the-pickup-point,Où est le point de rendez-vous ?,,u ɛ lə pwɛ̃ də ʁɑ̃devˈu,,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-send-me-the-pickup-point,Envoyez-moi le point de rendez-vous,,ɑ̃vwajemwa lə pwɛ̃ də ʁɑ̃devˈu,,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,Venez nous chercher ici,,vəne nu ʃɛʁʃe isˈi,,2,fr-agent-v1;ipa=espeak
-pickup-meeting.meet-us-at,Rejoignez-nous à {},,ʁəʒwanjenuz ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Rejoignez-nous à {},,ʁəʒwanjenuz a {},,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-call-me-a-ride,"Commandez-moi un VTC, s'il vous plaît",une voiture,"kɔmɑ̃demwa œ̃ vˌetˌesˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,"Appelez un taxi, s'il vous plaît",,"aplez œ̃ taksˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 rail-station-words.high-speed-rail,TGV,train à grande vitesse,tˌeʒˌevˈe,,2,fr-agent-v1;ipa=espeak

@@ -29,7 +29,7 @@ hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإف�
 hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,hˈal jmknnˈiː ɹˈuʔja ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
 hotel-basics.for-nights,عدد الليالي: {},,ʿadad al-layālī: {},ʕˈadad ʔallajˈaːliː {},number of nights: {},2,ar-agent-v1;fix=ar.wikipedia العدد والمعدود rev 76218556 (the table: 1 و2 إفراد وتثنية -- 3 إلى 10 جمع -- every other number إفراد -- تمييز الأعداد من 11 إلى 99 مفرد منصوب);fix=ar.wikipedia السياحة في ألمانيا rev 76519602 (وصل عدد الليالي التي أمضاها السياح في فنادق ألمانيا);was=لمدة {} ليال (li-muddat {} layāl: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame حساسية دوائية: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,ʔɹˈiːd sˌaɹiːɹˈiːna mˌunfas̪ilˈiːna,two separate beds,2,ar-agent-v1;ipa=espeak
-hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jwdʒd tˈakjiːf,,2,ar-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jˈuːdʒad tˈakjiːf,,2,ar-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,hˈal jmkˈunna tˈaʔxiːr ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak
 hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,mˈataː jbdʔ ʔalfˈat̪uːr,,2,ar-agent-v1;ipa=espeak
 hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,hˈal jmkˈunna ħˈifð ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
@@ -43,7 +43,7 @@ hotel-requests.another-blanket,بطانية أخرى لطفًا,,baṭṭānīya
 hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},ʔrdʒˈuː ʔˈiːqaːðˌi ʔassˈaːʕa {},,2,ar-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,hˈunaːkˌa mˈuʃkilˌa fˈiː ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
 room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,ʔattˈakjiːf mʕt̪ːl,,2,ar-agent-v1;ipa=espeak
-room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,lˈaː jwdʒd mˈaːʔ sˈaːxin,,2,ar-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,lˈaː jˈuːdʒad mˈaːʔ sˈaːxin,,2,ar-agent-v1;ipa=espeak
 room-problems.can-i-change-rooms,هل يمكن تغيير الغرفة؟,,hal yumkin taghyīr al-ghurfah?,hˈal jmkˈunna tˈaɣjiːr ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
 room-problems.the-room-is-too-noisy,الغرفة فيها ضجيج,,al-ghurfah fīhā ḍajīj,ʔalɣˈurfa fˈiːhaː dˤˈadʒiːdʒ,the room has noise,2,ar-agent-v1;ipa=espeak
 room-problems.the-key-does-not-work,المفتاح لا يعمل,البطاقة لا تعمل,al-miftāḥ lā yaʿmal,ʔalmˈiftaːħ lˈaː jʕml,,2,ar-agent-v1;ipa=espeak

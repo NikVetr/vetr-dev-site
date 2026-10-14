@@ -15,7 +15,7 @@ sim-data.how-long-is-it-valid,كم مدة الصلاحية؟,,kam muddat al-ṣa
 children.baby-changing-room,أين غرفة تغيير الحفاضات؟,غرفة الأمهات,ayna ghurfat taghyīr al-ḥafāḍāt?,ʔˈajna ɣˈurfa tˈaɣjiːr ʔalħfˈaːdˤaːt,,2,ar-agent-v1;ipa=espeak
 etiquette.remove-shoes,هل أخلع حذائي؟,,hal akhlaʿ ḥidhāʾī?,hˈal ʔxlʕ ħðˈaːʔiː,,2,ar-agent-v1;ipa=espeak
 sim-data.please-activate-it,فعّلها من فضلك,,faʿʿilhā min faḍlak,fʕʕlhaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-children.childrens-menu,هل يوجد قائمة أطفال؟,منيو أطفال,hal yūjad qāʾimat aṭfāl?,hˈal jwdʒd qˈaːʔimˌa ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
+children.childrens-menu,هل يوجد قائمة أطفال؟,منيو أطفال,hal yūjad qāʾimat aṭfāl?,hˈal jˈuːdʒad qˈaːʔimˌa ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 etiquette.photo-of-you,هل يمكنني تصويرك؟,,hal yumkinunī taṣwīrak?,hˈal jmknnˈiː tˈas̪wiːrkˌa,,2,ar-agent-v1;ipa=espeak
 sim-data.do-you-have-an-esim,هل لديكم إي سيم؟,,hal ladaykum ī sīm?,hˈal ldiːkm ʔˈiː siːm,,2,ar-agent-v1;ipa=espeak
 children.suitable-for-children,هل هذا مناسب للأطفال؟,,hal hādhā munāsib lil-aṭfāl?,hˈal haˈaðaˌa mˈunaːsˌib llʔt̪faːl,,2,ar-agent-v1;ipa=espeak
@@ -26,7 +26,7 @@ etiquette.queue-for,هل هذا صف {}؟,,hal hādhā ṣaff {}?,hˈal haˈaða
 sim-data.does-it-need-registration,هل يحتاج إلى تسجيل؟,,hal yaḥtāj ilá tasjīl?,hˈal jħtˈaːdʒ ʔˈilaː tˈasdʒiːl,,2,ar-agent-v1;ipa=espeak
 children.do-children-pay,هل يدفع الأطفال؟,,hal yadfaʿ al-aṭfāl?,hˈal jdfʕ ʔalʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 etiquette.dressed-appropriately,هل لباسي مناسب؟,,hal libāsī munāsib?,hˈal lbaːsˌiː mˈunaːsˌib,,2,ar-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,لا يوجد إرسال,لا توجد شبكة,lā yūjad irsāl,lˈaː jwdʒd ʔˈirsaːl,,2,ar-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,لا يوجد إرسال,لا توجد شبكة,lā yūjad irsāl,lˈaː jˈuːdʒad ʔˈirsaːl,,2,ar-agent-v1;ipa=espeak
 children.crib,هل لديكم سرير أطفال؟,,hal ladaykum sarīr aṭfāl?,hˈal ldiːkm sˈaɹiːr ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 etiquette.did-not-mean-to-offend,لم أقصد الإساءة,أعتذر، لم أقصد,lam aqṣid al-isāʾah,lˈam ʔˈaqs̪ad ʔalʔˈisaːʔˌa,,2,ar-agent-v1;ipa=espeak
 sim-data.please-write-the-wifi-password,اكتب كلمة سر الواي فاي,,uktub kalimat sirr al-wāy fāy,ˈaktb kˈalimˌa sˈirr ʔalˈuːi faːˌi,,2,ar-agent-v1;ipa=espeak
@@ -38,7 +38,7 @@ etiquette.keep-the-change,أرجو الاحتفاظ بالباقي,,arjū al-i�
 sim-data.where-can-i-buy-a-plug-adapter,أين أشتري محوّل كهرباء؟,,ayna ashtarī muḥawwil kahrabāʾ?,ʔˈajna ʔʃtɹˈiː mħˈuːl kˈahɹabˌaːʔ,,2,ar-agent-v1;ipa=espeak
 children.stroller,عربة أطفال,,ʿarabat aṭfāl,ʕˈaɹabˌa ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 sim-data.mobile-data,بيانات الهاتف,إنترنت الجوال,bayānāt al-hātif,biːˌaːnaːt ʔalhˈaːtif,,2,ar-agent-v1;ipa=espeak
-children.playground,هل يوجد ملعب أطفال؟,,hal yūjad malʿab aṭfāl?,hˈal jwdʒd mˈalʕab ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
+children.playground,هل يوجد ملعب أطفال؟,,hal yūjad malʿab aṭfāl?,hˈal jˈuːdʒad mˈalʕab ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 sim-data.can-i-top-up-this-sim,هل يمكن شحن هذه الشريحة؟,,hal yumkin shaḥn hādhihi al-sharīḥah?,hˈal jmkˈunna ʃˈaħn haˈaðihˌi ʔaʃʃˈaɹiːħˌa,,2,ar-agent-v1;ipa=espeak
 sim-data.top-up,شحن,تعبئة رصيد,shaḥn,ʃˈaħn,,2,ar-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,هل هناك تغطية في {}؟,,hal hunāk taghṭiyah fī {}?,hˈal hˈunaːkˌa tˈaɣt̪iːˌa fˈiː {},,2,ar-agent-v1;ipa=espeak
@@ -135,7 +135,7 @@ board-answers.what-happened,ماذا حدث؟,,mādhā ḥadath?,mˈaːðaː ħ�
 board-answers.understood,مفهوم,,mafhūm,mˈafhuːm,,2,ar-agent-v1;src=Wehr-1976 مفهوم;reply-neutrality-rule;rule=passive-participle-as-acknowledgement;answers-audit-v1;ipa=espeak
 board-answers.i-will-check,سأتأكّد,,saʾataʾakkad,sʔtʔkːd,,2,ar-agent-v1;src=Wehr-1976 تأكّد;reply-neutrality-rule;rule=first-person-verb-invariant-for-gender;answers-audit-v1;ipa=espeak
 board-answers.we-have-it,نعم، لدينا,,"naʿam, ladaynā",nˈaʕam ldiːnˌaː,,2,ar-agent-v1;in-pack-neighbour=board-answers.we-do-not-have-it;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,لا يوجد مكان,,lā yūjad makān,lˈaː jwdʒd mˈakaːn,,2,ar-agent-v1;src=Wehr-1976 مكان;in-pack-frame=sim-data.i-have-no-signal;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,لا يوجد مكان,,lā yūjad makān,lˈaː jˈuːdʒad mˈakaːn,,2,ar-agent-v1;src=Wehr-1976 مكان;in-pack-frame=sim-data.i-have-no-signal;answers-audit-v1;ipa=espeak
 board-answers.it-is-free,مجاني,,majjānī,mˈadʒdʒaːnˌiːj,,2,ar-agent-v1;src=Wehr-1976 مجّانيّ;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
 board-answers.it-does-not-matter,لا فرق,,lā farq,lˈaː fˈarq,,2,ar-agent-v1;src=Wehr-1976 فرق;answers-audit-v1;ipa=espeak
 board-answers.only-for-customers,للزبائن فقط,,lil-zabāʾin faqaṭ,llzbaːʔn fˈaqat̪,,2,ar-agent-v1;src=Wehr-1976 زبون;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak

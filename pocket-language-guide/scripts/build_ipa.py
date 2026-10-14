@@ -1301,7 +1301,9 @@ REPAIR = {
     # the column writes every other one. Every `ɾ` the column held was in this pair, so
     # none is left, and a written rr (Montserrat, Pierre, Sierra) keeps two.
     "ms": [("ˈatm", "ˌeːtˌiːˈɛm"), ("ɾr", "r")],
-    "sw": [("ˈatm", "ˌatˌiˈem")],
+    # *tangu* "since" comes back `ʃˈu`; it is /taŋɡu/ (TUKI), stressed on the
+    # penult as every Swahili word is. Spaced, because `ʃˈu` is inside *kushuka*.
+    "sw": [("ˈatm", "ˌatˌiˈem"), (" ʃˈu ", " tˈaŋɡu ")],
 
     # espeak writes the trill as a doubled tap, gives <ll>/<y> as `jj` in some
     # words and `ʝ` in others, and has a pre-nasal allophone of /e/ that Spanish
@@ -1311,7 +1313,13 @@ REPAIR = {
     # of the three characters no shipped face can draw.
     "es": [("ɾɾ", "r"), ("jj", "ʝ"), ("ɛ", "e"), ("β", "b"), ("ð", "d"), ("ɣ", "ɡ")],
     # espeak marks an elidable schwa with a trailing hyphen: `ʒə-` for *je*.
-    "fr": [("-", "")],
+    #
+    # **And it spells a one-letter word that ends what it is given.** A chunk stops at
+    # every slot, so *Je suis allergique à {}* hands it `... allergique à`, and the à
+    # comes back as its letter name, "a accent grave" -- on ten rows, both allergy rows
+    # among them -- and *allez-y* before a slash as "i grec". Neither string is a word
+    # any row means.
+    "fr": [("-", ""), ("ˌaaksɑ̃ɡʁˈav", "a"), ("eziɡʁˈɛk", "ezˈi")],
     # `r.` is ड़ /ɽ/, and `r.h` is ढ़; the bare `.` that is left over is noise.
     # **`Cːj` is a `C्य` conjunct, not a geminate.** क्या comes back `kːjaː` where the
     # word is [kjaː] with one consonant; `gu`'s entry below carries the full argument
@@ -1531,10 +1539,15 @@ REPAIR = {
     # real word has `iː`. Stressed `kˈam` because every Arabic row carries a mark,
     # monosyllables included (`hˈum`, `lˈajj`).
     #
-    # Unvowelled الليالي "the nights" comes back without its y, `ʔalliːˌaːliː`; it is
-    # *al-layālī* (Wehr: layāl, pl. of layla), stressed on the long penult. One row
-    # has it, `hotel-basics.for-nights`.
-    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam"), ("ʔalliːˌaːliː", "ʔallajˈaːliː")],
+    # **And some unvowelled words lose their vowels or a glide**, each measured as
+    # the whole of its occurrences: يوجد "there is" comes back as the bare consonants
+    # `jwdʒd` on all 20 rows that ask with it (it is *yūjad*); الليالي "the nights"
+    # as `ʔalliːˌaːliː` (*al-layālī*, Wehr: layāl, pl. of layla); الأيام "the days" as
+    # `ʔˈiːaːm` (*al-ayyām*, twice); and الأعراض "the symptoms" as `ʔalʔʕɹˈaːdˤ`, with
+    # no vowel and an English r (*al-aʿrāḍ*, once).
+    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam"), ("jwdʒd", "jˈuːdʒad"),
+           ("ʔalliːˌaːliː", "ʔallajˈaːliː"), ("ʔˈiːaːm", "ʔajjˈaːm"),
+           ("ʔalʔʕɹˈaːdˤ", "ʔalʔaʕrˈaːdˤ")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
     # soft sign on a final consonant comes out as: `dvʲˈerɪ^` for дверь /dvʲerʲ/.
     # And espeak writes ы as `y`, which in IPA is the close front *rounded* vowel:

@@ -22,8 +22,8 @@ shopping.where-can-i-buy,أين أشتري {}؟,,ayna ashtarī {}?,ʔˈajna ʔʃ
 shopping.do-you-have-this-in-stock,هل هذا متوفّر؟,,hal hādhā mutawaffir?,hˈal haˈaðaˌa mtˈuːffr,,2,ar-agent-v1;ipa=espeak
 shopping.two-of-these,اثنين من هذا من فضلك,,ithnayn min hādhā min faḍlak,ˈiθnajnˌi mˈin haˈaðaˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 shopping.what-is-it-made-of,من أيّ مادة؟,ما مكوّناته؟,min ayy māddah?,mˈin ʔˈiː mˈaːdːa,from which material,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-another-color,هل يوجد لون آخر؟,,hal yūjad lawn ākhar?,hˈal jwdʒd lˈawn ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal yūjad maqās ākhar?,hˈal jwdʒd mˈaqaːs ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,هل يوجد لون آخر؟,,hal yūjad lawn ākhar?,hˈal jˈuːdʒad lˈawn ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal yūjad maqās ākhar?,hˈal jˈuːdʒad mˈaqaːs ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
 color-size-returns.may-i-try-it-on,هل أقيسه؟,هل يمكنني قياسه؟,hal aqīsuh?,hˈal ʔqˈish,,2,ar-agent-v1;ipa=espeak
 color-size-returns.can-i-return-it,هل يمكن إرجاعه؟,,hal yumkin irjāʿuh?,hˈal jmkˈunna ʔˈirdʒaːʕh,,2,ar-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumkin istibdāluh?,hˈal jmkˈunna ˈistibdˌaːlh,,2,ar-agent-v1;ipa=espeak
