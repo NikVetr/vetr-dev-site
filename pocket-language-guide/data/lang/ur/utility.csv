@@ -7,7 +7,7 @@ utility-templates.do-you-have,کیا {} ہے؟,,kyā {} hai?,kjˈaː {} hɛ,,2,u
 utility-templates.please-write-the-number,نمبر لکھ دیجیے,,nambar likh dījiye,nˈʌmbəɾ lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
 utility-templates.i-need,مجھے {} چاہیے,,mujhe {} chāhiye,mˌʊɟʰeː {} cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,کیا یہاں پاس میں {} ہے؟,کیا قریب ہی {} ہے؟,kyā yahāñ pās meñ {} hai?,kjˈaː jˈʌhãː pˈaːs mˈẽ {} hɛ,,2,ur-agent-v1;ipa=espeak
-utility-templates.how-much-is,{} کتنے کا ہے؟,,{} kitne kā hai?,{} kˈɪtneː kaː hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} کتنے [کا|کی] ہے؟,,{} kitne [kā|kī] hai?,{} kˈɪtneː [kaː|ki] hɛ,,2,ur-agent-v1;fix=Platts A Dictionary of Urdu -- Classical Hindi -- and English (DSAL) p. 797 کا kā postpn. m. (f. kī -- obl. & pl. ke);was={} کتنے کا ہے؟ / {} kitne kā hai? (the masculine -- wrong for a feminine thing);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 utility-templates.is-this,کیا یہ {} ہے؟,,kyā yah {} hai?,kjˈaː jeːh {} hɛ,,2,ur-agent-v1;ipa=espeak
 utility-templates.please,{} دیجیے,,{} dījiye,{} diɟˈiːeː,the shortest polite request frame in Urdu: point at a word and add دیجیے,2,ur-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,مجھے {} کی تلاش ہے,میں {} ڈھونڈ رہا ہوں,mujhe {} kī talāsh hai,mˌʊɟʰeː {} ki təlˈaːʃ hɛ,,2,ur-agent-v1;ipa=espeak

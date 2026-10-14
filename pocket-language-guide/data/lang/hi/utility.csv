@@ -7,7 +7,7 @@ utility-templates.do-you-have,क्या {} है?,,kyā {} hai?,kjaː {} hɛ
 utility-templates.please-write-the-number,नंबर लिख दीजिए,,naṁbar likh dījie,nˈʌmbəɾ lˈɪkʰ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 utility-templates.i-need,मुझे {} चाहिए,,mujhe {} cāhie,mˌʊɟʰeː {} cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,क्या यहाँ पास में {} है?,,kyā yahāṁ pās meṁ {} hai?,kjaː jˈʌhã pˈaːs mˈẽː {} hɛː,,2,hi-agent-v1;ipa=espeak
-utility-templates.how-much-is,{} कितने का है?,,{} kitne kā hai?,{} kˈɪtnˌeː kaː hɛː,,2,hi-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} कितने [का|की] है?,,{} kitne [kā|kī] hai?,{} kˈɪtnˌeː [kaː|ki] hɛː,,2,hi-agent-v1;fix=Platts A Dictionary of Urdu -- Classical Hindi -- and English (DSAL) p. 797 kā postpn. m. (f. kī -- obl. & pl. ke ... also frequently used as an adj. termination -- e.g. sone-kī ghaṛī);fix=hi.wikipedia कारक rev 6543597 (यह राधेश्याम का बेटा है -- यह कमला की गाय है);was={} कितने का है? / {} kitne kā hai? (the masculine -- wrong for a feminine thing: यह किताब कितने की है);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 utility-templates.is-this,क्या यह {} है?,,kyā yah {} hai?,kjaː jˌəh {} hɛː,,2,hi-agent-v1;ipa=espeak
 utility-templates.please,{} दीजिए,,{} dījie,{} dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,मुझे {} की तलाश है,,mujhe {} kī talāś hai,mˌʊɟʰeː {} ki təlˈaːʃ hɛː,,2,hi-agent-v1;ipa=espeak

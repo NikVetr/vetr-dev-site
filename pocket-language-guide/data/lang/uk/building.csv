@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Який номер цієї кімнати?,,Yakyi nomer tsiiei kimnaty?,jakˈɪj nˈomɛr tsiːjˈɛjiː kiːmnˈatɪ,,2,uk-agent-v1;ipa=espeak
-building-help.i-am-lost,Я заблукав.,Я заблукала.,Ya zablukav.,jˈa zablˈukaʋ,,2,uk-agent-v1;ipa=espeak
+building-help.i-am-lost,Я заблукав.,,Ya zablukav.,jˈa zablˈukaʋ,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я заблукала. (the same wording);was=text_alt Я заблукала. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 building-help.where-is-reception,Де ресепшн?,Де адміністратор?,De resepshn?,dˈɛ rˈɛsɛpʃn,,2,uk-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Де розетка?,,De rozetka?,dˈɛ rozˈɛtka,,2,uk-agent-v1;ipa=espeak
 accessibility.step-free,Чи є вхід без сходинок?,Чи є безбар'єрний вхід?,Chy ye vkhid bez skhodynok?,tʃˈɪ jˈɛ fxˈiːd bˈɛs sxodɪnˈok,,2,uk-agent-v1;ipa=espeak
@@ -13,12 +13,12 @@ accessibility.need-to-sit-down,Мені треба сісти.,,Meni treba sisty
 accessibility.accessible-restroom,Є туалет для людей з інвалідністю?,,Ye tualet dlia liudei z invalidnistiu?,jˈɛ tualˈɛd dʎˈa ʎˈudɛj z iːnʋaʎˈiːdɲiːstju,,2,uk-agent-v1;ipa=espeak
 accessibility.station-assistance,Є супровід на станції?,,Ye suprovid na stantsii?,jˈɛ suprˈoʋiːd nˈa stantsˈiːjiː,,2,uk-agent-v1;ipa=espeak
 accessibility.help-me-carry,"Допоможіть, будь ласка, донести.",,"Dopomozhit, bud laska, donesty.","dopomˈoʒiːt, bˈud lˈaska, donˈɛstɪ",,2,uk-agent-v1;ipa=espeak
-accessibility.board-first,Можна мені зайти першим?,Можна мені зайти першою?,Mozhna meni zaity pershym?,mˈoʒna mˈɛɲiː zˈajtɪ pˈɛrʃɪm,,2,uk-agent-v1;ipa=espeak
+accessibility.board-first,Можна мені зайти першим?,,Mozhna meni zaity pershym?,mˈoʒna mˈɛɲiː zˈajtɪ pˈɛrʃɪm,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Можна мені зайти першою? (the same wording);was=text_alt Можна мені зайти першою? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 accessibility.door-width,Яка ширина дверей?,,Yaka shyryna dverei?,jakˈa ʃɪrˈɪna dʋˈɛrɛj,,2,uk-agent-v1;ipa=espeak
 accessibility.wheelchair-width,Ширина мого візка {} см.,,Shyryna moho vizka {} sm.,ʃɪrˈɪna mˈoho ʋˈiːska {} santɪmˈɛtriːʋ,,2,uk-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Я погано чую.,,Ya pohano chuiu.,jˈa pohˈano tʃˈuju,,2,uk-agent-v1;ipa=espeak
 accessibility.speak-louder,"Говоріть голосніше, будь ласка.",,"Hovorit holosnishe, bud laska.","hoʋˈoriːt holˈosɲiːʃɛ, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
-accessibility.visually-impaired,Я слабозорий.,Я слабозора.,Ya slabozoryi.,jˈa slabozˈorɪj,,2,uk-agent-v1;ipa=espeak
+accessibility.visually-impaired,Я слабозорий.,,Ya slabozoryi.,jˈa slabozˈorɪj,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я слабозора. (the same wording);was=text_alt Я слабозора. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 accessibility.take-your-arm,Можна взяти вас під руку?,,Mozhna vziaty vas pid ruku?,mˈoʒna ʋzjˈatɪ ʋˈas pˈiːd rˈuku,,2,uk-agent-v1;ipa=espeak
 accessibility.guide-dog,Це мій собака-поводир.,,Tse mii sobaka-povodyr.,tsˈɛ mˈiːj sobˈakapoʋodɪr,,2,uk-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Це правильний вхід?,,Tse pravylnyi vkhid?,tsˈɛ praʋˈɪʎnɪj fxˈiːd,,2,uk-agent-v1;ipa=espeak

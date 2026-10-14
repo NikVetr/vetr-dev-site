@@ -3,7 +3,7 @@ emergency-medical.help,Socorro!,Ajuda!,sˌokˈoxʊ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,"Chame uma ambulância, por favor",,"ʃˈɐ̃mj ˌumæ ˌɐ̃mbulˈɐ̃ŋsjæ, por favˈor",,2,pt-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Preciso de um médico,,prˌesˈizʊ dʒj ũŋ mˈɛdʒikʊ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.i-am-sick,Estou doente,,estˌow dˌoˈeɪŋtʃy,,2,pt-agent-v1;ipa=espeak
-emergency-medical.i-am-injured,Estou ferido,Estou ferida,estˌow fˌeɾˈidʊ,,2,pt-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Estou ferido,,estˌow fˌeɾˈidʊ,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Estou ferida (the same wording);was=text_alt Estou ferida (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 emergency-medical.it-hurts-here,Dói aqui,,dˈɔɪ akˈi,,2,pt-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Onde fica uma farmácia?,,ˌoŋdʒy fˈikæ ˌumæ fˌaɾəmˈasjæ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.please-take-me-to-a-hospital,"Leve-me a um hospital, por favor",Me leve a um hospital,"lˈɛvymj a ũŋ ˌospitˈaʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
@@ -124,11 +124,11 @@ police-consulate.i-want-to-contact-my-embassy,Quero contactar a minha embaixada,
 police-consulate.i-need-it-for-my-insurance,Preciso disto para o seguro,,prˌesˈizʊ dʒˈistʊ pˌaɾæ ʊ sˌeɡˈuɾʊ,,2,pt-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,Preciso de um intérprete,,prˌesˈizʊ dʒj ũŋ ˌiŋtˈɛɾəpretʃy,,2,pt-agent-v1;ipa=espeak
 police-consulate.please-leave-me-alone,Deixe-me em paz,Me deixe em paz,dˈeɪʃymj ˈeɪŋ pˈas,,2,pt-agent-v1;ipa=espeak
-police-consulate.i-was-robbed,Fui roubado,Fui roubada,fuɪ xˌowbˈadʊ,,2,pt-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,Fui roubado,,fuɪ xˌowbˈadʊ,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Fui roubada (the same wording);was=text_alt Fui roubada (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 police-consulate.i-want-a-lawyer,Quero um advogado,,kˈɛɾw ũŋ ˌadvoɡˈadʊ,,2,pt-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,"Avise o meu consulado, por favor",,"ˌavˈizj ʊ meʊ kˌoŋsulˈadʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Vou chamar a polícia,,vow ʃæmˈaɾ a pˌolˈisjæ,,2,pt-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,Estou detido?,Estou detida?,estˌow dˌetʃˈidʊ,,2,pt-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Estou detido?,,estˌow dˌetʃˈidʊ,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Estou detida? (the same wording);was=text_alt Estou detida? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Não, obrigado. Não tenho interesse",obrigada,"nˈɐ̃ʊ̃, ˌobriɡˈadʊ nˌɐ̃ʊ̃ tˌeɲʊ ˌiŋteɾˈesy",,2,pt-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,Fui agredido,Alguém me agrediu,fuɪ ˌaɡredʒˈidʊ,,2,pt-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,Não concordei com este preço,,nˌɐ̃ʊ̃ kˌoŋkoɾədˈeɪ koŋ ˌestʃy prˈesʊ,,2,pt-agent-v1;ipa=espeak

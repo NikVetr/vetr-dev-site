@@ -215,7 +215,7 @@ quick-directions.this-way,heer ent-LAHNG,Hier entlang.
 taxi.please-stop-here,HAHL-ten zee BIT-tuh heer,Halten Sie bitte hier.
 transit-rides.what-is-the-next-stop,vee hyst dee NEKHS-tuh shtah-TSYOHN?,Wie heißt die nächste Station?
 place-words.airport,FLOOK-hah-fen,Flughafen
-pickup-meeting.meet-us-at,TREF-en veer oons ahm {},Treffen wir uns am {}.
+pickup-meeting.meet-us-at,TREF-en veer oons heer: {},Treffen wir uns hier: {}.
 rail-station-words.ticket-gate,SHPAIR-uh,Sperre
 common-signs.vacant,fry,frei
 utility-templates.please-do-not-add,BIT-tuh OH-nuh {},Bitte ohne {}.
@@ -258,7 +258,7 @@ time-scheduling.when-is-convenient,vahn pahst es EE-nen?,Wann passt es Ihnen?
 time-words.next-week,NEKHS-tuh VOKH-uh,nächste Woche
 days-of-week.friday,FRY-tahk,Freitag
 months.may,my,Mai
-border-customs.i-am-staying-at,ikh VOH-nuh im {},Ich wohne im {}.
+border-customs.i-am-staying-at,ikh VOH-nuh heer: {},Ich wohne hier: {}.
 directions.please-show-me-on-the-map,BIT-tuh owf dair KAHR-tuh TSY-gen,Bitte auf der Karte zeigen.
 quick-directions.that-way,dah ent-LAHNG,Da entlang.
 taxi.can-you-wait-for-me-here,KUR-nen zee heer owf mikh VAHR-ten?,Können Sie hier auf mich warten?
@@ -307,7 +307,7 @@ time-words.morning,FOR-mit-tahk,Vormittag
 days-of-week.saturday,ZAHMS-tahk,Samstag
 months.june,YOO-nee,Juni
 border-customs.i-am-here-for-business,ikh bin guh-SHEFT-likh heer,Ich bin geschäftlich hier.
-directions.where-is-the-nearest,voh ist dair NEKHS-tuh {}?,Wo ist der nächste {}?
+directions.where-is-the-nearest,voh ist [dair|dee|dahs] NEKHS-tuh {}?,Wo ist [der|die|das] nächste {}?
 quick-directions.on-the-left,owf dair LING-ken ZY-tuh,Auf der linken Seite.
 taxi.we-need-to-catch-the-high-speed-train,veer MEWSS-en dayn ee-tsay-AY air-RY-khen,Wir müssen den ICE erreichen.
 transit-rides.is-this-direct,fairt dair dee-REKT?,Fährt der direkt?

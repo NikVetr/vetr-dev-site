@@ -8,7 +8,7 @@ utility-templates.please-write-the-number,नंबर लिहा,,naṁbara l
 utility-templates.i-need,मला {} हवे आहे,,malā {} havē āhē,mˈʌlaː {} hˈʌveː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,इथे जवळ {} आहे का?,,ithē javaḷa {} āhē kā?,ˈɪtʰeː zˈʌvəɭ {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 utility-templates.how-much-is,{} किती रुपयांना आहे?,,{} kitī rupayāṁnā āhē?,{} kˈɪti ɾˌʊpjˈãnaː ˈaːheː,,2,mr-agent-v1;ipa=espeak
-utility-templates.is-this,हे {} आहे का?,,hē {} āhē kā?,hˈeː {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.is-this,[हा|ही|हे] {} आहे का?,,[hā|hī|hē] {} āhē kā?,[hˈaː|hˈi|hˈeː] {} ˈaːheː kˈaː,,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 167 हा (3rd p. sg. m. pron. proximate) -- p. 169 ही (3rd p. sg. f.) and हे (3rd p. sg. n.);fix=mr.wikipedia कलानिधीगड rev 2628355 (हा एक किल्ला आहे) -- मेघना नदी rev 2719671 (ही एक नदी आहे) -- म्हसवड rev 2694660 (हे एक शहर आहे): the pronoun agrees with the noun it names;was=हे {} आहे का? / hē {} āhē kā? (the neuter pronoun -- wrong before a masculine or feminine noun: हा रस्ता -- ही बस);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 utility-templates.please,"{}, कृपया",,"{}, kr̥payā","{}, kɾˈʊpjˌaː",,2,mr-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,मी {} शोधत आहे,,mī {} śōdhata āhē,mˈi {} ʃˈoːdʰət ˈaːheː,,2,mr-agent-v1;ipa=espeak
 utility-templates.do-you-accept,इथे {} चालेल का?,,ithē {} cālēla kā?,ˈɪtʰeː {} caːlˈeːl kˈaː,,2,mr-agent-v1;ipa=espeak

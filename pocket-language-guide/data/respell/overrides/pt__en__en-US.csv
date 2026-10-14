@@ -307,7 +307,7 @@ time-scheduling.what-is-today-s-date,kwal EH ah DAH-tah duh OH-zhuh,Qual é a da
 time-words.morning,ah mah-NYANG,a manhã
 days-of-week.saturday,SAH-bah-doo,sábado
 months.june,ZHOO-nyoo,junho
-directions.where-is-the-nearest,ONG-duh FEE-kah oo {} MYSH PRAW-see-moo,Onde fica o {} mais próximo?
+directions.where-is-the-nearest,ONG-duh FEE-kah [oo|ah] {} MYSH PRAW-see-m[oo|ah],Onde fica [o|a] {} mais próxim[o|a]?
 quick-directions.on-the-left,ah shKER-dah,À esquerda
 taxi.we-need-to-catch-the-high-speed-train,TEH-moosh duh ah-pah-NYAR oo kong-BOY-oo HAH-pee-doo,Temos de apanhar o comboio rápido
 transit-rides.is-this-direct,EH dee-REH-too,É direto?

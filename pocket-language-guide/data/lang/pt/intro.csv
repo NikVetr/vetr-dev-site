@@ -10,7 +10,7 @@ introductions.how-are-you,Como está?,Tudo bem?,kˌomʊ estˌa,,2,pt-agent-v1;ip
 introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,ʊ meʊ mˌaɾˈidʊ / a mˌiɲæ muljˈɛr,,2,pt-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,A minha filha / O meu filho,,a mˌiɲæ fˈiljæ / ʊ meʊ fˈiljʊ,,2,pt-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Viajo sozinho,Viajo sozinha,vˌiˈaʒʊ sˌozˈiɲʊ,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Viajo sozinho,,vˌiˈaʒʊ sˌozˈiɲʊ,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Viajo sozinha (the same wording);was=text_alt Viajo sozinha (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 family-intros.this-is-my-husband,Este é o meu marido,Este é o meu esposo,ˌestʃy ɛ ʊ meʊ mˌaɾˈidʊ,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-wife,Esta é a minha mulher,Esta é a minha esposa,ˌɛstæ ɛ a mˌiɲæ muljˈɛr,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Este é o meu filho,,ˌestʃy ɛ ʊ meʊ fˈiljʊ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

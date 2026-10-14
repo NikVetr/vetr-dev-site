@@ -309,7 +309,7 @@ communication.i-cannot-read-understand,zhuh nuh seh pah leer SAH,Je ne sais pas 
 quick-responses.works-okay,sah MARSH,ça marche
 phone-text-power.the-translation-may-be-inaccurate,lah trah-dewk-syohn puh teh-truh ee-nek-ZAKT,La traduction peut être inexacte
 border-customs.i-am-here-for-business,zhuh vyehn poor ah-FAIR,Je viens pour affaires
-directions.where-is-the-nearest,oo eh luh {} luh plew PROSH,Où est le {} le plus proche ?
+directions.where-is-the-nearest,oo eh [luh|lah] {} [luh|lah] plew PROSH,Où est [le|la] {} [le|la] plus proche ?
 quick-directions.on-the-left,ah GOHSH,À gauche
 taxi.we-need-to-catch-the-high-speed-train,noo duh-vohn ah-trah-pay luh tay-zhay-VAY,Nous devons attraper le TGV
 transit-rides.is-this-direct,say dee-REKT,C'est direct ?
@@ -374,7 +374,7 @@ lost-rescue.please-contact-rescue,kohn-tak-tay lay suh-KOOR,Contactez les secour
 dietary-needs.i-am-vegetarian,zhuh swee vay-zhay-tah-RYEHN,Je suis végétarien
 food-ordering.does-it-contain,suh-lah kohn-tyehn-TEEL {},Cela contient-il {} ?
 introductions.how-are-you,koh-mahn tah-lay VOO,Comment allez-vous ?
-utility-templates.is-there-nearby,ee ah-teel uhn {} preh dee-SEE,Y a-t-il un {} près d'ici ?
+utility-templates.is-there-nearby,ee ah-teel [uhn|ewn] {} preh dee-SEE,Y a-t-il [un|une] {} près d'ici ?
 weather.storm,loh-RAZH,l'orage
 trail-words.steps,lay MARSH,les marches
 trail-warnings.first-aid-station,post duh suh-KOOR,Poste de secours

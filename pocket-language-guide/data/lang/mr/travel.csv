@@ -4,7 +4,7 @@ directions.how-do-i-get-to,{} कडे कसे जायचे?,,{} kaḍē k
 directions.is-it-far,हे लांब आहे का?,,hē lāṁba āhē kā?,hˈeː lˈãb ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 directions.how-long-on-foot,पायी किती वेळ लागतो?,,pāyī kitī vēḷa lāgatō?,pˈaːji kˈɪti vˈeːɭ lˈaːɡtˌoː,,2,mr-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,नकाशावर दाखवा,,nakāśāvara dākhavā,nˌəkaːʃˈaːvəɾ dˈaːkʰvˌaː,,2,mr-agent-v1;ipa=espeak
-directions.where-is-the-nearest,सगळ्यात जवळचे {} कुठे आहे?,,sagaḷyāta javaḷacē {} kuṭhē āhē?,sˌəɡɭjˈaːt zˈʌvəɭceː {} kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,सगळ्यात [जवळचा|जवळची|जवळचे] {} कुठे आहे?,,sagaḷyāta javaḷac[ā|ī|ē] {} kuṭhē āhē?,sˌəɡɭjˈaːt zˈʌvəɭc[aː|i|eː] {} kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;fix=Molesworth A Dictionary Marathi and English (DSAL) p. 276 चा (The declinable postposition marking the sixth or genitive case: त्याचें घर -- बसावयाचा धोंडा -- स्नानाची धोंड) and p. 310 जवळ (जवळचा Connected with ... near);was=सगळ्यात जवळचे {} कुठे आहे? / sagaḷyāta javaḷacē {} kuṭhē āhē? (the neuter -- wrong for a masculine or feminine place: बँक is feminine);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,मी कुठे आहे?,,mī kuṭhē āhē?,mˈi kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 directions.which-way,कोणत्या दिशेने?,,kōṇatyā diśēnē?,koːɳˈʌtjaː dɪʃˈeːneː,,2,mr-agent-v1;ipa=espeak
 directions.can-i-walk-there,तिथे पायी जाता येईल का?,,tithē pāyī jātā yēīla kā?,tˈɪtʰeː pˈaːji zˈaːtaː jeːˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak

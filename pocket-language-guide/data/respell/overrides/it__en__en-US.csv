@@ -712,7 +712,7 @@ border-customs.arrival-card,KAR-tah dee ZBAR-koh,Carta di sbarco
 border-customs.transit,TRAN-see-toh,Transito
 border-customs.boarding-pass,KAR-tah deem-BAR-koh,Carta d'imbarco
 directions.please-show-me-on-the-map,"meh loh MOS-tree SOOL-lah MAP-pah, per fah-VOH-reh","Me lo mostri sulla mappa, per favore"
-directions.where-is-the-nearest,doh-VEH eel {} pee-OO vee-CHEE-noh,Dov'è il {} più vicino?
+directions.where-is-the-nearest,doh-VEH [eel|lah] {} pee-OO vee-CHEE-n[oh|ah],Dov'è [il|la] {} più vicin[o|a]?
 directions.where-am-i,DOH-veh mee TROH-voh,Dove mi trovo?
 directions.which-way,dah keh PAR-teh,Da che parte?
 directions.can-i-walk-there,chee POS-soh an-DAH-reh ah pee-EH-dee,Ci posso andare a piedi?
@@ -732,9 +732,9 @@ utility-templates.please-do-not-add,"SEN-tsah {}, per fah-VOH-reh","Senza {}, pe
 utility-templates.do-you-have,ah-VEH-teh {},Avete {}?
 utility-templates.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh","Scriva la cifra, per favore"
 utility-templates.i-need,oh bee-ZOH-nyoh dee {},Ho bisogno di {}
-utility-templates.is-there-nearby,cheh oon {} kwee vee-CHEE-noh,C'è un {} qui vicino?
+utility-templates.is-there-nearby,cheh [oon|OO-nah] {} kwee vee-CHEE-noh,C'è [un|una] {} qui vicino?
 utility-templates.how-much-is,KWAN-toh KOS-tah {},Quanto costa {}?
-utility-templates.is-this,KWES-toh eh {},Questo è {}?
+utility-templates.is-this,KWES-t[oh|ah] eh {},[Questo|Questa] è {}?
 utility-templates.please,"{}, per fah-VOH-reh","{}, per favore"
 utility-templates.i-am-looking-for,CHER-koh {},Cerco {}
 utility-templates.do-you-accept,at-chet-TAH-teh {},Accettate {}?

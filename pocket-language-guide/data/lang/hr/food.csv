@@ -6,10 +6,10 @@ dietary-needs.less-spicy,Manje ljuto,,mˈaɲe ʎˈuto,,2,hr-agent-v1;ipa=espeak
 dietary-needs.no-peanuts,Bez arašida,,bˈez araʃida,,2,hr-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Bez orašastih plodova,,bˈez oraʃastix plodova,,2,hr-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Bez plodova mora,,bˈes plodova mˈora,,2,hr-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Vegetarijanac sam,Vegetarijanka sam,veɡetarijanats sam,,2,hr-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Vegan sam,Veganka sam,vˈeɡan sam,,2,hr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Vegetarijanac sam,,veɡetarijanats sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Vegetarijanka sam (the same wording);was=text_alt Vegetarijanka sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-am-vegan,Vegan sam,,vˈeɡan sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Veganka sam (the same wording);was=text_alt Veganka sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Ne jedem {},,nˈe jˈedem {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Alergičan sam na {},Alergična sam na {},alerɡitʃan sam nˈa {},man speaking / woman speaking; na takes the accusative,2,hr-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Alergičan sam na {},,alerɡitʃan sam nˈa {},man speaking / woman speaking; na takes the accusative,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Alergična sam na {} (the same wording);was=text_alt Alergična sam na {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Ima li u ovome ribljeg temeljca?,,ima li u ovome rˈibʎek temeʎtsa,,2,hr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Ima li u ovome svinjskog temeljca?,,ima li u ovome svˈiɲskok temeʎtsa,,2,hr-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Imam tešku alergiju na {},,imam tˈeʃku alerɡiju nˈa {},na takes the accusative,2,hr-agent-v1;ipa=espeak

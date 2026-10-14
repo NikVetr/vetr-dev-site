@@ -6,8 +6,8 @@ dietary-needs.less-spicy,Менш гостре.,,Mensh hostre.,mˈɛnʃ hˈostr�
 dietary-needs.no-peanuts,Без арахісу.,,Bez arakhisu.,bˈɛz arˈaxiːsu,,2,uk-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Без горіхів.,,Bez horikhiv.,bˈɛs horˈiːxiːʋ,,2,uk-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Без морепродуктів.,,Bez moreproduktiv.,bˈɛz morɪprˈoduktiːʋ,,2,uk-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Я вегетаріанець.,Я вегетаріанка.,Ya vehetarianets.,jˈa ʋɛhɪtarˈiːanɛts,,2,uk-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Я веган.,Я веганка.,Ya vehan.,jˈa ʋˈɛhan,,2,uk-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Я вегетаріанець.,,Ya vehetarianets.,jˈa ʋɛhɪtarˈiːanɛts,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я вегетаріанка. (the same wording);was=text_alt Я вегетаріанка. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-am-vegan,Я веган.,,Ya vehan.,jˈa ʋˈɛhan,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я веганка. (the same wording);was=text_alt Я веганка. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Я не їм {}.,,Ya ne yim {}.,jˈa nˈɛ jˈiːm {},,2,uk-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,У мене алергія на {}.,,U mene alerhiia na {}.,ˈu mˈɛnɛ alˈɛrhiːja nˈa {},,2,uk-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Тут є рибний бульйон?,,Tut ye rybnyi bulion?,tˈut jˈɛ rˈɪbnɪj bˈuʎjon,,2,uk-agent-v1;ipa=espeak

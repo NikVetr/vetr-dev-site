@@ -48,7 +48,7 @@ transit-rides.is-it-delayed,Czy jest opóźnienie?,,tʃɨ jɛst ˌɔpuʑɲˈɛɲ
 transit-rides.i-am-in-a-hurry,Śpieszę się,,ɕpʲˈɛʃɛ ɕɛ,,2,pl-agent-v1;ipa=espeak
 transit-rides.which-platform,Który peron?,,ktˌurɨ pˈɛrɔn,,2,pl-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,O której jest następny?,,ɔ ktˌurɛj jɛst nastˈɛmpnɨ,,2,pl-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Przejechałem swój przystanek,Przejechałam swój przystanek,pʃˌɛjɛxˈawɛm sfˈuj pʃɨstˈanɛk,masculine; a woman says przejechałam,2,pl-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Przejechałem swój przystanek,,pʃˌɛjɛxˈawɛm sfˈuj pʃɨstˈanɛk,masculine; a woman says przejechałam,2,pl-agent-v1;fix=variants.csv speaker_gender=feminine Przejechałam swój przystanek (the same wording);was=text_alt Przejechałam swój przystanek (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Czy mogę użyć tego biletu?,,tʃɨ mˈɔɡɛ ˈuʒɨtɕ tˌɛɡɔ bʲilˈɛtu,,2,pl-agent-v1;ipa=espeak
 place-words.scenic-area,strefa widokowa,,strˈɛfa vˌidɔkˈɔva,,2,pl-gloss-v1;ipa=espeak
 place-words.visitor-center,informacja turystyczna,,ˌinfɔrmˈatsja tˌurɨstˈɨtʃna,,2,pl-agent-v1;ipa=espeak

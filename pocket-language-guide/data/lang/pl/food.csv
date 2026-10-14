@@ -6,8 +6,8 @@ dietary-needs.less-spicy,Mniej ostre,,mɲˈɛj ˈɔstrɛ,,2,pl-agent-v1;ipa=espe
 dietary-needs.no-peanuts,Bez orzeszków ziemnych,,bˈɛs ɔʒˈɛʃkuv ʑˈɛmnɨx,,2,pl-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Bez orzechów,,bˈɛs ɔʒˈɛxuf,,2,pl-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Bez owoców morza,,bˈɛs ɔvˈɔtsuf mˈɔʒa,,2,pl-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Jestem wegetarianinem,Jestem wegetarianką,jˌɛstɛm vˌɛɡɛtˌarjaɲˈinɛm,masculine; a woman says wegetarianką,2,pl-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Jestem weganinem,Jestem weganką,jˌɛstɛm vˌɛɡaɲˈinɛm,masculine; a woman says weganką,2,pl-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Jestem wegetarianinem,,jˌɛstɛm vˌɛɡɛtˌarjaɲˈinɛm,masculine; a woman says wegetarianką,2,pl-agent-v1;fix=variants.csv speaker_gender=feminine Jestem wegetarianką (the same wording);was=text_alt Jestem wegetarianką (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-am-vegan,Jestem weganinem,,jˌɛstɛm vˌɛɡaɲˈinɛm,masculine; a woman says weganką,2,pl-agent-v1;fix=variants.csv speaker_gender=feminine Jestem weganką (the same wording);was=text_alt Jestem weganką (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Nie jem tego: {},,ɲˈɛjɛm tˈɛɡɔ {},,2,pl-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,Mam alergię na to: {},,mˈam alˈɛrɡjɛ nˈatɔ {},,2,pl-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Czy jest w tym wywar z ryb?,,tʃɨ jɛst f tɨm vˈɨvar z rˈɨp,,2,pl-agent-v1;ipa=espeak

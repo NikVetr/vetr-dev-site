@@ -80,8 +80,8 @@ etiquette.remove-shoes,Потрібно роззутися?,,Potribno rozzutysia
 etiquette.photo-of-you,Можна вас сфотографувати?,,Mozhna vas sfotohrafuvaty?,mˈoʒna ʋˈas sfotohrˈafuʋatɪ,,2,uk-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Можна тут сісти?,,Mozhna tut sisty?,mˈoʒna tˈut sˈiːstɪ,,2,uk-agent-v1;ipa=espeak
 etiquette.queue-for,Це черга на {}?,,Tse cherha na {}?,tsˈɛ tʃˈɛrha nˈa {},,2,uk-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Я нормально одягнений?,Я нормально одягнена?,Ya normalno odiahnenyi?,jˈa normˈaʎno odjahnˈɛnɪj,,2,uk-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,Я не хотів вас образити.,Я не хотіла вас образити.,Ya ne khotiv vas obrazyty.,jˈa nˈɛ xˈotiːʋ ʋˈas obrˈazɪtɪ,,2,uk-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Я нормально одягнений?,,Ya normalno odiahnenyi?,jˈa normˈaʎno odjahnˈɛnɪj,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я нормально одягнена? (the same wording);was=text_alt Я нормально одягнена? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Я не хотів вас образити.,,Ya ne khotiv vas obrazyty.,jˈa nˈɛ xˈotiːʋ ʋˈas obrˈazɪtɪ,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я не хотіла вас образити. (the same wording);was=text_alt Я не хотіла вас образити. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 etiquette.what-is-customary,Як тут прийнято?,,Yak tut pryiniato?,jˈak tˈut prɪjɲˈato,,2,uk-agent-v1;ipa=espeak
 etiquette.keep-the-change,Решти не треба.,,Reshty ne treba.,rˈɛʃtɪ nˈɛ trˈɛba,,2,uk-agent-v1;ipa=espeak
 children.cannot-find-my-child,Я не можу знайти свою дитину.,,Ya ne mozhu znaity svoiu dytynu.,jˈa nˈɛ mˈoʒu znˈajtɪ zʋˈoju dɪtˈɪnu,,2,uk-agent-v1;ipa=espeak

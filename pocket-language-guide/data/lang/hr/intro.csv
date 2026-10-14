@@ -7,14 +7,14 @@ introductions.this-is-my-friend,Ovo je moj prijatelj,,ˈovo je mˈoj prijateʎ,"
 introductions.i-am-from,Ja sam iz ovog mjesta: {},,jˈaː sam ˈiz ˈovoɡ mjˈesta {},"'I am from this place:' -- iz takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
 introductions.where-are-you-from,Odakle ste?,,odakle ste,,2,hr-agent-v1;ipa=espeak
 introductions.how-are-you,Kako ste?,,kˈako ste,,2,hr-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,,2,hr-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Turist sam,,tˈurist sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Turistkinja sam (the same wording);was=text_alt Turistkinja sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Ovo je moj muž,Ovo je moja žena,ˈovo je mˈoj mˈuʒ,husband / wife,2,hr-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Ovo je moja kći,Ovo je moj sin,ˈovo je mˈoja ktɕˈi,daughter / son,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-husband,Ovo je moj muž,,ˈovo je mˈoj mˈuʒ,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-wife,Ovo je moja žena,,ˈovo je mˈoja ʒˈena,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-son,Ovo je moj sin,,ˈovo je mˈoj sˈin,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Ovo je moja kći,,ˈovo je mˈoja ktɕˈi,,2,hr-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,,2,hr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Putujem sam,,putujem sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Putujem sama (the same wording);was=text_alt Putujem sama (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 about-me.i-am-a-student,Student sam,,stˈudent sam,masculine; a woman says Studentica sam,2,hr-agent-v1;ipa=espeak
 about-me.i-am-retired,U mirovini sam,,u mirovini sam,"I am retired, lit. 'I am in retirement' -- invariant, no gender marking; mirovina is the standard word, penzija (the old text) is marked colloquial",2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) s.v. mirovina 1 (stanje osobe koja je prestala obavljati svoj profesionalni posao ... [liječnik u mirovini, biti u mirovini], mir, penzija) and s.v. penzija (razg. 1. v. mirovina ... 2. ... [biti u penziji]);rule=the standard word, not the colloquial one;row-corrections-v9;ipa=espeak"
 about-me.i-am-a-teacher,Učitelj sam,,utʃiteʎ sam,masculine; a woman says Učiteljica sam,2,hr-agent-v1;ipa=espeak

@@ -13,7 +13,7 @@ lost-rescue.please-call-the-police,"Chiami la polizia, per favore",,"kjˈamɪ la
 lost-rescue.we-are-here,Siamo qui,,sjˌamo kwˈi,,2,it-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-location-pin,Guardi la mia posizione sulla mappa,,ɡwˈardɪ la mˌia pozitsiˈone sˌʊlla mˈappa,,2,it-agent-v1;ipa=espeak
 lost-rescue.i-cannot-walk,Non riesco a camminare,,non riˈesko a kamminˈare,,2,it-agent-v1;ipa=espeak
-lost-rescue.i-sprained-my-ankle,Ho la caviglia slogata,Mi sono slogato/a la caviglia,o la kavˈiʎa zloɡˈata,,2,it-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Ho la caviglia slogata,,o la kavˈiʎa zloɡˈata,,2,"it-agent-v1;was=text_alt Mi sono slogato/a la caviglia (the speaker's gender as a slash in a second wording; the text Ho la caviglia slogata is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 lost-rescue.please-contact-rescue,Chiami i soccorsi,Chiami il soccorso alpino,kjˈamɪ i sokkˈorsɪ,,2,it-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,Non trovo il mio compagno di viaggio,Non trovo la mia compagna di viaggio,non trˈɔvo il mˌio kompˈaɲɲo dɪ vjˈadʒdʒo,,2,it-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Guardi la mia posizione attuale,,ɡwˈardɪ la mˌia pozitsiˈone attʊˈale,,2,it-agent-v1;ipa=espeak
@@ -39,12 +39,12 @@ lost-rescue.where-is-lost-and-found,Dov'è l'ufficio oggetti smarriti?,,dovˈɛ 
 lost-rescue.i-cannot-find-my-hotel,Non trovo il mio albergo,,non trˈɔvo il mˌio albˈɛrɡo,,2,it-agent-v1;ipa=espeak
 lost-rescue.i-left-it-on-the-train,L'ho lasciato sul treno,,lo laʃˈato sʊl trˈɛno,,2,it-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,Non riesco a scendere,,non riˈesko a ʃˈɛndere,,2,it-agent-v1;ipa=espeak
-medical-conditions.i-am-diabetic,Ho il diabete,Sono diabetico/a,o il djabˈɛte,,2,it-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Ho il diabete,,o il djabˈɛte,,2,"it-agent-v1;was=text_alt Sono diabetico/a (the speaker's gender as a slash in a second wording; the text Ho il diabete is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 medical-conditions.i-need-insulin,Mi serve l'insulina,,mɪ sˈɛrve linsʊlˈina,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-have-asthma,Ho l'asma,,o lˈazma,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,Ho una malattia cardiaca,Ho una cardiopatia,o ˌʊna malattˈia kardˈiaka,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-penicillin,Ho un'allergia alla penicillina,,o ʊnallerdʒˈia ˌalla penitʃillˈina,,2,it-agent-v1;ipa=espeak
-medical-conditions.i-have-epilepsy,Ho l'epilessia,Sono epilettico/a,o lepilessˈia,,2,it-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Ho l'epilessia,,o lepilessˈia,,2,"it-agent-v1;was=text_alt Sono epilettico/a (the speaker's gender as a slash in a second wording; the text Ho l'epilessia is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 medical-conditions.my-blood-sugar-is-low,Ho la glicemia bassa,Ho un'ipoglicemia,o la ɡlitʃemˈia bˈassa,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Mi serve il mio inalatore,Mi serve lo spray per l'asma,mɪ sˈɛrve il mˌio inalatˈore,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Sono incinta,,sˌono intʃˈinta,,2,it-agent-v1;ipa=espeak

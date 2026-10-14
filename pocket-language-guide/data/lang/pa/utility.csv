@@ -7,7 +7,7 @@ utility-templates.do-you-have,ਤੁਹਾਡੇ ਕੋਲ {} ਹੈ?,,tuhāḍ�
 utility-templates.please-write-the-number,ਨੰਬਰ ਲਿਖ ਦਿਓ ਜੀ,,naṁbar likh diō jī,nʌnbəɾ lɪkʰ dɪo ɟi,write the number,2,pa-agent-v1;ipa=espeak
 utility-templates.i-need,ਮੈਨੂੰ {} ਦੀ ਲੋੜ ਹੈ,,mainūṁ {} dī lōṛ hai,mɛnũ {} di loɽ hɛ,to me there is need of {},2,pa-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,ਨੇੜੇ {} ਹੈ?,,nēṛē {} hai?,neɽe {} hɛ,is there a {} nearby?,2,pa-agent-v1;ipa=espeak
-utility-templates.how-much-is,{} ਕਿੰਨੇ ਦਾ ਹੈ?,,{} kiṁnē dā hai?,{} kɪnne da hɛ,of how much is {}?,2,pa-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} ਕਿੰਨੇ [ਦਾ|ਦੀ] ਹੈ?,,{} kiṁnē [dā|dī] hai?,{} kɪnne [da|di] hɛ,of how much is {}?,2,pa-agent-v1;fix=Bhai Maya Singh The Panjabi Dictionary (DSAL) p. 252 ਦਾ (sign of the genitive case masculine) and p. 317 ਦੀ (sign of gen. fem from Dá);was={} ਕਿੰਨੇ ਦਾ ਹੈ? / {} kiṁnē dā hai? (the masculine -- wrong for a feminine thing);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 utility-templates.is-this,ਇਹ {} ਹੈ?,,ih {} hai?,ɪ˥ {} hɛ,is this {}?,2,pa-agent-v1;ipa=espeak
 utility-templates.please,{} ਦਿਓ ਜੀ,,{} diō jī,{} dɪo ɟi,"give {}, please",2,pa-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,ਮੈਂ {} ਲੱਭ ਰਿਹਾ ਹਾਂ,,maiṁ {} labbh rihā hāṁ,mɛ̃ {} lʌ˥b ɾɪha hã,I am looking for {},2,pa-agent-v1;ipa=espeak

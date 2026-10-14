@@ -53,7 +53,7 @@ accessibility.help-me-carry,"Mi aiuti a portare questo, per favore",,"mɪ ajˈut
 accessibility.board-first,Posso salire prima degli altri?,,pˈɔsso salˈire prˈima dˌeʎɪ ˈaltrɪ,,2,it-agent-v1;ipa=espeak
 accessibility.door-width,Quanto è larga la porta?,,kwˈanto e lˈarɡa la pˈɔrta,,2,it-agent-v1;ipa=espeak
 accessibility.wheelchair-width,La mia sedia a rotelle è larga {} cm,,la mˌia sˈɛdia a rotˈɛlle e lˈarɡa {} tʃentˈimetrɪ,,2,it-agent-v1;ipa=espeak
-accessibility.hard-of-hearing,Ho problemi di udito,Sono ipoacusico/a,o problˈɛmɪ dɪ ʊdˈito,,2,it-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Ho problemi di udito,,o problˈɛmɪ dɪ ʊdˈito,,2,"it-agent-v1;was=text_alt Sono ipoacusico/a (the speaker's gender as a slash in a second wording; the text Ho problemi di udito is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 accessibility.speak-louder,"Parli più forte, per favore",,"pˈarlɪ pjʊ fˈɔrte, per favˈore",,2,it-agent-v1;ipa=espeak
 accessibility.visually-impaired,Sono ipovedente,Ho problemi di vista,sˌono ipovedˈɛnte,,2,it-agent-v1;ipa=espeak
 accessibility.take-your-arm,Posso prenderle il braccio?,,pˈɔsso prˈɛnderle il brˈatʃtʃo,,2,it-agent-v1;ipa=espeak

@@ -429,7 +429,7 @@ transit-rides.i-am-in-a-hurry,mu-JHEH JAL-dee hai,मुझे जल्दी �
 border-customs.this-is-for-personal-use,yah MEH-reh is-teh-MAAL keh li-YEH hai,यह मेरे इस्तेमाल के लिए है
 rail-station-words.carriage,DIB-baa,डिब्बा
 common-signs.do-not-touch,CHHOO-naa ma-NAA hai,छूना मना है
-utility-templates.how-much-is,{} KIT-neh kaa hai,{} कितने का है?
+utility-templates.how-much-is,{} KIT-neh [kaa|kee] hai,{} कितने [का|की] है?
 accessibility.help-me-carry,yah u-THAA-neh mein ma-DAD KEE-ji-yeh,यह उठाने में मदद कीजिए
 toilets.may-i-have-the-toilet-key,kyaa BAATH-room kee CHAA-bee mil sak-TEE hai,क्या बाथरूम की चाबी मिल सकती है?
 pronouns-verbs.be-called-call,naam / bu-LAA-naa,नाम / बुलाना

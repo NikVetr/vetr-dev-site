@@ -4,7 +4,7 @@ directions.how-do-i-get-to,Como se vai para {}?,,kˌomʊ sy vaɪ pˌaɾæ {},,2,
 directions.is-it-far,É longe?,,ɛ lˈoŋʒy,,2,pt-agent-v1;ipa=espeak
 directions.how-long-on-foot,Quanto tempo a pé?,,kwˈɐ̃ŋtʊ tˈeɪmpw a pˈɛ,,2,pt-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Mostre-me no mapa, por favor",Me mostre no mapa,"mˈɔstrymy nʊ mˈapæ, por favˈor",,2,pt-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Onde fica o {} mais próximo?,,ˌoŋdʒy fˈikæ ˈɔ {} mˈaɪs prˈɔsimʊ,,2,pt-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Onde fica [o|a] {} mais próxim[o|a]?,,ˌoŋdʒy fˈikæ [ˈɔ|ˈa] {} mˈaɪs prˈɔsim[ʊ|æ],,2,pt-agent-v1;fix=Priberam DPLP próximo adjectivo (1. Que está perto);in-pack=police-consulate.where-is-the-police-station (Onde fica a esquadra da polícia? -- the feminine article before a place);was=Onde fica o {} mais próximo? (the masculine article and adjective -- wrong for a feminine place: a farmácia mais próxima -- a paragem mais próxima);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Onde estou?,,ˌoŋdʒj estˌow,,2,pt-agent-v1;ipa=espeak
 directions.which-way,Para que lado?,,pˌaɾækˈi lˈadʊ,,2,pt-agent-v1;ipa=espeak
 directions.can-i-walk-there,Posso ir a pé?,,pˌɔsʊ ˈiɾ a pˈɛ,,2,pt-agent-v1;ipa=espeak

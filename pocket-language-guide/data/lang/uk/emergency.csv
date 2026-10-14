@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 emergency-medical.help,Допоможіть!,,Dopomozhit!,dopomˈoʒiːt,,2,uk-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,Викличте швидку!,Викличте швидку допомогу!,Vyklychte shvydku!,ʋɪklˈɪtʃtɛ ʃʋˈɪtku,,2,uk-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Мені потрібен лікар.,,Meni potriben likar.,mˈɛɲiː potrˈiːbɛn ʎˈiːkar,,2,uk-agent-v1;ipa=espeak
-emergency-medical.i-am-sick,Я хворий.,Я хвора.,Ya khvoryi.,jˈa ɣʋˈorɪj,,2,uk-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Я хворий.,,Ya khvoryi.,jˈa ɣʋˈorɪj,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я хвора. (the same wording);was=text_alt Я хвора. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 emergency-medical.i-am-injured,У мене травма.,,U mene travma.,ˈu mˈɛnɛ trˈaʋma,I have an injury,2,uk-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Болить тут.,,Bolyt tut.,bˈolɪt tˈut,,2,uk-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Де аптека?,,De apteka?,dˈɛ aptˈɛka,,2,uk-agent-v1;ipa=espeak
@@ -126,7 +126,7 @@ police-consulate.i-was-robbed,Мене пограбували.,,Mene pohrabuvaly
 police-consulate.i-want-a-lawyer,Я хочу адвоката.,,Ya khochu advokata.,jˈa xˈotʃu adʋˈokata,,2,uk-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,Повідомте моє консульство.,,Povidomte moie konsulstvo.,poʋˈiːdomtɛ mˈojɛ konsˈuʎzdʋo,,2,uk-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Я дзвоню в поліцію.,,Ya dzvoniu v politsiiu.,jˈa dzʋˈoɲu f poʎˈiːtsiːju,,2,uk-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,Я заарештований?,Я заарештована?,Ya zaareshtovanyi?,jˈa zaarɪʃtˈoʋanɪj,,2,uk-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Я заарештований?,,Ya zaareshtovanyi?,jˈa zaarɪʃtˈoʋanɪj,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я заарештована? (the same wording);was=text_alt Я заарештована? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Ні, дякую, мені не цікаво.",,"Ni, diakuiu, meni ne tsikavo.","ɲˈiː, djˈakuju, mˈɛɲiː nˈɛ tsiːkˈaʋo",,2,uk-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,На мене напали.,,Na mene napaly.,nˈa mˈɛnɛ napˈalɪ,they attacked me,2,uk-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,Ми домовлялися про іншу ціну.,,My domovlialysia pro inshu tsinu.,mˈɪ domoʋʎˈalɪsja prˈo ˈiːnʃu tsˈiːnu,we agreed a different price,2,uk-agent-v1;ipa=espeak

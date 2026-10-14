@@ -43,7 +43,7 @@ toilets.the-toilet-will-not-flush,El inodoro no descarga,El baño no descarga,el
 toilets.baby-change,Cambiador de bebés,,kˌambjadˈoɾ de bebˈes,,2,es-agent-v1;ipa=espeak
 toilets.squat-toilet,Inodoro a la turca,Váter turco,ˌinodˈoɾo a la tˈuɾka,,1,es-agent-v1;ipa=espeak
 building-help.what-room-number-is-this,¿Qué número de habitación es esta?,,kˈe nˈumeɾo de ˌabitasjˈon ˈes ˈesta,,2,es-agent-v1;ipa=espeak
-building-help.i-am-lost,Me perdí,Estoy perdido/a,me peɾdˈi,,2,es-agent-v1;ipa=espeak
+building-help.i-am-lost,Me perdí,,me peɾdˈi,,2,"es-agent-v1;was=text_alt Estoy perdido/a (the speaker's gender as a slash in a second wording; the text Me perdí is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 building-help.where-is-reception,¿Dónde está la recepción?,,dˈonde estˈa la rˌesepsjˈon,,2,es-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,¿Dónde hay un enchufe?,¿Dónde hay un tomacorriente?,dˈonde ˈaɪ ˈun entʃˈufe,,2,es-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,¿Es esta la entrada correcta?,,ˈes ˈesta la entɾˈada korˈekta,,2,es-agent-v1;ipa=espeak

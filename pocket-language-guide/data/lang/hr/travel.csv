@@ -4,7 +4,7 @@ directions.how-do-i-get-to,Kako doći ovamo: {}?,,kˈako dˈotɕi ovamo {},"'how
 directions.is-it-far,Je li daleko?,,je li daleko,,2,hr-agent-v1;ipa=espeak
 directions.how-long-on-foot,Koliko pješke?,,koliko pjˈeʃke,,2,hr-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Molim vas, pokažite mi na karti",,"mˈolim vˈas, pokaʒite mˈi nˈa kˈarti",,2,hr-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Gdje je najbliži {}?,,ɡdjˈe je najbliʒi {},"najbliža before a feminine noun, najbliže before a neuter one",2,hr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Gdje je najbliž[i|a|e] {}?,,ɡdjˈe je najbliʒ[i|a|e] {},"'where is the nearest {}?' -- najbliži, najbliža or najbliže as the place is masculine, feminine or neuter",2,hr-agent-v1;fix=hr.wikipedia Nacionalni park Manas rev 7107906 (najbliži grad) -- Kislovodsk rev 7345101 (Najbliža zračna luka) -- Tiškovac Lički rev 7430690 (Najbliže naselje);was=Gdje je najbliži {}? (the masculine adjective -- wrong for a feminine or neuter place -- as its literal said: najbliža before a feminine noun -- najbliže before a neuter one);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Gdje se nalazim?,,ɡdjˈe sˈe nalazim,,2,hr-agent-v1;ipa=espeak
 directions.which-way,U kojem smjeru?,,u kˈojem smjˈeru,,2,hr-agent-v1;ipa=espeak
 directions.can-i-walk-there,Mogu li tamo pješke?,,mˈoɡu li tˈamo pjˈeʃke,,2,hr-agent-v1;ipa=espeak
@@ -48,7 +48,7 @@ transit-rides.is-it-delayed,Ima li kašnjenja?,,ima li kaʃɲeɲa,,2,hr-agent-v1
 transit-rides.i-am-in-a-hurry,U žurbi sam,,u ʒˈurbi sam,,2,hr-agent-v1;ipa=espeak
 transit-rides.which-platform,Koji peron?,,kˈoji pˈeron,,2,hr-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,U koliko sati ide sljedeći?,,u koliko sˈati ˈide sʎedetɕi,,2,hr-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,Prošla sam svoju stanicu,prˈoʃao sam svˈoju stanitsu,,2,hr-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,,prˈoʃao sam svˈoju stanitsu,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Prošla sam svoju stanicu (the same wording);was=text_alt Prošla sam svoju stanicu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Mogu li koristiti ovu kartu?,,mˈoɡu li koristiti ˈovu kˈartu,,2,hr-agent-v1;ipa=espeak
 place-words.scenic-area,turističko područje,,turistitʃko podrutʃje,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 place-words.visitor-center,turistički informativni centar,,turistitʃki informativni tsˈentar,,2,hr-agent-v1;ipa=espeak
@@ -58,11 +58,11 @@ place-words.service-desk,informacije,,informatsije,,2,hr-agent-v1;ipa=espeak
 place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,2,hr-agent-v1;ipa=espeak
 place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,2,hr-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,turistička atrakcija,,turistitʃka atraktsija,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Turist sam,,tˈurist sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Turistkinja sam (the same wording);was=text_alt Turistkinja sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 border-customs.here-is-my-passport,Ovo je moja putovnica,,ˈovo je mˈoja putovnitsa,,2,hr-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Trajanje boravka (broj dana): {},,trajaɲe borafka brˈoj dˈana {},"'length of stay (number of days): {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 (CELEX 32009R0810 -- the Croatian text read through the Publications Office's cellar -- whose Annex I form is an image) Annex VII 4 (Rubrika: TRAJANJE BORAVKA … DANA -- Ta rubrika sadrži broj dana);fix=Hrvatski jezični portal boravak 1 (vrijeme provedeno u nekom mjestu);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Ostajem {} dana (right from two -- wrong for one: jedan dan);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nemam ništa za prijaviti,,nemam nˈiʃta zˈa prijaviti,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,Odsjeo sam ovdje: {},Odsjela sam ovdje: {},ˈotsjeo sam ˈovdje {},man speaking / woman speaking; 'I am staying here:' keeps the address in the nominative,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Odsjeo sam ovdje: {},,ˈotsjeo sam ˈovdje {},man speaking / woman speaking; 'I am staying here:' keeps the address in the nominative,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Odsjela sam ovdje: {} (the same wording);was=text_alt Odsjela sam ovdje: {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 border-customs.i-am-here-for-business,Ovdje sam poslovno,,ˈovdje sam poslovno,,2,hr-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Imam povratnu kartu,,imam povratnu kˈartu,,2,hr-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Ovdje sam u posjetu rodbini,,ˈovdje sam u posjetu rodbini,,2,hr-agent-v1;ipa=espeak

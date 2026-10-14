@@ -4,7 +4,7 @@ directions.how-do-i-get-to,Cum ajung la {}?,,kˈum aʒˈuŋɡ la {},,2,ro-agent-
 directions.is-it-far,Este departe?,,jˌeste depˈarte,,2,ro-agent-v1;ipa=espeak
 directions.how-long-on-foot,Cât durează pe jos?,,kˈɨt duɾˈeazə pe ʒˈos,,2,ro-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,Vă rog arătați-mi pe hartă,,və rˈoɡ ˌaɾətˈatsʲimʲ pe hˈartə,,2,ro-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Unde este cel mai apropiat {}?,,ˈunde jˌeste tʃel maɪ ˌapropjˈat {},,2,ro-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Unde este [cel|cea] mai apropia[t|tă] {}?,,ˈunde jˌeste tʃe[l|a] maɪ ˌapropjˈat[|ə] {},,2,ro-agent-v1;fix=DEX '09 CEL -- CEA -- cei -- cele (Urmat de mai formează superlativul relativ: Cel mai bun) and APROPIAT -- -Ă adj. 1 (Care se află aproape -- în spațiu sau în timp);fix=ro.wikipedia Gen gramatical rev 18000724 (substantivele neutre sunt ... masculine la singular -- so a neuter place takes cel ... apropiat);was=Unde este cel mai apropiat {}? (the masculine superlative -- wrong for a feminine place: cea mai apropiată farmacie -- cea mai apropiată stație);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Unde sunt?,,ˈunde sˈunt,,2,ro-agent-v1;ipa=espeak
 directions.which-way,Pe unde?,,pe ˈunde,,2,ro-agent-v1;ipa=espeak
 directions.can-i-walk-there,Pot merge pe jos până acolo?,,pot mˈerdʒe pe ʒˈos pˈɨnə akˈolo,,2,ro-agent-v1;ipa=espeak
@@ -41,7 +41,7 @@ transit-rides.please-tell-me-where-to-get-off,Vă rog spuneți-mi unde să cobor
 transit-rides.is-this-direct,Este direct?,,jˌeste diɾˈekt,,2,ro-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-transfer,Trebuie să schimb?,,trˈebwiˌe sə skˈimb,,2,ro-agent-v1;ipa=espeak
 transit-rides.is-it-delayed,Are întârziere?,,ˌaɾe ˌɨntɨrzjˈeɾe,,2,ro-agent-v1;ipa=espeak
-transit-rides.i-am-in-a-hurry,Sunt grăbit,Sunt grăbită,sunt ɡrəbˈit,,2,ro-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,Sunt grăbit,,sunt ɡrəbˈit,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt grăbită (the same wording);was=text_alt Sunt grăbită (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 transit-rides.which-platform,Care peron?,,kˌaɾe peɾˈon,,2,ro-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,La ce oră este următorul?,,la tʃe ˈorə jˌeste ˌurmətˈorul,,2,ro-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,Am trecut de stația mea,,am trekˈut de stˈatsja mˈea,,2,ro-agent-v1;ipa=espeak

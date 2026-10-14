@@ -441,7 +441,7 @@ quick-directions.behind,KHALF,خلف
 transit-rides.which-platform,ay ra-SEEF,أيّ رصيف؟
 rail-station-words.seat,MAK-ad,مقعد
 common-signs.temporarily-closed,MOOGH-lak moo-AK-ka-tan,مغلق مؤقتاً
-utility-templates.is-this,hal HAA-tha,هل هذا {}؟
+utility-templates.is-this,hal [HAA-tha|HAA-thi-hi] {},هل [هذا|هذه] {}؟
 toilets.there-is-no-toilet-paper,laa YOO-jad WA-rak ham-MAAM,لا يوجد ورق حمّام
 accessibility.board-first,hal yoom-KI-noo-nee as-soo-OOD AW-wa-lan,هل يمكنني الصعود أولاً؟
 pronouns-verbs.have,AN-dee,عندي

@@ -4,7 +4,7 @@ directions.how-do-i-get-to,Hoe kom ik bij {}?,,hˈu kˈɔm ɪk bˈɛɪ {},,2,nl-
 directions.is-it-far,Is het ver?,,ɪs hət vˈɛr,,2,nl-agent-v1;ipa=espeak
 directions.how-long-on-foot,Hoe lang lopen is het?,,hˈu lˈɑŋ lˈoːpən ɪs hət,,2,nl-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Kunt u het me op de kaart laten zien, alstublieft?",,"kʏnt y hət mə ɔp də kˈaːrt lˈaːtən zˈin, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Waar is de dichtstbijzijnde {}?,,ʋˈaːr ɪs də dˈɪxtstbɛɪzˌɛɪndə {},,2,nl-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Waar is [de|het] dichtstbijzijnde {}?,,ʋˈaːr ɪs [də|hə] [dˈɪxtstbɛɪzˌɛɪndə|tˈɪxtstbɛɪzˌɛɪndə] {},,2,nl-agent-v1;fix=nl.wikipedia Nederlandse grammatica rev 71945647 (de -- mannelijk of vrouwelijk ... het -- onzijdig);fix=nl.wikipedia Docker (Cumbria) rev 68694890 (Het dichtstbijzijnde station is station Kendal -- dichtstbijzijnde itself the same for both);was=Waar is de dichtstbijzijnde {}? (the common-gender article -- wrong for a het-word: het station -- het ziekenhuis -- het hotel);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Waar ben ik?,,ʋˈaːr bɛn ɪk,,2,nl-agent-v1;ipa=espeak
 directions.which-way,Welke kant op?,,ʋˈɛlkə kˈɑnt ˈɔp,,2,nl-agent-v1;ipa=espeak
 directions.can-i-walk-there,Kan ik daar lopend komen?,,kɑn ɪk dˈaːr lˈoːpənt kˈoːmən,,2,nl-agent-v1;ipa=espeak

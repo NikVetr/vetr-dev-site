@@ -1,1 +1,41 @@
 language,gender,color,notes
+es,masculine,#1f5fae,"el, -o; es.wikipedia Rosado rev 175167530: celeste for boys (distinguir a los niños con el color celeste)"
+es,feminine,#c2185b,"la, -a; es.wikipedia Rosado rev 175167530: el rosa se relaciona frecuentemente con lo femenino"
+fr,masculine,#1f5fae,"le, un; fr.wikipedia Rose (couleur) rev 238311516: le bleu pâle ceux de sexe masculin"
+fr,feminine,#c2185b,"la, une; fr.wikipedia Rose (couleur) rev 238311516: la couleur associée aux bébés de sexe féminin"
+it,masculine,#1f5fae,"il, un, -o, questo; blue, as every source here that names a colour for boys or men gives it"
+it,feminine,#c2185b,"la, una, -a, questa; it.wikipedia Rosa (colore) rev 151191046: il rosa è visto come un simbolo di femminilità"
+pt,masculine,#1f5fae,"o, -o; blue, as every source here that names a colour for boys or men gives it"
+pt,feminine,#c2185b,"a, -a; pt.wikipedia Cor-de-rosa rev 72792246: o rosa é visto como um símbolo de feminilidade"
+ro,masculine,#1f5fae,"un, cel, -t -- and every neuter, which is masculine in the singular (ro.wikipedia Gen gramatical rev 18000724: masculine la singular și feminine la plural); ro.wikipedia Albastru rev 17960199: culoarea cea mai asociată cu masculinul"
+ro,feminine,#c2185b,"o, cea, -tă; ro.wikipedia Roz rev 17955143: culoarea asociată cel mai adesea cu ... feminitatea"
+de,masculine,#1f5fae,der; de.wikipedia Rosa (Farbe) rev 270813330: kleine Jungen hellblau
+de,feminine,#c2185b,die; de.wikipedia Rosa (Farbe) rev 270813330: kleine Mädchen rosa
+de,neuter,#00796b,"das; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+nl,common,#6a1b9a,"de, for masculine and feminine alike (nl.wikipedia Nederlandse grammatica rev 71945647: de, mannelijk of vrouwelijk, overkoepelend ook wel zijdig genoemd), so it takes neither colour; purple, the two mixed, kept apart from the teal for every reader"
+nl,neuter,#00796b,"het; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+ru,masculine,#1f5fae,"ближайший; blue, as every source here that names a colour for boys or men gives it"
+ru,feminine,#c2185b,ближайшая; ru.wikipedia Розовый цвет rev 152641383: розовый цвет одежды стереотипно воспринимается как женский
+ru,neuter,#00796b,"ближайшее; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+uk,masculine,#1f5fae,"найближчий; blue, as every source here that names a colour for boys or men gives it"
+uk,feminine,#c2185b,найближча; uk.wikipedia Рожевий колір rev 45194754: традиційний дівчачий колір
+uk,neuter,#00796b,"найближче; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+hr,masculine,#1f5fae,najbliži; hr.wikipedia Ružičasta rev 7134417: plava muška ... plava odjeća simbolizira dječake
+hr,feminine,#c2185b,najbliža; hr.wikipedia Ružičasta rev 7134417: crvena ženska ... ružičasta djevojčice
+hr,neuter,#00796b,"najbliže; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+ar,masculine,#1f5fae,"هذا; blue, as every source here that names a colour for boys or men gives it"
+ar,feminine,#c2185b,هذه; ar.wikipedia زهري (لون) rev 76931012: pink symbolises الفتيات (girls)
+hi,masculine,#1f5fae,"का; blue, as every source here that names a colour for boys or men gives it"
+hi,feminine,#c2185b,"की; India marks women's facilities pink: MoHUA Swachh Bharat Mission (Urban) Gender Responsive Guidelines, the NCPCR PINK Toilet Model (the PINK colour making these buildings easily identifiable and demarcating them exclusively for women)"
+ur,masculine,#1f5fae,"کا; blue, as every source here that names a colour for boys or men gives it"
+ur,feminine,#c2185b,کی; ur.wikipedia کراچی میں نقل و حمل rev 12008139: گلابی بسیں صرف خواتین کے لیے ہیں
+pa,masculine,#1f5fae,"ਦਾ; blue, as every source here that names a colour for boys or men gives it"
+pa,feminine,#c2185b,ਦੀ; MoHUA SBM-U Gender Responsive Guidelines: the PINK Toilet Model for women
+gu,masculine,#1f5fae,"નજીકનો; blue, as every source here that names a colour for boys or men gives it"
+gu,feminine,#c2185b,નજીકની; MoHUA SBM-U Gender Responsive Guidelines: the PINK Toilet Model for women
+gu,neuter,#00796b,"નજીકનું; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+mr,masculine,#1f5fae,"जवळचा, हा; blue, as every source here that names a colour for boys or men gives it"
+mr,feminine,#c2185b,"जवळची, ही; mr.wikipedia गुलाबी rev 2719344: गुलाबी रंग हा बहुदा मुलींचा आवडीचा रंग असतो; MoHUA SBM-U PINK Toilet Model"
+mr,neuter,#00796b,"जवळचे, हे; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
+ha,masculine,#1f5fae,"yake, ne; ha.wikipedia Ruwan Kwalba a Amurka rev 794448: kwalaben shuɗi ga yara maza"
+ha,feminine,#c2185b,"take, ce; ha.wikipedia Ruwan Kwalba a Amurka rev 794448: kwalaben ruwan hoda ga 'yan mata"

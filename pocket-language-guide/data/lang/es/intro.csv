@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 introductions.my-name-is,Me llamo {},,me ʝˈamo {},,2,es-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Mucho gusto,Encantado/a,mˈutʃo ɡˈusto,,2,es-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Mucho gusto,,mˈutʃo ɡˈusto,,2,"es-agent-v1;was=text_alt Encantado/a (the speaker's gender as a slash in a second wording; the text Mucho gusto is the same for every speaker);rule=a slash is not a wording -- the row's text already serves a woman and a man alike, so the slashed alternative is cleared rather than given a variant (speaker-variants.md);gender-alternatives-v1;ipa=espeak"
 introductions.what-is-your-name,¿Cómo se llama?,,kˈomo se ʝˈama,,2,es-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Viajamos juntos,,bjaxˈamos xˈuntos,,2,es-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Es mi amigo,Es mi amiga,ˈes mi amˈiɡo,,2,es-agent-v1;ipa=espeak

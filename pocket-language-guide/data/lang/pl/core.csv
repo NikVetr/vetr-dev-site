@@ -13,7 +13,7 @@ pronouns-verbs.have,mieć,,mʲˈɛtɕ,,2,pl-agent-v1;ipa=espeak
 pronouns-verbs.do-not-have,nie mieć,,ɲˈɛmʲɛtɕ,the object then goes into the genitive,2,pl-agent-v1;ipa=espeak
 pronouns-verbs.go,iść,,ˈiɕtɕ,,2,pl-agent-v1;ipa=espeak
 pronouns-verbs.come,przyjść,,pʃˈɨjɕtɕ,,2,pl-agent-v1;ipa=espeak
-pronouns-verbs.would-like,chciałbym / chciałabym,,xtɕˈawbɨm / xtɕˈawabˌɨm,masculine / feminine speaker,2,pl-agent-v1;ipa=espeak
+pronouns-verbs.would-like,chciałbym,,xtɕˈawbɨm,,2,pl-agent-v1;fix=in-pack variants sim-data.i-would-like-a-tourist-sim (Chciałabym kartę SIM dla turystów) and air-travel.i-would-like-a-window-seat (Chciałabym miejsce przy oknie);fix=registry/speaker-axes.csv pl speaker_gender (-łem vs -łam in the 1sg);was=chciałbym / chciałabym with literal masculine / feminine speaker (the speaker's gender as a slash in the text);rule=the base row says the masculine and a new feminine variant row the feminine (speaker-variants.md);gender-alternatives-v1;ipa=espeak
 pronouns-verbs.want,chcieć,,xtɕˈɛtɕ,,2,pl-agent-v1;ipa=espeak
 pronouns-verbs.look-for,szukać,,ʃˈukatɕ,,2,pl-agent-v1;ipa=espeak
 pronouns-verbs.buy,kupić,,kˈupitɕ,,2,pl-agent-v1;ipa=espeak

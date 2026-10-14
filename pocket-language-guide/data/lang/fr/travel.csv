@@ -29,7 +29,7 @@ directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale a {},,2,fr-agent
 directions.is-it-far,C'est loin ?,,sɛ lwˈɛ̃,,2,fr-agent-v1;ipa=espeak
 directions.how-long-on-foot,Combien de temps à pied ?,,kɔ̃bjɛ̃ də tɑ̃ a pjˈe,,2,fr-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Montrez-moi sur la carte, s'il vous plaît",,"mɔ̃tʁemwa syʁ la kˈaʁt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Où est le {} le plus proche ?,,u ɛ lˈə {} lə ply pʁˈɔʃ,,2,fr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Où est [le|la] {} [le|la] plus proche ?,,u ɛ [lˈə|lˈa] {} [lə|la] ply pʁˈɔʃ,,2,fr-agent-v1;fix=Larousse le -- la -- les article défini (Déterminant défini d'un groupe nominal -- dont il indique le genre et le nombre : L'homme est mortel. La voiture démarre.);was=Où est le {} le plus proche ? (the masculine article twice -- wrong for a feminine place: la pharmacie la plus proche -- la gare la plus proche);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Où suis-je ?,,u syˈiʒ,,2,fr-agent-v1;ipa=espeak
 directions.which-way,Par où ?,,paʁ ˈu,,2,fr-agent-v1;ipa=espeak
 directions.can-i-walk-there,Peut-on y aller à pied ?,,pøtɔ̃n i ale a pjˈe,,2,fr-agent-v1;ipa=espeak

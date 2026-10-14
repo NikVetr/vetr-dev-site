@@ -10,7 +10,7 @@ introductions.how-are-you,तुमचं कसं चाललं आहे?,,
 introductions.i-am-a-tourist,मी पर्यटक आहे,मी टूरिस्ट आहे,mī paryaṭaka āhē,mˈi pˈʌrjəʈˌək ˈaːheː,,2,mr-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,हा माझा नवरा / ही माझी बायको,,hā mājhā navarā / hī mājhī bāyakō,hˈaː mˈaːɟʰaː nˈʌvɾˌaː / hˈi mˈaːɟʰi bˈaːjkˌoː,my husband / my wife,2,mr-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,ही माझी मुलगी / हा माझा मुलगा,,hī mājhī mulagī / hā mājhā mulagā,hˈi mˈaːɟʰi mˈʊlɡˌi / hˈaː mˈaːɟʰaː mˈʊlɡˌaː,my daughter / my son,2,mr-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,मी एकटा प्रवास करत आहे,मी एकटी प्रवास करत आहे,mī ēkaṭā pravāsa karata āhē,mˈi ˈeːkʈˌaː pɾəvˈaːs kˈʌɾət ˈaːheː,,2,mr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,मी एकटा प्रवास करत आहे,,mī ēkaṭā pravāsa karata āhē,mˈi ˈeːkʈˌaː pɾəvˈaːs kˈʌɾət ˈaːheː,,2,mr-agent-v1;fix=variants.csv speaker_gender=feminine मी एकटी प्रवास करत आहे (the same wording);was=text_alt मी एकटी प्रवास करत आहे (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 family-intros.this-is-my-husband,हा माझा नवरा आहे,,hā mājhā navarā āhē,hˈaː mˈaːɟʰaː nˈʌvɾˌaː ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-wife,ही माझी बायको आहे,,hī mājhī bāyakō āhē,hˈi mˈaːɟʰi bˈaːjkˌoː ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,हा माझा मुलगा आहे,,hā mājhā mulagā āhē,hˈaː mˈaːɟʰaː mˈʊlɡˌaː ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

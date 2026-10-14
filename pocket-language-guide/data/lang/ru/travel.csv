@@ -4,7 +4,7 @@ directions.how-do-i-get-to,{} — как туда доехать?,,{} — kak tu
 directions.is-it-far,Это далеко?,,Eto daleko?,ˈɛtʌ dʌɭʲikˈo,,2,ru-agent-v1;ipa=espeak
 directions.how-long-on-foot,Сколько идти пешком?,,Skolʼko idti peshkom?,skˈoɭkʌ ɪtʲtʲˈi pʲiʃkˈom,,2,ru-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Покажите на карте, пожалуйста.",,"Pokazhite na karte, pozhaluysta.","pʌkaʒˈɨtʲi nə kˈɑrtʲi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Где ближайший {}?,,Gde blizhayshiy {}?,ɡdʲˈe bɭʲiʒˈɑjʃɨj {},,2,ru-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Где ближайш[ий|ая|ее] {}?,,Gde blizhaysh[iy|aya|eye] {}?,ɡdʲˈe bɭʲiʒˈɑjʃ[ɨj|ʌja|ɨjɪ] {},,2,ru-agent-v1;fix=ru.wikipedia Нульви rev 135552099 (Ближайший аэропорт) -- Васильчики rev 154547760 (Ближайшая станция метро) -- Мещёрский Бор rev 152556381 (Ближайшее отделение скорой медицинской помощи);was=Где ближайший {}? / Gde blizhayshiy {}? (the masculine adjective -- wrong for ближайшая аптека -- ближайшая остановка -- ближайшее отделение);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Где я нахожусь?,,Gde ya nakhozhusʼ?,ɡdʲˈe ˈja nʌxʌʒˈusʲ,,2,ru-agent-v1;ipa=espeak
 directions.which-way,В какую сторону?,,V kakuyu storonu?,f kakˈuju stˈorʌnu,,2,ru-agent-v1;ipa=espeak
 directions.can-i-walk-there,Туда можно дойти пешком?,,Tuda mozhno doyti peshkom?,tudˈɑ mˈoʒnʌ dʌjtʲˈi pʲiʃkˈom,,2,ru-agent-v1;ipa=espeak

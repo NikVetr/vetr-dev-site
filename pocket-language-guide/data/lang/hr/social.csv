@@ -52,7 +52,7 @@ phone-text-power.do-you-have-a-power-bank,Imate li prijenosni punjač?,power ban
 phone-text-power.the-translation-may-be-inaccurate,Prijevod možda nije točan,,prijevod mˈoʒda nije tˈotʃan,,2,hr-agent-v1;ipa=espeak
 phone-text-power.please-confirm,"Molim vas, potvrdite",,"mˈolim vˈas, potvrdite",,2,hr-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Mogu li ovdje napuniti mobitel?,,mˈoɡu li ˈovdje napuniti mobitel,,2,hr-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,Želio bih turističku SIM karticu,Željela bih turističku SIM karticu,ʒˈelio bˈix turistitʃku sˈim kartitsu,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.i-would-like-a-tourist-sim,Želio bih turističku SIM karticu,,ʒˈelio bˈix turistitʃku sˈim kartitsu,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Željela bih turističku SIM karticu (the same wording);was=text_alt Željela bih turističku SIM karticu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak+loan
 sim-data.may-i-use-your-wifi,Mogu li se spojiti na vaš Wi-Fi?,,mˈoɡu li sˈe spojiti nˈa vˈaʃ vˈajfaj,,2,hr-agent-v1;ipa=espeak+loan
 sim-data.how-much-data-is-included,Koliko je podataka uključeno?,,koliko je podataka ukʎutʃeno,,2,hr-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,Trebate li moju putovnicu?,,trebate li mˈoju putovnitsu,,2,hr-agent-v1;ipa=espeak
@@ -81,8 +81,8 @@ etiquette.remove-shoes,Treba li izuti obuću?,,trˈeba li izuti obutɕu,,2,hr-ag
 etiquette.photo-of-you,Mogu li vas fotografirati?,,mˈoɡu li vˈas fotoɡrafirati,,2,hr-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Mogu li ovdje sjesti?,,mˈoɡu li ˈovdje sjˈesti,,2,hr-agent-v1;ipa=espeak
 etiquette.queue-for,Je li ovo red za {}?,,je li ˈovo rˈed zˈa {},"za takes the accusative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Jesam li prikladno odjeven?,Jesam li prikladno odjevena?,jˈesam li prikladno odjeven,,2,hr-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,Nisam vas htio uvrijediti,Nisam vas htjela uvrijediti,nisam vˈas xtˈio uvrijediti,,2,hr-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Jesam li prikladno odjeven?,,jˈesam li prikladno odjeven,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Jesam li prikladno odjevena? (the same wording);was=text_alt Jesam li prikladno odjevena? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Nisam vas htio uvrijediti,,nisam vˈas xtˈio uvrijediti,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Nisam vas htjela uvrijediti (the same wording);was=text_alt Nisam vas htjela uvrijediti (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 etiquette.what-is-customary,Što je ovdje običaj?,,ʃto je ˈovdje obitʃaj,,2,hr-agent-v1;ipa=espeak
 etiquette.keep-the-change,"Zadržite ostatak, molim",,"zadrʒite ostatak, mˈolim",,2,hr-agent-v1;ipa=espeak
 children.cannot-find-my-child,Ne mogu naći svoje dijete,,nˈe mˈoɡu nˈatɕi svˈoje dijete,"'I cannot find my child' -- deliberately not izgubio sam dijete, which in Croatian as in English can be read as bereavement",2,hr-agent-v1;ipa=espeak

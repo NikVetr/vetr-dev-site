@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Który to numer pokoju?,,ktˌurɨ tɔ nˈumɛr pɔkˈɔju,,2,pl-agent-v1;ipa=espeak
-building-help.i-am-lost,Zgubiłem się,Zgubiłam się,zɡubʲˈiwɛm ɕɛ,masculine; a woman says zgubiłam,2,pl-agent-v1;ipa=espeak
+building-help.i-am-lost,Zgubiłem się,,zɡubʲˈiwɛm ɕɛ,masculine; a woman says zgubiłam,2,pl-agent-v1;fix=variants.csv speaker_gender=feminine Zgubiłam się (the same wording);was=text_alt Zgubiłam się (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 building-help.where-is-reception,Gdzie jest recepcja?,,ɡdʑˈɛ jɛst rɛtsˈɛptsja,,2,pl-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Gdzie jest gniazdko?,,ɡdʑˈɛ jɛzd ɡɲˈastkɔ,,2,pl-agent-v1;ipa=espeak
 accessibility.step-free,Czy jest wejście bez schodów?,,tʃɨ jɛzd vˈɛjɕtɕɛ bˈɛs sxˈɔduf,,2,pl-agent-v1;ipa=espeak

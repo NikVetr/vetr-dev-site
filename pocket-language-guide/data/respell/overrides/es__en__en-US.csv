@@ -311,7 +311,7 @@ time-words.morning,la mah-NYAH-na,la mañana
 days-of-week.saturday,SAH-bah-doh,sábado
 months.june,HOO-nee-oh,junio
 border-customs.i-am-here-for-business,VEN-go por neh-GO-see-os,Vengo por negocios
-directions.where-is-the-nearest,DON-deh es-TA el {} mas ser-KAH-no,¿Dónde está el {} más cercano?
+directions.where-is-the-nearest,DON-deh es-TA [el|la] {} mas ser-KAH-n[o|a],¿Dónde está [el|la] {} más cercan[o|a]?
 quick-directions.on-the-left,a la ees-kee-ER-da,A la izquierda
 taxi.we-need-to-catch-the-high-speed-train,teh-NEH-mos keh to-MAR el tren deh AL-ta veh-lo-see-DAD,Tenemos que tomar el tren de alta velocidad
 transit-rides.is-this-direct,es dee-REK-toh,¿Es directo?
@@ -420,7 +420,7 @@ atm-cash.the-machine-is-out-of-service,el kah-HEH-ro es-TA FWEH-ra deh ser-VEE-s
 numbers-money.q,see-EH-teh,siete
 sim-data.does-it-need-registration,eye keh reh-hees-TRAR-la,¿Hay que registrarla?
 children.do-children-pay,los NEE-nyos PAH-gan,¿Los niños pagan?
-etiquette.dressed-appropriately,voy ves-TEE-doh ah-pro-pee-ah-dah-MEN-teh,¿Voy vestido/a apropiadamente?
+etiquette.dressed-appropriately,voy ves-TEE-doh ah-pro-pee-ah-dah-MEN-teh,¿Voy vestido apropiadamente?
 social-basics.sorry,lo see-EN-toh,Lo siento
 communication.please-wait-a-moment,"es-PEH-reh oon mo-MEN-toh, por fah-VOR","Espere un momento, por favor"
 time-scheduling.what-time-does-it-close,a keh O-ra see-EH-rra,¿A qué hora cierra?

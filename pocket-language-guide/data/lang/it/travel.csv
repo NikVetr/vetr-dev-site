@@ -103,7 +103,7 @@ border-customs.arrival-card,Carta di sbarco,Modulo d'ingresso,kˈarta dɪ zbˈar
 border-customs.transit,Transito,,trˈansito,,2,it-agent-v1;ipa=espeak
 border-customs.boarding-pass,Carta d'imbarco,,kˈarta dimbˈarko,,2,it-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Me lo mostri sulla mappa, per favore",,"me lo mˈostrɪ sˌʊlla mˈappa, per favˈore",,2,it-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Dov'è il {} più vicino?,Dov'è la {} più vicina?,dovˈɛ ˈiːl {} pjʊ vitʃˈino,,2,it-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Dov'è [il|la] {} più vicin[o|a]?,,dovˈɛ [ˈiːl|lˈa] {} pjʊ vitʃˈin[o|a],,2,it-agent-v1;fix=Treccani Vocabolario uno (art. indet. ... al masch. sing. ... le stesse norme che regolano l'uso dell'art. determ. masch. sing. il ... il femm. sing. una) and vicino agg. 1.a (Che è relativamente a poca distanza);was=Dov'è il {} più vicino? with text_alt Dov'è la {} più vicina? (the feminine sentence as a second cell -- which never prints -- where the one cell now offers both);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Dove mi trovo?,,dˈove mɪ trˈɔvo,,2,it-agent-v1;ipa=espeak
 directions.which-way,Da che parte?,,da ke pˈarte,,2,it-agent-v1;ipa=espeak
 directions.can-i-walk-there,Ci posso andare a piedi?,,tʃɪ pˈɔsso andˈare a pjˈedɪ,,2,it-agent-v1;ipa=espeak

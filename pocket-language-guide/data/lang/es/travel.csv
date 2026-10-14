@@ -29,7 +29,7 @@ directions.how-do-i-get-to,¿Cómo llego a {}?,,kˈomo ʝˈeɡo ˈa {},,2,es-age
 directions.is-it-far,¿Está lejos?,,estˈa lˈexos,,2,es-agent-v1;ipa=espeak
 directions.how-long-on-foot,¿Cuánto se tarda a pie?,,kwˈanto se tˈaɾda a pjˈe,,2,es-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Muéstremelo en el mapa, por favor",,"mwˈestɾemˌelo en el mˈapa, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
-directions.where-is-the-nearest,¿Dónde está el {} más cercano?,,dˈonde estˈa ˈel {} mˈas seɾkˈano,,2,es-agent-v1;ipa=espeak
+directions.where-is-the-nearest,¿Dónde está [el|la] {} más cercan[o|a]?,,dˈonde estˈa [ˈel|lˈa] {} mˈas seɾkˈan[o|a],,2,"es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) cercano, na adj. (Próximo -- inmediato en el tiempo o en el espacio);was=¿Dónde está el {} más cercano? (the masculine article and adjective -- wrong for a feminine place: la farmacia más cercana -- la parada más cercana);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak"
 directions.where-am-i,¿Dónde estoy?,,dˈonde estˈoɪ,,2,es-agent-v1;ipa=espeak
 directions.which-way,¿Por dónde?,,poɾ dˈonde,,2,es-agent-v1;ipa=espeak
 directions.can-i-walk-there,¿Puedo ir caminando?,¿Puedo ir andando?,pwˈedo ˈiɾ kˌaminˈando,,2,es-agent-v1;ipa=espeak

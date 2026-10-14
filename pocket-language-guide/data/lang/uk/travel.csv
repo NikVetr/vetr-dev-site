@@ -4,7 +4,7 @@ directions.how-do-i-get-to,{} — як туди дістатися?,,{} — yak 
 directions.is-it-far,Це далеко?,,Tse daleko?,tsˈɛ dalˈɛko,,2,uk-agent-v1;ipa=espeak
 directions.how-long-on-foot,Скільки йти пішки?,,Skilky yty pishky?,skˈiːʎkɪ jtˈɪ pˈiːʃkɪ,,2,uk-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Покажіть на карті, будь ласка.",,"Pokazhit na karti, bud laska.","pokˈaʒiːt nˈa kˈartiː, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Де найближчий {}?,,De naiblyzhchyi {}?,dˈɛ najblˈɪʃtʃɪj {},,2,uk-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Де найближч[ий|а|е] {}?,,De naiblyzhch[yi|a|e] {}?,dˈɛ najblˈɪʃtʃ[ɪj|a|ɛ] {},,2,uk-agent-v1;fix=СУМ-11 НАЙБЛИЖЧИЙ -- а -- е (Найвищ. ст. до близький) read on slovnyk.ua;was=Де найближчий {}? / De naiblyzhchyi {}? (the masculine adjective -- wrong for найближча аптека -- найближча зупинка -- найближче відділення);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 directions.where-am-i,Де я перебуваю?,,De ya perebuvaiu?,dˈɛ jˈa pɛrɪbˈuʋaju,,2,uk-agent-v1;ipa=espeak
 directions.which-way,У який бік?,,U yakyi bik?,ˈu jakˈɪj bˈiːk,,2,uk-agent-v1;ipa=espeak
 directions.can-i-walk-there,Туди можна дійти пішки?,,Tudy mozhna diity pishky?,tˈudɪ mˈoʒna dˈiːjtɪ pˈiːʃkɪ,,2,uk-agent-v1;ipa=espeak
@@ -44,7 +44,7 @@ transit-rides.is-it-delayed,Є затримка?,,Ye zatrymka?,jˈɛ zatrˈɪmka
 transit-rides.i-am-in-a-hurry,Я поспішаю.,,Ya pospishaiu.,jˈa pospˈiːʃaju,,2,uk-agent-v1;ipa=espeak
 transit-rides.which-platform,З якої платформи?,,Z yakoi platformy?,z jakˈojiː platfˈormɪ,,2,uk-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Коли наступний?,,Koly nastupnyi?,kolˈɪ nastˈupnɪj,,2,uk-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Я проїхав свою зупинку.,Я проїхала свою зупинку.,Ya proikhav svoiu zupynku.,jˈa projˈiːxaʋ zʋˈoju zupˈɪnku,,2,uk-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Я проїхав свою зупинку.,,Ya proikhav svoiu zupynku.,jˈa projˈiːxaʋ zʋˈoju zupˈɪnku,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я проїхала свою зупинку. (the same wording);was=text_alt Я проїхала свою зупинку. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Цей квиток підійде?,,Tsei kvytok pidiide?,tsˈɛj ɡʋɪtˈok piːdˈiːjdɛ,,2,uk-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Квиток потрібно компостувати?,Потрібно прикласти квиток до валідатора?,Kvytok potribno kompostuvaty?,ɡʋɪtˈok potrˈiːbno kompostˈuʋatɪ,,2,uk-agent-v1;ipa=espeak
 place-words.visitor-center,туристичний центр,,turystychnyi tsentr,turɪstˈɪtʃnɪj tsˈɛntr,,2,uk-agent-v1;ipa=espeak

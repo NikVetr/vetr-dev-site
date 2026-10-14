@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,આ ઓરડાનો નંબર શું છે?,,ā ōraḍānō naṁbar śuṁ chē?,aː oːɾɖaːnoː nʌmbəɾ ʃũ cʰeː,what is this room's number?,2,gu-agent-v1;ipa=espeak
-building-help.i-am-lost,હું રસ્તો ભૂલી ગયો છું,હું રસ્તો ભૂલી ગઈ છું,huṁ rastō bhūlī gayō chuṁ,hũ ɾʌstoː bʰuːli ɡʌjoː cʰũ,I have forgotten the way (m) — ગઈ છું for a woman,2,gu-agent-v1;ipa=espeak
+building-help.i-am-lost,હું રસ્તો ભૂલી ગયો છું,,huṁ rastō bhūlī gayō chuṁ,hũ ɾʌstoː bʰuːli ɡʌjoː cʰũ,I have forgotten the way (m) — ગઈ છું for a woman,2,gu-agent-v1;fix=variants.csv speaker_gender=feminine હું રસ્તો ભૂલી ગઈ છું (the same wording);was=text_alt હું રસ્તો ભૂલી ગઈ છું (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 building-help.where-is-reception,રિસેપ્શન ક્યાં છે?,,risēpśan kyāṁ chē?,ɾɪseːpʃʌn kjã cʰeː,where is reception?,2,gu-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,વીજળીનો સૉકેટ ક્યાં છે?,,vījaḷīnō sôkēṭ kyāṁ chē?,ʋiːɟɭiːnoː sɔkeːʈ kjã cʰeː,where is the electricity socket?,2,gu-agent-v1;ipa=espeak
 accessibility.step-free,સીડી વગરનો રસ્તો છે?,,sīḍī vagaranō rastō chē?,siːɖi ʋəɡəɾʌnoː ɾʌstoː cʰeː,is there a way without stairs?,2,gu-agent-v1;ipa=espeak
@@ -8,7 +8,7 @@ accessibility.wheelchair-access,વ્હીલચૅર જઈ શકે?,,vhī
 accessibility.elevator,લિફ્ટ છે?,,liphṭ chē?,lɪpʰʈ cʰeː,is there a lift?,2,gu-agent-v1;ipa=espeak
 accessibility.ramp,રૅમ્પ છે?,,rêmp chē?,ɾɛmp cʰeː,is there a ramp?,2,gu-agent-v1;ipa=espeak
 accessibility.how-many-steps,કેટલાં પગથિયાં છે?,,kēṭalāṁ pagathiyāṁ chē?,keːʈʌlã pəɡtʰɪjã cʰeː,how many steps are there?,2,gu-agent-v1;ipa=espeak
-accessibility.cannot-climb-stairs,હું સીડી ચઢી શકતો નથી,હું સીડી ચઢી શકતી નથી,huṁ sīḍī caḍhī śakatō nathī,hũ siːɖi cʌɖʰi ʃəkʌtoː nʌtʰi,I cannot climb stairs (m) — શકતી for a woman,2,gu-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,હું સીડી ચઢી શકતો નથી,,huṁ sīḍī caḍhī śakatō nathī,hũ siːɖi cʌɖʰi ʃəkʌtoː nʌtʰi,I cannot climb stairs (m) — શકતી for a woman,2,gu-agent-v1;fix=variants.csv speaker_gender=feminine હું સીડી ચઢી શકતી નથી (the same wording);was=text_alt હું સીડી ચઢી શકતી નથી (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 accessibility.need-to-sit-down,મને બેસવું છે,,manē bēsavuṁ chē,mʌneː beːsʌʋũ cʰeː,to me sitting is (needed),2,gu-agent-v1;ipa=espeak
 accessibility.accessible-restroom,દિવ્યાંગ શૌચાલય છે?,,divyāṁg śaucālay chē?,dɪʋjãɡ ʃɔcaːlɛj cʰeː,is there an accessible toilet?,2,gu-agent-v1;ipa=espeak
 accessibility.station-assistance,સ્ટેશન પર મદદ મળશે?,,sṭēśan par madad maḷaśē?,sʈeːʃʌn pʌɾ mədʌd məɭʌʃeː,will help be got at the station?,2,gu-agent-v1;ipa=espeak

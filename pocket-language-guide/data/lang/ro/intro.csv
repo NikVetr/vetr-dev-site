@@ -7,7 +7,7 @@ introductions.this-is-my-friend,El este prietenul meu,Ea este prietena mea,jel j
 introductions.i-am-from,Sunt din {},,sunt din {},,2,ro-agent-v1;ipa=espeak
 introductions.where-are-you-from,De unde sunteți?,,de ˈunde sˈuntetsʲ,,2,ro-agent-v1;ipa=espeak
 introductions.how-are-you,Ce mai faceți?,,tʃe maɪ fˈatʃetsʲ,"lit. what more are you doing -- the ordinary greeting-question, not a health enquiry",2,ro-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Sunt turist,Sunt turistă,sunt tuɾˈist,,2,ro-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sunt turist,,sunt tuɾˈist,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt turistă (the same wording);was=text_alt Sunt turistă (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 introductions.this-is-my-husband-wife,El este soțul meu / ea este soția mea,,jel jˌeste sˈotsul mˈeu / ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Ea este fiica mea / el este fiul meu,,ja jˌeste fˈiɪka mˈea / jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Călătoresc singur,,kˌələtoɾˈesk sˈiŋɡur,,2,ro-agent-v1;ipa=espeak

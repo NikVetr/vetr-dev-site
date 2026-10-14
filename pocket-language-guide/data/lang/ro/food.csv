@@ -6,10 +6,10 @@ dietary-needs.less-spicy,Mai puțin iute,,maɪ putsˈin jˈute,,2,ro-agent-v1;ip
 dietary-needs.no-peanuts,Fără arahide,Fără alune de pământ,fˈərə ˌaɾahˈide,,2,ro-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Fără fructe cu coajă lemnoasă,"Fără nuci, alune sau migdale",fˈərə frˈukte ku kˈɔaʒə lemnˈɔasə,coaja lemnoasa is the EU allergen-label term for tree nuts,2,ro-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Fără pește și fructe de mare,,fˈərə pˈeʃte ʃi frˈukte de mˈaɾe,,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Sunt vegetarian,Sunt vegetariană,sunt vˌedʒetaɾjˈan,,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Sunt vegan,Sunt vegană,sunt veɡˈan,,2,ro-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Sunt vegetarian,,sunt vˌedʒetaɾjˈan,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegetariană (the same wording);was=text_alt Sunt vegetariană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-am-vegan,Sunt vegan,,sunt veɡˈan,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegană (the same wording);was=text_alt Sunt vegană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Nu mănânc {},,nu mənˈɨnk {},,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Sunt alergic la {},Sunt alergică la {},sunt alˈerdʒik la {},,2,ro-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Sunt alergic la {},,sunt alˈerdʒik la {},,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt alergică la {} (the same wording);was=text_alt Sunt alergică la {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Conține fond de pește?,,kontsˈine fˈond de pˈeʃte,,2,ro-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Conține fond de porc?,Conține supă de oase de porc?,kontsˈine fˈond de pˈork,,2,ro-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Am o alergie severă la {},,am o ˌalerdʒˈie sˈeveɾˌə la {},,2,ro-agent-v1;ipa=espeak

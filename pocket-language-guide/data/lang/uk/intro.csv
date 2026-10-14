@@ -7,14 +7,14 @@ introductions.this-is-my-friend,Це мій друг.,,Tse mii druh.,tsˈɛ mˈi
 introductions.i-am-from,Моя країна — {}.,,Moia kraina — {}.,mˈoja krajˈiːna {},"'My country is {}'; predicate nominative (zero-copula), so the slot needs no case -- unlike з (+genitive), the same defect Russian's из has",2,"uk-agent-v1;rewritten-for-fill-in=z governs the genitive; predicate nominative with an em dash needs no case, the same repair as ru;fix=uk.wikipedia Латинізація української мови rev 48212974 (КМУ 2010 table: я ia and ї i except at the start of a word);rule=tmp/lang/uk/translit.py;row-corrections-v6;ipa=espeak"
 introductions.where-are-you-from,Звідки ви?,,Zvidky vy?,zʋˈiːtkɪ ʋˈɪ,,2,uk-agent-v1;ipa=espeak
 introductions.how-are-you,Як справи?,,Yak spravy?,jˈak sprˈaʋɪ,,2,uk-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turyst.,jˈa turˈɪst,,2,uk-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Я турист.,,Ya turyst.,jˈa turˈɪst,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я туристка. (the same wording);was=text_alt Я туристка. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Це мій чоловік / моя дружина.,,Tse mii cholovik / moia druzhyna.,tsˈɛ mˈiːj tʃoloʋˈiːk / mˈoja druʒˈɪna,,2,uk-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Це моя донька / мій син.,,Tse moia donka / mii syn.,tsˈɛ mˈoja dˈoɲka / mˈiːj sˈɪn,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-husband,Це мій чоловік.,,Tse mii cholovik.,tsˈɛ mˈiːj tʃoloʋˈiːk,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-wife,Це моя дружина.,,Tse moia druzhyna.,tsˈɛ mˈoja druʒˈɪna,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-son,Це мій син.,,Tse mii syn.,tsˈɛ mˈiːj sˈɪn,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Це моя донька.,,Tse moia donka.,tsˈɛ mˈoja dˈoɲka,,2,uk-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Я подорожую сам.,Я подорожую сама.,Ya podorozhuiu sam.,jˈa podorˈoʒuju sˈam,,2,uk-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Я подорожую сам.,,Ya podorozhuiu sam.,jˈa podorˈoʒuju sˈam,,2,uk-agent-v1;fix=variants.csv speaker_gender=feminine Я подорожую сама. (the same wording);was=text_alt Я подорожую сама. (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 about-me.i-am-a-student,Я студент.,,Ya student.,jˈa studˈɛnt,masculine; a woman says Я студентка. (Ya studentka.),2,uk-agent-v1;ipa=espeak
 about-me.i-am-retired,Я на пенсії.,,Ya na pensii.,jˈa nˈa pɛnsˈiːjiː,"invariant, no gender marking",2,uk-agent-v1;ipa=espeak
 about-me.i-am-a-teacher,Я вчитель.,,Ya vchytel.,jˈa ftʃˈɪtɛʎ,masculine; a woman says Я вчителька. (Ya vchytelka.),2,uk-agent-v1;ipa=espeak

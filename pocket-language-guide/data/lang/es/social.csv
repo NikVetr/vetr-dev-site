@@ -25,7 +25,7 @@ children.minimum-age,¿Cuál es la edad mínima?,,kwˈal ˈes la edˈad mˈinima
 etiquette.queue-for,¿Esta es la fila para {}?,¿Esta es la cola para {}?,ˈesta ˈes la fˈila pˈaɾa {},,2,es-agent-v1;ipa=espeak
 sim-data.does-it-need-registration,¿Hay que registrarla?,,ˈaɪ ke rˌexistɾˈaɾla,,2,es-agent-v1;ipa=espeak
 children.do-children-pay,¿Los niños pagan?,,los nˈiɲos pˈaɡan,,2,es-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,¿Voy vestido/a apropiadamente?,,bˈoɪ bestˈido ˌapɾopjˈadamente,,2,es-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,¿Voy vestido apropiadamente?,,bˈoɪ bestˈido ˌapɾopjˈadamente,,2,es-agent-v1;fix=variants.csv speaker_gender=feminine ¿Voy vestida apropiadamente? (the variant the slash stood for);fix=registry/speaker-axes.csv es speaker_gender (RAE Nueva gramática: Yo no estoy en absoluto {preocupado ~ preocupada} -- masculine the unmarked form);was=¿Voy vestido/a apropiadamente? (the speaker's gender as a slash in the text);rule=the base row says the masculine and the feminine variant row the feminine (speaker-variants.md);gender-alternatives-v1;ipa=espeak
 sim-data.i-have-no-signal,No tengo señal,,nˈo tˈeŋɡo seɲˈal,,2,es-agent-v1;ipa=espeak
 children.crib,¿Tienen cuna?,,tjˈenen kˈuna,,2,es-agent-v1;ipa=espeak
 etiquette.did-not-mean-to-offend,No quise ofender,,nˈo kˈise ˌofendˈeɾ,,2,es-agent-v1;ipa=espeak
