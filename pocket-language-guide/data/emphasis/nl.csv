@@ -62,7 +62,7 @@ color-size-returns.do-you-have-a-bag,tas
 color-size-returns.do-you-have-another-size,maat
 color-size-returns.may-i-try-it-on,passen
 communication.can-you-help-me,helpen
-communication.do-you-speak-english,Spreekt
+communication.do-you-speak-english,Spreekt | Spreek
 communication.i-do-not-speak-this-language,spreek geen
 communication.i-do-not-understand,begrijp het niet
 communication.please-speak-more-slowly,langzamer
@@ -116,7 +116,7 @@ food-ordering.is-a-table-available,tafel vrij
 food-ordering.is-this-vegetarian,vegetarisch
 food-ordering.table-for-two,tafel | twee
 food-ordering.to-go-please,mee te nemen
-food-ordering.what-do-you-recommend,raadt | aan
+food-ordering.what-do-you-recommend,raadt | aan | raad
 hiking-parks.how-long-to-the-summit,top
 hiking-parks.how-long-to-the-viewpoint,uitzichtpunt
 hiking-parks.is-this-trail-suitable-for-beginners,beginners
@@ -275,7 +275,7 @@ taxi.can-you-wait-for-me-here,wachten
 taxi.could-you-make-it-colder,kouder
 taxi.could-you-make-it-warmer,warmer
 taxi.may-i-open-the-window,raam
-taxi.please-stop-here,Stopt
+taxi.please-stop-here,Stopt | Stop
 taxi.please-take-me-here,Breng
 taxi.please-turn-around,keren
 time-scheduling.can-we-change-the-time,veranderen

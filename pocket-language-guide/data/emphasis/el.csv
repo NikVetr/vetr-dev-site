@@ -56,7 +56,7 @@ border-customs.where-do-i-collect-my-baggage,παραλαμβάνω
 color-size-returns.do-you-have-a-bag,σακούλα
 color-size-returns.do-you-have-another-size,μέγεθος
 color-size-returns.may-i-try-it-on,δοκιμάσω
-communication.can-you-help-me,βοηθήσετε
+communication.can-you-help-me,βοηθήσετε | βοηθήσεις
 communication.please-speak-more-slowly,πιο αργά
 dietary-needs.does-it-contain-fish-stock,ζωμό ψαριού
 dietary-needs.does-it-contain-pork-fat,χοιρινό λίπος | λαρδί
@@ -107,18 +107,18 @@ food-ordering.is-a-table-available,ελεύθερο τραπέζι
 food-ordering.is-this-vegetarian,χορτοφαγικό
 food-ordering.table-for-two,τραπέζι | δύο
 food-ordering.to-go-please,πακέτο
-food-ordering.what-do-you-recommend,προτείνετε
+food-ordering.what-do-you-recommend,προτείνετε | προτείνεις
 hiking-parks.how-long-to-the-summit,κορυφή
 hiking-parks.how-long-to-the-viewpoint,σημείο θέασης
 hiking-parks.is-this-trail-suitable-for-beginners,αρχάριους
 hiking-parks.where-is-the-trailhead,αρχή
 hiking-parks.which-route-is-easier,πιο εύκολη
-hitchhiking.can-you-give-me-a-ride,πάρετε
+hitchhiking.can-you-give-me-a-ride,πάρετε | πάρεις
 hitchhiking.i-can-pay-for-fuel,βενζίνη
 hitchhiking.i-only-need-to-go-to-the-next-town,επόμενη πόλη
 hitchhiking.is-there-room-for-two,χώρος | δύο
 hitchhiking.thank-you-for-the-ride,ευχαριστώ
-hitchhiking.where-are-you-going,πηγαίνετε
+hitchhiking.where-are-you-going,πηγαίνετε | πηγαίνεις
 hotel-basics.are-any-rooms-available,δωμάτια
 hotel-basics.how-much-per-night,διανυκτέρευση
 hotel-basics.i-have-a-reservation,κράτηση
@@ -146,7 +146,7 @@ introductions.i-am-traveling-alone,μόνος | μόνη
 introductions.my-name-is,Με
 introductions.this-is-my-friend,φίλος
 introductions.we-are-traveling-together,μαζί
-introductions.what-is-your-name,Πώς σας
+introductions.what-is-your-name,Πώς σας | Πώς σε
 introductions.where-are-you-from,Από πού
 kind-words.i-had-a-wonderful-time,υπέροχα
 kind-words.i-like-it-very-much,αρέσει
@@ -159,7 +159,7 @@ kind-words.you-are-very-kind,ευγενικό
 laundry.can-it-be-ready-today,σήμερα
 laundry.how-much-per-kilo,κιλό
 laundry.please-do-not-use-bleach,χλωρίνη
-laundry.please-wash-these-clothes,Πλύνετε
+laundry.please-wash-these-clothes,Πλύνετε | Πλύνε
 laundry.when-will-it-be-ready,Πότε
 laundry.where-is-a-laundromat,πλυντήριο
 lost-rescue.i-do-not-know-where-i-am,πού βρίσκομαι
@@ -175,9 +175,9 @@ massage-spa.focus-on-feet,πέλματα
 massage-spa.focus-on-neck,αυχένα
 massage-spa.focus-on-shoulders,ώμους
 massage-spa.more-gently,απαλά
-massage-spa.please-avoid-this-area,Μην πιέζετε
+massage-spa.please-avoid-this-area,Μην πιέζετε | Μην πιέζεις
 massage-spa.please-pause,παύση
-massage-spa.please-stop,Σταματήστε
+massage-spa.please-stop,Σταματήστε | Σταμάτα
 massage-spa.reply-ask-supervisor,αφεντικό
 massage-spa.reply-cannot-avoid-this-treatment,δεν γίνεται χωρίς
 massage-spa.reply-does-it-hurt-there,Πονάει
@@ -246,7 +246,7 @@ quick-directions.on-the-right,δεξιά
 quick-directions.turn-left,αριστερά
 quick-directions.turn-right,δεξιά
 room-problems.can-i-change-rooms,αλλάξω
-room-problems.please-send-someone,Στείλτε κάποιον
+room-problems.please-send-someone,Στείλτε κάποιον | Στείλε κάποιον
 room-problems.the-air-conditioning-is-broken,κλιματισμός
 room-problems.the-heating-does-not-work,θέρμανση
 room-problems.the-key-does-not-work,κλειδί
@@ -262,11 +262,11 @@ shopping.i-am-just-looking,κοιτάζω
 shopping.i-will-take-this,πάρω
 shopping.that-is-too-expensive,ακριβό
 shopping.where-do-i-pay,πληρώνω
-taxi.can-you-wait-for-me-here,περιμένετε
+taxi.can-you-wait-for-me-here,περιμένετε | περιμένεις
 taxi.could-you-make-it-colder,πιο κρύο
 taxi.could-you-make-it-warmer,πιο ζεστό
 taxi.may-i-open-the-window,παράθυρο
-taxi.please-stop-here,Σταματήστε
+taxi.please-stop-here,Σταματήστε | Σταμάτα
 taxi.please-take-me-here,Πάμε
 taxi.please-turn-around,αναστροφή
 time-scheduling.can-we-change-the-time,αλλάξουμε

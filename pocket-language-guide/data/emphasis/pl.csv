@@ -106,7 +106,7 @@ family-intros.this-is-my-wife,żona
 food-ordering.is-a-table-available,wolny stolik
 food-ordering.is-this-vegetarian,wegetariańskie
 food-ordering.table-for-two,Stolik | dwóch
-food-ordering.what-do-you-recommend,polecają
+food-ordering.what-do-you-recommend,polecają | polecacie
 hiking-parks.how-long-to-the-summit,szczyt
 hiking-parks.how-long-to-the-viewpoint,punktu widokowego
 hiking-parks.is-this-trail-suitable-for-beginners,początkujących
@@ -156,8 +156,8 @@ kind-words.you-are-very-kind,miło | miły | miła
 laundry.can-it-be-ready-today,dziś
 laundry.how-much-per-kilo,za kilogram
 laundry.please-do-not-use-bleach,wybielacza
-laundry.please-iron-this,wyprasować
-laundry.please-wash-these-clothes,wyprać
+laundry.please-iron-this,wyprasować | Wyprasuj
+laundry.please-wash-these-clothes,wyprać | Wypierz
 laundry.when-will-it-be-ready,Kiedy
 laundry.where-is-a-laundromat,pralnia
 lost-rescue.i-do-not-know-where-i-am,gdzie jestem
@@ -172,7 +172,7 @@ massage-spa.focus-on-back,plecach
 massage-spa.focus-on-feet,stopach
 massage-spa.focus-on-neck,karku
 massage-spa.focus-on-shoulders,barkach
-massage-spa.please-avoid-this-area,nie dotykać
+massage-spa.please-avoid-this-area,nie dotykać | Nie dotykaj
 massage-spa.please-pause,przerwa
 massage-spa.reply-ask-supervisor,kierownika
 massage-spa.reply-cannot-avoid-this-treatment,nie da się
@@ -246,7 +246,7 @@ quick-directions.on-the-right,prawej
 quick-directions.turn-left,lewo
 quick-directions.turn-right,prawo
 room-problems.can-i-change-rooms,zmienić
-room-problems.please-send-someone,kogoś przysłać
+room-problems.please-send-someone,kogoś przysłać | Przyślij kogoś
 room-problems.the-air-conditioning-is-broken,Klimatyzacja
 room-problems.the-heating-does-not-work,ogrzewanie
 room-problems.the-key-does-not-work,Karta
@@ -266,8 +266,8 @@ taxi.can-you-wait-for-me-here,poczekać
 taxi.could-you-make-it-colder,chłodniej
 taxi.could-you-make-it-warmer,cieplej
 taxi.may-i-open-the-window,okno
-taxi.please-stop-here,zatrzymać
-taxi.please-take-me-here,zawieźć
+taxi.please-stop-here,zatrzymać | Zatrzymaj
+taxi.please-take-me-here,zawieźć | Zawieź
 time-scheduling.can-we-change-the-time,zmienić
 time-scheduling.how-long-does-it-take,zajmie
 time-scheduling.what-day-is-it-today,dzień

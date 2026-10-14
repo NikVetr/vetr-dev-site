@@ -109,7 +109,7 @@ food-ordering.i-want-this,Dám si
 food-ordering.is-a-table-available,volný stůl
 food-ordering.is-this-vegetarian,vegetariánské
 food-ordering.table-for-two,Stůl | dva
-food-ordering.what-do-you-recommend,doporučujete
+food-ordering.what-do-you-recommend,doporučujete | doporučuješ
 hiking-parks.how-long-to-the-summit,vrchol
 hiking-parks.how-long-to-the-viewpoint,vyhlídku
 hiking-parks.is-this-trail-suitable-for-beginners,začátečníky
@@ -147,7 +147,7 @@ introductions.i-am-traveling-alone,sám | sama
 introductions.my-name-is,Jmenuji
 introductions.this-is-my-friend,kamarád
 introductions.we-are-traveling-together,spolu
-introductions.what-is-your-name,jmenujete
+introductions.what-is-your-name,jmenujete | jmenuješ
 introductions.where-are-you-from,Odkud
 kind-words.i-had-a-wonderful-time,skvěle
 kind-words.i-like-it-very-much,líbí
@@ -160,8 +160,8 @@ kind-words.you-are-very-kind,milé
 laundry.can-it-be-ready-today,dnes
 laundry.how-much-per-kilo,za kilo
 laundry.please-do-not-use-bleach,bělidlo
-laundry.please-iron-this,Vyžehlete
-laundry.please-wash-these-clothes,Vyperte
+laundry.please-iron-this,Vyžehlete | Vyžehli
+laundry.please-wash-these-clothes,Vyperte | Vyper
 laundry.when-will-it-be-ready,Kdy
 laundry.where-is-a-laundromat,prádelna
 lost-rescue.i-do-not-know-where-i-am,kde jsem
@@ -176,9 +176,9 @@ massage-spa.focus-on-back,záda
 massage-spa.focus-on-feet,chodidla
 massage-spa.focus-on-neck,krk
 massage-spa.focus-on-shoulders,ramena
-massage-spa.please-avoid-this-area,vyhněte
-massage-spa.please-pause,přerušte
-massage-spa.please-stop,Přestaňte
+massage-spa.please-avoid-this-area,vyhněte | vyhni
+massage-spa.please-pause,přerušte | přeruš
+massage-spa.please-stop,Přestaňte | Přestaň
 massage-spa.reply-ask-supervisor,vedoucí
 massage-spa.reply-cannot-avoid-this-treatment,vyhnout nedá
 massage-spa.reply-does-it-hurt-there,Bolí
@@ -245,7 +245,7 @@ quick-directions.go-straight,rovně
 quick-directions.turn-left,doleva
 quick-directions.turn-right,doprava
 room-problems.can-i-change-rooms,jiný pokoj
-room-problems.please-send-someone,Pošlete | někoho
+room-problems.please-send-someone,Pošlete | někoho | Pošli
 room-problems.the-air-conditioning-is-broken,Klimatizace
 room-problems.the-heating-does-not-work,Topení
 room-problems.the-key-does-not-work,Klíč
@@ -265,8 +265,8 @@ taxi.can-you-wait-for-me-here,počkat
 taxi.could-you-make-it-colder,snížit
 taxi.could-you-make-it-warmer,zvýšit
 taxi.may-i-open-the-window,okno
-taxi.please-stop-here,Zastavte
-taxi.please-take-me-here,Odvezte
+taxi.please-stop-here,Zastavte | Zastav
+taxi.please-take-me-here,Odvezte | Odvez
 time-scheduling.can-we-change-the-time,změnit
 time-scheduling.how-long-does-it-take,trvá
 time-scheduling.what-day-is-it-today,den

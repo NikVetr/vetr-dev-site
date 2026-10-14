@@ -59,7 +59,7 @@ color-size-returns.do-you-have-a-bag,Пакет
 color-size-returns.do-you-have-another-size,розмір
 color-size-returns.may-i-try-it-on,поміряти
 communication.can-you-help-me,допомогти
-communication.do-you-speak-english,розмовляєте
+communication.do-you-speak-english,розмовляєте | розмовляєш
 communication.i-do-not-speak-this-language,не розмовляю
 communication.i-do-not-understand,не розумію
 communication.please-speak-more-slowly,повільніше
@@ -111,7 +111,7 @@ food-ordering.i-want-this,хочу
 food-ordering.is-a-table-available,вільний столик
 food-ordering.is-this-vegetarian,вегетаріанське
 food-ordering.table-for-two,Столик | двох
-food-ordering.what-do-you-recommend,порадите
+food-ordering.what-do-you-recommend,порадите | порадиш
 hiking-parks.how-long-to-the-summit,вершини
 hiking-parks.how-long-to-the-viewpoint,оглядового майданчика
 hiking-parks.is-this-trail-suitable-for-beginners,новачків
@@ -150,7 +150,7 @@ introductions.i-am-traveling-alone,сама | сам
 introductions.my-name-is,Мене
 introductions.this-is-my-friend,друг
 introductions.we-are-traveling-together,разом
-introductions.what-is-your-name,Як вас
+introductions.what-is-your-name,Як вас | Як тебе
 introductions.where-are-you-from,Звідки
 kind-words.i-had-a-wonderful-time,чудово
 kind-words.i-like-it-very-much,подобається
@@ -159,12 +159,12 @@ kind-words.thank-you-for-everything,все
 kind-words.thank-you-for-your-help,допомогу
 kind-words.thank-you-for-your-hospitality,гостинність
 kind-words.this-is-delicious,смачно
-kind-words.you-are-very-kind,добрі
+kind-words.you-are-very-kind,добрі | добра
 laundry.can-it-be-ready-today,сьогодні
 laundry.how-much-per-kilo,кілограм
 laundry.please-do-not-use-bleach,відбілювача
-laundry.please-iron-this,Попрасуйте
-laundry.please-wash-these-clothes,Виперіть
+laundry.please-iron-this,Попрасуйте | Попрасуй
+laundry.please-wash-these-clothes,Виперіть | Випери
 laundry.when-will-it-be-ready,Коли
 laundry.where-is-a-laundromat,пральня
 lost-rescue.i-do-not-know-where-i-am,де я
@@ -179,9 +179,9 @@ massage-spa.focus-on-back,спиною
 massage-spa.focus-on-feet,стопами
 massage-spa.focus-on-neck,шиєю
 massage-spa.focus-on-shoulders,плечима
-massage-spa.please-avoid-this-area,Не натискайте
+massage-spa.please-avoid-this-area,Не натискайте | Не натискай
 massage-spa.please-pause,паузу
-massage-spa.please-stop,Зупиніться
+massage-spa.please-stop,Зупиніться | Зупинися
 massage-spa.reply-ask-supervisor,адміністратора
 massage-spa.reply-cannot-avoid-this-treatment,не обійтися
 massage-spa.reply-does-it-hurt-there,болить
@@ -269,8 +269,8 @@ taxi.can-you-wait-for-me-here,зачекати
 taxi.could-you-make-it-colder,холоднішим
 taxi.could-you-make-it-warmer,теплішим
 taxi.may-i-open-the-window,вікно
-taxi.please-stop-here,Зупиніться
-taxi.please-take-me-here,Відвезіть
+taxi.please-stop-here,Зупиніться | Зупинися
+taxi.please-take-me-here,Відвезіть | Відвези
 time-scheduling.can-we-change-the-time,змінити
 time-scheduling.how-long-does-it-take,триває
 time-scheduling.what-day-is-it-today,день
