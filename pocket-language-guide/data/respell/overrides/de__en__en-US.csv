@@ -21,7 +21,7 @@ trail-conditions.how-long-is-the-full-route,vee lahng ist dee GAHN-tsuh SHTREK-u
 trail-transport.how-long-is-the-queue,vee lahng ist dee SHLAHNG-uh?,Wie lang ist die Schlange?
 trail-warnings.open,guh-URF-net,geöffnet
 trail-landmarks.trail-marker,VAYK-mahr-kee-roong,Wegmarkierung
-laundry.please-wash-these-clothes,BIT-tuh DEE-zuh VESH-uh VAH-shen,Bitte diese Wäsche waschen.
+laundry.please-wash-these-clothes,BIT-tuh VAH-shen zee DEE-zuh VESH-uh,Bitte waschen Sie diese Wäsche.
 hotel-words.passport,pahss,Pass
 hotel-basics.are-any-rooms-available,HAH-ben zee ine TSIM-er fry?,Haben Sie ein Zimmer frei?
 hotel-requests.can-i-check-out-later,kahn ikh SHPAY-ter OWS-chek-en?,Kann ich später auschecken?
@@ -95,7 +95,7 @@ etiquette.is-tipping-expected,ist TRINK-gelt EWP-likh?,Ist Trinkgeld üblich?
 social-basics.hello-polite,GOO-ten tahk,Guten Tag
 communication.i-speak-only-a-little-of-this,ikh SHPREKH-uh noor ine VAY-nikh doytsh,Ich spreche nur ein wenig {target}.
 phone-translation.please-speak-toward-the-phone,BIT-tuh SHPREKH-en zee ins HEN-dee,Bitte sprechen Sie ins Handy.
-phone-translation.please-write-the-place-name,BIT-tuh dayn ORTS-nah-men owf doytsh SHRY-ben,Bitte den Ortsnamen auf {target} schreiben.
+phone-translation.please-write-the-place-name,BIT-tuh SHRY-ben zee dayn ORTS-nah-men owf doytsh,Bitte schreiben Sie den Ortsnamen auf {target}.
 time-scheduling.how-many-minutes,vee FEE-luh mee-NOO-ten?,Wie viele Minuten?
 time-words.tomorrow,MOR-gen,morgen
 days-of-week.tuesday,DEENS-tahk,Dienstag
@@ -150,7 +150,7 @@ etiquette.is-service-included,ist dee buh-DEE-noong in-kloo-ZEE-vuh?,Ist die Bed
 social-basics.good-morning,GOO-ten MOR-gen,Guten Morgen
 communication.do-you-speak-english,SHPREKH-en zee ENG-lish?,Sprechen Sie {source}?
 phone-translation.one-sentence-at-a-time-please,BIT-tuh EYE-nen zahts nahkh daym AHN-duh-ren,Bitte einen Satz nach dem anderen.
-phone-text-power.please-use-simple-words,BIT-tuh INE-fah-khuh VUR-ter buh-NOOT-sen,Bitte einfache Wörter benutzen.
+phone-text-power.please-use-simple-words,BIT-tuh buh-NOOT-sen zee INE-fah-khuh VUR-ter,Bitte benutzen Sie einfache Wörter.
 time-scheduling.what-time-should-we-meet,vahn TREF-en veer oons?,Wann treffen wir uns?
 time-words.yesterday,GES-tern,gestern
 days-of-week.wednesday,MIT-vokh,Mittwoch
@@ -190,7 +190,7 @@ trail-landmarks.start,shtahrt,Start
 laundry.how-much-per-kilo,vee feel proh KEE-loh?,Wie viel pro Kilo?
 hotel-words.check-out,CHEK-owt,Check-out
 hotel-basics.can-i-charge-my-phone,kahn ikh mine HEN-dee LAH-den?,Kann ich mein Handy laden?
-hotel-requests.no-housekeeping,BIT-tuh nikht RY-nee-gen,Bitte nicht reinigen.
+hotel-requests.no-housekeeping,BIT-tuh RY-nee-gen zee dahs TSIM-er nikht,Bitte reinigen Sie das Zimmer nicht.
 room-problems.can-i-change-rooms,kahn ikh dahs TSIM-er VEK-seln?,Kann ich das Zimmer wechseln?
 introductions.we-are-traveling-together,veer RY-zen tsoo-ZAHM-en,Wir reisen zusammen.
 atm-cash.is-there-a-fee,gipt es EYE-nuh guh-BEWR?,Gibt es eine Gebühr?
@@ -295,7 +295,7 @@ atm-cash.what-is-the-exchange-rate,vee ist dair VEK-sel-koors?,Wie ist der Wechs
 numbers-money.s,feer,vier
 attractions-tickets.please-take-a-photo-of-us,BIT-tuh MAH-khen zee ine FOH-toh fon oons,Bitte machen Sie ein Foto von uns.
 color-size-returns.do-you-have-a-bag,HAH-ben zee EYE-nuh TEW-tuh?,Haben Sie eine Tüte?
-sim-data.please-activate-it,BIT-tuh dee ZIM-kahr-tuh ahk-tee-VEE-ren,Bitte die SIM-Karte aktivieren.
+sim-data.please-activate-it,BIT-tuh ahk-tee-VEE-ren zee dee ZIM-kahr-tuh,Bitte aktivieren Sie die SIM-Karte.
 children.childrens-menu,gipt es EYE-nuh KIN-der-kahr-tuh?,Gibt es eine Kinderkarte?
 etiquette.photo-of-you,dahrf ikh zee foh-toh-grah-FEE-ren?,Darf ich Sie fotografieren?
 social-basics.thank-you,DAHNG-kuh,Danke
@@ -314,7 +314,7 @@ transit-rides.is-this-direct,fairt dair dee-REKT?,Fährt der direkt?
 place-words.bus-stop,HAHL-tuh-shtel-uh,Haltestelle
 rail-station-words.ticket-office,FAHR-kahr-ten-shahl-ter,Fahrkartenschalter
 common-signs.no-entry,TSOO-trit fair-BOH-ten,Zutritt verboten
-utility-templates.please-write-the-number,BIT-tuh dee tsahl OWF-shry-ben,Bitte die Zahl aufschreiben.
+utility-templates.please-write-the-number,BIT-tuh SHRY-ben zee dee tsahl owf,Bitte schreiben Sie die Zahl auf.
 toilets.do-i-need-a-coin,BROW-khuh ikh EYE-nuh MEWN-tsuh OH-der EYE-nen chip?,Brauche ich eine Münze oder einen Chip?
 accessibility.need-to-sit-down,ikh mooss mikh ZET-sen,Ich muss mich setzen.
 building-words.door,tewr,Tür
@@ -375,7 +375,7 @@ food-ordering.does-it-contain,ist {} dah-RIN?,Ist {} darin?
 weather.storm,shtoorm,Sturm
 trail-words.steps,SHTOO-fen,Stufen
 trail-warnings.first-aid-station,AIRS-tuh HIL-fuh shtah-TSYOHN,Erste-Hilfe-Station
-laundry.please-iron-this,BIT-tuh dahs BEW-geln,Bitte das bügeln.
+laundry.please-iron-this,BIT-tuh BEW-geln zee dahs,Bitte bügeln Sie das.
 room-problems.the-light-does-not-work,dahs likht gayt nikht,Das Licht geht nicht.
 introductions.how-are-you,vee gayt es EE-nen?,Wie geht es Ihnen?
 atm-cash.where-can-i-change-money,voh kahn ikh gelt VEK-seln?,Wo kann ich Geld wechseln?
@@ -474,8 +474,8 @@ laundry.dryer,TROK-ner,Trockner
 introductions.this-is-my-daughter-son,dahs ist MY-nuh TOKH-ter / mine zohn,Das ist meine Tochter / mein Sohn.
 atm-cash.do-you-have-change,KUR-nen zee VEK-seln?,Können Sie wechseln?
 numbers-money.ji,noyn,neun
-sim-data.please-write-the-wifi-password,BIT-tuh dahs VAY-lahn-pahss-vort OWF-shry-ben,Bitte das WLAN-Passwort aufschreiben.
-children.warm-this-bottle,BIT-tuh dahs FLESH-khen air-VAIR-men,Bitte das Fläschchen erwärmen.
+sim-data.please-write-the-wifi-password,BIT-tuh SHRY-ben zee dahs VAY-lahn-pahss-vort owf,Bitte schreiben Sie das WLAN-Passwort auf.
+children.warm-this-bottle,BIT-tuh air-VAIR-men zee dahs FLESH-khen,Bitte erwärmen Sie das Fläschchen.
 etiquette.what-is-customary,vahs ist heer EWP-likh?,Was ist hier üblich?
 social-basics.i-do-not-know,ikh vice nikht,Ich weiß nicht.
 communication.please-show-me-the-text,TSY-gen zee meer BIT-tuh dayn tekst owf doytsh,Zeigen Sie mir bitte den Text auf {target}.
@@ -519,7 +519,7 @@ pharmacy-symptoms.how-many-times-a-day,vee oft ahm tahk?,Wie oft am Tag?
 police-consulate.please-notify-my-consulate,BIT-tuh in-for-MEE-ren zee mine kon-zoo-LAHT,Bitte informieren Sie mein Konsulat.
 body-parts.knee,k-NEE,Knie
 weather.humid,foykht,feucht
-atm-cash.please-charge-in-local-currency,BIT-tuh in LAHN-des-vair-oong AHP-boo-khen,Bitte in Landeswährung abbuchen.
+atm-cash.please-charge-in-local-currency,BIT-tuh BOO-khen zee dayn buh-TRAHK in LAHN-des-vair-oong ap,Bitte buchen Sie den Betrag in Landeswährung ab.
 numbers-money.y-b-i,HOON-dert,hundert
 sim-data.where-can-i-buy-a-plug-adapter,voh gipt es EYE-nen RY-zuh-ah-dahp-ter?,Wo gibt es einen Reiseadapter?
 children.stroller,KIN-der-vah-gen,Kinderwagen
@@ -575,7 +575,7 @@ toilets.drinking-water,TRINK-vahss-er,Trinkwasser
 accessibility.take-your-arm,dahrf ikh mikh ahn EE-rem ahrm FEST-hahl-ten?,Darf ich mich an Ihrem Arm festhalten?
 pronouns-verbs.look-for,ZOO-khen,suchen
 question-words.too,tsoo,zu
-medical-conditions.inject-it-into-my-outer-thigh,BIT-tuh in dayn OY-suh-ren OH-ber-sheng-kel SHPRIT-sen,Bitte in den äußeren Oberschenkel spritzen.
+medical-conditions.inject-it-into-my-outer-thigh,BIT-tuh SHPRIT-sen zee es meer in dayn OY-suh-ren OH-ber-sheng-kel,Bitte spritzen Sie es mir in den äußeren Oberschenkel.
 pharmacy-symptoms.anti-diarrhea-medicine,MIT-tel GAY-gen DOORKH-fahl,Mittel gegen Durchfall
 police-consulate.someone-attacked-me,ikh VOOR-duh AHN-guh-grif-en,Ich wurde angegriffen.
 atm-cash.banknote,shine,Schein
@@ -665,7 +665,7 @@ numbers-money.2-items,tsvy shtewk,zwei Stück
 shopping.is-there-a-discount,gipt es EYE-nen rah-BAHT?,Gibt es einen Rabatt?
 social-basics.good-night,GOO-tuh nahkht,Gute Nacht
 quick-responses.can-possible,kahn / MURK-likh,kann / möglich
-phone-translation.please-type-it-and-show-me,BIT-tuh TIP-en oont TSY-gen,Bitte tippen und zeigen.
+phone-translation.please-type-it-and-show-me,BIT-tuh TIP-en zee es ine oont TSY-gen zee es meer,Bitte tippen Sie es ein und zeigen Sie es mir.
 phone-text-power.may-i-charge-my-phone-here,dahrf ikh heer mine HEN-dee LAH-den?,Darf ich hier mein Handy laden?
 pronouns-verbs.want-to-verb,ikh MURKH-tuh [vairp],ich möchte [Verb]
 emergency-medical.this-is-an-emergency,dahs ist ine NOHT-fahl,Das ist ein Notfall.
@@ -673,7 +673,7 @@ lost-rescue.please-look-at-my-current-location,BIT-tuh SHOW-en zee owf MY-nen SH
 hotel-words.luggage-storage,guh-PEK-owf-buh-vah-roong,Gepäckaufbewahrung
 hotel-basics.how-much-per-night,vee feel proh nahkht?,Wie viel pro Nacht?
 hotel-requests.what-time-is-check-out,vahn ist CHEK-owt?,Wann ist Check-out?
-payment-receipt.please-write-the-number,BIT-tuh dee tsahl OWF-shry-ben,Bitte die Zahl aufschreiben.
+payment-receipt.please-write-the-number,BIT-tuh SHRY-ben zee dee tsahl owf,Bitte schreiben Sie die Zahl auf.
 shopping.where-do-i-pay,voh kahn ikh TSAH-len?,Wo kann ich zahlen?
 communication.i-cannot-make-out-what-you-are-saying,ikh fair-SHTAY-uh zee ah-KOOS-tish nikht,Ich verstehe Sie akustisch nicht.
 quick-responses.cannot-not-possible,kahn nikht / OON-murk-likh,kann nicht / unmöglich
@@ -735,7 +735,7 @@ lost-rescue.i-cannot-find-my-hotel,ikh FIN-duh mine hoh-TEL nikht,Ich finde mein
 emergency-medical.is-there-a-doctor-who-speaks-english,"gipt es EYE-nen ahrtst, dair ENG-lish shprikht?","Gibt es einen Arzt, der {source} spricht?"
 lost-rescue.i-left-it-on-the-train,ikh HAH-buh es im tsook LEE-gen LAHSS-en,Ich habe es im Zug liegen lassen.
 dietary-needs.i-have-a-severe-allergy-to,ikh HAH-buh EYE-nuh SHVAY-ruh ah-lair-GEE GAY-gen {},Ich habe eine schwere Allergie gegen {}.
-communication.please-write-it-in-roman-letters,BIT-tuh in DROOK-bookh-shtah-ben SHRY-ben,Bitte in Druckbuchstaben schreiben.
+communication.please-write-it-in-roman-letters,BIT-tuh SHRY-ben zee es in DROOK-bookh-shtah-ben,Bitte schreiben Sie es in Druckbuchstaben.
 emergency-medical.i-think-a-bone-is-broken,"ikh GLOW-buh, ET-vahs ist guh-BROKH-en","Ich glaube, etwas ist gebrochen."
 lost-rescue.i-cannot-get-down,ikh KOM-uh nikht mair hair-OON-ter,Ich komme nicht mehr herunter.
 emergency-medical.please-call-my-emergency-contact,BIT-tuh ROO-fen zee MY-nen NOHT-fahl-kon-tahkt ahn,Bitte rufen Sie meinen Notfallkontakt an.

@@ -141,7 +141,7 @@ hotel-requests.can-i-check-in-early,früher einchecken
 hotel-requests.can-i-check-out-later,später auschecken
 hotel-requests.can-i-store-my-luggage,Gepäck
 hotel-requests.is-there-a-safe,Safe
-hotel-requests.no-housekeeping,nicht reinigen
+hotel-requests.no-housekeeping,reinigen | reinige | nicht
 hotel-requests.what-time-does-breakfast-start,Frühstück
 hotel-requests.what-time-is-check-out,Check-out
 in-a-building.is-this-the-correct-entrance,richtige
@@ -164,8 +164,8 @@ kind-words.you-are-very-kind,freundlich
 laundry.can-it-be-ready-today,heute
 laundry.how-much-per-kilo,pro Kilo
 laundry.please-do-not-use-bleach,Bleichmittel
-laundry.please-iron-this,bügeln
-laundry.please-wash-these-clothes,waschen
+laundry.please-iron-this,bügeln | bügele
+laundry.please-wash-these-clothes,waschen | wasch
 laundry.when-will-it-be-ready,fertig
 laundry.where-is-a-laundromat,Waschsalon
 lost-rescue.i-do-not-know-where-i-am,wo ich bin
@@ -180,7 +180,7 @@ massage-spa.focus-on-back,Rücken
 massage-spa.focus-on-feet,Füße
 massage-spa.focus-on-neck,Nacken
 massage-spa.focus-on-shoulders,Schultern
-massage-spa.please-avoid-this-area,nicht massieren
+massage-spa.please-avoid-this-area,massieren | massier | nicht
 massage-spa.please-pause,Pause
 massage-spa.reply-ask-supervisor,Leitung
 massage-spa.reply-cannot-avoid-this-treatment,geht nicht
