@@ -830,6 +830,7 @@
   "display.buttonSize": "ボタンの大きさ",
   "display.sizeEqual": "すべて同じ",
   "display.sizeWords": "文字数に合わせる",
+  "display.sizeMosaic": "敷き詰め",
   "display.evenType": "すべてのボタンで文字の大きさをそろえる",
   "display.boldKeys": "各ボタンの重要な語を太字にする",
   "display.colourKeys": "…さらに色のある語は色つきにする（例：「下げ」は青、「止め」は赤）",

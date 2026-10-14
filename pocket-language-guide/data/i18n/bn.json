@@ -830,6 +830,7 @@
   "display.buttonSize": "বোতামের আকার",
   "display.sizeEqual": "সব একই রকম",
   "display.sizeWords": "কথা অনুযায়ী",
+  "display.sizeMosaic": "মোজাইক",
   "display.evenType": "প্রতিটি বোতামে হরফের একই আকার",
   "display.boldKeys": "প্রতিটি বোতামের মূল শব্দগুলো গাঢ় হরফে",
   "display.colourKeys": "…আর যেগুলোর নিজস্ব রং আছে, সেগুলো সেই রঙেও, যেমন «বাড়িয়ে» নীলে আর «থামুন» লালে",

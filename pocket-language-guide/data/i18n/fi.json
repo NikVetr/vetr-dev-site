@@ -830,6 +830,7 @@
   "display.buttonSize": "Painikkeiden koko",
   "display.sizeEqual": "Yhtä suuret",
   "display.sizeWords": "Sanojen mukaan",
+  "display.sizeMosaic": "Mosaiikki",
   "display.evenType": "Sama kirjasinkoko joka painikkeessa",
   "display.boldKeys": "Kunkin painikkeen avainsanat lihavoituina",
   "display.colourKeys": "…ja värillisinä, jos niillä on väri, kuten ”viileämmälle” sinisellä ja ”pysähtyisittekö” punaisella",

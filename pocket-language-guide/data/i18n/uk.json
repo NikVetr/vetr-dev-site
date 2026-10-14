@@ -830,6 +830,7 @@
   "display.buttonSize": "Розмір кнопок",
   "display.sizeEqual": "Однаковий",
   "display.sizeWords": "За текстом",
+  "display.sizeMosaic": "Мозаїка",
   "display.evenType": "Однаковий розмір шрифту на всіх кнопках",
   "display.boldKeys": "Ключові слова кожної кнопки жирним",
   "display.colourKeys": "…і кольором, якщо він у них є, наприклад «холоднішим» синім, а «зупиніться» червоним",

@@ -830,6 +830,7 @@
   "display.buttonSize": "Tamaño de los botones",
   "display.sizeEqual": "Todos iguales",
   "display.sizeWords": "Según el texto",
+  "display.sizeMosaic": "Mosaico",
   "display.evenType": "El mismo tamaño de letra en todos los botones",
   "display.boldKeys": "Las palabras clave de cada botón en negrita",
   "display.colourKeys": "…y en color cuando lo tienen, como «bajar la temperatura» en azul y «pare» en rojo",

@@ -830,6 +830,7 @@
   "display.buttonSize": "버튼 크기",
   "display.sizeEqual": "모두 같게",
   "display.sizeWords": "글자 수에 맞게",
+  "display.sizeMosaic": "빈틈없이",
   "display.evenType": "모든 버튼에서 같은 글자 크기 쓰기",
   "display.boldKeys": "각 버튼의 핵심 단어를 굵게 표시하기",
   "display.colourKeys": "…색이 있는 단어는 그 색으로도 표시하기(예: “낮춰”는 파란색, “세워”는 빨간색)",

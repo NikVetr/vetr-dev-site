@@ -830,6 +830,7 @@
   "display.buttonSize": "按钮大小",
   "display.sizeEqual": "全部相同",
   "display.sizeWords": "随文字长短",
+  "display.sizeMosaic": "无缝拼接",
   "display.evenType": "所有按钮字号相同",
   "display.boldKeys": "每个按钮的关键词加粗",
   "display.colourKeys": "…有对应颜色的关键词再加上颜色，例如“冷一点”用蓝色、“停”用红色",

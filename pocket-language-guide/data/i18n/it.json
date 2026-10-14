@@ -830,6 +830,7 @@
   "display.buttonSize": "Dimensione dei pulsanti",
   "display.sizeEqual": "Tutti uguali",
   "display.sizeWords": "In base al testo",
+  "display.sizeMosaic": "Mosaico",
   "display.evenType": "Lo stesso corpo del carattere su ogni pulsante",
   "display.boldKeys": "Le parole chiave di ogni pulsante in grassetto",
   "display.colourKeys": "…e a colori dove ne hanno uno, come «abbassare la temperatura» in blu e «si fermi» in rosso",

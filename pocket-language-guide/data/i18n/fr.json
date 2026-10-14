@@ -830,6 +830,7 @@
   "display.buttonSize": "Taille des boutons",
   "display.sizeEqual": "Identique",
   "display.sizeWords": "Selon le texte",
+  "display.sizeMosaic": "Mosaïque",
   "display.evenType": "Le même corps sur chaque bouton",
   "display.boldKeys": "Les mots clés de chaque bouton en gras",
   "display.colourKeys": "…et en couleur quand ils en ont une, comme « monter la climatisation » en bleu et « arrêtez-vous » en rouge",

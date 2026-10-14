@@ -830,6 +830,7 @@
   "display.buttonSize": "ขนาดปุ่ม",
   "display.sizeEqual": "เท่ากันหมด",
   "display.sizeWords": "พอดีกับคำ",
+  "display.sizeMosaic": "ชิดกันเต็มแถว",
   "display.evenType": "ขนาดตัวอักษรเท่ากันบนทุกปุ่ม",
   "display.boldKeys": "คำสำคัญของแต่ละปุ่มเป็นตัวหนา",
   "display.colourKeys": "…และใส่สีถ้ามี เช่น “เย็นขึ้น” เป็นสีน้ำเงิน และ “จอด” เป็นสีแดง",

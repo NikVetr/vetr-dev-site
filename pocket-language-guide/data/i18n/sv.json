@@ -830,6 +830,7 @@
   "display.buttonSize": "Knappstorlek",
   "display.sizeEqual": "Alla lika",
   "display.sizeWords": "Efter orden",
+  "display.sizeMosaic": "Mosaik",
   "display.evenType": "Samma teckenstorlek på varje knapp",
   "display.boldKeys": "Nyckelorden på varje knapp i fetstil",
   "display.colourKeys": "…och i färg där de har en, som ”kallare” i blått och ”stanna” i rött",

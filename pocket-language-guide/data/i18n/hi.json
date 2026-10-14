@@ -830,6 +830,7 @@
   "display.buttonSize": "बटन का आकार",
   "display.sizeEqual": "सब एक जैसे",
   "display.sizeWords": "शब्दों के हिसाब से",
+  "display.sizeMosaic": "मोज़ेक",
   "display.evenType": "हर बटन पर टाइप का एक ही आकार",
   "display.boldKeys": "हर बटन के मुख्य शब्द मोटे अक्षरों में",
   "display.colourKeys": "…और जिन शब्दों का अपना रंग है, वे उस रंग में भी, जैसे «तेज़» नीले और «रोक» लाल रंग में",

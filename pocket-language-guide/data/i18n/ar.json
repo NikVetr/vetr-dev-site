@@ -830,6 +830,7 @@
   "display.buttonSize": "حجم الأزرار",
   "display.sizeEqual": "كلها بحجم واحد",
   "display.sizeWords": "على قدر كلماتها",
+  "display.sizeMosaic": "فسيفساء",
   "display.evenType": "حجم الخط نفسه على كل الأزرار",
   "display.boldKeys": "الكلمات المفتاحية في كل زر بخط عريض",
   "display.colourKeys": "…وبلونها حيث يكون لها لون، مثل «رفع» بالأزرق و«التوقّف» بالأحمر",

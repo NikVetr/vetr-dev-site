@@ -830,6 +830,7 @@
   "display.buttonSize": "Schaltflächengröße",
   "display.sizeEqual": "Alle gleich",
   "display.sizeWords": "Passend zum Text",
+  "display.sizeMosaic": "Mosaik",
   "display.evenType": "Auf jeder Schaltfläche dieselbe Schriftgröße",
   "display.boldKeys": "Die Schlüsselwörter jeder Schaltfläche fett",
   "display.colourKeys": "…und farbig, wo sie eine Farbe haben, etwa „kühler“ in Blau und „Halten“ in Rot",
