@@ -94,6 +94,69 @@ test('the reorder still happens for a reader who has asked for less motion', asy
   expect(after.topRow).toContain(pick);
 });
 
+/**
+ * Fold the picker by choosing, then scroll until its bar sits just under the header,
+ * which is where a reader who has scrolled on finds it.
+ * @param {import('@playwright/test').Page} page
+ */
+async function scrolledToBar(page) {
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.locator('#want .want-btn').first().click();
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'false');
+  await page.evaluate(() => {
+    const header = /** @type {HTMLElement} */ (document.querySelector('.site-header')).getBoundingClientRect().bottom;
+    scrollBy(0, /** @type {HTMLElement} */ (document.getElementById('want-toggle')).getBoundingClientRect().top - header - 4);
+  });
+}
+
+test('opening the picker from further down grows it downward from its bar', async ({ page }) => {
+  // Opening held the first card in view in place, which scrolled the page on by the
+  // grid's height and slid the grid up under the bar: only its last row showed.
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await scrolledToBar(page);
+  const bar = await page.locator('#want-toggle').boundingBox();
+  if (!bar) throw new Error('no toggle on screen');
+  await page.mouse.click(bar.x + 20, bar.y + bar.height / 2);
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'true');
+  const after = await page.locator('#want-toggle').boundingBox();
+  const first = await page.locator('#want .want-btn').first().boundingBox();
+  expect(Math.abs((after?.y ?? 0) - bar.y)).toBeLessThanOrEqual(2);
+  expect(first?.y).toBeGreaterThanOrEqual(bar.y + bar.height - 1);
+  expect(first?.y).toBeLessThan(900);
+});
+
+test('a language picked further down comes to the first row on screen, and the page stays put', async ({ page }) => {
+  // Into the grid's first row, the card went wherever that row was -- half under the
+  // header, once the grid had folded above it.
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await scrolledToBar(page);
+  const bar = await page.locator('#want-toggle').boundingBox();
+  if (!bar) throw new Error('no toggle on screen');
+  await page.mouse.click(bar.x + 20, bar.y + bar.height / 2);
+  const { order } = await grid(page);
+  const pick = order[order.length - 1];
+  await page.locator(`#want .want-btn[data-lang="${pick}"]`).click();
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'false');
+  await page.waitForTimeout(800);
+  const placed = await page.evaluate(() => {
+    const header = /** @type {HTMLElement} */ (document.querySelector('.site-header')).getBoundingClientRect().bottom;
+    const cards = [...document.querySelectorAll('#gallery .card')];
+    const firstWhole = cards.find((c) => c.getBoundingClientRect().top >= header && c.getBoundingClientRect().bottom <= innerHeight);
+    const chosen = /** @type {HTMLElement} */ (document.querySelector('.card.chosen'));
+    return {
+      chosen: chosen.dataset.lang,
+      top: chosen.getBoundingClientRect().top, bottom: chosen.getBoundingClientRect().bottom,
+      rowTop: firstWhole?.getBoundingClientRect().top, header, scrollY,
+    };
+  });
+  expect(placed.chosen).toBe(pick);
+  // Wholly on screen, in the first whole row.
+  expect(placed.top).toBeGreaterThanOrEqual(placed.header);
+  expect(placed.bottom).toBeLessThanOrEqual(900);
+  expect(placed.top).toBe(placed.rowTop);
+});
+
 test('the gallery uses the viewport without touching its edges', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1000 });
   await page.goto('/');

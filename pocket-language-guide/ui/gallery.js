@@ -192,8 +192,26 @@ function columnCount(cards) {
 /** Long enough to follow a card across the grid, short enough not to be a wait. */
 const REEL_MS = 420;
 
+/** The cards of the gallery, in grid order. @param {HTMLElement} grid */
+function cardsOf(grid) {
+  return /** @type {HTMLElement[]} */ ([...grid.children]
+    .filter((n) => n instanceof HTMLElement && n.classList.contains('card')));
+}
+
 /**
- * Bring one language's card into the top row by turning its own column, the way a
+ * The first row of cards wholly on screen under the site header, or -1 when none is.
+ * @param {HTMLElement[]} cards @param {number} cols
+ */
+function rowInView(cards, cols) {
+  for (let i = 0; i < cards.length; i += cols) {
+    const box = cards[i].getBoundingClientRect();
+    if (box.top >= headerHeight() && box.bottom <= innerHeight) return i / cols;
+  }
+  return -1;
+}
+
+/**
+ * Bring one language's card into a given row by turning its own column, the way a
  * reel stops on a symbol.
  *
  * **Only that column moves.** Sorting the chosen card to the front instead would
@@ -209,50 +227,40 @@ const REEL_MS = 420;
  * the layout is the real one and only the paint is offset. `prefers-reduced-motion`
  * gets the reorder with no travel, since the ring is what says "this one", and so does
  * a reader coming back to the page, who is not watching it happen.
- * @param {HTMLElement} grid @param {string} code @param {boolean} [travel]
+ * @param {HTMLElement} grid @param {string} code @param {number} row
+ * @param {boolean} [travel]
  * @returns {HTMLElement|null} the chosen card
  */
-function reelToTopRow(grid, code, travel = true) {
-  const cards = /** @type {HTMLElement[]} */ ([...grid.children]
-    .filter((n) => n instanceof HTMLElement && n.classList.contains('card')));
+function reelToRow(grid, code, row, travel = true) {
+  const cards = cardsOf(grid);
   const index = cards.findIndex((c) => c.dataset.lang === code);
   if (index < 0) return null;
 
   const cols = columnCount(cards);
-  const row = Math.floor(index / cols);
   const chosen = cards[index];
+  /** The indices this card's column occupies, top to bottom. */
+  /** @type {number[]} */ const column = [];
+  for (let i = index % cols; i < cards.length; i += cols) column.push(i);
+  const from = Math.floor(index / cols);
+  // A short last column has no card in the bottom row.
+  const to = Math.min(row, column.length - 1);
 
-  if (row > 0) {
-    // **Scroll first, and instantly.** Two reasons, both found by measuring. A
-    // running `animate()` moves an element's own box, so calling `scrollIntoView`
-    // on the card afterwards aims at the position it is travelling *from* and sends
-    // the page the wrong way -- 787px the wrong way, in the case that found this.
-    // And a `smooth` scroll would still be running while the cards travel, so the
-    // offsets FLIP measured would be stale before they were used. One instant jump
-    // to the top of the grid, only when the card would otherwise arrive off-screen,
-    // then the reel turns where it can be seen.
-    if (travel && chosen.getBoundingClientRect().top < 0) {
-      grid.scrollIntoView({ block: 'start' });
-    }
+  if (from !== to) {
     const before = new Map(cards.map((c) => [c, c.getBoundingClientRect()]));
-    /** The indices this card's column occupies, top to bottom. */
-    /** @type {number[]} */ const column = [];
-    for (let i = index % cols; i < cards.length; i += cols) column.push(i);
-    // Rotate the column upward by `row`, so what was in this card's row is now in
-    // the first. `% column.length` is the wrap, and it is why this reads as a reel
-    // rather than a shuffle: nothing leaves the column.
-    const turned = column.map((_, k) => cards[column[(k + row) % column.length]]);
+    // Rotate the column so what was in this card's row is now in the target one. The
+    // wrap is why this reads as a reel rather than a shuffle: nothing leaves the column.
+    const turned = column.map((_, k) => cards[column[(k + from - to + column.length) % column.length]]);
     const order = cards.slice();
     column.forEach((i, k) => { order[i] = turned[k]; });
     grid.replaceChildren(...order);
 
     if (travel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       for (const cardEl of order) {
-        const from = before.get(cardEl);
-        const to = cardEl.getBoundingClientRect();
-        if (!from) continue;
-        const dx = from.left - to.left;
-        const dy = from.top - to.top;
+        const start = before.get(cardEl);
+        const end = cardEl.getBoundingClientRect();
+        if (!start) continue;
+        const dx = start.left - end.left;
+        const dy = start.top - end.top;
         if (!dx && !dy) continue;
         cardEl.animate(
           [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
@@ -811,18 +819,19 @@ async function main() {
       toggle.addEventListener('click', () => {
         // **What the reader was looking at stays where it was.** Shutting the grid
         // left the scroll position alone while everything under it moved up by the
-        // grid's height, which read as the page throwing itself down; and opening it
-        // from the floating bar scrolled back to where the grid lives, which lost the
-        // reader's place among the cards. So the first card in view -- or the toggle,
-        // when no card is -- is held at its place on the screen, and from the floating
-        // bar the grid drops down under it instead (the stylesheet's `want-floating`).
+        // grid's height, which read as the page throwing itself down; so shutting it
+        // holds the first card in view at its place on the screen. Opening holds the
+        // toggle instead, so the grid grows down from it: holding a card there scrolled
+        // the page on by the grid's height and slid the grid up under the bar, leaving
+        // its last row showing. From the floating bar the grid drops down under it
+        // (the stylesheet's `want-floating`), out of the flow, and nothing moves.
+        const opening = toggle.getAttribute('aria-expanded') === 'false';
         const cards = [...document.querySelectorAll('#gallery .card')];
-        const anchor = cards.find((c) => {
+        const anchor = (!opening && cards.find((c) => {
           const box = c.getBoundingClientRect();
           return box.bottom > headerHeight() && box.top < innerHeight;
-        }) ?? toggle;
+        })) || toggle;
         const before = anchor.getBoundingClientRect().top;
-        const opening = toggle.getAttribute('aria-expanded') === 'false';
         // The reader's own tap: from here the grid stays as they leave it.
         foldedByChoice = false;
         want?.classList.toggle('want-dropped', opening && want.classList.contains('want-floating'));
@@ -835,32 +844,45 @@ async function main() {
   }
 
   /**
-   * Want a language: press its button, bring its card up, and fold the grid away.
-   * Coming back to the page chooses it again without the travel or the scroll, since
-   * the place restored after it is where the reader had got to.
-   * @param {string} code @param {boolean} [returning]
+   * Want a language: press its button, fold the grid away, and bring its card to
+   * the reader. Coming back to the page chooses it again into the row it had, without
+   * the travel or the scroll, since the place restored after it is where the reader
+   * had got to.
+   * @param {string} code @param {boolean} [returning] @param {number} [row]
    */
-  function choose(code, returning = false) {
+  function choose(code, returning = false, row = 0) {
     const grid = /** @type {HTMLElement} */ (document.getElementById('gallery'));
-    // On a phone the cards are one column and the grid above them folds: reeling
-    // a card to the top row moved it out from under the reader's scroll position,
-    // and reopening the grid lost the place again. So the card stays where it is
-    // and the page goes to it, after the fold so the offsets are the final ones.
-    const narrow = matchMedia('(max-width: 1080px)').matches;
-    const chosen = narrow
-      ? /** @type {HTMLElement|null} */ (grid.querySelector(`.card[data-lang="${code}"]`))
-      : reelToTopRow(grid, code, !returning);
     for (const button of document.querySelectorAll('#want .want-btn')) {
       button.setAttribute('aria-pressed',
         String(button.getAttribute('data-lang') === code));
     }
-    // **Folded the moment it has been used.** The card is now in the top row and
-    // the three things to do with it are on it; leaving fifty buttons above them
-    // means scrolling past the question to reach its answer.
-    const row = languages.find((l) => l.bcp47 === code);
-    setWantOpen(false, languageName(code, row?.exonym_en ?? code));
+    // **Folded the moment it has been used**, and first, so the card goes where the
+    // cards finally are: the three things to do with it are on it, and leaving fifty
+    // buttons above them means scrolling past the question to reach its answer.
+    const language = languages.find((l) => l.bcp47 === code);
+    setWantOpen(false, languageName(code, language?.exonym_en ?? code));
     foldedByChoice = true;
-    if (chosen && narrow && !returning) chosen.scrollIntoView({ block: 'start' });
+    // On a phone the cards are one column, so turning it would reorder the whole
+    // list under the reader; the card stays where it is and the page goes to it.
+    if (matchMedia('(max-width: 1080px)').matches) {
+      const card = grid.querySelector(`.card[data-lang="${code}"]`);
+      if (card && !returning) card.scrollIntoView({ block: 'start' });
+      return;
+    }
+    // **The card comes to the reader, and the page stays where it is**: into the
+    // first row wholly on screen. Into the grid's first row, it went wherever that row
+    // was -- often half under the header once the grid had folded above it.
+    if (!returning) {
+      const cards = cardsOf(grid);
+      row = rowInView(cards, columnCount(cards));
+      if (row < 0) {
+        // No row is whole on screen -- the cards are below it, or the window is
+        // shorter than a card -- so the first row is brought to the reader instead.
+        row = 0;
+        cards[0].scrollIntoView({ block: 'nearest' });
+      }
+    }
+    reelToRow(grid, code, row, !returning);
   }
 
   /**
@@ -877,7 +899,7 @@ async function main() {
     const place = JSON.parse(held);
     // A language that has since become the reader's own is no longer offered.
     if (place.want && document.querySelector(`#want .want-btn[data-lang="${place.want}"]`)) {
-      choose(place.want, true);
+      choose(place.want, true, place.row);
       if (!place.folded) {
         setWantOpen(true);
         foldedByChoice = false;
@@ -892,8 +914,11 @@ async function main() {
   addEventListener('pagehide', () => {
     const pressed = document.querySelector('#want .want-btn[aria-pressed="true"]');
     const cards = /** @type {HTMLElement} */ (document.getElementById('gallery'));
+    const all = cardsOf(cards);
+    const chosen = all.findIndex((c) => c.classList.contains('chosen'));
     sessionStorage.setItem(PLACE_KEY, JSON.stringify({
       want: pressed?.getAttribute('data-lang') ?? null,
+      row: chosen < 0 ? 0 : Math.floor(chosen / columnCount(all)),
       folded: foldedByChoice,
       into: -cards.getBoundingClientRect().top,
     }));
