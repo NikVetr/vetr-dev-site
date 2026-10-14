@@ -758,10 +758,21 @@ def main():
         if stray:
             errors.append(f"{where}: {stray} are not keys of the sound keyboard")
 
+    # A curated respelling is written for one wording, and `text` says which: a row
+    # reworded since would print its old pronunciation beside its new words.
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
+        code = path.name.split("__")[0]
+        said = {}
+        for group in groups:
+            src = DATA / f"lang/{code}/{group}.csv"
+            if src.exists():
+                said.update({r["concept_id"]: r["text"] for r in load(src.relative_to(DATA))})
         for row in load(path.relative_to(DATA)):
             if row["concept_id"] not in concepts:
                 errors.append(f"{path.name}: unknown concept_id {row['concept_id']!r}")
+            elif row.get("text") != said.get(row["concept_id"]):
+                errors.append(f"{path.name}: {row['concept_id']} respells {row.get('text')!r}, but the row now "
+                              f"says {said.get(row['concept_id'])!r} -- rewrite the respelling or remove it")
 
     # A respelling rule table is a borrowed pronunciation key plus named
     # departures from it, and both halves are load-bearing. Every standard worth

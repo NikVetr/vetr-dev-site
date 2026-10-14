@@ -1,745 +1,742 @@
-concept_id,respell
-building-help.what-room-number-is-this,keh NOO-meh-roh dee STAN-tsah eh KWES-toh
-building-help.i-am-lost,mee SOH-noh PER-soh
-building-help.where-is-reception,doh-VEH lah reh-CHEP-shon
-building-help.where-is-a-power-outlet,doh-VEH OO-nah PREH-zah dee kor-REN-teh
-in-a-building.is-this-the-correct-entrance,eh KWES-tah len-TRAH-tah JOOS-tah
-in-a-building.do-you-have-wi-fi,ah-VEH-teh eel WEE-fee
-in-a-building.what-is-the-wi-fi-password,kwal eh lah PAS-word del WEE-fee
-in-a-building.which-floor,KWAH-leh pee-AH-noh
-building-words.elevator,ah-shen-SOH-reh
-building-words.stairs,SKAH-leh
-building-words.entrance,en-TRAH-tah
-building-words.exit,oo-SHEE-tah
-building-words.men,WOH-mee-nee
-building-words.women,DON-neh
-building-words.door,POR-tah
-building-words.key,kee-AH-veh
-toilets.where-toilet,doh-VEH eel BAH-nyoh
-toilets.where-public-toilet,doh-VEH oon BAH-nyoh POOB-blee-koh
-toilets.may-i-use-the-toilet,"POS-soh oo-ZAH-reh eel BAH-nyoh, per fah-VOH-reh"
-toilets.is-it-only-for-customers,eh SOH-loh per ee klee-EN-tee
-toilets.toilet-wc,BAH-nyee / voo CHEE
-toilets.is-it-free,eh grah-TOO-ee-toh
-toilets.do-i-need-a-coin,SER-veh OO-nah moh-NEH-tah oh oon jet-TOH-neh
-toilets.is-the-tap-water-safe-to-drink,LAK-kwah del roo-bee-NET-toh eh poh-TAH-bee-leh
-toilets.it-is-urgent,eh oor-JEN-teh
-toilets.may-i-have-the-toilet-key,mee dah lah kee-AH-veh del BAH-nyoh
-toilets.there-is-no-toilet-paper,non cheh KAR-tah ee-JEH-nee-kah
-toilets.toilet-paper,KAR-tah ee-JEH-nee-kah
-toilets.it-is-out-of-order,non foon-tsee-OH-nah
-toilets.out-of-order,FWOH-ree ser-VEE-tsee-oh
-toilets.mens-toilet,see-NYOH-ree
-toilets.womens-toilet,see-NYOH-reh
-toilets.drinking-water,AK-kwah poh-TAH-bee-leh
-toilets.not-for-drinking,AK-kwah non poh-TAH-bee-leh
-toilets.accessible-toilet,BAH-nyoh at-ches-SEE-bee-leh
-toilets.where-can-i-wash-my-hands,DOH-veh POS-soh lah-VAR-mee leh MAH-nee
-toilets.can-i-flush-the-paper,POS-soh boot-TAH-reh lah KAR-tah nel VAH-ter
-toilets.is-there-a-toilet-on-board,cheh eel BAH-nyoh ah BOR-doh
-toilets.the-toilet-will-not-flush,loh shak-KWOH-neh non foon-tsee-OH-nah
-toilets.baby-change,fah-shah-TOH-yoh
-toilets.squat-toilet,BAH-nyoh AL-lah TOOR-kah
-accessibility.step-free,cheh oon at-CHES-soh SEN-tsah skah-LEE-nee
-accessibility.wheelchair-access,eh at-ches-SEE-bee-leh een SEH-dee-ah ah roh-TEL-leh
-accessibility.elevator,cheh lah-shen-SOH-reh
-accessibility.ramp,cheh OO-nah RAM-pah
-accessibility.how-many-steps,KWAN-tee skah-LEE-nee chee SOH-noh
-accessibility.cannot-climb-stairs,non POS-soh FAH-reh leh SKAH-leh
-accessibility.need-to-sit-down,oh bee-ZOH-nyoh dee seh-DER-mee
-accessibility.accessible-restroom,cheh oon BAH-nyoh at-ches-SEE-bee-leh
-accessibility.station-assistance,cheh as-sees-TEN-tsah een stah-tsee-OH-neh
-accessibility.help-me-carry,"mee ah-YOO-tee ah por-TAH-reh KWES-toh, per fah-VOH-reh"
-accessibility.board-first,POS-soh sah-LEE-reh PREE-mah DEH-lyee AL-tree
-accessibility.door-width,KWAN-toh eh LAR-gah lah POR-tah
-accessibility.wheelchair-width,lah MEE-ah SEH-dee-ah ah roh-TEL-leh eh LAR-gah {} chen-TEE-meh-tree
-accessibility.hard-of-hearing,oh proh-BLEH-mee dee oo-DEE-toh
-accessibility.speak-louder,"PAR-lee pee-OO FOR-teh, per fah-VOH-reh"
-accessibility.visually-impaired,SOH-noh ee-poh-veh-DEN-teh
-accessibility.take-your-arm,POS-soh PREN-der-leh eel BRAT-choh
-accessibility.guide-dog,KWES-toh eh eel MEE-oh KAH-neh GWEE-dah
-pronouns-verbs.i-me,EE-oh / mee
-pronouns-verbs.we-us,noy / chee
-pronouns-verbs.you,too
-pronouns-verbs.you-polite,lay
-pronouns-verbs.he-him,LOO-ee / loh
-pronouns-verbs.she-her,lay / lah
-pronouns-verbs.they-them,LOH-roh
-pronouns-verbs.my-mine,MEE-oh / MEE-ah
-pronouns-verbs.your-yours,SOO-oh / SOO-ah
-pronouns-verbs.be-called-call,kee-ah-MAR-see / kee-ah-MAH-reh
-pronouns-verbs.have,ah-VEH-reh
-pronouns-verbs.do-not-have,non ah-VEH-reh
-pronouns-verbs.go,an-DAH-reh
-pronouns-verbs.come,veh-NEE-reh
-pronouns-verbs.would-like,vor-RAY
-pronouns-verbs.want,voh-LEH-reh
-pronouns-verbs.look-for,cher-KAH-reh
-pronouns-verbs.buy,kom-PRAH-reh
-pronouns-verbs.like,pee-ah-CHEH-reh
-pronouns-verbs.need,ah-VEH-reh bee-ZOH-nyoh dee
-question-words.what,keh KOH-sah
-question-words.where,DOH-veh
-question-words.who,kee
-question-words.which-one,KWAH-leh
-question-words.when,KWAN-doh
-question-words.how,KOH-meh
-question-words.how-much-many,KWAN-toh
-question-words.how-many,KWAN-tee
-question-words.why,per-KEH
-question-words.this,KWES-toh
-question-words.that,KWEL-loh
-question-words.here,kwee
-question-words.there,lah
-question-words.a-little,oon poh
-question-words.some,al-KOO-nee
-question-words.very,MOL-toh
-question-words.too,TROP-poh
-question-words.also,AN-keh
-question-words.all-both,TOOT-toh / en-TRAM-bee
-pronouns-verbs.there-is-have,cheh / chee SOH-noh
-pronouns-verbs.there-is-not-do-not-have,non cheh / non chee SOH-noh
-pronouns-verbs.want-to-verb,VOH-lyoh
-pronouns-verbs.want-thing,VOH-lyoh
-pronouns-verbs.need-thing,oh bee-ZOH-nyoh dee
-pronouns-verbs.looking-for-thing,CHER-koh
-question-words.how-much-what-price,KWAN-toh KOS-tah
-emergency-medical.help,ah-YOO-toh
-emergency-medical.please-call-an-ambulance,"kee-AH-mee oo-nam-boo-LAN-tsah, per fah-VOH-reh"
-emergency-medical.i-need-a-doctor,oh bee-ZOH-nyoh dee oon MEH-dee-koh
-emergency-medical.i-am-sick,SOH-noh mah-LAH-toh
-emergency-medical.i-am-injured,SOH-noh feh-REE-toh
-emergency-medical.it-hurts-here,mee fah MAH-leh kwee
-emergency-medical.where-is-a-pharmacy,doh-VEH OO-nah far-mah-CHEE-ah
-emergency-medical.please-take-me-to-a-hospital,"mee POR-tee een os-peh-DAH-leh, per fah-VOH-reh"
-lost-rescue.i-lost-my-passport,oh PER-soh eel pas-sah-POR-toh
-lost-rescue.i-lost-my-phone,oh PER-soh eel teh-LEH-foh-noh
-lost-rescue.please-call-the-police,"kee-AH-mee lah poh-lee-TSEE-ah, per fah-VOH-reh"
-lost-rescue.we-are-here,see-AH-moh kwee
-lost-rescue.please-look-at-my-location-pin,GWAR-dee lah MEE-ah poh-zee-tsee-OH-neh SOOL-lah MAP-pah
-lost-rescue.i-cannot-walk,non ree-ES-koh ah kam-mee-NAH-reh
-lost-rescue.i-sprained-my-ankle,oh lah kah-VEE-lyah zloh-GAH-tah
-lost-rescue.please-contact-rescue,kee-AH-mee ee sok-KOR-see
-lost-rescue.my-companion-is-missing,non TROH-voh eel MEE-oh kom-PAH-nyoh dee vee-AD-joh
-lost-rescue.please-look-at-my-current-location,GWAR-dee lah MEE-ah poh-zee-tsee-OH-neh at-too-AH-leh
-emergency-medical.i-feel-unwell,non mee SEN-toh BEH-neh
-emergency-medical.this-is-an-emergency,eh oo-neh-mer-JEN-tsah
-emergency-medical.i-am-having-a-severe-allergic-reaction,oh OO-noh shok ah-nah-fee-LAT-tee-koh
-emergency-medical.i-cannot-breathe,non ree-ES-koh ah res-pee-RAH-reh
-emergency-medical.i-am-bleeding-badly,stoh per-DEN-doh MOL-toh SAN-gweh
-emergency-medical.i-have-chest-pain,oh doh-LOH-reh al PET-toh
-emergency-medical.this-person-is-unconscious,KWES-tah per-SOH-nah ah PER-soh koh-noh-SHEN-tsah
-emergency-medical.where-is-the-nearest-hospital,doh-VEH los-peh-DAH-leh pee-OO vee-CHEE-noh
-emergency-medical.what-is-the-emergency-number,kwal eh eel NOO-meh-roh dee eh-mer-JEN-tsah
-emergency-medical.is-there-a-doctor-who-speaks-english,cheh oon MEH-dee-koh keh PAR-lah een-GLEH-seh
-emergency-medical.i-think-a-bone-is-broken,KREH-doh dee ah-VEH-reh OO-nah frat-TOO-rah
-emergency-medical.please-call-my-emergency-contact,kee-AH-mee eel MEE-oh kon-TAT-toh dee eh-mer-JEN-tsah
-emergency-medical.i-have-travel-insurance,oh oo-nas-see-koo-rah-tsee-OH-neh dee vee-AD-joh
-lost-rescue.my-child-is-missing,MEE-oh FEE-lyoh see eh PER-soh
-lost-rescue.i-do-not-know-where-i-am,non soh DOH-veh mee TROH-voh
-lost-rescue.my-friend-is-hurt,eel MEE-oh ah-MEE-koh eh feh-REE-toh
-lost-rescue.i-lost-my-wallet,oh PER-soh eel por-tah-FOH-lyoh
-lost-rescue.i-lost-my-bag,oh PER-soh lah BOR-sah
-lost-rescue.where-is-lost-and-found,doh-VEH loof-FEE-choh od-JET-tee zmar-REE-tee
-lost-rescue.i-cannot-find-my-hotel,non TROH-voh eel MEE-oh al-BER-goh
-lost-rescue.i-left-it-on-the-train,loh lah-SHAH-toh sool TREH-noh
-lost-rescue.i-cannot-get-down,non ree-ES-koh ah SHEN-deh-reh
-medical-conditions.i-am-diabetic,oh eel dee-ah-BEH-teh
-medical-conditions.i-need-insulin,mee SER-veh leen-soo-LEE-nah
-medical-conditions.i-have-asthma,oh LAZ-mah
-medical-conditions.i-have-a-heart-condition,oh OO-nah mah-lat-TEE-ah kar-DEE-ah-kah
-medical-conditions.i-am-allergic-to-penicillin,oh oo-nal-ler-JEE-ah AL-lah peh-nee-cheel-LEE-nah
-medical-conditions.i-have-epilepsy,oh leh-pee-les-SEE-ah
-medical-conditions.my-blood-sugar-is-low,oh lah glee-cheh-MEE-ah BAS-sah
-medical-conditions.i-need-my-inhaler,mee SER-veh eel MEE-oh ee-nah-lah-TOH-reh
-medical-conditions.i-am-pregnant,SOH-noh een-CHEEN-tah
-medical-conditions.i-carry-an-adrenaline-injector,oh oon ow-toh-ee-nee-et-TOH-reh dee ah-dreh-nah-LEE-nah
-medical-conditions.i-take-medicine-for,PREN-doh meh-dee-CHEE-neh per {}
-medical-conditions.i-take-blood-thinners,PREN-doh an-tee-koh-ah-goo-LAN-tee
-medical-conditions.medicine-allergy,al-ler-JEE-ah eye FAR-mah-chee: {}
-medical-conditions.this-card-lists-my-conditions,KWES-tah SKEH-dah een-DEE-kah leh MEE-eh pah-toh-loh-JEE-eh
-medical-conditions.this-is-my-medicine,KWES-toh eh eel MEE-oh FAR-mah-koh
-medical-conditions.please-give-me-sugar-or-juice,mee DEE-ah DEL-loh tsook-KEH-roh oh oon SOOK-koh
-medical-conditions.inject-it-into-my-outer-thigh,loh ee-nee-ET-tee NEL-lah PAR-teh es-TER-nah DEL-lah KOH-shah
-medical-conditions.my-blood-type-is,eel MEE-oh GROOP-poh san-GWEE-nyoh eh {}
-medical-conditions.do-not-give-me,non mee DEE-ah {}
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,oh oo-nal-ler-JEE-ah al-las-pee-REE-nah eh al-lee-boo-proh-FEH-neh
-medical-conditions.my-injector-is-in-my-bag,eel MEE-oh ow-toh-ee-nee-et-TOH-reh eh NEL-lah BOR-sah
-medical-conditions.i-am-allergic-to-sulfa-drugs,oh oo-nal-ler-JEE-ah eye sool-fah-MEE-dee-chee
-pharmacy-symptoms.which-pharmacy-is-open-now,KWAH-leh far-mah-CHEE-ah eh ah-PER-tah ah-DES-soh
-pharmacy-symptoms.i-need-medicine-for,mee SER-veh oon FAR-mah-koh per {}
-pharmacy-symptoms.i-have-a-fever,oh lah FEB-breh
-pharmacy-symptoms.i-have-diarrhea,oh lah dee-ar-REH-ah
-pharmacy-symptoms.where-is-an-all-night-pharmacy,doh-VEH lah far-mah-CHEE-ah dee TOOR-noh
-pharmacy-symptoms.painkiller,oon an-tee-doh-loh-REE-fee-koh
-pharmacy-symptoms.do-i-need-a-prescription,SER-veh lah ree-CHET-tah
-pharmacy-symptoms.i-have-a-headache,oh mal dee TES-tah
-pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-cheh-tah-MOH-loh (tah-kee-pee-REE-nah)
-pharmacy-symptoms.how-much-should-i-take,KWAN-toh DEH-voh PREN-der-neh
-pharmacy-symptoms.i-am-vomiting,stoh voh-mee-TAN-doh
-pharmacy-symptoms.rehydration-salts,SAH-lee reh-ee-drah-TAN-tee
-pharmacy-symptoms.how-many-times-a-day,KWAN-teh VOL-teh al JOR-noh
-pharmacy-symptoms.i-have-a-stomach-ache,oh mal dee STOH-mah-koh
-pharmacy-symptoms.i-have-a-cough,oh lah TOS-seh
-pharmacy-symptoms.antihistamine,oon an-tees-tah-MEE-nee-koh
-pharmacy-symptoms.anti-diarrhea-medicine,oon an-tee-dee-ar-ROY-koh (loh-peh-rah-MEE-deh)
-pharmacy-symptoms.is-this-safe-to-take-with,POS-soh PREN-der-loh een-see-EH-meh ah {}
-pharmacy-symptoms.i-feel-dizzy,oh leh ver-TEE-jee-nee
-pharmacy-symptoms.ibuprofen,ee-boo-proh-FEH-neh
-pharmacy-symptoms.i-have-a-sore-throat,oh mal dee GOH-lah
-pharmacy-symptoms.can-i-get-this-medicine-here,ah-VEH-teh KWES-toh FAR-mah-koh
-pharmacy-symptoms.bandage,OO-nah BEN-dah
-pharmacy-symptoms.the-pain-is-severe,eel doh-LOH-reh eh MOL-toh FOR-teh
-pharmacy-symptoms.antiseptic,oon dee-zeen-fet-TAN-teh
-pharmacy-symptoms.i-feel-nauseous,oh lah NOW-zeh-ah
-pharmacy-symptoms.i-have-a-rash,oh oo-neh-roo-tsee-OH-neh koo-TAH-neh-ah
-pharmacy-symptoms.before-or-after-food,PREE-mah oh DOH-poh ee PAS-tee
-pharmacy-symptoms.i-think-it-is-infected,KREH-doh keh SEE-ah een-FET-toh
-pharmacy-symptoms.motion-sickness-tablets,pas-TEE-lyeh KON-troh eel mal DOW-toh
-pharmacy-symptoms.i-have-a-cut,oh oon TAH-lyoh
-pharmacy-symptoms.antacid,oon an-tee-AH-chee-doh
-pharmacy-symptoms.i-have-a-burn,oh oo-noos-tee-OH-neh
-pharmacy-symptoms.it-started-days-ago,eh ee-nee-tsee-AH-toh {} JOR-nee fah
-pharmacy-symptoms.cough-medicine,OO-noh shee-ROP-poh per lah TOS-seh
-pharmacy-symptoms.is-this-safe-during-pregnancy,see pwoh PREN-deh-reh een grah-vee-DAN-tsah
-police-consulate.where-is-the-police-station,doh-VEH eel kom-mees-sah-ree-AH-toh
-police-consulate.i-want-to-report-a-theft,VOH-lyoh deh-noon-CHAH-reh oon FOOR-toh
-police-consulate.my-bag-was-stolen,mee AN-noh roo-BAH-toh lah BOR-sah
-police-consulate.my-passport-was-stolen,mee AN-noh roo-BAH-toh eel pas-sah-POR-toh
-police-consulate.someone-is-following-me,kwal-KOO-noh mee stah seh-GWEN-doh
-police-consulate.i-need-a-written-police-report,mee SER-veh lah deh-NOON-chah SKREET-tah
-police-consulate.i-want-to-contact-my-embassy,VOH-lyoh kon-tat-TAH-reh lah MEE-ah am-bah-SHAH-tah
-police-consulate.i-need-it-for-my-insurance,mee SER-veh per las-see-koo-rah-tsee-OH-neh
-police-consulate.i-need-an-interpreter,mee SER-veh oon een-TER-preh-teh
-police-consulate.please-leave-me-alone,mee LAH-shee een PAH-cheh
-police-consulate.i-was-robbed,mee AN-noh deh-roo-BAH-toh
-police-consulate.i-want-a-lawyer,VOH-lyoh oon av-voh-KAH-toh
-police-consulate.please-notify-my-consulate,"av-VEE-see eel MEE-oh kon-soh-LAH-toh, per fah-VOH-reh"
-police-consulate.i-am-calling-the-police,stoh kee-ah-MAN-doh lah poh-lee-TSEE-ah
-police-consulate.am-i-under-arrest,SOH-noh een ar-RES-toh
-police-consulate.no-thank-you-i-am-not-interested,"noh GRAH-tsee-eh, non mee een-teh-RES-sah"
-police-consulate.someone-attacked-me,mee AN-noh ag-greh-DEE-toh
-police-consulate.i-did-not-agree-to-this-price,non oh at-chet-TAH-toh KWES-toh PRET-tsoh
-police-consulate.please-write-the-report-number,SKREE-vah eel NOO-meh-roh DEL-lah deh-NOON-chah
-police-consulate.it-happened-here,eh soot-CHES-soh kwee
-police-consulate.may-i-have-a-copy-of-the-report,POS-soh ah-VEH-reh OO-nah KOH-pee-ah DEL-lah deh-NOON-chah
-police-consulate.i-will-not-sign-anything-i-cannot-read,non FEER-moh NOOL-lah keh non POS-sah LED-jeh-reh
-police-consulate.am-i-free-to-go,POS-soh an-DAR-meh-neh
-police-consulate.i-do-not-want-to-go-with-you,non VOH-lyoh veh-NEE-reh kon lay
-body-parts.head,lah TES-tah
-body-parts.stomach,lah PAN-chah
-body-parts.back,lah skee-EH-nah
-body-parts.throat,lah GOH-lah
-body-parts.tooth,eel DEN-teh
-body-parts.chest,eel PET-toh
-body-parts.eye,LOK-kee-oh
-body-parts.ear,loh-REK-kee-oh
-body-parts.leg,lah GAM-bah
-body-parts.arm,eel BRAT-choh
-body-parts.foot,eel pee-EH-deh
-body-parts.hand,lah MAH-noh
-body-parts.knee,eel jee-NOK-kee-oh
-body-parts.ankle,lah kah-VEE-lyah
-body-parts.skin,lah PEL-leh
-dietary-needs.no-meat,SEN-tsah KAR-neh
-dietary-needs.no-eggs,SEN-tsah WOH-vah
-dietary-needs.not-spicy,non peek-KAN-teh
-dietary-needs.less-spicy,MEH-noh peek-KAN-teh
-dietary-needs.no-peanuts,SEN-tsah ah-RAH-kee-dee
-dietary-needs.no-nuts,SEN-tsah FROOT-tah ah GOO-shoh neh NOH-chee
-dietary-needs.no-seafood,SEN-tsah PEH-sheh neh FROOT-tee dee MAH-reh
-dietary-needs.i-am-vegetarian,SOH-noh veh-jeh-tah-ree-AH-noh
-dietary-needs.i-am-vegan,SOH-noh veh-GAH-noh
-dietary-needs.i-do-not-eat,non MAN-joh {}
-dietary-needs.i-am-allergic-to,oh oo-nal-ler-JEE-ah ah {}
-food-ordering.table-for-two,oon TAH-voh-loh per DOO-eh
-food-ordering.is-a-table-available,cheh oon TAH-voh-loh lee-BEH-roh
-food-ordering.menu-please,"eel meh-NOO, per fah-VOH-reh"
-food-ordering.i-want-this,vor-RAY KWES-toh
-food-ordering.do-you-have-drinking-water,ah-VEH-teh AK-kwah poh-TAH-bee-leh
-food-ordering.to-go-please,"dah por-TAH-reh VEE-ah, per fah-VOH-reh"
-food-ordering.check-please,"eel KON-toh, per fah-VOH-reh"
-food-ordering.does-it-contain,kon-tee-EH-neh {}
-food-ordering.is-this-vegetarian,KWES-toh eh veh-jeh-tah-ree-AH-noh
-dietary-needs.does-it-contain-fish-stock,kon-tee-EH-neh BROH-doh dee PEH-sheh
-dietary-needs.does-it-contain-pork-stock,kon-tee-EH-neh BROH-doh dee mah-YAH-leh
-dietary-needs.i-have-a-severe-allergy-to,oh OO-nah GRAH-veh al-ler-JEE-ah ah {}
-food-ordering.what-do-you-recommend,keh KOH-sah mee kon-SEE-lyah
-food-ordering.water-please,"AK-kwah, per fah-VOH-reh"
-food-ordering.can-a-vegetarian-eat-this,oon veh-jeh-tah-ree-AH-noh pwoh man-JAH-reh KWES-toh
-dietary-needs.no-pork,"SEN-tsah mah-YAH-leh, sah-LOO-mee, pan-CHET-tah oh gwan-CHAH-leh"
-dietary-needs.is-this-halal,eh ah-LAL
-trail-words.trail,eel sen-tee-EH-roh
-trail-words.trailhead,lee-NEE-tsee-oh del sen-tee-EH-roh
-trail-words.summit,lah CHEE-mah
-trail-words.viewpoint,eel POON-toh pah-noh-rah-MEE-koh
-trail-words.cableway,lah foo-NEE-vee-ah
-trail-words.shuttle-bus,lah nah-VET-tah
-trail-words.park-shuttle,lah nah-VET-tah del PAR-koh
-trail-words.steps,ee grah-DEE-nee
-trail-words.up-uphill,sah-LEE-tah
-trail-words.down-downhill,dee-SHEH-sah
-trail-words.one-way,SOH-loh an-DAH-tah
-trail-words.round-trip,an-DAH-tah eh ree-TOR-noh
-hiking-parks.is-this-the-way-to,eh KWES-toh eel sen-tee-EH-roh per {}
-hiking-parks.where-is-the-trailhead,DOH-veh ee-NEE-tsee-ah eel sen-tee-EH-roh
-hiking-parks.how-long-to-the-summit,KWAN-toh MAN-kah AL-lah CHEE-mah
-hiking-parks.how-long-to-the-viewpoint,KWAN-toh MAN-kah al POON-toh pah-noh-rah-MEE-koh
-hiking-parks.which-route-is-easier,KWAH-leh per-KOR-soh eh pee-OO FAH-chee-leh
-trail-conditions.how-long-is-the-full-route,KWAN-toh eh LOON-goh eel per-KOR-soh kom-PLEH-toh
-trail-conditions.can-we-return-the-same-way,pos-see-AH-moh tor-NAH-reh per lah STES-sah STRAH-dah
-trail-conditions.can-we-return-before-dark,pos-see-AH-moh tor-NAH-reh PREE-mah del BOO-yoh
-trail-conditions.is-the-trail-open,eel sen-tee-EH-roh eh ah-PER-toh
-trail-conditions.is-the-route-steep,eel per-KOR-soh eh ree-PEE-doh
-trail-conditions.is-the-path-slippery,eel sen-tee-EH-roh eh shee-voh-LOH-soh
-trail-transport.how-long-is-the-queue,KWAN-toh eh LOON-gah lah FEE-lah
-trail-transport.what-time-is-the-last-shuttle,ah keh OH-rah eh LOOL-tee-mah nah-VET-tah
-trail-transport.when-does-the-cableway-stop,ah keh OH-rah kee-OO-deh lah foo-NEE-vee-ah
-trail-transport.where-can-we-buy-water,DOH-veh pos-see-AH-moh kom-PRAH-reh del-LAK-kwah
-trail-transport.where-can-we-refill-water,DOH-veh pos-see-AH-moh ree-em-PEE-reh leh bor-RAT-cheh
-trail-transport.is-there-cell-signal-here,cheh KAM-poh kwee
-trail-transport.do-you-have-a-map,ah OO-nah MAP-pah
-trail-warnings.open,ah-PER-toh
-trail-warnings.closed,kee-OO-zoh
-trail-warnings.maintenance,mah-noo-ten-tsee-OH-neh
-trail-warnings.steep-slope,pen-DEN-tsah eh-leh-VAH-tah
-trail-warnings.caution-slippery,at-ten-tsee-OH-neh: FON-doh shee-voh-LOH-soh
-trail-warnings.danger,peh-REE-koh-loh
-trail-warnings.beware-falling-rocks,at-ten-tsee-OH-neh: kah-DOO-tah SAS-see
-trail-warnings.first-aid-station,POS-toh dee PREE-moh sok-KOR-soh
-trail-warnings.service-suspended,ser-VEE-tsee-oh sos-PEH-soh
-trail-landmarks.trail-marker,eel seh-nyah-VEE-ah
-trail-landmarks.fork-junction,eel BEE-vee-oh
-trail-landmarks.boardwalk-cliff-path,pas-seh-REL-lah / sen-tee-EH-roh es-POS-toh
-trail-landmarks.start,par-TEN-tsah
-trail-landmarks.end,ar-REE-voh
-trail-landmarks.elevation,lal-tee-TOO-dee-neh
-trail-landmarks.sunset,eel trah-MON-toh
-trail-landmarks.water-point,POON-toh AK-kwah
-hiking-parks.is-this-trail-suitable-for-beginners,KWES-toh sen-tee-EH-roh eh ah-DAT-toh eye preen-chee-pee-AN-tee
-trail-transport.how-long-is-the-wait,KWAN-toh see DEH-veh as-pet-TAH-reh
-weather.forecast,KWAH-lee SOH-noh leh preh-vee-zee-OH-nee del TEM-poh
-weather.will-it-rain,pee-oh-veh-RAH OD-jee
-weather.is-it-safe-today,OD-jee eh see-KOO-roh
-weather.how-cold-at-night,keh FRED-doh fah dee NOT-teh
-weather.rain,lah pee-OD-jah
-weather.snow,lah NEH-veh
-weather.wind,eel VEN-toh
-weather.storm,eel tem-poh-RAH-leh
-weather.ice,eel ghee-AT-choh
-weather.fog,lah NEB-bee-ah
-weather.heat,eel KAL-doh
-weather.cold,eel FRED-doh
-weather.humid,oo-MEE-doh
-weather.sunrise,LAL-bah
-weather.flood,lal-loo-vee-OH-neh
-weather.avalanche-risk,REES-kee-oh vah-LAN-gheh
-hotel-words.passport,eel pas-sah-POR-toh
-hotel-words.room-key-card,lah TES-seh-rah DEL-lah KAH-meh-rah
-hotel-words.check-in,eel chek-EEN
-hotel-words.check-out,eel chek-OWT
-hotel-basics.are-any-rooms-available,ah-VEH-teh KAH-meh-reh lee-BEH-reh
-hotel-basics.there-are-two-of-us,see-AH-moh een DOO-eh
-hotel-basics.i-have-a-reservation,oh OO-nah preh-noh-tah-tsee-OH-neh
-hotel-basics.can-i-charge-my-phone,POS-soh kah-ree-KAH-reh eel teh-LEH-foh-noh
-hotel-basics.i-would-like-a-non-smoking-room,vor-RAY OO-nah KAH-meh-rah per non foo-mah-TOH-ree
-hotel-basics.i-would-like-a-quiet-room,vor-RAY OO-nah KAH-meh-rah tran-KWEEL-lah
-hotel-basics.is-there-a-washing-machine,cheh OO-nah lah-vah-TREE-cheh
-hotel-requests.can-i-check-out-later,POS-soh FAH-reh eel chek-OWT pee-OO TAR-dee
-hotel-requests.what-time-does-breakfast-start,ah keh OH-rah ee-NEE-tsee-ah lah koh-lah-tsee-OH-neh
-hotel-requests.can-i-store-my-luggage,POS-soh lah-SHAH-reh ee bah-GAH-lyee
-hotel-requests.no-housekeeping,"nee-EN-teh poo-lee-TSEE-ah, GRAH-tsee-eh"
-room-problems.there-is-a-problem-with-the-room,cheh oon proh-BLEH-mah kon lah KAH-meh-rah
-room-problems.the-air-conditioning-is-broken,LAH-ree-ah kon-dee-tsee-oh-NAH-tah non foon-tsee-OH-nah
-room-problems.there-is-no-hot-water,non cheh AK-kwah KAL-dah
-room-problems.can-i-change-rooms,POS-soh kam-bee-AH-reh KAH-meh-rah
-room-problems.the-room-is-too-noisy,lah KAH-meh-rah eh TROP-poh roo-moh-ROH-sah
-hotel-basics.is-wi-fi-free,eel WEE-fee eh grah-TOO-ee-toh
-hotel-words.luggage-storage,eel deh-POH-zee-toh bah-GAH-lyee
-hotel-requests.another-towel-please,"oon AL-troh ah-shoo-gah-MAH-noh, per fah-VOH-reh"
-laundry.please-wash-these-clothes,"LAH-vee KWES-tee ves-TEE-tee, per fah-VOH-reh"
-laundry.where-is-a-laundromat,doh-VEH OO-nah lah-van-deh-REE-ah ah jet-TOH-nee
-laundry.when-will-it-be-ready,KWAN-doh sah-RAH PRON-toh
-laundry.how-much-per-kilo,KWAN-toh KOS-tah al KEE-loh
-laundry.can-it-be-ready-today,pwoh ES-seh-reh PRON-toh OD-jee
-laundry.please-do-not-use-bleach,"non OO-zee lah kan-ded-JEE-nah, per fah-VOH-reh"
-laundry.laundromat,lah-van-deh-REE-ah ah jet-TOH-nee
-laundry.please-iron-this,"STEE-ree KWES-toh, per fah-VOH-reh"
-laundry.detergent,eel deh-ter-SEE-voh
-laundry.dry-cleaning,eel lah-VAD-joh ah SEK-koh
-laundry.dryer,lah-shoo-gah-TREE-cheh
-laundry.coin-operated,ah jet-TOH-nee
-hotel-basics.how-much-per-night,KWAN-toh KOS-tah ah NOT-teh
-hotel-basics.is-breakfast-included,lah koh-lah-tsee-OH-neh eh kom-PREH-zah
-hotel-basics.may-i-see-the-room,POS-soh veh-DEH-reh lah KAH-meh-rah
-hotel-basics.for-nights,per {} NOT-tee
-hotel-basics.two-beds,"DOO-eh LET-tee seh-pah-RAH-tee, per fah-VOH-reh"
-hotel-basics.is-there-air-conditioning,cheh LAH-ree-ah kon-dee-tsee-oh-NAH-tah
-hotel-requests.what-time-is-check-out,ah keh OH-rah eh eel chek-OWT
-hotel-requests.can-i-check-in-early,POS-soh FAH-reh eel chek-EEN PREE-mah
-hotel-requests.another-night,POS-soh res-TAH-reh oo-NAL-trah NOT-teh
-hotel-requests.is-there-a-safe,cheh OO-nah kas-sah-FOR-teh
-hotel-requests.another-blanket,"oo-NAL-trah koh-PER-tah, per fah-VOH-reh"
-hotel-requests.wake-up-call,"mee ZVEH-lyee AL-leh {}, per fah-VOH-reh"
-room-problems.the-key-does-not-work,lah kee-AH-veh non foon-tsee-OH-nah
-room-problems.the-toilet-will-not-flush,loh shak-KWOH-neh non foon-tsee-OH-nah
-room-problems.the-light-does-not-work,lah LOO-cheh non foon-tsee-OH-nah
-room-problems.please-send-someone,"MAN-dee kwal-KOO-noh ah ree-pah-RAR-loh, per fah-VOH-reh"
-room-problems.the-heating-does-not-work,eel rees-kal-dah-MEN-toh non foon-tsee-OH-nah
-introductions.my-name-is,mee kee-AH-moh {}
-introductions.nice-to-meet-you,pee-ah-CHEH-reh
-introductions.what-is-your-name,KOH-meh see kee-AH-mah
-introductions.we-are-traveling-together,vee-ad-JAH-moh een-see-EH-meh
-introductions.this-is-my-friend,KWES-toh eh eel MEE-oh ah-MEE-koh
-introductions.i-am-from,VEN-goh dah {}
-introductions.where-are-you-from,dee doh-VEH
-introductions.how-are-you,KOH-meh stah
-introductions.i-am-a-tourist,SOH-noh oon too-REES-tah
-introductions.this-is-my-husband-wife,LOO-ee eh MEE-oh mah-REE-toh / lay eh MEE-ah MOH-lyeh
-introductions.this-is-my-daughter-son,lay eh MEE-ah FEE-lyah / LOO-ee eh MEE-oh FEE-lyoh
-introductions.i-am-traveling-alone,vee-AD-joh dah SOH-loh
-numbers-money.l-ng,DZEH-roh
-numbers-money.y,OO-noh
-numbers-money.r,DOO-eh
-numbers-money.s-n,treh
-numbers-money.s,KWAT-troh
-numbers-money.w,CHEEN-kweh
-numbers-money.li,say
-numbers-money.q,SET-teh
-numbers-money.b,OT-toh
-numbers-money.ji,NOH-veh
-numbers-money.sh,dee-EH-chee
-numbers-money.y-b-i,CHEN-toh
-numbers-money.y-qi-n,MEEL-leh
-numbers-money.y-w-n,dee-eh-chee-MEE-lah
-numbers-money.b-n,MED-dzoh
-atm-cash.where-is-an-atm,doh-VEH oon BAN-koh-mat
-atm-cash.does-this-atm-take-foreign-cards,KWES-toh BAN-koh-mat at-CHET-tah KAR-teh strah-nee-EH-reh
-atm-cash.the-atm-kept-my-card,eel BAN-koh-mat ah trat-teh-NOO-toh lah MEE-ah KAR-tah
-atm-cash.is-there-a-fee,cheh OO-nah kom-mees-see-OH-neh
-atm-cash.the-card-was-declined,lah KAR-tah eh STAH-tah ree-fee-oo-TAH-tah
-atm-cash.what-is-the-exchange-rate,kwal eh eel TAS-soh dee KAM-bee-oh
-atm-cash.no-money-came-out,non SOH-noh oo-SHEE-tee ee SOL-dee
-atm-cash.where-can-i-change-money,DOH-veh POS-soh kam-bee-AH-reh vah-LOO-tah
-atm-cash.the-machine-is-out-of-service,eel BAN-koh-mat eh FWOH-ree ser-VEE-tsee-oh
-atm-cash.please-give-me-smaller-notes,"mee DEE-ah ban-koh-NOH-teh pee-OO PEEK-koh-leh, per fah-VOH-reh"
-atm-cash.do-you-have-change,ah dah kam-bee-AH-reh
-atm-cash.may-i-pay-in,POS-soh pah-GAH-reh een {}
-atm-cash.please-charge-in-local-currency,"ad-DEH-bee-tee een vah-LOO-tah loh-KAH-leh, per fah-VOH-reh"
-atm-cash.where-can-i-get-coins,DOH-veh POS-soh troh-VAH-reh DEL-leh moh-NEH-teh
-atm-cash.is-there-a-minimum-for-cards,cheh oon MEE-nee-moh kon lah KAR-tah
-atm-cash.atm,eel BAN-koh-mat
-atm-cash.banknote,lah ban-koh-NOH-tah
-atm-cash.coin,lah moh-NEH-tah
-atm-cash.cash-only,SOH-loh kon-TAN-tee
-atm-cash.fee,lah kom-mees-see-OH-neh
-atm-cash.change,eel RES-toh
-atm-cash.exchange-rate,eel TAS-soh dee KAM-bee-oh
-atm-cash.bank,lah BAN-kah
-atm-cash.money-exchange,KAM-bee-oh vah-LOO-tah
-atm-cash.pin,eel peen
-attractions-tickets.where-can-i-buy-tickets,DOH-veh POS-soh kom-PRAH-reh ee bee-LYET-tee
-attractions-tickets.do-i-need-a-reservation,SER-veh lah preh-noh-tah-tsee-OH-neh
-attractions-tickets.what-is-the-latest-entry-time,kwal eh LOOL-tee-moh een-GRES-soh
-attractions-tickets.are-there-lockers,chee SOH-noh DEH-lyee ar-mah-dee-ET-tee
-attractions-tickets.may-i-take-photos,POS-soh FAH-reh FOH-toh
-attractions-tickets.please-take-a-photo-of-us,"chee FAT-chah OO-nah FOH-toh, per fah-VOH-reh"
-attractions-tickets.could-you-take-a-photo-for-us,pwoh FAR-chee OO-nah FOH-toh
-payment-receipt.pay-by-card,POS-soh pah-GAH-reh kon lah KAR-tah
-payment-receipt.pay-cash,POS-soh pah-GAH-reh een kon-TAN-tee
-payment-receipt.pay-by-qr-code,POS-soh pah-GAH-reh kon eel KOH-dee-cheh koo ER-reh
-payment-receipt.a-receipt-please,"OO-noh skon-TREE-noh, per fah-VOH-reh"
-shopping.i-am-just-looking,stoh SOH-loh DAN-doh oo-nok-kee-AH-tah
-shopping.how-much-is-this,KWAN-toh KOS-tah KWES-toh
-shopping.that-is-too-expensive,eh TROP-poh KAH-roh
-shopping.can-it-be-a-little-cheaper,pwoh FAR-mee oon poh dee SKON-toh
-color-size-returns.do-you-have-another-color,ah-VEH-teh oon AL-troh koh-LOH-reh
-color-size-returns.do-you-have-another-size,ah-VEH-teh oo-NAL-trah TAH-lyah
-color-size-returns.may-i-try-it-on,POS-soh proh-VAR-loh
-color-size-returns.can-i-return-it,POS-soh res-tee-too-EER-loh
-color-size-returns.can-i-exchange-it,POS-soh kam-bee-AR-loh
-color-size-returns.do-you-have-a-bag,ah-VEH-teh oon sak-KET-toh
-tax-refund.can-i-get-a-tax-refund,POS-soh kee-EH-deh-reh eel reem-BOR-soh del-LEE-vah
-tax-refund.is-tax-free-shopping-available,FAH-teh eel taks free
-shopping.is-there-a-discount,cheh OO-noh SKON-toh
-payment-receipt.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh"
-payment-receipt.how-much-in-total,kwan-TEH een TOOT-toh
-payment-receipt.can-we-pay-separately,pos-see-AH-moh pah-GAH-reh seh-pah-rah-tah-MEN-teh
-payment-receipt.is-tax-included,LEE-vah eh kom-PREH-zah
-payment-receipt.my-card-was-declined,lah MEE-ah KAR-tah eh STAH-tah ree-fee-oo-TAH-tah
-payment-receipt.the-bill-is-wrong,KREH-doh keh chee SEE-ah oon er-ROH-reh nel KON-toh
-payment-receipt.i-already-paid,oh jah pah-GAH-toh
-shopping.where-do-i-pay,DOH-veh see PAH-gah
-shopping.i-will-take-this,PREN-doh KWES-toh
-shopping.what-is-this,keh koh-SEH KWES-toh
-shopping.where-can-i-buy,DOH-veh POS-soh kom-PRAH-reh {}
-shopping.do-you-have-this-in-stock,cheh lah-VEH-teh dees-poh-NEE-bee-leh
-shopping.two-of-these,"DOO-eh dee KWES-tee, per fah-VOH-reh"
-shopping.what-is-it-made-of,dee keh KOH-sah eh FAT-toh
-social-basics.hello,chow
-social-basics.hello-polite,bwon-JOR-noh
-social-basics.good-morning,bwon-JOR-noh
-social-basics.good-evening,bwoh-nah-SEH-rah
-social-basics.goodbye,ar-ree-veh-DER-chee
-social-basics.thank-you,GRAH-tsee-eh
-social-basics.you-are-welcome,PREH-goh
-social-basics.excuse-me-sorry,mee SKOO-zee
-social-basics.sorry,mee dees-pee-AH-cheh
-social-basics.no-problem,non cheh proh-BLEH-mah
-social-basics.i-do-not-know,non loh soh
-communication.i-do-not-speak-this-language,non PAR-loh ee-tah-lee-AH-noh
-communication.i-speak-only-a-little-of-this,PAR-loh POH-koh ee-tah-lee-AH-noh
-communication.do-you-speak-english,PAR-lah een-GLEH-seh
-communication.please-speak-more-slowly,"PAR-lee pee-OO len-tah-MEN-teh, per fah-VOH-reh"
-communication.i-do-not-understand-spoken,non kah-PEES-koh
-communication.i-cannot-read-understand,non soh LED-jeh-reh KWES-toh
-communication.please-say-it-again,"ree-PEH-tah, per fah-VOH-reh"
-communication.please-write-it-down,"loh SKREE-vah, per fah-VOH-reh"
-communication.please-wait-a-moment,"oon moh-MEN-toh, per fah-VOH-reh"
-communication.can-you-help-me,mee pwoh ah-yoo-TAH-reh
-communication.please-show-me-the-text,mee MOS-tree eel TES-toh een ee-tah-lee-AH-noh
-quick-responses.please-go-ahead,PREH-goh
-quick-responses.yes-right,see / eh-ZAT-toh
-quick-responses.no-not,noh / non
-quick-responses.okay-can,dak-KOR-doh
-quick-responses.cannot-not-allowed,non see pwoh
-quick-responses.works-okay,foon-tsee-OH-nah
-quick-responses.does-not-work-no,non foon-tsee-OH-nah
-phone-translation.i-am-using-phone-translation,stoh oo-ZAN-doh oon trah-doot-TOH-reh sool teh-LEH-foh-noh
-phone-translation.please-speak-toward-the-phone,PAR-lee VER-soh eel teh-LEH-foh-noh
-phone-translation.one-sentence-at-a-time-please,"OO-nah FRAH-seh AL-lah VOL-tah, per fah-VOH-reh"
-phone-text-power.please-type-it-for-me,"loh SKREE-vah sool teh-LEH-foh-noh, per fah-VOH-reh"
-phone-translation.please-write-the-place-name,SKREE-vah eel NOH-meh del POS-toh een ee-tah-lee-AH-noh
-phone-text-power.please-use-simple-words,"OO-zee pah-ROH-leh sem-PLEE-chee, per fah-VOH-reh"
-phone-text-power.my-phone-battery-is-low,eel teh-LEH-foh-noh ah POH-kah bat-teh-REE-ah
-phone-text-power.do-you-have-a-power-bank,ah oon POW-er benk
-phone-text-power.the-translation-may-be-inaccurate,lah trah-doo-tsee-OH-neh pwoh ES-seh-reh eem-preh-CHEE-zah
-phone-text-power.please-confirm,"kon-FER-mee, per fah-VOH-reh"
-social-basics.good-night,bwoh-nah-NOT-teh
-social-basics.okay-fine-i-am-okay,stoh BEH-neh
-quick-responses.can-possible,see pwoh
-quick-responses.cannot-not-possible,non eh pos-SEE-bee-leh
-quick-responses.okay-fine,vah BEH-neh
-quick-responses.no-good-not-allowed-will-not-work,non eh per-MES-soh
-communication.i-cannot-make-out-what-you-are-saying,non kah-PEES-koh KWEL-loh keh DEE-cheh
-communication.i-do-not-understand,non kah-PEES-koh
-communication.i-cannot-read-it,non ree-ES-koh ah LED-jer-loh
-phone-translation.please-type-it-and-show-me,loh SKREE-vah sool teh-LEH-foh-noh eh meh loh MOS-tree
-phone-translation.please-look-at-the-screen,"GWAR-dee loh SKER-moh, per fah-VOH-reh"
-phone-text-power.may-i-charge-my-phone-here,POS-soh kah-ree-KAH-reh eel teh-LEH-foh-noh kwee
-sim-data.i-would-like-a-tourist-sim,vor-RAY OO-nah seem per too-REES-tee
-sim-data.may-i-use-your-wifi,POS-soh oo-ZAH-reh eel VOS-troh WEE-fee
-sim-data.how-much-data-is-included,KWAN-tee JEE-gah SOH-noh een-KLOO-see
-sim-data.do-you-need-my-passport,leh SER-veh eel MEE-oh pas-sah-POR-toh
-sim-data.how-long-is-it-valid,KWAN-toh TEM-poh eh VAH-lee-dah
-sim-data.please-activate-it,"lah at-TEE-vee, per fah-VOH-reh"
-sim-data.do-you-have-an-esim,ah-VEH-teh OO-nah eh-SEEM
-sim-data.my-data-is-not-working,ee DAH-tee non foon-tsee-OH-nah-noh
-sim-data.does-it-need-registration,vah reh-jees-TRAH-tah
-sim-data.i-have-no-signal,non oh seh-NYAH-leh
-sim-data.please-write-the-wifi-password,SKREE-vah lah PAS-word del WEE-fee
-sim-data.sim-card,lah SKEH-dah seem
-sim-data.where-can-i-buy-a-plug-adapter,DOH-veh POS-soh kom-PRAH-reh oon ah-dat-tah-TOH-reh per lah PREH-zah
-sim-data.mobile-data,ee DAH-tee MOH-bee-lee
-sim-data.can-i-top-up-this-sim,POS-soh ree-kah-ree-KAH-reh KWES-tah seem
-sim-data.top-up,lah ree-KAH-ree-kah
-sim-data.is-there-coverage-in,cheh koh-per-TOO-rah ah {}
-sim-data.signal,eel seh-NYAH-leh
-sim-data.esim,lah eh-SEEM
-sim-data.prepaid,preh-pah-GAH-tah
-sim-data.roaming,eel ROH-meeng
-children.cannot-find-my-child,non TROH-voh MEE-oh FEE-lyoh / MEE-ah FEE-lyah
-children.make-an-announcement,pwoh FAH-reh oon an-NOON-choh al-lal-toh-par-LAN-teh
-children.child-age,MEE-oh FEE-lyoh ah {} AN-nee
-children.high-chair,ah-VEH-teh oon sed-joh-LOH-neh
-children.baby-changing-room,doh-VEH eel fah-shah-TOH-yoh
-children.childrens-menu,cheh oon meh-NOO per bam-BEE-nee
-children.suitable-for-children,eh ah-DAT-toh eye bam-BEE-nee
-children.minimum-age,kwal eh leh-TAH MEE-nee-mah
-children.do-children-pay,ee bam-BEE-nee PAH-gah-noh
-children.crib,ah-VEH-teh OO-nah KOOL-lah
-children.warm-this-bottle,pwoh skal-DAH-reh KWES-toh bee-BEH-ron
-children.car-seat,chee SER-veh oon sed-joh-LEE-noh per OW-toh
-children.stroller,eel pas-sed-JEE-noh
-children.playground,cheh oon PAR-koh JOH-kee
-etiquette.is-this-allowed,eh per-MES-soh
-etiquette.is-tipping-expected,see OO-zah lah-SHAH-reh lah MAN-chah
-etiquette.is-service-included,eel ser-VEE-tsee-oh eh een-KLOO-soh
-etiquette.may-i-enter,POS-soh en-TRAH-reh
-etiquette.remove-shoes,DEH-voh toh-LYER-mee leh SKAR-peh
-etiquette.photo-of-you,POS-soh FAR-leh OO-nah FOH-toh
-etiquette.may-i-sit-here,POS-soh seh-DER-mee kwee
-etiquette.queue-for,eh KWES-tah lah FEE-lah per {}
-etiquette.dressed-appropriately,eel MEE-oh ab-bee-lyah-MEN-toh eh ah-deh-GWAH-toh
-etiquette.did-not-mean-to-offend,non voh-LEH-voh of-FEN-deh-reh
-etiquette.what-is-customary,KOH-meh see OO-zah FAH-reh kwee
-etiquette.keep-the-change,TEN-gah eel RES-toh
-time-scheduling.what-time-is-it,keh OH-reh SOH-noh
-time-scheduling.how-many-minutes,KWAN-tee mee-NOO-tee
-time-scheduling.what-time-should-we-meet,ah keh OH-rah chee veh-dee-AH-moh
-time-scheduling.can-we-change-the-time,pos-see-AH-moh kam-bee-AH-reh LOH-rah
-time-scheduling.when-is-convenient,KWAN-doh leh vah BEH-neh
-time-scheduling.what-is-today-s-date,keh DAH-tah eh OD-jee
-time-scheduling.what-day-is-it-today,keh JOR-noh eh OD-jee
-time-scheduling.what-time-does-it-open,ah keh OH-rah AH-preh
-time-scheduling.what-time-does-it-close,ah keh OH-rah kee-OO-deh
-time-words.today,OD-jee
-time-words.tomorrow,doh-MAH-nee
-time-words.yesterday,YEH-ree
-time-words.this-week,KWES-tah set-tee-MAH-nah
-time-words.next-week,lah set-tee-MAH-nah PROS-see-mah
-time-words.morning,lah mat-TEE-nah
-time-words.afternoon,eel poh-meh-REED-joh
-time-words.evening,lah SEH-rah
-time-words.spring,lah pree-mah-VEH-rah
-time-words.summer,les-TAH-teh
-time-words.fall,low-TOON-noh
-time-words.winter,leen-VER-noh
-days-of-week.monday,loo-neh-DEE
-days-of-week.tuesday,mar-teh-DEE
-days-of-week.wednesday,mer-koh-leh-DEE
-days-of-week.thursday,joh-veh-DEE
-days-of-week.friday,veh-ner-DEE
-days-of-week.saturday,SAH-bah-toh
-days-of-week.sunday,doh-MEH-nee-kah
-months.january,jen-NAH-yoh
-months.february,feb-BRAH-yoh
-months.march,MAR-tsoh
-months.april,ah-PREE-leh
-months.may,MAD-joh
-months.june,JOO-nyoh
-months.july,LOO-lyoh
-months.august,ah-GOS-toh
-months.september,set-TEM-breh
-months.october,ot-TOH-breh
-months.november,noh-VEM-breh
-months.december,dee-CHEM-breh
-time-words.night,lah NOT-teh
-time-scheduling.how-long-does-it-take,KWAN-toh TEM-poh chee VWOH-leh
-directions.where-is,doh-VEH {}
-directions.how-do-i-get-to,KOH-meh see ar-REE-vah ah {}
-directions.is-it-far,eh lon-TAH-noh
-directions.how-long-on-foot,KWAN-toh chee VWOH-leh ah pee-EH-dee
-quick-directions.go-straight,SEM-preh DREET-toh
-quick-directions.turn-left,JEE-ree ah see-NEES-trah
-quick-directions.turn-right,JEE-ree ah DES-trah
-quick-directions.this-way,dah KWES-tah PAR-teh
-quick-directions.that-way,dah KWEL-lah PAR-teh
-quick-directions.on-the-left,ah see-NEES-trah
-quick-directions.on-the-right,ah DES-trah
-quick-directions.across-from-here,dee FRON-teh
-quick-directions.in-front,dah-VAN-tee
-quick-directions.behind,dee-EH-troh
-taxi.please-take-me-here,"mee POR-tee kwee, per fah-VOH-reh"
-taxi.please-send-me-the-address,"mee MAN-dee leen-dee-REET-tsoh, per fah-VOH-reh"
-taxi.we-need-the-east-gate-not-the-south-gate,"chee SER-veh leen-GRES-soh est, non leen-GRES-soh sood"
-taxi.please-stop-here,"see FER-mee kwee, per fah-VOH-reh"
-taxi.can-you-wait-for-me-here,mee pwoh as-pet-TAH-reh kwee
-taxi.we-need-to-catch-the-high-speed-train,dob-bee-AH-moh PREN-deh-reh eel TREH-noh ad AL-tah veh-loh-chee-TAH
-taxi.please-use-the-meter,"at-CHEN-dah eel tas-SAH-meh-troh, per fah-VOH-reh"
-transit-rides.two-tickets,"DOO-eh bee-LYET-tee, per fah-VOH-reh"
-transit-rides.where-is-the-subway-station,doh-VEH lah stah-tsee-OH-neh DEL-lah MEH-troh
-transit-rides.does-this-bus-train-go-to,KWES-toh ow-TOH-boos oh TREH-noh vah ah {}
-transit-rides.what-is-the-next-stop,kwal eh lah PROS-see-mah fer-MAH-tah
-transit-rides.please-tell-me-where-to-get-off,"mee DEE-kah DOH-veh DEH-voh SHEN-deh-reh, per fah-VOH-reh"
-transit-rides.is-this-direct,eh dee-RET-toh
-transit-rides.do-i-need-to-transfer,DEH-voh kam-bee-AH-reh
-transit-rides.is-it-delayed,eh een ree-TAR-doh
-transit-rides.i-am-in-a-hurry,oh FRET-tah
-transit-rides.which-platform,KWAH-leh bee-NAH-ree-oh
-transit-rides.what-time-is-the-next-one,ah keh OH-rah cheh eel PROS-see-moh
-transit-rides.i-went-past-my-stop,oh pas-SAH-toh lah MEE-ah fer-MAH-tah
-place-words.visitor-center,CHEN-troh vee-zee-tah-TOH-ree
-place-words.railway-station,stah-tsee-OH-neh fer-roh-vee-AH-ree-ah
-place-words.airport,ah-eh-roh-POR-toh
-place-words.service-desk,BAN-koh een-for-mah-tsee-OH-nee
-place-words.bus-stop,fer-MAH-tah del-low-TOH-boos
-place-words.luggage-storage,deh-POH-zee-toh bah-GAH-lyee
-pickup-meeting.where-is-the-pickup-point,doh-VEH eel POON-toh dee ree-TROH-voh
-pickup-meeting.please-send-me-the-pickup-point,mee MAN-dee eel POON-toh dee ree-TROH-voh
-pickup-meeting.please-pick-us-up-here,chee VEN-gah ah PREN-deh-reh kwee
-pickup-meeting.meet-us-at,chee veh-dee-AH-moh ah {}
-pickup-meeting.please-call-me-a-ride,"mee kee-AH-mee oon EN-neh chee CHEE, per fah-VOH-reh"
-rail-station-words.high-speed-rail,AL-tah veh-loh-chee-TAH
-rail-station-words.transfer,KAM-bee-oh
-rail-station-words.ticket-gate,tor-NEL-loh
-rail-station-words.platform,bee-NAH-ree-oh
-rail-station-words.ticket-office,bee-lyet-teh-REE-ah
-rail-station-words.waiting-room,SAH-lah dat-TEH-sah
-rail-station-words.train-number,NOO-meh-roh del TREH-noh
-rail-station-words.carriage,kar-ROT-tsah
-rail-station-words.seat,POS-toh
-rail-station-words.last-train,OOL-tee-moh TREH-noh
-rail-station-words.delayed,een ree-TAR-doh
-rail-station-words.final-stop,kah-poh-LEE-neh-ah
-common-signs.open-on,ah-PER-toh
-common-signs.closed-off,kee-OO-zoh
-common-signs.occupied,ok-koo-PAH-toh
-common-signs.vacant,lee-BEH-roh
-common-signs.caution,at-ten-tsee-OH-neh
-common-signs.no-entry,vee-eh-TAH-toh lat-CHES-soh
-common-signs.no-smoking,vee-eh-TAH-toh foo-MAH-reh
-common-signs.no-photography,vee-eh-TAH-toh foh-toh-grah-FAH-reh
-common-signs.do-not-touch,non tok-KAH-reh
-common-signs.temporarily-closed,kee-OO-zoh tem-poh-rah-neh-ah-MEN-teh
-transit-rides.can-i-use-this-ticket,POS-soh oo-ZAH-reh KWES-toh bee-LYET-toh
-taxi.i-will-get-off-here,SHEN-doh kwee
-pickup-meeting.please-call-a-taxi,"kee-AH-mee oon TAK-see, per fah-VOH-reh"
-common-signs.open-operating,een ser-VEE-tsee-oh
-common-signs.closed,kee-OO-zoh
-common-signs.stopped-stop,FER-moh
-place-words.tourist-spot-sightseeing-area,DZOH-nah too-REES-tee-kah
-border-customs.i-am-a-tourist,VEN-goh per too-REEZ-moh
-border-customs.here-is-my-passport,EK-koh eel MEE-oh pas-sah-POR-toh
-border-customs.i-am-staying-for-days,RES-toh {} JOR-nee
-border-customs.nothing-to-declare,nee-EN-teh dah dee-kee-ah-RAH-reh
-border-customs.i-am-staying-at,al-LOD-joh PRES-soh {}
-border-customs.i-am-here-for-business,VEN-goh per lah-VOH-roh
-border-customs.i-have-a-return-ticket,oh eel bee-LYET-toh dee ree-TOR-noh
-border-customs.i-am-visiting-family,VEN-goh ah troh-VAH-reh day pah-REN-tee
-border-customs.this-is-for-personal-use,eh per OO-zoh per-soh-NAH-leh
-border-customs.i-am-in-transit,SOH-noh een TRAN-see-toh
-border-customs.i-have-in-cash,oh {} een kon-TAN-tee
-border-customs.this-is-a-gift,eh oon reh-GAH-loh
-border-customs.where-do-i-collect-my-baggage,DOH-veh ree-TEE-roh ee bah-GAH-lyee
-border-customs.how-long-may-i-stay,KWAN-toh TEM-poh POS-soh res-TAH-reh
-border-customs.i-have-a-connecting-flight,oh oon VOH-loh een koh-een-chee-DEN-tsah
-border-customs.may-i-have-an-entry-stamp,mee MET-teh eel TEEM-broh deen-GRES-soh
-border-customs.visa,eel VEES-toh
-border-customs.i-have-no-food-or-plants,non oh ah-lee-MEN-tee neh pee-AN-teh
-border-customs.passport-control,kon-TROL-loh pas-sah-POR-tee
-border-customs.customs,doh-GAH-nah
-border-customs.baggage-claim,ree-TEE-roh bah-GAH-lyee
-border-customs.customs-declaration,dee-kee-ah-rah-tsee-OH-neh doh-gah-NAH-leh
-border-customs.arrival-card,KAR-tah dee ZBAR-koh
-border-customs.transit,TRAN-see-toh
-border-customs.boarding-pass,KAR-tah deem-BAR-koh
-directions.please-show-me-on-the-map,"meh loh MOS-tree SOOL-lah MAP-pah, per fah-VOH-reh"
-directions.where-is-the-nearest,doh-VEH eel {} pee-OO vee-CHEE-noh
-directions.where-am-i,DOH-veh mee TROH-voh
-directions.which-way,dah keh PAR-teh
-directions.can-i-walk-there,chee POS-soh an-DAH-reh ah pee-EH-dee
-directions.how-far-is-it,KWAN-toh DEES-tah
-directions.which-exit,KWAH-leh oo-SHEE-tah
-directions.can-you-show-me-the-way,mee pwoh een-dee-KAH-reh lah STRAH-dah
-directions.north,nord
-directions.south,sood
-directions.east,est
-directions.west,OH-vest
-transit-rides.do-i-need-to-validate,DEH-voh kon-vah-lee-DAH-reh eel bee-LYET-toh
-rail-station-words.ticket-validator,oh-blee-teh-rah-TREE-cheh
-utility-templates.i-want-to-go-to,vor-RAY an-DAH-reh ah {}
-utility-templates.please-give-me,"mee DEE-ah {}, per fah-VOH-reh"
-utility-templates.may-i,POS-soh {}
-utility-templates.please-do-not-add,"SEN-tsah {}, per fah-VOH-reh"
-utility-templates.do-you-have,ah-VEH-teh {}
-utility-templates.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh"
-utility-templates.i-need,mee SER-veh {}
-utility-templates.is-there-nearby,cheh oon {} kwee vee-CHEE-noh
-utility-templates.how-much-is,KWAN-toh KOS-tah {}
-utility-templates.is-this,KWES-toh eh {}
-utility-templates.please,"{}, per fah-VOH-reh"
-utility-templates.i-am-looking-for,CHER-koh {}
-utility-templates.do-you-accept,at-chet-TAH-teh {}
-utility-templates.i-cannot-find,non TROH-voh {}
-utility-templates.there-is-a-problem-with,cheh oon proh-BLEH-mah kon {}
+concept_id,respell,text
+building-help.what-room-number-is-this,keh NOO-meh-roh dee STAN-tsah eh KWES-toh,Che numero di stanza è questo?
+building-help.i-am-lost,mee SOH-noh PER-soh,Mi sono perso
+building-help.where-is-reception,doh-VEH lah reh-CHEP-shon,Dov'è la reception?
+building-help.where-is-a-power-outlet,doh-VEH OO-nah PREH-zah dee kor-REN-teh,Dov'è una presa di corrente?
+in-a-building.is-this-the-correct-entrance,eh KWES-tah len-TRAH-tah JOOS-tah,È questa l'entrata giusta?
+in-a-building.do-you-have-wi-fi,ah-VEH-teh eel WEE-fee,Avete il Wi-Fi?
+in-a-building.what-is-the-wi-fi-password,kwal eh lah PAS-word del WEE-fee,Qual è la password del Wi-Fi?
+in-a-building.which-floor,KWAH-leh pee-AH-noh,Quale piano?
+building-words.elevator,ah-shen-SOH-reh,ascensore
+building-words.stairs,SKAH-leh,scale
+building-words.entrance,en-TRAH-tah,entrata
+building-words.exit,oo-SHEE-tah,uscita
+building-words.men,WOH-mee-nee,Uomini
+building-words.women,DON-neh,Donne
+building-words.door,POR-tah,porta
+building-words.key,kee-AH-veh,chiave
+toilets.where-toilet,doh-VEH eel BAH-nyoh,Dov'è il bagno?
+toilets.where-public-toilet,doh-VEH oon BAH-nyoh POOB-blee-koh,Dov'è un bagno pubblico?
+toilets.may-i-use-the-toilet,"POS-soh oo-ZAH-reh eel BAH-nyoh, per fah-VOH-reh","Posso usare il bagno, per favore?"
+toilets.is-it-only-for-customers,eh SOH-loh per ee klee-EN-tee,È solo per i clienti?
+toilets.toilet-wc,BAH-nyee / voo CHEE,Bagni / WC
+toilets.is-it-free,eh grah-TOO-ee-toh,È gratuito?
+toilets.do-i-need-a-coin,SER-veh OO-nah moh-NEH-tah oh oon jet-TOH-neh,Serve una moneta o un gettone?
+toilets.is-the-tap-water-safe-to-drink,LAK-kwah del roo-bee-NET-toh eh poh-TAH-bee-leh,L'acqua del rubinetto è potabile?
+toilets.it-is-urgent,eh oor-JEN-teh,È urgente
+toilets.may-i-have-the-toilet-key,mee dah lah kee-AH-veh del BAH-nyoh,Mi dà la chiave del bagno?
+toilets.there-is-no-toilet-paper,non cheh KAR-tah ee-JEH-nee-kah,Non c'è carta igienica
+toilets.toilet-paper,KAR-tah ee-JEH-nee-kah,carta igienica
+toilets.it-is-out-of-order,non foon-tsee-OH-nah,Non funziona
+toilets.out-of-order,FWOH-ree ser-VEE-tsee-oh,Fuori servizio
+toilets.mens-toilet,see-NYOH-ree,Signori
+toilets.womens-toilet,see-NYOH-reh,Signore
+toilets.drinking-water,AK-kwah poh-TAH-bee-leh,Acqua potabile
+toilets.not-for-drinking,AK-kwah non poh-TAH-bee-leh,Acqua non potabile
+toilets.accessible-toilet,BAH-nyoh at-ches-SEE-bee-leh,Bagno accessibile
+toilets.where-can-i-wash-my-hands,DOH-veh POS-soh lah-VAR-mee leh MAH-nee,Dove posso lavarmi le mani?
+toilets.can-i-flush-the-paper,POS-soh boot-TAH-reh lah KAR-tah nel VAH-ter,Posso buttare la carta nel water?
+toilets.is-there-a-toilet-on-board,cheh eel BAH-nyoh ah BOR-doh,C'è il bagno a bordo?
+toilets.the-toilet-will-not-flush,loh shak-KWOH-neh non foon-tsee-OH-nah,Lo sciacquone non funziona
+toilets.baby-change,fah-shah-TOH-yoh,Fasciatoio
+toilets.squat-toilet,BAH-nyoh AL-lah TOOR-kah,Bagno alla turca
+accessibility.step-free,cheh oon at-CHES-soh SEN-tsah skah-LEE-nee,C'è un accesso senza scalini?
+accessibility.wheelchair-access,eh at-ches-SEE-bee-leh een SEH-dee-ah ah roh-TEL-leh,È accessibile in sedia a rotelle?
+accessibility.elevator,cheh lah-shen-SOH-reh,C'è l'ascensore?
+accessibility.ramp,cheh OO-nah RAM-pah,C'è una rampa?
+accessibility.how-many-steps,KWAN-tee skah-LEE-nee chee SOH-noh,Quanti scalini ci sono?
+accessibility.cannot-climb-stairs,non POS-soh FAH-reh leh SKAH-leh,Non posso fare le scale
+accessibility.need-to-sit-down,oh bee-ZOH-nyoh dee seh-DER-mee,Ho bisogno di sedermi
+accessibility.accessible-restroom,cheh oon BAH-nyoh at-ches-SEE-bee-leh,C'è un bagno accessibile?
+accessibility.station-assistance,cheh as-sees-TEN-tsah een stah-tsee-OH-neh,C'è assistenza in stazione?
+accessibility.help-me-carry,"mee ah-YOO-tee ah por-TAH-reh KWES-toh, per fah-VOH-reh","Mi aiuti a portare questo, per favore"
+accessibility.board-first,POS-soh sah-LEE-reh PREE-mah DEH-lyee AL-tree,Posso salire prima degli altri?
+accessibility.door-width,KWAN-toh eh LAR-gah lah POR-tah,Quanto è larga la porta?
+accessibility.wheelchair-width,lah MEE-ah SEH-dee-ah ah roh-TEL-leh eh LAR-gah {} chen-TEE-meh-tree,La mia sedia a rotelle è larga {} cm
+accessibility.hard-of-hearing,oh proh-BLEH-mee dee oo-DEE-toh,Ho problemi di udito
+accessibility.speak-louder,"PAR-lee pee-OO FOR-teh, per fah-VOH-reh","Parli più forte, per favore"
+accessibility.visually-impaired,SOH-noh ee-poh-veh-DEN-teh,Sono ipovedente
+accessibility.take-your-arm,POS-soh PREN-der-leh eel BRAT-choh,Posso prenderle il braccio?
+accessibility.guide-dog,KWES-toh eh eel MEE-oh KAH-neh GWEE-dah,Questo è il mio cane guida
+pronouns-verbs.i-me,EE-oh / mee,io / mi
+pronouns-verbs.we-us,noy / chee,noi / ci
+pronouns-verbs.you,too,tu
+pronouns-verbs.you-polite,lay,Lei
+pronouns-verbs.he-him,LOO-ee / loh,lui / lo
+pronouns-verbs.she-her,lay / lah,lei / la
+pronouns-verbs.they-them,LOH-roh,loro
+pronouns-verbs.my-mine,MEE-oh / MEE-ah,mio / mia
+pronouns-verbs.your-yours,SOO-oh / SOO-ah,Suo / Sua
+pronouns-verbs.be-called-call,kee-ah-MAR-see / kee-ah-MAH-reh,chiamarsi / chiamare
+pronouns-verbs.have,ah-VEH-reh,avere
+pronouns-verbs.do-not-have,non ah-VEH-reh,non avere
+pronouns-verbs.go,an-DAH-reh,andare
+pronouns-verbs.come,veh-NEE-reh,venire
+pronouns-verbs.would-like,vor-RAY,vorrei
+pronouns-verbs.want,voh-LEH-reh,volere
+pronouns-verbs.look-for,cher-KAH-reh,cercare
+pronouns-verbs.buy,kom-PRAH-reh,comprare
+pronouns-verbs.like,pee-ah-CHEH-reh,piacere
+pronouns-verbs.need,ah-VEH-reh bee-ZOH-nyoh dee,avere bisogno di
+question-words.what,keh KOH-sah,che cosa
+question-words.where,DOH-veh,dove
+question-words.who,kee,chi
+question-words.which-one,KWAH-leh,quale
+question-words.when,KWAN-doh,quando
+question-words.how,KOH-meh,come
+question-words.how-much-many,KWAN-toh,quanto
+question-words.how-many,KWAN-tee,quanti
+question-words.why,per-KEH,perché
+question-words.this,KWES-toh,questo
+question-words.that,KWEL-loh,quello
+question-words.here,kwee,qui
+question-words.there,lah,là
+question-words.a-little,oon poh,un po'
+question-words.some,al-KOO-nee,alcuni
+question-words.very,MOL-toh,molto
+question-words.too,TROP-poh,troppo
+question-words.also,AN-keh,anche
+question-words.all-both,TOOT-toh / en-TRAM-bee,tutto / entrambi
+pronouns-verbs.there-is-have,cheh / chee SOH-noh,c'è / ci sono
+pronouns-verbs.there-is-not-do-not-have,non cheh / non chee SOH-noh,non c'è / non ci sono
+pronouns-verbs.want-to-verb,VOH-lyoh,voglio + infinito
+pronouns-verbs.want-thing,VOH-lyoh,voglio + cosa
+pronouns-verbs.need-thing,oh bee-ZOH-nyoh dee,ho bisogno di + cosa
+pronouns-verbs.looking-for-thing,CHER-koh,cerco + cosa
+question-words.how-much-what-price,KWAN-toh KOS-tah,quanto costa?
+emergency-medical.help,ah-YOO-toh,Aiuto!
+emergency-medical.please-call-an-ambulance,"kee-AH-mee oo-nam-boo-LAN-tsah, per fah-VOH-reh","Chiami un'ambulanza, per favore"
+emergency-medical.i-need-a-doctor,oh bee-ZOH-nyoh dee oon MEH-dee-koh,Ho bisogno di un medico
+emergency-medical.i-am-sick,SOH-noh mah-LAH-toh,Sono malato
+emergency-medical.i-am-injured,SOH-noh feh-REE-toh,Sono ferito
+emergency-medical.it-hurts-here,mee fah MAH-leh kwee,Mi fa male qui
+emergency-medical.where-is-a-pharmacy,doh-VEH OO-nah far-mah-CHEE-ah,Dov'è una farmacia?
+emergency-medical.please-take-me-to-a-hospital,"mee POR-tee een os-peh-DAH-leh, per fah-VOH-reh","Mi porti in ospedale, per favore"
+lost-rescue.i-lost-my-passport,oh PER-soh eel pas-sah-POR-toh,Ho perso il passaporto
+lost-rescue.i-lost-my-phone,oh PER-soh eel teh-LEH-foh-noh,Ho perso il telefono
+lost-rescue.please-call-the-police,"kee-AH-mee lah poh-lee-TSEE-ah, per fah-VOH-reh","Chiami la polizia, per favore"
+lost-rescue.we-are-here,see-AH-moh kwee,Siamo qui
+lost-rescue.please-look-at-my-location-pin,GWAR-dee lah MEE-ah poh-zee-tsee-OH-neh SOOL-lah MAP-pah,Guardi la mia posizione sulla mappa
+lost-rescue.i-cannot-walk,non ree-ES-koh ah kam-mee-NAH-reh,Non riesco a camminare
+lost-rescue.i-sprained-my-ankle,oh lah kah-VEE-lyah zloh-GAH-tah,Ho la caviglia slogata
+lost-rescue.please-contact-rescue,kee-AH-mee ee sok-KOR-see,Chiami i soccorsi
+lost-rescue.my-companion-is-missing,non TROH-voh eel MEE-oh kom-PAH-nyoh dee vee-AD-joh,Non trovo il mio compagno di viaggio
+lost-rescue.please-look-at-my-current-location,GWAR-dee lah MEE-ah poh-zee-tsee-OH-neh at-too-AH-leh,Guardi la mia posizione attuale
+emergency-medical.i-feel-unwell,non mee SEN-toh BEH-neh,Non mi sento bene
+emergency-medical.this-is-an-emergency,eh oo-neh-mer-JEN-tsah,È un'emergenza
+emergency-medical.i-am-having-a-severe-allergic-reaction,oh OO-noh shok ah-nah-fee-LAT-tee-koh,Ho uno shock anafilattico
+emergency-medical.i-cannot-breathe,non ree-ES-koh ah res-pee-RAH-reh,Non riesco a respirare
+emergency-medical.i-am-bleeding-badly,stoh per-DEN-doh MOL-toh SAN-gweh,Sto perdendo molto sangue
+emergency-medical.i-have-chest-pain,oh doh-LOH-reh al PET-toh,Ho dolore al petto
+emergency-medical.this-person-is-unconscious,KWES-tah per-SOH-nah ah PER-soh koh-noh-SHEN-tsah,Questa persona ha perso conoscenza
+emergency-medical.where-is-the-nearest-hospital,doh-VEH los-peh-DAH-leh pee-OO vee-CHEE-noh,Dov'è l'ospedale più vicino?
+emergency-medical.what-is-the-emergency-number,kwal eh eel NOO-meh-roh dee eh-mer-JEN-tsah,Qual è il numero di emergenza?
+emergency-medical.is-there-a-doctor-who-speaks-english,cheh oon MEH-dee-koh keh PAR-lah een-GLEH-seh,C'è un medico che parla {source}?
+emergency-medical.i-think-a-bone-is-broken,KREH-doh dee ah-VEH-reh OO-nah frat-TOO-rah,Credo di avere una frattura
+emergency-medical.please-call-my-emergency-contact,kee-AH-mee eel MEE-oh kon-TAT-toh dee eh-mer-JEN-tsah,Chiami il mio contatto di emergenza
+emergency-medical.i-have-travel-insurance,oh oo-nas-see-koo-rah-tsee-OH-neh dee vee-AD-joh,Ho un'assicurazione di viaggio
+lost-rescue.my-child-is-missing,MEE-oh FEE-lyoh see eh PER-soh,Mio figlio si è perso
+lost-rescue.i-do-not-know-where-i-am,non soh DOH-veh mee TROH-voh,Non so dove mi trovo
+lost-rescue.my-friend-is-hurt,eel MEE-oh ah-MEE-koh eh feh-REE-toh,Il mio amico è ferito
+lost-rescue.i-lost-my-wallet,oh PER-soh eel por-tah-FOH-lyoh,Ho perso il portafoglio
+lost-rescue.i-lost-my-bag,oh PER-soh lah BOR-sah,Ho perso la borsa
+lost-rescue.where-is-lost-and-found,doh-VEH loof-FEE-choh od-JET-tee zmar-REE-tee,Dov'è l'ufficio oggetti smarriti?
+lost-rescue.i-cannot-find-my-hotel,non TROH-voh eel MEE-oh al-BER-goh,Non trovo il mio albergo
+lost-rescue.i-left-it-on-the-train,loh lah-SHAH-toh sool TREH-noh,L'ho lasciato sul treno
+lost-rescue.i-cannot-get-down,non ree-ES-koh ah SHEN-deh-reh,Non riesco a scendere
+medical-conditions.i-am-diabetic,oh eel dee-ah-BEH-teh,Ho il diabete
+medical-conditions.i-need-insulin,mee SER-veh leen-soo-LEE-nah,Mi serve l'insulina
+medical-conditions.i-have-asthma,oh LAZ-mah,Ho l'asma
+medical-conditions.i-have-a-heart-condition,oh OO-nah mah-lat-TEE-ah kar-DEE-ah-kah,Ho una malattia cardiaca
+medical-conditions.i-am-allergic-to-penicillin,oh oo-nal-ler-JEE-ah AL-lah peh-nee-cheel-LEE-nah,Ho un'allergia alla penicillina
+medical-conditions.i-have-epilepsy,oh leh-pee-les-SEE-ah,Ho l'epilessia
+medical-conditions.my-blood-sugar-is-low,oh lah glee-cheh-MEE-ah BAS-sah,Ho la glicemia bassa
+medical-conditions.i-need-my-inhaler,mee SER-veh eel MEE-oh ee-nah-lah-TOH-reh,Mi serve il mio inalatore
+medical-conditions.i-am-pregnant,SOH-noh een-CHEEN-tah,Sono incinta
+medical-conditions.i-carry-an-adrenaline-injector,oh oon ow-toh-ee-nee-et-TOH-reh dee ah-dreh-nah-LEE-nah,Ho un autoiniettore di adrenalina
+medical-conditions.i-take-medicine-for,PREN-doh meh-dee-CHEE-neh per {},Prendo medicine per {}
+medical-conditions.i-take-blood-thinners,PREN-doh an-tee-koh-ah-goo-LAN-tee,Prendo anticoagulanti
+medical-conditions.medicine-allergy,al-ler-JEE-ah eye FAR-mah-chee: {},Allergia ai farmaci: {}
+medical-conditions.this-card-lists-my-conditions,KWES-tah SKEH-dah een-DEE-kah leh MEE-eh pah-toh-loh-JEE-eh,Questa scheda indica le mie patologie
+medical-conditions.this-is-my-medicine,KWES-toh eh eel MEE-oh FAR-mah-koh,Questo è il mio farmaco
+medical-conditions.please-give-me-sugar-or-juice,mee DEE-ah DEL-loh tsook-KEH-roh oh oon SOOK-koh,Mi dia dello zucchero o un succo
+medical-conditions.inject-it-into-my-outer-thigh,loh ee-nee-ET-tee NEL-lah PAR-teh es-TER-nah DEL-lah KOH-shah,Lo inietti nella parte esterna della coscia
+medical-conditions.my-blood-type-is,eel MEE-oh GROOP-poh san-GWEE-nyoh eh {},Il mio gruppo sanguigno è {}
+medical-conditions.do-not-give-me,non mee DEE-ah {},Non mi dia {}
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,oh oo-nal-ler-JEE-ah al-las-pee-REE-nah eh al-lee-boo-proh-FEH-neh,Ho un'allergia all'aspirina e all'ibuprofene
+medical-conditions.my-injector-is-in-my-bag,eel MEE-oh ow-toh-ee-nee-et-TOH-reh eh NEL-lah BOR-sah,Il mio autoiniettore è nella borsa
+medical-conditions.i-am-allergic-to-sulfa-drugs,oh oo-nal-ler-JEE-ah eye sool-fah-MEE-dee-chee,Ho un'allergia ai sulfamidici
+pharmacy-symptoms.which-pharmacy-is-open-now,KWAH-leh far-mah-CHEE-ah eh ah-PER-tah ah-DES-soh,Quale farmacia è aperta adesso?
+pharmacy-symptoms.i-need-medicine-for,mee SER-veh oon FAR-mah-koh per {},Mi serve un farmaco per {}
+pharmacy-symptoms.i-have-a-fever,oh lah FEB-breh,Ho la febbre
+pharmacy-symptoms.i-have-diarrhea,oh lah dee-ar-REH-ah,Ho la diarrea
+pharmacy-symptoms.where-is-an-all-night-pharmacy,doh-VEH lah far-mah-CHEE-ah dee TOOR-noh,Dov'è la farmacia di turno?
+pharmacy-symptoms.painkiller,oon an-tee-doh-loh-REE-fee-koh,un antidolorifico
+pharmacy-symptoms.do-i-need-a-prescription,SER-veh lah ree-CHET-tah,Serve la ricetta?
+pharmacy-symptoms.i-have-a-headache,oh mal dee TES-tah,Ho mal di testa
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-cheh-tah-MOH-loh (tah-kee-pee-REE-nah),paracetamolo (Tachipirina)
+pharmacy-symptoms.how-much-should-i-take,KWAN-toh DEH-voh PREN-der-neh,Quanto devo prenderne?
+pharmacy-symptoms.i-am-vomiting,stoh voh-mee-TAN-doh,Sto vomitando
+pharmacy-symptoms.rehydration-salts,SAH-lee reh-ee-drah-TAN-tee,sali reidratanti
+pharmacy-symptoms.how-many-times-a-day,KWAN-teh VOL-teh al JOR-noh,Quante volte al giorno?
+pharmacy-symptoms.i-have-a-stomach-ache,oh mal dee STOH-mah-koh,Ho mal di stomaco
+pharmacy-symptoms.i-have-a-cough,oh lah TOS-seh,Ho la tosse
+pharmacy-symptoms.antihistamine,oon an-tees-tah-MEE-nee-koh,un antistaminico
+pharmacy-symptoms.anti-diarrhea-medicine,oon an-tee-dee-ar-ROY-koh (loh-peh-rah-MEE-deh),un antidiarroico (loperamide)
+pharmacy-symptoms.is-this-safe-to-take-with,POS-soh PREN-der-loh een-see-EH-meh ah {},Posso prenderlo insieme a {}?
+pharmacy-symptoms.i-feel-dizzy,oh leh ver-TEE-jee-nee,Ho le vertigini
+pharmacy-symptoms.ibuprofen,ee-boo-proh-FEH-neh,ibuprofene
+pharmacy-symptoms.i-have-a-sore-throat,oh mal dee GOH-lah,Ho mal di gola
+pharmacy-symptoms.can-i-get-this-medicine-here,ah-VEH-teh KWES-toh FAR-mah-koh,Avete questo farmaco?
+pharmacy-symptoms.bandage,OO-nah BEN-dah,una benda
+pharmacy-symptoms.the-pain-is-severe,eel doh-LOH-reh eh MOL-toh FOR-teh,Il dolore è molto forte
+pharmacy-symptoms.antiseptic,oon dee-zeen-fet-TAN-teh,un disinfettante
+pharmacy-symptoms.i-feel-nauseous,oh lah NOW-zeh-ah,Ho la nausea
+pharmacy-symptoms.i-have-a-rash,oh oo-neh-roo-tsee-OH-neh koo-TAH-neh-ah,Ho un'eruzione cutanea
+pharmacy-symptoms.before-or-after-food,PREE-mah oh DOH-poh ee PAS-tee,Prima o dopo i pasti?
+pharmacy-symptoms.i-think-it-is-infected,KREH-doh keh SEE-ah een-FET-toh,Credo che sia infetto
+pharmacy-symptoms.motion-sickness-tablets,pas-TEE-lyeh KON-troh eel mal DOW-toh,pastiglie contro il mal d'auto
+pharmacy-symptoms.i-have-a-cut,oh oon TAH-lyoh,Ho un taglio
+pharmacy-symptoms.antacid,oon an-tee-AH-chee-doh,un antiacido
+pharmacy-symptoms.i-have-a-burn,oh oo-noos-tee-OH-neh,Ho un'ustione
+pharmacy-symptoms.it-started-days-ago,eh ee-nee-tsee-AH-toh {} JOR-nee fah,È iniziato {} giorni fa
+pharmacy-symptoms.cough-medicine,OO-noh shee-ROP-poh per lah TOS-seh,uno sciroppo per la tosse
+pharmacy-symptoms.is-this-safe-during-pregnancy,see pwoh PREN-deh-reh een grah-vee-DAN-tsah,Si può prendere in gravidanza?
+police-consulate.where-is-the-police-station,doh-VEH eel kom-mees-sah-ree-AH-toh,Dov'è il commissariato?
+police-consulate.i-want-to-report-a-theft,VOH-lyoh deh-noon-CHAH-reh oon FOOR-toh,Voglio denunciare un furto
+police-consulate.my-bag-was-stolen,mee AN-noh roo-BAH-toh lah BOR-sah,Mi hanno rubato la borsa
+police-consulate.my-passport-was-stolen,mee AN-noh roo-BAH-toh eel pas-sah-POR-toh,Mi hanno rubato il passaporto
+police-consulate.someone-is-following-me,kwal-KOO-noh mee stah seh-GWEN-doh,Qualcuno mi sta seguendo
+police-consulate.i-need-a-written-police-report,mee SER-veh lah deh-NOON-chah SKREET-tah,Mi serve la denuncia scritta
+police-consulate.i-want-to-contact-my-embassy,VOH-lyoh kon-tat-TAH-reh lah MEE-ah am-bah-SHAH-tah,Voglio contattare la mia ambasciata
+police-consulate.i-need-it-for-my-insurance,mee SER-veh per las-see-koo-rah-tsee-OH-neh,Mi serve per l'assicurazione
+police-consulate.i-need-an-interpreter,mee SER-veh oon een-TER-preh-teh,Mi serve un interprete
+police-consulate.please-leave-me-alone,mee LAH-shee een PAH-cheh,Mi lasci in pace
+police-consulate.i-was-robbed,mee AN-noh deh-roo-BAH-toh,Mi hanno derubato
+police-consulate.i-want-a-lawyer,VOH-lyoh oon av-voh-KAH-toh,Voglio un avvocato
+police-consulate.please-notify-my-consulate,"av-VEE-see eel MEE-oh kon-soh-LAH-toh, per fah-VOH-reh","Avvisi il mio consolato, per favore"
+police-consulate.i-am-calling-the-police,stoh kee-ah-MAN-doh lah poh-lee-TSEE-ah,Sto chiamando la polizia
+police-consulate.am-i-under-arrest,SOH-noh een ar-RES-toh,Sono in arresto?
+police-consulate.no-thank-you-i-am-not-interested,"noh GRAH-tsee-eh, non mee een-teh-RES-sah","No grazie, non mi interessa"
+police-consulate.someone-attacked-me,mee AN-noh ag-greh-DEE-toh,Mi hanno aggredito
+police-consulate.i-did-not-agree-to-this-price,non oh at-chet-TAH-toh KWES-toh PRET-tsoh,Non ho accettato questo prezzo
+police-consulate.please-write-the-report-number,SKREE-vah eel NOO-meh-roh DEL-lah deh-NOON-chah,Scriva il numero della denuncia
+police-consulate.it-happened-here,eh soot-CHES-soh kwee,È successo qui
+police-consulate.may-i-have-a-copy-of-the-report,POS-soh ah-VEH-reh OO-nah KOH-pee-ah DEL-lah deh-NOON-chah,Posso avere una copia della denuncia?
+police-consulate.i-will-not-sign-anything-i-cannot-read,non FEER-moh NOOL-lah keh non POS-sah LED-jeh-reh,Non firmo nulla che non possa leggere
+police-consulate.am-i-free-to-go,POS-soh an-DAR-meh-neh,Posso andarmene?
+police-consulate.i-do-not-want-to-go-with-you,non VOH-lyoh veh-NEE-reh kon lay,Non voglio venire con Lei
+body-parts.head,lah TES-tah,la testa
+body-parts.stomach,lah PAN-chah,la pancia
+body-parts.back,lah skee-EH-nah,la schiena
+body-parts.throat,lah GOH-lah,la gola
+body-parts.tooth,eel DEN-teh,il dente
+body-parts.chest,eel PET-toh,il petto
+body-parts.eye,LOK-kee-oh,l'occhio
+body-parts.ear,loh-REK-kee-oh,l'orecchio
+body-parts.leg,lah GAM-bah,la gamba
+body-parts.arm,eel BRAT-choh,il braccio
+body-parts.foot,eel pee-EH-deh,il piede
+body-parts.hand,lah MAH-noh,la mano
+body-parts.knee,eel jee-NOK-kee-oh,il ginocchio
+body-parts.ankle,lah kah-VEE-lyah,la caviglia
+body-parts.skin,lah PEL-leh,la pelle
+dietary-needs.no-meat,SEN-tsah KAR-neh,Senza carne
+dietary-needs.no-eggs,SEN-tsah WOH-vah,Senza uova
+dietary-needs.not-spicy,non peek-KAN-teh,Non piccante
+dietary-needs.less-spicy,MEH-noh peek-KAN-teh,Meno piccante
+dietary-needs.no-peanuts,SEN-tsah ah-RAH-kee-dee,Senza arachidi
+dietary-needs.no-nuts,SEN-tsah FROOT-tah ah GOO-shoh neh NOH-chee,Senza frutta a guscio né noci
+dietary-needs.no-seafood,SEN-tsah PEH-sheh neh FROOT-tee dee MAH-reh,Senza pesce né frutti di mare
+dietary-needs.i-am-vegetarian,SOH-noh veh-jeh-tah-ree-AH-noh,Sono vegetariano
+dietary-needs.i-am-vegan,SOH-noh veh-GAH-noh,Sono vegano
+dietary-needs.i-do-not-eat,non MAN-joh {},Non mangio {}
+dietary-needs.i-am-allergic-to,oh oo-nal-ler-JEE-ah ah {},Ho un'allergia a {}
+food-ordering.table-for-two,oon TAH-voh-loh per DOO-eh,Un tavolo per due
+food-ordering.is-a-table-available,cheh oon TAH-voh-loh lee-BEH-roh,C'è un tavolo libero?
+food-ordering.menu-please,"eel meh-NOO, per fah-VOH-reh","Il menù, per favore"
+food-ordering.i-want-this,vor-RAY KWES-toh,Vorrei questo
+food-ordering.do-you-have-drinking-water,ah-VEH-teh AK-kwah poh-TAH-bee-leh,Avete acqua potabile?
+food-ordering.to-go-please,"dah por-TAH-reh VEE-ah, per fah-VOH-reh","Da portare via, per favore"
+food-ordering.check-please,"eel KON-toh, per fah-VOH-reh","Il conto, per favore"
+food-ordering.does-it-contain,kon-tee-EH-neh {},Contiene {}?
+food-ordering.is-this-vegetarian,KWES-toh eh veh-jeh-tah-ree-AH-noh,Questo è vegetariano?
+dietary-needs.does-it-contain-fish-stock,kon-tee-EH-neh BROH-doh dee PEH-sheh,Contiene brodo di pesce?
+dietary-needs.does-it-contain-pork-stock,kon-tee-EH-neh BROH-doh dee mah-YAH-leh,Contiene brodo di maiale?
+dietary-needs.i-have-a-severe-allergy-to,oh OO-nah GRAH-veh al-ler-JEE-ah ah {},Ho una grave allergia a {}
+food-ordering.what-do-you-recommend,keh KOH-sah mee kon-SEE-lyah,Che cosa mi consiglia?
+food-ordering.water-please,"AK-kwah, per fah-VOH-reh","Acqua, per favore"
+food-ordering.can-a-vegetarian-eat-this,oon veh-jeh-tah-ree-AH-noh pwoh man-JAH-reh KWES-toh,Un vegetariano può mangiare questo?
+dietary-needs.no-pork,"SEN-tsah mah-YAH-leh, sah-LOO-mee, pan-CHET-tah oh gwan-CHAH-leh","Senza maiale, salumi, pancetta o guanciale"
+dietary-needs.is-this-halal,eh ah-LAL,È halal?
+trail-words.trail,eel sen-tee-EH-roh,il sentiero
+trail-words.trailhead,lee-NEE-tsee-oh del sen-tee-EH-roh,l'inizio del sentiero
+trail-words.summit,lah CHEE-mah,la cima
+trail-words.viewpoint,eel POON-toh pah-noh-rah-MEE-koh,il punto panoramico
+trail-words.cableway,lah foo-NEE-vee-ah,la funivia
+trail-words.shuttle-bus,lah nah-VET-tah,la navetta
+trail-words.park-shuttle,lah nah-VET-tah del PAR-koh,la navetta del parco
+trail-words.steps,ee grah-DEE-nee,i gradini
+trail-words.up-uphill,sah-LEE-tah,salita
+trail-words.down-downhill,dee-SHEH-sah,discesa
+trail-words.one-way,SOH-loh an-DAH-tah,solo andata
+trail-words.round-trip,an-DAH-tah eh ree-TOR-noh,andata e ritorno
+hiking-parks.is-this-the-way-to,eh KWES-toh eel sen-tee-EH-roh per {},È questo il sentiero per {}?
+hiking-parks.where-is-the-trailhead,DOH-veh ee-NEE-tsee-ah eel sen-tee-EH-roh,Dove inizia il sentiero?
+hiking-parks.how-long-to-the-summit,KWAN-toh MAN-kah AL-lah CHEE-mah,Quanto manca alla cima?
+hiking-parks.how-long-to-the-viewpoint,KWAN-toh MAN-kah al POON-toh pah-noh-rah-MEE-koh,Quanto manca al punto panoramico?
+hiking-parks.which-route-is-easier,KWAH-leh per-KOR-soh eh pee-OO FAH-chee-leh,Quale percorso è più facile?
+trail-conditions.how-long-is-the-full-route,KWAN-toh eh LOON-goh eel per-KOR-soh kom-PLEH-toh,Quanto è lungo il percorso completo?
+trail-conditions.can-we-return-the-same-way,pos-see-AH-moh tor-NAH-reh per lah STES-sah STRAH-dah,Possiamo tornare per la stessa strada?
+trail-conditions.can-we-return-before-dark,pos-see-AH-moh tor-NAH-reh PREE-mah del BOO-yoh,Possiamo tornare prima del buio?
+trail-conditions.is-the-trail-open,eel sen-tee-EH-roh eh ah-PER-toh,Il sentiero è aperto?
+trail-conditions.is-the-route-steep,eel per-KOR-soh eh ree-PEE-doh,Il percorso è ripido?
+trail-conditions.is-the-path-slippery,eel sen-tee-EH-roh eh shee-voh-LOH-soh,Il sentiero è scivoloso?
+trail-transport.how-long-is-the-queue,KWAN-toh eh LOON-gah lah FEE-lah,Quanto è lunga la fila?
+trail-transport.what-time-is-the-last-shuttle,ah keh OH-rah eh LOOL-tee-mah nah-VET-tah,A che ora è l'ultima navetta?
+trail-transport.when-does-the-cableway-stop,ah keh OH-rah kee-OO-deh lah foo-NEE-vee-ah,A che ora chiude la funivia?
+trail-transport.where-can-we-buy-water,DOH-veh pos-see-AH-moh kom-PRAH-reh del-LAK-kwah,Dove possiamo comprare dell'acqua?
+trail-transport.where-can-we-refill-water,DOH-veh pos-see-AH-moh ree-em-PEE-reh leh bor-RAT-cheh,Dove possiamo riempire le borracce?
+trail-transport.is-there-cell-signal-here,cheh KAM-poh kwee,C'è campo qui?
+trail-transport.do-you-have-a-map,ah OO-nah MAP-pah,Ha una mappa?
+trail-warnings.open,ah-PER-toh,Aperto
+trail-warnings.closed,kee-OO-zoh,Chiuso
+trail-warnings.maintenance,mah-noo-ten-tsee-OH-neh,Manutenzione
+trail-warnings.steep-slope,pen-DEN-tsah eh-leh-VAH-tah,Pendenza elevata
+trail-warnings.caution-slippery,at-ten-tsee-OH-neh: FON-doh shee-voh-LOH-soh,Attenzione: fondo scivoloso
+trail-warnings.danger,peh-REE-koh-loh,Pericolo
+trail-warnings.beware-falling-rocks,at-ten-tsee-OH-neh: kah-DOO-tah SAS-see,Attenzione: caduta sassi
+trail-warnings.first-aid-station,POS-toh dee PREE-moh sok-KOR-soh,Posto di primo soccorso
+trail-warnings.service-suspended,ser-VEE-tsee-oh sos-PEH-soh,Servizio sospeso
+trail-landmarks.trail-marker,eel seh-nyah-VEE-ah,il segnavia
+trail-landmarks.fork-junction,eel BEE-vee-oh,il bivio
+trail-landmarks.boardwalk-cliff-path,pas-seh-REL-lah / sen-tee-EH-roh es-POS-toh,passerella / sentiero esposto
+trail-landmarks.start,par-TEN-tsah,Partenza
+trail-landmarks.end,ar-REE-voh,Arrivo
+trail-landmarks.elevation,lal-tee-TOO-dee-neh,l'altitudine
+trail-landmarks.sunset,eel trah-MON-toh,il tramonto
+trail-landmarks.water-point,POON-toh AK-kwah,punto acqua
+hiking-parks.is-this-trail-suitable-for-beginners,KWES-toh sen-tee-EH-roh eh ah-DAT-toh eye preen-chee-pee-AN-tee,Questo sentiero è adatto ai principianti?
+trail-transport.how-long-is-the-wait,KWAN-toh see DEH-veh as-pet-TAH-reh,Quanto si deve aspettare?
+weather.forecast,KWAH-lee SOH-noh leh preh-vee-zee-OH-nee del TEM-poh,Quali sono le previsioni del tempo?
+weather.will-it-rain,pee-oh-veh-RAH OD-jee,Pioverà oggi?
+weather.is-it-safe-today,OD-jee eh see-KOO-roh,Oggi è sicuro?
+weather.how-cold-at-night,keh FRED-doh fah dee NOT-teh,Che freddo fa di notte?
+weather.rain,lah pee-OD-jah,la pioggia
+weather.snow,lah NEH-veh,la neve
+weather.wind,eel VEN-toh,il vento
+weather.storm,eel tem-poh-RAH-leh,il temporale
+weather.ice,eel ghee-AT-choh,il ghiaccio
+weather.fog,lah NEB-bee-ah,la nebbia
+weather.heat,eel KAL-doh,il caldo
+weather.cold,eel FRED-doh,il freddo
+weather.humid,oo-MEE-doh,umido
+weather.sunrise,LAL-bah,l'alba
+weather.flood,lal-loo-vee-OH-neh,l'alluvione
+weather.avalanche-risk,REES-kee-oh vah-LAN-gheh,rischio valanghe
+hotel-words.passport,eel pas-sah-POR-toh,il passaporto
+hotel-words.room-key-card,lah TES-seh-rah DEL-lah KAH-meh-rah,la tessera della camera
+hotel-words.check-in,eel chek-EEN,il check-in
+hotel-words.check-out,eel chek-OWT,il check-out
+hotel-basics.are-any-rooms-available,ah-VEH-teh KAH-meh-reh lee-BEH-reh,Avete camere libere?
+hotel-basics.there-are-two-of-us,see-AH-moh een DOO-eh,Siamo in due
+hotel-basics.i-have-a-reservation,oh OO-nah preh-noh-tah-tsee-OH-neh,Ho una prenotazione
+hotel-basics.can-i-charge-my-phone,POS-soh kah-ree-KAH-reh eel teh-LEH-foh-noh,Posso caricare il telefono?
+hotel-basics.i-would-like-a-non-smoking-room,vor-RAY OO-nah KAH-meh-rah per non foo-mah-TOH-ree,Vorrei una camera per non fumatori
+hotel-basics.i-would-like-a-quiet-room,vor-RAY OO-nah KAH-meh-rah tran-KWEEL-lah,Vorrei una camera tranquilla
+hotel-basics.is-there-a-washing-machine,cheh OO-nah lah-vah-TREE-cheh,C'è una lavatrice?
+hotel-requests.can-i-check-out-later,POS-soh FAH-reh eel chek-OWT pee-OO TAR-dee,Posso fare il check-out più tardi?
+hotel-requests.what-time-does-breakfast-start,ah keh OH-rah ee-NEE-tsee-ah lah koh-lah-tsee-OH-neh,A che ora inizia la colazione?
+hotel-requests.can-i-store-my-luggage,POS-soh lah-SHAH-reh ee bah-GAH-lyee,Posso lasciare i bagagli?
+hotel-requests.no-housekeeping,"nee-EN-teh poo-lee-TSEE-ah, GRAH-tsee-eh","Niente pulizia, grazie"
+room-problems.there-is-a-problem-with-the-room,cheh oon proh-BLEH-mah kon lah KAH-meh-rah,C'è un problema con la camera
+room-problems.the-air-conditioning-is-broken,LAH-ree-ah kon-dee-tsee-oh-NAH-tah non foon-tsee-OH-nah,L'aria condizionata non funziona
+room-problems.there-is-no-hot-water,non cheh AK-kwah KAL-dah,Non c'è acqua calda
+room-problems.can-i-change-rooms,POS-soh kam-bee-AH-reh KAH-meh-rah,Posso cambiare camera?
+room-problems.the-room-is-too-noisy,lah KAH-meh-rah eh TROP-poh roo-moh-ROH-sah,La camera è troppo rumorosa
+hotel-basics.is-wi-fi-free,eel WEE-fee eh grah-TOO-ee-toh,Il Wi-Fi è gratuito?
+hotel-words.luggage-storage,eel deh-POH-zee-toh bah-GAH-lyee,il deposito bagagli
+hotel-requests.another-towel-please,"oon AL-troh ah-shoo-gah-MAH-noh, per fah-VOH-reh","Un altro asciugamano, per favore"
+laundry.please-wash-these-clothes,"LAH-vee KWES-tee ves-TEE-tee, per fah-VOH-reh","Lavi questi vestiti, per favore"
+laundry.where-is-a-laundromat,doh-VEH OO-nah lah-van-deh-REE-ah ah jet-TOH-nee,Dov'è una lavanderia a gettoni?
+laundry.when-will-it-be-ready,KWAN-doh sah-RAH PRON-toh,Quando sarà pronto?
+laundry.how-much-per-kilo,KWAN-toh KOS-tah al KEE-loh,Quanto costa al chilo?
+laundry.can-it-be-ready-today,pwoh ES-seh-reh PRON-toh OD-jee,Può essere pronto oggi?
+laundry.please-do-not-use-bleach,"non OO-zee lah kan-ded-JEE-nah, per fah-VOH-reh","Non usi la candeggina, per favore"
+laundry.laundromat,lah-van-deh-REE-ah ah jet-TOH-nee,lavanderia a gettoni
+laundry.please-iron-this,"STEE-ree KWES-toh, per fah-VOH-reh","Stiri questo, per favore"
+laundry.detergent,eel deh-ter-SEE-voh,il detersivo
+laundry.dry-cleaning,eel lah-VAD-joh ah SEK-koh,il lavaggio a secco
+laundry.dryer,lah-shoo-gah-TREE-cheh,l'asciugatrice
+laundry.coin-operated,ah jet-TOH-nee,A gettoni
+hotel-basics.how-much-per-night,KWAN-toh KOS-tah ah NOT-teh,Quanto costa a notte?
+hotel-basics.is-breakfast-included,lah koh-lah-tsee-OH-neh eh kom-PREH-zah,La colazione è compresa?
+hotel-basics.may-i-see-the-room,POS-soh veh-DEH-reh lah KAH-meh-rah,Posso vedere la camera?
+hotel-basics.for-nights,per {} NOT-tee,Per {} notti
+hotel-basics.two-beds,"DOO-eh LET-tee seh-pah-RAH-tee, per fah-VOH-reh","Due letti separati, per favore"
+hotel-basics.is-there-air-conditioning,cheh LAH-ree-ah kon-dee-tsee-oh-NAH-tah,C'è l'aria condizionata?
+hotel-requests.what-time-is-check-out,ah keh OH-rah eh eel chek-OWT,A che ora è il check-out?
+hotel-requests.can-i-check-in-early,POS-soh FAH-reh eel chek-EEN PREE-mah,Posso fare il check-in prima?
+hotel-requests.another-night,POS-soh res-TAH-reh oo-NAL-trah NOT-teh,Posso restare un'altra notte?
+hotel-requests.is-there-a-safe,cheh OO-nah kas-sah-FOR-teh,C'è una cassaforte?
+hotel-requests.another-blanket,"oo-NAL-trah koh-PER-tah, per fah-VOH-reh","Un'altra coperta, per favore"
+hotel-requests.wake-up-call,"mee ZVEH-lyee AL-leh {}, per fah-VOH-reh","Mi svegli alle {}, per favore"
+room-problems.the-key-does-not-work,lah kee-AH-veh non foon-tsee-OH-nah,La chiave non funziona
+room-problems.the-toilet-will-not-flush,loh shak-KWOH-neh non foon-tsee-OH-nah,Lo sciacquone non funziona
+room-problems.the-light-does-not-work,lah LOO-cheh non foon-tsee-OH-nah,La luce non funziona
+room-problems.please-send-someone,"MAN-dee kwal-KOO-noh ah ree-pah-RAR-loh, per fah-VOH-reh","Mandi qualcuno a ripararlo, per favore"
+room-problems.the-heating-does-not-work,eel rees-kal-dah-MEN-toh non foon-tsee-OH-nah,Il riscaldamento non funziona
+introductions.my-name-is,mee kee-AH-moh {},Mi chiamo {}
+introductions.nice-to-meet-you,pee-ah-CHEH-reh,Piacere
+introductions.what-is-your-name,KOH-meh see kee-AH-mah,Come si chiama?
+introductions.we-are-traveling-together,vee-ad-JAH-moh een-see-EH-meh,Viaggiamo insieme
+introductions.this-is-my-friend,KWES-toh eh eel MEE-oh ah-MEE-koh,Questo è il mio amico
+introductions.i-am-from,VEN-goh dah {},Vengo da questo paese: {}.
+introductions.where-are-you-from,dee doh-VEH,Di dov'è?
+introductions.how-are-you,KOH-meh stah,Come sta?
+introductions.i-am-a-tourist,SOH-noh oon too-REES-tah,Sono un turista
+introductions.this-is-my-husband-wife,LOO-ee eh MEE-oh mah-REE-toh / lay eh MEE-ah MOH-lyeh,Lui è mio marito / lei è mia moglie
+introductions.this-is-my-daughter-son,lay eh MEE-ah FEE-lyah / LOO-ee eh MEE-oh FEE-lyoh,Lei è mia figlia / lui è mio figlio
+introductions.i-am-traveling-alone,vee-AD-joh dah SOH-loh,Viaggio da solo
+numbers-money.l-ng,DZEH-roh,zero
+numbers-money.y,OO-noh,uno
+numbers-money.r,DOO-eh,due
+numbers-money.s-n,treh,tre
+numbers-money.s,KWAT-troh,quattro
+numbers-money.w,CHEEN-kweh,cinque
+numbers-money.li,say,sei
+numbers-money.q,SET-teh,sette
+numbers-money.b,OT-toh,otto
+numbers-money.ji,NOH-veh,nove
+numbers-money.sh,dee-EH-chee,dieci
+numbers-money.y-b-i,CHEN-toh,cento
+numbers-money.y-qi-n,MEEL-leh,mille
+numbers-money.y-w-n,dee-eh-chee-MEE-lah,diecimila
+numbers-money.b-n,MED-dzoh,mezzo
+atm-cash.where-is-an-atm,doh-VEH oon BAN-koh-mat,Dov'è un bancomat?
+atm-cash.does-this-atm-take-foreign-cards,KWES-toh BAN-koh-mat at-CHET-tah KAR-teh strah-nee-EH-reh,Questo bancomat accetta carte straniere?
+atm-cash.the-atm-kept-my-card,eel BAN-koh-mat ah trat-teh-NOO-toh lah MEE-ah KAR-tah,Il bancomat ha trattenuto la mia carta
+atm-cash.is-there-a-fee,cheh OO-nah kom-mees-see-OH-neh,C'è una commissione?
+atm-cash.the-card-was-declined,lah KAR-tah eh STAH-tah ree-fee-oo-TAH-tah,La carta è stata rifiutata
+atm-cash.what-is-the-exchange-rate,kwal eh eel TAS-soh dee KAM-bee-oh,Qual è il tasso di cambio?
+atm-cash.no-money-came-out,non SOH-noh oo-SHEE-tee ee SOL-dee,Non sono usciti i soldi
+atm-cash.where-can-i-change-money,DOH-veh POS-soh kam-bee-AH-reh vah-LOO-tah,Dove posso cambiare valuta?
+atm-cash.the-machine-is-out-of-service,eel BAN-koh-mat eh FWOH-ree ser-VEE-tsee-oh,Il bancomat è fuori servizio
+atm-cash.please-give-me-smaller-notes,"mee DEE-ah ban-koh-NOH-teh pee-OO PEEK-koh-leh, per fah-VOH-reh","Mi dia banconote più piccole, per favore"
+atm-cash.do-you-have-change,ah dah kam-bee-AH-reh,Ha da cambiare?
+atm-cash.may-i-pay-in,POS-soh pah-GAH-reh een {},Posso pagare in {}?
+atm-cash.please-charge-in-local-currency,"ad-DEH-bee-tee een vah-LOO-tah loh-KAH-leh, per fah-VOH-reh","Addebiti in valuta locale, per favore"
+atm-cash.where-can-i-get-coins,DOH-veh POS-soh troh-VAH-reh DEL-leh moh-NEH-teh,Dove posso trovare delle monete?
+atm-cash.is-there-a-minimum-for-cards,cheh oon MEE-nee-moh kon lah KAR-tah,C'è un minimo con la carta?
+atm-cash.atm,eel BAN-koh-mat,il bancomat
+atm-cash.banknote,lah ban-koh-NOH-tah,la banconota
+atm-cash.coin,lah moh-NEH-tah,la moneta
+atm-cash.cash-only,SOH-loh kon-TAN-tee,Solo contanti
+atm-cash.fee,lah kom-mees-see-OH-neh,la commissione
+atm-cash.change,eel RES-toh,il resto
+atm-cash.exchange-rate,eel TAS-soh dee KAM-bee-oh,il tasso di cambio
+atm-cash.bank,lah BAN-kah,la banca
+atm-cash.money-exchange,KAM-bee-oh vah-LOO-tah,Cambio valuta
+atm-cash.pin,eel peen,il PIN
+attractions-tickets.where-can-i-buy-tickets,DOH-veh POS-soh kom-PRAH-reh ee bee-LYET-tee,Dove posso comprare i biglietti?
+attractions-tickets.do-i-need-a-reservation,SER-veh lah preh-noh-tah-tsee-OH-neh,Serve la prenotazione?
+attractions-tickets.what-is-the-latest-entry-time,kwal eh LOOL-tee-moh een-GRES-soh,Qual è l'ultimo ingresso?
+attractions-tickets.are-there-lockers,chee SOH-noh DEH-lyee ar-mah-dee-ET-tee,Ci sono degli armadietti?
+attractions-tickets.may-i-take-photos,POS-soh FAH-reh FOH-toh,Posso fare foto?
+attractions-tickets.please-take-a-photo-of-us,"chee FAT-chah OO-nah FOH-toh, per fah-VOH-reh","Ci faccia una foto, per favore"
+attractions-tickets.could-you-take-a-photo-for-us,pwoh FAR-chee OO-nah FOH-toh,Può farci una foto?
+payment-receipt.pay-by-card,POS-soh pah-GAH-reh kon lah KAR-tah,Posso pagare con la carta?
+payment-receipt.pay-cash,POS-soh pah-GAH-reh een kon-TAN-tee,Posso pagare in contanti?
+payment-receipt.pay-by-qr-code,POS-soh pah-GAH-reh kon eel KOH-dee-cheh koo ER-reh,Posso pagare con il codice QR?
+payment-receipt.a-receipt-please,"OO-noh skon-TREE-noh, per fah-VOH-reh","Uno scontrino, per favore"
+shopping.i-am-just-looking,stoh SOH-loh DAN-doh oo-nok-kee-AH-tah,Sto solo dando un'occhiata
+shopping.how-much-is-this,KWAN-toh KOS-tah KWES-toh,Quanto costa questo?
+shopping.that-is-too-expensive,eh TROP-poh KAH-roh,È troppo caro
+shopping.can-it-be-a-little-cheaper,pwoh FAR-mee oon poh dee SKON-toh,Può farmi un po' di sconto?
+color-size-returns.do-you-have-another-color,ah-VEH-teh oon AL-troh koh-LOH-reh,Avete un altro colore?
+color-size-returns.do-you-have-another-size,ah-VEH-teh oo-NAL-trah TAH-lyah,Avete un'altra taglia?
+color-size-returns.may-i-try-it-on,POS-soh proh-VAR-loh,Posso provarlo?
+color-size-returns.can-i-return-it,POS-soh res-tee-too-EER-loh,Posso restituirlo?
+color-size-returns.can-i-exchange-it,POS-soh kam-bee-AR-loh,Posso cambiarlo?
+color-size-returns.do-you-have-a-bag,ah-VEH-teh oon sak-KET-toh,Avete un sacchetto?
+tax-refund.can-i-get-a-tax-refund,POS-soh kee-EH-deh-reh eel reem-BOR-soh del-LEE-vah,Posso chiedere il rimborso dell'IVA?
+tax-refund.is-tax-free-shopping-available,FAH-teh eel taks free,Fate il tax free?
+shopping.is-there-a-discount,cheh OO-noh SKON-toh,C'è uno sconto?
+payment-receipt.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh","Scriva la cifra, per favore"
+payment-receipt.how-much-in-total,kwan-TEH een TOOT-toh,Quant'è in tutto?
+payment-receipt.can-we-pay-separately,pos-see-AH-moh pah-GAH-reh seh-pah-rah-tah-MEN-teh,Possiamo pagare separatamente?
+payment-receipt.is-tax-included,LEE-vah eh kom-PREH-zah,L'IVA è compresa?
+payment-receipt.my-card-was-declined,lah MEE-ah KAR-tah eh STAH-tah ree-fee-oo-TAH-tah,La mia carta è stata rifiutata
+payment-receipt.the-bill-is-wrong,KREH-doh keh chee SEE-ah oon er-ROH-reh nel KON-toh,Credo che ci sia un errore nel conto
+payment-receipt.i-already-paid,oh jah pah-GAH-toh,Ho già pagato
+shopping.where-do-i-pay,DOH-veh see PAH-gah,Dove si paga?
+shopping.i-will-take-this,PREN-doh KWES-toh,Prendo questo
+shopping.what-is-this,keh koh-SEH KWES-toh,Che cos'è questo?
+shopping.where-can-i-buy,DOH-veh POS-soh kom-PRAH-reh {},Dove posso comprare {}?
+shopping.do-you-have-this-in-stock,cheh lah-VEH-teh dees-poh-NEE-bee-leh,Ce l'avete disponibile?
+shopping.two-of-these,"DOO-eh dee KWES-tee, per fah-VOH-reh","Due di questi, per favore"
+shopping.what-is-it-made-of,dee keh KOH-sah eh FAT-toh,Di che cosa è fatto?
+social-basics.hello,chow,Ciao
+social-basics.hello-polite,bwon-JOR-noh,Buongiorno
+social-basics.good-morning,bwon-JOR-noh,Buongiorno
+social-basics.good-evening,bwoh-nah-SEH-rah,Buonasera
+social-basics.goodbye,ar-ree-veh-DER-chee,Arrivederci
+social-basics.thank-you,GRAH-tsee-eh,Grazie
+social-basics.you-are-welcome,PREH-goh,Prego
+social-basics.excuse-me-sorry,mee SKOO-zee,Mi scusi
+social-basics.sorry,mee dees-pee-AH-cheh,Mi dispiace
+social-basics.no-problem,non cheh proh-BLEH-mah,Non c'è problema
+social-basics.i-do-not-know,non loh soh,Non lo so
+communication.i-do-not-speak-this-language,non PAR-loh ee-tah-lee-AH-noh,Non parlo {target}
+communication.i-speak-only-a-little-of-this,PAR-loh POH-koh ee-tah-lee-AH-noh,Parlo poco {target}
+communication.do-you-speak-english,PAR-lah een-GLEH-seh,Parla {source}?
+communication.please-speak-more-slowly,"PAR-lee pee-OO len-tah-MEN-teh, per fah-VOH-reh","Parli più lentamente, per favore"
+communication.i-do-not-understand-spoken,non kah-PEES-koh,Non capisco
+communication.i-cannot-read-understand,non soh LED-jeh-reh KWES-toh,Non so leggere questo
+communication.please-say-it-again,"ree-PEH-tah, per fah-VOH-reh","Ripeta, per favore"
+communication.please-write-it-down,"loh SKREE-vah, per fah-VOH-reh","Lo scriva, per favore"
+communication.please-wait-a-moment,"oon moh-MEN-toh, per fah-VOH-reh","Un momento, per favore"
+communication.can-you-help-me,mee pwoh ah-yoo-TAH-reh,Mi può aiutare?
+communication.please-show-me-the-text,mee MOS-tree eel TES-toh een ee-tah-lee-AH-noh,Mi mostri il testo in {target}
+quick-responses.please-go-ahead,PREH-goh,prego
+quick-responses.okay-can,dak-KOR-doh,d'accordo
+quick-responses.cannot-not-allowed,non see pwoh,non si può
+quick-responses.works-okay,foon-tsee-OH-nah,funziona
+quick-responses.does-not-work-no,non foon-tsee-OH-nah,non funziona
+phone-translation.i-am-using-phone-translation,stoh oo-ZAN-doh oon trah-doot-TOH-reh sool teh-LEH-foh-noh,Sto usando un traduttore sul telefono
+phone-translation.please-speak-toward-the-phone,PAR-lee VER-soh eel teh-LEH-foh-noh,Parli verso il telefono
+phone-translation.one-sentence-at-a-time-please,"OO-nah FRAH-seh AL-lah VOL-tah, per fah-VOH-reh","Una frase alla volta, per favore"
+phone-text-power.please-type-it-for-me,"loh SKREE-vah sool teh-LEH-foh-noh, per fah-VOH-reh","Lo scriva sul telefono, per favore"
+phone-translation.please-write-the-place-name,SKREE-vah eel NOH-meh del POS-toh een ee-tah-lee-AH-noh,Scriva il nome del posto in {target}
+phone-text-power.please-use-simple-words,"OO-zee pah-ROH-leh sem-PLEE-chee, per fah-VOH-reh","Usi parole semplici, per favore"
+phone-text-power.my-phone-battery-is-low,eel teh-LEH-foh-noh ah POH-kah bat-teh-REE-ah,Il telefono ha poca batteria
+phone-text-power.do-you-have-a-power-bank,ah oon POW-er benk,Ha un power bank?
+phone-text-power.the-translation-may-be-inaccurate,lah trah-doo-tsee-OH-neh pwoh ES-seh-reh eem-preh-CHEE-zah,La traduzione può essere imprecisa
+phone-text-power.please-confirm,"kon-FER-mee, per fah-VOH-reh","Confermi, per favore"
+social-basics.good-night,bwoh-nah-NOT-teh,Buonanotte
+social-basics.okay-fine-i-am-okay,stoh BEH-neh,Sto bene
+quick-responses.can-possible,see pwoh,si può
+quick-responses.cannot-not-possible,non eh pos-SEE-bee-leh,non è possibile
+quick-responses.okay-fine,vah BEH-neh,va bene
+quick-responses.no-good-not-allowed-will-not-work,non eh per-MES-soh,non è permesso
+communication.i-cannot-make-out-what-you-are-saying,non kah-PEES-koh KWEL-loh keh DEE-cheh,Non capisco quello che dice
+communication.i-do-not-understand,non kah-PEES-koh,Non capisco
+communication.i-cannot-read-it,non ree-ES-koh ah LED-jer-loh,Non riesco a leggerlo
+phone-translation.please-type-it-and-show-me,loh SKREE-vah sool teh-LEH-foh-noh eh meh loh MOS-tree,Lo scriva sul telefono e me lo mostri
+phone-translation.please-look-at-the-screen,"GWAR-dee loh SKER-moh, per fah-VOH-reh","Guardi lo schermo, per favore"
+phone-text-power.may-i-charge-my-phone-here,POS-soh kah-ree-KAH-reh eel teh-LEH-foh-noh kwee,Posso caricare il telefono qui?
+sim-data.i-would-like-a-tourist-sim,vor-RAY OO-nah seem per too-REES-tee,Vorrei una SIM per turisti
+sim-data.may-i-use-your-wifi,POS-soh oo-ZAH-reh eel VOS-troh WEE-fee,Posso usare il vostro Wi-Fi?
+sim-data.how-much-data-is-included,KWAN-tee JEE-gah SOH-noh een-KLOO-see,Quanti giga sono inclusi?
+sim-data.do-you-need-my-passport,leh SER-veh eel MEE-oh pas-sah-POR-toh,Le serve il mio passaporto?
+sim-data.how-long-is-it-valid,KWAN-toh TEM-poh eh VAH-lee-dah,Quanto tempo è valida?
+sim-data.please-activate-it,"lah at-TEE-vee, per fah-VOH-reh","La attivi, per favore"
+sim-data.do-you-have-an-esim,ah-VEH-teh OO-nah eh-SEEM,Avete una eSIM?
+sim-data.my-data-is-not-working,ee DAH-tee non foon-tsee-OH-nah-noh,I dati non funzionano
+sim-data.does-it-need-registration,vah reh-jees-TRAH-tah,Va registrata?
+sim-data.i-have-no-signal,non oh seh-NYAH-leh,Non ho segnale
+sim-data.please-write-the-wifi-password,SKREE-vah lah PAS-word del WEE-fee,Scriva la password del Wi-Fi
+sim-data.sim-card,lah SKEH-dah seem,la scheda SIM
+sim-data.where-can-i-buy-a-plug-adapter,DOH-veh POS-soh kom-PRAH-reh oon ah-dat-tah-TOH-reh per lah PREH-zah,Dove posso comprare un adattatore per la presa?
+sim-data.mobile-data,ee DAH-tee MOH-bee-lee,i dati mobili
+sim-data.can-i-top-up-this-sim,POS-soh ree-kah-ree-KAH-reh KWES-tah seem,Posso ricaricare questa SIM?
+sim-data.top-up,lah ree-KAH-ree-kah,la ricarica
+sim-data.is-there-coverage-in,cheh koh-per-TOO-rah ah {},C'è copertura a {}?
+sim-data.signal,eel seh-NYAH-leh,il segnale
+sim-data.esim,lah eh-SEEM,la eSIM
+sim-data.prepaid,preh-pah-GAH-tah,prepagata
+sim-data.roaming,eel ROH-meeng,il roaming
+children.cannot-find-my-child,non TROH-voh MEE-oh FEE-lyoh / MEE-ah FEE-lyah,Non trovo mio figlio
+children.make-an-announcement,pwoh FAH-reh oon an-NOON-choh al-lal-toh-par-LAN-teh,Può fare un annuncio all'altoparlante?
+children.child-age,MEE-oh FEE-lyoh ah {} AN-nee,Mio figlio ha {} anni
+children.high-chair,ah-VEH-teh oon sed-joh-LOH-neh,Avete un seggiolone?
+children.baby-changing-room,doh-VEH eel fah-shah-TOH-yoh,Dov'è il fasciatoio?
+children.childrens-menu,cheh oon meh-NOO per bam-BEE-nee,C'è un menù per bambini?
+children.suitable-for-children,eh ah-DAT-toh eye bam-BEE-nee,È adatto ai bambini?
+children.minimum-age,kwal eh leh-TAH MEE-nee-mah,Qual è l'età minima?
+children.do-children-pay,ee bam-BEE-nee PAH-gah-noh,I bambini pagano?
+children.crib,ah-VEH-teh OO-nah KOOL-lah,Avete una culla?
+children.warm-this-bottle,pwoh skal-DAH-reh KWES-toh bee-BEH-ron,Può scaldare questo biberon?
+children.car-seat,chee SER-veh oon sed-joh-LEE-noh per OW-toh,Ci serve un seggiolino per auto
+children.stroller,eel pas-sed-JEE-noh,il passeggino
+children.playground,cheh oon PAR-koh JOH-kee,C'è un parco giochi?
+etiquette.is-this-allowed,eh per-MES-soh,È permesso?
+etiquette.is-tipping-expected,see OO-zah lah-SHAH-reh lah MAN-chah,Si usa lasciare la mancia?
+etiquette.is-service-included,eel ser-VEE-tsee-oh eh een-KLOO-soh,Il servizio è incluso?
+etiquette.may-i-enter,POS-soh en-TRAH-reh,Posso entrare?
+etiquette.remove-shoes,DEH-voh toh-LYER-mee leh SKAR-peh,Devo togliermi le scarpe?
+etiquette.photo-of-you,POS-soh FAR-leh OO-nah FOH-toh,Posso farle una foto?
+etiquette.may-i-sit-here,POS-soh seh-DER-mee kwee,Posso sedermi qui?
+etiquette.queue-for,eh KWES-tah lah FEE-lah per {},È questa la fila per {}?
+etiquette.dressed-appropriately,eel MEE-oh ab-bee-lyah-MEN-toh eh ah-deh-GWAH-toh,Il mio abbigliamento è adeguato?
+etiquette.did-not-mean-to-offend,non voh-LEH-voh of-FEN-deh-reh,Non volevo offendere
+etiquette.what-is-customary,KOH-meh see OO-zah FAH-reh kwee,Come si usa fare qui?
+etiquette.keep-the-change,TEN-gah eel RES-toh,Tenga il resto
+time-scheduling.what-time-is-it,keh OH-reh SOH-noh,Che ore sono?
+time-scheduling.how-many-minutes,KWAN-tee mee-NOO-tee,Quanti minuti?
+time-scheduling.what-time-should-we-meet,ah keh OH-rah chee veh-dee-AH-moh,A che ora ci vediamo?
+time-scheduling.can-we-change-the-time,pos-see-AH-moh kam-bee-AH-reh LOH-rah,Possiamo cambiare l'ora?
+time-scheduling.when-is-convenient,KWAN-doh leh vah BEH-neh,Quando Le va bene?
+time-scheduling.what-is-today-s-date,keh DAH-tah eh OD-jee,Che data è oggi?
+time-scheduling.what-day-is-it-today,keh JOR-noh eh OD-jee,Che giorno è oggi?
+time-scheduling.what-time-does-it-open,ah keh OH-rah AH-preh,A che ora apre?
+time-scheduling.what-time-does-it-close,ah keh OH-rah kee-OO-deh,A che ora chiude?
+time-words.today,OD-jee,oggi
+time-words.tomorrow,doh-MAH-nee,domani
+time-words.yesterday,YEH-ree,ieri
+time-words.this-week,KWES-tah set-tee-MAH-nah,questa settimana
+time-words.next-week,lah set-tee-MAH-nah PROS-see-mah,la settimana prossima
+time-words.morning,lah mat-TEE-nah,la mattina
+time-words.afternoon,eel poh-meh-REED-joh,il pomeriggio
+time-words.evening,lah SEH-rah,la sera
+time-words.spring,lah pree-mah-VEH-rah,la primavera
+time-words.summer,les-TAH-teh,l'estate
+time-words.fall,low-TOON-noh,l'autunno
+time-words.winter,leen-VER-noh,l'inverno
+days-of-week.monday,loo-neh-DEE,lunedì
+days-of-week.tuesday,mar-teh-DEE,martedì
+days-of-week.wednesday,mer-koh-leh-DEE,mercoledì
+days-of-week.thursday,joh-veh-DEE,giovedì
+days-of-week.friday,veh-ner-DEE,venerdì
+days-of-week.saturday,SAH-bah-toh,sabato
+days-of-week.sunday,doh-MEH-nee-kah,domenica
+months.january,jen-NAH-yoh,gennaio
+months.february,feb-BRAH-yoh,febbraio
+months.march,MAR-tsoh,marzo
+months.april,ah-PREE-leh,aprile
+months.may,MAD-joh,maggio
+months.june,JOO-nyoh,giugno
+months.july,LOO-lyoh,luglio
+months.august,ah-GOS-toh,agosto
+months.september,set-TEM-breh,settembre
+months.october,ot-TOH-breh,ottobre
+months.november,noh-VEM-breh,novembre
+months.december,dee-CHEM-breh,dicembre
+time-words.night,lah NOT-teh,la notte
+time-scheduling.how-long-does-it-take,KWAN-toh TEM-poh chee VWOH-leh,Quanto tempo ci vuole?
+directions.where-is,doh-VEH {},Dov'è {}?
+directions.how-do-i-get-to,KOH-meh see ar-REE-vah ah {},Come si arriva a {}?
+directions.is-it-far,eh lon-TAH-noh,È lontano?
+directions.how-long-on-foot,KWAN-toh chee VWOH-leh ah pee-EH-dee,Quanto ci vuole a piedi?
+quick-directions.go-straight,SEM-preh DREET-toh,Sempre dritto
+quick-directions.turn-left,JEE-ree ah see-NEES-trah,Giri a sinistra
+quick-directions.turn-right,JEE-ree ah DES-trah,Giri a destra
+quick-directions.this-way,dah KWES-tah PAR-teh,Da questa parte
+quick-directions.that-way,dah KWEL-lah PAR-teh,Da quella parte
+quick-directions.on-the-left,ah see-NEES-trah,A sinistra
+quick-directions.on-the-right,ah DES-trah,A destra
+quick-directions.across-from-here,dee FRON-teh,Di fronte
+quick-directions.in-front,dah-VAN-tee,Davanti
+quick-directions.behind,dee-EH-troh,Dietro
+taxi.please-take-me-here,"mee POR-tee kwee, per fah-VOH-reh","Mi porti qui, per favore"
+taxi.please-send-me-the-address,"mee MAN-dee leen-dee-REET-tsoh, per fah-VOH-reh","Mi mandi l'indirizzo, per favore"
+taxi.we-need-the-east-gate-not-the-south-gate,"chee SER-veh leen-GRES-soh est, non leen-GRES-soh sood","Ci serve l'ingresso est, non l'ingresso sud"
+taxi.please-stop-here,"see FER-mee kwee, per fah-VOH-reh","Si fermi qui, per favore"
+taxi.can-you-wait-for-me-here,mee pwoh as-pet-TAH-reh kwee,Mi può aspettare qui?
+taxi.we-need-to-catch-the-high-speed-train,dob-bee-AH-moh PREN-deh-reh eel TREH-noh ad AL-tah veh-loh-chee-TAH,Dobbiamo prendere il treno ad alta velocità
+taxi.please-use-the-meter,"at-CHEN-dah eel tas-SAH-meh-troh, per fah-VOH-reh","Accenda il tassametro, per favore"
+transit-rides.two-tickets,"DOO-eh bee-LYET-tee, per fah-VOH-reh","Due biglietti, per favore"
+transit-rides.where-is-the-subway-station,doh-VEH lah stah-tsee-OH-neh DEL-lah MEH-troh,Dov'è la stazione della metro?
+transit-rides.does-this-bus-train-go-to,KWES-toh ow-TOH-boos oh TREH-noh vah ah {},Questo autobus o treno va a {}?
+transit-rides.what-is-the-next-stop,kwal eh lah PROS-see-mah fer-MAH-tah,Qual è la prossima fermata?
+transit-rides.please-tell-me-where-to-get-off,"mee DEE-kah DOH-veh DEH-voh SHEN-deh-reh, per fah-VOH-reh","Mi dica dove devo scendere, per favore"
+transit-rides.is-this-direct,eh dee-RET-toh,È diretto?
+transit-rides.do-i-need-to-transfer,DEH-voh kam-bee-AH-reh,Devo cambiare?
+transit-rides.is-it-delayed,eh een ree-TAR-doh,È in ritardo?
+transit-rides.i-am-in-a-hurry,oh FRET-tah,Ho fretta
+transit-rides.which-platform,KWAH-leh bee-NAH-ree-oh,Quale binario?
+transit-rides.what-time-is-the-next-one,ah keh OH-rah cheh eel PROS-see-moh,A che ora c'è il prossimo?
+transit-rides.i-went-past-my-stop,oh pas-SAH-toh lah MEE-ah fer-MAH-tah,Ho passato la mia fermata
+place-words.visitor-center,CHEN-troh vee-zee-tah-TOH-ree,centro visitatori
+place-words.railway-station,stah-tsee-OH-neh fer-roh-vee-AH-ree-ah,stazione ferroviaria
+place-words.airport,ah-eh-roh-POR-toh,aeroporto
+place-words.service-desk,BAN-koh een-for-mah-tsee-OH-nee,banco informazioni
+place-words.bus-stop,fer-MAH-tah del-low-TOH-boos,fermata dell'autobus
+place-words.luggage-storage,deh-POH-zee-toh bah-GAH-lyee,deposito bagagli
+pickup-meeting.where-is-the-pickup-point,doh-VEH eel POON-toh dee ree-TROH-voh,Dov'è il punto di ritrovo?
+pickup-meeting.please-send-me-the-pickup-point,mee MAN-dee eel POON-toh dee ree-TROH-voh,Mi mandi il punto di ritrovo
+pickup-meeting.please-pick-us-up-here,chee VEN-gah ah PREN-deh-reh kwee,Ci venga a prendere qui
+pickup-meeting.meet-us-at,chee veh-dee-AH-moh ah {},Ci vediamo a {}
+pickup-meeting.please-call-me-a-ride,"mee kee-AH-mee oon EN-neh chee CHEE, per fah-VOH-reh","Mi chiami un NCC, per favore"
+rail-station-words.high-speed-rail,AL-tah veh-loh-chee-TAH,alta velocità
+rail-station-words.transfer,KAM-bee-oh,cambio
+rail-station-words.ticket-gate,tor-NEL-loh,tornello
+rail-station-words.platform,bee-NAH-ree-oh,binario
+rail-station-words.ticket-office,bee-lyet-teh-REE-ah,biglietteria
+rail-station-words.waiting-room,SAH-lah dat-TEH-sah,sala d'attesa
+rail-station-words.train-number,NOO-meh-roh del TREH-noh,numero del treno
+rail-station-words.carriage,kar-ROT-tsah,carrozza
+rail-station-words.seat,POS-toh,posto
+rail-station-words.last-train,OOL-tee-moh TREH-noh,ultimo treno
+rail-station-words.delayed,een ree-TAR-doh,In ritardo
+rail-station-words.final-stop,kah-poh-LEE-neh-ah,capolinea
+common-signs.open-on,ah-PER-toh,Aperto
+common-signs.closed-off,kee-OO-zoh,Chiuso
+common-signs.occupied,ok-koo-PAH-toh,Occupato
+common-signs.vacant,lee-BEH-roh,Libero
+common-signs.caution,at-ten-tsee-OH-neh,Attenzione
+common-signs.no-entry,vee-eh-TAH-toh lat-CHES-soh,Vietato l'accesso
+common-signs.no-smoking,vee-eh-TAH-toh foo-MAH-reh,Vietato fumare
+common-signs.no-photography,vee-eh-TAH-toh foh-toh-grah-FAH-reh,Vietato fotografare
+common-signs.do-not-touch,non tok-KAH-reh,Non toccare
+common-signs.temporarily-closed,kee-OO-zoh tem-poh-rah-neh-ah-MEN-teh,Chiuso temporaneamente
+transit-rides.can-i-use-this-ticket,POS-soh oo-ZAH-reh KWES-toh bee-LYET-toh,Posso usare questo biglietto?
+taxi.i-will-get-off-here,SHEN-doh kwee,Scendo qui
+pickup-meeting.please-call-a-taxi,"kee-AH-mee oon TAK-see, per fah-VOH-reh","Chiami un taxi, per favore"
+common-signs.closed,kee-OO-zoh,Chiuso
+common-signs.stopped-stop,FER-moh,Fermo
+place-words.tourist-spot-sightseeing-area,DZOH-nah too-REES-tee-kah,zona turistica
+border-customs.i-am-a-tourist,VEN-goh per too-REEZ-moh,Vengo per turismo
+border-customs.here-is-my-passport,EK-koh eel MEE-oh pas-sah-POR-toh,Ecco il mio passaporto
+border-customs.i-am-staying-for-days,RES-toh {} JOR-nee,Resto {} giorni
+border-customs.nothing-to-declare,nee-EN-teh dah dee-kee-ah-RAH-reh,Niente da dichiarare
+border-customs.i-am-staying-at,al-LOD-joh PRES-soh {},Alloggio presso {}
+border-customs.i-am-here-for-business,VEN-goh per lah-VOH-roh,Vengo per lavoro
+border-customs.i-have-a-return-ticket,oh eel bee-LYET-toh dee ree-TOR-noh,Ho il biglietto di ritorno
+border-customs.i-am-visiting-family,VEN-goh ah troh-VAH-reh day pah-REN-tee,Vengo a trovare dei parenti
+border-customs.this-is-for-personal-use,eh per OO-zoh per-soh-NAH-leh,È per uso personale
+border-customs.i-am-in-transit,SOH-noh een TRAN-see-toh,Sono in transito
+border-customs.i-have-in-cash,oh {} een kon-TAN-tee,Ho {} in contanti
+border-customs.this-is-a-gift,eh oon reh-GAH-loh,È un regalo
+border-customs.where-do-i-collect-my-baggage,DOH-veh ree-TEE-roh ee bah-GAH-lyee,Dove ritiro i bagagli?
+border-customs.how-long-may-i-stay,KWAN-toh TEM-poh POS-soh res-TAH-reh,Quanto tempo posso restare?
+border-customs.i-have-a-connecting-flight,oh oon VOH-loh een koh-een-chee-DEN-tsah,Ho un volo in coincidenza
+border-customs.may-i-have-an-entry-stamp,mee MET-teh eel TEEM-broh deen-GRES-soh,Mi mette il timbro d'ingresso?
+border-customs.visa,eel VEES-toh,il visto
+border-customs.i-have-no-food-or-plants,non oh ah-lee-MEN-tee neh pee-AN-teh,Non ho alimenti né piante
+border-customs.passport-control,kon-TROL-loh pas-sah-POR-tee,Controllo passaporti
+border-customs.customs,doh-GAH-nah,Dogana
+border-customs.baggage-claim,ree-TEE-roh bah-GAH-lyee,Ritiro bagagli
+border-customs.customs-declaration,dee-kee-ah-rah-tsee-OH-neh doh-gah-NAH-leh,Dichiarazione doganale
+border-customs.arrival-card,KAR-tah dee ZBAR-koh,Carta di sbarco
+border-customs.transit,TRAN-see-toh,Transito
+border-customs.boarding-pass,KAR-tah deem-BAR-koh,Carta d'imbarco
+directions.please-show-me-on-the-map,"meh loh MOS-tree SOOL-lah MAP-pah, per fah-VOH-reh","Me lo mostri sulla mappa, per favore"
+directions.where-is-the-nearest,doh-VEH eel {} pee-OO vee-CHEE-noh,Dov'è il {} più vicino?
+directions.where-am-i,DOH-veh mee TROH-voh,Dove mi trovo?
+directions.which-way,dah keh PAR-teh,Da che parte?
+directions.can-i-walk-there,chee POS-soh an-DAH-reh ah pee-EH-dee,Ci posso andare a piedi?
+directions.how-far-is-it,KWAN-toh DEES-tah,Quanto dista?
+directions.which-exit,KWAH-leh oo-SHEE-tah,Quale uscita?
+directions.can-you-show-me-the-way,mee pwoh een-dee-KAH-reh lah STRAH-dah,Mi può indicare la strada?
+directions.north,nord,nord
+directions.south,sood,sud
+directions.east,est,est
+directions.west,OH-vest,ovest
+transit-rides.do-i-need-to-validate,DEH-voh kon-vah-lee-DAH-reh eel bee-LYET-toh,Devo convalidare il biglietto?
+rail-station-words.ticket-validator,oh-blee-teh-rah-TREE-cheh,obliteratrice
+utility-templates.i-want-to-go-to,vor-RAY an-DAH-reh ah {},Vorrei andare a {}
+utility-templates.please-give-me,"mee DEE-ah {}, per fah-VOH-reh","Mi dia {}, per favore"
+utility-templates.may-i,POS-soh {},Posso {}?
+utility-templates.please-do-not-add,"SEN-tsah {}, per fah-VOH-reh","Senza {}, per favore"
+utility-templates.do-you-have,ah-VEH-teh {},Avete {}?
+utility-templates.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh","Scriva la cifra, per favore"
+utility-templates.i-need,mee SER-veh {},Mi serve {}
+utility-templates.is-there-nearby,cheh oon {} kwee vee-CHEE-noh,C'è un {} qui vicino?
+utility-templates.how-much-is,KWAN-toh KOS-tah {},Quanto costa {}?
+utility-templates.is-this,KWES-toh eh {},Questo è {}?
+utility-templates.please,"{}, per fah-VOH-reh","{}, per favore"
+utility-templates.i-am-looking-for,CHER-koh {},Cerco {}
+utility-templates.do-you-accept,at-chet-TAH-teh {},Accettate {}?
+utility-templates.i-cannot-find,non TROH-voh {},Non trovo {}
+utility-templates.there-is-a-problem-with,cheh oon proh-BLEH-mah kon {},C'è un problema con {}

@@ -1,755 +1,755 @@
-concept_id,respell
-building-help.what-room-number-is-this,juh shir jee how fahng
-in-a-building.is-this-the-correct-entrance,juh shir jung-chweh duh roo-koh ma
-building-words.elevator,dyen-tee
-pronouns-verbs.i-me,waw
-question-words.what,shun-muh
-emergency-medical.help,jyoh-meeng
-lost-rescue.i-lost-my-passport,waw duh hoo-jow dyoh luh
-dietary-needs.no-meat,boo yow roh
-food-ordering.table-for-two,lyahng way
-trail-words.trail,boo-dow
-hiking-parks.is-this-the-way-to,juh shir chyoo {} duh loo ma
-trail-conditions.how-long-is-the-full-route,chwan-chung dwaw chahng
-trail-transport.how-long-is-the-queue,pye-dway yow dwaw-jyoh
-trail-warnings.open,kye-fahng
-trail-landmarks.trail-marker,loo-byaow
-hotel-words.passport,hoo-jow
-hotel-basics.are-any-rooms-available,yoh kohng-fahng ma
-hotel-requests.can-i-check-out-later,kuh-yee wahn-dyen tway-fahng ma
-room-problems.there-is-a-problem-with-the-room,fahng-jyen yoh wun-tee
-introductions.my-name-is,waw jyaow {}
-numbers-money.l-ng,leeng
-attractions-tickets.where-can-i-buy-tickets,nah-lee kuh-yee mye pyow
-payment-receipt.pay-by-card,kuh-yee shwah-kah ma
-shopping.i-am-just-looking,waw jir-shir kahn-kahn
-color-size-returns.do-you-have-another-color,yoh byeh duh yen-suh ma
-tax-refund.can-i-get-a-tax-refund,kuh-yee tway-shway ma
-social-basics.hello,nee how
-communication.i-do-not-speak-this-language,waw boo hway shwaw jong-wun
-quick-responses.please-go-ahead,cheeng
-phone-translation.i-am-using-phone-translation,waw dzye yong show-jee fahn-yee
-phone-text-power.please-type-it-for-me,cheeng dah-dzuh gay waw kahn
-time-scheduling.what-time-is-it,shyen-dzye jee-dyen
-time-words.today,jeen-tyen
-days-of-week.monday,sheeng-chee ee
-months.january,ee yweh
-directions.where-is,{} dzye nah-lee
-quick-directions.go-straight,ee-jir dzoh
-taxi.please-take-me-here,cheeng dye waw chyoo juh-lee
-transit-rides.two-tickets,lyahng jahng pyow
-place-words.scenic-area,jeeng-chyoo
-pickup-meeting.where-is-the-pickup-point,shahng-chuh-dyen dzye nah-lee
-rail-station-words.high-speed-rail,gaow-tyeh
-common-signs.open-on,kye
-utility-templates.i-want-to-go-to,waw shyahng chyoo {}
-toilets.where-toilet,tsuh-swaw dzye nah-lee
-accessibility.step-free,yoh woo-jahng-eye tong-dow ma
-medical-conditions.i-am-diabetic,waw yoh tahng-nyow-beeng
-pharmacy-symptoms.which-pharmacy-is-open-now,shyen-dzye nah jyah yow-dyen kye-mun
-police-consulate.where-is-the-police-station,pye-choo-swaw dzye nah-lee
-body-parts.head,toh
-weather.forecast,tyen-chee yew-baow dzun-muh shwaw
-laundry.please-wash-these-clothes,cheeng syee juh-shyeh ee-foo
-atm-cash.where-is-an-atm,chyoo-kwahn-jee dzye nah-lee
-sim-data.i-would-like-a-tourist-sim,waw yow ee jahng lyoo-yoh show-jee-kah
-children.cannot-find-my-child,waw jaow boo dow waw duh hye-dzuh
-etiquette.is-this-allowed,juh-guh kuh-yee ma
-border-customs.i-am-a-tourist,waw lye lyoo-yoh
-building-help.i-am-lost,waw mee-loo luh
-building-words.stairs,loh-tee
-pronouns-verbs.we-us,waw-men
-question-words.where,nah-lee
-emergency-medical.please-call-an-ambulance,cheeng bahng waw jyaow jyoh-hoo-chuh
-lost-rescue.i-lost-my-phone,waw duh show-jee dyoh luh
-dietary-needs.no-eggs,boo yow jee-dahn
-food-ordering.is-a-table-available,yoh way-dzuh ma
-trail-words.trailhead,dung-shan-koh
-hiking-parks.where-is-the-trailhead,dung-shan-koh dzye nah-lee
-trail-conditions.can-we-return-the-same-way,nung ywen-loo fahn-hway ma
-trail-transport.what-time-is-the-last-shuttle,jyeh-baw-chuh dzway-wahn jee-dyen
-trail-warnings.closed,fung-bee
-trail-landmarks.fork-junction,chah-loo
-hotel-words.room-key-card,fahng-kah
-hotel-basics.there-are-two-of-us,waw-men lyahng guh run
-hotel-requests.what-time-does-breakfast-start,dzow-tsahn jee-dyen kye-shir
-room-problems.the-air-conditioning-is-broken,kohng-tyaow hwye luh
-introductions.nice-to-meet-you,hun gaow-sheeng run-shih nee
-numbers-money.y,ee
-attractions-tickets.do-i-need-a-reservation,syoo-yow yew-yweh ma
-payment-receipt.pay-cash,kuh-yee foo shyen-jeen ma
-shopping.how-much-is-this,juh-guh dwaw-shaow chyen
-color-size-returns.do-you-have-another-size,yoh byeh duh chir-mah ma
-social-basics.hello-polite,neen how
-communication.i-speak-only-a-little-of-this,waw jir hway shwaw ee-dyar jong-wun
-quick-responses.yes-right,shir
-phone-translation.please-speak-toward-the-phone,cheeng dway-juh show-jee shwaw
-phone-translation.please-write-the-place-name,cheeng bah dee-meeng syeh chung jong-wun
-time-scheduling.how-many-minutes,jee fun-jong
-time-words.tomorrow,ming-tyen
-days-of-week.tuesday,sheeng-chee are
-months.february,are yweh
-directions.how-do-i-get-to,dow {} dzun-muh dzoh
-quick-directions.turn-left,dzwaw jwahn
-taxi.please-send-me-the-address,cheeng bah dee-jir fah gay waw
-transit-rides.where-is-the-subway-station,dee-tyeh-jahn dzye nah-lee
-place-words.visitor-center,yoh-kuh jong-sheen
-pickup-meeting.please-send-me-the-pickup-point,cheeng bah shahng-chuh-dyen fah gay waw
-rail-station-words.maglev,tsuh-foo
-common-signs.closed-off,gwan
-utility-templates.please-give-me,cheeng gay waw {}
-toilets.where-public-toilet,gong-gong tsuh-swaw dzye nah-lee
-accessibility.wheelchair-access,loon-ee nung jeen ma
-medical-conditions.i-need-insulin,waw syoo-yow ee-dow-soo
-pharmacy-symptoms.i-need-medicine-for,waw syoo-yow jir {} duh yow
-police-consulate.i-want-to-report-a-theft,waw yow baow dow-chyeh-ahn
-body-parts.stomach,doo-dzuh
-weather.will-it-rain,jeen-tyen hway shyah yoo ma
-laundry.where-is-a-laundromat,dzuh-joo syee-ee-dyen dzye nah-lee
-atm-cash.does-this-atm-take-foreign-cards,wye-gwaw duh kah nung yong ma
-sim-data.may-i-use-your-wifi,kuh-yee jyeh-yong woo-shyen-wahng ma
-children.make-an-announcement,cheeng gwahng-baw jaow run
-etiquette.is-tipping-expected,syoo-yow gay syaow-fay ma
-border-customs.here-is-my-passport,juh shir waw duh hoo-jow
-building-help.where-is-reception,chyen-tye dzye nah-lee
-in-a-building.do-you-have-wi-fi,yoh woo-shyen-wahng ma
-building-words.entrance,roo-koh
-pronouns-verbs.you,nee
-question-words.who,shay
-emergency-medical.i-need-a-doctor,waw syoo-yow ee-shung
-lost-rescue.please-call-the-police,cheeng baow-jeeng
-dietary-needs.not-spicy,boo yow lah
-food-ordering.menu-please,cheeng gay waw ts-eye-dahn
-trail-words.summit,shahn-deeng
-hiking-parks.how-long-to-the-summit,dow shahn-deeng yow dwaw-jyoh
-trail-conditions.can-we-return-before-dark,tyen-hay chyen nung hway-lye ma
-trail-transport.when-does-the-cableway-stop,swaw-dow jee-dyen teeng-yoon
-trail-warnings.maintenance,way-shyoh
-trail-landmarks.boardwalk-cliff-path,jahn-dow
-hotel-words.check-in,roo-joo
-hotel-basics.i-have-a-reservation,waw yoh yew-deeng
-hotel-requests.can-i-store-my-luggage,kuh-yee jee-tswun sheeng-lee ma
-room-problems.there-is-no-hot-water,may-yoh ruh-shway
-introductions.what-is-your-name,nee jyaow shun-muh meeng-dzuh
-numbers-money.r,are
-attractions-tickets.what-is-the-latest-entry-time,dzway-wahn jee-dyen roo-ywen
-payment-receipt.pay-by-qr-code,kuh-yee saow-mah ma
-shopping.that-is-too-expensive,tye gway luh
-color-size-returns.may-i-try-it-on,waw kuh-yee shir yee-shyah ma
-social-basics.good-morning,dzow-shahng how
-communication.do-you-speak-english,nee hway shwaw eeng-yoo ma
-quick-responses.no-not,boo shir
-phone-translation.one-sentence-at-a-time-please,cheeng yee jyoo yee jyoo duh shwaw
-phone-text-power.please-use-simple-words,cheeng yong jyen-dahn duh hwah shwaw
-time-scheduling.what-time-should-we-meet,jee-dyen jyen
-time-words.yesterday,dzwaw-tyen
-days-of-week.wednesday,sheeng-chee sahn
-months.march,sahn yweh
-directions.is-it-far,ywen boo ywen
-quick-directions.turn-right,yoh jwahn
-taxi.we-need-the-east-gate-not-the-south-gate,"waw-men chyoo dong-mun, boo shir nahn-mun"
-transit-rides.does-this-bus-train-go-to,juh tahng chuh chyoo {} ma
-place-words.railway-station,hwa-chuh-jan
-pickup-meeting.please-pick-us-up-here,cheeng dzye juh-lee jyeh waw-men
-rail-station-words.transfer,hwahn-chung
-common-signs.occupied,yoh-run
-utility-templates.may-i,waw kuh-yee {} ma
-toilets.may-i-use-the-toilet,kuh-yee yong yee-shyah syee-show-jyen ma
-accessibility.elevator,yoh dyen-tee ma
-medical-conditions.i-have-asthma,waw yoh shyaow-chwahn
-pharmacy-symptoms.i-have-a-fever,waw fah-shaow luh
-police-consulate.my-bag-was-stolen,waw duh baow bay toh luh
-body-parts.back,bay
-weather.is-it-safe-today,jeen-tyen ahn-chwan ma
-laundry.when-will-it-be-ready,shun-muh shir-hoh nung how
-atm-cash.the-atm-kept-my-card,waw duh kah bay toon luh
-sim-data.how-much-data-is-included,yoh dwaw-shaow lyoh-lyahng
-children.child-age,waw duh hye-dzuh {} sway
-etiquette.is-service-included,hahn foo-woo-fay ma
-border-customs.i-am-staying-for-days,waw teeng-lyoh {} tyen
-building-help.where-is-a-power-outlet,chah-dzwaw dzye nah-lee
-in-a-building.what-is-the-wi-fi-password,wee-fye mee-mah shir shun-muh
-building-words.exit,choo-koh
-pronouns-verbs.you-polite,neen
-question-words.which-one,nah-guh
-emergency-medical.i-am-sick,waw shung-beeng luh
-lost-rescue.we-are-here,waw-men dzye juh-lee
-dietary-needs.less-spicy,shaow lah
-food-ordering.i-want-this,waw yow juh-guh
-trail-words.viewpoint,gwan-jing-tye
-hiking-parks.how-long-to-the-viewpoint,dow gwan-jing-tye yow dwaw-jyoh
-trail-conditions.is-the-trail-open,juh tyaow boo-dow kye-fahng ma
-trail-transport.where-can-we-buy-water,nah-lee kuh-yee mye shway
-trail-warnings.steep-slope,doh-pwaw
-trail-landmarks.start,chee-dyen
-hotel-words.check-out,tway-fahng
-hotel-basics.can-i-charge-my-phone,kuh-yee gay show-jee chohng-dyen ma
-hotel-requests.no-housekeeping,boo yong dah-sow
-room-problems.can-i-change-rooms,kuh-yee hwahn fahng ma
-introductions.we-are-traveling-together,waw-men ee-chee lyoo-syeeng
-numbers-money.li-ng,lyahng
-attractions-tickets.are-there-lockers,yoh jee-tswun-gway ma
-payment-receipt.a-receipt-please,cheeng gay waw show-jyoo
-shopping.can-it-be-a-little-cheaper,kuh-yee pyen-yee ee-dyen ma
-color-size-returns.can-i-return-it,kuh-yee tway ma
-social-basics.good-evening,wahn-shahng how
-communication.please-speak-more-slowly,cheeng shwaw mahn ee-dyen
-quick-responses.okay-can,kuh-yee
-phone-text-power.my-phone-battery-is-low,waw duh show-jee kwye may dyen luh
-time-scheduling.can-we-change-the-time,kuh-yee guy shir-jyen ma
-time-words.this-week,juh-guh sheeng-chee
-days-of-week.thursday,sheeng-chee suh
-months.april,suh yweh
-directions.how-long-on-foot,dzoh-loo yow dwaw-jyoh
-quick-directions.this-way,juh-byen
-taxi.please-stop-here,cheeng dzye juh-lee teeng
-transit-rides.what-is-the-next-stop,shyah yee jahn shir shun-muh
-place-words.airport,jee-chahng
-pickup-meeting.meet-us-at,waw-men dzye {} jee-huh
-rail-station-words.ticket-gate,jyen-pyow-koh
-common-signs.vacant,woo-run
-utility-templates.please-do-not-add,cheeng boo yow fahng {}
-toilets.is-it-only-for-customers,jir gay goo-kuh yong ma
-accessibility.ramp,yoh pwaw-dow ma
-medical-conditions.i-have-a-heart-condition,waw yoh sheen-dzahng-beeng
-pharmacy-symptoms.i-have-diarrhea,waw lah doo-dzuh luh
-police-consulate.my-passport-was-stolen,waw duh hoo-jow bay toh luh
-body-parts.throat,hoh-long
-weather.how-cold-at-night,wahn-shahng yoh dwaw lung
-laundry.how-much-per-kilo,ee gong-jeen dwaw-shaow chyen
-atm-cash.is-there-a-fee,yoh show-syoo-fay ma
-sim-data.do-you-need-my-passport,syoo-yow hoo-jow ma
-children.high-chair,yoh are-tong tsahn-ee ma
-etiquette.may-i-enter,kuh-yee jeen-chyoo ma
-border-customs.nothing-to-declare,may-yoh yow shun-baow duh dong-shee
-in-a-building.which-floor,dzye jee loh
-building-words.men,nahn
-pronouns-verbs.he-him,tah
-question-words.when,shun-muh shir-hoh
-emergency-medical.i-am-injured,waw show-shahng luh
-lost-rescue.please-look-at-my-location-pin,cheeng kahn waw duh deeng-way
-dietary-needs.no-peanuts,boo yow hwah-shung
-food-ordering.do-you-have-drinking-water,yoh een-yong-shway ma
-trail-words.cableway,swaw-dow
-hiking-parks.which-route-is-easier,nah tyaow loo-shyen bee-jyaow rong-yee
-trail-conditions.is-the-route-steep,juh tyaow loo doh ma
-trail-transport.where-can-we-refill-water,nah-lee kuh-yee jyeh shway
-trail-warnings.caution-slippery,syaow-sheen loo-hwah
-trail-landmarks.end,jong-dyen
-hotel-basics.i-would-like-a-non-smoking-room,waw yow woo-yen fahng
-room-problems.the-room-is-too-noisy,fahng-jyen tye chaow luh
-introductions.this-is-my-friend,juh shir waw duh pung-yoh
-numbers-money.s-n,sahn
-attractions-tickets.may-i-take-photos,kuh-yee pie-jow ma
-color-size-returns.can-i-exchange-it,kuh-yee hwahn ma
-social-basics.goodbye,dzye-jyen
-communication.i-do-not-understand-spoken,waw teeng boo dong
-quick-responses.cannot-not-allowed,boo kuh-yee
-phone-text-power.do-you-have-a-power-bank,yoh chohng-dyen-baow ma
-time-scheduling.when-is-convenient,shun-muh shir-hoh fahng-byen
-time-words.next-week,shyah-guh sheeng-chee
-days-of-week.friday,sheeng-chee woo
-months.may,woo yweh
-quick-directions.that-way,nah-byen
-taxi.can-you-wait-for-me-here,kuh-yee dzye juh-lee dung waw ma
-transit-rides.please-tell-me-where-to-get-off,cheeng gaow-soo waw dzye nah jahn shyah chuh
-place-words.service-desk,foo-woo-tye
-pickup-meeting.please-call-me-a-ride,cheeng bahng waw jyaow chuh
-rail-station-words.platform,jahn-tye
-common-signs.caution,syaow-sheen
-utility-templates.do-you-have,yoh may-yoh {}
-toilets.toilet-wc,tsuh-swaw
-accessibility.how-many-steps,yoh jee jee tye-jyeh
-medical-conditions.i-am-allergic-to-penicillin,waw dway cheeng-may-soo gwaw-min
-pharmacy-symptoms.where-is-an-all-night-pharmacy,nah-lee yoh are-shir-suh syaow-shir yow-dyen
-police-consulate.someone-is-following-me,yoh run gun-juh waw
-body-parts.tooth,yah
-weather.rain,yoo
-laundry.can-it-be-ready-today,jeen-tyen nung how ma
-atm-cash.the-card-was-declined,kah shwah boo lyaow
-sim-data.how-long-is-it-valid,yoh-shyaow-chee dwaw-jyoh
-children.baby-changing-room,moo-eeng-shir dzye nah-lee
-etiquette.remove-shoes,yow twaw syeh ma
-border-customs.i-am-staying-at,waw joo dzye {}
-directions.please-show-me-on-the-map,cheeng dzye dee-too shahng jir gay waw kahn
-building-words.women,nyoo
-pronouns-verbs.she-her,tah
-question-words.how,dzun-muh
-emergency-medical.it-hurts-here,juh-lee tung
-lost-rescue.i-cannot-walk,waw dzoh boo dong luh
-dietary-needs.no-nuts,boo yow jyen-gwaw
-food-ordering.to-go-please,cheeng dah-baow
-trail-words.shuttle-bus,jyeh-baw-chuh
-trail-conditions.is-the-path-slippery,loo hwah ma
-trail-transport.is-there-cell-signal-here,juh-lee yoh show-jee sheen-how ma
-trail-warnings.danger,way-shyen
-trail-landmarks.elevation,hi-bah
-hotel-basics.i-would-like-a-quiet-room,waw yow ahn-jeeng duh fahng-jyen
-numbers-money.s,suh
-attractions-tickets.please-take-a-photo-of-us,cheeng bahng waw-men pie jahng jow-pyen
-color-size-returns.do-you-have-a-bag,yoh dye-dzuh ma
-social-basics.thank-you,syeh-syeh
-communication.i-cannot-read-understand,waw kahn boo dong
-quick-responses.works-okay,syeeng
-phone-text-power.the-translation-may-be-inaccurate,fahn-yee kuh-nung boo joon-chweh
-time-scheduling.what-is-today-s-date,jeen-tyen jee how
-time-words.morning,dzow-shahng
-days-of-week.saturday,sheeng-chee lyoh
-months.june,lyoh yweh
-quick-directions.on-the-left,dzye dzwaw-byen
-taxi.we-need-to-catch-the-high-speed-train,waw-men yow gahn gaow-tyeh
-transit-rides.is-this-direct,juh shir jir-dah chuh ma
-place-words.bus-stop,gong-jyow-jan
-rail-station-words.ticket-office,show-pyow choo
-common-signs.no-entry,jeen-jir roo-nay
-utility-templates.please-write-the-number,cheeng syeh shoo-dzuh
-toilets.is-it-free,myen-fay ma
-accessibility.cannot-climb-stairs,waw shahng boo lyaow loh-tee
-medical-conditions.i-have-epilepsy,waw yoh dyen-shyen
-pharmacy-symptoms.painkiller,jir-tong-yow
-police-consulate.i-need-a-written-police-report,waw syoo-yow baow-jeeng jung-meeng
-body-parts.chest,shyong
-weather.snow,shweh
-laundry.please-do-not-use-bleach,cheeng boo yow yong pyaow-bye-jee
-room-problems.the-key-does-not-work,fahng-kah dah boo kye mun
-introductions.i-am-from,waw lye-dzuh {}
-atm-cash.what-is-the-exchange-rate,hway-lyoo shir dwaw-shaow
-sim-data.please-activate-it,cheeng bahng waw kye-tong
-children.childrens-menu,yoh are-tong ts-eye-dahn ma
-etiquette.photo-of-you,kuh-yee gay neen pie-jow ma
-border-customs.i-am-here-for-business,waw lye choo-chye
-directions.where-is-the-nearest,dzway-jeen duh {} dzye nah-lee
-building-words.door,mun
-pronouns-verbs.they-them,tah-men
-question-words.how-much-many,dwaw-shaow
-emergency-medical.where-is-a-pharmacy,yow-dyen dzye nah-lee
-lost-rescue.i-sprained-my-ankle,waw nyoh-shahng jyaow luh
-dietary-needs.no-seafood,boo yow hi-shyen
-food-ordering.check-please,cheeng jyeh-jahng
-trail-words.park-shuttle,hwan-bow-chu
-trail-transport.do-you-have-a-map,yoh dee-too ma
-trail-warnings.beware-falling-rocks,joo-yee lwaw-shir
-trail-landmarks.sunset,rih-lwaw
-hotel-basics.is-there-a-washing-machine,yoh syee-ee-jee ma
-numbers-money.w,woo
-social-basics.you-are-welcome,boo kuh-chee
-communication.please-say-it-again,cheeng dzye shwaw yee byen
-quick-responses.does-not-work-no,boo syeeng
-phone-text-power.please-confirm,cheeng chweh-run yee-shyah
-time-scheduling.what-day-is-it-today,jeen-tyen sheeng-chee jee
-time-words.afternoon,shyah-woo
-days-of-week.sunday,sheeng-chee rr
-months.july,chee yweh
-quick-directions.on-the-right,dzye yoh-byen
-taxi.please-use-the-meter,cheeng dah-kye jee-jyah-chee
-transit-rides.do-i-need-to-transfer,syoo-yow hwahn-chung ma
-place-words.luggage-storage,sheeng-lee jee-tswun
-rail-station-words.waiting-room,hoh-chuh-shir
-common-signs.no-smoking,jeen-jir shee-yen
-toilets.do-i-need-a-coin,syoo-yow eeng-bee ma
-accessibility.need-to-sit-down,waw syoo-yow dzwaw shyah
-medical-conditions.my-blood-sugar-is-low,waw shweh-tahng dee luh
-pharmacy-symptoms.do-i-need-a-prescription,syoo-yow choo-fahng ma
-police-consulate.i-want-to-contact-my-embassy,waw yow lyen-shee dah-shir-gwahn
-body-parts.eye,yen-jeeng
-weather.wind,fung
-laundry.laundromat,dzuh-joo syee-ee-dyen
-room-problems.the-toilet-will-not-flush,mah-tong chohng boo shyah-chyoo
-introductions.where-are-you-from,nee shir nah-lee run
-atm-cash.no-money-came-out,chyen may choo-lye
-sim-data.do-you-have-an-esim,yoh ee-sim ma
-children.suitable-for-children,shir-huh are-tong ma
-etiquette.may-i-sit-here,kuh-yee dzwaw juh-lee ma
-border-customs.i-have-a-return-ticket,waw yoh hway-chung-pyow
-directions.where-am-i,waw dzye nah-lee
-utility-templates.i-need,waw syoo-yow {}
-building-words.key,yow-shih
-pronouns-verbs.my-mine,waw duh
-question-words.how-many,jee
-emergency-medical.please-take-me-to-a-hospital,cheeng dye waw chyoo ee-ywen
-lost-rescue.please-contact-rescue,cheeng lyen-shee jyoh-ywen-dway
-dietary-needs.i-am-vegetarian,waw chih soo
-food-ordering.does-it-contain,lee-myen yoh {} ma
-trail-words.steps,tye-jyeh
-trail-warnings.first-aid-station,jee-jyoh-jahn
-numbers-money.li,lyoh
-social-basics.excuse-me-sorry,boo how ee-suh
-communication.please-write-it-down,cheeng syeh shyah-lye
-time-scheduling.what-time-does-it-open,jee-dyen kye-mun
-time-words.evening,wahn-shahng
-months.august,bah yweh
-quick-directions.across-from-here,dzye dway-myen
-transit-rides.is-it-delayed,chuh wahn-dyen luh ma
-rail-station-words.train-number,chuh-tsuh
-common-signs.no-photography,jeen-jir pie-jow
-toilets.is-the-tap-water-safe-to-drink,dzuh-lye-shway nung huh ma
-accessibility.accessible-restroom,yoh woo-jahng-eye way-shung-jyen ma
-medical-conditions.i-need-my-inhaler,waw syoo-yow shyaow-chwahn pun-woo
-pharmacy-symptoms.i-have-a-headache,waw toh tung
-police-consulate.i-need-it-for-my-insurance,waw duh baow-shyen syoo-yow juh-guh
-body-parts.ear,are-dwaw
-weather.storm,tye-fung
-laundry.please-iron-this,cheeng yoon yee-shyah juh-guh
-room-problems.the-light-does-not-work,dung boo lyahng luh
-introductions.how-are-you,nee how ma
-atm-cash.where-can-i-change-money,nah-lee kuh-yee hwahn chyen
-sim-data.my-data-is-not-working,waw duh lyoh-lyahng yong boo lyaow
-children.minimum-age,jee sway ee-shahng kuh-yee
-etiquette.queue-for,{} dzye juh-lee pye-dway ma
-border-customs.i-am-visiting-family,waw lye tahn-cheen
-directions.which-way,dzoh nah-byen
-utility-templates.is-there-nearby,foo-jeen yoh {} ma
-pronouns-verbs.your-yours,nee duh
-question-words.why,way-shun-muh
-lost-rescue.my-companion-is-missing,waw duh tong-bahn boo jyen luh
-dietary-needs.i-am-vegan,waw chih chwin soo
-food-ordering.is-this-vegetarian,juh-guh shir soo duh ma
-trail-words.up-uphill,shahng-syeeng
-trail-warnings.service-suspended,dzahn-teeng yoon-yeeng
-trail-landmarks.water-point,een-shway-den
-numbers-money.q,chee
-social-basics.sorry,dway-boo-chee
-communication.please-wait-a-moment,cheeng dung yee-shyah
-time-scheduling.what-time-does-it-close,jee-dyen gwan-mun
-time-words.spring,choon
-months.september,jyoh yweh
-quick-directions.in-front,dzye chyen-myen
-transit-rides.i-am-in-a-hurry,waw gahn shir-jyen
-rail-station-words.carriage,chuh-shyahng
-common-signs.do-not-touch,cheeng woo choo-mwaw
-toilets.it-is-urgent,waw hun jee
-accessibility.station-assistance,chuh-jahn yoh woo-jahng-eye foo-woo ma
-medical-conditions.i-am-pregnant,waw hwye-yoon luh
-pharmacy-symptoms.paracetamol-acetaminophen,dway ee-shyen ahn-jee-fun
-police-consulate.i-need-an-interpreter,waw syoo-yow fahn-yee
-body-parts.leg,tway
-weather.ice,jyeh-beeng
-laundry.detergent,syee-ee-yeh
-room-problems.please-send-someone,cheeng pye run lye shyoh
-introductions.i-am-a-tourist,waw shir yoh-kuh
-atm-cash.the-machine-is-out-of-service,jee-chee hwye luh
-sim-data.does-it-need-registration,syoo-yow shir-meeng dung-jee ma
-children.do-children-pay,are-tong yow mye pyow ma
-etiquette.dressed-appropriately,waw juh-yahng chwahn kuh-yee ma
-border-customs.this-is-for-personal-use,juh shir dzuh-yong duh
-directions.can-i-walk-there,dzoh-loo nung dow ma
-utility-templates.how-much-is,{} dwaw-shaow chyen
-pronouns-verbs.be-called-call,jyaow
-question-words.this,juh-guh
-dietary-needs.i-do-not-eat,waw boo chih {}
-trail-words.down-downhill,shyah-syeeng
-numbers-money.b,bah
-social-basics.no-problem,may gwan-shee
-communication.can-you-help-me,nee nung bahng waw ma
-time-words.summer,shyah
-months.october,shir yweh
-quick-directions.behind,dzye hoh-myen
-transit-rides.which-platform,nah-guh jahn-tye
-rail-station-words.seat,dzwaw-way
-common-signs.temporarily-closed,dzahn-teeng kye-fahng
-toilets.may-i-have-the-toilet-key,kuh-yee gay waw tsuh-swaw yow-shih ma
-accessibility.help-me-carry,cheeng bahng waw nah yee-shyah
-medical-conditions.i-carry-an-adrenaline-injector,waw dye-juh shun-shahng-shyen-soo bee
-pharmacy-symptoms.how-much-should-i-take,ee tsuh chih dwaw-shaow
-police-consulate.please-leave-me-alone,cheeng byeh fahn waw
-body-parts.arm,show-bee
-weather.fog,woo
-laundry.dry-cleaning,gahn-syee
-room-problems.the-heating-does-not-work,nwahn-chee hwye luh
-introductions.this-is-my-husband-wife,juh shir waw jahng-foo / chee-dzuh
-atm-cash.please-give-me-smaller-notes,cheeng gay waw syaow myen-uh duh chyen
-sim-data.i-have-no-signal,may-yoh sheen-how
-children.crib,yoh eeng-are-chwahng ma
-etiquette.did-not-mean-to-offend,waw woo-ee maow-fahn
-border-customs.i-am-in-transit,waw gwaw-jeeng
-directions.how-far-is-it,yoh dwaw ywen
-utility-templates.is-this,juh shir {} ma
-pronouns-verbs.have,yoh
-question-words.that,nah-guh
-dietary-needs.i-am-allergic-to,waw dway {} gwaw-min
-trail-words.one-way,dahn-chung
-numbers-money.ji,jyoh
-social-basics.i-do-not-know,waw boo zhih-dow
-communication.please-show-me-the-text,cheeng gay waw kahn jong-wun
-time-words.fall,chyoh
-months.november,shir-ee yweh
-transit-rides.what-time-is-the-next-one,shyah ee bahn jee-dyen
-rail-station-words.last-train,mwaw-bahn-chuh
-toilets.there-is-no-toilet-paper,may-yoh way-shung-jir
-accessibility.board-first,waw kuh-yee shyen shahng chuh ma
-medical-conditions.i-take-medicine-for,waw dzye chih {} duh yow
-pharmacy-symptoms.i-am-vomiting,waw dzye too
-police-consulate.i-was-robbed,waw bay chyahng luh
-body-parts.foot,jyaow
-weather.heat,gaow-wun
-laundry.dryer,hong-gahn-jee
-introductions.this-is-my-daughter-son,juh shir waw nyoo-are / are-dzuh
-atm-cash.do-you-have-change,yoh leeng-chyen ma
-sim-data.please-write-the-wifi-password,cheeng syeh shyah wee-fye mee-mah
-children.warm-this-bottle,cheeng bahng waw wun yee-shyah nye-peeng
-etiquette.what-is-customary,juh-lee yoh shun-muh gway-jyoo
-border-customs.i-have-in-cash,waw dye luh {} shyen-jeen
-directions.which-exit,nah-guh choo-koh
-utility-templates.please,mah-fahn gay waw {}
-pronouns-verbs.do-not-have,may-yoh
-question-words.here,juh-lee
-trail-words.round-trip,wahng-fahn
-numbers-money.sh,shir
-time-words.winter,dong
-months.december,shir-are yweh
-transit-rides.i-went-past-my-stop,waw dzwaw gwaw-jahn luh
-rail-station-words.delayed,wahn-dyen
-toilets.toilet-paper,way-shung-jir
-accessibility.door-width,mun yoh dwaw kwahn
-medical-conditions.i-take-blood-thinners,waw dzye chih kahng-neeng-yow
-pharmacy-symptoms.rehydration-salts,koh-foo boo-yeh-yen
-police-consulate.i-want-a-lawyer,waw yow lyoo-shir
-body-parts.hand,show
-weather.cold,hahn-lung
-laundry.coin-operated,toh-bee
-introductions.i-am-traveling-alone,waw ee guh run lyoo-syeeng
-atm-cash.may-i-pay-in,kuh-yee yong {} foo-kwahn ma
-sim-data.sim-card,show-jee-kah
-children.car-seat,waw-men syoo-yow are-tong ahn-chwan dzwaw-ee
-etiquette.keep-the-change,boo yong jaow luh
-border-customs.this-is-a-gift,juh shir lee-woo
-directions.can-you-show-me-the-way,nung gay waw jir loo ma
-utility-templates.i-am-looking-for,waw dzye jaow {}
-pronouns-verbs.go,chyoo
-question-words.there,nah-lee
-numbers-money.y-b-i,yee-bye
-rail-station-words.final-stop,jong-dyen-jahn
-toilets.it-is-out-of-order,hwye luh
-accessibility.wheelchair-width,waw duh loon-ee kwahn {} lee-mee
-medical-conditions.medicine-allergy,yow-woo gwaw-min {}
-pharmacy-symptoms.how-many-times-a-day,ee tyen chih jee tsuh
-police-consulate.please-notify-my-consulate,cheeng tong-jir waw duh leeng-shir-gwahn
-body-parts.knee,shee-gye
-weather.humid,chaow-shir
-atm-cash.please-charge-in-local-currency,cheeng yong run-min-bee jyeh-swahn
-sim-data.where-can-i-buy-a-plug-adapter,nah-lee kuh-yee mye jwahn-hwahn chah-toh
-children.stroller,eeng-are-chuh
-border-customs.where-do-i-collect-my-baggage,dzye nah-lee chyoo sheeng-lee
-directions.north,bay
-utility-templates.do-you-accept,show {} ma
-pronouns-verbs.come,lye
-question-words.a-little,ee-dyar
-numbers-money.y-qi-n,yee-chyen
-toilets.out-of-order,goo-jahng
-accessibility.hard-of-hearing,waw yoh teeng-lee jahng-eye
-medical-conditions.this-card-lists-my-conditions,juh jahng kah shahng yoh waw duh beeng-shir
-pharmacy-symptoms.i-have-a-stomach-ache,waw doo-dzuh tung
-police-consulate.i-am-calling-the-police,waw yow baow-jeeng luh
-body-parts.ankle,jyaow-hwye
-weather.sunrise,rih-choo
-atm-cash.where-can-i-get-coins,nah-lee kuh-yee hwahn eeng-bee
-sim-data.mobile-data,lyoh-lyahng
-children.playground,yoh are-tong yoh-luh-chyoo ma
-border-customs.how-long-may-i-stay,waw kuh-yee teeng-lyoh dwaw-jyoh
-directions.south,nahn
-utility-templates.i-cannot-find,waw jaow boo dow {}
-pronouns-verbs.would-like,shyahng
-question-words.some,ee-shyeh
-numbers-money.y-w-n,yee-wahn
-toilets.mens-toilet,nahn tsuh-swaw
-accessibility.speak-louder,cheeng dah-shung ee-dyen
-medical-conditions.this-is-my-medicine,juh shir waw duh yow
-pharmacy-symptoms.i-have-a-cough,waw kuh-soh
-police-consulate.am-i-under-arrest,waw bay dye-boo luh ma
-body-parts.skin,pee-foo
-weather.flood,hong-shway
-atm-cash.is-there-a-minimum-for-cards,shwah-kah yoh dzway-dee jeen-uh ma
-sim-data.can-i-top-up-this-sim,juh jahng kah nung chohng-jir ma
-border-customs.i-have-a-connecting-flight,waw yow jwahn-jee
-directions.east,dong
-utility-templates.there-is-a-problem-with,{} yoh wun-tee
-pronouns-verbs.want,yow
-question-words.very,hun
-numbers-money.b-n,bahn
-toilets.womens-toilet,nyoo tsuh-swaw
-accessibility.visually-impaired,waw yoh shir-lee jahng-eye
-medical-conditions.please-give-me-sugar-or-juice,cheeng gay waw tahng hwaw gwaw-jir
-pharmacy-symptoms.antihistamine,kahng gwaw-min yow
-police-consulate.no-thank-you-i-am-not-interested,"boo yong, syeh-syeh"
-weather.avalanche-risk,shweh-bung way-shyen
-atm-cash.atm,dzuh-dong chyoo-kwahn-jee
-sim-data.top-up,chohng-jir
-border-customs.may-i-have-an-entry-stamp,kuh-yee gye roo-jeeng-jahng ma
-directions.west,shee
-pronouns-verbs.look-for,jaow
-question-words.too,tye
-numbers-money.yu-n,ywen
-toilets.drinking-water,een-yong-shway
-accessibility.take-your-arm,kuh-yee foo neen duh show-bee ma
-medical-conditions.inject-it-into-my-outer-thigh,cheeng joo-shuh dow dah-tway wye-tsuh
-pharmacy-symptoms.anti-diarrhea-medicine,jir-syeh-yow
-police-consulate.someone-attacked-me,yoh run dah luh waw
-atm-cash.banknote,chaow-pyow
-sim-data.is-there-coverage-in,{} yoh sheen-how ma
-border-customs.visa,chyen-jung
-pronouns-verbs.buy,mye
-question-words.also,yeh
-numbers-money.ku-i,kwye
-toilets.not-for-drinking,fay een-yong-shway
-accessibility.guide-dog,juh shir waw duh dow-mahng-chwan
-medical-conditions.my-blood-type-is,waw duh shweh-syeeng shir {}
-pharmacy-symptoms.is-this-safe-to-take-with,juh-guh nung huh {} ee-chee chih ma
-police-consulate.i-did-not-agree-to-this-price,waw may tong-ee juh-guh jyah-guh
-atm-cash.coin,eeng-bee
-sim-data.signal,sheen-how
-border-customs.i-have-no-food-or-plants,waw may dye shir-peen huh jir-woo
-pronouns-verbs.like,syee-hwahn
-question-words.all-both,doh
-toilets.accessible-toilet,woo-jahng-eye way-shung-jyen
-medical-conditions.do-not-give-me,cheeng boo yow gay waw yong {}
-pharmacy-symptoms.i-feel-dizzy,waw toh-yoon
-police-consulate.please-write-the-report-number,cheeng syeh shyah ahn-jyen byen-how
-atm-cash.cash-only,jir show shyen-jeen
-sim-data.esim,ee-sim
-border-customs.passport-control,byen-fahng jyen-chah
-pronouns-verbs.need,syoo-yow
-toilets.where-can-i-wash-my-hands,nah-lee kuh-yee syee-show
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,waw dway ah-suh-pee-leen huh boo-lwaw-fun gwaw-min
-pharmacy-symptoms.ibuprofen,boo-lwaw-fun
-police-consulate.it-happened-here,jyoh dzye juh-lee fah-shung duh
-atm-cash.fee,show-syoo-fay
-sim-data.prepaid,yew-foo-fay
-border-customs.customs,hi-gwan
-toilets.can-i-flush-the-paper,way-shung-jir nung chohng-dyow ma
-medical-conditions.my-injector-is-in-my-bag,shun-shahng-shyen-soo bee dzye waw baow lee
-pharmacy-symptoms.i-have-a-sore-throat,waw hoh-long tung
-police-consulate.may-i-have-a-copy-of-the-report,nung gay waw ee fun foo-een-jyen ma
-atm-cash.change,jaow-leeng
-sim-data.roaming,mahn-yoh
-border-customs.baggage-claim,sheeng-lee tee-chyoo
-toilets.is-there-a-toilet-on-board,chuh shahng yoh tsuh-swaw ma
-medical-conditions.i-am-allergic-to-sulfa-drugs,waw dway hwahng-ahn lay yow gwaw-min
-pharmacy-symptoms.can-i-get-this-medicine-here,juh-lee yoh juh jong yow ma
-police-consulate.i-will-not-sign-anything-i-cannot-read,waw kahn boo dong duh dong-shee boo chyen
-atm-cash.exchange-rate,hway-lyoo
-border-customs.customs-declaration,hi-gwan shun-baow
-toilets.the-toilet-will-not-flush,mah-tong chohng boo shyah-chyoo
-pharmacy-symptoms.bandage,bung-dye
-police-consulate.am-i-free-to-go,waw kuh-yee dzoh luh ma
-atm-cash.bank,een-hahng
-border-customs.arrival-card,roo-jeeng dung-jee-kah
-toilets.baby-change,moo-eeng-shir
-pharmacy-symptoms.the-pain-is-severe,tung duh hun lee-hye
-police-consulate.i-do-not-want-to-go-with-you,waw boo shyahng gun nee dzoh
-atm-cash.money-exchange,wye-bee dway-hwahn
-border-customs.transit,jong-jwahn
-toilets.squat-toilet,doon-byen-chee
-pharmacy-symptoms.antiseptic,shyaow-doo-yeh
-atm-cash.pin,mee-mah
-border-customs.boarding-pass,dung-jee-pye
-pharmacy-symptoms.i-feel-nauseous,waw shyahng too
-pharmacy-symptoms.i-have-a-rash,waw chee jun-dzuh luh
-pharmacy-symptoms.before-or-after-food,fahn chyen hye-shir fahn hoh
-pharmacy-symptoms.i-think-it-is-infected,how-shyahng gahn-rahn luh
-pharmacy-symptoms.motion-sickness-tablets,yoon-chuh-yow
-pharmacy-symptoms.i-have-a-cut,waw guh-shahng luh
-pharmacy-symptoms.antacid,kahng-swahn-yow
-pharmacy-symptoms.i-have-a-burn,waw tahng-shahng luh
-pharmacy-symptoms.it-started-days-ago,{} tyen chyen kye-shir duh
-pharmacy-symptoms.cough-medicine,jir-kuh-yow
-pharmacy-symptoms.is-this-safe-during-pregnancy,hwye-yoon nung chih ma
-trail-transport.how-long-is-the-wait,yow dung dwaw-jyoh
-tax-refund.is-tax-free-shopping-available,kuh-yee myen-shway goh-woo ma
-place-words.tourist-spot-sightseeing-area,jeeng-dyen
-common-signs.open-operating,eeng-yeh jong
-time-scheduling.how-long-does-it-take,yow dwaw-jyoh
-transit-rides.can-i-use-this-ticket,juh jahng pyow nung yong ma
-common-signs.closed,shyoh-shee jong
-pronouns-verbs.there-is-have,yoh
-common-signs.stopped-stop,teeng
-pronouns-verbs.there-is-not-do-not-have,may-yoh
-emergency-medical.i-feel-unwell,waw boo shoo-foo
-food-ordering.what-do-you-recommend,yoh shun-muh tway-jyen
-hotel-basics.is-wi-fi-free,wee-fye myen-fay ma
-hotel-requests.another-towel-please,cheeng dzye gay ee tyaow maow-jeen
-numbers-money.2-items,lyahng guh
-shopping.is-there-a-discount,nung dah-juh ma
-social-basics.good-night,wahn-ahn
-quick-responses.can-possible,kuh-yee
-phone-translation.please-type-it-and-show-me,cheeng dah choo-lye gay waw kahn
-phone-text-power.may-i-charge-my-phone-here,kuh-yee dzye juh-lee chohng-dyen ma
-pronouns-verbs.want-to-verb,shyahng
-emergency-medical.this-is-an-emergency,juh shir jeen-jee cheeng-kwahng
-lost-rescue.please-look-at-my-current-location,cheeng kahn waw shyen-dzye duh way-jir
-hotel-words.luggage-storage,sheeng-lee jee-tswun
-hotel-basics.how-much-per-night,ee wahn dwaw-shaow chyen
-hotel-requests.what-time-is-check-out,jee dyen tway-fahng
-payment-receipt.please-write-the-number,cheeng syeh shoo-dzuh
-shopping.where-do-i-pay,dzye nah-lee foo chyen
-communication.i-cannot-make-out-what-you-are-saying,waw teeng boo cheeng-choo
-quick-responses.cannot-not-possible,boo kuh-yee
-taxi.i-will-get-off-here,waw dzye juh-lee shyah chuh
-pickup-meeting.please-call-a-taxi,cheeng bahng waw jyaow choo-dzoo-chuh
-pronouns-verbs.want-thing,yow
-emergency-medical.i-am-having-a-severe-allergic-reaction,waw choo-shyen yen-jong gwaw-min fahn-eeng
-lost-rescue.my-child-is-missing,waw duh hye-dzuh boo jyen luh
-food-ordering.water-please,cheeng gay waw ee bay shway
-hiking-parks.is-this-trail-suitable-for-beginners,juh tyaow loo shir-huh sheen-show ma
-hotel-basics.is-breakfast-included,hahn dzow-tsahn ma
-hotel-requests.can-i-check-in-early,kuh-yee dzow-dyen roo-joo ma
-attractions-tickets.could-you-take-a-photo-for-us,nung bahng waw-men pie jahng jow ma
-payment-receipt.how-much-in-total,ee-gong dwaw-shaow chyen
-shopping.i-will-take-this,juh-guh waw yow luh
-communication.i-do-not-understand,waw boo dong
-quick-responses.okay-fine,syeeng
-phone-translation.please-look-at-the-screen,cheeng kahn peeng-moo
-pronouns-verbs.need-thing,syoo-yow
-question-words.how-much-what-price,dwaw-shaow chyen
-emergency-medical.i-cannot-breathe,waw chwahn boo shahng chee
-lost-rescue.i-do-not-know-where-i-am,waw boo zhih-dow waw dzye nah-lee
-hotel-basics.may-i-see-the-room,kuh-yee kahn-kahn fahng-jyen ma
-hotel-requests.another-night,kuh-yee dzye joo ee wahn ma
-payment-receipt.can-we-pay-separately,kuh-yee fun-kye foo ma
-shopping.what-is-this,juh shir shun-muh
-communication.i-cannot-read-it,waw kahn boo dong juh-guh
-quick-responses.no-good-not-allowed-will-not-work,boo syeeng
-taxi.please-get-me-there-in-time-for-the-shinkansen,"waw yow gahn sheen-gahn-shyen, cheeng kwye dyen"
-pronouns-verbs.looking-for-thing,jaow
-emergency-medical.i-am-bleeding-badly,waw lyoh-shweh boo jir
-lost-rescue.my-friend-is-hurt,waw pung-yoh show-shahng luh
-dietary-needs.does-it-contain-fish-stock,tahng-dee shir yoo dzwaw duh ma
-dietary-needs.does-it-contain-pork-stock,tahng-dee shir joo-roh hwaw joo-goo ow duh ma
-hotel-basics.for-nights,joo {} wahn
-hotel-requests.is-there-a-safe,yoh baow-shyen-shyahng ma
-payment-receipt.is-tax-included,hahn shway ma
-shopping.where-can-i-buy,nah-lee kuh-yee mye {}
-emergency-medical.i-have-chest-pain,waw shyong-koh tung
-lost-rescue.i-lost-my-wallet,waw duh chyen-baow dyoh luh
-hotel-basics.two-beds,yow lyahng jahng chwahng
-hotel-requests.another-blanket,cheeng dzye gay ee tyaow tahn-dzuh
-payment-receipt.my-card-was-declined,waw duh kah shwah boo lyaow
-shopping.do-you-have-this-in-stock,yoh hwaw ma
-time-words.night,yeh-lee
-emergency-medical.this-person-is-unconscious,juh-guh run hoon-mee luh
-lost-rescue.i-lost-my-bag,waw duh baow dyoh luh
-food-ordering.can-a-vegetarian-eat-this,chih soo duh nung chih ma
-hotel-basics.is-there-air-conditioning,yoh kohng-tyaow ma
-hotel-requests.wake-up-call,cheeng {} jyaow waw chee-chwahng
-payment-receipt.the-bill-is-wrong,jahng-dahn how-shyahng boo dway
-shopping.two-of-these,juh-guh yow lyahng guh
-social-basics.okay-fine-i-am-okay,waw may shir
-emergency-medical.where-is-the-nearest-hospital,dzway-jeen duh ee-ywen dzye nah-lee
-lost-rescue.where-is-lost-and-found,shir-woo jaow-leeng-choo dzye nah-lee
-payment-receipt.i-already-paid,waw ee-jeeng foo luh
-shopping.what-is-it-made-of,juh shir shun-muh dzwaw duh
-emergency-medical.what-is-the-emergency-number,jee-jyoh dyen-hwah shir dwaw-shaow
-lost-rescue.i-cannot-find-my-hotel,waw jaow boo dow waw duh jyoh-dyen
-emergency-medical.is-there-a-doctor-who-speaks-english,yoh hway shwaw eeng-yoo duh ee-shung ma
-lost-rescue.i-left-it-on-the-train,waw wahng dzye hwaw-chuh shahng luh
-dietary-needs.i-have-a-severe-allergy-to,waw dway {} yen-jong gwaw-min
-communication.please-write-it-in-roman-letters,cheeng syeh peen-een
-emergency-medical.i-think-a-bone-is-broken,waw kuh-nung goo-juh luh
-lost-rescue.i-cannot-get-down,waw shyah boo chyoo luh
-emergency-medical.please-call-my-emergency-contact,cheeng dah gay waw duh jeen-jee lyen-shee-run
-emergency-medical.i-have-travel-insurance,waw yoh lyoo-syeeng baow-shyen
-numbers-money.yen,rih-ywen
-numbers-money.yen-symbol,rih-ywen
-transit-rides.do-i-need-to-validate,shahng chuh chyen syoo-yow yen-pyow ma
-rail-station-words.ticket-validator,jah-jee
-dietary-needs.no-pork,boo yow joo-roh
-dietary-needs.is-this-halal,juh-guh shir cheeng-jun duh ma
+concept_id,respell,text
+building-help.what-room-number-is-this,juh shir jee how fahng,这是几号房？
+in-a-building.is-this-the-correct-entrance,juh shir jung-chweh duh roo-koh ma,这是正确的入口吗？
+building-words.elevator,dyen-tee,电梯
+pronouns-verbs.i-me,waw,我
+question-words.what,shun-muh,什么
+emergency-medical.help,jyoh-meeng,救命！
+lost-rescue.i-lost-my-passport,waw duh hoo-jow dyoh luh,我的护照丢了
+dietary-needs.no-meat,boo yow roh,不要肉
+food-ordering.table-for-two,lyahng way,两位
+trail-words.trail,boo-dow,步道
+hiking-parks.is-this-the-way-to,juh shir chyoo {} duh loo ma,这是去{}的路吗？
+trail-conditions.how-long-is-the-full-route,chwan-chung dwaw chahng,全程多长？
+trail-transport.how-long-is-the-queue,pye-dway yow dwaw-jyoh,排队要多久？
+trail-warnings.open,kye-fahng,开放
+trail-landmarks.trail-marker,loo-byaow,路标
+hotel-words.passport,hoo-jow,护照
+hotel-basics.are-any-rooms-available,yoh kohng-fahng ma,有空房吗？
+hotel-requests.can-i-check-out-later,kuh-yee wahn-dyen tway-fahng ma,可以晚点退房吗？
+room-problems.there-is-a-problem-with-the-room,fahng-jyen yoh wun-tee,房间有问题
+introductions.my-name-is,waw jyaow {},我叫{}
+numbers-money.l-ng,leeng,零
+attractions-tickets.where-can-i-buy-tickets,nah-lee kuh-yee mye pyow,哪里可以买票？
+payment-receipt.pay-by-card,kuh-yee shwah-kah ma,可以刷卡吗？
+shopping.i-am-just-looking,waw jir-shir kahn-kahn,我只是看看
+color-size-returns.do-you-have-another-color,yoh byeh duh yen-suh ma,有别的颜色吗？
+tax-refund.can-i-get-a-tax-refund,kuh-yee tway-shway ma,可以退税吗？
+social-basics.hello,nee how,你好
+communication.i-do-not-speak-this-language,waw boo hway shwaw jong-wun,我不会说{target}
+quick-responses.please-go-ahead,cheeng,请
+phone-translation.i-am-using-phone-translation,waw dzye yong show-jee fahn-yee,我在用手机翻译
+phone-text-power.please-type-it-for-me,cheeng dah-dzuh gay waw kahn,请打字给我看
+time-scheduling.what-time-is-it,shyen-dzye jee-dyen,现在几点？
+time-words.today,jeen-tyen,今天
+days-of-week.monday,sheeng-chee ee,星期一
+months.january,ee yweh,一月
+directions.where-is,{} dzye nah-lee,{}在哪里？
+quick-directions.go-straight,ee-jir dzoh,一直走
+taxi.please-take-me-here,cheeng dye waw chyoo juh-lee,请带我去这里
+transit-rides.two-tickets,lyahng jahng pyow,两张票
+place-words.scenic-area,jeeng-chyoo,景区
+pickup-meeting.where-is-the-pickup-point,shahng-chuh-dyen dzye nah-lee,上车点在哪里？
+rail-station-words.high-speed-rail,gaow-tyeh,高铁
+common-signs.open-on,kye,开
+utility-templates.i-want-to-go-to,waw shyahng chyoo {},我想去{}
+toilets.where-toilet,tsuh-swaw dzye nah-lee,厕所在哪里？
+accessibility.step-free,yoh woo-jahng-eye tong-dow ma,有无障碍通道吗？
+medical-conditions.i-am-diabetic,waw yoh tahng-nyow-beeng,我有糖尿病
+pharmacy-symptoms.which-pharmacy-is-open-now,shyen-dzye nah jyah yow-dyen kye-mun,现在哪家药店开门？
+police-consulate.where-is-the-police-station,pye-choo-swaw dzye nah-lee,派出所在哪里？
+body-parts.head,toh,头
+weather.forecast,tyen-chee yew-baow dzun-muh shwaw,天气预报怎么说？
+laundry.please-wash-these-clothes,cheeng syee juh-shyeh ee-foo,请洗这些衣服
+atm-cash.where-is-an-atm,chyoo-kwahn-jee dzye nah-lee,取款机在哪里？
+sim-data.i-would-like-a-tourist-sim,waw yow ee jahng lyoo-yoh show-jee-kah,我要一张旅游手机卡
+children.cannot-find-my-child,waw jaow boo dow waw duh hye-dzuh,我找不到我的孩子
+etiquette.is-this-allowed,juh-guh kuh-yee ma,这个可以吗？
+border-customs.i-am-a-tourist,waw lye lyoo-yoh,我来旅游
+building-help.i-am-lost,waw mee-loo luh,我迷路了
+building-words.stairs,loh-tee,楼梯
+pronouns-verbs.we-us,waw-men,我们
+question-words.where,nah-lee,哪里
+emergency-medical.please-call-an-ambulance,cheeng bahng waw jyaow jyoh-hoo-chuh,请帮我叫救护车
+lost-rescue.i-lost-my-phone,waw duh show-jee dyoh luh,我的手机丢了
+dietary-needs.no-eggs,boo yow jee-dahn,不要鸡蛋
+food-ordering.is-a-table-available,yoh way-dzuh ma,有位子吗？
+trail-words.trailhead,dung-shan-koh,登山口
+hiking-parks.where-is-the-trailhead,dung-shan-koh dzye nah-lee,登山口在哪里？
+trail-conditions.can-we-return-the-same-way,nung ywen-loo fahn-hway ma,能原路返回吗？
+trail-transport.what-time-is-the-last-shuttle,jyeh-baw-chuh dzway-wahn jee-dyen,接驳车最晚几点？
+trail-warnings.closed,fung-bee,封闭
+trail-landmarks.fork-junction,chah-loo,岔路
+hotel-words.room-key-card,fahng-kah,房卡
+hotel-basics.there-are-two-of-us,waw-men lyahng guh run,我们两个人
+hotel-requests.what-time-does-breakfast-start,dzow-tsahn jee-dyen kye-shir,早餐几点开始？
+room-problems.the-air-conditioning-is-broken,kohng-tyaow hwye luh,空调坏了
+introductions.nice-to-meet-you,hun gaow-sheeng run-shih nee,很高兴认识您
+numbers-money.y,ee,一
+attractions-tickets.do-i-need-a-reservation,syoo-yow yew-yweh ma,需要预约吗？
+payment-receipt.pay-cash,kuh-yee foo shyen-jeen ma,可以付现金吗？
+shopping.how-much-is-this,juh-guh dwaw-shaow chyen,这个多少钱？
+color-size-returns.do-you-have-another-size,yoh byeh duh chir-mah ma,有别的尺码吗？
+social-basics.hello-polite,neen how,您好
+communication.i-speak-only-a-little-of-this,waw jir hway shwaw ee-dyar jong-wun,我只会说一点儿{target}
+quick-responses.yes-right,shir,是
+phone-translation.please-speak-toward-the-phone,cheeng dway-juh show-jee shwaw,请对着手机说
+phone-translation.please-write-the-place-name,cheeng bah dee-meeng syeh chung jong-wun,请把地名写成{target}
+time-scheduling.how-many-minutes,jee fun-jong,几分钟？
+time-words.tomorrow,ming-tyen,明天
+days-of-week.tuesday,sheeng-chee are,星期二
+months.february,are yweh,二月
+directions.how-do-i-get-to,dow {} dzun-muh dzoh,到{}怎么走？
+quick-directions.turn-left,dzwaw jwahn,左转
+taxi.please-send-me-the-address,cheeng bah dee-jir fah gay waw,请把地址发给我
+transit-rides.where-is-the-subway-station,dee-tyeh-jahn dzye nah-lee,地铁站在哪里？
+place-words.visitor-center,yoh-kuh jong-sheen,游客中心
+pickup-meeting.please-send-me-the-pickup-point,cheeng bah shahng-chuh-dyen fah gay waw,请把上车点发给我
+rail-station-words.maglev,tsuh-foo,磁浮
+common-signs.closed-off,gwan,关
+utility-templates.please-give-me,cheeng gay waw {},请给我{}
+toilets.where-public-toilet,gong-gong tsuh-swaw dzye nah-lee,公共厕所在哪里？
+accessibility.wheelchair-access,loon-ee nung jeen ma,轮椅能进吗？
+medical-conditions.i-need-insulin,waw syoo-yow ee-dow-soo,我需要胰岛素
+pharmacy-symptoms.i-need-medicine-for,waw syoo-yow jir {} duh yow,我需要治{}的药
+police-consulate.i-want-to-report-a-theft,waw yow baow dow-chyeh-ahn,我要报盗窃案
+body-parts.stomach,doo-dzuh,肚子
+weather.will-it-rain,jeen-tyen hway shyah yoo ma,今天会下雨吗？
+laundry.where-is-a-laundromat,dzuh-joo syee-ee-dyen dzye nah-lee,自助洗衣店在哪里？
+atm-cash.does-this-atm-take-foreign-cards,wye-gwaw duh kah nung yong ma,外国的卡能用吗？
+sim-data.may-i-use-your-wifi,kuh-yee jyeh-yong woo-shyen-wahng ma,可以借用无线网吗？
+children.make-an-announcement,cheeng gwahng-baw jaow run,请广播找人
+etiquette.is-tipping-expected,syoo-yow gay syaow-fay ma,需要给小费吗？
+border-customs.here-is-my-passport,juh shir waw duh hoo-jow,这是我的护照
+building-help.where-is-reception,chyen-tye dzye nah-lee,前台在哪里？
+in-a-building.do-you-have-wi-fi,yoh woo-shyen-wahng ma,有无线网吗？
+building-words.entrance,roo-koh,入口
+pronouns-verbs.you,nee,你
+question-words.who,shay,谁
+emergency-medical.i-need-a-doctor,waw syoo-yow ee-shung,我需要医生
+lost-rescue.please-call-the-police,cheeng baow-jeeng,请报警
+dietary-needs.not-spicy,boo yow lah,不要辣
+food-ordering.menu-please,cheeng gay waw ts-eye-dahn,请给我菜单
+trail-words.summit,shahn-deeng,山顶
+hiking-parks.how-long-to-the-summit,dow shahn-deeng yow dwaw-jyoh,到山顶要多久？
+trail-conditions.can-we-return-before-dark,tyen-hay chyen nung hway-lye ma,天黑前能回来吗？
+trail-transport.when-does-the-cableway-stop,swaw-dow jee-dyen teeng-yoon,索道几点停运？
+trail-warnings.maintenance,way-shyoh,维修
+trail-landmarks.boardwalk-cliff-path,jahn-dow,栈道
+hotel-words.check-in,roo-joo,入住
+hotel-basics.i-have-a-reservation,waw yoh yew-deeng,我有预订
+hotel-requests.can-i-store-my-luggage,kuh-yee jee-tswun sheeng-lee ma,可以寄存行李吗？
+room-problems.there-is-no-hot-water,may-yoh ruh-shway,没有热水
+introductions.what-is-your-name,nee jyaow shun-muh meeng-dzuh,您怎么称呼？
+numbers-money.r,are,二
+attractions-tickets.what-is-the-latest-entry-time,dzway-wahn jee-dyen roo-ywen,最晚几点入园？
+payment-receipt.pay-by-qr-code,kuh-yee saow-mah ma,可以扫码吗？
+shopping.that-is-too-expensive,tye gway luh,太贵了
+color-size-returns.may-i-try-it-on,waw kuh-yee shir yee-shyah ma,我可以试一下吗？
+social-basics.good-morning,dzow-shahng how,早上好
+communication.do-you-speak-english,nee hway shwaw eeng-yoo ma,您会说{source}吗？
+quick-responses.no-not,boo shir,不是
+phone-translation.one-sentence-at-a-time-please,cheeng yee jyoo yee jyoo duh shwaw,请一句一句地说
+phone-text-power.please-use-simple-words,cheeng yong jyen-dahn duh hwah shwaw,请用简单的话说
+time-scheduling.what-time-should-we-meet,jee-dyen jyen,几点见？
+time-words.yesterday,dzwaw-tyen,昨天
+days-of-week.wednesday,sheeng-chee sahn,星期三
+months.march,sahn yweh,三月
+directions.is-it-far,ywen boo ywen,远不远？
+quick-directions.turn-right,yoh jwahn,右转
+taxi.we-need-the-east-gate-not-the-south-gate,"waw-men chyoo dong-mun, boo shir nahn-mun",我们去东门，不是南门
+transit-rides.does-this-bus-train-go-to,juh tahng chuh chyoo {} ma,这趟车去{}吗？
+place-words.railway-station,hwa-chuh-jan,火车站
+pickup-meeting.please-pick-us-up-here,cheeng dzye juh-lee jyeh waw-men,请在这里接我们
+rail-station-words.transfer,hwahn-chung,换乘
+common-signs.occupied,yoh-run,有人
+utility-templates.may-i,waw kuh-yee {} ma,我可以{}吗？
+toilets.may-i-use-the-toilet,kuh-yee yong yee-shyah syee-show-jyen ma,可以用一下洗手间吗？
+accessibility.elevator,yoh dyen-tee ma,有电梯吗？
+medical-conditions.i-have-asthma,waw yoh shyaow-chwahn,我有哮喘
+pharmacy-symptoms.i-have-a-fever,waw fah-shaow luh,我发烧了
+police-consulate.my-bag-was-stolen,waw duh baow bay toh luh,我的包被偷了
+body-parts.back,bay,背
+weather.is-it-safe-today,jeen-tyen ahn-chwan ma,今天安全吗？
+laundry.when-will-it-be-ready,shun-muh shir-hoh nung how,什么时候能好？
+atm-cash.the-atm-kept-my-card,waw duh kah bay toon luh,我的卡被吞了
+sim-data.how-much-data-is-included,yoh dwaw-shaow lyoh-lyahng,有多少流量？
+children.child-age,waw duh hye-dzuh {} sway,我的孩子{}岁
+etiquette.is-service-included,hahn foo-woo-fay ma,含服务费吗？
+border-customs.i-am-staying-for-days,waw teeng-lyoh {} tyen,我停留{}天
+building-help.where-is-a-power-outlet,chah-dzwaw dzye nah-lee,插座在哪里？
+in-a-building.what-is-the-wi-fi-password,wee-fye mee-mah shir shun-muh,Wi-Fi 密码是什么？
+building-words.exit,choo-koh,出口
+pronouns-verbs.you-polite,neen,您
+question-words.which-one,nah-guh,哪个
+emergency-medical.i-am-sick,waw shung-beeng luh,我生病了
+lost-rescue.we-are-here,waw-men dzye juh-lee,我们在这里
+dietary-needs.less-spicy,shaow lah,少辣
+food-ordering.i-want-this,waw yow juh-guh,我要这个
+trail-words.viewpoint,gwan-jing-tye,观景台
+hiking-parks.how-long-to-the-viewpoint,dow gwan-jing-tye yow dwaw-jyoh,到观景台要多久？
+trail-conditions.is-the-trail-open,juh tyaow boo-dow kye-fahng ma,这条步道开放吗？
+trail-transport.where-can-we-buy-water,nah-lee kuh-yee mye shway,哪里可以买水？
+trail-warnings.steep-slope,doh-pwaw,陡坡
+trail-landmarks.start,chee-dyen,起点
+hotel-words.check-out,tway-fahng,退房
+hotel-basics.can-i-charge-my-phone,kuh-yee gay show-jee chohng-dyen ma,可以给手机充电吗？
+hotel-requests.no-housekeeping,boo yong dah-sow,不用打扫
+room-problems.can-i-change-rooms,kuh-yee hwahn fahng ma,可以换房吗？
+introductions.we-are-traveling-together,waw-men ee-chee lyoo-syeeng,我们一起旅行
+numbers-money.li-ng,lyahng,两
+attractions-tickets.are-there-lockers,yoh jee-tswun-gway ma,有寄存柜吗？
+payment-receipt.a-receipt-please,cheeng gay waw show-jyoo,请给我收据
+shopping.can-it-be-a-little-cheaper,kuh-yee pyen-yee ee-dyen ma,可以便宜一点吗？
+color-size-returns.can-i-return-it,kuh-yee tway ma,可以退吗？
+social-basics.good-evening,wahn-shahng how,晚上好
+communication.please-speak-more-slowly,cheeng shwaw mahn ee-dyen,请说慢一点
+quick-responses.okay-can,kuh-yee,可以
+phone-text-power.my-phone-battery-is-low,waw duh show-jee kwye may dyen luh,我的手机快没电了
+time-scheduling.can-we-change-the-time,kuh-yee guy shir-jyen ma,可以改时间吗？
+time-words.this-week,juh-guh sheeng-chee,这个星期
+days-of-week.thursday,sheeng-chee suh,星期四
+months.april,suh yweh,四月
+directions.how-long-on-foot,dzoh-loo yow dwaw-jyoh,走路要多久？
+quick-directions.this-way,juh-byen,这边
+taxi.please-stop-here,cheeng dzye juh-lee teeng,请在这里停
+transit-rides.what-is-the-next-stop,shyah yee jahn shir shun-muh,下一站是什么？
+place-words.airport,jee-chahng,机场
+pickup-meeting.meet-us-at,waw-men dzye {} jee-huh,我们在{}集合
+rail-station-words.ticket-gate,jyen-pyow-koh,检票口
+common-signs.vacant,woo-run,无人
+utility-templates.please-do-not-add,cheeng boo yow fahng {},请不要放{}
+toilets.is-it-only-for-customers,jir gay goo-kuh yong ma,只给顾客用吗？
+accessibility.ramp,yoh pwaw-dow ma,有坡道吗？
+medical-conditions.i-have-a-heart-condition,waw yoh sheen-dzahng-beeng,我有心脏病
+pharmacy-symptoms.i-have-diarrhea,waw lah doo-dzuh luh,我拉肚子了
+police-consulate.my-passport-was-stolen,waw duh hoo-jow bay toh luh,我的护照被偷了
+body-parts.throat,hoh-long,喉咙
+weather.how-cold-at-night,wahn-shahng yoh dwaw lung,晚上有多冷？
+laundry.how-much-per-kilo,ee gong-jeen dwaw-shaow chyen,一公斤多少钱？
+atm-cash.is-there-a-fee,yoh show-syoo-fay ma,有手续费吗？
+sim-data.do-you-need-my-passport,syoo-yow hoo-jow ma,需要护照吗？
+children.high-chair,yoh are-tong tsahn-ee ma,有儿童餐椅吗？
+etiquette.may-i-enter,kuh-yee jeen-chyoo ma,可以进去吗？
+border-customs.nothing-to-declare,may-yoh yow shun-baow duh dong-shee,没有要申报的东西
+in-a-building.which-floor,dzye jee loh,在几楼？
+building-words.men,nahn,男
+pronouns-verbs.he-him,tah,他
+question-words.when,shun-muh shir-hoh,什么时候
+emergency-medical.i-am-injured,waw show-shahng luh,我受伤了
+lost-rescue.please-look-at-my-location-pin,cheeng kahn waw duh deeng-way,请看我的定位
+dietary-needs.no-peanuts,boo yow hwah-shung,不要花生
+food-ordering.do-you-have-drinking-water,yoh een-yong-shway ma,有饮用水吗？
+trail-words.cableway,swaw-dow,索道
+hiking-parks.which-route-is-easier,nah tyaow loo-shyen bee-jyaow rong-yee,哪条路线比较容易？
+trail-conditions.is-the-route-steep,juh tyaow loo doh ma,这条路陡吗？
+trail-transport.where-can-we-refill-water,nah-lee kuh-yee jyeh shway,哪里可以接水？
+trail-warnings.caution-slippery,syaow-sheen loo-hwah,小心路滑
+trail-landmarks.end,jong-dyen,终点
+hotel-basics.i-would-like-a-non-smoking-room,waw yow woo-yen fahng,我要无烟房
+room-problems.the-room-is-too-noisy,fahng-jyen tye chaow luh,房间太吵了
+introductions.this-is-my-friend,juh shir waw duh pung-yoh,这是我的朋友
+numbers-money.s-n,sahn,三
+attractions-tickets.may-i-take-photos,kuh-yee pie-jow ma,可以拍照吗？
+color-size-returns.can-i-exchange-it,kuh-yee hwahn ma,可以换吗？
+social-basics.goodbye,dzye-jyen,再见
+communication.i-do-not-understand-spoken,waw teeng boo dong,我听不懂
+quick-responses.cannot-not-allowed,boo kuh-yee,不可以
+phone-text-power.do-you-have-a-power-bank,yoh chohng-dyen-baow ma,有充电宝吗？
+time-scheduling.when-is-convenient,shun-muh shir-hoh fahng-byen,什么时候方便？
+time-words.next-week,shyah-guh sheeng-chee,下个星期
+days-of-week.friday,sheeng-chee woo,星期五
+months.may,woo yweh,五月
+quick-directions.that-way,nah-byen,那边
+taxi.can-you-wait-for-me-here,kuh-yee dzye juh-lee dung waw ma,可以在这里等我吗？
+transit-rides.please-tell-me-where-to-get-off,cheeng gaow-soo waw dzye nah jahn shyah chuh,请告诉我在哪站下车
+place-words.service-desk,foo-woo-tye,服务台
+pickup-meeting.please-call-me-a-ride,cheeng bahng waw jyaow chuh,请帮我叫车
+rail-station-words.platform,jahn-tye,站台
+common-signs.caution,syaow-sheen,小心
+utility-templates.do-you-have,yoh may-yoh {},有没有{}？
+toilets.toilet-wc,tsuh-swaw,厕所
+accessibility.how-many-steps,yoh jee jee tye-jyeh,有几级台阶？
+medical-conditions.i-am-allergic-to-penicillin,waw dway cheeng-may-soo gwaw-min,我对青霉素过敏
+pharmacy-symptoms.where-is-an-all-night-pharmacy,nah-lee yoh are-shir-suh syaow-shir yow-dyen,哪里有24小时药店？
+police-consulate.someone-is-following-me,yoh run gun-juh waw,有人跟着我
+body-parts.tooth,yah,牙
+weather.rain,yoo,雨
+laundry.can-it-be-ready-today,jeen-tyen nung how ma,今天能好吗？
+atm-cash.the-card-was-declined,kah shwah boo lyaow,卡刷不了
+sim-data.how-long-is-it-valid,yoh-shyaow-chee dwaw-jyoh,有效期多久？
+children.baby-changing-room,moo-eeng-shir dzye nah-lee,母婴室在哪里？
+etiquette.remove-shoes,yow twaw syeh ma,要脱鞋吗？
+border-customs.i-am-staying-at,waw joo dzye {},我住在{}
+directions.please-show-me-on-the-map,cheeng dzye dee-too shahng jir gay waw kahn,请在地图上指给我看
+building-words.women,nyoo,女
+pronouns-verbs.she-her,tah,她
+question-words.how,dzun-muh,怎么
+emergency-medical.it-hurts-here,juh-lee tung,这里疼
+lost-rescue.i-cannot-walk,waw dzoh boo dong luh,我走不动了
+dietary-needs.no-nuts,boo yow jyen-gwaw,不要坚果
+food-ordering.to-go-please,cheeng dah-baow,请打包
+trail-words.shuttle-bus,jyeh-baw-chuh,接驳车
+trail-conditions.is-the-path-slippery,loo hwah ma,路滑吗？
+trail-transport.is-there-cell-signal-here,juh-lee yoh show-jee sheen-how ma,这里有手机信号吗？
+trail-warnings.danger,way-shyen,危险
+trail-landmarks.elevation,hi-bah,海拔
+hotel-basics.i-would-like-a-quiet-room,waw yow ahn-jeeng duh fahng-jyen,我要安静的房间
+numbers-money.s,suh,四
+attractions-tickets.please-take-a-photo-of-us,cheeng bahng waw-men pie jahng jow-pyen,请帮我们拍张照片
+color-size-returns.do-you-have-a-bag,yoh dye-dzuh ma,有袋子吗？
+social-basics.thank-you,syeh-syeh,谢谢
+communication.i-cannot-read-understand,waw kahn boo dong,我看不懂
+quick-responses.works-okay,syeeng,行
+phone-text-power.the-translation-may-be-inaccurate,fahn-yee kuh-nung boo joon-chweh,翻译可能不准确
+time-scheduling.what-is-today-s-date,jeen-tyen jee how,今天几号？
+time-words.morning,dzow-shahng,早上
+days-of-week.saturday,sheeng-chee lyoh,星期六
+months.june,lyoh yweh,六月
+quick-directions.on-the-left,dzye dzwaw-byen,在左边
+taxi.we-need-to-catch-the-high-speed-train,waw-men yow gahn gaow-tyeh,我们要赶高铁
+transit-rides.is-this-direct,juh shir jir-dah chuh ma,这是直达车吗？
+place-words.bus-stop,gong-jyow-jan,公交站
+rail-station-words.ticket-office,show-pyow choo,售票处
+common-signs.no-entry,jeen-jir roo-nay,禁止入内
+utility-templates.please-write-the-number,cheeng syeh shoo-dzuh,请写数字
+toilets.is-it-free,myen-fay ma,免费吗？
+accessibility.cannot-climb-stairs,waw shahng boo lyaow loh-tee,我上不了楼梯
+medical-conditions.i-have-epilepsy,waw yoh dyen-shyen,我有癫痫
+pharmacy-symptoms.painkiller,jir-tong-yow,止痛药
+police-consulate.i-need-a-written-police-report,waw syoo-yow baow-jeeng jung-meeng,我需要报警证明
+body-parts.chest,shyong,胸
+weather.snow,shweh,雪
+laundry.please-do-not-use-bleach,cheeng boo yow yong pyaow-bye-jee,请不要用漂白剂
+room-problems.the-key-does-not-work,fahng-kah dah boo kye mun,房卡打不开门
+introductions.i-am-from,waw lye-dzuh {},我来自{}
+atm-cash.what-is-the-exchange-rate,hway-lyoo shir dwaw-shaow,汇率是多少？
+sim-data.please-activate-it,cheeng bahng waw kye-tong,请帮我开通
+children.childrens-menu,yoh are-tong ts-eye-dahn ma,有儿童菜单吗？
+etiquette.photo-of-you,kuh-yee gay neen pie-jow ma,可以给您拍照吗？
+border-customs.i-am-here-for-business,waw lye choo-chye,我来出差
+directions.where-is-the-nearest,dzway-jeen duh {} dzye nah-lee,最近的{}在哪里？
+building-words.door,mun,门
+pronouns-verbs.they-them,tah-men,他们
+question-words.how-much-many,dwaw-shaow,多少
+emergency-medical.where-is-a-pharmacy,yow-dyen dzye nah-lee,药店在哪里？
+lost-rescue.i-sprained-my-ankle,waw nyoh-shahng jyaow luh,我扭伤脚了
+dietary-needs.no-seafood,boo yow hi-shyen,不要海鲜
+food-ordering.check-please,cheeng jyeh-jahng,请结账
+trail-words.park-shuttle,hwan-bow-chu,环保车
+trail-transport.do-you-have-a-map,yoh dee-too ma,有地图吗？
+trail-warnings.beware-falling-rocks,joo-yee lwaw-shir,注意落石
+trail-landmarks.sunset,rih-lwaw,日落
+hotel-basics.is-there-a-washing-machine,yoh syee-ee-jee ma,有洗衣机吗？
+numbers-money.w,woo,五
+social-basics.you-are-welcome,boo kuh-chee,不客气
+communication.please-say-it-again,cheeng dzye shwaw yee byen,请再说一遍
+quick-responses.does-not-work-no,boo syeeng,不行
+phone-text-power.please-confirm,cheeng chweh-run yee-shyah,请确认一下
+time-scheduling.what-day-is-it-today,jeen-tyen sheeng-chee jee,今天星期几？
+time-words.afternoon,shyah-woo,下午
+days-of-week.sunday,sheeng-chee rr,星期日
+months.july,chee yweh,七月
+quick-directions.on-the-right,dzye yoh-byen,在右边
+taxi.please-use-the-meter,cheeng dah-kye jee-jyah-chee,请打开计价器
+transit-rides.do-i-need-to-transfer,syoo-yow hwahn-chung ma,需要换乘吗？
+place-words.luggage-storage,sheeng-lee jee-tswun,行李寄存
+rail-station-words.waiting-room,hoh-chuh-shir,候车室
+common-signs.no-smoking,jeen-jir shee-yen,禁止吸烟
+toilets.do-i-need-a-coin,syoo-yow eeng-bee ma,需要硬币吗？
+accessibility.need-to-sit-down,waw syoo-yow dzwaw shyah,我需要坐下
+medical-conditions.my-blood-sugar-is-low,waw shweh-tahng dee luh,我血糖低了
+pharmacy-symptoms.do-i-need-a-prescription,syoo-yow choo-fahng ma,需要处方吗？
+police-consulate.i-want-to-contact-my-embassy,waw yow lyen-shee dah-shir-gwahn,我要联系大使馆
+body-parts.eye,yen-jeeng,眼睛
+weather.wind,fung,风
+laundry.laundromat,dzuh-joo syee-ee-dyen,自助洗衣店
+room-problems.the-toilet-will-not-flush,mah-tong chohng boo shyah-chyoo,马桶冲不下去
+introductions.where-are-you-from,nee shir nah-lee run,你是哪里人？
+atm-cash.no-money-came-out,chyen may choo-lye,钱没出来
+sim-data.do-you-have-an-esim,yoh ee-sim ma,有 eSIM 吗？
+children.suitable-for-children,shir-huh are-tong ma,适合儿童吗？
+etiquette.may-i-sit-here,kuh-yee dzwaw juh-lee ma,可以坐这里吗？
+border-customs.i-have-a-return-ticket,waw yoh hway-chung-pyow,我有回程票
+directions.where-am-i,waw dzye nah-lee,我在哪里？
+utility-templates.i-need,waw syoo-yow {},我需要{}
+building-words.key,yow-shih,钥匙
+pronouns-verbs.my-mine,waw duh,我的
+question-words.how-many,jee,几
+emergency-medical.please-take-me-to-a-hospital,cheeng dye waw chyoo ee-ywen,请带我去医院
+lost-rescue.please-contact-rescue,cheeng lyen-shee jyoh-ywen-dway,请联系救援队
+dietary-needs.i-am-vegetarian,waw chih soo,我吃素
+food-ordering.does-it-contain,lee-myen yoh {} ma,里面有{}吗？
+trail-words.steps,tye-jyeh,台阶
+trail-warnings.first-aid-station,jee-jyoh-jahn,急救站
+numbers-money.li,lyoh,六
+social-basics.excuse-me-sorry,boo how ee-suh,不好意思
+communication.please-write-it-down,cheeng syeh shyah-lye,请写下来
+time-scheduling.what-time-does-it-open,jee-dyen kye-mun,几点开门？
+time-words.evening,wahn-shahng,晚上
+months.august,bah yweh,八月
+quick-directions.across-from-here,dzye dway-myen,在对面
+transit-rides.is-it-delayed,chuh wahn-dyen luh ma,车晚点了吗？
+rail-station-words.train-number,chuh-tsuh,车次
+common-signs.no-photography,jeen-jir pie-jow,禁止拍照
+toilets.is-the-tap-water-safe-to-drink,dzuh-lye-shway nung huh ma,自来水能喝吗？
+accessibility.accessible-restroom,yoh woo-jahng-eye way-shung-jyen ma,有无障碍卫生间吗？
+medical-conditions.i-need-my-inhaler,waw syoo-yow shyaow-chwahn pun-woo,我需要哮喘喷雾
+pharmacy-symptoms.i-have-a-headache,waw toh tung,我头疼
+police-consulate.i-need-it-for-my-insurance,waw duh baow-shyen syoo-yow juh-guh,我的保险需要这个
+body-parts.ear,are-dwaw,耳朵
+weather.storm,tye-fung,台风
+laundry.please-iron-this,cheeng yoon yee-shyah juh-guh,请熨一下这个
+room-problems.the-light-does-not-work,dung boo lyahng luh,灯不亮了
+introductions.how-are-you,nee how ma,你好吗？
+atm-cash.where-can-i-change-money,nah-lee kuh-yee hwahn chyen,哪里可以换钱？
+sim-data.my-data-is-not-working,waw duh lyoh-lyahng yong boo lyaow,我的流量用不了
+children.minimum-age,jee sway ee-shahng kuh-yee,几岁以上可以？
+etiquette.queue-for,{} dzye juh-lee pye-dway ma,{}在这里排队吗？
+border-customs.i-am-visiting-family,waw lye tahn-cheen,我来探亲
+directions.which-way,dzoh nah-byen,走哪边？
+utility-templates.is-there-nearby,foo-jeen yoh {} ma,附近有{}吗？
+pronouns-verbs.your-yours,nee duh,你的
+question-words.why,way-shun-muh,为什么
+lost-rescue.my-companion-is-missing,waw duh tong-bahn boo jyen luh,我的同伴不见了
+dietary-needs.i-am-vegan,waw chih chwin soo,我吃纯素
+food-ordering.is-this-vegetarian,juh-guh shir soo duh ma,这个是素的吗？
+trail-words.up-uphill,shahng-syeeng,上行
+trail-warnings.service-suspended,dzahn-teeng yoon-yeeng,暂停运营
+trail-landmarks.water-point,een-shway-den,饮水点
+numbers-money.q,chee,七
+social-basics.sorry,dway-boo-chee,对不起
+communication.please-wait-a-moment,cheeng dung yee-shyah,请等一下
+time-scheduling.what-time-does-it-close,jee-dyen gwan-mun,几点关门？
+time-words.spring,choon,春
+months.september,jyoh yweh,九月
+quick-directions.in-front,dzye chyen-myen,在前面
+transit-rides.i-am-in-a-hurry,waw gahn shir-jyen,我赶时间
+rail-station-words.carriage,chuh-shyahng,车厢
+common-signs.do-not-touch,cheeng woo choo-mwaw,请勿触摸
+toilets.it-is-urgent,waw hun jee,我很急
+accessibility.station-assistance,chuh-jahn yoh woo-jahng-eye foo-woo ma,车站有无障碍服务吗？
+medical-conditions.i-am-pregnant,waw hwye-yoon luh,我怀孕了
+pharmacy-symptoms.paracetamol-acetaminophen,dway ee-shyen ahn-jee-fun,对乙酰氨基酚
+police-consulate.i-need-an-interpreter,waw syoo-yow fahn-yee,我需要翻译
+body-parts.leg,tway,腿
+weather.ice,jyeh-beeng,结冰
+laundry.detergent,syee-ee-yeh,洗衣液
+room-problems.please-send-someone,cheeng pye run lye shyoh,请派人来修
+introductions.i-am-a-tourist,waw shir yoh-kuh,我是游客
+atm-cash.the-machine-is-out-of-service,jee-chee hwye luh,机器坏了
+sim-data.does-it-need-registration,syoo-yow shir-meeng dung-jee ma,需要实名登记吗？
+children.do-children-pay,are-tong yow mye pyow ma,儿童要买票吗？
+etiquette.dressed-appropriately,waw juh-yahng chwahn kuh-yee ma,我这样穿可以吗？
+border-customs.this-is-for-personal-use,juh shir dzuh-yong duh,这是自用的
+directions.can-i-walk-there,dzoh-loo nung dow ma,走路能到吗？
+utility-templates.how-much-is,{} dwaw-shaow chyen,{}多少钱？
+pronouns-verbs.be-called-call,jyaow,叫
+question-words.this,juh-guh,这个
+dietary-needs.i-do-not-eat,waw boo chih {},我不吃{}
+trail-words.down-downhill,shyah-syeeng,下行
+numbers-money.b,bah,八
+social-basics.no-problem,may gwan-shee,没关系
+communication.can-you-help-me,nee nung bahng waw ma,您能帮我吗？
+time-words.summer,shyah,夏
+months.october,shir yweh,十月
+quick-directions.behind,dzye hoh-myen,在后面
+transit-rides.which-platform,nah-guh jahn-tye,哪个站台？
+rail-station-words.seat,dzwaw-way,座位
+common-signs.temporarily-closed,dzahn-teeng kye-fahng,暂停开放
+toilets.may-i-have-the-toilet-key,kuh-yee gay waw tsuh-swaw yow-shih ma,可以给我厕所钥匙吗？
+accessibility.help-me-carry,cheeng bahng waw nah yee-shyah,请帮我拿一下
+medical-conditions.i-carry-an-adrenaline-injector,waw dye-juh shun-shahng-shyen-soo bee,我带着肾上腺素笔
+pharmacy-symptoms.how-much-should-i-take,ee tsuh chih dwaw-shaow,一次吃多少？
+police-consulate.please-leave-me-alone,cheeng byeh fahn waw,请别烦我
+body-parts.arm,show-bee,手臂
+weather.fog,woo,雾
+laundry.dry-cleaning,gahn-syee,干洗
+room-problems.the-heating-does-not-work,nwahn-chee hwye luh,暖气坏了
+introductions.this-is-my-husband-wife,juh shir waw jahng-foo / chee-dzuh,这是我丈夫/妻子
+atm-cash.please-give-me-smaller-notes,cheeng gay waw syaow myen-uh duh chyen,请给我小面额的钱
+sim-data.i-have-no-signal,may-yoh sheen-how,没有信号
+children.crib,yoh eeng-are-chwahng ma,有婴儿床吗？
+etiquette.did-not-mean-to-offend,waw woo-ee maow-fahn,我无意冒犯
+border-customs.i-am-in-transit,waw gwaw-jeeng,我过境
+directions.how-far-is-it,yoh dwaw ywen,有多远？
+utility-templates.is-this,juh shir {} ma,这是{}吗？
+pronouns-verbs.have,yoh,有
+question-words.that,nah-guh,那个
+dietary-needs.i-am-allergic-to,waw dway {} gwaw-min,我对{}过敏
+trail-words.one-way,dahn-chung,单程
+numbers-money.ji,jyoh,九
+social-basics.i-do-not-know,waw boo zhih-dow,我不知道
+communication.please-show-me-the-text,cheeng gay waw kahn jong-wun,请给我看{target}
+time-words.fall,chyoh,秋
+months.november,shir-ee yweh,十一月
+transit-rides.what-time-is-the-next-one,shyah ee bahn jee-dyen,下一班几点？
+rail-station-words.last-train,mwaw-bahn-chuh,末班车
+toilets.there-is-no-toilet-paper,may-yoh way-shung-jir,没有卫生纸
+accessibility.board-first,waw kuh-yee shyen shahng chuh ma,我可以先上车吗？
+medical-conditions.i-take-medicine-for,waw dzye chih {} duh yow,我在吃{}的药
+pharmacy-symptoms.i-am-vomiting,waw dzye too,我在吐
+police-consulate.i-was-robbed,waw bay chyahng luh,我被抢了
+body-parts.foot,jyaow,脚
+weather.heat,gaow-wun,高温
+laundry.dryer,hong-gahn-jee,烘干机
+introductions.this-is-my-daughter-son,juh shir waw nyoo-are / are-dzuh,这是我女儿/儿子
+atm-cash.do-you-have-change,yoh leeng-chyen ma,有零钱吗？
+sim-data.please-write-the-wifi-password,cheeng syeh shyah wee-fye mee-mah,请写下 Wi-Fi 密码
+children.warm-this-bottle,cheeng bahng waw wun yee-shyah nye-peeng,请帮我温一下奶瓶
+etiquette.what-is-customary,juh-lee yoh shun-muh gway-jyoo,这里有什么规矩？
+border-customs.i-have-in-cash,waw dye luh {} shyen-jeen,我带了{}现金
+directions.which-exit,nah-guh choo-koh,哪个出口？
+utility-templates.please,mah-fahn gay waw {},麻烦给我{}
+pronouns-verbs.do-not-have,may-yoh,没有
+question-words.here,juh-lee,这里
+trail-words.round-trip,wahng-fahn,往返
+numbers-money.sh,shir,十
+time-words.winter,dong,冬
+months.december,shir-are yweh,十二月
+transit-rides.i-went-past-my-stop,waw dzwaw gwaw-jahn luh,我坐过站了
+rail-station-words.delayed,wahn-dyen,晚点
+toilets.toilet-paper,way-shung-jir,卫生纸
+accessibility.door-width,mun yoh dwaw kwahn,门有多宽？
+medical-conditions.i-take-blood-thinners,waw dzye chih kahng-neeng-yow,我在吃抗凝药
+pharmacy-symptoms.rehydration-salts,koh-foo boo-yeh-yen,口服补液盐
+police-consulate.i-want-a-lawyer,waw yow lyoo-shir,我要律师
+body-parts.hand,show,手
+weather.cold,hahn-lung,寒冷
+laundry.coin-operated,toh-bee,投币
+introductions.i-am-traveling-alone,waw ee guh run lyoo-syeeng,我一个人旅行
+atm-cash.may-i-pay-in,kuh-yee yong {} foo-kwahn ma,可以用{}付款吗？
+sim-data.sim-card,show-jee-kah,手机卡
+children.car-seat,waw-men syoo-yow are-tong ahn-chwan dzwaw-ee,我们需要儿童安全座椅
+etiquette.keep-the-change,boo yong jaow luh,不用找了
+border-customs.this-is-a-gift,juh shir lee-woo,这是礼物
+directions.can-you-show-me-the-way,nung gay waw jir loo ma,能给我指路吗？
+utility-templates.i-am-looking-for,waw dzye jaow {},我在找{}
+pronouns-verbs.go,chyoo,去
+question-words.there,nah-lee,那里
+numbers-money.y-b-i,yee-bye,一百
+rail-station-words.final-stop,jong-dyen-jahn,终点站
+toilets.it-is-out-of-order,hwye luh,坏了
+accessibility.wheelchair-width,waw duh loon-ee kwahn {} lee-mee,我的轮椅宽{}厘米
+medical-conditions.medicine-allergy,yow-woo gwaw-min {},药物过敏：{}
+pharmacy-symptoms.how-many-times-a-day,ee tyen chih jee tsuh,一天吃几次？
+police-consulate.please-notify-my-consulate,cheeng tong-jir waw duh leeng-shir-gwahn,请通知我的领事馆
+body-parts.knee,shee-gye,膝盖
+weather.humid,chaow-shir,潮湿
+atm-cash.please-charge-in-local-currency,cheeng yong run-min-bee jyeh-swahn,请用人民币结算
+sim-data.where-can-i-buy-a-plug-adapter,nah-lee kuh-yee mye jwahn-hwahn chah-toh,哪里可以买转换插头？
+children.stroller,eeng-are-chuh,婴儿车
+border-customs.where-do-i-collect-my-baggage,dzye nah-lee chyoo sheeng-lee,在哪里取行李？
+directions.north,bay,北
+utility-templates.do-you-accept,show {} ma,收{}吗？
+pronouns-verbs.come,lye,来
+question-words.a-little,ee-dyar,一点儿
+numbers-money.y-qi-n,yee-chyen,一千
+toilets.out-of-order,goo-jahng,故障
+accessibility.hard-of-hearing,waw yoh teeng-lee jahng-eye,我有听力障碍
+medical-conditions.this-card-lists-my-conditions,juh jahng kah shahng yoh waw duh beeng-shir,这张卡上有我的病史
+pharmacy-symptoms.i-have-a-stomach-ache,waw doo-dzuh tung,我肚子疼
+police-consulate.i-am-calling-the-police,waw yow baow-jeeng luh,我要报警了
+body-parts.ankle,jyaow-hwye,脚踝
+weather.sunrise,rih-choo,日出
+atm-cash.where-can-i-get-coins,nah-lee kuh-yee hwahn eeng-bee,哪里可以换硬币？
+sim-data.mobile-data,lyoh-lyahng,流量
+children.playground,yoh are-tong yoh-luh-chyoo ma,有儿童游乐区吗？
+border-customs.how-long-may-i-stay,waw kuh-yee teeng-lyoh dwaw-jyoh,我可以停留多久？
+directions.south,nahn,南
+utility-templates.i-cannot-find,waw jaow boo dow {},我找不到{}
+pronouns-verbs.would-like,shyahng,想
+question-words.some,ee-shyeh,一些
+numbers-money.y-w-n,yee-wahn,一万
+toilets.mens-toilet,nahn tsuh-swaw,男厕所
+accessibility.speak-louder,cheeng dah-shung ee-dyen,请大声一点
+medical-conditions.this-is-my-medicine,juh shir waw duh yow,这是我的药
+pharmacy-symptoms.i-have-a-cough,waw kuh-soh,我咳嗽
+police-consulate.am-i-under-arrest,waw bay dye-boo luh ma,我被逮捕了吗？
+body-parts.skin,pee-foo,皮肤
+weather.flood,hong-shway,洪水
+atm-cash.is-there-a-minimum-for-cards,shwah-kah yoh dzway-dee jeen-uh ma,刷卡有最低金额吗？
+sim-data.can-i-top-up-this-sim,juh jahng kah nung chohng-jir ma,这张卡能充值吗？
+border-customs.i-have-a-connecting-flight,waw yow jwahn-jee,我要转机
+directions.east,dong,东
+utility-templates.there-is-a-problem-with,{} yoh wun-tee,{}有问题
+pronouns-verbs.want,yow,要
+question-words.very,hun,很
+numbers-money.b-n,bahn,半
+toilets.womens-toilet,nyoo tsuh-swaw,女厕所
+accessibility.visually-impaired,waw yoh shir-lee jahng-eye,我有视力障碍
+medical-conditions.please-give-me-sugar-or-juice,cheeng gay waw tahng hwaw gwaw-jir,请给我糖或果汁
+pharmacy-symptoms.antihistamine,kahng gwaw-min yow,抗过敏药
+police-consulate.no-thank-you-i-am-not-interested,"boo yong, syeh-syeh",不用，谢谢
+weather.avalanche-risk,shweh-bung way-shyen,雪崩危险
+atm-cash.atm,dzuh-dong chyoo-kwahn-jee,自动取款机
+sim-data.top-up,chohng-jir,充值
+border-customs.may-i-have-an-entry-stamp,kuh-yee gye roo-jeeng-jahng ma,可以盖入境章吗？
+directions.west,shee,西
+pronouns-verbs.look-for,jaow,找
+question-words.too,tye,太
+numbers-money.yu-n,ywen,元
+toilets.drinking-water,een-yong-shway,饮用水
+accessibility.take-your-arm,kuh-yee foo neen duh show-bee ma,可以扶您的手臂吗？
+medical-conditions.inject-it-into-my-outer-thigh,cheeng joo-shuh dow dah-tway wye-tsuh,请注射到大腿外侧
+pharmacy-symptoms.anti-diarrhea-medicine,jir-syeh-yow,止泻药
+police-consulate.someone-attacked-me,yoh run dah luh waw,有人打了我
+atm-cash.banknote,chaow-pyow,钞票
+sim-data.is-there-coverage-in,{} yoh sheen-how ma,{}有信号吗？
+border-customs.visa,chyen-jung,签证
+pronouns-verbs.buy,mye,买
+question-words.also,yeh,也
+numbers-money.ku-i,kwye,块
+toilets.not-for-drinking,fay een-yong-shway,非饮用水
+accessibility.guide-dog,juh shir waw duh dow-mahng-chwan,这是我的导盲犬
+medical-conditions.my-blood-type-is,waw duh shweh-syeeng shir {},我的血型是{}
+pharmacy-symptoms.is-this-safe-to-take-with,juh-guh nung huh {} ee-chee chih ma,这个能和{}一起吃吗？
+police-consulate.i-did-not-agree-to-this-price,waw may tong-ee juh-guh jyah-guh,我没同意这个价格
+atm-cash.coin,eeng-bee,硬币
+sim-data.signal,sheen-how,信号
+border-customs.i-have-no-food-or-plants,waw may dye shir-peen huh jir-woo,我没带食品和植物
+pronouns-verbs.like,syee-hwahn,喜欢
+question-words.all-both,doh,都
+toilets.accessible-toilet,woo-jahng-eye way-shung-jyen,无障碍卫生间
+medical-conditions.do-not-give-me,cheeng boo yow gay waw yong {},请不要给我用{}
+pharmacy-symptoms.i-feel-dizzy,waw toh-yoon,我头晕
+police-consulate.please-write-the-report-number,cheeng syeh shyah ahn-jyen byen-how,请写下案件编号
+atm-cash.cash-only,jir show shyen-jeen,只收现金
+sim-data.esim,ee-sim,eSIM
+border-customs.passport-control,byen-fahng jyen-chah,边防检查
+pronouns-verbs.need,syoo-yow,需要
+toilets.where-can-i-wash-my-hands,nah-lee kuh-yee syee-show,哪里可以洗手？
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,waw dway ah-suh-pee-leen huh boo-lwaw-fun gwaw-min,我对阿司匹林和布洛芬过敏
+pharmacy-symptoms.ibuprofen,boo-lwaw-fun,布洛芬
+police-consulate.it-happened-here,jyoh dzye juh-lee fah-shung duh,就在这里发生的
+atm-cash.fee,show-syoo-fay,手续费
+sim-data.prepaid,yew-foo-fay,预付费
+border-customs.customs,hi-gwan,海关
+toilets.can-i-flush-the-paper,way-shung-jir nung chohng-dyow ma,卫生纸能冲掉吗？
+medical-conditions.my-injector-is-in-my-bag,shun-shahng-shyen-soo bee dzye waw baow lee,肾上腺素笔在我包里
+pharmacy-symptoms.i-have-a-sore-throat,waw hoh-long tung,我喉咙疼
+police-consulate.may-i-have-a-copy-of-the-report,nung gay waw ee fun foo-een-jyen ma,能给我一份复印件吗？
+atm-cash.change,jaow-leeng,找零
+sim-data.roaming,mahn-yoh,漫游
+border-customs.baggage-claim,sheeng-lee tee-chyoo,行李提取
+toilets.is-there-a-toilet-on-board,chuh shahng yoh tsuh-swaw ma,车上有厕所吗？
+medical-conditions.i-am-allergic-to-sulfa-drugs,waw dway hwahng-ahn lay yow gwaw-min,我对磺胺类药过敏
+pharmacy-symptoms.can-i-get-this-medicine-here,juh-lee yoh juh jong yow ma,这里有这种药吗？
+police-consulate.i-will-not-sign-anything-i-cannot-read,waw kahn boo dong duh dong-shee boo chyen,我看不懂的东西不签
+atm-cash.exchange-rate,hway-lyoo,汇率
+border-customs.customs-declaration,hi-gwan shun-baow,海关申报
+toilets.the-toilet-will-not-flush,mah-tong chohng boo shyah-chyoo,马桶冲不下去
+pharmacy-symptoms.bandage,bung-dye,绷带
+police-consulate.am-i-free-to-go,waw kuh-yee dzoh luh ma,我可以走了吗？
+atm-cash.bank,een-hahng,银行
+border-customs.arrival-card,roo-jeeng dung-jee-kah,入境登记卡
+toilets.baby-change,moo-eeng-shir,母婴室
+pharmacy-symptoms.the-pain-is-severe,tung duh hun lee-hye,疼得很厉害
+police-consulate.i-do-not-want-to-go-with-you,waw boo shyahng gun nee dzoh,我不想跟你走
+atm-cash.money-exchange,wye-bee dway-hwahn,外币兑换
+border-customs.transit,jong-jwahn,中转
+toilets.squat-toilet,doon-byen-chee,蹲便器
+pharmacy-symptoms.antiseptic,shyaow-doo-yeh,消毒液
+atm-cash.pin,mee-mah,密码
+border-customs.boarding-pass,dung-jee-pye,登机牌
+pharmacy-symptoms.i-feel-nauseous,waw shyahng too,我想吐
+pharmacy-symptoms.i-have-a-rash,waw chee jun-dzuh luh,我起疹子了
+pharmacy-symptoms.before-or-after-food,fahn chyen hye-shir fahn hoh,饭前还是饭后？
+pharmacy-symptoms.i-think-it-is-infected,how-shyahng gahn-rahn luh,好像感染了
+pharmacy-symptoms.motion-sickness-tablets,yoon-chuh-yow,晕车药
+pharmacy-symptoms.i-have-a-cut,waw guh-shahng luh,我割伤了
+pharmacy-symptoms.antacid,kahng-swahn-yow,抗酸药
+pharmacy-symptoms.i-have-a-burn,waw tahng-shahng luh,我烫伤了
+pharmacy-symptoms.it-started-days-ago,{} tyen chyen kye-shir duh,{}天前开始的
+pharmacy-symptoms.cough-medicine,jir-kuh-yow,止咳药
+pharmacy-symptoms.is-this-safe-during-pregnancy,hwye-yoon nung chih ma,怀孕能吃吗？
+trail-transport.how-long-is-the-wait,yow dung dwaw-jyoh,要等多久？
+tax-refund.is-tax-free-shopping-available,kuh-yee myen-shway goh-woo ma,可以免税购物吗？
+place-words.tourist-spot-sightseeing-area,jeeng-dyen,景点
+common-signs.open-operating,eeng-yeh jong,营业中
+time-scheduling.how-long-does-it-take,yow dwaw-jyoh,要多久？
+transit-rides.can-i-use-this-ticket,juh jahng pyow nung yong ma,这张票能用吗？
+common-signs.closed,shyoh-shee jong,休息中
+pronouns-verbs.there-is-have,yoh,有
+common-signs.stopped-stop,teeng,停
+pronouns-verbs.there-is-not-do-not-have,may-yoh,没有
+emergency-medical.i-feel-unwell,waw boo shoo-foo,我不舒服
+food-ordering.what-do-you-recommend,yoh shun-muh tway-jyen,有什么推荐？
+hotel-basics.is-wi-fi-free,wee-fye myen-fay ma,Wi-Fi 免费吗？
+hotel-requests.another-towel-please,cheeng dzye gay ee tyaow maow-jeen,请再给一条毛巾
+numbers-money.2-items,lyahng guh,两个
+shopping.is-there-a-discount,nung dah-juh ma,能打折吗？
+social-basics.good-night,wahn-ahn,晚安
+quick-responses.can-possible,kuh-yee,可以
+phone-translation.please-type-it-and-show-me,cheeng dah choo-lye gay waw kahn,请打出来给我看
+phone-text-power.may-i-charge-my-phone-here,kuh-yee dzye juh-lee chohng-dyen ma,可以在这里充电吗？
+pronouns-verbs.want-to-verb,shyahng,想
+emergency-medical.this-is-an-emergency,juh shir jeen-jee cheeng-kwahng,这是紧急情况
+lost-rescue.please-look-at-my-current-location,cheeng kahn waw shyen-dzye duh way-jir,请看我现在的位置
+hotel-words.luggage-storage,sheeng-lee jee-tswun,行李寄存
+hotel-basics.how-much-per-night,ee wahn dwaw-shaow chyen,一晚多少钱？
+hotel-requests.what-time-is-check-out,jee dyen tway-fahng,几点退房？
+payment-receipt.please-write-the-number,cheeng syeh shoo-dzuh,请写数字
+shopping.where-do-i-pay,dzye nah-lee foo chyen,在哪里付钱？
+communication.i-cannot-make-out-what-you-are-saying,waw teeng boo cheeng-choo,我听不清楚
+quick-responses.cannot-not-possible,boo kuh-yee,不可以
+taxi.i-will-get-off-here,waw dzye juh-lee shyah chuh,我在这里下车
+pickup-meeting.please-call-a-taxi,cheeng bahng waw jyaow choo-dzoo-chuh,请帮我叫出租车
+pronouns-verbs.want-thing,yow,要
+emergency-medical.i-am-having-a-severe-allergic-reaction,waw choo-shyen yen-jong gwaw-min fahn-eeng,我出现严重过敏反应
+lost-rescue.my-child-is-missing,waw duh hye-dzuh boo jyen luh,我的孩子不见了
+food-ordering.water-please,cheeng gay waw ee bay shway,请给我一杯水
+hiking-parks.is-this-trail-suitable-for-beginners,juh tyaow loo shir-huh sheen-show ma,这条路适合新手吗？
+hotel-basics.is-breakfast-included,hahn dzow-tsahn ma,含早餐吗？
+hotel-requests.can-i-check-in-early,kuh-yee dzow-dyen roo-joo ma,可以早点入住吗？
+attractions-tickets.could-you-take-a-photo-for-us,nung bahng waw-men pie jahng jow ma,能帮我们拍张照吗？
+payment-receipt.how-much-in-total,ee-gong dwaw-shaow chyen,一共多少钱？
+shopping.i-will-take-this,juh-guh waw yow luh,这个我要了
+communication.i-do-not-understand,waw boo dong,我不懂
+quick-responses.okay-fine,syeeng,行
+phone-translation.please-look-at-the-screen,cheeng kahn peeng-moo,请看屏幕
+pronouns-verbs.need-thing,syoo-yow,需要
+question-words.how-much-what-price,dwaw-shaow chyen,多少钱
+emergency-medical.i-cannot-breathe,waw chwahn boo shahng chee,我喘不上气
+lost-rescue.i-do-not-know-where-i-am,waw boo zhih-dow waw dzye nah-lee,我不知道我在哪里
+hotel-basics.may-i-see-the-room,kuh-yee kahn-kahn fahng-jyen ma,可以看看房间吗？
+hotel-requests.another-night,kuh-yee dzye joo ee wahn ma,可以再住一晚吗？
+payment-receipt.can-we-pay-separately,kuh-yee fun-kye foo ma,可以分开付吗？
+shopping.what-is-this,juh shir shun-muh,这是什么？
+communication.i-cannot-read-it,waw kahn boo dong juh-guh,我看不懂这个
+quick-responses.no-good-not-allowed-will-not-work,boo syeeng,不行
+taxi.please-get-me-there-in-time-for-the-shinkansen,"waw yow gahn sheen-gahn-shyen, cheeng kwye dyen",我要赶新干线，请快点
+pronouns-verbs.looking-for-thing,jaow,找
+emergency-medical.i-am-bleeding-badly,waw lyoh-shweh boo jir,我流血不止
+lost-rescue.my-friend-is-hurt,waw pung-yoh show-shahng luh,我朋友受伤了
+dietary-needs.does-it-contain-fish-stock,tahng-dee shir yoo dzwaw duh ma,汤底是鱼做的吗？
+dietary-needs.does-it-contain-pork-stock,tahng-dee shir joo-roh hwaw joo-goo ow duh ma,汤底是猪肉或猪骨熬的吗？
+hotel-basics.for-nights,joo {} wahn,住{}晚
+hotel-requests.is-there-a-safe,yoh baow-shyen-shyahng ma,有保险箱吗？
+payment-receipt.is-tax-included,hahn shway ma,含税吗？
+shopping.where-can-i-buy,nah-lee kuh-yee mye {},哪里可以买{}？
+emergency-medical.i-have-chest-pain,waw shyong-koh tung,我胸口疼
+lost-rescue.i-lost-my-wallet,waw duh chyen-baow dyoh luh,我的钱包丢了
+hotel-basics.two-beds,yow lyahng jahng chwahng,要两张床
+hotel-requests.another-blanket,cheeng dzye gay ee tyaow tahn-dzuh,请再给一条毯子
+payment-receipt.my-card-was-declined,waw duh kah shwah boo lyaow,我的卡刷不了
+shopping.do-you-have-this-in-stock,yoh hwaw ma,有货吗？
+time-words.night,yeh-lee,夜里
+emergency-medical.this-person-is-unconscious,juh-guh run hoon-mee luh,这个人昏迷了
+lost-rescue.i-lost-my-bag,waw duh baow dyoh luh,我的包丢了
+food-ordering.can-a-vegetarian-eat-this,chih soo duh nung chih ma,吃素的能吃吗？
+hotel-basics.is-there-air-conditioning,yoh kohng-tyaow ma,有空调吗？
+hotel-requests.wake-up-call,cheeng {} jyaow waw chee-chwahng,请{}叫我起床
+payment-receipt.the-bill-is-wrong,jahng-dahn how-shyahng boo dway,账单好像不对
+shopping.two-of-these,juh-guh yow lyahng guh,这个要两个
+social-basics.okay-fine-i-am-okay,waw may shir,我没事
+emergency-medical.where-is-the-nearest-hospital,dzway-jeen duh ee-ywen dzye nah-lee,最近的医院在哪里？
+lost-rescue.where-is-lost-and-found,shir-woo jaow-leeng-choo dzye nah-lee,失物招领处在哪里？
+payment-receipt.i-already-paid,waw ee-jeeng foo luh,我已经付了
+shopping.what-is-it-made-of,juh shir shun-muh dzwaw duh,这是什么做的？
+emergency-medical.what-is-the-emergency-number,jee-jyoh dyen-hwah shir dwaw-shaow,急救电话是多少？
+lost-rescue.i-cannot-find-my-hotel,waw jaow boo dow waw duh jyoh-dyen,我找不到我的酒店
+emergency-medical.is-there-a-doctor-who-speaks-english,yoh hway shwaw eeng-yoo duh ee-shung ma,有会说{source}的医生吗？
+lost-rescue.i-left-it-on-the-train,waw wahng dzye hwaw-chuh shahng luh,我忘在火车上了
+dietary-needs.i-have-a-severe-allergy-to,waw dway {} yen-jong gwaw-min,我对{}严重过敏
+communication.please-write-it-in-roman-letters,cheeng syeh peen-een,请写拼音
+emergency-medical.i-think-a-bone-is-broken,waw kuh-nung goo-juh luh,我可能骨折了
+lost-rescue.i-cannot-get-down,waw shyah boo chyoo luh,我下不去了
+emergency-medical.please-call-my-emergency-contact,cheeng dah gay waw duh jeen-jee lyen-shee-run,请打给我的紧急联系人
+emergency-medical.i-have-travel-insurance,waw yoh lyoo-syeeng baow-shyen,我有旅行保险
+numbers-money.yen,rih-ywen,日元
+numbers-money.yen-symbol,rih-ywen,￥
+transit-rides.do-i-need-to-validate,shahng chuh chyen syoo-yow yen-pyow ma,上车前需要验票吗？
+rail-station-words.ticket-validator,jah-jee,闸机
+dietary-needs.no-pork,boo yow joo-roh,不要猪肉
+dietary-needs.is-this-halal,juh-guh shir cheeng-jun duh ma,这个是清真的吗？

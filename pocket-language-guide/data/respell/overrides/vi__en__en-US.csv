@@ -1,749 +1,746 @@
-concept_id,respell
-building-help.what-room-number-is-this,digh lah fawng soh migh ah?
-accessibility.step-free,kaw loy vow khohng buhk tahng khohng ah?
-in-a-building.is-this-the-correct-entrance,digh kaw doong loy vow khohng ah?
-toilets.where-toilet,nyah vay sing uh doh ah?
-building-words.elevator,tahng migh
-pronouns-verbs.i-me,toy
-question-words.what,zee
-emergency-medical.help,kew vuh-ee!
-medical-conditions.i-am-diabetic,toy bee tee-oh duh-ung
-pharmacy-symptoms.which-pharmacy-is-open-now,nyah too-uk now dahng muh kuh-uh ah?
-body-parts.head,doh
-lost-rescue.i-lost-my-passport,toy muht hoh chee-oh
-police-consulate.where-is-the-police-station,dohn kohng ahn uh doh ah?
-dietary-needs.no-meat,khohng teet
-food-ordering.table-for-two,bahn chaw high nguh-oy
-trail-words.trail,duh-ung mawn
-weather.forecast,zuh bow tuh-ee tee-ut tay now ah?
-hiking-parks.is-this-the-way-to,duh-ung nigh dee {} figh khohng ah?
-trail-conditions.how-long-is-the-full-route,kah twee-un zigh bow nyee-oh ah?
-trail-transport.how-long-is-the-queue,sayp hahng bow loh ah?
-trail-warnings.open,muh kuh-uh
-trail-landmarks.trail-marker,mohk chee duh-ung
-hotel-words.passport,hoh chee-oh
-hotel-basics.are-any-rooms-available,kawn fawng chohng khohng ah?
-hotel-requests.can-i-check-out-later,chah fawng moo-un duh-uk khohng ah?
-room-problems.there-is-a-problem-with-the-room,fawng kaw vuhn day ah
-laundry.please-wash-these-clothes,seen zat zoop doh nigh
-introductions.my-name-is,toy tayn lah {}
-numbers-money.l-ng,khohng
-atm-cash.where-is-an-atm,migh ah-tay-em uh doh ah?
-attractions-tickets.where-can-i-buy-tickets,moo-uh veh uh doh ah?
-payment-receipt.pay-by-card,kwet teh duh-uk khohng ah?
-shopping.i-am-just-looking,toy sem toy ah
-color-size-returns.do-you-have-another-color,kaw mow khahk khohng ah?
-tax-refund.can-i-get-a-tax-refund,toy duh-uk hwahn tway khohng ah?
-social-basics.hello,seen chow
-communication.i-do-not-speak-this-language,toy khohng noy duh-uk tee-ung vee-ut
-quick-responses.please-go-ahead,seen muh-ee
-phone-translation.i-am-using-phone-translation,toy dahng zoong fuhn maym zik
-phone-text-power.please-type-it-for-me,seen gaw zoop toy
-sim-data.i-would-like-a-tourist-sim,toy moo-un moo-uh seem zoo lik
-etiquette.is-this-allowed,duh-uk fep khohng ah?
-children.cannot-find-my-child,toy khohng teem tigh kawn toy
-time-scheduling.what-time-is-it,migh zuh roy ah?
-time-words.today,hohm nigh
-days-of-week.monday,tuh high
-months.january,tahng moht
-directions.where-is,{} uh doh ah?
-quick-directions.go-straight,dee tang
-taxi.please-take-me-here,seen chuh toy dayn digh
-transit-rides.two-tickets,chaw toy high veh
-border-customs.i-am-a-tourist,toy dee zoo lik
-pickup-meeting.where-is-the-pickup-point,dee-um dawn khak uh doh ah?
-rail-station-words.high-speed-rail,tow kow tohk
-common-signs.open-on,muh
-utility-templates.i-want-to-go-to,toy moo-un dee {}
-building-help.i-am-lost,toy bee lahk
-accessibility.wheelchair-access,seh lan vow duh-uk khohng ah?
-toilets.where-public-toilet,nyah vay sing kohng kohng uh doh ah?
-building-words.stairs,koh tahng
-pronouns-verbs.we-us,choong toy
-question-words.where,uh doh
-emergency-medical.please-call-an-ambulance,seen goy seh kuhp kew
-medical-conditions.i-need-insulin,toy kuhn in-soo-leen
-pharmacy-symptoms.i-need-medicine-for,toy kuhn too-uk chee {}
-body-parts.stomach,boong
-lost-rescue.i-lost-my-phone,toy muht dee-un twigh
-police-consulate.i-want-to-report-a-theft,toy moo-un ching bow muht chohm
-dietary-needs.no-eggs,khohng chuhng
-food-ordering.is-a-table-available,kawn bahn chohng khohng ah?
-trail-words.trailhead,dee-um swuht faht
-weather.will-it-rain,hohm nigh kaw muh-uh khohng ah?
-hiking-parks.where-is-the-trailhead,dee-um swuht faht uh doh ah?
-trail-conditions.can-we-return-the-same-way,vay teh-oh duh-ung koo duh-uk khohng ah?
-trail-transport.what-time-is-the-last-shuttle,chwee-un seh koo-oy look migh zuh ah?
-trail-warnings.closed,dawng kuh-uh
-trail-landmarks.fork-junction,ngah bah
-hotel-words.room-key-card,teh fawng
-hotel-basics.there-are-two-of-us,choong toy kaw high nguh-oy
-hotel-requests.what-time-does-breakfast-start,migh zuh kaw buh-uh sahng ah?
-room-problems.the-air-conditioning-is-broken,dee-oh hwah bee hawng
-laundry.where-is-a-laundromat,tee-um zat uh doh ah?
-introductions.nice-to-meet-you,ruht voo-ee duh-uk gap
-numbers-money.y,moht
-atm-cash.does-this-atm-take-foreign-cards,migh nigh nyuhn teh nuh-uk ngwigh khohng ah?
-attractions-tickets.do-i-need-a-reservation,kaw kuhn dat chuh-uk khohng ah?
-payment-receipt.pay-cash,chah tee-un mat ah?
-shopping.how-much-is-this,kigh nigh bow nyee-oh ah?
-color-size-returns.do-you-have-another-size,kaw kuh khahk khohng ah?
-social-basics.hello-polite,chow ang / chee ah
-communication.i-speak-only-a-little-of-this,toy chee noy duh-uk moht choot tee-ung vee-ut
-quick-responses.yes-right,vuhng
-phone-translation.please-speak-toward-the-phone,seen noy vow dee-un twigh
-phone-translation.please-write-the-place-name,seen vee-ut tayn dee-uh dee-um bang tee-ung vee-ut
-sim-data.may-i-use-your-wifi,chaw toy zoong wai-fai ah
-etiquette.is-tipping-expected,kaw kuhn tee-un teep khohng ah?
-children.make-an-announcement,seen tohng bow chayn lwah
-time-scheduling.how-many-minutes,bow nyee-oh foot ah?
-time-words.tomorrow,ngigh migh
-days-of-week.tuesday,tuh bah
-months.february,tahng high
-directions.how-do-i-get-to,dee {} tay now ah?
-quick-directions.turn-left,reh chigh
-taxi.please-send-me-the-address,seen guh-ee dee-uh chee chaw toy
-transit-rides.where-is-the-subway-station,gah tow dee-un nguhm uh doh ah?
-place-words.visitor-center,choong tuhm zoo khak
-border-customs.here-is-my-passport,hoh chee-oh koo-uh toy digh
-pickup-meeting.please-send-me-the-pickup-point,seen guh-ee dee-um dawn chaw toy
-common-signs.closed-off,dawng
-utility-templates.please-give-me,seen chaw toy {}
-building-help.where-is-reception,lay tuhn uh doh ah?
-accessibility.elevator,uh digh kaw tahng migh khohng ah?
-in-a-building.do-you-have-wi-fi,uh digh kaw wai-fai khohng ah?
-toilets.may-i-use-the-toilet,toy zoong nyah vay sing duh-uk khohng ah?
-building-words.entrance,loy vow
-pronouns-verbs.you,bahn
-question-words.who,eye
-emergency-medical.i-need-a-doctor,toy kuhn bahk see
-medical-conditions.i-have-asthma,toy bee hen swee-un
-pharmacy-symptoms.i-have-a-fever,toy bee soht
-body-parts.back,luhng
-lost-rescue.please-call-the-police,seen goy kohng ahn
-police-consulate.my-bag-was-stolen,toy bee ligh kap too-ee sak
-dietary-needs.not-spicy,khohng kigh
-food-ordering.menu-please,chaw toy tuhk duhn ah
-trail-words.summit,ding noo-ee
-weather.is-it-safe-today,hohm nigh kaw ahn twahn khohng ah?
-hiking-parks.how-long-to-the-summit,layn ding muht bow loh ah?
-trail-conditions.can-we-return-before-dark,vay keep chuh-uk toy khohng ah?
-trail-transport.when-does-the-cableway-stop,kahp cheh-oh zuhng look migh zuh ah?
-trail-warnings.maintenance,dahng bow chee
-trail-landmarks.boardwalk-cliff-path,duh-ung vahn goh / vak dah
-hotel-words.check-in,nyuhn fawng
-hotel-basics.i-have-a-reservation,toy kaw dat fawng chuh-uk
-hotel-requests.can-i-store-my-luggage,guh-ee hang lee duh-uk khohng ah?
-room-problems.there-is-no-hot-water,khohng kaw nuh-uk nawng
-laundry.when-will-it-be-ready,khee now sawng ah?
-introductions.what-is-your-name,seen chaw hoy tayn zee ah?
-numbers-money.r,high
-atm-cash.the-atm-kept-my-card,migh noo-ut teh koo-uh toy
-attractions-tickets.what-is-the-latest-entry-time,vow kuh-uh moo-un nyuht look migh zuh ah?
-payment-receipt.pay-by-qr-code,kwet mah kyoo-ar duh-uk khohng ah?
-shopping.that-is-too-expensive,dat kwah
-color-size-returns.may-i-try-it-on,chaw toy mak tuh ah
-social-basics.good-morning,chow boo-oy sahng
-communication.do-you-speak-english,kaw noy duh-uk tee-ung ang khohng ah?
-quick-responses.no-not,khohng
-phone-translation.one-sentence-at-a-time-please,seen noy tuhng koh moht
-phone-text-power.please-use-simple-words,seen zoong tuh duhn zahn
-sim-data.how-much-data-is-included,duh-uk bow nyee-oh day-tah ah?
-etiquette.is-service-included,dah ting fee fook voo chuh-uh ah?
-children.child-age,kawn toy {} too-oy
-time-scheduling.what-time-should-we-meet,migh zuh gap nyow ah?
-time-words.yesterday,hohm kwah
-days-of-week.wednesday,tuh tuh
-months.march,tahng bah
-directions.is-it-far,kaw sah khohng ah?
-quick-directions.turn-right,reh figh
-taxi.we-need-the-east-gate-not-the-south-gate,"kohng dohng, khohng figh kohng nahm"
-transit-rides.does-this-bus-train-go-to,seh nigh kaw dee {} khohng ah?
-place-words.railway-station,gah tow hwah
-border-customs.i-am-staying-for-days,toy uh {} ngigh
-pickup-meeting.please-pick-us-up-here,seen dawn choong toy uh digh
-rail-station-words.transfer,doy tow
-common-signs.occupied,kaw nguh-oy
-utility-templates.may-i,toy {} duh-uk khohng ah?
-building-help.where-is-a-power-outlet,oh kam dee-un uh doh ah?
-accessibility.ramp,uh digh kaw duh-ung zohk khohng ah?
-in-a-building.what-is-the-wi-fi-password,muht khoh wai-fai lah zee ah?
-toilets.is-it-only-for-customers,chee zang chaw khak hahng ah?
-building-words.exit,loy rah
-pronouns-verbs.you-polite,ang / chee
-question-words.which-one,kigh now
-emergency-medical.i-am-sick,toy bee bayng
-medical-conditions.i-have-a-heart-condition,toy bee bayng teem
-pharmacy-symptoms.i-have-diarrhea,toy bee tee-oh chigh
-body-parts.throat,hawng
-lost-rescue.we-are-here,choong toy uh digh
-police-consulate.my-passport-was-stolen,toy bee ligh kap hoh chee-oh
-dietary-needs.less-spicy,eet kigh toy
-food-ordering.i-want-this,toy moo-un mawn nigh
-trail-words.viewpoint,dee-um ngam kang
-weather.how-cold-at-night,bahn daym lang bow nyee-oh doh ah?
-hiking-parks.how-long-to-the-viewpoint,dayn dee-um ngam kang muht bow loh ah?
-trail-conditions.is-the-trail-open,duh-ung mawn kaw muh khohng ah?
-trail-transport.where-can-we-buy-water,moo-uh nuh-uk uh doh ah?
-trail-warnings.steep-slope,zohk duhng
-trail-landmarks.start,dee-um bat doh
-hotel-words.check-out,chah fawng
-hotel-basics.can-i-charge-my-phone,sahk dee-un twigh duh-uk khohng ah?
-hotel-requests.no-housekeeping,khohng kuhn zawn fawng
-room-problems.can-i-change-rooms,doy fawng duh-uk khohng ah?
-laundry.how-much-per-kilo,bow nyee-oh moht kee ah?
-introductions.we-are-traveling-together,choong toy dee koong nyow
-atm-cash.is-there-a-fee,kaw muht fee khohng ah?
-attractions-tickets.are-there-lockers,kaw too guh-ee doh khohng ah?
-payment-receipt.a-receipt-please,chaw toy hwah duhn ah
-shopping.can-it-be-a-little-cheaper,buht choot duh-uk khohng ah?
-color-size-returns.can-i-return-it,chah ligh duh-uk khohng ah?
-social-basics.good-evening,chow boo-oy toy
-communication.please-speak-more-slowly,seen noy chuhm huhn
-quick-responses.okay-can,duh-uk
-phone-text-power.my-phone-battery-is-low,dee-un twigh toy sap hayt peen
-sim-data.do-you-need-my-passport,kaw kuhn hoh chee-oh khohng ah?
-etiquette.may-i-enter,toy vow duh-uk khohng ah?
-children.high-chair,kaw gay an chaw beh khohng ah?
-time-scheduling.can-we-change-the-time,doy zuh duh-uk khohng ah?
-time-words.this-week,twuhn nigh
-days-of-week.thursday,tuh nam
-months.april,tahng tuh
-directions.how-long-on-foot,dee boh muht bow loh ah?
-quick-directions.this-way,loy nigh
-taxi.please-stop-here,seen zuhng uh digh
-transit-rides.what-is-the-next-stop,chahm sow lah chahm now ah?
-place-words.airport,suhn bigh
-border-customs.nothing-to-declare,khohng kaw zee khigh bow
-pickup-meeting.meet-us-at,gap choong toy uh {}
-rail-station-words.ticket-gate,kohng swaht veh
-common-signs.vacant,chohng
-utility-templates.please-do-not-add,seen duhng chaw {}
-accessibility.how-many-steps,kaw bow nyee-oh buhk tahng ah?
-in-a-building.which-floor,tuhng migh ah?
-toilets.toilet-wc,nyah vay sing
-building-words.men,nahm
-pronouns-verbs.he-him,ang eye
-question-words.when,khee now
-emergency-medical.i-am-injured,toy bee tuh-ung
-medical-conditions.i-am-allergic-to-penicillin,toy zee uhng pay-nee-see-leen
-pharmacy-symptoms.where-is-an-all-night-pharmacy,nyah too-uk now muh bahn daym ah?
-body-parts.tooth,rang
-lost-rescue.please-look-at-my-location-pin,seen sem geem vee chee koo-uh toy
-police-consulate.someone-is-following-me,kaw nguh-oy dahng bahm teh-oh toy
-dietary-needs.no-peanuts,khohng doh fohng
-food-ordering.do-you-have-drinking-water,kaw nuh-uk oo-ung khohng ah?
-trail-words.cableway,kahp cheh-oh
-weather.rain,muh-uh
-hiking-parks.which-route-is-easier,duh-ung now zay dee huhn ah?
-trail-conditions.is-the-route-steep,duh-ung kaw zohk khohng ah?
-trail-transport.where-can-we-refill-water,ligh taym nuh-uk uh doh ah?
-trail-warnings.caution-slippery,kuhn tuhn chuhn chuh-ut
-trail-landmarks.end,dee-um kayt took
-hotel-basics.i-would-like-a-non-smoking-room,chaw toy fawng khohng hoot too-uk ah
-room-problems.the-room-is-too-noisy,fawng ohn kwah
-laundry.can-it-be-ready-today,hohm nigh sawng duh-uk khohng ah?
-introductions.this-is-my-friend,digh lah bahn toy
-numbers-money.s-n,bah
-atm-cash.the-card-was-declined,teh bee tuh choy
-attractions-tickets.may-i-take-photos,choop ang duh-uk khohng ah?
-color-size-returns.can-i-exchange-it,doy duh-uk khohng ah?
-social-basics.goodbye,tahm bee-ut
-communication.i-do-not-understand-spoken,toy ngeh khohng hee-oh
-quick-responses.cannot-not-allowed,khohng duh-uk
-phone-text-power.do-you-have-a-power-bank,kaw sahk zuh fawng khohng ah?
-sim-data.how-long-is-it-valid,zoong duh-uk bow loh ah?
-etiquette.remove-shoes,kaw figh kuh-ee zigh khohng ah?
-children.baby-changing-room,fawng tigh tah uh doh ah?
-time-scheduling.when-is-convenient,khee now tee-un ah?
-time-words.next-week,twuhn sow
-days-of-week.friday,tuh sow
-months.may,tahng nam
-directions.please-show-me-on-the-map,seen chee zoop chayn bahn doh
-quick-directions.that-way,loy kee-uh
-taxi.can-you-wait-for-me-here,chuh toy uh digh duh-uk khohng ah?
-transit-rides.please-tell-me-where-to-get-off,seen bow toy choh soo-ung
-place-words.service-desk,kwigh zik voo
-border-customs.i-am-staying-at,toy uh tigh {}
-pickup-meeting.please-call-me-a-ride,seen goy seh zoop toy
-rail-station-words.platform,suhn gah
-common-signs.caution,choo ee
-utility-templates.do-you-have,kaw {} khohng ah?
-accessibility.cannot-climb-stairs,toy khohng leh-oh koh tahng duh-uk
-toilets.is-it-free,kaw mee-un fee khohng ah?
-building-words.women,nuh
-pronouns-verbs.she-her,koh eye
-question-words.how,tay now
-emergency-medical.it-hurts-here,toy dow uh digh
-medical-conditions.i-have-epilepsy,toy bee dohng king
-pharmacy-symptoms.painkiller,too-uk zahm dow
-body-parts.chest,nguhk
-lost-rescue.i-cannot-walk,toy khohng dee duh-uk
-police-consulate.i-need-a-written-police-report,toy kuhn bee-un bahn koo-uh kohng ahn
-dietary-needs.no-nuts,khohng kahk lwigh haht
-food-ordering.to-go-please,chaw toy mahng vay ah
-trail-words.shuttle-bus,seh choong chwee-un
-weather.snow,twee-ut
-trail-conditions.is-the-path-slippery,duh-ung kaw chuhn khohng ah?
-trail-transport.is-there-cell-signal-here,uh digh kaw sawng khohng ah?
-trail-warnings.danger,ngwee hee-um
-trail-landmarks.elevation,doh kow
-hotel-basics.i-would-like-a-quiet-room,chaw toy fawng ee-un ting ah
-room-problems.the-key-does-not-work,teh fawng khohng muh duh-uk
-laundry.please-do-not-use-bleach,seen duhng zoong too-uk tigh
-introductions.i-am-from,toy dayn tuh {}
-numbers-money.s,bohn
-atm-cash.what-is-the-exchange-rate,tee zah bow nyee-oh ah?
-attractions-tickets.please-take-a-photo-of-us,choop zoop choong toy moht tuhm ah
-color-size-returns.do-you-have-a-bag,chaw toy kigh too-ee ah
-social-basics.thank-you,kahm uhn
-communication.i-cannot-read-understand,toy dawk khohng hee-oh
-quick-responses.works-okay,ohn
-phone-text-power.the-translation-may-be-inaccurate,bahn zik kaw tay khohng ching sahk
-sim-data.please-activate-it,seen kik hwaht zoop
-etiquette.photo-of-you,chaw toy choop hing ang / chee ah?
-children.childrens-menu,kaw mawn chaw cheh em khohng ah?
-time-scheduling.what-is-today-s-date,hohm nigh ngigh migh ah?
-time-words.morning,boo-oy sahng
-days-of-week.saturday,tuh bigh
-months.june,tahng sow
-directions.where-is-the-nearest,{} guhn nyuht uh doh ah?
-quick-directions.on-the-left,bayn chigh
-taxi.we-need-to-catch-the-high-speed-train,choong toy figh keep tow kow tohk
-transit-rides.is-this-direct,kaw dee tang khohng ah?
-place-words.bus-stop,chahm seh bweet
-border-customs.i-am-here-for-business,toy dee kohng tahk
-rail-station-words.ticket-office,fawng bahn veh
-common-signs.no-entry,kuhm vow
-utility-templates.please-write-the-number,seen gee soh rah zigh
-accessibility.need-to-sit-down,toy kuhn ngoy ngee
-toilets.do-i-need-a-coin,kaw kuhn tee-un soo high teh khohng ah?
-building-words.door,kuh-uh
-pronouns-verbs.they-them,haw
-question-words.how-much-many,bow nyee-oh
-emergency-medical.where-is-a-pharmacy,nyah too-uk uh doh ah?
-medical-conditions.my-blood-sugar-is-low,toy bee hah duh-ung hwee-ut
-pharmacy-symptoms.do-i-need-a-prescription,kaw kuhn duhn too-uk khohng ah?
-body-parts.eye,mat
-lost-rescue.i-sprained-my-ankle,toy bee bawng guhn koh chuhn
-police-consulate.i-want-to-contact-my-embassy,toy moo-un lee-un hay digh suh kwahn
-dietary-needs.no-seafood,khohng high sahn
-food-ordering.check-please,ting tee-un ah
-trail-words.park-shuttle,seh dee-un tahm kwahn
-weather.wind,zaw
-trail-transport.do-you-have-a-map,kaw bahn doh khohng ah?
-trail-warnings.beware-falling-rocks,kuhn tuhn dah ruh-ee
-trail-landmarks.sunset,hwahng hohn
-hotel-basics.is-there-a-washing-machine,kaw migh zat khohng ah?
-room-problems.the-toilet-will-not-flush,bohn koh khohng sah nuh-uk duh-uk
-laundry.laundromat,tee-um zat
-introductions.where-are-you-from,kway uh doh ah?
-numbers-money.w,nam
-atm-cash.no-money-came-out,migh khohng nyah tee-un
-social-basics.you-are-welcome,khohng kaw zee
-communication.please-say-it-again,seen noy ligh
-quick-responses.does-not-work-no,khohng ohn
-phone-text-power.please-confirm,seen sahk nyuhn zoop
-sim-data.do-you-have-an-esim,kaw ee-seem khohng ah?
-etiquette.may-i-sit-here,toy ngoy digh duh-uk khohng ah?
-children.suitable-for-children,kigh nigh huhp vuh-ee cheh em khohng ah?
-time-scheduling.what-day-is-it-today,hohm nigh tuh migh ah?
-time-words.afternoon,boo-oy chee-oh
-days-of-week.sunday,choo nyuht
-months.july,tahng bigh
-directions.where-am-i,toy dahng uh doh ah?
-quick-directions.on-the-right,bayn figh
-taxi.please-use-the-meter,seen buht dohng hoh
-transit-rides.do-i-need-to-transfer,kaw figh doy seh khohng ah?
-place-words.luggage-storage,nuh-ee guh-ee hang lee
-border-customs.i-have-a-return-ticket,toy kaw veh khuh hoy
-rail-station-words.waiting-room,fawng chuh
-common-signs.no-smoking,kuhm hoot too-uk
-utility-templates.i-need,toy kuhn {}
-accessibility.accessible-restroom,kaw nyah vay sing chaw nguh-oy khwee-ut tuht khohng?
-toilets.is-the-tap-water-safe-to-drink,nuh-uk migh oo-ung duh-uk khohng ah?
-building-words.key,chee-uh khwah
-pronouns-verbs.my-mine,koo-uh toy
-question-words.how-many,migh
-emergency-medical.please-take-me-to-a-hospital,seen duh-uh toy dayn bayng vee-un
-medical-conditions.i-need-my-inhaler,toy kuhn bing seet hen
-pharmacy-symptoms.i-have-a-headache,toy bee dow doh
-body-parts.ear,tigh
-lost-rescue.please-contact-rescue,seen lee-un hay doy kew hoh
-police-consulate.i-need-it-for-my-insurance,toy kuhn kigh nigh chaw bow hee-um
-dietary-needs.i-am-vegetarian,toy an chigh
-food-ordering.does-it-contain,mawn nigh kaw {} khohng ah?
-trail-words.steps,buhk tahng
-weather.storm,bow
-trail-warnings.first-aid-station,chahm suh kew
-room-problems.the-light-does-not-work,den khohng sahng
-laundry.please-iron-this,seen oo-ee zoop kigh nigh
-introductions.how-are-you,kaw khweh khohng ah?
-numbers-money.li,sow
-atm-cash.where-can-i-change-money,doy tee-un uh doh ah?
-social-basics.excuse-me-sorry,seen loy
-communication.please-write-it-down,seen vee-ut rah zigh
-sim-data.my-data-is-not-working,day-tah khohng zoong duh-uk
-etiquette.queue-for,digh lah hahng chuh {} figh khohng ah?
-children.minimum-age,bow nyee-oh too-oy chuh layn ah?
-time-scheduling.what-time-does-it-open,migh zuh muh kuh-uh ah?
-time-words.evening,boo-oy toy
-months.august,tahng tahm
-directions.which-way,dee huh-ung now ah?
-quick-directions.across-from-here,doy zee-un digh
-transit-rides.is-it-delayed,kaw bee chay khohng ah?
-border-customs.i-am-visiting-family,toy tam zah ding
-rail-station-words.train-number,soh hee-oh tow
-common-signs.no-photography,kuhm choop ang
-utility-templates.is-there-nearby,guhn digh kaw {} khohng ah?
-accessibility.station-assistance,uh gah kaw hoh chuh nguh-oy khwee-ut tuht khohng ah?
-toilets.it-is-urgent,guhp lam ah
-pronouns-verbs.your-yours,koo-uh bahn
-question-words.why,tigh sow
-medical-conditions.i-am-pregnant,toy dahng mahng tigh
-pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-say-tah-mawl
-body-parts.leg,chuhn
-lost-rescue.my-companion-is-missing,nguh-oy dee koong toy bee lahk
-police-consulate.i-need-an-interpreter,toy kuhn nguh-oy fee-un zik
-dietary-needs.i-am-vegan,toy an twuhn chigh
-food-ordering.is-this-vegetarian,mawn nigh lah mawn chigh ah?
-trail-words.up-uphill,layn zohk
-weather.ice,bang
-trail-warnings.service-suspended,tahm nguhng fook voo
-trail-landmarks.water-point,dee-um ligh nuh-uk
-room-problems.please-send-someone,seen chaw nguh-oy dayn suh-uh
-laundry.detergent,boht zat
-introductions.i-am-a-tourist,toy lah khak zoo lik
-numbers-money.q,bigh
-atm-cash.the-machine-is-out-of-service,migh khohng hwaht dohng
-social-basics.sorry,toy seen loy
-communication.please-wait-a-moment,seen chuh moht choot
-sim-data.does-it-need-registration,kaw kuhn dang kee khohng ah?
-etiquette.dressed-appropriately,toy mak tay nigh duh-uk khohng ah?
-children.do-children-pay,cheh em kaw figh moo-uh veh khohng ah?
-time-scheduling.what-time-does-it-close,migh zuh dawng kuh-uh ah?
-time-words.spring,moo-uh swuhn
-months.september,tahng cheen
-directions.can-i-walk-there,dee boh dayn duh-uk khohng ah?
-quick-directions.in-front,fee-uh chuh-uk
-transit-rides.i-am-in-a-hurry,toy dahng voy
-border-customs.this-is-for-personal-use,doh zoong kah nyuhn
-rail-station-words.carriage,twah tow
-common-signs.do-not-touch,khohng chahm vow
-utility-templates.how-much-is,{} bow nyee-oh tee-un ah?
-accessibility.help-me-carry,seen zoop toy mahng kigh nigh
-toilets.may-i-have-the-toilet-key,chaw toy muh-un chee-uh khwah nyah vay sing ah
-pronouns-verbs.be-called-call,tayn lah / goy
-question-words.this,kigh nigh
-medical-conditions.i-carry-an-adrenaline-injector,toy kaw boot tee-um ad-ray-nah-leen
-pharmacy-symptoms.how-much-should-i-take,oo-ung bow nyee-oh ah?
-body-parts.arm,kang tigh
-police-consulate.please-leave-me-alone,seen day toy ee-un
-dietary-needs.i-do-not-eat,toy khohng an {}
-trail-words.down-downhill,soo-ung zohk
-weather.fog,suh-ung moo
-room-problems.the-heating-does-not-work,migh suh-oy khohng chigh
-laundry.dry-cleaning,zat khoh
-introductions.this-is-my-husband-wife,digh lah chohng / vuh toy
-numbers-money.b,tahm
-atm-cash.please-give-me-smaller-notes,seen chaw toy tuh nyaw huhn
-social-basics.no-problem,khohng sow
-communication.can-you-help-me,zoop toy duh-uk khohng ah?
-sim-data.i-have-no-signal,toy khohng kaw sawng
-etiquette.did-not-mean-to-offend,"toy khohng koh ee, seen tuh loy"
-children.crib,kaw noy em beh khohng ah?
-time-words.summer,moo-uh heh
-months.october,tahng muh-oy
-directions.how-far-is-it,bow sah ah?
-quick-directions.behind,fee-uh sow
-transit-rides.which-platform,suhn gah now ah?
-border-customs.i-am-in-transit,toy kwah kang
-rail-station-words.seat,choh ngoy
-common-signs.temporarily-closed,tahm dawng kuh-uh
-utility-templates.is-this,digh lah {} figh khohng ah?
-accessibility.board-first,toy layn chuh-uk duh-uk khohng ah?
-toilets.there-is-no-toilet-paper,hayt zigh vay sing roy ah
-pronouns-verbs.have,kaw
-question-words.that,kigh kee-uh
-medical-conditions.i-take-medicine-for,toy oo-ung too-uk chee {}
-pharmacy-symptoms.i-am-vomiting,toy bee nohn
-body-parts.foot,bahn chuhn
-police-consulate.i-was-robbed,toy bee kuh-up
-dietary-needs.i-am-allergic-to,toy bee zee uhng vuh-ee {}
-trail-words.one-way,moht chee-oh
-weather.heat,nawng
-laundry.dryer,migh sigh
-introductions.this-is-my-daughter-son,digh lah kawn gigh / kawn chigh toy
-numbers-money.ji,cheen
-atm-cash.do-you-have-change,kaw tee-un leh khohng ah?
-social-basics.i-do-not-know,toy khohng bee-ut
-communication.please-show-me-the-text,seen chaw toy sem chuh tee-ung vee-ut
-sim-data.please-write-the-wifi-password,seen gee muht khoh wai-fai
-etiquette.what-is-customary,uh digh tuh-ung lahm tay now ah?
-children.warm-this-bottle,seen huhm nawng bing suh-uh nigh
-time-words.fall,moo-uh too
-months.november,tahng muh-oy moht
-directions.which-exit,loy rah now ah?
-transit-rides.what-time-is-the-next-one,chwee-un sow migh zuh ah?
-border-customs.i-have-in-cash,toy mahng teh-oh {} tee-un mat
-rail-station-words.last-train,chwee-un tow koo-oy
-utility-templates.please,chaw toy {} ah
-accessibility.door-width,kuh-uh rohng bow nyee-oh ah?
-toilets.toilet-paper,zigh vay sing
-pronouns-verbs.do-not-have,khohng kaw
-question-words.here,uh digh
-medical-conditions.i-take-blood-thinners,toy zoong too-uk chohng dohng mow
-pharmacy-symptoms.rehydration-salts,oh-ray-sawl
-body-parts.hand,bahn tigh
-police-consulate.i-want-a-lawyer,toy moo-un kaw lwuht suh
-trail-words.round-trip,khuh hoy
-weather.cold,lang
-laundry.coin-operated,migh zoong soo
-introductions.i-am-traveling-alone,toy dee zoo lik moht ming
-numbers-money.sh,muh-oy
-atm-cash.may-i-pay-in,chah bang {} duh-uk khohng ah?
-sim-data.sim-card,teh seem
-etiquette.keep-the-change,khohng kuhn chah ligh ah
-children.car-seat,choong toy kuhn gay oh toh chaw beh
-time-words.winter,moo-uh dohng
-months.december,tahng muh-oy high
-directions.can-you-show-me-the-way,chee duh-ung zoop toy vuh-ee ah
-transit-rides.i-went-past-my-stop,toy dee kwah chahm roy
-border-customs.this-is-a-gift,digh lah kwah
-rail-station-words.delayed,chuhm chwee-un
-utility-templates.i-am-looking-for,toy dahng teem {}
-accessibility.wheelchair-width,seh lan koo-uh toy rohng {} sang-tee-met
-toilets.it-is-out-of-order,bee hawng roy ah
-pronouns-verbs.go,dee
-question-words.there,uh daw
-medical-conditions.medicine-allergy,zee uhng too-uk: {}
-pharmacy-symptoms.how-many-times-a-day,ngigh oo-ung migh luhn ah?
-body-parts.knee,doh goy
-police-consulate.please-notify-my-consulate,seen bow chaw lang suh kwahn koo-uh toy
-weather.humid,uhm
-numbers-money.y-b-i,moht cham
-atm-cash.please-charge-in-local-currency,seen ting bang tee-un vee-ut
-sim-data.where-can-i-buy-a-plug-adapter,moo-uh oh kam chwee-un uh doh ah?
-children.stroller,seh digh
-directions.north,bak
-border-customs.where-do-i-collect-my-baggage,ligh hang lee uh doh ah?
-rail-station-words.final-stop,gah koo-oy
-utility-templates.do-you-accept,kaw nyuhn {} khohng ah?
-accessibility.hard-of-hearing,toy ngeh kem
-toilets.out-of-order,hawng
-pronouns-verbs.come,dayn
-question-words.a-little,moht choot
-medical-conditions.this-card-lists-my-conditions,teh nigh gee bayng koo-uh toy
-pharmacy-symptoms.i-have-a-stomach-ache,toy bee dow boong
-body-parts.ankle,koh chuhn
-police-consulate.i-am-calling-the-police,toy seh goy kohng ahn
-weather.sunrise,bing ming
-numbers-money.y-qi-n,moht ngeen
-atm-cash.where-can-i-get-coins,doy tee-un soo uh doh ah?
-sim-data.mobile-data,zuh lee-oh zee dohng
-children.playground,kaw khoo voo-ee chuh-ee khohng ah?
-directions.south,nahm
-border-customs.how-long-may-i-stay,toy duh-uk uh bow loh ah?
-rail-station-words.ticket-validator,migh swaht veh
-utility-templates.i-cannot-find,toy khohng teem tigh {}
-accessibility.speak-louder,seen noy taw huhn
-toilets.mens-toilet,nyah vay sing nahm
-pronouns-verbs.would-like,chaw toy
-question-words.some,moht vigh
-medical-conditions.this-is-my-medicine,digh lah too-uk koo-uh toy
-pharmacy-symptoms.i-have-a-cough,toy bee haw
-body-parts.skin,zah
-police-consulate.am-i-under-arrest,toy kaw bee bat khohng ah?
-weather.flood,loo loot
-numbers-money.y-w-n,muh-oy ngeen
-atm-cash.is-there-a-minimum-for-cards,teh kaw muhk toy tee-oh khohng ah?
-sim-data.can-i-top-up-this-sim,nahp tee-un seem nigh duh-uk khohng ah?
-directions.east,dohng
-border-customs.i-have-a-connecting-flight,toy kaw chwee-un bigh noy
-utility-templates.there-is-a-problem-with,{} kaw vuhn day ah
-accessibility.visually-impaired,toy bee khee-um tee
-toilets.womens-toilet,nyah vay sing nuh
-pronouns-verbs.want,moo-un
-question-words.very,ruht
-medical-conditions.please-give-me-sugar-or-juice,seen chaw toy duh-ung hwak nuh-uk ngawt
-pharmacy-symptoms.antihistamine,too-uk chohng zee uhng
-police-consulate.no-thank-you-i-am-not-interested,"khohng, kahm uhn. toy khohng kwahn tuhm"
-weather.avalanche-risk,ngwee kuh luh twee-ut
-numbers-money.b-n,moht nuh-uh
-atm-cash.atm,migh ah-tay-em
-sim-data.top-up,nahp tee-un
-directions.west,tigh
-border-customs.may-i-have-an-entry-stamp,chaw toy seen zoh nyuhp kang ah
-accessibility.take-your-arm,chaw toy veen tigh duh-uk khohng ah?
-toilets.drinking-water,nuh-uk oo-ung
-pronouns-verbs.look-for,teem
-question-words.too,kwah
-medical-conditions.inject-it-into-my-outer-thigh,tee-um vow mat ngwigh doo-ee toy
-pharmacy-symptoms.anti-diarrhea-medicine,too-uk kuhm tee-oh chigh
-police-consulate.someone-attacked-me,kaw nguh-oy hang hoong toy
-atm-cash.banknote,tuh tee-un
-sim-data.is-there-coverage-in,uh {} kaw sawng khohng ah?
-border-customs.visa,tee tuhk
-accessibility.guide-dog,digh lah chaw zuhn duh-ung koo-uh toy
-toilets.not-for-drinking,nuh-uk khohng oo-ung duh-uk
-pronouns-verbs.buy,moo-uh
-question-words.also,koong
-medical-conditions.my-blood-type-is,nyawm mow koo-uh toy lah {}
-pharmacy-symptoms.is-this-safe-to-take-with,oo-ung choong vuh-ee {} duh-uk khohng ah?
-police-consulate.i-did-not-agree-to-this-price,toy khohng dohng ee zah nigh
-atm-cash.coin,tee-un soo
-sim-data.signal,sawng
-border-customs.i-have-no-food-or-plants,toy khohng mahng tuhk fuhm high kigh
-toilets.accessible-toilet,nyah vay sing nguh-oy khwee-ut tuht
-pronouns-verbs.like,tik
-question-words.all-both,tuht kah
-medical-conditions.do-not-give-me,duhng chaw toy zoong {}
-pharmacy-symptoms.i-feel-dizzy,toy bee chawng mat
-police-consulate.please-write-the-report-number,seen gee soh bee-un bahn
-atm-cash.cash-only,chee nyuhn tee-un mat
-sim-data.esim,ee-seem
-border-customs.passport-control,nyuhp kang
-toilets.where-can-i-wash-my-hands,toy ruh-uh tigh uh doh duh-uk ah?
-pronouns-verbs.need,kuhn
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,toy zee uhng as-pee-reen vah ee-boo-praw-fen
-pharmacy-symptoms.ibuprofen,ee-boo-praw-fen
-police-consulate.it-happened-here,vee-uk sigh rah uh digh
-atm-cash.fee,fee
-sim-data.prepaid,chah chuh-uk
-border-customs.customs,high kwahn
-toilets.can-i-flush-the-paper,baw zigh vow bohn koh duh-uk khohng ah?
-medical-conditions.my-injector-is-in-my-bag,boot tee-um koo-uh toy uh chawng too-ee
-pharmacy-symptoms.i-have-a-sore-throat,toy bee dow hawng
-police-consulate.may-i-have-a-copy-of-the-report,chaw toy seen bahn sow bee-un bahn ah
-atm-cash.change,tee-un tuh-uh
-sim-data.roaming,chwee-un voong
-border-customs.baggage-claim,nyuhn hang lee
-toilets.is-there-a-toilet-on-board,chayn seh kaw nyah vay sing khohng ah?
-medical-conditions.i-am-allergic-to-sulfa-drugs,toy zee uhng too-uk soon-fah
-pharmacy-symptoms.can-i-get-this-medicine-here,uh digh kaw too-uk nigh khohng ah?
-police-consulate.i-will-not-sign-anything-i-cannot-read,toy khohng kee zigh tuh ming khohng dawk duh-uk
-atm-cash.exchange-rate,tee zah
-border-customs.customs-declaration,tuh khigh high kwahn
-toilets.the-toilet-will-not-flush,bohn koh khohng sah nuh-uk duh-uk
-pharmacy-symptoms.bandage,bang gahk
-police-consulate.am-i-free-to-go,toy duh-uk vay chuh-uh ah?
-atm-cash.bank,nguhn hahng
-border-customs.arrival-card,tuh khigh nyuhp kang
-toilets.baby-change,fawng tigh tah
-pharmacy-symptoms.the-pain-is-severe,toy dow zuh zoy
-police-consulate.i-do-not-want-to-go-with-you,toy khohng moo-un dee koong
-atm-cash.money-exchange,doy ngwigh tay
-border-customs.transit,kwah kang
-toilets.squat-toilet,bohn koh sohm
-pharmacy-symptoms.antiseptic,too-uk saht choong
-atm-cash.pin,mah peen
-border-customs.boarding-pass,teh layn migh bigh
-pharmacy-symptoms.i-feel-nauseous,toy boo-un nohn
-pharmacy-symptoms.i-have-a-rash,toy bee noy muhn
-pharmacy-symptoms.before-or-after-food,oo-ung chuh-uk high sow khee an ah?
-pharmacy-symptoms.i-think-it-is-infected,toy ngee naw bee nyee-um choong
-pharmacy-symptoms.motion-sickness-tablets,too-uk chohng sigh seh
-pharmacy-symptoms.i-have-a-cut,toy kaw vayt kat
-pharmacy-symptoms.antacid,too-uk dow zah zigh
-pharmacy-symptoms.i-have-a-burn,toy bee bawng
-pharmacy-symptoms.it-started-days-ago,bee tuh {} ngigh chuh-uk
-pharmacy-symptoms.cough-medicine,too-uk haw
-pharmacy-symptoms.is-this-safe-during-pregnancy,dahng mahng tigh oo-ung duh-uk khohng ah?
-trail-transport.how-long-is-the-wait,figh chuh bow loh ah?
-tax-refund.is-tax-free-shopping-available,uh digh kaw hwahn tway vaht khohng ah?
-place-words.tourist-spot-sightseeing-area,khoo zoo lik
-common-signs.open-operating,dahng hwaht dohng
-time-scheduling.how-long-does-it-take,muht bow loh ah?
-transit-rides.can-i-use-this-ticket,veh nigh zoong duh-uk khohng ah?
-common-signs.closed,dawng kuh-uh
-pronouns-verbs.there-is-have,kaw
-common-signs.stopped-stop,zuhng
-transit-rides.do-i-need-to-validate,kaw kuhn kwet veh chuh-uk khohng ah?
-pronouns-verbs.there-is-not-do-not-have,khohng kaw
-emergency-medical.i-feel-unwell,toy tigh khohng khweh
-food-ordering.what-do-you-recommend,nayn goy mawn zee ah?
-hotel-basics.is-wi-fi-free,wai-fai kaw mee-un fee khohng ah?
-hotel-requests.another-towel-please,chaw toy taym khan tam ah
-shopping.is-there-a-discount,kaw zahm zah khohng ah?
-social-basics.good-night,chook ngoo ngawn
-quick-responses.can-possible,kaw tay
-phone-translation.please-type-it-and-show-me,seen gaw rah roy chaw toy sem
-phone-text-power.may-i-charge-my-phone-here,sahk nyuh uh digh duh-uk khohng ah?
-pronouns-verbs.want-to-verb,moo-un + dohng tuh
-emergency-medical.this-is-an-emergency,digh lah chuh-ung huhp khuhn kuhp
-lost-rescue.please-look-at-my-current-location,seen sem vee chee hee-un tigh koo-uh toy
-hotel-words.luggage-storage,guh-ee hang lee
-hotel-basics.how-much-per-night,moht daym bow nyee-oh tee-un ah?
-hotel-requests.what-time-is-check-out,migh zuh figh chah fawng ah?
-payment-receipt.please-write-the-number,seen gee soh rah zigh
-shopping.where-do-i-pay,chah tee-un uh doh ah?
-communication.i-cannot-make-out-what-you-are-saying,toy khohng ngeh raw
-quick-responses.cannot-not-possible,khohng tay
-taxi.i-will-get-off-here,chaw toy soo-ung digh
-pickup-meeting.please-call-a-taxi,seen goy tak-see zoop toy
-pronouns-verbs.want-thing,moo-un + doh vuht
-emergency-medical.i-am-having-a-severe-allergic-reaction,toy bee sohk fahn vay
-lost-rescue.my-child-is-missing,kawn toy bee lahk
-food-ordering.water-please,chaw toy nuh-uk ah
-hiking-parks.is-this-trail-suitable-for-beginners,duh-ung nigh huhp vuh-ee nguh-oy muh-ee khohng ah?
-hotel-basics.is-breakfast-included,kaw bow gohm buh-uh sahng khohng ah?
-hotel-requests.can-i-check-in-early,nyuhn fawng suhm duh-uk khohng ah?
-attractions-tickets.could-you-take-a-photo-for-us,choop zoop moht tuhm duh-uk khohng ah?
-payment-receipt.how-much-in-total,tohng kohng bow nyee-oh ah?
-shopping.i-will-take-this,toy ligh kigh nigh
-communication.i-do-not-understand,toy khohng hee-oh
-quick-responses.okay-fine,duh-uk roy
-phone-translation.please-look-at-the-screen,seen nyeen mahn hing
-pronouns-verbs.need-thing,kuhn + doh vuht
-question-words.how-much-what-price,bow nyee-oh tee-un
-emergency-medical.i-cannot-breathe,toy khohng tuh duh-uk
-lost-rescue.i-do-not-know-where-i-am,toy khohng bee-ut ming dahng uh doh
-hotel-basics.may-i-see-the-room,chaw toy sem fawng ah
-hotel-requests.another-night,uh taym moht daym duh-uk khohng ah?
-payment-receipt.can-we-pay-separately,chah ree-ung duh-uk khohng ah?
-shopping.what-is-this,kigh nigh lah zee ah?
-communication.i-cannot-read-it,toy khohng dawk duh-uk
-quick-responses.no-good-not-allowed-will-not-work,khohng duh-uk doh
-pronouns-verbs.looking-for-thing,dahng teem + doh vuht
-emergency-medical.i-am-bleeding-badly,toy chigh mow nyee-oh
-lost-rescue.my-friend-is-hurt,bahn toy bee tuh-ung
-dietary-needs.does-it-contain-fish-stock,mawn nigh kaw nuh-uk mam khohng ah?
-dietary-needs.does-it-contain-pork-stock,nuh-uk zoong kaw suh-ung luhn khohng ah?
-hotel-basics.for-nights,uh {} daym
-hotel-requests.is-there-a-safe,kaw ket sat khohng ah?
-payment-receipt.is-tax-included,dah gohm tway chuh-uh ah?
-shopping.where-can-i-buy,moo-uh {} uh doh ah?
-emergency-medical.i-have-chest-pain,toy bee dow nguhk
-lost-rescue.i-lost-my-wallet,toy muht vee
-hotel-basics.two-beds,chaw toy fawng high zuh-ung ah
-hotel-requests.another-blanket,chaw toy taym chan ah
-payment-receipt.my-card-was-declined,teh koo-uh toy bee tuh choy
-shopping.do-you-have-this-in-stock,kawn hahng khohng ah?
-time-words.night,bahn daym
-emergency-medical.this-person-is-unconscious,nguh-oy nigh buht ting
-lost-rescue.i-lost-my-bag,toy muht too-ee sak
-food-ordering.can-a-vegetarian-eat-this,nguh-oy an chigh an duh-uk khohng ah?
-hotel-basics.is-there-air-conditioning,kaw dee-oh hwah khohng ah?
-hotel-requests.wake-up-call,seen goy toy zigh look {}
-payment-receipt.the-bill-is-wrong,hwah duhn hing nyuh nyuhm ah
-shopping.two-of-these,chaw toy high kigh ah
-social-basics.okay-fine-i-am-okay,toy ohn
-emergency-medical.where-is-the-nearest-hospital,bayng vee-un guhn nyuht uh doh ah?
-lost-rescue.where-is-lost-and-found,choh nyuhn doh tuht lahk uh doh ah?
-payment-receipt.i-already-paid,toy chah roy ah
-shopping.what-is-it-made-of,kigh nigh lahm bang zee ah?
-emergency-medical.what-is-the-emergency-number,soh khuhn kuhp lah soh migh ah?
-lost-rescue.i-cannot-find-my-hotel,toy khohng teem duh-uk khak sahn
-emergency-medical.is-there-a-doctor-who-speaks-english,kaw bahk see noy tee-ung ang khohng ah?
-lost-rescue.i-left-it-on-the-train,toy day kwayn chayn tow
-dietary-needs.i-have-a-severe-allergy-to,toy bee zee uhng nang vuh-ee {}
-emergency-medical.i-think-a-bone-is-broken,toy ngee bee gigh suh-ung
-lost-rescue.i-cannot-get-down,toy khohng soo-ung duh-uk
-emergency-medical.please-call-my-emergency-contact,seen goy nguh-oy lee-un hay khuhn kuhp koo-uh toy
-emergency-medical.i-have-travel-insurance,toy kaw bow hee-um zoo lik
-numbers-money.dong,dohng
-numbers-money.dong-symbol,dohng
-dietary-needs.no-pork,khohng teet luhn
-dietary-needs.is-this-halal,digh kaw figh doh hah-lahl khohng ah?
-pharmacy-symptoms.i-think-i-have-malaria,toy ngee toy bee soht ret
-pharmacy-symptoms.i-need-a-malaria-test,toy kuhn set ngee-um soht ret
+concept_id,respell,text
+building-help.what-room-number-is-this,digh lah fawng soh migh ah?,Đây là phòng số mấy ạ?
+accessibility.step-free,kaw loy vow khohng buhk tahng khohng ah?,Có lối vào không bậc thang không ạ?
+in-a-building.is-this-the-correct-entrance,digh kaw doong loy vow khohng ah?,Đây có đúng lối vào không ạ?
+toilets.where-toilet,nyah vay sing uh doh ah?,Nhà vệ sinh ở đâu ạ?
+building-words.elevator,tahng migh,Thang máy
+pronouns-verbs.i-me,toy,tôi
+question-words.what,zee,gì
+emergency-medical.help,kew vuh-ee!,Cứu với!
+medical-conditions.i-am-diabetic,toy bee tee-oh duh-ung,Tôi bị tiểu đường
+pharmacy-symptoms.which-pharmacy-is-open-now,nyah too-uk now dahng muh kuh-uh ah?,Nhà thuốc nào đang mở cửa ạ?
+body-parts.head,doh,Đầu
+lost-rescue.i-lost-my-passport,toy muht hoh chee-oh,Tôi mất hộ chiếu
+police-consulate.where-is-the-police-station,dohn kohng ahn uh doh ah?,Đồn công an ở đâu ạ?
+dietary-needs.no-meat,khohng teet,Không thịt
+food-ordering.table-for-two,bahn chaw high nguh-oy,Bàn cho hai người
+trail-words.trail,duh-ung mawn,Đường mòn
+weather.forecast,zuh bow tuh-ee tee-ut tay now ah?,Dự báo thời tiết thế nào ạ?
+hiking-parks.is-this-the-way-to,duh-ung nigh dee {} figh khohng ah?,Đường này đi {} phải không ạ?
+trail-conditions.how-long-is-the-full-route,kah twee-un zigh bow nyee-oh ah?,Cả tuyến dài bao nhiêu ạ?
+trail-transport.how-long-is-the-queue,sayp hahng bow loh ah?,Xếp hàng bao lâu ạ?
+trail-warnings.open,muh kuh-uh,Mở cửa
+trail-landmarks.trail-marker,mohk chee duh-ung,Mốc chỉ đường
+hotel-words.passport,hoh chee-oh,Hộ chiếu
+hotel-basics.are-any-rooms-available,kawn fawng chohng khohng ah?,Còn phòng trống không ạ?
+hotel-requests.can-i-check-out-later,chah fawng moo-un duh-uk khohng ah?,Trả phòng muộn được không ạ?
+room-problems.there-is-a-problem-with-the-room,fawng kaw vuhn day ah,Phòng có vấn đề ạ
+laundry.please-wash-these-clothes,seen zat zoop doh nigh,Xin giặt giúp đồ này
+introductions.my-name-is,toy tayn lah {},Tôi tên là {}
+numbers-money.l-ng,khohng,không
+atm-cash.where-is-an-atm,migh ah-tay-em uh doh ah?,Máy ATM ở đâu ạ?
+attractions-tickets.where-can-i-buy-tickets,moo-uh veh uh doh ah?,Mua vé ở đâu ạ?
+payment-receipt.pay-by-card,kwet teh duh-uk khohng ah?,Quẹt thẻ được không ạ?
+shopping.i-am-just-looking,toy sem toy ah,Tôi xem thôi ạ
+color-size-returns.do-you-have-another-color,kaw mow khahk khohng ah?,Có màu khác không ạ?
+tax-refund.can-i-get-a-tax-refund,toy duh-uk hwahn tway khohng ah?,Tôi được hoàn thuế không ạ?
+social-basics.hello,seen chow,Xin chào
+communication.i-do-not-speak-this-language,toy khohng noy duh-uk tee-ung vee-ut,Tôi không nói được tiếng {target}
+quick-responses.please-go-ahead,seen muh-ee,Xin mời
+phone-translation.i-am-using-phone-translation,toy dahng zoong fuhn maym zik,Tôi đang dùng phần mềm dịch
+phone-text-power.please-type-it-for-me,seen gaw zoop toy,Xin gõ giúp tôi
+sim-data.i-would-like-a-tourist-sim,toy moo-un moo-uh seem zoo lik,Tôi muốn mua SIM du lịch
+etiquette.is-this-allowed,duh-uk fep khohng ah?,Được phép không ạ?
+children.cannot-find-my-child,toy khohng teem tigh kawn toy,Tôi không tìm thấy con tôi
+time-scheduling.what-time-is-it,migh zuh roy ah?,Mấy giờ rồi ạ?
+time-words.today,hohm nigh,Hôm nay
+days-of-week.monday,tuh high,Thứ hai
+months.january,tahng moht,Tháng một
+directions.where-is,{} uh doh ah?,{} ở đâu ạ?
+quick-directions.go-straight,dee tang,Đi thẳng
+taxi.please-take-me-here,seen chuh toy dayn digh,Xin chở tôi đến đây
+transit-rides.two-tickets,chaw toy high veh,Cho tôi hai vé
+border-customs.i-am-a-tourist,toy dee zoo lik,Tôi đi du lịch
+pickup-meeting.where-is-the-pickup-point,dee-um dawn khak uh doh ah?,Điểm đón khách ở đâu ạ?
+rail-station-words.high-speed-rail,tow kow tohk,Tàu cao tốc
+common-signs.open-on,muh,Mở
+utility-templates.i-want-to-go-to,toy moo-un dee {},Tôi muốn đi {}
+building-help.i-am-lost,toy bee lahk,Tôi bị lạc
+accessibility.wheelchair-access,seh lan vow duh-uk khohng ah?,Xe lăn vào được không ạ?
+toilets.where-public-toilet,nyah vay sing kohng kohng uh doh ah?,Nhà vệ sinh công cộng ở đâu ạ?
+building-words.stairs,koh tahng,Cầu thang
+pronouns-verbs.we-us,choong toy,chúng tôi
+question-words.where,uh doh,ở đâu
+emergency-medical.please-call-an-ambulance,seen goy seh kuhp kew,Xin gọi xe cấp cứu
+medical-conditions.i-need-insulin,toy kuhn in-soo-leen,Tôi cần insulin
+pharmacy-symptoms.i-need-medicine-for,toy kuhn too-uk chee {},Tôi cần thuốc trị {}
+body-parts.stomach,boong,Bụng
+lost-rescue.i-lost-my-phone,toy muht dee-un twigh,Tôi mất điện thoại
+police-consulate.i-want-to-report-a-theft,toy moo-un ching bow muht chohm,Tôi muốn trình báo mất trộm
+dietary-needs.no-eggs,khohng chuhng,Không trứng
+food-ordering.is-a-table-available,kawn bahn chohng khohng ah?,Còn bàn trống không ạ?
+trail-words.trailhead,dee-um swuht faht,Điểm xuất phát
+weather.will-it-rain,hohm nigh kaw muh-uh khohng ah?,Hôm nay có mưa không ạ?
+hiking-parks.where-is-the-trailhead,dee-um swuht faht uh doh ah?,Điểm xuất phát ở đâu ạ?
+trail-conditions.can-we-return-the-same-way,vay teh-oh duh-ung koo duh-uk khohng ah?,Về theo đường cũ được không ạ?
+trail-transport.what-time-is-the-last-shuttle,chwee-un seh koo-oy look migh zuh ah?,Chuyến xe cuối lúc mấy giờ ạ?
+trail-warnings.closed,dawng kuh-uh,Đóng cửa
+trail-landmarks.fork-junction,ngah bah,Ngã ba
+hotel-words.room-key-card,teh fawng,Thẻ phòng
+hotel-basics.there-are-two-of-us,choong toy kaw high nguh-oy,Chúng tôi có hai người
+hotel-requests.what-time-does-breakfast-start,migh zuh kaw buh-uh sahng ah?,Mấy giờ có bữa sáng ạ?
+room-problems.the-air-conditioning-is-broken,dee-oh hwah bee hawng,Điều hòa bị hỏng
+laundry.where-is-a-laundromat,tee-um zat uh doh ah?,Tiệm giặt ở đâu ạ?
+introductions.nice-to-meet-you,ruht voo-ee duh-uk gap,Rất vui được gặp
+numbers-money.y,moht,một
+atm-cash.does-this-atm-take-foreign-cards,migh nigh nyuhn teh nuh-uk ngwigh khohng ah?,Máy này nhận thẻ nước ngoài không ạ?
+attractions-tickets.do-i-need-a-reservation,kaw kuhn dat chuh-uk khohng ah?,Có cần đặt trước không ạ?
+payment-receipt.pay-cash,chah tee-un mat ah?,Trả tiền mặt ạ?
+shopping.how-much-is-this,kigh nigh bow nyee-oh ah?,Cái này bao nhiêu ạ?
+color-size-returns.do-you-have-another-size,kaw kuh khahk khohng ah?,Có cỡ khác không ạ?
+social-basics.hello-polite,chow ang / chee ah,Xin chào
+communication.i-speak-only-a-little-of-this,toy chee noy duh-uk moht choot tee-ung vee-ut,Tôi chỉ nói được một chút tiếng {target}
+quick-responses.yes-right,vuhng,Vâng
+phone-translation.please-speak-toward-the-phone,seen noy vow dee-un twigh,Xin nói vào điện thoại
+phone-translation.please-write-the-place-name,seen vee-ut tayn dee-uh dee-um bang tee-ung vee-ut,Xin viết tên địa điểm bằng tiếng {target}
+sim-data.may-i-use-your-wifi,chaw toy zoong wai-fai ah,Cho tôi dùng Wi-Fi ạ
+etiquette.is-tipping-expected,kaw kuhn tee-un teep khohng ah?,Có cần tiền tip không ạ?
+children.make-an-announcement,seen tohng bow chayn lwah,Xin thông báo trên loa
+time-scheduling.how-many-minutes,bow nyee-oh foot ah?,Bao nhiêu phút ạ?
+time-words.tomorrow,ngigh migh,Ngày mai
+days-of-week.tuesday,tuh bah,Thứ ba
+months.february,tahng high,Tháng hai
+directions.how-do-i-get-to,dee {} tay now ah?,Đi {} thế nào ạ?
+quick-directions.turn-left,reh chigh,Rẽ trái
+taxi.please-send-me-the-address,seen guh-ee dee-uh chee chaw toy,Xin gửi địa chỉ cho tôi
+transit-rides.where-is-the-subway-station,gah tow dee-un nguhm uh doh ah?,Ga tàu điện ngầm ở đâu ạ?
+place-words.visitor-center,choong tuhm zoo khak,Trung tâm du khách
+border-customs.here-is-my-passport,hoh chee-oh koo-uh toy digh,Hộ chiếu của tôi đây
+pickup-meeting.please-send-me-the-pickup-point,seen guh-ee dee-um dawn chaw toy,Xin gửi điểm đón cho tôi
+common-signs.closed-off,dawng,Đóng
+utility-templates.please-give-me,seen chaw toy {},Xin cho tôi {}
+building-help.where-is-reception,lay tuhn uh doh ah?,Lễ tân ở đâu ạ?
+accessibility.elevator,uh digh kaw tahng migh khohng ah?,Ở đây có thang máy không ạ?
+in-a-building.do-you-have-wi-fi,uh digh kaw wai-fai khohng ah?,Ở đây có Wi-Fi không ạ?
+toilets.may-i-use-the-toilet,toy zoong nyah vay sing duh-uk khohng ah?,Tôi dùng nhà vệ sinh được không ạ?
+building-words.entrance,loy vow,Lối vào
+pronouns-verbs.you,bahn,bạn
+question-words.who,eye,ai
+emergency-medical.i-need-a-doctor,toy kuhn bahk see,Tôi cần bác sĩ
+medical-conditions.i-have-asthma,toy bee hen swee-un,Tôi bị hen suyễn
+pharmacy-symptoms.i-have-a-fever,toy bee soht,Tôi bị sốt
+body-parts.back,luhng,Lưng
+lost-rescue.please-call-the-police,seen goy kohng ahn,Xin gọi công an
+police-consulate.my-bag-was-stolen,toy bee ligh kap too-ee sak,Tôi bị lấy cắp túi xách
+dietary-needs.not-spicy,khohng kigh,Không cay
+food-ordering.menu-please,chaw toy tuhk duhn ah,Cho tôi thực đơn ạ
+trail-words.summit,ding noo-ee,Đỉnh núi
+weather.is-it-safe-today,hohm nigh kaw ahn twahn khohng ah?,Hôm nay có an toàn không ạ?
+hiking-parks.how-long-to-the-summit,layn ding muht bow loh ah?,Lên đỉnh mất bao lâu ạ?
+trail-conditions.can-we-return-before-dark,vay keep chuh-uk toy khohng ah?,Về kịp trước tối không ạ?
+trail-transport.when-does-the-cableway-stop,kahp cheh-oh zuhng look migh zuh ah?,Cáp treo dừng lúc mấy giờ ạ?
+trail-warnings.maintenance,dahng bow chee,Đang bảo trì
+trail-landmarks.boardwalk-cliff-path,duh-ung vahn goh / vak dah,Đường ván gỗ / vách đá
+hotel-words.check-in,nyuhn fawng,Nhận phòng
+hotel-basics.i-have-a-reservation,toy kaw dat fawng chuh-uk,Tôi có đặt phòng trước
+hotel-requests.can-i-store-my-luggage,guh-ee hang lee duh-uk khohng ah?,Gửi hành lý được không ạ?
+room-problems.there-is-no-hot-water,khohng kaw nuh-uk nawng,Không có nước nóng
+laundry.when-will-it-be-ready,khee now sawng ah?,Khi nào xong ạ?
+introductions.what-is-your-name,seen chaw hoy tayn zee ah?,Xin cho hỏi tên gì ạ?
+numbers-money.r,high,hai
+atm-cash.the-atm-kept-my-card,migh noo-ut teh koo-uh toy,Máy nuốt thẻ của tôi
+attractions-tickets.what-is-the-latest-entry-time,vow kuh-uh moo-un nyuht look migh zuh ah?,Vào cửa muộn nhất lúc mấy giờ ạ?
+payment-receipt.pay-by-qr-code,kwet mah kyoo-ar duh-uk khohng ah?,Quét mã QR được không ạ?
+shopping.that-is-too-expensive,dat kwah,Đắt quá
+color-size-returns.may-i-try-it-on,chaw toy mak tuh ah,Cho tôi mặc thử ạ
+social-basics.good-morning,chow boo-oy sahng,Chào buổi sáng
+communication.do-you-speak-english,kaw noy duh-uk tee-ung ang khohng ah?,Có nói được tiếng {source} không ạ?
+quick-responses.no-not,khohng,Không
+phone-translation.one-sentence-at-a-time-please,seen noy tuhng koh moht,Xin nói từng câu một
+phone-text-power.please-use-simple-words,seen zoong tuh duhn zahn,Xin dùng từ đơn giản
+sim-data.how-much-data-is-included,duh-uk bow nyee-oh day-tah ah?,Được bao nhiêu data ạ?
+etiquette.is-service-included,dah ting fee fook voo chuh-uh ah?,Đã tính phí phục vụ chưa ạ?
+children.child-age,kawn toy {} too-oy,Con tôi {} tuổi
+time-scheduling.what-time-should-we-meet,migh zuh gap nyow ah?,Mấy giờ gặp nhau ạ?
+time-words.yesterday,hohm kwah,Hôm qua
+days-of-week.wednesday,tuh tuh,Thứ tư
+months.march,tahng bah,Tháng ba
+directions.is-it-far,kaw sah khohng ah?,Có xa không ạ?
+quick-directions.turn-right,reh figh,Rẽ phải
+taxi.we-need-the-east-gate-not-the-south-gate,"kohng dohng, khohng figh kohng nahm","Cổng Đông, không phải cổng Nam"
+transit-rides.does-this-bus-train-go-to,seh nigh kaw dee {} khohng ah?,Xe này có đi {} không ạ?
+place-words.railway-station,gah tow hwah,Ga tàu hỏa
+border-customs.i-am-staying-for-days,toy uh {} ngigh,Tôi ở {} ngày
+pickup-meeting.please-pick-us-up-here,seen dawn choong toy uh digh,Xin đón chúng tôi ở đây
+rail-station-words.transfer,doy tow,Đổi tàu
+common-signs.occupied,kaw nguh-oy,Có người
+utility-templates.may-i,toy {} duh-uk khohng ah?,Tôi {} được không ạ?
+building-help.where-is-a-power-outlet,oh kam dee-un uh doh ah?,Ổ cắm điện ở đâu ạ?
+accessibility.ramp,uh digh kaw duh-ung zohk khohng ah?,Ở đây có đường dốc không ạ?
+in-a-building.what-is-the-wi-fi-password,muht khoh wai-fai lah zee ah?,Mật khẩu Wi-Fi là gì ạ?
+toilets.is-it-only-for-customers,chee zang chaw khak hahng ah?,Chỉ dành cho khách hàng ạ?
+building-words.exit,loy rah,Lối ra
+pronouns-verbs.you-polite,ang / chee,anh / chị
+question-words.which-one,kigh now,cái nào
+emergency-medical.i-am-sick,toy bee bayng,Tôi bị bệnh
+medical-conditions.i-have-a-heart-condition,toy bee bayng teem,Tôi bị bệnh tim
+pharmacy-symptoms.i-have-diarrhea,toy bee tee-oh chigh,Tôi bị tiêu chảy
+body-parts.throat,hawng,Họng
+lost-rescue.we-are-here,choong toy uh digh,Chúng tôi ở đây
+police-consulate.my-passport-was-stolen,toy bee ligh kap hoh chee-oh,Tôi bị lấy cắp hộ chiếu
+dietary-needs.less-spicy,eet kigh toy,Ít cay thôi
+food-ordering.i-want-this,toy moo-un mawn nigh,Tôi muốn món này
+trail-words.viewpoint,dee-um ngam kang,Điểm ngắm cảnh
+weather.how-cold-at-night,bahn daym lang bow nyee-oh doh ah?,Ban đêm lạnh bao nhiêu độ ạ?
+hiking-parks.how-long-to-the-viewpoint,dayn dee-um ngam kang muht bow loh ah?,Đến điểm ngắm cảnh mất bao lâu ạ?
+trail-conditions.is-the-trail-open,duh-ung mawn kaw muh khohng ah?,Đường mòn có mở không ạ?
+trail-transport.where-can-we-buy-water,moo-uh nuh-uk uh doh ah?,Mua nước ở đâu ạ?
+trail-warnings.steep-slope,zohk duhng,Dốc đứng
+trail-landmarks.start,dee-um bat doh,Điểm bắt đầu
+hotel-words.check-out,chah fawng,Trả phòng
+hotel-basics.can-i-charge-my-phone,sahk dee-un twigh duh-uk khohng ah?,Sạc điện thoại được không ạ?
+hotel-requests.no-housekeeping,khohng kuhn zawn fawng,Không cần dọn phòng
+room-problems.can-i-change-rooms,doy fawng duh-uk khohng ah?,Đổi phòng được không ạ?
+laundry.how-much-per-kilo,bow nyee-oh moht kee ah?,Bao nhiêu một ký ạ?
+introductions.we-are-traveling-together,choong toy dee koong nyow,Chúng tôi đi cùng nhau
+atm-cash.is-there-a-fee,kaw muht fee khohng ah?,Có mất phí không ạ?
+attractions-tickets.are-there-lockers,kaw too guh-ee doh khohng ah?,Có tủ gửi đồ không ạ?
+payment-receipt.a-receipt-please,chaw toy hwah duhn ah,Cho tôi hóa đơn ạ
+shopping.can-it-be-a-little-cheaper,buht choot duh-uk khohng ah?,Bớt chút được không ạ?
+color-size-returns.can-i-return-it,chah ligh duh-uk khohng ah?,Trả lại được không ạ?
+social-basics.good-evening,chow boo-oy toy,Chào buổi tối
+communication.please-speak-more-slowly,seen noy chuhm huhn,Xin nói chậm hơn
+quick-responses.okay-can,duh-uk,Được
+phone-text-power.my-phone-battery-is-low,dee-un twigh toy sap hayt peen,Điện thoại tôi sắp hết pin
+sim-data.do-you-need-my-passport,kaw kuhn hoh chee-oh khohng ah?,Có cần hộ chiếu không ạ?
+etiquette.may-i-enter,toy vow duh-uk khohng ah?,Tôi vào được không ạ?
+children.high-chair,kaw gay an chaw beh khohng ah?,Có ghế ăn cho bé không ạ?
+time-scheduling.can-we-change-the-time,doy zuh duh-uk khohng ah?,Đổi giờ được không ạ?
+time-words.this-week,twuhn nigh,Tuần này
+days-of-week.thursday,tuh nam,Thứ năm
+months.april,tahng tuh,Tháng tư
+directions.how-long-on-foot,dee boh muht bow loh ah?,Đi bộ mất bao lâu ạ?
+quick-directions.this-way,loy nigh,Lối này
+taxi.please-stop-here,seen zuhng uh digh,Xin dừng ở đây
+transit-rides.what-is-the-next-stop,chahm sow lah chahm now ah?,Trạm sau là trạm nào ạ?
+place-words.airport,suhn bigh,Sân bay
+border-customs.nothing-to-declare,khohng kaw zee khigh bow,Không có gì khai báo
+pickup-meeting.meet-us-at,gap choong toy uh {},Gặp chúng tôi ở {}
+rail-station-words.ticket-gate,kohng swaht veh,Cổng soát vé
+common-signs.vacant,chohng,Trống
+utility-templates.please-do-not-add,seen duhng chaw {},Xin đừng cho {}
+accessibility.how-many-steps,kaw bow nyee-oh buhk tahng ah?,Có bao nhiêu bậc thang ạ?
+in-a-building.which-floor,tuhng migh ah?,Tầng mấy ạ?
+toilets.toilet-wc,nyah vay sing,Nhà vệ sinh
+building-words.men,nahm,Nam
+pronouns-verbs.he-him,ang eye,anh ấy
+question-words.when,khee now,khi nào
+emergency-medical.i-am-injured,toy bee tuh-ung,Tôi bị thương
+medical-conditions.i-am-allergic-to-penicillin,toy zee uhng pay-nee-see-leen,Tôi dị ứng penicillin
+pharmacy-symptoms.where-is-an-all-night-pharmacy,nyah too-uk now muh bahn daym ah?,Nhà thuốc nào mở ban đêm ạ?
+body-parts.tooth,rang,Răng
+lost-rescue.please-look-at-my-location-pin,seen sem geem vee chee koo-uh toy,Xin xem ghim vị trí của tôi
+police-consulate.someone-is-following-me,kaw nguh-oy dahng bahm teh-oh toy,Có người đang bám theo tôi
+dietary-needs.no-peanuts,khohng doh fohng,Không đậu phộng
+food-ordering.do-you-have-drinking-water,kaw nuh-uk oo-ung khohng ah?,Có nước uống không ạ?
+trail-words.cableway,kahp cheh-oh,Cáp treo
+weather.rain,muh-uh,Mưa
+hiking-parks.which-route-is-easier,duh-ung now zay dee huhn ah?,Đường nào dễ đi hơn ạ?
+trail-conditions.is-the-route-steep,duh-ung kaw zohk khohng ah?,Đường có dốc không ạ?
+trail-transport.where-can-we-refill-water,ligh taym nuh-uk uh doh ah?,Lấy thêm nước ở đâu ạ?
+trail-warnings.caution-slippery,kuhn tuhn chuhn chuh-ut,Cẩn thận trơn trượt
+trail-landmarks.end,dee-um kayt took,Điểm kết thúc
+hotel-basics.i-would-like-a-non-smoking-room,chaw toy fawng khohng hoot too-uk ah,Cho tôi phòng không hút thuốc ạ
+room-problems.the-room-is-too-noisy,fawng ohn kwah,Phòng ồn quá
+laundry.can-it-be-ready-today,hohm nigh sawng duh-uk khohng ah?,Hôm nay xong được không ạ?
+introductions.this-is-my-friend,digh lah bahn toy,Đây là bạn tôi
+numbers-money.s-n,bah,ba
+atm-cash.the-card-was-declined,teh bee tuh choy,Thẻ bị từ chối
+attractions-tickets.may-i-take-photos,choop ang duh-uk khohng ah?,Chụp ảnh được không ạ?
+color-size-returns.can-i-exchange-it,doy duh-uk khohng ah?,Đổi được không ạ?
+social-basics.goodbye,tahm bee-ut,Tạm biệt
+communication.i-do-not-understand-spoken,toy ngeh khohng hee-oh,Tôi nghe không hiểu
+quick-responses.cannot-not-allowed,khohng duh-uk,Không được
+phone-text-power.do-you-have-a-power-bank,kaw sahk zuh fawng khohng ah?,Có sạc dự phòng không ạ?
+sim-data.how-long-is-it-valid,zoong duh-uk bow loh ah?,Dùng được bao lâu ạ?
+etiquette.remove-shoes,kaw figh kuh-ee zigh khohng ah?,Có phải cởi giày không ạ?
+children.baby-changing-room,fawng tigh tah uh doh ah?,Phòng thay tã ở đâu ạ?
+time-scheduling.when-is-convenient,khee now tee-un ah?,Khi nào tiện ạ?
+time-words.next-week,twuhn sow,Tuần sau
+days-of-week.friday,tuh sow,Thứ sáu
+months.may,tahng nam,Tháng năm
+directions.please-show-me-on-the-map,seen chee zoop chayn bahn doh,Xin chỉ giúp trên bản đồ
+quick-directions.that-way,loy kee-uh,Lối kia
+taxi.can-you-wait-for-me-here,chuh toy uh digh duh-uk khohng ah?,Chờ tôi ở đây được không ạ?
+transit-rides.please-tell-me-where-to-get-off,seen bow toy choh soo-ung,Xin báo tôi chỗ xuống
+place-words.service-desk,kwigh zik voo,Quầy dịch vụ
+border-customs.i-am-staying-at,toy uh tigh {},Tôi ở tại {}
+pickup-meeting.please-call-me-a-ride,seen goy seh zoop toy,Xin gọi xe giúp tôi
+rail-station-words.platform,suhn gah,Sân ga
+common-signs.caution,choo ee,Chú ý
+utility-templates.do-you-have,kaw {} khohng ah?,Có {} không ạ?
+accessibility.cannot-climb-stairs,toy khohng leh-oh koh tahng duh-uk,Tôi không leo cầu thang được
+toilets.is-it-free,kaw mee-un fee khohng ah?,Có miễn phí không ạ?
+building-words.women,nuh,Nữ
+pronouns-verbs.she-her,koh eye,cô ấy
+question-words.how,tay now,thế nào
+emergency-medical.it-hurts-here,toy dow uh digh,Tôi đau ở đây
+medical-conditions.i-have-epilepsy,toy bee dohng king,Tôi bị động kinh
+pharmacy-symptoms.painkiller,too-uk zahm dow,Thuốc giảm đau
+body-parts.chest,nguhk,Ngực
+lost-rescue.i-cannot-walk,toy khohng dee duh-uk,Tôi không đi được
+police-consulate.i-need-a-written-police-report,toy kuhn bee-un bahn koo-uh kohng ahn,Tôi cần biên bản của công an
+dietary-needs.no-nuts,khohng kahk lwigh haht,Không các loại hạt
+food-ordering.to-go-please,chaw toy mahng vay ah,Cho tôi mang về ạ
+trail-words.shuttle-bus,seh choong chwee-un,Xe trung chuyển
+weather.snow,twee-ut,Tuyết
+trail-conditions.is-the-path-slippery,duh-ung kaw chuhn khohng ah?,Đường có trơn không ạ?
+trail-transport.is-there-cell-signal-here,uh digh kaw sawng khohng ah?,Ở đây có sóng không ạ?
+trail-warnings.danger,ngwee hee-um,Nguy hiểm
+trail-landmarks.elevation,doh kow,Độ cao
+hotel-basics.i-would-like-a-quiet-room,chaw toy fawng ee-un ting ah,Cho tôi phòng yên tĩnh ạ
+room-problems.the-key-does-not-work,teh fawng khohng muh duh-uk,Thẻ phòng không mở được
+laundry.please-do-not-use-bleach,seen duhng zoong too-uk tigh,Xin đừng dùng thuốc tẩy
+introductions.i-am-from,toy dayn tuh {},Tôi đến từ {}
+numbers-money.s,bohn,bốn
+atm-cash.what-is-the-exchange-rate,tee zah bow nyee-oh ah?,Tỷ giá bao nhiêu ạ?
+attractions-tickets.please-take-a-photo-of-us,choop zoop choong toy moht tuhm ah,Chụp giúp chúng tôi một tấm ạ
+color-size-returns.do-you-have-a-bag,chaw toy kigh too-ee ah,Cho tôi cái túi ạ
+social-basics.thank-you,kahm uhn,Cảm ơn
+communication.i-cannot-read-understand,toy dawk khohng hee-oh,Tôi đọc không hiểu
+quick-responses.works-okay,ohn,Ổn
+phone-text-power.the-translation-may-be-inaccurate,bahn zik kaw tay khohng ching sahk,Bản dịch có thể không chính xác
+sim-data.please-activate-it,seen kik hwaht zoop,Xin kích hoạt giúp
+etiquette.photo-of-you,chaw toy choop hing ang / chee ah?,Cho tôi chụp hình anh / chị ạ?
+children.childrens-menu,kaw mawn chaw cheh em khohng ah?,Có món cho trẻ em không ạ?
+time-scheduling.what-is-today-s-date,hohm nigh ngigh migh ah?,Hôm nay ngày mấy ạ?
+time-words.morning,boo-oy sahng,Buổi sáng
+days-of-week.saturday,tuh bigh,Thứ bảy
+months.june,tahng sow,Tháng sáu
+directions.where-is-the-nearest,{} guhn nyuht uh doh ah?,{} gần nhất ở đâu ạ?
+quick-directions.on-the-left,bayn chigh,Bên trái
+taxi.we-need-to-catch-the-high-speed-train,choong toy figh keep tow kow tohk,Chúng tôi phải kịp tàu cao tốc
+transit-rides.is-this-direct,kaw dee tang khohng ah?,Có đi thẳng không ạ?
+place-words.bus-stop,chahm seh bweet,Trạm xe buýt
+border-customs.i-am-here-for-business,toy dee kohng tahk,Tôi đi công tác
+rail-station-words.ticket-office,fawng bahn veh,Phòng bán vé
+common-signs.no-entry,kuhm vow,Cấm vào
+utility-templates.please-write-the-number,seen gee soh rah zigh,Xin ghi số ra giấy
+accessibility.need-to-sit-down,toy kuhn ngoy ngee,Tôi cần ngồi nghỉ
+toilets.do-i-need-a-coin,kaw kuhn tee-un soo high teh khohng ah?,Có cần tiền xu hay thẻ không ạ?
+building-words.door,kuh-uh,Cửa
+pronouns-verbs.they-them,haw,họ
+question-words.how-much-many,bow nyee-oh,bao nhiêu
+emergency-medical.where-is-a-pharmacy,nyah too-uk uh doh ah?,Nhà thuốc ở đâu ạ?
+medical-conditions.my-blood-sugar-is-low,toy bee hah duh-ung hwee-ut,Tôi bị hạ đường huyết
+pharmacy-symptoms.do-i-need-a-prescription,kaw kuhn duhn too-uk khohng ah?,Có cần đơn thuốc không ạ?
+body-parts.eye,mat,Mắt
+lost-rescue.i-sprained-my-ankle,toy bee bawng guhn koh chuhn,Tôi bị bong gân cổ chân
+police-consulate.i-want-to-contact-my-embassy,toy moo-un lee-un hay digh suh kwahn,Tôi muốn liên hệ đại sứ quán
+dietary-needs.no-seafood,khohng high sahn,Không hải sản
+food-ordering.check-please,ting tee-un ah,Tính tiền ạ
+trail-words.park-shuttle,seh dee-un tahm kwahn,Xe điện tham quan
+weather.wind,zaw,Gió
+trail-transport.do-you-have-a-map,kaw bahn doh khohng ah?,Có bản đồ không ạ?
+trail-warnings.beware-falling-rocks,kuhn tuhn dah ruh-ee,Cẩn thận đá rơi
+trail-landmarks.sunset,hwahng hohn,Hoàng hôn
+hotel-basics.is-there-a-washing-machine,kaw migh zat khohng ah?,Có máy giặt không ạ?
+room-problems.the-toilet-will-not-flush,bohn koh khohng sah nuh-uk duh-uk,Bồn cầu không xả nước được
+laundry.laundromat,tee-um zat,Tiệm giặt
+introductions.where-are-you-from,kway uh doh ah?,Quê ở đâu ạ?
+numbers-money.w,nam,năm
+atm-cash.no-money-came-out,migh khohng nyah tee-un,Máy không nhả tiền
+social-basics.you-are-welcome,khohng kaw zee,Không có gì
+communication.please-say-it-again,seen noy ligh,Xin nói lại
+quick-responses.does-not-work-no,khohng ohn,Không ổn
+phone-text-power.please-confirm,seen sahk nyuhn zoop,Xin xác nhận giúp
+sim-data.do-you-have-an-esim,kaw ee-seem khohng ah?,Có eSIM không ạ?
+etiquette.may-i-sit-here,toy ngoy digh duh-uk khohng ah?,Tôi ngồi đây được không ạ?
+children.suitable-for-children,kigh nigh huhp vuh-ee cheh em khohng ah?,Cái này hợp với trẻ em không ạ?
+time-scheduling.what-day-is-it-today,hohm nigh tuh migh ah?,Hôm nay thứ mấy ạ?
+time-words.afternoon,boo-oy chee-oh,Buổi chiều
+days-of-week.sunday,choo nyuht,Chủ nhật
+months.july,tahng bigh,Tháng bảy
+directions.where-am-i,toy dahng uh doh ah?,Tôi đang ở đâu ạ?
+quick-directions.on-the-right,bayn figh,Bên phải
+taxi.please-use-the-meter,seen buht dohng hoh,Xin bật đồng hồ
+transit-rides.do-i-need-to-transfer,kaw figh doy seh khohng ah?,Có phải đổi xe không ạ?
+place-words.luggage-storage,nuh-ee guh-ee hang lee,Nơi gửi hành lý
+border-customs.i-have-a-return-ticket,toy kaw veh khuh hoy,Tôi có vé khứ hồi
+rail-station-words.waiting-room,fawng chuh,Phòng chờ
+common-signs.no-smoking,kuhm hoot too-uk,Cấm hút thuốc
+utility-templates.i-need,toy kuhn {},Tôi cần {}
+accessibility.accessible-restroom,kaw nyah vay sing chaw nguh-oy khwee-ut tuht khohng?,Có nhà vệ sinh cho người khuyết tật không?
+toilets.is-the-tap-water-safe-to-drink,nuh-uk migh oo-ung duh-uk khohng ah?,Nước máy uống được không ạ?
+building-words.key,chee-uh khwah,Chìa khóa
+pronouns-verbs.my-mine,koo-uh toy,của tôi
+question-words.how-many,migh,mấy
+emergency-medical.please-take-me-to-a-hospital,seen duh-uh toy dayn bayng vee-un,Xin đưa tôi đến bệnh viện
+medical-conditions.i-need-my-inhaler,toy kuhn bing seet hen,Tôi cần bình xịt hen
+pharmacy-symptoms.i-have-a-headache,toy bee dow doh,Tôi bị đau đầu
+body-parts.ear,tigh,Tai
+lost-rescue.please-contact-rescue,seen lee-un hay doy kew hoh,Xin liên hệ đội cứu hộ
+police-consulate.i-need-it-for-my-insurance,toy kuhn kigh nigh chaw bow hee-um,Tôi cần cái này cho bảo hiểm
+dietary-needs.i-am-vegetarian,toy an chigh,Tôi ăn chay
+food-ordering.does-it-contain,mawn nigh kaw {} khohng ah?,Món này có {} không ạ?
+trail-words.steps,buhk tahng,Bậc thang
+weather.storm,bow,Bão
+trail-warnings.first-aid-station,chahm suh kew,Trạm sơ cứu
+room-problems.the-light-does-not-work,den khohng sahng,Đèn không sáng
+laundry.please-iron-this,seen oo-ee zoop kigh nigh,Xin ủi giúp cái này
+introductions.how-are-you,kaw khweh khohng ah?,Có khỏe không ạ?
+numbers-money.li,sow,sáu
+atm-cash.where-can-i-change-money,doy tee-un uh doh ah?,Đổi tiền ở đâu ạ?
+social-basics.excuse-me-sorry,seen loy,Xin lỗi
+communication.please-write-it-down,seen vee-ut rah zigh,Xin viết ra giấy
+sim-data.my-data-is-not-working,day-tah khohng zoong duh-uk,Data không dùng được
+etiquette.queue-for,digh lah hahng chuh {} figh khohng ah?,Đây là hàng chờ {} phải không ạ?
+children.minimum-age,bow nyee-oh too-oy chuh layn ah?,Bao nhiêu tuổi trở lên ạ?
+time-scheduling.what-time-does-it-open,migh zuh muh kuh-uh ah?,Mấy giờ mở cửa ạ?
+time-words.evening,boo-oy toy,Buổi tối
+months.august,tahng tahm,Tháng tám
+directions.which-way,dee huh-ung now ah?,Đi hướng nào ạ?
+quick-directions.across-from-here,doy zee-un digh,Đối diện đây
+transit-rides.is-it-delayed,kaw bee chay khohng ah?,Có bị trễ không ạ?
+border-customs.i-am-visiting-family,toy tam zah ding,Tôi thăm gia đình
+rail-station-words.train-number,soh hee-oh tow,Số hiệu tàu
+common-signs.no-photography,kuhm choop ang,Cấm chụp ảnh
+utility-templates.is-there-nearby,guhn digh kaw {} khohng ah?,Gần đây có {} không ạ?
+accessibility.station-assistance,uh gah kaw hoh chuh nguh-oy khwee-ut tuht khohng ah?,Ở ga có hỗ trợ người khuyết tật không ạ?
+toilets.it-is-urgent,guhp lam ah,Gấp lắm ạ
+pronouns-verbs.your-yours,koo-uh bahn,của bạn
+question-words.why,tigh sow,tại sao
+medical-conditions.i-am-pregnant,toy dahng mahng tigh,Tôi đang mang thai
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-say-tah-mawl,Paracetamol
+body-parts.leg,chuhn,Chân
+lost-rescue.my-companion-is-missing,nguh-oy dee koong toy bee lahk,Người đi cùng tôi bị lạc
+police-consulate.i-need-an-interpreter,toy kuhn nguh-oy fee-un zik,Tôi cần người phiên dịch
+dietary-needs.i-am-vegan,toy an twuhn chigh,Tôi ăn thuần chay
+food-ordering.is-this-vegetarian,mawn nigh lah mawn chigh ah?,Món này là món chay ạ?
+trail-words.up-uphill,layn zohk,Lên dốc
+weather.ice,bang,Băng
+trail-warnings.service-suspended,tahm nguhng fook voo,Tạm ngừng phục vụ
+trail-landmarks.water-point,dee-um ligh nuh-uk,Điểm lấy nước
+room-problems.please-send-someone,seen chaw nguh-oy dayn suh-uh,Xin cho người đến sửa
+laundry.detergent,boht zat,Bột giặt
+introductions.i-am-a-tourist,toy lah khak zoo lik,Tôi là khách du lịch
+numbers-money.q,bigh,bảy
+atm-cash.the-machine-is-out-of-service,migh khohng hwaht dohng,Máy không hoạt động
+social-basics.sorry,toy seen loy,Tôi xin lỗi
+communication.please-wait-a-moment,seen chuh moht choot,Xin chờ một chút
+sim-data.does-it-need-registration,kaw kuhn dang kee khohng ah?,Có cần đăng ký không ạ?
+etiquette.dressed-appropriately,toy mak tay nigh duh-uk khohng ah?,Tôi mặc thế này được không ạ?
+children.do-children-pay,cheh em kaw figh moo-uh veh khohng ah?,Trẻ em có phải mua vé không ạ?
+time-scheduling.what-time-does-it-close,migh zuh dawng kuh-uh ah?,Mấy giờ đóng cửa ạ?
+time-words.spring,moo-uh swuhn,Mùa xuân
+months.september,tahng cheen,Tháng chín
+directions.can-i-walk-there,dee boh dayn duh-uk khohng ah?,Đi bộ đến được không ạ?
+quick-directions.in-front,fee-uh chuh-uk,Phía trước
+transit-rides.i-am-in-a-hurry,toy dahng voy,Tôi đang vội
+border-customs.this-is-for-personal-use,doh zoong kah nyuhn,Đồ dùng cá nhân
+rail-station-words.carriage,twah tow,Toa tàu
+common-signs.do-not-touch,khohng chahm vow,Không chạm vào
+utility-templates.how-much-is,{} bow nyee-oh tee-un ah?,{} bao nhiêu tiền ạ?
+accessibility.help-me-carry,seen zoop toy mahng kigh nigh,Xin giúp tôi mang cái này
+toilets.may-i-have-the-toilet-key,chaw toy muh-un chee-uh khwah nyah vay sing ah,Cho tôi mượn chìa khóa nhà vệ sinh ạ
+pronouns-verbs.be-called-call,tayn lah / goy,tên là / gọi
+question-words.this,kigh nigh,cái này
+medical-conditions.i-carry-an-adrenaline-injector,toy kaw boot tee-um ad-ray-nah-leen,Tôi có bút tiêm adrenalin
+pharmacy-symptoms.how-much-should-i-take,oo-ung bow nyee-oh ah?,Uống bao nhiêu ạ?
+body-parts.arm,kang tigh,Cánh tay
+police-consulate.please-leave-me-alone,seen day toy ee-un,Xin để tôi yên
+dietary-needs.i-do-not-eat,toy khohng an {},Tôi không ăn {}
+trail-words.down-downhill,soo-ung zohk,Xuống dốc
+weather.fog,suh-ung moo,Sương mù
+room-problems.the-heating-does-not-work,migh suh-oy khohng chigh,Máy sưởi không chạy
+laundry.dry-cleaning,zat khoh,Giặt khô
+introductions.this-is-my-husband-wife,digh lah chohng / vuh toy,Đây là chồng / vợ tôi
+numbers-money.b,tahm,tám
+atm-cash.please-give-me-smaller-notes,seen chaw toy tuh nyaw huhn,Xin cho tôi tờ nhỏ hơn
+social-basics.no-problem,khohng sow,Không sao
+communication.can-you-help-me,zoop toy duh-uk khohng ah?,Giúp tôi được không ạ?
+sim-data.i-have-no-signal,toy khohng kaw sawng,Tôi không có sóng
+etiquette.did-not-mean-to-offend,"toy khohng koh ee, seen tuh loy","Tôi không cố ý, xin thứ lỗi"
+children.crib,kaw noy em beh khohng ah?,Có nôi em bé không ạ?
+time-words.summer,moo-uh heh,Mùa hè
+months.october,tahng muh-oy,Tháng mười
+directions.how-far-is-it,bow sah ah?,Bao xa ạ?
+quick-directions.behind,fee-uh sow,Phía sau
+transit-rides.which-platform,suhn gah now ah?,Sân ga nào ạ?
+border-customs.i-am-in-transit,toy kwah kang,Tôi quá cảnh
+rail-station-words.seat,choh ngoy,Chỗ ngồi
+common-signs.temporarily-closed,tahm dawng kuh-uh,Tạm đóng cửa
+utility-templates.is-this,digh lah {} figh khohng ah?,Đây là {} phải không ạ?
+accessibility.board-first,toy layn chuh-uk duh-uk khohng ah?,Tôi lên trước được không ạ?
+toilets.there-is-no-toilet-paper,hayt zigh vay sing roy ah,Hết giấy vệ sinh rồi ạ
+pronouns-verbs.have,kaw,có
+question-words.that,kigh kee-uh,cái kia
+medical-conditions.i-take-medicine-for,toy oo-ung too-uk chee {},Tôi uống thuốc trị {}
+pharmacy-symptoms.i-am-vomiting,toy bee nohn,Tôi bị nôn
+body-parts.foot,bahn chuhn,Bàn chân
+police-consulate.i-was-robbed,toy bee kuh-up,Tôi bị cướp
+dietary-needs.i-am-allergic-to,toy bee zee uhng vuh-ee {},Tôi bị dị ứng với {}
+trail-words.one-way,moht chee-oh,Một chiều
+weather.heat,nawng,Nóng
+laundry.dryer,migh sigh,Máy sấy
+introductions.this-is-my-daughter-son,digh lah kawn gigh / kawn chigh toy,Đây là con gái / con trai tôi
+numbers-money.ji,cheen,chín
+atm-cash.do-you-have-change,kaw tee-un leh khohng ah?,Có tiền lẻ không ạ?
+social-basics.i-do-not-know,toy khohng bee-ut,Tôi không biết
+communication.please-show-me-the-text,seen chaw toy sem chuh tee-ung vee-ut,Xin cho tôi xem chữ tiếng {target}
+sim-data.please-write-the-wifi-password,seen gee muht khoh wai-fai,Xin ghi mật khẩu Wi-Fi
+etiquette.what-is-customary,uh digh tuh-ung lahm tay now ah?,Ở đây thường làm thế nào ạ?
+children.warm-this-bottle,seen huhm nawng bing suh-uh nigh,Xin hâm nóng bình sữa này
+time-words.fall,moo-uh too,Mùa thu
+months.november,tahng muh-oy moht,Tháng mười một
+directions.which-exit,loy rah now ah?,Lối ra nào ạ?
+transit-rides.what-time-is-the-next-one,chwee-un sow migh zuh ah?,Chuyến sau mấy giờ ạ?
+border-customs.i-have-in-cash,toy mahng teh-oh {} tee-un mat,Tôi mang theo {} tiền mặt
+rail-station-words.last-train,chwee-un tow koo-oy,Chuyến tàu cuối
+utility-templates.please,chaw toy {} ah,Cho tôi {} ạ
+accessibility.door-width,kuh-uh rohng bow nyee-oh ah?,Cửa rộng bao nhiêu ạ?
+toilets.toilet-paper,zigh vay sing,Giấy vệ sinh
+pronouns-verbs.do-not-have,khohng kaw,không có
+question-words.here,uh digh,ở đây
+medical-conditions.i-take-blood-thinners,toy zoong too-uk chohng dohng mow,Tôi dùng thuốc chống đông máu
+pharmacy-symptoms.rehydration-salts,oh-ray-sawl,Oresol
+body-parts.hand,bahn tigh,Bàn tay
+police-consulate.i-want-a-lawyer,toy moo-un kaw lwuht suh,Tôi muốn có luật sư
+trail-words.round-trip,khuh hoy,Khứ hồi
+weather.cold,lang,Lạnh
+laundry.coin-operated,migh zoong soo,Máy dùng xu
+introductions.i-am-traveling-alone,toy dee zoo lik moht ming,Tôi đi du lịch một mình
+numbers-money.sh,muh-oy,mười
+atm-cash.may-i-pay-in,chah bang {} duh-uk khohng ah?,Trả bằng {} được không ạ?
+sim-data.sim-card,teh seem,Thẻ SIM
+etiquette.keep-the-change,khohng kuhn chah ligh ah,Không cần trả lại ạ
+children.car-seat,choong toy kuhn gay oh toh chaw beh,Chúng tôi cần ghế ô tô cho bé
+time-words.winter,moo-uh dohng,Mùa đông
+months.december,tahng muh-oy high,Tháng mười hai
+directions.can-you-show-me-the-way,chee duh-ung zoop toy vuh-ee ah,Chỉ đường giúp tôi với ạ
+transit-rides.i-went-past-my-stop,toy dee kwah chahm roy,Tôi đi quá trạm rồi
+border-customs.this-is-a-gift,digh lah kwah,Đây là quà
+rail-station-words.delayed,chuhm chwee-un,Chậm chuyến
+utility-templates.i-am-looking-for,toy dahng teem {},Tôi đang tìm {}
+accessibility.wheelchair-width,seh lan koo-uh toy rohng {} sang-tee-met,Xe lăn của tôi rộng {} cm
+toilets.it-is-out-of-order,bee hawng roy ah,Bị hỏng rồi ạ
+pronouns-verbs.go,dee,đi
+question-words.there,uh daw,ở đó
+medical-conditions.medicine-allergy,zee uhng too-uk: {},Dị ứng thuốc: {}
+pharmacy-symptoms.how-many-times-a-day,ngigh oo-ung migh luhn ah?,Ngày uống mấy lần ạ?
+body-parts.knee,doh goy,Đầu gối
+police-consulate.please-notify-my-consulate,seen bow chaw lang suh kwahn koo-uh toy,Xin báo cho lãnh sự quán của tôi
+weather.humid,uhm,Ẩm
+numbers-money.y-b-i,moht cham,một trăm
+atm-cash.please-charge-in-local-currency,seen ting bang tee-un vee-ut,Xin tính bằng tiền Việt
+sim-data.where-can-i-buy-a-plug-adapter,moo-uh oh kam chwee-un uh doh ah?,Mua ổ cắm chuyển ở đâu ạ?
+children.stroller,seh digh,Xe đẩy
+directions.north,bak,Bắc
+border-customs.where-do-i-collect-my-baggage,ligh hang lee uh doh ah?,Lấy hành lý ở đâu ạ?
+rail-station-words.final-stop,gah koo-oy,Ga cuối
+utility-templates.do-you-accept,kaw nyuhn {} khohng ah?,Có nhận {} không ạ?
+accessibility.hard-of-hearing,toy ngeh kem,Tôi nghe kém
+toilets.out-of-order,hawng,Hỏng
+pronouns-verbs.come,dayn,đến
+question-words.a-little,moht choot,một chút
+medical-conditions.this-card-lists-my-conditions,teh nigh gee bayng koo-uh toy,Thẻ này ghi bệnh của tôi
+pharmacy-symptoms.i-have-a-stomach-ache,toy bee dow boong,Tôi bị đau bụng
+body-parts.ankle,koh chuhn,Cổ chân
+police-consulate.i-am-calling-the-police,toy seh goy kohng ahn,Tôi sẽ gọi công an
+weather.sunrise,bing ming,Bình minh
+numbers-money.y-qi-n,moht ngeen,một nghìn
+atm-cash.where-can-i-get-coins,doy tee-un soo uh doh ah?,Đổi tiền xu ở đâu ạ?
+sim-data.mobile-data,zuh lee-oh zee dohng,Dữ liệu di động
+children.playground,kaw khoo voo-ee chuh-ee khohng ah?,Có khu vui chơi không ạ?
+directions.south,nahm,Nam
+border-customs.how-long-may-i-stay,toy duh-uk uh bow loh ah?,Tôi được ở bao lâu ạ?
+rail-station-words.ticket-validator,migh swaht veh,Máy soát vé
+utility-templates.i-cannot-find,toy khohng teem tigh {},Tôi không tìm thấy {}
+accessibility.speak-louder,seen noy taw huhn,Xin nói to hơn
+toilets.mens-toilet,nyah vay sing nahm,Nhà vệ sinh nam
+pronouns-verbs.would-like,chaw toy,cho tôi
+question-words.some,moht vigh,một vài
+medical-conditions.this-is-my-medicine,digh lah too-uk koo-uh toy,Đây là thuốc của tôi
+pharmacy-symptoms.i-have-a-cough,toy bee haw,Tôi bị ho
+body-parts.skin,zah,Da
+police-consulate.am-i-under-arrest,toy kaw bee bat khohng ah?,Tôi có bị bắt không ạ?
+weather.flood,loo loot,Lũ lụt
+numbers-money.y-w-n,muh-oy ngeen,mười nghìn
+atm-cash.is-there-a-minimum-for-cards,teh kaw muhk toy tee-oh khohng ah?,Thẻ có mức tối thiểu không ạ?
+sim-data.can-i-top-up-this-sim,nahp tee-un seem nigh duh-uk khohng ah?,Nạp tiền SIM này được không ạ?
+directions.east,dohng,Đông
+border-customs.i-have-a-connecting-flight,toy kaw chwee-un bigh noy,Tôi có chuyến bay nối
+utility-templates.there-is-a-problem-with,{} kaw vuhn day ah,{} có vấn đề ạ
+accessibility.visually-impaired,toy bee khee-um tee,Tôi bị khiếm thị
+toilets.womens-toilet,nyah vay sing nuh,Nhà vệ sinh nữ
+pronouns-verbs.want,moo-un,muốn
+question-words.very,ruht,rất
+pharmacy-symptoms.antihistamine,too-uk chohng zee uhng,Thuốc chống dị ứng
+police-consulate.no-thank-you-i-am-not-interested,"khohng, kahm uhn. toy khohng kwahn tuhm","Không, cảm ơn. Tôi không quan tâm"
+weather.avalanche-risk,ngwee kuh luh twee-ut,Nguy cơ lở tuyết
+numbers-money.b-n,moht nuh-uh,một nửa
+atm-cash.atm,migh ah-tay-em,Máy ATM
+sim-data.top-up,nahp tee-un,Nạp tiền
+directions.west,tigh,Tây
+border-customs.may-i-have-an-entry-stamp,chaw toy seen zoh nyuhp kang ah,Cho tôi xin dấu nhập cảnh ạ
+accessibility.take-your-arm,chaw toy veen tigh duh-uk khohng ah?,Cho tôi vịn tay được không ạ?
+toilets.drinking-water,nuh-uk oo-ung,Nước uống
+pronouns-verbs.look-for,teem,tìm
+question-words.too,kwah,quá
+medical-conditions.inject-it-into-my-outer-thigh,tee-um vow mat ngwigh doo-ee toy,Tiêm vào mặt ngoài đùi tôi
+pharmacy-symptoms.anti-diarrhea-medicine,too-uk kuhm tee-oh chigh,Thuốc cầm tiêu chảy
+police-consulate.someone-attacked-me,kaw nguh-oy hang hoong toy,Có người hành hung tôi
+atm-cash.banknote,tuh tee-un,Tờ tiền
+sim-data.is-there-coverage-in,uh {} kaw sawng khohng ah?,Ở {} có sóng không ạ?
+border-customs.visa,tee tuhk,Thị thực
+accessibility.guide-dog,digh lah chaw zuhn duh-ung koo-uh toy,Đây là chó dẫn đường của tôi
+toilets.not-for-drinking,nuh-uk khohng oo-ung duh-uk,Nước không uống được
+pronouns-verbs.buy,moo-uh,mua
+question-words.also,koong,cũng
+medical-conditions.my-blood-type-is,nyawm mow koo-uh toy lah {},Nhóm máu của tôi là {}
+pharmacy-symptoms.is-this-safe-to-take-with,oo-ung choong vuh-ee {} duh-uk khohng ah?,Uống chung với {} được không ạ?
+police-consulate.i-did-not-agree-to-this-price,toy khohng dohng ee zah nigh,Tôi không đồng ý giá này
+atm-cash.coin,tee-un soo,Tiền xu
+sim-data.signal,sawng,Sóng
+border-customs.i-have-no-food-or-plants,toy khohng mahng tuhk fuhm high kigh,Tôi không mang thực phẩm hay cây
+toilets.accessible-toilet,nyah vay sing nguh-oy khwee-ut tuht,Nhà vệ sinh người khuyết tật
+pronouns-verbs.like,tik,thích
+question-words.all-both,tuht kah,tất cả
+medical-conditions.do-not-give-me,duhng chaw toy zoong {},Đừng cho tôi dùng {}
+pharmacy-symptoms.i-feel-dizzy,toy bee chawng mat,Tôi bị chóng mặt
+police-consulate.please-write-the-report-number,seen gee soh bee-un bahn,Xin ghi số biên bản
+atm-cash.cash-only,chee nyuhn tee-un mat,Chỉ nhận tiền mặt
+sim-data.esim,ee-seem,eSIM
+border-customs.passport-control,nyuhp kang,Nhập cảnh
+toilets.where-can-i-wash-my-hands,toy ruh-uh tigh uh doh duh-uk ah?,Tôi rửa tay ở đâu được ạ?
+pronouns-verbs.need,kuhn,cần
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,toy zee uhng as-pee-reen vah ee-boo-praw-fen,Tôi dị ứng aspirin và ibuprofen
+pharmacy-symptoms.ibuprofen,ee-boo-praw-fen,Ibuprofen
+police-consulate.it-happened-here,vee-uk sigh rah uh digh,Việc xảy ra ở đây
+atm-cash.fee,fee,Phí
+sim-data.prepaid,chah chuh-uk,Trả trước
+border-customs.customs,high kwahn,Hải quan
+toilets.can-i-flush-the-paper,baw zigh vow bohn koh duh-uk khohng ah?,Bỏ giấy vào bồn cầu được không ạ?
+medical-conditions.my-injector-is-in-my-bag,boot tee-um koo-uh toy uh chawng too-ee,Bút tiêm của tôi ở trong túi
+pharmacy-symptoms.i-have-a-sore-throat,toy bee dow hawng,Tôi bị đau họng
+police-consulate.may-i-have-a-copy-of-the-report,chaw toy seen bahn sow bee-un bahn ah,Cho tôi xin bản sao biên bản ạ
+atm-cash.change,tee-un tuh-uh,Tiền thừa
+sim-data.roaming,chwee-un voong,Chuyển vùng
+border-customs.baggage-claim,nyuhn hang lee,Nhận hành lý
+toilets.is-there-a-toilet-on-board,chayn seh kaw nyah vay sing khohng ah?,Trên xe có nhà vệ sinh không ạ?
+medical-conditions.i-am-allergic-to-sulfa-drugs,toy zee uhng too-uk soon-fah,Tôi dị ứng thuốc sulfa
+pharmacy-symptoms.can-i-get-this-medicine-here,uh digh kaw too-uk nigh khohng ah?,Ở đây có thuốc này không ạ?
+police-consulate.i-will-not-sign-anything-i-cannot-read,toy khohng kee zigh tuh ming khohng dawk duh-uk,Tôi không ký giấy tờ mình không đọc được
+atm-cash.exchange-rate,tee zah,Tỷ giá
+border-customs.customs-declaration,tuh khigh high kwahn,Tờ khai hải quan
+toilets.the-toilet-will-not-flush,bohn koh khohng sah nuh-uk duh-uk,Bồn cầu không xả nước được
+pharmacy-symptoms.bandage,bang gahk,Băng gạc
+police-consulate.am-i-free-to-go,toy duh-uk vay chuh-uh ah?,Tôi được về chưa ạ?
+atm-cash.bank,nguhn hahng,Ngân hàng
+border-customs.arrival-card,tuh khigh nyuhp kang,Tờ khai nhập cảnh
+toilets.baby-change,fawng tigh tah,Phòng thay tã
+pharmacy-symptoms.the-pain-is-severe,toy dow zuh zoy,Tôi đau dữ dội
+police-consulate.i-do-not-want-to-go-with-you,toy khohng moo-un dee koong,Tôi không muốn đi cùng
+atm-cash.money-exchange,doy ngwigh tay,Đổi ngoại tệ
+border-customs.transit,kwah kang,Quá cảnh
+toilets.squat-toilet,bohn koh sohm,Bồn cầu xổm
+pharmacy-symptoms.antiseptic,too-uk saht choong,Thuốc sát trùng
+atm-cash.pin,mah peen,Mã PIN
+border-customs.boarding-pass,teh layn migh bigh,Thẻ lên máy bay
+pharmacy-symptoms.i-feel-nauseous,toy boo-un nohn,Tôi buồn nôn
+pharmacy-symptoms.i-have-a-rash,toy bee noy muhn,Tôi bị nổi mẩn
+pharmacy-symptoms.before-or-after-food,oo-ung chuh-uk high sow khee an ah?,Uống trước hay sau khi ăn ạ?
+pharmacy-symptoms.i-think-it-is-infected,toy ngee naw bee nyee-um choong,Tôi nghĩ nó bị nhiễm trùng
+pharmacy-symptoms.motion-sickness-tablets,too-uk chohng sigh seh,Thuốc chống say xe
+pharmacy-symptoms.i-have-a-cut,toy kaw vayt kat,Tôi có vết cắt
+pharmacy-symptoms.antacid,too-uk dow zah zigh,Thuốc đau dạ dày
+pharmacy-symptoms.i-have-a-burn,toy bee bawng,Tôi bị bỏng
+pharmacy-symptoms.it-started-days-ago,bee tuh {} ngigh chuh-uk,Bị từ {} ngày trước
+pharmacy-symptoms.cough-medicine,too-uk haw,Thuốc ho
+pharmacy-symptoms.is-this-safe-during-pregnancy,dahng mahng tigh oo-ung duh-uk khohng ah?,Đang mang thai uống được không ạ?
+trail-transport.how-long-is-the-wait,figh chuh bow loh ah?,Phải chờ bao lâu ạ?
+tax-refund.is-tax-free-shopping-available,uh digh kaw hwahn tway vaht khohng ah?,Ở đây có hoàn thuế VAT không ạ?
+place-words.tourist-spot-sightseeing-area,khoo zoo lik,Khu du lịch
+time-scheduling.how-long-does-it-take,muht bow loh ah?,Mất bao lâu ạ?
+transit-rides.can-i-use-this-ticket,veh nigh zoong duh-uk khohng ah?,Vé này dùng được không ạ?
+common-signs.closed,dawng kuh-uh,Đóng cửa
+pronouns-verbs.there-is-have,kaw,có
+common-signs.stopped-stop,zuhng,Dừng
+transit-rides.do-i-need-to-validate,kaw kuhn kwet veh chuh-uk khohng ah?,Có cần quét vé trước không ạ?
+pronouns-verbs.there-is-not-do-not-have,khohng kaw,không có
+emergency-medical.i-feel-unwell,toy tigh khohng khweh,Tôi thấy không khỏe
+food-ordering.what-do-you-recommend,nayn goy mawn zee ah?,Nên gọi món gì ạ?
+hotel-basics.is-wi-fi-free,wai-fai kaw mee-un fee khohng ah?,Wi-Fi có miễn phí không ạ?
+hotel-requests.another-towel-please,chaw toy taym khan tam ah,Cho tôi thêm khăn tắm ạ
+shopping.is-there-a-discount,kaw zahm zah khohng ah?,Có giảm giá không ạ?
+social-basics.good-night,chook ngoo ngawn,Chúc ngủ ngon
+quick-responses.can-possible,kaw tay,Có thể
+phone-translation.please-type-it-and-show-me,seen gaw rah roy chaw toy sem,Xin gõ ra rồi cho tôi xem
+phone-text-power.may-i-charge-my-phone-here,sahk nyuh uh digh duh-uk khohng ah?,Sạc nhờ ở đây được không ạ?
+pronouns-verbs.want-to-verb,moo-un + dohng tuh,muốn + động từ
+emergency-medical.this-is-an-emergency,digh lah chuh-ung huhp khuhn kuhp,Đây là trường hợp khẩn cấp
+lost-rescue.please-look-at-my-current-location,seen sem vee chee hee-un tigh koo-uh toy,Xin xem vị trí hiện tại của tôi
+hotel-words.luggage-storage,guh-ee hang lee,Gửi hành lý
+hotel-basics.how-much-per-night,moht daym bow nyee-oh tee-un ah?,Một đêm bao nhiêu tiền ạ?
+hotel-requests.what-time-is-check-out,migh zuh figh chah fawng ah?,Mấy giờ phải trả phòng ạ?
+payment-receipt.please-write-the-number,seen gee soh rah zigh,Xin ghi số ra giấy
+shopping.where-do-i-pay,chah tee-un uh doh ah?,Trả tiền ở đâu ạ?
+communication.i-cannot-make-out-what-you-are-saying,toy khohng ngeh raw,Tôi không nghe rõ
+quick-responses.cannot-not-possible,khohng tay,Không thể
+taxi.i-will-get-off-here,chaw toy soo-ung digh,Cho tôi xuống đây
+pickup-meeting.please-call-a-taxi,seen goy tak-see zoop toy,Xin gọi taxi giúp tôi
+pronouns-verbs.want-thing,moo-un + doh vuht,muốn + đồ vật
+emergency-medical.i-am-having-a-severe-allergic-reaction,toy bee sohk fahn vay,Tôi bị sốc phản vệ
+lost-rescue.my-child-is-missing,kawn toy bee lahk,Con tôi bị lạc
+food-ordering.water-please,chaw toy nuh-uk ah,Cho tôi nước ạ
+hiking-parks.is-this-trail-suitable-for-beginners,duh-ung nigh huhp vuh-ee nguh-oy muh-ee khohng ah?,Đường này hợp với người mới không ạ?
+hotel-basics.is-breakfast-included,kaw bow gohm buh-uh sahng khohng ah?,Có bao gồm bữa sáng không ạ?
+hotel-requests.can-i-check-in-early,nyuhn fawng suhm duh-uk khohng ah?,Nhận phòng sớm được không ạ?
+payment-receipt.how-much-in-total,tohng kohng bow nyee-oh ah?,Tổng cộng bao nhiêu ạ?
+shopping.i-will-take-this,toy ligh kigh nigh,Tôi lấy cái này
+communication.i-do-not-understand,toy khohng hee-oh,Tôi không hiểu
+quick-responses.okay-fine,duh-uk roy,Được rồi
+phone-translation.please-look-at-the-screen,seen nyeen mahn hing,Xin nhìn màn hình
+pronouns-verbs.need-thing,kuhn + doh vuht,cần + đồ vật
+question-words.how-much-what-price,bow nyee-oh tee-un,bao nhiêu tiền
+emergency-medical.i-cannot-breathe,toy khohng tuh duh-uk,Tôi không thở được
+lost-rescue.i-do-not-know-where-i-am,toy khohng bee-ut ming dahng uh doh,Tôi không biết mình đang ở đâu
+hotel-basics.may-i-see-the-room,chaw toy sem fawng ah,Cho tôi xem phòng ạ
+hotel-requests.another-night,uh taym moht daym duh-uk khohng ah?,Ở thêm một đêm được không ạ?
+payment-receipt.can-we-pay-separately,chah ree-ung duh-uk khohng ah?,Trả riêng được không ạ?
+shopping.what-is-this,kigh nigh lah zee ah?,Cái này là gì ạ?
+communication.i-cannot-read-it,toy khohng dawk duh-uk,Tôi không đọc được
+quick-responses.no-good-not-allowed-will-not-work,khohng duh-uk doh,Không được đâu
+pronouns-verbs.looking-for-thing,dahng teem + doh vuht,đang tìm + đồ vật
+emergency-medical.i-am-bleeding-badly,toy chigh mow nyee-oh,Tôi chảy máu nhiều
+lost-rescue.my-friend-is-hurt,bahn toy bee tuh-ung,Bạn tôi bị thương
+dietary-needs.does-it-contain-fish-stock,mawn nigh kaw nuh-uk mam khohng ah?,Món này có nước mắm không ạ?
+dietary-needs.does-it-contain-pork-stock,nuh-uk zoong kaw suh-ung luhn khohng ah?,Nước dùng có xương lợn không ạ?
+hotel-basics.for-nights,uh {} daym,Ở {} đêm
+hotel-requests.is-there-a-safe,kaw ket sat khohng ah?,Có két sắt không ạ?
+payment-receipt.is-tax-included,dah gohm tway chuh-uh ah?,Đã gồm thuế chưa ạ?
+shopping.where-can-i-buy,moo-uh {} uh doh ah?,Mua {} ở đâu ạ?
+emergency-medical.i-have-chest-pain,toy bee dow nguhk,Tôi bị đau ngực
+lost-rescue.i-lost-my-wallet,toy muht vee,Tôi mất ví
+hotel-basics.two-beds,chaw toy fawng high zuh-ung ah,Cho tôi phòng hai giường ạ
+hotel-requests.another-blanket,chaw toy taym chan ah,Cho tôi thêm chăn ạ
+payment-receipt.my-card-was-declined,teh koo-uh toy bee tuh choy,Thẻ của tôi bị từ chối
+shopping.do-you-have-this-in-stock,kawn hahng khohng ah?,Còn hàng không ạ?
+time-words.night,bahn daym,Ban đêm
+emergency-medical.this-person-is-unconscious,nguh-oy nigh buht ting,Người này bất tỉnh
+lost-rescue.i-lost-my-bag,toy muht too-ee sak,Tôi mất túi xách
+food-ordering.can-a-vegetarian-eat-this,nguh-oy an chigh an duh-uk khohng ah?,Người ăn chay ăn được không ạ?
+hotel-basics.is-there-air-conditioning,kaw dee-oh hwah khohng ah?,Có điều hòa không ạ?
+hotel-requests.wake-up-call,seen goy toy zigh look {},Xin gọi tôi dậy lúc {}
+payment-receipt.the-bill-is-wrong,hwah duhn hing nyuh nyuhm ah,Hóa đơn hình như nhầm ạ
+shopping.two-of-these,chaw toy high kigh ah,Cho tôi hai cái ạ
+social-basics.okay-fine-i-am-okay,toy ohn,Tôi ổn
+emergency-medical.where-is-the-nearest-hospital,bayng vee-un guhn nyuht uh doh ah?,Bệnh viện gần nhất ở đâu ạ?
+lost-rescue.where-is-lost-and-found,choh nyuhn doh tuht lahk uh doh ah?,Chỗ nhận đồ thất lạc ở đâu ạ?
+payment-receipt.i-already-paid,toy chah roy ah,Tôi trả rồi ạ
+shopping.what-is-it-made-of,kigh nigh lahm bang zee ah?,Cái này làm bằng gì ạ?
+emergency-medical.what-is-the-emergency-number,soh khuhn kuhp lah soh migh ah?,Số khẩn cấp là số mấy ạ?
+lost-rescue.i-cannot-find-my-hotel,toy khohng teem duh-uk khak sahn,Tôi không tìm được khách sạn
+emergency-medical.is-there-a-doctor-who-speaks-english,kaw bahk see noy tee-ung ang khohng ah?,Có bác sĩ nói tiếng {source} không ạ?
+lost-rescue.i-left-it-on-the-train,toy day kwayn chayn tow,Tôi để quên trên tàu
+dietary-needs.i-have-a-severe-allergy-to,toy bee zee uhng nang vuh-ee {},Tôi bị dị ứng nặng với {}
+emergency-medical.i-think-a-bone-is-broken,toy ngee bee gigh suh-ung,Tôi nghĩ bị gãy xương
+lost-rescue.i-cannot-get-down,toy khohng soo-ung duh-uk,Tôi không xuống được
+emergency-medical.please-call-my-emergency-contact,seen goy nguh-oy lee-un hay khuhn kuhp koo-uh toy,Xin gọi người liên hệ khẩn cấp của tôi
+emergency-medical.i-have-travel-insurance,toy kaw bow hee-um zoo lik,Tôi có bảo hiểm du lịch
+numbers-money.dong,dohng,đồng
+numbers-money.dong-symbol,dohng,₫
+dietary-needs.no-pork,khohng teet luhn,Không thịt lợn
+dietary-needs.is-this-halal,digh kaw figh doh hah-lahl khohng ah?,Đây có phải đồ Halal không ạ?
+pharmacy-symptoms.i-think-i-have-malaria,toy ngee toy bee soht ret,Tôi nghĩ tôi bị sốt rét
+pharmacy-symptoms.i-need-a-malaria-test,toy kuhn set ngee-um soht ret,Tôi cần xét nghiệm sốt rét

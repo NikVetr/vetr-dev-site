@@ -1,749 +1,743 @@
-concept_id,respell
-building-help.what-room-number-is-this,HAWNG nee ber a-rai
-accessibility.step-free,mee tahng MAI mee ban-dai mai
-in-a-building.is-this-the-correct-entrance,KAO tahng nee chai mai
-toilets.where-toilet,HAWNG nahm yoo nai
-building-words.elevator,lip
-pronouns-verbs.i-me,pom / di-chan
-question-words.what,a-rai
-emergency-medical.help,CHUAI DUAI
-medical-conditions.i-am-diabetic,pen bow-wahn
-pharmacy-symptoms.which-pharmacy-is-open-now,rahn kai yah nai pert yoo
-body-parts.head,hua
-lost-rescue.i-lost-my-passport,paht-pawt hai
-police-consulate.where-is-the-police-station,sa-tah-nee tam-ruat yoo nai
-dietary-needs.no-meat,MAI sai nuea sat
-food-ordering.table-for-two,toh sawng kon
-trail-words.trail,SEN tahng dern pah
-weather.forecast,pa-yah-gawn ah-gaht WAH yahng-rai
-hiking-parks.is-this-the-way-to,tahng nee pai {} chai mai
-trail-conditions.how-long-is-the-full-route,tahng tang-mot glai TOW-rai
-trail-transport.how-long-is-the-queue,taw kiw nahn mai
-trail-warnings.open,pert
-trail-landmarks.trail-marker,PAI bawk tahng
-hotel-words.passport,paht-pawt
-hotel-basics.are-any-rooms-available,mee HAWNG WAHNG mai
-hotel-requests.can-i-check-out-later,chek-owt sai DAI mai
-room-problems.there-is-a-problem-with-the-room,HAWNG mee pan-hah
-laundry.please-wash-these-clothes,sak PAH HAI noi
-introductions.my-name-is,chan CHUE {}
-numbers-money.l-ng,soon
-atm-cash.where-is-an-atm,TOO ay-tee-em yoo nai
-attractions-tickets.where-can-i-buy-tickets,sue tua DAI TEE nai
-payment-receipt.pay-by-card,jai bat DAI mai
-shopping.i-am-just-looking,doo gawn
-color-size-returns.do-you-have-another-color,mee see uen mai
-tax-refund.can-i-get-a-tax-refund,kaw kuen pah-see DAI mai
-social-basics.hello,sa-wat-dee
-communication.i-do-not-speak-this-language,POOT pah-sah tai MAI DAI
-quick-responses.please-go-ahead,chern
-phone-translation.i-am-using-phone-translation,chai aep plae pah-sah
-phone-text-power.please-type-it-for-me,CHUAI pim HAI noi
-sim-data.i-would-like-a-tourist-sim,kaw sim nak TAWNG-TIAO
-etiquette.is-this-allowed,an nee tam DAI mai
-children.cannot-find-my-child,hah LOOK MAI jer
-time-scheduling.what-time-is-it,gee mohng laeo
-time-words.today,wan-nee
-days-of-week.monday,wan jan
-months.january,ma-ga-rah-kom
-directions.where-is,{} yoo nai
-quick-directions.go-straight,trong pai
-taxi.please-take-me-here,pai TEE-NEE
-transit-rides.two-tickets,kaw tua sawng bai
-border-customs.i-am-a-tourist,mah TIAO
-pickup-meeting.where-is-the-pickup-point,jut rap yoo nai
-rail-station-words.high-speed-rail,rot-fai kwahm-reo soong
-common-signs.open-on,pert
-utility-templates.i-want-to-go-to,yahk pai {}
-building-help.i-am-lost,long tahng
-accessibility.wheelchair-access,rot ken KAO DAI mai
-toilets.where-public-toilet,HAWNG nahm sah-tah-ra-na yoo nai
-building-words.stairs,ban-dai
-pronouns-verbs.we-us,row
-question-words.where,nai
-emergency-medical.please-call-an-ambulance,CHUAI RIAK rot pa-yah-bahn
-medical-conditions.i-need-insulin,TAWNG-gahn in-soo-lin
-pharmacy-symptoms.i-need-medicine-for,kaw yah GAE {}
-body-parts.stomach,tawng
-lost-rescue.i-lost-my-phone,mue-tue hai
-police-consulate.i-want-to-report-a-theft,kaw JAENG kwahm
-dietary-needs.no-eggs,MAI sai kai
-food-ordering.is-a-table-available,mee toh WAHNG mai
-trail-words.trailhead,jut RERM SEN tahng
-weather.will-it-rain,wan-nee fon ja tok mai
-hiking-parks.where-is-the-trailhead,jut RERM SEN tahng yoo nai
-trail-conditions.can-we-return-the-same-way,glap tahng derm DAI mai
-trail-transport.what-time-is-the-last-shuttle,rot rap song kan sut-tai gee mohng
-trail-warnings.closed,pit
-trail-landmarks.fork-junction,tahng YAEK
-hotel-words.room-key-card,kee gaht HAWNG
-hotel-basics.there-are-two-of-us,mah sawng kon
-hotel-requests.what-time-does-breakfast-start,ah-hahn chow RERM gee mohng
-room-problems.the-air-conditioning-is-broken,ae sia
-laundry.where-is-a-laundromat,rahn sa-duak sak yoo nai
-introductions.nice-to-meet-you,yin-dee TEE DAI roo-jak
-numbers-money.y,nueng
-atm-cash.does-this-atm-take-foreign-cards,chai bat tahng pra-tayt DAI mai
-attractions-tickets.do-i-need-a-reservation,TAWNG jong mai
-payment-receipt.pay-cash,jai ngern sot DAI mai
-shopping.how-much-is-this,an nee TOW-rai
-color-size-returns.do-you-have-another-size,mee sai uen mai
-social-basics.hello-polite,sa-wat-dee krap / KAH
-communication.i-speak-only-a-little-of-this,POOT tai DAI nit diao
-quick-responses.yes-right,CHAI
-phone-translation.please-speak-toward-the-phone,POOT sai mue-tue noi
-phone-translation.please-write-the-place-name,CHUAI kian CHUE sa-tahn-TEE pen pah-sah tai
-sim-data.may-i-use-your-wifi,kaw chai wai-fai DAI mai
-etiquette.is-tipping-expected,TAWNG HAI tip mai
-children.make-an-announcement,CHUAI pra-gaht hah HAI
-time-scheduling.how-many-minutes,gee nah-tee
-time-words.tomorrow,PRUNG-nee
-days-of-week.tuesday,wan ang-kahn
-months.february,gum-pah-pan
-directions.how-do-i-get-to,pai {} yang-ngai
-quick-directions.turn-left,liao saai
-taxi.please-send-me-the-address,song TEE-yoo mah HAI
-transit-rides.where-is-the-subway-station,sa-tah-nee rot-fai-fah yoo nai
-place-words.visitor-center,soon nak TAWNG-TIAO
-border-customs.here-is-my-passport,NEE paht-pawt
-pickup-meeting.please-send-me-the-pickup-point,song jut rap mah HAI
-common-signs.closed-off,pit
-utility-templates.please-give-me,kaw {} noi
-building-help.where-is-reception,pa-naek TAWN-rap yoo nai
-accessibility.elevator,mee lip mai
-in-a-building.do-you-have-wi-fi,mee wai-fai mai
-toilets.may-i-use-the-toilet,kaw chai HAWNG nahm DAI mai
-building-words.entrance,tahng KAO
-pronouns-verbs.you,kun
-question-words.who,krai
-emergency-medical.i-need-a-doctor,TAWNG-gahn maw
-medical-conditions.i-have-asthma,pen ROHK hawp huet
-pharmacy-symptoms.i-have-a-fever,mee KAI
-body-parts.back,lang
-lost-rescue.please-call-the-police,CHUAI RIAK tam-ruat
-police-consulate.my-bag-was-stolen,gra-pow took ka-moi
-dietary-needs.not-spicy,MAI pet loey
-food-ordering.menu-please,kaw may-noo
-trail-words.summit,YAWT kow
-weather.is-it-safe-today,wan-nee plawt-pai mai
-hiking-parks.how-long-to-the-summit,KUEN YAWT kow nahn TOW-rai
-trail-conditions.can-we-return-before-dark,glap gawn muet DAI mai
-trail-transport.when-does-the-cableway-stop,gra-chow pit gee mohng
-trail-warnings.maintenance,SAWM bam-roong
-trail-landmarks.boardwalk-cliff-path,tahng dern mai
-hotel-words.check-in,chek-in
-hotel-basics.i-have-a-reservation,jong wai laeo
-hotel-requests.can-i-store-my-luggage,fahk gra-pow DAI mai
-room-problems.there-is-no-hot-water,MAI mee nahm rawn
-laundry.when-will-it-be-ready,set MUEA-rai
-introductions.what-is-your-name,kun CHUE a-rai
-numbers-money.r,sawng
-atm-cash.the-atm-kept-my-card,TOO gin bat
-attractions-tickets.what-is-the-latest-entry-time,KAO DAI tueng gee mohng
-payment-receipt.pay-by-qr-code,sa-gaen jai DAI mai
-shopping.that-is-too-expensive,paeng gern pai
-color-size-returns.may-i-try-it-on,lawng DAI mai
-social-basics.good-morning,sa-wat-dee tawn chow
-communication.do-you-speak-english,POOT ang-grit DAI mai
-quick-responses.no-not,MAI
-phone-translation.one-sentence-at-a-time-please,POOT tee la pra-yohk
-phone-text-power.please-use-simple-words,chai kam NGAI-NGAI noi
-sim-data.how-much-data-is-included,DAI net TOW-rai
-etiquette.is-service-included,ruam KAH baw-ri-gahn mai
-children.child-age,LOOK ah-yu {} pee
-time-scheduling.what-time-should-we-meet,jer gan gee mohng
-time-words.yesterday,MUEA-wahn
-days-of-week.wednesday,wan put
-months.march,mee-nah-kom
-directions.is-it-far,glai mai
-quick-directions.turn-right,liao kwah
-taxi.we-need-the-east-gate-not-the-south-gate,"pra-too ta-wan awk, MAI chai pra-too TAI"
-transit-rides.does-this-bus-train-go-to,kan nee pai {} mai
-place-words.railway-station,sa-tah-nee rot-fai
-border-customs.i-am-staying-for-days,yoo {} wan
-pickup-meeting.please-pick-us-up-here,mah rap TEE-NEE
-rail-station-words.transfer,plian saai
-common-signs.occupied,MAI WAHNG
-utility-templates.may-i,kaw {} DAI mai
-building-help.where-is-a-power-outlet,plak fai yoo nai
-accessibility.ramp,mee tahng LAHT mai
-in-a-building.what-is-the-wi-fi-password,ra-hat wai-fai a-rai
-toilets.is-it-only-for-customers,cha-paw LOOK-kah mai
-building-words.exit,tahng awk
-pronouns-verbs.you-polite,TAHN
-question-words.which-one,an nai
-emergency-medical.i-am-sick,chan puai
-medical-conditions.i-have-a-heart-condition,pen ROHK hua-jai
-pharmacy-symptoms.i-have-diarrhea,tawng sia
-body-parts.throat,kaw
-lost-rescue.we-are-here,row yoo TEE-NEE
-police-consulate.my-passport-was-stolen,paht-pawt took ka-moi
-dietary-needs.less-spicy,pet noi
-food-ordering.i-want-this,ao an nee
-trail-words.viewpoint,jut chom wiu
-weather.how-cold-at-night,glahng-kuen now KAE nai
-hiking-parks.how-long-to-the-viewpoint,pai jut chom wiu nahn TOW-rai
-trail-conditions.is-the-trail-open,SEN tahng pert mai
-trail-transport.where-can-we-buy-water,sue nahm DAI TEE nai
-trail-warnings.steep-slope,tahng LAHT chan
-trail-landmarks.start,jut RERM-TON
-hotel-words.check-out,chek-owt
-hotel-basics.can-i-charge-my-phone,chaht mue-tue DAI mai
-hotel-requests.no-housekeeping,MAI TAWNG tam kwahm sa-aht
-room-problems.can-i-change-rooms,kaw plian HAWNG DAI mai
-laundry.how-much-per-kilo,gi-loh la TOW-rai
-introductions.we-are-traveling-together,row TIAO DUAI gan
-atm-cash.is-there-a-fee,mee KAH tam-niam mai
-attractions-tickets.are-there-lockers,mee lawk-ger mai
-payment-receipt.a-receipt-please,kaw bai set
-shopping.can-it-be-a-little-cheaper,lot noi DAI mai
-color-size-returns.can-i-return-it,kuen kawng DAI mai
-social-basics.good-evening,sa-wat-dee tawn yen
-communication.please-speak-more-slowly,POOT chah-chah noi
-quick-responses.okay-can,DAI
-phone-text-power.my-phone-battery-is-low,baet ja mot
-sim-data.do-you-need-my-passport,TAWNG chai paht-pawt mai
-etiquette.may-i-enter,kaw KAO DAI mai
-children.high-chair,mee GOW-ee dek mai
-time-scheduling.can-we-change-the-time,LUEAN way-lah DAI mai
-time-words.this-week,ah-tit nee
-days-of-week.thursday,wan pa-rue-hat
-months.april,may-sah-yon
-directions.how-long-on-foot,dern gee nah-tee
-quick-directions.this-way,tahng nee
-taxi.please-stop-here,jawt TEE-NEE
-transit-rides.what-is-the-next-stop,taw pai sa-tah-nee a-rai
-place-words.airport,sa-nahm bin
-border-customs.nothing-to-declare,MAI mee kawng TAWNG sam-daeng
-pickup-meeting.meet-us-at,jer gan TEE {}
-rail-station-words.ticket-gate,pra-too truat tua
-common-signs.vacant,WAHNG
-utility-templates.please-do-not-add,MAI sai {}
-accessibility.how-many-steps,ban-dai gee KAN
-in-a-building.which-floor,chan nai
-toilets.toilet-wc,HAWNG nahm
-building-words.men,chaai
-pronouns-verbs.he-him,kow
-question-words.when,MUEA-rai
-emergency-medical.i-am-injured,chan baht-jep
-medical-conditions.i-am-allergic-to-penicillin,pae yah pay-ni-sin-lin
-pharmacy-symptoms.where-is-an-all-night-pharmacy,rahn kai yah pert duek yoo nai
-body-parts.tooth,fan
-lost-rescue.please-look-at-my-location-pin,doo mut tam-naeng nee
-police-consulate.someone-is-following-me,mee kon tahm chan
-dietary-needs.no-peanuts,MAI sai tua li-song
-food-ordering.do-you-have-drinking-water,mee nahm plow mai
-trail-words.cableway,gra-chow fai-fah
-weather.rain,fon
-hiking-parks.which-route-is-easier,tahng nai NGAI gwah
-trail-conditions.is-the-route-steep,tahng chan mai
-trail-transport.where-can-we-refill-water,term nahm DAI TEE nai
-trail-warnings.caution-slippery,ra-wang puen LUEN
-trail-landmarks.end,jut sin-sut
-hotel-basics.i-would-like-a-non-smoking-room,kaw HAWNG plawt bu-ree
-room-problems.the-room-is-too-noisy,HAWNG siang dang MAHK
-laundry.can-it-be-ready-today,set wan-nee DAI mai
-introductions.this-is-my-friend,NEE PUEAN chan
-numbers-money.s-n,sahm
-atm-cash.the-card-was-declined,bat chai MAI DAI
-attractions-tickets.may-i-take-photos,tai roop DAI mai
-color-size-returns.can-i-exchange-it,plian kawng DAI mai
-social-basics.goodbye,lah gawn
-communication.i-do-not-understand-spoken,fang MAI KAO-jai
-quick-responses.cannot-not-allowed,MAI DAI
-phone-text-power.do-you-have-a-power-bank,mee pow-wer baeng mai
-sim-data.how-long-is-it-valid,chai DAI gee wan
-etiquette.remove-shoes,TAWNG tawt rong-tow mai
-children.baby-changing-room,TEE plian PAH-AWM yoo nai
-time-scheduling.when-is-convenient,sa-duak MUEA-rai
-time-words.next-week,ah-tit NAH
-days-of-week.friday,wan suk
-months.may,pruet-sa-pah-kom
-directions.please-show-me-on-the-map,chee nai paen-TEE HAI noi
-quick-directions.that-way,tahng nan
-taxi.can-you-wait-for-me-here,raw TEE-NEE DAI mai
-transit-rides.please-tell-me-where-to-get-off,bawk DUAI WAH long TEE nai
-place-words.service-desk,jut baw-ri-gahn
-border-customs.i-am-staying-at,pak TEE {}
-pickup-meeting.please-call-me-a-ride,CHUAI RIAK rot HAI
-rail-station-words.platform,chahn-chah-lah
-common-signs.caution,ra-wang
-utility-templates.do-you-have,mee {} mai
-accessibility.cannot-climb-stairs,KUEN ban-dai MAI DAI
-toilets.is-it-free,free mai
-building-words.women,ying
-pronouns-verbs.she-her,kow
-question-words.how,yahng-rai
-emergency-medical.it-hurts-here,jep trong nee
-medical-conditions.i-have-epilepsy,pen ROHK lom-chak
-pharmacy-symptoms.painkiller,yah GAE puat
-body-parts.chest,NAH-awk
-lost-rescue.i-cannot-walk,dern MAI DAI
-police-consulate.i-need-a-written-police-report,kaw bai JAENG kwahm
-dietary-needs.no-nuts,MAI sai tua took cha-nit
-food-ordering.to-go-please,haw glap BAHN
-trail-words.shuttle-bus,rot rap song
-weather.snow,hi-ma
-trail-conditions.is-the-path-slippery,tahng LUEN mai
-trail-transport.is-there-cell-signal-here,TEE-NEE mee san-yahn mai
-trail-warnings.danger,an-ta-rai
-trail-landmarks.elevation,kwahm soong
-hotel-basics.i-would-like-a-quiet-room,kaw HAWNG ngiap-ngiap
-room-problems.the-key-does-not-work,kee gaht chai MAI DAI
-laundry.please-do-not-use-bleach,MAI sai nahm-yah fawk kow
-introductions.i-am-from,mah jahk {}
-numbers-money.s,see
-atm-cash.what-is-the-exchange-rate,at-trah laek-plian TOW-rai
-attractions-tickets.please-take-a-photo-of-us,CHUAI tai roop HAI noi
-color-size-returns.do-you-have-a-bag,mee tung mai
-social-basics.thank-you,kawp-kun
-communication.i-cannot-read-understand,ahn MAI KAO-jai
-quick-responses.works-okay,chai DAI
-phone-text-power.the-translation-may-be-inaccurate,kam plae aht MAI trong
-sim-data.please-activate-it,CHUAI pert chai-ngahn HAI
-etiquette.photo-of-you,kaw tai roop kun DAI mai
-children.childrens-menu,mee may-noo dek mai
-time-scheduling.what-is-today-s-date,wan-nee wan-TEE TOW-rai
-time-words.morning,chow
-days-of-week.saturday,wan sow
-months.june,mi-tu-nah-yon
-directions.where-is-the-nearest,{} GLAI sut yoo nai
-quick-directions.on-the-left,yoo saai mue
-taxi.we-need-to-catch-the-high-speed-train,TAWNG KUEN rot-fai kwahm-reo soong
-transit-rides.is-this-direct,pai tueng loey mai
-place-words.bus-stop,PAI rot-may
-border-customs.i-am-here-for-business,mah tam tu-ra-git
-rail-station-words.ticket-office,HAWNG kai tua
-common-signs.no-entry,HAHM KAO
-utility-templates.please-write-the-number,CHUAI kian tua-LAYK
-accessibility.need-to-sit-down,kaw NANG noi
-toilets.do-i-need-a-coin,TAWNG chai rian mai
-building-words.door,pra-too
-pronouns-verbs.they-them,puak kow
-question-words.how-much-many,TOW-rai
-emergency-medical.where-is-a-pharmacy,rahn kai yah yoo nai
-medical-conditions.my-blood-sugar-is-low,nahm-tahn nai lueat tam
-pharmacy-symptoms.do-i-need-a-prescription,TAWNG mee bai sang yah mai
-body-parts.eye,taa
-lost-rescue.i-sprained-my-ankle,KAW-tow plik
-police-consulate.i-want-to-contact-my-embassy,kaw tit-taw sa-tahn toot
-dietary-needs.no-seafood,"MAI sai ah-hahn ta-lay, nahm plah, ga-pi"
-food-ordering.check-please,gep ngern
-trail-words.park-shuttle,rot rap song nai ut-ta-yahn
-weather.wind,lom
-trail-transport.do-you-have-a-map,mee paen-TEE mai
-trail-warnings.beware-falling-rocks,ra-wang hin RUANG
-trail-landmarks.sunset,pra ah-tit tok
-hotel-basics.is-there-a-washing-machine,mee KRUEANG sak-PAH mai
-room-problems.the-toilet-will-not-flush,chak-KROHK got MAI long
-laundry.laundromat,rahn sa-duak sak
-introductions.where-are-you-from,kun mah jahk nai
-numbers-money.w,HAH
-atm-cash.no-money-came-out,ngern MAI awk
-social-basics.you-are-welcome,MAI pen-rai
-communication.please-say-it-again,POOT eek krang
-quick-responses.does-not-work-no,chai MAI DAI
-phone-text-power.please-confirm,CHUAI yuen-yan
-sim-data.do-you-have-an-esim,mee ee-sim mai
-etiquette.may-i-sit-here,NANG TEE-NEE DAI mai
-children.suitable-for-children,maw gap dek mai
-time-scheduling.what-day-is-it-today,wan-nee wan a-rai
-time-words.afternoon,bai
-days-of-week.sunday,wan ah-tit
-months.july,ga-ra-ga-dah-kom
-directions.where-am-i,trong nee TEE nai
-quick-directions.on-the-right,yoo kwah mue
-taxi.please-use-the-meter,pert mi-ter DUAI
-transit-rides.do-i-need-to-transfer,TAWNG taw rot mai
-place-words.luggage-storage,TEE fahk gra-pow
-border-customs.i-have-a-return-ticket,mee tua glap
-rail-station-words.waiting-room,HAWNG pak koi
-common-signs.no-smoking,HAHM soop bu-ree
-utility-templates.i-need,TAWNG-gahn {}
-accessibility.accessible-restroom,mee HAWNG nahm POO pi-gahn mai
-toilets.is-the-tap-water-safe-to-drink,nahm pra-pah duem DAI mai
-building-words.key,gun-jae
-pronouns-verbs.my-mine,kawng pom
-question-words.how-many,gee
-emergency-medical.please-take-me-to-a-hospital,CHUAI pah pai rong pa-yah-bahn
-medical-conditions.i-need-my-inhaler,TAWNG-gahn yah PON
-pharmacy-symptoms.i-have-a-headache,puat hua
-body-parts.ear,hoo
-lost-rescue.please-contact-rescue,CHUAI JAENG GOO-pai
-police-consulate.i-need-it-for-my-insurance,TAWNG chai klem pra-gan
-food-ordering.does-it-contain,sai {} mai
-trail-words.steps,KAN ban-dai
-weather.storm,pah-yu
-trail-warnings.first-aid-station,jut pa-tom pa-yah-bahn
-room-problems.the-light-does-not-work,fai MAI tit
-laundry.please-iron-this,reet HAI noi
-introductions.how-are-you,sa-bai dee mai
-numbers-money.li,hok
-atm-cash.where-can-i-change-money,laek ngern DAI TEE nai
-social-basics.excuse-me-sorry,kaw TOHT
-communication.please-write-it-down,CHUAI kian HAI
-sim-data.my-data-is-not-working,net chai MAI DAI
-etiquette.queue-for,NEE kiw {} chai mai
-children.minimum-age,ah-yu KAN-tam TOW-rai
-time-scheduling.what-time-does-it-open,pert gee mohng
-time-words.evening,yen
-months.august,sing-hah-kom
-directions.which-way,tahng nai
-quick-directions.across-from-here,trong KAHM
-transit-rides.is-it-delayed,LAH-chah mai
-border-customs.i-am-visiting-family,mah hah krawp-krua
-rail-station-words.train-number,ka-buan TEE
-common-signs.no-photography,HAHM tai roop
-utility-templates.is-there-nearby,taeo nee mee {} mai
-accessibility.station-assistance,sa-tah-nee mee kon CHUAI mai
-toilets.it-is-urgent,duan MAHK
-pronouns-verbs.your-yours,kawng kun
-question-words.why,tam-mai
-medical-conditions.i-am-pregnant,TANG-kan
-pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-say-tah-mawn
-body-parts.leg,kah
-lost-rescue.my-companion-is-missing,PUEAN hai
-police-consulate.i-need-an-interpreter,kaw LAHM
-dietary-needs.i-am-vegetarian,gin mang-sa-wi-rat
-food-ordering.is-this-vegetarian,an nee mang-sa-wi-rat mai
-trail-words.up-uphill,KUEN kow
-weather.ice,nahm kaeng
-trail-warnings.service-suspended,ngot HAI baw-ri-gahn
-trail-landmarks.water-point,jut term nahm
-room-problems.please-send-someone,CHUAI song kon mah SAWM
-laundry.detergent,pong sak-fawk
-introductions.i-am-a-tourist,pen nak TAWNG-TIAO
-numbers-money.q,jet
-atm-cash.the-machine-is-out-of-service,TOO sia
-social-basics.sorry,kaw TOHT DUAI
-communication.please-wait-a-moment,raw sak KROO
-sim-data.does-it-need-registration,TAWNG long ta-bian mai
-etiquette.dressed-appropriately,taeng tua baep nee DAI mai
-children.do-children-pay,dek TAWNG jai mai
-time-scheduling.what-time-does-it-close,pit gee mohng
-time-words.spring,rue-doo bai-mai-pli
-months.september,gan-yah-yon
-directions.can-i-walk-there,dern pai DAI mai
-quick-directions.in-front,KAHNG-NAH
-transit-rides.i-am-in-a-hurry,reep MAHK
-border-customs.this-is-for-personal-use,chai suan-tua
-rail-station-words.carriage,TOO
-common-signs.do-not-touch,HAHM jap
-utility-templates.how-much-is,{} TOW-rai
-accessibility.help-me-carry,CHUAI yok HAI noi
-toilets.may-i-have-the-toilet-key,kaw gun-jae HAWNG nahm
-pronouns-verbs.be-called-call,CHUE
-question-words.this,NEE
-medical-conditions.i-carry-an-adrenaline-injector,mee pahk-gah cheet a-dree-nah-leen
-pharmacy-symptoms.how-much-should-i-take,gin krang la TOW-rai
-body-parts.arm,kaen
-police-consulate.please-leave-me-alone,yah mah YUNG gap chan
-dietary-needs.i-am-vegan,gin jay
-trail-words.down-downhill,long kow
-weather.fog,mawk
-room-problems.the-heating-does-not-work,KRUEANG tam kwahm rawn sia
-laundry.dry-cleaning,sak HAENG
-introductions.this-is-my-husband-wife,NEE sah-mee / pan-ra-yah
-numbers-money.b,paet
-atm-cash.please-give-me-smaller-notes,kaw baeng YOI
-social-basics.no-problem,MAI mee pan-hah
-communication.can-you-help-me,CHUAI noi DAI mai
-sim-data.i-have-no-signal,MAI mee san-yahn
-etiquette.did-not-mean-to-offend,"MAI DAI TANG-jai, kaw TOHT"
-children.crib,mee tiang dek mai
-time-words.summer,rue-doo rawn
-months.october,tu-lah-kom
-directions.how-far-is-it,glai TOW-rai
-quick-directions.behind,KAHNG-lang
-transit-rides.which-platform,chahn-chah-lah nai
-border-customs.i-am-in-transit,taw KRUEANG
-rail-station-words.seat,TEE-NANG
-common-signs.temporarily-closed,pit CHUA-krow
-utility-templates.is-this,NEE {} chai mai
-accessibility.board-first,kaw KUEN gawn DAI mai
-toilets.there-is-no-toilet-paper,MAI mee gra-daht cham-ra
-pronouns-verbs.have,mee
-question-words.that,NAN
-medical-conditions.i-take-medicine-for,gin yah rak-sah {}
-pharmacy-symptoms.i-am-vomiting,ah-jian
-body-parts.foot,tow
-police-consulate.i-was-robbed,took PLON
-dietary-needs.i-do-not-eat,MAI gin {}
-trail-words.one-way,tahng diao
-weather.heat,rawn
-laundry.dryer,KRUEANG op PAH
-introductions.this-is-my-daughter-son,NEE LOOK-sow / LOOK-chaai
-numbers-money.ji,GOW
-atm-cash.do-you-have-change,mee ngern tawn mai
-social-basics.i-do-not-know,MAI roo
-communication.please-show-me-the-text,kaw doo KAW-kwahm pah-sah tai
-sim-data.please-write-the-wifi-password,CHUAI kian ra-hat wai-fai
-etiquette.what-is-customary,TEE-NEE tam gan yahng-rai
-children.warm-this-bottle,CHUAI un nom HAI noi
-time-words.fall,rue-doo bai-mai-RUANG
-months.november,pruet-sa-ji-gah-yon
-directions.which-exit,tahng awk nai
-transit-rides.what-time-is-the-next-one,kan taw pai gee mohng
-border-customs.i-have-in-cash,mee ngern sot {}
-rail-station-words.last-train,rot-fai TIAO sut-tai
-utility-templates.please,kaw {}
-accessibility.door-width,pra-too KWAHNG TOW-rai
-toilets.toilet-paper,gra-daht cham-ra
-pronouns-verbs.do-not-have,MAI mee
-question-words.here,TEE-NEE
-medical-conditions.i-take-blood-thinners,gin yah la-lai LIM lueat
-pharmacy-symptoms.rehydration-salts,pong gluea RAE
-body-parts.hand,mue
-police-consulate.i-want-a-lawyer,kaw ta-nai
-dietary-needs.i-am-allergic-to,pae {}
-trail-words.round-trip,pai glap
-weather.cold,now
-laundry.coin-operated,yawt rian
-introductions.i-am-traveling-alone,mah kon diao
-numbers-money.sh,sip
-atm-cash.may-i-pay-in,jai pen {} DAI mai
-sim-data.sim-card,sim gaht
-etiquette.keep-the-change,MAI TAWNG tawn
-children.car-seat,TAWNG-gahn kah-seet
-time-words.winter,rue-doo now
-months.december,tan-wah-kom
-directions.can-you-show-me-the-way,chee tahng HAI noi
-transit-rides.i-went-past-my-stop,loey PAI mah laeo
-border-customs.this-is-a-gift,pen kawng-kwan
-rail-station-words.delayed,LAH-chah
-utility-templates.i-am-looking-for,hah {}
-accessibility.wheelchair-width,rot ken KWAHNG {} sen-ti-met
-toilets.it-is-out-of-order,chai MAI DAI
-pronouns-verbs.go,pai
-question-words.there,TEE-NAN
-medical-conditions.medicine-allergy,pae yah: {}
-pharmacy-symptoms.how-many-times-a-day,wan la gee krang
-body-parts.knee,kow
-police-consulate.please-notify-my-consulate,CHUAI JAENG sa-tahn gong-sun
-weather.humid,chuen
-numbers-money.y-b-i,roi
-atm-cash.please-charge-in-local-currency,kit pen ngern baht
-sim-data.where-can-i-buy-a-plug-adapter,sue plak plaeng TEE nai
-children.stroller,rot ken dek
-directions.north,tit nuea
-border-customs.where-do-i-collect-my-baggage,rap gra-pow TEE nai
-rail-station-words.final-stop,sa-tah-nee plai tahng
-utility-templates.do-you-accept,rap {} mai
-accessibility.hard-of-hearing,hoo MAI KOI DAI-yin
-toilets.out-of-order,cham-rut
-pronouns-verbs.come,mah
-question-words.a-little,nit noi
-medical-conditions.this-card-lists-my-conditions,bat nee bawk ROHK kawng chan
-pharmacy-symptoms.i-have-a-stomach-ache,puat tawng
-body-parts.ankle,KAW-tow
-police-consulate.i-am-calling-the-police,ja toh RIAK tam-ruat
-weather.sunrise,pra ah-tit KUEN
-numbers-money.y-qi-n,pan
-atm-cash.where-can-i-get-coins,laek rian DAI TEE nai
-sim-data.mobile-data,net mue-tue
-children.playground,mee sa-nahm dek LEN mai
-directions.south,tit TAI
-border-customs.how-long-may-i-stay,yoo DAI gee wan
-rail-station-words.ticket-validator,KRUEANG truat tua
-utility-templates.i-cannot-find,hah {} MAI jer
-accessibility.speak-louder,CHUAI POOT dang-dang noi
-toilets.mens-toilet,HAWNG nahm chaai
-pronouns-verbs.would-like,yahk DAI
-question-words.some,BAHNG
-medical-conditions.this-is-my-medicine,NEE yah kawng chan
-pharmacy-symptoms.i-have-a-cough,ai
-body-parts.skin,piu-nang
-police-consulate.am-i-under-arrest,chan took jap mai
-weather.flood,nahm TUAM
-numbers-money.y-w-n,muen
-atm-cash.is-there-a-minimum-for-cards,bat mee KAN-tam mai
-sim-data.can-i-top-up-this-sim,term ngern sim nee DAI mai
-directions.east,tit ta-wan awk
-border-customs.i-have-a-connecting-flight,mee TIAO-bin taw
-utility-templates.there-is-a-problem-with,{} mee pan-hah
-accessibility.visually-impaired,chan pi-gahn tahng sai-taa
-toilets.womens-toilet,HAWNG nahm ying
-pronouns-verbs.want,yahk
-question-words.very,MAHK
-medical-conditions.please-give-me-sugar-or-juice,kaw nahm-tahn rue nahm pon-la-mai
-pharmacy-symptoms.antihistamine,yah GAE pae
-police-consulate.no-thank-you-i-am-not-interested,"MAI son-jai, kawp-kun"
-weather.avalanche-risk,siang hi-ma ta-LOM
-numbers-money.b-n,KRUENG
-atm-cash.atm,TOO ay-tee-em
-sim-data.top-up,term ngern
-directions.west,tit ta-wan tok
-border-customs.may-i-have-an-entry-stamp,kaw trah pra-tap KAO mueang
-accessibility.take-your-arm,kaw jap kaen DAI mai
-toilets.drinking-water,nahm duem
-pronouns-verbs.look-for,hah
-question-words.too,gern pai
-medical-conditions.inject-it-into-my-outer-thigh,cheet TEE TON-kah DAHN nawk
-pharmacy-symptoms.anti-diarrhea-medicine,yah GAE tawng sia
-police-consulate.someone-attacked-me,mee kon tam-rai chan
-atm-cash.banknote,baeng
-sim-data.is-there-coverage-in,TEE {} mee san-yahn mai
-border-customs.visa,wee-SAH
-accessibility.guide-dog,NEE su-nak nam tahng
-toilets.not-for-drinking,HAHM duem
-pronouns-verbs.buy,sue
-question-words.also,DUAI
-medical-conditions.my-blood-type-is,glum lueat {}
-pharmacy-symptoms.is-this-safe-to-take-with,gin gap {} DAI mai
-police-consulate.i-did-not-agree-to-this-price,MAI DAI tok-long rah-kah nee
-atm-cash.coin,rian
-sim-data.signal,san-yahn
-border-customs.i-have-no-food-or-plants,MAI mee ah-hahn rue puet
-toilets.accessible-toilet,HAWNG nahm POO pi-gahn
-pronouns-verbs.like,CHAWP
-question-words.all-both,tang-mot
-medical-conditions.do-not-give-me,HAHM HAI {}
-pharmacy-symptoms.i-feel-dizzy,wian hua
-police-consulate.please-write-the-report-number,CHUAI kian LAYK-TEE JAENG kwahm
-atm-cash.cash-only,rap ngern sot TOW-nan
-sim-data.esim,ee-sim
-border-customs.passport-control,truat nang-sue dern tahng
-toilets.where-can-i-wash-my-hands,lahng mue TEE nai
-pronouns-verbs.need,TAWNG-gahn
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,pae aes-pai-rin lae ai-boo-proh-fen
-pharmacy-symptoms.ibuprofen,ai-boo-proh-fen
-police-consulate.it-happened-here,gert TEE-NEE
-atm-cash.fee,KAH tam-niam
-sim-data.prepaid,ra-bop term ngern
-border-customs.customs,sun-la-gah-gawn
-toilets.can-i-flush-the-paper,ting gra-daht nai toh DAI mai
-medical-conditions.my-injector-is-in-my-bag,yah cheet yoo nai gra-pow
-pharmacy-symptoms.i-have-a-sore-throat,jep kaw
-police-consulate.may-i-have-a-copy-of-the-report,kaw sam-now bai JAENG kwahm
-atm-cash.change,ngern tawn
-sim-data.roaming,rohm-ming
-border-customs.baggage-claim,rap gra-pow
-toilets.is-there-a-toilet-on-board,bon rot mee HAWNG nahm mai
-medical-conditions.i-am-allergic-to-sulfa-drugs,pae yah san-fah
-pharmacy-symptoms.can-i-get-this-medicine-here,mee yah nee mai
-police-consulate.i-will-not-sign-anything-i-cannot-read,"ahn MAI awk, ja MAI sen"
-atm-cash.exchange-rate,at-trah laek-plian
-border-customs.customs-declaration,kawng TAWNG sam-daeng
-toilets.the-toilet-will-not-flush,chak-KROHK got MAI long
-pharmacy-symptoms.bandage,PAH pan plae
-police-consulate.am-i-free-to-go,pai DAI mai
-atm-cash.bank,ta-nah-kahn
-border-customs.arrival-card,bat kah-KAO
-toilets.baby-change,TEE plian PAH-AWM
-pharmacy-symptoms.the-pain-is-severe,puat MAHK
-police-consulate.i-do-not-want-to-go-with-you,MAI pai gap kun
-atm-cash.money-exchange,rap laek ngern
-border-customs.transit,plian KRUEANG
-toilets.squat-toilet,SUAM NANG yong
-pharmacy-symptoms.antiseptic,yah sai plae
-atm-cash.pin,ra-hat
-border-customs.boarding-pass,bat KUEN KRUEANG
-pharmacy-symptoms.i-feel-nauseous,KLUEN SAI
-pharmacy-symptoms.i-have-a-rash,mee puen
-pharmacy-symptoms.before-or-after-food,gawn rue lang ah-hahn
-pharmacy-symptoms.i-think-it-is-infected,NAH ja tit chuea
-pharmacy-symptoms.motion-sickness-tablets,yah GAE mow rot
-pharmacy-symptoms.i-have-a-cut,mee baht-plae
-pharmacy-symptoms.antacid,yah lot grot
-pharmacy-symptoms.i-have-a-burn,mee plae MAI
-pharmacy-symptoms.it-started-days-ago,RERM mah {} wan
-pharmacy-symptoms.cough-medicine,yah GAE ai
-pharmacy-symptoms.is-this-safe-during-pregnancy,kon tawng gin DAI mai
-trail-transport.how-long-is-the-wait,raw nahn TOW-rai
-tax-refund.is-tax-free-shopping-available,mee baw-ri-gahn kuen pah-see mai
-place-words.tourist-spot-sightseeing-area,sa-tahn-TEE TAWNG-TIAO
-common-signs.open-operating,pert HAI baw-ri-gahn
-time-scheduling.how-long-does-it-take,chai way-lah nahn TOW-rai
-transit-rides.can-i-use-this-ticket,chai tua nee DAI mai
-common-signs.closed,pit HAI baw-ri-gahn
-pronouns-verbs.there-is-have,mee
-common-signs.stopped-stop,yut
-transit-rides.do-i-need-to-validate,TAWNG tae bat gawn mai
-pronouns-verbs.there-is-not-do-not-have,MAI mee
-emergency-medical.i-feel-unwell,MAI sa-bai
-food-ordering.what-do-you-recommend,nae-nam a-rai dee
-hotel-basics.is-wi-fi-free,wai-fai free mai
-hotel-requests.another-towel-please,kaw PAH chet tua perm
-shopping.is-there-a-discount,mee suan-lot mai
-social-basics.good-night,rah-tree sa-wat
-quick-responses.can-possible,pen pai DAI
-phone-translation.please-type-it-and-show-me,pim HAI doo noi
-phone-text-power.may-i-charge-my-phone-here,chaht TEE-NEE DAI mai
-pronouns-verbs.want-to-verb,yahk ...
-emergency-medical.this-is-an-emergency,chuk-chern
-lost-rescue.please-look-at-my-current-location,doo tam-naeng pat-ju-ban nee
-hotel-words.luggage-storage,TEE fahk gra-pow
-hotel-basics.how-much-per-night,kuen la TOW-rai
-hotel-requests.what-time-is-check-out,chek-owt gee mohng
-payment-receipt.please-write-the-number,CHUAI kian tua-LAYK
-shopping.where-do-i-pay,jai ngern TEE nai
-communication.i-cannot-make-out-what-you-are-saying,fang MAI tan
-quick-responses.cannot-not-possible,pen pai MAI DAI
-taxi.i-will-get-off-here,long TEE-NEE
-pickup-meeting.please-call-a-taxi,CHUAI RIAK taek-SEE
-pronouns-verbs.want-thing,ao ...
-emergency-medical.i-am-having-a-severe-allergic-reaction,mee ah-gahn pae run-raeng
-lost-rescue.my-child-is-missing,LOOK hai
-food-ordering.water-please,kaw nahm plow
-hiking-parks.is-this-trail-suitable-for-beginners,mue mai dern DAI mai
-hotel-basics.is-breakfast-included,ruam ah-hahn chow mai
-hotel-requests.can-i-check-in-early,chek-in gawn DAI mai
-attractions-tickets.could-you-take-a-photo-for-us,tai roop HAI DAI mai
-payment-receipt.how-much-in-total,tang-mot TOW-rai
-shopping.i-will-take-this,ao an nee
-communication.i-do-not-understand,MAI KAO-jai
-quick-responses.okay-fine,oh-kay
-phone-translation.please-look-at-the-screen,doo NAH-jaw noi
-pronouns-verbs.need-thing,TAWNG-gahn ...
-question-words.how-much-what-price,rah-kah TOW-rai
-emergency-medical.i-cannot-breathe,hai-jai MAI awk
-lost-rescue.i-do-not-know-where-i-am,MAI roo WAH yoo TEE nai
-hotel-basics.may-i-see-the-room,kaw doo HAWNG gawn
-hotel-requests.another-night,kaw yoo eek kuen
-payment-receipt.can-we-pay-separately,jai YAEK gan DAI mai
-shopping.what-is-this,NEE a-rai
-communication.i-cannot-read-it,ahn MAI awk
-quick-responses.no-good-not-allowed-will-not-work,HAHM
-pronouns-verbs.looking-for-thing,hah ...
-emergency-medical.i-am-bleeding-badly,lueat awk MAHK
-lost-rescue.my-friend-is-hurt,PUEAN baht-jep
-dietary-needs.does-it-contain-fish-stock,sai nahm plah mai
-dietary-needs.does-it-contain-pork-stock,nahm sup tam jahk moo mai
-hotel-basics.for-nights,{} kuen
-hotel-requests.is-there-a-safe,mee TOO sayf mai
-payment-receipt.is-tax-included,ruam pah-see laeo mai
-shopping.where-can-i-buy,sue {} DAI TEE nai
-emergency-medical.i-have-chest-pain,jep NAH-awk
-lost-rescue.i-lost-my-wallet,gra-pow ngern hai
-hotel-basics.two-beds,kaw tiang YAEK
-hotel-requests.another-blanket,kaw PAH-hom perm
-payment-receipt.my-card-was-declined,bat chai MAI DAI
-shopping.do-you-have-this-in-stock,mee kawng mai
-time-words.night,glahng-kuen
-emergency-medical.this-person-is-unconscious,kon nee mot sa-ti
-lost-rescue.i-lost-my-bag,gra-pow hai
-food-ordering.can-a-vegetarian-eat-this,kon mang-sa-wi-rat gin DAI mai
-hotel-basics.is-there-air-conditioning,mee ae mai
-hotel-requests.wake-up-call,CHUAI pluk tawn {}
-payment-receipt.the-bill-is-wrong,bin NAH ja pit
-shopping.two-of-these,kaw an nee sawng an
-social-basics.okay-fine-i-am-okay,sa-bai dee
-emergency-medical.where-is-the-nearest-hospital,rong pa-yah-bahn GLAI sut yoo nai
-lost-rescue.where-is-lost-and-found,soon kawng hai yoo nai
-payment-receipt.i-already-paid,jai laeo
-shopping.what-is-it-made-of,tam jahk a-rai
-emergency-medical.what-is-the-emergency-number,ber chuk-chern a-rai
-lost-rescue.i-cannot-find-my-hotel,hah rong-raem MAI jer
-emergency-medical.is-there-a-doctor-who-speaks-english,mee maw POOT ang-grit DAI mai
-lost-rescue.i-left-it-on-the-train,luem wai bon rot-fai
-dietary-needs.i-have-a-severe-allergy-to,"pae {} run-raeng, aht tueng tai"
-emergency-medical.i-think-a-bone-is-broken,gra-dook NAH ja hak
-lost-rescue.i-cannot-get-down,long MAI DAI
-emergency-medical.please-call-my-emergency-contact,CHUAI toh hah kon tit-taw chuk-chern
-emergency-medical.i-have-travel-insurance,mee pra-gan dern tahng
-dietary-needs.no-pork,"MAI sai moo, nahm-man moo, nahm sup moo"
-dietary-needs.is-this-halal,an nee hah-lahn mai
-numbers-money.baht,baht
-numbers-money.baht-symbol,baht
-pharmacy-symptoms.i-think-i-have-malaria,song-sai wah pen kai mah-lah-REE-ah
-pharmacy-symptoms.i-need-a-malaria-test,kaw truat mah-lah-REE-ah
+concept_id,respell,text
+building-help.what-room-number-is-this,HAWNG nee ber a-rai,ห้องนี้เบอร์อะไร
+accessibility.step-free,mee tahng MAI mee ban-dai mai,มีทางไม่มีบันไดไหม
+in-a-building.is-this-the-correct-entrance,KAO tahng nee chai mai,เข้าทางนี้ใช่ไหม
+toilets.where-toilet,HAWNG nahm yoo nai,ห้องน้ำอยู่ไหน
+building-words.elevator,lip,ลิฟต์
+pronouns-verbs.i-me,pom / di-chan,ผม
+question-words.what,a-rai,อะไร
+emergency-medical.help,CHUAI DUAI,ช่วยด้วย
+medical-conditions.i-am-diabetic,pen bow-wahn,เป็นเบาหวาน
+pharmacy-symptoms.which-pharmacy-is-open-now,rahn kai yah nai pert yoo,ร้านขายยาไหนเปิดอยู่
+body-parts.head,hua,หัว
+lost-rescue.i-lost-my-passport,paht-pawt hai,พาสปอร์ตหาย
+police-consulate.where-is-the-police-station,sa-tah-nee tam-ruat yoo nai,สถานีตำรวจอยู่ไหน
+dietary-needs.no-meat,MAI sai nuea sat,ไม่ใส่เนื้อสัตว์
+food-ordering.table-for-two,toh sawng kon,โต๊ะสองคน
+trail-words.trail,SEN tahng dern pah,เส้นทางเดินป่า
+weather.forecast,pa-yah-gawn ah-gaht WAH yahng-rai,พยากรณ์อากาศ ว่าอย่างไร
+hiking-parks.is-this-the-way-to,tahng nee pai {} chai mai,ทางนี้ไป{}ใช่ไหม
+trail-conditions.how-long-is-the-full-route,tahng tang-mot glai TOW-rai,ทางทั้งหมดไกลเท่าไร
+trail-transport.how-long-is-the-queue,taw kiw nahn mai,ต่อคิวนานไหม
+trail-warnings.open,pert,เปิด
+trail-landmarks.trail-marker,PAI bawk tahng,ป้ายบอกทาง
+hotel-words.passport,paht-pawt,พาสปอร์ต
+hotel-basics.are-any-rooms-available,mee HAWNG WAHNG mai,มีห้องว่างไหม
+hotel-requests.can-i-check-out-later,chek-owt sai DAI mai,เช็คเอาท์สายได้ไหม
+room-problems.there-is-a-problem-with-the-room,HAWNG mee pan-hah,ห้องมีปัญหา
+laundry.please-wash-these-clothes,sak PAH HAI noi,ซักผ้าให้หน่อย
+numbers-money.l-ng,soon,ศูนย์
+atm-cash.where-is-an-atm,TOO ay-tee-em yoo nai,ตู้เอทีเอ็มอยู่ไหน
+attractions-tickets.where-can-i-buy-tickets,sue tua DAI TEE nai,ซื้อตั๋วได้ที่ไหน
+payment-receipt.pay-by-card,jai bat DAI mai,จ่ายบัตรได้ไหม
+shopping.i-am-just-looking,doo gawn,ดูก่อน
+color-size-returns.do-you-have-another-color,mee see uen mai,มีสีอื่นไหม
+tax-refund.can-i-get-a-tax-refund,kaw kuen pah-see DAI mai,ขอคืนภาษีได้ไหม
+social-basics.hello,sa-wat-dee,สวัสดี
+communication.i-do-not-speak-this-language,POOT pah-sah tai MAI DAI,พูดภาษา{target}ไม่ได้
+quick-responses.please-go-ahead,chern,เชิญ
+phone-translation.i-am-using-phone-translation,chai aep plae pah-sah,ใช้แอปแปลภาษา
+phone-text-power.please-type-it-for-me,CHUAI pim HAI noi,ช่วยพิมพ์ให้หน่อย
+sim-data.i-would-like-a-tourist-sim,kaw sim nak TAWNG-TIAO,ขอซิมนักท่องเที่ยว
+etiquette.is-this-allowed,an nee tam DAI mai,อันนี้ทำได้ไหม
+children.cannot-find-my-child,hah LOOK MAI jer,หาลูกไม่เจอ
+time-scheduling.what-time-is-it,gee mohng laeo,กี่โมงแล้ว
+time-words.today,wan-nee,วันนี้
+days-of-week.monday,wan jan,วันจันทร์
+months.january,ma-ga-rah-kom,มกราคม
+directions.where-is,{} yoo nai,{}อยู่ไหน
+quick-directions.go-straight,trong pai,ตรงไป
+taxi.please-take-me-here,pai TEE-NEE,ไปที่นี่
+transit-rides.two-tickets,kaw tua sawng bai,ขอตั๋วสองใบ
+border-customs.i-am-a-tourist,mah TIAO,มาเที่ยว
+pickup-meeting.where-is-the-pickup-point,jut rap yoo nai,จุดรับอยู่ไหน
+rail-station-words.high-speed-rail,rot-fai kwahm-reo soong,รถไฟความเร็วสูง
+common-signs.open-on,pert,เปิด
+utility-templates.i-want-to-go-to,yahk pai {},อยากไป{}
+building-help.i-am-lost,long tahng,หลงทาง
+accessibility.wheelchair-access,rot ken KAO DAI mai,รถเข็นเข้าได้ไหม
+toilets.where-public-toilet,HAWNG nahm sah-tah-ra-na yoo nai,ห้องน้ำสาธารณะ อยู่ไหน
+building-words.stairs,ban-dai,บันได
+pronouns-verbs.we-us,row,เรา
+question-words.where,nai,ไหน
+emergency-medical.please-call-an-ambulance,CHUAI RIAK rot pa-yah-bahn,ช่วยเรียกรถพยาบาล
+medical-conditions.i-need-insulin,TAWNG-gahn in-soo-lin,ต้องการอินซูลิน
+pharmacy-symptoms.i-need-medicine-for,kaw yah GAE {},ขอยาแก้{}
+body-parts.stomach,tawng,ท้อง
+lost-rescue.i-lost-my-phone,mue-tue hai,มือถือหาย
+police-consulate.i-want-to-report-a-theft,kaw JAENG kwahm,ขอแจ้งความ
+dietary-needs.no-eggs,MAI sai kai,ไม่ใส่ไข่
+food-ordering.is-a-table-available,mee toh WAHNG mai,มีโต๊ะว่างไหม
+trail-words.trailhead,jut RERM SEN tahng,จุดเริ่มเส้นทาง
+weather.will-it-rain,wan-nee fon ja tok mai,วันนี้ฝนจะตกไหม
+hiking-parks.where-is-the-trailhead,jut RERM SEN tahng yoo nai,จุดเริ่มเส้นทาง อยู่ไหน
+trail-conditions.can-we-return-the-same-way,glap tahng derm DAI mai,กลับทางเดิมได้ไหม
+trail-transport.what-time-is-the-last-shuttle,rot rap song kan sut-tai gee mohng,รถรับส่งคันสุดท้าย กี่โมง
+trail-warnings.closed,pit,ปิด
+trail-landmarks.fork-junction,tahng YAEK,ทางแยก
+hotel-words.room-key-card,kee gaht HAWNG,คีย์การ์ดห้อง
+hotel-basics.there-are-two-of-us,mah sawng kon,มาสองคน
+hotel-requests.what-time-does-breakfast-start,ah-hahn chow RERM gee mohng,อาหารเช้าเริ่มกี่โมง
+room-problems.the-air-conditioning-is-broken,ae sia,แอร์เสีย
+laundry.where-is-a-laundromat,rahn sa-duak sak yoo nai,ร้านสะดวกซักอยู่ไหน
+introductions.nice-to-meet-you,yin-dee TEE DAI roo-jak,ยินดีที่ได้รู้จัก
+numbers-money.y,nueng,หนึ่ง
+atm-cash.does-this-atm-take-foreign-cards,chai bat tahng pra-tayt DAI mai,ใช้บัตรต่างประเทศ ได้ไหม
+attractions-tickets.do-i-need-a-reservation,TAWNG jong mai,ต้องจองไหม
+payment-receipt.pay-cash,jai ngern sot DAI mai,จ่ายเงินสดได้ไหม
+shopping.how-much-is-this,an nee TOW-rai,อันนี้เท่าไร
+color-size-returns.do-you-have-another-size,mee sai uen mai,มีไซส์อื่นไหม
+social-basics.hello-polite,sa-wat-dee krap / KAH,สวัสดีครับ
+communication.i-speak-only-a-little-of-this,POOT tai DAI nit diao,พูด{target}ได้นิดเดียว
+quick-responses.yes-right,CHAI,ใช่
+phone-translation.please-speak-toward-the-phone,POOT sai mue-tue noi,พูดใส่มือถือหน่อย
+phone-translation.please-write-the-place-name,CHUAI kian CHUE sa-tahn-TEE pen pah-sah tai,ช่วยเขียนชื่อสถานที่เป็นภาษา{target}
+sim-data.may-i-use-your-wifi,kaw chai wai-fai DAI mai,ขอใช้ไวไฟได้ไหม
+etiquette.is-tipping-expected,TAWNG HAI tip mai,ต้องให้ทิปไหม
+children.make-an-announcement,CHUAI pra-gaht hah HAI,ช่วยประกาศหาให้
+time-scheduling.how-many-minutes,gee nah-tee,กี่นาที
+time-words.tomorrow,PRUNG-nee,พรุ่งนี้
+days-of-week.tuesday,wan ang-kahn,วันอังคาร
+months.february,gum-pah-pan,กุมภาพันธ์
+directions.how-do-i-get-to,pai {} yang-ngai,ไป{}ยังไง
+quick-directions.turn-left,liao saai,เลี้ยวซ้าย
+taxi.please-send-me-the-address,song TEE-yoo mah HAI,ส่งที่อยู่มาให้
+transit-rides.where-is-the-subway-station,sa-tah-nee rot-fai-fah yoo nai,สถานีรถไฟฟ้าอยู่ไหน
+place-words.visitor-center,soon nak TAWNG-TIAO,ศูนย์นักท่องเที่ยว
+border-customs.here-is-my-passport,NEE paht-pawt,นี่พาสปอร์ต
+pickup-meeting.please-send-me-the-pickup-point,song jut rap mah HAI,ส่งจุดรับมาให้
+common-signs.closed-off,pit,ปิด
+utility-templates.please-give-me,kaw {} noi,ขอ{}หน่อย
+building-help.where-is-reception,pa-naek TAWN-rap yoo nai,แผนกต้อนรับอยู่ไหน
+accessibility.elevator,mee lip mai,มีลิฟต์ไหม
+in-a-building.do-you-have-wi-fi,mee wai-fai mai,มีไวไฟไหม
+toilets.may-i-use-the-toilet,kaw chai HAWNG nahm DAI mai,ขอใช้ห้องน้ำได้ไหม
+building-words.entrance,tahng KAO,ทางเข้า
+pronouns-verbs.you,kun,คุณ
+question-words.who,krai,ใคร
+emergency-medical.i-need-a-doctor,TAWNG-gahn maw,ต้องการหมอ
+medical-conditions.i-have-asthma,pen ROHK hawp huet,เป็นโรคหอบหืด
+pharmacy-symptoms.i-have-a-fever,mee KAI,มีไข้
+body-parts.back,lang,หลัง
+lost-rescue.please-call-the-police,CHUAI RIAK tam-ruat,ช่วยเรียกตำรวจ
+police-consulate.my-bag-was-stolen,gra-pow took ka-moi,กระเป๋าถูกขโมย
+dietary-needs.not-spicy,MAI pet loey,ไม่เผ็ดเลย
+food-ordering.menu-please,kaw may-noo,ขอเมนู
+trail-words.summit,YAWT kow,ยอดเขา
+weather.is-it-safe-today,wan-nee plawt-pai mai,วันนี้ปลอดภัยไหม
+hiking-parks.how-long-to-the-summit,KUEN YAWT kow nahn TOW-rai,ขึ้นยอดเขานานเท่าไร
+trail-conditions.can-we-return-before-dark,glap gawn muet DAI mai,กลับก่อนมืดได้ไหม
+trail-transport.when-does-the-cableway-stop,gra-chow pit gee mohng,กระเช้าปิดกี่โมง
+trail-warnings.maintenance,SAWM bam-roong,ซ่อมบำรุง
+trail-landmarks.boardwalk-cliff-path,tahng dern mai,ทางเดินไม้
+hotel-words.check-in,chek-in,เช็คอิน
+hotel-basics.i-have-a-reservation,jong wai laeo,จองไว้แล้ว
+hotel-requests.can-i-store-my-luggage,fahk gra-pow DAI mai,ฝากกระเป๋าได้ไหม
+room-problems.there-is-no-hot-water,MAI mee nahm rawn,ไม่มีน้ำร้อน
+laundry.when-will-it-be-ready,set MUEA-rai,เสร็จเมื่อไร
+introductions.what-is-your-name,kun CHUE a-rai,คุณชื่ออะไร
+numbers-money.r,sawng,สอง
+atm-cash.the-atm-kept-my-card,TOO gin bat,ตู้กินบัตร
+attractions-tickets.what-is-the-latest-entry-time,KAO DAI tueng gee mohng,เข้าได้ถึงกี่โมง
+payment-receipt.pay-by-qr-code,sa-gaen jai DAI mai,สแกนจ่ายได้ไหม
+shopping.that-is-too-expensive,paeng gern pai,แพงเกินไป
+color-size-returns.may-i-try-it-on,lawng DAI mai,ลองได้ไหม
+social-basics.good-morning,sa-wat-dee tawn chow,สวัสดีตอนเช้า
+communication.do-you-speak-english,POOT ang-grit DAI mai,พูด{source}ได้ไหม
+quick-responses.no-not,MAI,ไม่
+phone-translation.one-sentence-at-a-time-please,POOT tee la pra-yohk,พูดทีละประโยค
+phone-text-power.please-use-simple-words,chai kam NGAI-NGAI noi,ใช้คำง่ายๆหน่อย
+sim-data.how-much-data-is-included,DAI net TOW-rai,ได้เน็ตเท่าไร
+etiquette.is-service-included,ruam KAH baw-ri-gahn mai,รวมค่าบริการไหม
+children.child-age,LOOK ah-yu {} pee,ลูกอายุ {} ปี
+time-scheduling.what-time-should-we-meet,jer gan gee mohng,เจอกันกี่โมง
+time-words.yesterday,MUEA-wahn,เมื่อวาน
+days-of-week.wednesday,wan put,วันพุธ
+months.march,mee-nah-kom,มีนาคม
+directions.is-it-far,glai mai,ไกลไหม
+quick-directions.turn-right,liao kwah,เลี้ยวขวา
+taxi.we-need-the-east-gate-not-the-south-gate,"pra-too ta-wan awk, MAI chai pra-too TAI",ประตูตะวันออก ไม่ใช่ประตูใต้
+transit-rides.does-this-bus-train-go-to,kan nee pai {} mai,คันนี้ไป{}ไหม
+place-words.railway-station,sa-tah-nee rot-fai,สถานีรถไฟ
+border-customs.i-am-staying-for-days,yoo {} wan,อยู่ {} วัน
+pickup-meeting.please-pick-us-up-here,mah rap TEE-NEE,มารับที่นี่
+rail-station-words.transfer,plian saai,เปลี่ยนสาย
+common-signs.occupied,MAI WAHNG,ไม่ว่าง
+utility-templates.may-i,kaw {} DAI mai,ขอ{}ได้ไหม
+building-help.where-is-a-power-outlet,plak fai yoo nai,ปลั๊กไฟอยู่ไหน
+accessibility.ramp,mee tahng LAHT mai,มีทางลาดไหม
+in-a-building.what-is-the-wi-fi-password,ra-hat wai-fai a-rai,รหัสไวไฟอะไร
+toilets.is-it-only-for-customers,cha-paw LOOK-kah mai,เฉพาะลูกค้าไหม
+building-words.exit,tahng awk,ทางออก
+pronouns-verbs.you-polite,TAHN,ท่าน
+question-words.which-one,an nai,อันไหน
+medical-conditions.i-have-a-heart-condition,pen ROHK hua-jai,เป็นโรคหัวใจ
+pharmacy-symptoms.i-have-diarrhea,tawng sia,ท้องเสีย
+body-parts.throat,kaw,คอ
+lost-rescue.we-are-here,row yoo TEE-NEE,เราอยู่ที่นี่
+police-consulate.my-passport-was-stolen,paht-pawt took ka-moi,พาสปอร์ตถูกขโมย
+dietary-needs.less-spicy,pet noi,เผ็ดน้อย
+food-ordering.i-want-this,ao an nee,เอาอันนี้
+trail-words.viewpoint,jut chom wiu,จุดชมวิว
+weather.how-cold-at-night,glahng-kuen now KAE nai,กลางคืนหนาวแค่ไหน
+hiking-parks.how-long-to-the-viewpoint,pai jut chom wiu nahn TOW-rai,ไปจุดชมวิวนานเท่าไร
+trail-conditions.is-the-trail-open,SEN tahng pert mai,เส้นทางเปิดไหม
+trail-transport.where-can-we-buy-water,sue nahm DAI TEE nai,ซื้อน้ำได้ที่ไหน
+trail-warnings.steep-slope,tahng LAHT chan,ทางลาดชัน
+trail-landmarks.start,jut RERM-TON,จุดเริ่มต้น
+hotel-words.check-out,chek-owt,เช็คเอาท์
+hotel-basics.can-i-charge-my-phone,chaht mue-tue DAI mai,ชาร์จมือถือได้ไหม
+hotel-requests.no-housekeeping,MAI TAWNG tam kwahm sa-aht,ไม่ต้องทำความสะอาด
+room-problems.can-i-change-rooms,kaw plian HAWNG DAI mai,ขอเปลี่ยนห้องได้ไหม
+laundry.how-much-per-kilo,gi-loh la TOW-rai,กิโลละเท่าไร
+introductions.we-are-traveling-together,row TIAO DUAI gan,เราเที่ยวด้วยกัน
+atm-cash.is-there-a-fee,mee KAH tam-niam mai,มีค่าธรรมเนียมไหม
+attractions-tickets.are-there-lockers,mee lawk-ger mai,มีล็อกเกอร์ไหม
+payment-receipt.a-receipt-please,kaw bai set,ขอใบเสร็จ
+shopping.can-it-be-a-little-cheaper,lot noi DAI mai,ลดหน่อยได้ไหม
+color-size-returns.can-i-return-it,kuen kawng DAI mai,คืนของได้ไหม
+social-basics.good-evening,sa-wat-dee tawn yen,สวัสดีตอนเย็น
+communication.please-speak-more-slowly,POOT chah-chah noi,พูดช้าๆหน่อย
+quick-responses.okay-can,DAI,ได้
+phone-text-power.my-phone-battery-is-low,baet ja mot,แบตจะหมด
+sim-data.do-you-need-my-passport,TAWNG chai paht-pawt mai,ต้องใช้พาสปอร์ตไหม
+etiquette.may-i-enter,kaw KAO DAI mai,ขอเข้าได้ไหม
+children.high-chair,mee GOW-ee dek mai,มีเก้าอี้เด็กไหม
+time-scheduling.can-we-change-the-time,LUEAN way-lah DAI mai,เลื่อนเวลาได้ไหม
+time-words.this-week,ah-tit nee,อาทิตย์นี้
+days-of-week.thursday,wan pa-rue-hat,วันพฤหัส
+months.april,may-sah-yon,เมษายน
+directions.how-long-on-foot,dern gee nah-tee,เดินกี่นาที
+quick-directions.this-way,tahng nee,ทางนี้
+taxi.please-stop-here,jawt TEE-NEE,จอดที่นี่
+transit-rides.what-is-the-next-stop,taw pai sa-tah-nee a-rai,ต่อไปสถานีอะไร
+place-words.airport,sa-nahm bin,สนามบิน
+border-customs.nothing-to-declare,MAI mee kawng TAWNG sam-daeng,ไม่มีของต้องสำแดง
+pickup-meeting.meet-us-at,jer gan TEE {},เจอกันที่ {}
+rail-station-words.ticket-gate,pra-too truat tua,ประตูตรวจตั๋ว
+common-signs.vacant,WAHNG,ว่าง
+utility-templates.please-do-not-add,MAI sai {},ไม่ใส่{}
+accessibility.how-many-steps,ban-dai gee KAN,บันไดกี่ขั้น
+in-a-building.which-floor,chan nai,ชั้นไหน
+toilets.toilet-wc,HAWNG nahm,ห้องน้ำ
+building-words.men,chaai,ชาย
+pronouns-verbs.he-him,kow,เขา
+question-words.when,MUEA-rai,เมื่อไร
+medical-conditions.i-am-allergic-to-penicillin,pae yah pay-ni-sin-lin,แพ้ยาเพนิซิลลิน
+pharmacy-symptoms.where-is-an-all-night-pharmacy,rahn kai yah pert duek yoo nai,ร้านขายยาเปิดดึก อยู่ไหน
+body-parts.tooth,fan,ฟัน
+lost-rescue.please-look-at-my-location-pin,doo mut tam-naeng nee,ดูหมุดตำแหน่งนี้
+police-consulate.someone-is-following-me,mee kon tahm chan,มีคนตามฉัน
+dietary-needs.no-peanuts,MAI sai tua li-song,ไม่ใส่ถั่วลิสง
+food-ordering.do-you-have-drinking-water,mee nahm plow mai,มีน้ำเปล่าไหม
+trail-words.cableway,gra-chow fai-fah,กระเช้าไฟฟ้า
+weather.rain,fon,ฝน
+hiking-parks.which-route-is-easier,tahng nai NGAI gwah,ทางไหนง่ายกว่า
+trail-conditions.is-the-route-steep,tahng chan mai,ทางชันไหม
+trail-transport.where-can-we-refill-water,term nahm DAI TEE nai,เติมน้ำได้ที่ไหน
+trail-warnings.caution-slippery,ra-wang puen LUEN,ระวังพื้นลื่น
+trail-landmarks.end,jut sin-sut,จุดสิ้นสุด
+hotel-basics.i-would-like-a-non-smoking-room,kaw HAWNG plawt bu-ree,ขอห้องปลอดบุหรี่
+room-problems.the-room-is-too-noisy,HAWNG siang dang MAHK,ห้องเสียงดังมาก
+laundry.can-it-be-ready-today,set wan-nee DAI mai,เสร็จวันนี้ได้ไหม
+introductions.this-is-my-friend,NEE PUEAN chan,นี่เพื่อนฉัน
+numbers-money.s-n,sahm,สาม
+atm-cash.the-card-was-declined,bat chai MAI DAI,บัตรใช้ไม่ได้
+attractions-tickets.may-i-take-photos,tai roop DAI mai,ถ่ายรูปได้ไหม
+color-size-returns.can-i-exchange-it,plian kawng DAI mai,เปลี่ยนของได้ไหม
+social-basics.goodbye,lah gawn,ลาก่อน
+communication.i-do-not-understand-spoken,fang MAI KAO-jai,ฟังไม่เข้าใจ
+quick-responses.cannot-not-allowed,MAI DAI,ไม่ได้
+phone-text-power.do-you-have-a-power-bank,mee pow-wer baeng mai,มีพาวเวอร์แบงก์ไหม
+sim-data.how-long-is-it-valid,chai DAI gee wan,ใช้ได้กี่วัน
+etiquette.remove-shoes,TAWNG tawt rong-tow mai,ต้องถอดรองเท้าไหม
+children.baby-changing-room,TEE plian PAH-AWM yoo nai,ที่เปลี่ยนผ้าอ้อม อยู่ไหน
+time-scheduling.when-is-convenient,sa-duak MUEA-rai,สะดวกเมื่อไร
+time-words.next-week,ah-tit NAH,อาทิตย์หน้า
+days-of-week.friday,wan suk,วันศุกร์
+months.may,pruet-sa-pah-kom,พฤษภาคม
+directions.please-show-me-on-the-map,chee nai paen-TEE HAI noi,ชี้ในแผนที่ให้หน่อย
+quick-directions.that-way,tahng nan,ทางนั้น
+taxi.can-you-wait-for-me-here,raw TEE-NEE DAI mai,รอที่นี่ได้ไหม
+transit-rides.please-tell-me-where-to-get-off,bawk DUAI WAH long TEE nai,บอกด้วยว่าลงที่ไหน
+place-words.service-desk,jut baw-ri-gahn,จุดบริการ
+border-customs.i-am-staying-at,pak TEE {},พักที่ {}
+pickup-meeting.please-call-me-a-ride,CHUAI RIAK rot HAI,ช่วยเรียกรถให้
+rail-station-words.platform,chahn-chah-lah,ชานชาลา
+common-signs.caution,ra-wang,ระวัง
+utility-templates.do-you-have,mee {} mai,มี{}ไหม
+accessibility.cannot-climb-stairs,KUEN ban-dai MAI DAI,ขึ้นบันไดไม่ได้
+toilets.is-it-free,free mai,ฟรีไหม
+building-words.women,ying,หญิง
+pronouns-verbs.she-her,kow,เขา
+question-words.how,yahng-rai,อย่างไร
+emergency-medical.it-hurts-here,jep trong nee,เจ็บตรงนี้
+medical-conditions.i-have-epilepsy,pen ROHK lom-chak,เป็นโรคลมชัก
+pharmacy-symptoms.painkiller,yah GAE puat,ยาแก้ปวด
+body-parts.chest,NAH-awk,หน้าอก
+lost-rescue.i-cannot-walk,dern MAI DAI,เดินไม่ได้
+police-consulate.i-need-a-written-police-report,kaw bai JAENG kwahm,ขอใบแจ้งความ
+dietary-needs.no-nuts,MAI sai tua took cha-nit,ไม่ใส่ถั่วทุกชนิด
+food-ordering.to-go-please,haw glap BAHN,ห่อกลับบ้าน
+trail-words.shuttle-bus,rot rap song,รถรับส่ง
+weather.snow,hi-ma,หิมะ
+trail-conditions.is-the-path-slippery,tahng LUEN mai,ทางลื่นไหม
+trail-transport.is-there-cell-signal-here,TEE-NEE mee san-yahn mai,ที่นี่มีสัญญาณไหม
+trail-warnings.danger,an-ta-rai,อันตราย
+trail-landmarks.elevation,kwahm soong,ความสูง
+hotel-basics.i-would-like-a-quiet-room,kaw HAWNG ngiap-ngiap,ขอห้องเงียบๆ
+room-problems.the-key-does-not-work,kee gaht chai MAI DAI,คีย์การ์ดใช้ไม่ได้
+laundry.please-do-not-use-bleach,MAI sai nahm-yah fawk kow,ไม่ใส่น้ำยาฟอกขาว
+introductions.i-am-from,mah jahk {},มาจาก {}
+numbers-money.s,see,สี่
+atm-cash.what-is-the-exchange-rate,at-trah laek-plian TOW-rai,อัตราแลกเปลี่ยน เท่าไร
+attractions-tickets.please-take-a-photo-of-us,CHUAI tai roop HAI noi,ช่วยถ่ายรูปให้หน่อย
+color-size-returns.do-you-have-a-bag,mee tung mai,มีถุงไหม
+social-basics.thank-you,kawp-kun,ขอบคุณ
+communication.i-cannot-read-understand,ahn MAI KAO-jai,อ่านไม่เข้าใจ
+quick-responses.works-okay,chai DAI,ใช้ได้
+phone-text-power.the-translation-may-be-inaccurate,kam plae aht MAI trong,คำแปลอาจไม่ตรง
+sim-data.please-activate-it,CHUAI pert chai-ngahn HAI,ช่วยเปิดใช้งานให้
+etiquette.photo-of-you,kaw tai roop kun DAI mai,ขอถ่ายรูปคุณได้ไหม
+children.childrens-menu,mee may-noo dek mai,มีเมนูเด็กไหม
+time-scheduling.what-is-today-s-date,wan-nee wan-TEE TOW-rai,วันนี้วันที่เท่าไร
+time-words.morning,chow,เช้า
+days-of-week.saturday,wan sow,วันเสาร์
+months.june,mi-tu-nah-yon,มิถุนายน
+directions.where-is-the-nearest,{} GLAI sut yoo nai,{}ใกล้สุดอยู่ไหน
+quick-directions.on-the-left,yoo saai mue,อยู่ซ้ายมือ
+taxi.we-need-to-catch-the-high-speed-train,TAWNG KUEN rot-fai kwahm-reo soong,ต้องขึ้นรถไฟ ความเร็วสูง
+transit-rides.is-this-direct,pai tueng loey mai,ไปถึงเลยไหม
+place-words.bus-stop,PAI rot-may,ป้ายรถเมล์
+border-customs.i-am-here-for-business,mah tam tu-ra-git,มาทำธุรกิจ
+rail-station-words.ticket-office,HAWNG kai tua,ห้องขายตั๋ว
+common-signs.no-entry,HAHM KAO,ห้ามเข้า
+utility-templates.please-write-the-number,CHUAI kian tua-LAYK,ช่วยเขียนตัวเลข
+accessibility.need-to-sit-down,kaw NANG noi,ขอนั่งหน่อย
+toilets.do-i-need-a-coin,TAWNG chai rian mai,ต้องใช้เหรียญไหม
+building-words.door,pra-too,ประตู
+pronouns-verbs.they-them,puak kow,พวกเขา
+question-words.how-much-many,TOW-rai,เท่าไร
+emergency-medical.where-is-a-pharmacy,rahn kai yah yoo nai,ร้านขายยาอยู่ไหน
+medical-conditions.my-blood-sugar-is-low,nahm-tahn nai lueat tam,น้ำตาลในเลือดต่ำ
+pharmacy-symptoms.do-i-need-a-prescription,TAWNG mee bai sang yah mai,ต้องมีใบสั่งยาไหม
+body-parts.eye,taa,ตา
+lost-rescue.i-sprained-my-ankle,KAW-tow plik,ข้อเท้าพลิก
+police-consulate.i-want-to-contact-my-embassy,kaw tit-taw sa-tahn toot,ขอติดต่อสถานทูต
+dietary-needs.no-seafood,"MAI sai ah-hahn ta-lay, nahm plah, ga-pi",ไม่ใส่อาหารทะเล น้ำปลา กะปิ
+food-ordering.check-please,gep ngern,เก็บเงิน
+trail-words.park-shuttle,rot rap song nai ut-ta-yahn,รถรับส่งในอุทยาน
+weather.wind,lom,ลม
+trail-transport.do-you-have-a-map,mee paen-TEE mai,มีแผนที่ไหม
+trail-warnings.beware-falling-rocks,ra-wang hin RUANG,ระวังหินร่วง
+trail-landmarks.sunset,pra ah-tit tok,พระอาทิตย์ตก
+hotel-basics.is-there-a-washing-machine,mee KRUEANG sak-PAH mai,มีเครื่องซักผ้าไหม
+room-problems.the-toilet-will-not-flush,chak-KROHK got MAI long,ชักโครกกดไม่ลง
+laundry.laundromat,rahn sa-duak sak,ร้านสะดวกซัก
+introductions.where-are-you-from,kun mah jahk nai,คุณมาจากไหน
+numbers-money.w,HAH,ห้า
+atm-cash.no-money-came-out,ngern MAI awk,เงินไม่ออก
+social-basics.you-are-welcome,MAI pen-rai,ไม่เป็นไร
+communication.please-say-it-again,POOT eek krang,พูดอีกครั้ง
+quick-responses.does-not-work-no,chai MAI DAI,ใช้ไม่ได้
+phone-text-power.please-confirm,CHUAI yuen-yan,ช่วยยืนยัน
+sim-data.do-you-have-an-esim,mee ee-sim mai,มี eSIM ไหม
+etiquette.may-i-sit-here,NANG TEE-NEE DAI mai,นั่งที่นี่ได้ไหม
+children.suitable-for-children,maw gap dek mai,เหมาะกับเด็กไหม
+time-scheduling.what-day-is-it-today,wan-nee wan a-rai,วันนี้วันอะไร
+time-words.afternoon,bai,บ่าย
+days-of-week.sunday,wan ah-tit,วันอาทิตย์
+months.july,ga-ra-ga-dah-kom,กรกฎาคม
+directions.where-am-i,trong nee TEE nai,ตรงนี้ที่ไหน
+quick-directions.on-the-right,yoo kwah mue,อยู่ขวามือ
+taxi.please-use-the-meter,pert mi-ter DUAI,เปิดมิเตอร์ด้วย
+transit-rides.do-i-need-to-transfer,TAWNG taw rot mai,ต้องต่อรถไหม
+place-words.luggage-storage,TEE fahk gra-pow,ที่ฝากกระเป๋า
+border-customs.i-have-a-return-ticket,mee tua glap,มีตั๋วกลับ
+rail-station-words.waiting-room,HAWNG pak koi,ห้องพักคอย
+common-signs.no-smoking,HAHM soop bu-ree,ห้ามสูบบุหรี่
+utility-templates.i-need,TAWNG-gahn {},ต้องการ{}
+accessibility.accessible-restroom,mee HAWNG nahm POO pi-gahn mai,มีห้องน้ำผู้พิการไหม
+toilets.is-the-tap-water-safe-to-drink,nahm pra-pah duem DAI mai,น้ำประปาดื่มได้ไหม
+building-words.key,gun-jae,กุญแจ
+pronouns-verbs.my-mine,kawng pom,ของผม
+question-words.how-many,gee,กี่
+emergency-medical.please-take-me-to-a-hospital,CHUAI pah pai rong pa-yah-bahn,ช่วยพาไปโรงพยาบาล
+medical-conditions.i-need-my-inhaler,TAWNG-gahn yah PON,ต้องการยาพ่น
+pharmacy-symptoms.i-have-a-headache,puat hua,ปวดหัว
+body-parts.ear,hoo,หู
+lost-rescue.please-contact-rescue,CHUAI JAENG GOO-pai,ช่วยแจ้งกู้ภัย
+police-consulate.i-need-it-for-my-insurance,TAWNG chai klem pra-gan,ต้องใช้เคลมประกัน
+food-ordering.does-it-contain,sai {} mai,ใส่{}ไหม
+trail-words.steps,KAN ban-dai,ขั้นบันได
+weather.storm,pah-yu,พายุ
+trail-warnings.first-aid-station,jut pa-tom pa-yah-bahn,จุดปฐมพยาบาล
+room-problems.the-light-does-not-work,fai MAI tit,ไฟไม่ติด
+laundry.please-iron-this,reet HAI noi,รีดให้หน่อย
+introductions.how-are-you,sa-bai dee mai,สบายดีไหม
+numbers-money.li,hok,หก
+atm-cash.where-can-i-change-money,laek ngern DAI TEE nai,แลกเงินได้ที่ไหน
+social-basics.excuse-me-sorry,kaw TOHT,ขอโทษ
+communication.please-write-it-down,CHUAI kian HAI,ช่วยเขียนให้
+sim-data.my-data-is-not-working,net chai MAI DAI,เน็ตใช้ไม่ได้
+etiquette.queue-for,NEE kiw {} chai mai,นี่คิว{}ใช่ไหม
+children.minimum-age,ah-yu KAN-tam TOW-rai,อายุขั้นต่ำเท่าไร
+time-scheduling.what-time-does-it-open,pert gee mohng,เปิดกี่โมง
+time-words.evening,yen,เย็น
+months.august,sing-hah-kom,สิงหาคม
+directions.which-way,tahng nai,ทางไหน
+quick-directions.across-from-here,trong KAHM,ตรงข้าม
+transit-rides.is-it-delayed,LAH-chah mai,ล่าช้าไหม
+border-customs.i-am-visiting-family,mah hah krawp-krua,มาหาครอบครัว
+rail-station-words.train-number,ka-buan TEE,ขบวนที่
+common-signs.no-photography,HAHM tai roop,ห้ามถ่ายรูป
+utility-templates.is-there-nearby,taeo nee mee {} mai,แถวนี้มี{}ไหม
+accessibility.station-assistance,sa-tah-nee mee kon CHUAI mai,สถานีมีคนช่วยไหม
+toilets.it-is-urgent,duan MAHK,ด่วนมาก
+pronouns-verbs.your-yours,kawng kun,ของคุณ
+question-words.why,tam-mai,ทำไม
+medical-conditions.i-am-pregnant,TANG-kan,ตั้งครรภ์
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-say-tah-mawn,พาราเซตามอล
+body-parts.leg,kah,ขา
+lost-rescue.my-companion-is-missing,PUEAN hai,เพื่อนหาย
+police-consulate.i-need-an-interpreter,kaw LAHM,ขอล่าม
+dietary-needs.i-am-vegetarian,gin mang-sa-wi-rat,กินมังสวิรัติ
+food-ordering.is-this-vegetarian,an nee mang-sa-wi-rat mai,อันนี้มังสวิรัติไหม
+trail-words.up-uphill,KUEN kow,ขึ้นเขา
+weather.ice,nahm kaeng,น้ำแข็ง
+trail-warnings.service-suspended,ngot HAI baw-ri-gahn,งดให้บริการ
+trail-landmarks.water-point,jut term nahm,จุดเติมน้ำ
+room-problems.please-send-someone,CHUAI song kon mah SAWM,ช่วยส่งคนมาซ่อม
+laundry.detergent,pong sak-fawk,ผงซักฟอก
+introductions.i-am-a-tourist,pen nak TAWNG-TIAO,เป็นนักท่องเที่ยว
+numbers-money.q,jet,เจ็ด
+atm-cash.the-machine-is-out-of-service,TOO sia,ตู้เสีย
+social-basics.sorry,kaw TOHT DUAI,ขอโทษด้วย
+communication.please-wait-a-moment,raw sak KROO,รอสักครู่
+sim-data.does-it-need-registration,TAWNG long ta-bian mai,ต้องลงทะเบียนไหม
+etiquette.dressed-appropriately,taeng tua baep nee DAI mai,แต่งตัวแบบนี้ได้ไหม
+children.do-children-pay,dek TAWNG jai mai,เด็กต้องจ่ายไหม
+time-scheduling.what-time-does-it-close,pit gee mohng,ปิดกี่โมง
+time-words.spring,rue-doo bai-mai-pli,ฤดูใบไม้ผลิ
+months.september,gan-yah-yon,กันยายน
+directions.can-i-walk-there,dern pai DAI mai,เดินไปได้ไหม
+quick-directions.in-front,KAHNG-NAH,ข้างหน้า
+transit-rides.i-am-in-a-hurry,reep MAHK,รีบมาก
+border-customs.this-is-for-personal-use,chai suan-tua,ใช้ส่วนตัว
+rail-station-words.carriage,TOO,ตู้
+common-signs.do-not-touch,HAHM jap,ห้ามจับ
+utility-templates.how-much-is,{} TOW-rai,{}เท่าไร
+accessibility.help-me-carry,CHUAI yok HAI noi,ช่วยยกให้หน่อย
+toilets.may-i-have-the-toilet-key,kaw gun-jae HAWNG nahm,ขอกุญแจห้องน้ำ
+pronouns-verbs.be-called-call,CHUE,ชื่อ
+question-words.this,NEE,นี่
+medical-conditions.i-carry-an-adrenaline-injector,mee pahk-gah cheet a-dree-nah-leen,มีปากกาฉีดอะดรีนาลีน
+pharmacy-symptoms.how-much-should-i-take,gin krang la TOW-rai,กินครั้งละเท่าไร
+body-parts.arm,kaen,แขน
+dietary-needs.i-am-vegan,gin jay,กินเจ
+trail-words.down-downhill,long kow,ลงเขา
+weather.fog,mawk,หมอก
+room-problems.the-heating-does-not-work,KRUEANG tam kwahm rawn sia,เครื่องทำความร้อน เสีย
+laundry.dry-cleaning,sak HAENG,ซักแห้ง
+introductions.this-is-my-husband-wife,NEE sah-mee / pan-ra-yah,นี่สามี/ภรรยา
+numbers-money.b,paet,แปด
+atm-cash.please-give-me-smaller-notes,kaw baeng YOI,ขอแบงก์ย่อย
+social-basics.no-problem,MAI mee pan-hah,ไม่มีปัญหา
+communication.can-you-help-me,CHUAI noi DAI mai,ช่วยหน่อยได้ไหม
+sim-data.i-have-no-signal,MAI mee san-yahn,ไม่มีสัญญาณ
+etiquette.did-not-mean-to-offend,"MAI DAI TANG-jai, kaw TOHT",ไม่ได้ตั้งใจ ขอโทษ
+children.crib,mee tiang dek mai,มีเตียงเด็กไหม
+time-words.summer,rue-doo rawn,ฤดูร้อน
+months.october,tu-lah-kom,ตุลาคม
+directions.how-far-is-it,glai TOW-rai,ไกลเท่าไร
+quick-directions.behind,KAHNG-lang,ข้างหลัง
+transit-rides.which-platform,chahn-chah-lah nai,ชานชาลาไหน
+border-customs.i-am-in-transit,taw KRUEANG,ต่อเครื่อง
+rail-station-words.seat,TEE-NANG,ที่นั่ง
+common-signs.temporarily-closed,pit CHUA-krow,ปิดชั่วคราว
+utility-templates.is-this,NEE {} chai mai,นี่{}ใช่ไหม
+accessibility.board-first,kaw KUEN gawn DAI mai,ขอขึ้นก่อนได้ไหม
+toilets.there-is-no-toilet-paper,MAI mee gra-daht cham-ra,ไม่มีกระดาษชำระ
+pronouns-verbs.have,mee,มี
+question-words.that,NAN,นั่น
+medical-conditions.i-take-medicine-for,gin yah rak-sah {},กินยารักษา{}
+pharmacy-symptoms.i-am-vomiting,ah-jian,อาเจียน
+body-parts.foot,tow,เท้า
+police-consulate.i-was-robbed,took PLON,ถูกปล้น
+dietary-needs.i-do-not-eat,MAI gin {},ไม่กิน{}
+trail-words.one-way,tahng diao,ทางเดียว
+weather.heat,rawn,ร้อน
+laundry.dryer,KRUEANG op PAH,เครื่องอบผ้า
+introductions.this-is-my-daughter-son,NEE LOOK-sow / LOOK-chaai,นี่ลูกสาว/ลูกชาย
+numbers-money.ji,GOW,เก้า
+atm-cash.do-you-have-change,mee ngern tawn mai,มีเงินทอนไหม
+social-basics.i-do-not-know,MAI roo,ไม่รู้
+communication.please-show-me-the-text,kaw doo KAW-kwahm pah-sah tai,ขอดูข้อความภาษา{target}
+sim-data.please-write-the-wifi-password,CHUAI kian ra-hat wai-fai,ช่วยเขียนรหัสไวไฟ
+etiquette.what-is-customary,TEE-NEE tam gan yahng-rai,ที่นี่ทำกันอย่างไร
+children.warm-this-bottle,CHUAI un nom HAI noi,ช่วยอุ่นนมให้หน่อย
+time-words.fall,rue-doo bai-mai-RUANG,ฤดูใบไม้ร่วง
+months.november,pruet-sa-ji-gah-yon,พฤศจิกายน
+directions.which-exit,tahng awk nai,ทางออกไหน
+transit-rides.what-time-is-the-next-one,kan taw pai gee mohng,คันต่อไปกี่โมง
+border-customs.i-have-in-cash,mee ngern sot {},มีเงินสด {}
+rail-station-words.last-train,rot-fai TIAO sut-tai,รถไฟเที่ยวสุดท้าย
+utility-templates.please,kaw {},ขอ{}
+accessibility.door-width,pra-too KWAHNG TOW-rai,ประตูกว้างเท่าไร
+toilets.toilet-paper,gra-daht cham-ra,กระดาษชำระ
+pronouns-verbs.do-not-have,MAI mee,ไม่มี
+question-words.here,TEE-NEE,ที่นี่
+medical-conditions.i-take-blood-thinners,gin yah la-lai LIM lueat,กินยาละลายลิ่มเลือด
+pharmacy-symptoms.rehydration-salts,pong gluea RAE,ผงเกลือแร่
+body-parts.hand,mue,มือ
+police-consulate.i-want-a-lawyer,kaw ta-nai,ขอทนาย
+dietary-needs.i-am-allergic-to,pae {},แพ้{}
+trail-words.round-trip,pai glap,ไปกลับ
+weather.cold,now,หนาว
+laundry.coin-operated,yawt rian,หยอดเหรียญ
+introductions.i-am-traveling-alone,mah kon diao,มาคนเดียว
+numbers-money.sh,sip,สิบ
+atm-cash.may-i-pay-in,jai pen {} DAI mai,จ่ายเป็น {} ได้ไหม
+sim-data.sim-card,sim gaht,ซิมการ์ด
+etiquette.keep-the-change,MAI TAWNG tawn,ไม่ต้องทอน
+children.car-seat,TAWNG-gahn kah-seet,ต้องการคาร์ซีท
+time-words.winter,rue-doo now,ฤดูหนาว
+months.december,tan-wah-kom,ธันวาคม
+directions.can-you-show-me-the-way,chee tahng HAI noi,ชี้ทางให้หน่อย
+transit-rides.i-went-past-my-stop,loey PAI mah laeo,เลยป้ายมาแล้ว
+border-customs.this-is-a-gift,pen kawng-kwan,เป็นของขวัญ
+rail-station-words.delayed,LAH-chah,ล่าช้า
+utility-templates.i-am-looking-for,hah {},หา{}
+accessibility.wheelchair-width,rot ken KWAHNG {} sen-ti-met,รถเข็นกว้าง {} ซม.
+toilets.it-is-out-of-order,chai MAI DAI,ใช้ไม่ได้
+pronouns-verbs.go,pai,ไป
+question-words.there,TEE-NAN,ที่นั่น
+medical-conditions.medicine-allergy,pae yah: {},แพ้ยา: {}
+pharmacy-symptoms.how-many-times-a-day,wan la gee krang,วันละกี่ครั้ง
+body-parts.knee,kow,เข่า
+police-consulate.please-notify-my-consulate,CHUAI JAENG sa-tahn gong-sun,ช่วยแจ้งสถานกงสุล
+weather.humid,chuen,ชื้น
+numbers-money.y-b-i,roi,ร้อย
+atm-cash.please-charge-in-local-currency,kit pen ngern baht,คิดเป็นเงินบาท
+sim-data.where-can-i-buy-a-plug-adapter,sue plak plaeng TEE nai,ซื้อปลั๊กแปลงที่ไหน
+children.stroller,rot ken dek,รถเข็นเด็ก
+directions.north,tit nuea,ทิศเหนือ
+border-customs.where-do-i-collect-my-baggage,rap gra-pow TEE nai,รับกระเป๋าที่ไหน
+rail-station-words.final-stop,sa-tah-nee plai tahng,สถานีปลายทาง
+utility-templates.do-you-accept,rap {} mai,รับ{}ไหม
+accessibility.hard-of-hearing,hoo MAI KOI DAI-yin,หูไม่ค่อยได้ยิน
+toilets.out-of-order,cham-rut,ชำรุด
+pronouns-verbs.come,mah,มา
+question-words.a-little,nit noi,นิดหน่อย
+medical-conditions.this-card-lists-my-conditions,bat nee bawk ROHK kawng chan,บัตรนี้บอกโรคของฉัน
+pharmacy-symptoms.i-have-a-stomach-ache,puat tawng,ปวดท้อง
+body-parts.ankle,KAW-tow,ข้อเท้า
+police-consulate.i-am-calling-the-police,ja toh RIAK tam-ruat,จะโทรเรียกตำรวจ
+weather.sunrise,pra ah-tit KUEN,พระอาทิตย์ขึ้น
+numbers-money.y-qi-n,pan,พัน
+atm-cash.where-can-i-get-coins,laek rian DAI TEE nai,แลกเหรียญได้ที่ไหน
+sim-data.mobile-data,net mue-tue,เน็ตมือถือ
+children.playground,mee sa-nahm dek LEN mai,มีสนามเด็กเล่นไหม
+directions.south,tit TAI,ทิศใต้
+border-customs.how-long-may-i-stay,yoo DAI gee wan,อยู่ได้กี่วัน
+rail-station-words.ticket-validator,KRUEANG truat tua,เครื่องตรวจตั๋ว
+utility-templates.i-cannot-find,hah {} MAI jer,หา{}ไม่เจอ
+accessibility.speak-louder,CHUAI POOT dang-dang noi,ช่วยพูดดังๆหน่อย
+toilets.mens-toilet,HAWNG nahm chaai,ห้องน้ำชาย
+pronouns-verbs.would-like,yahk DAI,อยากได้
+question-words.some,BAHNG,บ้าง
+medical-conditions.this-is-my-medicine,NEE yah kawng chan,นี่ยาของฉัน
+pharmacy-symptoms.i-have-a-cough,ai,ไอ
+body-parts.skin,piu-nang,ผิวหนัง
+weather.flood,nahm TUAM,น้ำท่วม
+numbers-money.y-w-n,muen,หมื่น
+atm-cash.is-there-a-minimum-for-cards,bat mee KAN-tam mai,บัตรมีขั้นต่ำไหม
+sim-data.can-i-top-up-this-sim,term ngern sim nee DAI mai,เติมเงินซิมนี้ได้ไหม
+directions.east,tit ta-wan awk,ทิศตะวันออก
+border-customs.i-have-a-connecting-flight,mee TIAO-bin taw,มีเที่ยวบินต่อ
+utility-templates.there-is-a-problem-with,{} mee pan-hah,{}มีปัญหา
+accessibility.visually-impaired,chan pi-gahn tahng sai-taa,ฉันพิการทางสายตา
+toilets.womens-toilet,HAWNG nahm ying,ห้องน้ำหญิง
+pronouns-verbs.want,yahk,อยาก
+question-words.very,MAHK,มาก
+medical-conditions.please-give-me-sugar-or-juice,kaw nahm-tahn rue nahm pon-la-mai,ขอน้ำตาลหรือน้ำผลไม้
+pharmacy-symptoms.antihistamine,yah GAE pae,ยาแก้แพ้
+police-consulate.no-thank-you-i-am-not-interested,"MAI son-jai, kawp-kun",ไม่สนใจ ขอบคุณ
+weather.avalanche-risk,siang hi-ma ta-LOM,เสี่ยงหิมะถล่ม
+numbers-money.b-n,KRUENG,ครึ่ง
+atm-cash.atm,TOO ay-tee-em,ตู้เอทีเอ็ม
+sim-data.top-up,term ngern,เติมเงิน
+directions.west,tit ta-wan tok,ทิศตะวันตก
+border-customs.may-i-have-an-entry-stamp,kaw trah pra-tap KAO mueang,ขอตราประทับ เข้าเมือง
+accessibility.take-your-arm,kaw jap kaen DAI mai,ขอจับแขนได้ไหม
+toilets.drinking-water,nahm duem,น้ำดื่ม
+pronouns-verbs.look-for,hah,หา
+question-words.too,gern pai,เกินไป
+medical-conditions.inject-it-into-my-outer-thigh,cheet TEE TON-kah DAHN nawk,ฉีดที่ต้นขาด้านนอก
+pharmacy-symptoms.anti-diarrhea-medicine,yah GAE tawng sia,ยาแก้ท้องเสีย
+police-consulate.someone-attacked-me,mee kon tam-rai chan,มีคนทำร้ายฉัน
+atm-cash.banknote,baeng,แบงก์
+sim-data.is-there-coverage-in,TEE {} mee san-yahn mai,ที่{}มีสัญญาณไหม
+border-customs.visa,wee-SAH,วีซ่า
+accessibility.guide-dog,NEE su-nak nam tahng,นี่สุนัขนำทาง
+toilets.not-for-drinking,HAHM duem,ห้ามดื่ม
+pronouns-verbs.buy,sue,ซื้อ
+question-words.also,DUAI,ด้วย
+medical-conditions.my-blood-type-is,glum lueat {},กลุ่มเลือด {}
+pharmacy-symptoms.is-this-safe-to-take-with,gin gap {} DAI mai,กินกับ {} ได้ไหม
+police-consulate.i-did-not-agree-to-this-price,MAI DAI tok-long rah-kah nee,ไม่ได้ตกลงราคานี้
+atm-cash.coin,rian,เหรียญ
+sim-data.signal,san-yahn,สัญญาณ
+border-customs.i-have-no-food-or-plants,MAI mee ah-hahn rue puet,ไม่มีอาหารหรือพืช
+toilets.accessible-toilet,HAWNG nahm POO pi-gahn,ห้องน้ำผู้พิการ
+pronouns-verbs.like,CHAWP,ชอบ
+question-words.all-both,tang-mot,ทั้งหมด
+medical-conditions.do-not-give-me,HAHM HAI {},ห้ามให้ {}
+pharmacy-symptoms.i-feel-dizzy,wian hua,เวียนหัว
+police-consulate.please-write-the-report-number,CHUAI kian LAYK-TEE JAENG kwahm,ช่วยเขียน เลขที่แจ้งความ
+atm-cash.cash-only,rap ngern sot TOW-nan,รับเงินสดเท่านั้น
+sim-data.esim,ee-sim,eSIM
+border-customs.passport-control,truat nang-sue dern tahng,ตรวจหนังสือเดินทาง
+toilets.where-can-i-wash-my-hands,lahng mue TEE nai,ล้างมือที่ไหน
+pronouns-verbs.need,TAWNG-gahn,ต้องการ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,pae aes-pai-rin lae ai-boo-proh-fen,แพ้แอสไพริน และไอบูโพรเฟน
+pharmacy-symptoms.ibuprofen,ai-boo-proh-fen,ไอบูโพรเฟน
+police-consulate.it-happened-here,gert TEE-NEE,เกิดที่นี่
+atm-cash.fee,KAH tam-niam,ค่าธรรมเนียม
+sim-data.prepaid,ra-bop term ngern,ระบบเติมเงิน
+border-customs.customs,sun-la-gah-gawn,ศุลกากร
+toilets.can-i-flush-the-paper,ting gra-daht nai toh DAI mai,ทิ้งกระดาษในโถ ได้ไหม
+medical-conditions.my-injector-is-in-my-bag,yah cheet yoo nai gra-pow,ยาฉีดอยู่ในกระเป๋า
+pharmacy-symptoms.i-have-a-sore-throat,jep kaw,เจ็บคอ
+police-consulate.may-i-have-a-copy-of-the-report,kaw sam-now bai JAENG kwahm,ขอสำเนาใบแจ้งความ
+atm-cash.change,ngern tawn,เงินทอน
+sim-data.roaming,rohm-ming,โรมมิ่ง
+border-customs.baggage-claim,rap gra-pow,รับกระเป๋า
+toilets.is-there-a-toilet-on-board,bon rot mee HAWNG nahm mai,บนรถมีห้องน้ำไหม
+medical-conditions.i-am-allergic-to-sulfa-drugs,pae yah san-fah,แพ้ยาซัลฟา
+pharmacy-symptoms.can-i-get-this-medicine-here,mee yah nee mai,มียานี้ไหม
+police-consulate.i-will-not-sign-anything-i-cannot-read,"ahn MAI awk, ja MAI sen",อ่านไม่ออก จะไม่เซ็น
+atm-cash.exchange-rate,at-trah laek-plian,อัตราแลกเปลี่ยน
+border-customs.customs-declaration,kawng TAWNG sam-daeng,ของต้องสำแดง
+toilets.the-toilet-will-not-flush,chak-KROHK got MAI long,ชักโครกกดไม่ลง
+pharmacy-symptoms.bandage,PAH pan plae,ผ้าพันแผล
+police-consulate.am-i-free-to-go,pai DAI mai,ไปได้ไหม
+atm-cash.bank,ta-nah-kahn,ธนาคาร
+border-customs.arrival-card,bat kah-KAO,บัตรขาเข้า
+toilets.baby-change,TEE plian PAH-AWM,ที่เปลี่ยนผ้าอ้อม
+pharmacy-symptoms.the-pain-is-severe,puat MAHK,ปวดมาก
+police-consulate.i-do-not-want-to-go-with-you,MAI pai gap kun,ไม่ไปกับคุณ
+atm-cash.money-exchange,rap laek ngern,รับแลกเงิน
+border-customs.transit,plian KRUEANG,เปลี่ยนเครื่อง
+toilets.squat-toilet,SUAM NANG yong,ส้วมนั่งยอง
+pharmacy-symptoms.antiseptic,yah sai plae,ยาใส่แผล
+atm-cash.pin,ra-hat,รหัส
+border-customs.boarding-pass,bat KUEN KRUEANG,บัตรขึ้นเครื่อง
+pharmacy-symptoms.i-feel-nauseous,KLUEN SAI,คลื่นไส้
+pharmacy-symptoms.i-have-a-rash,mee puen,มีผื่น
+pharmacy-symptoms.before-or-after-food,gawn rue lang ah-hahn,ก่อนหรือหลังอาหาร
+pharmacy-symptoms.i-think-it-is-infected,NAH ja tit chuea,น่าจะติดเชื้อ
+pharmacy-symptoms.motion-sickness-tablets,yah GAE mow rot,ยาแก้เมารถ
+pharmacy-symptoms.i-have-a-cut,mee baht-plae,มีบาดแผล
+pharmacy-symptoms.antacid,yah lot grot,ยาลดกรด
+pharmacy-symptoms.i-have-a-burn,mee plae MAI,มีแผลไหม้
+pharmacy-symptoms.it-started-days-ago,RERM mah {} wan,เริ่มมา {} วัน
+pharmacy-symptoms.cough-medicine,yah GAE ai,ยาแก้ไอ
+pharmacy-symptoms.is-this-safe-during-pregnancy,kon tawng gin DAI mai,คนท้องกินได้ไหม
+trail-transport.how-long-is-the-wait,raw nahn TOW-rai,รอนานเท่าไร
+tax-refund.is-tax-free-shopping-available,mee baw-ri-gahn kuen pah-see mai,มีบริการคืนภาษีไหม
+place-words.tourist-spot-sightseeing-area,sa-tahn-TEE TAWNG-TIAO,สถานที่ท่องเที่ยว
+common-signs.open-operating,pert HAI baw-ri-gahn,เปิดให้บริการ
+time-scheduling.how-long-does-it-take,chai way-lah nahn TOW-rai,ใช้เวลานานเท่าไร
+transit-rides.can-i-use-this-ticket,chai tua nee DAI mai,ใช้ตั๋วนี้ได้ไหม
+common-signs.closed,pit HAI baw-ri-gahn,ปิดให้บริการ
+pronouns-verbs.there-is-have,mee,มี
+common-signs.stopped-stop,yut,หยุด
+transit-rides.do-i-need-to-validate,TAWNG tae bat gawn mai,ต้องแตะบัตรก่อนไหม
+pronouns-verbs.there-is-not-do-not-have,MAI mee,ไม่มี
+emergency-medical.i-feel-unwell,MAI sa-bai,ไม่สบาย
+food-ordering.what-do-you-recommend,nae-nam a-rai dee,แนะนำอะไรดี
+hotel-basics.is-wi-fi-free,wai-fai free mai,ไวไฟฟรีไหม
+hotel-requests.another-towel-please,kaw PAH chet tua perm,ขอผ้าเช็ดตัวเพิ่ม
+shopping.is-there-a-discount,mee suan-lot mai,มีส่วนลดไหม
+social-basics.good-night,rah-tree sa-wat,ราตรีสวัสดิ์
+quick-responses.can-possible,pen pai DAI,เป็นไปได้
+phone-translation.please-type-it-and-show-me,pim HAI doo noi,พิมพ์ให้ดูหน่อย
+phone-text-power.may-i-charge-my-phone-here,chaht TEE-NEE DAI mai,ชาร์จที่นี่ได้ไหม
+pronouns-verbs.want-to-verb,yahk ...,อยาก…
+emergency-medical.this-is-an-emergency,chuk-chern,ฉุกเฉิน
+lost-rescue.please-look-at-my-current-location,doo tam-naeng pat-ju-ban nee,ดูตำแหน่งปัจจุบันนี้
+hotel-words.luggage-storage,TEE fahk gra-pow,ที่ฝากกระเป๋า
+hotel-basics.how-much-per-night,kuen la TOW-rai,คืนละเท่าไร
+hotel-requests.what-time-is-check-out,chek-owt gee mohng,เช็คเอาท์กี่โมง
+payment-receipt.please-write-the-number,CHUAI kian tua-LAYK,ช่วยเขียนตัวเลข
+shopping.where-do-i-pay,jai ngern TEE nai,จ่ายเงินที่ไหน
+communication.i-cannot-make-out-what-you-are-saying,fang MAI tan,ฟังไม่ทัน
+quick-responses.cannot-not-possible,pen pai MAI DAI,เป็นไปไม่ได้
+taxi.i-will-get-off-here,long TEE-NEE,ลงที่นี่
+pickup-meeting.please-call-a-taxi,CHUAI RIAK taek-SEE,ช่วยเรียกแท็กซี่
+pronouns-verbs.want-thing,ao ...,เอา…
+emergency-medical.i-am-having-a-severe-allergic-reaction,mee ah-gahn pae run-raeng,มีอาการแพ้รุนแรง
+lost-rescue.my-child-is-missing,LOOK hai,ลูกหาย
+food-ordering.water-please,kaw nahm plow,ขอน้ำเปล่า
+hiking-parks.is-this-trail-suitable-for-beginners,mue mai dern DAI mai,มือใหม่เดินได้ไหม
+hotel-basics.is-breakfast-included,ruam ah-hahn chow mai,รวมอาหารเช้าไหม
+hotel-requests.can-i-check-in-early,chek-in gawn DAI mai,เช็คอินก่อนได้ไหม
+payment-receipt.how-much-in-total,tang-mot TOW-rai,ทั้งหมดเท่าไร
+shopping.i-will-take-this,ao an nee,เอาอันนี้
+communication.i-do-not-understand,MAI KAO-jai,ไม่เข้าใจ
+quick-responses.okay-fine,oh-kay,โอเค
+phone-translation.please-look-at-the-screen,doo NAH-jaw noi,ดูหน้าจอหน่อย
+pronouns-verbs.need-thing,TAWNG-gahn ...,ต้องการ…
+question-words.how-much-what-price,rah-kah TOW-rai,ราคาเท่าไร
+emergency-medical.i-cannot-breathe,hai-jai MAI awk,หายใจไม่ออก
+lost-rescue.i-do-not-know-where-i-am,MAI roo WAH yoo TEE nai,ไม่รู้ว่าอยู่ที่ไหน
+hotel-basics.may-i-see-the-room,kaw doo HAWNG gawn,ขอดูห้องก่อน
+hotel-requests.another-night,kaw yoo eek kuen,ขออยู่อีกคืน
+payment-receipt.can-we-pay-separately,jai YAEK gan DAI mai,จ่ายแยกกันได้ไหม
+shopping.what-is-this,NEE a-rai,นี่อะไร
+communication.i-cannot-read-it,ahn MAI awk,อ่านไม่ออก
+quick-responses.no-good-not-allowed-will-not-work,HAHM,ห้าม
+pronouns-verbs.looking-for-thing,hah ...,หา…
+emergency-medical.i-am-bleeding-badly,lueat awk MAHK,เลือดออกมาก
+lost-rescue.my-friend-is-hurt,PUEAN baht-jep,เพื่อนบาดเจ็บ
+dietary-needs.does-it-contain-fish-stock,sai nahm plah mai,ใส่น้ำปลาไหม
+dietary-needs.does-it-contain-pork-stock,nahm sup tam jahk moo mai,น้ำซุปทำจากหมูไหม
+hotel-basics.for-nights,{} kuen,{} คืน
+hotel-requests.is-there-a-safe,mee TOO sayf mai,มีตู้เซฟไหม
+payment-receipt.is-tax-included,ruam pah-see laeo mai,รวมภาษีแล้วไหม
+shopping.where-can-i-buy,sue {} DAI TEE nai,ซื้อ{}ได้ที่ไหน
+emergency-medical.i-have-chest-pain,jep NAH-awk,เจ็บหน้าอก
+lost-rescue.i-lost-my-wallet,gra-pow ngern hai,กระเป๋าเงินหาย
+hotel-basics.two-beds,kaw tiang YAEK,ขอเตียงแยก
+hotel-requests.another-blanket,kaw PAH-hom perm,ขอผ้าห่มเพิ่ม
+payment-receipt.my-card-was-declined,bat chai MAI DAI,บัตรใช้ไม่ได้
+shopping.do-you-have-this-in-stock,mee kawng mai,มีของไหม
+time-words.night,glahng-kuen,กลางคืน
+emergency-medical.this-person-is-unconscious,kon nee mot sa-ti,คนนี้หมดสติ
+lost-rescue.i-lost-my-bag,gra-pow hai,กระเป๋าหาย
+food-ordering.can-a-vegetarian-eat-this,kon mang-sa-wi-rat gin DAI mai,คนมังสวิรัติกินได้ไหม
+hotel-basics.is-there-air-conditioning,mee ae mai,มีแอร์ไหม
+hotel-requests.wake-up-call,CHUAI pluk tawn {},ช่วยปลุกตอน {}
+payment-receipt.the-bill-is-wrong,bin NAH ja pit,บิลน่าจะผิด
+shopping.two-of-these,kaw an nee sawng an,ขออันนี้สองอัน
+social-basics.okay-fine-i-am-okay,sa-bai dee,สบายดี
+emergency-medical.where-is-the-nearest-hospital,rong pa-yah-bahn GLAI sut yoo nai,โรงพยาบาลใกล้สุด อยู่ไหน
+lost-rescue.where-is-lost-and-found,soon kawng hai yoo nai,ศูนย์ของหายอยู่ไหน
+payment-receipt.i-already-paid,jai laeo,จ่ายแล้ว
+shopping.what-is-it-made-of,tam jahk a-rai,ทำจากอะไร
+emergency-medical.what-is-the-emergency-number,ber chuk-chern a-rai,เบอร์ฉุกเฉินอะไร
+lost-rescue.i-cannot-find-my-hotel,hah rong-raem MAI jer,หาโรงแรมไม่เจอ
+emergency-medical.is-there-a-doctor-who-speaks-english,mee maw POOT ang-grit DAI mai,มีหมอพูด{source}ได้ไหม
+lost-rescue.i-left-it-on-the-train,luem wai bon rot-fai,ลืมไว้บนรถไฟ
+dietary-needs.i-have-a-severe-allergy-to,"pae {} run-raeng, aht tueng tai",แพ้{}รุนแรง อาจถึงตาย
+emergency-medical.i-think-a-bone-is-broken,gra-dook NAH ja hak,กระดูกน่าจะหัก
+lost-rescue.i-cannot-get-down,long MAI DAI,ลงไม่ได้
+emergency-medical.please-call-my-emergency-contact,CHUAI toh hah kon tit-taw chuk-chern,ช่วยโทรหา คนติดต่อฉุกเฉิน
+emergency-medical.i-have-travel-insurance,mee pra-gan dern tahng,มีประกันเดินทาง
+dietary-needs.no-pork,"MAI sai moo, nahm-man moo, nahm sup moo",ไม่ใส่หมู น้ำมันหมู น้ำซุปหมู
+dietary-needs.is-this-halal,an nee hah-lahn mai,อันนี้ฮาลาลไหม
+numbers-money.baht,baht,บาท
+numbers-money.baht-symbol,baht,฿
+pharmacy-symptoms.i-think-i-have-malaria,song-sai wah pen kai mah-lah-REE-ah,สงสัยว่าเป็นไข้มาลาเรีย
+pharmacy-symptoms.i-need-a-malaria-test,kaw truat mah-lah-REE-ah,ขอตรวจมาลาเรีย

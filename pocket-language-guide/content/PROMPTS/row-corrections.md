@@ -12,7 +12,10 @@ Each item names the rows and what the agent that found it saw. Check the finding
 a dictionary of record or the language's own statutory or professional source before
 changing anything -- an agent's reading is a lead, not a source -- and where it does not
 hold up, leave the row and say why. Where a row's text changes, clear its `ipa` cell (the
-coordinator rebuilds it) and keep its romanisation in step, in the pack's own system.
+coordinator rebuilds it) and keep its romanisation in step, in the pack's own system; where
+it has a curated English respelling in `data/respell/overrides/<code>__en__en-US.csv`,
+rewrite that row for the new wording (its `text` column records the wording it respells) or
+remove it -- the validator refuses a respelling whose `text` is no longer the row's.
 Provenance records the correction and its source, as the pack's rows do.
 
 ## The items

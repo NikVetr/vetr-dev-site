@@ -1,747 +1,745 @@
-concept_id,respell
-building-help.what-room-number-is-this,is KAM-reh kaa NUM-bar kyaa hai
-accessibility.step-free,kyaa bi-NAA SEE-rhee kaa RAAS-taa hai
-in-a-building.is-this-the-correct-entrance,kyaa ya-HEE sa-HEE get hai
-toilets.where-toilet,BAATH-room ka-HAAN hai
-building-words.elevator,lift
-pronouns-verbs.i-me,main / mu-JHEH
-question-words.what,kyaa
-emergency-medical.help,ba-CHAA-oh
-medical-conditions.i-am-diabetic,mu-JHEH daa-ya-BEE-teez hai
-pharmacy-symptoms.which-pharmacy-is-open-now,a-BHEE kaun see da-VAA kee du-KAAN khu-LEE hai
-body-parts.head,sir
-lost-rescue.i-lost-my-passport,MEH-raa PAAS-port khoh ga-YAA hai
-police-consulate.where-is-the-police-station,pu-LIS STEH-shan ka-HAAN hai
-dietary-needs.no-meat,maans-mur-GEE-mach-LEE na-HEEN
-food-ordering.table-for-two,doh LOH-gon kee TEH-bal
-trail-words.trail,pag-DAN-dee
-weather.forecast,MAW-sam kaa haal kyaa hai
-hiking-parks.is-this-the-way-to,kyaa {} kaa RAAS-taa ya-HEE hai
-trail-conditions.how-long-is-the-full-route,POO-raa RAAS-taa KIT-naa LAM-baa hai
-trail-transport.how-long-is-the-queue,laain KIT-nee LAM-bee hai
-trail-warnings.open,khu-LAA
-trail-landmarks.trail-marker,RAAS-teh kaa ni-SHAAN
-hotel-words.passport,PAAS-port
-hotel-basics.are-any-rooms-available,kyaa KAM-raa KHAA-lee hai
-hotel-requests.can-i-check-out-later,kyaa der seh chek-OWT hoh sak-TAA hai
-room-problems.there-is-a-problem-with-the-room,KAM-reh mein ek DIK-kat hai
-laundry.please-wash-these-clothes,yeh KAP-reh dhul-VAA DEE-ji-yeh
-introductions.my-name-is,MEH-raa naam {} hai
-numbers-money.l-ng,SHOON-ya
-atm-cash.where-is-an-atm,ay-tee-EM ka-HAAN hai
-attractions-tickets.where-can-i-buy-tickets,TI-kat ka-HAAN mi-LEH-gaa
-payment-receipt.pay-by-card,kaard cha-LEH-gaa
-shopping.i-am-just-looking,bas DEKH-naa hai
-color-size-returns.do-you-have-another-color,kyaa DOOS-raa rang hai
-tax-refund.can-i-get-a-tax-refund,kyaa taiks VAA-pas mi-LEH-gaa
-social-basics.hello,na-MAS-teh
-communication.i-do-not-speak-this-language,mu-JHEH HIN-dee na-HEEN AA-tee
-quick-responses.please-go-ahead,KA-hi-yeh
-phone-translation.i-am-using-phone-translation,fone seh a-nu-VAAD hoh ra-HAA hai
-phone-text-power.please-type-it-for-me,MEH-reh li-YEH taaip kar DEE-ji-yeh
-sim-data.i-would-like-a-tourist-sim,mu-JHEH TOO-rist sim CHAA-hi-yeh
-etiquette.is-this-allowed,kyaa is-KEE i-JAA-zat hai
-children.cannot-find-my-child,MEH-raa BACH-chaa na-HEEN mil ra-HAA hai
-time-scheduling.what-time-is-it,KIT-neh BA-jeh hain
-time-words.today,aaj
-days-of-week.monday,SOM-vaar
-months.january,JAN-va-ree
-directions.where-is,{} ka-HAAN hai
-quick-directions.go-straight,SEE-dheh CHA-li-yeh
-taxi.please-take-me-here,mu-JHEH ya-HAAN leh CHA-li-yeh
-transit-rides.two-tickets,doh TI-kat DEE-ji-yeh
-border-customs.i-am-a-tourist,main PAR-ya-tak hoon
-pickup-meeting.where-is-the-pickup-point,PIK-up point ka-HAAN hai
-rail-station-words.high-speed-rail,tez tren
-common-signs.open-on,chaa-LOO
-utility-templates.i-want-to-go-to,mu-JHEH {} JAA-naa hai
-building-help.i-am-lost,main RAAS-taa bha-TAK ga-YAA hoon
-accessibility.wheelchair-access,kyaa WHEEL-cheh-yar jaa sak-TEE hai
-toilets.where-public-toilet,saar-va-JA-nik shaw-CHAA-lay ka-HAAN hai
-building-words.stairs,SEE-rhi-yaan
-pronouns-verbs.we-us,hum / ha-MEIN
-question-words.where,ka-HAAN
-emergency-medical.please-call-an-ambulance,AM-byu-lens bu-LAA-i-yeh
-medical-conditions.i-need-insulin,mu-JHEH IN-su-lin CHAA-hi-yeh
-pharmacy-symptoms.i-need-medicine-for,mu-JHEH {} kee da-VAA CHAA-hi-yeh
-body-parts.stomach,pet
-lost-rescue.i-lost-my-phone,MEH-raa fone khoh ga-YAA hai
-police-consulate.i-want-to-report-a-theft,mu-JHEH CHOH-ree kee ri-PORT ka-RAA-nee hai
-dietary-needs.no-eggs,AN-daa na-HEEN
-food-ordering.is-a-table-available,kyaa TEH-bal KHAA-lee hai
-trail-words.trailhead,trek kee shu-ru-AAT
-weather.will-it-rain,kyaa aaj BAA-rish HOH-gee
-hiking-parks.where-is-the-trailhead,trek ka-HAAN seh shu-ROO HOH-taa hai
-trail-conditions.can-we-return-the-same-way,kyaa i-SEE RAAS-teh seh VAA-pa-see hoh sak-TEE hai
-trail-transport.what-time-is-the-last-shuttle,AA-khi-ree SHA-tal kab hai
-trail-warnings.closed,band
-trail-landmarks.fork-junction,ti-RAA-haa
-hotel-words.room-key-card,KAM-reh kaa kaard
-hotel-basics.there-are-two-of-us,hum doh log hain
-hotel-requests.what-time-does-breakfast-start,NAASH-taa KIT-neh BA-jeh seh hai
-room-problems.the-air-conditioning-is-broken,ay-SEE kaam na-HEEN kar ra-HAA
-laundry.where-is-a-laundromat,LOWN-dree ka-HAAN hai
-introductions.nice-to-meet-you,AAP-seh MIL-kar khu-SHEE hu-EE
-numbers-money.y,ek
-atm-cash.does-this-atm-take-foreign-cards,kyaa is-MEIN vi-DEH-shee kaard CHAL-teh hain
-attractions-tickets.do-i-need-a-reservation,kyaa BU-king ka-RAA-nee pa-REH-gee
-payment-receipt.pay-cash,NA-kad theek hai
-shopping.how-much-is-this,yah KIT-neh kaa hai
-color-size-returns.do-you-have-another-size,kyaa DOOS-raa saaiz hai
-social-basics.hello-polite,na-mas-KAAR
-communication.i-speak-only-a-little-of-this,mu-JHEH HIN-dee THOH-ree-see AA-tee hai
-quick-responses.yes-right,haan / jee haan
-phone-translation.please-speak-toward-the-phone,fone kee ta-RAF BOH-li-yeh
-phone-translation.please-write-the-place-name,JA-gah kaa naam HIN-dee mein likh DEE-ji-yeh
-sim-data.may-i-use-your-wifi,kyaa AAP-kaa WAI-fai is-teh-MAAL kar loon
-etiquette.is-tipping-expected,kyaa tip DEH-nee HOH-tee hai
-children.make-an-announcement,a-NOWNS-ment ka-RAA DEE-ji-yeh
-time-scheduling.how-many-minutes,KIT-neh MI-nat
-time-words.tomorrow,kal
-days-of-week.tuesday,MAN-gal-vaar
-months.february,FAR-va-ree
-directions.how-do-i-get-to,{} KAI-seh JAA-oon
-quick-directions.turn-left,baa-YEN MU-ri-yeh
-taxi.please-send-me-the-address,pa-TAA bhej DEE-ji-yeh
-transit-rides.where-is-the-subway-station,MET-roh STEH-shan ka-HAAN hai
-place-words.visitor-center,PAR-ya-tak SOOCH-naa KEN-dra
-border-customs.here-is-my-passport,yah MEH-raa PAAS-port hai
-pickup-meeting.please-send-me-the-pickup-point,PIK-up point bhej DEE-ji-yeh
-common-signs.closed-off,band
-utility-templates.please-give-me,mu-JHEH {} DEE-ji-yeh
-building-help.where-is-reception,ri-SEP-shan ka-HAAN hai
-accessibility.elevator,kyaa lift hai
-in-a-building.do-you-have-wi-fi,kyaa ya-HAAN WAI-fai hai
-toilets.may-i-use-the-toilet,kyaa BAATH-room is-teh-MAAL kar loon
-building-words.entrance,pra-VESH
-pronouns-verbs.you,tum
-question-words.who,kaun
-emergency-medical.i-need-a-doctor,mu-JHEH DOK-tar CHAA-hi-yeh
-medical-conditions.i-have-asthma,mu-JHEH da-MAA hai
-pharmacy-symptoms.i-have-a-fever,mu-JHEH bu-KHAAR hai
-body-parts.back,peeth
-lost-rescue.please-call-the-police,pu-LIS koh bu-LAA-i-yeh
-police-consulate.my-bag-was-stolen,MEH-raa baig CHOH-ree hoh ga-YAA
-dietary-needs.not-spicy,TEE-khaa na-HEEN
-food-ordering.menu-please,MEN-yoo DEE-ji-yeh
-trail-words.summit,CHOH-tee
-weather.is-it-safe-today,kyaa aaj JAA-naa su-RAK-shit hai
-hiking-parks.how-long-to-the-summit,CHOH-tee tak KIT-nee der la-GEH-gee
-trail-conditions.can-we-return-before-dark,kyaa an-DHEH-reh seh PEH-leh VAA-pa-see hoh JAA-eh-gee
-trail-transport.when-does-the-cableway-stop,ROPE-vay kab band HOH-taa hai
-trail-warnings.maintenance,ma-RAM-mat
-trail-landmarks.boardwalk-cliff-path,chat-TAA-nee RAAS-taa
-hotel-words.check-in,chek-IN
-hotel-basics.i-have-a-reservation,MEH-ree BU-king hai
-hotel-requests.can-i-store-my-luggage,kyaa saa-MAAN ya-HAAN ra-KHAA jaa sak-TAA hai
-room-problems.there-is-no-hot-water,GA-ram PAA-nee na-HEEN aa ra-HAA
-laundry.when-will-it-be-ready,kab tai-YAAR HOH-gaa
-introductions.what-is-your-name,AAP-kaa naam kyaa hai
-numbers-money.r,doh
-atm-cash.the-atm-kept-my-card,ay-tee-EM neh MEH-raa kaard rakh li-YAA
-attractions-tickets.what-is-the-latest-entry-time,AN-dar JAA-neh kaa AA-khi-ree SA-may kyaa hai
-payment-receipt.pay-by-qr-code,kyoo-AAR kod cha-LEH-gaa
-shopping.that-is-too-expensive,yah ba-HUT ma-HAN-gaa hai
-color-size-returns.may-i-try-it-on,kyaa i-SEH PA-han kar dekh loon
-social-basics.good-morning,su-pra-BHAAT
-communication.do-you-speak-english,kyaa AAP-koh an-GREH-zee AA-tee hai
-quick-responses.no-not,na-HEEN
-phone-translation.one-sentence-at-a-time-please,ek-ek VAAK-ya BOH-li-yeh
-phone-text-power.please-use-simple-words,aa-SAAN SHAB-don mein BOH-li-yeh
-sim-data.how-much-data-is-included,KIT-naa DEH-taa mi-LEH-gaa
-etiquette.is-service-included,kyaa SAR-vis chaarj SHAA-mil hai
-children.child-age,MEH-raa BACH-chaa {} saal kaa hai
-time-scheduling.what-time-should-we-meet,KIT-neh BA-jeh mi-LEN
-time-words.yesterday,kal
-days-of-week.wednesday,BUDH-vaar
-months.march,maarch
-directions.is-it-far,kyaa door hai
-quick-directions.turn-right,daa-YEN MU-ri-yeh
-taxi.we-need-the-east-gate-not-the-south-gate,ha-MEIN POOR-vee get CHAA-hi-yeh DAK-shi-nee na-HEEN
-transit-rides.does-this-bus-train-go-to,kyaa yah {} JAA-tee hai
-place-words.railway-station,REL-vay STEH-shan
-border-customs.i-am-staying-for-days,mu-JHEH {} din RUK-naa hai
-pickup-meeting.please-pick-us-up-here,ha-MEIN ya-HAAN seh leh LEE-ji-yeh
-rail-station-words.transfer,GAA-ree ba-DAL-naa
-common-signs.occupied,bha-RAA hai
-utility-templates.may-i,kyaa main {} sak-TAA hoon
-building-help.where-is-a-power-outlet,BIJ-lee kaa SO-ket ka-HAAN hai
-accessibility.ramp,kyaa ramp hai
-in-a-building.what-is-the-wi-fi-password,WAI-fai kaa PAAS-vard kyaa hai
-toilets.is-it-only-for-customers,kyaa sirf GRAA-ha-kon keh li-YEH hai
-building-words.exit,ni-KAAS
-pronouns-verbs.you-polite,aap
-question-words.which-one,kaun saa
-emergency-medical.i-am-sick,main bee-MAAR hoon
-medical-conditions.i-have-a-heart-condition,mu-JHEH dil kee bee-MAA-ree hai
-pharmacy-symptoms.i-have-diarrhea,mu-JHEH dast hoh ra-HEH hain
-body-parts.throat,ga-LAA
-lost-rescue.we-are-here,hum ya-HAAN hain
-police-consulate.my-passport-was-stolen,MEH-raa PAAS-port CHOH-ree hoh ga-YAA
-dietary-needs.less-spicy,kam TEE-khaa
-food-ordering.i-want-this,mu-JHEH yah CHAA-hi-yeh
-trail-words.viewpoint,vyoo point
-weather.how-cold-at-night,raat mein KIT-nee thand HOH-tee hai
-hiking-parks.how-long-to-the-viewpoint,vyoo point tak KIT-nee der
-trail-conditions.is-the-trail-open,kyaa RAAS-taa khu-LAA hai
-trail-transport.where-can-we-buy-water,PAA-nee ka-HAAN mi-LEH-gaa
-trail-warnings.steep-slope,tez dha-LAAN
-trail-landmarks.start,shu-ru-AAT
-hotel-words.check-out,chek-OWT
-hotel-basics.can-i-charge-my-phone,kyaa fone chaarj kar loon
-hotel-requests.no-housekeeping,KAM-reh kee sa-FAA-ee na-HEEN CHAA-hi-yeh
-room-problems.can-i-change-rooms,kyaa KAM-raa bad-LAA jaa sak-TAA hai
-laundry.how-much-per-kilo,ek KEE-loh kaa KIT-naa
-introductions.we-are-traveling-together,hum saath YAA-traa kar ra-HEH hain
-atm-cash.is-there-a-fee,kyaa chaarj la-GEH-gaa
-attractions-tickets.are-there-lockers,kyaa LO-kar hain
-payment-receipt.a-receipt-please,ra-SEED DEE-ji-yeh
-shopping.can-it-be-a-little-cheaper,THOH-raa kam hoh JAA-eh-gaa
-color-size-returns.can-i-return-it,kyaa yah VAA-pas hoh sak-TAA hai
-social-basics.good-evening,shubh SAN-dhyaa
-communication.please-speak-more-slowly,za-RAA DHEE-reh BOH-li-yeh
-quick-responses.okay-can,theek hai
-phone-text-power.my-phone-battery-is-low,MEH-reh fone kee BAI-tree kam hai
-sim-data.do-you-need-my-passport,kyaa PAAS-port CHAA-hi-yeh
-etiquette.may-i-enter,kyaa AN-dar aa JAA-oon
-children.high-chair,kyaa BACH-chon kee OON-chee KUR-see hai
-time-scheduling.can-we-change-the-time,kyaa SA-may bad-LAA jaa sak-TAA hai
-time-words.this-week,is HAF-teh
-days-of-week.thursday,GU-ru-vaar
-months.april,ap-RAIL
-directions.how-long-on-foot,PAI-dal KIT-nee der
-quick-directions.this-way,is ta-RAF
-taxi.please-stop-here,ya-HAAN rok DEE-ji-yeh
-transit-rides.what-is-the-next-stop,AG-laa stop kaun saa hai
-place-words.airport,ha-VAA-ee AD-daa
-border-customs.nothing-to-declare,kuchh GHOH-shit KAR-neh koh na-HEEN
-pickup-meeting.meet-us-at,ha-MEIN {} par MI-li-yeh
-rail-station-words.ticket-gate,TI-kat get
-common-signs.vacant,KHAA-lee
-utility-templates.please-do-not-add,{} na DAA-li-yeh
-accessibility.how-many-steps,KIT-nee SEE-rhi-yaan hain
-in-a-building.which-floor,kaun see MAN-zil
-toilets.toilet-wc,shaw-CHAA-lay
-building-words.men,PU-rush
-pronouns-verbs.he-him,voh / u-SEH
-question-words.when,kab
-emergency-medical.i-am-injured,main GHAA-yal hoon
-medical-conditions.i-am-allergic-to-penicillin,mu-JHEH peh-ni-si-LIN seh e-LAR-jee hai
-pharmacy-symptoms.where-is-an-all-night-pharmacy,raat mein khu-LEE da-VAA kee du-KAAN ka-HAAN hai
-body-parts.tooth,daant
-lost-rescue.please-look-at-my-location-pin,MEH-raa loh-KEH-shan pin DEH-khi-yeh
-police-consulate.someone-is-following-me,KOH-ee MEH-raa PEE-chhaa kar ra-HAA hai
-dietary-needs.no-peanuts,MOONG-pha-lee na-HEEN
-food-ordering.do-you-have-drinking-water,kyaa PEE-neh kaa PAA-nee hai
-trail-words.cableway,ROPE-vay
-weather.rain,BAA-rish
-hiking-parks.which-route-is-easier,kaun saa RAAS-taa aa-SAAN hai
-trail-conditions.is-the-route-steep,kyaa cha-RHAA-ee tez hai
-trail-transport.where-can-we-refill-water,PAA-nee BHAR-neh kee JA-gah ka-HAAN hai
-trail-warnings.caution-slippery,saav-DHAAN: PHIS-lan
-trail-landmarks.end,ant
-hotel-basics.i-would-like-a-non-smoking-room,mu-JHEH noh-SMOH-king KAM-raa CHAA-hi-yeh
-room-problems.the-room-is-too-noisy,KAM-reh mein ba-HUT shor hai
-laundry.can-it-be-ready-today,kyaa aaj tai-YAAR hoh JAA-eh-gaa
-introductions.this-is-my-friend,yeh MEH-reh dost hain
-numbers-money.s-n,teen
-atm-cash.the-card-was-declined,kaard na-HEEN cha-LAA
-attractions-tickets.may-i-take-photos,kyaa ya-HAAN FOH-toh LEH-neh kee i-JAA-zat hai
-color-size-returns.can-i-exchange-it,kyaa yah bad-LAA jaa sak-TAA hai
-social-basics.goodbye,phir mi-LEN-geh
-communication.i-do-not-understand-spoken,mu-JHEH sa-MAJH na-HEEN aa ra-HAA
-quick-responses.cannot-not-allowed,ma-NAA hai
-phone-text-power.do-you-have-a-power-bank,kyaa PAA-var bank hai
-sim-data.how-long-is-it-valid,KIT-neh din cha-LEH-gaa
-etiquette.remove-shoes,kyaa JOO-teh u-TAAR-neh hain
-children.baby-changing-room,SHI-shu DEKH-bhaal kaksh ka-HAAN hai
-time-scheduling.when-is-convenient,AAP-koh kab theek ra-HEH-gaa
-time-words.next-week,AG-leh HAF-teh
-days-of-week.friday,SHUK-ra-vaar
-months.may,ma-EE
-directions.please-show-me-on-the-map,NAK-sheh par di-KHAA-i-yeh
-quick-directions.that-way,us ta-RAF
-taxi.can-you-wait-for-me-here,za-RAA ya-HAAN ruk JAA-i-yeh
-transit-rides.please-tell-me-where-to-get-off,ka-HAAN u-TAR-naa hai ba-TAA DEE-ji-yeh
-place-words.service-desk,POOCH-taachh
-border-customs.i-am-staying-at,mu-JHEH {} mein RUK-naa hai
-pickup-meeting.please-call-me-a-ride,MEH-reh li-YEH kaib bu-LAA DEE-ji-yeh
-rail-station-words.platform,PLET-form
-common-signs.caution,saav-DHAAN
-utility-templates.do-you-have,kyaa {} hai
-accessibility.cannot-climb-stairs,main SEE-rhi-yaan na-HEEN charh sak-TAA
-toilets.is-it-free,kyaa muft hai
-building-words.women,ma-hi-LAA
-pronouns-verbs.she-her,voh / u-SEH
-question-words.how,KAI-seh
-emergency-medical.it-hurts-here,ya-HAAN dard hai
-medical-conditions.i-have-epilepsy,mu-JHEH MIR-gee hai
-pharmacy-symptoms.painkiller,dard kee da-VAA
-body-parts.chest,SEE-naa
-lost-rescue.i-cannot-walk,main chal na-HEEN sak-TAA
-police-consulate.i-need-a-written-police-report,mu-JHEH ef-aa-ee-AAR kee KO-pee CHAA-hi-yeh
-dietary-needs.no-nuts,KAA-joo-BAA-daam-MEH-veh na-HEEN
-food-ordering.to-go-please,paik kar DEE-ji-yeh
-trail-words.shuttle-bus,SHA-tal bus
-weather.snow,barf
-trail-conditions.is-the-path-slippery,kyaa RAAS-taa PHIS-lan bha-RAA hai
-trail-transport.is-there-cell-signal-here,kyaa ya-HAAN SIG-nal AA-taa hai
-trail-warnings.danger,kha-TRAA
-trail-landmarks.elevation,oon-CHAA-ee
-hotel-basics.i-would-like-a-quiet-room,mu-JHEH shaant KAM-raa CHAA-hi-yeh
-room-problems.the-key-does-not-work,CHAA-bee kaam na-HEEN kar ra-HEE
-laundry.please-do-not-use-bleach,bleech na la-GAA-i-yeh
-introductions.i-am-from,main {} seh hoon
-numbers-money.s,chaar
-atm-cash.what-is-the-exchange-rate,EKS-chenj ret kyaa hai
-attractions-tickets.please-take-a-photo-of-us,ha-MAA-ree FOH-toh leh DEE-ji-yeh
-color-size-returns.do-you-have-a-bag,kyaa THAI-lee mi-LEH-gee
-social-basics.thank-you,DHAN-ya-vaad
-communication.i-cannot-read-understand,mu-JHEH PARH-naa-sa-MAJH-naa na-HEEN AA-taa
-quick-responses.works-okay,cha-LEH-gaa
-phone-text-power.the-translation-may-be-inaccurate,a-nu-VAAD mein GAL-tee hoh sak-TEE hai
-sim-data.please-activate-it,i-SEH chaa-LOO kar DEE-ji-yeh
-etiquette.photo-of-you,kyaa AAP-kee FOH-toh leh loon
-children.childrens-menu,kyaa BACH-chon kaa MEN-yoo hai
-time-scheduling.what-is-today-s-date,aaj kaun see taa-REEKH hai
-time-words.morning,SU-bah
-days-of-week.saturday,SHA-ni-vaar
-months.june,joon
-directions.where-is-the-nearest,SAB-seh naz-DEE-kee {} ka-HAAN hai
-quick-directions.on-the-left,baa-EEN ta-RAF
-taxi.we-need-to-catch-the-high-speed-train,ha-MEIN tez tren pa-KAR-nee hai
-transit-rides.is-this-direct,kyaa SEE-dhee JAA-tee hai
-place-words.bus-stop,bus stop
-border-customs.i-am-here-for-business,main kaam seh AA-yaa hoon
-rail-station-words.ticket-office,TI-kat ghar
-common-signs.no-entry,pra-VESH ni-SHEDH
-utility-templates.please-write-the-number,NUM-bar likh DEE-ji-yeh
-accessibility.need-to-sit-down,mu-JHEH BAITH-naa hai
-toilets.do-i-need-a-coin,kyaa SIK-kaa yaa TOH-kan la-GEH-gaa
-building-words.door,dar-VAA-zaa
-pronouns-verbs.they-them,veh / un-HEIN
-question-words.how-much-many,KIT-naa
-emergency-medical.where-is-a-pharmacy,da-VAA kee du-KAAN ka-HAAN hai
-medical-conditions.my-blood-sugar-is-low,MEH-raa blud SHU-gar kam hai
-pharmacy-symptoms.do-i-need-a-prescription,kyaa DOK-tar kaa PAR-chaa CHAA-hi-yeh
-body-parts.eye,aankh
-lost-rescue.i-sprained-my-ankle,MEH-reh TAKH-neh mein moch aa ga-EE hai
-police-consulate.i-want-to-contact-my-embassy,mu-JHEH AP-neh doo-taa-VAAS seh baat kar-NEE hai
-dietary-needs.no-seafood,mach-LEE-JHEEN-gaa na-HEEN
-food-ordering.check-please,bil DEE-ji-yeh
-trail-words.park-shuttle,paark kee bus
-weather.wind,ha-VAA
-trail-transport.do-you-have-a-map,kyaa NAK-shaa hai
-trail-warnings.beware-falling-rocks,PAT-thar GIR-neh kaa kha-TRAA
-trail-landmarks.sunset,soor-YAAST
-hotel-basics.is-there-a-washing-machine,kyaa VOH-shing ma-SHEEN hai
-room-problems.the-toilet-will-not-flush,flash kaam na-HEEN kar ra-HAA
-laundry.laundromat,LOWN-dree
-introductions.where-are-you-from,aap ka-HAAN seh hain
-numbers-money.w,paanch
-atm-cash.no-money-came-out,PAI-seh na-HEEN NIK-leh
-social-basics.you-are-welcome,KOH-ee baat na-HEEN
-communication.please-say-it-again,phir seh KA-hi-yeh
-quick-responses.does-not-work-no,na-HEEN cha-LEH-gaa
-phone-text-power.please-confirm,za-RAA PAK-kaa kar LEE-ji-yeh
-sim-data.do-you-have-an-esim,kyaa ee-SIM hai
-etiquette.may-i-sit-here,kyaa ya-HAAN baith JAA-oon
-children.suitable-for-children,kyaa yah BACH-chon keh li-YEH theek hai
-time-scheduling.what-day-is-it-today,aaj kaun saa din hai
-time-words.afternoon,doh-PA-har
-days-of-week.sunday,RA-vi-vaar
-months.july,ju-LAA-ee
-directions.where-am-i,main ka-HAAN hoon
-quick-directions.on-the-right,daa-EEN ta-RAF
-taxi.please-use-the-meter,MEE-tar seh CHA-li-yeh
-transit-rides.do-i-need-to-transfer,kyaa GAA-ree ba-DAL-nee pa-REH-gee
-place-words.luggage-storage,klok room
-border-customs.i-have-a-return-ticket,MEH-reh paas VAA-pa-see kaa TI-kat hai
-rail-station-words.waiting-room,pra-TEEK-shaa-lay
-common-signs.no-smoking,DHOOM-ra-paan ni-SHEDH
-utility-templates.i-need,mu-JHEH {} CHAA-hi-yeh
-accessibility.accessible-restroom,kyaa div-YAANG shaw-CHAA-lay hai
-toilets.is-the-tap-water-safe-to-drink,kyaa nal kaa PAA-nee PEE-neh LAA-yak hai
-building-words.key,CHAA-bee
-pronouns-verbs.my-mine,MEH-raa / MEH-ree
-question-words.how-many,KIT-neh
-emergency-medical.please-take-me-to-a-hospital,mu-JHEH as-pa-TAAL leh CHA-li-yeh
-medical-conditions.i-need-my-inhaler,mu-JHEH MEH-raa in-HEH-lar CHAA-hi-yeh
-pharmacy-symptoms.i-have-a-headache,MEH-reh sir mein dard hai
-body-parts.ear,kaan
-lost-rescue.please-contact-rescue,ba-CHAAV dal koh KHA-bar KEE-ji-yeh
-police-consulate.i-need-it-for-my-insurance,yah mu-JHEH BEE-meh keh li-YEH CHAA-hi-yeh
-dietary-needs.i-am-vegetarian,main shuddh shaa-kaa-HAA-ree hoon
-food-ordering.does-it-contain,kyaa is-MEIN {} hai
-trail-words.steps,SEE-rhi-yaan
-weather.storm,too-FAAN
-trail-warnings.first-aid-station,PRAA-tha-mik chi-KIT-saa KEN-dra
-room-problems.the-light-does-not-work,BAT-tee na-HEEN jal ra-HEE
-laundry.please-iron-this,i-SEH press kar DEE-ji-yeh
-introductions.how-are-you,aap KAI-seh hain
-numbers-money.li,chheh
-atm-cash.where-can-i-change-money,PAI-seh ba-DAL-neh kee JA-gah ka-HAAN hai
-social-basics.excuse-me-sorry,SU-ni-yeh
-communication.please-write-it-down,likh DEE-ji-yeh
-sim-data.my-data-is-not-working,MEH-raa DEH-taa na-HEEN chal ra-HAA
-etiquette.queue-for,kyaa yah {} kee laain hai
-children.minimum-age,kam seh kam KIT-nee UM-ra
-time-scheduling.what-time-does-it-open,KIT-neh BA-jeh KHUL-taa hai
-time-words.evening,shaam
-months.august,a-GAST
-directions.which-way,ki-DHAR
-quick-directions.across-from-here,SA-rak keh us paar
-transit-rides.is-it-delayed,kyaa der seh hai
-border-customs.i-am-visiting-family,main pa-ri-VAAR seh MIL-neh AA-yaa hoon
-rail-station-words.train-number,GAA-ree SAN-khyaa
-common-signs.no-photography,FOH-toh LEH-naa ma-NAA hai
-utility-templates.is-there-nearby,kyaa ya-HAAN paas mein {} hai
-accessibility.station-assistance,kyaa STEH-shan par ma-DAD mi-LEH-gee
-toilets.it-is-urgent,ba-HUT za-ROO-ree hai
-pronouns-verbs.your-yours,AAP-kaa / AAP-kee
-question-words.why,kyon
-medical-conditions.i-am-pregnant,main GARBH-va-tee hoon
-pharmacy-symptoms.paracetamol-acetaminophen,pai-raa-si-TAA-mol
-body-parts.leg,taang
-lost-rescue.my-companion-is-missing,MEH-raa SAA-thee gum hoh ga-YAA hai
-police-consulate.i-need-an-interpreter,mu-JHEH du-BHAA-shi-yaa CHAA-hi-yeh
-dietary-needs.i-am-vegan,main VEE-gan hoon (doodh-ghee bhee na-HEEN)
-food-ordering.is-this-vegetarian,kyaa yah shaa-kaa-HAA-ree hai
-trail-words.up-uphill,cha-RHAA-ee
-weather.ice,ja-MEE barf
-trail-warnings.service-suspended,SEH-vaa band
-trail-landmarks.water-point,PAY-jal
-room-problems.please-send-someone,ki-SEE koh theek KAR-neh BHEH-ji-yeh
-laundry.detergent,DI-tar-jent
-introductions.i-am-a-tourist,main PAR-ya-tak hoon
-numbers-money.q,saat
-atm-cash.the-machine-is-out-of-service,ma-SHEEN kha-RAAB hai
-social-basics.sorry,maaf KEE-ji-yeh
-communication.please-wait-a-moment,za-RAA RU-ki-yeh
-sim-data.does-it-need-registration,kyaa ra-jis-TREH-shan za-ROO-ree hai
-etiquette.dressed-appropriately,kyaa MEH-reh KAP-reh theek hain
-children.do-children-pay,kyaa BACH-chon kaa TI-kat LAG-taa hai
-time-scheduling.what-time-does-it-close,KIT-neh BA-jeh band HOH-taa hai
-time-words.spring,va-SANT
-months.september,si-TAM-bar
-directions.can-i-walk-there,kyaa PAI-dal JAA-neh LAA-yak hai
-quick-directions.in-front,SAAM-neh
-transit-rides.i-am-in-a-hurry,mu-JHEH JAL-dee hai
-border-customs.this-is-for-personal-use,yah MEH-reh is-teh-MAAL keh li-YEH hai
-rail-station-words.carriage,DIB-baa
-common-signs.do-not-touch,CHHOO-naa ma-NAA hai
-utility-templates.how-much-is,{} KIT-neh kaa hai
-accessibility.help-me-carry,yah u-THAA-neh mein ma-DAD KEE-ji-yeh
-toilets.may-i-have-the-toilet-key,kyaa BAATH-room kee CHAA-bee mil sak-TEE hai
-pronouns-verbs.be-called-call,naam / bu-LAA-naa
-question-words.this,yeh
-medical-conditions.i-carry-an-adrenaline-injector,MEH-reh paas ed-REH-naa-lin in-JEK-tar hai
-pharmacy-symptoms.how-much-should-i-take,KIT-nee khu-RAAK LEH-nee hai
-body-parts.arm,baanh
-police-consulate.please-leave-me-alone,mu-JHEH pa-reh-SHAAN na KEE-ji-yeh
-dietary-needs.i-do-not-eat,main {} na-HEEN KHAA-taa
-trail-words.down-downhill,u-traa-EE
-weather.fog,KOH-raa
-room-problems.the-heating-does-not-work,HEE-tar kaam na-HEEN kar ra-HAA
-laundry.dry-cleaning,draai KLEE-ning
-introductions.this-is-my-husband-wife,MEH-reh PA-ti / MEH-ree PAT-nee
-numbers-money.b,aath
-atm-cash.please-give-me-smaller-notes,CHHOH-teh not DEE-ji-yeh
-social-basics.no-problem,KOH-ee DIK-kat na-HEEN
-communication.can-you-help-me,MEH-ree ma-DAD KEE-ji-yeh
-sim-data.i-have-no-signal,SIG-nal na-HEEN aa ra-HAA
-etiquette.did-not-mean-to-offend,an-JAA-neh mein hu-AA maaf KEE-ji-yeh
-children.crib,kyaa BACH-cheh kaa PAAL-naa hai
-time-words.summer,GAR-mee
-months.october,ak-TOO-bar
-directions.how-far-is-it,KIT-nee door hai
-quick-directions.behind,PEE-chheh
-transit-rides.which-platform,kaun saa PLET-form
-border-customs.i-am-in-transit,main TRAAN-zit mein hoon
-rail-station-words.seat,seet
-common-signs.temporarily-closed,fil-HAAL band
-utility-templates.is-this,kyaa yah {} hai
-accessibility.board-first,kyaa main PEH-leh charh JAA-oon
-toilets.there-is-no-toilet-paper,TOY-let PEH-par na-HEEN hai
-pronouns-verbs.have,keh paas hai
-question-words.that,voh
-medical-conditions.i-take-medicine-for,mu-JHEH {} kee da-VAA LEH-nee PAR-tee hai
-pharmacy-symptoms.i-am-vomiting,mu-JHEH UL-tee hoh ra-HEE hai
-body-parts.foot,pair
-police-consulate.i-was-robbed,MEH-reh saath loot hu-EE hai
-dietary-needs.i-am-allergic-to,mu-JHEH {} seh e-LAR-jee hai
-trail-words.one-way,ek ta-RA-faa
-weather.heat,GAR-mee
-laundry.dryer,DRAA-yar
-introductions.this-is-my-daughter-son,MEH-ree BEH-tee / MEH-raa BEH-taa
-numbers-money.ji,naw
-atm-cash.do-you-have-change,kyaa CHHUT-teh hain
-social-basics.i-do-not-know,mu-JHEH na-HEEN pa-TAA
-communication.please-show-me-the-text,voh HIN-dee mein li-KHAA hu-AA di-KHAA-i-yeh
-sim-data.please-write-the-wifi-password,WAI-fai kaa PAAS-vard likh DEE-ji-yeh
-etiquette.what-is-customary,ya-HAAN kaa ri-VAAZ kyaa hai
-children.warm-this-bottle,yah BOH-tal GA-ram kar DEE-ji-yeh
-time-words.fall,PAT-jhar
-months.november,na-VAM-bar
-directions.which-exit,kaun saa get
-transit-rides.what-time-is-the-next-one,AG-lee KIT-neh BA-jeh hai
-border-customs.i-have-in-cash,MEH-reh paas {} NA-kad hain
-rail-station-words.last-train,AA-khi-ree tren
-utility-templates.please,{} DEE-ji-yeh
-accessibility.door-width,dar-VAA-zaa KIT-naa CHAW-raa hai
-toilets.toilet-paper,TOY-let PEH-par
-pronouns-verbs.do-not-have,keh paas na-HEEN hai
-question-words.here,ya-HAAN
-medical-conditions.i-take-blood-thinners,MEH-ree khoon PAT-laa KAR-neh kee da-VAA chal ra-HEE hai
-pharmacy-symptoms.rehydration-salts,oh-aar-ES
-body-parts.hand,haath
-police-consulate.i-want-a-lawyer,mu-JHEH va-KEEL CHAA-hi-yeh
-trail-words.round-trip,AA-naa-JAA-naa
-weather.cold,thand
-laundry.coin-operated,SIK-kaa DAAL-kar
-introductions.i-am-traveling-alone,main a-KEH-leh YAA-traa par hoon
-numbers-money.sh,das
-atm-cash.may-i-pay-in,kyaa {} cha-LEH-gaa
-sim-data.sim-card,sim kaard
-etiquette.keep-the-change,BAA-kee rakh LEE-ji-yeh
-children.car-seat,ha-MEIN BACH-cheh kee kaar seet CHAA-hi-yeh
-time-words.winter,SAR-dee
-months.december,di-SAM-bar
-directions.can-you-show-me-the-way,RAAS-taa di-KHAA DEE-ji-yeh
-transit-rides.i-went-past-my-stop,MEH-raa stop NI-kal ga-YAA
-border-customs.this-is-a-gift,yah u-pa-HAAR hai
-rail-station-words.delayed,DEH-ree seh
-utility-templates.i-am-looking-for,mu-JHEH {} kee ta-LAASH hai
-accessibility.wheelchair-width,MEH-ree WHEEL-cheh-yar {} SEH-mee CHAW-ree hai
-toilets.it-is-out-of-order,yah kha-RAAB hai
-pronouns-verbs.go,JAA-naa
-question-words.there,va-HAAN
-medical-conditions.medicine-allergy,da-VAA seh e-LAR-jee: {}
-pharmacy-symptoms.how-many-times-a-day,din mein KIT-nee baar
-body-parts.knee,GHUT-naa
-police-consulate.please-notify-my-consulate,MEH-reh VAA-nij-ya doo-taa-VAAS koh KHA-bar KEE-ji-yeh
-weather.humid,U-mas
-numbers-money.y-b-i,saw
-atm-cash.please-charge-in-local-currency,ru-PA-yeh mein chaarj KEE-ji-yeh
-sim-data.where-can-i-buy-a-plug-adapter,plug a-DAIP-tar ka-HAAN mi-LEH-gaa
-children.stroller,praim
-directions.north,UT-tar
-border-customs.where-do-i-collect-my-baggage,saa-MAAN ka-HAAN mi-LEH-gaa
-rail-station-words.final-stop,AA-khi-ree STEH-shan
-utility-templates.do-you-accept,kyaa {} cha-LEH-gaa
-accessibility.hard-of-hearing,mu-JHEH kam su-NAA-ee DEH-taa hai
-toilets.out-of-order,kha-RAAB
-pronouns-verbs.come,AA-naa
-question-words.a-little,THOH-raa
-medical-conditions.this-card-lists-my-conditions,is kaard par MEH-ree bee-MAA-ri-yaan li-KHEE hain
-pharmacy-symptoms.i-have-a-stomach-ache,MEH-reh pet mein dard hai
-body-parts.ankle,TAKH-naa
-police-consulate.i-am-calling-the-police,mu-JHEH pu-LIS bu-LAA-nee pa-REH-gee
-weather.sunrise,soor-YOH-day
-numbers-money.y-qi-n,ha-ZAAR
-atm-cash.where-can-i-get-coins,SIK-keh ka-HAAN mi-LEN-geh
-sim-data.mobile-data,MOH-baail DEH-taa
-children.playground,kyaa khel kaa mai-DAAN hai
-directions.south,DAK-shin
-border-customs.how-long-may-i-stay,KIT-neh din RUK-neh kee i-JAA-zat hai
-rail-station-words.ticket-validator,TI-kat panch ma-SHEEN
-utility-templates.i-cannot-find,mu-JHEH {} na-HEEN mil ra-HAA
-accessibility.speak-louder,za-RAA zor seh BOH-li-yeh
-toilets.mens-toilet,PU-rush shaw-CHAA-lay
-pronouns-verbs.would-like,CHAA-hi-yeh
-question-words.some,kuchh
-medical-conditions.this-is-my-medicine,yah MEH-ree da-VAA hai
-pharmacy-symptoms.i-have-a-cough,mu-JHEH KHAAN-see hai
-body-parts.skin,TVA-chaa
-police-consulate.am-i-under-arrest,kyaa main gi-raf-TAAR hoon
-weather.flood,baarh
-numbers-money.y-w-n,das ha-ZAAR
-atm-cash.is-there-a-minimum-for-cards,kaard keh li-YEH kam seh kam KIT-naa
-sim-data.can-i-top-up-this-sim,kyaa is-MEIN ri-CHAARJ hoh sak-TAA hai
-directions.east,poorv
-border-customs.i-have-a-connecting-flight,MEH-ree AA-geh kee flaait hai
-utility-templates.there-is-a-problem-with,{} mein DIK-kat hai
-accessibility.visually-impaired,mu-JHEH ba-HUT kam di-KHAA-ee DEH-taa hai
-toilets.womens-toilet,ma-hi-LAA shaw-CHAA-lay
-pronouns-verbs.want,CHAAH-naa
-question-words.very,ba-HUT
-medical-conditions.please-give-me-sugar-or-juice,mu-JHEH CHEE-nee yaa joos DEE-ji-yeh
-pharmacy-symptoms.antihistamine,e-LAR-jee kee da-VAA
-police-consulate.no-thank-you-i-am-not-interested,na-HEEN dhan-ya-VAAD mu-JHEH na-HEEN CHAA-hi-yeh
-weather.avalanche-risk,him-SKHA-lan kaa kha-TRAA
-numbers-money.b-n,AA-dhaa
-atm-cash.atm,ay-tee-EM
-sim-data.top-up,ri-CHAARJ
-directions.west,PASH-chim
-border-customs.may-i-have-an-entry-stamp,kyaa pra-VESH kee MU-har mil sak-TEE hai
-accessibility.take-your-arm,kyaa main AAP-kee baanh pa-KAR loon
-toilets.drinking-water,PEE-neh kaa PAA-nee
-pronouns-verbs.look-for,DHOONDH-naa
-question-words.too,ba-HUT ZYAA-daa
-medical-conditions.inject-it-into-my-outer-thigh,yah jaangh keh BAAH-ree HIS-seh mein la-GAA-i-yeh
-pharmacy-symptoms.anti-diarrhea-medicine,dast kee da-VAA
-police-consulate.someone-attacked-me,ki-SEE neh mujh par HAM-laa ki-YAA
-atm-cash.banknote,not
-sim-data.is-there-coverage-in,kyaa {} mein NET-vark AA-taa hai
-border-customs.visa,VEE-zaa
-accessibility.guide-dog,yah MEH-raa GAA-id dog hai
-toilets.not-for-drinking,PEE-neh YOG-ya na-HEEN
-pronouns-verbs.buy,kha-REED-naa
-question-words.also,bhee
-medical-conditions.my-blood-type-is,MEH-raa blud groop {} hai
-pharmacy-symptoms.is-this-safe-to-take-with,kyaa yah {} keh saath LEH-naa theek hai
-police-consulate.i-did-not-agree-to-this-price,MAIN-neh yah daam tay na-HEEN ki-YAA thaa
-atm-cash.coin,SIK-kaa
-sim-data.signal,SIG-nal
-border-customs.i-have-no-food-or-plants,MEH-reh paas KHAA-naa yaa PAW-dheh na-HEEN hain
-toilets.accessible-toilet,div-YAANG shaw-CHAA-lay
-pronouns-verbs.like,pa-SAND HOH-naa
-question-words.all-both,sab / DOH-non
-medical-conditions.do-not-give-me,mu-JHEH {} na DEE-ji-yeh
-pharmacy-symptoms.i-feel-dizzy,mu-JHEH CHAK-kar aa ra-HEH hain
-police-consulate.please-write-the-report-number,ri-PORT NUM-bar likh DEE-ji-yeh
-atm-cash.cash-only,sirf NA-kad
-sim-data.esim,ee-SIM
-border-customs.passport-control,PAAS-port jaanch
-toilets.where-can-i-wash-my-hands,haath DHOH-neh kee JA-gah ka-HAAN hai
-pronouns-verbs.need,za-ROO-rat hai
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,mu-JHEH ES-pi-rin aur aai-bu-PROH-fen seh e-LAR-jee hai
-pharmacy-symptoms.ibuprofen,aai-bu-PROH-fen
-police-consulate.it-happened-here,yah ya-HAAN hu-AA thaa
-atm-cash.fee,fees
-sim-data.prepaid,PREE-payd
-border-customs.customs,SEE-maa shulk
-toilets.can-i-flush-the-paper,kyaa KAA-gaz koh flash kar-NAA theek hai
-medical-conditions.my-injector-is-in-my-bag,MEH-raa in-JEK-tar MEH-reh baig mein hai
-pharmacy-symptoms.i-have-a-sore-throat,MEH-raa ga-LAA kha-RAAB hai
-police-consulate.may-i-have-a-copy-of-the-report,kyaa ri-PORT kee KO-pee mil sak-TEE hai
-atm-cash.change,BAA-kee PAI-seh
-sim-data.roaming,ROH-ming
-border-customs.baggage-claim,saa-MAAN PRAAP-ti
-toilets.is-there-a-toilet-on-board,kyaa is-MEIN shaw-CHAA-lay hai
-medical-conditions.i-am-allergic-to-sulfa-drugs,mu-JHEH SAL-faa da-VAA-on seh e-LAR-jee hai
-pharmacy-symptoms.can-i-get-this-medicine-here,kyaa yah da-VAA ya-HAAN mil JAA-eh-gee
-police-consulate.i-will-not-sign-anything-i-cannot-read,bi-NAA PAR-heh DAST-khat na-HEEN kar-NAA hai
-atm-cash.exchange-rate,EKS-chenj ret
-border-customs.customs-declaration,SEE-maa shulk GHOSH-naa
-toilets.the-toilet-will-not-flush,flash kaam na-HEEN kar ra-HAA
-pharmacy-symptoms.bandage,PAT-tee
-police-consulate.am-i-free-to-go,kyaa mu-JHEH JAA-neh kee i-JAA-zat hai
-atm-cash.bank,bank
-border-customs.arrival-card,AAG-man PA-tra
-toilets.baby-change,SHI-shu DEKH-bhaal kaksh
-pharmacy-symptoms.the-pain-is-severe,dard ba-HUT tez hai
-police-consulate.i-do-not-want-to-go-with-you,mu-JHEH AAP-keh saath na-HEEN JAA-naa hai
-atm-cash.money-exchange,MA-nee EKS-chenj
-border-customs.transit,TRAAN-zit
-toilets.squat-toilet,BHAA-ra-tee-ya shaw-CHAA-lay
-pharmacy-symptoms.antiseptic,en-tee-SEP-tik
-atm-cash.pin,pin
-border-customs.boarding-pass,BOR-ding paas
-pharmacy-symptoms.i-feel-nauseous,MEH-raa jee mich-LAA ra-HAA hai
-pharmacy-symptoms.i-have-a-rash,mu-JHEH raish hoh ga-YAA hai
-pharmacy-symptoms.before-or-after-food,KHAA-neh seh PEH-leh yaa baad mein
-pharmacy-symptoms.i-think-it-is-infected,LAG-taa hai is-MEIN in-FEK-shan hai
-pharmacy-symptoms.motion-sickness-tablets,UL-tee kee GOH-lee
-pharmacy-symptoms.i-have-a-cut,mu-JHEH kat la-GAA hai
-pharmacy-symptoms.antacid,e-si-di-TEE kee da-VAA
-pharmacy-symptoms.i-have-a-burn,ya-HAAN jal ga-YAA hai
-pharmacy-symptoms.it-started-days-ago,{} din PEH-leh shu-ROO hu-AA
-pharmacy-symptoms.cough-medicine,KHAAN-see kee da-VAA
-pharmacy-symptoms.is-this-safe-during-pregnancy,kyaa yah gar-BHAA-vas-thaa mein theek hai
-trail-transport.how-long-is-the-wait,KIT-nee der la-GEH-gee
-tax-refund.is-tax-free-shopping-available,kyaa taiks-FREE kha-ree-DAA-ree HOH-tee hai
-place-words.tourist-spot-sightseeing-area,PAR-ya-tan sthal
-common-signs.open-operating,khu-LAA hai
-time-scheduling.how-long-does-it-take,KIT-naa SA-may la-GEH-gaa
-transit-rides.can-i-use-this-ticket,kyaa yah TI-kat cha-LEH-gaa
-common-signs.closed,band hai
-pronouns-verbs.there-is-have,hai
-common-signs.stopped-stop,RU-ki-yeh
-transit-rides.do-i-need-to-validate,kyaa TI-kat panch ka-RAA-naa pa-REH-gaa
-pronouns-verbs.there-is-not-do-not-have,na-HEEN hai
-emergency-medical.i-feel-unwell,MEH-ree ta-BEE-yat theek na-HEEN hai
-food-ordering.what-do-you-recommend,ya-HAAN kyaa ACH-chhaa MIL-taa hai
-hotel-basics.is-wi-fi-free,kyaa WAI-fai muft hai
-hotel-requests.another-towel-please,ek aur TAW-li-yaa DEE-ji-yeh
-shopping.is-there-a-discount,KOH-ee chhoot hai
-social-basics.good-night,shubh RAA-tri
-quick-responses.can-possible,hoh sak-TAA hai
-phone-translation.please-type-it-and-show-me,taaip KAR-keh di-KHAA-i-yeh
-phone-text-power.may-i-charge-my-phone-here,kyaa ya-HAAN fone chaarj kar loon
-pronouns-verbs.want-to-verb,mu-JHEH (verb)-naa hai
-emergency-medical.this-is-an-emergency,yah i-mar-JEN-see hai
-lost-rescue.please-look-at-my-current-location,MEH-ree maw-JOO-daa JA-gah DEH-khi-yeh
-hotel-words.luggage-storage,saa-MAAN ghar
-hotel-basics.how-much-per-night,ek raat kaa KIT-naa
-hotel-requests.what-time-is-check-out,chek-OWT KIT-neh BA-jeh hai
-payment-receipt.please-write-the-number,NUM-bar likh DEE-ji-yeh
-shopping.where-do-i-pay,PAI-seh ka-HAAN DEH-neh hain
-communication.i-cannot-make-out-what-you-are-saying,AAP-kee baat sa-MAJH na-HEEN aa ra-HEE
-quick-responses.cannot-not-possible,na-HEEN hoh sak-TAA
-taxi.i-will-get-off-here,mu-JHEH ya-HAAN u-TAR-naa hai
-pickup-meeting.please-call-a-taxi,TAIK-see bu-LAA DEE-ji-yeh
-pronouns-verbs.want-thing,mu-JHEH (thing) CHAA-hi-yeh
-emergency-medical.i-am-having-a-severe-allergic-reaction,mu-JHEH gam-BHEER e-LAR-jee hoh ra-HEE hai (e-naa-fi-LAIK-sis)
-lost-rescue.my-child-is-missing,MEH-raa BACH-chaa gum hoh ga-YAA hai
-food-ordering.water-please,PAA-nee DEE-ji-yeh
-hiking-parks.is-this-trail-suitable-for-beginners,kyaa na-YEH LOH-gon keh li-YEH yah theek hai
-hotel-basics.is-breakfast-included,kyaa NAASH-taa SHAA-mil hai
-hotel-requests.can-i-check-in-early,kyaa JAL-dee chek-IN hoh sak-TAA hai
-attractions-tickets.could-you-take-a-photo-for-us,za-RAA ha-MAA-ree FOH-toh leh DEE-ji-yeh
-payment-receipt.how-much-in-total,kul KIT-naa hu-AA
-shopping.i-will-take-this,mu-JHEH ya-HEE LEH-naa hai
-communication.i-do-not-understand,mu-JHEH sa-MAJH na-HEEN AA-yaa
-quick-responses.okay-fine,BIL-kul
-phone-translation.please-look-at-the-screen,skreen DEH-khi-yeh
-pronouns-verbs.need-thing,mu-JHEH (thing) kee za-ROO-rat hai
-question-words.how-much-what-price,KIT-neh kaa hai
-emergency-medical.i-cannot-breathe,mu-JHEH saans na-HEEN aa ra-HEE hai
-lost-rescue.i-do-not-know-where-i-am,mu-JHEH na-HEEN pa-TAA main ka-HAAN hoon
-hotel-basics.may-i-see-the-room,kyaa KAM-raa dekh loon
-hotel-requests.another-night,kyaa ek raat aur mil sak-TEE hai
-payment-receipt.can-we-pay-separately,kyaa a-LAG-a-LAG bil hoh sak-TAA hai
-shopping.what-is-this,yah kyaa hai
-communication.i-cannot-read-it,mu-JHEH yah PARH-naa na-HEEN AA-taa
-quick-responses.no-good-not-allowed-will-not-work,na-HEEN HOH-gaa
-pronouns-verbs.looking-for-thing,mu-JHEH (thing) kee ta-LAASH hai
-emergency-medical.i-am-bleeding-badly,ba-HUT khoon bah ra-HAA hai
-lost-rescue.my-friend-is-hurt,MEH-reh dost koh chot la-GEE hai
-dietary-needs.does-it-contain-fish-stock,kyaa is-MEIN mach-LEE kaa SHOR-baa hai
-dietary-needs.does-it-contain-pork-stock,kyaa is-MEIN SOO-ar kaa SHOR-baa hai
-hotel-basics.for-nights,{} raat keh li-YEH
-hotel-requests.is-there-a-safe,kyaa LO-kar hai
-payment-receipt.is-tax-included,kyaa taiks SHAA-mil hai
-shopping.where-can-i-buy,{} ka-HAAN mi-LEH-gaa
-emergency-medical.i-have-chest-pain,MEH-reh SEE-neh mein dard hai
-lost-rescue.i-lost-my-wallet,MEH-raa ba-TU-aa khoh ga-YAA hai
-hotel-basics.two-beds,doh a-LAG bed CHAA-hi-yeh
-hotel-requests.another-blanket,ek aur KAM-bal DEE-ji-yeh
-payment-receipt.my-card-was-declined,MEH-raa kaard na-HEEN cha-LAA
-shopping.do-you-have-this-in-stock,kyaa yah stok mein hai
-time-words.night,raat
-emergency-medical.this-person-is-unconscious,yah VYAK-ti beh-HOSH hai
-lost-rescue.i-lost-my-bag,MEH-raa baig khoh ga-YAA hai
-food-ordering.can-a-vegetarian-eat-this,kyaa shaa-kaa-HAA-ree yah khaa sak-TAA hai
-hotel-basics.is-there-air-conditioning,kyaa ay-SEE hai
-hotel-requests.wake-up-call,mu-JHEH {} BA-jeh ja-GAA DEE-ji-yeh
-payment-receipt.the-bill-is-wrong,LAG-taa hai bil mein GAL-tee hai
-shopping.two-of-these,yeh doh DEE-ji-yeh
-social-basics.okay-fine-i-am-okay,theek hai
-emergency-medical.where-is-the-nearest-hospital,SAB-seh naz-DEE-kee as-pa-TAAL ka-HAAN hai
-lost-rescue.where-is-lost-and-found,KHOH-yaa-PAA-yaa KEN-dra ka-HAAN hai
-payment-receipt.i-already-paid,MAIN-neh PAI-seh deh di-YEH hain
-shopping.what-is-it-made-of,yah kis cheez kaa ba-NAA hai
-emergency-medical.what-is-the-emergency-number,i-mar-JEN-see NUM-bar kyaa hai
-lost-rescue.i-cannot-find-my-hotel,mu-JHEH AP-naa HOH-tal na-HEEN mil ra-HAA hai
-emergency-medical.is-there-a-doctor-who-speaks-english,kyaa KOH-ee DOK-tar an-GREH-zee BOL-taa hai
-lost-rescue.i-left-it-on-the-train,yah tren mein chhoot ga-YAA
-dietary-needs.i-have-a-severe-allergy-to,mu-JHEH {} seh gam-BHEER e-LAR-jee hai
-emergency-medical.i-think-a-bone-is-broken,LAG-taa hai HAD-dee toot ga-EE hai
-lost-rescue.i-cannot-get-down,main NEE-cheh na-HEEN u-TAR sak-TAA
-emergency-medical.please-call-my-emergency-contact,MEH-reh i-mar-JEN-see NUM-bar par fone KEE-ji-yeh
-emergency-medical.i-have-travel-insurance,MEH-raa YAA-traa BEE-maa hai
-dietary-needs.no-pork,SOO-ar kaa maans na-HEEN
-dietary-needs.is-this-halal,kyaa yah ha-LAAL hai
-pharmacy-symptoms.i-think-i-have-malaria,LAG-taa hai mu-JHEH ma-LEH-ri-yaa hai
-pharmacy-symptoms.i-need-a-malaria-test,mu-JHEH ma-LEH-ri-yaa kee JAANCH ka-RAA-nee hai
+concept_id,respell,text
+building-help.what-room-number-is-this,is KAM-reh kaa NUM-bar kyaa hai,इस कमरे का नंबर क्या है?
+accessibility.step-free,kyaa bi-NAA SEE-rhee kaa RAAS-taa hai,क्या बिना सीढ़ी का रास्ता है?
+in-a-building.is-this-the-correct-entrance,kyaa ya-HEE sa-HEE get hai,क्या यही सही गेट है?
+toilets.where-toilet,BAATH-room ka-HAAN hai,बाथरूम कहाँ है?
+building-words.elevator,lift,लिफ़्ट
+pronouns-verbs.i-me,main / mu-JHEH,मैं / मुझे
+question-words.what,kyaa,क्या
+emergency-medical.help,ba-CHAA-oh,बचाओ!
+medical-conditions.i-am-diabetic,mu-JHEH daa-ya-BEE-teez hai,मुझे डायबिटीज़ है
+pharmacy-symptoms.which-pharmacy-is-open-now,a-BHEE kaun see da-VAA kee du-KAAN khu-LEE hai,अभी कौन सी दवा की दुकान खुली है?
+body-parts.head,sir,सिर
+lost-rescue.i-lost-my-passport,MEH-raa PAAS-port khoh ga-YAA hai,मेरा पासपोर्ट खो गया है
+police-consulate.where-is-the-police-station,pu-LIS STEH-shan ka-HAAN hai,पुलिस स्टेशन कहाँ है?
+dietary-needs.no-meat,maans-mur-GEE-mach-LEE na-HEEN,मांस-मुर्गी-मछली नहीं
+food-ordering.table-for-two,doh LOH-gon kee TEH-bal,दो लोगों की टेबल
+trail-words.trail,pag-DAN-dee,पगडंडी
+weather.forecast,MAW-sam kaa haal kyaa hai,मौसम का हाल क्या है?
+hiking-parks.is-this-the-way-to,kyaa {} kaa RAAS-taa ya-HEE hai,क्या {} का रास्ता यही है?
+trail-conditions.how-long-is-the-full-route,POO-raa RAAS-taa KIT-naa LAM-baa hai,पूरा रास्ता कितना लंबा है?
+trail-transport.how-long-is-the-queue,laain KIT-nee LAM-bee hai,लाइन कितनी लंबी है?
+trail-warnings.open,khu-LAA,खुला
+trail-landmarks.trail-marker,RAAS-teh kaa ni-SHAAN,रास्ते का निशान
+hotel-words.passport,PAAS-port,पासपोर्ट
+hotel-basics.are-any-rooms-available,kyaa KAM-raa KHAA-lee hai,क्या कमरा खाली है?
+hotel-requests.can-i-check-out-later,kyaa der seh chek-OWT hoh sak-TAA hai,क्या देर से चेक-आउट हो सकता है?
+room-problems.there-is-a-problem-with-the-room,KAM-reh mein ek DIK-kat hai,कमरे में एक दिक्कत है
+laundry.please-wash-these-clothes,yeh KAP-reh dhul-VAA DEE-ji-yeh,ये कपड़े धुलवा दीजिए
+introductions.my-name-is,MEH-raa naam {} hai,मेरा नाम {} है
+numbers-money.l-ng,SHOON-ya,शून्य
+atm-cash.where-is-an-atm,ay-tee-EM ka-HAAN hai,एटीएम कहाँ है?
+attractions-tickets.where-can-i-buy-tickets,TI-kat ka-HAAN mi-LEH-gaa,टिकट कहाँ मिलेगा?
+payment-receipt.pay-by-card,kaard cha-LEH-gaa,कार्ड चलेगा?
+shopping.i-am-just-looking,bas DEKH-naa hai,बस देखना है
+color-size-returns.do-you-have-another-color,kyaa DOOS-raa rang hai,क्या दूसरा रंग है?
+tax-refund.can-i-get-a-tax-refund,kyaa taiks VAA-pas mi-LEH-gaa,क्या टैक्स वापस मिलेगा?
+social-basics.hello,na-MAS-teh,नमस्ते
+communication.i-do-not-speak-this-language,mu-JHEH HIN-dee na-HEEN AA-tee,मुझे {target} नहीं आती
+quick-responses.please-go-ahead,KA-hi-yeh,कहिए
+phone-translation.i-am-using-phone-translation,fone seh a-nu-VAAD hoh ra-HAA hai,फ़ोन से अनुवाद हो रहा है
+phone-text-power.please-type-it-for-me,MEH-reh li-YEH taaip kar DEE-ji-yeh,मेरे लिए टाइप कर दीजिए
+sim-data.i-would-like-a-tourist-sim,mu-JHEH TOO-rist sim CHAA-hi-yeh,मुझे टूरिस्ट सिम चाहिए
+etiquette.is-this-allowed,kyaa is-KEE i-JAA-zat hai,क्या इसकी इजाज़त है?
+children.cannot-find-my-child,MEH-raa BACH-chaa na-HEEN mil ra-HAA hai,मेरा बच्चा नहीं मिल रहा है
+time-scheduling.what-time-is-it,KIT-neh BA-jeh hain,कितने बजे हैं?
+time-words.today,aaj,आज
+days-of-week.monday,SOM-vaar,सोमवार
+months.january,JAN-va-ree,जनवरी
+directions.where-is,{} ka-HAAN hai,{} कहाँ है?
+quick-directions.go-straight,SEE-dheh CHA-li-yeh,सीधे चलिए
+taxi.please-take-me-here,mu-JHEH ya-HAAN leh CHA-li-yeh,मुझे यहाँ ले चलिए
+transit-rides.two-tickets,doh TI-kat DEE-ji-yeh,दो टिकट दीजिए
+border-customs.i-am-a-tourist,main PAR-ya-tak hoon,मैं पर्यटक हूँ
+pickup-meeting.where-is-the-pickup-point,PIK-up point ka-HAAN hai,पिकअप पॉइंट कहाँ है?
+rail-station-words.high-speed-rail,tez tren,तेज़ ट्रेन
+common-signs.open-on,chaa-LOO,चालू
+utility-templates.i-want-to-go-to,mu-JHEH {} JAA-naa hai,मुझे {} जाना है
+building-help.i-am-lost,main RAAS-taa bha-TAK ga-YAA hoon,मैं रास्ता भटक गया हूँ
+accessibility.wheelchair-access,kyaa WHEEL-cheh-yar jaa sak-TEE hai,क्या व्हीलचेयर जा सकती है?
+toilets.where-public-toilet,saar-va-JA-nik shaw-CHAA-lay ka-HAAN hai,सार्वजनिक शौचालय कहाँ है?
+building-words.stairs,SEE-rhi-yaan,सीढ़ियाँ
+pronouns-verbs.we-us,hum / ha-MEIN,हम / हमें
+question-words.where,ka-HAAN,कहाँ
+emergency-medical.please-call-an-ambulance,AM-byu-lens bu-LAA-i-yeh,एंबुलेंस बुलाइए
+medical-conditions.i-need-insulin,mu-JHEH IN-su-lin CHAA-hi-yeh,मुझे इंसुलिन चाहिए
+pharmacy-symptoms.i-need-medicine-for,mu-JHEH {} kee da-VAA CHAA-hi-yeh,मुझे {} की दवा चाहिए
+body-parts.stomach,pet,पेट
+lost-rescue.i-lost-my-phone,MEH-raa fone khoh ga-YAA hai,मेरा फ़ोन खो गया है
+police-consulate.i-want-to-report-a-theft,mu-JHEH CHOH-ree kee ri-PORT ka-RAA-nee hai,मुझे चोरी की रिपोर्ट करानी है
+dietary-needs.no-eggs,AN-daa na-HEEN,अंडा नहीं
+food-ordering.is-a-table-available,kyaa TEH-bal KHAA-lee hai,क्या टेबल खाली है?
+trail-words.trailhead,trek kee shu-ru-AAT,ट्रेक की शुरुआत
+weather.will-it-rain,kyaa aaj BAA-rish HOH-gee,क्या आज बारिश होगी?
+hiking-parks.where-is-the-trailhead,trek ka-HAAN seh shu-ROO HOH-taa hai,ट्रेक कहाँ से शुरू होता है?
+trail-conditions.can-we-return-the-same-way,kyaa i-SEE RAAS-teh seh VAA-pa-see hoh sak-TEE hai,क्या इसी रास्ते से वापसी हो सकती है?
+trail-transport.what-time-is-the-last-shuttle,AA-khi-ree SHA-tal kab hai,आखिरी शटल कब है?
+trail-warnings.closed,band,बंद
+trail-landmarks.fork-junction,ti-RAA-haa,तिराहा
+hotel-words.room-key-card,KAM-reh kaa kaard,कमरे का कार्ड
+hotel-basics.there-are-two-of-us,hum doh log hain,हम दो लोग हैं
+hotel-requests.what-time-does-breakfast-start,NAASH-taa KIT-neh BA-jeh seh hai,नाश्ता कितने बजे से है?
+room-problems.the-air-conditioning-is-broken,ay-SEE kaam na-HEEN kar ra-HAA,एसी काम नहीं कर रहा
+laundry.where-is-a-laundromat,LOWN-dree ka-HAAN hai,लॉन्ड्री कहाँ है?
+introductions.nice-to-meet-you,AAP-seh MIL-kar khu-SHEE hu-EE,आपसे मिलकर खुशी हुई
+numbers-money.y,ek,एक
+atm-cash.does-this-atm-take-foreign-cards,kyaa is-MEIN vi-DEH-shee kaard CHAL-teh hain,क्या इसमें विदेशी कार्ड चलते हैं?
+attractions-tickets.do-i-need-a-reservation,kyaa BU-king ka-RAA-nee pa-REH-gee,क्या बुकिंग करानी पड़ेगी?
+payment-receipt.pay-cash,NA-kad theek hai,नकद ठीक है?
+shopping.how-much-is-this,yah KIT-neh kaa hai,यह कितने का है?
+color-size-returns.do-you-have-another-size,kyaa DOOS-raa saaiz hai,क्या दूसरा साइज़ है?
+social-basics.hello-polite,na-mas-KAAR,नमस्कार
+communication.i-speak-only-a-little-of-this,mu-JHEH HIN-dee THOH-ree-see AA-tee hai,मुझे {target} थोड़ी-सी आती है
+phone-translation.please-speak-toward-the-phone,fone kee ta-RAF BOH-li-yeh,फ़ोन की तरफ़ बोलिए
+phone-translation.please-write-the-place-name,JA-gah kaa naam HIN-dee mein likh DEE-ji-yeh,जगह का नाम {target} में लिख दीजिए
+sim-data.may-i-use-your-wifi,kyaa AAP-kaa WAI-fai is-teh-MAAL kar loon,क्या आपका वाई-फ़ाई इस्तेमाल कर लूँ?
+etiquette.is-tipping-expected,kyaa tip DEH-nee HOH-tee hai,क्या टिप देनी होती है?
+children.make-an-announcement,a-NOWNS-ment ka-RAA DEE-ji-yeh,अनाउंसमेंट करा दीजिए
+time-scheduling.how-many-minutes,KIT-neh MI-nat,कितने मिनट?
+time-words.tomorrow,kal,कल
+days-of-week.tuesday,MAN-gal-vaar,मंगलवार
+months.february,FAR-va-ree,फ़रवरी
+directions.how-do-i-get-to,{} KAI-seh JAA-oon,{} कैसे जाऊँ?
+quick-directions.turn-left,baa-YEN MU-ri-yeh,बाएँ मुड़िए
+taxi.please-send-me-the-address,pa-TAA bhej DEE-ji-yeh,पता भेज दीजिए
+transit-rides.where-is-the-subway-station,MET-roh STEH-shan ka-HAAN hai,मेट्रो स्टेशन कहाँ है?
+place-words.visitor-center,PAR-ya-tak SOOCH-naa KEN-dra,पर्यटक सूचना केंद्र
+border-customs.here-is-my-passport,yah MEH-raa PAAS-port hai,यह मेरा पासपोर्ट है
+pickup-meeting.please-send-me-the-pickup-point,PIK-up point bhej DEE-ji-yeh,पिकअप पॉइंट भेज दीजिए
+common-signs.closed-off,band,बंद
+utility-templates.please-give-me,mu-JHEH {} DEE-ji-yeh,मुझे {} दीजिए
+building-help.where-is-reception,ri-SEP-shan ka-HAAN hai,रिसेप्शन कहाँ है?
+accessibility.elevator,kyaa lift hai,क्या लिफ़्ट है?
+in-a-building.do-you-have-wi-fi,kyaa ya-HAAN WAI-fai hai,क्या यहाँ वाई-फ़ाई है?
+toilets.may-i-use-the-toilet,kyaa BAATH-room is-teh-MAAL kar loon,क्या बाथरूम इस्तेमाल कर लूँ?
+building-words.entrance,pra-VESH,प्रवेश
+pronouns-verbs.you,tum,तुम
+question-words.who,kaun,कौन
+emergency-medical.i-need-a-doctor,mu-JHEH DOK-tar CHAA-hi-yeh,मुझे डॉक्टर चाहिए
+medical-conditions.i-have-asthma,mu-JHEH da-MAA hai,मुझे दमा है
+pharmacy-symptoms.i-have-a-fever,mu-JHEH bu-KHAAR hai,मुझे बुखार है
+body-parts.back,peeth,पीठ
+lost-rescue.please-call-the-police,pu-LIS koh bu-LAA-i-yeh,पुलिस को बुलाइए
+police-consulate.my-bag-was-stolen,MEH-raa baig CHOH-ree hoh ga-YAA,मेरा बैग चोरी हो गया
+dietary-needs.not-spicy,TEE-khaa na-HEEN,तीखा नहीं
+food-ordering.menu-please,MEN-yoo DEE-ji-yeh,मेन्यू दीजिए
+trail-words.summit,CHOH-tee,चोटी
+weather.is-it-safe-today,kyaa aaj JAA-naa su-RAK-shit hai,क्या आज जाना सुरक्षित है?
+hiking-parks.how-long-to-the-summit,CHOH-tee tak KIT-nee der la-GEH-gee,चोटी तक कितनी देर लगेगी?
+trail-conditions.can-we-return-before-dark,kyaa an-DHEH-reh seh PEH-leh VAA-pa-see hoh JAA-eh-gee,क्या अंधेरे से पहले वापसी हो जाएगी?
+trail-transport.when-does-the-cableway-stop,ROPE-vay kab band HOH-taa hai,रोपवे कब बंद होता है?
+trail-warnings.maintenance,ma-RAM-mat,मरम्मत
+trail-landmarks.boardwalk-cliff-path,chat-TAA-nee RAAS-taa,चट्टानी रास्ता
+hotel-words.check-in,chek-IN,चेक-इन
+hotel-basics.i-have-a-reservation,MEH-ree BU-king hai,मेरी बुकिंग है
+hotel-requests.can-i-store-my-luggage,kyaa saa-MAAN ya-HAAN ra-KHAA jaa sak-TAA hai,क्या सामान यहाँ रखा जा सकता है?
+room-problems.there-is-no-hot-water,GA-ram PAA-nee na-HEEN aa ra-HAA,गरम पानी नहीं आ रहा
+laundry.when-will-it-be-ready,kab tai-YAAR HOH-gaa,कब तैयार होगा?
+introductions.what-is-your-name,AAP-kaa naam kyaa hai,आपका नाम क्या है?
+numbers-money.r,doh,दो
+atm-cash.the-atm-kept-my-card,ay-tee-EM neh MEH-raa kaard rakh li-YAA,एटीएम ने मेरा कार्ड रख लिया
+attractions-tickets.what-is-the-latest-entry-time,AN-dar JAA-neh kaa AA-khi-ree SA-may kyaa hai,अंदर जाने का आखिरी समय क्या है?
+payment-receipt.pay-by-qr-code,kyoo-AAR kod cha-LEH-gaa,क्यूआर कोड चलेगा?
+shopping.that-is-too-expensive,yah ba-HUT ma-HAN-gaa hai,यह बहुत महंगा है
+color-size-returns.may-i-try-it-on,kyaa i-SEH PA-han kar dekh loon,क्या इसे पहन कर देख लूँ?
+social-basics.good-morning,su-pra-BHAAT,सुप्रभात
+communication.do-you-speak-english,kyaa AAP-koh an-GREH-zee AA-tee hai,क्या आपको {source} आती है?
+quick-responses.no-not,na-HEEN,नहीं
+phone-translation.one-sentence-at-a-time-please,ek-ek VAAK-ya BOH-li-yeh,एक-एक वाक्य बोलिए
+phone-text-power.please-use-simple-words,aa-SAAN SHAB-don mein BOH-li-yeh,आसान शब्दों में बोलिए
+sim-data.how-much-data-is-included,KIT-naa DEH-taa mi-LEH-gaa,कितना डेटा मिलेगा?
+etiquette.is-service-included,kyaa SAR-vis chaarj SHAA-mil hai,क्या सर्विस चार्ज शामिल है?
+children.child-age,MEH-raa BACH-chaa {} saal kaa hai,मेरा बच्चा {} साल का है
+time-scheduling.what-time-should-we-meet,KIT-neh BA-jeh mi-LEN,कितने बजे मिलें?
+time-words.yesterday,kal,कल
+days-of-week.wednesday,BUDH-vaar,बुधवार
+months.march,maarch,मार्च
+directions.is-it-far,kyaa door hai,क्या दूर है?
+quick-directions.turn-right,daa-YEN MU-ri-yeh,दाएँ मुड़िए
+taxi.we-need-the-east-gate-not-the-south-gate,ha-MEIN POOR-vee get CHAA-hi-yeh DAK-shi-nee na-HEEN,"हमें पूर्वी गेट चाहिए, दक्षिणी नहीं"
+transit-rides.does-this-bus-train-go-to,kyaa yah {} JAA-tee hai,क्या यह {} जाती है?
+place-words.railway-station,REL-vay STEH-shan,रेलवे स्टेशन
+border-customs.i-am-staying-for-days,mu-JHEH {} din RUK-naa hai,मुझे {} दिन रुकना है
+pickup-meeting.please-pick-us-up-here,ha-MEIN ya-HAAN seh leh LEE-ji-yeh,हमें यहाँ से ले लीजिए
+rail-station-words.transfer,GAA-ree ba-DAL-naa,गाड़ी बदलना
+common-signs.occupied,bha-RAA hai,भरा है
+utility-templates.may-i,kyaa main {} sak-TAA hoon,क्या मैं {} सकता हूँ?
+building-help.where-is-a-power-outlet,BIJ-lee kaa SO-ket ka-HAAN hai,बिजली का सॉकेट कहाँ है?
+accessibility.ramp,kyaa ramp hai,क्या रैंप है?
+in-a-building.what-is-the-wi-fi-password,WAI-fai kaa PAAS-vard kyaa hai,वाई-फ़ाई का पासवर्ड क्या है?
+toilets.is-it-only-for-customers,kyaa sirf GRAA-ha-kon keh li-YEH hai,क्या सिर्फ़ ग्राहकों के लिए है?
+building-words.exit,ni-KAAS,निकास
+pronouns-verbs.you-polite,aap,आप
+question-words.which-one,kaun saa,कौन सा
+emergency-medical.i-am-sick,main bee-MAAR hoon,मैं बीमार हूँ
+medical-conditions.i-have-a-heart-condition,mu-JHEH dil kee bee-MAA-ree hai,मुझे दिल की बीमारी है
+pharmacy-symptoms.i-have-diarrhea,mu-JHEH dast hoh ra-HEH hain,मुझे दस्त हो रहे हैं
+body-parts.throat,ga-LAA,गला
+lost-rescue.we-are-here,hum ya-HAAN hain,हम यहाँ हैं
+police-consulate.my-passport-was-stolen,MEH-raa PAAS-port CHOH-ree hoh ga-YAA,मेरा पासपोर्ट चोरी हो गया
+dietary-needs.less-spicy,kam TEE-khaa,कम तीखा
+food-ordering.i-want-this,mu-JHEH yah CHAA-hi-yeh,मुझे यह चाहिए
+trail-words.viewpoint,vyoo point,व्यू पॉइंट
+weather.how-cold-at-night,raat mein KIT-nee thand HOH-tee hai,रात में कितनी ठंड होती है?
+hiking-parks.how-long-to-the-viewpoint,vyoo point tak KIT-nee der,व्यू पॉइंट तक कितनी देर?
+trail-conditions.is-the-trail-open,kyaa RAAS-taa khu-LAA hai,क्या रास्ता खुला है?
+trail-transport.where-can-we-buy-water,PAA-nee ka-HAAN mi-LEH-gaa,पानी कहाँ मिलेगा?
+trail-warnings.steep-slope,tez dha-LAAN,तेज़ ढलान
+trail-landmarks.start,shu-ru-AAT,शुरुआत
+hotel-words.check-out,chek-OWT,चेक-आउट
+hotel-basics.can-i-charge-my-phone,kyaa fone chaarj kar loon,क्या फ़ोन चार्ज कर लूँ?
+hotel-requests.no-housekeeping,KAM-reh kee sa-FAA-ee na-HEEN CHAA-hi-yeh,कमरे की सफ़ाई नहीं चाहिए
+room-problems.can-i-change-rooms,kyaa KAM-raa bad-LAA jaa sak-TAA hai,क्या कमरा बदला जा सकता है?
+laundry.how-much-per-kilo,ek KEE-loh kaa KIT-naa,एक किलो का कितना?
+introductions.we-are-traveling-together,hum saath YAA-traa kar ra-HEH hain,हम साथ यात्रा कर रहे हैं
+atm-cash.is-there-a-fee,kyaa chaarj la-GEH-gaa,क्या चार्ज लगेगा?
+attractions-tickets.are-there-lockers,kyaa LO-kar hain,क्या लॉकर हैं?
+payment-receipt.a-receipt-please,ra-SEED DEE-ji-yeh,रसीद दीजिए
+shopping.can-it-be-a-little-cheaper,THOH-raa kam hoh JAA-eh-gaa,थोड़ा कम हो जाएगा?
+color-size-returns.can-i-return-it,kyaa yah VAA-pas hoh sak-TAA hai,क्या यह वापस हो सकता है?
+social-basics.good-evening,shubh SAN-dhyaa,शुभ संध्या
+communication.please-speak-more-slowly,za-RAA DHEE-reh BOH-li-yeh,ज़रा धीरे बोलिए
+quick-responses.okay-can,theek hai,ठीक है
+phone-text-power.my-phone-battery-is-low,MEH-reh fone kee BAI-tree kam hai,मेरे फ़ोन की बैटरी कम है
+sim-data.do-you-need-my-passport,kyaa PAAS-port CHAA-hi-yeh,क्या पासपोर्ट चाहिए?
+etiquette.may-i-enter,kyaa AN-dar aa JAA-oon,क्या अंदर आ जाऊँ?
+children.high-chair,kyaa BACH-chon kee OON-chee KUR-see hai,क्या बच्चों की ऊँची कुर्सी है?
+time-scheduling.can-we-change-the-time,kyaa SA-may bad-LAA jaa sak-TAA hai,क्या समय बदला जा सकता है?
+time-words.this-week,is HAF-teh,इस हफ़्ते
+days-of-week.thursday,GU-ru-vaar,गुरुवार
+months.april,ap-RAIL,अप्रैल
+directions.how-long-on-foot,PAI-dal KIT-nee der,पैदल कितनी देर?
+quick-directions.this-way,is ta-RAF,इस तरफ़
+taxi.please-stop-here,ya-HAAN rok DEE-ji-yeh,यहाँ रोक दीजिए
+transit-rides.what-is-the-next-stop,AG-laa stop kaun saa hai,अगला स्टॉप कौन सा है?
+place-words.airport,ha-VAA-ee AD-daa,हवाई अड्डा
+border-customs.nothing-to-declare,kuchh GHOH-shit KAR-neh koh na-HEEN,कुछ घोषित करने को नहीं
+pickup-meeting.meet-us-at,ha-MEIN {} par MI-li-yeh,हमें {} पर मिलिए
+rail-station-words.ticket-gate,TI-kat get,टिकट गेट
+common-signs.vacant,KHAA-lee,खाली
+utility-templates.please-do-not-add,{} na DAA-li-yeh,{} न डालिए
+accessibility.how-many-steps,KIT-nee SEE-rhi-yaan hain,कितनी सीढ़ियाँ हैं?
+in-a-building.which-floor,kaun see MAN-zil,कौन सी मंज़िल?
+toilets.toilet-wc,shaw-CHAA-lay,शौचालय
+building-words.men,PU-rush,पुरुष
+pronouns-verbs.he-him,voh / u-SEH,वह / उसे
+question-words.when,kab,कब
+emergency-medical.i-am-injured,main GHAA-yal hoon,मैं घायल हूँ
+medical-conditions.i-am-allergic-to-penicillin,mu-JHEH peh-ni-si-LIN seh e-LAR-jee hai,मुझे पेनिसिलिन से एलर्जी है
+pharmacy-symptoms.where-is-an-all-night-pharmacy,raat mein khu-LEE da-VAA kee du-KAAN ka-HAAN hai,रात में खुली दवा की दुकान कहाँ है?
+body-parts.tooth,daant,दाँत
+lost-rescue.please-look-at-my-location-pin,MEH-raa loh-KEH-shan pin DEH-khi-yeh,मेरा लोकेशन पिन देखिए
+police-consulate.someone-is-following-me,KOH-ee MEH-raa PEE-chhaa kar ra-HAA hai,कोई मेरा पीछा कर रहा है
+dietary-needs.no-peanuts,MOONG-pha-lee na-HEEN,मूंगफली नहीं
+food-ordering.do-you-have-drinking-water,kyaa PEE-neh kaa PAA-nee hai,क्या पीने का पानी है?
+trail-words.cableway,ROPE-vay,रोपवे
+weather.rain,BAA-rish,बारिश
+hiking-parks.which-route-is-easier,kaun saa RAAS-taa aa-SAAN hai,कौन सा रास्ता आसान है?
+trail-conditions.is-the-route-steep,kyaa cha-RHAA-ee tez hai,क्या चढ़ाई तेज़ है?
+trail-transport.where-can-we-refill-water,PAA-nee BHAR-neh kee JA-gah ka-HAAN hai,पानी भरने की जगह कहाँ है?
+trail-warnings.caution-slippery,saav-DHAAN: PHIS-lan,सावधान: फिसलन
+trail-landmarks.end,ant,अंत
+hotel-basics.i-would-like-a-non-smoking-room,mu-JHEH noh-SMOH-king KAM-raa CHAA-hi-yeh,मुझे नो-स्मोकिंग कमरा चाहिए
+room-problems.the-room-is-too-noisy,KAM-reh mein ba-HUT shor hai,कमरे में बहुत शोर है
+laundry.can-it-be-ready-today,kyaa aaj tai-YAAR hoh JAA-eh-gaa,क्या आज तैयार हो जाएगा?
+introductions.this-is-my-friend,yeh MEH-reh dost hain,ये मेरे दोस्त हैं
+numbers-money.s-n,teen,तीन
+atm-cash.the-card-was-declined,kaard na-HEEN cha-LAA,कार्ड नहीं चला
+attractions-tickets.may-i-take-photos,kyaa ya-HAAN FOH-toh LEH-neh kee i-JAA-zat hai,क्या यहाँ फ़ोटो लेने की इजाज़त है?
+color-size-returns.can-i-exchange-it,kyaa yah bad-LAA jaa sak-TAA hai,क्या यह बदला जा सकता है?
+social-basics.goodbye,phir mi-LEN-geh,फिर मिलेंगे
+communication.i-do-not-understand-spoken,mu-JHEH sa-MAJH na-HEEN aa ra-HAA,मुझे समझ नहीं आ रहा
+quick-responses.cannot-not-allowed,ma-NAA hai,मना है
+phone-text-power.do-you-have-a-power-bank,kyaa PAA-var bank hai,क्या पावर बैंक है?
+sim-data.how-long-is-it-valid,KIT-neh din cha-LEH-gaa,कितने दिन चलेगा?
+etiquette.remove-shoes,kyaa JOO-teh u-TAAR-neh hain,क्या जूते उतारने हैं?
+children.baby-changing-room,SHI-shu DEKH-bhaal kaksh ka-HAAN hai,शिशु देखभाल कक्ष कहाँ है?
+time-scheduling.when-is-convenient,AAP-koh kab theek ra-HEH-gaa,आपको कब ठीक रहेगा?
+time-words.next-week,AG-leh HAF-teh,अगले हफ़्ते
+days-of-week.friday,SHUK-ra-vaar,शुक्रवार
+months.may,ma-EE,मई
+directions.please-show-me-on-the-map,NAK-sheh par di-KHAA-i-yeh,नक्शे पर दिखाइए
+quick-directions.that-way,us ta-RAF,उस तरफ़
+taxi.can-you-wait-for-me-here,za-RAA ya-HAAN ruk JAA-i-yeh,ज़रा यहाँ रुक जाइए
+transit-rides.please-tell-me-where-to-get-off,ka-HAAN u-TAR-naa hai ba-TAA DEE-ji-yeh,"कहाँ उतरना है, बता दीजिए"
+place-words.service-desk,POOCH-taachh,पूछताछ
+border-customs.i-am-staying-at,mu-JHEH {} mein RUK-naa hai,मुझे {} में रुकना है
+pickup-meeting.please-call-me-a-ride,MEH-reh li-YEH kaib bu-LAA DEE-ji-yeh,मेरे लिए कैब बुला दीजिए
+rail-station-words.platform,PLET-form,प्लेटफ़ॉर्म
+common-signs.caution,saav-DHAAN,सावधान
+utility-templates.do-you-have,kyaa {} hai,क्या {} है?
+accessibility.cannot-climb-stairs,main SEE-rhi-yaan na-HEEN charh sak-TAA,मैं सीढ़ियाँ नहीं चढ़ सकता
+toilets.is-it-free,kyaa muft hai,क्या मुफ़्त है?
+building-words.women,ma-hi-LAA,महिला
+pronouns-verbs.she-her,voh / u-SEH,वह / उसे
+question-words.how,KAI-seh,कैसे
+emergency-medical.it-hurts-here,ya-HAAN dard hai,यहाँ दर्द है
+medical-conditions.i-have-epilepsy,mu-JHEH MIR-gee hai,मुझे मिर्गी है
+pharmacy-symptoms.painkiller,dard kee da-VAA,दर्द की दवा
+body-parts.chest,SEE-naa,सीना
+lost-rescue.i-cannot-walk,main chal na-HEEN sak-TAA,मैं चल नहीं सकता
+police-consulate.i-need-a-written-police-report,mu-JHEH ef-aa-ee-AAR kee KO-pee CHAA-hi-yeh,मुझे एफ़आईआर की कॉपी चाहिए
+dietary-needs.no-nuts,KAA-joo-BAA-daam-MEH-veh na-HEEN,काजू-बादाम-मेवे नहीं
+food-ordering.to-go-please,paik kar DEE-ji-yeh,पैक कर दीजिए
+trail-words.shuttle-bus,SHA-tal bus,शटल बस
+weather.snow,barf,बर्फ़
+trail-conditions.is-the-path-slippery,kyaa RAAS-taa PHIS-lan bha-RAA hai,क्या रास्ता फिसलन भरा है?
+trail-transport.is-there-cell-signal-here,kyaa ya-HAAN SIG-nal AA-taa hai,क्या यहाँ सिग्नल आता है?
+trail-warnings.danger,kha-TRAA,खतरा
+trail-landmarks.elevation,oon-CHAA-ee,ऊँचाई
+hotel-basics.i-would-like-a-quiet-room,mu-JHEH shaant KAM-raa CHAA-hi-yeh,मुझे शांत कमरा चाहिए
+room-problems.the-key-does-not-work,CHAA-bee kaam na-HEEN kar ra-HEE,चाबी काम नहीं कर रही
+laundry.please-do-not-use-bleach,bleech na la-GAA-i-yeh,ब्लीच न लगाइए
+introductions.i-am-from,main {} seh hoon,मैं {} से हूँ
+numbers-money.s,chaar,चार
+atm-cash.what-is-the-exchange-rate,EKS-chenj ret kyaa hai,एक्सचेंज रेट क्या है?
+attractions-tickets.please-take-a-photo-of-us,ha-MAA-ree FOH-toh leh DEE-ji-yeh,हमारी फ़ोटो ले दीजिए
+color-size-returns.do-you-have-a-bag,kyaa THAI-lee mi-LEH-gee,क्या थैली मिलेगी?
+social-basics.thank-you,DHAN-ya-vaad,धन्यवाद
+communication.i-cannot-read-understand,mu-JHEH PARH-naa-sa-MAJH-naa na-HEEN AA-taa,मुझे पढ़ना-समझना नहीं आता
+quick-responses.works-okay,cha-LEH-gaa,चलेगा
+phone-text-power.the-translation-may-be-inaccurate,a-nu-VAAD mein GAL-tee hoh sak-TEE hai,अनुवाद में गलती हो सकती है
+sim-data.please-activate-it,i-SEH chaa-LOO kar DEE-ji-yeh,इसे चालू कर दीजिए
+etiquette.photo-of-you,kyaa AAP-kee FOH-toh leh loon,क्या आपकी फ़ोटो ले लूँ?
+children.childrens-menu,kyaa BACH-chon kaa MEN-yoo hai,क्या बच्चों का मेन्यू है?
+time-scheduling.what-is-today-s-date,aaj kaun see taa-REEKH hai,आज कौन सी तारीख है?
+time-words.morning,SU-bah,सुबह
+days-of-week.saturday,SHA-ni-vaar,शनिवार
+months.june,joon,जून
+directions.where-is-the-nearest,SAB-seh naz-DEE-kee {} ka-HAAN hai,सबसे नज़दीकी {} कहाँ है?
+quick-directions.on-the-left,baa-EEN ta-RAF,बाईं तरफ़
+taxi.we-need-to-catch-the-high-speed-train,ha-MEIN tez tren pa-KAR-nee hai,हमें तेज़ ट्रेन पकड़नी है
+transit-rides.is-this-direct,kyaa SEE-dhee JAA-tee hai,क्या सीधी जाती है?
+place-words.bus-stop,bus stop,बस स्टॉप
+border-customs.i-am-here-for-business,main kaam seh AA-yaa hoon,मैं काम से आया हूँ
+rail-station-words.ticket-office,TI-kat ghar,टिकट घर
+common-signs.no-entry,pra-VESH ni-SHEDH,प्रवेश निषेध
+utility-templates.please-write-the-number,NUM-bar likh DEE-ji-yeh,नंबर लिख दीजिए
+accessibility.need-to-sit-down,mu-JHEH BAITH-naa hai,मुझे बैठना है
+toilets.do-i-need-a-coin,kyaa SIK-kaa yaa TOH-kan la-GEH-gaa,क्या सिक्का या टोकन लगेगा?
+building-words.door,dar-VAA-zaa,दरवाज़ा
+pronouns-verbs.they-them,veh / un-HEIN,वे / उन्हें
+question-words.how-much-many,KIT-naa,कितना
+emergency-medical.where-is-a-pharmacy,da-VAA kee du-KAAN ka-HAAN hai,दवा की दुकान कहाँ है?
+medical-conditions.my-blood-sugar-is-low,MEH-raa blud SHU-gar kam hai,मेरा ब्लड शुगर कम है
+pharmacy-symptoms.do-i-need-a-prescription,kyaa DOK-tar kaa PAR-chaa CHAA-hi-yeh,क्या डॉक्टर का पर्चा चाहिए?
+body-parts.eye,aankh,आँख
+lost-rescue.i-sprained-my-ankle,MEH-reh TAKH-neh mein moch aa ga-EE hai,मेरे टखने में मोच आ गई है
+police-consulate.i-want-to-contact-my-embassy,mu-JHEH AP-neh doo-taa-VAAS seh baat kar-NEE hai,मुझे अपने दूतावास से बात करनी है
+dietary-needs.no-seafood,mach-LEE-JHEEN-gaa na-HEEN,मछली-झींगा नहीं
+food-ordering.check-please,bil DEE-ji-yeh,बिल दीजिए
+trail-words.park-shuttle,paark kee bus,पार्क की बस
+weather.wind,ha-VAA,हवा
+trail-transport.do-you-have-a-map,kyaa NAK-shaa hai,क्या नक्शा है?
+trail-warnings.beware-falling-rocks,PAT-thar GIR-neh kaa kha-TRAA,पत्थर गिरने का खतरा
+trail-landmarks.sunset,soor-YAAST,सूर्यास्त
+hotel-basics.is-there-a-washing-machine,kyaa VOH-shing ma-SHEEN hai,क्या वॉशिंग मशीन है?
+room-problems.the-toilet-will-not-flush,flash kaam na-HEEN kar ra-HAA,फ़्लश काम नहीं कर रहा
+laundry.laundromat,LOWN-dree,लॉन्ड्री
+introductions.where-are-you-from,aap ka-HAAN seh hain,आप कहाँ से हैं?
+numbers-money.w,paanch,पाँच
+atm-cash.no-money-came-out,PAI-seh na-HEEN NIK-leh,पैसे नहीं निकले
+social-basics.you-are-welcome,KOH-ee baat na-HEEN,कोई बात नहीं
+communication.please-say-it-again,phir seh KA-hi-yeh,फिर से कहिए
+quick-responses.does-not-work-no,na-HEEN cha-LEH-gaa,नहीं चलेगा
+phone-text-power.please-confirm,za-RAA PAK-kaa kar LEE-ji-yeh,ज़रा पक्का कर लीजिए
+sim-data.do-you-have-an-esim,kyaa ee-SIM hai,क्या ई-सिम है?
+etiquette.may-i-sit-here,kyaa ya-HAAN baith JAA-oon,क्या यहाँ बैठ जाऊँ?
+children.suitable-for-children,kyaa yah BACH-chon keh li-YEH theek hai,क्या यह बच्चों के लिए ठीक है?
+time-scheduling.what-day-is-it-today,aaj kaun saa din hai,आज कौन सा दिन है?
+time-words.afternoon,doh-PA-har,दोपहर
+days-of-week.sunday,RA-vi-vaar,रविवार
+months.july,ju-LAA-ee,जुलाई
+directions.where-am-i,main ka-HAAN hoon,मैं कहाँ हूँ?
+quick-directions.on-the-right,daa-EEN ta-RAF,दाईं तरफ़
+taxi.please-use-the-meter,MEE-tar seh CHA-li-yeh,मीटर से चलिए
+transit-rides.do-i-need-to-transfer,kyaa GAA-ree ba-DAL-nee pa-REH-gee,क्या गाड़ी बदलनी पड़ेगी?
+place-words.luggage-storage,klok room,क्लॉक रूम
+border-customs.i-have-a-return-ticket,MEH-reh paas VAA-pa-see kaa TI-kat hai,मेरे पास वापसी का टिकट है
+rail-station-words.waiting-room,pra-TEEK-shaa-lay,प्रतीक्षालय
+common-signs.no-smoking,DHOOM-ra-paan ni-SHEDH,धूम्रपान निषेध
+utility-templates.i-need,mu-JHEH {} CHAA-hi-yeh,मुझे {} चाहिए
+accessibility.accessible-restroom,kyaa div-YAANG shaw-CHAA-lay hai,क्या दिव्यांग शौचालय है?
+toilets.is-the-tap-water-safe-to-drink,kyaa nal kaa PAA-nee PEE-neh LAA-yak hai,क्या नल का पानी पीने लायक है?
+building-words.key,CHAA-bee,चाबी
+pronouns-verbs.my-mine,MEH-raa / MEH-ree,मेरा / मेरी
+question-words.how-many,KIT-neh,कितने
+emergency-medical.please-take-me-to-a-hospital,mu-JHEH as-pa-TAAL leh CHA-li-yeh,मुझे अस्पताल ले चलिए
+medical-conditions.i-need-my-inhaler,mu-JHEH MEH-raa in-HEH-lar CHAA-hi-yeh,मुझे मेरा इनहेलर चाहिए
+pharmacy-symptoms.i-have-a-headache,MEH-reh sir mein dard hai,मेरे सिर में दर्द है
+body-parts.ear,kaan,कान
+lost-rescue.please-contact-rescue,ba-CHAAV dal koh KHA-bar KEE-ji-yeh,बचाव दल को खबर कीजिए
+police-consulate.i-need-it-for-my-insurance,yah mu-JHEH BEE-meh keh li-YEH CHAA-hi-yeh,यह मुझे बीमे के लिए चाहिए
+dietary-needs.i-am-vegetarian,main shuddh shaa-kaa-HAA-ree hoon,मैं शुद्ध शाकाहारी हूँ
+food-ordering.does-it-contain,kyaa is-MEIN {} hai,क्या इसमें {} है?
+trail-words.steps,SEE-rhi-yaan,सीढ़ियाँ
+weather.storm,too-FAAN,तूफ़ान
+trail-warnings.first-aid-station,PRAA-tha-mik chi-KIT-saa KEN-dra,प्राथमिक चिकित्सा केंद्र
+room-problems.the-light-does-not-work,BAT-tee na-HEEN jal ra-HEE,बत्ती नहीं जल रही
+laundry.please-iron-this,i-SEH press kar DEE-ji-yeh,इसे प्रेस कर दीजिए
+introductions.how-are-you,aap KAI-seh hain,आपका क्या हाल है?
+numbers-money.li,chheh,छह
+atm-cash.where-can-i-change-money,PAI-seh ba-DAL-neh kee JA-gah ka-HAAN hai,पैसे बदलने की जगह कहाँ है?
+social-basics.excuse-me-sorry,SU-ni-yeh,सुनिए
+communication.please-write-it-down,likh DEE-ji-yeh,लिख दीजिए
+sim-data.my-data-is-not-working,MEH-raa DEH-taa na-HEEN chal ra-HAA,मेरा डेटा नहीं चल रहा
+etiquette.queue-for,kyaa yah {} kee laain hai,क्या यह {} की लाइन है?
+children.minimum-age,kam seh kam KIT-nee UM-ra,कम से कम कितनी उम्र?
+time-scheduling.what-time-does-it-open,KIT-neh BA-jeh KHUL-taa hai,कितने बजे खुलता है?
+time-words.evening,shaam,शाम
+months.august,a-GAST,अगस्त
+directions.which-way,ki-DHAR,किधर?
+quick-directions.across-from-here,SA-rak keh us paar,सड़क के उस पार
+transit-rides.is-it-delayed,kyaa der seh hai,क्या देर से है?
+border-customs.i-am-visiting-family,main pa-ri-VAAR seh MIL-neh AA-yaa hoon,मैं परिवार से मिलने आया हूँ
+rail-station-words.train-number,GAA-ree SAN-khyaa,गाड़ी संख्या
+common-signs.no-photography,FOH-toh LEH-naa ma-NAA hai,फ़ोटो लेना मना है
+utility-templates.is-there-nearby,kyaa ya-HAAN paas mein {} hai,क्या यहाँ पास में {} है?
+accessibility.station-assistance,kyaa STEH-shan par ma-DAD mi-LEH-gee,क्या स्टेशन पर मदद मिलेगी?
+toilets.it-is-urgent,ba-HUT za-ROO-ree hai,बहुत ज़रूरी है
+pronouns-verbs.your-yours,AAP-kaa / AAP-kee,आपका / आपकी
+question-words.why,kyon,क्यों
+medical-conditions.i-am-pregnant,main GARBH-va-tee hoon,मैं गर्भवती हूँ
+pharmacy-symptoms.paracetamol-acetaminophen,pai-raa-si-TAA-mol,पैरासिटामोल
+body-parts.leg,taang,टाँग
+lost-rescue.my-companion-is-missing,MEH-raa SAA-thee gum hoh ga-YAA hai,मेरा साथी गुम हो गया है
+police-consulate.i-need-an-interpreter,mu-JHEH du-BHAA-shi-yaa CHAA-hi-yeh,मुझे दुभाषिया चाहिए
+dietary-needs.i-am-vegan,main VEE-gan hoon (doodh-ghee bhee na-HEEN),मैं वीगन हूँ (दूध-घी भी नहीं)
+food-ordering.is-this-vegetarian,kyaa yah shaa-kaa-HAA-ree hai,क्या यह शाकाहारी है?
+trail-words.up-uphill,cha-RHAA-ee,चढ़ाई
+weather.ice,ja-MEE barf,जमी बर्फ़
+trail-warnings.service-suspended,SEH-vaa band,सेवा बंद
+trail-landmarks.water-point,PAY-jal,पेयजल
+room-problems.please-send-someone,ki-SEE koh theek KAR-neh BHEH-ji-yeh,किसी को ठीक करने भेजिए
+laundry.detergent,DI-tar-jent,डिटर्जेंट
+introductions.i-am-a-tourist,main PAR-ya-tak hoon,मैं पर्यटक हूँ
+numbers-money.q,saat,सात
+atm-cash.the-machine-is-out-of-service,ma-SHEEN kha-RAAB hai,मशीन खराब है
+social-basics.sorry,maaf KEE-ji-yeh,माफ़ कीजिए
+communication.please-wait-a-moment,za-RAA RU-ki-yeh,ज़रा रुकिए
+sim-data.does-it-need-registration,kyaa ra-jis-TREH-shan za-ROO-ree hai,क्या रजिस्ट्रेशन ज़रूरी है?
+etiquette.dressed-appropriately,kyaa MEH-reh KAP-reh theek hain,क्या मेरे कपड़े ठीक हैं?
+children.do-children-pay,kyaa BACH-chon kaa TI-kat LAG-taa hai,क्या बच्चों का टिकट लगता है?
+time-scheduling.what-time-does-it-close,KIT-neh BA-jeh band HOH-taa hai,कितने बजे बंद होता है?
+time-words.spring,va-SANT,वसंत
+months.september,si-TAM-bar,सितंबर
+directions.can-i-walk-there,kyaa PAI-dal JAA-neh LAA-yak hai,क्या पैदल जाने लायक है?
+quick-directions.in-front,SAAM-neh,सामने
+transit-rides.i-am-in-a-hurry,mu-JHEH JAL-dee hai,मुझे जल्दी है
+border-customs.this-is-for-personal-use,yah MEH-reh is-teh-MAAL keh li-YEH hai,यह मेरे इस्तेमाल के लिए है
+rail-station-words.carriage,DIB-baa,डिब्बा
+common-signs.do-not-touch,CHHOO-naa ma-NAA hai,छूना मना है
+utility-templates.how-much-is,{} KIT-neh kaa hai,{} कितने का है?
+accessibility.help-me-carry,yah u-THAA-neh mein ma-DAD KEE-ji-yeh,यह उठाने में मदद कीजिए
+toilets.may-i-have-the-toilet-key,kyaa BAATH-room kee CHAA-bee mil sak-TEE hai,क्या बाथरूम की चाबी मिल सकती है?
+pronouns-verbs.be-called-call,naam / bu-LAA-naa,नाम / बुलाना
+question-words.this,yeh,यह
+medical-conditions.i-carry-an-adrenaline-injector,MEH-reh paas ed-REH-naa-lin in-JEK-tar hai,मेरे पास एड्रेनालिन इंजेक्टर है
+pharmacy-symptoms.how-much-should-i-take,KIT-nee khu-RAAK LEH-nee hai,कितनी खुराक लेनी है?
+body-parts.arm,baanh,बाँह
+police-consulate.please-leave-me-alone,mu-JHEH pa-reh-SHAAN na KEE-ji-yeh,मुझे परेशान न कीजिए
+dietary-needs.i-do-not-eat,main {} na-HEEN KHAA-taa,मैं {} नहीं खाता
+trail-words.down-downhill,u-traa-EE,उतराई
+weather.fog,KOH-raa,कोहरा
+room-problems.the-heating-does-not-work,HEE-tar kaam na-HEEN kar ra-HAA,हीटर काम नहीं कर रहा
+laundry.dry-cleaning,draai KLEE-ning,ड्राई क्लीनिंग
+introductions.this-is-my-husband-wife,MEH-reh PA-ti / MEH-ree PAT-nee,मेरे पति / मेरी पत्नी
+numbers-money.b,aath,आठ
+atm-cash.please-give-me-smaller-notes,CHHOH-teh not DEE-ji-yeh,छोटे नोट दीजिए
+social-basics.no-problem,KOH-ee DIK-kat na-HEEN,कोई दिक्कत नहीं
+communication.can-you-help-me,MEH-ree ma-DAD KEE-ji-yeh,मेरी मदद कीजिए
+sim-data.i-have-no-signal,SIG-nal na-HEEN aa ra-HAA,सिग्नल नहीं आ रहा
+etiquette.did-not-mean-to-offend,an-JAA-neh mein hu-AA maaf KEE-ji-yeh,"अनजाने में हुआ, माफ़ कीजिए"
+children.crib,kyaa BACH-cheh kaa PAAL-naa hai,क्या बच्चे का पालना है?
+time-words.summer,GAR-mee,गर्मी
+months.october,ak-TOO-bar,अक्टूबर
+directions.how-far-is-it,KIT-nee door hai,कितनी दूर है?
+quick-directions.behind,PEE-chheh,पीछे
+transit-rides.which-platform,kaun saa PLET-form,कौन सा प्लेटफ़ॉर्म?
+border-customs.i-am-in-transit,main TRAAN-zit mein hoon,मैं ट्रांज़िट में हूँ
+rail-station-words.seat,seet,सीट
+common-signs.temporarily-closed,fil-HAAL band,फ़िलहाल बंद
+utility-templates.is-this,kyaa yah {} hai,क्या यह {} है?
+accessibility.board-first,kyaa main PEH-leh charh JAA-oon,क्या मैं पहले चढ़ जाऊँ?
+toilets.there-is-no-toilet-paper,TOY-let PEH-par na-HEEN hai,टॉयलेट पेपर नहीं है
+pronouns-verbs.have,keh paas hai,के पास है
+question-words.that,voh,वह
+medical-conditions.i-take-medicine-for,mu-JHEH {} kee da-VAA LEH-nee PAR-tee hai,मुझे {} की दवा लेनी पड़ती है
+pharmacy-symptoms.i-am-vomiting,mu-JHEH UL-tee hoh ra-HEE hai,मुझे उल्टी हो रही है
+body-parts.foot,pair,पैर
+police-consulate.i-was-robbed,MEH-reh saath loot hu-EE hai,मेरे साथ लूट हुई है
+dietary-needs.i-am-allergic-to,mu-JHEH {} seh e-LAR-jee hai,मुझे {} से एलर्जी है
+trail-words.one-way,ek ta-RA-faa,एक तरफ़ा
+weather.heat,GAR-mee,गर्मी
+laundry.dryer,DRAA-yar,ड्रायर
+introductions.this-is-my-daughter-son,MEH-ree BEH-tee / MEH-raa BEH-taa,मेरी बेटी / मेरा बेटा
+numbers-money.ji,naw,नौ
+atm-cash.do-you-have-change,kyaa CHHUT-teh hain,क्या छुट्टे हैं?
+social-basics.i-do-not-know,mu-JHEH na-HEEN pa-TAA,मुझे नहीं पता
+communication.please-show-me-the-text,voh HIN-dee mein li-KHAA hu-AA di-KHAA-i-yeh,वह {target} में लिखा हुआ दिखाइए
+sim-data.please-write-the-wifi-password,WAI-fai kaa PAAS-vard likh DEE-ji-yeh,वाई-फ़ाई का पासवर्ड लिख दीजिए
+etiquette.what-is-customary,ya-HAAN kaa ri-VAAZ kyaa hai,यहाँ का रिवाज़ क्या है?
+children.warm-this-bottle,yah BOH-tal GA-ram kar DEE-ji-yeh,यह बोतल गरम कर दीजिए
+time-words.fall,PAT-jhar,पतझड़
+months.november,na-VAM-bar,नवंबर
+directions.which-exit,kaun saa get,कौन सा गेट?
+transit-rides.what-time-is-the-next-one,AG-lee KIT-neh BA-jeh hai,अगली कितने बजे है?
+border-customs.i-have-in-cash,MEH-reh paas {} NA-kad hain,मेरे पास {} नकद हैं
+rail-station-words.last-train,AA-khi-ree tren,आखिरी ट्रेन
+utility-templates.please,{} DEE-ji-yeh,{} दीजिए
+accessibility.door-width,dar-VAA-zaa KIT-naa CHAW-raa hai,दरवाज़ा कितना चौड़ा है?
+toilets.toilet-paper,TOY-let PEH-par,टॉयलेट पेपर
+pronouns-verbs.do-not-have,keh paas na-HEEN hai,के पास नहीं है
+question-words.here,ya-HAAN,यहाँ
+medical-conditions.i-take-blood-thinners,MEH-ree khoon PAT-laa KAR-neh kee da-VAA chal ra-HEE hai,मेरी खून पतला करने की दवा चल रही है
+pharmacy-symptoms.rehydration-salts,oh-aar-ES,ओआरएस
+body-parts.hand,haath,हाथ
+police-consulate.i-want-a-lawyer,mu-JHEH va-KEEL CHAA-hi-yeh,मुझे वकील चाहिए
+trail-words.round-trip,AA-naa-JAA-naa,आना-जाना
+weather.cold,thand,ठंड
+laundry.coin-operated,SIK-kaa DAAL-kar,सिक्का डालकर
+introductions.i-am-traveling-alone,main a-KEH-leh YAA-traa par hoon,मैं अकेले यात्रा पर हूँ
+numbers-money.sh,das,दस
+atm-cash.may-i-pay-in,kyaa {} cha-LEH-gaa,क्या {} चलेगा?
+sim-data.sim-card,sim kaard,सिम कार्ड
+etiquette.keep-the-change,BAA-kee rakh LEE-ji-yeh,बाकी रख लीजिए
+children.car-seat,ha-MEIN BACH-cheh kee kaar seet CHAA-hi-yeh,हमें बच्चे की कार सीट चाहिए
+time-words.winter,SAR-dee,सर्दी
+months.december,di-SAM-bar,दिसंबर
+directions.can-you-show-me-the-way,RAAS-taa di-KHAA DEE-ji-yeh,रास्ता दिखा दीजिए
+transit-rides.i-went-past-my-stop,MEH-raa stop NI-kal ga-YAA,मेरा स्टॉप निकल गया
+border-customs.this-is-a-gift,yah u-pa-HAAR hai,यह उपहार है
+rail-station-words.delayed,DEH-ree seh,देरी से
+utility-templates.i-am-looking-for,mu-JHEH {} kee ta-LAASH hai,मुझे {} की तलाश है
+accessibility.wheelchair-width,MEH-ree WHEEL-cheh-yar {} SEH-mee CHAW-ree hai,मेरी व्हीलचेयर {} सेमी चौड़ी है
+toilets.it-is-out-of-order,yah kha-RAAB hai,यह खराब है
+pronouns-verbs.go,JAA-naa,जाना
+question-words.there,va-HAAN,वहाँ
+medical-conditions.medicine-allergy,da-VAA seh e-LAR-jee: {},दवा से एलर्जी: {}
+pharmacy-symptoms.how-many-times-a-day,din mein KIT-nee baar,दिन में कितनी बार?
+body-parts.knee,GHUT-naa,घुटना
+police-consulate.please-notify-my-consulate,MEH-reh VAA-nij-ya doo-taa-VAAS koh KHA-bar KEE-ji-yeh,मेरे वाणिज्य दूतावास को खबर कीजिए
+weather.humid,U-mas,उमस
+numbers-money.y-b-i,saw,सौ
+atm-cash.please-charge-in-local-currency,ru-PA-yeh mein chaarj KEE-ji-yeh,रुपये में चार्ज कीजिए
+sim-data.where-can-i-buy-a-plug-adapter,plug a-DAIP-tar ka-HAAN mi-LEH-gaa,प्लग अडैप्टर कहाँ मिलेगा?
+children.stroller,praim,प्रैम
+directions.north,UT-tar,उत्तर
+border-customs.where-do-i-collect-my-baggage,saa-MAAN ka-HAAN mi-LEH-gaa,सामान कहाँ मिलेगा?
+rail-station-words.final-stop,AA-khi-ree STEH-shan,आखिरी स्टेशन
+utility-templates.do-you-accept,kyaa {} cha-LEH-gaa,क्या {} चलेगा?
+accessibility.hard-of-hearing,mu-JHEH kam su-NAA-ee DEH-taa hai,मुझे कम सुनाई देता है
+toilets.out-of-order,kha-RAAB,खराब
+pronouns-verbs.come,AA-naa,आना
+question-words.a-little,THOH-raa,थोड़ा
+medical-conditions.this-card-lists-my-conditions,is kaard par MEH-ree bee-MAA-ri-yaan li-KHEE hain,इस कार्ड पर मेरी बीमारियाँ लिखी हैं
+pharmacy-symptoms.i-have-a-stomach-ache,MEH-reh pet mein dard hai,मेरे पेट में दर्द है
+body-parts.ankle,TAKH-naa,टखना
+weather.sunrise,soor-YOH-day,सूर्योदय
+numbers-money.y-qi-n,ha-ZAAR,हज़ार
+atm-cash.where-can-i-get-coins,SIK-keh ka-HAAN mi-LEN-geh,सिक्के कहाँ मिलेंगे?
+sim-data.mobile-data,MOH-baail DEH-taa,मोबाइल डेटा
+children.playground,kyaa khel kaa mai-DAAN hai,क्या खेल का मैदान है?
+directions.south,DAK-shin,दक्षिण
+border-customs.how-long-may-i-stay,KIT-neh din RUK-neh kee i-JAA-zat hai,कितने दिन रुकने की इजाज़त है?
+rail-station-words.ticket-validator,TI-kat panch ma-SHEEN,टिकट पंच मशीन
+utility-templates.i-cannot-find,mu-JHEH {} na-HEEN mil ra-HAA,मुझे {} नहीं मिल रहा
+accessibility.speak-louder,za-RAA zor seh BOH-li-yeh,ज़रा ज़ोर से बोलिए
+toilets.mens-toilet,PU-rush shaw-CHAA-lay,पुरुष शौचालय
+pronouns-verbs.would-like,CHAA-hi-yeh,चाहिए
+question-words.some,kuchh,कुछ
+medical-conditions.this-is-my-medicine,yah MEH-ree da-VAA hai,यह मेरी दवा है
+pharmacy-symptoms.i-have-a-cough,mu-JHEH KHAAN-see hai,मुझे खाँसी है
+body-parts.skin,TVA-chaa,त्वचा
+police-consulate.am-i-under-arrest,kyaa main gi-raf-TAAR hoon,क्या मैं गिरफ़्तार हूँ?
+weather.flood,baarh,बाढ़
+numbers-money.y-w-n,das ha-ZAAR,दस हज़ार
+atm-cash.is-there-a-minimum-for-cards,kaard keh li-YEH kam seh kam KIT-naa,कार्ड के लिए कम से कम कितना?
+sim-data.can-i-top-up-this-sim,kyaa is-MEIN ri-CHAARJ hoh sak-TAA hai,क्या इसमें रिचार्ज हो सकता है?
+directions.east,poorv,पूर्व
+border-customs.i-have-a-connecting-flight,MEH-ree AA-geh kee flaait hai,मेरी आगे की फ़्लाइट है
+utility-templates.there-is-a-problem-with,{} mein DIK-kat hai,{} में दिक्कत है
+accessibility.visually-impaired,mu-JHEH ba-HUT kam di-KHAA-ee DEH-taa hai,मुझे बहुत कम दिखाई देता है
+toilets.womens-toilet,ma-hi-LAA shaw-CHAA-lay,महिला शौचालय
+pronouns-verbs.want,CHAAH-naa,चाहना
+question-words.very,ba-HUT,बहुत
+medical-conditions.please-give-me-sugar-or-juice,mu-JHEH CHEE-nee yaa joos DEE-ji-yeh,मुझे चीनी या जूस दीजिए
+pharmacy-symptoms.antihistamine,e-LAR-jee kee da-VAA,एलर्जी की दवा
+police-consulate.no-thank-you-i-am-not-interested,na-HEEN dhan-ya-VAAD mu-JHEH na-HEEN CHAA-hi-yeh,"नहीं, धन्यवाद, मुझे नहीं चाहिए"
+weather.avalanche-risk,him-SKHA-lan kaa kha-TRAA,हिमस्खलन का खतरा
+numbers-money.b-n,AA-dhaa,आधा
+atm-cash.atm,ay-tee-EM,एटीएम
+sim-data.top-up,ri-CHAARJ,रिचार्ज
+directions.west,PASH-chim,पश्चिम
+border-customs.may-i-have-an-entry-stamp,kyaa pra-VESH kee MU-har mil sak-TEE hai,क्या प्रवेश की मुहर मिल सकती है?
+accessibility.take-your-arm,kyaa main AAP-kee baanh pa-KAR loon,क्या मैं आपकी बाँह पकड़ लूँ?
+toilets.drinking-water,PEE-neh kaa PAA-nee,पीने का पानी
+pronouns-verbs.look-for,DHOONDH-naa,ढूँढना
+question-words.too,ba-HUT ZYAA-daa,बहुत ज़्यादा
+medical-conditions.inject-it-into-my-outer-thigh,yah jaangh keh BAAH-ree HIS-seh mein la-GAA-i-yeh,यह जाँघ के बाहरी हिस्से में लगाइए
+pharmacy-symptoms.anti-diarrhea-medicine,dast kee da-VAA,दस्त की दवा
+police-consulate.someone-attacked-me,ki-SEE neh mujh par HAM-laa ki-YAA,किसी ने मुझ पर हमला किया
+atm-cash.banknote,not,नोट
+sim-data.is-there-coverage-in,kyaa {} mein NET-vark AA-taa hai,क्या {} में नेटवर्क आता है?
+border-customs.visa,VEE-zaa,वीज़ा
+accessibility.guide-dog,yah MEH-raa GAA-id dog hai,यह मेरा गाइड डॉग है
+toilets.not-for-drinking,PEE-neh YOG-ya na-HEEN,पीने योग्य नहीं
+pronouns-verbs.buy,kha-REED-naa,खरीदना
+question-words.also,bhee,भी
+medical-conditions.my-blood-type-is,MEH-raa blud groop {} hai,मेरा ब्लड ग्रुप {} है
+pharmacy-symptoms.is-this-safe-to-take-with,kyaa yah {} keh saath LEH-naa theek hai,क्या यह {} के साथ लेना ठीक है?
+police-consulate.i-did-not-agree-to-this-price,MAIN-neh yah daam tay na-HEEN ki-YAA thaa,मैंने यह दाम तय नहीं किया था
+atm-cash.coin,SIK-kaa,सिक्का
+sim-data.signal,SIG-nal,सिग्नल
+border-customs.i-have-no-food-or-plants,MEH-reh paas KHAA-naa yaa PAW-dheh na-HEEN hain,मेरे पास खाना या पौधे नहीं हैं
+toilets.accessible-toilet,div-YAANG shaw-CHAA-lay,दिव्यांग शौचालय
+pronouns-verbs.like,pa-SAND HOH-naa,पसंद होना
+question-words.all-both,sab / DOH-non,सब / दोनों
+medical-conditions.do-not-give-me,mu-JHEH {} na DEE-ji-yeh,मुझे {} न दीजिए
+pharmacy-symptoms.i-feel-dizzy,mu-JHEH CHAK-kar aa ra-HEH hain,मुझे चक्कर आ रहे हैं
+police-consulate.please-write-the-report-number,ri-PORT NUM-bar likh DEE-ji-yeh,रिपोर्ट नंबर लिख दीजिए
+atm-cash.cash-only,sirf NA-kad,सिर्फ़ नकद
+sim-data.esim,ee-SIM,ई-सिम
+border-customs.passport-control,PAAS-port jaanch,पासपोर्ट जाँच
+toilets.where-can-i-wash-my-hands,haath DHOH-neh kee JA-gah ka-HAAN hai,हाथ धोने की जगह कहाँ है?
+pronouns-verbs.need,za-ROO-rat hai,ज़रूरत है
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,mu-JHEH ES-pi-rin aur aai-bu-PROH-fen seh e-LAR-jee hai,मुझे एस्पिरिन और आइबुप्रोफ़ेन से एलर्जी है
+pharmacy-symptoms.ibuprofen,aai-bu-PROH-fen,आइबुप्रोफ़ेन
+police-consulate.it-happened-here,yah ya-HAAN hu-AA thaa,यह यहाँ हुआ था
+atm-cash.fee,fees,फ़ीस
+sim-data.prepaid,PREE-payd,प्रीपेड
+border-customs.customs,SEE-maa shulk,सीमा शुल्क
+toilets.can-i-flush-the-paper,kyaa KAA-gaz koh flash kar-NAA theek hai,क्या कागज़ को फ़्लश करना ठीक है?
+medical-conditions.my-injector-is-in-my-bag,MEH-raa in-JEK-tar MEH-reh baig mein hai,मेरा इंजेक्टर मेरे बैग में है
+pharmacy-symptoms.i-have-a-sore-throat,MEH-raa ga-LAA kha-RAAB hai,मेरा गला खराब है
+police-consulate.may-i-have-a-copy-of-the-report,kyaa ri-PORT kee KO-pee mil sak-TEE hai,क्या रिपोर्ट की कॉपी मिल सकती है?
+atm-cash.change,BAA-kee PAI-seh,बाकी पैसे
+sim-data.roaming,ROH-ming,रोमिंग
+border-customs.baggage-claim,saa-MAAN PRAAP-ti,सामान प्राप्ति
+toilets.is-there-a-toilet-on-board,kyaa is-MEIN shaw-CHAA-lay hai,क्या इसमें शौचालय है?
+medical-conditions.i-am-allergic-to-sulfa-drugs,mu-JHEH SAL-faa da-VAA-on seh e-LAR-jee hai,मुझे सल्फ़ा दवाओं से एलर्जी है
+pharmacy-symptoms.can-i-get-this-medicine-here,kyaa yah da-VAA ya-HAAN mil JAA-eh-gee,क्या यह दवा यहाँ मिल जाएगी?
+police-consulate.i-will-not-sign-anything-i-cannot-read,bi-NAA PAR-heh DAST-khat na-HEEN kar-NAA hai,बिना पढ़े दस्तखत नहीं करना है
+atm-cash.exchange-rate,EKS-chenj ret,एक्सचेंज रेट
+border-customs.customs-declaration,SEE-maa shulk GHOSH-naa,सीमा शुल्क घोषणा
+toilets.the-toilet-will-not-flush,flash kaam na-HEEN kar ra-HAA,फ़्लश काम नहीं कर रहा
+pharmacy-symptoms.bandage,PAT-tee,पट्टी
+police-consulate.am-i-free-to-go,kyaa mu-JHEH JAA-neh kee i-JAA-zat hai,क्या मुझे जाने की इजाज़त है?
+atm-cash.bank,bank,बैंक
+border-customs.arrival-card,AAG-man PA-tra,आगमन पत्र
+toilets.baby-change,SHI-shu DEKH-bhaal kaksh,शिशु देखभाल कक्ष
+pharmacy-symptoms.the-pain-is-severe,dard ba-HUT tez hai,दर्द बहुत तेज़ है
+police-consulate.i-do-not-want-to-go-with-you,mu-JHEH AAP-keh saath na-HEEN JAA-naa hai,मुझे आपके साथ नहीं जाना है
+atm-cash.money-exchange,MA-nee EKS-chenj,मनी एक्सचेंज
+border-customs.transit,TRAAN-zit,ट्रांज़िट
+toilets.squat-toilet,BHAA-ra-tee-ya shaw-CHAA-lay,भारतीय शौचालय
+pharmacy-symptoms.antiseptic,en-tee-SEP-tik,एंटीसेप्टिक
+atm-cash.pin,pin,पिन
+border-customs.boarding-pass,BOR-ding paas,बोर्डिंग पास
+pharmacy-symptoms.i-feel-nauseous,MEH-raa jee mich-LAA ra-HAA hai,मेरा जी मिचला रहा है
+pharmacy-symptoms.i-have-a-rash,mu-JHEH raish hoh ga-YAA hai,मुझे रैश हो गया है
+pharmacy-symptoms.before-or-after-food,KHAA-neh seh PEH-leh yaa baad mein,खाने से पहले या बाद में?
+pharmacy-symptoms.i-think-it-is-infected,LAG-taa hai is-MEIN in-FEK-shan hai,लगता है इसमें इन्फ़ेक्शन है
+pharmacy-symptoms.motion-sickness-tablets,UL-tee kee GOH-lee,उल्टी की गोली
+pharmacy-symptoms.i-have-a-cut,mu-JHEH kat la-GAA hai,मुझे कट लगा है
+pharmacy-symptoms.antacid,e-si-di-TEE kee da-VAA,एसिडिटी की दवा
+pharmacy-symptoms.i-have-a-burn,ya-HAAN jal ga-YAA hai,यहाँ जल गया है
+pharmacy-symptoms.it-started-days-ago,{} din PEH-leh shu-ROO hu-AA,{} दिन पहले शुरू हुआ
+pharmacy-symptoms.cough-medicine,KHAAN-see kee da-VAA,खाँसी की दवा
+pharmacy-symptoms.is-this-safe-during-pregnancy,kyaa yah gar-BHAA-vas-thaa mein theek hai,क्या यह गर्भावस्था में ठीक है?
+trail-transport.how-long-is-the-wait,KIT-nee der la-GEH-gee,कितनी देर लगेगी?
+tax-refund.is-tax-free-shopping-available,kyaa taiks-FREE kha-ree-DAA-ree HOH-tee hai,क्या टैक्स-फ़्री खरीदारी होती है?
+place-words.tourist-spot-sightseeing-area,PAR-ya-tan sthal,पर्यटन स्थल
+common-signs.open-operating,khu-LAA hai,खुला है
+time-scheduling.how-long-does-it-take,KIT-naa SA-may la-GEH-gaa,कितना समय लगेगा?
+transit-rides.can-i-use-this-ticket,kyaa yah TI-kat cha-LEH-gaa,क्या यह टिकट चलेगा?
+common-signs.closed,band hai,बंद है
+pronouns-verbs.there-is-have,hai,है
+common-signs.stopped-stop,RU-ki-yeh,रुकिए
+transit-rides.do-i-need-to-validate,kyaa TI-kat panch ka-RAA-naa pa-REH-gaa,क्या टिकट पंच कराना पड़ेगा?
+pronouns-verbs.there-is-not-do-not-have,na-HEEN hai,नहीं है
+emergency-medical.i-feel-unwell,MEH-ree ta-BEE-yat theek na-HEEN hai,मेरी तबीयत ठीक नहीं है
+food-ordering.what-do-you-recommend,ya-HAAN kyaa ACH-chhaa MIL-taa hai,यहाँ क्या अच्छा मिलता है?
+hotel-basics.is-wi-fi-free,kyaa WAI-fai muft hai,क्या वाई-फ़ाई मुफ़्त है?
+hotel-requests.another-towel-please,ek aur TAW-li-yaa DEE-ji-yeh,एक और तौलिया दीजिए
+shopping.is-there-a-discount,KOH-ee chhoot hai,कोई छूट है?
+social-basics.good-night,shubh RAA-tri,शुभ रात्रि
+quick-responses.can-possible,hoh sak-TAA hai,हो सकता है
+phone-translation.please-type-it-and-show-me,taaip KAR-keh di-KHAA-i-yeh,टाइप करके दिखाइए
+phone-text-power.may-i-charge-my-phone-here,kyaa ya-HAAN fone chaarj kar loon,क्या यहाँ फ़ोन चार्ज कर लूँ?
+pronouns-verbs.want-to-verb,mu-JHEH (verb)-naa hai,मुझे …ना है
+emergency-medical.this-is-an-emergency,yah i-mar-JEN-see hai,यह इमरजेंसी है
+lost-rescue.please-look-at-my-current-location,MEH-ree maw-JOO-daa JA-gah DEH-khi-yeh,मेरी मौजूदा जगह देखिए
+hotel-words.luggage-storage,saa-MAAN ghar,सामान घर
+hotel-basics.how-much-per-night,ek raat kaa KIT-naa,एक रात का कितना?
+hotel-requests.what-time-is-check-out,chek-OWT KIT-neh BA-jeh hai,चेक-आउट कितने बजे है?
+payment-receipt.please-write-the-number,NUM-bar likh DEE-ji-yeh,नंबर लिख दीजिए
+shopping.where-do-i-pay,PAI-seh ka-HAAN DEH-neh hain,पैसे कहाँ देने हैं?
+communication.i-cannot-make-out-what-you-are-saying,AAP-kee baat sa-MAJH na-HEEN aa ra-HEE,आपकी बात समझ नहीं आ रही
+quick-responses.cannot-not-possible,na-HEEN hoh sak-TAA,नहीं हो सकता
+taxi.i-will-get-off-here,mu-JHEH ya-HAAN u-TAR-naa hai,मुझे यहाँ उतरना है
+pickup-meeting.please-call-a-taxi,TAIK-see bu-LAA DEE-ji-yeh,टैक्सी बुला दीजिए
+pronouns-verbs.want-thing,mu-JHEH (thing) CHAA-hi-yeh,मुझे … चाहिए
+emergency-medical.i-am-having-a-severe-allergic-reaction,mu-JHEH gam-BHEER e-LAR-jee hoh ra-HEE hai (e-naa-fi-LAIK-sis),एनाफ़िलैक्सिस — मुझे गंभीर एलर्जी हो रही है
+lost-rescue.my-child-is-missing,MEH-raa BACH-chaa gum hoh ga-YAA hai,मेरा बच्चा गुम हो गया है
+food-ordering.water-please,PAA-nee DEE-ji-yeh,पानी दीजिए
+hiking-parks.is-this-trail-suitable-for-beginners,kyaa na-YEH LOH-gon keh li-YEH yah theek hai,क्या नए लोगों के लिए यह ठीक है?
+hotel-basics.is-breakfast-included,kyaa NAASH-taa SHAA-mil hai,क्या नाश्ता शामिल है?
+hotel-requests.can-i-check-in-early,kyaa JAL-dee chek-IN hoh sak-TAA hai,क्या जल्दी चेक-इन हो सकता है?
+attractions-tickets.could-you-take-a-photo-for-us,za-RAA ha-MAA-ree FOH-toh leh DEE-ji-yeh,ज़रा हमारी फ़ोटो ले दीजिए
+payment-receipt.how-much-in-total,kul KIT-naa hu-AA,कुल कितना हुआ?
+shopping.i-will-take-this,mu-JHEH ya-HEE LEH-naa hai,मुझे यही लेना है
+communication.i-do-not-understand,mu-JHEH sa-MAJH na-HEEN AA-yaa,मुझे समझ नहीं आया
+quick-responses.okay-fine,BIL-kul,बिल्कुल
+phone-translation.please-look-at-the-screen,skreen DEH-khi-yeh,स्क्रीन देखिए
+pronouns-verbs.need-thing,mu-JHEH (thing) kee za-ROO-rat hai,मुझे … की ज़रूरत है
+question-words.how-much-what-price,KIT-neh kaa hai,कितने का है
+emergency-medical.i-cannot-breathe,mu-JHEH saans na-HEEN aa ra-HEE hai,मुझे साँस नहीं आ रही है
+lost-rescue.i-do-not-know-where-i-am,mu-JHEH na-HEEN pa-TAA main ka-HAAN hoon,मुझे नहीं पता मैं कहाँ हूँ
+hotel-basics.may-i-see-the-room,kyaa KAM-raa dekh loon,क्या कमरा देख लूँ?
+hotel-requests.another-night,kyaa ek raat aur mil sak-TEE hai,क्या एक रात और मिल सकती है?
+payment-receipt.can-we-pay-separately,kyaa a-LAG-a-LAG bil hoh sak-TAA hai,क्या अलग-अलग बिल हो सकता है?
+shopping.what-is-this,yah kyaa hai,यह क्या है?
+communication.i-cannot-read-it,mu-JHEH yah PARH-naa na-HEEN AA-taa,मुझे यह पढ़ना नहीं आता
+quick-responses.no-good-not-allowed-will-not-work,na-HEEN HOH-gaa,नहीं होगा
+pronouns-verbs.looking-for-thing,mu-JHEH (thing) kee ta-LAASH hai,मुझे … की तलाश है
+emergency-medical.i-am-bleeding-badly,ba-HUT khoon bah ra-HAA hai,बहुत खून बह रहा है
+lost-rescue.my-friend-is-hurt,MEH-reh dost koh chot la-GEE hai,मेरे दोस्त को चोट लगी है
+dietary-needs.does-it-contain-fish-stock,kyaa is-MEIN mach-LEE kaa SHOR-baa hai,क्या इसमें मछली का शोरबा है?
+dietary-needs.does-it-contain-pork-stock,kyaa is-MEIN SOO-ar kaa SHOR-baa hai,क्या इसमें सूअर का शोरबा है?
+hotel-basics.for-nights,{} raat keh li-YEH,{} रात के लिए
+hotel-requests.is-there-a-safe,kyaa LO-kar hai,क्या लॉकर है?
+payment-receipt.is-tax-included,kyaa taiks SHAA-mil hai,क्या टैक्स शामिल है?
+shopping.where-can-i-buy,{} ka-HAAN mi-LEH-gaa,{} कहाँ मिलेगा?
+emergency-medical.i-have-chest-pain,MEH-reh SEE-neh mein dard hai,मेरे सीने में दर्द है
+lost-rescue.i-lost-my-wallet,MEH-raa ba-TU-aa khoh ga-YAA hai,मेरा बटुआ खो गया है
+hotel-basics.two-beds,doh a-LAG bed CHAA-hi-yeh,दो अलग बेड चाहिए
+hotel-requests.another-blanket,ek aur KAM-bal DEE-ji-yeh,एक और कंबल दीजिए
+payment-receipt.my-card-was-declined,MEH-raa kaard na-HEEN cha-LAA,मेरा कार्ड नहीं चला
+shopping.do-you-have-this-in-stock,kyaa yah stok mein hai,क्या यह स्टॉक में है?
+time-words.night,raat,रात
+emergency-medical.this-person-is-unconscious,yah VYAK-ti beh-HOSH hai,यह व्यक्ति बेहोश है
+lost-rescue.i-lost-my-bag,MEH-raa baig khoh ga-YAA hai,मेरा बैग खो गया है
+food-ordering.can-a-vegetarian-eat-this,kyaa shaa-kaa-HAA-ree yah khaa sak-TAA hai,क्या शाकाहारी यह खा सकता है?
+hotel-basics.is-there-air-conditioning,kyaa ay-SEE hai,क्या एसी है?
+hotel-requests.wake-up-call,mu-JHEH {} BA-jeh ja-GAA DEE-ji-yeh,मुझे {} बजे जगा दीजिए
+payment-receipt.the-bill-is-wrong,LAG-taa hai bil mein GAL-tee hai,लगता है बिल में गलती है
+shopping.two-of-these,yeh doh DEE-ji-yeh,ये दो दीजिए
+social-basics.okay-fine-i-am-okay,theek hai,ठीक है
+emergency-medical.where-is-the-nearest-hospital,SAB-seh naz-DEE-kee as-pa-TAAL ka-HAAN hai,सबसे नज़दीकी अस्पताल कहाँ है?
+lost-rescue.where-is-lost-and-found,KHOH-yaa-PAA-yaa KEN-dra ka-HAAN hai,खोया-पाया केंद्र कहाँ है?
+payment-receipt.i-already-paid,MAIN-neh PAI-seh deh di-YEH hain,मैंने पैसे दे दिए हैं
+shopping.what-is-it-made-of,yah kis cheez kaa ba-NAA hai,यह किस चीज़ का बना है?
+emergency-medical.what-is-the-emergency-number,i-mar-JEN-see NUM-bar kyaa hai,इमरजेंसी नंबर क्या है?
+lost-rescue.i-cannot-find-my-hotel,mu-JHEH AP-naa HOH-tal na-HEEN mil ra-HAA hai,मुझे अपना होटल नहीं मिल रहा है
+emergency-medical.is-there-a-doctor-who-speaks-english,kyaa KOH-ee DOK-tar an-GREH-zee BOL-taa hai,क्या कोई डॉक्टर {source} बोलता है?
+lost-rescue.i-left-it-on-the-train,yah tren mein chhoot ga-YAA,यह ट्रेन में छूट गया
+dietary-needs.i-have-a-severe-allergy-to,mu-JHEH {} seh gam-BHEER e-LAR-jee hai,मुझे {} से गंभीर एलर्जी है
+emergency-medical.i-think-a-bone-is-broken,LAG-taa hai HAD-dee toot ga-EE hai,लगता है हड्डी टूट गई है
+lost-rescue.i-cannot-get-down,main NEE-cheh na-HEEN u-TAR sak-TAA,मैं नीचे नहीं उतर सकता
+emergency-medical.please-call-my-emergency-contact,MEH-reh i-mar-JEN-see NUM-bar par fone KEE-ji-yeh,मेरे इमरजेंसी नंबर पर फ़ोन कीजिए
+emergency-medical.i-have-travel-insurance,MEH-raa YAA-traa BEE-maa hai,मेरा यात्रा बीमा है
+dietary-needs.no-pork,SOO-ar kaa maans na-HEEN,सूअर का मांस नहीं
+dietary-needs.is-this-halal,kyaa yah ha-LAAL hai,क्या यह हलाल है?
+pharmacy-symptoms.i-think-i-have-malaria,LAG-taa hai mu-JHEH ma-LEH-ri-yaa hai,लगता है मुझे मलेरिया है
+pharmacy-symptoms.i-need-a-malaria-test,mu-JHEH ma-LEH-ri-yaa kee JAANCH ka-RAA-nee hai,मुझे मलेरिया की जाँच करानी है
