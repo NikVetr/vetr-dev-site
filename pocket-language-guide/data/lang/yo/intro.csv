@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 introductions.my-name-is,Orúkọ mi ni {},,oru˥kɔ mi ni {},,2,yo-agent-v1;ipa=yo-g2p
 introductions.nice-to-meet-you,Inú mi dùn láti pàdé ọ,,inu˥ mi dũ˩ la˥ti kpa˩de˥ ɔ,,2,yo-agent-v1;ipa=yo-g2p
-introductions.what-is-your-name,Kí ni orúkọ rẹ?,,ki˥ ni oru˥kɔ rɛ,,2,yo-agent-v1;ipa=yo-g2p
+introductions.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,"what is your name? -- yín, the honorific your, as board-answers.what-is-your-name asks it",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=BYO Luke 10:20 (a kọ̀wé orúkọ yín ní ọ̀run) for the 2pl possessive yín, and Mark 5:9 (Kí ni orúkọ rẹ?) for the singular;in-pack-frame=board-answers.what-is-your-name (Kí ni orúkọ yín?);was=Kí ni orúkọ rẹ? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-possessive-yin;row-corrections-v12;ipa=yo-g2p"
 introductions.we-are-traveling-together,A ń rin ìrìn-àjò papọ̀,,a n̩˥ rĩ i˩rĩ˩a˩dʒo˩ kpakpɔ˩,,2,yo-agent-v1;ipa=yo-g2p
 introductions.this-is-my-friend,Èyí ni ọ̀rẹ́ mi,,e˩ji˥ ni ɔ˩rɛ˥ mi,,2,yo-agent-v1;ipa=yo-g2p
 introductions.i-am-from,Mo wá láti {},,mo wa˥ la˥ti {},,2,yo-agent-v1;ipa=yo-g2p

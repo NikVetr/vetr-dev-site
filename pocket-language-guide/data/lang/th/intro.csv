@@ -3,7 +3,7 @@ introductions.my-name-is,ผมชื่อ {},,phom chue {},pʰom˩˩˦ tɕʰɯ
 introductions.nice-to-meet-you,ยินดีที่ได้รู้จัก,,yindi thi dai ruchak,jin˧diː˧ tʰiː˥˩ daːj˥˩ ruː˦˥tɕak˨˩,,2,th-agent-v1;ipa=thaig2p
 introductions.what-is-your-name,คุณชื่ออะไร,,khun chue arai,kʰun˧na˦˥ tɕʰɯː˥˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
 introductions.we-are-traveling-together,เราเที่ยวด้วยกัน,,rao thiao duai kan,raw˧ tʰia̯w˥˩ dua̯j˥˩kan˧,,2,th-agent-v1;ipa=thaig2p
-introductions.this-is-my-friend,นี่เพื่อนฉัน,,ni phuean chan,niː˥˩ pʰɯa̯n˥˩ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+introductions.this-is-my-friend,นี่เพื่อนผม,,ni phuean phom,niː˥˩ pʰɯa̯n˥˩ pʰom˩˩˦,"this is my friend -- phom, the polite first person a man uses; a woman's dichan is the variant row. chan, the old row, is said to an equal or a junior",2,"th-agent-v1;fix=RID-2554 ผม ๒ (คำใช้แทนตัวผู้พูด เพศชาย ใช้พูดโดยสุภาพ) and ฉัน ๑ (คำใช้แทนตัวผู้พูด พูดกับผู้ที่เสมอกันหรือผู้ใหญ่พูดกับผู้น้อย), read on dictionary.orst.go.th;fix=en.wikipedia Thai language rev 1379587877 (ผม I/me (masculine; common) -- ดิฉัน I/me (feminine; formal) -- ฉัน I/me (mainly used by women; common));in-pack-neighbour=introductions.my-name-is (ผมชื่อ {}, feminine variant ดิฉันชื่อ {});was=นี่เพื่อนฉัน (ni phuean chan: chan, to an equal or a junior, mainly a woman's);rule=polite-particle-or-pronoun-selected-by-speaker-sex;row-corrections-v12;ipa=thaig2p"
 introductions.i-am-from,มาจาก {},,ma chak {},maː˧tɕaːk˨˩ {},,2,th-agent-v1;ipa=thaig2p
 introductions.where-are-you-from,คุณมาจากไหน,,khun ma chak nai,kʰun˧na˦˥ maː˧tɕaːk˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 introductions.how-are-you,สบายดีไหม,,sabai di mai,sa˧baːj˧diː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

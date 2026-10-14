@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Je Wi-Fi zdarma?,,je vˈifi zdˈarma,,2,cs-agent-v1;i
 hotel-basics.how-much-per-night,Kolik to stojí za noc?,,kˈolik tˈo stˈojiː zˈanots,,2,cs-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Je snídaně v ceně?,,je sɲˈiːdaɲe v tsˈeɲe,,2,cs-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Mohu se podívat na pokoj?,,mˈohu se pˈoɟiːvat nˈapokoj,,2,cs-agent-v1;ipa=espeak
-hotel-basics.for-nights,Na {} nocí,,na {} nˈotsiː,,2,cs-agent-v1;ipa=espeak
+hotel-basics.for-nights,Počet nocí: {},,pˈotʃet nˈotsiː {},"'number of nights: {}' -- a label, so the number agrees with nothing; Na {} nocí took the genitive plural, right only from five nights on (na jednu noc, na dvě noci)",2,cs-agent-v1;fix=IJP (prirucka.ujc.cas.cz) noc (4. pád mn. noci -- 2. pád mn. nocí) and počet (SSČ: číselně zjistitelné množství ... počet obyvatel -- bodů);fix=cs.wikipedia usage (Pět nocí u Freddyho -- Dva dny a dvě noci -- sex na jednu noc);was=Na {} nocí (the genitive plural -- wrong for one to four);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergie na lék: {} -- and pl's Liczba nocy: {});row-corrections-v12;ipa=espeak
 hotel-basics.two-beds,"Dvě postele, prosím",,"dvjˈe pˈostele, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Je tu klimatizace?,,je tˈu klˈimatˌizatse,,2,cs-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Mohu se odhlásit později?,,mˈohu se ˈothlaːsit pˈozɟeji,,2,cs-agent-v1;ipa=espeak

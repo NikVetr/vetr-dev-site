@@ -10,7 +10,7 @@ directions.which-way,Ọ̀nà wo?,,ɔ˩na˩ wo,,2,yo-agent-v1;ipa=yo-g2p
 directions.can-i-walk-there,Ṣé mo lè rìn dé ibẹ̀?,,ʃe˥ mo le˩ rĩ˩ de˥ ibɛ˩,,2,yo-agent-v1;ipa=yo-g2p
 directions.how-far-is-it,Bí ó ti jìnnà tó?,,bi˥ o˥ ti dʒĩ˩na˩ to˥,,2,yo-agent-v1;ipa=yo-g2p
 directions.which-exit,Ọ̀nà jáde wo?,,ɔ˩na˩ dʒa˥de wo,,2,yo-agent-v1;ipa=yo-g2p
-directions.can-you-show-me-the-way,Ṣé o lè fi ọ̀nà náà hàn mí?,,ʃe˥ o le˩ fi ɔ˩na˩ na˥a˩ hã˩ mi˥,,2,yo-agent-v1;ipa=yo-g2p
+directions.can-you-show-me-the-way,Ṣé ẹ lè fi ọ̀nà náà hàn mí?,,ʃe˥ ɛ le˩ fi ɔ˩na˩ na˥a˩ hã˩ mi˥,"can you show me the way? -- ẹ, the honorific you, as the pack's other requests to a stranger",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=en.wikipedia Yoruba language rev 1379362191 (NWY has ẹ wá, you (pl.) came ... the innovative emergence of a plural of respect);in-pack-frame=hitchhiking.can-you-give-me-a-ride (Ṣé ẹ lè gbé mi lọ?);was=Ṣé o lè fi ọ̀nà náà hàn mí? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-subject-e;row-corrections-v12;ipa=yo-g2p"
 directions.north,àríwá,,a˩ri˥wa˥,,2,yo-agent-v1;ipa=yo-g2p
 directions.south,gúúsù,,ɡu˥u˥su˩,,2,yo-agent-v1;ipa=yo-g2p
 directions.east,ìlà oòrùn,,i˩la˩ oo˩rũ˩,,2,yo-agent-v1;ipa=yo-g2p
@@ -29,7 +29,7 @@ taxi.please-take-me-here,"Ẹ jọ̀wọ́, gbé mi lọ síbí",,"ɛ dʒɔ˩wɔ
 taxi.please-send-me-the-address,"Ẹ jọ̀wọ́, rán àdírẹ́sì náà sí mi",,"ɛ dʒɔ˩wɔ˥, rã˥ a˩di˥rɛ˥si˩ na˥a˩ si˥ mi",,2,yo-agent-v1;ipa=yo-g2p
 taxi.we-need-the-east-gate-not-the-south-gate,"A nílò ẹnu-ọ̀nà ìhà ìlà-oòrùn, kì í ṣe ìhà gúúsù",,"a ni˥lo˩ ɛnuɔ˩na˩ i˩ha˩ i˩la˩oo˩rũ˩, ki˩ i˥ ʃe i˩ha˩ ɡu˥u˥su˩",,2,yo-agent-v1;ipa=yo-g2p
 taxi.please-stop-here,"Ẹ jọ̀wọ́, dúró síbí",,"ɛ dʒɔ˩wɔ˥, du˥ro˥ si˥bi˥",,2,yo-agent-v1;ipa=yo-g2p
-taxi.can-you-wait-for-me-here,Ṣé o lè dúró de mi níbí?,,ʃe˥ o le˩ du˥ro˥ de mi ni˥bi˥,,2,yo-agent-v1;ipa=yo-g2p
+taxi.can-you-wait-for-me-here,Ṣé ẹ lè dúró de mi níbí?,,ʃe˥ ɛ le˩ du˥ro˥ de mi ni˥bi˥,"can you wait for me here? -- ẹ, the honorific you the pack's taxi rows say to a driver",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=en.wikipedia Yoruba language rev 1379362191 (NWY has ẹ wá, you (pl.) came ... the innovative emergence of a plural of respect);in-pack-frame=hitchhiking.can-you-give-me-a-ride (Ṣé ẹ lè gbé mi lọ?);was=Ṣé o lè dúró de mi níbí? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-subject-e;row-corrections-v12;ipa=yo-g2p"
 taxi.we-need-to-catch-the-high-speed-train,A nílò láti bá ọkọ̀ ojú irin gíga yára mú,,a ni˥lo˩ la˥ti ba˥ ɔkɔ˩ odʒu˥ irĩ ɡi˥ɡa ja˥ra mu˥,,2,yo-agent-v1;ipa=yo-g2p
 taxi.please-use-the-meter,"Ẹ jọ̀wọ́, lo mítà",,"ɛ dʒɔ˩wɔ˥, lo mi˥ta˩",,2,yo-agent-v1;ipa=yo-g2p
 taxi.i-will-get-off-here,Màá sọ̀kalẹ̀ níbí,,ma˩a˥ sɔ˩kalɛ˩ ni˥bi˥,,2,yo-agent-v1;ipa=yo-g2p

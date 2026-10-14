@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Wi-Fi безкоштовний?,,Wi-Fi bezkoshtovnyi?
 hotel-basics.how-much-per-night,Скільки за ніч?,,Skilky za nich?,skˈiːʎkɪ zˈa ɲˈiːtʃ,,2,uk-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Сніданок включено?,,Snidanok vkliucheno?,sɲiːdanˈok fkʎutʃˈɛno,,2,uk-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Можна подивитися номер?,,Mozhna podyvytysia nomer?,mˈoʒna podɪʋˈɪtɪsja nˈomɛr,,2,uk-agent-v1;ipa=espeak
-hotel-basics.for-nights,На {} ночей.,,Na {} nochei.,nˈa {} nˈotʃɛj,,2,uk-agent-v1;ipa=espeak
+hotel-basics.for-nights,Кількість ночей: {},,Kilkist nochei: {},kˈiːʎkiːst nˈotʃɛj {},"'number of nights: {}' -- a label, so the number agrees with nothing; На {} ночей. took the genitive plural, right only from five nights on (на одну ніч, на дві ночі)",2,"uk-agent-v1;fix=uk.wikipedia Числівник rev 48957764 (з родовим відмінком стали вживатися іменники після числівників два -- а потім і три -- чотири (два слова -- три жінки -- чотири штуки) ... сучасне п'ять слуг);fix=СУМ-11 КІЛЬКІСТЬ 1 (Число -- величина ... наявну кількість мін), read on slovnyk.ua (sum.in.ua refused the connection);was=На {} ночей. (Na {} nochei.: the genitive plural -- wrong for one to four);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Проблема: {} and Моя адреса: {} -- and ru's Количество ночей: {});row-corrections-v12;ipa=espeak"
 hotel-basics.two-beds,"Два ліжка, будь ласка.",,"Dva lizhka, bud laska.","dʋˈa ʎˈiːʃka, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Є кондиціонер?,,Ye kondytsioner?,jˈɛ kondɪtsˈiːonɛr,,2,uk-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Можна виїхати пізніше?,,Mozhna vyikhaty piznishe?,mˈoʒna ʋɪjˈiːxatɪ piːzɲˈiːʃɛ,,2,uk-agent-v1;ipa=espeak

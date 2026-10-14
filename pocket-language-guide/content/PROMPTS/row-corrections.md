@@ -560,3 +560,33 @@ and `tmp/out/crosscheck/<code>.csv` (verdict `disagree`, and the variants it not
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A twelfth pass: what the register passes and the cross-check saw beside their items
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-12.md`. The leads are in
+`tmp/notes/agents/register-5.md`, `row-corrections-11.md` ("Seen, not touched") and
+`strings-mosaic.md`.
+
+- **Yoruba requests already familiar.** Five base rows address the stranger with the
+  familiar *o / rẹ* where every other Yoruba request is polite *ẹ / yín* (can-you-help-me,
+  do-you-speak-english, can-you-show-me-the-way, can-you-wait-for-me-here,
+  what-is-your-name). Make each base row polite, and write its `register=familiar` row in
+  `data/lang/yo/variants.csv` as the register pass did for the others (the old wording, if
+  right, is the familiar one). Also check *Ẹ dárí jì mi*'s tone on the object pronoun.
+- **Thai first person.** Six more rows say ฉัน with no variant, where a man would not:
+  give them the speaker split the pack uses (ผม base or a neutral wording, ดิฉัน / ฉัน as
+  the feminine variant), as `introductions.my-name-is` has. Combined rows where a
+  register row exists.
+- **"For N nights" in Ukrainian and Czech** (*На {} ночей.*, *Na {} nocí*) cannot agree with
+  every number, as Russian could not; use the label form the eleventh pass gave Russian.
+  German and English are wrong for one night only: check and fix the same way if so.
+- **Georgian `directions.can-you-show-me-the-way`**: the base *მიმასწავლებთ* uses a stem the
+  Explanatory Dictionary does not give; check it against the dictionary's paradigm (the
+  register pass wrote the familiar from it).
+- **Lao romanisation**: the pack's reader (`tmp/lang/lo/g2p.py`) reads ແ…ວ as *tʰwɛː* where it
+  is *tʰɛːw*, and `social-basics.politeness-particles` carries the wrong romanisation; fix
+  the row, and say whether the reader itself needs the fix (it is a tool, not shipped).
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.

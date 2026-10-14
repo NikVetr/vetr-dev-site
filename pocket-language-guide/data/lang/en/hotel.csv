@@ -37,7 +37,7 @@ laundry.coin-operated,coin-operated,,kˈɔɪnɑːpɚɹˌeɪɾɪd,,2,expansion-v1
 hotel-basics.how-much-per-night,How much per night?,,hˌaʊ mˈʌtʃ pɜː nˈaɪt,,2,expansion-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Is breakfast included?,,ɪz bɹˈɛkfəst ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,May I see the room?,,mˈeɪ aɪ sˈiː ðə ɹˈuːm,,2,expansion-v1;ipa=espeak
-hotel-basics.for-nights,For {} nights,,fɔːɹ {} nˈaɪts,,2,expansion-v1;ipa=espeak
+hotel-basics.for-nights,Number of nights: {},,nˈʌmbɚɹ ʌv nˈaɪts {},,2,expansion-v1;fix=OALD number 1 (Use a pedometer to count the number of steps you take);was=For {} nights (the plural -- wrong for one);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Medicine allergy: {});row-corrections-v12;ipa=espeak
 hotel-basics.two-beds,"Two beds, please",,"tˈuː bˈɛdz, plˈiːz",,2,expansion-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Is there air conditioning?,,ɪz ðɛɹ ˈɛɹ kəndˈɪʃənɪŋ,,2,expansion-v1;ipa=espeak
 hotel-requests.what-time-is-check-out,What time is check-out?,,wˌʌt tˈaɪm ɪz tʃˈɛkaʊt,,2,expansion-v1;ipa=espeak

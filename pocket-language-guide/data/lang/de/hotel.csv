@@ -27,7 +27,7 @@ hotel-basics.is-wi-fi-free,Ist das WLAN kostenlos?,,ɪst das vˈeːlɑːn kˈɔs
 hotel-basics.how-much-per-night,Wie viel pro Nacht?,,viː fˈiːl pɾoː nˈaxt,,2,de-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Ist Frühstück inklusive?,,ɪst frˈyːʃtyk ɪnkluːzˈiːvə,,2,de-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Darf ich das Zimmer sehen?,,dˈaɾf ɪç das tsˈɪmɜ zˈeːən,,2,de-agent-v1;ipa=espeak
-hotel-basics.for-nights,Für {} Nächte.,,fˈyːɾ {} nˈɛçtə,,2,de-agent-v1;ipa=espeak
+hotel-basics.for-nights,Anzahl der Nächte: {},,ˈantsˌɑːl dɛɾ nˈɛçtə {},"'number of nights: {}' -- a label, so the number agrees with nothing; Für {} Nächte. was wrong for one night (für eine Nacht)",2,de-agent-v1;fix=Duden Anzahl 2 ([Gesamt]zahl: die Anzahl der Teilnehmer war nicht ausreichend) and Nacht (Plural: die Nächte -- ein Quartier für eine Nacht);was=Für {} Nächte. (the plural -- wrong for one);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Medikamentenallergie: {});row-corrections-v12;ipa=espeak
 hotel-basics.two-beds,"Zwei Betten, bitte.","Zwei getrennte Betten, bitte.","tsvˈaɪ bˈɛtən, bˈɪtə",,2,de-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Gibt es eine Klimaanlage?,,ɡˈiːpt ɛs ˌaɪnə klˈiːmɑːnlˌɑːɡə,,2,de-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Kann ich später auschecken?,,kˌan ɪç ʃpˈɛːtɜ ˈaʊsçˌɛkən,,2,de-agent-v1;ipa=espeak

@@ -227,7 +227,6 @@ medical-conditions.i-am-allergic-to-penicillin,pae yah pay-ni-sin-lin,แพ้�
 pharmacy-symptoms.where-is-an-all-night-pharmacy,rahn kai yah pert duek yoo nai,ร้านขายยาเปิดดึก อยู่ไหน
 body-parts.tooth,fan,ฟัน
 lost-rescue.please-look-at-my-location-pin,doo mut tam-naeng nee,ดูหมุดตำแหน่งนี้
-police-consulate.someone-is-following-me,mee kon tahm chan,มีคนตามฉัน
 dietary-needs.no-peanuts,MAI sai tua li-song,ไม่ใส่ถั่วลิสง
 food-ordering.do-you-have-drinking-water,mee nahm plow mai,มีน้ำเปล่าไหม
 trail-words.cableway,gra-chow fai-fah,กระเช้าไฟฟ้า
@@ -240,7 +239,6 @@ trail-landmarks.end,jut sin-sut,จุดสิ้นสุด
 hotel-basics.i-would-like-a-non-smoking-room,kaw HAWNG plawt bu-ree,ขอห้องปลอดบุหรี่
 room-problems.the-room-is-too-noisy,HAWNG siang dang MAHK,ห้องเสียงดังมาก
 laundry.can-it-be-ready-today,set wan-nee DAI mai,เสร็จวันนี้ได้ไหม
-introductions.this-is-my-friend,NEE PUEAN chan,นี่เพื่อนฉัน
 numbers-money.s-n,sahm,สาม
 atm-cash.the-card-was-declined,bat chai MAI DAI,บัตรใช้ไม่ได้
 attractions-tickets.may-i-take-photos,tai roop DAI mai,ถ่ายรูปได้ไหม
@@ -529,7 +527,6 @@ accessibility.hard-of-hearing,hoo MAI KOI DAI-yin,หูไม่ค่อยไ
 toilets.out-of-order,cham-rut,ชำรุด
 pronouns-verbs.come,mah,มา
 question-words.a-little,nit noi,นิดหน่อย
-medical-conditions.this-card-lists-my-conditions,bat nee bawk ROHK kawng chan,บัตรนี้บอกโรคของฉัน
 pharmacy-symptoms.i-have-a-stomach-ache,puat tawng,ปวดท้อง
 body-parts.ankle,KAW-tow,ข้อเท้า
 police-consulate.i-am-calling-the-police,ja toh RIAK tam-ruat,จะโทรเรียกตำรวจ
@@ -546,7 +543,6 @@ accessibility.speak-louder,CHUAI POOT dang-dang noi,ช่วยพูดดั�
 toilets.mens-toilet,HAWNG nahm chaai,ห้องน้ำชาย
 pronouns-verbs.would-like,yahk DAI,อยากได้
 question-words.some,BAHNG,บ้าง
-medical-conditions.this-is-my-medicine,NEE yah kawng chan,นี่ยาของฉัน
 pharmacy-symptoms.i-have-a-cough,ai,ไอ
 body-parts.skin,piu-nang,ผิวหนัง
 weather.flood,nahm TUAM,น้ำท่วม
@@ -556,7 +552,7 @@ sim-data.can-i-top-up-this-sim,term ngern sim nee DAI mai,เติมเงิ�
 directions.east,tit ta-wan awk,ทิศตะวันออก
 border-customs.i-have-a-connecting-flight,mee TIAO-bin taw,มีเที่ยวบินต่อ
 utility-templates.there-is-a-problem-with,{} mee pan-hah,{}มีปัญหา
-accessibility.visually-impaired,chan pi-gahn tahng sai-taa,ฉันพิการทางสายตา
+accessibility.visually-impaired,pi-gahn tahng sai-taa,พิการทางสายตา
 toilets.womens-toilet,HAWNG nahm ying,ห้องน้ำหญิง
 pronouns-verbs.want,yahk,อยาก
 question-words.very,MAHK,มาก
@@ -575,7 +571,6 @@ pronouns-verbs.look-for,hah,หา
 question-words.too,gern pai,เกินไป
 medical-conditions.inject-it-into-my-outer-thigh,cheet TEE TON-kah DAHN nawk,ฉีดที่ต้นขาด้านนอก
 pharmacy-symptoms.anti-diarrhea-medicine,yah GAE tawng sia,ยาแก้ท้องเสีย
-police-consulate.someone-attacked-me,mee kon tam-rai chan,มีคนทำร้ายฉัน
 atm-cash.banknote,baeng,แบงก์
 sim-data.is-there-coverage-in,TEE {} mee san-yahn mai,ที่{}มีสัญญาณไหม
 border-customs.visa,wee-SAH,วีซ่า

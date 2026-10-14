@@ -18,7 +18,7 @@ accessibility.door-width,ประตูกว้างเท่าไร,,pratu
 accessibility.wheelchair-width,รถเข็นกว้าง {} ซม.,,rot khen kwang {} sentimet,rot˦˥kʰen˩˩˦ kwaːŋ˥˩ {} som˧,,2,th-agent-v1;ipa=thaig2p
 accessibility.hard-of-hearing,หูไม่ค่อยได้ยิน,,hu mai khoi dai yin,huː˩˩˦ maj˥˩kʰɔj˥˩ daːj˥˩jin˧,,2,th-agent-v1;ipa=thaig2p
 accessibility.speak-louder,ช่วยพูดดังๆหน่อย,,chuai phut dang dang noi,tɕʰua̯j˥˩ pʰuːt˥˩ daŋ˧ ŋɔː˧ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
-accessibility.visually-impaired,ฉันพิการทางสายตา,,chan phikan thang saita,tɕʰan˩˩˦ pʰiʔ˦˥kaːn˧ tʰaːŋ˧ saːj˩˩˦taː˧,,2,th-agent-v1;ipa=thaig2p
+accessibility.visually-impaired,พิการทางสายตา,,phikan thang saita,pʰiʔ˦˥kaːn˧ tʰaːŋ˧ saːj˩˩˦taː˧,"(I am) visually impaired -- the pronoun left out, as Thai leaves it, so the row is right for any speaker; chan, the old row's, is said to an equal or a junior",2,"th-agent-v1;fix=en.wikipedia Thai language rev 1379587877 (Subject pronouns are often omitted);fix=RID-2554 ผม ๒ (คำใช้แทนตัวผู้พูด เพศชาย ใช้พูดโดยสุภาพ) and ฉัน ๑ (คำใช้แทนตัวผู้พูด พูดกับผู้ที่เสมอกันหรือผู้ใหญ่พูดกับผู้น้อย), read on dictionary.orst.go.th;in-pack-neighbour=accessibility.hard-of-hearing (หูไม่ค่อยได้ยิน) and building-help.i-am-lost (หลงทาง);was=ฉันพิการทางสายตา (chan phikan thang saita: chan, to an equal or a junior);rule=subject-pronoun-dropped;row-corrections-v12;ipa=thaig2p"
 accessibility.take-your-arm,ขอจับแขนได้ไหม,,kho chap khaen dai mai,kʰɔː˩˩˦ tɕap˨˩ kʰɛːn˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 accessibility.guide-dog,นี่สุนัขนำทาง,,ni sunak nam thang,niː˥˩ su˨˩nak˦˥ nam˧tʰaːŋ˧,,2,th-agent-v1;ipa=thaig2p
 in-a-building.is-this-the-correct-entrance,เข้าทางนี้ใช่ไหม,,khao thang ni chai mai,kʰaw˥˩tʰaːŋ˧ niː˦˥ tɕʰaj˥˩maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

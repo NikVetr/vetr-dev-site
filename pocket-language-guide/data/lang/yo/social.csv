@@ -14,14 +14,14 @@ social-basics.good-night,Ó dàárọ̀,,o˥ da˩a˥rɔ˩,,2,yo-agent-v1;ipa=yo-
 social-basics.okay-fine-i-am-okay,Dáadáa ni,,da˥ada˥a ni,,2,yo-agent-v1;ipa=yo-g2p
 communication.i-do-not-speak-this-language,Mi ò lè sọ {target},,mi o˩ le˩ sɔ {target},,2,yo-agent-v1;ipa=yo-g2p
 communication.i-speak-only-a-little-of-this,Mo lè sọ {target} díẹ̀ nìkan,,mo le˩ sɔ {target} di˥ɛ˩ ni˩kã,,2,yo-agent-v1;ipa=yo-g2p
-communication.do-you-speak-english,Ṣé o lè sọ {source}?,,ʃe˥ o le˩ sɔ {source},,2,yo-agent-v1;ipa=yo-g2p
+communication.do-you-speak-english,Ṣé ẹ lè sọ {source}?,,ʃe˥ ɛ le˩ sɔ {source},"can you speak {source}? -- ẹ, the honorific you, as the pack's other requests to a stranger",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=en.wikipedia Yoruba language rev 1379362191 (NWY has ẹ wá, you (pl.) came ... the innovative emergence of a plural of respect);in-pack-frame=hitchhiking.can-you-give-me-a-ride (Ṣé ẹ lè gbé mi lọ?);was=Ṣé o lè sọ {source}? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-subject-e;row-corrections-v12;ipa=yo-g2p"
 communication.please-speak-more-slowly,"Ẹ jọ̀wọ́, ẹ sọ̀rọ̀ jẹ́ẹ́jẹ́",,"ɛ dʒɔ˩wɔ˥, ɛ sɔ˩rɔ˩ dʒɛ˥ɛ˥dʒɛ˥",,2,yo-agent-v1;ipa=yo-g2p
 communication.i-do-not-understand-spoken,Mi ò gbọ́ ohun tí o sọ,,mi o˩ ɡbɔ˥ ohũ ti˥ o sɔ,,2,yo-agent-v1;ipa=yo-g2p
 communication.i-cannot-read-understand,"Mi ò lè kà á, kò yé mi",,"mi o˩ le˩ ka˩ a˥, ko˩ je˥ mi",I cannot read it; it is not clear to me,2,yo-agent-v1;fix=en.wiktionary ye 'Kò yé mi';fix=Yorùbá Yé Mi (COERLL) p. 21 'ó yé mi' and pp. 76 218 third-person negative 'kò';row-corrections-v1;ipa=yo-g2p
 communication.please-say-it-again,"Ẹ jọ̀wọ́, ẹ tún un sọ",,"ɛ dʒɔ˩wɔ˥, ɛ tũ˥ ũ sɔ",,2,yo-agent-v1;ipa=yo-g2p
 communication.please-write-it-down,"Ẹ jọ̀wọ́, ẹ kọ ọ́ sílẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ kɔ ɔ˥ si˥lɛ˩",,2,yo-agent-v1;ipa=yo-g2p
 communication.please-wait-a-moment,"Ẹ jọ̀wọ́, ẹ dúró díẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ du˥ro˥ di˥ɛ˩",,2,yo-agent-v1;ipa=yo-g2p
-communication.can-you-help-me,Ṣé o lè ràn mí lọ́wọ́?,,ʃe˥ o le˩ rã˩ mi˥ lɔ˥wɔ˥,,2,yo-agent-v1;ipa=yo-g2p
+communication.can-you-help-me,Ṣé ẹ lè ràn mí lọ́wọ́?,,ʃe˥ ɛ le˩ rã˩ mi˥ lɔ˥wɔ˥,"can you help me? -- ẹ, the honorific you, as the pack's other requests to a stranger",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=en.wikipedia Yoruba language rev 1379362191 (NWY has ẹ wá, you (pl.) came ... the innovative emergence of a plural of respect);in-pack-frame=hitchhiking.can-you-give-me-a-ride (Ṣé ẹ lè gbé mi lọ?);was=Ṣé o lè ràn mí lọ́wọ́? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-subject-e;row-corrections-v12;ipa=yo-g2p"
 communication.please-show-me-the-text,"Ẹ jọ̀wọ́, fi ọ̀rọ̀ náà hàn mí ní {target}",,"ɛ dʒɔ˩wɔ˥, fi ɔ˩rɔ˩ na˥a˩ hã˩ mi˥ ni˥ {target}",,2,yo-agent-v1;ipa=yo-g2p
 communication.i-cannot-make-out-what-you-are-saying,Mi ò gbọ́ ohun tí o ń sọ dáadáa,,mi o˩ ɡbɔ˥ ohũ ti˥ o n̩˥ sɔ da˥ada˥a,,2,yo-agent-v1;ipa=yo-g2p
 communication.i-do-not-understand,Kò yé mi,,ko˩ je˥ mi,it is not clear to me,2,yo-agent-v1;fix=en.wiktionary ye 'Kò yé mi';fix=Yorùbá Yé Mi (COERLL) p. 21 'ó yé mi' and pp. 76 218 third-person negative 'kò';row-corrections-v1;ipa=yo-g2p
@@ -117,7 +117,7 @@ board-answers.help-is-coming,Ìrànlọ́wọ́ ń bọ̀,,i˩rã˩lɔ˥wɔ˥ n�
 board-answers.where-does-it-hurt,Níbo ni ó ń dùn ẹ?,,ni˥bo ni o˥ n̩˥ dũ˩ ɛ,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.can-you-walk,Ṣé ẹ lè rìn?,,ʃe˥ ɛ le˩ rĩ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.stay-here,Ó dára kí ẹ dúró síbí,,o˥ da˥ra ki˥ ɛ du˥ro˥ si˥bi˥,it is good that you stay here,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
-board-answers.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,formal yín -- introductions.what-is-your-name uses informal rẹ,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,"formal yín, as introductions.what-is-your-name now asks it too",2,"yo-agent-v1;board-answers-v1;literal-only=the old literal said introductions.what-is-your-name uses informal rẹ, no longer true;row-corrections-v12;ipa=yo-g2p"
 board-answers.the-hospital-is-close,Ilé ìwòsàn wà nítòsí,,ile˥ i˩wo˩sã˩ wa˩ ni˥to˩si˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.i-do-not-have-a-phone,Mi ò ní fóònù,,mi o˩ ni˥ fo˥o˩nu˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.i-will-find-someone,Màá wá ẹnìkan tí ó lè ràn yín lọ́wọ́,,ma˩a˥ wa˥ ɛni˩kã ti˥ o˥ le˩ rã˩ jĩ˥ lɔ˥wɔ˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
