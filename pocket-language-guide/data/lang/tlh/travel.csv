@@ -54,7 +54,7 @@ common-signs.vacant,,,chIm,tʃɪm,be empty / be deserted,3,tlh-attested
 common-signs.caution,,,yIqIm,jɪqʰɪm,pay attention!,3,tlh-attested-v1;src=CK;native=piqad-csur;ipa=okrand
 common-signs.no-entry,,,yI'elQo',jɪʔɛlqxoʔ,do not enter!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
 common-signs.do-not-touch,,,yIHotQo',jɪxotʰqxoʔ,do not touch!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
-common-signs.open-operating,,,Qap,qxɑpʰ,be in operation,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+common-signs.open-operating,,,poS,pʰoʂ,be open,3,tlh-attested-v1;src=TKD;fix=klingon-assistant-data poS (v -- be open -- be opened -- TKD) beside SoQ (be closed -- be shut -- TKD -- the pack's closed sign);was=Qap (v:2 operate -- be in operation -- KGT);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;native=piqad-csur;ipa=okrand
 common-signs.closed,,,SoQ,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 common-signs.stopped-stop,,,mev,mɛv,stop / cease,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 directions.please-show-me-on-the-map, ,,pu'jInDaq HI'ang,pʰuʔdʒɪnɖɑqʰ xɪʔɑŋ,show me on the map,1,tlh-composed-v1;lex=qep'a' 14 (2007) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

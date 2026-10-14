@@ -11,7 +11,7 @@ phone-translation.please-speak-toward-the-phone,スマホに向かって話し�
 sim-data.may-i-use-your-wifi,Wi-Fiを使ってもいいですか？,,wai-fai o tsukatte mo ii desu ka?,waiɸai o tsɯkatte mo iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
 children.make-an-announcement,館内放送をお願いします,,kannai hōsō o onegaishimasu,kaɴnai hoːsoː o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
 etiquette.is-tipping-expected,チップは必要ですか？,,chippu wa hitsuyō desu ka?,tɕippɯ wa çitsɯjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
-social-basics.hello-polite,失礼します,,shitsurei shimasu,ɕitsɯɾei ɕimasɯ,,1,ja-agent-v1;ipa=hepburn
+social-basics.hello-polite,こんにちは,,konnichiwa,koɴɲitɕiwa,,2,ja-agent-v1;fix=ja.wikipedia こんにちは rev 109945687 (日本語の挨拶で、おもに昼間に人に会ったときに用いる);was=失礼します (said taking leave or excusing oneself -- ja.wikipedia 池乃めだか rev 111138642 「ほな失礼します」などと言って帰りかけ and 神風特別攻撃隊 rev 111380165 「ちょっと失礼します」と一同に背を向けて -- not on meeting someone);rule=one wording where the language has no separate polite hello (en Hello -- fr Bonjour) -- the wording of social-basics.hello;row-corrections-v11;ipa=hepburn
 social-basics.good-morning,おはようございます,,ohayō gozaimasu,ohajoː ɡozaimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 quick-responses.no-not,いいえ,,iie,iːe,,2,japanese-reviewed-v6;ipa=hepburn
 communication.do-you-speak-english,{source}を話せますか？,,{source} o hanasemasu ka?,{source} o hanasemasɯ ka,,2,language-slots-v1;ipa=hepburn

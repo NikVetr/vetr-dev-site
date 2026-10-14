@@ -112,7 +112,7 @@ common-signs.no-smoking,ممنوع التدخين,,mamnūʿ al-tadkhīn,mˈamnu�
 common-signs.no-photography,ممنوع التصوير,,mamnūʿ al-taṣwīr,mˈamnuːʕ ʔattˈas̪wiːr,,2,ar-agent-v1;ipa=espeak
 common-signs.do-not-touch,ممنوع اللمس,لا تلمس,mamnūʿ al-lams,mˈamnuːʕ ʔallˈamas,,2,ar-agent-v1;ipa=espeak
 common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,mˈuɣlaq mʔqtˈaː,,2,ar-agent-v1;ipa=espeak
-common-signs.open-operating,يعمل,قيد التشغيل,yaʿmal,jʕml,,2,ar-agent-v1;ipa=espeak
+common-signs.open-operating,مفتوح,,maftūḥ,mˈaftuːħ,,2,ar-agent-v1;fix=Wehr-1976 مفتوح (maftūḥ opened -- open) and ar.wikipedia شارع فاي وين rev 71363894 (وعادة ما تكون هذه المحلات مفتوحة بين 10.30 صباحا و 22.30 مساء) -- the pack's closed sign is مغلق;was=يعمل with alt قيد التشغيل (Wehr عمل to do -- act -- operate -- be active -- work);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
 common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,mtˈuːqːf,,2,ar-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,hˈal jdʒb tˈamɹiːr ʔattˈaðkaɹˌa qˈabl ʔas̪s̪ˈuʕuːd,must the ticket be swiped before boarding,1,ar-gaps-v1;ipa=espeak

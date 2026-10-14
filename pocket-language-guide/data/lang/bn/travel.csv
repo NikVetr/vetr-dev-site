@@ -112,7 +112,7 @@ common-signs.no-smoking,ধূমপান নিষেধ,,dhūmapāna niṣedh
 common-signs.no-photography,ছবি তোলা নিষেধ,,chabi tolā niṣedha,tʃʰˈobi tˈola nˈiʃedʰ,,2,bn-agent-v1;ipa=espeak
 common-signs.do-not-touch,হাত দেবেন না,,hāta debena nā,hˈato dˈeben nˈa,,2,bn-agent-v1;ipa=espeak
 common-signs.temporarily-closed,সাময়িকভাবে বন্ধ,,sāmaẏikabhābe bandha,ʃˈamɔˌikɔbʰˌabe bˈɔndʰɔ,,2,bn-agent-v1;ipa=espeak
-common-signs.open-operating,চালু,,cālu,tʃˈalu,,2,bn-agent-v1;ipa=espeak
+common-signs.open-operating,খোলা,,kholā,kʰˈola,,2,bn-agent-v1;fix=Biswas Bengali-English Dictionary (DSAL) p.289 খোলা 2 (to open for day's work (এ দোকান বেলা দশটায় খুলবে) ... a. open) and bn.wikipedia ২০২২ কানপুর সহিংসতা rev 8931539 (খুব কম দোকানপাট খোলা ছিল) -- the pack's closed sign is বন্ধ;was=চালু (Biswas p.358 current -- in vogue -- running);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,বন্ধ,,bandha,bˈɔndʰɔ,,2,bn-agent-v1;ipa=espeak
 common-signs.stopped-stop,বন্ধ / থামুন,,bandha / thāmuna,bˈɔndʰɔ / tʰˈamun,,2,bn-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,এই টিকিটটা পাঞ্চ করাতে হবে কি?,,ei ṭikiṭaṭā pāñca karāte habe ki?,ˌei ʈˈikiʈˌɔʈa pˈantʃɔ kˈɔɾatˌe hˈɔbe ki,,2,bn-agent-v1;ipa=espeak

@@ -111,7 +111,7 @@ common-signs.no-smoking,tilos a dohányzás,,tˈiloʃ ˈɑ dˈohaːɲzaːʃ,,2,h
 common-signs.no-photography,fényképezni tilos,,fˈeːɲkeːpɛzni tˈiloʃ,,2,hu-agent-v1;ipa=espeak
 common-signs.do-not-touch,megérinteni tilos,,mˈɛɡeːrintɛni tˈiloʃ,,2,hu-agent-v1;ipa=espeak
 common-signs.temporarily-closed,átmenetileg zárva,,ˈaːtmɛnɛtilɛɡ zˈaːrvɑ,,2,hu-agent-v1;ipa=espeak
-common-signs.open-operating,üzemel,,ˈyzɛmɛl,,2,hu-agent-v1;ipa=espeak
+common-signs.open-operating,nyitva,,ɲˈitvɑ,,2,hu-agent-v1;fix=A magyar nyelv értelmező szótára (ertelmezo.oszk.hu) nyitva 1a (A közönség számára hozzáférhető állapotban. Nyitva van a könyvtár ... Az üzletet este 8-ig nyitva tartják) -- the pack's closed sign is zárva;was=üzemel (ÉrtSz üzemel 1 (műszaki nyelv) gép ... üzemben van -- működik -- and 2 (ritka) for a non-industrial establishment);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,zárva,,zˈaːrvɑ,,2,hu-agent-v1;ipa=espeak
 common-signs.stopped-stop,leállt,,lˈɛaːlt,,2,hu-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Kell érvényesíteni ezt a jegyet?,,kˈɛll ˈeːrveːɲɛʃiːtɛni ˈɛst ˈɑ jˈɛɟɛt,Hungary fines an unvalidated ticket,2,hu-agent-v1;ipa=espeak

@@ -111,7 +111,7 @@ common-signs.no-smoking,Dilarang merokok,,dilˈaraŋ mərˈokok,,2,id-agent-v1;i
 common-signs.no-photography,Dilarang memotret,Dilarang mengambil gambar,dilˈaraŋ məmˈotrət,,2,id-agent-v1;ipa=espeak
 common-signs.do-not-touch,Dilarang menyentuh,Jangan disentuh,dilˈaraŋ məɲˈɛntuh,,2,id-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Tutup sementara,,tˈutup səməntˈara,,2,id-agent-v1;ipa=espeak
-common-signs.open-operating,Beroperasi,Sedang buka,bərˌopərˈasi,,2,id-agent-v1;ipa=espeak
+common-signs.open-operating,Buka,Sedang buka,bˈuka,,2,id-agent-v1;fix=KBBI buka 1 v 3 (berjualan atau bekerja: kantor pemerintah mulai -- pukul 08.00 -- tutup pukul 15.00) read on kbbi.web.id -- the pack's closed sign is Tutup and the alt Sedang buka stays;was=Beroperasi;rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Tutup,Libur,tˈutup,,2,id-agent-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈɛnti,,2,id-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈɛrlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",2,id-agent-v1;ipa=espeak

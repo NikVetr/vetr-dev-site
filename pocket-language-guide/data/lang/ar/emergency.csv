@@ -37,7 +37,7 @@ police-consulate.i-need-an-interpreter,أحتاج إلى مترجم,مترجم �
 body-parts.leg,ساق,رجل,sāq,sˈaːq,,2,ar-agent-v1;ipa=espeak
 medical-conditions.i-carry-an-adrenaline-injector,أحمل قلم أدرينالين,حاقن الأدرينالين التلقائي,aḥmil qalam adrīnālīn,ʔˈaħmal qˈalam ʔdɹˌiːnaːlˈiːna,,2,ar-agent-v1;ipa=espeak
 pharmacy-symptoms.how-much-should-i-take,ما الجرعة؟,,mā al-jurʿah?,mˈaː ʔaldʒˈurʕa,what is the dose,2,ar-agent-v1;ipa=espeak
-police-consulate.please-leave-me-alone,اتركني من فضلك,خلاص,utruknī min faḍlak,ˈatrkniː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+police-consulate.please-leave-me-alone,أرجو عدم إزعاجي,خلاص,arjū ʿadam izʿājī,ʔrdʒˈuː ʕˈadam ʔzʕˈaːdʒiː,"I ask not to be bothered -- arjū with the negated verbal noun (ʿadam izʿāj -- with -ī -- me), so nothing addresses the listener; utruknī was the masculine imperative (utrukīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 زعج IV (to disturb (s.o.) -- to trouble -- inconvenience -- molest -- pester -- harass) and ترك (tarakahu wa-šaʾnahu to leave s.o. alone -- the old row's verb);in-pack-frame=hotel-requests.no-housekeeping alt الرجاء عدم الإزعاج;rule=no-second-person;row-corrections-v11;ipa=espeak
 body-parts.arm,ذراع,,dhirāʿ,ðˈiɹaːʕ,,2,ar-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,أتناول دواء لعلاج {},,atanāwal dawāʾ li-ʿilāj {},ʔtnˈaːwl dˈawaːʔ lʕlaːdʒ {},medicine to treat,2,ar-agent-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,أتقيّأ,عندي ترجيع,ataqayyaʾ,ʔtqˈiːʔ,,2,ar-agent-v1;ipa=espeak
@@ -99,7 +99,7 @@ pharmacy-symptoms.is-this-safe-during-pregnancy,هل هذا آمن للحامل�
 pharmacy-symptoms.i-think-i-have-malaria,أظنّ أنّني مصاب بالملاريا,عندي ملاريا,,ʔðnn ʔnnnˈiː mˈus̪aːb bilmalˈaːɹiːˌaː,,2,malaria-reader-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,أحتاج إلى تحليل الملاريا,فحص الملاريا,,ʔħtˈaːdʒ ʔˈilaː tˈaħliːl ʔalmalˈaːɹiːˌaː,,2,malaria-reader-v1;ipa=espeak
 emergency-medical.help,النجدة!,ساعدوني!,al-najdah!,ʔannˈadʒda,,2,ar-agent-v1;ipa=espeak
-emergency-medical.please-call-an-ambulance,اتصل بالإسعاف من فضلك,,ittaṣil bi-al-isʿāf min faḍlak,ˈitːas̪ˌal bilʔˈisʕaːf mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,أرجو الاتصال بالإسعاف,,arjū al-ittiṣāl bi-al-isʿāf,ʔrdʒˈuː alˈitːis̪ˌaːl bilʔˈisʕaːf,"I ask for calling the ambulance -- arjū with the verbal noun, so nothing addresses the listener; ittaṣil was the masculine imperative (ittaṣilī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 وصل VIII ittaṣala (to get in touch (ب with s.o. -- also e.g. by telephone) -- to contact);in-pack-frame=police-consulate.please-notify-my-consulate أرجو إبلاغ قنصلية بلدي;rule=no-second-person;row-corrections-v11;ipa=espeak
 emergency-medical.i-need-a-doctor,أحتاج إلى طبيب,,aḥtāj ilá ṭabīb,ʔħtˈaːdʒ ʔˈilaː t̪ˈabiːb,,2,ar-agent-v1;ipa=espeak
 emergency-medical.i-am-sick,أنا مريض,,anā marīḍ,ˈana mˈaɹiːdˤ,,2,ar-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,أنا مصاب,,anā muṣāb,ˈana mˈus̪aːb,,2,ar-agent-v1;ipa=espeak

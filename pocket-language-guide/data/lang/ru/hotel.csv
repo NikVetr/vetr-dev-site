@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Wi-Fi бесплатный?,,Wi-Fi besplatnyy?,vajˈf
 hotel-basics.how-much-per-night,Сколько за ночь?,,Skolʼko za nochʼ?,skˈoɭkʌ zˈɑ nˈotʃʲ,,2,ru-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Завтрак включён?,,Zavtrak vklyuchën?,zˈɑftrʌk fkɭʲʉtʃʲˈɵn,,2,ru-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Можно посмотреть номер?,,Mozhno posmotretʼ nomer?,mˈoʒnʌ pʌsmʌtrʲˈetʲ nˈomʲir,,2,ru-agent-v1;ipa=espeak
-hotel-basics.for-nights,На {} ночей.,,Na {} nochey.,nˈɑ {} nʌtʃʲˈej,,2,ru-agent-v1;ipa=espeak
+hotel-basics.for-nights,Количество ночей: {},,Kolichestvo nochey: {},kʌɭʲˈitʃʲistvʌ nʌtʃʲˈej {},"'number of nights: {}' -- a label, so the number agrees with nothing; На {} ночей. took the genitive plural, right only from five nights on",2,ru-agent-v1;fix=ru.wikipedia Множественное число rev 151903523 (числительные два -- три -- четыре ... требуют родительного падежа единственного числа ... Составные числительные -- оканчивающиеся на единицу (двадцать один) -- требуют единственного числа: на 1 ночь -- на 2 ночи -- на 5 ночей);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Мой адрес: {} and Проблема: {} -- and pl's Liczba nocy: {});row-corrections-v11;ipa=espeak
 hotel-basics.two-beds,"Две кровати, пожалуйста.",,"Dve krovati, pozhaluysta.","dvʲˈe krʌvˈɑtʲɪ, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Есть кондиционер?,,Yestʼ konditsioner?,jestʲ kʌndʲitsɨʌnʲˈer,,2,ru-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Можно выехать позже?,,Mozhno vyyekhatʼ pozzhe?,mˈoʒnʌ vˈɨjixʌtʲ pˈoʒʒɨ,,2,ru-agent-v1;ipa=espeak

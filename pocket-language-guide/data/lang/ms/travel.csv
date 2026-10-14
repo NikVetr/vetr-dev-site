@@ -111,7 +111,7 @@ common-signs.no-smoking,Dilarang merokok,,dilˈaraŋ mərˈokoʔ,,2,ms-agent-v1;
 common-signs.no-photography,Dilarang memotret,Dilarang mengambil gambar,dilˈaraŋ məmˈotret,,2,ms-agent-v1;ipa=espeak
 common-signs.do-not-touch,Dilarang menyentuh,Jangan disentuh,dilˈaraŋ məɲˈəntoh,,2,ms-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Tutup sementara,,tˈutop səməntˈarə,,2,ms-agent-v1;ipa=espeak
-common-signs.open-operating,Beroperasi,Sedang buka,bərˌopərˈasi,,2,ms-agent-v1;ipa=espeak
+common-signs.open-operating,Buka,Sedang buka,bˈukə,,2,ms-agent-v1;fix=Kamus Dewan Edisi Keempat (prpm.dbp.gov.my) tutup 1 (tidak dibuka -- lw buka: Kedai itu ~ pd hari Jumaat) -- the pack's closed sign is Tutup and the alt Sedang buka stays;was=Beroperasi;rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Tutup,Cuti,tˈutop,,2,ms-agent-v1;fix=DBP cuti;row-corrections-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈənti,,2,ms-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈərlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",2,ms-agent-v1;ipa=espeak

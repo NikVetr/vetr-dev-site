@@ -108,7 +108,7 @@ common-signs.no-smoking,אין לעשן,אֵין לְעַשֵּׁן,eyn le‘ash
 common-signs.no-photography,אסור לצלם,אָסוּר לְצַלֵּם,asur letsalem,asˈuʁ letsalˈem,photographing forbidden,2,he-agent-v1;ipa=bgn
 common-signs.do-not-touch,אסור לגעת,אָסוּר לָגַעַת,asur lagá‘at,asˈuʁ laɡˈaat,touching forbidden,2,he-agent-v1;ipa=bgn
 common-signs.temporarily-closed,סגור זמנית,סָגוּר זְמַנִּית,sagur zemanit,saɡˈuʁ zemanˈit,closed temporarily,2,he-agent-v1;ipa=bgn
-common-signs.open-operating,פעיל,פָּעִיל,pa‘il,paˈil,operating,2,he-agent-v1;ipa=bgn
+common-signs.open-operating,פתוח,פָּתוּחַ,patúaẖ,patˈuax,open,2,he-agent-v1;fix=he.wikipedia סבן אילבן rev 43306797 (והיום רוב החנויות פתוחות 24 שעות ביממה) -- the pack's closed sign is סגור and its common-signs.open-on spells and romanises פתוח so;was=פעיל (active -- the row's own literal said operating);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=bgn
 common-signs.closed,סגור,סָגוּר,sagur,saɡˈuʁ,closed,2,he-agent-v1;ipa=bgn
 common-signs.stopped-stop,עצור,עֲצוֹר,‘atsor,atsˈoʁ,stop,2,he-agent-v1;ipa=bgn
 rail-station-words.fare,דמי נסיעה,דְּמֵי נְסִיעָה,demey nesi‘a,demˈej nesiˈa,travel fee,2,he-agent-v1;ipa=bgn

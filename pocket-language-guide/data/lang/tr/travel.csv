@@ -111,7 +111,7 @@ common-signs.no-smoking,sigara içilmez,,siɡaɾˈa itʃɪlmˈɛz,,2,tr-agent-v1
 common-signs.no-photography,fotoğraf çekmek yasaktır,,fotoːɾˈaf tʃɛkmˈɛk jˈasaktɯr,,2,tr-agent-v1;ipa=espeak
 common-signs.do-not-touch,dokunmayınız,,dokˈʊnmajɯnɯz,,2,tr-agent-v1;ipa=espeak
 common-signs.temporarily-closed,geçici olarak kapalı,,ɟetʃidʒˈɪ oɫaɾˈak kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
-common-signs.open-operating,hizmette,çalışıyor,hɪzmetːˈɛ,,1,tr-agent-v1;ipa=espeak
+common-signs.open-operating,açık,,atʃˈɯk,,2,tr-agent-v1;fix=TDK Güncel Türkçe Sözlük açık 7 (Çalışır durumda olan: Bazı dükkânları açık olan caddeden sola saptılar) -- the pack's closed sign is kapalı;was=hizmette with alt çalışıyor (TDK çalışmak 4 İşler duruma gelmek -- a machine's sense -- and no shop sense);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,kapalı,hizmet dışı,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
 common-signs.stopped-stop,dur,durdu,dˈʊr,,2,tr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Bileti okutmam gerekiyor mu?,Kartı okutmam gerekiyor mu?,biletˈɪ okʊtmˈam ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak

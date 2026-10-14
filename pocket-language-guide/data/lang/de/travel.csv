@@ -112,7 +112,7 @@ common-signs.no-smoking,Rauchen verboten,Rauchverbot,rˈaʊxən fɛɾbˈoːtən,
 common-signs.no-photography,Fotografieren verboten,,fˌoːtoːɡɾafˈiːrən fɛɾbˈoːtən,,2,de-agent-v1;ipa=espeak
 common-signs.do-not-touch,Nicht berühren,Bitte nicht berühren,nˈɪçt bərˈyːrən,,2,de-agent-v1;ipa=espeak
 common-signs.temporarily-closed,vorübergehend geschlossen,zeitweise geschlossen,foːrˈyːbɜɡˌeːənt ɡəʃlˈɔsən,,2,de-agent-v1;ipa=espeak
-common-signs.open-operating,in Betrieb,,ɪn bətɾˈiːp,,2,de-agent-v1;ipa=espeak
+common-signs.open-operating,geöffnet,offen,ɡəˈœfnət,,2,"de-agent-v1;fix=Duden öffnen (mit der Geschäftszeit, den Dienststunden beginnen -- das Geschäft wird um acht Uhr, ist ab acht Uhr geöffnet) and offen (das Geschäft [länger] offen halten);was=in Betrieb (Duden Betrieb: eine Maschine in Betrieb setzen -- die Maschine ist in Betrieb (läuft));rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak"
 common-signs.closed,geschlossen,Ruhetag,ɡəʃlˈɔsən,,2,de-agent-v1;ipa=espeak
 common-signs.stopped-stop,Halt,außer Betrieb,hˈalt,,2,de-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Muss ich das Ticket entwerten?,Muss ich die Fahrkarte abstempeln?,mˈʊs ɪç das tˈɪkət ɛntvˈɛɾtən,,2,coordinator-gaps-v2;ipa=espeak

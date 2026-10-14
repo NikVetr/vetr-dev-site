@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
 utility-templates.i-want-to-go-to,أريد الذهاب إلى {},,urīd al-dhahāb ilá {},ʔɹˈiːd ʔaððˈahaːb ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
-utility-templates.please-give-me,أعطني {} من فضلك,,aʿṭinī {} min faḍlak,ʔʕt̪nˈiː {} mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+utility-templates.please-give-me,أرجو إعطائي {},,arjū iʿṭāʾī {},ʔrdʒˈuː ʔʕt̪ˈaːʔiː {},"I ask for being given {} -- arjū with the verbal noun iʿṭāʾ and -ī (me), so nothing addresses the listener; aʿṭinī was the masculine imperative (aʿṭīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 عطو IV (to give (to s.o. s.th.) -- to present -- hand over);in-pack-frame=hotel-requests.wake-up-call أرجو إيقاظي الساعة {};rule=no-second-person;row-corrections-v11;ipa=espeak
 utility-templates.may-i,هل يمكنني {}؟,,hal yumkinunī {}?,hˈal jmknnˈiː {},,2,ar-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,من فضلك بدون {},,min faḍlak bidūn {},mˈin fˈadˤlka budːˈuːna {},please without,2,ar-agent-v1;ipa=espeak
 utility-templates.do-you-have,هل لديك {}؟,,hal ladayk {}?,hˈal ldiːkˌa {},,2,ar-agent-v1;ipa=espeak

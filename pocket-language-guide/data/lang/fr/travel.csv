@@ -112,7 +112,7 @@ common-signs.no-smoking,Interdiction de fumer,Défense de fumer,ɛ̃tɛʁdiksjɔ
 common-signs.no-photography,Photos interdites,,fotoz ɛ̃tɛʁdˈit,,2,fr-agent-v1;ipa=espeak
 common-signs.do-not-touch,Ne pas toucher,,nə pa tuʃˈe,,2,fr-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Fermé temporairement,Fermeture temporaire,fɛʁme tɑ̃poʁɛʁmˈɑ̃,,2,fr-agent-v1;ipa=espeak
-common-signs.open-operating,En service,,ɑ̃ sɛʁvˈis,,2,fr-agent-v1;ipa=espeak
+common-signs.open-operating,Ouvert,,uvˈɛʁ,,2,"fr-agent-v1;fix=Larousse ouvrir (être ouvert: être en activité, être en mesure d'accueillir les clients -- Ce magasin est ouvert le dimanche);was=En service (Larousse service: En service, se dit d'un appareil qui est en état de fonctionner);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak"
 common-signs.closed,Fermé,,fɛʁmˈe,,2,fr-agent-v1;ipa=espeak
 common-signs.stopped-stop,Arrêt,,aʁˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il composter ?,ʒə dwa valide mɔ̃ bijˈɛ,,2,coordinator-gaps-v2;ipa=espeak

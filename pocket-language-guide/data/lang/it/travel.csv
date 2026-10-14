@@ -72,7 +72,7 @@ taxi.could-you-make-it-colder,"Può abbassare la temperatura, per favore?",,"pʊ
 taxi.could-you-make-it-warmer,"Può alzare la temperatura, per favore?",,"pʊˈɔ altsˈare la temperatˈura, per favˈore",,2,it-agent-v1;ipa=espeak
 taxi.may-i-open-the-window,Posso aprire il finestrino?,,pˈɔsso aprˈire il finestrˈino,,2,it-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,"Chiami un taxi, per favore",,"kjˈamɪ ʊn tˈaksɪ, per favˈore",,2,it-agent-v1;ipa=espeak
-common-signs.open-operating,In servizio,,in servˈitsio,,2,it-agent-v1;ipa=espeak
+common-signs.open-operating,Aperto,,apˈɛrto,,2,it-agent-v1;fix=Treccani Vocabolario aperto 1a (Non chiuso: ... il negozio rimane a. fino all'una);was=In servizio (Treccani servizio 4 essere in s. of a person on duty and 9 funzionamento di una macchina -- l'ascensore è fuori servizio);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Chiuso,,kjˈuzo,,2,it-agent-v1;ipa=espeak
 common-signs.stopped-stop,Fermo,Fuori servizio,fˈermo,,2,it-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,zona turistica,,dzˈɔna tʊrˈistika,,2,it-agent-v1;ipa=espeak

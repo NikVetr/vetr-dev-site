@@ -111,7 +111,7 @@ common-signs.no-smoking,Proibido fumar,,prˌoɪbˈidʊ fumˈar,,2,pt-agent-v1;ip
 common-signs.no-photography,Proibido fotografar,,prˌoɪbˈidʊ fˌotoɡrafˈar,,2,pt-agent-v1;ipa=espeak
 common-signs.do-not-touch,Não tocar,,nˌɐ̃ʊ̃ tokˈar,,2,pt-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Encerrado temporariamente,Fechado temporariamente,ˌeɪŋsexˈadʊ tˌeɪmpoɾˌaɾiæmˈeɪŋtʃy,,2,pt-agent-v1;ipa=espeak
-common-signs.open-operating,Em funcionamento,,ˈeɪŋ fˌũŋsiˌonæmˈeɪŋtʊ,,2,pt-agent-v1;ipa=espeak
+common-signs.open-operating,Aberto,,ˌabˈɛɾətʊ,,2,pt-agent-v1;fix=Priberam abrir 13 (Cessar de estar fechado -- a loja abre às 15h) and 2 (os comerciantes já abriram as lojas) with aberto its participle;was=Em funcionamento (Priberam funcionamento: ato ou efeito de funcionar -- funcionar 1 exercer a sua função);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Fechado,Encerrado,fˌeʃˈadʊ,,2,pt-agent-v1;ipa=espeak
 common-signs.stopped-stop,Parado,Fora de serviço,pˌaɾˈadʊ,,2,pt-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Tenho de validar este bilhete?,Preciso validar esta passagem?,tˌeɲʊ dʒy vˌalidˈaɾ ˌestʃy bˌiljˈetʃy,,2,pt-agent-v1;ipa=espeak

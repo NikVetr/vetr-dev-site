@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-numbers-money.l-ng,零,,rei,ɾei,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.l-ng,ゼロ,,zero,zeɾo,,2,japanese-reviewed-v6;fix=ja.wikipedia 0 rev 109995372 (読み方: 零（れい、ぜろ）、ゼロ ... その他日常的にも「れい」よりも「ゼロ」を使うことが多い -- and NHK gives ゼロ first for telephone numbers from April 2026);rule=the spoken reading -- as the pack writes 四 yon and 七 nana;row-corrections-v11;ipa=hepburn
 atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,eːtiːemɯ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
 numbers-money.y,一,,ichi,itɕi,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,kaiɡai hakkoː no kaːdo wa tsɯkaemasɯ ka,,2,ja-agent-v1;ipa=hepburn

@@ -111,7 +111,7 @@ common-signs.no-smoking,Cấm hút thuốc,,kəm˧˥ hut̪˧˥ tuə̯c˧˥,,2,vi
 common-signs.no-photography,Cấm chụp ảnh,,kəm˧˥ tʃup˨˩ˀ aɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
 common-signs.do-not-touch,Không chạm vào,Cấm sờ,xoŋ˧ tʃaːm˨˩ˀ vaːw˨˩,,2,vi-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Tạm đóng cửa,Tạm nghỉ,t̪aːm˨˩ˀ ɗɔŋ˧˥ kyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
-common-signs.open-operating,Đang hoạt động,Đang mở cửa,ɗaːŋ˧ hwaːt̪˨˩ˀ ɗoŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+common-signs.open-operating,Mở cửa,Đang mở cửa,məː˧˩˧ kyə̯˧˩˧,,2,vi-agent-v1;fix=vi.wikipedia Giờ mua sắm rev 75602666 (thời gian cửa hàng mở cửa -- các cửa hàng mở cửa bảy ngày một tuần) -- the pack's closed sign is Đóng cửa and the alt Đang mở cửa stays;was=Đang hoạt động (in operation);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Đóng cửa,,ɗɔŋ˧˥ kyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
 common-signs.stopped-stop,Dừng,Ngừng,zyŋ˨˩,,2,vi-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Có cần quét vé trước không ạ?,,kɔ˧˥ kən˨˩ kwɛt̪˧˥ vɛ˧˥ tʃyə̯c˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

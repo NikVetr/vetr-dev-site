@@ -59,7 +59,7 @@ police-consulate.i-am-calling-the-police,Voy a llamar a la policía,,bˈoɪ a ʝ
 body-parts.ankle,el tobillo,,el tobˈiʝo,,2,es-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Este es mi medicamento,,ˈeste ˈes mi mˌedikamˈento,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,Tengo tos,,tˈeŋɡo tˈos,,2,es-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,¿Estoy detenido/a?,,estˈoɪ dˌetenˈido,,2,es-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,¿Estoy detenido?,,estˈoɪ dˌetenˈido,,2,es-agent-v1;fix=content/PROMPTS/speaker-variants.md cleanup table (a slash inside text: text becomes the masculine alone -- the feminine is a variant row) -- the feminine ¿Estoy detenida? is already es/variants.csv's;rule=one reading on the card -- the speaker axis carries the other;row-corrections-v11;ipa=espeak
 body-parts.skin,la piel,,la pjˈel,,2,es-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,"Deme azúcar o jugo, por favor",Deme azúcar o zumo,"dˈeme asˈukaɾ o xˈuɡo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,un antihistamínico,loratadina · cetirizina,ˈun ˌantiˌistamˈiniko,,2,es-agent-v1;ipa=espeak

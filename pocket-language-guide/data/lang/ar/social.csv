@@ -34,7 +34,7 @@ children.warm-this-bottle,سخّن هذه الزجاجة من فضلك,ببرو�
 etiquette.what-is-customary,ما المعتاد هنا؟,,mā al-muʿtād hunā?,mˈaː ʔalmˈuʕtaːd hˈunaː,,2,ar-agent-v1;ipa=espeak
 sim-data.sim-card,شريحة,شريحة اتصال,sharīḥah,ʃˈaɹiːħˌa,,2,ar-agent-v1;ipa=espeak
 children.car-seat,نحتاج كرسي سيارة للأطفال,,naḥtāj kursī sayyārah lil-aṭfāl,nħtˈaːdʒ kˈursiːj sˈajjaːɹˌa llʔt̪faːl,,2,ar-agent-v1;ipa=espeak
-etiquette.keep-the-change,احتفظ بالباقي,,iḥtafiẓ bi-al-bāqī,ˈiħtafˌað bilbˈaːqiː,,2,ar-agent-v1;ipa=espeak
+etiquette.keep-the-change,أرجو الاحتفاظ بالباقي,,arjū al-iḥtifāẓ bi-al-bāqī,ʔrdʒˈuː alˈiħtifˌaːð bilbˈaːqiː,"I ask for the change to be kept -- arjū with the verbal noun, so nothing addresses the listener; iḥtafiẓ was the masculine imperative (iḥtafiẓī to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 حفظ (to keep -- retain (ب s.th.)) and VIII iḥtafaẓa;in-pack-frame=phone-text-power.please-confirm أرجو التأكيد;rule=no-second-person;row-corrections-v11;ipa=espeak
 sim-data.where-can-i-buy-a-plug-adapter,أين أشتري محوّل كهرباء؟,,ayna ashtarī muḥawwil kahrabāʾ?,ʔˈajna ʔʃtɹˈiː mħˈuːl kˈahɹabˌaːʔ,,2,ar-agent-v1;ipa=espeak
 children.stroller,عربة أطفال,,ʿarabat aṭfāl,ʕˈaɹabˌa ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 sim-data.mobile-data,بيانات الهاتف,إنترنت الجوال,bayānāt al-hātif,biːˌaːnaːt ʔalhˈaːtif,,2,ar-agent-v1;ipa=espeak
@@ -57,7 +57,7 @@ social-basics.excuse-me-sorry,لو سمحت,,law samaḥt,lˈaw smħt,if you per
 social-basics.sorry,آسف,,āsif,ʔˈaːsif,,2,ar-agent-v1;ipa=espeak
 social-basics.no-problem,لا مشكلة,ولا يهمك,lā mushkilah,lˈaː mˈuʃkilˌa,,2,ar-agent-v1;ipa=espeak
 social-basics.i-do-not-know,لا أعرف,,lā aʿrif,lˈaː ʔˈaʕɹaf,,2,ar-agent-v1;ipa=espeak
-social-basics.good-night,تصبح على خير,,tuṣbiḥ ʿalá khayr,ts̪bħ ʕˈalaː xˈajr,may you wake to goodness,2,ar-agent-v1;ipa=espeak
+social-basics.good-night,ليلة سعيدة,,laylah saʿīdah,lˈajla sʕiːdt,"a happy night -- a wish with no second person; tuṣbiḥ ʿalá khayr (may you wake to goodness) was the 2sg to a man (tuṣbiḥīna to a woman), now the listener variants",2,ar-agent-v1;fix=ar.wikipedia ليلة سعيدة وحظ سعيد (فلم) rev 75386074 (the Arabic title of Good Night -- and Good Luck);rule=no-second-person;row-corrections-v11;ipa=espeak
 social-basics.okay-fine-i-am-okay,أنا بخير,تمام,anā bi-khayr,ˈana bxiːr,,2,ar-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,لا أتحدث {target},,lā ataḥaddath {target},lˈaː ʔtħdθ {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,أتحدث {target} قليلاً,,ataḥaddath {target} qalīlan,ʔtħdθ {target} qlˈiːlaː,,2,language-slots-v1;ipa=espeak
@@ -65,7 +65,7 @@ communication.do-you-speak-english,هل تتحدث {source}؟,,hal tataḥaddath
 communication.please-speak-more-slowly,أرجو التحدث ببطء,على مهلك,arjū al-taḥadduth bi-buṭʾ,ʔrdʒˈuː ʔattˈaħadːˌaθ bbt̪ʔ,"I ask for speaking slowly -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the listener; taḥaddath was the masculine imperative (taḥaddathī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 حدث V (to speak, talk, converse);fix=ar.wikipedia تصحيح إفراطي rev 76462194 (عند التحدث ببطء);in-pack-frame=phone-text-power.please-confirm;rule=no-second-person;row-corrections-v5;ipa=espeak"
 communication.i-do-not-understand-spoken,لم أفهم,ما فهمت,lam afham,lˈam ʔˈafham,,2,ar-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,لا أقرأ هذا,,lā aqraʾ hādhā,lˈaː ʔˈaqɹaʔ haˈaðaˌa,,2,language-slots-v1;ipa=espeak
-communication.please-say-it-again,كرّر من فضلك,,karrir min faḍlak,krrr mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+communication.please-say-it-again,أرجو التكرار,,arjū al-takrār,ʔrdʒˈuː ʔattˈakɹaːr,"I ask for a repetition -- arjū with the verbal noun, so nothing addresses the listener; karrir was the masculine imperative (karrirī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 كر II (to repeat -- reiterate -- do again) and takrār (repetition -- reiteration);in-pack-frame=phone-text-power.please-confirm أرجو التأكيد;rule=no-second-person;row-corrections-v11;ipa=espeak
 communication.please-write-it-down,اكتبه من فضلك,,uktubh min faḍlak,ˈaktbh mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 communication.please-wait-a-moment,انتظر لحظة من فضلك,,intaẓir laḥẓah min faḍlak,ˈintaðˌar lˈaħða mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 communication.can-you-help-me,هل تساعدني؟,,hal tusāʿidunī?,hˈal tsˈaːʕdniː,,2,ar-agent-v1;ipa=espeak

@@ -111,7 +111,7 @@ common-signs.no-smoking,Usivute sigara,,ˌusivˈute siɡˈara,,2,sw-agent-v1;ipa
 common-signs.no-photography,Usipige picha,Hairuhusiwi kupiga picha,ˌusipˈiɡe pˈitʃa,,2,sw-agent-v1;ipa=espeak
 common-signs.do-not-touch,Usiguse,,ˌusiɡˈuse,,2,sw-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Imefungwa kwa muda,,ˌimefˈuŋɡwa kwa mˈuda,,2,sw-agent-v1;ipa=espeak
-common-signs.open-operating,Inafanya kazi,,ˌinafˈaɲa kˈazi,,2,sw-agent-v1;ipa=espeak
+common-signs.open-operating,Wazi,,wˈazi,,2,sw-agent-v1;fix=TUKI-KKK wazi (kl 1 open: Aliacha mlango ~);was=Inafanya kazi (TUKI-KKK kazi 1 work -- 2 function: it is working);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Tumefunga,,tˌumefˈuŋɡa,we are closed,2,sw-agent-v1;ipa=espeak
 common-signs.stopped-stop,Simama,Imesimama,simˈama,stop; stopped,2,sw-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Nahitaji kugonga tiketi kwenye mashine?,,nˌahitˈaɟi kuɡˈoŋɡa tikˈeti kwˈeɲe maʃˈine,tap the ticket on the machine,1,sw-agent-v1;ipa=espeak

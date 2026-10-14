@@ -112,7 +112,7 @@ common-signs.no-smoking,ਸਿਗਰਟ ਪੀਣੀ ਮਨ੍ਹਾ,,sigaraṭ 
 common-signs.no-photography,ਫ਼ੋਟੋ ਖਿੱਚਣੀ ਮਨ੍ਹਾ,,fōṭō khiccaṇī manhā,foʈo kʰɪccəɳi mʌ˥na,taking photos is forbidden,2,pa-agent-v1;ipa=espeak
 common-signs.do-not-touch,ਹੱਥ ਨਾ ਲਾਓ,,hatth nā lāō,hʌtʰ na lao,do not put a hand,2,pa-agent-v1;ipa=espeak
 common-signs.temporarily-closed,ਕੁਝ ਵੇਲੇ ਲਈ ਬੰਦ,,kujh vēlē laī baṁd,kʊ˥ɟ ʋele lʌi bʌnd,closed for some time,2,pa-agent-v1;ipa=espeak
-common-signs.open-operating,ਚਾਲੂ,,cālū,calu,running,2,pa-agent-v1;ipa=espeak
+common-signs.open-operating,ਖੁੱਲ੍ਹਾ,,khullhā,kʰʊ˥lla,open,2,pa-agent-v1;fix=Maya Singh The Panjabi Dictionary (DSAL) p.606 ਖੁੱਲ੍ਹਾ (Open -- spacious -- free) -- the pack's closed sign is ਬੰਦ and the spelling and romanisation are its common-signs.open-on's;was=ਚਾਲੂ (the row's own literal said running);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,ਬੰਦ,,baṁd,bʌnd,,2,pa-agent-v1;ipa=espeak
 common-signs.stopped-stop,ਰੁਕੋ,,rukō,ɾʊko,stop,2,pa-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,ਇਹ ਟਿਕਟ ਪੰਚ ਕਰਾਉਣੀ ਪੈਂਦੀ ਹੈ?,,ih ṭikaṭ paṁc karāuṇī paiṁdī hai?,ɪ˥ ʈɪkəʈ pʌnc kəɾaʊɳi pɛndi hɛ,does this ticket have to be got punched?,2,pa-agent-v1;ipa=espeak

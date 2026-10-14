@@ -112,7 +112,7 @@ common-signs.no-smoking,Prohibido fumar,No fumar,pɾˌoibˈido fumˈaɾ,,2,es-ag
 common-signs.no-photography,Prohibido hacer fotos,No tomar fotografías,pɾˌoibˈido asˈeɾ fˈotos,,2,es-agent-v1;ipa=espeak
 common-signs.do-not-touch,No tocar,,nˈo tokˈaɾ,,2,es-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Cerrado temporalmente,,serˈado tˌempoɾˈalmente,,2,es-agent-v1;ipa=espeak
-common-signs.open-operating,En servicio,,en seɾbˈisjo,,2,es-agent-v1;ipa=espeak
+common-signs.open-operating,Abierto,,abjˈeɾto,,2,es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 abierto (p. p. irreg. de abrir) and abrir (comenzar el periodo de tiempo en que debe realizarse algo: abrimos la oficina de ocho a tres);was=En servicio (Espasa-Calpe servicio: utilidad o provecho -- esta cafetera aún nos hace servicio -- and de servicio: desempeñando un turno de trabajo);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Cerrado,,serˈado,,2,es-agent-v1;ipa=espeak
 common-signs.stopped-stop,Detenido,Fuera de servicio,dˌetenˈido,,2,es-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,¿Tengo que validar este boleto?,este billete,tˈeŋɡo ke bˌalidˈaɾ ˈeste bolˈeto,,2,es-agent-v1;ipa=espeak

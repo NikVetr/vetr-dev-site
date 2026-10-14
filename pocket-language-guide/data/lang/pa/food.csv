@@ -22,7 +22,7 @@ food-ordering.to-go-please,ਪੈਕ ਕਰ ਦਿਓ ਜੀ,,paik kar diō jī,
 food-ordering.check-please,ਬਿੱਲ ਦਿਓ ਜੀ,,bill diō jī,bɪl dɪo ɟi,give the bill,2,pa-agent-v1;ipa=espeak
 food-ordering.does-it-contain,ਇਸ ਵਿੱਚ {} ਹੈ?,,is vicc {} hai?,ɪs ʋɪc {} hɛ,is there {} in this?,2,pa-agent-v1;ipa=espeak
 food-ordering.is-this-vegetarian,ਇਹ ਸ਼ਾਕਾਹਾਰੀ ਹੈ?,,ih śākāhārī hai?,ɪ˥ ʃakahaɾi hɛ,is this vegetarian?,2,pa-agent-v1;ipa=espeak
-food-ordering.what-do-you-recommend,ਤੁਸੀਂ ਕੀ ਦੱਸੋਗੇ?,,tusīṁ kī dassōgē?,tʊsĩ ki dʌssoɡe,what will you suggest?,2,pa-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,ਇੱਥੇ ਕੀ ਚੰਗਾ ਮਿਲਦਾ ਹੈ?,,itthē kī caṁgā miladā hai?,ɪttʰe ki cʌnɡa mɪləda hɛ,"what is good here? -- the habitual miladā agrees with kī (what) and with nobody in the conversation, the wording of the Hindi and Urdu rows (yahāṁ kyā acchā miltā hai?); dassōgē carried the listener's gender (dassōgīāṁ to a woman)",2,pa-agent-v1;fix=en.wikipedia Punjabi grammar rev 1374637939 (hoṇā 2P tusī̃: future m. hōvōgē f. hōvōgiyā̃);in-pack-frame=accessibility.station-assistance ਮਦਦ ਮਿਲਦੀ ਹੈ and the hi and ur rows for this concept;rule=habitual-agrees-with-the-thing;row-corrections-v11;ipa=espeak
 food-ordering.water-please,ਪਾਣੀ ਦਿਓ ਜੀ,,pāṇī diō jī,paɳi dɪo ɟi,give water,2,pa-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,ਸ਼ਾਕਾਹਾਰੀ ਇਹ ਖਾ ਸਕਦਾ ਹੈ?,,śākāhārī ih khā sakadā hai?,ʃakahaɾi ɪ˥ kʰa sʌkəda hɛ,can a vegetarian eat this?,2,pa-agent-v1;ipa=espeak
 dietary-needs.no-pork,ਸੂਰ ਦਾ ਮਾਸ ਨਾ ਪਾਓ,,sūr dā mās nā pāō,suɾ da mas na pao,do not put pork meat in,2,pa-agent-v1;ipa=espeak

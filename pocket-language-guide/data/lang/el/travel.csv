@@ -111,7 +111,7 @@ common-signs.no-smoking,Απαγορεύεται το κάπνισμα,Μη κα
 common-signs.no-photography,Απαγορεύεται η φωτογράφιση,,Apagorevetai i fotografisi,ˌapaɣoɾˈevetˌe i fˌotoɣɾˈafisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.do-not-touch,Μην αγγίζετε,,Min angizete,mˈin aŋɡˈizetˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.temporarily-closed,Προσωρινά κλειστό,,Prosorina kleisto,pɾˌosoɾinˈa klistˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
-common-signs.open-operating,Λειτουργεί,Σε λειτουργία,Leitourgei,lˌituɾjˈi,In operation,2,el-agent-v1;roman=elot743;ipa=espeak
+common-signs.open-operating,Ανοιχτό,Λειτουργεί,Anoichto,ˌanixtˈo,Open,2,el-agent-v1;roman=elot743;fix=Λεξικό της κοινής νεοελληνικής (Triantafyllidis) ανοιχτός 8 ((για κατάστημα κτλ.) που λειτουργεί: Είναι ανοιχτά τα μαγαζιά το απόγευμα;) -- the pack's closed sign is Κλειστό;was=Λειτουργεί with alt Σε λειτουργία and literal In operation (λειτουργώ 1 is a machine's sense -- Tο ασανσέρ δε λειτουργεί -- and 4 the shop's -- Tα καταστήματα θα λειτουργήσουν κανονικά -- so it stays as the alt and Σε λειτουργία goes);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
 common-signs.closed,Κλειστό,Δεν λειτουργεί,Kleisto,klistˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.stopped-stop,Εκτός λειτουργίας,Στοπ,Ektos leitourgias,ektˈoz lˌituɾjˈias,Out of service; the road sign is ΣΤΟΠ,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.do-i-need-to-validate,Πρέπει να ακυρώσω το εισιτήριο;,Πρέπει να ακυρώσω το εισιτήριο στο ακυρωτικό;,Prepei na akyroso to eisitirio;,pɾˈepi n ˌaciɾˈoso to ˌisitˈiɾiˌo,Validating is ακύρωση; unstamped tickets are fined,2,el-agent-v1;roman=elot743;ipa=espeak

@@ -8,7 +8,7 @@ dietary-needs.no-nuts,Keine Nüsse.,,kˈaɪnə nˈysə,,2,de-agent-v1;ipa=espeak
 dietary-needs.no-seafood,"Kein Fisch, keine Meeresfrüchte.",Keine Meeresfrüchte.,"kˈaɪn fˈɪʃ, kˈaɪnə mˈeːrɛsfrˌyçtə","no fish, no shellfish",2,de-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,Ich esse vegetarisch.,Ich bin Vegetarier.,ɪç ˈɛsə vˌeːɡeːtˈɑrɪʃ,,2,de-agent-v1;ipa=espeak
 dietary-needs.i-am-vegan,Ich esse vegan.,Ich bin Veganer.,ɪç ˈɛsə veːɡˈɑːn,,2,de-agent-v1;ipa=espeak
-dietary-needs.i-do-not-eat,Ich esse kein {}.,,ɪç ˈɛsə kˈaɪn {},,2,de-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Ich esse Folgendes nicht: {}.,,ɪç ˈɛsə fˈɔlɡəndəs nˈɪçt {},'I do not eat the following: {}' -- the filler follows a colon and takes no article; Ich esse kein {}. fitted a neuter noun only (keinen Fisch -- keine Eier -- keine Milch),2,de-agent-v1;fix=Duden kein (kein Wort sagen -- keine Arbeit finden -- sie erhob keinen Anspruch darauf: kein agrees with its noun) and folgend (Großschreibung D 72: wir möchten Ihnen Folgendes mitteilen -- bitte bringen Sie folgende Unterlagen mit: Ausweis -- Foto -- Geburtsurkunde);rule=a label whose filler follows a colon and agrees with nothing (the pack's own introductions.i-am-from Ich komme aus diesem Land: {}.);row-corrections-v11;ipa=espeak
 dietary-needs.i-am-allergic-to,Ich bin allergisch gegen {}.,,ɪç bɪn ˈalɜɡˌɪʃ ɡˈeːɡən {},,2,de-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Ist Fischbrühe darin?,Enthält es Fischfond?,ɪst fˈɪʃbɾyːə dɑːrˈɪn,,2,de-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Ist Schweinebrühe darin?,Ist Schweinefleisch in der Brühe?,ɪst ʃvˈaɪnɛbɾˌyːə dɑːrˈɪn,,2,de-pork-stock-v1;ipa=espeak

@@ -112,7 +112,7 @@ common-signs.no-smoking,common-signs,ref,word,no-smoking,7,0.667,common-signs.no
 common-signs.no-photography,common-signs,ref,word,no-photography,8,0.644,common-signs.no-photography,0,0,neutral,,
 common-signs.do-not-touch,common-signs,ref,word,do-not-touch,9,0.622,common-signs.do-not-touch,0,0,neutral,,
 common-signs.temporarily-closed,common-signs,ref,word,temporarily-closed,10,0.600,common-signs.temporarily-closed,0,0,neutral,,
-common-signs.open-operating,common-signs,ref,word,open-operating,1001,0.680,common-signs.open-operating,0,0,neutral,,
+common-signs.open-operating,common-signs,ref,word,open-operating,1001,0.680,common-signs.open-operating,0,0,neutral,,"The open-for-business sign on a shop, office or counter door (zh 营业中, ja 営業中), and the time board's 'open now' answer to 'when does it open?'. Not a machine's or a lift's working status, and not a switch's on (common-signs.open-on)."
 common-signs.closed,common-signs,ref,word,closed,1002,0.680,common-signs.closed,0,0,neutral,,
 common-signs.stopped-stop,common-signs,ref,word,stopped-stop,1003,0.680,common-signs.stopped-stop,0,0,neutral,,
 transit-rides.do-i-need-to-validate,transit-rides,entry,phrase,do-i-need-to-validate,1003,0.780,transit-rides.validate,0,0,neutral,,"Stamping or tapping a ticket before boarding. An unvalidated ticket is fined as travelling without one across German-speaking Europe, Italy and much of central Europe, and the machine is easy to walk past. Must ask about validating, not buying."

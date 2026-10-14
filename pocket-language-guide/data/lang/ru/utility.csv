@@ -5,7 +5,7 @@ utility-templates.may-i,Можно {} ?,,Mozhno {} ?,mˈoʒnʌ {},,2,ru-agent-v1
 utility-templates.please-do-not-add,"Без {}, пожалуйста.",,"Bez {}, pozhaluysta.","bʲˈes {}, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 utility-templates.do-you-have,У вас есть {} ?,,U vas yestʼ {} ?,ˈu vˈɑs jestʲ {},,2,ru-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,"Напишите число, пожалуйста.",,"Napishite chislo, pozhaluysta.","nʌpʲiʃˈɨtʲi tʃʲisɭˈo, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-utility-templates.i-need,Мне нужен {}.,,Mne nuzhen {}.,mnʲˈe nˈuʒɨn {},,2,ru-agent-v1;ipa=espeak
+utility-templates.i-need,Мне нужно: {},,Mne nuzhno: {},mnʲˈe nˈuʒnʌ {},"'I need: {}' -- the impersonal нужно before a colon agrees with nothing; Мне нужен {}. was masculine and wrong for any feminine, neuter or plural noun",2,ru-agent-v1;fix=ru.wikipedia Краткая форма прилагательных rev 149746661 (сюжет интересен -- повесть интересна -- произведение интересно -- сказки интересны: the short form agrees with its subject -- so нужен fits a masculine noun only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Мой адрес: {} and Проблема: {} -- and its pronouns-verbs.need нужно);row-corrections-v11;ipa=espeak
 utility-templates.is-there-nearby,Здесь рядом есть {}?,,Zdesʼ ryadom yestʼ {}?,ʑdʲˈesʲ rʲˈɑdʌm jestʲ {},,2,ru-agent-v1;ipa=espeak
 utility-templates.how-much-is,Сколько стоит {}?,,Skolʼko stoit {}?,skˈoɭkʌ stʌˈit {},,2,ru-agent-v1;ipa=espeak
 utility-templates.is-this,Это {}?,,Eto {}?,ˈɛtʌ {},,2,ru-agent-v1;ipa=espeak

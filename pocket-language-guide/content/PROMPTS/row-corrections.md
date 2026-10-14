@@ -513,3 +513,47 @@ in the "Seen, not touched" of `tmp/notes/agents/row-corrections-9-a.md` or `-9-b
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## An eleventh pass: what the phrasebook cross-check found
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-11.md`. The leads, with
+the phrasebook's wording and the pilot's reading, are in `tmp/notes/agents/crosscheck-pilot.md`
+and `tmp/out/crosscheck/<code>.csv` (verdict `disagree`, and the variants it notes).
+
+- **`common-signs.open-operating` across the packs.** The concept is the *open for
+  business* sign on a shop or office door (zh 营业中, ja 営業中; en cites OALD "ready for
+  business"), beside `common-signs.open-on` (a switch's *on*). About twenty packs wrote it
+  as a machine that is running -- de *in Betrieb*, es *En servicio*, ar *يعمل*, sw *Inafanya
+  kazi*, and the same reading in fr, it, pt, el, he, fa, hu, tr, id, ms, vi, ha, yo, ta, km,
+  bn, mr, pa, or (check each; ru, uk and pl are right, their "works" word being the shop
+  sign). Write the concept's `notes` in `data/concepts/travel.csv` -- the one concept cell
+  this pass may touch -- and correct every pack whose row means "running", by the sign each
+  language's shops actually hang (its own Wikipedia, signage standards, dictionaries).
+- **Russian templates that cannot agree with their slot**: `hotel-basics.for-nights` *На {}
+  ночей.* is wrong for one to four nights, and `utility-templates.i-need` *Мне нужен {}.* for
+  any noun not masculine. Reword as label forms that agree with any filler (*Количество
+  ночей: {}*, *Мне нужно: {}*); the slot count must not change. German *Ich esse kein {}.* is
+  the milder case of the same problem: check and fix it the same way if it is one.
+- **Thai pronouns**: `emergency-medical.i-am-sick`, `emergency-medical.i-am-injured`,
+  `police-consulate.please-leave-me-alone`, `police-consulate.am-i-under-arrest` use ฉัน,
+  which a man reading to a doctor or the police should not; drop the pronoun, as
+  `building-help.i-am-lost` does.
+- **Arabic gender gaps**: `social-basics.sorry` *آسف* lacks the feminine speaker variant
+  (*آسفة*) twenty other rows have; `police-consulate.please-leave-me-alone` and the request
+  rows the pilot lists (please-call-an-ambulance, please-say-it-again, please-give-me,
+  keep-the-change, good-night) address a man only -- neutral base rows with listener
+  variants, by the fifth pass's method, and combined keys where a row also has a speaker
+  variant.
+- **Punjabi**: three outgoing rows still say a request only to a man --
+  `could-you-take-a-photo-for-us` (ਦਿਓਗੇ), `communication.can-you-help-me` (ਸਕਦੇ ਹੋ),
+  `food-ordering.what-do-you-recommend` (ਦੱਸੋਗੇ) -- the same treatment.
+- **Smaller ones**: Japanese `social-basics.hello-polite` *失礼します* is said entering a room,
+  not as a greeting; Japanese zero as *零* where speech says *ゼロ*; Spanish
+  `time-words.evening` *el atardecer* (dusk); Spanish *¿Estoy detenido/a?* showing a slash
+  though its feminine variant exists; Swahili *Mkono / kiganja* and *Mguu / unyayo* slash
+  pairs on rows a reader is shown (keep one reading per the sixth pass's slash rule if
+  they are on a board; the sheet may keep both).
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
