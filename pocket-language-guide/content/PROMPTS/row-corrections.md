@@ -678,3 +678,28 @@ right for any filler a traveller would give it.
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A fifteenth pass: what the thirteenth and fourteenth passes left beside their items
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-15.md`. The leads are
+the closing lists of `tmp/notes/agents/row-corrections-13b.md` and `row-corrections-14.md`.
+
+1. **Finnish `hotel-basics.for-nights`** *{} yötä* is wrong for one night (*yksi yö*), as its
+   own literal says; give it the label form the other packs' rows have.
+2. **`quick-responses.please-go-ahead` rows that still ask rather than offer**, against
+   the concept note the thirteenth pass wrote: Yoruba *Ẹ jọ̀wọ́*, Croatian *molim / samo
+   naprijed*, Amharic *እባክዎ / ይለፉ*, and Arabic *تفضّل*, which offers but to a man --
+   word it to address nobody's gender, as the first pass did `board-answers.please-wait`.
+   Quenya has no row; leave it. The South Asian rows are left for the owner.
+3. **Georgian `common-signs.open-operating`** *მუშაობს* ("it is working") against the
+   concept's note and the closed sign the thirteenth pass wrote (*დაკეტილია*): check which
+   a Georgian shop hangs, and make the text and literal say the open-for-business sign.
+4. **Korean `common-signs.closed`** keeps *휴업* in `text_alt`, which leans to "closed for a
+   holiday" (`common-signs.temporarily-closed`); check it against the 표준국어대사전 and
+   the note.
+5. **Greek `border-customs.i-am-staying-for-days`** keeps *Θα μείνω {} μέρες* in
+   `text_alt`, wrong for one day; clear it or give it the text's form.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
