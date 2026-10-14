@@ -1560,15 +1560,18 @@ is not — no axis, real hazard.
 
 **Whom a request is said to is a switch, never a question.** The boards word what the
 traveller says so it is right to anyone. Where a language has a more natural form to a
-man or to a woman -- Arabic and Hebrew imperatives, Czech polite address, the Hausa
-second person, some Punjabi requests -- `data/registry/listener-axes.csv` declares a
+man or to a woman -- Arabic and Hebrew imperatives, Czech and Polish polite address
+(*pan / pani*), the Hausa second person, Punjabi, Urdu and Gujarati requests; a survey
+of the other packs found no more -- `data/registry/listener-axes.csv` declares a
 `listener_gender` axis whose default is that neutral base row, and `variants.csv`
 carries the two forms under `listener_gender=masculine|feminine`. A reader who wants
 them turns on a setting, and the board's bar then holds a light switch with Mars and
 Venus for its marks, drawn only where the listener's language declares the axis, set
 for whoever is at the counter. Its key joins the speaker's (`joinKeys`), and
 `variantOf` tries the whole key and then each part, so a sentence that changes only
-with its listener is found whoever says it. It reaches the listener's side of what the
+with its listener is found whoever says it -- every combination of the key's parts, the
+largest first, and a concept with rows for two axes must carry their combined row too,
+which the validator holds, so no single part decides a wording. It reaches the listener's side of what the
 traveller says and nothing else: the reader's own gloss is said to nobody, and an
 incoming reply is refused as always. **The register is the same kind of switch**: a
 `register` axis whose default is the polite base row a stranger is owed and whose other
@@ -1576,12 +1579,17 @@ value is `familiar` -- *du* for *Sie*, plain for *desu/masu* -- drawn as a secon
 switch whose two ends are the language's own words for the two (the registry's `label`
 column), behind its own setting. Both switches may be on at once; the key then joins
 both parts, and a sentence written for only one of them is found by that part. The
-familiar forms come from a research pass (`content/PROMPTS/register-variants.md`):
-German (Sie / du), French (vous / tu), Spanish (usted / tú), Russian (вы / ты) and
-Korean (해요 / 해) have them, on the outgoing buttons of every board but the emergency
-and pharmacy ones -- a concept that also stands on those, or is also a reply, gets
-none, since a variant belongs to the concept wherever it appears. A language that
-declares no register axis draws no switch.
+familiar forms come from research passes (`content/PROMPTS/register-variants.md`):
+37 languages have them -- the T-V pairs of Europe and the Caucasus (Sie / du, vous / tu,
+вы / ты, Ön / te, თქვენ / შენ ...), the speech levels of Korean and Japanese (해요 / 해,
+です / だ), the honorific *you* of South Asia (आप / तुम, ਤੁਸੀਂ / ਤੂੰ, நீங்கள் / நீ ...,
+never the intimate तू-level form), and the systems without a pronoun pair, written as a
+friend is spoken to (Vietnamese without its respect particle) -- on the outgoing buttons
+of every board but the emergency and pharmacy ones. A concept that also stands on those,
+or is also a reply, gets none, since a variant belongs to the concept wherever it
+appears; where a familiar form would mark the listener's gender and the language has no
+listener axis, the row is reworded without it or skipped, which is why Amharic has no
+register axis at all. A language that declares none draws no switch.
 
 One setting, four surfaces, and one set of rows for the question: `axisRows` in
 `ui/speaker-settings.js` draws the pills for the board's and the languages' settings
@@ -2896,8 +2904,11 @@ Named so nobody has to rediscover the gap:
   pass checked it, less what the correction passes kept finding errors behind -- the
   same text as a concept whose English differs, a multi-word text the same as English,
   no IPA -- and writes `tmp/out/confidence/summary.md` and, per language, the rows below
-  60 with the reasons, romanised. Nothing of it ships. A high score says the row's
-  record is strong, not that the row is right.
+  60 with the reasons, romanised. Where a research pass has cross-checked a pack against
+  an open phrasebook (Wikivoyage's, `tmp/out/crosscheck/<code>.csv`, eight languages so
+  far), agreement adds to a row's score and disagreement subtracts and is shown as the
+  reason, unless its reader put the error down to the phrasebook. Nothing of it ships. A
+  high score says the row's record is strong, not that the row is right.
 - **The rest of the translators' backlog**, still staged in
   `content/PROPOSED-CONCEPTS.md` with the argument and the sources for each. The
   strong cases have shipped — the malaria pair, both pork-stock questions, the
