@@ -758,3 +758,32 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-17.md`. The l
 
 Afterwards rebuild IPA for every language whose text changed, run
 `python3 scripts/validate_data.py`, and list every cell you changed in your notes.
+
+## An eighteenth pass: the rest of the printed gender notes
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-18.md`. The leads are the
+closing list of `tmp/notes/agents/row-corrections-17.md`.
+
+1. **The printed `literal` cells that are still a translator's gender note** on rows whose
+   other gender lives in `variants.csv`: 106 base rows the seventeenth pass counted (pl 8,
+   hr 8, gu 3, pt 3, cs 8, ru 6, uk 8, el 3, he 18, hi 5, mr 6, pa 5, ne 2, ur 14, es 1) and
+   pl `about-me.i-am-an-engineer`'s variant row. Rewrite each as a back-translation of its
+   row's own words, as the seventeenth pass did; a back-translation that names a pronoun
+   because the pronoun is the point (th, km) stays. List, for each pack, the phrasings the
+   notes used (*a woman says*, *(m)*, *masculine default*), so a check can keep them out.
+2. **Portuguese** penicillin and aspirin-and-ibuprofen rows park a bare *Sou alérgica* in
+   `text_alt`, which their variant rows already say in full: clear them, as the
+   seventeenth pass did sulfa drugs.
+3. **Hebrew `utility-templates.is-this`** *זה {}?* agrees with a masculine filler only; the
+   seventeenth pass's sources support *[זה|זו]*. Give Hebrew its rows in
+   `data/registry/genders.csv` (masculine and feminine, with the evidence for their colours
+   as `content/PROMPTS/gender-alternatives.md` asks, and the hex values the other languages
+   use) and write the group, in `text`, its pointed `text_alt` and its romanisation.
+4. **German** massage rows whose `literal` is a translator's note rather than a
+   back-translation (please-stop, neck, feet): rewrite them. And
+   `quick-directions.turn-left` / `turn-right` *Links abbiegen.* / *Rechts abbiegen.*, a
+   stranger's directions in the bare infinitive: check whether a German giving directions
+   says them so (they may well be right, as a navigation instruction), and leave them if so.
+
+Afterwards rebuild IPA for every language whose text changed, run
+`python3 scripts/validate_data.py`, and list every cell you changed in your notes.
