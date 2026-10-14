@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,Sipati unachosema,,sipˈati 
 communication.i-do-not-understand,Sifahamu,,sˌifahˈamu,,2,sw-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Siwezi kusoma hii,,siwˈezi kusˈoma hˌii,,2,sw-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Tafadhali andika kwa herufi za Kilatini,,tˌafaðˈali andˈika kwa herˈufi za kˌilatˈini,,1,reader-gloss-v1;ipa=espeak
-quick-responses.please-go-ahead,Tafadhali,Endelea,tˌafaðˈali,,2,sw-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,Karibu,Endelea,karˈibu,"welcome — the offering please: come in, help yourself, go ahead",2,"sw-agent-v1;fix=TUKI Kamusi ya Kiswahili-Kiingereza karibu 2 (welcome) and karibisha (welcome -- invite) and sw.wikipedia Chai rev 1350129 (""Karibu chai"" humaanisha mara nyingi kumwalika mgeni ale kitafunio) -- the alt Endelea stays;was=Tafadhali (TUKI please -- tafadhalisha request kindly -- the pack's own request frame utility-templates.please {} -- tafadhali);rule=the offering please (the concept note) -- after you -- here you are -- go ahead;row-corrections-v13;ipa=espeak"
 quick-responses.yes-right,Ndiyo,,n̩dˈijo,,2,sw-agent-v1;ipa=espeak
 quick-responses.no-not,Hapana,La,hapˈana,,2,sw-agent-v1;ipa=espeak
 quick-responses.okay-can,Sawa,,sˈawa,,2,sw-agent-v1;ipa=espeak

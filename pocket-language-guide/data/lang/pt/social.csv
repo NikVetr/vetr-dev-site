@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,Não consigo perceber o que 
 communication.i-do-not-understand,Não entendo,Não percebo,nˌɐ̃ʊ̃ ˌeɪŋtˈeɪŋdʊ,,2,pt-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Não consigo ler isto,,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ lˈeɾ ˈistʊ,,2,pt-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Escreva em letras latinas,,ˌeskrˈevæ ˈeɪŋ lˈetræz lˌatʃˈinæs,,1,reader-gloss-v1;ipa=espeak
-quick-responses.please-go-ahead,Faz favor,Pode passar,fas favˈor,,2,pt-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,Faça favor,Pode passar,fˈasæ favˈor,,2,pt-agent-v1;fix=Priberam favor (fazer o favor de: Ter a amabilidade -- a gentileza de (ex.: faça o favor de entrar -- amigo!)) and pt.wikipedia César de melhor ator rev 61947619 (Après vous -- Portuguese title Faça Favor...) -- the alt Pode passar stays;was=Faz favor (the clipped se faz favor of a request: Priberam r.s.f.f. responder -- se faz favor -- and por favor quando se faz um pedido; pt.wikipedia RSVP: Responda Se Faz Favor);rule=the offering please (the concept note) -- after you -- here you are -- go ahead;row-corrections-v13;ipa=espeak
 quick-responses.yes-right,Sim,Certo,sˈiŋ,,2,pt-agent-v1;ipa=espeak
 quick-responses.no-not,Não,,nˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
 quick-responses.okay-can,De acordo,Pode ser,dʒj ˌakˈoɾədʊ,,2,pt-agent-v1;ipa=espeak

@@ -5,7 +5,7 @@ introductions.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,"w
 introductions.we-are-traveling-together,A ń rin ìrìn-àjò papọ̀,,a n̩˥ rĩ i˩rĩ˩a˩dʒo˩ kpakpɔ˩,,2,yo-agent-v1;ipa=yo-g2p
 introductions.this-is-my-friend,Èyí ni ọ̀rẹ́ mi,,e˩ji˥ ni ɔ˩rɛ˥ mi,,2,yo-agent-v1;ipa=yo-g2p
 introductions.i-am-from,Mo wá láti {},,mo wa˥ la˥ti {},,2,yo-agent-v1;ipa=yo-g2p
-introductions.where-are-you-from,Níbo ni o ti wá?,,ni˥bo ni o ti wa˥,,2,yo-agent-v1;ipa=yo-g2p
+introductions.where-are-you-from,Níbo ni ẹ ti wá?,,ni˥bo ni ɛ ti wa˥,,2,yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (2pl subject ẹ -- object yín -- 2sg o -- ọ) and en.wikipedia Yoruba language rev 1379362191 (the plural of respect) -- the twelfth pass's sources;fix=Bíbélì Mímọ́ Yorùbá Òde Òní (BYO) Genesis 42:7 (Ó béèrè pé -- Níbo ni ẹ ti wá?);was=Níbo ni o ti wá? -- ni o ti wá (2sg subject);rule=honorific-subject-e;register=no familiar row (outside the register scope);row-corrections-v13;ipa=yo-g2p
 introductions.how-are-you,Báwo ni?,,ba˥wo ni,,2,yo-agent-v1;ipa=yo-g2p
 introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́ ni mi,,arĩ˩rĩ˩a˩dʒo˩ afɛ˥ ni mi,,2,yo-agent-v1;ipa=yo-g2p
 introductions.this-is-my-husband-wife,Èyí ni ọkọ mi / aya mi,,e˩ji˥ ni ɔkɔ mi / aja mi,husband-my / wife-my,2,yo-agent-v1;ipa=yo-g2p

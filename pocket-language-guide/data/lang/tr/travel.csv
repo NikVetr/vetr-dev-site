@@ -112,7 +112,7 @@ common-signs.no-photography,fotoğraf çekmek yasaktır,,fotoːɾˈaf tʃɛkmˈ�
 common-signs.do-not-touch,dokunmayınız,,dokˈʊnmajɯnɯz,,2,tr-agent-v1;ipa=espeak
 common-signs.temporarily-closed,geçici olarak kapalı,,ɟetʃidʒˈɪ oɫaɾˈak kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
 common-signs.open-operating,açık,,atʃˈɯk,,2,tr-agent-v1;fix=TDK Güncel Türkçe Sözlük açık 7 (Çalışır durumda olan: Bazı dükkânları açık olan caddeden sola saptılar) -- the pack's closed sign is kapalı;was=hizmette with alt çalışıyor (TDK çalışmak 4 İşler duruma gelmek -- a machine's sense -- and no shop sense);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
-common-signs.closed,kapalı,hizmet dışı,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+common-signs.closed,kapalı,,kapaɫˈɯ,,2,tr-agent-v1;fix=TDK Güncel Türkçe Sözlük kapalı 3 (Çalışma süresi sona ermiş (iş yeri)) -- the text stays;was=alt hizmet dışı (no TDK entry; tr.wikipedia Discovery Uzay Mekiği rev 36751045 hizmet dışı kalmış bir Amerikan uzay mekiği and Nükleer reaktörler listesi rev 37800381 status Hizmet dışı: out of service or decommissioned -- and the pack's own toilets.out-of-order alt Hizmet dışı);rule=the closed sign on a shop door (the concept note) -- a machine out of order is toilets.out-of-order -- the alt cleared;row-corrections-v13;ipa=espeak
 common-signs.stopped-stop,dur,durdu,dˈʊr,,2,tr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Bileti okutmam gerekiyor mu?,Kartı okutmam gerekiyor mu?,biletˈɪ okʊtmˈam ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,validatör,turnike,validatˈœr,,2,tr-agent-v1;ipa=espeak

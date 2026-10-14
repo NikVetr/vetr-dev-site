@@ -19,7 +19,7 @@ accessibility.wheelchair-width,Kẹ̀kẹ́ arọ mi fẹ̀ ní sẹ̀ǹtímít�
 accessibility.hard-of-hearing,Etí mi kò gbọ́ dáadáa,,eti˥ mi ko˩ ɡbɔ˥ da˥ada˥a,,2,yo-agent-v1;ipa=yo-g2p
 accessibility.speak-louder,"Ẹ jọ̀wọ́, sọ̀rọ̀ sókè",,"ɛ dʒɔ˩wɔ˥, sɔ˩rɔ˩ so˥ke˩",,2,yo-agent-v1;ipa=yo-g2p
 accessibility.visually-impaired,Ojú mi kò rí dáadáa,,odʒu˥ mi ko˩ ri˥ da˥ada˥a,,2,yo-agent-v1;ipa=yo-g2p
-accessibility.take-your-arm,Ṣé mo lè dì mọ́ apá rẹ?,,ʃe˥ mo le˩ di˩ mɔ˥ akpa˥ rɛ,,2,yo-agent-v1;ipa=yo-g2p
+accessibility.take-your-arm,Ṣé mo lè dì mọ́ apá yín?,,ʃe˥ mo le˩ di˩ mɔ˥ akpa˥ jĩ˥,,2,yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (2pl subject ẹ -- object yín -- 2sg o -- ọ) and en.wikipedia Yoruba language rev 1379362191 (the plural of respect) -- the twelfth pass's sources;fix=BYO Ezekiel 11:5 (mo mọ ohun tó wà lọ́kàn yín: the 2pl possessive) -- as the pack's board-answers.what-is-your-name orúkọ yín;was=Ṣé mo lè dì mọ́ apá rẹ? -- apá rẹ (2sg possessive);rule=honorific-possessive-yin;register=no familiar row (outside the register scope);row-corrections-v13;ipa=yo-g2p
 accessibility.guide-dog,Ajá amọ̀nà ni èyí,,adʒa˥ amɔ˩na˩ ni e˩ji˥,,2,yo-agent-v1;ipa=yo-g2p
 in-a-building.is-this-the-correct-entrance,Ṣé ẹnu-ọ̀nà tó tọ́ ni èyí?,,ʃe˥ ɛnuɔ˩na˩ to˥ tɔ˥ ni e˩ji˥,,2,yo-agent-v1;ipa=yo-g2p
 in-a-building.do-you-have-wi-fi,Ṣé ẹ ní Wi-Fi?,,ʃe˥ ɛ ni˥ wajfaj,,2,yo-agent-v1;ipa=yo-g2p+loan

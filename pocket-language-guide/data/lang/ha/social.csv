@@ -26,7 +26,7 @@ communication.please-show-me-the-text,Don Allah ka nuna mini rubutun a {target},
 communication.i-cannot-make-out-what-you-are-saying,Ban gane abin da kake faɗa ba,,ban ɡane abin da kake faɗa ba,I-didn't get what you.m are saying,2,ha-agent-v1;ipa=ha-g2p
 communication.i-do-not-understand,Ba na fahimta,,ba na fahimta,neutral register; distinct verb from the casual row above,2,ha-agent-v1;ipa=ha-g2p
 communication.i-cannot-read-it,Ba na iya karanta shi ba,,ba na ija karanta ʃi ba,,2,ha-agent-v1;ipa=ha-g2p
-quick-responses.please-go-ahead,Ci gaba,,tʃi ɡaba,go ahead/continue,2,ha-agent-v1;ipa=ha-g2p
+quick-responses.please-go-ahead,Bisimilla,,bisimilla,"the formula of invitation: go ahead, come in, join in",2,ha-agent-v1;fix=Bargery (maguzawa.dyndns.ws) bismillah (1. Formula of invitation to one to make a start at anything -- or to join in a meal. 2. (a) Formula of invitation to a visitor to approach = come in -- come along; but more commonly bisimillah) and ha.wikipedia Alwala rev 366649 (Yin bisimilla) for the spelling;was=Ci gaba (Bargery gaba II.3(c) Progress: ba ka yi (= ci) gaba ba -- you have made no progress: carry on);rule=the offering please (the concept note) -- after you -- here you are -- go ahead;row-corrections-v13;ipa=ha-g2p
 quick-responses.yes-right,Ee,,ee,,2,ha-agent-v1;ipa=ha-g2p
 quick-responses.no-not,A'a,,aʔa,,2,ha-agent-v1;ipa=ha-g2p
 quick-responses.okay-can,To,Iya,to,iya = can/able,2,ha-agent-v1;ipa=ha-g2p
