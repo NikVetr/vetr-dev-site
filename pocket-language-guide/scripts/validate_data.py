@@ -93,8 +93,9 @@ LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it", "hu"}
 # `check_drawable` already asks whether a codepoint can be *drawn* in the latin
 # stack, and that is a different question: `t` with a dot below, U+1E6D, is in Noto
 # Sans and drew perfectly. It is also not an IPA symbol. It reached the `ipa` column
-# because for the five ROMANISED packs -- Mandarin, Japanese, Korean, Hebrew, Amharic
-# -- `build_ipa.py` reads the *romanisation* column rather than the native script, so
+# because for the ROMANISED packs -- Mandarin, Japanese, Korean, Hebrew, Amharic,
+# Arabic and the two invented languages -- `build_ipa.py` reads the *romanisation*
+# column rather than the native script, so
 # an unconverted letter passes straight through, and from there into the charset and
 # the subset font of all 50 readers of that pack. It shipped.
 #
