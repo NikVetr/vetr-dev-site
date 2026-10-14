@@ -7,6 +7,7 @@ text is NFC, every printed string is drawable by the faces that will draw it, an
 safety-critical sections carry reviewed content.
 """
 import csv
+import itertools
 import json
 import re
 import sys
@@ -569,14 +570,14 @@ def main():
                           "listener-axes.csv, so no variant of it can ever be selected")
         # Every key the registries can actually produce. Sorted `axis=value` pairs,
         # matching `variantKey` in core/speaker.js, and never the all-defaults one --
-        # that is the base row, which lives in the section file. A speaker axis and a
-        # listener axis may combine, for a sentence that changes with both.
+        # that is the base row, which lives in the section file. Axes may combine, for a
+        # sentence that changes with more than one of them.
         singles = {axis: [f"{axis}={value}" for value in held["values"] if value != held["default"]]
                    for axis, held in declared.items()}
-        keys = {key for options in singles.values() for key in options}
-        names = sorted(singles)
-        keys |= {"|".join(sorted((a, b))) for i, x in enumerate(names) for y in names[i + 1:]
-                 for a in singles[x] for b in singles[y]}
+        keys = set()
+        for size in range(1, len(singles) + 1):
+            for chosen in itertools.combinations(sorted(singles), size):
+                keys |= {"|".join(sorted(parts)) for parts in itertools.product(*(singles[a] for a in chosen))}
         base_rows = {}
         for group in groups:
             src = DATA / f"lang/{code}/{group}.csv"
