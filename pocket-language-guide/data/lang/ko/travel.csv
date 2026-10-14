@@ -112,7 +112,7 @@ common-signs.no-photography,촬영 금지,,chwaryeong geumji,tɕʰwaɾjʌŋ kɯm
 common-signs.do-not-touch,만지지 마세요,,manjiji maseyo,mandʑidʑi masejo,,2,ko-agent-v1;ipa=rr
 common-signs.temporarily-closed,임시 휴업,,imsi hyueop,imsi hjuʌp,,2,ko-agent-v1;ipa=rr
 common-signs.open-operating,영업 중,운영 중,yeongeop jung,jʌŋʌp tɕuŋ,,2,ko-agent-v1;ipa=rr
-common-signs.closed,영업 종료,휴업,yeongeop jongnyo,jʌŋʌp tɕoŋnjo,,2,ko-agent-v1;ipa=rr
+common-signs.closed,영업 종료,,yeongeop jongnyo,jʌŋʌp tɕoŋnjo,,2,ko-agent-v1;fix=표준국어대사전 (stdict.korean.go.kr) 종료 (어떤 행동이나 일 따위가 끝남 -- 반대말 개시) and 영업 (영리를 목적으로 하는 사업 ... 오늘은 영업을 쉽니다) -- the text stays;was=alt 휴업 (표준국어대사전 휴업: 사업이나 영업 -- 작업 따위를 일시적으로 중단하고 하루 또는 한동안 쉼 -- 금일 휴업 ... 임시 휴업을 선언하였다: a business suspended for a day or a while -- and the head of the pack's common-signs.temporarily-closed 임시 휴업);rule=the closed sign on a shop door (the concept note) -- a temporary closure is common-signs.temporarily-closed -- the alt cleared;row-corrections-v15;ipa=rr
 common-signs.stopped-stop,정지,,jeongji,tɕʌŋdʑi,,2,ko-agent-v1;ipa=rr
 transit-rides.do-i-need-to-validate,이 표 개찰해야 해요?,,i pyo gaechalhaeya haeyo?,i pʰjo kɛtɕʰalhɛja hɛjo,,2,ko-agent-v1;ipa=rr
 rail-station-words.ticket-validator,개찰기,검표기,gaechalgi,kɛtɕʰalɡi,,2,ko-agent-v1;ipa=rr

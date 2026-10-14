@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Onko wifi maksuton?,,ˈoŋko vˈifi mˈaksuton,,2,fi-
 hotel-basics.how-much-per-night,Paljonko yö kustantaa?,,pˈaljoŋko ˈyø kˈustantaː,,2,fi-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Sisältyykö aamiainen hintaan?,,sˈisæltˌyːkø ˈaːmiˌainen hˈintaːn,,2,fi-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Saisinko nähdä huoneen?,,sˈaisiŋko nˈæhdæ hˈuoneːn,,2,fi-agent-v1;ipa=espeak
-hotel-basics.for-nights,{} yötä,,{} ˈyøtæ,"a Finnish numeral above one governs the partitive singular, so this is right from two up and 'yksi yötä' is wrong for one -- the same trade every pack with numeral government takes, and a single form rather than the Slavic three",2,fi-agent-v1;ipa=espeak
+hotel-basics.for-nights,Öiden määrä: {},,ˈøiden mˈæːræ {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,fi-agent-v1;fix=Kielitoimiston sanakirja yö (mon. gen. öiden -- öitten) and määrä 1a (luku(määrä) -- joukko: Henkilökunnan määrä -- Asukasmäärä);fix=fi.wikipedia Ilmastonmuutos Ruotsissa rev 23163104 (Trooppisten öiden määrä kasvaa);was={} yötä (the partitive a numeral from two governs -- wrong for one: yksi yö);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {} and Oleskelun kesto päivinä: {});row-corrections-v15;ipa=espeak
 hotel-basics.two-beds,"Kaksi erillistä sänkyä, kiitos.",,"kˈaksi ˈerillˌistæ sˈæŋkyæ, kˈiːtos",,2,fi-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Onko huoneessa ilmastointi?,,ˈoŋko hˈuoneːssa ˈilmastˌointi,,2,fi-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Voinko kirjautua ulos myöhemmin?,,vˈoiŋko kˈirjautˌua ˈulos mˈyøhemmin,,2,fi-agent-v1;ipa=espeak

@@ -1544,10 +1544,11 @@ REPAIR = {
     # `jwdʒd` on all 20 rows that ask with it (it is *yūjad*); الليالي "the nights"
     # as `ʔalliːˌaːliː` (*al-layālī*, Wehr: layāl, pl. of layla); الأيام "the days" as
     # `ʔˈiːaːm` (*al-ayyām*, twice); and الأعراض "the symptoms" as `ʔalʔʕɹˈaːdˤ`, with
-    # no vowel and an English r (*al-aʿrāḍ*, once).
+    # no vowel and an English r (*al-aʿrāḍ*, once); تفضّلوا "please, go ahead" as
+    # `tfdˤdˤlˈuː` (*tafaḍḍalū*, stressed on the heavy antepenult, once).
     "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam"), ("jwdʒd", "jˈuːdʒad"),
            ("ʔalliːˌaːliː", "ʔallajˈaːliː"), ("ʔˈiːaːm", "ʔajjˈaːm"),
-           ("ʔalʔʕɹˈaːdˤ", "ʔalʔaʕrˈaːdˤ")],
+           ("ʔalʔʕɹˈaːdˤ", "ʔalʔaʕrˈaːdˤ"), ("tfdˤdˤlˈuː", "tafˈadˤdˤaluː")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
     # soft sign on a final consonant comes out as: `dvʲˈerɪ^` for дверь /dvʲerʲ/.
     # And espeak writes ы as `y`, which in IPA is the close front *rounded* vowel:

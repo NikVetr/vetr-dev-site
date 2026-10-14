@@ -60,7 +60,7 @@ place-words.tourist-spot-sightseeing-area,Αξιοθέατο,Τουριστικ�
 place-words.scenic-area,Φυσικό τοπίο,,,fˌisikˈo topˈio,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Είμαι εδώ για τουρισμό,,Eimai edo gia tourismo,ˈime eðˈo jˈa tˌuɾismˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.here-is-my-passport,Ορίστε το διαβατήριο,,Oriste to diavatirio,oɾˈiste to ðˌiavatˈiɾiˌo,Here is the passport,2,el-agent-v1;roman=elot743;ipa=espeak
-border-customs.i-am-staying-for-days,Μέρες παραμονής: {},Θα μείνω {} μέρες,Meres paramonis: {},mˈeɾes pˌaɾamonˈis {},Days of stay: {} (write a figure),2,el-agent-v1;roman=elot743;ipa=espeak
+border-customs.i-am-staying-for-days,Μέρες παραμονής: {},,Meres paramonis: {},mˈeɾes pˌaɾamonˈis {},Days of stay: {} (write a figure),2,el-agent-v1;roman=elot743;fix=Λεξικό της κοινής νεοελληνικής (Triantafyllidis -- greek-language.gr) ημέρα & μέρα (Θα χρειαστώ δυο μέρες -- Έλειψα τρεις μέρες -- Mια μέρα θα το θυμηθείς: the plural from two -- the singular for one) -- the label text stays;was=alt Θα μείνω {} μέρες (the plural -- wrong for one: μία μέρα);rule=a label whose filler follows a colon and agrees with nothing -- the alt that put a plural after the number cleared;row-corrections-v15;ipa=espeak
 border-customs.nothing-to-declare,Δεν έχω τίποτα να δηλώσω,Ουδέν δηλωτέον,Den echo tipota na diloso,ðˈen ˈexo tˈipotˌa na ðilˈoso,Green channel sign reads ΟΥΔΕΝ ΔΗΛΩΤΕΟΝ,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-staying-at,Μένω εδώ: {},Διαμονή: {},Meno edo: {},mˈeno eðˈo {},I am staying here: {} (no case on fill),2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-here-for-business,Είμαι εδώ για δουλειά,,Eimai edo gia douleia,ˈime eðˈo jˈa ðuʎˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
