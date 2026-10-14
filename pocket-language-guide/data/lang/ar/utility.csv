@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,أريد الذهاب إلى {},,urīd al-dhahāb ilá {},ʔɹˈiːd ʔaððˈahaːb ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
-utility-templates.please-give-me,أرجو إعطائي {},,arjū iʿṭāʾī {},ʔrdʒˈuː ʔʕt̪ˈaːʔiː {},"I ask for being given {} -- arjū with the verbal noun iʿṭāʾ and -ī (me), so nothing addresses the listener; aʿṭinī was the masculine imperative (aʿṭīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 عطو IV (to give (to s.o. s.th.) -- to present -- hand over);in-pack-frame=hotel-requests.wake-up-call أرجو إيقاظي الساعة {};rule=no-second-person;row-corrections-v11;ipa=espeak
-utility-templates.may-i,هل يمكنني {}؟,,hal yumkinunī {}?,hˈal jmknnˈiː {},,2,ar-agent-v1;ipa=espeak
-utility-templates.please-do-not-add,من فضلك بدون {},,min faḍlak bidūn {},mˈin fˈadˤlka budːˈuːna {},please without,2,ar-agent-v1;ipa=espeak
-utility-templates.do-you-have,هل لديك {}؟,,hal ladayk {}?,hˈal ldiːkˌa {},,2,ar-agent-v1;ipa=espeak
-utility-templates.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ˈaktb ʔarɹˈaqm mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-utility-templates.i-need,أحتاج إلى {},,aḥtāj ilá {},ʔħtˈaːdʒ ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
-utility-templates.is-there-nearby,هل يوجد {} بالقرب من هنا؟,,hal yūjad {} bi-al-qurb min hunā?,hˈal jˈuːdʒad {} bilqˈurb mˈin hˈunaː,is there {} near here?,2,ar-agent-v1;fix=ar.wikipedia نعت rev 73534428 (الصفة والموصوف يتطابقان في التذكير والتأنيث);fix=ar.wikipedia فاعل rev 74100548 (يؤنث الفعل ... جوازاً ... إذا كان الفاعل اسماً ظاهراً مجازي التأنيث: «حَكَمَتِ المَحْكَمَةُ» فيصحُّ القول كذلك «حَكَمَ المَحْكَمَةُ» -- so يوجد stays);fix=ar.wikipedia مايدنهيد (إنجلترا) rev 76317202 (يبدأ فوق قفل بولتر بالقرب من هنا);was=هل يوجد {} قريب؟ (hal yūjad {} qarīb?: the masculine adjective -- wrong for a feminine place: صيدلية قريبة -- محطة قريبة);rule=an adverbial that agrees with nothing in place of the adjective (the pack's own هل يوجد مصعد؟ and من هنا);row-corrections-v14;ipa=espeak
-utility-templates.how-much-is,بكم {}؟,,bikam {}?,bˈakam {},,2,ar-agent-v1;ipa=espeak
-utility-templates.is-this,هل هذا {}؟,,hal hādhā {}?,hˈal haˈaðaˌa {},,2,ar-agent-v1;ipa=espeak
-utility-templates.please,{} من فضلك,,{} min faḍlak,{} mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-utility-templates.i-am-looking-for,أبحث عن {},,abḥath ʿan {},ʔbħθ ʕˈan {},,2,ar-agent-v1;ipa=espeak
-utility-templates.do-you-accept,هل تقبلون {}؟,,hal taqbalūn {}?,hˈal tˌaqabːalˈuːna {},,2,ar-agent-v1;ipa=espeak
-utility-templates.i-cannot-find,لا أجد {},,lā ajid {},lˈaː ʔˈadʒadː {},,2,ar-agent-v1;ipa=espeak
-utility-templates.there-is-a-problem-with,هناك مشكلة في {},,hunāk mushkilah fī {},hˈunaːkˌa mˈuʃkilˌa fˈiː {},,2,ar-agent-v1;ipa=espeak
+utility-templates.i-want-to-go-to,أريد الذهاب إلى {},,urīd al-dhahāb ilá {},ʔurˈiːd ʔaððahˈaːb ʔˈilaː {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.please-give-me,أرجو إعطائي {},,arjū iʿṭāʾī {},ʔˈardʒuː ʔiʕtˤˈaːʔiː {},"I ask for being given {} -- arjū with the verbal noun iʿṭāʾ and -ī (me), so nothing addresses the listener; aʿṭinī was the masculine imperative (aʿṭīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 عطو IV (to give (to s.o. s.th.) -- to present -- hand over);in-pack-frame=hotel-requests.wake-up-call أرجو إيقاظي الساعة {};rule=no-second-person;row-corrections-v11;ipa=ala-lc
+utility-templates.may-i,هل يمكنني {}؟,,hal yumkinunī {}?,hˈal jumkˈinuniː {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.please-do-not-add,من فضلك بدون {},,min faḍlak bi-dūn {},mˈin fˈadˤlak bidˈuːn {},please without,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+utility-templates.do-you-have,هل لديك {}؟,,hal ladayk {}?,hˈal ladˈajk {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ʔˈuktub ʔarrˈaqm mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+utility-templates.i-need,أحتاج إلى {},,aḥtāj ilá {},ʔaħtˈaːdʒ ʔˈilaː {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.is-there-nearby,هل يوجد {} بالقرب من هنا؟,,hal yūjad {} bi-al-qurb min hunā?,hˈal jˈuːdʒad {} bilqˈurb mˈin hˈunaː,is there {} near here?,2,ar-agent-v1;fix=ar.wikipedia نعت rev 73534428 (الصفة والموصوف يتطابقان في التذكير والتأنيث);fix=ar.wikipedia فاعل rev 74100548 (يؤنث الفعل ... جوازاً ... إذا كان الفاعل اسماً ظاهراً مجازي التأنيث: «حَكَمَتِ المَحْكَمَةُ» فيصحُّ القول كذلك «حَكَمَ المَحْكَمَةُ» -- so يوجد stays);fix=ar.wikipedia مايدنهيد (إنجلترا) rev 76317202 (يبدأ فوق قفل بولتر بالقرب من هنا);was=هل يوجد {} قريب؟ (hal yūjad {} qarīb?: the masculine adjective -- wrong for a feminine place: صيدلية قريبة -- محطة قريبة);rule=an adverbial that agrees with nothing in place of the adjective (the pack's own هل يوجد مصعد؟ and من هنا);row-corrections-v14;ipa=ala-lc
+utility-templates.how-much-is,بكم {}؟,,bi-kam {}?,bikˈam {},,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+utility-templates.is-this,هل هذا {}؟,,hal hādhā {}?,hˈal hˈaːðaː {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.please,{} من فضلك,,{} min faḍlak,{} mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+utility-templates.i-am-looking-for,أبحث عن {},,abḥath ʿan {},ʔˈabħaθ ʕˈan {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.do-you-accept,هل تقبلون {}؟,,hal taqbalūn {}?,hˈal taqbalˈuːn {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.i-cannot-find,لا أجد {},,lā ajid {},lˈaː ʔˈadʒid {},,2,ar-agent-v1;ipa=ala-lc
+utility-templates.there-is-a-problem-with,هناك مشكلة في {},,hunāk mushkilah fī {},hunˈaːk mˈuʃkila fˈiː {},,2,ar-agent-v1;ipa=ala-lc

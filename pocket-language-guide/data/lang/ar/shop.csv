@@ -1,34 +1,34 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,أدفع بالبطاقة؟,,adfaʿ bi-al-biṭāqah?,ʔdfʕ bilbˈit̪aːqˌa,,2,ar-agent-v1;ipa=espeak
-payment-receipt.pay-cash,أدفع نقداً؟,,adfaʿ naqdan?,ʔdfʕ nqdˈaː,,2,ar-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,أدفع بالرمز؟,أدفع بكود كيو آر؟,adfaʿ bi-al-ramz?,ʔdfʕ birɹˈamz,pay by the code,2,ar-agent-v1;ipa=espeak
-payment-receipt.a-receipt-please,إيصال لطفًا,فاتورة من فضلك,īṣāl luṭfan,ʔˈiːs̪aːl lˈut̪fan,"a receipt, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=espeak
-payment-receipt.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ˈaktb ʔarɹˈaqm mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,kˈam ʔalmˈadʒmuːʕ,,2,ar-agent-v1;ipa=espeak
-payment-receipt.can-we-pay-separately,هل ندفع بشكل منفصل؟,,hal nadfaʿ bi-shakl munfaṣil?,hˈal ndfʕ bʃkl mˈunfas̪ˌil,,2,ar-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,هل الضريبة مشمولة؟,,hal al-ḍarībah mashmūlah?,hˈal ʔadˤdˤˈaɹiːbˌa mʃmˈuːlt,,2,ar-agent-v1;ipa=espeak
-payment-receipt.my-card-was-declined,رُفضت بطاقتي,,rufiḍat biṭāqatī,ɹˈufdˤt bt̪aːqtˌiː,,2,ar-agent-v1;ipa=espeak
-payment-receipt.the-bill-is-wrong,أظنّ أنّ في الحساب خطأ,,aẓunn anna fī al-ḥisāb khaṭaʾ,ʔðnn ʔnn fˈiː ʔalħˈisaːb xˈat̪aʔ,I think there is an error in the bill,2,ar-agent-v1;ipa=espeak
-payment-receipt.i-already-paid,لقد دفعت,,laqad dafaʿt,lqd dfʕt,,2,ar-agent-v1;ipa=espeak
-shopping.i-am-just-looking,أتفرّج فقط,,atafarraj faqaṭ,ʔtfrrdʒ fˈaqat̪,,2,ar-agent-v1;ipa=espeak
-shopping.how-much-is-this,بكم هذا؟,,bikam hādhā?,bˈakam haˈaðaˌa,,2,ar-agent-v1;ipa=espeak
-shopping.that-is-too-expensive,هذا غالي جدّاً,,hādhā ghālī jiddan,haˈaðaˌa ɣˈaːliː dʒdːˈaː,,2,ar-agent-v1;ipa=espeak
-shopping.can-it-be-a-little-cheaper,هل يمكن أن يكون أرخص؟,أرخص شويّة؟,hal yumkin an yakūn arkhaṣ?,hˈal jmkˈunna ʔn jˈakuːn ʔˈarxas̪,,2,ar-agent-v1;ipa=espeak
-shopping.is-there-a-discount,هل هناك خصم؟,,hal hunāk khaṣm?,hˈal hˈunaːkˌa xˈas̪m,,2,ar-agent-v1;ipa=espeak
-shopping.where-do-i-pay,أين أدفع؟,,ayna adfaʿ?,ʔˈajna ʔdfʕ,,2,ar-agent-v1;ipa=espeak
-shopping.i-will-take-this,سآخذ هذا,,saʾākhudh hādhā,sʔaːxð haˈaðaˌa,,2,ar-agent-v1;ipa=espeak
-shopping.what-is-this,ما هذا؟,,mā hādhā?,mˈaː haˈaðaˌa,,2,ar-agent-v1;ipa=espeak
-shopping.where-can-i-buy,أين أشتري {}؟,,ayna ashtarī {}?,ʔˈajna ʔʃtɹˈiː {},,2,ar-agent-v1;ipa=espeak
-shopping.do-you-have-this-in-stock,هل هذا متوفّر؟,,hal hādhā mutawaffir?,hˈal haˈaðaˌa mtˈuːffr,,2,ar-agent-v1;ipa=espeak
-shopping.two-of-these,اثنين من هذا من فضلك,,ithnayn min hādhā min faḍlak,ˈiθnajnˌi mˈin haˈaðaˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-shopping.what-is-it-made-of,من أيّ مادة؟,ما مكوّناته؟,min ayy māddah?,mˈin ʔˈiː mˈaːdːa,from which material,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-another-color,هل يوجد لون آخر؟,,hal yūjad lawn ākhar?,hˈal jˈuːdʒad lˈawn ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal yūjad maqās ākhar?,hˈal jˈuːdʒad mˈaqaːs ʔˈaːxar,,2,ar-agent-v1;ipa=espeak
-color-size-returns.may-i-try-it-on,هل أقيسه؟,هل يمكنني قياسه؟,hal aqīsuh?,hˈal ʔqˈish,,2,ar-agent-v1;ipa=espeak
-color-size-returns.can-i-return-it,هل يمكن إرجاعه؟,,hal yumkin irjāʿuh?,hˈal jmkˈunna ʔˈirdʒaːʕh,,2,ar-agent-v1;ipa=espeak
-color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumkin istibdāluh?,hˈal jmkˈunna ˈistibdˌaːlh,,2,ar-agent-v1;ipa=espeak
-color-size-returns.do-you-have-a-bag,هل لديكم كيس؟,,hal ladaykum kīs?,hˈal ldiːkm kˈajs,"do you (plural) have a bag? -- ladaykum, the plural to the shop, as in food-ordering.do-you-have-drinking-water, so no one listener's gender shows; ladayk was the -ka of a man (ladayki to a woman)",2,ar-agent-v1;fix=en.wikipedia Arabic grammar rev 1375067122 (suffix 2nd m. -ka -- f. -ki; short vowels are not usually written);in-pack-frame=food-ordering.do-you-have-drinking-water (هل لديكم ماء للشرب؟);rule=generic-plural-to-the-house;row-corrections-v6;ipa=espeak
-tax-refund.can-i-get-a-tax-refund,هل يمكنني استرداد الضريبة؟,,hal yumkinunī istirdād al-ḍarībah?,hˈal jmknnˈiː ˈistirdˌaːd ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
-tax-refund.is-tax-free-shopping-available,هل هناك تسوّق معفى من الضريبة؟,,hal hunāk tasawwuq muʿfá min al-ḍarībah?,hˈal hˈunaːkˌa tsˈuːq mˈuʕfaː mˈin ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
-payment-receipt.can-i-pay-by-mobile-money,أدفع بمحفظة الهاتف؟,,adfaʿ bi-maḥfaẓat al-hātif?,ʔdfʕ bmħfðt ʔalhˈaːtif,pay by the phone wallet,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
-payment-receipt.what-is-the-cover-charge,ما هو الرسم الثابت لكل شخص؟,كم الرسم الثابت لكل شخص؟,mā huwa al-rasm al-thābit li-kull shakhṣ?,mˈaː hˈuːa ʔarɹˈasm ʔaθθˈaːbit lkl ʃˈaxs̪,what is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.pay-by-card,أدفع بالبطاقة؟,,adfaʿ bi-al-biṭāqah?,ʔˈadfaʕ bilbitˤˈaːqa,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.pay-cash,أدفع نقداً؟,,adfaʿ naqdan?,ʔˈadfaʕ nˈaqdan,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.pay-by-qr-code,أدفع بالرمز؟,أدفع بكود كيو آر؟,adfaʿ bi-al-ramz?,ʔˈadfaʕ birrˈamz,pay by the code,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.a-receipt-please,إيصال لطفًا,فاتورة من فضلك,īṣāl luṭfan,ʔiːsˤˈaːl lˈutˤfan,"a receipt, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=ala-lc
+payment-receipt.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ʔˈuktub ʔarrˈaqm mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,kˈam ʔalmadʒmˈuːʕ,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.can-we-pay-separately,هل ندفع بشكل منفصل؟,,hal nadfaʿ bi-shakl munfaṣil?,hˈal nˈadfaʕ biʃˈakl mˈunfasˤil,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.is-tax-included,هل الضريبة مشمولة؟,,hal al-ḍarībah mashmūlah?,hˈal ʔadˤdˤarˈiːba maʃmˈuːla,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.my-card-was-declined,رُفضت بطاقتي,,rufiḍat biṭāqatī,rˈufidˤat bitˤˈaːqatiː,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.the-bill-is-wrong,أظنّ أنّ في الحساب خطأ,,aẓunn anna fī al-ḥisāb khaṭaʾ,ʔaðˤˈunn ʔˈanna fˈil ħisˈaːb xˈatˤaʔ,I think there is an error in the bill,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.i-already-paid,لقد دفعت,,la-qad dafaʿt,laqˈad dafˈaʕt,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+shopping.i-am-just-looking,أتفرّج فقط,,atafarraj faqaṭ,ʔatafˈarradʒ fˈaqatˤ,,2,ar-agent-v1;ipa=ala-lc
+shopping.how-much-is-this,بكم هذا؟,,bi-kam hādhā?,bikˈam hˈaːðaː,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+shopping.that-is-too-expensive,هذا غالي جدّاً,,hādhā ghālī jiddan,hˈaːðaː ɣˈaːliː dʒˈiddan,,2,ar-agent-v1;ipa=ala-lc
+shopping.can-it-be-a-little-cheaper,هل يمكن أن يكون أرخص؟,أرخص شويّة؟,hal yumkin an yakūn arkhaṣ?,hˈal jˈumkin ʔˈan jakˈuːn ʔˈarxasˤ,,2,ar-agent-v1;ipa=ala-lc
+shopping.is-there-a-discount,هل هناك خصم؟,,hal hunāk khaṣm?,hˈal hunˈaːk xˈasˤm,,2,ar-agent-v1;ipa=ala-lc
+shopping.where-do-i-pay,أين أدفع؟,,ayna adfaʿ?,ʔˈajna ʔˈadfaʕ,,2,ar-agent-v1;ipa=ala-lc
+shopping.i-will-take-this,سآخذ هذا,,sa-ākhudh hādhā,saʔˈaːxuð hˈaːðaː,,2,ar-agent-v1;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc
+shopping.what-is-this,ما هذا؟,,mā hādhā?,mˈaː hˈaːðaː,,2,ar-agent-v1;ipa=ala-lc
+shopping.where-can-i-buy,أين أشتري {}؟,,ayna ashtarī {}?,ʔˈajna ʔˈaʃtariː {},,2,ar-agent-v1;ipa=ala-lc
+shopping.do-you-have-this-in-stock,هل هذا متوفّر؟,,hal hādhā mutawaffir?,hˈal hˈaːðaː mutawˈaffir,,2,ar-agent-v1;ipa=ala-lc
+shopping.two-of-these,اثنين من هذا من فضلك,,ithnayn min hādhā min faḍlak,ʔiθnˈajn mˈin hˈaːðaː mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+shopping.what-is-it-made-of,من أيّ مادة؟,ما مكوّناته؟,min ayy māddah?,mˈin ʔˈajj mˈaːdda,from which material,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.do-you-have-another-color,هل يوجد لون آخر؟,,hal yūjad lawn ākhar?,hˈal jˈuːdʒad lˈawn ʔˈaːxar,,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal yūjad maqās ākhar?,hˈal jˈuːdʒad maqˈaːs ʔˈaːxar,,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.may-i-try-it-on,هل أقيسه؟,هل يمكنني قياسه؟,hal aqīsuh?,hˈal ʔaqˈiːsuh,,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.can-i-return-it,هل يمكن إرجاعه؟,,hal yumkin irjāʿuh?,hˈal jˈumkin ʔirdʒˈaːʕuh,,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumkin istibdāluh?,hˈal jˈumkin ʔistibdˈaːluh,,2,ar-agent-v1;ipa=ala-lc
+color-size-returns.do-you-have-a-bag,هل لديكم كيس؟,,hal ladaykum kīs?,hˈal ladˈajkum kˈiːs,"do you (plural) have a bag? -- ladaykum, the plural to the shop, as in food-ordering.do-you-have-drinking-water, so no one listener's gender shows; ladayk was the -ka of a man (ladayki to a woman)",2,ar-agent-v1;fix=en.wikipedia Arabic grammar rev 1375067122 (suffix 2nd m. -ka -- f. -ki; short vowels are not usually written);in-pack-frame=food-ordering.do-you-have-drinking-water (هل لديكم ماء للشرب؟);rule=generic-plural-to-the-house;row-corrections-v6;ipa=ala-lc
+tax-refund.can-i-get-a-tax-refund,هل يمكنني استرداد الضريبة؟,,hal yumkinunī istirdād al-ḍarībah?,hˈal jumkˈinuniː ʔistirdˈaːd ʔadˤdˤarˈiːba,,2,ar-agent-v1;ipa=ala-lc
+tax-refund.is-tax-free-shopping-available,هل هناك تسوّق معفى من الضريبة؟,,hal hunāk tasawwuq muʿfá min al-ḍarībah?,hˈal hunˈaːk tasˈawwuq mˈuʕfaː mˈin ʔadˤdˤarˈiːba,,2,ar-agent-v1;ipa=ala-lc
+payment-receipt.can-i-pay-by-mobile-money,أدفع بمحفظة الهاتف؟,,adfaʿ bi-maḥfaẓat al-hātif?,ʔˈadfaʕ bimˈaħfaðˤat ʔalhˈaːtif,pay by the phone wallet,2,translator-requests-v1;in-pack-neighbour;ipa=ala-lc
+payment-receipt.what-is-the-cover-charge,ما هو الرسم الثابت لكل شخص؟,كم الرسم الثابت لكل شخص؟,mā huwa al-rasm al-thābit li-kull shakhṣ?,mˈaː hˈuwar rˈasm ʔaθθˈaːbit likˈull ʃˈaxsˤ,what is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=ala-lc

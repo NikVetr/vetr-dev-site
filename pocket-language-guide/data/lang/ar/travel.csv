@@ -1,135 +1,135 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-border-customs.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,ˈana sˈaːʔiħ,,2,ar-agent-v1;ipa=espeak
-border-customs.here-is-my-passport,هذا جواز سفري,,hādhā jawāz safarī,haˈaðaˌa dʒˈawaːz sˈafaɹˌiːj,,2,ar-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,مدة الإقامة بالأيام: {},,muddat al-iqāmah bi-al-ayyām: {},mˈudːa ʔalʔˈiqaːmˌa bilʔajjˈaːm {},length of stay in days: {},2,ar-agent-v1;fix=ar.wikipedia سياسة التأشيرات في إسرائيل rev 74227109 (على ألا تتجاوز مدة الإقامة 3 أشهر);fix=ar.wikipedia تاريخ يولياني rev 75012349 (الوقت بالأيام);fix=ar.wikipedia العدد والمعدود rev 76218556 (تمييز الأعداد من 11 إلى 99 مفرد منصوب);was=سأبقى {} أيام (saʾabqá {} ayyām: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames حساسية دوائية: {} and عدد الليالي: {});row-corrections-v14;ipa=espeak
-border-customs.nothing-to-declare,لا شيء للتصريح,لا شيء للإفصاح عنه,lā shayʾ lil-taṣrīḥ,lˈaː ʃˈajʔ llts̪ɹiːħ,,1,ar-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,أنا مقيم في {},,anā muqīm fī {},ˈana mˈuqiːm fˈiː {},,2,ar-agent-v1;ipa=espeak
-border-customs.i-am-here-for-business,أنا هنا للعمل,,anā hunā lil-ʿamal,ˈana hˈunaː llʕml,,2,ar-agent-v1;ipa=espeak
-border-customs.i-have-a-return-ticket,لديّ تذكرة عودة,,ladayya tadhkirat ʿawdah,ldiː tˈaðkaɹˌa ʕˈawda,,2,ar-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,أزور عائلتي,,azūr ʿāʾilatī,ʔˈazwar ʕˈaːʔltiː,,2,ar-agent-v1;ipa=espeak
-border-customs.this-is-for-personal-use,هذا للاستخدام الشخصي,,hādhā lil-istikhdām al-shakhṣī,haˈaðaˌa llaːstxdˌaːm ʔaʃʃˈaxs̪iːj,,2,ar-agent-v1;ipa=espeak
-border-customs.i-am-in-transit,أنا مسافر عابر,ترانزيت,anā musāfir ʿābir,ˈana mˈusaːfˌir ʕˈaːbir,,2,ar-agent-v1;ipa=espeak
-border-customs.i-have-in-cash,معي {} نقداً,,maʿī {} naqdan,mˈaʕj {} nqdˈaː,,2,ar-agent-v1;ipa=espeak
-border-customs.this-is-a-gift,هذه هدية,,hādhihi hadīyah,haˈaðihˌi hˈadiːjˌa,,2,ar-agent-v1;ipa=espeak
-border-customs.where-do-i-collect-my-baggage,أين أستلم أمتعتي؟,,ayna astalim amtiʿatī?,ʔˈajna ʔstlm ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
-border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,kˈam jmknnˈiː ʔalbˈaqaːʔ,,2,ar-agent-v1;ipa=espeak
-border-customs.i-have-a-connecting-flight,لديّ رحلة متّصلة,رحلة ترانزيت,ladayya riḥlah muttaṣilah,ldiː ɹˈiħla mtːs̪lt,,2,ar-agent-v1;ipa=espeak
-border-customs.may-i-have-an-entry-stamp,أريد ختم الدخول من فضلك,,urīd khatm al-dukhūl min faḍlak,ʔɹˈiːd xˈatam ʔaddˈuxuːl mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-border-customs.visa,تأشيرة,فيزا,taʾshīrah,tʔʃˈiːrt,,2,ar-agent-v1;ipa=espeak
-border-customs.i-have-no-food-or-plants,لا أحمل طعاماً أو نباتات,,lā aḥmil ṭaʿāman aw nabātāt,lˈaː ʔˈaħmal t̪ʕˈaːmaː ʔˈaw mbˈaːtaːt,,2,ar-agent-v1;ipa=espeak
-border-customs.passport-control,مراقبة الجوازات,الجوازات,murāqabat al-jawāzāt,muɹˈaːqabˌa ʔaldʒˈuːaːzˌaːt,,2,ar-agent-v1;ipa=espeak
-border-customs.customs,الجمارك,,al-jamārik,ʔaldʒˈummaːrkˌa,,2,ar-agent-v1;ipa=espeak
-border-customs.baggage-claim,استلام الأمتعة,,istilām al-amtiʿah,ˈistilˌaːm ʔalʔmtʕt,,2,ar-agent-v1;ipa=espeak
-border-customs.customs-declaration,الإقرار الجمركي,التصريح الجمركي,al-iqrār al-jumrukī,ʔalʔˈiqɹaːr ʔaldʒˈumɹukˌiːj,,1,ar-agent-v1;ipa=espeak
-border-customs.arrival-card,بطاقة الوصول,,biṭāqat al-wuṣūl,bˈit̪aːqˌa ʔalwˈus̪uːl,,2,ar-agent-v1;ipa=espeak
-border-customs.transit,ترانزيت,عبور,tarānzīt,tɹˈaːnziːt,,2,ar-agent-v1;ipa=espeak
-border-customs.boarding-pass,بطاقة الصعود,,biṭāqat al-ṣuʿūd,bˈit̪aːqˌa ʔas̪s̪ˈuʕuːd,,2,ar-agent-v1;ipa=espeak
-directions.where-is,أين {}؟,,ayna {}?,ʔˈajna {},,2,ar-agent-v1;ipa=espeak
-directions.how-do-i-get-to,كيف أصل إلى {}؟,,kayf aṣil ilá {}?,kˈajfa ʔˈas̪l ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
-directions.is-it-far,هل هو بعيد؟,,hal huwa baʿīd?,hˈal hˈuːa bˈaʕiːd,,2,ar-agent-v1;ipa=espeak
-directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,kˈam jstɣrq siːɹˌaː,how long on foot,2,ar-agent-v1;ipa=espeak
-directions.please-show-me-on-the-map,أرجو الإشارة إلى المكان على الخريطة,,arjū al-ishārah ilá al-makān ʿalá al-kharīṭah,ʔrdʒˈuː ʔalʔˈiʃaːɹˌa ʔˈilaː ʔalmˈakaːn ʕˈalaː ʔalxˈaɹiːt̪ˌa,"I ask for pointing to the place on the map -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the passer-by; arinī was the masculine imperative (arīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 شور IV (to point, indicate, point out -- إلى to) išāra (sign, indication);fix=ar.wikipedia عساف الحسين rev 75661804 (أشار إلى مكان);in-pack-frame=phone-text-power.please-confirm;in-pack-neighbour=accessibility.wheelchair-access;rule=no-second-person;row-corrections-v5;ipa=espeak"
-directions.where-is-the-nearest,أين أقرب {}؟,,ayna aqrab {}?,ʔˈajna ʔˈaqɹab {},,2,ar-agent-v1;ipa=espeak
-directions.where-am-i,أين أنا؟,,ayna anā?,ʔˈajna ˈana,,2,ar-agent-v1;ipa=espeak
-directions.which-way,في أيّ اتجاه؟,,fī ayy ittijāh?,fˈiː ʔˈiː ˈitːidʒˌaːh,,2,ar-agent-v1;ipa=espeak
-directions.can-i-walk-there,هل يمكن المشي؟,,hal yumkin al-mashy?,hˈal jmkˈunna ʔalmˈaʃj,,2,ar-agent-v1;ipa=espeak
-directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,kˈam ʔalmˈasaːfˌa,,2,ar-agent-v1;ipa=espeak
-directions.which-exit,أيّ مخرج؟,,ayy makhraj?,ʔˈiː mˈuxɹidʒ,,2,ar-agent-v1;ipa=espeak
-directions.can-you-show-me-the-way,هل يمكن إرشادي إلى الطريق؟,,hal yumkin irshādī ilá al-ṭarīq?,hˈal jmkˈunna ʔˈirʃaːdˌiːj ʔˈilaː ʔat̪ˈaɹiːq,"is showing me the way possible? -- the impersonal yumkin with the verbal noun and the object suffix -ī, as in taxi.can-you-wait-for-me-here, so nothing addresses the passer-by; irshād as in accessibility.guide-dog; tadullunī was the masculine (tadullīnanī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 رشد IV iršād (guidance; a conducting, showing the way -- إلى to);fix=ar.wikipedia الإمبراطور تشنغده rev 73059623 (طلب منهم إرشاده إلى الطريق);in-pack-frame=taxi.can-you-wait-for-me-here;in-pack-neighbour=accessibility.guide-dog;rule=no-second-person;row-corrections-v5;ipa=espeak"
-directions.north,شمال,,shamāl,ʃˈamaːl,,2,ar-agent-v1;ipa=espeak
-directions.south,جنوب,,janūb,dʒˈanuːb,,2,ar-agent-v1;ipa=espeak
-directions.east,شرق,,sharq,ʃˈarq,,2,ar-agent-v1;ipa=espeak
-directions.west,غرب,,gharb,ɣˈarb,,2,ar-agent-v1;ipa=espeak
-quick-directions.go-straight,إلى الأمام مباشرة,إلى الأمام,ilá al-amām mubāsharatan,ʔˈilaː ʔalʔˈamaːm mubˈaːʃaɹˌa,"straight ahead -- a direction with no verb, the row's own ilá al-amām with its mubāsharatan, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; imshi was the masculine imperative (imshī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 أمام (ilā l-amāmi to the front, forward, onward, ahead);fix=Wehr-1976 بشر mubāšaratan (immediately, directly);fix=ar.wikipedia بيدق (شطرنج) rev 72232792 (تحركت هذه القطعة إلى الأمام مباشرة);in-pack-neighbour=quick-directions.go-straight text_alt;rule=no-second-person;row-corrections-v5;ipa=espeak"
-quick-directions.turn-left,يساراً,,yasāran,jsˈaːɹaː,"to the left -- the adverb with no verb, as a direction is given, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; liff was the masculine imperative (liffī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 يسر yasār (left side | yasāran to (at, on) the left);fix=ar.wikipedia جبل حديد rev 76003456 (ثم ينعطفون عند قرية ونغة يميناً ... ثم يساراً عند اللافتة: the adverb alone as a direction);in-pack-frame=quick-directions.on-the-left;rule=no-second-person;row-corrections-v5;ipa=espeak"
-quick-directions.turn-right,يميناً,,yamīnan,jmˈiːnaː,"to the right -- the adverb with no verb, as a direction is given, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; liff was the masculine imperative (liffī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 يمن yamīn (right side | yamīnan to (at, on) the right);fix=ar.wikipedia جبل حديد rev 76003456 (ثم ينعطفون عند قرية ونغة يميناً ... ثم يساراً عند اللافتة: the adverb alone as a direction);in-pack-frame=quick-directions.on-the-left;rule=no-second-person;row-corrections-v5;ipa=espeak"
-quick-directions.this-way,من هنا,,min hunā,mˈin hˈunaː,,2,ar-agent-v1;ipa=espeak
-quick-directions.that-way,من هناك,,min hunāk,mˈin hˈunaːkˌa,,2,ar-agent-v1;ipa=espeak
-quick-directions.on-the-left,على اليسار,,ʿalá al-yasār,ʕˈalaː ʔaljˈasaːr,,2,ar-agent-v1;ipa=espeak
-quick-directions.on-the-right,على اليمين,,ʿalá al-yamīn,ʕˈalaː ʔaljˈamiːn,,2,ar-agent-v1;ipa=espeak
-quick-directions.across-from-here,في الجهة المقابلة,مقابل,fī al-jihah al-muqābilah,fˈiː ʔaldʒˈiha ʔalmuqˈaːbalˌa,on the opposite side,2,ar-agent-v1;ipa=espeak
-quick-directions.in-front,أمام,,amām,ʔˈamaːm,,2,ar-agent-v1;ipa=espeak
-quick-directions.behind,خلف,وراء,khalf,xˈalf,,2,ar-agent-v1;ipa=espeak
-taxi.please-take-me-here,أرجو توصيلي إلى هنا,,arjū tawṣīlī ilá hunā,ʔrdʒˈuː tˈuːs̪iːlˌiː ʔˈilaː hˈunaː,"I ask for taking me to here -- arjū with the verbal noun and the object suffix -ī, as in hotel-requests.wake-up-call, so nothing addresses the driver; khudhnī was the masculine imperative (khudhīnī to a woman); tawṣīl as in hitchhiking.thank-you-for-the-ride",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 وصل II (to take s.o. to -- to give s.o. a ride or a lift) tawṣīl (conveyance);fix=ar.wikipedia كريزي تاكسي (سلسلة ألعاب فيديو) rev 75558524 (سائق سيارة أجرة ... توصيل الركاب إلى وجهاتهم);in-pack-frame=hotel-requests.wake-up-call;in-pack-neighbour=hitchhiking.thank-you-for-the-ride;rule=no-second-person;row-corrections-v4;ipa=espeak
-taxi.please-send-me-the-address,أرسل لي العنوان من فضلك,,arsil lī al-ʿunwān min faḍlak,ʔˈarsal lˈajj ʔalʕˈunwaːn mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-taxi.we-need-the-east-gate-not-the-south-gate,نريد البوابة الشرقية لا الجنوبية,,nurīd al-bawwābah al-sharqīyah lā al-janūbīyah,nɹˈiːd ʔalbˈawwaːbˌa ʔaʃʃarqˈijjah lˈaː ʔaldʒˌanuːbˈijjah,,2,ar-agent-v1;ipa=espeak
-taxi.please-stop-here,أرجو التوقّف هنا,,arjū al-tawaqquf hunā,ʔrdʒˈuː ʔattˈuːqːf hˈunaː,"I ask for stopping here -- arjū with the verbal noun, as in massage-spa.please-stop, so nothing addresses the driver; tawaqqaf was the masculine imperative (tawaqqafī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 وقف V (to stop, halt, come to a stop) tawaqquf (halt, stop);in-pack-frame=massage-spa.please-stop;rule=no-second-person;row-corrections-v4;ipa=espeak"
-taxi.can-you-wait-for-me-here,هل يمكن انتظاري هنا؟,,hal yumkin intiẓārī hunā?,hˈal jmkˈunna ˈantðaːɹˌiː hˈunaː,"is waiting for me here possible? -- the impersonal yumkin with the verbal noun and the object suffix -ī, as in hotel-requests.can-i-store-my-luggage, so nothing addresses the driver; tantaẓirunī was the masculine (tantaẓirīnanī to a woman)",2,ar-agent-v1;fix=Wehr-1976 نظر VIII (to wait for s.o.) intiẓār (waiting);in-pack-frame=hotel-requests.can-i-store-my-luggage;rule=no-second-person;row-corrections-v4;ipa=espeak
-taxi.we-need-to-catch-the-high-speed-train,نريد اللحاق بالقطار السريع,,nurīd al-liḥāq bi-al-qiṭār al-sarīʿ,nɹˈiːd ʔallˈiħaːq bilqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
-taxi.please-use-the-meter,شغّل العدّاد من فضلك,,shaghghil al-ʿaddād min faḍlak,ʃɣɣl ʔalʕdːˈaːd mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-taxi.i-will-get-off-here,سأنزل هنا,,saʾanzil hunā,sʔnzl hˈunaː,,2,ar-agent-v1;ipa=espeak
-taxi.please-get-me-there-in-time-for-the-shinkansen,أرجو الوصول قبل موعد القطار السريع,,arjū al-wuṣūl qabl mawʿid al-qiṭār al-sarīʿ,ʔrdʒˈuː ʔalwˈus̪uːl qˈabl mˈawʕid ʔalqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
-taxi.could-you-make-it-colder,أرجو رفع المكيف,,arjū rafʿ al-mukayyif,ʔrdʒˈuː ɹˈafʕ ʔalmˈukajjˌaf,"I ask for raising the AC -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the driver; irfaʿ was the masculine imperative (irfaʿī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 رفع rafʿ (raising, stepping up);in-pack-frame=phone-text-power.please-confirm;rule=no-second-person;row-corrections-v4;ipa=espeak"
-taxi.could-you-make-it-warmer,أرجو تخفيف المكيف,,arjū takhfīf al-mukayyif,ʔrdʒˈuː tˈaxfiːf ʔalmˈukajjˌaf,"I ask for turning down the AC -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the driver; khaffif was the masculine imperative (khaffifī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 خف II (to lessen, reduce, moderate) takhfīf (lessening, reduction);in-pack-frame=phone-text-power.please-confirm;rule=no-second-person;row-corrections-v4;ipa=espeak"
-taxi.may-i-open-the-window,هل يمكنني فتح النافذة؟,,hal yumkinunī fatḥ al-nāfidhah?,hˈal jmknnˈiː fˈatħ ʔannˈaːfiðˌa,,2,ar-agent-v1;ipa=espeak
-transit-rides.two-tickets,تذكرتان لطفًا,تذكرتين,tadhkiratān luṭfan,tðkrtˈaːn lˈut̪fan,"two tickets, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا;in-pack-neighbour=board-answers.please-wait;rule=no-second-person;row-corrections-v5;ipa=espeak
-transit-rides.where-is-the-subway-station,أين محطة المترو؟,,ayna maḥaṭṭat al-mitrū?,ʔˈajna mˈaħat̪t̪ˌa ʔalmˈitɹuː,,2,ar-agent-v1;ipa=espeak
-transit-rides.does-this-bus-train-go-to,هل يذهب هذا إلى {}؟,,hal yadhhab hādhā ilá {}?,hˈal jðhb haˈaðaˌa ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
-transit-rides.what-is-the-next-stop,ما المحطة القادمة؟,,mā al-maḥaṭṭah al-qādimah?,mˈaː ʔalmˈaħat̪t̪ˌa ʔalqˈaːdimˌa,,2,ar-agent-v1;ipa=espeak
-transit-rides.please-tell-me-where-to-get-off,أرجو إخباري أين أنزل,,arjū ikhbārī ayna anzil,ʔrdʒˈuː ʔˈixbaːɹˌiːj ʔˈajna ʔˈanzal,"I ask for telling me where I get off -- arjū with the verbal noun and the object suffix -ī, as in hotel-requests.wake-up-call, so nothing addresses the driver; anzil is the first person, one form for any speaker; akhbirnī was the masculine imperative (akhbirīnī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 خبر IV (to tell, inform s.o.) ikhbār (notification, information);in-pack-frame=hotel-requests.wake-up-call;rule=no-second-person;row-corrections-v4;ipa=espeak"
-transit-rides.is-this-direct,هل هذا مباشر؟,,hal hādhā mubāshir?,hˈal haˈaðaˌa mˈubaːʃˌir,,2,ar-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-transfer,هل يجب أن أبدّل؟,هل هناك تبديل؟,hal yajib an ubaddil?,hˈal jdʒb ʔn ʔbdːl,,2,ar-agent-v1;ipa=espeak
-transit-rides.is-it-delayed,هل هو متأخّر؟,,hal huwa mutaʾakhkhir?,hˈal hˈuːa mtʔxxr,,2,ar-agent-v1;ipa=espeak
-transit-rides.i-am-in-a-hurry,أنا مستعجل,,anā mustaʿjil,ˈana mˈustaʕdʒˌal,,2,ar-agent-v1;ipa=espeak
-transit-rides.which-platform,أيّ رصيف؟,,ayy raṣīf?,ʔˈiː ɹˈas̪iːf,,2,ar-agent-v1;ipa=espeak
-transit-rides.what-time-is-the-next-one,متى القادم؟,,matá al-qādim?,mˈataː ʔalqˈaːdim,,2,ar-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,تجاوزت محطتي,,tajāwazt maḥaṭṭatī,tdʒˈaːwzt mħt̪tˈiː,,2,ar-agent-v1;ipa=espeak
-transit-rides.can-i-use-this-ticket,هل تصلح هذه التذكرة؟,,hal taṣluḥ hādhihi al-tadhkirah?,hˈal ts̪lħ haˈaðihˌi ʔattˈaðkaɹˌa,,2,ar-agent-v1;ipa=espeak
-place-words.scenic-area,منطقة طبيعية,,minṭaqah ṭabīʿīyah,mˈint̪aqˌa t̪abˈiːʕiːjˌa,,2,ar-agent-v1;ipa=espeak
-place-words.visitor-center,مركز الزوار,,markaz al-zuwwār,mˈarkaz ʔazzˈuːaːr,,2,ar-agent-v1;ipa=espeak
-place-words.railway-station,محطة القطار,,maḥaṭṭat al-qiṭār,mˈaħat̪t̪ˌa ʔalqˈit̪aːr,,2,ar-agent-v1;ipa=espeak
-place-words.airport,مطار,,maṭār,mˈat̪aːr,,2,ar-agent-v1;ipa=espeak
-place-words.service-desk,مكتب الاستعلامات,استعلامات,maktab al-istiʿlāmāt,mˈaktab alˈastʕlaːmˌaːt,,2,ar-agent-v1;ipa=espeak
-place-words.bus-stop,موقف الحافلة,موقف الباص,mawqif al-ḥāfilah,mˈawqif ʔalħˈaːfilˌa,,2,ar-agent-v1;ipa=espeak
-place-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifð ʔalʔmtʕt,,2,ar-agent-v1;ipa=espeak
-place-words.tourist-spot-sightseeing-area,معلم سياحي,,maʿlam siyāḥī,mˈuʕallˌim sˈiːaːħˌiːj,,2,ar-agent-v1;ipa=espeak
-pickup-meeting.where-is-the-pickup-point,أين نقطة الالتقاء؟,,ayna nuqṭat al-iltiqāʾ?,ʔˈajna nˈuqt̪a alˈiltiqˌaːʔ,,2,ar-agent-v1;ipa=espeak
-pickup-meeting.please-send-me-the-pickup-point,أرسل لي نقطة الالتقاء,,arsil lī nuqṭat al-iltiqāʾ,ʔˈarsal lˈajj nˈuqt̪a alˈiltiqˌaːʔ,,2,ar-agent-v1;ipa=espeak
-pickup-meeting.please-pick-us-up-here,خذنا من هنا من فضلك,,khudhnā min hunā min faḍlak,xðnˈaː mˈin hˈunaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-pickup-meeting.meet-us-at,قابلنا في {},,qābilnā fī {},qˈaːblnaː fˈiː {},,2,ar-agent-v1;ipa=espeak
-pickup-meeting.please-call-me-a-ride,اطلب لي سيارة من فضلك,,uṭlub lī sayyārah min faḍlak,ˈat̪lb lˈajj sˈajjaːɹˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-pickup-meeting.please-call-a-taxi,اطلب لي تاكسي من فضلك,سيارة أجرة,uṭlub lī tāksī min faḍlak,ˈat̪lb lˈajj tˈaːksiːj mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-rail-station-words.high-speed-rail,القطار السريع,,al-qiṭār al-sarīʿ,ʔalqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
-rail-station-words.maglev,القطار المغناطيسي,,al-qiṭār al-maghnāṭīsī,ʔalqˈit̪aːr ʔalmɣnˈaːt̪iːsˌiː,,2,ar-agent-v1;ipa=espeak
-rail-station-words.transfer,تبديل,,tabdīl,tˈabdiːl,,2,ar-agent-v1;ipa=espeak
-rail-station-words.ticket-gate,بوابة التذاكر,,bawwābat al-tadhākir,bˈawwaːbˌa ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
-rail-station-words.platform,رصيف,,raṣīf,ɹˈas̪iːf,,2,ar-agent-v1;ipa=espeak
-rail-station-words.ticket-office,شبّاك التذاكر,مكتب التذاكر,shubbāk al-tadhākir,ʃbːˈaːka ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
-rail-station-words.waiting-room,صالة الانتظار,,ṣālat al-intiẓār,s̪ˈaːla alˈintiðˌaːr,,2,ar-agent-v1;ipa=espeak
-rail-station-words.train-number,رقم القطار,,raqm al-qiṭār,ɹˈaqm ʔalqˈit̪aːr,,2,ar-agent-v1;ipa=espeak
-rail-station-words.carriage,عربة,,ʿarabah,ʕˈaɹabˌa,,2,ar-agent-v1;ipa=espeak
-rail-station-words.seat,مقعد,,maqʿad,mˈaqʕad,,2,ar-agent-v1;ipa=espeak
-rail-station-words.last-train,آخر قطار,,ākhir qiṭār,ʔˈaːxar qˈit̪aːr,,2,ar-agent-v1;ipa=espeak
-rail-station-words.delayed,متأخّر,تأخير,mutaʾakhkhir,mtʔxxr,,2,ar-agent-v1;ipa=espeak
-rail-station-words.final-stop,المحطة الأخيرة,,al-maḥaṭṭah al-akhīrah,ʔalmˈaħat̪t̪ˌa ʔalʔxˈiːrt,,2,ar-agent-v1;ipa=espeak
-common-signs.open-on,مفتوح,تشغيل,maftūḥ,mˈaftuːħ,,2,ar-agent-v1;ipa=espeak
-common-signs.closed-off,مغلق,إيقاف,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
-common-signs.occupied,مشغول,,mashghūl,mˈaʃɣuːl,,2,ar-agent-v1;ipa=espeak
-common-signs.vacant,فارغ,شاغر,fārigh,fˈaːɹiɣ,,1,ar-agent-v1;ipa=espeak
-common-signs.caution,تحذير,احترس,taḥdhīr,tˈaħðiːr,,2,ar-agent-v1;ipa=espeak
-common-signs.no-entry,ممنوع الدخول,,mamnūʿ al-dukhūl,mˈamnuːʕ ʔaddˈuxuːl,,2,ar-agent-v1;ipa=espeak
-common-signs.no-smoking,ممنوع التدخين,,mamnūʿ al-tadkhīn,mˈamnuːʕ ʔattˈadxiːn,,2,ar-agent-v1;ipa=espeak
-common-signs.no-photography,ممنوع التصوير,,mamnūʿ al-taṣwīr,mˈamnuːʕ ʔattˈas̪wiːr,,2,ar-agent-v1;ipa=espeak
-common-signs.do-not-touch,ممنوع اللمس,لا تلمس,mamnūʿ al-lams,mˈamnuːʕ ʔallˈamas,,2,ar-agent-v1;ipa=espeak
-common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,mˈuɣlaq mʔqtˈaː,,2,ar-agent-v1;ipa=espeak
-common-signs.open-operating,مفتوح,,maftūḥ,mˈaftuːħ,,2,ar-agent-v1;fix=Wehr-1976 مفتوح (maftūḥ opened -- open) and ar.wikipedia شارع فاي وين rev 71363894 (وعادة ما تكون هذه المحلات مفتوحة بين 10.30 صباحا و 22.30 مساء) -- the pack's closed sign is مغلق;was=يعمل with alt قيد التشغيل (Wehr عمل to do -- act -- operate -- be active -- work);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=espeak
-common-signs.closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
-common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,mtˈuːqːf,,2,ar-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,hˈal jdʒb tˈamɹiːr ʔattˈaðkaɹˌa qˈabl ʔas̪s̪ˈuʕuːd,must the ticket be swiped before boarding,1,ar-gaps-v1;ipa=espeak
-rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,qˈaːɹiʔ ʔalbt̪aːqˌaːt,card reader,1,ar-gaps-v1;ipa=espeak
-common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr,rmˈuːz lˈaħm ʔalxˈinziːr,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
-rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒɹa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
-transit-rides.where-do-i-pay-the-fare,أين أدفع الأجرة؟,,ayna adfaʿ al-ujrah?,ʔˈajna ʔdfʕ ʔalʔˈudʒɹa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
-air-travel.where-is-check-in,أين تسجيل الوصول؟,,ayna tasjīl al-wuṣūl?,ʔˈajna tˈasdʒiːl ʔalwˈus̪uːl,"tasjīl al-wuṣūl = check-in, the term Gulf carriers' own Arabic-language sites use",2,ar-agent-v1;ipa=espeak
-air-travel.which-gate,أي بوابة؟,,ayy bawwābah?,ʔˈajj bˈawwaːbˌa,"bawwābah = gate, already the pack's word (taxi.we-need-the-east-gate-not-the-south-gate)",2,ar-agent-v1;ipa=espeak
-air-travel.where-is-the-security-check,أين التفتيش الأمني؟,,ayna al-taftīsh al-amnī?,ʔˈajna ʔattˈaftiːʃ ʔalʔˈamniːj,,2,ar-agent-v1;ipa=espeak
-air-travel.my-luggage-did-not-arrive,حقيبتي لم تصل,,ḥaqībatī lam taṣil,ħqˈibtiː lˈam ts̪l,,2,ar-agent-v1;ipa=espeak
-air-travel.i-would-like-a-window-seat,أريد مقعدًا بجانب النافذة,,urīd maqʿadan bijānib al-nāfidhah,ʔɹˈiːd mˈaqʕadˌan bdʒaːmb ʔannˈaːfiðˌa,,2,ar-agent-v1;ipa=espeak
-air-travel.i-would-like-an-aisle-seat,أريد مقعدًا بجانب الممر,,urīd maqʿadan bijānib al-mamarr,ʔɹˈiːd mˈaqʕadˌan bdʒaːmb ʔalmˈamarr,,2,ar-agent-v1;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,هل يمكنني الحصول على توصيلة؟,,hal yumkinunī al-ḥuṣūl ʿalá tawṣīlah?,hˈal jmknnˈiː ʔalħˈus̪uːl ʕˈalaː tˈuːs̪iːlt,"can I get a lift? -- yumkinunī (it is possible for me) carries only the first-person -nī, which has one form for any speaker, and nothing addresses the driver, as in tax-refund.can-i-get-a-tax-refund; taʾkhudhanī was the masculine (taʾkhudhīnī to a woman); tawṣīlah as in hitchhiking.thank-you-for-the-ride",2,ar-agent-v1;fix=ar.wikipedia يحيى فرحان rev 74069581 (تحاول الحصول على توصيلة);fix=ar.wikipedia ذا دارما بامز rev 76109057 (طلب التوصيلة من المارة في الطريق);in-pack-frame=tax-refund.can-i-get-a-tax-refund;in-pack-neighbour=hitchhiking.thank-you-for-the-ride;rule=no-second-person;row-corrections-v3;ipa=espeak
-hitchhiking.where-are-you-going,إلى أين تذهب هذه السيارة؟,,ilá ayna tadhhab hādhihi al-sayyārah?,ʔˈilaː ʔˈajna tðhb haˈaðihˌi ʔassˈajjaːɹˌa,"where is this car going? -- asks about the car and not the driver, as transit-rides.does-this-bus-train-go-to asks about the vehicle, so no second person is left to carry a gender",2,ar-agent-v1;fix=ar.wikipedia سيارة rev 76379488 (السَّيَّارة ... هي مركبة and تعمل السيارة: feminine);in-pack-frame=transit-rides.does-this-bus-train-go-to;rule=vehicle-as-subject;row-corrections-v2;ipa=espeak
-hitchhiking.i-only-need-to-go-to-the-next-town,أحتاج فقط الوصول إلى البلدة التالية,,aḥtāj faqaṭ al-wuṣūl ilā al-baldah al-tālīyah,ʔħtˈaːdʒ fˈaqat̪ ʔalwˈus̪uːl ʔˈilaː ʔalbˈalda ʔattaːlˈijjah,,2,ar-agent-v1;ipa=espeak
-hitchhiking.is-there-room-for-two,هل يوجد مكان لشخصين؟,,hal yūjad makān li-shakhṣayn?,hˈal jˈuːdʒad mˈakaːn lʃxs̪ˈiːna,,2,ar-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,يمكنني أن أدفع ثمن البنزين,,yumkinunī an adfaʿ thaman al-banzīn,jmknnˈiː ʔn ʔdfʕ θˈaman ʔalbˈinziːn,"banzīn = petrol, the word drivers use",2,ar-agent-v1;ipa=espeak
-hitchhiking.thank-you-for-the-ride,شكرًا على التوصيلة,,shukran ʿalā al-tawṣīlah,ʃˈukɹan ʕˈalaː ʔattˈuːs̪iːlt,,2,ar-agent-v1;ipa=espeak
-taxi.please-turn-around,أرجو الدوران للخلف,,arjū al-dawarān lil-khalf,ʔrdʒˈuː ʔaddˈawaɹˌaːn llxlf,,2,ar-agent-v1;ar.wikipedia=دوران للخلف (rev 69982129);in-pack-frame=taxi.please-get-me-there-in-time-for-the-shinkansen;answers-audit-v1;ipa=espeak
+border-customs.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,ʔˈanaː sˈaːʔiħ,,2,ar-agent-v1;ipa=ala-lc
+border-customs.here-is-my-passport,هذا جواز سفري,,hādhā jawāz safarī,hˈaːðaː dʒawˈaːz sˈafariː,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-am-staying-for-days,مدة الإقامة بالأيام: {},,muddat al-iqāmah bi-al-ayyām: {},mˈuddat ʔalʔiqˈaːma bilʔajjˈaːm {},length of stay in days: {},2,ar-agent-v1;fix=ar.wikipedia سياسة التأشيرات في إسرائيل rev 74227109 (على ألا تتجاوز مدة الإقامة 3 أشهر);fix=ar.wikipedia تاريخ يولياني rev 75012349 (الوقت بالأيام);fix=ar.wikipedia العدد والمعدود rev 76218556 (تمييز الأعداد من 11 إلى 99 مفرد منصوب);was=سأبقى {} أيام (saʾabqá {} ayyām: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames حساسية دوائية: {} and عدد الليالي: {});row-corrections-v14;ipa=ala-lc
+border-customs.nothing-to-declare,لا شيء للتصريح,لا شيء للإفصاح عنه,lā shayʾ lil-taṣrīḥ,lˈaː ʃˈajʔ littasˤrˈiːħ,,1,ar-agent-v1;ipa=ala-lc
+border-customs.i-am-staying-at,أنا مقيم في {},,anā muqīm fī {},ʔˈanaː muqˈiːm fˈiː {},,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-am-here-for-business,أنا هنا للعمل,,anā hunā lil-ʿamal,ʔˈanaː hˈunaː lilʕˈamal,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-have-a-return-ticket,لديّ تذكرة عودة,,ladayya tadhkirat ʿawdah,ladˈajja tˈaðkirat ʕˈawda,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-am-visiting-family,أزور عائلتي,,azūr ʿāʾilatī,ʔazˈuːr ʕaːʔˈilatiː,,2,ar-agent-v1;ipa=ala-lc
+border-customs.this-is-for-personal-use,هذا للاستخدام الشخصي,,hādhā lil-istikhdām al-shakhṣī,hˈaːðaː lilistixdˈaːm ʔaʃʃˈaxsˤiː,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-am-in-transit,أنا مسافر عابر,ترانزيت,anā musāfir ʿābir,ʔˈanaː musˈaːfir ʕˈaːbir,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-have-in-cash,معي {} نقداً,,maʿī {} naqdan,mˈaʕiː {} nˈaqdan,,2,ar-agent-v1;ipa=ala-lc
+border-customs.this-is-a-gift,هذه هدية,,hādhihi hadīyah,hˈaːðihi hadˈijja,,2,ar-agent-v1;ipa=ala-lc
+border-customs.where-do-i-collect-my-baggage,أين أستلم أمتعتي؟,,ayna astalim amtiʿatī?,ʔˈajna ʔˈastalim ʔamtˈiʕatiː,,2,ar-agent-v1;ipa=ala-lc
+border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,kˈam jumkˈinunil baqˈaːʔ,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-have-a-connecting-flight,لديّ رحلة متّصلة,رحلة ترانزيت,ladayya riḥlah muttaṣilah,ladˈajja rˈiħla muttˈasˤila,,2,ar-agent-v1;ipa=ala-lc
+border-customs.may-i-have-an-entry-stamp,أريد ختم الدخول من فضلك,,urīd khatm al-dukhūl min faḍlak,ʔurˈiːd xˈatm ʔadduxˈuːl mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+border-customs.visa,تأشيرة,فيزا,taʾshīrah,taʔʃˈiːra,,2,ar-agent-v1;ipa=ala-lc
+border-customs.i-have-no-food-or-plants,لا أحمل طعاماً أو نباتات,,lā aḥmil ṭaʿāman aw nabātāt,lˈaː ʔˈaħmil tˤaʕˈaːman ʔˈaw nabaːtˈaːt,,2,ar-agent-v1;ipa=ala-lc
+border-customs.passport-control,مراقبة الجوازات,الجوازات,murāqabat al-jawāzāt,murˈaːqabat ʔaldʒawaːzˈaːt,,2,ar-agent-v1;ipa=ala-lc
+border-customs.customs,الجمارك,,al-jamārik,ʔaldʒamˈaːrik,,2,ar-agent-v1;ipa=ala-lc
+border-customs.baggage-claim,استلام الأمتعة,,istilām al-amtiʿah,ʔistilˈaːm ʔalʔˈamtiʕa,,2,ar-agent-v1;ipa=ala-lc
+border-customs.customs-declaration,الإقرار الجمركي,التصريح الجمركي,al-iqrār al-jumrukī,ʔalʔiqrˈaːr ʔaldʒˈumrukiː,,1,ar-agent-v1;ipa=ala-lc
+border-customs.arrival-card,بطاقة الوصول,,biṭāqat al-wuṣūl,bitˤˈaːqat ʔalwusˤˈuːl,,2,ar-agent-v1;ipa=ala-lc
+border-customs.transit,ترانزيت,عبور,tarānzīt,taraːnzˈiːt,,2,ar-agent-v1;ipa=ala-lc
+border-customs.boarding-pass,بطاقة الصعود,,biṭāqat al-ṣuʿūd,bitˤˈaːqat ʔasˤsˤuʕˈuːd,,2,ar-agent-v1;ipa=ala-lc
+directions.where-is,أين {}؟,,ayna {}?,ʔˈajna {},,2,ar-agent-v1;ipa=ala-lc
+directions.how-do-i-get-to,كيف أصل إلى {}؟,,kayf aṣil ilá {}?,kˈajf ʔˈasˤil ʔˈilaː {},,2,ar-agent-v1;ipa=ala-lc
+directions.is-it-far,هل هو بعيد؟,,hal huwa baʿīd?,hˈal hˈuwa baʕˈiːd,,2,ar-agent-v1;ipa=ala-lc
+directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,kˈam jastˈaɣriq sˈajran,how long on foot,2,ar-agent-v1;ipa=ala-lc
+directions.please-show-me-on-the-map,أرجو الإشارة إلى المكان على الخريطة,,arjū al-ishārah ilá al-makān ʿalá al-kharīṭah,ʔˈardʒul ʔiʃˈaːra ʔˈilal makˈaːn ʕˈalal xarˈiːtˤa,"I ask for pointing to the place on the map -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the passer-by; arinī was the masculine imperative (arīnī to a woman) and min faḍlak the masculine suffix (faḍlik to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 شور IV (to point, indicate, point out -- إلى to) išāra (sign, indication);fix=ar.wikipedia عساف الحسين rev 75661804 (أشار إلى مكان);in-pack-frame=phone-text-power.please-confirm;in-pack-neighbour=accessibility.wheelchair-access;rule=no-second-person;row-corrections-v5;ipa=ala-lc"
+directions.where-is-the-nearest,أين أقرب {}؟,,ayna aqrab {}?,ʔˈajna ʔˈaqrab {},,2,ar-agent-v1;ipa=ala-lc
+directions.where-am-i,أين أنا؟,,ayna anā?,ʔˈajna ʔˈanaː,,2,ar-agent-v1;ipa=ala-lc
+directions.which-way,في أيّ اتجاه؟,,fī ayy ittijāh?,fˈiː ʔˈajj ʔittidʒˈaːh,,2,ar-agent-v1;ipa=ala-lc
+directions.can-i-walk-there,هل يمكن المشي؟,,hal yumkin al-mashy?,hˈal jˈumkin ʔalmˈaʃj,,2,ar-agent-v1;ipa=ala-lc
+directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,kˈam ʔalmasˈaːfa,,2,ar-agent-v1;ipa=ala-lc
+directions.which-exit,أيّ مخرج؟,,ayy makhraj?,ʔˈajj mˈaxradʒ,,2,ar-agent-v1;ipa=ala-lc
+directions.can-you-show-me-the-way,هل يمكن إرشادي إلى الطريق؟,,hal yumkin irshādī ilá al-ṭarīq?,hˈal jˈumkin ʔirʃˈaːdiː ʔˈilatˤ tˤarˈiːq,"is showing me the way possible? -- the impersonal yumkin with the verbal noun and the object suffix -ī, as in taxi.can-you-wait-for-me-here, so nothing addresses the passer-by; irshād as in accessibility.guide-dog; tadullunī was the masculine (tadullīnanī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 رشد IV iršād (guidance; a conducting, showing the way -- إلى to);fix=ar.wikipedia الإمبراطور تشنغده rev 73059623 (طلب منهم إرشاده إلى الطريق);in-pack-frame=taxi.can-you-wait-for-me-here;in-pack-neighbour=accessibility.guide-dog;rule=no-second-person;row-corrections-v5;ipa=ala-lc"
+directions.north,شمال,,shamāl,ʃamˈaːl,,2,ar-agent-v1;ipa=ala-lc
+directions.south,جنوب,,janūb,dʒanˈuːb,,2,ar-agent-v1;ipa=ala-lc
+directions.east,شرق,,sharq,ʃˈarq,,2,ar-agent-v1;ipa=ala-lc
+directions.west,غرب,,gharb,ɣˈarb,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.go-straight,إلى الأمام مباشرة,إلى الأمام,ilá al-amām mubāsharatan,ʔˈilal ʔamˈaːm mubaːʃˈaratan,"straight ahead -- a direction with no verb, the row's own ilá al-amām with its mubāsharatan, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; imshi was the masculine imperative (imshī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 أمام (ilā l-amāmi to the front, forward, onward, ahead);fix=Wehr-1976 بشر mubāšaratan (immediately, directly);fix=ar.wikipedia بيدق (شطرنج) rev 72232792 (تحركت هذه القطعة إلى الأمام مباشرة);in-pack-neighbour=quick-directions.go-straight text_alt;rule=no-second-person;row-corrections-v5;ipa=ala-lc"
+quick-directions.turn-left,يساراً,,yasāran,jasˈaːran,"to the left -- the adverb with no verb, as a direction is given, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; liff was the masculine imperative (liffī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 يسر yasār (left side | yasāran to (at, on) the left);fix=ar.wikipedia جبل حديد rev 76003456 (ثم ينعطفون عند قرية ونغة يميناً ... ثم يساراً عند اللافتة: the adverb alone as a direction);in-pack-frame=quick-directions.on-the-left;rule=no-second-person;row-corrections-v5;ipa=ala-lc"
+quick-directions.turn-right,يميناً,,yamīnan,jamˈiːnan,"to the right -- the adverb with no verb, as a direction is given, so it serves the passenger to the driver and the passer-by to the traveller and addresses neither; liff was the masculine imperative (liffī to a woman)",2,"ar-agent-v1;fix=Wehr-1976 يمن yamīn (right side | yamīnan to (at, on) the right);fix=ar.wikipedia جبل حديد rev 76003456 (ثم ينعطفون عند قرية ونغة يميناً ... ثم يساراً عند اللافتة: the adverb alone as a direction);in-pack-frame=quick-directions.on-the-left;rule=no-second-person;row-corrections-v5;ipa=ala-lc"
+quick-directions.this-way,من هنا,,min hunā,mˈin hˈunaː,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.that-way,من هناك,,min hunāk,mˈin hunˈaːk,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.on-the-left,على اليسار,,ʿalá al-yasār,ʕˈalal jasˈaːr,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.on-the-right,على اليمين,,ʿalá al-yamīn,ʕˈalal jamˈiːn,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.across-from-here,في الجهة المقابلة,مقابل,fī al-jihah al-muqābilah,fˈil dʒˈihal muqˈaːbila,on the opposite side,2,ar-agent-v1;ipa=ala-lc
+quick-directions.in-front,أمام,,amām,ʔamˈaːm,,2,ar-agent-v1;ipa=ala-lc
+quick-directions.behind,خلف,وراء,khalf,xˈalf,,2,ar-agent-v1;ipa=ala-lc
+taxi.please-take-me-here,أرجو توصيلي إلى هنا,,arjū tawṣīlī ilá hunā,ʔˈardʒuː tawsˤˈiːliː ʔˈilaː hˈunaː,"I ask for taking me to here -- arjū with the verbal noun and the object suffix -ī, as in hotel-requests.wake-up-call, so nothing addresses the driver; khudhnī was the masculine imperative (khudhīnī to a woman); tawṣīl as in hitchhiking.thank-you-for-the-ride",2,ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 وصل II (to take s.o. to -- to give s.o. a ride or a lift) tawṣīl (conveyance);fix=ar.wikipedia كريزي تاكسي (سلسلة ألعاب فيديو) rev 75558524 (سائق سيارة أجرة ... توصيل الركاب إلى وجهاتهم);in-pack-frame=hotel-requests.wake-up-call;in-pack-neighbour=hitchhiking.thank-you-for-the-ride;rule=no-second-person;row-corrections-v4;ipa=ala-lc
+taxi.please-send-me-the-address,أرسل لي العنوان من فضلك,,arsil lī al-ʿunwān min faḍlak,ʔˈarsil lˈil ʕunwˈaːn mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+taxi.we-need-the-east-gate-not-the-south-gate,نريد البوابة الشرقية لا الجنوبية,,nurīd al-bawwābah al-sharqīyah lā al-janūbīyah,nurˈiːd ʔalbawwˈaːbaʃ ʃarqˈijja lˈal dʒanuːbˈijja,,2,ar-agent-v1;ipa=ala-lc
+taxi.please-stop-here,أرجو التوقّف هنا,,arjū al-tawaqquf hunā,ʔˈardʒut tawˈaqquf hˈunaː,"I ask for stopping here -- arjū with the verbal noun, as in massage-spa.please-stop, so nothing addresses the driver; tawaqqaf was the masculine imperative (tawaqqafī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 وقف V (to stop, halt, come to a stop) tawaqquf (halt, stop);in-pack-frame=massage-spa.please-stop;rule=no-second-person;row-corrections-v4;ipa=ala-lc"
+taxi.can-you-wait-for-me-here,هل يمكن انتظاري هنا؟,,hal yumkin intiẓārī hunā?,hˈal jˈumkin ʔintiðˤˈaːriː hˈunaː,"is waiting for me here possible? -- the impersonal yumkin with the verbal noun and the object suffix -ī, as in hotel-requests.can-i-store-my-luggage, so nothing addresses the driver; tantaẓirunī was the masculine (tantaẓirīnanī to a woman)",2,ar-agent-v1;fix=Wehr-1976 نظر VIII (to wait for s.o.) intiẓār (waiting);in-pack-frame=hotel-requests.can-i-store-my-luggage;rule=no-second-person;row-corrections-v4;ipa=ala-lc
+taxi.we-need-to-catch-the-high-speed-train,نريد اللحاق بالقطار السريع,,nurīd al-liḥāq bi-al-qiṭār al-sarīʿ,nurˈiːd ʔalliħˈaːq bilqitˤˈaːr ʔassarˈiːʕ,,2,ar-agent-v1;ipa=ala-lc
+taxi.please-use-the-meter,شغّل العدّاد من فضلك,,shaghghil al-ʿaddād min faḍlak,ʃˈaɣɣil ʔalʕaddˈaːd mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+taxi.i-will-get-off-here,سأنزل هنا,,sa-anzil hunā,saʔˈanzil hˈunaː,,2,ar-agent-v1;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc
+taxi.please-get-me-there-in-time-for-the-shinkansen,أرجو الوصول قبل موعد القطار السريع,,arjū al-wuṣūl qabl mawʿid al-qiṭār al-sarīʿ,ʔˈardʒul wusˤˈuːl qˈabl mˈawʕid ʔalqitˤˈaːr ʔassarˈiːʕ,,2,ar-agent-v1;ipa=ala-lc
+taxi.could-you-make-it-colder,أرجو رفع المكيف,,arjū rafʿ al-mukayyif,ʔˈardʒuː rˈafʕ ʔalmukˈajjif,"I ask for raising the AC -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the driver; irfaʿ was the masculine imperative (irfaʿī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 رفع rafʿ (raising, stepping up);in-pack-frame=phone-text-power.please-confirm;rule=no-second-person;row-corrections-v4;ipa=ala-lc"
+taxi.could-you-make-it-warmer,أرجو تخفيف المكيف,,arjū takhfīf al-mukayyif,ʔˈardʒuː taxfˈiːf ʔalmukˈajjif,"I ask for turning down the AC -- arjū with the verbal noun, as in phone-text-power.please-confirm, so nothing addresses the driver; khaffif was the masculine imperative (khaffifī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 خف II (to lessen, reduce, moderate) takhfīf (lessening, reduction);in-pack-frame=phone-text-power.please-confirm;rule=no-second-person;row-corrections-v4;ipa=ala-lc"
+taxi.may-i-open-the-window,هل يمكنني فتح النافذة؟,,hal yumkinunī fatḥ al-nāfidhah?,hˈal jumkˈinuniː fˈatħ ʔannˈaːfiða,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.two-tickets,تذكرتان لطفًا,تذكرتين,tadhkiratān luṭfan,taðkiratˈaːn lˈutˤfan,"two tickets, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا;in-pack-neighbour=board-answers.please-wait;rule=no-second-person;row-corrections-v5;ipa=ala-lc
+transit-rides.where-is-the-subway-station,أين محطة المترو؟,,ayna maḥaṭṭat al-mitrū?,ʔˈajna maħˈatˤtˤat ʔalmˈitruː,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.does-this-bus-train-go-to,هل يذهب هذا إلى {}؟,,hal yadhhab hādhā ilá {}?,hˈal jˈaðhab hˈaːðaː ʔˈilaː {},,2,ar-agent-v1;ipa=ala-lc
+transit-rides.what-is-the-next-stop,ما المحطة القادمة؟,,mā al-maḥaṭṭah al-qādimah?,mˈal maħˈatˤtˤal qˈaːdima,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.please-tell-me-where-to-get-off,أرجو إخباري أين أنزل,,arjū ikhbārī ayna anzil,ʔˈardʒuː ʔixbˈaːriː ʔˈajna ʔˈanzil,"I ask for telling me where I get off -- arjū with the verbal noun and the object suffix -ī, as in hotel-requests.wake-up-call, so nothing addresses the driver; anzil is the first person, one form for any speaker; akhbirnī was the masculine imperative (akhbirīnī to a woman)",2,"ar-agent-v1;fix=Mukhtar-Omar-2008 رجا (رجا المساعدةَ: سألَه إيَّاها -- arjū with a verbal noun asks for the act);fix=Wehr-1976 خبر IV (to tell, inform s.o.) ikhbār (notification, information);in-pack-frame=hotel-requests.wake-up-call;rule=no-second-person;row-corrections-v4;ipa=ala-lc"
+transit-rides.is-this-direct,هل هذا مباشر؟,,hal hādhā mubāshir?,hˈal hˈaːðaː mubˈaːʃir,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.do-i-need-to-transfer,هل يجب أن أبدّل؟,هل هناك تبديل؟,hal yajib an ubaddil?,hˈal jˈadʒib ʔˈan ʔubˈaddil,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.is-it-delayed,هل هو متأخّر؟,,hal huwa mutaʾakhkhir?,hˈal hˈuwa mutaʔˈaxxir,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.i-am-in-a-hurry,أنا مستعجل,,anā mustaʿjil,ʔˈanaː mustˈaʕdʒil,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.which-platform,أيّ رصيف؟,,ayy raṣīf?,ʔˈajj rasˤˈiːf,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.what-time-is-the-next-one,متى القادم؟,,matá al-qādim?,mˈatal qˈaːdim,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.i-went-past-my-stop,تجاوزت محطتي,,tajāwazt maḥaṭṭatī,tadʒaːwˈazt maħˈatˤtˤatiː,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.can-i-use-this-ticket,هل تصلح هذه التذكرة؟,,hal taṣluḥ hādhihi al-tadhkirah?,hˈal tˈasˤluħ hˈaːðihit tˈaðkira,,2,ar-agent-v1;ipa=ala-lc
+place-words.scenic-area,منطقة طبيعية,,minṭaqah ṭabīʿīyah,mˈintˤaqa tˤabiːʕˈijja,,2,ar-agent-v1;ipa=ala-lc
+place-words.visitor-center,مركز الزوار,,markaz al-zuwwār,mˈarkaz ʔazzuwwˈaːr,,2,ar-agent-v1;ipa=ala-lc
+place-words.railway-station,محطة القطار,,maḥaṭṭat al-qiṭār,maħˈatˤtˤat ʔalqitˤˈaːr,,2,ar-agent-v1;ipa=ala-lc
+place-words.airport,مطار,,maṭār,matˤˈaːr,,2,ar-agent-v1;ipa=ala-lc
+place-words.service-desk,مكتب الاستعلامات,استعلامات,maktab al-istiʿlāmāt,mˈaktab ʔalistiʕlaːmˈaːt,,2,ar-agent-v1;ipa=ala-lc
+place-words.bus-stop,موقف الحافلة,موقف الباص,mawqif al-ḥāfilah,mˈawqif ʔalħˈaːfila,,2,ar-agent-v1;ipa=ala-lc
+place-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifðˤ ʔalʔˈamtiʕa,,2,ar-agent-v1;ipa=ala-lc
+place-words.tourist-spot-sightseeing-area,معلم سياحي,,maʿlam siyāḥī,mˈaʕlam sijˈaːħiː,,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.where-is-the-pickup-point,أين نقطة الالتقاء؟,,ayna nuqṭat al-iltiqāʾ?,ʔˈajna nˈuqtˤat ʔaliltiqˈaːʔ,,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.please-send-me-the-pickup-point,أرسل لي نقطة الالتقاء,,arsil lī nuqṭat al-iltiqāʾ,ʔˈarsil lˈiː nˈuqtˤat ʔaliltiqˈaːʔ,,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.please-pick-us-up-here,خذنا من هنا من فضلك,,khudhnā min hunā min faḍlak,xˈuðnaː mˈin hˈunaː mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.meet-us-at,قابلنا في {},,qābilnā fī {},qaːbˈilnaː fˈiː {},,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.please-call-me-a-ride,اطلب لي سيارة من فضلك,,uṭlub lī sayyārah min faḍlak,ʔˈutˤlub lˈiː sajjˈaːra mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+pickup-meeting.please-call-a-taxi,اطلب لي تاكسي من فضلك,سيارة أجرة,uṭlub lī tāksī min faḍlak,ʔˈutˤlub lˈiː tˈaːksiː mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.high-speed-rail,القطار السريع,,al-qiṭār al-sarīʿ,ʔalqitˤˈaːr ʔassarˈiːʕ,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.maglev,القطار المغناطيسي,,al-qiṭār al-maghnāṭīsī,ʔalqitˤˈaːr ʔalmaɣnaːtˤˈiːsiː,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.transfer,تبديل,,tabdīl,tabdˈiːl,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.ticket-gate,بوابة التذاكر,,bawwābat al-tadhākir,bawwˈaːbat ʔattaðˈaːkir,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.platform,رصيف,,raṣīf,rasˤˈiːf,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.ticket-office,شبّاك التذاكر,مكتب التذاكر,shubbāk al-tadhākir,ʃubbˈaːk ʔattaðˈaːkir,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.waiting-room,صالة الانتظار,,ṣālat al-intiẓār,sˤˈaːlat ʔalintiðˤˈaːr,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.train-number,رقم القطار,,raqm al-qiṭār,rˈaqm ʔalqitˤˈaːr,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.carriage,عربة,,ʿarabah,ʕˈaraba,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.seat,مقعد,,maqʿad,mˈaqʕad,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.last-train,آخر قطار,,ākhir qiṭār,ʔˈaːxir qitˤˈaːr,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.delayed,متأخّر,تأخير,mutaʾakhkhir,mutaʔˈaxxir,,2,ar-agent-v1;ipa=ala-lc
+rail-station-words.final-stop,المحطة الأخيرة,,al-maḥaṭṭah al-akhīrah,ʔalmaħˈatˤtˤal ʔaxˈiːra,,2,ar-agent-v1;ipa=ala-lc
+common-signs.open-on,مفتوح,تشغيل,maftūḥ,maftˈuːħ,,2,ar-agent-v1;ipa=ala-lc
+common-signs.closed-off,مغلق,إيقاف,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=ala-lc
+common-signs.occupied,مشغول,,mashghūl,maʃɣˈuːl,,2,ar-agent-v1;ipa=ala-lc
+common-signs.vacant,فارغ,شاغر,fārigh,fˈaːriɣ,,1,ar-agent-v1;ipa=ala-lc
+common-signs.caution,تحذير,احترس,taḥdhīr,taħðˈiːr,,2,ar-agent-v1;ipa=ala-lc
+common-signs.no-entry,ممنوع الدخول,,mamnūʿ al-dukhūl,mamnˈuːʕ ʔadduxˈuːl,,2,ar-agent-v1;ipa=ala-lc
+common-signs.no-smoking,ممنوع التدخين,,mamnūʿ al-tadkhīn,mamnˈuːʕ ʔattadxˈiːn,,2,ar-agent-v1;ipa=ala-lc
+common-signs.no-photography,ممنوع التصوير,,mamnūʿ al-taṣwīr,mamnˈuːʕ ʔattasˤwˈiːr,,2,ar-agent-v1;ipa=ala-lc
+common-signs.do-not-touch,ممنوع اللمس,لا تلمس,mamnūʿ al-lams,mamnˈuːʕ ʔallˈams,,2,ar-agent-v1;ipa=ala-lc
+common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,mˈuɣlaq muʔˈaqqatan,,2,ar-agent-v1;ipa=ala-lc
+common-signs.open-operating,مفتوح,,maftūḥ,maftˈuːħ,,2,ar-agent-v1;fix=Wehr-1976 مفتوح (maftūḥ opened -- open) and ar.wikipedia شارع فاي وين rev 71363894 (وعادة ما تكون هذه المحلات مفتوحة بين 10.30 صباحا و 22.30 مساء) -- the pack's closed sign is مغلق;was=يعمل with alt قيد التشغيل (Wehr عمل to do -- act -- operate -- be active -- work);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=ala-lc
+common-signs.closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=ala-lc
+common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,mutawˈaqqif,,2,ar-agent-v1;ipa=ala-lc
+transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,hˈal jˈadʒib tamrˈiːr ʔattˈaðkira qˈabl ʔasˤsˤuʕˈuːd,must the ticket be swiped before boarding,1,ar-gaps-v1;ipa=ala-lc
+rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,qˈaːriʔ ʔalbitˤaːqˈaːt,card reader,1,ar-gaps-v1;ipa=ala-lc
+common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr,rumˈuːz lˈaħm ʔalxinzˈiːr,,2,pork-code-agent-v1;lppom-mui;ipa=ala-lc
+rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒra,,2,fare-agent-v1;in-pack-neighbour;ipa=ala-lc
+transit-rides.where-do-i-pay-the-fare,أين أدفع الأجرة؟,,ayna adfaʿ al-ujrah?,ʔˈajna ʔˈadfaʕ ʔalʔˈudʒra,,2,translator-requests-v1;in-pack-neighbour;ipa=ala-lc
+air-travel.where-is-check-in,أين تسجيل الوصول؟,,ayna tasjīl al-wuṣūl?,ʔˈajna tasdʒˈiːl ʔalwusˤˈuːl,"tasjīl al-wuṣūl = check-in, the term Gulf carriers' own Arabic-language sites use",2,ar-agent-v1;ipa=ala-lc
+air-travel.which-gate,أي بوابة؟,,ayy bawwābah?,ʔˈajj bawwˈaːba,"bawwābah = gate, already the pack's word (taxi.we-need-the-east-gate-not-the-south-gate)",2,ar-agent-v1;ipa=ala-lc
+air-travel.where-is-the-security-check,أين التفتيش الأمني؟,,ayna al-taftīsh al-amnī?,ʔˈajnat taftˈiːʃ ʔalʔˈamniː,,2,ar-agent-v1;ipa=ala-lc
+air-travel.my-luggage-did-not-arrive,حقيبتي لم تصل,,ḥaqībatī lam taṣil,ħaqˈiːbatiː lˈam tˈasˤil,,2,ar-agent-v1;ipa=ala-lc
+air-travel.i-would-like-a-window-seat,أريد مقعدًا بجانب النافذة,,urīd maqʿadan bi-jānib al-nāfidhah,ʔurˈiːd mˈaqʕadan bidʒˈaːnib ʔannˈaːfiða,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+air-travel.i-would-like-an-aisle-seat,أريد مقعدًا بجانب الممر,,urīd maqʿadan bi-jānib al-mamarr,ʔurˈiːd mˈaqʕadan bidʒˈaːnib ʔalmamˈarr,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+hitchhiking.can-you-give-me-a-ride,هل يمكنني الحصول على توصيلة؟,,hal yumkinunī al-ḥuṣūl ʿalá tawṣīlah?,hˈal jumkˈinunil ħusˤˈuːl ʕˈalaː tawsˤˈiːla,"can I get a lift? -- yumkinunī (it is possible for me) carries only the first-person -nī, which has one form for any speaker, and nothing addresses the driver, as in tax-refund.can-i-get-a-tax-refund; taʾkhudhanī was the masculine (taʾkhudhīnī to a woman); tawṣīlah as in hitchhiking.thank-you-for-the-ride",2,ar-agent-v1;fix=ar.wikipedia يحيى فرحان rev 74069581 (تحاول الحصول على توصيلة);fix=ar.wikipedia ذا دارما بامز rev 76109057 (طلب التوصيلة من المارة في الطريق);in-pack-frame=tax-refund.can-i-get-a-tax-refund;in-pack-neighbour=hitchhiking.thank-you-for-the-ride;rule=no-second-person;row-corrections-v3;ipa=ala-lc
+hitchhiking.where-are-you-going,إلى أين تذهب هذه السيارة؟,,ilá ayna tadhhab hādhihi al-sayyārah?,ʔˈilaː ʔˈajna tˈaðhab hˈaːðihis sajjˈaːra,"where is this car going? -- asks about the car and not the driver, as transit-rides.does-this-bus-train-go-to asks about the vehicle, so no second person is left to carry a gender",2,ar-agent-v1;fix=ar.wikipedia سيارة rev 76379488 (السَّيَّارة ... هي مركبة and تعمل السيارة: feminine);in-pack-frame=transit-rides.does-this-bus-train-go-to;rule=vehicle-as-subject;row-corrections-v2;ipa=ala-lc
+hitchhiking.i-only-need-to-go-to-the-next-town,أحتاج فقط الوصول إلى البلدة التالية,,aḥtāj faqaṭ al-wuṣūl ilá al-baldah al-tālīyah,ʔaħtˈaːdʒ fˈaqatˤ ʔalwusˤˈuːl ʔˈilal bˈaldat taːlˈijja,,2,ar-agent-v1;fix=ALA-LC 2012 rule 6(a): alif maqṣūrah is á;arabic-ipa-v1;ipa=ala-lc
+hitchhiking.is-there-room-for-two,هل يوجد مكان لشخصين؟,,hal yūjad makān li-shakhṣayn?,hˈal jˈuːdʒad makˈaːn liʃaxsˤˈajn,,2,ar-agent-v1;ipa=ala-lc
+hitchhiking.i-can-pay-for-fuel,يمكنني أن أدفع ثمن البنزين,,yumkinunī an adfaʿ thaman al-banzīn,jumkˈinuniː ʔˈan ʔˈadfaʕ θˈaman ʔalbanzˈiːn,"banzīn = petrol, the word drivers use",2,ar-agent-v1;ipa=ala-lc
+hitchhiking.thank-you-for-the-ride,شكرًا على التوصيلة,,shukran ʿalá al-tawṣīlah,ʃˈukran ʕˈalat tawsˤˈiːla,,2,ar-agent-v1;fix=ALA-LC 2012 rule 6(a): alif maqṣūrah is á;arabic-ipa-v1;ipa=ala-lc
+taxi.please-turn-around,أرجو الدوران للخلف,,arjū al-dawarān lil-khalf,ʔˈardʒud dawarˈaːn lilxˈalf,,2,ar-agent-v1;ar.wikipedia=دوران للخلف (rev 69982129);in-pack-frame=taxi.please-get-me-there-in-time-for-the-shinkansen;answers-audit-v1;ipa=ala-lc

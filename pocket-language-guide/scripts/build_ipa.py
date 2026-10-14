@@ -300,11 +300,11 @@ distrust the column as a whole.
   word at a time espeak demotes some words to a secondary mark and no primary
   (`vagyok` is `vˌɑɟok`), and a word with no primary mark prints unmarked, which for
   an accented script is not a possible word.
-- 73 `ar` rows have no short vowels at all, because espeak read unvocalised text.
-  `hal imknni istijdam` is what a respelling of one looks like, and no rule table
-  can recover the vowels. Vocalising the Arabic source text is the fix. A further
-  `ar` row is a wrong *reading* rather than a missing vowel: espeak takes `كم حجم`
-  for *kilometer*.
+- **What `ar` still reads with espeak guesses its short vowels**: the 49 currency
+  glosses with no romanisation, the `ar,km` language name and every country name,
+  since `ala_lc_to_ipa` can only read what the ALA-LC column writes. `فرنك` comes back
+  `fˈurnka` for *frank*, and `روبية` as `rˈuːbiːjˌa` where the romanised rows say
+  `ruːbˈijja`. Romanising those cells is the fix.
 - **espeak writes /y/ for three different vowels that are not /y/**, which is one
   defect wearing three hats and the most consequential entry here, since /y/ is a
   real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
@@ -863,7 +863,21 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
              # resolves the sixth order, whose vowel is pronounced in ስንት /sɨnt/ and
              # not in ገንዘብ /ɡənzəb/ -- a distinction BGN/PCGN's own Note 1 delegates
              # to pronunciation and espeak gets wrong on most polysyllables.
-             "am": "romanization_bgn"}
+             "am": "romanization_bgn",
+             # **Arabic is the one romanised pack with a voice.** The voice reads
+             # unvowelled script and guesses the short vowels it leaves out -- يوجد
+             # came back as the bare consonants `jwdʒd` on twenty rows -- where the
+             # pack's ALA-LC column writes every one. A row with no romanisation is
+             # still read in the script by the voice: see `reads_script`.
+             "ar": "romanization_ala-lc"}
+
+
+def reads_script(code, romanisation):
+    """Whether a row of `code` is read in its own script rather than its romanisation:
+    in every pack with no romanisation route, and in a romanised pack with a voice
+    wherever the row has no romanisation to read."""
+    return code not in ROMANISED or (code in VOICES and not romanisation.strip())
+
 
 # Whether espeak's word-level stress marks are kept.
 #   keep    the language has lexical stress and espeak finds it
@@ -1519,36 +1533,14 @@ REPAIR = {
            ("ʂ", "s"), ("ʐ", "z"),
            ("nahˈiːn", "nahˈĩː"), ("huːn", "hũː"),
            ("w", "ʋ"), ("r", "ɾ")],
-    # espeak inserts a stray `.` before a long vowel in Arabic: `i.ː` for `iː`.
-    #
-    # **And it reads a bare كم as the kilometre abbreviation.** كم is *kam*, "how
-    # much / how many", and the voice expands it to `kˌiiluˈu mitˌar` -- "kilo
-    # meter" -- on all 21 rows of the pack that begin with it. That is the whole of
-    # the pack's interrogative spine: `question-words.how-much-many` is the bare
-    # word, and `what-time-is-it`, `how-much-in-total`, `how-far-is-it`,
-    # `how-many-times-a-day` and `how-long-may-i-stay` all open with it, so every
-    # Arabic sheet was telling all 52 readers to say "kilometre" for the most
-    # frequent question word in the language.
-    #
-    # Safe as a bare string replacement, which was measured rather than assumed:
-    # `kˌiiluˈu` occurs 21 times and every one is followed by ` mitˌar`, so no row
-    # means kilometre by it. The prefixed forms never had the defect -- بكم comes
-    # back `bˈakam` because the ب stops the abbreviation matching -- and the pack's
-    # one genuine kilo, الكيلو in `laundry.how-much-per-kilo`, is `ʔalkˈiːluː`,
-    # which is a different string: the abbreviation expansion writes `ii` where the
-    # real word has `iː`. Stressed `kˈam` because every Arabic row carries a mark,
-    # monosyllables included (`hˈum`, `lˈajj`).
-    #
-    # **And some unvowelled words lose their vowels or a glide**, each measured as
-    # the whole of its occurrences: يوجد "there is" comes back as the bare consonants
-    # `jwdʒd` on all 20 rows that ask with it (it is *yūjad*); الليالي "the nights"
-    # as `ʔalliːˌaːliː` (*al-layālī*, Wehr: layāl, pl. of layla); الأيام "the days" as
-    # `ʔˈiːaːm` (*al-ayyām*, twice); and الأعراض "the symptoms" as `ʔalʔʕɹˈaːdˤ`, with
-    # no vowel and an English r (*al-aʿrāḍ*, once); تفضّلوا "please, go ahead" as
-    # `tfdˤdˤlˈuː` (*tafaḍḍalū*, stressed on the heavy antepenult, once).
-    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam"), ("jwdʒd", "jˈuːdʒad"),
-           ("ʔalliːˌaːliː", "ʔallajˈaːliː"), ("ʔˈiːaːm", "ʔajjˈaːm"),
-           ("ʔalʔʕɹˈaːdˤ", "ʔalʔaʕrˈaːdˤ"), ("tfdˤdˤlˈuː", "tafˈadˤdˤaluː")],
+    # Only what espeak still reads in Arabic -- the rows with no romanisation, one
+    # language name and every country name -- since `ala_lc_to_ipa` reads the rest.
+    # It inserts a stray `.` before a long vowel (`ʔalbɹiːt̪a.ːnˈijjah`, two country
+    # names). And it writes ط as `t̪` and ص as `s̪`, which are dental marks rather than
+    # emphatics, and ر as `ɹ`, a sound Arabic does not have; all three are folded to
+    # the column's `tˤ`, `sˤ` and `r`, measured as the only sources of those symbols in
+    # this voice's output. ظ comes back as `ð`, which is also ذ, so that one cannot be.
+    "ar": [(".", ""), ("t̪", "tˤ"), ("s̪", "sˤ"), ("ɹ", "r")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
     # soft sign on a final consonant comes out as: `dvʲˈerɪ^` for дверь /dvʲerʲ/.
     # And espeak writes ы as `y`, which in IPA is the close front *rounded* vowel:
@@ -3409,6 +3401,9 @@ UNITS = {
     "sv": {"cm": "centimeter"}, "ru": {"см": "сантиметров"}, "uk": {"см": "сантиметрів"},
     "tr": {"cm": "santimetre"}, "hy": {"սմ": "սանտիմետր"}, "ka": {"სმ": "სანტიმეტრი"},
     "uz": {"sm": "santimetr"}, "id": {"cm": "sentimeter"}, "vi": {"cm": "xentimét"},
+    # سم in the ALA-LC column the route reads; the vowels the script leaves out of
+    # سنتيمتر are supplied from the French, as the LC table's rule 22 has it.
+    "ar": {"sm": "santīmitr"},
 }
 
 
@@ -4112,6 +4107,125 @@ def he_to_ipa(word):
     if at is not None:
         out.insert(at, "ˈ")
     return "".join(out)
+
+
+# ------------------------------------------- Arabic romanisation -> IPA
+# The column is `romanization_ala-lc`, the Library of Congress Arabic Romanization
+# Table (2012), and read in reverse it writes every consonant, every vowel and every
+# length the unvowelled script leaves out. Five things a speaker says are still not
+# written in it, and the route adds them; the rule numbers are the table's:
+#
+#   the article's l assimilates to a sun letter, which rule 17(c) writes as l
+#     regardless: al-shams is /ʔaʃʃams/;
+#   the article's vowel is elided after a prefix or after a word ending in a vowel,
+#     and a long vowel before it shortens (rule 19): bi-al-qurb is /bilqurb/, fī
+#     al-bayt is /fil bajt/ -- the l going with the word whose syllable it closes;
+#   no syllable begins with a vowel, so a vowel-initial word or stem takes the
+#     glottal stop rule 8(a) leaves unwritten -- except a stem with hamzat al-waṣl
+#     after the article, which the table cannot tell apart (`AR_WASL`);
+#   tāʾ marbūṭah in pause is /a/, which rule 7(a) writes h, the way it writes a real
+#     final h (`AR_FINAL_H`);
+#   and stress, which `ala_lc_stress` derives.
+#
+# Case and verb endings are read as written, so the column is pausal wherever its
+# author wrote pausal. The values keep the notation the column already had for the
+# sounds espeak got right -- `ħ ʕ ʔ x ɣ q ʃ dʒ`, emphatics with ˤ, length as ː -- so
+# no reader table needs a new rule.
+ALA_LC = {
+    "th": "θ", "dh": "ð", "kh": "x", "sh": "ʃ", "gh": "ɣ",
+    "b": "b", "t": "t", "j": "dʒ", "ḥ": "ħ", "d": "d", "r": "r", "z": "z", "s": "s",
+    "ṣ": "sˤ", "ḍ": "dˤ", "ṭ": "tˤ", "ẓ": "ðˤ", "ʿ": "ʕ", "f": "f", "q": "q", "k": "k",
+    "l": "l", "m": "m", "n": "n", "h": "h", "w": "w", "y": "j", "ʾ": "ʔ",
+    "a": "a", "i": "i", "u": "u", "ā": "aː", "á": "aː", "ī": "iː", "ū": "uː",
+    # Rule 11(b)(1): the nisbah's doubled y is written īy, so al-ʿarabīyah is /ijja/.
+    "īy": "ijj",
+}
+AR_SUN = {"t", "θ", "d", "ð", "r", "z", "s", "ʃ", "sˤ", "dˤ", "tˤ", "ðˤ", "l", "n"}
+AR_SHORT = {"aː": "a", "iː": "i", "uː": "u"}
+# One sound: a vowel with its length, a consonant with its ˤ, or dʒ.
+AR_SOUND = re.compile(r"[aiu]ː?|dʒ|.ˤ?")
+# The column's two words whose final h is ه rather than tāʾ marbūṭah, found by
+# reading every -ah against the script: بعده and المتنزه.
+AR_FINAL_H = {"baʿdah", "mutanazzah"}
+# The column's stems written الا after the article, hamzat al-waṣl, where الإ and الأ
+# are a hamzah said as /ʔ/: al-ism is /ʔalism/ but al-isʿāf is /ʔalʔisʕaːf/.
+AR_WASL = {"ism", "ithnayn", "iltiqāʾ", "intiẓār", "inḥidār", "irtifāʿ", "istikhdām",
+           "istiqbāl", "istiʿlāmāt", "ittiṣāl", "iḥtifāẓ"}
+ARABIC_SCRIPT = re.compile("[\u0600-\u06ff]")
+
+
+def ala_lc_sounds(part):
+    """One hyphen-delimited part of an ALA-LC word, as a list of IPA sounds."""
+    out, i = [], 0
+    while i < len(part):
+        if part[i] == "ʹ":                        # rule 21(a): s and h, not sh
+            i += 1
+            continue
+        letter = longest(ALA_LC, part, i)
+        if not letter:
+            return out + [part[i:]]               # carried out, so a gate names it
+        out += AR_SOUND.findall(ALA_LC[letter])
+        i += len(letter)
+    return out
+
+
+def ala_lc_to_ipa(chunk):
+    """A run of ALA-LC words, with the article's sandhi across them and a stress on
+    every word."""
+    words = []                                    # (sounds, where the stem starts)
+    for word in unicodedata.normalize("NFC", chunk).split():
+        letters = word.split("-")
+        if letters[0] == "lil":                   # rule 17(b): li- fused with the article
+            letters[:1] = ["li", "al"]
+        if letters[-1].endswith("ah") and letters[-1] not in AR_FINAL_H:
+            letters[-1] = letters[-1][:-1]        # tāʾ marbūṭah in pause
+        parts = [ala_lc_sounds(p) for p in letters]
+        for n, part in enumerate(parts):
+            if part and part[0][0] in "aiu" and not (n and letters[n] in AR_WASL):
+                part.insert(0, "ʔ")
+        for n, (part, stem) in enumerate(zip(parts, parts[1:])):
+            if letters[n] != "al":
+                continue
+            if stem[0] in AR_SUN:
+                part[-1] = stem[0]
+            before = parts[n - 1] if n else (words[-1][0] if words else None)
+            if before and before[-1][0] in "aiu":
+                del part[:2]                      # the article's /ʔa/
+                before[-1] = AR_SHORT.get(before[-1], before[-1])
+                if not n and stem[0][0] not in "aiu":
+                    before.append(part.pop())     # it closes the word before's syllable
+        sounds = [s for part in parts for s in part]
+        words.append((sounds, len(sounds) - len(parts[-1])))
+    return " ".join(ala_lc_stress(sounds, stem) for sounds, stem in words)
+
+
+def ala_lc_stress(sounds, stem):
+    """`sounds` joined, with the stress mark before the nucleus of the stressed
+    syllable -- which is where `syllabify` in core/respell.js reads it from.
+
+    The rule is Halpern's (*Word Stress and Vowel Neutralization in Modern Standard
+    Arabic*, CJK Dictionary Institute, 2009, §4), which en.wikipedia "Standard Arabic
+    phonology" rev 1369813777 adapts under "Word stress": prefixes and the article are
+    not counted (§5.2: bi-kam, la-qad); a superheavy final syllable is stressed;
+    otherwise a word of two syllables stresses the first, and a longer one its penult
+    if that is heavy and its antepenult if it is light. A syllable is light (CV), heavy
+    (CVV, CVC) or superheavy (CVVC, CVCC), and every Arabic syllable has exactly one
+    onset, so a nucleus's weight is its length plus all but the last of the consonants
+    after it. Halpern's one exception, li- or bi- before a pronoun (lahu), does not
+    arise: the column writes those as one word.
+    """
+    nuclei = [n for n, s in enumerate(sounds) if n >= stem and s[0] in "aiu"]
+    if not nuclei:
+        return "".join(sounds)
+    ends = [n - 1 for n in nuclei[1:]] + [len(sounds)]
+    weight = [len(sounds[n]) + end - n - 1 for n, end in zip(nuclei, ends)]
+    if len(nuclei) == 1 or weight[-1] > 2:
+        at = nuclei[-1]
+    elif len(nuclei) == 2 or weight[-2] > 1:
+        at = nuclei[-2]
+    else:
+        at = nuclei[-3]
+    return "".join(sounds[:at] + ["ˈ"] + sounds[at:])
 
 
 # ------------------------------------- Amharic romanisation -> IPA
@@ -5123,6 +5237,11 @@ ROUTE_FORBIDS = {
     # fricative -- and `y` is always rewritten to `j`. `c` is *not* in the list,
     # because the table emits it inside `tʃ` and `tʃʼ`.
     "bgn-am": set("qxy"),
+    # Legal IPA and no sound of Arabic: the vowels e and o, which ALA-LC has no letter
+    # for; `p` and `v`, which it writes for پ and ڤ and this pack never does; and `c`
+    # and `y`, which the table never emits. `ALA_LC` is a whitelist and an unmatched
+    # letter is carried out, so one surviving means a letter went unread.
+    "ala-lc": set("ceopvy"),
 }
 
 
@@ -5435,6 +5554,13 @@ def route(code, chunks):
     the substituted cell would be in a different phonology than the sentence
     around it.
     """
+    if code == "ar":
+        # Two readers in one pack: the ALA-LC column where a row has one, and the voice
+        # where `reads_script` sent it the script instead.
+        lexicon = espeak_lexicon(VOICES[code],
+                                 [c for c in chunks if ARABIC_SCRIPT.search(c)])
+        return (lambda chunk: lexicon[chunk] if chunk in lexicon
+                else ala_lc_to_ipa(chunk.lower())), "ala-lc"
     if code in VOICES and code in WORD_AT_A_TIME:
         lexicon = espeak_lexicon(VOICES[code], [w for c in chunks for w in c.split()])
         return lambda chunk: " ".join(lexicon.get(w) or "" for w in chunk.split()), "espeak"
@@ -5605,9 +5731,9 @@ def language_name_ipa(locales, subjects, rows):
     owns the whole column rather than adding to it.
 
     Through the language's own route, so the substituted name is in the same
-    phonology as the sentence it lands in: the seven romanised packs read their
-    `romanization` cell, which is hand-written and complete, and the rest read the
-    name in its own script. A pair the route refuses gets an empty cell, and
+    phonology as the sentence it lands in: the romanised packs read their
+    `romanization` cell, which is hand-written, and the rest read the name in its own
+    script, as Arabic does for the one name it has not romanised. A pair the route refuses gets an empty cell, and
     `fillLanguageSlots` then blanks the whole `ipa` rather than printing a sentence
     with a hole where the language should be -- which is the blank respelling these
     rows print today, so nothing regresses.
@@ -5638,8 +5764,8 @@ def language_name_ipa(locales, subjects, rows):
             # has no name for gets no cell -- which is what an empty `ipa` already
             # means everywhere else here.
             cldr = names[locale][subject] if locale in cldr_locales else ""
-            name = (row.get("romanization") if locale in ROMANISED
-                    else row.get("name") or cldr) or ""
+            roman = row.get("romanization", "")
+            name = (row.get("name") or cldr if reads_script(locale, roman) else roman) or ""
             if name and locale == "ko":
                 # RR read against the Hangul it romanises, which for every name but
                 # 한국어 is CLDR's rather than the registry's: `yeongeo` is 영어, so
@@ -5687,7 +5813,7 @@ def country_ipa(locale, rows):
     text = {}
     for row in rows:
         said = row["insert"] or row["name"]
-        if locale in ROMANISED:
+        if not reads_script(locale, row["romanization"]):
             said = row["romanization"]
             if said and locale == "ko":
                 said = ko_romanization(row["insert"] or row["name"], said) or ""
@@ -6226,7 +6352,21 @@ GRADE = {
            "it there; that is a fact about the language rather than a claim about the voice"),
     "fr": ("C", "liaison survives and stress is phrasal, but the curated sheet's unit is coarser"),
     "vi": ("C", "tones reconstructed from espeak's digits, ngang included; anh/ach is a judgement"),
-    "ar": ("D", "short vowels are unwritten and espeak guesses; emphatics inconsistent"),
+    "ar": ("B+", "the pack's ALA-LC column read in reverse, so every short vowel the "
+           "script leaves out is written; the article's sun-letter assimilation and its "
+           "elision after a prefix or a vowel are added, and stress is derived from "
+           "syllable weight by Halpern's (2009) rule rather than looked up. Syllable "
+           "agreement with the curated sheet is 87%, and the rows that disagree are mostly "
+           "the sheet keeping al- whole after a vowel (`AY-na al-ham-MAAM`). Two things "
+           "the table writes alike and the script does not -- a final h that is ه, and a "
+           "stem with hamzat al-waṣl after the article -- are word lists (`AR_FINAL_H`, "
+           "`AR_WASL`), so a new row with an unlisted case reads wrong without failing. "
+           "It is a careful reading: a word-initial hamzat al-waṣl after a vowel keeps its "
+           "/ʔi/ (`hādhihi ibnatī`), `min al-` is not `mina l-`, and a final long vowel "
+           "is written long where Halpern hears it shortened. What keeps it from an A is "
+           "what is still espeak's -- the 49 currency glosses with no romanisation, the "
+           "`ar,km` name and every country name -- which guesses the short vowels and "
+           "writes ظ as ð: D quality, on 5% of the rows"),
     "th": ("D", "a neural G2P, and no Thai tone is verifiable against anything in this corpus"),
     "uk": ("B+", "near-phonemic orthography and, unlike Russian, genuinely no vowel-"
            "reduction system to get wrong -- probed on 60-odd words chosen for it "
@@ -6804,8 +6944,8 @@ def build(code):
             if not row["text"].strip():
                 skipped["no text"] += 1
                 continue
-            said = [expand_units(code, spoken(v))
-                    for v in alternatives(row[source] if source else row["text"])]
+            cell = row["text"] if reads_script(code, row.get(source, "")) else row[source]
+            said = [expand_units(code, spoken(v)) for v in alternatives(cell)]
             text = said[0]
             if source and not text.strip():
                 skipped[f"no {source}"] += 1
@@ -6839,8 +6979,8 @@ def build(code):
     bad = Counter()
     flagged = []                                  # rows a reviewer should read first
 
-    def reading(row, parts):
-        """One reading of a row's pieces, and why it is refused if it is."""
+    def reading(row, parts, how):
+        """One reading of a row's pieces by `how`, and why it is refused if it is."""
         # A loan piece is already IPA and already in this column's conventions, so
         # it skips `normalise` for the same reason a marker does: there is no route
         # output to repair and no stress for `apply_stress` to find.
@@ -6857,7 +6997,7 @@ def build(code):
         # `ROUTE_FORBIDS["hepburn"]`, so the two Japanese rows that name the reader
         # were being refused for the word "source".
         sound = LANGUAGE_SLOT.sub("", ipa)
-        stray = check_alphabet(sound) + check_route(sound, method)
+        stray = check_alphabet(sound) + check_route(sound, how)
         if not ipa or stray:
             return ipa, "G2P failed", stray or ["(empty)"]
         # Korean is a syllable-block script, so the result must have exactly as many
@@ -6879,8 +7019,10 @@ def build(code):
         return ipa, None, []
 
     for path, index, row, variants in plan:
+        # A romanised row read in its script went through the voice, not the route.
+        how = "espeak" if source and reads_script(code, row[source]) else method
         # One reading for each gender a template's alternatives are written for.
-        readings = [reading(row, parts) for parts in variants]
+        readings = [reading(row, parts, how) for parts in variants]
         refused = next((r for r in readings if r[1]), None)
         if refused:
             skipped[refused[1]] += 1
@@ -6893,7 +7035,7 @@ def build(code):
         # cells per method, so the precedent is visible rather than buried here.
         loaned = any(kind == "loan" for parts in variants for kind, _ in parts)
         filled[(path, index)] = (join_alternates([ipa for ipa, _, _ in readings]),
-                                 f"{method}+loan" if loaned else method)
+                                 f"{how}+loan" if loaned else how)
     return filled, skipped, bad, method, flagged
 
 
