@@ -1357,7 +1357,10 @@ test('a table of phrases folds into two columns, a table of single words does no
     throw new Error(`${conceptId} is not on the sheet`);
   };
 
-  const folded = sides('quick-responses.please-go-ahead');
+  // The report was about Quick responses, which folded while their respellings
+  // spelled both halves of "да / верно"; with one reading each they fit four columns
+  // and rightly stay there. The place words are the phrase table that still needs it.
+  const folded = sides('place-words.visitor-center');
   assert.ok(Math.abs(folded.script.x - folded.roman.x) < 0.5,
     'a folded row stacks the romanisation under the writing, at the same left edge');
   assert.ok(folded.roman.y > folded.script.y + 1,
