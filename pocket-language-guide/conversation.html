@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>try{var t=localStorage.getItem('plg.theme');if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>addEventListener('error',function(e){if(!e.target||e.target.tagName!=='SCRIPT')return;var b=document.createElement('div');b.className='container load-failed';b.style.padding='1rem';b.innerHTML='<h2>Something went wrong</h2><p class="muted">This page did not finish loading: one of its files was stopped, perhaps by a content blocker or a lost connection.</p>';document.body.prepend(b)},true)</script>
 <!-- No `user-scalable=no` and no `maximum-scale`: the specification forbids
      disabling zoom, and someone holding this out at arm's length in bad light is
      exactly the reader who needs to pinch it larger. -->

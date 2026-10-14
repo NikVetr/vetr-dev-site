@@ -254,6 +254,43 @@ test('a shell file is never shadowed by a copy in the pack cache', async ({ page
   expect(fonts, 'the pair\'s subset fonts belong in the pack cache').toBeGreaterThan(10);
 });
 
+test('a shell file is never refreshed in place from the network', async ({ page, context, browserName }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  // Only Chromium routes a service worker's own fetches through `context.route`.
+  test.skip(browserName !== 'chromium', 'needs a service worker\'s requests routed');
+  // The shell's files agree because they were installed together. Revalidating them
+  // into the running worker's cache mixed two deploys whenever the next install could
+  // not complete -- a blocker refusing one file was enough -- and the studio died on
+  // a button last week's page did not have.
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  const before = await page.evaluate(async () => {
+    const shell = await caches.open((await caches.keys()).find((n) => n.endsWith('-shell')) ?? '');
+    return (await shell.match('style.css'))?.text();
+  });
+  expect(before).toBeTruthy();
+
+  await context.route('**/style.css', (route) => route.fulfill({ body: '/* another deploy */', contentType: 'text/css' }));
+  await page.reload();
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForTimeout(1500);
+  const after = await page.evaluate(async () => {
+    const shell = await caches.open((await caches.keys()).find((n) => n.endsWith('-shell')) ?? '');
+    return (await shell.match('style.css'))?.text();
+  });
+  expect(after).toBe(before);
+});
+
+test('a page whose module a blocker refuses says so rather than staying blank', async ({ page }) => {
+  // A module graph that cannot be fetched runs nothing, so no module can report it;
+  // the page's own first script does. This is the blank board a reader got when
+  // EasyPrivacy refused `ui/platform/beacon.js`.
+  await page.route('**/ui/platform/flasher.js', (route) => route.abort('blockedbyclient'));
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  await expect(page.locator('.load-failed')).toContainText('did not finish loading');
+});
+
 test('a first visit does not reload itself when the worker takes charge', async ({ page }) => {
   test.skip(!HAS_PACKS, NEEDS_PACKS);
   // `controllerchange` is how a deploy reaches a page that is already open: the new

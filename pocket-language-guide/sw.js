@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-fefd58a2f84b';
+const VERSION = 'plg-6dd9306f8f9e';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -113,41 +113,28 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== location.origin) return;
 
-  // Stale-while-revalidate: instant offline, and a background refresh means a
-  // deploy is picked up on the next visit without a hard reload.
   event.respondWith((async () => {
-    // **A page comes from the shell, never from the pack cache.** Every other file
-    // may be looked up across both caches, because the pack cache is where a saved
-    // language's rows and fonts live and it outlives a deploy on purpose. HTML is
-    // different: it is the one file whose *version* has to agree with the modules
-    // it loads, and a `customize.html` that reached the pack cache -- an older
-    // worker keyed pages by full URL, so a pair first opened months ago carried its
-    // own copy -- was being served under this week's JavaScript. `#section-picker`
-    // did not exist in that page, `createSectionPicker` called `replaceChildren` on
-    // the null it got, and the studio came up half-built with an error over it, on
-    // exactly the pairs that had been opened before that element was added.
-    // The shell is version-scoped, so a page from it and the modules from it agree
-    // by construction; a miss falls through to the network below.
-    const cached = request.mode === 'navigate'
-      ? await (await caches.open(SHELL_CACHE)).match(request, { ignoreSearch: true })
-      : await caches.match(request, { ignoreSearch: true });
-    const fresh = fetch(request).then(async (response) => {
-      if (response.ok) {
-        // Refresh the file in whichever cache already owns it. A shell file stays
-        // in the version-scoped shell, so a deploy really does replace it; a
-        // language's rows, its subset fonts and the gallery's thumbnails stay in
-        // the pack cache, which outlives a deploy on purpose.
-        //
-        // Asking the shell rather than testing the path is what makes this right.
-        // `data/registry/scripts.csv` is a shell file and `data/lang/km/core.csv`
-        // is not, and no prefix tells them apart -- which is why the `/data/` test
-        // this replaces sent two thirds of the shell to the wrong cache.
-        const shell = await caches.open(SHELL_CACHE);
-        const owner = (await shell.match(request, { ignoreSearch: true }))
-          ? shell
-          : await caches.open(PACK_CACHE);
-        owner.put(request, response.clone());
-      }
+    // **The shell answers from its own version, and is never refreshed in place.**
+    // Its files agree with each other because they were installed together: a
+    // deploy changes `VERSION` and installs a new worker with a new shell, and only
+    // a complete one activates. This used to revalidate every shell file into the
+    // running worker's cache, which was harmless while the next install succeeded
+    // and ruinous when it could not -- a reader whose blocker refused one file kept
+    // the old worker for good, and its cache filled up file by file with the new
+    // deploy, until the studio ran this week's `studio.js` in last week's
+    // `customize.html` and died on a button the page did not have.
+    //
+    // It is also the only cache a page may come from: HTML has to agree with the
+    // modules it loads, and a `customize.html` in the pack cache (an older worker
+    // put pages there) once served last month's page under this week's JavaScript.
+    const shelled = await (await caches.open(SHELL_CACHE)).match(request, { ignoreSearch: true });
+    if (shelled) return shelled;
+    // Everything else is stale-while-revalidate in the pack cache, which outlives a
+    // deploy on purpose: a saved language's rows, its subset fonts, the thumbnails.
+    const pack = await caches.open(PACK_CACHE);
+    const cached = request.mode === 'navigate' ? undefined : await pack.match(request, { ignoreSearch: true });
+    const fresh = fetch(request).then((response) => {
+      if (response.ok && request.mode !== 'navigate') pack.put(request, response.clone());
       return response;
     }).catch(() => null);
 

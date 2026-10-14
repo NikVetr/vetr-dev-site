@@ -1060,7 +1060,7 @@ input.board-entry-amount {
    signal that does not flash is not a distress signal. Everything else here gives
    its information statically on purpose.
 
-   The dot is 300ms (`ui/platform/beacon.js`), so the fastest this ever gets is under
+   The dot is 300ms (`ui/platform/flasher.js`), so the fastest this ever gets is under
    two flashes a second, against the three-per-second photosensitive threshold. That
    bound is a safety property, not a taste. */
 .beacon {
@@ -1159,7 +1159,7 @@ input.board-entry-amount {
    seen.
 
    The light's position comes from `--beacon-x` / `--beacon-y` / `--beacon-rot`, set
-   per frame in `ui/platform/beacon.js`. Doing the perimeter arithmetic there rather
+   per frame in `ui/platform/flasher.js`. Doing the perimeter arithmetic there rather
    than in `calc` keeps it to four lines of readable maths instead of four clamped
    terms that are all evaluated every frame, and CSS has no way to express "which
    side am I on" without them. No transition is declared: the animation *is* the

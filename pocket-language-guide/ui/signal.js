@@ -14,7 +14,7 @@ import {
 } from './app.js';
 import { loadUiLanguage, applyStatic, t } from './i18n.js';
 import { encode, decode, toTimeline, unitMs, MIN_UNIT_MS } from '../core/morse.js';
-import { startBeacon } from './platform/beacon.js';
+import { startBeacon } from './platform/flasher.js';
 import { keepAwake } from './platform/wake.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));

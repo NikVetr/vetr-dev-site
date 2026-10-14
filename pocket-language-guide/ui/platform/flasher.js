@@ -24,6 +24,11 @@
 // hand in its own unit, and that unit is clamped here -- `safeUnitMs`, 170ms at the
 // least -- so this module is the one place the ceiling is enforced and no page's
 // speed setting can be the thing that bypasses it.
+//
+// **Not `beacon.js`.** EasyPrivacy blocks any URL ending in `/beacon.js`, a tracking
+// pixel's usual name, so a reader with a content blocker lost the whole board, which
+// imports this, and every service-worker update, which precaches it.
+// `tests/shell.test.mjs` keeps the shell's names clear of that rule's like.
 
 import { safeUnitMs } from '../../core/morse.js';
 

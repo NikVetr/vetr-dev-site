@@ -43,7 +43,7 @@ import {
 } from './board-display.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
-import { startBeacon, stopBeacon } from './platform/beacon.js';
+import { startBeacon, stopBeacon } from './platform/flasher.js';
 import { isNative, notePlace, onBack } from './platform/shell.js';
 import {
   read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged, removePlacement, showBuiltIn,

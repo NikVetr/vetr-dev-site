@@ -2728,7 +2728,7 @@ dialogs and only in the apps), in place of the page it started on. Android's Bac
 goes up where there is no page behind to go back to -- a context's root to the
 contexts, the contexts to the languages, the languages out of the app -- because
 Chromium skips history entries a page made without a gesture, so a relaunched
-screen has nothing behind it as far as Back can tell. `ui/platform/beacon.js`
+screen has nothing behind it as far as Back can tell. `ui/platform/flasher.js`
 reaches the lamp through the camera where the platform lends it. What the emulator
 has shown, and what only a phone can, is in `docs/native.md`.
 
