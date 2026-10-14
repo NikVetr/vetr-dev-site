@@ -292,6 +292,17 @@ records which, and what had to be adapted where no key existed); the English one
 read off the 12,001 curated respellings already in the corpus, which is a better
 source, because it records what a person actually chose for each sound in context.
 
+The `ipa` column those tables read is built by `scripts/build_ipa.py`: espeak-ng for
+most languages, each with its measured repairs, and for the eight packs whose script
+leaves sounds unwritten or whose romanisation is the authored record -- Mandarin,
+Japanese, Korean, Hebrew, Amharic, Arabic, Klingon and Quenya -- from the romanisation
+itself (pinyin, Hepburn, RR, BGN, ALA-LC and the invented languages' own systems).
+Arabic is the sharp case: its script writes no short vowels, so espeak guessed them,
+while the pack's ALA-LC column writes every one; `ala_lc_to_ipa` reads that column, with
+the article's assimilation and Halpern's stress rule, and only the country names, which
+have no romanisation, are left to the voice. Each language's column carries a grade and
+what limits it (`GRADE` in the same file).
+
 **The nineteenth reader has the best key of the nineteen, and its author says he built
 it the way we do.** Magay's *Idegen nevek kiejtési szótára* (Akadémiai Kiadó, 1974)
 transcribes 40,000 foreign names into Hungarian letters, and its introduction records
