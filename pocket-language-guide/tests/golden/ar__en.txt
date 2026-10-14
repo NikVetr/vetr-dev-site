@@ -70,8 +70,8 @@ item     quick-responses.yes-right          box 119.66 x 9.14
   rect    0.00    8.92  119.66 x 0.22  #BCC6CF
   run     1.72    6.09    7.45  latin-cond-400i 5.20  #3F4A55 ltr  "NA-"
   run     9.17    6.09    6.73  latin-cond-400i 5.20  #3F4A55 ltr  "am"
-  run    56.60    6.47    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
-  run    76.34    6.15   13.48  latin-cond-400i 5.40  #111820 ltr  "naʿam"
+  run    62.56    6.47    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
+  run    81.32    6.15   13.48  latin-cond-400i 5.40  #111820 ltr  "naʿam"
   run   108.71    5.85   10.10  arabic-700 6.60  #111820 rtl  "نعم"
 
 item     heading:payment-receipt            box 119.66 x 8.97
