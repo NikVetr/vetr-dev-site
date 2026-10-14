@@ -6,7 +6,7 @@ social-basics.good-evening,શુભ સાંજ,,śubh sāṁj,ʃubʰ sãɟ,au
 social-basics.goodbye,આવજો,,āvajō,aːʋʌɟoː,do come (again) — the ordinary Gujarati parting,2,gu-agent-v1;ipa=espeak
 social-basics.thank-you,આભાર,ધન્યવાદ,ābhār,aːbʰaːɾ,gratitude,2,gu-agent-v1;ipa=espeak
 social-basics.you-are-welcome,કંઈ વાત નથી,,kaṁī vāt nathī,kʌni ʋaːt nʌtʰi,it is nothing at all,2,gu-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,સાંભળો,એ ભાઈ / એ બહેન,sāṁbhaḷō,sãbʰʌɭoː,listen — the polite way to get attention,2,gu-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,સાંભળો,,sāṁbhaḷō,sãbʰʌɭoː,listen — the polite way to get attention,2,gu-agent-v1;rule=listener-pair-moved-to-variants (એ ભાઈ / એ બહેન);listener-variants-v2;ipa=espeak
 social-basics.sorry,માફ કરશો,,māph karaśō,maːpʰ kəɾʌʃoː,you will forgive (me),2,gu-agent-v1;ipa=espeak
 social-basics.no-problem,કંઈ વાંધો નહીં,,kaṁī vāṁdhō nahīṁ,kʌni ʋãdʰoː nʌhĩ,no objection at all,2,gu-agent-v1;ipa=espeak
 social-basics.i-do-not-know,મને ખબર નથી,,manē khabar nathī,mʌneː kʰʌbəɾ nʌtʰi,to me there is no knowledge,2,gu-agent-v1;ipa=espeak

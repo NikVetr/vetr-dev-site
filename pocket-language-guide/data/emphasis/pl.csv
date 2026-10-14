@@ -14,7 +14,7 @@ air-travel.my-luggage-did-not-arrive,nie dotarł
 air-travel.where-is-check-in,odprawa
 air-travel.where-is-the-security-check,kontrola bezpieczeństwa
 attractions-tickets.are-there-lockers,szafki
-attractions-tickets.could-you-take-a-photo-for-us,zdjęcia
+attractions-tickets.could-you-take-a-photo-for-us,zdjęcia | zdjęcie
 attractions-tickets.do-i-need-a-reservation,rezerwacja
 attractions-tickets.may-i-take-photos,fotografować
 attractions-tickets.what-is-the-latest-entry-time,wejść
@@ -112,7 +112,7 @@ hiking-parks.how-long-to-the-viewpoint,punktu widokowego
 hiking-parks.is-this-trail-suitable-for-beginners,początkujących
 hiking-parks.where-is-the-trailhead,początek
 hiking-parks.which-route-is-easier,łatwiejsza
-hitchhiking.can-you-give-me-a-ride,podwiezienie
+hitchhiking.can-you-give-me-a-ride,podwiezienie | podwieźć
 hitchhiking.i-can-pay-for-fuel,benzynę
 hitchhiking.i-only-need-to-go-to-the-next-town,następnego miasteczka
 hitchhiking.is-there-room-for-two,miejsce | dwóch
@@ -144,7 +144,7 @@ introductions.i-am-traveling-alone,sama | sam
 introductions.my-name-is,Nazywam
 introductions.this-is-my-friend,znajomy
 introductions.we-are-traveling-together,razem
-introductions.what-is-your-name,imię
+introductions.what-is-your-name,imię | nazywa
 kind-words.i-had-a-wonderful-time,wspaniały
 kind-words.i-like-it-very-much,podoba
 kind-words.it-is-beautiful-here,pięknie
@@ -152,7 +152,7 @@ kind-words.thank-you-for-everything,wszystko
 kind-words.thank-you-for-your-help,pomoc
 kind-words.thank-you-for-your-hospitality,gościnność
 kind-words.this-is-delicious,smaczne
-kind-words.you-are-very-kind,miło
+kind-words.you-are-very-kind,miło | miły | miła
 laundry.can-it-be-ready-today,dziś
 laundry.how-much-per-kilo,za kilogram
 laundry.please-do-not-use-bleach,wybielacza
