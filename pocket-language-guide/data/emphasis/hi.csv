@@ -60,7 +60,7 @@ color-size-returns.do-you-have-another-size,साइज़
 color-size-returns.may-i-try-it-on,पहन
 common-signs.no-photography,मना
 communication.can-you-help-me,मदद
-communication.do-you-speak-english,आपको
+communication.do-you-speak-english,आपको | तुम्हें
 communication.i-do-not-speak-this-language,नहीं आती
 communication.i-do-not-understand,समझ नहीं
 communication.please-speak-more-slowly,धीरे
@@ -151,7 +151,7 @@ introductions.i-am-traveling-alone,अकेले
 introductions.my-name-is,मेरा नाम
 introductions.this-is-my-friend,दोस्त
 introductions.we-are-traveling-together,साथ
-introductions.what-is-your-name,आपका नाम
+introductions.what-is-your-name,आपका नाम | तुम्हारा नाम
 introductions.where-are-you-from,कहाँ से
 kind-words.i-had-a-wonderful-time,अच्छा समय
 kind-words.i-like-it-very-much,पसंद
@@ -181,7 +181,7 @@ massage-spa.focus-on-feet,पैरों
 massage-spa.focus-on-neck,गर्दन
 massage-spa.focus-on-shoulders,कंधों
 massage-spa.more-gently,हल्के
-massage-spa.please-avoid-this-area,न कीजिए
+massage-spa.please-avoid-this-area,न कीजिए | न करो
 massage-spa.please-pause,थोड़ी देर
 massage-spa.please-stop,रोक
 massage-spa.reply-ask-supervisor,मैनेजर
@@ -259,7 +259,7 @@ quick-directions.on-the-right,दाईं
 quick-directions.turn-left,बाएँ
 quick-directions.turn-right,दाएँ
 room-problems.can-i-change-rooms,बदला
-room-problems.please-send-someone,भेजिए
+room-problems.please-send-someone,भेजिए | भेजो
 room-problems.the-air-conditioning-is-broken,एसी
 room-problems.the-heating-does-not-work,हीटर
 room-problems.the-key-does-not-work,चाबी
@@ -281,7 +281,7 @@ taxi.could-you-make-it-colder,तेज़
 taxi.could-you-make-it-warmer,कम
 taxi.may-i-open-the-window,खिड़की
 taxi.please-stop-here,रोक
-taxi.please-take-me-here,ले चलिए
+taxi.please-take-me-here,ले चलिए | ले चलो
 taxi.please-turn-around,यू-टर्न
 time-scheduling.can-we-change-the-time,बदला
 time-scheduling.how-long-does-it-take,समय

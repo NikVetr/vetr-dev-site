@@ -2,7 +2,7 @@ concept_id,key
 accessibility.step-free,段差なし
 air-travel.i-would-like-a-window-seat,窓側
 air-travel.i-would-like-an-aisle-seat,通路側
-air-travel.my-luggage-did-not-arrive,届いていません
+air-travel.my-luggage-did-not-arrive,届いていません | 届いていない
 air-travel.where-is-check-in,チェックイン
 air-travel.where-is-the-security-check,保安検査場
 attractions-tickets.are-there-lockers,コインロッカー
@@ -32,8 +32,8 @@ border-customs.where-do-i-collect-my-baggage,手荷物受取所
 color-size-returns.do-you-have-a-bag,袋
 color-size-returns.do-you-have-another-size,サイズ
 color-size-returns.may-i-try-it-on,試着
-communication.do-you-speak-english,話せます
-communication.i-do-not-speak-this-language,話せません
+communication.do-you-speak-english,話せます | 話せる
+communication.i-do-not-speak-this-language,話せません | 話せない
 communication.please-speak-more-slowly,ゆっくり
 dietary-needs.does-it-contain-fish-stock,魚のだし
 dietary-needs.does-it-contain-pork-fat,ラード
@@ -107,10 +107,10 @@ introductions.i-am-traveling-alone,一人
 introductions.my-name-is,名前
 introductions.this-is-my-friend,友達
 introductions.we-are-traveling-together,一緒
-introductions.what-is-your-name,お名前
+introductions.what-is-your-name,お名前 | 名前
 introductions.where-are-you-from,どこから
 kind-words.i-had-a-wonderful-time,素晴らしい
-kind-words.i-like-it-very-much,気に入り
+kind-words.i-like-it-very-much,気に入り | 気に入った
 kind-words.it-is-beautiful-here,きれい
 kind-words.thank-you-for-everything,いろいろ
 kind-words.thank-you-for-your-help,助け
@@ -169,7 +169,7 @@ payment-receipt.a-receipt-please,レシート
 payment-receipt.can-we-pay-separately,別々
 payment-receipt.how-much-in-total,全部
 payment-receipt.i-already-paid,もう
-payment-receipt.my-card-was-declined,通りません
+payment-receipt.my-card-was-declined,通りません | 通らなかった
 payment-receipt.pay-by-card,カード
 payment-receipt.the-bill-is-wrong,会計 | 間違って
 pharmacy-symptoms.can-i-get-this-medicine-here,薬
@@ -211,7 +211,7 @@ room-problems.there-is-no-hot-water,お湯
 shopping.can-it-be-a-little-cheaper,安く
 shopping.do-you-have-this-in-stock,在庫
 shopping.how-much-is-this,いくら
-shopping.where-do-i-pay,払い
+shopping.where-do-i-pay,払い | 払う
 taxi.can-you-wait-for-me-here,待って
 taxi.could-you-make-it-colder,下げ
 taxi.could-you-make-it-warmer,上げ
@@ -219,12 +219,12 @@ taxi.may-i-open-the-window,窓
 taxi.please-stop-here,止め
 taxi.please-take-me-here,ここへ
 time-scheduling.can-we-change-the-time,変え
-time-scheduling.how-long-does-it-take,かかり
+time-scheduling.how-long-does-it-take,かかり | かかる
 time-scheduling.what-day-is-it-today,何曜日
-time-scheduling.what-time-does-it-close,閉まり
-time-scheduling.what-time-does-it-open,開き
+time-scheduling.what-time-does-it-close,閉まり | 閉まる
+time-scheduling.what-time-does-it-open,開き | 開く
 time-scheduling.what-time-is-it,今
-time-scheduling.what-time-should-we-meet,会い
+time-scheduling.what-time-should-we-meet,会い | 会おう
 time-scheduling.when-is-convenient,都合
 toilets.where-toilet,トイレ
 trail-conditions.can-we-return-before-dark,暗くなる前
@@ -240,7 +240,7 @@ trail-transport.what-time-is-the-last-shuttle,最終シャトル
 trail-transport.when-does-the-cableway-stop,ロープウェイ
 trail-transport.where-can-we-buy-water,水
 trail-transport.where-can-we-refill-water,給水所
-transit-rides.can-i-use-this-ticket,乗れます
+transit-rides.can-i-use-this-ticket,乗れます | 乗れる
 transit-rides.do-i-need-to-transfer,乗り換え
 transit-rides.do-i-need-to-validate,自動改札
 transit-rides.is-this-direct,直通

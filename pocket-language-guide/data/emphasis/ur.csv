@@ -59,7 +59,7 @@ color-size-returns.do-you-have-another-size,سائز
 color-size-returns.may-i-try-it-on,پہن
 common-signs.no-photography,منع
 communication.can-you-help-me,مدد
-communication.do-you-speak-english,آپ کو
+communication.do-you-speak-english,آپ کو | تمہیں
 communication.i-do-not-speak-this-language,نہیں آتی
 communication.i-do-not-understand,سمجھ نہیں
 communication.please-speak-more-slowly,آہستہ
@@ -150,7 +150,7 @@ introductions.i-am-traveling-alone,اکیلا | اکیلی
 introductions.my-name-is,میرا نام
 introductions.this-is-my-friend,دوست
 introductions.we-are-traveling-together,ساتھ
-introductions.what-is-your-name,آپ کا نام
+introductions.what-is-your-name,آپ کا نام | تمہارا نام
 introductions.where-are-you-from,کہاں سے
 kind-words.i-had-a-wonderful-time,اچھا وقت
 kind-words.i-like-it-very-much,پسند
@@ -180,7 +180,7 @@ massage-spa.focus-on-feet,پاؤں
 massage-spa.focus-on-neck,گردن
 massage-spa.focus-on-shoulders,کندھوں
 massage-spa.more-gently,ہلکے
-massage-spa.please-avoid-this-area,نہ کیجیے
+massage-spa.please-avoid-this-area,نہ کیجیے | نہ کرو
 massage-spa.please-pause,تھوڑی دیر
 massage-spa.please-stop,روک
 massage-spa.reply-ask-supervisor,منیجر
@@ -258,7 +258,7 @@ quick-directions.on-the-right,دائیں
 quick-directions.turn-left,بائیں
 quick-directions.turn-right,دائیں
 room-problems.can-i-change-rooms,بدلا
-room-problems.please-send-someone,بھیجیے
+room-problems.please-send-someone,بھیجیے | بھیجو
 room-problems.the-air-conditioning-is-broken,اے سی
 room-problems.the-heating-does-not-work,ہیٹر
 room-problems.the-key-does-not-work,چابی
@@ -280,7 +280,7 @@ taxi.could-you-make-it-colder,ٹھنڈا
 taxi.could-you-make-it-warmer,گرم
 taxi.may-i-open-the-window,کھڑکی
 taxi.please-stop-here,روک
-taxi.please-take-me-here,لے چلیے
+taxi.please-take-me-here,لے چلیے | لے چلو
 taxi.please-turn-around,یو ٹرن
 time-scheduling.can-we-change-the-time,بدلا
 time-scheduling.how-long-does-it-take,وقت
