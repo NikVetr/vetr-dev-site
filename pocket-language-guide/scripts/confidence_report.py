@@ -17,6 +17,11 @@ gains for a cited source and for a correction pass that checked it. It loses for
   the same as English is usually a loan: *Taxi*, *Hotel*);
 - **no IPA** on a row that should have one.
 
+Where `tmp/out/crosscheck/<code>.csv` holds a cross-check against an open phrasebook
+(`concept_id,app_text,reference_text,verdict,reason`, written by a research pass), a row
+the reference agrees with gains and one it disagrees with loses, with the reference's
+wording as the reason.
+
 Writes `summary.md` (per language: rows, mean score, how many fall below 50, flag
 counts) and `<code>.csv` (that pack's rows below 60, lowest first, with the reasons).
 """
@@ -61,8 +66,15 @@ def cited(provenance):
     return bool(re.search(r"\(|\b(fix|src|lex|grammar|cldr|dict|source)=", provenance))
 
 
+def checked(code):
+    """concept_id -> (verdict, reference text), from a cross-check where there is one."""
+    path = ROOT / f"tmp/out/crosscheck/{code}.csv"
+    return {r["concept_id"]: (r["verdict"], r["reference_text"]) for r in rows(path)} if path.exists() else {}
+
+
 def score(code, english):
     found = pack(code)
+    reference = checked(code)
     by_text = defaultdict(set)
     for cid, r in found.items():
         by_text[bare(r["text"])].add(cid)
@@ -88,6 +100,12 @@ def score(code, english):
         if not r.get("ipa"):
             value -= 5
             reasons.append("no IPA")
+        verdict, said = reference.get(cid, ("", ""))
+        if verdict == "agree":
+            value += 10
+        elif verdict == "disagree":
+            value -= 15
+            reasons.append(f"the phrasebook says {said!r}")
         roman = next((v for k, v in r.items() if k.startswith("romanization") and v), "")
         scored.append((max(0, min(100, value)), cid, r["text"], roman, english.get(cid, ""), r.get("confidence", ""), reasons))
     return sorted(scored)
