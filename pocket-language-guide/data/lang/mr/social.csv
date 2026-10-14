@@ -3,7 +3,7 @@ social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,the everyday gree
 social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,2,mr-agent-v1;ipa=espeak
 social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,2,mr-agent-v1;ipa=espeak
 social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,2,mr-agent-v1;ipa=espeak
-social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]' -- the everyday Marathi goodbye; masculine here and feminine in variants.csv,2,mr-agent-v1;ipa=espeak
+social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]' -- the everyday Marathi goodbye,2,"mr-agent-v1;fix=the cell's own back-translation -- kept -- and Berntsen A Basic Marathi-English Dictionary (DSAL) p. 123 येणे (v.i. to come);was=literal lit. 'I'll come [again]' -- the everyday Marathi goodbye -- masculine here and feminine in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine येते serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 social-basics.thank-you,धन्यवाद,,dhanyavāda,dʰˌənjəvˈaːd,,2,mr-agent-v1;ipa=espeak
 social-basics.you-are-welcome,स्वागत आहे,,svāgata āhē,svˈaːɡət ˈaːheː,,2,mr-agent-v1;ipa=espeak
 social-basics.excuse-me-sorry,माफ करा,,māpha karā,mˈaːpʰ kˈʌɾaː,,2,mr-agent-v1;ipa=espeak

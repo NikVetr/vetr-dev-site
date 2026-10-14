@@ -39,3 +39,5 @@ mr,feminine,#c2185b,"जवळची, ही; mr.wikipedia गुलाबी re
 mr,neuter,#00796b,"जवळचे, हे; no culture gives a neuter a colour; teal, the one hue that stays apart from this blue and pink for protan and deutan readers too (CIEDE2000 >= 15, Machado 2009) at >= 4.5:1 on white"
 ha,masculine,#1f5fae,"yake, ne; ha.wikipedia Ruwan Kwalba a Amurka rev 794448: kwalaben shuɗi ga yara maza"
 ha,feminine,#c2185b,"take, ce; ha.wikipedia Ruwan Kwalba a Amurka rev 794448: kwalaben ruwan hoda ga 'yan mata"
+he,masculine,#1f5fae,זה; he.wikipedia ורוד rev 43621271 (ורוד ומגדר): הצבע הכחול מקושר עם גבריות -- blue with masculinity
+he,feminine,#c2185b,זו; he.wikipedia ורוד rev 43621271: ורוד הוא צבע נפוץ בפריטים המיועדים לתינוקות ממין נקבה -- הצבע הוורוד מקושר במערב עם נשיות

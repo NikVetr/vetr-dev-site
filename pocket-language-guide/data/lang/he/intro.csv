@@ -7,19 +7,19 @@ introductions.this-is-my-friend,זה חבר שלי,זֶה חָבֵר שֶׁלִ�
 introductions.i-am-from,אני מ{},אֲנִי מ{},ani m{},anˈi m {},I am from {},2,he-agent-v1;ipa=bgn
 introductions.where-are-you-from,מאיזו ארץ?,מֵאֵיזוֹ אֶרֶץ?,me’éyzo érets?,meˈejzo ˈeʁets,from which country?,2,he-agent-v1;src=Milog ארץ;reply-neutrality-rule;rule=verbless-question-drops-gendered-pronoun;answers-audit-v1;ipa=bgn
 introductions.how-are-you,מה המצב?,מָה הַמַּצָּב?,ma hamatsav?,mˈa hamatsˈav,how is the situation? -- the everyday greeting,2,he-agent-v1;ipa=bgn
-introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,a woman says tayeret,2,he-agent-v1;ipa=bgn
+introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,I am a tourist,2,"he-agent-v1;fix=Pealim (pealim.com) 4933 תַּיָּר (tourist);was=literal a woman says tayeret (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני תיירת serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
 introductions.this-is-my-husband-wife,זה בעלי / זאת אשתי,זֶה בַּעֲלִי / זֹאת אִשְׁתִּי,ze ba‘ali / zot ishti,zˈe baalˈi / zˈot iʃtˈi,this is my husband / this is my wife,2,he-agent-v1;ipa=bgn
 introductions.this-is-my-daughter-son,זאת הבת שלי / זה הבן שלי,זֹאת הַבַּת שֶׁלִּי / זֶה הַבֵּן שֶׁלִּי,zot habat sheli / ze háben sheli,zˈot habˈat ʃelˈi / zˈe hˈaben ʃelˈi,this is my daughter / this is my son,2,he-agent-v1;ipa=bgn
 family-intros.this-is-my-husband,זה בעלי,זֶה בַּעֲלִי,ze ba‘ali,zˈe baalˈi,,2,he-agent-v1;ipa=bgn
 family-intros.this-is-my-wife,זאת אשתי,זֹאת אִשְׁתִּי,zot ishti,zˈot iʃtˈi,,2,he-agent-v1;ipa=bgn
 family-intros.this-is-my-son,זה הבן שלי,זֶה הַבֵּן שֶׁלִּי,ze háben sheli,zˈe hˈaben ʃelˈi,,2,he-agent-v1;ipa=bgn
 family-intros.this-is-my-daughter,זאת הבת שלי,זֹאת הַבַּת שֶׁלִּי,zot habat sheli,zˈot habˈat ʃelˈi,,2,he-agent-v1;ipa=bgn
-introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,a woman says metayelet,2,he-agent-v1;ipa=bgn
+introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,I am travelling alone,2,"he-agent-v1;fix=Pealim (pealim.com) 743 לְטַיֵּל (to walk -- to travel);was=literal a woman says metayelet (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני מטיילת לבד serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
 about-me.i-am-a-student,אני סטודנט,אֲנִי סְטוּדֶנְט,ani student,anˈi studˈent,,2,he-agent-v1;ipa=bgn
 about-me.i-am-retired,אני גמלאי,אֲנִי גִּמְלָאִי,ani gimla’i,anˈi ɡimlaˈi,,2,he-agent-v1;ipa=bgn
 about-me.i-am-a-teacher,אני מורה,אֲנִי מוֹרֶה,ani moreh,anˈi moʁˈeh,,2,he-agent-v1;ipa=bgn
 about-me.i-am-a-doctor,אני רופא,אֲנִי רוֹפֵא,ani rofe,anˈi ʁofˈe,,2,he-agent-v1;ipa=bgn
-about-me.i-am-a-nurse,אני אח,אֲנִי אָח,ani aẖ,anˈi ˈax,"אח = male nurse, an extension of ""brother"" (the primary sense); a woman says אחות (achot)",2,he-agent-v1;ipa=bgn
+about-me.i-am-a-nurse,אני אח,אֲנִי אָח,ani aẖ,anˈi ˈax,I am a nurse,2,"he-agent-v1;fix=he.wikipedia אח rev 43249508 (אח מוסמך – עובד סיעוד);was=literal אח = male nurse, an extension of ""brother"" (the primary sense) -- a woman says אחות (achot) (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני אחות serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
 about-me.i-am-an-engineer,אני מהנדס,אֲנִי מְהַנְדֵּס,ani mehandes,anˈi mehandˈes,,2,he-agent-v1;ipa=bgn
 about-me.i-work-in-an-office,אני עובד במשרד,אֲנִי עוֹבֵד בְּמִשְׂרָד,ani oved bemisrad,anˈi ovˈed bemisʁˈad,,2,he-agent-v1;ipa=bgn
 about-me.i-have-my-own-business,יש לי עסק משלי,יֵשׁ לִי עֵסֶק מִשֶּׁלִּי,yesh li esek misheli,jˈeʃ lˈi esˈek miʃelˈi,,2,he-agent-v1;ipa=bgn

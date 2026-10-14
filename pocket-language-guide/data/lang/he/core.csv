@@ -23,7 +23,7 @@ pronouns-verbs.there-is-have,יש,יֵשׁ,yesh,jˈeʃ,,2,he-agent-v1;ipa=bgn
 pronouns-verbs.there-is-not-do-not-have,אין,אֵין,eyn,ˈejn,,2,he-agent-v1;ipa=bgn
 pronouns-verbs.want-to-verb,רוצה ל…,רוֹצֶה לְ…,rotse le…,ʁotsˈe lˈe,I want to… + infinitive,2,he-agent-v1;ipa=bgn
 pronouns-verbs.want-thing,רוצה…,רוֹצֶה…,rotse…,ʁotsˈe,I want…,2,he-agent-v1;ipa=bgn
-pronouns-verbs.need-thing,צריך…,צָרִיךְ…,tsarikh…,tsaʁˈix,I need… -- a woman says tsrikha,2,he-agent-v1;ipa=bgn
+pronouns-verbs.need-thing,צריך…,צָרִיךְ…,tsarikh…,tsaʁˈix,I need…,2,"he-agent-v1;fix=the cell's own back-translation -- kept -- and Pealim (pealim.com) 6018 צָרִיךְ (need -- should -- must);was=literal I need… -- a woman says tsrikha (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine צריכה… serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
 pronouns-verbs.looking-for-thing,מחפש…,מְחַפֵּשׂ…,meẖapes…,mexapˈes,I am looking for…,2,he-agent-v1;ipa=bgn
 question-words.what,מה,מָה,ma,mˈa,,2,he-agent-v1;ipa=bgn
 question-words.where,איפה,אֵיפֹה,éyfo,ˈejfo,,2,he-agent-v1;ipa=bgn
