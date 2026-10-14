@@ -2882,7 +2882,14 @@ Named so nobody has to rediscover the gap:
   or nine faces about a second later, which is the point at which they would want the
   second one.
 - **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
-  the validator enforces the safety gate, but there is no review UI.
+  the validator enforces the safety gate, but there is no review UI. What there is, is
+  a triage list: `scripts/confidence_report.py` scores every row from 0 to 100 from its
+  own `confidence`, whether its `provenance` cites a source and whether a correction
+  pass checked it, less what the correction passes kept finding errors behind -- the
+  same text as a concept whose English differs, a multi-word text the same as English,
+  no IPA -- and writes `tmp/out/confidence/summary.md` and, per language, the rows below
+  60 with the reasons, romanised. Nothing of it ships. A high score says the row's
+  record is strong, not that the row is right.
 - **The rest of the translators' backlog**, still staged in
   `content/PROPOSED-CONCEPTS.md` with the argument and the sources for each. The
   strong cases have shipped — the malaria pair, both pork-stock questions, the
