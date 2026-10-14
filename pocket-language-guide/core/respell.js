@@ -801,7 +801,8 @@ function withInherent(text) {
   for (let i = 0; i < chars.length; i += 1) {
     out += chars[i];
     const at = indicAt(chars[i]);
-    if (!((at >= 0x15 && at <= 0x39) || (at >= 0x58 && at <= 0x5f))) continue;
+    // Odia ୱ stands outside the plan's consonant range.
+    if (!((at >= 0x15 && at <= 0x39) || (at >= 0x58 && at <= 0x5f) || chars[i] === 'ୱ')) continue;
     while (indicAt(chars[i + 1]) === 0x3c) out += chars[++i];
     const next = indicAt(chars[i + 1]);
     if (!((next >= 0x3e && next <= 0x4d) || (next >= 0x55 && next <= 0x57) || next === 0x62 || next === 0x63)) out += '◌';
@@ -820,7 +821,7 @@ function withInherent(text) {
  * (`sch` before `s`). A run may be read only at a word's start (`^st`) or end (`e$`):
  * each word is read between those two marks, which add no sound themselves. An Indic
  * consonant's own vowel is read as `◌` (`withInherent`), and Hangul as its jamo. A letter
- * the table does not read -- a space, a hyphen, an apostrophe -- adds no sound.
+ * the table does not read -- a space, a hyphen, an apostrophe no row names -- adds no sound.
  * @param {string} name
  * @param {Record<string,string>[]} table  rows of `language,script,letters,sound`
  * @param {string} language  the reader's, whose own readings come first
@@ -828,14 +829,17 @@ function withInherent(text) {
  * @returns {string} the sounds, joined as the keyboard keeps them
  */
 export function guessSounds(name, table, language, script) {
+  // Hangul is read letter by letter: a syllable block decomposes into its jamo, and so do
+  // the table's rows, which a CSV reader composes again.
+  const form = script === 'Kore' ? 'NFD' : 'NFC';
   /** @type {Map<string, string>} */ const read = new Map();
-  for (const row of table) if (row.script === script && !row.language) read.set(row.letters, row.sound);
-  for (const row of table) if (row.script === script && row.language === language) read.set(row.letters, row.sound);
+  for (const row of table) if (row.script === script && !row.language) read.set(row.letters.normalize(form), row.sound);
+  for (const row of table) if (row.script === script && row.language === language) read.set(row.letters.normalize(form), row.sound);
   const longest = Math.max(0, ...[...read.keys()].map((letters) => letters.length));
-  // Hangul is read letter by letter: a syllable block decomposes into its jamo.
-  const typed = name.normalize(script === 'Kore' ? 'NFD' : 'NFC').toLocaleLowerCase(language);
+  const typed = name.normalize(form).toLocaleLowerCase(language);
+  // An apostrophe inside a name is part of its word: Uzbek o', Swahili ng', Hebrew ג׳.
   const text = (INDIC.has(script) ? withInherent(typed) : typed)
-    .replace(/[\p{L}\p{M}◌]+/gu, (word) => `^${word}$`);
+    .replace(/[\p{L}\p{M}◌'’ʼ׳]+/gu, (word) => `^${word}$`);
   /** @type {string[]} */ const sounds = [];
   for (let i = 0; i < text.length;) {
     let n = Math.min(longest, text.length - i);

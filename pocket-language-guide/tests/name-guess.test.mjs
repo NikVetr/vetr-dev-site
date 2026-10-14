@@ -59,6 +59,16 @@ test('an Indic consonant carries its own vowel unless a sign or virama follows, 
   assert.equal(guessSounds('민수', hangul, 'ko', 'Kore'), 'minsu');
 });
 
+test('a Hangul row composed by the CSV reader still reads, and an apostrophe stays inside its word', () => {
+  // 시 as a CSV cell is one syllable; the name arrives as jamo.
+  const hangul = [['시', 'ʃ i'], ['ᄆ', 'm'], ['ᅵ', 'i'], ['ᆫ', 'n']]
+    .map(([letters, sound]) => ({ language: '', script: 'Kore', letters, sound }));
+  assert.equal(guessSounds('시민', hangul, 'ko', 'Kore'), 'ʃimin');
+  const uzbek = [...TABLE, { language: 'uz', script: 'Latn', letters: "o'", sound: 'o' },
+    { language: 'uz', script: 'Latn', letters: 't', sound: 't' }, { language: 'uz', script: 'Latn', letters: 'r', sound: 'r' }];
+  assert.equal(guessSounds("O'tkir", uzbek, 'uz', 'Latn'), 'otkir');
+});
+
 test('what the table does not read adds no sound, and another script reads nothing here', () => {
   assert.equal(guessSounds('Ana-Lou', TABLE, 'en', 'Latn'), 'analou');
   assert.equal(guessSounds('Ника', TABLE, 'ru', 'Latn'), '');
