@@ -149,7 +149,7 @@ introductions.i-am-traveling-alone,մենակ
 introductions.my-name-is,Իմ
 introductions.this-is-my-friend,ընկերն
 introductions.we-are-traveling-together,միասին
-introductions.what-is-your-name,Ձեր
+introductions.what-is-your-name,Ձեր | քո
 introductions.where-are-you-from,Որտեղի՞ց
 kind-words.i-had-a-wonderful-time,հիանալի
 kind-words.i-like-it-very-much,հավանեցի
@@ -162,8 +162,8 @@ kind-words.you-are-very-kind,բարի
 laundry.can-it-be-ready-today,Այսօր
 laundry.how-much-per-kilo,կիլոգրամը
 laundry.please-do-not-use-bleach,սպիտակեցնող
-laundry.please-iron-this,արդուկե՛ք
-laundry.please-wash-these-clothes,լվացե՛ք
+laundry.please-iron-this,արդուկե՛ք | արդուկի՛ր
+laundry.please-wash-these-clothes,լվացե՛ք | լվա՛
 laundry.when-will-it-be-ready,Ե՞րբ
 laundry.where-is-a-laundromat,լվացքատունը
 lost-rescue.i-do-not-know-where-i-am,որտեղ եմ
@@ -179,9 +179,9 @@ massage-spa.focus-on-feet,ոտքերը
 massage-spa.focus-on-neck,վիզը
 massage-spa.focus-on-shoulders,ուսերը
 massage-spa.more-gently,Մեղմ
-massage-spa.please-avoid-this-area,մի՛ մերսեք
+massage-spa.please-avoid-this-area,մի՛ մերսեք | մի՛ մերսիր
 massage-spa.please-pause,Մի պահ
-massage-spa.please-stop,Դադարեցրե՛ք
+massage-spa.please-stop,Դադարեցրե՛ք | Դադարեցրո՛ւ
 massage-spa.reply-ask-supervisor,ղեկավարին
 massage-spa.reply-cannot-avoid-this-treatment,հնարավոր չէ
 massage-spa.reply-does-it-hurt-there,ցավո՞ւմ
@@ -254,7 +254,7 @@ quick-directions.on-the-right,Աջ
 quick-directions.turn-left,ձախ
 quick-directions.turn-right,աջ
 room-problems.can-i-change-rooms,փոխել
-room-problems.please-send-someone,մարդ ուղարկե՛ք
+room-problems.please-send-someone,մարդ ուղարկե՛ք | մարդ ուղարկի՛ր
 room-problems.the-air-conditioning-is-broken,Օդորակիչը
 room-problems.the-heating-does-not-work,Ջեռուցումը
 room-problems.the-key-does-not-work,Բանալին
@@ -274,9 +274,9 @@ taxi.can-you-wait-for-me-here,սպասել
 taxi.could-you-make-it-colder,պաղ
 taxi.could-you-make-it-warmer,տաքացնել
 taxi.may-i-open-the-window,պատուհանը
-taxi.please-stop-here,կանգնե՛ք
-taxi.please-take-me-here,տարե՛ք
-taxi.please-turn-around,ետ դարձե՛ք
+taxi.please-stop-here,կանգնե՛ք | կանգնի՛ր
+taxi.please-take-me-here,տարե՛ք | տա՛ր
+taxi.please-turn-around,ետ դարձե՛ք | ետ դարձի՛ր
 time-scheduling.can-we-change-the-time,փոխել
 time-scheduling.how-long-does-it-take,Որքա՞ն ժամանակ
 time-scheduling.what-day-is-it-today,ի՞նչ օր

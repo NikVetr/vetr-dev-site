@@ -52,7 +52,7 @@ color-size-returns.do-you-have-a-bag,Paket
 color-size-returns.do-you-have-another-size,oʻlchami
 color-size-returns.may-i-try-it-on,Kiyib
 communication.can-you-help-me,yordam
-communication.do-you-speak-english,bilasizmi
+communication.do-you-speak-english,bilasizmi | bilasanmi
 communication.i-do-not-speak-this-language,bilmayman
 communication.please-speak-more-slowly,Sekinroq
 dietary-needs.does-it-contain-fish-stock,baliq bulyoni
@@ -108,7 +108,7 @@ hiking-parks.how-long-to-the-viewpoint,Manzara maydonchasigacha
 hiking-parks.is-this-trail-suitable-for-beginners,yangi boshlovchilarga
 hiking-parks.where-is-the-trailhead,Yoʻl boshi
 hiking-parks.which-route-is-easier,osonroq
-hitchhiking.can-you-give-me-a-ride,olib ketasizmi
+hitchhiking.can-you-give-me-a-ride,olib ketasizmi | olib ketasanmi
 hitchhiking.i-can-pay-for-fuel,Benzin
 hitchhiking.i-only-need-to-go-to-the-next-town,keyingi shaharchagacha
 hitchhiking.is-there-room-for-two,Ikki kishiga joy
@@ -141,20 +141,20 @@ introductions.i-am-traveling-alone,yolgʻiz
 introductions.my-name-is,ismim
 introductions.this-is-my-friend,doʻstim
 introductions.we-are-traveling-together,birga
-introductions.what-is-your-name,Ismingiz
+introductions.what-is-your-name,Ismingiz | Isming
 kind-words.i-had-a-wonderful-time,Ajoyib
 kind-words.i-like-it-very-much,yoqdi
 kind-words.it-is-beautiful-here,chiroyli
 kind-words.thank-you-for-everything,Hammasi
-kind-words.thank-you-for-your-help,Yordamingiz
-kind-words.thank-you-for-your-hospitality,Mehmondoʻstligingiz
+kind-words.thank-you-for-your-help,Yordamingiz | Yordaming
+kind-words.thank-you-for-your-hospitality,Mehmondoʻstligingiz | Mehmondoʻstliging
 kind-words.this-is-delicious,mazali
-kind-words.you-are-very-kind,mehribonsiz
+kind-words.you-are-very-kind,mehribonsiz | mehribonsan
 laundry.can-it-be-ready-today,Bugun
 laundry.how-much-per-kilo,Bir kilosi
 laundry.please-do-not-use-bleach,Oqartirgich
-laundry.please-iron-this,dazmollang
-laundry.please-wash-these-clothes,yuving
+laundry.please-iron-this,dazmollang | dazmolla
+laundry.please-wash-these-clothes,yuving | yuv
 laundry.when-will-it-be-ready,Qachon
 laundry.where-is-a-laundromat,Kir yuvish shoxobchasi
 lost-rescue.i-do-not-know-where-i-am,Qayerdaligimni
@@ -170,15 +170,15 @@ massage-spa.focus-on-feet,oyoqlarimni
 massage-spa.focus-on-neck,boʻynimni
 massage-spa.focus-on-shoulders,yelkamni
 massage-spa.more-gently,Yumshoqroq
-massage-spa.please-avoid-this-area,tegmang
+massage-spa.please-avoid-this-area,tegmang | tegma
 massage-spa.please-pause,Bir ozga
-massage-spa.please-stop,toʻxtating
+massage-spa.please-stop,toʻxtating | toʻxtat
 massage-spa.reply-ask-supervisor,rahbardan
 massage-spa.reply-cannot-avoid-this-treatment,chetlab oʻtib boʻlmaydi
 massage-spa.reply-does-it-hurt-there,ogʻriyaptimi
 massage-spa.reply-i-will-avoid-that-area,tegmayman
 massage-spa.reply-which-area-exactly,qaysi joyni
-massage-spa.stronger-pressure,kuchaytiring
+massage-spa.stronger-pressure,kuchaytiring | kuchaytir
 massage-spa.that-pressure-is-good,ayni joyida
 medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,aspirin | ibuprofenga
 medical-conditions.i-am-allergic-to-penicillin,penitsillinga
@@ -244,7 +244,7 @@ quick-directions.go-straight,Toʻgʻriga
 quick-directions.turn-left,Chapga
 quick-directions.turn-right,Oʻngga
 room-problems.can-i-change-rooms,almashtirsam
-room-problems.please-send-someone,odam yuboring
+room-problems.please-send-someone,odam yuboring | odam yubor
 room-problems.the-air-conditioning-is-broken,Konditsioner
 room-problems.the-heating-does-not-work,Isitish
 room-problems.the-key-does-not-work,Karta
@@ -264,8 +264,8 @@ taxi.can-you-wait-for-me-here,kutib
 taxi.could-you-make-it-colder,sovuqroq
 taxi.could-you-make-it-warmer,issiqroq
 taxi.may-i-open-the-window,Derazani
-taxi.please-stop-here,toʻxtang
-taxi.please-take-me-here,olib boring
+taxi.please-stop-here,toʻxtang | toʻxta
+taxi.please-take-me-here,olib boring | olib bor
 time-scheduling.can-we-change-the-time,oʻzgartirsak
 time-scheduling.how-long-does-it-take,vaqt oladi
 time-scheduling.what-day-is-it-today,kun
@@ -280,7 +280,7 @@ trail-conditions.how-long-is-the-full-route,Butun yoʻl
 trail-conditions.is-the-path-slippery,sirpanchiqmi
 trail-conditions.is-the-route-steep,tikmi
 trail-conditions.is-the-trail-open,ochiqmi
-trail-transport.do-you-have-a-map,Xaritangiz
+trail-transport.do-you-have-a-map,Xaritangiz | Xaritang
 trail-transport.how-long-is-the-wait,kutish
 trail-transport.is-there-cell-signal-here,aloqa
 trail-transport.what-time-is-the-last-shuttle,Oxirgi avtobus

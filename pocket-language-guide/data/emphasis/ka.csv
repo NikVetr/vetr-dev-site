@@ -14,7 +14,7 @@ air-travel.my-luggage-did-not-arrive,არ მოვიდა
 air-travel.where-is-check-in,რეგისტრაცია
 air-travel.where-is-the-security-check,უსაფრთხოების შემოწმება
 attractions-tickets.are-there-lockers,ბარგის შესანახი
-attractions-tickets.could-you-take-a-photo-for-us,გადაგვიღოთ
+attractions-tickets.could-you-take-a-photo-for-us,გადაგვიღოთ | გადაგვიღო
 attractions-tickets.do-i-need-a-reservation,დავჯავშნო
 attractions-tickets.may-i-take-photos,ფოტოს გადაღება
 attractions-tickets.what-is-the-latest-entry-time,უშვებენ
@@ -103,7 +103,7 @@ food-ordering.i-want-this,მინდა
 food-ordering.is-a-table-available,თავისუფალი მაგიდა
 food-ordering.is-this-vegetarian,ვეგეტარიანულია
 food-ordering.table-for-two,ორზე
-food-ordering.what-do-you-recommend,მირჩევთ
+food-ordering.what-do-you-recommend,მირჩევთ | მირჩევ
 hiking-parks.how-long-to-the-summit,მწვერვალამდე
 hiking-parks.how-long-to-the-viewpoint,სახედავ ადგილამდე
 hiking-parks.is-this-trail-suitable-for-beginners,დამწყებთათვის
@@ -112,8 +112,8 @@ hiking-parks.which-route-is-easier,ადვილია
 hitchhiking.i-can-pay-for-fuel,ბენზინის
 hitchhiking.i-only-need-to-go-to-the-next-town,შემდეგ ქალაქამდე
 hitchhiking.is-there-room-for-two,ადგილი
-hitchhiking.thank-you-for-the-ride,გმადლობთ
-hitchhiking.where-are-you-going,მიდიხართ
+hitchhiking.thank-you-for-the-ride,გმადლობთ | გმადლობ
+hitchhiking.where-are-you-going,მიდიხართ | მიდიხარ
 hotel-basics.are-any-rooms-available,თავისუფალი ოთახი
 hotel-basics.how-much-per-night,ღამე
 hotel-basics.i-have-a-reservation,ჯავშანი
@@ -141,7 +141,7 @@ introductions.i-am-traveling-alone,მარტო
 introductions.my-name-is,მქვია
 introductions.this-is-my-friend,მეგობარია
 introductions.we-are-traveling-together,ერთად
-introductions.what-is-your-name,გქვიათ
+introductions.what-is-your-name,გქვიათ | გქვია
 introductions.where-are-you-from,საიდან
 kind-words.i-had-a-wonderful-time,საუცხოო
 kind-words.i-like-it-very-much,მომეწონა
@@ -154,8 +154,8 @@ kind-words.you-are-very-kind,კეთილი
 laundry.can-it-be-ready-today,დღეს
 laundry.how-much-per-kilo,კილო
 laundry.please-do-not-use-bleach,მათეთრებელი
-laundry.please-iron-this,დააუთოვეთ
-laundry.please-wash-these-clothes,გარეცხეთ
+laundry.please-iron-this,დააუთოვეთ | დააუთოვე
+laundry.please-wash-these-clothes,გარეცხეთ | გარეცხე
 laundry.when-will-it-be-ready,როდის
 laundry.where-is-a-laundromat,სამრეცხაო
 lost-rescue.i-do-not-know-where-i-am,სად ვარ
@@ -171,9 +171,9 @@ massage-spa.focus-on-feet,ტერფებს
 massage-spa.focus-on-neck,კისერს
 massage-spa.focus-on-shoulders,მხრებს
 massage-spa.more-gently,ნაკლები
-massage-spa.please-avoid-this-area,ნუ შეეხებით
-massage-spa.please-pause,შეისვენეთ
-massage-spa.please-stop,შეწყვიტეთ
+massage-spa.please-avoid-this-area,ნუ შეეხებით | ნუ შეეხები
+massage-spa.please-pause,შეისვენეთ | შეისვენე
+massage-spa.please-stop,შეწყვიტეთ | შეწყვიტე
 massage-spa.reply-ask-supervisor,უფროსს
 massage-spa.reply-cannot-avoid-this-treatment,გარეშე არ კეთდება
 massage-spa.reply-does-it-hurt-there,გტკივათ
@@ -242,7 +242,7 @@ quick-directions.across-from-here,მოპირდაპირე
 quick-directions.turn-left,მარცხნივ
 quick-directions.turn-right,მარჯვნივ
 room-problems.can-i-change-rooms,გავცვალო
-room-problems.please-send-someone,გამოგზავნეთ ვინმე
+room-problems.please-send-someone,გამოგზავნეთ ვინმე | გამოგზავნე ვინმე
 room-problems.the-air-conditioning-is-broken,კონდიციონერი
 room-problems.the-heating-does-not-work,გათბობა
 room-problems.the-key-does-not-work,გასაღები
@@ -258,12 +258,12 @@ shopping.i-am-just-looking,ვათვალიერებ
 shopping.i-will-take-this,ვიყიდი
 shopping.that-is-too-expensive,ძვირია
 shopping.where-do-i-pay,გადავიხადო
-taxi.can-you-wait-for-me-here,დამელოდოთ
-taxi.could-you-make-it-colder,გააგრილოთ
-taxi.could-you-make-it-warmer,გაათბოთ
+taxi.can-you-wait-for-me-here,დამელოდოთ | დამელოდო
+taxi.could-you-make-it-colder,გააგრილოთ | გააგრილო
+taxi.could-you-make-it-warmer,გაათბოთ | გაათბო
 taxi.may-i-open-the-window,ფანჯარა
-taxi.please-stop-here,გაჩერდით
-taxi.please-take-me-here,წამიყვანეთ
+taxi.please-stop-here,გაჩერდით | გაჩერდი
+taxi.please-take-me-here,წამიყვანეთ | წამიყვანე
 time-scheduling.can-we-change-the-time,შეცვლა
 time-scheduling.how-long-does-it-take,რამდენი ხანი
 time-scheduling.what-day-is-it-today,დღეა

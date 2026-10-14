@@ -159,8 +159,8 @@ kind-words.you-are-very-kind,tốt bụng
 laundry.can-it-be-ready-today,Hôm nay
 laundry.how-much-per-kilo,một ký
 laundry.please-do-not-use-bleach,thuốc tẩy
-laundry.please-iron-this,ủi
-laundry.please-wash-these-clothes,giặt
+laundry.please-iron-this,ủi | Ủi
+laundry.please-wash-these-clothes,giặt | Giặt
 laundry.when-will-it-be-ready,Khi nào
 laundry.where-is-a-laundromat,Tiệm giặt
 lost-rescue.i-do-not-know-where-i-am,mình đang ở đâu
@@ -176,7 +176,7 @@ massage-spa.focus-on-feet,bàn chân
 massage-spa.focus-on-neck,cổ
 massage-spa.focus-on-shoulders,vai
 massage-spa.more-gently,Nhẹ tay
-massage-spa.please-avoid-this-area,đừng xoa bóp
+massage-spa.please-avoid-this-area,đừng xoa bóp | Đừng xoa bóp
 massage-spa.please-pause,Nghỉ
 massage-spa.please-stop,Dừng lại
 massage-spa.reply-ask-supervisor,quản lý
@@ -255,7 +255,7 @@ quick-directions.on-the-right,phải
 quick-directions.turn-left,trái
 quick-directions.turn-right,phải
 room-problems.can-i-change-rooms,Đổi phòng
-room-problems.please-send-someone,cho người đến
+room-problems.please-send-someone,cho người đến | Cho người đến
 room-problems.the-air-conditioning-is-broken,Điều hòa
 room-problems.the-heating-does-not-work,Máy sưởi
 room-problems.the-key-does-not-work,Thẻ phòng
@@ -275,8 +275,8 @@ taxi.can-you-wait-for-me-here,Chờ
 taxi.could-you-make-it-colder,lạnh hơn
 taxi.could-you-make-it-warmer,ấm hơn
 taxi.may-i-open-the-window,cửa sổ
-taxi.please-stop-here,dừng
-taxi.please-take-me-here,chở
+taxi.please-stop-here,dừng | Dừng
+taxi.please-take-me-here,chở | Chở
 time-scheduling.can-we-change-the-time,Đổi giờ
 time-scheduling.how-long-does-it-take,bao lâu
 time-scheduling.what-day-is-it-today,thứ mấy
