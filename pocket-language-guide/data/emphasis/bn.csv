@@ -58,7 +58,7 @@ color-size-returns.do-you-have-another-size,মাপ
 color-size-returns.may-i-try-it-on,পরে দেখতে
 common-signs.no-photography,নিষেধ
 communication.can-you-help-me,সাহায্য
-communication.do-you-speak-english,বলতে পারেন
+communication.do-you-speak-english,বলতে পারেন | বলতে পারো
 communication.i-do-not-speak-this-language,বলতে পারি না
 communication.i-do-not-understand,বুঝতে পারছি না
 communication.please-speak-more-slowly,ধীরে
@@ -112,7 +112,7 @@ food-ordering.is-a-table-available,টেবিল খালি
 food-ordering.is-this-vegetarian,নিরামিষ
 food-ordering.table-for-two,দুজনের
 food-ordering.to-go-please,প্যাক
-food-ordering.what-do-you-recommend,খেতে বলবেন
+food-ordering.what-do-you-recommend,খেতে বলবেন | খেতে বলবে
 hiking-parks.how-long-to-the-summit,চূড়ায়
 hiking-parks.how-long-to-the-viewpoint,ভিউ পয়েন্টে
 hiking-parks.is-this-trail-suitable-for-beginners,নতুনদের
@@ -150,7 +150,7 @@ introductions.i-am-traveling-alone,একা
 introductions.my-name-is,আমার
 introductions.this-is-my-friend,বন্ধু
 introductions.we-are-traveling-together,একসাথে
-introductions.what-is-your-name,আপনার
+introductions.what-is-your-name,আপনার | তোমার
 introductions.where-are-you-from,কোথা থেকে
 kind-words.i-had-a-wonderful-time,ভালো সময়
 kind-words.i-like-it-very-much,ভালো লেগেছে
@@ -179,10 +179,10 @@ massage-spa.focus-on-back,পিঠে
 massage-spa.focus-on-feet,পায়ের পাতায়
 massage-spa.focus-on-neck,ঘাড়ে
 massage-spa.focus-on-shoulders,কাঁধে
-massage-spa.more-gently,কমান
-massage-spa.please-avoid-this-area,দেবেন না
+massage-spa.more-gently,কমান | কমাও
+massage-spa.please-avoid-this-area,দেবেন না | দিয়ো না
 massage-spa.please-pause,সাময়িকভাবে
-massage-spa.please-stop,থামুন
+massage-spa.please-stop,থামুন | থামো
 massage-spa.reply-ask-supervisor,ম্যানেজারকে
 massage-spa.reply-cannot-avoid-this-treatment,বাদ দেওয়া যায় না
 massage-spa.reply-does-it-hurt-there,ব্যথা
@@ -258,7 +258,7 @@ quick-directions.on-the-right,ডান
 quick-directions.turn-left,বাঁ
 quick-directions.turn-right,ডান
 room-problems.can-i-change-rooms,বদল
-room-problems.please-send-someone,কাউকে পাঠান
+room-problems.please-send-someone,কাউকে পাঠান | কাউকে পাঠাও
 room-problems.the-air-conditioning-is-broken,এসি
 room-problems.the-heating-does-not-work,হিটার
 room-problems.the-key-does-not-work,চাবিটা
@@ -278,8 +278,8 @@ taxi.can-you-wait-for-me-here,অপেক্ষা
 taxi.could-you-make-it-colder,বাড়িয়ে
 taxi.could-you-make-it-warmer,কমিয়ে
 taxi.may-i-open-the-window,জানালাটা
-taxi.please-stop-here,থামুন
-taxi.please-take-me-here,নিয়ে চলুন
+taxi.please-stop-here,থামুন | থামো
+taxi.please-take-me-here,নিয়ে চলুন | নিয়ে চলো
 taxi.please-turn-around,ইউটার্ন
 time-scheduling.can-we-change-the-time,বদলানো
 time-scheduling.how-long-does-it-take,কত সময়

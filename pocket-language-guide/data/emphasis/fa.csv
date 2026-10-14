@@ -58,7 +58,7 @@ color-size-returns.do-you-have-a-bag,کیسه
 color-size-returns.do-you-have-another-size,سایزِ
 color-size-returns.may-i-try-it-on,امتحانش
 communication.can-you-help-me,کمکم
-communication.do-you-speak-english,صحبت می‌کنید
+communication.do-you-speak-english,صحبت می‌کنید | صحبت می‌کنی
 communication.i-do-not-speak-this-language,صحبت نمی‌کنم
 communication.please-speak-more-slowly,آهسته‌تر
 dietary-needs.does-it-contain-fish-stock,آبِ ماهی
@@ -114,7 +114,7 @@ hiking-parks.how-long-to-the-viewpoint,چشم‌انداز
 hiking-parks.is-this-trail-suitable-for-beginners,تازه‌کار
 hiking-parks.where-is-the-trailhead,ابتدای مسیر
 hiking-parks.which-route-is-easier,آسان‌تر
-hitchhiking.can-you-give-me-a-ride,با خودتان
+hitchhiking.can-you-give-me-a-ride,با خودتان | با خودت
 hitchhiking.i-can-pay-for-fuel,بنزین
 hitchhiking.i-only-need-to-go-to-the-next-town,شهر بعدی
 hitchhiking.is-there-room-for-two,دو نفر جا
@@ -146,21 +146,21 @@ introductions.i-am-traveling-alone,تنها
 introductions.my-name-is,اسمِ من
 introductions.this-is-my-friend,دوستِ
 introductions.we-are-traveling-together,با هم
-introductions.what-is-your-name,اسمِ شما
+introductions.what-is-your-name,اسمِ شما | اسمِ تو
 introductions.where-are-you-from,از کجا
 kind-words.i-had-a-wonderful-time,خوبی
 kind-words.i-like-it-very-much,خوشم آمد
 kind-words.it-is-beautiful-here,زیبا
 kind-words.thank-you-for-everything,همه چیز
-kind-words.thank-you-for-your-help,کمکتان
-kind-words.thank-you-for-your-hospitality,مهمان‌نوازی‌تان
+kind-words.thank-you-for-your-help,کمکتان | کمکت
+kind-words.thank-you-for-your-hospitality,مهمان‌نوازی‌تان | مهمان‌نوازی‌ات
 kind-words.this-is-delicious,خوشمزه
 kind-words.you-are-very-kind,مهربان
 laundry.can-it-be-ready-today,امروز
 laundry.how-much-per-kilo,کیلویی
 laundry.please-do-not-use-bleach,وایتکس
 laundry.please-iron-this,اتو
-laundry.please-wash-these-clothes,بشورید
+laundry.please-wash-these-clothes,بشورید | بشور
 laundry.when-will-it-be-ready,کی
 laundry.where-is-a-laundromat,لباسشوییِ سلف‌سرویس
 lost-rescue.i-do-not-know-where-i-am,کجا هستم
@@ -176,7 +176,7 @@ massage-spa.focus-on-feet,کف پا
 massage-spa.focus-on-neck,گردن
 massage-spa.focus-on-shoulders,شانه‌ها
 massage-spa.more-gently,ملایم‌تر
-massage-spa.please-avoid-this-area,ماساژ ندهید
+massage-spa.please-avoid-this-area,ماساژ ندهید | ماساژ نده
 massage-spa.please-pause,مکث
 massage-spa.please-stop,بس
 massage-spa.reply-ask-supervisor,سرپرست
@@ -251,7 +251,7 @@ quick-directions.on-the-right,راست
 quick-directions.turn-left,چپ
 quick-directions.turn-right,راست
 room-problems.can-i-change-rooms,عوض
-room-problems.please-send-someone,کسی را بفرستید
+room-problems.please-send-someone,کسی را بفرستید | کسی را بفرست
 room-problems.the-air-conditioning-is-broken,کولر
 room-problems.the-heating-does-not-work,شوفاژ
 room-problems.the-key-does-not-work,کلید
@@ -271,8 +271,8 @@ taxi.can-you-wait-for-me-here,منتظرم
 taxi.could-you-make-it-colder,زیاد
 taxi.could-you-make-it-warmer,کم
 taxi.may-i-open-the-window,پنجره
-taxi.please-stop-here,نگه دارید
-taxi.please-take-me-here,ببرید
+taxi.please-stop-here,نگه دارید | نگه دار
+taxi.please-take-me-here,ببرید | ببر
 taxi.please-turn-around,دور
 time-scheduling.can-we-change-the-time,عوض
 time-scheduling.how-long-does-it-take,طول می‌کشد

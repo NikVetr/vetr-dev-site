@@ -111,7 +111,7 @@ food-ordering.i-want-this,Aș vrea
 food-ordering.is-a-table-available,masă liberă
 food-ordering.is-this-vegetarian,vegetarian
 food-ordering.table-for-two,masă | doi
-food-ordering.what-do-you-recommend,recomandați
+food-ordering.what-do-you-recommend,recomandați | recomanzi
 hiking-parks.how-long-to-the-summit,vârf
 hiking-parks.how-long-to-the-viewpoint,punctul panoramic
 hiking-parks.is-this-trail-suitable-for-beginners,începători
@@ -149,7 +149,7 @@ introductions.i-am-traveling-alone,singură | singur
 introductions.my-name-is,numesc
 introductions.this-is-my-friend,prietenul
 introductions.we-are-traveling-together,împreună
-introductions.what-is-your-name,numiți
+introductions.what-is-your-name,numiți | cheamă
 introductions.where-are-you-from,De unde
 kind-words.i-had-a-wonderful-time,minunate
 kind-words.i-like-it-very-much,place
@@ -162,8 +162,8 @@ kind-words.you-are-very-kind,drăguț
 laundry.can-it-be-ready-today,astăzi
 laundry.how-much-per-kilo,pe kilogram
 laundry.please-do-not-use-bleach,înălbitor
-laundry.please-iron-this,călcați
-laundry.please-wash-these-clothes,spălați
+laundry.please-iron-this,călcați | calcă
+laundry.please-wash-these-clothes,spălați | spală
 laundry.when-will-it-be-ready,Când
 laundry.where-is-a-laundromat,spălătorie
 lost-rescue.i-do-not-know-where-i-am,unde sunt
@@ -179,9 +179,9 @@ massage-spa.focus-on-feet,tălpi
 massage-spa.focus-on-neck,ceafă
 massage-spa.focus-on-shoulders,umeri
 massage-spa.more-gently,ușor
-massage-spa.please-avoid-this-area,evitați
+massage-spa.please-avoid-this-area,evitați | evită
 massage-spa.please-pause,pauză
-massage-spa.please-stop,Opriți
+massage-spa.please-stop,Opriți | Oprește
 massage-spa.reply-ask-supervisor,persoana responsabilă
 massage-spa.reply-cannot-avoid-this-treatment,nu poate fi ocolită
 massage-spa.reply-does-it-hurt-there,doare
@@ -251,7 +251,7 @@ quick-directions.on-the-right,dreapta
 quick-directions.turn-left,stânga
 quick-directions.turn-right,dreapta
 room-problems.can-i-change-rooms,schimba
-room-problems.please-send-someone,trimiteți pe cineva
+room-problems.please-send-someone,trimiteți pe cineva | trimite pe cineva
 room-problems.the-air-conditioning-is-broken,Aerul condiționat
 room-problems.the-heating-does-not-work,Încălzirea
 room-problems.the-key-does-not-work,Cheia
@@ -267,13 +267,13 @@ shopping.i-am-just-looking,uit
 shopping.i-will-take-this,Iau
 shopping.that-is-too-expensive,scump
 shopping.where-do-i-pay,plătesc
-taxi.can-you-wait-for-me-here,așteptați
+taxi.can-you-wait-for-me-here,așteptați | aștepți
 taxi.could-you-make-it-colder,rece
 taxi.could-you-make-it-warmer,cald
 taxi.may-i-open-the-window,fereastra
-taxi.please-stop-here,opriți
-taxi.please-take-me-here,duceți-mă
-taxi.please-turn-around,întoarceți
+taxi.please-stop-here,opriți | oprește
+taxi.please-take-me-here,duceți-mă | du-mă
+taxi.please-turn-around,întoarceți | întoarce
 time-scheduling.can-we-change-the-time,schimba
 time-scheduling.how-long-does-it-take,durează
 time-scheduling.what-day-is-it-today,zi

@@ -115,7 +115,7 @@ hitchhiking.i-only-need-to-go-to-the-next-town,következő városig
 hitchhiking.is-there-room-for-two,hely kettőnknek
 hitchhiking.thank-you-for-the-ride,Köszönöm
 hitchhiking.where-are-you-going,Hova
-hotel-basics.are-any-rooms-available,szabad szobájuk
+hotel-basics.are-any-rooms-available,szabad szobájuk | szabad szobátok
 hotel-basics.how-much-per-night,éjszaka
 hotel-basics.i-have-a-reservation,szobafoglalásom
 hotel-basics.i-would-like-a-non-smoking-room,Nemdohányzó
@@ -142,7 +142,7 @@ introductions.i-am-traveling-alone,Egyedül
 introductions.my-name-is,nevem
 introductions.this-is-my-friend,barátom
 introductions.we-are-traveling-together,Együtt
-introductions.what-is-your-name,hívják
+introductions.what-is-your-name,hívják | hívnak
 introductions.where-are-you-from,honnan
 kind-words.i-had-a-wonderful-time,Csodálatosan
 kind-words.i-like-it-very-much,tetszik
@@ -155,8 +155,8 @@ kind-words.you-are-very-kind,kedves
 laundry.can-it-be-ready-today,Ma
 laundry.how-much-per-kilo,kilónként
 laundry.please-do-not-use-bleach,fehérítőt
-laundry.please-iron-this,vasalja ki
-laundry.please-wash-these-clothes,mossa ki
+laundry.please-iron-this,vasalja ki | vasald ki
+laundry.please-wash-these-clothes,mossa ki | mosd ki
 laundry.when-will-it-be-ready,Mikor
 laundry.where-is-a-laundromat,önkiszolgáló mosoda
 lost-rescue.i-do-not-know-where-i-am,hol vagyok
@@ -171,7 +171,7 @@ massage-spa.focus-on-back,hátamat
 massage-spa.focus-on-feet,talpamat
 massage-spa.focus-on-neck,nyakamat
 massage-spa.focus-on-shoulders,vállamat
-massage-spa.please-avoid-this-area,ne érintse
+massage-spa.please-avoid-this-area,ne érintse | ne érintsd
 massage-spa.please-pause,szünetet
 massage-spa.reply-ask-supervisor,vezetőt
 massage-spa.reply-cannot-avoid-this-treatment,nem lehet
@@ -240,7 +240,7 @@ quick-directions.on-the-right,Jobb
 quick-directions.turn-left,balra
 quick-directions.turn-right,jobbra
 room-problems.can-i-change-rooms,másik szobát
-room-problems.please-send-someone,küldjenek valakit
+room-problems.please-send-someone,küldjenek valakit | küldjetek valakit
 room-problems.the-air-conditioning-is-broken,légkondicionáló
 room-problems.the-heating-does-not-work,fűtés
 room-problems.the-key-does-not-work,kulcs
@@ -249,7 +249,7 @@ room-problems.the-room-is-too-noisy,zajos
 room-problems.the-toilet-will-not-flush,vécét
 room-problems.there-is-a-problem-with-the-room,Probléma
 room-problems.there-is-no-hot-water,meleg víz
-shopping.can-it-be-a-little-cheaper,engedne
+shopping.can-it-be-a-little-cheaper,engedne | engednél
 shopping.do-you-have-this-in-stock,készleten
 shopping.how-much-is-this,Mennyibe
 shopping.i-am-just-looking,körülnézek
@@ -260,8 +260,8 @@ taxi.can-you-wait-for-me-here,várni
 taxi.could-you-make-it-colder,hidegebbre
 taxi.could-you-make-it-warmer,melegebbre
 taxi.may-i-open-the-window,ablakot
-taxi.please-stop-here,álljon meg
-taxi.please-take-me-here,vigyen
+taxi.please-stop-here,álljon meg | állj meg
+taxi.please-take-me-here,vigyen | vigyél
 time-scheduling.can-we-change-the-time,másik időpontra
 time-scheduling.how-long-does-it-take,Meddig
 time-scheduling.what-day-is-it-today,nap
@@ -277,7 +277,7 @@ trail-conditions.how-long-is-the-full-route,teljes útvonal
 trail-conditions.is-the-path-slippery,Csúszós
 trail-conditions.is-the-route-steep,Meredek
 trail-conditions.is-the-trail-open,Nyitva
-trail-transport.do-you-have-a-map,térképük
+trail-transport.do-you-have-a-map,térképük | térképetek
 trail-transport.how-long-is-the-wait,várni
 trail-transport.is-there-cell-signal-here,térerő
 trail-transport.what-time-is-the-last-shuttle,utolsó ingajárat
