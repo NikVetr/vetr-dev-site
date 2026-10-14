@@ -585,6 +585,19 @@ def main():
                     base_rows[r["concept_id"]] = r
         base = set(base_rows)
         variants = load(rel)
+        # A concept with rows for two axes needs their combined row too: `variantOf` tries
+        # the whole key and then fewer of its parts, so without it one axis's row answers
+        # for both -- a woman with the familiar switch on would be given a man's wording.
+        varied = defaultdict(set)
+        for row in variants:
+            varied[row["concept_id"]].add(row["variant"])
+        for cid, have in sorted(varied.items()):
+            singles_here = sorted(k for k in have if "|" not in k)
+            for i, a in enumerate(singles_here):
+                for b in singles_here[i + 1:]:
+                    if a.split("=")[0] != b.split("=")[0] and f"{a}|{b}" not in have:
+                        errors.append(f"{rel}: {cid} has rows for {a} and {b} but none for "
+                                      f"{a}|{b}, so one of them would answer for both")
         for line, row in enumerate(variants, start=2):
             where = f"{rel}:{line}"
             if row["variant"] not in keys:

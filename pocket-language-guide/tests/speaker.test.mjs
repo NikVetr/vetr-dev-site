@@ -250,3 +250,12 @@ test('whom a sentence is said to joins who says it, and either part alone still 
   // And never on what the listener says back.
   assert.equal(variantOf({ conceptId: 'taxi.stop', row: { text: 'neutral' }, variants, key, incoming: true }).row.text, 'neutral');
 });
+
+test('with three axes on, a row written for two of them is still found, before either alone', () => {
+  const variants = {
+    'register=familiar': { 'taxi.stop': { text: 'stop, familiar' } },
+    'register=familiar|speaker_gender=feminine': { 'taxi.stop': { text: 'stop, familiar, as her' } },
+  };
+  const key = joinKeys('speaker_gender=feminine', 'listener_gender=feminine|register=familiar');
+  assert.equal(variantOf({ conceptId: 'taxi.stop', row: { text: 'stop' }, variants, key }).row.text, 'stop, familiar, as her');
+});

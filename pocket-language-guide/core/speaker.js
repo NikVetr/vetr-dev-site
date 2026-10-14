@@ -132,6 +132,14 @@ export function joinKeys(...keys) {
   return parts.length ? parts.sort().join('|') : null;
 }
 
+/** A joined key's parts in every combination, the whole first, in the key's own order. @param {string} key */
+function subkeys(key) {
+  const parts = key.split('|');
+  /** @type {string[][]} */ const out = [];
+  for (let mask = (1 << parts.length) - 1; mask > 0; mask -= 1) out.push(parts.filter((_, i) => mask & (1 << i)));
+  return out.sort((a, b) => b.length - a.length).map((p) => p.join('|'));
+}
+
 /**
  * One concept's row as this speaker says it, falling back to the row on disk.
  *
@@ -159,9 +167,11 @@ export function joinKeys(...keys) {
  */
 export function variantOf({ conceptId, row, variants, key, incoming }) {
   if (incoming || !key) return { row, varied: false };
-  // The whole key first, then each of its parts: a sentence that changes only with
-  // whom it is said to has its rows under the listener's part alone, whoever says it.
-  const said = [key, ...key.split('|')].map((k) => variants[k]?.[conceptId]).find(Boolean);
+  // The whole key first, then ever fewer of its parts: a sentence that changes only
+  // with whom it is said to has its rows under the listener's part alone, whoever says
+  // it. A concept with rows for two parts has their combined row too (the validator
+  // holds it), so which single part is tried first never decides a wording.
+  const said = subkeys(key).map((k) => variants[k]?.[conceptId]).find(Boolean);
   if (!said) return { row, varied: false };
   const merged = { ...row };
   for (const [field, value] of Object.entries(said)) if (value) merged[field] = value;
