@@ -58,7 +58,7 @@ color-size-returns.do-you-have-another-size,ସାଇଜ
 color-size-returns.may-i-try-it-on,ପିନ୍ଧି
 common-signs.no-photography,ନିଷେଧ
 communication.can-you-help-me,ସାହାଯ୍ୟ
-communication.do-you-speak-english,କହିପାରନ୍ତି
+communication.do-you-speak-english,କହିପାରନ୍ତି | କହିପାର
 communication.i-do-not-speak-this-language,କହିପାରେ ନାହିଁ
 communication.i-do-not-understand,ବୁଝିଲି ନାହିଁ
 communication.please-speak-more-slowly,ଧୀରେ
@@ -110,7 +110,7 @@ food-ordering.is-a-table-available,ଟେବୁଲ ଖାଲି
 food-ordering.is-this-vegetarian,ନିରାମିଷ
 food-ordering.table-for-two,ଦୁଇ ଜଣଙ୍କ
 food-ordering.to-go-please,ପ୍ୟାକ୍
-food-ordering.what-do-you-recommend,ଖାଇବାକୁ କହିବେ
+food-ordering.what-do-you-recommend,ଖାଇବାକୁ କହିବେ | ଖାଇବାକୁ କହିବ
 hiking-parks.how-long-to-the-summit,ଶିଖର
 hiking-parks.how-long-to-the-viewpoint,ଦୃଶ୍ୟ ସ୍ଥଳ
 hiking-parks.is-this-trail-suitable-for-beginners,ନୂଆ ଲୋକଙ୍କ
@@ -149,7 +149,7 @@ introductions.i-am-traveling-alone,ଏକା
 introductions.my-name-is,ମୋ
 introductions.this-is-my-friend,ସାଙ୍ଗ
 introductions.we-are-traveling-together,ଏକାଠି
-introductions.what-is-your-name,ଆପଣଙ୍କ
+introductions.what-is-your-name,ଆପଣଙ୍କ | ତୁମ
 introductions.where-are-you-from,କେଉଁଠାରୁ
 kind-words.i-had-a-wonderful-time,ଭଲ ସମୟ
 kind-words.i-like-it-very-much,ଭଲ ଲାଗିଲା
@@ -179,9 +179,9 @@ massage-spa.focus-on-feet,ପାଦରେ
 massage-spa.focus-on-neck,ବେକରେ
 massage-spa.focus-on-shoulders,କାନ୍ଧରେ
 massage-spa.more-gently,ହାଲୁକା ହାତରେ
-massage-spa.please-avoid-this-area,କରନ୍ତୁ ନାହିଁ
+massage-spa.please-avoid-this-area,କରନ୍ତୁ ନାହିଁ | କର ନାହିଁ
 massage-spa.please-pause,ବିରାମ
-massage-spa.please-stop,ବନ୍ଦ କରନ୍ତୁ
+massage-spa.please-stop,ବନ୍ଦ କରନ୍ତୁ | ବନ୍ଦ କର
 massage-spa.reply-ask-supervisor,ପରିଚାଳକଙ୍କୁ
 massage-spa.reply-cannot-avoid-this-treatment,ଛାଡ଼ି ହେବ ନାହିଁ
 massage-spa.reply-does-it-hurt-there,ଯନ୍ତ୍ରଣା
@@ -258,7 +258,7 @@ quick-directions.on-the-right,ଡାହାଣ
 quick-directions.turn-left,ବାମକୁ
 quick-directions.turn-right,ଡାହାଣକୁ
 room-problems.can-i-change-rooms,ବଦଳାଇ
-room-problems.please-send-someone,ଜଣକୁ ପଠାନ୍ତୁ
+room-problems.please-send-someone,ଜଣକୁ ପଠାନ୍ତୁ | ଜଣକୁ ପଠାଅ
 room-problems.the-air-conditioning-is-broken,ଏସି
 room-problems.the-heating-does-not-work,ହିଟର
 room-problems.the-key-does-not-work,ଚାବି
@@ -278,9 +278,9 @@ taxi.can-you-wait-for-me-here,ଅପେକ୍ଷା
 taxi.could-you-make-it-colder,ଥଣ୍ଡା
 taxi.could-you-make-it-warmer,ଗରମ
 taxi.may-i-open-the-window,ଝରକା
-taxi.please-stop-here,ରୁହନ୍ତୁ
-taxi.please-take-me-here,ନେଇଯାଆନ୍ତୁ
-taxi.please-turn-around,ଗାଡ଼ି ବୁଲାନ୍ତୁ
+taxi.please-stop-here,ରୁହନ୍ତୁ | ରୁହ
+taxi.please-take-me-here,ନେଇଯାଆନ୍ତୁ | ନେଇଯାଅ
+taxi.please-turn-around,ଗାଡ଼ି ବୁଲାନ୍ତୁ | ଗାଡ଼ି ବୁଲାଅ
 time-scheduling.can-we-change-the-time,ବଦଳାଇ
 time-scheduling.how-long-does-it-take,କେତେ ସମୟ
 time-scheduling.what-day-is-it-today,ବାର

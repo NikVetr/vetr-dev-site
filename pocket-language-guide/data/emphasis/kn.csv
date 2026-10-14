@@ -55,7 +55,7 @@ color-size-returns.do-you-have-a-bag,ಚೀಲ
 color-size-returns.do-you-have-another-size,ಅಳತೆ
 color-size-returns.may-i-try-it-on,ಹಾಕಿ
 communication.can-you-help-me,ಸಹಾಯ
-communication.do-you-speak-english,ನಿಮಗೆ
+communication.do-you-speak-english,ನಿಮಗೆ | ನಿನಗೆ
 communication.i-do-not-speak-this-language,ಬರುವುದಿಲ್ಲ
 communication.i-do-not-understand,ಅರ್ಥವಾಗುವುದಿಲ್ಲ
 communication.please-speak-more-slowly,ನಿಧಾನವಾಗಿ
@@ -113,7 +113,7 @@ hiking-parks.how-long-to-the-viewpoint,ವೀಕ್ಷಣಾ ಸ್ಥಳಕ್�
 hiking-parks.is-this-trail-suitable-for-beginners,ಆರಂಭಿಕರಿಗೆ
 hiking-parks.where-is-the-trailhead,ಚಾರಣ ಆರಂಭ
 hiking-parks.which-route-is-easier,ಸುಲಭ
-hitchhiking.can-you-give-me-a-ride,ಕರೆದುಕೊಂಡು ಹೋಗುತ್ತೀರಾ
+hitchhiking.can-you-give-me-a-ride,ಕರೆದುಕೊಂಡು ಹೋಗುತ್ತೀರಾ | ಕರೆದುಕೊಂಡು ಹೋಗುತ್ತೀಯಾ
 hitchhiking.i-can-pay-for-fuel,ಪೆಟ್ರೋಲ್
 hitchhiking.i-only-need-to-go-to-the-next-town,ಮುಂದಿನ ಪಟ್ಟಣದವರೆಗೆ
 hitchhiking.is-there-room-for-two,ಇಬ್ಬರಿಗೆ ಜಾಗ
@@ -146,7 +146,7 @@ introductions.i-am-traveling-alone,ಒಂಟಿಯಾಗಿ
 introductions.my-name-is,ನನ್ನ
 introductions.this-is-my-friend,ಸ್ನೇಹಿತ
 introductions.we-are-traveling-together,ಒಟ್ಟಿಗೆ
-introductions.what-is-your-name,ನಿಮ್ಮ
+introductions.what-is-your-name,ನಿಮ್ಮ | ನಿನ್ನ
 introductions.where-are-you-from,ಎಲ್ಲಿಂದ
 kind-words.i-had-a-wonderful-time,ಅದ್ಭುತ
 kind-words.i-like-it-very-much,ಇಷ್ಟವಾಗಿದೆ
@@ -155,12 +155,12 @@ kind-words.thank-you-for-everything,ಎಲ್ಲದಕ್ಕೂ
 kind-words.thank-you-for-your-help,ಸಹಾಯಕ್ಕೆ
 kind-words.thank-you-for-your-hospitality,ಆತಿಥ್ಯಕ್ಕೆ
 kind-words.this-is-delicious,ರುಚಿಯಾಗಿದೆ
-kind-words.you-are-very-kind,ಒಳ್ಳೆಯವರು
+kind-words.you-are-very-kind,ಒಳ್ಳೆಯವರು | ಒಳ್ಳೆಯ ವ್ಯಕ್ತಿ
 laundry.can-it-be-ready-today,ಇಂದೇ
 laundry.how-much-per-kilo,ಕಿಲೋಗೆ
 laundry.please-do-not-use-bleach,ಬ್ಲೀಚ್
 laundry.please-iron-this,ಇಸ್ತ್ರಿ
-laundry.please-wash-these-clothes,ತೊಳೆಯಿರಿ
+laundry.please-wash-these-clothes,ತೊಳೆಯಿರಿ | ತೊಳೆ
 laundry.when-will-it-be-ready,ಯಾವಾಗ
 laundry.where-is-a-laundromat,ಬಟ್ಟೆ ತೊಳೆಯುವ ಅಂಗಡಿ
 lost-rescue.i-do-not-know-where-i-am,ಎಲ್ಲಿದ್ದೇನೆ
@@ -176,9 +176,9 @@ massage-spa.focus-on-feet,ಪಾದಗಳಿಗೆ
 massage-spa.focus-on-neck,ಕುತ್ತಿಗೆಗೆ
 massage-spa.focus-on-shoulders,ಭುಜಗಳಿಗೆ
 massage-spa.more-gently,ಮೆಲ್ಲಗೆ
-massage-spa.please-avoid-this-area,ಮುಟ್ಟಬೇಡಿ
+massage-spa.please-avoid-this-area,ಮುಟ್ಟಬೇಡಿ | ಮುಟ್ಟಬೇಡ
 massage-spa.please-pause,ವಿರಾಮ
-massage-spa.please-stop,ನಿಲ್ಲಿಸಿ
+massage-spa.please-stop,ನಿಲ್ಲಿಸಿ | ನಿಲ್ಲಿಸು
 massage-spa.reply-ask-supervisor,ಮೇಲಧಿಕಾರಿಯನ್ನು
 massage-spa.reply-cannot-avoid-this-treatment,ಬಿಡಲು ಆಗುವುದಿಲ್ಲ
 massage-spa.reply-does-it-hurt-there,ನೋವಿದೆಯೇ
@@ -254,7 +254,7 @@ quick-directions.go-straight,ನೇರವಾಗಿ
 quick-directions.turn-left,ಎಡಕ್ಕೆ
 quick-directions.turn-right,ಬಲಕ್ಕೆ
 room-problems.can-i-change-rooms,ಬದಲಿಸಬಹುದೇ
-room-problems.please-send-someone,ಯಾರನ್ನಾದರೂ ಕಳುಹಿಸಿ
+room-problems.please-send-someone,ಯಾರನ್ನಾದರೂ ಕಳುಹಿಸಿ | ಯಾರನ್ನಾದರೂ ಕಳುಹಿಸು
 room-problems.the-air-conditioning-is-broken,ಎಸಿ
 room-problems.the-heating-does-not-work,ಹೀಟರ್
 room-problems.the-key-does-not-work,ಕೀ
@@ -270,12 +270,12 @@ shopping.i-will-take-this,ತೆಗೆದುಕೊಳ್ಳುತ್ತೇನೆ
 shopping.that-is-too-expensive,ದುಬಾರಿ
 shopping.where-do-i-pay,ಕೊಡಬೇಕು
 social-basics.i-do-not-know,ಗೊತ್ತಿಲ್ಲ
-taxi.can-you-wait-for-me-here,ಕಾಯುತ್ತೀರಾ
+taxi.can-you-wait-for-me-here,ಕಾಯುತ್ತೀರಾ | ಕಾಯುತ್ತೀಯಾ
 taxi.could-you-make-it-colder,ಜಾಸ್ತಿ
 taxi.could-you-make-it-warmer,ಕಡಿಮೆ
 taxi.may-i-open-the-window,ಕಿಟಕಿ
-taxi.please-stop-here,ನಿಲ್ಲಿಸಿ
-taxi.please-take-me-here,ಕರೆದುಕೊಂಡು ಹೋಗಿ
+taxi.please-stop-here,ನಿಲ್ಲಿಸಿ | ನಿಲ್ಲಿಸು
+taxi.please-take-me-here,ಕರೆದುಕೊಂಡು ಹೋಗಿ | ಕರೆದುಕೊಂಡು ಹೋಗು
 taxi.please-turn-around,ಯು-ಟರ್ನ್
 time-scheduling.can-we-change-the-time,ಬದಲಿಸಬಹುದೇ
 time-scheduling.how-long-does-it-take,ಸಮಯ

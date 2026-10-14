@@ -59,7 +59,7 @@ color-size-returns.do-you-have-another-size,સાઇઝ
 color-size-returns.may-i-try-it-on,પહેરીને
 common-signs.no-photography,મના
 communication.can-you-help-me,મદદ
-communication.do-you-speak-english,તમને
+communication.do-you-speak-english,તમને | તને
 communication.i-do-not-speak-this-language,આવડતી નથી
 communication.i-do-not-understand,સમજ ન પડી
 communication.please-speak-more-slowly,ધીમે
@@ -150,7 +150,7 @@ introductions.i-am-traveling-alone,એકલો | એકલી
 introductions.my-name-is,મારું નામ
 introductions.this-is-my-friend,મિત્ર
 introductions.we-are-traveling-together,સાથે
-introductions.what-is-your-name,તમારું નામ
+introductions.what-is-your-name,તમારું નામ | તારું નામ
 introductions.where-are-you-from,ક્યાંથી
 kind-words.i-had-a-wonderful-time,સરસ સમય
 kind-words.i-like-it-very-much,ગમે
@@ -180,9 +180,9 @@ massage-spa.focus-on-feet,પગ
 massage-spa.focus-on-neck,ગરદન
 massage-spa.focus-on-shoulders,ખભા
 massage-spa.more-gently,હળવા હાથે
-massage-spa.please-avoid-this-area,ન કરો
+massage-spa.please-avoid-this-area,ન કરો | ન કર
 massage-spa.please-pause,થોડી વાર
-massage-spa.please-stop,બંધ કરો
+massage-spa.please-stop,બંધ કરો | બંધ કર
 massage-spa.reply-ask-supervisor,મેનેજરને
 massage-spa.reply-cannot-avoid-this-treatment,છોડી શકાય નહીં
 massage-spa.reply-does-it-hurt-there,દુખે
@@ -258,7 +258,7 @@ quick-directions.on-the-right,જમણી
 quick-directions.turn-left,ડાબે
 quick-directions.turn-right,જમણે
 room-problems.can-i-change-rooms,બદલી
-room-problems.please-send-someone,મોકલો
+room-problems.please-send-someone,મોકલો | મોકલ
 room-problems.the-air-conditioning-is-broken,એસી
 room-problems.the-heating-does-not-work,હીટર
 room-problems.the-key-does-not-work,ચાવી
@@ -276,12 +276,12 @@ shopping.that-is-too-expensive,મોંઘું
 shopping.where-do-i-pay,પૈસા
 social-basics.i-do-not-know,ખબર નથી
 taxi.can-you-wait-for-me-here,થોભી
-taxi.could-you-make-it-colder,વધારો
+taxi.could-you-make-it-colder,વધારો | વધાર
 taxi.could-you-make-it-warmer,ઓછું
 taxi.may-i-open-the-window,બારી
-taxi.please-stop-here,ઊભા રાખો
-taxi.please-take-me-here,લઈ જાઓ
-taxi.please-turn-around,પાછી વાળો
+taxi.please-stop-here,ઊભા રાખો | ઊભા રાખ
+taxi.please-take-me-here,લઈ જાઓ | લઈ જા
+taxi.please-turn-around,પાછી વાળો | પાછી વાળ
 time-scheduling.can-we-change-the-time,બદલી
 time-scheduling.how-long-does-it-take,સમય
 time-scheduling.what-day-is-it-today,વાર

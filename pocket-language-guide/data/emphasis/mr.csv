@@ -56,7 +56,7 @@ color-size-returns.do-you-have-another-size,साईझ
 color-size-returns.may-i-try-it-on,घालून
 common-signs.no-photography,मनाई
 communication.can-you-help-me,मदत
-communication.do-you-speak-english,तुम्हाला
+communication.do-you-speak-english,तुम्हाला | तुला
 communication.i-do-not-speak-this-language,येत नाही
 communication.i-do-not-understand,समजत नाही
 communication.please-speak-more-slowly,हळू
@@ -108,7 +108,7 @@ food-ordering.i-want-this,हवे
 food-ordering.is-a-table-available,टेबल उपलब्ध
 food-ordering.is-this-vegetarian,शाकाहारी
 food-ordering.table-for-two,दोघांसाठी
-food-ordering.what-do-you-recommend,सुचवाल
+food-ordering.what-do-you-recommend,सुचवाल | सुचवशील
 hiking-parks.how-long-to-the-summit,शिखरापर्यंत
 hiking-parks.how-long-to-the-viewpoint,दृश्यस्थळापर्यंत
 hiking-parks.is-this-trail-suitable-for-beginners,नवशिक्यांसाठी
@@ -147,7 +147,7 @@ introductions.i-am-traveling-alone,एकटा | एकटी
 introductions.my-name-is,माझे नाव
 introductions.this-is-my-friend,मित्र
 introductions.we-are-traveling-together,एकत्र
-introductions.what-is-your-name,तुमचे नाव
+introductions.what-is-your-name,तुमचे नाव | तुझे नाव
 introductions.where-are-you-from,कुठून
 kind-words.i-had-a-wonderful-time,चांगला वेळ
 kind-words.i-like-it-very-much,आवडते
@@ -161,7 +161,7 @@ laundry.can-it-be-ready-today,आज
 laundry.how-much-per-kilo,एका किलोचे
 laundry.please-do-not-use-bleach,ब्लीच
 laundry.please-iron-this,इस्त्री
-laundry.please-wash-these-clothes,धुवा
+laundry.please-wash-these-clothes,धुवा | धू
 laundry.when-will-it-be-ready,कधी
 laundry.where-is-a-laundromat,लॉन्ड्री
 lost-rescue.i-do-not-know-where-i-am,कुठे आहे
@@ -177,9 +177,9 @@ massage-spa.focus-on-feet,पायांवर
 massage-spa.focus-on-neck,मानेवर
 massage-spa.focus-on-shoulders,खांद्यांवर
 massage-spa.more-gently,हलक्या हाताने
-massage-spa.please-avoid-this-area,टाळा
-massage-spa.please-pause,थांबा
-massage-spa.please-stop,बंद करा
+massage-spa.please-avoid-this-area,टाळा | टाळ
+massage-spa.please-pause,थांबा | थांब
+massage-spa.please-stop,बंद करा | बंद कर
 massage-spa.reply-ask-supervisor,वरिष्ठांना
 massage-spa.reply-cannot-avoid-this-treatment,टाळता येत नाही
 massage-spa.reply-does-it-hurt-there,दुखतं
@@ -249,7 +249,7 @@ quick-directions.go-straight,सरळ
 quick-directions.turn-left,डावीकडे
 quick-directions.turn-right,उजवीकडे
 room-problems.can-i-change-rooms,बदलता
-room-problems.please-send-someone,पाठवा
+room-problems.please-send-someone,पाठवा | पाठव
 room-problems.the-air-conditioning-is-broken,एसी
 room-problems.the-heating-does-not-work,हीटर
 room-problems.the-key-does-not-work,चावी
@@ -266,12 +266,12 @@ shopping.i-will-take-this,घ्यायचे
 shopping.that-is-too-expensive,महाग
 shopping.where-do-i-pay,पैसे
 social-basics.i-do-not-know,माहीत नाही
-taxi.can-you-wait-for-me-here,थांबाल
+taxi.can-you-wait-for-me-here,थांबाल | थांबशील
 taxi.could-you-make-it-colder,थंड
 taxi.could-you-make-it-warmer,गरम
 taxi.may-i-open-the-window,खिडकी
-taxi.please-stop-here,थांबा
-taxi.please-take-me-here,न्या
+taxi.please-stop-here,थांबा | थांब
+taxi.please-take-me-here,न्या | ने
 taxi.please-turn-around,यू टर्न
 time-scheduling.can-we-change-the-time,बदलू
 time-scheduling.how-long-does-it-take,वेळ

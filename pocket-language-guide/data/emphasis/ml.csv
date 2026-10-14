@@ -54,7 +54,7 @@ color-size-returns.do-you-have-a-bag,കവർ
 color-size-returns.do-you-have-another-size,സൈസ്
 common-signs.no-photography,എടുക്കരുത്
 communication.can-you-help-me,സഹായിക്കാമോ
-communication.do-you-speak-english,നിങ്ങൾക്ക്
+communication.do-you-speak-english,നിങ്ങൾക്ക് | നിനക്ക്
 communication.i-do-not-speak-this-language,അറിയില്ല
 communication.i-do-not-understand,മനസ്സിലായില്ല
 communication.please-speak-more-slowly,പതുക്കെ
@@ -144,7 +144,7 @@ introductions.i-am-traveling-alone,ഒറ്റയ്ക്ക്
 introductions.my-name-is,എന്റെ
 introductions.this-is-my-friend,സുഹൃത്താണ്
 introductions.we-are-traveling-together,ഒരുമിച്ച്
-introductions.what-is-your-name,നിങ്ങളുടെ
+introductions.what-is-your-name,നിങ്ങളുടെ | നിന്റെ
 introductions.where-are-you-from,എവിടെ നിന്നാണ്
 kind-words.i-had-a-wonderful-time,അത്ഭുതകരമായ
 kind-words.i-like-it-very-much,ഇഷ്ടമായി
@@ -153,12 +153,12 @@ kind-words.thank-you-for-everything,എല്ലാത്തിനും
 kind-words.thank-you-for-your-help,സഹായത്തിന്
 kind-words.thank-you-for-your-hospitality,ആതിഥ്യത്തിന്
 kind-words.this-is-delicious,രുചിയാണ്
-kind-words.you-are-very-kind,നല്ലവരാണ്
+kind-words.you-are-very-kind,നല്ലവരാണ് | നല്ല ആളാണ്
 laundry.can-it-be-ready-today,ഇന്നുതന്നെ
 laundry.how-much-per-kilo,കിലോയ്ക്ക്
 laundry.please-do-not-use-bleach,ബ്ലീച്ച്
-laundry.please-iron-this,ഇസ്തിരിയിടൂ
-laundry.please-wash-these-clothes,കഴുകൂ
+laundry.please-iron-this,ഇസ്തിരിയിടൂ | ഇസ്തിരിയിട്
+laundry.please-wash-these-clothes,കഴുകൂ | കഴുക്
 laundry.when-will-it-be-ready,എപ്പോൾ
 laundry.where-is-a-laundromat,അലക്കുകട
 lost-rescue.i-do-not-know-where-i-am,എവിടെയാണെന്ന്
@@ -176,7 +176,7 @@ massage-spa.focus-on-shoulders,തോളിൽ
 massage-spa.more-gently,മൃദുവായി
 massage-spa.please-avoid-this-area,തിരുമ്മരുത്
 massage-spa.please-pause,കുറച്ചു നേരത്തേക്ക്
-massage-spa.please-stop,നിർത്തൂ
+massage-spa.please-stop,നിർത്തൂ | നിർത്ത്
 massage-spa.reply-ask-supervisor,മാനേജരോട്
 massage-spa.reply-cannot-avoid-this-treatment,ഒഴിവാക്കാൻ കഴിയില്ല
 massage-spa.reply-does-it-hurt-there,വേദനയുണ്ടോ
@@ -250,7 +250,7 @@ quick-directions.go-straight,നേരെ
 quick-directions.turn-left,ഇടത്തോട്ട്
 quick-directions.turn-right,വലത്തോട്ട്
 room-problems.can-i-change-rooms,മാറ്റാമോ
-room-problems.please-send-someone,ആരെയെങ്കിലും അയക്കൂ
+room-problems.please-send-someone,ആരെയെങ്കിലും അയക്കൂ | ആരെയെങ്കിലും അയക്ക്
 room-problems.the-air-conditioning-is-broken,എ.സി.
 room-problems.the-heating-does-not-work,ഹീറ്റർ
 room-problems.the-key-does-not-work,താക്കോൽ
@@ -271,9 +271,9 @@ taxi.can-you-wait-for-me-here,കാത്തിരിക്കാമോ
 taxi.could-you-make-it-colder,തണുപ്പിക്കാമോ
 taxi.could-you-make-it-warmer,ചൂടാക്കാമോ
 taxi.may-i-open-the-window,ജനാല
-taxi.please-stop-here,നിർത്തൂ
-taxi.please-take-me-here,കൊണ്ടുപോകൂ
-taxi.please-turn-around,വണ്ടി തിരിക്കൂ
+taxi.please-stop-here,നിർത്തൂ | നിർത്ത്
+taxi.please-take-me-here,കൊണ്ടുപോകൂ | കൊണ്ടുപോ
+taxi.please-turn-around,വണ്ടി തിരിക്കൂ | വണ്ടി തിരിക്ക്
 time-scheduling.can-we-change-the-time,മാറ്റാമോ
 time-scheduling.how-long-does-it-take,സമയം
 time-scheduling.what-day-is-it-today,ദിവസമാണ്

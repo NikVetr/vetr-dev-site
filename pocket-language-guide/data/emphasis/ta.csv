@@ -56,7 +56,7 @@ color-size-returns.do-you-have-another-size,அளவு
 color-size-returns.may-i-try-it-on,போட்டுப்
 common-signs.no-photography,எடுக்கக் கூடாது
 communication.can-you-help-me,உதவ
-communication.do-you-speak-english,உங்களுக்கு
+communication.do-you-speak-english,உங்களுக்கு | உனக்கு
 communication.i-do-not-speak-this-language,தெரியாது
 communication.i-do-not-understand,புரியவில்லை
 communication.please-speak-more-slowly,மெதுவாகப்
@@ -147,7 +147,7 @@ introductions.i-am-traveling-alone,தனியாகப்
 introductions.my-name-is,என்
 introductions.this-is-my-friend,நண்பர்
 introductions.we-are-traveling-together,சேர்ந்து
-introductions.what-is-your-name,உங்கள்
+introductions.what-is-your-name,உங்கள் | உன்
 introductions.where-are-you-from,எந்த ஊர்
 kind-words.i-had-a-wonderful-time,அருமையான
 kind-words.i-like-it-very-much,பிடிக்கும்
@@ -156,7 +156,7 @@ kind-words.thank-you-for-everything,எல்லாவற்றுக்கு�
 kind-words.thank-you-for-your-help,உதவிக்கு
 kind-words.thank-you-for-your-hospitality,விருந்தோம்பலுக்கு
 kind-words.this-is-delicious,ருசியாக
-kind-words.you-are-very-kind,அன்பானவர்
+kind-words.you-are-very-kind,அன்பானவர் | அன்பாக
 laundry.can-it-be-ready-today,இன்றே
 laundry.how-much-per-kilo,கிலோவுக்கு
 laundry.please-do-not-use-bleach,பிளீச்
@@ -176,10 +176,10 @@ massage-spa.focus-on-back,முதுகை
 massage-spa.focus-on-feet,பாதங்களை
 massage-spa.focus-on-neck,கழுத்தை
 massage-spa.focus-on-shoulders,தோள்களை
-massage-spa.more-gently,குறையுங்கள்
+massage-spa.more-gently,குறையுங்கள் | குறை
 massage-spa.please-avoid-this-area,செய்ய வேண்டாம்
 massage-spa.please-pause,இடைவேளை
-massage-spa.please-stop,நிறுத்துங்கள்
+massage-spa.please-stop,நிறுத்துங்கள் | நிறுத்து
 massage-spa.reply-ask-supervisor,மேலாளரிடம்
 massage-spa.reply-cannot-avoid-this-treatment,விட முடியாது
 massage-spa.reply-does-it-hurt-there,வலிக்கிறதா
@@ -255,7 +255,7 @@ quick-directions.go-straight,நேராகப்
 quick-directions.turn-left,இடதுபுறம்
 quick-directions.turn-right,வலதுபுறம்
 room-problems.can-i-change-rooms,மாற்ற
-room-problems.please-send-someone,ஒருவரை அனுப்புங்கள்
+room-problems.please-send-someone,ஒருவரை அனுப்புங்கள் | ஒருவரை அனுப்பு
 room-problems.the-air-conditioning-is-broken,குளிரூட்டி
 room-problems.the-heating-does-not-work,வெப்பமூட்டி
 room-problems.the-key-does-not-work,சாவி
@@ -275,8 +275,8 @@ taxi.can-you-wait-for-me-here,காத்திருக்க
 taxi.could-you-make-it-colder,குளிராக
 taxi.could-you-make-it-warmer,சூடாக
 taxi.may-i-open-the-window,ஜன்னலைத்
-taxi.please-stop-here,நிறுத்துங்கள்
-taxi.please-take-me-here,கொண்டு போங்கள்
+taxi.please-stop-here,நிறுத்துங்கள் | நிறுத்து
+taxi.please-take-me-here,கொண்டு போங்கள் | கொண்டு போ
 taxi.please-turn-around,யு டர்ன்
 time-scheduling.can-we-change-the-time,மாற்ற
 time-scheduling.how-long-does-it-take,நேரம்

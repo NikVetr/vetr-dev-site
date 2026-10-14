@@ -62,7 +62,7 @@ color-size-returns.do-you-have-another-size,ਸਾਈਜ਼
 color-size-returns.may-i-try-it-on,ਪਾ ਕੇ
 common-signs.no-photography,ਮਨ੍ਹਾ
 communication.can-you-help-me,ਮਦਦ
-communication.do-you-speak-english,ਤੁਹਾਨੂੰ
+communication.do-you-speak-english,ਤੁਹਾਨੂੰ | ਤੈਨੂੰ
 communication.i-do-not-speak-this-language,ਨਹੀਂ ਆਉਂਦੀ
 communication.i-do-not-understand,ਸਮਝ ਨਹੀਂ
 communication.please-speak-more-slowly,ਹੌਲੀ
@@ -115,7 +115,7 @@ food-ordering.is-a-table-available,ਮੇਜ਼ ਖ਼ਾਲੀ
 food-ordering.is-this-vegetarian,ਸ਼ਾਕਾਹਾਰੀ
 food-ordering.table-for-two,ਦੋ ਜਣਿਆਂ
 food-ordering.to-go-please,ਪੈਕ
-food-ordering.what-do-you-recommend,ਚੰਗਾ | ਦੱਸੋ
+food-ordering.what-do-you-recommend,ਚੰਗਾ | ਦੱਸੋ | ਦੱਸੇਂ
 hiking-parks.how-long-to-the-summit,ਚੋਟੀ
 hiking-parks.how-long-to-the-viewpoint,ਨਜ਼ਾਰੇ ਵਾਲੀ ਥਾਂ
 hiking-parks.is-this-trail-suitable-for-beginners,ਨਵਿਆਂ
@@ -153,7 +153,7 @@ introductions.i-am-traveling-alone,ਇਕੱਲਾ | ਇਕੱਲੀ
 introductions.my-name-is,ਮੇਰਾ ਨਾਂ
 introductions.this-is-my-friend,ਦੋਸਤ
 introductions.we-are-traveling-together,ਇਕੱਠੇ
-introductions.what-is-your-name,ਤੁਹਾਡਾ ਨਾਂ
+introductions.what-is-your-name,ਤੁਹਾਡਾ ਨਾਂ | ਤੇਰਾ ਨਾਂ
 introductions.where-are-you-from,ਕਿੱਥੋਂ
 kind-words.i-had-a-wonderful-time,ਵਧੀਆ ਸਮਾਂ
 kind-words.i-like-it-very-much,ਪਸੰਦ
@@ -183,7 +183,7 @@ massage-spa.focus-on-feet,ਪੈਰਾਂ
 massage-spa.focus-on-neck,ਗਰਦਨ
 massage-spa.focus-on-shoulders,ਮੋਢਿਆਂ
 massage-spa.more-gently,ਘੱਟ
-massage-spa.please-avoid-this-area,ਨਾ ਦਬਾਓ
+massage-spa.please-avoid-this-area,ਨਾ ਦਬਾਓ | ਨਾ ਦਬਾ
 massage-spa.please-pause,ਥੋੜ੍ਹੀ ਦੇਰ
 massage-spa.please-stop,ਬੱਸ
 massage-spa.reply-ask-supervisor,ਮੈਨੇਜਰ
@@ -261,7 +261,7 @@ quick-directions.on-the-right,ਸੱਜੇ
 quick-directions.turn-left,ਖੱਬੇ
 quick-directions.turn-right,ਸੱਜੇ
 room-problems.can-i-change-rooms,ਬਦਲ
-room-problems.please-send-someone,ਭੇਜੋ
+room-problems.please-send-someone,ਭੇਜੋ | ਭੇਜ
 room-problems.the-air-conditioning-is-broken,ਏਸੀ
 room-problems.the-heating-does-not-work,ਹੀਟਰ
 room-problems.the-key-does-not-work,ਚਾਬੀ
@@ -282,7 +282,7 @@ taxi.could-you-make-it-colder,ਠੰਡਾ
 taxi.could-you-make-it-warmer,ਗਰਮ
 taxi.may-i-open-the-window,ਖਿੜਕੀ
 taxi.please-stop-here,ਰੋਕ
-taxi.please-take-me-here,ਲੈ ਚੱਲੋ
+taxi.please-take-me-here,ਲੈ ਚੱਲੋ | ਲੈ ਚੱਲ
 taxi.please-turn-around,ਯੂ-ਟਰਨ
 time-scheduling.can-we-change-the-time,ਬਦਲ
 time-scheduling.how-long-does-it-take,ਵੇਲਾ

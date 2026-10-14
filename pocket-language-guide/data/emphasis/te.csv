@@ -55,7 +55,7 @@ color-size-returns.do-you-have-a-bag,సంచి
 color-size-returns.do-you-have-another-size,సైజు
 color-size-returns.may-i-try-it-on,వేసుకుని
 communication.can-you-help-me,సహాయం
-communication.do-you-speak-english,మీకు
+communication.do-you-speak-english,మీకు | నీకు
 communication.i-do-not-speak-this-language,రాదు
 communication.i-do-not-understand,అర్థం కాలేదు
 communication.please-speak-more-slowly,నెమ్మదిగా
@@ -146,7 +146,7 @@ introductions.i-am-traveling-alone,ఒంటరిగా
 introductions.my-name-is,నా
 introductions.this-is-my-friend,స్నేహితుడు
 introductions.we-are-traveling-together,కలిసి
-introductions.what-is-your-name,మీ
+introductions.what-is-your-name,మీ | నీ
 introductions.where-are-you-from,ఎక్కడి నుంచి
 kind-words.i-had-a-wonderful-time,బాగా సమయం
 kind-words.i-like-it-very-much,ఇష్టం
@@ -155,12 +155,12 @@ kind-words.thank-you-for-everything,అన్నింటికీ
 kind-words.thank-you-for-your-help,సహాయానికి
 kind-words.thank-you-for-your-hospitality,ఆతిథ్యానికి
 kind-words.this-is-delicious,రుచిగా
-kind-words.you-are-very-kind,దయగలవారు
+kind-words.you-are-very-kind,దయగలవారు | దయగల
 laundry.can-it-be-ready-today,ఈ రోజే
 laundry.how-much-per-kilo,కిలోకు
 laundry.please-do-not-use-bleach,బ్లీచ్
 laundry.please-iron-this,ఇస్త్రీ
-laundry.please-wash-these-clothes,ఉతకండి
+laundry.please-wash-these-clothes,ఉతకండి | ఉతుకు
 laundry.when-will-it-be-ready,ఎప్పుడు
 laundry.where-is-a-laundromat,బట్టలు ఉతికే షాపు
 lost-rescue.i-do-not-know-where-i-am,ఎక్కడ ఉన్నానో
@@ -178,7 +178,7 @@ massage-spa.focus-on-shoulders,భుజాలకు
 massage-spa.more-gently,తేలికగా
 massage-spa.please-avoid-this-area,ఒత్తవద్దు
 massage-spa.please-pause,కాసేపు
-massage-spa.please-stop,ఆపండి
+massage-spa.please-stop,ఆపండి | ఆపు
 massage-spa.reply-ask-supervisor,మేనేజరును
 massage-spa.reply-cannot-avoid-this-treatment,వదలడం కుదరదు
 massage-spa.reply-does-it-hurt-there,నొప్పిగా
@@ -256,7 +256,7 @@ quick-directions.on-the-right,కుడి
 quick-directions.turn-left,ఎడమకు
 quick-directions.turn-right,కుడికి
 room-problems.can-i-change-rooms,మార్చవచ్చా
-room-problems.please-send-someone,ఒకరిని పంపండి
+room-problems.please-send-someone,ఒకరిని పంపండి | ఒకరిని పంపు
 room-problems.the-air-conditioning-is-broken,ఏసీ
 room-problems.the-heating-does-not-work,హీటర్
 room-problems.the-key-does-not-work,తాళం చెవి
@@ -265,7 +265,7 @@ room-problems.the-room-is-too-noisy,గోల
 room-problems.the-toilet-will-not-flush,టాయిలెట్ ఫ్లష్
 room-problems.there-is-a-problem-with-the-room,సమస్య
 room-problems.there-is-no-hot-water,వేడి నీళ్ళు
-shopping.can-it-be-a-little-cheaper,తగ్గించండి
+shopping.can-it-be-a-little-cheaper,తగ్గించండి | తగ్గించు
 shopping.do-you-have-this-in-stock,స్టాక్
 shopping.how-much-is-this,ఎంత
 shopping.i-am-just-looking,చూస్తున్నానంతే
@@ -273,12 +273,12 @@ shopping.i-will-take-this,తీసుకుంటాను
 shopping.that-is-too-expensive,ఎక్కువ
 shopping.where-do-i-pay,కట్టాలి
 social-basics.i-do-not-know,తెలియదు
-taxi.can-you-wait-for-me-here,ఆగుతారా
+taxi.can-you-wait-for-me-here,ఆగుతారా | ఆగుతావా
 taxi.could-you-make-it-colder,చల్లగా
 taxi.could-you-make-it-warmer,వేడిగా
 taxi.may-i-open-the-window,కిటికీ
-taxi.please-stop-here,ఆపండి
-taxi.please-take-me-here,తీసుకెళ్ళండి
+taxi.please-stop-here,ఆపండి | ఆపు
+taxi.please-take-me-here,తీసుకెళ్ళండి | తీసుకెళ్ళు
 taxi.please-turn-around,వెనక్కి
 time-scheduling.can-we-change-the-time,మార్చవచ్చా
 time-scheduling.how-long-does-it-take,సమయం

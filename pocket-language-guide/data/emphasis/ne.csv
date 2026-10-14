@@ -56,7 +56,7 @@ color-size-returns.do-you-have-another-size,साइज
 color-size-returns.may-i-try-it-on,लगाएर
 common-signs.no-photography,मनाही
 communication.can-you-help-me,सहयोग
-communication.do-you-speak-english,तपाईंलाई
+communication.do-you-speak-english,तपाईंलाई | तिमीलाई
 communication.i-do-not-speak-this-language,आउँदैन
 communication.i-do-not-understand,बुझिएन
 communication.please-speak-more-slowly,बिस्तारै
@@ -146,7 +146,7 @@ introductions.i-am-traveling-alone,एक्लै
 introductions.my-name-is,मेरो नाम
 introductions.this-is-my-friend,साथी
 introductions.we-are-traveling-together,सँगै
-introductions.what-is-your-name,तपाईंको नाम
+introductions.what-is-your-name,तपाईंको नाम | तिम्रो नाम
 introductions.where-are-you-from,कहाँबाट
 kind-words.i-had-a-wonderful-time,समय बिताएँ
 kind-words.i-like-it-very-much,मन पर्छ
@@ -160,7 +160,7 @@ laundry.can-it-be-ready-today,आज
 laundry.how-much-per-kilo,एक किलोको
 laundry.please-do-not-use-bleach,ब्लिच
 laundry.please-iron-this,इस्त्री
-laundry.please-wash-these-clothes,धोइदिनुहोस्
+laundry.please-wash-these-clothes,धोइदिनुहोस् | धोइदेऊ
 laundry.when-will-it-be-ready,कहिले
 laundry.where-is-a-laundromat,लुगा धुने ठाउँ
 lost-rescue.i-do-not-know-where-i-am,म कहाँ छु
@@ -175,10 +175,10 @@ massage-spa.focus-on-back,ढाडमा
 massage-spa.focus-on-feet,खुट्टामा
 massage-spa.focus-on-neck,घाँटीमा
 massage-spa.focus-on-shoulders,काँधमा
-massage-spa.more-gently,घटाउनुहोस्
-massage-spa.please-avoid-this-area,नथिच्नुहोस्
+massage-spa.more-gently,घटाउनुहोस् | घटाऊ
+massage-spa.please-avoid-this-area,नथिच्नुहोस् | नथिच
 massage-spa.please-pause,एक छिनलाई
-massage-spa.please-stop,बन्द गर्नुहोस्
+massage-spa.please-stop,बन्द गर्नुहोस् | बन्द गर
 massage-spa.reply-ask-supervisor,म्यानेजरलाई
 massage-spa.reply-cannot-avoid-this-treatment,छाड्न मिल्दैन
 massage-spa.reply-does-it-hurt-there,दुख्छ
@@ -251,7 +251,7 @@ quick-directions.go-straight,सीधा
 quick-directions.turn-left,देब्रे
 quick-directions.turn-right,दायाँ
 room-problems.can-i-change-rooms,बदल्न
-room-problems.please-send-someone,पठाउनुहोस्
+room-problems.please-send-someone,पठाउनुहोस् | पठाऊ
 room-problems.the-air-conditioning-is-broken,एसी
 room-problems.the-heating-does-not-work,हिटर
 room-problems.the-key-does-not-work,साँचोले
@@ -268,13 +268,13 @@ shopping.i-will-take-this,लिन्छु
 shopping.that-is-too-expensive,महँगो
 shopping.where-do-i-pay,तिर्ने
 social-basics.i-do-not-know,थाहा छैन
-taxi.can-you-wait-for-me-here,पर्खनुहुन्छ
+taxi.can-you-wait-for-me-here,पर्खनुहुन्छ | पर्खिदेऊ
 taxi.could-you-make-it-colder,चिसो
 taxi.could-you-make-it-warmer,तातो
 taxi.may-i-open-the-window,झ्याल
-taxi.please-stop-here,रोक्नुहोस्
-taxi.please-take-me-here,लानुहोस्
-taxi.please-turn-around,फर्काउनुहोस्
+taxi.please-stop-here,रोक्नुहोस् | रोक
+taxi.please-take-me-here,लानुहोस् | लैजाऊ
+taxi.please-turn-around,फर्काउनुहोस् | फर्काऊ
 time-scheduling.can-we-change-the-time,बदल्न
 time-scheduling.how-long-does-it-take,समय
 time-scheduling.what-day-is-it-today,बार
