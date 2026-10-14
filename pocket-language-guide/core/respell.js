@@ -779,6 +779,36 @@ export function nameRespeller(rules, ownerIpa) {
   return (ipa) => respeller.respell(ipa.replace(/[ˈˌ]/gu, ''));
 }
 
+/** The Brahmic scripts laid out on ISCII's plan, whose consonants carry a vowel of their own. */
+const INDIC = new Set(['Deva', 'Beng', 'Guru', 'Gujr', 'Orya', 'Taml', 'Telu', 'Knda', 'Mlym']);
+
+/** A character's place in its Indic block (each 128 code points, on one plan), or -1. @param {string|undefined} ch */
+const indicAt = (ch) => {
+  const cp = ch?.codePointAt(0) ?? 0;
+  return cp >= 0x900 && cp < 0xd80 ? cp & 0x7f : -1;
+};
+
+/**
+ * An Indic name with its unwritten vowels written: `◌` after every consonant that no
+ * vowel sign or virama follows, so the table reads the vowel it carries (`◌` as *a*)
+ * and a language can drop it at a word's end (`◌$`), as Hindi does. A nukta stays
+ * with its consonant; anusvara, candrabindu and visarga follow the vowel.
+ * @param {string} text
+ */
+function withInherent(text) {
+  const chars = [...text];
+  let out = '';
+  for (let i = 0; i < chars.length; i += 1) {
+    out += chars[i];
+    const at = indicAt(chars[i]);
+    if (!((at >= 0x15 && at <= 0x39) || (at >= 0x58 && at <= 0x5f))) continue;
+    while (indicAt(chars[i + 1]) === 0x3c) out += chars[++i];
+    const next = indicAt(chars[i + 1]);
+    if (!((next >= 0x3e && next <= 0x4d) || (next >= 0x55 && next <= 0x57) || next === 0x62 || next === 0x63)) out += '◌';
+  }
+  return out;
+}
+
 /**
  * A first guess at the sounds of a typed name, for the sound keyboard to start from.
  *
@@ -788,7 +818,8 @@ export function nameRespeller(rules, ownerIpa) {
  * sounds of a letter or a run of letters, with a language's own reading of a run taking
  * the place of the script's default. The longest run that reads wins at each point
  * (`sch` before `s`). A run may be read only at a word's start (`^st`) or end (`e$`):
- * each word is read between those two marks, which add no sound themselves. A letter
+ * each word is read between those two marks, which add no sound themselves. An Indic
+ * consonant's own vowel is read as `◌` (`withInherent`), and Hangul as its jamo. A letter
  * the table does not read -- a space, a hyphen, an apostrophe -- adds no sound.
  * @param {string} name
  * @param {Record<string,string>[]} table  rows of `language,script,letters,sound`
@@ -801,7 +832,10 @@ export function guessSounds(name, table, language, script) {
   for (const row of table) if (row.script === script && !row.language) read.set(row.letters, row.sound);
   for (const row of table) if (row.script === script && row.language === language) read.set(row.letters, row.sound);
   const longest = Math.max(0, ...[...read.keys()].map((letters) => letters.length));
-  const text = name.normalize('NFC').toLocaleLowerCase(language).replace(/[\p{L}\p{M}]+/gu, (word) => `^${word}$`);
+  // Hangul is read letter by letter: a syllable block decomposes into its jamo.
+  const typed = name.normalize(script === 'Kore' ? 'NFD' : 'NFC').toLocaleLowerCase(language);
+  const text = (INDIC.has(script) ? withInherent(typed) : typed)
+    .replace(/[\p{L}\p{M}◌]+/gu, (word) => `^${word}$`);
   /** @type {string[]} */ const sounds = [];
   for (let i = 0; i < text.length;) {
     let n = Math.min(longest, text.length - i);

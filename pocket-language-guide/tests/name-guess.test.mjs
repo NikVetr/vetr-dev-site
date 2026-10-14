@@ -45,6 +45,20 @@ test('a run may be read only at a word\'s start or end', () => {
   assert.equal(guessSounds('Sissel', edges, 'de', 'Latn'), 'ʃissel');
 });
 
+test('an Indic consonant carries its own vowel unless a sign or virama follows, and Hangul reads by its letters', () => {
+  const deva = [['क', 'k'], ['म', 'm'], ['ल', 'l'], ['र', 'r'], ['ा', 'a'], ['ि', 'i'], ['्', ''], ['◌', 'ə']]
+    .map(([letters, sound]) => ({ language: '', script: 'Deva', letters, sound }))
+    .concat({ language: 'hi', script: 'Deva', letters: '◌$', sound: '' });
+  assert.equal(guessSounds('कमल', deva, 'mr', 'Deva'), 'kəmələ');
+  // Hindi drops the vowel a word ends on.
+  assert.equal(guessSounds('कमल', deva, 'hi', 'Deva'), 'kəməl');
+  assert.equal(guessSounds('राम', deva, 'hi', 'Deva'), 'ram');
+  assert.equal(guessSounds('क्रिल', deva, 'hi', 'Deva'), 'kril');
+  const hangul = [['ᄆ', 'm'], ['ᅵ', 'i'], ['ᆫ', 'n'], ['ᄉ', 's'], ['ᅮ', 'u']]
+    .map(([letters, sound]) => ({ language: '', script: 'Kore', letters, sound }));
+  assert.equal(guessSounds('민수', hangul, 'ko', 'Kore'), 'minsu');
+});
+
 test('what the table does not read adds no sound, and another script reads nothing here', () => {
   assert.equal(guessSounds('Ana-Lou', TABLE, 'en', 'Latn'), 'analou');
   assert.equal(guessSounds('Ника', TABLE, 'ru', 'Latn'), '');
@@ -74,7 +88,8 @@ test('the shipped table reads only into the keyboard\'s own sounds, for scripts 
     const where = `${row.language || '*'} ${row.script} ${row.letters}`;
     assert.ok(scripts.has(row.script), `${where}: no script ${row.script}`);
     assert.ok(!row.language || languages.has(row.language), `${where}: no language ${row.language}`);
-    assert.equal(row.letters, row.letters.normalize('NFC').toLowerCase(), `${where}: letters must be lower-case NFC`);
+    const form = row.script === 'Kore' ? 'NFD' : 'NFC';
+    assert.equal(row.letters, row.letters.normalize(form).toLowerCase(), `${where}: letters must be lower-case ${form}`);
     for (const sound of row.sound.split(' ').filter(Boolean)) {
       assert.ok(SOUNDS.includes(sound), `${where}: ${sound} is not a key on the sound keyboard`);
     }

@@ -57,7 +57,25 @@ fr,Latn,h,,"silent in French names: Hélène"
    worst guesses; prefer the reading most common *in names* (`th` as `t` in Thomas is
    rarer than `θ` in Thatcher; take θ) and note the trade-off.
 2. **Cyrillic** (`ru uk`) and **Greek** (`el`): near-phonemic, a short table each.
-3. Stop there. Other scripts are a later batch.
+3. **The second batch** -- the scripts readers of the other packs type their names in:
+   - **The Indic scripts** (`Deva` for hi mr ne, `Beng` bn, `Guru` pa, `Gujr` gu, `Orya` or,
+     `Taml` ta, `Telu` te, `Knda` kn, `Mlym` ml). `guessSounds` writes a consonant's own
+     vowel as `◌` after every consonant no vowel sign or virama follows, so the table
+     reads consonants as bare consonants, vowel signs and independent vowels as vowels,
+     the virama as silent, and `◌` as the script's inherent vowel (*a*, or *ə*, or Bengali
+     *ɔ*). A language that drops it at a word's end writes `◌$` silent (Hindi *Rām*,
+     *Kamal*); medial deletion is beyond a table and is noted, not chased.
+   - **Hangul** (`Kore`): read as its jamo, so the rows are written decomposed (NFD) --
+     one row per initial, vowel and final jamo.
+   - **Kana** (`Jpan`): hiragana and katakana by syllable (`きょ` before `き`); kanji names
+     are not guessed.
+   - **Arabic script** (`Arab` for ar fa ur) and **Hebrew** (`Hebr`): letters write
+     consonants and long vowels only, so a guess has no short vowels and is a poorer
+     start; write the letters and the long-vowel letters well, any vowel points a reader
+     may type, and say how poor the guesses are rather than inventing vowels.
+   - **Armenian** (`Armn`), **Georgian** (`Geor`) and **Ethiopic** (`Ethi`, one row per
+     syllable character): near-phonemic.
+   Thai, Lao, Khmer and the Han characters are left for later.
 
 ## Sources
 

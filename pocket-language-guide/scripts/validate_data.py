@@ -730,8 +730,10 @@ def main():
         if row["language"] and row["language"] not in languages:
             errors.append(f"{where}: unknown language {row['language']!r}")
         letters = row["letters"]
-        if not letters or letters != unicodedata.normalize("NFC", letters).lower():
-            errors.append(f"{where}: letters {letters!r} are not lower-case NFC")
+        # Hangul is matched as its jamo, so its rows are written decomposed.
+        form = "NFD" if row["script"] == "Kore" else "NFC"
+        if not letters or letters != unicodedata.normalize(form, letters).lower():
+            errors.append(f"{where}: letters {letters!r} are not lower-case {form}")
         # `^` and `$` mark a word's start and end, so only first and last, around letters.
         if not letters.strip("^$") or "^" in letters[1:] or "$" in letters[:-1]:
             errors.append(f"{where}: {letters!r} may have ^ only first and $ only last, around letters")

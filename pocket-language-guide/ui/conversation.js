@@ -407,7 +407,16 @@ async function nameSpellers(corpus, listener, owner, ownerRows) {
 }
 
 /** The scripts a typed name is guessed from, by the letters it is typed in. */
-const NAME_SCRIPTS = [['Latn', /\p{Script=Latin}/u], ['Cyrl', /\p{Script=Cyrillic}/u], ['Grek', /\p{Script=Greek}/u]];
+/** The script a typed name is in, as `name-letters.csv` names it (ISO 15924, as `scripts.csv`). */
+const NAME_SCRIPTS = /** @type {[string, RegExp][]} */ ([
+  ['Latn', /\p{Script=Latin}/u], ['Cyrl', /\p{Script=Cyrillic}/u], ['Grek', /\p{Script=Greek}/u],
+  ['Arab', /\p{Script=Arabic}/u], ['Hebr', /\p{Script=Hebrew}/u], ['Armn', /\p{Script=Armenian}/u],
+  ['Geor', /\p{Script=Georgian}/u], ['Ethi', /\p{Script=Ethiopic}/u], ['Deva', /\p{Script=Devanagari}/u],
+  ['Beng', /\p{Script=Bengali}/u], ['Guru', /\p{Script=Gurmukhi}/u], ['Gujr', /\p{Script=Gujarati}/u],
+  ['Orya', /\p{Script=Oriya}/u], ['Taml', /\p{Script=Tamil}/u], ['Telu', /\p{Script=Telugu}/u],
+  ['Knda', /\p{Script=Kannada}/u], ['Mlym', /\p{Script=Malayalam}/u], ['Kore', /\p{Script=Hangul}/u],
+  ['Jpan', /[\p{Script=Hiragana}\p{Script=Katakana}]/u],
+]);
 
 /**
  * What the name's sounds are built with, for a dialog about to open: its keys, the whole
@@ -422,7 +431,7 @@ function soundsFor(spellers, listener, voiceId, corpus, owner) {
   return spellers && {
     ...spellers,
     guess: (name) => {
-      const script = NAME_SCRIPTS.find(([, test]) => /** @type {RegExp} */ (test).test(name))?.[0]
+      const script = NAME_SCRIPTS.find(([, test]) => test.test(name))?.[0]
         ?? corpus.languages[owner].script;
       return guessSounds(name, corpus.nameLetters, owner, /** @type {string} */ (script));
     },
