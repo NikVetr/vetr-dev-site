@@ -67,9 +67,16 @@ def cited(provenance):
 
 
 def checked(code):
-    """concept_id -> (verdict, reference text), from a cross-check where there is one."""
+    """concept_id -> (verdict, reference text), from a cross-check where there is one.
+
+    A disagreement its reader put down to the reference ("Reference wrong: ...") is no
+    mark against the row.
+    """
     path = ROOT / f"tmp/out/crosscheck/{code}.csv"
-    return {r["concept_id"]: (r["verdict"], r["reference_text"]) for r in rows(path)} if path.exists() else {}
+    if not path.exists():
+        return {}
+    return {r["concept_id"]: ("" if r["reason"].startswith("Reference wrong") else r["verdict"], r["reference_text"])
+            for r in rows(path)}
 
 
 def score(code, english):
