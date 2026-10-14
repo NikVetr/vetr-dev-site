@@ -6012,3 +6012,21 @@ rows and four country names. French spelt a one-letter word ending a chunk -- *J
 allergique à {}* said "a accent grave" on ten rows -- and Arabic read يوجد "there is" as
 bare consonants on twenty; both are repaired in the builder, with three more Arabic words
 and Swahili *tangu*, each measured as the whole of its occurrences.
+
+## Native evidence for Batch AJ
+
+Built from the pushed commit `150578e37`, after the gate, the unit tests (748) and the
+Chromium suite (316 passed, one skipped) passed on it; the whole WebKit suite showed only
+the eight host failures already recorded (the four offline navigations, Russian's
+capitalised name, the Chinese punctuation face, the tap budget, the Speak stub).
+**Android**: `scripts/build_android.sh` built a 44.5MB debug APK and
+`scripts/check_android.mjs` passed every check on the emulator -- launch with App,
+AppLauncher, Filesystem, Preferences and Share; persistence across a relaunch and a
+reinstall; resuming and Back; an offline start (53 cards); the share sheet and its cancel;
+Back at the top leaving the app. **iOS** (`npm run ios -- --run` then `npm run check:ios` on
+the Mac): every check passed on the simulator -- launch, an offline start with nothing
+outside the bundle (85 requests), both safe areas, persistence, speech (68 voices), the
+keyboard and its dismissal, the share sheet and the PDF export, a backgrounded beacon
+stopping and a page kept across a trip to another app. Still device checks: hands-free
+listening in WKWebView, Save Image in the iPhone share sheet, the translator apps, the
+torch, and how the register switch, the mosaic and the key words read on a real screen.
