@@ -89,6 +89,18 @@ test('the shipped table reads German st as ʃt only where it begins a word', asy
   assert.equal(guessSounds('Sebastian', table, 'de', 'Latn'), 'sebastian');
 });
 
+test('the shipped table keeps a Marathi name\'s last vowel after a conjunct, and drops it elsewhere', async () => {
+  const rel = 'data/registry/name-letters.csv';
+  const table = parseTable(await readFile(rel, 'utf8'), rel);
+  assert.equal(guessSounds('राजेंद्र', table, 'mr', 'Deva'), 'radʒendrə');
+});
+
+test('the shipped table reads Hangul g as k where a name starts and moves a final onto a silent ᄋ, voiced', async () => {
+  const rel = 'data/registry/name-letters.csv';
+  const table = parseTable(await readFile(rel, 'utf8'), rel);
+  assert.equal(guessSounds('김석우', table, 'ko', 'Kore'), 'kimsəɡu');
+});
+
 test('the shipped table reads only into the keyboard\'s own sounds, for scripts and languages there are', async () => {
   const { SOUNDS } = await import('../ui/board-menu.js');
   const read = async (/** @type {string} */ rel) => parseTable(await readFile(rel, 'utf8'), rel);
@@ -98,8 +110,9 @@ test('the shipped table reads only into the keyboard\'s own sounds, for scripts 
     const where = `${row.language || '*'} ${row.script} ${row.letters}`;
     assert.ok(scripts.has(row.script), `${where}: no script ${row.script}`);
     assert.ok(!row.language || languages.has(row.language), `${where}: no language ${row.language}`);
-    const form = row.script === 'Kore' ? 'NFD' : 'NFC';
-    assert.equal(row.letters, row.letters.normalize(form).toLowerCase(), `${where}: letters must be lower-case ${form}`);
+    // The CSV reader composes every cell, so Hangul's rows, decomposed on disk, are the
+    // validator's to check as written; read back, every row is NFC.
+    assert.equal(row.letters, row.letters.normalize('NFC').toLowerCase(), `${where}: letters must be lower-case NFC`);
     for (const sound of row.sound.split(' ').filter(Boolean)) {
       assert.ok(SOUNDS.includes(sound), `${where}: ${sound} is not a key on the sound keyboard`);
     }
