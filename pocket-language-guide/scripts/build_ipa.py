@@ -300,11 +300,10 @@ distrust the column as a whole.
   word at a time espeak demotes some words to a secondary mark and no primary
   (`vagyok` is `vˌɑɟok`), and a word with no primary mark prints unmarked, which for
   an accented script is not a possible word.
-- **What `ar` still reads with espeak guesses its short vowels**: the 49 currency
-  glosses with no romanisation, the `ar,km` language name and every country name,
-  since `ala_lc_to_ipa` can only read what the ALA-LC column writes. `فرنك` comes back
-  `fˈurnka` for *frank*, and `روبية` as `rˈuːbiːjˌa` where the romanised rows say
-  `ruːbˈijja`. Romanising those cells is the fix.
+- **What `ar` still reads with espeak guesses its short vowels**: the country names,
+  which have no romanisation, since `ala_lc_to_ipa` can only read what the ALA-LC
+  column writes; every phrase and language name now has one. Romanising the country
+  names is the fix.
 - **espeak writes /y/ for three different vowels that are not /y/**, which is one
   defect wearing three hats and the most consequential entry here, since /y/ is a
   real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
@@ -3334,6 +3333,7 @@ DIGIT_GROUP = re.compile(r"(?<=\d)[,\u00a0 ](?=\d{3}\b)")
 # the respellings of the same cell.
 GROUP = re.compile(r"\[([^\[\]{}]*\|[^\[\]{}]*)\]")
 MIN_STEM = 3
+MIN_TAIL = 6
 
 
 def alternatives(text):
@@ -3345,29 +3345,56 @@ def alternatives(text):
             for i in range(first.group(1).count("|") + 1)]
 
 
+STRESS_MARK = re.compile("[ˈˌ]")
+
+
+def shared_start(forms):
+    """How far all the forms agree from the start, never stopping before a combining mark."""
+    n = 0
+    while n < len(forms[0]) and all(f[n:n + 1] == forms[0][n] for f in forms):
+        n += 1
+    while 0 < n < len(forms[0]) and unicodedata.category(forms[0][n]).startswith("M"):
+        n -= 1
+    return n
+
+
+def shared_end(forms):
+    """How far all the forms agree from the end, never starting on a combining mark."""
+    m = 0
+    while m < len(forms[0]) and all(f[len(f) - 1 - m:len(f) - m] == forms[0][len(forms[0]) - 1 - m] for f in forms):
+        m += 1
+    while m and unicodedata.category(forms[0][len(forms[0]) - m]).startswith("M"):
+        m -= 1
+    return m
+
+
+def join_word(forms):
+    """One word's forms as a single word, as `joinWord` in core/alternation.js makes it:
+    the start they share when it is at least `MIN_STEM` characters (`θeɾkˈan[o|a]`) and
+    the end when it is at least `MIN_TAIL` (`[d|t]ˈɪxtst…`), the whole forms otherwise
+    (`[el|la]`); forms apart
+    only in where a stress mark falls are one reading. IPA has no hyphens, so the
+    respelling's syllable rule there has nothing to stop at here."""
+    if all(STRESS_MARK.sub("", f) == STRESS_MARK.sub("", forms[0]) for f in forms):
+        return forms[0]
+    head = shared_start(forms)
+    tail = min(shared_end(forms), min(len(f) for f in forms) - head)
+    head = head if head >= MIN_STEM else 0
+    tail = tail if tail >= MIN_TAIL else 0
+    word = forms[0]
+    return word[:head] + "[" + "|".join(f[head:len(f) - tail] for f in forms) + "]" + word[len(word) - tail:]
+
+
 def join_alternates(readings):
-    """Readings of one sentence, one per gender, back into one cell: the words they
-    share, and where they differ the alternatives, after a shared start of at least
-    `MIN_STEM` characters (`θeɾkˈan[o|a]`) or whole (`[el|la]`)."""
+    """Readings of one sentence, one per gender, back into one cell word by word
+    (`join_word`): `joinAlternates` in core/alternation.js, which the respelling of the
+    same cell goes through."""
     if len(readings) == 1:
         return readings[0]
     words = [r.split(" ") for r in readings]
     if any(len(w) != len(words[0]) for w in words):
         raise ValueError(f"alternatives do not line up word for word: {' | '.join(readings)}")
-    out = []
-    for forms in zip(*words):
-        if all(f == forms[0] for f in forms):
-            out.append(forms[0])
-            continue
-        n = 0
-        while n < len(forms[0]) and all(f[n:n + 1] == forms[0][n] for f in forms):
-            n += 1
-        # Never between a letter and its combining mark.
-        while 0 < n < len(forms[0]) and unicodedata.category(forms[0][n]).startswith("M"):
-            n -= 1
-        stem = forms[0][:n] if n >= MIN_STEM else ""
-        out.append(stem + "[" + "|".join(f[len(stem):] for f in forms) + "]")
-    return " ".join(out)
+    return " ".join(join_word(forms) for forms in zip(*words))
 
 
 def spoken(text):
@@ -6364,9 +6391,8 @@ GRADE = {
            "It is a careful reading: a word-initial hamzat al-waṣl after a vowel keeps its "
            "/ʔi/ (`hādhihi ibnatī`), `min al-` is not `mina l-`, and a final long vowel "
            "is written long where Halpern hears it shortened. What keeps it from an A is "
-           "what is still espeak's -- the 49 currency glosses with no romanisation, the "
-           "`ar,km` name and every country name -- which guesses the short vowels and "
-           "writes ظ as ð: D quality, on 5% of the rows"),
+           "what is still espeak's -- the country names, which have no romanisation -- "
+           "which guesses the short vowels and writes ظ as ð"),
     "th": ("D", "a neural G2P, and no Thai tone is verifiable against anything in this corpus"),
     "uk": ("B+", "near-phonemic orthography and, unlike Russian, genuinely no vowel-"
            "reduction system to get wrong -- probed on 60-odd words chosen for it "

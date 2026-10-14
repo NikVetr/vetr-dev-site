@@ -10,6 +10,8 @@
 const GROUP = /\[([^[\]{}]*\|[^[\]{}]*)\]/gu;
 /** A word's start is shared only this far into it, or the alternatives stay whole. */
 const MIN_STEM = 3;
+/** A shared end has to be the body of the word to read as one: `j/take` reads as two words. */
+const MIN_TAIL = 6;
 
 /** @typedef {{at: number, alts: string[]}} Group  `at` is where it starts in the printed text */
 
@@ -47,12 +49,53 @@ export function alternative(text, i) {
   return text.replace(GROUP, (_, body) => body.split('|')[i]);
 }
 
+const STRESS = /[ˈˌ]/gu;
+
+/** How far all the forms agree from the start, never stopping before a combining mark. @param {string[]} forms */
+function sharedStart(forms) {
+  let n = 0;
+  while (n < forms[0].length && forms.every((f) => f[n] === forms[0][n])) n += 1;
+  while (n > 0 && /\p{M}/u.test(forms[0][n] ?? '')) n -= 1;
+  return n;
+}
+
+/** How far all the forms agree from the end, never starting on a combining mark. @param {string[]} forms */
+function sharedEnd(forms) {
+  const at = (/** @type {string} */ f, /** @type {number} */ m) => f[f.length - 1 - m];
+  let m = 0;
+  while (m < forms[0].length && forms.every((f) => at(f, m) === at(forms[0], m))) m += 1;
+  while (m > 0 && /\p{M}/u.test(forms[0][forms[0].length - m])) m -= 1;
+  return m;
+}
+
 /**
- * Variants of one sentence, one per gender, put back into a single cell: the words
- * they share, and where they differ, the alternatives -- after the start the word
- * shares when that is at least `MIN_STEM` characters (`ser-KAH-n[oh|ah]`), whole
- * otherwise (`[el|la]`). How the respelling of a varied row is made, since the
- * respeller reads one sentence at a time.
+ * One word's forms, one per gender, as a single word: the start they share when it is
+ * at least `MIN_STEM` characters (`θeɾkˈan[o|a]`) and the end when it is at least
+ * `MIN_TAIL` (`[d|t]ˈɪxtst…`), the whole forms otherwise (`[el|la]`). A respelling's hyphens are its syllables, so there
+ * a shared part stops at one (`ser-KA-[no|na]`, never `ser-KA-n[o|a]`). Forms apart only
+ * in where a stress mark falls are one reading.
+ * @param {string[]} forms
+ */
+function joinWord(forms) {
+  if (forms.every((f) => f.replace(STRESS, '') === forms[0].replace(STRESS, ''))) return forms[0];
+  const word = forms[0];
+  let head = sharedStart(forms);
+  let tail = Math.min(sharedEnd(forms), Math.min(...forms.map((f) => f.length)) - head);
+  if (forms.some((f) => f.includes('-'))) {
+    head = word.lastIndexOf('-', head - 1) + 1;
+    const from = word.indexOf('-', word.length - tail);
+    tail = from < 0 ? 0 : word.length - from;
+  }
+  if (head < MIN_STEM) head = 0;
+  if (tail < MIN_TAIL) tail = 0;
+  return `${word.slice(0, head)}[${forms.map((f) => f.slice(head, f.length - tail)).join('|')}]${word.slice(word.length - tail)}`;
+}
+
+/**
+ * Variants of one sentence, one per gender, put back into a single cell word by word
+ * (`joinWord`): how the respelling of a varied row is made, since the respeller reads
+ * one sentence at a time. `join_alternates` in scripts/build_ipa.py does the same for
+ * the IPA.
  * @param {string[]} variants
  */
 export function joinAlternates(variants) {
@@ -60,16 +103,7 @@ export function joinAlternates(variants) {
   if (words.some((w) => w.length !== words[0].length)) {
     throw new Error(`alternatives do not line up word for word: ${variants.join(' | ')}`);
   }
-  return words[0].map((_, k) => {
-    const forms = words.map((w) => w[k]);
-    if (forms.every((f) => f === forms[0])) return forms[0];
-    let n = 0;
-    while (n < forms[0].length && forms.every((f) => f[n] === forms[0][n])) n += 1;
-    // Never between a letter and its combining mark.
-    while (n > 0 && /\p{M}/u.test(forms[0][n] ?? '')) n -= 1;
-    const stem = n >= MIN_STEM ? forms[0].slice(0, n) : '';
-    return `${stem}[${forms.map((f) => f.slice(stem.length)).join('|')}]`;
-  }).join(' ');
+  return words[0].map((_, k) => joinWord(words.map((w) => w[k]))).join(' ');
 }
 
 /**

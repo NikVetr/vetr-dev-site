@@ -34,6 +34,14 @@ test('readings join back word by word, sharing a word\'s start only when it is a
   // A respelling of each, joined the same way.
   assert.equal(perAlternative('[el|la] cercan[o|a]', (s) => s.toUpperCase()), '[EL|LA] CERCAN[O|A]');
   assert.throws(() => joinAlternates(['a b', 'a b c']), /line up word for word/);
+  // A shared end too: Dutch *het* lends its t to the next word, which is otherwise one.
+  assert.equal(joinAlternates(['də dˈɪxtstbɛizɛində', 'hə tˈɪxtstbɛizɛində']), '[də|hə] [d|t]ˈɪxtstbɛizɛində');
+  // Apart only in where the stress falls: one reading, not `[ˌɛ|ˈɛ]`.
+  assert.equal(joinAlternates(['ˌɛ', 'ˈɛ']), 'ˌɛ');
+  // A respelling shares whole syllables, never half of one.
+  assert.equal(joinAlternates(['ser-KA-no', 'ser-KA-na']), 'ser-KA-[no|na]');
+  assert.equal(joinAlternates(['ah-prro-pee-AT', 'ah-prro-pee-AH-tuh']), 'ah-prro-pee-[AT|AH-tuh]');
+  assert.equal(joinAlternates(['chel', 'che-ah']), '[chel|che-ah]');
 });
 
 test('a card prints a template\'s alternatives joined, each in its gender\'s colour', async () => {
@@ -70,4 +78,8 @@ test('a card prints a template\'s alternatives joined, each in its gender\'s col
   // One word still: side by side in reading order, on one baseline.
   assert.ok(word.every((r, i) => i === 0 || r.x > word[i - 1].x));
   assert.equal(new Set(word.map((r) => r.y)).size, 1);
+  // The respelling spells Spanish words in English letters, so its genders are Spanish.
+  const respelt = runs.findIndex((r, i) => r.text === 'TA' && runs[i + 1]?.text === 'el') + 1;
+  assert.deepEqual(runs.slice(respelt, respelt + 3).map((r) => [r.text, gender(r)]),
+    [['el', 'm'], ['/', ''], ['la', 'f']]);
 });

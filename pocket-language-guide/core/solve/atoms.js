@@ -197,10 +197,13 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     /**
      * Each gender's colour in a field's language, for a template's alternatives; none
      * on a mono sheet, where the order they are written in is what is left to say it.
+     * The respelling is the target's words in the reader's letters, so its genders are
+     * the target's: only the gloss and the numeral are in the reader's own language.
      * @param {import('../types.js').FieldId} field
      */
     genderFills: (field) => (spec.inkMode === 'mono' ? null
-      : corpus.genders[isTargetSide(field) ? spec.target : spec.source]?.map((g) => g.color) ?? null),
+      : corpus.genders[field === 'gloss' || field === 'numeral' ? spec.source : spec.target]
+        ?.map((g) => g.color) ?? null),
     sourceStack: (() => {
       const resolved = resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts);
       return { ...resolved, stack: registry.stackFor(resolved.stack, typeface),

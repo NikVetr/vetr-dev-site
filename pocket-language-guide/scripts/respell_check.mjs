@@ -24,6 +24,7 @@ import {
   fillLanguageSlots, loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules,
 } from '../core/pack.js';
 import { createRespeller, phonemesOf } from '../core/respell.js';
+import { alternatives, perAlternative, printed } from '../core/alternation.js';
 
 const loadText = (/** @type {string} */ rel) => readFile(rel, 'utf8');
 const args = process.argv.slice(2);
@@ -74,10 +75,13 @@ async function rowsFor(/** @type {{source:string, accent:string, rules:any}} */ 
   const ipa = Object.entries(rows)
     .map(([id, row]) => ({ id, text: row.text ?? '', ipa: (row.ipa ?? '').trim() }))
     .filter((r) => r.ipa);
+  // As `core/content.js` respells a template's alternatives: one gender at a time.
   const respeller = createRespeller({
-    rules: table.rules, target, targetIpa: ipa.map((r) => r.ipa),
+    rules: table.rules, target, targetIpa: ipa.flatMap((r) => alternatives(r.ipa)),
   });
-  return ipa.map((r) => ({ ...r, out: respeller.respell(r.ipa), want: curated[r.id] ?? '' }));
+  return ipa.map((r) => ({
+    ...r, out: perAlternative(r.ipa, (one) => respeller.respell(one)), want: curated[r.id] ?? '',
+  }));
 }
 
 /**
@@ -104,7 +108,7 @@ async function charset() {
     /** @type {Set<string>} */ const chars = new Set();
     for (const target of ready) {
       if (target === src) continue;
-      for (const r of await rowsFor(table, target)) for (const ch of r.out) chars.add(ch);
+      for (const r of await rowsFor(table, target)) for (const ch of printed(r.out)) chars.add(ch);
     }
     out[src] = [...chars].sort().join('');
   }
