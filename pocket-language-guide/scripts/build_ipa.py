@@ -2538,6 +2538,13 @@ def _lao_parses(s, i):
             if not closed and t < len(s) and s[t] in LAO_FINALS:
                 options.append(s[t])
             options.append("")
+            # A pre-base vowel, a consonant and ວ with nothing after it in the syllable
+            # is that consonant, the vowel and a final /w/ -- BGN note 6: "at the end of
+            # a syllable, ວ should be romanized o: ... ແກວ -> kèo"; Kerr 1972 ແຖວ tʰɛ̌ːw,
+            # ແນວ nɛ́ːw, ແຄວ kʰɛ́ːw -- never the cluster Cw before an open vowel. ແຂວງ keeps
+            # its cluster because a final follows (BGN: Khoèng).
+            if pre and not comb and not tail and len(k) == 2 and k[1] == "ວ" and k != "ຫວ":
+                options = [f for f in options if f]
             for fin in options:
                 # ໌ U+0ECC, the cancellation mark, silences the consonant it sits
                 # on -- ໄຟລ໌ "file", ອາເມຣິກ໌, and BGN's own example ເບີຣ໌ -> Beur

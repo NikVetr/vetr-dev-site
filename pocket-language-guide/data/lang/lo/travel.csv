@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 directions.where-is,{} ຢູ່ໃສ,,{} yousai,{} juː˧saj˩,"ຢູ່ໃສ follows the noun, so the slot leads",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
-directions.how-do-i-get-to,ໄປ {} ແນວໃດ,,pai {} noèdai,paj˩ {} nwɛː˧˥daj˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+directions.how-do-i-get-to,ໄປ {} ແນວໃດ,,pai {} nèodai,paj˩ {} nɛːw˧˥daj˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);fix=BGN/PCGN 1966 Romanization of Lao note 6 (ວ at the end of a syllable is o: ແກວ kèo) and Kerr 1972 ແນວ nɛ́ːw (final w, not a cluster);was=pai {} noèdai;row-corrections-v12;ipa=lo-g2p"
 directions.is-it-far,ໄກບໍ່,,kaibo,kaj˩bɔː˧,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 directions.how-long-on-foot,ຍ່າງໄປໃຊ້ເວລາຫຼາຍປານໃດ,,gnangpaixaivélalaypandai,ɲaːŋ˧paj˩saj˥˨weː˧˥laː˧˥laːj˩paːn˩daj˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 directions.please-show-me-on-the-map,ກະລຸນາຊີ້ໃນແຜນທີ່,,kalounaxinaiphènthi,kaʔ˧˥luʔ˧naː˧˥siː˥˨naj˧˥pʰɛːn˩tʰiː˧,,2,"Lao PDR public signage and announcement wording (Wattay International Airport, Vientiane Capital public notices, Lao State Railway station boards);ipa=lo-g2p"
