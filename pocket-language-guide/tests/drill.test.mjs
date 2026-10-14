@@ -13,10 +13,22 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseTable } from '../core/csv.js';
 import {
-  buildDrill, commandIn, drillPool, grade, heardVerdict, normalise, numberIn,
+  answerForms, buildDrill, commandIn, drillPool, grade, heardVerdict, normalise, numberIn,
 } from '../ui/drill.js';
+import { parseAlternates } from '../core/alternation.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
+
+test('a template\'s alternatives are each an answer, and the card prints them joined', () => {
+  // `¿Dónde está la ____ más cercana?` is the card's own sentence for a pharmacy, so
+  // a learner who types it is right, as one who types the masculine is.
+  const { text, groups } = parseAlternates('¿Dónde está [el|la] {} más cercan[o|a]?');
+  const card = { conceptId: 'x', sectionId: 'y', values: { script: text }, alternates: { script: groups } };
+  const forms = answerForms(card, 'script');
+  assert.deepEqual(forms, ['¿Dónde está el {} más cercano?', '¿Dónde está la {} más cercana?']);
+  assert.equal(grade('dónde está la ____ más cercana', forms[1]), 'right');
+  assert.deepEqual(answerForms({ ...card, alternates: undefined }, 'script'), [text]);
+});
 
 test('normalise drops case and the punctuation around a phrase', () => {
   assert.equal(normalise('  Où est la gare ?  '), 'où est la gare');

@@ -11,6 +11,7 @@ import {
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { paperSpec } from '../core/pack.js';
+import { printed } from '../core/alternation.js';
 import { contentBox } from '../core/solve/index.js';
 import { elvenInset, isElven } from '../core/elven-frame.js';
 import { proposeBalance } from '../core/solve/weights.js';
@@ -623,8 +624,8 @@ async function main() {
               && field !== 'numeral')
             .map(([field, v]) => [field, String(v ?? '')]))
           : {
-            script: targetRows[id]?.text ?? '',
-            gloss: sourceRows[id]?.text ?? '',
+            script: printed(targetRows[id]?.text ?? ''),
+            gloss: printed(sourceRows[id]?.text ?? ''),
           };
         const role = spec.sectionColors?.[sectionId] ?? section?.color_role ?? '';
         const roles = /** @type {Record<string,string>} */ (theme?.colors?.roles ?? {});

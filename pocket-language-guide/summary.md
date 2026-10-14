@@ -264,6 +264,7 @@ pair is a runtime join on `concept_id`:
 | `data/registry/` | languages (with the countries each is spoken in), scripts, sections, paper/printer presets, regions |
 | `data/registry/roles.csv` | the five colour roles' own names, for a super-section tab: Essentials, Money & food, Travel, Stay & time, Emergency |
 | `data/registry/redundancy.csv` | a sparse pair table of substitutes, `partial`/`duplicate`/`none`, with the pass count it was agreed by |
+| `data/registry/genders.csv` | each language's genders in the order a template's alternatives are written, and the colour each prints in |
 | `data/concepts/<group>.csv` | the language-independent concept bank: importance, coverage cluster, slot count, template |
 | `data/lang/<bcp47>/<group>.csv` | one language's `text`, romanizations, IPA, confidence, provenance |
 | `data/respell/overrides/<target>__<source>__<accent>.csv` | pronunciations spelled for a reader of the *source* language |
@@ -1139,8 +1140,16 @@ name. `DETAILS` in `core/conversation.js` is the closed list -- the name, `typed
 country, `chosen` -- and `ui/about.js` keeps the details in `plg.about`, carried in a
 backup. Every other slot is a blank the traveller writes a word or a number into, so a
 template is worded to be right for any filler: where a plural after the number would be
-wrong for one, the pack writes a label (*Number of nights: {}*, *My child's age: {}*). Until the detail is given the button is greyed with an empty box in its corner and
-its label has a blank; the first press asks for the detail rather than showing a sentence
+wrong for one, the pack writes a label (*Number of nights: {}*, *My child's age: {}*),
+and where a word agrees with the gender of what fills the blank, the row offers one form
+per gender, `¿Dónde está [el|la] {} más cercan[o|a]?`, which a card prints `el/la ...
+cercano/a` with each form in its gender's colour (`core/alternation.js`;
+`data/registry/genders.csv` gives each language's genders in order and their colours, and
+a mono card keeps only the order). The IPA builder reads each gender's sentence and joins
+the readings the same way, the respelling is made one gender at a time, and the quiz
+takes any of the forms as the answer; the validator keeps alternatives off the boards,
+whose blanks are filled with a whole sentence. Until the detail is given the button is
+greyed with an empty box in its corner and its label has a blank; the first press asks for the detail rather than showing a sentence
 with a hole, and a given one shows a ticked box and the value, and is cleared by a hold
 (or a right click). The settings dialog has the same fields under "About you". **A name
 can be built from its sounds**, in a grid folded under the name field (`soundGrid` in

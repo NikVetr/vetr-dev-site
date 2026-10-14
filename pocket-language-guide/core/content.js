@@ -12,6 +12,7 @@ import {
   loadEmergencyLabels, fillLanguageSlots, buildBlocks,
 } from './pack.js';
 import { createRespeller } from './respell.js';
+import { alternatives, perAlternative } from './alternation.js';
 import { applyVariants, variantKey } from './speaker.js';
 
 /**
@@ -60,11 +61,13 @@ async function generatedRespellings(ctx, spec, targetRows) {
     .map(([id, row]) => /** @type {[string, string]} */ ([id, (row.ipa ?? '').trim()]))
     .filter(([, ipa]) => ipa);
   const respeller = createRespeller({
-    rules, target: spec.target, targetIpa: ipaByConcept.map(([, ipa]) => ipa),
+    rules, target: spec.target, targetIpa: ipaByConcept.flatMap(([, ipa]) => alternatives(ipa)),
   });
   /** @type {Record<string,string>} */ const out = {};
   for (const [id, ipa] of ipaByConcept) {
-    const said = respeller.respell(ipa);
+    // A template's alternatives are respelled one gender at a time, since the
+    // respeller reads one sentence, and joined back the way the IPA is.
+    const said = perAlternative(ipa, (one) => respeller.respell(one));
     if (said) out[id] = said;
   }
   generated.set(key, out);

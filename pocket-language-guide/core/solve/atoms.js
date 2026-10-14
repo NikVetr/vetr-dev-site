@@ -194,6 +194,13 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     mirror: targetScriptRow.direction === 'rtl',
     /** @param {import('../types.js').FieldStyle} fs @param {string} role */
     colorFor: (fs, role) => (fs.color === 'section' ? palette.roles[role] : palette[fs.color]),
+    /**
+     * Each gender's colour in a field's language, for a template's alternatives; none
+     * on a mono sheet, where the order they are written in is what is left to say it.
+     * @param {import('../types.js').FieldId} field
+     */
+    genderFills: (field) => (spec.inkMode === 'mono' ? null
+      : corpus.genders[isTargetSide(field) ? spec.target : spec.source]?.map((g) => g.color) ?? null),
     sourceStack: (() => {
       const resolved = resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts);
       return { ...resolved, stack: registry.stackFor(resolved.stack, typeface),
@@ -209,17 +216,64 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
 }
 
 /**
+ * Where each of a field's alternatives sits in its printed text, and its colour.
+ * @param {import('../alternation.js').Group[]} groups @param {string[]} fills
+ */
+function colouredSpans(groups, fills) {
+  /** @type {{from:number, to:number, fill:string}[]} */ const spans = [];
+  for (const group of groups) {
+    let at = group.at;
+    group.alts.forEach((alt, i) => {
+      if (alt) spans.push({ from: at, to: at + alt.length, fill: fills[i] });
+      at += alt.length + 1;
+    });
+  }
+  return spans;
+}
+
+/**
+ * A run cut where alternatives start and end, each part in its own colour: `cercan`
+ * and the slash keep the field's, `o` and `a` take their genders'. Placed by the
+ * width of what comes before each part, from the line's start edge.
+ * @param {ReturnType<typeof makeContext>} ctx @param {TextRun} run
+ * @param {number} start  where the run's text starts in the field's printed text
+ * @param {{from:number, to:number, fill:string}[]} spans
+ * @param {import('../measure.js').RunStyle} style @param {number} inkW
+ * @returns {TextRun[]}
+ */
+function splitRun(ctx, run, start, spans, style, inkW) {
+  const end = start + run.text.length;
+  if (!spans.some((s) => s.from < end && s.to > start)) return [run];
+  const cuts = new Set([start, end]);
+  for (const s of spans) for (const at of [s.from, s.to]) if (at > start && at < end) cuts.add(at);
+  const at = [...cuts].sort((a, b) => a - b);
+  return at.slice(0, -1).map((from, k) => {
+    const to = at[k + 1];
+    const text = run.text.slice(from - start, to - start);
+    const before = ctx.measurer.width(run.text.slice(0, from - start), style);
+    const w = ctx.measurer.width(text, style);
+    const fill = spans.find((s) => s.from <= from && s.to >= to)?.fill ?? run.fill;
+    return { ...run, text, x: style.dir === 'rtl' ? run.x + inkW - before - w : run.x + before, fill };
+  });
+}
+
+/**
  * Lay out one text field inside a box, returning runs plus the height consumed.
  * @param {ReturnType<typeof makeContext>} ctx
  * @param {string} text
  * @param {import('../measure.js').RunStyle} style
  * @param {{x:number, y:number, w:number, align:'start'|'end'|'center', fill:string}} box
+ * @param {{groups: import('../alternation.js').Group[], fills: string[]}} [alternates]
  */
-function paintField(ctx, text, style, box) {
+function paintField(ctx, text, style, box, alternates) {
   /** @type {TextRun[]} */ const runs = [];
   /** @type {Rect[]} */ const rects = [];
   const { lines } = ctx.measurer.wrap(text, box.w, style);
   const baseline = ctx.measurer.baselineOffset(style);
+  const spans = alternates ? colouredSpans(alternates.groups, alternates.fills) : [];
+  // Where the next piece starts in `text`: pieces are its substrings in order, but for
+  // a slot, which stands for the two characters of `{}`.
+  let pos = 0;
 
   // Pieces are in logical order. A right-to-left line therefore starts at its
   // *right* edge and walks left, which is the whole of what was wrong with Arabic:
@@ -238,6 +292,9 @@ function paintField(ctx, text, style, box) {
     // edge -- the left for ltr, the right for rtl.
     let cursor = rtl ? left + width : left;
     for (const piece of line) {
+      const start = pos;
+      const slot = piece.type === 'slot' || (text.startsWith('{}', pos) && !text.startsWith(piece.text, pos));
+      pos += slot ? 2 : piece.text.length;
       // `w` carries any trailing space, `inkW` does not. In a right-to-left line
       // that space sits to the *left* of the word, so the ink has to be flushed to
       // the right of its advance box rather than the left.
@@ -250,13 +307,15 @@ function paintField(ctx, text, style, box) {
           h: Math.max(0.35, style.size * 0.055), fill: box.fill,
         });
       } else if (piece.text.trim() !== '') {
-        runs.push({
+        /** @type {TextRun} */ const run = {
           // Trimmed, because the position now comes from the ink width: leaving the
           // space in would draw it on the wrong side of a right-to-left word.
           text: piece.text.trim(), x, y: y + baseline, fontId: ctx.measurer.faceKey(style),
           size: style.size, fill: box.fill, bold: style.weight >= 700,
           italic: style.italic, dir: style.dir,
-        });
+        };
+        const lead = piece.text.length - piece.text.trimStart().length;
+        runs.push(...(spans.length ? splitRun(ctx, run, start + lead, spans, style, piece.inkW) : [run]));
       }
       cursor += rtl ? -piece.w : piece.w;
     }
@@ -668,11 +727,13 @@ function itemAtoms(ctx, block, rows, withPaint) {
       let y = pad[0] + (centred ? (gridHeight - stackHeight) / 2 + lift : ascent - cellAscent);
       live.forEach((cell, k) => {
         if (k > 0) y += rowGap;
+        const groups = row.alternates?.[cell.fs.field];
+        const fills = groups && at.genderFills(cell.fs.field);
         const painted = paintField(at, cell.text, cell.style, {
           x, y, w: widths[j],
           align: edgeAlign(j, resolveAlign(cell.fs.align, ctx.mirror)),
           fill: at.colorFor(cell.fs, block.colorRole),
-        });
+        }, groups && fills ? { groups, fills } : undefined);
         rects.push(...painted.rects);
         runs.push(...painted.runs);
         y += painted.height;

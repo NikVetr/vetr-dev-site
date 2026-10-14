@@ -17,6 +17,7 @@
 // at what a traveller wants, and it should have to ask.
 
 import { appliesTo } from '../pack.js';
+import { printed } from '../alternation.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 
@@ -218,8 +219,8 @@ export function proposeBalance(input) {
     adds.push({
       conceptId: item.concept.concept_id,
       sectionId: section,
-      label: `${input.targetRows[item.concept.concept_id].text} — `
-        + `${input.sourceRows[item.concept.concept_id].text}`,
+      label: `${printed(input.targetRows[item.concept.concept_id].text)} — `
+        + `${printed(input.sourceRows[item.concept.concept_id].text)}`,
       reason: [
         `fills ${priced.cost.toFixed(0)}pt`,
         priced.overhead ? `opens ${corpus.sectionById[section].title_en}` : '',
@@ -346,13 +347,14 @@ function measureHeights(input, candidates, liveSections) {
       rows: group.map((c) => ({
         conceptId: c.concept_id,
         weight: Number(c.importance),
+        // Measured as printed: a template's alternatives joined, `el/la`.
         values: {
-          script: input.targetRows[c.concept_id].text,
-          roman: input.targetRows[c.concept_id][`romanization_${spec.romanization}`] ?? '',
-          ipa: input.targetRows[c.concept_id].ipa || '',
-          gloss: input.sourceRows[c.concept_id].text,
-          numeral: input.sourceRows[c.concept_id].text,
-          respell: input.respell[c.concept_id] ?? '',
+          script: printed(input.targetRows[c.concept_id].text),
+          roman: printed(input.targetRows[c.concept_id][`romanization_${spec.romanization}`] ?? ''),
+          ipa: printed(input.targetRows[c.concept_id].ipa || ''),
+          gloss: printed(input.sourceRows[c.concept_id].text),
+          numeral: printed(input.sourceRows[c.concept_id].text),
+          respell: printed(input.respell[c.concept_id] ?? ''),
         },
       })),
     }]);

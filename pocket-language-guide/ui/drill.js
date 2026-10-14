@@ -23,6 +23,7 @@
 // namespace, separate button.
 
 import { sayable } from '../core/pack.js';
+import { printedAlternatives } from '../core/alternation.js';
 import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
@@ -42,7 +43,7 @@ const MATCH_GROUP = 5;
 /** @typedef {import('../core/types.js').FieldId} FieldId */
 /** @typedef {'choice'|'match'|'blank'} DrillKind */
 /** @typedef {'right'|'marks'|'wrong'} Verdict */
-/** @typedef {{conceptId:string, sectionId:string, values:Partial<Record<FieldId,string>>}} Card */
+/** @typedef {{conceptId:string, sectionId:string, values:Partial<Record<FieldId,string>>, alternates?:import('../core/types.js').ItemRow['alternates']}} Card */
 
 /**
  * The three shapes, in the order the setting offers them. Keys rather than words:
@@ -303,7 +304,7 @@ export function drillPool(blocks, fields) {
     if (block.kind !== 'items') continue;
     for (const row of block.rows ?? []) {
       if (fields.some((f) => !(row.values[f] ?? '').trim())) continue;
-      pool.push({ conceptId: row.conceptId, sectionId: block.sectionId, values: row.values });
+      pool.push({ conceptId: row.conceptId, sectionId: block.sectionId, values: row.values, alternates: row.alternates });
     }
   }
   return pool;
@@ -438,6 +439,16 @@ export function buildDrill({ blocks, concepts, kind, prompt, answer, seed, count
   }
   return questions;
 }
+
+/**
+ * A card's cell as each gender says it: one form, except for a template's
+ * alternatives, where each is an answer (`¿Dónde está la ____ más cercana?`).
+ * @param {Card} card @param {FieldId} field
+ */
+export const answerForms = (card, field) => printedAlternatives(card.values[field] ?? '', card.alternates?.[field]);
+
+/** The best verdict a typed answer earns against any of the forms. @param {string} typed @param {string[]} answers */
+const bestGrade = (typed, answers) => answers.map((a) => grade(typed, a)).sort((a, b) => RANK[a] - RANK[b])[0];
 
 // --- hearing an answer ----------------------------------------------------
 
@@ -579,9 +590,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
    * A cell as it is said, and in which language.
    * @param {Card} card @param {FieldId} field @returns {[string, string]}
    */
-  const spoken = (card, field) => [
-    (saidIn(field) === spec.target ? card.values.script : card.values[field]) ?? '', saidIn(field),
-  ];
+  const spoken = (card, field) => [answerForms(card, saidIn(field) === spec.target ? 'script' : field)[0], saidIn(field)];
 
   /**
    * Why hands-free cannot run on these columns, or '' when it can: it needs a
@@ -1059,7 +1068,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
           /** @type {Verdict[]} */ const verdicts = [];
           for (const entry of boxes) {
             const want = /** @type {string} */ (row.values[entry.field]);
-            const verdict = revealed ? 'wrong' : said?.verdict ?? grade(entry.box.value, want);
+            const verdict = revealed ? 'wrong' : said?.verdict ?? bestGrade(entry.box.value, answerForms(row, entry.field));
             verdicts.push(verdict);
             tally[verdict] += 1;
             // Revealed, the answer goes into the box itself, where the reader
@@ -1138,7 +1147,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       if (speak && target) {
         speak.disabled = question.asks.includes('script');
         speak.addEventListener('click', () => {
-          speech.speak({ text: sayable(/** @type {string} */ (target.values.script)), locale: spec.target })
+          speech.speak({ text: sayable(answerForms(target, 'script')[0]), locale: spec.target })
             .catch(() => {});
         });
       }
@@ -1229,8 +1238,8 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
       const n = question.kind === 'choice' ? numberIn(heard, numberWords(), digits) : 0;
       const said = question.kind === 'blank'
         ? heardVerdict(heard, saidIn(field) === spec.target
-          ? [row.values.script ?? '', row.values.script_alt ?? ''].filter(Boolean)
-          : [row.values[field] ?? ''])
+          ? [...answerForms(row, 'script'), ...answerForms(row, 'script_alt')].filter(Boolean)
+          : answerForms(row, field))
         : null;
       const command = (n || (said && said.verdict !== 'wrong')) ? null : commandIn(heard, commands());
       if (command === 'stop') { interrupt(); summarise(); return; }

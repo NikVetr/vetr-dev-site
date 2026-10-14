@@ -758,6 +758,68 @@ def main():
         if stray:
             errors.append(f"{where}: {stray} are not keys of the sound keyboard")
 
+    # --- a template's alternatives -----------------------------------------------
+    #
+    # `[el|la]` is the word that agrees with what the traveller writes into a
+    # template's blank, one alternative per gender in the order `genders.csv` gives
+    # the language (core/alternation.js). So: only in a row with a blank to agree
+    # with and no language name substituted into it (the groups' places are taken
+    # before that); never on a board, whose blanks are filled with a whole sentence;
+    # and a whole word outside Latin, Cyrillic and Greek, where a run cut inside a
+    # word would lose its joins and its vowel signs.
+    genders = defaultdict(list)
+    for line, row in enumerate(load("registry/genders.csv"), start=2):
+        if row["language"] not in languages:
+            errors.append(f"genders.csv:{line}: unknown language {row['language']!r}")
+        if not re.fullmatch(r"#[0-9a-f]{6}", row["color"]):
+            errors.append(f"genders.csv:{line}: colour {row['color']!r} is not #rrggbb")
+        genders[row["language"]].append(row["gender"])
+    on_boards = set()
+
+    def board_refs(node):
+        if isinstance(node, dict):
+            ref = node.get("phraseRef")
+            if isinstance(ref, dict) and ref.get("kind") == "corpus":
+                on_boards.add(ref["id"])
+            for value in node.values():
+                board_refs(value)
+        elif isinstance(node, list):
+            for value in node:
+                board_refs(value)
+    for path in (DATA / "boards").glob("*.json"):
+        board_refs(json.loads(path.read_text(encoding="utf-8")))
+    alternation = re.compile(r"\[([^\[\]{}]*\|[^\[\]{}]*)\]")
+    apart = {"Latn", "Cyrl", "Grek"}
+
+    def letter(ch):
+        return unicodedata.category(ch)[0] in "LM"
+    cells = [(code, path.name, row, column, row[column])
+             for code in languages for path in sorted((DATA / f"lang/{code}").glob("*.csv"))
+             for row in load(path.relative_to(DATA))
+             for column in ("text", "text_alt", "ipa", *(c for c in row if c.startswith("romanization_")))
+             if row.get(column)]
+    cells += [(path.name.split("__")[0], path.name, row, "respell", row["respell"])
+              for path in sorted((DATA / "respell/overrides").glob("*.csv"))
+              for row in load(path.relative_to(DATA))]
+    for code, name, row, column, value in cells:
+        found = list(alternation.finditer(value))
+        if not found:
+            continue
+        where = f"{code}/{name} {row['concept_id']} {column}"
+        if "{}" not in value or re.search(r"\{(?:target|source)\}", value):
+            errors.append(f"{where}: alternatives belong in a row with a blank and no language name")
+        if row["concept_id"] in on_boards:
+            errors.append(f"{where}: alternatives in a concept a board says")
+        script = languages[code]["script"] if column in ("text", "text_alt") else "Latn"
+        for m in found:
+            n = m.group(1).count("|") + 1
+            if n != len(genders[code]):
+                errors.append(f"{where}: [{m.group(1)}] has {n} alternatives, and genders.csv "
+                              f"gives {code} {len(genders[code])}")
+            inside = (m.start() and letter(value[m.start() - 1])) or (m.end() < len(value) and letter(value[m.end()]))
+            if inside and script not in apart:
+                errors.append(f"{where}: [{m.group(1)}] is inside a word in {script}; write the whole word")
+
     # A curated respelling is written for one wording, and `text` says which: a row
     # reworded since would print its old pronunciation beside its new words.
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):

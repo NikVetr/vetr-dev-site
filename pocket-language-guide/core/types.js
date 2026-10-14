@@ -56,6 +56,8 @@
  * @property {string} conceptId
  * @property {Partial<Record<FieldId,string>>} values
  * @property {number} weight   coverage value, used by the add/subtract solver
+ * @property {Partial<Record<FieldId, import('./alternation.js').Group[]>>} [alternates]
+ *   where a field's alternatives for the slot's gender sit in its printed text
  * @property {string[]} [mergedFrom]  other concepts that came out as the same
  *   target text and were folded into this row. They are on the sheet, inside this
  *   row's gloss -- anything asking "is this concept shown?" has to count them, or

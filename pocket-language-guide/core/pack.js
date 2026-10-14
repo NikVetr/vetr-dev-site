@@ -6,6 +6,7 @@
 // concept_id. Adding a language is one directory, and every pair with it works.
 
 import { parseTable } from './csv.js';
+import { parseAlternates } from './alternation.js';
 import { readAxes } from './speaker.js';
 
 /** @typedef {(relPath:string)=>Promise<string>} LoadText */
@@ -63,6 +64,12 @@ export async function loadCorpus(loadText) {
   // cold blue, stop in red -- and the colour is the concept's, whatever the language.
   const keyTones = Object.fromEntries((await read('data/registry/key-tones.csv'))
     .map((row) => [row.concept_id, row.tone]));
+  // The genders a template's alternatives are written for, in their order, and the
+  // colour each prints in (`core/alternation.js`).
+  /** @type {Record<string, {gender:string, color:string}[]>} */ const genders = {};
+  for (const row of await read('data/registry/genders.csv')) {
+    (genders[row.language] ??= []).push({ gender: row.gender, color: row.color });
+  }
   // How letters are read in a typed name, for the first guess at its sounds.
   const nameLetters = await read('data/registry/name-letters.csv');
   const sectionRows = await read('data/registry/sections.csv');
@@ -141,6 +148,7 @@ export async function loadCorpus(loadText) {
     speakerAxes,
     listenerAxes,
     keyTones,
+    genders,
     nameLetters,
     coverage,
     respellOverrides,
@@ -891,7 +899,19 @@ function itemRow(concept, target, source, respell, spec, override, custom) {
     }
   }
   if (merged.numeral === base.numeral && merged.gloss !== base.gloss) merged.numeral = merged.gloss;
-  return { conceptId: concept.concept_id, weight: Number(concept.importance), values: merged };
+  // A template's alternatives print joined, `el/la`, and where they sit is kept for
+  // their colours (`core/alternation.js`).
+  /** @type {NonNullable<import('./types.js').ItemRow['alternates']>} */ const alternates = {};
+  for (const [field, value] of Object.entries(merged)) {
+    const { text, groups } = parseAlternates(value);
+    if (!groups.length) continue;
+    merged[/** @type {'script'} */ (field)] = text;
+    alternates[/** @type {'script'} */ (field)] = groups;
+  }
+  return {
+    conceptId: concept.concept_id, weight: Number(concept.importance), values: merged,
+    ...(Object.keys(alternates).length ? { alternates } : {}),
+  };
 }
 
 /**

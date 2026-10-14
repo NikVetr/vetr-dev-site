@@ -59,6 +59,7 @@ const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
 /** Which of them are the target language's, and so take its font and lang tag. */
 const TARGET_FIELDS = new Set(['script', 'script_alt', 'roman', 'ipa', 'literal']);
 import { appliesTo, sectionOrder } from '../core/pack.js';
+import { printed } from '../core/alternation.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -594,10 +595,10 @@ export function createTree(input) {
           // section off empties its labels. The corpus is the fallback, which has
           // the two sides and none of the generated columns.
           if (item.cells.script) {
-            item.cells.script.textContent = input.targetRows[item.conceptId]?.text ?? '';
+            item.cells.script.textContent = printed(input.targetRows[item.conceptId]?.text ?? '');
           }
           if (item.cells.gloss) {
-            item.cells.gloss.textContent = input.sourceRows[item.conceptId]?.text ?? '';
+            item.cells.gloss.textContent = printed(input.sourceRows[item.conceptId]?.text ?? '');
           }
         }
       }

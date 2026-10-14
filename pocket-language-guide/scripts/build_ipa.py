@@ -3336,6 +3336,48 @@ GENDER_SUFFIX = re.compile(r"(?<=[a-zà-ÿ])/[a-zà-ÿ]{1,2}\b")
 DIGIT_GROUP = re.compile(r"(?<=\d)[,\u00a0 ](?=\d{3}\b)")
 
 
+# A template's words that agree with what fills its slot, one per gender: `¿Dónde
+# está [el|la] {} más cercan[o|a]?` (core/alternation.js). Each gender's sentence is
+# read in full, and the readings are joined back the way `joinAlternates` there joins
+# the respellings of the same cell.
+GROUP = re.compile(r"\[([^\[\]{}]*\|[^\[\]{}]*)\]")
+MIN_STEM = 3
+
+
+def alternatives(text):
+    """The cell as said for each gender in turn, or just the cell."""
+    first = GROUP.search(text)
+    if not first:
+        return [text]
+    return [GROUP.sub(lambda m: m.group(1).split("|")[i], text)
+            for i in range(first.group(1).count("|") + 1)]
+
+
+def join_alternates(readings):
+    """Readings of one sentence, one per gender, back into one cell: the words they
+    share, and where they differ the alternatives, after a shared start of at least
+    `MIN_STEM` characters (`θeɾkˈan[o|a]`) or whole (`[el|la]`)."""
+    if len(readings) == 1:
+        return readings[0]
+    words = [r.split(" ") for r in readings]
+    if any(len(w) != len(words[0]) for w in words):
+        raise ValueError(f"alternatives do not line up word for word: {' | '.join(readings)}")
+    out = []
+    for forms in zip(*words):
+        if all(f == forms[0] for f in forms):
+            out.append(forms[0])
+            continue
+        n = 0
+        while n < len(forms[0]) and all(f[n:n + 1] == forms[0][n] for f in forms):
+            n += 1
+        # Never between a letter and its combining mark.
+        while 0 < n < len(forms[0]) and unicodedata.category(forms[0][n]).startswith("M"):
+            n -= 1
+        stem = forms[0][:n] if n >= MIN_STEM else ""
+        out.append(stem + "[" + "|".join(f[len(stem):] for f in forms) + "]")
+    return " ".join(out)
+
+
 def spoken(text):
     """The part of a row's text that is said aloud.
 
@@ -6762,7 +6804,9 @@ def build(code):
             if not row["text"].strip():
                 skipped["no text"] += 1
                 continue
-            text = expand_units(code, spoken(row[source] if source else row["text"]))
+            said = [expand_units(code, spoken(v))
+                    for v in alternatives(row[source] if source else row["text"])]
+            text = said[0]
             if source and not text.strip():
                 skipped[f"no {source}"] += 1
                 continue
@@ -6775,25 +6819,28 @@ def build(code):
                 skipped["latin loanword"] += 1
                 continue
             if code == "ko":
-                text = ko_romanization(row["text"], text)
-                if text is None:
+                # Korean has no genders, so one reading.
+                said = [ko_romanization(row["text"], text)]
+                if said[0] is None:
                     skipped["rr not aligned"] += 1
                     continue
-            parts = pieces(text, loans)
+            variants = [pieces(v, loans) for v in said]
             # A row that is nothing but an acronym -- `eSIM` is its own entry in
             # four languages -- has a loan piece and no text piece, and is not
             # nothing to say.
-            if not any(kind in ("text", "loan") for kind, _ in parts):
+            if not any(kind in ("text", "loan") for kind, _ in variants[0]):
                 skipped["nothing to say"] += 1
                 continue
-            plan.append((path, index, row, parts))
+            plan.append((path, index, row, variants))
 
-    transcribe, method = route(code, [v for _, _, _, parts in plan
+    transcribe, method = route(code, [v for _, _, _, variants in plan for parts in variants
                                       for kind, v in parts if kind == "text"])
     filled = {}                                   # (path, index) -> (ipa, method)
     bad = Counter()
     flagged = []                                  # rows a reviewer should read first
-    for path, index, row, parts in plan:
+
+    def reading(row, parts):
+        """One reading of a row's pieces, and why it is refused if it is."""
         # A loan piece is already IPA and already in this column's conventions, so
         # it skips `normalise` for the same reason a marker does: there is no route
         # output to repair and no stress for `apply_stress` to find.
@@ -6812,9 +6859,7 @@ def build(code):
         sound = LANGUAGE_SLOT.sub("", ipa)
         stray = check_alphabet(sound) + check_route(sound, method)
         if not ipa or stray:
-            skipped["G2P failed"] += 1
-            bad.update(stray or ["(empty)"])
-            continue
+            return ipa, "G2P failed", stray or ["(empty)"]
         # Korean is a syllable-block script, so the result must have exactly as many
         # syllables as the row has blocks. `ko_hyphenate` now resolves the digraphs
         # that used to fail this rather than leaving them to be caught, so what is
@@ -6830,15 +6875,25 @@ def build(code):
         if code == "ko" and hangul_blocks(row["text"]) \
                 and not any(c.isdigit() for c in row["text"]) \
                 and syllable_count(blocks) != hangul_blocks(row["text"]):
-            skipped["syllable count"] += 1
+            return ipa, "syllable count", []
+        return ipa, None, []
+
+    for path, index, row, variants in plan:
+        # One reading for each gender a template's alternatives are written for.
+        readings = [reading(row, parts) for parts in variants]
+        refused = next((r for r in readings if r[1]), None)
+        if refused:
+            skipped[refused[1]] += 1
+            bad.update(refused[2])
             continue
         if ACRONYM.search(row["text"]):
             flagged.append(row["concept_id"])
         # `+loan` on the row's own provenance, because a hand-written reading is the
         # one thing in this column no route produced: `npm run validate` counts the
         # cells per method, so the precedent is visible rather than buried here.
-        loaned = any(kind == "loan" for kind, _ in parts)
-        filled[(path, index)] = (ipa, f"{method}+loan" if loaned else method)
+        loaned = any(kind == "loan" for parts in variants for kind, _ in parts)
+        filled[(path, index)] = (join_alternates([ipa for ipa, _, _ in readings]),
+                                 f"{method}+loan" if loaned else method)
     return filled, skipped, bad, method, flagged
 
 
