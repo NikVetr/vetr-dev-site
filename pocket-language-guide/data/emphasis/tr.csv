@@ -105,7 +105,7 @@ hiking-parks.how-long-to-the-viewpoint,Seyir terasına
 hiking-parks.is-this-trail-suitable-for-beginners,yeni başlayanlara
 hiking-parks.where-is-the-trailhead,başlangıcı
 hiking-parks.which-route-is-easier,kolay
-hitchhiking.can-you-give-me-a-ride,arabanıza
+hitchhiking.can-you-give-me-a-ride,arabanıza | arabana
 hitchhiking.i-can-pay-for-fuel,Benzin
 hitchhiking.i-only-need-to-go-to-the-next-town,sonraki kasabaya
 hitchhiking.is-there-room-for-two,İki kişilik yer
@@ -136,20 +136,20 @@ introductions.i-am-a-tourist,Turist
 introductions.i-am-traveling-alone,Yalnız
 introductions.this-is-my-friend,arkadaşım
 introductions.we-are-traveling-together,Birlikte
-introductions.what-is-your-name,Adınız
+introductions.what-is-your-name,Adınız | Adın
 kind-words.i-had-a-wonderful-time,güzel zaman
 kind-words.i-like-it-very-much,beğendim
 kind-words.it-is-beautiful-here,güzel
 kind-words.thank-you-for-everything,Her şey
-kind-words.thank-you-for-your-help,Yardımınız
-kind-words.thank-you-for-your-hospitality,Misafirperverliğiniz
+kind-words.thank-you-for-your-help,Yardımınız | Yardımın
+kind-words.thank-you-for-your-hospitality,Misafirperverliğiniz | Misafirperverliğin
 kind-words.this-is-delicious,lezzetli
-kind-words.you-are-very-kind,naziksiniz
+kind-words.you-are-very-kind,naziksiniz | naziksin
 laundry.can-it-be-ready-today,Bugün
 laundry.how-much-per-kilo,Kilosu
 laundry.please-do-not-use-bleach,Çamaşır suyu
-laundry.please-iron-this,ütüleyin
-laundry.please-wash-these-clothes,yıkayın
+laundry.please-iron-this,ütüleyin | ütüle
+laundry.please-wash-these-clothes,yıkayın | yıka
 laundry.when-will-it-be-ready,Ne zaman
 laundry.where-is-a-laundromat,Çamaşırhane
 lost-rescue.i-do-not-know-where-i-am,Nerede olduğumu
@@ -164,9 +164,9 @@ massage-spa.focus-on-back,sırta
 massage-spa.focus-on-feet,ayaklara
 massage-spa.focus-on-neck,boyna
 massage-spa.focus-on-shoulders,omuzlara
-massage-spa.please-avoid-this-area,dokunmayın
-massage-spa.please-pause,ara verin
-massage-spa.please-stop,durun
+massage-spa.please-avoid-this-area,dokunmayın | dokunma
+massage-spa.please-pause,ara verin | ara ver
+massage-spa.please-stop,durun | dur
 massage-spa.reply-ask-supervisor,sorumluya
 massage-spa.reply-cannot-avoid-this-treatment,atlanamaz
 massage-spa.reply-does-it-hurt-there,ağrıyor
@@ -239,7 +239,7 @@ quick-directions.go-straight,Düz
 quick-directions.turn-left,Sola
 quick-directions.turn-right,Sağa
 room-problems.can-i-change-rooms,değiştirebilir
-room-problems.please-send-someone,birini gönderin
+room-problems.please-send-someone,birini gönderin | birini gönder
 room-problems.the-air-conditioning-is-broken,Klima
 room-problems.the-heating-does-not-work,Isıtma
 room-problems.the-key-does-not-work,Kart
@@ -259,8 +259,8 @@ taxi.can-you-wait-for-me-here,bekler
 taxi.could-you-make-it-colder,soğuk
 taxi.could-you-make-it-warmer,sıcak
 taxi.may-i-open-the-window,Camı
-taxi.please-stop-here,durun
-taxi.please-take-me-here,götürün
+taxi.please-stop-here,durun | dur
+taxi.please-take-me-here,götürün | götür
 taxi.please-turn-around,U dönüşü
 time-scheduling.can-we-change-the-time,değiştirebilir
 time-scheduling.how-long-does-it-take,sürer
@@ -276,7 +276,7 @@ trail-conditions.how-long-is-the-full-route,Tüm yol
 trail-conditions.is-the-path-slippery,kaygan
 trail-conditions.is-the-route-steep,dik
 trail-conditions.is-the-trail-open,açık
-trail-transport.do-you-have-a-map,Haritanız
+trail-transport.do-you-have-a-map,Haritanız | Haritan
 trail-transport.how-long-is-the-wait,beklenir
 trail-transport.is-there-cell-signal-here,telefon çekiyor
 trail-transport.what-time-is-the-last-shuttle,Son servis

@@ -110,7 +110,7 @@ food-ordering.is-a-table-available,tavolo libero
 food-ordering.is-this-vegetarian,vegetariano
 food-ordering.table-for-two,tavolo | due
 food-ordering.to-go-please,portare via
-food-ordering.what-do-you-recommend,consiglia
+food-ordering.what-do-you-recommend,consiglia | consigli
 hiking-parks.how-long-to-the-summit,cima
 hiking-parks.how-long-to-the-viewpoint,punto panoramico
 hiking-parks.is-this-trail-suitable-for-beginners,principianti
@@ -149,7 +149,7 @@ introductions.i-am-traveling-alone,solo | sola
 introductions.my-name-is,chiamo
 introductions.this-is-my-friend,amico
 introductions.we-are-traveling-together,insieme
-introductions.what-is-your-name,chiama
+introductions.what-is-your-name,chiama | chiami
 kind-words.i-had-a-wonderful-time,fantastici
 kind-words.i-like-it-very-much,piace
 kind-words.it-is-beautiful-here,bellissimo
@@ -161,8 +161,8 @@ kind-words.you-are-very-kind,gentile
 laundry.can-it-be-ready-today,oggi
 laundry.how-much-per-kilo,chilo
 laundry.please-do-not-use-bleach,candeggina
-laundry.please-iron-this,Stiri
-laundry.please-wash-these-clothes,Lavi
+laundry.please-iron-this,Stiri | Stira
+laundry.please-wash-these-clothes,Lavi | Lava
 laundry.when-will-it-be-ready,Quando
 laundry.where-is-a-laundromat,lavanderia
 lost-rescue.i-do-not-know-where-i-am,dove mi trovo
@@ -178,7 +178,7 @@ massage-spa.focus-on-feet,piedi
 massage-spa.focus-on-neck,collo
 massage-spa.focus-on-shoulders,spalle
 massage-spa.more-gently,delicato
-massage-spa.please-avoid-this-area,Non prema
+massage-spa.please-avoid-this-area,Non prema | Non premere
 massage-spa.please-stop,Basta
 massage-spa.reply-ask-supervisor,direzione
 massage-spa.reply-cannot-avoid-this-treatment,non si può
@@ -249,7 +249,7 @@ quick-directions.on-the-right,destra
 quick-directions.turn-left,sinistra
 quick-directions.turn-right,destra
 room-problems.can-i-change-rooms,cambiare
-room-problems.please-send-someone,Mandi qualcuno
+room-problems.please-send-someone,Mandi qualcuno | Manda qualcuno
 room-problems.the-air-conditioning-is-broken,aria condizionata
 room-problems.the-heating-does-not-work,riscaldamento
 room-problems.the-key-does-not-work,chiave
@@ -269,8 +269,8 @@ taxi.can-you-wait-for-me-here,aspettare
 taxi.could-you-make-it-colder,abbassare
 taxi.could-you-make-it-warmer,alzare
 taxi.may-i-open-the-window,finestrino
-taxi.please-stop-here,fermi
-taxi.please-take-me-here,porti
+taxi.please-stop-here,fermi | Fermati
+taxi.please-take-me-here,porti | Portami
 taxi.please-turn-around,inversione
 time-scheduling.can-we-change-the-time,cambiare
 time-scheduling.how-long-does-it-take,tempo

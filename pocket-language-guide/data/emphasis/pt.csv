@@ -164,8 +164,8 @@ kind-words.you-are-very-kind,amável
 laundry.can-it-be-ready-today,hoje
 laundry.how-much-per-kilo,quilo
 laundry.please-do-not-use-bleach,lixívia
-laundry.please-iron-this,Passe | a ferro
-laundry.please-wash-these-clothes,Lave
+laundry.please-iron-this,Passe | Passa | a ferro
+laundry.please-wash-these-clothes,Lave | Lava
 laundry.when-will-it-be-ready,Quando
 laundry.where-is-a-laundromat,lavandaria
 lost-rescue.i-do-not-know-where-i-am,onde estou
@@ -182,7 +182,7 @@ massage-spa.focus-on-neck,pescoço
 massage-spa.focus-on-shoulders,ombros
 massage-spa.more-gently,suave
 massage-spa.please-avoid-this-area,Não carregue
-massage-spa.please-stop,Pare
+massage-spa.please-stop,Pare | Para
 massage-spa.reply-ask-supervisor,responsável
 massage-spa.reply-cannot-avoid-this-treatment,não pode evitar
 massage-spa.reply-does-it-hurt-there,dói
@@ -273,8 +273,8 @@ taxi.can-you-wait-for-me-here,esperar
 taxi.could-you-make-it-colder,frio
 taxi.could-you-make-it-warmer,quente
 taxi.may-i-open-the-window,janela
-taxi.please-stop-here,Pare
-taxi.please-take-me-here,Leve-me
+taxi.please-stop-here,Pare | Para
+taxi.please-take-me-here,Leve-me | Leva-me
 taxi.please-turn-around,volta
 time-scheduling.can-we-change-the-time,mudar
 time-scheduling.how-long-does-it-take,demora
