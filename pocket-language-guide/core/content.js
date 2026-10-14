@@ -138,8 +138,10 @@ export async function buildContent(ctx, spec, edits) {
   // column; a rule table for the *reader* plus the target's own `ipa` column
   // covers the rest. The curated layer stays authoritative because the sixteen
   // sheets are not mutually consistent, so no deterministic function can match all
-  // of them -- see `core/respell.js`.
-  const respell = { ...await generatedRespellings(ctx, spec, targetRows), ...curated };
+  // of them -- see `core/respell.js`. A curated respelling spells the pack's own
+  // row, so a row the reader's voice replaced keeps the one generated from its IPA.
+  const unvaried = Object.entries(curated).filter(([id]) => targetRows[id] === loadedTarget[id]);
+  const respell = { ...await generatedRespellings(ctx, spec, targetRows), ...Object.fromEntries(unvaried) };
   // Headings are read by the source-language reader, so they follow the gloss. So
   // does the emergency note's frame and its service words -- "110 police" was
   // printing in English on every one of the 225 pairs not glossed into it.

@@ -270,6 +270,21 @@ test('a message is in the owner\'s voice and a reply is never bent to it', () =>
   assert.equal(resolvePhrase({ kind: 'corpus', id: 'a.hurts' }, voiced)?.listener.text, '很痛');
 });
 
+test('a variant row is respelled from its own IPA, never by the respelling curated for the pack row', () => {
+  // A curated respelling is keyed on the concept and spells the pack's row, so asked
+  // for it under "Soy vegana" it would teach a woman the masculine "veh-GAH-no".
+  const voiced = {
+    ...ctx,
+    listenerVoice: {
+      key: 'speaker_gender=feminine',
+      variants: { 'speaker_gender=feminine': { 'a.stop': { text: '请停下（女）', ipa: 'nʏ' } } },
+    },
+    respell: (/** @type {string} */ id, /** @type {string} */ ipa) => (id ? `curated ${id}` : `<${ipa}>`),
+  };
+  assert.equal(resolvePhrase({ kind: 'corpus', id: 'a.stop' }, voiced)?.listener.say, '<nʏ>');
+  assert.equal(resolvePhrase({ kind: 'corpus', id: 'a.hurts' }, voiced)?.listener.say, 'curated a.hurts');
+});
+
 test("the owner's own phrase carries its text and admits it is unreviewed", () => {
   const withCustom = { ...ctx, custom: { mine: { owner: 'No peanuts', listener: '不要花生' } } };
   const got = resolvePhrase({ kind: 'custom', id: 'mine' }, withCustom);

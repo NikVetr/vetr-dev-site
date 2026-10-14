@@ -284,6 +284,8 @@ function inlineControl(label, hint, onOpen) {
  * inventory and the syllable-opening clusters, and a hand-curated sheet first where
  * one exists for the triple. `undefined` for a reader whose language has no table,
  * which is a fact about the data and not a failure -- the line simply does not draw.
+ * A row that is not the pack's own (a variant, a looked-up word) comes with no
+ * concept id, since a curated respelling spells only the row it was written for.
  * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
  * @param {string} listener @param {string} owner
  * @param {Record<string,Record<string,string>>} listenerRows

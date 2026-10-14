@@ -435,8 +435,8 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     }
   }
   const put = (/** @type {string} */ text, value = detail) => (fill ? text.replace('{}', value || BLANK) : text);
-  const listener = say(ctx.listenerVoice, ref.id, base.listener, incoming);
-  const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
+  const { row: listener, varied } = say(ctx.listenerVoice, ref.id, base.listener, incoming);
+  const { row: owner } = say(ctx.ownerVoice, ref.id, base.owner, incoming);
   // **One reading, not the concept's range.** A gloss like "okay / can" documents
   // what the concept covers, which is what a translator or the printed sheet wants;
   // a person handed a phone wants one word. The first alternative is the head one.
@@ -453,13 +453,14 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     // reader's own gender where that matters, and Hebrew's "I am sick" is the case
     // that proves it -- the script is identical for both genders and the
     // pronunciation is not. The respelling is derived from that same variant IPA
-    // by the hook the page supplies, which is the sheet's own respeller.
+    // by the hook the page supplies, which is the sheet's own respeller; a curated
+    // respelling spells the pack's own row, so a variant row never asks for one.
     listener: {
       text: put(primary(listener.text), heard),
       lang: ctx.listener,
       dir: ctx.listenerDir,
       // A slot with no pronunciation blanks the whole line rather than leaving a hole.
-      say: fill && !spoken ? '' : put(cut(ctx.respell?.(ref.id, ipa) || ''), spoken),
+      say: fill && !spoken ? '' : put(cut(ctx.respell?.(varied ? '' : ref.id, ipa) || ''), spoken),
       ipa: fill && !sound ? '' : put(ipa, sound),
     },
     owner: { text: put(primary(owner.text)), lang: ctx.owner, dir: ctx.ownerDir },
@@ -479,8 +480,8 @@ export function resolvePhrase(ref, ctx, incoming = false) {
  * @param {boolean} incoming
  */
 function say(voice, conceptId, row, incoming) {
-  if (!voice?.key) return row;
-  return variantOf({ conceptId, row, variants: voice.variants, key: voice.key, incoming }).row;
+  if (!voice?.key) return { row, varied: false };
+  return variantOf({ conceptId, row, variants: voice.variants, key: voice.key, incoming });
 }
 
 /**

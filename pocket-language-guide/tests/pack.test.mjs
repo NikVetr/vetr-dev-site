@@ -6,6 +6,7 @@ import {
   buildBlocks, fillLanguageSlots, loadCorpus, loadLanguage, loadRespellOverrides,
   sayable,
 } from '../core/pack.js';
+import { buildContent } from '../core/content.js';
 import { referenceSpec } from '../scripts/spec.mjs';
 
 /** The corpus, once. */
@@ -159,6 +160,21 @@ test('a respelling is never substituted into', () => {
   const rows = { [ID]: { text: 'x', respell: 'par-lay voo {source}' } };
   fillLanguageSlots(rows, { locale: 'fr', target: 'fr', source: 'es', names: {} });
   assert.equal(rows[ID].respell, 'par-lay voo {source}', 'left alone for a human to write');
+});
+
+test("a card in a woman's voice respells her row, not the curated man's one", async () => {
+  // The curated sheet spells the pack's own rows, so it gives way wherever the
+  // reader's voice replaced a row; the respelling generated from the variant's IPA
+  // is the one that says what she will say.
+  const corpus = await context();
+  const ctx = { corpus, loadText: (/** @type {string} */ rel) => readFile(rel, 'utf8') };
+  const spec = await referenceSpec('es', 'en');
+  const id = 'dietary-needs.i-am-vegan';
+  const his = await buildContent(ctx, spec);
+  const hers = await buildContent(ctx, { ...spec, speaker: { speaker_gender: 'feminine' } });
+  assert.deepEqual([his.targetRows[id].text, his.respell[id]], ['Soy vegano', 'soy veh-GAH-no']);
+  assert.equal(hers.targetRows[id].text, 'Soy vegana');
+  assert.match(hers.respell[id], /-na$/);
 });
 
 test('every pack agrees on which slots a concept takes', async () => {
