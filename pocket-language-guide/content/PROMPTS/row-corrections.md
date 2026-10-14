@@ -728,3 +728,33 @@ Same rules as above; notes go to `tmp/notes/agents/row-corrections-16.md`. The l
 
 Afterwards rebuild IPA for every language whose text changed, run
 `python3 scripts/validate_data.py`, and list every cell you changed in your notes.
+
+## A seventeenth pass: what the gender alternatives and the sixteenth pass left
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-17.md`. The leads are in
+`tmp/notes/agents/gender-alternatives.md` ("Seen, not touched").
+
+1. **Printed `literal` cells that are a translator's gender note.** 22 rows whose feminine
+   now lives in `variants.csv` still gloss the base row with a note about it -- Polish's
+   twelve *masculine; a woman says zgubiłam*, Gujarati's seven *... (m) — શકતી for a woman*,
+   Croatian's two *man speaking / woman speaking; ...*, Portuguese `thank-you` *-o if male,
+   -a if female*. `literal` prints on the card as a back-translation: rewrite each as one,
+   of the base row's own words, and check the variant rows' literals the same way.
+2. **Portuguese `medical-conditions.i-am-allergic-to-sulfa-drugs`** keeps the `text_alt`
+   *Sou alérgica · sulfas*, which reads as garbled; the feminine is its variant row's
+   business. Fix or clear it.
+3. **German requests in the bare infinitive.** About twenty rows said to a person are
+   *Bitte* + infinitive (*Bitte tippen und zeigen.*, the laundry, SIM and massage
+   requests), the form Duden gives for official instructions and not for a request
+   (the sixteenth pass's sources). Make each a *Sie* imperative request as the pack's
+   other requests are, keep a sign or a notice to no one (*Bitte nicht stören*) as it is,
+   and where a changed row is on a board, give it its `register=familiar` *du* row as the
+   sixteenth pass did for the map.
+4. **Hebrew `hiking-parks.is-this-the-way-to`** *זה הדרך* pairs the masculine
+   demonstrative with the feminine *דרך*; check it against the Hebrew Academy or a grammar
+   (*זו / זאת הדרך*) and fix it if so.
+5. **Arabic `numbers-money.hryvnia-symbol`** is romanised *hrīfniyā* without the `(al-ramz)`
+   its sibling symbol rows carry, as its script does; make it agree.
+
+Afterwards rebuild IPA for every language whose text changed, run
+`python3 scripts/validate_data.py`, and list every cell you changed in your notes.
