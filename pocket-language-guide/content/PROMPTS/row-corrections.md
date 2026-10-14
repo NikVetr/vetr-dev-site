@@ -703,3 +703,28 @@ the closing lists of `tmp/notes/agents/row-corrections-13b.md` and `row-correcti
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A sixteenth pass: what the open questions and the Arabic route left
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-16.md`. The leads are in
+`tmp/notes/agents/open-questions.md` ("Seen, not touched") and the Arabic route's commit
+(`git show 1fdfc3fae`).
+
+1. **German `directions.please-show-me-on-the-map`** *Bitte auf der Karte zeigen.* is the
+   bare infinitive, which de.wikipedia's *Imperativ* article gives for an instruction to no
+   one in particular and not for a request; its `text_alt` *Zeigen Sie es mir bitte auf der
+   Karte.* is the request. Check it against Duden's grammar and the pack's other requests,
+   and swap them if it holds.
+2. **The Korean register switch's labels** are `해요` / `해`, two verb endings, as the Japanese
+   ones were copulas until the open-questions pass gave them the styles' names (丁寧体 /
+   普通体). Give Korean the names its own grammars give the two styles (the National
+   Institute of Korean Language, ko.wikipedia *한국어의 높임법*), in the `label` cells of
+   `data/registry/listener-axes.csv`, if a source names them in words a reader would know.
+3. **Arabic rows still read by espeak.** The Arabic IPA now comes from `romanization_ala-lc`
+   wherever a row has one; the 49 currency glosses in `data/lang/ar/numbers.csv` and the `km`
+   language name in `data/registry/language-names.csv` have none, so they are still espeak's
+   guesses. Give each its ALA-LC romanisation from the script by the LC table (the pack's
+   other cells show the column's conventions), then `python3 scripts/build_ipa.py --only ar`.
+
+Afterwards rebuild IPA for every language whose text changed, run
+`python3 scripts/validate_data.py`, and list every cell you changed in your notes.
