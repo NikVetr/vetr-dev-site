@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,O Wi-Fi é grátis?,,ʊ wˈifi ɛ ɡrˈatʃis,,2,pt-a
 hotel-basics.how-much-per-night,Quanto custa por noite?,,kwˈɐ̃ŋtʊ kˈustæ por nˈoɪtʃy,,2,pt-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,O pequeno-almoço está incluído?,O café da manhã está incluído?,ʊ pˌekˈenʊˌaʊmosw estˌa ˌiŋkluˈidʊ,,2,pt-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Posso ver o quarto?,,pˌɔsʊ vˈeɾ ʊ kwˈaɾətʊ,,2,pt-agent-v1;ipa=espeak
-hotel-basics.for-nights,Para {} noites,,pˌaɾæ {} nˈoɪtʃys,,2,pt-agent-v1;ipa=espeak
+hotel-basics.for-nights,Número de noites: {},,nˈũmeɾʊ dʒy nˈoɪtʃys {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,pt-agent-v1;fix=Dicionário Priberam da Língua Portuguesa número 4 (Quantidade -- porção) and noite (nome feminino);was=Para {} noites (the plural -- wrong for one: para uma noite);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergia a medicamentos: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Duas camas, por favor",,"dˈuæs kˈɐ̃mæs, por favˈor",,2,pt-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Há ar condicionado?,,a ˈar kˌoŋdʒisˌionˈadʊ,,2,pt-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Posso fazer check-out mais tarde?,,pˌɔsʊ fazˌer ʃˈekowtʃ mˈaɪs tˈaɾədʒy,,2,pt-agent-v1;ipa=espeak

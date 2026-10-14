@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,వైఫై ఉచితమా?,,vaiphai ucitamā?,�
 hotel-basics.how-much-per-night,ఒక రాత్రికి ఎంత?,,oka rātriki eṁta?,oka raːtriki enta,,2,te-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,టిఫిన్ కలిపి ఉందా?,,ṭiphin kalipi uṁdā?,ʈipʰin kalipi undaː,ṭiphin is breakfast in Indian English and in Telugu,2,te-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,గది చూడవచ్చా?,,gadi cūḍavaccā?,ɡadi tʃuːɖaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak
-hotel-basics.for-nights,{} రాత్రులకు,,{} rātrulaku,{} raːtrulaku,,2,te-agent-v1;ipa=espeak
+hotel-basics.for-nights,రాత్రుల సంఖ్య: {},,rātrula saṁkhya: {},raːtrula saŋkʰja {},number of nights: {},2,te-agent-v1;fix=Gwynn A Telugu-English Dictionary (DSAL) p. 524 సంఖ్య (n. number) and p. 452 రాత్రి (n. night);fix=te.wikipedia గ్లోబల్ వార్మింగ్ rev 4971265 (చల్లని రాత్రుల సంఖ్య తగ్గగా) and సూర్య దేవాలయం (బీహార్) rev 4958867 (ఒక రాత్రికి);was={} రాత్రులకు ({} rātrulaku: the plural -- wrong for one: ఒక రాత్రికి);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame మందు అలర్జీ: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,రెండు మంచాలు కావాలి,,reṁḍu maṁcālu kāvāli,reɳɖu maɲtʃaːlu kaːʋaːli,,2,te-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,ఏసీ ఉందా?,,ēsī uṁdā?,eːsiː undaː,,2,te-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,ఆలస్యంగా చెక్-అవుట్ చేయవచ్చా?,,ālasyaṁgā cek-avuṭ cēyavaccā?,aːlasjaŋɡaː tʃekaʋuʈ tʃeːjaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak

@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,वाय-फाय मोफत आहे का?,,v
 hotel-basics.how-much-per-night,एका रात्रीचे भाडे किती?,,ēkā rātrīcē bhāḍē kitī?,ˈeːkaː ɾˈaːtɾicˌeː bʰˈaːɖeː kˈɪti,,2,mr-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,नाश्ता समाविष्ट आहे का?,,nāśtā samāviṣṭa āhē kā?,nˈaːʃtaː sˌəmaːvˈɪʂʈ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,खोली बघता येईल का?,,khōlī baghatā yēīla kā?,kʰˈoːli bˈʌɡʰtˌaː jeːˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
-hotel-basics.for-nights,{} रात्रींसाठी,,{} rātrīṁsāṭhī,{} ɾˈaːtɾĩsˌaːʈʰi,,2,mr-agent-v1;ipa=espeak
+hotel-basics.for-nights,रात्रींची संख्या: {},,rātrīṁcī saṁkhyā: {},ɾˈaːtɾĩcˌi sˈʌŋkʰjaː {},number of nights: {},2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 150 संख्या (f. number) and p. 126 रात्र (f.(i) night);fix=mr.wikipedia नवरात्र rev 2353070 (नऊ रात्रींचा समूह) -- भारत जोडो यात्रा rev 2592160 (the table heading दिवसांची संख्या) -- अनाहत (चित्रपट) rev 2606043 (एका रात्रीसाठी);was={} रात्रींसाठी ({} rātrīṁsāṭhī: the oblique plural -- wrong for one: एका रात्रीसाठी);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame औषधाची ऍलर्जी: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"दोन बेड द्या, कृपया",,"dōna bēḍa dyā, kr̥payā","dˈoːn bˈeːɖ djˈaː, kɾˈʊpjˌaː","two separate beds, not one double",2,mr-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,एसी आहे का?,,ēsī āhē kā?,ˈeːsi ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,उशिरा चेक-आऊट करता येईल का?,,uśirā cēka-āūṭa karatā yēīla kā?,ˈʊʃɪɾˌaː cˈeːkaːuʈ kˈʌɾtˌaː jeːˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak

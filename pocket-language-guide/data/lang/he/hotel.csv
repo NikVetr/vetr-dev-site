@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,ה-Wi-Fi בחינם?,הַ-Wi-Fi בְּחִינָּם?
 hotel-basics.how-much-per-night,כמה ללילה?,כַּמָּה לְלַיְלָה?,káma leláyla?,kˈama lelˈajla,how much per night?,2,he-agent-v1;ipa=bgn
 hotel-basics.is-breakfast-included,ארוחת בוקר כלולה?,אֲרוּחַת בּוֹקֶר כְּלוּלָה?,aruẖat bóqer kelula?,aʁuxˈat bˈokeʁ kelulˈa,is breakfast included?,2,he-agent-v1;ipa=bgn
 hotel-basics.may-i-see-the-room,אפשר לראות את החדר?,אֶפְשָׁר לִרְאוֹת אֶת הַחֶדֶר?,efshar lirot et haẖéder?,efʃˈaʁ liʁˈot ˈet haxˈedeʁ,,2,he-agent-v1;ipa=bgn
-hotel-basics.for-nights,ל{} לילות,לְ{} לֵילוֹת,le{} leylot,lˈe {} lejlˈot,for {} nights,2,he-agent-v1;ipa=bgn
+hotel-basics.for-nights,מספר לילות: {},מִסְפַּר לֵילוֹת: {},mispar leylot: {},mispˈaʁ lejlˈot {},number of nights: {},2,he-agent-v1;fix=he.wikipedia שמות מספרים rev 42849624 (המספר המונה יבוא לפני שם העצם אליו הוא מתייחס (חוץ מהמספר 1 שיבוא אחרי שם העצם) ... אמא אחת ואבא אחד);fix=he.wikipedia חדר לפי שעה rev 42853588 (התעריף נקבע על פי מספר לילות);was=ל{} לילות (le{} leylot: the plural -- wrong for one: ללילה אחד);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame אלרגיה לתרופות: {} and its construct מִסְפַּר רַכֶּבֶת);row-corrections-v13;ipa=bgn
 hotel-basics.two-beds,"שתי מיטות, בבקשה","שְׁתֵּי מִיטּוֹת, בְּבַקָּשָׁה","shetey mitot, bevaqasha","ʃetˈej mitˈot, bevakaʃˈa","two beds, please",2,he-agent-v1;ipa=bgn
 hotel-basics.is-there-air-conditioning,יש מזגן?,יֵשׁ מַזְגָן?,yesh mazgan?,jˈeʃ mazɡˈan,is there an air conditioner?,2,he-agent-v1;ipa=bgn
 hotel-requests.can-i-check-out-later,אפשר לעשות צ׳ק-אאוט יותר מאוחר?,אֶפְשָׁר לַעֲשׂוֹת צֶ׳ק-אַאוּט יוֹתֵר מְאוּחָר?,efshar la‘asot čeq-aut yoter meuẖar?,efʃˈaʁ laasˈot tʃekaˈut jotˈeʁ meuxˈaʁ,can check-out be done later?,2,he-agent-v1;ipa=bgn

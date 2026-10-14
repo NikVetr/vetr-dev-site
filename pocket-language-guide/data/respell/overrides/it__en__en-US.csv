@@ -372,7 +372,7 @@ laundry.coin-operated,ah jet-TOH-nee,A gettoni
 hotel-basics.how-much-per-night,KWAN-toh KOS-tah ah NOT-teh,Quanto costa a notte?
 hotel-basics.is-breakfast-included,lah koh-lah-tsee-OH-neh eh kom-PREH-zah,La colazione è compresa?
 hotel-basics.may-i-see-the-room,POS-soh veh-DEH-reh lah KAH-meh-rah,Posso vedere la camera?
-hotel-basics.for-nights,per {} NOT-tee,Per {} notti
+hotel-basics.for-nights,NOO-meh-roh dee NOT-tee: {},Numero di notti: {}
 hotel-basics.two-beds,"DOO-eh LET-tee seh-pah-RAH-tee, per fah-VOH-reh","Due letti separati, per favore"
 hotel-basics.is-there-air-conditioning,cheh LAH-ree-ah kon-dee-tsee-oh-NAH-tah,C'è l'aria condizionata?
 hotel-requests.what-time-is-check-out,ah keh OH-rah eh eel chek-OWT,A che ora è il check-out?
@@ -731,7 +731,7 @@ utility-templates.may-i,POS-soh {},Posso {}?
 utility-templates.please-do-not-add,"SEN-tsah {}, per fah-VOH-reh","Senza {}, per favore"
 utility-templates.do-you-have,ah-VEH-teh {},Avete {}?
 utility-templates.please-write-the-number,"SKREE-vah lah CHEE-frah, per fah-VOH-reh","Scriva la cifra, per favore"
-utility-templates.i-need,mee SER-veh {},Mi serve {}
+utility-templates.i-need,oh bee-ZOH-nyoh dee {},Ho bisogno di {}
 utility-templates.is-there-nearby,cheh oon {} kwee vee-CHEE-noh,C'è un {} qui vicino?
 utility-templates.how-much-is,KWAN-toh KOS-tah {},Quanto costa {}?
 utility-templates.is-this,KWES-toh eh {},Questo è {}?

@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Is wifi gratis?,,ɪs ʋˈifi ɣrˈaːtɪs,,2,nl-agent
 hotel-basics.how-much-per-night,Hoeveel kost het per nacht?,,huvˈeːl kˈɔst hət pˈɛr nˈɑxt,,2,nl-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Is het ontbijt inbegrepen?,,ɪs hət ɔntbˈɛɪt ˈɪnbəɣrˌeːpən,,2,nl-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Mag ik de kamer zien?,,mɑx ɪk də kˈaːmər zˈin,,2,nl-agent-v1;ipa=espeak
-hotel-basics.for-nights,Voor {} nachten,,vˈɔːr {} nˈɑxtən,,2,nl-agent-v1;ipa=espeak
+hotel-basics.for-nights,Aantal nachten: {},,ˈaːntˌɑl nˈɑxtən {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,nl-agent-v1;fix=ANW (Algemeen Nederlands Woordenboek) nacht (Enkelvoud nacht -- Meervoud nachten: bij een hotelverblijf van minimum 7 nachten) and aantal (zelfstandig naamwoord -- het -- and the ANW's own field label Aantal lettergrepen);was=Voor {} nachten (the plural -- wrong for one: voor één nacht);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Allergie voor medicijnen: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Twee bedden, alstublieft.",,"tʋˈeː bˈɛdən, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Is er airconditioning?,,ɪs ər ˈɑjrkɔndˌiʃoːnˌɪŋ,,2,nl-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Kan ik later uitchecken?,,kɑn ɪk lˈaːtər ˈœyttʃˌɛkən,,2,nl-agent-v1;ipa=espeak

@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Är wifin gratis?,,ɛːr viːfˈiːn ɡrˈɑːtɪs,,2
 hotel-basics.how-much-per-night,Hur mycket per natt?,,hˈʉr mˈykət pˈɛːr nˈat,,2,sv-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Ingår frukost?,,ˈɪŋoːr frˈʉkɔst,,2,sv-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Får jag se rummet?,,fˈoːr jɑːɡ sˈeː rˈɵmət,,2,sv-agent-v1;ipa=espeak
-hotel-basics.for-nights,I {} nätter.,,iː {} nˈɛtːər,,2,sv-agent-v1;ipa=espeak
+hotel-basics.for-nights,Antal nätter: {},,antˈɑːl nˈɛtːər {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,sv-agent-v1;fix=SO (Svenska Akademien -- svenska.se) antal (i heltal angiven mängd: antalet åskådare var över 20 000) and natt (de tillbringade en natt tillsammans -- rummet kostar fem hundra kronor natten);fix=SAOL natt (singular natt -- plural nätter);was=I {} nätter. (the plural -- wrong for one: i en natt);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Läkemedelsallergi: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Två sängar, tack.",,"tvˈoː sˈɛŋar, tˈak",,2,sv-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Finns det luftkonditionering?,,fˈɪns deːt lˌɵftkɔndiːsxˈuːneːrˌɪŋ,,2,sv-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Kan jag checka ut senare?,,kan jɑːɡ ʃˈɛkːa ˈʉt sˈeːnarə,,2,sv-agent-v1;ipa=espeak

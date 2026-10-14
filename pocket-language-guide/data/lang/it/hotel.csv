@@ -37,7 +37,7 @@ laundry.coin-operated,A gettoni,Funziona a monete,a dʒettˈonɪ,,2,it-agent-v1;
 hotel-basics.how-much-per-night,Quanto costa a notte?,,kwˈanto kˈɔsta a nˈɔtte,,2,it-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,La colazione è compresa?,,la kolatsiˈone e komprˈeza,,2,it-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Posso vedere la camera?,,pˈɔsso vedˈere la kˈamera,,2,it-agent-v1;ipa=espeak
-hotel-basics.for-nights,Per {} notti,,pˈer {} nˈɔttɪ,,2,it-agent-v1;ipa=espeak
+hotel-basics.for-nights,Numero di notti: {},,nˈumero dɪ nˈɔttɪ {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,it-agent-v1;fix=Treccani numero 1 (a indicarne la quantità (anch'essa detta numero): il n. dei libri -- dei voti ... degli alunni di una scuola) and notte (s. f.);was=Per {} notti (the plural -- wrong for one: per una notte);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Allergia ai farmaci: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Due letti separati, per favore",,"dˈue lˈɛttɪ sepaɾˈatɪ, per favˈore",,2,it-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,C'è l'aria condizionata?,,tʃe lˈaria konditsjonˈata,,2,it-agent-v1;ipa=espeak
 hotel-requests.what-time-is-check-out,A che ora è il check-out?,,a ke ˈora e il tʃˈɛkkaʊt,,2,it-agent-v1;ipa=espeak

@@ -27,7 +27,7 @@ hotel-basics.is-wi-fi-free,¿El wifi es gratis?,,el wˈifi ˈes ɡɾˈatis,,2,es
 hotel-basics.how-much-per-night,¿Cuánto cuesta por noche?,,kwˈanto kwˈesta poɾ nˈotʃe,,2,es-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,¿Incluye el desayuno?,,inklˈuʝe el dˌesaʝˈuno,,2,es-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,¿Puedo ver la habitación?,,pwˈedo bˈeɾ la ˌabitasjˈon,,2,es-agent-v1;ipa=espeak
-hotel-basics.for-nights,Por {} noches,,pˈoɾ {} nˈotʃes,,2,es-agent-v1;ipa=espeak
+hotel-basics.for-nights,Número de noches: {},,nˈumeɾo de nˈotʃes {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,es-agent-v1;fix=Espasa-Calpe Diccionario de la lengua española 2005 (the pack's dictionary -- read on WordReference's licensed copy) número (Cantidad indeterminada de personas -- animales o cosas: asistió un gran número de espectadores) and noche (f. -- pl. noches);was=Por {} noches (the plural -- wrong for one: por una noche);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergia a medicamentos: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Dos camas, por favor",,"dˈos kˈamas, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,¿Hay aire acondicionado?,,ˈaɪ ˈaɪɾe ˌakondˌisjonˈado,,2,es-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,¿Puedo hacer el check-out más tarde?,,pwˈedo asˈeɾ el tʃˈekowt mˈas tˈaɾde,,2,es-agent-v1;ipa=espeak

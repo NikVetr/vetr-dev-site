@@ -27,7 +27,7 @@ hotel-basics.is-wi-fi-free,Le wifi est-il gratuit ?,,lə waɪfaɪ ɛtil ɡʁaty
 hotel-basics.how-much-per-night,Combien par nuit ?,,kɔ̃bjɛ̃ paʁ nyˈi,,2,fr-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Le petit-déjeuner est-il inclus ?,,lə pətideʒøne ɛtil ɛ̃klˈy,,2,fr-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Puis-je voir la chambre ?,,pyiʒ vwaʁ la ʃˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
-hotel-basics.for-nights,Pour {} nuits,,pˈuʁ {} nyˈi,,2,fr-agent-v1;ipa=espeak
+hotel-basics.for-nights,Nombre de nuits : {},,nɔ̃bʁ də nyˈi {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,fr-agent-v1;fix=Larousse nombre 3 (Quantité -- pluralité d'éléments de même nature) and nuit (Nuit (d'hôtel) -- nuit passée à l'hôtel -- nuitée);was=Pour {} nuits (the plural -- wrong for one: pour une nuit);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Allergie médicamenteuse : {} -- with its no-break space before the colon);row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Deux lits séparés, s'il vous plaît",,"dø li sepaʁˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Y a-t-il la climatisation ?,la clim,i atil la klimatizatjˈɔ̃,,2,fr-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Puis-je partir plus tard ?,,pyiʒ paʁtiʁ ply tˈaʁ,,2,fr-agent-v1;ipa=espeak

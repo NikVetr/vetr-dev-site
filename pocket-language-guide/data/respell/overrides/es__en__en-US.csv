@@ -710,7 +710,7 @@ emergency-medical.i-am-bleeding-badly,es-TOY san-GRAN-doh MOO-cho,Estoy sangrand
 lost-rescue.my-friend-is-hurt,mee ah-MEE-go es-TA eh-REE-doh,Mi amigo está herido
 dietary-needs.does-it-contain-fish-stock,YEH-va KAL-doh deh pes-KAH-doh,¿Lleva caldo de pescado?
 dietary-needs.does-it-contain-pork-stock,YEH-va KAL-doh deh SER-doh,¿Lleva caldo de cerdo?
-hotel-basics.for-nights,por {} NO-ches,Por {} noches
+hotel-basics.for-nights,NOO-meh-ro deh NO-ches: {},Número de noches: {}
 hotel-requests.is-there-a-safe,eye KAH-ha FWER-teh,¿Hay caja fuerte?
 payment-receipt.is-tax-included,el eem-PWES-toh es-TA een-kloo-EE-doh,¿El impuesto está incluido?
 shopping.where-can-i-buy,DON-deh PWEH-doh kom-PRAR {},¿Dónde puedo comprar {}?

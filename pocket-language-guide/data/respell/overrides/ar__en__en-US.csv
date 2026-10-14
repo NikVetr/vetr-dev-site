@@ -685,7 +685,7 @@ emergency-medical.i-am-bleeding-badly,A-na AN-zif bi-SHID-da,أنا أنزف ب�
 lost-rescue.my-friend-is-hurt,sa-DEE-kee moo-SAAB,صديقي مصاب
 dietary-needs.does-it-contain-fish-stock,hal yah-TA-wee A-la MA-rak SA-mak,هل يحتوي على مرق سمك؟
 dietary-needs.does-it-contain-pork-stock,hal yah-TA-wee A-la MA-rak LAHM al-khin-ZEER,هل يحتوي على مرق لحم الخنزير؟
-hotel-basics.for-nights,li-MOOD-dat … la-YAAL,لمدة {} ليال
+hotel-basics.for-nights,A-dad al-la-YAA-lee: {},عدد الليالي: {}
 hotel-requests.is-there-a-safe,hal TOO-jad KHAZ-na,هل توجد خزنة؟
 payment-receipt.is-tax-included,hal ad-da-REE-ba mash-MOO-la,هل الضريبة مشمولة؟
 shopping.where-can-i-buy,AY-na ash-TA-ree,أين أشتري {}؟

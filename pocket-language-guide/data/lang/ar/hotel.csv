@@ -27,7 +27,7 @@ hotel-basics.is-wi-fi-free,هل الواي فاي مجاني؟,,hal al-wāy fāy
 hotel-basics.how-much-per-night,بكم الليلة؟,,bikam al-laylah?,bˈakam ʔallˈajla,,2,ar-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإفطار مشمول؟,hal al-fuṭūr mashmūl?,hˈal ʔalfˈat̪uːr mˈaʃmuːl,,2,ar-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,hˈal jmknnˈiː ɹˈuʔja ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
-hotel-basics.for-nights,لمدة {} ليال,,li-muddat {} layāl,lmdt {} liːˌaːl,for a period of {} nights,2,ar-agent-v1;ipa=espeak
+hotel-basics.for-nights,عدد الليالي: {},,ʿadad al-layālī: {},ʕˈadad ʔallajˈaːliː {},number of nights: {},2,ar-agent-v1;fix=ar.wikipedia العدد والمعدود rev 76218556 (the table: 1 و2 إفراد وتثنية -- 3 إلى 10 جمع -- every other number إفراد -- تمييز الأعداد من 11 إلى 99 مفرد منصوب);fix=ar.wikipedia السياحة في ألمانيا rev 76519602 (وصل عدد الليالي التي أمضاها السياح في فنادق ألمانيا);was=لمدة {} ليال (li-muddat {} layāl: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame حساسية دوائية: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,ʔɹˈiːd sˌaɹiːɹˈiːna mˌunfas̪ilˈiːna,two separate beds,2,ar-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jwdʒd tˈakjiːf,,2,ar-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,hˈal jmkˈunna tˈaʔxiːr ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak

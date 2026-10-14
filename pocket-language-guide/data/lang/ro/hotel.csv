@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Wi-Fi-ul este gratuit?,,wˈifiul jˌeste ɡratwˈit,,
 hotel-basics.how-much-per-night,Cât costă pe noapte?,,kˈɨt kˈostə pe nˈɔapte,,2,ro-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Micul dejun este inclus?,,mˈikul deʒˈun jˌeste inklˈus,,2,ro-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Pot vedea camera?,,pot vedˈea kˈameɾˌa,,2,ro-agent-v1;ipa=espeak
-hotel-basics.for-nights,Pentru {} nopți,,pˌentru {} nˈoptsʲ,,2,ro-agent-v1;ipa=espeak
+hotel-basics.for-nights,Număr de nopți: {},,nˈumər de nˈoptsʲ {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,ro-agent-v1;fix=DEX '09 număr I.1 (Cantitate de elemente de același fel) and DOOM 3 noapte (s. f. -- pl. nopți);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni -- 10 până la 20 de vizitatori -- vreo douăzeci de case);was=Pentru {} nopți (the plural -- wrong for one (pentru o noapte) and from twenty on (pentru 20 de nopți));rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergie la medicamente: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Două paturi, vă rog",,"dˈouˌə patˈurʲ, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Este aer condiționat?,,jˌeste ˈaɪer kˌonditsjonˈat,,2,ro-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Pot face check-out mai târziu?,,pot fˌatʃe kˈekkoʊt maɪ tɨrzˈiu,,2,ro-agent-v1;ipa=espeak

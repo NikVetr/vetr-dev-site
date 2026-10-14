@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Je li Wi-Fi besplatan?,,je li vˈajfaj besplatan,,2,h
 hotel-basics.how-much-per-night,Koliko košta noćenje?,,koliko kˈoʃta notɕeɲe,,2,hr-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Je li doručak uključen?,,je li dorutʃak ukʎutʃen,,2,hr-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Mogu li vidjeti sobu?,,mˈoɡu li vidjeti sˈobu,,2,hr-agent-v1;ipa=espeak
-hotel-basics.for-nights,Na {} noći,,nˈa {} nˈotɕi,"noći is both the paucal and the genitive plural of noć, so the frame is right from two nights up",2,hr-agent-v1;ipa=espeak
+hotel-basics.for-nights,Broj noći: {},,brˈoj nˈotɕi {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=HJP (Hrvatski jezični portal) noć (A jd noć -- G mn noći) and broj 1;fix=hr.wikipedia Hrvatski jezik rev 7583866 (malina koja se pojavljuje uz brojeve dva -- tri i četiri (jedan stup -- dva stupa -- pet stupova));was=Na {} noći (the paucal and genitive plural -- wrong for one: na jednu noć);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergija na lijek: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,"Dva odvojena ležaja, molim",,"dvˈa odvojena leʒaja, mˈolim",'two separate beds' -- said so it is not read as one double,2,hr-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Ima li klima uređaj?,,ima li klˈima uredʑaj,,2,hr-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Mogu li se odjaviti kasnije?,,mˈoɡu li sˈe odjaviti kasnije,,2,hr-agent-v1;ipa=espeak

@@ -1530,7 +1530,11 @@ REPAIR = {
     # which is a different string: the abbreviation expansion writes `ii` where the
     # real word has `iː`. Stressed `kˈam` because every Arabic row carries a mark,
     # monosyllables included (`hˈum`, `lˈajj`).
-    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam")],
+    #
+    # Unvowelled الليالي "the nights" comes back without its y, `ʔalliːˌaːliː`; it is
+    # *al-layālī* (Wehr: layāl, pl. of layla), stressed on the long penult. One row
+    # has it, `hotel-basics.for-nights`.
+    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam"), ("ʔalliːˌaːliː", "ʔallajˈaːliː")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
     # soft sign on a final consonant comes out as: `dvʲˈerɪ^` for дверь /dvʲerʲ/.
     # And espeak writes ы as `y`, which in IPA is the close front *rounded* vowel:

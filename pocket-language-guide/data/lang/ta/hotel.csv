@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,வைஃபை இலவசமா?,,vaiḥpai ilavac
 hotel-basics.how-much-per-night,ஒரு இரவுக்கு எவ்வளவு?,,oru iravukku evvaḷavu?,oɾɯ iɾʌvɯkkɯ evvʌɭʌvɯ,,2,ta-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,காலை உணவு சேர்த்திருக்கிறதா?,,kālai uṇavu cērttirukkiṟatā?,kaːlaɪ uɳʌvɯ seːrttiɾɯkkirʌdaː,,2,ta-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,அறையைப் பார்க்கலாமா?,,aṟaiyaip pārkkalāmā?,araɪjaɪp paːrkkʌlaːmaː,,2,ta-agent-v1;ipa=espeak
-hotel-basics.for-nights,{} இரவுகளுக்கு,,{} iravukaḷukku,{} iɾʌvɯɡʌɭɯkkɯ,,2,ta-agent-v1;ipa=espeak
+hotel-basics.for-nights,இரவுகளின் எண்ணிக்கை: {},,iravukaḷiṉ eṇṇikkai: {},iɾʌvɯɡʌɭin eɳɳikkaɪ {},number of nights: {},2,ta-agent-v1;fix=Cre-A Kriyāvin Taṟkālat Tamiḻ Akarāti (DSAL) p. 170 எண்ணிக்கை ((total) number: இந்த அரண்மனையில் உள்ள அறைகளின் எண்ணிக்கை நூறு) and p. 100 இரவு;fix=ta.wikipedia ரிசிகேசு rev 4553910 (ஒரு விடுதி அறைக்கு சராசரியாக ஒரு இரவுக்கு);was={} இரவுகளுக்கு ({} iravukaḷukku: the plural -- wrong for one: ஒரு இரவுக்கு);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame மருந்து ஒவ்வாமை: {});row-corrections-v13;ipa=espeak
 hotel-basics.two-beds,இரண்டு கட்டில் வேண்டும்,,iraṇṭu kaṭṭil vēṇṭum,iɾʌɳɖɯ kʌʈʈil veːɳɖɯm,,2,ta-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,குளிரூட்டி உள்ளதா?,ஏசி உள்ளதா?,kuḷirūṭṭi uḷḷatā?,kuɭiɾɯʈʈi uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,தாமதமாகச் செக் அவுட் செய்யலாமா?,,tāmatamākac cek avuṭ ceyyalāmā?,taːmʌdʌmaːɡʌtʃ tʃek avɯɖ sejjʌlaːmaː,,2,ta-agent-v1;ipa=espeak

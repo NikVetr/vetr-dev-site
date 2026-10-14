@@ -711,7 +711,7 @@ dietary-needs.does-it-contain-fish-stock,ee ah-teel dew boo-yohn duh pwah-SOHN,Y
 dietary-needs.does-it-contain-pork-stock,ee ah-teel dew boo-yohn duh por,Y a-t-il du bouillon de porc ?
 payment-receipt.is-tax-included,lah tay-vay-AH eh tehn-KLEWZ,La TVA est incluse ?
 shopping.where-can-i-buy,oo pwee-zhuh ash-TAY {},Où puis-je acheter {} ?
-hotel-basics.for-nights,poor {} NWEE,Pour {} nuits
+hotel-basics.for-nights,nohm-bruh duh NWEE : {},Nombre de nuits : {}
 hotel-requests.is-there-a-safe,ee ah-teel uhn koh-fruh FOR,Y a-t-il un coffre-fort ?
 emergency-medical.i-have-chest-pain,zhay ewn doo-lur ah lah pwah-TREEN,J'ai une douleur à la poitrine
 lost-rescue.i-lost-my-wallet,zhay pair-dew mohn por-tuh-FUHY,J'ai perdu mon portefeuille
