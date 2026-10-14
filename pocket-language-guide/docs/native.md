@@ -269,8 +269,8 @@ account in Accounts settings". What is left is the owner's:
    Integrations, App Manager role) and keep the `.p8` on the Mac, outside the
    repository.
 6. **Decide what the store sees**: the icon and launch image are the site's own mark
-   (`scripts/build_app_icons.mjs` renders them from `favicon.svg`; replace the file
-   and re-run to change them), screenshots and store text are not written, and the
+   (`scripts/build_app_icons.mjs` renders them from `data/brand/mark.svg`; replace
+   the file and re-run to change them), screenshots and store text are not written, and the
    privacy answers -- the app collects nothing and sends nothing -- are what App
    Store Connect records as "Data Not Collected".
 

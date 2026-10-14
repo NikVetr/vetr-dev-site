@@ -5,8 +5,10 @@ language, a wart is the thing everyone notices, as a tourist is, and a *Wanderwa
 is the person who leads a hiking club. The repository folder and the package keep the
 working name, `pocket-language-guide`. The mark is a phrase card and a landscape card
 overlapping, drawn once as flat paths in `data/brand/mark.svg` (green, with a sun) and
-`data/brand/mark-dark.svg` (blue, with a crescent moon); the favicon carries both and
-follows the system's scheme, the header shows whichever the page's scheme asks for,
+`data/brand/mark-dark.svg` (blue, with a crescent moon); the favicon is the landscape
+card alone, which fills a square tab icon where the whole mark could fill two thirds of
+it, green on a light browser and orange on a dark one; the header shows whichever drawing
+the page's scheme asks for,
 `scripts/build_app_icons.mjs` draws every launcher icon from the green one, and
 `scripts/build_logo.mjs` writes it as the path data the cards print. The same script
 writes `data/brand/mark-loading.svg` and `-dark.svg`, the mark that moves while a page is
