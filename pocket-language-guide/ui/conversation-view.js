@@ -551,6 +551,10 @@ const LOWER = 'M133 57H219C235 57 248 70 248 86V142C248 157.4 236.1 170 221 171L
  * @param {HTMLElement} root
  */
 function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label') {
+  if (root.classList.contains('board-grid-mosaic') && !root.classList.contains('board-grid-results')) {
+    fitMosaic(root, labelSel);
+    return;
+  }
   if (root.classList.contains('board-grid-words') && !root.classList.contains('board-grid-results')) {
     fitWords(root, labelSel);
     return;
@@ -628,7 +632,7 @@ function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label')
  * rows are `auto` here, and share what is left over. For a reader who would rather
  * read one size of type than see the buttons line up. The same tests as a cell's
  * own fit: nothing may overflow the grid along its block axis, and no word may be
- * broken to make a size fit.
+ * broken to make a size fit. Returns the size it settled on.
  * @param {HTMLElement} root @param {string} labelSel
  */
 function fitWords(root, labelSel) {
@@ -647,8 +651,50 @@ function fitWords(root, labelSel) {
       if (fits(mid)) lo = mid; else hi = mid;
     }
     fits(lo);
+  } else {
+    lo = hi;
   }
   for (const label of labels) label.style.overflowWrap = '';
+  return lo;
+}
+
+/** How many lines a mosaic tries setting each button's words in; a fourth never won. */
+const MOSAIC_LINES = [1, 2, 3];
+
+/**
+ * Buttons as a mosaic: in their order, wrapping into rows, each as wide as its words
+ * and growing with its row to fill the screen's width, the rows sharing its height --
+ * a row of short buttons beside a row with one long one. Every label at one size, the
+ * largest `fitWords` finds.
+ *
+ * **As wide as its words set in a few lines, not in one.** A width that follows a
+ * label's whole length leaves a short one no room to wrap, so every label stays on one
+ * line, the width sets the type and the height goes unused: the German taxi requests
+ * came out at 13px on a phone. So each label is measured once, as one line and as its
+ * longest word, and given the width of its words in one, two or three lines -- never
+ * less than that word -- in `em`, so it follows every size the search tries. The count
+ * that lets the largest type is kept: a tall phone keeps more lines than a desktop.
+ * @param {HTMLElement} root @param {string} labelSel
+ */
+function fitMosaic(root, labelSel) {
+  const labels = [...root.querySelectorAll(labelSel)].map((n) => /** @type {HTMLElement} */ (n));
+  /** @param {HTMLElement} label @param {string} size */
+  const ems = (label, size) => { label.style.inlineSize = size; return widestLine(label) / MAX_CELL_PX; };
+  // Measured on its own, not shrunk to its button: shrunk, a long label wraps and
+  // measures as a short one.
+  const words = labels.map((label) => {
+    label.style.flex = 'none';
+    label.style.fontSize = `${MAX_CELL_PX}px`;
+    const measured = { line: ems(label, 'max-content'), word: ems(label, 'min-content') };
+    label.style.flex = '';
+    return measured;
+  });
+  const setIn = (/** @type {number} */ lines) => {
+    labels.forEach((label, i) => { label.style.inlineSize = `${Math.max(words[i].line / lines, words[i].word)}em`; });
+    return fitWords(root, labelSel);
+  };
+  const sizes = MOSAIC_LINES.map(setIn);
+  setIn(MOSAIC_LINES[sizes.indexOf(Math.max(...sizes))]);
 }
 
 /**

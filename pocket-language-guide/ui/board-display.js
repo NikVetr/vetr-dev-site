@@ -39,6 +39,7 @@ const KEY = 'plg.board-display';
  * @property {boolean} tapAnswers  ...and a question then opens its answers
  * @property {boolean} holdSpeaks  holding a button says its sentence, whatever a tap does
  * @property {boolean} sizedToWords  each row of buttons as tall as its words, at one size of type
+ * @property {boolean} mosaic  the buttons in rows, each as wide as its words, filling the screen at one size of type
  * @property {boolean} evenType  with the buttons all one size, the same size of type on every one
  * @property {boolean} boldKeys  the words that carry a button's sentence, in bold
  * @property {boolean} colourKeys  ...and in a colour where the sentence has one: colder in blue, stop in red
@@ -86,8 +87,9 @@ export const DEFAULTS = {
   holdSpeaks: false,
   // The buttons all one size, each label as large as its own fits, is the board as it
   // was drawn: a grid that never moves. One size of type, or buttons sized to their
-  // words, is a reader's choice to trade that for evenness.
+  // words -- in their rows, or as a mosaic -- is a reader's choice to trade that for evenness.
   sizedToWords: false,
+  mosaic: false,
   evenType: false,
   // **Neutral unless the reader asks.** A request worded so it is right to anyone is
   // what the boards say; where a language has a more natural form to a man or to a
@@ -131,13 +133,14 @@ export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
  * fourth are parts of a screen, each a short name in a grid of tiles; the second are
  * behaviours, each a sentence.
  */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'evenType'|'addressSwitch'|'registerSwitch'|'boldKeys'|'colourKeys'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'holdSpeaks'|'sizedToWords'|'mosaic'|'evenType'|'addressSwitch'|'registerSwitch'|'boldKeys'|'colourKeys'|'cellWords'|'cellSay'|'cellIpa'|'peekOwner'|'peekWords'|'peekSay'|'peekIpa'|'peekAnswers', labelKey:string, group:'screen'|'size'|'buttons'|'cells'|'peek'}[]} */ ([
   { id: 'owner', labelKey: 'display.ownerShort', group: 'screen' },
   { id: 'roman', labelKey: 'display.romanShort', group: 'screen' },
   { id: 'ipa', labelKey: 'display.ipaShort', group: 'screen' },
   { id: 'speak', labelKey: 'display.speakShort', group: 'screen' },
   { id: 'turn', labelKey: 'display.turnShort', group: 'screen' },
   { id: 'sizedToWords', labelKey: 'display.buttonSize', group: 'size' },
+  { id: 'mosaic', labelKey: 'display.sizeMosaic', group: 'size' },
   { id: 'evenType', labelKey: 'display.evenType', group: 'buttons' },
   { id: 'boldKeys', labelKey: 'display.boldKeys', group: 'buttons' },
   { id: 'colourKeys', labelKey: 'display.colourKeys', group: 'buttons' },
@@ -249,18 +252,18 @@ export function displaySection(current, onChange, voice) {
   };
   /** A follow-on setting is out of play while the one it depends on says so. */
   const follow = () => {
-    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords], ['colourKeys', !held.boldKeys]])) {
+    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords || held.mosaic], ['colourKeys', !held.boldKeys]])) {
       const input = /** @type {HTMLInputElement} */ (inputs[id]);
       input.disabled = off;
       input.closest('label')?.classList.toggle('display-option-off', off);
     }
   };
-  /** Write one setting and tell everyone. @param {keyof BoardDisplay} id @param {boolean} on */
-  const set = (id, on) => {
-    held[id] = /** @type {never} */ (on);
+  /** Write settings and tell everyone. @param {Partial<BoardDisplay>} change */
+  const set = (change) => {
+    Object.assign(held, change);
     // Merged into what is stored rather than written from this dialog's copy: the
     // Most used section writes the same record, and neither may undo the other.
-    const next = { ...readDisplay(), [id]: on };
+    const next = { ...readDisplay(), ...change };
     writeDisplay(next);
     follow();
     drawing.paint(held);
@@ -279,7 +282,7 @@ export function displaySection(current, onChange, voice) {
     // message screen's, so their accessible names carry the heading too: two checkboxes
     // both called "IPA" would be one question twice to a screen reader.
     if (context) input.setAttribute('aria-label', `${context} ${t(option.labelKey)}`);
-    input.addEventListener('change', () => set(option.id, input.checked));
+    input.addEventListener('change', () => set({ [option.id]: input.checked }));
     const text = document.createElement('span');
     text.textContent = t(option.labelKey);
     row.append(input, text);
@@ -296,9 +299,10 @@ export function displaySection(current, onChange, voice) {
   /** @type {Node[]} */ const buttons = [pills({
     name: 'display-size',
     label: t('display.buttonSize'),
-    options: [{ value: 'equal', label: t('display.sizeEqual') }, { value: 'words', label: t('display.sizeWords') }],
-    value: held.sizedToWords ? 'words' : 'equal',
-    onChange: (value) => set('sizedToWords', value === 'words'),
+    options: [{ value: 'equal', label: t('display.sizeEqual') }, { value: 'words', label: t('display.sizeWords') },
+      { value: 'mosaic', label: t('display.sizeMosaic') }],
+    value: held.mosaic ? 'mosaic' : held.sizedToWords ? 'words' : 'equal',
+    onChange: (value) => set({ sizedToWords: value === 'words', mosaic: value === 'mosaic' }),
   })];
   for (const option of OPTIONS.filter((o) => o.group === 'buttons')) {
     const row = checkbox(option);

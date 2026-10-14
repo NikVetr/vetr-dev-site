@@ -833,6 +833,8 @@
   "display.buttonSize": "Button size",
   "display.sizeEqual": "All the same",
   "display.sizeWords": "Fit their words",
+  "display.sizeMosaic": "Mosaic",
+  "_note.display.sizeMosaic": "The third way to size the board’s buttons, beside All the same and Fit their words: the buttons in rows, each as wide as its words, fitted edge to edge to fill the screen like the tiles of a mosaic. The tiled picture, not the blur that hides part of an image.",
   "display.evenType": "The same size of type on every button",
   "display.boldKeys": "The key words of each button in bold",
   "display.colourKeys": "…and in colour where they have one, like colder in blue and stop in red",

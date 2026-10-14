@@ -540,6 +540,14 @@
 /* Buttons sized to their words (`fitWords`): each row as tall as its words at the one
    size they all share, and the rows sharing whatever is left of the screen. */
 .board-grid.board-grid-words:not(.board-grid-results) { grid-auto-rows: auto; }
+/* Buttons as a mosaic (`fitMosaic`): in their order, wrapping into rows that share the
+   screen's height, each button as wide as `fitMosaic` measured its words and growing
+   with the rest of its row to fill it. Nothing is held wider than its button, so a
+   word too long for one is caught by the fit rather than drawn past its edge. */
+.board-grid.board-grid-mosaic:not(.board-grid-results) { display: flex; flex-wrap: wrap; }
+.board-grid-mosaic:not(.board-grid-results) > .board-cell { flex: 1 1 auto; min-inline-size: 0; }
+.board-grid-mosaic:not(.board-grid-results) .board-cell-label { flex: 1 1 auto; min-inline-size: 0; }
+.board-grid-mosaic:not(.board-grid-results) > .board-grid-title { flex-basis: 100%; }
 /* The letters that matched, marked twice -- heavier, and in another colour -- so the
    mark survives a screen in sun and a reader who does not see the colour. */
 mark.board-cell-found { background: none; color: var(--accent); font-weight: 700; }

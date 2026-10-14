@@ -1182,6 +1182,64 @@ test('the buttons can share one size of type, or be sized to their words', async
   expect(await page.locator('#board-grid').evaluate((g) => g.scrollHeight <= g.clientHeight + 1)).toBe(true);
 });
 
+test('the buttons can be a mosaic: in their order, each as wide as its words, at one size of type', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const cells = () => page.locator('#board-grid .board-cell').evaluateAll((all) => all.map((n) => {
+    const cell = /** @type {HTMLElement} */ (n);
+    const label = /** @type {HTMLElement} */ (cell.querySelector('.board-cell-label'));
+    const r = cell.getBoundingClientRect();
+    const grid = /** @type {HTMLElement} */ (cell.parentElement).getBoundingClientRect();
+    return {
+      id: cell.dataset.button, text: label.textContent ?? '', px: getComputedStyle(label).fontSize,
+      left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height),
+      // Inside the grid, and the label inside its button.
+      inside: r.left >= grid.left - 1 && r.right <= grid.right + 1 && r.top >= grid.top - 1 && r.bottom <= grid.bottom + 1
+        && label.scrollWidth <= label.clientWidth + 1 && label.getBoundingClientRect().height <= cell.clientHeight + 1,
+    };
+  }));
+  const size = async (/** @type {string} */ name) => {
+    await page.locator('#site-menu').click();
+    const dialog = page.locator('dialog.speaker-settings');
+    await dialog.getByRole('radio', { name }).check();
+    // One size of type already, so the choice of one size of type is out of play.
+    await expect(dialog.getByRole('checkbox', { name: 'The same size of type on every button' })).toBeEnabled({ enabled: name === 'All the same' });
+    await page.keyboard.press('Escape');
+  };
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const drawn = await cells();
+  await size('Mosaic');
+  await expect.poll(async () => new Set((await cells()).map((c) => c.px)).size).toBe(1);
+  const tiled = await cells();
+  // In the board's order, read as rows: top to bottom, then along each row.
+  expect([...tiled].sort((a, b) => a.top - b.top || a.left - b.left).map((c) => c.id)).toEqual(drawn.map((c) => c.id));
+  /** @type {Map<number, typeof tiled>} */ const rows = new Map();
+  for (const cell of tiled) rows.set(cell.top, [...(rows.get(cell.top) ?? []), cell]);
+  // Rows of different counts -- short buttons beside one long one -- and, in a row, a
+  // longer label's button wider than a short one's.
+  expect(new Set([...rows.values()].map((row) => row.length)).size).toBeGreaterThan(1);
+  expect([...rows.values()].some((row) => {
+    const byLength = [...row].sort((a, b) => a.text.length - b.text.length);
+    return row.length > 1 && /** @type {typeof row[number]} */ (byLength.at(-1)).width > byLength[0].width + 8;
+  })).toBe(true);
+  // Nothing past the grid's edges or its own button's.
+  expect(tiled.filter((c) => !c.inside).map((c) => c.id)).toEqual([]);
+  expect(await page.locator('#board-grid').evaluate((g) => g.scrollHeight <= g.clientHeight + 1 && g.scrollWidth <= g.clientWidth + 1)).toBe(true);
+  // And back: the grid as it was drawn.
+  await size('All the same');
+  await expect.poll(cells).toEqual(drawn);
+  // Turned, on a desktop: one size of type still, above the floor, and nothing past the
+  // grid's edges -- a turned button's mark once reached past them and pinned it there.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.evaluate(() => localStorage.setItem('plg.board-display', JSON.stringify({ mosaic: true, turned: true })));
+  await page.reload();
+  await expect.poll(async () => new Set((await cells()).map((c) => c.px)).size).toBe(1);
+  const turned = await cells();
+  expect(Number.parseFloat(turned[0].px)).toBeGreaterThan(12);
+  expect(turned.filter((c) => !c.inside).map((c) => c.id)).toEqual([]);
+  expect(await page.locator('#board-grid').evaluate((g) => g.scrollHeight <= g.clientHeight + 1 && g.scrollWidth <= g.clientWidth + 1)).toBe(true);
+});
+
 test('a request is neutral until the reader turns on the switch for whom it is said to', async ({ page }) => {
   // Czech says "could you" to one person with a participle that agrees with them:
   // the board's own row is worded for anyone, and the switch gives the natural form.

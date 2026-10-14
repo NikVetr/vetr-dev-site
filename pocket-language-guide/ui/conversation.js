@@ -1637,6 +1637,7 @@ async function main() {
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       $('board-grid').classList.toggle('board-grid-words', display.sizedToWords);
       $('board-grid').classList.toggle('board-grid-even', display.evenType);
+      $('board-grid').classList.toggle('board-grid-mosaic', display.mosaic);
       renderGrid($('board-grid'), node, {
         lang: owner,
         title: node.titleKey ? t(node.titleKey) : node.title,
