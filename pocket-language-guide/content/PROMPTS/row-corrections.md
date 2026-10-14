@@ -646,3 +646,35 @@ are in `tmp/notes/agents/row-corrections-12.md` ("Seen, not touched") and
 Afterwards rebuild IPA for every language whose text changed
 (`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
 and list every cell you changed in your notes.
+
+## A fourteenth pass: templates whose fixed words agree with what fills them
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-14.md`. The leads are the
+"Seen, not touched" list of `tmp/notes/agents/row-corrections-13a.md`. Only a name and a
+country are ever filled in by the app; every other `{}` prints as a blank the traveller writes
+a word or a number into, or points at one elsewhere on the card, so a template has to be
+right for any filler a traveller would give it.
+
+1. **A number before a plural noun**, the "for N nights" case again, in three concepts:
+   `border-customs.i-am-staying-for-days` (es fr it nl pt ro sv he de en te ar, ru and uk
+   right from five only, cs; mr's literal calls an oblique plural invariant),
+   `children.child-age` (en de fr es it pt ru uk cs pl hr ro ar el) and
+   `pharmacy-symptoms.it-started-days-ago` (it es pt). Check every pack of the three, not
+   only those named. Where the wording fails for one (a child of one, a stay of one day),
+   use the label form the packs' *Number of nights: {}* rows use, worded as that language's
+   own forms and signs say it (an arrival card's *length of stay*, a clinic form's *age*);
+   where a language keeps the noun singular after any numeral, leave it and say so.
+2. **One o'clock.** `hotel-requests.wake-up-call` it *alle {}*, es *a las {}* and pt *às {}*
+   are wrong for 1:00 (*all'una*, *a la una*, *à uma*). Check the concept in every pack for the
+   same defect, and fix it the same way.
+3. **A fixed article.** `utility-templates.is-there-nearby` (en *Is there a {} nearby?*, fr
+   *Y a-t-il un {}*, it *C'è un {}*, es *¿Hay un {}*) and `directions.where-is-the-nearest` (de
+   *der nächste {}*, fr *le {} le plus proche*, es, pt) fix one gender or one article for every
+   filler. Check both concepts in every pack. Change a row only where the language has an
+   equally natural wording that agrees with any filler; where the fix would read worse
+   than the defect, leave it and say why. These are the weakest of the three items: a
+   reader pointing at *pharmacie* under *un ___* is understood.
+
+Afterwards rebuild IPA for every language whose text changed
+(`python3 scripts/build_ipa.py --only <codes>`), run `python3 scripts/validate_data.py`,
+and list every cell you changed in your notes.
