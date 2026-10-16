@@ -1,4 +1,4 @@
-// "Help me decide": three questions instead of thirty controls.
+// "Help me decide": a starting point for the card, with optional personal phrases.
 //
 // The answers set the things a newcomer cannot reasonably guess at -- which
 // sections are worth their space, whether romanisation and respelling are useful
@@ -9,6 +9,8 @@ import { defaultSelection } from '../core/pack.js';
 import { headBands } from '../core/solve/index.js';
 import { t } from './i18n.js';
 import { dialogHead } from './dialog.js';
+import { readAbout } from './about.js';
+import { MODEL_LINKS, personalPrompt, responseCsv } from './quiz-personal.js';
 
 // Keys rather than words: this is module scope, evaluated before a catalogue is
 // loaded, so each option is named where it is built.
@@ -28,6 +30,8 @@ const INTERESTS = [
  * @property {string[]} interests
  * @property {'none'|'some'|'reading'} proficiency
  * @property {'pocket'|'large'} print
+ * @property {'one'|'few'|'any'} [carry]
+ * @property {'basics'|'broad'} [breadth]
  */
 
 /** A head position may hold a bare slot in a spec saved before it became a list.
@@ -49,9 +53,12 @@ function el(tag, attrs = {}, kids = []) {
 
 /**
  * Show the quiz. Resolves with the answers, or null if it was dismissed.
+ * @param {{spec:import('../core/types.js').SheetSpec, corpus:any,
+ *   previewCsv:(text:string)=>{updated:number,added:number,problems:string[]},
+ *   applyCsv:(text:string,answers:QuizAnswers)=>Promise<unknown>}} [context]
  * @returns {Promise<QuizAnswers|null>}
  */
-export function openQuiz() {
+export function openQuiz(context) {
   const dialog = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'quiz' }));
 
   const boxes = INTERESTS.map((item) => {
@@ -78,11 +85,28 @@ export function openQuiz() {
     new Option(t('quiz.print.pocket'), 'pocket'),
     new Option(t('quiz.print.large'), 'large'),
   );
+  /** @param {string} id @param {string} label @param {string[]} choices */
+  const choice = (id, label, choices) => {
+    const select = /** @type {HTMLSelectElement} */ (el('select', { id }));
+    select.append(...choices.map((value) => new Option(t(`quiz.${value}`), value)));
+    return { select, field: el('div', { class: 'field' }, [el('label', { for: id, text: t(label) }), select]) };
+  };
+  const carry = choice('quiz-carry', 'quiz.carry', ['any', 'few', 'one']);
+  const breadth = choice('quiz-breadth', 'quiz.breadth', ['broad', 'basics']);
+  /** @returns {QuizAnswers} */
+  const answers = () => ({
+    interests: boxes.map((label) => /** @type {HTMLInputElement} */ (label.querySelector('input')))
+      .filter((box) => box.checked).map((box) => box.value),
+    proficiency: /** @type {QuizAnswers['proficiency']} */ (proficiency.value),
+    print: /** @type {QuizAnswers['print']} */ (print.value),
+    carry: /** @type {QuizAnswers['carry']} */ (carry.select.value),
+    breadth: /** @type {QuizAnswers['breadth']} */ (breadth.select.value),
+  });
 
   dialog.setAttribute('aria-label', t('quiz.heading'));
   dialog.append(
     dialogHead({ title: t('quiz.heading'), close: t('gallery.previewClose'), onClose: () => cancel.click() }),
-    el('p', { class: 'lede', text: t('quiz.lede') }),
+    el('p', { class: 'lede', text: t('quiz.intro') }),
     el('fieldset', {}, [
       el('legend', { text: t('quiz.doing') }),
       ...boxes,
@@ -95,33 +119,105 @@ export function openQuiz() {
       el('label', { for: 'quiz-print' }, [el('span', { text: t('quiz.printSize') })]),
       print,
     ]),
+    carry.field, breadth.field,
   );
+  if (context) dialog.append(personalWorkflow(context, answers));
 
   const cancel = el('button', { type: 'button', text: t('quiz.cancel') });
   const apply = el('button', { type: 'button', class: 'primary', text: t('quiz.build') });
   dialog.append(el('div', { class: 'row', style: 'justify-content:flex-end' }, [cancel, apply]));
 
-  document.body.append(dialog);
-  dialog.showModal();
-
   return new Promise((resolve) => {
-    /** @param {QuizAnswers|null} value */
-    const done = (value) => {
-      dialog.close();
+    /** @type {QuizAnswers|null} */ let result = null;
+    // Backdrop, Escape and Android Back all close the same dialog. Resolve there,
+    // not only from buttons, so every dismissal also releases its DOM and promise.
+    dialog.addEventListener('close', () => {
       dialog.remove();
-      resolve(value);
-    };
-    cancel.addEventListener('click', () => done(null));
-    dialog.addEventListener('cancel', () => done(null));
-    apply.addEventListener('click', () => done({
-      interests: boxes
-        .map((label) => /** @type {HTMLInputElement} */ (label.querySelector('input')))
-        .filter((box) => box.checked)
-        .map((box) => box.value),
-      proficiency: /** @type {any} */ (proficiency.value),
-      print: /** @type {any} */ (print.value),
-    }));
+      resolve(result);
+    }, { once: true });
+    cancel.addEventListener('click', () => dialog.close());
+    apply.addEventListener('click', () => { result = answers(); dialog.close(); });
+    document.body.append(dialog);
+    dialog.showModal();
   });
+}
+
+/** @param {NonNullable<Parameters<typeof openQuiz>[0]>} context
+ * @param {()=>QuizAnswers} answers */
+function personalWorkflow(context, answers) {
+  const box = el('details', { class: 'quiz-personal' });
+  box.append(el('summary', { text: t('quiz.personal') }), el('p', { class: 'small muted', text: t('quiz.personalHint') }));
+  const saved = readAbout();
+  /** @type {Record<string,HTMLInputElement>} */ const fields = {};
+  for (const key of ['name', 'country', 'profession', 'school']) {
+    const input = /** @type {HTMLInputElement} */ (el('input', { id: `quiz-${key}`, type: 'text', placeholder: t('quiz.optional') }));
+    // Countries in the shared profile are registry codes; leave them unambiguous.
+    input.value = saved[key] ?? '';
+    if (key === 'name') input.autocomplete = 'name';
+    fields[key] = input;
+    box.append(el('div', { class: 'field' }, [el('label', { for: input.id, text: t(`quiz.${key}`) }), input]));
+  }
+  const generate = el('button', { type: 'button', class: 'btn', text: t('quiz.makePrompt') });
+  const prompt = /** @type {HTMLTextAreaElement} */ (el('textarea', { id: 'quiz-prompt', rows: '10', readonly: '', 'aria-label': t('quiz.prompt') }));
+  const copy = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn', text: t('quiz.copyPrompt') }));
+  copy.disabled = true;
+  const handoff = el('div', { class: 'quiz-handoff' }, [prompt, el('div', { class: 'row' }, [copy,
+    ...MODEL_LINKS.map(({ name, href }) => el('a', { class: 'btn', text: name, href, target: '_blank', rel: 'noopener noreferrer' })),
+  ]), el('p', { class: 'small muted', text: t('quiz.externalHint') })]);
+  handoff.hidden = true;
+  const status = el('p', { class: 'small', role: 'status', 'aria-live': 'polite' });
+  generate.addEventListener('click', () => {
+    const selected = answers();
+    prompt.value = personalPrompt({
+      target: context.spec.target, source: context.spec.source, sections: context.corpus.sections,
+      personal: Object.fromEntries(Object.entries(fields).map(([key, input]) => [key, input.value])),
+      interests: selected.interests, proficiency: selected.proficiency,
+      carry: selected.carry ?? 'any', breadth: selected.breadth ?? 'broad', speaker: context.spec.speaker,
+    });
+    handoff.hidden = false;
+    copy.disabled = false;
+    status.textContent = '';
+  });
+  copy.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(prompt.value); status.textContent = t('quiz.copied'); }
+    catch { prompt.focus(); prompt.select(); status.textContent = t('quiz.copyFailed'); }
+  });
+  const response = /** @type {HTMLTextAreaElement} */ (el('textarea', { id: 'quiz-response', rows: '7', placeholder: t('quiz.pasteResponse'), 'aria-label': t('quiz.pasteResponse') }));
+  const review = el('button', { type: 'button', class: 'btn', text: t('quiz.reviewResponse') });
+  const add = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'primary', text: t('quiz.importResponse') }));
+  add.disabled = true;
+  let reviewed = '';
+  response.addEventListener('input', () => { reviewed = ''; add.disabled = true; status.textContent = ''; });
+  review.addEventListener('click', () => {
+    add.disabled = true;
+    reviewed = '';
+    try {
+      const csv = responseCsv(response.value);
+      const result = context.previewCsv(csv);
+      if (result.problems.length) throw new Error(result.problems.join('\n'));
+      status.textContent = t('quiz.responsePreview', { updated: String(result.updated), added: String(result.added) });
+      reviewed = csv;
+      add.disabled = !(result.updated + result.added);
+    } catch (error) { status.textContent = t('quiz.responseError', { error: String(/** @type {Error} */ (error).message) }); }
+  });
+  add.addEventListener('click', async () => {
+    if (!reviewed) return;
+    add.disabled = true;
+    try {
+      await context.applyCsv(reviewed, answers());
+      reviewed = '';
+      status.textContent = t('quiz.responseImported');
+      // The callback applies questionnaire settings before the imported rows. Do
+      // not return answers again and overwrite the imported inclusion choices.
+      /** @type {HTMLDialogElement} */ (box.closest('dialog')).close();
+    } catch (error) {
+      status.textContent = t('quiz.responseError', { error: String(/** @type {Error} */ (error).message) });
+      add.disabled = false;
+    }
+  });
+  box.append(generate, handoff, el('label', { for: response.id, text: t('quiz.pasteResponse') }), response,
+    el('div', { class: 'row' }, [review, add]), status);
+  return box;
 }
 
 /**
@@ -185,6 +281,11 @@ export function applyQuiz(spec, corpus, answers) {
     foot: marked && target === 'foot' ? band : (bands.bottom ?? undefined),
     // Large print means fewer, bigger items rather than the same content shrunk.
     scale: answers.print === 'large' ? 1.3 : 0,
+    priority: answers.breadth === 'basics' ? 0.65 : 0,
+    ...(answers.carry && answers.carry !== 'any' ? {
+      autoFaces: false,
+      geometry: { ...spec.geometry, faces: spec.geometry.screen ? 1 : answers.carry === 'one' ? 2 : 4 },
+    } : { autoFaces: true }),
     selection: answers.interests.length
       ? defaultSelection(corpus, answers.interests)
       : { sections: {}, items: {} },

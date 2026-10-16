@@ -29,6 +29,7 @@ import { createSectionPicker } from './chips.js';
 import { number, t } from './i18n.js';
 import { nextIndex } from './keys.js';
 import { arrange } from './arrange.js';
+import { itemIncluded } from './io.js';
 
 /**
  * A line drawing for one of the list's own buttons: the pencil that opens a row's
@@ -213,7 +214,7 @@ export function sectionConcepts(input, section) {
  * @param {TreeInput} input
  * @returns {(spec:import('../core/types.js').SheetSpec,
  *   blocks:import('../core/types.js').Block[],
- *   marked?:Record<string,boolean>|null)=>void}
+ *   marked?:Record<string,boolean>|null, edits?:import('../core/pack.js').SheetEdits)=>void}
  */
 export function createTree(input) {
   const { root, corpus, theme, spec } = input;
@@ -529,7 +530,8 @@ export function createTree(input) {
 
   return (/** @type {import('../core/types.js').SheetSpec} */ nextSpec,
     /** @type {import('../core/types.js').Block[]} */ blocks,
-    /** @type {Record<string,boolean>|null} */ marked = null) => {
+    /** @type {Record<string,boolean>|null} */ marked = null,
+    /** @type {import('../core/pack.js').SheetEdits} */ nextEdits = input.edits) => {
     // Text comes from the solved blocks, so an imported edit shows here too, not
     // just on the page.
     /** @type {Map<string, import('../core/types.js').ItemRow>} */ const shown = new Map();
@@ -576,7 +578,7 @@ export function createTree(input) {
         // moments after it was cleared, because that solve had started from the
         // older selection. The count below is the outcome, and does come from
         // the blocks.
-        item.box.checked = on && nextSpec.selection.items[item.conceptId] !== false;
+        item.box.checked = itemIncluded(nextSpec, nextEdits, item.conceptId, section.sectionId);
         item.box.disabled = !on;
         // What the last balance did to this row, until the reader touches anything
         // else. Two classes rather than one, because "it added twelve rows" and "it
@@ -590,16 +592,20 @@ export function createTree(input) {
           for (const [field, cell] of Object.entries(item.cells)) {
             cell.textContent = values[field] ?? '';
           }
-        } else if (!item.cells.script?.textContent) {
-          // A row the solve dropped still has to say what it is, or switching a
-          // section off empties its labels. The corpus is the fallback, which has
-          // the two sides and none of the generated columns.
-          if (item.cells.script) {
-            item.cells.script.textContent = printed(input.targetRows[item.conceptId]?.text ?? '');
+        } else {
+          // Excluded imports still need their wording: a custom row has no corpus
+          // fallback, and an existing row may have a saved correction.
+          const values = Object.fromEntries(Object.entries(item.cells)
+            .map(([field, cell]) => [field, cell.textContent ?? '']));
+          values.script = input.targetRows[item.conceptId]?.text ?? values.script;
+          values.gloss = input.sourceRows[item.conceptId]?.text ?? values.gloss;
+          for (const layer of [nextEdits.extras.find((e) => e.conceptId === item.conceptId)?.values,
+            nextEdits.overrides[item.conceptId]?.values]) {
+            for (const [field, value] of Object.entries(layer ?? {})) {
+              if (value) values[field] = value;
+            }
           }
-          if (item.cells.gloss) {
-            item.cells.gloss.textContent = printed(input.sourceRows[item.conceptId]?.text ?? '');
-          }
+          for (const [field, cell] of Object.entries(item.cells)) cell.textContent = printed(values[field] ?? '');
         }
       }
       section.count.textContent = `${included}/${section.items.length}`;

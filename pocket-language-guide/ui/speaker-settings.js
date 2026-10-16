@@ -238,7 +238,7 @@ export function personalSection({ gather, apply, forget, read, save }) {
     const made = gather();
     // A package from someone who has written nothing is a stamp and a version.
     // Saying so beats handing them a file that restores nothing.
-    if (!made.boards && !made.speaker && !made.edits && !made.about && !made.usage) {
+    if (!made.boards && !made.speaker && !made.edits && !made.about && !made.usage && !made.quiz && !made.cards?.length) {
       status.textContent = t('personal.nothing');
       return;
     }
@@ -292,7 +292,7 @@ export function personalSection({ gather, apply, forget, read, save }) {
           status.classList.remove('speaker-refused');
           status.textContent = t('personal.loaded', { phrases: String(count) });
         } catch (err) {
-          status.replaceChildren(t('personal.failed'), ' ',
+          status.replaceChildren(t('common.somethingWrong'), ': ',
             el('span', { lang: 'en', dir: 'ltr', text: /** @type {Error} */ (err).message }));
           status.classList.add('speaker-refused');
         }
@@ -311,7 +311,7 @@ export function personalSection({ gather, apply, forget, read, save }) {
       status.classList.remove('speaker-refused');
       status.textContent = t('personal.gone');
     } catch (err) {
-      status.replaceChildren(t('personal.failed'), ' ',
+      status.replaceChildren(t('common.somethingWrong'), ': ',
         el('span', { lang: 'en', dir: 'ltr', text: /** @type {Error} */ (err).message }));
       status.classList.add('speaker-refused');
     }

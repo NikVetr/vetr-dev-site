@@ -75,6 +75,8 @@ const MIN_WORTH_FILLING_PT = 8;
  * @property {import('../types.js').LayoutPlan} plan      the solved sheet
  * @property {number} colWidth
  * @property {number} colHeight
+ * @property {boolean} [allowRemovals] offer reviewed swaps when additions alone cannot help
+ * @property {import('../pack.js').SheetEdits} [edits] custom wording is protected from removal
  */
 
 /**
@@ -82,6 +84,13 @@ const MIN_WORTH_FILLING_PT = 8;
  * @returns {import('../types.js').Diff & {slack:number, note:string}}
  */
 export function proposeBalance(input) {
+  const fill = proposeAdditions(input);
+  if (!input.allowRemovals || fill.adds.length) return fill;
+  return proposeReplacement(input) ?? fill;
+}
+
+/** @param {BalanceInput} input */
+function proposeAdditions(input) {
   const { corpus, spec, blocks, plan } = input;
   // A row can stand for more than one concept: two that came out as the same target
   // text are folded into one, and both are on the sheet.
@@ -259,6 +268,86 @@ export function proposeBalance(input) {
         + 'One fewer face, or a larger type size, would take up the space instead.'
       : `${slack.toFixed(0)}pt of whitespace, but nothing left is worth the space.`,
   };
+}
+
+/**
+ * A small, reviewable exchange: the least useful replaceable row for something
+ * worth more. Personal wording, explicit picks, emergency rows and the essential
+ * priority band are never offered for removal. A redundant row can also be removed
+ * on its own; that choice is left unchecked in the review.
+ * @param {BalanceInput} input
+ * @returns {(import('../types.js').Diff & {slack:number, note:string})|null}
+ */
+function proposeReplacement(input) {
+  const { corpus, spec, blocks } = input;
+  const rows = blocks.flatMap((b) => (b.rows ?? []).map((row) => ({ row, section: b.sectionId })));
+  const onCard = new Set(rows.flatMap(({ row }) => [row.conceptId, ...(row.mergedFrom ?? [])]));
+  /** @param {Record<string,string>} concept @param {Set<string>} included */
+  const value = (concept, included) => {
+    let keep = 1;
+    for (const [other, factor] of substitutesOf(corpus, concept)) {
+      if (included.has(other)) keep *= factor;
+    }
+    return Number(concept.importance) * keep;
+  };
+  const removable = rows.filter(({ row, section }) => {
+    const concept = corpus.concepts[row.conceptId];
+    return concept && !row.mergedFrom?.length
+      && corpus.sectionById[section].group !== 'emergency'
+      && !section.startsWith('emergency') && Number(concept.importance) < 0.85
+      && spec.selection.items[row.conceptId] !== true
+      && !input.edits?.overrides[row.conceptId]
+      && value(concept, onCard) < 0.55;
+  }).sort((a, b) => value(corpus.concepts[a.row.conceptId], onCard)
+    - value(corpus.concepts[b.row.conceptId], onCard));
+  const live = new Set(blocks.map((b) => b.sectionId));
+  const additions = Object.values(corpus.concepts)
+    .filter((c) => !onCard.has(c.concept_id) && live.has(c.section_id)
+      && c.default_template !== 'note' && appliesTo(c, spec.target)
+      && Number(c.importance) >= spec.priority
+      && input.targetRows[c.concept_id] && input.sourceRows[c.concept_id]);
+  const slack = input.plan.looseness.reduce((a, b) => a + b, 0);
+  const measured = measureHeights(input, additions, live).height;
+  for (const { row, section } of removable) {
+    const concept = corpus.concepts[row.conceptId];
+    const without = new Set(onCard);
+    without.delete(row.conceptId);
+    const oldValue = value(concept, without);
+    // A cluster is a ranking prior, not evidence that a row is dispensable:
+    // compass directions, for example, share a cluster but complement each other.
+    const duplicate = Object.entries(corpus.redundancy[row.conceptId] ?? {})
+      .some(([other, relation]) => relation === 'duplicate' && without.has(other));
+    // A row hit is the actual resolved box; synthetic measurement would miss edits
+    // or a table folded by the solver.
+    const height = input.plan.faces.flatMap((f) => f.hits)
+      .find((h) => h.conceptId === row.conceptId)?.h ?? 0;
+    const better = additions.filter((c) => value(c, without) > oldValue + 0.1
+      && (duplicate || Number(c.importance) > Number(concept.importance) + 0.1)
+      && (measured.get(c.concept_id) ?? Infinity) <= height + slack)
+      .sort((a, b) => value(b, without) - value(a, without));
+    const replacement = better[0];
+    const remove = {
+      conceptId: row.conceptId, sectionId: section,
+      label: `${row.values.script ?? ''} — ${row.values.gloss ?? ''}`,
+      reason: `importance ${Number(concept.importance).toFixed(2)}; `
+        + (duplicate ? 'similar wording is already included' : 'lower priority'),
+    };
+    if (replacement) {
+      return {
+        removes: [remove],
+        adds: [{ conceptId: replacement.concept_id, sectionId: replacement.section_id,
+          label: `${printed(input.targetRows[replacement.concept_id].text)} — `
+            + printed(input.sourceRows[replacement.concept_id].text),
+          reason: `importance ${Number(replacement.importance).toFixed(2)}; replaces a lower-value row` }],
+        slack, note: 'Review a higher-value replacement. The selected changes must fit before they are applied.',
+      };
+    }
+    if (duplicate) {
+      return { adds: [], removes: [remove], slack,
+        note: 'Similar wording is already included. Optionally remove this row to simplify the card.' };
+    }
+  }
+  return null;
 }
 
 /**

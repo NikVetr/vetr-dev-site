@@ -53,7 +53,7 @@ const TAP_SLOP_PX = 10;
  *   where in its label a search matched, for the found buttons
  * @param {(button:import('../core/conversation.js').BoardButton)=>SubLine[]} [config.sub]
  *   the lines a button carries under its words, where the settings ask for them
- * @param {(button:import('../core/conversation.js').BoardButton)=>{words:string[], tone?:string}|null} [config.keys]
+ * @param {(button:import('../core/conversation.js').BoardButton)=>{words:string[], bold:boolean, tone?:string}|null} [config.keys]
  *   the words of its label to set in bold, and their colour, where the settings ask for them
  */
 export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, onHoldSay, mark, sub, keys }) {
@@ -1353,10 +1353,10 @@ export function openRateMenu(anchor, { rate, onRate, voices, voiceId, onVoice, v
 
 /**
  * A label with its key words set apart: each word's first place in it, in order.
- * @param {string} said @param {{words: string[], tone?: string}} key
+ * @param {string} said @param {{words: string[], bold: boolean, tone?: string}} key
  * @returns {(string|HTMLElement)[]}
  */
-function emphasised(said, { words, tone }) {
+function emphasised(said, { words, bold, tone }) {
   /** @type {(string|HTMLElement)[]} */ const out = [];
   let from = 0;
   for (const [at, word] of words.map((w) => /** @type {[number, string]} */ ([said.indexOf(w), w]))
@@ -1369,8 +1369,9 @@ function emphasised(said, { words, tone }) {
     if (last instanceof HTMLElement && !gap.trim()) {
       last.textContent += gap + word;
     } else {
-      const b = document.createElement('b');
+      const b = document.createElement('span');
       b.className = tone ? `board-key board-key-${tone}` : 'board-key';
+      b.classList.toggle('board-key-bold', bold);
       b.textContent = word;
       out.push(gap, b);
     }

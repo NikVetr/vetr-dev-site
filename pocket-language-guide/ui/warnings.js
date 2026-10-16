@@ -17,7 +17,7 @@ import { warningText, fixText, number, t } from './i18n.js';
 
 /** How long a notice that asks nothing stays before it goes, in milliseconds. */
 const LINGER_MS = 1500;
-const FLIGHT_MS = 420;
+const FLIGHT_MS = 620;
 
 /**
  * A warning plus, where the solver found one, a button that actually fixes it.
@@ -59,11 +59,17 @@ function flyInto(panel, target) {
   const to = target.getBoundingClientRect();
   const dx = to.left + to.width / 2 - (from.left + from.width / 2);
   const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+  const bend = dx < 0 ? -12 : 12;
   panel.animate([
-    { transform: 'none', opacity: 1 },
-    { transform: `translate(${dx}px, ${dy}px) scale(0.06)`, opacity: 0.3 },
-  ], { duration: FLIGHT_MS, easing: 'cubic-bezier(0.55, 0, 0.75, 0.2)' })
-    .finished.then(() => panel.close());
+    { offset: 0, transform: 'none', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1 },
+    { offset: 0.3, transform: `translate(${dx * 0.12}px, ${dy * 0.08}px) skewX(${bend}deg) scale(0.82, 1.08)`,
+      clipPath: 'polygon(12% 0, 88% 0, 100% 100%, 0 100%)', opacity: 1 },
+    { offset: 0.72, transform: `translate(${dx * 0.65}px, ${dy * 0.55}px) skewX(${-bend}deg) scale(0.28, 0.65)`,
+      clipPath: 'polygon(40% 0, 60% 0, 100% 100%, 0 100%)', opacity: 0.9 },
+    { offset: 1, transform: `translate(${dx}px, ${dy}px) scale(0.015, 0.03)`,
+      clipPath: 'polygon(48% 0, 52% 0, 65% 100%, 35% 100%)', opacity: 0 },
+  ], { duration: FLIGHT_MS, easing: 'cubic-bezier(0.45, 0, 0.8, 0.35)', fill: 'forwards' })
+    .finished.then(() => panel.close(), () => panel.close());
 }
 
 /**
@@ -75,8 +81,9 @@ function flyInto(panel, target) {
  * @param {import('../core/types.js').Warning[]} config.warnings  the new ones
  * @param {(fix:import('../core/types.js').WarningFix) => void} config.onFix
  * @param {() => Element|undefined} config.target  the control they are kept behind
+ * @param {() => void} config.onAbsorbed
  */
-function announce({ warnings, onFix, target }) {
+function announce({ warnings, onFix, target, onAbsorbed }) {
   const decide = warnings.some((w) => w.severity === 'error' || w.fixes?.length);
   const panel = /** @type {HTMLDialogElement} */ (document.createElement('dialog'));
   panel.className = 'speaker-settings warning-dialog';
@@ -84,11 +91,11 @@ function announce({ warnings, onFix, target }) {
   const away = () => flyInto(panel, target());
   const list = document.createElement('ul');
   list.className = 'warnings';
-  list.append(...warnings.map((w) => renderWarning(w, (fix) => { panel.close(); onFix(fix); })));
+  list.append(...warnings.map((w) => renderWarning(w, (fix) => { away(); onFix(fix); })));
   panel.append(dialogHead({ title: t('studio.warnings'), close: t('gallery.previewClose'), onClose: away }), list);
   // Escape leaves the way the cross does, into the menu.
   panel.addEventListener('cancel', (event) => { event.preventDefault(); away(); });
-  panel.addEventListener('close', () => panel.remove());
+  panel.addEventListener('close', () => { panel.remove(); onAbsorbed(); });
   document.body.append(panel);
   if (decide) {
     panel.showModal();
@@ -113,20 +120,42 @@ function announce({ warnings, onFix, target }) {
 export function createWarnings({ menu, list, count, buttons, onFix }) {
   /** What was said last time, by its words, so a re-solve does not say it again. */
   let said = new Set();
-  return (/** @type {import('../core/types.js').Warning[]} */ warnings) => {
-    list.replaceChildren(...warnings.map((w) => renderWarning(w, onFix)));
-    menu.hidden = !warnings.length;
-    count.textContent = number(warnings.length, 0);
+  /** @type {import('../core/types.js').Warning[]} */ let current = [];
+  const absorbed = new Set();
+  const pending = new Map();
+  const renderRecord = () => {
+    const recorded = current.filter((w) => absorbed.has(warningText(w)));
+    list.replaceChildren(...recorded.map((w) => renderWarning(w, onFix)));
+    menu.hidden = !recorded.length;
+    count.textContent = number(recorded.length, 0);
     for (const button of buttons) {
-      if (warnings.length) button.dataset.warnings = number(warnings.length, 0);
+      if (recorded.length) button.dataset.warnings = number(recorded.length, 0);
       else delete button.dataset.warnings;
     }
+  };
+  return (/** @type {import('../core/types.js').Warning[]} */ warnings) => {
+    current = warnings;
+    const keys = new Set(warnings.map(warningText));
+    for (const key of absorbed) if (!keys.has(key)) absorbed.delete(key);
+    for (const key of pending.keys()) if (!keys.has(key)) pending.delete(key);
+    renderRecord();
     const fresh = warnings.filter((w) => !said.has(warningText(w)));
-    said = new Set(warnings.map(warningText));
+    said = keys;
     if (fresh.length) {
+      const token = Symbol();
+      for (const warning of fresh) pending.set(warningText(warning), token);
       announce({
         warnings: fresh,
         onFix,
+        onAbsorbed: () => {
+          for (const warning of fresh) {
+            const key = warningText(warning);
+            if (pending.get(key) !== token) continue;
+            pending.delete(key);
+            absorbed.add(key);
+          }
+          renderRecord();
+        },
         // Whichever of the two is on screen: the bars on a desktop, the phone's menu.
         target: () => buttons.find((b) => b.offsetParent !== null),
       });

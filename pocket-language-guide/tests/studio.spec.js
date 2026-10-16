@@ -3,6 +3,7 @@ import {
   counts, expectIncluded, expectIncludedNot, faceCount, settledCounts,
 } from './counts.js';
 import { translated, withoutPack } from './registry.js';
+import { parseTable, serialize } from '../core/csv.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -98,6 +99,9 @@ test.describe('studio', () => {
     const said = page.locator('dialog.warning-dialog:modal');
     await expect(said.locator('li.error')).toHaveCount(1);
     await expect(said.locator('li.error')).toContainText('will not fit');
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
+    await said.locator('.speaker-close').click();
+    await expect(said).toHaveCount(0);
     await expect(page.locator('#warnings li.error')).toHaveCount(1);
     await expect(page.locator('#warnings li.error')).toContainText('will not fit');
   });
@@ -258,22 +262,12 @@ test.describe('studio', () => {
     await expect(page.locator('#status')).toHaveText(/Faces: \d+ · type \d/, { timeout: 90_000 });
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
 
-    // Work down the list the way a person would. Clicking rather than unchecking:
-    // a solve blocks the main thread for a few hundred milliseconds, so uncheck's
-    // immediate state assertion is a race against that, and what matters here is
-    // that the selection ends up right.
     const full = await counts(page);
-    // Every third item, and the stride keeps having to shrink: it was every ninth,
-    // and each time the sheet learned to absorb more slack -- glue ceilings that
-    // follow the type's own curve, a heading bound to its rows rather than merged
-    // with them -- the old fraction stopped leaving any whitespace to propose into,
-    // and this test started asserting on a panel that had nothing to say.
-    const boxes = page.locator('.items input[type=checkbox]');
-    const count = await boxes.count();
-    for (let i = 0; i < count; i += 3) await boxes.nth(i).click({ force: true });
-    // Settled, not merely changed: two hundred clicks queue a burst of debounced
-    // solves, and reading the counter after the first one gave a `before` from
-    // halfway through -- which the final count is legitimately *below*.
+    // Fixture setup still uses each checkbox's click/change handlers, but one
+    // browser task lets the debounce coalesce the changes into a single solve.
+    await page.locator('.items input[type=checkbox]').evaluateAll((boxes) => {
+      for (let i = 0; i < boxes.length; i += 3) boxes[i].click();
+    });
     const { included: before } = await settledCounts(page);
     expect(before).toBeLessThan(full.included);
     await page.locator('#balance').click();
@@ -414,6 +408,64 @@ test.describe('studio', () => {
     });
     await expectIncluded(page, before.included);
     await expect(page.locator('.items li', { hasText: 'Hi there' })).toHaveCount(1);
+  });
+
+  test('importing into a hidden section enables only imported and explicitly selected rows', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    const section = page.locator('.tree details').first();
+    await section.evaluate((node) => { node.open = true; });
+    const picked = section.locator('.items input[type=checkbox]').first();
+    const pickedId = await picked.locator('xpath=ancestor::li[@data-concept]').getAttribute('data-concept');
+    await picked.uncheck();
+    await settledCounts(page);
+    await picked.check();
+    await settledCounts(page);
+    await section.locator('summary input[type=checkbox]').uncheck();
+    await settledCounts(page);
+    const csv = 'concept_id,section_id,template,include,target_text,romanization,ipa,gloss,respell,importance,notes\n'
+      + 'custom.hidden,social-basics,entry,yes,HIDDEN-IMPORT,,,Hidden import,,1,custom\n';
+    page.once('dialog', (dialog) => dialog.accept());
+    await page.locator('#csv-file').setInputFiles({ name: 'hidden.csv', mimeType: 'text/csv', buffer: Buffer.from(csv) });
+    await expect(page.locator('.items li[data-concept="custom.hidden"] input[type=checkbox]')).toBeChecked();
+    const checkedIds = await section.locator('.items li').evaluateAll((rows) => rows
+      .filter((row) => row.querySelector('input[type=checkbox]').checked)
+      .map((row) => row.getAttribute('data-concept')));
+    expect(checkedIds.sort()).toEqual([pickedId, 'custom.hidden'].sort());
+  });
+
+  test('imported exclusions can be checked back on and custom exports honor item and section toggles', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    const csv = 'concept_id,section_id,template,include,target_text,romanization,ipa,gloss,respell,importance,notes\n'
+      + 'custom.inclusion,social-basics,entry,no,INCLUSION-PROBE,,,Inclusion probe,,1,custom\n';
+    page.once('dialog', (dialog) => dialog.accept());
+    await page.locator('#csv-file').setInputFiles({ name: 'inclusion.csv', mimeType: 'text/csv', buffer: Buffer.from(csv) });
+    const row = page.locator('.items li[data-concept="custom.inclusion"]');
+    const checkbox = row.locator('input[type=checkbox]');
+    await expect(checkbox).not.toBeChecked();
+    await row.locator('xpath=ancestor::details').evaluate((node) => { node.open = true; });
+    await checkbox.check();
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('plg.edits.zh-Hans__en'))
+      .overrides['custom.inclusion'].include)).toBe(true);
+    await expect(page.locator('#face-area')).toContainText('Inclusion probe');
+
+    const exportedInclude = async () => {
+      const pending = page.waitForEvent('download');
+      await page.locator('#csv-out').click();
+      const stream = await (await pending).createReadStream();
+      let text = '';
+      for await (const chunk of stream) text += chunk;
+      return text.split('\n').find((line) => line.startsWith('custom.inclusion,')).split(',')[3];
+    };
+    await checkbox.uncheck();
+    await settledCounts(page);
+    expect(await exportedInclude()).toBe('no');
+    await checkbox.check();
+    await settledCounts(page);
+    await row.locator('xpath=ancestor::details').locator('summary input[type=checkbox]').uncheck();
+    await settledCounts(page);
+    expect(await exportedInclude()).toBe('no');
   });
 });
 
@@ -759,26 +811,72 @@ test('switching a section off keeps the rows another section had switched off', 
   await expect(row('social-basics.hello')).not.toBeChecked();
 });
 
+test('balancing into a hidden section excludes unreviewed legacy custom rows and keeps explicit picks', async ({ page }) => {
+  const pair = new Set(['toilets.where-toilet', 'kind-words.you-are-very-kind']);
+  await page.route('**/data/concepts/*.csv', async (route) => {
+    const response = await route.fetch();
+    const rows = parseTable(await response.text());
+    await route.fulfill({ response, body: serialize(Object.keys(rows[0]),
+      rows.filter((row) => pair.has(row.concept_id))) });
+  });
+  await page.addInitScript(() => {
+    localStorage.clear();
+    // Older imported extras did not carry explicit selection flags. An explicit
+    // pick in the same hidden section must still survive opening it.
+    localStorage.setItem('plg.edits.zh-Hans__en', JSON.stringify({ overrides: {}, extras: [
+      { conceptId: 'custom.legacy', sectionId: 'kind-words', template: 'entry', weight: 1,
+        values: { script: 'LEGACY-ROW', gloss: 'Legacy custom row' } },
+      { conceptId: 'custom.picked', sectionId: 'kind-words', template: 'entry', weight: 1,
+        values: { script: 'PICKED-ROW', gloss: 'Explicitly picked custom row' } },
+    ] }));
+    localStorage.setItem('plg.studio.zh-Hans__en', JSON.stringify({ spec: { selection: {
+      sections: { 'kind-words': false }, items: { 'custom.picked': true },
+    } } }));
+  });
+  await page.goto(STUDIO);
+  await expectIncluded(page, 1);
+  await page.locator('#balance').click();
+  const proposal = page.locator('#diff input[type=checkbox]');
+  await expect(proposal).toHaveCount(1);
+  await expect(proposal).toHaveAttribute('data-concept', 'kind-words.you-are-very-kind');
+  await page.locator('#diff button.primary').click();
+  await expect(page.locator('#diff')).toBeHidden();
+  await expectIncluded(page, 3);
+  await expect(page.locator('.items li[data-concept="custom.legacy"] input[type=checkbox]')).not.toBeChecked();
+  await expect(page.locator('.items li[data-concept="custom.picked"] input[type=checkbox]')).toBeChecked();
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('plg.edits.zh-Hans__en')));
+  expect(saved.extras.map((row) => row.conceptId)).toEqual(['custom.legacy', 'custom.picked']);
+});
+
 test('balancing marks what it changed, until the next interaction', async ({ page }) => {
-  // Balancing can move a dozen rows at once and the only feedback was the total
-  // changing, so the answer to "what did that do" was to compare two numbers.
+  // Two real corpus rows rated duplicate, in separate sections so their identical
+  // target wording is not merged into one printed row. Keep the fixture small and
+  // make a removal proposal mandatory rather than passing when there is none.
+  const pair = new Set(['room-problems.the-toilet-will-not-flush', 'toilets.the-toilet-will-not-flush']);
+  await page.route('**/data/concepts/*.csv', async (route) => {
+    const response = await route.fetch();
+    const text = await response.text();
+    const rows = parseTable(text);
+    const headers = Object.keys(rows[0]);
+    await route.fulfill({ response, body: serialize(headers, rows.filter((row) => pair.has(row.concept_id))) });
+  });
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
-
+  await expectIncluded(page, 2);
   await page.locator('#balance').click();
   const apply = page.locator('#diff button.primary');
-  if (await apply.count()) {
-    await apply.click();
-    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 120_000 });
-    // Two states, because "it added rows" and "it switched rows off so the added
-    // ones would not bring a whole section" are different news.
-    const changed = page.locator('.items li.added, .items li.removed');
-    await expect.poll(() => changed.count(), { timeout: 30_000 }).toBeGreaterThan(0);
+  await expect(apply).toBeDisabled();
+  await page.locator('#diff input[type=checkbox]').check();
+  await expect(apply).toBeEnabled();
+  await apply.click();
+  await expect(page.locator('#diff')).toBeHidden();
+  await expectIncluded(page, 1);
+  const changed = page.locator('.items li.added, .items li.removed');
+  await expect.poll(() => changed.count(), { timeout: 30_000 }).toBeGreaterThan(0);
 
-    // And it is a diff, not a decoration: the next interaction clears it.
-    await page.locator('.items input[type=checkbox]').first().click();
-    await expect.poll(() => changed.count(), { timeout: 30_000 }).toBe(0);
-  }
+  // And it is a diff, not a decoration: the next interaction clears it.
+  await page.locator('.items input[type=checkbox]').first().click();
+  await expect.poll(() => changed.count(), { timeout: 30_000 }).toBe(0);
 });
 
 test('choosing a phone reveals the models, with their aspect ratios', async ({ page }) => {
@@ -1020,7 +1118,6 @@ test('an edit belongs to its pair, and a new column reaches the tree', async ({ 
   // Two state transitions that had no coverage, and both were wrong.
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
-  await page.waitForTimeout(2500);
 
   // **An edit belongs to the pair it was made on.** `edits` is keyed on
   // (target, source) in localStorage, and changing the reader left the previous
@@ -1037,16 +1134,13 @@ test('an edit belongs to its pair, and a new column reaches the tree', async ({ 
 
   await page.selectOption('#source', 'de');
   await expect(page.locator('html')).toHaveAttribute('lang', 'de');
-  await page.waitForTimeout(4000);
-  const onGerman = await page.locator('.items li').first().locator('.cell.respell').textContent();
-  expect(onGerman, 'an English edit must not appear on the German sheet')
-    .not.toContain('MARKER-EN');
+  await expect(page.locator('.items li').first().locator('.cell.respell'),
+    'an English edit must not appear on the German sheet').not.toContainText('MARKER-EN');
 
   // And it is still there when the pair it belongs to comes back.
   await page.selectOption('#source', 'en');
-  await page.waitForTimeout(4000);
-  await expect.poll(async () => page.locator('.items li').first()
-    .locator('.cell.respell').textContent(), { timeout: 60_000 }).toBe('MARKER-EN');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('.items li').first().locator('.cell.respell')).toHaveText('MARKER-EN');
 
   // **A column switched on reaches the tree and the editor.** A row carries one cell
   // per shown column and the editor one input per cell, both built when the tree is

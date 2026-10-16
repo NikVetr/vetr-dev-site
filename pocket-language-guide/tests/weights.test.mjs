@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { createSheetContext, buildSheet } from '../core/sheet.js';
+import { createSheetContext, buildSheet, loadFontsFor } from '../core/sheet.js';
 import { proposeBalance, substitutesOf } from '../core/solve/weights.js';
 import { contentBox } from '../core/solve/index.js';
 import { parseTable } from '../core/csv.js';
@@ -281,4 +281,119 @@ test('a currency word and its symbol carry one relation', () => {
   }
   assert.equal(levels.size, 1,
     `the word/symbol pairs carry ${[...levels].join(' and ')}; one shape, one relation`);
+});
+
+/** A flush card with one weaker duplicate and a valuable absent alternative. */
+async function exchangeFixture() {
+  const spec = await referenceSpec();
+  await loadFontsFor(ctx, spec.target, spec.source);
+  const section = { section_id: 'exchange', group: 'social', color_role: 'comm',
+    default_level: '1', title_en: 'Exchange', default_on: '1' };
+  const concept = (/** @type {string} */ id, /** @type {number} */ importance) => ({
+    concept_id: id, section_id: 'exchange', default_template: 'entry',
+    importance: String(importance), cluster_id: id,
+  });
+  const concepts = { weak: concept('weak', 0.8), keep: concept('keep', 0.95), better: concept('better', 0.84) };
+  const corpus = { ...ctx.corpus, sections: [section], sectionById: { exchange: section },
+    concepts, conceptsByGroup: { social: Object.values(concepts) },
+    conceptsByCluster: {}, redundancy: { weak: { keep: 'duplicate' }, keep: { weak: 'duplicate' } } };
+  const rows = { weak: { text: 'Maybe' }, keep: { text: 'Yes' }, better: { text: 'Help' } };
+  const blocks = /** @type {import('../core/types.js').Block[]} */ ([{
+    kind: 'items', sectionId: 'exchange', colorRole: 'comm', stretch: 0, templateId: 'entry',
+    rows: /** @type {('weak'|'keep')[]} */ (['weak', 'keep']).map((id) => ({ conceptId: id, weight: Number(concepts[id].importance),
+      values: { script: rows[id].text, gloss: rows[id].text } })),
+  }]);
+  return /** @type {any} */ ({ ...ctx, corpus, spec: { ...spec, selection: { sections: {}, items: {} } },
+    theme: await ctx.theme(spec.themeId), targetRows: rows, sourceRows: rows, respell: {}, blocks,
+    colWidth: 100, colHeight: 300, allowRemovals: true,
+    plan: { scale: 1, looseness: [0], faces: [{ hits: [{ conceptId: 'weak', h: 100 }] }] } });
+}
+
+test('a flush card can offer one higher-value swap without modifying its selection', async () => {
+  const input = await exchangeFixture();
+  const before = JSON.stringify(input.spec.selection);
+  const diff = proposeBalance(input);
+  assert.deepEqual(diff.removes.map((r) => r.conceptId), ['weak']);
+  assert.deepEqual(diff.adds.map((r) => r.conceptId), ['better']);
+  assert.equal(JSON.stringify(input.spec.selection), before);
+  assert.equal(proposeBalance({ ...input, allowRemovals: false }).removes.length, 0);
+});
+
+test('removal proposals protect emergency, high-importance, personal and explicitly picked rows', async () => {
+  const input = await exchangeFixture();
+  const check = () => assert.equal(proposeBalance(input).removes.length, 0);
+  input.spec.selection.items.weak = true;
+  check();
+  delete input.spec.selection.items.weak;
+  input.edits = { extras: [], overrides: { weak: { values: { gloss: 'Mine' } } } };
+  check();
+  delete input.edits;
+  input.corpus.concepts.weak.importance = '0.85';
+  check();
+  input.corpus.concepts.weak.importance = '0.8';
+  input.corpus.sectionById.exchange.group = 'emergency';
+  check();
+  input.corpus.sectionById.exchange.group = 'social';
+  input.blocks[0].rows[0].mergedFrom = ['another'];
+  check();
+});
+
+test('a redundant row can be offered for optional removal when no replacement exists', async () => {
+  const input = await exchangeFixture();
+  delete input.corpus.concepts.better;
+  const diff = proposeBalance(input);
+  assert.equal(diff.adds.length, 0);
+  assert.equal(diff.removes[0].conceptId, 'weak');
+  assert.match(diff.removes[0].reason, /similar wording is already included/);
+  assert.match(diff.note, /Optionally remove/);
+});
+
+test('an unrated cluster cannot justify dropping a complementary row or a marginal swap', async () => {
+  const input = await exchangeFixture();
+  input.corpus.redundancy = {};
+  input.corpus.concepts.weak.cluster_id = 'compass';
+  input.corpus.concepts.keep.cluster_id = 'compass';
+  input.corpus.conceptsByCluster = { compass: ['weak', 'keep'] };
+  // The prior cuts .80 to .44; the absent .84 row would look much better if
+  // ranking discount alone were enough to discard an independent direction.
+  assert.deepEqual(proposeBalance(input).removes, []);
+  delete input.corpus.concepts.better;
+  assert.deepEqual(proposeBalance(input).removes, []);
+});
+
+test('a replacement without duplicate evidence must improve undiscounted importance', async () => {
+  const input = await exchangeFixture();
+  input.corpus.redundancy = {};
+  input.corpus.concepts.weak.importance = '0.4';
+  const diff = proposeBalance(input);
+  assert.equal(diff.removes[0].conceptId, 'weak');
+  assert.equal(diff.adds[0].conceptId, 'better');
+  assert.match(diff.removes[0].reason, /lower priority/);
+});
+
+test('reviewing a swap at fixed geometry refuses addition alone and accepts its matching removal', async () => {
+  const base = await referenceSpec('es', 'en');
+  const spec = { ...base, autoFaces: false, scale: 1, region: '',
+    geometry: { ...base.geometry, pageW: 120, pageH: 90, columns: 1, faces: 1 },
+    selection: {
+      sections: Object.fromEntries(ctx.corpus.sections.map((s) => [s.section_id, s.section_id === 'social-basics'])),
+      items: Object.fromEntries(Object.values(ctx.corpus.concepts)
+        .filter((c) => c.section_id === 'social-basics').map((c) => [c.concept_id, false])),
+    } };
+  const edits = { overrides: {}, extras: [
+    { conceptId: 'custom.old', sectionId: 'social-basics', template: 'entry', weight: 1,
+      values: { script: 'Please help me now '.repeat(3), gloss: 'Please help me now '.repeat(3) } },
+    { conceptId: 'custom.new', sectionId: 'social-basics', template: 'entry', weight: 1,
+      values: { script: 'Please show me how '.repeat(3), gloss: 'Please show me how '.repeat(3) } },
+  ] };
+  const review = (/** @type {boolean} */ old, /** @type {boolean} */ added) => buildSheet(ctx, {
+    ...spec, selection: { ...spec.selection,
+      items: { ...spec.selection.items, 'custom.old': old, 'custom.new': added } },
+  }, edits);
+  assert.equal((await review(true, false)).plan.faces.length, 1);
+  const withoutRemoval = await review(true, true);
+  assert.equal(withoutRemoval.plan.faces.length, 0);
+  assert.ok(withoutRemoval.plan.warnings.some((w) => w.severity === 'error'));
+  assert.equal((await review(false, true)).plan.faces.length, 1);
+  assert.equal(edits.extras.length, 2, 'a removal only changes inclusion, never authored content');
 });

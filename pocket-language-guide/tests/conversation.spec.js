@@ -1311,6 +1311,37 @@ test('a button\'s key words are set in bold, and the reader marks their own', as
   await expect(cell.locator('.board-key')).toHaveCount(0);
 });
 
+test('keyword colour and bold are independent choices', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ boldKeys: false, colourKeys: true })));
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  const cell = page.locator('[data-button="colder"]');
+  const key = cell.locator('.board-key');
+  await expect(key).toHaveText('colder');
+  await expect(key).toHaveClass(/board-key-cold/);
+  const plainWeight = await cell.locator('.board-cell-label').evaluate((node) => getComputedStyle(node).fontWeight);
+  await expect(key).toHaveCSS('font-weight', plainWeight);
+  await fromMenu(page, 'Settings');
+  const dialog = page.locator('dialog.speaker-settings');
+  const colour = dialog.getByRole('checkbox', { name: '…and in colour where they have one, like colder in blue and stop in red', exact: true });
+  await expect(colour).toBeEnabled();
+  await expect(colour).toBeChecked();
+  await dialog.getByRole('checkbox', { name: 'The key words of each button in bold', exact: true }).check();
+  await page.keyboard.press('Escape');
+  await expect(key).toHaveCSS('font-weight', '800');
+  await expect(key).toHaveClass(/board-key-cold/);
+});
+
+test('incoming answers respect message visibility settings after reversing languages', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ owner: false, roman: false, ipa: false, turn: false })));
+  await page.goto(REPLIES);
+  await page.locator('[data-button="avoid"]').click();
+  await page.locator(EXCHANGE).click();
+  await page.locator('.board-answer').first().click();
+  await expect(page.locator('.board-stage')).toHaveClass(/board-stage-incoming/);
+  await expect(page.locator('.board-message-text')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('.gloss-own, .gloss-say, .gloss-ipa, .board-turn')).toHaveCount(0);
+});
+
 test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');

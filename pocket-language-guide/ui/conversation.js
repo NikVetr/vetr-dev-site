@@ -843,7 +843,16 @@ function travelChecks(listener, owner, index, nameOf) {
     {
       label: t('check.saved'),
       run: async () => {
-        if (isNative()) return { state: 'pass', detail: t('check.bundled') };
+        if (isNative()) {
+          loaded();
+          const { nativeLanguagePacks } = await import('./platform/language-packs.js');
+          const packs = await nativeLanguagePacks();
+          if (!packs) throw new Error('Native language storage is unavailable');
+          const saved = await packs.status();
+          const ready = [listener, owner].every((code) => ['bundled', 'installed'].includes(saved[code]?.state));
+          return ready ? { state: 'pass', detail: t('native.packReady') }
+            : { state: 'fail', detail: t('native.packNotReady') };
+        }
         if (!navigator.serviceWorker?.controller) return { state: 'fail', detail: t('check.noWorker') };
         /** @type {string[]} */ const missing = [];
         for (const url of used) if (!(await caches.match(url, { ignoreSearch: true }))) missing.push(url);
@@ -1405,7 +1414,7 @@ async function main() {
     const concept = button.phraseRef?.kind === 'corpus' ? button.phraseRef.id : own?.concept;
     const words = ((concept ? pairing.ownerKeys[concept] : own?.keys) ?? []).filter((/** @type {string} */ w) => said.includes(w));
     if (!words.length) return null;
-    return { words, tone: display.colourKeys && concept ? corpus.keyTones[concept] : undefined };
+    return { words, bold: display.boldKeys, tone: display.colourKeys && concept ? corpus.keyTones[concept] : undefined };
   };
 
   /**
@@ -1655,7 +1664,7 @@ async function main() {
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onHoldSay: display.holdSpeaks && canSpeak ? (button) => { countPress(button); sayOnTap(button, false); } : undefined,
         onPick: pickButton,
-        keys: display.boldKeys ? keysOf : undefined,
+        keys: display.boldKeys || display.colourKeys ? keysOf : undefined,
         sub: (peeking || display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
           const phrase = button.kind === 'message' ? phraseOf(button) : null;
           if (!phrase) return [];
@@ -1838,6 +1847,7 @@ async function main() {
       replyLabel: '',
       incoming: true,
       colour: chosen?.colour ?? button.colour,
+      show: display,
     });
     // **The door to the fuller translator, opened.** "None of these" is the stranger
     // saying the board has no answer for them; the next thing they need is a

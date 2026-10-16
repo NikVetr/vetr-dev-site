@@ -259,8 +259,26 @@ export function isMissingFile(err) {
  * @param {LoadText} loadText @param {string} bcp47 @param {string[]} groups
  */
 export async function loadLanguage(loadText, bcp47, groups) {
-  /** @type {Record<string,Record<string,string>>} */ const rows = {};
-  for (const group of groups) {
+  let cache = languagesByLoader.get(loadText);
+  if (!cache) { cache = new Map(); languagesByLoader.set(loadText, cache); }
+  const key = JSON.stringify([bcp47, groups]);
+  let pending = cache.get(key);
+  if (!pending) {
+    pending = readLanguage(loadText, bcp47, groups);
+    cache.set(key, pending);
+    pending.catch(() => cache.delete(key)); // a failed connection must be retryable
+  }
+  const rows = await pending;
+  // Slots and speaker variants modify rows; cached corpus rows never escape.
+  return Object.fromEntries(Object.entries(rows).map(([id, row]) => [id, { ...row }]));
+}
+
+/** @type {WeakMap<LoadText, Map<string, Promise<Record<string, Record<string, string>>>>>} */
+const languagesByLoader = new WeakMap();
+
+/** @param {LoadText} loadText @param {string} bcp47 @param {string[]} groups */
+async function readLanguage(loadText, bcp47, groups) {
+  const tables = await Promise.all(groups.map(async (group) => {
     let text;
     try {
       text = await loadText(`data/lang/${bcp47}/${group}.csv`);
@@ -268,14 +286,12 @@ export async function loadLanguage(loadText, bcp47, groups) {
       // A draft language legitimately has no file for some groups. Anything other
       // than "absent" means we failed to fetch rows that do exist, and carrying on
       // would print a sheet silently missing a section -- possibly Emergency.
-      if (isMissingFile(err)) continue;
+      if (isMissingFile(err)) return [];
       throw err;
     }
-    for (const row of parseTable(text, `data/lang/${bcp47}/${group}.csv`)) {
-      rows[row.concept_id] = row;
-    }
-  }
-  return rows;
+    return parseTable(text, `data/lang/${bcp47}/${group}.csv`);
+  }));
+  return Object.fromEntries(tables.flat().map((row) => [row.concept_id, row]));
 }
 
 /**

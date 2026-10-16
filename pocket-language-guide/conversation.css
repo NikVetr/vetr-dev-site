@@ -532,7 +532,7 @@
 /* **The words that carry a button**, heavier than the rest of its label -- and, where
    the reader asked and the sentence has one, in its colour: cold blue, warm orange,
    stop red, go green, each a shade that holds its contrast on the cell in both themes. */
-.board-key { font-weight: 800; }
+.board-key-bold { font-weight: 800; }
 .board-key-cold { color: light-dark(#1559a8, #7db7f5); }
 .board-key-warm { color: light-dark(#b34700, #ffab70); }
 .board-key-stop { color: light-dark(#b3141f, #ff8a8a); }

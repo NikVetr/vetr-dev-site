@@ -9,6 +9,28 @@ import {
 import { buildContent } from '../core/content.js';
 import { referenceSpec } from '../scripts/spec.mjs';
 
+test('language loads share in-flight reads but never mutable rows or failed reads', async () => {
+  let reads = 0;
+  let fail = false;
+  const loadText = async () => {
+    reads += 1;
+    if (fail) throw new Error('connection lost');
+    return 'concept_id,text\nhello,Hello\n';
+  };
+  const [a, b] = await Promise.all([loadLanguage(loadText, 'en', ['core']), loadLanguage(loadText, 'en', ['core'])]);
+  assert.equal(reads, 1);
+  a.hello.text = 'changed';
+  assert.equal(b.hello.text, 'Hello');
+  assert.equal((await loadLanguage(loadText, 'en', ['core'])).hello.text, 'Hello');
+  fail = true;
+  await assert.rejects(loadLanguage(loadText, 'es', ['core']), /connection lost/);
+  fail = false;
+  assert.equal((await loadLanguage(loadText, 'es', ['core'])).hello.text, 'Hello');
+  assert.equal(reads, 3);
+  const other = async () => 'concept_id,text\nhello,Another corpus\n';
+  assert.equal((await loadLanguage(other, 'en', ['core'])).hello.text, 'Another corpus');
+});
+
 /** The corpus, once. */
 let held;
 const context = async () => {

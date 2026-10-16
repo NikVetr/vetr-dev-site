@@ -93,6 +93,61 @@ test.describe('help me decide', () => {
     await expect(page.locator('dialog.quiz')).toHaveCount(0);
     await expectIncluded(page, before.included);
   });
+
+  test('every close path releases the questionnaire and its pending result', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('#quiz-open')).toBeEnabled();
+    for (const close of ['close', 'escape', 'cross']) {
+      await page.evaluate(async () => {
+        const { openQuiz } = await import('/ui/quiz.js');
+        const state = /** @type {any} */ (window);
+        state.quizResult = 'pending';
+        openQuiz().then((answer) => { state.quizResult = answer; });
+      });
+      if (close === 'close') await page.locator('dialog.quiz').evaluate((dialog) => /** @type {HTMLDialogElement} */ (dialog).close());
+      else if (close === 'escape') await page.keyboard.press('Escape');
+      else await page.locator('dialog.quiz .speaker-close').click();
+      await expect(page.locator('dialog.quiz')).toHaveCount(0);
+      await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).quizResult)).toBe(null);
+    }
+  });
+
+  test('personal phrases are reviewed before importing through the shared CSV workflow', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    await page.locator('#quiz-open').click();
+    const quiz = page.locator('dialog.quiz');
+    await quiz.locator('.quiz-personal summary').click();
+    await quiz.locator('#quiz-name').fill('Alex');
+    await quiz.locator('#quiz-profession').fill('engineer');
+    await quiz.locator('#quiz-school').fill('Example University');
+    await quiz.getByRole('button', { name: 'Create a translation prompt' }).click();
+    await expect(quiz.locator('#quiz-prompt')).toHaveValue(/Example University/);
+    for (const name of ['ChatGPT', 'Claude', 'Gemini']) {
+      expect(new URL(await quiz.getByRole('link', { name, exact: true }).getAttribute('href') ?? '').search).toBe('');
+    }
+    const add = quiz.getByRole('button', { name: 'Apply choices and import' });
+    await expect(add).toBeDisabled();
+    await quiz.locator('#quiz-response').fill('not a CSV');
+    await quiz.getByRole('button', { name: 'Review response' }).click();
+    await expect(quiz.getByRole('status')).toContainText('Could not import');
+    await expect(add).toBeDisabled();
+    const header = 'concept_id,section_id,template,include,target_text,romanization,ipa,gloss,respell,importance,notes';
+    await quiz.locator('#quiz-response').fill('```csv\n' + header
+      + '\ncustom.personal.alex,introductions,entry,yes,我叫Alex,,,My name is Alex,,0.8,custom\n```');
+    await quiz.getByRole('button', { name: 'Review response' }).click();
+    await expect(quiz.getByRole('status')).toContainText('1 new rows');
+    await expect(add).toBeEnabled();
+    // A changed response must be reviewed again, even after the first was valid.
+    await quiz.locator('#quiz-response').press('End');
+    await quiz.locator('#quiz-response').press('Space');
+    await expect(add).toBeDisabled();
+    await quiz.getByRole('button', { name: 'Review response' }).click();
+    await add.click();
+    await expect(quiz).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('plg.edits.zh-Hans__en') ?? '{}')
+      .extras?.find((row) => row.conceptId === 'custom.personal.alex')?.values.script)).toBe('我叫Alex');
+  });
 });
 
 test.describe('drag handles', () => {

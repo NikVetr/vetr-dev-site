@@ -27,6 +27,7 @@ import { renderFaces, highlight } from './preview.js';
 import { openItemPopup, closeItemPopup } from './item-popup.js';
 import {
   exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits, loadConfig, saveConfig,
+  setItemInclusion, itemIncluded,
 } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
@@ -111,18 +112,26 @@ async function main() {
   /** @type {Record<string,any>} */ const themes = {};
   for (const id of THEME_IDS) themes[id] = await ctx.theme(id);
 
+  const saved = loadConfig(choice.target, choice.source);
+  const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+    || (narrow() && matchMedia('(pointer: coarse)').matches);
+  // The device supplies a first format, never a replacement for a reader's choice.
+  const savedAspect = saved?.spec.geometry?.pageW != null || saved?.spec.geometry?.pageH != null;
+  const initialChoice = mobile && !choice.geometry && !savedAspect
+    ? { ...choice, geometry: 'phone-19-5x9' } : choice;
   /** @type {import('../core/types.js').SheetSpec} */
-  let spec = makeSpec(ctx, presets, choice);
+  let spec = makeSpec(ctx, presets, initialChoice);
   // **The card comes back as it was left.** Every change below is saved as it is
   // made (`persist`), and a phone closes an app without asking -- so what the studio
   // opens on is the reader's own card for this pair where there is one, over the
   // defaults, which still fill in anything a card saved by an older build lacks.
-  const saved = loadConfig(spec.target, spec.source);
   // The paper's facts are the registry's rather than the reader's, so only which paper
   // it was comes back: a printer margin corrected in `paper.csv` reaches a saved card.
   if (saved) {
     spec = {
-      ...spec, ...saved.spec, paper: paperSpec(ctx.corpus, (saved.spec.paper ?? spec.paper).presetId),
+      ...spec, ...saved.spec,
+      geometry: { ...spec.geometry, ...saved.spec.geometry },
+      paper: paperSpec(ctx.corpus, saved.spec.paper?.presetId ?? spec.paper.presetId),
     };
   }
   let edits = loadEdits(spec.target, spec.source);
@@ -180,6 +189,58 @@ async function main() {
   function persist() {
     const { target, source, speaker, ...kept } = spec;
     saveConfig(target, source, { spec: kept, finish: format.finish(), dpi: pngDpi }).catch(unkept);
+  }
+
+  /** Keep explicit content choices and legacy CSV inclusion flags in step.
+   * @param {{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>}} patch */
+  function toggleContent(patch) {
+    marked = null;
+    if (patch.items) {
+      edits = setItemInclusion(edits, patch.items);
+      saveEdits(spec.target, spec.source, edits).catch(unsaved);
+    }
+    spec = {
+      ...spec,
+      selection: {
+        sections: { ...spec.selection.sections, ...(patch.sections ?? {}) },
+        items: { ...spec.selection.items, ...(patch.items ?? {}) },
+      },
+      sectionColors: { ...spec.sectionColors, ...(patch.sectionColors ?? {}) },
+    };
+    schedule();
+  }
+
+  /** @param {ReturnType<typeof importSheetCsv>} result
+   * @param {import('../core/types.js').SheetSpec} [base] */
+  async function commitImport(result, base = spec) {
+    await saveEdits(base.target, base.source, result.edits);
+    edits = result.edits;
+    const sections = { ...base.selection.sections };
+    const items = { ...base.selection.items, ...result.inclusion };
+    for (const [id, on] of Object.entries(result.inclusion)) {
+      if (!on) continue;
+      const section = ctx.corpus.concepts[id]?.section_id
+        ?? result.edits.extras.find((row) => row.conceptId === id)?.sectionId;
+      if (!section) continue;
+      if (sections[section] === false) {
+        // Opening a hidden section imports these rows, not its untouched siblings.
+        // Preserve explicit picks, including custom rows made before this import.
+        const definition = ctx.corpus.sectionById[section];
+        const siblings = [
+          ...(ctx.corpus.conceptsByGroup[definition.group] ?? [])
+            .filter((row) => row.section_id === section).map((row) => row.concept_id),
+          ...result.edits.extras.filter((row) => row.sectionId === section).map((row) => row.conceptId),
+        ];
+        for (const sibling of siblings) {
+          if (!(sibling in result.inclusion) && base.selection.items[sibling] !== true) items[sibling] = false;
+        }
+      }
+      sections[section] = true;
+    }
+    spec = { ...base, selection: {
+      sections, items,
+    } };
+    schedule();
   }
 
   /** @param {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish */
@@ -351,7 +412,15 @@ async function main() {
   // value nothing reads.
   store.remove(BANNER_KEY);
   $('quiz-open').addEventListener('click', async () => {
-    const answers = await openQuiz();
+    const answers = await openQuiz({
+      spec, corpus: ctx.corpus,
+      previewCsv: (text) => importSheetCsv(text, ctx.corpus, edits),
+      applyCsv: async (text, answers) => {
+        const result = importSheetCsv(text, ctx.corpus, edits);
+        if (result.problems.length) throw new Error(result.problems.join('\n'));
+        await commitImport(result, applyQuiz(spec, ctx.corpus, answers));
+      },
+    });
     if (!answers) return;
     spec = applyQuiz(spec, ctx.corpus, answers);
     schedule();
@@ -439,18 +508,7 @@ async function main() {
           saveEdits(spec.target, spec.source, edits).catch(unsaved);
           schedule();
         },
-        onToggle: (patch) => {
-          marked = null;
-          spec = {
-            ...spec,
-            selection: {
-              sections: { ...spec.selection.sections, ...(patch.sections ?? {}) },
-              items: { ...spec.selection.items, ...(patch.items ?? {}) },
-            },
-            sectionColors: { ...spec.sectionColors, ...(patch.sectionColors ?? {}) },
-          };
-          schedule();
-        },
+        onToggle: toggleContent,
         // Only the keys the section sets apart are kept, and a section that sets none
         // is dropped, so "has its own format" is simply "is in the table".
         onFormat: (sectionId, title) => openSectionFormat({
@@ -486,7 +544,7 @@ async function main() {
         },
       });
     }
-    updateTree(spec, blocks, marked);
+    updateTree(spec, blocks, marked, edits);
     // Custom items are written into the same edits an import produces, so a term
     // typed here and a term imported from a CSV behave identically.
     if (!addTerm) {
@@ -635,8 +693,7 @@ async function main() {
           title: values.script || values.gloss || id,
           sectionId,
           sectionTitle: sectionTitles?.[sectionId] || section?.title_en || sectionId,
-          itemOn: spec.selection.items[id] !== false
-            && spec.selection.sections[sectionId] !== false,
+          itemOn: itemIncluded(spec, edits, id, sectionId),
           sectionOn: spec.selection.sections[sectionId] !== false,
           role,
           colours: Object.entries(roles).map(([r, hex]) => ({
@@ -645,18 +702,7 @@ async function main() {
           values,
           target: spec.target,
           source: spec.source,
-          onToggle: (patch) => {
-            marked = null;
-            spec = {
-              ...spec,
-              selection: {
-                sections: { ...spec.selection.sections, ...(patch.sections ?? {}) },
-                items: { ...spec.selection.items, ...(patch.items ?? {}) },
-              },
-              sectionColors: { ...spec.sectionColors, ...(patch.sectionColors ?? {}) },
-            };
-            schedule();
-          },
+          onToggle: toggleContent,
           onEdit: (conceptId, next) => {
             const held = edits.overrides[conceptId];
             edits = {
@@ -696,6 +742,8 @@ async function main() {
   // --- content ------------------------------------------------------------
 
   $('all-on').addEventListener('click', () => {
+    edits = setItemInclusion(edits, Object.fromEntries(Object.keys(edits.overrides).map((id) => [id, true])));
+    saveEdits(spec.target, spec.source, edits).catch(unsaved);
     spec = { ...spec, selection: { sections: {}, items: {} } };
     schedule();
   });
@@ -726,6 +774,7 @@ async function main() {
     }
     const box = contentBox(spec.geometry, spec.paper, plan.bands, elvenInset(spec));
     showDiff(proposeBalance({
+      allowRemovals: true, edits,
       corpus: ctx.corpus,
       spec,
       theme: built.theme,
@@ -754,6 +803,9 @@ async function main() {
 
   /** @param {ReturnType<typeof proposeBalance>} diff */
   function showDiff(diff) {
+    const reviewedSpec = spec;
+    const reviewedEdits = edits;
+    const reviewedPlan = plan;
     const panel = $('diff');
     panel.hidden = false;
     const note = document.createElement('p');
@@ -762,18 +814,26 @@ async function main() {
 
     const list = document.createElement('ul');
     /** @type {HTMLInputElement[]} */ const boxes = [];
-    for (const add of diff.adds) {
+    const changes = [
+      ...diff.removes.map((entry) => ({ ...entry, on: false })),
+      ...diff.adds.map((entry) => ({ ...entry, on: true })),
+    ];
+    for (const change of changes) {
       const box = document.createElement('input');
       box.type = 'checkbox';
-      box.checked = true;
-      box.dataset.concept = add.conceptId;
+      box.checked = change.on || diff.adds.length > 0;
+      box.dataset.concept = change.conceptId;
+      box.dataset.include = String(change.on);
+      box.setAttribute('aria-label', change.on
+        ? t('studio.balanceAdd', { label: change.label })
+        : t('studio.balanceRemove', { label: change.label }));
       boxes.push(box);
       const label = document.createElement('label');
       const text = document.createElement('span');
-      text.textContent = add.label;
+      text.textContent = `${change.on ? '+' : '−'} ${change.label}`;
       const why = document.createElement('span');
       why.className = 'why';
-      why.textContent = add.reason;
+      why.textContent = change.reason;
       label.append(box, text, why);
       const li = document.createElement('li');
       li.append(label);
@@ -785,15 +845,22 @@ async function main() {
     const dismiss = document.createElement('button');
     dismiss.type = 'button';
     dismiss.className = 'ghost';
-    dismiss.textContent = diff.adds.length ? t('studio.rejectAll') : t('studio.close');
+    dismiss.textContent = changes.length ? t('studio.rejectAll') : t('studio.close');
     dismiss.addEventListener('click', () => { panel.hidden = true; });
     actions.append(dismiss);
-    if (diff.adds.length) {
+    if (changes.length) {
       const apply = document.createElement('button');
       apply.type = 'button';
       apply.className = 'primary';
-      apply.textContent = t('studio.addTicked');
-      apply.addEventListener('click', () => {
+      apply.textContent = t('studio.applyTicked');
+      const syncApply = () => { apply.disabled = !boxes.some((box) => box.checked); };
+      for (const box of boxes) box.addEventListener('change', syncApply);
+      syncApply();
+      apply.addEventListener('click', async () => {
+        if (spec !== reviewedSpec || edits !== reviewedEdits || !reviewedPlan) {
+          note.textContent = t('studio.balanceChanged');
+          return;
+        }
         const taken = new Set(boxes
           .filter((box) => box.checked && box.dataset.concept)
           .map((box) => /** @type {string} */ (box.dataset.concept)));
@@ -803,6 +870,9 @@ async function main() {
           if (!taken.has(add.conceptId)) continue;
           items[add.conceptId] = true;
           sections[add.sectionId] = true;
+        }
+        for (const remove of diff.removes) {
+          if (taken.has(remove.conceptId)) items[remove.conceptId] = false;
         }
         // Most proposals come from a section the default card hides, and switching a
         // section on brings all of its items with it -- so accepting one row from
@@ -822,25 +892,58 @@ async function main() {
             if (spec.selection.items[concept.concept_id]) continue;
             items[concept.concept_id] = false;
           }
+          for (const extra of edits.extras) {
+            if (extra.sectionId !== sectionId || items[extra.conceptId]
+              || spec.selection.items[extra.conceptId]) continue;
+            items[extra.conceptId] = false;
+          }
         }
         // What balancing did, so the reader can see it rather than infer it from a
         // count. `items` holds both halves already: `true` is a row it added and
         // `false` is one it turned off to stop a whole section arriving with it --
         // which is the surprising half and the one worth colouring.
-        marked = items;
-        spec = {
+        const next = {
           ...spec,
           selection: {
             sections: { ...spec.selection.sections, ...sections },
             items: { ...spec.selection.items, ...items },
           },
         };
+        const nextEdits = setItemInclusion(edits, items);
+        apply.disabled = true;
+        try {
+          // Approval can select a replacement without its matching removal. Solve
+          // that exact subset at the current size before committing any changes.
+          const checked = await buildSheet(ctx, {
+            ...next, autoFaces: false, scale: reviewedPlan.scale,
+            geometry: reviewedPlan.geometry,
+          }, nextEdits);
+          if (!checked.plan.faces.length
+            || checked.plan.warnings.some((warning) => warning.severity === 'error')) {
+            note.textContent = t('studio.balanceDoesNotFit');
+            return;
+          }
+          if (spec !== reviewedSpec || edits !== reviewedEdits) {
+            note.textContent = t('studio.balanceChanged');
+            return;
+          }
+          await saveEdits(spec.target, spec.source, nextEdits);
+          marked = items;
+          edits = nextEdits;
+          spec = next;
+        } catch (err) {
+          note.textContent = t('studio.balanceFailed', { reason: err instanceof Error ? err.message : String(err) });
+          unsaved(err instanceof Error ? err : new Error(String(err)));
+          return;
+        } finally {
+          syncApply();
+        }
         panel.hidden = true;
         schedule();
       });
       actions.prepend(apply);
     }
-    panel.replaceChildren(note, ...(diff.adds.length ? [list] : []), actions);
+    panel.replaceChildren(note, ...(changes.length ? [list] : []), actions);
   }
 
   // --- export -------------------------------------------------------------
@@ -893,8 +996,7 @@ async function main() {
     if (!file) return;
     try {
       const result = importSheetCsv(await file.text(), ctx.corpus, edits);
-      edits = result.edits;
-      saveEdits(spec.target, spec.source, edits).catch(unsaved);
+      await commitImport(result);
       const skipped = result.problems.length
         ? t('studio.importSkipped', { problems: result.problems.slice(0, 8).join('\n') })
         : '';

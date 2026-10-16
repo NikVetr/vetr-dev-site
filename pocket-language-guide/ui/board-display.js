@@ -252,7 +252,7 @@ export function displaySection(current, onChange, voice) {
   };
   /** A follow-on setting is out of play while the one it depends on says so. */
   const follow = () => {
-    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords || held.mosaic], ['colourKeys', !held.boldKeys]])) {
+    for (const [id, off] of /** @type {const} */ ([['tapAnswers', !held.tapSpeaks], ['evenType', held.sizedToWords || held.mosaic]])) {
       const input = /** @type {HTMLInputElement} */ (inputs[id]);
       input.disabled = off;
       input.closest('label')?.classList.toggle('display-option-off', off);

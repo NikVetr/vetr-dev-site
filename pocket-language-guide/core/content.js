@@ -16,18 +16,17 @@ import { alternatives, perAlternative } from './alternation.js';
 import { applyVariants, variantKey } from './speaker.js';
 
 /**
- * Generated respellings, keyed `target__source__accent__voice`. Module scope rather
- * than per-context: it is a pure function of committed data and the reader's own
- * profile, so two contexts cannot disagree about it.
+ * Generated respellings, keyed `target__source__accent__voice` within one context.
+ * Separate corpora or loaders must not share generated text.
  *
  * The fourth part of the key is not decoration. A respelling is derived from the
  * target row's `ipa`, and a speaker variant replaces that row -- so the moment the
  * reader says they are speaking as a woman, the same pair has a different answer.
  * Keyed on three parts it returned the previous voice's respellings, which is the
  * quiet version of exactly the defect this feature exists to fix.
- * @type {Map<string, Record<string,string>>}
+ * @type {WeakMap<ContentContext, Map<string, Record<string,string>>>}
  */
-const generated = new Map();
+const generated = new WeakMap();
 
 /**
  * What building the words needs: the corpus and a way to read a file.
@@ -50,7 +49,9 @@ const generated = new Map();
 async function generatedRespellings(ctx, spec, targetRows) {
   const voice = variantKey(ctx.corpus.speakerAxes[spec.target] ?? [], spec.speaker ?? {});
   const key = `${spec.target}__${spec.source}__${spec.accent}__${voice ?? ''}`;
-  const held = generated.get(key);
+  let cache = generated.get(ctx);
+  if (!cache) { cache = new Map(); generated.set(ctx, cache); }
+  const held = cache.get(key);
   if (held) return held;
   // A reader whose language has no rule table gets nothing, which is the state of
   // sixteen of the seventeen today and is not a failure.
@@ -70,7 +71,7 @@ async function generatedRespellings(ctx, spec, targetRows) {
     const said = perAlternative(ipa, (one) => respeller.respell(one));
     if (said) out[id] = said;
   }
-  generated.set(key, out);
+  cache.set(key, out);
   return out;
 }
 
