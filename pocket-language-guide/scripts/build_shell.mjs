@@ -69,7 +69,7 @@ const DEFAULT_BOARD_PAIR = ['zh-Hans', 'en'];
 
 const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
   'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
-  'data/respell/rules', 'data/i18n', 'data/boards', 'data/brand'];
+  'data/respell/rules', 'data/i18n', 'data/boards', 'data/brand', 'data/flags'];
 
 /**
  * The corpus a conversation board needs, for every pair a board declares.
@@ -154,7 +154,8 @@ async function boardCorpus() {
  * about the disk; asking for a file a language does not have would leave a save
  * "partly done" for good.
  */
-async function offlineIndex() {
+/** @param {Set<string>} shellFiles */
+async function offlineIndex(shellFiles) {
   const read = async (/** @type {string} */ rel) => readFile(join(ROOT, rel), 'utf8');
   const size = (/** @type {string} */ rel) => stat(join(ROOT, rel)).then((s) => s.size, () => null);
   const groups = (await readdir(join(ROOT, 'data/concepts'))).filter((f) => f.endsWith('.csv'));
@@ -165,7 +166,8 @@ async function offlineIndex() {
   // condensed Latin its tables are set in -- which every saved language shares, so
   // they are listed once rather than counted against each.
   const fontsOf = (/** @type {string[]} */ stacks) => {
-    const own = faces.filter((/** @type {any} */ f) => stacks.includes(f.stack));
+    const variants = new Set(stacks.flatMap((stack) => [stack, `${stack}-serif`, `${stack}-cond`, `${stack}-cond-serif`]));
+    const own = faces.filter((/** @type {any} */ f) => variants.has(f.stack));
     return {
       fonts: own.flatMap((/** @type {any} */ f) => [`data/fonts/${f.file}.woff2`, `data/fonts/${f.file}.ttf`]),
       fontBytes: own.reduce((/** @type {number} */ n, /** @type {any} */ f) => n + f.woff2Bytes + f.ttfBytes, 0),
@@ -184,9 +186,14 @@ async function offlineIndex() {
       ...fontsOf(common.includes(stackOf[script]) ? [] : [stackOf[script]]),
     };
   }
-  return `${JSON.stringify({ common: fontsOf(common), languages })}\n`;
+  const shared = fontsOf(common);
+  const packFiles = [...new Set([...shared.fonts,
+    ...Object.values(languages).flatMap((language) => [...language.files, ...language.fonts])])]
+    .filter((path) => !shellFiles.has(path)).sort();
+  /** @type {Record<string,string>} */ const hashes = {};
+  for (const path of packFiles) hashes[path] = createHash('sha256').update(await readFile(join(ROOT, path))).digest('hex');
+  return `${JSON.stringify({ common: shared, languages, hashes })}\n`;
 }
-const offline = await offlineIndex();
 
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {
@@ -213,6 +220,7 @@ const files = [...new Set([
     .filter((f) => f.endsWith('.csv') || f.endsWith('.json') || f.endsWith('.png') || f.endsWith('.svg'))
     .map((f) => `${dir}/${f}`)))).flat(),
 ])].sort();
+const offline = await offlineIndex(new Set(files));
 
 // Which curated respelling files exist. Without this the app guessed, and asking
 // for `zh-Hans__ja__ja-US.csv` -- a pair nobody has hand-curated -- 404ed on the

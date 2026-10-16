@@ -3,9 +3,8 @@
 //   node scripts/build_mobile.mjs [--quiet]
 //
 // Writes `dist/mobile/`, which Capacitor copies into the iOS and Android app. The
-// app must work on the first launch after installation with no download, so this is
-// a *closure* rather than a subset: every file the pages actually reach, and nothing
-// else.
+// starter English/Mandarin pair works on first launch without a download. Other
+// language data and script fonts are installed explicitly from a pinned inventory.
 //
 // **An allowlist, not a denylist.** The repository holds test fixtures, Python build
 // environments, research notes, native build intermediates and an 8.6MB dump of
@@ -14,43 +13,31 @@
 // somebody adds a directory. So this names what goes in, and fails if a file that is
 // named cannot be found.
 //
-// **The packs are the whole size question.** They are 114MB of the repository's 172MB
-// -- 2,756 thumbnails, 2,756 gzipped faces, and a 1.9MB index -- because both grow as
-// the square of the language count. A phone application cannot carry that, and it
-// does not have to: the gallery draws a card without a thumbnail whenever
-// `packs/index.json` does not list the pair, so *trimming the index is what stops the
-// request*. No gallery change, and nothing 404s. `PACK_SOURCES` says which reader
-// languages get pre-rendered cards in the bundle; everyone else gets a card with a
-// placeholder until they are online.
+// Previews grow with the square of the language count. Only the starter pair's
+// previews ride along; trimming their index keeps the gallery from requesting a
+// preview the application does not carry.
 
 import { readFile, writeFile, mkdir, rm, cp, stat, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { nativePackManifest, STARTER_LANGUAGES } from './native_packs.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const OUT = join(ROOT, 'dist/mobile');
 const QUIET = process.argv.includes('--quiet');
 
-/**
- * Reader languages whose pre-rendered cards ride along.
- *
- * One source is 52 thumbnails and 52 faces, about 2.1MB. All 53 would be 114MB, and
- * the App Store's over-cellular limit alone makes that the wrong trade for a picture
- * of a card the reader is about to typeset anyway.
- */
-const PACK_SOURCES = ['en'];
-
 /** Directories copied whole, because every file in them is reachable at runtime. */
 const DIRS = [
   'core', 'render', 'ui', 'vendor',
-  'data/concepts', 'data/lang', 'data/registry', 'data/themes', 'data/i18n',
-  'data/respell', 'data/boards', 'data/fonts', 'data/countries', 'data/emphasis',
+  'data/concepts', 'data/registry', 'data/themes', 'data/i18n',
+  'data/respell', 'data/boards', 'data/flags',
 ];
 
 /** Individual files, each of which some page names directly. */
 const FILES = [
   'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
   'style.css', 'conversation.css', 'favicon.svg', 'manifest.webmanifest',
-  'data/presets.json', 'data/icons.json', 'data/coverage.json',
+  'data/presets.json', 'data/icons.json', 'data/coverage.json', 'data/offline.json',
+  'data/fonts/manifest.json', 'data/countries/index.json',
   // The header's two marks and the two that move while a page loads. The launcher
   // PNGs beside them are the web's; an app has its own icon, built into the native project.
   'data/brand/mark.svg', 'data/brand/mark-dark.svg',
@@ -83,18 +70,20 @@ async function walk(dir) {
 
 /** Every file the bundle should contain, as repository-relative paths. */
 async function manifest() {
-  /** @type {string[]} */ const files = [...FILES];
+  const languagePacks = await nativePackManifest(ROOT);
+  /** @type {string[]} */ const files = [...FILES, ...languagePacks.bundled];
   for (const dir of DIRS) files.push(...await walk(dir));
 
   // The packs, trimmed to the sources that ride along, and the index trimmed with
   // them so the gallery never asks for one that did not.
   const index = JSON.parse(await readFile(join(ROOT, 'packs/index.json'), 'utf8'));
-  const kept = index.packs.filter((/** @type {any} */ p) => PACK_SOURCES.includes(p.source));
+  const kept = index.packs.filter((/** @type {any} */ p) => STARTER_LANGUAGES.includes(p.source)
+    && STARTER_LANGUAGES.includes(p.target));
   for (const pack of kept) {
     files.push(`packs/${pack.target}__${pack.source}/thumb.png`);
     files.push(`packs/${pack.target}__${pack.source}/face-1.svg.gz`);
   }
-  return { files: files.filter((f) => !SKIP.has(f)), index: { ...index, packs: kept } };
+  return { files: [...new Set(files.filter((f) => !SKIP.has(f)))], index: { ...index, packs: kept }, languagePacks };
 }
 
 /** @param {string[]} files */
@@ -119,7 +108,7 @@ async function report(files) {
   return total;
 }
 
-const { files, index } = await manifest();
+const { files, index, languagePacks } = await manifest();
 
 // Rebuilt from nothing every time. An incremental copy accumulates the files a
 // previous run needed and this one does not, which is how a bundle grows a
@@ -134,6 +123,8 @@ for (const file of files) {
 // The trimmed index, written rather than copied.
 await writeFile(join(OUT, 'packs/index.json'), `${JSON.stringify(index, null, 1)}\n`);
 files.push('packs/index.json');
+await writeFile(join(OUT, 'data/native-packs.json'), `${JSON.stringify(languagePacks)}\n`);
+files.push('data/native-packs.json');
 
 // **The marker that tells the app it is native.** The web ships the same file saying
 // `false`, so this is one small cached read rather than a 404 on every page load, and
@@ -143,6 +134,8 @@ await writeFile(join(OUT, 'data/native.json'), `${JSON.stringify({
   native: true,
   // No service worker in the bundle, so nothing should try to register one.
   serviceWorker: false,
+  starter: STARTER_LANGUAGES,
+  packsVersion: languagePacks.version,
   built: new Date().toISOString().slice(0, 10),
 }, null, 1)}\n`);
 files.push('data/native.json');
@@ -158,5 +151,5 @@ if (missing.length) throw new Error(`bundle is missing: ${missing.join(', ')}`);
 const total = await report(files);
 if (!QUIET) {
   console.log(`dist/mobile  ${files.length} files  ${(total / 1048576).toFixed(1)} MB`
-    + `  (packs for ${PACK_SOURCES.join(', ')})`);
+    + `  (starter languages: ${STARTER_LANGUAGES.join(', ')})`);
 }

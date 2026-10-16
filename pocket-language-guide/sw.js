@@ -4,7 +4,7 @@
 // to work with the network off -- including export, which is why every renderer is
 // client-side. The shell is precached on install; a language's corpus and fonts
 // are two megabytes or so per script, far too much to cache speculatively, so they
-// are fetched on request from the gallery's "save for offline".
+// are fetched when opened or explicitly saved from Settings.
 //
 // Scoped to /pocket-language-guide/, so nothing else on the site is affected.
 
@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-ebd3d339a3f0';
+const VERSION = 'plg-fa1d8f6b5f5e';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -25,16 +25,74 @@ const SHELL_CACHE = `${VERSION}-shell`;
  * every pack every reader had saved, because `VERSION` is a content hash of the
  * *shell*.
  *
- * The trade is that a pack can outlive a change to the data it holds. That is
- * survivable in a way the reverse is not: `data/coverage.json` and the registry are
- * in the shell, so a language whose rows changed shape still loads, and a reader who
- * wants the new rows can press the button again.
+ * Content hashes in the shell's offline manifest refresh changed cached files on
+ * upgrade. A failed refresh keeps its old bytes and old hash, so it works offline
+ * and can be retried when the file is next opened with a connection.
  */
 const PACK_CACHE = 'plg-packs';
 /** The prefix every cache of ours carries, which is what tells them apart from every
  * other app's on this origin. `VERSION` already begins with it. */
 const OURS = 'plg-';
 const SHELL_MANIFEST = 'data/shell.json';
+const CONTENT_HASH = 'x-plg-content-sha256';
+let hashes;
+const refreshing = new Map();
+
+async function packHashes() {
+  if (!hashes) hashes = (async () => {
+    const manifest = await (await caches.open(SHELL_CACHE)).match('data/offline.json');
+    const index = await manifest?.json();
+    if (!index?.hashes) throw new Error('Offline content hashes are missing from the shell');
+    return index.hashes;
+  })();
+  return hashes;
+}
+
+function packPath(request) {
+  const url = new URL(typeof request === 'string' ? request : request.url, location.href);
+  const base = new URL('./', location.href);
+  return url.origin === base.origin && url.pathname.startsWith(base.pathname)
+    ? url.pathname.slice(base.pathname.length) : '';
+}
+
+async function digest(response) {
+  const bytes = await crypto.subtle.digest('SHA-256', await response.clone().arrayBuffer());
+  return [...new Uint8Array(bytes)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function putTagged(cache, request, response, hash) {
+  const headers = new Headers(response.headers);
+  headers.set(CONTENT_HASH, hash);
+  const tagged = new Response(await response.arrayBuffer(), {
+    status: response.status, statusText: response.statusText, headers,
+  });
+  const keys = await cache.keys(request, { ignoreSearch: true });
+  await Promise.all((keys.length ? keys : [request]).map((key) => cache.put(key, tagged.clone())));
+  return tagged;
+}
+
+async function refreshPack(cache, request, expected) {
+  const url = new URL(typeof request === 'string' ? request : request.url, location.href);
+  url.search = '';
+  const key = url.href;
+  let work = refreshing.get(key);
+  if (!work) {
+    work = (async () => {
+      const response = await fetch(request, { cache: 'reload' });
+      if (!response.ok) return response;
+      if (expected) {
+        const actual = await digest(response);
+        if (actual !== expected) throw new Error(`Content hash mismatch: ${key}`);
+        return putTagged(cache, request, response, actual);
+      }
+      await cache.put(request, response.clone());
+      return response;
+    })();
+    refreshing.set(key, work);
+  }
+  try { return (await work).clone(); }
+  finally { if (refreshing.get(key) === work) refreshing.delete(key); }
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -67,19 +125,6 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
-    for (const key of await caches.keys()) {
-      // **Only this app's own caches.** Cache Storage is scoped to the *origin*, not
-      // to a service worker's scope, and vetr.dev serves several apps from the same
-      // one -- so deleting everything that is not one of our two names was deleting
-      // caches belonging to whatever else happens to be there. Nothing else on the
-      // origin uses Cache Storage today, which is the only reason this never showed;
-      // the next app to add a service worker would have lost its cache silently.
-      //
-      // Ours are the ones carrying our prefix, and the two current names are kept.
-      if (!key.startsWith(OURS)) continue;
-      if (key !== SHELL_CACHE && key !== PACK_CACHE) await caches.delete(key);
-    }
-
     // **Nothing the shell owns may also sit in the pack cache.** The fetch handler
     // below used to revalidate every `/data/` path into `PACK_CACHE`, and that is
     // 221 of the 278 shell files -- the whole registry, all 66 respell tables, all
@@ -99,10 +144,27 @@ self.addEventListener('activate', (event) => {
     // the two font files that *are* in the shell keep their shell copy.
     const shell = await caches.open(SHELL_CACHE);
     const pack = await caches.open(PACK_CACHE);
+    const expected = await packHashes();
+    const failed = [];
     for (const request of await pack.keys()) {
-      if (await shell.match(request, { ignoreSearch: true })) await pack.delete(request);
+      if (await shell.match(request, { ignoreSearch: true })) { await pack.delete(request); continue; }
+      const path = packPath(request);
+      if (!expected[path]) continue;
+      const cached = await pack.match(request);
+      if (!cached) continue;
+      const actual = cached.headers.get(CONTENT_HASH) || await digest(cached);
+      // One local hash migrates old, untagged saves without downloading them again.
+      if (!cached.headers.has(CONTENT_HASH)) await putTagged(pack, request, cached, actual);
+      if (actual === expected[path]) continue;
+      try {
+        if (!(await refreshPack(pack, request, expected[path])).ok) failed.push(path);
+      } catch { failed.push(path); }
     }
-
+    if (failed.length) console.warn('[plg] saved files kept offline; refresh will retry when opened:', failed);
+    for (const key of await caches.keys()) {
+      // Cache Storage belongs to the origin, so leave every other app's caches alone.
+      if (key.startsWith(OURS) && key !== SHELL_CACHE && key !== PACK_CACHE) await caches.delete(key);
+    }
     await self.clients.claim();
   })());
 });
@@ -129,15 +191,29 @@ self.addEventListener('fetch', (event) => {
     // put pages there) once served last month's page under this week's JavaScript.
     const shelled = await (await caches.open(SHELL_CACHE)).match(request, { ignoreSearch: true });
     if (shelled) return shelled;
-    // Everything else is stale-while-revalidate in the pack cache, which outlives a
-    // deploy on purpose: a saved language's rows, its subset fonts, the thumbnails.
+    // Reuse verified files. A failed upgrade refresh leaves the old hash attached,
+    // so this read can retry before returning the old bytes as an offline fallback.
     const pack = await caches.open(PACK_CACHE);
     const cached = request.mode === 'navigate' ? undefined : await pack.match(request, { ignoreSearch: true });
-    const fresh = fetch(request).then((response) => {
-      if (response.ok && request.mode !== 'navigate') pack.put(request, response.clone());
+    const languageFile = /\/data\/(?:lang|countries|emphasis|fonts)\//.test(url.pathname);
+    if (languageFile) {
+      const expected = (await packHashes())[packPath(request)];
+      if (cached && (!expected || cached.headers.get(CONTENT_HASH) === expected)) return cached;
+      try {
+        const response = await refreshPack(pack, request, expected);
+        if (response.ok || !cached) return response;
+        console.warn('[plg] saved file refresh failed; keeping previous copy:', packPath(request), response.status);
+      } catch (error) {
+        console.warn('[plg] saved file refresh failed; keeping previous copy:', packPath(request), String(error));
+      }
+      return cached || new Response('Offline and this file was never cached.', { status: 504 });
+    }
+    const fresh = fetch(request).then(async (response) => {
+      if (response.ok && request.mode !== 'navigate') await pack.put(request, response.clone());
       return response;
     }).catch(() => null);
 
+    // Previews and other non-language assets may update behind their cached copy.
     if (cached) return cached;
     const response = await fresh;
     if (response) return response;
@@ -151,6 +227,7 @@ self.addEventListener('fetch', (event) => {
 // what to carry rather than downloading every script -- and can let it go again, one
 // language's files or every saved file at once, to give the space back. Only the pack
 // cache is ever emptied: the shell is what the app runs on.
+const reply = (event, data) => (event.ports[0] ?? event.source)?.postMessage(data);
 self.addEventListener('message', (event) => {
   const data = event.data;
   if (data?.type !== 'forget-urls') return;
@@ -161,8 +238,8 @@ self.addEventListener('message', (event) => {
     } else {
       await caches.delete(PACK_CACHE);
     }
-    event.source?.postMessage({ type: 'forget-urls-done' });
-  })());
+    reply(event, { type: 'forget-urls-done' });
+  })().catch((error) => reply(event, { type: 'forget-urls-done', error: String(error.message) })));
 });
 
 self.addEventListener('message', (event) => {
@@ -194,10 +271,14 @@ self.addEventListener('message', (event) => {
       if (data.onlyMissing && await cache.match(url, { ignoreSearch: true })) continue;
       wanted.push(url);
     }
-    const results = await Promise.allSettled(wanted.map((u) => cache.add(u)));
+    const expected = await packHashes();
+    const results = await Promise.allSettled(wanted.map(async (u) => {
+      const response = await refreshPack(cache, u, expected[packPath(u)]);
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${u}`);
+    }));
     const failed = wanted.filter((/** @type {string} */ _, /** @type {number} */ i) => results[i].status === 'rejected');
-    event.source?.postMessage({
+    reply(event, {
       type: 'cache-urls-done', ok: failed.length === 0, failed, total: data.urls.length,
     });
-  })());
+  })().catch((error) => reply(event, { type: 'cache-urls-done', error: String(error.message) })));
 });

@@ -21,7 +21,7 @@ import { openSpeakerSettings, personalSection, readProfile } from './speaker-set
 import { readAxes } from '../core/speaker.js';
 import { parseTable } from '../core/csv.js';
 import { loadCountries } from '../core/pack.js';
-import { regionRow, setFlagColours } from './flags.js';
+import { regionRow } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
 import { storeLinks } from './app-stores.js';
@@ -648,12 +648,11 @@ async function openSettings(reader, nameOf) {
 
 async function main() {
   registerOffline();
-  const { languages, coverage, names, regions } = await loadLanguages();
+  const { languages, coverage, names } = await loadLanguages();
   if (resumeLaunch()) return;
   notePlace(null);
   // The top: an unhandled Back leaves the app, where Capacitor alone would do nothing.
   onBack(() => false);
-  setFlagColours(regions);
   const reader = readerLanguage(languages, coverage);
   /**
    * The registry's rows for one locale, as `languageName` wants them.
@@ -674,6 +673,7 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
+  await (await import('./native-languages.js')).nativeLanguageSetup();
   /** @type {HTMLElement} */ (document.querySelector('.site-footer')).prepend(...storeLinks());
   /** @param {string} code */
   const nameOf = (code) => languageName(code, languages.find((l) => l.bcp47 === code)?.exonym_en ?? code);

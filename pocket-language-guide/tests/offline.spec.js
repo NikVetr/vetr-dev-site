@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { spawn } from 'node:child_process';
+import httpServer from 'http-server';
 import { test, expect } from '@playwright/test';
 
 /**
@@ -18,12 +18,27 @@ import { test, expect } from '@playwright/test';
  */
 async function offlineHarness(browserName, context) {
   if (browserName !== 'webkit') return { base: '', goOffline: () => context.setOffline(true) };
-  const port = 8150 + Math.floor(Math.random() * 40);
-  const server = spawn('npx', ['http-server', '.', '-p', String(port), '-c-1', '--silent'], { stdio: 'ignore' });
-  await new Promise((resolve) => { setTimeout(resolve, 1500); });
+  const server = httpServer.createServer({ root: '.', cache: -1 }).server;
+  await new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(0, '127.0.0.1', () => {
+      server.removeListener('error', reject);
+      resolve();
+    });
+  });
+  const { port } = server.address();
+  // Also release the listener if an assertion fails before going offline.
+  context.once('close', () => {
+    if (!server.listening) return;
+    server.close();
+    server.closeAllConnections();
+  });
   return {
     base: `http://127.0.0.1:${port}`,
-    goOffline: async () => { server.kill('SIGKILL'); await new Promise((resolve) => { setTimeout(resolve, 1000); }); },
+    goOffline: () => new Promise((resolve, reject) => {
+      server.close((error) => error ? reject(error) : resolve());
+      server.closeAllConnections();
+    }),
   };
 }
 
@@ -60,6 +75,63 @@ async function save(page, target, source) {
       ...codes.flatMap((/** @type {string} */ code) => [...index.languages[code].files, ...index.languages[code].fonts])]);
   }, [target, source]);
 }
+
+test('concurrent offline saves get distinct results', async ({ page }) => {
+  await page.goto('/');
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  const result = await page.evaluate(async () => {
+    const { keepOffline } = await import('./ui/app.js');
+    return Promise.all([keepOffline(['data/lang/es/core.csv']), keepOffline(['missing-audit-file.csv'])]);
+  });
+  expect(result[0].ok).toBe(true);
+  expect(result[0].failed).toEqual([]);
+  expect(result[1].ok).toBe(false);
+  expect(result[1].failed).toEqual(['missing-audit-file.csv']);
+});
+
+test('opening a cached language avoids another download until explicitly refreshed', async ({ page, context }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  await page.goto('/');
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  let downloads = 0;
+  context.on('request', (request) => {
+    if (request.serviceWorker() && new URL(request.url()).pathname === '/data/lang/de/core.csv') downloads += 1;
+  });
+  const read = () => page.evaluate(() => fetch('data/lang/de/core.csv').then((response) => response.text()));
+  const first = await read();
+  expect(first).toContain('id');
+  expect(downloads).toBe(1);
+  expect(await read()).toBe(first);
+  expect(downloads).toBe(1);
+  const refreshed = await page.evaluate(async () => (await import('./ui/app.js')).keepOffline(['data/lang/de/core.csv'], false));
+  expect(refreshed.ok).toBe(true);
+  expect(downloads).toBe(2);
+});
+
+test('saved serif fonts and fonts shared by languages remain usable offline', async ({ page, context }) => {
+  await page.goto('/');
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  expect((await save(page, 'es', 'en')).ok).toBe(true);
+  expect((await save(page, 'hi', 'mr')).ok).toBe(true);
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog.speaker-settings');
+  await settings.getByText('Languages on this device').click();
+  const hindi = settings.locator('.travel-lang').filter({ has: page.locator('.travel-lang-name', { hasText: /^Hindi$/ }) });
+  await hindi.getByRole('button', { name: 'Delete', exact: true }).click();
+  await expect(hindi.getByRole('button', { name: 'Save', exact: true })).toBeVisible();
+  await context.setOffline(true);
+  const result = await page.evaluate(async () => {
+    const { browserSheetContext } = await import('./ui/app.js');
+    const { loadFontsFor } = await import('./core/sheet.js');
+    const ctx = await browserSheetContext();
+    await loadFontsFor(ctx, 'es', 'en', 'serif');
+    const files = await loadFontsFor(ctx, 'mr', 'en');
+    const rows = await fetch('data/lang/mr/core.csv');
+    return { files, rows: rows.ok };
+  });
+  expect(result.rows).toBe(true);
+  expect(result.files.some((f) => f.startsWith('deva-'))).toBe(true);
+});
 
 test('the settings save a language for offline, and delete it again', async ({ page }) => {
   test.skip(!HAS_PACKS, NEEDS_PACKS);
@@ -395,7 +467,7 @@ test('a board works on a cold offline visit with nothing saved @smoke', async ({
   // that is where the wait question lives now; navigating to a *second* board with
   // the network off is the better test anyway, since the shell has to carry every
   // board a pair declares and not only the one someone happened to open first.
-  await page.goto('/conversation.html?target=zh-Hans&source=en&board=time');
+  await page.goto(`${base}/conversation.html?target=zh-Hans&source=en&board=time`);
   await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
   await page.locator('[data-button="wait"]').click();
   await page.locator('.board-reply').click();

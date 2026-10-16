@@ -4,7 +4,8 @@
 // the registry and the pre-rendered packs, so it never pays for the solver, the
 // corpus or a CJK font; the studio loads everything.
 
-import { deliver } from './platform/shell.js';
+import { deliver, isNative } from './platform/shell.js';
+import { askWorker } from './offline-worker.js';
 import { parseTable } from '../core/csv.js';
 import {
   DEFAULT_PADDING, defaultFieldSet, defaultSelection, hasContent, isSpoken, paperSpec,
@@ -54,7 +55,25 @@ class LoadError extends Error {
 }
 
 /** @param {string} rel */
+async function nativeBytes(rel) {
+  if (!isNative()) return null;
+  const { nativeLanguagePacks } = await import('./platform/language-packs.js');
+  const packs = await nativeLanguagePacks();
+  if (!packs) throw new Error('Native language storage is unavailable');
+  try { return await packs.readBytes(rel); }
+  catch (error) {
+    const required = /** @type {{code?:string,language?:string}} */ (error);
+    if (required.code !== 'NATIVE_PACK_REQUIRED' || !required.language) throw error;
+    const { requestLanguageDownload } = await import('./native-languages.js');
+    await requestLanguageDownload(required.language);
+    return packs.readBytes(rel);
+  }
+}
+
+/** @param {string} rel */
 export async function loadText(rel) {
+  const bytes = await nativeBytes(rel);
+  if (bytes) return new TextDecoder().decode(bytes);
   const res = await fetch(rel, { cache: 'no-cache' });
   if (!res.ok) throw new LoadError(rel, res.status);
   return res.text();
@@ -62,6 +81,8 @@ export async function loadText(rel) {
 
 /** @param {string} rel */
 export async function loadBytes(rel) {
+  const bytes = await nativeBytes(rel);
+  if (bytes) return bytes;
   const res = await fetch(rel, { cache: 'no-cache' });
   if (!res.ok) throw new LoadError(rel, res.status);
   return new Uint8Array(await res.arrayBuffer());
@@ -94,6 +115,9 @@ export function browserSheetContext() {
  * @type {Promise<{faces:{stack:string,weight:number,italic:boolean,file:string}[]}>|null}
  */
 let manifestOnce = null;
+/** Downloaded font URLs live for this page, just like its loaded FontFace objects.
+ * @type {Map<string,string>} */
+const nativeFontUrls = new Map();
 
 export function fontManifest() {
   manifestOnce ??= loadText('data/fonts/manifest.json').then(JSON.parse);
@@ -119,22 +143,16 @@ export async function loadLanguages() {
   // that `readerLanguage` below -- and everything else that reads synchronously --
   // sees the reader's own settings rather than an empty one. It resolves instantly
   // on the web, where `localStorage` needs no opening.
-  const [, languages, coverage, names, regions] = await Promise.all([
+  const [, languages, coverage, names] = await Promise.all([
     store.ready(),
     loadText('data/registry/languages.csv'),
     loadText('data/coverage.json'),
     loadText('data/registry/language-names.csv'),
-    // 30KB, and it is what turns the country-code fallback from a white box into
-    // that country's own colours on a platform with no flag glyphs.
-    loadText('data/registry/regions.csv'),
   ]);
   return {
     languages: parseTable(languages, 'languages.csv'),
     coverage: JSON.parse(coverage),
     names: parseTable(names, 'language-names.csv'),
-    regions: Object.fromEntries(
-      parseTable(regions, 'regions.csv').map((r) => [r.iso3166, r]),
-    ),
   };
 }
 
@@ -181,7 +199,21 @@ export async function ensureFontCss(ctx, target, source, typeface = 'sans', seri
   if (!document.getElementById(id)) {
     const style = document.createElement('style');
     style.id = id;
-    style.textContent = fontFaceCss(manifest, stacks);
+    let css = fontFaceCss(manifest, stacks);
+    if (isNative()) {
+      for (const face of manifest.faces.filter((face) => stacks.includes(face.stack))) {
+        const path = `data/fonts/${face.file}.woff2`;
+        let url = nativeFontUrls.get(path);
+        if (!url) {
+          const bytes = await nativeBytes(path);
+          if (!bytes) continue;
+          url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'font/woff2' }));
+          nativeFontUrls.set(path, url);
+        }
+        css = css.replace(`url("${path}")`, `url("${url}")`);
+      }
+    }
+    style.textContent = css;
     document.head.append(style);
   }
   // The solver measured advances from the .ttf, so a .woff2 that fails to arrive
@@ -447,33 +479,6 @@ function registerWorker() {
 }
 
 /**
- * Hand the worker a message about what to keep, and wait for its answer.
- *
- * The protocol, once, for everything that asks: a board that has just opened keeping
- * its rows, and the settings saving or deleting a language. What they share is this
- * -- and a timeout, because a worker that never answers must not leave a button
- * spinning forever.
- * @param {object} message @param {string} done  the type of the answer to wait for
- * @returns {Promise<any>}
- */
-async function askWorker(message, done) {
-  if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
-  const registration = await navigator.serviceWorker.ready;
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('the offline store did not answer')), 120000);
-    /** @param {MessageEvent} event */
-    const onMessage = (event) => {
-      if (event.data?.type !== done) return;
-      clearTimeout(timer);
-      navigator.serviceWorker.removeEventListener('message', onMessage);
-      resolve(event.data);
-    };
-    navigator.serviceWorker.addEventListener('message', onMessage);
-    registration.active?.postMessage(message);
-  });
-}
-
-/**
  * Have the worker keep a list of URLs, and say whether it did.
  * @param {string[]} urls
  * @param {boolean} [onlyMissing] skip what is already kept, instead of refreshing it
@@ -522,6 +527,8 @@ export function forgetOffline(urls) {
  * @param {{groups:string[], target:string, source:string, variants?:string[], countries?:string[], keys?:string[]}} pair
  */
 export function keepBoardOffline({ groups, target, source, variants = [], countries = [], keys = [] }) {
+  // Native loaders already require a complete installed pack; there is no worker.
+  if (isNative()) return Promise.resolve({ ok: true, failed: [], total: 0 });
   return keepOffline([
     ...groups.flatMap((group) => [
       `data/lang/${target}/${group}.csv`,

@@ -13,7 +13,8 @@ import { el } from './board-menu.js';
 import { helpTip } from './dialog.js';
 import { t } from './i18n.js';
 import { forgetOffline, keepOffline } from './app.js';
-import { isNative } from './platform/shell.js';
+import { isNative, exportCacheSize, clearExportCache } from './platform/shell.js';
+import { nativeLanguageSection } from './native-languages.js';
 
 /**
  * @typedef {{state: 'pass'|'warn'|'fail', detail: string,
@@ -69,6 +70,16 @@ async function allSaved(urls) {
   return found.every(Boolean);
 }
 
+/** Keep faces required by any other saved language, including shared script faces.
+ * @param {string} code @param {Record<string, Saveable>} languages
+ * @param {(files: string[]) => Promise<boolean>} [saved] */
+export async function languageFilesToForget(code, languages, saved = allSaved) {
+  const others = Object.entries(languages).filter(([other]) => other !== code);
+  const kept = await Promise.all(others.map(([, language]) => saved(language.files)));
+  const needed = new Set(others.flatMap(([, language], i) => kept[i] ? language.fonts : []));
+  return [...languages[code].files, ...languages[code].fonts.filter((font) => !needed.has(font))];
+}
+
 /**
  * The settings' Before you travel section.
  *
@@ -81,8 +92,7 @@ async function allSaved(urls) {
  * on a card, with the Latin ones every card uses. What each costs is said before it
  * is pressed, from `data/offline.json`, which the shell build writes from the disk.
  *
- * The app on a phone carries everything already, so there it says so and offers
- * nothing to save.
+ * Native apps retain the starter pair and manage other languages in device storage.
  * @param {object} config
  * @param {(code: string) => string} config.nameOf
  * @param {(rel: string) => Promise<string>} config.loadText
@@ -105,7 +115,30 @@ export function travelSection({ nameOf, loadText, checks, pair, suggestions = []
       el('ul', { class: 'travel-suggest' }, suggestions.map(({ href, label }) => el('li', {}, [el('a', { href, text: label })]))));
   }
   if (isNative()) {
-    box.append(el('p', { class: 'speaker-why', text: t('check.bundled') }));
+    box.append(nativeLanguageSection(nameOf));
+    const used = el('p', { class: 'speaker-why' });
+    const status = el('p', { class: 'speaker-refused export-cache-status', role: 'status' });
+    const clear = /** @type {HTMLButtonElement} */ (el('button', {
+      type: 'button', class: 'chip', text: t('offline.clearExportCopies'),
+    }));
+    clear.disabled = true;
+    const refresh = async () => {
+      used.textContent = t('offline.exportCopies', { size: megabytes(await exportCacheSize()) });
+    };
+    clear.addEventListener('click', async () => {
+      clear.disabled = true;
+      status.textContent = '';
+      try {
+        await clearExportCache();
+        await refresh();
+        status.textContent = t('offline.exportCopiesCleared');
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : String(error);
+      } finally { clear.disabled = false; }
+    });
+    box.append(used, el('p', { class: 'speaker-why', text: t('offline.exportCopiesTip') }), clear, status);
+    refresh().catch((error) => { status.textContent = error instanceof Error ? error.message : String(error); })
+      .finally(() => { clear.disabled = false; });
     return box;
   }
   if (!navigator.serviceWorker?.controller) {
@@ -173,48 +206,57 @@ async function drawSaved(box, index, builtIn, nameOf, pair) {
     const estimate = await navigator.storage?.estimate?.();
     used.textContent = estimate?.usage ? t('offline.used', { size: megabytes(estimate.usage) }) : '';
   };
-  /** Save these, one language at a time so a long save can be followed. @param {string[]} chosen */
-  const save = async (chosen) => {
+  /** @param {string[]} chosen @param {boolean} [refreshSaved] */
+  const save = async (chosen, refreshSaved = false) => {
     /** @type {string[]} */ const failed = [];
     for (const [i, code] of chosen.entries()) {
       status.textContent = t('offline.saving', { done: String(i), total: String(chosen.length) });
       const files = parts(code).flatMap((part) => part.files);
-      failed.push(...(await keepOffline(fonts.checked ? [...files, ...index.common.fonts] : files, true)).failed);
+      failed.push(...(await keepOffline(fonts.checked ? [...files, ...index.common.fonts] : files, !refreshSaved)).failed);
     }
     status.textContent = failed.length ? t('offline.partly', { count: String(failed.length) }) : '';
     await refresh();
   };
-  /** Run `act` with `button` out of service until it is done. @param {Element} button @param {() => Promise<void>} act */
-  const busy = async (button, act) => {
-    button.setAttribute('disabled', '');
-    try { await act(); } finally { button.removeAttribute('disabled'); }
+  /** Serialize this panel's actions while shared-file ownership is checked. @param {() => Promise<void>} act */
+  const busy = async (act) => {
+    const buttons = [...box.querySelectorAll('button')];
+    buttons.forEach((b) => { b.disabled = true; });
+    fonts.disabled = true;
+    try { await act(); }
+    catch (error) { status.textContent = String(error instanceof Error ? error.message : error); }
+    finally { buttons.forEach((b) => { b.disabled = false; }); fonts.disabled = false; }
   };
 
   for (const code of codes) {
     const state = el('span', { class: 'travel-lang-state' });
     const button = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'chip' }));
-    // Deleting takes the language's own faces with it, never the Latin ones others share.
-    button.addEventListener('click', () => busy(button, async () => {
+    // A script's faces may belong to several saved languages.
+    button.addEventListener('click', () => busy(async () => {
       if (button.dataset.saved !== 'true') { await save([code]); return; }
-      await forgetOffline([...index.languages[code].files, ...index.languages[code].fonts]);
+      await forgetOffline(await languageFilesToForget(code, index.languages));
       await refresh();
     }));
     const row = el('li', { class: 'travel-lang' }, [el('span', { class: 'travel-lang-name', text: nameOf(code) }), state, button]);
     rows.set(code, { row, state, button });
   }
-  all.addEventListener('click', () => busy(all, () => save(codes)));
+  all.addEventListener('click', () => busy(() => save(codes)));
   const clear = el('button', { type: 'button', class: 'chip', text: t('offline.clear') });
-  clear.addEventListener('click', () => busy(clear, async () => {
+  clear.addEventListener('click', () => busy(async () => {
     if (!globalThis.confirm(t('offline.clearAsk'))) return;
     await forgetOffline(null);
     status.textContent = t('offline.cleared');
     await refresh();
   }));
-  /** @type {Element[]} */ const actions = [all, clear];
+  const update = el('button', { type: 'button', class: 'chip', text: t('offline.refreshSaved') });
+  update.addEventListener('click', () => busy(async () => {
+    const saved = await Promise.all(codes.map((code) => allSaved(index.languages[code].files)));
+    await save(codes.filter((_, i) => saved[i]), true);
+  }));
+  /** @type {Element[]} */ const actions = [all, update, clear];
   if (pair) {
     const both = el('button', { type: 'button', class: 'chip',
       text: t('offline.savePair', { listener: nameOf(pair[0]), owner: nameOf(pair[1]) }) });
-    both.addEventListener('click', () => busy(both, () => save(pair)));
+    both.addEventListener('click', () => busy(() => save(pair)));
     actions.unshift(both);
   }
   fonts.addEventListener('change', () => { refresh(); });

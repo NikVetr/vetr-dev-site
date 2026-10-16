@@ -14,12 +14,14 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
+import { nativePackManifest, STARTER_LANGUAGES } from '../scripts/native_packs.mjs';
+import { parseTable } from '../core/csv.js';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const OUT = join(ROOT, 'dist/mobile');
 
-// Built once for the whole file. It is a copy of forty megabytes and there is no
-// reason to do it four times.
+// Built once for the whole file; subprocesses inherit the caller's CPU affinity.
 execFileSync('node', ['scripts/build_mobile.mjs', '--quiet'], { cwd: ROOT });
 
 /** @param {string} dir @returns {Promise<string[]>} */
@@ -61,6 +63,7 @@ test('no service worker, and the marker that says why', async () => {
   const marker = JSON.parse(await readFile(join(OUT, 'data/native.json'), 'utf8'));
   assert.equal(marker.serviceWorker, false);
   assert.equal(marker.native, true);
+  assert.deepEqual(marker.starter, STARTER_LANGUAGES);
   // And the web still says the opposite, so `registerOffline` reads a cached file
   // rather than a 404 on every page load.
   const web = JSON.parse(await readFile(join(ROOT, 'data/native.json'), 'utf8'));
@@ -75,6 +78,7 @@ test('the pack index lists only packs that shipped', async () => {
   const index = JSON.parse(await readFile(join(OUT, 'packs/index.json'), 'utf8'));
   assert.ok(index.packs.length > 0, 'no packs at all, so every card is a placeholder');
   for (const pack of index.packs) {
+    assert.ok(STARTER_LANGUAGES.includes(pack.source) && STARTER_LANGUAGES.includes(pack.target));
     const dir = `packs/${pack.target}__${pack.source}`;
     assert.ok(present.has(`${dir}/thumb.png`), `${dir} is in the index with no thumbnail`);
     assert.ok(present.has(`${dir}/face-1.svg.gz`), `${dir} is in the index with no face`);
@@ -84,6 +88,59 @@ test('the pack index lists only packs that shipped', async () => {
   const orphans = files.filter((f) => f.startsWith('packs/') && f !== 'packs/index.json')
     .map((f) => f.split('/')[1]).filter((d) => !named.has(d));
   assert.deepEqual([...new Set(orphans)], [], 'packs shipped that the index does not list');
+});
+
+test('only starter language payloads and required font styles ship', async () => {
+  const manifest = JSON.parse(await readFile(join(OUT, 'data/native-packs.json'), 'utf8'));
+  const needed = new Set(STARTER_LANGUAGES.flatMap((code) =>
+    [...manifest.languages[code].files, ...manifest.languages[code].fonts].map((entry) => entry.path)));
+  assert.deepEqual(manifest.bundled, [...needed].sort());
+  for (const path of needed) assert.ok(present.has(path), `starter payload missing: ${path}`);
+  const managed = files.filter((path) => /^data\/(?:lang\/|(?:countries|emphasis)\/[^/]+\.csv$|fonts\/.*\.(?:ttf|woff2)$)/.test(path));
+  assert.deepEqual(managed.sort(), [...needed].sort(), 'a non-starter language or unused font was bundled');
+  // Corpus/UI metadata remains available before any language is downloaded.
+  for (const path of ['data/concepts/core.csv', 'data/i18n/ja.json', 'data/registry/section-titles/ja.csv',
+    'data/registry/emergency-labels/ja.csv', 'data/respell/rules/index.json', 'data/countries/index.json',
+    'data/fonts/manifest.json', 'data/boards/index.json']) assert.ok(present.has(path), `${path} is required metadata`);
+});
+
+test('download inventory pins every payload to existing bytes and all usable font styles', async () => {
+  const manifest = JSON.parse(await readFile(join(OUT, 'data/native-packs.json'), 'utf8'));
+  assert.equal(manifest.schemaVersion, 1);
+  assert.match(manifest.sourceCommit, /^[0-9a-f]{40}$/);
+  assert.equal(manifest.baseUrl,
+    `https://raw.githubusercontent.com/NikVetr/vetr-dev-site/${manifest.sourceCommit}/pocket-language-guide/`);
+  assert.deepEqual(manifest, await nativePackManifest(ROOT), 'inventory is not reproducible');
+  const scriptRows = parseTable(await readFile(join(ROOT, 'data/registry/scripts.csv'), 'utf8'));
+  const stacks = Object.fromEntries(scriptRows.map((row) => [row.iso15924, row.font_stack]));
+  /** @type {{stack:string,file:string}[]} */
+  const faces = JSON.parse(await readFile(join(ROOT, 'data/fonts/manifest.json'), 'utf8')).faces;
+  const registry = parseTable(await readFile(join(ROOT, 'data/registry/languages.csv'), 'utf8'));
+  /** @type {Set<string>} */ const checked = new Set();
+  for (const row of registry) {
+    /** @type {{files:{path:string,bytes:number,sha256:string}[],fonts:{path:string,bytes:number,sha256:string}[]}} */
+    const language = manifest.languages[row.bcp47];
+    assert.ok(language, `${row.bcp47}: language omitted from download inventory`);
+    const variants = new Set(['latin', 'latin-cond', stacks[row.script]]
+      .flatMap((stack) => [stack, `${stack}-serif`, `${stack}-cond`, `${stack}-cond-serif`]));
+    const expectedFonts = faces.filter((face) => variants.has(face.stack))
+      .flatMap((face) => [`data/fonts/${face.file}.ttf`, `data/fonts/${face.file}.woff2`]).sort();
+    assert.deepEqual(language.fonts.map((entry) => entry.path).sort(), expectedFonts, `${row.bcp47}: incomplete font styles/formats`);
+    const paths = new Set(language.files.map((entry) => entry.path));
+    for (const group of (await readdir(join(ROOT, 'data/lang', row.bcp47))).filter((name) => name.endsWith('.csv'))) {
+      assert.ok(paths.has(`data/lang/${row.bcp47}/${group}`), `${row.bcp47}/${group}: missing corpus data`);
+    }
+    for (const entry of [...language.files, ...language.fonts]) {
+      assert.ok(/^data\//.test(entry.path) && !entry.path.includes('..') && !entry.path.includes('://'));
+      if (checked.has(entry.path)) continue;
+      checked.add(entry.path);
+      const bytes = await readFile(join(ROOT, entry.path));
+      assert.equal(entry.bytes, bytes.length, `${entry.path}: wrong size`);
+      assert.equal(entry.sha256, createHash('sha256').update(bytes).digest('hex'), `${entry.path}: wrong digest`);
+    }
+  }
+  const marker = JSON.parse(await readFile(join(OUT, 'data/native.json'), 'utf8'));
+  assert.equal(marker.packsVersion, manifest.version);
 });
 
 test('every module the pages import is in the bundle', async () => {
@@ -120,13 +177,10 @@ test('the bundle is a sane size and is dominated by fonts, not packs', async () 
       : file.startsWith('data/fonts/') ? 'fonts' : 'rest';
     byClass[kind] = (byClass[kind] ?? 0) + size;
   }
-  // Not a benchmark, a tripwire. 114MB of the repository is pre-rendered packs and
-  // the whole point of `PACK_SOURCES` is that they do not all come along; if this
-  // ever fails, the trim has stopped working rather than the app having grown.
-  assert.ok(byClass.packs < 10 * 1048576,
+  // Tripwires for accidentally restoring all language payloads or all previews.
+  assert.ok(byClass.packs < 1 * 1048576,
     `packs are ${(byClass.packs / 1048576).toFixed(0)}MB, so the index trim is not biting`);
-  // The fonts are irreducible: the solver measures advance widths from the .ttf
-  // through fontkit, so they are load-bearing for layout and not only for PDF export.
+  // The starter scripts keep TTF for layout/export and WOFF2 for display.
   assert.ok(byClass.fonts > byClass.packs, 'fonts should be the bundle, packs the extra');
-  assert.ok(total < 120 * 1048576, `${(total / 1048576).toFixed(0)}MB is past what a phone app should carry`);
+  assert.ok(total < 40 * 1048576, `${(total / 1048576).toFixed(0)}MB exceeds the starter installation budget`);
 });

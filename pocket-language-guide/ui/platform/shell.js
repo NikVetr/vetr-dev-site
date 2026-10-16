@@ -176,9 +176,50 @@ export async function handOff(text, title) {
  *
  * A dismissed sheet is `true`: the reader chose not to take it, which is not a
  * failure and must not start a second delivery.
- * @param {Blob} blob @param {string} name
- * @returns {Promise<boolean>}
  */
+const EXPORT_CACHE = 'wanderwart-exports';
+const OWN_EXPORT = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}--[^/\\]+$/;
+// Custom-scheme webviews may lack randomUUID; getRandomValues has no secure-context restriction.
+function exportId() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+}
+/** @type {Set<string>} */ const sharing = new Set();
+/** @param {unknown} error */
+const missingFile = (error) => /** @type {{code?:string}} */ (error)?.code === 'OS-PLUG-FILE-0008';
+
+/** Only disposable copies made here, never the rest of the app's cache. */
+async function exportCopies() {
+  const fs = /** @type {any} */ (globalThis).Capacitor?.Plugins?.Filesystem;
+  if (!isNative() || !fs?.readdir || !fs?.deleteFile) throw new Error('Native export storage is unavailable');
+  /** @type {{name:string, type:string, size:number}[]} */ let files;
+  try { ({ files } = await fs.readdir({ path: EXPORT_CACHE, directory: 'CACHE' })); }
+  catch (error) { if (missingFile(error)) files = []; else throw error; }
+  return { fs, files: files.filter((file) => file.type === 'file' && OWN_EXPORT.test(file.name)) };
+}
+
+/** Size of this app's temporary export copies, including those still being shared. */
+export async function exportCacheSize() {
+  const { files } = await exportCopies();
+  return files.reduce((bytes, file) => bytes + file.size, 0);
+}
+
+/** Clear a snapshot, keeping any export whose write/share is still in progress. */
+export async function clearExportCache() {
+  const { fs, files } = await exportCopies();
+  for (const file of files) {
+    const path = `${EXPORT_CACHE}/${file.name}`;
+    if (sharing.has(path)) continue;
+    try { await fs.deleteFile({ path, directory: 'CACHE' }); }
+    // The OS may reclaim cache files, or another settings panel may clear them.
+    catch (error) { if (!missingFile(error)) throw error; }
+  }
+}
+
+/** @param {Blob} blob @param {string} name @returns {Promise<boolean>} */
 export async function deliver(blob, name) {
   const plugins = /** @type {any} */ (globalThis).Capacitor?.Plugins;
   if (!isNative() || !plugins?.Filesystem?.writeFile || !plugins?.Share?.share) return false;
@@ -189,14 +230,19 @@ export async function deliver(blob, name) {
   for (let i = 0; i < bytes.length; i += 0x8000) {
     data += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   }
+  // Unique paths prevent a second export from overwriting a file another app is reading.
+  const path = `${EXPORT_CACHE}/${exportId()}--${name.replace(/[/\\]/g, '_') || 'export'}`;
+  sharing.add(path);
   try {
     const { uri } = await plugins.Filesystem.writeFile({
-      path: name, data: btoa(data), directory: 'CACHE', recursive: true,
+      path, data: btoa(data), directory: 'CACHE', recursive: true,
     });
     await plugins.Share.share({ url: uri, title: name, dialogTitle: name });
     return true;
   } catch (err) {
     if (/** @type {Error} */ (err)?.name === 'AbortError' || /cancel/i.test(String(/** @type {Error} */ (err)?.message))) return true;
     return false;
+  } finally {
+    sharing.delete(path);
   }
 }
