@@ -30,6 +30,7 @@ import { nextIndex } from './keys.js';
 import { languageName, t } from './i18n.js';
 import { helpTip, pills } from './dialog.js';
 import { listening, speech } from './platform/speech.js';
+import { mountRecitation } from './recitation.js';
 
 /** How many options a multiple-choice question offers, and the fewest it can be
  * asked with. Below two there is no question, so such a row is dropped. */
@@ -550,6 +551,7 @@ function el(tag, attrs = {}, kids = []) {
  * @property {Awaited<ReturnType<import('../core/pack.js').loadCorpus>>} corpus
  * @property {import('../core/types.js').SheetSpec} spec
  * @property {Node} [choose]  the page's choice of rows, at the head of the setup
+ * @property {() => Promise<{blocks:import('../core/types.js').Block[],spec:import('../core/types.js').SheetSpec}>} reverse
  * @property {(conceptId:string, verdict:Verdict) => void} onAnswer  each row as it is graded
  * @property {(phase:'setup'|'run'|'summary') => void} [onPhase]
  * @property {(key: string) => string} targetWords  the target language's catalogue, for
@@ -561,7 +563,7 @@ function el(tag, attrs = {}, kids = []) {
  * @param {DrillInput} input
  * @returns {{refresh: () => void}}  counts the rows again, after the page's choice moved
  */
-export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPhase, targetWords }) {
+export function mountDrill({ root, blocks, corpus, spec, choose, reverse, onAnswer, onPhase, targetWords }) {
   // The same columns the format panel offers, named the way that control names them
   // -- "Japanese", "Hepburn", "English" rather than "Their script" -- because this is
   // the same vocabulary asked about the same cells. `numeral` is excluded there and
@@ -656,9 +658,18 @@ export function mountDrill({ root, blocks, corpus, spec, choose, onAnswer, onPha
     const voice = pills({
       name: 'drill-voice',
       label: t('drill.voice.label'),
-      options: [{ value: 'off', label: t('drill.voice.off') }, { value: 'on', label: t('drill.voice.on') }],
+      options: [{ value: 'off', label: t('drill.voice.off') }, { value: 'on', label: t('drill.voice.on') },
+        { value: 'auto', label: t('recitation.title') }],
       value: 'off',
-      onChange: (value) => { handsFree = value === 'on'; refresh(); },
+      onChange: (value) => {
+        if (value === 'auto') {
+          const recitation = mountRecitation({ root, blocks, corpus, spec, choose, reverse,
+            back: () => setup(), onRun: (running) => onPhase?.(running ? 'run' : 'setup') });
+          recount = recitation.refresh;
+          return;
+        }
+        handsFree = value === 'on'; refresh();
+      },
     });
     const [voiceOff, voiceOn] = /** @type {HTMLInputElement[]} */ ([...voice.querySelectorAll('input')]);
     const voiceHelp = helpTip(t('drill.voice.help'), t('drill.voice.privacy'));

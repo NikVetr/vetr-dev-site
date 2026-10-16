@@ -113,7 +113,7 @@ export function savePick(pair, pick) {
 
 /** Every pair's choice and the whole record, for Delete everything. */
 export async function forgetDrill() {
-  await Promise.all([RECORD_KEY, ...store.keys(`${PICK_KEY}.`)].map((key) => store.remove(key)));
+  await Promise.all([RECORD_KEY, ...store.keys(`${PICK_KEY}.`), ...store.keys('plg.recitation.')].map((key) => store.remove(key)));
 }
 
 /**

@@ -6030,3 +6030,275 @@ keyboard and its dismissal, the share sheet and the PDF export, a backgrounded b
 stopping and a page kept across a trip to another app. Still device checks: hands-free
 listening in WKWebView, Save Image in the iPhone share sheet, the translator apps, the
 torch, and how the register switch, the mosaic and the key words read on a real screen.
+
+## Request-fulfillment review — 2026-10-16
+
+**Scope.** Compared the current working tree, including the local security/storage/offline
+fixes, with the project's Claude Code conversation from August 31 through October 14.
+The source is session `b4384ea8-e3dd-4e46-81d9-a72d42333d20` under the project-specific
+`~/.claude/projects/` directory. After removing repeated UUIDs, automated task notices
+and generated compaction summaries, 125 user-message records were reviewed, plus
+`tmp/inbox/long-note.txt`. A message can contain many requirements, or only ask to
+continue, so this is not a denominator for a percentage-complete claim.
+
+Historical approvals and completion statements were treated as evidence of intent,
+not proof of implementation. Later revisions take precedence: for example, the
+first-face-only prerendering and pointed conversation buttons are requested choices.
+No application code was changed during this review. The findings below describe
+the state at review time; the continuation section below records their fixes.
+
+### Confirmed behavior gaps
+
+| Priority | Request and source | Current behavior | Evidence |
+| --- | --- | --- | --- |
+| First | Item toggles and reliable CSV round trips: Aug 31; Sep 4 transcript L17615 | An imported `include=no` item can look checked, and switching its checkbox off/on cannot restore it. The imported exclusion and UI selection are separate vetoes. | Browser reproduced after reload. `ui/io.js:211`, `ui/io.js:249`, `ui/content-tree.js:371`, `ui/content-tree.js:579`, `core/pack.js:737`. |
+| First | Custom CSV exclusions: Sep 4 transcript L17615 | A custom row disabled through the content checkbox still exports `include=yes`. Reimporting the file can restore unwanted content. | Browser download reproduced. `ui/io.js:154` ignores the current item/section selection. |
+| Next | Independent keyword emphasis: Oct 4 long note L85 | Color emphasis is disabled unless bold is enabled. Forcing color-only in stored settings still supplies no keyword spans. | Browser confirmed the disabled control. `ui/board-display.js:255`, `ui/conversation.js:1658`, `conversation.css:535`. |
+| Next | Consistent display settings: Sep 22–27 conversation controls | Incoming answer cards use default secondary-text visibility instead of saved preferences: disabled secondary wording reappears and requested IPA disappears. | Browser reproduced with `owner:false, roman:false, ipa:true`. `ui/conversation.js:1833`, `ui/conversation-view.js:786`. Role reversal needs to be respected when passing the settings. |
+| Low | Clicking outside a modal should equal its close button: Sep 27 transcript L62595 | Dismissing Help me decide through `dialog.close()` leaves its promise pending and its closed dialog in the DOM. This is the path used by backdrop dismissal and native Back. | Browser reproduced. `ui/quiz.js:107` handles cancel/apply but not close; `ui/site-menu.js:32`, `ui/platform/shell.js:79`. |
+
+The incoming answer also resets rotation. That observation is **not classified as a
+confirmed requirement violation**: the user explicitly requested rotation of the
+outgoing sentence and answer grid, but the final answer reverses roles and is read by
+the owner. Its intended orientation needs a design decision; visibility settings are
+a separate, reproducible inconsistency.
+
+### Requested features that remain partial
+
+| Request | Implemented portion | Missing portion and evidence |
+| --- | --- | --- |
+| Expanded questionnaire and LLM personalization, Sep 12 transcript L27181 | Interests, proficiency, pocket/large print; separate personal fields and CSV import | Carry amount, breadth-versus-basics choices, personalized prompt/copy/model links and pasted-response integration are absent from `ui/quiz.js:54`. Historical replies explicitly deferred this work; no later withdrawal was found. |
+| Weighted addition/subtraction with review, Aug 31 transcript L3 and Sep 3 L12736 | Addition proposals with review and selection highlights | Every `proposeBalance` return has `removes:[]`; studio review/application iterates only additions (`core/solve/weights.js:238`, `ui/studio.js:767`, `ui/studio.js:804`). Incidental deselection of other rows in a newly enabled section is not a weighted removal proposal. |
+| Actual flags on Windows Chrome, Sep 12 transcript L27181 | Detection and readable colored country-code fallback | The unsupported-emoji path writes `US`, etc., not a flag (`ui/flags.js:80`, `ui/flags.js:92`). A simulated unsupported canvas confirms this path; no Windows device screenshot was taken. |
+| Delete downloaded content to recover phone space, Oct 4 long note L94 | Browser language-cache removal | Native apps bundle all language/font files and return before rendering these controls (`ui/travel-check.js:124`, `scripts/build_mobile.mjs:44`). Bundled resources cannot be selectively removed through the current UI. |
+
+One maintenance issue also affects coverage reporting: `scripts/speaker_coverage.mjs:91`
+loads only speaker axes but examines files containing speaker, listener and register
+variants. Its `unknownKeys` output therefore includes valid listener/register keys.
+This is a diagnostic defect, not evidence that those features are missing. Its slash
+heuristic also needs to distinguish intentionally printed gender alternatives.
+
+### Implemented requests verified in source or focused checks
+
+- Printable SVG/PDF/PNG rendering, custom geometry and styles, section/item controls,
+  phone previews, fold layouts, saved cards, first-face gallery previews and on-demand
+  later faces have connected implementations. The two CSV findings above are exceptions.
+- Conversation contexts, structured quantity replies, search, custom buttons/contexts,
+  rearranging, soundboard mode, held-button speech, Most used and quiz history exist.
+- The corrected logo animation is a three-second opposing rotational bounce with
+  progressive back-bubble lines; reduced-motion and dark/light assets are wired in.
+- Mosaic button layout, the confidence-scoring script and sampled phrasebook
+  cross-check artifacts are present. The earlier report that these were unbuilt is
+  superseded. The local cross-check output contains 2,061 samples across 14 languages;
+  this does not establish semantic correctness across the whole corpus.
+- The registry contains register controls for 37 languages and listener-gender controls
+  for eight, including Polish. Name-guessing tables cover 19 script identifiers,
+  including Arabic and Devanagari. These are data-presence counts, not accuracy scores.
+- Printed gender alternatives and the Arabic romanization-to-IPA route exist. The
+  ad-block-sensitive `beacon.js` import has been replaced with `flasher.js`. Existing
+  deployments with stale service-worker state were not reproduced here.
+
+### Checks and limits
+
+Read-only Node suites passed in three groups: 243 layout/font/weight tests, 62
+conversation/storage/shell tests, and 33 alternation/name/usage/quantity/drill tests.
+These groups overlap in usage tests and must not be summed as a unique-test count.
+Seven WebKit smoke tests passed. Four targeted Chromium tests passed for loading
+assets, mosaic layout and two rotated Reply geometry cases. Separate temporary browser
+probes reproduced both CSV defects, incoming visibility defaults, the unresolved quiz
+promise and the dependent keyword-color control, without page errors.
+
+No new native build, signing, store submission, live deployment, physical Windows/iPhone
+test, full browser matrix or fluent-language audit was performed. Photos/share-sheet
+availability, native translator handoffs, torch, speech recognition and device-specific
+layout remain device checks. Exact visual satisfaction across every historical screenshot
+and all language/viewport combinations is not established by this review.
+
+Recommended order: unify inclusion state and CSV export first; then independent emphasis,
+incoming visibility and dialog cleanup; then scope questionnaire/prompt integration,
+weighted removal proposals, portable flags and native content-storage choices separately.
+
+## Audit continuation — 2026-10-16
+
+The confirmed behavior gaps above have implementations and regression coverage:
+
+- CSV imports and checkboxes share effective inclusion state. Older imported
+  exclusions can be enabled again, custom exports respect item/section choices,
+  and importing into a hidden section preserves only imported or explicitly
+  selected rows when opening it. Balance Apply also preserves this boundary for
+  legacy custom rows without stored selection flags.
+- Keyword color and bold work independently. Incoming answers respect text
+  visibility settings while preserving the existing role reversal and orientation.
+- Every questionnaire close path removes the dialog and resolves its result.
+  Carry limits count double-sided sheets before cutting; breadth controls the
+  priority floor. Optional name, origin, profession and school fields produce a
+  copyable prompt. External model links send no details; pasted CSV is validated,
+  reviewed, then imported through the shared importer.
+- Balancing reviews additions, one conservative replacement, or an optional
+  duplicate removal. Standalone removals require an explicit duplicate rating;
+  category membership alone does not establish redundancy. Other swaps must
+  improve raw importance as well as marginal value. Protected rows include
+  emergency, high-importance, explicitly selected, edited, custom and merged content.
+  Apply is disabled with no choices, and selected changes must fit before saving.
+- Platforms without emoji flag support use 78 bundled SVG flags. Sources are pinned
+  to an immutable flag-icons revision with SHA-256 hashes and the MIT license.
+  Both offline and native inventories include the assets. The unused flag-color
+  preload was removed from page startup.
+- Native settings show and clear disposable export copies from a dedicated cache
+  directory. Active shares, unrelated cache files, saved cards and personal settings
+  are preserved. Missing-directory errors mean an empty cache; other failures are
+  displayed. This does not make bundled language files individually removable.
+- Speaker coverage understands speaker, listener and register axes, including
+  combined variants, and separates intentional lexical/template alternatives from
+  first-person slashes needing review.
+
+Tests use a batch of real checkbox click handlers for bulk balance fixture setup,
+avoiding hundreds of sequential layout solves. Balance marker coverage requires an
+actual reviewed change; it cannot pass by skipping an absent proposal.
+The WebKit offline harness waits for a real listener, closes the server and its
+connections, and keeps subsequent navigation on that stopped origin. It also
+closes the listener after an early assertion failure.
+
+Export identifiers use `getRandomValues` to create UUIDs without depending on
+the secure-context-only `randomUUID` API. This follows the
+[Web Crypto interface](https://www.w3.org/TR/webcrypto/#crypto-interface);
+the export regression runs with `randomUUID` absent. This is compatibility
+coverage, not an iOS device result.
+
+### Continuation validation
+
+| Command/check | Result |
+| --- | --- |
+| `npm audit --json` | 0 known vulnerabilities |
+| `python3 scripts/validate_data.py` | 0 errors, 194 editorial/review warnings |
+| `npm run test:unit` and focused reruns | The initial run had 676 passes and 102 failures, all obsolete catalogue keys during the catalogue edit. After removing those keys, `node --test tests/i18n.test.mjs` passed all 210 tests. |
+| `node --test tests/weights.test.mjs tests/imports.test.mjs tests/quiz-personal.test.mjs tests/export-cache.test.mjs` | 26 passed; the export-cache suite also passed after removing the `randomUUID` dependency |
+| Speaker coverage, speaker and conversation Node suites | 38 passed |
+| Chromium import security and personal-data specs | 6 passed, including inert stored payloads, rejected imports, partial geometry, restore failure, partial backups and native cache cleanup |
+| Focused Chromium studio, questionnaire, conversation and flag tests | Passed after fixture/selector corrections; includes hidden-section CSV import, hidden legacy custom rows during balancing, reviewed removals, color-only emphasis, incoming visibility, prompt review/import and unsupported-emoji flags |
+| WebKit smoke suite | 6 passed initially; the offline test failed in server startup. After repairing the harness and its second navigation, that test passed. |
+| `npm run android`; `npm run check:android` | Debug APK built; all 10 emulator checks passed, including offline launch, persistence/reinstall, sharing/cancel, Back and export cleanup without personal-data changes |
+| Mobile questionnaire and desktop flag screenshots | Inspected; no horizontal overflow in the questionnaire, fallback flags rendered |
+
+The initial unit run and focused reruns are recorded separately rather than
+reported as one clean full-suite run. The full browser matrix, exhaustive
+ornament integration suite, physical devices and iOS build were not rerun in
+this continuation.
+
+Remaining scope: new interface labels use English fallback pending translations.
+Physical-device checks, fluent-language review and release/signing are separate
+from these local fixes. No push, deployment or store submission is included.
+
+### Downloadable native languages
+
+The requested storage model is implemented: English and Simplified Chinese ship
+with the application; other languages are downloadable and deletable from the
+language gallery's settings. The raw mobile bundle is about 28 MiB. All languages
+remain discoverable, and opening an unavailable language automatically downloads it
+when online. A failed download offers Retry and Cancel; cancellation also dismisses
+requests already queued by that page.
+
+The first native launch offers all languages or a selected-language checklist with
+additional-storage sizes, counting shared fonts only once. Nothing is selected by
+default. “Download as I go” retains the starter pair and defers other downloads until
+use. Settings keeps the selected/all controls, individual deletion and progress.
+Cancellation retains completed languages and cleans up uncommitted files.
+
+The browser has no first-launch chooser. Requested language data/fonts are cached
+and subsequent opens reuse them without another network fetch. Settings offers
+Save every language and Refresh saved languages. Shell updates retain saved packs;
+previews continue refreshing in the background.
+
+Downloads use a bundled inventory of SHA-256 hashes and immutable source URLs.
+The native filesystem stores verified content by hash; shared fonts are retained
+until their last installed language is deleted. Installation metadata is committed
+only after every file is verified on disk. Failed downloads and deletions remain
+visible and retryable. The app's text, printing and browser-font loaders read
+installed packs; saved cards and personal settings are separate from pack deletion.
+
+Release prerequisite: the corpus commit pinned by this checkout,
+`12f1403a83e444acd41b0b797113597987335f38`, is not publicly available yet (HTTP 404).
+Publish that existing asset commit before distributing this build. The older
+published corpus differs, so substituting its URL would violate the bundled hashes.
+Local integration tests use the matching checkout as a release fixture; they do
+not establish availability of a published download service.
+
+Validation for the initial storage model (before the automatic-download UX):
+
+- Full Node suite, run sequentially: 796 passed, zero failures, including nine
+  storage-manager and eight packaging tests.
+- Seven offline mobile-bundle browser tests, three native-download integration
+  tests and the native export-cleanup regression passed. These cover approval,
+  persistent downloads, printing with stored fonts, deletion without personal-data
+  loss and cancellation of queued prompts.
+- Android debug build succeeded; all 11 emulator checks passed. The added storage
+  lifecycle check uses real Filesystem and Preferences plugins in an isolated
+  namespace, including binary reads, shared-file retention and deletion. Its
+  download bytes are a local fixture, not evidence of production HTTP availability.
+- The Android download prompt was inspected at phone dimensions; its text and
+  controls fit. The emulator and build daemon were stopped after verification.
+- Per-call status checks deduplicate shared-file metadata reads without caching
+  across calls. The nine manager tests passed again after this small optimization.
+
+Focused validation of the automatic-download UX: ten manager tests and three worker
+utility tests passed. Five Chromium native-integration tests cover first-launch
+deferral, selected-only/all choices, automatic download/offline reuse, network-failure
+retry, deletion/personal-data retention, and queued cancellation. Two worker browser
+checks verify that repeated language reads avoid network requests until an explicit
+refresh and that shell files are never shadowed by pack copies. All runs used CPUs
+28–31. These tests use local release fixtures and do not establish public asset
+availability or replace device validation of the updated chooser.
+
+All 2,809 previews were regenerated and match their current input fingerprints.
+Every compressed SVG parses, every thumbnail is a valid 480-pixel PNG, and the
+index metadata is valid. Thumbnail optimization reduced the files from 277,924 KiB
+to 85,157 KiB (69%). The offline manifest was refreshed to 513 files; its check and
+a fresh Chromium cold-offline board/reply test passed.
+
+The strict generated-file run passed the eleven gates independent of previews and
+the shell. Those two gates initially reported the expected stale outputs during
+regeneration and passed individually afterward. Type checking and whitespace
+checks also passed after the final source changes. The Android bundle was synced
+again after asset optimization.
+
+Compute jobs shared CPU affinity 28–31. Rendering used three workers and peaked at
+4.53 GiB descendant RSS, with a 20 GiB safety cutoff. Thumbnail compression ran in
+one process. iOS, physical-device testing, the full browser matrix and the exhaustive
+layout integration matrix were not rerun for this storage change.
+
+
+## Inspection checkpoint — October 2026
+
+The card/import and backup fixes, prior conversation-request corrections, native
+language storage, warning absorption timing and mobile card default are implemented.
+Full-auto practice adds configurable source/target display and audio phases, delays,
+depth, speech rate and repeat without microphone use or quiz grading. Browser playback
+pauses when hidden; native audio uses the tracked Android foreground service and iOS
+prepared AAC player. Native and browser storage reuse cached language files; native
+first launch offers selected/all downloads with incremental size estimates. Browser
+upgrades verify hashes and refresh only changed cached language files.
+
+Validation at this checkpoint: 814 regular Node tests passed; the focused player,
+plan, native wiring and worker-upgrade tests passed. The three new full-auto browser
+cases and all 20 existing quiz cases passed. Warning/mobile-default checks, native
+pack browser scenarios and cache reuse/upgrade checks passed. Desktop and phone
+full-auto screenshots were inspected, including multi-field text-fit assertions.
+All 2,809 generated previews match their inputs. Corpus validation reports zero
+errors and 194 standing linguistic/review warnings. Android compilation and iOS
+Swift type checking against Capacitor and the iOS simulator SDK passed; isolated
+iOS project wiring was also validated.
+
+Physical-device speech/background-audio checks and remaining translations are
+explicitly deferred by the owner. New labels use the existing English fallback.
+No store distribution or signing changes are part of this inspection checkpoint.
+
+The strict generated-file suite passed all 13 gates. Android emulator checks verified
+native background progression after HOME with installed local English voices,
+pause/resume/stop, persistent personal data, offline startup with 53 gallery cards,
+sharing/cancellation, export-cache cleanup, installed-pack lifecycle and in-place
+reinstallation. The emulator was muted, so audible quality was not assessed.
+The final rerun corrected a first-launch-chooser test-fixture timing issue; cleanup
+interrupted its final Back-at-top assertion before a new results.json was written.
+That assertion passed on the preceding run. This is combined evidence across runs,
+not a claim of one uninterrupted all-green emulator run. Native test processes and
+the emulator were stopped after validation.

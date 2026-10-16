@@ -10,6 +10,7 @@
 // Everything here is emulator evidence, not a phone's.
 import { execFileSync, spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { get } from 'node:http';
 
 const SDK = process.env.ANDROID_HOME ?? `${process.env.HOME}/android-tools/sdk`;
 const ADB = `${SDK}/platform-tools/adb`;
@@ -34,7 +35,7 @@ try { booted = adb('shell', 'getprop', 'sys.boot_completed') === '1'; } catch { 
 if (!booted) {
   // `sg kvm`: the emulator is unusable without acceleration, and a shell that
   // predates the kvm group membership does not have it.
-  spawn('sg', ['kvm', '-c', `${SDK}/emulator/emulator -avd ${AVD} -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect`],
+  spawn('sg', ['kvm', '-c', `${SDK}/emulator/emulator -avd ${AVD} -cores 4 -memory 1536 -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect`],
     { stdio: 'ignore', detached: true }).unref();
   for (let i = 0; i < 60 && !booted; i += 1) {
     await sleep(3000);
@@ -62,10 +63,22 @@ async function page() {
     let pid = '';
     try { pid = adb('shell', 'pidof', APP); } catch { /* not running yet */ }
     if (pid && adb('shell', 'cat', '/proc/net/unix').includes(`webview_devtools_remote_${pid}`)) {
-      adb('forward', '--remove-all');
       adb('forward', 'tcp:9222', `localabstract:webview_devtools_remote_${pid}`);
       try {
-        const list = await (await fetch('http://127.0.0.1:9222/json', { signal: AbortSignal.timeout(3000) })).json();
+        // Keep the adb endpoint local even when Node's fetch uses a host proxy.
+        const list = /** @type {any[]} */ (await new Promise((resolve, reject) => {
+          const request = get('http://127.0.0.1:9222/json', { agent: false }, (response) => {
+            let body = '';
+            response.setEncoding('utf8');
+            response.on('data', (chunk) => { body += chunk; });
+            response.on('end', () => {
+              try { resolve(JSON.parse(body)); } catch (error) { reject(error); }
+            });
+            response.on('error', reject);
+          });
+          request.setTimeout(3000, () => request.destroy(new Error('devtools discovery timed out')));
+          request.on('error', reject);
+        }));
         target = list.find((/** @type {any} */ t) => t.type === 'page') ?? null;
       } catch { /* not listening yet */ }
     }
@@ -73,7 +86,10 @@ async function page() {
   }
   if (!target) throw new Error('no WebView page to attach to');
   const ws = new WebSocket(target.webSocketDebuggerUrl);
-  await new Promise((resolve) => { ws.onopen = resolve; });
+  await new Promise((resolve, reject) => {
+    ws.onopen = resolve;
+    ws.onerror = () => reject(new Error('Cannot connect to local WebView devtools; exclude localhost from HTTP proxy settings.'));
+  });
   let id = 0;
   /** @type {Map<number,(r:any)=>void>} */ const pending = new Map();
   ws.onmessage = (msg) => {
@@ -104,7 +120,14 @@ async function page() {
 async function launch() {
   adb('shell', 'am', 'start', '-W', '-n', `${APP}/.MainActivity`);
   await sleep(6000);
-  return page();
+  const connected = await page();
+  // The download chooser belongs to first-launch onboarding, not the persistence
+  // checks below. Choose on-demand downloads and leave its preference durable.
+  await connected.evaluate(`(() => {
+    const dialog = document.querySelector('dialog.native-language-setup');
+    if (dialog) dialog.querySelector('button.ghost')?.click();
+  })()`);
+  return connected;
 }
 
 const BOARDS = JSON.stringify({
@@ -114,11 +137,54 @@ const BOARDS = JSON.stringify({
 });
 const SPA = 'conversation.html?target=zh-Hans&source=en&board=spa';
 
+/** A restored board can reach first-launch onboarding only after Back to gallery. */
+async function galleryCards() {
+  for (let i = 0; i < 30; i += 1) {
+    const count = await p.evaluate(`(() => {
+      document.querySelector('dialog.native-language-setup button.ghost')?.click();
+      return document.querySelectorAll('.card').length;
+    })()`);
+    if (count) return count;
+    await sleep(1000);
+  }
+  const diagnostic = await p.evaluate('document.body.innerText.slice(0,1500)');
+  console.log('Gallery did not populate:', diagnostic);
+  return 0;
+}
+
 install();
 stop();
 let p = await launch();
 const plugins = await p.evaluate('Object.keys(Capacitor.Plugins).sort().join(",")');
-check('launch', /Filesystem/.test(plugins) && /Preferences/.test(plugins) && /Share/.test(plugins), plugins);
+check('launch', /Filesystem/.test(plugins) && /Preferences/.test(plugins) && /Share/.test(plugins)
+  && /BackgroundRecitation/.test(plugins), plugins);
+
+// --- native playback, independent of WebView timers while HOME is showing --------
+const voices = await p.evaluate("Capacitor.Plugins.BackgroundRecitation.getVoices({ locale: 'en' })");
+if (voices.voices.length) {
+  const started = await p.evaluate(`Capacitor.Plugins.BackgroundRecitation.start({ repeat: false, steps: [
+    { id: 'first', audio: [{ text: 'Hello.', locale: 'en', rate: 1 }], delayMs: 1000 },
+    { id: 'second', audio: [{ text: 'This phrase is played by the native background service.', locale: 'en', rate: 1 }], delayMs: 15000 }
+  ] })`);
+  adb('shell', 'input', 'keyevent', '3');
+  await sleep(6000);
+  const services = adb('shell', 'dumpsys', 'activity', 'services', APP);
+  const background = await p.evaluate('Capacitor.Plugins.BackgroundRecitation.getState()');
+  const paused = await p.evaluate('Capacitor.Plugins.BackgroundRecitation.pause()');
+  const resumed = await p.evaluate('Capacitor.Plugins.BackgroundRecitation.resume()');
+  const stopped = await p.evaluate('Capacitor.Plugins.BackgroundRecitation.stop()');
+  check('native-background-playback', started.status === 'playing' && background.status === 'playing'
+    && background.index === 1 && /RecitationService/.test(services) && /isForeground=true/.test(services)
+    && paused.status === 'paused' && resumed.status === 'playing' && stopped.status === 'stopped',
+  { started, background, paused, resumed, stopped, foregroundService: /isForeground=true/.test(services) });
+  p.close();
+  p = await launch();
+} else {
+  const refused = await p.evaluate(`Capacitor.Plugins.BackgroundRecitation.start({ repeat: false,
+    steps: [{ id: 'no-voice', audio: [{ text: 'Hello.', locale: 'en' }], delayMs: 1000 }] })
+    .then(() => false, (error) => /local.*voice|voice.*unavailable/i.test(error.message))`);
+  check('native-playback-no-voice', refused, 'No local English voice installed; playback explicitly refused. Background audio needs device/voice validation.');
+}
 
 // --- persistence ------------------------------------------------------------------
 await p.open(SPA, '.board-cell');
@@ -143,8 +209,7 @@ try {
   const resumed = await p.evaluate('location.pathname + location.search');
   check('resume-launch', resumed === '/conversation.html?target=zh-Hans&source=en', resumed);
   adb('shell', 'input', 'keyevent', '4');
-  for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.card').length")); i += 1) await sleep(1000);
-  const cards = await p.evaluate("document.querySelectorAll('.card').length");
+  const cards = await galleryCards();
   check('resume-back', focus().includes(APP) && /^\/(index\.html)?$/.test(await p.evaluate('location.pathname')),
     'BACK from the restored contexts went to the languages, and stayed');
   await p.open(SPA, '.board-cell');
@@ -171,6 +236,90 @@ await sleep(2000);
 check('share-cancel', focus().includes(APP) && await p.evaluate('window.__blobs') === 0,
   'BACK returned to the app, and no browser download fell back behind it');
 
+// --- disposable export copies, through the real native filesystem ---------------------
+const cleanup = await p.evaluate(`(async () => {
+  const { exportCacheSize, clearExportCache } = await import('./ui/platform/shell.js');
+  const { Filesystem: fs, Preferences: prefs } = Capacitor.Plugins;
+  const keys = ['plg.about', 'plg.speaker', 'plg.cards', 'plg.boards', 'plg.board-display'];
+  const personal = () => Promise.all(keys.map(async (key) => [key, (await prefs.get({ key })).value]));
+  const beforePersonal = JSON.stringify(await personal());
+  const name = crypto.randomUUID() + '--native-cleanup-check.txt';
+  const path = 'wanderwart-exports/' + name;
+  const text = 'native temporary export cleanup check';
+  await fs.writeFile({ path, data: btoa(text), directory: 'CACHE', recursive: true });
+  const before = await exportCacheSize();
+  await clearExportCache();
+  const after = await exportCacheSize();
+  const { files } = await fs.readdir({ path: 'wanderwart-exports', directory: 'CACHE' });
+  return { before, after, fixtureBytes: text.length,
+    fixtureGone: !files.some((file) => file.name === name),
+    personalUnchanged: beforePersonal === JSON.stringify(await personal()) };
+})()`);
+check('temporary-export-cleanup', cleanup.fixtureGone && cleanup.personalUnchanged
+  && cleanup.before >= cleanup.fixtureBytes && cleanup.after <= cleanup.before - cleanup.fixtureBytes, cleanup);
+
+// --- pack persistence/deletion with real plugins; transport is a tiny local fixture ---
+const packs = await p.evaluate(`(async () => {
+  const { createLanguagePacks } = await import('./ui/platform/language-packs.js');
+  const { sha256 } = await import('./vendor/sha256.esm.js');
+  const { Filesystem: fs, Preferences: prefs } = Capacitor.Plugins;
+  const id = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, '0')).join('');
+  const root = 'native-pack-check-' + id;
+  const key = root + '.metadata';
+  const keys = ['plg.about', 'plg.speaker', 'plg.cards', 'plg.boards', 'plg.board-display', 'wanderwart.language-packs.v1'];
+  const personal = async () => JSON.stringify(await Promise.all(keys.map(async (key) => [key, (await prefs.get({ key })).value])));
+  const before = await personal();
+  const hash = (bytes) => Array.from(sha256(bytes), (b) => b.toString(16).padStart(2, '0')).join('');
+  const data = new Map([
+    ['data/lang/fr/core.csv', new TextEncoder().encode('id,text\\nhello,bonjour\\n')],
+    ['data/lang/de/core.csv', new TextEncoder().encode('id,text\\nhello,hallo\\n')],
+    ['data/fonts/native-check.woff2', new Uint8Array([0, 128, 255, 42])],
+  ]);
+  const files = [...data].map(([path, bytes]) => ({ path, bytes: bytes.length, sha256: hash(bytes) }));
+  const manifest = { schemaVersion: 1, version: hash(new Uint8Array([1])),
+    baseUrl: 'https://raw.githubusercontent.com/NikVetr/vetr-dev-site/' + '1'.repeat(40) + '/pocket-language-guide/',
+    starter: ['en'], bundled: [], languages: {
+      en: { files: [], fonts: [] }, fr: { files: [files[0]], fonts: [files[2]] }, de: { files: [files[1]], fonts: [files[2]] },
+    } };
+  // Only path/key rewriting is substituted: every storage operation reaches the plugin.
+  const filesystem = Object.fromEntries(['readFile', 'writeFile', 'stat', 'readdir', 'deleteFile'].map((method) =>
+    [method, (options) => fs[method]({ ...options, path: root + '/' + options.path })]));
+  const preferences = { get: () => prefs.get({ key }), set: ({ value }) => prefs.set({ key, value }) };
+  let downloads = 0;
+  const download = async (url) => {
+    downloads += 1;
+    const bytes = data.get(url.slice(manifest.baseUrl.length));
+    if (!bytes) throw new Error('Unexpected native fixture download: ' + url);
+    return bytes;
+  };
+  try {
+    let manager = await createLanguagePacks(manifest, { filesystem, preferences, hash, download });
+    await manager.install('fr');
+    await manager.install('de');
+    manager = await createLanguagePacks(manifest, { filesystem, preferences, hash,
+      download: async () => { throw new Error('Offline fixture cannot download'); } });
+    const status = await manager.status();
+    const persisted = status.fr.state === 'installed' && status.de.state === 'installed'
+      && hash(await manager.readBytes(files[0].path)) === files[0].sha256;
+    await manager.remove('fr');
+    const remaining = (await filesystem.readdir({ path: 'wanderwart-language-packs', directory: 'DATA' })).files;
+    const sharedRetained = remaining.length === 2 && remaining.some((file) => file.name === files[2].sha256)
+      && hash(await manager.readBytes(files[2].path)) === files[2].sha256;
+    let removedUnavailable = false;
+    try { await manager.readBytes(files[0].path); }
+    catch (error) { removedUnavailable = error.code === 'NATIVE_PACK_REQUIRED' && error.language === 'fr'; }
+    await manager.remove('de');
+    const empty = (await filesystem.readdir({ path: 'wanderwart-language-packs', directory: 'DATA' })).files.length === 0;
+    return { persisted, sharedRetained, removedUnavailable, empty, downloads, personalUnchanged: before === await personal() };
+  } finally {
+    try { await fs.rmdir({ path: root, directory: 'DATA', recursive: true }); }
+    catch (error) { if (error.code !== 'OS-PLUG-FILE-0008') throw error; }
+    finally { await prefs.remove({ key }); }
+  }
+})()`);
+check('native-pack-storage-lifecycle', packs.persisted && packs.sharedRetained && packs.removedUnavailable
+  && packs.empty && packs.downloads === 3 && packs.personalUnchanged, packs);
+
 // --- an in-place update -------------------------------------------------------------
 p.close();
 await leave();
@@ -184,7 +333,7 @@ await p.evaluate("Capacitor.Plugins.Preferences.set({ key: 'plg.place', value: '
 p.close();
 await leave();
 p = await launch();
-for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.card').length")); i += 1) await sleep(1000);
+await galleryCards();
 adb('shell', 'input', 'keyevent', '4');
 await sleep(2500);
 check('back-at-top-leaves', !focus().includes(APP), focus().slice(0, 120));

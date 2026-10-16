@@ -63,12 +63,13 @@ mkdir -p "$RES/values-night"
 printf '<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="launch_background">#FFFFFF</color></resources>\n' > "$RES/values/launch_background.xml"
 printf '<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="launch_background">#14191E</color></resources>\n' > "$RES/values-night/launch_background.xml"
 npx cap sync android
-# The devtools socket, for the emulator probe in docs/native.md. Debug builds only;
-# it lives in the generated project, never in the committed config.
+node scripts/wire_recitation.mjs android
+# Let Capacitor enable devtools only when Android marks the build debuggable.
+# Remove an old explicit override as well, so --sync followed by a release is safe.
 node -e '
   const fs = require("fs"); const p = "android/app/src/main/assets/capacitor.config.json";
   const c = JSON.parse(fs.readFileSync(p, "utf8"));
-  c.android = { ...(c.android ?? {}), webContentsDebuggingEnabled: true };
+  if (c.android) delete c.android.webContentsDebuggingEnabled;
   fs.writeFileSync(p, JSON.stringify(c, null, 2));
 '
 if [ "${1:-}" = "--sync" ]; then exit 0; fi

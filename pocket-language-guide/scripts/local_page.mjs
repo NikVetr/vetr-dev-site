@@ -69,6 +69,7 @@ export async function openLocalPage(opts = {}) {
     /** @param {string} html */
     async show(html) {
       failures.length = 0;
+      await page.unroute(`${ORIGIN}/__page`);
       await page.route(`${ORIGIN}/__page`, (route) => route.fulfill({
         status: 200, contentType: 'text/html; charset=utf-8', body: html,
       }));

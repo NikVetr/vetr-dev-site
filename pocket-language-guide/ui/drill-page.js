@@ -173,6 +173,17 @@ async function main() {
     loadCatalogue(target, loadText),
   ]);
   const sections = sectionsOf(blocks);
+  /** @type {Promise<{blocks:import('../core/types.js').Block[],spec:import('../core/types.js').SheetSpec}>|null} */
+  let reverseContent = null;
+  const reverse = () => {
+    if (!reverseContent) {
+      const reverseSpec = { ...makeSpec({ corpus }, presets, { target: source, source: target }),
+        selection: { sections: {}, items: {} }, priority: 0 };
+      reverseContent = buildContent({ corpus, loadText }, reverseSpec, loadEdits(source, target))
+        .then(({ blocks }) => ({ blocks, spec: reverseSpec }));
+    }
+    return reverseContent;
+  };
   const rows = new Map(sections.flatMap((s) => s.rows.map((row) => [row.conceptId, row])));
 
   /**
@@ -226,6 +237,7 @@ async function main() {
     corpus,
     spec,
     choose: picker.node,
+    reverse,
     targetWords: (key) => targetCatalogue.t(key),
     onAnswer: (conceptId, verdict) => { recordAnswer(pair, conceptId, verdict).catch(unkept); },
     // The record is the setup's and the summary's; a question has the page to itself.

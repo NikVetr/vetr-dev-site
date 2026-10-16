@@ -34,19 +34,116 @@ distribution** — §1.2 and N1 both require the owner to settle identity before
 anything is submitted anywhere, and an identifier is effectively permanent once a
 store listing exists. Change it before the first upload, not after.
 
-## Plugins, and why only these four
+## Plugins
 
 Only what an implemented feature uses, all at Capacitor 8:
 
 | plugin | used by | for |
 |---|---|---|
 | `@capacitor/app` | `ui/platform/shell.js` | the Android system Back press |
-| `@capacitor/preferences` | `ui/platform/store.js` | durable personal data |
+| `@capacitor/preferences` | `ui/platform/store.js`, `ui/platform/language-packs.js` | durable personal data and installed-language metadata |
 | `@capacitor/share` | `ui/platform/shell.js` | one-way handoff of a sentence, and delivering a file |
-| `@capacitor/filesystem` | `ui/platform/shell.js` | writing an export or a backup where the share sheet can take it |
+| `@capacitor/filesystem` | `ui/platform/shell.js`, `ui/platform/language-packs.js` | temporary exports and persistent downloaded language files |
 | `@capacitor/app-launcher` | `ui/platform/shell.js` | "None of these" opening the translators' own apps (Google Translate, DeepL, Papago, and Apple's Translate on an iPhone) where the phone has them; the schemes and packages it may ask about are declared by `build_ios.sh` (`LSApplicationQueriesSchemes`) and `build_android.sh` (`<queries>`) |
+| local `BackgroundRecitation` | `ui/platform/recitation.js` | microphone-free full-auto practice with background audio and media controls |
 
-No location, no notifications, no background service. The camera is declared, not
+The built-in `CapacitorHttp` bridge downloads pack bytes; no additional HTTP plugin
+is required. Hash verification uses the bundled SHA-256 implementation on both platforms.
+
+Exports and backups are shared from unique files in `CACHE/wanderwart-exports`.
+The settings show the total size of those temporary copies and can clear them.
+Cleanup skips files still being written or shared and ignores unrelated cache files,
+including legacy exports outside that directory. Saved cards and personal settings
+remain in Preferences. Temporary export cleanup is separate from language-pack storage.
+
+## Starter installation and language packs
+
+`npm run mobile` bundles English and Simplified Mandarin (`en`, `zh-Hans`). Both
+directions work without an initial download, including printable cards and exports.
+Only these languages' corpus rows, country names and emphasis data are installed
+with the app. Their fonts include sans, serif and condensed Latin styles, Chinese
+sans and serif, and both TTF and WOFF2: the layout/PDF engine measures TTF while
+the display and exported SVG use WOFF2.
+
+The smaller language-independent files remain bundled: concepts, registries,
+interface translations, section and emergency labels, boards, pronunciation rules
+and curated overrides, font metadata and coverage indexes. Keeping these together
+lets the app list languages and settings before a language pack is installed.
+Pre-rendered thumbnails and first faces are limited to the starter pair; their
+trimmed `packs/index.json` never advertises an unavailable preview.
+
+The current uncompressed web bundle is about **28 MiB**, of which 15.3 MiB is
+starter fonts. Store downloads, installed native code and subsequent language
+downloads have separate sizes. `node scripts/build_mobile.mjs` reports the current
+breakdown; `node --test tests/mobile-build.test.mjs` checks the starter inventory,
+both font formats, module closure and a 40 MiB size ceiling.
+
+`scripts/native_packs.mjs` derives `dist/mobile/data/native-packs.json` from the
+web's generated `data/offline.json`. Every registry language has lists of corpus
+files and fonts, with each path's byte count and SHA-256. Shared Latin fonts appear
+in every language's requirements so installation can deduplicate them and deletion
+can retain files another installed language needs. `bundled` names the starter
+files that are part of the application and cannot be reclaimed without uninstalling
+it. Downloaded language files are separate from personal data and export caches.
+The native marker records the inventory version; this manifest is bundled with the
+app, not fetched and trusted from the network.
+
+`ui/platform/language-packs.js` manages downloaded packs. Payloads live in
+`DATA/wanderwart-language-packs/<sha256>`, with installed-language metadata in
+Preferences under `wanderwart.language-packs.v1`. The manager checks the expected
+size and digest before and after writing, then records installation only after all
+files succeed. Shared fonts are stored once and retained while any installed pack
+needs them. Starter languages cannot be deleted. Removing a downloaded pack leaves
+personal cards, saved wording and settings intact. Opening a missing or corrupt
+language starts a verified download automatically, with progress and a retry/cancel
+dialog if the network or storage operation fails. It never downloads every language
+by default.
+
+On the first native launch, a chooser offers all languages or a checklist of selected
+languages. No language is checked initially; “Download as I go” keeps the bundled
+starter pair and defers other downloads until use. The choice is remembered under
+`wanderwart.language-setup.v1`. Settings retains the same selected/all controls and
+individual deletion. Additional-storage totals exclude existing verified-pack blobs
+and count shared fonts only once. Cancellation stops after the current network file;
+completed languages remain installed and uncommitted files are reclaimed.
+
+The browser does not show this first-launch chooser. Its service worker caches
+requested language data/fonts and reuses unchanged bytes without downloading again.
+Settings offers Save every language and Refresh saved languages. Shell-version
+updates replace shell files but retain downloaded packs. Content hashes refresh
+only changed cached files; a failed refresh keeps its previous offline copy and
+retries when opened, while unchanged files need no download. Explicit refresh
+replaces their contents, and deletion retains shared fonts still in use.
+
+**The asset commit must be published before distribution.** Downloads use
+`https://raw.githubusercontent.com/NikVetr/vetr-dev-site/<commit>/pocket-language-guide/`.
+The builder discovers the latest commit affecting `data/lang`, `data/fonts`,
+`data/countries` or `data/emphasis` and pins its full forty-character SHA in the
+manifest. It refuses uncommitted managed files; unrelated application-code changes
+do not require another asset commit. This immutable source keeps an existing
+application's downloads working when the website's current corpus changes.
+
+A normal build makes no network check and does not publish anything. Before
+distribution, verify that the pinned commit and payload URLs are publicly
+available. An unpublished asset commit returns 404: the starter pair still works,
+but additional downloads cannot install. Falling back to a different revision would
+mix corpus versions and is deliberately refused. A build never publishes assets or
+distributes the app by itself.
+
+The full-auto player uses the tracked sources under `native/recitation/`;
+`scripts/wire_recitation.mjs` registers them in each generated native project.
+Android uses a foreground `mediaPlayback` service with an ongoing media notification,
+audio focus, a CPU wake lock during playback, and local text-to-speech voices. Pausing
+an utterance restarts that utterance on resume; a paused gap keeps its remaining time.
+iOS prepares a bounded temporary AAC track containing speech and the requested silent
+gaps, then plays it with `AVAudioPlayer` and the background-audio mode. Preparation
+requires the app to remain foregrounded. Playback and pauses then continue independently
+of WebView timers, with lock-screen pause/resume/stop controls. Both platforms pause on
+audio interruption or headphone disconnection. Browser sessions and native screen-only
+sessions pause when hidden and require an explicit resume. Full-auto does not request
+the microphone and does not write quiz scores.
+
+The camera is declared, not
 pluginned: the beacon asks the WebView for it the way it asks a browser, only to
 switch the lamp on and off, so `NSCameraUsageDescription` (iOS) and an optional
 `CAMERA` permission (Android) go into the generated projects. So are the microphone and

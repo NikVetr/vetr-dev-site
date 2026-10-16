@@ -53,6 +53,8 @@ plutil -replace NSCameraUsageDescription -string "Wanderwart uses the camera's f
 # why is stopped by iOS the moment a page asks. The app keeps no audio.
 plutil -replace NSMicrophoneUsageDescription -string "Wanderwart listens only while a hands-free quiz waits for your answer. Nothing is recorded or kept." ios/App/App/Info.plist
 plutil -replace NSSpeechRecognitionUsageDescription -string "Hands-free quizzes turn your spoken answer into text with Apple's speech recognition to check it. Wanderwart keeps nothing you say." ios/App/App/Info.plist
+# Full-auto recitation is audio playback, independent of the microphone-based quiz.
+plutil -replace UIBackgroundModes -json '["audio"]' ios/App/App/Info.plist
 # "None of these" opens the translators' own apps where the phone has them, and iOS
 # answers whether an app is installed only for the schemes an app declares up front.
 plutil -replace LSApplicationQueriesSchemes -json '["googletranslate","deepl","papago","translate"]' ios/App/App/Info.plist
@@ -73,6 +75,7 @@ for f in splash-2732x2732.png splash-2732x2732-1.png splash-2732x2732-2.png; do
   cp assets/native/ios/splash-2732x2732.png "$ASSETS/Splash.imageset/$f"
 done
 npx cap sync ios
+node scripts/wire_recitation.mjs ios
 if [ "$MODE" = "--sync" ]; then exit 0; fi
 
 PROJECT=(-project ios/App/App.xcodeproj -scheme App)
