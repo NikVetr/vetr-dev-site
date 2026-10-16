@@ -57,7 +57,7 @@ export function faceToSvg(face, plan, opts) {
     `<svg xmlns="http://www.w3.org/2000/svg" width="${num(pageW)}pt" height="${num(pageH)}pt" `
     + `viewBox="0 0 ${num(pageW)} ${num(pageH)}" direction="ltr">`,
   );
-  out.push(`<rect x="0" y="0" width="${num(pageW)}" height="${num(pageH)}" fill="${opts.background ?? '#FFFFFF'}"/>`);
+  out.push(`<rect x="0" y="0" width="${num(pageW)}" height="${num(pageH)}" fill="${esc(opts.background ?? '#FFFFFF')}"/>`);
   if (face.rotate) {
     out.push(`<g transform="rotate(${num(face.rotate)} ${num(pageW / 2)} ${num(pageH / 2)})">`);
   }
@@ -67,7 +67,7 @@ export function faceToSvg(face, plan, opts) {
     const alpha = r.opacity === undefined ? '' : ` fill-opacity="${num(r.opacity)}"`;
     out.push(
       `<rect x="${num(r.x)}" y="${num(r.y)}" width="${num(r.w)}" height="${num(r.h)}"${radius}`
-      + ` fill="${r.fill}"${alpha}/>`,
+      + ` fill="${esc(r.fill)}"${alpha}/>`,
     );
   }
 
@@ -83,9 +83,9 @@ export function faceToSvg(face, plan, opts) {
     const k = icon.size / opts.icons.viewBox;
     out.push(
       `<g transform="translate(${num(icon.x)} ${num(icon.y)}) scale(${num(k)})" `
-      + `fill="none" stroke="${icon.fill}" stroke-width="${opts.icons.strokeWidth}" `
-      + `stroke-linecap="${opts.icons.linecap}" stroke-linejoin="${opts.icons.linejoin}">`
-      + paths.map((d) => `<path d="${d}"/>`).join('')
+      + `fill="none" stroke="${esc(icon.fill)}" stroke-width="${num(opts.icons.strokeWidth)}" `
+      + `stroke-linecap="${esc(opts.icons.linecap)}" stroke-linejoin="${esc(opts.icons.linejoin)}">`
+      + paths.map((d) => `<path d="${esc(d)}"/>`).join('')
       + '</g>',
     );
   }
@@ -114,8 +114,8 @@ export function faceToSvg(face, plan, opts) {
     // before it, where the PDF drew it where the plan put it.
     out.push(
       `<text x="${num(run.x)}" y="${num(run.y)}" font-family="${esc(f.family)}" `
-      + `font-size="${num(run.size)}" font-weight="${f.weight}"${italic} `
-      + `fill="${run.fill}" xml:space="preserve" style="unicode-bidi:plaintext">${esc(run.text)}</text>`,
+      + `font-size="${num(run.size)}" font-weight="${num(f.weight)}"${italic} `
+      + `fill="${esc(run.fill)}" xml:space="preserve" style="unicode-bidi:plaintext">${esc(run.text)}</text>`,
     );
   }
 

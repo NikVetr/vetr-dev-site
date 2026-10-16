@@ -19,6 +19,7 @@ import { forgetDrill, readRecord, writeRecord } from './drill-store.js';
 import { forgetCards, readCards, writeCards } from './saved-cards.js';
 import { buildPackage, readPackage } from '../core/personal.js';
 import { loadCountries } from '../core/pack.js';
+import { settleWrites } from '../core/settle.js';
 
 /**
  * The reader's own sections of a sheet page's settings: their details and their saved
@@ -65,17 +66,20 @@ export function personalWiring({ onChanged, save, boards }) {
       // write is awaited; if any is refused, what was on the device before is put
       // back -- every part, so a package that carried no speaker answers cannot
       // leave the device with the file's phrases and its own old answers half-mixed
-      // -- and the refusal is what the reader is told. `onChanged` runs either way,
-      // because the screen has to show whichever state actually stands.
+      // -- and the refusal is what the reader is told. Refresh only after success:
+      // reloading after a failure would erase the error the import dialog displays.
       const before = current();
       try {
         await put(data, false);
       } catch (err) {
-        await put(before, true).catch(() => {});
+        try {
+          await put(before, true);
+        } catch (rollback) {
+          throw new AggregateError([err, rollback], 'Restore failed and the previous data could not be fully restored');
+        }
         throw err;
-      } finally {
-        onChanged();
       }
+      onChanged();
       return Object.keys(data.boards?.phrases ?? {}).length;
     },
     forget: async () => {
@@ -130,5 +134,5 @@ async function put(pkg, whole) {
   // Not `forgetDrill`: that also drops each pair's choice of rows, which no package carries.
   if (pkg.quiz || whole) jobs.push(writeRecord(/** @type {any} */ (pkg.quiz ?? { pairs: {} })));
   if (pkg.cards || whole) jobs.push(writeCards(/** @type {any} */ (pkg.cards ?? [])));
-  await Promise.all(jobs);
+  await settleWrites(jobs);
 }

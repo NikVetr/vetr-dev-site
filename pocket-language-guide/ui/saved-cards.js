@@ -19,6 +19,8 @@ import { askConfirm, askText, el } from './board-menu.js';
 import { dialogHead, helpTip } from './dialog.js';
 import { BIN_MARK } from './arrange.js';
 import { number, t, uiLanguage } from './i18n.js';
+import { cardProblems } from '../core/import-validation.js';
+import { MAX_PACKAGE_BYTES } from '../core/personal.js';
 
 const KEY = 'plg.cards';
 /** How long a card stays in the recycle bin. */
@@ -86,6 +88,9 @@ function changeCard(id, patch) {
  * @returns {{ok: true, card: Omit<SavedCard, 'id'|'binned'>} | {ok: false, problems: string[]}}
  */
 export function readExport(text) {
+  if (new TextEncoder().encode(text).length > MAX_PACKAGE_BYTES) {
+    return { ok: false, problems: [`over the ${MAX_PACKAGE_BYTES / 1024}KB limit`] };
+  }
   /** @type {any} */ let file;
   try {
     file = JSON.parse(text);
@@ -94,14 +99,7 @@ export function readExport(text) {
   }
   if (file?.kind !== KIND || file.version !== 1) return { ok: false, problems: [`not a ${KIND}, version 1`] };
   const card = file.card ?? {};
-  const plain = (/** @type {unknown} */ v) => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
-  const problems = [
-    ...['name', 'target', 'source'].filter((k) => typeof card[k] !== 'string' || !card[k]).map((k) => `card.${k}: missing`),
-    ...['spec', 'finish', 'summary'].filter((k) => !plain(card[k])).map((k) => `card.${k}: not an object`),
-    ...(typeof card.dpi === 'number' ? [] : ['card.dpi: not a number']),
-    ...(card.edits === undefined || (plain(card.edits.overrides) && Array.isArray(card.edits.extras))
-      ? [] : ['card.edits: not a set of edits']),
-  ];
+  const problems = cardProblems(card);
   return problems.length ? { ok: false, problems } : { ok: true, card };
 }
 

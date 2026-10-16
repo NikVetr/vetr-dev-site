@@ -215,7 +215,9 @@ test('the details a button says travel in a backup, and must be text', () => {
 
 test('the quiz record and the saved cards travel in a backup, and must have their shape', () => {
   const quiz = { pairs: { ja__en: { n: [3, 0, 1], days: {}, rows: {} } } };
-  const cards = [{ id: 'a1', name: 'Tokyo', target: 'ja', source: 'en', spec: { faces: 2 } }];
+  const cards = [{ id: 'a1', name: 'Tokyo', at: 1, target: 'ja', source: 'en', spec: { geometry: { faces: 2 } },
+    finish: { mode: '', flip: 'short-edge' }, dpi: 600,
+    summary: { sections: 1, items: 2, faces: 2, width: 504, height: 360 } }];
   const got = round({ quiz, cards }, KNOWN);
   assert.equal(got.ok, true);
   assert.deepEqual(got.ok && [got.data.quiz, got.data.cards], [quiz, cards]);
@@ -226,4 +228,14 @@ test('the quiz record and the saved cards travel in a backup, and must have thei
   }));
   assert.ok(!bad.ok && bad.problems.includes('quiz: not a record of answers')
     && bad.problems.includes('cards: not a list of saved cards'));
+});
+
+test('backup validation reaches nested edits, counts and card palettes', () => {
+  for (const parts of [
+    { edits: { es__en: { overrides: {}, extras: 42 } } },
+    { edits: { es__en: { overrides: { hello: { include: 'yes' } }, extras: [] } } },
+    { usage: { items: { hello: { at: {}, by: { es: { n: -1, d: {} } } } } } },
+    { quiz: { pairs: { es__en: { n: [0, 0], days: {}, rows: {} } } } },
+    { cards: [{ id: 'x', name: 'x', target: 'es', source: 'en', spec: { themeColors: { ink: '<svg>' } } }] },
+  ]) assert.equal(readPackage(JSON.stringify({ version: 1, ...parts })).ok, false);
 });

@@ -9,6 +9,8 @@
 import { parseTable, serialize, stripFormulaGuard } from '../core/csv.js';
 import { download } from './app.js';
 import * as store from './platform/store.js';
+import { settleWrites } from '../core/settle.js';
+import { CUSTOM_TEMPLATES } from '../core/import-validation.js';
 
 const EDIT_KEY = 'plg.edits';
 const CONFIG_KEY = 'plg.studio';
@@ -41,6 +43,27 @@ export function loadEdits(target, source) {
  */
 export function saveEdits(target, source, edits) {
   return store.set(`${EDIT_KEY}.${target}__${source}`, JSON.stringify(edits));
+}
+
+/**
+ * Explicit checkbox choices supersede exclusions kept by older CSV imports.
+ * The text layer stays intact; only rows that already have an override need a write.
+ * @param {SheetEdits} edits @param {Record<string,boolean>} items
+ * @returns {SheetEdits}
+ */
+export function setItemInclusion(edits, items) {
+  const overrides = { ...edits.overrides };
+  for (const [id, include] of Object.entries(items)) {
+    if (overrides[id]) overrides[id] = { ...overrides[id], include };
+  }
+  return { ...edits, overrides };
+}
+
+/** @param {import('../core/types.js').SheetSpec} spec @param {SheetEdits} edits
+ * @param {string} id @param {string} section */
+export function itemIncluded(spec, edits, id, section) {
+  return spec.selection.sections[section] !== false
+    && spec.selection.items[id] !== false && edits.overrides[id]?.include !== false;
 }
 
 /** @param {string} target @param {string} source @returns {Promise<void>} */
@@ -99,6 +122,16 @@ export async function forgetConfigs() {
  * @param {string} input.name
  */
 export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
+  const records = sheetCsvRecords({ corpus, blocks, spec, edits });
+  download(
+    new Blob([serialize(CSV_HEADER, records, { bom: true })], { type: 'text/csv;charset=utf-8' }),
+    `${name}-${spec.target}-${spec.source}.csv`,
+  );
+}
+
+/** The records before delivery, shared by previews and round-trip checks.
+ * @param {Omit<Parameters<typeof exportSheetCsv>[0], 'name'>} input */
+export function sheetCsvRecords({ corpus, blocks, spec, edits }) {
   const included = new Set(blocks.flatMap((b) => (b.rows ?? []).map((r) => r.conceptId)));
   /** @type {Map<string, import('../core/types.js').ItemRow & {templateId:string, sectionId:string}>} */
   const rows = new Map();
@@ -149,7 +182,7 @@ export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
       concept_id: extra.conceptId,
       section_id: extra.sectionId,
       template: extra.template,
-      include: saved?.include === false ? 'no' : 'yes',
+      include: itemIncluded(spec, edits, extra.conceptId, extra.sectionId) ? 'yes' : 'no',
       target_text: values.script ?? '',
       romanization: values.roman ?? '',
       ipa: values.ipa ?? '',
@@ -160,10 +193,7 @@ export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
     });
   }
 
-  download(
-    new Blob([serialize(CSV_HEADER, records, { bom: true })], { type: 'text/csv;charset=utf-8' }),
-    `${name}-${spec.target}-${spec.source}.csv`,
-  );
+  return records;
 }
 
 /**
@@ -172,7 +202,7 @@ export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
  * @param {string} text
  * @param {any} corpus
  * @param {SheetEdits} current
- * @returns {{edits:SheetEdits, updated:number, added:number, problems:string[]}}
+ * @returns {{edits:SheetEdits, updated:number, added:number, problems:string[], inclusion:Record<string,boolean>}}
  */
 export function importSheetCsv(text, corpus, current) {
   const rows = parseTable(text, 'import');
@@ -182,6 +212,7 @@ export function importSheetCsv(text, corpus, current) {
 
   /** @type {SheetEdits} */
   const edits = { overrides: { ...current.overrides }, extras: [...current.extras] };
+  /** @type {Record<string,boolean>} */ const inclusion = {};
   /** @type {string[]} */ const problems = [];
   let updated = 0;
   let added = 0;
@@ -191,8 +222,8 @@ export function importSheetCsv(text, corpus, current) {
   for (const [i, row] of rows.entries()) {
     const id = clean(row.concept_id);
     const line = i + 2;
-    if (!id) {
-      problems.push(`row ${line}: no concept_id`);
+    if (!id || ['__proto__', 'constructor', 'prototype'].includes(id)) {
+      problems.push(`row ${line}: missing or unsafe concept_id`);
       continue;
     }
     const values = {
@@ -207,6 +238,7 @@ export function importSheetCsv(text, corpus, current) {
 
     if (corpus.concepts[id]) {
       edits.overrides[id] = { values, include: on };
+      inclusion[id] = on;
       updated += 1;
       continue;
     }
@@ -228,6 +260,10 @@ export function importSheetCsv(text, corpus, current) {
         + 'comes from the reader-side row of an existing concept');
       continue;
     }
+    if (!CUSTOM_TEMPLATES.includes(template)) {
+      problems.push(`row ${line}: unknown template "${template}"`);
+      continue;
+    }
     const weight = Number(clean(row.importance));
     edits.extras = edits.extras.filter((e) => e.conceptId !== id);
     edits.extras.push({
@@ -240,11 +276,12 @@ export function importSheetCsv(text, corpus, current) {
     // `include` was parsed and then dropped for a new row, so an excluded one came
     // back switched on. `buildBlocks` filters every concept, custom included, on
     // `overrides[id].include`, so that is where the flag goes.
-    if (!on) edits.overrides[id] = { values, include: false };
+    edits.overrides[id] = { values, include: on };
+    inclusion[id] = on;
     added += 1;
   }
 
-  return { edits, updated, added, problems };
+  return { edits, updated, added, problems, inclusion };
 }
 
 /**
@@ -270,13 +307,13 @@ export function allEdits() {
 
 /** @param {Record<string, unknown>} edits keyed by pair @returns {Promise<void>} */
 export async function restoreEdits(edits) {
-  await Promise.all(Object.entries(edits).map(([pair, value]) => (
+  await settleWrites(Object.entries(edits).map(([pair, value]) => (
     store.set(`${EDIT_KEY}.${pair}`, JSON.stringify(value)))));
 }
 
 /** Drop every pair's edits. @returns {Promise<number>} how many pairs were cleared */
 export async function forgetEdits() {
   const keys = [...store.keys(`${EDIT_KEY}.`)];
-  await Promise.all(keys.map((key) => store.remove(key)));
+  await settleWrites(keys.map((key) => store.remove(key)));
   return keys.length;
 }

@@ -16,6 +16,8 @@
 // this build does not have is reported as such rather than imported into a state
 // where the phrases exist and are on no screen.
 
+import { plain, checkShape, cardProblems, validEdits, validUsage, validQuiz } from "./import-validation.js";
+
 /** The only shape this code writes. A newer one is refused, not guessed at. */
 export const PACKAGE_VERSION = 1;
 
@@ -28,9 +30,6 @@ export const PACKAGE_VERSION = 1;
  * phone's memory before it is parsed.
  */
 export const MAX_PACKAGE_BYTES = 2 * 1024 * 1024;
-
-/** Deeper than this is not data anyone typed. */
-const MAX_DEPTH = 8;
 
 /** @typedef {import('../ui/board-store.js').BoardPersonal} BoardPersonal */
 
@@ -72,38 +71,6 @@ export function buildPackage(parts) {
   if (parts.quiz && Object.keys(parts.quiz.pairs ?? {}).length) out.quiz = parts.quiz;
   if (parts.cards?.length) out.cards = parts.cards;
   return out;
-}
-
-/**
- * Whether a value is a plain object we are willing to walk.
- * @param {unknown} v @returns {v is Record<string, unknown>}
- */
-const plain = (v) => typeof v === 'object' && v !== null && !Array.isArray(v);
-
-/**
- * Refuse anything that is not text, a number, a boolean, or a shallow container of
- * those. A package carries sentences; a function, a prototype or a ten-deep graph is
- * something else arriving in the shape of one.
- * @param {unknown} value @param {number} depth @param {string} at
- * @param {string[]} problems
- */
-function checkShape(value, depth, at, problems) {
-  if (depth > MAX_DEPTH) { problems.push(`${at}: nested deeper than ${MAX_DEPTH}`); return; }
-  if (value === null || ['string', 'number', 'boolean'].includes(typeof value)) return;
-  if (Array.isArray(value)) {
-    value.forEach((v, i) => checkShape(v, depth + 1, `${at}[${i}]`, problems));
-    return;
-  }
-  if (!plain(value)) { problems.push(`${at}: not text or a plain value`); return; }
-  for (const [key, v] of Object.entries(value)) {
-    // `__proto__` and friends never appear in data someone typed, and they are the
-    // classic way a JSON payload reaches past the object it is supposed to be.
-    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-      problems.push(`${at}: unsafe key ${key}`);
-      continue;
-    }
-    checkShape(v, depth + 1, `${at}.${key}`, problems);
-  }
 }
 
 /**
@@ -281,16 +248,15 @@ export function readPackage(text, known = {}) {
       if (typeof value !== 'string') problems.push(`about ${fact}: not text`);
     }
   }
-  if (raw.usage !== undefined && !(plain(raw.usage) && plain(raw.usage.items))) problems.push('usage: not a set of counts');
-  if (raw.quiz !== undefined && !(plain(raw.quiz) && plain(raw.quiz.pairs))) problems.push('quiz: not a record of answers');
-  if (raw.cards !== undefined && !(Array.isArray(raw.cards) && raw.cards.every((/** @type {unknown} */ card) => plain(card)
-    && ['id', 'name', 'target', 'source'].every((k) => typeof card[k] === 'string') && plain(card.spec)))) {
-    problems.push('cards: not a list of saved cards');
+  if (raw.usage !== undefined && !validUsage(raw.usage)) problems.push('usage: not a set of counts');
+  if (raw.quiz !== undefined && !validQuiz(raw.quiz)) problems.push('quiz: not a record of answers');
+  if (raw.cards !== undefined && !(Array.isArray(raw.cards) && raw.cards.every((/** @type {unknown} */ card) => !cardProblems(card, true).length))) {
+    problems.push("cards: not a list of saved cards");
   }
   if (raw.edits !== undefined && !plain(raw.edits)) problems.push('edits: not a set of pairs');
   else if (raw.edits) {
     for (const [pair, value] of Object.entries(raw.edits)) {
-      if (!plain(value)) problems.push(`edits ${pair}: not a set of edits`);
+      if (!/^[\w-]+__[\w-]+$/.test(pair) || !validEdits(value)) problems.push(`edits ${pair}: not a set of edits`);
     }
   }
 
