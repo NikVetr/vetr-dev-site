@@ -16,7 +16,7 @@
 // `scripts/optimize_thumbs.py` runs after this one (via the `postprerender` hook)
 // and reindexes each screenshot to an exact palette: 16.4MB becomes 5.0MB.
 import { existsSync } from 'node:fs';
-import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, rename } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
@@ -25,6 +25,7 @@ import { planToSvg } from '../render/svg.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
 import { openLocalPage } from './local_page.mjs';
 import { referenceSpec } from './spec.mjs';
+import { prerenderInputs } from './prerender_inputs.mjs';
 
 const THUMB_WIDTH = 480;
 
@@ -42,9 +43,11 @@ const usable = Object.values(ctx.corpus.languages).filter((l) => l.status === 'r
 // that already have a thumbnail. Adding one language to fifty-three used to mean
 // rendering all 2,756 pairs again to get its 52.
 const arg = (/** @type {string} */ flag) => (
-  process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : null);
+  process.argv.includes(flag) ? process.argv[process.argv.lastIndexOf(flag) + 1] : null);
 const only = arg('--only');
+const sourceOnly = arg('--source');
 const force = process.argv.includes('--force');
+const check = process.argv.includes('--check');
 // `--jobs N` splits the pairs over N processes. The solve is single-threaded
 // arithmetic, so one process left every other core idle and a full re-render after
 // a corpus change took the better part of two hours. Each child renders every Nth
@@ -52,33 +55,49 @@ const force = process.argv.includes('--force');
 // index in pair order, so it is the same file a single process writes.
 const jobs = Number(arg('--jobs') ?? 1);
 const shard = arg('--shard');
-// A full forced run starts clean, so a pair that no longer exists leaves no pack
-// behind. A partial run never wipes: the other 2,700 packs are the point of it.
-if (force && !only && !shard) await rm('packs', { recursive: true, force: true });
-/** @type {{target:string, source:string}[]} */ const pairs = [];
+if (!Number.isInteger(jobs) || jobs < 1) throw new Error('--jobs must be a positive integer');
+/** @type {{target:string, source:string}[]} */ const allPairs = [];
 for (const target of usable) {
-  if (only && target.bcp47 !== only) continue;
   // A source is a reader's own language, which Morse -- learnt, never spoken, and
   // so without an "I speak" label -- is not.
   for (const source of usable.filter((l) => l.speak_label)) {
-    if (target.bcp47 !== source.bcp47) pairs.push({ target: target.bcp47, source: source.bcp47 });
+    if (target.bcp47 !== source.bcp47) allPairs.push({ target: target.bcp47, source: source.bcp47 });
   }
 }
+const pairs = allPairs.filter((p) => (!only || p.target === only) && (!sourceOnly || p.source === sourceOnly));
 if (!pairs.length) throw new Error('no language pair has content on both sides');
 
-// A partial run keeps the index entries of every pack it did not touch; a full
-// forced run starts from nothing, as it does with the directory.
-/** @type {any[]} */ const prior = (force && !only) || !existsSync('packs/index.json')
+// Keep the current index available until the replacement is complete.
+/** @type {any[]} */ const prior = !existsSync('packs/index.json')
   ? [] : JSON.parse(await readFile('packs/index.json', 'utf8')).packs;
 const key = (/** @type {{target:string, source:string}} */ m) => `${m.target}__${m.source}`;
+const inputHash = await prerenderInputs(usable.map((l) => l.bcp47));
+const previous = new Map(prior.map((p) => [key(p), p]));
+const fresh = (/** @type {{target:string, source:string}} */ pair) => {
+  const dir = `packs/${key(pair)}`;
+  return previous.get(key(pair))?.inputHash === inputHash(pair.target, pair.source)
+    && existsSync(`${dir}/thumb.png`) && existsSync(`${dir}/face-1.svg.gz`);
+};
+if (check) {
+  const stale = pairs.filter((pair) => !fresh(pair));
+  if (stale.length) throw new Error(`${stale.length} stale previews (${stale.slice(0, 8).map(key).join(', ')}); run npm run prerender`);
+  console.log(`all ${pairs.length} previews match their inputs`);
+  process.exit(0);
+}
+if (!force && pairs.every(fresh)) {
+  console.log(`all ${pairs.length} previews are current; nothing to render`);
+  process.exit(0);
+}
 
 /** Write the index: the packs rendered now, in pair order, over the ones kept. @param {any[]} rendered */
 async function writeIndex(rendered) {
-  const order = new Map(pairs.map((p, i) => [key(p), i]));
-  rendered.sort((a, b) => (order.get(key(a)) ?? 0) - (order.get(key(b)) ?? 0));
+  const order = new Map(allPairs.map((p, i) => [key(p), i]));
   const fresh = new Set(rendered.map(key));
-  const packs = [...prior.filter((m) => !fresh.has(key(m))), ...rendered];
-  await writeFile('packs/index.json', `${JSON.stringify({ packs }, null, 2)}\n`);
+  const packs = [...prior.filter((m) => !fresh.has(key(m)) && (only || sourceOnly || order.has(key(m)))), ...rendered];
+  packs.sort((a, b) => (order.get(key(a)) ?? 0) - (order.get(key(b)) ?? 0));
+  await mkdir('packs', { recursive: true });
+  await writeFile('packs/index.json.tmp', `${JSON.stringify({ packs })}\n`);
+  await rename('packs/index.json.tmp', 'packs/index.json');
   console.log(`packs/index.json  ${packs.length} pack(s), ${rendered.length} rendered now`);
 }
 
@@ -102,63 +121,66 @@ const [k, n] = shard ? shard.split('/').map(Number) : [0, 1];
 const local = await openLocalPage({ deviceScaleFactor: 2 });
 /** @type {any[]} */ const index = [];
 
-for (const { target, source } of pairs.filter((_, i) => i % n === k)) {
-  const dir = `packs/${target}__${source}`;
-  if (!force && existsSync(`${dir}/thumb.png`) && existsSync(`${dir}/face-1.svg.gz`)) continue;
-  await mkdir(dir, { recursive: true });
+try {
+  for (const { target, source } of pairs.filter((_, i) => i % n === k)) {
+    const dir = `packs/${target}__${source}`;
+    if (!force && fresh({ target, source })) continue;
+    await mkdir(dir, { recursive: true });
 
-  const spec = { ...(await referenceSpec(target, source)), scale: 0 };
-  const { plan } = await buildSheet(ctx, spec);
-  const errors = plan.warnings.filter((w) => w.severity === 'error');
-  if (errors.length) throw new Error(`${dir}: ${errors.map((e) => e.message).join('; ')}`);
+    const spec = { ...(await referenceSpec(target, source)), scale: 0 };
+    const { plan } = await buildSheet(ctx, spec);
+    const errors = plan.warnings.filter((w) => w.severity === 'error');
+    if (errors.length) throw new Error(`${dir}: ${errors.map((e) => e.message).join('; ')}`);
 
-  const stacks = stacksFor(ctx.corpus, target, source);
-  const svgs = planToSvg(plan, { faces: cssFaces(manifest), icons });
-  await local.page.setViewportSize({
-    width: Math.ceil(plan.pageW), height: Math.ceil(plan.pageH),
-  });
-  // Only the first face: the thumbnail is a glance at what the card looks like.
-  await local.show(`<!doctype html><meta charset="utf-8"><style>
-    ${fontFaceCss(manifest, stacks)}
-    html,body{margin:0;padding:0;background:#fff}
-    svg{display:block;width:${plan.pageW}px;height:${plan.pageH}px}
-  </style>${svgs[0]}`);
-  await local.page.locator('svg').screenshot({
-    path: `${dir}/thumb.png`, scale: 'css', style: `svg{width:${THUMB_WIDTH}px;height:auto}`,
-  });
+    const stacks = stacksFor(ctx.corpus, target, source);
+    const svgs = planToSvg(plan, { faces: cssFaces(manifest), icons });
+    await local.page.setViewportSize({
+      width: Math.ceil(plan.pageW), height: Math.ceil(plan.pageH),
+    });
+    // Only the first face: the thumbnail is a glance at what the card looks like.
+    await local.show(`<!doctype html><meta charset="utf-8"><style>
+      ${fontFaceCss(manifest, stacks)}
+      html,body{margin:0;padding:0;background:#fff}
+      svg{display:block;width:${plan.pageW}px;height:${plan.pageH}px}
+    </style>${svgs[0]}`);
+    await local.page.locator('svg').screenshot({
+      path: `${dir}/thumb.png`, scale: 'css', style: `svg{width:${THUMB_WIDTH}px;height:auto}`,
+    });
 
-  // **The first face as vector, so the lightbox opens on the real thing.**
-  //
-  // Laying out a sheet is about a second of arithmetic, and none of it is network:
-  // the fit is already pinned from this index, so what is left is measuring and
-  // breaking 600-odd rows. For that second the reader was looking at the 480px
-  // thumbnail above, upscaled to card size and dimmed -- honest about not being
-  // ready, and the thing they actually complained about.
-  //
-  // Shipping the whole sheet is not affordable and shipping one face is: a face is
-  // ~180KB of SVG, but SVG is text that repeats itself and gzip takes it to 13KB, so
-  // 420 pairs of first faces is ~5.5MB against ~75MB raw. Compressed *in the repo*
-  // rather than only on the wire, because these files are rewritten wholesale every
-  // time the corpus or the theme moves and git would keep every revision.
-  // `DecompressionStream` inflates it in the browser; the remaining faces arrive when
-  // the solve finishes, by which time the reader is still on this one.
-  await writeFile(`${dir}/face-1.svg.gz`, gzipSync(svgs[0], { level: 9 }));
+    // **The first face as vector, so the lightbox opens on the real thing.**
+    //
+    // Laying out a sheet is about a second of arithmetic, and none of it is network:
+    // the fit is already pinned from this index, so what is left is measuring and
+    // breaking 600-odd rows. For that second the reader was looking at the 480px
+    // thumbnail above, upscaled to card size and dimmed -- honest about not being
+    // ready, and the thing they actually complained about.
+    //
+    // Shipping the whole sheet is not affordable and shipping one face is: a face is
+    // ~180KB of SVG, but SVG is text that repeats itself and gzip takes it to 13KB, so
+    // 420 pairs of first faces is ~5.5MB against ~75MB raw. Compressed *in the repo*
+    // rather than only on the wire, because these files are rewritten wholesale every
+    // time the corpus or the theme moves and git would keep every revision.
+    // `DecompressionStream` inflates it in the browser; the remaining faces arrive when
+    // the solve finishes, by which time the reader is still on this one.
+    await writeFile(`${dir}/face-1.svg.gz`, gzipSync(svgs[0], { level: 9 }));
 
-  const meta = {
-    target,
-    source,
-    scale: Number(plan.scale.toFixed(4)),
-    faces: plan.faces.length,
-    pageW: plan.pageW,
-    pageH: plan.pageH,
-    items: plan.faces.reduce((n, f) => n + f.hits.filter((h) => h.conceptId).length, 0),
-    warnings: plan.warnings,
-  };
-  index.push(meta);
-  console.log(`${dir}  ${meta.faces} faces  ${meta.items} items  scale ${meta.scale}`);
+    const meta = {
+      target,
+      source,
+      inputHash: inputHash(target, source),
+      scale: Number(plan.scale.toFixed(4)),
+      faces: plan.faces.length,
+      pageW: plan.pageW,
+      pageH: plan.pageH,
+      items: plan.faces.reduce((n, f) => n + f.hits.filter((h) => h.conceptId).length, 0),
+      warnings: plan.warnings,
+    };
+    index.push(meta);
+    console.log(`${dir}  ${meta.faces} faces  ${meta.items} items  scale ${meta.scale}`);
+  }
+} finally {
+  await local.close();
 }
-
-await local.close();
 if (shard) {
   await mkdir('tmp/out', { recursive: true });
   await writeFile(`tmp/out/prerender-shard-${k}.json`, JSON.stringify(index));

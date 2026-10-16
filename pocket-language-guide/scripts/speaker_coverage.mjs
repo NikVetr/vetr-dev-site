@@ -1,4 +1,4 @@
-// Which languages promise a wording for a woman speaking, and which actually have it.
+// Which languages declare speaker/listener wording or register, and which have it.
 //
 //   node scripts/speaker_coverage.mjs            the report
 //   node scripts/speaker_coverage.mjs --json     the same, machine-readable
@@ -27,6 +27,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { parseTable } from '../core/csv.js';
 import { readAxes, variantKey } from '../core/speaker.js';
+import { parseAlternates } from '../core/alternation.js';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const read = (/** @type {string} */ rel) => parseTable(readFileSync(`${ROOT}/${rel}`, 'utf8'), rel);
@@ -58,24 +59,30 @@ function pack(/** @type {string} */ code) {
 }
 
 /**
- * Base rows still carrying the wording ad hoc: a slash inside the sentence, which
- * makes the reader do grammar at a hotel counter. The migration backlog, per
+ * First-person rows with a slash to inspect, excluding lexical alternatives already
+ * present in the English concept and intentional noun-gender templates. Per
  * `content/PROMPTS/speaker-variants.md`.
  *
- * Only the slash. A feminine parked in `text_alt` is the other half of that backlog,
+ * This is a heuristic, not proof of a gender error. A feminine parked in `text_alt` is another part of that backlog,
  * but `text_alt` is a general second-wording cell — Hebrew fills all 136 of them with
  * the pointed spelling, Greek with a periphrasis — so counting it reported every
  * Hebrew row as suspect and told nobody anything. Which languages park a feminine
  * there is written down in the prompt instead, where it can say *which* rows.
  */
-function slashed(/** @type {Record<string,Record<string,string>>} */ rows, /** @type {Set<string>} */ want) {
+function slashed(/** @type {Record<string,Record<string,string>>} */ rows, /** @type {Set<string>} */ want,
+  /** @type {Record<string,Record<string,string>>} */ english) {
   return Object.values(rows)
-    .filter((r) => want.has(r.concept_id) && /\S\s*\/\s*\S/.test(r.text ?? ''))
+    .filter((r) => want.has(r.concept_id) && /\S\s*\/\s*\S/.test(r.text ?? '')
+      // A concept such as "I / me" intentionally offers several readings. Likewise,
+      // bracketed template alternatives belong to the noun in the blank, not the speaker.
+      && !(english[r.concept_id]?.text ?? '').includes('/')
+      && !parseAlternates(r.text ?? '').groups.length)
     .map((r) => r.concept_id);
 }
 
-const axes = readAxes(read('data/registry/speaker-axes.csv'));
+const axes = readAxes([...read('data/registry/speaker-axes.csv'), ...read('data/registry/listener-axes.csv')]);
 const want = candidates();
+const english = pack('en');
 
 // One language's worklist: every first-person concept it has a row for, with the
 // English beside it, so whoever writes the variants is reading the same list the
@@ -83,13 +90,12 @@ const want = candidates();
 const only = process.argv.slice(2).find((a) => !a.startsWith('--'));
 if (only) {
   const rows = pack(only);
-  const english = pack('en');
   // `--slashed` narrows the worklist to the migration backlog: rows whose `text`
   // still carries a slashed dual form, which is the thing a reader has to do
   // grammar on at a hotel counter. The third column is the English, so whoever is
   // splitting the form can see which half is which.
   const wanted = process.argv.includes('--slashed')
-    ? [...want].filter((id) => rows[id] && /\S\s*\/\s*\S/.test(rows[id].text ?? ''))
+    ? slashed(rows, want, english)
     : [...want].filter((id) => rows[id]);
   for (const id of wanted.sort()) {
     console.log([id, rows[id].text, english[id]?.text ?? ''].join('\t'));
@@ -104,13 +110,12 @@ for (const [code, list] of Object.entries(axes).sort()) {
   const mine = [...want].filter((id) => rows[id]);
   const rel = `data/lang/${code}/variants.csv`;
   const variants = existsSync(`${ROOT}/${rel}`) ? read(rel) : [];
-  // Every key the axes can produce that is not the all-defaults one, so a file can
-  // be checked against what the registry actually offers rather than against itself.
-  const keys = new Set(list.flatMap((axis) => axis.values
-    .filter((value) => value !== axis.fallback)
-    .map((value) => variantKey(list, { [axis.axis]: value }))));
   const covered = new Set(variants.map((r) => r.concept_id));
-  const unknown = variants.filter((r) => !keys.has(r.variant)).map((r) => r.variant);
+  // Rebuild the complete key: listener, register and speaker axes can combine, and
+  // default, unknown or duplicated components must not be accepted as valid keys.
+  const unknown = variants.filter((r) => variantKey(list,
+    Object.fromEntries(r.variant.split('|').map((part) => part.split('=')))) !== r.variant)
+    .map((r) => r.variant);
   const stray = variants.filter((r) => !rows[r.concept_id]).map((r) => r.concept_id);
   report.push({
     language: code,
@@ -118,7 +123,9 @@ for (const [code, list] of Object.entries(axes).sort()) {
     candidates: mine.length,
     covered: covered.size,
     rows: variants.length,
-    slashed: slashed(rows, want),
+    slashed: slashed(rows, want, english),
+    templateAlternates: Object.values(rows).filter((r) => parseAlternates(r.text ?? '').groups.length)
+      .map((r) => r.concept_id),
     unknownKeys: [...new Set(unknown)],
     strayConcepts: stray,
   });
@@ -145,5 +152,6 @@ if (process.argv.includes('--json')) {
   }
   const done = report.filter((r) => r.rows).length;
   console.log(`\n${done}/${report.length} declared languages have a variants file.`);
-  console.log(`${report.reduce((n, r) => n + r.slashed.length, 0)} first-person rows still carry a slash.`);
+  console.log(`${report.reduce((n, r) => n + r.slashed.length, 0)} first-person rows have a slash to review (excluding lexical and template alternatives).`);
+  console.log(`${report.reduce((n, r) => n + r.templateAlternates.length, 0)} rows carry intentional template gender alternatives.`);
 }

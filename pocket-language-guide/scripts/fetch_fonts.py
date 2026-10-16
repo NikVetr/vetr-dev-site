@@ -6,11 +6,13 @@ subsetting in subset_fonts.py is reproducible from named upstream releases.
 All faces are SIL Open Font License 1.1.
 """
 import sys
+import hashlib
+import json
 import urllib.request
 from pathlib import Path
 
-NOTO = "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts"
-GFONTS = "https://raw.githubusercontent.com/google/fonts/main/ofl"
+NOTO = "https://raw.githubusercontent.com/notofonts/notofonts.github.io/5c3913063bb189df4edc94b766584dfb4c04a187/fonts"
+GFONTS = "https://raw.githubusercontent.com/google/fonts/bf7c667ae010c0ffb39944ae85097021478cb91d/ofl"
 
 SOURCES = {
     "NotoSans-Regular.ttf": f"{NOTO}/NotoSans/hinted/ttf/NotoSans-Regular.ttf",
@@ -224,7 +226,8 @@ SOURCES = {
     "NotoSerifBengali-var.ttf":
         f"{GFONTS}/notoserifbengali/NotoSerifBengali%5Bwdth,wght%5D.ttf",
     "NotoSansDevanagari-var.ttf":
-        f"{GFONTS}/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/03a182001fd7b1ccb3960a8faa8b616619c0d1a1"
+        "/ofl/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
     "NotoSerifDevanagari-var.ttf":
         f"{GFONTS}/notoserifdevanagari/NotoSerifDevanagari%5Bwdth,wght%5D.ttf",
     # Tamil, and `NotoSans-var.ttf` has zero codepoints of U+0B80..0BFF, so `Taml`
@@ -484,11 +487,24 @@ SOURCES = {
     # `PUA_DONOR` in subset_fonts.py, which is a measurement rather than a
     # preference.
     "Constructium.ttf":
-        "https://raw.githubusercontent.com/kreativekorp/open-relay/master"
+        "https://raw.githubusercontent.com/kreativekorp/open-relay/e4b81241e8c7269a91c0bd865cf5c9e7208fbada"
         "/Constructium/Constructium.ttf",
 }
 
 DEST = Path(__file__).resolve().parent.parent / "tmp" / "data" / "fonts-src"
+CHECKSUMS = json.loads(Path(__file__).with_name("font-sources.sha256.json").read_text())
+if set(CHECKSUMS) != set(SOURCES):
+    raise ValueError("font sources and checksums disagree; record each reviewed source before fetching")
+
+
+def verify_source(name, data):
+    if hashlib.sha256(data).hexdigest() != CHECKSUMS[name]:
+        raise ValueError(f"{name}: SHA-256 mismatch; refusing an unreviewed font source")
+
+
+def verify_sources(names):
+    for name in names:
+        verify_source(name, (DEST / name).read_bytes())
 
 
 def main() -> int:
@@ -496,11 +512,16 @@ def main() -> int:
     for name, url in SOURCES.items():
         out = DEST / name
         if out.exists():
-            print(f"have  {name}")
+            verify_source(name, out.read_bytes())
+            print(f"check {name}")
             continue
         print(f"fetch {name}")
         with urllib.request.urlopen(url, timeout=120) as resp:
-            out.write_bytes(resp.read())
+            data = resp.read()
+        verify_source(name, data)
+        partial = out.with_suffix(".tmp")
+        partial.write_bytes(data)
+        partial.replace(out)
     print(f"sources in {DEST}")
     return 0
 

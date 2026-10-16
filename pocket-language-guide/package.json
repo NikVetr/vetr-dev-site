@@ -19,7 +19,7 @@
     "test:webkit": "WEBKIT=1 npx playwright test --project=webkit",
     "postprerender": "python3 scripts/optimize_thumbs.py",
     "test:unit": "node --test tests/*.test.mjs",
-    "test": "npm run validate && npm run check && npm run test:unit && npx playwright test",
+    "test": "npm run validate && npm run check && npm run test:unit && npm run test:integration && npx playwright test",
     "vendor": "node scripts/build_vendor.mjs",
     "icons": "node scripts/extract_icons.mjs",
     "logo": "node scripts/build_logo.mjs",
@@ -31,7 +31,9 @@
     "native": "python3 scripts/transliterate_native.py",
     "boards": "node scripts/build_board_index.mjs",
     "countries": "node scripts/build_countries.mjs",
-    "timezones": "node scripts/build_timezones.mjs"
+    "timezones": "node scripts/build_timezones.mjs",
+    "test:integration": "node --test tests/integration/*.test.mjs",
+    "test:fast": "npx tsc -p jsconfig.json && npm run test:unit"
   },
   "devDependencies": {
     "@capacitor/android": "^8.5.2",
@@ -43,6 +45,7 @@
     "@capacitor/ios": "^8.5.2",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/share": "^8.0.2",
+    "@noble/hashes": "2.4.0",
     "@pdf-lib/fontkit": "^1.1.1",
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.4.0",
@@ -52,5 +55,10 @@
     "pdf-lib": "^1.17.1",
     "regenerator-runtime": "^0.14.1",
     "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
   }
 }

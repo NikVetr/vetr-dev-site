@@ -38,6 +38,7 @@ const targets = [
       export default m;`,
   },
   { out: 'vendor/pdf-lib.esm.js', contents: "export * from 'pdf-lib';" },
+  { out: 'vendor/sha256.esm.js', contents: "export { sha256 } from '@noble/hashes/sha2.js';" },
 ];
 
 for (const { contents, out, banner } of targets) {
@@ -59,7 +60,7 @@ for (const { contents, out, banner } of targets) {
   console.log(`${out}  ${(readFileSync(out).length / 1024).toFixed(0)} KB`);
 }
 
-const versions = ['@pdf-lib/fontkit', 'pdf-lib']
+const versions = ['@pdf-lib/fontkit', 'pdf-lib', '@noble/hashes']
   .map((n) => {
     const pkg = JSON.parse(readFileSync(`node_modules/${n}/package.json`, 'utf8'));
     return `- ${n} ${pkg.version} (${pkg.license})`;
@@ -70,3 +71,4 @@ writeFileSync(
   `# Vendored bundles\n\nBuilt by \`npm run vendor\` (scripts/build_vendor.mjs). Do not edit by hand.\n\n${versions}\n`,
 );
 console.log('vendor/VERSIONS.md');
+writeFileSync('vendor/noble-hashes.LICENSE', readFileSync('node_modules/@noble/hashes/LICENSE'));

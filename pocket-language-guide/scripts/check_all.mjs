@@ -56,9 +56,11 @@ const env = loaderEnv();
 const checks = [
   { name: 'types', cmd: 'npx', args: ['tsc', '-p', 'jsconfig.json'] },
   { name: 'shell', cmd: 'node', args: ['scripts/build_shell.mjs', '--check'] },
+  { name: 'previews', cmd: 'node', args: ['scripts/prerender_packs.mjs', '--check'] },
   { name: 'publish', cmd: 'node', args: ['scripts/check_publish_boundary.mjs'] },
   { name: 'boards', cmd: 'node', args: ['scripts/build_board_index.mjs', '--check'] },
   { name: 'countries', cmd: 'node', args: ['scripts/build_countries.mjs', '--check'] },
+  { name: 'flags', cmd: 'python3', args: ['scripts/fetch_flags.py', '--check'] },
   { name: 'i18n', cmd: 'node', args: ['scripts/check_i18n.mjs', '--check'] },
   { name: 'native', cmd: 'python3', args: ['scripts/transliterate_native.py', '--check'] },
   { name: 'ipa', cmd: 'python3', args: ['scripts/build_ipa.py', '--check', '--only', systemVoices()] },
@@ -98,6 +100,7 @@ if (!env) {
   // Not a failure: a machine without the loader simply cannot check those two, and
   // saying so is better than a silent gap where two languages used to be.
   console.log('note  ipa:uk and ipa:mr skipped -- espeakng-loader is not installed');
+  if (process.env.CI || process.argv.includes('--strict')) failed.push('ipa:uk', 'ipa:mr');
 }
 if (failed.length) {
   console.error(`\n${failed.length} check(s) failed: ${failed.join(', ')}`);

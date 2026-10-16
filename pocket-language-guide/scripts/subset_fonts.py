@@ -21,6 +21,7 @@ from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables.DefaultTable import DefaultTable
 from fontTools.ttLib.scaleUpem import scale_upem
 from fontTools.varLib import instancer
+from fetch_fonts import verify_sources
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "tmp" / "data" / "fonts-src"
@@ -1596,6 +1597,7 @@ def main():
     if not SRC.exists():
         print("run scripts/fetch_fonts.py first", file=sys.stderr)
         return 1
+    verify_sources(set(FACES.values()) | set(LATIN_DONOR.values()) | {PUA_DONOR})
     cache = {}
     faces = []
     for (stack, weight, italic), source in FACES.items():
