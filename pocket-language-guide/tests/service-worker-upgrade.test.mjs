@@ -143,3 +143,17 @@ test('failed upgrade keeps offline bytes and old hashes, then retries once onlin
   assert.equal(await f.read(path), 'new rows');
   assert.equal(f.reads.length, before + 1, 'successful refresh returns to cache-first reads');
 });
+
+test('a file from another deploy is served to a reader with no copy, and never stored', async () => {
+  // GitHub Pages' CDN holds each file for ten minutes, so the manifest and a file can
+  // come from different deploys: refusing them blocked a language's first open.
+  const path = 'data/lang/de/core.csv';
+  const f = await worker({ [path]: hash('new rows') });
+  await f.activate();
+  f.network.set(path, 'previous deploy rows');
+  assert.equal(await f.read(path), 'previous deploy rows');
+  assert.equal(await f.pack.match(path), undefined);
+  f.network.set(path, 'new rows');
+  assert.equal(await f.read(path), 'new rows');
+  assert.equal((await f.pack.match(path))?.headers.get(HASH), hash('new rows'));
+});

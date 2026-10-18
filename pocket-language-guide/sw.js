@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-2b75f3cce3ed';
+const VERSION = 'plg-b7c230e42764';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -82,7 +82,12 @@ async function refreshPack(cache, request, expected) {
       if (!response.ok) return response;
       if (expected) {
         const actual = await digest(response);
-        if (actual !== expected) throw new Error(`Content hash mismatch: ${key}`);
+        if (actual !== expected) {
+          // The CDN can serve this file and the manifest from different deploys for its
+          // ten-minute max-age: never store such bytes, but a reader with no copy may
+          // still use them.
+          throw Object.assign(new Error(`Content hash mismatch: ${key}`), { response });
+        }
         return putTagged(cache, request, response, actual);
       }
       await cache.put(request, response.clone());
@@ -205,6 +210,7 @@ self.addEventListener('fetch', (event) => {
         console.warn('[plg] saved file refresh failed; keeping previous copy:', packPath(request), response.status);
       } catch (error) {
         console.warn('[plg] saved file refresh failed; keeping previous copy:', packPath(request), String(error));
+        if (!cached && error.response) return error.response;
       }
       return cached || new Response('Offline and this file was never cached.', { status: 504 });
     }

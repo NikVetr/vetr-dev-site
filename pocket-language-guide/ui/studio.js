@@ -131,7 +131,9 @@ async function main() {
     spec = {
       ...spec, ...saved.spec,
       geometry: { ...spec.geometry, ...saved.spec.geometry },
-      paper: paperSpec(ctx.corpus, saved.spec.paper?.presetId ?? spec.paper.presetId),
+      // A preset the registry no longer has (renamed, or from an imported card) falls
+      // back to the default rather than refusing to open the pair at all.
+      paper: paperSpec(ctx.corpus, ctx.corpus.paper[saved.spec.paper?.presetId] ? saved.spec.paper.presetId : spec.paper.presetId),
     };
   }
   let edits = loadEdits(spec.target, spec.source);

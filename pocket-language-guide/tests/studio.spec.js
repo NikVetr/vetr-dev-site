@@ -1412,3 +1412,13 @@ test.describe('saved cards', () => {
     expect(held).toEqual(['Binned']);
   });
 });
+
+test('a saved card naming a paper the registry no longer has still opens, on the default paper', async ({ page }) => {
+  // `paperSpec` refuses an unknown preset, so a renamed preset or an imported card's
+  // made-up one used to stop the studio from opening that pair at all.
+  await page.addInitScript(() => localStorage.setItem('plg.studio.ja__en',
+    JSON.stringify({ spec: { target: 'ja', source: 'en', paper: { presetId: 'no-such-paper' } } })));
+  await page.goto('/customize.html?target=ja&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect(page.locator('body')).not.toContainText('Something went wrong');
+});
