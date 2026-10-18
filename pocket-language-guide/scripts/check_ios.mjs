@@ -43,7 +43,9 @@ const idb = (/** @type {string[]} */ ...args) => run('idb', [...args, '--udid', 
 const screen = JSON.parse(idb('ui', 'describe-all', '--json'))[0].frame;
 
 // --- the inspector ----------------------------------------------------------
-const socket = run('bash', ['-c', 'ls /private/var/tmp/com.apple.launchd.*/com.apple.webinspectord_sim.socket | head -1']);
+// The newest socket: a session that ended leaves its own behind, and the first by name
+// can be a dead one from weeks ago.
+const socket = run('bash', ['-c', 'ls -t /private/var/tmp/com.apple.launchd.*/com.apple.webinspectord_sim.socket | head -1']);
 const proxy = spawn('ios_webkit_debug_proxy', ['-s', `unix:${socket}`, '-F'], { stdio: 'ignore', env });
 process.on('exit', () => proxy.kill());
 
@@ -142,7 +144,10 @@ async function launch() {
   run('xcrun', ['simctl', 'launch', UDID, APP]);
   await sleep(3000);
   const p = await page();
-  await p.until("document.querySelectorAll('.card, .board-cell').length");
+  // The download chooser belongs to first-launch onboarding, as on Android: choose
+  // on-demand downloads and leave that preference durable.
+  await p.until("(document.querySelector('dialog.native-language-setup button.ghost')?.click(), "
+    + "document.querySelectorAll('.card, .board-cell').length)");
   return p;
 }
 
