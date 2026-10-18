@@ -1,7 +1,11 @@
 // The phone. Three things were broken here and none of them showed on a desktop.
 import { test, expect } from '@playwright/test';
+import { nativeFixture } from './native-fixture.js';
 
 const PHONE = { width: 390, height: 844 };
+// The card's own drawing: a phone opens on a lock-screen card, whose clock overlay is a
+// second, aria-hidden svg in the same face.
+const CARD = '.face.focused svg:not([aria-hidden])';
 
 test.describe('on a phone', () => {
   test.use({ viewport: PHONE });
@@ -14,7 +18,7 @@ test.describe('on a phone', () => {
     // tall, the face 2x2, its `<svg>` 0x0 -- a 56pt sliver where the sheet should be.
     // The thumbnail strip still drew, which is why the panel looked present.
     await page.goto('/customize.html?target=es&source=en');
-    const face = page.locator('.face.focused svg');
+    const face = page.locator(CARD);
     await expect(face).toBeVisible();
     const box = await face.boundingBox();
     expect(box.width).toBeGreaterThan(200);
@@ -112,7 +116,7 @@ test('in the app, Open shows the page over the app, which has no tabs to open it
   // The shell hands a `target="_blank"` link to the system, which cannot open a
   // `blob:` address -- so on a phone Open did nothing at all.
   await page.setViewportSize(PHONE);
-  await page.addInitScript(() => { /** @type {any} */ (window).Capacitor = { isNativePlatform: () => true, Plugins: {} }; });
+  await nativeFixture(page);
   await page.goto('/sheet.html?target=es&source=en');
   await expect(page.locator('.sheet-preview .face svg').first()).toBeVisible();
   await page.evaluate(() => {
@@ -135,9 +139,9 @@ test('in the app, one picture is shown with Save image, which hands the image it
   // A file handed to the share sheet is a file, which iOS offers Save to Files for and
   // not Save Image -- so the picture itself is shared, from a press of its own.
   await page.setViewportSize(PHONE);
+  await nativeFixture(page);
   await page.addInitScript(() => {
     const g = /** @type {any} */ (window);
-    g.Capacitor = { isNativePlatform: () => true, Plugins: {} };
     g.__shared = [];
     Object.defineProperty(navigator, 'canShare', { configurable: true, value: (/** @type {any} */ d) => Boolean(d?.files?.length) });
     Object.defineProperty(navigator, 'share', {
@@ -146,7 +150,7 @@ test('in the app, one picture is shown with Save image, which hands the image it
     });
   });
   await page.goto('/customize.html?target=zh-Hans&source=en&geometry=phone-19-5x9');
-  await expect(page.locator('.face.focused svg').first()).toBeVisible({ timeout: 90_000 });
+  await expect(page.locator(CARD).first()).toBeVisible({ timeout: 90_000 });
   const lock = page.locator('.panel-field').filter({ has: page.locator('.panel-field-title', { hasText: 'Lock screen' }) });
   await lock.getByRole('radio', { name: 'Beginner' }).click();
   await expect(page.locator('#status')).toContainText('Faces: 1', { timeout: 90_000 });
@@ -203,12 +207,12 @@ test.describe('editing a row on a phone', () => {
     const popup = page.locator('.item-popup');
     const title = await popup.locator('.item-popup-title').textContent();
     // The row's own words are on the card; unticking it should take them off.
-    await expect(page.locator('.face.focused svg')).toContainText(title.trim());
+    await expect(page.locator(CARD)).toContainText(title.trim());
     await popup.locator('.item-popup-toggle input').first().uncheck();
     // A re-solve replaces the hit layer the popup is anchored to, so it closes
     // itself rather than pointing at a row that has moved.
     await expect(popup).toHaveCount(0);
-    await expect(page.locator('.face.focused svg')).not.toContainText(title.trim());
+    await expect(page.locator(CARD)).not.toContainText(title.trim());
   });
 
   test('the editor in the popup is the list\'s own, and it saves', async ({ page }) => {
@@ -225,7 +229,7 @@ test.describe('editing a row on a phone', () => {
     const first = form.locator('input').first();
     await first.fill('Hasta luego');
     await form.getByRole('button', { name: /save/i }).click();
-    await expect(page.locator('.face.focused svg')).toContainText('Hasta luego');
+    await expect(page.locator(CARD)).toContainText('Hasta luego');
   });
 });
 
@@ -235,7 +239,7 @@ test.describe('the studio\'s chrome on a phone', () => {
   /** The studio, solved, with its phone chrome built. @param {import('@playwright/test').Page} page */
   const studio = async (page) => {
     await page.goto('/customize.html?target=es&source=en');
-    await expect(page.locator('.face.focused svg')).toBeVisible();
+    await expect(page.locator(CARD)).toBeVisible();
     await expect(page.locator('.panel-toggle')).toHaveCount(2);
   };
 
@@ -463,7 +467,7 @@ test('the phone\'s chrome is built and taken down at the breakpoint', async ({ p
   // controls are put back against markers rather than re-stated in a second list.
   await page.setViewportSize({ width: 844, height: 390 });
   await page.goto('/customize.html?target=es&source=en');
-  await expect(page.locator('.face.focused svg')).toBeVisible();
+  await expect(page.locator(CARD)).toBeVisible();
   const order = () => page.evaluate(() => [...document.querySelectorAll('.site-header .container > *')]
     .map((el) => el.id || el.className.replace(/\s+/g, '.')).join(' '));
   const laid = await order();
@@ -486,7 +490,7 @@ test('none of the phone\'s chrome is on a desktop', async ({ page }) => {
   // you: there is nothing to fold away and nothing to hide in a menu.
   await page.setViewportSize({ width: 1680, height: 1000 });
   await page.goto('/customize.html?target=es&source=en');
-  await expect(page.locator('.face.focused svg')).toBeVisible();
+  await expect(page.locator(CARD)).toBeVisible();
   await expect(page.locator('.panel-toggle')).toHaveCount(0);
   await expect(page.locator('#header-more')).toBeHidden();
   await expect(page.locator('#header-menu')).toBeHidden();
@@ -505,7 +509,7 @@ test('the studio has a way back to the languages at every width', async ({ page 
   for (const viewport of [{ width: 1680, height: 1000 }, PHONE]) {
     await page.setViewportSize(viewport);
     await page.goto('/customize.html?target=es&source=en');
-    await expect(page.locator('.face.focused svg')).toBeVisible();
+    await expect(page.locator(CARD)).toBeVisible();
     const back = page.locator('.site-header').getByRole('link', { name: 'All languages' });
     await expect(back).toBeVisible();
     await expect(back).toHaveCount(1);
@@ -533,7 +537,7 @@ test.describe('the section picker on a phone', () => {
    * @param {import('@playwright/test').Page} page */
   const studio = async (page) => {
     await page.goto('/customize.html?target=es&source=en');
-    await expect(page.locator('.face.focused svg')).toBeVisible();
+    await expect(page.locator(CARD)).toBeVisible();
     await expect(page.locator('.section-chips .chip-toggle').first()).toBeVisible();
   };
 
@@ -719,7 +723,7 @@ test.describe('the section picker on a phone', () => {
     await chip(page, 'Toilets').check();
     await expect(item(page, 'toilets.where-toilet')).toBeChecked();
     await expect(hello).not.toBeChecked();
-    await expect(page.locator('.face.focused svg')).not.toContainText('Hola');
+    await expect(page.locator(CARD)).not.toContainText('Hola');
   });
 
   test('the drill\'s column lists use the same chips', async ({ page }) => {
@@ -745,7 +749,7 @@ test('a lock-screen level opens the content list beside the format panel, to a t
   // So the reader can press the levels in turn and watch which sections light up.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/customize.html?target=zh-Hans&source=en&geometry=phone-19-5x9');
-  await expect(page.locator('.face.focused svg').first()).toBeVisible({ timeout: 90_000 });
+  await expect(page.locator(CARD).first()).toBeVisible({ timeout: 90_000 });
   const format = page.locator('.studio > section').filter({ has: page.locator('#format-body') });
   const content = page.locator('.studio > section').filter({ has: page.locator('#content-body') });
   // Folded, as a reader working in the format panel may have left it.
@@ -774,7 +778,7 @@ test('the section picker is a phone control only', async ({ page }) => {
   // be a second thing to keep in step with the first.
   await page.setViewportSize({ width: 1680, height: 1000 });
   await page.goto('/customize.html?target=es&source=en');
-  await expect(page.locator('.face.focused svg')).toBeVisible();
+  await expect(page.locator(CARD)).toBeVisible();
   await expect(page.locator('#section-picker')).toBeHidden();
   await expect(page.locator('.tree summary input[type=checkbox]').first()).toBeVisible();
 });
@@ -784,14 +788,12 @@ test('the app opens again where the reader left off, as deep as they allow @smok
   // register a Back handler. Back is delivered the way Android delivers it to a
   // screen a launch opened -- with nothing behind it, because Chromium skips history
   // entries a page made without a gesture.
+  await nativeFixture(context);
   await context.addInitScript(() => {
     /** @type {Function[]} */ const back = [];
-    /** @type {any} */ (globalThis).Capacitor = {
-      isNativePlatform: () => true,
-      Plugins: { App: {
-        addListener: (/** @type {string} */ name, /** @type {Function} */ fn) => { if (name === 'backButton') back.push(fn); },
-        exitApp: () => { /** @type {any} */ (globalThis).exited = true; },
-      } },
+    /** @type {any} */ (globalThis).Capacitor.Plugins.App = {
+      addListener: (/** @type {string} */ name, /** @type {Function} */ fn) => { if (name === 'backButton') back.push(fn); },
+      exitApp: () => { /** @type {any} */ (globalThis).exited = true; },
     };
     /** @type {any} */ (globalThis).systemBack = () => back.forEach((fn) => fn({ canGoBack: false }));
   });
@@ -820,6 +822,8 @@ test('the app opens again where the reader left off, as deep as they allow @smok
   await second.keyboard.press('Escape');
   await second.locator('.board-cell', { hasText: 'Massage' }).click();
   await expect(second).toHaveURL(/board=spa$/);
+  // The reader is on the board when they leave: it notes its place once it has drawn.
+  await expect(second.locator('.board-cell').first()).toBeVisible();
   const third = await launch();
   await expect(third).toHaveURL(/board=spa$/);
   await expect(third.locator('.board-cell').first()).toBeVisible();

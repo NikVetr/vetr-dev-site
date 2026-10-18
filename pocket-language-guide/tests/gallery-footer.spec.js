@@ -3,6 +3,7 @@
 // so the badges link nowhere and say so, and the dialog holds a labelled place for each
 // code. Inside the native apps none of it is offered.
 import { test, expect } from '@playwright/test';
+import { nativeFixture } from './native-fixture.js';
 
 /** @param {import('@playwright/test').Page} page */
 const ready = (page) => expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
@@ -78,9 +79,7 @@ test('on a desktop the footer holds the corner Donate held, and the last row cle
 });
 
 test('inside the app, the footer is Donate alone', async ({ page }) => {
-  await page.addInitScript(() => {
-    /** @type {any} */ (globalThis).Capacitor = { isNativePlatform: () => true, Plugins: {} };
-  });
+  await nativeFixture(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await ready(page);
