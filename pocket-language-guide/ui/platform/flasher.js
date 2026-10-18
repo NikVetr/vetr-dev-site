@@ -31,6 +31,7 @@
 // `tests/shell.test.mjs` keeps the shell's names clear of that rule's like.
 
 import { safeUnitMs } from '../../core/morse.js';
+import { onPause } from './shell.js';
 
 /** Morse for SOS, in units: true is lit. Dot 1, dash 3, gap 1, letter gap 3. */
 const DOT = 300;
@@ -367,8 +368,13 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // the web process before it runs the hidden event and deliver it on return, when
   // the page reads visible again -- the iOS simulator caught a beacon still flashing
   // after a trip to Settings that way. A page cannot come back without having left.
+  //
+  // And the app's own pause, because on iOS 27 WebKit delivers neither event when the
+  // app goes to the background: the simulator showed the shell's pause and no
+  // visibility change at all, and a beacon -- lamp and all -- flashing on behind Settings.
   document.addEventListener('visibilitychange', stopBeacon);
   addEventListener('pagehide', stopBeacon);
+  const unpause = onPause(stopBeacon);
 
   const stop = () => {
     stopped = true;
@@ -379,6 +385,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
     if (frame !== undefined) cancelAnimationFrame(frame);
     document.removeEventListener('visibilitychange', stopBeacon);
     removeEventListener('pagehide', stopBeacon);
+    unpause();
     root.remove();
     onStop?.();
     // Whoever holds page reloads back for a running beacon can let go now.

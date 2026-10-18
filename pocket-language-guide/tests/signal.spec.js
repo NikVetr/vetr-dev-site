@@ -7,6 +7,7 @@
 // conversation is light.
 
 import { test, expect } from '@playwright/test';
+import { nativeFixture } from './native-fixture.js';
 
 const SIGNAL = '/signal.html?target=morse&source=en';
 
@@ -165,4 +166,29 @@ test('a beacon stops when the page is hidden, and a lamp that answers late is re
   await expect(beacon).toBeVisible();
   await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
   await expect(beacon).toHaveCount(0);
+});
+
+test('inside the app, the app going to the background stops a beacon though the page never hears of it', async ({ page }) => {
+  // On iOS 27 WebKit delivers neither visibilitychange nor pagehide when the app is put
+  // in the background; only the shell's own pause arrives.
+  await nativeFixture(page);
+  await page.addInitScript(() => {
+    const g = /** @type {any} */ (globalThis);
+    g.__pause = [];
+    g.Capacitor.Plugins.App = {
+      addListener: (/** @type {string} */ name, /** @type {Function} */ fn) => {
+        if (name === 'pause') g.__pause.push(fn);
+        return Promise.resolve({ remove: () => { g.__pause = g.__pause.filter((/** @type {Function} */ f) => f !== fn); } });
+      },
+    };
+  });
+  await page.goto(SIGNAL);
+  await page.locator('#signal-text').fill('SOS');
+  await page.locator('#signal-start').click();
+  const beacon = page.locator('.beacon');
+  await expect(beacon).toBeVisible();
+  await page.evaluate(() => /** @type {any} */ (globalThis).__pause.forEach((/** @type {Function} */ fn) => fn()));
+  await expect(beacon).toHaveCount(0);
+  // And it lets go of the listener with the beacon.
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (globalThis).__pause.length)).toBe(0);
 });

@@ -80,6 +80,18 @@ export function onBack(handler, up) {
   });
 }
 
+/**
+ * Call `fn` when the native app goes to the background; never on the web. Returns the
+ * way to stop listening.
+ * @param {() => void} fn @returns {() => void}
+ */
+export function onPause(fn) {
+  const app = /** @type {any} */ (globalThis).Capacitor?.Plugins?.App;
+  if (!isNative() || !app?.addListener) return () => {};
+  const handle = app.addListener('pause', fn);
+  return () => { Promise.resolve(handle).then((h) => h?.remove?.()); };
+}
+
 /** How far a relaunch returns, shallowest first: every language, a pair's contexts, the last context. */
 export const RESUME_DEPTHS = /** @type {const} */ (['start', 'topics', 'board']);
 /** @typedef {typeof RESUME_DEPTHS[number]} ResumeDepth */
