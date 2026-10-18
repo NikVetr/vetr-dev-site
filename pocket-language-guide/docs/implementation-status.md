@@ -6302,3 +6302,75 @@ interrupted its final Back-at-top assertion before a new results.json was writte
 That assertion passed on the preceding run. This is combined evidence across runs,
 not a claim of one uninterrupted all-green emulator run. Native test processes and
 the emulator were stopped after validation.
+
+## Batch AK — a content blocker no longer takes the app down, the picker and the favicon, a template's gender alternatives, and Arabic IPA from its romanisation
+
+**A content blocker.** On a desktop Chrome with a blocker the board stayed blank and the
+studio died on a button its page did not have. EasyPrivacy blocks any URL ending in
+`/beacon.js`, and `ui/platform/beacon.js` was imported by the board and precached by the
+service worker, whose install refuses a partial shell -- so the reader was held on an old
+worker, which revalidated every shell file into its own cache until two deploys were
+mixed in it. The module is `ui/platform/flasher.js` (an audit of every shipped path
+against EasyList, EasyPrivacy and uBlock's lists found no other match, and
+`tests/shell.test.mjs` keeps the shell's names clear of the stems those rules use); the
+shell now answers from its own version and is never refreshed in place; and a page whose
+module graph cannot be fetched says so instead of staying blank.
+
+**The landing page.** Opened from further down, the language picker grows down from its
+bar instead of sliding up under it; a chosen language's card turns into the first row
+wholly on screen without the page moving, and comes back to that row on a return. The
+favicon is the landscape card alone, which fills a square tab icon, green on a light
+browser and orange on a dark one; every other icon keeps both cards.
+
+**A template's words that agree with its blank.** `¿Dónde está [el|la] {} más cercan[o|a]?`
+offers one form per gender, and a card prints `el/la ___ más cercano/a` with each form in
+its gender's colour (`core/alternation.js`; `data/registry/genders.csv`: blue and pink for
+masculine and feminine from each language's own Wikipedia, teal for a neuter, purple for
+Dutch's common gender, each legible at 5pt and distinct under a red-green simulation; a
+mono card keeps the order alone). The IPA builder reads each gender's sentence and joins
+the readings, the respelling is made one gender at a time and takes the target's colours,
+the quiz takes any form as the answer, and the validator keeps alternatives to rows with
+a blank, off the boards, and to whole words outside Latin, Cyrillic and Greek. 28 rows in
+17 languages carry them; the speaker's own gender stays the variants' business, and 101
+slashed or parked feminine alternatives the variants already covered were cleared.
+
+**Arabic IPA** is read from the pack's ALA-LC romanisation instead of espeak's guessed
+short vowels: the article's assimilation, hamzat al-waṣl, pausal -ah and Halpern's stress
+rule, 1,069 cells changed and the curated English sheet's syllable count matched on 87%
+of rows (42% before); every phrase and language name now has a romanisation, so only
+country names are left to the voice. Grade D -> B+.
+
+**Corrections and the owner's questions.** The register switch names its styles in
+Japanese (丁寧体 / 普通体) and Korean (해요체 / 해체); German requests to a person are Sie
+imperatives with du rows on the boards; Hebrew's is-this offers both genders; and 123 printed
+literal cells that were a translator's note on the speaker's gender are back-translations. The open questions were researched: every judgement call the register passes
+had made held against a source, and the rest are set out as choices for the owner.
+
+## Review of the owner's round, and native evidence for Batch AK
+
+The owner's six commits (import validation, pinned asset sources, card selection and phone
+defaults, on-demand and native language packs, refreshed previews, native background
+recitation) were reviewed. Fixed: a hash mismatch during the CDN's ten-minute window
+returned a 504 for a language with no saved copy (now served, never stored); a saved card
+naming a paper preset `paper.csv` lacks locked the studio for that pair (now the default
+paper); preview freshness read `data/region`, an empty directory no clone has (dropped; every
+preview re-rendered byte-identical). Twenty Chromium tests had failed since the phone
+default and the native packs landed, none from the app: the lock-screen card's clock overlay
+is a second svg (the phone tests name the card's own), the in-app tests stubbed Capacitor
+with none of the plugins the gallery now requires (`tests/native-fixture.js`, shared), and a
+resume test relaunched before the board noted its place.
+
+The iOS simulator check found a real defect: on iOS 27 WebKit delivers neither
+`visibilitychange` nor `pagehide` when the app goes to the background, so a beacon -- lamp
+and all -- kept flashing behind Settings. It now also stops on the shell's native `pause`
+(`onPause` in `ui/platform/shell.js`). The iOS check itself took a stale inspector socket and
+did not answer the first-launch language chooser; both fixed.
+
+Built from the pushed commit `62fc524e2`, after the gate (13 checks), the unit tests (821)
+and the Chromium suite (349 passed, one skipped) passed. **Android**: a 44.4MB debug APK;
+every emulator check passed, background recitation (playing, backgrounded, paused, resumed,
+stopped, as a foreground service) and the native pack storage lifecycle among them. **iOS**:
+every simulator check passed, the backgrounded beacon stopping among them. Not checked by
+either: the recitation plugin on iOS (no simulator check exercises it, and it is not in the
+launch plugin list, which may only reflect when it registers), and everything listed before
+as a device check.
