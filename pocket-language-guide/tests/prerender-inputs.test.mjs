@@ -8,7 +8,7 @@ import { prerenderInputs } from '../scripts/prerender_inputs.mjs';
 test('preview freshness follows contents, with row changes scoped to their language pairs', async () => {
   const root = await mkdtemp(join(tmpdir(), 'plg-preview-inputs-'));
   const directories = ['core', 'render', 'vendor', 'data/concepts', 'data/fonts', 'data/registry',
-    'data/themes', 'data/respell', 'data/region', 'data/lang/en', 'data/lang/es', 'data/lang/fr'];
+    'data/themes', 'data/respell', 'data/lang/en', 'data/lang/es', 'data/lang/fr'];
   const files = ['package-lock.json', 'scripts/spec.mjs', 'scripts/prerender_packs.mjs',
     'scripts/prerender_inputs.mjs', 'scripts/local_page.mjs', 'data/coverage.json', 'data/presets.json', 'data/icons.json'];
   /** @param {string} path @param {string} content */

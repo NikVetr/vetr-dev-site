@@ -28,7 +28,7 @@ export async function prerenderInputs(languages, root = '.') {
   const common = await digest(root, [
     'core', 'render', 'vendor', 'scripts/spec.mjs',
     'scripts/prerender_packs.mjs', 'scripts/prerender_inputs.mjs', 'scripts/local_page.mjs',
-    'data/concepts', 'data/fonts', 'data/registry', 'data/themes', 'data/respell', 'data/region',
+    'data/concepts', 'data/fonts', 'data/registry', 'data/themes', 'data/respell',
     'data/coverage.json', 'data/presets.json', 'data/icons.json',
   ]);
   // The renderer loads the vendored font/PDF code above. Playwright is its only
