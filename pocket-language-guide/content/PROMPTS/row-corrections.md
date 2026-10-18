@@ -787,3 +787,28 @@ closing list of `tmp/notes/agents/row-corrections-17.md`.
 
 Afterwards rebuild IPA for every language whose text changed, run
 `python3 scripts/validate_data.py`, and list every cell you changed in your notes.
+
+## A nineteenth pass: what the eighteenth left
+
+Same rules as above; notes go to `tmp/notes/agents/row-corrections-19.md`. The leads are the
+"Status at pause" and "seen" lists of `tmp/notes/agents/row-corrections-18.md`.
+
+1. **German massage rows** whose `literal` is a translator's note (please-stop, neck, feet):
+   rewrite each as a back-translation (the eighteenth pass drafted them). And
+   `quick-directions.turn-left` / `turn-right` *Links abbiegen.* / *Rechts abbiegen.*: check
+   whether a German giving a stranger directions says them so, and leave them if so.
+2. **Printed gender notes on the listener-gender rows.** 43 rows with listener-gender
+   variants carry a translator's note in `literal` (ar 24, pa 7, ha 5, cs 3, he 2, pl 1,
+   ur 1): rewrite each as a back-translation of its own words, as the seventeenth and
+   eighteenth passes did for the speaker's gender.
+3. **Base `text_alt` cells a woman's variant inherits.** Some are masculine (ar, ur, it)
+   and some are a bare feminine parked on the man's row (fr x3, pt x2): give the variant
+   row its own alternative or clear the parked one, as the earlier passes did.
+4. **Khmer `quick-responses.yes-right`**'s `literal` is a gender note, not a
+   back-translation, and its woman's variant prints it too: rewrite it.
+5. **Punjabi spellings**: the Punjabi University dictionary writes the feminine teacher
+   ਅਧਿਆਪਕਾ where the variant row has ਅਧਿਆਪਿਕਾ, and petrol ਪਟਰੋਲ where the row has ਪੈਟਰੋਲ;
+   check both and correct them if the dictionary holds.
+
+Afterwards rebuild IPA for every language whose text changed, run
+`python3 scripts/validate_data.py`, and list every cell you changed in your notes.
