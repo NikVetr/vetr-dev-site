@@ -128,12 +128,13 @@ async function main() {
   // The paper's facts are the registry's rather than the reader's, so only which paper
   // it was comes back: a printer margin corrected in `paper.csv` reaches a saved card.
   if (saved) {
+    const kept = saved.spec.paper?.presetId;
     spec = {
       ...spec, ...saved.spec,
       geometry: { ...spec.geometry, ...saved.spec.geometry },
       // A preset the registry no longer has (renamed, or from an imported card) falls
       // back to the default rather than refusing to open the pair at all.
-      paper: paperSpec(ctx.corpus, ctx.corpus.paper[saved.spec.paper?.presetId] ? saved.spec.paper.presetId : spec.paper.presetId),
+      paper: paperSpec(ctx.corpus, kept && ctx.corpus.paper[kept] ? kept : spec.paper.presetId),
     };
   }
   let edits = loadEdits(spec.target, spec.source);
