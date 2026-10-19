@@ -4177,7 +4177,7 @@ AR_FINAL_H = {"baʿdah", "mutanazzah"}
 # The column's stems written الا after the article, hamzat al-waṣl, where الإ and الأ
 # are a hamzah said as /ʔ/: al-ism is /ʔalism/ but al-isʿāf is /ʔalʔisʕaːf/.
 AR_WASL = {"ism", "ithnayn", "iltiqāʾ", "intiẓār", "inḥidār", "irtifāʿ", "istikhdām",
-           "istiqbāl", "istiʿlāmāt", "ittiṣāl", "iḥtifāẓ"}
+           "istiqbāl", "istiʿlāmāt", "istiwāʾīyah", "ittiṣāl", "iḥtifāẓ"}
 ARABIC_SCRIPT = re.compile("[\u0600-\u06ff]")
 
 
@@ -4204,11 +4204,12 @@ def ala_lc_to_ipa(chunk):
         letters = word.split("-")
         if letters[0] == "lil":                   # rule 17(b): li- fused with the article
             letters[:1] = ["li", "al"]
+        wasl = [n and letter in AR_WASL for n, letter in enumerate(letters)]
         if letters[-1].endswith("ah") and letters[-1] not in AR_FINAL_H:
             letters[-1] = letters[-1][:-1]        # tāʾ marbūṭah in pause
         parts = [ala_lc_sounds(p) for p in letters]
         for n, part in enumerate(parts):
-            if part and part[0][0] in "aiu" and not (n and letters[n] in AR_WASL):
+            if part and part[0][0] in "aiu" and not wasl[n]:
                 part.insert(0, "ʔ")
         for n, (part, stem) in enumerate(zip(parts, parts[1:])):
             if letters[n] != "al":
