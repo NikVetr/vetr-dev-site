@@ -300,10 +300,6 @@ distrust the column as a whole.
   word at a time espeak demotes some words to a secondary mark and no primary
   (`vagyok` is `vˌɑɟok`), and a word with no primary mark prints unmarked, which for
   an accented script is not a possible word.
-- **What `ar` still reads with espeak guesses its short vowels**: the country names,
-  which have no romanisation, since `ala_lc_to_ipa` can only read what the ALA-LC
-  column writes; every phrase and language name now has one. Romanising the country
-  names is the fix.
 - **espeak writes /y/ for three different vowels that are not /y/**, which is one
   defect wearing three hats and the most consequential entry here, since /y/ is a
   real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
@@ -6391,9 +6387,10 @@ GRADE = {
            "`AR_WASL`), so a new row with an unlisted case reads wrong without failing. "
            "It is a careful reading: a word-initial hamzat al-waṣl after a vowel keeps its "
            "/ʔi/ (`hādhihi ibnatī`), `min al-` is not `mina l-`, and a final long vowel "
-           "is written long where Halpern hears it shortened. What keeps it from an A is "
-           "what is still espeak's -- the country names, which have no romanisation -- "
-           "which guesses the short vowels and writes ظ as ð"),
+           "is written long where Halpern hears it shortened. Country names are romanised "
+           "too, their vowels from Arabic Wikipedia's vocalisation or Wehr; a few (Chile, "
+           "Benin, Belize) have no vocalisation anywhere and rest on rule 22 alone. What "
+           "keeps it from an A is those two word lists, which fail silently"),
     "th": ("D", "a neural G2P, and no Thai tone is verifiable against anything in this corpus"),
     "uk": ("B+", "near-phonemic orthography and, unlike Russian, genuinely no vowel-"
            "reduction system to get wrong -- probed on 60-odd words chosen for it "

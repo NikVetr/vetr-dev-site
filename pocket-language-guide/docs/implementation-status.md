@@ -6337,8 +6337,8 @@ slashed or parked feminine alternatives the variants already covered were cleare
 **Arabic IPA** is read from the pack's ALA-LC romanisation instead of espeak's guessed
 short vowels: the article's assimilation, hamzat al-waṣl, pausal -ah and Halpern's stress
 rule, 1,069 cells changed and the curated English sheet's syllable count matched on 87%
-of rows (42% before); every phrase and language name now has a romanisation, so only
-country names are left to the voice. Grade D -> B+.
+of rows (42% before); every phrase and language name now has a romanisation, and the
+country names have one since the nineteenth pass below. Grade D -> B+.
 
 **Corrections and the owner's questions.** The register switch names its styles in
 Japanese (丁寧体 / 普通体) and Korean (해요체 / 해체); German requests to a person are Sie
@@ -6374,3 +6374,31 @@ every simulator check passed, the backgrounded beacon stopping among them. Not c
 either: the recitation plugin on iOS (no simulator check exercises it, and it is not in the
 launch plugin list, which may only reflect when it registers), and everything listed before
 as a device check.
+
+## The nineteenth correction pass, and Arabic country names
+
+Researched by Gemini 3.8 Flash (read-only: it reads the repo and fetches sources, and
+proposes cells as a CSV that `old` must match exactly to apply), then every cell checked
+against its source by a separate Opus reviewer before commit. Its text held up; its page
+citations often did not, and were corrected or dropped.
+
+**Pass 19** (`content/PROMPTS/row-corrections.md`, items 1, 3, 4, 5): German massage
+literals that were translator's notes are back-translations; a woman's variant in Arabic,
+Urdu and Italian carries its own alternative instead of the man's, and bare feminines
+parked on the man's row in French and Portuguese are cleared; Khmer yes-right prints
+baat and chaa; Punjabi ਅਧਿਆਪਕਾ and ਪਟਰੋਲ follow the Punjabi University dictionary.
+Item 2 (43 listener-gender literals) waits on whether printed literals keep their
+`--` notes.
+
+**Arabic country names** are romanised in the column's ALA-LC conventions, so their IPA
+is read rather than guessed by espeak. The reviewer checked all 250 against the script's
+consonants and 46 against Arabic Wikipedia's vocalised lead sentences and Wehr; 22 were
+corrected (ī/ū before an unwritten y/w, which ALA-LC reads as shaddah; vowels as
+vocalised; al-Būsnah wa-al-Hirsik, al-Suwīd). Five names have no vocalisation in any
+source and rest on rule 22 alone. `AR_WASL` was checked after the pausal -ah had been
+stripped, so no -ah stem could match; it is now checked against the word as written
+(Equatorial Guinea's al-Istiwāʾīyah).
+
+Language coverage: every natural language has 1006–1012 of the 1012 concepts, and each
+blank is a finding its concept's note records (kosher in 16 languages, the strongest
+expletive in 23, Khmer's platform, the reader-side notes), not an omission.
