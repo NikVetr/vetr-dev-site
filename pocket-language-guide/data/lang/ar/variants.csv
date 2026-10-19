@@ -1,5 +1,5 @@
 variant,concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-speaker_gender=feminine,accessibility.visually-impaired,أنا ضعيفة البصر,,anā ḍaʿīfat al-baṣar,ʔˈanaː dˤaʕˈiːfat ʔalbˈasˤar,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
+speaker_gender=feminine,accessibility.visually-impaired,أنا ضعيفة البصر,أنا كفيفة,anā ḍaʿīfat al-baṣar,ʔˈanaː dˤaʕˈiːfat ʔalbˈasˤar,,2,"ar-variants-v1;rule=predicative-adjective-agrees-in-gender;fix=Hans Wehr (4th ed., 1979) p. 974 (كفيف kafīf blind, كفيفة kafīfa blind woman);was=;row-corrections-v19;ipa=ala-lc"
 speaker_gender=feminine,border-customs.i-am-a-tourist,أنا سائحة,,anā sāʾiḥah,ʔˈanaː sˈaːʔiħa,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,border-customs.i-am-in-transit,أنا مسافرة عابرة,,anā musāfirah ʿābirah,ʔˈanaː musˈaːfira ʕˈaːbira,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,border-customs.i-am-staying-at,أنا مقيمة في {},,anā muqīmah fī {},ʔˈanaː muqˈiːma fˈiː {},,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
@@ -9,10 +9,10 @@ speaker_gender=feminine,dietary-needs.i-am-vegetarian,أنا نباتية,,anā 
 speaker_gender=feminine,emergency-medical.i-am-injured,أنا مصابة,,anā muṣābah,ʔˈanaː musˤˈaːba,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,emergency-medical.i-am-sick,أنا مريضة,,anā marīḍah,ʔˈanaː marˈiːdˤa,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,introductions.i-am-a-tourist,أنا سائحة,,anā sāʾiḥah,ʔˈanaː sˈaːʔiħa,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
-speaker_gender=feminine,medical-conditions.i-am-diabetic,أنا مصابة بالسكري,,anā muṣābah bi-al-sukkarī,ʔˈanaː musˤˈaːba bissˈukkariː,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
+speaker_gender=feminine,medical-conditions.i-am-diabetic,أنا مصابة بالسكري,أنا مريضة سكري,anā muṣābah bi-al-sukkarī,ʔˈanaː musˤˈaːba bissˈukkariː,,2,"ar-variants-v1;rule=predicative-adjective-agrees-in-gender;fix=Hans Wehr (4th ed., 1979) p. 1060 (مريض marīḍ sick, ill);was=;row-corrections-v19;ipa=ala-lc"
 speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-dengue,أظنّ أنّني مصابة بحمّى الضنك,,aẓunn annanī muṣābah bi-ḥummá al-ḍank,ʔaðˤˈunn ʔˈannaniː musˤˈaːba biħˈummadˤ dˤˈank,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-malaria,أظنّ أنّني مصابة بالملاريا,,aẓunn annanī muṣābah bi-al-malāriyā,ʔaðˤˈunn ʔˈannaniː musˤˈaːba bilmalˈaːrijaː,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
-speaker_gender=feminine,police-consulate.am-i-under-arrest,هل أنا موقوفة؟,,hal anā mawqūfah?,hˈal ʔˈanaː mawqˈuːfa,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
+speaker_gender=feminine,police-consulate.am-i-under-arrest,هل أنا موقوفة؟,هل أنا معتقلة؟,hal anā mawqūfah?,hˈal ʔˈanaː mawqˈuːfa,,2,"ar-variants-v1;rule=predicative-adjective-agrees-in-gender;fix=Hans Wehr (4th ed., 1979) pp. 737-738 (عقل VIII to arrest, معتقل muʿtaqal prisoner);was=;row-corrections-v19;ipa=ala-lc"
 speaker_gender=feminine,about-me.i-am-a-student,أنا طالبة,,anā ṭālibah,ʔˈanaː tˤˈaːliba,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,about-me.i-am-retired,أنا متقاعدة,,anā mutaqāʿidah,ʔˈanaː mutaqˈaːʕida,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc
 speaker_gender=feminine,about-me.i-am-a-teacher,أنا معلّمة,,anā muʿallimah,ʔˈanaː muʕˈallima,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=ala-lc

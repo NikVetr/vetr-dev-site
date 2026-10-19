@@ -2,7 +2,7 @@ concept_id,key
 about-me.i-am-a-doctor,ਡਾਕਟਰ
 about-me.i-am-a-nurse,ਨਰਸ
 about-me.i-am-a-student,ਵਿਦਿਆਰਥੀ | ਵਿਦਿਆਰਥਣ
-about-me.i-am-a-teacher,ਅਧਿਆਪਕ | ਅਧਿਆਪਿਕਾ
+about-me.i-am-a-teacher,ਅਧਿਆਪਕ | ਅਧਿਆਪਕਾ
 about-me.i-am-an-engineer,ਇੰਜੀਨੀਅਰ
 about-me.i-am-retired,ਸੇਵਾਮੁਕਤ
 about-me.i-have-my-own-business,ਆਪਣਾ ਕਾਰੋਬਾਰ
@@ -122,7 +122,7 @@ hiking-parks.is-this-trail-suitable-for-beginners,ਨਵਿਆਂ
 hiking-parks.where-is-the-trailhead,ਸ਼ੁਰੂ
 hiking-parks.which-route-is-easier,ਸੌਖਾ
 hitchhiking.can-you-give-me-a-ride,ਲਿਫ਼ਟ
-hitchhiking.i-can-pay-for-fuel,ਪੈਟਰੋਲ
+hitchhiking.i-can-pay-for-fuel,ਪਟਰੋਲ
 hitchhiking.i-only-need-to-go-to-the-next-town,ਅਗਲੇ ਸ਼ਹਿਰ
 hitchhiking.is-there-room-for-two,ਦੋ ਬੰਦਿਆਂ | ਜਗ੍ਹਾ
 hitchhiking.thank-you-for-the-ride,ਧੰਨਵਾਦ

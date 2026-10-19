@@ -14,7 +14,7 @@ family-intros.this-is-my-husband,Voici mon mari,,vwasi mɔ̃ maʁˈi,,2,fr-agent
 family-intros.this-is-my-wife,Voici ma femme,,vwasi ma fˈam,,2,fr-agent-v1;ipa=espeak
 family-intros.this-is-my-son,Voici mon fils,,vwasi mɔ̃ fˈis,,2,fr-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Voici ma fille,,vwasi ma fˈij,,2,fr-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Je voyage seul,seule,ʒə vwajaʒ sˈœl,,2,fr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Je voyage seul,,ʒə vwajaʒ sˈœl,,2,fr-agent-v1;fix=speaker-variants.md;was=seule;row-corrections-v19;ipa=espeak
 about-me.i-am-a-student,Je suis étudiant,,ʒə syiz etydjˈɑ̃,,2,fr-about-travel-v1;ipa=espeak
 about-me.i-am-retired,Je suis retraité,,ʒə syi ʁətʁɛtˈe,,2,fr-about-travel-v1;ipa=espeak
 about-me.i-am-a-teacher,Je suis professeur,,ʒə syi pʁofɛsˈœʁ,,2,fr-about-travel-v1;ipa=espeak

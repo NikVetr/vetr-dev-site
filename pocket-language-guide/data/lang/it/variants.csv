@@ -6,7 +6,7 @@ speaker_gender=feminine,emergency-medical.i-am-injured,Sono ferita,,sˌono ferˈ
 speaker_gender=feminine,emergency-medical.i-am-sick,Sono malata,,sˌono malˈata,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,introductions.i-am-a-tourist,Sono una turista,,sˌono ˌʊna tʊrˈista,,2,it-variants-v1;rule=indefinite-article-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,introductions.i-am-traveling-alone,Viaggio da sola,,vjˈadʒdʒo da sˈola,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
-speaker_gender=feminine,police-consulate.i-was-robbed,Mi hanno derubata,,mɪ ˌanno derʊbˈata,,2,it-variants-v1;rule=avere-agrees-with-preceding-object-clitic;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Mi hanno derubata,Mi hanno rapinata,mɪ ˌanno derʊbˈata,,2,it-variants-v1;rule=avere-agrees-with-preceding-object-clitic;fix=Treccani Enciclopedia dell'Italiano (2010) s.v. participio (accordato con un pronome oggetto diretto ... meno regolarmente nella prima e seconda persona: ci hanno visti / ci hanno visto);fix=Treccani Vocabolario s.v. rapinare (con compl. oggetto della persona);was=;row-corrections-v19;ipa=espeak
 speaker_gender=feminine,police-consulate.someone-attacked-me,Mi hanno aggredita,,mɪ ˌanno aɡɡredˈita,,2,it-variants-v1;rule=avere-agrees-with-preceding-object-clitic;ipa=espeak
 speaker_gender=feminine,about-me.i-am-a-student,Sono studentessa,,sˌono stʊdentˈessa,,2,it-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
 speaker_gender=feminine,about-me.i-am-retired,Sono pensionata,,sˌono pensjonˈata,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
