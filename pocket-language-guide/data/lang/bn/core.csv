@@ -21,7 +21,7 @@ pronouns-verbs.like,ভালো লাগা,,bhālo lāgā,bʰˈalo lˈaɡa,to
 pronouns-verbs.need,দরকার,,darakāra,dɔɾkˈaɾ,need,,2,bn-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,আছে,,āche,ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,নেই,,nei,nˈei,,,2,bn-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,আমি …তে চাই,,āmi …te cāi,ˌami tˈe tʃˈai,verb stem + -তে,,2,bn-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,আমি …তে চাই,,āmi …te cāi,ˌami tˈe tʃˈai,I want to …,verb stem + -তে,2,bn-agent-v1;ipa=espeak
 pronouns-verbs.want-thing,আমার … চাই,,āmāra … cāi,ˌamaɾ tʃˈai,,,2,bn-agent-v1;ipa=espeak
 pronouns-verbs.need-thing,আমার … দরকার,,āmāra … darakāra,ˌamaɾ dɔɾkˈaɾ,,,2,bn-agent-v1;ipa=espeak
 pronouns-verbs.looking-for-thing,আমি … খুঁজছি,,āmi … khum̐jachi,ˌami kʰˈũɟɔtʃʰˌi,,,2,bn-agent-v1;ipa=espeak
@@ -42,6 +42,6 @@ question-words.a-little,একটু,,ekaṭu,ˈekɔʈˌu,,,2,bn-agent-v1;ipa=es
 question-words.some,কিছু,,kichu,kˈitʃʰu,,,2,bn-agent-v1;ipa=espeak
 question-words.very,খুব,,khuba,kʰˈub,,,2,bn-agent-v1;ipa=espeak
 question-words.too,বেশি,,beśi,bˈeʃi,too much,,2,bn-agent-v1;ipa=espeak
-question-words.also,-ও,,-o,o,"a suffix, not a word: আমিও = 'me too'",,2,bn-agent-v1;ipa=espeak
+question-words.also,-ও,,-o,o,also,"a suffix, not a word: আমিও = 'me too'",2,bn-agent-v1;ipa=espeak
 question-words.all-both,সব / দুটোই,,saba / duṭoi,ʃˈɔb / dˈuʈoˌi,,,2,bn-agent-v1;ipa=espeak
 question-words.how-much-what-price,দাম কত,,dāma kata,dˈam kˈɔto,price how much,,2,bn-agent-v1;ipa=espeak

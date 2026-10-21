@@ -83,15 +83,15 @@ pharmacy-symptoms.i-need-a-malaria-test,Χρειάζομαι τεστ για ε�
 body-parts.head,κεφάλι,,kefali,cefˈali,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.stomach,στομάχι / κοιλιά,,stomachi / koilia,stomˈaçi / ciʎˈa,"stomach / belly, abdomen",,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.back,πλάτη / μέση,,plati / mesi,plˈati / mˈesi,upper back / lower back,,2,el-agent-v1;roman=elot743;ipa=espeak
-body-parts.throat,λαιμός,,laimos,lemˈos,throat (also means neck),,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.throat,λαιμός,,laimos,lemˈos,throat,also means neck,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.tooth,δόντι,,donti,ðˈodi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.chest,στήθος,,stithos,stˈiθos,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.eye,μάτι,,mati,mˈati,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.ear,αυτί,,afti,aftˈi,,,2,el-agent-v1;roman=elot743;ipa=espeak
-body-parts.leg,πόδι,,podi,pˈoði,leg (the same word also means foot),,2,el-agent-v1;roman=elot743;ipa=espeak
-body-parts.arm,χέρι,,cheri,çˈeɾi,arm (the same word also means hand),,2,el-agent-v1;roman=elot743;ipa=espeak
-body-parts.foot,πόδι,πατούσα,podi,pˈoði,foot; the same word also means leg,,2,el-agent-v1;roman=elot743;ipa=espeak
-body-parts.hand,χέρι,παλάμη,cheri,çˈeɾi,hand; the same word also means arm,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.leg,πόδι,,podi,pˈoði,leg,the same word also means foot,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.arm,χέρι,,cheri,çˈeɾi,arm,the same word also means hand,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.foot,πόδι,πατούσα,podi,pˈoði,foot,the same word also means leg,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.hand,χέρι,παλάμη,cheri,çˈeɾi,hand,the same word also means arm,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.knee,γόνατο,,gonato,ɣˈonatˌo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.ankle,αστράγαλος,,astragalos,astɾˈaɣalˌos,,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.skin,δέρμα,,derma,ðˈeɾma,,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -107,7 +107,7 @@ lost-rescue.my-companion-is-missing,Χάθηκε το άτομο που είνα
 lost-rescue.please-look-at-my-current-location,Δείτε πού βρίσκομαι τώρα,Δείτε την τρέχουσα τοποθεσία μου,Deite pou vriskomai tora,ðˈite pˈu vɾˈiskomˌe tˈoɾa,Look at where I am now,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.my-child-is-missing,Χάθηκε το παιδί μου,Αγνοείται το παιδί μου,Chathike to paidi mou,xˈaθicˌe to peðˈi mu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,Δεν ξέρω πού βρίσκομαι,,Den xero pou vriskomai,ðˈeŋ ɡzˈeɾo pˈu vɾˈiskomˌe,,,2,el-agent-v1;roman=elot743;ipa=espeak
-lost-rescue.my-friend-is-hurt,Τραυματίστηκε ο φίλος μου,,Travmatistike o filos mou,tɾˌavmatˈisticˌe o fˈiloz mu,φίλος/φίλη has no epicene form in Greek; masculine generic,the friend's gender rather than the speaker's,2,el-agent-v1;roman=elot743;rule=no-neutral-noun-masculine-generic;ipa=espeak
+lost-rescue.my-friend-is-hurt,Τραυματίστηκε ο φίλος μου,,Travmatistike o filos mou,tɾˌavmatˈisticˌe o fˈiloz mu,my friend was injured,φίλος/φίλη has no epicene form in Greek; masculine generic; the friend's gender rather than the speaker's,2,el-agent-v1;roman=elot743;rule=no-neutral-noun-masculine-generic;ipa=espeak
 lost-rescue.i-lost-my-wallet,Έχασα το πορτοφόλι μου,,Echasa to portofoli mou,ˈexasˌa to pˌoɾtofˈoli mu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.i-lost-my-bag,Έχασα την τσάντα μου,,Echasa tin tsanta mou,ˈexasˌa tin dzˈada mu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.where-is-lost-and-found,Πού είναι το γραφείο απολεσθέντων;,Πού είναι τα χαμένα αντικείμενα;,Pou einai to grafeio apolesthenton;,pˈu ˈine to ɣɾafˈio ˌapolesθˈedon,Where is the lost property office?,,2,el-agent-v1;roman=elot743;ipa=espeak

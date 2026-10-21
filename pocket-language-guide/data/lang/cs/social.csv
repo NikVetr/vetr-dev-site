@@ -22,7 +22,7 @@ communication.please-say-it-again,"Zopakujte to, prosím",,"zˈopakˌujte tˈo, 
 communication.please-write-it-down,"Napište mi to, prosím",,"nˈapiʃte mi tˈo, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Počkejte chvíli, prosím",,"pˈotʃkeɪte xvˈiːli, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
 communication.can-you-help-me,Můžete mi pomoct?,,mˈuːʒete mi pˈomotst,,,2,cs-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Ukažte mi ten text napsaný {target},,ˈukaʃte mi tˈen tˈekst nˈapsaniː {target},"napsaný {target} ('written [in the manner of] {target}') is the adverbial slot, not a locative noun",see this file's own docstring,2,cs-agent-v1;ipa=espeak
+communication.please-show-me-the-text,Ukažte mi ten text napsaný {target},,ˈukaʃte mi tˈen tˈekst nˈapsaniː {target},show me the text written {target},"napsaný {target} ('written [in the manner of] {target}') is the adverbial slot, not a locative noun; see this file's own docstring",2,cs-agent-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,"Nerozumím, co říkáte",,"nˈerozˌumiːm, tsˈo r̝ˈiːkaːte",,,2,cs-agent-v1;ipa=espeak
 communication.i-do-not-understand,Nerozumím,,nˈerozˌumiːm,,,2,cs-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Neumím to přečíst,,nˈeʊmiːm tˈo pr̝ˈetʃiːst,,,2,cs-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ communication.please-write-it-in-roman-letters,Napište to prosím latinkou,,nˈ
 social-basics.politeness-particles,"Thajská zdvořilost: skoro každá věta se zakončí slovem khrap, pokud mluví muž, nebo kha, pokud mluví žena. V otázce žena říká kha se stoupavou intonací. Řádky v této příručce tuto částici vynechávají, doplňte si ji sami.",,,,,2,cs-notes-v1
 board-answers.there-is-no-wait,"Není tu fronta, můžete jít hned dál",,"nˈeɲiː tˈu frˈonta, mˈuːʒete jˈiːt hnˈed dˈaːl",,,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,"Není tu to, co chci říct",,"nˈeɲiː tˈu tˈo, tsˈo xtsi r̝ˈiːtst",,,2,cs-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,Máme zavřeno,,mˌaːme zˈavr̝eno,"spoken register, distinct from the sign word zavřeno",,2,cs-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Máme zavřeno,,mˌaːme zˈavr̝eno,we have closed,"spoken register, distinct from the sign word zavřeno",2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,To nemáme,,tˈo nˈemaːme,,,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Karta nebo hotovost?,,kˈarta nˌebo hˈotovost,,,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.please-wait,"Okamžik, prosím",,"ˈokamʒik, prˈosiːm",,,2,cs-agent-v1;board-answers-v1;ipa=espeak

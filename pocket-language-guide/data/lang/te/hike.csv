@@ -18,7 +18,7 @@ weather.how-cold-at-night,రాత్రి ఎంత చలిగా ఉంట
 weather.rain,వర్షం,,varṣaṁ,ʋarʂam,,,2,te-agent-v1;ipa=espeak
 weather.snow,మంచు,,maṁcu,maɲtʃu,,,2,te-agent-v1;ipa=espeak
 weather.wind,గాలి,,gāli,ɡaːli,,,2,te-agent-v1;ipa=espeak
-weather.storm,తుఫాను,,tuphānu,tupʰaːnu,the word used for a cyclone on the Bay of Bengal coast,,2,te-agent-v1;ipa=espeak
+weather.storm,తుఫాను,,tuphānu,tupʰaːnu,storm,the word used for a cyclone on the Bay of Bengal coast,2,te-agent-v1;ipa=espeak
 weather.ice,మంచు గడ్డ,,maṁcu gaḍḍa,maɲtʃu ɡaɖɖa,"ice on the ground, not for a drink",,2,te-agent-v1;ipa=espeak
 weather.fog,పొగమంచు,,pogamaṁcu,poɡamaɲtʃu,,,2,te-agent-v1;ipa=espeak
 weather.heat,వేడి,ఎండ,vēḍi,ʋeːɖi,eṁḍa is the sun's heat,,2,te-agent-v1;ipa=espeak

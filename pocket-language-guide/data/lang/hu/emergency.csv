@@ -9,7 +9,7 @@ emergency-medical.where-is-a-pharmacy,Hol van egy gyógyszertár?,,hˈol vˈɑn 
 emergency-medical.please-take-me-to-a-hospital,"Kérem, vigyen kórházba",,"kˈeːrɛm, vˈiɟɛn kˈoːrhaːzbɑ",,,2,hu-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,Nem érzem jól magam,,nˈɛm ˈeːrzɛm jˈoːl mˈɑɡɑm,,,2,hu-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,Ez vészhelyzet,,ˈɛz vˈeːshɛjzɛt,,,2,hu-agent-v1;ipa=espeak
-emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaxiás reakcióm van,,ˈɑnɑfilɑksiaːʃ rˈɛɑktsioːm vˈɑn,anafilaxia is the word a dispatcher acts on,,2,hu-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaxiás reakcióm van,,ˈɑnɑfilɑksiaːʃ rˈɛɑktsioːm vˈɑn,I have an anaphylactic reaction,anafilaxia is the word a dispatcher acts on,2,hu-agent-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,Nem kapok levegőt,,nˈɛm kˈɑpok lˈɛvɛɡøːt,,,2,hu-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,Erősen vérzem,,ˈɛrøːʃɛn vˈeːrzɛm,,,2,hu-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,Mellkasi fájdalmam van,,mˈɛlkɑʃi fˈaːjdɑlmɑm vˈɑn,,,2,hu-agent-v1;ipa=espeak
@@ -46,7 +46,7 @@ pharmacy-symptoms.which-pharmacy-is-open-now,Melyik gyógyszertár van most nyit
 pharmacy-symptoms.i-need-medicine-for,Gyógyszert kérek a következőre: {},,ɟˈoːɟsɛrt kˈeːrɛk ˈɑ kˈøvɛtkɛzøːrɛ {},,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-fever,Lázam van,,lˈaːzɑm vˈɑn,,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Hasmenésem van,,hˈɑʃmɛneːʃɛm vˈɑn,,,2,hu-agent-v1;ipa=espeak
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Hol van ügyeletes gyógyszertár?,,hˈol vˈɑn ˈyɟɛlɛtɛʃ ɟˈoːɟsɛrtaːr,Hungary runs an ügyelet duty rota rather than 24h shops,,2,hu-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Hol van ügyeletes gyógyszertár?,,hˈol vˈɑn ˈyɟɛlɛtɛʃ ɟˈoːɟsɛrtaːr,where is [an] on-duty pharmacy?,Hungary runs an ügyelet duty rota rather than 24h shops,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.painkiller,fájdalomcsillapító,,fˈaːjdɑlomtʃillɑpiːtoː,,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Kell hozzá recept?,,kˈɛll hˈozzaː rˈɛtsɛpt,,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Fáj a fejem,,fˈaːj ˈɑ fˈɛjɛm,,,2,hu-agent-v1;ipa=espeak

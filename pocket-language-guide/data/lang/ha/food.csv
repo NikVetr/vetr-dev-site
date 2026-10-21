@@ -19,7 +19,7 @@ food-ordering.menu-please,"Menu, don Allah",,"menu, don allah",,,2,ha-agent-v1;i
 food-ordering.i-want-this,Ina son wannan,,ina son wannan,,,2,ha-agent-v1;ipa=ha-g2p
 food-ordering.do-you-have-drinking-water,Kuna da ruwan sha?,,kuna da ruwan ʃa,,,2,ha-agent-v1;ipa=ha-g2p
 food-ordering.to-go-please,"Don ɗauka, don Allah",,"don ɗauka, don allah","for taking away, please",,2,ha-agent-v1;ipa=ha-g2p
-food-ordering.check-please,"Bill, don Allah","Kuɗin abinci, don Allah","bill, don allah",bill is the everyday loanword; the alt is descriptive: money of the food,,2,ha-agent-v1;ipa=ha-g2p
+food-ordering.check-please,"Bill, don Allah","Kuɗin abinci, don Allah","bill, don allah","bill, please",bill is the everyday loanword; the alt is descriptive: money of the food,2,ha-agent-v1;ipa=ha-g2p
 food-ordering.does-it-contain,Yana da {} a ciki?,,jana da {} a tʃiki,,,2,ha-agent-v1;ipa=ha-g2p
 food-ordering.is-this-vegetarian,Wannan ba shi da nama?,,wannan ba ʃi da nama,this does not have meat,,2,ha-agent-v1;ipa=ha-g2p
 food-ordering.what-do-you-recommend,Me za ku shawarta?,,me za ku ʃawarta,,,2,ha-agent-v1;ipa=ha-g2p

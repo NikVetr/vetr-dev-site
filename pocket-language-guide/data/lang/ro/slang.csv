@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-slang.thats-good,Mișto!,,miʃtˈo,"cool (Romani loanword, ubiquitous slang)",,1,slang-agent-v1;ipa=espeak
+slang.thats-good,Mișto!,,miʃtˈo,cool!,"cool (Romani loanword, ubiquitous slang)",1,slang-agent-v1;ipa=espeak
 slang.thats-great,Super tare!,,sˈuper tˈaɾe,lit. super strong,,1,slang-agent-v1;ipa=espeak
 slang.i-love-it,Îmi place la nebunie,,ˌɨmʲ plˈatʃe la nebˈunje,lit. I like it to madness,,1,slang-agent-v1;ipa=espeak
 slang.thats-bad,Nu e cine știe ce,,nu je tʃˈine ʃtˈie tʃˈe,lit. it's not who-knows-what,,1,slang-agent-v1;ipa=espeak

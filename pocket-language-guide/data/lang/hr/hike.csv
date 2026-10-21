@@ -18,7 +18,7 @@ weather.how-cold-at-night,Koliko je hladno noću?,,koliko je xlˈadno nˈotɕu,,
 weather.rain,kiša,,kˈiʃa,,,2,hr-agent-v1;ipa=espeak
 weather.snow,snijeg,,snˈijeɡ,,,2,hr-agent-v1;ipa=espeak
 weather.wind,vjetar,,vjˈetar,,,2,hr-agent-v1;ipa=espeak
-weather.storm,nevrijeme,bura,nevrijeme,"bura is the strong northeasterly wind on the Adriatic, which is what a coastal warning names",,2,hr-agent-v1;ipa=espeak
+weather.storm,nevrijeme,bura,nevrijeme,bad weather,"bura is the strong northeasterly wind on the Adriatic, which is what a coastal warning names",2,hr-agent-v1;ipa=espeak
 weather.ice,led,,lˈed,ice on the ground or the road,,2,hr-agent-v1;ipa=espeak
 weather.fog,magla,,mˈaɡla,,,2,hr-agent-v1;ipa=espeak
 weather.heat,vrućina,,vrutɕina,,,2,hr-agent-v1;ipa=espeak

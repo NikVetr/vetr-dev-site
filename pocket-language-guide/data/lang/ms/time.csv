@@ -11,7 +11,7 @@ time-scheduling.what-time-does-it-close,Tutup jam berapa?,,tˈutop dʒˈam bər�
 time-scheduling.how-long-does-it-take,Berapa lama?,,bərˈapə lˈamə,,,2,ms-agent-v1;ipa=espeak
 time-words.today,hari ini,,hˈari ˈini,,,2,ms-agent-v1;ipa=espeak
 time-words.tomorrow,esok,,ˈɛsoʔ,,,2,ms-agent-v1;ipa=espeak
-time-words.yesterday,semalam,kelmarin,səmˈalam,semalam also means last night and is the everyday word; kelmarin is the more formal/dictionary word,,2,ms-agent-v1;ipa=espeak
+time-words.yesterday,semalam,kelmarin,səmˈalam,yesterday,semalam also means last night and is the everyday word; kelmarin is the more formal/dictionary word,2,ms-agent-v1;ipa=espeak
 time-words.this-week,minggu ini,,mˈiŋɡu ˈini,,,2,ms-agent-v1;ipa=espeak
 time-words.next-week,minggu depan,,mˈiŋɡu dˈəpan,,,2,ms-agent-v1;ipa=espeak
 time-words.morning,pagi,,pˈaɡi,to about 11,,2,ms-agent-v1;ipa=espeak

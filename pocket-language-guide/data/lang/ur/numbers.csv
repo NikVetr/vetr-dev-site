@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
-numbers-money.l-ng,صفر,۰,sifr,sɪfˈaɾ,"the word is in text and the Urdu numeral in text_alt: Pakistan prints prices, number plates and road signs in 0-9 and keeps ۰۱۲۳۴۵۶۷۸۹ for Urdu prose, and espeak's Urdu voice returns nothing at all for U+06F0-06F9",,2,ur-agent-v1;ipa=espeak
+numbers-money.l-ng,صفر,۰,sifr,sɪfˈaɾ,zero,"the word is in text and the Urdu numeral in text_alt: Pakistan prints prices, number plates and road signs in 0-9 and keeps ۰۱۲۳۴۵۶۷۸۹ for Urdu prose, and espeak's Urdu voice returns nothing at all for U+06F0-06F9",2,ur-agent-v1;ipa=espeak
 numbers-money.y,ایک,۱,ek,ˈeːk,,,2,ur-agent-v1;ipa=espeak
 numbers-money.r,دو,۲,do,dˈoː,,,2,ur-agent-v1;ipa=espeak
 numbers-money.li-ng,دو اور ماپ کا لفظ,,do aur māp kā lafz,dˈoː ɔɾ mˈaːp kaː lˈafz,,,2,ur-agent-v1;ipa=espeak
@@ -65,7 +65,7 @@ numbers-money.baht,باہت,,bāht,bˈaːhət,,,2,ur-agent-v1;ipa=espeak
 numbers-money.baht-symbol,باہت کا نشان,,bāht kā nishān,bˈaːhət kaː nɪʃˈaːn,,,2,ur-agent-v1;ipa=espeak
 numbers-money.forint,فورنٹ,,forinṭ,fˈoːɾənʈ,,,2,ur-agent-v1;ipa=espeak
 numbers-money.forint-symbol,فورنٹ کا نشان,,forinṭ kā nishān,fˈoːɾənʈ kaː nɪʃˈaːn,,,2,ur-agent-v1;ipa=espeak
-numbers-money.rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,the plural روپے is what a price is quoted in,,2,ur-agent-v1;ipa=espeak
+numbers-money.rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,rupee,the plural روپے is what a price is quoted in,2,ur-agent-v1;ipa=espeak
 numbers-money.dollar,ڈالر,,ḍālar,ɖˈaːləɾ,,,2,ur-agent-v1;ipa=espeak
 numbers-money.dollar-symbol,ڈالر کا نشان,,ḍālar kā nishān,ɖˈaːləɾ kaː nɪʃˈaːn,,,2,ur-agent-v1;ipa=espeak
 numbers-money.pound,پاؤنڈ,,pā’unḍ,paːˈoːnɖ,,,2,ur-agent-v1;ipa=espeak
@@ -103,7 +103,7 @@ numbers-money.naira,نائیجیریائی نائرا,,,nˌaːiɟˈiːɾjaːˌi�
 numbers-money.naira-symbol,نائیجیریائی نائرا (علامت),,,nˌaːiɟˈiːɾjaːˌiː nˈaɪɾaː,,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,ریئل,,,ɾeːˈɪl,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,ریئل (علامت),,,ɾeːˈɪl,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
-numbers-money.pakistani-rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,the Pakistani rupee; the plural روپے is what a price is quoted in,,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1;ipa=espeak
+numbers-money.pakistani-rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,rupee,the Pakistani rupee; the plural روپے is what a price is quoted in,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1;ipa=espeak
 numbers-money.pakistani-rupee-symbol,₨,Rs · PKR,rūpiya,,the symbol on a price tag; a receipt prints Rs,,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1
 numbers-money.dram,ڈرم,,ḍaram,ɖˈʌɾəm,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.dram-symbol,ڈرم (علامت),,ḍaram (alāmat),ɖˈʌɾəm,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

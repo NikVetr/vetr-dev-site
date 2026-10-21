@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 social-basics.hello,నమస్కారం,,namaskāraṁ,namaskaːram,,,2,te-agent-v1;ipa=espeak
-social-basics.hello-polite,నమస్కారమండీ,,namaskāramaṁḍī,namaskaːramaɳɖiː,the -aṇḍī suffix is the polite address particle,,2,te-agent-v1;ipa=espeak
+social-basics.hello-polite,నమస్కారమండీ,,namaskāramaṁḍī,namaskaːramaɳɖiː,hello,the -aṇḍī suffix is the polite address particle,2,te-agent-v1;ipa=espeak
 social-basics.good-morning,శుభోదయం,నమస్కారం,śubhōdayaṁ,ʃubʰoːdajam,auspicious dawn; a written and broadcast greeting,namaskāraṁ serves at any hour,2,te-agent-v1;ipa=espeak
-social-basics.good-evening,శుభ సాయంత్రం,నమస్కారం,śubha sāyaṁtraṁ,ʃubʰa saːjantram,formal; namaskāraṁ is what is said,,2,te-agent-v1;ipa=espeak
+social-basics.good-evening,శుభ సాయంత్రం,నమస్కారం,śubha sāyaṁtraṁ,ʃubʰa saːjantram,good evening,formal; namaskāraṁ is what is said,2,te-agent-v1;ipa=espeak
 social-basics.goodbye,వెళ్ళి వస్తాను,సెలవు,veḷḷi vastānu,ʋeɭɭi ʋastaːnu,I will go and come back,said by the one leaving; a bare 'I go' is inauspicious,2,te-agent-v1;ipa=espeak
 social-basics.thank-you,ధన్యవాదాలు,కృతజ్ఞతలు,dhanyavādālu,dʰanjaʋaːdaːlu,,,2,te-agent-v1;ipa=espeak
 social-basics.you-are-welcome,పరవాలేదు,,paravālēdu,paraʋaːleːdu,it is nothing; Telugu has no set reply to thanks,,2,te-agent-v1;ipa=espeak
@@ -36,7 +36,7 @@ quick-responses.works-okay,పని చేస్తుంది,,pani cēstuṁ
 quick-responses.does-not-work-no,పని చేయదు / లేదు,,pani cēyadu / lēdu,pani tʃeːjadu / leːdu,,,2,te-agent-v1;ipa=espeak
 quick-responses.can-possible,అవుతుంది,సాధ్యం,avutuṁdi,aʋutundi,,,2,te-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,సాధ్యం కాదు,,sādhyaṁ kādu,saːdʰjam kaːdu,,,2,te-agent-v1;ipa=espeak
-quick-responses.okay-fine,అలాగే,,alāgē,alaːɡeː,"all right, as you wish; సరే, the old text, is quick-responses.okay-can",,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) అలాగే p. 35 (minor sentence, in reply to a request all right, as you wish);rule=distinct-concepts-distinct-text (quick-responses.okay-can has the old text since row-corrections-v7);row-corrections-v8;ipa=espeak"
+quick-responses.okay-fine,అలాగే,,alāgē,alaːɡeː,"all right, as you wish","సరే, the old text, is quick-responses.okay-can",2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) అలాగే p. 35 (minor sentence, in reply to a request all right, as you wish);rule=distinct-concepts-distinct-text (quick-responses.okay-can has the old text since row-corrections-v7);row-corrections-v8;ipa=espeak"
 quick-responses.no-good-not-allowed-will-not-work,కుదరదు,,kudaradu,kudaradu,it will not work out,,2,te-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,నేను ఫోన్ అనువాదం వాడుతున్నాను,,nēnu phōn anuvādaṁ vāḍutunnānu,neːnu pʰoːn anuʋaːdam ʋaːɖutunnaːnu,,,2,te-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,ఫోన్ వైపు మాట్లాడండి,,phōn vaipu māṭlāḍaṁḍi,pʰoːn ʋaɪpu maːʈlaːɖaɳɖi,,,2,te-agent-v1;ipa=espeak

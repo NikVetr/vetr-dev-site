@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 social-basics.hello,ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ,ਨਮਸਤੇ,sati srī akāl,sʌtɪ sɾi əkal,true is the timeless Lord,,2,pa-agent-v1;ipa=espeak
-social-basics.hello-polite,ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ,,sati srī akāl jī,sʌtɪ sɾi əkal ɟi,hello + the honorific ਜੀ,,2,pa-agent-v1;ipa=espeak
+social-basics.hello-polite,ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ,,sati srī akāl jī,sʌtɪ sɾi əkal ɟi,"truth is the timeless one, respected one",hello + the honorific ਜੀ,2,pa-agent-v1;ipa=espeak
 social-basics.good-morning,ਸ਼ੁਭ ਸਵੇਰ,,śubh savēr,ʃʊ˥b səʋeɾ,auspicious morning,,2,pa-agent-v1;ipa=espeak
 social-basics.good-evening,ਸ਼ੁਭ ਸ਼ਾਮ,,śubh śām,ʃʊ˥b ʃam,auspicious evening,,2,pa-agent-v1;ipa=espeak
 social-basics.goodbye,ਫਿਰ ਮਿਲਾਂਗੇ,ਰੱਬ ਰਾਖਾ,phir milāṁgē,pʰɪɾ mɪlaŋɡe,we will meet again,,2,pa-agent-v1;ipa=espeak
@@ -117,7 +117,7 @@ board-answers.please-wait,ਬਸ ਇੱਕ ਮਿੰਟ,,bas ikk miṁṭ,bʌs �
 board-answers.say-it-again,ਇੱਕ ਵਾਰੀ ਫਿਰ?,,ikk vārī phir?,ɪk ʋaɾi pʰɪɾ,,,2,pa-board-answers-v1;ipa=espeak
 board-answers.stay-here,ਇੱਥੇ ਹੀ ਰੁਕਣਾ ਬਿਹਤਰ ਹੈ,,itthē hī rukaṇā bihatar hai,ɪttʰe hi ɾʊkəɳa bɪhətəɾ hɛ,,,2,pa-board-answers-v1;ipa=espeak
 board-answers.the-hospital-is-close,ਹਸਪਤਾਲ ਨੇੜੇ ਹੀ ਹੈ,,hasapatāl nēṛē hī hai,həsəpətal neɽe hi hɛ,,,2,pa-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"ਇੰਤਜ਼ਾਰ ਨਹੀਂ ਹੈ, ਹੁਣੇ ਅੰਦਰ ਆ ਜਾਓ",,"iṁtazār nahīṁ hai, huṇē aṁdar ā jāō","ɪntəzaɾ nʌhĩ hɛ, hʊɳe ʌndəɾ a ɟao","-ō imperative, invariant for gender",,2,pa-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"ਇੰਤਜ਼ਾਰ ਨਹੀਂ ਹੈ, ਹੁਣੇ ਅੰਦਰ ਆ ਜਾਓ",,"iṁtazār nahīṁ hai, huṇē aṁdar ā jāō","ɪntəzaɾ nʌhĩ hɛ, hʊɳe ʌndəɾ a ɟao","there is no wait, come inside right now","-ō imperative, invariant for gender",2,pa-board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,ਸਾਡੇ ਕੋਲ ਇਹ ਨਹੀਂ ਹੈ,,sāḍē kōl ih nahīṁ hai,saɖe kol ɪ˥ nʌhĩ hɛ,,,2,pa-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,ਨਾਂ ਕੀ ਹੈ?,,nāṁ kī hai?,nã ki hɛ,,,2,pa-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,ਕਿੱਥੇ ਦਰਦ ਹੈ?,,kitthē dard hai?,kɪttʰe dʌɾəd hɛ,,,2,pa-board-answers-v1;ipa=espeak
@@ -126,7 +126,7 @@ kind-words.thank-you-for-your-help,ਤੁਹਾਡੀ ਮਦਦ ਲਈ ਧੰਨ
 kind-words.this-is-delicious,ਇਹ ਬਹੁਤ ਸੁਆਦੀ ਹੈ.,,ih bahut suādī hai,ɪ˥ bʌhʊt sʊadi hɛ,,,2,kind-words-v1;ipa=espeak
 kind-words.it-is-beautiful-here,ਇੱਥੇ ਬਹੁਤ ਸੋਹਣਾ ਹੈ.,,ithē bahut sōhaṇā hai,ɪttʰe bʌhʊt sohəɳa hɛ,,,2,kind-words-v1;ipa=espeak
 kind-words.i-like-it-very-much,ਮੈਨੂੰ ਇਹ ਬਹੁਤ ਪਸੰਦ ਹੈ.,,mainūṁ ih bahut pasand hai,mɛnũ ɪ˥ bʌhʊt pʌsənd hɛ,,,2,kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,ਮੈਂ ਇੱਥੇ ਬਹੁਤ ਵਧੀਆ ਸਮਾਂ ਬਿਤਾਇਆ.,,maiṁ ithē bahut vadhīā samāṁ bitāiā,mɛ̃ ɪttʰe bʌhʊt ʋə˥dia sʌmã bɪtaɪa,"ਨੇ-marked perfective agrees with the object ਸਮਾਂ (masc.), not the speaker, so invariant for speaker gender",,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,ਮੈਂ ਇੱਥੇ ਬਹੁਤ ਵਧੀਆ ਸਮਾਂ ਬਿਤਾਇਆ.,,maiṁ ithē bahut vadhīā samāṁ bitāiā,mɛ̃ ɪttʰe bʌhʊt ʋə˥dia sʌmã bɪtaɪa,I spent a very wonderful time here.,"ਨੇ-marked perfective agrees with the object ਸਮਾਂ (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,ਸਭ ਕੁਝ ਲਈ ਧੰਨਵਾਦ.,,sabh kujh laī dhaṁnavād,sʌ˥b kʊ˥ɟ lʌi tə˩nnəʋad,,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,ਤੁਹਾਡੀ ਮਹਿਮਾਨ-ਨਵਾਜ਼ੀ ਲਈ ਧੰਨਵਾਦ.,,tuhāḍī mahimān-navāzī laī dhaṁnavād,tʊhaɖi məhɪmannəʋazi lʌi tə˩nnəʋad,,,2,kind-words-v1;ipa=espeak
 board-answers.my-name-is-blank,ਮੇਰਾ ਨਾਂ {} ਹੈ,,mērā nāṁ {} hai,meɾa nã {} hɛ,my name is {},,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak

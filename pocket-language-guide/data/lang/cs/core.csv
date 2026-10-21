@@ -7,10 +7,10 @@ pronouns-verbs.he-him,"on / jeho, ho",,"ˈon / jˈeho, hˈo",,,2,cs-agent-v1;ipa
 pronouns-verbs.she-her,ona / ji,,ˈona / jˈi,,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.they-them,oni / je,,ˈoɲi / je,,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.my-mine,můj,,mˈuːj,,,2,cs-agent-v1;ipa=espeak
-pronouns-verbs.your-yours,tvůj,,tvˈuːj,"informal, matching pronouns-verbs.you; the polite form is váš",,2,cs-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,tvůj,,tvˈuːj,your,"informal, matching pronouns-verbs.you; the polite form is váš",2,cs-agent-v1;ipa=espeak
 pronouns-verbs.be-called-call,jmenovat se,,jmˈenovat se,,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.have,mít,,mˈiːt,,,2,cs-agent-v1;ipa=espeak
-pronouns-verbs.do-not-have,nemít,,nˈemiːt,"unlike Polish and Russian, ordinary spoken Czech no longer shifts the object to the genitive under negation","'Nemám čas', not the bookish 'Nemám času'",2,cs-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,nemít,,nˈemiːt,to not have,"unlike Polish and Russian, ordinary spoken Czech no longer shifts the object to the genitive under negation; 'Nemám čas', not the bookish 'Nemám času'",2,cs-agent-v1;ipa=espeak
 pronouns-verbs.go,jít,,jˈiːt,on foot; jet is by vehicle,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.come,přijít,,pr̝ˈijiːt,,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.would-like,chtěl bych,,xcˈel bix,,,2,cs-agent-v1;ipa=espeak

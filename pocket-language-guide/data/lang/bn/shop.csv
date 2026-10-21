@@ -6,7 +6,7 @@ payment-receipt.a-receipt-please,রসিদ দিন,,rasida dina,ɾˈoʃid d
 payment-receipt.please-write-the-number,দয়া করে সংখ্যাটা লিখে দিন,,daẏā kare saṁkhyāṭā likhe dina,dˈɔa kˈɔɾe ʃˈɔŋkʰæʈˌa lˈikʰe dˈin,,,2,bn-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,সব মিলিয়ে কত?,,saba miliẏe kata?,ʃˈɔb mˈiliˌe kˈɔto,,,2,bn-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,আলাদা আলাদা দেওয়া যাবে কি?,,ālādā ālādā deoẏā yābe ki?,ˈaladˌa ˈaladˌa dˈeoˌa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,ভ্যাট ধরা আছে কি?,,bhyāṭa dharā āche ki?,bʰˈæʈ dʰˈɔɾa ˈatʃʰe ki,is VAT included? Both countries charge VAT or GST rather than a sales tax,,2,bn-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,ভ্যাট ধরা আছে কি?,,bhyāṭa dharā āche ki?,bʰˈæʈ dʰˈɔɾa ˈatʃʰe ki,is VAT included?,Both countries charge VAT or GST rather than a sales tax,2,bn-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,আমার কার্ড কাজ করেনি,,āmāra kārḍa kāja kareni,ˌamaɾ kˈaɾɖɔ kˈaɟ kˈɔɾenˌi,,,2,bn-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,বিলটা মনে হয় ঠিক নেই,,bilaṭā mane haẏa ṭhika nei,bˈilɔʈˌa mˈɔne hˌɔj ʈʰˈik nˈei,the bill seems not to be right,,2,bn-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,আমি টাকা দিয়ে দিয়েছি,,āmi ṭākā diẏe diẏechi,ˌami ʈˈaka dˈie dˈietʃʰˌi,I have already given the money,,2,bn-agent-v1;ipa=espeak

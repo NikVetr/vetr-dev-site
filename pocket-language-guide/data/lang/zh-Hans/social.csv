@@ -145,4 +145,4 @@ board-answers.pay-on-board,在车上付,,zài chē shang fù,tsaɪ˥˩ ʈʂʰɤ�
 board-answers.see-a-doctor,最好去看医生,,zuìhǎo qù kàn yīshēng,tsweɪ˥˩xɑʊ˧˩˧ tɕʰy˥˩ kʰan˥˩ i˥ʂɤŋ˥,it is best to go and see a doctor,,2,in-pack-neighbour=board-answers.stay-here;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=pinyin
 board-answers.prescription-only,要处方,,yào chǔfāng,jɑʊ˥˩ ʈʂʰu˧˩˧fɑŋ˥,a prescription is needed,,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=pinyin
 board-answers.before-food,饭前,,fàn qián,fan˥˩ tɕʰjɛn˧˥,before meals,,2,src=福建省药品监督管理局 饭前服药还是饭后服药 (2025);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=pinyin
-board-answers.after-food,饭后,,fàn hòu,fan˥˩ xoʊ˥˩,after meals; a label's 餐时 (with meals) is read as this too,,2,src=福建省药品监督管理局 饭前服药还是饭后服药 (2025);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=pinyin
+board-answers.after-food,饭后,,fàn hòu,fan˥˩ xoʊ˥˩,after meals,a label's 餐时 (with meals) is read as this too,2,src=福建省药品监督管理局 饭前服药还是饭后服药 (2025);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=pinyin

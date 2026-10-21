@@ -2,7 +2,7 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 building-help.what-room-number-is-this,Koji je ovo broj sobe?,,kˈoji je ˈovo brˈoj sˈobe,,,2,hr-agent-v1;ipa=espeak
 building-help.i-am-lost,Izgubio sam se,,izɡubio sam sˈe,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Izgubila sam se (the same wording);was=text_alt Izgubila sam se (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 building-help.where-is-reception,Gdje je recepcija?,,ɡdjˈe je retseptsija,,,2,hr-agent-v1;ipa=espeak
-building-help.where-is-a-power-outlet,Gdje je struja?,Gdje je utičnica?,ɡdjˈe je strˈuja,utičnica is the socket itself; struja is what people say,,2,hr-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Gdje je struja?,Gdje je utičnica?,ɡdjˈe je strˈuja,where is electricity?,utičnica is the socket itself; struja is what people say,2,hr-agent-v1;ipa=espeak
 accessibility.step-free,Ima li pristup bez stepenica?,,ima li prˈistub bˈes stepenitsa,,,2,hr-agent-v1;ipa=espeak
 accessibility.wheelchair-access,Je li pristupačno za invalidska kolica?,,je li pristupatʃno zˈa invalitska kolitsa,,,2,hr-agent-v1;ipa=espeak
 accessibility.elevator,Ima li lift?,,ima li lˈift,,,2,hr-agent-v1;ipa=espeak
@@ -29,7 +29,7 @@ toilets.where-toilet,Gdje je WC?,,ɡdjˈe je vˈetse,,,2,hr-agent-v1;ipa=espeak+
 toilets.where-public-toilet,Gdje je javni WC?,,ɡdjˈe je jˈavni vˈetse,,,2,hr-agent-v1;ipa=espeak+loan
 toilets.may-i-use-the-toilet,Mogu li koristiti WC?,,mˈoɡu li koristiti vˈetse,,,2,hr-agent-v1;ipa=espeak+loan
 toilets.is-it-only-for-customers,Je li samo za goste?,,je li sˈamo zˈa ɡˈoste,,,2,hr-agent-v1;ipa=espeak
-toilets.toilet-wc,WC,zahod,vˈetse,WC is what is printed on the door; zahod is the everyday word,,2,hr-agent-v1;ipa=espeak+loan
+toilets.toilet-wc,WC,zahod,vˈetse,toilet,WC is what is printed on the door; zahod is the everyday word,2,hr-agent-v1;ipa=espeak+loan
 toilets.is-it-free,Je li besplatno?,,je li besplatno,,,2,hr-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,Treba li kovanica ili žeton?,,trˈeba li kovanitsa ili ʒˈeton,,,2,hr-agent-v1;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,Je li voda iz pipe pitka?,,je li vˈoda ˈis pˈipe pˈitka,,,2,hr-agent-v1;ipa=espeak

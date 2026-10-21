@@ -4,7 +4,7 @@ directions.how-do-i-get-to,Πώς πάω εδώ: {};,Θέλω να πάω εδώ
 directions.is-it-far,Είναι μακριά;,,Einai makria;,ˈine mˌakɾiˈa,,,2,el-agent-v1;roman=elot743;ipa=espeak
 directions.how-long-on-foot,Πόση ώρα με τα πόδια;,,Posi ora me ta podia;,pˈosi ˈoɾa me ta pˈoðja,,,2,el-agent-v1;roman=elot743;ipa=espeak
 directions.please-show-me-on-the-map,"Δείξτε μου στον χάρτη, παρακαλώ",,"Deixte mou ston charti, parakalo","ðˈikste mu ston xˈaɾti, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
-directions.where-is-the-nearest,Πού υπάρχει {} εδώ κοντά;,,Pou yparchei {} edo konta;,pˈu ipˈaɾçi {} eðˈo kodˈa,Where is there {} near here? (nominative fill),,2,el-agent-v1;roman=elot743;ipa=espeak
+directions.where-is-the-nearest,Πού υπάρχει {} εδώ κοντά;,,Pou yparchei {} edo konta;,pˈu ipˈaɾçi {} eðˈo kodˈa,where is there {} near here?,nominative fill,2,el-agent-v1;roman=elot743;ipa=espeak
 directions.where-am-i,Πού είμαι;,,Pou eimai;,pˈu ˈime,,,2,el-agent-v1;roman=elot743;ipa=espeak
 directions.which-way,Προς τα πού;,,Pros ta pou;,pɾˈos ta pˈu,Toward where?,,2,el-agent-v1;roman=elot743;ipa=espeak
 directions.can-i-walk-there,Μπορώ να πάω με τα πόδια;,,Boro na pao me ta podia;,boɾˈo na pˈao me ta pˈoðja,,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -30,15 +30,15 @@ taxi.please-send-me-the-address,"Στείλτε μου τη διεύθυνση, 
 taxi.we-need-the-east-gate-not-the-south-gate,"Θέλουμε την Ανατολική Πύλη, όχι τη Νότια Πύλη",,"Theloume tin Anatoliki Pyli, ochi ti Notia Pyli","θˈelumˌe tin ˌanatˌolicˈi pˈili, ˈoçi ti nˈotiˌa pˈili",,,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.please-stop-here,"Σταματήστε εδώ, παρακαλώ",,"Stamatiste edo, parakalo","stˌamatˈiste eðˈo, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.can-you-wait-for-me-here,Μπορείτε να με περιμένετε εδώ;,,Boreite na me perimenete edo;,boɾˈite na me pˌeɾimˈenetˌe eðˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
-taxi.we-need-to-catch-the-high-speed-train,Πρέπει να προλάβουμε το τρένο υψηλής ταχύτητας,Πρέπει να προλάβουμε την ταχεία,Prepei na prolavoume to treno ypsilis tachytitas,pɾˈepi na pɾolˈavumˌe to tɾˈeno ˌipsilˈis taçˈititˌas,Greek fast trains are marked Ταχεία or Ιντερσίτι,,2,el-agent-v1;roman=elot743;ipa=espeak
-taxi.please-use-the-meter,"Βάλτε το ταξίμετρο, παρακαλώ","Με το ταξίμετρο, παρακαλώ","Valte to taximetro, parakalo","vˈalte to taksˈimetɾˌo, pˌaɾakalˈo",Fare = κόμιστρο; tolls (διόδια) cost extra,,2,el-agent-v1;roman=elot743;ipa=espeak
-taxi.i-will-get-off-here,Θα κατεβώ εδώ,"Θα κατεβώ εδώ. Την απόδειξη, παρακαλώ",Tha katevo edo,θa kˌatevˈo eðˈo,Receipt = απόδειξη,,2,el-agent-v1;roman=elot743;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,Πρέπει να προλάβουμε το τρένο υψηλής ταχύτητας,Πρέπει να προλάβουμε την ταχεία,Prepei na prolavoume to treno ypsilis tachytitas,pɾˈepi na pɾolˈavumˌe to tɾˈeno ˌipsilˈis taçˈititˌas,we must catch the high-speed train,Greek fast trains are marked Ταχεία or Ιντερσίτι,2,el-agent-v1;roman=elot743;ipa=espeak
+taxi.please-use-the-meter,"Βάλτε το ταξίμετρο, παρακαλώ","Με το ταξίμετρο, παρακαλώ","Valte to taximetro, parakalo","vˈalte to taksˈimetɾˌo, pˌaɾakalˈo","put on the meter, please",Fare = κόμιστρο; tolls (διόδια) cost extra,2,el-agent-v1;roman=elot743;ipa=espeak
+taxi.i-will-get-off-here,Θα κατεβώ εδώ,"Θα κατεβώ εδώ. Την απόδειξη, παρακαλώ",Tha katevo edo,θa kˌatevˈo eðˈo,I will get off here,Receipt = απόδειξη,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Να προλάβω το Σινκανσέν,,,na pɾolˈavo to sˌinkansˈen,,,1,reader-gloss-v1;ipa=espeak
 taxi.could-you-make-it-colder,"Μπορείτε να βάλετε το κλιματιστικό πιο κρύο, παρακαλώ;",,"Boreite na valete to klimatistiko pio kryo, parakalo;","boɾˈite na vˈaletˌe to klˌimatˌistikˈo pçˈo kɾˈio, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.could-you-make-it-warmer,"Μπορείτε να βάλετε το κλιματιστικό πιο ζεστό, παρακαλώ;",,"Boreite na valete to klimatistiko pio zesto, parakalo;","boɾˈite na vˈaletˌe to klˌimatˌistikˈo pçˈo zestˈo, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.may-i-open-the-window,Μπορώ να ανοίξω το παράθυρο;,,Boro na anoixo to parathyro;,boɾˈo n anˈikso to paɾˈaθiɾˌo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.two-tickets,Δύο εισιτήρια,"Δύο εισιτήρια, παρακαλώ",Dyo eisitiria,ðˈio ˌisitˈiɾiˌa,,,2,el-agent-v1;roman=elot743;ipa=espeak
-transit-rides.where-is-the-subway-station,Πού είναι ο σταθμός του μετρό;,Πού είναι το μετρό;,Pou einai o stathmos tou metro;,pˈu ˈine o staθmˈos tu metɾˈo,Athens line 1 is called ο Ηλεκτρικός,,2,el-agent-v1;roman=elot743;ipa=espeak
+transit-rides.where-is-the-subway-station,Πού είναι ο σταθμός του μετρό;,Πού είναι το μετρό;,Pou einai o stathmos tou metro;,pˈu ˈine o staθmˈos tu metɾˈo,where is the metro station?,Athens line 1 is called ο Ηλεκτρικός,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Αυτό το λεωφορείο / τρένο πάει εδώ: {};,Προορισμός: {}. Πάει εκεί;,Afto to leoforeio / treno paei edo: {};,aftˈo to lˌeofoɾˈio / tɾˈeno pˈai eðˈo {},Does this bus / train go here: {}? (no case on fill),,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.what-is-the-next-stop,Ποια είναι η επόμενη στάση;,,Poia einai i epomeni stasi;,pˈia ˈine i epˈomenˌi stˈasi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,"Πείτε μου πού να κατεβώ, παρακαλώ",,"Peite mou pou na katevo, parakalo","pˈite mu pˈu na kˌatevˈo, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -61,7 +61,7 @@ place-words.scenic-area,Φυσικό τοπίο,,,fˌisikˈo topˈio,,,1,reader-
 border-customs.i-am-a-tourist,Είμαι εδώ για τουρισμό,,Eimai edo gia tourismo,ˈime eðˈo jˈa tˌuɾismˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.here-is-my-passport,Ορίστε το διαβατήριο,,Oriste to diavatirio,oɾˈiste to ðˌiavatˈiɾiˌo,Here is the passport,,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-staying-for-days,Μέρες παραμονής: {},,Meres paramonis: {},mˈeɾes pˌaɾamonˈis {},Days of stay: {} (write a figure),,2,el-agent-v1;roman=elot743;fix=Λεξικό της κοινής νεοελληνικής (Triantafyllidis -- greek-language.gr) ημέρα & μέρα (Θα χρειαστώ δυο μέρες -- Έλειψα τρεις μέρες -- Mια μέρα θα το θυμηθείς: the plural from two -- the singular for one) -- the label text stays;was=alt Θα μείνω {} μέρες (the plural -- wrong for one: μία μέρα);rule=a label whose filler follows a colon and agrees with nothing -- the alt that put a plural after the number cleared;row-corrections-v15;ipa=espeak
-border-customs.nothing-to-declare,Δεν έχω τίποτα να δηλώσω,Ουδέν δηλωτέον,Den echo tipota na diloso,ðˈen ˈexo tˈipotˌa na ðilˈoso,Green channel sign reads ΟΥΔΕΝ ΔΗΛΩΤΕΟΝ,,2,el-agent-v1;roman=elot743;ipa=espeak
+border-customs.nothing-to-declare,Δεν έχω τίποτα να δηλώσω,Ουδέν δηλωτέον,Den echo tipota na diloso,ðˈen ˈexo tˈipotˌa na ðilˈoso,I have nothing to declare,Green channel sign reads ΟΥΔΕΝ ΔΗΛΩΤΕΟΝ,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-staying-at,Μένω εδώ: {},Διαμονή: {},Meno edo: {},mˈeno eðˈo {},I am staying here: {} (no case on fill),,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-here-for-business,Είμαι εδώ για δουλειά,,Eimai edo gia douleia,ˈime eðˈo jˈa ðuʎˈa,,,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-have-a-return-ticket,Έχω εισιτήριο επιστροφής,,Echo eisitirio epistrofis,ˈexo ˌisitˈiɾiˌo ˌepistɾofˈis,,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -89,18 +89,18 @@ pickup-meeting.please-pick-us-up-here,"Ελάτε να μας πάρετε εδ�
 pickup-meeting.meet-us-at,Σημείο συνάντησης: {},Θα σας περιμένουμε εδώ: {},Simeio synantisis: {},simˈio sinˈadisˌis {},Meeting point: {} (place takes no case),,2,el-agent-v1;roman=elot743;ipa=espeak
 pickup-meeting.please-call-me-a-ride,"Καλέστε μου ένα αυτοκίνητο, παρακαλώ",Μπορείτε να μου καλέσετε ένα όχημα;,"Kaleste mou ena aftokinito, parakalo","kalˈeste mu ˌen ˌaftocˈinitˌo, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
 pickup-meeting.please-call-a-taxi,"Καλέστε ένα ταξί, παρακαλώ",,"Kaleste ena taxi, parakalo","kalˈeste ˈena taksˈi, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
-rail-station-words.high-speed-rail,Ταχεία,Τρένο υψηλής ταχύτητας,Tacheia,taçˈia,Express train; boards may show Ιντερσίτι,,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.high-speed-rail,Ταχεία,Τρένο υψηλής ταχύτητας,Tacheia,taçˈia,express train,boards may show Ιντερσίτι,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.transfer,Μετεπιβίβαση,Αλλαγή γραμμής,Metepivivasi,mˌetepivˈivasˌi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-gate,Πύλη εισόδου,Τουρνικέ,Pyli eisodou,pˈili isˈoðu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.platform,Αποβάθρα,Πλατφόρμα,Apovathra,ˌapovˈaθɾa,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-office,Εισιτήρια,Εκδοτήρια εισιτηρίων,Eisitiria,ˌisitˈiɾiˌa,Sign over the ticket office,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.waiting-room,Αίθουσα αναμονής,,Aithousa anamonis,ˈeθus ˌanamonˈis,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.train-number,Αριθμός τρένου,Αριθμός αμαξοστοιχίας,Arithmos trenou,ˌaɾiθmˈos tɾˈenu,,,2,el-agent-v1;roman=elot743;ipa=espeak
-rail-station-words.carriage,Βαγόνι,Όχημα,Vagoni,vaɣˈoni,Tickets print ΟΧΗΜΑ for the carriage,,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.carriage,Βαγόνι,Όχημα,Vagoni,vaɣˈoni,carriage,Tickets print ΟΧΗΜΑ for the carriage,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.seat,Θέση,,Thesi,θˈesi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.last-train,Τελευταίο τρένο,,Teleftaio treno,tˌeleftˈeo tɾˈeno,,,2,el-agent-v1;roman=elot743;ipa=espeak
-rail-station-words.delayed,Καθυστέρηση,Καθυστερεί,Kathysterisi,kˌaθistˈeɾisˌi,Delay; boards read ΑΝΑΧΩΡΗΣΕΙΣ / ΑΦΙΞΕΙΣ,,2,el-agent-v1;roman=elot743;ipa=espeak
-rail-station-words.final-stop,Τέρμα,Τελικός σταθμός,Terma,tˈeɾma,Terminus; boards show ΠΡΟΣ + destination,,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.delayed,Καθυστέρηση,Καθυστερεί,Kathysterisi,kˌaθistˈeɾisˌi,delay,boards read ΑΝΑΧΩΡΗΣΕΙΣ / ΑΦΙΞΕΙΣ,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.final-stop,Τέρμα,Τελικός σταθμός,Terma,tˈeɾma,terminus,boards show ΠΡΟΣ + destination,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.open-on,Ανοιχτό / αναμμένο,,Anoichto / anammeno,ˌanixtˈo / ˌanamˈeno,,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.closed-off,Κλειστό / σβηστό,,Kleisto / svisto,klistˈo / svistˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.occupied,Κατειλημμένο,,Kateilimmeno,kˌatilimˈeno,,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -113,23 +113,23 @@ common-signs.do-not-touch,Μην αγγίζετε,,Min angizete,mˈin aŋɡˈize
 common-signs.temporarily-closed,Προσωρινά κλειστό,,Prosorina kleisto,pɾˌosoɾinˈa klistˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 common-signs.open-operating,Ανοιχτό,,Anoichto,ˌanixtˈo,Open,,2,el-agent-v1;roman=elot743;fix=Λεξικό της κοινής νεοελληνικής (Triantafyllidis) ανοιχτός 8 ((για κατάστημα κτλ.) που λειτουργεί: Είναι ανοιχτά τα μαγαζιά το απόγευμα;) -- the pack's closed sign is Κλειστό;was=Λειτουργεί with alt Σε λειτουργία and literal In operation (λειτουργώ 1 is a machine's sense -- Tο ασανσέρ δε λειτουργεί -- and 4 the shop's -- Tα καταστήματα θα λειτουργήσουν κανονικά -- so it stays as the alt and Σε λειτουργία goes);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;fix=Triantafyllidis ανοιχτός 8 (as above) -- the text stays;was=alt Λειτουργεί (λειτουργώ 1 is a machine's working -- 4 a shop's -- and with the closed row's Δεν λειτουργεί gone the alt reads first as the machine's state);rule=the open-for-business sign on a shop door (the concept note) -- not a machine's working status -- the alt cleared;row-corrections-v13;ipa=espeak
 common-signs.closed,Κλειστό,,Kleisto,klistˈo,,,2,el-agent-v1;roman=elot743;fix=Λεξικό της κοινής νεοελληνικής (Triantafyllidis) κλειστός 6 (για επιχείρηση κτλ. που έχει σταματήσει μόνιμα ή προσωρινά τη λειτουργία της: Tα καταστήματα θα παραμείνουν κλειστά) -- the text stays;was=alt Δεν λειτουργεί (λειτουργώ 1 (για μηχανές -- όργανα -- μηχανισμούς) with the example Tο ασανσέρ δε λειτουργεί -- and the pack's own toilets.out-of-order alt Δεν λειτουργεί);rule=the closed sign on a shop door (the concept note) -- a machine out of order is toilets.out-of-order -- the alt cleared;row-corrections-v13;ipa=espeak
-common-signs.stopped-stop,Εκτός λειτουργίας,Στοπ,Ektos leitourgias,ektˈoz lˌituɾjˈias,Out of service; the road sign is ΣΤΟΠ,,2,el-agent-v1;roman=elot743;ipa=espeak
-transit-rides.do-i-need-to-validate,Πρέπει να ακυρώσω το εισιτήριο;,Πρέπει να ακυρώσω το εισιτήριο στο ακυρωτικό;,Prepei na akyroso to eisitirio;,pɾˈepi n ˌaciɾˈoso to ˌisitˈiɾiˌo,Validating is ακύρωση; unstamped tickets are fined,,2,el-agent-v1;roman=elot743;ipa=espeak
+common-signs.stopped-stop,Εκτός λειτουργίας,Στοπ,Ektos leitourgias,ektˈoz lˌituɾjˈias,out of service,the road sign is ΣΤΟΠ,2,el-agent-v1;roman=elot743;ipa=espeak
+transit-rides.do-i-need-to-validate,Πρέπει να ακυρώσω το εισιτήριο;,Πρέπει να ακυρώσω το εισιτήριο στο ακυρωτικό;,Prepei na akyroso to eisitirio;,pɾˈepi n ˌaciɾˈoso to ˌisitˈiɾiˌo,must I validate the ticket?,Validating is ακύρωση; unstamped tickets are fined,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-validator,Ακυρωτικό μηχάνημα,Ακυρωτικό,Akyrotiko michanima,ˌaciɾˌotikˈo mixˈanimˌa,The machine that validates (cancels) tickets,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.maglev,Μαγνητικό τρένο,,,mˌaɣnitikˈo tɾˈeno,,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,κωδικοί χοιρινού,,kodikoi choirinou,kˌoðicˈi çˌiɾinˈu,,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Κόμιστρο,,Komistro,kˈomistɾˌo,,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Πού πληρώνω το κόμιστρο;,,Pou plirono to komistro;,pˈu pliɾˈono to kˈomistɾˌo,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
-air-travel.where-is-check-in,Πού είναι ο έλεγχος εισιτηρίων;,,Pou einai o elenchos eisitirion;,pˈu ˈine o ˈeleŋxˌos ˌisitiɾˈion,the Athens airport's own page for this step is titled Έλεγχος Εισιτηρίων (Check in),,2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
+air-travel.where-is-check-in,Πού είναι ο έλεγχος εισιτηρίων;,,Pou einai o elenchos eisitirion;,pˈu ˈine o ˈeleŋxˌos ˌisitiɾˈion,where is the ticket check?,the Athens airport's own page for this step is titled Έλεγχος Εισιτηρίων (Check in),2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
 air-travel.which-gate,Ποια πύλη;,,Poia pyli;,pˈia pˈili,,,2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
 air-travel.where-is-the-security-check,Πού είναι ο έλεγχος ασφαλείας;,,Pou einai o elenchos asfaleias;,pˈu ˈine o ˈeleŋxˌos ˌasfalˈias,,,2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
-air-travel.my-luggage-did-not-arrive,Οι αποσκευές μου δεν έφτασαν.,,Oi aposkeves mou den eftasan.,i ˌaposcevˈez mu ðˈen ˈeftasˌan,"αποσκευές, the word Athens airport's own baggage page uses",,2,el-agent-v1;roman=elot743;ipa=espeak
-air-travel.i-would-like-a-window-seat,Θα ήθελα θέση δίπλα στο παράθυρο.,,Tha ithela thesi dipla sto parathyro.,θa ˈiθelˌa θˈesi ðˈipla sto paɾˈaθiɾˌo,θα ήθελα is a verb form and does not agree with the speaker's gender,,2,el-agent-v1;roman=elot743;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Οι αποσκευές μου δεν έφτασαν.,,Oi aposkeves mou den eftasan.,i ˌaposcevˈez mu ðˈen ˈeftasˌan,my luggage did not arrive.,"αποσκευές, the word Athens airport's own baggage page uses",2,el-agent-v1;roman=elot743;ipa=espeak
+air-travel.i-would-like-a-window-seat,Θα ήθελα θέση δίπλα στο παράθυρο.,,Tha ithela thesi dipla sto parathyro.,θa ˈiθelˌa θˈesi ðˈipla sto paɾˈaθiɾˌo,I would like a seat next to the window.,θα ήθελα is a verb form and does not agree with the speaker's gender,2,el-agent-v1;roman=elot743;ipa=espeak
 air-travel.i-would-like-an-aisle-seat,Θα ήθελα θέση διάδρομο.,,Tha ithela thesi diadromo.,θa ˈiθelˌa θˈesi ðiˈaðɾomˌo,,,2,el-agent-v1;roman=elot743;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,Μπορείτε να με πάρετε;,,Boreite na me parete;,boɾˈite na me pˈaɾetˌe,"formal, matching the pack's taxi register",,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Μπορείτε να με πάρετε;,,Boreite na me parete;,boɾˈite na me pˈaɾetˌe,can you take me?,"formal, matching the pack's taxi register",2,el-agent-v1;roman=elot743;ipa=espeak
 hitchhiking.where-are-you-going,Πού πηγαίνετε;,,Pou pigainete;,pˈu pijˈenetˌe,,,2,el-agent-v1;roman=elot743;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Πρέπει να πάω μόνο μέχρι την επόμενη πόλη.,,Prepei na pao mono mechri tin epomeni poli.,pɾˈepi na pˈao mˈono mˈexɾi tin epˈomenˌi pˈoli,,,2,el-agent-v1;roman=elot743;ipa=espeak
 hitchhiking.is-there-room-for-two,Υπάρχει χώρος για δύο;,,Yparchei choros gia dyo;,ipˈaɾçi xˈoɾoz jˈa ðˈio,,,2,el-agent-v1;roman=elot743;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Μπορώ να πληρώσω τη βενζίνη.,,Boro na pliroso ti venzini.,boɾˈo na pliɾˈoso ti venzˈini,"βενζίνη, the word drivers use",,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Μπορώ να πληρώσω τη βενζίνη.,,Boro na pliroso ti venzini.,boɾˈo na pliɾˈoso ti venzˈini,I can pay for the petrol.,"βενζίνη, the word drivers use",2,el-agent-v1;roman=elot743;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Σας ευχαριστώ που με πήρατε.,,Sas efcharisto pou me pirate.,sas ˌefxaɾistˈo pu me pˈiɾatˌe,,,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.please-turn-around,"Κάντε αναστροφή, παρακαλώ",,"Kante anastrofi, parakalo","kˈade ˌanastɾofˈi, pˌaɾakalˈo",,,2,"el-agent-v1;src=LKN-Triantafyllidis αναστροφή 1;src=ΚΟΚ ν. 2696/1999 άρθρο 29 (επιτόπια στροφή, αναστροφή 180°);src=OPUS-OpenSubtitles2013-el (Kielipankki-Korp) κάνε αναστροφή 14;roman=elot743;in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak"

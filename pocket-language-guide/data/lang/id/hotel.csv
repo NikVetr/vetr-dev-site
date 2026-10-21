@@ -48,13 +48,13 @@ laundry.please-do-not-use-bleach,Tolong jangan pakai pemutih,,tˈoloŋ dʒˈaŋa
 laundry.laundromat,Laundry,Binatu,lˈaʊndrj,,,2,id-agent-v1;ipa=espeak
 laundry.please-iron-this,Tolong setrika ini,,tˈoloŋ sətrˈika ˈini,,,2,id-agent-v1;ipa=espeak
 laundry.detergent,Deterjen,Sabun cuci,dətˈɛrdʒən,,,2,id-agent-v1;ipa=espeak
-laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaniŋ,cuci kering here means wash-and-dry,,2,id-agent-v1;ipa=espeak
+laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaniŋ,dry cleaning,cuci kering here means wash-and-dry,2,id-agent-v1;ipa=espeak
 laundry.dryer,Mesin pengering,,mˈɛsin pəŋˈɛriŋ,,,2,id-agent-v1;ipa=espeak
 laundry.coin-operated,Pakai koin,Self-service,pˈakaɪ kˈoin,,,2,id-agent-v1;ipa=espeak
 massage-spa.please-stop,"Stop, jangan dilanjutkan",,"stˈop, dʒˈaŋan dˌilandʒˈutkan","stop, do not carry on","deliberately unsoftened, with no tolong, where the pause row below keeps it",2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
 massage-spa.please-pause,Tolong berhenti sebentar,,tˈoloŋ bərhˈɛnti səbəntar,stop for a moment,,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
 massage-spa.please-avoid-this-area,Tolong jangan tekan bagian ini,,tˈoloŋ dʒˈaŋan tˈɛkan baɡˈian ˈini,do not press this part,,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
-massage-spa.stronger-pressure,Tolong tekan lebih kuat,,tˈoloŋ tˈɛkan lˈɛbih kˈuat,press harder; tekanan is the word the pijat trade uses for pressure,,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
+massage-spa.stronger-pressure,Tolong tekan lebih kuat,,tˈoloŋ tˈɛkan lˈɛbih kˈuat,please press harder,tekanan is the word the pijat trade uses for pressure,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
 massage-spa.more-gently,Tolong lebih ringan,,tˈoloŋ lˈɛbih rˈiŋan,"lighter; ringan is weight, where pelan would say slow",,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
 massage-spa.that-pressure-is-good,"Tekanannya pas, tolong begitu terus",,"tˌɛkanˈanɲa pˈas, tˈoloŋ bəɡˈitu tˈɛrus","the pressure is just right, keep it like that",,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak
 massage-spa.focus-on-shoulders,Tolong fokus di bahu,,tˈoloŋ fˈokus di bˈahu,,,2,id-agent-v1;spa-board-v1;kbbi;kemenkes-pijat-tradisional;ipa=espeak

@@ -54,7 +54,7 @@ laundry.coin-operated,Inatumia sarafu,,ˌinatumˈia sarˈafu,,,1,sw-agent-v1;ipa
 massage-spa.please-stop,"Tafadhali acha, usiendelee",,"tˌafaðˈali ˈatʃa, ˌusiˌendelˈee","please stop, do not continue",,2,sw-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-pause,"Sitisha kwa muda, tafadhali",,"sitˈiʃa kwa mˈuda, tˌafaðˈali",suspend for a while,kwa muda says it resumes,2,sw-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-avoid-this-area,Tafadhali usiguse sehemu hii,,tˌafaðˈali ˌusiɡˈuse sehˈemu hˌii,please do not touch this part,,2,sw-agent-v1;spa-board-v1;ipa=espeak
-massage-spa.stronger-pressure,"Kanda kwa nguvu zaidi, tafadhali",,"kˈanda kwa ŋɡˈuvu zaˈidi, tˌafaðˈali","kukanda is the verb for kneading a body, which is what masaji is",,2,sw-agent-v1;spa-board-v1;ipa=espeak
+massage-spa.stronger-pressure,"Kanda kwa nguvu zaidi, tafadhali",,"kˈanda kwa ŋɡˈuvu zaˈidi, tˌafaðˈali","knead harder, please","kukanda is the verb for kneading a body, which is what masaji is",2,sw-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.more-gently,"Punguza nguvu, tafadhali",,"puŋɡˈuza ŋɡˈuvu, tˌafaðˈali","reduce the force, please",,2,sw-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.that-pressure-is-good,"Nguvu hizi ni sawa, endelea hivyo",,"ŋɡˈuvu hˈizi ni sˈawa, ˌendelˈea hˈivjo","this force is right, carry on like that",,2,sw-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.focus-on-shoulders,Tafadhali kanda mabega zaidi,,tˌafaðˈali kˈanda mabˈeɡa zaˈidi,,,2,sw-agent-v1;spa-board-v1;ipa=espeak

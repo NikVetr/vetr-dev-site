@@ -27,7 +27,7 @@ pronouns-verbs.need-thing,… لازم دارم,,… lāzem dāram,lɑzem dɑram
 pronouns-verbs.looking-for-thing,دنبالِ … هستم,,donbāl-e … hastam,donbɑle hastam,I am looking for…,,2,fa-agent-v1;ipa=espeak
 question-words.what,چه,چی,che,tʃe,spoken chi,,2,fa-agent-v1;ipa=espeak
 question-words.where,کجا,,kojā,kodʒɑ,,,2,fa-agent-v1;ipa=espeak
-question-words.who,چه کسی,کی,che kasi,tʃe kasi,"spoken ki, which is also the word for 'when'",,2,fa-agent-v1;ipa=espeak
+question-words.who,چه کسی,کی,che kasi,tʃe kasi,what person,"spoken ki, which is also the word for 'when'",2,fa-agent-v1;ipa=espeak
 question-words.which-one,کدام,کدوم,kodām,kodɑm,spoken kodum,,2,fa-agent-v1;ipa=espeak
 question-words.when,چه وقت,کِی,che vaqt,tʃe vaqt,also key,,2,fa-agent-v1;ipa=espeak
 question-words.how,چطور,,chetor,tʃetor,,,2,fa-agent-v1;ipa=espeak
@@ -42,6 +42,6 @@ question-words.a-little,کمی,یک کم,kami,kami,also yek kam,,2,fa-agent-v1;i
 question-words.some,چند تا,,chand tā,tʃand tɑ,a few,,2,fa-agent-v1;ipa=espeak
 question-words.very,خیلی,,kheyli,xejli,,,2,fa-agent-v1;ipa=espeak
 question-words.too,زیادی,,ziyādi,ziɑdi,too much,ziyādi gerān ast is 'it is too expensive',2,fa-agent-v1;ipa=espeak
-question-words.also,هم,,ham,ham,follows the word it joins: man ham is 'me too',,2,fa-agent-v1;ipa=espeak
+question-words.also,هم,,ham,ham,also,follows the word it joins: man ham is 'me too',2,fa-agent-v1;ipa=espeak
 question-words.all-both,همه / هر دو,,hame / har do,hame / har do,everything / both,,2,fa-agent-v1;ipa=espeak
 question-words.how-much-what-price,چند است؟,چنده؟,chand ast?,tʃand ast,spoken chande,,2,fa-agent-v1;ipa=espeak

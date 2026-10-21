@@ -22,7 +22,7 @@ sim-data.prepaid,선불,,seonbul,sʌnbul,,,2,ko-agent-v1;ipa=rr
 sim-data.roaming,로밍,,roming,ɾomiŋ,,,2,ko-agent-v1;ipa=rr
 children.cannot-find-my-child,아이를 못 찾겠어요,,aireul mot chatgesseoyo,aiɾɯl mot tɕʰatkes͈ʌjo,cannot find my child,,2,ko-agent-v1;ipa=rr
 children.make-an-announcement,안내 방송 해 주세요,,annae bangsong hae juseyo,annɛ paŋsoŋ hɛ tɕusejo,,,2,ko-agent-v1;ipa=rr
-children.child-age,아이가 {}살이에요,,aiga {}sarieyo,aiɡa {} saɾiejo,native numbers + 살,,2,ko-agent-v1;ipa=rr
+children.child-age,아이가 {}살이에요,,aiga {}sarieyo,aiɡa {} saɾiejo,the child is {} years old,native numbers + 살,2,ko-agent-v1;ipa=rr
 children.high-chair,아기 의자 있어요?,,agi uija isseoyo?,aɡi ɰidʑa is͈ʌjo,,,2,ko-agent-v1;ipa=rr
 children.baby-changing-room,수유실이 어디예요?,,suyusiri eodiyeyo?,sujusiɾi ʌdijejo,,,2,ko-agent-v1;ipa=rr
 children.childrens-menu,어린이 메뉴 있어요?,,eorini menyu isseoyo?,ʌɾini menju is͈ʌjo,,,2,ko-agent-v1;ipa=rr
@@ -101,10 +101,10 @@ phone-text-power.may-i-charge-my-phone-here,여기서 충전해도 돼요?,,yeog
 social-basics.politeness-particles,"한국어가 -요로 하는 일을 태국어는 문장 끝에 붙이는 한 마디로 해요. 남자는 거의 모든 말 뒤에 khrap, 여자는 kha를 붙이고, 여자가 질문할 때는 kha를 올림조로 발음해요. 이 카드의 문장에는 이 말이 빠져 있으니 자신에게 맞는 쪽을 직접 붙이세요.",,,,,,2,ko-notes-v1
 board-answers.there-is-no-wait,대기 없이 바로 들어가시면 돼요,,daegi eopsi baro deureogasimyeon dwaeyo,tɛɡi ʌpsi paɾo tɯɾʌɡasimjʌn twɛjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.none-of-these,말하고 싶은 게 여기 없어요,,malhago sipeun ge yeogi eopseoyo,malhaɡo sipʰɯn ke jʌɡi ʌpsʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
-board-answers.it-is-closed,문 닫았어요,,mun dadasseoyo,mun tadas͈ʌjo,"lit. 'the door has closed'; the ordinary spoken way to say a shop is closed, distinct from the sign words 영업 종료/휴업",,2,ko-agent-v1;board-answers-v1;ipa=rr
+board-answers.it-is-closed,문 닫았어요,,mun dadasseoyo,mun tadas͈ʌjo,[we] have closed [the] door,"the ordinary spoken way to say a shop is closed, distinct from the sign words 영업 종료/휴업",2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.we-do-not-have-it,그건 없어요,,geugeon eopseoyo,kɯɡʌn ʌpsʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.card-or-cash,"카드예요, 현금이에요?",,"kadeuyeyo, hyeongeumieyo?","kʰadɯjejo, hjʌŋɯmiejo",,,2,ko-agent-v1;board-answers-v1;ipa=rr
-board-answers.please-wait,잠시만요,,jamsimanyo,tɕamsimanjo,the short counter form; communication.please-wait-a-moment carries the fuller 잠시만 기다려 주세요 as its own text and this as its text_alt,,2,ko-agent-v1;board-answers-v1;ipa=rr
+board-answers.please-wait,잠시만요,,jamsimanyo,tɕamsimanjo,just a moment,the short counter form; communication.please-wait-a-moment carries the fuller 잠시만 기다려 주세요 as its own text and this as its text_alt,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.it-is-over-there,저기예요,,jeogiyeyo,tɕʌɡijejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-will-show-you,길을 알려드릴게요,,gireul allyeodeurilgeyo,kiɾɯl alljʌdɯɾilɡejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.how-many,몇 개 필요하세요?,,myeot gae piryohaseyo?,mjʌt kɛ pʰiɾjohasejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
@@ -112,12 +112,12 @@ board-answers.not-possible,그건 안 돼요,,geugeon an dwaeyo,kɯɡʌn an twɛ
 board-answers.say-it-again,한 번만 더요?,,han beonman deoyo?,han pʌnman tʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-will-write-it-down,적을게요,,jeogeulgeyo,tɕʌɡɯlɡejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-am-calling-an-ambulance,구급차를 부를게요,,gugeupchareul bureulgeyo,kuɡɯptɕʰaɾɯl puɾɯlɡejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
-board-answers.i-am-calling-the-police,경찰을 부를게요,,gyeongchareul bureulgeyo,kjʌŋtɕʰaɾɯl puɾɯlɡejo,"recast in 해요체 rather than reused from police-consulate.i-am-calling-the-police's 부르겠습니다, which is the formal self-report register Korean uses for statements to officials, not the counter-service register this batch uses",,2,ko-agent-v1;board-answers-v1;ipa=rr
+board-answers.i-am-calling-the-police,경찰을 부를게요,,gyeongchareul bureulgeyo,kjʌŋtɕʰaɾɯl puɾɯlɡejo,[I] will call the police,"recast in 해요체 rather than reused from police-consulate.i-am-calling-the-police's 부르겠습니다, which is the formal self-report register Korean uses for statements to officials, not the counter-service register this batch uses",2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.help-is-coming,도움이 곧 올 거예요,,doumi got ol geoyeyo,toumi kot ol kʌjejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.where-does-it-hurt,어디가 아파요?,,eodiga apayo?,ʌdiɡa apʰajo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.can-you-walk,걸을 수 있어요?,,georeul su isseoyo?,kʌɾɯl su is͈ʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.stay-here,여기 있는 게 좋아요,,yeogi issneun ge joayo,jʌɡi is͈nɯn ke tɕoajo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
-board-answers.what-is-your-name,이름이 뭐예요?,,ireumi mwoyeyo?,iɾɯmi mwʌjejo,"the plain polite question, distinct from introductions.what-is-your-name's more elaborate honorific 어떻게 되세요",,2,ko-agent-v1;board-answers-v1;ipa=rr
+board-answers.what-is-your-name,이름이 뭐예요?,,ireumi mwoyeyo?,iɾɯmi mwʌjejo,what is [your] name?,"the plain polite question, distinct from introductions.what-is-your-name's more elaborate honorific 어떻게 되세요",2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.the-hospital-is-close,병원이 가까워요,,byeongwoni gakkawoyo,pjʌŋwʌni kak͈awʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-do-not-have-a-phone,휴대폰이 없어요,,hyudaeponi eopseoyo,hjudɛpʰoni ʌpsʌjo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-will-find-someone,도와줄 사람을 찾을게요,,dowajul sarameul chajeulgeyo,towadʑul saɾamɯl tɕʰadʑɯlɡejo,,,2,ko-agent-v1;board-answers-v1;ipa=rr
@@ -129,20 +129,20 @@ kind-words.i-like-it-very-much,정말 마음에 들어요,,jeongmal maeume deure
 kind-words.i-had-a-wonderful-time,정말 좋은 시간을 보냈어요,,jeongmal joeun siganeul bonaesseoyo,tɕʌŋmal tɕoɯn siɡanɯl ponɛs͈ʌjo,[I] spent a really good time,,2,ko-agent-v1;ipa=rr
 kind-words.thank-you-for-everything,모든 것에 감사합니다,,modeun geose gamsahamnida,modɯn kʌse kamsahamnida,thank you for everything,,2,ko-agent-v1;ipa=rr
 kind-words.thank-you-for-your-hospitality,환대해 주셔서 감사합니다,,hwandaehae jusyeoseo gamsahamnida,hwandɛhɛ tɕusjʌsʌ kamsahamnida,thank you for the hospitality [you gave me],,2,ko-agent-v1;ipa=rr
-board-answers.my-name-is-blank,{}입니다,,{}imnida,{} imnida,"[I] am {}: 입니다 follows a name ending in a consonant or a vowel alike, where 이에요 or 예요 would have to know which",,2,ko-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=rr
+board-answers.my-name-is-blank,{}입니다,,{}imnida,{} imnida,[I] am {},"입니다 follows a name ending in a consonant or a vowel alike, where 이에요 or 예요 would have to know which",2,ko-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=rr
 board-answers.i-would-rather-not-say,말씀드리기 어려워요,,malsseumdeurigi eoryeowoyo,mals͈ɯmdɯɾiɡi ʌɾjʌwʌjo,it is hard to tell [you],,2,ko-agent-v1;src=NIKL-StdKor 말씀드리다;answers-audit-v1;ipa=rr
 board-answers.what-happened,무슨 일이에요?,,museun irieyo?,musɯn iɾiejo,what matter is it?,,2,ko-agent-v1;src=NIKL-StdKor 무슨;answers-audit-v1;ipa=rr
-board-answers.understood,알겠습니다,,algetseumnida,alɡetsɯmnida,"understood: the fixed acknowledgement, in 합쇼체 as staff say it",,2,ko-agent-v1;src=NIKL-StdKor 알다;answers-audit-v1;ipa=rr
-board-answers.i-will-check,확인해 볼게요,,hwaginhae bolgeyo,hwaɡinhɛ polɡejo,"I will check and see: -ㄹ게요, the pack's form for the responder's own next action",,2,ko-agent-v1;in-pack-neighbour=phone-text-power.please-confirm;in-pack-neighbour=massage-spa.reply-ask-supervisor;answers-audit-v1;ipa=rr
+board-answers.understood,알겠습니다,,algetseumnida,alɡetsɯmnida,understood,"the fixed acknowledgement, in 합쇼체 as staff say it",2,ko-agent-v1;src=NIKL-StdKor 알다;answers-audit-v1;ipa=rr
+board-answers.i-will-check,확인해 볼게요,,hwaginhae bolgeyo,hwaɡinhɛ polɡejo,I will check and see,"-ㄹ게요, the pack's form for the responder's own next action",2,ko-agent-v1;in-pack-neighbour=phone-text-power.please-confirm;in-pack-neighbour=massage-spa.reply-ask-supervisor;answers-audit-v1;ipa=rr
 board-answers.we-have-it,있어요,,isseoyo,is͈ʌjo,[it] exists: the question's own verb echoed,,2,ko-agent-v1;in-pack-neighbour=shopping.do-you-have-this-in-stock;answers-audit-v1;ipa=rr
-board-answers.we-are-full,다 찼어요,,da chasseoyo,ta tɕʰas͈ʌjo,"it is all filled up: venue-neutral, where 만석 is seats and 만실 rooms",,2,ko-agent-v1;src=NIKL-StdKor 차다;answers-audit-v1;ipa=rr
+board-answers.we-are-full,다 찼어요,,da chasseoyo,ta tɕʰas͈ʌjo,it is all filled up,"venue-neutral, where 만석 is seats and 만실 rooms",2,ko-agent-v1;src=NIKL-StdKor 차다;answers-audit-v1;ipa=rr
 board-answers.it-is-free,무료예요,,muryoyeyo,muɾjojejo,,,2,ko-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=rr
 board-answers.it-does-not-matter,상관없어요,,sanggwaneopseoyo,saŋɡwanʌpsʌjo,it makes no difference,,2,ko-agent-v1;src=NIKL-Urimalsaem 상관없다;answers-audit-v1;ipa=rr
 board-answers.only-for-customers,손님만 쓸 수 있어요,,sonnimman sseul su isseoyo,sonnimman s͈ɯl su is͈ʌjo,only customers can use it,,2,ko-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=rr
 board-answers.where-to,어디까지요?,,eodikkajiyo?,ʌdik͈adʑijo,as far as where?,,2,ko-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=rr
-board-answers.at-the-next-stop,다음 정거장에서요,,daeum jeonggeojangeseoyo,taɯm tɕʌŋɡʌdʑaŋesʌjo,at the next stop: 정거장 is a bus or a train stop,,2,ko-agent-v1;src=NIKL-StdKor 정거장;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=rr
+board-answers.at-the-next-stop,다음 정거장에서요,,daeum jeonggeojangeseoyo,taɯm tɕʌŋɡʌdʑaŋesʌjo,at the next stop,정거장 is a bus or a train stop,2,ko-agent-v1;src=NIKL-StdKor 정거장;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=rr
 board-answers.pay-on-board,차 안에서 내요,,cha aneseo naeyo,tɕʰa anesʌ nɛjo,[it is] paid inside the vehicle,,2,ko-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=rr
-board-answers.see-a-doctor,병원에 가 보시는 게 좋겠어요,,byeongwone ga bosineun ge jokesseoyo,pjʌŋwʌne ka posinɯn ke tɕokʰes͈ʌjo,it would be good to go to a clinic: 병원 is where a doctor is seen,,2,ko-agent-v1;in-pack-neighbour=board-answers.stay-here;in-pack-neighbour=board-answers.the-hospital-is-close;answers-audit-v1;ipa=rr
+board-answers.see-a-doctor,병원에 가 보시는 게 좋겠어요,,byeongwone ga bosineun ge jokesseoyo,pjʌŋwʌne ka posinɯn ke tɕokʰes͈ʌjo,it would be good to go to a clinic,병원 is where a doctor is seen,2,ko-agent-v1;in-pack-neighbour=board-answers.stay-here;in-pack-neighbour=board-answers.the-hospital-is-close;answers-audit-v1;ipa=rr
 board-answers.prescription-only,처방전이 필요해요,,cheobangjeoni piryohaeyo,tɕʰʌbaŋdʑʌni pʰiɾjohɛjo,a prescription is needed,,2,ko-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=rr
 board-answers.before-food,식전이에요,,sikjeonieyo,siktɕʌniejo,[it is] before meals,,2,ko-agent-v1;src=NIKL-StdKor 식전;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=rr
 board-answers.after-food,식후예요,,sikhuyeyo,sikhujejo,[it is] after meals,,2,ko-agent-v1;src=MFDS 꼭 식후 30분에 약 먹어야 하나요;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=rr

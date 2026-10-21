@@ -29,7 +29,7 @@ medical-conditions.i-have-epilepsy,Saya punya epilepsi,Saya bisa kejang,sˈaja p
 medical-conditions.my-blood-sugar-is-low,Gula darah saya rendah,,ɡˈula dˈarah sˈaja rˈɛndah,,,2,id-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Saya perlu inhaler saya,Saya perlu obat asma saya,sˈaja pˈɛrlu inhˈalər sˈaja,,,2,id-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Saya hamil,,sˈaja hˈamil,,,2,id-agent-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈaja bˈawa suntˈikan ˌadrənˈalin,EpiPen is unknown here; adrenalin is the word,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈaja bˈawa suntˈikan ˌadrənˈalin,I carry an adrenaline injection,EpiPen is unknown here; adrenalin is the word,2,id-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Saya minum obat untuk {},,sˈaja mˈinum ˈobat ˌuntuk {},,,2,id-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Saya minum obat pengencer darah,Saya minum antikoagulan,sˈaja mˈinum ˈobat pəŋˈɛntʃər dˈarah,,,2,id-agent-v1;ipa=espeak
 medical-conditions.medicine-allergy,Alergi obat: {},,alˈɛrɡi ˈobat {},,,2,id-agent-v1;ipa=espeak

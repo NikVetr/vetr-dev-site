@@ -121,7 +121,7 @@ common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr
 rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒra,,,2,fare-agent-v1;in-pack-neighbour;ipa=ala-lc
 transit-rides.where-do-i-pay-the-fare,أين أدفع الأجرة؟,,ayna adfaʿ al-ujrah?,ʔˈajna ʔˈadfaʕ ʔalʔˈudʒra,,,2,translator-requests-v1;in-pack-neighbour;ipa=ala-lc
 air-travel.where-is-check-in,أين تسجيل الوصول؟,,ayna tasjīl al-wuṣūl?,ʔˈajna tasdʒˈiːl ʔalwusˤˈuːl,"tasjīl al-wuṣūl = check-in, the term Gulf carriers' own Arabic-language sites use",,2,ar-agent-v1;ipa=ala-lc
-air-travel.which-gate,أي بوابة؟,,ayy bawwābah?,ʔˈajj bawwˈaːba,"bawwābah = gate, already the pack's word (taxi.we-need-the-east-gate-not-the-south-gate)",,2,ar-agent-v1;ipa=ala-lc
+air-travel.which-gate,أي بوابة؟,,ayy bawwābah?,ʔˈajj bawwˈaːba,which gate?,"bawwābah = gate, already the pack's word (taxi.we-need-the-east-gate-not-the-south-gate)",2,ar-agent-v1;ipa=ala-lc
 air-travel.where-is-the-security-check,أين التفتيش الأمني؟,,ayna al-taftīsh al-amnī?,ʔˈajnat taftˈiːʃ ʔalʔˈamniː,,,2,ar-agent-v1;ipa=ala-lc
 air-travel.my-luggage-did-not-arrive,حقيبتي لم تصل,,ḥaqībatī lam taṣil,ħaqˈiːbatiː lˈam tˈasˤil,,,2,ar-agent-v1;ipa=ala-lc
 air-travel.i-would-like-a-window-seat,أريد مقعدًا بجانب النافذة,,urīd maqʿadan bi-jānib al-nāfidhah,ʔurˈiːd mˈaqʕadan bidʒˈaːnib ʔannˈaːfiða,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
@@ -130,6 +130,6 @@ hitchhiking.can-you-give-me-a-ride,هل يمكنني الحصول على توص�
 hitchhiking.where-are-you-going,إلى أين تذهب هذه السيارة؟,,ilá ayna tadhhab hādhihi al-sayyārah?,ʔˈilaː ʔˈajna tˈaðhab hˈaːðihis sajjˈaːra,where is this car going?,"asks about the car and not the driver, as transit-rides.does-this-bus-train-go-to asks about the vehicle, so no second person is left to carry a gender",2,ar-agent-v1;fix=ar.wikipedia سيارة rev 76379488 (السَّيَّارة ... هي مركبة and تعمل السيارة: feminine);in-pack-frame=transit-rides.does-this-bus-train-go-to;rule=vehicle-as-subject;row-corrections-v2;ipa=ala-lc
 hitchhiking.i-only-need-to-go-to-the-next-town,أحتاج فقط الوصول إلى البلدة التالية,,aḥtāj faqaṭ al-wuṣūl ilá al-baldah al-tālīyah,ʔaħtˈaːdʒ fˈaqatˤ ʔalwusˤˈuːl ʔˈilal bˈaldat taːlˈijja,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 6(a): alif maqṣūrah is á;arabic-ipa-v1;ipa=ala-lc
 hitchhiking.is-there-room-for-two,هل يوجد مكان لشخصين؟,,hal yūjad makān li-shakhṣayn?,hˈal jˈuːdʒad makˈaːn liʃaxsˤˈajn,,,2,ar-agent-v1;ipa=ala-lc
-hitchhiking.i-can-pay-for-fuel,يمكنني أن أدفع ثمن البنزين,,yumkinunī an adfaʿ thaman al-banzīn,jumkˈinuniː ʔˈan ʔˈadfaʕ θˈaman ʔalbanzˈiːn,"banzīn = petrol, the word drivers use",,2,ar-agent-v1;ipa=ala-lc
+hitchhiking.i-can-pay-for-fuel,يمكنني أن أدفع ثمن البنزين,,yumkinunī an adfaʿ thaman al-banzīn,jumkˈinuniː ʔˈan ʔˈadfaʕ θˈaman ʔalbanzˈiːn,I can pay the price of the petrol,"banzīn = petrol, the word drivers use",2,ar-agent-v1;ipa=ala-lc
 hitchhiking.thank-you-for-the-ride,شكرًا على التوصيلة,,shukran ʿalá al-tawṣīlah,ʃˈukran ʕˈalat tawsˤˈiːla,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 6(a): alif maqṣūrah is á;arabic-ipa-v1;ipa=ala-lc
 taxi.please-turn-around,أرجو الدوران للخلف,,arjū al-dawarān lil-khalf,ʔˈardʒud dawarˈaːn lilxˈalf,,,2,ar-agent-v1;ar.wikipedia=دوران للخلف (rev 69982129);in-pack-frame=taxi.please-get-me-there-in-time-for-the-shinkansen;answers-audit-v1;ipa=ala-lc

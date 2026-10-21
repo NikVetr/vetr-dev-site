@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-directions.where-is,Gdje je {}?,,ɡdjˈe je {},the slot is a nominative subject,,2,hr-agent-v1;ipa=espeak
+directions.where-is,Gdje je {}?,,ɡdjˈe je {},where is {}?,the slot is a nominative subject,2,hr-agent-v1;ipa=espeak
 directions.how-do-i-get-to,Kako doći ovamo: {}?,,kˈako dˈotɕi ovamo {},how does one get here:,"do takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
 directions.is-it-far,Je li daleko?,,je li daleko,,,2,hr-agent-v1;ipa=espeak
 directions.how-long-on-foot,Koliko pješke?,,koliko pjˈeʃke,,,2,hr-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ transit-rides.can-i-use-this-ticket,Mogu li koristiti ovu kartu?,,mˈoɡu li kor
 place-words.scenic-area,turističko područje,,turistitʃko podrutʃje,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 place-words.visitor-center,turistički informativni centar,,turistitʃki informativni tsˈentar,,,2,hr-agent-v1;ipa=espeak
 place-words.railway-station,željeznička stanica,,ʒeʎeznitʃka stanitsa,,,2,hr-agent-v1;ipa=espeak
-place-words.airport,zračna luka,aerodrom,zrˈatʃna lˈuka,zračna luka is what Croatian signage says; aerodrom is what people say,,2,hr-agent-v1;ipa=espeak
+place-words.airport,zračna luka,aerodrom,zrˈatʃna lˈuka,airport,zračna luka is what Croatian signage says; aerodrom is what people say,2,hr-agent-v1;ipa=espeak
 place-words.service-desk,informacije,,informatsije,,,2,hr-agent-v1;ipa=espeak
 place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,,2,hr-agent-v1;ipa=espeak
 place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,,2,hr-agent-v1;ipa=espeak
@@ -82,7 +82,7 @@ border-customs.baggage-claim,preuzimanje prtljage,,preuzimaɲe prtʎaɡe,,,2,hr-
 border-customs.customs-declaration,carinska prijava,,tsarinska prijava,,,2,hr-agent-v1;ipa=espeak
 border-customs.arrival-card,ulazna kartica,,ulazna kartitsa,,,2,hr-agent-v1;ipa=espeak
 border-customs.transit,tranzit,,trˈanzit,,,2,hr-agent-v1;ipa=espeak
-border-customs.boarding-pass,propusnica za ukrcaj,boarding pass,propusnitsa zˈa ukrtsaj,the English term is what Croatian airports print,,2,hr-agent-v1;ipa=espeak
+border-customs.boarding-pass,propusnica za ukrcaj,boarding pass,propusnitsa zˈa ukrtsaj,pass for boarding,the English term is what Croatian airports print,2,hr-agent-v1;ipa=espeak
 pickup-meeting.where-is-the-pickup-point,Gdje je mjesto preuzimanja?,,ɡdjˈe je mjˈesto preuzimaɲa,,,2,hr-agent-v1;ipa=espeak
 pickup-meeting.please-send-me-the-pickup-point,"Molim vas, pošaljite mi mjesto preuzimanja",,"mˈolim vˈas, poʃaʎite mˈi mjˈesto preuzimaɲa",,,2,hr-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,"Molim vas, pokupite nas ovdje",,"mˈolim vˈas, pokupite nˈas ˈovdje",,,2,hr-agent-v1;ipa=espeak
@@ -126,10 +126,10 @@ air-travel.where-is-the-security-check,Gdje je sigurnosna kontrola?,,ɡdjˈe je 
 air-travel.my-luggage-did-not-arrive,Moja prtljaga nije stigla,,mˈoja prtʎaɡa nije stˈiɡla,,,2,hr-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Želio bih mjesto uz prozor,,ʒˈelio bˈix mjˈesto ˈus prˈozor,'I would like a seat by the window',,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti);was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prozor serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 air-travel.i-would-like-an-aisle-seat,Želio bih mjesto uz prolaz,,ʒˈelio bˈix mjˈesto ˈus prˈolaz,'I would like a seat by the aisle',,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti) and prolaz 2a (mjesto namijenjeno prolaženju (između stvari -- pokućstva itd.));was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prolaz serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-hitchhiking.can-you-give-me-a-ride,Možete li me povesti?,,moʒete li mˈe povesti,"formal Vi, matching the pack's taxi register",,2,hr-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Možete li me povesti?,,moʒete li mˈe povesti,can you give me a ride?,"formal Vi, matching the pack's taxi register",2,hr-agent-v1;ipa=espeak
 hitchhiking.where-are-you-going,Kamo idete?,,kˈamo idete,,,2,hr-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Trebam samo do sljedećeg grada,,trˈebam sˈamo dˈo sʎedetɕeɡ ɡrˈada,,,2,hr-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,Ima li mjesta za dvoje?,,ima li mjˈesta zˈa dvˈoje,,,2,hr-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,"benzin, the word drivers use",,2,hr-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,I can pay for petrol,"benzin, the word drivers use",2,hr-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Hvala na prijevozu,,xvˈala nˈa prijevozu,,,2,hr-agent-v1;ipa=espeak
 taxi.please-turn-around,"Molim vas, okrenite se",,"mˈolim vˈas, okrenite sˈe",,,2,hr-agent-v1;src=HJP okrenuti 2a;src=Zakon o sigurnosti prometa na cestama čl. 43 (okretati se polukružno);in-pack-frame;answers-audit-v1;ipa=espeak

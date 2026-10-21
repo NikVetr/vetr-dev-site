@@ -83,14 +83,14 @@ numbers-money.crore,deset milijuna,10 000 000,dˈeset milijuna,,,2,gloss-only;sc
 numbers-money.shekel,šekel,,ʃˈekel,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,šekel (simbol),,ʃˈekel,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.rial,rijal,,rˈijal,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
-numbers-money.toman,10 rijala,,dˈeset rijala,ten rial; rijala is the genitive plural the numeral governs,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+numbers-money.toman,10 rijala,,dˈeset rijala,ten rial,rijala is the genitive plural the numeral governs,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 numbers-money.zloty,zlota,,zlˈota,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.zloty-symbol,zlota (simbol),,zlˈota,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.hryvnia,hrivnja,,xrˈivɲa,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.hryvnia-symbol,hrivnja (simbol),,xrˈivɲa,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.leu,lej,,lˈej,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.leu-symbol,lej (simbol),,lˈej,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
-numbers-money.koruna,češka kruna,,tʃˈeʃka krˈuna,qualified because Croatian calls the Swedish krona kruna too,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
+numbers-money.koruna,češka kruna,,tʃˈeʃka krˈuna,Czech crown,qualified because Croatian calls the Swedish krona kruna too,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.koruna-symbol,češka kruna (simbol),,tʃˈeʃka krˈuna,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.ringgit,ringit,,rˈinɡit,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.ringgit-symbol,ringit (simbol),,rˈinɡit,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak

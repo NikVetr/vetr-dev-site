@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
-pronouns-verbs.i-me,میں / مجھے,,maiñ / mujhe,mˈẽ / mˌʊɟʰeː,nominative / oblique,,2,ur-agent-v1;ipa=espeak
+pronouns-verbs.i-me,میں / مجھے,,maiñ / mujhe,mˈẽ / mˌʊɟʰeː,I / me,nominative / oblique,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.we-us,ہم / ہمیں,,ham / hameñ,ham / hˈʌmẽː,,,2,ur-agent-v1;ipa=espeak
-pronouns-verbs.you,تم,,tum,tʊm,familiar; say آپ to a stranger,,2,ur-agent-v1;ipa=espeak
+pronouns-verbs.you,تم,,tum,tʊm,you,familiar; say آپ to a stranger,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.you-polite,آپ,,āp,ˌaːp,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.he-him,وہ / اُسے,,wah / use,ʋoː / ˈʊseː,Urdu has one third-person pronoun for both genders,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.she-her,وہ / اُسے,,wah / use,ʋoː / ˈʊseː,the same word as he/him,"Urdu marks gender on the verb, not the pronoun",2,ur-agent-v1;ipa=espeak
@@ -9,7 +9,7 @@ pronouns-verbs.they-them,وہ / انہیں,,wah / unheñ,ʋoː / ˌʊnhˌeːn,,,
 pronouns-verbs.my-mine,میرا / میری,,merā / merī,mˈeːɾaː / mˈeːɾi,masculine / feminine possessum,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.your-yours,آپ کا / آپ کی,,āp kā / āp kī,ˌaːp kaː / ˌaːp ki,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.be-called-call,نام / بلانا,,nām / bulānā,nˈaːm / bəlˈaːnaː,,,2,ur-agent-v1;ipa=espeak
-pronouns-verbs.have,کے پاس ہے,,ke pās hai,keː pˈaːs hɛ,"literally ""is near""",,2,ur-agent-v1;ipa=espeak
+pronouns-verbs.have,کے پاس ہے,,ke pās hai,keː pˈaːs hɛ,is near,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.do-not-have,کے پاس نہیں,,ke pās nahīñ,keː pˈaːs nahˈĩː,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.go,جانا,,jānā,ɟˈaːnaː,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.come,آنا,,ānā,ˈaːnaː,,,2,ur-agent-v1;ipa=espeak
@@ -21,10 +21,10 @@ pronouns-verbs.like,پسند ہونا,,pasand honā,pəsˈʌnd hˈoːnaː,,,2,ur
 pronouns-verbs.need,ضرورت ہے,,zarūrat hai,zˌaɾuːɾˈat hɛ,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,ہے,,hai,hɛ,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,نہیں ہے,,nahīñ hai,nahˈĩː hɛ,,,2,ur-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,مجھے … نا ہے,,mujhe … nā hai,mˌʊɟʰeː nˈaː hɛ,the verbal noun takes -نا,,2,ur-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,مجھے … نا ہے,,mujhe … nā hai,mˌʊɟʰeː nˈaː hɛ,to me … to is,the verbal noun takes -نا,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.want-thing,مجھے … چاہیے,,mujhe … chāhiye,mˌʊɟʰeː cˈaːhjeː,,,2,ur-agent-v1;ipa=espeak
 pronouns-verbs.need-thing,مجھے … کی ضرورت ہے,,mujhe … kī zarūrat hai,mˌʊɟʰeː ki zˌaɾuːɾˈat hɛ,,,2,ur-agent-v1;ipa=espeak
-pronouns-verbs.looking-for-thing,میں … ڈھونڈ رہا ہوں,,maiñ … ḍhūñḍ rahā hūñ,mˈẽ ɖʰˈuːnɖ ɾˈʌhaː hũː,masculine speaker; a woman says رہی,,2,ur-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,میں … ڈھونڈ رہا ہوں,,maiñ … ḍhūñḍ rahā hūñ,mˈẽ ɖʰˈuːnɖ ɾˈʌhaː hũː,I am looking for …,masculine speaker; a woman says رہی,2,ur-agent-v1;ipa=espeak
 question-words.what,کیا,,kyā,kjˈaː,,,2,ur-agent-v1;ipa=espeak
 question-words.where,کہاں,,kahāñ,kˈʌhãː,,,2,ur-agent-v1;ipa=espeak
 question-words.who,کون,,kaun,kˈoːn,,,2,ur-agent-v1;ipa=espeak

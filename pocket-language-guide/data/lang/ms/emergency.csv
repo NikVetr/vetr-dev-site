@@ -29,7 +29,7 @@ medical-conditions.i-have-epilepsy,Saya punya epilepsi,Saya boleh kejang,sˈajə
 medical-conditions.my-blood-sugar-is-low,Gula darah saya rendah,,ɡˈulə dˈarah sˈajə rˈəndah,,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Saya perlu inhaler saya,Saya perlu ubat asma saya,sˈajə pˈərlu inhˈalər sˈajə,,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Saya hamil,,sˈajə hˈamel,,,2,ms-agent-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈajə bˈawə suntˈikan ˌadrənˈalen,EpiPen is unknown here; adrenalin is the word,,2,ms-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈajə bˈawə suntˈikan ˌadrənˈalen,I carry an adrenaline injection,EpiPen is unknown here; adrenalin is the word,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Saya minum ubat untuk {},,sˈajə mˈinom ˈubat ˈuntoʔ {},,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Saya minum ubat pencair darah,Saya minum antikoagulan,sˈajə mˈinom ˈubat pˈɛntʃaɪr dˈarah,,,2,ms-agent-v1;fix=DBP pencair;fix=KKM Buku Rawatan Antikoagulasi 2021 ubat cair darah;row-corrections-v1;ipa=espeak
 medical-conditions.medicine-allergy,Alergi ubat: {},,alˈərɡi ˈubat {},,,2,ms-agent-v1;ipa=espeak

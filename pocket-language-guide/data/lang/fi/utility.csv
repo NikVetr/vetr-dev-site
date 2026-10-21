@@ -3,12 +3,12 @@ utility-templates.i-want-to-go-to,Haluan mennä tänne: {}.,,hˈaluan mˈennæ t
 utility-templates.please-give-me,Saisinko tämän: {}?,,sˈaisiŋko tˈæmæn {},could I have this: {},the object case sits on tämän,2,fi-agent-v1;ipa=espeak
 utility-templates.may-i,Saanko {}?,,sˈaːŋko {},"the slot is a verb, and a Finnish verb's dictionary form is the first infinitive the frame wants",no device needed,2,fi-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,Älä lisää tätä: {}.,,ˈælæ lˈisæː tˈætæ {},,,2,fi-agent-v1;ipa=espeak
-utility-templates.do-you-have,Onko teillä {}?,,ˈoŋko tˈeillæ {},"the possessive existential takes a nominative for a countable thing; a mass noun would be partitive (kahvia), which the slot cannot supply",,2,fi-agent-v1;ipa=espeak
+utility-templates.do-you-have,Onko teillä {}?,,ˈoŋko tˈeillæ {},is there at you {}?,"the possessive existential takes a nominative for a countable thing; a mass noun would be partitive (kahvia), which the slot cannot supply",2,fi-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,Kirjoittaisitko numeron?,,kˈirjoittˌaisitko nˈumeron,,,2,fi-agent-v1;ipa=espeak
 utility-templates.i-need,Tarvitsen tätä: {}.,,tˈarvitsen tˈætæ {},"tarvita always takes a partitive object, which a bare filler cannot be",,2,fi-agent-v1;ipa=espeak
-utility-templates.is-there-nearby,Onko lähellä {}?,,ˈoŋko lˈæhellæ {},"an existential whose subject is nominative, so this frame needs no device at all",,2,fi-agent-v1;ipa=espeak
-utility-templates.how-much-is,Paljonko {} maksaa?,,pˈaljoŋko {} mˈaksaː,the slot is the nominative subject of maksaa,,2,fi-agent-v1;ipa=espeak
-utility-templates.is-this,Onko tämä {}?,,ˈoŋko tˈæmæ {},predicative nominative,,2,fi-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Onko lähellä {}?,,ˈoŋko lˈæhellæ {},is there nearby {}?,"an existential whose subject is nominative, so this frame needs no device at all",2,fi-agent-v1;ipa=espeak
+utility-templates.how-much-is,Paljonko {} maksaa?,,pˈaljoŋko {} mˈaksaː,how much does {} cost?,the slot is the nominative subject of maksaa,2,fi-agent-v1;ipa=espeak
+utility-templates.is-this,Onko tämä {}?,,ˈoŋko tˈæmæ {},is this {}?,predicative nominative,2,fi-agent-v1;ipa=espeak
 utility-templates.please,"{}, kiitos.",,"{}, kˈiːtos",,,2,fi-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Etsin tätä: {}.,,ˈetsin tˈætæ {},,,2,fi-agent-v1;ipa=espeak
 utility-templates.do-you-accept,Käykö {}?,,kˈæykø {},does {} do?,"the nominative-subject rewrite, in place of 'hyväksyttekö {}' which would need a partitive object",2,fi-agent-v1;ipa=espeak

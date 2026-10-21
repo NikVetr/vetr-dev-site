@@ -20,7 +20,7 @@ food-ordering.i-want-this,Haluaisin tämän.,,hˈaluˌaisin tˈæmæn,,,2,fi-age
 food-ordering.do-you-have-drinking-water,Onko teillä juomavettä?,,ˈoŋko tˈeillæ jˈuomavˌettæ,,,2,fi-agent-v1;ipa=espeak
 food-ordering.to-go-please,"Mukaan, kiitos.",,"mˈukaːn, kˈiːtos",,,2,fi-agent-v1;ipa=espeak
 food-ordering.check-please,Saisinko laskun?,,sˈaisiŋko lˈaskun,,,2,fi-agent-v1;ipa=espeak
-food-ordering.does-it-contain,Sisältääkö tämä seuraavaa: {}?,,sˈisæltˌæːkø tˈæmæ sˈeuraːvaː {},sisältää takes a partitive object; the colon lets the slot stay nominative,,2,fi-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Sisältääkö tämä seuraavaa: {}?,,sˈisæltˌæːkø tˈæmæ sˈeuraːvaː {},does this contain the following: {}?,sisältää takes a partitive object; the colon lets the slot stay nominative,2,fi-agent-v1;ipa=espeak
 food-ordering.is-this-vegetarian,Onko tämä kasvisruokaa?,,ˈoŋko tˈæmæ kˈasvisrˌuokaː,,,2,fi-agent-v1;ipa=espeak
 food-ordering.what-do-you-recommend,Mitä suosittelet?,,mˈitæ sˈuosittelet,,,2,fi-agent-v1;ipa=espeak
 food-ordering.water-please,"Vettä, kiitos.",,"vˈettæ, kˈiːtos",,,2,fi-agent-v1;ipa=espeak

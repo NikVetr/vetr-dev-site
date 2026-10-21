@@ -26,7 +26,7 @@ hotel-requests.another-towel-please,ایک اور تولیہ دیجیے,,ek aur 
 hotel-requests.what-time-is-check-out,چیک آؤٹ کتنے بجے ہے؟,,chek ā’ūṭ kitne baje hai?,cˈeːk aːˈoːʈ kˈɪtneː bˈʌɟeː hɛ,,,2,ur-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,کیا جلدی چیک ان ہو سکتا ہے؟,,kyā jaldī chek in ho saktā hai?,kjˈaː ɟˈʌldˌiː cˈeːk ɪn hˈoː sˈʌktˌaː hɛ,,,2,ur-agent-v1;ipa=espeak
 hotel-requests.another-night,کیا میں ایک رات اور رک سکتا ہوں؟,,kyā maiñ ek rāt aur ruk saktā hūñ?,kjˈaː mˈẽ ˈeːk ɾˈaːt ɔɾ ɾˈʌk sˈʌktˌaː hũː,,,2,ur-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,کیا لاکر ہے؟,کیا سیف ہے؟,kyā lākar hai?,kjˈaː lˈaːkəɾ hɛ,"lākar, 'locker', is what Pakistani hotels call the in-room safe",,2,ur-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,کیا لاکر ہے؟,کیا سیف ہے؟,kyā lākar hai?,kjˈaː lˈaːkəɾ hɛ,is there a locker?,"lākar, 'locker', is what Pakistani hotels call the in-room safe",2,ur-agent-v1;ipa=espeak
 hotel-requests.another-blanket,ایک اور کمبل دیجیے,,ek aur kambal dījiye,ˈeːk ɔɾ kˈʌmbəl diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
 hotel-requests.wake-up-call,مجھے {} بجے جگا دیجیے,,mujhe {} baje jagā dījiye,mˌʊɟʰeː {} bˈʌɟeː ɟˈʌɡaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,کمرے میں ایک مسئلہ ہے,کمرے میں ایک خرابی ہے,kamre meñ ek mas’ala hai,kˈʌmɾˌeː mˈẽ ˈeːk mˈʌsəla hɛ,,,2,ur-agent-v1;ipa=espeak

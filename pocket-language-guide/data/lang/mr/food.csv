@@ -4,10 +4,10 @@ dietary-needs.no-eggs,अंडी नको,,aṁḍī nakō,ˈʌɳɖi nˈʌko�
 dietary-needs.not-spicy,तिखट नको,,tikhaṭa nakō,tˈɪkʰəʈ nˈʌkoː,,,2,mr-agent-v1;ipa=espeak
 dietary-needs.less-spicy,कमी तिखट,,kamī tikhaṭa,kˈʌmi tˈɪkʰəʈ,,,2,mr-agent-v1;ipa=espeak
 dietary-needs.no-peanuts,शेंगदाणे नको,,śēṁgadāṇē nakō,ʃˌẽːɡdˈaːɳeː nˈʌkoː,,,2,mr-agent-v1;ipa=espeak
-dietary-needs.no-nuts,नट्स नको,,naṭsa nakō,nˈʌʈs nˈʌkoː,tree nuts; a loanword to avoid सुका मेवा's ambiguity with non-nut dried fruit,,2,mr-agent-v1;ipa=espeak
-dietary-needs.no-seafood,सीफूड नको,,sīphūḍa nakō,sipʰˈuːɖ nˈʌkoː,a loanword covering both fish and shellfish,,2,mr-agent-v1;ipa=espeak
+dietary-needs.no-nuts,नट्स नको,,naṭsa nakō,nˈʌʈs nˈʌkoː,no nuts,tree nuts; a loanword to avoid सुका मेवा's ambiguity with non-nut dried fruit,2,mr-agent-v1;ipa=espeak
+dietary-needs.no-seafood,सीफूड नको,,sīphūḍa nakō,sipʰˈuːɖ nˈʌkoː,no seafood,a loanword covering both fish and shellfish,2,mr-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,मी शाकाहारी आहे,,mī śākāhārī āhē,mˈi ʃˌaːkaːhˈaːɾi ˈaːheː,,,2,mr-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,मी व्हीगन आहे,,mī vhīgana āhē,mˈi vhˈiːɡən ˈaːheː,stricter than शाकाहारी: no dairy or eggs either,,2,mr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,मी व्हीगन आहे,,mī vhīgana āhē,mˈi vhˈiːɡən ˈaːheː,I am vegan,stricter than शाकाहारी: no dairy or eggs either,2,mr-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,मी {} खात नाही,,mī {} khāta nāhī,mˈi {} kʰˈaːt nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,मला {} ची ऍलर्जी आहे,,malā {} cī êlarjī āhē,mˈʌlaː {} cˈi ɛlˈʌɾɟiˌi ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,यात माशाचा स्टॉक आहे का?,,yāta māśācā sṭôka āhē kā?,jˈaːt maːʃˈaːcaː sʈˈɔk ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak

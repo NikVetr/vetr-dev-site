@@ -7,8 +7,8 @@ utility-templates.do-you-have,Imate li {}?,,imate li {},the thing takes the accu
 utility-templates.please-write-the-number,"Molim vas, napišite broj",,"mˈolim vˈas, napiʃite brˈoj",,,2,hr-agent-v1;ipa=espeak
 utility-templates.i-need,Trebam {},,trˈebam {},the thing takes the accusative,,2,hr-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,Je li blizu {}?,,je li blˈizu {},is {} nearby,"the slot is a nominative subject, so no case has to be adjusted",2,hr-agent-v1;ipa=espeak
-utility-templates.how-much-is,Koliko košta {}?,,koliko kˈoʃta {},the slot is a nominative subject,,2,hr-agent-v1;ipa=espeak
-utility-templates.is-this,Je li ovo {}?,,je li ˈovo {},the slot is a nominative predicate,,2,hr-agent-v1;ipa=espeak
+utility-templates.how-much-is,Koliko košta {}?,,koliko kˈoʃta {},how much does {} cost?,the slot is a nominative subject,2,hr-agent-v1;ipa=espeak
+utility-templates.is-this,Je li ovo {}?,,je li ˈovo {},is this {}?,the slot is a nominative predicate,2,hr-agent-v1;ipa=espeak
 utility-templates.please,"{}, molim",,"{}, mˈolim",,,2,hr-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Tražim {},,trˈaʒim {},the thing takes the accusative,,2,hr-agent-v1;ipa=espeak
 utility-templates.do-you-accept,Primate li {}?,,primate li {},the thing takes the accusative,,2,hr-agent-v1;ipa=espeak

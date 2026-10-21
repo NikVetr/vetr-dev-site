@@ -16,7 +16,7 @@ communication.i-do-not-speak-this-language,Ik spreek geen {target}.,,ɪk sprˈe�
 communication.i-speak-only-a-little-of-this,Ik spreek maar een beetje {target}.,,ɪk sprˈeːk maːr ən bˈeːtʲə {target},,,2,nl-agent-v1;ipa=espeak
 communication.do-you-speak-english,Spreekt u {source}?,,sprˈeːkt y {source},,,2,nl-agent-v1;ipa=espeak
 communication.please-speak-more-slowly,"Kunt u iets langzamer praten, alstublieft?",,"kʏnt y ˈits lˈɑŋzaːmər prˈaːtən, ˌɑlstʏblˈift",,,2,nl-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,Snap ik niet.,,snˈɑp ɪk nˈit,"casual register, distinct from the neutral i-do-not-understand",,2,nl-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,Snap ik niet.,,snˈɑp ɪk nˈit,I don't get [it],"casual register, distinct from the neutral i-do-not-understand",2,nl-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,Ik kan dit niet lezen.,,ɪk kɑn dɪt nˌit lˈeːzən,,,2,nl-agent-v1;ipa=espeak
 communication.please-say-it-again,Kunt u dat nog een keer zeggen?,,kʏnt y dɑt nˈɔx ən kˈɪːr zˈɛɣən,,,2,nl-agent-v1;ipa=espeak
 communication.please-write-it-down,Kunt u het opschrijven?,,kʏnt y hət ˈɔpsxrɛɪvən,,,2,nl-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ children.playground,Is er een speeltuin?,,ɪs ər ən spˈeːltœyn,,,2,nl-agent
 social-basics.politeness-particles,"Thaise beleefdheid: eindig vrijwel elke zin met khrap als u een man bent, kha als u een vrouw bent. Een vrouw die een vraag stelt, zegt in plaats daarvan kha met een stijgende toon. De zinnen hier laten het partikel weg, dus voeg het zelf toe.",,,,,2,nl-agent-v1
 board-answers.there-is-no-wait,"Geen wachttijd, u kunt nu naar binnen.",,"ɣˈeːn ʋˈɑxtɛɪt, y kʏnt nˈy naːr bˈɪnən",,,2,nl-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,Niets hiervan is wat ik wil zeggen.,,nˌits hˈirvɑn ɪs ʋɑt ɪk ʋɪl zˈɛɣən,,,2,nl-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,We zijn dicht.,,ʋə zɛɪn dˈɪxt,"colloquial 'dicht', distinct register from common-signs.closed's 'gesloten'",,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,We zijn dicht.,,ʋə zɛɪn dˈɪxt,we are closed,"colloquial 'dicht', distinct register from common-signs.closed's 'gesloten'",2,nl-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,Dat hebben we niet.,,dɑt hˌɛbən ʋə nˈit,,,2,nl-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kaart of contant?,,kˈaːrt ɔf kɔntˈɑnt,,,2,nl-agent-v1;board-answers-v1;ipa=espeak
 board-answers.please-wait,"Een moment, alstublieft.",,"ən moːmˈɛnt, ˌɑlstʏblˈift",,,2,nl-agent-v1;board-answers-v1;ipa=espeak

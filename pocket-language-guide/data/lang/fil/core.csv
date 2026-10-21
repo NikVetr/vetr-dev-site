@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-pronouns-verbs.i-me,ako,akin,ako,akin is used after 'sa' or to mean 'mine',,2,fil-agent-v1;ipa=fil-g2p
+pronouns-verbs.i-me,ako,akin,ako,I,akin is used after 'sa' or to mean 'mine',2,fil-agent-v1;ipa=fil-g2p
 pronouns-verbs.we-us,kami,tayo,kami,"kami excludes you, tayo includes you",,2,fil-agent-v1;ipa=fil-g2p
 pronouns-verbs.you,ikaw,ka,ikaw,ka is the short form used after a verb,,2,fil-agent-v1;ipa=fil-g2p
 pronouns-verbs.you-polite,kayo,,kajo,"polite/plural 'you', for one respected elder or stranger, used with po",,2,fil-agent-v1;ipa=fil-g2p

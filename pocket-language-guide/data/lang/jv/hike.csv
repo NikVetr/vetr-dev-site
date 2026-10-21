@@ -9,7 +9,7 @@ trail-words.park-shuttle,Bis taman,Shuttle taman,bɪs ˈtaman,,,2,jv-agent-v1;ip
 trail-words.steps,Undhak-undhakan,Tangga,ʊnɖaʔʊnˈɖakan,,,2,jv-agent-v1;ipa=jv-g2p
 trail-words.up-uphill,Minggah,Tanjakan,ˈmɪŋɡah,,,2,jv-agent-v1;ipa=jv-g2p
 trail-words.down-downhill,Mandhap,Turunan,ˈmanɖap,,,2,jv-agent-v1;ipa=jv-g2p
-trail-words.one-way,Sepisan mlampah,,səˈpisan ˈmlampah,satu arah means a one-way street,,2,jv-agent-v1;ipa=jv-g2p
+trail-words.one-way,Sepisan mlampah,,səˈpisan ˈmlampah,one walk,satu arah means a one-way street,2,jv-agent-v1;ipa=jv-g2p
 trail-words.round-trip,Wangsul-késah,PP,waŋsʊlˈkesah,,,2,jv-agent-v1;ipa=jv-g2p
 weather.forecast,Ramalan cuacanipun kadospundi?,,raˈmalan tʃuatʃaˈnipʊn kadɔsˈpʊndi,,,2,jv-agent-v1;ipa=jv-g2p
 weather.will-it-rain,Dinten menika badhé jawah?,,ˈdɪntən məˈnikɔ ˈbaɖe ˈdʒawah,jawah is the krama word for rain,,2,jv-agent-v1;ipa=jv-g2p
@@ -64,6 +64,6 @@ trail-landmarks.end,Pungkasan,Rampung,pʊŋˈkasan,,,2,jv-agent-v1;ipa=jv-g2p
 trail-landmarks.elevation,Inggilipun,,ɪŋɡiˈlipʊn,,,2,jv-agent-v1;ipa=jv-g2p
 trail-landmarks.sunset,Srengéngé surup,,srəˈŋeŋe ˈsurʊp,,,2,jv-agent-v1;ipa=jv-g2p
 trail-landmarks.water-point,Titik toya,Sumber toya,ˈtitɪʔ ˈtɔjɔ,,,2,jv-agent-v1;ipa=jv-g2p
-outdoors.can-we-camp-here,Kula sedaya saged kemah wonten mriki?,,ˈkulɔ səˈdɔjɔ ˈsaɡəd kəˈmah ˈwɔntən ˈmriki,"kula sedaya (we-all), matching introductions.we-are-traveling-together; kemah is a loanword, no indigenous Javanese camping term exists",,2,jv-agent-v1;in-pack-neighbour=introductions.we-are-traveling-together;ipa=jv-g2p
+outdoors.can-we-camp-here,Kula sedaya saged kemah wonten mriki?,,ˈkulɔ səˈdɔjɔ ˈsaɡəd kəˈmah ˈwɔntən ˈmriki,can we all camp here?,"kula sedaya (we-all), matching introductions.we-are-traveling-together; kemah is a loanword, no indigenous Javanese camping term exists",2,jv-agent-v1;in-pack-neighbour=introductions.we-are-traveling-together;ipa=jv-g2p
 outdoors.is-it-safe-to-swim-here,Ngelangi wonten mriki menika aman?,,ŋəˈlaŋi ˈwɔntən ˈmriki məˈnikɔ ˈaman,reuses weather.is-it-safe-today's aman construction; ngelangi = to swim,,2,jv-agent-v1;in-pack-neighbour=weather.is-it-safe-today;ipa=jv-g2p
 outdoors.are-there-dangerous-animals-here,Wonten kewan ingkang bebaya wonten mriki?,,ˈwɔntən kəˈwan ˈɪŋkaŋ bəˈbɔjɔ ˈwɔntən ˈmriki,bebaya reused from trail-warnings.danger,,2,jv-agent-v1;in-pack-neighbour=trail-warnings.danger;ipa=jv-g2p

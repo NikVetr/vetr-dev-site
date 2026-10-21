@@ -11,7 +11,7 @@ social-basics.sorry,Yi haƙuri,,ji hakʼuri,same expression as excuse-me/sorry,H
 social-basics.no-problem,Babu matsala,,babu matsʼala,,,2,ha-agent-v1;ipa=ha-g2p
 social-basics.i-do-not-know,Ban sani ba,,ban sani ba,,,2,ha-agent-v1;ipa=ha-g2p
 social-basics.good-night,Barci mai daɗi,,bartʃi mai daɗi,sleep that has sweetness,,2,ha-agent-v1;ipa=ha-g2p
-social-basics.okay-fine-i-am-okay,Lafiya,,lafija,also the word for health/peace,,2,ha-agent-v1;ipa=ha-g2p
+social-basics.okay-fine-i-am-okay,Lafiya,,lafija,health,also the word for health/peace,2,ha-agent-v1;ipa=ha-g2p
 communication.i-do-not-speak-this-language,Ba na jin harshen {target},,ba na dʒin harʃen {target},not I hear/understand language-of {target},,2,ha-agent-v1;ipa=ha-g2p
 communication.i-speak-only-a-little-of-this,Ina jin kaɗan na harshen {target},,ina dʒin kaɗan na harʃen {target},,,2,ha-agent-v1;ipa=ha-g2p
 communication.do-you-speak-english,Ana jin harshen {source} a nan?,,ana dʒin harʃen {source} a nan,is {source} understood here?,the impersonal continuous ana in place of kana (kina to a woman); ji is to understand a language,2,"ha-agent-v1;fix=Bargery ana I (the impersonal pronoun a with the suffix na of the continuous tense);fix=Bargery ji I.1(b) (understand: ya ji Hausa, he understands Hausa well; yina jin Hausa, he knows a certain amount of Hausa);in-pack-frame=laundry.coin-operated (ana amfani da);rule=no polite singular: WALS 45A Hausa = no politeness distinction (Helmbrecht after Smirnova 1982) and Bargery ku = 2nd pl. only, so ku is not used to one person;kai-ke-avoided;row-corrections-v8;ipa=ha-g2p"
@@ -24,7 +24,7 @@ communication.please-wait-a-moment,Don Allah ka jira ɗan lokaci,,don allah ka d
 communication.can-you-help-me,Za a iya taimaka mini?,,za a ija taimaka mini,will one be able to help me?,"the impersonal a after za in place of ka (ki to a woman), as in directions.can-you-show-me-the-way",2,"ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=directions.can-you-show-me-the-way;rule=no polite singular: WALS 45A Hausa = no politeness distinction (Helmbrecht after Smirnova 1982) and Bargery ku = 2nd pl. only, so ku is not used to one person;kai-ke-avoided;row-corrections-v8;ipa=ha-g2p"
 communication.please-show-me-the-text,Don Allah ka nuna mini rubutun a {target},,don allah ka nuna mini rubutun a {target},,,2,ha-agent-v1;ipa=ha-g2p
 communication.i-cannot-make-out-what-you-are-saying,Ban gane abin da kake faɗa ba,,ban ɡane abin da kake faɗa ba,I-didn't get what you.m are saying,,2,ha-agent-v1;ipa=ha-g2p
-communication.i-do-not-understand,Ba na fahimta,,ba na fahimta,neutral register; distinct verb from the casual row above,,2,ha-agent-v1;ipa=ha-g2p
+communication.i-do-not-understand,Ba na fahimta,,ba na fahimta,I do not understand,neutral register; distinct verb from the casual row above,2,ha-agent-v1;ipa=ha-g2p
 communication.i-cannot-read-it,Ba na iya karanta shi ba,,ba na ija karanta ʃi ba,,,2,ha-agent-v1;ipa=ha-g2p
 quick-responses.please-go-ahead,Bisimilla,,bisimilla,"the formula of invitation: go ahead, come in, join in",,2,ha-agent-v1;fix=Bargery (maguzawa.dyndns.ws) bismillah (1. Formula of invitation to one to make a start at anything -- or to join in a meal. 2. (a) Formula of invitation to a visitor to approach = come in -- come along; but more commonly bisimillah) and ha.wikipedia Alwala rev 366649 (Yin bisimilla) for the spelling;was=Ci gaba (Bargery gaba II.3(c) Progress: ba ka yi (= ci) gaba ba -- you have made no progress: carry on);rule=the offering please (the concept note) -- after you -- here you are -- go ahead;row-corrections-v13;ipa=ha-g2p
 quick-responses.yes-right,Ee,,ee,,,2,ha-agent-v1;ipa=ha-g2p
@@ -68,11 +68,11 @@ sim-data.can-i-top-up-this-sim,Zan iya caji wannan SIM?,,zan ija tʃadʒi wannan
 sim-data.top-up,caji,,tʃadʒi,top-up/recharge,,2,ha-agent-v1;ipa=ha-g2p
 sim-data.is-there-coverage-in,Akwai sigina a {}?,,akwai siɡina a {},,,2,ha-agent-v1;ipa=ha-g2p
 sim-data.signal,sigina,,siɡina,,,2,ha-agent-v1;ipa=ha-g2p
-sim-data.esim,eSIM,,iːsim,"kept as the Latin abbreviation, as in most languages this pack has seen",,2,ha-agent-v1;ipa=ha-g2p+loan
+sim-data.esim,eSIM,,iːsim,eSIM,"kept as the Latin abbreviation, as in most languages this pack has seen",2,ha-agent-v1;ipa=ha-g2p+loan
 sim-data.prepaid,biya kafin amfani,,bija kafin amfani,pay before use,,2,ha-agent-v1;ipa=ha-g2p
-sim-data.roaming,roaming,yawo,roaminɡ,kept as the loanword used in local telecom marketing; yawo (wandering) is the descriptive alt,,2,ha-agent-v1;ipa=ha-g2p
+sim-data.roaming,roaming,yawo,roaminɡ,roaming,kept as the loanword used in local telecom marketing; yawo (wandering) is the descriptive alt,2,ha-agent-v1;ipa=ha-g2p
 etiquette.is-this-allowed,Ana yarda da wannan?,,ana jarda da wannan,,,2,ha-agent-v1;ipa=ha-g2p
-etiquette.is-tipping-expected,Ana tsammanin a bayar da tip?,,ana tsʼammanin a bajar da tip,tip is a common loanword here,,2,ha-agent-v1;ipa=ha-g2p
+etiquette.is-tipping-expected,Ana tsammanin a bayar da tip?,,ana tsʼammanin a bajar da tip,is it expected to give a tip?,tip is a common loanword here,2,ha-agent-v1;ipa=ha-g2p
 etiquette.is-service-included,An haɗa da kuɗin sabis?,,an haɗa da kuɗin sabis,,,2,ha-agent-v1;ipa=ha-g2p
 etiquette.may-i-enter,Zan iya shiga?,,zan ija ʃiɡa,,,2,ha-agent-v1;ipa=ha-g2p
 etiquette.remove-shoes,Ya kamata in cire takalmina?,,ja kamata in tʃire takalmina,,,2,ha-agent-v1;ipa=ha-g2p

@@ -20,7 +20,7 @@ accessibility.hard-of-hearing,مجھے کم سنائی دیتا ہے,,mujhe kam 
 accessibility.speak-louder,ذرا زور سے بولیے,,zarā zor se boliye,zˈʌɾaː zˈoːɾ seː bˈoːljeː,,,2,ur-agent-v1;ipa=espeak
 accessibility.visually-impaired,مجھے بہت کم دکھائی دیتا ہے,میری نظر بہت کمزور ہے,mujhe bahut kam dikhā’ī detā hai,mˌʊɟʰeː bˈahʊt kˈʌm dɪkʰˈaːi dˈeːtaː hɛ,,,2,ur-agent-v1;ipa=espeak
 accessibility.take-your-arm,کیا میں آپ کا بازو پکڑ لوں؟,,kyā maiñ āp kā bāzū pakaṛ lūñ?,kjˈaː mˈẽ ˌaːp kaː bˈaːzuː pˈʌkəɽ lˈõː,,,2,ur-agent-v1;ipa=espeak
-accessibility.guide-dog,یہ میرا گائیڈ ڈاگ ہے,یہ میرا رہنما کتا ہے,yih merā gā’iḍ ḍāg hai,jeːh mˈeːɾaː ɡaːˈiːɖ ɖˈaːɡ hɛ,guide dogs are very rare in Pakistan; the loanword may need explaining,,2,ur-agent-v1;ipa=espeak
+accessibility.guide-dog,یہ میرا گائیڈ ڈاگ ہے,یہ میرا رہنما کتا ہے,yih merā gā’iḍ ḍāg hai,jeːh mˈeːɾaː ɡaːˈiːɖ ɖˈaːɡ hɛ,this is my guide dog,guide dogs are very rare in Pakistan; the loanword may need explaining,2,ur-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,کیا اندر جانے کا راستہ یہی ہے؟,کیا یہی صحیح گیٹ ہے؟,kyā andar jāne kā rāsta yahī hai?,kjˈaː ˈandaɾ ɟˈaːneː kaː ɾˈaːstˌa jˈɛhi hɛ,,,2,ur-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,کیا یہاں وائی فائی ہے؟,,kyā yahāñ wā’ī fā’ī hai?,kjˈaː jˈʌhãː ʋˈaːi fˈaːi hɛ,,,2,ur-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,وائی فائی کا پاس ورڈ کیا ہے؟,,wā’ī fā’ī kā pās warḍ kyā hai?,ʋˈaːi fˈaːi kaː pˈaːs ʋˈʌɾɖ kjˈaː hɛ,,,2,ur-agent-v1;ipa=espeak
@@ -39,8 +39,8 @@ toilets.there-is-no-toilet-paper,ٹوائلٹ پیپر نہیں ہے,,ṭo’ila
 toilets.toilet-paper,ٹوائلٹ پیپر,,ṭo’ilaṭ pepar,ʈaʋˈaɪləʈ pˈeːpəɾ,,,2,ur-agent-v1;ipa=espeak
 toilets.it-is-out-of-order,یہ خراب ہے,,yih kharāb hai,jeːh xəɾˈaːb hɛ,,,2,ur-agent-v1;ipa=espeak
 toilets.out-of-order,خراب ہے,,kharāb hai,xəɾˈaːb hɛ,,,2,ur-agent-v1;ipa=espeak
-toilets.mens-toilet,مردانہ بیت الخلا,حضرات,mardāna bait ul-khalā,məɾdˈaːnˌa bˈeːt ʊlxˈʌlaː,"hazrāt, 'gentlemen', is what most Pakistani doors print",,2,ur-agent-v1;ipa=espeak
-toilets.womens-toilet,زنانہ بیت الخلا,خواتین,zanāna bait ul-khalā,zənˈaːnˌa bˈeːt ʊlxˈʌlaː,"khawātīn, 'ladies', is what most Pakistani doors print",,2,ur-agent-v1;ipa=espeak
+toilets.mens-toilet,مردانہ بیت الخلا,حضرات,mardāna bait ul-khalā,məɾdˈaːnˌa bˈeːt ʊlxˈʌlaː,men's toilet,"hazrāt, 'gentlemen', is what most Pakistani doors print",2,ur-agent-v1;ipa=espeak
+toilets.womens-toilet,زنانہ بیت الخلا,خواتین,zanāna bait ul-khalā,zənˈaːnˌa bˈeːt ʊlxˈʌlaː,women's toilet,"khawātīn, 'ladies', is what most Pakistani doors print",2,ur-agent-v1;ipa=espeak
 toilets.drinking-water,پینے کا پانی,,pīne kā pānī,pˈiːneː kaː pˈaːni,,,2,ur-agent-v1;ipa=espeak
 toilets.not-for-drinking,یہ پانی پینے کے قابل نہیں,پینے کا پانی نہیں,yih pānī pīne ke qābil nahīñ,jeːh pˈaːni pˈiːneː keː qˈaːbɪl nahˈĩː,not fit to drink; a reviewer should confirm the wording actually printed on Pakistani signs,,2,ur-agent-v1;ipa=espeak
 toilets.accessible-toilet,معذوروں کا بیت الخلا,معذور افراد کے لیے واش روم,māzūroñ kā bait ul-khalā,mˈaːzuːɾˌõː kaː bˈeːt ʊlxˈʌlaː,,,2,ur-agent-v1;ipa=espeak

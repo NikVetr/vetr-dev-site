@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,prove
 profanity.oh-my-god,ਹੇ ਰੱਬਾ!,,hē rabbā!,he ɾʌbba,O God!,,1,pa-agent-v1;ipa=espeak
 profanity.damn,ਲਾਹਨਤ!,,lāhanat!,lahənət,a curse!,damnation rather than anatomy,1,pa-agent-v1;ipa=espeak
 profanity.expletive,ਕੰਜਰਖ਼ਾਨਾ!,,kaṁjarak͟hānā!,kənɟəɾəxana,a shambles,the everyday coarse exclamation at a situation,1,pa-agent-v1;ipa=espeak
-profanity.intensifier,ਸਾਲਾ,,sālā,sala,"attributive intensifier; literally *wife's brother*, and abusive of a person if aimed at one",,1,pa-agent-v1;ipa=espeak
+profanity.intensifier,ਸਾਲਾ,,sālā,sala,wife's brother,attributive intensifier; and abusive of a person if aimed at one,1,pa-agent-v1;ipa=espeak
 profanity.frustration,ਇਹ ਤਾਂ ਕਬਾੜ ਏ,,ih tāṁ kabāṛ ē,ɪ˥ tã kəbaɽ e,this is junk,,1,pa-agent-v1;ipa=espeak
 profanity.thats-rude,ਇਹ ਗੱਲ ਚੰਗੀ ਨਹੀਂ,,ih gall caṁgī nahīṁ,ɪ˥ ɡʌl cʌnɡi nʌhĩ,this speech is not good,,2,pa-agent-v1;ipa=espeak
 profanity.excuse-my-language,"ਮਾਫ਼ ਕਰਨਾ, ਮੂੰਹੋਂ ਨਿਕਲ ਗਿਆ",,"māf karanā, mūṁhōṁ nikal giā","maf kʌɾəna, mũhõ nɪkəl ɡɪa","forgive me, it slipped out of my mouth",,2,pa-agent-v1;ipa=espeak

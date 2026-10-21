@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,prove
 trail-words.trail,পায়ে চলার পথ,,pāẏe calāra patha,pˈae tʃˈɔlaɾ pˈɔtʰ,footpath,Bengali has no word for a marked hiking trail,2,bn-agent-v1;ipa=espeak
 trail-words.trailhead,পথের শুরু,,pathera śuru,pˈɔtʰeɾ ʃˈuɾu,start of the path,,2,bn-agent-v1;ipa=espeak
 trail-words.summit,চূড়া,,cūṛā,tʃˈuɽa,,,2,bn-agent-v1;ipa=espeak
-trail-words.viewpoint,ভিউ পয়েন্ট,দেখার জায়গা,bhiu paẏenṭa,bʰˈiu pˈɔenʈˌɔ,the loan is what the signs in Darjeeling and Bandarban say,,2,bn-agent-v1;ipa=espeak
+trail-words.viewpoint,ভিউ পয়েন্ট,দেখার জায়গা,bhiu paẏenṭa,bʰˈiu pˈɔenʈˌɔ,viewpoint,the loan is what the signs in Darjeeling and Bandarban say,2,bn-agent-v1;ipa=espeak
 trail-words.cableway,রোপওয়ে,কেবল কার,ropaoẏe,ɾˈopɔˌoe,,,2,bn-agent-v1;ipa=espeak
 trail-words.shuttle-bus,শাটল বাস,,śāṭala bāsa,ʃˈaʈɔl bˈaʃ,,,2,bn-agent-v1;ipa=espeak
 trail-words.park-shuttle,পার্কের শাটল,,pārkera śāṭala,pˈaɾkeɾ ʃˈaʈɔl,,,2,bn-agent-v1;ipa=espeak
@@ -16,7 +16,7 @@ weather.will-it-rain,আজ বৃষ্টি হবে কি?,,āja br̥ṣ�
 weather.is-it-safe-today,আজ নিরাপদ কি?,,āja nirāpada ki?,ˈaɟ nˈiɾapˌɔd ki,,,2,bn-agent-v1;ipa=espeak
 weather.how-cold-at-night,রাতে কত ঠান্ডা পড়ে?,,rāte kata ṭhānḍā paṛe?,ɾˈate kˈɔto ʈʰˈanɖa pˈɔɽe,,,2,bn-agent-v1;ipa=espeak
 weather.rain,বৃষ্টি,,br̥ṣṭi,bɾˈiʃʈi,,,2,bn-agent-v1;ipa=espeak
-weather.snow,তুষার,বরফ,tuṣāra,tˈuʃaɾ,তুষার is snow proper; বরফ is both ice and snow in speech,,2,bn-agent-v1;ipa=espeak
+weather.snow,তুষার,বরফ,tuṣāra,tˈuʃaɾ,snow,তুষার is snow proper; বরফ is both ice and snow in speech,2,bn-agent-v1;ipa=espeak
 weather.wind,বাতাস,,bātāsa,bˈataʃ,,,2,bn-agent-v1;ipa=espeak
 weather.storm,ঝড়,,jhaṛa,ɟʰˈɔɽ,,,2,bn-agent-v1;ipa=espeak
 weather.ice,বরফ,,barapha,bˈɔɾɔf,,,2,bn-agent-v1;ipa=espeak
@@ -42,7 +42,7 @@ trail-conditions.is-the-path-slippery,পথটা কি পিছল?,,patha�
 trail-transport.how-long-is-the-queue,লাইন কত লম্বা?,,lāina kata lambā?,lˈain kˈɔto lˈɔmba,,,2,bn-agent-v1;ipa=espeak
 trail-transport.what-time-is-the-last-shuttle,শেষ শাটল কয়টায়?,,śeṣa śāṭala kaẏaṭāẏa?,ʃˈeʃ ʃˈaʈɔl kˈɔjɔʈˌaj,,,2,bn-agent-v1;ipa=espeak
 trail-transport.when-does-the-cableway-stop,রোপওয়ে কয়টায় বন্ধ হয়?,,ropaoẏe kaẏaṭāẏa bandha haẏa?,ɾˈopɔˌoe kˈɔjɔʈˌaj bˈɔndʰɔ hˌɔj,,,2,bn-agent-v1;ipa=espeak
-trail-transport.where-can-we-buy-water,পানি কোথায় কিনতে পারব?,জল কোথায় কিনতে পারব?,pāni kothāẏa kinate pāraba?,pˈani kˈotʰaj kˈinɔtˌe pˈaɾɔb,পানি is Bangladeshi and জল West Bengali,,2,bn-agent-v1;ipa=espeak
+trail-transport.where-can-we-buy-water,পানি কোথায় কিনতে পারব?,জল কোথায় কিনতে পারব?,pāni kothāẏa kinate pāraba?,pˈani kˈotʰaj kˈinɔtˌe pˈaɾɔb,where can we buy water?,পানি is Bangladeshi and জল West Bengali,2,bn-agent-v1;ipa=espeak
 trail-transport.where-can-we-refill-water,পানি কোথায় ভরে নিতে পারব?,,pāni kothāẏa bhare nite pāraba?,pˈani kˈotʰaj bʰˈɔɾe nˈite pˈaɾɔb,,,2,bn-agent-v1;ipa=espeak
 trail-transport.is-there-cell-signal-here,এখানে মোবাইলে নেটওয়ার্ক আছে কি?,,ekhāne mobāile neṭaoẏārka āche ki?,ˈekʰanˌe mˈobaˌile nˈeʈɔˌoaɾkˌɔ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
 trail-transport.do-you-have-a-map,একটা ম্যাপ আছে কি?,,ekaṭā myāpa āche ki?,ˈækʈa mˈæp ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
@@ -63,7 +63,7 @@ trail-landmarks.start,শুরু,,śuru,ʃˈuɾu,,,2,bn-agent-v1;ipa=espeak
 trail-landmarks.end,শেষ,,śeṣa,ʃˈeʃ,,,2,bn-agent-v1;ipa=espeak
 trail-landmarks.elevation,উচ্চতা,,uccatā,ˈutʃtʃɔtˌa,,,2,bn-agent-v1;ipa=espeak
 trail-landmarks.sunset,সূর্যাস্ত,,sūryāsta,ʃˈuɾæstˌo,,,2,bn-agent-v1;ipa=espeak
-trail-landmarks.water-point,পানির জায়গা,জলের জায়গা,pānira jāẏagā,pˈaniɾ ɟˈajɔɡˌa,পানি is Bangladeshi and জল West Bengali,,2,bn-agent-v1;ipa=espeak
+trail-landmarks.water-point,পানির জায়গা,জলের জায়গা,pānira jāẏagā,pˈaniɾ ɟˈajɔɡˌa,water place,পানি is Bangladeshi and জল West Bengali,2,bn-agent-v1;ipa=espeak
 outdoors.can-we-camp-here,আমরা কি এখানে ক্যাম্প করতে পারি?,,āmarā ki ekhāne kyāmpa karate pāri?,ˌamɔɾˌa ki ˈekʰanˌe kˈæmpɔ kˈɔɾɔtˌe pˈaɾi,,,2,bn-agent-v1;ipa=espeak
 outdoors.is-it-safe-to-swim-here,এখানে সাঁতার কাটা কি নিরাপদ?,,ekhāne sām̐tāra kāṭā ki nirāpada?,ˈekʰanˌe ʃˈãtaɾ kˈaʈa ki nˈiɾapˌɔd,,,2,bn-agent-v1;ipa=espeak
 outdoors.are-there-dangerous-animals-here,এখানে কি বিপজ্জনক প্রাণী আছে?,,ekhāne ki bipajjanaka prāṇī āche?,ˈekʰanˌe ki bˈipɔɟɟˌɔnɔk pɾˈani ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak

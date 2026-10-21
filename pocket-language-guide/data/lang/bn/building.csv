@@ -8,7 +8,7 @@ accessibility.wheelchair-access,হুইলচেয়ার নিয়ে �
 accessibility.elevator,লিফট আছে কি?,,liphaṭa āche ki?,lˈifɔʈ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
 accessibility.ramp,ঢালু পথ আছে কি?,,ḍhālu patha āche ki?,ɖʰˈalu pˈɔtʰ ˈatʃʰe ki,is there a sloping path?,,2,bn-agent-v1;ipa=espeak
 accessibility.how-many-steps,কত ধাপ সিঁড়ি আছে?,,kata dhāpa sim̐ṛi āche?,kˈɔto dʰˈap ʃˈĩɽi ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak
-accessibility.cannot-climb-stairs,আমি সিঁড়ি ভাঙতে পারি না,,āmi sim̐ṛi bhāṅate pāri nā,ˌami ʃˈĩɽi bʰˈaŋɔtˌe pˈaɾi nˈa,literally 'I cannot break stairs',the Bengali idiom for climbing them,2,bn-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,আমি সিঁড়ি ভাঙতে পারি না,,āmi sim̐ṛi bhāṅate pāri nā,ˌami ʃˈĩɽi bʰˈaŋɔtˌe pˈaɾi nˈa,I cannot break stairs,the Bengali idiom for climbing them,2,bn-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,আমাকে বসতে হবে,,āmāke basate habe,ˈamakˌe bˈɔʃɔtˌe hˈɔbe,,,2,bn-agent-v1;ipa=espeak
 accessibility.accessible-restroom,প্রতিবন্ধীদের জন্য টয়লেট আছে কি?,,pratibandhīdera janya ṭaẏaleṭa āche ki?,pɾˈotibˌɔndʰidˌeɾ ɟˈɔnnɔ ʈˈɔjɔlˌeʈ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
 accessibility.station-assistance,স্টেশনে সাহায্য পাওয়া যায় কি?,,sṭeśane sāhāyya pāoẏā yāẏa ki?,ʃʈˈeʃɔnˌe ʃˈahadʒːˌɔ pˈaoˌa dʒˈaj ki,,,2,bn-agent-v1;ipa=espeak
@@ -29,7 +29,7 @@ toilets.where-toilet,টয়লেট কোথায়?,,ṭaẏaleṭa koth
 toilets.where-public-toilet,পাবলিক টয়লেট কোথায়?,,pābalika ṭaẏaleṭa kothāẏa?,pˈabɔlˌik ʈˈɔjɔlˌeʈ kˈotʰaj,,,2,bn-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,টয়লেট ব্যবহার করতে পারি কি?,,ṭaẏaleṭa byabahāra karate pāri ki?,ʈˈɔjɔlˌeʈ bˈæbɔhˌaɾ kˈɔɾɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,এটা কি শুধু ক্রেতাদের জন্য?,,eṭā ki śudhu kretādera janya?,ˌeʈa ki ʃˈudʰu kɾˈetadˌeɾ ɟˈɔnnɔ,,,2,bn-agent-v1;ipa=espeak
-toilets.toilet-wc,টয়লেট,শৌচাগার,ṭaẏaleṭa,ʈˈɔjɔlˌeʈ,"শৌচাগার is the formal word, and what a sign says",,2,bn-agent-v1;ipa=espeak
+toilets.toilet-wc,টয়লেট,শৌচাগার,ṭaẏaleṭa,ʈˈɔjɔlˌeʈ,toilet,"শৌচাগার is the formal word, and what a sign says",2,bn-agent-v1;ipa=espeak
 toilets.is-it-free,ফ্রি কি?,,phri ki?,fɾˈi ki,,,2,bn-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,কয়েন বা টোকেন লাগবে কি?,,kaẏena bā ṭokena lāgabe ki?,kˈɔen bˈa ʈˈoken lˈaɡɔbˌe ki,,,2,bn-agent-v1;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,কলের পানি খাওয়া যাবে কি?,কলের জল খাওয়া যাবে কি?,kalera pāni khāoẏā yābe ki?,kˈɔleɾ pˈani kʰˈaoˌa dʒˈabe ki,is the tap water drinkable? In Dhaka and in Kolkata the answer is normally no,,2,bn-agent-v1;ipa=espeak
@@ -38,10 +38,10 @@ toilets.may-i-have-the-toilet-key,টয়লেটের চাবিটা �
 toilets.there-is-no-toilet-paper,টয়লেট পেপার নেই,,ṭaẏaleṭa pepāra nei,ʈˈɔjɔlˌeʈ pˈepaɾ nˈei,,,2,bn-agent-v1;ipa=espeak
 toilets.toilet-paper,টয়লেট পেপার,,ṭaẏaleṭa pepāra,ʈˈɔjɔlˌeʈ pˈepaɾ,,,2,bn-agent-v1;ipa=espeak
 toilets.it-is-out-of-order,এটা কাজ করছে না,,eṭā kāja karache nā,ˌeʈa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,,2,bn-agent-v1;ipa=espeak
-toilets.out-of-order,বিকল,নষ্ট,bikala,bˈikɔl,বিকল is what a sign says,,2,bn-agent-v1;ipa=espeak
+toilets.out-of-order,বিকল,নষ্ট,bikala,bˈikɔl,out of order,বিকল is what a sign says,2,bn-agent-v1;ipa=espeak
 toilets.mens-toilet,পুরুষ,,puruṣa,pˈuɾuʃ,men,what the sign says,2,bn-agent-v1;ipa=espeak
 toilets.womens-toilet,মহিলা,,mahilā,mˈohilˌa,women,what the sign says,2,bn-agent-v1;ipa=espeak
-toilets.drinking-water,খাওয়ার পানি,পানীয় জল,khāoẏāra pāni,kʰˈaoˌaɾ pˈani,পানীয় জল is what a sign says,,2,bn-agent-v1;ipa=espeak
+toilets.drinking-water,খাওয়ার পানি,পানীয় জল,khāoẏāra pāni,kʰˈaoˌaɾ pˈani,drinking water,পানীয় জল is what a sign says,2,bn-agent-v1;ipa=espeak
 toilets.not-for-drinking,খাওয়ার উপযুক্ত নয়,,khāoẏāra upayukta naẏa,kʰˈaoˌaɾ ˈupɔdʒˌukto nˈɔj,not fit for drinking,,2,bn-agent-v1;ipa=espeak
 toilets.accessible-toilet,প্রতিবন্ধীদের টয়লেট,,pratibandhīdera ṭaẏaleṭa,pɾˈotibˌɔndʰidˌeɾ ʈˈɔjɔlˌeʈ,,,2,bn-agent-v1;ipa=espeak
 toilets.where-can-i-wash-my-hands,হাত কোথায় ধোব?,,hāta kothāẏa dhoba?,hˈato kˈotʰaj dʰˈob,,,2,bn-agent-v1;ipa=espeak
@@ -49,7 +49,7 @@ toilets.can-i-flush-the-paper,কাগজ ফ্লাশ করা যাব�
 toilets.is-there-a-toilet-on-board,গাড়িতে টয়লেট আছে কি?,,gāṛite ṭaẏaleṭa āche ki?,ɡˈaɽitˌe ʈˈɔjɔlˌeʈ ˈatʃʰe ki,is there a toilet on the vehicle?,,2,bn-agent-v1;ipa=espeak
 toilets.the-toilet-will-not-flush,ফ্লাশ কাজ করছে না,,phlāśa kāja karache nā,flˈaʃ kˈaɟ kˈɔɾɔtʃʰˌe nˈa,the flush is not working,,2,bn-agent-v1;ipa=espeak
 toilets.baby-change,শিশুর ন্যাপি বদলানোর জায়গা,,śiśura nyāpi badalānora jāẏagā,ʃˈiʃuɾ nˈæpi bˈɔdɔlˌanoɾ ɟˈajɔɡˌa,place for changing a baby's nappy,,2,bn-agent-v1;ipa=espeak
-toilets.squat-toilet,প্যান টয়লেট,ভারতীয় টয়লেট,pyāna ṭaẏaleṭa,pˈæn ʈˈɔjɔlˌeʈ,"the pan toilet, which is what most public ones are",,2,bn-agent-v1;ipa=espeak
+toilets.squat-toilet,প্যান টয়লেট,ভারতীয় টয়লেট,pyāna ṭaẏaleṭa,pˈæn ʈˈɔjɔlˌeʈ,pan toilet,which is what most public ones are,2,bn-agent-v1;ipa=espeak
 building-words.elevator,লিফট,,liphaṭa,lˈifɔʈ,,,2,bn-agent-v1;ipa=espeak
 building-words.stairs,সিঁড়ি,,sim̐ṛi,ʃˈĩɽi,,,2,bn-agent-v1;ipa=espeak
 building-words.entrance,প্রবেশপথ,ঢোকার পথ,prabeśapatha,pɾˈobeʃˌɔpɔtʰ,,,2,bn-agent-v1;ipa=espeak

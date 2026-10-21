@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 introductions.my-name-is,Jmenuji se {},,jmˈenuji se {},,,2,cs-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Těší mě,,cˈeʃiː mɲˈe,literally 'it pleases me',,2,cs-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Těší mě,,cˈeʃiː mɲˈe,it pleases me,,2,cs-agent-v1;ipa=espeak
 introductions.what-is-your-name,Jak se jmenujete?,,jˈak se jmˈenujˌete,,,2,cs-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Cestujeme spolu,,tsˈestujˌeme spˈolu,,,2,cs-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Toto je můj kamarád,,tˈoto je mˈuːj kˈamaraːt,kamarád/kamarádka has no epicene form in Czech; masculine generic,"the friend's gender rather than the speaker's. kamarád rather than přítel, which in everyday spoken Czech reads as 'boyfriend' rather than a platonic friend",2,cs-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Czech has no sex-neutral word for a friend (kamarád or kamarádka) so the masculine stays and the doubled form goes);fix=IJP UJČ kamarád m. živ. (příbuzná slova: kamarádka);rule=no-neutral-noun-masculine-generic;in-pack-neighbour=lost-rescue.my-friend-is-hurt;row-corrections-v3;ipa=espeak

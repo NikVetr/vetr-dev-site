@@ -104,7 +104,7 @@ board-answers.none-of-these,"Ezek között nincs, amit mondani szeretnék",,"ˈ�
 board-answers.it-is-closed,Zárva vagyunk,,zˈaːrvɑ vˈɑɟunk,"lit. 'we are closed'; the idiom a Hungarian shop uses about itself, distinct from the bare sign word zárva",,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,Az nincs,,ˈɑz nˈintʃ,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kártyával vagy készpénzzel?,,kˈaːrcaːvɑl vˈɑɟ kˈeːspeːnzzɛl,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
-board-answers.please-wait,"Egy pillanatot, kérem",,"ˈɛɟ pˈillɑnɑtot, kˈeːrɛm","nominal, no imperative verb; distinct from communication.please-wait-a-moment's várjon",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Egy pillanatot, kérem",,"ˈɛɟ pˈillɑnɑtot, kˈeːrɛm","one moment, please","nominal, no imperative verb; distinct from communication.please-wait-a-moment's várjon",2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.it-is-over-there,Ott van,,ˈott vˈɑn,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-show-you,Megmutatom az utat,,mˈɛɡmutɑtom ˈɑz ˈutɑt,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.how-many,Hányat szeretne?,,hˈaːɲɑt sˈɛrɛtnɛ,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
@@ -117,7 +117,7 @@ board-answers.help-is-coming,Jön a segítség,,jˈøn ˈɑ ʃˈɛɡiːtʃtʃeː
 board-answers.where-does-it-hurt,Hol fáj?,,hˈol fˈaːj,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.can-you-walk,Tud járni?,,tˈud jˈaːrni,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.stay-here,Legjobb itt maradni,,lˈɛɡjobb ˈitt mˈɑrɑdni,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
-board-answers.what-is-your-name,Mi a neve?,,mˈi ˈɑ nˈɛvɛ,"an alternative formal construction to introductions.what-is-your-name's Hogy hívják?, kept distinct rather than duplicated",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Mi a neve?,,mˈi ˈɑ nˈɛvɛ,what is your name?,"an alternative formal construction to introductions.what-is-your-name's Hogy hívják?, kept distinct rather than duplicated",2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.the-hospital-is-close,A kórház közel van,,ˈɑ kˈoːrhaːz kˈøzɛl vˈɑn,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Nincs telefonom,,nˈintʃ tˈɛlɛfonom,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Keresek valakit, aki tud segíteni",,"kˈɛrɛʃɛk vˈɑlɑkit, ˈɑki tˈud ʃˈɛɡiːtɛni",,,2,hu-agent-v1;board-answers-v1;ipa=espeak

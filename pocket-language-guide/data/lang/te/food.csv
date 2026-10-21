@@ -7,13 +7,13 @@ dietary-needs.no-peanuts,పల్లీలు వద్దు,వేరుశ�
 dietary-needs.no-nuts,"జీడిపప్పు, బాదం వంటివి వద్దు",,"jīḍipappu, bādaṁ vaṁṭivi vaddu","dʒiːɖipappu, baːdam ʋaɳʈiʋi ʋaddu","no cashew, almond or the like",Telugu has no one word for nuts,2,te-agent-v1;ipa=espeak
 dietary-needs.no-seafood,"చేపలు, రొయ్యలు వద్దు",,"cēpalu, royyalu vaddu","tʃeːpalu, rojjalu ʋaddu",no fish or prawns,,2,te-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,నేను శాకాహారి,,nēnu śākāhāri,neːnu ʃaːkaːhaːri,,,2,te-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,"నేను పాలు, పెరుగు, నెయ్యి, గుడ్డు తినను",,"nēnu pālu, perugu, neyyi, guḍḍu tinanu","neːnu paːlu, peruɡu, nejji, ɡuɖɖu tinanu","spelt out: śākāhāri allows milk and curd, so the word alone is not enough",,2,te-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,"నేను పాలు, పెరుగు, నెయ్యి, గుడ్డు తినను",,"nēnu pālu, perugu, neyyi, guḍḍu tinanu","neːnu paːlu, peruɡu, nejji, ɡuɖɖu tinanu","I do not eat milk, curd, ghee, egg","spelt out: śākāhāri allows milk and curd, so the word alone is not enough",2,te-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,నేను {} తినను,,nēnu {} tinanu,neːnu {} tinanu,,,2,te-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,నాకు {} అలర్జీ,,nāku {} alarjī,naːku {} alardʒiː,,,2,te-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,ఇందులో చేపల రసం ఉందా?,,iṁdulō cēpala rasaṁ uṁdā?,induloː tʃeːpala rasam undaː,,,2,te-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,ఇందులో పంది ఎముకల రసం ఉందా?,,iṁdulō paṁdi emukala rasaṁ uṁdā?,induloː pandi emukala rasam undaː,pork-bone broth,,2,te-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,నాకు {} తీవ్రమైన అలర్జీ,,nāku {} tīvramaina alarjī,naːku {} tiːʋramaɪna alardʒiː,,,2,te-agent-v1;ipa=espeak
-dietary-needs.no-pork,"పంది మాంసం, హామ్, బేకన్, సాసేజ్ వద్దు",,"paṁdi māṁsaṁ, hām, bēkan, sāsēj vaddu","pandi maːnsam, haːm, beːkan, saːseːdʒ ʋaddu",the cured forms are named because they read as seasoning rather than as meat,,2,te-agent-v1;ipa=espeak
+dietary-needs.no-pork,"పంది మాంసం, హామ్, బేకన్, సాసేజ్ వద్దు",,"paṁdi māṁsaṁ, hām, bēkan, sāsēj vaddu","pandi maːnsam, haːm, beːkan, saːseːdʒ ʋaddu","no pork, ham, bacon, sausage",the cured forms are named because they read as seasoning rather than as meat,2,te-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,ఇది హలాల్ ఏనా?,,idi halāl ēnā?,idi halaːl eːnaː,,,2,te-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,ఇందులో పంది కొవ్వు ఉందా?,,iṁdulō paṁdi kovvu uṁdā?,induloː pandi koʋʋu undaː,,,2,te-agent-v1;ipa=espeak
 dietary-needs.no-sesame,నువ్వులు వద్దు,,nuvvulu vaddu,nuʋʋulu ʋaddu,,,2,"Brown, A Telugu-English Dictionary (1903, DSAL), నువ్వు nuvvu 'Sesamum'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
@@ -22,7 +22,7 @@ food-ordering.is-a-table-available,టేబుల్ ఖాళీ ఉందా?
 food-ordering.menu-please,మెనూ ఇవ్వండి,,menū ivvaṁḍi,menuː iʋʋaɳɖi,,,2,te-agent-v1;ipa=espeak
 food-ordering.i-want-this,ఇది కావాలి,,idi kāvāli,idi kaːʋaːli,,,2,te-agent-v1;ipa=espeak
 food-ordering.do-you-have-drinking-water,తాగు నీరు ఉందా?,,tāgu nīru uṁdā?,taːɡu niːru undaː,,,2,te-agent-v1;ipa=espeak
-food-ordering.to-go-please,పార్సెల్ కట్టండి,,pārsel kaṭṭaṁḍi,paːrsel kaʈʈaɳɖi,'parcel' is what a takeaway is called in India,,2,te-agent-v1;ipa=espeak
+food-ordering.to-go-please,పార్సెల్ కట్టండి,,pārsel kaṭṭaṁḍi,paːrsel kaʈʈaɳɖi,pack [a] parcel,'parcel' is what a takeaway is called in India,2,te-agent-v1;ipa=espeak
 food-ordering.check-please,బిల్లు ఇవ్వండి,,billu ivvaṁḍi,billu iʋʋaɳɖi,,,2,te-agent-v1;ipa=espeak
 food-ordering.does-it-contain,ఇందులో {} ఉందా?,,iṁdulō {} uṁdā?,induloː {} undaː,,,2,te-agent-v1;ipa=espeak
 food-ordering.is-this-vegetarian,ఇది శాకాహారమా?,,idi śākāhāramā?,idi ʃaːkaːhaːramaː,,,2,te-agent-v1;ipa=espeak

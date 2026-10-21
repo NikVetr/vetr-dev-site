@@ -53,7 +53,7 @@ toilets.squat-toilet,ఇండియన్ టాయిలెట్,,iṁḍiyan
 building-words.elevator,లిఫ్ట్,,liphṭ,lipʰʈ,,,2,te-agent-v1;ipa=espeak
 building-words.stairs,మెట్లు,,meṭlu,meʈlu,,,2,te-agent-v1;ipa=espeak
 building-words.entrance,ప్రవేశం,లోపలికి,pravēśaṁ,praʋeːʃam,,,2,te-agent-v1;ipa=espeak
-building-words.exit,నిర్గమనం,బయటికి,nirgamanaṁ,nirɡamanam,bayaṭiki 'out' is what a sign usually says,,2,te-agent-v1;ipa=espeak
+building-words.exit,నిర్గమనం,బయటికి,nirgamanaṁ,nirɡamanam,exit,bayaṭiki 'out' is what a sign usually says,2,te-agent-v1;ipa=espeak
 building-words.men,పురుషులు,మగవారు,puruṣulu,puruʂulu,,,2,te-agent-v1;ipa=espeak
 building-words.women,స్త్రీలు,ఆడవారు,strīlu,striːlu,,,2,te-agent-v1;ipa=espeak
 building-words.door,తలుపు,,talupu,talupu,,,2,te-agent-v1;ipa=espeak

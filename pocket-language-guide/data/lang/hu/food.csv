@@ -11,7 +11,7 @@ dietary-needs.i-am-vegan,Vegán vagyok,,vˈɛɡaːn vˈɑɟok,,,2,hu-agent-v1;ip
 dietary-needs.i-do-not-eat,Nem eszem a következőt: {},,nˈɛm ˈɛsɛm ˈɑ kˈøvɛtkɛzøːt {},,,2,hu-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,Allergiás vagyok a következőre: {},,ˈɑllɛrɡiaːʃ vˈɑɟok ˈɑ kˈøvɛtkɛzøːrɛ {},,,2,hu-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Van benne halalaplé?,,vˈɑn bˈɛnnɛ hˈɑlɑlɑpleː,,,2,hu-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,Van benne sertésalaplé?,,vˈɑn bˈɛnnɛ ʃˈɛrteːʃɑlɑpleː,the lard this row used to name is its own concept now,,2,hu-agent-v1;narrowed-by-pork-fat-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Van benne sertésalaplé?,,vˈɑn bˈɛnnɛ ʃˈɛrteːʃɑlɑpleː,is there pork stock in it?,the lard this row used to name is its own concept now,2,hu-agent-v1;narrowed-by-pork-fat-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Súlyos allergiám van a következőre: {},,ʃˈuːjoʃ ˈɑllɛrɡiaːm vˈɑn ˈɑ kˈøvɛtkɛzøːrɛ {},,,2,hu-agent-v1;ipa=espeak
 food-ordering.table-for-two,Asztalt két főre,,ˈɑstɑlt kˈeːt fˈøːrɛ,,,2,hu-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,Van szabad asztal?,,vˈɑn sˈɑbɑd ˈɑstɑl,,,2,hu-agent-v1;ipa=espeak

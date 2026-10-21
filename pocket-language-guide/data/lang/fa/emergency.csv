@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 emergency-medical.help,کمک!,,komak!,komak,,,2,fa-agent-v1;ipa=espeak
-emergency-medical.please-call-an-ambulance,لطفاً آمبولانس خبر کنید,به اورژانس زنگ بزنید,lotfan āmbulāns khabar konid,lotfan ɑmbulɑns xabar konid,orzhāns is the Iranian emergency medical service and the word on the vehicle; its number is 115,,2,fa-med-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,لطفاً آمبولانس خبر کنید,به اورژانس زنگ بزنید,lotfan āmbulāns khabar konid,lotfan ɑmbulɑns xabar konid,please call an ambulance,orzhāns is the Iranian emergency medical service and the word on the vehicle; its number is 115,2,fa-med-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,پزشک لازم دارم,دکتر,pezeshk lāzem dāram,pezeʃk lɑzem dɑram,,,2,fa-med-v1;ipa=espeak
 emergency-medical.i-am-sick,حالم بد است,,hālam bad ast,hɑlam bad ast,,,2,fa-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,زخمی شده‌ام,,zakhmi shode-am,zaxmi ʃodeam,,,2,fa-med-v1;ipa=espeak
@@ -9,7 +9,7 @@ emergency-medical.where-is-a-pharmacy,داروخانه کجاست؟,,dārukhāne
 emergency-medical.please-take-me-to-a-hospital,لطفاً مرا به بیمارستان ببرید,,lotfan marā be bimārestān bebarid,lotfan marɑ be bimɑrestɑn bebarid,,,2,fa-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,حالم خوب نیست,,hālam khub nist,hɑlam xub nist,,,2,fa-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,اورژانسی است,,orzhānsi ast,urʒɑnsi ast,,,2,fa-med-v1;ipa=espeak
-emergency-medical.i-am-having-a-severe-allergic-reaction,دچارِ آنافیلاکسی شده‌ام,واکنشِ شدیدِ آلرژیک,dochār-e ānāfilāksi shode-am,dotʃɑre ɑnɑfilɑkasi ʃodeam,ānāfilāksi is the word an Iranian dispatcher and an emergency ward are trained on; the descriptive phrase is in text_alt,,2,fa-med-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,دچارِ آنافیلاکسی شده‌ام,واکنشِ شدیدِ آلرژیک,dochār-e ānāfilāksi shode-am,dotʃɑre ɑnɑfilɑkasi ʃodeam,I have become afflicted with anaphylaxis,ānāfilāksi is the word an Iranian dispatcher and an emergency ward are trained on; the descriptive phrase is in text_alt,2,fa-med-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,نمی‌توانم نفس بکشم,,nemitavānam nafas bekesham,nemitavɑnam nafas bekeʃam,,,2,fa-med-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,خونریزیِ شدید دارم,,khunrizi-ye shadid dāram,xunrizie ʃadid dɑram,,,2,fa-med-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,دردِ سینه دارم,دردِ قفسهٔ سینه,dard-e sine dāram,darde sine dɑram,,,2,fa-med-v1;ipa=espeak
@@ -25,11 +25,11 @@ medical-conditions.i-need-insulin,انسولین لازم دارم,,ansulin lāz
 medical-conditions.i-have-asthma,آسم دارم,,āsm dāram,ɑsm dɑram,,,2,fa-med-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,بیماریِ قلبی دارم,,bimāri-ye qalbi dāram,bimɑrie qalbi dɑram,,,2,fa-med-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-penicillin,به پنیسیلین حساسیت دارم,,be penisilin hassāsiyat dāram,be panisilin hassɑsijat dɑram,,,2,fa-med-v1;ipa=espeak
-medical-conditions.i-have-epilepsy,صرع دارم,,sar‘ dāram,sarʔ dɑram,"sar‘ is the clinical word and is neutral; the colloquial ghash means fainting, is imprecise and carries stigma",,2,fa-med-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,صرع دارم,,sar‘ dāram,sarʔ dɑram,I have epilepsy,"sar‘ is the clinical word and is neutral; the colloquial ghash means fainting, is imprecise and carries stigma",2,fa-med-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,قندِ خونم پایین است,,qand-e khunam pāyin ast,qande xunam pɑjin ast,,,2,fa-med-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,اسپریِ آسمم را لازم دارم,,esperi-ye āsmam rā lāzem dāram,espereje ɑsmam rɑ lɑzem dɑram,,,2,fa-med-v1;ipa=espeak
 medical-conditions.i-am-pregnant,باردار هستم,حامله,bārdār hastam,bɑrdɑr hastam,,,2,fa-med-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,آمپولِ آدرنالین همراهم دارم,قلمِ آدرنالین,āmpul-e ādrenālin hamrāham dāram,ɑmpule ɑdaranɑlin hamrɑham dɑram,"qalam-e ādrenālin, 'adrenaline pen', is what an Iranian pharmacist calls the auto-injector; the brand name is not used",,2,fa-med-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,آمپولِ آدرنالین همراهم دارم,قلمِ آدرنالین,āmpul-e ādrenālin hamrāham dāram,ɑmpule ɑdaranɑlin hamrɑham dɑram,I have an adrenaline ampoule with me,"qalam-e ādrenālin, 'adrenaline pen', is what an Iranian pharmacist calls the auto-injector; the brand name is not used",2,fa-med-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,برای {} دارو می‌خورم,,barāye {} dāru mikhoram,barɑje {} dɑru mixoram,,,2,fa-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,داروی رقیق‌کنندهٔ خون می‌خورم,ضدِانعقاد,dāru-ye raqiq-konande-ye khun mikhoram,dɑruje raqiqkonandeje xun mixoram,zedd-e en‘eqād is the term on the box,,2,fa-med-v1;ipa=espeak
 medical-conditions.medicine-allergy,حساسیتِ دارویی: {},,hassāsiyat-e dāruyi: {},hassɑsijate dɑrui {},,,2,fa-med-v1;ipa=espeak
@@ -47,7 +47,7 @@ pharmacy-symptoms.i-need-medicine-for,برای {} دارو لازم دارم,,ba
 pharmacy-symptoms.i-have-a-fever,تب دارم,,tab dāram,tab dɑram,,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,اسهال دارم,,es·hāl dāram,eshɑl dɑram,,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,داروخانهٔ شبانه‌روزی کجاست؟,,dārukhāne-ye shabāne-ruzi kojāst?,dɑruxɑneje ʃabɑneruzi kodʒɑst,"Iran really does run 24-hour pharmacies, so unlike the French pharmacie de garde this asks for a shop and not for a duty rota",,2,fa-med-v1;ipa=espeak
-pharmacy-symptoms.painkiller,مسکّن,,mosakken,mosakken,"written with the tashdid: unpointed مسکن is also maskan, 'housing'",,2,fa-med-v1;ipa=espeak
+pharmacy-symptoms.painkiller,مسکّن,,mosakken,mosakken,painkiller,"written with the tashdid: unpointed مسکن is also maskan, 'housing'",2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,نسخه لازم است؟,,noskhe lāzem ast?,nosxe lɑzem ast,,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,سردرد دارم,,sardard dāram,sardard dɑram,,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.paracetamol-acetaminophen,استامینوفن,,estāminofen,estɑminofen,Iranian pharmacies stock and answer to estāminofen,the US name -- not to paracetamol,2,fa-med-v1;ipa=espeak
@@ -66,7 +66,7 @@ pharmacy-symptoms.i-have-a-sore-throat,گُلودرد دارم,,golu-dard dāram
 pharmacy-symptoms.can-i-get-this-medicine-here,این دارو را اینجا دارید؟,,in dāru rā injā dārid?,in dɑru rɑ indʒɑ dɑrid,,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.bandage,باند,چسبِ زخم,bānd,bɑnd,chasb-e zakhm is the adhesive plaster,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.the-pain-is-severe,درد شدید است,,dard shadid ast,dard ʃadid ast,,,2,fa-agent-v1;ipa=espeak
-pharmacy-symptoms.antiseptic,ضدّ عفونی‌کننده,بتادین,zedd-e ofuni-konande,zedde ofunikonande,"betādin, the povidone-iodine brand, is what an Iranian pharmacist is actually asked for",,2,fa-med-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,ضدّ عفونی‌کننده,بتادین,zedd-e ofuni-konande,zedde ofunikonande,antiseptic,"betādin, the povidone-iodine brand, is what an Iranian pharmacist is actually asked for",2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,حالِ تهوع دارم,,hāl-e tahavvo‘ dāram,hɑle tahavvoʔ dɑram,,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-rash,جوش زده‌ام,,jush zade-am,dʒuʃ zadeam,,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.before-or-after-food,قبل از غذا یا بعد از غذا؟,,qabl az ghazā yā ba‘d az ghazā?,qabl az qazɑ jɑ baʔd az qazɑ,,,2,fa-agent-v1;ipa=espeak
@@ -138,4 +138,4 @@ police-consulate.am-i-free-to-go,می‌توانم بروم؟,,mitavānam berava
 police-consulate.i-do-not-want-to-go-with-you,نمی‌خواهم با شما بیایم,,nemikhāham bā shomā biyāyam,nemixɑham bɑ ʃomɑ biɑjam,,,2,fa-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,فکر می‌کنم مالاریا دارم,,fekr mikonam mālāriyā dāram,fekr mikonam mɑlɑriɑ dɑram,,,2,fa-med-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,آزمایشِ مالاریا لازم دارم,,āzmāyesh-e mālāriyā lāzem dāram,ʔɑzmɑjeʃe mɑlɑriɑ lɑzem dɑram,,,2,fa-med-v1;ipa=espeak
-pharmacy-symptoms.i-think-i-have-dengue,فکر می‌کنم تبِ دِنگی دارم,,fekr mikonam tab-e dengi dāram,fekr mikonam tabe denɡi dɑram,tab-e dengi is the Iranian clinical name; the kasra is written because unpointed دنگی reads as dongi,,2,fa-med-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,فکر می‌کنم تبِ دِنگی دارم,,fekr mikonam tab-e dengi dāram,fekr mikonam tabe denɡi dɑram,I think I have dengue fever,tab-e dengi is the Iranian clinical name; the kasra is written because unpointed دنگی reads as dongi,2,fa-med-v1;ipa=espeak

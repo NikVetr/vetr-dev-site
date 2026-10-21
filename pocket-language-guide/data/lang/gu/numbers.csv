@@ -86,8 +86,8 @@ numbers-money.zloty,ઝ્લોટી,,jhlōṭī,zloːʈi,,,2,gu-currency-v1;c
 numbers-money.zloty-symbol,ઝ્લોટી (ચિહ્ન),,jhlōṭī (cihn),zloːʈi,zloty (sign),,2,gu-currency-v1;cldr;ipa=espeak
 numbers-money.hryvnia,હ્રિવ્નિયા,,hrivniyā,hɾɪʋnɪjaː,,,2,gu-currency-v1;cldr;ipa=espeak
 numbers-money.hryvnia-symbol,હ્રિવ્નિયા (ચિહ્ન),,hrivniyā (cihn),hɾɪʋnɪjaː,hryvnia (sign),,2,gu-currency-v1;cldr;ipa=espeak
-numbers-money.leu,લેઉ,લેઈ,lēu,leːʊ,"leu (sg) / lei (pl), which is what a price tag spells out",,2,gu-currency-v1;cldr;ipa=espeak
-numbers-money.leu-symbol,લેઈ,,lēī,leːi,"the plural *lei*, which is what a price tag spells out",,2,gu-currency-v1;cldr;ipa=espeak
+numbers-money.leu,લેઉ,લેઈ,lēu,leːʊ,leu,"leu (sg) / lei (pl), which is what a price tag spells out",2,gu-currency-v1;cldr;ipa=espeak
+numbers-money.leu-symbol,લેઈ,,lēī,leːi,lei,"the plural *lei*, which is what a price tag spells out",2,gu-currency-v1;cldr;ipa=espeak
 numbers-money.koruna,કોરુના,,kōrunā,koːɾunaː,,,2,gu-currency-v1;cldr;ipa=espeak
 numbers-money.koruna-symbol,કોરુના (ચિહ્ન),,kōrunā (cihn),koːɾunaː,koruna (sign),,2,gu-currency-v1;cldr;ipa=espeak
 numbers-money.number-and-classifier-notes,"સંખ્યાઓ જોડીને બને છે: 11 = shi yi, 20 = er shi, 21 = er shi yi. ફોન પર 1 ઘણી વાર yao બોલાય છે. ગણતરી સીધી નામ સાથે આવતી નથી — વચ્ચે એક માપક શબ્દ જોઈએ, એટલે બે ટિકિટ માટે liang zhang piao. ge (સામાન્ય), wei (માણસ), zhang (ટિકિટ અને સપાટ ચીજ), bei (પ્યાલા), ping (બોટલ). બોલચાલમાં yuan ને kuai કહે છે; jiao / mao = 0.1 yuan, fen = 0.01 yuan.",,"saṁkhyāō jōḍīnē banē chē: 11 = shi yi, 20 = er shi, 21 = er shi yi. phōn par 1 ghaṇī vār yao bōlāy chē. gaṇatarī sīdhī nām sāthē āvatī nathī — vaccē ēk māpak śabd jōīē, ēṭalē bē ṭikiṭ māṭē liang zhang piao. ge (sāmāny), wei (māṇas), zhang (ṭikiṭ anē sapāṭ cīj), bei (pyālā), ping (bōṭal). bōlacālamāṁ yuan nē kuai kahē chē; jiao / mao = 0.1 yuan, fen = 0.01 yuan.",,,,2,gu-notes-v1

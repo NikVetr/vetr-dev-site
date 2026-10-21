@@ -7,7 +7,7 @@ trail-words.cableway,रोपवे,,rōpavē,ɾˌoːpəwˈeː,,,2,ne-agent-v1;
 trail-words.shuttle-bus,शटल बस,,śaṭala basa,ʃˈʌʈəl bˈʌs,,,2,ne-agent-v1;ipa=espeak
 trail-words.park-shuttle,पार्कको बस,,pārkakō basa,pˈaːrkəkˌoː bˈʌs,,,2,ne-agent-v1;ipa=espeak
 trail-words.steps,सिँढी,,sim̐ḍhī,sĩɖʰˈiː,,,2,ne-agent-v1;ipa=espeak
-trail-words.up-uphill,माथि / उकालो,,māthi / ukālō,mˈaːtʰɪ / ʊkˈaːloː,the word every trekking guide uses,,2,ne-agent-v1;ipa=espeak
+trail-words.up-uphill,माथि / उकालो,,māthi / ukālō,mˈaːtʰɪ / ʊkˈaːloː,up / uphill,the word every trekking guide uses,2,ne-agent-v1;ipa=espeak
 trail-words.down-downhill,तल / ओरालो,,tala / ōrālō,tˈʌl / oːɾˈaːloː,,,2,ne-agent-v1;ipa=espeak
 trail-words.one-way,एकतर्फी,,ēkatarphī,ˌeːkətˈʌrpʰi,,,2,ne-agent-v1;ipa=espeak
 trail-words.round-trip,आउने-जाने,,āunē-jānē,ˈaːʊnˌeːɟaːneː,,,2,ne-agent-v1;ipa=espeak
@@ -16,10 +16,10 @@ weather.will-it-rain,आज पानी पर्छ?,,āja pānī parcha?,aː�
 weather.is-it-safe-today,आज जानु सुरक्षित छ?,,āja jānu surakṣita cha?,aːɟˈəː ɟˈaːnuʲˌu suɾˈʌkʂɪt cʰˈə,,,2,ne-agent-v1;ipa=espeak
 weather.how-cold-at-night,राति कति जाडो हुन्छ?,,rāti kati jāḍō huncha?,ɾˈaːtɪ kˈʌtɪ ɟˈaːɖoː hˈuncʰə,,,2,ne-agent-v1;ipa=espeak
 weather.rain,पानी,,pānī,pˈaːni,"everyday Nepali for rain is its word for ""water""",,2,ne-agent-v1;ipa=espeak
-weather.snow,हिउँ,,hium̐,hˈɪũ,"distinct from बरफ ""ice"", both of which this card needs",,2,ne-agent-v1;ipa=espeak
+weather.snow,हिउँ,,hium̐,hˈɪũ,snow,"distinct from बरफ ""ice"", both of which this card needs",2,ne-agent-v1;ipa=espeak
 weather.wind,हावा,,hāvā,haːwˈaː,,,2,ne-agent-v1;ipa=espeak
 weather.storm,आँधी,,ām̐dhī,ãdʰˈiː,,,2,ne-agent-v1;ipa=espeak
-weather.ice,बरफ,,barapha,bˈʌɾəpʰ,"distinct from हिउँ ""snow""",,2,ne-agent-v1;ipa=espeak
+weather.ice,बरफ,,barapha,bˈʌɾəpʰ,ice,"distinct from हिउँ ""snow""",2,ne-agent-v1;ipa=espeak
 weather.fog,कुहिरो,,kuhirō,kˈuhɪɾˌoː,,,2,ne-agent-v1;ipa=espeak
 weather.heat,गर्मी,,garmī,ɡˈʌrmi,,,2,ne-agent-v1;ipa=espeak
 weather.cold,जाडो,,jāḍō,ɟˈaːɖoː,,,2,ne-agent-v1;ipa=espeak

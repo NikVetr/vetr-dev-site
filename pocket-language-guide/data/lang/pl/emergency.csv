@@ -13,7 +13,7 @@ emergency-medical.i-am-having-a-severe-allergic-reaction,Mam wstrząs anafilakty
 emergency-medical.i-cannot-breathe,Nie mogę oddychać,,ɲɛ mˈɔɡɛ ɔddˈɨxatɕ,,,2,pl-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,Mocno krwawię,,mˈɔtsnɔ krfˈavjɛ,,,2,pl-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,Boli mnie w klatce piersiowej,,bˈɔli mɲɛ f klˈattsɛ pʲɛrɕˈɔvɛj,,,2,pl-agent-v1;ipa=espeak
-emergency-medical.this-person-is-unconscious,Ta osoba jest nieprzytomna,,ta ɔsˈɔba jɛst ɲˌɛpʃɨtˈɔmna,"agrees with osoba, so it is right for a person of either gender",,2,pl-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Ta osoba jest nieprzytomna,,ta ɔsˈɔba jɛst ɲˌɛpʃɨtˈɔmna,this person is unconscious,"agrees with osoba, so it is right for a person of either gender",2,pl-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Gdzie jest najbliższy szpital?,,ɡdʑˈɛ jɛst najblˈiʃʃɨ ʃpˈital,,,2,pl-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Jaki jest numer alarmowy?,,jˈaki jɛst nˈumɛr ˌalarmˈɔvɨ,,,2,pl-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Czy jest lekarz mówiący {source}?,,tʃɨ jɛst lˈɛkaʃ muvʲˈɔntsɨ {source},,,2,pl-agent-v1;ipa=espeak
@@ -78,7 +78,7 @@ pharmacy-symptoms.i-have-a-cut,Mam ranę ciętą,,mˈam rˈanɛ tɕˈɛntɔ̃,,,
 pharmacy-symptoms.antacid,lek na zgagę,,lˈɛk na zɡˈaɡɛ,,,2,pl-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Mam oparzenie,,mˈam ˌɔpaʒˈɛɲɛ,,,2,pl-agent-v1;ipa=espeak
 pharmacy-symptoms.it-started-days-ago,Liczba dni od początku: {},,lˈidʒba dɲˈi ɔt pɔtʃˈɔntku {},number of days since the start: {},"a label, so the number agrees with nothing",2,pl-agent-v1;fix=Słownik języka polskiego PWN początek (to -- od czego się coś zaczyna w czasie lub przestrzeni) and dzień 2 (okres 24 godzin);was=Zaczęło się {} dni temu (wrong for one: dzień temu);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergia na lek: {} and Liczba nocy: {});row-corrections-v14;ipa=espeak
-pharmacy-symptoms.cough-medicine,syrop na kaszel,,sˈɨrɔp na kˈaʃɛl,"cough syrup, which is what a Polish pharmacy hands over",,2,pl-med-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,syrop na kaszel,,sˈɨrɔp na kˈaʃɛl,cough syrup,which is what a Polish pharmacy hands over,2,pl-med-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Czy to jest bezpieczne w ciąży?,,tʃɨ tɔ jɛzd bɛspʲˈɛtʃnɛ f tɕˈɔ̃ʒɨ,,,2,pl-agent-v1;ipa=espeak
 body-parts.head,głowa,,ɡwˈɔva,,,2,pl-agent-v1;ipa=espeak
 body-parts.stomach,brzuch,,bʒˈux,"the belly, not the organ",,2,pl-agent-v1;ipa=espeak

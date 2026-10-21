@@ -10,7 +10,7 @@ time-scheduling.what-time-does-it-open,कितने बजे खुलता
 time-scheduling.what-time-does-it-close,कितने बजे बंद होता है?,,kitne baje baṁd hotā hai?,kˈɪtnˌeː bˈʌɟeː bˈʌnd hˈoːtaː hɛː,,,2,hi-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,कितना समय लगेगा?,,kitnā samay lagegā?,kˈɪtnˌaː sˈʌmˌɛj ləɡˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
 time-words.today,आज,,āj,ˈaːɟ,,,2,hi-agent-v1;ipa=espeak
-time-words.tomorrow,कल,,kal,kˈʌl,also means yesterday,,2,hi-agent-v1;ipa=espeak
+time-words.tomorrow,कल,,kal,kˈʌl,tomorrow,also means yesterday,2,hi-agent-v1;ipa=espeak
 time-words.yesterday,कल,,kal,kˈʌl,same word as tomorrow,,2,hi-agent-v1;ipa=espeak
 time-words.this-week,इस हफ़्ते,,is hafte,ˈɪs hˈʌfteː,,,2,hi-agent-v1;ipa=espeak
 time-words.next-week,अगले हफ़्ते,,agle hafte,ˈʌɡlˌeː hˈʌfteː,,,2,hi-agent-v1;ipa=espeak

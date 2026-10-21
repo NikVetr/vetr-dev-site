@@ -3,7 +3,7 @@ profanity.oh-my-god,Doamne!,Dumnezeule!,dˈɔamne,Lord! / my God!,"mild, everywh
 profanity.damn,La naiba!,Fir-ar să fie!,la nˈaɪba,to the devil!,mild oath,1,profanity-agent-v1;src=DEX;ipa=espeak
 profanity.expletive,Rahat!,,rahˈat,shit,coarse but everyday,1,profanity-agent-v1;src=DEX;ipa=espeak
 profanity.strong-expletive,Pula mea!,,pˈula mˈea,lit. my dick,very strong; said at nothing,1,profanity-agent-v1;src=DEX;ipa=espeak
-profanity.intensifier,dracului,pulii,drˈakuluɪ,"of-the-devil (casual) / genitive of pula (vulgar), both used before/after a noun: damn -",,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.intensifier,dracului,pulii,drˈakuluɪ,of the devil,"of-the-devil (casual) / genitive of pula (vulgar), both used before/after a noun: damn -",1,profanity-agent-v1;src=DEX;ipa=espeak
 profanity.frustration,E o porcărie,,je o pˌorkəɾˈie,it is a piggish thing,mild-coarse,1,profanity-agent-v1;src=DEX;ipa=espeak
 profanity.thats-rude,Asta e nepoliticos,,ˌasta je nˌepolˌitikˈos,that is impolite,,1,profanity-agent-v1;src=DEX;ipa=espeak
 profanity.excuse-my-language,Scuzați limbajul,,skuzˈatsʲ limbˈaʒul,excuse the language,,1,profanity-agent-v1;src=DEX;ipa=espeak

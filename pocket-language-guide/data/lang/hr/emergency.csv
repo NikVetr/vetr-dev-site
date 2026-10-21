@@ -48,7 +48,7 @@ pharmacy-symptoms.i-have-a-fever,Imam temperaturu,,imam temperaturu,,,2,hr-agent
 pharmacy-symptoms.i-think-i-have-malaria,Mislim da imam malariju,,mˈislim dˈa imam malariju,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,Trebam test na malariju,,trˈebam tˈest nˈa malariju,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Imam proljev,,imam prˈoʎev,,,2,hr-agent-v1;ipa=espeak
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Gdje je dežurna ljekarna?,,ɡdjˈe je deʒurna ʎekarna,Croatia runs a duty rota rather than 24-hour shops in most towns,,2,hr-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Gdje je dežurna ljekarna?,,ɡdjˈe je deʒurna ʎekarna,where is [the] on-duty pharmacy?,Croatia runs a duty rota rather than 24-hour shops in most towns,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.painkiller,lijek za bolove,,lˈijek zˈa bolove,,,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Treba li mi recept?,,trˈeba li mˈi rˈetsept,,,2,hr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Boli me glava,,bˈoli mˈe ɡlˈava,,,2,hr-agent-v1;ipa=espeak

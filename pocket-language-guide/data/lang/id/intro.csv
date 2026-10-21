@@ -25,7 +25,7 @@ about-me.i-work-in-an-office,Saya kerja di kantor,,sˈaja kˈɛrdʒa di kˈantɔ
 about-me.i-have-my-own-business,Saya punya bisnis sendiri,,sˈaja pˈuɲa bˈisnis səndˈiri,sendiri reused from introductions.i-am-traveling-alone,,2,id-agent-v1;in-pack-neighbour=introductions.i-am-traveling-alone;ipa=espeak
 family-intros.this-is-my-mother,Ini ibu saya,,ˈini ˈibu sˈaja,,,2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-father,Ini ayah saya,,ˈini ˈajah sˈaja,,,2,id-agent-v1;ipa=espeak
-family-intros.this-is-my-brother,Ini saudara laki-laki saya,,ˈini saʊdˈara lˈakilaki sˈaja,"saudara (age-neutral sibling) + laki-laki, matching this pack's own anak laki-laki/anak perempuan pattern rather than the age-graded kakak/adik",,2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ini saudara laki-laki saya,,ˈini saʊdˈara lˈakilaki sˈaja,this is my brother,"saudara (age-neutral sibling) + laki-laki, matching this pack's own anak laki-laki/anak perempuan pattern rather than the age-graded kakak/adik",2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Ini saudara perempuan saya,,ˈini saʊdˈara pərəmpˈuan sˈaja,see this-is-my-brother,,2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈaja,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rekan bisnis, mitra)",,2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-colleague,Ini rekan kerja saya,,ˈini rˈɛkan kˈɛrdʒa sˈaja,,,2,id-agent-v1;ipa=espeak

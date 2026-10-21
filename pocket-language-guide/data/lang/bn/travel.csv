@@ -34,11 +34,11 @@ taxi.we-need-to-catch-the-high-speed-train,আমাদের দ্রুতগ
 taxi.please-use-the-meter,দয়া করে মিটারে চলুন,,daẏā kare miṭāre caluna,dˈɔa kˈɔɾe mˈiʈaɾˌe tʃˈolun,please run on the meter,"the phrase for a Dhaka CNG autorickshaw, where the meter is routinely refused",2,bn-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,আমি এখানে নামব,,āmi ekhāne nāmaba,ˌami ˈekʰanˌe nˈamɔb,,,2,bn-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,দয়া করে শিনকানসেন ধরার মতো সময়ে পৌঁছে দিন,,daẏā kare śinakānasena dharāra mato samaẏe paum̐che dina,dˈɔa kˈɔɾe ʃˈinɔkˌanɔʃˌen dʰˈɔɾaɾ mˈɔto ʃˈɔmɔˌe pˈõwtʃʰe dˈin,,,2,bn-gloss-v1;ipa=espeak
-taxi.could-you-make-it-colder,দয়া করে এসিটা একটু বাড়িয়ে দিন,,daẏā kare esiṭā ekaṭu bāṛiẏe dina,dˈɔa kˈɔɾe ˈeʃiʈˌa ˈekɔʈˌu bˈaɽiˌe dˈin,'AC' is the everyday loanword for the car's air conditioner,,2,bn-agent-v1;ipa=espeak
-taxi.could-you-make-it-warmer,দয়া করে এসিটা একটু কমিয়ে দিন,,daẏā kare esiṭā ekaṭu kamiẏe dina,dˈɔa kˈɔɾe ˈeʃiʈˌa ˈekɔʈˌu kˈomiˌe dˈin,'AC' is the everyday loanword for the car's air conditioner,,2,bn-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,দয়া করে এসিটা একটু বাড়িয়ে দিন,,daẏā kare esiṭā ekaṭu bāṛiẏe dina,dˈɔa kˈɔɾe ˈeʃiʈˌa ˈekɔʈˌu bˈaɽiˌe dˈin,please turn up the AC a little,'AC' is the everyday loanword for the car's air conditioner,2,bn-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,দয়া করে এসিটা একটু কমিয়ে দিন,,daẏā kare esiṭā ekaṭu kamiẏe dina,dˈɔa kˈɔɾe ˈeʃiʈˌa ˈekɔʈˌu kˈomiˌe dˈin,please turn down the AC a little,'AC' is the everyday loanword for the car's air conditioner,2,bn-agent-v1;ipa=espeak
 taxi.may-i-open-the-window,আমি কি জানালাটা খুলতে পারি?,,āmi ki jānālāṭā khulate pāri?,ˌami ki ɟˈanalˌaʈa kʰˈulɔtˌe pˈaɾi,,,2,bn-agent-v1;ipa=espeak
 transit-rides.two-tickets,দুটো টিকিট,,duṭo ṭikiṭa,dˈuʈo ʈˈikiʈ,,,2,bn-agent-v1;ipa=espeak
-transit-rides.where-is-the-subway-station,মেট্রো স্টেশন কোথায়?,,meṭro sṭeśana kothāẏa?,mˈeʈɾo ʃʈˈeʃɔn kˈotʰaj,Dhaka and Kolkata both have a মেট্রো,,2,bn-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,মেট্রো স্টেশন কোথায়?,,meṭro sṭeśana kothāẏa?,mˈeʈɾo ʃʈˈeʃɔn kˈotʰaj,where is the metro station?,Dhaka and Kolkata both have a মেট্রো,2,bn-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,এই বাস / ট্রেন {} যায় কি?,,ei bāsa / ṭrena {} yāẏa ki?,ˌei bˈaʃ / ʈɾˈen {} dʒˈaj ki,,,2,bn-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,পরের স্টপ কোনটা?,,parera sṭapa konaṭā?,pˈɔɾeɾ ʃʈˈɔp kˈonɔʈˌa,,,2,bn-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,দয়া করে কোথায় নামতে হবে বলে দিন,,daẏā kare kothāẏa nāmate habe bale dina,dˈɔa kˈɔɾe kˈotʰaj nˈamɔtˌe hˈɔbe bˈɔle dˈin,,,2,bn-agent-v1;ipa=espeak
@@ -98,7 +98,7 @@ rail-station-words.ticket-office,টিকিট কাউন্টার,,ṭik
 rail-station-words.waiting-room,অপেক্ষা কক্ষ,ওয়েটিং রুম,apekṣā kakṣa,ˈɔpekʰkʰˌa kˈɔkʰkʰɔ,,,2,bn-agent-v1;ipa=espeak
 rail-station-words.train-number,ট্রেন নম্বর,,ṭrena nambara,ʈɾˈen nˈɔmbɔɾ,,,2,bn-agent-v1;ipa=espeak
 rail-station-words.carriage,বগি,,bagi,bˈoɡi,the coach,বগি is the ordinary word in both countries,2,bn-agent-v1;ipa=espeak
-rail-station-words.seat,সিট,আসন,siṭa,ʃˈiʈ,আসন is what a ticket prints,,2,bn-agent-v1;ipa=espeak
+rail-station-words.seat,সিট,আসন,siṭa,ʃˈiʈ,seat,আসন is what a ticket prints,2,bn-agent-v1;ipa=espeak
 rail-station-words.last-train,শেষ ট্রেন,,śeṣa ṭrena,ʃˈeʃ ʈɾˈen,,,2,bn-agent-v1;ipa=espeak
 rail-station-words.delayed,দেরি,,deri,dˈeɾi,,,2,bn-agent-v1;ipa=espeak
 rail-station-words.final-stop,শেষ স্টেশন,,śeṣa sṭeśana,ʃˈeʃ ʃʈˈeʃɔn,,,2,bn-agent-v1;ipa=espeak
@@ -121,15 +121,15 @@ common-signs.pork-code,শুকরের মাংসের সংকেত,,ś
 rail-station-words.fare,ভাড়া,,bhāṛā,bʰˈaɽa,,,2,bn-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,ভাড়া কোথায় দিতে হবে?,,bhāṛā kothāẏa dite habe?,bʰˈaɽa kˈotʰaj dˈite hˈɔbe,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
 air-travel.where-is-check-in,চেক-ইন কোথায়?,,ceka-ina kothāẏa?,tʃˈekɔin kˈotʰaj,,,2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (ceka with its inherent a as in hotel-words.check-in);row-corrections-v2;ipa=espeak
-air-travel.which-gate,কোন গেট?,,kona geṭa?,kˈon ɡˈeʈ,"গেট, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",,2,bn-agent-v1;ipa=espeak
-air-travel.where-is-the-security-check,নিরাপত্তা তল্লাশি কোথায়?,,nirāpattā tallāśi kothāẏa?,nˈiɾapˌɔtta tˈɔllaʃˌi kˈotʰaj,"তল্লাশি, the everyday word for a security search/checkpoint",,2,bn-agent-v1;ipa=espeak
-air-travel.my-luggage-did-not-arrive,আমার লাগেজ আসেনি,,āmāra lāgeja āseni,ˌamaɾ lˈaɡeɟ ˈaʃenˌi,"লাগেজ, already this pack's word in border-customs.baggage-claim",,2,bn-agent-v1;ipa=espeak
+air-travel.which-gate,কোন গেট?,,kona geṭa?,kˈon ɡˈeʈ,which gate?,"গেট, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",2,bn-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,নিরাপত্তা তল্লাশি কোথায়?,,nirāpattā tallāśi kothāẏa?,nˈiɾapˌɔtta tˈɔllaʃˌi kˈotʰaj,where is the security search?,"তল্লাশি, the everyday word for a security search/checkpoint",2,bn-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,আমার লাগেজ আসেনি,,āmāra lāgeja āseni,ˌamaɾ lˈaɡeɟ ˈaʃenˌi,my luggage did not arrive,"লাগেজ, already this pack's word in border-customs.baggage-claim",2,bn-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,আমার জানালার পাশের সিট চাই,,āmāra jānālāra pāśera siṭa cāi,ˌamaɾ ɟˈanalˌaɾ pˈaʃeɾ ʃˈiʈ tʃˈai,,,2,bn-agent-v1;ipa=espeak
-air-travel.i-would-like-an-aisle-seat,আমার আইল সিট চাই,,āmāra āila siṭa cāi,ˌamaɾ ˈail ʃˈiʈ tʃˈai,"no natural native calque for 'aisle' on a plane, unlike window; loanword",,2,bn-agent-v1;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,আপনি কি আমাকে একটা লিফট দিতে পারবেন?,,āpani ki āmāke ekaṭā liphaṭa dite pārabena?,ˌapɔnˌi ki ˈamakˌe ˈækʈa lˈifɔʈ dˈite pˈaɾɔbˌen,"লিফট, the pan-South Asian loanword for a ride; Bengali verbs carry no gender marking",,2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (ph for ফ as in accessibility.elevator liphaṭa);row-corrections-v2;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,আমার আইল সিট চাই,,āmāra āila siṭa cāi,ˌamaɾ ˈail ʃˈiʈ tʃˈai,I want an aisle seat,"no natural native calque for 'aisle' on a plane, unlike window; loanword",2,bn-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,আপনি কি আমাকে একটা লিফট দিতে পারবেন?,,āpani ki āmāke ekaṭā liphaṭa dite pārabena?,ˌapɔnˌi ki ˈamakˌe ˈækʈa lˈifɔʈ dˈite pˈaɾɔbˌen,can you give me a lift?,"লিফট, the pan-South Asian loanword for a ride; Bengali verbs carry no gender marking",2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (ph for ফ as in accessibility.elevator liphaṭa);row-corrections-v2;ipa=espeak
 hitchhiking.where-are-you-going,আপনি কোথায় যাচ্ছেন?,,āpani kothāẏa yācchena?,ˌapɔnˌi kˈotʰaj dʒˈatʃtʃʰen,,,2,bn-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,আমার শুধু পরের শহর পর্যন্ত যেতে হবে,,āmāra śudhu parera śahara paryanta yete habe,ˌamaɾ ʃˈudʰu pˈɔɾeɾ ʃˈɔhɔɾ pˈɔɾæntˌo dʒˈete hˈɔbe,,,2,bn-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,দুজনের জন্য জায়গা আছে কি?,,dujanera janya jāẏagā āche ki?,dˈuɟɔnˌeɾ ɟˈɔnnɔ ɟˈajɔɡˌa ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,আমি পেট্রলের জন্য টাকা দিতে পারি,,āmi peṭralera janya ṭākā dite pāri,ˌami pˈeʈɾɔlˌeɾ ɟˈɔnnɔ ʈˈaka dˈite pˈaɾi,"পেট্রল, the pump word across South Asia, not 'gas'",,2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (পেট্রলের has no ো);row-corrections-v2;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,আমি পেট্রলের জন্য টাকা দিতে পারি,,āmi peṭralera janya ṭākā dite pāri,ˌami pˈeʈɾɔlˌeɾ ɟˈɔnnɔ ʈˈaka dˈite pˈaɾi,I can give money for petrol,"পেট্রল, the pump word across South Asia, not 'gas'",2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (পেট্রলের has no ো);row-corrections-v2;ipa=espeak
 hitchhiking.thank-you-for-the-ride,লিফট দেওয়ার জন্য ধন্যবাদ,,liphaṭa deoẏāra janya dhanyabāda,lˈifɔʈ dˈeoˌaɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,,2,bn-agent-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (ph for ফ as in accessibility.elevator liphaṭa);row-corrections-v2;ipa=espeak
 taxi.please-turn-around,দয়া করে ইউটার্ন নিন,,daẏā kare iuṭārna nina,dˈɔa kˈɔɾe ˈiuʈˌarnɔ nˈin,please take a U-turn,,2,bn.wikipedia=বাংলাদেশের সড়কের সংকেতসমূহ (ইউটার্ন নেওয়া নিষেধ);in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak

@@ -6,7 +6,7 @@ building-help.where-is-a-power-outlet,پریزِ برق کجاست؟,,periz-e ba
 accessibility.step-free,مسیرِ بدونِ پله دارد؟,,masir-e bedun-e pelle dārad?,masire bedune pelle dɑrad,,,2,fa-agent-v1;ipa=espeak
 accessibility.wheelchair-access,برای ویلچر مناسب است؟,,barāye vilcher monāseb ast?,barɑje viltʃer monɑseb ast,,,2,fa-agent-v1;ipa=espeak
 accessibility.elevator,آسانسور دارد؟,,āsānsor dārad?,ɑsɑnsur dɑrad,,,2,fa-agent-v1;ipa=espeak
-accessibility.ramp,رمپ دارد؟,سطحِ شیب‌دار,ramp dārad?,ramp dɑrad,ramp is what Iranian signage uses,,2,fa-agent-v1;ipa=espeak
+accessibility.ramp,رمپ دارد؟,سطحِ شیب‌دار,ramp dārad?,ramp dɑrad,does [it] have a ramp?,ramp is what Iranian signage uses,2,fa-agent-v1;ipa=espeak
 accessibility.how-many-steps,چند پله دارد؟,,chand pelle dārad?,tʃand pelle dɑrad,,,2,fa-agent-v1;ipa=espeak
 accessibility.cannot-climb-stairs,نمی‌توانم از پله بالا بروم,,nemitavānam az pelle bālā beravam,nemitavɑnam az pelle bɑlɑ beravam,,,2,fa-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,باید بنشینم,,bāyad beneshinam,bɑjad beneʃinam,,,2,fa-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ accessibility.hard-of-hearing,کم‌شنوا هستم,,kam-shenavā hastam,kam�
 accessibility.speak-louder,لطفاً بلندتر صحبت کنید,,lotfan bolandtar sohbat konid,lotfan bolandtar sohbat konid,,,2,fa-agent-v1;ipa=espeak
 accessibility.visually-impaired,کم‌بینا هستم,,kam-binā hastam,kambinɑ hastam,,,2,fa-agent-v1;ipa=espeak
 accessibility.take-your-arm,می‌شود بازویتان را بگیرم؟,,mishavad bāzuyetān rā begiram?,miʃavad bɑzujetɑn rɑ beɡiram,,,2,fa-agent-v1;ipa=espeak
-accessibility.guide-dog,این سگِ راهنمای من است,,in sag-e rāhnamā-ye man ast,in saɡe rɑhnamɑje man ast,"guide dogs are rare in Iran and dogs are unwelcome in many indoor places, so this row often needs explaining rather than just showing",,2,fa-agent-v1;ipa=espeak
+accessibility.guide-dog,این سگِ راهنمای من است,,in sag-e rāhnamā-ye man ast,in saɡe rɑhnamɑje man ast,this is my guide dog,"guide dogs are rare in Iran and dogs are unwelcome in many indoor places, so this row often needs explaining rather than just showing",2,fa-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,ورودی همین است؟,,vorudi hamin ast?,vorudi hamin ast,,,2,fa-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,وای‌فای دارید؟,,vāyfāy dārid?,vɑjfɑj dɑrid,,,2,fa-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,رمزِ وای‌فای چیست؟,,ramz-e vāyfāy chist?,ramze vɑjfɑj tʃist,,,2,fa-agent-v1;ipa=espeak

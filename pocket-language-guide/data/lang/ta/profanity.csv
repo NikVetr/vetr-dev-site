@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,அய்யோ!,கடவுளே!,ayyō!,ajjoː,"the general Tamil cry of dismay, and religiously neutral",,1,ta-agent-v1;ipa=espeak
 profanity.damn,சே!,,cē!,tʃeː,an oath of annoyance,mild,1,ta-agent-v1;ipa=espeak
-profanity.expletive,சனியன்!,,caṉiyaṉ!,sʌnijʌn,"literally 'Saturn', a piece of misfortune; coarse, and said at a thing rather than at a person",,1,ta-agent-v1;ipa=espeak
-profanity.intensifier,நாசமாய்ப் போன,,nācamāyp pōṉa,naːsʌmaːjp poːnʌ,before a noun: 'the damn -'; literally 'gone to ruin',,1,ta-agent-v1;ipa=espeak
+profanity.expletive,சனியன்!,,caṉiyaṉ!,sʌnijʌn,Saturn!,"a piece of misfortune; coarse, and said at a thing rather than at a person",1,ta-agent-v1;ipa=espeak
+profanity.intensifier,நாசமாய்ப் போன,,nācamāyp pōṉa,naːsʌmaːjp poːnʌ,gone to ruin,before a noun: 'the damn -',1,ta-agent-v1;ipa=espeak
 profanity.frustration,இது சுத்த வேஸ்ட்,இது மோசமாக இருக்கிறது,itu cutta vēsṭ,idɯ suttʌ veːsʈ,a complete waste,"mild-coarse, about a thing and not a person",1,ta-agent-v1;ipa=espeak
 profanity.thats-rude,இது அநாகரிகம்,,itu anākarikam,idɯ anaːɡʌɾiɡʌm,this is bad manners,,1,ta-agent-v1;ipa=espeak
 profanity.excuse-my-language,மோசமான வார்த்தைகளுக்கு மன்னிக்கவும்,,mōcamāṉa vārttaikaḷukku maṉṉikkavum,moːsʌmaːnʌ vaːrttaɪɡʌɭɯkkɯ mʌnnikkʌvɯm,forgive me for the bad words,,1,ta-agent-v1;ipa=espeak

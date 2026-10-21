@@ -25,11 +25,11 @@ in-a-building.is-this-the-correct-entrance,ਇਹ ਸਹੀ ਦਰਵਾਜ਼�
 in-a-building.do-you-have-wi-fi,ਇੱਥੇ ਵਾਈ-ਫ਼ਾਈ ਹੈ?,,itthē vāī-fāī hai?,ɪttʰe ʋaifai hɛ,is Wi-Fi with you?,,2,pa-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,ਵਾਈ-ਫ਼ਾਈ ਦਾ ਪਾਸਵਰਡ ਕੀ ਹੈ?,,vāī-fāī dā pāsavaraḍ kī hai?,ʋaifai da pasəʋəɾəɖ ki hɛ,,,2,pa-agent-v1;ipa=espeak
 in-a-building.which-floor,ਕਿਹੜੀ ਮੰਜ਼ਿਲ?,,kihaṛī maṁzil?,kɪhəɽi mʌnzɪl,which floor?,,2,pa-agent-v1;ipa=espeak
-toilets.where-toilet,ਟਾਇਲਟ ਕਿੱਥੇ ਹੈ?,ਪਖਾਨਾ ਕਿੱਥੇ ਹੈ?,ṭāilaṭ kitthē hai?,ʈaɪləʈ kɪttʰe hɛ,ਟਾਇਲਟ is the everyday word in Punjab; ਪਖਾਨਾ is the older Punjabi one,,2,pa-agent-v1;ipa=espeak
+toilets.where-toilet,ਟਾਇਲਟ ਕਿੱਥੇ ਹੈ?,ਪਖਾਨਾ ਕਿੱਥੇ ਹੈ?,ṭāilaṭ kitthē hai?,ʈaɪləʈ kɪttʰe hɛ,where is the toilet?,ਟਾਇਲਟ is the everyday word in Punjab; ਪਖਾਨਾ is the older Punjabi one,2,pa-agent-v1;ipa=espeak
 toilets.where-public-toilet,ਜਨਤਕ ਟਾਇਲਟ ਕਿੱਥੇ ਹੈ?,,janatak ṭāilaṭ kitthē hai?,ɟʌnətək ʈaɪləʈ kɪttʰe hɛ,where is the public toilet?,,2,pa-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,ਮੈਂ ਟਾਇਲਟ ਵਰਤ ਸਕਦਾ ਹਾਂ?,,maiṁ ṭāilaṭ varat sakadā hāṁ?,mɛ̃ ʈaɪləʈ ʋʌɾət sʌkəda hã,may I use the toilet?,,2,pa-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,ਇਹ ਸਿਰਫ਼ ਗਾਹਕਾਂ ਲਈ ਹੈ?,,ih siraf gāhakāṁ laī hai?,ɪ˥ sɪɾəf ɡahəkã lʌi hɛ,is this only for customers?,,2,pa-agent-v1;ipa=espeak
-toilets.toilet-wc,ਟਾਇਲਟ,ਪਖਾਨਾ,ṭāilaṭ,ʈaɪləʈ,the sign word; the older Punjabi ਪਖਾਨਾ is beside it,,2,pa-agent-v1;ipa=espeak
+toilets.toilet-wc,ਟਾਇਲਟ,ਪਖਾਨਾ,ṭāilaṭ,ʈaɪləʈ,toilet,the sign word; the older Punjabi ਪਖਾਨਾ is beside it,2,pa-agent-v1;ipa=espeak
 toilets.is-it-free,ਮੁਫ਼ਤ ਹੈ?,,mufat hai?,mʊfət hɛ,is it free?,,2,pa-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,ਸਿੱਕਾ ਪਾਉਣਾ ਪੈਂਦਾ ਹੈ?,,sikkā pāuṇā paiṁdā hai?,sɪkka paʊɳa pɛnda hɛ,does a coin have to be put in?,,2,pa-agent-v1;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,ਟੂਟੀ ਦਾ ਪਾਣੀ ਪੀਣ ਲਈ ਠੀਕ ਹੈ?,,ṭūṭī dā pāṇī pīṇ laī ṭhīk hai?,ʈuʈi da paɳi piɳ lʌi ʈʰik hɛ,is the tap water right for drinking?,,2,pa-agent-v1;ipa=espeak

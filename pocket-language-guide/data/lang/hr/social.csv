@@ -101,7 +101,7 @@ children.stroller,dječja kolica,,djˈetʃja kolitsa,"plural only, like English 
 children.playground,Ima li ovdje dječje igralište?,,ima li ˈovdje djˈetʃje iɡraliʃte,,,2,hr-agent-v1;ipa=espeak
 board-answers.there-is-no-wait,"Nema reda, možete odmah ući",,"nema rˈeda, moʒete ˈodmax ˈutɕi",,,2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,Ovdje nema toga što želim reći,,ˈovdje nema tˈoɡa ʃto ʒˈelim rˈetɕi,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,Zatvoreno je,,zatvoreno je,"spoken register, distinct from the sign word zatvoreno",,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Zatvoreno je,,zatvoreno je,it is closed,"spoken register, distinct from the sign word zatvoreno",2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,Nemamo to,,nemamo tˈo,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kartica ili gotovina?,,kartitsa ili ɡotovina,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.please-wait,"Trenutak, molim",,"trenutak, mˈolim",,,2,hr-agent-v1;board-answers-v1;ipa=espeak

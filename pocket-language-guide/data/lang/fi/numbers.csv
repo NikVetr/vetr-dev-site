@@ -29,7 +29,7 @@ atm-cash.may-i-pay-in,Käykö maksuksi {}?,,kˈæykø mˈaksuksi {},does {} do a
 atm-cash.please-charge-in-local-currency,"Maksu paikallisessa valuutassa, kiitos.",,"mˈaksu pˈaikallisˌessa vˈaluːtˌassa, kˈiːtos",declines dynamic currency conversion,,2,fi-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,Mistä saa kolikoita?,,mˈistæ sˈaː kˈolikˌoita,,,2,fi-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Onko kortilla minimisumma?,,ˈoŋko kˈortilla mˈinimisˌumma,,,2,fi-agent-v1;ipa=espeak
-atm-cash.atm,pankkiautomaatti,Otto.,pˈaŋkkiˌautomˌaːtti,Otto. is the brand on most Finnish cash machines and is what people say,,2,fi-agent-v1;ipa=espeak
+atm-cash.atm,pankkiautomaatti,Otto.,pˈaŋkkiˌautomˌaːtti,bank automat,Otto. is the brand on most Finnish cash machines and is what people say,2,fi-agent-v1;ipa=espeak
 atm-cash.banknote,seteli,,sˈeteli,,,2,fi-agent-v1;ipa=espeak
 atm-cash.coin,kolikko,,kˈolikko,,,2,fi-agent-v1;ipa=espeak
 atm-cash.cash-only,vain käteinen,,vˈaiŋ kˈæteinen,,,2,fi-agent-v1;ipa=espeak
@@ -38,7 +38,7 @@ atm-cash.change,vaihtoraha,,vˈaihtorˌaha,"the money handed back, not the verb"
 atm-cash.exchange-rate,vaihtokurssi,,vˈaihtokˌurssi,,,2,fi-agent-v1;ipa=espeak
 atm-cash.bank,pankki,,pˈaŋkki,,,2,fi-agent-v1;ipa=espeak
 atm-cash.money-exchange,rahanvaihto,,rˈahanvˌaihto,,,2,fi-agent-v1;ipa=espeak
-atm-cash.pin,tunnusluku,PIN-koodi,tˈunnuslˌuku,tunnusluku is what a Finnish keypad displays; PIN-koodi is what people say,,2,fi-agent-v1;ipa=espeak
+atm-cash.pin,tunnusluku,PIN-koodi,tˈunnuslˌuku,identification number,tunnusluku is what a Finnish keypad displays; PIN-koodi is what people say,2,fi-agent-v1;ipa=espeak
 numbers-money.euro,euro,,ˈeuro,,,2,fi-agent-v1;ipa=espeak
 numbers-money.euro-symbol,€,euro,,"after the number with a comma decimal, as Finnish writes every amount: 10,50 €",,2,fi-agent-v1
 numbers-money.toman,10 rialia,,kˈymmenen rˈialˌia,"the unit an Iranian price is quoted in, not the one on the note",,2,fi-agent-v1;ipa=espeak

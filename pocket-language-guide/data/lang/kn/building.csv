@@ -29,7 +29,7 @@ toilets.where-toilet,ಟಾಯ್ಲೆಟ್ ಎಲ್ಲಿದೆ?,ಶೌಚ�
 toilets.where-public-toilet,ಸಾರ್ವಜನಿಕ ಶೌಚಾಲಯ ಎಲ್ಲಿದೆ?,,sārvajanika śaucālaya ellide?,saːrvaɟanika ʃaʊcaːlaja ellide,where is the public toilet?,,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
 toilets.may-i-use-the-toilet,ಟಾಯ್ಲೆಟ್ ಬಳಸಬಹುದೇ?,,ṭāyleṭ baḷasabahudē?,ʈaːjleʈ baɭasabahudeː,may the toilet be used?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 toilets.is-it-only-for-customers,ಗ್ರಾಹಕರಿಗೆ ಮಾತ್ರವೇ?,,grāhakarige mātravē?,ɡraːhakariɡe maːtraveː,for customers only?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
-toilets.toilet-wc,ಶೌಚಾಲಯ,ಟಾಯ್ಲೆಟ್,śaucālaya,ʃaʊcaːlaja,the sign form; the loan is what is spoken,,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
+toilets.toilet-wc,ಶೌಚಾಲಯ,ಟಾಯ್ಲೆಟ್,śaucālaya,ʃaʊcaːlaja,toilet,the sign form; the loan is what is spoken,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
 toilets.is-it-free,ಉಚಿತವೇ?,,ucitavē?,ucitaveː,is it free of charge?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 toilets.do-i-need-a-coin,ನಾಣ್ಯ ಬೇಕೇ?,,nāṇya bēkē?,naːɳja beːkeː,is a coin needed?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 toilets.is-the-tap-water-safe-to-drink,ನಲ್ಲಿ ನೀರು ಕುಡಿಯಲು ಸುರಕ್ಷಿತವೇ?,,nalli nīru kuḍiyalu surakṣitavē?,nalli niːru kuɖijalu surakʂitaveː,is tap water safe to drink?,,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
@@ -57,4 +57,4 @@ building-words.exit,ನಿರ್ಗಮನ,,nirgamana,nirɡamana,,,2,Karnataka pu
 building-words.men,ಪುರುಷರು,,puruṣaru,puruʂaru,,,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
 building-words.women,ಮಹಿಳೆಯರು,,mahiḷeyaru,mahiɭejaru,,,2,Karnataka public signage; Namma Metro bilingual station wording; BWSSB potable-water notices;ipa=espeak
 building-words.door,ಬಾಗಿಲು,,bāgilu,baːɡilu,,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
-building-words.key,ಕೀ,ಬೀಗದ ಕೈ,kī,kiː,the loan is what a hotel says; ಬೀಗದ ಕೈ is the native compound,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
+building-words.key,ಕೀ,ಬೀಗದ ಕೈ,kī,kiː,key,the loan is what a hotel says; ಬೀಗದ ಕೈ is the native compound,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"

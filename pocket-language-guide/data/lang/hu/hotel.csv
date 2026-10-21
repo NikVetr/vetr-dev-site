@@ -54,7 +54,7 @@ laundry.coin-operated,érmés / érmével működik,,ˈeːrmeːʃ / ˈeːrmeːv�
 massage-spa.please-stop,"Kérem, hagyja abba",,"kˈeːrɛm, hˈɑɟɟɑ ˈɑbbɑ",please stop it,"abbahagy is to cease, not to interrupt",2,hu-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-pause,Tartsunk egy kis szünetet,,tˈɑrtʃunk ˈɛɟ kˈiʃ sˈynɛtɛt,let us take a short break,szünet is a break that resumes,2,hu-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-avoid-this-area,"Kérem, ezt a részt ne érintse",,"kˈeːrɛm, ˈɛst ˈɑ rˈeːst nˈɛ ˈeːrintʃɛ",please do not touch this part,,2,hu-agent-v1;spa-board-v1;ipa=espeak
-massage-spa.stronger-pressure,"Kérem, nyomja erősebben",,"kˈeːrɛm, ɲˈomjɑ ˈɛrøːʃɛbbɛn",erősebben is the word a Hungarian masszőr asks the guest to use,,2,hu-agent-v1;spa-board-v1;ipa=espeak
+massage-spa.stronger-pressure,"Kérem, nyomja erősebben",,"kˈeːrɛm, ɲˈomjɑ ˈɛrøːʃɛbbɛn",please press harder,erősebben is the word a Hungarian masszőr asks the guest to use,2,hu-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.more-gently,"Gyengébben, kérem",,"ɟˈɛnɡeːbbɛn, kˈeːrɛm","weaker, please",,2,hu-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.that-pressure-is-good,"Ez a nyomás jó, maradjon így",,"ˈɛz ˈɑ ɲˈomaːʃ jˈoː, mˈɑrɑɟɟon ˈiːɟ","this pressure is good, keep it like this",,2,hu-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.focus-on-shoulders,"Kérem, főleg a vállamat masszírozza",,"kˈeːrɛm, fˈøːlɛɡ ˈɑ vˈaːllɑmɑt mˈɑsiːrozzɑ",Hungarian uses the singular for a paired body part: a vállam is both shoulders,,2,hu-agent-v1;spa-board-v1;ipa=espeak

@@ -6,7 +6,7 @@ emergency-medical.i-am-sick,میں بیمار ہوں,,maiñ bīmār hūñ,mˈẽ
 emergency-medical.i-am-injured,مجھے چوٹ لگی ہے,,mujhe choṭ lagī hai,mˌʊɟʰeː cˈoːʈ lˈʌɡi hɛ,I have been injured,زخمی/گھایل read as gravely wounded,2,ur-med-v1;ipa=espeak
 emergency-medical.it-hurts-here,یہاں درد ہے,,yahāñ dard hai,jˈʌhãː dˈʌɾd hɛ,,,2,ur-med-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,میڈیکل اسٹور کہاں ہے؟,دوا خانہ کہاں ہے؟,meḍikal isṭor kahāñ hai?,meːɖˈiːkəl ɪsʈˈoːɾ kˈʌhãː hɛ,"Pakistani pharmacies sign themselves Medical Store, in English and in Urdu transcription",,2,ur-med-v1;ipa=espeak
-emergency-medical.please-take-me-to-a-hospital,مجھے ہسپتال لے چلیے,,mujhe hasptāl le chaliye,mˌʊɟʰeː hˌəsəptˈaːl lˈeː cˈʌljeː,Pakistan writes ہسپتال where Indian Urdu writes اسپتال,,2,ur-med-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,مجھے ہسپتال لے چلیے,,mujhe hasptāl le chaliye,mˌʊɟʰeː hˌəsəptˈaːl lˈeː cˈʌljeː,please take me to hospital,Pakistan writes ہسپتال where Indian Urdu writes اسپتال,2,ur-med-v1;ipa=espeak
 emergency-medical.i-feel-unwell,میری طبیعت ٹھیک نہیں,,merī tabī’at ṭhīk nahīñ,mˈeːɾi tˌabiˈat ʈʰˈiːk nahˈĩː,,,2,ur-med-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,یہ ایمرجنسی ہے,,yah aimarjansī hai,jeːh ˌeːməɾəɟˈʌnsi hɛ,,,2,ur-med-v1;ipa=espeak
 emergency-medical.i-am-having-a-severe-allergic-reaction,مجھے شدید الرجی ہو رہی ہے، اینافلیکسس,,"mujhe shadīd alarjī ho rahī hai, aināfilaiksis",mˌʊɟʰeː ʃədˈiːd ʊlɾˈʌɟi hˈoː ɾˈʌhi hɛ ˌeːnaːflˈiːkəsˌəs,the clinical term is appended so a doctor reads the right condition,,2,ur-med-v1;ipa=espeak
@@ -20,7 +20,7 @@ emergency-medical.is-there-a-doctor-who-speaks-english,کیا کوئی ڈاکٹ�
 emergency-medical.i-think-a-bone-is-broken,لگتا ہے ہڈی ٹوٹ گئی ہے,,lagtā hai haḍḍī ṭūṭ ga’ī hai,lˈʌɡtˌaː hɛ hˈʌɖi ʈˈoːʈ ɡˈai hɛ,,,2,ur-med-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,میرے ایمرجنسی نمبر پر فون کیجیے,,mere aimarjansī nambar par fon kījiye,mˈeːɾeː ˌeːməɾəɟˈʌnsi nˈʌmbəɾ pˈʌɾ fˈoːn kˈeːɟjeː,,,2,ur-med-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,میرا سفری بیمہ ہے,,merā safarī bīma hai,mˈeːɾaː sˈʌfɾˌiː bˈiːma hɛ,,,2,ur-med-v1;ipa=espeak
-medical-conditions.i-am-diabetic,مجھے شوگر ہے,مجھے ذیابیطس ہے,mujhe shugar hai,mˌʊɟʰeː ʃˈoːɡəɾ hɛ,شوگر is what every Pakistani says and understands; ذیابیطس is the written medical term,,2,ur-med-v1;ipa=espeak
+medical-conditions.i-am-diabetic,مجھے شوگر ہے,مجھے ذیابیطس ہے,mujhe shugar hai,mˌʊɟʰeː ʃˈoːɡəɾ hɛ,I have sugar,شوگر is what every Pakistani says and understands; ذیابیطس is the written medical term,2,ur-med-v1;ipa=espeak
 medical-conditions.i-need-insulin,مجھے انسولین چاہیے,,mujhe insūlīn chāhiye,mˌʊɟʰeː ˈansoːlˌiːn cˈaːhjeː,,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-have-asthma,مجھے دمہ ہے,,mujhe dama hai,mˌʊɟʰeː dˈʌmˌa hɛ,,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,مجھے دل کی بیماری ہے,,mujhe dil kī bīmārī hai,mˌʊɟʰeː dˈɪl ki bimˈaːɾi hɛ,,,2,ur-med-v1;ipa=espeak
@@ -28,7 +28,7 @@ medical-conditions.i-am-allergic-to-penicillin,مجھے پینسلین سے ال
 medical-conditions.i-have-epilepsy,مجھے مرگی ہے,,mujhe mirgī hai,mˌʊɟʰeː mˈʌɾɡˌiː hɛ,,,2,ur-med-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,میری شوگر کم ہو گئی ہے,,merī shugar kam ho ga’ī hai,mˈeːɾi ʃˈoːɡəɾ kˈʌm hˈoː ɡˈai hɛ,,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,مجھے اپنا انہیلر چاہیے,,mujhe apnā inhelar chāhiye,mˌʊɟʰeː ˈapnˌaː ˌanhˈiːləɾ cˈaːhjeː,I need my (own) inhaler,"apnā, the reflexive possessive, refers back to the dative subject mujhe",2,ur-med-v1;fix=en.wikipedia Hindustani grammar rev 1365420047 (apnā is a (genitive) reflexive pronoun: my/your/etc. (own));in-pack-frame=lost-rescue.i-cannot-find-my-hotel (مجھے اپنا ہوٹل نہیں مل رہا);rule=reflexive-possessive-with-dative-subject;row-corrections-v7;ipa=espeak
-medical-conditions.i-am-pregnant,میں حاملہ ہوں,میں امید سے ہوں,maiñ hāmila hūñ,mˈẽ hˈaːməla hũː,the alternative is the everyday euphemism; the clinical word is in text because this is a medical row,,2,ur-med-v1;ipa=espeak
+medical-conditions.i-am-pregnant,میں حاملہ ہوں,میں امید سے ہوں,maiñ hāmila hūñ,mˈẽ hˈaːməla hũː,I am pregnant,the alternative is the everyday euphemism; the clinical word is in text because this is a medical row,2,ur-med-v1;ipa=espeak
 medical-conditions.i-carry-an-adrenaline-injector,میرے پاس ایڈرینالین انجیکٹر ہے,,mere pās aiḍrenālīn injekṭar hai,mˈeːɾeː pˈaːs ˌeːɖɾˌiːnaːlˈiːn anɟˈeːkʈəɾ hɛ,,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,مجھے {} کی دوا لینی پڑتی ہے,,mujhe {} kī dawā lenī paṛtī hai,mˌʊɟʰeː {} ki dˈaʋaː lˈeːni pˈʌɽtˌiː hɛ,,,2,ur-med-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,میری خون پتلا کرنے کی دوا چل رہی ہے,,merī khūn patlā karne kī dawā chal rahī hai,mˈeːɾi xˈuːn pˈʌtlˌaː kˌaɾneː ki dˈaʋaː cˈʌl ɾˈʌhi hɛ,,,2,ur-med-v1;ipa=espeak
@@ -52,10 +52,10 @@ pharmacy-symptoms.where-is-an-all-night-pharmacy,رات بھر کھلا میڈی
 pharmacy-symptoms.painkiller,درد کی دوا,,dard kī dawā,dˈʌɾd ki dˈaʋaː,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,کیا ڈاکٹر کا نسخہ چاہیے؟,,kyā ḍākṭar kā nuskha chāhiye?,kjˈaː ɖˌaːkʈˈaɾ kaː nˈʌsəxa cˈaːhjeː,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,میرے سر میں درد ہے,,mere sar meñ dard hai,mˈeːɾeː sˈʌɾ mˈẽ dˈʌɾd hɛ,,,2,ur-med-v1;ipa=espeak
-pharmacy-symptoms.paracetamol-acetaminophen,پیراسیٹامول,پیناڈول,pairāsīṭāmol,pˌeːɾaːsˌiːʈaːmˈoːl,پیناڈول is the brand every Pakistani pharmacy stocks and the name to ask for,,2,ur-med-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,پیراسیٹامول,پیناڈول,pairāsīṭāmol,pˌeːɾaːsˌiːʈaːmˈoːl,paracetamol,پیناڈول is the brand every Pakistani pharmacy stocks and the name to ask for,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.how-much-should-i-take,کتنی خوراک لینی ہے؟,,kitnī khurāk lenī hai?,kˈɪtni xoːɾˈaːk lˈeːni hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,مجھے قے آ رہی ہے,مجھے الٹیاں آ رہی ہیں,mujhe qai ā rahī hai,mˌʊɟʰeː qˈeː ˈaː ɾˈʌhi hɛ,,,2,ur-med-v1;ipa=espeak
-pharmacy-symptoms.rehydration-salts,او آر ایس,نمکول,o ār es,ˈoː ˈaːɾ ˈeːs,نمکول is the Pakistani brand name of the ORS sachet,,2,ur-med-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,او آر ایس,نمکول,o ār es,ˈoː ˈaːɾ ˈeːs,ORS,نمکول is the Pakistani brand name of the ORS sachet,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.how-many-times-a-day,دن میں کتنی بار؟,,din meñ kitnī bār?,dˈɪn mˈẽ kˈɪtni bˈaːɾ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-stomach-ache,میرے پیٹ میں درد ہے,,mere peṭ meñ dard hai,mˈeːɾeː pˈeːʈ mˈẽ dˈʌɾd hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,مجھے کھانسی ہے,,mujhe khānsī hai,mˌʊɟʰeː kʰˈaːnsi hɛ,,,2,ur-med-v1;ipa=espeak
@@ -63,17 +63,17 @@ pharmacy-symptoms.antihistamine,الرجی کی دوا,,alarjī kī dawā,alɾˈ
 pharmacy-symptoms.anti-diarrhea-medicine,دستوں کی دوا,,dastoñ kī dawā,dˈʌstˌõː ki dˈaʋaː,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-to-take-with,کیا یہ {} کے ساتھ لینا ٹھیک ہے؟,,kyā yah {} ke sāth lenā ṭhīk hai?,kjˈaː jeːh {} keː sˈaːtʰ lˈeːnaː ʈʰˈiːk hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-feel-dizzy,مجھے چکر آ رہے ہیں,,mujhe chakkar ā rahe haiñ,mˌʊɟʰeː cˈʌkəɾ ˈaː ɾˈʌheː hẽ,,,2,ur-med-v1;ipa=espeak
-pharmacy-symptoms.ibuprofen,آئبوپروفین,بروفین,ā’ibūprofen,ˈaːɪbˌoːpɾˌoːfin,بروفین is the Pakistani brand name,,2,ur-med-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,آئبوپروفین,بروفین,ā’ibūprofen,ˈaːɪbˌoːpɾˌoːfin,ibuprofen,بروفین is the Pakistani brand name,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,میرا گلا خراب ہے,,merā galā kharāb hai,mˈeːɾaː ɡˈʌlaː xəɾˈaːb hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.can-i-get-this-medicine-here,کیا یہ دوا یہاں مل جائے گی؟,,kyā yah dawā yahāñ mil jā’e gī?,kjˈaː jeːh dˈaʋaː jˈʌhãː mˈɪl ɟˈaːeː ɡi,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.bandage,پٹی,,paṭṭī,pˈʌʈi,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.the-pain-is-severe,درد بہت شدید ہے,,dard bahut shadīd hai,dˈʌɾd bˈahʊt ʃədˈiːd hɛ,,,2,ur-med-v1;ipa=espeak
-pharmacy-symptoms.antiseptic,اینٹی سیپٹک,پایوڈین,ainṭī saipṭik,ˈeːnʈi sˈeːpəʈˌək,پایوڈین is the Pakistani brand name of the antiseptic solution,,2,ur-med-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,اینٹی سیپٹک,پایوڈین,ainṭī saipṭik,ˈeːnʈi sˈeːpəʈˌək,antiseptic,پایوڈین is the Pakistani brand name of the antiseptic solution,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,میرا جی متلا رہا ہے,,merā jī matlā rahā hai,mˈeːɾaː ɟˈiː mʊtˈalaː ɾˈʌhaː hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-rash,مجھے دانے نکل آئے ہیں,,mujhe dāne nikal ā’e haiñ,mˌʊɟʰeː dˈaːneː nɪkˈal ˈaːeː hẽ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.before-or-after-food,کھانے سے پہلے یا بعد میں؟,,khāne se pahle yā bād meñ?,kʰˈaːneː seː pˈɛhleː jˈaː bˈaːd mˈẽ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-think-it-is-infected,لگتا ہے اس میں انفیکشن ہے,,lagtā hai is meñ infekshan hai,lˈʌɡtˌaː hɛ ɪs mˈẽ ˌanfˈeːkʃan hɛ,,,2,ur-med-v1;ipa=espeak
-pharmacy-symptoms.motion-sickness-tablets,متلی کی گولی,گریوینیٹ,matlī kī golī,mʊtˈali ki ɡˈoːli,گریوینیٹ is the Pakistani brand name,,2,ur-med-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,متلی کی گولی,گریوینیٹ,matlī kī golī,mʊtˈali ki ɡˈoːli,nausea tablet,گریوینیٹ is the Pakistani brand name,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cut,مجھے کٹ لگا ہے,,mujhe kaṭ lagā hai,mˌʊɟʰeː kˈʌʈ lˈʌɡaː hɛ,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.antacid,تیزابیت کی دوا,ایسیڈیٹی کی دوا,tezābiyat kī dawā,tˌeːzaːbiˈat ki dˈaʋaː,,,2,ur-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,یہاں جل گیا ہے,,yahāñ jal gayā hai,jˈʌhãː ɟˈʌl ɡˌajaː hɛ,,,2,ur-med-v1;ipa=espeak
@@ -102,10 +102,10 @@ lost-rescue.we-are-here,ہم یہاں ہیں,,ham yahāñ haiñ,ham jˈʌhãː h
 lost-rescue.please-look-at-my-location-pin,میرا لوکیشن پن دیکھیے,,merā lokeshan pin dekhiye,mˈeːɾaː loːkˈiːʃən pˈʌn dˈeːkʰjeː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-cannot-walk,میں چل نہیں سکتا,,maiñ chal nahīñ saktā,mˈẽ cˈʌl nahˈĩː sˈʌktˌaː,I cannot walk,,2,"ur-agent-v1;fix=Platts A Dictionary of Urdu, Classical Hindi, and English (DSAL) p. 440 ćalnā (to walk -- travel);was=literal masculine speaker -- a woman says سکتی (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine میں چل نہیں سکتی serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 lost-rescue.i-sprained-my-ankle,میرے ٹخنے میں موچ آ گئی ہے,,mere ṭakhne meñ moch ā ga’ī hai,mˈeːɾeː ʈˈʌxnˌeː mˈẽ mˈoːc ˈaː ɡˈai hɛ,,,2,ur-agent-v1;ipa=espeak
-lost-rescue.please-contact-rescue,ریسکیو کو خبر کیجیے,,reskiyū ko khabar kījiye,ɾˌeːskˈeːoː kˈoː xˈʌbəɾ kˈeːɟjeː,"Pakistan's emergency service calls itself Rescue, and the word is used in Urdu as it stands",,2,ur-agent-v1;ipa=espeak
+lost-rescue.please-contact-rescue,ریسکیو کو خبر کیجیے,,reskiyū ko khabar kījiye,ɾˌeːskˈeːoː kˈoː xˈʌbəɾ kˈeːɟjeː,please inform Rescue,"Pakistan's emergency service calls itself Rescue, and the word is used in Urdu as it stands",2,ur-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,میرا ساتھی گم ہو گیا ہے,,merā sāthī gum ho gayā hai,mˈeːɾaː sˈaːtʰi ɡˈʊm hˈoː ɡˌajaː hɛ,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,میری موجودہ جگہ دیکھیے,,merī maujūda jagah dekhiye,mˈeːɾi moːɟˈuːda ɟˈʌɡˌa dˈeːkʰjeː,,,2,ur-agent-v1;ipa=espeak
-lost-rescue.my-child-is-missing,میرا بچہ گم ہو گیا ہے,,merā bachcha gum ho gayā hai,mˈeːɾaː bˈʌca ɡˈʊm hˈoː ɡˌajaː hɛ,masculine child; a girl is میری بچی گم ہو گئی ہے,,2,ur-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,میرا بچہ گم ہو گیا ہے,,merā bachcha gum ho gayā hai,mˈeːɾaː bˈʌca ɡˈʊm hˈoː ɡˌajaː hɛ,my child has become lost,masculine child; a girl is میری بچی گم ہو گئی ہے,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,مجھے نہیں معلوم میں کہاں ہوں,,mujhe nahīñ mālūm maiñ kahāñ hūñ,mˌʊɟʰeː nahˈĩː mˈaːluːm mˈẽ kˈʌhãː hũː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.my-friend-is-hurt,میرے دوست کو چوٹ لگی ہے,,mere dost ko choṭ lagī hai,mˈeːɾeː dˈoːst kˈoː cˈoːʈ lˈʌɡi hɛ,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,میرا بٹوہ گم ہو گیا ہے,,merā baṭwa gum ho gayā hai,mˈeːɾaː bəʈˈoːa ɡˈʊm hˈoː ɡˌajaː hɛ,,,2,ur-agent-v1;ipa=espeak
@@ -114,7 +114,7 @@ lost-rescue.where-is-lost-and-found,گم شدہ سامان کا دفتر کہا�
 lost-rescue.i-cannot-find-my-hotel,مجھے اپنا ہوٹل نہیں مل رہا,,mujhe apnā hoṭal nahīñ mil rahā,mˌʊɟʰeː ˈapnˌaː hˈoːʈəl nahˈĩː mˈɪl ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-left-it-on-the-train,یہ ٹرین میں رہ گیا,,yah ṭren meñ rah gayā,jeːh ʈɾˈeːn mˈẽ ɾˈɛh ɡˌajaː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,میں نیچے نہیں اتر سکتا,,maiñ nīche nahīñ utar saktā,mˈẽ nˈiːceː nahˈĩː ʊtˈaɾ sˈʌktˌaː,I cannot get down,,2,"ur-agent-v1;fix=Platts A Dictionary of Urdu, Classical Hindi, and English (DSAL) p. 16 utarnā (to come down -- descend -- alight);was=literal masculine speaker -- a woman says سکتی (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine میں نیچے نہیں اتر سکتی serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-police-consulate.where-is-the-police-station,تھانہ کہاں ہے؟,پولیس اسٹیشن کہاں ہے؟,thāna kahāñ hai?,tʰˈaːnˌa kˈʌhãː hɛ,تھانہ is what the building is called and signed in Pakistan,,2,ur-agent-v1;ipa=espeak
+police-consulate.where-is-the-police-station,تھانہ کہاں ہے؟,پولیس اسٹیشن کہاں ہے؟,thāna kahāñ hai?,tʰˈaːnˌa kˈʌhãː hɛ,where is the police station?,تھانہ is what the building is called and signed in Pakistan,2,ur-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,مجھے چوری کی رپورٹ کرانی ہے,,mujhe chorī kī riporṭ karānī hai,mˌʊɟʰeː cˈoːɾi ki ɾəpˈoːɾʈ kəɾˈaːni hɛ,,,2,ur-agent-v1;ipa=espeak
 police-consulate.my-bag-was-stolen,میرا بیگ چوری ہو گیا,,merā baig chorī ho gayā,mˈeːɾaː bˈeːɡ cˈoːɾi hˈoː ɡˌajaː,,,2,ur-agent-v1;ipa=espeak
 police-consulate.my-passport-was-stolen,میرا پاسپورٹ چوری ہو گیا,,merā pāsporṭ chorī ho gayā,mˈeːɾaː pˌaːspˈoːɾʈ cˈoːɾi hˈoː ɡˌajaː,,,2,ur-agent-v1;ipa=espeak

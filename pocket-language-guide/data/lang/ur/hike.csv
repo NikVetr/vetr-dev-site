@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
-trail-words.trail,ٹریک,پگڈنڈی,ṭrek,ʈɾˈeːk,ṭrek is what hikers in Pakistan say; pagḍanḍī is the Urdu word for a footpath,,2,ur-agent-v1;ipa=espeak
+trail-words.trail,ٹریک,پگڈنڈی,ṭrek,ʈɾˈeːk,trek,ṭrek is what hikers in Pakistan say; pagḍanḍī is the Urdu word for a footpath,2,ur-agent-v1;ipa=espeak
 trail-words.trailhead,ٹریک کا آغاز,,ṭrek kā āghāz,ʈɾˈeːk kaː aːɣˈaːz,,,2,ur-agent-v1;ipa=espeak
 trail-words.summit,چوٹی,,choṭī,cˈoːʈi,,,2,ur-agent-v1;ipa=espeak
 trail-words.viewpoint,ویو پوائنٹ,نظارے کی جگہ,wyū po’inṭ,ʋˈeːoː pˌʊaːˈɪnʈ,,,2,ur-agent-v1;ipa=espeak

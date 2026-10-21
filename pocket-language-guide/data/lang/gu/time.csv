@@ -10,8 +10,8 @@ time-scheduling.what-time-does-it-open,કેટલા વાગ્યે ખૂ
 time-scheduling.what-time-does-it-close,કેટલા વાગ્યે બંધ થાય છે?,,kēṭalā vāgyē baṁdh thāy chē?,keːʈʌlaː ʋaːɡjeː bʌndʰ tʰaːjə cʰeː,at how many o clock does it close?,,2,gu-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,કેટલો સમય લાગશે?,,kēṭalō samay lāgaśē?,keːʈʌloː səmɛj laːɡʌʃeː,how much time will it take?,,2,gu-agent-v1;ipa=espeak
 time-words.today,આજે,,ājē,aːɟeː,today,,2,gu-agent-v1;ipa=espeak
-time-words.tomorrow,કાલે,,kālē,kaːleː,also means yesterday,the tense tells them apart,2,gu-agent-v1;ipa=espeak
-time-words.yesterday,કાલે,ગઈ કાલે,kālē,kaːleː,same word as tomorrow; ગઈ કાલે is *the gone કાલે*,,2,gu-agent-v1;ipa=espeak
+time-words.tomorrow,કાલે,,kālē,kaːleː,tomorrow,also means yesterday; the tense tells them apart,2,gu-agent-v1;ipa=espeak
+time-words.yesterday,કાલે,ગઈ કાલે,kālē,kaːleː,yesterday,same word as tomorrow; ગઈ કાલે is *the gone કાલે*,2,gu-agent-v1;ipa=espeak
 time-words.this-week,આ અઠવાડિયે,,ā aṭhavāḍiyē,aː ʌʈʰʋaːɖɪjeː,in this week,,2,gu-agent-v1;ipa=espeak
 time-words.next-week,આવતા અઠવાડિયે,,āvatā aṭhavāḍiyē,aːʋʌtaː ʌʈʰʋaːɖɪjeː,in the coming week,,2,gu-agent-v1;ipa=espeak
 time-words.morning,સવાર,,savār,sʌʋaːɾ,morning,,2,gu-agent-v1;ipa=espeak

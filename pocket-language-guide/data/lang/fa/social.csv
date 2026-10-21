@@ -68,7 +68,7 @@ sim-data.can-i-top-up-this-sim,می‌شود این سیم‌کارت را شا�
 sim-data.top-up,شارژ,,shārzh,ʃɑrʒ,,,2,fa-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,در {} آنتن دارد؟,,dar {} ānten dārad?,dar {} ɑnten dɑrad,,,2,fa-agent-v1;ipa=espeak
 sim-data.signal,آنتن,,ānten,ɑnten,,,2,fa-agent-v1;ipa=espeak
-sim-data.esim,ای‌سیم,,i-sim,isim,Persian writes it out in its own letters rather than keeping the Latin,,2,fa-agent-v1;ipa=espeak
+sim-data.esim,ای‌سیم,,i-sim,isim,eSIM,Persian writes it out in its own letters rather than keeping the Latin,2,fa-agent-v1;ipa=espeak
 sim-data.prepaid,اعتباری,,e‘tebāri,eʔtebɑri,,,2,fa-agent-v1;ipa=espeak
 sim-data.roaming,رومینگ,,ruming,ruminɡ,,,2,fa-agent-v1;ipa=espeak
 etiquette.is-this-allowed,این مجاز است؟,,in mojāz ast?,in modʒɑz ast,,,2,fa-agent-v1;ipa=espeak

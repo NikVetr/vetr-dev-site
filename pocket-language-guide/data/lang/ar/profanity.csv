@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_ala-lc,ipa,literal,note,confidence,provena
 profanity.oh-my-god,يا إلهي!,,yā ilāhī!,jˈaː ʔilˈaːhiː,O my God,mild,1,profanity-v1;src=Wasit;ipa=ala-lc
 profanity.damn,اللعنة!,,al-laʿnah!,ʔallˈaʕna,the curse,"damn it, mild",1,profanity-v1;src=Wasit;ipa=ala-lc
 profanity.expletive,خرا!,,kharā!,xˈaraː,shit,"coarse, colloquial",1,profanity-v1;src=Hinds-Badawi;ipa=ala-lc
-profanity.intensifier,اللعين,,al-laʿīn,ʔallaʕˈiːn,after a noun: the damned; agrees,,1,profanity-v1;src=Wasit;ipa=ala-lc
+profanity.intensifier,اللعين,,al-laʿīn,ʔallaʕˈiːn,the damned,after a noun: the damned; agrees,1,profanity-v1;src=Wasit;ipa=ala-lc
 profanity.frustration,دَه زفت,,dah zift,dˈa zˈift,this is tar,rubbish; mild-coarse,1,profanity-v1;src=Hinds-Badawi;ipa=ala-lc
 profanity.thats-rude,هذا كلام قبيح,,hādhā kalām qabīḥ,hˈaːðaː kalˈaːm qabˈiːħ,these are ugly words,,1,profanity-v1;src=Wasit;ipa=ala-lc
 profanity.excuse-my-language,آسف على هذا التعبير,,āsif ʿalá hādhā al-taʿbīr,ʔˈaːsif ʕˈalaː hˈaːðat taʕbˈiːr,sorry for this expression,,1,profanity-v1;src=Wasit;ipa=ala-lc

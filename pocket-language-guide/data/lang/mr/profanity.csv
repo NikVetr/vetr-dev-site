@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,अरे देवा!,,arē dēvā!,ˈʌɾeː dˈeːvaː,O God,mild,1,mr-agent-v1;ipa=espeak
 profanity.damn,छ्या!,,chyā!,cʰjˈaː,an interjection of annoyance at a situation,mild,1,mr-agent-v1;ipa=espeak
-profanity.expletive,आयला!,,āyalā!,ˈaːjlˌaː,"coarse general exclamation, literally a kinship reference (cf. Hindi साला); an insult only if aimed at someone",,1,mr-agent-v1;ipa=espeak
-profanity.intensifier,साला,,sālā,sˈaːlaː,"before a noun: wretched, damn-; mild, shared Mumbai Marathi/Hindi register",,1,mr-agent-v1;ipa=espeak
+profanity.expletive,आयला!,,āyalā!,ˈaːjlˌaː,[to] mother!,"coarse general exclamation, literally a kinship reference (cf. Hindi साला); an insult only if aimed at someone",1,mr-agent-v1;ipa=espeak
+profanity.intensifier,साला,,sālā,sˈaːlaː,brother-in-law,"before a noun: wretched, damn-; mild, shared Mumbai Marathi/Hindi register",1,mr-agent-v1;ipa=espeak
 profanity.frustration,हे भंगार आहे,,hē bhaṁgāra āhē,hˈeː bʰəŋɡˈaːɾ ˈaːheː,this is junk/scrap,mild,1,mr-agent-v1;ipa=espeak
 profanity.thats-rude,हे असभ्य आहे,,hē asabhya āhē,hˈeː ʌsˈʌbʰjə ˈaːheː,this is uncivil,,1,mr-agent-v1;ipa=espeak
 profanity.excuse-my-language,अपशब्दांबद्दल माफ करा,,apaśabdāṁbaddala māpha karā,ˌʌpəʃbdãbˈʌdːəl mˈaːpʰ kˈʌɾaː,forgive me for the bad words,,1,mr-agent-v1;ipa=espeak

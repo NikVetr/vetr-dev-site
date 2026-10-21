@@ -48,7 +48,7 @@ transit-rides.i-went-past-my-stop,از ایستگاهم گذشتم,,az istgāham
 transit-rides.can-i-use-this-ticket,این بلیت اعتبار دارد؟,,in belit e‘tebār dārad?,in belit eʔtebɑr dɑrad,,,2,fa-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,بلیت را باید باطل کنم؟,,belit rā bāyad bātel konam?,belit rɑ bɑjad bɑtel konam,,,2,fa-agent-v1;ipa=espeak
 place-words.visitor-center,مرکزِ اطلاعاتِ گردشگری,,markaz-e ettelā‘āt-e gardeshgari,markaze ettelɑʔɑte ɡardeʃɡari,,,2,fa-agent-v1;ipa=espeak
-place-words.railway-station,ایستگاهِ قطار,راه‌آهن,istgāh-e qatār,istɡɑhe qatɑr,rāh-āhan is what the station itself is called in most cities,,2,fa-agent-v1;ipa=espeak
+place-words.railway-station,ایستگاهِ قطار,راه‌آهن,istgāh-e qatār,istɡɑhe qatɑr,railway station,rāh-āhan is what the station itself is called in most cities,2,fa-agent-v1;ipa=espeak
 place-words.airport,فرودگاه,,forudgāh,forudɡɑh,,,2,fa-agent-v1;ipa=espeak
 place-words.service-desk,باجهٔ خدمات,,bāje-ye khadamāt,bɑdʒeje xadamɑt,,,2,fa-agent-v1;ipa=espeak
 place-words.bus-stop,ایستگاهِ اتوبوس,,istgāh-e otobus,istɡɑhe otobus,,,2,fa-agent-v1;ipa=espeak
@@ -69,7 +69,7 @@ border-customs.this-is-a-gift,این هدیه است,,in hediye ast,in hedije as
 border-customs.where-do-i-collect-my-baggage,چمدان‌ها را کجا بگیرم؟,,chamedān-hā rā kojā begiram?,tʃamedɑnhɑ rɑ kodʒɑ beɡiram,,,2,fa-agent-v1;ipa=espeak
 border-customs.how-long-may-i-stay,چقدر می‌توانم بمانم؟,,cheqadr mitavānam bemānam?,tʃeqadr mitavɑnam bemɑnam,,,2,fa-agent-v1;ipa=espeak
 border-customs.i-have-a-connecting-flight,پروازِ بعدی دارم,,parvāz-e ba‘di dāram,parvɑze baʔdi dɑram,,,2,fa-agent-v1;ipa=espeak
-border-customs.may-i-have-an-entry-stamp,مهرِ ورود می‌زنید؟,,mohr-e vorud mizanid?,mehre vorud mizanid,"Iran has stamped visas on a separate sheet for some nationalities rather than in the passport; ask, and know why the answer may be no",,2,fa-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,مهرِ ورود می‌زنید؟,,mohr-e vorud mizanid?,mehre vorud mizanid,do you stamp [an] entry stamp?,"Iran has stamped visas on a separate sheet for some nationalities rather than in the passport; ask, and know why the answer may be no",2,fa-agent-v1;ipa=espeak
 border-customs.visa,ویزا,روادید,vizā,vizɑ,ravādid is the official word on the form,,2,fa-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,خوراکی و گیاه همراهم نیست,,khorāki va giyāh hamrāham nist,xorɑki va ɡiɑh hamrɑham nist,,,2,fa-agent-v1;ipa=espeak
 border-customs.passport-control,کنترلِ گذرنامه,,kontrol-e gozarnāme,kontorole ɡozarnɑme,,,2,fa-agent-v1;ipa=espeak
@@ -130,6 +130,6 @@ hitchhiking.can-you-give-me-a-ride,می‌شود مرا با خودتان ببر
 hitchhiking.where-are-you-going,کجا می‌روید؟,,kojā miravid?,kodʒɑ miravid,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.i-only-need-to-go-to-the-next-town,من فقط تا شهر بعدی می‌روم,,man faqat tā shahr-e ba‘di miravam,man faqat tɑ ʃahr baʔdi miravam,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.is-there-room-for-two,برای دو نفر جا هست؟,,barāye do nafar jā hast?,barɑje do nafar dʒɑ hast,,,2,fa-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,می‌توانم پول بنزین را بدهم,,mitavānam pul-e benzin rā bedaham,mitavɑnam pul benzin rɑ bedaham,"benzin = petrol, the word drivers use",,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
+hitchhiking.i-can-pay-for-fuel,می‌توانم پول بنزین را بدهم,,mitavānam pul-e benzin rā bedaham,mitavɑnam pul benzin rɑ bedaham,I can pay the petrol money,"benzin = petrol, the word drivers use",2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.thank-you-for-the-ride,ممنون که مرا رساندید,,mamnun ke marā resāndid,mamnun ke marɑ resɑndid,"resāndan = to get someone there/drop someone off, the ordinary verb for giving a ride",,2,fa-agent-v1;ipa=espeak
 taxi.please-turn-around,لطفاً دور بزنید,,lotfan dowr bezanid,lotfan dur bezanid,,,2,fa-agent-v1;src=fa.wikipedia دور زدن ممنوع rev 40561289;src=fa.wikisource آیین‌نامهٔ راهنمایی و رانندگی (دور زدن ... ممنوع است);in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak

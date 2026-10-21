@@ -29,7 +29,7 @@ medical-conditions.i-have-epilepsy,Kula gadhah épilèpsi,Kula saged ayan,ˈkul�
 medical-conditions.my-blood-sugar-is-low,Gula rah kula andhap,,ˈɡulɔ rah ˈkulɔ ˈanɖap,,,2,jv-agent-v1;ipa=jv-g2p
 medical-conditions.i-need-my-inhaler,Kula mbetahaken inhaler kula,Kula mbetahaken obat asma kula,ˈkulɔ mbətaˈhakən ɪnˈhalər ˈkulɔ,,,2,jv-agent-v1;ipa=jv-g2p
 medical-conditions.i-am-pregnant,Kula ngandhut,,ˈkulɔ ˈŋanɖʊt,,,2,jv-agent-v1;ipa=jv-g2p
-medical-conditions.i-carry-an-adrenaline-injector,Kula mbekta suntikan adrénalin,Suntikan épinéfrin,ˈkulɔ mbəʔˈtɔ sʊnˈtikan adreˈnalɪn,EpiPen is unknown here; adrenalin is the word,,2,jv-agent-v1;ipa=jv-g2p
+medical-conditions.i-carry-an-adrenaline-injector,Kula mbekta suntikan adrénalin,Suntikan épinéfrin,ˈkulɔ mbəʔˈtɔ sʊnˈtikan adreˈnalɪn,I carry [an] adrenaline injection,EpiPen is unknown here; adrenalin is the word,2,jv-agent-v1;ipa=jv-g2p
 medical-conditions.i-take-medicine-for,Kula nedha obat kanggé {},,ˈkulɔ nəˈɖɔ ˈɔbat ˈkaŋɡe {},nedha obat = to take medicine,,2,jv-agent-v1;ipa=jv-g2p
 medical-conditions.i-take-blood-thinners,Kula nedha obat pengencer rah,Antikoagulan,ˈkulɔ nəˈɖɔ ˈɔbat pəŋənˈtʃər rah,,,2,jv-agent-v1;ipa=jv-g2p
 medical-conditions.medicine-allergy,Alergi obat: {},,alərˈɡi ˈɔbat {},,,2,jv-agent-v1;ipa=jv-g2p
@@ -80,7 +80,7 @@ pharmacy-symptoms.i-have-a-burn,Kula tatu kobong,,ˈkulɔ ˈtatu ˈkɔbɔŋ,,,2,
 pharmacy-symptoms.it-started-days-ago,Wiwit {} dinten kepengker,,ˈwiwɪt {} ˈdɪntən kəpəŋˈkər,,,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.cough-medicine,Obat watuk,,ˈɔbat ˈwatʊʔ,,,2,jv-agent-v1;ipa=jv-g2p
 pharmacy-symptoms.is-this-safe-during-pregnancy,Menika aman kanggé tiyang ngandhut?,,məˈnikɔ ˈaman ˈkaŋɡe ˈtijaŋ ˈŋanɖʊt,,,2,jv-agent-v1;ipa=jv-g2p
-body-parts.head,Sirah,Mustaka,ˈsirah,mustaka is used only of someone you honour,,2,jv-agent-v1;ipa=jv-g2p
+body-parts.head,Sirah,Mustaka,ˈsirah,head,mustaka is used only of someone you honour,2,jv-agent-v1;ipa=jv-g2p
 body-parts.stomach,Padharan,Weteng,paˈɖaran,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.back,Geger,,ɡəˈɡər,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.throat,Tenggak,Gorokan,təŋˈɡaʔ,,,2,jv-agent-v1;ipa=jv-g2p
@@ -91,7 +91,7 @@ body-parts.ear,Talingan,Kuping,taˈliŋan,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.leg,Suku,Sikil,ˈsuku,suku covers leg and foot,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.arm,Lengen,,ləˈŋən,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.foot,Suku,Tlapakan suku,ˈsuku,,,2,jv-agent-v1;ipa=jv-g2p
-body-parts.hand,Tangan,Asta,ˈtaŋan,asta is used only of someone you honour,,2,jv-agent-v1;ipa=jv-g2p
+body-parts.hand,Tangan,Asta,ˈtaŋan,hand,asta is used only of someone you honour,2,jv-agent-v1;ipa=jv-g2p
 body-parts.knee,Jengku,Dhengkul,dʒəŋˈku,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.ankle,Polok,,ˈpɔlɔʔ,,,2,jv-agent-v1;ipa=jv-g2p
 body-parts.skin,Kulit,,ˈkulɪt,,,2,jv-agent-v1;ipa=jv-g2p

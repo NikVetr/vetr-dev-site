@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 slang.thats-good,خوبه,خوب است,khube,xube,spoken form of khub ast,,2,fa-agent-v1;ipa=espeak
 slang.thats-great,عالیه!,محشره!,‘āliye!,ɑlije,also mahshare,,2,fa-agent-v1;ipa=espeak
-slang.i-love-it,عاشقشم,خیلی دوستش دارم,‘āsheqesham,ɑʃqaʃam,literally 'I am in love with it',,2,fa-agent-v1;ipa=espeak
+slang.i-love-it,عاشقشم,خیلی دوستش دارم,‘āsheqesham,ɑʃqaʃam,I am in love with it,,2,fa-agent-v1;ipa=espeak
 slang.thats-bad,تعریفی نداره,,ta‘rifi nadāre,taʔrifi nadɑre,it is nothing to speak of,"Persian hedges here rather than negating, as German and Japanese do",2,fa-agent-v1;ipa=espeak
 slang.delicious,چه خوشمزه!,,che khoshmaze!,tʃe xoʃmaze,,,2,fa-agent-v1;ipa=espeak
 slang.thats-pricey,گرونه,قیمتش بالاست,gerune,ɡerune,spoken form of gerān ast,,2,fa-agent-v1;ipa=espeak

@@ -2,7 +2,7 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 pronouns-verbs.i-me,jag / mig,,jɑːɡ / mˈɛj,,,2,sv-agent-v1;ipa=espeak
 pronouns-verbs.we-us,vi / oss,,viː / ˈɔs,,,2,sv-agent-v1;ipa=espeak
 pronouns-verbs.you,du / dig,,dʉ / dˈɛj,,,2,sv-agent-v1;ipa=espeak
-pronouns-verbs.you-polite,ni / er,,niː / ˈeːr,"formal/plural 'you'; modern Swedish mostly addresses strangers as du, but ni is the real polite form and still used in service and official contexts",,2,sv-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,ni / er,,niː / ˈeːr,you / you,"formal/plural 'you'; modern Swedish mostly addresses strangers as du, but ni is the real polite form and still used in service and official contexts",2,sv-agent-v1;ipa=espeak
 pronouns-verbs.he-him,han / honom,,han / hˈɔnɔm,,,2,sv-agent-v1;ipa=espeak
 pronouns-verbs.she-her,hon / henne,,hʊn / hˈɛnə,,,2,sv-agent-v1;ipa=espeak
 pronouns-verbs.they-them,de / dem,,deː / dˈɛm,,,2,sv-agent-v1;ipa=espeak

@@ -36,7 +36,7 @@ quick-responses.works-okay,வேலை செய்கிறது,,vēlai ceyk
 quick-responses.does-not-work-no,வேலை செய்யவில்லை / இல்லை,,vēlai ceyyavillai / illai,veːlaɪ sejjʌvillaɪ / illaɪ,,,2,ta-agent-v1;ipa=espeak
 quick-responses.can-possible,முடியும்,,muṭiyum,muɖijɯm,,,2,ta-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,முடியாது,,muṭiyātu,muɖijaːdɯ,,,2,ta-agent-v1;ipa=espeak
-quick-responses.okay-fine,ஆகட்டும்,,ākaṭṭum,aːɡʌʈʈɯm,"all right, so be it; சரி, the old text, is quick-responses.okay-can",,2,ta-agent-v1;fix=Tamil Lexicon (DSAL) ஆகட்டும் p. 203 (adv. 1. Yes; ஆம். 2. So be it; ஆகுக. Colloq.);rule=distinct-concepts-distinct-text (quick-responses.okay-can has the old text since row-corrections-v7);row-corrections-v8;ipa=espeak
+quick-responses.okay-fine,ஆகட்டும்,,ākaṭṭum,aːɡʌʈʈɯm,so be it,"all right; சரி, the old text, is quick-responses.okay-can",2,ta-agent-v1;fix=Tamil Lexicon (DSAL) ஆகட்டும் p. 203 (adv. 1. Yes; ஆம். 2. So be it; ஆகுக. Colloq.);rule=distinct-concepts-distinct-text (quick-responses.okay-can has the old text since row-corrections-v7);row-corrections-v8;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,ஆகாது,,ākātu,aːɡaːdɯ,,,2,ta-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,நான் தொலைபேசி மொழிபெயர்ப்பைப் பயன்படுத்துகிறேன்,,nāṉ tolaipēci moḻipeyarppaip payaṉpaṭuttukiṟēṉ,naːn tolaɪpeːsi moɻipejʌrppaɪp pʌjʌnpʌɖɯttɯɡireːn,,,2,ta-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,தொலைபேசியை நோக்கிப் பேசுங்கள்,,tolaipēciyai nōkkip pēcuṅkaḷ,tolaɪpeːsijaɪ noːkkip peːsɯŋɡʌɭ,,,2,ta-agent-v1;ipa=espeak
@@ -69,7 +69,7 @@ sim-data.can-i-top-up-this-sim,இந்த சிம்மை ரீசார�
 sim-data.top-up,ரீசார்ஜ்,,rīcārj,ɾiːtʃaːrdʒ,,,2,ta-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,{} இல் சிக்னல் இருக்கிறதா?,,{} il cikṉal irukkiṟatā?,{} il siɡnʌl iɾɯkkirʌdaː,,,2,ta-agent-v1;ipa=espeak
 sim-data.signal,சிக்னல்,,cikṉal,siɡnʌl,,,2,ta-agent-v1;ipa=espeak
-sim-data.esim,இ-சிம்,eSIM,i-cim,isim,the Latin abbreviation is what shops use,,2,ta-agent-v1;ipa=espeak
+sim-data.esim,இ-சிம்,eSIM,i-cim,isim,eSIM,the Latin abbreviation is what shops use,2,ta-agent-v1;ipa=espeak
 sim-data.prepaid,ப்ரீபெய்ட்,முன்பணம்,prīpeyṭ,pɾiːbejɖ,,,2,ta-agent-v1;ipa=espeak
 sim-data.roaming,ரோமிங்,,rōmiṅ,ɾoːmiŋ,,,2,ta-agent-v1;ipa=espeak
 etiquette.is-this-allowed,இதற்கு அனுமதி உண்டா?,,itaṟku aṉumati uṇṭā?,idʌrkɯ anɯmʌdi uɳɖaː,,,2,ta-agent-v1;ipa=espeak

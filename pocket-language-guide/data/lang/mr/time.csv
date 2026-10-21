@@ -11,7 +11,7 @@ time-scheduling.what-time-does-it-close,हे किती वाजता ब�
 time-scheduling.how-long-does-it-take,किती वेळ लागतो?,,kitī vēḷa lāgatō?,kˈɪti vˈeːɭ lˈaːɡtˌoː,,,2,mr-agent-v1;ipa=espeak
 time-words.today,आज,,āja,ˈaːz,,,2,mr-agent-v1;ipa=espeak
 time-words.tomorrow,उद्या,,udyā,ˈʊdjaː,,,2,mr-agent-v1;ipa=espeak
-time-words.yesterday,काल,,kāla,kˈaːl,"unambiguous, unlike Hindi's कल",,2,mr-agent-v1;ipa=espeak
+time-words.yesterday,काल,,kāla,kˈaːl,yesterday,"unambiguous, unlike Hindi's कल",2,mr-agent-v1;ipa=espeak
 time-words.this-week,हा आठवडा,,hā āṭhavaḍā,hˈaː ˈaːʈʰəvɖaː,,,2,mr-agent-v1;ipa=espeak
 time-words.next-week,पुढचा आठवडा,,puḍhacā āṭhavaḍā,pˈʊɖʰcˌaː ˈaːʈʰəvɖaː,,,2,mr-agent-v1;ipa=espeak
 time-words.morning,सकाळ,,sakāḷa,səkˈaːɭ,,,2,mr-agent-v1;ipa=espeak

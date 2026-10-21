@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-utility-templates.i-want-to-go-to,నేను {} వెళ్ళాలి,,nēnu {} veḷḷāli,neːnu {} ʋeɭɭaːli,a place name takes no case suffix with 'go' in Telugu,,2,te-agent-v1;ipa=espeak
+utility-templates.i-want-to-go-to,నేను {} వెళ్ళాలి,,nēnu {} veḷḷāli,neːnu {} ʋeɭɭaːli,I must go {},a place name takes no case suffix with 'go' in Telugu,2,te-agent-v1;ipa=espeak
 utility-templates.please-give-me,నాకు {} ఇవ్వండి,,nāku {} ivvaṁḍi,naːku {} iʋʋaɳɖi,,,2,te-agent-v1;ipa=espeak
 utility-templates.may-i,నేను {} చేయవచ్చా?,,nēnu {} cēyavaccā?,neːnu {} tʃeːjaʋatʃtʃaː,may I do —,,2,te-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,{} వేయకండి,,{} vēyakaṁḍi,{} ʋeːjakaɳɖi,do not put in —,,2,te-agent-v1;ipa=espeak

@@ -25,7 +25,7 @@ in-a-building.is-this-the-correct-entrance,Ez a jó bejárat?,,ˈɛz ˈɑ jˈoː
 in-a-building.do-you-have-wi-fi,Van Wi-Fi?,,vˈɑn vˈifi,,,2,hu-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,Mi a Wi-Fi jelszó?,,mˈi ˈɑ vˈifi jˈɛlsoː,,,2,hu-agent-v1;ipa=espeak
 in-a-building.which-floor,Melyik emelet?,,mˈɛjik ˈɛmɛlɛt,,,2,hu-agent-v1;ipa=espeak
-toilets.where-toilet,Hol van a mosdó?,Hol van a vécé?,hˈol vˈɑn ˈɑ mˈoʃdoː,mosdó is the polite word; vécé is what people say,,2,hu-agent-v1;ipa=espeak
+toilets.where-toilet,Hol van a mosdó?,Hol van a vécé?,hˈol vˈɑn ˈɑ mˈoʃdoː,where is the washroom?,mosdó is the polite word; vécé is what people say,2,hu-agent-v1;ipa=espeak
 toilets.where-public-toilet,Hol van egy nyilvános mosdó?,,hˈol vˈɑn ˈɛɟ ɲˈilvaːnoʃ mˈoʃdoː,,,2,hu-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,Használhatnám a mosdót?,,hˈɑsnaːlhɑtnaːm ˈɑ mˈoʃdoːt,,,2,hu-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,Csak vendégeknek van?,,tʃˈɑk vˈɛndeːɡɛknɛk vˈɑn,,,2,hu-agent-v1;ipa=espeak

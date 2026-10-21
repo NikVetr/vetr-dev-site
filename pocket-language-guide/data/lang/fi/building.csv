@@ -3,7 +3,7 @@ building-help.what-room-number-is-this,Mikä huoneen numero tämä on?,,mˈikæ 
 building-help.i-am-lost,Olen eksynyt.,,ˈolen ˈeksynyt,,,2,fi-agent-v1;ipa=espeak
 building-help.where-is-reception,Missä on vastaanotto?,,mˈissæ ˈon vˈastaːnˌotto,,,2,fi-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Missä on pistorasia?,,mˈissæ ˈom pˈistorˌasia,,,2,fi-agent-v1;ipa=espeak
-accessibility.step-free,Pääseekö sisään ilman portaita?,,pˈæːseːkø sˈisæːn ˈilmam pˈortaita,"the everyday form of the esteetön question, which is what gets a useful answer",,2,fi-agent-v1;ipa=espeak
+accessibility.step-free,Pääseekö sisään ilman portaita?,,pˈæːseːkø sˈisæːn ˈilmam pˈortaita,can one get in without stairs?,"the everyday form of the esteetön question, which is what gets a useful answer",2,fi-agent-v1;ipa=espeak
 accessibility.wheelchair-access,Pääseekö tänne pyörätuolilla?,,pˈæːseːkø tˈænne pˈyørætˌuolilla,esteetön is the signage term; this is the question a Finn would ask,,2,fi-agent-v1;ipa=espeak
 accessibility.elevator,Onko täällä hissi?,,ˈoŋko tˈæːllæ hˈissi,,,2,fi-agent-v1;ipa=espeak
 accessibility.ramp,Onko täällä luiska?,,ˈoŋko tˈæːllæ lˈuiska,,,2,fi-agent-v1;ipa=espeak
@@ -25,7 +25,7 @@ in-a-building.is-this-the-correct-entrance,Onko tämä oikea sisäänkäynti?,,�
 in-a-building.do-you-have-wi-fi,Onko täällä wifiä?,,ˈoŋko tˈæːllæ vˈifiæ,wifi is the naturalised Finnish spelling and takes Finnish endings,,2,fi-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,Mikä on wifin salasana?,,mˈikæ ˈon vˈifin sˈalasˌana,,,2,fi-agent-v1;ipa=espeak
 in-a-building.which-floor,Mikä kerros?,,mˈikæ kˈerros,,,2,fi-agent-v1;ipa=espeak
-toilets.where-toilet,Missä on vessa?,,mˈissæ ˈon vˈessa,vessa is the everyday word; wc is what the door says,,2,fi-agent-v1;ipa=espeak
+toilets.where-toilet,Missä on vessa?,,mˈissæ ˈon vˈessa,where is the toilet?,vessa is the everyday word; wc is what the door says,2,fi-agent-v1;ipa=espeak
 toilets.where-public-toilet,Missä on yleinen wc?,,mˈissæ ˈon ˈyleinen vˈeːseː,,,2,fi-agent-v1;ipa=espeak+loan
 toilets.may-i-use-the-toilet,Saisinko käydä vessassa?,,sˈaisiŋko kˈæydæ vˈessassa,,,2,fi-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,Onko se vain asiakkaille?,,ˈoŋko sˈe vˈain ˈasiˌakkaille,,,2,fi-agent-v1;ipa=espeak
@@ -48,7 +48,7 @@ toilets.where-can-i-wash-my-hands,Missä voi pestä kädet?,,mˈissæ vˈoi pˈe
 toilets.can-i-flush-the-paper,Voiko paperin laittaa pönttöön?,,vˈoiko pˈaperin lˈaittaː pˈønttøːn,,,2,fi-agent-v1;ipa=espeak
 toilets.is-there-a-toilet-on-board,Onko kyydissä wc?,,ˈoŋko kˈyːdissæ vˈeːseː,,,2,fi-agent-v1;ipa=espeak+loan
 toilets.the-toilet-will-not-flush,Vessa ei vedä.,,vˈessa ˈei vˈedæ,the Finnish idiom for a toilet that will not flush,,2,fi-agent-v1;ipa=espeak
-toilets.baby-change,lastenhoitotila,,lˈastenhˌoitotˌila,the word on Finnish signage,,2,fi-agent-v1;ipa=espeak
+toilets.baby-change,lastenhoitotila,,lˈastenhˌoitotˌila,childcare room,the word on Finnish signage,2,fi-agent-v1;ipa=espeak
 toilets.squat-toilet,kyykkykäymälä,,kˈyːkkykˌæymælæ,descriptive: Finland has no squat-toilet tradition and no established sign word,,2,fi-agent-v1;ipa=espeak
 building-words.elevator,hissi,,hˈissi,,,2,fi-agent-v1;ipa=espeak
 building-words.stairs,portaat,,pˈortaːt,,,2,fi-agent-v1;ipa=espeak

@@ -7,12 +7,12 @@ social-basics.goodbye,Näkemiin.,Moikka!,nˈækemiːn,moikka is the casual parti
 social-basics.thank-you,Kiitos.,,kˈiːtos,,,2,fi-agent-v1;ipa=espeak
 social-basics.you-are-welcome,Ole hyvä.,,ˈole hˈyvæ,,,2,fi-agent-v1;ipa=espeak
 social-basics.excuse-me-sorry,Anteeksi.,,ˈanteːksi,both 'excuse me' and a light apology,,2,fi-agent-v1;ipa=espeak
-social-basics.sorry,Olen pahoillani.,,ˈolem pˈahoillˌani,"regret rather than attention-getting, which is anteeksi",,2,fi-agent-v1;ipa=espeak
+social-basics.sorry,Olen pahoillani.,,ˈolem pˈahoillˌani,I am sorry,"regret rather than attention-getting, which is anteeksi",2,fi-agent-v1;ipa=espeak
 social-basics.no-problem,Ei haittaa.,,ˈei hˈaittaː,,,2,fi-agent-v1;ipa=espeak
 social-basics.i-do-not-know,En tiedä.,,ˈen tˈiedæ,,,2,fi-agent-v1;ipa=espeak
 social-basics.good-night,Hyvää yötä.,,hˈyvæː ˈyøtæ,,,2,fi-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,Selvä. / Kaikki hyvin.,,sˈelvæ / kˈaikki hˈyvin,,,2,fi-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,En puhu {target} kieltä.,,ˈem pˈuhu {target} kˈieltæ,the slot is the genitive of the language name and kieli carries the case: 'I do not speak the X language',,2,fi-agent-v1;ipa=espeak
+communication.i-do-not-speak-this-language,En puhu {target} kieltä.,,ˈem pˈuhu {target} kˈieltæ,I do not speak {target} language,the slot is the genitive of the language name and kieli carries the case: 'I do not speak the X language',2,fi-agent-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,Puhun vain vähän {target} kieltä.,,pˈuhun vˈain vˈæhæn {target} kˈieltæ,,,2,fi-agent-v1;ipa=espeak
 communication.do-you-speak-english,Puhutko {source} kieltä?,,pˈuhutko {source} kˈieltæ,,,2,fi-agent-v1;ipa=espeak
 communication.please-speak-more-slowly,Voisitko puhua hitaammin?,,vˈoisitko pˈuhua hˈitaːmmin,,,2,fi-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,Sanoisitko sen uudelleen?,,sˈanoisˌitko sˈe
 communication.please-write-it-down,Kirjoittaisitko sen paperille?,,kˈirjoittˌaisitko sˈem pˈaperˌille,,,2,fi-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Hetkinen, kiitos.",,"hˈetkinen, kˈiːtos",,,2,fi-agent-v1;ipa=espeak
 communication.can-you-help-me,Voitko auttaa minua?,,vˈoitko ˈauttaː mˈinua,,,2,fi-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Näyttäisitkö tekstin {target} kielellä?,,nˈæyttæisˌitkø tˈekstin {target} kˈielellæ,"the same genitive slot, with kieli in the adessive: 'in the X language'",,2,fi-agent-v1;ipa=espeak
+communication.please-show-me-the-text,Näyttäisitkö tekstin {target} kielellä?,,nˈæyttæisˌitkø tˈekstin {target} kˈielellæ,would you show the text in {target} language?,"the same genitive slot, with kieli in the adessive: 'in the X language'",2,fi-agent-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,"En saa selvää, mitä sanot.",,"ˈen sˈaː sˈelvæː, mˈitæ sˈanot",,,2,fi-agent-v1;ipa=espeak
 communication.i-do-not-understand,En ymmärrä.,,ˈen ˈymmærræ,,,2,fi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,En saa tästä selvää.,,ˈen sˈaː tˈæstæ sˈelvæː,,,2,fi-agent-v1;ipa=espeak
@@ -66,11 +66,11 @@ sim-data.where-can-i-buy-a-plug-adapter,Mistä voin ostaa matkasovittimen?,,mˈi
 sim-data.mobile-data,mobiilidata,,mˈobiːlˌidata,,,2,fi-agent-v1;ipa=espeak
 sim-data.can-i-top-up-this-sim,Voinko ladata tähän SIM-korttiin lisää?,,vˈoiŋko lˈadata tˈæhæn sˈim kˈorttiːn lˈisæː,,,2,fi-agent-v1;ipa=espeak+loan
 sim-data.top-up,saldon lataus,,sˈaldon lˈataus,,,2,fi-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,Onko täällä kuuluvuutta: {}?,,ˈoŋko tˈæːllæ kˈuːluvˌuːtta {},"kuuluvuus jossakin governs the inessive, so the frame keeps täällä and the slot stays nominative",,2,fi-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,Onko täällä kuuluvuutta: {}?,,ˈoŋko tˈæːllæ kˈuːluvˌuːtta {},is there coverage here: {}?,"kuuluvuus jossakin governs the inessive, so the frame keeps täällä and the slot stays nominative",2,fi-agent-v1;ipa=espeak
 sim-data.signal,kuuluvuus,,kˈuːluvuːs,,,2,fi-agent-v1;ipa=espeak
 sim-data.esim,eSIM,,ˈeːsim,,,2,fi-agent-v1;ipa=espeak+loan
 sim-data.prepaid,prepaid,,prˈepaid,,,2,fi-agent-v1;ipa=espeak
-sim-data.roaming,verkkovierailu,roaming,vˈerkkovˌierailu,verkkovierailu is the official Finnish term and roaming is what people say,,2,fi-agent-v1;ipa=espeak
+sim-data.roaming,verkkovierailu,roaming,vˈerkkovˌierailu,network visit,verkkovierailu is the official Finnish term and roaming is what people say,2,fi-agent-v1;ipa=espeak
 etiquette.is-this-allowed,Onko tämä sallittua?,,ˈoŋko tˈæmæ sˈallittˌua,,,2,fi-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,Kuuluuko täällä antaa tippiä?,,kˈuːluːko tˈæːllæ ˈantaː tˈippiæ,a neutral yes/no question; tipping is not customary in Finland and the answer is normally no,,2,fi-agent-v1;ipa=espeak
 etiquette.is-service-included,Sisältyykö palvelumaksu laskuun?,,sˈisæltˌyːkø pˈalvelumˌaksu lˈaskuːn,,,2,fi-agent-v1;ipa=espeak
@@ -83,9 +83,9 @@ etiquette.dressed-appropriately,Onko pukeutumiseni tähän sopiva?,,ˈoŋko pˈu
 etiquette.did-not-mean-to-offend,En tarkoittanut loukata.,,ˈen tˈarkoittanut lˈoukata,,,2,fi-agent-v1;ipa=espeak
 etiquette.what-is-customary,Mikä on täällä tapana?,,mˈikæ ˈon tˈæːllæ tˈapana,,,2,fi-agent-v1;ipa=espeak
 etiquette.keep-the-change,Pitäkää vaihtorahat.,,pˈitækæː vˈaihtorahat,,,2,fi-agent-v1;ipa=espeak
-children.cannot-find-my-child,En löydä lastani.,,ˈen lˈøydæ lˈastani,"literally 'I cannot find my child', which has no second reading",menettää lapsi is the Finnish bereavement idiom exactly as English 'lost a child' is. lost-rescue.my-child-is-missing takes the official kadonnut wording instead,2,fi-agent-v1;ipa=espeak
+children.cannot-find-my-child,En löydä lastani.,,ˈen lˈøydæ lˈastani,I cannot find my child,which has no second reading; menettää lapsi is the Finnish bereavement idiom exactly as English 'lost a child' is. lost-rescue.my-child-is-missing takes the official kadonnut wording instead,2,fi-agent-v1;ipa=espeak
 children.make-an-announcement,Voisitteko kuuluttaa asiasta?,,vˈoisittˌeko kˈuːluttaː ˈasiˌasta,,,2,fi-agent-v1;ipa=espeak
-children.child-age,Lapseni on {}-vuotias.,,lˈapseni ˈon {} vˈuotias,a numeral takes a hyphen before a suffix in Finnish orthography: 5-vuotias,,2,fi-agent-v1;ipa=espeak
+children.child-age,Lapseni on {}-vuotias.,,lˈapseni ˈon {} vˈuotias,my child is {}-year-old,a numeral takes a hyphen before a suffix in Finnish orthography: 5-vuotias,2,fi-agent-v1;ipa=espeak
 children.high-chair,Onko teillä syöttötuolia?,,ˈoŋko tˈeillæ sˈyøttøtˌuolia,,,2,fi-agent-v1;ipa=espeak
 children.baby-changing-room,Missä on lastenhoitohuone?,,mˈissæ ˈon lˈastenhˌoitohˌuone,,,2,fi-agent-v1;ipa=espeak
 children.childrens-menu,Onko lapsille omaa ruokalistaa?,,ˈoŋko lˈapsille ˈomaː rˈuokalˌistaː,,,2,fi-agent-v1;ipa=espeak
@@ -101,10 +101,10 @@ communication.please-write-it-in-roman-letters,Kirjoittaisitko sen latinalaisin 
 social-basics.politeness-particles,"Thain kohteliaisuus: lisää lähes minkä tahansa perään khrap, jos olet mies, ja kha, jos olet nainen. Nainen sanoo kysymyksen lopussa kha nousevalla sävelkululla. Näiltä riveiltä partikkeli puuttuu, joten lisää se itse.",,,,,2,fi-agent-v1
 board-answers.there-is-no-wait,"Ei jonoa, voitte mennä sisään nyt.",,"ˈei jˈonoa, vˈoitte mˈennæ sˈisæːn nˈyt",,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,"Näiden joukossa ei ole sitä, mitä haluan sanoa.",,"nˈæiden jˈoukossa ˈei ˈole sˈitæ, mˈitæ hˈaluan sˈanoa",,,2,fi-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,Olemme kiinni.,,ˈolemme kˈiːnni,"lit. 'we are shut'; kiinni is the spoken word for a closed shop, where suljettu (the sign word) is written register",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Olemme kiinni.,,ˈolemme kˈiːnni,we are shut,"kiinni is the spoken word for a closed shop, where suljettu (the sign word) is written register",2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,Sitä ei ole.,,sˈitæ ˈei ˈole,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kortilla vai käteisellä?,,kˈortilla vˈai kˈæteisellæ,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
-board-answers.please-wait,Hetkinen.,,hˈetkinen,"shorter than communication.please-wait-a-moment's Hetkinen, kiitos.; the bare form is what is said quickly across a counter",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,Hetkinen.,,hˈetkinen,a moment,"shorter than communication.please-wait-a-moment's Hetkinen, kiitos.; the bare form is what is said quickly across a counter",2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.it-is-over-there,Se on tuolla.,,sˈe ˈon tˈuolla,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-show-you,Näytän tien.,,nˈæytæn tˈien,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.how-many,Kuinka monta haluaisitte?,,kˈuiŋka mˈonta hˈaluˌaisitte,,,2,fi-agent-v1;board-answers-v1;ipa=espeak

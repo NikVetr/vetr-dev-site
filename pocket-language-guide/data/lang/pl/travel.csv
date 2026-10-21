@@ -12,7 +12,7 @@ directions.how-far-is-it,Jak daleko to jest?,,jˈaɡ dalˈɛkɔ tɔ jˈɛst,,,2,
 directions.which-exit,Które wyjście?,,ktˌurɛ vˈɨjɕtɕɛ,,,2,pl-agent-v1;ipa=espeak
 directions.can-you-show-me-the-way,Proszę wskazać drogę,,prˈɔʃɛ fskˈazadʑ drˈɔɡɛ,please point out the way,,2,pl-agent-v1;ipa=espeak
 directions.north,północ,,pˈuwnɔts,,,2,pl-agent-v1;ipa=espeak
-directions.south,południe,,pɔwˈudɲɛ,also means noon and midday,,2,pl-agent-v1;ipa=espeak
+directions.south,południe,,pɔwˈudɲɛ,south,also means noon and midday,2,pl-agent-v1;ipa=espeak
 directions.east,wschód,,fsxˈut,,,2,pl-agent-v1;ipa=espeak
 directions.west,zachód,,zˈaxut,,,2,pl-agent-v1;ipa=espeak
 quick-directions.go-straight,Prosto,,prˈɔstɔ,,,2,pl-agent-v1;ipa=espeak
@@ -116,7 +116,7 @@ common-signs.open-operating,czynne,,tʃˈɨnnɛ,the sign on an open shop,,2,pl-a
 common-signs.closed,nieczynne,,ɲɛtʃˈɨnnɛ,,,2,pl-agent-v1;ipa=espeak
 common-signs.stopped-stop,stop,,stˈɔp,,,2,pl-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Czy trzeba skasować ten bilet?,,tʃɨ tʃˈɛba skasˈɔvatɕ tɛn bʲˈilɛt,skasować bilet is exactly to validate a ticket in Polish,,2,pl-agent-v1;ipa=espeak
-rail-station-words.ticket-validator,kasownik,,kasˈɔvɲik,the word printed on the machine,,2,pl-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,kasownik,,kasˈɔvɲik,ticket validator,the word printed on the machine,2,pl-agent-v1;ipa=espeak
 common-signs.pork-code,kody wieprzowiny,,kˈɔdɨ vʲˌɛpʃɔvˈinɨ,,,2,pl-gloss-v1;ipa=espeak
 rail-station-words.fare,opłata za przejazd,,ɔpwˈata za pʃˈɛjast,,,2,pl-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Gdzie płacę za przejazd?,,ɡdʑˈɛ pwˈatsɛ za pʃˈɛjast,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
@@ -127,9 +127,9 @@ air-travel.my-luggage-did-not-arrive,Mój bagaż nie dotarł,,mˈuj bˈaɡaʃ ɲ
 air-travel.i-would-like-a-window-seat,Chciałbym miejsce przy oknie,,xtɕˈawbɨm mʲˈɛjstsɛ pʃɨ ˈɔkɲɛ,I would like a seat by the window,,2,"pl-agent-v1;fix=Słownik języka polskiego PWN (sjp.pwn.pl) miejsce 4 (wycinek przestrzeni przeznaczony dla jednej osoby);was=literal masculine -- a woman says Chciałabym (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Chciałabym miejsce przy oknie serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 air-travel.i-would-like-an-aisle-seat,Chciałbym miejsce przy przejściu,,xtɕˈawbɨm mʲˈɛjstsɛ pʃɨ pʃˈɛjɕtɕu,I would like a seat by the aisle,,2,"pl-agent-v1;fix=Słownik języka polskiego PWN (sjp.pwn.pl) miejsce 4 (wycinek przestrzeni przeznaczony dla jednej osoby) and przejście 1 (miejsce -- w którym można przejść);was=literal masculine -- a woman says Chciałabym (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Chciałabym miejsce przy przejściu serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 hitchhiking.can-you-give-me-a-ride,Czy mogę prosić o podwiezienie?,,tʃɨ mˈɔɡɛ prˈɔɕitɕ ɔ pˌɔdvʲɛʑˈɛɲɛ,"matches taxi.may-i-open-the-window's 'Czy mogę + infinitive?' construction (already on disk), which needs no pan/pani address at all",,2,pl-agent-v1;matches=taxi.may-i-open-the-window;ipa=espeak
-hitchhiking.where-are-you-going,Dokąd jedzie ten samochód?,,dˈɔkɔnt jˈɛdʑɛ tɛn samˈɔxut,"asks about the car rather than the driver, matching transit-rides.does-this-bus-train-go-to's vehicle-as-subject construction (already on disk); needs no pan/pani address",,2,pl-agent-v1;matches=transit-rides.does-this-bus-train-go-to;ipa=espeak
+hitchhiking.where-are-you-going,Dokąd jedzie ten samochód?,,dˈɔkɔnt jˈɛdʑɛ tɛn samˈɔxut,where is this car going?,"asks about the car rather than the driver, matching transit-rides.does-this-bus-train-go-to's vehicle-as-subject construction (already on disk); needs no pan/pani address",2,pl-agent-v1;matches=transit-rides.does-this-bus-train-go-to;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Muszę dojechać tylko do następnego miasteczka,,mˈuʃɛ dɔjˈɛxatɕ tˌɨlkɔ dɔ nˌastɛmpnˈɛɡɔ mʲastˈɛtʃka,,,2,pl-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,Czy jest miejsce dla dwóch?,,tʃɨ jɛst mʲˈɛjstsɛ dla dvˈux,,,2,pl-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Mogę zapłacić za benzynę,,mˈɔɡɛ zapwˈatɕidʑ za bɛnzˈɨnɛ,"benzyna, the word drivers use",,2,pl-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mogę zapłacić za benzynę,,mˈɔɡɛ zapwˈatɕidʑ za bɛnzˈɨnɛ,I can pay for petrol,"benzyna, the word drivers use",2,pl-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Dziękuję za podwiezienie,,dʑɛŋkˈujɛ za pˌɔdvʲɛʑˈɛɲɛ,,,2,pl-agent-v1;ipa=espeak
 taxi.please-turn-around,Proszę zawrócić,,prˈɔʃɛ zavrˈutɕitɕ,,,2,pl-agent-v1;src=SJP-PWN zawrócić 1;src=Prawo o ruchu drogowym art. 22 ust. 6 + znak B-23 zakaz zawracania;in-pack-frame;answers-audit-v1;ipa=espeak

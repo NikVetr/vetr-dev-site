@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
-numbers-money.l-ng,ዜሮ,ባዶ,zēro,zero,ባዶ is the colloquial one,,2,am-agent-v1;ipa=bgn-am
+numbers-money.l-ng,ዜሮ,ባዶ,zēro,zero,zero,ባዶ is the colloquial one,2,am-agent-v1;ipa=bgn-am
 numbers-money.y,አንድ,,ānd,ʔand,,,2,am-agent-v1;ipa=bgn-am
 numbers-money.r,ሁለት,,hulett,hulətː,,,2,am-agent-v1;ipa=bgn-am
 numbers-money.li-ng,ሁለት + መቁጠሪያ,,hulett + mekʼutʼerīya,hulətː,two plus a classifier,,2,am-agent-v1;ipa=bgn-am
@@ -98,7 +98,7 @@ numbers-money.ringgit,ሪንጊት,,rīngīt,rinɡit,,,2,am-agent-v1;ipa=bgn-am
 numbers-money.ringgit-symbol,ሪንጊት (ምልክት),,rīngīt (milikkit),rinɡit,,,2,am-agent-v1;ipa=bgn-am
 numbers-money.nepali-rupee,የኔፓል ሩፒ,,yenēpal rupī,jənepal rupi,,,2,am-agent-v1;ipa=bgn-am
 numbers-money.nepali-rupee-symbol,የኔፓል ሩፒ (ምልክት),,yenēpal rupī (milikkit),jənepal rupi,,,2,am-agent-v1;ipa=bgn-am
-numbers-money.birr,ብር,Br · ETB,bir,bɨr,the abbreviation on a price is the word itself,,2,am-agent-v1;ipa=bgn-am
+numbers-money.birr,ብር,Br · ETB,bir,bɨr,birr,the abbreviation on a price is the word itself,2,am-agent-v1;ipa=bgn-am
 numbers-money.naira,የናይጄሪያ ናይራ,,,,,,2,naira-gloss-v1;cldr
 numbers-money.naira-symbol,የናይጄሪያ ናይራ (ምልክት),,,,,,2,naira-gloss-v1;cldr
 numbers-money.riel,ሬል,,rēl,rel,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am

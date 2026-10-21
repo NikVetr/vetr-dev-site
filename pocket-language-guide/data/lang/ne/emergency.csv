@@ -124,14 +124,14 @@ police-consulate.i-want-to-contact-my-embassy,मलाई मेरो दू�
 police-consulate.i-need-it-for-my-insurance,मलाई यो मेरो बीमाको लागि चाहियो,,malāī yō mērō bīmākō lāgi cāhiyō,məlˈaːi jˈoː mˈeːɾoː bɪːmˈaːkoː lˈaːɡɪ cˈaːhɪjˌoː,,,2,ne-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,मलाई अनुवादक चाहियो,,malāī anuvādaka cāhiyō,məlˈaːi ˌənuwˈaːdəkˌə cˈaːhɪjˌoː,,,2,ne-agent-v1;ipa=espeak
 police-consulate.please-leave-me-alone,मलाई एक्लै छोडिदिनुहोस्,,malāī ēklai chōḍidinuhōs,məlˈaːi ˈeːklɛː cʰˌoːɖɪdˌɪnuhˈoːs,,,2,ne-agent-v1;ipa=espeak
-police-consulate.i-was-robbed,मलाई लुटियो,,malāī luṭiyō,məlˈaːi lˈuʈɪjˌoː,"invariant passive, not the participial लुटिएको",,2,ne-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,मलाई लुटियो,,malāī luṭiyō,məlˈaːi lˈuʈɪjˌoː,I was robbed,"invariant passive, not the participial लुटिएको",2,ne-agent-v1;ipa=espeak
 police-consulate.i-want-a-lawyer,मलाई वकिल चाहियो,,malāī vakila cāhiyō,məlˈaːi wˈʌkɪl cˈaːhɪjˌoː,,,2,ne-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,मेरो दूतावासलाई खबर गर्नुहोस्,,mērō dūtāvāsalāī khabara garnuhōs,mˈeːɾoː dˌuːtaːwˈaːsəlˌaːi kʰˈʌbəɾˌə ɡˌərnuhˈoːs,,,2,ne-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,म प्रहरीलाई बोलाउँदै छु,,ma praharīlāī bōlāum̐dai chu,mə pɾˌəhəɾɪːlˈaːi bˌoːlaːũdˈɛː cʰˈu,,,2,ne-agent-v1;ipa=espeak
 police-consulate.am-i-under-arrest,के मलाई पक्राउ गरिएको हो?,,kē malāī pakrāu gariēkō hō?,kˈeː məlˈaːi pəkɾˈaːʊ ɡˌəɾɪˈeːkoː hoː,,,2,ne-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"पर्दैन धन्यवाद, मलाई चाहिँदैन",,"pardaina dhanyavāda, malāī cāhim̐daina","pərdˈɛːnə dʰˌənjəwˈaːd, məlˈaːi cˌaːhĩdˈɛːnə",,,2,ne-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,कसैले मलाई आक्रमण गर्‍यो,,kasailē malāī ākramaṇa gar̆yō,kəsˈɛːleː məlˈaːi ˈaːkɾəmˌəɳ ɡˈʌrjoː,,,2,ne-agent-v1;fix=ISO-15919-2001 Table 1 ref 048a eyelash RA r̆ (Used in Marathi and Nepali);row-corrections-v2;ipa=espeak
-police-consulate.i-did-not-agree-to-this-price,यो मूल्यमा मेरो सहमति थिएन,,yō mūlyamā mērō sahamati thiēna,jˈoː mˈuːljəmˌaː mˈeːɾoː sˈʌhəmˌətɪ tʰɪˈeːnə,"invariant, recast with सहमति (agreement) as subject",,2,ne-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,यो मूल्यमा मेरो सहमति थिएन,,yō mūlyamā mērō sahamati thiēna,jˈoː mˈuːljəmˌaː mˈeːɾoː sˈʌhəmˌətɪ tʰɪˈeːnə,my agreement was not on this price,"invariant, recast with सहमति (agreement) as subject",2,ne-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,प्रतिवेदन नम्बर लेखिदिनुहोस्,,prativēdana nambara lēkhidinuhōs,pɾˌətɪwˈeːdən nˈʌmbəɾˌə lˌeːkʰɪdˌɪnuhˈoːs,,,2,ne-agent-v1;ipa=espeak
 police-consulate.it-happened-here,यो यहीँ भएको हो,,yō yahīm̐ bhaēkō hō,jˈoː jˈʌhĩ bʰəˈeːkoː hoː,,,2,ne-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,प्रतिवेदनको प्रतिलिपि पाउन सक्छु?,,prativēdanakō pratilipi pāuna sakchu?,pɾˌətɪwˈeːdənˌəkoː pɾˈʌtɪlˌɪpɪ pˈaːʊn sˈʌkcʰu,,,2,ne-agent-v1;ipa=espeak

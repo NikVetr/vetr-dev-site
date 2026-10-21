@@ -3,7 +3,7 @@ trail-words.trail,ಚಾರಣ ಮಾರ್ಗ,,cāraṇa mārga,caːraɳa maːr
 trail-words.trailhead,ಚಾರಣ ಆರಂಭ,,cāraṇa āraṁbha,caːraɳa aːrambʰa,trek start,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-words.summit,ಶಿಖರ,,śikhara,ʃikʰara,peak,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-words.viewpoint,ವೀಕ್ಷಣಾ ಸ್ಥಳ,,vīkṣaṇā sthaḷa,viːkʂaɳaː stʰaɭa,viewing place,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
-trail-words.cableway,ರೋಪ್ ವೇ,ತಂತಿ ಮಾರ್ಗ,rōp vē,roːp veː,the loan is what a ticket window says,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
+trail-words.cableway,ರೋಪ್ ವೇ,ತಂತಿ ಮಾರ್ಗ,rōp vē,roːp veː,cableway,the loan is what a ticket window says,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-words.shuttle-bus,ಶಟಲ್ ಬಸ್,,śaṭal bas,ʃaʈal bas,,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-words.park-shuttle,ಉದ್ಯಾನ ಬಸ್,,udyāna bas,udjaːna bas,park bus,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-words.steps,ಮೆಟ್ಟಿಲು,,meṭṭilu,meʈʈilu,,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
@@ -16,7 +16,7 @@ weather.will-it-rain,ಇಂದು ಮಳೆ ಬರುತ್ತದೆಯೇ?,,i�
 weather.is-it-safe-today,ಇಂದು ಸುರಕ್ಷಿತವೇ?,,iṁdu surakṣitavē?,indu surakʂitaveː,is it safe today?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 weather.how-cold-at-night,ರಾತ್ರಿ ಎಷ್ಟು ಚಳಿ ಆಗುತ್ತದೆ?,,rātri eṣṭu caḷi āguttade?,raːtri eʂʈu caɭi aːɡuttade,how much cold does it become at night?,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 weather.rain,ಮಳೆ,,maḷe,maɭe,,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
-weather.snow,ಹಿಮ,,hima,hima,"ಹಿಮ is snow, frost and ice alike in Kannada",,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
+weather.snow,ಹಿಮ,,hima,hima,snow,"ಹಿಮ is snow, frost and ice alike in Kannada",2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 weather.wind,ಗಾಳಿ,,gāḷi,ɡaːɭi,,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 weather.storm,ಬಿರುಗಾಳಿ,ಚಂಡಮಾರುತ,birugāḷi,biruɡaːɭi,gale / cyclone,the second is the coastal Karnataka word,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 weather.ice,ಮಂಜುಗಡ್ಡೆ,,maṁjugaḍḍe,maɲɟuɡaɖɖe,frozen block,said this way because ಹಿಮ already carries snow,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
@@ -64,6 +64,6 @@ trail-landmarks.end,ಕೊನೆ,,kone,kone,,,2,Karnataka Forest Department and 
 trail-landmarks.elevation,ಎತ್ತರ,,ettara,ettara,height,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 trail-landmarks.sunset,ಸೂರ್ಯಾಸ್ತ,,sūryāsta,suːrjaːsta,,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 trail-landmarks.water-point,ನೀರಿನ ಸ್ಥಳ,,nīrina sthaḷa,niːrina stʰaɭa,water place,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
-outdoors.can-we-camp-here,ಇಲ್ಲಿ ಕ್ಯಾಂಪ್ ಮಾಡಬಹುದೇ?,,illi kyāmp māḍabahudē?,illi kjaːmp maːɖabahudeː,…ಬಹುದೇ? reused from transit-rides.can-i-use-this-ticket,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
+outdoors.can-we-camp-here,ಇಲ್ಲಿ ಕ್ಯಾಂಪ್ ಮಾಡಬಹುದೇ?,,illi kyāmp māḍabahudē?,illi kjaːmp maːɖabahudeː,can we camp here?,…ಬಹುದೇ? reused from transit-rides.can-i-use-this-ticket,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 outdoors.is-it-safe-to-swim-here,ಇಲ್ಲಿ ಈಜುವುದು ಸುರಕ್ಷಿತವೇ?,,illi ījuvudu surakṣitavē?,illi iːɟuvudu surakʂitaveː,,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak
 outdoors.are-there-dangerous-animals-here,ಇಲ್ಲಿ ಅಪಾಯಕಾರಿ ಪ್ರಾಣಿಗಳು ಇವೆಯೇ?,,illi apāyakāri prāṇigaḷu iveyē?,illi apaːjakaːri praːɳiɡaɭu ivejeː,,,2,Karnataka Forest Department and KSTDC trail and warning-board wording; Kittel (DSAL);ipa=espeak

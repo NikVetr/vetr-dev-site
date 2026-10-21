@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-utility-templates.i-want-to-go-to,Chci jet do {},,xtsi jˈed do {},the place then takes the genitive after do,'do Prahy',2,cs-agent-v1;ipa=espeak
+utility-templates.i-want-to-go-to,Chci jet do {},,xtsi jˈed do {},I want to go to {},the place then takes the genitive after do; 'do Prahy',2,cs-agent-v1;ipa=espeak
 utility-templates.please-give-me,"Dejte mi {}, prosím",,"dˈeɪte mi {}, prˈosiːm",the thing takes the accusative,,2,cs-agent-v1;ipa=espeak
 utility-templates.may-i,Mohu {}?,,mˈohu {},,,2,cs-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,"Nedávejte mi tam {}, prosím",,"nˈedaːvˌeɪte mi tˈam {}, prˈosiːm",the thing takes the accusative,,2,cs-agent-v1;ipa=espeak

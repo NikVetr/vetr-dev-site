@@ -32,7 +32,7 @@ atm-cash.no-money-came-out,টাকা বের হয়নি,,ṭākā bera
 atm-cash.where-can-i-change-money,টাকা কোথায় বদল করা যাবে?,,ṭākā kothāẏa badala karā yābe?,ʈˈaka kˈotʰaj bˈɔdɔl kˈɔɾa dʒˈabe,,,2,bn-agent-v1;ipa=espeak
 atm-cash.the-machine-is-out-of-service,মেশিনটা কাজ করছে না,,meśinaṭā kāja karache nā,mˈeʃinˌɔʈa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,,2,bn-agent-v1;ipa=espeak
 atm-cash.please-give-me-smaller-notes,দয়া করে ছোট নোট দিন,,daẏā kare choṭa noṭa dina,dˈɔa kˈɔɾe tʃʰˈoʈ nˈoʈ dˈin,,,2,bn-agent-v1;ipa=espeak
-atm-cash.do-you-have-change,ভাংতি আছে কি?,খুচরো আছে কি?,bhāṁti āche ki?,bʰˈaŋti ˈatʃʰe ki,ভাংতি is Bangladeshi and খুচরো West Bengali,,2,bn-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,ভাংতি আছে কি?,খুচরো আছে কি?,bhāṁti āche ki?,bʰˈaŋti ˈatʃʰe ki,is there change?,ভাংতি is Bangladeshi and খুচরো West Bengali,2,bn-agent-v1;ipa=espeak
 atm-cash.may-i-pay-in,আমি কি {} দিয়ে দিতে পারি?,,āmi ki {} diẏe dite pāri?,ˌami ki {} dˈie dˈite pˈaɾi,may I pay with {}?,,2,bn-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,দয়া করে স্থানীয় মুদ্রায় নিন,,daẏā kare sthānīẏa mudrāẏa nina,dˈɔa kˈɔɾe stʰˈanij mˈudɾaj nˈin,please take it in local currency,,2,bn-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,খুচরো পয়সা কোথায় পাওয়া যাবে?,,khucaro paẏasā kothāẏa pāoẏā yābe?,kʰˈutʃɔɾˌo pˈɔjɔʃˌa kˈotʰaj pˈaoˌa dʒˈabe,,,2,bn-agent-v1;ipa=espeak
@@ -42,7 +42,7 @@ atm-cash.banknote,নোট,,noṭa,nˈoʈ,,,2,bn-agent-v1;ipa=espeak
 atm-cash.coin,কয়েন,পয়সা,kaẏena,kˈɔen,,,2,bn-agent-v1;ipa=espeak
 atm-cash.cash-only,শুধু নগদ,,śudhu nagada,ʃˈudʰu nˈɔɡɔd,,,2,bn-agent-v1;ipa=espeak
 atm-cash.fee,চার্জ,কমিশন,cārja,tʃˈaɾɟɔ,,,2,bn-agent-v1;ipa=espeak
-atm-cash.change,ভাংতি,খুচরো,bhāṁti,bʰˈaŋti,ভাংতি is Bangladeshi and খুচরো West Bengali,,2,bn-agent-v1;ipa=espeak
+atm-cash.change,ভাংতি,খুচরো,bhāṁti,bʰˈaŋti,change,ভাংতি is Bangladeshi and খুচরো West Bengali,2,bn-agent-v1;ipa=espeak
 atm-cash.exchange-rate,বিনিময় হার,,binimaẏa hāra,bˈinimˌɔj hˈaɾ,,,2,bn-agent-v1;ipa=espeak
 atm-cash.bank,ব্যাংক,,byāṁka,bˈæŋkɔ,,,2,bn-agent-v1;ipa=espeak
 atm-cash.money-exchange,মানি এক্সচেঞ্জ,,māni eksaceñja,mˈani ˈekʃɔtʃˌenɟɔ,,,2,bn-agent-v1;ipa=espeak
@@ -65,7 +65,7 @@ numbers-money.baht,বাত,,bāta,bˈato,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.baht-symbol,বাতের চিহ্ন,,bātera cihna,bˈateɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.forint,ফরিন্ট,,pharinṭa,fˈoɾinʈˌɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.forint-symbol,ফরিন্টের চিহ্ন,,pharinṭera cihna,fˈoɾinʈˌeɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
-numbers-money.rupee,রুপি,,rupi,ɾˈupi,"the Indian rupee; West Bengalis call it টাকা in speech, the same word as the Bangladeshi taka",,2,bn-gloss-v1;cldr;ipa=espeak
+numbers-money.rupee,রুপি,,rupi,ɾˈupi,rupee,"the Indian rupee; West Bengalis call it টাকা in speech, the same word as the Bangladeshi taka",2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.rupee-symbol,₹,রুপির চিহ্ন,rupi,,,,2,bn-gloss-v1;cldr;currency-gap-v1
 numbers-money.dollar,ডলার,,ḍalāra,ɖˈɔlaɾ,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.dollar-symbol,ডলারের চিহ্ন,,ḍalārera cihna,ɖˈɔlaɾˌeɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
@@ -75,7 +75,7 @@ numbers-money.franc,ফ্রাঙ্ক,,phrāṅka,fɾˈaŋkɔ,,,2,bn-gloss-v
 numbers-money.franc-symbol,ফ্রাঙ্কের চিহ্ন,,phrāṅkera cihna,fɾˈaŋkeɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.peso,পেসো,,peso,pˈeʃo,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.peso-symbol,পেসোর চিহ্ন,,pesora cihna,pˈeʃoɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
-numbers-money.real,রেয়াল,,reẏāla,ɾˈeal,"the Brazilian real. Spelt to keep it apart from the Iranian রিয়াল, which Bengali would otherwise write the same way",,2,bn-gloss-v1;cldr;ipa=espeak
+numbers-money.real,রেয়াল,,reẏāla,ɾˈeal,real,"the Brazilian real. Spelt to keep it apart from the Iranian রিয়াল, which Bengali would otherwise write the same way",2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.real-symbol,রেয়ালের চিহ্ন,,reẏālera cihna,ɾˈealˌeɾ tʃˈihnɔ,,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.local-currency,টাকা · রুপি,৳ · ₹,ṭākā · rupi,ʈˈaka ɾˈupi,BD · IN,,2,currency-agent-v1;cldr;ipa=espeak
 numbers-money.lakh,লাখ,"১,০০,০০০",lākha,lˈakʰ,"100,000","and the grouping is the point: a Bengali price board writes ১,০০,০০০, not ১০০,০০০",2,lakh-crore-agent-v1;ipa=espeak

@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-social-basics.hello,નમસ્તે,કેમ છો?,namastē,nəmʌsteː,I bow to you; કેમ છો? is the everyday Gujarati greeting,,2,gu-agent-v1;ipa=espeak
-social-basics.hello-polite,નમસ્કાર,,namaskār,nəmʌskaːɾ,"the fuller, more formal form of નમસ્તે",,2,gu-agent-v1;ipa=espeak
+social-basics.hello,નમસ્તે,કેમ છો?,namastē,nəmʌsteː,I bow to you,કેમ છો? is the everyday Gujarati greeting,2,gu-agent-v1;ipa=espeak
+social-basics.hello-polite,નમસ્કાર,,namaskār,nəmʌskaːɾ,salutations,"the fuller, more formal form of નમસ્તે",2,gu-agent-v1;ipa=espeak
 social-basics.good-morning,સુપ્રભાત,શુભ સવાર,suprabhāt,supɾəbʰaːt,good dawn,,2,gu-agent-v1;ipa=espeak
 social-basics.good-evening,શુભ સાંજ,,śubh sāṁj,ʃubʰ sãɟ,auspicious evening,,2,gu-agent-v1;ipa=espeak
 social-basics.goodbye,આવજો,,āvajō,aːʋʌɟoː,do come (again),the ordinary Gujarati parting,2,gu-agent-v1;ipa=espeak
@@ -115,9 +115,9 @@ board-answers.none-of-these,આમાંથી કંઈ મારી વાત 
 board-answers.not-possible,આવું નહીં થઈ શકે,,āvuṁ nahīṁ thaī śakē,aːʋũ nʌhĩ tʰʌi ʃʌkeː,this cannot happen,"matches the pack's own quick-responses.cannot-not-possible construction, impersonal",2,gu-board-answers-v1;ipa=espeak
 board-answers.please-wait,બસ એક મિનિટ,,bas ēk miniṭ,bʌs eːk mɪnɪʈ,,,2,gu-board-answers-v1;ipa=espeak
 board-answers.say-it-again,ફરી એક વાર?,,pharī ēk vār?,pʰʌɾi eːk ʋaːɾ,,,2,gu-board-answers-v1;ipa=espeak
-board-answers.stay-here,અહીં જ રહેવું સારું છે,,ahīṁ ja rahēvuṁ sāruṁ chē,ɛhĩ ɟə ɾəheːʋũ saːɾũ cʰeː,"'sāruṁ' agrees with the neuter gerund 'rahēvuṁ', not with anyone's gender",,2,gu-board-answers-v1;ipa=espeak
+board-answers.stay-here,અહીં જ રહેવું સારું છે,,ahīṁ ja rahēvuṁ sāruṁ chē,ɛhĩ ɟə ɾəheːʋũ saːɾũ cʰeː,staying right here is good,"'sāruṁ' agrees with the neuter gerund 'rahēvuṁ', not with anyone's gender",2,gu-board-answers-v1;ipa=espeak
 board-answers.the-hospital-is-close,હૉસ્પિટલ નજીક જ છે,,hospiṭal najīk ja chē,hɔspɪʈʌl nəɟiːk ɟə cʰeː,,,2,gu-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"કોઈ રાહ જોવાની નથી, હવે અંદર આવો",,"kōī rāh jōvānī nathī, havē andar āvō","koːi ɾaːh ɟoːʋaːni nʌtʰi, hʌʋeː ʌndəɾ aːʋoː","-ō imperative, invariant for gender",,2,gu-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"કોઈ રાહ જોવાની નથી, હવે અંદર આવો",,"kōī rāh jōvānī nathī, havē andar āvō","koːi ɾaːh ɟoːʋaːni nʌtʰi, hʌʋeː ʌndəɾ aːʋoː","there is no wait, now come inside","-ō imperative, invariant for gender",2,gu-board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,અમારી પાસે આ નથી,,amārī pāsē ā nathī,ʌmaːɾi paːseː aː nʌtʰi,,,2,gu-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,નામ શું છે?,,nām śuṁ chē?,naːm ʃũ cʰeː,,,2,gu-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,ક્યાં દુખે છે?,,kyāṁ dukhē chē?,kjã dukʰeː cʰeː,,,2,gu-board-answers-v1;ipa=espeak
@@ -126,7 +126,7 @@ kind-words.thank-you-for-your-help,તમારી મદદ માટે આભ
 kind-words.this-is-delicious,આ બહુ સ્વાદિષ્ટ છે.,,ā bahu svādiṣṭ chē,aː bʌhu sʋaːdɪʂʈ cʰeː,,,2,kind-words-v1;ipa=espeak
 kind-words.it-is-beautiful-here,અહીં બહુ સુંદર છે.,,ahīṁ bahu sundar chē,ɛhĩ bʌhu sundəɾ cʰeː,,,2,kind-words-v1;ipa=espeak
 kind-words.i-like-it-very-much,મને આ બહુ ગમે છે.,,manē ā bahu gamē chē,mʌneː aː bʌhu ɡʌmeː cʰeː,,,2,kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,મેં અહીં ખૂબ સરસ સમય પસાર કર્યો.,,mēṁ ahīṁ khūb saras samay pasār karyō,mẽː ɛhĩ kʰuːb səɾʌs səmɛj pʌsaːɾ kʌɾjoː,"perfective agrees with the object સમય (masc.), not the speaker, so invariant for speaker gender",,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,મેં અહીં ખૂબ સરસ સમય પસાર કર્યો.,,mēṁ ahīṁ khūb saras samay pasār karyō,mẽː ɛhĩ kʰuːb səɾʌs səmɛj pʌsaːɾ kʌɾjoː,I spent a very wonderful time here.,"perfective agrees with the object સમય (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,બધા માટે આભાર.,,badhā māṭē ābhār,bʌdʰaː maːʈeː aːbʰaːɾ,,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,તમારા આતિથ્ય માટે આભાર.,,tamārā ātithya māṭē ābhār,təmaːɾaː aːtɪtʰjə maːʈeː aːbʰaːɾ,,,2,kind-words-v1;ipa=espeak
 board-answers.my-name-is-blank,મારું નામ {} છે,,māruṁ nām {} chē,maːɾũ naːm {} cʰeː,my name is {},,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak

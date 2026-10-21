@@ -25,7 +25,7 @@ about-me.i-work-in-an-office,Saya kerja di pejabat,,sˈajə kˈərdʒə di pəd�
 about-me.i-have-my-own-business,Saya ada perniagaan sendiri,,sˈajə ˈadə pərnˌiaɡˈaan səndˈiri,perniagaan reused from border-customs.i-am-here-for-business,,2,ms-agent-v1;in-pack-neighbour=border-customs.i-am-here-for-business;fix=DBP perniagaan;row-corrections-v1;ipa=espeak
 family-intros.this-is-my-mother,Ini ibu saya,,ˈini ˈibu sˈajə,,,2,ms-agent-v1;ipa=espeak
 family-intros.this-is-my-father,Ini ayah saya,,ˈini ˈajah sˈajə,,,2,ms-agent-v1;ipa=espeak
-family-intros.this-is-my-brother,Ini saudara lelaki saya,,ˈini saʊdˈarə ləlˈaki sˈajə,"saudara (age-neutral sibling) + lelaki, matching this pack's own anak lelaki/anak perempuan pattern rather than the age-graded abang/adik",,2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ini saudara lelaki saya,,ˈini saʊdˈarə ləlˈaki sˈajə,this is my brother,"saudara (age-neutral sibling) + lelaki, matching this pack's own anak lelaki/anak perempuan pattern rather than the age-graded abang/adik",2,ms-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Ini saudara perempuan saya,,ˈini saʊdˈarə pərəmpˈuan sˈajə,see this-is-my-brother,,2,ms-agent-v1;ipa=espeak
 family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈajə,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rakan kongsi)",,2,ms-agent-v1;ipa=espeak
 family-intros.this-is-my-colleague,Ini rakan sekerja saya,,ˈini rˈakan səkˈərdʒə sˈajə,"rakan is the Malaysian spelling, distinct from Indonesian rekan",,2,ms-agent-v1;ipa=espeak

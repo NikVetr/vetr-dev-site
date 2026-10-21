@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 hotel-words.passport,putovnica,,putovnitsa,,,2,hr-agent-v1;ipa=espeak
 hotel-words.room-key-card,kartica za sobu,,kartitsa zˈa sˈobu,,,2,hr-agent-v1;ipa=espeak
-hotel-words.check-in,prijava,check-in,prijava,the English word is what most Croatian hotel signage uses,,2,hr-agent-v1;ipa=espeak
-hotel-words.check-out,odjava,check-out,odjava,the English word is what most Croatian hotel signage uses,,2,hr-agent-v1;ipa=espeak
+hotel-words.check-in,prijava,check-in,prijava,check-in,the English word is what most Croatian hotel signage uses,2,hr-agent-v1;ipa=espeak
+hotel-words.check-out,odjava,check-out,odjava,check-out,the English word is what most Croatian hotel signage uses,2,hr-agent-v1;ipa=espeak
 hotel-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,,2,hr-agent-v1;ipa=espeak
 hotel-basics.are-any-rooms-available,Imate li slobodnih soba?,,imate li slobodnix sˈoba,,,2,hr-agent-v1;ipa=espeak
 hotel-basics.there-are-two-of-us,Nas smo dvoje,,nˈas smo dvˈoje,,,2,hr-agent-v1;ipa=espeak

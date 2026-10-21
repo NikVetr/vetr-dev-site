@@ -120,8 +120,8 @@ rail-station-words.maglev,maglev,manyetik tren,maɡlˈɛv,,,1,reader-gloss-v1;ip
 common-signs.pork-code,domuz kodları,,dˈomʊz kɔdɫaɾˈɯ,,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,bilet ücreti,ücret,bilˈɛt ødʒretˈɪ,,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Ücreti nereye ödeyeceğim?,,ødʒretˈɪ nˈeɾejɛ œdejedʒˈejɪm,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
-air-travel.where-is-check-in,Check-in nerede?,,dʒhˈɛdʒkɪn nˈeɾedɛ,"check-in is used as the English loanword on Turkish airport and airline signage (THY, Istanbul Airport)",,2,tr-agent-v1;ipa=espeak
-air-travel.which-gate,Hangi kapı?,,hanɡˈɪ kapˈɯ,"kapı = gate, the word THY boarding passes print",,2,tr-agent-v1;ipa=espeak
+air-travel.where-is-check-in,Check-in nerede?,,dʒhˈɛdʒkɪn nˈeɾedɛ,where is check-in?,"check-in is used as the English loanword on Turkish airport and airline signage (THY, Istanbul Airport)",2,tr-agent-v1;ipa=espeak
+air-travel.which-gate,Hangi kapı?,,hanɡˈɪ kapˈɯ,which gate?,"kapı = gate, the word THY boarding passes print",2,tr-agent-v1;ipa=espeak
 air-travel.where-is-the-security-check,Güvenlik kontrolü nerede?,,ɟyvænlˈɪk kɔntrolˈø nˈeɾedɛ,,,2,tr-agent-v1;ipa=espeak
 air-travel.my-luggage-did-not-arrive,Bagajım gelmedi.,,baɡˈaʒɯm ɟˈælmedɪ,,,2,tr-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Pencere kenarı koltuk istiyorum.,,pændʒeɾˈɛ kenaɾˈɯ kɔɫtˈʊk ɪstˈijoɾʊm,,,2,tr-agent-v1;ipa=espeak
@@ -130,6 +130,6 @@ hitchhiking.can-you-give-me-a-ride,Beni arabanıza alır mısınız?,,benˈɪ a�
 hitchhiking.where-are-you-going,Nereye gidiyorsunuz?,,nˈeɾejɛ ɟidˈijɔrsunʊz,,,2,tr-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Sadece bir sonraki kasabaya kadar gidiyorum.,,sadˈedʒɛ bɪr sɔnrakˈɪ kasabajˈa kadˈar ɟidˈijoɾʊm,,,2,tr-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,İki kişilik yer var mı?,,ikˈɪ kiʃilˈɪk jˈɛr vˈar mɯ,,,2,tr-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Benzin parasını verebilirim.,,bænzˈɪn paɾasɯnˈɯ veɾebilˈiɾɪm,"benzin = petrol/gas, the word drivers use for fuel money",,2,tr-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Benzin parasını verebilirim.,,bænzˈɪn paɾasɯnˈɯ veɾebilˈiɾɪm,I can give the petrol money,"benzin = petrol/gas, the word drivers use for fuel money",2,tr-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Beni götürdüğünüz için teşekkürler.,,benˈɪ ɟœtørdˈyːnøz itʃˈɪn teʃekːørlˈɛr,,,2,tr-agent-v1;ipa=espeak
 taxi.please-turn-around,"U dönüşü yapın, lütfen.",,"ˈu dœnyʃˈø japˈɯn, løtfˈæn",,,2,tr-agent-v1;src=TDK-GTS U dönüşü 1;src=OPUS-OpenSubtitles2013-tr (Kielipankki-Korp) u dönüşü yap 7;in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak

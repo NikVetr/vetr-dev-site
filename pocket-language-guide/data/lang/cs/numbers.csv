@@ -25,7 +25,7 @@ atm-cash.where-can-i-change-money,Kde mohu vyměnit peníze?,,ɡdˈe mˈohu vˈi
 atm-cash.the-machine-is-out-of-service,Automat je mimo provoz,,ˈaʊtomat je mˈimo prˈovos,,,2,cs-agent-v1;ipa=espeak
 atm-cash.please-give-me-smaller-notes,Dejte mi prosím menší bankovky,,dˈeɪte mi prˈosiːm mˈenʃiː bˈaŋkofki,,,2,cs-agent-v1;ipa=espeak
 atm-cash.do-you-have-change,Máte drobné?,,mˌaːte drˈobneː,,,2,cs-agent-v1;ipa=espeak
-atm-cash.may-i-pay-in,Mohu platit v {}?,,mˈohu plˈacit vˈeː {},the currency name takes the locative case after v,"'v eurech', 'v korunách' -- which a bare slot cannot inflect for every filler; the same limitation intro.py records for i-am-from",2,cs-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Mohu platit v {}?,,mˈohu plˈacit vˈeː {},can I pay in {}?,"the currency name takes the locative case after v; 'v eurech', 'v korunách' -- which a bare slot cannot inflect for every filler; the same limitation intro.py records for i-am-from",2,cs-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,Účtujte prosím v místní měně,,ˈuːtʃtujte prˈosiːm v mˈiːstɲiː mɲˈeɲe,,,2,cs-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,Kde mohu získat mince?,,ɡdˈe mˈohu zˈiːskat mˈintse,,,2,cs-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Je tu minimum pro platbu kartou?,,je tˈu mˈinimum prˈopladbu kˈartoʊ,,,2,cs-agent-v1;ipa=espeak

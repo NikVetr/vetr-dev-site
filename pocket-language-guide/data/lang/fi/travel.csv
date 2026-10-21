@@ -1,10 +1,10 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-directions.where-is,Missä on {}?,,mˈissæ ˈon {},"the nominative-subject existential, so this frame needs no device",,2,fi-agent-v1;ipa=espeak
+directions.where-is,Missä on {}?,,mˈissæ ˈon {},where is {}?,"the nominative-subject existential, so this frame needs no device",2,fi-agent-v1;ipa=espeak
 directions.how-do-i-get-to,Miten pääsen tänne: {}?,,mˈitem pˈæːsen tˈænne {},"päästä johonkin governs the illative, which a bare filler cannot be",,2,fi-agent-v1;ipa=espeak
 directions.is-it-far,Onko sinne pitkä matka?,,ˈoŋko sˈinne pˈitkæ mˈatka,,,2,fi-agent-v1;ipa=espeak
 directions.how-long-on-foot,Kuinka kauan kävellen?,,kˈuiŋka kˈauaŋ kˈævellen,,,2,fi-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,Näyttäisittekö kartalta?,,nˈæyttæisˌittekø kˈartalta,,,2,fi-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Missä on lähin {}?,,mˈissæ ˈon lˈæhin {},"lähin agrees with a nominative, so the slot needs no case",,2,fi-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Missä on lähin {}?,,mˈissæ ˈon lˈæhin {},where is the nearest {}?,"lähin agrees with a nominative, so the slot needs no case",2,fi-agent-v1;ipa=espeak
 directions.where-am-i,Missä minä olen?,,mˈissæ mˈinæ ˈolen,,,2,fi-agent-v1;ipa=espeak
 directions.which-way,Kummalle puolelle?,,kˈummalle pˈuolelle,,,2,fi-agent-v1;ipa=espeak
 directions.can-i-walk-there,Voiko sinne kävellä?,,vˈoiko sˈinne kˈævellæ,,,2,fi-agent-v1;ipa=espeak
@@ -46,7 +46,7 @@ transit-rides.which-platform,Miltä laiturilta?,,mˈiltæ lˈaiturˌilta,,,2,fi-
 transit-rides.what-time-is-the-next-one,Mihin aikaan menee seuraava?,,mˈihin ˈaikaːn mˈeneː sˈeuraːva,,,2,fi-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,Menin pysäkkini ohi.,,mˈenim pˈysækkˌini ˈohi,,,2,fi-agent-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Käykö tämä lippu?,,kˈæykø tˈæmæ lˈippu,,,2,fi-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-validate,Pitääkö tämä lippu leimata?,,pˈitæːkø tˈæmæ lˈippu lˈeimata,"leimata is what a Finnish ticket machine does; the question is about validating, not buying",,2,fi-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Pitääkö tämä lippu leimata?,,pˈitæːkø tˈæmæ lˈippu lˈeimata,must this ticket be stamped?,"leimata is what a Finnish ticket machine does; the question is about validating, not buying",2,fi-agent-v1;ipa=espeak
 place-words.visitor-center,matkailuneuvonta,,mˈatkailunˌeuvonta,,,2,fi-agent-v1;ipa=espeak
 place-words.railway-station,rautatieasema,,rˈautatˌieasˌema,,,2,fi-agent-v1;ipa=espeak
 place-words.airport,lentoasema,,lˈentoˌasema,,,2,fi-agent-v1;ipa=espeak
@@ -85,7 +85,7 @@ pickup-meeting.please-pick-us-up-here,Noutaisitteko meidät tästä?,,nˈoutais�
 pickup-meeting.meet-us-at,Tavataan täällä: {}.,,tˈavataːn tˈæːllæ {},tavata jossakin governs a local case,,2,fi-agent-v1;ipa=espeak
 pickup-meeting.please-call-me-a-ride,Tilaisitteko minulle kyydin?,,tˈilaisˌitteko mˈinulle kˈyːdin,,,2,fi-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,Tilaisitteko taksin?,,tˈilaisˌitteko tˈaksin,,,2,fi-agent-v1;ipa=espeak
-rail-station-words.high-speed-rail,pikajuna,Pendolino,pˈikajˌuna,Pendolino is what Finland's fastest trains are called,,2,fi-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,pikajuna,Pendolino,pˈikajˌuna,express train,Pendolino is what Finland's fastest trains are called,2,fi-agent-v1;ipa=espeak
 rail-station-words.transfer,vaihto,,vˈaihto,,,2,fi-agent-v1;ipa=espeak
 rail-station-words.ticket-gate,lippuportti,,lˈippupˌortti,,,2,fi-agent-v1;ipa=espeak
 rail-station-words.platform,laituri,,lˈaituri,,,2,fi-agent-v1;ipa=espeak
@@ -121,7 +121,7 @@ rail-station-words.maglev,magneettijuna,,mˈaɡneːttˌijuna,,,2,fi-agent-v1;ipa
 place-words.scenic-area,nähtävyysalue,,nˈæhtævˌyːsalˌue,,,2,fi-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Missä matkalippu maksetaan?,,mˈissæ mˈatkalˌippu mˈaksetaːn,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
 air-travel.where-is-check-in,Missä on lähtöselvitys?,,mˈissæ ˈon lˈæhtøsˌelvitys,,,2,fi-agent-v1;source=finavia.fi;ipa=espeak
-air-travel.which-gate,Miltä portilta?,,mˈiltæ pˈortilta,matches Miltä laiturilta? already in the pack,,2,fi-agent-v1;source=finavia.fi;ipa=espeak
+air-travel.which-gate,Miltä portilta?,,mˈiltæ pˈortilta,from which gate?,matches Miltä laiturilta? already in the pack,2,fi-agent-v1;source=finavia.fi;ipa=espeak
 air-travel.where-is-the-security-check,Missä on turvatarkastus?,,mˈissæ ˈon tˈurvatˌarkastus,,,2,fi-agent-v1;source=finavia.fi;ipa=espeak
 air-travel.my-luggage-did-not-arrive,Matkatavarani ei saapunut.,,mˈatkatˌavarˌani ˈei sˈaːpunut,"matkatavara, the term Finnish airlines use for luggage",,2,fi-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Haluaisin ikkunapaikan.,,hˈaluˌaisin ˈikkunapˌaikan,,,2,fi-agent-v1;ipa=espeak

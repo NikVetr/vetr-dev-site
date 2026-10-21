@@ -15,7 +15,7 @@ hotel-basics.is-wi-fi-free,Czy Wi-Fi jest bezpłatne?,,tʃɨ vˈifi jɛzd bɛspw
 hotel-basics.how-much-per-night,Ile za noc?,,ˈilɛ za nˈɔts,,,2,pl-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Czy śniadanie jest w cenie?,,tʃɨ ɕɲadˈaɲɛ jɛst f tsˈɛɲɛ,,,2,pl-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Czy mogę zobaczyć pokój?,,tʃɨ mˈɔɡɛ zɔbˈatʃɨtɕ pˈɔkuj,,,2,pl-agent-v1;ipa=espeak
-hotel-basics.for-nights,Liczba nocy: {},,lˈidʒba nˈɔtsɨ {},"number of nights; a label, because after a Polish numeral the noun would have to change form",,2,pl-agent-v1;ipa=espeak
+hotel-basics.for-nights,Liczba nocy: {},,lˈidʒba nˈɔtsɨ {},number of nights: {},"a label, because after a Polish numeral the noun would have to change form",2,pl-agent-v1;ipa=espeak
 hotel-basics.two-beds,Poproszę dwa łóżka,,pɔprˈɔʃɛ dvˈa wˈuʃka,,,2,pl-agent-v1;ipa=espeak
 hotel-basics.is-there-air-conditioning,Czy jest klimatyzacja?,,tʃɨ jɛst klˌimatɨzˈatsja,,,2,pl-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Czy mogę się wymeldować później?,,tʃɨ mˈɔɡɛ ɕɛ vˌɨmɛldˈɔvatɕ pˈuʑɲɛj,,,2,pl-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ laundry.dryer,suszarka,,suʃˈarka,,,2,pl-agent-v1;ipa=espeak
 laundry.coin-operated,na monety,,na mɔnˈɛtɨ,,,2,pl-agent-v1;ipa=espeak
 massage-spa.please-stop,Proszę przestać,,prˈɔʃɛ pʃˈɛstatɕ,przestać is to cease; przerwać in the pause row is to interrupt and resume,,2,pl-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-pause,"Krótka przerwa, proszę",,"krˈutka pʃˈɛrva, prˈɔʃɛ","a short break, please",,2,pl-agent-v1;spa-board-v1;ipa=espeak
-massage-spa.please-avoid-this-area,Proszę nie dotykać tego miejsca,,prˈɔʃɛ ɲɛ dɔtˈɨkatɕ tˌɛɡɔ mʲˈɛjstsa,"infinitive rather than an imperative, so no pan/pani is forced",,2,pl-agent-v1;spa-board-v1;ipa=espeak
+massage-spa.please-avoid-this-area,Proszę nie dotykać tego miejsca,,prˈɔʃɛ ɲɛ dɔtˈɨkatɕ tˌɛɡɔ mʲˈɛjstsa,please do not touch this place,"infinitive rather than an imperative, so no pan/pani is forced",2,pl-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.stronger-pressure,Proszę mocniej,,prˈɔʃɛ mˈɔtsɲɛj,mocniej / delikatniej is the pair a Polish masażysta uses,,2,pl-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.more-gently,"Delikatniej, proszę",,"dˌɛlikˈatɲɛj, prˈɔʃɛ",,,2,pl-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.that-pressure-is-good,"Taki nacisk jest dobry, proszę tak dalej",,"tˌaki nˈatɕisk jɛzd dˈɔbrɨ, prˈɔʃɛ tˈaɡ dˈalɛj",nacisk is the pressure itself,siła nacisku is the trade's term,2,pl-agent-v1;spa-board-v1;ipa=espeak

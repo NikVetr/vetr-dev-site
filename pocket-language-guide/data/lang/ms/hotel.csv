@@ -48,7 +48,7 @@ laundry.please-do-not-use-bleach,Tolong jangan pakai peluntur,,tˈoloŋ dʒˈaŋ
 laundry.laundromat,Kedai dobi layan diri,,kˈədaɪ dˈobi lˈajan dˈiri,,,2,ms-agent-v1;fix=DBP laundry absent;fix=KIMD laundromat kedai dobi layan diri;fix=DBP binatu absent (DBP benatu is the washerman);row-corrections-v3;ipa=espeak
 laundry.please-iron-this,Tolong seterika ini,,tˈoloŋ sətərˈikə ˈini,,,2,ms-agent-v1;fix=DBP seterika;row-corrections-v1;ipa=espeak
 laundry.detergent,Detergen,Sabun cuci,detˈɛrɡen,,,2,ms-agent-v1;fix=DBP detergen;row-corrections-v1;ipa=espeak
-laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaneŋ,cuci kering here means wash-and-dry,,2,ms-agent-v1;ipa=espeak
+laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaneŋ,dry cleaning,cuci kering here means wash-and-dry,2,ms-agent-v1;ipa=espeak
 laundry.dryer,Mesin pengering,,mˈəsen pəŋˈəreŋ,,,2,ms-agent-v1;ipa=espeak
 laundry.coin-operated,Pakai syiling,Self-service,pˈakaɪ ʃˈileŋ,,,2,ms-agent-v1;fix=DBP syiling;row-corrections-v1;ipa=espeak
 massage-spa.please-stop,"Berhenti, jangan teruskan",,"bərhˈənti, dʒˈaŋan tərˈuskan",stop; do not continue,,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak

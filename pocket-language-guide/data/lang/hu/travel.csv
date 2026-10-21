@@ -12,7 +12,7 @@ directions.how-far-is-it,Milyen messze van?,,mˈijɛn mˈɛssɛ vˈɑn,,,2,hu-ag
 directions.which-exit,Melyik kijárat?,,mˈɛjik kˈijaːrɑt,,,2,hu-agent-v1;ipa=espeak
 directions.can-you-show-me-the-way,Meg tudná mutatni az utat?,,mˈɛɡ tˈudnaː mˈutɑtni ˈɑz ˈutɑt,,,2,hu-agent-v1;ipa=espeak
 directions.north,észak,,ˈeːsɑk,,,2,hu-agent-v1;ipa=espeak
-directions.south,dél,,dˈeːl,dél also means noon,,2,hu-agent-v1;ipa=espeak
+directions.south,dél,,dˈeːl,south,dél also means noon,2,hu-agent-v1;ipa=espeak
 directions.east,kelet,,kˈɛlɛt,,,2,hu-agent-v1;ipa=espeak
 directions.west,nyugat,,ɲˈuɡɑt,,,2,hu-agent-v1;ipa=espeak
 quick-directions.go-straight,Menjen egyenesen,,mˈɛɲɲɛn ˈɛɟɛnɛʃɛn,,,2,hu-agent-v1;ipa=espeak
@@ -126,10 +126,10 @@ air-travel.where-is-the-security-check,Hol van a biztonsági ellenőrzés?,,hˈo
 air-travel.my-luggage-did-not-arrive,Nem érkezett meg a csomagom.,,nˈɛm ˈeːrkɛzɛtt mˈɛɡ ˈɑ tʃˈomɑɡom,,,2,hu-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Ablak melletti helyet szeretnék.,,ˈɑblɑk mˈɛllɛtti hˈɛjɛt sˈɛrɛtneːk,,,2,hu-agent-v1;ipa=espeak
 air-travel.i-would-like-an-aisle-seat,Folyosó melletti helyet szeretnék.,,fˈojoʃoː mˈɛllɛtti hˈɛjɛt sˈɛrɛtneːk,,,2,hu-agent-v1;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,El tudna vinni?,,ˈɛl tˈudnɑ vˈinni,"formal, matching the pack's taxi register",,2,hu-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,El tudna vinni?,,ˈɛl tˈudnɑ vˈinni,could you take me?,"formal, matching the pack's taxi register",2,hu-agent-v1;ipa=espeak
 hitchhiking.where-are-you-going,Hova megy?,,hˈovɑ mˈɛɟ,,,2,hu-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Csak a következő városig kell mennem.,,tʃˈɑk ˈɑ kˈøvɛtkɛzøː vˈaːroʃiɡ kˈɛll mˈɛnnɛm,,,2,hu-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,Van hely kettőnknek?,,vˈɑn hˈɛj kˈɛttøːnknɛk,,,2,hu-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Ki tudom fizetni a benzint.,,kˈi tˈudom fˈizɛtni ˈɑ bˈɛnzint,"benzin, the word drivers use",,2,hu-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Ki tudom fizetni a benzint.,,kˈi tˈudom fˈizɛtni ˈɑ bˈɛnzint,I can pay for the petrol,"benzin, the word drivers use",2,hu-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,"Köszönöm, hogy elvitt.",,"kˈøsønøm, hˈoɟ ˈɛlvitt",,,2,hu-agent-v1;ipa=espeak
 taxi.please-turn-around,"Kérem, forduljon meg",,"kˈeːrɛm, fˈordujjon mˈɛɡ",,,2,hu-agent-v1;src=ÉrtSz megfordul 2;src=KRESZ 14. § Megfordulni tilos;in-pack-frame;answers-audit-v1;ipa=espeak

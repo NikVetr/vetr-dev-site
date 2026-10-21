@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,the everyday greeting; नमस्कार is the polite row,,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.75 नमस्ते word used in greeting -- where its हाय (p.168) is an exclamation of pain and the English hi has no entry in Berntsen Date or Molesworth;rule=register-neutral (the concept is neutral and social-basics.hello-polite is नमस्कार -- the hi ne and gu pairing);row-corrections-v9;ipa=espeak
+social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,hello,the everyday greeting; नमस्कार is the polite row,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.75 नमस्ते word used in greeting -- where its हाय (p.168) is an exclamation of pain and the English hi has no entry in Berntsen Date or Molesworth;rule=register-neutral (the concept is neutral and social-basics.hello-polite is नमस्कार -- the hi ne and gu pairing);row-corrections-v9;ipa=espeak
 social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,,2,mr-agent-v1;ipa=espeak
-social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,,2,mr-agent-v1;ipa=espeak
+social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,good morning,नमस्कार serves too,2,mr-agent-v1;ipa=espeak
 social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,,2,mr-agent-v1;ipa=espeak
 social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]',the everyday Marathi goodbye,2,"mr-agent-v1;fix=the cell's own back-translation -- kept -- and Berntsen A Basic Marathi-English Dictionary (DSAL) p. 123 येणे (v.i. to come);was=literal lit. 'I'll come [again]' -- the everyday Marathi goodbye -- masculine here and feminine in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine येते serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 social-basics.thank-you,धन्यवाद,,dhanyavāda,dʰˌənjəvˈaːd,,,2,mr-agent-v1;ipa=espeak
 social-basics.you-are-welcome,स्वागत आहे,,svāgata āhē,svˈaːɡət ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 social-basics.excuse-me-sorry,माफ करा,,māpha karā,mˈaːpʰ kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
-social-basics.sorry,सॉरी,,sôrī,sˈɔɾi,"casual, distinct register from माफ करा",,2,mr-agent-v1;ipa=espeak
+social-basics.sorry,सॉरी,,sôrī,sˈɔɾi,sorry,"casual, distinct register from माफ करा",2,mr-agent-v1;ipa=espeak
 social-basics.no-problem,काही हरकत नाही,,kāhī harakata nāhī,kˈaːhi hˈʌɾəkˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 social-basics.i-do-not-know,मला माहीत नाही,,malā māhīta nāhī,mˈʌlaː maːhˈiːt nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 social-basics.good-night,शुभ रात्री,,śubha rātrī,ʃˈʊbʰ ɾˈaːtɾi,,,2,mr-agent-v1;ipa=espeak
@@ -102,9 +102,9 @@ social-basics.politeness-particles,"थाई भाषेत नम्रता
 board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,,2,mr-board-answers-v1;ipa=espeak
 board-answers.card-or-cash,कार्ड की रोख?,,kārḍa kī rōkha?,kˈaːɾɖ kˈi ɾˈoːkʰ,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.help-is-coming,मदत येत आहे,,madata yēta āhē,mˈʌdət jˈeːt ˈaːheː,"progressive gerund + āhē, invariant regardless of speaker",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
-board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",,2,mr-board-answers-v1;ipa=espeak
+board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,how many are wanted?,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",2,mr-board-answers-v1;ipa=espeak
 board-answers.i-am-calling-an-ambulance,मी अँब्युलन्स बोलावत आहे,,mī am̐byulansa bōlāvata āhē,mˈi ˌʌnbjʊlˈʌns boːlˈaːvət ˈaːheː,"progressive gerund + āhē is invariant for gender in Marathi, unlike the habitual present",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
-board-answers.i-am-calling-the-police,मी पोलिसांना बोलावत आहे,,mī pōlisāṁnā bōlāvata āhē,mˈi pˌoːlɪsˈãnaː boːlˈaːvət ˈaːheː,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.i-am-calling-the-police,मी पोलिसांना बोलावत आहे,,mī pōlisāṁnā bōlāvata āhē,mˈi pˌoːlɪsˈãnaː boːlˈaːvət ˈaːheː,I am calling the police,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
 board-answers.i-do-not-have-a-phone,माझ्याकडे फोन नाही,,mājhyākaḍē phōna nāhī,mˈaːɟʰjaːkɖeː pʰˈoːn nˈaːhi,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,मला मदत करणारं कोणीतरी भेटेल,,malā madata karaṇāraṁ kōṇītarī bhēṭēla,mˈʌlaː mˈʌdət kˌəɾɳˈaːɾən koːɳˈiːtɾˌi bʰeːʈˈeːl,someone who can help will be found to me,"'bhēṭēla' is future 3sg agreeing with the ungendered 'kōṇītarī', and Marathi future does not mark gender in any case",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
 board-answers.i-will-show-you,मी वाट दाखवीन,,mī vāṭa dākhavīna,mˈi vˈaːʈ dˌaːkʰvˈiːn,"Marathi future tense (-īn) does not mark gender, unlike the present habitual or past",,2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
@@ -115,9 +115,9 @@ board-answers.none-of-these,मला जे म्हणायचं आहे 
 board-answers.not-possible,असं शक्य नाही,,asaṁ śakya nāhī,ˈʌsən ʃˈʌkjə nˈaːhi,that is not possible,"'śakya' is an invariant adjective, no verb agreement at all",2,mr-board-answers-v1;ipa=espeak
 board-answers.please-wait,एक मिनिट,,ēka miniṭa,ˈeːk mˈɪnɪʈ,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.say-it-again,परत एकदा?,,parata ēkadā?,pˈʌɾət ˈeːkdˌaː,,,2,mr-board-answers-v1;ipa=espeak
-board-answers.stay-here,इथेच थांबणं चांगलं,,ithēca thāmbaṇaṁ cāṁgalaṁ,ɪtʰˈeːc tʰˈãbəɳˌən cˈãɡəlˌən,"'cāṁgalaṁ' agrees with the neuter gerund 'thāmbaṇaṁ', not with anyone's gender",,2,mr-board-answers-v1;ipa=espeak
+board-answers.stay-here,इथेच थांबणं चांगलं,,ithēca thāmbaṇaṁ cāṁgalaṁ,ɪtʰˈeːc tʰˈãbəɳˌən cˈãɡəlˌən,staying right here [is] good,"'cāṁgalaṁ' agrees with the neuter gerund 'thāmbaṇaṁ', not with anyone's gender",2,mr-board-answers-v1;ipa=espeak
 board-answers.the-hospital-is-close,रुग्णालय जवळच आहे,,rugṇālaya javaḷaca āhē,ɾʊɡɳˈaːlˌɛj zˈʌvəɭˌəc ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"वाट पाहायची गरज नाही, आत या",,"vāṭa pāhāyacī garaja nāhī, āta yā","vˈaːʈ paːhˈaːjcˌi ɡˈʌɾəz nˈaːhi, ˈaːt jˈaː","'yā' is the tumhi-imperative of yēṇē, invariant for gender",,2,mr-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"वाट पाहायची गरज नाही, आत या",,"vāṭa pāhāyacī garaja nāhī, āta yā","vˈaːʈ paːhˈaːjcˌi ɡˈʌɾəz nˈaːhi, ˈaːt jˈaː","no need to wait, come in","'yā' is the tumhi-imperative of yēṇē, invariant for gender",2,mr-board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,आमच्याकडे हे नाही,,āmacyākaḍē hē nāhī,ˌaːmcjˈaːkɖˌeː hˈeː nˈaːhi,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,नाव काय आहे?,,nāva kāya āhē?,nˈaːv kˈaːj ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,कुठे दुखत आहे?,,kuṭhē dukhata āhē?,kˈʊʈʰeː dˈʊkʰət ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
@@ -126,7 +126,7 @@ kind-words.thank-you-for-your-help,तुमच्या मदतीसाठ�
 kind-words.this-is-delicious,हे खूप चविष्ट आहे.,,hē khūp caviṣṭ āhē,hˈeː kʰˈuːp cəvˈɪʂʈ ˈaːheː,,,2,kind-words-v1;ipa=espeak
 kind-words.it-is-beautiful-here,इथे खूप सुंदर आहे.,,ithē khūp sundar āhē,ˈɪtʰeː kʰˈuːp sˈũdəɾ ˈaːheː,,,2,kind-words-v1;ipa=espeak
 kind-words.i-like-it-very-much,मला हे खूप आवडते.,,malā hē khūp āvaḍtē,mˈʌlaː hˈeː kʰˈuːp ˈaːvəɖteː,,,2,kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,मी इथे खूप चांगला वेळ घालवला.,,mī ithē khūp cāṅgalā vēḻ ghālavalā,mˈi ˈɪtʰeː kʰˈuːp cˈãɡlˌaː vˈeːɭ ɡʰˈaːləvlaː,"घालवला agrees with the object वेळ (masc.), not the speaker, so invariant for speaker gender",,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मी इथे खूप चांगला वेळ घालवला.,,mī ithē khūp cāṅgalā vēḻ ghālavalā,mˈi ˈɪtʰeː kʰˈuːp cˈãɡlˌaː vˈeːɭ ɡʰˈaːləvlaː,I spent a very good time here,"घालवला agrees with the object वेळ (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,सर्वांसाठी धन्यवाद.,,sarvāṁsāṭhī dhanyavāda,sˌərvãsˈaːʈʰi dʰˌənjəvˈaːd,,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,तुमच्या आदरातिथ्यासाठी धन्यवाद.,,tumacyā ādarātithyāsāṭhī dhanyavāda,tʊmˈʌcjaː ˌaːdɾˌaːtɪtʰjaːsˈaːʈʰi dʰˌənjəvˈaːd,,,2,kind-words-v1;ipa=espeak
 board-answers.my-name-is-blank,माझे नाव {} आहे,,mājhē nāva {} āhē,mˈaːɟʰeː nˈaːv {} ˈaːheː,,,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak

@@ -46,7 +46,7 @@ pharmacy-symptoms.which-pharmacy-is-open-now,Která lékárna má teď otevřeno
 pharmacy-symptoms.i-need-medicine-for,Potřebuji lék na {},,pˈotr̝ebˌuji lˈeːk na {},,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-fever,Mám horečku,,maːm hˈoretʃku,,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Mám průjem,,maːm prˈuːjem,,,2,cs-agent-v1;ipa=espeak
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Kde je pohotovostní lékárna?,,ɡdˈe je pˈohotˌovostɲiː lˈeːkaːrna,"Czech runs a duty-pharmacy rota (lékárenská pohotovostní služba) rather than universal 24h shops, matching the concept's own note",,2,cs-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Kde je pohotovostní lékárna?,,ɡdˈe je pˈohotˌovostɲiː lˈeːkaːrna,where is the emergency pharmacy?,"Czech runs a duty-pharmacy rota (lékárenská pohotovostní služba) rather than universal 24h shops, matching the concept's own note",2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.painkiller,lék proti bolesti,,lˈeːk prˌoci bˈolesci,,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Potřebuji na to recept?,,pˈotr̝ebˌuji nˈato rˈetsept,,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Bolí mě hlava,,bˈoliː mɲˈe hlˈava,,,2,cs-agent-v1;ipa=espeak

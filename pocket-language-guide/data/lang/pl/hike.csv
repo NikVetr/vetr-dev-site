@@ -56,7 +56,7 @@ trail-warnings.danger,niebezpieczeństwo,,ɲˌɛbɛspʲɛtʃˈɛɲstfɔ,,,2,pl-a
 trail-warnings.beware-falling-rocks,uwaga na spadające kamienie,,uvˈaɡa na spˌadajˈɔntsɛ kamjˈɛɲɛ,,,2,pl-agent-v1;ipa=espeak
 trail-warnings.first-aid-station,punkt pierwszej pomocy,,pˈuŋkt pʲˈɛrʃɛj pɔmˈɔtsɨ,,,2,pl-agent-v1;ipa=espeak
 trail-warnings.service-suspended,kursy wstrzymane,,kˈursɨ fstʃɨmˈanɛ,,,2,pl-agent-v1;ipa=espeak
-trail-landmarks.trail-marker,znak szlaku,,znˈak ʃlˈaku,Polish trails are colour-blazed rather than numbered,,2,pl-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,znak szlaku,,znˈak ʃlˈaku,trail marker,Polish trails are colour-blazed rather than numbered,2,pl-agent-v1;ipa=espeak
 trail-landmarks.fork-junction,rozwidlenie,,rˌɔzvidlˈɛɲɛ,,,2,pl-agent-v1;ipa=espeak
 trail-landmarks.boardwalk-cliff-path,kładka,,kwˈatka,a boardwalk; perć is the Tatra word for an exposed cliff path,,2,pl-agent-v1;ipa=espeak
 trail-landmarks.start,początek,,pɔtʃˈɔntɛk,,,2,pl-agent-v1;ipa=espeak

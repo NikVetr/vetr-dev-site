@@ -53,8 +53,8 @@ numbers-money.rupee,卢比,,lúbǐ,lu˧˥pi˧˩˧,,,2,reader-gloss-v1;roman=gene
 numbers-money.rupee-symbol,卢比符号,,lúbǐ fúhào,lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.won,韩元,,hányuán,xan˧˥ɥœn˧˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.won-symbol,韩元符号,,hányuán fúhào,xan˧˥ɥœn˧˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.baht,泰币,,tàibì,tʰaɪ˥˩pi˥˩,泰铢 needs U+94E2 in cjk-sc,,1,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.baht-symbol,泰币符号,,tàibì fúhào,tʰaɪ˥˩pi˥˩ fu˧˥xɑʊ˥˩,泰铢 needs U+94E2 in cjk-sc,,1,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.baht,泰币,,tàibì,tʰaɪ˥˩pi˥˩,Thai currency,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.baht-symbol,泰币符号,,tàibì fúhào,tʰaɪ˥˩pi˥˩ fu˧˥xɑʊ˥˩,Thai currency symbol,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.lira,里拉,,lǐlā,li˧˩˧la˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.lira-symbol,里拉符号,,lǐlā fúhào,li˧˩˧la˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.dong,越南盾,,yuènándùn,ɥœ˥˩nan˧˥twən˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin

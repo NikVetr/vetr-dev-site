@@ -54,7 +54,7 @@ medical-conditions.i-take-blood-thinners,ደም የሚያሳሳ መድኃኒት 
 medical-conditions.medicine-allergy,የመድኃኒት አለርጂ፦ {},,yemedhanīt ālerjī: {},jəmədhanit ʔalərdʒi {},,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.this-card-lists-my-conditions,ይህ ካርድ የህመሜን ዝርዝር ይዟል,,yih kard yehimemēn zirizir yizwal,jɨh kard jəhɨməmen zɨrɨzɨr jɨzwal,,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.this-is-my-medicine,ይህ የኔ መድኃኒት ነው,,yih yenē medhanīt new,jɨh jəne mədhanit nəw,,,2,am-agent-v1;ipa=bgn-am
-medical-conditions.please-give-me-sugar-or-juice,እባክዎ ስኳር ወይም ጭማቂ ይስጡኝ,,ibakwo skwar weyim chʼimakʼī yistʼunny,ʔɨbakwo skwar wəjɨm tʃʼɨmakʼi jɨstʼuɲː,ስኳር alone is granulated sugar,diabetes is የስኳር በሽታ,2,am-agent-v1;ipa=bgn-am
+medical-conditions.please-give-me-sugar-or-juice,እባክዎ ስኳር ወይም ጭማቂ ይስጡኝ,,ibakwo skwar weyim chʼimakʼī yistʼunny,ʔɨbakwo skwar wəjɨm tʃʼɨmakʼi jɨstʼuɲː,please give me sugar or juice,ስኳር alone is granulated sugar; diabetes is የስኳር በሽታ,2,am-agent-v1;ipa=bgn-am
 medical-conditions.inject-it-into-my-outer-thigh,በጭኔ ውጫዊ ክፍል ይወጉት,,bechʼinē wichʼawī kifil yiwegut,bətʃʼɨne wɨtʃʼawi kɨfɨl jɨwəɡut,,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.my-blood-type-is,የደሜ ዓይነት {} ነው,,yedemē ʽaynet {} new,jədəme ʔajnət {} nəw,,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.do-not-give-me,{} አይስጡኝ,,{} āyistʼunny,{} ʔajɨstʼuɲː,,,2,am-agent-v1;ipa=bgn-am
@@ -64,7 +64,7 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,ለሰልፋ መድኃኒት አ
 pharmacy-symptoms.which-pharmacy-is-open-now,አሁን የትኛው መድኃኒት ቤት ክፍት ነው?,,āhun yetinyaw medhanīt bēt kift new?,ʔahun jətɨɲaw mədhanit bet kɨft nəw,,,2,am-agent-v1;ipa=bgn-am
 pharmacy-symptoms.i-need-medicine-for,ለ{} መድኃኒት ያስፈልገኛል,,le{} medhanīt yasfelligennyal,lə {} mədhanit jasfəlːɨɡəɲːal,,,2,am-agent-v1;ipa=bgn-am
 pharmacy-symptoms.i-have-a-fever,ትኩሳት አለብኝ,,tikusat āllebbinny,tɨkusat ʔalːəbːɨɲː,,,2,am-agent-v1;ipa=bgn-am
-pharmacy-symptoms.i-think-i-have-malaria,ወባ ያለብኝ ይመስለኛል,,weba yallebbinny yimeslennyal,wəba jalːəbːɨɲː jɨməsləɲːal,it seems to me I have ወባ,,2,am-agent-v1;ipa=bgn-am
+pharmacy-symptoms.i-think-i-have-malaria,ወባ ያለብኝ ይመስለኛል,,weba yallebbinny yimeslennyal,wəba jalːəbːɨɲː jɨməsləɲːal,it seems to me I have malaria,,2,am-agent-v1;ipa=bgn-am
 pharmacy-symptoms.i-need-a-malaria-test,የወባ ምርመራ ያስፈልገኛል,,yeweba mirmera yasfelligennyal,jəwəba mɨrməra jasfəlːɨɡəɲːal,,,2,am-agent-v1;ipa=bgn-am
 pharmacy-symptoms.i-have-diarrhea,ተቅማጥ አለብኝ,,tekʼimatʼ āllebbinny,təkʼɨmatʼ ʔalːəbːɨɲː,,,2,am-agent-v1;ipa=bgn-am
 pharmacy-symptoms.where-is-an-all-night-pharmacy,ሌሊት የሚሰራ መድኃኒት ቤት የት ነው?,,lēlīt yemīsera medhanīt bēt yet new?,lelit jəmisəra mədhanit bet jət nəw,the medicine house that works at night,,2,am-agent-v1;ipa=bgn-am
@@ -133,7 +133,7 @@ body-parts.eye,ዓይን,,ʽayn,ʔajn,,,2,am-agent-v1;ipa=bgn-am
 body-parts.ear,ጆሮ,,joro,dʒoro,,,2,am-agent-v1;ipa=bgn-am
 body-parts.leg,እግር,,igir,ʔɨɡɨr,,,2,am-agent-v1;ipa=bgn-am
 body-parts.arm,ክንድ,,kinid,kɨnɨd,,,2,am-agent-v1;ipa=bgn-am
-body-parts.foot,እግር,,igir,ʔɨɡɨr,እግር is leg and foot alike,,2,am-agent-v1;ipa=bgn-am
+body-parts.foot,እግር,,igir,ʔɨɡɨr,foot,እግር is leg and foot alike,2,am-agent-v1;ipa=bgn-am
 body-parts.hand,እጅ,,ij,ʔɨdʒ,,,2,am-agent-v1;ipa=bgn-am
 body-parts.knee,ጉልበት,,gulbet,ɡulbət,,,2,am-agent-v1;ipa=bgn-am
 body-parts.ankle,ቁርጭምጭሚት,,kʼurchʼimichʼimīt,kʼurtʃʼɨmɨtʃʼɨmit,,,2,am-agent-v1;ipa=bgn-am

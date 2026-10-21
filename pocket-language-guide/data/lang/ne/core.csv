@@ -6,7 +6,7 @@ pronouns-verbs.you-polite,तपाईं,,tapāīṁ,tˌəpaːˈɪːn,use this 
 pronouns-verbs.he-him,ऊ / उसलाई,,ū / usalāī,ˈʊ / ˌʊsəlˈaːi,he/she and him/her are the same word in Nepali,"gender-neutral, not a gap",2,ne-agent-v1;ipa=espeak
 pronouns-verbs.she-her,ऊ / उसलाई,,ū / usalāī,ˈʊ / ˌʊsəlˈaːi,identical to he/him: Nepali's non-honorific third person has no gender split,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.they-them,तिनीहरू / तिनीहरूलाई,,tinīharū / tinīharūlāī,tɪnˈɪːhəɾˌuː / tˌɪnɪːhˌəɾuːlˈaːi,they / to them,,2,ne-agent-v1;ipa=espeak
-pronouns-verbs.my-mine,मेरो / मेरी,,mērō / mērī,mˈeːɾoː / mˈeːɾi,"मेरो agrees with a masculine/neuter possessed noun, मेरी with a feminine one","the same three-way agreement (-o/-ī/-ā) Hindi's मेरा/मेरी/मेरे makes, checked and confirmed rather than assumed after this pack's first draft guessed Nepali possessives were invariant and was wrong",2,ne-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,मेरो / मेरी,,mērō / mērī,mˈeːɾoː / mˈeːɾi,my / my,"मेरो agrees with a masculine/neuter possessed noun, मेरी with a feminine one; the same three-way agreement (-o/-ī/-ā) Hindi's मेरा/मेरी/मेरे makes, checked and confirmed rather than assumed after this pack's first draft guessed Nepali possessives were invariant and was wrong",2,ne-agent-v1;ipa=espeak
 pronouns-verbs.your-yours,तपाईंको,,tapāīṁkō,tˌəpaːˈɪːŋkoː,polite,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.be-called-call,नाम / भनिनु,,nāma / bhaninu,nˈaːmə / bʰˈʌnɪnˌuʲu,name / to be called,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.have,छ,,cha,cʰˈə,"sanga chha, ""with [X] there is""",,2,ne-agent-v1;ipa=espeak
@@ -21,7 +21,7 @@ pronouns-verbs.like,मन पर्नु,,mana parnu,mˈʌn pˈʌrnuʲˌu,,,2,
 pronouns-verbs.need,चाहिनु,,cāhinu,cˈaːhɪnˌuʲu,,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,छ,,cha,cʰˈə,,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,छैन,,chaina,cʰˈɛːnə,,,2,ne-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,… चाहन्छु,,… cāhanchu,caːhˈʌncʰu,"verb stem + -न (oblique infinitive) + चाहन्छु, invariant for speaker gender; e.g. जान चाहन्छु ""want to go""",,2,ne-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,… चाहन्छु,,… cāhanchu,caːhˈʌncʰu,I want to …,"verb stem + -न (oblique infinitive) + चाहन्छु, invariant for speaker gender; e.g. जान चाहन्छु ""want to go""",2,ne-agent-v1;ipa=espeak
 pronouns-verbs.want-thing,मलाई … चाहियो,,malāī … cāhiyō,məlˈaːi cˈaːhɪjˌoː,,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.need-thing,मलाई … चाहिन्छ,,malāī … cāhincha,məlˈaːi caːhˈɪncʰə,,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.looking-for-thing,म … खोज्छु,,ma … khōjchu,mə kʰˈoːɟcʰu,"simple present, invariant",avoids the gendered -eko/-eki participle,2,ne-agent-v1;ipa=espeak

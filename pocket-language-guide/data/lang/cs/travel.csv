@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 directions.where-is,Kde je {}?,,ɡdˈe je {},,,2,cs-agent-v1;ipa=espeak
-directions.how-do-i-get-to,Jak se dostanu do {}?,,jˈak se dˈostanu do {},the place name takes the genitive after do,see intro.py's note on i-am-from,2,cs-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Jak se dostanu do {}?,,jˈak se dˈostanu do {},how do I get to {}?,the place name takes the genitive after do; see intro.py's note on i-am-from,2,cs-agent-v1;ipa=espeak
 directions.is-it-far,Je to daleko?,,je tˈo dˈaleko,,,2,cs-agent-v1;ipa=espeak
 directions.how-long-on-foot,Jak dlouho pěšky?,,jˈak dlˈoʊho pjˈeʃki,,,2,cs-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Ukažte mi to na mapě, prosím",,"ˈukaʃte mi tˈo nˈamapje, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
@@ -58,7 +58,7 @@ border-customs.i-am-a-tourist,Jsem turista,,jsem tˈurista,,,2,cs-agent-v1;ipa=e
 border-customs.here-is-my-passport,Tady je můj pas,,tˈadi je mˈuːj pˈas,,,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Doba pobytu (počet dnů): {},,dˈoba pˈobitu pˈotʃed dnˈuː {},length of stay (number of days): {},"a label, so the number agrees with nothing",2,cs-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Czech text read through the Publications Office's cellar) field 25 (Předpokládaná doba trvání pobytu nebo průjezdu -- Uveďte počet dnů);fix=Internetová jazyková příručka den (1. pád mn. dni -- dny -- 2. pád mn. dní -- dnů);was=Zůstávám {} dní (the genitive plural -- wrong for one: jeden den -- and two to four: dva dny);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergie na lék: {} and Počet nocí: {});row-corrections-v14;ipa=espeak
 border-customs.nothing-to-declare,Nic k proclení,,ɲˈits k prˈotsleɲiː,,,2,cs-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,Bydlím v {},,bˈidliːm vˈeː {},the place name takes the locative case after v,,2,cs-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Bydlím v {},,bˈidliːm vˈeː {},I live in {},the place name takes the locative case after v,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Jsem tu služebně,,jsem tˈu slˈuʒebɲe,,,2,cs-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Mám zpáteční lístek,,maːm spˈaːtetʃɲiː lˈiːstek,,,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Navštěvuji rodinu,,nˈafʃcevˌuji rˈoɟinu,,,2,cs-agent-v1;ipa=espeak
@@ -126,10 +126,10 @@ air-travel.where-is-the-security-check,Kde je bezpečnostní kontrola?,,ɡdˈe j
 air-travel.my-luggage-did-not-arrive,Moje zavazadlo nedorazilo,,mˈoje zˈavazˌadlo nˈedorˌazilo,,,2,cs-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Chtěl bych místo u okna,,xcˈel bix mˈiːsto ˈu ˈokna,I would like a seat by the window,,2,"cs-agent-v1;fix=Slovník spisovného jazyka českého (ssjc.ujc.cas.cz) místo 1 and cs.wikipedia Sedadlo rev 25617341 (Sedadlo je místo určené k sezení);was=literal masculine -- a woman says Chtěla bych (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Chtěla bych místo u okna serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 air-travel.i-would-like-an-aisle-seat,Chtěl bych místo u uličky,,xcˈel bix mˈiːsto ˈu ˈulitʃki,I would like a seat by the aisle,,2,"cs-agent-v1;fix=Slovník spisovného jazyka českého (ssjc.ujc.cas.cz) místo 1 and cs.wikipedia Sedadlo rev 25617341 (Sedadlo je místo určené k sezení) and ulička (u. mezi stany -- mezi sedadly);was=literal masculine -- a woman says Chtěla bych (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Chtěla bych místo u uličky serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-hitchhiking.can-you-give-me-a-ride,Můžete mě vzít?,,mˈuːʒete mɲˈe vzˈiːt,"formal vykání, matching the pack's taxi register; present tense, so unlike jsem+participle this carries no gender",,2,cs-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Můžete mě vzít?,,mˈuːʒete mɲˈe vzˈiːt,can you take me?,"formal vykání, matching the pack's taxi register; present tense, so unlike jsem+participle this carries no gender",2,cs-agent-v1;ipa=espeak
 hitchhiking.where-are-you-going,Kam jedete?,,kˈam jˈedete,,,2,cs-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Potřebuji jet jen do nejbližšího města,,pˈotr̝ebˌuji jˈet jˈen do nˈeɪbliʃʃˌiːho mɲˈesta,,,2,cs-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,Je tu místo pro dva?,,je tˈu mˈiːsto prˈodva,,,2,cs-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Mohu zaplatit za benzín,,mˈohu zˈaplacid zˈabenziːn,"benzín, the word drivers use",,2,cs-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mohu zaplatit za benzín,,mˈohu zˈaplacid zˈabenziːn,I can pay for petrol,"benzín, the word drivers use",2,cs-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Děkuji za svezení,,ɟˈekuji zˈasvezˌeɲiː,,,2,cs-agent-v1;ipa=espeak
 taxi.please-turn-around,"Otočte, prosím",,"ˈototʃte, prˈosiːm",,,2,cs-agent-v1;src=SSČ otočit 3 (otočil s vozem a jede zpět);src=zákon 361/2000 Sb. § 24 (řidič nesmí otáčet);in-pack-frame;answers-audit-v1;ipa=espeak

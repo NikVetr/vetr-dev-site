@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-social-basics.hello,Halo,Kula nuwun,ˈhɔlɔ,kula nuwun is what you call at a door,,2,jv-agent-v1;ipa=jv-g2p
+social-basics.hello,Halo,Kula nuwun,ˈhɔlɔ,hello,kula nuwun is what you call at a door,2,jv-agent-v1;ipa=jv-g2p
 social-basics.hello-polite,Sugeng siyang,Sugeng énjing · Sugeng sonten,ˈsuɡəŋ ˈsijaŋ,"énjing to 11, siyang to 3, sonten to dusk",,2,jv-agent-v1;ipa=jv-g2p
 social-basics.good-morning,Sugeng énjing,,ˈsuɡəŋ ˈɛndʒɪŋ,,,2,jv-agent-v1;ipa=jv-g2p
 social-basics.good-evening,Sugeng dalu,,ˈsuɡəŋ ˈdalu,,,2,jv-agent-v1;ipa=jv-g2p
@@ -37,7 +37,7 @@ quick-responses.does-not-work-no,Risak,Mboten lampah,ˈrisaʔ,,,2,jv-agent-v1;ip
 quick-responses.can-possible,Saged,,ˈsaɡəd,,,2,jv-agent-v1;ipa=jv-g2p
 quick-responses.cannot-not-possible,Mboten saged,,ˈmbɔtən ˈsaɡəd,,,2,jv-agent-v1;ipa=jv-g2p
 quick-responses.okay-fine,Saé,Inggih,ˈsae,,,2,jv-agent-v1;ipa=jv-g2p
-quick-responses.no-good-not-allowed-will-not-work,Mboten kénging,Sampun,ˈmbɔtən ˈkeŋɪŋ,sampun here means do not,,2,jv-agent-v1;ipa=jv-g2p
+quick-responses.no-good-not-allowed-will-not-work,Mboten kénging,Sampun,ˈmbɔtən ˈkeŋɪŋ,not allowed,sampun here means do not,2,jv-agent-v1;ipa=jv-g2p
 phone-translation.i-am-using-phone-translation,Kula ngginakaken penerjemah ing HP,,ˈkulɔ ŋɡinaˈkakən pənərdʒəˈmah ɪŋ haˈpe,,,2,jv-agent-v1;ipa=jv-g2p+loan
 phone-translation.please-speak-toward-the-phone,"Nyuwun tulung, ngendika dhateng HP",,"ˈɲuwʊn ˈtulʊŋ, ŋənˈdikɔ ˈɖatəŋ haˈpe",,,2,jv-agent-v1;ipa=jv-g2p+loan
 phone-translation.please-write-the-place-name,"Nyuwun tulung, nyerat nami panggènanipun ing basa {target}",,"ˈɲuwʊn ˈtulʊŋ, ɲəˈrat ˈnami paŋɡɛnaˈnipʊn ɪŋ ˈbɔsɔ {target}",,,2,jv-agent-v1;ipa=jv-g2p
@@ -75,7 +75,7 @@ sim-data.roaming,Roaming,,roˈamɪŋ,,,2,jv-agent-v1;ipa=jv-g2p
 etiquette.is-this-allowed,Menika kénging?,,məˈnikɔ ˈkeŋɪŋ,,,2,jv-agent-v1;ipa=jv-g2p
 etiquette.is-tipping-expected,Prelu maringi tip?,,prəˈlu maˈriŋi tɪp,,,2,jv-agent-v1;ipa=jv-g2p
 etiquette.is-service-included,Sampun kalebet servis?,,ˈsampʊn kaləˈbət sərˈfɪs,,,2,jv-agent-v1;ipa=jv-g2p
-etiquette.may-i-enter,Kénging kula mlebet?,Kula nuwun,ˈkeŋɪŋ ˈkulɔ mləˈbət,kula nuwun is what you call at a door,,2,jv-agent-v1;ipa=jv-g2p
+etiquette.may-i-enter,Kénging kula mlebet?,Kula nuwun,ˈkeŋɪŋ ˈkulɔ mləˈbət,may I enter?,kula nuwun is what you call at a door,2,jv-agent-v1;ipa=jv-g2p
 etiquette.remove-shoes,Prelu nyopot sepatu?,,prəˈlu ˈɲɔpɔt səˈpatu,,,2,jv-agent-v1;ipa=jv-g2p
 etiquette.photo-of-you,Kénging kula motrèt panjenengan?,,ˈkeŋɪŋ ˈkulɔ ˈmɔtrɛt pandʒənəˈŋan,,,2,jv-agent-v1;ipa=jv-g2p
 etiquette.may-i-sit-here,Kénging kula lenggah mriki?,,ˈkeŋɪŋ ˈkulɔ ləŋˈɡah ˈmriki,,,2,jv-agent-v1;ipa=jv-g2p
@@ -121,16 +121,16 @@ board-answers.there-is-no-wait,"Mboten perlu ngentosi, sampun saged mlebet",,"ˈ
 board-answers.we-do-not-have-it,Kula mboten gadhah,,ˈkulɔ ˈmbɔtən ˈɡaɖah,"kula, not kita","kula never includes the addressee, so it renders the exclusive reading without a dedicated kami/kita split",2,jv-agent-v1;ipa=jv-g2p
 board-answers.what-is-your-name,Asma panjenengan sinten?,,ˈasmɔ pandʒənəˈŋan ˈsɪntən,,,2,jv-agent-v1;ipa=jv-g2p
 board-answers.where-does-it-hurt,Sakitipun wonten pundi?,,sakiˈtipʊn ˈwɔntən ˈpʊndi,,,2,jv-agent-v1;ipa=jv-g2p
-kind-words.you-are-very-kind,Panjenengan saé sanget.,,pandʒənəˈŋan ˈsae ˈsaŋət,"krama; saé = good/kind, matching Sugeng siyang / panjenengan already in this pack",,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;fix=Poerwadarminta Bausastra Jawa 1939 (sastra.org) S section (sae II k.: bêcik -- a plain e, /e/, the pack's é);in-pack=quick-responses.okay-fine (Saé), board-answers.see-a-doctor (saé);rule=the pack writes é for /e/ (a bare e builds as a schwa: ˈsaə);row-corrections-v8;ipa=jv-g2p"
+kind-words.you-are-very-kind,Panjenengan saé sanget.,,pandʒənəˈŋan ˈsae ˈsaŋət,you are very kind.,"krama; saé = good/kind, matching Sugeng siyang / panjenengan already in this pack",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;fix=Poerwadarminta Bausastra Jawa 1939 (sastra.org) S section (sae II k.: bêcik -- a plain e, /e/, the pack's é);in-pack=quick-responses.okay-fine (Saé), board-answers.see-a-doctor (saé);rule=the pack writes é for /e/ (a bare e builds as a schwa: ˈsaə);row-corrections-v8;ipa=jv-g2p"
 kind-words.thank-you-for-your-help,Matur nuwun kagem tulungipun.,,ˈmatʊr ˈnuwʊn ˈkaɡəm tuluˈŋipʊn,,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
 kind-words.this-is-delicious,Raosipun éca sanget.,,raoˈsipʊn ˈetʃɔ ˈsaŋət,"lit. ""its taste is very delicious""",the attested kramantara phrasing (raos + -ipun + éca),2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
 kind-words.it-is-beautiful-here,Ing mriki endah sanget.,,ɪŋ ˈmriki ənˈdah ˈsaŋət,,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
-kind-words.i-like-it-very-much,Kula remen sanget.,,ˈkulɔ rəˈmən ˈsaŋət,"remen already used for ""like"" in this pack's core.csv",,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.i-like-it-very-much,Kula remen sanget.,,ˈkulɔ rəˈmən ˈsaŋət,I like [it] very much.,"remen already used for ""like"" in this pack's core.csv",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
 kind-words.i-had-a-wonderful-time,Kula bingah sanget.,,ˈkulɔ ˈbiŋah ˈsaŋət,"lit. ""I am very happy/glad"" (krama bingah, ngoko bungah)",,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
 kind-words.thank-you-for-everything,Matur nuwun kagem sedayanipun.,,ˈmatʊr ˈnuwʊn ˈkaɡəm sədajaˈnipʊn,,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
 kind-words.thank-you-for-your-hospitality,Matur nuwun sampun nampi kula kanthi saé.,,ˈmatʊr ˈnuwʊn ˈsampʊn ˈnampi ˈkulɔ ˈkanʈi ˈsae,"lit. ""thank you for having received me so well""","no single krama noun for ""hospitality""",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;fix=Poerwadarminta Bausastra Jawa 1939 (sastra.org) S section (sae II k.: bêcik -- a plain e, /e/, the pack's é);in-pack=quick-responses.okay-fine (Saé), board-answers.see-a-doctor (saé);rule=the pack writes é for /e/ (a bare e builds as a schwa: ˈsaə);row-corrections-v8;ipa=jv-g2p"
 board-answers.my-name-is-blank,Nami kula {},,ˈnami ˈkulɔ {},"my name [is] {}: kula, the krama I, carries no gender",,2,jv-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=jv-g2p
-board-answers.i-would-rather-not-say,"Ngapunten, kula mboten saged matur",,"ŋaˈpʊntən, ˈkulɔ ˈmbɔtən ˈsaɡəd ˈmatʊr","sorry, I cannot say: matur is the humble verb of the pack's Matur nuwun",,2,jv-agent-v1;in-pack-neighbour=social-basics.sorry;in-pack-neighbour=social-basics.thank-you;reply-neutrality-rule;answers-audit-v1;ipa=jv-g2p
+board-answers.i-would-rather-not-say,"Ngapunten, kula mboten saged matur",,"ŋaˈpʊntən, ˈkulɔ ˈmbɔtən ˈsaɡəd ˈmatʊr","sorry, I cannot say",matur is the humble verb of the pack's Matur nuwun,2,jv-agent-v1;in-pack-neighbour=social-basics.sorry;in-pack-neighbour=social-basics.thank-you;reply-neutrality-rule;answers-audit-v1;ipa=jv-g2p
 board-answers.what-happened,Wonten menapa?,,ˈwɔntən məˈnɔpɔ,there is what?,what is the matter,2,jv-agent-v1;in-pack-neighbour=utility-templates.do-you-have;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=jv-g2p
 board-answers.understood,"Inggih, kula mangertos",,"ˈɪŋɡɪh, ˈkulɔ maŋərˈtɔs","yes, I understand",,2,jv-agent-v1;in-pack-neighbour=communication.i-do-not-understand;in-pack-neighbour=quick-responses.yes-right;reply-neutrality-rule;answers-audit-v1;ipa=jv-g2p
 board-answers.i-will-check,Kula priksa rumiyin,,ˈkulɔ ˈprɪʔsɔ ruˈmijɪn,I will examine [it] first,,2,jv-agent-v1;jv.wiktionary=priksa;in-pack-neighbour=shopping.i-am-just-looking;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;reply-neutrality-rule;answers-audit-v1;ipa=jv-g2p

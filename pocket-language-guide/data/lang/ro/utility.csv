@@ -8,7 +8,7 @@ utility-templates.please-write-the-number,"Scrieți cifra, vă rog",,"skrˈiets�
 utility-templates.i-need,Am nevoie de {},,am nevˈoje de {},,,2,ro-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,Este [un|o] {} prin apropiere?,,jˌeste [un|o] {} prin ˌapropjˈeɾe,is there a {} nearby?,un or o as the place is masculine or feminine,2,ro-agent-v1;fix=DEX '09 UN -- O -- unii -- unele art. nehot. (Un prieten ... O bucurie);fix=ro.wikipedia Gen gramatical rev 18000724 (neuters are masculine in the singular -- so they take un);was=Este un {} prin apropiere? (the masculine and neuter article -- wrong for a feminine place -- as its literal said: a feminine place noun takes o instead);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
 utility-templates.how-much-is,Cât costă {}?,,kˈɨt kˈostə {},,,2,ro-agent-v1;ipa=espeak
-utility-templates.is-this,Asta e {}?,,ˌasta ˈe {},"asta is the gender-invariant colloquial demonstrative, chosen because the slot's gender is unknown",,2,ro-agent-v1;ipa=espeak
+utility-templates.is-this,Asta e {}?,,ˌasta ˈe {},is this {}?,"asta is the gender-invariant colloquial demonstrative, chosen because the slot's gender is unknown",2,ro-agent-v1;ipa=espeak
 utility-templates.please,"{}, vă rog",,"{}, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Caut {},,kaˈut {},,,2,ro-agent-v1;ipa=espeak
 utility-templates.do-you-accept,Acceptați {}?,,ˌaktʃeptˈatsʲ {},,,2,ro-agent-v1;ipa=espeak
