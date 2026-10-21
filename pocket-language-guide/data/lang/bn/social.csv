@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,আপনি কী বল�
 communication.i-do-not-understand,আমি বুঝতে পারছি না,,āmi bujhate pārachi nā,ˌami bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
 communication.i-cannot-read-it,আমি এটা পড়তে পারছি না,,āmi eṭā paṛate pārachi nā,ˌami ˌeʈa pˈɔɽɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,দয়া করে ইংরেজি অক্ষরে লিখে দিন,,daẏā kare iṁreji akṣare likhe dina,dˈɔa kˈɔɾe ˈiŋɾeɟˌi ˈɔkʰkʰɔɾˌe lˈikʰe dˈin,in English letters,what ordinary Bengali calls the Roman alphabet,2,bn-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,বলুন,,baluna,bˈolun,speak,the Bengali 'go ahead',2,bn-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,নিন / অবশ্যই,,nina / abaśya’i,nˈin / ˈɔbɔʃdʒˌɔi,here you are / please do,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL biswas-bengali) p. 596 নেওয়া (to take), p. 57 অবশ্য 2 (surely, by all means, int. of course), p. 136 -ই (emphasis, অবশ্যই);was=বলুন;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,হ্যাঁ,,hyām̐,hˈæ,,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) হ্যাঁ (var. of হাঁ) and হাঁ 2 (int. & adv. indicating acquiescence, affirmation ... yes);rule=one-reading-on-a-board (ঠিক, right, was the gloss of the range);row-corrections-v7;ipa=espeak"
 quick-responses.no-not,না,,nā,nˈa,,,2,bn-agent-v1;ipa=espeak
 quick-responses.okay-can,ঠিক আছে,,ṭhika āche,ʈʰˈik ˈatʃʰe,,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) ঠিক (right ... in working order -- ঘড়িটা ঠিক নেই);rule=one-reading-on-a-board (হবে, it will be, was the can gloss, quick-responses.can-possible is সম্ভব);row-corrections-v7;ipa=espeak"

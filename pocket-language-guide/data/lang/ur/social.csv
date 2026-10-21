@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,آپ کی بات سمجھ ن
 communication.i-do-not-understand,مجھے سمجھ نہیں آیا,,mujhe samajh nahīñ āyā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaːjaː,,,2,ur-agent-v1;ipa=espeak
 communication.i-cannot-read-it,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,,2,ur-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,یہ رومن حروف میں لکھ دیجیے,,yah roman hurūf meñ likh dījiye,jeːh ɾˈoːmən hʊɾˈuːf mˈẽ lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,کہیے,,kahiye,kˈʌhjeː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,لیجیے / ضرور,,lījiye / zarūr,lˈiːɟiˌeː / zaɾˈuːɾ,here you are / please do,,2,"ur-agent-v1;fix=Platts Grammar of the Hindustani or Urdu Language (1874) §§176-177 pp. 136-137 (the precative in polite speech for the imperative, dījiye from de), Platts Dictionary p. 976 لينا (to take) and p. 749 ضرور (certainly, of course);was=کہیے;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,جی ہاں,ہاں,jī hāñ,ɟˈiː hˈãː,,,2,ur-agent-v1;ipa=espeak
 quick-responses.no-not,نہیں,جی نہیں,nahīñ,nahˈĩː,,,2,ur-agent-v1;ipa=espeak
 quick-responses.okay-can,ٹھیک ہے,,ṭhīk hai,ʈʰˈiːk hɛ,,,2,ur-agent-v1;ipa=espeak

@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,आपकी बात स�
 communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaːjaː,,,2,hi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,mˌʊɟʰeː jˌəh pˈʌɽʰənˌaː nˈʌhĩ ˈaːtaː,,,2,hi-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,रोमन अक्षरों में लिख दीजिए,,,ɾˈoːmən ˈʌkʃəɾˌõ mẽː lˈɪkʰ dˈiːɟɪˌeː,,,1,reader-gloss-v1;ipa=espeak
-quick-responses.please-go-ahead,कहिए,जी,kahie,kˈʌhɪˌeː,go ahead / please,,2,hi-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,लीजिए / ज़रूर,,lījie / zarūr,lˈiːɟɪˌeː / zəɾˈuːɾ,here you are / please do,,2,"hi-agent-v1;fix=Caturvedi Practical Hindi-English Dictionary p. 677 लीजिए (deferential imperative of लेना), McGregor Oxford Hindi-English Dictionary p. 900 लेना (लो! take this! in giving sthg.) and p. 361 ज़रूर (certainly, of course);was=कहिए;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,हाँ,जी हाँ,hāṁ,hˈã,,,2,"hi-agent-v1;fix=McGregor Oxford Hindi-English Dictionary हाँ 1 (interj. yes -- ~ जी, interj. = ~; जी ~, interj. = ~);rule=one-reading-on-a-board (जी हाँ, the respectful yes, is a second wording and moves to text_alt);row-corrections-v6;ipa=espeak"
 quick-responses.no-not,नहीं,,nahīṁ,nˈʌhĩ,,,2,hi-agent-v1;ipa=espeak
 quick-responses.okay-can,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,,2,hi-agent-v1;ipa=espeak

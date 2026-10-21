@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,તમે શું કહ�
 communication.i-do-not-understand,મને સમજ ન પડી,,manē samaj n paḍī,mʌneː səmʌɟ nə pʌɖi,understanding did not fall to me,,2,gu-agent-v1;ipa=espeak
 communication.i-cannot-read-it,મને આ વાંચતાં નથી આવડતું,,manē ā vāṁcatāṁ nathī āvaḍatuṁ,mʌneː aː ʋãcʌtã nʌtʰi aːʋəɖʌtũ,reading this is not known to me,,2,gu-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,રોમન લિપિમાં લખી આપો,,rōman lipimāṁ lakhī āpō,ɾoːmʌn lɪpɪmã lʌkʰi aːpoː,write it in the Roman script,,2,gu-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,બોલો,,bōlō,boːloː,speak,the invitation to go ahead,2,gu-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,લો / જરૂર,,lō / jarūr,loː / ɟʌɾuːɾ,here you are / please do,,2,"gu-agent-v1;fix=Taylor Student's Gujarati Grammar (1893) §63 n. p. 55 (આ લો take ye this), Belsare Etymological Gujarati-English Dictionary (1904) p. 273 જરૂર (positively, absolutely);was=બોલો;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,હા,જી હા,hā,haː,yes,,2,gu-agent-v1;ipa=espeak
 quick-responses.no-not,ના,નહીં,nā,naː,no,,2,gu-agent-v1;ipa=espeak
 quick-responses.okay-can,ઠીક,,ṭhīk,ʈʰiːk,fine,,2,gu-agent-v1;ipa=espeak

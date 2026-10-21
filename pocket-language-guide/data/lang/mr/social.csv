@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,तुम्ही काय
 communication.i-do-not-understand,मला समजत नाही,,malā samajata nāhī,mˈʌlaː sˈʌməzˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 communication.i-cannot-read-it,मला हे वाचता येत नाही,,malā hē vācatā yēta nāhī,mˈʌlaː hˈeː vˈaːctˌaː jˈeːt nˈaːhi,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,हे रोमन लिपीत लिहा,,hē rōmana lipīta lihā,hˈeː ɾˈoːmən lɪpˈiːt lˈɪhaː,,,2,mr-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,जरूर,,jarūra,zəɾˈuːɾ,,,2,mr-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,घ्या / जरूर,,ghyā / jarūra,ɡʰjˈaː / zəɾˈuːɾ,here you are / please do,,2,"mr-agent-v1;fix=Molesworth Dictionary Marathi and English p. 266 घ्या (int. Here! take!) and p. 263 घेणें 17 (to hand over, ती दऊत इकडे घ्या), Berntsen Basic Marathi-English Dictionary p. 49 जरूर (surely, definitely);was=जरूर;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,हो,,hō,hˈoː,,,2,mr-agent-v1;ipa=espeak
 quick-responses.no-not,नाही,,nāhī,nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 quick-responses.okay-can,चालेल,,cālēla,caːlˈeːl,,,2,mr-agent-v1;ipa=espeak
