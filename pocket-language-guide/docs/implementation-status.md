@@ -6413,10 +6413,12 @@ column after `literal`; nothing prints it. 3,622 notes that followed a " -- " (o
 semicolon, were rewritten as back-translations of their own text with the rest kept in
 `note` -- drafted by Gemini 3.8 Flash in language batches, applied only where the old cell
 matched exactly, cross-checked by a second Gemini pass and a separate reviewer. The validator
-fails a lang file without the column or a literal with a " -- " in it. It does not catch a
-note written without a separator; the reviewer found more of those in rows no pattern
-selected (`el` and `km` polite hellos, `hy` toilet sign), and 858 variant literals that are
-the English source sentence rather than the variant's own words, both still to do.
+fails a lang file without the column or a literal with a " -- " in it. It cannot catch a
+note written with no separator, or a variant whose literal is the English source sentence
+rather than its own words (hi बिल दो "give the bill" printing "Check, please"); a second pass
+took both -- 2,326 candidates by a wider pattern, 1,005 flagged and rewritten by Gemini, every
+one read by a reviewer, who corrected 38 (Kč and the pork codes left in, the generic
+masculine read as "my son", printed "[polite]" tags and slash alternatives).
 
 **Smaller choices.** Korean's register switch reads 존댓말 / 반말 and Polish's per pan / per
 ty; Urdu's familiar polite hello is dropped, as Hindi has none; Amharic's after-you half is
@@ -6430,3 +6432,7 @@ and CLDR's spellings of Réunion and Saint Pierre and Miquelon.
 **The quiz colours a template's alternatives** by gender, as the printed card does
 (`painted` in `ui/drill.js`), mixed toward white on a dark page; the expected-answer
 sentence and the matching menus stay plain.
+
+Built from the pushed `805a3cca0` (gate 13 checks, unit 821, Chromium 351 passed and one
+skipped): **Android**, a 44.4MB debug APK, every emulator check passed, background recitation
+and native pack storage among them. **iOS** was not built: the Mac was unreachable over SSH.
