@@ -6402,3 +6402,31 @@ stripped, so no -ah stem could match; it is now checked against the word as writ
 Language coverage: every natural language has 1006–1012 of the 1012 concepts, and each
 blank is a finding its concept's note records (kosher in 16 languages, the strongest
 expletive in 23, Khmer's platform, the reader-side notes), not an omission.
+
+## The owner's choices, and the literal that is only word for word
+
+The owner took the recommendation on each open question.
+
+**`literal` is a back-translation and nothing else.** Every `data/lang` file has a `note`
+column after `literal`; nothing prints it. 3,622 notes that followed a " -- " (or the last
+" — ") moved there by script, and 1,300 literals that were notes all through, or after a
+semicolon, were rewritten as back-translations of their own text with the rest kept in
+`note` -- drafted by Gemini 3.8 Flash in language batches, applied only where the old cell
+matched exactly, cross-checked by a second Gemini pass and a separate reviewer. The validator
+fails a lang file without the column or a literal with a " -- " in it. It does not catch a
+note written without a separator; the reviewer found more of those in rows no pattern
+selected (`el` and `km` polite hellos, `hy` toilet sign), and 858 variant literals that are
+the English source sentence rather than the variant's own words, both still to do.
+
+**Smaller choices.** Korean's register switch reads 존댓말 / 반말 and Polish's per pan / per
+ty; Urdu's familiar polite hello is dropped, as Hindi has none; Amharic's after-you half is
+ይቅደሙ "you go first". `quick-responses.please-go-ahead` is a "here you are / please do"
+sheet pair in the twelve languages with no word for all three acts (hi ur bn gu ne or te ta
+kn ml mr yo), each half from a dictionary of record, Yoruba's from the toned modern Bible.
+Left as they were: how-much-is with a quantity, the Persian and Malay greetings, Portuguese
+*Olá*, Turkish *Merhaba*, Chinese *你好吗？*, the German familiar map row, Chile's *Tshīlī*
+and CLDR's spellings of Réunion and Saint Pierre and Miquelon.
+
+**The quiz colours a template's alternatives** by gender, as the printed card does
+(`painted` in `ui/drill.js`), mixed toward white on a dark page; the expected-answer
+sentence and the matching menus stay plain.
