@@ -4,11 +4,11 @@ pronouns-verbs.we-us,kula sedaya,kita,ˈkulɔ səˈdɔjɔ,kita includes the pers
 pronouns-verbs.you,sampéyan,kowé,samˈpejan,kowé is ngoko and rude to a stranger,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.you-polite,panjenengan,Bapak · Ibu,pandʒənəˈŋan,Pak / Bu to a stranger,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.he-him,piyambakipun,dhèwèké,pijambaˈkipʊn,,,2,jv-agent-v1;ipa=jv-g2p
-pronouns-verbs.she-her,piyambakipun,,pijambaˈkipʊn,one word for he and she,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.she-her,piyambakipun,,pijambaˈkipʊn,he / she,one word for he and she,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.they-them,piyambakipun sedaya,tiyang-tiyang menika,pijambaˈkipʊn səˈdɔjɔ,,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.my-mine,kula,gadhahan kula,ˈkulɔ,goes after the noun: tas kula,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.your-yours,panjenengan,gadhahan panjenengan,pandʒənəˈŋan,goes after the noun,,2,jv-agent-v1;ipa=jv-g2p
-pronouns-verbs.be-called-call,nami,nimbali,ˈnami,nami = to be named; nimbali = to call someone,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.be-called-call,nami,nimbali,ˈnami,to be named,nami = to be named; nimbali = to call someone,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.have,gadhah,kagungan,ˈɡaɖah,kagungan of the person you are speaking to,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.do-not-have,mboten gadhah,,ˈmbɔtən ˈɡaɖah,,,2,jv-agent-v1;ipa=jv-g2p
 pronouns-verbs.go,késah,tindak,ˈkesah,tindak of the person you are speaking to,,2,jv-agent-v1;ipa=jv-g2p
@@ -34,8 +34,8 @@ question-words.how,kadospundi,piyé,kadɔsˈpʊndi,,,2,jv-agent-v1;ipa=jv-g2p
 question-words.how-much-many,pinten,pira,ˈpɪntən,,,2,jv-agent-v1;ipa=jv-g2p
 question-words.how-many,pinten kathahipun,,ˈpɪntən kaʈaˈhipʊn,,,2,jv-agent-v1;ipa=jv-g2p
 question-words.why,kénging menapa,ngapa,ˈkeŋɪŋ məˈnɔpɔ,,,2,jv-agent-v1;ipa=jv-g2p
-question-words.this,menika,punika,məˈnikɔ,krama has one word for this and that,,2,jv-agent-v1;ipa=jv-g2p
-question-words.that,menika,punika,məˈnikɔ,krama has one word for this and that,,2,jv-agent-v1;ipa=jv-g2p
+question-words.this,menika,punika,məˈnikɔ,this,krama has one word for this and that,2,jv-agent-v1;ipa=jv-g2p
+question-words.that,menika,punika,məˈnikɔ,that,krama has one word for this and that,2,jv-agent-v1;ipa=jv-g2p
 question-words.here,mriki,kéné,ˈmriki,,,2,jv-agent-v1;ipa=jv-g2p
 question-words.there,mrika,kana,ˈmrikɔ,,,2,jv-agent-v1;ipa=jv-g2p
 question-words.a-little,sekedhik,,səkəˈɖɪʔ,,,2,jv-agent-v1;ipa=jv-g2p

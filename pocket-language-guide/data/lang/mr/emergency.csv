@@ -13,7 +13,7 @@ emergency-medical.i-am-having-a-severe-allergic-reaction,ऍनाफिलॅ�
 emergency-medical.i-cannot-breathe,मला श्वास घेता येत नाही,,malā śvāsa ghētā yēta nāhī,mˈʌlaː ʃvˈaːs ɡʰˈeːtaː jˈeːt nˈaːhi,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,खूप रक्तस्त्राव होत आहे,,khūpa raktastrāva hōta āhē,kʰˈuːp ɾˌəktəstɾˈaːv hˈoːt ˈaːheː,impersonal,,2,mr-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,छातीत दुखत आहे,,chātīta dukhata āhē,cʰaːtˈiːt dˈʊkʰət ˈaːheː,,,2,mr-agent-v1;ipa=espeak
-emergency-medical.this-person-is-unconscious,ही व्यक्ती बेशुद्ध आहे,,hī vyaktī bēśuddha āhē,hˈi vjˈʌkti beːʃˈʊdʰː ˈaːheː,said about someone else,,2,mr-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,ही व्यक्ती बेशुद्ध आहे,,hī vyaktī bēśuddha āhē,hˈi vjˈʌkti beːʃˈʊdʰː ˈaːheː,This person is unconscious,said about someone else,2,mr-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,सगळ्यात जवळचे रुग्णालय कुठे आहे?,,sagaḷyāta javaḷacē rugṇālaya kuṭhē āhē?,sˌəɡɭjˈaːt zˈʌvəɭceː ɾʊɡɳˈaːlˌɛj kˈʊʈʰeː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,आणीबाणीचा नंबर काय आहे?,,āṇībāṇīcā naṁbara kāya āhē?,ˌaːɳibaːɳˈiːcaː nˈʌmbəɾ kˈaːj ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,इथे {source} बोलणारा डॉक्टर आहे का?,,ithē {source} bōlaṇārā ḍôkṭara āhē kā?,ˈɪtʰeː {source} bˌoːlɳˈaːɾaː ɖˈɔkʈəɾ ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
@@ -105,14 +105,14 @@ lost-rescue.i-sprained-my-ankle,माझा घोटा मुरगळला,
 lost-rescue.please-contact-rescue,बचाव पथकाशी संपर्क करा,,bacāva pathakāśī saṁparka karā,bəcˈaːv pˌətʰkˈaːʃi səmpˈʌɾk kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,माझा सोबती हरवला आहे,,mājhā sōbatī haravalā āhē,mˈaːɟʰaː sˈoːbtˌi hˈʌɾəvlaː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,माझे सध्याचे लोकेशन बघा,,mājhē sadhyācē lōkēśana baghā,mˈaːɟʰeː sədʰjˈaːceː loːkˈeːʃən bˈʌɡʰaː,,,2,mr-agent-v1;ipa=espeak
-lost-rescue.my-child-is-missing,माझे मूल हरवले आहे,,mājhē mūla haravalē āhē,mˈaːɟʰeː mˈuːl hˈʌɾəvleː ˈaːheː,"standard lost-and-found wording; flagged for fluent-speaker review, see module docstring",,2,mr-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,माझे मूल हरवले आहे,,mājhē mūla haravalē āhē,mˈaːɟʰeː mˈuːl hˈʌɾəvleː ˈaːheː,My child is lost,"standard lost-and-found wording; flagged for fluent-speaker review, see module docstring",2,mr-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,मला कुठे आहे ते माहीत नाही,,malā kuṭhē āhē tē māhīta nāhī,mˈʌlaː kˈʊʈʰeː ˈaːheː tˈeː maːhˈiːt nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.my-friend-is-hurt,माझ्या मित्राला दुखापत झाली आहे,,mājhyā mitrālā dukhāpata jhālī āhē,mˈaːɟʰjaː mɪtɾˈaːlaː dʊkʰˈaːpət ɟʰˈaːli ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,माझे पाकीट हरवले,,mājhē pākīṭa haravalē,mˈaːɟʰeː paːkˈiːʈ hˈʌɾəvleː,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,माझी बॅग हरवली,,mājhī bêga haravalī,mˈaːɟʰi bˈɛɡ hˈʌɾəvli,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,हरवलेल्या वस्तू कुठे मिळतील?,,haravalēlyā vastū kuṭhē miḷatīla?,hˌəɾəvlˈeːljaː vˈʌstuː kˈʊʈʰeː mˌɪɭtˈiːl,,,2,mr-agent-v1;ipa=espeak
 lost-rescue.i-cannot-find-my-hotel,मला माझे हॉटेल सापडत नाही,,malā mājhē hôṭēla sāpaḍata nāhī,mˈʌlaː mˈaːɟʰeː hɔʈˈeːl sˈaːpəɖˌət nˈaːhi,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
-lost-rescue.i-left-it-on-the-train,हे ट्रेनमध्ये राहिले,,hē ṭrēnamadhyē rāhilē,hˈeː ʈɾˌeːnəmˈʌdʰjeː ɾˈaːhɪlˌeː,impersonal; substitute bus/taxi as needed,,2,mr-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,हे ट्रेनमध्ये राहिले,,hē ṭrēnamadhyē rāhilē,hˈeː ʈɾˌeːnəmˈʌdʰjeː ɾˈaːhɪlˌeː,This remained on the train,impersonal; substitute bus/taxi as needed,2,mr-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,मला खाली उतरता येत नाही,,malā khālī utaratā yēta nāhī,mˈʌlaː kʰˈaːli ˈʊtəɾtaː jˈeːt nˈaːhi,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
 police-consulate.where-is-the-police-station,पोलीस स्टेशन कुठे आहे?,,pōlīsa sṭēśana kuṭhē āhē?,poːlˈiːs sʈˈeːʃən kˈʊʈʰeː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,मला चोरीची तक्रार करायची आहे,,malā cōrīcī takrāra karāyacī āhē,mˈʌlaː coːɾˈiːci təkɾˈaːɾ kəɾˈaːjcˌi ˈaːheː,,,2,mr-agent-v1;ipa=espeak
@@ -133,7 +133,7 @@ police-consulate.no-thank-you-i-am-not-interested,"नको, धन्यवा
 police-consulate.someone-attacked-me,कोणीतरी माझ्यावर हल्ला केला,,kōṇītarī mājhyāvara hallā kēlā,koːɳˈiːtɾˌi mˈaːɟʰjaːvˌəɾ hˈʌllaː kˈeːlaː,,,2,mr-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,ही किंमत मला मान्य नव्हती,,hī kiṁmata malā mānya navhatī,hˈi kˈĩmət mˈʌlaː mˈaːnjə nˈʌvhətˌi,invariant,,2,mr-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,रिपोर्ट नंबर लिहा,,ripōrṭa naṁbara lihā,ɾɪpˈoːɾʈ nˈʌmbəɾ lˈɪhaː,,,2,mr-agent-v1;ipa=espeak
-police-consulate.it-happened-here,हे इथे घडले,,hē ithē ghaḍalē,hˈeː ˈɪtʰeː ɡʰˈʌɖlˌeː,said while pointing at a map or address,,2,mr-agent-v1;ipa=espeak
+police-consulate.it-happened-here,हे इथे घडले,,hē ithē ghaḍalē,hˈeː ˈɪtʰeː ɡʰˈʌɖlˌeː,This happened here,said while pointing at a map or address,2,mr-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,रिपोर्टची कॉपी मिळेल का?,,ripōrṭacī kôpī miḷēla kā?,ɾɪpˈoːɾʈəcˌi kˈɔpi mɪɭˈeːl kˈaː,,,2,mr-agent-v1;ipa=espeak
 police-consulate.i-will-not-sign-anything-i-cannot-read,"जे वाचता येत नाही, त्यावर सही होणार नाही",,"jē vācatā yēta nāhī, tyāvara sahī hōṇāra nāhī","zˈeː vˈaːctˌaː jˈeːt nˈaːhi, tjˈaːvəɾ sˈʌhi hoːɳˈaːɾ nˈaːhi","fully impersonal, no gender",,2,mr-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,मला जाता येईल का?,,malā jātā yēīla kā?,mˈʌlaː zˈaːtaː jeːˈiːl kˈaː,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak

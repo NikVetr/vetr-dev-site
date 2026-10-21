@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 payment-receipt.pay-by-card,Bayar pakai kad?,,bˈajar pˈakaɪ kˈad,,,2,ms-agent-v1;ipa=espeak
 payment-receipt.pay-cash,Bayar tunai?,,bˈajar tˈunaɪ,,,2,ms-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,Bayar pakai DuitNow QR?,,bˈajar pˈakaɪ dˈuet nˈow kjˌuːˈar,DuitNow QR = the national QR standard,,2,ms-agent-v1;corrected=QRIS is Indonesia's standard and Malaysia's is DuitNow QR (Payments Network Malaysia);ipa=espeak
+payment-receipt.pay-by-qr-code,Bayar pakai DuitNow QR?,,bˈajar pˈakaɪ dˈuet nˈow kjˌuːˈar,Pay using DuitNow QR?,DuitNow QR = the national QR standard,2,ms-agent-v1;corrected=QRIS is Indonesia's standard and Malaysia's is DuitNow QR (Payments Network Malaysia);ipa=espeak
 payment-receipt.a-receipt-please,Minta resit,,mˈintə rˈəset,,,2,ms-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈules aŋkˈəɲə,,,2,ms-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲə bərˈapə,,,2,ms-agent-v1;ipa=espeak

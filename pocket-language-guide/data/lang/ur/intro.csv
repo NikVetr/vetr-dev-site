@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 introductions.my-name-is,میرا نام {} ہے,,merā nām {} hai,mˈeːɾaː nˈaːm {} hɛ,,,2,ur-agent-v1;ipa=espeak
 introductions.nice-to-meet-you,آپ سے مل کر خوشی ہوئی,,āp se mil kar khushī hu’ī,ˌaːp seː mˈɪl kaɾ xˈʊʃi hˈuːi,,,2,ur-agent-v1;ipa=espeak
-introductions.what-is-your-name,آپ کا نام کیا ہے؟,آپ کا اسمِ گرامی؟,āp kā nām kyā hai?,ˌaːp kaː nˈaːm kjˈaː hɛ,the alternative is the formal courtesy form,,2,ur-agent-v1;ipa=espeak
+introductions.what-is-your-name,آپ کا نام کیا ہے؟,آپ کا اسمِ گرامی؟,āp kā nām kyā hai?,ˌaːp kaː nˈaːm kjˈaː hɛ,what is your name?,the alternative is the formal courtesy form,2,ur-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,ہم ساتھ سفر کر رہے ہیں,,ham sāth safar kar rahe haiñ,ham sˈaːtʰ safˈaɾ kaɾ ɾˈʌheː hẽ,,,2,ur-agent-v1;ipa=espeak
 introductions.this-is-my-friend,یہ میرے دوست ہیں,,yah mere dost haiñ,jeːh mˈeːɾeː dˈoːst hẽ,this is my friend,plural agreement is the polite form for one person,2,ur-agent-v1;ipa=espeak
 introductions.i-am-from,میں {} سے ہوں,,maiñ {} se hūñ,mˈẽ {} seː hũː,,,2,ur-agent-v1;ipa=espeak

@@ -77,8 +77,8 @@ numbers-money.peso-symbol,پیسو کا نشان,,peso kā nishān,pˈeːsoː ka
 numbers-money.real,ریال,,riyāl,ɾjˈaːl,,,2,ur-agent-v1;ipa=espeak
 numbers-money.real-symbol,ریال کا نشان,,riyāl kā nishān,ɾjˈaːl kaː nɪʃˈaːn,,,2,ur-agent-v1;ipa=espeak
 numbers-money.local-currency,مقامی کرنسی,,muqāmī karansī,məqˈaːmi kəɾˈʌnsi,,,2,ur-agent-v1;ipa=espeak
-numbers-money.lakh,لاکھ,"۱,۰۰,۰۰۰",lākh,lˈaːkʰ,"the everyday unit above ten thousand in Pakistan, and the digit grouping that goes with it",,2,ur-agent-v1;ipa=espeak
-numbers-money.crore,کروڑ,"۱,۰۰,۰۰,۰۰۰",karoṛ,kəɾˈoːɽ,Pakistan groups digits the same way and uses the same word,,2,ur-agent-v1;ipa=espeak
+numbers-money.lakh,لاکھ,"۱,۰۰,۰۰۰",lākh,lˈaːkʰ,one hundred thousand,"the everyday unit above ten thousand in Pakistan, and the digit grouping that goes with it",2,ur-agent-v1;ipa=espeak
+numbers-money.crore,کروڑ,"۱,۰۰,۰۰,۰۰۰",karoṛ,kəɾˈoːɽ,ten million,Pakistan groups digits the same way and uses the same word,2,ur-agent-v1;ipa=espeak
 numbers-money.shekel,شیکل,,shekal,ʃˈeːkəl,,,2,ur-agent-v1;ipa=espeak
 numbers-money.shekel-symbol,شیکل کا نشان,,shekal kā nishān,ʃˈeːkəl kaː nɪʃˈaːn,,,2,ur-agent-v1;ipa=espeak
 numbers-money.rial,ریال,,riyāl,ɾjˈaːl,,,2,ur-agent-v1;ipa=espeak
@@ -104,7 +104,7 @@ numbers-money.naira-symbol,نائیجیریائی نائرا (علامت),,,nˌa
 numbers-money.riel,ریئل,,,ɾeːˈɪl,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,ریئل (علامت),,,ɾeːˈɪl,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.pakistani-rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,rupee,the Pakistani rupee; the plural روپے is what a price is quoted in,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1;ipa=espeak
-numbers-money.pakistani-rupee-symbol,₨,Rs · PKR,rūpiya,,the symbol on a price tag; a receipt prints Rs,,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1
+numbers-money.pakistani-rupee-symbol,₨,Rs · PKR,rūpiya,,rupee [symbol],the symbol on a price tag; a receipt prints Rs,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1
 numbers-money.dram,ڈرم,,ḍaram,ɖˈʌɾəm,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.dram-symbol,ڈرم (علامت),,ḍaram (alāmat),ɖˈʌɾəm,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.lari,لاری,,lārī,lˈaːɾi,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

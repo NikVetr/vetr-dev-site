@@ -4,7 +4,7 @@ dietary-needs.no-eggs,Tojás nélkül,,tˈojaːʃ nˈeːlkyl,,,2,hu-agent-v1;ipa
 dietary-needs.not-spicy,Ne legyen csípős,,nˈɛ lˈɛɟɛn tʃˈiːpøːʃ,,,2,hu-agent-v1;ipa=espeak
 dietary-needs.less-spicy,Kevésbé csípősen,,kˈɛveːʃbeː tʃˈiːpøːʃɛn,,,2,hu-agent-v1;ipa=espeak
 dietary-needs.no-peanuts,Földimogyoró nélkül,,fˈøldimoɟoroː nˈeːlkyl,mogyoró on its own is hazelnut,,2,hu-agent-v1;ipa=espeak
-dietary-needs.no-nuts,"Csonthéjas nélkül: dió, mandula, mogyoró",,"tʃˈontheːjɑʃ nˈeːlkyl dˈioː, mˈɑndulɑ, mˈoɟoroː",csonthéjas is the label term; peanut is listed apart,,2,hu-agent-v1;ipa=espeak
+dietary-needs.no-nuts,"Csonthéjas nélkül: dió, mandula, mogyoró",,"tʃˈontheːjɑʃ nˈeːlkyl dˈioː, mˈɑndulɑ, mˈoɟoroː","without nuts: walnut, almond, hazelnut",csonthéjas is the label term; peanut is listed apart,2,hu-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Hal és tenger gyümölcsei nélkül,,hˈɑl ˈeːʃ tˈɛnɡɛr ɟˈymøltʃɛi nˈeːlkyl,tenger gyümölcsei on its own excludes fish,,2,hu-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,Vegetáriánus vagyok,,vˈɛɡɛtaːriaːnuʃ vˈɑɟok,,,2,hu-agent-v1;ipa=espeak
 dietary-needs.i-am-vegan,Vegán vagyok,,vˈɛɡaːn vˈɑɟok,,,2,hu-agent-v1;ipa=espeak

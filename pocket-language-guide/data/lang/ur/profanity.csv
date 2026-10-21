@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,یا اللہ!,ہائے اللہ!,yā allāh!,jˈaː ˈallaːh,,,2,ur-agent-v1;ipa=espeak
 profanity.damn,لعنت!,,lānat!,lˈaːnət,damnation,"at a situation, never at a person",2,ur-agent-v1;ipa=espeak
-profanity.expletive,دھت تیرے کی!,,dhat tere kī!,dʰˈʌt tˈeːɾeː ki,an exclamation of disgust at a situation; the coarser Urdu options are all aimed at a person,,2,ur-agent-v1;ipa=espeak
+profanity.expletive,دھت تیرے کی!,,dhat tere kī!,dʰˈʌt tˈeːɾeː ki,damn it!,an exclamation of disgust at a situation; the coarser Urdu options are all aimed at a person,2,ur-agent-v1;ipa=espeak
 profanity.intensifier,کم بخت,,kambakht,kˈʌm bˈʌxt,luckless,"attributive emphasis, not an insult",2,ur-agent-v1;ipa=espeak
 profanity.frustration,یہ بکواس ہے,,yah bakwās hai,jeːh bəkʋˈaːs hɛ,,,2,ur-agent-v1;ipa=espeak
 profanity.thats-rude,یہ بد تمیزی ہے,,yah badtamīzī hai,jeːh bˈʌd təmˈiːzi hɛ,,,2,ur-agent-v1;ipa=espeak

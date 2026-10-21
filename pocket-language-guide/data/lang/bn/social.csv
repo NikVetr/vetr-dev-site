@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-social-basics.hello,হ্যালো,,hyālo,hˈælo,"the English loan, and the one greeting that is religiously neutral. See the polite row",,2,bn-agent-v1;ipa=espeak
+social-basics.hello,হ্যালো,,hyālo,hˈælo,hello,"the English loan, and the one greeting that is religiously neutral. See the polite row",2,bn-agent-v1;ipa=espeak
 social-basics.hello-polite,আসসালামু আলাইকুম,নমস্কার,āsasālāmu ālāikuma,ˈaʃɔʃˌalamˌu ˈalaˌikum,peace be upon you,"**the choice is religious, not one of register.** আসসালামু আলাইকুম to a Muslim, which is most of Bangladesh; নমস্কার to a Hindu, which is most of West Bengal. হ্যালো is the safe default if you cannot tell",2,bn-agent-v1;ipa=espeak
 social-basics.good-morning,শুভ সকাল,,śubha sakāla,ʃˈubʰ ʃˈɔkal,,,2,bn-agent-v1;ipa=espeak
 social-basics.good-evening,শুভ সন্ধ্যা,,śubha sandhyā,ʃˈubʰ ʃˈɔndʰːa,,,2,bn-agent-v1;ipa=espeak
@@ -68,7 +68,7 @@ sim-data.mobile-data,মোবাইল ডেটা,,mobāila ḍeṭā,mˈoba�
 sim-data.can-i-top-up-this-sim,এই সিমে টাকা ভরা যাবে কি?,,ei sime ṭākā bharā yābe ki?,ˌei ʃˈime ʈˈaka bʰˈɔɾa dʒˈabe ki,can money be loaded onto this SIM,the Bengali idiom,2,bn-agent-v1;ipa=espeak
 sim-data.top-up,রিচার্জ,টাকা ভরা,ricārja,ɾˈitʃaɾɟˌɔ,,,2,bn-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,{} এলাকায় নেটওয়ার্ক আছে কি?,,{} elākāẏa neṭaoẏārka āche ki?,{} ˈelakˌaj nˈeʈɔˌoaɾkˌɔ ˈatʃʰe ki,in the {} area,এলাকায় carries the locative so the slot need not,2,bn-agent-v1;ipa=espeak
-sim-data.signal,নেটওয়ার্ক,,neṭaoẏārka,nˈeʈɔˌoaɾkˌɔ,Bengali says 'network' where English says signal,,2,bn-agent-v1;ipa=espeak
+sim-data.signal,নেটওয়ার্ক,,neṭaoẏārka,nˈeʈɔˌoaɾkˌɔ,network,Bengali says 'network' where English says signal,2,bn-agent-v1;ipa=espeak
 sim-data.esim,ই-সিম,,i-sima,hɾˌɔʃʃoˈiʃim,,,2,bn-agent-v1;ipa=espeak
 sim-data.prepaid,প্রিপেইড,,pripeiḍa,pɾˈipeˌiɖ,,,2,bn-agent-v1;ipa=espeak
 sim-data.roaming,রোমিং,,romiṁ,ɾˈomiŋ,,,2,bn-agent-v1;ipa=espeak

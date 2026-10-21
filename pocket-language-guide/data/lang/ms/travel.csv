@@ -48,7 +48,7 @@ transit-rides.is-it-delayed,Terlambat?,,tərlˈambat,,,2,ms-agent-v1;ipa=espeak
 transit-rides.i-am-in-a-hurry,Saya sedang buru-buru,,sˈajə sˈədaŋ bˈuruburu,,,2,ms-agent-v1;ipa=espeak
 transit-rides.which-platform,Platform mana?,,plˈatfɔrm mˈanə,,,2,ms-agent-v1;fix=DBP platform;row-corrections-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Berikutnya jam berapa?,,bərikˈotɲə dʒˈam bərˈapə,,,2,ms-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Saya sudah melewati perhentian saya,Saya terlajak,sˈajə sˈudah mələwˈati pərhəntˈian sˈajə,I have already gone past my stop; the alt is I overshot,terlajak is carrying on past the place one meant to stop at,2,ms-agent-v1;fix=DBP kelewatan (2) and terlewat (1) are being late;fix=DBP melewati (1) lalu di or melintasi;fix=KIMD overshoot melewati;fix=DBP terlajak (KP terlangsung dr tempat yg dituju);row-corrections-v2;ipa=espeak
+transit-rides.i-went-past-my-stop,Saya sudah melewati perhentian saya,Saya terlajak,sˈajə sˈudah mələwˈati pərhəntˈian sˈajə,I have already gone past my stop,the alt is I overshot; terlajak is carrying on past the place one meant to stop at,2,ms-agent-v1;fix=DBP kelewatan (2) and terlewat (1) are being late;fix=DBP melewati (1) lalu di or melintasi;fix=KIMD overshoot melewati;fix=DBP terlajak (KP terlangsung dr tempat yg dituju);row-corrections-v2;ipa=espeak
 transit-rides.can-i-use-this-ticket,Tiket ini boleh dipakai?,,tˈikət ˈini bˈoleh dipˈakaɪ,,,2,ms-agent-v1;ipa=espeak
 place-words.visitor-center,Pusat informasi,,pˈusat ˌinfɔrmˈasi,,,2,ms-agent-v1;ipa=espeak
 place-words.railway-station,Stesen keretapi,,stˈesen kərətˈapi,,,2,ms-agent-v1;ipa=espeak
@@ -76,7 +76,7 @@ border-customs.i-have-a-connecting-flight,Saya ada penerbangan lanjutan,,sˈajə
 border-customs.may-i-have-an-entry-stamp,Boleh minta cap masuk?,,bˈoleh mˈintə tʃˈap mˈasoʔ,,,2,ms-agent-v1;ipa=espeak
 border-customs.visa,Visa,,vˈisə,,,2,ms-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,Saya tidak bawa makanan atau tanaman,,sˈajə tˈidaʔ bˈawə makˈanan ˈataʊ tanˈaman,,,2,ms-agent-v1;ipa=espeak
-border-customs.passport-control,Imigresen,,ˌimiɡrˈesen,what the airport sign says,,2,ms-agent-v1;ipa=espeak
+border-customs.passport-control,Imigresen,,ˌimiɡrˈesen,Immigration,what the airport sign says,2,ms-agent-v1;ipa=espeak
 border-customs.customs,Kastam,,kˈastam,,,2,ms-agent-v1;ipa=espeak
 border-customs.baggage-claim,Pengambilan bagasi,Baggage claim,pəŋambˈilan baɡˈasi,,,2,ms-agent-v1;ipa=espeak
 border-customs.customs-declaration,Pengisytiharan kastam,Borang kastam,pəŋˌiʃtihˈaran kˈastam,,,2,ms-agent-v1;ipa=espeak
@@ -87,11 +87,11 @@ pickup-meeting.where-is-the-pickup-point,Titik penjemputan di mana?,,tˈiteʔ p�
 pickup-meeting.please-send-me-the-pickup-point,Tolong kirim titik penjemputan,,tˈoloŋ kˈirem tˈiteʔ pəndʒəmpˈutan,,,2,ms-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,Tolong jemput kami di sini,,tˈoloŋ dʒˈəmpot kˈami di sˈini,,,2,ms-agent-v1;ipa=espeak
 pickup-meeting.meet-us-at,Temui kami di {},,təmˈui kˈami di {},,,2,ms-agent-v1;ipa=espeak
-pickup-meeting.please-call-me-a-ride,Tolong tempahkan Grab,E-hailing,tˈoloŋ təmpˈahkan ɡrˈab,"Grab is Malaysia's dominant ride-hailing app; unlike Indonesia's ojek, motorcycle-taxi apps are not the mainstream option",,2,ms-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,Tolong tempahkan Grab,E-hailing,tˈoloŋ təmpˈahkan ɡrˈab,Please book [a] Grab,"Grab is Malaysia's dominant ride-hailing app; unlike Indonesia's ojek, motorcycle-taxi apps are not the mainstream option",2,ms-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,Tolong panggil teksi,,tˈoloŋ pˈaŋɡel tˈəksi,,,2,ms-agent-v1;ipa=espeak
 rail-station-words.high-speed-rail,Keretapi laju,,kərətˈapi lˈadʒu,,,2,ms-agent-v1;ipa=espeak
 rail-station-words.transfer,Transit,Tukar keretapi,trˈanset,,,2,ms-agent-v1;ipa=espeak
-rail-station-words.ticket-gate,Gate,Palang masuk,ɡˈate,"English word, used as-is",,2,ms-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,Gate,Palang masuk,ɡˈate,Gate,"English word, used as-is",2,ms-agent-v1;ipa=espeak
 rail-station-words.platform,Platform,,plˈatfɔrm,,,2,ms-agent-v1;fix=DBP platform;row-corrections-v1;ipa=espeak
 rail-station-words.ticket-office,Kaunter tiket,,kˈaʊntər tˈikət,,,2,ms-agent-v1;ipa=espeak
 rail-station-words.waiting-room,Ruang tunggu,,rˈuaŋ tˈuŋɡu,,,2,ms-agent-v1;ipa=espeak
@@ -115,14 +115,14 @@ common-signs.open-operating,Buka,Sedang buka,bˈukə,,,2,ms-agent-v1;fix=Kamus D
 common-signs.closed,Tutup,Cuti,tˈutop,,,2,ms-agent-v1;fix=DBP cuti;row-corrections-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈənti,,,2,ms-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈərlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",,2,ms-agent-v1;ipa=espeak
-rail-station-words.ticket-validator,Mesin pengesahan,Gate,mˈəsen pəŋəsˈahan,bas: mesin pengesahan; rail: gate,,2,ms-agent-v1;fix=MABBIM pengesahan;row-corrections-v1;ipa=espeak
+rail-station-words.ticket-validator,Mesin pengesahan,Gate,mˈəsen pəŋəsˈahan,Validation machine,bas: mesin pengesahan; rail: gate,2,ms-agent-v1;fix=MABBIM pengesahan;row-corrections-v1;ipa=espeak
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,,1,reader-gloss-v1;ipa=espeak
-common-signs.pork-code,Tiada logo Halal JAKIM · bak kut teh · char siu,siu yuk · sio bak,tiˈadə lˈoɡo hˈalal dʒˈakem bˈaʔ kˈut tˈɛh tʃˈar sˈiu,"the JAKIM Halal logo's absence is the main signal in Malaysia (""no pork no lard"" signage is not itself a halal certificate); bak kut teh and char siu are pork dishes by name",,2,pork-code-agent-v1;jakim;ipa=espeak
+common-signs.pork-code,Tiada logo Halal JAKIM · bak kut teh · char siu,siu yuk · sio bak,tiˈadə lˈoɡo hˈalal dʒˈakem bˈaʔ kˈut tˈɛh tʃˈar sˈiu,No JAKIM Halal logo · pork rib soup · barbecued pork,"the JAKIM Halal logo's absence is the main signal in Malaysia (""no pork no lard"" signage is not itself a halal certificate); bak kut teh and char siu are pork dishes by name",2,pork-code-agent-v1;jakim;ipa=espeak
 rail-station-words.fare,Tambang,Tarif,tˈambaŋ,,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Bayar tambang di mana?,,bˈajar tˈambaŋ dimˈanə,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
 air-travel.where-is-check-in,Kaunter daftar masuk di mana?,,kˈaʊntər dˈaftar mˈasoʔ dimˈanə,where is the check-in counter?,"daftar masuk is the Malaysian check-in term (PRPM/Malaysia Airports), distinct from Indonesian's loanword usage",2,ms-agent-v1;src=prpm.dbp.gov.my daftar masuk;ipa=espeak
 air-travel.which-gate,Pintu mana?,,pˈintu mˈanə,which gate?,"Malaysian airport signage says pintu (e.g. pintu berlepas) rather than gerbang, which this pack reserves for a compound's own gate (taxi.we-need-the-east-gate-not-the-south-gate); X mana? matches transit-rides.which-platform's Peron mana?",2,ms-agent-v1;in-pack-neighbour=transit-rides.which-platform;ipa=espeak
-air-travel.where-is-the-security-check,Semakan keselamatan di mana?,,səmˈəkan kəsˌəlamˈatan dimˈanə,"keselamatan is the Malaysian word for security, distinct from Indonesian keamanan",,2,ms-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,Semakan keselamatan di mana?,,səmˈəkan kəsˌəlamˈatan dimˈanə,Where is the security check?,"keselamatan is the Malaysian word for security, distinct from Indonesian keamanan",2,ms-agent-v1;ipa=espeak
 air-travel.my-luggage-did-not-arrive,Bagasi saya tidak tiba,,baɡˈasi sˈajə tˈidaʔ tˈibə,bagasi reused from border-customs.where-do-i-collect-my-baggage,,2,ms-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=espeak
 air-travel.i-would-like-a-window-seat,Saya mahu kerusi dekat tingkap,,sˈajə mˈahu kərˈusi dˈəkat tˈiŋkap,I want a seat near the window,mahu/kerusi/tingkap are this pack's own established words (core.csv pronouns-verbs.want; taxi.may-i-open-the-window),2,ms-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
 air-travel.i-would-like-an-aisle-seat,Saya mahu kerusi dekat lorong,,sˈajə mˈahu kərˈusi dˈəkat lˈɔroŋ,"lorong = aisle/corridor, parallel to the window-seat row",,2,ms-agent-v1;ipa=espeak

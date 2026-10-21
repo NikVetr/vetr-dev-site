@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 utility-templates.i-want-to-go-to,ຂ້ອຍຢາກໄປ {},,khoyyakpai {},kʰɔːj˧˩jaːk˧˩paj˩ {},I want to go to {},"ໄປ takes its destination as a bare noun, so the slot needs no preposition",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 utility-templates.please-give-me,ກະລຸນາໃຫ້ຂ້ອຍ {},,kalounahaikhoy {},kaʔ˧˥luʔ˧naː˧˥haj˧˩kʰɔːj˧˩ {},,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
-utility-templates.may-i,{} ໄດ້ບໍ່,,{} daibo,{} daj˥˨bɔː˧,"the frame follows the insert, which is Lao word order",,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+utility-templates.may-i,{} ໄດ້ບໍ່,,{} daibo,{} daj˥˨bɔː˧,can [I] {}?,"the frame follows the insert, which is Lao word order",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 utility-templates.please-do-not-add,ກະລຸນາຢ່າໃສ່ {},,kalounayasai {},kaʔ˧˥luʔ˧naː˧˥jaː˧saj˧ {},,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 utility-templates.do-you-have,ມີ {} ບໍ່,,mi {} bo,miː˧˥ {} bɔː˧,,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 utility-templates.please-write-the-number,ກະລຸນາຂຽນເລກ,,kalounakhianlék,kaʔ˧˥luʔ˧naː˧˥kʰia̯n˩leːk˥˨,,,2,"Lao PDR public signage and announcement wording (Wattay International Airport, Vientiane Capital public notices);ipa=lo-g2p"

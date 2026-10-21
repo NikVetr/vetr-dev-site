@@ -96,7 +96,7 @@ rail-station-words.platform,प्लेटफ़ॉर्म,,pleṭform,plˈe�
 rail-station-words.ticket-office,टिकट घर,आरक्षण केंद्र,ṭikaṭ ghar,ʈˈɪkəʈ ɡʰˈʌɾ,reservation office,,2,hi-agent-v1;ipa=espeak
 rail-station-words.waiting-room,प्रतीक्षालय,,pratīkṣālay,pɾətˈiːkʃaːlɛj,,,2,hi-agent-v1;ipa=espeak
 rail-station-words.train-number,गाड़ी संख्या,,gāṛī saṁkhyā,ɡˈaːɽi sˈʌŋkʰjaː,,,2,hi-agent-v1;ipa=espeak
-rail-station-words.carriage,डिब्बा,सामान्य डिब्बा,ḍibbā,ɖˈɪbbaː,coach; general coach,,2,hi-agent-v1;ipa=espeak
+rail-station-words.carriage,डिब्बा,सामान्य डिब्बा,ḍibbā,ɖˈɪbbaː,coach,general coach,2,hi-agent-v1;ipa=espeak
 rail-station-words.seat,सीट,बर्थ,sīṭ,sˈiːʈ,,,2,hi-agent-v1;ipa=espeak
 rail-station-words.last-train,आखिरी ट्रेन,,ākhirī ṭren,ˈaːkʰɪɾˌi ʈɾˈeːn,,,2,hi-agent-v1;ipa=espeak
 rail-station-words.delayed,देरी से,लेट,derī se,dˈeːɾi seː,,,2,hi-agent-v1;ipa=espeak

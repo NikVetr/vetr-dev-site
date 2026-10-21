@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 hotel-words.passport,passi,,pˈassi,,,2,fi-agent-v1;ipa=espeak
 hotel-words.room-key-card,huoneen kulkukortti,,hˈuoneːŋ kˈulkukˌortti,,,2,fi-agent-v1;ipa=espeak
-hotel-words.check-in,sisäänkirjautuminen,check-in,sˈisæːŋkˌirjautˌuminen,Finnish hotels sign both,,2,fi-agent-v1;ipa=espeak
+hotel-words.check-in,sisäänkirjautuminen,check-in,sˈisæːŋkˌirjautˌuminen,check-in,Finnish hotels sign both,2,fi-agent-v1;ipa=espeak
 hotel-words.check-out,uloskirjautuminen,check-out,ˈuloskˌirjautˌuminen,,,2,fi-agent-v1;ipa=espeak
 hotel-words.luggage-storage,matkatavaroiden säilytys,,mˈatkatavarˌoiden sˈæilytys,,,2,fi-agent-v1;ipa=espeak
 hotel-basics.are-any-rooms-available,Onko huoneita vapaana?,,ˈoŋko hˈuoneita vˈapaːna,,,2,fi-agent-v1;ipa=espeak
@@ -45,7 +45,7 @@ laundry.when-will-it-be-ready,Milloin se on valmis?,,mˈilloin sˈe ˈon vˈalmi
 laundry.how-much-per-kilo,Paljonko kilo kustantaa?,,pˈaljoŋko kˈilo kˈustantaː,,,2,fi-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,Ehtiikö se valmistua tänään?,,ˈehtiːkø sˈe vˈalmistˌua tˈænæːn,,,2,fi-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,Älkää käyttäkö valkaisuainetta.,,ˈælkæː kˈæyttækø vˈalkaisuˌainetta,,,2,fi-agent-v1;ipa=espeak
-laundry.laundromat,itsepalvelupesula,,ˈitsepˌalvelˌupesˌula,the Finnish shop name; a full-service pesula is a different thing,,2,fi-agent-v1;ipa=espeak
+laundry.laundromat,itsepalvelupesula,,ˈitsepˌalvelˌupesˌula,self-service laundry,the Finnish shop name; a full-service pesula is a different thing,2,fi-agent-v1;ipa=espeak
 laundry.please-iron-this,Silittäisittekö tämän?,,sˈilittˌæisittˌekø tˈæmæn,,,2,fi-agent-v1;ipa=espeak
 laundry.detergent,pyykinpesuaine,,pˈyːkimpesuˌaine,,,2,fi-agent-v1;ipa=espeak
 laundry.dry-cleaning,kemiallinen pesu,,kˈemiˌallinem pˈesu,,,2,fi-agent-v1;ipa=espeak

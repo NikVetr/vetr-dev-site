@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 hotel-words.passport,דרכון,דַּרְכּוֹן,darkon,daʁkˈon,,,2,he-agent-v1;ipa=bgn
 hotel-words.room-key-card,כרטיס חדר,כַּרְטִיס חֶדֶר,kartis ẖéder,kaʁtˈis xˈedeʁ,room card,,2,he-agent-v1;ipa=bgn
-hotel-words.check-in,צ׳ק-אין,צֶ׳ק-אִין,čeq-in,tʃekˈin,"the English word, as Israeli hotels use it",,2,he-agent-v1;ipa=bgn
+hotel-words.check-in,צ׳ק-אין,צֶ׳ק-אִין,čeq-in,tʃekˈin,check-in,"the English word, as Israeli hotels use it",2,he-agent-v1;ipa=bgn
 hotel-words.check-out,צ׳ק-אאוט,צֶ׳ק-אַאוּט,čeq-aut,tʃekaˈut,,,2,he-agent-v1;ipa=bgn
 hotel-words.luggage-storage,שמירת מזוודות,שְׁמִירַת מִזְוָודוֹת,shemirat mizvadot,ʃemiʁˈat mizvadˈot,keeping of suitcases,,2,he-agent-v1;ipa=bgn
 hotel-basics.are-any-rooms-available,יש חדרים פנויים?,יֵשׁ חֲדָרִים פְּנוּיִים?,yesh ẖadarim penuyim?,jˈeʃ xadaʁˈim penujˈim,are there free rooms?,,2,he-agent-v1;ipa=bgn

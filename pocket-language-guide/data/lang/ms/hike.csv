@@ -54,7 +54,7 @@ trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,tandʒˈəkan tˈərdʒ
 trail-warnings.caution-slippery,Awas licin,Hati-hati licin,ˈawas lˈitʃen,,,2,ms-agent-v1;ipa=espeak
 trail-warnings.danger,Bahaya,,bahˈajə,,,2,ms-agent-v1;ipa=espeak
 trail-warnings.beware-falling-rocks,Awas batu jatuh,Awas tanah runtuh,ˈawas bˈatu dʒˈatoh,,,2,ms-agent-v1;fix=MABBIM tanah runtuh;row-corrections-v1;ipa=espeak
-trail-warnings.first-aid-station,Pusat bantuan kecemasan,,pˈusat bantˈuan kətʃəmˈasan,Malaysia has no fixed abbreviation the way Indonesia's P3K is; trail signage spells the words out,,2,ms-agent-v1;ipa=espeak
+trail-warnings.first-aid-station,Pusat bantuan kecemasan,,pˈusat bantˈuan kətʃəmˈasan,Emergency assistance centre,Malaysia has no fixed abbreviation the way Indonesia's P3K is; trail signage spells the words out,2,ms-agent-v1;ipa=espeak
 trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,tˈidaʔ bərˌopərˈasi,,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.trail-marker,Penanda jalur,,pənˈandə dʒˈalor,,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.fork-junction,Percabangan,Persimpangan,pərtʃabˈaŋan,,,2,ms-agent-v1;ipa=espeak
@@ -64,6 +64,6 @@ trail-landmarks.end,Akhir,Selesai,ˈaxer,,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.elevation,Ketinggian,,kətiŋɡˈian,,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari tərbˈɛnam,,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.water-point,Titik air,Sumber air,tˈiteʔ ˈaɪr,,,2,ms-agent-v1;ipa=espeak
-outdoors.can-we-camp-here,Kami boleh berkhemah di sini?,,kˈami bˈoleh bərxˈɛmah di sˈini,"berkhemah (PRPM), the Malaysian spelling, distinct from Indonesian berkemah; boleh matches taxi.may-i-open-the-window",,2,ms-agent-v1;src=prpm.dbp.gov.my berkhemah;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
+outdoors.can-we-camp-here,Kami boleh berkhemah di sini?,,kˈami bˈoleh bərxˈɛmah di sˈini,Can we camp here?,"berkhemah (PRPM), the Malaysian spelling, distinct from Indonesian berkemah; boleh matches taxi.may-i-open-the-window",2,ms-agent-v1;src=prpm.dbp.gov.my berkhemah;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
 outdoors.is-it-safe-to-swim-here,Selamatkah berenang di sini?,,səlamˈatkah bərˈɛnaŋ di sˈini,is it safe to swim here?,"selamat, the Malaysian word for physically safe, rather than aman (peaceful/secure), with the question particle -kah, so that it cannot read as the wish selamat berenang (happy swimming)",2,"ms-agent-v1;fix=Kamus Dewan Edisi Keempat (PRPM) selamat 1 (terpelihara atau terhindar drpd bencana, terlepas drpd bahaya) and 4 (harapan ... yg diucapkan sbg tegur sapa: ~ datang; ~ jalan; ~ malam);fix=Kamus Dewan Edisi Keempat (PRPM) kah II (partikel utk menyatakan pertanyaan: boleh~ kau menyanyi?);rule=Selamat + verb at the head of the row is the greeting formula;row-corrections-v8;ipa=espeak"
 outdoors.are-there-dangerous-animals-here,Ada haiwan berbahaya di sini?,,ˈadə hˈaɪwan bərbahˈajə di sˈini,"haiwan is the Malaysian spelling, distinct from Indonesian hewan",,2,ms-agent-v1;ipa=espeak

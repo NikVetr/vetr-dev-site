@@ -1,11 +1,11 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 social-basics.hello,வணக்கம்,ஹலோ,vaṇakkam,vʌɳʌkkʌm,,,2,ta-agent-v1;ipa=espeak
-social-basics.hello-polite,வணக்கம்,,vaṇakkam,vʌɳʌkkʌm,the same word; vaṇakkam is already polite,,2,ta-agent-v1;ipa=espeak
+social-basics.hello-polite,வணக்கம்,,vaṇakkam,vʌɳʌkkʌm,greetings,the same word; vaṇakkam is already polite,2,ta-agent-v1;ipa=espeak
 social-basics.good-morning,காலை வணக்கம்,,kālai vaṇakkam,kaːlaɪ vʌɳʌkkʌm,,,2,ta-agent-v1;ipa=espeak
 social-basics.good-evening,மாலை வணக்கம்,,mālai vaṇakkam,maːlaɪ vʌɳʌkkʌm,,,2,ta-agent-v1;ipa=espeak
 social-basics.goodbye,போய் வருகிறேன்,வணக்கம்,pōy varukiṟēṉ,poːj vʌɾɯɡireːn,I will go and come back,said by the one leaving,2,ta-agent-v1;ipa=espeak
 social-basics.thank-you,நன்றி,மிக்க நன்றி,naṉṟi,nʌnri,,,2,ta-agent-v1;ipa=espeak
-social-basics.you-are-welcome,பரவாயில்லை,,paravāyillai,pʌɾʌvaːjillaɪ,'it is nothing'; Tamil has no set reply to thanks,,2,ta-agent-v1;ipa=espeak
+social-basics.you-are-welcome,பரவாயில்லை,,paravāyillai,pʌɾʌvaːjillaɪ,it is nothing,Tamil has no set reply to thanks,2,ta-agent-v1;ipa=espeak
 social-basics.excuse-me-sorry,மன்னிக்கவும்,,maṉṉikkavum,mʌnnikkʌvɯm,,,2,ta-agent-v1;ipa=espeak
 social-basics.sorry,மன்னியுங்கள்,ஸாரி,maṉṉiyuṅkaḷ,mʌnnijɯŋɡʌɭ,,,2,ta-agent-v1;ipa=espeak
 social-basics.no-problem,பிரச்சினை இல்லை,,piracciṉai illai,pɾʌtʃːinaɪ illaɪ,,,2,ta-agent-v1;ipa=espeak

@@ -57,7 +57,7 @@ place-words.tourist-spot-sightseeing-area,toeristische attractie,bezienswaardigh
 border-customs.i-am-a-tourist,Ik ben toerist.,,ɪk bɛn tˈurˌɪst,kept in the same 'Ik ben ...' shape as the other three purpose-of-visit answers,,2,nl-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Hier is mijn paspoort.,,hˈir ɪs mɛɪn pˈɑspɔːrt,,,2,nl-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Duur van het verblijf (dagen): {},,dˈyr vɑn hət vərblˈɛɪf dˈaːɣən {},length of stay (days): {},"a label, so the number agrees with nothing",2,nl-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Dutch text read through the Publications Office's cellar) field 25 (Duur van beoogd verblijf of doorreis -- Aantal dagen aangeven);was=Ik blijf {} dagen. (the plural -- wrong for one: één dag);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Allergie voor medicijnen: {} and Aantal nachten: {});row-corrections-v14;ipa=espeak
-border-customs.nothing-to-declare,Niets aan te geven,,nˌits aːn tə ɣˈeːvən,also the green-channel sign wording,,2,nl-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,Niets aan te geven,,nˌits aːn tə ɣˈeːvən,Nothing to declare,also the green-channel sign wording,2,nl-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Ik verblijf in {}.,,ɪk vərblˈɛɪf ˈɪn {},,,2,nl-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Ik ben hier voor zaken.,,ɪk bɛn hˈir vɔːr zˈaːkən,,,2,nl-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Ik heb een retourticket.,,ɪk hɛp ən rˈeːtuːrtˌɪkɛt,,,2,nl-agent-v1;ipa=espeak

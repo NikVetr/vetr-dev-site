@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_elot,ipa,literal,note,confidence,provenance
 pronouns-verbs.i-me,εγώ / εμένα,,ego / emena,eɣˈo / emˈena,I / me,the form you hear before a verb is με,2,el-agent-v1;roman=elot743;ipa=espeak
 pronouns-verbs.we-us,εμείς / εμάς,,emeis / emas,emˈis / emˈas,,,2,el-agent-v1;roman=elot743;ipa=espeak
-pronouns-verbs.you,εσύ / εσένα,,esy / esena,esˈi / esˈena,"you (one person, informal)",,2,el-agent-v1;roman=elot743;ipa=espeak
-pronouns-verbs.you-polite,εσείς / εσάς,,eseis / esas,esˈis / esˈas,"you (polite, or more than one person)",,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.you,εσύ / εσένα,,esy / esena,esˈi / esˈena,you,"one person, informal",2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.you-polite,εσείς / εσάς,,eseis / esas,esˈis / esˈas,you,"polite, or more than one person",2,el-agent-v1;roman=elot743;ipa=espeak
 pronouns-verbs.he-him,αυτός / αυτόν,,aftos / afton,aftˈos / aftˈon,,,2,el-agent-v1;roman=elot743;ipa=espeak
 pronouns-verbs.she-her,αυτή / αυτήν,,afti / aftin,aftˈi / aftˈin,,,2,el-agent-v1;roman=elot743;ipa=espeak
 pronouns-verbs.they-them,αυτοί / αυτούς,αυτές / αυτά,aftoi / aftous,aftˈi / aftˈus,they / them,"they (m.); f. αυτές, n. αυτά",2,el-agent-v1;roman=elot743;ipa=espeak

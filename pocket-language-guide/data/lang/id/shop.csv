@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 payment-receipt.pay-by-card,Bayar pakai kartu?,,bˈajar pˈakaɪ kˈartu,,,2,id-agent-v1;ipa=espeak
 payment-receipt.pay-cash,Bayar tunai?,,bˈajar tˈunaɪ,,,2,id-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,bˈajar pˈakaɪ krˈis,QRIS = the national QR standard,,2,id-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,bˈajar pˈakaɪ krˈis,pay using QRIS?,QRIS = the national QR standard,2,id-agent-v1;ipa=espeak
 payment-receipt.a-receipt-please,Minta struk,Kuitansi,mˈinta strˈuk,,,2,id-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈulis aŋkˈaɲa,,,2,id-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲa bərˈapa,,,2,id-agent-v1;ipa=espeak

@@ -131,7 +131,7 @@ lost-rescue.my-companion-is-missing,No encuentro a mi acompañante,,nˈo enkwˈe
 lost-rescue.please-look-at-my-current-location,Mire mi ubicación actual,,mˈiɾe mi ˌubikasjˈon aktwˈal,,,2,es-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Mi hijo se ha perdido,,mi ˈixo se ˈa peɾdˈido,,,2,es-agent-v1;src=RAE-DLE;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,No sé dónde estoy,,nˈo sˈe dˈonde estˈoɪ,,,2,es-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Mi amigo está herido,,mi amˈiɡo estˈa eɾˈido,amigo/a has no epicene form in Spanish; masculine generic,the friend's gender rather than the speaker's,2,es-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
+lost-rescue.my-friend-is-hurt,Mi amigo está herido,,mi amˈiɡo estˈa eɾˈido,my friend is hurt,amigo/a has no epicene form in Spanish; masculine generic; the friend's gender rather than the speaker's,2,es-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
 lost-rescue.i-lost-my-wallet,Perdí mi cartera,Perdí mi billetera,peɾdˈi mi kaɾtˈeɾa,,,2,es-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Perdí mi bolso,Perdí mi mochila,peɾdˈi mi bˈolso,,,2,es-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,¿Dónde están los objetos perdidos?,objetos extraviados,dˈonde estˈan los obxˈetos peɾdˈidos,,,2,es-agent-v1;ipa=espeak

@@ -31,10 +31,10 @@ taxi.we-need-the-east-gate-not-the-south-gate,"Tarvitsemme itäportin, ei etelä
 taxi.please-stop-here,Pysähtyisittekö tässä?,,pˈysæhtˌyisittˌekø tˈæssæ,,,2,fi-agent-v1;ipa=espeak
 taxi.can-you-wait-for-me-here,Voitteko odottaa minua tässä?,,vˈoitteko ˈodottaː mˈinua tˈæssæ,,,2,fi-agent-v1;ipa=espeak
 taxi.we-need-to-catch-the-high-speed-train,Meidän pitää ehtiä pikajunaan.,,mˈeidæm pˈitæː ˈehtiæ pˈikajunaːn,,,2,fi-agent-v1;ipa=espeak
-taxi.please-use-the-meter,Laittaisitteko taksamittarin päälle?,,lˈaittaisˌitteko tˈaksamˌittarim pˈæːlle,taksamittari is the Finnish word on the meter itself,,2,fi-agent-v1;ipa=espeak
+taxi.please-use-the-meter,Laittaisitteko taksamittarin päälle?,,lˈaittaisˌitteko tˈaksamˌittarim pˈæːlle,would you put the taximeter on?,taksamittari is the Finnish word on the meter itself,2,fi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Jään tässä pois.,,jˈæːn tˈæssæ pˈois,,,2,fi-agent-v1;ipa=espeak
 transit-rides.two-tickets,Kaksi lippua.,,kˈaksi lˈippua,,,2,fi-agent-v1;ipa=espeak
-transit-rides.where-is-the-subway-station,Missä on metroasema?,,mˈissæ ˈon mˈetroˌasema,Helsinki has the only metro in Finland; elsewhere the question is about the rail station,,2,fi-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,Missä on metroasema?,,mˈissæ ˈon mˈetroˌasema,where is the metro station?,Helsinki has the only metro in Finland; elsewhere the question is about the rail station,2,fi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Meneekö tämä bussi tai juna tänne: {}?,,mˈeneːkø tˈæmæ bˈussi tˈai jˈuna tˈænne {},mennä johonkin governs the illative,,2,fi-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,Mikä on seuraava pysäkki?,,mˈikæ ˈon sˈeuraːva pˈysækki,,,2,fi-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,"Sanoisitteko, missä pitää jäädä pois?",,"sˈanoisˌitteko, mˈissæ pˈitæː jˈæːdæ pˈois",,,2,fi-agent-v1;ipa=espeak
@@ -57,7 +57,7 @@ place-words.tourist-spot-sightseeing-area,nähtävyys / matkailukohde,,nˈæhtæ
 border-customs.i-am-a-tourist,Olen turisti.,,ˈolen tˈuristi,,,2,fi-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Tässä on passini.,,tˈæssæ ˈom pˈassini,,,2,fi-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Oleskelun kesto päivinä: {},,ˈoleskeluŋ kˈesto pˈæivinæ {},length of stay in days: {},"a label, so the number agrees with nothing",2,fi-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 Annex I (CELEX 32009R0810 -- the Finnish text read through the Publications Office's cellar) field 25 (Oleskelun tai kauttakulun suunniteltu kesto -- Päivien lukumäärä);fix=Kielitoimiston sanakirja kesto (kestäminen -- kestoaika -- ajallinen pituus: Sairauden -- matkan kesto) and oleskelu (Vuoden oleskelu ulkomailla);fix=fi.wikipedia P-EU-lupa rev 24247404 (muun muassa oleskelun kesto);was=Olen täällä {} päivää. (the partitive a numeral from two governs -- wrong for one: yhden päivän);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {});row-corrections-v14;ipa=espeak
-border-customs.nothing-to-declare,Ei tullattavaa.,,ˈei tˈullattavaː,the wording on the green channel sign,,2,fi-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,Ei tullattavaa.,,ˈei tˈullattavaː,nothing to declare,the wording on the green channel sign,2,fi-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Majoitun täällä: {}.,,mˈajoitun tˈæːllæ {},majoittua governs the inessive or adessive of a place name,,2,fi-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Olen työmatkalla.,,ˈolen tˈyømatkalla,,,2,fi-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Minulla on paluulippu.,,mˈinulla ˈom pˈaluːlˌippu,,,2,fi-agent-v1;ipa=espeak
@@ -126,10 +126,10 @@ air-travel.where-is-the-security-check,Missä on turvatarkastus?,,mˈissæ ˈon 
 air-travel.my-luggage-did-not-arrive,Matkatavarani ei saapunut.,,mˈatkatˌavarˌani ˈei sˈaːpunut,"matkatavara, the term Finnish airlines use for luggage",,2,fi-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,Haluaisin ikkunapaikan.,,hˈaluˌaisin ˈikkunapˌaikan,,,2,fi-agent-v1;ipa=espeak
 air-travel.i-would-like-an-aisle-seat,Haluaisin käytäväpaikan.,,hˈaluˌaisiŋ kˈæytævæpˌaikan,,,2,fi-agent-v1;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,Voitko antaa kyydin?,,vˈoitko ˈantaː kˈyːdin,informal sinä,"hitchhiking is asking a favour of a stranger rather than a paid service, and Finnish informal address is now the ordinary register for this kind of roadside request",2,fi-agent-v1;ipa=espeak
-hitchhiking.where-are-you-going,Minne olet menossa?,,mˈinne ˈolet mˈenossa,"informal, for the same reason",,2,fi-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Voitko antaa kyydin?,,vˈoitko ˈantaː kˈyːdin,can you give a ride?,"informal sinä; hitchhiking is asking a favour of a stranger rather than a paid service, and Finnish informal address is now the ordinary register for this kind of roadside request",2,fi-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Minne olet menossa?,,mˈinne ˈolet mˈenossa,where are you going?,"informal, for the same reason",2,fi-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Minun täytyy päästä vain seuraavaan kaupunkiin.,,mˈinun tˈæytyː pˈæːstæ vˈain sˈeuraːvaːŋ kˈaupuŋkiːn,,,2,fi-agent-v1;ipa=espeak
 hitchhiking.is-there-room-for-two,Onko tilaa kahdelle?,,ˈoŋko tˈilaː kˈahdelle,,,2,fi-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Voin maksaa bensat.,,vˈoin mˈaksaː bˈensat,"bensat, the colloquial word drivers use for petrol money",,2,fi-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Voin maksaa bensat.,,vˈoin mˈaksaː bˈensat,I can pay [for] the petrol,"bensat, the colloquial word drivers use for petrol money",2,fi-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Kiitos kyydistä.,,kˈiːtos kˈyːdistæ,,,2,fi-agent-v1;ipa=espeak
 taxi.please-turn-around,Tekisittekö U-käännöksen?,,tˈekisˌittekø ˈuːkæːnnøksen,,,2,fi-agent-v1;src=Kielitoimiston-sanakirja U-käännös;in-pack-frame;answers-audit-v1;ipa=espeak

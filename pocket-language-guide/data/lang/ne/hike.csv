@@ -15,7 +15,7 @@ weather.forecast,मौसमको पूर्वानुमान के छ
 weather.will-it-rain,आज पानी पर्छ?,,āja pānī parcha?,aːɟˈəː pˈaːni pˈʌrcʰə,,,2,ne-agent-v1;ipa=espeak
 weather.is-it-safe-today,आज जानु सुरक्षित छ?,,āja jānu surakṣita cha?,aːɟˈəː ɟˈaːnuʲˌu suɾˈʌkʂɪt cʰˈə,,,2,ne-agent-v1;ipa=espeak
 weather.how-cold-at-night,राति कति जाडो हुन्छ?,,rāti kati jāḍō huncha?,ɾˈaːtɪ kˈʌtɪ ɟˈaːɖoː hˈuncʰə,,,2,ne-agent-v1;ipa=espeak
-weather.rain,पानी,,pānī,pˈaːni,"everyday Nepali for rain is its word for ""water""",,2,ne-agent-v1;ipa=espeak
+weather.rain,पानी,,pānī,pˈaːni,rain,"everyday Nepali for rain is its word for ""water""",2,ne-agent-v1;ipa=espeak
 weather.snow,हिउँ,,hium̐,hˈɪũ,snow,"distinct from बरफ ""ice"", both of which this card needs",2,ne-agent-v1;ipa=espeak
 weather.wind,हावा,,hāvā,haːwˈaː,,,2,ne-agent-v1;ipa=espeak
 weather.storm,आँधी,,ām̐dhī,ãdʰˈiː,,,2,ne-agent-v1;ipa=espeak

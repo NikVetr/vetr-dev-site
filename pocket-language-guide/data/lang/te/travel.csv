@@ -3,7 +3,7 @@ directions.where-is,{} ఎక్కడ ఉంది?,,{} ekkaḍa uṁdi?,{} ekk
 directions.how-do-i-get-to,{} ఎలా వెళ్ళాలి?,,{} elā veḷḷāli?,{} elaː ʋeɭɭaːli,,,2,te-agent-v1;ipa=espeak
 directions.is-it-far,దూరమా?,,dūramā?,duːramaː,,,2,te-agent-v1;ipa=espeak
 directions.how-long-on-foot,నడిచి ఎంత సమయం?,,naḍici eṁta samayaṁ?,naɖitʃi enta samajam,,,2,te-agent-v1;ipa=espeak
-directions.please-show-me-on-the-map,పటంలో చూపించండి,మ్యాప్ మీద చూపించండి,paṭaṁlō cūpiṁcaṁḍi,paʈanloː tʃuːpiɲtʃaɳɖi,paṭaṁ is the Telugu word for a map,,2,te-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,పటంలో చూపించండి,మ్యాప్ మీద చూపించండి,paṭaṁlō cūpiṁcaṁḍi,paʈanloː tʃuːpiɲtʃaɳɖi,show on the map,paṭaṁ is the Telugu word for a map,2,te-agent-v1;ipa=espeak
 directions.where-is-the-nearest,దగ్గరి {} ఎక్కడ ఉంది?,,daggari {} ekkaḍa uṁdi?,daɡɡari {} ekkaɖa undi,,,2,te-agent-v1;ipa=espeak
 directions.where-am-i,నేను ఎక్కడ ఉన్నాను?,,nēnu ekkaḍa unnānu?,neːnu ekkaɖa unnaːnu,,,2,te-agent-v1;ipa=espeak
 directions.which-way,ఏ దారి?,,ē dāri?,eː daːri,,,2,te-agent-v1;ipa=espeak
@@ -14,7 +14,7 @@ directions.can-you-show-me-the-way,దారి చూపిస్తారా?,
 directions.north,ఉత్తరం,,uttaraṁ,uttaram,,,2,te-agent-v1;ipa=espeak
 directions.south,దక్షిణం,,dakṣiṇaṁ,dakʂiɳam,,,2,te-agent-v1;ipa=espeak
 directions.east,తూర్పు,,tūrpu,tuːrpu,,,2,te-agent-v1;ipa=espeak
-directions.west,పడమర,పశ్చిమం,paḍamara,paɖamara,paścimaṁ is the Sanskritic form used on signs,,2,te-agent-v1;ipa=espeak
+directions.west,పడమర,పశ్చిమం,paḍamara,paɖamara,west,paścimaṁ is the Sanskritic form used on signs,2,te-agent-v1;ipa=espeak
 quick-directions.go-straight,నేరుగా వెళ్ళండి,,nērugā veḷḷaṁḍi,neːruɡaː ʋeɭɭaɳɖi,,,2,te-agent-v1;ipa=espeak
 quick-directions.turn-left,ఎడమకు తిరగండి,,eḍamaku tiragaṁḍi,eɖamaku tiraɡaɳɖi,,,2,te-agent-v1;ipa=espeak
 quick-directions.turn-right,కుడికి తిరగండి,,kuḍiki tiragaṁḍi,kuɖiki tiraɡaɳɖi,,,2,te-agent-v1;ipa=espeak

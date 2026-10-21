@@ -2,7 +2,7 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 slang.thats-good,Fajn,,fˈajn,,,2,cs-agent-v1;ipa=espeak
 slang.thats-great,Super!,Bezva!,sˈuper,,,2,cs-agent-v1;ipa=espeak
 slang.i-love-it,Miluju to!,,mˈiluju tˈo,,,2,cs-agent-v1;ipa=espeak
-slang.thats-bad,To je blbý,,tˈo je bˈl̩biː,"mild/casual, never about a person",,2,cs-agent-v1;ipa=espeak
+slang.thats-bad,To je blbý,,tˈo je bˈl̩biː,that is bad,"mild/casual, never about a person",2,cs-agent-v1;ipa=espeak
 slang.delicious,Mňam!,,mɲˈam,,,2,cs-agent-v1;ipa=espeak
 slang.thats-pricey,To je drahota,,tˈo je drˈahota,,,2,cs-agent-v1;ipa=espeak
 slang.exactly,Přesně!,,pr̝ˈesɲe,,,2,cs-agent-v1;ipa=espeak

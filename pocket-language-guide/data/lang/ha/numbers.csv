@@ -41,13 +41,13 @@ atm-cash.money-exchange,wurin canjin kuɗi,,wurin tʃandʒin kuɗi,place-of mone
 atm-cash.pin,PIN,,pin,,,2,ha-agent-v1;ipa=ha-g2p+loan
 numbers-money.number-and-classifier-notes,"Ƙirƙirar lambobi: 11 = shíyī; 20 = èrshí; 21 = èrshíyī. A wayar salula, 1 ana karanta shi yāo. Tsakanin lamba da suna sai an sa kalmar awo, kuma dole ne -- Hausa ba ta da irin wannan kalma: liǎng zhāng piào = tikiti biyu. gè (na gaba ɗaya), wèi (mutane), zhāng (tikiti, abubuwa lebur), bēi (kofuna), píng (kwalba). Kuɗi: yuan ana ce da shi kuài; jiǎo ko máo = 0.1 yuan; fēn = 0.01 yuan.",,,,,2,ha-notes-v1
 numbers-money.number-and-classifier-notes-2,"Ƙirƙirar lambobi: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Lamba ba ta tsayawa kaɗai a gaban suna -- kalmar ƙirga tana bin lamba, kuma ana zaɓar ta bisa siffar abu: -tsu (abubuwa na kowa), -mai (abubuwa lebur), -hon (abubuwa masu tsayi), -nin (mutane), -hai (kofuna). A wayar salula: 0 = zero ko maru, 4 = yon, 7 = nana, 9 = kyuu; layin da ke tsakanin sassa ana karanta shi no.",,,,,2,ha-notes-v1
-numbers-money.franc,faranki,,faranki,"the West African CFA franc, used in Niger",,2,ha-currency-v1;ipa=ha-g2p
+numbers-money.franc,faranki,,faranki,franc,"the West African CFA franc, used in Niger",2,ha-currency-v1;ipa=ha-g2p
 numbers-money.franc-symbol,F CFA,,f siːɛfeː,"the abbreviation printed on a price in the BCEAO states, including Niger",,2,ha-currency-v1;ipa=ha-g2p+loan
 numbers-money.naira,naira,,naira,,,2,ha-currency-v1;ipa=ha-g2p
 numbers-money.naira-symbol,₦,₦,,the symbol on a price tag,,2,ha-currency-v1
 numbers-money.li-ng,biyu + kalmar awo,,biju,two + measure-word,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.yu-n,Yuan,,juan,,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
-numbers-money.ku-i,Yuan (magana),,juan,spoken form,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
+numbers-money.ku-i,Yuan (magana),,juan,yuan (spoken),,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.2-items,Abubuwa biyu,,abubuwa biju,,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.yen,Yen na ƙasar Japan,,jen na kʼasar dʒapan,,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.yen-symbol,¥,,,,,2,ha-currency-gloss-v1;cldr

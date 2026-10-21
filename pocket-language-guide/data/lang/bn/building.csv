@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,prove
 building-help.what-room-number-is-this,এটা কোন রুম নম্বর?,,eṭā kona ruma nambara?,ˌeʈa kˈon ɾˈum nˈɔmbɔɾ,,,2,bn-agent-v1;ipa=espeak
 building-help.i-am-lost,আমি পথ হারিয়ে ফেলেছি,,āmi patha hāriẏe phelechi,ˌami pˈɔtʰ hˈaɾiˌe fˈeletʃʰˌi,,,2,bn-agent-v1;ipa=espeak
 building-help.where-is-reception,রিসেপশন কোথায়?,,risepaśana kothāẏa?,ɾˈiʃepˌɔʃɔn kˈotʰaj,,,2,bn-agent-v1;ipa=espeak
-building-help.where-is-a-power-outlet,প্লাগ পয়েন্ট কোথায়?,,plāga paẏenṭa kothāẏa?,plˈaɡ pˈɔenʈˌɔ kˈotʰaj,'plug point' is the usual term in both countries,,2,bn-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,প্লাগ পয়েন্ট কোথায়?,,plāga paẏenṭa kothāẏa?,plˈaɡ pˈɔenʈˌɔ kˈotʰaj,where is the plug point?,'plug point' is the usual term in both countries,2,bn-agent-v1;ipa=espeak
 accessibility.step-free,সিঁড়ি ছাড়া ঢোকার পথ আছে কি?,,sim̐ṛi chāṛā ḍhokāra patha āche ki?,ʃˈĩɽi tʃʰˈaɽa ɖʰˈokaɾ pˈɔtʰ ˈatʃʰe ki,is there a way in without stairs?,,2,bn-agent-v1;ipa=espeak
 accessibility.wheelchair-access,হুইলচেয়ার নিয়ে ঢোকা যাবে কি?,,huilaceẏāra niẏe ḍhokā yābe ki?,hˈuilˌɔtʃeˌaɾ nˈie ɖʰˈoka dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
 accessibility.elevator,লিফট আছে কি?,,liphaṭa āche ki?,lˈifɔʈ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ toilets.squat-toilet,প্যান টয়লেট,ভারতীয় �
 building-words.elevator,লিফট,,liphaṭa,lˈifɔʈ,,,2,bn-agent-v1;ipa=espeak
 building-words.stairs,সিঁড়ি,,sim̐ṛi,ʃˈĩɽi,,,2,bn-agent-v1;ipa=espeak
 building-words.entrance,প্রবেশপথ,ঢোকার পথ,prabeśapatha,pɾˈobeʃˌɔpɔtʰ,,,2,bn-agent-v1;ipa=espeak
-building-words.exit,প্রস্থান,বাহির,prasthāna,pɾˈostʰan,what a sign says,,2,bn-agent-v1;ipa=espeak
+building-words.exit,প্রস্থান,বাহির,prasthāna,pɾˈostʰan,exit,what a sign says,2,bn-agent-v1;ipa=espeak
 building-words.men,পুরুষ,,puruṣa,pˈuɾuʃ,,,2,bn-agent-v1;ipa=espeak
 building-words.women,মহিলা,,mahilā,mˈohilˌa,,,2,bn-agent-v1;ipa=espeak
 building-words.door,দরজা,,darajā,dˈɔɾɔɟˌa,,,2,bn-agent-v1;ipa=espeak

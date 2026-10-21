@@ -119,7 +119,7 @@ police-consulate.i-want-to-report-a-theft,मुझे चोरी की र�
 police-consulate.my-bag-was-stolen,मेरा बैग चोरी हो गया,,merā baig corī ho gayā,mˌeːɾaː bˈɛːɡ cˈoːɾi hoː ɡˈʌjaː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.my-passport-was-stolen,मेरा पासपोर्ट चोरी हो गया,,merā pāsporṭ corī ho gayā,mˌeːɾaː pˌaːspˈoːɾʈ cˈoːɾi hoː ɡˈʌjaː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.someone-is-following-me,कोई मेरा पीछा कर रहा है,,koī merā pīchā kar rahā hai,kˈoːi mˌeːɾaː pˈiːcʰaː kˈʌɾ ɾˌəhaː hɛː,,,2,hi-agent-v1;ipa=espeak
-police-consulate.i-need-a-written-police-report,मुझे एफ़आईआर की कॉपी चाहिए,मुझे लिखित पुलिस रिपोर्ट चाहिए,mujhe efāīār kī kopī cāhie,mˌʊɟʰeː ˌeːfˌaːiˈaːɾ ki kˈɔpi cˈaːhɪˌeː,written police report (FIR),,2,hi-agent-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,मुझे एफ़आईआर की कॉपी चाहिए,मुझे लिखित पुलिस रिपोर्ट चाहिए,mujhe efāīār kī kopī cāhie,mˌʊɟʰeː ˌeːfˌaːiˈaːɾ ki kˈɔpi cˈaːhɪˌeː,I need a copy of the FIR,written police report (FIR),2,hi-agent-v1;ipa=espeak
 police-consulate.i-want-to-contact-my-embassy,मुझे अपने दूतावास से बात करनी है,,mujhe apne dūtāvās se bāt karnī hai,mˌʊɟʰeː ˈʌpnˌeː dˌuːtaːʋˈaːs seː bˈaːt kˈʌɾnˌi hɛː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.i-need-it-for-my-insurance,यह मुझे बीमे के लिए चाहिए,,yah mujhe bīme ke lie cāhie,jˌəh mˌʊɟʰeː bˈiːmeː keː lˈɪeː cˈaːhɪˌeː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,मुझे दुभाषिया चाहिए,,mujhe dubhāṣiyā cāhie,mˌʊɟʰeː dʊbʰˈaːʂɪjˌaː cˈaːhɪˌeː,,,2,hi-agent-v1;ipa=espeak
@@ -135,7 +135,7 @@ police-consulate.i-did-not-agree-to-this-price,मैंने यह दाम 
 police-consulate.please-write-the-report-number,रिपोर्ट नंबर लिख दीजिए,,riporṭ naṁbar likh dījie,ɾɪpˈoːɾʈ nˈʌmbəɾ lˈɪkʰ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.it-happened-here,यह यहाँ हुआ था,,yah yahāṁ huā thā,jˌəh jˈʌhã hˈʊaː tʰaː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,क्या रिपोर्ट की कॉपी मिल सकती है?,,kyā riporṭ kī kopī mil saktī hai?,kjaː ɾɪpˈoːɾʈ ki kˈɔpi mˈɪl sˈʌktˌi hɛː,,,2,hi-agent-v1;ipa=espeak
-police-consulate.i-will-not-sign-anything-i-cannot-read,बिना पढ़े दस्तखत नहीं करना है,,binā paṛhe dastkhat nahīṁ karnā hai,bˌɪnaː pˈʌɽʰeː dˈʌstəkʰˌət nˈʌhĩ kˈʌɾnˌaː hɛː,won't sign unread,,2,hi-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,बिना पढ़े दस्तखत नहीं करना है,,binā paṛhe dastkhat nahīṁ karnā hai,bˌɪnaː pˈʌɽʰeː dˈʌstəkʰˌət nˈʌhĩ kˈʌɾnˌaː hɛː,not to sign without reading,,2,hi-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,क्या मुझे जाने की इजाज़त है?,,kyā mujhe jāne kī ijāzat hai?,kjaː mˌʊɟʰeː ɟˈaːneː ki ɪɟˈaːzət hɛː,,,2,hi-agent-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,मुझे आपके साथ नहीं जाना है,,mujhe āpke sāth nahīṁ jānā hai,mˌʊɟʰeː ˌaːpkˌeː sˈaːtʰ nˈʌhĩ ɟˈaːnaː hɛː,,,2,hi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-dengue,लगता है मुझे डेंगू है,,lagtā hai mujhe ḍeṁgū hai,lˈʌɡtˌaː hɛː mˌʊɟʰeː ɖˈẽːɡuː hɛː,,,2,dengue-agent-v1;in-pack-frame;ipa=espeak

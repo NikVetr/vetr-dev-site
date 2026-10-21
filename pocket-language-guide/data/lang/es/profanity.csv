@@ -2,8 +2,8 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,¡Dios mío!,,djˈos mˈio,my God,"mild, no offence",1,profanity-v1;src=RAE-DLE;ipa=espeak
 profanity.damn,¡Maldita sea!,,maldˈita sˈea,cursed be it,mild oath,1,profanity-v1;src=RAE-DLE;ipa=espeak
 profanity.expletive,¡Mierda!,,mjˈeɾda,shit,coarse but everyday,1,profanity-v1;src=RAE-DLE;ipa=espeak
-profanity.strong-expletive,¡Joder!,¡Carajo!,xodˈeɾ,very strong; said at nothing,,1,profanity-v1;src=RAE-DLE;ipa=espeak
-profanity.intensifier,de mierda,maldito,de mjˈeɾda,with a noun: damn -; coarse,,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.strong-expletive,¡Joder!,¡Carajo!,xodˈeɾ,fuck!,very strong; said at nothing,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.intensifier,de mierda,maldito,de mjˈeɾda,of shit,with a noun: damn -; coarse,1,profanity-v1;src=RAE-DLE;ipa=espeak
 profanity.frustration,¡Qué porquería!,,kˈe pˌoɾkeɾˈia,what filth,mild-coarse,1,profanity-v1;src=RAE-DLE;ipa=espeak
 profanity.thats-rude,Eso es una grosería,,ˈeso ˈes ˈuna ɡɾˌoseɾˈia,that is a coarseness,,1,profanity-v1;src=RAE-DLE;ipa=espeak
 profanity.excuse-my-language,Perdón por la expresión,,peɾdˈom poɾ la ˌekspɾesjˈon,sorry for the expression,,1,profanity-v1;src=RAE-DLE;ipa=espeak

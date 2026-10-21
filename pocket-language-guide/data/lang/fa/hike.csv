@@ -15,7 +15,7 @@ weather.forecast,پیش‌بینیِ هوا چیست؟,,pishbini-ye havā chist?
 weather.will-it-rain,امروز باران می‌آید؟,,emruz bārān miyāyad?,emruz bɑrɑn miɑjad,,,2,fa-agent-v1;ipa=espeak
 weather.is-it-safe-today,امروز امن است؟,,emruz amn ast?,emruz amn ast,,,2,fa-agent-v1;ipa=espeak
 weather.how-cold-at-night,شب چقدر سرد می‌شود؟,,shab cheqadr sard mishavad?,ʃab tʃeqadr sard miʃavad,,,2,fa-agent-v1;ipa=espeak
-weather.rain,باران,بارون,bārān,bɑrɑn,spoken bārun,,2,fa-agent-v1;ipa=espeak
+weather.rain,باران,بارون,bārān,bɑrɑn,rain,spoken bārun,2,fa-agent-v1;ipa=espeak
 weather.snow,برف,,barf,barf,,,2,fa-agent-v1;ipa=espeak
 weather.wind,باد,,bād,bɑd,,,2,fa-agent-v1;ipa=espeak
 weather.storm,طوفان,,tufān,tufɑn,,,2,fa-agent-v1;ipa=espeak
@@ -23,7 +23,7 @@ weather.ice,یخ,,yakh,jax,ice on the ground,,2,fa-agent-v1;ipa=espeak
 weather.fog,مه,,meh,meh,,,2,fa-agent-v1;ipa=espeak
 weather.heat,گرما,,garmā,ɡarmɑ,,,2,fa-agent-v1;ipa=espeak
 weather.cold,سرما,,sarmā,sarmɑ,,,2,fa-agent-v1;ipa=espeak
-weather.humid,شرجی,مرطوب,sharji,ʃardʒi,the Persian Gulf coast word; martub is the general one,,2,fa-agent-v1;ipa=espeak
+weather.humid,شرجی,مرطوب,sharji,ʃardʒi,humid,the Persian Gulf coast word; martub is the general one,2,fa-agent-v1;ipa=espeak
 weather.sunrise,طلوعِ آفتاب,,tolu‘-e āftāb,toluʔe ɑftɑb,,,2,fa-agent-v1;ipa=espeak
 weather.flood,سیل,,seyl,sejl,,,2,fa-agent-v1;ipa=espeak
 weather.avalanche-risk,خطرِ بهمن,,khatar-e bahman,xatare bahman,,,2,fa-agent-v1;ipa=espeak

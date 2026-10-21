@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-profanity.oh-my-god,అయ్యో!,దేవుడా!,ayyō!,ajjoː,the general Telugu cry of dismay; dēvuḍā is the religious oath and is mild,,1,te-profanity-v1;ipa=espeak
+profanity.oh-my-god,అయ్యో!,దేవుడా!,ayyō!,ajjoː,alas!,the general Telugu cry of dismay; dēvuḍā is the religious oath and is mild,1,te-profanity-v1;ipa=espeak
 profanity.damn,ఛ!,ఛీ!,cha!,tʃʰa,an oath of annoyance,"mild, and at a situation",1,te-profanity-v1;ipa=espeak
 profanity.expletive,పాడుగాను!,,pāḍugānu!,paːɖuɡaːnu,may it rot,"coarse but ordinary, said at a thing going wrong",1,te-profanity-v1;ipa=espeak
 profanity.intensifier,వెధవ,పాడు,vedhava,ʋedʰaʋa,wretched,"before a noun: 'the damn -'; literally 'wretched'. Emphasis, not an insult",1,te-profanity-v1;ipa=espeak

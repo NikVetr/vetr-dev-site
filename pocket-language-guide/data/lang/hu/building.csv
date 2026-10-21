@@ -10,7 +10,7 @@ accessibility.ramp,Van rámpa?,,vˈɑn rˈaːmpɑ,,,2,hu-agent-v1;ipa=espeak
 accessibility.how-many-steps,Hány lépcsőfok van?,,hˈaːɲ lˈeːptʃøːfok vˈɑn,,,2,hu-agent-v1;ipa=espeak
 accessibility.cannot-climb-stairs,Nem tudok lépcsőn járni,,nˈɛm tˈudok lˈeːptʃøːn jˈaːrni,,,2,hu-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,Le kell ülnöm,,lˈɛ kˈɛll ˈylnøm,,,2,hu-agent-v1;ipa=espeak
-accessibility.accessible-restroom,Van akadálymentes mosdó?,,vˈɑn ˈɑkɑdaːjmɛntɛʃ mˈoʃdoː,signs read mozgáskorlátozott,,2,hu-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Van akadálymentes mosdó?,,vˈɑn ˈɑkɑdaːjmɛntɛʃ mˈoʃdoː,is there an accessible restroom?,signs read mozgáskorlátozott,2,hu-agent-v1;ipa=espeak
 accessibility.station-assistance,Van segítségnyújtás az állomáson?,,vˈɑn ʃˈɛɡiːtʃtʃeːɡɲuːjtaːʃ ˈɑz ˈaːllomaːʃon,,,2,hu-agent-v1;ipa=espeak
 accessibility.help-me-carry,"Kérem, segítsen ezt vinni",,"kˈeːrɛm, ʃˈɛɡiːtʃtʃɛn ˈɛst vˈinni",,,2,hu-agent-v1;ipa=espeak
 accessibility.board-first,Felszállhatok először?,,fˈɛlsaːlhɑtok ˈɛløːsør,,,2,hu-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ accessibility.hard-of-hearing,Nagyothalló vagyok,,nˈɑɟothɑlloː vˈɑɟok,,
 accessibility.speak-louder,"Kérem, beszéljen hangosabban",,"kˈeːrɛm, bˈɛseːjjɛn hˈɑnɡoʃɑbbɑn",,,2,hu-agent-v1;ipa=espeak
 accessibility.visually-impaired,Látássérült vagyok,,lˈaːtaːʃʃeːrylt vˈɑɟok,,,2,hu-agent-v1;ipa=espeak
 accessibility.take-your-arm,Megfoghatom a karját?,,mˈɛɡfoɡhɑtom ˈɑ kˈɑrjaːt,,,2,hu-agent-v1;ipa=espeak
-accessibility.guide-dog,Ez a vakvezető kutyám,,ˈɛz ˈɑ vˈɑkvɛzɛtøː kˈucaːm,vakvezető = for the blind; assistance dogs are segítő kutya,,2,hu-agent-v1;ipa=espeak
+accessibility.guide-dog,Ez a vakvezető kutyám,,ˈɛz ˈɑ vˈɑkvɛzɛtøː kˈucaːm,this is my guide dog,vakvezető = for the blind; assistance dogs are segítő kutya,2,hu-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Ez a jó bejárat?,,ˈɛz ˈɑ jˈoː bˈɛjaːrɑt,,,2,hu-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,Van Wi-Fi?,,vˈɑn vˈifi,,,2,hu-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,Mi a Wi-Fi jelszó?,,mˈi ˈɑ vˈifi jˈɛlsoː,,,2,hu-agent-v1;ipa=espeak

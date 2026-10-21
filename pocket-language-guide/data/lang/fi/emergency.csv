@@ -25,11 +25,11 @@ medical-conditions.i-need-insulin,Tarvitsen insuliinia.,,tˈarvitsen ˈinsulˌi�
 medical-conditions.i-have-asthma,Minulla on astma.,,mˈinulla ˈon ˈastma,,,2,fi-agent-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,Minulla on sydänsairaus.,,mˈinulla ˈon sˈydænsˌairaus,,,2,fi-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-penicillin,Olen allerginen penisilliinille.,,ˈolen ˈallerɡinem pˈenisˌilliːnˌille,,,2,fi-agent-v1;ipa=espeak
-medical-conditions.i-have-epilepsy,Minulla on epilepsia.,,mˈinulla ˈon ˈepilˌepsia,epilepsia is the ordinary neutral Finnish word and carries no stigma,,2,fi-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Minulla on epilepsia.,,mˈinulla ˈon ˈepilˌepsia,I have epilepsy,epilepsia is the ordinary neutral Finnish word and carries no stigma,2,fi-agent-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,Verensokerini on matala.,,vˈerensˌokerˌini ˈon mˈatala,,,2,fi-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Tarvitsen inhalaattorini.,,tˈarvitsen ˈinhalˌaːttorˌini,,,2,fi-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Olen raskaana.,,ˈolen rˈaskaːna,,,2,fi-agent-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,Minulla on adrenaliinikynä.,,mˈinulla ˈon ˈadrenalˌiːnikˌynæ,"adrenaliinikynä is the Finnish generic; EpiPen, Jext and Emerade are the three brands sold in Finland, so no brand name would be right",,2,fi-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Minulla on adrenaliinikynä.,,mˈinulla ˈon ˈadrenalˌiːnikˌynæ,I have an adrenaline pen,"adrenaliinikynä is the Finnish generic; EpiPen, Jext and Emerade are the three brands sold in Finland, so no brand name would be right",2,fi-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Käytän lääkettä tähän: {}.,,kˈæytæn lˈæːkettæ tˈæhæn {},"lääke johonkin governs the illative, so the frame carries it on tähän",,2,fi-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Käytän verenohennuslääkettä.,,kˈæytæn vˈerenohˌennuslˌæːkettæ,I use blood-thinning medicine,verenohennuslääke is what patients and nurses say; antikoagulantti is the label term,2,fi-agent-v1;ipa=espeak
 medical-conditions.medicine-allergy,Lääkeallergia: {},,lˈæːkeˌallerɡˌia {},"a label, already appositive, so the slot needs no case",,2,fi-agent-v1;ipa=espeak
@@ -47,13 +47,13 @@ pharmacy-symptoms.i-need-medicine-for,Tarvitsen lääkettä tähän: {}.,,tˈarv
 pharmacy-symptoms.i-have-a-fever,Minulla on kuumetta.,,mˈinulla ˈoŋ kˈuːmetta,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Minulla on ripulia.,,mˈinulla ˈon rˈipulˌia,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Missä on päivystävä apteekki?,,mˈissæ ˈom pˈæivystˌævæ ˈapteːkki,where is the on-duty pharmacy?,"Finland runs a duty rota rather than 24-hour shops outside Helsinki, and päivystävä apteekki is the term a pharmacist answers to",2,fi-agent-v1;ipa=espeak
-pharmacy-symptoms.painkiller,särkylääke,kipulääke,sˈærkylˌæːke,särkylääke is the over-the-counter shelf word,,2,fi-agent-v1;ipa=espeak
+pharmacy-symptoms.painkiller,särkylääke,kipulääke,sˈærkylˌæːke,painkiller,särkylääke is the over-the-counter shelf word,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Tarvitaanko resepti?,,tˈarvitˌaːŋko rˈesepti,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Minulla on päänsärkyä.,,mˈinulla ˈom pˈæːnsærkˌyæ,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.paracetamol-acetaminophen,parasetamoli,Panadol,pˈarasˌetamˌoli,Panadol and Para-Tabs are the names on Finnish shelves,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.how-much-should-i-take,Kuinka paljon pitää ottaa?,,kˈuiŋka pˈaljom pˈitæː ˈottaː,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,Oksentelen.,,ˈoksentelen,,,2,fi-agent-v1;ipa=espeak
-pharmacy-symptoms.rehydration-salts,ripulijuoma,Osmosal,rˈipulijˌuoma,"Osmosal is the name on the Finnish pharmacy shelf; the descriptive term alone gets a blank look, which is the Russian pack's own brand-over-description decision",,2,fi-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,ripulijuoma,Osmosal,rˈipulijˌuoma,diarrhea drink,"Osmosal is the name on the Finnish pharmacy shelf; the descriptive term alone gets a blank look, which is the Russian pack's own brand-over-description decision",2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.how-many-times-a-day,Kuinka monta kertaa päivässä?,,kˈuiŋka mˈonta kˈertaː pˈæivæssæ,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-stomach-ache,Minulla on vatsakipua.,,mˈinulla ˈon vˈatsakˌipua,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,Minulla on yskää.,,mˈinulla ˈon ˈyskæː,,,2,fi-agent-v1;ipa=espeak
@@ -73,7 +73,7 @@ pharmacy-symptoms.before-or-after-food,Ennen ruokaa vai ruoan jälkeen?,,ˈennen
 pharmacy-symptoms.i-think-it-is-infected,"Luulen, että se on tulehtunut.",,"lˈuːlen, ˈettæ sˈe ˈon tˈulehtunut",,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.motion-sickness-tablets,matkapahoinvointilääke,,mˈatkapahˌoinvointilˌæːke,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cut,Minulla on haava.,,mˈinulla ˈon hˈaːva,,,2,fi-agent-v1;ipa=espeak
-pharmacy-symptoms.antacid,närästyslääke,antasidi,nˈæræstˌyslæːke,"närästyslääke is the everyday word, antasidi the technical one",,2,fi-agent-v1;ipa=espeak
+pharmacy-symptoms.antacid,närästyslääke,antasidi,nˈæræstˌyslæːke,heartburn medicine,"närästyslääke is the everyday word, antasidi the technical one",2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Minulla on palovamma.,,mˈinulla ˈom pˈalovˌamma,,,2,fi-agent-v1;ipa=espeak
 pharmacy-symptoms.it-started-days-ago,Päiviä oireiden alkamisesta: {},,pˈæiviæ ˈoireiden ˈalkamisˌesta {},days since the symptoms began: {},"a label, so the number agrees with nothing",2,fi-agent-v1;fix=Kielitoimiston sanakirja päivä (Vuodessa on 365 päivää);fix=fi.wikipedia Aivokalvontulehdus rev 24023810 (muutaman tunnin kuluessa ensimmäisten oireiden alkamisesta);was=Se alkoi {} päivää sitten. (the partitive a numeral from two governs -- wrong for one: päivä sitten);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {});row-corrections-v14;ipa=espeak
 pharmacy-symptoms.cough-medicine,yskänlääke,,ˈyskænlˌæːke,,,2,fi-agent-v1;ipa=espeak
@@ -86,7 +86,7 @@ body-parts.tooth,hammas,,hˈammas,,,2,fi-agent-v1;ipa=espeak
 body-parts.chest,rintakehä,,rˈintakˌehæ,,,2,fi-agent-v1;ipa=espeak
 body-parts.eye,silmä,,sˈilmæ,,,2,fi-agent-v1;ipa=espeak
 body-parts.ear,korva,,kˈorva,,,2,fi-agent-v1;ipa=espeak
-body-parts.leg,jalka,,jˈalka,jalka is leg and foot alike in Finnish; jalkaterä names the foot specifically,,2,fi-agent-v1;ipa=espeak
+body-parts.leg,jalka,,jˈalka,leg,jalka is leg and foot alike in Finnish; jalkaterä names the foot specifically,2,fi-agent-v1;ipa=espeak
 body-parts.arm,käsivarsi,,kˈæsivˌarsi,arm,"käsi is arm and hand alike, so the compound is what names the arm",2,fi-agent-v1;ipa=espeak
 body-parts.foot,jalkaterä,jalka,jˈalkatˌeræ,foot,"the compound, because plain jalka would not distinguish it from the leg",2,fi-agent-v1;ipa=espeak
 body-parts.hand,käsi,,kˈæsi,,,2,fi-agent-v1;ipa=espeak

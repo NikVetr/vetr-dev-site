@@ -60,7 +60,7 @@ sim-data.do-you-have-an-esim,Kana da eSIM?,,kana da iːsim,,,2,ha-agent-v1;ipa=h
 sim-data.my-data-is-not-working,Data na ba ya aiki,,data na ba ja aiki,,,2,ha-agent-v1;ipa=ha-g2p
 sim-data.does-it-need-registration,Yana buƙatar rijista?,,jana bukʼatar ridʒista,,,2,ha-agent-v1;ipa=ha-g2p
 sim-data.i-have-no-signal,Ba ni da sigina,,ba ni da siɡina,,,2,ha-agent-v1;ipa=ha-g2p
-sim-data.please-write-the-wifi-password,Don Allah ka rubuta kalmar sirri ta Wi-Fi,,don allah ka rubuta kalmar sirri ta wajfaj,word-of-secret of Wi-Fi,,2,ha-agent-v1;ipa=ha-g2p+loan
+sim-data.please-write-the-wifi-password,Don Allah ka rubuta kalmar sirri ta Wi-Fi,,don allah ka rubuta kalmar sirri ta wajfaj,please write [the] password of Wi-Fi,,2,ha-agent-v1;ipa=ha-g2p+loan
 sim-data.sim-card,katin SIM,,katin sim,,,2,ha-agent-v1;ipa=ha-g2p+loan
 sim-data.where-can-i-buy-a-plug-adapter,Ina zan sayi adaftan wutar lantarki?,,ina zan saji adaftan wutar lantarki,,,2,ha-agent-v1;ipa=ha-g2p
 sim-data.mobile-data,data ta waya,,data ta waja,,,2,ha-agent-v1;ipa=ha-g2p
@@ -80,7 +80,7 @@ etiquette.photo-of-you,Zan iya ɗaukar hotonka?,Zan iya ɗaukar hotonki?,zan ija
 etiquette.may-i-sit-here,Zan iya zama a nan?,,zan ija zama a nan,,,2,ha-agent-v1;ipa=ha-g2p
 etiquette.queue-for,Wannan layin {} ne?,,wannan lajin {} ne,layi = queue/line,,2,ha-agent-v1;ipa=ha-g2p
 etiquette.dressed-appropriately,Sutura ta dace?,,sutura ta datʃe,clothing is-fitting,,2,ha-agent-v1;ipa=ha-g2p
-etiquette.did-not-mean-to-offend,Ban yi nufin in ɓata maka rai ba,Ban yi nufin in ɓata miki rai ba,ban ji nufin in bata maka rai ba,bata rai = to spoil the mood/offend; miki to a woman,,2,ha-agent-v1;ipa=ha-g2p
+etiquette.did-not-mean-to-offend,Ban yi nufin in ɓata maka rai ba,Ban yi nufin in ɓata miki rai ba,ban ji nufin in bata maka rai ba,I did not intend that I spoil your mood,bata rai = to spoil the mood/offend; miki to a woman,2,ha-agent-v1;ipa=ha-g2p
 etiquette.what-is-customary,Mene ne al'ada a nan?,,mene ne alʔada a nan,,,2,ha-agent-v1;ipa=ha-g2p
 etiquette.keep-the-change,Ka ajiye canjin,Ki ajiye canjin,ka adʒije tʃandʒin,ki to a woman,,2,ha-agent-v1;ipa=ha-g2p
 children.cannot-find-my-child,Ban sami ɗana ba,,ban sami ɗana ba,not I-found child-my,"samu (find) negated, never a verb that can mean bereavement",2,ha-agent-v1;ipa=ha-g2p

@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-slang.thats-good,Dobro je,Fora je,dˈobro je,"fora is 'cool', informal",,2,hr-agent-v1;ipa=espeak
+slang.thats-good,Dobro je,Fora je,dˈobro je,it is good,"fora is 'cool', informal",2,hr-agent-v1;ipa=espeak
 slang.thats-great,Super je,Ekstra je,sˈuper je,,,2,hr-agent-v1;ipa=espeak
 slang.i-love-it,Baš mi se sviđa,,bˈaʃ mˈi sˈe svˈidʑa,'it really pleases me',,2,hr-agent-v1;ipa=espeak
 slang.thats-bad,Loše je,Bezveze je,lˈoʃe je,"bezveze is 'pointless, no good'",,2,hr-agent-v1;ipa=espeak

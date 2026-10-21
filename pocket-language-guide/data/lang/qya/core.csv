@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_appendix-e,ipa,literal,note,confidence,provenance
 pronouns-verbs.i-me,,inyë,ni,ni,inyë is the emphatic form,,3,qya-attested-v1;src=LotR/0377.3505;eldamo=q;native=quenya-classical;ipa=appendix-e
-pronouns-verbs.we-us,,ve,me,me,me excludes you; ve includes you,,3,qya-attested-v1;src=LotR/0377.4004;eldamo=q;native=quenya-classical;ipa=appendix-e
+pronouns-verbs.we-us,,ve,me,me,we,me excludes you; ve includes you,3,qya-attested-v1;src=LotR/0377.4004;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.you,,,tye,tje,"one person, familiar",,3,qya-attested-v1;src=PE17/075.0408;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.you-polite,,elyë,lye,lje,elyë is the emphatic form,,3,qya-attested-v1;src=PE17/075.0308;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.he-him,,issë,se,se,se covers he and she alike,,3,qya-attested-v1;src=PE17/091.4105;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.she-her,,essë,se,se,one pronoun for he and she,,3,qya-attested-v1;src=PE17/091.4105;eldamo=q;native=quenya-classical;ipa=appendix-e
-pronouns-verbs.they-them,,tai,te,te,te of people; tai of things,,3,qya-attested-v1;src=LotR/0953.2503;eldamo=q;native=quenya-classical;ipa=appendix-e
+pronouns-verbs.they-them,,tai,te,te,they,te of people; tai of things,3,qya-attested-v1;src=LotR/0953.2503;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.my-mine,-,,-nya,nja,goes on the noun: essenya = my name,,3,qya-attested-v1;src=LotR/0377.3706;eldamo=q;native=quenya-classical;ipa=appendix-e
-pronouns-verbs.your-yours,-,-tya,-lya,lja,"-lya polite, -tya familiar",,3,qya-attested-v1;src=VT49/38.1401;eldamo=q;native=quenya-classical;ipa=appendix-e
+pronouns-verbs.your-yours,-,-tya,-lya,lja,your,"-lya polite, -tya familiar",3,qya-attested-v1;src=VT49/38.1401;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.be-called-call,,,essë,ˈesse,name,,3,qya-attested-v1;src=LotR/1123.0701;eldamo=q;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.have,-,,harya-,hˈarja,to have,,1,qya-deduced-v1;src=MS/01.03;eldamo=q#;native=quenya-classical;ipa=appendix-e
 pronouns-verbs.do-not-have,,,penya,pˈenja,lacking / inadequate,,3,qya-attested-v1;src=VT39/06.2506;eldamo=q;native=quenya-classical;ipa=appendix-e

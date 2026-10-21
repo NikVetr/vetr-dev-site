@@ -13,7 +13,7 @@ emergency-medical.i-am-having-a-severe-allergic-reaction,నాకు అనా�
 emergency-medical.i-cannot-breathe,నాకు ఊపిరి ఆడడం లేదు,,nāku ūpiri āḍaḍaṁ lēdu,naːku uːpiri aːɖaɖam leːdu,,,2,te-med-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,నాకు రక్తం ఎక్కువగా కారుతోంది,,nāku raktaṁ ekkuvagā kārutōṁdi,naːku raktam ekkuʋaɡaː kaːrutoːndi,,,2,te-med-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,నాకు ఛాతీ నొప్పి,,nāku chātī noppi,naːku tʃʰaːtiː noppi,,,2,te-med-v1;ipa=espeak
-emergency-medical.this-person-is-unconscious,ఈ వ్యక్తి స్పృహ కోల్పోయారు,,ī vyakti spr̥ha kōlpōyāru,iː ʋjakti spruha koːlpoːjaːru,said about someone else,,2,te-med-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,ఈ వ్యక్తి స్పృహ కోల్పోయారు,,ī vyakti spr̥ha kōlpōyāru,iː ʋjakti spruha koːlpoːjaːru,this person lost consciousness,said about someone else,2,te-med-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,దగ్గరి ఆసుపత్రి ఎక్కడ ఉంది?,,daggari āsupatri ekkaḍa uṁdi?,daɡɡari aːsupatri ekkaɖa undi,,,2,te-med-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,అత్యవసర నంబరు ఏమిటి?,,atyavasara naṁbaru ēmiṭi?,atjaʋasara nambaru eːmiʈi,,,2,te-med-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,{source} వచ్చిన డాక్టర్ ఉన్నారా?,,{source} vaccina ḍākṭar unnārā?,{source} ʋatʃtʃina ɖaːkʈar unnaːraː,a doctor to whom {source} has come,,2,te-med-v1;ipa=espeak
@@ -22,10 +22,10 @@ emergency-medical.please-call-my-emergency-contact,నా అత్యవసర 
 emergency-medical.i-have-travel-insurance,నాకు ప్రయాణ బీమా ఉంది,,nāku prayāṇa bīmā uṁdi,naːku prajaːɳa biːmaː undi,,,2,te-med-v1;ipa=espeak
 medical-conditions.i-am-diabetic,నాకు మధుమేహం ఉంది,నాకు షుగర్ ఉంది,nāku madhumēhaṁ uṁdi,naːku madʰumeːham undi,to me there is diabetes,śugar is what is said in ordinary speech,2,te-med-v1;ipa=espeak
 medical-conditions.i-need-insulin,నాకు ఇన్సులిన్ కావాలి,,nāku insulin kāvāli,naːku insulin kaːʋaːli,,,2,te-med-v1;ipa=espeak
-medical-conditions.i-have-asthma,నాకు ఆస్తమా ఉంది,నాకు ఉబ్బసం ఉంది,nāku āstamā uṁdi,naːku aːstamaː undi,ubbasaṁ is the Telugu word,,2,te-med-v1;ipa=espeak
+medical-conditions.i-have-asthma,నాకు ఆస్తమా ఉంది,నాకు ఉబ్బసం ఉంది,nāku āstamā uṁdi,naːku aːstamaː undi,I have asthma,ubbasaṁ is the Telugu word,2,te-med-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,నాకు గుండె జబ్బు ఉంది,,nāku guṁḍe jabbu uṁdi,naːku ɡuɳɖe dʒabbu undi,,,2,te-med-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-penicillin,నాకు పెన్సిలిన్ అలర్జీ,,nāku pensilin alarjī,naːku pensilin alardʒiː,,,2,te-med-v1;ipa=espeak
-medical-conditions.i-have-epilepsy,నాకు మూర్ఛ వ్యాధి ఉంది,ఫిట్స్ వస్తాయి,nāku mūrcha vyādhi uṁdi,naːku muːrtʃʰa ʋjaːdʰi undi,phiṭs is the everyday word,,2,te-med-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,నాకు మూర్ఛ వ్యాధి ఉంది,ఫిట్స్ వస్తాయి,nāku mūrcha vyādhi uṁdi,naːku muːrtʃʰa ʋjaːdʰi undi,I have epilepsy,phiṭs is the everyday word,2,te-med-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,నా రక్తంలో చక్కెర తగ్గింది,,nā raktaṁlō cakkera taggiṁdi,naː raktanloː tʃakkera taɡɡindi,,,2,te-med-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,నాకు నా ఇన్హేలర్ కావాలి,,nāku nā inhēlar kāvāli,naːku naː inheːlar kaːʋaːli,,,2,te-med-v1;ipa=espeak
 medical-conditions.i-am-pregnant,నేను గర్భవతిని,,nēnu garbhavatini,neːnu ɡarbʰaʋatini,,,2,te-med-v1;ipa=espeak
@@ -47,7 +47,7 @@ pharmacy-symptoms.i-need-medicine-for,నాకు {} కోసం మందు 
 pharmacy-symptoms.i-have-a-fever,నాకు జ్వరం ఉంది,,nāku jvaraṁ uṁdi,naːku dʒʋaram undi,,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,నాకు మలేరియా వచ్చినట్టు ఉంది,,nāku malēriyā vaccinaṭṭu uṁdi,naːku maleːrijaː ʋatʃtʃinaʈʈu undi,,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,నాకు మలేరియా పరీక్ష కావాలి,,nāku malēriyā parīkṣa kāvāli,naːku maleːrijaː pariːkʂa kaːʋaːli,,,2,te-med-v1;ipa=espeak
-pharmacy-symptoms.i-think-i-have-dengue,నాకు డెంగీ వచ్చినట్టు ఉంది,డెంగ్యూ,nāku ḍeṁgī vaccinaṭṭu uṁdi,naːku ɖeŋɡiː ʋatʃtʃinaʈʈu undi,ḍeṁgī is the spelling used in Telugu health notices,,2,te-med-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,నాకు డెంగీ వచ్చినట్టు ఉంది,డెంగ్యూ,nāku ḍeṁgī vaccinaṭṭu uṁdi,naːku ɖeŋɡiː ʋatʃtʃinaʈʈu undi,it seems I have got dengue,ḍeṁgī is the spelling used in Telugu health notices,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,నాకు విరేచనాలు అవుతున్నాయి,,nāku virēcanālu avutunnāyi,naːku ʋireːtʃanaːlu aʋutunnaːji,,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,రాత్రి తెరిచే మెడికల్ షాపు ఎక్కడ ఉంది?,,rātri tericē meḍikal ṣāpu ekkaḍa uṁdi?,raːtri teritʃeː meɖikal ʂaːpu ekkaɖa undi,,,2,te-med-v1;ipa=espeak
 pharmacy-symptoms.painkiller,నొప్పి మందు,,noppi maṁdu,noppi mandu,,,2,te-med-v1;ipa=espeak
@@ -91,7 +91,7 @@ body-parts.eye,కన్ను,,kannu,kannu,,,2,te-agent-v1;ipa=espeak
 body-parts.ear,చెవి,,cevi,tʃeʋi,,,2,te-agent-v1;ipa=espeak
 body-parts.leg,కాలు,,kālu,kaːlu,kālu is both the leg and the foot,,2,te-agent-v1;ipa=espeak
 body-parts.arm,బాహువు,చేయి,bāhuvu,baːhuʋu,arm,bāhuvu is the arm proper; cēyi means both the arm and the hand,2,te-agent-v1;ipa=espeak
-body-parts.foot,పాదం,,pādaṁ,paːdam,the foot proper; kālu covers both,,2,te-agent-v1;ipa=espeak
+body-parts.foot,పాదం,,pādaṁ,paːdam,foot,the foot proper; kālu covers both,2,te-agent-v1;ipa=espeak
 body-parts.hand,చేయి,,cēyi,tʃeːji,cēyi is both the hand and the arm,,2,te-agent-v1;ipa=espeak
 body-parts.knee,మోకాలు,,mōkālu,moːkaːlu,,,2,te-agent-v1;ipa=espeak
 body-parts.ankle,చీలమండ,,cīlamaṁḍa,tʃiːlamaɳɖa,,,2,te-agent-v1;ipa=espeak
@@ -106,7 +106,7 @@ lost-rescue.i-sprained-my-ankle,నా చీలమండ బెణికిం�
 lost-rescue.please-contact-rescue,సహాయక బృందాన్ని పిలవండి,,sahāyaka br̥ṁdānni pilavaṁḍi,sahaːjaka brundaːnni pilaʋaɳɖi,call the rescue team,,2,te-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,నా తోడు తప్పిపోయారు,,nā tōḍu tappipōyāru,naː toːɖu tappipoːjaːru,tappipōyāru 'got lost',pōyāru alone would say they had died,2,te-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,నేను ఇప్పుడు ఎక్కడ ఉన్నానో చూడండి,,nēnu ippuḍu ekkaḍa unnānō cūḍaṁḍi,neːnu ippuɖu ekkaɖa unnaːnoː tʃuːɖaɳɖi,,,2,te-agent-v1;ipa=espeak
-lost-rescue.my-child-is-missing,నా బిడ్డ తప్పిపోయింది,,nā biḍḍa tappipōyiṁdi,naː biɖɖa tappipoːjindi,tappipōyiṁdi 'got lost'; biḍḍa pōyiṁdi would mean the child had died,,2,te-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,నా బిడ్డ తప్పిపోయింది,,nā biḍḍa tappipōyiṁdi,naː biɖɖa tappipoːjindi,my child got lost,tappipōyiṁdi 'got lost'; biḍḍa pōyiṁdi would mean the child had died,2,te-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,నేను ఎక్కడ ఉన్నానో తెలియడం లేదు,,nēnu ekkaḍa unnānō teliyaḍaṁ lēdu,neːnu ekkaɖa unnaːnoː telijaɖam leːdu,,,2,te-agent-v1;ipa=espeak
 lost-rescue.my-friend-is-hurt,నా స్నేహితుడికి గాయం అయింది,,nā snēhituḍiki gāyaṁ ayiṁdi,naː sneːhituɖiki ɡaːjam ajindi,,,2,te-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,నా పర్సు పోయింది,,nā parsu pōyiṁdi,naː parsu poːjindi,,,2,te-agent-v1;ipa=espeak
@@ -123,7 +123,7 @@ police-consulate.someone-is-following-me,ఎవరో నా వెంట వస
 police-consulate.i-need-a-written-police-report,నాకు రాతపూర్వక పోలీసు ఫిర్యాదు కావాలి,,nāku rātapūrvaka pōlīsu phiryādu kāvāli,naːku raːtapuːrʋaka poːliːsu pʰirjaːdu kaːʋaːli,,,2,te-agent-v1;ipa=espeak
 police-consulate.i-want-to-contact-my-embassy,నా రాయబార కార్యాలయాన్ని సంప్రదించాలి,,nā rāyabāra kāryālayānni saṁpradiṁcāli,naː raːjabaːra kaːrjaːlajaːnni sampradiɲtʃaːli,,,2,te-agent-v1;ipa=espeak
 police-consulate.i-need-it-for-my-insurance,నా బీమా కోసం అది కావాలి,,nā bīmā kōsaṁ adi kāvāli,naː biːmaː koːsam adi kaːʋaːli,,,2,te-agent-v1;ipa=espeak
-police-consulate.i-need-an-interpreter,నాకు దుబాసీ కావాలి,అనువాదకుడు కావాలి,nāku dubāsī kāvāli,naːku dubaːsiː kaːʋaːli,dubāsī is the Telugu word for a spoken interpreter,,2,te-agent-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,నాకు దుబాసీ కావాలి,అనువాదకుడు కావాలి,nāku dubāsī kāvāli,naːku dubaːsiː kaːʋaːli,I need an interpreter,dubāsī is the Telugu word for a spoken interpreter,2,te-agent-v1;ipa=espeak
 police-consulate.please-leave-me-alone,నన్ను వదిలేయండి,,nannu vadilēyaṁḍi,nannu ʋadileːjaɳɖi,,,2,te-agent-v1;ipa=espeak
 police-consulate.i-was-robbed,నన్ను దోచుకున్నారు,,nannu dōcukunnāru,nannu doːtʃukunnaːru,,,2,te-agent-v1;ipa=espeak
 police-consulate.i-want-a-lawyer,నాకు లాయర్ కావాలి,,nāku lāyar kāvāli,naːku laːjar kaːʋaːli,,,2,te-agent-v1;ipa=espeak

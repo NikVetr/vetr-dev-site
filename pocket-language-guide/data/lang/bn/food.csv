@@ -25,7 +25,7 @@ food-ordering.is-this-vegetarian,এটা নিরামিষ কি?,,eṭā
 food-ordering.what-do-you-recommend,আপনি কী খেতে বলবেন?,,āpani kī khete balabena?,ˌapɔnˌi kˈi kʰˈete bˈɔlɔbˌen,what will you say to eat?,,2,bn-agent-v1;ipa=espeak
 food-ordering.water-please,পানি দিন,জল দিন,pāni dina,pˈani dˈin,give water,পানি is Bangladeshi and জল West Bengali,2,bn-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,নিরামিষভোজী এটা খেতে পারবে কি?,,nirāmiṣabhojī eṭā khete pārabe ki?,nˈiɾamˌiʃɔbʰˌoɟi ˌeʈa kʰˈete pˈaɾɔbˌe ki,,,2,bn-agent-v1;ipa=espeak
-dietary-needs.no-pork,শুকরের মাংস ছাড়া,শুয়োরের মাংস ছাড়া,śukarera māṁsa chāṛā,ʃˈukɔɾˌeɾ mˈaŋʃɔ tʃʰˈaɽa,without pork; the variant is the commoner West Bengali spelling,,2,bn-agent-v1;ipa=espeak
+dietary-needs.no-pork,শুকরের মাংস ছাড়া,শুয়োরের মাংস ছাড়া,śukarera māṁsa chāṛā,ʃˈukɔɾˌeɾ mˈaŋʃɔ tʃʰˈaɽa,without pork,the variant is the commoner West Bengali spelling,2,bn-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,এটা হালাল কি?,,eṭā hālāla ki?,ˌeʈa hˈalal ki,,,2,bn-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,এতে শুকরের চর্বি দেওয়া আছে কি?,,ete śukarera carbi deoẏā āche ki?,ˈete ʃˈukɔɾˌeɾ tʃˈoɾbi dˈeoˌa ˈatʃʰe ki,has pork fat,lard -- been put in this?,2,bn-allergen-v1;ipa=espeak
 dietary-needs.no-sesame,তিল ছাড়া,,tila chāṛā,tˈil tʃʰˈaɽa,,,2,"Samsad Bengali-English Dictionary (DSAL), তিল tila 'sesame, til'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"

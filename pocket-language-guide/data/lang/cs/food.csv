@@ -27,7 +27,7 @@ food-ordering.to-go-please,"S sebou, prosím",,"s sˈeboʊ, prˈosiːm",,,2,cs-a
 food-ordering.check-please,"Účet, prosím",,"ˈuːtʃet, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
 food-ordering.does-it-contain,Obsahuje to {}?,,ˈopsahˌuje tˈo {},,,2,cs-agent-v1;ipa=espeak
 food-ordering.is-this-vegetarian,Je to vegetariánské?,,je tˈo vˈeɡetˌariˌaːnskeː,,,2,cs-agent-v1;ipa=espeak
-food-ordering.what-do-you-recommend,Co doporučujete?,,tsˈo dˈoporˌutʃujˌete,"present tense, formal vy",avoids the gendered past-tense form of doporučit,2,cs-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Co doporučujete?,,tsˈo dˈoporˌutʃujˌete,what do you recommend?,"present tense, formal vy; avoids the gendered past-tense form of doporučit",2,cs-agent-v1;ipa=espeak
 food-ordering.water-please,"Vodu, prosím",,"vˈodu, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Může to jíst vegetarián?,,mˈuːʒe tˈo jˈiːst vˈeɡetˌariaːn,,,2,cs-agent-v1;ipa=espeak
 dietary-needs.no-onion-garlic,Bez cibule a česneku,,bˈestsibˌule a tʃˈesneku,,,2,no-allium-v1;in-pack-frame;cs.wikipedia Cibule kuchynska + Cesnek kuchynsky;ipa=espeak

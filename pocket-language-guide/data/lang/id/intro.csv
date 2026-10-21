@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 introductions.my-name-is,Nama saya {},,nˈama sˈaja {},,,2,id-agent-v1;ipa=espeak
 introductions.nice-to-meet-you,Senang berkenalan,,sˈɛnaŋ bərkənˈalan,,,2,id-agent-v1;ipa=espeak
-introductions.what-is-your-name,Namanya siapa?,Nama Anda siapa?,namˈaɲa siˈapa,"-nya = polite ""your""",,2,id-agent-v1;ipa=espeak
+introductions.what-is-your-name,Namanya siapa?,Nama Anda siapa?,namˈaɲa siˈapa,[your] name [is] who?,"-nya = polite ""your""",2,id-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Kami bepergian bersama,,kˈami bəpərɡˈian bərsˈama,,,2,id-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Ini teman saya,,ˈini tˈɛman sˈaja,,,2,id-agent-v1;ipa=espeak
 introductions.i-am-from,Saya dari {},,sˈaja dˌari {},,,2,id-agent-v1;ipa=espeak
@@ -27,5 +27,5 @@ family-intros.this-is-my-mother,Ini ibu saya,,ˈini ˈibu sˈaja,,,2,id-agent-v1
 family-intros.this-is-my-father,Ini ayah saya,,ˈini ˈajah sˈaja,,,2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-brother,Ini saudara laki-laki saya,,ˈini saʊdˈara lˈakilaki sˈaja,this is my brother,"saudara (age-neutral sibling) + laki-laki, matching this pack's own anak laki-laki/anak perempuan pattern rather than the age-graded kakak/adik",2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Ini saudara perempuan saya,,ˈini saʊdˈara pərəmpˈuan sˈaja,see this-is-my-brother,,2,id-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈaja,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rekan bisnis, mitra)",,2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈaja,this [is] my partner,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rekan bisnis, mitra)",2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-colleague,Ini rekan kerja saya,,ˈini rˈɛkan kˈɛrdʒa sˈaja,,,2,id-agent-v1;ipa=espeak

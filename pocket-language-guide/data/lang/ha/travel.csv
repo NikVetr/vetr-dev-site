@@ -14,7 +14,7 @@ directions.can-you-show-me-the-way,Za a iya nuna mini hanya?,,za a ija nuna mini
 directions.north,arewa,,arewa,,,2,ha-agent-v1;ipa=ha-g2p
 directions.south,kudu,,kudu,,,2,ha-agent-v1;ipa=ha-g2p
 directions.east,gabas,,ɡabas,,,2,ha-agent-v1;ipa=ha-g2p
-directions.west,yamma,,jamma,the same word as 'evening',west is the direction of sunset,2,ha-agent-v1;ipa=ha-g2p
+directions.west,yamma,,jamma,west,the same word as 'evening'; west is the direction of sunset,2,ha-agent-v1;ipa=ha-g2p
 quick-directions.go-straight,Miƙe gaba,,mikʼe ɡaba,,,2,ha-agent-v1;ipa=ha-g2p
 quick-directions.turn-left,Juya hagu,,dʒuja haɡu,,,2,ha-agent-v1;ipa=ha-g2p
 quick-directions.turn-right,Juya dama,,dʒuja dama,,,2,ha-agent-v1;ipa=ha-g2p
@@ -110,7 +110,7 @@ common-signs.no-photography,Kada a ɗauki hoto,,kada a ɗauki hoto,,,2,ha-agent-
 common-signs.do-not-touch,Kada a taɓa,,kada a taba,,,2,ha-agent-v1;ipa=ha-g2p
 common-signs.temporarily-closed,An rufe na wani lokaci,,an rufe na wani lokatʃi,,,2,ha-agent-v1;ipa=ha-g2p
 common-signs.open-operating,yana buɗe,,jana buɗe,,,2,ha-agent-v1;fix=Bargery (maguzawa.dyndns.ws) buɗe IV (adv. of state to buɗe -- idonsa yina b. his eye is open) beside rufe IV (k'ofa tana r. the door is shut);was=yana aiki (aiki work -- it is working);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=ha-g2p
-common-signs.closed,rufe,,rufe,"bare sign form, distinct from the fuller a rufe phrase",,2,ha-agent-v1;ipa=ha-g2p
+common-signs.closed,rufe,,rufe,closed,"bare sign form, distinct from the fuller a rufe phrase",2,ha-agent-v1;ipa=ha-g2p
 common-signs.stopped-stop,Tsaya,,tsʼaja,,,2,ha-agent-v1;ipa=ha-g2p
 taxi.please-get-me-there-in-time-for-the-shinkansen,Don Allah ka kai ni can a kan lokaci domin in kama Shinkansen,,don allah ka kai ni tʃan a kan lokatʃi domin in kama ʃinkansen,,,2,ha-notes-v1;ipa=ha-g2p
 taxi.could-you-make-it-colder,Za a iya ƙara AC?,,za a ija kʼara eːsiː,will one be able to increase the AC?,"the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p+loan
@@ -122,9 +122,9 @@ common-signs.pork-code,Alamomin naman alade,,alamomin naman alade,,,2,ha-notes-v
 transit-rides.where-do-i-pay-the-fare,Ina ake biyan kuɗin sufuri?,,ina ake bijan kuɗin sufuri,where does one pay the fare?,,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
 air-travel.where-is-check-in,Ina wurin shiga yake?,,ina wurin ʃiɡa jake,reuses hotel-words.check-in's shiga (entering),,2,ha-agent-v1;in-pack-neighbour=hotel-words.check-in;ipa=ha-g2p
 air-travel.which-gate,Wace ƙofa?,,watʃe kʼofa,reuses taxi.we-need-the-east-gate-not-the-south-gate's ƙofa (gate),,2,ha-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=ha-g2p
-air-travel.where-is-the-security-check,Ina wurin bincike na tsaro yake?,,ina wurin bintʃike na tsʼaro jake,place of security check; tsaro attested in ha.wikipedia.org's Filin jirgin sama article,,2,ha-agent-v1;src=ha.wikipedia.org Filin_jirgin_sama;ipa=ha-g2p
+air-travel.where-is-the-security-check,Ina wurin bincike na tsaro yake?,,ina wurin bintʃike na tsʼaro jake,where is [the] place of security check?,tsaro attested in ha.wikipedia.org's Filin jirgin sama article,2,ha-agent-v1;src=ha.wikipedia.org Filin_jirgin_sama;ipa=ha-g2p
 air-travel.my-luggage-did-not-arrive,Kayana bai zo ba,,kajana bai zo ba,reuses kayana from border-customs.where-do-i-collect-my-baggage,,2,ha-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=ha-g2p
-air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,seat near the window; taga reused from taxi.may-i-open-the-window,,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
+air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,I want [a] seat near [the] window,taga reused from taxi.may-i-open-the-window,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
 air-travel.i-would-like-an-aisle-seat,Ina son wurin zama kusa da hanya,,ina son wurin zama kusa da hanja,"seat near the aisle/path, parallel to the window-seat row",,2,ha-agent-v1;ipa=ha-g2p
 hitchhiking.can-you-give-me-a-ride,Za a iya ɗauke ni?,,za a ija ɗauke ni,will one be able to take me?,"the impersonal a after za in place of ka or ki, as in board-answers.can-you-walk",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=board-answers.can-you-walk;kai-ke-avoided;row-corrections-v3;ipa=ha-g2p
 hitchhiking.where-are-you-going,Ina za a?,,ina za a,where is one to go?,"Bargery's impersonal a after za, in place of ka or ki",2,ha-agent-v1;fix=Bargery a (impers. pron.) II.1 used after za without a verb: ina za a? where is one to go?;kai-ke-avoided;row-corrections-v2;ipa=ha-g2p

@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,हे भगवान!,,he bhagvān!,hˈeː bʰˌəɡʋˈaːn,O God,mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
 profanity.damn,धत् तेरे की!,,dhat tere kī!,dʰˈʌt tˈeːɾeː ki,an oath of annoyance,mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
-profanity.expletive,साला!,,sālā!,sˈaːlaː,coarse; an insult if aimed at anyone,,1,profanity-v1;src=McGregor-OHED;ipa=espeak
-profanity.intensifier,कमबख्त,,kambakht,kˌəməbˈʌkʰt,"before a noun: wretched, damn -; mild",,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.expletive,साला!,,sālā!,sˈaːlaː,brother-in-law,coarse; an insult if aimed at anyone,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.intensifier,कमबख्त,,kambakht,kˌəməbˈʌkʰt,wretched,before a noun: damn -; mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
 profanity.frustration,यह बकवास है,,yah bakvās hai,jˌəh bˌəkʋˈaːs hɛː,this is rubbish,mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
 profanity.thats-rude,यह बदतमीज़ी है,,yah badtamīzī hai,jˌəh bˌədətmˈiːzi hɛː,this is bad manners,,1,profanity-v1;src=McGregor-OHED;ipa=espeak
 profanity.excuse-my-language,अपशब्दों के लिए माफ़ कीजिए,,apaśabdoṁ ke lie māf kījie,ˌʌpəʃˈʌbdõ keː lˈɪeː mˈaːf kˈiːɟɪˌeː,forgive me for the foul words,,1,profanity-v1;src=McGregor-OHED;ipa=espeak

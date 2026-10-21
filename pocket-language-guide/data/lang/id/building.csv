@@ -19,7 +19,7 @@ accessibility.wheelchair-width,Kursi roda saya lebar {} cm,,kˈursi rˈoda sˈaj
 accessibility.hard-of-hearing,Pendengaran saya kurang,Saya sulit mendengar,pəndəŋˈaran sˈaja kˈuraŋ,,,2,id-agent-v1;ipa=espeak
 accessibility.speak-louder,Tolong bicara lebih keras,,tˈoloŋ bitʃˈara lˈɛbih kˈɛras,,,2,id-agent-v1;ipa=espeak
 accessibility.visually-impaired,Saya tunanetra,Penglihatan saya terbatas,sˈaja tˌunanˈɛtra,,,2,id-agent-v1;ipa=espeak
-accessibility.take-your-arm,Boleh saya pegang lengannya?,,bˈoləh sˈaja pˈɛɡaŋ ləŋˈanɲa,"-nya = polite ""your""",,2,id-agent-v1;ipa=espeak
+accessibility.take-your-arm,Boleh saya pegang lengannya?,,bˈoləh sˈaja pˈɛɡaŋ ləŋˈanɲa,may I hold [your] arm?,"-nya = polite ""your""",2,id-agent-v1;ipa=espeak
 accessibility.guide-dog,Ini anjing pemandu saya,,ˈini ˈandʒiŋ pəmˈandu sˈaja,,,2,id-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Ini pintu masuk yang benar?,,ˈini pˈintu mˈasuk jaŋ bənˈar,,,2,id-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,Ada Wi-Fi?,,ˈada wˈifi,,,2,id-agent-v1;ipa=espeak
@@ -42,7 +42,7 @@ toilets.out-of-order,Rusak,Sedang dalam perbaikan,rˈusak,,,2,id-agent-v1;ipa=es
 toilets.mens-toilet,Toilet pria,Laki-laki,toˈilət prˈia,,,2,id-agent-v1;ipa=espeak
 toilets.womens-toilet,Toilet wanita,Perempuan,toˈilət wanˈita,,,2,id-agent-v1;ipa=espeak
 toilets.drinking-water,Air siap minum,Air minum,ˈaɪr sˈiap mˈinum,,,2,id-agent-v1;ipa=espeak
-toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,ˈaɪr tˈidak lˈajak mˈinum,usually only a crossed-tap sign,,1,id-agent-v1;ipa=espeak
+toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,ˈaɪr tˈidak lˈajak mˈinum,water not fit to drink,usually only a crossed-tap sign,1,id-agent-v1;ipa=espeak
 toilets.accessible-toilet,Toilet disabilitas,Toilet difabel,toˈilət dˌisabilˈitas,,,2,id-agent-v1;ipa=espeak
 toilets.where-can-i-wash-my-hands,Di mana bisa cuci tangan?,,di mˈana bˈisa tʃˈutʃi tˈaŋan,,,2,id-agent-v1;ipa=espeak
 toilets.can-i-flush-the-paper,Tisunya boleh dibuang ke kloset?,,tisˈuɲa bˈoləh dibˈuaŋ kə klˈosət,,,2,id-agent-v1;ipa=espeak

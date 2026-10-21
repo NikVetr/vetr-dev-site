@@ -9,7 +9,7 @@ social-basics.you-are-welcome,خواهش می‌کنم,,khāhesh mikonam,xɑheʃ
 social-basics.excuse-me-sorry,ببخشید,,bebakhshid,bebaxʃid,,,2,fa-agent-v1;ipa=espeak
 social-basics.sorry,متأسفم,ببخشید,mota’assefam,moteaʔssefam,,,2,fa-agent-v1;ipa=espeak
 social-basics.no-problem,مشکلی نیست,,moshkeli nist,moʃkeli nist,,,2,fa-agent-v1;ipa=espeak
-social-basics.i-do-not-know,نمی‌دانم,نمی‌دونم,nemidānam,nemidɑnam,spoken nemidunam,,2,fa-agent-v1;ipa=espeak
+social-basics.i-do-not-know,نمی‌دانم,نمی‌دونم,nemidānam,nemidɑnam,I do not know,spoken nemidunam,2,fa-agent-v1;ipa=espeak
 social-basics.good-night,شب بخیر,,shab bekheyr,ʃab bexejr,,,2,fa-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,باشه / خوبم,,bāshe / khubam,bɑʃe / xubam,okay / I am fine,,2,fa-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,من {target} صحبت نمی‌کنم,,man {target} sohbat nemikonam,man {target} sohbat nemikonam,the language name is a bare adverbial in Persian,"no preposition and no ezāfe, so one frame fits every fill",2,fa-agent-v1;ipa=espeak
@@ -17,7 +17,7 @@ communication.i-speak-only-a-little-of-this,من فقط کمی {target} صحبت
 communication.do-you-speak-english,شما {source} صحبت می‌کنید؟,,shomā {source} sohbat mikonid?,ʃomɑ {source} sohbat mikonid,,,2,fa-agent-v1;ipa=espeak
 communication.please-speak-more-slowly,لطفاً آهسته‌تر صحبت کنید,,lotfan āheste-tar sohbat konid,lotfan ɑhestetar sohbat konid,,,2,fa-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,نمی‌فهمم چه می‌گویید,,nemifahmam che miguyid,nemifahmam tʃe miɡuid,,,2,fa-agent-v1;ipa=espeak
-communication.i-cannot-read-understand,این را نمی‌توانم بخوانم,,in rā nemitavānam bekhānam,in rɑ nemitavɑnam bexɑnam,"said while pointing at a sign, so it names no language",,2,fa-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,این را نمی‌توانم بخوانم,,in rā nemitavānam bekhānam,in rɑ nemitavɑnam bexɑnam,I cannot read this,"said while pointing at a sign, so it names no language",2,fa-agent-v1;ipa=espeak
 communication.please-say-it-again,لطفاً دوباره بگویید,,lotfan dobāre beguyid,lotfan dobɑre beɡuid,,,2,fa-agent-v1;ipa=espeak
 communication.please-write-it-down,لطفاً بنویسید,,lotfan benevisid,lotfan benevisid,,,2,fa-agent-v1;ipa=espeak
 communication.please-wait-a-moment,لطفاً یک لحظه صبر کنید,,lotfan yek lahze sabr konid,lotfan jek lahze sabr konid,,,2,fa-agent-v1;ipa=espeak
@@ -28,7 +28,7 @@ communication.i-do-not-understand,نمی‌فهمم,,nemifahmam,nemifahmam,,,2,f
 communication.i-cannot-read-it,نمی‌توانم بخوانم,,nemitavānam bekhānam,nemitavɑnam bexɑnam,,,2,fa-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,بفرمایید,,befarmāyid,befarmɑid,go ahead' and 'here you are' and 'please sit,one word for all of them,2,fa-agent-v1;ipa=espeak
 quick-responses.yes-right,بله,,bale,bale,,,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) بله (Yes. Yea. -- the form بله is more common in ordinary conversation than بلی);rule=one-reading-on-a-board (درست, right, was the gloss of the range);row-corrections-v7;ipa=espeak"
-quick-responses.no-not,نه,خیر,na,na,kheyr is the formal no,,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) نه 1 (No -- Opposed to بله) and خیر (No. Nay. Often نه خیر);rule=one-reading-on-a-board (خیر, the formal no, is a second wording and moves to text_alt);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,نه,خیر,na,na,no,kheyr is the formal no,2,"fa-agent-v1;fix=Hayyim New Persian-English Dictionary 1934 (DSAL) نه 1 (No -- Opposed to بله) and خیر (No. Nay. Often نه خیر);rule=one-reading-on-a-board (خیر, the formal no, is a second wording and moves to text_alt);row-corrections-v7;ipa=espeak"
 quick-responses.okay-can,می‌شود,,mishavad,miʃavad,it is possible,,2,fa-agent-v1;ipa=espeak
 quick-responses.cannot-not-allowed,ممنوع است,,mamnu‘ ast,mamnuʔ ast,it is forbidden,,2,fa-agent-v1;ipa=espeak
 quick-responses.works-okay,کار می‌کند,,kār mikonad,kɑr mikonad,,,2,fa-agent-v1;ipa=espeak
@@ -128,7 +128,7 @@ kind-words.it-is-beautiful-here,اینجا خیلی زیبا است.,,injā khey
 kind-words.i-like-it-very-much,خیلی خوشم آمد.,,kheyli khosham āmad.,xejli xoʃam ɑmad,"lit. ""I became very pleased""","the idiomatic way to say ""I like it""",2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
 kind-words.i-had-a-wonderful-time,وقت خیلی خوبی داشتم.,,vaqt kheyli khubi dāshtam.,vaqt xejli xubi dɑʃtam,,,2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-everything,برای همه چیز متشکرم.,,barāye hame chiz motashakkeram.,barɑje hame tʃiz moteʃakkeram,,,2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-your-hospitality,برای مهمان‌نوازی‌تان متشکرم.,,barāye mehmān-navāzi-tān motashakkeram.,barɑje mehmɑnnavɑzitɑn moteʃakkeram,"mehmān-navāzi-tān; the two ZWNJs are ordinary Persian orthography for a compound plus an enclitic, not decoration",add-a-language.md warns clean() drops U+200C if it is ever re-cleaned,2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,برای مهمان‌نوازی‌تان متشکرم.,,barāye mehmān-navāzi-tān motashakkeram.,barɑje mehmɑnnavɑzitɑn moteʃakkeram,thank you for your hospitality,"mehmān-navāzi-tān; the two ZWNJs are ordinary Persian orthography for a compound plus an enclitic, not decoration; add-a-language.md warns clean() drops U+200C if it is ever re-cleaned",2,"Aryanpur Kashani, M., The Aryanpur Progressive Persian-English Dictionary;fa-kind-words-v1;ipa=espeak"
 board-answers.my-name-is-blank,اسمِ من {} است,,esm-e man {} ast,esme man {} ast,,,2,fa-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
 board-answers.i-would-rather-not-say,ترجیح می‌دهم نگویم,,tarjih midaham naguyam,tardʒih midahom naɡujam,,,2,"fa-agent-v1;src=Amid, H., Farhang-e Fārsi-ye ‘Amid (rev. Qorbānzāde), read on vajehyab.com s.v. ترجیح 1 (برتری دادن);rule=no-grammatical-gender;answers-audit-v1;ipa=espeak"
 board-answers.what-happened,چه شده؟,,che shode?,tʃe ʃode,,,2,"fa-agent-v1;src=Amid, H., Farhang-e Fārsi-ye ‘Amid (rev. Qorbānzāde), read on vajehyab.com s.v. شدن (šodan) 1 (انجام یافتن؛ گشتن);answers-audit-v1;ipa=espeak"

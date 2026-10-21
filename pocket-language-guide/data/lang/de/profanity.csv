@@ -3,7 +3,7 @@ profanity.oh-my-god,Mein Gott!,,maɪn ɡˈɔt,my God,mild,1,profanity-v1;src=Dud
 profanity.damn,Verdammt!,,fɛɾdˈamt,damned,mild oath,1,profanity-v1;src=Duden;ipa=espeak
 profanity.expletive,Scheiße!,,ʃˈaɪsə,shit,coarse but everyday,1,profanity-v1;src=Duden;ipa=espeak
 profanity.strong-expletive,Verdammte Scheiße!,,fɛɾdˈamtə ʃˈaɪsə,damned shit,German stacks to escalate,1,profanity-v1;src=Duden;ipa=espeak
-profanity.intensifier,Scheiß-,,ʃˈaɪs,noun prefix: damn -; coarse,,1,profanity-v1;src=Duden;ipa=espeak
+profanity.intensifier,Scheiß-,,ʃˈaɪs,shit-,noun prefix: damn -; coarse,1,profanity-v1;src=Duden;ipa=espeak
 profanity.frustration,Das ist Mist.,,das ɪst mˈɪst,that is manure,mild,1,profanity-v1;src=Duden;ipa=espeak
 profanity.thats-rude,Das ist ordinär.,,das ɪst ˌɔɾdiːnˈɛːɾ,that is coarse,,1,profanity-v1;src=Duden;ipa=espeak
 profanity.excuse-my-language,Verzeihen Sie den Ausdruck.,,fɛɾtsˈaɪən ziː deːn ˈaʊsdɾˌʊk,forgive the expression,,1,profanity-v1;src=Duden;ipa=espeak

@@ -29,7 +29,7 @@ medical-conditions.i-have-epilepsy,Jag har epilepsi.,,jɑːɡ hɑːr ˈeːpiːl�
 medical-conditions.my-blood-sugar-is-low,Mitt blodsocker är lågt.,,mɪt blˈuːdsɔkːər ɛːr lˈoːɡt,,,2,sv-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Jag behöver min inhalator.,,jɑːɡ bəhˈøːvər mɪn ˈɪnhalˌatɔr,,,2,sv-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Jag är gravid.,,jɑːɡ ɛːr ɡrˈɑːviːd,,,2,sv-agent-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,Jag har en adrenalinpenna med mig.,,jɑːɡ hɑːr ɛn ˈadrənˌalɪnpˌɛna meːd mˈɛj,"'adrenalinpenna' is the ordinary Swedish word for the auto-injector, not the brand EpiPen",,2,sv-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Jag har en adrenalinpenna med mig.,,jɑːɡ hɑːr ɛn ˈadrənˌalɪnpˌɛna meːd mˈɛj,I have an adrenaline pen with me.,"'adrenalinpenna' is the ordinary Swedish word for the auto-injector, not the brand EpiPen",2,sv-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Jag tar medicin mot {}.,,jɑːɡ tˈɑːr mˌeːdiːsˈiːn muːt {},,,2,sv-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Jag tar blodförtunnande medicin.,,jɑːɡ tˈɑːr blˈuːdfœtɵnˌandə mˌeːdiːsˈiːn,,,2,sv-agent-v1;ipa=espeak
 medical-conditions.medicine-allergy,Läkemedelsallergi: {},,lˈɛːkəmˌeːdəlsˌalərjˌiː {},,,2,sv-agent-v1;ipa=espeak

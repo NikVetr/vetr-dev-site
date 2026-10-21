@@ -1,17 +1,17 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 social-basics.hello,నమస్కారం,,namaskāraṁ,namaskaːram,,,2,te-agent-v1;ipa=espeak
 social-basics.hello-polite,నమస్కారమండీ,,namaskāramaṁḍī,namaskaːramaɳɖiː,hello,the -aṇḍī suffix is the polite address particle,2,te-agent-v1;ipa=espeak
-social-basics.good-morning,శుభోదయం,నమస్కారం,śubhōdayaṁ,ʃubʰoːdajam,auspicious dawn; a written and broadcast greeting,namaskāraṁ serves at any hour,2,te-agent-v1;ipa=espeak
+social-basics.good-morning,శుభోదయం,నమస్కారం,śubhōdayaṁ,ʃubʰoːdajam,auspicious dawn,a written and broadcast greeting; namaskāraṁ serves at any hour,2,te-agent-v1;ipa=espeak
 social-basics.good-evening,శుభ సాయంత్రం,నమస్కారం,śubha sāyaṁtraṁ,ʃubʰa saːjantram,good evening,formal; namaskāraṁ is what is said,2,te-agent-v1;ipa=espeak
 social-basics.goodbye,వెళ్ళి వస్తాను,సెలవు,veḷḷi vastānu,ʋeɭɭi ʋastaːnu,I will go and come back,said by the one leaving; a bare 'I go' is inauspicious,2,te-agent-v1;ipa=espeak
 social-basics.thank-you,ధన్యవాదాలు,కృతజ్ఞతలు,dhanyavādālu,dʰanjaʋaːdaːlu,,,2,te-agent-v1;ipa=espeak
-social-basics.you-are-welcome,పరవాలేదు,,paravālēdu,paraʋaːleːdu,it is nothing; Telugu has no set reply to thanks,,2,te-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,ఏమండీ,క్షమించండి,ēmaṁḍī,eːmaɳɖiː,ēmaṇḍī gets attention; kṣamiṁcaṇḍi apologises,,2,te-agent-v1;ipa=espeak
+social-basics.you-are-welcome,పరవాలేదు,,paravālēdu,paraʋaːleːdu,it is nothing,Telugu has no set reply to thanks,2,te-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,ఏమండీ,క్షమించండి,ēmaṁḍī,eːmaɳɖiː,excuse me,ēmaṇḍī gets attention; kṣamiṁcaṇḍi apologises,2,te-agent-v1;ipa=espeak
 social-basics.sorry,క్షమించండి,సారీ,kṣamiṁcaṁḍi,kʂamiɲtʃaɳɖi,forgive me,,2,te-agent-v1;ipa=espeak
 social-basics.no-problem,సమస్య లేదు,పరవాలేదు,samasya lēdu,samasja leːdu,,,2,te-agent-v1;ipa=espeak
 social-basics.i-do-not-know,నాకు తెలియదు,,nāku teliyadu,naːku telijadu,,,2,te-agent-v1;ipa=espeak
 social-basics.good-night,శుభ రాత్రి,,śubha rātri,ʃubʰa raːtri,,,2,te-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,సరే / నేను బాగున్నాను,,sarē / nēnu bāgunnānu,sareː / neːnu baːɡunnaːnu,sarē = all right; bāgunnānu = I am well,,2,te-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,సరే / నేను బాగున్నాను,,sarē / nēnu bāgunnānu,sareː / neːnu baːɡunnaːnu,all right / I am well,,2,te-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,నాకు {target} రాదు,,nāku {target} rādu,naːku {target} raːdu,{target} does not come to me,the Telugu idiom for not knowing a language,2,te-agent-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,నాకు {target} కొంచెం మాత్రమే వస్తుంది,,nāku {target} koṁceṁ mātramē vastuṁdi,naːku {target} koɲtʃem maːtrameː ʋastundi,,,2,te-agent-v1;ipa=espeak
 communication.do-you-speak-english,మీకు {source} వచ్చా?,,mīku {source} vaccā?,miːku {source} ʋatʃtʃaː,,,2,te-agent-v1;ipa=espeak
@@ -29,7 +29,7 @@ communication.i-cannot-read-it,నేను ఇది చదవలేను,,nē
 communication.please-write-it-in-roman-letters,ఇంగ్లీషు అక్షరాలలో రాయండి,,iṁglīṣu akṣarālalō rāyaṁḍi,iŋɡliːʂu akʂaraːlaloː raːjaɳɖi,in English letters,which is what Telugu calls the Roman alphabet,2,te-agent-v1;ipa=espeak
 quick-responses.please-go-ahead,ఇదిగో / తప్పకుండా,,idigō / tappakuṁḍā,idiɡoː / tappakuɳɖaː,here you are / please do,,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary p. 60 ఇదిగో (here it is!, here is the rent, sir!) and p. 226 తప్పక, తప్పకుండా (without fail, undoubtedly);was=చెప్పండి;open-questions-v1;ipa=espeak"
 quick-responses.yes-right,అవును,,avunu,aʋunu,,,2,"te-agent-v1;fix=Brown Telugu-English Dictionary 1903 (DSAL) అవును (or ఔను -- It is so, yes);rule=one-reading-on-a-board (సరే, all right, was the okay word, not the yes);row-corrections-v7;ipa=espeak"
-quick-responses.no-not,కాదు,,kādu,kaːdu,kādu denies identity; lēdu denies existence,,2,"te-agent-v1;fix=Brown Telugu-English Dictionary 1903 (DSAL) కాదు (It is not (so) ... It is opposed to అవును, i.e., yes -- అవునా కాదా yes or no?);rule=one-reading-on-a-board (లేదు, there is not, is the other negation, the literal keeps the difference);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,కాదు,,kādu,kaːdu,no,kādu denies identity; lēdu denies existence,2,"te-agent-v1;fix=Brown Telugu-English Dictionary 1903 (DSAL) కాదు (It is not (so) ... It is opposed to అవును, i.e., yes -- అవునా కాదా yes or no?);rule=one-reading-on-a-board (లేదు, there is not, is the other negation, the literal keeps the difference);row-corrections-v7;ipa=espeak"
 quick-responses.okay-can,సరే,,sarē,sareː,,,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) సరే (in reply to a demand or request yes!, all right!);rule=one-reading-on-a-board (అవుతుంది, it will happen, was the can gloss and is quick-responses.can-possible's own row);row-corrections-v7;ipa=espeak"
 quick-responses.cannot-not-allowed,కూడదు,,kūḍadu,kuːɖadu,kūḍadu = it must not be done,,2,"te-agent-v1;fix=Gwynn Telugu-English Dictionary (DSAL) కూడదు 1 (impersonal use following an infinitive must not, should not);rule=one-reading-on-a-board (both halves were prohibitions, కూడదు, must not, is kept as the first and as what the board showed, and అనుమతి లేదు, there is no permission, is dropped);row-corrections-v7;ipa=espeak"
 quick-responses.works-okay,పని చేస్తుంది,,pani cēstuṁdi,pani tʃeːstundi,,,2,te-agent-v1;ipa=espeak

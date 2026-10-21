@@ -6,7 +6,7 @@ payment-receipt.a-receipt-please,رسید دیجیے,,rasīd dījiye,ɾəsˈiːd
 payment-receipt.please-write-the-number,نمبر لکھ دیجیے,,nambar likh dījiye,nˈʌmbəɾ lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,کُل کتنا ہوا؟,ٹوٹل کتنا ہوا؟,kul kitnā huā?,kˈʊl kˈɪtnaː hˈuːaː,how much total became?,کُل is pointed here because unpointed کل is also 'tomorrow / yesterday',2,ur-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,کیا الگ الگ بل بن سکتا ہے؟,,kyā alag alag bil ban saktā hai?,kjˈaː ˈaləɡ ˈaləɡ bˈʌl bˈʌn sˈʌktˌaː hɛ,,,2,ur-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,کیا ٹیکس شامل ہے؟,,kyā ṭaiks shāmil hai?,kjˈaː ʈˈeːks ʃˈaːmɪl hɛ,Pakistani shelf prices usually include GST; restaurants add it on the bill,,2,ur-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,کیا ٹیکس شامل ہے؟,,kyā ṭaiks shāmil hai?,kjˈaː ʈˈeːks ʃˈaːmɪl hɛ,is tax included?,Pakistani shelf prices usually include GST; restaurants add it on the bill,2,ur-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,میرا کارڈ نہیں چلا,,merā kārḍ nahīñ chalā,mˈeːɾaː kˈaːɾɖ nahˈĩː cˈʌlaː,,,2,ur-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,لگتا ہے بل میں کوئی غلطی ہے,,lagtā hai bil meñ ko’ī ghaltī hai,lˈʌɡtˌaː hɛ bˈʌl mˈẽ kˈoːi ɣˈʌltˌiː hɛ,it seems there is a mistake in the bill,"hedged, not an accusation",2,ur-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,میں نے پیسے دے دیے ہیں,,maiñ ne paise de diye haiñ,mˈẽ neː pˈeːseː dˈeː djˈeː hẽ,,,2,ur-agent-v1;ipa=espeak

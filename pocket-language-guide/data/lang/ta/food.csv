@@ -12,7 +12,7 @@ dietary-needs.i-do-not-eat,நான் {} சாப்பிட மாட்ட
 dietary-needs.i-am-allergic-to,எனக்கு {} ஒவ்வாமை,,eṉakku {} ovvāmai,enʌkkɯ {} ovvaːmaɪ,,,2,ta-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,இதில் மீன் சாறு உள்ளதா?,,itil mīṉ cāṟu uḷḷatā?,idil miːn saːrɯ uɭɭʌdaː,,,2,ta-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,இதில் பன்றி இறைச்சிச் சாறு உள்ளதா?,,itil paṉṟi iṟaiccic cāṟu uḷḷatā?,idil pʌnri iraɪtʃːitʃːaːrɯ uɭɭʌdaː,,,2,ta-agent-v1;ipa=espeak
-dietary-needs.i-have-a-severe-allergy-to,எனக்கு {} கடுமையான ஒவ்வாமை — சிறிதளவும் ஆபத்து,,eṉakku {} kaṭumaiyāṉa ovvāmai — ciṟitaḷavum āpattu,enʌkkɯ {} kʌɖɯmaɪjaːnʌ ovvaːmaɪ siridʌɭʌvɯm aːbʌttɯ,severe allergy; even a trace is dangerous,,2,ta-agent-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,எனக்கு {} கடுமையான ஒவ்வாமை — சிறிதளவும் ஆபத்து,,eṉakku {} kaṭumaiyāṉa ovvāmai — ciṟitaḷavum āpattu,enʌkkɯ {} kʌɖɯmaɪjaːnʌ ovvaːmaɪ siridʌɭʌvɯm aːbʌttɯ,to me {} [is a] severe allergy — even a little is dangerous,,2,ta-agent-v1;ipa=espeak
 food-ordering.table-for-two,இரண்டு பேருக்கு மேசை,,iraṇṭu pērukku mēcai,iɾʌɳɖɯ peːɾɯkkɯ meːsaɪ,,,2,ta-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,மேசை காலியாக உள்ளதா?,,mēcai kāliyāka uḷḷatā?,meːsaɪ kaːlijaːɡʌ uɭɭʌdaː,,,2,ta-agent-v1;ipa=espeak
 food-ordering.menu-please,உணவுப் பட்டியல் கொடுங்கள்,மெனு கொடுங்கள்,uṇavup paṭṭiyal koṭuṅkaḷ,uɳʌvɯp pʌʈʈijʌl koɖɯŋɡʌɭ,,,2,ta-agent-v1;ipa=espeak

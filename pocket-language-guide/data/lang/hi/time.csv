@@ -11,7 +11,7 @@ time-scheduling.what-time-does-it-close,कितने बजे बंद ह�
 time-scheduling.how-long-does-it-take,कितना समय लगेगा?,,kitnā samay lagegā?,kˈɪtnˌaː sˈʌmˌɛj ləɡˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
 time-words.today,आज,,āj,ˈaːɟ,,,2,hi-agent-v1;ipa=espeak
 time-words.tomorrow,कल,,kal,kˈʌl,tomorrow,also means yesterday,2,hi-agent-v1;ipa=espeak
-time-words.yesterday,कल,,kal,kˈʌl,same word as tomorrow,,2,hi-agent-v1;ipa=espeak
+time-words.yesterday,कल,,kal,kˈʌl,yesterday,same word as tomorrow,2,hi-agent-v1;ipa=espeak
 time-words.this-week,इस हफ़्ते,,is hafte,ˈɪs hˈʌfteː,,,2,hi-agent-v1;ipa=espeak
 time-words.next-week,अगले हफ़्ते,,agle hafte,ˈʌɡlˌeː hˈʌfteː,,,2,hi-agent-v1;ipa=espeak
 time-words.morning,सुबह,,subah,sˈʊbəh,,,2,hi-agent-v1;ipa=espeak

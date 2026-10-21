@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-social-basics.hello,Szia,,sˈiɑ,informal; use Jó napot with strangers,,2,hu-agent-v1;ipa=espeak
+social-basics.hello,Szia,,sˈiɑ,hi,informal; use Jó napot with strangers,2,hu-agent-v1;ipa=espeak
 social-basics.hello-polite,Jó napot kívánok,Jó napot,jˈoː nˈɑpot kˈiːvaːnok,,,2,hu-agent-v1;ipa=espeak
 social-basics.good-morning,Jó reggelt kívánok,Jó reggelt,jˈoː rˈɛɡɡɛlt kˈiːvaːnok,before about 9 a.m.,,2,hu-agent-v1;ipa=espeak
 social-basics.good-evening,Jó estét kívánok,Jó estét,jˈoː ˈɛʃteːt kˈiːvaːnok,,,2,hu-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ children.playground,Van itt játszótér?,,vˈɑn ˈitt jˈaːtstsoːteːr,,,2,h
 social-basics.politeness-particles,"Udvariasság a thai nyelvben: szinte minden mondat végére tegye oda a khrap szót, ha férfi, és a kha szót, ha nő. Kérdésben a nő a kha szót emelkedő hangmenettel mondja. Az itteni sorokból ez a szó kimaradt, tegye hozzá maga.",,,,,2,hu-agent-v1
 board-answers.there-is-no-wait,"Nincs várakozás, most beléphet",,"nˈintʃ vˈaːrɑkozaːʃ, mˈoʃt bˈɛleːphɛt",,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,"Ezek között nincs, amit mondani szeretnék",,"ˈɛzɛk kˈøzøtt nˈintʃ, ˈɑmit mˈondɑni sˈɛrɛtneːk",,,2,hu-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,Zárva vagyunk,,zˈaːrvɑ vˈɑɟunk,"lit. 'we are closed'; the idiom a Hungarian shop uses about itself, distinct from the bare sign word zárva",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Zárva vagyunk,,zˈaːrvɑ vˈɑɟunk,we are closed,"the idiom a Hungarian shop uses about itself, distinct from the bare sign word zárva",2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,Az nincs,,ˈɑz nˈintʃ,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.card-or-cash,Kártyával vagy készpénzzel?,,kˈaːrcaːvɑl vˈɑɟ kˈeːspeːnzzɛl,,,2,hu-agent-v1;board-answers-v1;ipa=espeak
 board-answers.please-wait,"Egy pillanatot, kérem",,"ˈɛɟ pˈillɑnɑtot, kˈeːrɛm","one moment, please","nominal, no imperative verb; distinct from communication.please-wait-a-moment's várjon",2,hu-agent-v1;board-answers-v1;ipa=espeak

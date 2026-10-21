@@ -10,7 +10,7 @@ weather.rain,,rossë,ulo,ˈulo,,,3,qya-attested-v1;src=PE22/167.2714
 weather.snow,,,hrissë,rˈisse,fall of snow,,3,qya-attested-v1;src=PE17/168.1904;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.wind,,váva,súrë,sˈuːre,,,3,qya-attested-v1;src=LotR/0377.2805;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.storm,,,raumo,rˈawmo,the noise of a storm,,3,qya-attested-v1;src=MC/222.1801;eldamo=q;native=quenya-classical;ipa=appendix-e
-weather.ice,,helca,nixë,nˈikse,frost / ice-flake; helca is the adjective icy,,3,qya-attested-v1;src=WJ/417.0801;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.ice,,helca,nixë,nˈikse,frost,helca is the adjective icy,3,qya-attested-v1;src=WJ/417.0801;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.fog,,,hísië,hˈiːsie,mist / mistiness,,3,qya-attested-v1;src=LotR/0377.4006;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.heat,,,úrë,ˈuːre,heat,,3,qya-attested-v1;src=LotR/1123.0507;eldamo=q;native=quenya-classical;ipa=appendix-e
 weather.cold,,niquë,ringa,rˈiŋɡa,ringa is the adjective,,3,qya-attested-v1;src=MC/222.0101;eldamo=q;native=quenya-classical;ipa=appendix-e

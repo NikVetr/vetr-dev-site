@@ -25,11 +25,11 @@ in-a-building.is-this-the-correct-entrance,हे बरोबर प्रव�
 in-a-building.do-you-have-wi-fi,वाय-फाय आहे का?,,vāya-phāya āhē kā?,vˈaːjpʰaːj ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,वाय-फायचा पासवर्ड काय आहे?,,vāya-phāyacā pāsavarḍa kāya āhē?,vˈaːjpʰaːjcˌaː pˌaːsəvˈʌɾɖ kˈaːj ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 in-a-building.which-floor,कोणता मजला?,,kōṇatā majalā?,kˈoːɳtˌaː mˈʌzlˌaː,,,2,mr-agent-v1;ipa=espeak
-toilets.where-toilet,टॉयलेट कुठे आहे?,,ṭôyalēṭa kuṭhē āhē?,ʈˌɔjlˈeːʈ kˈʊʈʰeː ˈaːheː,everyday spoken word,,2,mr-agent-v1;ipa=espeak
+toilets.where-toilet,टॉयलेट कुठे आहे?,,ṭôyalēṭa kuṭhē āhē?,ʈˌɔjlˈeːʈ kˈʊʈʰeː ˈaːheː,Where is the toilet?,everyday spoken word,2,mr-agent-v1;ipa=espeak
 toilets.where-public-toilet,सार्वजनिक टॉयलेट कुठे आहे?,,sārvajanika ṭôyalēṭa kuṭhē āhē?,sˈaːrvəznɪk ʈˌɔjlˈeːʈ kˈʊʈʰeː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,टॉयलेट वापरू का?,,ṭôyalēṭa vāparū kā?,ʈˌɔjlˈeːʈ vˈaːpɾˌuː kˈaː,,,2,mr-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,हे फक्त ग्राहकांसाठी आहे का?,,hē phakta grāhakāṁsāṭhī āhē kā?,hˈeː pʰˈʌkt ɡɾˌaːhəkãsˈaːʈʰi ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
-toilets.toilet-wc,शौचालय,,śaucālaya,ʃaʊcˈaːlˌɛj,the more formal word actually printed on doors,,2,mr-agent-v1;ipa=espeak
+toilets.toilet-wc,शौचालय,,śaucālaya,ʃaʊcˈaːlˌɛj,toilet,the more formal word actually printed on doors,2,mr-agent-v1;ipa=espeak
 toilets.is-it-free,हे मोफत आहे का?,,hē mōphata āhē kā?,hˈeː mˈoːpʰət ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,नाणे किंवा टोकन लागते का?,,nāṇē kiṁvā ṭōkana lāgatē kā?,nˈaːɳeː kˈĩvaː ʈˈoːkən lˈaːɡtˌeː kˈaː,,,2,mr-agent-v1;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,नळाचे पाणी पिण्यायोग्य आहे का?,,naḷācē pāṇī piṇyāyōgya āhē kā?,nəɭˈaːceː pˈaːɳi pˌɪɳjaːjˈoːɡjə ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
@@ -38,7 +38,7 @@ toilets.may-i-have-the-toilet-key,टॉयलेटची चावी मि�
 toilets.there-is-no-toilet-paper,टॉयलेट पेपर नाही,,ṭôyalēṭa pēpara nāhī,ʈˌɔjlˈeːʈ pˈeːpəɾ nˈaːhi,,,2,mr-agent-v1;ipa=espeak
 toilets.toilet-paper,टॉयलेट पेपर,,ṭôyalēṭa pēpara,ʈˌɔjlˈeːʈ pˈeːpəɾ,,,2,mr-agent-v1;ipa=espeak
 toilets.it-is-out-of-order,हे नादुरुस्त आहे,,hē nādurusta āhē,hˈeː nˌaːdʊɾˈʊst ˈaːheː,,,2,mr-agent-v1;ipa=espeak
-toilets.out-of-order,नादुरुस्त,,nādurusta,nˌaːdʊɾˈʊst,"sign word, distinct from temporarily closed",,2,mr-agent-v1;ipa=espeak
+toilets.out-of-order,नादुरुस्त,,nādurusta,nˌaːdʊɾˈʊst,out of order,"sign word, distinct from temporarily closed",2,mr-agent-v1;ipa=espeak
 toilets.mens-toilet,पुरुषांचे टॉयलेट,,puruṣāṁcē ṭôyalēṭa,pˌʊɾʊʂˈãceː ʈˌɔjlˈeːʈ,,,2,mr-agent-v1;ipa=espeak
 toilets.womens-toilet,स्त्रियांचे टॉयलेट,,striyāṁcē ṭôyalēṭa,stɾɪjˈãceː ʈˌɔjlˈeːʈ,,,2,mr-agent-v1;ipa=espeak
 toilets.drinking-water,पिण्याचे पाणी,,piṇyācē pāṇī,pɪɳjˈaːceː pˈaːɳi,,,2,mr-agent-v1;ipa=espeak

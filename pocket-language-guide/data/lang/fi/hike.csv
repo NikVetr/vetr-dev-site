@@ -18,7 +18,7 @@ weather.how-cold-at-night,Kuinka kylmä yöllä tulee?,,kˈuiŋka kˈylmæ ˈyø
 weather.rain,sade,,sˈade,,,2,fi-agent-v1;ipa=espeak
 weather.snow,lumi,,lˈumi,,,2,fi-agent-v1;ipa=espeak
 weather.wind,tuuli,,tˈuːli,,,2,fi-agent-v1;ipa=espeak
-weather.storm,myrsky,,mˈyrsky,a wind storm; Finland has no tropical-cyclone word to reach for,,2,fi-agent-v1;ipa=espeak
+weather.storm,myrsky,,mˈyrsky,storm,a wind storm; Finland has no tropical-cyclone word to reach for,2,fi-agent-v1;ipa=espeak
 weather.ice,jää,liukkaus,jˈæː,ice,jää on the ground; liukkaus is the word on road and pavement warnings,2,fi-agent-v1;ipa=espeak
 weather.fog,sumu,,sˈumu,,,2,fi-agent-v1;ipa=espeak
 weather.heat,helle,,hˈelle,,,2,fi-agent-v1;ipa=espeak
@@ -56,7 +56,7 @@ trail-warnings.danger,vaara,,vˈaːra,,,2,fi-agent-v1;ipa=espeak
 trail-warnings.beware-falling-rocks,varo putoavia kiviä,,vˈaro pˈutoˌavia kˈiviæ,,,2,fi-agent-v1;ipa=espeak
 trail-warnings.first-aid-station,ensiapupiste,,ˈensiapupˌiste,,,2,fi-agent-v1;ipa=espeak
 trail-warnings.service-suspended,liikennöinti keskeytetty,,lˈiːkennˌøinti kˈeskeytˌetty,,,2,fi-agent-v1;ipa=espeak
-trail-landmarks.trail-marker,reittimerkintä,,rˈeittimˌerkintæ,Metsähallitus's own word for the painted or posted marker,,2,fi-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,reittimerkintä,,rˈeittimˌerkintæ,route marking,Metsähallitus's own word for the painted or posted marker,2,fi-agent-v1;ipa=espeak
 trail-landmarks.fork-junction,risteys,,rˈisteys,,,2,fi-agent-v1;ipa=espeak
 trail-landmarks.boardwalk-cliff-path,pitkospuut / jyrkännepolku,,pˈitkospuːt / jˈyrkænnepˌolku,pitkospuut are the duckboards laid across Finnish bogs and are on every park map,,2,fi-agent-v1;ipa=espeak
 trail-landmarks.start,alku,,ˈalku,,,2,fi-agent-v1;ipa=espeak

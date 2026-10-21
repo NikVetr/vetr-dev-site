@@ -11,7 +11,7 @@ social-basics.excuse-me-sorry,Paumanhin po,,paumanhin po,,,2,fil-agent-v1;ipa=fi
 social-basics.sorry,Pasensya na po,,pasɛnsja na po,,,2,fil-agent-v1;ipa=fil-g2p
 social-basics.no-problem,Walang problema,,walaŋ pɾoblɛma,,,2,fil-agent-v1;ipa=fil-g2p
 social-basics.i-do-not-know,Hindi ko po alam,,hindi ko po alam,,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.good-night,Magandang gabi,,maɡandaŋ ɡabi,the same phrase as good-evening; Filipino does not distinguish them,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.good-night,Magandang gabi,,maɡandaŋ ɡabi,good evening,the same phrase as good-evening; Filipino does not distinguish them,2,fil-agent-v1;ipa=fil-g2p
 social-basics.okay-fine-i-am-okay,Ayos lang,,ajos laŋ,,,2,fil-agent-v1;ipa=fil-g2p
 communication.i-do-not-speak-this-language,Hindi po ako marunong ng {target},,hindi po ako maɾunoŋ naŋ {target},,,2,fil-agent-v1;ipa=fil-g2p
 communication.i-speak-only-a-little-of-this,Kaunti lang po ang alam kong {target},,kaunti laŋ po aŋ alam koŋ {target},,,2,fil-agent-v1;ipa=fil-g2p
@@ -129,7 +129,7 @@ kind-words.i-like-it-very-much,Gustong-gusto ko po ito.,,ɡustoŋɡusto ko po it
 kind-words.i-had-a-wonderful-time,Naging maganda po ang karanasan ko dito.,,naɡiŋ maɡanda po aŋ kaɾanasan ko dito,,,2,kind-words-v1;ipa=fil-g2p
 kind-words.thank-you-for-everything,Salamat po sa lahat.,,salamat po sa lahat,,,2,kind-words-v1;ipa=fil-g2p
 kind-words.thank-you-for-your-hospitality,Salamat po sa inyong pagtanggap.,,salamat po sa iɲoŋ paɡtaŋɡap,,,2,kind-words-v1;ipa=fil-g2p
-board-answers.my-name-is-blank,Ako po si {},,ako po si {},I [am] {}: si marks a personal name; po is respect for the listener and marks no one's sex,,2,fil-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.my-name-is-blank,Ako po si {},,ako po si {},I [am] {},si marks a personal name; po is respect for the listener and marks no one's sex,2,fil-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
 board-answers.i-would-rather-not-say,Hindi ko na lang po sasabihin,,hindi ko na laŋ po sasabihin,I will just not say it,,2,fil-agent-v1;in-pack-neighbour=board-answers.none-of-these;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
 board-answers.what-happened,Ano po ang nangyari?,,ano po aŋ naŋjaɾi,what happened?,,2,fil-agent-v1;src=KWF Diksiyonaryo mangyári;answers-audit-v1;ipa=fil-g2p
 board-answers.understood,"Sige po, naiintindihan ko",,"siɡɛ po, naiintindihan ko","all right, I understand",,2,fil-agent-v1;in-pack-neighbour=communication.i-do-not-understand;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p

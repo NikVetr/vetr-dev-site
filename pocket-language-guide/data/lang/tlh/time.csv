@@ -17,7 +17,7 @@ days-of-week.tuesday,,,povjaj,pʰovdʒɑdʒ,,,3,tlh-attested-v
 days-of-week.wednesday,,,ghItlhjaj,ɣɪtɬdʒɑdʒ,,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
 days-of-week.thursday,,,loghjaj,loɣdʒɑdʒ,,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
 days-of-week.friday,,,buqjaj,buqʰdʒɑdʒ,,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
-days-of-week.saturday,,,lojmItjaj,lodʒmɪtʰdʒɑdʒ,the formal name; ghInjaj is the everyday one,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.saturday,,,lojmItjaj,lodʒmɪtʰdʒɑdʒ,Saturday,the formal name; ghInjaj is the everyday one,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
 days-of-week.sunday, ,,jaj wa',dʒɑdʒ wɑʔ,day one,"the Klingon week has six days, so a seventh is numbered",3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
 time-words.next-week, ,,Hogh veb,xoɣ vɛb,the next week,,1,tlh-composed-v1;lex=TKD + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
 time-words.summer, ,,qImroq tuj,qʰɪmroqʰ tʰudʒ,hot season,Okrand's own way of naming a Terran season,1,tlh-composed-v1;lex=qep'a' 23 (2016) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

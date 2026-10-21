@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,prove
 profanity.oh-my-god,हे भगवान्!,,hē bhagavān!,hˈeː bʰˌəɡəwˈaːn,,,2,ne-agent-v1;ipa=espeak
 profanity.damn,धत्!,,dhat!,dʰˈʌt,,,2,ne-agent-v1;ipa=espeak
 profanity.expletive,सत्यानाश!,,satyānāśa!,sˌətjaːnˈaːʃ,,,2,ne-agent-v1;ipa=espeak
-profanity.intensifier,अभागी,,abhāgī,əbʰˈaːɡi,"""wretched"", used as an intensifier",,2,ne-agent-v1;ipa=espeak
+profanity.intensifier,अभागी,,abhāgī,əbʰˈaːɡi,wretched,used as an intensifier,2,ne-agent-v1;ipa=espeak
 profanity.frustration,यो बकवास छ,,yō bakavāsa cha,jˈoː bˌəkəwˈaːs cʰˈə,,,2,ne-agent-v1;ipa=espeak
 profanity.thats-rude,यो असभ्य छ,,yō asabhya cha,jˈoː əsˈʌbʰjˌə cʰˈə,,,2,ne-agent-v1;ipa=espeak
 profanity.excuse-my-language,अपशब्दको लागि माफ गर्नुहोस्,,apaśabdakō lāgi māpha garnuhōs,ˌəpəʃˈʌbdəkˌoː lˈaːɡɪ mˈaːpʰ ɡˌərnuhˈoːs,,,2,ne-agent-v1;ipa=espeak

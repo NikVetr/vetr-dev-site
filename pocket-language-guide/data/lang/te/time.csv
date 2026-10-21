@@ -9,17 +9,17 @@ time-scheduling.what-day-is-it-today,ఈ రోజు ఏ వారం?,,ī rōj
 time-scheduling.what-time-does-it-open,ఎన్ని గంటలకు తెరుస్తారు?,,enni gaṁṭalaku terustāru?,enni ɡaɳʈalaku terustaːru,,,2,te-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-close,ఎన్ని గంటలకు మూసేస్తారు?,,enni gaṁṭalaku mūsēstāru?,enni ɡaɳʈalaku muːseːstaːru,,,2,te-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,ఎంత సమయం పడుతుంది?,,eṁta samayaṁ paḍutuṁdi?,enta samajam paɖutundi,,,2,te-agent-v1;ipa=espeak
-time-words.today,ఈ రోజు,నేడు,ī rōju,iː roːdʒu,nēḍu is the written form,,2,te-agent-v1;ipa=espeak
+time-words.today,ఈ రోజు,నేడు,ī rōju,iː roːdʒu,today,nēḍu is the written form,2,te-agent-v1;ipa=espeak
 time-words.tomorrow,రేపు,,rēpu,reːpu,,,2,te-agent-v1;ipa=espeak
 time-words.yesterday,నిన్న,,ninna,ninna,,,2,te-agent-v1;ipa=espeak
 time-words.this-week,ఈ వారం,,ī vāraṁ,iː ʋaːram,,,2,te-agent-v1;ipa=espeak
 time-words.next-week,వచ్చే వారం,,vaccē vāraṁ,ʋatʃtʃeː ʋaːram,the week that comes,,2,te-agent-v1;ipa=espeak
-time-words.morning,ఉదయం,పొద్దున,udayaṁ,udajam,poddun is the spoken form,,2,te-agent-v1;ipa=espeak
+time-words.morning,ఉదయం,పొద్దున,udayaṁ,udajam,morning,poddun is the spoken form,2,te-agent-v1;ipa=espeak
 time-words.afternoon,మధ్యాహ్నం,,madhyāhnaṁ,madʰjaːhnam,,,2,te-agent-v1;ipa=espeak
 time-words.evening,సాయంత్రం,,sāyaṁtraṁ,saːjantram,,,2,te-agent-v1;ipa=espeak
 time-words.spring,వసంత కాలం,,vasaṁta kālaṁ,ʋasanta kaːlam,,,2,te-agent-v1;ipa=espeak
 time-words.summer,వేసవి,ఎండాకాలం,vēsavi,ʋeːsaʋi,summer,"eṁḍākālaṁ = the hot season, which is what it is called",2,te-agent-v1;ipa=espeak
-time-words.fall,శరత్కాలం,ఆకురాలు కాలం,śaratkālaṁ,ʃaratkaːlam,the leaf-fall season; south India has no autumn to speak of,,2,te-agent-v1;ipa=espeak
+time-words.fall,శరత్కాలం,ఆకురాలు కాలం,śaratkālaṁ,ʃaratkaːlam,autumn,south India has no autumn to speak of,2,te-agent-v1;ipa=espeak
 time-words.winter,చలికాలం,,calikālaṁ,tʃalikaːlam,the cold season,,2,te-agent-v1;ipa=espeak
 time-words.night,రాత్రి,,rātri,raːtri,,,2,te-agent-v1;ipa=espeak
 days-of-week.monday,సోమవారం,,sōmavāraṁ,soːmaʋaːram,,,2,te-agent-v1;ipa=espeak

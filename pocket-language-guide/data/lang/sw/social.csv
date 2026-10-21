@@ -75,7 +75,7 @@ sim-data.roaming,Mtandao wa nje,Roaming,mtandˈao wa ɲɟˈe,a network from outs
 etiquette.is-this-allowed,"Je, hii inaruhusiwa?",,"ɟˈe, hˌii ˌinarˌuhusˈiwa",,,2,sw-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,"Je, bakshishi inatarajiwa?",,"ɟˈe, bakʃˈiʃi ˌinatˌaraɟˈiwa",,,2,sw-agent-v1;ipa=espeak
 etiquette.is-service-included,"Je, huduma imo?",,"ɟˈe, hudˈuma ˈimo",,,2,sw-agent-v1;ipa=espeak
-etiquette.may-i-enter,Hodi?,Naomba niingie?,hˈodi,said at a door; reply: karibu,,2,sw-agent-v1;ipa=espeak
+etiquette.may-i-enter,Hodi?,Naomba niingie?,hˈodi,may I enter?,said at a door; reply: karibu,2,sw-agent-v1;ipa=espeak
 etiquette.remove-shoes,Nivue viatu?,,nivˈue viˈatu,,,2,sw-agent-v1;ipa=espeak
 etiquette.photo-of-you,Naomba nikupige picha?,,naˈomba nˌikupˈiɡe pˈitʃa,,,2,sw-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Naomba nikae hapa?,,naˈomba nikˈae hˈapa,,,2,sw-agent-v1;ipa=espeak

@@ -76,7 +76,7 @@ border-customs.i-have-a-connecting-flight,Saya ada penerbangan lanjutan,,sˈaja 
 border-customs.may-i-have-an-entry-stamp,Boleh minta cap masuk?,,bˈoləh mˈinta tʃˈap mˈasuk,,,2,id-agent-v1;ipa=espeak
 border-customs.visa,Visa,,vˈisa,,,2,id-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,Saya tidak bawa makanan atau tanaman,,sˈaja tˈidak bˈawa makˈanan ˌataʊ tanˈaman,,,2,id-agent-v1;ipa=espeak
-border-customs.passport-control,Imigrasi,,ˌimiɡrˈasi,what the airport sign says,,2,id-agent-v1;ipa=espeak
+border-customs.passport-control,Imigrasi,,ˌimiɡrˈasi,immigration,what the airport sign says,2,id-agent-v1;ipa=espeak
 border-customs.customs,Bea Cukai,,bˈɛa tʃˈukaɪ,,,2,id-agent-v1;ipa=espeak
 border-customs.baggage-claim,Pengambilan bagasi,Baggage claim,pəŋambˈilan baɡˈasi,,,2,id-agent-v1;ipa=espeak
 border-customs.customs-declaration,Pemberitahuan pabean,Deklarasi bea cukai,pəmbˌɛritahˈuan pabˈɛan,,,2,id-agent-v1;ipa=espeak
@@ -91,7 +91,7 @@ pickup-meeting.please-call-me-a-ride,Tolong pesankan ojek online,Ojol · Gojek �
 pickup-meeting.please-call-a-taxi,Tolong panggil taksi,,tˈoloŋ pˈaŋɡil tˈaksi,,,2,id-agent-v1;ipa=espeak
 rail-station-words.high-speed-rail,Kereta cepat,Whoosh,kərˈɛta tʃˈɛpat,,,2,id-agent-v1;ipa=espeak
 rail-station-words.transfer,Transit,Ganti kereta,trˈansit,,,2,id-agent-v1;ipa=espeak
-rail-station-words.ticket-gate,Gate,Palang masuk,ɡˈatə,"English word, used as-is",,2,id-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,Gate,Palang masuk,ɡˈatə,gate,"English word, used as-is",2,id-agent-v1;ipa=espeak
 rail-station-words.platform,Peron,,pˈɛron,,,2,id-agent-v1;ipa=espeak
 rail-station-words.ticket-office,Loket tiket,,lˈokət tˈikət,,,2,id-agent-v1;ipa=espeak
 rail-station-words.waiting-room,Ruang tunggu,,rˈuaŋ tˈuŋɡu,,,2,id-agent-v1;ipa=espeak
@@ -115,21 +115,21 @@ common-signs.open-operating,Buka,Sedang buka,bˈuka,,,2,id-agent-v1;fix=KBBI buk
 common-signs.closed,Tutup,Libur,tˈutup,,,2,id-agent-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈɛnti,,,2,id-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈɛrlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",,2,id-agent-v1;ipa=espeak
-rail-station-words.ticket-validator,Mesin validasi,Gate,mˈɛsin vˌalidˈasi,bus: mesin validasi; rail: gate,,2,id-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,Mesin validasi,Gate,mˈɛsin vˌalidˈasi,validation machine,bus: mesin validasi; rail: gate,2,id-agent-v1;ipa=espeak
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,,1,reader-gloss-v1;ipa=espeak
-common-signs.pork-code,B2 · BPK · samcan · bakut · cu nyuk,siobak · saksang · char siu,bˈe dˈua bˌepˌekˈa sˈamtʃan bˈakut tʃˈu ɲˈuk,"B1 is dog (Batak biang), not pork; bak- in bakso/bakmi/bakpao is Hokkien for meat",,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+common-signs.pork-code,B2 · BPK · samcan · bakut · cu nyuk,siobak · saksang · char siu,bˈe dˈua bˌepˌekˈa sˈamtʃan bˈakut tʃˈu ɲˈuk,pork · Karo roast pork · pork belly · pork ribs · pork,"B1 is dog (Batak biang), not pork; bak- in bakso/bakmi/bakpao is Hokkien for meat",2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Tarif,Ongkos,tˈarif,,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Bayar ongkos di mana?,,bˈajar ˈoŋkos di mˈana,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
 air-travel.where-is-check-in,Konter check-in di mana?,,kˈontər xˈɛtʃkin di mˈana,di mana frame matches transit-rides.where-is-the-subway-station's Stasiun MRT di mana?,,2,id-agent-v1;in-pack-neighbour=transit-rides.where-is-the-subway-station;ipa=espeak
-air-travel.which-gate,Gerbang mana?,,ɡˈɛrbaŋ mˈana,reuses taxi.we-need-the-east-gate-not-the-south-gate's Gerbang; X mana? matches transit-rides.which-platform's Peron mana?,,2,id-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=espeak
+air-travel.which-gate,Gerbang mana?,,ɡˈɛrbaŋ mˈana,which gate?,reuses taxi.we-need-the-east-gate-not-the-south-gate's Gerbang; X mana? matches transit-rides.which-platform's Peron mana?,2,id-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=espeak
 air-travel.where-is-the-security-check,Pemeriksaan keamanan di mana?,,pəmˌɛriksˈaan kəamˈanan di mˈana,pemeriksaan keamanan = security screening (STTKD aviation-training glossary),,2,id-agent-v1;src=sttkd.ac.id istilah bandara;ipa=espeak
 air-travel.my-luggage-did-not-arrive,Bagasi saya tidak tiba,,baɡˈasi sˈaja tˈidak tˈiba,bagasi reused from border-customs.where-do-i-collect-my-baggage,,2,id-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=espeak
 air-travel.i-would-like-a-window-seat,Saya mau kursi dekat jendela,,sˈaja mˈaʊ kˈursi dˈɛkat dʒəndˈɛla,I want a seat near the window,Saya mau matches this pack's own want-construction (core.csv pronouns-verbs.want-to-verb),2,id-agent-v1;ipa=espeak
 air-travel.i-would-like-an-aisle-seat,Saya mau kursi dekat lorong,,sˈaja mˈaʊ kˈursi dˈɛkat lˈɔroŋ,"lorong = aisle/corridor, parallel to the window-seat row",,2,id-agent-v1;ipa=espeak
-hitchhiking.can-you-give-me-a-ride,Bisa memberi saya tumpangan?,,bˈisa məmbˈɛri sˈaja tumpˈaŋan,"tumpangan = a lift/ride, the ordinary word for hitchhiking (menumpang); Bisa...? matches taxi.can-you-wait-for-me-here",,2,id-agent-v1;in-pack-neighbour=taxi.can-you-wait-for-me-here;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Bisa memberi saya tumpangan?,,bˈisa məmbˈɛri sˈaja tumpˈaŋan,can [you] give me a ride?,"tumpangan = a lift/ride, the ordinary word for hitchhiking (menumpang); Bisa...? matches taxi.can-you-wait-for-me-here",2,id-agent-v1;in-pack-neighbour=taxi.can-you-wait-for-me-here;ipa=espeak
 hitchhiking.where-are-you-going,Anda mau ke mana?,,ˈanda mˈaʊ kə mˈana,,,2,id-agent-v1;ipa=espeak
 hitchhiking.i-only-need-to-go-to-the-next-town,Saya hanya perlu ke kota berikutnya,,sˈaja hˈaɲa pˈɛrlu kə kˈota bərikˈutɲa,berikutnya reused from transit-rides.what-is-the-next-stop,,2,id-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;ipa=espeak
 hitchhiking.is-there-room-for-two,Ada tempat untuk dua orang?,,ˈada tˈɛmpat ˌuntuk dˈua ˈoraŋ,,,2,id-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Saya bisa bayar bensin,,sˈaja bˈisa bˈajar bənsˈin,bensin (KBBI); bayar reused from transit-rides.where-do-i-pay-the-fare,,2,id-agent-v1;src=kbbi.web.id bensin;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Saya bisa bayar bensin,,sˈaja bˈisa bˈajar bənsˈin,I can pay [for] fuel,bensin (KBBI); bayar reused from transit-rides.where-do-i-pay-the-fare,2,id-agent-v1;src=kbbi.web.id bensin;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Terima kasih atas tumpangannya,,tərˈima kˈasih ˈatas tˌumpaŋˈanɲa,reuses tumpangan from the ride-request row,,2,id-agent-v1;ipa=espeak
 taxi.please-turn-around,Tolong putar balik,,tˈoloŋ pˈutar bˈalik,please make a U-turn,,2,id-agent-v1;id.wikipedia=Putar balik;in-pack-neighbour=taxi.please-stop-here;answers-audit-v1;ipa=espeak

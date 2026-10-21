@@ -25,11 +25,11 @@ in-a-building.is-this-the-correct-entrance,ورودی همین است؟,,vorudi 
 in-a-building.do-you-have-wi-fi,وای‌فای دارید؟,,vāyfāy dārid?,vɑjfɑj dɑrid,,,2,fa-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,رمزِ وای‌فای چیست؟,,ramz-e vāyfāy chist?,ramze vɑjfɑj tʃist,,,2,fa-agent-v1;ipa=espeak
 in-a-building.which-floor,کدام طبقه؟,,kodām tabaqe?,kodɑm tabaqe,,,2,fa-agent-v1;ipa=espeak
-toilets.where-toilet,دستشویی کجاست؟,,dastshuyi kojāst?,dastʃui kodʒɑst,the everyday word; the sign says servis-e behdāshti,,2,fa-agent-v1;ipa=espeak
+toilets.where-toilet,دستشویی کجاست؟,,dastshuyi kojāst?,dastʃui kodʒɑst,where is the toilet?,the everyday word; the sign says servis-e behdāshti,2,fa-agent-v1;ipa=espeak
 toilets.where-public-toilet,سرویسِ بهداشتیِ عمومی کجاست؟,,servis-e behdāshti-ye omumi kojāst?,servise behdɑʃtie omumi kodʒɑst,,,2,fa-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,می‌شود از دستشویی استفاده کنم؟,,mishavad az dastshuyi estefāde konam?,miʃavad az dastʃui estefɑde konam,,,2,fa-agent-v1;ipa=espeak
 toilets.is-it-only-for-customers,فقط برای مشتری است؟,,faqat barāye moshtari ast?,faqat barɑje moʃtari ast,,,2,fa-agent-v1;ipa=espeak
-toilets.toilet-wc,سرویسِ بهداشتی,توالت,servis-e behdāshti,servise behdɑʃti,the words on the door; W.C. is printed as often as either,,2,fa-agent-v1;ipa=espeak
+toilets.toilet-wc,سرویسِ بهداشتی,توالت,servis-e behdāshti,servise behdɑʃti,restroom,the words on the door; W.C. is printed as often as either,2,fa-agent-v1;ipa=espeak
 toilets.is-it-free,مجانی است؟,,majjāni ast?,madʒdʒɑni ast,,,2,fa-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,سکه لازم دارد؟,,sekke lāzem dārad?,sekke lɑzem dɑrad,,,2,fa-agent-v1;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,آبِ شیر آشامیدنی است؟,,āb-e shir āshāmidani ast?,ɑbe ʃir ɑʃɑmidani ast,,,2,fa-agent-v1;ipa=espeak

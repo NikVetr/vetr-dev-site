@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_elot,ipa,literal,note,confidence,provenance
-social-basics.hello,Γεια σας,,Geia sas,jˈa sas,Polite plural; the safe form with strangers,,2,el-agent-v1;roman=elot743;ipa=espeak
-social-basics.hello-polite,Χαίρετε,,Chairete,çˈeɾetˌe,"Formal greeting, any time of day",,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.hello,Γεια σας,,Geia sas,jˈa sas,health to you,Polite plural; the safe form with strangers,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.hello-polite,Χαίρετε,,Chairete,çˈeɾetˌe,greetings,"Formal greeting, any time of day",2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.good-morning,Καλημέρα,,Kalimera,kˌalimˈeɾa,,,2,el-agent-v1;roman=elot743;ipa=espeak
-social-basics.good-evening,Καλησπέρα,,Kalispera,kˌalispˈeɾa,Used from midday onward,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.good-evening,Καλησπέρα,,Kalispera,kˌalispˈeɾa,good evening,Used from midday onward,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.goodbye,Αντίο,Γεια σας,Antio,adˈio,,,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.thank-you,Ευχαριστώ,Ευχαριστώ πολύ,Efcharisto,ˌefxaɾistˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
-social-basics.you-are-welcome,Παρακαλώ,,Parakalo,pˌaɾakalˈo,"Same word as ""please"" and ""pardon?""",,2,el-agent-v1;roman=elot743;ipa=espeak
-social-basics.excuse-me-sorry,Με συγχωρείτε,Συγγνώμη,Me synchoreite,me sˌiŋxoɾˈite,Forgive me; use to get attention,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.you-are-welcome,Παρακαλώ,,Parakalo,pˌaɾakalˈo,please,"Same word as ""please"" and ""pardon?""",2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.excuse-me-sorry,Με συγχωρείτε,Συγγνώμη,Me synchoreite,me sˌiŋxoɾˈite,forgive me,use to get attention,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.sorry,Συγγνώμη,,Syngnomi,siŋɡnˈomi,"Also serves as ""excuse me""",,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.no-problem,Δεν πειράζει,Κανένα πρόβλημα,Den peirazei,ðˈem biɾˈazi,It does not matter,,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.i-do-not-know,Δεν ξέρω,,Den xero,ðˈeŋ ɡzˈeɾo,,,2,el-agent-v1;roman=elot743;ipa=espeak
-social-basics.good-night,Καληνύχτα,,Kalinychta,kˌalinˈixta,"Said on parting or at bedtime, not on arrival",,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.good-night,Καληνύχτα,,Kalinychta,kˌalinˈixta,good night,"Said on parting or at bedtime, not on arrival",2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.okay-fine-i-am-okay,Εντάξει / Είμαι καλά,Ωραία,Entaxei / Eimai kala,edˈaksi / ˈime kalˈa,,,2,el-agent-v1;roman=elot743;ipa=espeak
 communication.i-do-not-speak-this-language,Δεν μιλάω {target},,Den milao {target},ðˈen milˈao {target},,,2,el-agent-v1;roman=elot743;ipa=espeak
 communication.i-speak-only-a-little-of-this,Μιλάω λίγο {target},,Milao ligo {target},milˈao lˈiɣo {target},,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -27,7 +27,7 @@ communication.i-cannot-make-out-what-you-are-saying,Δεν καταλαβαίν�
 communication.i-do-not-understand,Δεν καταλαβαίνω,,Den katalavaino,ðˈeŋ ɡˌatalavˈeno,,,2,el-agent-v1;roman=elot743;ipa=espeak
 communication.i-cannot-read-it,Δεν μπορώ να το διαβάσω,,Den boro na to diavaso,ðˈen boɾˈo na to ðˌiavˈaso,,,2,el-agent-v1;roman=elot743;ipa=espeak
 communication.please-write-it-in-roman-letters,Γράψτε το λατινικά,,,ɣɾˈapste to lˌatinikˈa,,,1,reader-gloss-v1;ipa=espeak
-quick-responses.please-go-ahead,Παρακαλώ,,Parakalo,pˌaɾakalˈo,"Please; also ""go ahead"", ""you're welcome""",,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.please-go-ahead,Παρακαλώ,,Parakalo,pˌaɾakalˈo,please,"also ""go ahead"", ""you're welcome""",2,el-agent-v1;roman=elot743;ipa=espeak
 quick-responses.yes-right,Ναι,,Nai,nˈe,,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis Λεξικό της κοινής νεοελληνικής ναι 1α (ως σύντομη καταφατική απάντηση σε ερώτηση: Θα έρθεις μαζί μας; -- Ναι);rule=one-reading-on-a-board (σωστά was the gloss of the range, right);row-corrections-v6;ipa=espeak"
 quick-responses.no-not,Όχι,,Ochi,ˈoçi,,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis όχι I.1α (ως σύντομη αρνητική απάντηση: Να πάω μαζί τους; -- Όχι);rule=one-reading-on-a-board (δεν, which negates a verb, was the gloss of the range, not);row-corrections-v6;ipa=espeak"
 quick-responses.okay-can,Εντάξει,,Entaxei,edˈaksi,,,2,"el-agent-v1;roman=elot743;fix=Triantafyllidis εντάξει 1α (ως απάντηση απόλυτης συμφωνίας, συγκατάθεσης του ομιλητή στην πρόταση που του έγινε προηγουμένως);rule=one-reading-on-a-board (γίνεται was the gloss of the range, can);row-corrections-v6;ipa=espeak"
@@ -71,7 +71,7 @@ sim-data.is-there-coverage-in,Υπάρχει κάλυψη στην περιοχ�
 sim-data.signal,σήμα / κάλυψη,,sima / kalypsi,sˈima / kˈalipsˌi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 sim-data.esim,eSIM,,eSIM,isˈim,Kept as the Latin abbreviation in Greek too,,2,el-agent-v1;roman=elot743;ipa=espeak+loan
 sim-data.prepaid,καρτοκινητή,προπληρωμένη,kartokiniti,kˌaɾtocˌinitˈi,"Prepaid mobile, lit. ""card mobile""",,2,el-agent-v1;roman=elot743;ipa=espeak
-sim-data.roaming,περιαγωγή,roaming,periagogi,pˌeɾiˌaɣojˈi,The term used on Greek phone bills,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.roaming,περιαγωγή,roaming,periagogi,pˌeɾiˌaɣojˈi,roaming,The term used on Greek phone bills,2,el-agent-v1;roman=elot743;ipa=espeak
 etiquette.is-this-allowed,Επιτρέπεται αυτό;,,Epitrepetai afto;,ˌepitɾˈepetˌe aftˈo,,,2,el-agent-v1;roman=elot743;ipa=espeak
 etiquette.is-tipping-expected,Συνηθίζεται το φιλοδώρημα;,,Synithizetai to filodorima;,sˌiniθˈizetˌe to fˌiloðˈoɾimˌa,Is a tip customary?,,2,el-agent-v1;roman=elot743;ipa=espeak
 etiquette.is-service-included,Περιλαμβάνεται το φιλοδώρημα στον λογαριασμό;,Περιλαμβάνεται η εξυπηρέτηση;,Perilamvanetai to filodorima ston logariasmo;,pˌeɾilamvˈanetˌe to fˌiloðˈoɾimˌa ston lˌoɣaɾˌiasmˈo,Is the tip already on the bill?,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -86,7 +86,7 @@ etiquette.what-is-customary,Τι συνηθίζεται εδώ;,,Ti synithizetai
 etiquette.keep-the-change,Κρατήστε τα ρέστα,"Κρατήστε τα ρέστα, παρακαλώ",Kratiste ta resta,kɾatˈiste ta ɾˈesta,,,2,el-agent-v1;roman=elot743;ipa=espeak
 children.cannot-find-my-child,"Δεν μπορώ να βρω το παιδί μου, βοηθήστε με",,"Den boro na vro to paidi mou, voithiste me","ðˈen boɾˈo na vɾˈo to peðˈi mu, voɪθˈiste me","I cannot find my child, help me",,2,el-agent-v1;roman=elot743;ipa=espeak
 children.make-an-announcement,"Κάντε μια ανακοίνωση, παρακαλώ",Μπορείτε να κάνετε μια ανακοίνωση;,"Kante mia anakoinosi, parakalo","kˈade mɲ ˌanacˈinosˌi, pˌaɾakalˈo",,,2,el-agent-v1;roman=elot743;ipa=espeak
-children.child-age,Ηλικία του παιδιού μου: {},,Ilikia tou paidiou mou: {},ˌilicˈia tu pˌeðiˈu mu {},My child's age: {} (label; write a figure),,2,el-agent-v1;roman=elot743;fix=Triantafyllidis Λεξικό της κοινής νεοελληνικής (greek-language.gr) ηλικία 1α (ο χρόνος που διανύθηκε από τη γέννηση κάποιου ως μία ορισμένη στιγμή: Tι ~ έχεις) and χρόνος (γεν. πληθ. και χρονών στη σημ. 4 ... Είναι δώδεκα / είκοσι χρονών);was=Το παιδί μου είναι {} χρονών (To paidi mou einai {} chronon: the genitive plural -- wrong for one: ενός έτους);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Αλλεργία σε φάρμακο: {} and Μέρες παραμονής: {});row-corrections-v14;ipa=espeak
+children.child-age,Ηλικία του παιδιού μου: {},,Ilikia tou paidiou mou: {},ˌilicˈia tu pˌeðiˈu mu {},My child's age: {},label; write a figure,2,el-agent-v1;roman=elot743;fix=Triantafyllidis Λεξικό της κοινής νεοελληνικής (greek-language.gr) ηλικία 1α (ο χρόνος που διανύθηκε από τη γέννηση κάποιου ως μία ορισμένη στιγμή: Tι ~ έχεις) and χρόνος (γεν. πληθ. και χρονών στη σημ. 4 ... Είναι δώδεκα / είκοσι χρονών);was=Το παιδί μου είναι {} χρονών (To paidi mou einai {} chronon: the genitive plural -- wrong for one: ενός έτους);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Αλλεργία σε φάρμακο: {} and Μέρες παραμονής: {});row-corrections-v14;ipa=espeak
 children.high-chair,Έχετε παιδική καρέκλα;,Έχετε καρεκλάκι για μωρό;,Echete paidiki karekla;,ˈeçetˌe pˌeðicˈi kaɾˈekla,Do you have a child's chair?,,2,el-agent-v1;roman=elot743;ipa=espeak
 children.baby-changing-room,Πού είναι ο χώρος αλλαγής βρεφών;,Πού έχει αλλαξιέρα;,Pou einai o choros allagis vrefon;,pˈu ˈine o xˈoɾos ˌalajˈiz vɾefˈon,Where is the baby changing area?,,2,el-agent-v1;roman=elot743;ipa=espeak
 children.childrens-menu,Υπάρχει παιδικό μενού;,,Yparchei paidiko menou;,ipˈaɾçi pˌeðikˈo menˈu,,,2,el-agent-v1;roman=elot743;ipa=espeak

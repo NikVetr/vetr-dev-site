@@ -49,7 +49,7 @@ toilets.can-i-flush-the-paper,Папір можна змивати?,,Papir mozhn
 toilets.is-there-a-toilet-on-board,На борту є туалет?,У вагоні є туалет?,Na bortu ye tualet?,nˈa bˈortu jˈɛ tualˈɛt,,,2,uk-agent-v1;ipa=espeak
 toilets.the-toilet-will-not-flush,Туалет не змивається.,,Tualet ne zmyvaietsia.,tualˈɛt nˈɛ zmɪʋˈajɛtsja,,,2,uk-agent-v1;ipa=espeak
 toilets.baby-change,пеленальний столик,,pelenalnyi stolyk,pɛlənˈaʎnɪj stolˈɪk,,,2,uk-agent-v1;ipa=espeak
-toilets.squat-toilet,турецький туалет,,turetskyi tualet,turˈɛtskɪj tualˈɛt,"the everyday colloquial name for a squat toilet, lit. ""Turkish toilet""","the term this pack's speakers actually use, kept at confidence 1 the way ru__ru-RU keeps its own answer to this same row, since neither is a term with an authority to cite",1,uk-agent-v1;ipa=espeak
+toilets.squat-toilet,турецький туалет,,turetskyi tualet,turˈɛtskɪj tualˈɛt,Turkish toilet,"the everyday colloquial name for a squat toilet; the term this pack's speakers actually use, kept at confidence 1 the way ru__ru-RU keeps its own answer to this same row, since neither is a term with an authority to cite",1,uk-agent-v1;ipa=espeak
 building-words.elevator,ліфт,,lift,ʎˈiːft,,,2,uk-agent-v1;ipa=espeak
 building-words.stairs,сходи,,skhody,sxˈodɪ,,,2,uk-agent-v1;ipa=espeak
 building-words.entrance,вхід,,vkhid,fxˈiːd,,,2,uk-agent-v1;ipa=espeak

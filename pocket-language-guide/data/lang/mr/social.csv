@@ -73,7 +73,7 @@ sim-data.esim,ई-सिम,,ī-sima,ˈisɪm,,,2,mr-agent-v1;ipa=espeak
 sim-data.prepaid,प्रीपेड,,prīpēḍa,pɾipˈeːɖ,,,2,mr-agent-v1;ipa=espeak
 sim-data.roaming,रोमिंग,,rōmiṁga,ɾoːmˈĩɡ,,,2,mr-agent-v1;ipa=espeak
 etiquette.is-this-allowed,हे करण्याची परवानगी आहे का?,,hē karaṇyācī paravānagī āhē kā?,hˈeː kˌəɾɳjˈaːci pˌəɾvˈaːnɡˌi ˈaːheː kˈaː,deliberately general,,2,mr-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,इथे टिप देण्याची पद्धत आहे का?,,ithē ṭipa dēṇyācī paddhata āhē kā?,ˈɪtʰeː ʈˈɪp dˈeːɳjaːcˌi pˈʌdʰːət ˈaːheː kˈaː,neutral yes/no,,2,mr-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,इथे टिप देण्याची पद्धत आहे का?,,ithē ṭipa dēṇyācī paddhata āhē kā?,ˈɪtʰeː ʈˈɪp dˈeːɳjaːcˌi pˈʌdʰːət ˈaːheː kˈaː,Is there a custom of giving a tip here?,neutral yes/no,2,mr-agent-v1;ipa=espeak
 etiquette.is-service-included,सेवा शुल्क समाविष्ट आहे का?,,sēvā śulka samāviṣṭa āhē kā?,sˈeːvaː ʃˈʊlk sˌəmaːvˈɪʂʈ ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
 etiquette.may-i-enter,मी आत येऊ का?,,mī āta yēū kā?,mˈi ˈaːt jˈeːu kˈaː,,,2,mr-agent-v1;ipa=espeak
 etiquette.remove-shoes,मी बूट काढू का?,,mī būṭa kāḍhū kā?,mˈi bˈuːʈ kˈaːɖʰuː kˈaː,,,2,mr-agent-v1;ipa=espeak
@@ -84,7 +84,7 @@ etiquette.dressed-appropriately,माझा पेहराव योग्य 
 etiquette.did-not-mean-to-offend,"माझा तसा हेतू नव्हता, माफ करा",,"mājhā tasā hētū navhatā, māpha karā","mˈaːɟʰaː tˈʌsaː hˈeːtuː nˈʌvhətˌaː, mˈaːpʰ kˈʌɾaː","invariant, no gender",,2,mr-agent-v1;ipa=espeak
 etiquette.what-is-customary,इथली पद्धत काय आहे?,,ithalī paddhata kāya āhē?,ˈɪtʰlˌi pˈʌdʰːət kˈaːj ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 etiquette.keep-the-change,उरलेले पैसे ठेवा,,uralēlē paisē ṭhēvā,ˌʊɾlˈeːleː pˈaɪseː ʈʰˈeːvaː,,,2,mr-agent-v1;ipa=espeak
-children.cannot-find-my-child,माझे मूल सापडत नाही,,mājhē mūla sāpaḍata nāhī,mˈaːɟʰeː mˈuːl sˈaːpəɖˌət nˈaːhi,SAFETY-CRITICAL wording; flagged for fluent-speaker review,,2,mr-agent-v1;ipa=espeak
+children.cannot-find-my-child,माझे मूल सापडत नाही,,mājhē mūla sāpaḍata nāhī,mˈaːɟʰeː mˈuːl sˈaːpəɖˌət nˈaːhi,My child is not found,SAFETY-CRITICAL wording; flagged for fluent-speaker review,2,mr-agent-v1;ipa=espeak
 children.make-an-announcement,कृपया जाहीर सूचना द्या,,kr̥payā jāhīra sūcanā dyā,kɾˈʊpjˌaː zaːhˈiːɾ sˈuːcnˌaː djˈaː,,,2,mr-agent-v1;ipa=espeak
 children.child-age,माझ्या मुलाचे वय: {},,mājhyā mulācē vaya: {},mˈaːɟʰjaː mʊlˈaːceː vˈʌɛj {},my child's age: {},,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 135 वय (n. age);fix=mr.wikipedia महाराष्ट्रातील शिक्षण व्यवस्था rev 2546612 (पहिल्या वर्गात जाणाऱ्या मुलाचे वय सहा असले पाहिजे);was=माझे मूल {} वर्षांचे आहे (mājhē mūla {} varṣāṁcē āhē: the oblique plural -- wrong for one: एका वर्षाचे);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames औषधाची ऍलर्जी: {} and रात्रींची संख्या: {});row-corrections-v14;ipa=espeak
 children.high-chair,लहान मुलांची खुर्ची आहे का?,,lahāna mulāṁcī khurcī āhē kā?,ləhˈaːn mʊlˈãci kʰˈʊɾci ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
@@ -99,7 +99,7 @@ children.car-seat,आम्हाला मुलांची कार सी�
 children.stroller,बाळगाडी,,bāḷagāḍī,bˌaːɭɡˈaːɖi,,,2,mr-agent-v1;ipa=espeak
 children.playground,मुलांसाठी खेळण्याची जागा आहे का?,,mulāṁsāṭhī khēḷaṇyācī jāgā āhē kā?,mˌʊlãsˈaːʈʰi kʰˌeːɭɳjˈaːci zˈaːɡaː ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
 social-basics.politeness-particles,"थाई भाषेत नम्रता दाखवण्यासाठी वाक्याच्या शेवटी शब्द जोडतात: पुरुष असाल तर 'खाप', स्त्री असाल तर 'खा'. प्रश्न विचारताना स्त्री 'खा' चढत्या सुरात म्हणते. इथल्या ओळींमध्ये हा शब्द जोडलेला नाही, तो तुम्ही स्वतः जोडायचा आहे.",,"thāī bhāṣēta namratā dākhavaṇyāsāṭhī vākyācyā śēvaṭī śabda jōḍatāta: puruṣa asāla tara 'khāpa', strī asāla tara 'khā'. praśna vicāratānā strī 'khā' caḍhatyā surāta mhaṇatē. ithalyā ōḷīṁmadhyē hā śabda jōḍalēlā nāhī, tō tumhī svataḥ jōḍāyacā āhē.",,,,2,mr-notes-v1
-board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,,2,mr-board-answers-v1;ipa=espeak
+board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,Is walking possible?,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,2,mr-board-answers-v1;ipa=espeak
 board-answers.card-or-cash,कार्ड की रोख?,,kārḍa kī rōkha?,kˈaːɾɖ kˈi ɾˈoːkʰ,,,2,mr-board-answers-v1;ipa=espeak
 board-answers.help-is-coming,मदत येत आहे,,madata yēta āhē,mˈʌdət jˈeːt ˈaːheː,"progressive gerund + āhē, invariant regardless of speaker",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
 board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,how many are wanted?,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",2,mr-board-answers-v1;ipa=espeak

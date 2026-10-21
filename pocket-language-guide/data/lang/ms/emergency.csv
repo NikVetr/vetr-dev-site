@@ -20,7 +20,7 @@ emergency-medical.is-there-a-doctor-who-speaks-english,Ada doktor yang boleh bah
 emergency-medical.i-think-a-bone-is-broken,Nampaknya saya patah tulang,,nampˈakɲə sˈajə pˈatah tˈulaŋ,,,2,ms-agent-v1;fix=DBP nampaknya;row-corrections-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak kecemasan saya,,tˈoloŋ hubˈuŋi kˈontaʔ kətʃəmˈasan sˈajə,,,2,ms-agent-v1;fix=MABBIM kecemasan;row-corrections-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Saya punya insurans perjalanan,,sˈajə pˈuɲə insˈurans pərdʒalˈanan,,,2,ms-agent-v1;ipa=espeak
-medical-conditions.i-am-diabetic,Saya punya diabetes,Saya kencing manis,sˈajə pˈuɲə dˌiabˈetes,older lay word for diabetes,,2,ms-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Saya punya diabetes,Saya kencing manis,sˈajə pˈuɲə dˌiabˈetes,I have diabetes,older lay word for diabetes,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-need-insulin,Saya perlu insulin,,sˈajə pˈərlu insˈulen,,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-have-asthma,Saya punya asma,,sˈajə pˈuɲə ˈasmə,,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,Saya punya penyakit jantung,,sˈajə pˈuɲə pəɲˈaket dʒˈantoŋ,,,2,ms-agent-v1;ipa=espeak
@@ -48,7 +48,7 @@ pharmacy-symptoms.i-have-a-fever,Saya demam,,sˈajə dˈəmam,,,2,ms-agent-v1;ip
 pharmacy-symptoms.i-think-i-have-malaria,Nampaknya saya kena malaria,,nampˈakɲə sˈajə kˈənə mˌalarˈiə,,,2,malaria-v1;fix=DBP nampaknya;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,Saya perlu ujian malaria,pemeriksaan darah malaria,sˈajə pˈərlu udʒˈian mˌalarˈiə,,,2,malaria-v1;fix=MABBIM ujian;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Saya cirit-birit,,sˈajə tʃˈiretbiret,,,2,ms-agent-v1;fix=DBP cirit-birit;row-corrections-v1;ipa=espeak
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Farmasi 24 jam di mana?,,farmˈasi dˈuəpˌulohəmpat dʒˈam dimˈanə,Malaysia has no dedicated 24-hour chain the way Indonesia's K-24 is; some Guardian and Watsons outlets in cities open 24 hours,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Farmasi 24 jam di mana?,,farmˈasi dˈuəpˌulohəmpat dʒˈam dimˈanə,Where is a 24-hour pharmacy?,Malaysia has no dedicated 24-hour chain the way Indonesia's K-24 is; some Guardian and Watsons outlets in cities open 24 hours,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.painkiller,Ubat pereda nyeri,,ˈubat pərˈɛdə ɲˈəri,,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Perlu preskripsi doktor?,,pˈərlu prəskrˈipsi dˈoktər,,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Kepala saya sakit,Sakit kepala,kəpˈalə sˈajə sˈaket,,,2,ms-agent-v1;ipa=espeak

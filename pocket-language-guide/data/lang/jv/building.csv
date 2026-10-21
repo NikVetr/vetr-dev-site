@@ -42,7 +42,7 @@ toilets.out-of-order,Risak,Saweg dipundandosi,ˈrisaʔ,,,2,jv-agent-v1;ipa=jv-g2
 toilets.mens-toilet,WC jaler,Priya,weˈtʃe ˈdʒalər,,,2,jv-agent-v1;ipa=jv-g2p+loan
 toilets.womens-toilet,WC èstri,Wanita,weˈtʃe ˈɛstri,,,2,jv-agent-v1;ipa=jv-g2p+loan
 toilets.drinking-water,Toya saged dipunombé,Toya ombèn,ˈtɔjɔ ˈsaɡəd dipuˈnɔmbe,,,2,jv-agent-v1;ipa=jv-g2p
-toilets.not-for-drinking,Toya mboten kénging dipunombé,Dilarang ngombé toya,ˈtɔjɔ ˈmbɔtən ˈkeŋɪŋ dipuˈnɔmbe,usually only a crossed-tap sign,,2,jv-agent-v1;ipa=jv-g2p
+toilets.not-for-drinking,Toya mboten kénging dipunombé,Dilarang ngombé toya,ˈtɔjɔ ˈmbɔtən ˈkeŋɪŋ dipuˈnɔmbe,water may not be drunk,usually only a crossed-tap sign,2,jv-agent-v1;ipa=jv-g2p
 toilets.accessible-toilet,WC kanggé difabel,WC disabilitas,weˈtʃe ˈkaŋɡe diˈfabəl,,,2,jv-agent-v1;ipa=jv-g2p+loan
 toilets.where-can-i-wash-my-hands,Wisuh asta wonten pundi?,,ˈwisʊh ˈastɔ ˈwɔntən ˈpʊndi,wisuh = to wash the hands,,2,jv-agent-v1;ipa=jv-g2p
 toilets.can-i-flush-the-paper,Tisunipun kénging dipunbucal ing kloset?,,tisuˈnipʊn ˈkeŋɪŋ dipʊnˈbutʃal ɪŋ ˈklɔsət,,,2,jv-agent-v1;ipa=jv-g2p
@@ -56,5 +56,5 @@ building-words.entrance,Mlebet,Lawang mlebet,mləˈbət,,,2,jv-agent-v1;ipa=jv-g
 building-words.exit,Medal,Lawang medal,məˈdal,,,2,jv-agent-v1;ipa=jv-g2p
 building-words.men,Jaler,Priya,ˈdʒalər,,,2,jv-agent-v1;ipa=jv-g2p
 building-words.women,Èstri,Wanita,ˈɛstri,,,2,jv-agent-v1;ipa=jv-g2p
-building-words.door,Kori,Lawang,ˈkori,lawang is the ngoko word,,2,jv-agent-v1;ipa=jv-g2p
+building-words.door,Kori,Lawang,ˈkori,door,lawang is the ngoko word,2,jv-agent-v1;ipa=jv-g2p
 building-words.key,Kunci,,ˈkʊntʃi,,,2,jv-agent-v1;ipa=jv-g2p

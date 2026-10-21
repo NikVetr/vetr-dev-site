@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 utility-templates.i-want-to-go-to,ខ្ញុំចង់ទៅ {},,kʰɲom tɕɑŋ tɨw {},,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
 utility-templates.please-give-me,ខ្ញុំសុំ {},សុំ {},kʰɲom som {},"I ask for {}: som covers both give me and may I have, and needs no verb after it",,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
-utility-templates.may-i,ខ្ញុំ {} បានទេ,,kʰɲom {} baːn teː,I {} - is that possible? Put a verb in the gap; baan tee is the ordinary permission question,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+utility-templates.may-i,ខ្ញុំ {} បានទេ,,kʰɲom {} baːn teː,I {} - is that possible?,put a verb in the gap; baan tee is the ordinary permission question,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
 utility-templates.please-do-not-add,សូមកុំដាក់ {},,soːm kom daʔ {},please do not put {} in,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
 utility-templates.do-you-have,មាន {} ទេ,,miən {} teː,,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
 utility-templates.please-write-the-number,សូមសរសេរលេខ,,soːm sɑseː leːk,,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"

@@ -14,7 +14,7 @@ numbers-money.y-b-i,صد,۱۰۰,sad,sad,,,2,fa-agent-v1;ipa=espeak
 numbers-money.y-qi-n,هزار,۱۰۰۰,hezār,hezɑr,,,2,fa-agent-v1;ipa=espeak
 numbers-money.y-w-n,ده هزار,۱۰۰۰۰,dah hezār,dah hezɑr,,,2,fa-agent-v1;ipa=espeak
 numbers-money.b-n,نیم,۱/۲,nim,nim,half,,2,fa-agent-v1;ipa=espeak
-atm-cash.where-is-an-atm,خودپرداز کجاست؟,عابربانک,khodpardāz kojāst?,xodpardɑz kodʒɑst,‘āber-bānk is just as common on signage,,2,fa-agent-v1;ipa=espeak
+atm-cash.where-is-an-atm,خودپرداز کجاست؟,عابربانک,khodpardāz kojāst?,xodpardɑz kodʒɑst,where is the ATM?,‘āber-bānk is just as common on signage,2,fa-agent-v1;ipa=espeak
 atm-cash.does-this-atm-take-foreign-cards,این دستگاه کارتِ خارجی می‌پذیرد؟,,in dastgāh kārt-e khāreji mipazirad?,in dastɡɑh kɑrte xɑredʒi mipazirad,"Iranian machines are outside the international card networks, so the answer is usually no",,2,fa-agent-v1;ipa=espeak
 atm-cash.the-atm-kept-my-card,دستگاه کارتم را نگه داشت,,dastgāh kārtam rā negah dāsht,dastɡɑh kɑrtam rɑ neɡah dɑʃt,,,2,fa-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,کارمزد دارد؟,,kārmozd dārad?,kɑrmozd dɑrad,,,2,fa-agent-v1;ipa=espeak
@@ -41,7 +41,7 @@ atm-cash.money-exchange,صرافی,,sarrāfi,sarrɑfi,,,2,fa-agent-v1;ipa=espeak
 atm-cash.pin,رمز,رمزِ کارت,ramz,ramz,,,2,fa-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,عددها ترکیبی‌اند: شی ده و ئی یک و اِر دو، پس یازده شی‌ئی است و بیست اِر‌شی و بیست‌ویک اِر‌شی‌ئی. در تلفن یک را یائو می‌خوانند. میانِ عدد و اسم باید یک واژهٔ شمارشی بیاید و حذف‌شدنی نیست: گِه برای چیزها، وِی برای آدم‌ها، جانگ برای بلیت و چیزهای تخت، بِی برای فنجان، پینگ برای بطری. پیش از واژهٔ شمارشی دو را لیانگ می‌گویند نه اِر، پس دو بلیت لیانگ‌جانگ‌پیائو است. پول: یوان را در گفتار کوای می‌گویند، جیائو یا مائو یک‌دهمِ آن است و فِن یک‌صدم. چینی زبانِ آهنگ است و آهنگ‌ها اینجا نوشته نشده‌اند.,,,,,,2,fa-notes-v1
 numbers-money.number-and-classifier-notes-2,عددها ترکیبی‌اند: جو ده و ایچی یک و نی دو، پس یازده جوایچی است و بیست نی‌جو و بیست‌ویک نی‌جوایچی. در شمردن، پسوندی به عدد می‌چسبد که به شکلِ شمرده‌شده بستگی دارد و حذف نمی‌شود: ـتسو برای چیزها، ـمای برای چیزهای تخت، ـهون برای چیزهای دراز، ـنین برای آدم‌ها، ـهای برای فنجان‌ها. در تلفن صفر را زِرو یا مارو می‌گویند، چهار را یون، هفت را نانا و نه را کیو، و خطِ تیره را نو می‌خوانند.,,,,,,2,fa-notes-v1
-numbers-money.rial,ریال,تومان,riāl,riɑl,the unit on the banknote; a shop quotes in toman,,2,fa-agent-v1;ipa=espeak
+numbers-money.rial,ریال,تومان,riāl,riɑl,rial,the unit on the banknote; a shop quotes in toman,2,fa-agent-v1;ipa=espeak
 numbers-money.toman,تومان,ده ریال,tomān,tumɑn,"one toman is ten rial, and the price you are quoted is in toman",,2,fa-agent-v1;ipa=espeak
 numbers-money.li-ng,دو + واژهٔ شمارشی,,do + vāzhe-ye shomāreshi,do,,,2,fa-gloss-v1;ipa=espeak
 numbers-money.yu-n,یوان,,yuān,javɑn,,,2,fa-gloss-v1;cldr;ipa=espeak

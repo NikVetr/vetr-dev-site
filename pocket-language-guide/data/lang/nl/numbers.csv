@@ -30,7 +30,7 @@ atm-cash.please-charge-in-local-currency,Reken alstublieft af in de lokale valut
 atm-cash.where-can-i-get-coins,Waar kan ik munten krijgen?,,ʋˈaːr kɑn ɪk mˈʏntən krˈɛɪɣən,,,2,nl-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Is er een minimumbedrag voor kaartbetalingen?,,ɪs ər ən mˈinimˌʏmbɛdrˌɑx vɔːr kˈaːrtbətˌaːlɪŋən,,,2,nl-agent-v1;ipa=espeak
 atm-cash.atm,pinautomaat,geldautomaat,pˌinʌʊtoːmˈaːt,,,2,nl-agent-v1;ipa=espeak
-atm-cash.banknote,briefje,bankbiljet,brˈifjə,everyday word ('een briefje van twintig'); bankbiljet is the more formal term,,2,nl-agent-v1;ipa=espeak
+atm-cash.banknote,briefje,bankbiljet,brˈifjə,banknote,everyday word ('een briefje van twintig'); bankbiljet is the more formal term,2,nl-agent-v1;ipa=espeak
 atm-cash.coin,munt,,mˈʏnt,,,2,nl-agent-v1;ipa=espeak
 atm-cash.cash-only,Alleen contant,,ɑlˈeːn kɔntˈɑnt,,,2,nl-agent-v1;ipa=espeak
 atm-cash.fee,kosten,commissie,kˈɔstən,,,2,nl-agent-v1;ipa=espeak
@@ -55,7 +55,7 @@ numbers-money.lira,lira,,lˈiraː,,,2,nl-agent-v1;ipa=espeak
 numbers-money.lira-symbol,lira (symbool),,lˈiraː,,,2,nl-agent-v1;ipa=espeak
 numbers-money.dong,dong,,dˈɔŋ,,,2,nl-agent-v1;ipa=espeak
 numbers-money.dong-symbol,dong (symbool),,dˈɔŋ,,,2,nl-agent-v1;ipa=espeak
-numbers-money.ruble,roebel,,rˈubəl,the naturalised Dutch word,,2,nl-agent-v1;ipa=espeak
+numbers-money.ruble,roebel,,rˈubəl,ruble,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
 numbers-money.ruble-symbol,roebel (symbool),,rˈubəl,,,2,nl-agent-v1;ipa=espeak
 numbers-money.rupiah,rupiah,,rˈypiˌɑh,,,2,nl-agent-v1;ipa=espeak
 numbers-money.rupiah-symbol,rupiah (symbool),,rˈypiˌɑh,,,2,nl-agent-v1;ipa=espeak
@@ -65,13 +65,13 @@ numbers-money.baht,baht,,bˈɑht,,,2,nl-agent-v1;ipa=espeak
 numbers-money.baht-symbol,baht (symbool),,bˈɑht,,,2,nl-agent-v1;ipa=espeak
 numbers-money.forint,forint,,fˈoːrɪnt,,,2,nl-agent-v1;ipa=espeak
 numbers-money.forint-symbol,forint (symbool),,fˈoːrɪnt,,,2,nl-agent-v1;ipa=espeak
-numbers-money.rupee,roepie,,rupˈi,the naturalised Dutch word,,2,nl-agent-v1;ipa=espeak
+numbers-money.rupee,roepie,,rupˈi,rupee,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
 numbers-money.rupee-symbol,₹,roepie,,,,2,nl-agent-v1
 numbers-money.dollar,dollar,$,dˈɔlɑr,,,2,nl-agent-v1;ipa=espeak
 numbers-money.dollar-symbol,$,dollar,,,,2,nl-agent-v1
-numbers-money.pound,pond,£,pˈɔnt,"Brits pond, the naturalised Dutch word",,2,nl-agent-v1;ipa=espeak
+numbers-money.pound,pond,£,pˈɔnt,pound,"Brits pond, the naturalised Dutch word",2,nl-agent-v1;ipa=espeak
 numbers-money.pound-symbol,£,pond,,,,2,nl-agent-v1
-numbers-money.franc,frank,,frˈɑŋk,the naturalised Dutch word,,2,nl-agent-v1;ipa=espeak
+numbers-money.franc,frank,,frˈɑŋk,franc,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
 numbers-money.franc-symbol,frank (symbool),,frˈɑŋk,,,2,nl-agent-v1;ipa=espeak
 numbers-money.peso,peso,,pˈeːzoː,,,2,nl-agent-v1;ipa=espeak
 numbers-money.peso-symbol,peso (symbool),,pˈeːzoː,,,2,nl-agent-v1;ipa=espeak

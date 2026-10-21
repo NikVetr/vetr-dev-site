@@ -8,7 +8,7 @@ payment-receipt.how-much-in-total,एकूण किती झाले?,,ēkū
 payment-receipt.can-we-pay-separately,आम्ही वेगवेगळे पैसे भरू शकतो का?,,āmhī vēgavēgaḷē paisē bharū śakatō kā?,ˈaːmhi vˌeːɡvˈeːɡɭˌeː pˈaɪseː bʰˈʌɾuː ʃˈʌktˌoː kˈaː,,,2,mr-agent-v1;ipa=espeak
 payment-receipt.is-tax-included,यात कर समाविष्ट आहे का?,,yāta kara samāviṣṭa āhē kā?,jˈaːt kˈʌɾ sˌəmaːvˈɪʂʈ ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,माझे कार्ड चालले नाही,,mājhē kārḍa cālalē nāhī,mˈaːɟʰeː kˈaːɾɖ cˈaːllˌeː nˈaːhi,,,2,mr-agent-v1;ipa=espeak
-payment-receipt.the-bill-is-wrong,बिलात चूक झाली आहे असे वाटते,,bilāta cūka jhālī āhē asē vāṭatē,bɪlˈaːt cˈuːk ɟʰˈaːli ˈaːheː ˈʌseː vˈaːʈtˌeː,"phrased as a polite query, not an accusation",,2,mr-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,बिलात चूक झाली आहे असे वाटते,,bilāta cūka jhālī āhē asē vāṭatē,bɪlˈaːt cˈuːk ɟʰˈaːli ˈaːheː ˈʌseː vˈaːʈtˌeː,[It] seems there is a mistake in the bill,"phrased as a polite query, not an accusation",2,mr-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,मी आधीच पैसे दिले आहेत,,mī ādhīca paisē dilē āhēta,mˈi aːdʰˈiːc pˈaɪseː dˈɪleː aːhˈeːt,,,2,mr-agent-v1;ipa=espeak
 shopping.i-am-just-looking,फक्त बघायचे आहे,,phakta baghāyacē āhē,pʰˈʌkt bəɡʰˈaːjcˌeː ˈaːheː,just to look is [my intent],"impersonal, no gender",2,mr-agent-v1;ipa=espeak
 shopping.how-much-is-this,हे किती रुपयांना आहे?,,hē kitī rupayāṁnā āhē?,hˈeː kˈɪti ɾˌʊpjˈãnaː ˈaːheː,,,2,mr-agent-v1;ipa=espeak

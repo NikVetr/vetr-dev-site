@@ -55,7 +55,7 @@ place-words.visitor-center,turistički informativni centar,,turistitʃki informa
 place-words.railway-station,željeznička stanica,,ʒeʎeznitʃka stanitsa,,,2,hr-agent-v1;ipa=espeak
 place-words.airport,zračna luka,aerodrom,zrˈatʃna lˈuka,airport,zračna luka is what Croatian signage says; aerodrom is what people say,2,hr-agent-v1;ipa=espeak
 place-words.service-desk,informacije,,informatsije,,,2,hr-agent-v1;ipa=espeak
-place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,,2,hr-agent-v1;ipa=espeak
+place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,bus stop,stajalište is the official sign word for a stop,2,hr-agent-v1;ipa=espeak
 place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,,2,hr-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,turistička atrakcija,,turistitʃka atraktsija,,,2,hr-agent-v1;ipa=espeak
 border-customs.i-am-a-tourist,Turist sam,,tˈurist sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Turistkinja sam (the same wording);was=text_alt Turistkinja sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak

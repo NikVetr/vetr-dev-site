@@ -2,12 +2,12 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 pronouns-verbs.i-me,እኔ / እኔን,,inē / inēn,ʔɨne / ʔɨnen,I / me,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.we-us,እኛ / እኛን,,innya / innyan,ʔɨɲːa / ʔɨɲːan,we / us,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.you,አንተ / አንቺ,,ānte / ānchī,ʔantə / ʔantʃi,to a man / to a woman,,2,am-agent-v1;ipa=bgn-am
-pronouns-verbs.you-polite,እርስዎ,,irsiwo,ʔɨrsɨwo,the polite grade,no gender,2,am-agent-v1;ipa=bgn-am
+pronouns-verbs.you-polite,እርስዎ,,irsiwo,ʔɨrsɨwo,you,the polite grade; no gender,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.he-him,እሱ,,issu,ʔɨsːu,,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.she-her,እሷ,,isswa,ʔɨsːwa,,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.they-them,እነሱ,,innessu,ʔɨnːəsːu,also the honorific singular,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.my-mine,የኔ,,yenē,jəne,,,2,am-agent-v1;ipa=bgn-am
-pronouns-verbs.your-yours,የእርስዎ,,yeʼirsiwo,jəʔɨrsɨwo,polite,,2,am-agent-v1;ipa=bgn-am
+pronouns-verbs.your-yours,የእርስዎ,,yeʼirsiwo,jəʔɨrsɨwo,your,polite,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.be-called-call,ይባላል / መጥራት,,yibbalal / metʼirat,jɨbːalal / mətʼɨrat,is called / to call,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.have,አለው,,āllew,ʔalːəw,he has,,2,am-agent-v1;ipa=bgn-am
 pronouns-verbs.do-not-have,የለውም,,yellewim,jəlːəwɨm,he does not have,,2,am-agent-v1;ipa=bgn-am

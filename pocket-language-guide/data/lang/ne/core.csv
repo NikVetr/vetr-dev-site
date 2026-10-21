@@ -3,11 +3,11 @@ pronouns-verbs.i-me,म / मलाई,,ma / malāī,mə / məlˈaːi,I / to me,
 pronouns-verbs.we-us,हामी / हामीलाई,,hāmī / hāmīlāī,hˈaːmi / hˌaːmɪːlˈaːi,we / to us,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.you,तिमी,,timī,tˈɪmi,familiar,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.you-polite,तपाईं,,tapāīṁ,tˌəpaːˈɪːn,use this with strangers,,2,ne-agent-v1;ipa=espeak
-pronouns-verbs.he-him,ऊ / उसलाई,,ū / usalāī,ˈʊ / ˌʊsəlˈaːi,he/she and him/her are the same word in Nepali,"gender-neutral, not a gap",2,ne-agent-v1;ipa=espeak
+pronouns-verbs.he-him,ऊ / उसलाई,,ū / usalāī,ˈʊ / ˌʊsəlˈaːi,he / him,"he/she and him/her are the same word in Nepali; gender-neutral, not a gap",2,ne-agent-v1;ipa=espeak
 pronouns-verbs.she-her,ऊ / उसलाई,,ū / usalāī,ˈʊ / ˌʊsəlˈaːi,identical to he/him: Nepali's non-honorific third person has no gender split,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.they-them,तिनीहरू / तिनीहरूलाई,,tinīharū / tinīharūlāī,tɪnˈɪːhəɾˌuː / tˌɪnɪːhˌəɾuːlˈaːi,they / to them,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.my-mine,मेरो / मेरी,,mērō / mērī,mˈeːɾoː / mˈeːɾi,my / my,"मेरो agrees with a masculine/neuter possessed noun, मेरी with a feminine one; the same three-way agreement (-o/-ī/-ā) Hindi's मेरा/मेरी/मेरे makes, checked and confirmed rather than assumed after this pack's first draft guessed Nepali possessives were invariant and was wrong",2,ne-agent-v1;ipa=espeak
-pronouns-verbs.your-yours,तपाईंको,,tapāīṁkō,tˌəpaːˈɪːŋkoː,polite,,2,ne-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,तपाईंको,,tapāīṁkō,tˌəpaːˈɪːŋkoː,your / yours,polite,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.be-called-call,नाम / भनिनु,,nāma / bhaninu,nˈaːmə / bʰˈʌnɪnˌuʲu,name / to be called,,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.have,छ,,cha,cʰˈə,"sanga chha, ""with [X] there is""",,2,ne-agent-v1;ipa=espeak
 pronouns-verbs.do-not-have,छैन,,chaina,cʰˈɛːnə,,,2,ne-agent-v1;ipa=espeak

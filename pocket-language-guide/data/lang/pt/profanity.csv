@@ -2,8 +2,8 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,Meu Deus!,,meʊ dˈeʊs,my God,mild,1,profanity-v1;src=Priberam;ipa=espeak
 profanity.damn,Droga!,,drˈɔɡæ,drug,"mild oath, harmless",1,profanity-v1;src=Priberam;ipa=espeak
 profanity.expletive,Merda!,,mˈɛɾədæ,shit,coarse but everyday,1,profanity-v1;src=Priberam;ipa=espeak
-profanity.strong-expletive,Caralho!,Porra!,kˌaɾˈaljʊ,very strong; said at nothing,,1,profanity-v1;src=Priberam;ipa=espeak
-profanity.intensifier,maldito,de merda,mˌaʊdʒˈitʊ,with a noun: damn -; mild,,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.strong-expletive,Caralho!,Porra!,kˌaɾˈaljʊ,fuck!,very strong; said at nothing,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.intensifier,maldito,de merda,mˌaʊdʒˈitʊ,damned,with a noun: damn -; mild,1,profanity-v1;src=Priberam;ipa=espeak
 profanity.frustration,Isto é uma porcaria,,ˈistw ɛ ˌumæ pˌoɾəkaɾˈiæ,this is filth,mild-coarse,1,profanity-v1;src=Priberam;ipa=espeak
 profanity.thats-rude,Isso é grosseria,,ˈisw ɛ ɡrˌoseɾˈiæ,that is coarseness,,1,profanity-v1;src=Priberam;ipa=espeak
 profanity.excuse-my-language,Desculpe a expressão,,dˌeskˈuwpj a ˌespresˈɐ̃ʊ̃,excuse the expression,,1,profanity-v1;src=Priberam;ipa=espeak

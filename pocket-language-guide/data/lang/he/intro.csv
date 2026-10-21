@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
 introductions.my-name-is,קוראים לי {},קוֹרְאִים לִי {},qor’im li {},koʁˈim lˈi {},they call me {},,2,he-agent-v1;ipa=bgn
 introductions.nice-to-meet-you,נעים להכיר,נָעִים לְהַכִּיר,na‘im lehakir,naˈim lehakˈiʁ,pleasant to become acquainted,,2,he-agent-v1;ipa=bgn
-introductions.what-is-your-name,איך קוראים לך?,אֵיךְ קוֹרְאִים לְךָ?,eykh qor’im lekha?,ˈejx koʁˈim lexˈa,to a man; to a woman lakh,,2,he-agent-v1;ipa=bgn
+introductions.what-is-your-name,איך קוראים לך?,אֵיךְ קוֹרְאִים לְךָ?,eykh qor’im lekha?,ˈejx koʁˈim lexˈa,how do they call you?,to a man; to a woman lakh,2,he-agent-v1;ipa=bgn
 introductions.we-are-traveling-together,אנחנו מטיילים ביחד,אֲנַחְנוּ מְטַיְּילִים בְּיַחַד,anáẖnu metaylim beyáẖad,anˈaxnu metajlˈim bejˈaxad,we are travelling together,,2,he-agent-v1;ipa=bgn
 introductions.this-is-my-friend,זה חבר שלי,זֶה חָבֵר שֶׁלִּי,ze ẖaver sheli,zˈe xavˈeʁ ʃelˈi,"of a woman, ẖavera",,2,he-agent-v1;ipa=bgn
 introductions.i-am-from,אני מ{},אֲנִי מ{},ani m{},anˈi m {},I am from {},,2,he-agent-v1;ipa=bgn

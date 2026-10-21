@@ -2,8 +2,8 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,Mamma mia!,Dio mio!,mˈamma mˈia,my mother,"mild, and everywhere",1,profanity-v1;src=Treccani;ipa=espeak
 profanity.damn,Accidenti!,,atʃtʃidˈɛntɪ,mishaps,mild oath,1,profanity-v1;src=Treccani;ipa=espeak
 profanity.expletive,Merda!,,mˈɛrda,shit,coarse but everyday,1,profanity-v1;src=Treccani;ipa=espeak
-profanity.strong-expletive,Cazzo!,,kˈatstso,very strong; said at nothing,,1,profanity-v1;src=Treccani;ipa=espeak
-profanity.intensifier,maledetto,del cazzo,maledˈetto,with a noun: damn -; mild,,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.strong-expletive,Cazzo!,,kˈatstso,fuck!,very strong; said at nothing,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.intensifier,maledetto,del cazzo,maledˈetto,damned,with a noun: damn -; mild,1,profanity-v1;src=Treccani;ipa=espeak
 profanity.frustration,È una schifezza,,e ˌʊna skifˈetstsa,it is a disgusting thing,mild,1,profanity-v1;src=Treccani;ipa=espeak
 profanity.thats-rude,È volgare,,e volɡˈare,that is vulgar,,1,profanity-v1;src=Treccani;ipa=espeak
 profanity.excuse-my-language,Scusi il linguaggio,,skˈuzɪ il liŋɡwˈadʒdʒo,excuse the language,,1,profanity-v1;src=Treccani;ipa=espeak

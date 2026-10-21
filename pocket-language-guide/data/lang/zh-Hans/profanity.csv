@@ -3,7 +3,7 @@ profanity.oh-my-god,天哪！,,tiān na!,tʰjɛn˥ na,oh heaven,mild,1,profanity
 profanity.damn,该死！,,gāisǐ!,kaɪ˥sɯ˧˩˧,deserving death,"damn it, mild",1,profanity-v1;src=XHC-7;ipa=pinyin
 profanity.expletive,妈的！,,mā de!,ma˥ tɤ,mother's,coarse; not aimed at anyone,1,profanity-v1;src=XHC-7;ipa=pinyin
 profanity.strong-expletive,操！,草！,cào!,tsʰɑʊ˥˩,fuck!,very strong; 草 is the softened spelling,1,profanity-v1;src=XHC-7;ipa=pinyin
-profanity.intensifier,他妈的,,tā mā de,tʰa˥ ma˥ tɤ,before a noun: damn -; coarse,,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.intensifier,他妈的,,tā mā de,tʰa˥ ma˥ tɤ,his mother's,before a noun: damn -; coarse,1,profanity-v1;src=XHC-7;ipa=pinyin
 profanity.frustration,太烂了,,tài làn le,tʰaɪ˥˩ lan˥˩ lɤ,too rotten,rubbish; mild-coarse,1,profanity-v1;src=XHC-7;ipa=pinyin
 profanity.thats-rude,别说脏话,,bié shuō zānghuà,pjɛ˧˥ ʂwɔ˥ tsɑŋ˥xwa˥˩,do not use foul language,,1,profanity-v1;src=XHC-7;ipa=pinyin
 profanity.excuse-my-language,抱歉，我说了脏话,,"bàoqiàn, wǒ shuō le zānghuà","pɑʊ˥˩tɕʰjɛn˥˩, wɔ˧˩˧ ʂwɔ˥ lɤ tsɑŋ˥xwa˥˩","sorry, I used foul language",,1,profanity-v1;src=XHC-7;ipa=pinyin

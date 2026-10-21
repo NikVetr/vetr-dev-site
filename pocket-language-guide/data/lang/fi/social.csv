@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-social-basics.hello,Hei!,Moi!,hˈei,moi is the everyday casual form,,2,fi-agent-v1;ipa=espeak
+social-basics.hello,Hei!,Moi!,hˈei,hello!,moi is the everyday casual form,2,fi-agent-v1;ipa=espeak
 social-basics.hello-polite,Hyvää päivää.,,hˈyvæː pˈæivæː,,,2,fi-agent-v1;ipa=espeak
 social-basics.good-morning,Hyvää huomenta.,,hˈyvæː hˈuomenta,,,2,fi-agent-v1;ipa=espeak
 social-basics.good-evening,Hyvää iltaa.,,hˈyvæː ˈiltaː,,,2,fi-agent-v1;ipa=espeak
@@ -72,7 +72,7 @@ sim-data.esim,eSIM,,ˈeːsim,,,2,fi-agent-v1;ipa=espeak+loan
 sim-data.prepaid,prepaid,,prˈepaid,,,2,fi-agent-v1;ipa=espeak
 sim-data.roaming,verkkovierailu,roaming,vˈerkkovˌierailu,network visit,verkkovierailu is the official Finnish term and roaming is what people say,2,fi-agent-v1;ipa=espeak
 etiquette.is-this-allowed,Onko tämä sallittua?,,ˈoŋko tˈæmæ sˈallittˌua,,,2,fi-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,Kuuluuko täällä antaa tippiä?,,kˈuːluːko tˈæːllæ ˈantaː tˈippiæ,a neutral yes/no question; tipping is not customary in Finland and the answer is normally no,,2,fi-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,Kuuluuko täällä antaa tippiä?,,kˈuːluːko tˈæːllæ ˈantaː tˈippiæ,is giving a tip customary here?,a neutral yes/no question; tipping is not customary in Finland and the answer is normally no,2,fi-agent-v1;ipa=espeak
 etiquette.is-service-included,Sisältyykö palvelumaksu laskuun?,,sˈisæltˌyːkø pˈalvelumˌaksu lˈaskuːn,,,2,fi-agent-v1;ipa=espeak
 etiquette.may-i-enter,Saanko tulla sisään?,,sˈaːŋko tˈulla sˈisæːn,,,2,fi-agent-v1;ipa=espeak
 etiquette.remove-shoes,Pitääkö kengät ottaa pois?,,pˈitæːkø kˈeŋŋæt ˈottaː pˈois,asked at a Finnish home as a matter of course: shoes come off indoors,,2,fi-agent-v1;ipa=espeak
@@ -117,7 +117,7 @@ board-answers.help-is-coming,Apua on tulossa.,,ˈapua ˈon tˈulossa,,,2,fi-agen
 board-answers.where-does-it-hurt,Mihin sattuu?,,mˈihin sˈattuː,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.can-you-walk,Pystyttekö kävelemään?,,pˈystyttˌekø kˈævelemæːn,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.stay-here,On parasta jäädä tähän.,,ˈom pˈarasta jˈæːdæ tˈæhæn,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
-board-answers.what-is-your-name,Mikä nimi on?,,mˈikæ nˈimi ˈon,"drops the informal possessive sinun that introductions.what-is-your-name carries, per this concept's own steering away from a second-person possessive",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Mikä nimi on?,,mˈikæ nˈimi ˈon,what is [the] name?,"drops the informal possessive sinun that introductions.what-is-your-name carries, per this concept's own steering away from a second-person possessive",2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.the-hospital-is-close,Sairaala on lähellä.,,sˈairaːla ˈon lˈæhellæ,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Minulla ei ole puhelinta.,,mˈinulla ˈei ˈole pˈuhelˌinta,,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Etsin jonkun, joka voi auttaa.",,"ˈetsin jˈoŋkun, jˈoka vˈoi ˈauttaː",,,2,fi-agent-v1;board-answers-v1;ipa=espeak

@@ -50,7 +50,7 @@ laundry.please-iron-this,Kunt u dit strijken?,,kʏnt y dɪt strˈɛɪkən,,,2,nl
 laundry.detergent,wasmiddel,,ʋˌɑsmɪdˈɛl,,,2,nl-agent-v1;ipa=espeak
 laundry.dry-cleaning,stomerij,,stˌoːmərˈɛɪ,,,2,nl-agent-v1;ipa=espeak
 laundry.dryer,droger,,drˈoːɣər,,,2,nl-agent-v1;ipa=espeak
-laundry.coin-operated,muntautomaat,,mˌʏntʌʊtoːmˈaːt,sign on self-service machines,,2,nl-agent-v1;ipa=espeak
+laundry.coin-operated,muntautomaat,,mˌʏntʌʊtoːmˈaːt,coin-operated machine,sign on self-service machines,2,nl-agent-v1;ipa=espeak
 massage-spa.please-stop,"Stop, niet verdergaan.",,"stˈɔp, nˌit vˌɛrdərɣˈaːn",stop; do not go on,,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
 massage-spa.please-pause,"Even pauzeren, alstublieft.",,"ˈeːvən pʌʊzˈɪːrən, ˌɑlstʏblˈift","pause for a moment, please",,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
 massage-spa.please-avoid-this-area,"Dit gebied niet masseren, alstublieft.",,"dɪt ɣəbˈit nˌit mɑsˈɪːrən, ˌɑlstʏblˈift","do not massage this area, please",,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak

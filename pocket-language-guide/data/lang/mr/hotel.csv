@@ -50,7 +50,7 @@ laundry.please-iron-this,हे इस्त्री करून द्या,
 laundry.detergent,डिटर्जंट,,ḍiṭarjaṁṭa,ɖˌɪʈərzˈʌɳʈ,,,2,mr-agent-v1;ipa=espeak
 laundry.dry-cleaning,ड्राय क्लीनिंग,,ḍrāya klīniṁga,ɖɾˈaːj klinˈĩɡ,,,2,mr-agent-v1;ipa=espeak
 laundry.dryer,ड्रायर,,ḍrāyara,ɖɾˈaːjəɾ,,,2,mr-agent-v1;ipa=espeak
-laundry.coin-operated,नाणे टाकून चालणारे,,nāṇē ṭākūna cālaṇārē,nˈaːɳeː ʈaːkˈuːn cˌaːlɳˈaːɾeː,sign on self-service machines,,2,mr-agent-v1;ipa=espeak
+laundry.coin-operated,नाणे टाकून चालणारे,,nāṇē ṭākūna cālaṇārē,nˈaːɳeː ʈaːkˈuːn cˌaːlɳˈaːɾeː,operating by inserting a coin,sign on self-service machines,2,mr-agent-v1;ipa=espeak
 massage-spa.please-stop,मसाज बंद करा,,masāja baṁda karā,məsˈaːz bˈʌnd kˈʌɾaː,stop the massage,naming it removes the reading 'pause',2,mr-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-pause,थोडा वेळ थांबा,,thōḍā vēḷa thāmbā,tʰˈoːɖaː vˈeːɭ tʰˈãbaː,hold for a little while,,2,mr-agent-v1;spa-board-v1;ipa=espeak
 massage-spa.please-avoid-this-area,हा भाग टाळा,,hā bhāga ṭāḷā,hˈaː bʰˈaːɡ ʈˈaːɭaː,avoid this part,,2,mr-agent-v1;spa-board-v1;ipa=espeak

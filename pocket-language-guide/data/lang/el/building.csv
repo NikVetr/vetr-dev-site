@@ -29,7 +29,7 @@ toilets.where-toilet,Πού είναι η τουαλέτα;,Πού έχει το
 toilets.where-public-toilet,Πού είναι μια δημόσια τουαλέτα;,Υπάρχει δημόσια τουαλέτα εδώ κοντά;,Pou einai mia dimosia toualeta;,pˈu ˈine mɲa ðimˈosja tˌualˈeta,,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.may-i-use-the-toilet,Μπορώ να χρησιμοποιήσω την τουαλέτα;,"Μπορώ να πάω στην τουαλέτα, παρακαλώ;",Boro na chrisimopoiiso tin toualeta;,boɾˈo na xɾˌisimˌopiˈiso tin dˌualˈeta,,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.is-it-only-for-customers,Είναι μόνο για πελάτες;,,Einai mono gia pelates;,ˈine mˈono jˈa pelˈates,,,2,el-agent-v1;roman=elot743;ipa=espeak
-toilets.toilet-wc,Τουαλέτα,W.C.,Toualeta,tˌualˈeta,the sign usually reads W.C.,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.toilet-wc,Τουαλέτα,W.C.,Toualeta,tˌualˈeta,toilet,the sign usually reads W.C.,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.is-it-free,Είναι δωρεάν;,,Einai dorean;,ˈine ðˌoɾeˈan,Is it free of charge?,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.do-i-need-a-coin,Χρειάζεται κέρμα ή μάρκα;,Πληρώνω για την τουαλέτα;,Chreiazetai kerma i marka;,xɾçˈazetˌe cˈeɾma ˈi mˈaɾka,is a coin or token needed?,μάρκα = token,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.is-the-tap-water-safe-to-drink,Το νερό της βρύσης είναι πόσιμο;,Πίνεται το νερό της βρύσης;,To nero tis vrysis einai posimo;,to neɾˈo tiz vɾˈisis ˈine pˈosimˌo,,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -45,7 +45,7 @@ toilets.drinking-water,Πόσιμο νερό,,Posimo nero,pˈosimˌo neɾˈo,,,2
 toilets.not-for-drinking,Μη πόσιμο νερό,Ακατάλληλο για πόση,Mi posimo nero,mˈi pˈosimˌo neɾˈo,NOT drinking water,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.accessible-toilet,Τουαλέτα ΑμεΑ,Προσβάσιμη τουαλέτα,Toualeta Amea,tˌualˈet ˈame ˈalfa,toilet for people with disabilities,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.where-can-i-wash-my-hands,Πού μπορώ να πλύνω τα χέρια μου;,,Pou boro na plyno ta cheria mou;,pˈu boɾˈo na plˈino ta çˈeɾiˌa mu,,,2,el-agent-v1;roman=elot743;ipa=espeak
-toilets.can-i-flush-the-paper,Μπορώ να ρίξω το χαρτί στη λεκάνη;,Μην πετάτε χαρτί στη λεκάνη,Boro na rixo to charti sti lekani;,boɾˈo na ɾˈikso to xaɾtˈi sti lekˈani,the sign in reply: do not put paper in the bowl,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.can-i-flush-the-paper,Μπορώ να ρίξω το χαρτί στη λεκάνη;,Μην πετάτε χαρτί στη λεκάνη,Boro na rixo to charti sti lekani;,boɾˈo na ɾˈikso to xaɾtˈi sti lekˈani,can I throw the paper in the bowl?,the sign in reply: do not put paper in the bowl,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.is-there-a-toilet-on-board,Υπάρχει τουαλέτα μέσα;,Υπάρχει τουαλέτα στο λεωφορείο ή στο πλοίο;,Yparchei toualeta mesa;,ipˈaɾçi tˌualˈeta mˈesa,Is there a toilet on board (inside)?,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.the-toilet-will-not-flush,Το καζανάκι δεν λειτουργεί,Η τουαλέτα δεν τραβάει,To kazanaki den leitourgei,to kˌazanˈaci ðˈen lˌituɾjˈi,The cistern (flush) does not work,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.baby-change,Αλλαγή βρεφών,αλλαξιέρα,Allagi vrefon,ˌalajˈi vɾefˈon,baby changing,αλλαξιέρα = changing table,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -53,7 +53,7 @@ toilets.squat-toilet,τουρκική τουαλέτα,τουαλέτα δαπέ
 building-words.elevator,ανελκυστήρας,ασανσέρ,anelkystiras,ˌanelcistˈiɾas,lift,people say ασανσέρ,2,el-agent-v1;roman=elot743;ipa=espeak
 building-words.stairs,σκάλα,κλιμακοστάσιο,skala,skˈala,stairs,κλιμακοστάσιο = stairwell,2,el-agent-v1;roman=elot743;ipa=espeak
 building-words.entrance,Είσοδος,,Eisodos,ˈisoðˌos,,,2,el-agent-v1;roman=elot743;ipa=espeak
-building-words.exit,Έξοδος,Έξοδος κινδύνου,Exodos,ˈeksoðˌos,exit; alt = emergency exit,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.exit,Έξοδος,Έξοδος κινδύνου,Exodos,ˈeksoðˌos,exit,alt = emergency exit,2,el-agent-v1;roman=elot743;ipa=espeak
 building-words.men,Άνδρες,Ανδρών,Andres,ˈanðɾes,men,Ανδρών is the form on doors,2,el-agent-v1;roman=elot743;ipa=espeak
 building-words.women,Γυναίκες,Γυναικών,Gynaikes,jinˈeces,women,Γυναικών is the form on doors,2,el-agent-v1;roman=elot743;ipa=espeak
 building-words.door,πόρτα,θύρα,porta,pˈoɾta,,,2,el-agent-v1;roman=elot743;ipa=espeak

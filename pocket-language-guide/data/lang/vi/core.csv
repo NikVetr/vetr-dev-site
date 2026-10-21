@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 pronouns-verbs.i-me,tôi,,t̪oj˧,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.we-us,chúng tôi,,tʃuŋ˧˥ t̪oj˧,,,2,vi-agent-v1;ipa=espeak
-pronouns-verbs.you,bạn,,baːn˨˩ˀ,"neutral, any stranger",,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.you,bạn,,baːn˨˩ˀ,you,"neutral, any stranger",2,vi-agent-v1;ipa=espeak
 pronouns-verbs.you-polite,anh / chị,ông / bà,aɲ˧ / tʃi˨˩ˀ,"anh = m., chị = f.",,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.he-him,anh ấy,ông ấy,aɲ˧ əɪ˧˥,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.she-her,cô ấy,chị ấy,ko˧ əɪ˧˥,,,2,vi-agent-v1;ipa=espeak
@@ -13,7 +13,7 @@ pronouns-verbs.have,có,,kɔ˧˥,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.do-not-have,không có,,xoŋ˧ kɔ˧˥,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.go,đi,,ɗi˧,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.come,đến,,ɗen˧˥,,,2,vi-agent-v1;ipa=espeak
-pronouns-verbs.would-like,cho tôi,,tʃɔ˧ t̪oj˧,polite want-frame,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.would-like,cho tôi,,tʃɔ˧ t̪oj˧,give me,polite want-frame,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.want,muốn,,muə̯n˧˥,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.look-for,tìm,,t̪im˨˩,,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.buy,mua,,muə̯˧,,,2,vi-agent-v1;ipa=espeak

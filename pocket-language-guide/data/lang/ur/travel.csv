@@ -11,7 +11,7 @@ directions.can-i-walk-there,کیا پیدل جا سکتا ہوں؟,,kyā paidal 
 directions.how-far-is-it,کتنی دور ہے؟,,kitnī dūr hai?,kˈɪtni dˈuːɾ hɛ,,,2,ur-agent-v1;ipa=espeak
 directions.which-exit,کس گیٹ سے باہر جاؤں؟,کون سا دروازہ؟,kis geṭ se bāhar jā’ūñ?,kɪs ɡˈeːʈ seː bˈaːhəɾ ɟaːˈoːn,through which gate do I go out?,"station exits in Pakistan are numbered gates; the verb of leaving keeps it apart from air-travel.which-gate (کون سا گیٹ؟), whose text it had",2,"ur-agent-v1;fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive);in-pack-frame=directions.how-do-i-get-to ({} کیسے جاؤں؟);in-pack-neighbour=building-words.exit (باہر جانے کا راستہ);rule=distinct-concepts-distinct-text;row-corrections-v7;ipa=espeak"
 directions.can-you-show-me-the-way,راستہ دکھا دیجیے,,rāsta dikhā dījiye,ɾˈaːstˌa dˈʌkʰaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
-directions.north,شمال,,shumāl,ʃəmˈaːl,Perso-Arabic set throughout; the Hindi uttar / dakshin series is not used in Urdu,,2,ur-agent-v1;ipa=espeak
+directions.north,شمال,,shumāl,ʃəmˈaːl,north,Perso-Arabic set throughout; the Hindi uttar / dakshin series is not used in Urdu,2,ur-agent-v1;ipa=espeak
 directions.south,جنوب,,junūb,ɟʊnˈuːb,,,2,ur-agent-v1;ipa=espeak
 directions.east,مشرق,,mashriq,mˈaʃɾˌɪq,,,2,ur-agent-v1;ipa=espeak
 directions.west,مغرب,,maghrib,mˈaɣɾˌɪb,west,"also the name of the sunset prayer, so time and direction share the word",2,ur-agent-v1;ipa=espeak
@@ -30,8 +30,8 @@ taxi.please-send-me-the-address,پتہ بھیج دیجیے,ایڈریس بھیج
 taxi.we-need-the-east-gate-not-the-south-gate,ہمیں مشرقی گیٹ چاہیے، جنوبی نہیں,,"hameñ mashriqī geṭ chāhiye, junūbī nahīñ",hˈʌmẽː mˈaʃɾˌɪqi ɡˈeːʈ cˈaːhjeː ɟʊnˈuːbi nahˈĩː,,,2,ur-agent-v1;ipa=espeak
 taxi.please-stop-here,یہاں روک دیجیے,,yahāñ rok dījiye,jˈʌhãː ɾˈoːk diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
 taxi.can-you-wait-for-me-here,ذرا یہاں رک جائیے,,zarā yahāñ ruk jā’iye,zˈʌɾaː jˈʌhãː ɾˈʌk ɟˈaːjeː,please wait here a moment,"Urdu puts this as a request, not a yes/no question",2,ur-agent-v1;ipa=espeak
-taxi.we-need-to-catch-the-high-speed-train,ہمیں تیز رفتار ٹرین پکڑنی ہے,,hameñ tez raftār ṭren pakaṛnī hai,hˈʌmẽː tˈeːz ɾˈaftaːɾ ʈɾˈeːn pˈʌkəɽni hɛ,"fast-speed train; Pakistan has no high-speed rail, so travellers name the express instead",,2,ur-agent-v1;ipa=espeak
-taxi.please-use-the-meter,میٹر سے چلیے,میٹر آن کر دیجیے,mīṭar se chaliye,mˈeːʈəɾ seː cˈʌljeː,go by the meter; meters are rare in Pakistan,fares are agreed beforehand or set by the app,2,ur-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,ہمیں تیز رفتار ٹرین پکڑنی ہے,,hameñ tez raftār ṭren pakaṛnī hai,hˈʌmẽː tˈeːz ɾˈaftaːɾ ʈɾˈeːn pˈʌkəɽni hɛ,we have to catch [the] fast-speed train,"Pakistan has no high-speed rail, so travellers name the express instead",2,ur-agent-v1;ipa=espeak
+taxi.please-use-the-meter,میٹر سے چلیے,میٹر آن کر دیجیے,mīṭar se chaliye,mˈeːʈəɾ seː cˈʌljeː,go by the meter,meters are rare in Pakistan; fares are agreed beforehand or set by the app,2,ur-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,مجھے یہاں اترنا ہے,,mujhe yahāñ utarnā hai,mˌʊɟʰeː jˈʌhãː ʊtˈaɾnaː hɛ,,,2,ur-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,مجھے شنکانسن کے وقت پر پہنچا دیجیے,,mujhe shinkānsan ke waqt par pahunchā dījiye,mˌʊɟʰeː ʃˌənkˈaːnsən keː ʋˈaqt pˈʌɾ pahˈʊncaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
 taxi.could-you-make-it-colder,کیا اے سی ٹھنڈا کیا جا سکتا ہے؟,,kyā e sī ṭhanḍā kiyā jā saktā hai?,kjˈaː ˈeː sˈiː ʈʰˈʌnɖaː kjˈaː ɟˈaː sˈʌktˌaː hɛ,can the AC be made cold?,"the passive with jānā, which agrees with e sī (m.) and with nobody in the car, as in room-problems.can-i-change-rooms; sakte haiṁ carried the driver's gender",2,ur-agent-v1;fix=en.wikipedia Hindustani grammar rev 1365420047 (the passive is formed from the perfective participle by addition of the auxiliary jānā);fix=Platts جانا p. 373 (to be -- commonly used to form passive verbs);fix=ur.wikipedia برودت خانہ rev 8705974 (برودت خانے کا اندرونی حصہ ... ٹھنڈا کیا جا سکے);fix=ur.wikipedia ایئر کنڈیشنگ rev 6905451 (آپ کا ایک ٹن کا اے سی ... نکال باہر کرتا ہے: e sī is masculine);in-pack-frame=room-problems.can-i-change-rooms;rule=passive-agrees-with-its-subject;row-corrections-v4;ipa=espeak
@@ -61,7 +61,7 @@ place-words.tourist-spot-sightseeing-area,سیر گاہ,تفریحی مقام,sa
 border-customs.i-am-a-tourist,میں سیاح ہوں,میں ٹورسٹ ہوں,maiñ sayyāh hūñ,mˈẽ sjˈaːh hũː,,,2,ur-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,یہ میرا پاسپورٹ ہے,,yah merā pāsporṭ hai,jeːh mˈeːɾaː pˌaːspˈoːɾʈ hɛ,,,2,ur-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,مجھے {} دن رکنا ہے,,mujhe {} din ruknā hai,mˌʊɟʰeː {} dˈɪn ɾˈʊknaː hɛ,,,2,ur-agent-v1;ipa=espeak
-border-customs.nothing-to-declare,میرے پاس ظاہر کرنے کے لیے کچھ نہیں,کچھ ڈیکلیئر نہیں کرنا,mere pās zāhir karne ke liye kuchh nahīñ,mˈeːɾeː pˈaːs zˈaːhɪɾ kˌaɾneː keː lˈiːeː kʊcʰ nahˈĩː,"Pakistani airports sign the green channel NOTHING TO DECLARE, in English",,2,ur-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,میرے پاس ظاہر کرنے کے لیے کچھ نہیں,کچھ ڈیکلیئر نہیں کرنا,mere pās zāhir karne ke liye kuchh nahīñ,mˈeːɾeː pˈaːs zˈaːhɪɾ kˌaɾneː keː lˈiːeː kʊcʰ nahˈĩː,I have nothing to declare,"Pakistani airports sign the green channel NOTHING TO DECLARE, in English",2,ur-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,میں {} میں ٹھہرا ہوں,مجھے {} میں رکنا ہے,maiñ {} meñ ṭhahrā hūñ,mˈẽ {} mˈẽ ʈʰˈʌhɾaː hũː,I am staying in {},,2,"ur-agent-v1;fix=Platts A Dictionary of Urdu, Classical Hindi, and English (DSAL) p. 365 ṭhaharnā (to stay -- remain -- abide);was=literal ٹھہری ہوں if the speaker is a woman (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine میں {} میں ٹھہری ہوں serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 border-customs.i-am-here-for-business,میں کاروبار کے لیے آیا ہوں,,maiñ kārobār ke liye āyā hūñ,mˈẽ kˌaːɾoːbˈaːɾ keː lˈiːeː ˈaːjaː hũː,I have come for business,,2,"ur-agent-v1;fix=Platts A Dictionary of Urdu, Classical Hindi, and English (DSAL) p. 800 kār-o-bār (= kār-bār -- business);was=literal آئی ہوں if the speaker is a woman (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine میں کاروبار کے لیے آئی ہوں serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
 border-customs.i-have-a-return-ticket,میرے پاس واپسی کا ٹکٹ ہے,,mere pās wāpsī kā ṭikaṭ hai,mˈeːɾeː pˈaːs ʋˈaːpsˌiː kaː ʈˈɪkɪʈ hɛ,,,2,ur-agent-v1;ipa=espeak
@@ -89,12 +89,12 @@ pickup-meeting.please-pick-us-up-here,ہمیں یہاں سے لے لیجیے,,ha
 pickup-meeting.meet-us-at,ہمیں {} پر ملیے,,hameñ {} par miliye,hˈʌmẽː {} pˈʌɾ mˈʌljeː,,,2,ur-agent-v1;ipa=espeak
 pickup-meeting.please-call-me-a-ride,میرے لیے گاڑی بلا دیجیے,,mere liye gāṛī bulā dījiye,mˈeːɾeː lˈiːeː ɡˈaːɽi bˈʌlaː diɟˈiːeː,please call a car for me,گاڑی is a car and رکشہ an auto-rickshaw; ride-hailing in Pakistan is Careem or inDrive,2,ur-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,ٹیکسی بلا دیجیے,,ṭaiksī bulā dījiye,ʈˈeːksˌiː bˈʌlaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
-rail-station-words.high-speed-rail,تیز رفتار ٹرین,,tez raftār ṭren,tˈeːz ɾˈaftaːɾ ʈɾˈeːn,"fast train; Pakistan has no high-speed rail, only named expresses",,2,ur-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,تیز رفتار ٹرین,,tez raftār ṭren,tˈeːz ɾˈaftaːɾ ʈɾˈeːn,fast-speed train,"Pakistan has no high-speed rail, only named expresses",2,ur-agent-v1;ipa=espeak
 rail-station-words.maglev,مقناطیسی ٹرین,,maqnātīsī ṭren,mˌəqnaːtˈiːsi ʈɾˈeːn,,,2,ur-agent-v1;ipa=espeak
 rail-station-words.transfer,گاڑی بدلنا,,gāṛī badalnā,ɡˈaːɽi bˈʌdəlnaː,change trains,,2,ur-agent-v1;ipa=espeak
 rail-station-words.ticket-gate,ٹکٹ گیٹ,داخلے کا گیٹ,ṭikaṭ geṭ,ʈˈɪkɪʈ ɡˈeːʈ,ticket gate,Pakistan Railways posts a ticket checker at the platform gate rather than a barrier,2,ur-agent-v1;ipa=espeak
 rail-station-words.platform,پلیٹ فارم,,pleṭ fārm,plˈeːʈ fˈaːɾm,,,2,ur-agent-v1;ipa=espeak
-rail-station-words.ticket-office,ٹکٹ گھر,بکنگ آفس,ṭikaṭ ghar,ʈˈɪkɪʈ ɡʰˈʌɾ,reservation office; Pakistani stations sign it both ways,,2,ur-agent-v1;ipa=espeak
+rail-station-words.ticket-office,ٹکٹ گھر,بکنگ آفس,ṭikaṭ ghar,ʈˈɪkɪʈ ɡʰˈʌɾ,ticket house,Pakistani stations sign it both ways,2,ur-agent-v1;ipa=espeak
 rail-station-words.waiting-room,انتظار گاہ,ویٹنگ روم,intizār gāh,ˌɪntɪzˈaːɾ ɡˈaːh,,,2,ur-agent-v1;ipa=espeak
 rail-station-words.train-number,گاڑی نمبر,ٹرین نمبر,gāṛī nambar,ɡˈaːɽi nˈʌmbəɾ,,,2,ur-agent-v1;ipa=espeak
 rail-station-words.carriage,ڈبہ,بوگی,ḍibba,ɖˈʌbˌa,coach,بوگی is the ordinary spoken word in Pakistan,2,ur-agent-v1;ipa=espeak
@@ -103,7 +103,7 @@ rail-station-words.last-train,آخری ٹرین,,ākhirī ṭren,ˈaːxɾˌiː �
 rail-station-words.delayed,تاخیر سے,لیٹ,tākhīr se,taːxˈiːɾ seː,delayed,announcements say گاڑی تاخیر سے چل رہی ہے; passengers say لیٹ,2,ur-agent-v1;ipa=espeak
 rail-station-words.final-stop,آخری اسٹیشن,,ākhirī isṭeshan,ˈaːxɾˌiː ɪsʈˈiːʃən,,,2,ur-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,ٹکٹ چیکنگ مشین,,ṭikaṭ chekiṅg mashīn,ʈˈɪkɪʈ cˈeːkɪnɡ məʃˈiːn,ticket checking machine,Named for Lahore's Orange Line Metro card-tap turnstiles; Pakistan Railways intercity trains check tickets by hand instead (see this pack's ticket-gate row),2,ur-agent-v1;ipa=espeak
-common-signs.open-on,چالو,آن,chālū,cˈaːloː,"of a switch or a machine; switches in Pakistan are labelled ON, in English",,2,ur-agent-v1;ipa=espeak
+common-signs.open-on,چالو,آن,chālū,cˈaːloː,on,"of a switch or a machine; switches in Pakistan are labelled ON, in English",2,ur-agent-v1;ipa=espeak
 common-signs.closed-off,بند,آف,band,bˈʌnd,closed,"بند covers both senses; a switch is labelled OFF, in English",2,ur-agent-v1;ipa=espeak
 common-signs.occupied,مصروف,بھرا ہے,masrūf,mˌəsɾˈuːf,occupied,"the toilet or booth latch indicator in Pakistan reads OCCUPIED, in English; spoken Urdu is اندر کوئی ہے",2,ur-agent-v1;ipa=espeak
 common-signs.vacant,خالی,,khālī,xˈaːli,genuinely printed,"خالی is the word on vacant rooms, plots and seats",2,ur-agent-v1;ipa=espeak
@@ -115,8 +115,8 @@ common-signs.do-not-touch,ہاتھ نہ لگائیں,چھونا منع ہے,hāt
 common-signs.temporarily-closed,عارضی طور پر بند,فی الحال بند,ārzī taur par band,ˈaːɾzˌiː tˈɔːɾ pˈʌɾ bˈʌnd,closed for now,,2,ur-agent-v1;ipa=espeak
 common-signs.open-operating,کھلا ہے,کھلا,khulā hai,kʰˈʌlaː hɛ,is open,"shop placards in Pakistan usually print OPEN, in English; کھلا is the Urdu sign form",2,ur-agent-v1;ipa=espeak
 common-signs.closed,بند ہے,بند,band hai,bˈʌnd hɛ,"shop placards usually print CLOSED, in English",,2,ur-agent-v1;ipa=espeak
-common-signs.stopped-stop,رکیے,رک جائیں,rukiye,ɾˈʌkjeː,"stop; the octagonal road sign in Pakistan reads STOP, in English",,2,ur-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-validate,کیا ٹکٹ پنچ کرانا پڑے گا؟,,kyā ṭikaṭ panch karānā paṛe gā?,kjˈaː ʈˈɪkɪʈ pˈʌnc kəɾˈaːnaː pˈʌɽeː ɡaː,must the ticket be punched; Pakistan has no validate-before-boarding machine,"a conductor punches or checks the ticket, and metro fares are tapped at the gate",2,ur-agent-v1;ipa=espeak
+common-signs.stopped-stop,رکیے,رک جائیں,rukiye,ɾˈʌkjeː,stop,"the octagonal road sign in Pakistan reads STOP, in English",2,ur-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,کیا ٹکٹ پنچ کرانا پڑے گا؟,,kyā ṭikaṭ panch karānā paṛe gā?,kjˈaː ʈˈɪkɪʈ pˈʌnc kəɾˈaːnaː pˈʌɽeː ɡaː,will [the] ticket have to be punched?,"Pakistan has no validate-before-boarding machine; a conductor punches or checks the ticket, and metro fares are tapped at the gate",2,ur-agent-v1;ipa=espeak
 common-signs.pork-code,تختی پر سؤر کا کوڈ,,takhtī par su’ar kā koḍ,tˈʌxtˌiː pˈʌɾ səˈoːɾ kaː kˈoːɖ,,,2,ur-agent-v1;ipa=espeak
 rail-station-words.fare,کرایہ,,kirāya,kˌəɾaːjˈaa,,,2,ur-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,کرایہ کہاں دینا ہے؟,,kirāya kahāñ denā hai?,kˌəɾaːjˈaa kˈʌhãː dˈeːnaː hɛ,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

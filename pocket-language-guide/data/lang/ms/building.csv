@@ -19,7 +19,7 @@ accessibility.wheelchair-width,Kerusi roda saya lebar {} cm,,kərˈusi rˈodə s
 accessibility.hard-of-hearing,Pendengaran saya kurang,Saya susah mendengar,pəndəŋˈaran sˈajə kˈuraŋ,,,2,ms-agent-v1;ipa=espeak
 accessibility.speak-louder,Tolong bicara lebih keras,,tˈoloŋ bitʃˈarə lˈəbeh kˈəras,,,2,ms-agent-v1;ipa=espeak
 accessibility.visually-impaired,Saya OKU penglihatan,Penglihatan saya terhad,sˈajə ˌoːkˌejˈuː pəŋlihˈatan,,,2,ms-agent-v1;ipa=espeak
-accessibility.take-your-arm,Boleh saya pegang lengannya?,,bˈoleh sˈajə pˈəɡaŋ ləŋˈanɲə,"-nya = polite ""your""",,2,ms-agent-v1;ipa=espeak
+accessibility.take-your-arm,Boleh saya pegang lengannya?,,bˈoleh sˈajə pˈəɡaŋ ləŋˈanɲə,May I hold your arm?,"-nya = polite ""your""",2,ms-agent-v1;ipa=espeak
 accessibility.guide-dog,Ini anjing pemandu saya,,ˈini ˈandʒeŋ pəmˈandu sˈajə,,,2,ms-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Ini pintu masuk yang benar?,,ˈini pˈintu mˈasoʔ jaŋ bˈənar,,,2,ms-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,Ada Wi-Fi?,,ˈadə wˈifi,,,2,ms-agent-v1;ipa=espeak
@@ -42,7 +42,7 @@ toilets.out-of-order,Rosak,Sedang dalam pembaikan,rˈosaʔ,,,2,ms-agent-v1;fix=D
 toilets.mens-toilet,Tandas lelaki,Lelaki,tˈandas ləlˈaki,,,2,ms-agent-v1;ipa=espeak
 toilets.womens-toilet,Tandas wanita,Perempuan,tˈandas wanˈita,,,2,ms-agent-v1;ipa=espeak
 toilets.drinking-water,Air siap minum,Air minum,ˈaɪr sˈiap mˈinom,,,2,ms-agent-v1;ipa=espeak
-toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,ˈaɪr tˈidaʔ lˈajaʔ mˈinom,usually only a crossed-tap sign,,1,ms-agent-v1;ipa=espeak
+toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,ˈaɪr tˈidaʔ lˈajaʔ mˈinom,Water not fit for drinking,usually only a crossed-tap sign,1,ms-agent-v1;ipa=espeak
 toilets.accessible-toilet,Tandas OKU,,tˈandas ˌoːkˌejˈuː,,,2,ms-agent-v1;ipa=espeak
 toilets.where-can-i-wash-my-hands,Di mana boleh cuci tangan?,,dimˈanə bˈoleh tʃˈutʃi tˈaŋan,,,2,ms-agent-v1;ipa=espeak
 toilets.can-i-flush-the-paper,Tisunya boleh dibuang ke dalam tandas?,,tisˈuɲə bˈoleh dibˈuaŋ kə dˈalam tˈandas,,,2,ms-agent-v1;ipa=espeak

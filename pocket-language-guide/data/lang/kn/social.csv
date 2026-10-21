@@ -1,10 +1,10 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
-social-basics.hello,ನಮಸ್ಕಾರ,,namaskāra,namaskaːra,the ordinary greeting at any hour,,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
-social-basics.hello-polite,ನಮಸ್ಕಾರಗಳು,ನಮಸ್ಕಾರ,namaskāragaḷu,namaskaːraɡaɭu,the plural is the formal grade,,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
+social-basics.hello,ನಮಸ್ಕಾರ,,namaskāra,namaskaːra,Hello,the ordinary greeting at any hour,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
+social-basics.hello-polite,ನಮಸ್ಕಾರಗಳು,ನಮಸ್ಕಾರ,namaskāragaḷu,namaskaːraɡaɭu,Greetings,the plural is the formal grade,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.good-morning,ಶುಭೋದಯ,,śubhōdaya,ʃubʰoːdaja,auspicious dawn,,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.good-evening,ಶುಭ ಸಂಜೆ,,śubha saṁje,ʃubʰa saɲɟe,auspicious evening,,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.goodbye,ಹೋಗಿ ಬರುತ್ತೇನೆ,ನಮಸ್ಕಾರ,hōgi baruttēne,hoːɡi barutteːne,I shall go and come,said by the one leaving; Kannada has no word for a final parting,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
-social-basics.thank-you,ಧನ್ಯವಾದ,ಧನ್ಯವಾದಗಳು,dhanyavāda,dʰanjavaːda,"thanks / thanks (plural, more formal)",,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
+social-basics.thank-you,ಧನ್ಯವಾದ,ಧನ್ಯವಾದಗಳು,dhanyavāda,dʰanjavaːda,Thanks,"thanks (plural, more formal)",2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.you-are-welcome,ಪರವಾಗಿಲ್ಲ,,paravāgilla,paravaːɡilla,it does not matter,the ordinary reply to thanks,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.excuse-me-sorry,ಕ್ಷಮಿಸಿ,,kṣamisi,kʂamisi,forgive [me],also the way to get attention,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"
 social-basics.sorry,"ಕ್ಷಮಿಸಿ, ತಪ್ಪಾಯಿತು",,"kṣamisi, tappāyitu","kʂamisi, tappaːjitu","forgive me, a mistake happened",,2,"Kittel, A Kannada-English Dictionary (DSAL); Sridhar, Kannada (Descriptive Grammars 1990);ipa=espeak"

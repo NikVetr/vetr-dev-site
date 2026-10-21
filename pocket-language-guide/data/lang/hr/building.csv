@@ -19,7 +19,7 @@ accessibility.wheelchair-width,Moja invalidska kolica široka su {} cm,,mˈoja i
 accessibility.hard-of-hearing,Nagluh sam,,nˈaɡlux sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Nagluha sam (the same wording);was=text_alt Nagluha sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 accessibility.speak-louder,"Molim vas, govorite glasnije",,"mˈolim vˈas, ɡovorite ɡlasnije",,,2,hr-agent-v1;ipa=espeak
 accessibility.visually-impaired,Slabovidan sam,,slabovidan sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Slabovidna sam (the same wording);was=text_alt Slabovidna sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-accessibility.take-your-arm,Mogu li vas uzeti pod ruku?,,mˈoɡu li vˈas uzeti pˈod rˈuku,the standard sighted-guide request: the blind traveller holds the guide's arm,,2,hr-agent-v1;ipa=espeak
+accessibility.take-your-arm,Mogu li vas uzeti pod ruku?,,mˈoɡu li vˈas uzeti pˈod rˈuku,can I take you by the arm?,the standard sighted-guide request: the blind traveller holds the guide's arm,2,hr-agent-v1;ipa=espeak
 accessibility.guide-dog,Ovo je moj pas vodič,,ˈovo je mˈoj pˈas vˈoditʃ,,,2,hr-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Je li ovo pravi ulaz?,,je li ˈovo prˈavi ˈulaz,,,2,hr-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,Imate li Wi-Fi?,,imate li vˈajfaj,,,2,hr-agent-v1;ipa=espeak+loan
@@ -42,7 +42,7 @@ toilets.out-of-order,u kvaru,,u kvˈaru,,,2,hr-agent-v1;ipa=espeak
 toilets.mens-toilet,muški WC,,mˈuʃki vˈetse,,,2,hr-agent-v1;ipa=espeak+loan
 toilets.womens-toilet,ženski WC,,ʒˈenski vˈetse,,,2,hr-agent-v1;ipa=espeak+loan
 toilets.drinking-water,pitka voda,,pˈitka vˈoda,,,2,hr-agent-v1;ipa=espeak
-toilets.not-for-drinking,nije za piće,,nije zˈa pˈitɕe,the non-potable sign,,2,hr-agent-v1;ipa=espeak
+toilets.not-for-drinking,nije za piće,,nije zˈa pˈitɕe,not for drinking,the non-potable sign,2,hr-agent-v1;ipa=espeak
 toilets.accessible-toilet,prilagođeni toalet,,prilaɡodʑeni tˈoalet,,,2,hr-agent-v1;ipa=espeak
 toilets.where-can-i-wash-my-hands,Gdje mogu oprati ruke?,,ɡdjˈe mˈoɡu oprati rˈuke,,,2,hr-agent-v1;ipa=espeak
 toilets.can-i-flush-the-paper,Smije li se papir baciti u WC?,,smˈije li sˈe pˈapir batsiti ˈu vˈetse,,,2,hr-agent-v1;ipa=espeak+loan

@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,હે ભગવાન!,અરે રામ!,hē bhagavān!,heː bʰəɡʋaːn,O God,mild,1,gu-profanity-v1;ipa=espeak
 profanity.damn,ધત્ તારીની!,,dhat tārīnī!,dʰʌt taːɾiːni,an oath of annoyance,mild,1,gu-profanity-v1;ipa=espeak
-profanity.expletive,સાલા!,,sālā!,saːlaː,coarse; an insult if aimed at anyone,,1,gu-profanity-v1;ipa=espeak
-profanity.intensifier,કમબખ્ત,,kamabakht,kəməbʌkʰt,"before a noun: wretched, damn -; mild",,1,gu-profanity-v1;ipa=espeak
+profanity.expletive,સાલા!,,sālā!,saːlaː,[wife's] brother-in-law!,coarse; an insult if aimed at anyone,1,gu-profanity-v1;ipa=espeak
+profanity.intensifier,કમબખ્ત,,kamabakht,kəməbʌkʰt,wretched,"before a noun: wretched, damn -; mild",1,gu-profanity-v1;ipa=espeak
 profanity.frustration,આ બકવાસ છે,,ā bakavās chē,aː bəkʋaːs cʰeː,this is rubbish,mild,1,gu-profanity-v1;ipa=espeak
 profanity.thats-rude,આ અસભ્યતા છે,,ā asabhyatā chē,aː ʌsəbʰjətaː cʰeː,this is bad manners,,1,gu-profanity-v1;ipa=espeak
 profanity.excuse-my-language,ગાળ માટે માફ કરશો,,gāḷ māṭē māph karaśō,ɡaːɭ maːʈeː maːpʰ kəɾʌʃoː,forgive me for the swearing,,1,gu-profanity-v1;ipa=espeak

@@ -1,12 +1,12 @@
 concept_id,text,text_alt,romanization_elot,ipa,literal,note,confidence,provenance
-introductions.my-name-is,Με λένε {},,Me lene {},me lˈene {},They call me {}; the name goes in as written,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.my-name-is,Με λένε {},,Me lene {},me lˈene {},they call me {},the name goes in as written,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.nice-to-meet-you,Χαίρω πολύ,,Chairo poly,çˈeɾo polˈi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.what-is-your-name,Πώς σας λένε;,Πώς λέγεστε;,Pos sas lene;,pˈos saz lˈene,,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.we-are-traveling-together,Ταξιδεύουμε μαζί,,Taxidevoume mazi,tˌaksiðˈevumˌe mazˈi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.this-is-my-friend,Από εδώ ο φίλος μου,,Apo edo o filos mou,apˈo eðˈo o fˈiloz mu,"Lit. ""from here"": the Greek way to introduce",,2,el-agent-v1;roman=elot743;fix=speaker-variants.md third-party gender (no companion axis: Greek has no sex-neutral word for a friend (φίλος or φίλη) so the masculine stays and the doubled form goes);row-corrections-v6;ipa=espeak
 introductions.i-am-from,Η χώρα μου είναι {}.,,I chora mou einai {}.,i xˈoɾa mu ˈine {},my country is {}.,"a predicate-nominative proper noun after einai drops its article in Greek, so the bare name needs no case even though apo governs the accusative (Kanadas -> apo ton Kanada)",2,"el-agent-v1;roman=elot743;rewritten-for-fill-in=apo governs the accusative, which drops -s on masculine/-os nouns (Kanadas, Livanos) and -oi->-ous on plural Nisoi names; predicate-nominative proper nouns conventionally drop the article in Greek, so 'i chora mou einai' needs no case or article on the filler; replaces the label-style 'Katagogi: {}';ipa=espeak"
 introductions.where-are-you-from,Από πού είστε;,,Apo pou eiste;,apˈo pˈu ˈiste,,,2,el-agent-v1;roman=elot743;ipa=espeak
-introductions.how-are-you,Τι κάνετε;,Πώς είστε;,Ti kanete;,tˈi kˈanetˌe,"Lit. ""what are you doing?"": the usual greeting",,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.how-are-you,Τι κάνετε;,Πώς είστε;,Ti kanete;,tˈi kˈanetˌe,what are you doing?,the usual greeting,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.i-am-a-tourist,Είμαι εδώ για τουρισμό,Είμαι τουρίστας,Eimai edo gia tourismo,ˈime eðˈo jˈa tˌuɾismˈo,I am here as a tourist,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.this-is-my-husband-wife,Από εδώ ο άντρας μου / η γυναίκα μου,Από εδώ ο σύζυγός μου / η σύζυγός μου,Apo edo o antras mou / i gynaika mou,apˈo eðˈo o ˈadɾaz mu / i jinˈeka mu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.this-is-my-daughter-son,Από εδώ η κόρη μου / ο γιος μου,,Apo edo i kori mou / o gios mou,apˈo eðˈo i kˈoɾi mu / o jˈoz mu,,,2,el-agent-v1;roman=elot743;ipa=espeak

@@ -2,8 +2,8 @@ concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,Mon Dieu !,,mɔ̃ djˈø,my God,mild,1,profanity-v1;src=TLFi;ipa=espeak
 profanity.damn,Zut !,Mince !,zˈyt,darn,harmless,1,profanity-v1;src=TLFi;ipa=espeak
 profanity.expletive,Merde !,,mˈɛʁd,shit,coarse but everyday,1,profanity-v1;src=TLFi;ipa=espeak
-profanity.strong-expletive,Putain !,Tabarnak !,pytˈɛ̃,very strong; Québec tabarnak stronger,,1,profanity-v1;src=TLFi+Usito;ipa=espeak
-profanity.intensifier,foutu,putain de,futˈy,before a noun: damn -; coarse,,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.strong-expletive,Putain !,Tabarnak !,pytˈɛ̃,fuck!,very strong; Québec tabarnak stronger,1,profanity-v1;src=TLFi+Usito;ipa=espeak
+profanity.intensifier,foutu,putain de,futˈy,damned,before a noun: damn -; coarse,1,profanity-v1;src=TLFi;ipa=espeak
 profanity.frustration,C'est nul,,sɛ nˈyl,it is worthless,mild,1,profanity-v1;src=TLFi;ipa=espeak
 profanity.thats-rude,C'est grossier,,sɛ ɡʁosjˈe,that is coarse,,1,profanity-v1;src=TLFi;ipa=espeak
 profanity.excuse-my-language,Excusez l'expression,,ɛkskyze lɛkspʁɛsjˈɔ̃,excuse the expression,,1,profanity-v1;src=TLFi;ipa=espeak

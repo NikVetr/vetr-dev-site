@@ -5,7 +5,7 @@ emergency-medical.i-need-a-doctor,Trebam liječnika,,trˈebam lijetʃnika,,,2,hr
 emergency-medical.i-am-sick,Bolestan sam,,bolestan sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Bolesna sam (the same wording);was=text_alt Bolesna sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 emergency-medical.i-am-injured,Povrijeđen sam,,povrijedʑen sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Povrijeđena sam (the same wording);was=text_alt Povrijeđena sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
 emergency-medical.it-hurts-here,Ovdje me boli,,ˈovdje mˈe bˈoli,,,2,hr-agent-v1;ipa=espeak
-emergency-medical.where-is-a-pharmacy,Gdje je ljekarna?,,ɡdjˈe je ʎekarna,ljekarna is the Croatian word; apoteka is Serbian and is not used on Croatian signage,,2,hr-agent-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Gdje je ljekarna?,,ɡdjˈe je ʎekarna,where is the pharmacy?,ljekarna is the Croatian word; apoteka is Serbian and is not used on Croatian signage,2,hr-agent-v1;ipa=espeak
 emergency-medical.please-take-me-to-a-hospital,"Molim vas, odvezite me u bolnicu",,"mˈolim vˈas, odvezite mˈe u bolnitsu",,,2,hr-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,Ne osjećam se dobro,,nˈe osjetɕam sˈe dˈobro,,,2,hr-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,Ovo je hitan slučaj,,ˈovo je xˈitan slˈutʃaj,,,2,hr-agent-v1;ipa=espeak
@@ -32,7 +32,7 @@ medical-conditions.i-am-pregnant,Trudna sam,,trˈudna sam,,,2,hr-agent-v1;ipa=es
 medical-conditions.i-carry-an-adrenaline-injector,Nosim autoinjektor adrenalina,,nˈosim autoiɲektor adrenalina,,,2,hr-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Uzimam lijekove za {},,uzimam lijekove zˈa {},za takes the accusative,,2,hr-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Uzimam lijekove za razrjeđivanje krvi,,uzimam lijekove zˈa razrjedʑivaɲe krvi,,,2,hr-agent-v1;ipa=espeak
-medical-conditions.medicine-allergy,Alergija na lijek: {},,alerɡija nˈa lˈijek {},a label to fill in and show; use the generic drug name,,2,hr-agent-v1;ipa=espeak
+medical-conditions.medicine-allergy,Alergija na lijek: {},,alerɡija nˈa lˈijek {},allergy to medicine: {},a label to fill in and show; use the generic drug name,2,hr-agent-v1;ipa=espeak
 medical-conditions.this-card-lists-my-conditions,Na ovoj kartici su moje bolesti,,nˈa ˈovoj kartitsi su mˈoje bolesti,,,2,hr-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Ovo su moji lijekovi,,ˈovo su mˈoji lijekovi,,,2,hr-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,"Molim vas, dajte mi šećer ili sok",,"mˈolim vˈas, dˈajte mˈi ʃˈetɕer ili sˈok",,,2,hr-agent-v1;ipa=espeak
@@ -89,7 +89,7 @@ body-parts.chest,prsa,,prsa,plural only,,2,hr-agent-v1;ipa=espeak
 body-parts.eye,oko,,ˈoko,,,2,hr-agent-v1;ipa=espeak
 body-parts.ear,uho,,ˈuxo,,,2,hr-agent-v1;ipa=espeak
 body-parts.leg,noga,,nˈoɡa,,,2,hr-agent-v1;ipa=espeak
-body-parts.arm,ruka,,rˈuka,Croatian ruka covers the whole limb; the hand alone is šaka,,2,hr-agent-v1;ipa=espeak
+body-parts.arm,ruka,,rˈuka,arm,Croatian ruka covers the whole limb; the hand alone is šaka,2,hr-agent-v1;ipa=espeak
 body-parts.foot,stopalo,,stopalo,,,2,hr-agent-v1;ipa=espeak
 body-parts.hand,šaka,ruka,ʃˈaka,"šaka is the hand as against the whole arm, which is also ruka",,2,hr-agent-v1;ipa=espeak
 body-parts.knee,koljeno,,koʎeno,,,2,hr-agent-v1;ipa=espeak

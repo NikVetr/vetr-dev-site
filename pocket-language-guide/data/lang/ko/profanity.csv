@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_rr,ipa,literal,note,confidence,provenance
 profanity.oh-my-god,세상에!,,sesange!,sesaŋe,to the world,mild shock,1,profanity-v1;src=NIKL-StdKor;ipa=rr
 profanity.damn,젠장!,,jenjang!,tɕendʑaŋ,damn it,mild,1,profanity-v1;src=NIKL-StdKor;ipa=rr
 profanity.strong-expletive,씨발!,,ssibal!,s͈ibal,very strong,Korea's commonest swear,1,profanity-v1;src=NIKL-Urimalsaem;ipa=rr
-profanity.intensifier,개-,,gae-,kɛ,"prefix: damn -, gae-joha; coarse",,1,profanity-v1;src=NIKL-Urimalsaem;ipa=rr
+profanity.intensifier,개-,,gae-,kɛ,Fucking -,"prefix: damn -, gae-joha; coarse",1,profanity-v1;src=NIKL-Urimalsaem;ipa=rr
 profanity.frustration,이건 쓰레기예요,,igeon sseuregiyeyo,iɡʌn s͈ɯɾeɡijejo,this is garbage,blunt,1,profanity-v1;src=NIKL-StdKor;ipa=rr
 profanity.thats-rude,그건 무례해요,,geugeon muryehaeyo,kɯɡʌn muɾjehɛjo,that is impolite,,1,profanity-v1;src=NIKL-StdKor;ipa=rr
 profanity.excuse-my-language,거친 말 해서 죄송해요,,geochin mal haeseo joesonghaeyo,kʌtɕʰin mal hɛsʌ tɕwesoŋhɛjo,sorry for the coarse words,,1,profanity-v1;src=NIKL-StdKor;ipa=rr

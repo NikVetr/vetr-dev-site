@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
-social-basics.hello,Ahoj,,ˈahoj,the ordinary default greeting; formal Dobrý den is a separate concept (hello-polite),,2,cs-agent-v1;ipa=espeak
+social-basics.hello,Ahoj,,ˈahoj,hello,the ordinary default greeting; formal Dobrý den is a separate concept (hello-polite),2,cs-agent-v1;ipa=espeak
 social-basics.hello-polite,Dobrý den,,dˈobriː dˈen,,,2,cs-agent-v1;ipa=espeak
 social-basics.good-morning,Dobré ráno,,dˈobreː rˈaːno,,,2,cs-agent-v1;ipa=espeak
 social-basics.good-evening,Dobrý večer,,dˈobriː vˈetʃer,,,2,cs-agent-v1;ipa=espeak

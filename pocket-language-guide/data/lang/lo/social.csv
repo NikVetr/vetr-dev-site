@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
-social-basics.hello,ສະບາຍດີ,,sabaydi,saʔ˧˥baːj˩diː˩,"the ordinary greeting at any hour, and also 'how are you'",,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+social-basics.hello,ສະບາຍດີ,,sabaydi,saʔ˧˥baːj˩diː˩,well-being,"the ordinary greeting at any hour, and also 'how are you'",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 social-basics.hello-polite,ສະບາຍດີເຈົ້າ,,sabaydichao,saʔ˧˥baːj˩diː˩caw˥˨,hello,"ເຈົ້າ is the polite final particle and is not gendered, unlike Thai khrap/kha",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 social-basics.good-morning,ສະບາຍດີຕອນເຊົ້າ,,sabayditonxao,saʔ˧˥baːj˩diː˩tɔːn˩saw˥˨,hello in the morning,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
 social-basics.good-evening,ສະບາຍດີຕອນແລງ,,sabayditonlèng,saʔ˧˥baːj˩diː˩tɔːn˩lɛːŋ˧˥,hello in the evening,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
@@ -7,7 +7,7 @@ social-basics.goodbye,ລາກ່ອນ,,lakon,laː˧˥kɔːn˧,take leave firs
 social-basics.thank-you,ຂອບໃຈ,ຂອບໃຈຫຼາຍໆ,khopchai,kʰɔːp˧˩caj˩,thank you,ຂອບໃຈຫຼາຍໆ is 'thank you very much',2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
 social-basics.you-are-welcome,ບໍ່ເປັນຫຍັງ,,bopéngnang,bɔː˧pen˩ɲaŋ˩,it is not anything,the same phrase answers an apology,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 social-basics.excuse-me-sorry,ຂໍໂທດ,,khothôt,kʰɔː˩tʰoːt˥˨,opens a request to a stranger as well as apologising,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
-social-basics.sorry,ຂໍອະໄພ,,khoaphai,kʰɔː˩ʔaʔ˧˥pʰaj˧˥,"the more formal apology, for something that has gone wrong",,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
+social-basics.sorry,ຂໍອະໄພ,,khoaphai,kʰɔː˩ʔaʔ˧˥pʰaj˧˥,ask pardon,"the more formal apology, for something that has gone wrong",2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
 social-basics.no-problem,ບໍ່ເປັນຫຍັງ,,bopéngnang,bɔː˧pen˩ɲaŋ˩,Lao answers both 'you are welcome' and 'no problem' with one phrase,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
 social-basics.i-do-not-know,ຂ້ອຍບໍ່ຮູ້,,khoybohou,kʰɔːj˧˩bɔː˧huː˥˨,,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
 social-basics.good-night,ຝັນດີ,,fandi,fan˩diː˩,dream well,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"

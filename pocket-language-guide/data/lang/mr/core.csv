@@ -32,7 +32,7 @@ question-words.which-one,कोणता,,kōṇatā,kˈoːɳtˌaː,which one,"m
 question-words.when,कधी,,kadhī,kˈʌdʰi,,,2,mr-agent-v1;ipa=espeak
 question-words.how,कसे,,kasē,kˈʌseː,,,2,mr-agent-v1;ipa=espeak
 question-words.how-much-many,किती,,kitī,kˈɪti,,,2,mr-agent-v1;ipa=espeak
-question-words.how-many,किती,,kitī,kˈɪti,same word as how-much/many,किती does not inflect for count,2,mr-agent-v1;ipa=espeak
+question-words.how-many,किती,,kitī,kˈɪti,how many,same word as how-much/many; किती does not inflect for count,2,mr-agent-v1;ipa=espeak
 question-words.why,का,,kā,kˈaː,,,2,mr-agent-v1;ipa=espeak
 question-words.this,हे,,hē,hˈeː,this,generic; हा/ही if the referent's gender is known,2,mr-agent-v1;ipa=espeak
 question-words.that,ते,,tē,tˈeː,that,generic; तो/ती if the referent's gender is known,2,mr-agent-v1;ipa=espeak

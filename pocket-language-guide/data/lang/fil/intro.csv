@@ -8,8 +8,8 @@ introductions.i-am-from,Taga-{} po ako,,taɡa {} po ako,,,2,fil-agent-v1;ipa=fil
 introductions.where-are-you-from,Taga-saan po kayo?,,taɡasaan po kajo,,,2,fil-agent-v1;ipa=fil-g2p
 introductions.how-are-you,Kumusta po kayo?,,kumusta po kajo,,,2,fil-agent-v1;ipa=fil-g2p
 introductions.i-am-a-tourist,Turista po ako,,tuɾista po ako,,,2,fil-agent-v1;ipa=fil-g2p
-introductions.this-is-my-husband-wife,Ito po ang asawa ko,,ito po aŋ asawa ko,"asawa is gender-neutral, covering both husband and wife",,2,fil-agent-v1;ipa=fil-g2p
-introductions.this-is-my-daughter-son,Ito po ang anak ko,,ito po aŋ anak ko,"anak is gender-neutral, covering both daughter and son",,2,fil-agent-v1;ipa=fil-g2p
+introductions.this-is-my-husband-wife,Ito po ang asawa ko,,ito po aŋ asawa ko,this is my spouse,"asawa is gender-neutral, covering both husband and wife",2,fil-agent-v1;ipa=fil-g2p
+introductions.this-is-my-daughter-son,Ito po ang anak ko,,ito po aŋ anak ko,this is my child,"anak is gender-neutral, covering both daughter and son",2,fil-agent-v1;ipa=fil-g2p
 introductions.i-am-traveling-alone,Nag-iisa po akong naglalakbay,,naɡiisa po akoŋ naɡlalakbaj,,,2,fil-agent-v1;ipa=fil-g2p
 family-intros.this-is-my-husband,Ito po ang asawa kong lalaki,,ito po aŋ asawa koŋ lalaki,,,2,fil-agent-v1;split-from=this-is-my-husband-wife;ipa=fil-g2p
 family-intros.this-is-my-wife,Ito po ang asawa kong babae,,ito po aŋ asawa koŋ babaɛ,,,2,fil-agent-v1;split-from=this-is-my-husband-wife;ipa=fil-g2p

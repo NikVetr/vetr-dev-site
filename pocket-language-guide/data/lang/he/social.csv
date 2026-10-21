@@ -5,7 +5,7 @@ social-basics.good-morning,בוקר טוב,בּוֹקֶר טוֹב,bóqer tov,b�
 social-basics.good-evening,ערב טוב,עֶרֶב טוֹב,‘érev tov,ˈeʁev tˈov,,,2,he-agent-v1;ipa=bgn
 social-basics.goodbye,להתראות,לְהִתְרָאוֹת,lehitraot,lehitʁaˈot,until we see each other,,2,he-agent-v1;ipa=bgn
 social-basics.thank-you,תודה,תּוֹדָה,toda,todˈa,,,2,he-agent-v1;ipa=bgn
-social-basics.you-are-welcome,בבקשה,בְּבַקָּשָׁה,bevaqasha,bevakaʃˈa,the same word as please,,2,he-agent-v1;ipa=bgn
+social-basics.you-are-welcome,בבקשה,בְּבַקָּשָׁה,bevaqasha,bevakaʃˈa,please,the same word as please,2,he-agent-v1;ipa=bgn
 social-basics.excuse-me-sorry,סליחה,סְלִיחָה,seliẖa,selixˈa,,,2,he-agent-v1;ipa=bgn
 social-basics.sorry,אני מצטער,אֲנִי מִצְטַעֵר,ani mitsta‘er,anˈi mitstaˈeʁ,I am sorry,,2,"he-agent-v1;fix=Pealim (pealim.com) 1826 לְהִצְטַעֵר (to be sorry -- to regret);was=literal masculine -- a woman says mitsta‘eret (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני מצטערת serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
 social-basics.no-problem,אין בעיה,אֵין בְּעָיָה,eyn be‘aya,ˈejn beajˈa,,,2,he-agent-v1;ipa=bgn
@@ -76,7 +76,7 @@ etiquette.is-tipping-expected,מצופה להשאיר טיפ?,מְצוּפֶּה
 etiquette.is-service-included,השירות כלול?,הַשֵּׁירוּת כָּלוּל?,hasherut kalul?,haʃeʁˈut kalˈul,is the service included?,,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (תופיע י' ... במילים שבהן הצירי בא לפני אותיות אהחע""ר במקום חיריק כתוצאה מתשלום דגש);fix=Academy terms DB תחבורה 2012 (שֵׁרוּת שירות service);fix=Academy terms DB מתמטיקה 1985 (הָיָה כָּלוּל בְּ be included in -- qamats gadol: kalul);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
 etiquette.may-i-enter,אפשר להיכנס?,אֶפְשָׁר לְהִיכָּנֵס?,efshar lehikanes?,efʃˈaʁ lehikanˈes,is it possible to enter?,,2,he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (ברוב המקרים תנועת i תסומן באות י' -- לא לפני שווא נח);rule=academy-full-spelling;row-corrections-v7;ipa=bgn
 etiquette.remove-shoes,צריך להוריד נעליים?,צָרִיךְ לְהוֹרִיד נַעֲלַיִים?,tsarikh lehorid na‘aláyim?,tsaʁˈix lehoʁˈid naalˈajim,is it necessary to take off shoes?,,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (י' עיצורית נכפלת כשהיא באמצע מילה או בסופה למשל: בניין הייתה בניי ... היו""ד נכפלת במילה שמיים);fix=Academy terms DB הנעלה 1921 (נַעֲלַיִם נעליים);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
-etiquette.photo-of-you,אפשר לצלם אותך?,אֶפְשָׁר לְצַלֵּם אוֹתְךָ?,efshar letsalem otkha?,efʃˈaʁ letsalˈem otxˈa,to a man; to a woman otakh,,2,he-agent-v1;ipa=bgn
+etiquette.photo-of-you,אפשר לצלם אותך?,אֶפְשָׁר לְצַלֵּם אוֹתְךָ?,efshar letsalem otkha?,efʃˈaʁ letsalˈem otxˈa,is it possible to photograph you?,to a man; to a woman otakh,2,he-agent-v1;ipa=bgn
 etiquette.may-i-sit-here,אפשר לשבת כאן?,אֶפְשָׁר לָשֶׁבֶת כָּאן?,efshar lashévet kan?,efʃˈaʁ laʃˈevet kˈan,,,2,he-agent-v1;ipa=bgn
 etiquette.queue-for,זה התור בשביל {}?,זֶה הַתּוֹר בִּשְׁבִיל {}?,ze hator bishvil {}?,zˈe hatˈoʁ biʃvˈil {},is this the queue for {}?,,2,he-agent-v1;ipa=bgn
 etiquette.dressed-appropriately,הלבוש שלי מתאים כאן?,הַלְּבוּשׁ שֶׁלִּי מַתְאִים כָּאן?,halvush sheli mat’im kan?,halvˈuʃ ʃelˈi matˈim kˈan,is my clothing suitable here?,,2,he-agent-v1;ipa=bgn

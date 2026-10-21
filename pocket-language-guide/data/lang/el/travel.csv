@@ -93,7 +93,7 @@ rail-station-words.high-speed-rail,Ταχεία,Τρένο υψηλής ταχύ
 rail-station-words.transfer,Μετεπιβίβαση,Αλλαγή γραμμής,Metepivivasi,mˌetepivˈivasˌi,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-gate,Πύλη εισόδου,Τουρνικέ,Pyli eisodou,pˈili isˈoðu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.platform,Αποβάθρα,Πλατφόρμα,Apovathra,ˌapovˈaθɾa,,,2,el-agent-v1;roman=elot743;ipa=espeak
-rail-station-words.ticket-office,Εισιτήρια,Εκδοτήρια εισιτηρίων,Eisitiria,ˌisitˈiɾiˌa,Sign over the ticket office,,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.ticket-office,Εισιτήρια,Εκδοτήρια εισιτηρίων,Eisitiria,ˌisitˈiɾiˌa,tickets,Sign over the ticket office,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.waiting-room,Αίθουσα αναμονής,,Aithousa anamonis,ˈeθus ˌanamonˈis,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.train-number,Αριθμός τρένου,Αριθμός αμαξοστοιχίας,Arithmos trenou,ˌaɾiθmˈos tɾˈenu,,,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.carriage,Βαγόνι,Όχημα,Vagoni,vaɣˈoni,carriage,Tickets print ΟΧΗΜΑ for the carriage,2,el-agent-v1;roman=elot743;ipa=espeak

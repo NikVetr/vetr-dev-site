@@ -22,7 +22,7 @@ emergency-medical.please-call-my-emergency-contact,Don Allah ku kira wanda zan t
 emergency-medical.i-have-travel-insurance,Ina da inshorar tafiya,,ina da inʃorar tafija,,,2,ha-agent-v1;ipa=ha-g2p
 medical-conditions.i-am-diabetic,Ina da ciwon suga,,ina da tʃiwon suɡa,lit. the sugar disease,"distinct from plain sukari, sugar, so there is no Punjabi/Gujarati-style clash here",2,ha-agent-v1;ipa=ha-g2p
 medical-conditions.i-need-insulin,Ina buƙatar insulin,,ina bukʼatar insulin,,,2,ha-agent-v1;ipa=ha-g2p
-medical-conditions.i-have-asthma,Ina da asma,matsalar numfashi,ina da asma,asma is the widely used borrowing; the alt is descriptive: a breathing problem,,2,ha-agent-v1;ipa=ha-g2p
+medical-conditions.i-have-asthma,Ina da asma,matsalar numfashi,ina da asma,I have asthma,asma is the widely used borrowing; the alt is descriptive: a breathing problem,2,ha-agent-v1;ipa=ha-g2p
 medical-conditions.i-have-a-heart-condition,Ina da matsalar zuciya,,ina da matsʼalar zutʃija,,,2,ha-agent-v1;ipa=ha-g2p
 medical-conditions.i-am-allergic-to-penicillin,Ina da rashin jurewa ga fenisilin,,ina da raʃin dʒurewa ɡa fenisilin,,,2,ha-agent-v1;ipa=ha-g2p
 medical-conditions.i-have-epilepsy,Ina da farfaɗiya,,ina da farfaɗija,I have epilepsy,the standard clinical term used in Nigerian public-health campaigns; flag for a fluent speaker on regional register,2,ha-agent-v1;ipa=ha-g2p
@@ -67,7 +67,7 @@ pharmacy-symptoms.can-i-get-this-medicine-here,Zan iya samun wannan maganin a na
 pharmacy-symptoms.bandage,bandeji,,bandedʒi,,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.the-pain-is-severe,Ciwon yana da tsanani,,tʃiwon jana da tsʼanani,,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.antiseptic,maganin kashe ƙwayoyin cuta,,maɡanin kaʃe kʼwajojin tʃuta,medicine that kills germs,,2,ha-agent-v1;ipa=ha-g2p
-pharmacy-symptoms.i-feel-nauseous,Ina jin tashin zuciya,,ina dʒin taʃin zutʃija,"the standard idiom for nausea, lit. a rising of the heart",,2,ha-agent-v1;ipa=ha-g2p
+pharmacy-symptoms.i-feel-nauseous,Ina jin tashin zuciya,,ina dʒin taʃin zutʃija,I feel [a] rising of [the] heart,"the standard idiom for nausea, lit. a rising of the heart",2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.i-have-a-rash,Ina ƙurji,,ina kʼurdʒi,,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.before-or-after-food,Kafin ko bayan cin abinci?,,kafin ko bajan tʃin abintʃi,,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.i-think-it-is-infected,Ina tsammanin ya kamu da ƙwayoyin cuta,,ina tsʼammanin ja kamu da kʼwajojin tʃuta,has caught germs,,2,ha-agent-v1;ipa=ha-g2p
@@ -88,8 +88,8 @@ body-parts.eye,ido,,ido,,,2,ha-agent-v1;ipa=ha-g2p
 body-parts.ear,kunne,,kunne,,,2,ha-agent-v1;ipa=ha-g2p
 body-parts.leg,ƙafa,,kʼafa,covers foot as well,"Hausa names the whole lower limb, not the segment",2,ha-agent-v1;ipa=ha-g2p
 body-parts.arm,hannu,,hannu,covers hand as well,"Hausa names the whole upper limb, not the segment; point while naming it",2,ha-agent-v1;ipa=ha-g2p
-body-parts.foot,ƙafa,,kʼafa,same word as leg,,2,ha-agent-v1;ipa=ha-g2p
-body-parts.hand,hannu,,hannu,same word as arm,,2,ha-agent-v1;ipa=ha-g2p
+body-parts.foot,ƙafa,,kʼafa,foot,same word as leg,2,ha-agent-v1;ipa=ha-g2p
+body-parts.hand,hannu,,hannu,hand,same word as arm,2,ha-agent-v1;ipa=ha-g2p
 body-parts.knee,gwiwa,,ɡwiwa,,,2,ha-agent-v1;ipa=ha-g2p
 body-parts.ankle,idon ƙafa,,idon kʼafa,lit. eye of the foot,the ordinary way Hausa names a joint,2,ha-agent-v1;ipa=ha-g2p
 body-parts.skin,fata,,fata,,,2,ha-agent-v1;ipa=ha-g2p
@@ -133,7 +133,7 @@ police-consulate.i-did-not-agree-to-this-price,Ban yarda da wannan farashin ba,,
 police-consulate.please-write-the-report-number,Don Allah ku rubuta lambar rahoto,,don allah ku rubuta lambar rahoto,,,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.it-happened-here,Ya faru a nan,,ja faru a nan,,,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.may-i-have-a-copy-of-the-report,Zan iya samun kwafin rahoton?,,zan ija samun kwafin rahoton,,,2,ha-agent-v1;ipa=ha-g2p
-police-consulate.i-will-not-sign-anything-i-cannot-read,Ba zan sa hannu kan abin da ba na iya karantawa ba,,ba zan sa hannu kan abin da ba na ija karantawa ba,will not put my hand (sign) on a thing I cannot read,,2,ha-agent-v1;ipa=ha-g2p
+police-consulate.i-will-not-sign-anything-i-cannot-read,Ba zan sa hannu kan abin da ba na iya karantawa ba,,ba zan sa hannu kan abin da ba na ija karantawa ba,I will not put my hand on a thing I cannot read,,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.am-i-free-to-go,Zan iya tafiya?,,zan ija tafija,,,2,ha-agent-v1;ipa=ha-g2p
 police-consulate.i-do-not-want-to-go-with-you,Ba na son zuwa tare da kai,Ba na son zuwa tare da ke,ba na son zuwa tare da kai,ke to a woman,,2,ha-agent-v1;ipa=ha-g2p
 pharmacy-symptoms.i-think-i-have-malaria,Ina tsammanin ina da zazzaɓin cizon sauro,,ina tsʼammanin ina da zazzabin tʃizon sauro,I think I have fever-of-mosquito-bite,the standard Hausa descriptive term for malaria,2,ha-disease-v1;fix=Bargery zazza'bi (n.m. any feverishness);fix=ha.wikipedia Zazzaɓi rev 949381 (the article title; Zazzabi redirects to it) and Cutar zazzaɓin cizon sauro rev 910287 (malaria);rule=hooked ɓ;row-corrections-v8;ipa=ha-g2p

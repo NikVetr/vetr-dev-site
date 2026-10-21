@@ -118,7 +118,7 @@ board-answers.say-it-again,Tolong ulangi,,tˈoloŋ ulˈaŋi,,,2,id-agent-v1;ipa=
 board-answers.stay-here,Sebaiknya di sini saja,,səbˈaɪkɲa di sˈini sˈadʒa,,,2,id-agent-v1;ipa=espeak
 board-answers.the-hospital-is-close,Rumah sakit dekat dari sini,,rˈumah sˈakit dˈɛkat dˌari sˈini,,,2,id-agent-v1;ipa=espeak
 board-answers.there-is-no-wait,"Tidak perlu menunggu, sudah bisa masuk",,"tˈidak pˈɛrlu mənˈuŋɡu, sˈudah bˈisa mˈasuk",,,2,id-agent-v1;ipa=espeak
-board-answers.we-do-not-have-it,Kami tidak punya,,kˈami tˈidak pˈuɲa,kami = exclusive we; the shop's kami excludes the customer being spoken to,,2,id-agent-v1;ipa=espeak
+board-answers.we-do-not-have-it,Kami tidak punya,,kˈami tˈidak pˈuɲa,we do not have [it],kami = exclusive we; the shop's kami excludes the customer being spoken to,2,id-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Namanya siapa?,,namˈaɲa siˈapa,,,2,id-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Sakitnya di mana?,,sakˈitɲa di mˈana,,,2,id-agent-v1;ipa=espeak
 kind-words.you-are-very-kind,Anda sangat baik.,,ˈanda sˈaŋat bˈaɪk,,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"

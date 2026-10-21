@@ -5,7 +5,7 @@ emergency-medical.i-need-a-doctor,مجھے ڈاکٹر چاہیے,,mujhe ḍāk�
 emergency-medical.i-am-sick,میں بیمار ہوں,,maiñ bīmār hūñ,mˈẽ bimˈaːɾ hũː,,,2,ur-med-v1;ipa=espeak
 emergency-medical.i-am-injured,مجھے چوٹ لگی ہے,,mujhe choṭ lagī hai,mˌʊɟʰeː cˈoːʈ lˈʌɡi hɛ,I have been injured,زخمی/گھایل read as gravely wounded,2,ur-med-v1;ipa=espeak
 emergency-medical.it-hurts-here,یہاں درد ہے,,yahāñ dard hai,jˈʌhãː dˈʌɾd hɛ,,,2,ur-med-v1;ipa=espeak
-emergency-medical.where-is-a-pharmacy,میڈیکل اسٹور کہاں ہے؟,دوا خانہ کہاں ہے؟,meḍikal isṭor kahāñ hai?,meːɖˈiːkəl ɪsʈˈoːɾ kˈʌhãː hɛ,"Pakistani pharmacies sign themselves Medical Store, in English and in Urdu transcription",,2,ur-med-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,میڈیکل اسٹور کہاں ہے؟,دوا خانہ کہاں ہے؟,meḍikal isṭor kahāñ hai?,meːɖˈiːkəl ɪsʈˈoːɾ kˈʌhãː hɛ,where is [the] medical store?,"Pakistani pharmacies sign themselves Medical Store, in English and in Urdu transcription",2,ur-med-v1;ipa=espeak
 emergency-medical.please-take-me-to-a-hospital,مجھے ہسپتال لے چلیے,,mujhe hasptāl le chaliye,mˌʊɟʰeː hˌəsəptˈaːl lˈeː cˈʌljeː,please take me to hospital,Pakistan writes ہسپتال where Indian Urdu writes اسپتال,2,ur-med-v1;ipa=espeak
 emergency-medical.i-feel-unwell,میری طبیعت ٹھیک نہیں,,merī tabī’at ṭhīk nahīñ,mˈeːɾi tˌabiˈat ʈʰˈiːk nahˈĩː,,,2,ur-med-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,یہ ایمرجنسی ہے,,yah aimarjansī hai,jeːh ˌeːməɾəɟˈʌnsi hɛ,,,2,ur-med-v1;ipa=espeak
@@ -110,7 +110,7 @@ lost-rescue.i-do-not-know-where-i-am,مجھے نہیں معلوم میں کہا�
 lost-rescue.my-friend-is-hurt,میرے دوست کو چوٹ لگی ہے,,mere dost ko choṭ lagī hai,mˈeːɾeː dˈoːst kˈoː cˈoːʈ lˈʌɡi hɛ,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,میرا بٹوہ گم ہو گیا ہے,,merā baṭwa gum ho gayā hai,mˈeːɾaː bəʈˈoːa ɡˈʊm hˈoː ɡˌajaː hɛ,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,میرا بیگ گم ہو گیا ہے,,merā baig gum ho gayā hai,mˈeːɾaː bˈeːɡ ɡˈʊm hˈoː ɡˌajaː hɛ,,,2,ur-agent-v1;ipa=espeak
-lost-rescue.where-is-lost-and-found,گم شدہ سامان کا دفتر کہاں ہے؟,,gum-shuda sāmān kā daftar kahāñ hai?,ɡˈʊm ʃˈʊdˌa saːmˈaːn kaː dˌaftˈaɾ kˈʌhãː hɛ,descriptive: Pakistani stations and airports rarely sign this counter in Urdu,,2,ur-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,گم شدہ سامان کا دفتر کہاں ہے؟,,gum-shuda sāmān kā daftar kahāñ hai?,ɡˈʊm ʃˈʊdˌa saːmˈaːn kaː dˌaftˈaɾ kˈʌhãː hɛ,where is [the] lost luggage office?,descriptive: Pakistani stations and airports rarely sign this counter in Urdu,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-cannot-find-my-hotel,مجھے اپنا ہوٹل نہیں مل رہا,,mujhe apnā hoṭal nahīñ mil rahā,mˌʊɟʰeː ˈapnˌaː hˈoːʈəl nahˈĩː mˈɪl ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-left-it-on-the-train,یہ ٹرین میں رہ گیا,,yah ṭren meñ rah gayā,jeːh ʈɾˈeːn mˈẽ ɾˈɛh ɡˌajaː,,,2,ur-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,میں نیچے نہیں اتر سکتا,,maiñ nīche nahīñ utar saktā,mˈẽ nˈiːceː nahˈĩː ʊtˈaɾ sˈʌktˌaː,I cannot get down,,2,"ur-agent-v1;fix=Platts A Dictionary of Urdu, Classical Hindi, and English (DSAL) p. 16 utarnā (to come down -- descend -- alight);was=literal masculine speaker -- a woman says سکتی (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine میں نیچے نہیں اتر سکتی serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"

@@ -47,7 +47,7 @@ pharmacy-symptoms.i-need-medicine-for,আমার {} রোগের ওষু�
 pharmacy-symptoms.i-have-a-fever,আমার জ্বর হয়েছে,,āmāra jbara haẏeche,ˌamaɾ ɟˈɔɾ hˈɔetʃʰˌe,,,2,bn-med-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-malaria,আমার মনে হয় ম্যালেরিয়া হয়েছে,,āmāra mane haẏa myāleriẏā haẏeche,ˌamaɾ mˈɔne hˌɔj mˈæleɾˌia hˈɔetʃʰˌe,malaria is transmitted in the Chittagong Hill Tracts and in the north-eastern Indian states,,2,malaria-agent-v1;ipa=espeak
 pharmacy-symptoms.i-need-a-malaria-test,আমার ম্যালেরিয়া পরীক্ষা দরকার,,āmāra myāleriẏā parīkṣā darakāra,ˌamaɾ mˈæleɾˌia pˈoɾikʰkʰˌa dɔɾkˈaɾ,the rapid test is stocked by upazila health complexes and by many pharmacies,,2,malaria-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-diarrhea,আমার ডায়রিয়া হয়েছে,আমার পাতলা পায়খানা হচ্ছে,āmāra ḍāẏariẏā haẏeche,ˌamaɾ ɖˈajɔɾˌia hˈɔetʃʰˌe,the variant is the plainer everyday phrase,,2,bn-med-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,আমার ডায়রিয়া হয়েছে,আমার পাতলা পায়খানা হচ্ছে,āmāra ḍāẏariẏā haẏeche,ˌamaɾ ɖˈajɔɾˌia hˈɔetʃʰˌe,my diarrhea has happened,the variant is the plainer everyday phrase,2,bn-med-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,রাতভর খোলা ওষুধের দোকান কোথায়?,,rātabhara kholā oṣudhera dokāna kothāẏa?,ɾˈatɔbʰˌɔɾ kʰˈola ˈoʃudʰˌeɾ dˈokan kˈotʰaj,,,2,bn-med-v1;ipa=espeak
 pharmacy-symptoms.painkiller,ব্যথার ওষুধ,,byathāra oṣudha,bˈætʰaɾ ˈoʃudʰ,,,2,bn-med-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,প্রেসক্রিপশন লাগবে কি?,,presakripaśana lāgabe ki?,pɾˈeʃɔkɾˌipɔʃˌɔn lˈaɡɔbˌe ki,,,2,bn-med-v1;ipa=espeak
@@ -138,4 +138,4 @@ police-consulate.may-i-have-a-copy-of-the-report,রিপোর্টের এ
 police-consulate.i-will-not-sign-anything-i-cannot-read,আমি পড়তে পারি না এমন কিছুতে সই করব না,,āmi paṛate pāri nā emana kichute sa’i karaba nā,ˌami pˈɔɽɔtˌe pˈaɾi nˈa ˈemɔn kˈitʃʰutˌe ʃˈoi kˈɔɾɔb nˈa,,,2,bn-med-v1;ipa=espeak
 police-consulate.am-i-free-to-go,আমি কি যেতে পারি?,,āmi ki yete pāri?,ˌami ki dʒˈete pˈaɾi,,,2,bn-med-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,আমি আপনার সাথে যেতে চাই না,,āmi āpanāra sāthe yete cāi nā,ˌami ˌapɔnˌaɾ ʃˈatʰe dʒˈete tʃˈai nˈa,,,2,bn-med-v1;ipa=espeak
-pharmacy-symptoms.i-think-i-have-dengue,আমার মনে হয় ডেঙ্গু হয়েছে,,āmāra mane haẏa ḍeṅgu haẏeche,ˌamaɾ mˈɔne hˌɔj ɖˈeŋɡu hˈɔetʃʰˌe,dengue is hyperendemic in Bangladesh; the 2023 outbreak was the country's largest on record,,2,dengue-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,আমার মনে হয় ডেঙ্গু হয়েছে,,āmāra mane haẏa ḍeṅgu haẏeche,ˌamaɾ mˈɔne hˌɔj ɖˈeŋɡu hˈɔetʃʰˌe,I think dengue has happened,dengue is hyperendemic in Bangladesh; the 2023 outbreak was the country's largest on record,2,dengue-agent-v1;ipa=espeak

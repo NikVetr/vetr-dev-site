@@ -52,7 +52,7 @@ pharmacy-symptoms.where-is-an-all-night-pharmacy,ਰਾਤ ਭਰ ਖੁੱਲ�
 pharmacy-symptoms.painkiller,ਦਰਦ ਦੀ ਦਵਾਈ,,darad dī davāī,dʌɾəd di dəʋai,medicine for pain,,2,pa-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,ਡਾਕਟਰ ਦੀ ਪਰਚੀ ਚਾਹੀਦੀ ਹੈ?,,ḍākaṭar dī paracī cāhīdī hai?,ɖakəʈəɾ di pʌɾəci cahidi hɛ,is the doctor's slip needed?,,2,pa-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,ਮੇਰਾ ਸਿਰ ਦੁਖਦਾ ਹੈ,,mērā sir dukhadā hai,meɾa sɪɾ dʊkʰəda hɛ,my head hurts,,2,pa-agent-v1;ipa=espeak
-pharmacy-symptoms.paracetamol-acetaminophen,ਪੈਰਾਸੀਟਾਮੋਲ,,pairāsīṭāmōl,pɛɾasiʈamol,the international name; the same drug is acetaminophen in the US,,2,pa-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,ਪੈਰਾਸੀਟਾਮੋਲ,,pairāsīṭāmōl,pɛɾasiʈamol,paracetamol,the international name; the same drug is acetaminophen in the US,2,pa-agent-v1;ipa=espeak
 pharmacy-symptoms.how-much-should-i-take,ਕਿੰਨੀ ਲੈਣੀ ਹੈ?,,kiṁnī laiṇī hai?,kɪnni lɛɳi hɛ,how much is to be taken?,,2,pa-agent-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,ਮੈਨੂੰ ਉਲਟੀਆਂ ਲੱਗੀਆਂ ਹਨ,,mainūṁ ulaṭīāṁ laggīāṁ han,mɛnũ ʊləʈiã ləɡɡiã hən,vomiting has struck me,,2,pa-agent-v1;ipa=espeak
 pharmacy-symptoms.rehydration-salts,ਓ.ਆਰ.ਐੱਸ.,ਨਮਕ-ਖੰਡ ਦਾ ਘੋਲ,ō.ār.aiss.,oaɾəɛs,sold under the WHO abbreviation ORS in every chemist's shop in Punjab,,2,pa-agent-v1;ipa=espeak

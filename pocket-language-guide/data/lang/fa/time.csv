@@ -29,14 +29,14 @@ days-of-week.thursday,پنجشنبه,,panjshanbe,pandʒʃanbe,"the last working 
 days-of-week.friday,جمعه,,jom‘e,dʒomʔe,"the Iranian weekend: offices, banks and most shops are shut",,2,fa-agent-v1;ipa=espeak
 days-of-week.saturday,شنبه,,shanbe,ʃanbe,"the first day of the Iranian week, and a full working day",,2,fa-agent-v1;ipa=espeak
 days-of-week.sunday,یکشنبه,,yekshanbe,jekʃanbe,first day,a working day in Iran,2,fa-agent-v1;ipa=espeak
-months.january,ژانویه,دی/بهمن,zhānviye,ʒɑnvije,the Iranian months January falls across; they turn over around the 21st,,2,fa-agent-v1;ipa=espeak
+months.january,ژانویه,دی/بهمن,zhānviye,ʒɑnvije,January,the Iranian months January falls across; they turn over around the 21st,2,fa-agent-v1;ipa=espeak
 months.february,فوریه,بهمن/اسفند,fevriye,fevrije,,,2,fa-agent-v1;ipa=espeak
 months.march,مارس,اسفند/فروردین,mārs,mɑrs,"Nowruz, the Iranian new year, is 21 March",Farvardin 1,2,fa-agent-v1;ipa=espeak
 months.april,آوریل,فروردین/اردیبهشت,āvril,ɑvril,,,2,fa-agent-v1;ipa=espeak
 months.may,مه,اردیبهشت/خرداد,me,meh,May,also written می,2,fa-agent-v1;ipa=espeak
 months.june,ژوئن,خرداد/تیر,zhu’an,ʒuʔan,,,2,fa-agent-v1;ipa=espeak
 months.july,ژوئیه,تیر/مرداد,zhu’iye,ʒuije,,,2,fa-agent-v1;ipa=espeak
-months.august,اوت,مرداد/شهریور,ut,ut,āgust is just as common,,2,fa-agent-v1;ipa=espeak
+months.august,اوت,مرداد/شهریور,ut,ut,August,āgust is just as common,2,fa-agent-v1;ipa=espeak
 months.september,سپتامبر,شهریور/مهر,septāmbr,septɑmbr,,,2,fa-agent-v1;ipa=espeak
 months.october,اکتبر,مهر/آبان,oktobr,oktobr,,,2,fa-agent-v1;ipa=espeak
 months.november,نوامبر,آبان/آذر,novāmbr,novɑmbr,,,2,fa-agent-v1;ipa=espeak

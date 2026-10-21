@@ -18,7 +18,7 @@ weather.how-cold-at-night,रात्री किती थंडी असत
 weather.rain,पाऊस,,pāūsa,pˈaːus,,,2,mr-agent-v1;ipa=espeak
 weather.snow,हिम,,hima,hˈɪm,,,2,mr-agent-v1;ipa=espeak
 weather.wind,वारा,,vārā,vˈaːɾaː,,,2,mr-agent-v1;ipa=espeak
-weather.storm,वादळ,,vādaḷa,vˈaːdəɭ,generic; use the regional word where one dominates,,2,mr-agent-v1;ipa=espeak
+weather.storm,वादळ,,vādaḷa,vˈaːdəɭ,storm,generic; use the regional word where one dominates,2,mr-agent-v1;ipa=espeak
 weather.ice,बर्फ,,barpha,bˈʌɾpʰ,"ice on ground/road, not a drink's ice",,2,mr-agent-v1;ipa=espeak
 weather.fog,धुके,,dhukē,dʰˈʊkeː,,,2,mr-agent-v1;ipa=espeak
 weather.heat,गरमी,,garamī,ɡˈʌɾmˌi,,,2,mr-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ trail-warnings.maintenance,देखभाल,,dēkhabhāla,dˌeːkʰbʰˈaːl,,
 trail-warnings.steep-slope,तीव्र उतार,,tīvra utāra,tˈiːvɾə ʊtˈaːɾ,,,2,mr-agent-v1;ipa=espeak
 trail-warnings.caution-slippery,सावधान: निसरडे,,sāvadhāna: nisaraḍē,sˌaːvdʰˈaːn nˈɪsəɾɖeː,,,2,mr-agent-v1;ipa=espeak
 trail-warnings.danger,धोका,,dhōkā,dʰˈoːkaː,,,2,mr-agent-v1;ipa=espeak
-trail-warnings.beware-falling-rocks,दरड कोसळण्याची शक्यता,,daraḍa kōsaḷaṇyācī śakyatā,dˈʌɾəɖ kˌoːsəɭɳjˈaːci ʃˈʌkjətˌaː,standard Maharashtra ghat-road wording,,2,mr-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,दरड कोसळण्याची शक्यता,,daraḍa kōsaḷaṇyācī śakyatā,dˈʌɾəɖ kˌoːsəɭɳjˈaːci ʃˈʌkjətˌaː,possibility of landslide,standard Maharashtra ghat-road wording,2,mr-agent-v1;ipa=espeak
 trail-warnings.first-aid-station,प्रथमोपचार केंद्र,,prathamōpacāra kēṁdra,pɾˌətʰmˌoːpcˈaːɾ kˈẽːdɾə,,,2,mr-agent-v1;ipa=espeak
 trail-warnings.service-suspended,सेवा बंद आहे,,sēvā baṁda āhē,sˈeːvaː bˈʌnd ˈaːheː,,,2,mr-agent-v1;ipa=espeak
 trail-landmarks.trail-marker,पायवाटेची खूण,,pāyavāṭēcī khūṇa,pˌaːjvaːʈˈeːci kʰˈuːɳ,,,2,mr-agent-v1;ipa=espeak

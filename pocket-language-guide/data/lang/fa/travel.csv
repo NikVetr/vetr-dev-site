@@ -70,7 +70,7 @@ border-customs.where-do-i-collect-my-baggage,چمدان‌ها را کجا بگ�
 border-customs.how-long-may-i-stay,چقدر می‌توانم بمانم؟,,cheqadr mitavānam bemānam?,tʃeqadr mitavɑnam bemɑnam,,,2,fa-agent-v1;ipa=espeak
 border-customs.i-have-a-connecting-flight,پروازِ بعدی دارم,,parvāz-e ba‘di dāram,parvɑze baʔdi dɑram,,,2,fa-agent-v1;ipa=espeak
 border-customs.may-i-have-an-entry-stamp,مهرِ ورود می‌زنید؟,,mohr-e vorud mizanid?,mehre vorud mizanid,do you stamp [an] entry stamp?,"Iran has stamped visas on a separate sheet for some nationalities rather than in the passport; ask, and know why the answer may be no",2,fa-agent-v1;ipa=espeak
-border-customs.visa,ویزا,روادید,vizā,vizɑ,ravādid is the official word on the form,,2,fa-agent-v1;ipa=espeak
+border-customs.visa,ویزا,روادید,vizā,vizɑ,visa,ravādid is the official word on the form,2,fa-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,خوراکی و گیاه همراهم نیست,,khorāki va giyāh hamrāham nist,xorɑki va ɡiɑh hamrɑham nist,,,2,fa-agent-v1;ipa=espeak
 border-customs.passport-control,کنترلِ گذرنامه,,kontrol-e gozarnāme,kontorole ɡozarnɑme,,,2,fa-agent-v1;ipa=espeak
 border-customs.customs,گمرک,,gomrok,ɡomrok,,,2,fa-agent-v1;ipa=espeak
@@ -83,9 +83,9 @@ pickup-meeting.where-is-the-pickup-point,محلِ سوار شدن کجاست؟,,
 pickup-meeting.please-send-me-the-pickup-point,لطفاً محلِ سوار شدن را بفرستید,,lotfan mahall-e savār shodan rā beferestid,lotfan mahale savɑr ʃodan rɑ beferestid,,,2,fa-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,لطفاً ما را از اینجا سوار کنید,,lotfan mā rā az injā savār konid,lotfan mɑ rɑ az indʒɑ savɑr konid,,,2,fa-agent-v1;ipa=espeak
 pickup-meeting.meet-us-at,{} همدیگر را ببینیم,,{} hamdigar rā bebinim,{} hamdiɡar rɑ bebinim,,,2,fa-agent-v1;ipa=espeak
-pickup-meeting.please-call-me-a-ride,لطفاً برایم اسنپ بگیرید,,lotfan barāyam Esnap begirid,lotfan barɑjam asnap beɡirid,"Snapp is the ride app everyone in Iran uses, and 'esnap begir' is the ordinary way to say it",,2,fa-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,لطفاً برایم اسنپ بگیرید,,lotfan barāyam Esnap begirid,lotfan barɑjam asnap beɡirid,please get a Snapp for me,"Snapp is the ride app everyone in Iran uses, and 'esnap begir' is the ordinary way to say it",2,fa-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,لطفاً تاکسی خبر کنید,,lotfan tāksi khabar konid,lotfan tɑksi xabar konid,,,2,fa-agent-v1;ipa=espeak
-rail-station-words.high-speed-rail,قطارِ پرسرعت,,qatār-e por-sor‘at,qatɑre porsorʔat,the official term is qatār-e sari‘-os-seyr; Iran has none in service yet,,2,fa-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,قطارِ پرسرعت,,qatār-e por-sor‘at,qatɑre porsorʔat,high-speed train,the official term is qatār-e sari‘-os-seyr; Iran has none in service yet,2,fa-agent-v1;ipa=espeak
 rail-station-words.transfer,تغییرِ خط,,taghyir-e khatt,taqire xat,,,2,fa-agent-v1;ipa=espeak
 rail-station-words.ticket-gate,دروازهٔ بلیت,,darvāze-ye belit,darvɑzeje belit,,,2,fa-agent-v1;ipa=espeak
 rail-station-words.platform,سکو,,sakku,saku,,,2,fa-agent-v1;ipa=espeak
@@ -126,7 +126,7 @@ air-travel.where-is-the-security-check,بازرسی امنیتی کجاست؟,,b
 air-travel.my-luggage-did-not-arrive,چمدانم نرسید,,chamedānam naresid,tʃamedɑnam naresid,,,2,fa-agent-v1;ipa=espeak
 air-travel.i-would-like-a-window-seat,صندلی کنار پنجره می‌خواهم,,sandali-ye kenār-e panjere mikhāham,sandali kenɑr pandʒare mixɑham,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 air-travel.i-would-like-an-aisle-seat,صندلی کنار راهرو می‌خواهم,,sandali-ye kenār-e rāhro mikhāham,sandali kenɑr rɑhro mixɑham,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
-hitchhiking.can-you-give-me-a-ride,می‌شود مرا با خودتان ببرید؟,,mishavad marā bā khodetān bebarid?,miʃavad marɑ bɑ xodetɑn bebarid,mishavad ... reuses taxi.can-you-wait-for-me-here's own polite-request construction,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
+hitchhiking.can-you-give-me-a-ride,می‌شود مرا با خودتان ببرید؟,,mishavad marā bā khodetān bebarid?,miʃavad marɑ bɑ xodetɑn bebarid,can you take me with you?,mishavad ... reuses taxi.can-you-wait-for-me-here's own polite-request construction,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.where-are-you-going,کجا می‌روید؟,,kojā miravid?,kodʒɑ miravid,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.i-only-need-to-go-to-the-next-town,من فقط تا شهر بعدی می‌روم,,man faqat tā shahr-e ba‘di miravam,man faqat tɑ ʃahr baʔdi miravam,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 hitchhiking.is-there-room-for-two,برای دو نفر جا هست؟,,barāye do nafar jā hast?,barɑje do nafar dʒɑ hast,,,2,fa-agent-v1;ipa=espeak

@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 numbers-money.l-ng,nulla,,nˈullɑ,,,2,hu-agent-v1;ipa=espeak
 numbers-money.y,egy,,ˈɛɟ,,,2,hu-agent-v1;ipa=espeak
-numbers-money.r,kettő,két,kˈɛttøː,kettő stands alone; két goes before a noun,,2,hu-agent-v1;ipa=espeak
+numbers-money.r,kettő,két,kˈɛttøː,two,kettő stands alone; két goes before a noun,2,hu-agent-v1;ipa=espeak
 numbers-money.s-n,három,,hˈaːrom,,,2,hu-agent-v1;ipa=espeak
 numbers-money.s,négy,,nˈeːɟ,,,2,hu-agent-v1;ipa=espeak
 numbers-money.w,öt,,ˈøt,,,2,hu-agent-v1;ipa=espeak
@@ -13,7 +13,7 @@ numbers-money.sh,tíz,,tˈiːz,,,2,hu-agent-v1;ipa=espeak
 numbers-money.y-b-i,száz,,sˈaːz,,,2,hu-agent-v1;ipa=espeak
 numbers-money.y-qi-n,ezer,,ˈɛzɛr,,,2,hu-agent-v1;ipa=espeak
 numbers-money.y-w-n,tízezer,,tˈiːzɛzɛr,,,2,hu-agent-v1;ipa=espeak
-numbers-money.b-n,fél,,fˈeːl,fél precedes a noun; és fél follows a number,,2,hu-agent-v1;ipa=espeak
+numbers-money.b-n,fél,,fˈeːl,half,fél precedes a noun; és fél follows a number,2,hu-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"A számok felépítése: 11 = shí yī, 20 = èr shí, 21 = èr shí yī. Telefonszámban az 1 gyakran yāo. A szám és a főnév között kötelező az osztályozószó: gè (általános), wèi (személy), zhāng (jegy, lapos tárgy), bēi (pohár), píng (üveg). Osztályozószó előtt a kettő liǎng, nem èr: liǎng zhāng piào, két jegy. jiǎo / máo = 0,1 yuan; fēn = 0,01 yuan.",,,,,2,hu-agent-v1
 numbers-money.number-and-classifier-notes-2,"A számok felépítése: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. A számlálószó a szám után áll: -tsu (tárgy), -mai (lapos), -hon (hosszú), -nin (személy), -hai (pohár). Telefonban: 0 = zero vagy maru, 4 = yon, 7 = nana, 9 = kyuu. A kettőzött magánhangzó hosszú magánhangzót jelöl.",,,,,2,hu-agent-v1
 atm-cash.where-is-an-atm,Hol van egy bankautomata?,Hol van egy ATM?,hˈol vˈɑn ˈɛɟ bˈɑnkɑutomɑtɑ,,,2,hu-agent-v1;ipa=espeak
@@ -42,7 +42,7 @@ atm-cash.bank,bank,,bˈɑnk,,,2,hu-agent-v1;ipa=espeak
 atm-cash.money-exchange,pénzváltó,,pˈeːnzvaːltoː,,,2,hu-agent-v1;ipa=espeak
 atm-cash.pin,PIN-kód,,pˈinkoːd,,,2,hu-agent-v1;ipa=espeak
 numbers-money.forint,forint,,fˈorint,,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Ft,HUF,fˈorint,written after the amount: 500 Ft,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Ft,HUF,fˈorint,forint,written after the amount: 500 Ft,2,hu-agent-v1;ipa=espeak
 numbers-money.rupee,rúpia,,rˈuːpiɑ,,,2,reader-gloss-v1;ipa=espeak
 numbers-money.rupee-symbol,rúpia (jel),,rˈuːpiɑ,,,2,reader-gloss-v1;ipa=espeak
 numbers-money.won,von,won,vˈon,,,1,reader-gloss-v1;ipa=espeak

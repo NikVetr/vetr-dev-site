@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iast,ipa,literal,note,confidence,provenanc
 social-basics.hello,नमस्ते,,namaste,nəmˈʌsteː,,,2,hi-agent-v1;ipa=espeak
 social-basics.hello-polite,नमस्कार,,namaskār,nˌəmskˈaːɾ,,,2,hi-agent-v1;ipa=espeak
 social-basics.good-morning,सुप्रभात,नमस्ते,suprabhāt,sˌʊpɾəbʰˈaːt,namaste serves too,,2,hi-agent-v1;ipa=espeak
-social-basics.good-evening,शुभ संध्या,नमस्ते,śubh saṁdhyā,ʃˈʊbʰ sˈʌndʰjaː,formal; namaste is usual,,2,hi-agent-v1;ipa=espeak
+social-basics.good-evening,शुभ संध्या,नमस्ते,śubh saṁdhyā,ʃˈʊbʰ sˈʌndʰjaː,auspicious evening,formal; namaste is usual,2,hi-agent-v1;ipa=espeak
 social-basics.goodbye,फिर मिलेंगे,नमस्ते,phir mileṁge,pʰˈɪɾ mɪlˈẽːɡeː,see you again,,2,hi-agent-v1;ipa=espeak
 social-basics.thank-you,धन्यवाद,शुक्रिया,dhanyavād,dʰˌənjəʋˈaːd,,,2,hi-agent-v1;ipa=espeak
 social-basics.you-are-welcome,कोई बात नहीं,,koī bāt nahīṁ,kˈoːi bˈaːt nˈʌhĩ,it is nothing,,2,hi-agent-v1;ipa=espeak

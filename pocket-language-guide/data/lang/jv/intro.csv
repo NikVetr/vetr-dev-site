@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,note,confidence,provenance
 introductions.my-name-is,Nami kula {},,ˈnami ˈkulɔ {},,,2,jv-agent-v1;ipa=jv-g2p
 introductions.nice-to-meet-you,Bingah saged pinanggih,,ˈbiŋah ˈsaɡəd piˈnaŋɡɪh,,,2,jv-agent-v1;ipa=jv-g2p
-introductions.what-is-your-name,Asma panjenengan sinten?,Naminipun sinten?,ˈasmɔ pandʒənəˈŋan ˈsɪntən,asma is the honorific word for a name,,2,jv-agent-v1;ipa=jv-g2p
+introductions.what-is-your-name,Asma panjenengan sinten?,Naminipun sinten?,ˈasmɔ pandʒənəˈŋan ˈsɪntən,What is your name?,asma is the honorific word for a name,2,jv-agent-v1;ipa=jv-g2p
 introductions.we-are-traveling-together,Kula sedaya késah sesarengan,,ˈkulɔ səˈdɔjɔ ˈkesah səsarəˈŋan,,,2,jv-agent-v1;ipa=jv-g2p
 introductions.this-is-my-friend,Menika kanca kula,,məˈnikɔ ˈkantʃɔ ˈkulɔ,,,2,jv-agent-v1;ipa=jv-g2p
 introductions.i-am-from,Kula saking {},,ˈkulɔ ˈsakɪŋ {},,,2,jv-agent-v1;ipa=jv-g2p
@@ -23,8 +23,8 @@ about-me.i-am-a-nurse,Kula perawat,,ˈkulɔ pəˈrawat,,,2,jv-agent-v1;ipa=jv-g2
 about-me.i-am-an-engineer,Kula insinyur,,ˈkulɔ ɪnˈsiɲʊr,,,2,jv-agent-v1;ipa=jv-g2p
 about-me.i-work-in-an-office,Kula nyambut damel wonten kantor,,ˈkulɔ ˈɲambʊt ˈdaməl ˈwɔntən ˈkantɔr,nyambut damel is krama halus for kerja/work,,2,jv-agent-v1;src=kawruhbasa.com nyambut damel;ipa=jv-g2p
 about-me.i-have-my-own-business,Kula gadhah usaha piyambak,,ˈkulɔ ˈɡaɖah uˈsɔhɔ piˈjambaʔ,I have [my] own business,gadhah is this pack's own krama have (core.csv pronouns-verbs.have); piyambak reused from introductions.i-am-traveling-alone,2,jv-agent-v1;in-pack-neighbour=introductions.i-am-traveling-alone;ipa=jv-g2p
-family-intros.this-is-my-mother,Menika ibu kula,,məˈnikɔ ˈibu ˈkulɔ,"ibu, the krama word for mother (biyung/mak/mbok are ngoko)",,2,jv-agent-v1;ipa=jv-g2p
-family-intros.this-is-my-father,Menika rama kula,,məˈnikɔ ˈrɔmɔ ˈkulɔ,"rama, the krama word for father (bapak/pak are the ngoko/general address form)",,2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-mother,Menika ibu kula,,məˈnikɔ ˈibu ˈkulɔ,This is my mother,"ibu, the krama word for mother (biyung/mak/mbok are ngoko)",2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-father,Menika rama kula,,məˈnikɔ ˈrɔmɔ ˈkulɔ,This is my father,"rama, the krama word for father (bapak/pak are the ngoko/general address form)",2,jv-agent-v1;ipa=jv-g2p
 family-intros.this-is-my-brother,Menika sedhèrèk jaler kula,,məˈnikɔ səˈɖɛrɛʔ ˈdʒalər ˈkulɔ,this is my male sibling,"sedhèrèk (krama for sedulur, age-neutral sibling) + jaler, matching this pack's own laré jaler/laré èstri pattern for children rather than the age-graded kakang/mbakyu/adik",2,"jv-agent-v1;fix=Poerwadarminta Bausastra Jawa 1939 (sastra.org) S section (sêdhèrèk: pc. k. sêdulur; kc. sadhèrèk -- ê is the pepet, which the pack writes bare e, and è is /ɛ/);in-pack=border-customs.i-am-visiting-family (sedhèrèk);rule=the pack writes è for /ɛ/ (tmp/lang/jv/decisions.md 2);row-corrections-v8;ipa=jv-g2p"
 family-intros.this-is-my-sister,Menika sedhèrèk èstri kula,,məˈnikɔ səˈɖɛrɛʔ ˈɛstri ˈkulɔ,see this-is-my-brother,,2,"jv-agent-v1;fix=Poerwadarminta Bausastra Jawa 1939 (sastra.org) S section (sêdhèrèk: pc. k. sêdulur; kc. sadhèrèk -- ê is the pepet, which the pack writes bare e, and è is /ɛ/);in-pack=border-customs.i-am-visiting-family (sedhèrèk);rule=the pack writes è for /ɛ/ (tmp/lang/jv/decisions.md 2);row-corrections-v8;ipa=jv-g2p"
 family-intros.this-is-my-partner,Menika pasangan kula,,məˈnikɔ paˈsaŋan ˈkulɔ,this is my partner,"pasangan (loanword) rather than reusing garwa (spouse); Javanese otherwise has no word for an unmarried romantic partner distinct from a spouse, and this concept is deliberately not this-is-my-husband/wife again",2,jv-agent-v1;ipa=jv-g2p

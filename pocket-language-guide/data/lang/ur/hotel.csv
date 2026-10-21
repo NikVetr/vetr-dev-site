@@ -40,21 +40,21 @@ room-problems.the-light-does-not-work,بتی نہیں جل رہی,لائٹ نہ�
 room-problems.please-send-someone,کسی کو ٹھیک کرنے کے لیے بھیجیے,,kisī ko ṭhīk karne ke liye bhejiye,kˈɪsi kˈoː ʈʰˈiːk kˌaɾneː keː lˈiːeː bʰˈeːɟjeː,,,2,ur-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,ہیٹر کام نہیں کر رہا,,hīṭar kām nahīñ kar rahā,hˈeːʈəɾ kˈaːm nahˈĩː kaɾ ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
 laundry.please-wash-these-clothes,یہ کپڑے دھلوا دیجیے,,yih kapṛe dhulwā dījiye,jeːh kˈʌpɽˌeː dʰˈʌlʋaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,لانڈری کہاں ہے؟,دھوبی کہاں ملے گا؟,lānḍrī kahāñ hai?,lˈaːnɖəɾˌiː kˈʌhãː hɛ,self-service laundromats are rare in Pakistan; a lānḍrī shop or a dhobī does wash-and-fold,,2,ur-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,لانڈری کہاں ہے؟,دھوبی کہاں ملے گا؟,lānḍrī kahāñ hai?,lˈaːnɖəɾˌiː kˈʌhãː hɛ,where is [the] laundry?,self-service laundromats are rare in Pakistan; a lānḍrī shop or a dhobī does wash-and-fold,2,ur-agent-v1;ipa=espeak
 laundry.when-will-it-be-ready,کب تیار ہو گا؟,,kab taiyār ho gā?,kˈʌb tˌaiˈaːɾ hˈoː ɡaː,,,2,ur-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,ایک کلو کا کتنا ہے؟,,ek kilo kā kitnā hai?,ˈeːk kˈɪloː kaː kˈɪtnaː hɛ,"Pakistani laundries usually charge per garment, not by weight",,2,ur-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,کیا آج تیار ہو جائے گا؟,,kyā āj taiyār ho jā’e gā?,kjˈaː ˈaːɟ tˌaiˈaːɾ hˈoː ɟˈaːeː ɡaː,,,2,ur-agent-v1;ipa=espeak
 laundry.please-do-not-use-bleach,بلیچ نہ لگائیے,,blīch na lagā’iye,bəlˈiːc nˈa ləɡˈaːjeː,,,2,ur-agent-v1;ipa=espeak
 laundry.laundromat,لانڈری,,lānḍrī,lˈaːnɖəɾˌiː,,,2,ur-agent-v1;ipa=espeak
 laundry.please-iron-this,اسے پریس کر دیجیے,اس پر استری کر دیجیے,ise pres kar dījiye,ˌɪseː pɾˈeːs kaɾ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
-laundry.detergent,واشنگ پاؤڈر,سرف,wāshing pā’ūḍar,ʋaːʃˈʌnɡ paːˈoːɖəɾ,"sarf, from the Surf brand, is the everyday generic word",,2,ur-agent-v1;ipa=espeak
+laundry.detergent,واشنگ پاؤڈر,سرف,wāshing pā’ūḍar,ʋaːʃˈʌnɡ paːˈoːɖəɾ,washing powder,"sarf, from the Surf brand, is the everyday generic word",2,ur-agent-v1;ipa=espeak
 laundry.dry-cleaning,ڈرائی کلیننگ,,ḍrā’ī klīning,ɖəɾˈaːi kˌəlinˈʌnɡ,,,2,ur-agent-v1;ipa=espeak
 laundry.dryer,ڈرائر,کپڑے سکھانے والی مشین,ḍrā’ir,ɖəɾˈaɪɾ,,,2,ur-agent-v1;ipa=espeak
-laundry.coin-operated,سکہ ڈال کر چلائیں,,sikka ḍāl kar chalā’eñ,sˈɪka ɖˈaːl kaɾ cəlˈaːẽː,insert a coin to run it; coin-operated machines are rare in Pakistan,,2,ur-agent-v1;ipa=espeak
+laundry.coin-operated,سکہ ڈال کر چلائیں,,sikka ḍāl kar chalā’eñ,sˈɪka ɖˈaːl kaɾ cəlˈaːẽː,insert [a] coin to run [it],coin-operated machines are rare in Pakistan,2,ur-agent-v1;ipa=espeak
 massage-spa.please-stop,روک دیجیے، اب اور نہیں,,"rok dījiye, ab aur nahīñ",ɾˈoːk diɟˈiːeː ˈab ɔɾ nahˈĩː,stop; no more now,the second clause is what keeps it from being heard as the pause row,2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak
-massage-spa.please-pause,تھوڑی دیر کے لیے روک دیجیے,,thoṛī der ke liye rok dījiye,tʰˈoːɽi dˈeːɾ keː lˈiːeː ɾˈoːk diɟˈiːeː,stop for a little while; distinct from communication.please-wait-a-moment,,2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak
+massage-spa.please-pause,تھوڑی دیر کے لیے روک دیجیے,,thoṛī der ke liye rok dījiye,tʰˈoːɽi dˈeːɾ keː lˈiːeː ɾˈoːk diɟˈiːeː,stop for a little while,distinct from communication.please-wait-a-moment,2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak
 massage-spa.please-avoid-this-area,اس حصے پر مالش نہ کیجیے,,is hisse par mālish na kījiye,ɪs hˈɪseː pˈʌɾ mˈaːlɪʃ nˈa kˈeːɟjeː,do not massage this part,,2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak
-massage-spa.stronger-pressure,ذرا زور سے دبائیے,,zarā zor se dabā’iye,zˈʌɾaː zˈoːɾ seː dəbˈaːjeː,"press with a little more force; dabaanaa is to press, dabaa'o the pressure",,2,"ur-agent-v1;spa-board-v1;rekhta-lughat;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
+massage-spa.stronger-pressure,ذرا زور سے دبائیے,,zarā zor se dabā’iye,zˈʌɾaː zˈoːɾ seː dəbˈaːjeː,press with a little more force,"dabaanaa is to press, dabaa'o the pressure",2,"ur-agent-v1;spa-board-v1;rekhta-lughat;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
 massage-spa.more-gently,ہلکے ہاتھ سے کیجیے,,halke hāth se kījiye,hˈʌlkˌeː hˈaːtʰ seː kˈeːɟjeː,with a light hand,"the Urdu idiom for less pressure, where aahista would say slower",2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak
 massage-spa.that-pressure-is-good,دباؤ ٹھیک ہے، ایسے ہی کیجیے,,"dabā’o ṭhīk hai, aise hī kījiye",dəbˈaːoː ʈʰˈiːk hɛ ˈeːseː hˈiː kˈeːɟjeː,"the pressure is right, keep doing it just like this",,2,"ur-agent-v1;spa-board-v1;rekhta-lughat;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
 massage-spa.focus-on-shoulders,خاص طور پر کندھوں کی مالش کیجیے,,khās taur par kandhoñ kī mālish kījiye,xˈaːs tˈɔːɾ pˈʌɾ kˈʌndʰõː ki mˈaːlɪʃ kˈeːɟjeː,,,2,ur-agent-v1;spa-board-v1;rekhta-lughat;ipa=espeak

@@ -48,9 +48,9 @@ etiquette.keep-the-change,잔돈은 괜찮아요,,jandoneun gwaenchanayo,tɕando
 etiquette.what-is-customary,여기서는 어떻게 해요?,,yeogiseoneun eotteoke haeyo?,jʌɡisʌnɯn ʌt͈ʌkʰe hɛjo,,,2,ko-agent-v1;ipa=rr
 social-basics.hello,안녕하세요,,annyeonghaseyo,annjʌŋhasejo,,,2,ko-agent-v1;ipa=rr
 social-basics.hello-polite,안녕하십니까,,annyeonghasimnikka,annjʌŋhasimnik͈a,,,2,ko-agent-v1;ipa=rr
-social-basics.good-morning,안녕하세요,,annyeonghaseyo,annjʌŋhasejo,used at any hour,,2,ko-agent-v1;ipa=rr
-social-basics.good-evening,안녕하세요,,annyeonghaseyo,annjʌŋhasejo,used at any hour,,2,ko-agent-v1;ipa=rr
-social-basics.goodbye,안녕히 계세요,안녕히 가세요,annyeonghi gyeseyo,annjʌŋhi kjesejo,said when you leave,,2,ko-agent-v1;ipa=rr
+social-basics.good-morning,안녕하세요,,annyeonghaseyo,annjʌŋhasejo,Hello,used at any hour,2,ko-agent-v1;ipa=rr
+social-basics.good-evening,안녕하세요,,annyeonghaseyo,annjʌŋhasejo,Hello,used at any hour,2,ko-agent-v1;ipa=rr
+social-basics.goodbye,안녕히 계세요,안녕히 가세요,annyeonghi gyeseyo,annjʌŋhi kjesejo,Stay peacefully,said when you leave,2,ko-agent-v1;ipa=rr
 social-basics.thank-you,감사합니다,,gamsahamnida,kamsahamnida,,,2,ko-agent-v1;ipa=rr
 social-basics.you-are-welcome,아니에요,별말씀을요,anieyo,aniejo,,,2,ko-agent-v1;ipa=rr
 social-basics.excuse-me-sorry,실례합니다,저기요,sillyehamnida,silljehamnida,,,2,ko-agent-v1;ipa=rr

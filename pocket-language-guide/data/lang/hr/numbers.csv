@@ -50,7 +50,7 @@ atm-cash.pin,PIN,,pˈin,,,2,hr-agent-v1;ipa=espeak
 numbers-money.won,won,,vˈon,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.won-symbol,won (simbol),,vˈon,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.euro,euro,,ˈeuro,,,2,hr-agent-v1;ipa=espeak
-numbers-money.euro-symbol,€,euro,,"the sign as printed on a Croatian price, after the number and with a comma decimal: 10,50 €",,2,hr-agent-v1
+numbers-money.euro-symbol,€,euro,,€,"the sign as printed on a Croatian price, after the number and with a comma decimal: 10,50 €",2,hr-agent-v1
 numbers-money.lira,lira,,lˈira,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.lira-symbol,lira (simbol),,lˈira,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
 numbers-money.dong,dong,,dˈonɡ,,,2,gloss-only;scoped-away;hr-agent-v1;cldr;ipa=espeak
