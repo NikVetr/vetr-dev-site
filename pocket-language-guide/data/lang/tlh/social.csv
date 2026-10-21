@@ -1,86 +1,86 @@
-concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
-social-basics.hello,,,nuqneH,nuqʰnɛx,what do you want? -- the closest thing Klingon has to a greeting,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-social-basics.goodbye,,,Qapla',qxɑpʰlɑʔ,success! -- said on parting,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
-social-basics.thank-you,,,qatlho',qʰɑtɬoʔ,I thank you,1,tlh-composed-v1;lex=TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
-social-basics.no-problem,,,qay'be',qʰɑjʔbɛʔ,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
-social-basics.i-do-not-know,,,jISovbe',dʒɪʂovbɛʔ,,1,tlh-composed-v1;lex=CK + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
-social-basics.okay-fine-i-am-okay,,luq,lu',luʔ,yes / okay / I will,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-communication.i-do-not-speak-this-language,{target} ,,{target} vIjatlhbe',{target} vɪdʒɑtɬbɛʔ,the slot fills with a name that already ends in Hol,3,tlh-attested-v1;src=CK;slot-substituted;native=piqad-csur;ipa=okrand
-communication.i-speak-only-a-little-of-this,{target}   ,,{target} mu'mey puS vIjatlh,{target} muʔmɛj pʰuʂ vɪdʒɑtɬ,I speak a few words of it,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.do-you-speak-english,{source} ,,{source} Dajatlh'a',{source} ɖɑdʒɑtɬʔɑʔ,the slot fills with a name that already ends in Hol,3,tlh-attested-v1;src=TKD p.170 + CK;slot-substituted;native=piqad-csur;ipa=okrand
-communication.please-speak-more-slowly, ,,QIt yIjatlh,qxɪtʰ jɪdʒɑtɬ,speak slowly -- Klingon has no word for please,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-communication.i-do-not-understand-spoken,,,jIyajbe',dʒɪjɑdʒbɛʔ,I do not understand,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
-communication.i-cannot-read-understand,,,vIlaDlaHbe',vɪlɑɖlɑxbɛʔ,I cannot read it,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.please-say-it-again,,,yIjatlhqa',jɪdʒɑtɬqʰɑʔ,say it again,1,tlh-composed-v1;lex=TKD 4.2.3;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.please-write-it-down,,,yIghItlh,jɪɣɪtɬ,write it down,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-communication.please-wait-a-moment,,,yIloS,jɪloʂ,wait,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.can-you-help-me,,,choQaHlaH'a',tʃoqxɑxlɑxʔɑʔ,can you help me?,1,tlh-composed-v1;lex=TKD + TKD 4.2.5;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.please-show-me-the-text,{target}  ,,{target} mu'mey HI'ang,{target} muʔmɛj xɪʔɑŋ,show me the {target} words,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.i-do-not-understand,,,jIyajbe',dʒɪjɑdʒbɛʔ,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
-communication.i-cannot-read-it,,,vIlaDlaHbe',vɪlɑɖlɑxbɛʔ,I cannot read it,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-quick-responses.please-go-ahead,,,yIruch,jɪrutʃ,proceed! go ahead!,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-quick-responses.yes-right,,HISlaH,HIja',xɪdʒɑʔ,yes -- answering a yes/no question,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-quick-responses.no-not,,,ghobe',ɣobɛʔ,no -- answering a question,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-quick-responses.okay-can,,luq,lu',luʔ,yes / okay / I will,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-quick-responses.works-okay,,,Qap,qxɑpʰ,it operates / it works,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
-quick-responses.does-not-work-no,,,Qapbe',qxɑpʰbɛʔ,it does not work,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
-quick-responses.okay-fine,,,QaQ,qxɑqx,it is good,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-quick-responses.no-good-not-allowed-will-not-work,,,Qo',qxoʔ,no -- I refuse / I won't,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-phone-translation.please-look-at-the-screen, ,,jIH yIbej,dʒɪx jɪbɛdʒ,watch the viewing screen,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.please-type-it-for-me,,,yIghItlh,jɪɣɪtɬ,write it,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.please-use-simple-words,  ,,mu'mey ngeD yIlo',muʔmɛj ŋɛɖ jɪloʔ,use easy words,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.please-confirm,,,yIwoq,jɪwoqʰ,confirm it,1,tlh-composed-v1;lex=DSC + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.is-this-allowed,,,chaw'lu''a',tʃɑwʔluʔʔɑʔ,is it permitted?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.may-i-enter,,,jI'ellaH'a',dʒɪʔɛllɑxʔɑʔ,can I enter?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.may-i-sit-here, ,,naDev jIba'laH'a',nɑɖɛv dʒɪbɑʔlɑxʔɑʔ,can I sit here?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.keep-the-change, ,,chuv yIpol,tʃuv jɪpʰol,keep the change,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-social-basics.hello-polite,,,nuqneH,nuqʰnɛx,what do you want? -- Klingon has one greeting and it is not a polite one,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-social-basics.you-are-welcome,,,qay'be',qʰɑjʔbɛʔ,no problem -- Klingon has no set reply to thanks,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
-social-basics.excuse-me-sorry,,,qaSuj'a',qʰɑʂudʒʔɑʔ,am I disturbing you?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
-social-basics.sorry,,,jItlhIj,dʒɪtɬɪdʒ,I apologize,1,tlh-composed-v1;lex=TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
-communication.i-cannot-make-out-what-you-are-saying,  ,,Dajatlhbogh mu'mey vIyajlaHbe',ɖɑdʒɑtɬboɣ muʔmɛj vɪjɑdʒlɑxbɛʔ,I cannot understand the words you speak,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.3;native=piqad-csur;ipa=okrand
-quick-responses.can-possible,-,,-laH,lɑx,goes on the verb: vIleghlaH = I can see it,3,tlh-attested-v1;src=TKD 4.2.5;native=piqad-csur;ipa=okrand
-quick-responses.cannot-not-possible,-,,-laHbe',lɑxbɛʔ,goes on the verb: vIleghlaHbe' = I cannot see it,1,tlh-composed-v1;lex=TKD 4.2.5 + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
-quick-responses.cannot-not-allowed,,,chaw'be'lu',tʃɑwʔbɛʔluʔ,one does not permit it,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.5;native=piqad-csur;ipa=okrand
-phone-translation.i-am-using-phone-translation, ,,mughwI' vIlo',muɣwɪʔ vɪloʔ,I use a translator,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-translation.please-speak-toward-the-phone,  ,,ghogh HablI'Daq yIjatlh,ɣoɣ xɑblɪʔɖɑqʰ jɪdʒɑtɬ,speak at the telephone,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-translation.please-type-it-and-show-me,  ,,yIghItlh 'ej HI'ang,jɪɣɪtɬ ʔɛdʒ xɪʔɑŋ,write it and show me,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-translation.one-sentence-at-a-time-please,  ,,wa' mu'tlhegh yIjatlh,wɑʔ muʔtɬɛɣ jɪdʒɑtɬ,speak one sentence,1,tlh-composed-v1;lex=TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
-phone-text-power.my-phone-battery-is-low,  ,,'ul 'aplo'wIj chIm,ʔul ʔɑpʰloʔwɪdʒ tʃɪm,my battery is empty,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.may-i-charge-my-phone-here,   ,,naDev ghogh HablI'wIj vIHujlaH'a',nɑɖɛv ɣoɣ xɑblɪʔwɪdʒ vɪxudʒlɑxʔɑʔ,can I charge my telephone here?,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.do-you-have-a-power-bank,  ,,'ul 'aplo' Daghaj'a',ʔul ʔɑpʰloʔ ɖɑɣɑdʒʔɑʔ,do you have a battery?,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-phone-text-power.the-translation-may-be-inaccurate, ,,qarbe'law' mu'mey,qʰɑrbɛʔlɑwʔ muʔmɛj,the words seem inaccurate,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.4;native=piqad-csur;ipa=okrand
-etiquette.is-tipping-expected,  ,,tlho' Huch poQlu''a',tɬoʔ xutʃ pʰoqxluʔʔɑʔ,is a tip required?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.remove-shoes, ,,waqwIj vIteqnIS'a',wɑqʰwɪdʒ vɪtʰɛqʰnɪʂʔɑʔ,must I remove my shoes?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.photo-of-you, ,,mIlloghlIj vIqonlaH'a',mɪlloɣlɪdʒ vɪqʰonlɑxʔɑʔ,can I record your picture?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.did-not-mean-to-offend,  ,,qamaw 'e' vIHechbe',qʰɑmɑw ʔɛʔ vɪxɛtʃbɛʔ,I did not intend to offend you,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
-etiquette.what-is-customary,   ,,naDev nuq mIw motlh,nɑɖɛv nuqʰ mɪw motɬ,which procedure is usual here?,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-etiquette.dressed-appropriately, ,,lugh'a' SutwIj,luɣʔɑʔ ʂutʰwɪdʒ,is my clothing right?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-children.cannot-find-my-child, ,,puqwIj vItu'laHbe',pʰuqʰwɪdʒ vɪtʰuʔlɑxbɛʔ,I cannot find my child,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;native=piqad-csur;ipa=okrand
-children.make-an-announcement, ,,rI'wI' yIlo',rɪʔwɪʔ jɪloʔ,use the loudspeaker,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-children.child-age,{}   ,,{} ben boghpu' puqwIj,{} bɛn boɣpʰuʔ pʰuqʰwɪdʒ,my child was born {} years ago -- the Klingon way of giving an age,1,tlh-composed-v1;lex=KGT + msn 1996.12.12;grammar=TKD;native=piqad-csur;ipa=okrand
-children.high-chair,  ,,puq quS Daghaj'a',pʰuqʰ qʰuʂ ɖɑɣɑdʒʔɑʔ,do you have a child's chair?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-children.suitable-for-children, ,,puqpu'vaD QaQ'a',pʰuqʰpʰuʔvɑɖ qxɑqxʔɑʔ,is it good for children?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-children.do-children-pay, ,,DIlnIS'a' puqpu',ɖɪlnɪʂʔɑʔ pʰuqʰpʰuʔ,must children pay?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-children.minimum-age,  ,,nuq nen rav,nuqʰ nɛn rɑv,what is the minimum age?,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-sim-data.may-i-use-your-wifi, ,,'InternetlIj vIlo'laH'a',ʔɪntʰɛrnɛtʰlɪdʒ vɪloʔlɑxʔɑʔ,can I use your Internet?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.can-you-walk,,,bIyItlaH'a',bɪjɪtʰlɑxʔɑʔ,can you walk?,1,tlh-composed-v1;lex=TKD (yIt) + TKD 4.2.5 (-laH);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.card-or-cash,   ,,Huch chaw' Huch ghap,xutʃ tʃɑwʔ xutʃ ɣɑpʰ,"credit card, money, or?",1,"tlh-composed-v1;lex=TNK (Huch chaw') + TKD (Huch, ghap);grammar=TKD;native=piqad-csur;ipa=okrand"
-board-answers.help-is-coming, ,,paw QaH,pʰɑw qxɑx,help arrives,1,tlh-composed-v1;lex=TKD (paw) + TKDA (QaH);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.i-am-calling-an-ambulance,  ,,chach Duj vItlhob,tʃɑtʃ ɖudʒ vɪtɬob,I request an ambulance,1,tlh-composed-v1;lex=TNK (chach Duj) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.i-am-calling-the-police, ,,ghan'Iq vItlhob,ɣɑnʔɪqʰ vɪtɬob,I request the police force,1,tlh-composed-v1;lex=qep'a' 25 (2018) (ghan'Iq) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.i-do-not-have-a-phone, ,,HablI' vIghajbe',xɑblɪʔ vɪɣɑdʒbɛʔ,I do not have a telephone,1,tlh-composed-v1;lex=HQ 5.2 p.20 (HablI') + TKD (ghaj);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.i-will-find-someone,  ,,QaHlaHbogh vay' vItu',qxɑxlɑxboɣ vɑjʔ vɪtʰuʔ,I will find somebody who can help,1,"tlh-composed-v1;lex=TKD (QaH, vay', tu');grammar=TKD 4.2.5 (-laH), TKD 4.2.9/6.2.3 (-bogh);native=piqad-csur;ipa=okrand"
-board-answers.i-will-show-you, ,,He vI'ang,xɛ vɪʔɑŋ,I show the way,1,tlh-composed-v1;lex=TKD (He) + KGT ('ang);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.i-will-write-it-down,,,vIghItlh,vɪɣɪtɬ,I write it down,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.it-is-closed,,,SoQ,ʂoqx,"be closed, be shut",3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-board-answers.it-is-over-there,,,pa',pʰɑʔ,"there, over there",3,tlh-attested-v1;src=TKD 3.3.5;native=piqad-csur;ipa=okrand
-board-answers.none-of-these,   ,,naDev mu' vIjatlhnISbogh tu'lu'be',nɑɖɛv muʔ vɪdʒɑtɬnɪʂboɣ tʰuʔluʔbɛʔ,"the words I need to say are not here -- Dochmeyvam vIjatlhbe', the old row ('I do not say these things'), read as a refusal to answer",1,"tlh-composed-v1;lex=TKD (Doch, jatlh); -mey+-vam stacking per paq'batlh 2ed p.135 (mu'meyvam jatlh);grammar=TKD 3.3.4 (-vam);native=piqad-csur;fix=klingon-assistant-data (De7vID, main, 6,531 entries, the boQwI' database): naDev here, mu' word, jatlh say, -nIS need (TKD 4.2.2), -bogh which (TKD 4.2.9, 6.2.3), tu'lu' there is (TKD), -be' (TKD 4.3); the shape of PK Ho'Du'lIjDaq to'baj 'uSHom lughoDlu'bogh tu'lu' (a -bogh noun phrase as the object of tu'lu') and TKW p.29 SuvwI'pu' qan tu'lu'be';rule=none-of-these is not a refusal (board-answers.md), as tr row-corrections-v6;row-corrections-v9;ipa=okrand"
-board-answers.please-wait,,,yIloS,jɪloʂ,wait,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.say-it-again,,,yIjatlhqa',jɪdʒɑtɬqʰɑʔ,say it again,1,tlh-composed-v1;lex=TKD 4.2.3;grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.stay-here, ,,naDev yIba',nɑɖɛv jɪbɑʔ,sit/stay here,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.the-hospital-is-close,  ,,Sum ropyaH qach,ʂum ropʰjɑx qʰɑtʃ,the hospital is near,1,tlh-composed-v1;lex=TNK (ropyaH qach) + KGT (Sum);grammar=TKD;native=piqad-csur;ipa=okrand
-board-answers.there-is-no-wait,   ,,mImbe'lu' 'ej DaH yI'el,mɪmbɛʔluʔ ʔɛdʒ ɖɑx jɪʔɛl,"there is no delay, and now, enter",1,"tlh-composed-v1;lex=TKD (mIm, 'ej, DaH, 'el);grammar=TKD (-be', -lu');native=piqad-csur;ipa=okrand"
-board-answers.we-do-not-have-it,,,wIghajbe',wɪɣɑdʒbɛʔ,we do not have it,1,"tlh-composed-v1;lex=TKD;grammar=TKD (verb prefix table, wI-);native=piqad-csur;ipa=okrand"
-board-answers.what-is-your-name,  ,,nuq 'oH ponglIj'e',nuqʰ ʔox pʰoŋlɪdʒʔɛʔ,what is your name?,1,"tlh-composed-v1;lex=TKD (nuq, 'oH, pong);grammar=TKD (pronoun-as-copula w/ -'e' topic marker);native=piqad-csur;ipa=okrand"
-board-answers.where-does-it-hurt, ,,nuqDaq 'oy',nuqʰɖɑqʰ ʔojʔ,where hurts?,1,"tlh-composed-v1;lex=TKD (nuqDaq, 'oy');grammar=TKD ('nuqDaq' is just 'nuq' plus '-Daq');native=piqad-csur;ipa=okrand"
+concept_id,text,text_alt,romanization_okrand,ipa,literal,note,confidence,provenance
+social-basics.hello,,,nuqneH,nuqʰnɛx,what do you want?,the closest thing Klingon has to a greeting,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+social-basics.goodbye,,,Qapla',qxɑpʰlɑʔ,success!,said on parting,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
+social-basics.thank-you,,,qatlho',qʰɑtɬoʔ,I thank you,,1,tlh-composed-v1;lex=TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+social-basics.no-problem,,,qay'be',qʰɑjʔbɛʔ,,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+social-basics.i-do-not-know,,,jISovbe',dʒɪʂovbɛʔ,,,1,tlh-composed-v1;lex=CK + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+social-basics.okay-fine-i-am-okay,,luq,lu',luʔ,yes / okay / I will,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+communication.i-do-not-speak-this-language,{target} ,,{target} vIjatlhbe',{target} vɪdʒɑtɬbɛʔ,the slot fills with a name that already ends in Hol,,3,tlh-attested-v1;src=CK;slot-substituted;native=piqad-csur;ipa=okrand
+communication.i-speak-only-a-little-of-this,{target}   ,,{target} mu'mey puS vIjatlh,{target} muʔmɛj pʰuʂ vɪdʒɑtɬ,I speak a few words of it,,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.do-you-speak-english,{source} ,,{source} Dajatlh'a',{source} ɖɑdʒɑtɬʔɑʔ,the slot fills with a name that already ends in Hol,,3,tlh-attested-v1;src=TKD p.170 + CK;slot-substituted;native=piqad-csur;ipa=okrand
+communication.please-speak-more-slowly, ,,QIt yIjatlh,qxɪtʰ jɪdʒɑtɬ,speak slowly,Klingon has no word for please,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+communication.i-do-not-understand-spoken,,,jIyajbe',dʒɪjɑdʒbɛʔ,I do not understand,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+communication.i-cannot-read-understand,,,vIlaDlaHbe',vɪlɑɖlɑxbɛʔ,I cannot read it,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.please-say-it-again,,,yIjatlhqa',jɪdʒɑtɬqʰɑʔ,say it again,,1,tlh-composed-v1;lex=TKD 4.2.3;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.please-write-it-down,,,yIghItlh,jɪɣɪtɬ,write it down,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+communication.please-wait-a-moment,,,yIloS,jɪloʂ,wait,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.can-you-help-me,,,choQaHlaH'a',tʃoqxɑxlɑxʔɑʔ,can you help me?,,1,tlh-composed-v1;lex=TKD + TKD 4.2.5;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.please-show-me-the-text,{target}  ,,{target} mu'mey HI'ang,{target} muʔmɛj xɪʔɑŋ,show me the {target} words,,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.i-do-not-understand,,,jIyajbe',dʒɪjɑdʒbɛʔ,,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+communication.i-cannot-read-it,,,vIlaDlaHbe',vɪlɑɖlɑxbɛʔ,I cannot read it,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-responses.please-go-ahead,,,yIruch,jɪrutʃ,proceed! go ahead!,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-responses.yes-right,,HISlaH,HIja',xɪdʒɑʔ,yes,answering a yes/no question,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-responses.no-not,,,ghobe',ɣobɛʔ,no,answering a question,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-responses.okay-can,,luq,lu',luʔ,yes / okay / I will,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-responses.works-okay,,,Qap,qxɑpʰ,it operates / it works,,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+quick-responses.does-not-work-no,,,Qapbe',qxɑpʰbɛʔ,it does not work,,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-responses.okay-fine,,,QaQ,qxɑqx,it is good,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-responses.no-good-not-allowed-will-not-work,,,Qo',qxoʔ,no,I refuse / I won't,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+phone-translation.please-look-at-the-screen, ,,jIH yIbej,dʒɪx jɪbɛdʒ,watch the viewing screen,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.please-type-it-for-me,,,yIghItlh,jɪɣɪtɬ,write it,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.please-use-simple-words,  ,,mu'mey ngeD yIlo',muʔmɛj ŋɛɖ jɪloʔ,use easy words,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.please-confirm,,,yIwoq,jɪwoqʰ,confirm it,,1,tlh-composed-v1;lex=DSC + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.is-this-allowed,,,chaw'lu''a',tʃɑwʔluʔʔɑʔ,is it permitted?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.may-i-enter,,,jI'ellaH'a',dʒɪʔɛllɑxʔɑʔ,can I enter?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.may-i-sit-here, ,,naDev jIba'laH'a',nɑɖɛv dʒɪbɑʔlɑxʔɑʔ,can I sit here?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.keep-the-change, ,,chuv yIpol,tʃuv jɪpʰol,keep the change,,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+social-basics.hello-polite,,,nuqneH,nuqʰnɛx,what do you want?,Klingon has one greeting and it is not a polite one,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+social-basics.you-are-welcome,,,qay'be',qʰɑjʔbɛʔ,no problem,Klingon has no set reply to thanks,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+social-basics.excuse-me-sorry,,,qaSuj'a',qʰɑʂudʒʔɑʔ,am I disturbing you?,,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+social-basics.sorry,,,jItlhIj,dʒɪtɬɪdʒ,I apologize,,1,tlh-composed-v1;lex=TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.i-cannot-make-out-what-you-are-saying,  ,,Dajatlhbogh mu'mey vIyajlaHbe',ɖɑdʒɑtɬboɣ muʔmɛj vɪjɑdʒlɑxbɛʔ,I cannot understand the words you speak,,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.3;native=piqad-csur;ipa=okrand
+quick-responses.can-possible,-,,-laH,lɑx,goes on the verb: vIleghlaH = I can see it,,3,tlh-attested-v1;src=TKD 4.2.5;native=piqad-csur;ipa=okrand
+quick-responses.cannot-not-possible,-,,-laHbe',lɑxbɛʔ,goes on the verb: vIleghlaHbe' = I cannot see it,,1,tlh-composed-v1;lex=TKD 4.2.5 + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-responses.cannot-not-allowed,,,chaw'be'lu',tʃɑwʔbɛʔluʔ,one does not permit it,,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.5;native=piqad-csur;ipa=okrand
+phone-translation.i-am-using-phone-translation, ,,mughwI' vIlo',muɣwɪʔ vɪloʔ,I use a translator,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.please-speak-toward-the-phone,  ,,ghogh HablI'Daq yIjatlh,ɣoɣ xɑblɪʔɖɑqʰ jɪdʒɑtɬ,speak at the telephone,,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.please-type-it-and-show-me,  ,,yIghItlh 'ej HI'ang,jɪɣɪtɬ ʔɛdʒ xɪʔɑŋ,write it and show me,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.one-sentence-at-a-time-please,  ,,wa' mu'tlhegh yIjatlh,wɑʔ muʔtɬɛɣ jɪdʒɑtɬ,speak one sentence,,1,tlh-composed-v1;lex=TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+phone-text-power.my-phone-battery-is-low,  ,,'ul 'aplo'wIj chIm,ʔul ʔɑpʰloʔwɪdʒ tʃɪm,my battery is empty,,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.may-i-charge-my-phone-here,   ,,naDev ghogh HablI'wIj vIHujlaH'a',nɑɖɛv ɣoɣ xɑblɪʔwɪdʒ vɪxudʒlɑxʔɑʔ,can I charge my telephone here?,,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.do-you-have-a-power-bank,  ,,'ul 'aplo' Daghaj'a',ʔul ʔɑpʰloʔ ɖɑɣɑdʒʔɑʔ,do you have a battery?,,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.the-translation-may-be-inaccurate, ,,qarbe'law' mu'mey,qʰɑrbɛʔlɑwʔ muʔmɛj,the words seem inaccurate,,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.4;native=piqad-csur;ipa=okrand
+etiquette.is-tipping-expected,  ,,tlho' Huch poQlu''a',tɬoʔ xutʃ pʰoqxluʔʔɑʔ,is a tip required?,,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.remove-shoes, ,,waqwIj vIteqnIS'a',wɑqʰwɪdʒ vɪtʰɛqʰnɪʂʔɑʔ,must I remove my shoes?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.photo-of-you, ,,mIlloghlIj vIqonlaH'a',mɪlloɣlɪdʒ vɪqʰonlɑxʔɑʔ,can I record your picture?,,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.did-not-mean-to-offend,  ,,qamaw 'e' vIHechbe',qʰɑmɑw ʔɛʔ vɪxɛtʃbɛʔ,I did not intend to offend you,,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
+etiquette.what-is-customary,   ,,naDev nuq mIw motlh,nɑɖɛv nuqʰ mɪw motɬ,which procedure is usual here?,,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.dressed-appropriately, ,,lugh'a' SutwIj,luɣʔɑʔ ʂutʰwɪdʒ,is my clothing right?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.cannot-find-my-child, ,,puqwIj vItu'laHbe',pʰuqʰwɪdʒ vɪtʰuʔlɑxbɛʔ,I cannot find my child,,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;native=piqad-csur;ipa=okrand
+children.make-an-announcement, ,,rI'wI' yIlo',rɪʔwɪʔ jɪloʔ,use the loudspeaker,,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.child-age,{}   ,,{} ben boghpu' puqwIj,{} bɛn boɣpʰuʔ pʰuqʰwɪdʒ,my child was born {} years ago,the Klingon way of giving an age,1,tlh-composed-v1;lex=KGT + msn 1996.12.12;grammar=TKD;native=piqad-csur;ipa=okrand
+children.high-chair,  ,,puq quS Daghaj'a',pʰuqʰ qʰuʂ ɖɑɣɑdʒʔɑʔ,do you have a child's chair?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.suitable-for-children, ,,puqpu'vaD QaQ'a',pʰuqʰpʰuʔvɑɖ qxɑqxʔɑʔ,is it good for children?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.do-children-pay, ,,DIlnIS'a' puqpu',ɖɪlnɪʂʔɑʔ pʰuqʰpʰuʔ,must children pay?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.minimum-age,  ,,nuq nen rav,nuqʰ nɛn rɑv,what is the minimum age?,,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+sim-data.may-i-use-your-wifi, ,,'InternetlIj vIlo'laH'a',ʔɪntʰɛrnɛtʰlɪdʒ vɪloʔlɑxʔɑʔ,can I use your Internet?,,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.can-you-walk,,,bIyItlaH'a',bɪjɪtʰlɑxʔɑʔ,can you walk?,,1,tlh-composed-v1;lex=TKD (yIt) + TKD 4.2.5 (-laH);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.card-or-cash,   ,,Huch chaw' Huch ghap,xutʃ tʃɑwʔ xutʃ ɣɑpʰ,"credit card, money, or?",,1,"tlh-composed-v1;lex=TNK (Huch chaw') + TKD (Huch, ghap);grammar=TKD;native=piqad-csur;ipa=okrand"
+board-answers.help-is-coming, ,,paw QaH,pʰɑw qxɑx,help arrives,,1,tlh-composed-v1;lex=TKD (paw) + TKDA (QaH);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-am-calling-an-ambulance,  ,,chach Duj vItlhob,tʃɑtʃ ɖudʒ vɪtɬob,I request an ambulance,,1,tlh-composed-v1;lex=TNK (chach Duj) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-am-calling-the-police, ,,ghan'Iq vItlhob,ɣɑnʔɪqʰ vɪtɬob,I request the police force,,1,tlh-composed-v1;lex=qep'a' 25 (2018) (ghan'Iq) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-do-not-have-a-phone, ,,HablI' vIghajbe',xɑblɪʔ vɪɣɑdʒbɛʔ,I do not have a telephone,,1,tlh-composed-v1;lex=HQ 5.2 p.20 (HablI') + TKD (ghaj);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-will-find-someone,  ,,QaHlaHbogh vay' vItu',qxɑxlɑxboɣ vɑjʔ vɪtʰuʔ,I will find somebody who can help,,1,"tlh-composed-v1;lex=TKD (QaH, vay', tu');grammar=TKD 4.2.5 (-laH), TKD 4.2.9/6.2.3 (-bogh);native=piqad-csur;ipa=okrand"
+board-answers.i-will-show-you, ,,He vI'ang,xɛ vɪʔɑŋ,I show the way,,1,tlh-composed-v1;lex=TKD (He) + KGT ('ang);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-will-write-it-down,,,vIghItlh,vɪɣɪtɬ,I write it down,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.it-is-closed,,,SoQ,ʂoqx,"be closed, be shut",,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+board-answers.it-is-over-there,,,pa',pʰɑʔ,"there, over there",,3,tlh-attested-v1;src=TKD 3.3.5;native=piqad-csur;ipa=okrand
+board-answers.none-of-these,   ,,naDev mu' vIjatlhnISbogh tu'lu'be',nɑɖɛv muʔ vɪdʒɑtɬnɪʂboɣ tʰuʔluʔbɛʔ,the words I need to say are not here,"Dochmeyvam vIjatlhbe', the old row ('I do not say these things'), read as a refusal to answer",1,"tlh-composed-v1;lex=TKD (Doch, jatlh); -mey+-vam stacking per paq'batlh 2ed p.135 (mu'meyvam jatlh);grammar=TKD 3.3.4 (-vam);native=piqad-csur;fix=klingon-assistant-data (De7vID, main, 6,531 entries, the boQwI' database): naDev here, mu' word, jatlh say, -nIS need (TKD 4.2.2), -bogh which (TKD 4.2.9, 6.2.3), tu'lu' there is (TKD), -be' (TKD 4.3); the shape of PK Ho'Du'lIjDaq to'baj 'uSHom lughoDlu'bogh tu'lu' (a -bogh noun phrase as the object of tu'lu') and TKW p.29 SuvwI'pu' qan tu'lu'be';rule=none-of-these is not a refusal (board-answers.md), as tr row-corrections-v6;row-corrections-v9;ipa=okrand"
+board-answers.please-wait,,,yIloS,jɪloʂ,wait,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.say-it-again,,,yIjatlhqa',jɪdʒɑtɬqʰɑʔ,say it again,,1,tlh-composed-v1;lex=TKD 4.2.3;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.stay-here, ,,naDev yIba',nɑɖɛv jɪbɑʔ,sit/stay here,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.the-hospital-is-close,  ,,Sum ropyaH qach,ʂum ropʰjɑx qʰɑtʃ,the hospital is near,,1,tlh-composed-v1;lex=TNK (ropyaH qach) + KGT (Sum);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.there-is-no-wait,   ,,mImbe'lu' 'ej DaH yI'el,mɪmbɛʔluʔ ʔɛdʒ ɖɑx jɪʔɛl,"there is no delay, and now, enter",,1,"tlh-composed-v1;lex=TKD (mIm, 'ej, DaH, 'el);grammar=TKD (-be', -lu');native=piqad-csur;ipa=okrand"
+board-answers.we-do-not-have-it,,,wIghajbe',wɪɣɑdʒbɛʔ,we do not have it,,1,"tlh-composed-v1;lex=TKD;grammar=TKD (verb prefix table, wI-);native=piqad-csur;ipa=okrand"
+board-answers.what-is-your-name,  ,,nuq 'oH ponglIj'e',nuqʰ ʔox pʰoŋlɪdʒʔɛʔ,what is your name?,,1,"tlh-composed-v1;lex=TKD (nuq, 'oH, pong);grammar=TKD (pronoun-as-copula w/ -'e' topic marker);native=piqad-csur;ipa=okrand"
+board-answers.where-does-it-hurt, ,,nuqDaq 'oy',nuqʰɖɑqʰ ʔojʔ,where hurts?,,1,"tlh-composed-v1;lex=TKD (nuqDaq, 'oy');grammar=TKD ('nuqDaq' is just 'nuq' plus '-Daq');native=piqad-csur;ipa=okrand"

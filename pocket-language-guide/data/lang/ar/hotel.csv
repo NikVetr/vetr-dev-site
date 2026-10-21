@@ -1,68 +1,68 @@
-concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-laundry.please-wash-these-clothes,أريد غسل هذه الملابس,,urīd ghasl hādhihi al-malābis,ʔurˈiːd ɣˈasl hˈaːðihil malˈaːbis,,2,ar-agent-v1;ipa=ala-lc
-laundry.where-is-a-laundromat,أين مغسلة؟,محل غسيل,ayna maghsalah?,ʔˈajna mˈaɣsala,,2,ar-agent-v1;ipa=ala-lc
-laundry.when-will-it-be-ready,متى تكون جاهزة؟,,matá takūn jāhizah?,mˈataː takˈuːn dʒˈaːhiza,,2,ar-agent-v1;ipa=ala-lc
-laundry.how-much-per-kilo,بكم الكيلو؟,,bi-kam al-kīlū?,bikˈam ʔalkˈiːluː,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
-laundry.can-it-be-ready-today,هل تكون جاهزة اليوم؟,,hal takūn jāhizah al-yawm?,hˈal takˈuːn dʒˈaːhizal jˈawm,,2,ar-agent-v1;ipa=ala-lc
-laundry.please-do-not-use-bleach,بدون كلور لطفًا,بدون مبيّض,bi-dūn klūr luṭfan,bidˈuːn klˈuːr lˈutˤfan,"without chlorine bleach, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
-laundry.laundromat,مغسلة,,maghsalah,mˈaɣsala,,2,ar-agent-v1;ipa=ala-lc
-laundry.please-iron-this,أريد كيّ هذا,,urīd kayy hādhā,ʔurˈiːd kˈajj hˈaːðaː,,2,ar-agent-v1;ipa=ala-lc
-laundry.detergent,مسحوق غسيل,صابون غسيل,masḥūq ghasīl,masħˈuːq ɣasˈiːl,,2,ar-agent-v1;ipa=ala-lc
-laundry.dry-cleaning,تنظيف جاف,دراي كلين,tanẓīf jāff,tanðˤˈiːf dʒˈaːff,,2,ar-agent-v1;ipa=ala-lc
-laundry.dryer,مجفّفة,نشّافة,mujaffifah,mudʒˈaffifa,,2,ar-agent-v1;ipa=ala-lc
-laundry.coin-operated,بالعملة المعدنية,,bi-al-ʿumlah al-maʿdanīyah,bilʕˈumlal maʕdanˈijja,by coin,1,ar-agent-v1;ipa=ala-lc
-hotel-words.passport,جواز سفر,,jawāz safar,dʒawˈaːz sˈafar,,2,ar-agent-v1;ipa=ala-lc
-hotel-words.room-key-card,بطاقة الغرفة,مفتاح الغرفة,biṭāqat al-ghurfah,bitˤˈaːqat ʔalɣˈurfa,,2,ar-agent-v1;ipa=ala-lc
-hotel-words.check-in,تسجيل الوصول,,tasjīl al-wuṣūl,tasdʒˈiːl ʔalwusˤˈuːl,,2,ar-agent-v1;ipa=ala-lc
-hotel-words.check-out,تسجيل المغادرة,المغادرة,tasjīl al-mughādarah,tasdʒˈiːl ʔalmuɣˈaːdara,,2,ar-agent-v1;ipa=ala-lc
-hotel-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifðˤ ʔalʔˈamtiʕa,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.are-any-rooms-available,هل توجد غرف فارغة؟,,hal tūjad ghuraf fārighah?,hˈal tˈuːdʒad ɣˈuraf fˈaːriɣa,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.there-are-two-of-us,نحن اثنان,,naḥnu ithnān,nˈaħnu ʔiθnˈaːn,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.i-have-a-reservation,لديّ حجز,عندي حجز,ladayya ḥajz,ladˈajja ħˈadʒz,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.can-i-charge-my-phone,هل يمكنني شحن هاتفي؟,,hal yumkinunī shaḥn hātifī?,hˈal jumkˈinuniː ʃˈaħn hˈaːtifiː,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.i-would-like-a-non-smoking-room,أريد غرفة بدون تدخين,غرفة لغير المدخنين,urīd ghurfah bi-dūn tadkhīn,ʔurˈiːd ɣˈurfa bidˈuːn tadxˈiːn,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
-hotel-basics.i-would-like-a-quiet-room,أريد غرفة هادئة,,urīd ghurfah hādiʾah,ʔurˈiːd ɣˈurfa hˈaːdiʔa,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.is-there-a-washing-machine,هل توجد غسّالة؟,,hal tūjad ghassālah?,hˈal tˈuːdʒad ɣassˈaːla,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.is-wi-fi-free,هل الواي فاي مجاني؟,,hal al-wāy fāy majjānī?,hˈal ʔalwˈaːj fˈaːj madʒdʒˈaːniː,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.how-much-per-night,بكم الليلة؟,,bi-kam al-laylah?,bikˈam ʔallˈajla,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
-hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإفطار مشمول؟,hal al-fuṭūr mashmūl?,hˈal ʔalfutˤˈuːr maʃmˈuːl,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,hˈal jumkˈinuniː rˈuʔjat ʔalɣˈurfa,,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.for-nights,عدد الليالي: {},,ʿadad al-layālī: {},ʕˈadad ʔallajˈaːliː {},number of nights: {},2,ar-agent-v1;fix=ar.wikipedia العدد والمعدود rev 76218556 (the table: 1 و2 إفراد وتثنية -- 3 إلى 10 جمع -- every other number إفراد -- تمييز الأعداد من 11 إلى 99 مفرد منصوب);fix=ar.wikipedia السياحة في ألمانيا rev 76519602 (وصل عدد الليالي التي أمضاها السياح في فنادق ألمانيا);was=لمدة {} ليال (li-muddat {} layāl: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame حساسية دوائية: {});row-corrections-v13;ipa=ala-lc
-hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,ʔurˈiːd sariːrˈajn munfasˤilˈajn,two separate beds,2,ar-agent-v1;ipa=ala-lc
-hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jˈuːdʒad takjˈiːf,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,hˈal jˈumkin taʔxˈiːr ʔalmuɣˈaːdara,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,mˈataː jˈabdaʔ ʔalfutˤˈuːr,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,hˈal jˈumkin ħˈifðˤ ʔamtˈiʕatiː,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.no-housekeeping,لا حاجة للتنظيف,الرجاء عدم الإزعاج,lā ḥājah lil-tanẓīf,lˈaː ħˈaːdʒa littanðˤˈiːf,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.another-towel-please,منشفة أخرى لطفًا,فوطة أخرى,minshafah ukhrá luṭfan,mˈinʃafa ʔˈuxraː lˈutˤfan,"another towel, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=ala-lc
-hotel-requests.what-time-is-check-out,متى موعد المغادرة؟,,matá mawʿid al-mughādarah?,mˈataː mˈawʕid ʔalmuɣˈaːdara,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.can-i-check-in-early,هل يمكن تسجيل الوصول مبكراً؟,,hal yumkin tasjīl al-wuṣūl mubakkiran?,hˈal jˈumkin tasdʒˈiːl ʔalwusˤˈuːl mubˈakkiran,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.another-night,أريد ليلة أخرى,,urīd laylah ukhrá,ʔurˈiːd lˈajla ʔˈuxraː,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.is-there-a-safe,هل توجد خزنة؟,خزينة,hal tūjad khaznah?,hˈal tˈuːdʒad xˈazna,,2,ar-agent-v1;ipa=ala-lc
-hotel-requests.another-blanket,بطانية أخرى لطفًا,,baṭṭānīyah ukhrá luṭfan,batˤtˤaːnˈijja ʔˈuxraː lˈutˤfan,"another blanket, kindly -- luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=ala-lc
-hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},ʔˈardʒuː ʔiːqˈaːðˤis sˈaːʕa {},,2,ar-agent-v1;ipa=ala-lc
-room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,hunˈaːk mˈuʃkila fˈil ɣˈurfa,,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,ʔattakjˈiːf muʕˈatˤtˤal,,2,ar-agent-v1;ipa=ala-lc
-room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,lˈaː jˈuːdʒad mˈaːʔ sˈaːxin,,2,ar-agent-v1;ipa=ala-lc
-room-problems.can-i-change-rooms,هل يمكن تغيير الغرفة؟,,hal yumkin taghyīr al-ghurfah?,hˈal jˈumkin taɣjˈiːr ʔalɣˈurfa,,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-room-is-too-noisy,الغرفة فيها ضجيج,,al-ghurfah fīhā ḍajīj,ʔalɣˈurfa fˈiːhaː dˤadʒˈiːdʒ,the room has noise,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-key-does-not-work,المفتاح لا يعمل,البطاقة لا تعمل,al-miftāḥ lā yaʿmal,ʔalmiftˈaːħ lˈaː jˈaʕmal,,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-toilet-will-not-flush,السيفون لا يعمل,,al-sīfūn lā yaʿmal,ʔassiːfˈuːn lˈaː jˈaʕmal,the flush does not work,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-light-does-not-work,الضوء لا يعمل,النور لا يعمل,al-ḍawʾ lā yaʿmal,ʔadˤdˤˈawʔ lˈaː jˈaʕmal,,2,ar-agent-v1;ipa=ala-lc
-room-problems.please-send-someone,أرجو إرسال أحد للإصلاح,,arjū irsāl aḥad lil-iṣlāḥ,ʔˈardʒuː ʔirsˈaːl ʔˈaħad lilʔisˤlˈaːħ,,2,ar-agent-v1;ipa=ala-lc
-room-problems.the-heating-does-not-work,التدفئة لا تعمل,,al-tadfiʾah lā taʿmal,ʔattˈadfiʔa lˈaː tˈaʕmal,,2,ar-agent-v1;ipa=ala-lc
-massage-spa.please-stop,أرجو التوقّف، لا أريد المتابعة,,"arjū al-tawaqquf, lā urīd al-mutābaʿah","ʔˈardʒut tawˈaqquf, lˈaː ʔurˈiːd ʔalmutˈaːbaʕa",please stop; I do not want to continue,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;in-pack-frame;ipa=ala-lc
-massage-spa.please-pause,استراحة قصيرة من فضلك,,istirāḥah qaṣīrah min faḍlak,ʔistirˈaːħa qasˤˈiːra mˈin fˈadˤlak,"a short break, please",2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.please-avoid-this-area,أرجو تجنّب هذه المنطقة,,arjū tajannub hādhihi al-minṭaqah,ʔˈardʒuː tadʒˈannub hˈaːðihil mˈintˤaqa,please avoid this region,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;in-pack-frame;ipa=ala-lc
-massage-spa.stronger-pressure,أرجو ضغطًا أقوى,,arjū ḍaghṭan aqwá,ʔˈardʒuː dˤˈaɣtˤan ʔˈaqwaː,I ask for stronger pressure,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.more-gently,برفق أكثر من فضلك,ضغط أخفّ من فضلك,bi-rifq akthar min faḍlak,birˈifq ʔˈakθar mˈin fˈadˤlak,"more gently, please; the alt says lighter pressure",2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.that-pressure-is-good,الضغط مناسب، هكذا تمامًا,,"al-ḍaghṭ munāsib, hākadhā tamāman","ʔadˤdˤˈaɣtˤ munˈaːsib, hˈaːkaðaː tamˈaːman",the pressure is right; exactly like this,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.focus-on-shoulders,أرجو التركيز على الكتفين,,arjū al-tarkīz ʿalá al-katifayn,ʔˈardʒut tarkˈiːz ʕˈalal katifˈajn,please concentrate on the shoulders,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.focus-on-back,أرجو التركيز على الظهر,,arjū al-tarkīz ʿalá al-ẓahr,ʔˈardʒut tarkˈiːz ʕˈalaðˤ ðˤˈahr,please concentrate on the back,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.focus-on-neck,أرجو التركيز على الرقبة,,arjū al-tarkīz ʿalá al-raqabah,ʔˈardʒut tarkˈiːz ʕˈalar rˈaqaba,please concentrate on the neck,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.focus-on-feet,أرجو التركيز على القدمين,,arjū al-tarkīz ʿalá al-qadamayn,ʔˈardʒut tarkˈiːz ʕˈalal qadamˈajn,please concentrate on the feet,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.reply-i-will-avoid-that-area,حسنًا، سأتجنّب هذه المنطقة,,"ḥasanan, sa-atajannab hādhihi al-minṭaqah","ħˈasanan, saʔatadʒˈannab hˈaːðihil mˈintˤaqa",all right; I will avoid this region,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc
-massage-spa.reply-which-area-exactly,أي منطقة بالضبط؟,,ayy minṭaqah bi-al-ḍabṭ?,ʔˈajj mˈintˤaqa bidˤdˤˈabtˤ,which region exactly?,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.reply-cannot-avoid-this-treatment,هذه الجلسة لا تتمّ دون هذه المنطقة,,hādhihi al-jalsah lā tatimm dūn hādhihi al-minṭaqah,hˈaːðihil dʒˈalsa lˈaː tatˈimm dˈuːn hˈaːðihil mˈintˤaqa,this session cannot be done without this region,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.reply-does-it-hurt-there,هل تؤلم هذه المنطقة؟,,hal tuʾlim hādhihi al-minṭaqah?,hˈal tˈuʔlim hˈaːðihil mˈintˤaqa,does this region hurt?,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
-massage-spa.reply-ask-supervisor,لا أعرف بالضبط، سأسأل المسؤول,,"lā aʿrif bi-al-ḍabṭ, sa-asʾal al-masʾūl","lˈaː ʔˈaʕrif bidˤdˤˈabtˤ, saʔˈasʔal ʔalmasʔˈuːl",I do not know exactly; I will ask the person in charge,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;generic-masculine-third-party;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,note,confidence,provenance
+laundry.please-wash-these-clothes,أريد غسل هذه الملابس,,urīd ghasl hādhihi al-malābis,ʔurˈiːd ɣˈasl hˈaːðihil malˈaːbis,,,2,ar-agent-v1;ipa=ala-lc
+laundry.where-is-a-laundromat,أين مغسلة؟,محل غسيل,ayna maghsalah?,ʔˈajna mˈaɣsala,,,2,ar-agent-v1;ipa=ala-lc
+laundry.when-will-it-be-ready,متى تكون جاهزة؟,,matá takūn jāhizah?,mˈataː takˈuːn dʒˈaːhiza,,,2,ar-agent-v1;ipa=ala-lc
+laundry.how-much-per-kilo,بكم الكيلو؟,,bi-kam al-kīlū?,bikˈam ʔalkˈiːluː,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+laundry.can-it-be-ready-today,هل تكون جاهزة اليوم؟,,hal takūn jāhizah al-yawm?,hˈal takˈuːn dʒˈaːhizal jˈawm,,,2,ar-agent-v1;ipa=ala-lc
+laundry.please-do-not-use-bleach,بدون كلور لطفًا,بدون مبيّض,bi-dūn klūr luṭfan,bidˈuːn klˈuːr lˈutˤfan,"without chlorine bleach, kindly","luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+laundry.laundromat,مغسلة,,maghsalah,mˈaɣsala,,,2,ar-agent-v1;ipa=ala-lc
+laundry.please-iron-this,أريد كيّ هذا,,urīd kayy hādhā,ʔurˈiːd kˈajj hˈaːðaː,,,2,ar-agent-v1;ipa=ala-lc
+laundry.detergent,مسحوق غسيل,صابون غسيل,masḥūq ghasīl,masħˈuːq ɣasˈiːl,,,2,ar-agent-v1;ipa=ala-lc
+laundry.dry-cleaning,تنظيف جاف,دراي كلين,tanẓīf jāff,tanðˤˈiːf dʒˈaːff,,,2,ar-agent-v1;ipa=ala-lc
+laundry.dryer,مجفّفة,نشّافة,mujaffifah,mudʒˈaffifa,,,2,ar-agent-v1;ipa=ala-lc
+laundry.coin-operated,بالعملة المعدنية,,bi-al-ʿumlah al-maʿdanīyah,bilʕˈumlal maʕdanˈijja,by coin,,1,ar-agent-v1;ipa=ala-lc
+hotel-words.passport,جواز سفر,,jawāz safar,dʒawˈaːz sˈafar,,,2,ar-agent-v1;ipa=ala-lc
+hotel-words.room-key-card,بطاقة الغرفة,مفتاح الغرفة,biṭāqat al-ghurfah,bitˤˈaːqat ʔalɣˈurfa,,,2,ar-agent-v1;ipa=ala-lc
+hotel-words.check-in,تسجيل الوصول,,tasjīl al-wuṣūl,tasdʒˈiːl ʔalwusˤˈuːl,,,2,ar-agent-v1;ipa=ala-lc
+hotel-words.check-out,تسجيل المغادرة,المغادرة,tasjīl al-mughādarah,tasdʒˈiːl ʔalmuɣˈaːdara,,,2,ar-agent-v1;ipa=ala-lc
+hotel-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifðˤ ʔalʔˈamtiʕa,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.are-any-rooms-available,هل توجد غرف فارغة؟,,hal tūjad ghuraf fārighah?,hˈal tˈuːdʒad ɣˈuraf fˈaːriɣa,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.there-are-two-of-us,نحن اثنان,,naḥnu ithnān,nˈaħnu ʔiθnˈaːn,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.i-have-a-reservation,لديّ حجز,عندي حجز,ladayya ḥajz,ladˈajja ħˈadʒz,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.can-i-charge-my-phone,هل يمكنني شحن هاتفي؟,,hal yumkinunī shaḥn hātifī?,hˈal jumkˈinuniː ʃˈaħn hˈaːtifiː,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.i-would-like-a-non-smoking-room,أريد غرفة بدون تدخين,غرفة لغير المدخنين,urīd ghurfah bi-dūn tadkhīn,ʔurˈiːd ɣˈurfa bidˈuːn tadxˈiːn,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+hotel-basics.i-would-like-a-quiet-room,أريد غرفة هادئة,,urīd ghurfah hādiʾah,ʔurˈiːd ɣˈurfa hˈaːdiʔa,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.is-there-a-washing-machine,هل توجد غسّالة؟,,hal tūjad ghassālah?,hˈal tˈuːdʒad ɣassˈaːla,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.is-wi-fi-free,هل الواي فاي مجاني؟,,hal al-wāy fāy majjānī?,hˈal ʔalwˈaːj fˈaːj madʒdʒˈaːniː,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.how-much-per-night,بكم الليلة؟,,bi-kam al-laylah?,bikˈam ʔallˈajla,,,2,ar-agent-v1;fix=ALA-LC 2012 rule 16(b): an inseparable prefix is joined to what follows by a hyphen;arabic-ipa-v1;ipa=ala-lc
+hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإفطار مشمول؟,hal al-fuṭūr mashmūl?,hˈal ʔalfutˤˈuːr maʃmˈuːl,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,hˈal jumkˈinuniː rˈuʔjat ʔalɣˈurfa,,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.for-nights,عدد الليالي: {},,ʿadad al-layālī: {},ʕˈadad ʔallajˈaːliː {},number of nights: {},,2,ar-agent-v1;fix=ar.wikipedia العدد والمعدود rev 76218556 (the table: 1 و2 إفراد وتثنية -- 3 إلى 10 جمع -- every other number إفراد -- تمييز الأعداد من 11 إلى 99 مفرد منصوب);fix=ar.wikipedia السياحة في ألمانيا rev 76519602 (وصل عدد الليالي التي أمضاها السياح في فنادق ألمانيا);was=لمدة {} ليال (li-muddat {} layāl: the broken plural -- right for three to ten only);rule=a label whose filler follows a colon and agrees with nothing (the pack's frame حساسية دوائية: {});row-corrections-v13;ipa=ala-lc
+hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,ʔurˈiːd sariːrˈajn munfasˤilˈajn,two separate beds,,2,ar-agent-v1;ipa=ala-lc
+hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jˈuːdʒad takjˈiːf,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,hˈal jˈumkin taʔxˈiːr ʔalmuɣˈaːdara,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,mˈataː jˈabdaʔ ʔalfutˤˈuːr,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,hˈal jˈumkin ħˈifðˤ ʔamtˈiʕatiː,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.no-housekeeping,لا حاجة للتنظيف,الرجاء عدم الإزعاج,lā ḥājah lil-tanẓīf,lˈaː ħˈaːdʒa littanðˤˈiːf,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.another-towel-please,منشفة أخرى لطفًا,فوطة أخرى,minshafah ukhrá luṭfan,mˈinʃafa ʔˈuxraː lˈutˤfan,"another towel, kindly","luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=ala-lc
+hotel-requests.what-time-is-check-out,متى موعد المغادرة؟,,matá mawʿid al-mughādarah?,mˈataː mˈawʕid ʔalmuɣˈaːdara,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.can-i-check-in-early,هل يمكن تسجيل الوصول مبكراً؟,,hal yumkin tasjīl al-wuṣūl mubakkiran?,hˈal jˈumkin tasdʒˈiːl ʔalwusˤˈuːl mubˈakkiran,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.another-night,أريد ليلة أخرى,,urīd laylah ukhrá,ʔurˈiːd lˈajla ʔˈuxraː,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.is-there-a-safe,هل توجد خزنة؟,خزينة,hal tūjad khaznah?,hˈal tˈuːdʒad xˈazna,,,2,ar-agent-v1;ipa=ala-lc
+hotel-requests.another-blanket,بطانية أخرى لطفًا,,baṭṭānīyah ukhrá luṭfan,batˤtˤaːnˈijja ʔˈuxraː lˈutˤfan,"another blanket, kindly","luṭfan, the invariable polite adverb of board-answers.please-wait, in place of min faḍlak, whose -ak addressed a man (faḍlik to a woman)",2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا (لُطْفًا: دعوة مهذَّبة لعمل شيء، من فضلك، إذا سمحت);in-pack-neighbour=transit-rides.two-tickets;rule=no-second-person;row-corrections-v6;ipa=ala-lc
+hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},ʔˈardʒuː ʔiːqˈaːðˤis sˈaːʕa {},,,2,ar-agent-v1;ipa=ala-lc
+room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,hunˈaːk mˈuʃkila fˈil ɣˈurfa,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,ʔattakjˈiːf muʕˈatˤtˤal,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,lˈaː jˈuːdʒad mˈaːʔ sˈaːxin,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.can-i-change-rooms,هل يمكن تغيير الغرفة؟,,hal yumkin taghyīr al-ghurfah?,hˈal jˈumkin taɣjˈiːr ʔalɣˈurfa,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-room-is-too-noisy,الغرفة فيها ضجيج,,al-ghurfah fīhā ḍajīj,ʔalɣˈurfa fˈiːhaː dˤadʒˈiːdʒ,the room has noise,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-key-does-not-work,المفتاح لا يعمل,البطاقة لا تعمل,al-miftāḥ lā yaʿmal,ʔalmiftˈaːħ lˈaː jˈaʕmal,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-toilet-will-not-flush,السيفون لا يعمل,,al-sīfūn lā yaʿmal,ʔassiːfˈuːn lˈaː jˈaʕmal,the flush does not work,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-light-does-not-work,الضوء لا يعمل,النور لا يعمل,al-ḍawʾ lā yaʿmal,ʔadˤdˤˈawʔ lˈaː jˈaʕmal,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.please-send-someone,أرجو إرسال أحد للإصلاح,,arjū irsāl aḥad lil-iṣlāḥ,ʔˈardʒuː ʔirsˈaːl ʔˈaħad lilʔisˤlˈaːħ,,,2,ar-agent-v1;ipa=ala-lc
+room-problems.the-heating-does-not-work,التدفئة لا تعمل,,al-tadfiʾah lā taʿmal,ʔattˈadfiʔa lˈaː tˈaʕmal,,,2,ar-agent-v1;ipa=ala-lc
+massage-spa.please-stop,أرجو التوقّف، لا أريد المتابعة,,"arjū al-tawaqquf, lā urīd al-mutābaʿah","ʔˈardʒut tawˈaqquf, lˈaː ʔurˈiːd ʔalmutˈaːbaʕa",please stop; I do not want to continue,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;in-pack-frame;ipa=ala-lc
+massage-spa.please-pause,استراحة قصيرة من فضلك,,istirāḥah qaṣīrah min faḍlak,ʔistirˈaːħa qasˤˈiːra mˈin fˈadˤlak,"a short break, please",,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.please-avoid-this-area,أرجو تجنّب هذه المنطقة,,arjū tajannub hādhihi al-minṭaqah,ʔˈardʒuː tadʒˈannub hˈaːðihil mˈintˤaqa,please avoid this region,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;in-pack-frame;ipa=ala-lc
+massage-spa.stronger-pressure,أرجو ضغطًا أقوى,,arjū ḍaghṭan aqwá,ʔˈardʒuː dˤˈaɣtˤan ʔˈaqwaː,I ask for stronger pressure,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.more-gently,برفق أكثر من فضلك,ضغط أخفّ من فضلك,bi-rifq akthar min faḍlak,birˈifq ʔˈakθar mˈin fˈadˤlak,"more gently, please; the alt says lighter pressure",,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.that-pressure-is-good,الضغط مناسب، هكذا تمامًا,,"al-ḍaghṭ munāsib, hākadhā tamāman","ʔadˤdˤˈaɣtˤ munˈaːsib, hˈaːkaðaː tamˈaːman",the pressure is right; exactly like this,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.focus-on-shoulders,أرجو التركيز على الكتفين,,arjū al-tarkīz ʿalá al-katifayn,ʔˈardʒut tarkˈiːz ʕˈalal katifˈajn,please concentrate on the shoulders,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.focus-on-back,أرجو التركيز على الظهر,,arjū al-tarkīz ʿalá al-ẓahr,ʔˈardʒut tarkˈiːz ʕˈalaðˤ ðˤˈahr,please concentrate on the back,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.focus-on-neck,أرجو التركيز على الرقبة,,arjū al-tarkīz ʿalá al-raqabah,ʔˈardʒut tarkˈiːz ʕˈalar rˈaqaba,please concentrate on the neck,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.focus-on-feet,أرجو التركيز على القدمين,,arjū al-tarkīz ʿalá al-qadamayn,ʔˈardʒut tarkˈiːz ʕˈalal qadamˈajn,please concentrate on the feet,,2,spa-board-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.reply-i-will-avoid-that-area,حسنًا، سأتجنّب هذه المنطقة,,"ḥasanan, sa-atajannab hādhihi al-minṭaqah","ħˈasanan, saʔatadʒˈannab hˈaːðihil mˈintˤaqa",all right; I will avoid this region,,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc
+massage-spa.reply-which-area-exactly,أي منطقة بالضبط؟,,ayy minṭaqah bi-al-ḍabṭ?,ʔˈajj mˈintˤaqa bidˤdˤˈabtˤ,which region exactly?,,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.reply-cannot-avoid-this-treatment,هذه الجلسة لا تتمّ دون هذه المنطقة,,hādhihi al-jalsah lā tatimm dūn hādhihi al-minṭaqah,hˈaːðihil dʒˈalsa lˈaː tatˈimm dˈuːn hˈaːðihil mˈintˤaqa,this session cannot be done without this region,,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.reply-does-it-hurt-there,هل تؤلم هذه المنطقة؟,,hal tuʾlim hādhihi al-minṭaqah?,hˈal tˈuʔlim hˈaːðihil mˈintˤaqa,does this region hurt?,,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;ipa=ala-lc
+massage-spa.reply-ask-supervisor,لا أعرف بالضبط، سأسأل المسؤول,,"lā aʿrif bi-al-ḍabṭ, sa-asʾal al-masʾūl","lˈaː ʔˈaʕrif bidˤdˤˈabtˤ, saʔˈasʔal ʔalmasʔˈuːl",I do not know exactly; I will ask the person in charge,,2,spa-reply-v1;src=al-Ghani;ar.wikipedia=tadlik;generic-masculine-third-party;fix=ALA-LC 2012 rules 13 and 16(b) (sa-yakūn) and 8(a): the prefix sa- takes a hyphen and a hamzah after a prefix is not written;arabic-ipa-v1;ipa=ala-lc

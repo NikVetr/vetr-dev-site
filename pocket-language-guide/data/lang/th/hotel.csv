@@ -1,68 +1,68 @@
-concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-hotel-words.passport,พาสปอร์ต,หนังสือเดินทาง,phatpot,pʰaː˧sa˨˩pɔːt˨˩,,2,th-agent-v1;ipa=thaig2p
-hotel-words.room-key-card,คีย์การ์ดห้อง,บัตรห้อง,khi kat hong,kʰiː˧ kaːt˦˥ hɔŋ˥˩,,2,th-agent-v1;ipa=thaig2p
-hotel-words.check-in,เช็คอิน,,chek in,tɕʰek˦˥ ʔin˧,,2,th-agent-v1;ipa=thaig2p
-hotel-words.check-out,เช็คเอาท์,,chek out,tɕʰek˦˥ ʔaw˦˥,,2,th-agent-v1;ipa=thaig2p
-hotel-words.luggage-storage,ที่ฝากกระเป๋า,,thi fak krapao,tʰiː˥˩ faːk˨˩ kra˨˩raʔ˨˩paw˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.are-any-rooms-available,มีห้องว่างไหม,,mi hong wang mai,miː˧ hɔŋ˥˩ waːŋ˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.there-are-two-of-us,มาสองคน,,ma song khon,maː˧ sɔːŋ˩˩˦ kʰon˧,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.i-have-a-reservation,จองไว้แล้ว,,chong wai laeo,tɕɔːŋ˧ waj˦˥ lɛːw˦˥,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.can-i-charge-my-phone,ชาร์จมือถือได้ไหม,,chat muethue dai mai,tɕʰaːt˦˥ mɯː˧tʰɯː˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.i-would-like-a-non-smoking-room,ขอห้องปลอดบุหรี่,,kho hong plot buri,kʰɔː˩˩˦ hɔŋ˥˩ plɔːt˨˩ buʔ˨˩riː˨˩,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.i-would-like-a-quiet-room,ขอห้องเงียบๆ,,kho hong ngiap ngiap,kʰɔː˩˩˦ hɔŋ˥˩ ŋia̯p˥˩ŋɔː˧,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.is-there-a-washing-machine,มีเครื่องซักผ้าไหม,,mi khrueang sakpha mai,miː˧ kʰrɯa̯ŋ˥˩sak˦˥pʰaː˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.is-wi-fi-free,ไวไฟฟรีไหม,,waifai fri mai,waj˧faj˧ friː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.how-much-per-night,คืนละเท่าไร,,khuen la thaorai,kʰɯːn˧ laʔ˦˥ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.is-breakfast-included,รวมอาหารเช้าไหม,,ruam ahan chao mai,rua̯m˧ ʔaː˧haːn˩˩˦tɕʰaw˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.may-i-see-the-room,ขอดูห้องก่อน,,kho du hong kon,kʰɔː˩˩˦ duː˧ hɔŋ˥˩ kɔːn˨˩,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.for-nights,{} คืน,,{} khuen,{} kʰɯːn˧,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.two-beds,ขอเตียงแยก,,kho tiang yaek,kʰɔː˩˩˦ tia̯ŋ˧ jɛːk˥˩,,2,th-agent-v1;ipa=thaig2p
-hotel-basics.is-there-air-conditioning,มีแอร์ไหม,,mi ae mai,miː˧ ʔɛː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.can-i-check-out-later,เช็คเอาท์สายได้ไหม,,chek out sai dai mai,tɕʰek˦˥ ʔaw˦˥ saːj˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.what-time-does-breakfast-start,อาหารเช้าเริ่มกี่โมง,,ahan chao roem ki mong,ʔaː˧haːn˩˩˦tɕʰaw˦˥ rɤːm˥˩ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.can-i-store-my-luggage,ฝากกระเป๋าได้ไหม,,fak krapao dai mai,faːk˨˩ kra˨˩raʔ˨˩paw˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.no-housekeeping,ไม่ต้องทำความสะอาด,,mai tong tham khwam sa-at,maj˥˩tɔŋ˥˩ tʰam˧kʰwaːm˧saʔ˨˩ʔaːt˨˩,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.another-towel-please,ขอผ้าเช็ดตัวเพิ่ม,,kho pha chet tua phoem,kʰɔː˩˩˦ pʰaː˥˩tɕʰet˦˥tua̯˧ pʰɤːm˥˩,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.what-time-is-check-out,เช็คเอาท์กี่โมง,,chek out ki mong,tɕʰek˦˥ ʔaw˦˥ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.can-i-check-in-early,เช็คอินก่อนได้ไหม,,chek in kon dai mai,tɕʰek˦˥ ʔin˧ kɔːn˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.another-night,ขออยู่อีกคืน,,kho yu ik khuen,kʰɔː˩˩˦ juː˨˩ ʔiːk˨˩ kʰɯːn˧,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.is-there-a-safe,มีตู้เซฟไหม,,mi tu sef mai,miː˧ tuː˥˩sef˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.another-blanket,ขอผ้าห่มเพิ่ม,,kho pha hom phoem,kʰɔː˩˩˦ pʰaː˥˩hom˨˩ pʰɤːm˥˩,,2,th-agent-v1;ipa=thaig2p
-hotel-requests.wake-up-call,ช่วยปลุกตอน {},,chuai pluk ton {},tɕʰua̯j˥˩ pluk˨˩ tɔːn˧ {},,2,th-agent-v1;ipa=thaig2p
-room-problems.there-is-a-problem-with-the-room,ห้องมีปัญหา,,hong mi panha,hɔŋ˥˩ miː˧pan˧haː˩˩˦,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-air-conditioning-is-broken,แอร์เสีย,,ae sia,ʔɛː˧ sia̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
-room-problems.there-is-no-hot-water,ไม่มีน้ำร้อน,,mai mi nam ron,maj˥˩ miː˧ naːm˦˥rɔːn˦˥,,2,th-agent-v1;ipa=thaig2p
-room-problems.can-i-change-rooms,ขอเปลี่ยนห้องได้ไหม,,kho plian hong dai mai,kʰɔː˩˩˦ plia̯n˨˩ hɔŋ˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-room-is-too-noisy,ห้องเสียงดังมาก,,hong siang dang mak,hɔŋ˥˩ sia̯ŋ˩˩˦daŋ˧ maːk˥˩,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-key-does-not-work,คีย์การ์ดใช้ไม่ได้,,khi kat chai mai dai,kʰiː˧ kaːt˦˥ tɕʰaj˦˥maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-toilet-will-not-flush,ชักโครกกดไม่ลง,,chakkhrok kot mai long,tɕʰak˦˥kʰroːk˥˩ kot˨˩ maj˥˩ loŋ˧,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-light-does-not-work,ไฟไม่ติด,,fai mai tit,faj˧ maj˥˩ tit˨˩,,2,th-agent-v1;ipa=thaig2p
-room-problems.please-send-someone,ช่วยส่งคนมาซ่อม,,chuai song khon ma som,tɕʰua̯j˥˩ soŋ˨˩ kʰon˧ maː˧ sɔm˥˩,,2,th-agent-v1;ipa=thaig2p
-room-problems.the-heating-does-not-work,เครื่องทำความร้อน เสีย,,khrueang tham khwam ron sia,kʰrɯa̯ŋ˥˩tʰam˧kʰwaːm˧rɔːn˦˥ sia̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
-laundry.please-wash-these-clothes,ซักผ้าให้หน่อย,,sak pha hai noi,sak˦˥pʰaː˥˩ haj˥˩ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
-laundry.where-is-a-laundromat,ร้านสะดวกซักอยู่ไหน,ร้านซักรีดอยู่ไหน,ran saduak sak yu nai,raːn˦˥ saʔ˨˩dua̯k˨˩ sak˦˥ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-laundry.when-will-it-be-ready,เสร็จเมื่อไร,,set muearai,set˨˩ mɯa̯˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
-laundry.how-much-per-kilo,กิโลละเท่าไร,,kilo la thaorai,kiʔ˨˩loː˧ laʔ˦˥ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
-laundry.can-it-be-ready-today,เสร็จวันนี้ได้ไหม,,set wanni dai mai,set˨˩ wan˧niː˦˥ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-laundry.please-do-not-use-bleach,ไม่ใส่น้ำยาฟอกขาว,,mai sai namya fok khao,maj˥˩ saj˨˩ naːm˦˥jaː˧ fɔːk˥˩kʰaːw˩˩˦,,2,th-agent-v1;ipa=thaig2p
-laundry.laundromat,ร้านสะดวกซัก,ร้านซักรีด,ran saduak sak,raːn˦˥ saʔ˨˩dua̯k˨˩ sak˦˥,,2,th-agent-v1;ipa=thaig2p
-laundry.please-iron-this,รีดให้หน่อย,,rit hai noi,riːt˥˩ haj˥˩ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
-laundry.detergent,ผงซักฟอก,,phong sakfok,pʰoŋ˩˩˦sak˦˥fɔːk˥˩,,2,th-agent-v1;ipa=thaig2p
-laundry.dry-cleaning,ซักแห้ง,,sak haeng,sak˦˥hɛːŋ˥˩,,2,th-agent-v1;ipa=thaig2p
-laundry.dryer,เครื่องอบผ้า,,khrueang op pha,kʰrɯa̯ŋ˥˩ʔop˨˩pʰaː˥˩,,2,th-agent-v1;ipa=thaig2p
-laundry.coin-operated,หยอดเหรียญ,,yot rian,jɔːt˨˩ ria̯n˩˩˦,,2,th-agent-v1;ipa=thaig2p
-massage-spa.please-stop,พอแล้ว หยุดนวด,,pho laeo yut nuat,pʰɔː˧lɛːw˦˥ jut˨˩ nua̯t˥˩,"enough, stop the massage -- no ...หน่อย softener and no particle, the row ends the session",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
-massage-spa.please-pause,พักก่อน เดี๋ยวนวดต่อ,,phak kon diao nuat to,pʰak˦˥ kɔːn˨˩ dia̯w˩˩˦ nua̯t˥˩ tɔː˨˩,"a break for now, carry on in a moment -- พัก is a rest that resumes, where หยุด is not",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
-massage-spa.please-avoid-this-area,ตรงนี้ไม่ต้องนวด,,trong ni mai tong nuat,troŋ˧niː˦˥ maj˥˩tɔŋ˥˩ nua̯t˥˩,no need to massage this spot -- ตรงนี้ matches emergency-medical.it-hurts-here on the same board,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
-massage-spa.stronger-pressure,นวดแรงกว่านี้หน่อย,,nuat raeng kwa ni noi,nua̯t˥˩ rɛːŋ˧ kwaː˨˩ niː˦˥ nɔj˨˩,massage a little stronger than this -- แรง is the word the trade's own question แรงไปหรือเบาไปไหม uses,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
-massage-spa.more-gently,เบามือหน่อย,,bao mue noi,baw˧mɯː˧ nɔj˨˩,"a lighter hand -- เบามือ, the counterpart of แรง; the pack spells 'more slowly' ช้าๆ, so เบา is pressure",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
-massage-spa.that-pressure-is-good,แรงพอดี นวดแบบนี้ต่อ,,raeng phodi nuat baep ni to,rɛːŋ˧ pʰɔː˧diː˧ nua̯t˥˩ bɛːp˨˩niː˦˥ tɔː˨˩,"the pressure is just right, keep massaging like this",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
-massage-spa.focus-on-shoulders,เน้นนวดบ่า,เน้นนวดไหล่,nen nuat ba,nen˦˥ nua̯t˥˩ baː˨˩,บ่า is the top of the shoulder the trade works and names in คอ บ่า ไหล่; ไหล่ is the shoulder joint,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-kho-ba-lai;moph-nuat-curriculum;ipa=thaig2p
-massage-spa.focus-on-back,เน้นนวดหลัง,,nen nuat lang,nen˦˥ nua̯t˥˩ laŋ˩˩˦,,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
-massage-spa.focus-on-neck,เน้นนวดคอ,,nen nuat kho,nen˦˥ nua̯t˥˩ kʰɔː˧,"คอ, the first member of the trade's คอ บ่า ไหล่ group",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-kho-ba-lai;moph-nuat-curriculum;ipa=thaig2p
-massage-spa.focus-on-feet,เน้นนวดเท้า,,nen nuat thao,nen˦˥ nua̯t˥˩ tʰaːw˦˥,"นวดเท้า is a bookable service of its own in Thailand, not part of a full-body massage",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-nuat-thao;ipa=thaig2p
-massage-spa.reply-i-will-avoid-that-area,ได้ ตรงนี้จะไม่นวด,,dai trong ni cha mai nuat,daːj˥˩ troŋ˧niː˦˥ tɕaʔ˨˩ maj˥˩ nua̯t˥˩,"all right, this spot will not be massaged -- Thai takes no pronoun and no particle here",2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
-massage-spa.reply-which-area-exactly,หมายถึงตรงไหน,,mai thueng trong nai,maːj˩˩˦tʰɯŋ˩˩˦ troŋ˧naj˩˩˦,"which spot do you mean -- หมายถึง presupposes no pointing, which a guest face down cannot do",2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
-massage-spa.reply-cannot-avoid-this-treatment,นวดแบบนี้เลี่ยงตรงนี้ไม่ได้,,nuat baep ni liang trong ni mai dai,nua̯t˥˩ bɛːp˨˩niː˦˥ lia̯ŋ˥˩ troŋ˧niː˦˥ maj˥˩ daːj˥˩,this kind of massage cannot avoid this spot -- เลี่ยง is the trade's own avoid,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
-massage-spa.reply-does-it-hurt-there,ตรงนี้เจ็บไหม,,trong ni chep mai,troŋ˧niː˦˥ tɕep˨˩ maj˩˩˦,เจ็บ follows emergency-medical.it-hurts-here in this pack,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
-massage-spa.reply-ask-supervisor,ไม่แน่ใจ ขอถามหัวหน้าก่อน,,mai nae chai kho tham hua na kon,maj˥˩ nɛː˥˩tɕaj˧ kʰɔː˩˩˦ tʰaːm˩˩˦ hua̯˩˩˦naː˥˩ kɔːn˨˩,"หัวหน้า names the shift head and is not sex-marked; no ครับ/ค่ะ, as everywhere in this pack",2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,note,confidence,provenance
+hotel-words.passport,พาสปอร์ต,หนังสือเดินทาง,phatpot,pʰaː˧sa˨˩pɔːt˨˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-words.room-key-card,คีย์การ์ดห้อง,บัตรห้อง,khi kat hong,kʰiː˧ kaːt˦˥ hɔŋ˥˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-words.check-in,เช็คอิน,,chek in,tɕʰek˦˥ ʔin˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-words.check-out,เช็คเอาท์,,chek out,tɕʰek˦˥ ʔaw˦˥,,,2,th-agent-v1;ipa=thaig2p
+hotel-words.luggage-storage,ที่ฝากกระเป๋า,,thi fak krapao,tʰiː˥˩ faːk˨˩ kra˨˩raʔ˨˩paw˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.are-any-rooms-available,มีห้องว่างไหม,,mi hong wang mai,miː˧ hɔŋ˥˩ waːŋ˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.there-are-two-of-us,มาสองคน,,ma song khon,maː˧ sɔːŋ˩˩˦ kʰon˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.i-have-a-reservation,จองไว้แล้ว,,chong wai laeo,tɕɔːŋ˧ waj˦˥ lɛːw˦˥,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.can-i-charge-my-phone,ชาร์จมือถือได้ไหม,,chat muethue dai mai,tɕʰaːt˦˥ mɯː˧tʰɯː˩˩˦ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.i-would-like-a-non-smoking-room,ขอห้องปลอดบุหรี่,,kho hong plot buri,kʰɔː˩˩˦ hɔŋ˥˩ plɔːt˨˩ buʔ˨˩riː˨˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.i-would-like-a-quiet-room,ขอห้องเงียบๆ,,kho hong ngiap ngiap,kʰɔː˩˩˦ hɔŋ˥˩ ŋia̯p˥˩ŋɔː˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.is-there-a-washing-machine,มีเครื่องซักผ้าไหม,,mi khrueang sakpha mai,miː˧ kʰrɯa̯ŋ˥˩sak˦˥pʰaː˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.is-wi-fi-free,ไวไฟฟรีไหม,,waifai fri mai,waj˧faj˧ friː˧ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.how-much-per-night,คืนละเท่าไร,,khuen la thaorai,kʰɯːn˧ laʔ˦˥ tʰaw˥˩raj˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.is-breakfast-included,รวมอาหารเช้าไหม,,ruam ahan chao mai,rua̯m˧ ʔaː˧haːn˩˩˦tɕʰaw˦˥ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.may-i-see-the-room,ขอดูห้องก่อน,,kho du hong kon,kʰɔː˩˩˦ duː˧ hɔŋ˥˩ kɔːn˨˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.for-nights,{} คืน,,{} khuen,{} kʰɯːn˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.two-beds,ขอเตียงแยก,,kho tiang yaek,kʰɔː˩˩˦ tia̯ŋ˧ jɛːk˥˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-basics.is-there-air-conditioning,มีแอร์ไหม,,mi ae mai,miː˧ ʔɛː˧ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.can-i-check-out-later,เช็คเอาท์สายได้ไหม,,chek out sai dai mai,tɕʰek˦˥ ʔaw˦˥ saːj˩˩˦ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.what-time-does-breakfast-start,อาหารเช้าเริ่มกี่โมง,,ahan chao roem ki mong,ʔaː˧haːn˩˩˦tɕʰaw˦˥ rɤːm˥˩ kiː˨˩ moːŋ˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.can-i-store-my-luggage,ฝากกระเป๋าได้ไหม,,fak krapao dai mai,faːk˨˩ kra˨˩raʔ˨˩paw˩˩˦ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.no-housekeeping,ไม่ต้องทำความสะอาด,,mai tong tham khwam sa-at,maj˥˩tɔŋ˥˩ tʰam˧kʰwaːm˧saʔ˨˩ʔaːt˨˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.another-towel-please,ขอผ้าเช็ดตัวเพิ่ม,,kho pha chet tua phoem,kʰɔː˩˩˦ pʰaː˥˩tɕʰet˦˥tua̯˧ pʰɤːm˥˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.what-time-is-check-out,เช็คเอาท์กี่โมง,,chek out ki mong,tɕʰek˦˥ ʔaw˦˥ kiː˨˩ moːŋ˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.can-i-check-in-early,เช็คอินก่อนได้ไหม,,chek in kon dai mai,tɕʰek˦˥ ʔin˧ kɔːn˨˩ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.another-night,ขออยู่อีกคืน,,kho yu ik khuen,kʰɔː˩˩˦ juː˨˩ ʔiːk˨˩ kʰɯːn˧,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.is-there-a-safe,มีตู้เซฟไหม,,mi tu sef mai,miː˧ tuː˥˩sef˦˥ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.another-blanket,ขอผ้าห่มเพิ่ม,,kho pha hom phoem,kʰɔː˩˩˦ pʰaː˥˩hom˨˩ pʰɤːm˥˩,,,2,th-agent-v1;ipa=thaig2p
+hotel-requests.wake-up-call,ช่วยปลุกตอน {},,chuai pluk ton {},tɕʰua̯j˥˩ pluk˨˩ tɔːn˧ {},,,2,th-agent-v1;ipa=thaig2p
+room-problems.there-is-a-problem-with-the-room,ห้องมีปัญหา,,hong mi panha,hɔŋ˥˩ miː˧pan˧haː˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-air-conditioning-is-broken,แอร์เสีย,,ae sia,ʔɛː˧ sia̯˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+room-problems.there-is-no-hot-water,ไม่มีน้ำร้อน,,mai mi nam ron,maj˥˩ miː˧ naːm˦˥rɔːn˦˥,,,2,th-agent-v1;ipa=thaig2p
+room-problems.can-i-change-rooms,ขอเปลี่ยนห้องได้ไหม,,kho plian hong dai mai,kʰɔː˩˩˦ plia̯n˨˩ hɔŋ˥˩ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-room-is-too-noisy,ห้องเสียงดังมาก,,hong siang dang mak,hɔŋ˥˩ sia̯ŋ˩˩˦daŋ˧ maːk˥˩,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-key-does-not-work,คีย์การ์ดใช้ไม่ได้,,khi kat chai mai dai,kʰiː˧ kaːt˦˥ tɕʰaj˦˥maj˥˩daːj˥˩,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-toilet-will-not-flush,ชักโครกกดไม่ลง,,chakkhrok kot mai long,tɕʰak˦˥kʰroːk˥˩ kot˨˩ maj˥˩ loŋ˧,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-light-does-not-work,ไฟไม่ติด,,fai mai tit,faj˧ maj˥˩ tit˨˩,,,2,th-agent-v1;ipa=thaig2p
+room-problems.please-send-someone,ช่วยส่งคนมาซ่อม,,chuai song khon ma som,tɕʰua̯j˥˩ soŋ˨˩ kʰon˧ maː˧ sɔm˥˩,,,2,th-agent-v1;ipa=thaig2p
+room-problems.the-heating-does-not-work,เครื่องทำความร้อน เสีย,,khrueang tham khwam ron sia,kʰrɯa̯ŋ˥˩tʰam˧kʰwaːm˧rɔːn˦˥ sia̯˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+laundry.please-wash-these-clothes,ซักผ้าให้หน่อย,,sak pha hai noi,sak˦˥pʰaː˥˩ haj˥˩ nɔj˨˩,,,2,th-agent-v1;ipa=thaig2p
+laundry.where-is-a-laundromat,ร้านสะดวกซักอยู่ไหน,ร้านซักรีดอยู่ไหน,ran saduak sak yu nai,raːn˦˥ saʔ˨˩dua̯k˨˩ sak˦˥ juː˨˩ naj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+laundry.when-will-it-be-ready,เสร็จเมื่อไร,,set muearai,set˨˩ mɯa̯˥˩raj˧,,,2,th-agent-v1;ipa=thaig2p
+laundry.how-much-per-kilo,กิโลละเท่าไร,,kilo la thaorai,kiʔ˨˩loː˧ laʔ˦˥ tʰaw˥˩raj˧,,,2,th-agent-v1;ipa=thaig2p
+laundry.can-it-be-ready-today,เสร็จวันนี้ได้ไหม,,set wanni dai mai,set˨˩ wan˧niː˦˥ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+laundry.please-do-not-use-bleach,ไม่ใส่น้ำยาฟอกขาว,,mai sai namya fok khao,maj˥˩ saj˨˩ naːm˦˥jaː˧ fɔːk˥˩kʰaːw˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+laundry.laundromat,ร้านสะดวกซัก,ร้านซักรีด,ran saduak sak,raːn˦˥ saʔ˨˩dua̯k˨˩ sak˦˥,,,2,th-agent-v1;ipa=thaig2p
+laundry.please-iron-this,รีดให้หน่อย,,rit hai noi,riːt˥˩ haj˥˩ nɔj˨˩,,,2,th-agent-v1;ipa=thaig2p
+laundry.detergent,ผงซักฟอก,,phong sakfok,pʰoŋ˩˩˦sak˦˥fɔːk˥˩,,,2,th-agent-v1;ipa=thaig2p
+laundry.dry-cleaning,ซักแห้ง,,sak haeng,sak˦˥hɛːŋ˥˩,,,2,th-agent-v1;ipa=thaig2p
+laundry.dryer,เครื่องอบผ้า,,khrueang op pha,kʰrɯa̯ŋ˥˩ʔop˨˩pʰaː˥˩,,,2,th-agent-v1;ipa=thaig2p
+laundry.coin-operated,หยอดเหรียญ,,yot rian,jɔːt˨˩ ria̯n˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+massage-spa.please-stop,พอแล้ว หยุดนวด,,pho laeo yut nuat,pʰɔː˧lɛːw˦˥ jut˨˩ nua̯t˥˩,"enough, stop the massage","no ...หน่อย softener and no particle, the row ends the session",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
+massage-spa.please-pause,พักก่อน เดี๋ยวนวดต่อ,,phak kon diao nuat to,pʰak˦˥ kɔːn˨˩ dia̯w˩˩˦ nua̯t˥˩ tɔː˨˩,"a break for now, carry on in a moment","พัก is a rest that resumes, where หยุด is not",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
+massage-spa.please-avoid-this-area,ตรงนี้ไม่ต้องนวด,,trong ni mai tong nuat,troŋ˧niː˦˥ maj˥˩tɔŋ˥˩ nua̯t˥˩,no need to massage this spot,ตรงนี้ matches emergency-medical.it-hurts-here on the same board,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
+massage-spa.stronger-pressure,นวดแรงกว่านี้หน่อย,,nuat raeng kwa ni noi,nua̯t˥˩ rɛːŋ˧ kwaː˨˩ niː˦˥ nɔj˨˩,massage a little stronger than this,แรง is the word the trade's own question แรงไปหรือเบาไปไหม uses,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
+massage-spa.more-gently,เบามือหน่อย,,bao mue noi,baw˧mɯː˧ nɔj˨˩,a lighter hand,"เบามือ, the counterpart of แรง; the pack spells 'more slowly' ช้าๆ, so เบา is pressure",2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
+massage-spa.that-pressure-is-good,แรงพอดี นวดแบบนี้ต่อ,,raeng phodi nuat baep ni to,rɛːŋ˧ pʰɔː˧diː˧ nua̯t˥˩ bɛːp˨˩niː˦˥ tɔː˨˩,"the pressure is just right, keep massaging like this",,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-raeng-bao-pair;ipa=thaig2p
+massage-spa.focus-on-shoulders,เน้นนวดบ่า,เน้นนวดไหล่,nen nuat ba,nen˦˥ nua̯t˥˩ baː˨˩,บ่า is the top of the shoulder the trade works and names in คอ บ่า ไหล่; ไหล่ is the shoulder joint,,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-kho-ba-lai;moph-nuat-curriculum;ipa=thaig2p
+massage-spa.focus-on-back,เน้นนวดหลัง,,nen nuat lang,nen˦˥ nua̯t˥˩ laŋ˩˩˦,,,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;ipa=thaig2p
+massage-spa.focus-on-neck,เน้นนวดคอ,,nen nuat kho,nen˦˥ nua̯t˥˩ kʰɔː˧,"คอ, the first member of the trade's คอ บ่า ไหล่ group",,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-kho-ba-lai;moph-nuat-curriculum;ipa=thaig2p
+massage-spa.focus-on-feet,เน้นนวดเท้า,,nen nuat thao,nen˦˥ nua̯t˥˩ tʰaːw˦˥,"นวดเท้า is a bookable service of its own in Thailand, not part of a full-body massage",,2,spa-board-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-nuat-thao;ipa=thaig2p
+massage-spa.reply-i-will-avoid-that-area,ได้ ตรงนี้จะไม่นวด,,dai trong ni cha mai nuat,daːj˥˩ troŋ˧niː˦˥ tɕaʔ˨˩ maj˥˩ nua̯t˥˩,"all right, this spot will not be massaged",Thai takes no pronoun and no particle here,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
+massage-spa.reply-which-area-exactly,หมายถึงตรงไหน,,mai thueng trong nai,maːj˩˩˦tʰɯŋ˩˩˦ troŋ˧naj˩˩˦,which spot do you mean,"หมายถึง presupposes no pointing, which a guest face down cannot do",2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
+massage-spa.reply-cannot-avoid-this-treatment,นวดแบบนี้เลี่ยงตรงนี้ไม่ได้,,nuat baep ni liang trong ni mai dai,nua̯t˥˩ bɛːp˨˩niː˦˥ lia̯ŋ˥˩ troŋ˧niː˦˥ maj˥˩ daːj˥˩,this kind of massage cannot avoid this spot,เลี่ยง is the trade's own avoid,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
+massage-spa.reply-does-it-hurt-there,ตรงนี้เจ็บไหม,,trong ni chep mai,troŋ˧niː˦˥ tɕep˨˩ maj˩˩˦,เจ็บ follows emergency-medical.it-hurts-here in this pack,,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p
+massage-spa.reply-ask-supervisor,ไม่แน่ใจ ขอถามหัวหน้าก่อน,,mai nae chai kho tham hua na kon,maj˥˩ nɛː˥˩tɕaj˧ kʰɔː˩˩˦ tʰaːm˩˩˦ hua̯˩˩˦naː˥˩ kɔːn˨˩,"หัวหน้า names the shift head and is not sex-marked; no ครับ/ค่ะ, as everywhere in this pack",,2,spa-reply-v1;th-agent-v1;dtam-moph-nuat-thai;th.wikipedia=การนวดแผนไทย;th-neutral-reply;ipa=thaig2p

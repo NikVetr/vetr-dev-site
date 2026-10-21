@@ -35,7 +35,7 @@ SECTION_HEADER = ["section_id", "group", "color_role", "default_level", "icon",
 CONCEPT_HEADER = ["concept_id", "section_id", "default_template", "kind", "slug_en", "rank",
                   "importance", "cluster_id", "cluster_rank", "slots", "register", "applies_to",
                   "notes"]
-EN_HEADER = ["concept_id", "text", "text_alt", "ipa", "literal", "confidence", "provenance"]
+EN_HEADER = ["concept_id", "text", "text_alt", "ipa", "literal", "note", "confidence", "provenance"]
 
 
 def header_of(rel, fallback):

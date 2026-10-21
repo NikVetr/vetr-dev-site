@@ -1,8 +1,8 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Gdzie mogę kupić bilety?,,ɡdʑˈɛ mˈɔɡɛ kˈupidʑ bʲilˈɛtɨ,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.do-i-need-a-reservation,Czy potrzebna jest rezerwacja?,,tʃɨ pɔtʃˈɛbna jɛst rˌɛzɛrvˈatsja,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.what-is-the-latest-entry-time,Do której można wejść?,,dɔ ktˌurɛj mˈɔʒna vˈɛjɕtɕ,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.are-there-lockers,Czy są szafki?,,tʃɨ sɔ̃ ʃˈafki,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.may-i-take-photos,Czy można fotografować?,,tʃɨ mˈɔʒna fˌɔtɔɡrafˈɔvatɕ,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.please-take-a-photo-of-us,Proszę zrobić nam zdjęcie,,prˈɔʃɛ zrˈɔbʲitɕ nˈam zdjˈɛɲtɕɛ,,2,pl-agent-v1;ipa=espeak
-attractions-tickets.could-you-take-a-photo-for-us,Czy mogę prosić o zrobienie nam zdjęcia?,,tʃɨ mˈɔɡɛ prˈɔɕitɕ ɔ zrɔbjˈɛɲɛ nˈam zdjˈɛɲtɕa,may I ask for a photo to be taken of us? -- the verbal noun zrobienie with nam keeps 'of us' and addresses nobody; o zdjęcie alone could ask to be in a photo with the listener,2,pl-agent-v1;fix=PWN SJP prosić (zwracać się do kogoś z prośbą -- prosić o coś);in-pack-neighbour=attractions-tickets.please-take-a-photo-of-us (Proszę zrobić nam zdjęcie);rule=no-second-person;row-corrections-v6;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Gdzie mogę kupić bilety?,,ɡdʑˈɛ mˈɔɡɛ kˈupidʑ bʲilˈɛtɨ,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Czy potrzebna jest rezerwacja?,,tʃɨ pɔtʃˈɛbna jɛst rˌɛzɛrvˈatsja,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Do której można wejść?,,dɔ ktˌurɛj mˈɔʒna vˈɛjɕtɕ,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Czy są szafki?,,tʃɨ sɔ̃ ʃˈafki,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Czy można fotografować?,,tʃɨ mˈɔʒna fˌɔtɔɡrafˈɔvatɕ,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Proszę zrobić nam zdjęcie,,prˈɔʃɛ zrˈɔbʲitɕ nˈam zdjˈɛɲtɕɛ,,,2,pl-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Czy mogę prosić o zrobienie nam zdjęcia?,,tʃɨ mˈɔɡɛ prˈɔɕitɕ ɔ zrɔbjˈɛɲɛ nˈam zdjˈɛɲtɕa,may I ask for a photo to be taken of us?,the verbal noun zrobienie with nam keeps 'of us' and addresses nobody; o zdjęcie alone could ask to be in a photo with the listener,2,pl-agent-v1;fix=PWN SJP prosić (zwracać się do kogoś z prośbą -- prosić o coś);in-pack-neighbour=attractions-tickets.please-take-a-photo-of-us (Proszę zrobić nam zdjęcie);rule=no-second-person;row-corrections-v6;ipa=espeak

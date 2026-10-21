@@ -125,8 +125,8 @@ def main(argv):
     target_header = ["concept_id", "text", "text_alt"]
     if args.romanization:
         target_header.append(f"romanization_{args.romanization}")
-    target_header += ["ipa", "literal", "confidence", "provenance"]
-    source_header = ["concept_id", "text", "text_alt", "ipa", "literal", "confidence", "provenance"]
+    target_header += ["ipa", "literal", "note", "confidence", "provenance"]
+    source_header = ["concept_id", "text", "text_alt", "ipa", "literal", "note", "confidence", "provenance"]
     concept_header = list(concepts_by_group[groups[0]][0]) if concepts_by_group[groups[0]] else [
         "concept_id", "section_id", "default_template", "kind", "slug_en", "rank",
         "importance", "cluster_id", "cluster_rank", "slots", "register", "notes",

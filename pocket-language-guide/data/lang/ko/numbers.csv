@@ -1,116 +1,116 @@
-concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,hjʌnɡɯmintɕʰulɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
-atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,weɡuk kʰadɯ twɛjo,,2,ko-agent-v1;ipa=rr
-atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,kiɡjeɡa kʰadɯɾɯl mʌɡʌs͈ʌjo,machine ate my card,2,ko-agent-v1;ipa=rr
-atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,susuɾjo is͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.the-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,kʰadɯɡa an twɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.what-is-the-exchange-rate,환율이 얼마예요?,,hwannyuri eolmayeyo?,hwannjuɾi ʌlmajejo,,2,ko-agent-v1;ipa=rr
-atm-cash.no-money-came-out,돈이 안 나왔어요,,doni an nawasseoyo,toni an nawas͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.where-can-i-change-money,환전 어디서 해요?,,hwanjeon eodiseo haeyo?,hwandʑʌn ʌdisʌ hɛjo,,2,ko-agent-v1;ipa=rr
-atm-cash.the-machine-is-out-of-service,기계가 고장났어요,,gigyega gojangnasseoyo,kiɡjeɡa kodʑaŋnas͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.please-give-me-smaller-notes,작은 지폐로 주세요,,jageun jipyero juseyo,tɕaɡɯn tɕipʰjeɾo tɕusejo,,2,ko-agent-v1;ipa=rr
-atm-cash.do-you-have-change,잔돈 있어요?,,jandon isseoyo?,tɕandon is͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,{} ɾo nɛl su is͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,wʌnhwaɾo kjʌldʑehɛ tɕusejo,,2,ko-agent-v1;ipa=rr
-atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,toŋdʑʌn ʌdisʌ pak͈wʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,kʰadɯ tɕʰweso kɯmɛk is͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,hjʌnɡɯmintɕʰulɡi,,2,ko-agent-v1;ipa=rr
-atm-cash.banknote,지폐,,jipye,tɕipʰje,,2,ko-agent-v1;ipa=rr
-atm-cash.coin,동전,,dongjeon,toŋdʑʌn,,2,ko-agent-v1;ipa=rr
-atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,hjʌnɡɯmman kanɯŋ,,2,ko-agent-v1;ipa=rr
-atm-cash.fee,수수료,,susuryo,susuɾjo,,2,ko-agent-v1;ipa=rr
-atm-cash.change,잔돈,거스름돈,jandon,tɕandon,,2,ko-agent-v1;ipa=rr
-atm-cash.exchange-rate,환율,,hwannyul,hwannjul,,2,ko-agent-v1;ipa=rr
-atm-cash.bank,은행,,eunhaeng,ɯnhɛŋ,,2,ko-agent-v1;ipa=rr
-atm-cash.money-exchange,환전소,,hwanjeonso,hwandʑʌnso,,2,ko-agent-v1;ipa=rr
-atm-cash.pin,비밀번호,PIN,bimilbeonho,pimilbʌnho,,2,ko-agent-v1;ipa=rr
-numbers-money.l-ng,영,공,yeong,jʌŋ,or 공 on phones,2,ko-agent-v1;ipa=rr
-numbers-money.y,일,하나,il,il,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.r,이,둘,i,i,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.s-n,삼,셋,sam,sam,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.s,사,넷,sa,sa,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.w,오,다섯,o,o,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.li,육,여섯,yuk,juk,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.q,칠,일곱,chil,tɕʰil,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.b,팔,여덟,pal,pʰal,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.ji,구,아홉,gu,ku,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.sh,십,열,sip,sip,Sino / native,2,ko-agent-v1;ipa=rr
-numbers-money.y-b-i,백,,baek,pɛk,,2,ko-agent-v1;ipa=rr
-numbers-money.y-qi-n,천,,cheon,tɕʰʌn,,2,ko-agent-v1;ipa=rr
-numbers-money.y-w-n,만,,man,man,,2,ko-agent-v1;ipa=rr
-numbers-money.b-n,반,,ban,pan,,2,ko-agent-v1;ipa=rr
-numbers-money.won,원,,won,wʌn,,2,ko-agent-v1;ipa=rr
-numbers-money.won-symbol,₩,,won,wʌn,,2,ko-agent-v1;ipa=rr
-numbers-money.number-and-classifier-notes,"수는 십일, 이십처럼 쌓아요: 11 = shíyī, 20 = èrshí. 단 백, 천, 만 앞에는 yī가 붙고(yìbǎi, yíwàn), 중간이 비면 líng을 넣어요(101 = yìbǎi líng yī). 단위명사 앞의 2는 èr이 아니라 liǎng이에요, 둘이 두가 되는 것과 같아요. gè = 개, zhāng = 장, píng = 병은 그대로지만, 사람은 명이 아니라 gè, 높이면 wèi, 잔은 bēi예요. 전화에서 1은 yāo. 말할 때 yuán은 kuài, jiǎo / máo = 0.1위안, fēn = 0.01위안.",,,,,2,ko-notes-v1
-numbers-money.number-and-classifier-notes-2,"수는 십일, 이십처럼 쌓아요: 11 = jūichi, 20 = nijū. 단 만은 ichi를 붙여 ichiman이에요. 세는 말: -tsu(물건), -mai(납작한 것), -hon(긴 것), -nin(사람), -hai(잔). 고유수사가 붙는 자리가 우리와 달라서 -tsu는 hitotsu, futatsu처럼 아홉까지고, 사람은 hitori, futari 다음이 sannin이에요. 전화는 0 = zero/maru, 4 = yon, 7 = nana, 9 = kyū.",,,,,2,ko-notes-v1
-numbers-money.forint,포린트,,porinteu,pʰoɾintʰɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.forint-symbol,포린트 기호,,porinteu giho,pʰoɾintʰɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.rupee,루피,,rupi,ɾupʰi,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.rupee-symbol,루피 기호,,rupi giho,ɾupʰi kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.baht,바트,,bateu,patʰɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.baht-symbol,바트 기호,,bateu giho,patʰɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.lira,리라,,rira,ɾiɾa,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.lira-symbol,리라 기호,,rira giho,ɾiɾa kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.dong,동,,dong,toŋ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.dong-symbol,동 기호,,dong giho,toŋ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.ruble,루블,,rubeul,ɾubɯl,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.ruble-symbol,루블 기호,,rubeul giho,ɾubɯl kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.rupiah,루피아,,rupia,ɾupʰia,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.rupiah-symbol,루피아 기호,,rupia giho,ɾupʰia kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.shilling,실링,,silring,silɾiŋ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.shilling-symbol,실링 기호,,silring giho,silɾiŋ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.euro,유로,,yuro,juɾo,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.euro-symbol,유로 기호,,yuro giho,juɾo kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.dollar,달러,,dalreo,talɾʌ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.dollar-symbol,달러 기호,,dalreo giho,talɾʌ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.pound,파운드,,paundeu,pʰaundɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.pound-symbol,파운드 기호,,paundeu giho,pʰaundɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.yen,엔,,en,en,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
-numbers-money.yu-n,위안,,wian,wian,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.ku-i,위안 (구어),,wian (gueo),,,1,reader-gloss-v1;roman=generated
-numbers-money.li-ng,2 + 단위명사,,2 + danwimyeongsa,,,1,reader-gloss-v1;roman=generated
-numbers-money.2-items,2개,,2gae,,,1,reader-gloss-v1;roman=generated
-numbers-money.franc,프랑,,peurang,pʰɯɾaŋ,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.franc-symbol,프랑 기호,,peurang giho,pʰɯɾaŋ kiho,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.peso,페소,,peso,pʰeso,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.peso-symbol,페소 기호,,peso giho,pʰeso kiho,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.real,레알,,real,ɾeal,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.real-symbol,레알 기호,,real giho,ɾeal kiho,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.local-currency,현지 통화,,hyeonji tonghwa,hjʌndʑi tʰoŋhwa,,2,currency-agent-v1;cldr;ipa=rr
-numbers-money.lakh,십만,,simman,simman,,2,lakh-crore-agent-v1;cldr;ipa=rr
-numbers-money.crore,천만,,cheonman,tɕʰʌnman,,2,lakh-crore-agent-v1;cldr;ipa=rr
-numbers-money.shekel,세켈,,sekel,sekʰel,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
-numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
-numbers-money.rial,리얄,,riyal,ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
-numbers-money.toman,십 리얄,,sip riyal,sip ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
-numbers-money.zloty,즈워티,,jeuwoti,tɕɯwʌtʰi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.zloty-symbol,즈워티 기호,,jeuwoti giho,tɕɯwʌtʰi kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.hryvnia,흐리브냐,,heuribeunya,hɯɾibɯnja,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.hryvnia-symbol,흐리브냐 기호,,heuribeunya giho,hɯɾibɯnja kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.leu,레우,,reu,ɾeu,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.leu-symbol,레우 기호,,reu giho,ɾeu kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.koruna,코루나,,koruna,kʰoɾuna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.koruna-symbol,코루나 기호,,koruna giho,kʰoɾuna kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.krona,크로나,,keurona,kʰɯɾona,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.krona-symbol,크로나 기호,,keurona giho,kʰɯɾona kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.ringgit,링깃,,ringgit,ɾiŋɡit,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=rr
-numbers-money.ringgit-symbol,링깃 기호,,ringgit giho,ɾiŋɡit kiho,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=rr
-numbers-money.nepali-rupee,네팔 루피,,nepal rupi,nepʰal ɾupʰi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.nepali-rupee-symbol,네팔 루피 기호,,nepal rupi giho,nepʰal ɾupʰi kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.birr,비르,,bireu,piɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.naira,나이지리아 나이라,,Naijiria naira,naidʑiɾia naiɾa,,2,naira-gloss-v1;cldr;ipa=rr
-numbers-money.naira-symbol,나이지리아 나이라 기호,,Naijiria naira giho,naidʑiɾia naiɾa kiho,,2,naira-gloss-v1;cldr;ipa=rr
-numbers-money.riel,리엘,,riel,ɾiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.riel-symbol,리엘 기호,,riel giho,ɾiel kiho,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.dram,드람,,deuram,tɯɾam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.dram-symbol,드람 기호,,deuram giho,tɯɾam kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.lari,라리,,rari,ɾaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.lari-symbol,라리 기호,,rari giho,ɾaɾi kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.kip,키프,,kipeu,kʰipʰɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.kip-symbol,키프 기호,,kipeu giho,kʰipʰɯ kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.taka,타카,,taka,tʰakʰa,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.taka-symbol,타카 기호,,taka giho,tʰakʰa kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.pakistani-rupee,파키스탄 루피,,pakiseutan rupi,pʰakʰisɯtʰan ɾupʰi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.pakistani-rupee-symbol,파키스탄 루피 기호,,pakiseutan rupi giho,pʰakʰisɯtʰan ɾupʰi kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
-numbers-money.som,숨,,sum,sum,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+concept_id,text,text_alt,romanization_rr,ipa,literal,note,confidence,provenance
+atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,hjʌnɡɯmintɕʰulɡi ʌdijejo,,,2,ko-agent-v1;ipa=rr
+atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,weɡuk kʰadɯ twɛjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,kiɡjeɡa kʰadɯɾɯl mʌɡʌs͈ʌjo,machine ate my card,,2,ko-agent-v1;ipa=rr
+atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,susuɾjo is͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.the-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,kʰadɯɡa an twɛs͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.what-is-the-exchange-rate,환율이 얼마예요?,,hwannyuri eolmayeyo?,hwannjuɾi ʌlmajejo,,,2,ko-agent-v1;ipa=rr
+atm-cash.no-money-came-out,돈이 안 나왔어요,,doni an nawasseoyo,toni an nawas͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.where-can-i-change-money,환전 어디서 해요?,,hwanjeon eodiseo haeyo?,hwandʑʌn ʌdisʌ hɛjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.the-machine-is-out-of-service,기계가 고장났어요,,gigyega gojangnasseoyo,kiɡjeɡa kodʑaŋnas͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.please-give-me-smaller-notes,작은 지폐로 주세요,,jageun jipyero juseyo,tɕaɡɯn tɕipʰjeɾo tɕusejo,,,2,ko-agent-v1;ipa=rr
+atm-cash.do-you-have-change,잔돈 있어요?,,jandon isseoyo?,tɕandon is͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,{} ɾo nɛl su is͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,wʌnhwaɾo kjʌldʑehɛ tɕusejo,,,2,ko-agent-v1;ipa=rr
+atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,toŋdʑʌn ʌdisʌ pak͈wʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,kʰadɯ tɕʰweso kɯmɛk is͈ʌjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,hjʌnɡɯmintɕʰulɡi,,,2,ko-agent-v1;ipa=rr
+atm-cash.banknote,지폐,,jipye,tɕipʰje,,,2,ko-agent-v1;ipa=rr
+atm-cash.coin,동전,,dongjeon,toŋdʑʌn,,,2,ko-agent-v1;ipa=rr
+atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,hjʌnɡɯmman kanɯŋ,,,2,ko-agent-v1;ipa=rr
+atm-cash.fee,수수료,,susuryo,susuɾjo,,,2,ko-agent-v1;ipa=rr
+atm-cash.change,잔돈,거스름돈,jandon,tɕandon,,,2,ko-agent-v1;ipa=rr
+atm-cash.exchange-rate,환율,,hwannyul,hwannjul,,,2,ko-agent-v1;ipa=rr
+atm-cash.bank,은행,,eunhaeng,ɯnhɛŋ,,,2,ko-agent-v1;ipa=rr
+atm-cash.money-exchange,환전소,,hwanjeonso,hwandʑʌnso,,,2,ko-agent-v1;ipa=rr
+atm-cash.pin,비밀번호,PIN,bimilbeonho,pimilbʌnho,,,2,ko-agent-v1;ipa=rr
+numbers-money.l-ng,영,공,yeong,jʌŋ,or 공 on phones,,2,ko-agent-v1;ipa=rr
+numbers-money.y,일,하나,il,il,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.r,이,둘,i,i,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.s-n,삼,셋,sam,sam,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.s,사,넷,sa,sa,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.w,오,다섯,o,o,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.li,육,여섯,yuk,juk,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.q,칠,일곱,chil,tɕʰil,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.b,팔,여덟,pal,pʰal,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.ji,구,아홉,gu,ku,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.sh,십,열,sip,sip,Sino / native,,2,ko-agent-v1;ipa=rr
+numbers-money.y-b-i,백,,baek,pɛk,,,2,ko-agent-v1;ipa=rr
+numbers-money.y-qi-n,천,,cheon,tɕʰʌn,,,2,ko-agent-v1;ipa=rr
+numbers-money.y-w-n,만,,man,man,,,2,ko-agent-v1;ipa=rr
+numbers-money.b-n,반,,ban,pan,,,2,ko-agent-v1;ipa=rr
+numbers-money.won,원,,won,wʌn,,,2,ko-agent-v1;ipa=rr
+numbers-money.won-symbol,₩,,won,wʌn,,,2,ko-agent-v1;ipa=rr
+numbers-money.number-and-classifier-notes,"수는 십일, 이십처럼 쌓아요: 11 = shíyī, 20 = èrshí. 단 백, 천, 만 앞에는 yī가 붙고(yìbǎi, yíwàn), 중간이 비면 líng을 넣어요(101 = yìbǎi líng yī). 단위명사 앞의 2는 èr이 아니라 liǎng이에요, 둘이 두가 되는 것과 같아요. gè = 개, zhāng = 장, píng = 병은 그대로지만, 사람은 명이 아니라 gè, 높이면 wèi, 잔은 bēi예요. 전화에서 1은 yāo. 말할 때 yuán은 kuài, jiǎo / máo = 0.1위안, fēn = 0.01위안.",,,,,,2,ko-notes-v1
+numbers-money.number-and-classifier-notes-2,"수는 십일, 이십처럼 쌓아요: 11 = jūichi, 20 = nijū. 단 만은 ichi를 붙여 ichiman이에요. 세는 말: -tsu(물건), -mai(납작한 것), -hon(긴 것), -nin(사람), -hai(잔). 고유수사가 붙는 자리가 우리와 달라서 -tsu는 hitotsu, futatsu처럼 아홉까지고, 사람은 hitori, futari 다음이 sannin이에요. 전화는 0 = zero/maru, 4 = yon, 7 = nana, 9 = kyū.",,,,,,2,ko-notes-v1
+numbers-money.forint,포린트,,porinteu,pʰoɾintʰɯ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.forint-symbol,포린트 기호,,porinteu giho,pʰoɾintʰɯ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupee,루피,,rupi,ɾupʰi,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupee-symbol,루피 기호,,rupi giho,ɾupʰi kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.baht,바트,,bateu,patʰɯ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.baht-symbol,바트 기호,,bateu giho,patʰɯ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.lira,리라,,rira,ɾiɾa,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.lira-symbol,리라 기호,,rira giho,ɾiɾa kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dong,동,,dong,toŋ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dong-symbol,동 기호,,dong giho,toŋ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ruble,루블,,rubeul,ɾubɯl,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ruble-symbol,루블 기호,,rubeul giho,ɾubɯl kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupiah,루피아,,rupia,ɾupʰia,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupiah-symbol,루피아 기호,,rupia giho,ɾupʰia kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.shilling,실링,,silring,silɾiŋ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.shilling-symbol,실링 기호,,silring giho,silɾiŋ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.euro,유로,,yuro,juɾo,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.euro-symbol,유로 기호,,yuro giho,juɾo kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dollar,달러,,dalreo,talɾʌ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dollar-symbol,달러 기호,,dalreo giho,talɾʌ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.pound,파운드,,paundeu,pʰaundɯ,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.pound-symbol,파운드 기호,,paundeu giho,pʰaundɯ kiho,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.yen,엔,,en,en,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.yen-symbol,¥,,,,,,2,reader-gloss-v1
+numbers-money.yu-n,위안,,wian,wian,,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ku-i,위안 (구어),,wian (gueo),,,,1,reader-gloss-v1;roman=generated
+numbers-money.li-ng,2 + 단위명사,,2 + danwimyeongsa,,,,1,reader-gloss-v1;roman=generated
+numbers-money.2-items,2개,,2gae,,,,1,reader-gloss-v1;roman=generated
+numbers-money.franc,프랑,,peurang,pʰɯɾaŋ,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.franc-symbol,프랑 기호,,peurang giho,pʰɯɾaŋ kiho,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.peso,페소,,peso,pʰeso,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.peso-symbol,페소 기호,,peso giho,pʰeso kiho,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.real,레알,,real,ɾeal,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.real-symbol,레알 기호,,real giho,ɾeal kiho,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.local-currency,현지 통화,,hyeonji tonghwa,hjʌndʑi tʰoŋhwa,,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.lakh,십만,,simman,simman,,,2,lakh-crore-agent-v1;cldr;ipa=rr
+numbers-money.crore,천만,,cheonman,tɕʰʌnman,,,2,lakh-crore-agent-v1;cldr;ipa=rr
+numbers-money.shekel,세켈,,sekel,sekʰel,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
+numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
+numbers-money.rial,리얄,,riyal,ɾijal,,,2,rial-toman-gloss-v1;cldr;ipa=rr
+numbers-money.toman,십 리얄,,sip riyal,sip ɾijal,,,2,rial-toman-gloss-v1;cldr;ipa=rr
+numbers-money.zloty,즈워티,,jeuwoti,tɕɯwʌtʰi,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.zloty-symbol,즈워티 기호,,jeuwoti giho,tɕɯwʌtʰi kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.hryvnia,흐리브냐,,heuribeunya,hɯɾibɯnja,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.hryvnia-symbol,흐리브냐 기호,,heuribeunya giho,hɯɾibɯnja kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.leu,레우,,reu,ɾeu,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.leu-symbol,레우 기호,,reu giho,ɾeu kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.koruna,코루나,,koruna,kʰoɾuna,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.koruna-symbol,코루나 기호,,koruna giho,kʰoɾuna kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.krona,크로나,,keurona,kʰɯɾona,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.krona-symbol,크로나 기호,,keurona giho,kʰɯɾona kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.ringgit,링깃,,ringgit,ɾiŋɡit,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=rr
+numbers-money.ringgit-symbol,링깃 기호,,ringgit giho,ɾiŋɡit kiho,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=rr
+numbers-money.nepali-rupee,네팔 루피,,nepal rupi,nepʰal ɾupʰi,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.nepali-rupee-symbol,네팔 루피 기호,,nepal rupi giho,nepʰal ɾupʰi kiho,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.birr,비르,,bireu,piɾɯ,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.naira,나이지리아 나이라,,Naijiria naira,naidʑiɾia naiɾa,,,2,naira-gloss-v1;cldr;ipa=rr
+numbers-money.naira-symbol,나이지리아 나이라 기호,,Naijiria naira giho,naidʑiɾia naiɾa kiho,,,2,naira-gloss-v1;cldr;ipa=rr
+numbers-money.riel,리엘,,riel,ɾiel,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.riel-symbol,리엘 기호,,riel giho,ɾiel kiho,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.dram,드람,,deuram,tɯɾam,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.dram-symbol,드람 기호,,deuram giho,tɯɾam kiho,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.lari,라리,,rari,ɾaɾi,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.lari-symbol,라리 기호,,rari giho,ɾaɾi kiho,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.kip,키프,,kipeu,kʰipʰɯ,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.kip-symbol,키프 기호,,kipeu giho,kʰipʰɯ kiho,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.taka,타카,,taka,tʰakʰa,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.taka-symbol,타카 기호,,taka giho,tʰakʰa kiho,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.pakistani-rupee,파키스탄 루피,,pakiseutan rupi,pʰakʰisɯtʰan ɾupʰi,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.pakistani-rupee-symbol,파키스탄 루피 기호,,pakiseutan rupi giho,pʰakʰisɯtʰan ɾupʰi kiho,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.som,숨,,sum,sum,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr

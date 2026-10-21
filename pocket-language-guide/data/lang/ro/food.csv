@@ -1,35 +1,35 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Fără carne,,fˈərə kˈarne,,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-eggs,Fără ouă,,fˈərə ˈoʊə,,2,ro-agent-v1;ipa=espeak
-dietary-needs.not-spicy,Fără iute,,fˈərə jˈute,,2,ro-agent-v1;ipa=espeak
-dietary-needs.less-spicy,Mai puțin iute,,maɪ putsˈin jˈute,,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-peanuts,Fără arahide,Fără alune de pământ,fˈərə ˌaɾahˈide,,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-nuts,Fără fructe cu coajă lemnoasă,"Fără nuci, alune sau migdale",fˈərə frˈukte ku kˈɔaʒə lemnˈɔasə,coaja lemnoasa is the EU allergen-label term for tree nuts,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-seafood,Fără pește și fructe de mare,,fˈərə pˈeʃte ʃi frˈukte de mˈaɾe,,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Sunt vegetarian,,sunt vˌedʒetaɾjˈan,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegetariană (the same wording);was=text_alt Sunt vegetariană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-dietary-needs.i-am-vegan,Sunt vegan,,sunt veɡˈan,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegană (the same wording);was=text_alt Sunt vegană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-dietary-needs.i-do-not-eat,Nu mănânc {},,nu mənˈɨnk {},,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Sunt alergic la {},,sunt alˈerdʒik la {},,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt alergică la {} (the same wording);was=text_alt Sunt alergică la {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-dietary-needs.does-it-contain-fish-stock,Conține fond de pește?,,kontsˈine fˈond de pˈeʃte,,2,ro-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,Conține fond de porc?,Conține supă de oase de porc?,kontsˈine fˈond de pˈork,,2,ro-agent-v1;ipa=espeak
-dietary-needs.i-have-a-severe-allergy-to,Am o alergie severă la {},,am o ˌalerdʒˈie sˈeveɾˌə la {},,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-pork,"Fără carne de porc, șuncă sau cârnați",Fără slănină sau untură,"fˈərə kˈarne de pˈork, ʃˈunkə saʊ kɨrnˈatsʲ",,2,ro-agent-v1;ipa=espeak
-dietary-needs.is-this-halal,Este halal?,Are certificare halal?,jˌeste halˈal,,2,ro-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-fat,Conține untură sau slănină?,Conține grăsime de porc?,kontsˈine untˈuɾə saʊ slənˈinə,untura (rendered pork fat) is used in Romanian cooking as a seasoning medium the way manteca/strutto/Schmalz are,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-sesame,Fără susan,,fˈərə susˈan,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Romanian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
-dietary-needs.is-this-kosher,Este cușer?,Are certificare cușer?,jˌeste kuʃˈer,also written kosher,2,"DEX via dexonline, cușer adj. invar. ('Despre mâncăruri și băuturi, în practica religiei mozaice'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
-food-ordering.table-for-two,O masă pentru doi,,o mˈasə pˌentru dˈoj,,2,ro-agent-v1;ipa=espeak
-food-ordering.is-a-table-available,Aveți o masă liberă?,,avˌetsʲ o mˈasə lˈibeɾˌə,,2,ro-agent-v1;ipa=espeak
-food-ordering.menu-please,"Meniul, vă rog",,"menˈiʊl, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-food-ordering.i-want-this,Aș vrea asta,,ˈaʃ vrˈea ˈasta,,2,ro-agent-v1;ipa=espeak
-food-ordering.do-you-have-drinking-water,Aveți apă potabilă?,,avˌetsʲ ˈapə pˌotabˈilə,,2,ro-agent-v1;ipa=espeak
-food-ordering.to-go-please,"La pachet, vă rog",,"la pakˈet, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-food-ordering.check-please,"Nota de plată, vă rog",,"nˈota de plˈatə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-food-ordering.does-it-contain,Conține {}?,,kontsˈine {},,2,ro-agent-v1;ipa=espeak
-food-ordering.is-this-vegetarian,Acesta este vegetarian?,,atʃˌesta jˌeste vˌedʒetaɾjˈan,,2,ro-agent-v1;ipa=espeak
-food-ordering.what-do-you-recommend,Ce recomandați?,,tʃe rekˌomandˈatsʲ,,2,ro-agent-v1;ipa=espeak
-food-ordering.water-please,"Apă, vă rog",,"ˈapə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-food-ordering.can-a-vegetarian-eat-this,Poate un vegetarian să mănânce asta?,,pˌɔate un vˌedʒetaɾjˈan sə mənˈɨntʃe ˈasta,,2,ro-agent-v1;ipa=espeak
-dietary-needs.no-onion-garlic,Fără ceapă și usturoi,,fˈərə tʃˈeapə ʃi ˌustuɾˈoj,,2,no-allium-v1;in-pack-frame;ro.wikipedia Ceapa + Usturoi;ipa=espeak
-dietary-needs.does-it-contain-dried-fish,Conține pește uscat?,,kontsˈine pˈeʃte uskˈat,,2,hidden-fish-v1;in-pack-frame;ro.wikipedia Batog + Uscare;ipa=espeak
-food-ordering.does-it-cost-more-at-a-table,La masă e mai scump?,,la mˈasə je maɪ skˈump,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+dietary-needs.no-meat,Fără carne,,fˈərə kˈarne,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Fără ouă,,fˈərə ˈoʊə,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Fără iute,,fˈərə jˈute,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Mai puțin iute,,maɪ putsˈin jˈute,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Fără arahide,Fără alune de pământ,fˈərə ˌaɾahˈide,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Fără fructe cu coajă lemnoasă,"Fără nuci, alune sau migdale",fˈərə frˈukte ku kˈɔaʒə lemnˈɔasə,coaja lemnoasa is the EU allergen-label term for tree nuts,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Fără pește și fructe de mare,,fˈərə pˈeʃte ʃi frˈukte de mˈaɾe,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Sunt vegetarian,,sunt vˌedʒetaɾjˈan,,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegetariană (the same wording);was=text_alt Sunt vegetariană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-am-vegan,Sunt vegan,,sunt veɡˈan,,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt vegană (the same wording);was=text_alt Sunt vegană (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Nu mănânc {},,nu mənˈɨnk {},,,2,ro-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Sunt alergic la {},,sunt alˈerdʒik la {},,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt alergică la {} (the same wording);was=text_alt Sunt alergică la {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Conține fond de pește?,,kontsˈine fˈond de pˈeʃte,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Conține fond de porc?,Conține supă de oase de porc?,kontsˈine fˈond de pˈork,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Am o alergie severă la {},,am o ˌalerdʒˈie sˈeveɾˌə la {},,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-pork,"Fără carne de porc, șuncă sau cârnați",Fără slănină sau untură,"fˈərə kˈarne de pˈork, ʃˈunkə saʊ kɨrnˈatsʲ",,,2,ro-agent-v1;ipa=espeak
+dietary-needs.is-this-halal,Este halal?,Are certificare halal?,jˌeste halˈal,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Conține untură sau slănină?,Conține grăsime de porc?,kontsˈine untˈuɾə saʊ slənˈinə,untura (rendered pork fat) is used in Romanian cooking as a seasoning medium the way manteca/strutto/Schmalz are,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Fără susan,,fˈərə susˈan,,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Romanian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Este cușer?,Are certificare cușer?,jˌeste kuʃˈer,also written kosher,,2,"DEX via dexonline, cușer adj. invar. ('Despre mâncăruri și băuturi, în practica religiei mozaice'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+food-ordering.table-for-two,O masă pentru doi,,o mˈasə pˌentru dˈoj,,,2,ro-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Aveți o masă liberă?,,avˌetsʲ o mˈasə lˈibeɾˌə,,,2,ro-agent-v1;ipa=espeak
+food-ordering.menu-please,"Meniul, vă rog",,"menˈiʊl, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+food-ordering.i-want-this,Aș vrea asta,,ˈaʃ vrˈea ˈasta,,,2,ro-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Aveți apă potabilă?,,avˌetsʲ ˈapə pˌotabˈilə,,,2,ro-agent-v1;ipa=espeak
+food-ordering.to-go-please,"La pachet, vă rog",,"la pakˈet, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+food-ordering.check-please,"Nota de plată, vă rog",,"nˈota de plˈatə, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Conține {}?,,kontsˈine {},,,2,ro-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Acesta este vegetarian?,,atʃˌesta jˌeste vˌedʒetaɾjˈan,,,2,ro-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Ce recomandați?,,tʃe rekˌomandˈatsʲ,,,2,ro-agent-v1;ipa=espeak
+food-ordering.water-please,"Apă, vă rog",,"ˈapə, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Poate un vegetarian să mănânce asta?,,pˌɔate un vˌedʒetaɾjˈan sə mənˈɨntʃe ˈasta,,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,Fără ceapă și usturoi,,fˈərə tʃˈeapə ʃi ˌustuɾˈoj,,,2,no-allium-v1;in-pack-frame;ro.wikipedia Ceapa + Usturoi;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Conține pește uscat?,,kontsˈine pˈeʃte uskˈat,,,2,hidden-fish-v1;in-pack-frame;ro.wikipedia Batog + Uscare;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,La masă e mai scump?,,la mˈasə je maɪ skˈump,,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

@@ -1,31 +1,31 @@
-concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-introductions.my-name-is,اسمِ من {} است,,esm-e man {} ast,esme man {} ast,,2,fa-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,خوشوقتم,از آشنایی با شما خوشوقتم,khoshvaqtam,xoʃvaqtam,glad -- the long form is az āshnāyi bā shomā khoshvaqtam,2,fa-agent-v1;ipa=espeak
-introductions.what-is-your-name,اسمِ شما چیست؟,اسمتون چیه؟,esm-e shomā chist?,esme ʃomɑ tʃist,spoken esmetun chie,2,fa-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,ما با هم سفر می‌کنیم,,mā bā ham safar mikonim,mɑ bɑ ham safar mikonim,,2,fa-agent-v1;ipa=espeak
-introductions.this-is-my-friend,ایشان دوستِ من است,,ishān dust-e man ast,iʃɑn duste man ast,"ishān is the polite third person -- Persian introduces a person with it, not with in",2,fa-agent-v1;ipa=espeak
-introductions.i-am-from,من از {} هستم,,man az {} hastam,man az {} hastam,,2,fa-agent-v1;ipa=espeak
-introductions.where-are-you-from,شما از کجا هستید؟,اهلِ کجایید؟,shomā az kojā hastid?,ʃomɑ az kodʒɑ hastid,also ahl-e kojāyid,2,fa-agent-v1;ipa=espeak
-introductions.how-are-you,حالِ شما چطور است؟,حالتون چطوره؟,hāl-e shomā chetor ast?,hɑle ʃomɑ tʃetor ast,the ordinary greeting-question -- spoken hāletun chetore,2,fa-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,من گردشگر هستم,من توریستم,man gardeshgar hastam,man ɡardeʃɡar hastam,turist is just as common,2,fa-agent-v1;ipa=espeak
-introductions.this-is-my-husband-wife,ایشان همسرِ من است,شوهرم / خانمم,ishān hamsar-e man ast,iʃɑn hamsare man ast,"hamsar is spouse of either sex, so Persian needs one word where most languages need two -- showhar is husband, khānom wife",2,fa-agent-v1;ipa=espeak
-introductions.this-is-my-daughter-son,این دخترم / پسرم است,,in dokhtaram / pesaram ast,in doxtaram / pesaram ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-husband,ایشان شوهرم است,,ishān showharam ast,iʃɑn ʃoharam ast,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
-family-intros.this-is-my-wife,ایشان خانمم است,,ishān khānomam ast,iʃɑn xɑnomam ast,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
-family-intros.this-is-my-son,این پسرم است,,in pesaram ast,in pesaram ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-daughter,این دخترم است,,in dokhtaram ast,in doxtaram ast,,2,fa-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,من تنها سفر می‌کنم,,man tanhā safar mikonam,man tanhɑ safar mikonam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-a-student,من دانشجو هستم,,man dāneshju hastam,man dɑneʃdʒu hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-retired,من بازنشسته هستم,,man bāznešaste hastam,man bɑzneʃaste hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-a-teacher,من معلم هستم,,man mo‘allem hastam,man moʔallem hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-a-doctor,من پزشک هستم,,man pezeshk hastam,man pezeʃk hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-a-nurse,من پرستار هستم,,man parastār hastam,man parastɑr hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-am-an-engineer,من مهندس هستم,,man mohandes hastam,man mohandes hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-work-in-an-office,من در یک دفتر کار می‌کنم,,man dar yek daftar kār mikonam,man dar jek daftar kɑr mikonam,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
-about-me.i-have-my-own-business,من کسب و کار خودم را دارم,,man kasb o kār-e khodam rā dāram,man kasb va kɑr xodam rɑ dɑram,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-mother,ایشان مادرم است,,ishān mādaram ast,iʃɑn mɑdaram ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-father,ایشان پدرم است,,ishān pedaram ast,iʃɑn pedaram ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-brother,ایشان برادرم است,,ishān barādaram ast,iʃɑn barɑdaram ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-sister,ایشان خواهرم است,,ishān khāharam ast,iʃɑn xɑharam ast,,2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,ایشان پارتنر من است,,ishān pārtner-e man ast,iʃɑn pɑrtner man ast,"pārtner (loanword) names a romantic/life partner regardless of marriage; sharik (native) skews to a business partner, which the brief asks to avoid",2,fa-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,ایشان همکار من است,,ishān hamkār-e man ast,iʃɑn hamkɑr man ast,,2,fa-agent-v1;ipa=espeak
+concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
+introductions.my-name-is,اسمِ من {} است,,esm-e man {} ast,esme man {} ast,,,2,fa-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,خوشوقتم,از آشنایی با شما خوشوقتم,khoshvaqtam,xoʃvaqtam,glad,the long form is az āshnāyi bā shomā khoshvaqtam,2,fa-agent-v1;ipa=espeak
+introductions.what-is-your-name,اسمِ شما چیست؟,اسمتون چیه؟,esm-e shomā chist?,esme ʃomɑ tʃist,spoken esmetun chie,,2,fa-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,ما با هم سفر می‌کنیم,,mā bā ham safar mikonim,mɑ bɑ ham safar mikonim,,,2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ایشان دوستِ من است,,ishān dust-e man ast,iʃɑn duste man ast,ishān is the polite third person,"Persian introduces a person with it, not with in",2,fa-agent-v1;ipa=espeak
+introductions.i-am-from,من از {} هستم,,man az {} hastam,man az {} hastam,,,2,fa-agent-v1;ipa=espeak
+introductions.where-are-you-from,شما از کجا هستید؟,اهلِ کجایید؟,shomā az kojā hastid?,ʃomɑ az kodʒɑ hastid,also ahl-e kojāyid,,2,fa-agent-v1;ipa=espeak
+introductions.how-are-you,حالِ شما چطور است؟,حالتون چطوره؟,hāl-e shomā chetor ast?,hɑle ʃomɑ tʃetor ast,the ordinary greeting-question,spoken hāletun chetore,2,fa-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,من گردشگر هستم,من توریستم,man gardeshgar hastam,man ɡardeʃɡar hastam,turist is just as common,,2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,ایشان همسرِ من است,شوهرم / خانمم,ishān hamsar-e man ast,iʃɑn hamsare man ast,"hamsar is spouse of either sex, so Persian needs one word where most languages need two","showhar is husband, khānom wife",2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,این دخترم / پسرم است,,in dokhtaram / pesaram ast,in doxtaram / pesaram ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ایشان شوهرم است,,ishān showharam ast,iʃɑn ʃoharam ast,,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
+family-intros.this-is-my-wife,ایشان خانمم است,,ishān khānomam ast,iʃɑn xɑnomam ast,,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
+family-intros.this-is-my-son,این پسرم است,,in pesaram ast,in pesaram ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-daughter,این دخترم است,,in dokhtaram ast,in doxtaram ast,,,2,fa-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,من تنها سفر می‌کنم,,man tanhā safar mikonam,man tanhɑ safar mikonam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-student,من دانشجو هستم,,man dāneshju hastam,man dɑneʃdʒu hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-retired,من بازنشسته هستم,,man bāznešaste hastam,man bɑzneʃaste hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,من معلم هستم,,man mo‘allem hastam,man moʔallem hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,من پزشک هستم,,man pezeshk hastam,man pezeʃk hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,من پرستار هستم,,man parastār hastam,man parastɑr hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,من مهندس هستم,,man mohandes hastam,man mohandes hastam,,,2,fa-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,من در یک دفتر کار می‌کنم,,man dar yek daftar kār mikonam,man dar jek daftar kɑr mikonam,,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
+about-me.i-have-my-own-business,من کسب و کار خودم را دارم,,man kasb o kār-e khodam rā dāram,man kasb va kɑr xodam rɑ dɑram,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ایشان مادرم است,,ishān mādaram ast,iʃɑn mɑdaram ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-father,ایشان پدرم است,,ishān pedaram ast,iʃɑn pedaram ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,ایشان برادرم است,,ishān barādaram ast,iʃɑn barɑdaram ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ایشان خواهرم است,,ishān khāharam ast,iʃɑn xɑharam ast,,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,ایشان پارتنر من است,,ishān pārtner-e man ast,iʃɑn pɑrtner man ast,"pārtner (loanword) names a romantic/life partner regardless of marriage; sharik (native) skews to a business partner, which the brief asks to avoid",,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,ایشان همکار من است,,ishān hamkār-e man ast,iʃɑn hamkɑr man ast,,,2,fa-agent-v1;ipa=espeak

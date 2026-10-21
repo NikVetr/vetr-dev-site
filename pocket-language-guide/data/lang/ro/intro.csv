@@ -1,31 +1,31 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Mă numesc {},,mə numˈesk {},,2,ro-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Îmi pare bine,,ˌɨmʲ pˈaɾe bˈine,,2,ro-agent-v1;ipa=espeak
-introductions.what-is-your-name,Cum vă numiți?,,kˈum və numˈitsʲ,,2,ro-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,Călătorim împreună,,kˌələtoɾˈim ˌɨmpreˈunə,,2,ro-agent-v1;ipa=espeak
-introductions.this-is-my-friend,El este prietenul meu,Ea este prietena mea,jel jˌeste prjˈetenul mˈeu,,2,ro-agent-v1;ipa=espeak
-introductions.i-am-from,Sunt din {},,sunt din {},,2,ro-agent-v1;ipa=espeak
-introductions.where-are-you-from,De unde sunteți?,,de ˈunde sˈuntetsʲ,,2,ro-agent-v1;ipa=espeak
-introductions.how-are-you,Ce mai faceți?,,tʃe maɪ fˈatʃetsʲ,"lit. what more are you doing -- the ordinary greeting-question, not a health enquiry",2,ro-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Sunt turist,,sunt tuɾˈist,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt turistă (the same wording);was=text_alt Sunt turistă (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-introductions.this-is-my-husband-wife,El este soțul meu / ea este soția mea,,jel jˌeste sˈotsul mˈeu / ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;ipa=espeak
-introductions.this-is-my-daughter-son,Ea este fiica mea / el este fiul meu,,ja jˌeste fˈiɪka mˈea / jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Călătoresc singur,,kˌələtoɾˈesk sˈiŋɡur,,2,ro-agent-v1;ipa=espeak
-family-intros.this-is-my-husband,El este soțul meu,,jel jˌeste sˈotsul mˈeu,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-wife,Ea este soția mea,,ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-son,El este fiul meu,,jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-family-intros.this-is-my-daughter,Ea este fiica mea,,ja jˌeste fˈiɪka mˈea,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-about-me.i-am-a-student,Sunt student,,sunt studˈent,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-am-retired,Sunt pensionar,,sunt pˌensjonˈar,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-am-a-teacher,Sunt profesor,,sunt profˈesor,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-am-a-doctor,Sunt medic,,sunt mˈedik,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-am-a-nurse,Sunt asistent medical,,sunt ˌasistˈent mˌedikˈal,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-am-an-engineer,Sunt inginer,,sunt ˌiŋdʒinˈer,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-work-in-an-office,Lucrez într-un birou,,lukrˈez ˈɨntrun biɾˈoʊ,,2,ro-about-travel-v1;ipa=espeak
-about-me.i-have-my-own-business,Am propria afacere,,am proprˈia ˌafatʃˈeɾe,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-mother,Ea este mama mea,,ja jˌeste mˈama mˈea,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-father,El este tatăl meu,,jel jˌeste tˈatəl mˈeu,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-brother,El este fratele meu,,jel jˌeste fratˈele mˈeu,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-sister,Ea este sora mea,,ja jˌeste sˈoɾa mˈea,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-partner,El este partenerul meu,Ea este partenera mea,jel jˌeste pˌartenˈerul mˈeu,,2,ro-about-travel-v1;ipa=espeak
-family-intros.this-is-my-colleague,El este colegul meu,Ea este colega mea,jel jˌeste kolˈeɡul mˈeu,,2,ro-about-travel-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+introductions.my-name-is,Mă numesc {},,mə numˈesk {},,,2,ro-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Îmi pare bine,,ˌɨmʲ pˈaɾe bˈine,,,2,ro-agent-v1;ipa=espeak
+introductions.what-is-your-name,Cum vă numiți?,,kˈum və numˈitsʲ,,,2,ro-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Călătorim împreună,,kˌələtoɾˈim ˌɨmpreˈunə,,,2,ro-agent-v1;ipa=espeak
+introductions.this-is-my-friend,El este prietenul meu,Ea este prietena mea,jel jˌeste prjˈetenul mˈeu,,,2,ro-agent-v1;ipa=espeak
+introductions.i-am-from,Sunt din {},,sunt din {},,,2,ro-agent-v1;ipa=espeak
+introductions.where-are-you-from,De unde sunteți?,,de ˈunde sˈuntetsʲ,,,2,ro-agent-v1;ipa=espeak
+introductions.how-are-you,Ce mai faceți?,,tʃe maɪ fˈatʃetsʲ,lit. what more are you doing,"the ordinary greeting-question, not a health enquiry",2,ro-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sunt turist,,sunt tuɾˈist,,,2,ro-agent-v1;fix=variants.csv speaker_gender=feminine Sunt turistă (the same wording);was=text_alt Sunt turistă (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+introductions.this-is-my-husband-wife,El este soțul meu / ea este soția mea,,jel jˌeste sˈotsul mˈeu / ja jˌeste sˈotsja mˈea,,,2,ro-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Ea este fiica mea / el este fiul meu,,ja jˌeste fˈiɪka mˈea / jel jˌeste fˈiʊl mˈeu,,,2,ro-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Călătoresc singur,,kˌələtoɾˈesk sˈiŋɡur,,,2,ro-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,El este soțul meu,,jel jˌeste sˈotsul mˈeu,,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Ea este soția mea,,ja jˌeste sˈotsja mˈea,,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,El este fiul meu,,jel jˌeste fˈiʊl mˈeu,,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Ea este fiica mea,,ja jˌeste fˈiɪka mˈea,,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Sunt student,,sunt studˈent,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Sunt pensionar,,sunt pˌensjonˈar,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Sunt profesor,,sunt profˈesor,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Sunt medic,,sunt mˈedik,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Sunt asistent medical,,sunt ˌasistˈent mˌedikˈal,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Sunt inginer,,sunt ˌiŋdʒinˈer,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Lucrez într-un birou,,lukrˈez ˈɨntrun biɾˈoʊ,,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Am propria afacere,,am proprˈia ˌafatʃˈeɾe,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Ea este mama mea,,ja jˌeste mˈama mˈea,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,El este tatăl meu,,jel jˌeste tˈatəl mˈeu,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,El este fratele meu,,jel jˌeste fratˈele mˈeu,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Ea este sora mea,,ja jˌeste sˈoɾa mˈea,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,El este partenerul meu,Ea este partenera mea,jel jˌeste pˌartenˈerul mˈeu,,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,El este colegul meu,Ea este colega mea,jel jˌeste kolˈeɡul mˈeu,,,2,ro-about-travel-v1;ipa=espeak

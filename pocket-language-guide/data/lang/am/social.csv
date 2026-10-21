@@ -1,148 +1,148 @@
-concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-social-basics.hello,ሰላም,,selam,səlam,peace,2,am-agent-v1;ipa=bgn-am
-social-basics.hello-polite,ጤና ይስጥልኝ,,tʼēna yistʼillinny,tʼena jɨstʼɨlːɨɲː,may he give you health,2,am-agent-v1;ipa=bgn-am
-social-basics.good-morning,እንደምን አደሩ,,indemin āderu,ʔɨndəmɨn ʔadəru,how did you spend the night?,2,am-agent-v1;ipa=bgn-am
-social-basics.good-evening,እንደምን አመሹ,,indemin āmeshu,ʔɨndəmɨn ʔaməʃu,how did you spend the day?,2,am-agent-v1;ipa=bgn-am
-social-basics.goodbye,ደህና ይሁኑ,,dehna yihunu,dəhna jɨhunu,be well,2,am-agent-v1;ipa=bgn-am
-social-basics.thank-you,አመሰግናለሁ,,āmesegginallehu,ʔaməsəɡːɨnalːəhu,,2,am-agent-v1;ipa=bgn-am
-social-basics.you-are-welcome,ምንም አይደለም,,minim āydellem,mɨnɨm ʔajdəlːəm,it is nothing,2,am-agent-v1;ipa=bgn-am
-social-basics.excuse-me-sorry,ይቅርታ,,yikʼirta,jɨkʼɨrta,,2,am-agent-v1;ipa=bgn-am
-social-basics.sorry,አዝናለሁ,,āzinallehu,ʔazɨnalːəhu,I am sorry,2,am-agent-v1;ipa=bgn-am
-social-basics.no-problem,ችግር የለም,,chigir yellem,tʃɨɡɨr jəlːəm,there is no problem,2,am-agent-v1;ipa=bgn-am
-social-basics.i-do-not-know,አላውቅም,,ālawikʼim,ʔalawɨkʼɨm,,2,am-agent-v1;ipa=bgn-am
-communication.i-do-not-speak-this-language,{target} አልናገርም,,{target} ālnagerim,{target} ʔalnaɡərɨm,,2,am-agent-v1;ipa=bgn-am
-communication.i-speak-only-a-little-of-this,{target} ጥቂት ብቻ እናገራለሁ,,{target} tʼikʼīt bicha inagerallehu,{target} tʼɨkʼit bɨtʃa ʔɨnaɡəralːəhu,I speak only a little {target},2,am-agent-v1;ipa=bgn-am
-communication.do-you-speak-english,{source} ይናገራሉ?,,{source} yinnageralu?,{source} jɨnːaɡəralu,,2,am-agent-v1;ipa=bgn-am
-communication.please-speak-more-slowly,እባክዎ ቀስ ብለው ይናገሩ,,ibakwo kʼes bilew yinnageru,ʔɨbakwo kʼəs bɨləw jɨnːaɡəru,please speak slowly,2,am-agent-v1;ipa=bgn-am
-communication.i-do-not-understand-spoken,የሚሉትን አልገባኝም,,yemīlutin ālgebanyim,jəmilutɨn ʔalɡəbaɲɨm,what you say has not entered me,2,am-agent-v1;ipa=bgn-am
-communication.i-cannot-read-understand,ማንበብ አልችልም,,manbeb ālchilim,manbəb ʔaltʃɨlɨm,I cannot read,2,am-agent-v1;ipa=bgn-am
-communication.please-say-it-again,እባክዎ ደግመው ይናገሩ,,ibakwo degimew yinnageru,ʔɨbakwo dəɡɨməw jɨnːaɡəru,,2,am-agent-v1;ipa=bgn-am
-communication.please-write-it-down,እባክዎ ይጻፉት,,ibakwo yitsʼafut,ʔɨbakwo jɨsʼafut,,2,am-agent-v1;ipa=bgn-am
-communication.please-wait-a-moment,እባክዎ ጥቂት ይጠብቁ,,ibakwo tʼikʼīt yitʼebbikʼu,ʔɨbakwo tʼɨkʼit jɨtʼəbːɨkʼu,,2,am-agent-v1;ipa=bgn-am
-communication.can-you-help-me,ሊረዱኝ ይችላሉ?,,līredunny yichilallu?,lirəduɲː jɨtʃɨlalːu,,2,am-agent-v1;ipa=bgn-am
-communication.please-show-me-the-text,እባክዎ በ{target} የተጻፈውን ያሳዩኝ,,ibakwo be{target} yetetsʼafewin yasayunny,ʔɨbakwo bə {target} jətəsʼafəwɨn jasajuɲː,please show me what is written in {target},2,am-agent-v1;ipa=bgn-am
-quick-responses.please-go-ahead,ይኸው / ይቅደሙ,,yihew / yikʼidemu,jɨhəw / jɨkʼɨdəmu,here it is / you go first -- both offer: handing something over and letting someone go first,2,am-agent-v1;fix=Leslau Basic Amharic Dictionary (1972 -- ERIC ED100127) Amharic-English p. 224 ይኸው (behold! -- here it is!) and p. 143 አለፈ (pass -- go by);in-pack=border-customs.here-is-my-passport (ፓስፖርቴ ይኸው);was=እባክዎ / ይለፉ (ibakwo: the request please -- Leslau 1972 English-Amharic p. 224 please! እባክህ -- as the pack's frame {} እባክዎ);rule=the offering please replaces the request half -- the after-you half stays;row-corrections-v15;fix=Leslau English-Amharic Dictionary of Everyday Usage Part I (ERIC ED 012 044) p. 13 Ahead -- You go ahead -- I'll follow later -- አንተ ቅደም;was=ይኸው / ይለፉ;open-questions-v1;ipa=bgn-am
-quick-responses.yes-right,አዎ,,āwo,ʔawo,yes,2,"am-agent-v1;fix=abyssinica-dict=yes (አዎ፣ አዎን፣ እሺ) and አዎ (yea);rule=one-reading-on-a-board (ልክ, exactly, was the gloss of the range, right);row-corrections-v6;ipa=bgn-am"
-quick-responses.no-not,አይ,,āy,ʔaj,no,2,"am-agent-v1;in-pack-frame=police-consulate.no-thank-you-i-am-not-interested (አይ አመሰግናለሁ -- āy, no);fix=abyssinica-dict=no (የለም፣ አይደለም -- the copula's negative, kept out as the gloss of the range, not);rule=one-reading-on-a-board;row-corrections-v6;ipa=bgn-am"
-quick-responses.okay-can,እሺ,,isshī,ʔɨʃːi,okay,2,"am-agent-v1;fix=abyssinica-dict=እሺ (ok, yea);rule=one-reading-on-a-board (ይቻላል, it is possible, was the gloss of the range, can);row-corrections-v6;ipa=bgn-am"
-quick-responses.cannot-not-allowed,አይፈቀድም,,āyifekʼedim,ʔajɨfəkʼədɨm,it is not permitted,2,"am-agent-v1;fix=abyssinica-dict=permit (አመቸ፣ ፈቀደ -- አይፈቀድም its negative passive);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is አይቻልም);row-corrections-v6;ipa=bgn-am"
-quick-responses.works-okay,ይሰራል / ደህና,,yiseral / dehna,jɨsəral / dəhna,it works / fine,2,am-agent-v1;ipa=bgn-am
-quick-responses.does-not-work-no,አይሰራም / አይ,,āyiseram / āy,ʔajɨsəram / ʔaj,it does not work / no,2,am-agent-v1;ipa=bgn-am
-phone-translation.i-am-using-phone-translation,በስልክ ትርጉም እየተጠቀምኩ ነው,,beslik tirgum iyyetetʼekʼemku new,bəslɨk tɨrɡum ʔɨjːətətʼəkʼəmku nəw,,2,am-agent-v1;ipa=bgn-am
-phone-translation.please-speak-toward-the-phone,እባክዎ ወደ ስልኩ ይናገሩ,,ibakwo wede sliku yinnageru,ʔɨbakwo wədə slɨku jɨnːaɡəru,,2,am-agent-v1;ipa=bgn-am
-phone-translation.one-sentence-at-a-time-please,እባክዎ አንድ ዓረፍተ ነገር በአንድ ጊዜ,,ibakwo ānd ʽarefte neger beʼānd gīzē,ʔɨbakwo ʔand ʔarəftə nəɡər bəʔand ɡize,one sentence at one time please,2,am-agent-v1;ipa=bgn-am
-phone-text-power.please-type-it-for-me,እባክዎ ይጽፉልኝ,,ibakwo yitsʼifulinny,ʔɨbakwo jɨsʼɨfulɨɲː,,2,am-agent-v1;ipa=bgn-am
-phone-translation.please-write-the-place-name,እባክዎ የቦታውን ስም በ{target} ይጻፉት,,ibakwo yebotawin sim be{target} yitsʼafut,ʔɨbakwo jəbotawɨn sɨm bə {target} jɨsʼafut,,2,am-agent-v1;ipa=bgn-am
-phone-text-power.please-use-simple-words,እባክዎ ቀላል ቃላት ይጠቀሙ,,ibakwo kʼelal kʼalat yitʼekʼemu,ʔɨbakwo kʼəlal kʼalat jɨtʼəkʼəmu,,2,am-agent-v1;ipa=bgn-am
-phone-text-power.my-phone-battery-is-low,የስልኬ ባትሪ አልቋል,,yeslikē batirī ālkʼwal,jəslɨke batɨri ʔalkʼwal,my phone battery has run out,2,am-agent-v1;ipa=bgn-am
-phone-text-power.do-you-have-a-power-bank,ፓወር ባንክ አለዎት?,,pawer bank āllewot?,pawər bank ʔalːəwot,,2,am-agent-v1;ipa=bgn-am
-phone-text-power.the-translation-may-be-inaccurate,ትርጉሙ ስህተት ሊኖረው ይችላል,,tirgumu sihitet līnorew yichilal,tɨrɡumu sɨhɨtət linorəw jɨtʃɨlal,the translation may have an error,2,am-agent-v1;ipa=bgn-am
-phone-text-power.please-confirm,እባክዎ ያረጋግጡ,,ibakwo yaregagitʼu,ʔɨbakwo jarəɡaɡɨtʼu,,2,am-agent-v1;ipa=bgn-am
-social-basics.good-night,ደህና እደሩ,,dehna ideru,dəhna ʔɨdəru,spend the night well,2,am-agent-v1;ipa=bgn-am
-social-basics.okay-fine-i-am-okay,ደህና ነኝ,,dehna neny,dəhna nəɲ,I am well,2,am-agent-v1;ipa=bgn-am
-quick-responses.can-possible,ይቻላል,,yichalal,jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-quick-responses.cannot-not-possible,አይቻልም,,āyichalim,ʔajɨtʃalɨm,,2,am-agent-v1;ipa=bgn-am
-quick-responses.okay-fine,እሺ,,isshī,ʔɨʃːi,,2,am-agent-v1;ipa=bgn-am
-quick-responses.no-good-not-allowed-will-not-work,አይሆንም,,āyihonim,ʔajɨhonɨm,it will not do,2,am-agent-v1;ipa=bgn-am
-communication.i-cannot-make-out-what-you-are-saying,የሚሉትን መለየት አልችልም,,yemīlutin meleyet ālchilim,jəmilutɨn mələjət ʔaltʃɨlɨm,I cannot make out what you say,2,am-agent-v1;ipa=bgn-am
-communication.i-do-not-understand,አልገባኝም,,ālgebanyim,ʔalɡəbaɲɨm,it has not entered me,2,am-agent-v1;ipa=bgn-am
-communication.i-cannot-read-it,ይህን ማንበብ አልችልም,,yihin manbeb ālchilim,jɨhɨn manbəb ʔaltʃɨlɨm,,2,am-agent-v1;ipa=bgn-am
-communication.please-write-it-in-roman-letters,በላቲን ፊደል ይጻፉት,,belatīn fīdel yitsʼafut,bəlatin fidəl jɨsʼafut,please write it in Latin letters,2,am-agent-v1;ipa=bgn-am
-phone-translation.please-type-it-and-show-me,እባክዎ ጽፈው ያሳዩኝ,,ibakwo tsʼifew yasayunny,ʔɨbakwo sʼɨfəw jasajuɲː,,2,am-agent-v1;ipa=bgn-am
-phone-translation.please-look-at-the-screen,እባክዎ ስክሪኑን ይመልከቱ,,ibakwo sikirīnun yimelkketu,ʔɨbakwo sɨkɨrinun jɨməlkːətu,,2,am-agent-v1;ipa=bgn-am
-phone-text-power.may-i-charge-my-phone-here,ስልኬን እዚህ ቻርጅ ማድረግ ይቻላል?,,silikēn izzīh charj madireg yichalal?,sɨlɨken ʔɨzːih tʃardʒ madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-sim-data.i-would-like-a-tourist-sim,የጎብኚ ሲም ካርድ እፈልጋለሁ,,yegobinyī sīm kard ifelligallehu,jəɡobɨɲi sim kard ʔɨfəlːɨɡalːəhu,,2,am-agent-v1;ipa=bgn-am
-sim-data.may-i-use-your-wifi,ዋይፋይዎን መጠቀም ይቻላል?,,wayfaywon metʼekʼem yichalal?,wajfajwon mətʼəkʼəm jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-sim-data.how-much-data-is-included,ስንት ዳታ ተካትቷል?,,sint data tekatitwal?,sɨnt data təkatɨtwal,,2,am-agent-v1;ipa=bgn-am
-sim-data.do-you-need-my-passport,ፓስፖርቴ ያስፈልጋል?,,pasporitē yasfelligal?,pasporɨte jasfəlːɨɡal,,2,am-agent-v1;ipa=bgn-am
-sim-data.how-long-is-it-valid,ለምን ያህል ጊዜ ይሰራል?,,lemin yahil gīzē yiseral?,ləmɨn jahɨl ɡize jɨsəral,,2,am-agent-v1;ipa=bgn-am
-sim-data.please-activate-it,እባክዎ ያስጀምሩት,,ibakwo yasjemmirut,ʔɨbakwo jasdʒəmːɨrut,,2,am-agent-v1;ipa=bgn-am
-sim-data.do-you-have-an-esim,ኢ-ሲም አለዎት?,,ī-sīm āllewot?,ʔisim ʔalːəwot,,2,am-agent-v1;ipa=bgn-am
-sim-data.my-data-is-not-working,ዳታዬ አይሰራም,,datayē āyiseram,dataje ʔajɨsəram,,2,am-agent-v1;ipa=bgn-am
-sim-data.does-it-need-registration,ምዝገባ ያስፈልጋል?,,mizgeba yasfelligal?,mɨzɡəba jasfəlːɨɡal,,2,am-agent-v1;ipa=bgn-am
-sim-data.i-have-no-signal,ሲግናል የለኝም,,sīginal yellenyim,siɡɨnal jəlːəɲɨm,,2,am-agent-v1;ipa=bgn-am
-sim-data.please-write-the-wifi-password,እባክዎ የዋይፋይ የይለፍ ቃል ይጻፉት,,ibakwo yewayfay yeyilef kʼal yitsʼafut,ʔɨbakwo jəwajfaj jəjɨləf kʼal jɨsʼafut,,2,am-agent-v1;ipa=bgn-am
-sim-data.sim-card,ሲም ካርድ,,sīm kard,sim kard,,2,am-agent-v1;ipa=bgn-am
-sim-data.where-can-i-buy-a-plug-adapter,አዳፕተር የት መግዛት እችላለሁ?,,ādapiter yet megzat ichilallehu?,ʔadapɨtər jət məɡzat ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
-sim-data.mobile-data,የሞባይል ዳታ,,yemobayil data,jəmobajɨl data,,2,am-agent-v1;ipa=bgn-am
-sim-data.can-i-top-up-this-sim,ይህን ሲም መሙላት ይቻላል?,,yihin sīm memulat yichalal?,jɨhɨn sim məmulat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-sim-data.top-up,መሙላት,,memulat,məmulat,,2,am-agent-v1;ipa=bgn-am
-sim-data.is-there-coverage-in,በ{} ኔትወርክ አለ?,,be{} nētiwerk ālle?,bə {} netɨwərk ʔalːə,is there network in {}?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
-sim-data.signal,ሲግናል,,sīginal,siɡɨnal,,2,am-agent-v1;ipa=bgn-am
-sim-data.esim,ኢ-ሲም,,ī-sīm,ʔisim,,2,am-agent-v1;ipa=bgn-am
-sim-data.prepaid,በቅድሚያ የተከፈለ,,bekʼidimīya yetekefele,bəkʼɨdɨmija jətəkəfələ,paid in advance,2,am-agent-v1;ipa=bgn-am
-sim-data.roaming,ሮሚንግ,,romīng,rominɡ,,2,am-agent-v1;ipa=bgn-am
-children.cannot-find-my-child,ልጄን አላገኘሁም,,lijēn ālagenyehum,lɨdʒen ʔalaɡəɲəhum,I have not found my child,2,am-agent-v1;ipa=bgn-am
-children.make-an-announcement,እባክዎ ማስታወቂያ ያስተላልፉ,,ibakwo mastawekʼīya yastelalifu,ʔɨbakwo mastawəkʼija jastəlalɨfu,,2,am-agent-v1;ipa=bgn-am
-children.child-age,ልጄ {} ዓመቱ ነው,,lijē {} ʽametu new,lɨdʒe {} ʔamətu nəw,my child is {} years old,2,am-agent-v1;ipa=bgn-am
-children.high-chair,የልጅ ወንበር አለዎት?,,yelij wenber āllewot?,jəlɨdʒ wənbər ʔalːəwot,do you have a child chair?,2,am-agent-v1;ipa=bgn-am
-children.baby-changing-room,የልጅ መቀየሪያ ክፍል የት ነው?,,yelij mekʼeyerīya kifil yet new?,jəlɨdʒ məkʼəjərija kɨfɨl jət nəw,,2,am-agent-v1;ipa=bgn-am
-children.childrens-menu,የልጆች ሜኑ አለ?,,yelijoch mēnu ālle?,jəlɨdʒotʃ menu ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
-children.suitable-for-children,ይህ ለልጆች ተስማሚ ነው?,,yih lelijoch tesmamī new?,jɨh ləlɨdʒotʃ təsmami nəw,,2,am-agent-v1;ipa=bgn-am
-children.minimum-age,ዝቅተኛው ዕድሜ ስንት ነው?,,zikʼitenyaw ʽidimē sint new?,zɨkʼɨtəɲaw ʔɨdɨme sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
-children.do-children-pay,ልጆች ይከፍላሉ?,,lijoch yikeflallu?,lɨdʒotʃ jɨkəflalːu,,2,am-agent-v1;ipa=bgn-am
-children.crib,የልጅ አልጋ አለዎት?,,yelij ālga āllewot?,jəlɨdʒ ʔalɡa ʔalːəwot,do you have a child bed?,2,am-agent-v1;ipa=bgn-am
-children.warm-this-bottle,እባክዎ ይህን ጠርሙስ ያሙቁት,,ibakwo yihin tʼermus yamukʼut,ʔɨbakwo jɨhɨn tʼərmus jamukʼut,,2,am-agent-v1;ipa=bgn-am
-children.car-seat,የልጅ የመኪና መቀመጫ እንፈልጋለን,,yelij yemekīna mekʼemechʼa infelligallen,jəlɨdʒ jəməkina məkʼəmətʃʼa ʔɨnfəlːɨɡalːən,,2,am-agent-v1;ipa=bgn-am
-children.stroller,የልጅ ጋሪ,,yelij garī,jəlɨdʒ ɡari,child cart,2,am-agent-v1;ipa=bgn-am
-children.playground,የመጫወቻ ስፍራ አለ?,,yemechʼawecha sifira ālle?,jəmətʃʼawətʃa sɨfɨra ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
-etiquette.is-this-allowed,ይህ ይፈቀዳል?,,yih yifekʼedal?,jɨh jɨfəkʼədal,,2,am-agent-v1;ipa=bgn-am
-etiquette.is-tipping-expected,ጉርሻ መስጠት የተለመደ ነው?,,gursha mestʼet yetelemede new?,ɡurʃa məstʼət jətələmədə nəw,is giving a tip customary?,2,am-agent-v1;ipa=bgn-am
-etiquette.is-service-included,የአገልግሎት ክፍያ ተካትቷል?,,yeʼāgeliglot kifiya tekatitwal?,jəʔaɡəlɨɡlot kɨfɨja təkatɨtwal,,2,am-agent-v1;ipa=bgn-am
-etiquette.may-i-enter,መግባት ይቻላል?,,megbat yichalal?,məɡbat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-etiquette.remove-shoes,ጫማዬን ማውለቅ አለብኝ?,,chʼamayēn mawlekʼ āllebbinny?,tʃʼamajen mawləkʼ ʔalːəbːɨɲː,must I take off my shoes?,2,am-agent-v1;ipa=bgn-am
-etiquette.photo-of-you,ፎቶ ላነሳዎት?,,foto lanesawot?,foto lanəsawot,may I take a photo of you?,2,am-agent-v1;ipa=bgn-am
-etiquette.may-i-sit-here,እዚህ መቀመጥ ይቻላል?,,izzīh mekʼemetʼ yichalal?,ʔɨzːih məkʼəmətʼ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-etiquette.queue-for,ይህ የ{} ሰልፍ ነው?,,yih ye{} selif new?,jɨh jə {} səlɨf nəw,,2,am-agent-v1;ipa=bgn-am
-etiquette.dressed-appropriately,አለባበሴ ተስማሚ ነው?,,ālebabesē tesmamī new?,ʔaləbabəse təsmami nəw,is my manner of dress suitable?,2,am-agent-v1;ipa=bgn-am
-etiquette.did-not-mean-to-offend,ላስቀይም አልፈለግኩም,,laskʼeyim ālfelegkum,laskʼəjɨm ʔalfələɡkum,I did not want to offend,2,am-agent-v1;ipa=bgn-am
-etiquette.what-is-customary,እዚህ የተለመደው ምን ነው?,,izzīh yetelemedew min new?,ʔɨzːih jətələmədəw mɨn nəw,,2,am-agent-v1;ipa=bgn-am
-etiquette.keep-the-change,ዝርዝሩን ይያዙት,,zirizirun yiyazut,zɨrɨzɨrun jɨjazut,keep the change,2,am-agent-v1;ipa=bgn-am
-social-basics.politeness-particles,የታይ ጨዋነት፦ ወንድ ከሆኑ ሁሉንም ነገር ክራፕ ብለው ይጨርሱ፤ ሴት ከሆኑ ካ ይበሉ። ሴት ጥያቄ ስትጠይቅ ካ የሚለውን ከፍ ባለ ቃና ትናገራለች። ከላይ ያሉት መስመሮች ቅንጣቱን አልያዙም ስለዚህ እርስዎ ይጨምሩ።,,yetay chʼewanet: wend kehonu hulunim neger kirap bilew yichʼersu; sēt kehonu ka yibelu. sēt tʼiyakʼē sititʼeyikʼ ka yemīlewin kef bale kʼana tinnagerallech. kelay yallut mesmeroch kʼintʼatun ālyazum silezzīh irsiwo yichʼemru.,,,2,am-agent-v1
-board-answers.can-you-walk,መራመድ ይቻላል?,,meramed yichalal?,məraməd jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-board-answers.card-or-cash,በካርድ ወይስ በጥሬ ገንዘብ?,,bekard weys betʼirē genzeb?,bəkard wəjs bətʼɨre ɡənzəb,,2,am-agent-v1;ipa=bgn-am
-board-answers.help-is-coming,እርዳታ እየመጣ ነው,,irdata iyyemetʼa new,ʔɨrdata ʔɨjːəmətʼa nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.how-many,ስንት?,,sint?,sɨnt,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-am-calling-an-ambulance,አምቡላንስ እየጠራሁ ነው,,āmbulans iyyetʼerahu new,ʔambulans ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-am-calling-the-police,ፖሊስ እየጠራሁ ነው,,polīs iyyetʼerahu new,polis ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-do-not-have-a-phone,ስልክ የለኝም,,silk yellenyim,sɨlk jəlːəɲɨm,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-will-find-someone,የሚረዳ ሰው ማግኘት እችላለሁ,,yemīredda sew magnyet ichilallehu,jəmirədːa səw maɡɲət ʔɨtʃɨlalːəhu,"I can find someone who will help -- the bystander's offer, ማግኘት እችላለሁ as in hitchhiking.i-can-pay-for-fuel; the text's እፈልጋለሁ (I want) read as the speaker needing help, and the romanisation already said እችላለሁ",2,"am-agent-v1;fix=abyssinica-dict=ቻለ (became capable);fix=abyssinica-dict=ፈለገ (look about for -- እፈልጋለሁ, I want or I look for);fix=abyssinica-dict=ረዳ (help out, extend help);in-pack-frame=hitchhiking.i-can-pay-for-fuel (የነዳጅ ገንዘብ መክፈል እችላለሁ);rule=first-person-verb-invariant-for-gender;row-corrections-v6;ipa=bgn-am"
-board-answers.i-will-show-you,መንገዱን አሳያለሁ,,mengedun asayallehu,mənɡədun ʔasajalːəhu,,2,am-agent-v1;ipa=bgn-am
-board-answers.i-will-write-it-down,ይህን እጻፋለሁ,,yihin itsʼafallehu,jɨhɨn ʔɨsʼafalːəhu,,2,am-agent-v1;ipa=bgn-am
-board-answers.it-is-closed,ዝግ ነው,,zig new,zɨɡ nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.it-is-over-there,እዚያ ነው,,izziya new,ʔɨzːɨja nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.none-of-these,ከእነዚህ አንዱም አይደለም,,keʼinezzih andum āydellem,kəʔɨnəzːɨh ʔandum ʔajdəlːəm,,2,am-agent-v1;ipa=bgn-am
-board-answers.not-possible,ይህ አይቻልም,,yih āyichalim,jɨh ʔajɨtʃalɨm,,2,am-agent-v1;ipa=bgn-am
-board-answers.please-wait,ጥቂት ጊዜ እባክዎ,,tʼikʼīt gīzē ibakwo,tʼɨkʼit ɡize ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
-board-answers.say-it-again,አንድ ጊዜ ደግሞ እባክዎ?,,ānd gīzē degmo ibakwo?,ʔand ɡize dəɡmo ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
-board-answers.stay-here,የተሻለው ቦታ እዚህ ነው,,yeteshalew bota izzih new,jətəʃaləw bota ʔɨzːɨh nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.the-hospital-is-close,ሆስፒታሉ በቅርብ ነው,,hospītalu bekʼirb new,hospitalu bəkʼɨrb nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.there-is-no-wait,የመጠበቅ ጊዜ የለም፤ አሁን መግባት ይቻላል,,yemetʼebekʼ gīzē yellem; ahun megbat yichalal,jəmətʼəbəkʼ ɡize jəlːəm ʔahun məɡbat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-board-answers.we-do-not-have-it,ይህ የለንም,,yih yellenim,jɨh jəlːənɨm,,2,am-agent-v1;ipa=bgn-am
-board-answers.what-is-your-name,ስም ማን ነው?,,sim man new?,sɨm man nəw,,2,am-agent-v1;ipa=bgn-am
-board-answers.where-does-it-hurt,የት ያማል?,,yet yamal?,jət jamal,,2,am-agent-v1;ipa=bgn-am
-kind-words.you-are-very-kind,በጣም ደግ ነዎት,,betʼam deg newot,bətʼam dəɡ nəwot,"you are very kind -- ነዎት, the polite copula, which addresses a man or a woman alike",2,"am-agent-v1;fix=FSI Amharic Basic Course 1964 vol. 1 Note 3.1 pp. 22-23 (/irsiwo/ is used as a polite or deferential form of you, addressing both men and women; verb forms used with the polite pronouns have the third person plural personal endings) Note 26.1 p. 301 (degg kind, degginnet kindness) and the p. 305 drill (awo, beTam degg sew new);fix=en.wikipedia Amharic rev 1377926863 (copula polite ነዎ(ት) näwo(t));in-pack-frame=introductions.where-are-you-from (ከየት ነዎት?);rule=ነው is the third person (he or it is), so the row did not say you;row-corrections-v8;ipa=bgn-am"
-kind-words.thank-you-for-your-help,ስለ እርዳታዎ አመሰግናለሁ,,sile irdatawo āmesegginallehu,sɨlə ʔɨrdatawo ʔaməsəɡːɨnalːəhu,for your help I thank [you],2,am-agent-v1;ipa=bgn-am
-kind-words.this-is-delicious,ይህ ጣዕሙ ጥሩ ነው,,yih tʼaʼimu tʼiru new,jɨh tʼaʔɨmu tʼɨru nəw,"this, its taste is good",2,am-agent-v1;ipa=bgn-am
-kind-words.it-is-beautiful-here,እዚህ በጣም ቆንጆ ነው,,izzīh betʼam konjo new,ʔɨzːih bətʼam kondʒo nəw,here [is] very beautiful — about the place,2,am-agent-v1;ipa=bgn-am
-kind-words.i-like-it-very-much,በጣም ደስ ብሎኛል,,betʼam des bilonnyal,bətʼam dəs bɨloɲːal,"[it] has very much pleased me — reusing introductions.nice-to-meet-you's own idiom, which is 1st person only in the ungendered sense (an impersonal subject 'pleased', not a gendered verb)",2,am-agent-v1;ipa=bgn-am
-kind-words.i-had-a-wonderful-time,ጊዜዬ በጣም ጥሩ ነበር,,gīzēyē betʼam tʼiru neber,ɡizeje bətʼam tʼɨru nəbər,my time was very good,2,am-agent-v1;ipa=bgn-am
-kind-words.thank-you-for-everything,ስለ ሁሉም ነገር አመሰግናለሁ,,sile hulum neger āmesegginallehu,sɨlə hulum nəɡər ʔaməsəɡːɨnalːəhu,for all things I thank [you],2,am-agent-v1;ipa=bgn-am
-kind-words.thank-you-for-your-hospitality,ስለ ግብዣዎ አመሰግናለሁ,,sile gibizhawo āmesegginallehu,sɨlə ɡɨbɨʒawo ʔaməsəɡːɨnalːəhu,for your hospitality I thank [you],2,am-agent-v1;ipa=bgn-am
-board-answers.my-name-is-blank,ስሜ {} ነው,,simē {} new,sɨme {} nəw,,2,am-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
-board-answers.i-would-rather-not-say,ይቅርታ፤ ባልናገር እመርጣለሁ,,"yikʼirta, balnager imertʼallehu","jɨkʼɨrta, balnaɡər ʔɨmərtʼalːəhu",,2,am-agent-v1;abyssinica-dict=መረጠ (prefer);in-pack-neighbour=social-basics.excuse-me-sorry;src=srta.gov.et ባጣ እመርጣለሁ (conditional + እመርጣለሁ);reply-neutrality-rule;rule=first-person-verb-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.what-happened,ምን ሆነ?,,min hone?,mɨn honə,,2,am-agent-v1;abyssinica-dict=ሆነ (happen);reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
-board-answers.understood,ገባኝ,,gebbany,ɡəbːaɲ,,2,am-agent-v1;abyssinica-dict=ገባኝ (understood);en.wiktionary=ገባ gäbba (Leslau 1996 p. 210);in-pack-neighbour=communication.i-do-not-understand;reply-neutrality-rule;rule=first-person-object-suffix-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.i-will-check,አረጋግጣለሁ,,āregagitʼallehu,ʔarəɡaɡɨtʼalːəhu,,2,am-agent-v1;abyssinica-dict=አረጋገጠ (verify);in-pack-frame=phone-text-power.please-confirm;reply-neutrality-rule;rule=first-person-verb-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.we-have-it,አዎ፤ አለ,,"āwo, ālle","ʔawo, ʔalːə",,2,am-agent-v1;in-pack-neighbour=food-ordering.is-a-table-available;in-pack-neighbour=shopping.do-you-have-this-in-stock;reply-neutrality-rule;rule=existential-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.we-are-full,ቦታ የለም,,bota yellem,bota jəlːəm,,2,am-agent-v1;in-pack-neighbour=hitchhiking.is-there-room-for-two;reply-neutrality-rule;rule=existential-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.it-is-free,በነጻ ነው,,benetsʼa new,bənəsʼa nəw,,2,am-agent-v1;abyssinica-dict=በነጻ (free of charge);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=bgn-am
-board-answers.it-does-not-matter,ሁለቱም ይቻላል,,hulettum yichalal,hulətːum jɨtʃalal,,2,am-agent-v1;in-pack-neighbour=question-words.all-both;in-pack-neighbour=quick-responses.can-possible;answers-audit-v1;ipa=bgn-am
-board-answers.only-for-customers,ለደንበኞች ብቻ ነው,,ledenbenyoch bicha new,lədənbəɲotʃ bɨtʃa nəw,,2,am-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=bgn-am
-board-answers.where-to,ወዴት?,,wedēt?,wədet,,2,am-agent-v1;abyssinica-dict=ወዴት (whither);in-pack-neighbour=hitchhiking.where-are-you-going;reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
-board-answers.at-the-next-stop,በሚቀጥለው ማቆሚያ,,bemīkʼetʼilew makʼomīya,bəmikʼətʼɨləw makʼomija,,2,am-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=bgn-am
-board-answers.pay-on-board,በመኪናው ውስጥ ይከፈላል,,bemekīnaw wistʼ yikkefelal,bəməkinaw wɨstʼ jɨkːəfəlal,,2,am-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=lost-rescue.i-left-it-on-the-train;reply-neutrality-rule;rule=impersonal-passive-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.see-a-doctor,ወደ ሐኪም መሄድ ይሻላል,,wede hākīm mehēd yishalal,wədə hakim məhed jɨʃalal,,2,am-agent-v1;in-pack-neighbour=emergency-medical.i-need-a-doctor;in-pack-frame=police-consulate.i-do-not-want-to-go-with-you;in-pack-neighbour=time-scheduling.when-is-convenient;reply-neutrality-rule;rule=infinitive-invariant-for-gender;answers-audit-v1;ipa=bgn-am
-board-answers.prescription-only,በሐኪም ማዘዣ ብቻ ነው,,behākīm mazezha bicha new,bəhakim mazəʒa bɨtʃa nəw,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=bgn-am
-board-answers.before-food,ከምግብ በፊት,,kemigib befīt,kəmɨɡɨb bəfit,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=bgn-am
-board-answers.after-food,ከምግብ በኋላ,,kemigib behwala,kəmɨɡɨb bəhwala,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=bgn-am
+concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
+social-basics.hello,ሰላም,,selam,səlam,peace,,2,am-agent-v1;ipa=bgn-am
+social-basics.hello-polite,ጤና ይስጥልኝ,,tʼēna yistʼillinny,tʼena jɨstʼɨlːɨɲː,may he give you health,,2,am-agent-v1;ipa=bgn-am
+social-basics.good-morning,እንደምን አደሩ,,indemin āderu,ʔɨndəmɨn ʔadəru,how did you spend the night?,,2,am-agent-v1;ipa=bgn-am
+social-basics.good-evening,እንደምን አመሹ,,indemin āmeshu,ʔɨndəmɨn ʔaməʃu,how did you spend the day?,,2,am-agent-v1;ipa=bgn-am
+social-basics.goodbye,ደህና ይሁኑ,,dehna yihunu,dəhna jɨhunu,be well,,2,am-agent-v1;ipa=bgn-am
+social-basics.thank-you,አመሰግናለሁ,,āmesegginallehu,ʔaməsəɡːɨnalːəhu,,,2,am-agent-v1;ipa=bgn-am
+social-basics.you-are-welcome,ምንም አይደለም,,minim āydellem,mɨnɨm ʔajdəlːəm,it is nothing,,2,am-agent-v1;ipa=bgn-am
+social-basics.excuse-me-sorry,ይቅርታ,,yikʼirta,jɨkʼɨrta,,,2,am-agent-v1;ipa=bgn-am
+social-basics.sorry,አዝናለሁ,,āzinallehu,ʔazɨnalːəhu,I am sorry,,2,am-agent-v1;ipa=bgn-am
+social-basics.no-problem,ችግር የለም,,chigir yellem,tʃɨɡɨr jəlːəm,there is no problem,,2,am-agent-v1;ipa=bgn-am
+social-basics.i-do-not-know,አላውቅም,,ālawikʼim,ʔalawɨkʼɨm,,,2,am-agent-v1;ipa=bgn-am
+communication.i-do-not-speak-this-language,{target} አልናገርም,,{target} ālnagerim,{target} ʔalnaɡərɨm,,,2,am-agent-v1;ipa=bgn-am
+communication.i-speak-only-a-little-of-this,{target} ጥቂት ብቻ እናገራለሁ,,{target} tʼikʼīt bicha inagerallehu,{target} tʼɨkʼit bɨtʃa ʔɨnaɡəralːəhu,I speak only a little {target},,2,am-agent-v1;ipa=bgn-am
+communication.do-you-speak-english,{source} ይናገራሉ?,,{source} yinnageralu?,{source} jɨnːaɡəralu,,,2,am-agent-v1;ipa=bgn-am
+communication.please-speak-more-slowly,እባክዎ ቀስ ብለው ይናገሩ,,ibakwo kʼes bilew yinnageru,ʔɨbakwo kʼəs bɨləw jɨnːaɡəru,please speak slowly,,2,am-agent-v1;ipa=bgn-am
+communication.i-do-not-understand-spoken,የሚሉትን አልገባኝም,,yemīlutin ālgebanyim,jəmilutɨn ʔalɡəbaɲɨm,what you say has not entered me,,2,am-agent-v1;ipa=bgn-am
+communication.i-cannot-read-understand,ማንበብ አልችልም,,manbeb ālchilim,manbəb ʔaltʃɨlɨm,I cannot read,,2,am-agent-v1;ipa=bgn-am
+communication.please-say-it-again,እባክዎ ደግመው ይናገሩ,,ibakwo degimew yinnageru,ʔɨbakwo dəɡɨməw jɨnːaɡəru,,,2,am-agent-v1;ipa=bgn-am
+communication.please-write-it-down,እባክዎ ይጻፉት,,ibakwo yitsʼafut,ʔɨbakwo jɨsʼafut,,,2,am-agent-v1;ipa=bgn-am
+communication.please-wait-a-moment,እባክዎ ጥቂት ይጠብቁ,,ibakwo tʼikʼīt yitʼebbikʼu,ʔɨbakwo tʼɨkʼit jɨtʼəbːɨkʼu,,,2,am-agent-v1;ipa=bgn-am
+communication.can-you-help-me,ሊረዱኝ ይችላሉ?,,līredunny yichilallu?,lirəduɲː jɨtʃɨlalːu,,,2,am-agent-v1;ipa=bgn-am
+communication.please-show-me-the-text,እባክዎ በ{target} የተጻፈውን ያሳዩኝ,,ibakwo be{target} yetetsʼafewin yasayunny,ʔɨbakwo bə {target} jətəsʼafəwɨn jasajuɲː,please show me what is written in {target},,2,am-agent-v1;ipa=bgn-am
+quick-responses.please-go-ahead,ይኸው / ይቅደሙ,,yihew / yikʼidemu,jɨhəw / jɨkʼɨdəmu,here it is / you go first,both offer: handing something over and letting someone go first,2,am-agent-v1;fix=Leslau Basic Amharic Dictionary (1972 -- ERIC ED100127) Amharic-English p. 224 ይኸው (behold! -- here it is!) and p. 143 አለፈ (pass -- go by);in-pack=border-customs.here-is-my-passport (ፓስፖርቴ ይኸው);was=እባክዎ / ይለፉ (ibakwo: the request please -- Leslau 1972 English-Amharic p. 224 please! እባክህ -- as the pack's frame {} እባክዎ);rule=the offering please replaces the request half -- the after-you half stays;row-corrections-v15;fix=Leslau English-Amharic Dictionary of Everyday Usage Part I (ERIC ED 012 044) p. 13 Ahead -- You go ahead -- I'll follow later -- አንተ ቅደም;was=ይኸው / ይለፉ;open-questions-v1;ipa=bgn-am
+quick-responses.yes-right,አዎ,,āwo,ʔawo,yes,,2,"am-agent-v1;fix=abyssinica-dict=yes (አዎ፣ አዎን፣ እሺ) and አዎ (yea);rule=one-reading-on-a-board (ልክ, exactly, was the gloss of the range, right);row-corrections-v6;ipa=bgn-am"
+quick-responses.no-not,አይ,,āy,ʔaj,no,,2,"am-agent-v1;in-pack-frame=police-consulate.no-thank-you-i-am-not-interested (አይ አመሰግናለሁ -- āy, no);fix=abyssinica-dict=no (የለም፣ አይደለም -- the copula's negative, kept out as the gloss of the range, not);rule=one-reading-on-a-board;row-corrections-v6;ipa=bgn-am"
+quick-responses.okay-can,እሺ,,isshī,ʔɨʃːi,okay,,2,"am-agent-v1;fix=abyssinica-dict=እሺ (ok, yea);rule=one-reading-on-a-board (ይቻላል, it is possible, was the gloss of the range, can);row-corrections-v6;ipa=bgn-am"
+quick-responses.cannot-not-allowed,አይፈቀድም,,āyifekʼedim,ʔajɨfəkʼədɨm,it is not permitted,,2,"am-agent-v1;fix=abyssinica-dict=permit (አመቸ፣ ፈቀደ -- አይፈቀድም its negative passive);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is አይቻልም);row-corrections-v6;ipa=bgn-am"
+quick-responses.works-okay,ይሰራል / ደህና,,yiseral / dehna,jɨsəral / dəhna,it works / fine,,2,am-agent-v1;ipa=bgn-am
+quick-responses.does-not-work-no,አይሰራም / አይ,,āyiseram / āy,ʔajɨsəram / ʔaj,it does not work / no,,2,am-agent-v1;ipa=bgn-am
+phone-translation.i-am-using-phone-translation,በስልክ ትርጉም እየተጠቀምኩ ነው,,beslik tirgum iyyetetʼekʼemku new,bəslɨk tɨrɡum ʔɨjːətətʼəkʼəmku nəw,,,2,am-agent-v1;ipa=bgn-am
+phone-translation.please-speak-toward-the-phone,እባክዎ ወደ ስልኩ ይናገሩ,,ibakwo wede sliku yinnageru,ʔɨbakwo wədə slɨku jɨnːaɡəru,,,2,am-agent-v1;ipa=bgn-am
+phone-translation.one-sentence-at-a-time-please,እባክዎ አንድ ዓረፍተ ነገር በአንድ ጊዜ,,ibakwo ānd ʽarefte neger beʼānd gīzē,ʔɨbakwo ʔand ʔarəftə nəɡər bəʔand ɡize,one sentence at one time please,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.please-type-it-for-me,እባክዎ ይጽፉልኝ,,ibakwo yitsʼifulinny,ʔɨbakwo jɨsʼɨfulɨɲː,,,2,am-agent-v1;ipa=bgn-am
+phone-translation.please-write-the-place-name,እባክዎ የቦታውን ስም በ{target} ይጻፉት,,ibakwo yebotawin sim be{target} yitsʼafut,ʔɨbakwo jəbotawɨn sɨm bə {target} jɨsʼafut,,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.please-use-simple-words,እባክዎ ቀላል ቃላት ይጠቀሙ,,ibakwo kʼelal kʼalat yitʼekʼemu,ʔɨbakwo kʼəlal kʼalat jɨtʼəkʼəmu,,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.my-phone-battery-is-low,የስልኬ ባትሪ አልቋል,,yeslikē batirī ālkʼwal,jəslɨke batɨri ʔalkʼwal,my phone battery has run out,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.do-you-have-a-power-bank,ፓወር ባንክ አለዎት?,,pawer bank āllewot?,pawər bank ʔalːəwot,,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.the-translation-may-be-inaccurate,ትርጉሙ ስህተት ሊኖረው ይችላል,,tirgumu sihitet līnorew yichilal,tɨrɡumu sɨhɨtət linorəw jɨtʃɨlal,the translation may have an error,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.please-confirm,እባክዎ ያረጋግጡ,,ibakwo yaregagitʼu,ʔɨbakwo jarəɡaɡɨtʼu,,,2,am-agent-v1;ipa=bgn-am
+social-basics.good-night,ደህና እደሩ,,dehna ideru,dəhna ʔɨdəru,spend the night well,,2,am-agent-v1;ipa=bgn-am
+social-basics.okay-fine-i-am-okay,ደህና ነኝ,,dehna neny,dəhna nəɲ,I am well,,2,am-agent-v1;ipa=bgn-am
+quick-responses.can-possible,ይቻላል,,yichalal,jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+quick-responses.cannot-not-possible,አይቻልም,,āyichalim,ʔajɨtʃalɨm,,,2,am-agent-v1;ipa=bgn-am
+quick-responses.okay-fine,እሺ,,isshī,ʔɨʃːi,,,2,am-agent-v1;ipa=bgn-am
+quick-responses.no-good-not-allowed-will-not-work,አይሆንም,,āyihonim,ʔajɨhonɨm,it will not do,,2,am-agent-v1;ipa=bgn-am
+communication.i-cannot-make-out-what-you-are-saying,የሚሉትን መለየት አልችልም,,yemīlutin meleyet ālchilim,jəmilutɨn mələjət ʔaltʃɨlɨm,I cannot make out what you say,,2,am-agent-v1;ipa=bgn-am
+communication.i-do-not-understand,አልገባኝም,,ālgebanyim,ʔalɡəbaɲɨm,it has not entered me,,2,am-agent-v1;ipa=bgn-am
+communication.i-cannot-read-it,ይህን ማንበብ አልችልም,,yihin manbeb ālchilim,jɨhɨn manbəb ʔaltʃɨlɨm,,,2,am-agent-v1;ipa=bgn-am
+communication.please-write-it-in-roman-letters,በላቲን ፊደል ይጻፉት,,belatīn fīdel yitsʼafut,bəlatin fidəl jɨsʼafut,please write it in Latin letters,,2,am-agent-v1;ipa=bgn-am
+phone-translation.please-type-it-and-show-me,እባክዎ ጽፈው ያሳዩኝ,,ibakwo tsʼifew yasayunny,ʔɨbakwo sʼɨfəw jasajuɲː,,,2,am-agent-v1;ipa=bgn-am
+phone-translation.please-look-at-the-screen,እባክዎ ስክሪኑን ይመልከቱ,,ibakwo sikirīnun yimelkketu,ʔɨbakwo sɨkɨrinun jɨməlkːətu,,,2,am-agent-v1;ipa=bgn-am
+phone-text-power.may-i-charge-my-phone-here,ስልኬን እዚህ ቻርጅ ማድረግ ይቻላል?,,silikēn izzīh charj madireg yichalal?,sɨlɨken ʔɨzːih tʃardʒ madɨrəɡ jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.i-would-like-a-tourist-sim,የጎብኚ ሲም ካርድ እፈልጋለሁ,,yegobinyī sīm kard ifelligallehu,jəɡobɨɲi sim kard ʔɨfəlːɨɡalːəhu,,,2,am-agent-v1;ipa=bgn-am
+sim-data.may-i-use-your-wifi,ዋይፋይዎን መጠቀም ይቻላል?,,wayfaywon metʼekʼem yichalal?,wajfajwon mətʼəkʼəm jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.how-much-data-is-included,ስንት ዳታ ተካትቷል?,,sint data tekatitwal?,sɨnt data təkatɨtwal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.do-you-need-my-passport,ፓስፖርቴ ያስፈልጋል?,,pasporitē yasfelligal?,pasporɨte jasfəlːɨɡal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.how-long-is-it-valid,ለምን ያህል ጊዜ ይሰራል?,,lemin yahil gīzē yiseral?,ləmɨn jahɨl ɡize jɨsəral,,,2,am-agent-v1;ipa=bgn-am
+sim-data.please-activate-it,እባክዎ ያስጀምሩት,,ibakwo yasjemmirut,ʔɨbakwo jasdʒəmːɨrut,,,2,am-agent-v1;ipa=bgn-am
+sim-data.do-you-have-an-esim,ኢ-ሲም አለዎት?,,ī-sīm āllewot?,ʔisim ʔalːəwot,,,2,am-agent-v1;ipa=bgn-am
+sim-data.my-data-is-not-working,ዳታዬ አይሰራም,,datayē āyiseram,dataje ʔajɨsəram,,,2,am-agent-v1;ipa=bgn-am
+sim-data.does-it-need-registration,ምዝገባ ያስፈልጋል?,,mizgeba yasfelligal?,mɨzɡəba jasfəlːɨɡal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.i-have-no-signal,ሲግናል የለኝም,,sīginal yellenyim,siɡɨnal jəlːəɲɨm,,,2,am-agent-v1;ipa=bgn-am
+sim-data.please-write-the-wifi-password,እባክዎ የዋይፋይ የይለፍ ቃል ይጻፉት,,ibakwo yewayfay yeyilef kʼal yitsʼafut,ʔɨbakwo jəwajfaj jəjɨləf kʼal jɨsʼafut,,,2,am-agent-v1;ipa=bgn-am
+sim-data.sim-card,ሲም ካርድ,,sīm kard,sim kard,,,2,am-agent-v1;ipa=bgn-am
+sim-data.where-can-i-buy-a-plug-adapter,አዳፕተር የት መግዛት እችላለሁ?,,ādapiter yet megzat ichilallehu?,ʔadapɨtər jət məɡzat ʔɨtʃɨlalːəhu,,,2,am-agent-v1;ipa=bgn-am
+sim-data.mobile-data,የሞባይል ዳታ,,yemobayil data,jəmobajɨl data,,,2,am-agent-v1;ipa=bgn-am
+sim-data.can-i-top-up-this-sim,ይህን ሲም መሙላት ይቻላል?,,yihin sīm memulat yichalal?,jɨhɨn sim məmulat jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.top-up,መሙላት,,memulat,məmulat,,,2,am-agent-v1;ipa=bgn-am
+sim-data.is-there-coverage-in,በ{} ኔትወርክ አለ?,,be{} nētiwerk ālle?,bə {} netɨwərk ʔalːə,is there network in {}?,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
+sim-data.signal,ሲግናል,,sīginal,siɡɨnal,,,2,am-agent-v1;ipa=bgn-am
+sim-data.esim,ኢ-ሲም,,ī-sīm,ʔisim,,,2,am-agent-v1;ipa=bgn-am
+sim-data.prepaid,በቅድሚያ የተከፈለ,,bekʼidimīya yetekefele,bəkʼɨdɨmija jətəkəfələ,paid in advance,,2,am-agent-v1;ipa=bgn-am
+sim-data.roaming,ሮሚንግ,,romīng,rominɡ,,,2,am-agent-v1;ipa=bgn-am
+children.cannot-find-my-child,ልጄን አላገኘሁም,,lijēn ālagenyehum,lɨdʒen ʔalaɡəɲəhum,I have not found my child,,2,am-agent-v1;ipa=bgn-am
+children.make-an-announcement,እባክዎ ማስታወቂያ ያስተላልፉ,,ibakwo mastawekʼīya yastelalifu,ʔɨbakwo mastawəkʼija jastəlalɨfu,,,2,am-agent-v1;ipa=bgn-am
+children.child-age,ልጄ {} ዓመቱ ነው,,lijē {} ʽametu new,lɨdʒe {} ʔamətu nəw,my child is {} years old,,2,am-agent-v1;ipa=bgn-am
+children.high-chair,የልጅ ወንበር አለዎት?,,yelij wenber āllewot?,jəlɨdʒ wənbər ʔalːəwot,do you have a child chair?,,2,am-agent-v1;ipa=bgn-am
+children.baby-changing-room,የልጅ መቀየሪያ ክፍል የት ነው?,,yelij mekʼeyerīya kifil yet new?,jəlɨdʒ məkʼəjərija kɨfɨl jət nəw,,,2,am-agent-v1;ipa=bgn-am
+children.childrens-menu,የልጆች ሜኑ አለ?,,yelijoch mēnu ālle?,jəlɨdʒotʃ menu ʔalːə,,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
+children.suitable-for-children,ይህ ለልጆች ተስማሚ ነው?,,yih lelijoch tesmamī new?,jɨh ləlɨdʒotʃ təsmami nəw,,,2,am-agent-v1;ipa=bgn-am
+children.minimum-age,ዝቅተኛው ዕድሜ ስንት ነው?,,zikʼitenyaw ʽidimē sint new?,zɨkʼɨtəɲaw ʔɨdɨme sɨnt nəw,,,2,am-agent-v1;ipa=bgn-am
+children.do-children-pay,ልጆች ይከፍላሉ?,,lijoch yikeflallu?,lɨdʒotʃ jɨkəflalːu,,,2,am-agent-v1;ipa=bgn-am
+children.crib,የልጅ አልጋ አለዎት?,,yelij ālga āllewot?,jəlɨdʒ ʔalɡa ʔalːəwot,do you have a child bed?,,2,am-agent-v1;ipa=bgn-am
+children.warm-this-bottle,እባክዎ ይህን ጠርሙስ ያሙቁት,,ibakwo yihin tʼermus yamukʼut,ʔɨbakwo jɨhɨn tʼərmus jamukʼut,,,2,am-agent-v1;ipa=bgn-am
+children.car-seat,የልጅ የመኪና መቀመጫ እንፈልጋለን,,yelij yemekīna mekʼemechʼa infelligallen,jəlɨdʒ jəməkina məkʼəmətʃʼa ʔɨnfəlːɨɡalːən,,,2,am-agent-v1;ipa=bgn-am
+children.stroller,የልጅ ጋሪ,,yelij garī,jəlɨdʒ ɡari,child cart,,2,am-agent-v1;ipa=bgn-am
+children.playground,የመጫወቻ ስፍራ አለ?,,yemechʼawecha sifira ālle?,jəmətʃʼawətʃa sɨfɨra ʔalːə,,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
+etiquette.is-this-allowed,ይህ ይፈቀዳል?,,yih yifekʼedal?,jɨh jɨfəkʼədal,,,2,am-agent-v1;ipa=bgn-am
+etiquette.is-tipping-expected,ጉርሻ መስጠት የተለመደ ነው?,,gursha mestʼet yetelemede new?,ɡurʃa məstʼət jətələmədə nəw,is giving a tip customary?,,2,am-agent-v1;ipa=bgn-am
+etiquette.is-service-included,የአገልግሎት ክፍያ ተካትቷል?,,yeʼāgeliglot kifiya tekatitwal?,jəʔaɡəlɨɡlot kɨfɨja təkatɨtwal,,,2,am-agent-v1;ipa=bgn-am
+etiquette.may-i-enter,መግባት ይቻላል?,,megbat yichalal?,məɡbat jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+etiquette.remove-shoes,ጫማዬን ማውለቅ አለብኝ?,,chʼamayēn mawlekʼ āllebbinny?,tʃʼamajen mawləkʼ ʔalːəbːɨɲː,must I take off my shoes?,,2,am-agent-v1;ipa=bgn-am
+etiquette.photo-of-you,ፎቶ ላነሳዎት?,,foto lanesawot?,foto lanəsawot,may I take a photo of you?,,2,am-agent-v1;ipa=bgn-am
+etiquette.may-i-sit-here,እዚህ መቀመጥ ይቻላል?,,izzīh mekʼemetʼ yichalal?,ʔɨzːih məkʼəmətʼ jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+etiquette.queue-for,ይህ የ{} ሰልፍ ነው?,,yih ye{} selif new?,jɨh jə {} səlɨf nəw,,,2,am-agent-v1;ipa=bgn-am
+etiquette.dressed-appropriately,አለባበሴ ተስማሚ ነው?,,ālebabesē tesmamī new?,ʔaləbabəse təsmami nəw,is my manner of dress suitable?,,2,am-agent-v1;ipa=bgn-am
+etiquette.did-not-mean-to-offend,ላስቀይም አልፈለግኩም,,laskʼeyim ālfelegkum,laskʼəjɨm ʔalfələɡkum,I did not want to offend,,2,am-agent-v1;ipa=bgn-am
+etiquette.what-is-customary,እዚህ የተለመደው ምን ነው?,,izzīh yetelemedew min new?,ʔɨzːih jətələmədəw mɨn nəw,,,2,am-agent-v1;ipa=bgn-am
+etiquette.keep-the-change,ዝርዝሩን ይያዙት,,zirizirun yiyazut,zɨrɨzɨrun jɨjazut,keep the change,,2,am-agent-v1;ipa=bgn-am
+social-basics.politeness-particles,የታይ ጨዋነት፦ ወንድ ከሆኑ ሁሉንም ነገር ክራፕ ብለው ይጨርሱ፤ ሴት ከሆኑ ካ ይበሉ። ሴት ጥያቄ ስትጠይቅ ካ የሚለውን ከፍ ባለ ቃና ትናገራለች። ከላይ ያሉት መስመሮች ቅንጣቱን አልያዙም ስለዚህ እርስዎ ይጨምሩ።,,yetay chʼewanet: wend kehonu hulunim neger kirap bilew yichʼersu; sēt kehonu ka yibelu. sēt tʼiyakʼē sititʼeyikʼ ka yemīlewin kef bale kʼana tinnagerallech. kelay yallut mesmeroch kʼintʼatun ālyazum silezzīh irsiwo yichʼemru.,,,,2,am-agent-v1
+board-answers.can-you-walk,መራመድ ይቻላል?,,meramed yichalal?,məraməd jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+board-answers.card-or-cash,በካርድ ወይስ በጥሬ ገንዘብ?,,bekard weys betʼirē genzeb?,bəkard wəjs bətʼɨre ɡənzəb,,,2,am-agent-v1;ipa=bgn-am
+board-answers.help-is-coming,እርዳታ እየመጣ ነው,,irdata iyyemetʼa new,ʔɨrdata ʔɨjːəmətʼa nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.how-many,ስንት?,,sint?,sɨnt,,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-am-calling-an-ambulance,አምቡላንስ እየጠራሁ ነው,,āmbulans iyyetʼerahu new,ʔambulans ʔɨjːətʼərahu nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-am-calling-the-police,ፖሊስ እየጠራሁ ነው,,polīs iyyetʼerahu new,polis ʔɨjːətʼərahu nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-do-not-have-a-phone,ስልክ የለኝም,,silk yellenyim,sɨlk jəlːəɲɨm,,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-find-someone,የሚረዳ ሰው ማግኘት እችላለሁ,,yemīredda sew magnyet ichilallehu,jəmirədːa səw maɡɲət ʔɨtʃɨlalːəhu,I can find someone who will help,"the bystander's offer, ማግኘት እችላለሁ as in hitchhiking.i-can-pay-for-fuel; the text's እፈልጋለሁ (I want) read as the speaker needing help, and the romanisation already said እችላለሁ",2,"am-agent-v1;fix=abyssinica-dict=ቻለ (became capable);fix=abyssinica-dict=ፈለገ (look about for -- እፈልጋለሁ, I want or I look for);fix=abyssinica-dict=ረዳ (help out, extend help);in-pack-frame=hitchhiking.i-can-pay-for-fuel (የነዳጅ ገንዘብ መክፈል እችላለሁ);rule=first-person-verb-invariant-for-gender;row-corrections-v6;ipa=bgn-am"
+board-answers.i-will-show-you,መንገዱን አሳያለሁ,,mengedun asayallehu,mənɡədun ʔasajalːəhu,,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-write-it-down,ይህን እጻፋለሁ,,yihin itsʼafallehu,jɨhɨn ʔɨsʼafalːəhu,,,2,am-agent-v1;ipa=bgn-am
+board-answers.it-is-closed,ዝግ ነው,,zig new,zɨɡ nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.it-is-over-there,እዚያ ነው,,izziya new,ʔɨzːɨja nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.none-of-these,ከእነዚህ አንዱም አይደለም,,keʼinezzih andum āydellem,kəʔɨnəzːɨh ʔandum ʔajdəlːəm,,,2,am-agent-v1;ipa=bgn-am
+board-answers.not-possible,ይህ አይቻልም,,yih āyichalim,jɨh ʔajɨtʃalɨm,,,2,am-agent-v1;ipa=bgn-am
+board-answers.please-wait,ጥቂት ጊዜ እባክዎ,,tʼikʼīt gīzē ibakwo,tʼɨkʼit ɡize ʔɨbakwo,,,2,am-agent-v1;ipa=bgn-am
+board-answers.say-it-again,አንድ ጊዜ ደግሞ እባክዎ?,,ānd gīzē degmo ibakwo?,ʔand ɡize dəɡmo ʔɨbakwo,,,2,am-agent-v1;ipa=bgn-am
+board-answers.stay-here,የተሻለው ቦታ እዚህ ነው,,yeteshalew bota izzih new,jətəʃaləw bota ʔɨzːɨh nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.the-hospital-is-close,ሆስፒታሉ በቅርብ ነው,,hospītalu bekʼirb new,hospitalu bəkʼɨrb nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.there-is-no-wait,የመጠበቅ ጊዜ የለም፤ አሁን መግባት ይቻላል,,yemetʼebekʼ gīzē yellem; ahun megbat yichalal,jəmətʼəbəkʼ ɡize jəlːəm ʔahun məɡbat jɨtʃalal,,,2,am-agent-v1;ipa=bgn-am
+board-answers.we-do-not-have-it,ይህ የለንም,,yih yellenim,jɨh jəlːənɨm,,,2,am-agent-v1;ipa=bgn-am
+board-answers.what-is-your-name,ስም ማን ነው?,,sim man new?,sɨm man nəw,,,2,am-agent-v1;ipa=bgn-am
+board-answers.where-does-it-hurt,የት ያማል?,,yet yamal?,jət jamal,,,2,am-agent-v1;ipa=bgn-am
+kind-words.you-are-very-kind,በጣም ደግ ነዎት,,betʼam deg newot,bətʼam dəɡ nəwot,you are very kind,"ነዎት, the polite copula, which addresses a man or a woman alike",2,"am-agent-v1;fix=FSI Amharic Basic Course 1964 vol. 1 Note 3.1 pp. 22-23 (/irsiwo/ is used as a polite or deferential form of you, addressing both men and women; verb forms used with the polite pronouns have the third person plural personal endings) Note 26.1 p. 301 (degg kind, degginnet kindness) and the p. 305 drill (awo, beTam degg sew new);fix=en.wikipedia Amharic rev 1377926863 (copula polite ነዎ(ት) näwo(t));in-pack-frame=introductions.where-are-you-from (ከየት ነዎት?);rule=ነው is the third person (he or it is), so the row did not say you;row-corrections-v8;ipa=bgn-am"
+kind-words.thank-you-for-your-help,ስለ እርዳታዎ አመሰግናለሁ,,sile irdatawo āmesegginallehu,sɨlə ʔɨrdatawo ʔaməsəɡːɨnalːəhu,for your help I thank [you],,2,am-agent-v1;ipa=bgn-am
+kind-words.this-is-delicious,ይህ ጣዕሙ ጥሩ ነው,,yih tʼaʼimu tʼiru new,jɨh tʼaʔɨmu tʼɨru nəw,"this, its taste is good",,2,am-agent-v1;ipa=bgn-am
+kind-words.it-is-beautiful-here,እዚህ በጣም ቆንጆ ነው,,izzīh betʼam konjo new,ʔɨzːih bətʼam kondʒo nəw,here [is] very beautiful,about the place,2,am-agent-v1;ipa=bgn-am
+kind-words.i-like-it-very-much,በጣም ደስ ብሎኛል,,betʼam des bilonnyal,bətʼam dəs bɨloɲːal,[it] has very much pleased me,"reusing introductions.nice-to-meet-you's own idiom, which is 1st person only in the ungendered sense (an impersonal subject 'pleased', not a gendered verb)",2,am-agent-v1;ipa=bgn-am
+kind-words.i-had-a-wonderful-time,ጊዜዬ በጣም ጥሩ ነበር,,gīzēyē betʼam tʼiru neber,ɡizeje bətʼam tʼɨru nəbər,my time was very good,,2,am-agent-v1;ipa=bgn-am
+kind-words.thank-you-for-everything,ስለ ሁሉም ነገር አመሰግናለሁ,,sile hulum neger āmesegginallehu,sɨlə hulum nəɡər ʔaməsəɡːɨnalːəhu,for all things I thank [you],,2,am-agent-v1;ipa=bgn-am
+kind-words.thank-you-for-your-hospitality,ስለ ግብዣዎ አመሰግናለሁ,,sile gibizhawo āmesegginallehu,sɨlə ɡɨbɨʒawo ʔaməsəɡːɨnalːəhu,for your hospitality I thank [you],,2,am-agent-v1;ipa=bgn-am
+board-answers.my-name-is-blank,ስሜ {} ነው,,simē {} new,sɨme {} nəw,,,2,am-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
+board-answers.i-would-rather-not-say,ይቅርታ፤ ባልናገር እመርጣለሁ,,"yikʼirta, balnager imertʼallehu","jɨkʼɨrta, balnaɡər ʔɨmərtʼalːəhu",,,2,am-agent-v1;abyssinica-dict=መረጠ (prefer);in-pack-neighbour=social-basics.excuse-me-sorry;src=srta.gov.et ባጣ እመርጣለሁ (conditional + እመርጣለሁ);reply-neutrality-rule;rule=first-person-verb-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.what-happened,ምን ሆነ?,,min hone?,mɨn honə,,,2,am-agent-v1;abyssinica-dict=ሆነ (happen);reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
+board-answers.understood,ገባኝ,,gebbany,ɡəbːaɲ,,,2,am-agent-v1;abyssinica-dict=ገባኝ (understood);en.wiktionary=ገባ gäbba (Leslau 1996 p. 210);in-pack-neighbour=communication.i-do-not-understand;reply-neutrality-rule;rule=first-person-object-suffix-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.i-will-check,አረጋግጣለሁ,,āregagitʼallehu,ʔarəɡaɡɨtʼalːəhu,,,2,am-agent-v1;abyssinica-dict=አረጋገጠ (verify);in-pack-frame=phone-text-power.please-confirm;reply-neutrality-rule;rule=first-person-verb-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.we-have-it,አዎ፤ አለ,,"āwo, ālle","ʔawo, ʔalːə",,,2,am-agent-v1;in-pack-neighbour=food-ordering.is-a-table-available;in-pack-neighbour=shopping.do-you-have-this-in-stock;reply-neutrality-rule;rule=existential-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.we-are-full,ቦታ የለም,,bota yellem,bota jəlːəm,,,2,am-agent-v1;in-pack-neighbour=hitchhiking.is-there-room-for-two;reply-neutrality-rule;rule=existential-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.it-is-free,በነጻ ነው,,benetsʼa new,bənəsʼa nəw,,,2,am-agent-v1;abyssinica-dict=በነጻ (free of charge);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=bgn-am
+board-answers.it-does-not-matter,ሁለቱም ይቻላል,,hulettum yichalal,hulətːum jɨtʃalal,,,2,am-agent-v1;in-pack-neighbour=question-words.all-both;in-pack-neighbour=quick-responses.can-possible;answers-audit-v1;ipa=bgn-am
+board-answers.only-for-customers,ለደንበኞች ብቻ ነው,,ledenbenyoch bicha new,lədənbəɲotʃ bɨtʃa nəw,,,2,am-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=bgn-am
+board-answers.where-to,ወዴት?,,wedēt?,wədet,,,2,am-agent-v1;abyssinica-dict=ወዴት (whither);in-pack-neighbour=hitchhiking.where-are-you-going;reply-neutrality-rule;answers-audit-v1;ipa=bgn-am
+board-answers.at-the-next-stop,በሚቀጥለው ማቆሚያ,,bemīkʼetʼilew makʼomīya,bəmikʼətʼɨləw makʼomija,,,2,am-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=bgn-am
+board-answers.pay-on-board,በመኪናው ውስጥ ይከፈላል,,bemekīnaw wistʼ yikkefelal,bəməkinaw wɨstʼ jɨkːəfəlal,,,2,am-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=lost-rescue.i-left-it-on-the-train;reply-neutrality-rule;rule=impersonal-passive-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.see-a-doctor,ወደ ሐኪም መሄድ ይሻላል,,wede hākīm mehēd yishalal,wədə hakim məhed jɨʃalal,,,2,am-agent-v1;in-pack-neighbour=emergency-medical.i-need-a-doctor;in-pack-frame=police-consulate.i-do-not-want-to-go-with-you;in-pack-neighbour=time-scheduling.when-is-convenient;reply-neutrality-rule;rule=infinitive-invariant-for-gender;answers-audit-v1;ipa=bgn-am
+board-answers.prescription-only,በሐኪም ማዘዣ ብቻ ነው,,behākīm mazezha bicha new,bəhakim mazəʒa bɨtʃa nəw,,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=bgn-am
+board-answers.before-food,ከምግብ በፊት,,kemigib befīt,kəmɨɡɨb bəfit,,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=bgn-am
+board-answers.after-food,ከምግብ በኋላ,,kemigib behwala,kəmɨɡɨb bəhwala,,,2,am-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=bgn-am

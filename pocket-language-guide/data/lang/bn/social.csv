@@ -1,148 +1,148 @@
-concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
-social-basics.hello,হ্যালো,,hyālo,hˈælo,"the English loan, and the one greeting that is religiously neutral. See the polite row",2,bn-agent-v1;ipa=espeak
-social-basics.hello-polite,আসসালামু আলাইকুম,নমস্কার,āsasālāmu ālāikuma,ˈaʃɔʃˌalamˌu ˈalaˌikum,"**the choice is religious, not one of register.** আসসালামু আলাইকুম to a Muslim, which is most of Bangladesh; নমস্কার to a Hindu, which is most of West Bengal. হ্যালো is the safe default if you cannot tell",2,bn-agent-v1;ipa=espeak
-social-basics.good-morning,শুভ সকাল,,śubha sakāla,ʃˈubʰ ʃˈɔkal,,2,bn-agent-v1;ipa=espeak
-social-basics.good-evening,শুভ সন্ধ্যা,,śubha sandhyā,ʃˈubʰ ʃˈɔndʰːa,,2,bn-agent-v1;ipa=espeak
-social-basics.goodbye,বিদায়,আল্লাহ হাফেজ,bidāẏa,bˈidaj,"বিদায় is neutral and slightly formal; আল্লাহ হাফেজ is the everyday Bangladeshi parting, and is Muslim",2,bn-agent-v1;ipa=espeak
-social-basics.thank-you,ধন্যবাদ,,dhanyabāda,dʰˈɔnæbˌad,,2,bn-agent-v1;ipa=espeak
-social-basics.you-are-welcome,স্বাগতম,,sbāgatama,ʃˈaɡɔtˌɔm,"literally 'welcome'. Bengali has no set reply to thanks; this is what is written, and in speech people say nothing",2,bn-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,শুনছেন?,মাফ করবেন,śunachena?,ʃˈunɔtʃʰˌen,'are you listening?' -- the ordinary way to get a stranger's attention. মাফ করবেন is 'forgive me',2,bn-agent-v1;ipa=espeak
-social-basics.sorry,দুঃখিত,মাফ করবেন,duḥkhita,dˈukʰitˌo,,2,bn-agent-v1;ipa=espeak
-social-basics.no-problem,কোনো সমস্যা নেই,,kono samasyā nei,kˈono ʃˈɔmɔssˌa nˈei,,2,bn-agent-v1;ipa=espeak
-social-basics.i-do-not-know,আমি জানি না,,āmi jāni nā,ˌami ɟˈani nˈa,,2,bn-agent-v1;ipa=espeak
-social-basics.good-night,শুভ রাত্রি,,śubha rātri,ʃˈubʰ ɾˈatɾi,,2,bn-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,ঠিক আছে,,ṭhika āche,ʈʰˈik ˈatʃʰe,,2,bn-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,আমি {target} বলতে পারি না,,āmi {target} balate pāri nā,ˌami {target} bˈɔlɔtˌe pˈaɾi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.i-speak-only-a-little-of-this,আমি অল্প একটু {target} বলতে পারি,,āmi alpa ekaṭu {target} balate pāri,ˌami ˈɔlpɔ ˈekɔʈˌu {target} bˈɔlɔtˌe pˈaɾi,,2,bn-agent-v1;ipa=espeak
-communication.do-you-speak-english,আপনি {source} বলতে পারেন?,,āpani {source} balate pārena?,ˌapɔnˌi {source} bˈɔlɔtˌe pˈaɾen,,2,bn-agent-v1;ipa=espeak
-communication.please-speak-more-slowly,দয়া করে একটু ধীরে বলুন,,daẏā kare ekaṭu dhīre baluna,dˈɔa kˈɔɾe ˈekɔʈˌu dʰˈiɾe bˈolun,,2,bn-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,বুঝতে পারছি না,,bujhate pārachi nā,bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.i-cannot-read-understand,আমি পড়তে পারি না,,āmi paṛate pāri nā,ˌami pˈɔɽɔtˌe pˈaɾi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.please-say-it-again,দয়া করে আরেকবার বলুন,,daẏā kare ārekabāra baluna,dˈɔa kˈɔɾe ˈaɾekˌɔbaɾ bˈolun,,2,bn-agent-v1;ipa=espeak
-communication.please-write-it-down,দয়া করে লিখে দিন,,daẏā kare likhe dina,dˈɔa kˈɔɾe lˈikʰe dˈin,,2,bn-agent-v1;ipa=espeak
-communication.please-wait-a-moment,দয়া করে একটু অপেক্ষা করুন,,daẏā kare ekaṭu apekṣā karuna,dˈɔa kˈɔɾe ˈekɔʈˌu ˈɔpekʰkʰˌa kˈoɾun,,2,bn-agent-v1;ipa=espeak
-communication.can-you-help-me,আপনি আমাকে সাহায্য করতে পারেন?,,āpani āmāke sāhāyya karate pārena?,ˌapɔnˌi ˈamakˌe ʃˈahadʒːˌɔ kˈɔɾɔtˌe pˈaɾen,,2,bn-agent-v1;ipa=espeak
-communication.please-show-me-the-text,দয়া করে {target} ভাষায় লেখাটা দেখান,,daẏā kare {target} bhāṣāẏa lekhāṭā dekhāna,dˈɔa kˈɔɾe {target} bʰˈaʃaj lˈekʰaʈˌa dˈekʰan,ভাষায় -- 'in the language' -- carries the locative so the slot need not,2,bn-agent-v1;ipa=espeak
-communication.i-cannot-make-out-what-you-are-saying,আপনি কী বলছেন বুঝতে পারছি না,,āpani kī balachena bujhate pārachi nā,ˌapɔnˌi kˈi bˈɔlɔtʃʰˌen bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.i-do-not-understand,আমি বুঝতে পারছি না,,āmi bujhate pārachi nā,ˌami bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.i-cannot-read-it,আমি এটা পড়তে পারছি না,,āmi eṭā paṛate pārachi nā,ˌami ˌeʈa pˈɔɽɔtˌe pˈaɾɔtʃʰˌi nˈa,,2,bn-agent-v1;ipa=espeak
-communication.please-write-it-in-roman-letters,দয়া করে ইংরেজি অক্ষরে লিখে দিন,,daẏā kare iṁreji akṣare likhe dina,dˈɔa kˈɔɾe ˈiŋɾeɟˌi ˈɔkʰkʰɔɾˌe lˈikʰe dˈin,'in English letters' -- what ordinary Bengali calls the Roman alphabet,2,bn-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,বলুন,,baluna,bˈolun,'speak' -- the Bengali 'go ahead',2,bn-agent-v1;ipa=espeak
-quick-responses.yes-right,হ্যাঁ,,hyām̐,hˈæ,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) হ্যাঁ (var. of হাঁ) and হাঁ 2 (int. & adv. indicating acquiescence, affirmation ... yes);rule=one-reading-on-a-board (ঠিক, right, was the gloss of the range);row-corrections-v7;ipa=espeak"
-quick-responses.no-not,না,,nā,nˈa,,2,bn-agent-v1;ipa=espeak
-quick-responses.okay-can,ঠিক আছে,,ṭhika āche,ʈʰˈik ˈatʃʰe,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) ঠিক (right ... in working order -- ঘড়িটা ঠিক নেই);rule=one-reading-on-a-board (হবে, it will be, was the can gloss, quick-responses.can-possible is সম্ভব);row-corrections-v7;ipa=espeak"
-quick-responses.cannot-not-allowed,যাবে না,,yābe nā,dʒˈabe nˈa,it will not do,2,bn-agent-v1;ipa=espeak
-quick-responses.works-okay,চলবে,,calabe,tʃˈɔlɔbˌe,it will run,2,bn-agent-v1;ipa=espeak
-quick-responses.does-not-work-no,কাজ করছে না,,kāja karache nā,kˈaɟ kˈɔɾɔtʃʰˌe nˈa,it is not working,2,bn-agent-v1;ipa=espeak
-quick-responses.can-possible,সম্ভব,,sambhaba,ʃˈɔmbʰɔb,,2,bn-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,সম্ভব নয়,,sambhaba naẏa,ʃˈɔmbʰɔb nˈɔj,,2,bn-agent-v1;ipa=espeak
-quick-responses.okay-fine,আচ্ছা,,ācchā,ˈatʃtʃʰa,,2,bn-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,হবে না,,habe nā,hˈɔbe nˈa,it will not happen,2,bn-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,আমি ফোনে অনুবাদ ব্যবহার করছি,,āmi phone anubāda byabahāra karachi,ˌami fˈone ˈonubˌad bˈæbɔhˌaɾ koɾcʰˈi,,2,bn-agent-v1;ipa=espeak
-phone-translation.please-speak-toward-the-phone,দয়া করে ফোনের দিকে বলুন,,daẏā kare phonera dike baluna,dˈɔa kˈɔɾe fˈoneɾ dˈike bˈolun,,2,bn-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,দয়া করে জায়গার নাম {target} ভাষায় লিখে দিন,,daẏā kare jāẏagāra nāma {target} bhāṣāẏa likhe dina,dˈɔa kˈɔɾe ɟˈajɔɡˌaɾ nˈam {target} bʰˈaʃaj lˈikʰe dˈin,,2,bn-agent-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,দয়া করে একবারে একটা বাক্য বলুন,,daẏā kare ekabāre ekaṭā bākya baluna,dˈɔa kˈɔɾe ˈekɔbˌaɾe ˈækʈa bˈakːɔ bˈolun,,2,bn-agent-v1;ipa=espeak
-phone-translation.please-type-it-and-show-me,দয়া করে টাইপ করে দেখান,,daẏā kare ṭāipa kare dekhāna,dˈɔa kˈɔɾe ʈˈaip kˈɔɾe dˈekʰan,,2,bn-agent-v1;ipa=espeak
-phone-translation.please-look-at-the-screen,দয়া করে স্ক্রিনের দিকে দেখুন,,daẏā kare skrinera dike dekhuna,dˈɔa kˈɔɾe ʃkɾˈineɾ dˈike dˈekʰun,,2,bn-agent-v1;ipa=espeak
-phone-text-power.please-type-it-for-me,দয়া করে আমার জন্য টাইপ করে দিন,,daẏā kare āmāra janya ṭāipa kare dina,dˈɔa kˈɔɾe ˌamaɾ ɟˈɔnnɔ ʈˈaip kˈɔɾe dˈin,,2,bn-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,দয়া করে সহজ কথা বলুন,,daẏā kare sahaja kathā baluna,dˈɔa kˈɔɾe ʃˈɔhɔɟ kˈɔtʰa bˈolun,,2,bn-agent-v1;ipa=espeak
-phone-text-power.my-phone-battery-is-low,আমার ফোনের চার্জ শেষ হয়ে আসছে,,āmāra phonera cārja śeṣa haẏe āsache,ˌamaɾ fˈoneɾ tʃˈaɾɟɔ ʃˈeʃ hˈɔe ˈaʃɔtʃʰˌe,,2,bn-agent-v1;ipa=espeak
-phone-text-power.do-you-have-a-power-bank,পাওয়ার ব্যাংক আছে কি?,,pāoẏāra byāṁka āche ki?,pˈaoˌaɾ bˈæŋkɔ ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,অনুবাদ ভুল হতে পারে,,anubāda bhula hate pāre,ˈonubˌad bʰˈul hˈɔte pˈaɾe,,2,bn-agent-v1;ipa=espeak
-phone-text-power.please-confirm,দয়া করে একবার মিলিয়ে দেখুন,,daẏā kare ekabāra miliẏe dekhuna,dˈɔa kˈɔɾe ˈekɔbˌaɾ mˈiliˌe dˈekʰun,please check it once,2,bn-agent-v1;ipa=espeak
-phone-text-power.may-i-charge-my-phone-here,এখানে ফোন চার্জ দিতে পারি কি?,,ekhāne phona cārja dite pāri ki?,ˈekʰanˌe fˈon tʃˈaɾɟɔ dˈite pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,পর্যটকদের জন্য একটা সিম কার্ড চাই,,paryaṭakadera janya ekaṭā sima kārḍa cāi,pˈɔɾæʈˌɔkɔdˌeɾ ɟˈɔnnɔ ˈækʈa ʃˈim kˈaɾɖɔ tʃˈai,,2,bn-agent-v1;ipa=espeak
-sim-data.may-i-use-your-wifi,আপনার ওয়াই-ফাই ব্যবহার করতে পারি কি?,,āpanāra oẏāi-phāi byabahāra karate pāri ki?,ˌapɔnˌaɾ ˈoaˌifai bˈæbɔhˌaɾ kˈɔɾɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-sim-data.how-much-data-is-included,কত ডেটা পাওয়া যাবে?,,kata ḍeṭā pāoẏā yābe?,kˈɔto ɖˈeʈa pˈaoˌa dʒˈabe,,2,bn-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,আমার পাসপোর্ট লাগবে কি?,,āmāra pāsaporṭa lāgabe ki?,ˌamaɾ pˈaʃɔpˌoɾʈɔ lˈaɡɔbˌe ki,"yes, in both countries: a SIM needs a passport and a biometric registration",2,bn-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,কত দিন চলবে?,,kata dina calabe?,kˈɔto dˈin tʃˈɔlɔbˌe,,2,bn-agent-v1;ipa=espeak
-sim-data.please-activate-it,দয়া করে চালু করে দিন,,daẏā kare cālu kare dina,dˈɔa kˈɔɾe tʃˈalu kˈɔɾe dˈin,,2,bn-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,ই-সিম আছে কি?,,i-sima āche ki?,hɾˌɔʃʃoˈiʃim ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-sim-data.my-data-is-not-working,আমার ডেটা কাজ করছে না,,āmāra ḍeṭā kāja karache nā,ˌamaɾ ɖˈeʈa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,2,bn-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,রেজিস্ট্রেশন লাগবে কি?,,rejisṭreśana lāgabe ki?,ɾˈeɟiʃʈɾˌeʃɔn lˈaɡɔbˌe ki,,2,bn-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,আমার নেটওয়ার্ক নেই,,āmāra neṭaoẏārka nei,ˌamaɾ nˈeʈɔˌoaɾkˌɔ nˈei,,2,bn-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,দয়া করে ওয়াই-ফাইয়ের পাসওয়ার্ড লিখে দিন,,daẏā kare oẏāi-phāiẏera pāsaoẏārḍa likhe dina,dˈɔa kˈɔɾe ˈoaˌifaiˌeɾ pˈaʃɔˌoaɾɖˌɔ lˈikʰe dˈin,,2,bn-agent-v1;ipa=espeak
-sim-data.sim-card,সিম কার্ড,,sima kārḍa,ʃˈim kˈaɾɖɔ,,2,bn-agent-v1;ipa=espeak
-sim-data.where-can-i-buy-a-plug-adapter,প্লাগ অ্যাডাপ্টার কোথায় পাওয়া যাবে?,,plāga ayāḍāpṭāra kothāẏa pāoẏā yābe?,plˈaɡ ˈæɖapʈˌaɾ kˈotʰaj pˈaoˌa dʒˈabe,,2,bn-agent-v1;ipa=espeak
-sim-data.mobile-data,মোবাইল ডেটা,,mobāila ḍeṭā,mˈobaˌil ɖˈeʈa,,2,bn-agent-v1;ipa=espeak
-sim-data.can-i-top-up-this-sim,এই সিমে টাকা ভরা যাবে কি?,,ei sime ṭākā bharā yābe ki?,ˌei ʃˈime ʈˈaka bʰˈɔɾa dʒˈabe ki,'can money be loaded onto this SIM' -- the Bengali idiom,2,bn-agent-v1;ipa=espeak
-sim-data.top-up,রিচার্জ,টাকা ভরা,ricārja,ɾˈitʃaɾɟˌɔ,,2,bn-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,{} এলাকায় নেটওয়ার্ক আছে কি?,,{} elākāẏa neṭaoẏārka āche ki?,{} ˈelakˌaj nˈeʈɔˌoaɾkˌɔ ˈatʃʰe ki,'in the {} area' -- এলাকায় carries the locative so the slot need not,2,bn-agent-v1;ipa=espeak
-sim-data.signal,নেটওয়ার্ক,,neṭaoẏārka,nˈeʈɔˌoaɾkˌɔ,Bengali says 'network' where English says signal,2,bn-agent-v1;ipa=espeak
-sim-data.esim,ই-সিম,,i-sima,hɾˌɔʃʃoˈiʃim,,2,bn-agent-v1;ipa=espeak
-sim-data.prepaid,প্রিপেইড,,pripeiḍa,pɾˈipeˌiɖ,,2,bn-agent-v1;ipa=espeak
-sim-data.roaming,রোমিং,,romiṁ,ɾˈomiŋ,,2,bn-agent-v1;ipa=espeak
-etiquette.is-this-allowed,এটা করা যাবে কি?,,eṭā karā yābe ki?,ˌeʈa kˈɔɾa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,বকশিশ দিতে হয় কি?,,bakaśiśa dite haẏa ki?,bˈɔkɔʃˌiʃ dˈite hˌɔj ki,বকশিশ is the word in both countries,2,bn-agent-v1;ipa=espeak
-etiquette.is-service-included,সার্ভিস চার্জ ধরা আছে কি?,,sārbhisa cārja dharā āche ki?,ʃˈaɾbʰiʃ tʃˈaɾɟɔ dʰˈɔɾa ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-etiquette.may-i-enter,ঢুকতে পারি কি?,,ḍhukate pāri ki?,ɖʰˈukɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-etiquette.remove-shoes,জুতো খুলতে হবে কি?,,juto khulate habe ki?,ɟˈuto kʰˈulɔtˌe hˈɔbe ki,,2,bn-agent-v1;ipa=espeak
-etiquette.photo-of-you,আপনার একটা ছবি তুলতে পারি কি?,,āpanāra ekaṭā chabi tulate pāri ki?,ˌapɔnˌaɾ ˈækʈa tʃʰˈobi tˈulɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-etiquette.may-i-sit-here,এখানে বসতে পারি কি?,,ekhāne basate pāri ki?,ˈekʰanˌe bˈɔʃɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-etiquette.queue-for,{} লাইন এটাই কি?,,{} lāina eṭāi ki?,{} lˈain ˈeʈaˌi ki,"is this the {} queue? -- a bare compound, no suffix",2,bn-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,আমার পোশাক ঠিক আছে কি?,,āmāra pośāka ṭhika āche ki?,ˌamaɾ pˈoʃak ʈʰˈik ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,আমি আপনাকে আঘাত দিতে চাইনি,,āmi āpanāke āghāta dite cāini,ˌami ˌapɔnˌake ˈaɡʰatˌo dˈite tʃˈainˌi,I did not want to hurt you,2,bn-agent-v1;ipa=espeak
-etiquette.what-is-customary,এখানে কী রীতি?,,ekhāne kī rīti?,ˈekʰanˌe kˈi ɾˈiti,what is the custom here?,2,bn-agent-v1;ipa=espeak
-etiquette.keep-the-change,ভাংতিটা রেখে দিন,খুচরোটা রেখে দিন,bhāṁtiṭā rekhe dina,bʰˈaŋtiʈˌa ɾˈekʰe dˈin,ভাংতি is Bangladeshi and খুচরো West Bengali,2,bn-agent-v1;ipa=espeak
-children.cannot-find-my-child,আমার বাচ্চাকে খুঁজে পাচ্ছি না,,āmāra bāccāke khum̐je pācchi nā,ˌamaɾ bˈatʃtʃakˌe kʰˈũɟe pˈatʃtʃʰi nˈa,,2,bn-agent-v1;ipa=espeak
-children.make-an-announcement,দয়া করে মাইকে ঘোষণা দিন,,daẏā kare māike ghoṣaṇā dina,dˈɔa kˈɔɾe mˈaikˌe ɡʰˈoʃɔnˌa dˈin,please announce on the loudspeaker,2,bn-agent-v1;ipa=espeak
-children.child-age,আমার বাচ্চার বয়স {} বছর,,āmāra bāccāra baẏasa {} bachara,ˌamaɾ bˈatʃtʃaɾ bˈɔjɔʃ {} bˈɔtʃʰɔɾ,,2,bn-agent-v1;ipa=espeak
-children.high-chair,বাচ্চাদের উঁচু চেয়ার আছে কি?,,bāccādera um̐cu ceẏāra āche ki?,bˈatʃtʃadˌeɾ ˈũtʃu tʃˈeaɾ ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-children.baby-changing-room,শিশুর ন্যাপি বদলানোর জায়গা কোথায়?,,śiśura nyāpi badalānora jāẏagā kothāẏa?,ʃˈiʃuɾ nˈæpi bˈɔdɔlˌanoɾ ɟˈajɔɡˌa kˈotʰaj,,2,bn-agent-v1;ipa=espeak
-children.childrens-menu,বাচ্চাদের জন্য আলাদা মেনু আছে কি?,,bāccādera janya ālādā menu āche ki?,bˈatʃtʃadˌeɾ ɟˈɔnnɔ ˈaladˌa mˈenu ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-children.suitable-for-children,এটা বাচ্চাদের জন্য ঠিক আছে কি?,,eṭā bāccādera janya ṭhika āche ki?,ˌeʈa bˈatʃtʃadˌeɾ ɟˈɔnnɔ ʈʰˈik ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-children.minimum-age,সর্বনিম্ন বয়স কত?,,sarbanimna baẏasa kata?,ʃˈɔɾbɔnˌimnɔ bˈɔjɔʃ kˈɔto,,2,bn-agent-v1;ipa=espeak
-children.do-children-pay,বাচ্চাদের টিকিট লাগে কি?,,bāccādera ṭikiṭa lāge ki?,bˈatʃtʃadˌeɾ ʈˈikiʈ lˈaɡe ki,do children need a ticket?,2,bn-agent-v1;ipa=espeak
-children.crib,বাচ্চার খাট আছে কি?,,bāccāra khāṭa āche ki?,bˈatʃtʃaɾ kʰˈaʈ ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-children.warm-this-bottle,দয়া করে এই ফিডারটা গরম করে দিন,,daẏā kare ei phiḍāraṭā garama kare dina,dˈɔa kˈɔɾe ˌei fˈiɖaɾˌɔʈa ɡˈɔɾɔm kˈɔɾe dˈin,ফিডার is the baby bottle,2,bn-agent-v1;ipa=espeak
-children.car-seat,আমাদের বাচ্চার জন্য কার সিট দরকার,,āmādera bāccāra janya kāra siṭa darakāra,ˌamadˌeɾ bˈatʃtʃaɾ ɟˈɔnnɔ kˈaɾ ʃˈiʈ dɔɾkˈaɾ,,2,bn-agent-v1;ipa=espeak
-children.stroller,বাচ্চার গাড়ি,স্ট্রলার,bāccāra gāṛi,bˈatʃtʃaɾ ɡˈaɽi,,2,bn-agent-v1;ipa=espeak
-children.playground,খেলার জায়গা আছে কি?,,khelāra jāẏagā āche ki?,kʰˈelaɾ ɟˈajɔɡˌa ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-social-basics.politeness-particles,"থাই ভদ্রতা: পুরুষ হলে প্রায় যেকোনো বাক্যের শেষে krap, মহিলা হলে ka জুড়ে দিন। মহিলা প্রশ্ন করলে ka-টা উঁচু সুরে বলেন। এখানের সারিগুলোতে এই কণাটা নেই, তাই নিজে যোগ করে নিন।",,"thāi bhadratā: puruṣa hale prāẏa yekono bākyera śeṣe krap, mahilā hale ka juṛe dina. mahilā praśna karale ka-ṭā um̐cu sure balena. ekhānera sārigulote ei kaṇāṭā nei, tāi nije yoga kare nina.",,,2,bn-notes-v1
-board-answers.can-you-walk,আপনি কি হাঁটতে পারবেন?,,āpani ki hām̐ṭate pārabena?,ˌapɔnˌi ki hˈãʈɔtˌe pˈaɾɔbˌen,,2,bn-board-answers-v1;board-answers-v3;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.card-or-cash,কার্ড না নগদ?,,kārḍa nā nagada?,kˈaɾɖɔ nˈa nˈɔɡɔd,,2,bn-board-answers-v1;ipa=espeak
-board-answers.help-is-coming,সাহায্য আসছে,,sāhāyya āsache,ʃˈahadʒːˌɔ ˈaʃɔtʃʰˌe,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.how-many,কতগুলো লাগবে?,,katagulo lāgabe?,kˈɔtɔɡˌulo lˈaɡɔbˌe,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.i-am-calling-an-ambulance,আমি অ্যাম্বুলেন্স ডাকছি,,āmi ayāmbulensa ḍākachi,ˌami ˈæmbulˌenʃɔ ɖˈakɔtʃʰˌi,,2,bn-board-answers-v1;ipa=espeak
-board-answers.i-am-calling-the-police,আমি পুলিশ ডাকছি,,āmi puliśa ḍākachi,ˌami pˈuliʃ ɖˈakɔtʃʰˌi,matches the pack's existing police-consulate.i-am-calling-the-police wording,2,bn-board-answers-v1;ipa=espeak
-board-answers.i-do-not-have-a-phone,আমার কাছে ফোন নেই,,āmāra kāche phona nei,ˌamaɾ kˈatʃʰe fˈon nˈei,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.i-will-find-someone,আমি সাহায্য করার মতো কাউকে খুঁজব,,āmi sāhāyya karāra mato kāuke khum̐jaba,ˌami ʃˈahadʒːˌɔ kˈɔɾaɾ mˈɔto kˈaukˌe kʰˈũɟɔb,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.i-will-show-you,আমি রাস্তা দেখিয়ে দিচ্ছি,,āmi rāstā dekhiẏe dicchi,ˌami ɾˈasta dˈekʰiˌe dˈitʃtʃʰi,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.i-will-write-it-down,আমি এটা লিখে দিচ্ছি,,āmi eṭā likhe dicchi,ˌami ˌeʈa lˈikʰe dˈitʃtʃʰi,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.it-is-closed,বন্ধ আছে,,bandha āche,bˈɔndʰɔ ˈatʃʰe,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.it-is-over-there,ওখানে আছে,,okhāne āche,ˈokʰanˌe ˈatʃʰe,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.none-of-these,এর মধ্যে আমার কথাটা নেই,,era madhye āmāra kathāṭā nei,ˌeɾ mˌɔdʰːe ˌamaɾ kˈɔtʰaʈˌa nˈei,my point is not among these,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.not-possible,এটা সম্ভব নয়,,eṭā sambhaba naẏa,ˌeʈa ʃˈɔmbʰɔb nˈɔj,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.please-wait,এক মিনিট,,eka miniṭa,ˈek mˈiniʈ,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.say-it-again,আরেকবার?,,ārekabāra?,ˈaɾekˌɔbaɾ,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.stay-here,এখানে থাকাই ভালো,,ekhāne thākāi bhālo,ˈekʰanˌe tʰˈakaˌi bʰˈalo,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.the-hospital-is-close,হাসপাতাল কাছেই,,hāsapātāla kāchei,hˈaʃɔpˌatal kˈatʃʰeˌi,,2,bn-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"অপেক্ষা করতে হবে না, এখন ভিতরে যান",,"apekṣā karate habe nā, ekhana bhitare yāna","ˈɔpekʰkʰˌa kˈɔɾɔtˌe hˈɔbe nˈa, ˈekʰɔn bʰˈitɔɾˌe dʒˈan",,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.we-do-not-have-it,আমাদের কাছে এটা নেই,,āmādera kāche eṭā nei,ˌamadˌeɾ kˈatʃʰe ˌeʈa nˈei,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-board-answers.what-is-your-name,নাম কী?,,nāma kī?,nˈam kˈi,,2,bn-board-answers-v1;ipa=espeak
-board-answers.where-does-it-hurt,কোথায় ব্যথা করছে?,,kothāẏa byathā karache?,kˈotʰaj bˈætʰa kˈɔɾɔtʃʰˌe,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
-kind-words.you-are-very-kind,আপনি খুব দয়ালু।,,āpani khuba daẏālu.,ˌapɔnˌi kʰˈub dˈɔalˌu,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.thank-you-for-your-help,আপনার সাহায্যের জন্য ধন্যবাদ।,,āpanāra sāhāyyera janya dhanyabāda.,ˌapɔnˌaɾ ʃˈahadʒdʒˌeɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.this-is-delicious,এটা খুব সুস্বাদু।,,eṭā khuba susbādu.,ˌeʈa kʰˈub ʃˈuʃbadˌu,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.it-is-beautiful-here,এখানে খুব সুন্দর।,,ekhāne khuba sundara.,ˈekʰanˌe kʰˈub ʃˈundɔɾ,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.i-like-it-very-much,আমার এটা খুব ভালো লেগেছে।,,āmāra eṭā khuba bhālo legeche.,ˌamaɾ ˌeʈa kʰˈub bʰˈalo lˈeɡetʃʰˌe,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.i-had-a-wonderful-time,আমি এখানে অনেক ভালো সময় কাটিয়েছি।,,āmi ekhāne aneka bhālo samaẏa kāṭiẏechi.,ˌami ˈekʰanˌe ˈɔnek bʰˈalo ʃˈɔmɔj kˈaʈiˌetʃʰi,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.thank-you-for-everything,সব কিছুর জন্য ধন্যবাদ।,,saba kichura janya dhanyabāda.,ʃˈɔb kˈitʃʰuɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-kind-words.thank-you-for-your-hospitality,আপনার আতিথেয়তার জন্য ধন্যবাদ।,,āpanāra ātitheẏatāra janya dhanyabāda.,ˌapɔnˌaɾ ˈatitʰˌejɔtˌaɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
-board-answers.my-name-is-blank,আমার নাম {},,āmāra nāma {},ˌamaɾ nˈam {},,2,in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=espeak
-board-answers.i-would-rather-not-say,"মাফ করবেন, এটা বলতে চাই না",,"māpha karabena, eṭā balate cāi nā","mˈaf kˈɔɾɔbˌen, ˌeʈa bˈɔlɔtˌe tʃˈai nˈa","excuse me, I do not want to say this",2,src=Samsad-Bengali-English মাপ p.860 (মাপ করা to pardon / to excuse);src=Samsad-Bengali-English চাওয়া p.352 (to want);in-pack-neighbour=social-basics.sorry;answers-audit-v1;ipa=espeak
-board-answers.what-happened,কী হয়েছে?,,kī haẏeche?,kˈi hˈɔetʃʰˌe,what has happened?,2,src=Samsad-Bengali-English কী p.236;src=Samsad-Bengali-English হওয়া p.1044 (to happen / to occur);in-pack-frame=pharmacy-symptoms.i-have-a-fever;answers-audit-v1;ipa=espeak
-board-answers.understood,"আচ্ছা, বুঝেছি",,"ācchā, bujhechi","ˈatʃtʃʰa, bˈuɟʰetʃʰˌi","all right, I have understood",2,src=Samsad-Bengali-English আচ্ছা p.103 (well / yes / fine);src=Samsad-Bengali-English বোঝা p.792 (to understand);rule=bengali-verbs-carry-no-gender;answers-audit-v1;ipa=espeak
-board-answers.i-will-check,একটু দেখে জানাচ্ছি,,ekaṭu dekhe jānācchi,ˈekɔʈˌu dˈekʰe ɟˈanatʃtʃʰˌi,I will just look and let [you] know,2,src=Samsad-Bengali-English দেখা p.515 (to examine / to inspect / to search);src=Samsad-Bengali-English জানা p.399 (~নো to inform);in-pack-frame=board-answers.i-will-write-it-down;answers-audit-v1;ipa=espeak
-board-answers.we-have-it,"হ্যাঁ, আছে",,"hyām̐, āche","hˈæ, ˈatʃʰe","yes, there is",2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,জায়গা নেই,,jāẏagā nei,ɟˈajɔɡˌa nˈei,there is no room,2,src=Samsad-Bengali-English জায়গা p.400 (room / accommodation: এখানে তার জায়গা নেই);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
-board-answers.it-is-free,এটা ফ্রি,,eṭā phri,ˌeʈa fɾˈi,,2,src=Samsad-Bengali-English ফ্রি p.712 (free: ফ্রিতে পাওয়া to obtain free of cost);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
-board-answers.it-does-not-matter,দুটোই চলবে,,duṭoi calabe,dˈuʈoˌi tʃˈɔlɔbˌe,both will do,2,src=Samsad-Bengali-English দুই p.503 (both);src=Samsad-Bengali-English চলা p.351 (to be accepted / to be allowed);answers-audit-v1;ipa=espeak
-board-answers.only-for-customers,শুধু ক্রেতাদের জন্য,,śudhu kretādera janya,ʃˈudʰu kɾˈetadˌeɾ ɟˈɔnnɔ,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=Samsad-Bengali-English ক্রেতা p.264 (a buyer / a customer);answers-audit-v1;ipa=espeak
-board-answers.where-to,কোথায় যাবেন?,,kothāẏa yābena?,kˈotʰaj dʒˈaben,where will [you] go?,2,in-pack-neighbour=hitchhiking.where-are-you-going;rule=bengali-verbs-carry-no-gender;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,পরের স্টপে,,parera sṭape,pˈɔɾeɾ ʃʈˈɔpe,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=Samsad-Bengali-English পরে p.627 (পরের দিন the day after);answers-audit-v1;ipa=espeak
-board-answers.pay-on-board,ভাড়া গাড়িতেই দিতে হবে,,bhāṛā gāṛitei dite habe,bʰˈaɽa ɡˈaɽitˌei dˈite hˈɔbe,the fare is to be paid in the vehicle itself,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=Samsad-Bengali-English ভাড়া p.811 (charges / fare);src=Samsad-Bengali-English গাড়ি p.306 (a vehicle);answers-audit-v1;ipa=espeak
-board-answers.see-a-doctor,ডাক্তার দেখানোই ভালো,,ḍāktāra dekhānoi bhālo,ɖˈaktaɾ dˈekʰanˌoi bʰˈalo,showing [it] to a doctor is best,2,in-pack-frame=board-answers.stay-here;src=Samsad-Bengali-English দেখা p.515 (দেখানো to cause to examine / to cause to treat);answers-audit-v1;ipa=espeak
-board-answers.prescription-only,প্রেসক্রিপশন লাগবে,,presakripaśana lāgabe,pɾˈeʃɔkɾˌipɔʃˌɔn lˈaɡɔbˌe,a prescription will be needed,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=Samsad-Bengali-English প্রেসক্রিপশন p.698;src=Samsad-Bengali-English লাগা p.926 (to require / to need);answers-audit-v1;ipa=espeak
-board-answers.before-food,খাবার আগে,,khābāra āge,kʰˈabaɾ ˈaɡe,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Samsad-Bengali-English খাবার p.280 (food / meal);src=Samsad-Bengali-English আগে p.102;answers-audit-v1;ipa=espeak
-board-answers.after-food,খাবার পরে,,khābāra pare,kʰˈabaɾ pˈɔɾe,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Samsad-Bengali-English খাবার p.280 (food / meal);src=Samsad-Bengali-English পরে p.627;answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
+social-basics.hello,হ্যালো,,hyālo,hˈælo,"the English loan, and the one greeting that is religiously neutral. See the polite row",,2,bn-agent-v1;ipa=espeak
+social-basics.hello-polite,আসসালামু আলাইকুম,নমস্কার,āsasālāmu ālāikuma,ˈaʃɔʃˌalamˌu ˈalaˌikum,"**the choice is religious, not one of register.** আসসালামু আলাইকুম to a Muslim, which is most of Bangladesh; নমস্কার to a Hindu, which is most of West Bengal. হ্যালো is the safe default if you cannot tell",,2,bn-agent-v1;ipa=espeak
+social-basics.good-morning,শুভ সকাল,,śubha sakāla,ʃˈubʰ ʃˈɔkal,,,2,bn-agent-v1;ipa=espeak
+social-basics.good-evening,শুভ সন্ধ্যা,,śubha sandhyā,ʃˈubʰ ʃˈɔndʰːa,,,2,bn-agent-v1;ipa=espeak
+social-basics.goodbye,বিদায়,আল্লাহ হাফেজ,bidāẏa,bˈidaj,"বিদায় is neutral and slightly formal; আল্লাহ হাফেজ is the everyday Bangladeshi parting, and is Muslim",,2,bn-agent-v1;ipa=espeak
+social-basics.thank-you,ধন্যবাদ,,dhanyabāda,dʰˈɔnæbˌad,,,2,bn-agent-v1;ipa=espeak
+social-basics.you-are-welcome,স্বাগতম,,sbāgatama,ʃˈaɡɔtˌɔm,"literally 'welcome'. Bengali has no set reply to thanks; this is what is written, and in speech people say nothing",,2,bn-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,শুনছেন?,মাফ করবেন,śunachena?,ʃˈunɔtʃʰˌen,are you listening?,the ordinary way to get a stranger's attention. মাফ করবেন is 'forgive me',2,bn-agent-v1;ipa=espeak
+social-basics.sorry,দুঃখিত,মাফ করবেন,duḥkhita,dˈukʰitˌo,,,2,bn-agent-v1;ipa=espeak
+social-basics.no-problem,কোনো সমস্যা নেই,,kono samasyā nei,kˈono ʃˈɔmɔssˌa nˈei,,,2,bn-agent-v1;ipa=espeak
+social-basics.i-do-not-know,আমি জানি না,,āmi jāni nā,ˌami ɟˈani nˈa,,,2,bn-agent-v1;ipa=espeak
+social-basics.good-night,শুভ রাত্রি,,śubha rātri,ʃˈubʰ ɾˈatɾi,,,2,bn-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,ঠিক আছে,,ṭhika āche,ʈʰˈik ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak
+communication.i-do-not-speak-this-language,আমি {target} বলতে পারি না,,āmi {target} balate pāri nā,ˌami {target} bˈɔlɔtˌe pˈaɾi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,আমি অল্প একটু {target} বলতে পারি,,āmi alpa ekaṭu {target} balate pāri,ˌami ˈɔlpɔ ˈekɔʈˌu {target} bˈɔlɔtˌe pˈaɾi,,,2,bn-agent-v1;ipa=espeak
+communication.do-you-speak-english,আপনি {source} বলতে পারেন?,,āpani {source} balate pārena?,ˌapɔnˌi {source} bˈɔlɔtˌe pˈaɾen,,,2,bn-agent-v1;ipa=espeak
+communication.please-speak-more-slowly,দয়া করে একটু ধীরে বলুন,,daẏā kare ekaṭu dhīre baluna,dˈɔa kˈɔɾe ˈekɔʈˌu dʰˈiɾe bˈolun,,,2,bn-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,বুঝতে পারছি না,,bujhate pārachi nā,bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,আমি পড়তে পারি না,,āmi paṛate pāri nā,ˌami pˈɔɽɔtˌe pˈaɾi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.please-say-it-again,দয়া করে আরেকবার বলুন,,daẏā kare ārekabāra baluna,dˈɔa kˈɔɾe ˈaɾekˌɔbaɾ bˈolun,,,2,bn-agent-v1;ipa=espeak
+communication.please-write-it-down,দয়া করে লিখে দিন,,daẏā kare likhe dina,dˈɔa kˈɔɾe lˈikʰe dˈin,,,2,bn-agent-v1;ipa=espeak
+communication.please-wait-a-moment,দয়া করে একটু অপেক্ষা করুন,,daẏā kare ekaṭu apekṣā karuna,dˈɔa kˈɔɾe ˈekɔʈˌu ˈɔpekʰkʰˌa kˈoɾun,,,2,bn-agent-v1;ipa=espeak
+communication.can-you-help-me,আপনি আমাকে সাহায্য করতে পারেন?,,āpani āmāke sāhāyya karate pārena?,ˌapɔnˌi ˈamakˌe ʃˈahadʒːˌɔ kˈɔɾɔtˌe pˈaɾen,,,2,bn-agent-v1;ipa=espeak
+communication.please-show-me-the-text,দয়া করে {target} ভাষায় লেখাটা দেখান,,daẏā kare {target} bhāṣāẏa lekhāṭā dekhāna,dˈɔa kˈɔɾe {target} bʰˈaʃaj lˈekʰaʈˌa dˈekʰan,ভাষায়,'in the language' -- carries the locative so the slot need not,2,bn-agent-v1;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,আপনি কী বলছেন বুঝতে পারছি না,,āpani kī balachena bujhate pārachi nā,ˌapɔnˌi kˈi bˈɔlɔtʃʰˌen bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.i-do-not-understand,আমি বুঝতে পারছি না,,āmi bujhate pārachi nā,ˌami bˈuɟʰɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.i-cannot-read-it,আমি এটা পড়তে পারছি না,,āmi eṭā paṛate pārachi nā,ˌami ˌeʈa pˈɔɽɔtˌe pˈaɾɔtʃʰˌi nˈa,,,2,bn-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,দয়া করে ইংরেজি অক্ষরে লিখে দিন,,daẏā kare iṁreji akṣare likhe dina,dˈɔa kˈɔɾe ˈiŋɾeɟˌi ˈɔkʰkʰɔɾˌe lˈikʰe dˈin,in English letters,what ordinary Bengali calls the Roman alphabet,2,bn-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,বলুন,,baluna,bˈolun,speak,the Bengali 'go ahead',2,bn-agent-v1;ipa=espeak
+quick-responses.yes-right,হ্যাঁ,,hyām̐,hˈæ,,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) হ্যাঁ (var. of হাঁ) and হাঁ 2 (int. & adv. indicating acquiescence, affirmation ... yes);rule=one-reading-on-a-board (ঠিক, right, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,না,,nā,nˈa,,,2,bn-agent-v1;ipa=espeak
+quick-responses.okay-can,ঠিক আছে,,ṭhika āche,ʈʰˈik ˈatʃʰe,,,2,"bn-agent-v1;fix=Samsad Bengali-English Dictionary (DSAL) ঠিক (right ... in working order -- ঘড়িটা ঠিক নেই);rule=one-reading-on-a-board (হবে, it will be, was the can gloss, quick-responses.can-possible is সম্ভব);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,যাবে না,,yābe nā,dʒˈabe nˈa,it will not do,,2,bn-agent-v1;ipa=espeak
+quick-responses.works-okay,চলবে,,calabe,tʃˈɔlɔbˌe,it will run,,2,bn-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,কাজ করছে না,,kāja karache nā,kˈaɟ kˈɔɾɔtʃʰˌe nˈa,it is not working,,2,bn-agent-v1;ipa=espeak
+quick-responses.can-possible,সম্ভব,,sambhaba,ʃˈɔmbʰɔb,,,2,bn-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,সম্ভব নয়,,sambhaba naẏa,ʃˈɔmbʰɔb nˈɔj,,,2,bn-agent-v1;ipa=espeak
+quick-responses.okay-fine,আচ্ছা,,ācchā,ˈatʃtʃʰa,,,2,bn-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,হবে না,,habe nā,hˈɔbe nˈa,it will not happen,,2,bn-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,আমি ফোনে অনুবাদ ব্যবহার করছি,,āmi phone anubāda byabahāra karachi,ˌami fˈone ˈonubˌad bˈæbɔhˌaɾ koɾcʰˈi,,,2,bn-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,দয়া করে ফোনের দিকে বলুন,,daẏā kare phonera dike baluna,dˈɔa kˈɔɾe fˈoneɾ dˈike bˈolun,,,2,bn-agent-v1;ipa=espeak
+phone-translation.please-write-the-place-name,দয়া করে জায়গার নাম {target} ভাষায় লিখে দিন,,daẏā kare jāẏagāra nāma {target} bhāṣāẏa likhe dina,dˈɔa kˈɔɾe ɟˈajɔɡˌaɾ nˈam {target} bʰˈaʃaj lˈikʰe dˈin,,,2,bn-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,দয়া করে একবারে একটা বাক্য বলুন,,daẏā kare ekabāre ekaṭā bākya baluna,dˈɔa kˈɔɾe ˈekɔbˌaɾe ˈækʈa bˈakːɔ bˈolun,,,2,bn-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,দয়া করে টাইপ করে দেখান,,daẏā kare ṭāipa kare dekhāna,dˈɔa kˈɔɾe ʈˈaip kˈɔɾe dˈekʰan,,,2,bn-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,দয়া করে স্ক্রিনের দিকে দেখুন,,daẏā kare skrinera dike dekhuna,dˈɔa kˈɔɾe ʃkɾˈineɾ dˈike dˈekʰun,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,দয়া করে আমার জন্য টাইপ করে দিন,,daẏā kare āmāra janya ṭāipa kare dina,dˈɔa kˈɔɾe ˌamaɾ ɟˈɔnnɔ ʈˈaip kˈɔɾe dˈin,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,দয়া করে সহজ কথা বলুন,,daẏā kare sahaja kathā baluna,dˈɔa kˈɔɾe ʃˈɔhɔɟ kˈɔtʰa bˈolun,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,আমার ফোনের চার্জ শেষ হয়ে আসছে,,āmāra phonera cārja śeṣa haẏe āsache,ˌamaɾ fˈoneɾ tʃˈaɾɟɔ ʃˈeʃ hˈɔe ˈaʃɔtʃʰˌe,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,পাওয়ার ব্যাংক আছে কি?,,pāoẏāra byāṁka āche ki?,pˈaoˌaɾ bˈæŋkɔ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,অনুবাদ ভুল হতে পারে,,anubāda bhula hate pāre,ˈonubˌad bʰˈul hˈɔte pˈaɾe,,,2,bn-agent-v1;ipa=espeak
+phone-text-power.please-confirm,দয়া করে একবার মিলিয়ে দেখুন,,daẏā kare ekabāra miliẏe dekhuna,dˈɔa kˈɔɾe ˈekɔbˌaɾ mˈiliˌe dˈekʰun,please check it once,,2,bn-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,এখানে ফোন চার্জ দিতে পারি কি?,,ekhāne phona cārja dite pāri ki?,ˈekʰanˌe fˈon tʃˈaɾɟɔ dˈite pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,পর্যটকদের জন্য একটা সিম কার্ড চাই,,paryaṭakadera janya ekaṭā sima kārḍa cāi,pˈɔɾæʈˌɔkɔdˌeɾ ɟˈɔnnɔ ˈækʈa ʃˈim kˈaɾɖɔ tʃˈai,,,2,bn-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,আপনার ওয়াই-ফাই ব্যবহার করতে পারি কি?,,āpanāra oẏāi-phāi byabahāra karate pāri ki?,ˌapɔnˌaɾ ˈoaˌifai bˈæbɔhˌaɾ kˈɔɾɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,কত ডেটা পাওয়া যাবে?,,kata ḍeṭā pāoẏā yābe?,kˈɔto ɖˈeʈa pˈaoˌa dʒˈabe,,,2,bn-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,আমার পাসপোর্ট লাগবে কি?,,āmāra pāsaporṭa lāgabe ki?,ˌamaɾ pˈaʃɔpˌoɾʈɔ lˈaɡɔbˌe ki,"yes, in both countries: a SIM needs a passport and a biometric registration",,2,bn-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,কত দিন চলবে?,,kata dina calabe?,kˈɔto dˈin tʃˈɔlɔbˌe,,,2,bn-agent-v1;ipa=espeak
+sim-data.please-activate-it,দয়া করে চালু করে দিন,,daẏā kare cālu kare dina,dˈɔa kˈɔɾe tʃˈalu kˈɔɾe dˈin,,,2,bn-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,ই-সিম আছে কি?,,i-sima āche ki?,hɾˌɔʃʃoˈiʃim ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,আমার ডেটা কাজ করছে না,,āmāra ḍeṭā kāja karache nā,ˌamaɾ ɖˈeʈa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,,2,bn-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,রেজিস্ট্রেশন লাগবে কি?,,rejisṭreśana lāgabe ki?,ɾˈeɟiʃʈɾˌeʃɔn lˈaɡɔbˌe ki,,,2,bn-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,আমার নেটওয়ার্ক নেই,,āmāra neṭaoẏārka nei,ˌamaɾ nˈeʈɔˌoaɾkˌɔ nˈei,,,2,bn-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,দয়া করে ওয়াই-ফাইয়ের পাসওয়ার্ড লিখে দিন,,daẏā kare oẏāi-phāiẏera pāsaoẏārḍa likhe dina,dˈɔa kˈɔɾe ˈoaˌifaiˌeɾ pˈaʃɔˌoaɾɖˌɔ lˈikʰe dˈin,,,2,bn-agent-v1;ipa=espeak
+sim-data.sim-card,সিম কার্ড,,sima kārḍa,ʃˈim kˈaɾɖɔ,,,2,bn-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,প্লাগ অ্যাডাপ্টার কোথায় পাওয়া যাবে?,,plāga ayāḍāpṭāra kothāẏa pāoẏā yābe?,plˈaɡ ˈæɖapʈˌaɾ kˈotʰaj pˈaoˌa dʒˈabe,,,2,bn-agent-v1;ipa=espeak
+sim-data.mobile-data,মোবাইল ডেটা,,mobāila ḍeṭā,mˈobaˌil ɖˈeʈa,,,2,bn-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,এই সিমে টাকা ভরা যাবে কি?,,ei sime ṭākā bharā yābe ki?,ˌei ʃˈime ʈˈaka bʰˈɔɾa dʒˈabe ki,can money be loaded onto this SIM,the Bengali idiom,2,bn-agent-v1;ipa=espeak
+sim-data.top-up,রিচার্জ,টাকা ভরা,ricārja,ɾˈitʃaɾɟˌɔ,,,2,bn-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,{} এলাকায় নেটওয়ার্ক আছে কি?,,{} elākāẏa neṭaoẏārka āche ki?,{} ˈelakˌaj nˈeʈɔˌoaɾkˌɔ ˈatʃʰe ki,in the {} area,এলাকায় carries the locative so the slot need not,2,bn-agent-v1;ipa=espeak
+sim-data.signal,নেটওয়ার্ক,,neṭaoẏārka,nˈeʈɔˌoaɾkˌɔ,Bengali says 'network' where English says signal,,2,bn-agent-v1;ipa=espeak
+sim-data.esim,ই-সিম,,i-sima,hɾˌɔʃʃoˈiʃim,,,2,bn-agent-v1;ipa=espeak
+sim-data.prepaid,প্রিপেইড,,pripeiḍa,pɾˈipeˌiɖ,,,2,bn-agent-v1;ipa=espeak
+sim-data.roaming,রোমিং,,romiṁ,ɾˈomiŋ,,,2,bn-agent-v1;ipa=espeak
+etiquette.is-this-allowed,এটা করা যাবে কি?,,eṭā karā yābe ki?,ˌeʈa kˈɔɾa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,বকশিশ দিতে হয় কি?,,bakaśiśa dite haẏa ki?,bˈɔkɔʃˌiʃ dˈite hˌɔj ki,বকশিশ is the word in both countries,,2,bn-agent-v1;ipa=espeak
+etiquette.is-service-included,সার্ভিস চার্জ ধরা আছে কি?,,sārbhisa cārja dharā āche ki?,ʃˈaɾbʰiʃ tʃˈaɾɟɔ dʰˈɔɾa ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.may-i-enter,ঢুকতে পারি কি?,,ḍhukate pāri ki?,ɖʰˈukɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.remove-shoes,জুতো খুলতে হবে কি?,,juto khulate habe ki?,ɟˈuto kʰˈulɔtˌe hˈɔbe ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.photo-of-you,আপনার একটা ছবি তুলতে পারি কি?,,āpanāra ekaṭā chabi tulate pāri ki?,ˌapɔnˌaɾ ˈækʈa tʃʰˈobi tˈulɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,এখানে বসতে পারি কি?,,ekhāne basate pāri ki?,ˈekʰanˌe bˈɔʃɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.queue-for,{} লাইন এটাই কি?,,{} lāina eṭāi ki?,{} lˈain ˈeʈaˌi ki,is this the {} queue?,"a bare compound, no suffix",2,bn-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,আমার পোশাক ঠিক আছে কি?,,āmāra pośāka ṭhika āche ki?,ˌamaɾ pˈoʃak ʈʰˈik ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,আমি আপনাকে আঘাত দিতে চাইনি,,āmi āpanāke āghāta dite cāini,ˌami ˌapɔnˌake ˈaɡʰatˌo dˈite tʃˈainˌi,I did not want to hurt you,,2,bn-agent-v1;ipa=espeak
+etiquette.what-is-customary,এখানে কী রীতি?,,ekhāne kī rīti?,ˈekʰanˌe kˈi ɾˈiti,what is the custom here?,,2,bn-agent-v1;ipa=espeak
+etiquette.keep-the-change,ভাংতিটা রেখে দিন,খুচরোটা রেখে দিন,bhāṁtiṭā rekhe dina,bʰˈaŋtiʈˌa ɾˈekʰe dˈin,ভাংতি is Bangladeshi and খুচরো West Bengali,,2,bn-agent-v1;ipa=espeak
+children.cannot-find-my-child,আমার বাচ্চাকে খুঁজে পাচ্ছি না,,āmāra bāccāke khum̐je pācchi nā,ˌamaɾ bˈatʃtʃakˌe kʰˈũɟe pˈatʃtʃʰi nˈa,,,2,bn-agent-v1;ipa=espeak
+children.make-an-announcement,দয়া করে মাইকে ঘোষণা দিন,,daẏā kare māike ghoṣaṇā dina,dˈɔa kˈɔɾe mˈaikˌe ɡʰˈoʃɔnˌa dˈin,please announce on the loudspeaker,,2,bn-agent-v1;ipa=espeak
+children.child-age,আমার বাচ্চার বয়স {} বছর,,āmāra bāccāra baẏasa {} bachara,ˌamaɾ bˈatʃtʃaɾ bˈɔjɔʃ {} bˈɔtʃʰɔɾ,,,2,bn-agent-v1;ipa=espeak
+children.high-chair,বাচ্চাদের উঁচু চেয়ার আছে কি?,,bāccādera um̐cu ceẏāra āche ki?,bˈatʃtʃadˌeɾ ˈũtʃu tʃˈeaɾ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+children.baby-changing-room,শিশুর ন্যাপি বদলানোর জায়গা কোথায়?,,śiśura nyāpi badalānora jāẏagā kothāẏa?,ʃˈiʃuɾ nˈæpi bˈɔdɔlˌanoɾ ɟˈajɔɡˌa kˈotʰaj,,,2,bn-agent-v1;ipa=espeak
+children.childrens-menu,বাচ্চাদের জন্য আলাদা মেনু আছে কি?,,bāccādera janya ālādā menu āche ki?,bˈatʃtʃadˌeɾ ɟˈɔnnɔ ˈaladˌa mˈenu ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+children.suitable-for-children,এটা বাচ্চাদের জন্য ঠিক আছে কি?,,eṭā bāccādera janya ṭhika āche ki?,ˌeʈa bˈatʃtʃadˌeɾ ɟˈɔnnɔ ʈʰˈik ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+children.minimum-age,সর্বনিম্ন বয়স কত?,,sarbanimna baẏasa kata?,ʃˈɔɾbɔnˌimnɔ bˈɔjɔʃ kˈɔto,,,2,bn-agent-v1;ipa=espeak
+children.do-children-pay,বাচ্চাদের টিকিট লাগে কি?,,bāccādera ṭikiṭa lāge ki?,bˈatʃtʃadˌeɾ ʈˈikiʈ lˈaɡe ki,do children need a ticket?,,2,bn-agent-v1;ipa=espeak
+children.crib,বাচ্চার খাট আছে কি?,,bāccāra khāṭa āche ki?,bˈatʃtʃaɾ kʰˈaʈ ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+children.warm-this-bottle,দয়া করে এই ফিডারটা গরম করে দিন,,daẏā kare ei phiḍāraṭā garama kare dina,dˈɔa kˈɔɾe ˌei fˈiɖaɾˌɔʈa ɡˈɔɾɔm kˈɔɾe dˈin,ফিডার is the baby bottle,,2,bn-agent-v1;ipa=espeak
+children.car-seat,আমাদের বাচ্চার জন্য কার সিট দরকার,,āmādera bāccāra janya kāra siṭa darakāra,ˌamadˌeɾ bˈatʃtʃaɾ ɟˈɔnnɔ kˈaɾ ʃˈiʈ dɔɾkˈaɾ,,,2,bn-agent-v1;ipa=espeak
+children.stroller,বাচ্চার গাড়ি,স্ট্রলার,bāccāra gāṛi,bˈatʃtʃaɾ ɡˈaɽi,,,2,bn-agent-v1;ipa=espeak
+children.playground,খেলার জায়গা আছে কি?,,khelāra jāẏagā āche ki?,kʰˈelaɾ ɟˈajɔɡˌa ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+social-basics.politeness-particles,"থাই ভদ্রতা: পুরুষ হলে প্রায় যেকোনো বাক্যের শেষে krap, মহিলা হলে ka জুড়ে দিন। মহিলা প্রশ্ন করলে ka-টা উঁচু সুরে বলেন। এখানের সারিগুলোতে এই কণাটা নেই, তাই নিজে যোগ করে নিন।",,"thāi bhadratā: puruṣa hale prāẏa yekono bākyera śeṣe krap, mahilā hale ka juṛe dina. mahilā praśna karale ka-ṭā um̐cu sure balena. ekhānera sārigulote ei kaṇāṭā nei, tāi nije yoga kare nina.",,,,2,bn-notes-v1
+board-answers.can-you-walk,আপনি কি হাঁটতে পারবেন?,,āpani ki hām̐ṭate pārabena?,ˌapɔnˌi ki hˈãʈɔtˌe pˈaɾɔbˌen,,,2,bn-board-answers-v1;board-answers-v3;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.card-or-cash,কার্ড না নগদ?,,kārḍa nā nagada?,kˈaɾɖɔ nˈa nˈɔɡɔd,,,2,bn-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,সাহায্য আসছে,,sāhāyya āsache,ʃˈahadʒːˌɔ ˈaʃɔtʃʰˌe,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.how-many,কতগুলো লাগবে?,,katagulo lāgabe?,kˈɔtɔɡˌulo lˈaɡɔbˌe,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,আমি অ্যাম্বুলেন্স ডাকছি,,āmi ayāmbulensa ḍākachi,ˌami ˈæmbulˌenʃɔ ɖˈakɔtʃʰˌi,,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,আমি পুলিশ ডাকছি,,āmi puliśa ḍākachi,ˌami pˈuliʃ ɖˈakɔtʃʰˌi,matches the pack's existing police-consulate.i-am-calling-the-police wording,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,আমার কাছে ফোন নেই,,āmāra kāche phona nei,ˌamaɾ kˈatʃʰe fˈon nˈei,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.i-will-find-someone,আমি সাহায্য করার মতো কাউকে খুঁজব,,āmi sāhāyya karāra mato kāuke khum̐jaba,ˌami ʃˈahadʒːˌɔ kˈɔɾaɾ mˈɔto kˈaukˌe kʰˈũɟɔb,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.i-will-show-you,আমি রাস্তা দেখিয়ে দিচ্ছি,,āmi rāstā dekhiẏe dicchi,ˌami ɾˈasta dˈekʰiˌe dˈitʃtʃʰi,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.i-will-write-it-down,আমি এটা লিখে দিচ্ছি,,āmi eṭā likhe dicchi,ˌami ˌeʈa lˈikʰe dˈitʃtʃʰi,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.it-is-closed,বন্ধ আছে,,bandha āche,bˈɔndʰɔ ˈatʃʰe,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.it-is-over-there,ওখানে আছে,,okhāne āche,ˈokʰanˌe ˈatʃʰe,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.none-of-these,এর মধ্যে আমার কথাটা নেই,,era madhye āmāra kathāṭā nei,ˌeɾ mˌɔdʰːe ˌamaɾ kˈɔtʰaʈˌa nˈei,my point is not among these,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.not-possible,এটা সম্ভব নয়,,eṭā sambhaba naẏa,ˌeʈa ʃˈɔmbʰɔb nˈɔj,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.please-wait,এক মিনিট,,eka miniṭa,ˈek mˈiniʈ,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.say-it-again,আরেকবার?,,ārekabāra?,ˈaɾekˌɔbaɾ,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.stay-here,এখানে থাকাই ভালো,,ekhāne thākāi bhālo,ˈekʰanˌe tʰˈakaˌi bʰˈalo,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.the-hospital-is-close,হাসপাতাল কাছেই,,hāsapātāla kāchei,hˈaʃɔpˌatal kˈatʃʰeˌi,,,2,bn-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"অপেক্ষা করতে হবে না, এখন ভিতরে যান",,"apekṣā karate habe nā, ekhana bhitare yāna","ˈɔpekʰkʰˌa kˈɔɾɔtˌe hˈɔbe nˈa, ˈekʰɔn bʰˈitɔɾˌe dʒˈan",,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.we-do-not-have-it,আমাদের কাছে এটা নেই,,āmādera kāche eṭā nei,ˌamadˌeɾ kˈatʃʰe ˌeʈa nˈei,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+board-answers.what-is-your-name,নাম কী?,,nāma kī?,nˈam kˈi,,,2,bn-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,কোথায় ব্যথা করছে?,,kothāẏa byathā karache?,kˈotʰaj bˈætʰa kˈɔɾɔtʃʰˌe,,,2,bn-board-answers-v1;fix=ISO-15919 e and o for এ ও and ẏ for য় (the pack's own romaniser tmp/lang/bn/iso15919.py);row-corrections-v1;ipa=espeak
+kind-words.you-are-very-kind,আপনি খুব দয়ালু।,,āpani khuba daẏālu.,ˌapɔnˌi kʰˈub dˈɔalˌu,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.thank-you-for-your-help,আপনার সাহায্যের জন্য ধন্যবাদ।,,āpanāra sāhāyyera janya dhanyabāda.,ˌapɔnˌaɾ ʃˈahadʒdʒˌeɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.this-is-delicious,এটা খুব সুস্বাদু।,,eṭā khuba susbādu.,ˌeʈa kʰˈub ʃˈuʃbadˌu,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.it-is-beautiful-here,এখানে খুব সুন্দর।,,ekhāne khuba sundara.,ˈekʰanˌe kʰˈub ʃˈundɔɾ,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.i-like-it-very-much,আমার এটা খুব ভালো লেগেছে।,,āmāra eṭā khuba bhālo legeche.,ˌamaɾ ˌeʈa kʰˈub bʰˈalo lˈeɡetʃʰˌe,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.i-had-a-wonderful-time,আমি এখানে অনেক ভালো সময় কাটিয়েছি।,,āmi ekhāne aneka bhālo samaẏa kāṭiẏechi.,ˌami ˈekʰanˌe ˈɔnek bʰˈalo ʃˈɔmɔj kˈaʈiˌetʃʰi,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.thank-you-for-everything,সব কিছুর জন্য ধন্যবাদ।,,saba kichura janya dhanyabāda.,ʃˈɔb kˈitʃʰuɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+kind-words.thank-you-for-your-hospitality,আপনার আতিথেয়তার জন্য ধন্যবাদ।,,āpanāra ātitheẏatāra janya dhanyabāda.,ˌapɔnˌaɾ ˈatitʰˌejɔtˌaɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,,2,kind-words-v1;fix=ISO-15919 by the pack's romaniser tmp/lang/bn/iso15919.py (e and o for এ ও and ẏ for য় and the inherent a written in khuba and janya and the danda as . as the pack's notes write it);row-corrections-v2;ipa=espeak
+board-answers.my-name-is-blank,আমার নাম {},,āmāra nāma {},ˌamaɾ nˈam {},,,2,in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"মাফ করবেন, এটা বলতে চাই না",,"māpha karabena, eṭā balate cāi nā","mˈaf kˈɔɾɔbˌen, ˌeʈa bˈɔlɔtˌe tʃˈai nˈa","excuse me, I do not want to say this",,2,src=Samsad-Bengali-English মাপ p.860 (মাপ করা to pardon / to excuse);src=Samsad-Bengali-English চাওয়া p.352 (to want);in-pack-neighbour=social-basics.sorry;answers-audit-v1;ipa=espeak
+board-answers.what-happened,কী হয়েছে?,,kī haẏeche?,kˈi hˈɔetʃʰˌe,what has happened?,,2,src=Samsad-Bengali-English কী p.236;src=Samsad-Bengali-English হওয়া p.1044 (to happen / to occur);in-pack-frame=pharmacy-symptoms.i-have-a-fever;answers-audit-v1;ipa=espeak
+board-answers.understood,"আচ্ছা, বুঝেছি",,"ācchā, bujhechi","ˈatʃtʃʰa, bˈuɟʰetʃʰˌi","all right, I have understood",,2,src=Samsad-Bengali-English আচ্ছা p.103 (well / yes / fine);src=Samsad-Bengali-English বোঝা p.792 (to understand);rule=bengali-verbs-carry-no-gender;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,একটু দেখে জানাচ্ছি,,ekaṭu dekhe jānācchi,ˈekɔʈˌu dˈekʰe ɟˈanatʃtʃʰˌi,I will just look and let [you] know,,2,src=Samsad-Bengali-English দেখা p.515 (to examine / to inspect / to search);src=Samsad-Bengali-English জানা p.399 (~নো to inform);in-pack-frame=board-answers.i-will-write-it-down;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"হ্যাঁ, আছে",,"hyām̐, āche","hˈæ, ˈatʃʰe","yes, there is",,2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,জায়গা নেই,,jāẏagā nei,ɟˈajɔɡˌa nˈei,there is no room,,2,src=Samsad-Bengali-English জায়গা p.400 (room / accommodation: এখানে তার জায়গা নেই);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,এটা ফ্রি,,eṭā phri,ˌeʈa fɾˈi,,,2,src=Samsad-Bengali-English ফ্রি p.712 (free: ফ্রিতে পাওয়া to obtain free of cost);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,দুটোই চলবে,,duṭoi calabe,dˈuʈoˌi tʃˈɔlɔbˌe,both will do,,2,src=Samsad-Bengali-English দুই p.503 (both);src=Samsad-Bengali-English চলা p.351 (to be accepted / to be allowed);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,শুধু ক্রেতাদের জন্য,,śudhu kretādera janya,ʃˈudʰu kɾˈetadˌeɾ ɟˈɔnnɔ,,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=Samsad-Bengali-English ক্রেতা p.264 (a buyer / a customer);answers-audit-v1;ipa=espeak
+board-answers.where-to,কোথায় যাবেন?,,kothāẏa yābena?,kˈotʰaj dʒˈaben,where will [you] go?,,2,in-pack-neighbour=hitchhiking.where-are-you-going;rule=bengali-verbs-carry-no-gender;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,পরের স্টপে,,parera sṭape,pˈɔɾeɾ ʃʈˈɔpe,,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=Samsad-Bengali-English পরে p.627 (পরের দিন the day after);answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,ভাড়া গাড়িতেই দিতে হবে,,bhāṛā gāṛitei dite habe,bʰˈaɽa ɡˈaɽitˌei dˈite hˈɔbe,the fare is to be paid in the vehicle itself,,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=Samsad-Bengali-English ভাড়া p.811 (charges / fare);src=Samsad-Bengali-English গাড়ি p.306 (a vehicle);answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,ডাক্তার দেখানোই ভালো,,ḍāktāra dekhānoi bhālo,ɖˈaktaɾ dˈekʰanˌoi bʰˈalo,showing [it] to a doctor is best,,2,in-pack-frame=board-answers.stay-here;src=Samsad-Bengali-English দেখা p.515 (দেখানো to cause to examine / to cause to treat);answers-audit-v1;ipa=espeak
+board-answers.prescription-only,প্রেসক্রিপশন লাগবে,,presakripaśana lāgabe,pɾˈeʃɔkɾˌipɔʃˌɔn lˈaɡɔbˌe,a prescription will be needed,,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=Samsad-Bengali-English প্রেসক্রিপশন p.698;src=Samsad-Bengali-English লাগা p.926 (to require / to need);answers-audit-v1;ipa=espeak
+board-answers.before-food,খাবার আগে,,khābāra āge,kʰˈabaɾ ˈaɡe,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Samsad-Bengali-English খাবার p.280 (food / meal);src=Samsad-Bengali-English আগে p.102;answers-audit-v1;ipa=espeak
+board-answers.after-food,খাবার পরে,,khābāra pare,kʰˈabaɾ pˈɔɾe,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Samsad-Bengali-English খাবার p.280 (food / meal);src=Samsad-Bengali-English পরে p.627;answers-audit-v1;ipa=espeak

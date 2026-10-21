@@ -1,35 +1,35 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Tanpa daging,,tˈanpa dˈaɡiŋ,,2,id-agent-v1;ipa=espeak
-dietary-needs.no-eggs,Tanpa telur,,tˈanpa təlˈur,,2,id-agent-v1;ipa=espeak
-dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,tˈidak pˈɛdas,,2,id-agent-v1;ipa=espeak
-dietary-needs.less-spicy,Jangan terlalu pedas,,dʒˈaŋan tərlˈalu pˈɛdas,,2,id-agent-v1;ipa=espeak
-dietary-needs.no-peanuts,Tanpa kacang tanah,,tˈanpa kˈatʃaŋ tˈanah,kacang alone = any bean or nut,2,id-agent-v1;ipa=espeak
-dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,tˈanpa kˈatʃaŋkatʃaŋan,,2,id-agent-v1;ipa=espeak
-dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,tˈanpa makˈanan lˈaʊt,,2,id-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Saya vegetarian,"Tanpa daging, ayam, ikan",sˈaja vˌɛɡətarˈian,"I am vegetarian -- vegetarian already means no meat, poultry or fish; murni ('pure'), the old row's last word, read as the stricter diet of Saya vegan beside it. text_alt spells the three out",2,"id-agent-v1;fix=KBBI vegetarian (orang yang ... tidak makan daging, tetapi makan sayuran dan hasil tumbuhan), read on kbbi.web.id;fix=id.wikipedia Vegetarianisme rev 30016165 (menolak ... makanan yang berasal dari hewan seperti daging, unggas, dan ikan ... terkadang masih mungkin mengonsumsi ... telur, keju ... susu);fix=KBBI murni 1 (tidak bercampur dengan unsur lain; tulen);rule=distinct-concepts-distinct-text (beside dietary-needs.i-am-vegan);row-corrections-v7;ipa=espeak"
-dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈaja vˈɛɡan,,2,id-agent-v1;ipa=espeak
-dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈaja tˈidak mˈakan {},,2,id-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Saya alergi {},,sˈaja alˈɛrɡi {},,2,id-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-fish-stock,Ada kaldu ikan?,,ˈada kˈaldu ˈikan,"narrowed to the liquid half: the paste moved to dietary-needs.does-it-contain-dried-fish, so the two do not print as one card's two rows saying the same thing",2,id-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,kuˈahɲa pˈakaɪ kˈaldu bˈabi,,2,id-pork-stock-v1;ipa=espeak
-dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},sˈaja alˈɛrɡi bˈɛrat {},,2,id-agent-v1;ipa=espeak
-food-ordering.table-for-two,Meja untuk dua orang,,mˈɛdʒa ˌuntuk dˈua ˈoraŋ,,2,id-agent-v1;ipa=espeak
-food-ordering.is-a-table-available,Ada meja kosong?,,ˈada mˈɛdʒa kˈosoŋ,,2,id-agent-v1;ipa=espeak
-food-ordering.menu-please,Minta menunya,,mˈinta mənˈuɲa,,2,id-agent-v1;ipa=espeak
-food-ordering.i-want-this,Saya mau ini,,sˈaja mˈaʊ ˈini,,2,id-agent-v1;ipa=espeak
-food-ordering.do-you-have-drinking-water,Ada air putih?,,ˈada ˈair pˈutih,air putih = plain drinking water,2,id-agent-v1;ipa=espeak
-food-ordering.to-go-please,"Dibungkus, ya",,"dibˈuŋkus, jˈa",,2,id-agent-v1;ipa=espeak
-food-ordering.check-please,Minta bonnya,Minta struknya,mˈinta bˈonɲa,,2,id-agent-v1;ipa=espeak
-food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,ˈini pˈakaɪ {},"try: babi, angciu, terasi",2,id-agent-v1;ipa=espeak
-food-ordering.is-this-vegetarian,Ini vegetarian?,,ˈini vˌɛɡətarˈian,,2,id-agent-v1;ipa=espeak
-food-ordering.what-do-you-recommend,Apa yang enak di sini?,,ˈapa jaŋ ˈɛnak di sˈini,,2,id-agent-v1;ipa=espeak
-food-ordering.water-please,Minta air putih,,mˈinta ˈair pˈutih,,2,id-agent-v1;ipa=espeak
-food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,"ˈini pˈakaɪ dˈaɡiŋ, ˈikan, ˌataʊ tərˈasi",,2,id-agent-v1;ipa=espeak
-dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpa bˈabi,lemak babi = lard,2,id-gaps-v1;ipa=espeak
-dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,ˈini hˈalal,logo: BPJPH (was MUI),2,id-gaps-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲa pˈakaɪ lˈɛmak bˈabi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
-dietary-needs.no-sesame,Tanpa wijen,Tanpa wijen dan minyak wijen,tˈanpa wˈidʒən,,2,Indonesian Wikipedia Wijen; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
-dietary-needs.is-this-kosher,Ini kosher?,Ada sertifikat kosher?,ˈini kˈoshər,,2,OU Kosher edisi Bahasa Indonesia (oukosher.org/id); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
-dietary-needs.no-onion-garlic,Tanpa bawang merah dan bawang putih,Tanpa bawang bombai juga,tˈanpa bˈawaŋ mˈɛrah dan bˈawaŋ pˈutih,bawang merah is the shallot an Indonesian kitchen actually uses; bawang bombai is the European onion,2,no-allium-v1;in-pack-frame;id.wikipedia Bawang putih + Bawang merah (Shallot) + Bawang bombai;ipa=espeak
-dietary-needs.does-it-contain-dried-fish,Ada terasi atau ikan asin?,,ˈada tərˈasi ˌataʊ ˈikan ˈasin,"terasi = fermented shrimp paste, ikan asin = salted dried fish",2,hidden-fish-v1;in-pack-frame;id.wikipedia Terasi + Ikan asin;ipa=espeak
-food-ordering.does-it-cost-more-at-a-table,Lebih mahal kalau di meja?,,lˈɛbih mˈahal kˈalaʊ di mˈɛdʒa,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+dietary-needs.no-meat,Tanpa daging,,tˈanpa dˈaɡiŋ,,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Tanpa telur,,tˈanpa təlˈur,,,2,id-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,tˈidak pˈɛdas,,,2,id-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Jangan terlalu pedas,,dʒˈaŋan tərlˈalu pˈɛdas,,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Tanpa kacang tanah,,tˈanpa kˈatʃaŋ tˈanah,kacang alone = any bean or nut,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,tˈanpa kˈatʃaŋkatʃaŋan,,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,tˈanpa makˈanan lˈaʊt,,,2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Saya vegetarian,"Tanpa daging, ayam, ikan",sˈaja vˌɛɡətarˈian,I am vegetarian,"vegetarian already means no meat, poultry or fish; murni ('pure'), the old row's last word, read as the stricter diet of Saya vegan beside it. text_alt spells the three out",2,"id-agent-v1;fix=KBBI vegetarian (orang yang ... tidak makan daging, tetapi makan sayuran dan hasil tumbuhan), read on kbbi.web.id;fix=id.wikipedia Vegetarianisme rev 30016165 (menolak ... makanan yang berasal dari hewan seperti daging, unggas, dan ikan ... terkadang masih mungkin mengonsumsi ... telur, keju ... susu);fix=KBBI murni 1 (tidak bercampur dengan unsur lain; tulen);rule=distinct-concepts-distinct-text (beside dietary-needs.i-am-vegan);row-corrections-v7;ipa=espeak"
+dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈaja vˈɛɡan,,,2,id-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈaja tˈidak mˈakan {},,,2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Saya alergi {},,sˈaja alˈɛrɡi {},,,2,id-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Ada kaldu ikan?,,ˈada kˈaldu ˈikan,"narrowed to the liquid half: the paste moved to dietary-needs.does-it-contain-dried-fish, so the two do not print as one card's two rows saying the same thing",,2,id-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,kuˈahɲa pˈakaɪ kˈaldu bˈabi,,,2,id-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},sˈaja alˈɛrɡi bˈɛrat {},,,2,id-agent-v1;ipa=espeak
+food-ordering.table-for-two,Meja untuk dua orang,,mˈɛdʒa ˌuntuk dˈua ˈoraŋ,,,2,id-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Ada meja kosong?,,ˈada mˈɛdʒa kˈosoŋ,,,2,id-agent-v1;ipa=espeak
+food-ordering.menu-please,Minta menunya,,mˈinta mənˈuɲa,,,2,id-agent-v1;ipa=espeak
+food-ordering.i-want-this,Saya mau ini,,sˈaja mˈaʊ ˈini,,,2,id-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Ada air putih?,,ˈada ˈair pˈutih,air putih = plain drinking water,,2,id-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Dibungkus, ya",,"dibˈuŋkus, jˈa",,,2,id-agent-v1;ipa=espeak
+food-ordering.check-please,Minta bonnya,Minta struknya,mˈinta bˈonɲa,,,2,id-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,ˈini pˈakaɪ {},"try: babi, angciu, terasi",,2,id-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Ini vegetarian?,,ˈini vˌɛɡətarˈian,,,2,id-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Apa yang enak di sini?,,ˈapa jaŋ ˈɛnak di sˈini,,,2,id-agent-v1;ipa=espeak
+food-ordering.water-please,Minta air putih,,mˈinta ˈair pˈutih,,,2,id-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,"ˈini pˈakaɪ dˈaɡiŋ, ˈikan, ˌataʊ tərˈasi",,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpa bˈabi,lemak babi = lard,,2,id-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,ˈini hˈalal,logo: BPJPH (was MUI),,2,id-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲa pˈakaɪ lˈɛmak bˈabi,,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Tanpa wijen,Tanpa wijen dan minyak wijen,tˈanpa wˈidʒən,,,2,Indonesian Wikipedia Wijen; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.is-this-kosher,Ini kosher?,Ada sertifikat kosher?,ˈini kˈoshər,,,2,OU Kosher edisi Bahasa Indonesia (oukosher.org/id); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,Tanpa bawang merah dan bawang putih,Tanpa bawang bombai juga,tˈanpa bˈawaŋ mˈɛrah dan bˈawaŋ pˈutih,bawang merah is the shallot an Indonesian kitchen actually uses; bawang bombai is the European onion,,2,no-allium-v1;in-pack-frame;id.wikipedia Bawang putih + Bawang merah (Shallot) + Bawang bombai;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Ada terasi atau ikan asin?,,ˈada tərˈasi ˌataʊ ˈikan ˈasin,"terasi = fermented shrimp paste, ikan asin = salted dried fish",,2,hidden-fish-v1;in-pack-frame;id.wikipedia Terasi + Ikan asin;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Lebih mahal kalau di meja?,,lˈɛbih mˈahal kˈalaʊ di mˈɛdʒa,,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

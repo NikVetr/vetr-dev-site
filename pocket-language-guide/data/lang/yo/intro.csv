@@ -1,31 +1,31 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Orúkọ mi ni {},,oru˥kɔ mi ni {},,2,yo-agent-v1;ipa=yo-g2p
-introductions.nice-to-meet-you,Inú mi dùn láti pàdé ọ,,inu˥ mi dũ˩ la˥ti kpa˩de˥ ɔ,,2,yo-agent-v1;ipa=yo-g2p
-introductions.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,"what is your name? -- yín, the honorific your, as board-answers.what-is-your-name asks it",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=BYO Luke 10:20 (a kọ̀wé orúkọ yín ní ọ̀run) for the 2pl possessive yín, and Mark 5:9 (Kí ni orúkọ rẹ?) for the singular;in-pack-frame=board-answers.what-is-your-name (Kí ni orúkọ yín?);was=Kí ni orúkọ rẹ? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-possessive-yin;row-corrections-v12;ipa=yo-g2p"
-introductions.we-are-traveling-together,A ń rin ìrìn-àjò papọ̀,,a n̩˥ rĩ i˩rĩ˩a˩dʒo˩ kpakpɔ˩,,2,yo-agent-v1;ipa=yo-g2p
-introductions.this-is-my-friend,Èyí ni ọ̀rẹ́ mi,,e˩ji˥ ni ɔ˩rɛ˥ mi,,2,yo-agent-v1;ipa=yo-g2p
-introductions.i-am-from,Mo wá láti {},,mo wa˥ la˥ti {},,2,yo-agent-v1;ipa=yo-g2p
-introductions.where-are-you-from,Níbo ni ẹ ti wá?,,ni˥bo ni ɛ ti wa˥,,2,yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (2pl subject ẹ -- object yín -- 2sg o -- ọ) and en.wikipedia Yoruba language rev 1379362191 (the plural of respect) -- the twelfth pass's sources;fix=Bíbélì Mímọ́ Yorùbá Òde Òní (BYO) Genesis 42:7 (Ó béèrè pé -- Níbo ni ẹ ti wá?);was=Níbo ni o ti wá? -- ni o ti wá (2sg subject);rule=honorific-subject-e;register=no familiar row (outside the register scope);row-corrections-v13;ipa=yo-g2p
-introductions.how-are-you,Báwo ni?,,ba˥wo ni,,2,yo-agent-v1;ipa=yo-g2p
-introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́ ni mi,,arĩ˩rĩ˩a˩dʒo˩ afɛ˥ ni mi,,2,yo-agent-v1;ipa=yo-g2p
-introductions.this-is-my-husband-wife,Èyí ni ọkọ mi / aya mi,,e˩ji˥ ni ɔkɔ mi / aja mi,husband-my / wife-my,2,yo-agent-v1;ipa=yo-g2p
-introductions.this-is-my-daughter-son,Èyí ni ọmọbìnrin mi / ọmọkùnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi / ɔmɔkũ˩rĩ mi,daughter-my / son-my,2,yo-agent-v1;ipa=yo-g2p
-introductions.i-am-traveling-alone,Mo ń rin ìrìn-àjò nìkan,,mo n̩˥ rĩ i˩rĩ˩a˩dʒo˩ ni˩kã,,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-husband,Èyí ni ọkọ mi,,e˩ji˥ ni ɔkɔ mi,husband-my,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
-family-intros.this-is-my-wife,Èyí ni aya mi,,e˩ji˥ ni aja mi,wife-my,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
-family-intros.this-is-my-son,Èyí ni ọmọkùnrin mi,,e˩ji˥ ni ɔmɔkũ˩rĩ mi,son-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
-family-intros.this-is-my-daughter,Èyí ni ọmọbìnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi,daughter-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
-about-me.i-am-a-student,Akẹ́kọ̀ọ́ ni mi,,akɛ˥kɔ˩ɔ˥ ni mi,matches introductions.i-am-a-tourist's X ni mi construction,2,yo-agent-v1;ipa=yo-g2p
-about-me.i-am-retired,Mo ti fẹ̀yìntì,,mo ti fɛ˩jĩ˩ti˩,"fẹ̀yìntì = to retire; no gender marking, Yoruba has none",2,yo-agent-v1;ipa=yo-g2p
-about-me.i-am-a-teacher,Olùkọ́ ni mi,,olu˩kɔ˥ ni mi,,2,yo-agent-v1;ipa=yo-g2p
-about-me.i-am-a-doctor,Dókítà ni mi,,do˥ki˥ta˩ ni mi,,2,yo-agent-v1;ipa=yo-g2p
-about-me.i-am-a-nurse,Nọ́ọ̀sì ni mi,,nɔ˥ɔ˩si˩ ni mi,loanword; no native word distinguishes the modern nursing profession,2,yo-agent-v1;ipa=yo-g2p
-about-me.i-am-an-engineer,Ẹlẹ́rọ̀ ni mi,,ɛlɛ˥rɔ˩ ni mi,"ẹlẹ́- agentive + ẹ̀rọ̀ machine, the same word-formation as olùkọ́/oníṣòwò",2,yo-agent-v1;ipa=yo-g2p
-about-me.i-work-in-an-office,Mo ń ṣiṣẹ́ ní ọ́fíìsì,,mo n̩˥ ʃiʃɛ˥ ni˥ ɔ˥fi˥i˩si˩,,2,yo-agent-v1;ipa=yo-g2p
-about-me.i-have-my-own-business,Mo ni òwò tèmi,,mo ni o˩wo˩ te˩mi,,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-mother,Èyí ni ìyá mi,,e˩ji˥ ni i˩ja˥ mi,,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-father,Èyí ni bàbá mi,,e˩ji˥ ni ba˩ba˥ mi,,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-brother,Èyí ni arákùnrin mi,,e˩ji˥ ni ara˥kũ˩rĩ mi,arákùnrin/arábìnrin name the sibling's sex directly; Yoruba's other kinship set (ẹ̀gbọ́n/àbúrò) sorts by relative age instead and has no age-neutral brother/sister,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-sister,Èyí ni arábìnrin mi,,e˩ji˥ ni ara˥bĩ˩rĩ mi,see this-is-my-brother,2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-partner,Èyí ni olùfẹ́ mi,,e˩ji˥ ni olu˩fɛ˥ mi,"olùfẹ́ = beloved/sweetheart, the neutral word for a romantic partner, not a business partner (alábàáṣiṣẹ́owó); Yoruba has no grammatical gender so one form covers either partner",2,yo-agent-v1;ipa=yo-g2p
-family-intros.this-is-my-colleague,Èyí ni alábàáṣiṣẹ́ mi,,e˩ji˥ ni ala˥ba˩a˥ʃiʃɛ˥ mi,one who works together with me,2,yo-agent-v1;ipa=yo-g2p
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+introductions.my-name-is,Orúkọ mi ni {},,oru˥kɔ mi ni {},,,2,yo-agent-v1;ipa=yo-g2p
+introductions.nice-to-meet-you,Inú mi dùn láti pàdé ọ,,inu˥ mi dũ˩ la˥ti kpa˩de˥ ɔ,,,2,yo-agent-v1;ipa=yo-g2p
+introductions.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,what is your name?,"yín, the honorific your, as board-answers.what-is-your-name asks it",2,"yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (subject 2sg o, 2pl ẹ; object 2sg ọ / ẹ, 2pl yín) and ẹ rev 89162697 (you, second-person plural or honorific personal pronoun);fix=BYO Luke 10:20 (a kọ̀wé orúkọ yín ní ọ̀run) for the 2pl possessive yín, and Mark 5:9 (Kí ni orúkọ rẹ?) for the singular;in-pack-frame=board-answers.what-is-your-name (Kí ni orúkọ yín?);was=Kí ni orúkọ rẹ? (the non-honorific o / rẹ, against the pack's polite register; now its register=familiar row);rule=honorific-possessive-yin;row-corrections-v12;ipa=yo-g2p"
+introductions.we-are-traveling-together,A ń rin ìrìn-àjò papọ̀,,a n̩˥ rĩ i˩rĩ˩a˩dʒo˩ kpakpɔ˩,,,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-friend,Èyí ni ọ̀rẹ́ mi,,e˩ji˥ ni ɔ˩rɛ˥ mi,,,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-from,Mo wá láti {},,mo wa˥ la˥ti {},,,2,yo-agent-v1;ipa=yo-g2p
+introductions.where-are-you-from,Níbo ni ẹ ti wá?,,ni˥bo ni ɛ ti wa˥,,,2,yo-agent-v1;fix=en.wiktionary Template:yo-personal pronouns rev 88398883 (2pl subject ẹ -- object yín -- 2sg o -- ọ) and en.wikipedia Yoruba language rev 1379362191 (the plural of respect) -- the twelfth pass's sources;fix=Bíbélì Mímọ́ Yorùbá Òde Òní (BYO) Genesis 42:7 (Ó béèrè pé -- Níbo ni ẹ ti wá?);was=Níbo ni o ti wá? -- ni o ti wá (2sg subject);rule=honorific-subject-e;register=no familiar row (outside the register scope);row-corrections-v13;ipa=yo-g2p
+introductions.how-are-you,Báwo ni?,,ba˥wo ni,,,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́ ni mi,,arĩ˩rĩ˩a˩dʒo˩ afɛ˥ ni mi,,,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-husband-wife,Èyí ni ọkọ mi / aya mi,,e˩ji˥ ni ɔkɔ mi / aja mi,husband-my / wife-my,,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-daughter-son,Èyí ni ọmọbìnrin mi / ọmọkùnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi / ɔmɔkũ˩rĩ mi,daughter-my / son-my,,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-traveling-alone,Mo ń rin ìrìn-àjò nìkan,,mo n̩˥ rĩ i˩rĩ˩a˩dʒo˩ ni˩kã,,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-husband,Èyí ni ọkọ mi,,e˩ji˥ ni ɔkɔ mi,husband-my,,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
+family-intros.this-is-my-wife,Èyí ni aya mi,,e˩ji˥ ni aja mi,wife-my,,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
+family-intros.this-is-my-son,Èyí ni ọmọkùnrin mi,,e˩ji˥ ni ɔmɔkũ˩rĩ mi,son-my,,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
+family-intros.this-is-my-daughter,Èyí ni ọmọbìnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi,daughter-my,,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
+about-me.i-am-a-student,Akẹ́kọ̀ọ́ ni mi,,akɛ˥kɔ˩ɔ˥ ni mi,matches introductions.i-am-a-tourist's X ni mi construction,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-retired,Mo ti fẹ̀yìntì,,mo ti fɛ˩jĩ˩ti˩,"fẹ̀yìntì = to retire; no gender marking, Yoruba has none",,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-teacher,Olùkọ́ ni mi,,olu˩kɔ˥ ni mi,,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-doctor,Dókítà ni mi,,do˥ki˥ta˩ ni mi,,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-nurse,Nọ́ọ̀sì ni mi,,nɔ˥ɔ˩si˩ ni mi,loanword; no native word distinguishes the modern nursing profession,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-an-engineer,Ẹlẹ́rọ̀ ni mi,,ɛlɛ˥rɔ˩ ni mi,"ẹlẹ́- agentive + ẹ̀rọ̀ machine, the same word-formation as olùkọ́/oníṣòwò",,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-work-in-an-office,Mo ń ṣiṣẹ́ ní ọ́fíìsì,,mo n̩˥ ʃiʃɛ˥ ni˥ ɔ˥fi˥i˩si˩,,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-have-my-own-business,Mo ni òwò tèmi,,mo ni o˩wo˩ te˩mi,,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-mother,Èyí ni ìyá mi,,e˩ji˥ ni i˩ja˥ mi,,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-father,Èyí ni bàbá mi,,e˩ji˥ ni ba˩ba˥ mi,,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-brother,Èyí ni arákùnrin mi,,e˩ji˥ ni ara˥kũ˩rĩ mi,arákùnrin/arábìnrin name the sibling's sex directly; Yoruba's other kinship set (ẹ̀gbọ́n/àbúrò) sorts by relative age instead and has no age-neutral brother/sister,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-sister,Èyí ni arábìnrin mi,,e˩ji˥ ni ara˥bĩ˩rĩ mi,see this-is-my-brother,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-partner,Èyí ni olùfẹ́ mi,,e˩ji˥ ni olu˩fɛ˥ mi,"olùfẹ́ = beloved/sweetheart, the neutral word for a romantic partner, not a business partner (alábàáṣiṣẹ́owó); Yoruba has no grammatical gender so one form covers either partner",,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-colleague,Èyí ni alábàáṣiṣẹ́ mi,,e˩ji˥ ni ala˥ba˩a˥ʃiʃɛ˥ mi,one who works together with me,,2,yo-agent-v1;ipa=yo-g2p

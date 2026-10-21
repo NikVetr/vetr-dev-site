@@ -1,15 +1,15 @@
-concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
-introductions.my-name-is,{}  ,,{} 'oH pongwIj'e',{} ʔox pʰoŋwɪdʒʔɛʔ,,1,tlh-composed-v1;lex=TKD 6.3;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.what-is-your-name, ,,nuq ponglIj,nuqʰ pʰoŋlɪdʒ,,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.we-are-traveling-together,,,maleng,mɑlɛŋ,we travel,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.this-is-my-friend, ,,jupwI' ghaH,dʒupʰwɪʔ ɣɑx,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.i-am-a-tourist,,,jIleng,dʒɪlɛŋ,I travel -- lengwI' is taken by a grammatical term,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.this-is-my-husband-wife, ,,'IpnalwI' ghaH,ʔɪpʰnɑlwɪʔ ɣɑx,my spouse -- the word is gender-neutral,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.this-is-my-daughter-son, ,,puqwI' ghaH,pʰuqʰwɪʔ ɣɑx,my child -- puqbe' daughter / puqloD son,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.i-am-traveling-alone, ,,nIteb jIleng,nɪtʰɛb dʒɪlɛŋ,I travel alone,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.i-am-from,{} ,,{}Daq jIboghpu',{} ɖɑqʰ dʒɪboɣpʰuʔ,I was born in {} -- Klingon expresses origin as birthplace,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-introductions.where-are-you-from, ,,nuqDaq bIboghpu',nuqʰɖɑqʰ bɪboɣpʰuʔ,where were you born?,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-family-intros.this-is-my-husband, ,,loDnalwI' ghaH,loɖnɑlwɪʔ ɣɑx,"loDnal 'husband' (loD 'male' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-family-intros.this-is-my-wife, ,,be'nalwI' ghaH,bɛʔnɑlwɪʔ ɣɑx,"be'nal 'wife' (be' 'female' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-family-intros.this-is-my-son, ,,puqloDwI' ghaH,pʰuqʰloɖwɪʔ ɣɑx,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-family-intros.this-is-my-daughter, ,,puqbe'wI' ghaH,pʰuqʰbɛʔwɪʔ ɣɑx,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,note,confidence,provenance
+introductions.my-name-is,{}  ,,{} 'oH pongwIj'e',{} ʔox pʰoŋwɪdʒʔɛʔ,,,1,tlh-composed-v1;lex=TKD 6.3;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.what-is-your-name, ,,nuq ponglIj,nuqʰ pʰoŋlɪdʒ,,,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.we-are-traveling-together,,,maleng,mɑlɛŋ,we travel,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.this-is-my-friend, ,,jupwI' ghaH,dʒupʰwɪʔ ɣɑx,,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.i-am-a-tourist,,,jIleng,dʒɪlɛŋ,I travel,lengwI' is taken by a grammatical term,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.this-is-my-husband-wife, ,,'IpnalwI' ghaH,ʔɪpʰnɑlwɪʔ ɣɑx,my spouse,the word is gender-neutral,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.this-is-my-daughter-son, ,,puqwI' ghaH,pʰuqʰwɪʔ ɣɑx,my child,puqbe' daughter / puqloD son,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.i-am-traveling-alone, ,,nIteb jIleng,nɪtʰɛb dʒɪlɛŋ,I travel alone,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.i-am-from,{} ,,{}Daq jIboghpu',{} ɖɑqʰ dʒɪboɣpʰuʔ,I was born in {},Klingon expresses origin as birthplace,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+introductions.where-are-you-from, ,,nuqDaq bIboghpu',nuqʰɖɑqʰ bɪboɣpʰuʔ,where were you born?,,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-husband, ,,loDnalwI' ghaH,loɖnɑlwɪʔ ɣɑx,"loDnal 'husband' (loD 'male' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",,1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-wife, ,,be'nalwI' ghaH,bɛʔnɑlwɪʔ ɣɑx,"be'nal 'wife' (be' 'female' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",,1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-son, ,,puqloDwI' ghaH,pʰuqʰloɖwɪʔ ɣɑx,,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-daughter, ,,puqbe'wI' ghaH,pʰuqʰbɛʔwɪʔ ɣɑx,,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand

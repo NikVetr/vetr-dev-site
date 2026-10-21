@@ -1,148 +1,148 @@
-concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
-social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,the everyday greeting; नमस्कार is the polite row,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.75 नमस्ते word used in greeting -- where its हाय (p.168) is an exclamation of pain and the English hi has no entry in Berntsen Date or Molesworth;rule=register-neutral (the concept is neutral and social-basics.hello-polite is नमस्कार -- the hi ne and gu pairing);row-corrections-v9;ipa=espeak
-social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,2,mr-agent-v1;ipa=espeak
-social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,2,mr-agent-v1;ipa=espeak
-social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,2,mr-agent-v1;ipa=espeak
-social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]' -- the everyday Marathi goodbye,2,"mr-agent-v1;fix=the cell's own back-translation -- kept -- and Berntsen A Basic Marathi-English Dictionary (DSAL) p. 123 येणे (v.i. to come);was=literal lit. 'I'll come [again]' -- the everyday Marathi goodbye -- masculine here and feminine in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine येते serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-social-basics.thank-you,धन्यवाद,,dhanyavāda,dʰˌənjəvˈaːd,,2,mr-agent-v1;ipa=espeak
-social-basics.you-are-welcome,स्वागत आहे,,svāgata āhē,svˈaːɡət ˈaːheː,,2,mr-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,माफ करा,,māpha karā,mˈaːpʰ kˈʌɾaː,,2,mr-agent-v1;ipa=espeak
-social-basics.sorry,सॉरी,,sôrī,sˈɔɾi,"casual, distinct register from माफ करा",2,mr-agent-v1;ipa=espeak
-social-basics.no-problem,काही हरकत नाही,,kāhī harakata nāhī,kˈaːhi hˈʌɾəkˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-social-basics.i-do-not-know,मला माहीत नाही,,malā māhīta nāhī,mˈʌlaː maːhˈiːt nˈaːhi,,2,mr-agent-v1;ipa=espeak
-social-basics.good-night,शुभ रात्री,,śubha rātrī,ʃˈʊbʰ ɾˈaːtɾi,,2,mr-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,ठीक आहे,,ṭhīka āhē,ʈʰˈiːk ˈaːheː,,2,mr-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,मला {target} येत नाही,,malā {target} yēta nāhī,mˈʌlaː {target} jˈeːt nˈaːhi,,2,mr-agent-v1;ipa=espeak
-communication.i-speak-only-a-little-of-this,मला थोडेसे {target} येते,,malā thōḍēsē {target} yētē,mˈʌlaː tʰoːɖˈeːseː {target} jˈeːteː,,2,mr-agent-v1;ipa=espeak
-communication.do-you-speak-english,तुम्हाला {source} येते का?,,tumhālā {source} yētē kā?,tʊmhˈaːlaː {source} jˈeːteː kˈaː,,2,mr-agent-v1;ipa=espeak
-communication.please-speak-more-slowly,जरा हळू बोला,,jarā haḷū bōlā,zˈʌɾaː hˈʌɭuː bˈoːlaː,,2,mr-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,मला ऐकून समजत नाही,,malā aikūna samajata nāhī,mˈʌlaː aɪkˈuːn sˈʌməzˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-communication.i-cannot-read-understand,मला वाचून समजत नाही,,malā vācūna samajata nāhī,mˈʌlaː vaːcˈuːn sˈʌməzˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-communication.please-say-it-again,परत सांगा,,parata sāṁgā,pˈʌɾət sˈãɡaː,,2,mr-agent-v1;ipa=espeak
-communication.please-write-it-down,लिहून दाखवा,,lihūna dākhavā,lɪhˈuːn dˈaːkʰvˌaː,,2,mr-agent-v1;ipa=espeak
-communication.please-wait-a-moment,जरा थांबा,,jarā thāṁbā,zˈʌɾaː tʰˈãbaː,,2,mr-agent-v1;ipa=espeak
-communication.can-you-help-me,तुम्ही मला मदत कराल का?,,tumhī malā madata karāla kā?,tˈʊmhi mˈʌlaː mˈʌdət kəɾˈaːl kˈaː,,2,mr-agent-v1;ipa=espeak
-communication.please-show-me-the-text,मला {target} मध्ये मजकूर दाखवा,,malā {target} madhyē majakūra dākhavā,mˈʌlaː {target} mˈʌdʰjeː mˌəzkˈuːɾ dˈaːkʰvˌaː,,2,mr-agent-v1;ipa=espeak
-communication.i-cannot-make-out-what-you-are-saying,तुम्ही काय बोलताय ते कळत नाही,,tumhī kāya bōlatāya tē kaḷata nāhī,tˈʊmhi kˈaːj bˌoːltˈaːj tˈeː kˈʌɭət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-communication.i-do-not-understand,मला समजत नाही,,malā samajata nāhī,mˈʌlaː sˈʌməzˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-communication.i-cannot-read-it,मला हे वाचता येत नाही,,malā hē vācatā yēta nāhī,mˈʌlaː hˈeː vˈaːctˌaː jˈeːt nˈaːhi,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
-communication.please-write-it-in-roman-letters,हे रोमन लिपीत लिहा,,hē rōmana lipīta lihā,hˈeː ɾˈoːmən lɪpˈiːt lˈɪhaː,,2,mr-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,जरूर,,jarūra,zəɾˈuːɾ,,2,mr-agent-v1;ipa=espeak
-quick-responses.yes-right,हो,,hō,hˈoː,,2,mr-agent-v1;ipa=espeak
-quick-responses.no-not,नाही,,nāhī,nˈaːhi,,2,mr-agent-v1;ipa=espeak
-quick-responses.okay-can,चालेल,,cālēla,caːlˈeːl,,2,mr-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,चालणार नाही,,cālaṇāra nāhī,cˌaːlɳˈaːɾ nˈaːhi,,2,mr-agent-v1;ipa=espeak
-quick-responses.works-okay,चालते,,cālatē,cˈaːltˌeː,,2,mr-agent-v1;ipa=espeak
-quick-responses.does-not-work-no,चालत नाही,,cālata nāhī,cˈaːlət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-quick-responses.can-possible,शक्य आहे,,śakya āhē,ʃˈʌkjə ˈaːheː,,2,mr-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,शक्य नाही,,śakya nāhī,ʃˈʌkjə nˈaːhi,,2,mr-agent-v1;ipa=espeak
-quick-responses.okay-fine,ठीक,,ṭhīka,ʈʰˈiːk,,2,mr-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,नाही चालणार,,nāhī cālaṇāra,nˈaːhi cˌaːlɳˈaːɾ,,2,mr-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,मी फोनवरून भाषांतर करत आहे,,mī phōnavarūna bhāṣāṁtara karata āhē,mˈi pʰˌoːnəvɾˈuːn bʰaːʂˈãtəɾ kˈʌɾət ˈaːheː,,2,mr-agent-v1;ipa=espeak
-phone-translation.please-speak-toward-the-phone,फोनकडे बघून बोला,,phōnakaḍē baghūna bōlā,pʰˈoːnəkɖeː bəɡʰˈuːn bˈoːlaː,,2,mr-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,जागेचे नाव {target} मध्ये लिहा,,jāgēcē nāva {target} madhyē lihā,zaːɡˈeːceː nˈaːv {target} mˈʌdʰjeː lˈɪhaː,,2,mr-agent-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,एका वेळी एकच वाक्य बोला,,ēkā vēḷī ēkaca vākya bōlā,ˈeːkaː vˈeːɭi ˈeːkəc vˈaːkjə bˈoːlaː,,2,mr-agent-v1;ipa=espeak
-phone-translation.please-type-it-and-show-me,टाईप करून दाखवा,,ṭāīpa karūna dākhavā,ʈaːˈiːp kəɾˈuːn dˈaːkʰvˌaː,,2,mr-agent-v1;ipa=espeak
-phone-translation.please-look-at-the-screen,स्क्रीनकडे बघा,,skrīnakaḍē baghā,skɾˈiːnəkɖeː bˈʌɡʰaː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.please-type-it-for-me,माझ्यासाठी टाईप करा,,mājhyāsāṭhī ṭāīpa karā,mˈaːɟʰjaːsˌaːʈʰi ʈaːˈiːp kˈʌɾaː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,सोपे शब्द वापरा,,sōpē śabda vāparā,sˈoːpeː ʃˈʌbd vˈaːpɾˌaː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.my-phone-battery-is-low,माझा फोन डिस्चार्ज होत आहे,,mājhā phōna ḍiscārja hōta āhē,mˈaːɟʰaː pʰˈoːn ɖɪscˈaːrz hˈoːt ˈaːheː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.do-you-have-a-power-bank,पॉवर बँक आहे का?,,pôvara bam̐ka āhē kā?,pˈɔvəɾ bˈʌnk ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,भाषांतर चुकीचे असू शकते,,bhāṣāṁtara cukīcē asū śakatē,bʰaːʂˈãtəɾ cʊkˈiːceː ˈʌsuː ʃˈʌktˌeː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.please-confirm,कृपया खात्री करा,,kr̥payā khātrī karā,kɾˈʊpjˌaː kʰˈaːtɾi kˈʌɾaː,,2,mr-agent-v1;ipa=espeak
-phone-text-power.may-i-charge-my-phone-here,मी इथे फोन चार्ज करू का?,,mī ithē phōna cārja karū kā?,mˈi ˈɪtʰeː pʰˈoːn cˈaːrz kˈʌɾuː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,मला पर्यटकांसाठीचे सिम कार्ड हवे आहे,,malā paryaṭakāṁsāṭhīcē sima kārḍa havē āhē,mˈʌlaː pˌərjəʈkãsaːʈʰˈiːceː sˈɪm kˈaːɾɖ hˈʌveː ˈaːheː,,2,mr-agent-v1;ipa=espeak
-sim-data.may-i-use-your-wifi,मी तुमचा वाय-फाय वापरू का?,,mī tumacā vāya-phāya vāparū kā?,mˈi tˈʊmcˌaː vˈaːjpʰaːj vˈaːpɾˌuː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.how-much-data-is-included,किती डेटा समाविष्ट आहे?,,kitī ḍēṭā samāviṣṭa āhē?,kˈɪti ɖˈeːʈaː sˌəmaːvˈɪʂʈ ˈaːheː,,2,mr-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,तुम्हाला माझा पासपोर्ट हवा आहे का?,,tumhālā mājhā pāsapōrṭa havā āhē kā?,tʊmhˈaːlaː mˈaːɟʰaː pˌaːspˈoːɾʈ hˈʌvaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,हे किती दिवस चालते?,,hē kitī divasa cālatē?,hˈeː kˈɪti dˈɪvəs cˈaːltˌeː,,2,mr-agent-v1;ipa=espeak
-sim-data.please-activate-it,हे ऍक्टिव्हेट करा,,hē êkṭivhēṭa karā,hˈeː ˌɛkʈɪvhˈeːʈ kˈʌɾaː,,2,mr-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,ई-सिम आहे का?,,ī-sima āhē kā?,ˈisɪm ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.my-data-is-not-working,माझा डेटा चालत नाही,,mājhā ḍēṭā cālata nāhī,mˈaːɟʰaː ɖˈeːʈaː cˈaːlət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,याला नोंदणी लागते का?,,yālā nōṁdaṇī lāgatē kā?,jˈaːlaː nˈõdɳˌi lˈaːɡtˌeː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,मला सिग्नल नाही,,malā signala nāhī,mˈʌlaː sˈɪɡnəl nˈaːhi,,2,mr-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,वाय-फायचा पासवर्ड लिहून द्या,,vāya-phāyacā pāsavarḍa lihūna dyā,vˈaːjpʰaːjcˌaː pˌaːsəvˈʌɾɖ lɪhˈuːn djˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.sim-card,सिम कार्ड,,sima kārḍa,sˈɪm kˈaːɾɖ,,2,mr-agent-v1;ipa=espeak
-sim-data.where-can-i-buy-a-plug-adapter,प्लग अडॅप्टर कुठे मिळेल?,,plaga aḍêpṭara kuṭhē miḷēla?,plˈʌɡ ʌɖˈɛpʈəɾ kˈʊʈʰeː mɪɭˈeːl,,2,mr-agent-v1;ipa=espeak
-sim-data.mobile-data,मोबाईल डेटा,,mōbāīla ḍēṭā,mˌoːbaːˈiːl ɖˈeːʈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.can-i-top-up-this-sim,हे सिम टॉप-अप करता येईल का?,,hē sima ṭôpa-apa karatā yēīla kā?,hˈeː sˈɪm ʈˈɔpəʌp kˈʌɾtˌaː jeːˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
-sim-data.top-up,टॉप-अप,,ṭôpa-apa,ʈˈɔpəʌp,,2,mr-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,{} मध्ये नेटवर्क मिळते का?,,{} madhyē nēṭavarka miḷatē kā?,{} mˈʌdʰjeː nˌeːʈəvˈʌɾk mˈɪɭtˌeː kˈaː,,2,mr-agent-v1;ipa=espeak
-sim-data.signal,सिग्नल,,signala,sˈɪɡnəl,,2,mr-agent-v1;ipa=espeak
-sim-data.esim,ई-सिम,,ī-sima,ˈisɪm,,2,mr-agent-v1;ipa=espeak
-sim-data.prepaid,प्रीपेड,,prīpēḍa,pɾipˈeːɖ,,2,mr-agent-v1;ipa=espeak
-sim-data.roaming,रोमिंग,,rōmiṁga,ɾoːmˈĩɡ,,2,mr-agent-v1;ipa=espeak
-etiquette.is-this-allowed,हे करण्याची परवानगी आहे का?,,hē karaṇyācī paravānagī āhē kā?,hˈeː kˌəɾɳjˈaːci pˌəɾvˈaːnɡˌi ˈaːheː kˈaː,deliberately general,2,mr-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,इथे टिप देण्याची पद्धत आहे का?,,ithē ṭipa dēṇyācī paddhata āhē kā?,ˈɪtʰeː ʈˈɪp dˈeːɳjaːcˌi pˈʌdʰːət ˈaːheː kˈaː,neutral yes/no,2,mr-agent-v1;ipa=espeak
-etiquette.is-service-included,सेवा शुल्क समाविष्ट आहे का?,,sēvā śulka samāviṣṭa āhē kā?,sˈeːvaː ʃˈʊlk sˌəmaːvˈɪʂʈ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.may-i-enter,मी आत येऊ का?,,mī āta yēū kā?,mˈi ˈaːt jˈeːu kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.remove-shoes,मी बूट काढू का?,,mī būṭa kāḍhū kā?,mˈi bˈuːʈ kˈaːɖʰuː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.photo-of-you,मी तुमचा फोटो काढू का?,,mī tumacā phōṭō kāḍhū kā?,mˈi tˈʊmcˌaː pʰˈoːʈoː kˈaːɖʰuː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.may-i-sit-here,मी इथे बसू का?,,mī ithē basū kā?,mˈi ˈɪtʰeː bˈʌsuː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.queue-for,ही {} साठीची रांग आहे का?,,hī {} sāṭhīcī rāṁga āhē kā?,hˈi {} saːʈʰˈiːci ɾˈãɡ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,माझा पेहराव योग्य आहे का?,,mājhā pēharāva yōgya āhē kā?,mˈaːɟʰaː pˌeːhəɾˈaːv jˈoːɡjə ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,"माझा तसा हेतू नव्हता, माफ करा",,"mājhā tasā hētū navhatā, māpha karā","mˈaːɟʰaː tˈʌsaː hˈeːtuː nˈʌvhətˌaː, mˈaːpʰ kˈʌɾaː","invariant, no gender",2,mr-agent-v1;ipa=espeak
-etiquette.what-is-customary,इथली पद्धत काय आहे?,,ithalī paddhata kāya āhē?,ˈɪtʰlˌi pˈʌdʰːət kˈaːj ˈaːheː,,2,mr-agent-v1;ipa=espeak
-etiquette.keep-the-change,उरलेले पैसे ठेवा,,uralēlē paisē ṭhēvā,ˌʊɾlˈeːleː pˈaɪseː ʈʰˈeːvaː,,2,mr-agent-v1;ipa=espeak
-children.cannot-find-my-child,माझे मूल सापडत नाही,,mājhē mūla sāpaḍata nāhī,mˈaːɟʰeː mˈuːl sˈaːpəɖˌət nˈaːhi,SAFETY-CRITICAL wording; flagged for fluent-speaker review,2,mr-agent-v1;ipa=espeak
-children.make-an-announcement,कृपया जाहीर सूचना द्या,,kr̥payā jāhīra sūcanā dyā,kɾˈʊpjˌaː zaːhˈiːɾ sˈuːcnˌaː djˈaː,,2,mr-agent-v1;ipa=espeak
-children.child-age,माझ्या मुलाचे वय: {},,mājhyā mulācē vaya: {},mˈaːɟʰjaː mʊlˈaːceː vˈʌɛj {},my child's age: {},2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 135 वय (n. age);fix=mr.wikipedia महाराष्ट्रातील शिक्षण व्यवस्था rev 2546612 (पहिल्या वर्गात जाणाऱ्या मुलाचे वय सहा असले पाहिजे);was=माझे मूल {} वर्षांचे आहे (mājhē mūla {} varṣāṁcē āhē: the oblique plural -- wrong for one: एका वर्षाचे);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames औषधाची ऍलर्जी: {} and रात्रींची संख्या: {});row-corrections-v14;ipa=espeak
-children.high-chair,लहान मुलांची खुर्ची आहे का?,,lahāna mulāṁcī khurcī āhē kā?,ləhˈaːn mʊlˈãci kʰˈʊɾci ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-children.baby-changing-room,बाळाचे कपडे बदलण्याची खोली कुठे आहे?,,bāḷācē kapaḍē badalaṇyācī khōlī kuṭhē āhē?,baːɭˈaːceː kˈʌpɖˌeː bˌədəlɳjˈaːci kʰˈoːli kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
-children.childrens-menu,मुलांसाठी मेनू आहे का?,,mulāṁsāṭhī mēnū āhē kā?,mˌʊlãsˈaːʈʰi mˈeːnuː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-children.suitable-for-children,हे मुलांसाठी योग्य आहे का?,,hē mulāṁsāṭhī yōgya āhē kā?,hˈeː mˌʊlãsˈaːʈʰi jˈoːɡjə ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-children.minimum-age,किमान वय किती आहे?,,kimāna vaya kitī āhē?,kɪmˈaːn vˈʌɛj kˈɪti ˈaːheː,,2,mr-agent-v1;ipa=espeak
-children.do-children-pay,मुलांना पैसे भरावे लागतात का?,,mulāṁnā paisē bharāvē lāgatāta kā?,mʊlˈãnaː pˈaɪseː bʰəɾˈaːveː lˌaːɡtˈaːt kˈaː,,2,mr-agent-v1;ipa=espeak
-children.crib,बाळासाठी पाळणा आहे का?,,bāḷāsāṭhī pāḷaṇā āhē kā?,bˌaːɭaːsˈaːʈʰi pˈaːɭɳˌaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-children.warm-this-bottle,ही बाटली गरम करून द्या,,hī bāṭalī garama karūna dyā,hˈi bˈaːʈlˌi ɡˈʌɾəm kəɾˈuːn djˈaː,,2,mr-agent-v1;ipa=espeak
-children.car-seat,आम्हाला मुलांची कार सीट हवी आहे,,āmhālā mulāṁcī kāra sīṭa havī āhē,ˈaːmhaːlˌaː mʊlˈãci kˈaːɾ sˈiːʈ hˈʌvi ˈaːheː,,2,mr-agent-v1;ipa=espeak
-children.stroller,बाळगाडी,,bāḷagāḍī,bˌaːɭɡˈaːɖi,,2,mr-agent-v1;ipa=espeak
-children.playground,मुलांसाठी खेळण्याची जागा आहे का?,,mulāṁsāṭhī khēḷaṇyācī jāgā āhē kā?,mˌʊlãsˈaːʈʰi kʰˌeːɭɳjˈaːci zˈaːɡaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-social-basics.politeness-particles,"थाई भाषेत नम्रता दाखवण्यासाठी वाक्याच्या शेवटी शब्द जोडतात: पुरुष असाल तर 'खाप', स्त्री असाल तर 'खा'. प्रश्न विचारताना स्त्री 'खा' चढत्या सुरात म्हणते. इथल्या ओळींमध्ये हा शब्द जोडलेला नाही, तो तुम्ही स्वतः जोडायचा आहे.",,"thāī bhāṣēta namratā dākhavaṇyāsāṭhī vākyācyā śēvaṭī śabda jōḍatāta: puruṣa asāla tara 'khāpa', strī asāla tara 'khā'. praśna vicāratānā strī 'khā' caḍhatyā surāta mhaṇatē. ithalyā ōḷīṁmadhyē hā śabda jōḍalēlā nāhī, tō tumhī svataḥ jōḍāyacā āhē.",,,2,mr-notes-v1
-board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,2,mr-board-answers-v1;ipa=espeak
-board-answers.card-or-cash,कार्ड की रोख?,,kārḍa kī rōkha?,kˈaːɾɖ kˈi ɾˈoːkʰ,,2,mr-board-answers-v1;ipa=espeak
-board-answers.help-is-coming,मदत येत आहे,,madata yēta āhē,mˈʌdət jˈeːt ˈaːheː,"progressive gerund + āhē, invariant regardless of speaker",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
-board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",2,mr-board-answers-v1;ipa=espeak
-board-answers.i-am-calling-an-ambulance,मी अँब्युलन्स बोलावत आहे,,mī am̐byulansa bōlāvata āhē,mˈi ˌʌnbjʊlˈʌns boːlˈaːvət ˈaːheː,"progressive gerund + āhē is invariant for gender in Marathi, unlike the habitual present",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
-board-answers.i-am-calling-the-police,मी पोलिसांना बोलावत आहे,,mī pōlisāṁnā bōlāvata āhē,mˈi pˌoːlɪsˈãnaː boːlˈaːvət ˈaːheː,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
-board-answers.i-do-not-have-a-phone,माझ्याकडे फोन नाही,,mājhyākaḍē phōna nāhī,mˈaːɟʰjaːkɖeː pʰˈoːn nˈaːhi,,2,mr-board-answers-v1;ipa=espeak
-board-answers.i-will-find-someone,मला मदत करणारं कोणीतरी भेटेल,,malā madata karaṇāraṁ kōṇītarī bhēṭēla,mˈʌlaː mˈʌdət kˌəɾɳˈaːɾən koːɳˈiːtɾˌi bʰeːʈˈeːl,"someone who can help will be found to me -- 'bhēṭēla' is future 3sg agreeing with the ungendered 'kōṇītarī', and Marathi future does not mark gender in any case",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
-board-answers.i-will-show-you,मी वाट दाखवीन,,mī vāṭa dākhavīna,mˈi vˈaːʈ dˌaːkʰvˈiːn,"Marathi future tense (-īn) does not mark gender, unlike the present habitual or past",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
-board-answers.i-will-write-it-down,मी हे लिहून घेईन,,mī hē lihūna ghēīna,mˈi hˈeː lɪhˈuːn ɡʰeːˈiːn,"future tense, invariant",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
-board-answers.it-is-closed,बंद आहे,,baṁda āhē,bˈʌnd ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.it-is-over-there,तिथे आहे,,tithē āhē,tˈɪtʰeː ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.none-of-these,मला जे म्हणायचं आहे ते यात नाही,,malā jē mhaṇāyacaṁ āhē tē yāta nāhī,mˈʌlaː zˈeː mhəɳˈaːjəcˌən ˈaːheː tˈeː jˈaːt nˈaːhi,"what I want to say is not in this -- 'mhaṇāyacaṁ' agrees with the neuter relative 'jē', not with the speaker; the old यातलं काहीच मला म्हणायचं नाही was I do not want to say any of this, the refusal board-answers.i-would-rather-not-say already gives",2,mr-board-answers-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.51 जे 3rd p. sg. n. rel. pron. that which and p.123 म्हणणे to say;rule=none-of-these is not a refusal (board-answers.md -- the sw and tr repair: what I want to say is not among these);rule=obligative-agrees-with-object-not-speaker;row-corrections-v9;ipa=espeak
-board-answers.not-possible,असं शक्य नाही,,asaṁ śakya nāhī,ˈʌsən ʃˈʌkjə nˈaːhi,"that is not possible -- 'śakya' is an invariant adjective, no verb agreement at all",2,mr-board-answers-v1;ipa=espeak
-board-answers.please-wait,एक मिनिट,,ēka miniṭa,ˈeːk mˈɪnɪʈ,,2,mr-board-answers-v1;ipa=espeak
-board-answers.say-it-again,परत एकदा?,,parata ēkadā?,pˈʌɾət ˈeːkdˌaː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.stay-here,इथेच थांबणं चांगलं,,ithēca thāmbaṇaṁ cāṁgalaṁ,ɪtʰˈeːc tʰˈãbəɳˌən cˈãɡəlˌən,"'cāṁgalaṁ' agrees with the neuter gerund 'thāmbaṇaṁ', not with anyone's gender",2,mr-board-answers-v1;ipa=espeak
-board-answers.the-hospital-is-close,रुग्णालय जवळच आहे,,rugṇālaya javaḷaca āhē,ɾʊɡɳˈaːlˌɛj zˈʌvəɭˌəc ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"वाट पाहायची गरज नाही, आत या",,"vāṭa pāhāyacī garaja nāhī, āta yā","vˈaːʈ paːhˈaːjcˌi ɡˈʌɾəz nˈaːhi, ˈaːt jˈaː","'yā' is the tumhi-imperative of yēṇē, invariant for gender",2,mr-board-answers-v1;ipa=espeak
-board-answers.we-do-not-have-it,आमच्याकडे हे नाही,,āmacyākaḍē hē nāhī,ˌaːmcjˈaːkɖˌeː hˈeː nˈaːhi,,2,mr-board-answers-v1;ipa=espeak
-board-answers.what-is-your-name,नाव काय आहे?,,nāva kāya āhē?,nˈaːv kˈaːj ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-board-answers.where-does-it-hurt,कुठे दुखत आहे?,,kuṭhē dukhata āhē?,kˈʊʈʰeː dˈʊkʰət ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
-kind-words.you-are-very-kind,तुम्ही खूप दयाळू आहात.,,tumhī khūp dayāḷū āhāt,tˈʊmhi kʰˈuːp dəjˈaːɭuː aːhˈaːt,,2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-help,तुमच्या मदतीसाठी धन्यवाद.,,tumacyā madatīsāṭhī dhanyavāda,tʊmˈʌcjaː mˌədtisˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak
-kind-words.this-is-delicious,हे खूप चविष्ट आहे.,,hē khūp caviṣṭ āhē,hˈeː kʰˈuːp cəvˈɪʂʈ ˈaːheː,,2,kind-words-v1;ipa=espeak
-kind-words.it-is-beautiful-here,इथे खूप सुंदर आहे.,,ithē khūp sundar āhē,ˈɪtʰeː kʰˈuːp sˈũdəɾ ˈaːheː,,2,kind-words-v1;ipa=espeak
-kind-words.i-like-it-very-much,मला हे खूप आवडते.,,malā hē khūp āvaḍtē,mˈʌlaː hˈeː kʰˈuːp ˈaːvəɖteː,,2,kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,मी इथे खूप चांगला वेळ घालवला.,,mī ithē khūp cāṅgalā vēḻ ghālavalā,mˈi ˈɪtʰeː kʰˈuːp cˈãɡlˌaː vˈeːɭ ɡʰˈaːləvlaː,"घालवला agrees with the object वेळ (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-everything,सर्वांसाठी धन्यवाद.,,sarvāṁsāṭhī dhanyavāda,sˌərvãsˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-hospitality,तुमच्या आदरातिथ्यासाठी धन्यवाद.,,tumacyā ādarātithyāsāṭhī dhanyavāda,tʊmˈʌcjaː ˌaːdɾˌaːtɪtʰjaːsˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak
-board-answers.my-name-is-blank,माझे नाव {} आहे,,mājhē nāva {} āhē,mˈaːɟʰeː nˈaːv {} ˈaːheː,,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
-board-answers.i-would-rather-not-say,"माफ करा, मला हे सांगायचं नाही",,"māpha karā, malā hē sāṁgāyacaṁ nāhī","mˈaːpʰ kˈʌɾaː, mˈʌlaː hˈeː sãɡˈaːjəcˌən nˈaːhi","sorry, I do not want to tell this",2,src=Berntsen-BMED सांगणे p.157 (to tell);src=Berntsen-BMED माफ p.117;in-pack-frame=board-answers.none-of-these;rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.what-happened,काय झालं?,,kāya jhālaṁ?,kˈaːj ɟʰˈaːlən,,2,src=Berntsen-BMED होणे p.170 (to happen);src=Berntsen-BMED काय p.24 (what);rule=perfective-agrees-with-kaay-not-a-person;answers-audit-v1;ipa=espeak
-board-answers.understood,"हो, समजलं",,"hō, samajalaṁ","hˈoː, sˈʌməzˌələn","yes, [it is] understood",2,src=Berntsen-BMED समजणे p.153 (v.i. N-la impers. to understand);in-pack-neighbour=communication.i-do-not-understand;rule=dative-experiencer-verb-has-no-gender-for-the-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.i-will-check,मी बघून सांगेन,,mī baghūna sāṁgēna,mˈi bəɡʰˈuːn sãɡˈeːn,I will look and tell [you],2,src=Berntsen-BMED बघणे p.100 (to see / look at);src=Berntsen-BMED सांगणे p.157;in-pack-frame=board-answers.i-will-show-you;rule=future-tense-invariant;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.we-have-it,"हो, आहे",,"hō, āhē","hˈoː, ˈaːheː","yes, there is",2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;rule=copula-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,जागा नाही,,jāgā nāhī,zˈaːɡaː nˈaːhi,there is no room,2,src=Berntsen-BMED जागा p.49 (place / space / accommodation / seat);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
-board-answers.it-is-free,मोफत आहे,,mōphata āhē,mˈoːpʰət ˈaːheː,,2,src=Berntsen-BMED मोफत p.122 (adj. inv. free);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
-board-answers.it-does-not-matter,काही फरक पडत नाही,,kāhī pharaka paḍata nāhī,kˈaːhi pʰˈʌɾək pˈʌɖət nˈaːhi,it makes no difference,2,src=Berntsen-BMED फरक p.97 (difference);src=Berntsen-BMED पडणे p.82 (to occur / to arise);answers-audit-v1;ipa=espeak
-board-answers.only-for-customers,हे फक्त ग्राहकांसाठी आहे,,hē phakta grāhakāṁsāṭhī āhē,hˈeː pʰˈʌkt ɡɾˌaːhəkãsˈaːʈʰi ˈaːheː,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=Berntsen-BMED ग्राहक p.39;answers-audit-v1;ipa=espeak
-board-answers.where-to,कुठे जायचं आहे?,,kuṭhē jāyacaṁ āhē?,kˈʊʈʰeː zˈaːjəcˌən ˈaːheː,where is [one] to go?,2,in-pack-frame=taxi.i-will-get-off-here;src=Berntsen-BMED जाणे p.49;rule=obligative-infinitive-has-no-person;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,पुढच्या थांब्यावर,,puḍhacyā thāṁbyāvara,pʊɖʰˈʌcjaː tʰˈãbjaːvˌəɾ,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=Berntsen-BMED थांबणे p.65;answers-audit-v1;ipa=espeak
-board-answers.pay-on-board,भाडं गाडीतच भरायचं,,bhāḍaṁ gāḍītaca bharāyacaṁ,bʰˈaːɖən ɡaːɖˈiːtəc bʰəɾˈaːjəcˌən,the fare is to be paid in the vehicle itself,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=Berntsen-BMED भाडे p.109 (rent / fare);src=Berntsen-BMED गाडी p.36 (cart / car / bus / train);rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.see-a-doctor,डॉक्टरांना दाखवणं चांगलं,,ḍôkṭarāṁnā dākhavaṇaṁ cāṁgalaṁ,ɖˌɔkʈəɾˈãnaː dˈaːkʰəvˌəɳən cˈãɡəlˌən,showing [it] to a doctor is good,2,in-pack-frame=board-answers.stay-here;src=Berntsen-BMED दाखवणे p.67 (to show);reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.prescription-only,प्रिस्क्रिप्शन लागेल,,priskripśana lāgēla,pɾɪskɾˈɪpʃən laːɡˈeːl,a prescription will be needed,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=Berntsen-BMED लागणे p.131 (N-la impers. to require);rule=future-tense-invariant;answers-audit-v1;ipa=espeak
-board-answers.before-food,जेवणापूर्वी,,jēvaṇāpūrvī,zˌeːvɳaːpˈuːrvi,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Berntsen-BMED जेवण p.51 (meal / food);src=Berntsen-BMED पूर्वी p.92;answers-audit-v1;ipa=espeak
-board-answers.after-food,जेवणानंतर,,jēvaṇānaṁtara,zˌeːvɳaːnˈʌntəɾ,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Berntsen-BMED जेवण p.51 (meal / food);src=Berntsen-BMED नंतर p.75;answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
+social-basics.hello,नमस्ते,,namastē,nəmˈʌsteː,the everyday greeting; नमस्कार is the polite row,,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.75 नमस्ते word used in greeting -- where its हाय (p.168) is an exclamation of pain and the English hi has no entry in Berntsen Date or Molesworth;rule=register-neutral (the concept is neutral and social-basics.hello-polite is नमस्कार -- the hi ne and gu pairing);row-corrections-v9;ipa=espeak
+social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,,2,mr-agent-v1;ipa=espeak
+social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,,2,mr-agent-v1;ipa=espeak
+social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,,2,mr-agent-v1;ipa=espeak
+social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]',the everyday Marathi goodbye,2,"mr-agent-v1;fix=the cell's own back-translation -- kept -- and Berntsen A Basic Marathi-English Dictionary (DSAL) p. 123 येणे (v.i. to come);was=literal lit. 'I'll come [again]' -- the everyday Marathi goodbye -- masculine here and feminine in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine येते serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
+social-basics.thank-you,धन्यवाद,,dhanyavāda,dʰˌənjəvˈaːd,,,2,mr-agent-v1;ipa=espeak
+social-basics.you-are-welcome,स्वागत आहे,,svāgata āhē,svˈaːɡət ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,माफ करा,,māpha karā,mˈaːpʰ kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
+social-basics.sorry,सॉरी,,sôrī,sˈɔɾi,"casual, distinct register from माफ करा",,2,mr-agent-v1;ipa=espeak
+social-basics.no-problem,काही हरकत नाही,,kāhī harakata nāhī,kˈaːhi hˈʌɾəkˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+social-basics.i-do-not-know,मला माहीत नाही,,malā māhīta nāhī,mˈʌlaː maːhˈiːt nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+social-basics.good-night,शुभ रात्री,,śubha rātrī,ʃˈʊbʰ ɾˈaːtɾi,,,2,mr-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,ठीक आहे,,ṭhīka āhē,ʈʰˈiːk ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+communication.i-do-not-speak-this-language,मला {target} येत नाही,,malā {target} yēta nāhī,mˈʌlaː {target} jˈeːt nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,मला थोडेसे {target} येते,,malā thōḍēsē {target} yētē,mˈʌlaː tʰoːɖˈeːseː {target} jˈeːteː,,,2,mr-agent-v1;ipa=espeak
+communication.do-you-speak-english,तुम्हाला {source} येते का?,,tumhālā {source} yētē kā?,tʊmhˈaːlaː {source} jˈeːteː kˈaː,,,2,mr-agent-v1;ipa=espeak
+communication.please-speak-more-slowly,जरा हळू बोला,,jarā haḷū bōlā,zˈʌɾaː hˈʌɭuː bˈoːlaː,,,2,mr-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,मला ऐकून समजत नाही,,malā aikūna samajata nāhī,mˈʌlaː aɪkˈuːn sˈʌməzˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,मला वाचून समजत नाही,,malā vācūna samajata nāhī,mˈʌlaː vaːcˈuːn sˈʌməzˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+communication.please-say-it-again,परत सांगा,,parata sāṁgā,pˈʌɾət sˈãɡaː,,,2,mr-agent-v1;ipa=espeak
+communication.please-write-it-down,लिहून दाखवा,,lihūna dākhavā,lɪhˈuːn dˈaːkʰvˌaː,,,2,mr-agent-v1;ipa=espeak
+communication.please-wait-a-moment,जरा थांबा,,jarā thāṁbā,zˈʌɾaː tʰˈãbaː,,,2,mr-agent-v1;ipa=espeak
+communication.can-you-help-me,तुम्ही मला मदत कराल का?,,tumhī malā madata karāla kā?,tˈʊmhi mˈʌlaː mˈʌdət kəɾˈaːl kˈaː,,,2,mr-agent-v1;ipa=espeak
+communication.please-show-me-the-text,मला {target} मध्ये मजकूर दाखवा,,malā {target} madhyē majakūra dākhavā,mˈʌlaː {target} mˈʌdʰjeː mˌəzkˈuːɾ dˈaːkʰvˌaː,,,2,mr-agent-v1;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,तुम्ही काय बोलताय ते कळत नाही,,tumhī kāya bōlatāya tē kaḷata nāhī,tˈʊmhi kˈaːj bˌoːltˈaːj tˈeː kˈʌɭət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+communication.i-do-not-understand,मला समजत नाही,,malā samajata nāhī,mˈʌlaː sˈʌməzˌət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+communication.i-cannot-read-it,मला हे वाचता येत नाही,,malā hē vācatā yēta nāhī,mˈʌlaː hˈeː vˈaːctˌaː jˈeːt nˈaːhi,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,हे रोमन लिपीत लिहा,,hē rōmana lipīta lihā,hˈeː ɾˈoːmən lɪpˈiːt lˈɪhaː,,,2,mr-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,जरूर,,jarūra,zəɾˈuːɾ,,,2,mr-agent-v1;ipa=espeak
+quick-responses.yes-right,हो,,hō,hˈoː,,,2,mr-agent-v1;ipa=espeak
+quick-responses.no-not,नाही,,nāhī,nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+quick-responses.okay-can,चालेल,,cālēla,caːlˈeːl,,,2,mr-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,चालणार नाही,,cālaṇāra nāhī,cˌaːlɳˈaːɾ nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+quick-responses.works-okay,चालते,,cālatē,cˈaːltˌeː,,,2,mr-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,चालत नाही,,cālata nāhī,cˈaːlət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+quick-responses.can-possible,शक्य आहे,,śakya āhē,ʃˈʌkjə ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,शक्य नाही,,śakya nāhī,ʃˈʌkjə nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+quick-responses.okay-fine,ठीक,,ṭhīka,ʈʰˈiːk,,,2,mr-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,नाही चालणार,,nāhī cālaṇāra,nˈaːhi cˌaːlɳˈaːɾ,,,2,mr-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,मी फोनवरून भाषांतर करत आहे,,mī phōnavarūna bhāṣāṁtara karata āhē,mˈi pʰˌoːnəvɾˈuːn bʰaːʂˈãtəɾ kˈʌɾət ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,फोनकडे बघून बोला,,phōnakaḍē baghūna bōlā,pʰˈoːnəkɖeː bəɡʰˈuːn bˈoːlaː,,,2,mr-agent-v1;ipa=espeak
+phone-translation.please-write-the-place-name,जागेचे नाव {target} मध्ये लिहा,,jāgēcē nāva {target} madhyē lihā,zaːɡˈeːceː nˈaːv {target} mˈʌdʰjeː lˈɪhaː,,,2,mr-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,एका वेळी एकच वाक्य बोला,,ēkā vēḷī ēkaca vākya bōlā,ˈeːkaː vˈeːɭi ˈeːkəc vˈaːkjə bˈoːlaː,,,2,mr-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,टाईप करून दाखवा,,ṭāīpa karūna dākhavā,ʈaːˈiːp kəɾˈuːn dˈaːkʰvˌaː,,,2,mr-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,स्क्रीनकडे बघा,,skrīnakaḍē baghā,skɾˈiːnəkɖeː bˈʌɡʰaː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,माझ्यासाठी टाईप करा,,mājhyāsāṭhī ṭāīpa karā,mˈaːɟʰjaːsˌaːʈʰi ʈaːˈiːp kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,सोपे शब्द वापरा,,sōpē śabda vāparā,sˈoːpeː ʃˈʌbd vˈaːpɾˌaː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,माझा फोन डिस्चार्ज होत आहे,,mājhā phōna ḍiscārja hōta āhē,mˈaːɟʰaː pʰˈoːn ɖɪscˈaːrz hˈoːt ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,पॉवर बँक आहे का?,,pôvara bam̐ka āhē kā?,pˈɔvəɾ bˈʌnk ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,भाषांतर चुकीचे असू शकते,,bhāṣāṁtara cukīcē asū śakatē,bʰaːʂˈãtəɾ cʊkˈiːceː ˈʌsuː ʃˈʌktˌeː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.please-confirm,कृपया खात्री करा,,kr̥payā khātrī karā,kɾˈʊpjˌaː kʰˈaːtɾi kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,मी इथे फोन चार्ज करू का?,,mī ithē phōna cārja karū kā?,mˈi ˈɪtʰeː pʰˈoːn cˈaːrz kˈʌɾuː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,मला पर्यटकांसाठीचे सिम कार्ड हवे आहे,,malā paryaṭakāṁsāṭhīcē sima kārḍa havē āhē,mˈʌlaː pˌərjəʈkãsaːʈʰˈiːceː sˈɪm kˈaːɾɖ hˈʌveː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,मी तुमचा वाय-फाय वापरू का?,,mī tumacā vāya-phāya vāparū kā?,mˈi tˈʊmcˌaː vˈaːjpʰaːj vˈaːpɾˌuː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,किती डेटा समाविष्ट आहे?,,kitī ḍēṭā samāviṣṭa āhē?,kˈɪti ɖˈeːʈaː sˌəmaːvˈɪʂʈ ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,तुम्हाला माझा पासपोर्ट हवा आहे का?,,tumhālā mājhā pāsapōrṭa havā āhē kā?,tʊmhˈaːlaː mˈaːɟʰaː pˌaːspˈoːɾʈ hˈʌvaː ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,हे किती दिवस चालते?,,hē kitī divasa cālatē?,hˈeː kˈɪti dˈɪvəs cˈaːltˌeː,,,2,mr-agent-v1;ipa=espeak
+sim-data.please-activate-it,हे ऍक्टिव्हेट करा,,hē êkṭivhēṭa karā,hˈeː ˌɛkʈɪvhˈeːʈ kˈʌɾaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,ई-सिम आहे का?,,ī-sima āhē kā?,ˈisɪm ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,माझा डेटा चालत नाही,,mājhā ḍēṭā cālata nāhī,mˈaːɟʰaː ɖˈeːʈaː cˈaːlət nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,याला नोंदणी लागते का?,,yālā nōṁdaṇī lāgatē kā?,jˈaːlaː nˈõdɳˌi lˈaːɡtˌeː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,मला सिग्नल नाही,,malā signala nāhī,mˈʌlaː sˈɪɡnəl nˈaːhi,,,2,mr-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,वाय-फायचा पासवर्ड लिहून द्या,,vāya-phāyacā pāsavarḍa lihūna dyā,vˈaːjpʰaːjcˌaː pˌaːsəvˈʌɾɖ lɪhˈuːn djˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.sim-card,सिम कार्ड,,sima kārḍa,sˈɪm kˈaːɾɖ,,,2,mr-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,प्लग अडॅप्टर कुठे मिळेल?,,plaga aḍêpṭara kuṭhē miḷēla?,plˈʌɡ ʌɖˈɛpʈəɾ kˈʊʈʰeː mɪɭˈeːl,,,2,mr-agent-v1;ipa=espeak
+sim-data.mobile-data,मोबाईल डेटा,,mōbāīla ḍēṭā,mˌoːbaːˈiːl ɖˈeːʈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,हे सिम टॉप-अप करता येईल का?,,hē sima ṭôpa-apa karatā yēīla kā?,hˈeː sˈɪm ʈˈɔpəʌp kˈʌɾtˌaː jeːˈiːl kˈaː,"impersonal, no gender",,2,mr-agent-v1;ipa=espeak
+sim-data.top-up,टॉप-अप,,ṭôpa-apa,ʈˈɔpəʌp,,,2,mr-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,{} मध्ये नेटवर्क मिळते का?,,{} madhyē nēṭavarka miḷatē kā?,{} mˈʌdʰjeː nˌeːʈəvˈʌɾk mˈɪɭtˌeː kˈaː,,,2,mr-agent-v1;ipa=espeak
+sim-data.signal,सिग्नल,,signala,sˈɪɡnəl,,,2,mr-agent-v1;ipa=espeak
+sim-data.esim,ई-सिम,,ī-sima,ˈisɪm,,,2,mr-agent-v1;ipa=espeak
+sim-data.prepaid,प्रीपेड,,prīpēḍa,pɾipˈeːɖ,,,2,mr-agent-v1;ipa=espeak
+sim-data.roaming,रोमिंग,,rōmiṁga,ɾoːmˈĩɡ,,,2,mr-agent-v1;ipa=espeak
+etiquette.is-this-allowed,हे करण्याची परवानगी आहे का?,,hē karaṇyācī paravānagī āhē kā?,hˈeː kˌəɾɳjˈaːci pˌəɾvˈaːnɡˌi ˈaːheː kˈaː,deliberately general,,2,mr-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,इथे टिप देण्याची पद्धत आहे का?,,ithē ṭipa dēṇyācī paddhata āhē kā?,ˈɪtʰeː ʈˈɪp dˈeːɳjaːcˌi pˈʌdʰːət ˈaːheː kˈaː,neutral yes/no,,2,mr-agent-v1;ipa=espeak
+etiquette.is-service-included,सेवा शुल्क समाविष्ट आहे का?,,sēvā śulka samāviṣṭa āhē kā?,sˈeːvaː ʃˈʊlk sˌəmaːvˈɪʂʈ ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.may-i-enter,मी आत येऊ का?,,mī āta yēū kā?,mˈi ˈaːt jˈeːu kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.remove-shoes,मी बूट काढू का?,,mī būṭa kāḍhū kā?,mˈi bˈuːʈ kˈaːɖʰuː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.photo-of-you,मी तुमचा फोटो काढू का?,,mī tumacā phōṭō kāḍhū kā?,mˈi tˈʊmcˌaː pʰˈoːʈoː kˈaːɖʰuː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,मी इथे बसू का?,,mī ithē basū kā?,mˈi ˈɪtʰeː bˈʌsuː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.queue-for,ही {} साठीची रांग आहे का?,,hī {} sāṭhīcī rāṁga āhē kā?,hˈi {} saːʈʰˈiːci ɾˈãɡ ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,माझा पेहराव योग्य आहे का?,,mājhā pēharāva yōgya āhē kā?,mˈaːɟʰaː pˌeːhəɾˈaːv jˈoːɡjə ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,"माझा तसा हेतू नव्हता, माफ करा",,"mājhā tasā hētū navhatā, māpha karā","mˈaːɟʰaː tˈʌsaː hˈeːtuː nˈʌvhətˌaː, mˈaːpʰ kˈʌɾaː","invariant, no gender",,2,mr-agent-v1;ipa=espeak
+etiquette.what-is-customary,इथली पद्धत काय आहे?,,ithalī paddhata kāya āhē?,ˈɪtʰlˌi pˈʌdʰːət kˈaːj ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+etiquette.keep-the-change,उरलेले पैसे ठेवा,,uralēlē paisē ṭhēvā,ˌʊɾlˈeːleː pˈaɪseː ʈʰˈeːvaː,,,2,mr-agent-v1;ipa=espeak
+children.cannot-find-my-child,माझे मूल सापडत नाही,,mājhē mūla sāpaḍata nāhī,mˈaːɟʰeː mˈuːl sˈaːpəɖˌət nˈaːhi,SAFETY-CRITICAL wording; flagged for fluent-speaker review,,2,mr-agent-v1;ipa=espeak
+children.make-an-announcement,कृपया जाहीर सूचना द्या,,kr̥payā jāhīra sūcanā dyā,kɾˈʊpjˌaː zaːhˈiːɾ sˈuːcnˌaː djˈaː,,,2,mr-agent-v1;ipa=espeak
+children.child-age,माझ्या मुलाचे वय: {},,mājhyā mulācē vaya: {},mˈaːɟʰjaː mʊlˈaːceː vˈʌɛj {},my child's age: {},,2,mr-agent-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p. 135 वय (n. age);fix=mr.wikipedia महाराष्ट्रातील शिक्षण व्यवस्था rev 2546612 (पहिल्या वर्गात जाणाऱ्या मुलाचे वय सहा असले पाहिजे);was=माझे मूल {} वर्षांचे आहे (mājhē mūla {} varṣāṁcē āhē: the oblique plural -- wrong for one: एका वर्षाचे);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames औषधाची ऍलर्जी: {} and रात्रींची संख्या: {});row-corrections-v14;ipa=espeak
+children.high-chair,लहान मुलांची खुर्ची आहे का?,,lahāna mulāṁcī khurcī āhē kā?,ləhˈaːn mʊlˈãci kʰˈʊɾci ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+children.baby-changing-room,बाळाचे कपडे बदलण्याची खोली कुठे आहे?,,bāḷācē kapaḍē badalaṇyācī khōlī kuṭhē āhē?,baːɭˈaːceː kˈʌpɖˌeː bˌədəlɳjˈaːci kʰˈoːli kˈʊʈʰeː ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+children.childrens-menu,मुलांसाठी मेनू आहे का?,,mulāṁsāṭhī mēnū āhē kā?,mˌʊlãsˈaːʈʰi mˈeːnuː ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+children.suitable-for-children,हे मुलांसाठी योग्य आहे का?,,hē mulāṁsāṭhī yōgya āhē kā?,hˈeː mˌʊlãsˈaːʈʰi jˈoːɡjə ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+children.minimum-age,किमान वय किती आहे?,,kimāna vaya kitī āhē?,kɪmˈaːn vˈʌɛj kˈɪti ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+children.do-children-pay,मुलांना पैसे भरावे लागतात का?,,mulāṁnā paisē bharāvē lāgatāta kā?,mʊlˈãnaː pˈaɪseː bʰəɾˈaːveː lˌaːɡtˈaːt kˈaː,,,2,mr-agent-v1;ipa=espeak
+children.crib,बाळासाठी पाळणा आहे का?,,bāḷāsāṭhī pāḷaṇā āhē kā?,bˌaːɭaːsˈaːʈʰi pˈaːɭɳˌaː ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+children.warm-this-bottle,ही बाटली गरम करून द्या,,hī bāṭalī garama karūna dyā,hˈi bˈaːʈlˌi ɡˈʌɾəm kəɾˈuːn djˈaː,,,2,mr-agent-v1;ipa=espeak
+children.car-seat,आम्हाला मुलांची कार सीट हवी आहे,,āmhālā mulāṁcī kāra sīṭa havī āhē,ˈaːmhaːlˌaː mʊlˈãci kˈaːɾ sˈiːʈ hˈʌvi ˈaːheː,,,2,mr-agent-v1;ipa=espeak
+children.stroller,बाळगाडी,,bāḷagāḍī,bˌaːɭɡˈaːɖi,,,2,mr-agent-v1;ipa=espeak
+children.playground,मुलांसाठी खेळण्याची जागा आहे का?,,mulāṁsāṭhī khēḷaṇyācī jāgā āhē kā?,mˌʊlãsˈaːʈʰi kʰˌeːɭɳjˈaːci zˈaːɡaː ˈaːheː kˈaː,,,2,mr-agent-v1;ipa=espeak
+social-basics.politeness-particles,"थाई भाषेत नम्रता दाखवण्यासाठी वाक्याच्या शेवटी शब्द जोडतात: पुरुष असाल तर 'खाप', स्त्री असाल तर 'खा'. प्रश्न विचारताना स्त्री 'खा' चढत्या सुरात म्हणते. इथल्या ओळींमध्ये हा शब्द जोडलेला नाही, तो तुम्ही स्वतः जोडायचा आहे.",,"thāī bhāṣēta namratā dākhavaṇyāsāṭhī vākyācyā śēvaṭī śabda jōḍatāta: puruṣa asāla tara 'khāpa', strī asāla tara 'khā'. praśna vicāratānā strī 'khā' caḍhatyā surāta mhaṇatē. ithalyā ōḷīṁmadhyē hā śabda jōḍalēlā nāhī, tō tumhī svataḥ jōḍāyacā āhē.",,,,2,mr-notes-v1
+board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,,2,mr-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,कार्ड की रोख?,,kārḍa kī rōkha?,kˈaːɾɖ kˈi ɾˈoːkʰ,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,मदत येत आहे,,madata yēta āhē,mˈʌdət jˈeːt ˈaːheː,"progressive gerund + āhē, invariant regardless of speaker",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",,2,mr-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,मी अँब्युलन्स बोलावत आहे,,mī am̐byulansa bōlāvata āhē,mˈi ˌʌnbjʊlˈʌns boːlˈaːvət ˈaːheː,"progressive gerund + āhē is invariant for gender in Marathi, unlike the habitual present",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.i-am-calling-the-police,मी पोलिसांना बोलावत आहे,,mī pōlisāṁnā bōlāvata āhē,mˈi pˌoːlɪsˈãnaː boːlˈaːvət ˈaːheː,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",,2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.i-do-not-have-a-phone,माझ्याकडे फोन नाही,,mājhyākaḍē phōna nāhī,mˈaːɟʰjaːkɖeː pʰˈoːn nˈaːhi,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,मला मदत करणारं कोणीतरी भेटेल,,malā madata karaṇāraṁ kōṇītarī bhēṭēla,mˈʌlaː mˈʌdət kˌəɾɳˈaːɾən koːɳˈiːtɾˌi bʰeːʈˈeːl,someone who can help will be found to me,"'bhēṭēla' is future 3sg agreeing with the ungendered 'kōṇītarī', and Marathi future does not mark gender in any case",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-show-you,मी वाट दाखवीन,,mī vāṭa dākhavīna,mˈi vˈaːʈ dˌaːkʰvˈiːn,"Marathi future tense (-īn) does not mark gender, unlike the present habitual or past",,2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-write-it-down,मी हे लिहून घेईन,,mī hē lihūna ghēīna,mˈi hˈeː lɪhˈuːn ɡʰeːˈiːn,"future tense, invariant",,2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.it-is-closed,बंद आहे,,baṁda āhē,bˈʌnd ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,तिथे आहे,,tithē āhē,tˈɪtʰeː ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.none-of-these,मला जे म्हणायचं आहे ते यात नाही,,malā jē mhaṇāyacaṁ āhē tē yāta nāhī,mˈʌlaː zˈeː mhəɳˈaːjəcˌən ˈaːheː tˈeː jˈaːt nˈaːhi,what I want to say is not in this,"'mhaṇāyacaṁ' agrees with the neuter relative 'jē', not with the speaker; the old यातलं काहीच मला म्हणायचं नाही was I do not want to say any of this, the refusal board-answers.i-would-rather-not-say already gives",2,mr-board-answers-v1;fix=Berntsen A Basic Marathi-English Dictionary (DSAL) p.51 जे 3rd p. sg. n. rel. pron. that which and p.123 म्हणणे to say;rule=none-of-these is not a refusal (board-answers.md -- the sw and tr repair: what I want to say is not among these);rule=obligative-agrees-with-object-not-speaker;row-corrections-v9;ipa=espeak
+board-answers.not-possible,असं शक्य नाही,,asaṁ śakya nāhī,ˈʌsən ʃˈʌkjə nˈaːhi,that is not possible,"'śakya' is an invariant adjective, no verb agreement at all",2,mr-board-answers-v1;ipa=espeak
+board-answers.please-wait,एक मिनिट,,ēka miniṭa,ˈeːk mˈɪnɪʈ,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.say-it-again,परत एकदा?,,parata ēkadā?,pˈʌɾət ˈeːkdˌaː,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.stay-here,इथेच थांबणं चांगलं,,ithēca thāmbaṇaṁ cāṁgalaṁ,ɪtʰˈeːc tʰˈãbəɳˌən cˈãɡəlˌən,"'cāṁgalaṁ' agrees with the neuter gerund 'thāmbaṇaṁ', not with anyone's gender",,2,mr-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,रुग्णालय जवळच आहे,,rugṇālaya javaḷaca āhē,ɾʊɡɳˈaːlˌɛj zˈʌvəɭˌəc ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"वाट पाहायची गरज नाही, आत या",,"vāṭa pāhāyacī garaja nāhī, āta yā","vˈaːʈ paːhˈaːjcˌi ɡˈʌɾəz nˈaːhi, ˈaːt jˈaː","'yā' is the tumhi-imperative of yēṇē, invariant for gender",,2,mr-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,आमच्याकडे हे नाही,,āmacyākaḍē hē nāhī,ˌaːmcjˈaːkɖˌeː hˈeː nˈaːhi,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,नाव काय आहे?,,nāva kāya āhē?,nˈaːv kˈaːj ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,कुठे दुखत आहे?,,kuṭhē dukhata āhē?,kˈʊʈʰeː dˈʊkʰət ˈaːheː,,,2,mr-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,तुम्ही खूप दयाळू आहात.,,tumhī khūp dayāḷū āhāt,tˈʊmhi kʰˈuːp dəjˈaːɭuː aːhˈaːt,,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,तुमच्या मदतीसाठी धन्यवाद.,,tumacyā madatīsāṭhī dhanyavāda,tʊmˈʌcjaː mˌədtisˈaːʈʰi dʰˌənjəvˈaːd,,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,हे खूप चविष्ट आहे.,,hē khūp caviṣṭ āhē,hˈeː kʰˈuːp cəvˈɪʂʈ ˈaːheː,,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,इथे खूप सुंदर आहे.,,ithē khūp sundar āhē,ˈɪtʰeː kʰˈuːp sˈũdəɾ ˈaːheː,,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,मला हे खूप आवडते.,,malā hē khūp āvaḍtē,mˈʌlaː hˈeː kʰˈuːp ˈaːvəɖteː,,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मी इथे खूप चांगला वेळ घालवला.,,mī ithē khūp cāṅgalā vēḻ ghālavalā,mˈi ˈɪtʰeː kʰˈuːp cˈãɡlˌaː vˈeːɭ ɡʰˈaːləvlaː,"घालवला agrees with the object वेळ (masc.), not the speaker, so invariant for speaker gender",,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,सर्वांसाठी धन्यवाद.,,sarvāṁsāṭhī dhanyavāda,sˌərvãsˈaːʈʰi dʰˌənjəvˈaːd,,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,तुमच्या आदरातिथ्यासाठी धन्यवाद.,,tumacyā ādarātithyāsāṭhī dhanyavāda,tʊmˈʌcjaː ˌaːdɾˌaːtɪtʰjaːsˈaːʈʰi dʰˌənjəvˈaːd,,,2,kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,माझे नाव {} आहे,,mājhē nāva {} āhē,mˈaːɟʰeː nˈaːv {} ˈaːheː,,,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"माफ करा, मला हे सांगायचं नाही",,"māpha karā, malā hē sāṁgāyacaṁ nāhī","mˈaːpʰ kˈʌɾaː, mˈʌlaː hˈeː sãɡˈaːjəcˌən nˈaːhi","sorry, I do not want to tell this",,2,src=Berntsen-BMED सांगणे p.157 (to tell);src=Berntsen-BMED माफ p.117;in-pack-frame=board-answers.none-of-these;rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,काय झालं?,,kāya jhālaṁ?,kˈaːj ɟʰˈaːlən,,,2,src=Berntsen-BMED होणे p.170 (to happen);src=Berntsen-BMED काय p.24 (what);rule=perfective-agrees-with-kaay-not-a-person;answers-audit-v1;ipa=espeak
+board-answers.understood,"हो, समजलं",,"hō, samajalaṁ","hˈoː, sˈʌməzˌələn","yes, [it is] understood",,2,src=Berntsen-BMED समजणे p.153 (v.i. N-la impers. to understand);in-pack-neighbour=communication.i-do-not-understand;rule=dative-experiencer-verb-has-no-gender-for-the-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,मी बघून सांगेन,,mī baghūna sāṁgēna,mˈi bəɡʰˈuːn sãɡˈeːn,I will look and tell [you],,2,src=Berntsen-BMED बघणे p.100 (to see / look at);src=Berntsen-BMED सांगणे p.157;in-pack-frame=board-answers.i-will-show-you;rule=future-tense-invariant;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"हो, आहे",,"hō, āhē","hˈoː, ˈaːheː","yes, there is",,2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;rule=copula-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,जागा नाही,,jāgā nāhī,zˈaːɡaː nˈaːhi,there is no room,,2,src=Berntsen-BMED जागा p.49 (place / space / accommodation / seat);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,मोफत आहे,,mōphata āhē,mˈoːpʰət ˈaːheː,,,2,src=Berntsen-BMED मोफत p.122 (adj. inv. free);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,काही फरक पडत नाही,,kāhī pharaka paḍata nāhī,kˈaːhi pʰˈʌɾək pˈʌɖət nˈaːhi,it makes no difference,,2,src=Berntsen-BMED फरक p.97 (difference);src=Berntsen-BMED पडणे p.82 (to occur / to arise);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,हे फक्त ग्राहकांसाठी आहे,,hē phakta grāhakāṁsāṭhī āhē,hˈeː pʰˈʌkt ɡɾˌaːhəkãsˈaːʈʰi ˈaːheː,,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=Berntsen-BMED ग्राहक p.39;answers-audit-v1;ipa=espeak
+board-answers.where-to,कुठे जायचं आहे?,,kuṭhē jāyacaṁ āhē?,kˈʊʈʰeː zˈaːjəcˌən ˈaːheː,where is [one] to go?,,2,in-pack-frame=taxi.i-will-get-off-here;src=Berntsen-BMED जाणे p.49;rule=obligative-infinitive-has-no-person;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,पुढच्या थांब्यावर,,puḍhacyā thāṁbyāvara,pʊɖʰˈʌcjaː tʰˈãbjaːvˌəɾ,,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=Berntsen-BMED थांबणे p.65;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,भाडं गाडीतच भरायचं,,bhāḍaṁ gāḍītaca bharāyacaṁ,bʰˈaːɖən ɡaːɖˈiːtəc bʰəɾˈaːjəcˌən,the fare is to be paid in the vehicle itself,,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=Berntsen-BMED भाडे p.109 (rent / fare);src=Berntsen-BMED गाडी p.36 (cart / car / bus / train);rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,डॉक्टरांना दाखवणं चांगलं,,ḍôkṭarāṁnā dākhavaṇaṁ cāṁgalaṁ,ɖˌɔkʈəɾˈãnaː dˈaːkʰəvˌəɳən cˈãɡəlˌən,showing [it] to a doctor is good,,2,in-pack-frame=board-answers.stay-here;src=Berntsen-BMED दाखवणे p.67 (to show);reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,प्रिस्क्रिप्शन लागेल,,priskripśana lāgēla,pɾɪskɾˈɪpʃən laːɡˈeːl,a prescription will be needed,,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=Berntsen-BMED लागणे p.131 (N-la impers. to require);rule=future-tense-invariant;answers-audit-v1;ipa=espeak
+board-answers.before-food,जेवणापूर्वी,,jēvaṇāpūrvī,zˌeːvɳaːpˈuːrvi,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Berntsen-BMED जेवण p.51 (meal / food);src=Berntsen-BMED पूर्वी p.92;answers-audit-v1;ipa=espeak
+board-answers.after-food,जेवणानंतर,,jēvaṇānaṁtara,zˌeːvɳaːnˈʌntəɾ,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=Berntsen-BMED जेवण p.51 (meal / food);src=Berntsen-BMED नंतर p.75;answers-audit-v1;ipa=espeak

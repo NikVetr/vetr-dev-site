@@ -1,68 +1,68 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,passi,,pˈassi,,2,fi-agent-v1;ipa=espeak
-hotel-words.room-key-card,huoneen kulkukortti,,hˈuoneːŋ kˈulkukˌortti,,2,fi-agent-v1;ipa=espeak
-hotel-words.check-in,sisäänkirjautuminen,check-in,sˈisæːŋkˌirjautˌuminen,Finnish hotels sign both,2,fi-agent-v1;ipa=espeak
-hotel-words.check-out,uloskirjautuminen,check-out,ˈuloskˌirjautˌuminen,,2,fi-agent-v1;ipa=espeak
-hotel-words.luggage-storage,matkatavaroiden säilytys,,mˈatkatavarˌoiden sˈæilytys,,2,fi-agent-v1;ipa=espeak
-hotel-basics.are-any-rooms-available,Onko huoneita vapaana?,,ˈoŋko hˈuoneita vˈapaːna,,2,fi-agent-v1;ipa=espeak
-hotel-basics.there-are-two-of-us,Meitä on kaksi.,,mˈeitæ ˈoŋ kˈaksi,,2,fi-agent-v1;ipa=espeak
-hotel-basics.i-have-a-reservation,Minulla on varaus.,,mˈinulla ˈon vˈaraus,,2,fi-agent-v1;ipa=espeak
-hotel-basics.can-i-charge-my-phone,Voinko ladata puhelintani?,,vˈoiŋko lˈadata pˈuhelˌintani,,2,fi-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-non-smoking-room,Haluaisin savuttoman huoneen.,,hˈaluˌaisin sˈavuttoman hˈuoneːn,,2,fi-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-quiet-room,Haluaisin rauhallisen huoneen.,,hˈaluˌaisin rˈauhallisen hˈuoneːn,,2,fi-agent-v1;ipa=espeak
-hotel-basics.is-there-a-washing-machine,Onko täällä pesukone?,,ˈoŋko tˈæːllæ pˈesukˌone,,2,fi-agent-v1;ipa=espeak
-hotel-basics.is-wi-fi-free,Onko wifi maksuton?,,ˈoŋko vˈifi mˈaksuton,,2,fi-agent-v1;ipa=espeak
-hotel-basics.how-much-per-night,Paljonko yö kustantaa?,,pˈaljoŋko ˈyø kˈustantaː,,2,fi-agent-v1;ipa=espeak
-hotel-basics.is-breakfast-included,Sisältyykö aamiainen hintaan?,,sˈisæltˌyːkø ˈaːmiˌainen hˈintaːn,,2,fi-agent-v1;ipa=espeak
-hotel-basics.may-i-see-the-room,Saisinko nähdä huoneen?,,sˈaisiŋko nˈæhdæ hˈuoneːn,,2,fi-agent-v1;ipa=espeak
-hotel-basics.for-nights,Öiden määrä: {},,ˈøiden mˈæːræ {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,fi-agent-v1;fix=Kielitoimiston sanakirja yö (mon. gen. öiden -- öitten) and määrä 1a (luku(määrä) -- joukko: Henkilökunnan määrä -- Asukasmäärä);fix=fi.wikipedia Ilmastonmuutos Ruotsissa rev 23163104 (Trooppisten öiden määrä kasvaa);was={} yötä (the partitive a numeral from two governs -- wrong for one: yksi yö);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {} and Oleskelun kesto päivinä: {});row-corrections-v15;ipa=espeak
-hotel-basics.two-beds,"Kaksi erillistä sänkyä, kiitos.",,"kˈaksi ˈerillˌistæ sˈæŋkyæ, kˈiːtos",,2,fi-agent-v1;ipa=espeak
-hotel-basics.is-there-air-conditioning,Onko huoneessa ilmastointi?,,ˈoŋko hˈuoneːssa ˈilmastˌointi,,2,fi-agent-v1;ipa=espeak
-hotel-requests.can-i-check-out-later,Voinko kirjautua ulos myöhemmin?,,vˈoiŋko kˈirjautˌua ˈulos mˈyøhemmin,,2,fi-agent-v1;ipa=espeak
-hotel-requests.what-time-does-breakfast-start,Mihin aikaan aamiainen alkaa?,,mˈihin ˈaikaːn ˈaːmiˌainen ˈalkaː,,2,fi-agent-v1;ipa=espeak
-hotel-requests.can-i-store-my-luggage,Voinko jättää matkatavarat säilytykseen?,,vˈoiŋko jˈættæː mˈatkatˌavarat sˈæilytˌykseːn,,2,fi-agent-v1;ipa=espeak
-hotel-requests.no-housekeeping,"Ei siivousta, kiitos.",,"ˈei sˈiːvousta, kˈiːtos",,2,fi-agent-v1;ipa=espeak
-hotel-requests.another-towel-please,Saisinko toisen pyyhkeen?,,sˈaisiŋko tˈoisem pˈyːhkeːn,,2,fi-agent-v1;ipa=espeak
-hotel-requests.what-time-is-check-out,Mihin aikaan on uloskirjautuminen?,,mˈihin ˈaikaːn ˈon ˈuloskˌirjautˌuminen,,2,fi-agent-v1;ipa=espeak
-hotel-requests.can-i-check-in-early,Voinko kirjautua sisään aikaisemmin?,,vˈoiŋko kˈirjautˌua sˈisæːn ˈaikaisˌemmin,,2,fi-agent-v1;ipa=espeak
-hotel-requests.another-night,Voinko jäädä vielä yhden yön?,,vˈoiŋko jˈæːdæ vˈielæ ˈyhden ˈyøn,,2,fi-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,Onko täällä tallelokero?,,ˈoŋko tˈæːllæ tˈallelˌokero,,2,fi-agent-v1;ipa=espeak
-hotel-requests.another-blanket,Saisinko toisen peiton?,,sˈaisiŋko tˈoisem pˈeiton,,2,fi-agent-v1;ipa=espeak
-hotel-requests.wake-up-call,Herättäisittekö minut kello {}?,,hˈerættˌæisittˌekø mˈinut kˈello {},"kello takes the bare numeral, so the slot needs no case",2,fi-agent-v1;ipa=espeak
-room-problems.there-is-a-problem-with-the-room,Huoneessa on ongelma.,,hˈuoneːssa ˈon ˈoŋŋelma,,2,fi-agent-v1;ipa=espeak
-room-problems.the-air-conditioning-is-broken,Ilmastointi on rikki.,,ˈilmastˌointi ˈon rˈikki,,2,fi-agent-v1;ipa=espeak
-room-problems.there-is-no-hot-water,Kuumaa vettä ei tule.,,kˈuːmaː vˈettæ ˈei tˈule,,2,fi-agent-v1;ipa=espeak
-room-problems.can-i-change-rooms,Voinko vaihtaa huonetta?,,vˈoiŋko vˈaihtaː hˈuonetta,,2,fi-agent-v1;ipa=espeak
-room-problems.the-room-is-too-noisy,Huone on liian meluisa.,,hˈuone ˈon lˈiːan mˈeluisa,,2,fi-agent-v1;ipa=espeak
-room-problems.the-key-does-not-work,Avain ei toimi.,,ˈavain ˈei tˈoimi,,2,fi-agent-v1;ipa=espeak
-room-problems.the-toilet-will-not-flush,Vessa ei vedä.,,vˈessa ˈei vˈedæ,,2,fi-agent-v1;ipa=espeak
-room-problems.the-light-does-not-work,Valo ei toimi.,,vˈalo ˈei tˈoimi,,2,fi-agent-v1;ipa=espeak
-room-problems.please-send-someone,Voisitteko lähettää jonkun korjaamaan?,,vˈoisittˌeko lˈæhettæː jˈoŋkuŋ kˈorjaːmaːn,,2,fi-agent-v1;ipa=espeak
-room-problems.the-heating-does-not-work,Lämmitys ei toimi.,,lˈæmmitys ˈei tˈoimi,,2,fi-agent-v1;ipa=espeak
-laundry.please-wash-these-clothes,Pesisittekö nämä vaatteet?,,pˈesisˌittekø nˈæmæ vˈaːtteːt,,2,fi-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,Missä on itsepalvelupesula?,,mˈissæ ˈon ˈitsepˌalvelˌupesˌula,,2,fi-agent-v1;ipa=espeak
-laundry.when-will-it-be-ready,Milloin se on valmis?,,mˈilloin sˈe ˈon vˈalmis,,2,fi-agent-v1;ipa=espeak
-laundry.how-much-per-kilo,Paljonko kilo kustantaa?,,pˈaljoŋko kˈilo kˈustantaː,,2,fi-agent-v1;ipa=espeak
-laundry.can-it-be-ready-today,Ehtiikö se valmistua tänään?,,ˈehtiːkø sˈe vˈalmistˌua tˈænæːn,,2,fi-agent-v1;ipa=espeak
-laundry.please-do-not-use-bleach,Älkää käyttäkö valkaisuainetta.,,ˈælkæː kˈæyttækø vˈalkaisuˌainetta,,2,fi-agent-v1;ipa=espeak
-laundry.laundromat,itsepalvelupesula,,ˈitsepˌalvelˌupesˌula,the Finnish shop name; a full-service pesula is a different thing,2,fi-agent-v1;ipa=espeak
-laundry.please-iron-this,Silittäisittekö tämän?,,sˈilittˌæisittˌekø tˈæmæn,,2,fi-agent-v1;ipa=espeak
-laundry.detergent,pyykinpesuaine,,pˈyːkimpesuˌaine,,2,fi-agent-v1;ipa=espeak
-laundry.dry-cleaning,kemiallinen pesu,,kˈemiˌallinem pˈesu,,2,fi-agent-v1;ipa=espeak
-laundry.dryer,kuivausrumpu,,kˈuivausrˌumpu,,2,fi-agent-v1;ipa=espeak
-laundry.coin-operated,kolikkokäyttöinen,,kˈolikkokˌæyttøinen,,2,fi-agent-v1;ipa=espeak
-massage-spa.please-stop,"Lopettakaa, kiitos.",,"lˈopettakaː, kˈiːtos","stop, please -- a bare polite-plural imperative, blunter than this pack's usual conditional requests (Voisitteko..., Saisinko...), because the concept ends the session and is deliberately not softened. lopettaa is lexically terminal against tauko in the row below, so Finnish needs no second clause where the Mandarin row carries one",2,fi-massage-spa-v1;spa-board-v1;src=Kielitoimiston-sanakirja;in-pack-neighbour;ipa=espeak
-massage-spa.please-pause,"Pieni tauko, kiitos.",,"pˈieni tˈauko, kˈiːtos","a short break, please -- tauko says temporarily on its own, and unlike this pack's communication.please-wait-a-moment (Hetkinen, kiitos.) it asks the listener to suspend what they are doing rather than to wait for the speaker",2,fi-massage-spa-v1;spa-board-v1;src=Kielitoimiston-sanakirja;ipa=espeak
-massage-spa.please-avoid-this-area,Älkää hieroko tätä kohtaa.,,ˈælkæː hˈieroko tˈætæ kˈohtaː,do not massage this spot -- kohta is the ordinary Finnish word for a place on the body; the negative plural imperative matches this pack's laundry.please-do-not-use-bleach,2,fi-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=espeak
-massage-spa.stronger-pressure,"Vähän kovempaa, kiitos.",,"vˈæhæŋ kˈovempaː, kˈiːtos","a bit firmer, please -- kovempaa is the trade's word: a registered hieroja's own FAQ writes kevyemmin lupaan aina pyydettaessa ottaa, kovempaakin, jos se on mielestani tarpeen. Three words beginning Vähän against the two of Kevyemmin, kiitos, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
-massage-spa.more-gently,"Kevyemmin, kiitos.",,"kˈevyˌemmin, kˈiːtos","more lightly, please -- the other half of the trade's kovempaa / kevyemmin pair, and it modifies the therapist's ote, the grip, so it is about pressure and not speed",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
-massage-spa.that-pressure-is-good,"Tämä ote on hyvä, jatkakaa näin.",,"tˈæmæ ˈote ˈon hˈyvæ, jˈatkakaː nˈæin","this grip is good, carry on like this -- ote, the grip, is what Finnish measures massage pressure in; a confirmation with a keep-it-there clause, not praise",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
-massage-spa.focus-on-shoulders,Keskittykää hartioihin.,,kˈeskittykæː hˈartiˌoihin,,2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
-massage-spa.focus-on-back,Keskittykää selkään.,,kˈeskittykæː sˈelkæːn,selkä is one of the areas a Finnish hieronta price list sells by name,2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
-massage-spa.focus-on-neck,Keskittykää niskaan.,,kˈeskittykæː nˈiskaːn,"niska, the back of the neck, is the massage word; kaula is the throat and would be wrong here. The trade groups this with the shoulders as the niska-hartiaseutu and sells niska-hartiahieronta as one bookable service, but the two rows stay separate because a board button is one meaning",2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
-massage-spa.focus-on-feet,Keskittykää jalkateriin.,,kˈeskittykæː jˈalkateriːn,"jalkaterä, the foot proper, as this pack's body-parts.foot already has it, because plain jalka would be read as the whole leg -- and jalkahieronta is a bookable service of its own in Finland rather than part of a kokovartalohieronta",2,fi-massage-spa-v1;spa-board-v1;in-pack-neighbour;src=relahierojat-hinnasto;ipa=espeak
-massage-spa.reply-i-will-avoid-that-area,"Selvä, jätän sen kohdan väliin.",,"sˈelvæ, jˈætæn sˈeŋ kˈohdan vˈæliːn","right, I will leave that spot out -- Finnish has no grammatical gender, so no reply in this set needed steering",2,fi-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
-massage-spa.reply-which-area-exactly,Mikä kohta tarkalleen?,,mˈikæ kˈohta tˈarkalleːn,,2,fi-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
-massage-spa.reply-cannot-avoid-this-treatment,Tässä hoidossa sitä kohtaa ei voi jättää väliin.,,tˈæssæ hˈoidossa sˈitæ kˈohtaː ˈei vˈoi jˈættæː vˈæliːn,"in this treatment that spot cannot be skipped -- hoito is one bookable treatment, not a hoitosarja, which would be a course of several and overstate what is being refused",2,fi-massage-spa-v1;spa-reply-v1;src=Kielitoimiston-sanakirja;ipa=espeak
-massage-spa.reply-does-it-hurt-there,Sattuuko tähän kohtaan?,,sˈattuːko tˈæhæŋ kˈohtaːn,,2,fi-massage-spa-v1;spa-reply-v1;in-pack-neighbour;ipa=espeak
-massage-spa.reply-ask-supervisor,"En ole varma, kysyn esihenkilöltä.",,"ˈen ˈole vˈarma, kˈysyn ˈesihˌeŋkilˌøltæ","I am not sure, I will ask the supervisor -- esihenkilö is the gender-neutral term that has displaced esimies, which contains mies, man; Kotus's own Kielikello and its virkakieli guidance recommend the switch",2,fi-massage-spa-v1;spa-reply-v1;src=kotus-kielikello-varusnainen-ja-esihenkilo;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+hotel-words.passport,passi,,pˈassi,,,2,fi-agent-v1;ipa=espeak
+hotel-words.room-key-card,huoneen kulkukortti,,hˈuoneːŋ kˈulkukˌortti,,,2,fi-agent-v1;ipa=espeak
+hotel-words.check-in,sisäänkirjautuminen,check-in,sˈisæːŋkˌirjautˌuminen,Finnish hotels sign both,,2,fi-agent-v1;ipa=espeak
+hotel-words.check-out,uloskirjautuminen,check-out,ˈuloskˌirjautˌuminen,,,2,fi-agent-v1;ipa=espeak
+hotel-words.luggage-storage,matkatavaroiden säilytys,,mˈatkatavarˌoiden sˈæilytys,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,Onko huoneita vapaana?,,ˈoŋko hˈuoneita vˈapaːna,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,Meitä on kaksi.,,mˈeitæ ˈoŋ kˈaksi,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,Minulla on varaus.,,mˈinulla ˈon vˈaraus,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Voinko ladata puhelintani?,,vˈoiŋko lˈadata pˈuhelˌintani,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Haluaisin savuttoman huoneen.,,hˈaluˌaisin sˈavuttoman hˈuoneːn,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Haluaisin rauhallisen huoneen.,,hˈaluˌaisin rˈauhallisen hˈuoneːn,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Onko täällä pesukone?,,ˈoŋko tˈæːllæ pˈesukˌone,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,Onko wifi maksuton?,,ˈoŋko vˈifi mˈaksuton,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,Paljonko yö kustantaa?,,pˈaljoŋko ˈyø kˈustantaː,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Sisältyykö aamiainen hintaan?,,sˈisæltˌyːkø ˈaːmiˌainen hˈintaːn,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,Saisinko nähdä huoneen?,,sˈaisiŋko nˈæhdæ hˈuoneːn,,,2,fi-agent-v1;ipa=espeak
+hotel-basics.for-nights,Öiden määrä: {},,ˈøiden mˈæːræ {},number of nights: {},"a label, so the number agrees with nothing",2,fi-agent-v1;fix=Kielitoimiston sanakirja yö (mon. gen. öiden -- öitten) and määrä 1a (luku(määrä) -- joukko: Henkilökunnan määrä -- Asukasmäärä);fix=fi.wikipedia Ilmastonmuutos Ruotsissa rev 23163104 (Trooppisten öiden määrä kasvaa);was={} yötä (the partitive a numeral from two governs -- wrong for one: yksi yö);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Lääkeallergia: {} and Oleskelun kesto päivinä: {});row-corrections-v15;ipa=espeak
+hotel-basics.two-beds,"Kaksi erillistä sänkyä, kiitos.",,"kˈaksi ˈerillˌistæ sˈæŋkyæ, kˈiːtos",,,2,fi-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,Onko huoneessa ilmastointi?,,ˈoŋko hˈuoneːssa ˈilmastˌointi,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,Voinko kirjautua ulos myöhemmin?,,vˈoiŋko kˈirjautˌua ˈulos mˈyøhemmin,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,Mihin aikaan aamiainen alkaa?,,mˈihin ˈaikaːn ˈaːmiˌainen ˈalkaː,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Voinko jättää matkatavarat säilytykseen?,,vˈoiŋko jˈættæː mˈatkatˌavarat sˈæilytˌykseːn,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,"Ei siivousta, kiitos.",,"ˈei sˈiːvousta, kˈiːtos",,,2,fi-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,Saisinko toisen pyyhkeen?,,sˈaisiŋko tˈoisem pˈyːhkeːn,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,Mihin aikaan on uloskirjautuminen?,,mˈihin ˈaikaːn ˈon ˈuloskˌirjautˌuminen,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,Voinko kirjautua sisään aikaisemmin?,,vˈoiŋko kˈirjautˌua sˈisæːn ˈaikaisˌemmin,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.another-night,Voinko jäädä vielä yhden yön?,,vˈoiŋko jˈæːdæ vˈielæ ˈyhden ˈyøn,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Onko täällä tallelokero?,,ˈoŋko tˈæːllæ tˈallelˌokero,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.another-blanket,Saisinko toisen peiton?,,sˈaisiŋko tˈoisem pˈeiton,,,2,fi-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,Herättäisittekö minut kello {}?,,hˈerættˌæisittˌekø mˈinut kˈello {},"kello takes the bare numeral, so the slot needs no case",,2,fi-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,Huoneessa on ongelma.,,hˈuoneːssa ˈon ˈoŋŋelma,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,Ilmastointi on rikki.,,ˈilmastˌointi ˈon rˈikki,,,2,fi-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,Kuumaa vettä ei tule.,,kˈuːmaː vˈettæ ˈei tˈule,,,2,fi-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,Voinko vaihtaa huonetta?,,vˈoiŋko vˈaihtaː hˈuonetta,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,Huone on liian meluisa.,,hˈuone ˈon lˈiːan mˈeluisa,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,Avain ei toimi.,,ˈavain ˈei tˈoimi,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,Vessa ei vedä.,,vˈessa ˈei vˈedæ,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,Valo ei toimi.,,vˈalo ˈei tˈoimi,,,2,fi-agent-v1;ipa=espeak
+room-problems.please-send-someone,Voisitteko lähettää jonkun korjaamaan?,,vˈoisittˌeko lˈæhettæː jˈoŋkuŋ kˈorjaːmaːn,,,2,fi-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,Lämmitys ei toimi.,,lˈæmmitys ˈei tˈoimi,,,2,fi-agent-v1;ipa=espeak
+laundry.please-wash-these-clothes,Pesisittekö nämä vaatteet?,,pˈesisˌittekø nˈæmæ vˈaːtteːt,,,2,fi-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Missä on itsepalvelupesula?,,mˈissæ ˈon ˈitsepˌalvelˌupesˌula,,,2,fi-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,Milloin se on valmis?,,mˈilloin sˈe ˈon vˈalmis,,,2,fi-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,Paljonko kilo kustantaa?,,pˈaljoŋko kˈilo kˈustantaː,,,2,fi-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,Ehtiikö se valmistua tänään?,,ˈehtiːkø sˈe vˈalmistˌua tˈænæːn,,,2,fi-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,Älkää käyttäkö valkaisuainetta.,,ˈælkæː kˈæyttækø vˈalkaisuˌainetta,,,2,fi-agent-v1;ipa=espeak
+laundry.laundromat,itsepalvelupesula,,ˈitsepˌalvelˌupesˌula,the Finnish shop name; a full-service pesula is a different thing,,2,fi-agent-v1;ipa=espeak
+laundry.please-iron-this,Silittäisittekö tämän?,,sˈilittˌæisittˌekø tˈæmæn,,,2,fi-agent-v1;ipa=espeak
+laundry.detergent,pyykinpesuaine,,pˈyːkimpesuˌaine,,,2,fi-agent-v1;ipa=espeak
+laundry.dry-cleaning,kemiallinen pesu,,kˈemiˌallinem pˈesu,,,2,fi-agent-v1;ipa=espeak
+laundry.dryer,kuivausrumpu,,kˈuivausrˌumpu,,,2,fi-agent-v1;ipa=espeak
+laundry.coin-operated,kolikkokäyttöinen,,kˈolikkokˌæyttøinen,,,2,fi-agent-v1;ipa=espeak
+massage-spa.please-stop,"Lopettakaa, kiitos.",,"lˈopettakaː, kˈiːtos","stop, please","a bare polite-plural imperative, blunter than this pack's usual conditional requests (Voisitteko..., Saisinko...), because the concept ends the session and is deliberately not softened. lopettaa is lexically terminal against tauko in the row below, so Finnish needs no second clause where the Mandarin row carries one",2,fi-massage-spa-v1;spa-board-v1;src=Kielitoimiston-sanakirja;in-pack-neighbour;ipa=espeak
+massage-spa.please-pause,"Pieni tauko, kiitos.",,"pˈieni tˈauko, kˈiːtos","a short break, please","tauko says temporarily on its own, and unlike this pack's communication.please-wait-a-moment (Hetkinen, kiitos.) it asks the listener to suspend what they are doing rather than to wait for the speaker",2,fi-massage-spa-v1;spa-board-v1;src=Kielitoimiston-sanakirja;ipa=espeak
+massage-spa.please-avoid-this-area,Älkää hieroko tätä kohtaa.,,ˈælkæː hˈieroko tˈætæ kˈohtaː,do not massage this spot,kohta is the ordinary Finnish word for a place on the body; the negative plural imperative matches this pack's laundry.please-do-not-use-bleach,2,fi-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=espeak
+massage-spa.stronger-pressure,"Vähän kovempaa, kiitos.",,"vˈæhæŋ kˈovempaː, kˈiːtos","a bit firmer, please","kovempaa is the trade's word: a registered hieroja's own FAQ writes kevyemmin lupaan aina pyydettaessa ottaa, kovempaakin, jos se on mielestani tarpeen. Three words beginning Vähän against the two of Kevyemmin, kiitos, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
+massage-spa.more-gently,"Kevyemmin, kiitos.",,"kˈevyˌemmin, kˈiːtos","more lightly, please","the other half of the trade's kovempaa / kevyemmin pair, and it modifies the therapist's ote, the grip, so it is about pressure and not speed",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
+massage-spa.that-pressure-is-good,"Tämä ote on hyvä, jatkakaa näin.",,"tˈæmæ ˈote ˈon hˈyvæ, jˈatkakaː nˈæin","this grip is good, carry on like this","ote, the grip, is what Finnish measures massage pressure in; a confirmation with a keep-it-there clause, not praise",2,fi-massage-spa-v1;spa-board-v1;src=voimistaja-hieroja-faq;ipa=espeak
+massage-spa.focus-on-shoulders,Keskittykää hartioihin.,,kˈeskittykæː hˈartiˌoihin,,,2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
+massage-spa.focus-on-back,Keskittykää selkään.,,kˈeskittykæː sˈelkæːn,selkä is one of the areas a Finnish hieronta price list sells by name,,2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
+massage-spa.focus-on-neck,Keskittykää niskaan.,,kˈeskittykæː nˈiskaːn,"niska, the back of the neck, is the massage word; kaula is the throat and would be wrong here. The trade groups this with the shoulders as the niska-hartiaseutu and sells niska-hartiahieronta as one bookable service, but the two rows stay separate because a board button is one meaning",,2,fi-massage-spa-v1;spa-board-v1;src=relahierojat-hinnasto;ipa=espeak
+massage-spa.focus-on-feet,Keskittykää jalkateriin.,,kˈeskittykæː jˈalkateriːn,"jalkaterä, the foot proper, as this pack's body-parts.foot already has it, because plain jalka would be read as the whole leg",and jalkahieronta is a bookable service of its own in Finland rather than part of a kokovartalohieronta,2,fi-massage-spa-v1;spa-board-v1;in-pack-neighbour;src=relahierojat-hinnasto;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Selvä, jätän sen kohdan väliin.",,"sˈelvæ, jˈætæn sˈeŋ kˈohdan vˈæliːn","right, I will leave that spot out","Finnish has no grammatical gender, so no reply in this set needed steering",2,fi-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
+massage-spa.reply-which-area-exactly,Mikä kohta tarkalleen?,,mˈikæ kˈohta tˈarkalleːn,,,2,fi-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,Tässä hoidossa sitä kohtaa ei voi jättää väliin.,,tˈæssæ hˈoidossa sˈitæ kˈohtaː ˈei vˈoi jˈættæː vˈæliːn,in this treatment that spot cannot be skipped,"hoito is one bookable treatment, not a hoitosarja, which would be a course of several and overstate what is being refused",2,fi-massage-spa-v1;spa-reply-v1;src=Kielitoimiston-sanakirja;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Sattuuko tähän kohtaan?,,sˈattuːko tˈæhæŋ kˈohtaːn,,,2,fi-massage-spa-v1;spa-reply-v1;in-pack-neighbour;ipa=espeak
+massage-spa.reply-ask-supervisor,"En ole varma, kysyn esihenkilöltä.",,"ˈen ˈole vˈarma, kˈysyn ˈesihˌeŋkilˌøltæ","I am not sure, I will ask the supervisor","esihenkilö is the gender-neutral term that has displaced esimies, which contains mies, man; Kotus's own Kielikello and its virkakieli guidance recommend the switch",2,fi-massage-spa-v1;spa-reply-v1;src=kotus-kielikello-varusnainen-ja-esihenkilo;ipa=espeak

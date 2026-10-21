@@ -1,148 +1,148 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.hello,Bok,Zdravo,bˈok,the everyday informal greeting in Croatia,2,hr-agent-v1;ipa=espeak
-social-basics.hello-polite,Dobar dan,,dˈobar dˈan,'good day' -- the polite greeting to a stranger,2,hr-agent-v1;ipa=espeak
-social-basics.good-morning,Dobro jutro,,dˈobro jˈutro,,2,hr-agent-v1;ipa=espeak
-social-basics.good-evening,Dobra večer,,dˈobra vˈetʃer,"večer is feminine in Croatian, so the adjective is dobra",2,hr-agent-v1;ipa=espeak
-social-basics.goodbye,Do viđenja,,dˈo vidʑeɲa,,2,hr-agent-v1;ipa=espeak
-social-basics.thank-you,Hvala,,xvˈala,,2,hr-agent-v1;ipa=espeak
-social-basics.you-are-welcome,Nema na čemu,,nema nˈa tʃˈemu,'there is nothing to it',2,hr-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,Oprostite,,oprostite,,2,hr-agent-v1;ipa=espeak
-social-basics.sorry,Žao mi je,,ʒˈao mˈi je,'it is sorry to me',2,hr-agent-v1;ipa=espeak
-social-basics.no-problem,Nema problema,,nema problema,,2,hr-agent-v1;ipa=espeak
-social-basics.i-do-not-know,Ne znam,,nˈe znˈam,,2,hr-agent-v1;ipa=espeak
-social-basics.good-night,Laku noć,,lˈaku nˈotɕ,"'easy night' -- the fixed parting for the night, not a greeting",2,hr-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,U redu,,u rˈedu,'in order',2,hr-agent-v1;ipa=espeak
-social-basics.politeness-particles,"Pristojnost na tajskom: gotovo svaku rečenicu završite s khrap ako ste muškarac, ili s kha ako ste žena. U pitanju žena kaže kha uzlaznom intonacijom. Redovi u ovom vodiču tu česticu ne sadrže, pa je dodajte sami.",,,,2,gloss-only;scoped-away;hr-agent-v1
-communication.i-do-not-speak-this-language,Ne govorim {target},,nˈe ɡovorim {target},,2,hr-agent-v1;ipa=espeak
-communication.i-speak-only-a-little-of-this,Govorim samo malo {target},,ɡovorim sˈamo mˈalo {target},,2,hr-agent-v1;ipa=espeak
-communication.do-you-speak-english,Govorite li {source}?,,ɡovorite li {source},,2,hr-agent-v1;ipa=espeak
-communication.please-speak-more-slowly,"Molim vas, govorite sporije",,"mˈolim vˈas, ɡovorite sporije",,2,hr-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,Ne razumijem,,nˈe razumijem,,2,hr-agent-v1;ipa=espeak
-communication.i-cannot-read-understand,Ne znam ovo pročitati / ne razumijem,,nˈe znˈam ˈovo protʃitati / nˈe razumijem,,2,hr-agent-v1;ipa=espeak
-communication.please-say-it-again,"Molim vas, ponovite",,"mˈolim vˈas, ponovite",,2,hr-agent-v1;ipa=espeak
-communication.please-write-it-down,"Molim vas, napišite mi to",,"mˈolim vˈas, napiʃite mˈi tˈo",,2,hr-agent-v1;ipa=espeak
-communication.please-wait-a-moment,"Molim vas, samo trenutak",,"mˈolim vˈas, sˈamo trenutak",,2,hr-agent-v1;ipa=espeak
-communication.can-you-help-me,Možete li mi pomoći?,,moʒete li mˈi pomotɕi,,2,hr-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Pokažite mi tekst na ovom jeziku: {target},,pokaʒite mˈi tˈekst nˈa ˈovom jeziku {target},"'show me the text in this language:' -- na takes the locative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
-communication.i-cannot-make-out-what-you-are-saying,Ne razumijem što govorite,,nˈe razumijem ʃto ɡovorite,,2,hr-agent-v1;ipa=espeak
-communication.i-do-not-understand,Ne razumijem,,nˈe razumijem,,2,hr-agent-v1;ipa=espeak
-communication.i-cannot-read-it,Ne znam ovo pročitati,,nˈe znˈam ˈovo protʃitati,,2,hr-agent-v1;ipa=espeak
-communication.please-write-it-in-roman-letters,"Molim vas, napišite to latinicom",,"mˈolim vˈas, napiʃite tˈo latinitsom","latinica is the Latin alphabet, which Croatian itself is written in",2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,izvolite / samo naprijed,,izvolite / sˈamo naprijed,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) izvoljeti (frazeologija: izvoli! izvolite! -- izraz pristojnog nuđenja (mjesta za sjedenje -- proizvoda na prodaju));was=molim / samo naprijed (molim: HJP moliti 1 obraćati se molbom -- the request please -- as the pack's frame {}, molim);rule=the offering please replaces the request half -- the go-ahead half stays (as fr je vous en prie / allez-y);row-corrections-v15;ipa=espeak"
-quick-responses.yes-right,da,,dˈa,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) da 2 (u samostalnoj upotrebi znači odobravanje ili potvrđivanje -- Je li tako? — da);rule=one-reading-on-a-board (tako je, that is so, was the gloss of the range);row-corrections-v7;ipa=espeak"
-quick-responses.no-not,ne,,nˈe,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) ne (riječ za odricanje);rule=one-reading-on-a-board (nije, it is not, was the gloss of the range);row-corrections-v7;ipa=espeak"
-quick-responses.okay-can,dobro,,dˈobro,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dobro! (riječ za odobravanje onoga što se čulo ili onoga što se radi);rule=one-reading-on-a-board (može, can, was the can gloss and is quick-responses.can-possible's first half);row-corrections-v7;ipa=espeak"
-quick-responses.cannot-not-allowed,nije dopušteno,,nije dopuʃteno,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dopušten (koji je odobren, dozvoljen);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, whose first half is ne može);row-corrections-v7;ipa=espeak"
-quick-responses.works-okay,radi / u redu,,rˈadi / u rˈedu,,2,hr-agent-v1;ipa=espeak
-quick-responses.does-not-work-no,ne radi / ne,,nˈe rˈadi / nˈe,,2,hr-agent-v1;ipa=espeak
-quick-responses.can-possible,može / moguće je,,mˈoʒe / moɡutɕe je,,2,hr-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,ne može / nije moguće,,nˈe mˈoʒe / nije moɡutɕe,,2,hr-agent-v1;ipa=espeak
-quick-responses.okay-fine,dobro / u redu,,dˈobro / u rˈedu,,2,hr-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,nije dobro / nije dopušteno / neće ići,,nije dˈobro / nije dopuʃteno / nˈetɕe ˈitɕi,,2,hr-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,Koristim prevoditelj na mobitelu,,koristim prevoditeʎ nˈa mobitelu,,2,hr-agent-v1;ipa=espeak
-phone-translation.please-speak-toward-the-phone,"Molim vas, govorite prema mobitelu",,"mˈolim vˈas, ɡovorite prˈema mobitelu",,2,hr-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Napišite naziv mjesta na ovom jeziku: {target},,napiʃite nˈaziv mjˈesta nˈa ˈovom jeziku {target},,2,hr-agent-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,"Molim vas, rečenicu po rečenicu",,"mˈolim vˈas, retʃenitsu pˈo retʃenitsu",,2,hr-agent-v1;ipa=espeak
-phone-translation.please-type-it-and-show-me,"Molim vas, napišite to i pokažite mi",,"mˈolim vˈas, napiʃite tˈo i pokaʒite mˈi",,2,hr-agent-v1;ipa=espeak
-phone-translation.please-look-at-the-screen,"Molim vas, pogledajte ekran",,"mˈolim vˈas, poɡledajte ˈekran",,2,hr-agent-v1;ipa=espeak
-phone-text-power.please-type-it-for-me,"Molim vas, napišite mi to na mobitelu",,"mˈolim vˈas, napiʃite mˈi tˈo nˈa mobitelu",,2,hr-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,"Molim vas, koristite jednostavne riječi",,"mˈolim vˈas, koristite jednostavne rijetʃi",,2,hr-agent-v1;ipa=espeak
-phone-text-power.my-phone-battery-is-low,Baterija na mobitelu mi je skoro prazna,,baterija nˈa mobitelu mˈi je skˈoro prˈazna,,2,hr-agent-v1;ipa=espeak
-phone-text-power.do-you-have-a-power-bank,Imate li prijenosni punjač?,power bank,imate li prijenosni pˈuɲatʃ,,2,hr-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,Prijevod možda nije točan,,prijevod mˈoʒda nije tˈotʃan,,2,hr-agent-v1;ipa=espeak
-phone-text-power.please-confirm,"Molim vas, potvrdite",,"mˈolim vˈas, potvrdite",,2,hr-agent-v1;ipa=espeak
-phone-text-power.may-i-charge-my-phone-here,Mogu li ovdje napuniti mobitel?,,mˈoɡu li ˈovdje napuniti mobitel,,2,hr-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,Želio bih turističku SIM karticu,,ʒˈelio bˈix turistitʃku sˈim kartitsu,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Željela bih turističku SIM karticu (the same wording);was=text_alt Željela bih turističku SIM karticu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak+loan
-sim-data.may-i-use-your-wifi,Mogu li se spojiti na vaš Wi-Fi?,,mˈoɡu li sˈe spojiti nˈa vˈaʃ vˈajfaj,,2,hr-agent-v1;ipa=espeak+loan
-sim-data.how-much-data-is-included,Koliko je podataka uključeno?,,koliko je podataka ukʎutʃeno,,2,hr-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,Trebate li moju putovnicu?,,trebate li mˈoju putovnitsu,,2,hr-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,Koliko dugo vrijedi?,,koliko dˈuɡo vrijedi,,2,hr-agent-v1;ipa=espeak
-sim-data.please-activate-it,"Molim vas, aktivirajte je",,"mˈolim vˈas, aktivirajte je","je refers to the SIM kartica, which is feminine",2,hr-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,Imate li eSIM?,,imate li esˈim,,2,hr-agent-v1;ipa=espeak+loan
-sim-data.my-data-is-not-working,Ne radi mi mobilni internet,,nˈe rˈadi mˈi mobilni internet,,2,hr-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,Treba li se registrirati?,,trˈeba li sˈe reɡistrirati,,2,hr-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,Nemam signal,,nemam sˈiɡnal,,2,hr-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,"Molim vas, napišite Wi-Fi lozinku",,"mˈolim vˈas, napiʃite vˈajfaj lozinku",,2,hr-agent-v1;ipa=espeak+loan
-sim-data.sim-card,SIM kartica,,sˈim kartitsa,,2,hr-agent-v1;ipa=espeak+loan
-sim-data.where-can-i-buy-a-plug-adapter,Gdje mogu kupiti adapter za struju?,,ɡdjˈe mˈoɡu kupiti adapter zˈa strˈuju,,2,hr-agent-v1;ipa=espeak
-sim-data.mobile-data,mobilni internet,mobilni podaci,mobilni internet,,2,hr-agent-v1;ipa=espeak
-sim-data.can-i-top-up-this-sim,Mogu li dopuniti ovu SIM karticu?,,mˈoɡu li dopuniti ˈovu sˈim kartitsu,,2,hr-agent-v1;ipa=espeak+loan
-sim-data.top-up,dopuna,,dopuna,,2,hr-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,Ima li signala na ovom mjestu: {},,ima li siɡnala nˈa ˈovom mjˈestu {},"'is there signal at this place:' -- na takes the locative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
-sim-data.signal,signal,,sˈiɡnal,,2,hr-agent-v1;ipa=espeak
-sim-data.esim,eSIM,,esˈim,,2,hr-agent-v1;ipa=espeak+loan
-sim-data.prepaid,kartica na bonove,prepaid,kartitsa nˈa bonove,'card on vouchers' -- what a Croatian shop and a Croatian speaker both call a prepaid SIM,2,hr-agent-v1;ipa=espeak
-sim-data.roaming,roaming,,rˈoaminɡ,,2,hr-agent-v1;ipa=espeak
-etiquette.is-this-allowed,Je li ovo dopušteno?,,je li ˈovo dopuʃteno,,2,hr-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,Očekuje li se napojnica?,,otʃekuje li sˈe napojnitsa,,2,hr-agent-v1;ipa=espeak
-etiquette.is-service-included,Je li usluga uključena u cijenu?,,je li usluɡa ukʎutʃena u tsijenu,,2,hr-agent-v1;ipa=espeak
-etiquette.may-i-enter,Mogu li ući?,,mˈoɡu li ˈutɕi,,2,hr-agent-v1;ipa=espeak
-etiquette.remove-shoes,Treba li izuti obuću?,,trˈeba li izuti obutɕu,,2,hr-agent-v1;ipa=espeak
-etiquette.photo-of-you,Mogu li vas fotografirati?,,mˈoɡu li vˈas fotoɡrafirati,,2,hr-agent-v1;ipa=espeak
-etiquette.may-i-sit-here,Mogu li ovdje sjesti?,,mˈoɡu li ˈovdje sjˈesti,,2,hr-agent-v1;ipa=espeak
-etiquette.queue-for,Je li ovo red za {}?,,je li ˈovo rˈed zˈa {},"za takes the accusative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Jesam li prikladno odjeven?,,jˈesam li prikladno odjeven,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Jesam li prikladno odjevena? (the same wording);was=text_alt Jesam li prikladno odjevena? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,Nisam vas htio uvrijediti,,nisam vˈas xtˈio uvrijediti,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Nisam vas htjela uvrijediti (the same wording);was=text_alt Nisam vas htjela uvrijediti (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-etiquette.what-is-customary,Što je ovdje običaj?,,ʃto je ˈovdje obitʃaj,,2,hr-agent-v1;ipa=espeak
-etiquette.keep-the-change,"Zadržite ostatak, molim",,"zadrʒite ostatak, mˈolim",,2,hr-agent-v1;ipa=espeak
-children.cannot-find-my-child,Ne mogu naći svoje dijete,,nˈe mˈoɡu nˈatɕi svˈoje dijete,"'I cannot find my child' -- deliberately not izgubio sam dijete, which in Croatian as in English can be read as bereavement",2,hr-agent-v1;ipa=espeak
-children.make-an-announcement,Možete li to objaviti preko zvučnika?,,moʒete li tˈo objaviti prˈeko zvutʃnika,,2,hr-agent-v1;ipa=espeak
-children.child-age,Dob mog djeteta: {},,dˈob mˈoɡ djeteta {},"'my child's age: {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=Hrvatski jezični portal dob (razdoblje u ljudskom životu);fix=hr.wikipedia Dojenje rev 7576467 (gestacijsku dob -- dob djeteta -- dob majke);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Moje dijete ima {} godina (right from five -- wrong for one: godinu -- and two to four: godine);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
-children.high-chair,Imate li dječju stolicu za hranjenje?,,imate li djˈetʃju stolitsu zˈa xraɲeɲe,,2,hr-agent-v1;ipa=espeak
-children.baby-changing-room,Gdje je prostor za promjenu pelena?,,ɡdjˈe je prˈostor zˈa promjenu pelena,,2,hr-agent-v1;ipa=espeak
-children.childrens-menu,Imate li dječji meni?,,imate li djˈetʃji mˈeni,,2,hr-agent-v1;ipa=espeak
-children.suitable-for-children,Je li ovo prikladno za djecu?,,je li ˈovo prikladno zˈa djˈetsu,,2,hr-agent-v1;ipa=espeak
-children.minimum-age,Koja je dobna granica?,,kˈoja je dˈobna ɡranitsa,'what is the age limit',2,hr-agent-v1;ipa=espeak
-children.do-children-pay,Plaćaju li djeca?,,platɕaju li djˈetsa,,2,hr-agent-v1;ipa=espeak
-children.crib,Imate li dječji krevetić?,,imate li djˈetʃji krevetitɕ,,2,hr-agent-v1;ipa=espeak
-children.warm-this-bottle,"Molim vas, ugrijte ovu bočicu",,"mˈolim vˈas, uɡrijte ˈovu botʃitsu",,2,hr-agent-v1;ipa=espeak
-children.car-seat,Trebamo dječju autosjedalicu,,trebamo djˈetʃju autosjedalitsu,,2,hr-agent-v1;ipa=espeak
-children.stroller,dječja kolica,,djˈetʃja kolitsa,"plural only, like English 'scissors'",2,hr-agent-v1;ipa=espeak
-children.playground,Ima li ovdje dječje igralište?,,ima li ˈovdje djˈetʃje iɡraliʃte,,2,hr-agent-v1;ipa=espeak
-board-answers.there-is-no-wait,"Nema reda, možete odmah ući",,"nema rˈeda, moʒete ˈodmax ˈutɕi",,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.none-of-these,Ovdje nema toga što želim reći,,ˈovdje nema tˈoɡa ʃto ʒˈelim rˈetɕi,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-closed,Zatvoreno je,,zatvoreno je,"spoken register, distinct from the sign word zatvoreno",2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.we-do-not-have-it,Nemamo to,,nemamo tˈo,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.card-or-cash,Kartica ili gotovina?,,kartitsa ili ɡotovina,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.please-wait,"Trenutak, molim",,"trenutak, mˈolim",,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.it-is-over-there,To je tamo,,tˈo je tˈamo,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.i-will-show-you,Pokazat ću put,,pokazat tɕˈu pˈut,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.how-many,Koliko?,,koliko,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.not-possible,To nije moguće,,tˈo nije moɡutɕe,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.say-it-again,"Još jednom, molim?",,"jˈoʃ jˈednom, mˈolim",,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.i-will-write-it-down,Zapisat ću to,,zapisat tɕˈu tˈo,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.i-am-calling-an-ambulance,Zovem hitnu pomoć,,zˈovem xˈitnu pˈomotɕ,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.i-am-calling-the-police,Zovem policiju,,zˈovem politsiju,,2,hr-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
-board-answers.help-is-coming,Pomoć je na putu,,pˈomotɕ je nˈa pˈutu,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.where-does-it-hurt,Gdje vas boli?,,ɡdjˈe vˈaz bˈoli,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.can-you-walk,Može li se hodati?,,mˈoʒe li sˈe xodati,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.stay-here,Bolje je ostati ovdje,,bˈoʎe je ostati ˈovdje,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.what-is-your-name,Kako se zovete?,,kˈako sˈe zovete,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
-board-answers.the-hospital-is-close,Bolnica je blizu,,bolnitsa je blˈizu,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.i-do-not-have-a-phone,Nemam telefon,,nemam telefon,,2,hr-agent-v1;board-answers-v1;ipa=espeak
-board-answers.i-will-find-someone,Pronaći ću nekoga tko može pomoći,,pronatɕi tɕˈu nekoɡa tko mˈoʒe pomotɕi,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-kind-words.you-are-very-kind,Vi ste vrlo ljubazni.,,vˈi ste vrlo ʎubazni,"formal Vi takes a plural adjective, which is neutral regardless of the listener's gender (speaker-variants.md: low hazard)",2,hr-kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-help,Hvala na pomoći.,,xvˈala nˈa pomotɕi,,2,hr-kind-words-v1;ipa=espeak
-kind-words.this-is-delicious,Ovo je vrlo ukusno.,,ˈovo je vrlo ukusno,,2,hr-kind-words-v1;ipa=espeak
-kind-words.it-is-beautiful-here,Ovdje je vrlo lijepo.,,ˈovdje je vrlo lijepo,,2,hr-kind-words-v1;ipa=espeak
-kind-words.i-like-it-very-much,To mi se puno sviđa.,,tˈo mˈi sˈe pˈuno svˈidʑa,,2,hr-kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,Imao sam ovdje divno vrijeme.,,ˈimao sam ˈovdje dˈivno vrijeme,'I had a wonderful time here',2,"hr-kind-words-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) divan (koji izaziva divljenje -- neobično lijep -- krasan) and vrijeme 4 ((vremensko) trajanje);was=literal masculine default -- the l-participle marks the speaker's gender, feminine variant in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Imala sam ovdje divno vrijeme. serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-kind-words.thank-you-for-everything,Hvala na svemu.,,xvˈala nˈa svˈemu,,2,hr-kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-hospitality,Hvala na gostoljubivosti.,,xvˈala nˈa ɡostoʎubivosti,,2,hr-kind-words-v1;ipa=espeak
-board-answers.my-name-is-blank,Zovem se {},,zˈovem sˈe {},,2,hr-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
-board-answers.i-would-rather-not-say,Radije to neću reći,,radije tˈo nˈetɕu rˈetɕi,,2,hr-agent-v1;src=HJP rado (komp. radije);reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.what-happened,Što se dogodilo?,,ʃto sˈe doɡodilo,,2,hr-agent-v1;src=HJP dogoditi se;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.understood,Razumijem,,razumijem,,2,hr-agent-v1;src=HJP razumjeti 1a;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.i-will-check,Provjerit ću,,provjerit tɕˈu,,2,hr-agent-v1;src=HJP provjeriti 1;reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.we-have-it,"Da, imamo",,"dˈa, imamo",,2,hr-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,Sve je popunjeno,,svˈe je popuɲeno,,2,hr-agent-v1;src=HJP popuniti 1 (prid. trp. popunjen);reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.it-is-free,Besplatno je,,besplatno je,,2,hr-agent-v1;src=HJP besplatno;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.it-does-not-matter,Svejedno je,,svejedno je,,2,hr-agent-v1;src=HJP svejedno 1;answers-audit-v1;ipa=espeak
-board-answers.only-for-customers,Samo za goste,,sˈamo zˈa ɡˈoste,,2,hr-agent-v1;src=HJP gost 2;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.where-to,Kamo putujete?,,kˈamo putujete,,2,hr-agent-v1;src=HJP kamo 1 + putovati 1;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,Na sljedećoj stanici,,nˈa sʎedetɕoj stanitsi,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.pay-on-board,Plaća se u vozilu,,plˈatɕa sˈe u vozilu,,2,hr-agent-v1;src=HJP vozilo;src=zet.hr karte kupljene u vozilu;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.see-a-doctor,Bolje je otići liječniku,,bˈoʎe je otitɕi lijetʃniku,,2,hr-agent-v1;src=HJP liječnik 1;reply-neutrality-rule;in-pack-frame;answers-audit-v1;ipa=espeak
-board-answers.prescription-only,Samo na recept,,sˈamo nˈa rˈetsept,,2,hr-agent-v1;src=HJP recept 1;src=halmed.hr način izdavanja lijeka na recept;answers-audit-v1;ipa=espeak
-board-answers.before-food,Prije jela,,prˈije jˈela,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
-board-answers.after-food,Poslije jela,,poslije jˈela,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+social-basics.hello,Bok,Zdravo,bˈok,the everyday informal greeting in Croatia,,2,hr-agent-v1;ipa=espeak
+social-basics.hello-polite,Dobar dan,,dˈobar dˈan,good day,the polite greeting to a stranger,2,hr-agent-v1;ipa=espeak
+social-basics.good-morning,Dobro jutro,,dˈobro jˈutro,,,2,hr-agent-v1;ipa=espeak
+social-basics.good-evening,Dobra večer,,dˈobra vˈetʃer,"večer is feminine in Croatian, so the adjective is dobra",,2,hr-agent-v1;ipa=espeak
+social-basics.goodbye,Do viđenja,,dˈo vidʑeɲa,,,2,hr-agent-v1;ipa=espeak
+social-basics.thank-you,Hvala,,xvˈala,,,2,hr-agent-v1;ipa=espeak
+social-basics.you-are-welcome,Nema na čemu,,nema nˈa tʃˈemu,'there is nothing to it',,2,hr-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,Oprostite,,oprostite,,,2,hr-agent-v1;ipa=espeak
+social-basics.sorry,Žao mi je,,ʒˈao mˈi je,'it is sorry to me',,2,hr-agent-v1;ipa=espeak
+social-basics.no-problem,Nema problema,,nema problema,,,2,hr-agent-v1;ipa=espeak
+social-basics.i-do-not-know,Ne znam,,nˈe znˈam,,,2,hr-agent-v1;ipa=espeak
+social-basics.good-night,Laku noć,,lˈaku nˈotɕ,easy night,"the fixed parting for the night, not a greeting",2,hr-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,U redu,,u rˈedu,'in order',,2,hr-agent-v1;ipa=espeak
+social-basics.politeness-particles,"Pristojnost na tajskom: gotovo svaku rečenicu završite s khrap ako ste muškarac, ili s kha ako ste žena. U pitanju žena kaže kha uzlaznom intonacijom. Redovi u ovom vodiču tu česticu ne sadrže, pa je dodajte sami.",,,,,2,gloss-only;scoped-away;hr-agent-v1
+communication.i-do-not-speak-this-language,Ne govorim {target},,nˈe ɡovorim {target},,,2,hr-agent-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,Govorim samo malo {target},,ɡovorim sˈamo mˈalo {target},,,2,hr-agent-v1;ipa=espeak
+communication.do-you-speak-english,Govorite li {source}?,,ɡovorite li {source},,,2,hr-agent-v1;ipa=espeak
+communication.please-speak-more-slowly,"Molim vas, govorite sporije",,"mˈolim vˈas, ɡovorite sporije",,,2,hr-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,Ne razumijem,,nˈe razumijem,,,2,hr-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,Ne znam ovo pročitati / ne razumijem,,nˈe znˈam ˈovo protʃitati / nˈe razumijem,,,2,hr-agent-v1;ipa=espeak
+communication.please-say-it-again,"Molim vas, ponovite",,"mˈolim vˈas, ponovite",,,2,hr-agent-v1;ipa=espeak
+communication.please-write-it-down,"Molim vas, napišite mi to",,"mˈolim vˈas, napiʃite mˈi tˈo",,,2,hr-agent-v1;ipa=espeak
+communication.please-wait-a-moment,"Molim vas, samo trenutak",,"mˈolim vˈas, sˈamo trenutak",,,2,hr-agent-v1;ipa=espeak
+communication.can-you-help-me,Možete li mi pomoći?,,moʒete li mˈi pomotɕi,,,2,hr-agent-v1;ipa=espeak
+communication.please-show-me-the-text,Pokažite mi tekst na ovom jeziku: {target},,pokaʒite mˈi tˈekst nˈa ˈovom jeziku {target},show me the text in this language:,"na takes the locative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,Ne razumijem što govorite,,nˈe razumijem ʃto ɡovorite,,,2,hr-agent-v1;ipa=espeak
+communication.i-do-not-understand,Ne razumijem,,nˈe razumijem,,,2,hr-agent-v1;ipa=espeak
+communication.i-cannot-read-it,Ne znam ovo pročitati,,nˈe znˈam ˈovo protʃitati,,,2,hr-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,"Molim vas, napišite to latinicom",,"mˈolim vˈas, napiʃite tˈo latinitsom","latinica is the Latin alphabet, which Croatian itself is written in",,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,izvolite / samo naprijed,,izvolite / sˈamo naprijed,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) izvoljeti (frazeologija: izvoli! izvolite! -- izraz pristojnog nuđenja (mjesta za sjedenje -- proizvoda na prodaju));was=molim / samo naprijed (molim: HJP moliti 1 obraćati se molbom -- the request please -- as the pack's frame {}, molim);rule=the offering please replaces the request half -- the go-ahead half stays (as fr je vous en prie / allez-y);row-corrections-v15;ipa=espeak"
+quick-responses.yes-right,da,,dˈa,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) da 2 (u samostalnoj upotrebi znači odobravanje ili potvrđivanje -- Je li tako? — da);rule=one-reading-on-a-board (tako je, that is so, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.no-not,ne,,nˈe,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) ne (riječ za odricanje);rule=one-reading-on-a-board (nije, it is not, was the gloss of the range);row-corrections-v7;ipa=espeak"
+quick-responses.okay-can,dobro,,dˈobro,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dobro! (riječ za odobravanje onoga što se čulo ili onoga što se radi);rule=one-reading-on-a-board (može, can, was the can gloss and is quick-responses.can-possible's first half);row-corrections-v7;ipa=espeak"
+quick-responses.cannot-not-allowed,nije dopušteno,,nije dopuʃteno,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) dopušten (koji je odobren, dozvoljen);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, whose first half is ne može);row-corrections-v7;ipa=espeak"
+quick-responses.works-okay,radi / u redu,,rˈadi / u rˈedu,,,2,hr-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,ne radi / ne,,nˈe rˈadi / nˈe,,,2,hr-agent-v1;ipa=espeak
+quick-responses.can-possible,može / moguće je,,mˈoʒe / moɡutɕe je,,,2,hr-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,ne može / nije moguće,,nˈe mˈoʒe / nije moɡutɕe,,,2,hr-agent-v1;ipa=espeak
+quick-responses.okay-fine,dobro / u redu,,dˈobro / u rˈedu,,,2,hr-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,nije dobro / nije dopušteno / neće ići,,nije dˈobro / nije dopuʃteno / nˈetɕe ˈitɕi,,,2,hr-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,Koristim prevoditelj na mobitelu,,koristim prevoditeʎ nˈa mobitelu,,,2,hr-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,"Molim vas, govorite prema mobitelu",,"mˈolim vˈas, ɡovorite prˈema mobitelu",,,2,hr-agent-v1;ipa=espeak
+phone-translation.please-write-the-place-name,Napišite naziv mjesta na ovom jeziku: {target},,napiʃite nˈaziv mjˈesta nˈa ˈovom jeziku {target},,,2,hr-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,"Molim vas, rečenicu po rečenicu",,"mˈolim vˈas, retʃenitsu pˈo retʃenitsu",,,2,hr-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,"Molim vas, napišite to i pokažite mi",,"mˈolim vˈas, napiʃite tˈo i pokaʒite mˈi",,,2,hr-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,"Molim vas, pogledajte ekran",,"mˈolim vˈas, poɡledajte ˈekran",,,2,hr-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,"Molim vas, napišite mi to na mobitelu",,"mˈolim vˈas, napiʃite mˈi tˈo nˈa mobitelu",,,2,hr-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,"Molim vas, koristite jednostavne riječi",,"mˈolim vˈas, koristite jednostavne rijetʃi",,,2,hr-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,Baterija na mobitelu mi je skoro prazna,,baterija nˈa mobitelu mˈi je skˈoro prˈazna,,,2,hr-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,Imate li prijenosni punjač?,power bank,imate li prijenosni pˈuɲatʃ,,,2,hr-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,Prijevod možda nije točan,,prijevod mˈoʒda nije tˈotʃan,,,2,hr-agent-v1;ipa=espeak
+phone-text-power.please-confirm,"Molim vas, potvrdite",,"mˈolim vˈas, potvrdite",,,2,hr-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,Mogu li ovdje napuniti mobitel?,,mˈoɡu li ˈovdje napuniti mobitel,,,2,hr-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,Želio bih turističku SIM karticu,,ʒˈelio bˈix turistitʃku sˈim kartitsu,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Željela bih turističku SIM karticu (the same wording);was=text_alt Željela bih turističku SIM karticu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak+loan
+sim-data.may-i-use-your-wifi,Mogu li se spojiti na vaš Wi-Fi?,,mˈoɡu li sˈe spojiti nˈa vˈaʃ vˈajfaj,,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.how-much-data-is-included,Koliko je podataka uključeno?,,koliko je podataka ukʎutʃeno,,,2,hr-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Trebate li moju putovnicu?,,trebate li mˈoju putovnitsu,,,2,hr-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,Koliko dugo vrijedi?,,koliko dˈuɡo vrijedi,,,2,hr-agent-v1;ipa=espeak
+sim-data.please-activate-it,"Molim vas, aktivirajte je",,"mˈolim vˈas, aktivirajte je","je refers to the SIM kartica, which is feminine",,2,hr-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,Imate li eSIM?,,imate li esˈim,,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.my-data-is-not-working,Ne radi mi mobilni internet,,nˈe rˈadi mˈi mobilni internet,,,2,hr-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,Treba li se registrirati?,,trˈeba li sˈe reɡistrirati,,,2,hr-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,Nemam signal,,nemam sˈiɡnal,,,2,hr-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,"Molim vas, napišite Wi-Fi lozinku",,"mˈolim vˈas, napiʃite vˈajfaj lozinku",,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.sim-card,SIM kartica,,sˈim kartitsa,,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.where-can-i-buy-a-plug-adapter,Gdje mogu kupiti adapter za struju?,,ɡdjˈe mˈoɡu kupiti adapter zˈa strˈuju,,,2,hr-agent-v1;ipa=espeak
+sim-data.mobile-data,mobilni internet,mobilni podaci,mobilni internet,,,2,hr-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,Mogu li dopuniti ovu SIM karticu?,,mˈoɡu li dopuniti ˈovu sˈim kartitsu,,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.top-up,dopuna,,dopuna,,,2,hr-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,Ima li signala na ovom mjestu: {},,ima li siɡnala nˈa ˈovom mjˈestu {},is there signal at this place:,"na takes the locative, and the slot carries a bare name",2,hr-agent-v1;ipa=espeak
+sim-data.signal,signal,,sˈiɡnal,,,2,hr-agent-v1;ipa=espeak
+sim-data.esim,eSIM,,esˈim,,,2,hr-agent-v1;ipa=espeak+loan
+sim-data.prepaid,kartica na bonove,prepaid,kartitsa nˈa bonove,card on vouchers,what a Croatian shop and a Croatian speaker both call a prepaid SIM,2,hr-agent-v1;ipa=espeak
+sim-data.roaming,roaming,,rˈoaminɡ,,,2,hr-agent-v1;ipa=espeak
+etiquette.is-this-allowed,Je li ovo dopušteno?,,je li ˈovo dopuʃteno,,,2,hr-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,Očekuje li se napojnica?,,otʃekuje li sˈe napojnitsa,,,2,hr-agent-v1;ipa=espeak
+etiquette.is-service-included,Je li usluga uključena u cijenu?,,je li usluɡa ukʎutʃena u tsijenu,,,2,hr-agent-v1;ipa=espeak
+etiquette.may-i-enter,Mogu li ući?,,mˈoɡu li ˈutɕi,,,2,hr-agent-v1;ipa=espeak
+etiquette.remove-shoes,Treba li izuti obuću?,,trˈeba li izuti obutɕu,,,2,hr-agent-v1;ipa=espeak
+etiquette.photo-of-you,Mogu li vas fotografirati?,,mˈoɡu li vˈas fotoɡrafirati,,,2,hr-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,Mogu li ovdje sjesti?,,mˈoɡu li ˈovdje sjˈesti,,,2,hr-agent-v1;ipa=espeak
+etiquette.queue-for,Je li ovo red za {}?,,je li ˈovo rˈed zˈa {},"za takes the accusative, and the slot carries a bare name",,2,hr-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Jesam li prikladno odjeven?,,jˈesam li prikladno odjeven,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Jesam li prikladno odjevena? (the same wording);was=text_alt Jesam li prikladno odjevena? (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Nisam vas htio uvrijediti,,nisam vˈas xtˈio uvrijediti,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Nisam vas htjela uvrijediti (the same wording);was=text_alt Nisam vas htjela uvrijediti (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+etiquette.what-is-customary,Što je ovdje običaj?,,ʃto je ˈovdje obitʃaj,,,2,hr-agent-v1;ipa=espeak
+etiquette.keep-the-change,"Zadržite ostatak, molim",,"zadrʒite ostatak, mˈolim",,,2,hr-agent-v1;ipa=espeak
+children.cannot-find-my-child,Ne mogu naći svoje dijete,,nˈe mˈoɡu nˈatɕi svˈoje dijete,I cannot find my child,"deliberately not izgubio sam dijete, which in Croatian as in English can be read as bereavement",2,hr-agent-v1;ipa=espeak
+children.make-an-announcement,Možete li to objaviti preko zvučnika?,,moʒete li tˈo objaviti prˈeko zvutʃnika,,,2,hr-agent-v1;ipa=espeak
+children.child-age,Dob mog djeteta: {},,dˈob mˈoɡ djeteta {},my child's age: {},"a label, so the number agrees with nothing",2,hr-agent-v1;fix=Hrvatski jezični portal dob (razdoblje u ljudskom životu);fix=hr.wikipedia Dojenje rev 7576467 (gestacijsku dob -- dob djeteta -- dob majke);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Moje dijete ima {} godina (right from five -- wrong for one: godinu -- and two to four: godine);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
+children.high-chair,Imate li dječju stolicu za hranjenje?,,imate li djˈetʃju stolitsu zˈa xraɲeɲe,,,2,hr-agent-v1;ipa=espeak
+children.baby-changing-room,Gdje je prostor za promjenu pelena?,,ɡdjˈe je prˈostor zˈa promjenu pelena,,,2,hr-agent-v1;ipa=espeak
+children.childrens-menu,Imate li dječji meni?,,imate li djˈetʃji mˈeni,,,2,hr-agent-v1;ipa=espeak
+children.suitable-for-children,Je li ovo prikladno za djecu?,,je li ˈovo prikladno zˈa djˈetsu,,,2,hr-agent-v1;ipa=espeak
+children.minimum-age,Koja je dobna granica?,,kˈoja je dˈobna ɡranitsa,'what is the age limit',,2,hr-agent-v1;ipa=espeak
+children.do-children-pay,Plaćaju li djeca?,,platɕaju li djˈetsa,,,2,hr-agent-v1;ipa=espeak
+children.crib,Imate li dječji krevetić?,,imate li djˈetʃji krevetitɕ,,,2,hr-agent-v1;ipa=espeak
+children.warm-this-bottle,"Molim vas, ugrijte ovu bočicu",,"mˈolim vˈas, uɡrijte ˈovu botʃitsu",,,2,hr-agent-v1;ipa=espeak
+children.car-seat,Trebamo dječju autosjedalicu,,trebamo djˈetʃju autosjedalitsu,,,2,hr-agent-v1;ipa=espeak
+children.stroller,dječja kolica,,djˈetʃja kolitsa,"plural only, like English 'scissors'",,2,hr-agent-v1;ipa=espeak
+children.playground,Ima li ovdje dječje igralište?,,ima li ˈovdje djˈetʃje iɡraliʃte,,,2,hr-agent-v1;ipa=espeak
+board-answers.there-is-no-wait,"Nema reda, možete odmah ući",,"nema rˈeda, moʒete ˈodmax ˈutɕi",,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Ovdje nema toga što želim reći,,ˈovdje nema tˈoɡa ʃto ʒˈelim rˈetɕi,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Zatvoreno je,,zatvoreno je,"spoken register, distinct from the sign word zatvoreno",,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Nemamo to,,nemamo tˈo,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Kartica ili gotovina?,,kartitsa ili ɡotovina,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Trenutak, molim",,"trenutak, mˈolim",,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,To je tamo,,tˈo je tˈamo,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Pokazat ću put,,pokazat tɕˈu pˈut,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.how-many,Koliko?,,koliko,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,To nije moguće,,tˈo nije moɡutɕe,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Još jednom, molim?",,"jˈoʃ jˈednom, mˈolim",,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Zapisat ću to,,zapisat tɕˈu tˈo,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Zovem hitnu pomoć,,zˈovem xˈitnu pˈomotɕ,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-the-police,Zovem policiju,,zˈovem politsiju,,,2,hr-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Pomoć je na putu,,pˈomotɕ je nˈa pˈutu,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Gdje vas boli?,,ɡdjˈe vˈaz bˈoli,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Može li se hodati?,,mˈoʒe li sˈe xodati,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.stay-here,Bolje je ostati ovdje,,bˈoʎe je ostati ˈovdje,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.what-is-your-name,Kako se zovete?,,kˈako sˈe zovete,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,Bolnica je blizu,,bolnitsa je blˈizu,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Nemam telefon,,nemam telefon,,,2,hr-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,Pronaći ću nekoga tko može pomoći,,pronatɕi tɕˈu nekoɡa tko mˈoʒe pomotɕi,,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Vi ste vrlo ljubazni.,,vˈi ste vrlo ʎubazni,"formal Vi takes a plural adjective, which is neutral regardless of the listener's gender (speaker-variants.md: low hazard)",,2,hr-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Hvala na pomoći.,,xvˈala nˈa pomotɕi,,,2,hr-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Ovo je vrlo ukusno.,,ˈovo je vrlo ukusno,,,2,hr-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Ovdje je vrlo lijepo.,,ˈovdje je vrlo lijepo,,,2,hr-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,To mi se puno sviđa.,,tˈo mˈi sˈe pˈuno svˈidʑa,,,2,hr-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Imao sam ovdje divno vrijeme.,,ˈimao sam ˈovdje dˈivno vrijeme,'I had a wonderful time here',,2,"hr-kind-words-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) divan (koji izaziva divljenje -- neobično lijep -- krasan) and vrijeme 4 ((vremensko) trajanje);was=literal masculine default -- the l-participle marks the speaker's gender, feminine variant in variants.csv (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Imala sam ovdje divno vrijeme. serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
+kind-words.thank-you-for-everything,Hvala na svemu.,,xvˈala nˈa svˈemu,,,2,hr-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Hvala na gostoljubivosti.,,xvˈala nˈa ɡostoʎubivosti,,,2,hr-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Zovem se {},,zˈovem sˈe {},,,2,hr-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Radije to neću reći,,radije tˈo nˈetɕu rˈetɕi,,,2,hr-agent-v1;src=HJP rado (komp. radije);reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Što se dogodilo?,,ʃto sˈe doɡodilo,,,2,hr-agent-v1;src=HJP dogoditi se;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Razumijem,,razumijem,,,2,hr-agent-v1;src=HJP razumjeti 1a;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Provjerit ću,,provjerit tɕˈu,,,2,hr-agent-v1;src=HJP provjeriti 1;reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Da, imamo",,"dˈa, imamo",,,2,hr-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Sve je popunjeno,,svˈe je popuɲeno,,,2,hr-agent-v1;src=HJP popuniti 1 (prid. trp. popunjen);reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Besplatno je,,besplatno je,,,2,hr-agent-v1;src=HJP besplatno;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Svejedno je,,svejedno je,,,2,hr-agent-v1;src=HJP svejedno 1;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Samo za goste,,sˈamo zˈa ɡˈoste,,,2,hr-agent-v1;src=HJP gost 2;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Kamo putujete?,,kˈamo putujete,,,2,hr-agent-v1;src=HJP kamo 1 + putovati 1;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Na sljedećoj stanici,,nˈa sʎedetɕoj stanitsi,,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Plaća se u vozilu,,plˈatɕa sˈe u vozilu,,,2,hr-agent-v1;src=HJP vozilo;src=zet.hr karte kupljene u vozilu;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Bolje je otići liječniku,,bˈoʎe je otitɕi lijetʃniku,,,2,hr-agent-v1;src=HJP liječnik 1;reply-neutrality-rule;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Samo na recept,,sˈamo nˈa rˈetsept,,,2,hr-agent-v1;src=HJP recept 1;src=halmed.hr način izdavanja lijeka na recept;answers-audit-v1;ipa=espeak
+board-answers.before-food,Prije jela,,prˈije jˈela,,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Poslije jela,,poslije jˈela,,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak

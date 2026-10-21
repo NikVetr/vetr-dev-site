@@ -65,7 +65,10 @@ files are real.
    rows**: it filters on `applies_to`, which is right for a target row and wrong for a
    note, whose scope names the language it is *about*. Handle the notes explicitly or
    the validator will name them the moment you finish.
-2. `data/lang/<code>/*.csv` — `concept_id,text,text_alt,ipa,literal,confidence,provenance`.
+2. `data/lang/<code>/*.csv` — `concept_id,text,text_alt,ipa,literal,note,confidence,provenance`.
+   `literal` prints, under "word for word": the English back-translation of `text` and
+   nothing else. Anything said to the next editor -- grammar, sources, the case a slot
+   cannot take -- goes in `note`, which never prints.
 3. The `ipa` column via `scripts/build_ipa.py`.
 4. `data/respell/rules/<code>__<code>-<ACCENT>.json` — your reader table.
 5. `data/i18n/<code>.json` — the interface.
@@ -664,7 +667,7 @@ Two smaller results, both reusable:
 **A case language has to decide what to do with the 44 slot rows, and the corpus is
 now split three ways rather than two.** A `{}` filler is a bare dictionary-form noun,
 so a frame governing an oblique case is ungrammatical — and `ru`, `uk` and `cs` all
-took the natural frame and put the problem in `literal`, while `pl`, `hu` and `tr`
+took the natural frame and recorded the problem beside it, while `pl`, `hu` and `tr`
 all took a colon apposition (`Jestem z tego kraju: {}`). Croatian's addition split
 the difference **on which case the frame governs**, which is the reading those six
 packs make available but none of them states: an *accusative* frame is right as
@@ -684,7 +687,7 @@ Two smaller findings from the same addition, both reusable:
   `{} noći` and `{} dana` are correct from two up because the paucal and the genitive
   plural coincide; `{} godina` is correct from five up and wrong for two to four. No
   single form of a Slavic noun serves every numeral, and `ru`, `uk`, `pl` and `cs`
-  all print the high form. Say so in `literal` rather than looking for a fifth
+  all print the high form. Say so in `note` rather than looking for a fifth
   answer.
 
 **And a reader-table device worth knowing about before enumerating a list by hand:

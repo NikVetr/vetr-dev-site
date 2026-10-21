@@ -1,31 +1,31 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Chamo-me {},Meu nome é {},ʃˈɐ̃mʊmy {},,2,pt-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Muito prazer,,mwˈiŋtʊ prazˈer,,2,pt-agent-v1;ipa=espeak
-introductions.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,2,pt-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,Viajamos juntos,,vˌiaʒˈɐ̃mʊz ʒˈũŋtʊs,,2,pt-agent-v1;ipa=espeak
-introductions.this-is-my-friend,Este é o meu amigo,Esta é a minha amiga,ˌestʃy ɛ ʊ meʊ ˌæmˈiɡʊ,,2,pt-agent-v1;ipa=espeak
-introductions.i-am-from,Venho deste país: {}.,,vˈeɲʊ dˈestʃy paˈis {},"'I come from this country: {}'; most country names take the article after de (do Brasil, da Espanha, dos Estados Unidos), so the case is fixed on 'deste país' and the name follows as a label",2,"pt-agent-v1;rewritten-for-fill-in=Ciberduvidas ('O artigo definido e o nome dos paises'): most Portuguese country names take the gendered article, a handful (Portugal, Mocambique, Cuba...) do not, so no single bare frame is safe; 'deste pais' fixes the preposition once;ipa=espeak"
-introductions.where-are-you-from,De onde é?,,dʒj ˌoŋdʒj ɛ,,2,pt-agent-v1;ipa=espeak
-introductions.how-are-you,Como está?,Tudo bem?,kˌomʊ estˌa,,2,pt-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak
-introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,ʊ meʊ mˌaɾˈidʊ / a mˌiɲæ muljˈɛr,,2,pt-agent-v1;ipa=espeak
-introductions.this-is-my-daughter-son,A minha filha / O meu filho,,a mˌiɲæ fˈiljæ / ʊ meʊ fˈiljʊ,,2,pt-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Viajo sozinho,,vˌiˈaʒʊ sˌozˈiɲʊ,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Viajo sozinha (the same wording);was=text_alt Viajo sozinha (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-family-intros.this-is-my-husband,Este é o meu marido,Este é o meu esposo,ˌestʃy ɛ ʊ meʊ mˌaɾˈidʊ,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-wife,Esta é a minha mulher,Esta é a minha esposa,ˌɛstæ ɛ a mˌiɲæ muljˈɛr,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-son,Este é o meu filho,,ˌestʃy ɛ ʊ meʊ fˈiljʊ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-family-intros.this-is-my-daughter,Esta é a minha filha,,ˌɛstæ ɛ a mˌiɲæ fˈiljæ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-about-me.i-am-a-student,Sou estudante,,sow ˌestudˈɐ̃ŋtʃy,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-am-retired,Estou reformado,Estou aposentado,estˌow xˌefoɾəmˈadʊ,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-am-a-teacher,Sou professor,,sow prˌofesˈor,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-am-a-doctor,Sou médico,,sow mˈɛdʒikʊ,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-am-a-nurse,Sou enfermeiro,,sow ˌeɪŋfeɾəmˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-am-an-engineer,Sou engenheiro,,sow ˌeɪŋʒeɲˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-work-in-an-office,Trabalho num escritório,,trˌabˈaljʊ nũŋ ˌeskritˈɔɾjʊ,,2,pt-about-travel-v1;ipa=espeak
-about-me.i-have-my-own-business,Tenho o meu próprio negócio,,tˌeɲʊ ʊ meʊ prˈɔprjʊ nˌeɡˈɔsjʊ,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-mother,Esta é a minha mãe,,ˌɛstæ ɛ a mˌiɲæ mˈɐ̃y,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-father,Este é o meu pai,,ˌestʃy ɛ ʊ meʊ pˈaɪ,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-brother,Este é o meu irmão,,ˌestʃy ɛ ʊ meʊ iɾəmˈɐ̃ʊ̃,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-sister,Esta é a minha irmã,,ˌɛstæ ɛ a mˌiɲæ iɾəmˈɐ̃,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-partner,Este é o meu companheiro,Esta é a minha companheira,ˌestʃy ɛ ʊ meʊ kˌompɐ̃ɲˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
-family-intros.this-is-my-colleague,Este é o meu colega,Esta é a minha colega,ˌestʃy ɛ ʊ meʊ kˌolˈɛɡæ,,2,pt-about-travel-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+introductions.my-name-is,Chamo-me {},Meu nome é {},ʃˈɐ̃mʊmy {},,,2,pt-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Muito prazer,,mwˈiŋtʊ prazˈer,,,2,pt-agent-v1;ipa=espeak
+introductions.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,,2,pt-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Viajamos juntos,,vˌiaʒˈɐ̃mʊz ʒˈũŋtʊs,,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Este é o meu amigo,Esta é a minha amiga,ˌestʃy ɛ ʊ meʊ ˌæmˈiɡʊ,,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-from,Venho deste país: {}.,,vˈeɲʊ dˈestʃy paˈis {},"'I come from this country: {}'; most country names take the article after de (do Brasil, da Espanha, dos Estados Unidos), so the case is fixed on 'deste país' and the name follows as a label",,2,"pt-agent-v1;rewritten-for-fill-in=Ciberduvidas ('O artigo definido e o nome dos paises'): most Portuguese country names take the gendered article, a handful (Portugal, Mocambique, Cuba...) do not, so no single bare frame is safe; 'deste pais' fixes the preposition once;ipa=espeak"
+introductions.where-are-you-from,De onde é?,,dʒj ˌoŋdʒj ɛ,,,2,pt-agent-v1;ipa=espeak
+introductions.how-are-you,Como está?,Tudo bem?,kˌomʊ estˌa,,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,ʊ meʊ mˌaɾˈidʊ / a mˌiɲæ muljˈɛr,,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,A minha filha / O meu filho,,a mˌiɲæ fˈiljæ / ʊ meʊ fˈiljʊ,,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Viajo sozinho,,vˌiˈaʒʊ sˌozˈiɲʊ,,,2,pt-agent-v1;fix=variants.csv speaker_gender=feminine Viajo sozinha (the same wording);was=text_alt Viajo sozinha (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+family-intros.this-is-my-husband,Este é o meu marido,Este é o meu esposo,ˌestʃy ɛ ʊ meʊ mˌaɾˈidʊ,,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Esta é a minha mulher,Esta é a minha esposa,ˌɛstæ ɛ a mˌiɲæ muljˈɛr,,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Este é o meu filho,,ˌestʃy ɛ ʊ meʊ fˈiljʊ,,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Esta é a minha filha,,ˌɛstæ ɛ a mˌiɲæ fˈiljæ,,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Sou estudante,,sow ˌestudˈɐ̃ŋtʃy,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Estou reformado,Estou aposentado,estˌow xˌefoɾəmˈadʊ,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Sou professor,,sow prˌofesˈor,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Sou médico,,sow mˈɛdʒikʊ,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Sou enfermeiro,,sow ˌeɪŋfeɾəmˈeɪɾʊ,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Sou engenheiro,,sow ˌeɪŋʒeɲˈeɪɾʊ,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Trabalho num escritório,,trˌabˈaljʊ nũŋ ˌeskritˈɔɾjʊ,,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Tenho o meu próprio negócio,,tˌeɲʊ ʊ meʊ prˈɔprjʊ nˌeɡˈɔsjʊ,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Esta é a minha mãe,,ˌɛstæ ɛ a mˌiɲæ mˈɐ̃y,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,Este é o meu pai,,ˌestʃy ɛ ʊ meʊ pˈaɪ,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,Este é o meu irmão,,ˌestʃy ɛ ʊ meʊ iɾəmˈɐ̃ʊ̃,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Esta é a minha irmã,,ˌɛstæ ɛ a mˌiɲæ iɾəmˈɐ̃,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,Este é o meu companheiro,Esta é a minha companheira,ˌestʃy ɛ ʊ meʊ kˌompɐ̃ɲˈeɪɾʊ,,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,Este é o meu colega,Esta é a minha colega,ˌestʃy ɛ ʊ meʊ kˌolˈɛɡæ,,,2,pt-about-travel-v1;ipa=espeak

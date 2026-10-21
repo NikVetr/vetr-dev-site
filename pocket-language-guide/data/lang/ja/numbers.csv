@@ -1,116 +1,116 @@
-concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-numbers-money.l-ng,ゼロ,,zero,zeɾo,,2,japanese-reviewed-v6;fix=ja.wikipedia 0 rev 109995372 (読み方: 零（れい、ぜろ）、ゼロ ... その他日常的にも「れい」よりも「ゼロ」を使うことが多い -- and NHK gives ゼロ first for telephone numbers from April 2026);rule=the spoken reading -- as the pack writes 四 yon and 七 nana;row-corrections-v11;ipa=hepburn
-atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,eːtiːemɯ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.y,一,,ichi,itɕi,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,kaiɡai hakkoː no kaːdo wa tsɯkaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.r,二,,ni,ɲi,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,eːtiːemɯ ɡa kaːdo o toɾikomimaɕita,,2,ja-agent-v1;ipa=hepburn
-atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,tesɯːɾjoː wa kakaɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.li-ng,二,,ni,ɲi,,2,ja-agent-v1;ipa=hepburn
-numbers-money.s-n,三,,san,saɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.the-card-was-declined,カードが通りませんでした,,kādo ga tōrimasen deshita,kaːdo ɡa toːɾimaseɴ deɕita,,2,ja-agent-v1;ipa=hepburn
-numbers-money.s,四,,yon,joɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.what-is-the-exchange-rate,為替レートはいくらですか？,,kawase rēto wa ikura desu ka?,kawase ɾeːto wa ikɯɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.w,五,,go,ɡo,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.no-money-came-out,お金が出てきません,,okane ga dete kimasen,okane ɡa dete kimaseɴ,,2,ja-agent-v1;ipa=hepburn
-numbers-money.li,六,,roku,ɾokɯ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.where-can-i-change-money,両替はどこでできますか？,,ryōgae wa doko de dekimasu ka?,ɾjoːɡae wa doko de dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.q,七,,nana,nana,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.the-machine-is-out-of-service,機械が故障しています,,kikai ga koshō shiteimasu,kikai ɡa koɕoː ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
-numbers-money.b,八,,hachi,hatɕi,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.please-give-me-smaller-notes,小さいお札にしてください,,chiisai osatsu ni shite kudasai,tɕiisai osatsɯ ɲi ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
-numbers-money.ji,九,,kyū,kjɯː,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.do-you-have-change,細かいお金はありますか？,,komakai okane wa arimasu ka?,komakai okane wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.sh,十,,jū,dʑɯː,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.may-i-pay-in,{}で払えますか？,,{} de haraemasu ka?,{} de haɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.y-b-i,百,,hyaku,çakɯ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.please-charge-in-local-currency,円で決済してください,,en de kessai shite kudasai,eɴ de kessai ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
-numbers-money.y-qi-n,千,,sen,seɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni wa doko de moraemasu ka?,kozeɲi wa doko de moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.y-w-n,一万,,ichiman,itɕimaɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,kaːdo wa saitei kiɴɡakɯ ɡa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.b-n,半分,,hanbun,haɴbɯɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.atm,ATM,,ētīemu,eːtiːemɯ,,2,ja-agent-v1;ipa=hepburn
-atm-cash.banknote,お札,紙幣,osatsu,osatsɯ,,2,ja-agent-v1;ipa=hepburn
-numbers-money.yu-n,元,,gen,ɡeɴ,,2,ja-agent-v1;ipa=hepburn
-atm-cash.coin,硬貨,コイン,kōka,koːka,,2,ja-agent-v1;ipa=hepburn
-numbers-money.ku-i,元,,gen,ɡeɴ,,2,ja-agent-v1;ipa=hepburn
-atm-cash.cash-only,現金のみ,,genkin nomi,ɡeɴkiɴ nomi,,2,ja-agent-v1;ipa=hepburn
-numbers-money.number-and-classifier-notes,数の作り方は 11 = shi yi、20 = er shi、21 = er shi yi。 電話番号の 1 は yao、量詞の前の 2 は liang。 量詞は ge が個、wei が名、zhang が枚、bei が杯、ping が本。 お金は話し言葉で kuai が元、jiao / mao = 0.1 元、fen = 0.01 元。,,,,,2,ja-notes-v1
-atm-cash.fee,手数料,,tesūryō,tesɯːɾjoː,,2,ja-agent-v1;ipa=hepburn
-atm-cash.change,お釣り,,otsuri,otsɯɾi,,2,ja-agent-v1;ipa=hepburn
-atm-cash.exchange-rate,為替レート,,kawase rēto,kawase ɾeːto,,2,ja-agent-v1;ipa=hepburn
-atm-cash.bank,銀行,,ginkō,ɡiɴkoː,,2,ja-agent-v1;ipa=hepburn
-atm-cash.money-exchange,外貨両替,,gaika ryōgae,ɡaika ɾjoːɡae,,2,ja-agent-v1;ipa=hepburn
-atm-cash.pin,暗証番号,,anshō bangō,aɴɕoː baɴɡoː,,2,ja-agent-v1;ipa=hepburn
-numbers-money.2-items,二つ,,futatsu,ɸɯtatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
-numbers-money.yen,円,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
-numbers-money.yen-symbol,￥,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
-numbers-money.number-and-classifier-notes-2,,,,,,2,japanese-reviewed-v6
-numbers-money.forint,フォリント,,forinto,ɸoɾiɴto,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.forint-symbol,フォリント記号,,forinto kigō,ɸoɾiɴto kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.rupee,ルピー,,rupī,ɾɯpiː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.rupee-symbol,ルピー記号,,rupī kigō,ɾɯpiː kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.won,ウォン,,uon,ɯoɴ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.won-symbol,ウォン記号,,uon kigō,ɯoɴ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.baht,バーツ,,bātsu,baːtsɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.baht-symbol,バーツ記号,,bātsu kigō,baːtsɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.lira,リラ,,rira,ɾiɾa,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.lira-symbol,リラ記号,,rira kigō,ɾiɾa kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.dong,ドン,,don,doɴ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.dong-symbol,ドン記号,,don kigō,doɴ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.ruble,ルーブル,,rūburu,ɾɯːbɯɾɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.ruble-symbol,ルーブル記号,,rūburu kigō,ɾɯːbɯɾɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.rupiah,ルピア,,rupia,ɾɯpia,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.rupiah-symbol,ルピア記号,,rupia kigō,ɾɯpia kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.shilling,シリング,,shiringu,ɕiɾiɴɡɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.shilling-symbol,シリング記号,,shiringu kigō,ɕiɾiɴɡɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.euro,ユーロ,,yūro,jɯːɾo,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.euro-symbol,ユーロ記号,,yūro kigō,jɯːɾo kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.dollar,ドル,,doru,doɾɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.dollar-symbol,ドル記号,,doru kigō,doɾɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.pound,ポンド,,pondo,poɴdo,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.pound-symbol,ポンド記号,,pondo kigō,poɴdo kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
-numbers-money.franc,フラン,,furan,ɸɯɾaɴ,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.franc-symbol,フラン記号,,furan kigō,ɸɯɾaɴ kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.peso,ペソ,,peso,peso,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.peso-symbol,ペソ記号,,peso kigō,peso kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.real,レアル,,rearu,ɾeaɾɯ,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.real-symbol,レアル記号,,rearu kigō,ɾeaɾɯ kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.local-currency,現地通貨,,genchi tsūka,ɡeɴtɕi tsɯːka,,2,currency-agent-v1;cldr;ipa=hepburn
-numbers-money.lakh,十万,,jūman,dʑɯːmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
-numbers-money.crore,一千万,,issenman,isseɴmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
-numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
-numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
-numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
-numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
-numbers-money.zloty,ズウォティ,,zuwoti,zɯwoti,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.zloty-symbol,ズウォティ記号,,zuwoti,zɯwoti,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.hryvnia,フリヴニャ,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.hryvnia-symbol,フリヴニャ記号,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.leu,レイ,,rei,ɾei,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.leu-symbol,レイ記号,,rei kigō,ɾei kiɡoː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.koruna,コルナ,,koruna,koɾɯna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.koruna-symbol,コルナ記号,,koruna,koɾɯna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.krona,クローナ,,kurōna,kɯɾoːna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.krona-symbol,クローナ記号,,kurōna,kɯɾoːna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.ringgit,リンギット,,ringitto,ɾiɴɡitto,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn
-numbers-money.ringgit-symbol,リンギット記号,,ringitto,ɾiɴɡitto,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn
-numbers-money.nepali-rupee,ネパール・ルピー,,nepāru rupī,nepaːɾɯ ɾɯpiː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.nepali-rupee-symbol,ネパール・ルピー記号,,nepāru rupī,nepaːɾɯ ɾɯpiː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.birr,ブル,,buru,bɯɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.naira,ナイジェリア ナイラ,,Naijeria naira,naidʑeɾia naiɾa,,2,naira-gloss-v1;cldr;ipa=hepburn
-numbers-money.naira-symbol,ナイジェリア ナイラ記号,,Naijeria naira,naidʑeɾia naiɾa,,2,naira-gloss-v1;cldr;ipa=hepburn
-numbers-money.riel,リエル,,rieru,ɾieɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.riel-symbol,リエル記号,,rieru,ɾieɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.dram,ドラム,,doramu,doɾamɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.dram-symbol,ドラム記号,,doramu kigō,doɾamɯ kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.lari,ラリ,,rari,ɾaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.lari-symbol,ラリ記号,,rari kigō,ɾaɾi kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.kip,キープ,,kīpu,kiːpɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.kip-symbol,キープ記号,,kīpu kigō,kiːpɯ kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.taka,タカ,,taka,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.taka-symbol,タカ記号,,taka kigō,taka kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.pakistani-rupee,パキスタン・ルピー,,pakisutan rupī,pakisɯtaɴ ɾɯpiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.pakistani-rupee-symbol,パキスタン・ルピー記号,,pakisutan rupī kigō,pakisɯtaɴ ɾɯpiː kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
-numbers-money.som,スム,,sumu,sɯmɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,note,confidence,provenance
+numbers-money.l-ng,ゼロ,,zero,zeɾo,,,2,japanese-reviewed-v6;fix=ja.wikipedia 0 rev 109995372 (読み方: 零（れい、ぜろ）、ゼロ ... その他日常的にも「れい」よりも「ゼロ」を使うことが多い -- and NHK gives ゼロ first for telephone numbers from April 2026);rule=the spoken reading -- as the pack writes 四 yon and 七 nana;row-corrections-v11;ipa=hepburn
+atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,eːtiːemɯ wa doko desɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y,一,,ichi,itɕi,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,kaiɡai hakkoː no kaːdo wa tsɯkaemasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.r,二,,ni,ɲi,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,eːtiːemɯ ɡa kaːdo o toɾikomimaɕita,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,tesɯːɾjoː wa kakaɾimasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.li-ng,二,,ni,ɲi,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.s-n,三,,san,saɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.the-card-was-declined,カードが通りませんでした,,kādo ga tōrimasen deshita,kaːdo ɡa toːɾimaseɴ deɕita,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.s,四,,yon,joɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.what-is-the-exchange-rate,為替レートはいくらですか？,,kawase rēto wa ikura desu ka?,kawase ɾeːto wa ikɯɾa desɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.w,五,,go,ɡo,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.no-money-came-out,お金が出てきません,,okane ga dete kimasen,okane ɡa dete kimaseɴ,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.li,六,,roku,ɾokɯ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.where-can-i-change-money,両替はどこでできますか？,,ryōgae wa doko de dekimasu ka?,ɾjoːɡae wa doko de dekimasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.q,七,,nana,nana,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.the-machine-is-out-of-service,機械が故障しています,,kikai ga koshō shiteimasu,kikai ɡa koɕoː ɕiteimasɯ,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.b,八,,hachi,hatɕi,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.please-give-me-smaller-notes,小さいお札にしてください,,chiisai osatsu ni shite kudasai,tɕiisai osatsɯ ɲi ɕite kɯdasai,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.ji,九,,kyū,kjɯː,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.do-you-have-change,細かいお金はありますか？,,komakai okane wa arimasu ka?,komakai okane wa aɾimasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.sh,十,,jū,dʑɯː,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.may-i-pay-in,{}で払えますか？,,{} de haraemasu ka?,{} de haɾaemasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-b-i,百,,hyaku,çakɯ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.please-charge-in-local-currency,円で決済してください,,en de kessai shite kudasai,eɴ de kessai ɕite kɯdasai,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-qi-n,千,,sen,seɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni wa doko de moraemasu ka?,kozeɲi wa doko de moɾaemasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-w-n,一万,,ichiman,itɕimaɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,kaːdo wa saitei kiɴɡakɯ ɡa aɾimasɯ ka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.b-n,半分,,hanbun,haɴbɯɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.atm,ATM,,ētīemu,eːtiːemɯ,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.banknote,お札,紙幣,osatsu,osatsɯ,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.yu-n,元,,gen,ɡeɴ,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.coin,硬貨,コイン,kōka,koːka,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.ku-i,元,,gen,ɡeɴ,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.cash-only,現金のみ,,genkin nomi,ɡeɴkiɴ nomi,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.number-and-classifier-notes,数の作り方は 11 = shi yi、20 = er shi、21 = er shi yi。 電話番号の 1 は yao、量詞の前の 2 は liang。 量詞は ge が個、wei が名、zhang が枚、bei が杯、ping が本。 お金は話し言葉で kuai が元、jiao / mao = 0.1 元、fen = 0.01 元。,,,,,,2,ja-notes-v1
+atm-cash.fee,手数料,,tesūryō,tesɯːɾjoː,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.change,お釣り,,otsuri,otsɯɾi,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.exchange-rate,為替レート,,kawase rēto,kawase ɾeːto,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.bank,銀行,,ginkō,ɡiɴkoː,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.money-exchange,外貨両替,,gaika ryōgae,ɡaika ɾjoːɡae,,,2,ja-agent-v1;ipa=hepburn
+atm-cash.pin,暗証番号,,anshō bangō,aɴɕoː baɴɡoː,,,2,ja-agent-v1;ipa=hepburn
+numbers-money.2-items,二つ,,futatsu,ɸɯtatsɯ,,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.yen,円,,en,eɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.yen-symbol,￥,,en,eɴ,,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.number-and-classifier-notes-2,,,,,,,2,japanese-reviewed-v6
+numbers-money.forint,フォリント,,forinto,ɸoɾiɴto,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.forint-symbol,フォリント記号,,forinto kigō,ɸoɾiɴto kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupee,ルピー,,rupī,ɾɯpiː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupee-symbol,ルピー記号,,rupī kigō,ɾɯpiː kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.won,ウォン,,uon,ɯoɴ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.won-symbol,ウォン記号,,uon kigō,ɯoɴ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.baht,バーツ,,bātsu,baːtsɯ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.baht-symbol,バーツ記号,,bātsu kigō,baːtsɯ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.lira,リラ,,rira,ɾiɾa,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.lira-symbol,リラ記号,,rira kigō,ɾiɾa kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dong,ドン,,don,doɴ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dong-symbol,ドン記号,,don kigō,doɴ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.ruble,ルーブル,,rūburu,ɾɯːbɯɾɯ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.ruble-symbol,ルーブル記号,,rūburu kigō,ɾɯːbɯɾɯ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupiah,ルピア,,rupia,ɾɯpia,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupiah-symbol,ルピア記号,,rupia kigō,ɾɯpia kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.shilling,シリング,,shiringu,ɕiɾiɴɡɯ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.shilling-symbol,シリング記号,,shiringu kigō,ɕiɾiɴɡɯ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.euro,ユーロ,,yūro,jɯːɾo,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.euro-symbol,ユーロ記号,,yūro kigō,jɯːɾo kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dollar,ドル,,doru,doɾɯ,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dollar-symbol,ドル記号,,doru kigō,doɾɯ kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.pound,ポンド,,pondo,poɴdo,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.pound-symbol,ポンド記号,,pondo kigō,poɴdo kiɡoː,,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.franc,フラン,,furan,ɸɯɾaɴ,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.franc-symbol,フラン記号,,furan kigō,ɸɯɾaɴ kiɡoː,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.peso,ペソ,,peso,peso,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.peso-symbol,ペソ記号,,peso kigō,peso kiɡoː,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.real,レアル,,rearu,ɾeaɾɯ,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.real-symbol,レアル記号,,rearu kigō,ɾeaɾɯ kiɡoː,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.local-currency,現地通貨,,genchi tsūka,ɡeɴtɕi tsɯːka,,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.lakh,十万,,jūman,dʑɯːmaɴ,,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
+numbers-money.crore,一千万,,issenman,isseɴmaɴ,,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
+numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
+numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
+numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
+numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
+numbers-money.zloty,ズウォティ,,zuwoti,zɯwoti,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.zloty-symbol,ズウォティ記号,,zuwoti,zɯwoti,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.hryvnia,フリヴニャ,,furivunya,ɸɯɾivɯɲa,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.hryvnia-symbol,フリヴニャ記号,,furivunya,ɸɯɾivɯɲa,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.leu,レイ,,rei,ɾei,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.leu-symbol,レイ記号,,rei kigō,ɾei kiɡoː,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.koruna,コルナ,,koruna,koɾɯna,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.koruna-symbol,コルナ記号,,koruna,koɾɯna,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.krona,クローナ,,kurōna,kɯɾoːna,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.krona-symbol,クローナ記号,,kurōna,kɯɾoːna,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.ringgit,リンギット,,ringitto,ɾiɴɡitto,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn
+numbers-money.ringgit-symbol,リンギット記号,,ringitto,ɾiɴɡitto,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn
+numbers-money.nepali-rupee,ネパール・ルピー,,nepāru rupī,nepaːɾɯ ɾɯpiː,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.nepali-rupee-symbol,ネパール・ルピー記号,,nepāru rupī,nepaːɾɯ ɾɯpiː,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.birr,ブル,,buru,bɯɾɯ,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.naira,ナイジェリア ナイラ,,Naijeria naira,naidʑeɾia naiɾa,,,2,naira-gloss-v1;cldr;ipa=hepburn
+numbers-money.naira-symbol,ナイジェリア ナイラ記号,,Naijeria naira,naidʑeɾia naiɾa,,,2,naira-gloss-v1;cldr;ipa=hepburn
+numbers-money.riel,リエル,,rieru,ɾieɾɯ,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.riel-symbol,リエル記号,,rieru,ɾieɾɯ,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.dram,ドラム,,doramu,doɾamɯ,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.dram-symbol,ドラム記号,,doramu kigō,doɾamɯ kiɡoː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.lari,ラリ,,rari,ɾaɾi,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.lari-symbol,ラリ記号,,rari kigō,ɾaɾi kiɡoː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.kip,キープ,,kīpu,kiːpɯ,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.kip-symbol,キープ記号,,kīpu kigō,kiːpɯ kiɡoː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.taka,タカ,,taka,taka,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.taka-symbol,タカ記号,,taka kigō,taka kiɡoː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.pakistani-rupee,パキスタン・ルピー,,pakisutan rupī,pakisɯtaɴ ɾɯpiː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.pakistani-rupee-symbol,パキスタン・ルピー記号,,pakisutan rupī kigō,pakisɯtaɴ ɾɯpiː kiɡoː,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.som,スム,,sumu,sɯmɯ,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn

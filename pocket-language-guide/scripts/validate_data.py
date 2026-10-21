@@ -198,6 +198,9 @@ def check_drawable(text, stack, where, fatal=False):
             "there is no system font to fall back to. Romanise it or drop it.")
 
 
+NOTES_CHECKED = set()
+
+
 def load(rel):
     path = DATA / rel
     with path.open(encoding="utf-8-sig") as fh:
@@ -205,6 +208,15 @@ def load(rel):
     for n, row in enumerate(rows, start=2):
         if any(k is None or v is None for k, v in row.items()):
             errors.append(f"{rel}:{n}: wrong number of cells")
+    if str(rel).startswith("lang/") and str(rel) not in NOTES_CHECKED:
+        NOTES_CHECKED.add(str(rel))
+        # `literal` prints as "word for word"; what is said to the next editor goes in
+        # `note`, which never prints. 3,622 notes once sat after a " -- " in `literal`.
+        if rows and "note" not in rows[0]:
+            errors.append(f"{rel}: no `note` column")
+        for n, row in enumerate(rows, start=2):
+            if " -- " in (row.get("literal") or ""):
+                errors.append(f"{rel}:{n}: `literal` carries a note after ' -- '; move it to `note`")
     return rows
 
 

@@ -1,148 +1,148 @@
-concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-social-basics.hello,नमस्ते,,namaste,nəmˈʌsteː,,2,hi-agent-v1;ipa=espeak
-social-basics.hello-polite,नमस्कार,,namaskār,nˌəmskˈaːɾ,,2,hi-agent-v1;ipa=espeak
-social-basics.good-morning,सुप्रभात,नमस्ते,suprabhāt,sˌʊpɾəbʰˈaːt,namaste serves too,2,hi-agent-v1;ipa=espeak
-social-basics.good-evening,शुभ संध्या,नमस्ते,śubh saṁdhyā,ʃˈʊbʰ sˈʌndʰjaː,formal; namaste is usual,2,hi-agent-v1;ipa=espeak
-social-basics.goodbye,फिर मिलेंगे,नमस्ते,phir mileṁge,pʰˈɪɾ mɪlˈẽːɡeː,see you again,2,hi-agent-v1;ipa=espeak
-social-basics.thank-you,धन्यवाद,शुक्रिया,dhanyavād,dʰˌənjəʋˈaːd,,2,hi-agent-v1;ipa=espeak
-social-basics.you-are-welcome,कोई बात नहीं,,koī bāt nahīṁ,kˈoːi bˈaːt nˈʌhĩ,it is nothing,2,hi-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,सुनिए,माफ़ कीजिए,sunie,sˈʊnɪˌeː,to get attention,2,hi-agent-v1;ipa=espeak
-social-basics.sorry,माफ़ कीजिए,सॉरी,māf kījie,mˈaːf kˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-social-basics.no-problem,कोई दिक्कत नहीं,,koī dikkat nahīṁ,kˈoːi dˈɪkːət nˈʌhĩ,,2,hi-agent-v1;ipa=espeak
-social-basics.i-do-not-know,मुझे नहीं पता,,mujhe nahīṁ patā,mˌʊɟʰeː nˈʌhĩ pˈʌtaː,,2,hi-agent-v1;ipa=espeak
-social-basics.good-night,शुभ रात्रि,गुड नाइट,śubh rātri,ʃˈʊbʰ ɾˈaːtɾɪ,,2,hi-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,2,hi-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,मुझे {target} नहीं आती,,mujhe {target} nahīṁ ātī,mˌʊɟʰeː {target} nˈʌhĩ ˈaːti,,2,language-slots-v1;ipa=espeak
-communication.i-speak-only-a-little-of-this,मुझे {target} थोड़ी-सी आती है,,mujhe {target} thoṛī-sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽisi ˈaːti hɛː,,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,क्या आपको {source} आती है?,,kyā āpko {source} ātī hai?,kjaː ˌaːpkˌoː {source} ˈaːti hɛː,,2,language-slots-v1;ipa=espeak
-communication.please-speak-more-slowly,ज़रा धीरे बोलिए,,zarā dhīre bolie,zˈʌɾaː dʰˈiːɾeː bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,मुझे समझ नहीं आ रहा,,mujhe samajh nahīṁ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
-communication.i-cannot-read-understand,मुझे पढ़ना-समझना नहीं आता,,mujhe paṛhnā-samajhnā nahīṁ ātā,mˌʊɟʰeː pˈʌɽʰənˌaːsʌməɟʰnaː nˈʌhĩ ˈaːtaː,,2,hi-agent-v1;ipa=espeak
-communication.please-say-it-again,फिर से कहिए,,phir se kahie,pʰˈɪɾ seː kˈʌhɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.please-write-it-down,लिख दीजिए,,likh dījie,lˈɪkʰ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.please-wait-a-moment,ज़रा रुकिए,,zarā rukie,zˈʌɾaː ɾˈʊkɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.can-you-help-me,मेरी मदद कीजिए,,merī madad kījie,mˌeːɾi mˈʌdəd kˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.please-show-me-the-text,वह {target} में लिखा हुआ दिखाइए,,vah {target} meṁ likhā huā dikhāie,ʋˌəh {target} mẽː lˈɪkʰaː hˈʊaː dɪkʰˈaːɪˌeː,,2,language-slots-v1;ipa=espeak
-communication.i-cannot-make-out-what-you-are-saying,आपकी बात समझ नहीं आ रही,,āpkī bāt samajh nahīṁ ā rahī,ˌaːpkˌi bˈaːt sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhi,,2,hi-agent-v1;ipa=espeak
-communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaːjaː,,2,hi-agent-v1;ipa=espeak
-communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,mˌʊɟʰeː jˌəh pˈʌɽʰənˌaː nˈʌhĩ ˈaːtaː,,2,hi-agent-v1;ipa=espeak
-communication.please-write-it-in-roman-letters,रोमन अक्षरों में लिख दीजिए,,,ɾˈoːmən ˈʌkʃəɾˌõ mẽː lˈɪkʰ dˈiːɟɪˌeː,,1,reader-gloss-v1;ipa=espeak
-quick-responses.please-go-ahead,कहिए,जी,kahie,kˈʌhɪˌeː,go ahead / please,2,hi-agent-v1;ipa=espeak
-quick-responses.yes-right,हाँ,जी हाँ,hāṁ,hˈã,,2,"hi-agent-v1;fix=McGregor Oxford Hindi-English Dictionary हाँ 1 (interj. yes -- ~ जी, interj. = ~; जी ~, interj. = ~);rule=one-reading-on-a-board (जी हाँ, the respectful yes, is a second wording and moves to text_alt);row-corrections-v6;ipa=espeak"
-quick-responses.no-not,नहीं,,nahīṁ,nˈʌhĩ,,2,hi-agent-v1;ipa=espeak
-quick-responses.okay-can,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,2,hi-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,मना है,,manā hai,mˈʌnaː hɛː,it is forbidden,2,hi-agent-v1;ipa=espeak
-quick-responses.works-okay,चलेगा,,calegā,cəlˈeːɡaː,it will do,2,hi-agent-v1;ipa=espeak
-quick-responses.does-not-work-no,नहीं चलेगा,,nahīṁ calegā,nˈʌhĩ cəlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
-quick-responses.can-possible,हो सकता है,,ho saktā hai,hoː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,नहीं हो सकता,,nahīṁ ho saktā,nˈʌhĩ hoː sˈʌktˌaː,,2,hi-agent-v1;ipa=espeak
-quick-responses.okay-fine,बिल्कुल,,bilkul,bˈɪlkʊl,absolutely,2,hi-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,नहीं होगा,,nahīṁ hogā,nˈʌhĩ hˈoːɡaː,,2,hi-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,फ़ोन से अनुवाद हो रहा है,,fon se anuvād ho rahā hai,fˈoːn seː ˌʌnʊʋˈaːd hoː ɾˌəhaː hɛː,translating by phone,2,hi-agent-v1;ipa=espeak
-phone-translation.please-speak-toward-the-phone,फ़ोन की तरफ़ बोलिए,,fon kī taraf bolie,fˈoːn ki tˈʌɾəf bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,जगह का नाम {target} में लिख दीजिए,,jagah kā nām {target} meṁ likh dījie,ɟˈʌɡəh kaː nˈaːm {target} mẽː lˈɪkʰ dˈiːɟɪˌeː,,2,language-slots-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,एक-एक वाक्य बोलिए,,ek-ek vākya bolie,ˈeːkeːk ʋˈaːkjə bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-translation.please-type-it-and-show-me,टाइप करके दिखाइए,,ṭāip karke dikhāie,ʈˈaːɪp kˈʌɾkˌeː dɪkʰˈaːɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-translation.please-look-at-the-screen,स्क्रीन देखिए,,skrīn dekhie,skɾˈiːn dˈeːkʰɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.please-type-it-for-me,मेरे लिए टाइप कर दीजिए,,mere lie ṭāip kar dījie,mˌeːɾeː lˈɪeː ʈˈaːɪp kˈʌɾ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,आसान शब्दों में बोलिए,,āsān śabdoṁ meṁ bolie,aːsˈaːn ʃˈʌbdõ mẽː bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.my-phone-battery-is-low,मेरे फ़ोन की बैटरी कम है,,mere fon kī baiṭrī kam hai,mˌeːɾeː fˈoːn ki bˈɛːʈɾˌi kˈʌm hɛː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.do-you-have-a-power-bank,क्या पावर बैंक है?,,kyā pāvar baiṁk hai?,kjaː pˈaːʋəɾ bˈɛ̃k hɛː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,अनुवाद में गलती हो सकती है,,anuvād meṁ galtī ho saktī hai,ˌʌnʊʋˈaːd mẽː ɡˈʌltˌi hoː sˈʌktˌi hɛː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.please-confirm,ज़रा पक्का कर लीजिए,,zarā pakkā kar lījie,zˈʌɾaː pˈʌkːaː kˈʌɾ lˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-text-power.may-i-charge-my-phone-here,क्या यहाँ फ़ोन चार्ज कर लूँ?,,kyā yahāṁ fon cārj kar lūṁ?,kjaː jˈʌhã fˈoːn cˈaːɾɟ kˈʌɾ lˈũ,,2,hi-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,मुझे टूरिस्ट सिम चाहिए,,mujhe ṭūrisṭ sim cāhie,mˌʊɟʰeː ʈuːɾˈɪsʈ sˈɪm cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
-sim-data.may-i-use-your-wifi,क्या आपका वाई-फ़ाई इस्तेमाल कर लूँ?,,kyā āpkā vāī-fāī istemāl kar lūṁ?,kjaː ˌaːpkˌaː ʋˈaːifaːi ˌɪsteːmˈaːl kˈʌɾ lˈũ,,2,hi-agent-v1;ipa=espeak
-sim-data.how-much-data-is-included,कितना डेटा मिलेगा?,,kitnā ḍeṭā milegā?,kˈɪtnˌaː ɖˈeːʈaː mɪlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,क्या पासपोर्ट चाहिए?,,kyā pāsporṭ cāhie?,kjaː pˌaːspˈoːɾʈ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,कितने दिन चलेगा?,,kitne din calegā?,kˈɪtnˌeː dˈɪn cəlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
-sim-data.please-activate-it,इसे चालू कर दीजिए,,ise cālū kar dījie,ˈɪseː cˈaːluː kˈʌɾ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,क्या ई-सिम है?,,kyā ī-sim hai?,kjaː ˈisɪm hɛː,,2,hi-agent-v1;ipa=espeak
-sim-data.my-data-is-not-working,मेरा डेटा नहीं चल रहा,,merā ḍeṭā nahīṁ cal rahā,mˌeːɾaː ɖˈeːʈaː nˈʌhĩ cˈʌl ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,क्या रजिस्ट्रेशन ज़रूरी है?,,kyā rajisṭreśan zarūrī hai?,kjaː ɾˌəɟɪsʈɾˈeːʃən zəɾˈuːɾi hɛː,,2,hi-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,सिग्नल नहीं आ रहा,,signal nahīṁ ā rahā,sˈɪɡnəl nˈʌhĩ ˈaː ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,वाई-फ़ाई का पासवर्ड लिख दीजिए,,vāī-fāī kā pāsvarḍ likh dījie,ʋˈaːifaːi kaː pˌaːsəʋˈʌɾɖ lˈɪkʰ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-sim-data.sim-card,सिम कार्ड,,sim kārḍ,sˈɪm kˈaːɾɖ,,2,hi-agent-v1;ipa=espeak
-sim-data.where-can-i-buy-a-plug-adapter,प्लग अडैप्टर कहाँ मिलेगा?,,plag aḍaipṭar kahāṁ milegā?,plˈʌɡ ʌɖˈɛːpʈəɾ kˈʌhã mɪlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
-sim-data.mobile-data,मोबाइल डेटा,,mobāil ḍeṭā,moːbˈaːɪl ɖˈeːʈaː,,2,hi-agent-v1;ipa=espeak
-sim-data.can-i-top-up-this-sim,क्या इसमें रिचार्ज हो सकता है?,,kyā ismeṁ ricārj ho saktā hai?,kjaː ˈɪsmˌẽː ɾɪcˈaːɾɟ hoː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
-sim-data.top-up,रिचार्ज,,ricārj,ɾɪcˈaːɾɟ,,2,hi-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,क्या {} में नेटवर्क आता है?,,kyā {} meṁ neṭvark ātā hai?,kjaː {} mẽː nˌeːʈəʋˈʌɾk ˈaːtaː hɛː,,2,hi-agent-v1;ipa=espeak
-sim-data.signal,सिग्नल,नेटवर्क,signal,sˈɪɡnəl,,2,hi-agent-v1;ipa=espeak
-sim-data.esim,ई-सिम,,ī-sim,ˈisɪm,,2,hi-agent-v1;ipa=espeak
-sim-data.prepaid,प्रीपेड,,prīpeḍ,pɾipˈeːɖ,,2,hi-agent-v1;ipa=espeak
-sim-data.roaming,रोमिंग,,romiṁg,ɾoːmˈĩɡ,,2,hi-agent-v1;ipa=espeak
-etiquette.is-this-allowed,क्या इसकी इजाज़त है?,,kyā iskī ijāzat hai?,kjaː ˈɪskˌi ɪɟˈaːzət hɛː,,2,hi-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,क्या टिप देनी होती है?,,kyā ṭip denī hotī hai?,kjaː ʈˈɪp dˈeːni hˈoːti hɛː,,2,hi-agent-v1;ipa=espeak
-etiquette.is-service-included,क्या सर्विस चार्ज शामिल है?,,kyā sarvis cārj śāmil hai?,kjaː sˈʌrʋɪs cˈaːɾɟ ʃˈaːmɪl hɛː,,2,hi-agent-v1;ipa=espeak
-etiquette.may-i-enter,क्या अंदर आ जाऊँ?,,kyā aṁdar ā jāūṁ?,kjaː ˈʌndəɾ ˈaː ɟˈaːũ,,2,hi-agent-v1;ipa=espeak
-etiquette.remove-shoes,क्या जूते उतारने हैं?,,kyā jūte utārne haiṁ?,kjaː ɟˈuːteː ʊtˈaːɾnˌeː hɛ̃,,2,hi-agent-v1;ipa=espeak
-etiquette.photo-of-you,क्या आपकी फ़ोटो ले लूँ?,,kyā āpkī foṭo le lūṁ?,kjaː ˌaːpkˌi fˈoːʈoː lˈeː lˈũ,,2,hi-agent-v1;ipa=espeak
-etiquette.may-i-sit-here,क्या यहाँ बैठ जाऊँ?,,kyā yahāṁ baiṭh jāūṁ?,kjaː jˈʌhã bˈɛːʈʰ ɟˈaːũ,,2,hi-agent-v1;ipa=espeak
-etiquette.queue-for,क्या यह {} की लाइन है?,,kyā yah {} kī lāin hai?,kjaː jˌəh {} ki lˈaːɪn hɛː,,2,hi-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,क्या मेरे कपड़े ठीक हैं?,,kyā mere kapṛe ṭhīk haiṁ?,kjaː mˌeːɾeː kˈʌpɽˌeː ʈʰˈiːk hɛ̃,,2,hi-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,"अनजाने में हुआ, माफ़ कीजिए",,"anjāne meṁ huā, māf kījie","ˌʌnɟˈaːneː mẽː hˈʊaː, mˈaːf kˈiːɟɪˌeː",it happened unknowingly,2,hi-agent-v1;ipa=espeak
-etiquette.what-is-customary,यहाँ का रिवाज़ क्या है?,,yahāṁ kā rivāz kyā hai?,jˈʌhã kaː ɾɪʋˈaːz kjaː hɛː,,2,hi-agent-v1;ipa=espeak
-etiquette.keep-the-change,बाकी रख लीजिए,,bākī rakh lījie,bˈaːki ɾˈʌkʰ lˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-children.cannot-find-my-child,मेरा बच्चा नहीं मिल रहा है,,merā baccā nahīṁ mil rahā hai,mˌeːɾaː bˈʌcːaː nˈʌhĩ mˈɪl ɾˌəhaː hɛː,,2,hi-agent-v1;ipa=espeak
-children.make-an-announcement,अनाउंसमेंट करा दीजिए,उद्घोषणा कीजिए,anāuṁsmeṁṭ karā dījie,ˌʌnaːˌʊnsəmˈẽːʈ kˈʌɾaː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-children.child-age,मेरा बच्चा {} साल का है,,merā baccā {} sāl kā hai,mˌeːɾaː bˈʌcːaː {} sˈaːl kaː hɛː,,2,hi-agent-v1;ipa=espeak
-children.high-chair,क्या बच्चों की ऊँची कुर्सी है?,,kyā baccoṁ kī ūṁcī kursī hai?,kjaː bˈʌcːõ ki ˈunci kˈʊrsi hɛː,,2,hi-agent-v1;ipa=espeak
-children.baby-changing-room,शिशु देखभाल कक्ष कहाँ है?,,śiśu dekhbhāl kakṣ kahāṁ hai?,ʃˈɪʃʊ dˌeːkʰbʰˈaːl kˈʌkʃ kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
-children.childrens-menu,क्या बच्चों का मेन्यू है?,,kyā baccoṁ kā menyū hai?,kjaː bˈʌcːõ kaː mˈeːnjuː hɛː,,2,hi-agent-v1;ipa=espeak
-children.suitable-for-children,क्या यह बच्चों के लिए ठीक है?,,kyā yah baccoṁ ke lie ṭhīk hai?,kjaː jˌəh bˈʌcːõ keː lˈɪeː ʈʰˈiːk hɛː,,2,hi-agent-v1;ipa=espeak
-children.minimum-age,कम से कम कितनी उम्र?,,kam se kam kitnī umra?,kˈʌm seː kˈʌm kˈɪtnˌi ˈʊmɾə,,2,hi-agent-v1;ipa=espeak
-children.do-children-pay,क्या बच्चों का टिकट लगता है?,,kyā baccoṁ kā ṭikaṭ lagtā hai?,kjaː bˈʌcːõ kaː ʈˈɪkəʈ lˈʌɡtˌaː hɛː,,2,hi-agent-v1;ipa=espeak
-children.crib,क्या बच्चे का पालना है?,,kyā bacce kā pālnā hai?,kjaː bˈʌcːeː kaː pˈaːlnˌaː hɛː,,2,hi-agent-v1;ipa=espeak
-children.warm-this-bottle,यह बोतल गरम कर दीजिए,,yah botal garam kar dījie,jˌəh bˈoːtəl ɡˈʌɾəm kˈʌɾ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-children.car-seat,हमें बच्चे की कार सीट चाहिए,,hameṁ bacce kī kār sīṭ cāhie,hˈʌmẽː bˈʌcːeː ki kˈaːɾ sˈiːʈ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
-children.stroller,प्रैम,बच्चा गाड़ी,praim,pɾˈɛːm,,2,hi-agent-v1;ipa=espeak
-children.playground,क्या खेल का मैदान है?,,kyā khel kā maidān hai?,kjaː kʰˈeːl kaː mɛːdˈaːn hɛː,,2,hi-agent-v1;ipa=espeak
-social-basics.politeness-particles,"थाई में शिष्टता वाक्य के अंत में एक शब्द से आती है, कुछ वैसे ही जैसे आप और तुम का चुनाव: पुरुष लगभग हर बात के बाद khrap जोड़ते हैं, महिलाएँ kha। सवाल पूछते समय महिला kha को चढ़ते सुर में कहती है। यहाँ दी गई पंक्तियों में यह शब्द नहीं है, इसलिए अपने हिसाब से जोड़ लीजिए।",,,,,2,hi-notes-v1
-board-answers.can-you-walk,क्या चलना संभव है?,,kyā calanā sambhav hai?,kjaː cˈʌlnˌaː sˈʌmbʰəʋ hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.card-or-cash,कार्ड या नकद?,,kārḍ yā nakad?,kˈaːɾɖ jˈaː nˈʌkəd,,2,hi-board-answers-v1;ipa=espeak
-board-answers.help-is-coming,मदद आ रही है,,madad ā rahī hai,mˈʌdəd ˈaː ɾˌəhi hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.how-many,कितने चाहिए?,,kitne cāhie?,kˈɪtnˌeː cˈaːhɪˌeː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.i-am-calling-an-ambulance,एंबुलेंस बुलाई जा रही है,,aṁbuleṁs bulāī jā rahī hai,ˌẽːbʊlˈẽːs bʊlˈaːi ɟˈaː ɾˌəhi hɛː,"an ambulance is being called -- the passive agrees with एंबुलेंस (feminine), not with the speaker; the obligative bulānī paṛegī said 'I will have to call', a necessity rather than the call being made",2,hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);rule=passive-agrees-with-object-not-speaker;row-corrections-v6;ipa=espeak
-board-answers.i-am-calling-the-police,पुलिस बुलाई जा रही है,,pulis bulāī jā rahī hai,pˈʊlɪs bʊlˈaːi ɟˈaː ɾˌəhi hɛː,"the police are being called -- the passive agrees with पुलिस (feminine), not with the speaker; the obligative bulānī paṛegī said 'I will have to call', which also reads as a threat",2,hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);rule=passive-agrees-with-object-not-speaker;row-corrections-v6;ipa=espeak
-board-answers.i-do-not-have-a-phone,मेरे पास फ़ोन नहीं है,,mere pās fon nahīṁ hai,mˌeːɾeː pˈaːs fˈoːn nˈʌhĩ hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.i-will-find-someone,मदद करने वाला कोई मिल जाएगा,,madad karne vālā koī mil jāegā,mˈʌdəd kˈʌɾnˌeː ʋˈaːlaː kˈoːi mˈɪl ɟaːˈeːɡaː,"someone who can help will be found -- third person, no reference to the speaker at all",2,hi-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
-board-answers.i-will-show-you,"चलिए, रास्ता दिखा दूँ",,"calie, rāstā dikhā dūṁ","cˈʌlɪˌeː, ɾˈaːstaː dˈɪkʰaː dˈũ","come, let me show the way -- the subjunctive dūṁ has one form for any speaker and makes an offer, as in board-answers.i-will-check (ज़रा देख लूँ); dikhānā hai was an obligation, 'I have to show the way'",2,"hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions: maiṁ jāūṁ? May I go?);fix=en.wikipedia Hindustani grammar rev 1365420047 (the subjunctive takes personal concord, the future adds gā ~ ge ~ gī to it);in-pack-frame=board-answers.i-will-check;rule=subjunctive-has-no-gender;row-corrections-v6;ipa=espeak"
-board-answers.i-will-write-it-down,ज़रा लिख दूँ,,zarā likh dūṁ,zˈʌɾaː lˈɪkʰ dˈũ,"let me just write it down -- the subjunctive, one form for any speaker, as in board-answers.i-will-check (ज़रा देख लूँ); likh denā writes it for the other person, where likh lenā hai was 'I have to write this down' for oneself",2,"hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.3 (ek savārī aur le lūṁ -- I shall just collect one more fare);in-pack-frame=board-answers.i-will-check;rule=subjunctive-has-no-gender;row-corrections-v6;ipa=espeak"
-board-answers.it-is-closed,बंद है,,band hai,bˈʌnd hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.it-is-over-there,वहाँ है,,vahāṁ hai,ʋˈʌhã hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.none-of-these,इनमें मेरी बात नहीं है,,inmeṁ merī bāt nahīṁ hai,ˈɪnmˌẽː mˌeːɾi bˈaːt nˈʌhĩ hɛː,"my point is not among these -- 'merii' agrees with 'baat' (fem.), not the speaker",2,hi-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
-board-answers.not-possible,ऐसा नहीं हो सकता,,aisā nahīṁ ho saktā,ˈɛːsaː nˈʌhĩ hoː sˈʌktˌaː,"that cannot happen -- impersonal, saktā defaults masculine since 'aisā' has no gender",2,hi-board-answers-v1;ipa=espeak
-board-answers.please-wait,बस एक मिनट,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnəʈ,,2,hi-board-answers-v1;ipa=espeak
-board-answers.say-it-again,एक बार फिर?,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,2,hi-board-answers-v1;ipa=espeak
-board-answers.stay-here,यहीं रुकना बेहतर है,,yahīṁ ruknā behtar hai,jˈʌhĩ ɾˈʊknˌaː bˈeːhətˌəɾ hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.the-hospital-is-close,अस्पताल पास ही है,,aspatāl pās hī hai,ˌʌspətˈaːl pˈaːs hˈi hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,"इंतज़ार नहीं है, अभी अंदर आ जाइए",,"intazār nahīṁ hai, abhī andar ā jāie","ˌĩtzˈaːɾ nˈʌhĩ hɛː, ˈʌbʰi ˈʌndəɾ ˈaː ɟˈaːɪˌeː","-iye imperative, invariant for gender",2,hi-board-answers-v1;ipa=espeak
-board-answers.we-do-not-have-it,हमारे पास यह नहीं है,,hamāre pās yah nahīṁ hai,həmˌaːɾeː pˈaːs jˌəh nˈʌhĩ hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.what-is-your-name,नाम क्या है?,,nām kyā hai?,nˈaːm kjaː hɛː,,2,hi-board-answers-v1;ipa=espeak
-board-answers.where-does-it-hurt,कहाँ दर्द है?,,kahāṁ dard hai?,kˈʌhã dˈʌɾd hɛː,,2,hi-board-answers-v1;ipa=espeak
-kind-words.you-are-very-kind,आप बहुत दयालु हैं।,,āp bahut dayālu haiṁ,ˌaːp bˈʌhʊt dəjˈaːlʊ hɛ̃,,2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-help,आपकी मदद के लिए धन्यवाद।,,āpkī madad ke lie dhanyavād,ˌaːpkˌi mˈʌdəd keː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak
-kind-words.this-is-delicious,यह बहुत स्वादिष्ट है।,,yah bahut svādiṣṭ hai,jˌəh bˈʌhʊt sʋaːdˈɪʂʈ hɛː,,2,kind-words-v1;ipa=espeak
-kind-words.it-is-beautiful-here,यहाँ बहुत सुंदर है।,,yahāṁ bahut sundar hai,jˈʌhã bˈʌhʊt sˈũdəɾ hɛː,,2,kind-words-v1;ipa=espeak
-kind-words.i-like-it-very-much,मुझे यह बहुत पसंद है।,,mujhe yah bahut pasand hai,mˌʊɟʰeː jˌəh bˈʌhʊt pəsˈʌnd hɛː,,2,kind-words-v1;ipa=espeak
-kind-words.i-had-a-wonderful-time,मैंने यहाँ बहुत अच्छा समय बिताया।,,maiṁne yahāṁ bahut acchā samay bitāyā,mˈɛ̃neː jˈʌhã bˈʌhʊt ˈʌcʰcʰaː sˈʌmˌɛj bɪtˈaːjaː,"transitive perfective with ने agrees with the object समय (masc.), not the speaker, so this is invariant for speaker gender",2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-everything,सबके लिए धन्यवाद।,,sabke lie dhanyavād,sˈʌbkˌeː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-your-hospitality,आपके आतिथ्य के लिए धन्यवाद।,,āpke ātithya ke lie dhanyavād,ˌaːpkˌeː aːtˈɪtʰjə keː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak
-board-answers.my-name-is-blank,मेरा नाम {} है,,merā nām {} hai,mˌeːɾaː nˈaːm {} hɛː,,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
-board-answers.i-would-rather-not-say,"माफ़ कीजिए, न बताऊँ तो बेहतर है",,"māf kījie, na batāūṁ to behtar hai","mˈaːf kˈiːɟɪˌeː, nˈə bətˈaːũ tˈoː bˈeːhətˌəɾ hɛː","sorry, it is better if I do not tell",2,in-pack-neighbour=social-basics.sorry;src=McGregor-OHED बताना p.702;src=McGregor-OHED बेहतर p.747;rule=subjunctive-invariant-for-gender;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.what-happened,क्या हुआ?,,kyā huā?,kjaː hˈʊaː,,2,src=McGregor-OHED क्या p.220 (~ हुआ? what has happened? what is the matter?);answers-audit-v1;ipa=espeak
-board-answers.understood,"जी, समझ में आ गया",,"jī, samajh meṁ ā gayā","ɟˈi, sˈʌməɟʰ mẽː ˈaː ɡˈʌjaː","yes, it has come into [my] understanding",2,src=McGregor-OHED समझ p.984 (~ में आना to be understood);rule=samajh-mein-aana-agrees-with-thing-understood-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.i-will-check,ज़रा देख लूँ,,zarā dekh lūṁ,zˈʌɾaː dˈeːkʰ lˈũ,let me just look,2,src=McGregor-OHED देखना p.509 senses 7-9;in-pack-frame=hotel-basics.may-i-see-the-room;rule=subjunctive-invariant-for-gender;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.we-have-it,"जी, है",,"jī, hai","ɟˈi, hɛː","yes, there is",2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;rule=copula-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,जगह नहीं है,,jagah nahīṁ hai,ɟˈʌɡəh nˈʌhĩ hɛː,there is no room,2,src=McGregor-OHED जगह p.352 sense 4 (room / space / seat / place);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
-board-answers.it-is-free,मुफ़्त है,,muft hai,mˈʊft hɛː,,2,src=McGregor-OHED मुफ़्त p.823 (free / not paid for);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
-board-answers.it-does-not-matter,कोई फ़र्क़ नहीं पड़ता,,koī farq nahīṁ paṛtā,kˈoːi fˈʌɾq nˈʌhĩ pˈʌɽtˌaː,it makes no difference,2,src=McGregor-OHED फ़रक़ p.676 (~ पड़ना);answers-audit-v1;ipa=espeak
-board-answers.only-for-customers,सिर्फ़ ग्राहकों के लिए है,,sirf grāhakoṁ ke lie hai,sˈɪrf ɡɾˈaːhəkˌõ keː lˈɪeː hɛː,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=McGregor-OHED ग्राहक p.282;answers-audit-v1;ipa=espeak
-board-answers.where-to,कहाँ जाना है?,,kahāṁ jānā hai?,kˈʌhã ɟˈaːnaː hɛː,where is [one] to go?,2,in-pack-frame=transit-rides.please-tell-me-where-to-get-off;rule=obligative-infinitive-has-no-person;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,अगले स्टॉप पर,,agle sṭop par,ˈʌɡlˌeː sʈˈɔp pˈʌɾ,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=McGregor-OHED अगला p.13 sense 4;answers-audit-v1;ipa=espeak
-board-answers.pay-on-board,किराया गाड़ी में ही देना है,,kirāyā gāṛī meṁ hī denā hai,kɪɾˈaːjaː ɡˈaːɽi mẽː hˈi dˈeːnaː hɛː,the fare is to be paid in the vehicle itself,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=McGregor-OHED गाड़ी p.263 (car / truck / bus / train);rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.see-a-doctor,डॉक्टर को दिखाना बेहतर है,,ḍokṭar ko dikhānā behtar hai,ɖˈɔkʈəɾ koː dɪkʰˈaːnaː bˈeːhətˌəɾ hɛː,showing [it] to a doctor is better,2,in-pack-frame=board-answers.stay-here;src=McGregor-OHED दिखाना p.494;src=McGregor-OHED बेहतर p.747;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.prescription-only,सिर्फ़ डॉक्टर के पर्चे पर,,sirf ḍokṭar ke parce par,sˈɪrf ɖˈɔkʈəɾ keː pˈʌɾceː pˈʌɾ,only on a doctor's prescription,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=McGregor-OHED परचा p.602 sense 2 (note / letter / prescription);answers-audit-v1;ipa=espeak
-board-answers.before-food,खाने से पहले,,khāne se pahle,kʰˈaːneː seː pˈʌhəlˌeː,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=McGregor-OHED खाना p.235 sense 6 (eating / food);answers-audit-v1;ipa=espeak
-board-answers.after-food,खाने के बाद,,khāne ke bād,kʰˈaːneː keː bˈaːd,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=McGregor-OHED खाना p.235 sense 6 (eating / food);answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,romanization_iast,ipa,literal,note,confidence,provenance
+social-basics.hello,नमस्ते,,namaste,nəmˈʌsteː,,,2,hi-agent-v1;ipa=espeak
+social-basics.hello-polite,नमस्कार,,namaskār,nˌəmskˈaːɾ,,,2,hi-agent-v1;ipa=espeak
+social-basics.good-morning,सुप्रभात,नमस्ते,suprabhāt,sˌʊpɾəbʰˈaːt,namaste serves too,,2,hi-agent-v1;ipa=espeak
+social-basics.good-evening,शुभ संध्या,नमस्ते,śubh saṁdhyā,ʃˈʊbʰ sˈʌndʰjaː,formal; namaste is usual,,2,hi-agent-v1;ipa=espeak
+social-basics.goodbye,फिर मिलेंगे,नमस्ते,phir mileṁge,pʰˈɪɾ mɪlˈẽːɡeː,see you again,,2,hi-agent-v1;ipa=espeak
+social-basics.thank-you,धन्यवाद,शुक्रिया,dhanyavād,dʰˌənjəʋˈaːd,,,2,hi-agent-v1;ipa=espeak
+social-basics.you-are-welcome,कोई बात नहीं,,koī bāt nahīṁ,kˈoːi bˈaːt nˈʌhĩ,it is nothing,,2,hi-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,सुनिए,माफ़ कीजिए,sunie,sˈʊnɪˌeː,to get attention,,2,hi-agent-v1;ipa=espeak
+social-basics.sorry,माफ़ कीजिए,सॉरी,māf kījie,mˈaːf kˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+social-basics.no-problem,कोई दिक्कत नहीं,,koī dikkat nahīṁ,kˈoːi dˈɪkːət nˈʌhĩ,,,2,hi-agent-v1;ipa=espeak
+social-basics.i-do-not-know,मुझे नहीं पता,,mujhe nahīṁ patā,mˌʊɟʰeː nˈʌhĩ pˈʌtaː,,,2,hi-agent-v1;ipa=espeak
+social-basics.good-night,शुभ रात्रि,गुड नाइट,śubh rātri,ʃˈʊbʰ ɾˈaːtɾɪ,,,2,hi-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,,2,hi-agent-v1;ipa=espeak
+communication.i-do-not-speak-this-language,मुझे {target} नहीं आती,,mujhe {target} nahīṁ ātī,mˌʊɟʰeː {target} nˈʌhĩ ˈaːti,,,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,मुझे {target} थोड़ी-सी आती है,,mujhe {target} thoṛī-sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽisi ˈaːti hɛː,,,2,language-slots-v1;ipa=espeak
+communication.do-you-speak-english,क्या आपको {source} आती है?,,kyā āpko {source} ātī hai?,kjaː ˌaːpkˌoː {source} ˈaːti hɛː,,,2,language-slots-v1;ipa=espeak
+communication.please-speak-more-slowly,ज़रा धीरे बोलिए,,zarā dhīre bolie,zˈʌɾaː dʰˈiːɾeː bˈoːlɪˌeː,,,2,hi-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,मुझे समझ नहीं आ रहा,,mujhe samajh nahīṁ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhaː,,,2,hi-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,मुझे पढ़ना-समझना नहीं आता,,mujhe paṛhnā-samajhnā nahīṁ ātā,mˌʊɟʰeː pˈʌɽʰənˌaːsʌməɟʰnaː nˈʌhĩ ˈaːtaː,,,2,hi-agent-v1;ipa=espeak
+communication.please-say-it-again,फिर से कहिए,,phir se kahie,pʰˈɪɾ seː kˈʌhɪˌeː,,,2,hi-agent-v1;ipa=espeak
+communication.please-write-it-down,लिख दीजिए,,likh dījie,lˈɪkʰ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+communication.please-wait-a-moment,ज़रा रुकिए,,zarā rukie,zˈʌɾaː ɾˈʊkɪˌeː,,,2,hi-agent-v1;ipa=espeak
+communication.can-you-help-me,मेरी मदद कीजिए,,merī madad kījie,mˌeːɾi mˈʌdəd kˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+communication.please-show-me-the-text,वह {target} में लिखा हुआ दिखाइए,,vah {target} meṁ likhā huā dikhāie,ʋˌəh {target} mẽː lˈɪkʰaː hˈʊaː dɪkʰˈaːɪˌeː,,,2,language-slots-v1;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,आपकी बात समझ नहीं आ रही,,āpkī bāt samajh nahīṁ ā rahī,ˌaːpkˌi bˈaːt sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhi,,,2,hi-agent-v1;ipa=espeak
+communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaːjaː,,,2,hi-agent-v1;ipa=espeak
+communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,mˌʊɟʰeː jˌəh pˈʌɽʰənˌaː nˈʌhĩ ˈaːtaː,,,2,hi-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,रोमन अक्षरों में लिख दीजिए,,,ɾˈoːmən ˈʌkʃəɾˌõ mẽː lˈɪkʰ dˈiːɟɪˌeː,,,1,reader-gloss-v1;ipa=espeak
+quick-responses.please-go-ahead,कहिए,जी,kahie,kˈʌhɪˌeː,go ahead / please,,2,hi-agent-v1;ipa=espeak
+quick-responses.yes-right,हाँ,जी हाँ,hāṁ,hˈã,,,2,"hi-agent-v1;fix=McGregor Oxford Hindi-English Dictionary हाँ 1 (interj. yes -- ~ जी, interj. = ~; जी ~, interj. = ~);rule=one-reading-on-a-board (जी हाँ, the respectful yes, is a second wording and moves to text_alt);row-corrections-v6;ipa=espeak"
+quick-responses.no-not,नहीं,,nahīṁ,nˈʌhĩ,,,2,hi-agent-v1;ipa=espeak
+quick-responses.okay-can,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,,2,hi-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,मना है,,manā hai,mˈʌnaː hɛː,it is forbidden,,2,hi-agent-v1;ipa=espeak
+quick-responses.works-okay,चलेगा,,calegā,cəlˈeːɡaː,it will do,,2,hi-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,नहीं चलेगा,,nahīṁ calegā,nˈʌhĩ cəlˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
+quick-responses.can-possible,हो सकता है,,ho saktā hai,hoː sˈʌktˌaː hɛː,,,2,hi-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,नहीं हो सकता,,nahīṁ ho saktā,nˈʌhĩ hoː sˈʌktˌaː,,,2,hi-agent-v1;ipa=espeak
+quick-responses.okay-fine,बिल्कुल,,bilkul,bˈɪlkʊl,absolutely,,2,hi-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,नहीं होगा,,nahīṁ hogā,nˈʌhĩ hˈoːɡaː,,,2,hi-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,फ़ोन से अनुवाद हो रहा है,,fon se anuvād ho rahā hai,fˈoːn seː ˌʌnʊʋˈaːd hoː ɾˌəhaː hɛː,translating by phone,,2,hi-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,फ़ोन की तरफ़ बोलिए,,fon kī taraf bolie,fˈoːn ki tˈʌɾəf bˈoːlɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-translation.please-write-the-place-name,जगह का नाम {target} में लिख दीजिए,,jagah kā nām {target} meṁ likh dījie,ɟˈʌɡəh kaː nˈaːm {target} mẽː lˈɪkʰ dˈiːɟɪˌeː,,,2,language-slots-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,एक-एक वाक्य बोलिए,,ek-ek vākya bolie,ˈeːkeːk ʋˈaːkjə bˈoːlɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,टाइप करके दिखाइए,,ṭāip karke dikhāie,ʈˈaːɪp kˈʌɾkˌeː dɪkʰˈaːɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,स्क्रीन देखिए,,skrīn dekhie,skɾˈiːn dˈeːkʰɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,मेरे लिए टाइप कर दीजिए,,mere lie ṭāip kar dījie,mˌeːɾeː lˈɪeː ʈˈaːɪp kˈʌɾ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,आसान शब्दों में बोलिए,,āsān śabdoṁ meṁ bolie,aːsˈaːn ʃˈʌbdõ mẽː bˈoːlɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,मेरे फ़ोन की बैटरी कम है,,mere fon kī baiṭrī kam hai,mˌeːɾeː fˈoːn ki bˈɛːʈɾˌi kˈʌm hɛː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,क्या पावर बैंक है?,,kyā pāvar baiṁk hai?,kjaː pˈaːʋəɾ bˈɛ̃k hɛː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,अनुवाद में गलती हो सकती है,,anuvād meṁ galtī ho saktī hai,ˌʌnʊʋˈaːd mẽː ɡˈʌltˌi hoː sˈʌktˌi hɛː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.please-confirm,ज़रा पक्का कर लीजिए,,zarā pakkā kar lījie,zˈʌɾaː pˈʌkːaː kˈʌɾ lˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,क्या यहाँ फ़ोन चार्ज कर लूँ?,,kyā yahāṁ fon cārj kar lūṁ?,kjaː jˈʌhã fˈoːn cˈaːɾɟ kˈʌɾ lˈũ,,,2,hi-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,मुझे टूरिस्ट सिम चाहिए,,mujhe ṭūrisṭ sim cāhie,mˌʊɟʰeː ʈuːɾˈɪsʈ sˈɪm cˈaːhɪˌeː,,,2,hi-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,क्या आपका वाई-फ़ाई इस्तेमाल कर लूँ?,,kyā āpkā vāī-fāī istemāl kar lūṁ?,kjaː ˌaːpkˌaː ʋˈaːifaːi ˌɪsteːmˈaːl kˈʌɾ lˈũ,,,2,hi-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,कितना डेटा मिलेगा?,,kitnā ḍeṭā milegā?,kˈɪtnˌaː ɖˈeːʈaː mɪlˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,क्या पासपोर्ट चाहिए?,,kyā pāsporṭ cāhie?,kjaː pˌaːspˈoːɾʈ cˈaːhɪˌeː,,,2,hi-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,कितने दिन चलेगा?,,kitne din calegā?,kˈɪtnˌeː dˈɪn cəlˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.please-activate-it,इसे चालू कर दीजिए,,ise cālū kar dījie,ˈɪseː cˈaːluː kˈʌɾ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,क्या ई-सिम है?,,kyā ī-sim hai?,kjaː ˈisɪm hɛː,,,2,hi-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,मेरा डेटा नहीं चल रहा,,merā ḍeṭā nahīṁ cal rahā,mˌeːɾaː ɖˈeːʈaː nˈʌhĩ cˈʌl ɾˌəhaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,क्या रजिस्ट्रेशन ज़रूरी है?,,kyā rajisṭreśan zarūrī hai?,kjaː ɾˌəɟɪsʈɾˈeːʃən zəɾˈuːɾi hɛː,,,2,hi-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,सिग्नल नहीं आ रहा,,signal nahīṁ ā rahā,sˈɪɡnəl nˈʌhĩ ˈaː ɾˌəhaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,वाई-फ़ाई का पासवर्ड लिख दीजिए,,vāī-fāī kā pāsvarḍ likh dījie,ʋˈaːifaːi kaː pˌaːsəʋˈʌɾɖ lˈɪkʰ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+sim-data.sim-card,सिम कार्ड,,sim kārḍ,sˈɪm kˈaːɾɖ,,,2,hi-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,प्लग अडैप्टर कहाँ मिलेगा?,,plag aḍaipṭar kahāṁ milegā?,plˈʌɡ ʌɖˈɛːpʈəɾ kˈʌhã mɪlˈeːɡaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.mobile-data,मोबाइल डेटा,,mobāil ḍeṭā,moːbˈaːɪl ɖˈeːʈaː,,,2,hi-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,क्या इसमें रिचार्ज हो सकता है?,,kyā ismeṁ ricārj ho saktā hai?,kjaː ˈɪsmˌẽː ɾɪcˈaːɾɟ hoː sˈʌktˌaː hɛː,,,2,hi-agent-v1;ipa=espeak
+sim-data.top-up,रिचार्ज,,ricārj,ɾɪcˈaːɾɟ,,,2,hi-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,क्या {} में नेटवर्क आता है?,,kyā {} meṁ neṭvark ātā hai?,kjaː {} mẽː nˌeːʈəʋˈʌɾk ˈaːtaː hɛː,,,2,hi-agent-v1;ipa=espeak
+sim-data.signal,सिग्नल,नेटवर्क,signal,sˈɪɡnəl,,,2,hi-agent-v1;ipa=espeak
+sim-data.esim,ई-सिम,,ī-sim,ˈisɪm,,,2,hi-agent-v1;ipa=espeak
+sim-data.prepaid,प्रीपेड,,prīpeḍ,pɾipˈeːɖ,,,2,hi-agent-v1;ipa=espeak
+sim-data.roaming,रोमिंग,,romiṁg,ɾoːmˈĩɡ,,,2,hi-agent-v1;ipa=espeak
+etiquette.is-this-allowed,क्या इसकी इजाज़त है?,,kyā iskī ijāzat hai?,kjaː ˈɪskˌi ɪɟˈaːzət hɛː,,,2,hi-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,क्या टिप देनी होती है?,,kyā ṭip denī hotī hai?,kjaː ʈˈɪp dˈeːni hˈoːti hɛː,,,2,hi-agent-v1;ipa=espeak
+etiquette.is-service-included,क्या सर्विस चार्ज शामिल है?,,kyā sarvis cārj śāmil hai?,kjaː sˈʌrʋɪs cˈaːɾɟ ʃˈaːmɪl hɛː,,,2,hi-agent-v1;ipa=espeak
+etiquette.may-i-enter,क्या अंदर आ जाऊँ?,,kyā aṁdar ā jāūṁ?,kjaː ˈʌndəɾ ˈaː ɟˈaːũ,,,2,hi-agent-v1;ipa=espeak
+etiquette.remove-shoes,क्या जूते उतारने हैं?,,kyā jūte utārne haiṁ?,kjaː ɟˈuːteː ʊtˈaːɾnˌeː hɛ̃,,,2,hi-agent-v1;ipa=espeak
+etiquette.photo-of-you,क्या आपकी फ़ोटो ले लूँ?,,kyā āpkī foṭo le lūṁ?,kjaː ˌaːpkˌi fˈoːʈoː lˈeː lˈũ,,,2,hi-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,क्या यहाँ बैठ जाऊँ?,,kyā yahāṁ baiṭh jāūṁ?,kjaː jˈʌhã bˈɛːʈʰ ɟˈaːũ,,,2,hi-agent-v1;ipa=espeak
+etiquette.queue-for,क्या यह {} की लाइन है?,,kyā yah {} kī lāin hai?,kjaː jˌəh {} ki lˈaːɪn hɛː,,,2,hi-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,क्या मेरे कपड़े ठीक हैं?,,kyā mere kapṛe ṭhīk haiṁ?,kjaː mˌeːɾeː kˈʌpɽˌeː ʈʰˈiːk hɛ̃,,,2,hi-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,"अनजाने में हुआ, माफ़ कीजिए",,"anjāne meṁ huā, māf kījie","ˌʌnɟˈaːneː mẽː hˈʊaː, mˈaːf kˈiːɟɪˌeː",it happened unknowingly,,2,hi-agent-v1;ipa=espeak
+etiquette.what-is-customary,यहाँ का रिवाज़ क्या है?,,yahāṁ kā rivāz kyā hai?,jˈʌhã kaː ɾɪʋˈaːz kjaː hɛː,,,2,hi-agent-v1;ipa=espeak
+etiquette.keep-the-change,बाकी रख लीजिए,,bākī rakh lījie,bˈaːki ɾˈʌkʰ lˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+children.cannot-find-my-child,मेरा बच्चा नहीं मिल रहा है,,merā baccā nahīṁ mil rahā hai,mˌeːɾaː bˈʌcːaː nˈʌhĩ mˈɪl ɾˌəhaː hɛː,,,2,hi-agent-v1;ipa=espeak
+children.make-an-announcement,अनाउंसमेंट करा दीजिए,उद्घोषणा कीजिए,anāuṁsmeṁṭ karā dījie,ˌʌnaːˌʊnsəmˈẽːʈ kˈʌɾaː dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+children.child-age,मेरा बच्चा {} साल का है,,merā baccā {} sāl kā hai,mˌeːɾaː bˈʌcːaː {} sˈaːl kaː hɛː,,,2,hi-agent-v1;ipa=espeak
+children.high-chair,क्या बच्चों की ऊँची कुर्सी है?,,kyā baccoṁ kī ūṁcī kursī hai?,kjaː bˈʌcːõ ki ˈunci kˈʊrsi hɛː,,,2,hi-agent-v1;ipa=espeak
+children.baby-changing-room,शिशु देखभाल कक्ष कहाँ है?,,śiśu dekhbhāl kakṣ kahāṁ hai?,ʃˈɪʃʊ dˌeːkʰbʰˈaːl kˈʌkʃ kˈʌhã hɛː,,,2,hi-agent-v1;ipa=espeak
+children.childrens-menu,क्या बच्चों का मेन्यू है?,,kyā baccoṁ kā menyū hai?,kjaː bˈʌcːõ kaː mˈeːnjuː hɛː,,,2,hi-agent-v1;ipa=espeak
+children.suitable-for-children,क्या यह बच्चों के लिए ठीक है?,,kyā yah baccoṁ ke lie ṭhīk hai?,kjaː jˌəh bˈʌcːõ keː lˈɪeː ʈʰˈiːk hɛː,,,2,hi-agent-v1;ipa=espeak
+children.minimum-age,कम से कम कितनी उम्र?,,kam se kam kitnī umra?,kˈʌm seː kˈʌm kˈɪtnˌi ˈʊmɾə,,,2,hi-agent-v1;ipa=espeak
+children.do-children-pay,क्या बच्चों का टिकट लगता है?,,kyā baccoṁ kā ṭikaṭ lagtā hai?,kjaː bˈʌcːõ kaː ʈˈɪkəʈ lˈʌɡtˌaː hɛː,,,2,hi-agent-v1;ipa=espeak
+children.crib,क्या बच्चे का पालना है?,,kyā bacce kā pālnā hai?,kjaː bˈʌcːeː kaː pˈaːlnˌaː hɛː,,,2,hi-agent-v1;ipa=espeak
+children.warm-this-bottle,यह बोतल गरम कर दीजिए,,yah botal garam kar dījie,jˌəh bˈoːtəl ɡˈʌɾəm kˈʌɾ dˈiːɟɪˌeː,,,2,hi-agent-v1;ipa=espeak
+children.car-seat,हमें बच्चे की कार सीट चाहिए,,hameṁ bacce kī kār sīṭ cāhie,hˈʌmẽː bˈʌcːeː ki kˈaːɾ sˈiːʈ cˈaːhɪˌeː,,,2,hi-agent-v1;ipa=espeak
+children.stroller,प्रैम,बच्चा गाड़ी,praim,pɾˈɛːm,,,2,hi-agent-v1;ipa=espeak
+children.playground,क्या खेल का मैदान है?,,kyā khel kā maidān hai?,kjaː kʰˈeːl kaː mɛːdˈaːn hɛː,,,2,hi-agent-v1;ipa=espeak
+social-basics.politeness-particles,"थाई में शिष्टता वाक्य के अंत में एक शब्द से आती है, कुछ वैसे ही जैसे आप और तुम का चुनाव: पुरुष लगभग हर बात के बाद khrap जोड़ते हैं, महिलाएँ kha। सवाल पूछते समय महिला kha को चढ़ते सुर में कहती है। यहाँ दी गई पंक्तियों में यह शब्द नहीं है, इसलिए अपने हिसाब से जोड़ लीजिए।",,,,,,2,hi-notes-v1
+board-answers.can-you-walk,क्या चलना संभव है?,,kyā calanā sambhav hai?,kjaː cˈʌlnˌaː sˈʌmbʰəʋ hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,कार्ड या नकद?,,kārḍ yā nakad?,kˈaːɾɖ jˈaː nˈʌkəd,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,मदद आ रही है,,madad ā rahī hai,mˈʌdəd ˈaː ɾˌəhi hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.how-many,कितने चाहिए?,,kitne cāhie?,kˈɪtnˌeː cˈaːhɪˌeː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,एंबुलेंस बुलाई जा रही है,,aṁbuleṁs bulāī jā rahī hai,ˌẽːbʊlˈẽːs bʊlˈaːi ɟˈaː ɾˌəhi hɛː,an ambulance is being called,"the passive agrees with एंबुलेंस (feminine), not with the speaker; the obligative bulānī paṛegī said 'I will have to call', a necessity rather than the call being made",2,hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);rule=passive-agrees-with-object-not-speaker;row-corrections-v6;ipa=espeak
+board-answers.i-am-calling-the-police,पुलिस बुलाई जा रही है,,pulis bulāī jā rahī hai,pˈʊlɪs bʊlˈaːi ɟˈaː ɾˌəhi hɛː,the police are being called,"the passive agrees with पुलिस (feminine), not with the speaker; the obligative bulānī paṛegī said 'I will have to call', which also reads as a threat",2,hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);rule=passive-agrees-with-object-not-speaker;row-corrections-v6;ipa=espeak
+board-answers.i-do-not-have-a-phone,मेरे पास फ़ोन नहीं है,,mere pās fon nahīṁ hai,mˌeːɾeː pˈaːs fˈoːn nˈʌhĩ hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,मदद करने वाला कोई मिल जाएगा,,madad karne vālā koī mil jāegā,mˈʌdəd kˈʌɾnˌeː ʋˈaːlaː kˈoːi mˈɪl ɟaːˈeːɡaː,someone who can help will be found,"third person, no reference to the speaker at all",2,hi-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
+board-answers.i-will-show-you,"चलिए, रास्ता दिखा दूँ",,"calie, rāstā dikhā dūṁ","cˈʌlɪˌeː, ɾˈaːstaː dˈɪkʰaː dˈũ","come, let me show the way","the subjunctive dūṁ has one form for any speaker and makes an offer, as in board-answers.i-will-check (ज़रा देख लूँ); dikhānā hai was an obligation, 'I have to show the way'",2,"hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions: maiṁ jāūṁ? May I go?);fix=en.wikipedia Hindustani grammar rev 1365420047 (the subjunctive takes personal concord, the future adds gā ~ ge ~ gī to it);in-pack-frame=board-answers.i-will-check;rule=subjunctive-has-no-gender;row-corrections-v6;ipa=espeak"
+board-answers.i-will-write-it-down,ज़रा लिख दूँ,,zarā likh dūṁ,zˈʌɾaː lˈɪkʰ dˈũ,let me just write it down,"the subjunctive, one form for any speaker, as in board-answers.i-will-check (ज़रा देख लूँ); likh denā writes it for the other person, where likh lenā hai was 'I have to write this down' for oneself",2,"hi-board-answers-v1;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.3 (ek savārī aur le lūṁ -- I shall just collect one more fare);in-pack-frame=board-answers.i-will-check;rule=subjunctive-has-no-gender;row-corrections-v6;ipa=espeak"
+board-answers.it-is-closed,बंद है,,band hai,bˈʌnd hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,वहाँ है,,vahāṁ hai,ʋˈʌhã hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.none-of-these,इनमें मेरी बात नहीं है,,inmeṁ merī bāt nahīṁ hai,ˈɪnmˌẽː mˌeːɾi bˈaːt nˈʌhĩ hɛː,my point is not among these,"'merii' agrees with 'baat' (fem.), not the speaker",2,hi-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,ऐसा नहीं हो सकता,,aisā nahīṁ ho saktā,ˈɛːsaː nˈʌhĩ hoː sˈʌktˌaː,that cannot happen,"impersonal, saktā defaults masculine since 'aisā' has no gender",2,hi-board-answers-v1;ipa=espeak
+board-answers.please-wait,बस एक मिनट,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnəʈ,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.say-it-again,एक बार फिर?,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.stay-here,यहीं रुकना बेहतर है,,yahīṁ ruknā behtar hai,jˈʌhĩ ɾˈʊknˌaː bˈeːhətˌəɾ hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,अस्पताल पास ही है,,aspatāl pās hī hai,ˌʌspətˈaːl pˈaːs hˈi hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"इंतज़ार नहीं है, अभी अंदर आ जाइए",,"intazār nahīṁ hai, abhī andar ā jāie","ˌĩtzˈaːɾ nˈʌhĩ hɛː, ˈʌbʰi ˈʌndəɾ ˈaː ɟˈaːɪˌeː","-iye imperative, invariant for gender",,2,hi-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,हमारे पास यह नहीं है,,hamāre pās yah nahīṁ hai,həmˌaːɾeː pˈaːs jˌəh nˈʌhĩ hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,नाम क्या है?,,nām kyā hai?,nˈaːm kjaː hɛː,,,2,hi-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,कहाँ दर्द है?,,kahāṁ dard hai?,kˈʌhã dˈʌɾd hɛː,,,2,hi-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,आप बहुत दयालु हैं।,,āp bahut dayālu haiṁ,ˌaːp bˈʌhʊt dəjˈaːlʊ hɛ̃,,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,आपकी मदद के लिए धन्यवाद।,,āpkī madad ke lie dhanyavād,ˌaːpkˌi mˈʌdəd keː lˈɪeː dʰˌənjəʋˈaːd,,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,यह बहुत स्वादिष्ट है।,,yah bahut svādiṣṭ hai,jˌəh bˈʌhʊt sʋaːdˈɪʂʈ hɛː,,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,यहाँ बहुत सुंदर है।,,yahāṁ bahut sundar hai,jˈʌhã bˈʌhʊt sˈũdəɾ hɛː,,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,मुझे यह बहुत पसंद है।,,mujhe yah bahut pasand hai,mˌʊɟʰeː jˌəh bˈʌhʊt pəsˈʌnd hɛː,,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मैंने यहाँ बहुत अच्छा समय बिताया।,,maiṁne yahāṁ bahut acchā samay bitāyā,mˈɛ̃neː jˈʌhã bˈʌhʊt ˈʌcʰcʰaː sˈʌmˌɛj bɪtˈaːjaː,"transitive perfective with ने agrees with the object समय (masc.), not the speaker, so this is invariant for speaker gender",,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,सबके लिए धन्यवाद।,,sabke lie dhanyavād,sˈʌbkˌeː lˈɪeː dʰˌənjəʋˈaːd,,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,आपके आतिथ्य के लिए धन्यवाद।,,āpke ātithya ke lie dhanyavād,ˌaːpkˌeː aːtˈɪtʰjə keː lˈɪeː dʰˌənjəʋˈaːd,,,2,kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,मेरा नाम {} है,,merā nām {} hai,mˌeːɾaː nˈaːm {} hɛː,,,2,in-pack-neighbour=introductions.my-name-is;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"माफ़ कीजिए, न बताऊँ तो बेहतर है",,"māf kījie, na batāūṁ to behtar hai","mˈaːf kˈiːɟɪˌeː, nˈə bətˈaːũ tˈoː bˈeːhətˌəɾ hɛː","sorry, it is better if I do not tell",,2,in-pack-neighbour=social-basics.sorry;src=McGregor-OHED बताना p.702;src=McGregor-OHED बेहतर p.747;rule=subjunctive-invariant-for-gender;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,क्या हुआ?,,kyā huā?,kjaː hˈʊaː,,,2,src=McGregor-OHED क्या p.220 (~ हुआ? what has happened? what is the matter?);answers-audit-v1;ipa=espeak
+board-answers.understood,"जी, समझ में आ गया",,"jī, samajh meṁ ā gayā","ɟˈi, sˈʌməɟʰ mẽː ˈaː ɡˈʌjaː","yes, it has come into [my] understanding",,2,src=McGregor-OHED समझ p.984 (~ में आना to be understood);rule=samajh-mein-aana-agrees-with-thing-understood-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,ज़रा देख लूँ,,zarā dekh lūṁ,zˈʌɾaː dˈeːkʰ lˈũ,let me just look,,2,src=McGregor-OHED देखना p.509 senses 7-9;in-pack-frame=hotel-basics.may-i-see-the-room;rule=subjunctive-invariant-for-gender;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"जी, है",,"jī, hai","ɟˈi, hɛː","yes, there is",,2,in-pack-frame=hotel-basics.is-there-a-washing-machine;rule=verb-echo-reply;rule=copula-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,जगह नहीं है,,jagah nahīṁ hai,ɟˈʌɡəh nˈʌhĩ hɛː,there is no room,,2,src=McGregor-OHED जगह p.352 sense 4 (room / space / seat / place);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,मुफ़्त है,,muft hai,mˈʊft hɛː,,,2,src=McGregor-OHED मुफ़्त p.823 (free / not paid for);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,कोई फ़र्क़ नहीं पड़ता,,koī farq nahīṁ paṛtā,kˈoːi fˈʌɾq nˈʌhĩ pˈʌɽtˌaː,it makes no difference,,2,src=McGregor-OHED फ़रक़ p.676 (~ पड़ना);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,सिर्फ़ ग्राहकों के लिए है,,sirf grāhakoṁ ke lie hai,sˈɪrf ɡɾˈaːhəkˌõ keː lˈɪeː hɛː,,,2,in-pack-neighbour=toilets.is-it-only-for-customers;src=McGregor-OHED ग्राहक p.282;answers-audit-v1;ipa=espeak
+board-answers.where-to,कहाँ जाना है?,,kahāṁ jānā hai?,kˈʌhã ɟˈaːnaː hɛː,where is [one] to go?,,2,in-pack-frame=transit-rides.please-tell-me-where-to-get-off;rule=obligative-infinitive-has-no-person;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,अगले स्टॉप पर,,agle sṭop par,ˈʌɡlˌeː sʈˈɔp pˈʌɾ,,,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;src=McGregor-OHED अगला p.13 sense 4;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,किराया गाड़ी में ही देना है,,kirāyā gāṛī meṁ hī denā hai,kɪɾˈaːjaː ɡˈaːɽi mẽː hˈi dˈeːnaː hɛː,the fare is to be paid in the vehicle itself,,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;src=McGregor-OHED गाड़ी p.263 (car / truck / bus / train);rule=obligative-agrees-with-object-not-speaker;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,डॉक्टर को दिखाना बेहतर है,,ḍokṭar ko dikhānā behtar hai,ɖˈɔkʈəɾ koː dɪkʰˈaːnaː bˈeːhətˌəɾ hɛː,showing [it] to a doctor is better,,2,in-pack-frame=board-answers.stay-here;src=McGregor-OHED दिखाना p.494;src=McGregor-OHED बेहतर p.747;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,सिर्फ़ डॉक्टर के पर्चे पर,,sirf ḍokṭar ke parce par,sˈɪrf ɖˈɔkʈəɾ keː pˈʌɾceː pˈʌɾ,only on a doctor's prescription,,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;src=McGregor-OHED परचा p.602 sense 2 (note / letter / prescription);answers-audit-v1;ipa=espeak
+board-answers.before-food,खाने से पहले,,khāne se pahle,kʰˈaːneː seː pˈʌhəlˌeː,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=McGregor-OHED खाना p.235 sense 6 (eating / food);answers-audit-v1;ipa=espeak
+board-answers.after-food,खाने के बाद,,khāne ke bād,kʰˈaːneː keː bˈaːd,,,2,in-pack-neighbour=pharmacy-symptoms.before-or-after-food;src=McGregor-OHED खाना p.235 sense 6 (eating / food);answers-audit-v1;ipa=espeak

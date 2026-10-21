@@ -1,8 +1,8 @@
-concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,ʔˈajna ʔˈaʃtarit taðˈaːkir,,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.do-i-need-a-reservation,هل يجب الحجز؟,,hal yajib al-ḥajz?,hˈal jˈadʒib ʔalħˈadʒz,is booking required,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.what-is-the-latest-entry-time,ما آخر موعد للدخول؟,,mā ākhir mawʿid lil-dukhūl?,mˈaː ʔˈaːxir mˈawʕid lidduxˈuːl,,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.are-there-lockers,هل توجد خزائن؟,,hal tūjad khazāʾin?,hˈal tˈuːdʒad xazˈaːʔin,,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.may-i-take-photos,هل التصوير مسموح؟,,hal al-taṣwīr masmūḥ?,hˈal ʔattasˤwˈiːr masmˈuːħ,is photography allowed,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.please-take-a-photo-of-us,صوّرنا من فضلك,,ṣawwirnā min faḍlak,sˤawwˈirnaː mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
-attractions-tickets.could-you-take-a-photo-for-us,هل تصوّرنا من فضلك؟,,hal tuṣawwirnā min faḍlak?,hˈal tusˤawwˈirnaː mˈin fˈadˤlak,,2,ar-agent-v1;ipa=ala-lc
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,note,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,ʔˈajna ʔˈaʃtarit taðˈaːkir,,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.do-i-need-a-reservation,هل يجب الحجز؟,,hal yajib al-ḥajz?,hˈal jˈadʒib ʔalħˈadʒz,is booking required,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.what-is-the-latest-entry-time,ما آخر موعد للدخول؟,,mā ākhir mawʿid lil-dukhūl?,mˈaː ʔˈaːxir mˈawʕid lidduxˈuːl,,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.are-there-lockers,هل توجد خزائن؟,,hal tūjad khazāʾin?,hˈal tˈuːdʒad xazˈaːʔin,,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.may-i-take-photos,هل التصوير مسموح؟,,hal al-taṣwīr masmūḥ?,hˈal ʔattasˤwˈiːr masmˈuːħ,is photography allowed,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.please-take-a-photo-of-us,صوّرنا من فضلك,,ṣawwirnā min faḍlak,sˤawwˈirnaː mˈin fˈadˤlak,,,2,ar-agent-v1;ipa=ala-lc
+attractions-tickets.could-you-take-a-photo-for-us,هل تصوّرنا من فضلك؟,,hal tuṣawwirnā min faḍlak?,hˈal tusˤawwˈirnaː mˈin fˈadˤlak,,,2,ar-agent-v1;ipa=ala-lc

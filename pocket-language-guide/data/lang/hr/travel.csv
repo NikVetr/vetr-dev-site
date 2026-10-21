@@ -1,135 +1,135 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,Gdje je {}?,,ɡdjˈe je {},the slot is a nominative subject,2,hr-agent-v1;ipa=espeak
-directions.how-do-i-get-to,Kako doći ovamo: {}?,,kˈako dˈotɕi ovamo {},"'how does one get here:' -- do takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
-directions.is-it-far,Je li daleko?,,je li daleko,,2,hr-agent-v1;ipa=espeak
-directions.how-long-on-foot,Koliko pješke?,,koliko pjˈeʃke,,2,hr-agent-v1;ipa=espeak
-directions.please-show-me-on-the-map,"Molim vas, pokažite mi na karti",,"mˈolim vˈas, pokaʒite mˈi nˈa kˈarti",,2,hr-agent-v1;ipa=espeak
-directions.where-is-the-nearest,Gdje je najbliž[i|a|e] {}?,,ɡdjˈe je najbliʒ[i|a|e] {},"'where is the nearest {}?' -- najbliži, najbliža or najbliže as the place is masculine, feminine or neuter",2,hr-agent-v1;fix=hr.wikipedia Nacionalni park Manas rev 7107906 (najbliži grad) -- Kislovodsk rev 7345101 (Najbliža zračna luka) -- Tiškovac Lički rev 7430690 (Najbliže naselje);was=Gdje je najbliži {}? (the masculine adjective -- wrong for a feminine or neuter place -- as its literal said: najbliža before a feminine noun -- najbliže before a neuter one);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
-directions.where-am-i,Gdje se nalazim?,,ɡdjˈe sˈe nalazim,,2,hr-agent-v1;ipa=espeak
-directions.which-way,U kojem smjeru?,,u kˈojem smjˈeru,,2,hr-agent-v1;ipa=espeak
-directions.can-i-walk-there,Mogu li tamo pješke?,,mˈoɡu li tˈamo pjˈeʃke,,2,hr-agent-v1;ipa=espeak
-directions.how-far-is-it,Koliko je daleko?,,koliko je daleko,,2,hr-agent-v1;ipa=espeak
-directions.which-exit,Koji izlaz?,,kˈoji ˈizlaz,,2,hr-agent-v1;ipa=espeak
-directions.can-you-show-me-the-way,Možete li mi pokazati put?,,moʒete li mˈi pokazati pˈut,,2,hr-agent-v1;ipa=espeak
-directions.north,sjever,,sjˈever,,2,hr-agent-v1;ipa=espeak
-directions.south,jug,,jˈuɡ,,2,hr-agent-v1;ipa=espeak
-directions.east,istok,,ˈistok,,2,hr-agent-v1;ipa=espeak
-directions.west,zapad,,zˈapad,,2,hr-agent-v1;ipa=espeak
-quick-directions.go-straight,Idite pravo,,idite prˈavo,,2,hr-agent-v1;ipa=espeak
-quick-directions.turn-left,Skrenite lijevo,,skrenite lijevo,,2,hr-agent-v1;ipa=espeak
-quick-directions.turn-right,Skrenite desno,,skrenite dˈesno,,2,hr-agent-v1;ipa=espeak
-quick-directions.this-way,Ovuda,,ovuda,,2,hr-agent-v1;ipa=espeak
-quick-directions.that-way,Onuda,,onuda,,2,hr-agent-v1;ipa=espeak
-quick-directions.on-the-left,Lijevo,,lijevo,,2,hr-agent-v1;ipa=espeak
-quick-directions.on-the-right,Desno,,dˈesno,,2,hr-agent-v1;ipa=espeak
-quick-directions.across-from-here,Preko puta,,prˈeko pˈuta,,2,hr-agent-v1;ipa=espeak
-quick-directions.in-front,Ispred,,ˈispred,,2,hr-agent-v1;ipa=espeak
-quick-directions.behind,Iza,,ˈiza,,2,hr-agent-v1;ipa=espeak
-taxi.please-take-me-here,"Molim vas, odvezite me ovamo",,"mˈolim vˈas, odvezite mˈe ovamo",,2,hr-agent-v1;ipa=espeak
-taxi.please-send-me-the-address,"Molim vas, pošaljite mi adresu",,"mˈolim vˈas, poʃaʎite mˈi adresu",,2,hr-agent-v1;ipa=espeak
-taxi.we-need-the-east-gate-not-the-south-gate,"Trebamo istočni ulaz, ne južni",,"trebamo istotʃni ˈulaz, nˈe jˈuʒni",,2,hr-agent-v1;ipa=espeak
-taxi.please-stop-here,"Molim vas, stanite ovdje",,"mˈolim vˈas, stanite ˈovdje",,2,hr-agent-v1;ipa=espeak
-taxi.can-you-wait-for-me-here,Možete li me ovdje pričekati?,,moʒete li mˈe ˈovdje pritʃekati,,2,hr-agent-v1;ipa=espeak
-taxi.we-need-to-catch-the-high-speed-train,Moramo stići na brzi vlak,,moramo stˈitɕi nˈa brzi vlˈak,,2,hr-agent-v1;ipa=espeak
-taxi.please-use-the-meter,"Molim vas, uključite taksimetar",,"mˈolim vˈas, ukʎutʃite taksimetar",,2,hr-agent-v1;ipa=espeak
-taxi.i-will-get-off-here,Izlazim ovdje,,izlazim ˈovdje,,2,hr-agent-v1;ipa=espeak
-taxi.please-get-me-there-in-time-for-the-shinkansen,"Molim vas, dovezite me na vrijeme za shinkansen",,"mˈolim vˈas, dovezite mˈe nˈa vrijeme zˈa sxinkansen",,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
-taxi.could-you-make-it-colder,Možete li pojačati klimu?,,moʒete li pojatʃati klˈimu,,2,hr-agent-v1;ipa=espeak
-taxi.could-you-make-it-warmer,Možete li smanjiti klimu?,,moʒete li smaɲiti klˈimu,,2,hr-agent-v1;ipa=espeak
-taxi.may-i-open-the-window,Mogu li otvoriti prozor?,,mˈoɡu li otvoriti prˈozor,,2,hr-agent-v1;ipa=espeak
-transit-rides.two-tickets,Dvije karte,,dvˈije kˈarte,,2,hr-agent-v1;ipa=espeak
-transit-rides.where-is-the-subway-station,Gdje je stanica podzemne željeznice?,,ɡdjˈe je stanitsa podʑemne ʒeʎeznitse,,2,hr-agent-v1;ipa=espeak
-transit-rides.does-this-bus-train-go-to,Ide li ovaj autobus / vlak ovamo: {}?,,ˈide li ˈovaj autobus / vlˈak ovamo {},'does this bus / train go here:' -- u and do take a case a bare name in the slot cannot carry,2,hr-agent-v1;ipa=espeak
-transit-rides.what-is-the-next-stop,Koja je sljedeća stanica?,,kˈoja je sʎedetɕa stanitsa,,2,hr-agent-v1;ipa=espeak
-transit-rides.please-tell-me-where-to-get-off,"Molim vas, recite mi gdje izaći",,"mˈolim vˈas, retsite mˈi ɡdjˈe izatɕi",,2,hr-agent-v1;ipa=espeak
-transit-rides.is-this-direct,Je li ovo direktna veza?,,je li ˈovo direktna vˈeza,,2,hr-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-transfer,Moram li presjedati?,,mˈoram li presjedati,,2,hr-agent-v1;ipa=espeak
-transit-rides.is-it-delayed,Ima li kašnjenja?,,ima li kaʃɲeɲa,,2,hr-agent-v1;ipa=espeak
-transit-rides.i-am-in-a-hurry,U žurbi sam,,u ʒˈurbi sam,,2,hr-agent-v1;ipa=espeak
-transit-rides.which-platform,Koji peron?,,kˈoji pˈeron,,2,hr-agent-v1;ipa=espeak
-transit-rides.what-time-is-the-next-one,U koliko sati ide sljedeći?,,u koliko sˈati ˈide sʎedetɕi,,2,hr-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,,prˈoʃao sam svˈoju stanitsu,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Prošla sam svoju stanicu (the same wording);was=text_alt Prošla sam svoju stanicu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-transit-rides.can-i-use-this-ticket,Mogu li koristiti ovu kartu?,,mˈoɡu li koristiti ˈovu kˈartu,,2,hr-agent-v1;ipa=espeak
-place-words.scenic-area,turističko područje,,turistitʃko podrutʃje,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
-place-words.visitor-center,turistički informativni centar,,turistitʃki informativni tsˈentar,,2,hr-agent-v1;ipa=espeak
-place-words.railway-station,željeznička stanica,,ʒeʎeznitʃka stanitsa,,2,hr-agent-v1;ipa=espeak
-place-words.airport,zračna luka,aerodrom,zrˈatʃna lˈuka,zračna luka is what Croatian signage says; aerodrom is what people say,2,hr-agent-v1;ipa=espeak
-place-words.service-desk,informacije,,informatsije,,2,hr-agent-v1;ipa=espeak
-place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,2,hr-agent-v1;ipa=espeak
-place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,2,hr-agent-v1;ipa=espeak
-place-words.tourist-spot-sightseeing-area,turistička atrakcija,,turistitʃka atraktsija,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-a-tourist,Turist sam,,tˈurist sam,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Turistkinja sam (the same wording);was=text_alt Turistkinja sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-border-customs.here-is-my-passport,Ovo je moja putovnica,,ˈovo je mˈoja putovnitsa,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-staying-for-days,Trajanje boravka (broj dana): {},,trajaɲe borafka brˈoj dˈana {},"'length of stay (number of days): {}' -- a label, so the number agrees with nothing",2,hr-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 (CELEX 32009R0810 -- the Croatian text read through the Publications Office's cellar -- whose Annex I form is an image) Annex VII 4 (Rubrika: TRAJANJE BORAVKA … DANA -- Ta rubrika sadrži broj dana);fix=Hrvatski jezični portal boravak 1 (vrijeme provedeno u nekom mjestu);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Ostajem {} dana (right from two -- wrong for one: jedan dan);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
-border-customs.nothing-to-declare,Nemam ništa za prijaviti,,nemam nˈiʃta zˈa prijaviti,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,Odsjeo sam ovdje: {},,ˈotsjeo sam ˈovdje {},'I have put up here: {}' -- the colon keeps the address in the nominative,2,"hr-agent-v1;fix=variants.csv speaker_gender=feminine Odsjela sam ovdje: {} (the same wording);was=text_alt Odsjela sam ovdje: {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) odsjesti (proboraviti neko vrijeme u hotelu ili kod nekoga u stanu -- privremeno se smjestiti -- perfekt odsjeo sam);was=literal man speaking / woman speaking -- 'I am staying here:' keeps the address in the nominative (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Odsjela sam ovdje: {} serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v17;ipa=espeak"
-border-customs.i-am-here-for-business,Ovdje sam poslovno,,ˈovdje sam poslovno,,2,hr-agent-v1;ipa=espeak
-border-customs.i-have-a-return-ticket,Imam povratnu kartu,,imam povratnu kˈartu,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,Ovdje sam u posjetu rodbini,,ˈovdje sam u posjetu rodbini,,2,hr-agent-v1;ipa=espeak
-border-customs.this-is-for-personal-use,Ovo je za osobnu upotrebu,,ˈovo je zˈa osobnu upotrebu,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-in-transit,U tranzitu sam,,u tranzitu sam,,2,hr-agent-v1;ipa=espeak
-border-customs.i-have-in-cash,Imam {} u gotovini,,ˈimam {} u ɡotovini,,2,hr-agent-v1;ipa=espeak
-border-customs.this-is-a-gift,Ovo je dar,,ˈovo je dˈar,,2,hr-agent-v1;ipa=espeak
-border-customs.where-do-i-collect-my-baggage,Gdje mogu preuzeti prtljagu?,,ɡdjˈe mˈoɡu preuzeti prtʎaɡu,,2,hr-agent-v1;ipa=espeak
-border-customs.how-long-may-i-stay,Koliko dugo mogu ostati?,,koliko dˈuɡo mˈoɡu ostati,,2,hr-agent-v1;ipa=espeak
-border-customs.i-have-a-connecting-flight,Imam povezani let,,imam povezani lˈet,,2,hr-agent-v1;ipa=espeak
-border-customs.may-i-have-an-entry-stamp,Mogu li dobiti ulazni pečat?,,mˈoɡu li dobiti ulazni pˈetʃat,,2,hr-agent-v1;ipa=espeak
-border-customs.visa,viza,,vˈiza,,2,hr-agent-v1;ipa=espeak
-border-customs.i-have-no-food-or-plants,Nemam hrane ni biljaka,,nemam xrˈane nˈi biʎaka,,2,hr-agent-v1;ipa=espeak
-border-customs.passport-control,kontrola putovnica,,kontrola putovnitsa,,2,hr-agent-v1;ipa=espeak
-border-customs.customs,carina,,tsarina,,2,hr-agent-v1;ipa=espeak
-border-customs.baggage-claim,preuzimanje prtljage,,preuzimaɲe prtʎaɡe,,2,hr-agent-v1;ipa=espeak
-border-customs.customs-declaration,carinska prijava,,tsarinska prijava,,2,hr-agent-v1;ipa=espeak
-border-customs.arrival-card,ulazna kartica,,ulazna kartitsa,,2,hr-agent-v1;ipa=espeak
-border-customs.transit,tranzit,,trˈanzit,,2,hr-agent-v1;ipa=espeak
-border-customs.boarding-pass,propusnica za ukrcaj,boarding pass,propusnitsa zˈa ukrtsaj,the English term is what Croatian airports print,2,hr-agent-v1;ipa=espeak
-pickup-meeting.where-is-the-pickup-point,Gdje je mjesto preuzimanja?,,ɡdjˈe je mjˈesto preuzimaɲa,,2,hr-agent-v1;ipa=espeak
-pickup-meeting.please-send-me-the-pickup-point,"Molim vas, pošaljite mi mjesto preuzimanja",,"mˈolim vˈas, poʃaʎite mˈi mjˈesto preuzimaɲa",,2,hr-agent-v1;ipa=espeak
-pickup-meeting.please-pick-us-up-here,"Molim vas, pokupite nas ovdje",,"mˈolim vˈas, pokupite nˈas ˈovdje",,2,hr-agent-v1;ipa=espeak
-pickup-meeting.meet-us-at,Nađimo se ovdje: {},,nadʑimo sˈe ˈovdje {},'let us meet here:' -- keeps the place name in the nominative,2,hr-agent-v1;ipa=espeak
-pickup-meeting.please-call-me-a-ride,"Molim vas, pozovite mi prijevoz",,"mˈolim vˈas, pozovite mˈi prijevoz",,2,hr-agent-v1;ipa=espeak
-pickup-meeting.please-call-a-taxi,"Molim vas, pozovite taksi",,"mˈolim vˈas, pozovite tˈaksi",,2,hr-agent-v1;ipa=espeak
-rail-station-words.high-speed-rail,brzi vlak,,brzi vlˈak,,2,hr-agent-v1;ipa=espeak
-rail-station-words.maglev,maglev,,mˈaɡlev,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
-rail-station-words.transfer,presjedanje,,presjedaɲe,,2,hr-agent-v1;ipa=espeak
-rail-station-words.ticket-gate,turniket,,turniket,,2,hr-agent-v1;ipa=espeak
-rail-station-words.platform,peron,,pˈeron,,2,hr-agent-v1;ipa=espeak
-rail-station-words.ticket-office,blagajna,,blaɡajna,,2,hr-agent-v1;ipa=espeak
-rail-station-words.waiting-room,čekaonica,,tʃekaonitsa,,2,hr-agent-v1;ipa=espeak
-rail-station-words.train-number,broj vlaka,,brˈoj vlˈaka,,2,hr-agent-v1;ipa=espeak
-rail-station-words.carriage,vagon,,vˈaɡon,,2,hr-agent-v1;ipa=espeak
-rail-station-words.seat,sjedalo,,sjedalo,,2,hr-agent-v1;ipa=espeak
-rail-station-words.last-train,zadnji vlak,,zˈadɲi vlˈak,,2,hr-agent-v1;ipa=espeak
-rail-station-words.delayed,kasni,,kˈasni,,2,hr-agent-v1;ipa=espeak
-rail-station-words.final-stop,zadnja stanica,,zˈadɲa stanitsa,,2,hr-agent-v1;ipa=espeak
-common-signs.open-on,otvoreno / uključeno,,otvoreno / ukʎutʃeno,,2,hr-agent-v1;ipa=espeak
-common-signs.closed-off,zatvoreno / isključeno,,zatvoreno / iskʎutʃeno,,2,hr-agent-v1;ipa=espeak
-common-signs.occupied,zauzeto,,zauzeto,,2,hr-agent-v1;ipa=espeak
-common-signs.vacant,slobodno,,slobodno,,2,hr-agent-v1;ipa=espeak
-common-signs.caution,pozor,,pˈozor,,2,hr-agent-v1;ipa=espeak
-common-signs.no-entry,zabranjen ulaz,,zabraɲen ˈulaz,,2,hr-agent-v1;ipa=espeak
-common-signs.no-smoking,zabranjeno pušenje,,zabraɲeno puʃeɲe,,2,hr-agent-v1;ipa=espeak
-common-signs.no-photography,zabranjeno fotografiranje,,zabraɲeno fotoɡrafiraɲe,,2,hr-agent-v1;ipa=espeak
-common-signs.do-not-touch,ne dirati,,nˈe dirati,,2,hr-agent-v1;ipa=espeak
-common-signs.temporarily-closed,privremeno zatvoreno,,privremeno zatvoreno,,2,hr-agent-v1;ipa=espeak
-common-signs.open-operating,otvoreno,,otvoreno,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) otvoren 1 (koji ... ima otvorena vrata ... opr. zatvoren);rule=one-reading-on-a-board (u pogonu, in operation, was the gloss of the range);row-corrections-v7;ipa=espeak"
-common-signs.closed,zatvoreno,,zatvoreno,,2,hr-agent-v1;ipa=espeak
-common-signs.stopped-stop,zaustavljeno / stop,,zaustavljeno / stˈop,,2,hr-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-validate,Moram li poništiti ovu kartu?,,mˈoram li poniʃtiti ˈovu kˈartu,,2,hr-agent-v1;ipa=espeak
-rail-station-words.ticket-validator,poništavač karata,,poniʃtavatʃ karata,,2,hr-agent-v1;ipa=espeak
-common-signs.pork-code,oznake za svinjetinu na natpisima,,oznake zˈa sviɲetinu nˈa natpisima,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
-rail-station-words.fare,cijena vožnje,,tsijena vˈoʒɲe,,2,hr-agent-v1;ipa=espeak
-transit-rides.where-do-i-pay-the-fare,Gdje se plaća vožnja?,,ɡdjˈe sˈe plˈatɕa vˈoʒɲa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
-air-travel.where-is-check-in,Gdje je prijava na let?,,ɡdjˈe je prijava nˈa lˈet,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
-air-travel.which-gate,Koji izlaz?,,kˈoji ˈizlaz,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
-air-travel.where-is-the-security-check,Gdje je sigurnosna kontrola?,,ɡdjˈe je siɡurnosna kontrola,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
-air-travel.my-luggage-did-not-arrive,Moja prtljaga nije stigla,,mˈoja prtʎaɡa nije stˈiɡla,,2,hr-agent-v1;ipa=espeak
-air-travel.i-would-like-a-window-seat,Želio bih mjesto uz prozor,,ʒˈelio bˈix mjˈesto ˈus prˈozor,'I would like a seat by the window',2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti);was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prozor serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-air-travel.i-would-like-an-aisle-seat,Želio bih mjesto uz prolaz,,ʒˈelio bˈix mjˈesto ˈus prˈolaz,'I would like a seat by the aisle',2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti) and prolaz 2a (mjesto namijenjeno prolaženju (između stvari -- pokućstva itd.));was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prolaz serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
-hitchhiking.can-you-give-me-a-ride,Možete li me povesti?,,moʒete li mˈe povesti,"formal Vi, matching the pack's taxi register",2,hr-agent-v1;ipa=espeak
-hitchhiking.where-are-you-going,Kamo idete?,,kˈamo idete,,2,hr-agent-v1;ipa=espeak
-hitchhiking.i-only-need-to-go-to-the-next-town,Trebam samo do sljedećeg grada,,trˈebam sˈamo dˈo sʎedetɕeɡ ɡrˈada,,2,hr-agent-v1;ipa=espeak
-hitchhiking.is-there-room-for-two,Ima li mjesta za dvoje?,,ima li mjˈesta zˈa dvˈoje,,2,hr-agent-v1;ipa=espeak
-hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,"benzin, the word drivers use",2,hr-agent-v1;ipa=espeak
-hitchhiking.thank-you-for-the-ride,Hvala na prijevozu,,xvˈala nˈa prijevozu,,2,hr-agent-v1;ipa=espeak
-taxi.please-turn-around,"Molim vas, okrenite se",,"mˈolim vˈas, okrenite sˈe",,2,hr-agent-v1;src=HJP okrenuti 2a;src=Zakon o sigurnosti prometa na cestama čl. 43 (okretati se polukružno);in-pack-frame;answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+directions.where-is,Gdje je {}?,,ɡdjˈe je {},the slot is a nominative subject,,2,hr-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Kako doći ovamo: {}?,,kˈako dˈotɕi ovamo {},how does one get here:,"do takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
+directions.is-it-far,Je li daleko?,,je li daleko,,,2,hr-agent-v1;ipa=espeak
+directions.how-long-on-foot,Koliko pješke?,,koliko pjˈeʃke,,,2,hr-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,"Molim vas, pokažite mi na karti",,"mˈolim vˈas, pokaʒite mˈi nˈa kˈarti",,,2,hr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Gdje je najbliž[i|a|e] {}?,,ɡdjˈe je najbliʒ[i|a|e] {},where is the nearest {}?,"najbliži, najbliža or najbliže as the place is masculine, feminine or neuter",2,hr-agent-v1;fix=hr.wikipedia Nacionalni park Manas rev 7107906 (najbliži grad) -- Kislovodsk rev 7345101 (Najbliža zračna luka) -- Tiškovac Lički rev 7430690 (Najbliže naselje);was=Gdje je najbliži {}? (the masculine adjective -- wrong for a feminine or neuter place -- as its literal said: najbliža before a feminine noun -- najbliže before a neuter one);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=espeak
+directions.where-am-i,Gdje se nalazim?,,ɡdjˈe sˈe nalazim,,,2,hr-agent-v1;ipa=espeak
+directions.which-way,U kojem smjeru?,,u kˈojem smjˈeru,,,2,hr-agent-v1;ipa=espeak
+directions.can-i-walk-there,Mogu li tamo pješke?,,mˈoɡu li tˈamo pjˈeʃke,,,2,hr-agent-v1;ipa=espeak
+directions.how-far-is-it,Koliko je daleko?,,koliko je daleko,,,2,hr-agent-v1;ipa=espeak
+directions.which-exit,Koji izlaz?,,kˈoji ˈizlaz,,,2,hr-agent-v1;ipa=espeak
+directions.can-you-show-me-the-way,Možete li mi pokazati put?,,moʒete li mˈi pokazati pˈut,,,2,hr-agent-v1;ipa=espeak
+directions.north,sjever,,sjˈever,,,2,hr-agent-v1;ipa=espeak
+directions.south,jug,,jˈuɡ,,,2,hr-agent-v1;ipa=espeak
+directions.east,istok,,ˈistok,,,2,hr-agent-v1;ipa=espeak
+directions.west,zapad,,zˈapad,,,2,hr-agent-v1;ipa=espeak
+quick-directions.go-straight,Idite pravo,,idite prˈavo,,,2,hr-agent-v1;ipa=espeak
+quick-directions.turn-left,Skrenite lijevo,,skrenite lijevo,,,2,hr-agent-v1;ipa=espeak
+quick-directions.turn-right,Skrenite desno,,skrenite dˈesno,,,2,hr-agent-v1;ipa=espeak
+quick-directions.this-way,Ovuda,,ovuda,,,2,hr-agent-v1;ipa=espeak
+quick-directions.that-way,Onuda,,onuda,,,2,hr-agent-v1;ipa=espeak
+quick-directions.on-the-left,Lijevo,,lijevo,,,2,hr-agent-v1;ipa=espeak
+quick-directions.on-the-right,Desno,,dˈesno,,,2,hr-agent-v1;ipa=espeak
+quick-directions.across-from-here,Preko puta,,prˈeko pˈuta,,,2,hr-agent-v1;ipa=espeak
+quick-directions.in-front,Ispred,,ˈispred,,,2,hr-agent-v1;ipa=espeak
+quick-directions.behind,Iza,,ˈiza,,,2,hr-agent-v1;ipa=espeak
+taxi.please-take-me-here,"Molim vas, odvezite me ovamo",,"mˈolim vˈas, odvezite mˈe ovamo",,,2,hr-agent-v1;ipa=espeak
+taxi.please-send-me-the-address,"Molim vas, pošaljite mi adresu",,"mˈolim vˈas, poʃaʎite mˈi adresu",,,2,hr-agent-v1;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,"Trebamo istočni ulaz, ne južni",,"trebamo istotʃni ˈulaz, nˈe jˈuʒni",,,2,hr-agent-v1;ipa=espeak
+taxi.please-stop-here,"Molim vas, stanite ovdje",,"mˈolim vˈas, stanite ˈovdje",,,2,hr-agent-v1;ipa=espeak
+taxi.can-you-wait-for-me-here,Možete li me ovdje pričekati?,,moʒete li mˈe ˈovdje pritʃekati,,,2,hr-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,Moramo stići na brzi vlak,,moramo stˈitɕi nˈa brzi vlˈak,,,2,hr-agent-v1;ipa=espeak
+taxi.please-use-the-meter,"Molim vas, uključite taksimetar",,"mˈolim vˈas, ukʎutʃite taksimetar",,,2,hr-agent-v1;ipa=espeak
+taxi.i-will-get-off-here,Izlazim ovdje,,izlazim ˈovdje,,,2,hr-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,"Molim vas, dovezite me na vrijeme za shinkansen",,"mˈolim vˈas, dovezite mˈe nˈa vrijeme zˈa sxinkansen",,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Možete li pojačati klimu?,,moʒete li pojatʃati klˈimu,,,2,hr-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Možete li smanjiti klimu?,,moʒete li smaɲiti klˈimu,,,2,hr-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Mogu li otvoriti prozor?,,mˈoɡu li otvoriti prˈozor,,,2,hr-agent-v1;ipa=espeak
+transit-rides.two-tickets,Dvije karte,,dvˈije kˈarte,,,2,hr-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,Gdje je stanica podzemne željeznice?,,ɡdjˈe je stanitsa podʑemne ʒeʎeznitse,,,2,hr-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,Ide li ovaj autobus / vlak ovamo: {}?,,ˈide li ˈovaj autobus / vlˈak ovamo {},does this bus / train go here:,u and do take a case a bare name in the slot cannot carry,2,hr-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,Koja je sljedeća stanica?,,kˈoja je sʎedetɕa stanitsa,,,2,hr-agent-v1;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,"Molim vas, recite mi gdje izaći",,"mˈolim vˈas, retsite mˈi ɡdjˈe izatɕi",,,2,hr-agent-v1;ipa=espeak
+transit-rides.is-this-direct,Je li ovo direktna veza?,,je li ˈovo direktna vˈeza,,,2,hr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,Moram li presjedati?,,mˈoram li presjedati,,,2,hr-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,Ima li kašnjenja?,,ima li kaʃɲeɲa,,,2,hr-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,U žurbi sam,,u ʒˈurbi sam,,,2,hr-agent-v1;ipa=espeak
+transit-rides.which-platform,Koji peron?,,kˈoji pˈeron,,,2,hr-agent-v1;ipa=espeak
+transit-rides.what-time-is-the-next-one,U koliko sati ide sljedeći?,,u koliko sˈati ˈide sʎedetɕi,,,2,hr-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,,prˈoʃao sam svˈoju stanitsu,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Prošla sam svoju stanicu (the same wording);was=text_alt Prošla sam svoju stanicu (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,Mogu li koristiti ovu kartu?,,mˈoɡu li koristiti ˈovu kˈartu,,,2,hr-agent-v1;ipa=espeak
+place-words.scenic-area,turističko područje,,turistitʃko podrutʃje,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+place-words.visitor-center,turistički informativni centar,,turistitʃki informativni tsˈentar,,,2,hr-agent-v1;ipa=espeak
+place-words.railway-station,željeznička stanica,,ʒeʎeznitʃka stanitsa,,,2,hr-agent-v1;ipa=espeak
+place-words.airport,zračna luka,aerodrom,zrˈatʃna lˈuka,zračna luka is what Croatian signage says; aerodrom is what people say,,2,hr-agent-v1;ipa=espeak
+place-words.service-desk,informacije,,informatsije,,,2,hr-agent-v1;ipa=espeak
+place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,,2,hr-agent-v1;ipa=espeak
+place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,,2,hr-agent-v1;ipa=espeak
+place-words.tourist-spot-sightseeing-area,turistička atrakcija,,turistitʃka atraktsija,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Turist sam,,tˈurist sam,,,2,hr-agent-v1;fix=variants.csv speaker_gender=feminine Turistkinja sam (the same wording);was=text_alt Turistkinja sam (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+border-customs.here-is-my-passport,Ovo je moja putovnica,,ˈovo je mˈoja putovnitsa,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Trajanje boravka (broj dana): {},,trajaɲe borafka brˈoj dˈana {},length of stay (number of days): {},"a label, so the number agrees with nothing",2,hr-agent-v1;fix=EU Visa Code Regulation (EC) No 810/2009 (CELEX 32009R0810 -- the Croatian text read through the Publications Office's cellar -- whose Annex I form is an image) Annex VII 4 (Rubrika: TRAJANJE BORAVKA … DANA -- Ta rubrika sadrži broj dana);fix=Hrvatski jezični portal boravak 1 (vrijeme provedeno u nekom mjestu);fix=hr.wikipedia Hrvatski jezik rev 7583866 (jedan stup -- dva stupa -- pet stupova);was=Ostajem {} dana (right from two -- wrong for one: jedan dan);rule=a label whose filler follows a colon and agrees with nothing (the pack's frames Alergija na lijek: {} and Broj noći: {});row-corrections-v14;ipa=espeak
+border-customs.nothing-to-declare,Nemam ništa za prijaviti,,nemam nˈiʃta zˈa prijaviti,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Odsjeo sam ovdje: {},,ˈotsjeo sam ˈovdje {},I have put up here: {},the colon keeps the address in the nominative,2,"hr-agent-v1;fix=variants.csv speaker_gender=feminine Odsjela sam ovdje: {} (the same wording);was=text_alt Odsjela sam ovdje: {} (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) odsjesti (proboraviti neko vrijeme u hotelu ili kod nekoga u stanu -- privremeno se smjestiti -- perfekt odsjeo sam);was=literal man speaking / woman speaking -- 'I am staying here:' keeps the address in the nominative (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Odsjela sam ovdje: {} serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v17;ipa=espeak"
+border-customs.i-am-here-for-business,Ovdje sam poslovno,,ˈovdje sam poslovno,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,Imam povratnu kartu,,imam povratnu kˈartu,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Ovdje sam u posjetu rodbini,,ˈovdje sam u posjetu rodbini,,,2,hr-agent-v1;ipa=espeak
+border-customs.this-is-for-personal-use,Ovo je za osobnu upotrebu,,ˈovo je zˈa osobnu upotrebu,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-in-transit,U tranzitu sam,,u tranzitu sam,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-have-in-cash,Imam {} u gotovini,,ˈimam {} u ɡotovini,,,2,hr-agent-v1;ipa=espeak
+border-customs.this-is-a-gift,Ovo je dar,,ˈovo je dˈar,,,2,hr-agent-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,Gdje mogu preuzeti prtljagu?,,ɡdjˈe mˈoɡu preuzeti prtʎaɡu,,,2,hr-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,Koliko dugo mogu ostati?,,koliko dˈuɡo mˈoɡu ostati,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,Imam povezani let,,imam povezani lˈet,,,2,hr-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,Mogu li dobiti ulazni pečat?,,mˈoɡu li dobiti ulazni pˈetʃat,,,2,hr-agent-v1;ipa=espeak
+border-customs.visa,viza,,vˈiza,,,2,hr-agent-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,Nemam hrane ni biljaka,,nemam xrˈane nˈi biʎaka,,,2,hr-agent-v1;ipa=espeak
+border-customs.passport-control,kontrola putovnica,,kontrola putovnitsa,,,2,hr-agent-v1;ipa=espeak
+border-customs.customs,carina,,tsarina,,,2,hr-agent-v1;ipa=espeak
+border-customs.baggage-claim,preuzimanje prtljage,,preuzimaɲe prtʎaɡe,,,2,hr-agent-v1;ipa=espeak
+border-customs.customs-declaration,carinska prijava,,tsarinska prijava,,,2,hr-agent-v1;ipa=espeak
+border-customs.arrival-card,ulazna kartica,,ulazna kartitsa,,,2,hr-agent-v1;ipa=espeak
+border-customs.transit,tranzit,,trˈanzit,,,2,hr-agent-v1;ipa=espeak
+border-customs.boarding-pass,propusnica za ukrcaj,boarding pass,propusnitsa zˈa ukrtsaj,the English term is what Croatian airports print,,2,hr-agent-v1;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,Gdje je mjesto preuzimanja?,,ɡdjˈe je mjˈesto preuzimaɲa,,,2,hr-agent-v1;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,"Molim vas, pošaljite mi mjesto preuzimanja",,"mˈolim vˈas, poʃaʎite mˈi mjˈesto preuzimaɲa",,,2,hr-agent-v1;ipa=espeak
+pickup-meeting.please-pick-us-up-here,"Molim vas, pokupite nas ovdje",,"mˈolim vˈas, pokupite nˈas ˈovdje",,,2,hr-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Nađimo se ovdje: {},,nadʑimo sˈe ˈovdje {},let us meet here:,keeps the place name in the nominative,2,hr-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,"Molim vas, pozovite mi prijevoz",,"mˈolim vˈas, pozovite mˈi prijevoz",,,2,hr-agent-v1;ipa=espeak
+pickup-meeting.please-call-a-taxi,"Molim vas, pozovite taksi",,"mˈolim vˈas, pozovite tˈaksi",,,2,hr-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,brzi vlak,,brzi vlˈak,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.maglev,maglev,,mˈaɡlev,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+rail-station-words.transfer,presjedanje,,presjedaɲe,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,turniket,,turniket,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.platform,peron,,pˈeron,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.ticket-office,blagajna,,blaɡajna,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.waiting-room,čekaonica,,tʃekaonitsa,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.train-number,broj vlaka,,brˈoj vlˈaka,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.carriage,vagon,,vˈaɡon,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.seat,sjedalo,,sjedalo,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.last-train,zadnji vlak,,zˈadɲi vlˈak,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.delayed,kasni,,kˈasni,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.final-stop,zadnja stanica,,zˈadɲa stanitsa,,,2,hr-agent-v1;ipa=espeak
+common-signs.open-on,otvoreno / uključeno,,otvoreno / ukʎutʃeno,,,2,hr-agent-v1;ipa=espeak
+common-signs.closed-off,zatvoreno / isključeno,,zatvoreno / iskʎutʃeno,,,2,hr-agent-v1;ipa=espeak
+common-signs.occupied,zauzeto,,zauzeto,,,2,hr-agent-v1;ipa=espeak
+common-signs.vacant,slobodno,,slobodno,,,2,hr-agent-v1;ipa=espeak
+common-signs.caution,pozor,,pˈozor,,,2,hr-agent-v1;ipa=espeak
+common-signs.no-entry,zabranjen ulaz,,zabraɲen ˈulaz,,,2,hr-agent-v1;ipa=espeak
+common-signs.no-smoking,zabranjeno pušenje,,zabraɲeno puʃeɲe,,,2,hr-agent-v1;ipa=espeak
+common-signs.no-photography,zabranjeno fotografiranje,,zabraɲeno fotoɡrafiraɲe,,,2,hr-agent-v1;ipa=espeak
+common-signs.do-not-touch,ne dirati,,nˈe dirati,,,2,hr-agent-v1;ipa=espeak
+common-signs.temporarily-closed,privremeno zatvoreno,,privremeno zatvoreno,,,2,hr-agent-v1;ipa=espeak
+common-signs.open-operating,otvoreno,,otvoreno,,,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) otvoren 1 (koji ... ima otvorena vrata ... opr. zatvoren);rule=one-reading-on-a-board (u pogonu, in operation, was the gloss of the range);row-corrections-v7;ipa=espeak"
+common-signs.closed,zatvoreno,,zatvoreno,,,2,hr-agent-v1;ipa=espeak
+common-signs.stopped-stop,zaustavljeno / stop,,zaustavljeno / stˈop,,,2,hr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Moram li poništiti ovu kartu?,,mˈoram li poniʃtiti ˈovu kˈartu,,,2,hr-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,poništavač karata,,poniʃtavatʃ karata,,,2,hr-agent-v1;ipa=espeak
+common-signs.pork-code,oznake za svinjetinu na natpisima,,oznake zˈa sviɲetinu nˈa natpisima,,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+rail-station-words.fare,cijena vožnje,,tsijena vˈoʒɲe,,,2,hr-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Gdje se plaća vožnja?,,ɡdjˈe sˈe plˈatɕa vˈoʒɲa,,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Gdje je prijava na let?,,ɡdjˈe je prijava nˈa lˈet,,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.which-gate,Koji izlaz?,,kˈoji ˈizlaz,,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.where-is-the-security-check,Gdje je sigurnosna kontrola?,,ɡdjˈe je siɡurnosna kontrola,,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Moja prtljaga nije stigla,,mˈoja prtʎaɡa nije stˈiɡla,,,2,hr-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Želio bih mjesto uz prozor,,ʒˈelio bˈix mjˈesto ˈus prˈozor,'I would like a seat by the window',,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti);was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prozor serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
+air-travel.i-would-like-an-aisle-seat,Želio bih mjesto uz prolaz,,ʒˈelio bˈix mjˈesto ˈus prˈolaz,'I would like a seat by the aisle',,2,"hr-agent-v1;fix=Hrvatski jezični portal (hjp.znanje.hr) mjesto 2a (prostor gdje se može što smjestiti) and prolaz 2a (mjesto namijenjeno prolaženju (između stvari -- pokućstva itd.));was=literal masculine -- a woman says Željela bih (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine Željela bih mjesto uz prolaz serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=espeak"
+hitchhiking.can-you-give-me-a-ride,Možete li me povesti?,,moʒete li mˈe povesti,"formal Vi, matching the pack's taxi register",,2,hr-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Kamo idete?,,kˈamo idete,,,2,hr-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Trebam samo do sljedećeg grada,,trˈebam sˈamo dˈo sʎedetɕeɡ ɡrˈada,,,2,hr-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Ima li mjesta za dvoje?,,ima li mjˈesta zˈa dvˈoje,,,2,hr-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,"benzin, the word drivers use",,2,hr-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Hvala na prijevozu,,xvˈala nˈa prijevozu,,,2,hr-agent-v1;ipa=espeak
+taxi.please-turn-around,"Molim vas, okrenite se",,"mˈolim vˈas, okrenite sˈe",,,2,hr-agent-v1;src=HJP okrenuti 2a;src=Zakon o sigurnosti prometa na cestama čl. 43 (okretati se polukružno);in-pack-frame;answers-audit-v1;ipa=espeak

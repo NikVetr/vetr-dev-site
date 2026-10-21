@@ -1,31 +1,31 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Mi chiamo {},,mɪ kjˈamo {},,2,it-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Piacere,Molto piacere,pjatʃˈere,,2,it-agent-v1;ipa=espeak
-introductions.what-is-your-name,Come si chiama?,,kˌome sɪ kjˈama,,2,it-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,Viaggiamo insieme,,vjadʒdʒˈamo insɪˈɛme,,2,it-agent-v1;ipa=espeak
-introductions.this-is-my-friend,Questo è il mio amico,Questa è la mia amica,kwˈesto ˌɛ il mˌio amˈiko,,2,it-agent-v1;ipa=espeak
-introductions.i-am-from,Vengo da questo paese: {}.,,vˈeŋɡo da kwˌɛsto paˈeze {},"'I come from this country: {}'; da always contracts with the article for a nation (dall'Italia, dagli Stati Uniti, dalle Filippine -- never bare), so the preposition+article is fixed on 'questo paese' and the name is a label",2,"it-agent-v1;rewritten-for-fill-in=da requires the articulated preposition for every nation name regardless of gender (learn-italian-online.net, Zanichelli Aula di lingue: 'preposizioni articolate' for stati), so 'da questo paese' carries it and the bare name follows a colon;ipa=espeak"
-introductions.where-are-you-from,Di dov'è?,,dɪ dovˈɛ,,2,it-agent-v1;ipa=espeak
-introductions.how-are-you,Come sta?,,kˌome stˈa,,2,it-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Sono un turista,,sˌono ʊn tʊrˈista,,2,it-agent-v1;fix=variants.csv speaker_gender=feminine Sono una turista (the same wording);was=text_alt Sono una turista (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
-introductions.this-is-my-husband-wife,Lui è mio marito / lei è mia moglie,,lˌʊi e mˌio marˈito / lˌɛi e mˌia mˈoʎe,,2,it-agent-v1;ipa=espeak
-introductions.this-is-my-daughter-son,Lei è mia figlia / lui è mio figlio,,lˌɛi e mˌia fˈiʎa / lˌʊi e mˌio fˈiʎo,,2,it-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Viaggio da solo,,vjˈadʒdʒo da sˈolo,,2,it-agent-v1;ipa=espeak
-family-intros.this-is-my-husband,Lui è mio marito,,lˌʊi e mˌio marˈito,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-wife,Lei è mia moglie,,lˌɛi e mˌia mˈoʎe,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-son,Lui è mio figlio,,lˌʊi e mˌio fˈiʎo,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-family-intros.this-is-my-daughter,Lei è mia figlia,,lˌɛi e mˌia fˈiʎa,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-about-me.i-am-a-student,Sono studente,,sˌono stʊdˈɛnte,,2,it-about-travel-v1;ipa=espeak
-about-me.i-am-retired,Sono pensionato,,sˌono pensjonˈato,,2,it-about-travel-v1;ipa=espeak
-about-me.i-am-a-teacher,Sono insegnante,,sˌono inseɲˈante,,2,it-about-travel-v1;ipa=espeak
-about-me.i-am-a-doctor,Sono medico,,sˌono mˈɛdiko,,2,it-about-travel-v1;ipa=espeak
-about-me.i-am-a-nurse,Sono infermiere,,sˌono infermiˈɛre,,2,it-about-travel-v1;ipa=espeak
-about-me.i-am-an-engineer,Sono ingegnere,,sˌono indʒeɲˈɛre,,2,it-about-travel-v1;ipa=espeak
-about-me.i-work-in-an-office,Lavoro in un ufficio,,lavˈɔro in ʊn ʊffˈitʃo,,2,it-about-travel-v1;ipa=espeak
-about-me.i-have-my-own-business,Ho un'attività in proprio,,o ʊnattivitˈa in prˈɔprio,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-mother,Lei è mia madre,,lˌɛi e mˌia mˈadre,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-father,Lui è mio padre,,lˌʊi e mˌio pˈadre,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-brother,Lui è mio fratello,,lˌʊi e mˌio fratˈɛllo,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-sister,Lei è mia sorella,,lˌɛi e mˌia sorˈɛlla,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-partner,Lui è il mio partner,Lei è la mia partner,lˌʊi e il mˌio pˈartner,,2,it-about-travel-v1;ipa=espeak
-family-intros.this-is-my-colleague,Lui è il mio collega,Lei è la mia collega,lˌʊi e il mˌio kollˈɛɡa,,2,it-about-travel-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+introductions.my-name-is,Mi chiamo {},,mɪ kjˈamo {},,,2,it-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Piacere,Molto piacere,pjatʃˈere,,,2,it-agent-v1;ipa=espeak
+introductions.what-is-your-name,Come si chiama?,,kˌome sɪ kjˈama,,,2,it-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Viaggiamo insieme,,vjadʒdʒˈamo insɪˈɛme,,,2,it-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Questo è il mio amico,Questa è la mia amica,kwˈesto ˌɛ il mˌio amˈiko,,,2,it-agent-v1;ipa=espeak
+introductions.i-am-from,Vengo da questo paese: {}.,,vˈeŋɡo da kwˌɛsto paˈeze {},"'I come from this country: {}'; da always contracts with the article for a nation (dall'Italia, dagli Stati Uniti, dalle Filippine","never bare), so the preposition+article is fixed on 'questo paese' and the name is a label",2,"it-agent-v1;rewritten-for-fill-in=da requires the articulated preposition for every nation name regardless of gender (learn-italian-online.net, Zanichelli Aula di lingue: 'preposizioni articolate' for stati), so 'da questo paese' carries it and the bare name follows a colon;ipa=espeak"
+introductions.where-are-you-from,Di dov'è?,,dɪ dovˈɛ,,,2,it-agent-v1;ipa=espeak
+introductions.how-are-you,Come sta?,,kˌome stˈa,,,2,it-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sono un turista,,sˌono ʊn tʊrˈista,,,2,it-agent-v1;fix=variants.csv speaker_gender=feminine Sono una turista (the same wording);was=text_alt Sono una turista (the feminine speaker's form the variant row already serves);rule=the speaker's gender is the variants' to serve -- speaker-variants.md: the feminine parked in text_alt moves to a variant row and text_alt is cleared (as the Russian text_alt pass did);gender-alternatives-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Lui è mio marito / lei è mia moglie,,lˌʊi e mˌio marˈito / lˌɛi e mˌia mˈoʎe,,,2,it-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Lei è mia figlia / lui è mio figlio,,lˌɛi e mˌia fˈiʎa / lˌʊi e mˌio fˈiʎo,,,2,it-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Viaggio da solo,,vjˈadʒdʒo da sˈolo,,,2,it-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Lui è mio marito,,lˌʊi e mˌio marˈito,,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Lei è mia moglie,,lˌɛi e mˌia mˈoʎe,,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Lui è mio figlio,,lˌʊi e mˌio fˈiʎo,,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Lei è mia figlia,,lˌɛi e mˌia fˈiʎa,,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Sono studente,,sˌono stʊdˈɛnte,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Sono pensionato,,sˌono pensjonˈato,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Sono insegnante,,sˌono inseɲˈante,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Sono medico,,sˌono mˈɛdiko,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Sono infermiere,,sˌono infermiˈɛre,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Sono ingegnere,,sˌono indʒeɲˈɛre,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Lavoro in un ufficio,,lavˈɔro in ʊn ʊffˈitʃo,,,2,it-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Ho un'attività in proprio,,o ʊnattivitˈa in prˈɔprio,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Lei è mia madre,,lˌɛi e mˌia mˈadre,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,Lui è mio padre,,lˌʊi e mˌio pˈadre,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,Lui è mio fratello,,lˌʊi e mˌio fratˈɛllo,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Lei è mia sorella,,lˌɛi e mˌia sorˈɛlla,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,Lui è il mio partner,Lei è la mia partner,lˌʊi e il mˌio pˈartner,,,2,it-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,Lui è il mio collega,Lei è la mia collega,lˌʊi e il mˌio kollˈɛɡa,,,2,it-about-travel-v1;ipa=espeak

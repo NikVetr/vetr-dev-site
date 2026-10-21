@@ -1,68 +1,68 @@
-concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
-hotel-words.passport,পাসপোর্ট,,pāsaporṭa,pˈaʃɔpˌoɾʈɔ,,2,bn-agent-v1;ipa=espeak
-hotel-words.room-key-card,রুমের চাবি-কার্ড,,rumera cābi-kārḍa,ɾˈumeɾ tʃˈabikaɾɖɔ,,2,bn-agent-v1;ipa=espeak
-hotel-words.check-in,চেক-ইন,,ceka-ina,tʃˈekɔin,,2,bn-agent-v1;ipa=espeak
-hotel-words.check-out,চেক-আউট,,ceka-āuṭa,tʃˈekɔauʈ,,2,bn-agent-v1;ipa=espeak
-hotel-words.luggage-storage,লাগেজ রাখার জায়গা,,lāgeja rākhāra jāẏagā,lˈaɡeɟ ɾˈakʰaɾ ɟˈajɔɡˌa,place for keeping luggage,2,bn-agent-v1;ipa=espeak
-hotel-basics.are-any-rooms-available,রুম খালি আছে কি?,,ruma khāli āche ki?,ɾˈum kʰˈali ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-hotel-basics.there-are-two-of-us,আমরা দুজন,,āmarā dujana,ˌamɔɾˌa dˈuɟɔn,we are two,2,bn-agent-v1;ipa=espeak
-hotel-basics.i-have-a-reservation,আমার বুকিং আছে,,āmāra bukiṁ āche,ˌamaɾ bˈukiŋ ˈatʃʰe,,2,bn-agent-v1;ipa=espeak
-hotel-basics.can-i-charge-my-phone,ফোনটা চার্জ দিতে পারি কি?,,phonaṭā cārja dite pāri ki?,fˈonɔʈˌa tʃˈaɾɟɔ dˈite pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-non-smoking-room,ধূমপানমুক্ত একটা রুম চাই,,dhūmapānamukta ekaṭā ruma cāi,dʰˈumɔpˌanɔmˌukto ˈækʈa ɾˈum tʃˈai,,2,bn-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-quiet-room,শান্ত একটা রুম চাই,,śānta ekaṭā ruma cāi,ʃˈanto ˈækʈa ɾˈum tʃˈai,,2,bn-agent-v1;ipa=espeak
-hotel-basics.is-there-a-washing-machine,ওয়াশিং মেশিন আছে কি?,,oẏāśiṁ meśina āche ki?,ˈoaʃˌiŋ mˈeʃin ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
-hotel-basics.is-wi-fi-free,ওয়াই-ফাই ফ্রি কি?,,oẏāi-phāi phri ki?,ˈoaˌifai fɾˈi ki,,2,bn-agent-v1;ipa=espeak
-hotel-basics.how-much-per-night,প্রতি রাতে কত?,,prati rāte kata?,pɾˈoti ɾˈate kˈɔto,,2,bn-agent-v1;ipa=espeak
-hotel-basics.is-breakfast-included,সকালের নাস্তা ধরা আছে কি?,সকালের জলখাবার ধরা আছে কি?,sakālera nāstā dharā āche ki?,ʃˈɔkalˌeɾ nˈasta dʰˈɔɾa ˈatʃʰe ki,নাস্তা is Bangladeshi and জলখাবার West Bengali for breakfast,2,bn-agent-v1;ipa=espeak
-hotel-basics.may-i-see-the-room,রুমটা একবার দেখতে পারি কি?,,rumaṭā ekabāra dekhate pāri ki?,ɾˈumɔʈˌa ˈekɔbˌaɾ dˈekʰɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-hotel-basics.for-nights,{} রাতের জন্য,,{} rātera janya,{} ɾˈateɾ ɟˈɔnnɔ,,2,bn-agent-v1;ipa=espeak
-hotel-basics.two-beds,দুটো বিছানা চাই,,duṭo bichānā cāi,dˈuʈo bˈitʃʰanˌa tʃˈai,,2,bn-agent-v1;ipa=espeak
-hotel-basics.is-there-air-conditioning,এসি আছে কি?,,esi āche ki?,ˈeʃi ˈatʃʰe ki,এসি is how both countries say air conditioning,2,bn-agent-v1;ipa=espeak
-hotel-requests.can-i-check-out-later,দেরিতে চেক-আউট করা যাবে কি?,,derite ceka-āuṭa karā yābe ki?,dˈeɾitˌe tʃˈekɔauʈ kˈɔɾa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
-hotel-requests.what-time-does-breakfast-start,সকালের নাস্তা কয়টায় শুরু হয়?,,sakālera nāstā kaẏaṭāẏa śuru haẏa?,ʃˈɔkalˌeɾ nˈasta kˈɔjɔʈˌaj ʃˈuɾu hˌɔj,,2,bn-agent-v1;ipa=espeak
-hotel-requests.can-i-store-my-luggage,লাগেজ রেখে যেতে পারি কি?,,lāgeja rekhe yete pāri ki?,lˈaɡeɟ ɾˈekʰe dʒˈete pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-hotel-requests.no-housekeeping,ঘর পরিষ্কার করার দরকার নেই,,ghara pariṣkāra karāra darakāra nei,ɡʰˈɔɾ pˈoɾiʃkˌaɾ kˈɔɾaɾ dɔɾkˈaɾ nˈei,no need to clean the room,2,bn-agent-v1;ipa=espeak
-hotel-requests.another-towel-please,আরেকটা তোয়ালে দিন,,ārekaṭā toẏāle dina,ˈaɾekˌɔʈa tˈoalˌe dˈin,,2,bn-agent-v1;ipa=espeak
-hotel-requests.what-time-is-check-out,চেক-আউট কয়টায়?,,ceka-āuṭa kaẏaṭāẏa?,tʃˈekɔauʈ kˈɔjɔʈˌaj,,2,bn-agent-v1;ipa=espeak
-hotel-requests.can-i-check-in-early,আগে চেক-ইন করা যাবে কি?,,āge ceka-ina karā yābe ki?,ˈaɡe tʃˈekɔin kˈɔɾa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
-hotel-requests.another-night,আরেক রাত থাকতে পারি কি?,,āreka rāta thākate pāri ki?,ˈaɾek ɾˈato tʰˈakɔtˌe pˈaɾi ki,,2,bn-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,রুমে সেফ আছে কি?,,rume sepha āche ki?,ɾˈume ʃˈef ˈatʃʰe ki,is there a safe in the room?,2,bn-agent-v1;ipa=espeak
-hotel-requests.another-blanket,আরেকটা কম্বল দিন,,ārekaṭā kambala dina,ˈaɾekˌɔʈa kˈɔmbɔl dˈin,,2,bn-agent-v1;ipa=espeak
-hotel-requests.wake-up-call,দয়া করে আমাকে {} টায় ডেকে দিন,,daẏā kare āmāke {} ṭāẏa ḍeke dina,dˈɔa kˈɔɾe ˈamakˌe {} ʈˈaj ɖˈeke dˈin,please wake me at {} o'clock,2,bn-agent-v1;ipa=espeak
-room-problems.there-is-a-problem-with-the-room,রুমে একটা সমস্যা আছে,,rume ekaṭā samasyā āche,ɾˈume ˈækʈa ʃˈɔmɔssˌa ˈatʃʰe,,2,bn-agent-v1;ipa=espeak
-room-problems.the-air-conditioning-is-broken,এসি কাজ করছে না,,esi kāja karache nā,ˈeʃi kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,2,bn-agent-v1;ipa=espeak
-room-problems.there-is-no-hot-water,গরম পানি নেই,গরম জল নেই,garama pāni nei,ɡˈɔɾɔm pˈani nˈei,পানি is Bangladeshi and জল West Bengali,2,bn-agent-v1;ipa=espeak
-room-problems.can-i-change-rooms,রুম বদল করা যাবে কি?,,ruma badala karā yābe ki?,ɾˈum bˈɔdɔl kˈɔɾa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
-room-problems.the-room-is-too-noisy,রুমে অনেক শব্দ,,rume aneka śabda,ɾˈume ˈɔnek ʃˈɔbdɔ,there is a lot of noise in the room,2,bn-agent-v1;ipa=espeak
-room-problems.the-key-does-not-work,চাবিটা কাজ করছে না,,cābiṭā kāja karache nā,tʃˈabiʈˌa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,2,bn-agent-v1;ipa=espeak
-room-problems.the-toilet-will-not-flush,ফ্লাশ কাজ করছে না,,phlāśa kāja karache nā,flˈaʃ kˈaɟ kˈɔɾɔtʃʰˌe nˈa,the flush is not working,2,bn-agent-v1;ipa=espeak
-room-problems.the-light-does-not-work,বাতি জ্বলছে না,,bāti jbalache nā,bˈati ɟˈɔlɔtʃʰˌe nˈa,the lamp is not lighting,2,bn-agent-v1;ipa=espeak
-room-problems.please-send-someone,দয়া করে কাউকে পাঠান ঠিক করার জন্য,,daẏā kare kāuke pāṭhāna ṭhika karāra janya,dˈɔa kˈɔɾe kˈaukˌe pˈaʈʰan ʈʰˈik kˈɔɾaɾ ɟˈɔnnɔ,,2,bn-agent-v1;ipa=espeak
-room-problems.the-heating-does-not-work,হিটার কাজ করছে না,,hiṭāra kāja karache nā,hˈiʈaɾ kˈaɟ kˈɔɾɔtʃʰˌe nˈa,the heater is not working -- few buildings in either country have heating at all,2,bn-agent-v1;ipa=espeak
-laundry.please-wash-these-clothes,দয়া করে এই কাপড়গুলো ধুয়ে দিন,,daẏā kare ei kāpaṛagulo dhuẏe dina,dˈɔa kˈɔɾe ˌei kˈapɔɽˌɔɡulˌo dʰˈue dˈin,,2,bn-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,লন্ড্রি কোথায়?,,lanḍri kothāẏa?,lˈonɖɾi kˈotʰaj,,2,bn-agent-v1;ipa=espeak
-laundry.when-will-it-be-ready,কখন পাওয়া যাবে?,,kakhana pāoẏā yābe?,kˌɔkʰɔn pˈaoˌa dʒˈabe,when will it be available?,2,bn-agent-v1;ipa=espeak
-laundry.how-much-per-kilo,কেজি প্রতি কত?,,keji prati kata?,kˈeɟi pɾˈoti kˈɔto,,2,bn-agent-v1;ipa=espeak
-laundry.can-it-be-ready-today,আজকেই পাওয়া যাবে কি?,,ājakei pāoẏā yābe ki?,ˈaɟɔkˌei pˈaoˌa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
-laundry.please-do-not-use-bleach,দয়া করে ব্লিচ দেবেন না,,daẏā kare blica debena nā,dˈɔa kˈɔɾe blˈitʃ dˈeben nˈa,,2,bn-agent-v1;ipa=espeak
-laundry.laundromat,লন্ড্রি,,lanḍri,lˈonɖɾi,,2,bn-agent-v1;ipa=espeak
-laundry.please-iron-this,দয়া করে এটা ইস্তিরি করে দিন,দয়া করে এটা ইস্ত্রি করে দিন,daẏā kare eṭā istiri kare dina,dˈɔa kˈɔɾe ˌeʈa ˈistiɾˌi kˈɔɾe dˈin,ইস্তিরি is Bangladeshi and ইস্ত্রি West Bengali,2,bn-agent-v1;ipa=espeak
-laundry.detergent,ডিটারজেন্ট,সাবানের গুঁড়ো,ḍiṭārajenṭa,ɖˈiʈaɾˌɔɟenʈˌɔ,the variant is 'soap powder',2,bn-agent-v1;ipa=espeak
-laundry.dry-cleaning,ড্রাই ক্লিনিং,,ḍrāi kliniṁ,ɖɾˈai klˈiniŋ,,2,bn-agent-v1;ipa=espeak
-laundry.dryer,ড্রায়ার,,ḍrāẏāra,ɖɾˈaaɾ,,2,bn-agent-v1;ipa=espeak
-laundry.coin-operated,কয়েন দিয়ে চলে,,kaẏena diẏe cale,kˈɔen dˈie tʃˈɔle,runs on coins,2,bn-agent-v1;ipa=espeak
-massage-spa.please-stop,"থামুন, আর করবেন না",,"thāmuna, āra karabena nā","tʰˈamun, ˌaɾ kˈɔɾɔbˌen nˈa","stop, do not do any more -- two clauses for the Mandarin row's reason, and the দয়া করে that this pack's taxi.please-stop-here carries is deliberately dropped, because the concept ends the session; the -ুন ending is itself the polite form, so the row is direct without being rude",2,bn-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=espeak
-massage-spa.please-pause,সাময়িকভাবে থামুন,,sāmaẏikabhābe thāmuna,ʃˈamɔˌikɔbʰˌabe tʰˈamun,"stop temporarily -- সাময়িকভাবে is a shade formal for a treatment room, and is used anyway because it says temporarily unambiguously where a bare একটু থামুন would be a near minimal pair with the row above",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-samayikbhabe;ipa=espeak
-massage-spa.please-avoid-this-area,এই জায়গায় চাপ দেবেন না,,ei jāẏagāẏa cāpa debena nā,ˌei ɟˈajɔɡˌaj tʃˈap dˈeben nˈa,"do not press on this spot -- চাপ দেওয়া, to apply pressure, is the attested verb phrase, and চাপ দেবেন না is the attested prohibitive; জায়গা as in this pack's hotel-words.luggage-storage",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;in-pack-frame;ipa=espeak
-massage-spa.stronger-pressure,আরেকটু জোরে চাপ দিন,,ārekaṭu jore cāpa dina,ˈaɾekˌɔʈu ɟˈoɾe tʃˈap dˈin,"press a bit harder -- জোরে চাপ দেওয়া, to press hard, is the dictionary's own collocation, and চাপ keeps it about pressure. Four words against the two of চাপ কমান, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;ipa=espeak
-massage-spa.more-gently,চাপ কমান,,cāpa kamāna,tʃˈap kˈɔman,"reduce the pressure -- named as pressure rather than as speed, and left at two words so its shape differs from the row beside it",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;ipa=espeak
-massage-spa.that-pressure-is-good,"এই চাপটা ঠিক আছে, এভাবেই রাখুন",,"ei cāpaṭā ṭhika āche, ebhābei rākhuna","ˌei tʃˈapɔʈˌa ʈʰˈik ˈatʃʰe, ˈebʰabˌei ɾˈakʰun","this pressure is right, keep it just like this -- a confirmation with a keep-it-there clause, not praise; ঠিক আছে is this pack's own quick-responses.okay-can",2,bn-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=espeak
-massage-spa.focus-on-shoulders,কাঁধে বেশি মনোযোগ দিন,,kām̐dhe beśi manoyoga dina,kˈãdʰe bˈeʃi mˈɔnodʒˌoɡ dˈin,give more attention to the shoulders -- মনোযোগ দেওয়া is the phrasing Bengali physiotherapy writing uses for concentrating on one region,2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;ipa=espeak
-massage-spa.focus-on-back,পিঠে বেশি মনোযোগ দিন,,piṭhe beśi manoyoga dina,pˈiʈʰe bˈeʃi mˈɔnodʒˌoɡ dˈin,,2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;in-pack-neighbour;ipa=espeak
-massage-spa.focus-on-neck,ঘাড়ে বেশি মনোযোগ দিন,,ghāṛe beśi manoyoga dina,ɡʰˈaɽe bˈeʃi mˈɔnodʒˌoɡ dˈin,"ঘাড়, the back of the neck, is the massage word; গলা is the throat. Bengali has no single term fusing the neck with the shoulders the way Finnish niska-hartiaseutu does -- health writing coordinates the two nouns instead (ঘাড় ও কাঁধে ব্যথা), which is a checked negative and not a gap in the search",2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;ipa=espeak
-massage-spa.focus-on-feet,পায়ের পাতায় বেশি মনোযোগ দিন,,pāẏera pātāẏa beśi manoyoga dina,pˈaeɾ pˈataj bˈeʃi mˈɔnodʒˌoɡ dˈin,"পায়ের পাতা, the foot proper, as this pack's body-parts.foot already has it, because পা alone is the whole leg -- and পায়ের মালিশ, sold in parlours as ফুট স্পা, is a service of its own",2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;in-pack-neighbour;ipa=espeak
-massage-spa.reply-i-will-avoid-that-area,"ঠিক আছে, এই জায়গায় হাত দেব না",,"ṭhika āche, ei jāẏagāẏa hāta deba nā","ʈʰˈik ˈatʃʰe, ˌei ɟˈajɔɡˌaj hˈato dˈeb nˈa","all right, I will not touch this spot -- হাত দেওয়া, to touch, is this pack's common-signs.do-not-touch. Bengali has no grammatical gender at all, so no reply in this set needed steering",2,bn-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
-massage-spa.reply-which-area-exactly,ঠিক কোন জায়গায়?,,ṭhika kona jāẏagāẏa?,ʈʰˈik kˈon ɟˈajɔɡˌaj,,2,bn-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
-massage-spa.reply-cannot-avoid-this-treatment,এই সেবায় এই জায়গা বাদ দেওয়া যায় না,,ei sebāẏa ei jāẏagā bāda deoẏā yāẏa nā,ˌei ʃˈebaj ˌei ɟˈajɔɡˌa bˈad dˈeoˌa dʒˈaj nˈa,"in this service this spot cannot be left out -- সেবা is what a Bengali parlour calls one bookable item on its menu (মালিশ, ফেসিয়াল, স্ক্রাবিং ও অন্যান্য সেবা)",2,bn-massage-spa-v1;spa-reply-v1;src=prothomalo-spa-debe-prashanti;ipa=espeak
-massage-spa.reply-does-it-hurt-there,এই জায়গায় ব্যথা করছে?,,ei jāẏagāẏa byathā karache?,ˌei ɟˈajɔɡˌaj bˈætʰa kˈɔɾɔtʃʰˌe,,2,bn-massage-spa-v1;spa-reply-v1;in-pack-neighbour;ipa=espeak
-massage-spa.reply-ask-supervisor,"আমি জানি না, ম্যানেজারকে জিজ্ঞেস করতে হবে",,"āmi jāni nā, myānejārake jijñesa karate habe","ˌami ɟˈani nˈa, mˈæneɟˌaɾɔkˌe ɟˈiɡɡeʃ kˈɔɾɔtˌe hˈɔbe","I do not know, the manager will have to be asked -- ম্যানেজার is the English loanword and has no Bengali feminine derivation, where ব্যবস্থাপক does (ব্যবস্থাপিকা is on record), so the loanword is what keeps the person unnamed for sex",2,bn-massage-spa-v1;spa-reply-v1;src=bn.wiktionary-byabasthapak;in-pack-neighbour;ipa=espeak
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
+hotel-words.passport,পাসপোর্ট,,pāsaporṭa,pˈaʃɔpˌoɾʈɔ,,,2,bn-agent-v1;ipa=espeak
+hotel-words.room-key-card,রুমের চাবি-কার্ড,,rumera cābi-kārḍa,ɾˈumeɾ tʃˈabikaɾɖɔ,,,2,bn-agent-v1;ipa=espeak
+hotel-words.check-in,চেক-ইন,,ceka-ina,tʃˈekɔin,,,2,bn-agent-v1;ipa=espeak
+hotel-words.check-out,চেক-আউট,,ceka-āuṭa,tʃˈekɔauʈ,,,2,bn-agent-v1;ipa=espeak
+hotel-words.luggage-storage,লাগেজ রাখার জায়গা,,lāgeja rākhāra jāẏagā,lˈaɡeɟ ɾˈakʰaɾ ɟˈajɔɡˌa,place for keeping luggage,,2,bn-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,রুম খালি আছে কি?,,ruma khāli āche ki?,ɾˈum kʰˈali ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,আমরা দুজন,,āmarā dujana,ˌamɔɾˌa dˈuɟɔn,we are two,,2,bn-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,আমার বুকিং আছে,,āmāra bukiṁ āche,ˌamaɾ bˈukiŋ ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,ফোনটা চার্জ দিতে পারি কি?,,phonaṭā cārja dite pāri ki?,fˈonɔʈˌa tʃˈaɾɟɔ dˈite pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,ধূমপানমুক্ত একটা রুম চাই,,dhūmapānamukta ekaṭā ruma cāi,dʰˈumɔpˌanɔmˌukto ˈækʈa ɾˈum tʃˈai,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,শান্ত একটা রুম চাই,,śānta ekaṭā ruma cāi,ʃˈanto ˈækʈa ɾˈum tʃˈai,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,ওয়াশিং মেশিন আছে কি?,,oẏāśiṁ meśina āche ki?,ˈoaʃˌiŋ mˈeʃin ˈatʃʰe ki,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,ওয়াই-ফাই ফ্রি কি?,,oẏāi-phāi phri ki?,ˈoaˌifai fɾˈi ki,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,প্রতি রাতে কত?,,prati rāte kata?,pɾˈoti ɾˈate kˈɔto,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,সকালের নাস্তা ধরা আছে কি?,সকালের জলখাবার ধরা আছে কি?,sakālera nāstā dharā āche ki?,ʃˈɔkalˌeɾ nˈasta dʰˈɔɾa ˈatʃʰe ki,নাস্তা is Bangladeshi and জলখাবার West Bengali for breakfast,,2,bn-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,রুমটা একবার দেখতে পারি কি?,,rumaṭā ekabāra dekhate pāri ki?,ɾˈumɔʈˌa ˈekɔbˌaɾ dˈekʰɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.for-nights,{} রাতের জন্য,,{} rātera janya,{} ɾˈateɾ ɟˈɔnnɔ,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.two-beds,দুটো বিছানা চাই,,duṭo bichānā cāi,dˈuʈo bˈitʃʰanˌa tʃˈai,,,2,bn-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,এসি আছে কি?,,esi āche ki?,ˈeʃi ˈatʃʰe ki,এসি is how both countries say air conditioning,,2,bn-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,দেরিতে চেক-আউট করা যাবে কি?,,derite ceka-āuṭa karā yābe ki?,dˈeɾitˌe tʃˈekɔauʈ kˈɔɾa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,সকালের নাস্তা কয়টায় শুরু হয়?,,sakālera nāstā kaẏaṭāẏa śuru haẏa?,ʃˈɔkalˌeɾ nˈasta kˈɔjɔʈˌaj ʃˈuɾu hˌɔj,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,লাগেজ রেখে যেতে পারি কি?,,lāgeja rekhe yete pāri ki?,lˈaɡeɟ ɾˈekʰe dʒˈete pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,ঘর পরিষ্কার করার দরকার নেই,,ghara pariṣkāra karāra darakāra nei,ɡʰˈɔɾ pˈoɾiʃkˌaɾ kˈɔɾaɾ dɔɾkˈaɾ nˈei,no need to clean the room,,2,bn-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,আরেকটা তোয়ালে দিন,,ārekaṭā toẏāle dina,ˈaɾekˌɔʈa tˈoalˌe dˈin,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,চেক-আউট কয়টায়?,,ceka-āuṭa kaẏaṭāẏa?,tʃˈekɔauʈ kˈɔjɔʈˌaj,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,আগে চেক-ইন করা যাবে কি?,,āge ceka-ina karā yābe ki?,ˈaɡe tʃˈekɔin kˈɔɾa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.another-night,আরেক রাত থাকতে পারি কি?,,āreka rāta thākate pāri ki?,ˈaɾek ɾˈato tʰˈakɔtˌe pˈaɾi ki,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,রুমে সেফ আছে কি?,,rume sepha āche ki?,ɾˈume ʃˈef ˈatʃʰe ki,is there a safe in the room?,,2,bn-agent-v1;ipa=espeak
+hotel-requests.another-blanket,আরেকটা কম্বল দিন,,ārekaṭā kambala dina,ˈaɾekˌɔʈa kˈɔmbɔl dˈin,,,2,bn-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,দয়া করে আমাকে {} টায় ডেকে দিন,,daẏā kare āmāke {} ṭāẏa ḍeke dina,dˈɔa kˈɔɾe ˈamakˌe {} ʈˈaj ɖˈeke dˈin,please wake me at {} o'clock,,2,bn-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,রুমে একটা সমস্যা আছে,,rume ekaṭā samasyā āche,ɾˈume ˈækʈa ʃˈɔmɔssˌa ˈatʃʰe,,,2,bn-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,এসি কাজ করছে না,,esi kāja karache nā,ˈeʃi kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,,2,bn-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,গরম পানি নেই,গরম জল নেই,garama pāni nei,ɡˈɔɾɔm pˈani nˈei,পানি is Bangladeshi and জল West Bengali,,2,bn-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,রুম বদল করা যাবে কি?,,ruma badala karā yābe ki?,ɾˈum bˈɔdɔl kˈɔɾa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,রুমে অনেক শব্দ,,rume aneka śabda,ɾˈume ˈɔnek ʃˈɔbdɔ,there is a lot of noise in the room,,2,bn-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,চাবিটা কাজ করছে না,,cābiṭā kāja karache nā,tʃˈabiʈˌa kˈaɟ kˈɔɾɔtʃʰˌe nˈa,,,2,bn-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,ফ্লাশ কাজ করছে না,,phlāśa kāja karache nā,flˈaʃ kˈaɟ kˈɔɾɔtʃʰˌe nˈa,the flush is not working,,2,bn-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,বাতি জ্বলছে না,,bāti jbalache nā,bˈati ɟˈɔlɔtʃʰˌe nˈa,the lamp is not lighting,,2,bn-agent-v1;ipa=espeak
+room-problems.please-send-someone,দয়া করে কাউকে পাঠান ঠিক করার জন্য,,daẏā kare kāuke pāṭhāna ṭhika karāra janya,dˈɔa kˈɔɾe kˈaukˌe pˈaʈʰan ʈʰˈik kˈɔɾaɾ ɟˈɔnnɔ,,,2,bn-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,হিটার কাজ করছে না,,hiṭāra kāja karache nā,hˈiʈaɾ kˈaɟ kˈɔɾɔtʃʰˌe nˈa,the heater is not working,few buildings in either country have heating at all,2,bn-agent-v1;ipa=espeak
+laundry.please-wash-these-clothes,দয়া করে এই কাপড়গুলো ধুয়ে দিন,,daẏā kare ei kāpaṛagulo dhuẏe dina,dˈɔa kˈɔɾe ˌei kˈapɔɽˌɔɡulˌo dʰˈue dˈin,,,2,bn-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,লন্ড্রি কোথায়?,,lanḍri kothāẏa?,lˈonɖɾi kˈotʰaj,,,2,bn-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,কখন পাওয়া যাবে?,,kakhana pāoẏā yābe?,kˌɔkʰɔn pˈaoˌa dʒˈabe,when will it be available?,,2,bn-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,কেজি প্রতি কত?,,keji prati kata?,kˈeɟi pɾˈoti kˈɔto,,,2,bn-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,আজকেই পাওয়া যাবে কি?,,ājakei pāoẏā yābe ki?,ˈaɟɔkˌei pˈaoˌa dʒˈabe ki,,,2,bn-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,দয়া করে ব্লিচ দেবেন না,,daẏā kare blica debena nā,dˈɔa kˈɔɾe blˈitʃ dˈeben nˈa,,,2,bn-agent-v1;ipa=espeak
+laundry.laundromat,লন্ড্রি,,lanḍri,lˈonɖɾi,,,2,bn-agent-v1;ipa=espeak
+laundry.please-iron-this,দয়া করে এটা ইস্তিরি করে দিন,দয়া করে এটা ইস্ত্রি করে দিন,daẏā kare eṭā istiri kare dina,dˈɔa kˈɔɾe ˌeʈa ˈistiɾˌi kˈɔɾe dˈin,ইস্তিরি is Bangladeshi and ইস্ত্রি West Bengali,,2,bn-agent-v1;ipa=espeak
+laundry.detergent,ডিটারজেন্ট,সাবানের গুঁড়ো,ḍiṭārajenṭa,ɖˈiʈaɾˌɔɟenʈˌɔ,the variant is 'soap powder',,2,bn-agent-v1;ipa=espeak
+laundry.dry-cleaning,ড্রাই ক্লিনিং,,ḍrāi kliniṁ,ɖɾˈai klˈiniŋ,,,2,bn-agent-v1;ipa=espeak
+laundry.dryer,ড্রায়ার,,ḍrāẏāra,ɖɾˈaaɾ,,,2,bn-agent-v1;ipa=espeak
+laundry.coin-operated,কয়েন দিয়ে চলে,,kaẏena diẏe cale,kˈɔen dˈie tʃˈɔle,runs on coins,,2,bn-agent-v1;ipa=espeak
+massage-spa.please-stop,"থামুন, আর করবেন না",,"thāmuna, āra karabena nā","tʰˈamun, ˌaɾ kˈɔɾɔbˌen nˈa","stop, do not do any more","two clauses for the Mandarin row's reason, and the দয়া করে that this pack's taxi.please-stop-here carries is deliberately dropped, because the concept ends the session; the -ুন ending is itself the polite form, so the row is direct without being rude",2,bn-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=espeak
+massage-spa.please-pause,সাময়িকভাবে থামুন,,sāmaẏikabhābe thāmuna,ʃˈamɔˌikɔbʰˌabe tʰˈamun,stop temporarily,"সাময়িকভাবে is a shade formal for a treatment room, and is used anyway because it says temporarily unambiguously where a bare একটু থামুন would be a near minimal pair with the row above",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-samayikbhabe;ipa=espeak
+massage-spa.please-avoid-this-area,এই জায়গায় চাপ দেবেন না,,ei jāẏagāẏa cāpa debena nā,ˌei ɟˈajɔɡˌaj tʃˈap dˈeben nˈa,do not press on this spot,"চাপ দেওয়া, to apply pressure, is the attested verb phrase, and চাপ দেবেন না is the attested prohibitive; জায়গা as in this pack's hotel-words.luggage-storage",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;in-pack-frame;ipa=espeak
+massage-spa.stronger-pressure,আরেকটু জোরে চাপ দিন,,ārekaṭu jore cāpa dina,ˈaɾekˌɔʈu ɟˈoɾe tʃˈap dˈin,press a bit harder,"জোরে চাপ দেওয়া, to press hard, is the dictionary's own collocation, and চাপ keeps it about pressure. Four words against the two of চাপ কমান, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;ipa=espeak
+massage-spa.more-gently,চাপ কমান,,cāpa kamāna,tʃˈap kˈɔman,reduce the pressure,"named as pressure rather than as speed, and left at two words so its shape differs from the row beside it",2,bn-massage-spa-v1;spa-board-v1;src=english-bangla.com-jore-chap-dewa;ipa=espeak
+massage-spa.that-pressure-is-good,"এই চাপটা ঠিক আছে, এভাবেই রাখুন",,"ei cāpaṭā ṭhika āche, ebhābei rākhuna","ˌei tʃˈapɔʈˌa ʈʰˈik ˈatʃʰe, ˈebʰabˌei ɾˈakʰun","this pressure is right, keep it just like this","a confirmation with a keep-it-there clause, not praise; ঠিক আছে is this pack's own quick-responses.okay-can",2,bn-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=espeak
+massage-spa.focus-on-shoulders,কাঁধে বেশি মনোযোগ দিন,,kām̐dhe beśi manoyoga dina,kˈãdʰe bˈeʃi mˈɔnodʒˌoɡ dˈin,give more attention to the shoulders,মনোযোগ দেওয়া is the phrasing Bengali physiotherapy writing uses for concentrating on one region,2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;ipa=espeak
+massage-spa.focus-on-back,পিঠে বেশি মনোযোগ দিন,,piṭhe beśi manoyoga dina,pˈiʈʰe bˈeʃi mˈɔnodʒˌoɡ dˈin,,,2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;in-pack-neighbour;ipa=espeak
+massage-spa.focus-on-neck,ঘাড়ে বেশি মনোযোগ দিন,,ghāṛe beśi manoyoga dina,ɡʰˈaɽe bˈeʃi mˈɔnodʒˌoɡ dˈin,"ঘাড়, the back of the neck, is the massage word; গলা is the throat. Bengali has no single term fusing the neck with the shoulders the way Finnish niska-hartiaseutu does","health writing coordinates the two nouns instead (ঘাড় ও কাঁধে ব্যথা), which is a checked negative and not a gap in the search",2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;ipa=espeak
+massage-spa.focus-on-feet,পায়ের পাতায় বেশি মনোযোগ দিন,,pāẏera pātāẏa beśi manoyoga dina,pˈaeɾ pˈataj bˈeʃi mˈɔnodʒˌoɡ dˈin,"পায়ের পাতা, the foot proper, as this pack's body-parts.foot already has it, because পা alone is the whole leg","and পায়ের মালিশ, sold in parlours as ফুট স্পা, is a service of its own",2,bn-massage-spa-v1;spa-board-v1;src=bn.wikipedia-sharir-malish;in-pack-neighbour;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"ঠিক আছে, এই জায়গায় হাত দেব না",,"ṭhika āche, ei jāẏagāẏa hāta deba nā","ʈʰˈik ˈatʃʰe, ˌei ɟˈajɔɡˌaj hˈato dˈeb nˈa","all right, I will not touch this spot","হাত দেওয়া, to touch, is this pack's common-signs.do-not-touch. Bengali has no grammatical gender at all, so no reply in this set needed steering",2,bn-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
+massage-spa.reply-which-area-exactly,ঠিক কোন জায়গায়?,,ṭhika kona jāẏagāẏa?,ʈʰˈik kˈon ɟˈajɔɡˌaj,,,2,bn-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,এই সেবায় এই জায়গা বাদ দেওয়া যায় না,,ei sebāẏa ei jāẏagā bāda deoẏā yāẏa nā,ˌei ʃˈebaj ˌei ɟˈajɔɡˌa bˈad dˈeoˌa dʒˈaj nˈa,in this service this spot cannot be left out,"সেবা is what a Bengali parlour calls one bookable item on its menu (মালিশ, ফেসিয়াল, স্ক্রাবিং ও অন্যান্য সেবা)",2,bn-massage-spa-v1;spa-reply-v1;src=prothomalo-spa-debe-prashanti;ipa=espeak
+massage-spa.reply-does-it-hurt-there,এই জায়গায় ব্যথা করছে?,,ei jāẏagāẏa byathā karache?,ˌei ɟˈajɔɡˌaj bˈætʰa kˈɔɾɔtʃʰˌe,,,2,bn-massage-spa-v1;spa-reply-v1;in-pack-neighbour;ipa=espeak
+massage-spa.reply-ask-supervisor,"আমি জানি না, ম্যানেজারকে জিজ্ঞেস করতে হবে",,"āmi jāni nā, myānejārake jijñesa karate habe","ˌami ɟˈani nˈa, mˈæneɟˌaɾɔkˌe ɟˈiɡɡeʃ kˈɔɾɔtˌe hˈɔbe","I do not know, the manager will have to be asked","ম্যানেজার is the English loanword and has no Bengali feminine derivation, where ব্যবস্থাপক does (ব্যবস্থাপিকা is on record), so the loanword is what keeps the person unnamed for sex",2,bn-massage-spa-v1;spa-reply-v1;src=bn.wiktionary-byabasthapak;in-pack-neighbour;ipa=espeak

@@ -1,16 +1,16 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Ich möchte nach {}.,,ɪç mˈœçtə nˈɑːx {},,2,de-agent-v1;ipa=espeak
-utility-templates.please-give-me,Bitte geben Sie mir {}.,,bˈɪtə ɡˈeːbən ziː mˈiːɾ {},,2,de-agent-v1;ipa=espeak
-utility-templates.may-i,Darf ich {}?,,dˈaɾf ɪç {},,2,de-agent-v1;ipa=espeak
-utility-templates.please-do-not-add,Bitte ohne {}.,,bˈɪtə ˈoːnə {},,2,de-agent-v1;ipa=espeak
-utility-templates.do-you-have,Haben Sie {}?,,hˈɑːbən ziː {},,2,de-agent-v1;ipa=espeak
-utility-templates.please-write-the-number,Bitte schreiben Sie die Zahl auf.,,bˈɪtə ʃrˈaɪbən ziː diː tsˈɑːl ˈaʊf,,2,"de-agent-v1;fix=Duden Sprachwissen Bildung des Imperativs (Der Imperativ dient in seiner Grundfunktion dazu -- eine Aufforderung -- einen Befehl oder eine Bitte auszudrücken. Er ist unmittelbar an eine Person ... gerichtet ... Gerade in offiziellen Aufforderungen wird oft der Infinitiv verwendet: Auf spielende Kinder achten! Nur hinten einsteigen!);fix=de.wikipedia Imperativ (Modus) rev 265581360 (In Anleitungen -- die den Anwender nicht persönlich anreden ... In öffentlichen Anzeigeschildern wird der Infinitiv oft gebraucht: ... Bitte hinten aussteigen! ... der Infinitiv als Ersatz für den Imperativ bei echten Aufforderungen (keine Bitten ...) allgemein üblich);was=text Bitte die Zahl aufschreiben. (bitte with the bare infinitive -- the form of a notice or an instruction to no one in particular -- on a request said to a person);rule=a request said to a person is the Sie imperative with bitte, as the pack's other requests are (communication.please-write-it-down Bitte schreiben Sie es auf. -- phone-text-power.please-type-it-for-me Bitte tippen Sie es ein.);row-corrections-v17;ipa=espeak"
-utility-templates.i-need,Ich brauche {}.,,ɪç bɾˈaʊxə {},,2,de-agent-v1;ipa=espeak
-utility-templates.is-there-nearby,Gibt es {} hier in der Nähe?,,ɡˈiːpt ɛs {} hˈiːɾ ɪn dɛɾ nˈɛːə,,2,de-agent-v1;ipa=espeak
-utility-templates.how-much-is,Was kostet {}?,,vˈas kˈɔstət {},,2,de-agent-v1;ipa=espeak
-utility-templates.is-this,Ist das {}?,,ɪst das {},,2,de-agent-v1;ipa=espeak
-utility-templates.please,"{}, bitte.",,"{}, bˈɪtə",,2,de-agent-v1;ipa=espeak
-utility-templates.i-am-looking-for,Ich suche {}.,,ɪç zˈuːxə {},,2,de-agent-v1;ipa=espeak
-utility-templates.do-you-accept,Nehmen Sie {}?,,nˈeːmən ziː {},,2,de-agent-v1;ipa=espeak
-utility-templates.i-cannot-find,Ich finde {} nicht.,,ɪç fˈɪndə {} nˈɪçt,,2,de-agent-v1;ipa=espeak
-utility-templates.there-is-a-problem-with,Es gibt ein Problem mit {}.,,ɛs ɡˈiːpt aɪn pɾoːblˈeːm mˈɪt {},,2,de-agent-v1;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+utility-templates.i-want-to-go-to,Ich möchte nach {}.,,ɪç mˈœçtə nˈɑːx {},,,2,de-agent-v1;ipa=espeak
+utility-templates.please-give-me,Bitte geben Sie mir {}.,,bˈɪtə ɡˈeːbən ziː mˈiːɾ {},,,2,de-agent-v1;ipa=espeak
+utility-templates.may-i,Darf ich {}?,,dˈaɾf ɪç {},,,2,de-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Bitte ohne {}.,,bˈɪtə ˈoːnə {},,,2,de-agent-v1;ipa=espeak
+utility-templates.do-you-have,Haben Sie {}?,,hˈɑːbən ziː {},,,2,de-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Bitte schreiben Sie die Zahl auf.,,bˈɪtə ʃrˈaɪbən ziː diː tsˈɑːl ˈaʊf,,,2,"de-agent-v1;fix=Duden Sprachwissen Bildung des Imperativs (Der Imperativ dient in seiner Grundfunktion dazu -- eine Aufforderung -- einen Befehl oder eine Bitte auszudrücken. Er ist unmittelbar an eine Person ... gerichtet ... Gerade in offiziellen Aufforderungen wird oft der Infinitiv verwendet: Auf spielende Kinder achten! Nur hinten einsteigen!);fix=de.wikipedia Imperativ (Modus) rev 265581360 (In Anleitungen -- die den Anwender nicht persönlich anreden ... In öffentlichen Anzeigeschildern wird der Infinitiv oft gebraucht: ... Bitte hinten aussteigen! ... der Infinitiv als Ersatz für den Imperativ bei echten Aufforderungen (keine Bitten ...) allgemein üblich);was=text Bitte die Zahl aufschreiben. (bitte with the bare infinitive -- the form of a notice or an instruction to no one in particular -- on a request said to a person);rule=a request said to a person is the Sie imperative with bitte, as the pack's other requests are (communication.please-write-it-down Bitte schreiben Sie es auf. -- phone-text-power.please-type-it-for-me Bitte tippen Sie es ein.);row-corrections-v17;ipa=espeak"
+utility-templates.i-need,Ich brauche {}.,,ɪç bɾˈaʊxə {},,,2,de-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Gibt es {} hier in der Nähe?,,ɡˈiːpt ɛs {} hˈiːɾ ɪn dɛɾ nˈɛːə,,,2,de-agent-v1;ipa=espeak
+utility-templates.how-much-is,Was kostet {}?,,vˈas kˈɔstət {},,,2,de-agent-v1;ipa=espeak
+utility-templates.is-this,Ist das {}?,,ɪst das {},,,2,de-agent-v1;ipa=espeak
+utility-templates.please,"{}, bitte.",,"{}, bˈɪtə",,,2,de-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Ich suche {}.,,ɪç zˈuːxə {},,,2,de-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Nehmen Sie {}?,,nˈeːmən ziː {},,,2,de-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Ich finde {} nicht.,,ɪç fˈɪndə {} nˈɪçt,,,2,de-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Es gibt ein Problem mit {}.,,ɛs ɡˈiːpt aɪn pɾoːblˈeːm mˈɪt {},,,2,de-agent-v1;ipa=espeak

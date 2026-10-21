@@ -1,116 +1,116 @@
-concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-numbers-money.l-ng,零,,líng,liŋ˧˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.where-is-an-atm,取款机在哪里？,,qǔkuǎnjī zài nǎlǐ?,tɕʰy˧˩˧kʰwan˧˩˧tɕi˥ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.y,一,,yī,i˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.does-this-atm-take-foreign-cards,外国的卡能用吗？,,wàiguó de kǎ néng yòng ma?,waɪ˥˩kwɔ˧˥ tɤ kʰa˧˩˧ nɤŋ˧˥ jʊŋ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.r,二,,èr,ɑɻ˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.the-atm-kept-my-card,我的卡被吞了,,wǒ de kǎ bèi tūn le,wɔ˧˩˧ tɤ kʰa˧˩˧ peɪ˥˩ tʰwən˥ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.li-ng,两,,liǎng,ljɑŋ˧˩˧,,2,latex-reference-v2;ipa=pinyin
-atm-cash.is-there-a-fee,有手续费吗？,,yǒu shǒuxùfèi ma?,joʊ˧˩˧ ʂoʊ˧˩˧ɕy˥˩feɪ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.s-n,三,,sān,san˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.the-card-was-declined,卡刷不了,,kǎ shuā bu liǎo,kʰa˧˩˧ ʂwa˥ pu ljɑʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.s,四,,sì,sɯ˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.what-is-the-exchange-rate,汇率是多少？,,huìlǜ shì duōshao?,xweɪ˥˩ly˥˩ ʂɨ˥˩ twɔ˥ʂɑʊ,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.w,五,,wǔ,u˧˩˧,,2,latex-reference-v2;ipa=pinyin
-atm-cash.no-money-came-out,钱没出来,,qián méi chūlái,tɕʰjɛn˧˥ meɪ˧˥ ʈʂʰu˥laɪ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.li,六,,liù,ljoʊ˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.where-can-i-change-money,哪里可以换钱？,,nǎlǐ kěyǐ huàn qián?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.q,七,,qī,tɕʰi˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.the-machine-is-out-of-service,机器坏了,,jīqì huài le,tɕi˥tɕʰi˥˩ xwaɪ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.b,八,,bā,pa˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.please-give-me-smaller-notes,请给我小面额的钱,,qǐng gěi wǒ xiǎo miàn'é de qián,tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ ɕjɑʊ˧˩˧ mjɛn˥˩ɤ˧˥ tɤ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.ji,九,,jiǔ,tɕjoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
-atm-cash.do-you-have-change,有零钱吗？,,yǒu língqián ma?,joʊ˧˩˧ liŋ˧˥tɕʰjɛn˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.sh,十,,shí,ʂɨ˧˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.may-i-pay-in,可以用{}付款吗？,,kěyǐ yòng {} fùkuǎn ma?,kʰɤ˧˩˧i˧˩˧ jʊŋ˥˩ {} fu˥˩kʰwan˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.y-b-i,一百,,yìbǎi,i˥˩paɪ˧˩˧,,2,latex-reference-v2;ipa=pinyin
-atm-cash.please-charge-in-local-currency,请用人民币结算,,qǐng yòng Rénmínbì jiésuàn,tɕʰiŋ˧˩˧ jʊŋ˥˩ ʐən˧˥min˧˥pi˥˩ tɕjɛ˧˥swan˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.y-qi-n,一千,,yìqiān,i˥˩tɕʰjɛn˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.where-can-i-get-coins,哪里可以换硬币？,,nǎlǐ kěyǐ huàn yìngbì?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ iŋ˥˩pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.y-w-n,一万,,yíwàn,i˧˥wan˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.is-there-a-minimum-for-cards,刷卡有最低金额吗？,,shuākǎ yǒu zuìdī jīn'é ma?,ʂwa˥kʰa˧˩˧ joʊ˧˩˧ tsweɪ˥˩ti˥ tɕin˥ɤ˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.b-n,半,,bàn,pan˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.atm,自动取款机,自動取款機,zìdòng qǔkuǎnjī,tsɯ˥˩tʊŋ˥˩ tɕʰy˧˩˧kʰwan˧˩˧tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.yu-n,元,,yuán,ɥœn˧˥,,2,latex-reference-v2;ipa=pinyin
-atm-cash.banknote,钞票,,chāopiào,ʈʂʰɑʊ˥pʰjɑʊ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.ku-i,块,,kuài,kʰwaɪ˥˩,,2,latex-reference-v2;ipa=pinyin
-atm-cash.coin,硬币,,yìngbì,iŋ˥˩pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.number-and-classifier-notes,,,,,,2,latex-reference-v2
-atm-cash.cash-only,只收现金,只收現金,zhǐ shōu xiànjīn,ʈʂɨ˧˩˧ ʂoʊ˥ ɕjɛn˥˩tɕin˥,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.fee,手续费,,shǒuxùfèi,ʂoʊ˧˩˧ɕy˥˩feɪ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.change,找零,,zhǎolíng,ʈʂɑʊ˧˩˧liŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.exchange-rate,汇率,匯率,huìlǜ,xweɪ˥˩ly˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.bank,银行,銀行,yínháng,in˧˥xɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.money-exchange,外币兑换,外幣兌換,wàibì duìhuàn,waɪ˥˩pi˥˩ tweɪ˥˩xwan˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-atm-cash.pin,密码,密碼,mìmǎ,mi˥˩ma˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.2-items,两个,,liǎng gè,ljɑŋ˧˩˧ kɤ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.yen,日元,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.yen-symbol,￥,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
-numbers-money.number-and-classifier-notes-2,日语数字的构成和汉语一样：11 = juuichi，20 = nijuu。只是 100 说 hyaku、1000 说 sen，前面不加 ichi，10000 却要 ichiman。量词紧跟数字，多半能对上汉语的量词：-mai 张，-hon 根或瓶，-nin 人，-hai 杯。-tsu 相当于个，只用到九：hitotsu、futatsu；人也特殊：hitori、futari，三人起才是 sannin。念号码：0 = zero 或 maru，4 = yon，7 = nana，9 = kyuu，横线读 no。,,,,,2,zh-Hans-notes-v1
-numbers-money.forint,福林,,fúlín,fu˧˥lin˧˥,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.forint-symbol,福林符号,,fúlín fúhào,fu˧˥lin˧˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.rupee,卢比,,lúbǐ,lu˧˥pi˧˩˧,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.rupee-symbol,卢比符号,,lúbǐ fúhào,lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.won,韩元,,hányuán,xan˧˥ɥœn˧˥,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.won-symbol,韩元符号,,hányuán fúhào,xan˧˥ɥœn˧˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.baht,泰币,,tàibì,tʰaɪ˥˩pi˥˩,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.baht-symbol,泰币符号,,tàibì fúhào,tʰaɪ˥˩pi˥˩ fu˧˥xɑʊ˥˩,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.lira,里拉,,lǐlā,li˧˩˧la˥,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.lira-symbol,里拉符号,,lǐlā fúhào,li˧˩˧la˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.dong,越南盾,,yuènándùn,ɥœ˥˩nan˧˥twən˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.dong-symbol,越南盾符号,,yuènándùn fúhào,ɥœ˥˩nan˧˥twən˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.ruble,卢布,,lúbù,lu˧˥pu˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.ruble-symbol,卢布符号,,lúbù fúhào,lu˧˥pu˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.rupiah,印尼盾,,yìnnídùn,in˥˩ni˧˥twən˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.rupiah-symbol,印尼盾符号,,yìnnídùn fúhào,in˥˩ni˧˥twən˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.shilling,先令,,xiānlìng,ɕjɛn˥liŋ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.shilling-symbol,先令符号,,xiānlìng fúhào,ɕjɛn˥liŋ˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.euro,欧元,,ōuyuán,oʊ˥ɥœn˧˥,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.euro-symbol,欧元符号,,ōuyuán fúhào,oʊ˥ɥœn˧˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.dollar,美元,,měiyuán,meɪ˧˩˧ɥœn˧˥,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.dollar-symbol,美元符号,,měiyuán fúhào,meɪ˧˩˧ɥœn˧˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.pound,英镑,,yīngbàng,iŋ˥pɑŋ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.pound-symbol,英镑符号,,yīngbàng fúhào,iŋ˥pɑŋ˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
-numbers-money.franc,法郎,,fǎláng,fa˧˩˧lɑŋ˧˥,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.franc-symbol,法郎符号,,fǎláng fúhào,fa˧˩˧lɑŋ˧˥ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.peso,比索,,bǐsuǒ,pi˧˩˧swɔ˧˩˧,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.peso-symbol,比索符号,,bǐsuǒ fúhào,pi˧˩˧swɔ˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.real,雷亚尔,,léiyà'ěr,leɪ˧˥ja˥˩ɑɻ˧˩˧,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.real-symbol,雷亚尔符号,,léiyà'ěr fúhào,leɪ˧˥ja˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.local-currency,当地货币,,dāngdì huòbì,tɑŋ˥ti˥˩ xwɔ˥˩pi˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
-numbers-money.lakh,十万,,shíwàn,ʂɨ˧˥wan˥˩,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
-numbers-money.crore,一千万,,yīqiānwàn,i˥tɕʰjɛn˥wan˥˩,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
-numbers-money.shekel,谢克尔,,xièkè'ěr,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
-numbers-money.shekel-symbol,谢克尔符号,,xièkè'ěr fúhào,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
-numbers-money.rial,里亚尔,,lǐyà'ěr,li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
-numbers-money.toman,十里亚尔,,shí lǐyà'ěr,ʂɨ˧˥ li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
-numbers-money.zloty,兹罗提,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.zloty-symbol,兹罗提符号,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.hryvnia,格里夫纳,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.hryvnia-symbol,格里夫纳符号,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.leu,列伊,,lièyī,ljɛ˥˩i˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.leu-symbol,列伊符号,,lièyī fúhào,ljɛ˥˩i˥ fu˧˥xɑʊ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.koruna,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.koruna-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.krona,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.krona-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.ringgit,林吉特,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin
-numbers-money.ringgit-symbol,林吉特符号,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin
-numbers-money.nepali-rupee,尼泊尔卢比,,Níbóěr lúbǐ,ni˧˥pwɔ˧˥ɑɻ˧˩˧ lu˧˥pi˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.nepali-rupee-symbol,尼泊尔卢比符号,,Níbóěr lúbǐ,ni˧˥pwɔ˧˥ɑɻ˧˩˧ lu˧˥pi˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.birr,比尔,,bǐ'ěr,pi˧˩˧ɑɻ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.naira,尼日利亚奈拉,,Nírìlìyà Nàilā,ni˧˥ʐɨ˥˩li˥˩ja˥˩ naɪ˥˩la˥,,2,naira-gloss-v1;cldr;ipa=pinyin
-numbers-money.naira-symbol,尼日利亚奈拉符号,,Nírìlìyà Nàilā fúhào,ni˧˥ʐɨ˥˩li˥˩ja˥˩ naɪ˥˩la˥ fu˧˥xɑʊ˥˩,,2,naira-gloss-v1;cldr;ipa=pinyin
-numbers-money.riel,瑞尔,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.riel-symbol,瑞尔符号,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.dram,德拉姆,,délāmǔ,tɤ˧˥la˥mu˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.dram-symbol,德拉姆符号,,délāmǔ fúhào,tɤ˧˥la˥mu˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.lari,拉里,,lālǐ,la˥li˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.lari-symbol,拉里符号,,lālǐ fúhào,la˥li˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.kip,基普,,jīpǔ,tɕi˥pʰu˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.kip-symbol,基普符号,,jīpǔ fúhào,tɕi˥pʰu˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.taka,塔卡,,tǎkǎ,tʰa˧˩˧kʰa˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.taka-symbol,塔卡符号,,tǎkǎ fúhào,tʰa˧˩˧kʰa˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.pakistani-rupee,巴基斯坦卢比,,Bājīsītǎn lúbǐ,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.pakistani-rupee-symbol,巴基斯坦卢比符号,,Bājīsītǎn lúbǐ fúhào,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
-numbers-money.som,苏姆,,sūmǔ,su˥mu˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,note,confidence,provenance
+numbers-money.l-ng,零,,líng,liŋ˧˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-is-an-atm,取款机在哪里？,,qǔkuǎnjī zài nǎlǐ?,tɕʰy˧˩˧kʰwan˧˩˧tɕi˥ tsaɪ˥˩ na˧˩˧li˧˩˧,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y,一,,yī,i˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.does-this-atm-take-foreign-cards,外国的卡能用吗？,,wàiguó de kǎ néng yòng ma?,waɪ˥˩kwɔ˧˥ tɤ kʰa˧˩˧ nɤŋ˧˥ jʊŋ˥˩ ma,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.r,二,,èr,ɑɻ˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-atm-kept-my-card,我的卡被吞了,,wǒ de kǎ bèi tūn le,wɔ˧˩˧ tɤ kʰa˧˩˧ peɪ˥˩ tʰwən˥ lɤ,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.li-ng,两,,liǎng,ljɑŋ˧˩˧,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.is-there-a-fee,有手续费吗？,,yǒu shǒuxùfèi ma?,joʊ˧˩˧ ʂoʊ˧˩˧ɕy˥˩feɪ˥˩ ma,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.s-n,三,,sān,san˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-card-was-declined,卡刷不了,,kǎ shuā bu liǎo,kʰa˧˩˧ ʂwa˥ pu ljɑʊ˧˩˧,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.s,四,,sì,sɯ˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.what-is-the-exchange-rate,汇率是多少？,,huìlǜ shì duōshao?,xweɪ˥˩ly˥˩ ʂɨ˥˩ twɔ˥ʂɑʊ,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.w,五,,wǔ,u˧˩˧,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.no-money-came-out,钱没出来,,qián méi chūlái,tɕʰjɛn˧˥ meɪ˧˥ ʈʂʰu˥laɪ˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.li,六,,liù,ljoʊ˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-can-i-change-money,哪里可以换钱？,,nǎlǐ kěyǐ huàn qián?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ tɕʰjɛn˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.q,七,,qī,tɕʰi˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-machine-is-out-of-service,机器坏了,,jīqì huài le,tɕi˥tɕʰi˥˩ xwaɪ˥˩ lɤ,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.b,八,,bā,pa˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.please-give-me-smaller-notes,请给我小面额的钱,,qǐng gěi wǒ xiǎo miàn'é de qián,tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ ɕjɑʊ˧˩˧ mjɛn˥˩ɤ˧˥ tɤ tɕʰjɛn˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.ji,九,,jiǔ,tɕjoʊ˧˩˧,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.do-you-have-change,有零钱吗？,,yǒu língqián ma?,joʊ˧˩˧ liŋ˧˥tɕʰjɛn˧˥ ma,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.sh,十,,shí,ʂɨ˧˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.may-i-pay-in,可以用{}付款吗？,,kěyǐ yòng {} fùkuǎn ma?,kʰɤ˧˩˧i˧˩˧ jʊŋ˥˩ {} fu˥˩kʰwan˧˩˧ ma,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-b-i,一百,,yìbǎi,i˥˩paɪ˧˩˧,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.please-charge-in-local-currency,请用人民币结算,,qǐng yòng Rénmínbì jiésuàn,tɕʰiŋ˧˩˧ jʊŋ˥˩ ʐən˧˥min˧˥pi˥˩ tɕjɛ˧˥swan˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-qi-n,一千,,yìqiān,i˥˩tɕʰjɛn˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-can-i-get-coins,哪里可以换硬币？,,nǎlǐ kěyǐ huàn yìngbì?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ iŋ˥˩pi˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-w-n,一万,,yíwàn,i˧˥wan˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.is-there-a-minimum-for-cards,刷卡有最低金额吗？,,shuākǎ yǒu zuìdī jīn'é ma?,ʂwa˥kʰa˧˩˧ joʊ˧˩˧ tsweɪ˥˩ti˥ tɕin˥ɤ˧˥ ma,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.b-n,半,,bàn,pan˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.atm,自动取款机,自動取款機,zìdòng qǔkuǎnjī,tsɯ˥˩tʊŋ˥˩ tɕʰy˧˩˧kʰwan˧˩˧tɕi˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yu-n,元,,yuán,ɥœn˧˥,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.banknote,钞票,,chāopiào,ʈʂʰɑʊ˥pʰjɑʊ˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.ku-i,块,,kuài,kʰwaɪ˥˩,,,2,latex-reference-v2;ipa=pinyin
+atm-cash.coin,硬币,,yìngbì,iŋ˥˩pi˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.number-and-classifier-notes,,,,,,,2,latex-reference-v2
+atm-cash.cash-only,只收现金,只收現金,zhǐ shōu xiànjīn,ʈʂɨ˧˩˧ ʂoʊ˥ ɕjɛn˥˩tɕin˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.fee,手续费,,shǒuxùfèi,ʂoʊ˧˩˧ɕy˥˩feɪ˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.change,找零,,zhǎolíng,ʈʂɑʊ˧˩˧liŋ˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.exchange-rate,汇率,匯率,huìlǜ,xweɪ˥˩ly˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.bank,银行,銀行,yínháng,in˧˥xɑŋ˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.money-exchange,外币兑换,外幣兌換,wàibì duìhuàn,waɪ˥˩pi˥˩ tweɪ˥˩xwan˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.pin,密码,密碼,mìmǎ,mi˥˩ma˧˩˧,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.2-items,两个,,liǎng gè,ljɑŋ˧˩˧ kɤ˥˩,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yen,日元,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yen-symbol,￥,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.number-and-classifier-notes-2,日语数字的构成和汉语一样：11 = juuichi，20 = nijuu。只是 100 说 hyaku、1000 说 sen，前面不加 ichi，10000 却要 ichiman。量词紧跟数字，多半能对上汉语的量词：-mai 张，-hon 根或瓶，-nin 人，-hai 杯。-tsu 相当于个，只用到九：hitotsu、futatsu；人也特殊：hitori、futari，三人起才是 sannin。念号码：0 = zero 或 maru，4 = yon，7 = nana，9 = kyuu，横线读 no。,,,,,,2,zh-Hans-notes-v1
+numbers-money.forint,福林,,fúlín,fu˧˥lin˧˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.forint-symbol,福林符号,,fúlín fúhào,fu˧˥lin˧˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.rupee,卢比,,lúbǐ,lu˧˥pi˧˩˧,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.rupee-symbol,卢比符号,,lúbǐ fúhào,lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.won,韩元,,hányuán,xan˧˥ɥœn˧˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.won-symbol,韩元符号,,hányuán fúhào,xan˧˥ɥœn˧˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.baht,泰币,,tàibì,tʰaɪ˥˩pi˥˩,泰铢 needs U+94E2 in cjk-sc,,1,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.baht-symbol,泰币符号,,tàibì fúhào,tʰaɪ˥˩pi˥˩ fu˧˥xɑʊ˥˩,泰铢 needs U+94E2 in cjk-sc,,1,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.lira,里拉,,lǐlā,li˧˩˧la˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.lira-symbol,里拉符号,,lǐlā fúhào,li˧˩˧la˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.dong,越南盾,,yuènándùn,ɥœ˥˩nan˧˥twən˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.dong-symbol,越南盾符号,,yuènándùn fúhào,ɥœ˥˩nan˧˥twən˥˩ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.ruble,卢布,,lúbù,lu˧˥pu˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.ruble-symbol,卢布符号,,lúbù fúhào,lu˧˥pu˥˩ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.rupiah,印尼盾,,yìnnídùn,in˥˩ni˧˥twən˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.rupiah-symbol,印尼盾符号,,yìnnídùn fúhào,in˥˩ni˧˥twən˥˩ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.shilling,先令,,xiānlìng,ɕjɛn˥liŋ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.shilling-symbol,先令符号,,xiānlìng fúhào,ɕjɛn˥liŋ˥˩ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.euro,欧元,,ōuyuán,oʊ˥ɥœn˧˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.euro-symbol,欧元符号,,ōuyuán fúhào,oʊ˥ɥœn˧˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.dollar,美元,,měiyuán,meɪ˧˩˧ɥœn˧˥,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.dollar-symbol,美元符号,,měiyuán fúhào,meɪ˧˩˧ɥœn˧˥ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.pound,英镑,,yīngbàng,iŋ˥pɑŋ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.pound-symbol,英镑符号,,yīngbàng fúhào,iŋ˥pɑŋ˥˩ fu˧˥xɑʊ˥˩,,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.franc,法郎,,fǎláng,fa˧˩˧lɑŋ˧˥,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.franc-symbol,法郎符号,,fǎláng fúhào,fa˧˩˧lɑŋ˧˥ fu˧˥xɑʊ˥˩,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.peso,比索,,bǐsuǒ,pi˧˩˧swɔ˧˩˧,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.peso-symbol,比索符号,,bǐsuǒ fúhào,pi˧˩˧swɔ˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.real,雷亚尔,,léiyà'ěr,leɪ˧˥ja˥˩ɑɻ˧˩˧,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.real-symbol,雷亚尔符号,,léiyà'ěr fúhào,leɪ˧˥ja˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.local-currency,当地货币,,dāngdì huòbì,tɑŋ˥ti˥˩ xwɔ˥˩pi˥˩,,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.lakh,十万,,shíwàn,ʂɨ˧˥wan˥˩,,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
+numbers-money.crore,一千万,,yīqiānwàn,i˥tɕʰjɛn˥wan˥˩,,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
+numbers-money.shekel,谢克尔,,xièkè'ěr,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
+numbers-money.shekel-symbol,谢克尔符号,,xièkè'ěr fúhào,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
+numbers-money.rial,里亚尔,,lǐyà'ěr,li˧˩˧ja˥˩ɑɻ˧˩˧,,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
+numbers-money.toman,十里亚尔,,shí lǐyà'ěr,ʂɨ˧˥ li˧˩˧ja˥˩ɑɻ˧˩˧,,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
+numbers-money.zloty,兹罗提,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.zloty-symbol,兹罗提符号,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.hryvnia,格里夫纳,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.hryvnia-symbol,格里夫纳符号,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.leu,列伊,,lièyī,ljɛ˥˩i˥,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.leu-symbol,列伊符号,,lièyī fúhào,ljɛ˥˩i˥ fu˧˥xɑʊ˥˩,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.koruna,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.koruna-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.krona,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.krona-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.ringgit,林吉特,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin
+numbers-money.ringgit-symbol,林吉特符号,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin
+numbers-money.nepali-rupee,尼泊尔卢比,,Níbóěr lúbǐ,ni˧˥pwɔ˧˥ɑɻ˧˩˧ lu˧˥pi˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.nepali-rupee-symbol,尼泊尔卢比符号,,Níbóěr lúbǐ,ni˧˥pwɔ˧˥ɑɻ˧˩˧ lu˧˥pi˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.birr,比尔,,bǐ'ěr,pi˧˩˧ɑɻ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.naira,尼日利亚奈拉,,Nírìlìyà Nàilā,ni˧˥ʐɨ˥˩li˥˩ja˥˩ naɪ˥˩la˥,,,2,naira-gloss-v1;cldr;ipa=pinyin
+numbers-money.naira-symbol,尼日利亚奈拉符号,,Nírìlìyà Nàilā fúhào,ni˧˥ʐɨ˥˩li˥˩ja˥˩ naɪ˥˩la˥ fu˧˥xɑʊ˥˩,,,2,naira-gloss-v1;cldr;ipa=pinyin
+numbers-money.riel,瑞尔,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.riel-symbol,瑞尔符号,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.dram,德拉姆,,délāmǔ,tɤ˧˥la˥mu˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.dram-symbol,德拉姆符号,,délāmǔ fúhào,tɤ˧˥la˥mu˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.lari,拉里,,lālǐ,la˥li˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.lari-symbol,拉里符号,,lālǐ fúhào,la˥li˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.kip,基普,,jīpǔ,tɕi˥pʰu˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.kip-symbol,基普符号,,jīpǔ fúhào,tɕi˥pʰu˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.taka,塔卡,,tǎkǎ,tʰa˧˩˧kʰa˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.taka-symbol,塔卡符号,,tǎkǎ fúhào,tʰa˧˩˧kʰa˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.pakistani-rupee,巴基斯坦卢比,,Bājīsītǎn lúbǐ,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.pakistani-rupee-symbol,巴基斯坦卢比符号,,Bājīsītǎn lúbǐ fúhào,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.som,苏姆,,sūmǔ,su˥mu˧˩˧,,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin

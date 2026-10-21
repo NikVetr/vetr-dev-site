@@ -1,135 +1,135 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,Ina {} [yake|take]?,,ina {} [jake|take],where {} it-is(m/f) -- yake or take as the place is masculine or feminine,2,ha-agent-v1;fix=ha.wikipedia Sarah James rev 964120 (a nan ne asibitin yake) -- Kasuwar Abubakar Mahmud Gumi rev 533768 (Yankin da kasuwar take);was=Ina {} yake? (the masculine continuous -- its literal: masculine agreement used as the template default -- wrong for a feminine place: kasuwa -- tasha);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=ha-g2p
-directions.how-do-i-get-to,Ta yaya zan je {}?,,ta jaja zan dʒe {},,2,ha-agent-v1;ipa=ha-g2p
-directions.is-it-far,Yana da nisa?,,jana da nisa,it-is with distance,2,ha-agent-v1;ipa=ha-g2p
-directions.how-long-on-foot,Tsawon lokaci nawa a ƙafa?,,tsʼawon lokatʃi nawa a kʼafa,,2,ha-agent-v1;ipa=ha-g2p
-directions.please-show-me-on-the-map,Don Allah nuna mini a taswira,,don allah nuna mini a taswira,"please show me on the map -- the imperative, which takes no pronoun and is said to a man or a woman, in place of ka (ki to a woman), as in transit-rides.please-tell-me-where-to-get-off",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Caron 2013 Hausa Grammatical Sketch (HAL halshs-00647533) 14.2 (the Imperative is insensitive to gender and number; Table 18 grade 1 before a benefactive pronoun: kàːmaː minì ɓàɽaːwòː! Catch the thief for me!);fix=Bargery nuna I.1 (show; point out -- plus dative);in-pack-frame=transit-rides.please-tell-me-where-to-get-off;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
-directions.where-is-the-nearest,Ina {} mafi kusa [yake|take]?,,ina {} mafi kusa [jake|take],,2,ha-agent-v1;fix=ha.wikipedia Sarah James rev 964120 (a nan ne asibitin yake) -- Kasuwar Abubakar Mahmud Gumi rev 533768 (Yankin da kasuwar take) -- Abiya rev 915266 (Tashar jirgin sama mafi kusa ... itace: tasha is feminine);was=Ina {} mafi kusa yake? (the masculine continuous -- wrong for a feminine place -- which takes take: kasuwa -- tasha -- makaranta);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=ha-g2p
-directions.where-am-i,Ina nake?,,ina nake,where I-am,2,ha-agent-v1;ipa=ha-g2p
-directions.which-way,Wace hanya?,,watʃe hanja,,2,ha-agent-v1;ipa=ha-g2p
-directions.can-i-walk-there,Zan iya tafiya can da ƙafa?,,zan ija tafija tʃan da kʼafa,,2,ha-agent-v1;ipa=ha-g2p
-directions.how-far-is-it,Wane nisa ne?,,wane nisa ne,,2,ha-agent-v1;ipa=ha-g2p
-directions.which-exit,Wace ƙofar fita?,,watʃe kʼofar fita,"which exit door? -- ƙofar fita, the pack's exit (building-words.exit), so the row no longer reads as air-travel.which-gate's Wace ƙofa?",2,"ha-agent-v1;fix=R. M. Newman An English-Hausa Dictionary (Yale 1990; ERIC ED356616) s.v. exit (v fita: you should exit by the back door, sai ka fita ta ƙofar baya);fix=Bargery ƙofa I.1(a) (a doorway; gateway);in-pack-neighbour=building-words.exit;row-corrections-v8;ipa=ha-g2p"
-directions.can-you-show-me-the-way,Za a iya nuna mini hanya?,,za a ija nuna mini hanja,"will one be able to show me the way? -- the impersonal a after za in place of ka (ki to a woman), as in taxi.can-you-wait-for-me-here",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=taxi.can-you-wait-for-me-here;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
-directions.north,arewa,,arewa,,2,ha-agent-v1;ipa=ha-g2p
-directions.south,kudu,,kudu,,2,ha-agent-v1;ipa=ha-g2p
-directions.east,gabas,,ɡabas,,2,ha-agent-v1;ipa=ha-g2p
-directions.west,yamma,,jamma,the same word as 'evening' -- west is the direction of sunset,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.go-straight,Miƙe gaba,,mikʼe ɡaba,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.turn-left,Juya hagu,,dʒuja haɡu,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.turn-right,Juya dama,,dʒuja dama,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.this-way,Wannan hanyar,,wannan hanjar,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.that-way,Wancan hanyar,,wantʃan hanjar,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.on-the-left,A hagu,,a haɡu,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.on-the-right,A dama,,a dama,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.across-from-here,Ɗaura da nan,,ɗaura da nan,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.in-front,A gaba,,a ɡaba,,2,ha-agent-v1;ipa=ha-g2p
-quick-directions.behind,A baya,,a baja,,2,ha-agent-v1;ipa=ha-g2p
-taxi.please-take-me-here,Don Allah kai ni nan,,don allah kai ni nan,"please take me here -- the imperative, which takes no pronoun and is said to a man or a woman, in place of ka, as in taxi.please-stop-here",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery kai I.2(e) (take -- convey: kai wannan wurinsa = take this to him);in-pack-frame=taxi.please-stop-here;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
-taxi.please-send-me-the-address,Don Allah ka aiko mini da adireshin,,don allah ka aiko mini da adireʃin,,2,ha-agent-v1;ipa=ha-g2p
-taxi.we-need-the-east-gate-not-the-south-gate,"Muna buƙatar ƙofar gabas, ba ƙofar kudu ba",,"muna bukʼatar kʼofar ɡabas, ba kʼofar kudu ba",,2,ha-agent-v1;ipa=ha-g2p
-taxi.please-stop-here,Don Allah tsaya nan,,don allah tsʼaja nan,"please stop here -- the imperative, which takes no pronoun and is said to a man or a woman, in place of ka",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery tsaya 2 (tsaya mini kaɗan: wait for me a while);in-pack-frame=phone-text-power.please-use-simple-words;kai-ke-avoided;row-corrections-v3;ipa=ha-g2p
-taxi.can-you-wait-for-me-here,Za a iya jira ni a nan?,,za a ija dʒira ni a nan,"will one be able to wait for me here? -- the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
-taxi.we-need-to-catch-the-high-speed-train,Muna buƙatar kama jirgin ƙasa mai saurin gudu,,muna bukʼatar kama dʒirɡin kʼasa mai saurin ɡudu,train that-has speed-of-running,2,ha-agent-v1;ipa=ha-g2p
-taxi.please-use-the-meter,Don Allah ka yi amfani da mita,,don allah ka ji amfani da mita,,2,ha-agent-v1;ipa=ha-g2p
-taxi.i-will-get-off-here,Zan sauka a nan,,zan sauka a nan,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.two-tickets,Tikiti biyu,,tikiti biju,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.where-is-the-subway-station,Ina tashar jirgin ƙarƙashin ƙasa take?,,ina taʃar dʒirɡin kʼarkʼaʃin kʼasa take,station-of train under-ground,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.does-this-bus-train-go-to,Wannan bas ko jirgin yana zuwa {}?,,wannan bas ko dʒirɡin jana zuwa {},,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.what-is-the-next-stop,Mene ne tasha ta gaba?,,mene ne taʃa ta ɡaba,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.please-tell-me-where-to-get-off,Don Allah gaya mini inda zan sauka,,don allah ɡaja mini inda zan sauka,"please tell me where I will get off -- the imperative, which takes no pronoun and is said to a man or a woman, in place of ka; zan is the first person, one form for any speaker",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery gaya I.1(a)(iii) (gaya mini -- Tell me!);in-pack-frame=taxi.please-stop-here;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
-transit-rides.is-this-direct,Wannan kai tsaye ne?,,wannan kai tsʼaje ne,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.do-i-need-to-transfer,Ina buƙatar canja jirgi?,,ina bukʼatar tʃandʒa dʒirɡi,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.is-it-delayed,Ya yi jinkiri?,,ja ji dʒinkiri,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.i-am-in-a-hurry,Ina cikin gaggawa,,ina tʃikin ɡaɡɡawa,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.which-platform,Wane dandamali?,,wane dandamali,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.what-time-is-the-next-one,Ƙarfe nawa na gaba?,,kʼarfe nawa na ɡaba,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.i-went-past-my-stop,Na wuce tashata,,na wutʃe taʃata,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.can-i-use-this-ticket,Zan iya amfani da wannan tikitin?,,zan ija amfani da wannan tikitin,,2,ha-agent-v1;ipa=ha-g2p
-transit-rides.do-i-need-to-validate,Ina buƙatar in tantance wannan tikitin?,,ina bukʼatar in tantantʃe wannan tikitin,validate/verify,2,ha-agent-v1;ipa=ha-g2p
-place-words.visitor-center,cibiyar baƙi,,tʃibijar bakʼi,center-of visitors,2,ha-agent-v1;ipa=ha-g2p
-place-words.railway-station,tashar jirgin ƙasa,,taʃar dʒirɡin kʼasa,,2,ha-agent-v1;ipa=ha-g2p
-place-words.airport,filin jirgin sama,,filin dʒirɡin sama,field-of plane,2,ha-agent-v1;ipa=ha-g2p
-place-words.service-desk,teburin sabis,,teburin sabis,,2,ha-agent-v1;ipa=ha-g2p
-place-words.bus-stop,tashar bas,,taʃar bas,,2,ha-agent-v1;ipa=ha-g2p
-place-words.luggage-storage,ajiyar kaya,,adʒijar kaja,,2,ha-agent-v1;ipa=ha-g2p
-place-words.tourist-spot-sightseeing-area,wurin yawon shakatawa,,wurin jawon ʃakatawa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-a-tourist,Ni mai yawon shakatawa ne,,ni mai jawon ʃakatawa ne,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.here-is-my-passport,Ga fasfo na,,ɡa fasfo na,here-is passport-my,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-staying-for-days,Zan zauna kwana {},,zan zauna kwana {},I-will stay days {},2,ha-agent-v1;ipa=ha-g2p
-border-customs.nothing-to-declare,Babu wani abu don bayyanawa,,babu wani abu don bajjanawa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-staying-at,Zan zauna a {},,zan zauna a {},,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-here-for-business,Ina nan don kasuwanci,,ina nan don kasuwantʃi,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-have-a-return-ticket,Ina da tikitin dawowa,,ina da tikitin dawowa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-visiting-family,Ina ziyartar iyali,,ina zijartar ijali,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.this-is-for-personal-use,Wannan don amfanin kaina ne,,wannan don amfanin kaina ne,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-am-in-transit,Ina wucewa ne kawai,,ina wutʃewa ne kawai,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-have-in-cash,Ina da {} a kuɗin hannu,,ina da {} a kuɗin hannu,"cash, lit. money-of-hand",2,ha-agent-v1;ipa=ha-g2p
-border-customs.this-is-a-gift,Wannan kyauta ce,,wannan kjauta tʃe,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.where-do-i-collect-my-baggage,Ina zan ɗauki kayana?,,ina zan ɗauki kajana,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.how-long-may-i-stay,Har yaushe zan iya zama?,,har jauʃe zan ija zama,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-have-a-connecting-flight,Ina da jirgi mai haɗewa,,ina da dʒirɡi mai haɗewa,a plane that connects onward,2,ha-agent-v1;ipa=ha-g2p
-border-customs.may-i-have-an-entry-stamp,Zan iya samun tambarin shiga?,,zan ija samun tambarin ʃiɡa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.visa,biza,,biza,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.i-have-no-food-or-plants,Ba ni da abinci ko tsirrai,,ba ni da abintʃi ko tsʼirrai,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.passport-control,bincikar fasfo,,bintʃikar fasfo,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.customs,kwastam,,kwastam,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.baggage-claim,wurin ɗaukar kaya,,wurin ɗaukar kaja,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.customs-declaration,sanarwar kwastam,,sanarwar kwastam,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.arrival-card,katin isowa,,katin isowa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.transit,wucewa,,wutʃewa,,2,ha-agent-v1;ipa=ha-g2p
-border-customs.boarding-pass,katin hawa jirgi,,katin hawa dʒirɡi,,2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.where-is-the-pickup-point,Ina wurin ɗaukar mutane yake?,,ina wurin ɗaukar mutane jake,,2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.please-send-me-the-pickup-point,Don Allah ka aiko mini da wurin ɗaukar mutane,,don allah ka aiko mini da wurin ɗaukar mutane,,2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.please-pick-us-up-here,Don Allah ku ɗauke mu a nan,,don allah ku ɗauke mu a nan,,2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.meet-us-at,Ku haɗu da mu a {},,ku haɗu da mu a {},you(pl) meet with us at {},2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.please-call-me-a-ride,Don Allah ka kira mini mota,,don allah ka kira mini mota,,2,ha-agent-v1;ipa=ha-g2p
-pickup-meeting.please-call-a-taxi,Don Allah ka kira taksi,,don allah ka kira taksi,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.high-speed-rail,jirgin ƙasa mai saurin gudu,,dʒirɡin kʼasa mai saurin ɡudu,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.transfer,canjawa,,tʃandʒawa,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.ticket-gate,ƙofar tikiti,,kʼofar tikiti,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.platform,dandamali,,dandamali,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.ticket-office,ofishin tikiti,,ofiʃin tikiti,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.waiting-room,ɗakin jira,,ɗakin dʒira,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.train-number,lambar jirgi,,lambar dʒirɡi,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.carriage,motar jirgi,,motar dʒirɡi,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.seat,kujera,,kudʒera,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.last-train,jirgi na ƙarshe,,dʒirɡi na kʼarʃe,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.delayed,makara,,makara,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.final-stop,tasha ta ƙarshe,,taʃa ta kʼarʃe,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.ticket-validator,na'urar tantance tikiti,,naʔurar tantantʃe tikiti,,2,ha-agent-v1;ipa=ha-g2p
-rail-station-words.fare,kuɗin sufuri,,kuɗin sufuri,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.open-on,a buɗe,,a buɗe,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.closed-off,a rufe,,a rufe,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.occupied,ana amfani,,ana amfani,in use,2,ha-agent-v1;ipa=ha-g2p
-common-signs.vacant,wofi,,wofi,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.caution,Hankali,,hankali,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.no-entry,Kada a shiga,,kada a ʃiɡa,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.no-smoking,Kada a sha taba,,kada a ʃa taba,lit. do not drink tobacco,2,ha-agent-v1;ipa=ha-g2p
-common-signs.no-photography,Kada a ɗauki hoto,,kada a ɗauki hoto,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.do-not-touch,Kada a taɓa,,kada a taba,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.temporarily-closed,An rufe na wani lokaci,,an rufe na wani lokatʃi,,2,ha-agent-v1;ipa=ha-g2p
-common-signs.open-operating,yana buɗe,,jana buɗe,,2,ha-agent-v1;fix=Bargery (maguzawa.dyndns.ws) buɗe IV (adv. of state to buɗe -- idonsa yina b. his eye is open) beside rufe IV (k'ofa tana r. the door is shut);was=yana aiki (aiki work -- it is working);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=ha-g2p
-common-signs.closed,rufe,,rufe,"bare sign form, distinct from the fuller a rufe phrase",2,ha-agent-v1;ipa=ha-g2p
-common-signs.stopped-stop,Tsaya,,tsʼaja,,2,ha-agent-v1;ipa=ha-g2p
-taxi.please-get-me-there-in-time-for-the-shinkansen,Don Allah ka kai ni can a kan lokaci domin in kama Shinkansen,,don allah ka kai ni tʃan a kan lokatʃi domin in kama ʃinkansen,,2,ha-notes-v1;ipa=ha-g2p
-taxi.could-you-make-it-colder,Za a iya ƙara AC?,,za a ija kʼara eːsiː,"will one be able to increase the AC? -- the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p+loan
-taxi.could-you-make-it-warmer,Za a iya rage AC?,,za a ija raɡe eːsiː,"will one be able to reduce the AC? -- the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p+loan
-taxi.may-i-open-the-window,Zan iya buɗe taga?,,zan ija buɗe taɡa,,2,ha-agent-v1;ipa=ha-g2p
-place-words.scenic-area,wurin shakatawa,,wurin ʃakatawa,,2,ha-notes-v1;ipa=ha-g2p
-rail-station-words.maglev,jirgin maglev,,dʒirɡin maɡlev,,2,ha-notes-v1;ipa=ha-g2p
-common-signs.pork-code,Alamomin naman alade,,alamomin naman alade,,2,ha-notes-v1;ipa=ha-g2p
-transit-rides.where-do-i-pay-the-fare,Ina ake biyan kuɗin sufuri?,,ina ake bijan kuɗin sufuri,where does one pay the fare?,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
-air-travel.where-is-check-in,Ina wurin shiga yake?,,ina wurin ʃiɡa jake,reuses hotel-words.check-in's shiga (entering),2,ha-agent-v1;in-pack-neighbour=hotel-words.check-in;ipa=ha-g2p
-air-travel.which-gate,Wace ƙofa?,,watʃe kʼofa,reuses taxi.we-need-the-east-gate-not-the-south-gate's ƙofa (gate),2,ha-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=ha-g2p
-air-travel.where-is-the-security-check,Ina wurin bincike na tsaro yake?,,ina wurin bintʃike na tsʼaro jake,place of security check; tsaro attested in ha.wikipedia.org's Filin jirgin sama article,2,ha-agent-v1;src=ha.wikipedia.org Filin_jirgin_sama;ipa=ha-g2p
-air-travel.my-luggage-did-not-arrive,Kayana bai zo ba,,kajana bai zo ba,reuses kayana from border-customs.where-do-i-collect-my-baggage,2,ha-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=ha-g2p
-air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,seat near the window; taga reused from taxi.may-i-open-the-window,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
-air-travel.i-would-like-an-aisle-seat,Ina son wurin zama kusa da hanya,,ina son wurin zama kusa da hanja,"seat near the aisle/path, parallel to the window-seat row",2,ha-agent-v1;ipa=ha-g2p
-hitchhiking.can-you-give-me-a-ride,Za a iya ɗauke ni?,,za a ija ɗauke ni,"will one be able to take me? -- the impersonal a after za in place of ka or ki, as in board-answers.can-you-walk",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=board-answers.can-you-walk;kai-ke-avoided;row-corrections-v3;ipa=ha-g2p
-hitchhiking.where-are-you-going,Ina za a?,,ina za a,"where is one to go? -- Bargery's impersonal a after za, in place of ka or ki",2,ha-agent-v1;fix=Bargery a (impers. pron.) II.1 used after za without a verb: ina za a? where is one to go?;kai-ke-avoided;row-corrections-v2;ipa=ha-g2p
-hitchhiking.i-only-need-to-go-to-the-next-town,Ina bukatar zuwa gari na gaba kawai,,ina bukatar zuwa ɡari na ɡaba kawai,,2,ha-agent-v1;ipa=ha-g2p
-hitchhiking.is-there-room-for-two,Akwai wuri don mutum biyu?,,akwai wuri don mutum biju,,2,ha-agent-v1;ipa=ha-g2p
-hitchhiking.i-can-pay-for-fuel,Zan iya biyan man fetur,,zan ija bijan man fetur,"man fetur = petrol, the word Hausa speakers use at the pump",2,ha-agent-v1;src=Newman A Hausa-English Dictionary 2007 fetur;ipa=ha-g2p
-hitchhiking.thank-you-for-the-ride,Na gode don ɗaukar ni,,na ɡode don ɗaukar ni,reuses social-basics.thank-you's Na gode,2,ha-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=ha-g2p
-taxi.please-turn-around,Don Allah juya,,don allah dʒuja,"please turn round -- the imperative, which takes no pronoun and is said to a man or a woman, as in taxi.please-stop-here",2,"ha-agent-v1;src=Bargery juya 2 (turn round, changing one's direction);in-pack-frame=taxi.please-stop-here;answers-audit-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);kai-ke-avoided;row-corrections-v3;ipa=ha-g2p"
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+directions.where-is,Ina {} [yake|take]?,,ina {} [jake|take],where {} it-is(m/f),yake or take as the place is masculine or feminine,2,ha-agent-v1;fix=ha.wikipedia Sarah James rev 964120 (a nan ne asibitin yake) -- Kasuwar Abubakar Mahmud Gumi rev 533768 (Yankin da kasuwar take);was=Ina {} yake? (the masculine continuous -- its literal: masculine agreement used as the template default -- wrong for a feminine place: kasuwa -- tasha);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=ha-g2p
+directions.how-do-i-get-to,Ta yaya zan je {}?,,ta jaja zan dʒe {},,,2,ha-agent-v1;ipa=ha-g2p
+directions.is-it-far,Yana da nisa?,,jana da nisa,it-is with distance,,2,ha-agent-v1;ipa=ha-g2p
+directions.how-long-on-foot,Tsawon lokaci nawa a ƙafa?,,tsʼawon lokatʃi nawa a kʼafa,,,2,ha-agent-v1;ipa=ha-g2p
+directions.please-show-me-on-the-map,Don Allah nuna mini a taswira,,don allah nuna mini a taswira,please show me on the map,"the imperative, which takes no pronoun and is said to a man or a woman, in place of ka (ki to a woman), as in transit-rides.please-tell-me-where-to-get-off",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Caron 2013 Hausa Grammatical Sketch (HAL halshs-00647533) 14.2 (the Imperative is insensitive to gender and number; Table 18 grade 1 before a benefactive pronoun: kàːmaː minì ɓàɽaːwòː! Catch the thief for me!);fix=Bargery nuna I.1 (show; point out -- plus dative);in-pack-frame=transit-rides.please-tell-me-where-to-get-off;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
+directions.where-is-the-nearest,Ina {} mafi kusa [yake|take]?,,ina {} mafi kusa [jake|take],,,2,ha-agent-v1;fix=ha.wikipedia Sarah James rev 964120 (a nan ne asibitin yake) -- Kasuwar Abubakar Mahmud Gumi rev 533768 (Yankin da kasuwar take) -- Abiya rev 915266 (Tashar jirgin sama mafi kusa ... itace: tasha is feminine);was=Ina {} mafi kusa yake? (the masculine continuous -- wrong for a feminine place -- which takes take: kasuwa -- tasha -- makaranta);rule=one form per gender of the word in the blank -- in genders.csv's order -- printed joined in each gender's colour (core/alternation.js);gender-alternatives-v1;ipa=ha-g2p
+directions.where-am-i,Ina nake?,,ina nake,where I-am,,2,ha-agent-v1;ipa=ha-g2p
+directions.which-way,Wace hanya?,,watʃe hanja,,,2,ha-agent-v1;ipa=ha-g2p
+directions.can-i-walk-there,Zan iya tafiya can da ƙafa?,,zan ija tafija tʃan da kʼafa,,,2,ha-agent-v1;ipa=ha-g2p
+directions.how-far-is-it,Wane nisa ne?,,wane nisa ne,,,2,ha-agent-v1;ipa=ha-g2p
+directions.which-exit,Wace ƙofar fita?,,watʃe kʼofar fita,which exit door?,"ƙofar fita, the pack's exit (building-words.exit), so the row no longer reads as air-travel.which-gate's Wace ƙofa?",2,"ha-agent-v1;fix=R. M. Newman An English-Hausa Dictionary (Yale 1990; ERIC ED356616) s.v. exit (v fita: you should exit by the back door, sai ka fita ta ƙofar baya);fix=Bargery ƙofa I.1(a) (a doorway; gateway);in-pack-neighbour=building-words.exit;row-corrections-v8;ipa=ha-g2p"
+directions.can-you-show-me-the-way,Za a iya nuna mini hanya?,,za a ija nuna mini hanja,will one be able to show me the way?,"the impersonal a after za in place of ka (ki to a woman), as in taxi.can-you-wait-for-me-here",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=taxi.can-you-wait-for-me-here;kai-ke-avoided;row-corrections-v5;ipa=ha-g2p
+directions.north,arewa,,arewa,,,2,ha-agent-v1;ipa=ha-g2p
+directions.south,kudu,,kudu,,,2,ha-agent-v1;ipa=ha-g2p
+directions.east,gabas,,ɡabas,,,2,ha-agent-v1;ipa=ha-g2p
+directions.west,yamma,,jamma,the same word as 'evening',west is the direction of sunset,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.go-straight,Miƙe gaba,,mikʼe ɡaba,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.turn-left,Juya hagu,,dʒuja haɡu,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.turn-right,Juya dama,,dʒuja dama,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.this-way,Wannan hanyar,,wannan hanjar,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.that-way,Wancan hanyar,,wantʃan hanjar,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.on-the-left,A hagu,,a haɡu,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.on-the-right,A dama,,a dama,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.across-from-here,Ɗaura da nan,,ɗaura da nan,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.in-front,A gaba,,a ɡaba,,,2,ha-agent-v1;ipa=ha-g2p
+quick-directions.behind,A baya,,a baja,,,2,ha-agent-v1;ipa=ha-g2p
+taxi.please-take-me-here,Don Allah kai ni nan,,don allah kai ni nan,please take me here,"the imperative, which takes no pronoun and is said to a man or a woman, in place of ka, as in taxi.please-stop-here",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery kai I.2(e) (take -- convey: kai wannan wurinsa = take this to him);in-pack-frame=taxi.please-stop-here;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
+taxi.please-send-me-the-address,Don Allah ka aiko mini da adireshin,,don allah ka aiko mini da adireʃin,,,2,ha-agent-v1;ipa=ha-g2p
+taxi.we-need-the-east-gate-not-the-south-gate,"Muna buƙatar ƙofar gabas, ba ƙofar kudu ba",,"muna bukʼatar kʼofar ɡabas, ba kʼofar kudu ba",,,2,ha-agent-v1;ipa=ha-g2p
+taxi.please-stop-here,Don Allah tsaya nan,,don allah tsʼaja nan,please stop here,"the imperative, which takes no pronoun and is said to a man or a woman, in place of ka",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery tsaya 2 (tsaya mini kaɗan: wait for me a while);in-pack-frame=phone-text-power.please-use-simple-words;kai-ke-avoided;row-corrections-v3;ipa=ha-g2p
+taxi.can-you-wait-for-me-here,Za a iya jira ni a nan?,,za a ija dʒira ni a nan,will one be able to wait for me here?,"the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
+taxi.we-need-to-catch-the-high-speed-train,Muna buƙatar kama jirgin ƙasa mai saurin gudu,,muna bukʼatar kama dʒirɡin kʼasa mai saurin ɡudu,train that-has speed-of-running,,2,ha-agent-v1;ipa=ha-g2p
+taxi.please-use-the-meter,Don Allah ka yi amfani da mita,,don allah ka ji amfani da mita,,,2,ha-agent-v1;ipa=ha-g2p
+taxi.i-will-get-off-here,Zan sauka a nan,,zan sauka a nan,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.two-tickets,Tikiti biyu,,tikiti biju,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.where-is-the-subway-station,Ina tashar jirgin ƙarƙashin ƙasa take?,,ina taʃar dʒirɡin kʼarkʼaʃin kʼasa take,station-of train under-ground,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.does-this-bus-train-go-to,Wannan bas ko jirgin yana zuwa {}?,,wannan bas ko dʒirɡin jana zuwa {},,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.what-is-the-next-stop,Mene ne tasha ta gaba?,,mene ne taʃa ta ɡaba,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.please-tell-me-where-to-get-off,Don Allah gaya mini inda zan sauka,,don allah ɡaja mini inda zan sauka,please tell me where I will get off,"the imperative, which takes no pronoun and is said to a man or a woman, in place of ka; zan is the first person, one form for any speaker",2,ha-agent-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);fix=Bargery gaya I.1(a)(iii) (gaya mini -- Tell me!);in-pack-frame=taxi.please-stop-here;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p
+transit-rides.is-this-direct,Wannan kai tsaye ne?,,wannan kai tsʼaje ne,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.do-i-need-to-transfer,Ina buƙatar canja jirgi?,,ina bukʼatar tʃandʒa dʒirɡi,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.is-it-delayed,Ya yi jinkiri?,,ja ji dʒinkiri,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.i-am-in-a-hurry,Ina cikin gaggawa,,ina tʃikin ɡaɡɡawa,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.which-platform,Wane dandamali?,,wane dandamali,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.what-time-is-the-next-one,Ƙarfe nawa na gaba?,,kʼarfe nawa na ɡaba,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.i-went-past-my-stop,Na wuce tashata,,na wutʃe taʃata,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.can-i-use-this-ticket,Zan iya amfani da wannan tikitin?,,zan ija amfani da wannan tikitin,,,2,ha-agent-v1;ipa=ha-g2p
+transit-rides.do-i-need-to-validate,Ina buƙatar in tantance wannan tikitin?,,ina bukʼatar in tantantʃe wannan tikitin,validate/verify,,2,ha-agent-v1;ipa=ha-g2p
+place-words.visitor-center,cibiyar baƙi,,tʃibijar bakʼi,center-of visitors,,2,ha-agent-v1;ipa=ha-g2p
+place-words.railway-station,tashar jirgin ƙasa,,taʃar dʒirɡin kʼasa,,,2,ha-agent-v1;ipa=ha-g2p
+place-words.airport,filin jirgin sama,,filin dʒirɡin sama,field-of plane,,2,ha-agent-v1;ipa=ha-g2p
+place-words.service-desk,teburin sabis,,teburin sabis,,,2,ha-agent-v1;ipa=ha-g2p
+place-words.bus-stop,tashar bas,,taʃar bas,,,2,ha-agent-v1;ipa=ha-g2p
+place-words.luggage-storage,ajiyar kaya,,adʒijar kaja,,,2,ha-agent-v1;ipa=ha-g2p
+place-words.tourist-spot-sightseeing-area,wurin yawon shakatawa,,wurin jawon ʃakatawa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-a-tourist,Ni mai yawon shakatawa ne,,ni mai jawon ʃakatawa ne,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.here-is-my-passport,Ga fasfo na,,ɡa fasfo na,here-is passport-my,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-staying-for-days,Zan zauna kwana {},,zan zauna kwana {},I-will stay days {},,2,ha-agent-v1;ipa=ha-g2p
+border-customs.nothing-to-declare,Babu wani abu don bayyanawa,,babu wani abu don bajjanawa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-staying-at,Zan zauna a {},,zan zauna a {},,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-here-for-business,Ina nan don kasuwanci,,ina nan don kasuwantʃi,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-have-a-return-ticket,Ina da tikitin dawowa,,ina da tikitin dawowa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-visiting-family,Ina ziyartar iyali,,ina zijartar ijali,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.this-is-for-personal-use,Wannan don amfanin kaina ne,,wannan don amfanin kaina ne,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-am-in-transit,Ina wucewa ne kawai,,ina wutʃewa ne kawai,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-have-in-cash,Ina da {} a kuɗin hannu,,ina da {} a kuɗin hannu,"cash, lit. money-of-hand",,2,ha-agent-v1;ipa=ha-g2p
+border-customs.this-is-a-gift,Wannan kyauta ce,,wannan kjauta tʃe,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.where-do-i-collect-my-baggage,Ina zan ɗauki kayana?,,ina zan ɗauki kajana,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.how-long-may-i-stay,Har yaushe zan iya zama?,,har jauʃe zan ija zama,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-have-a-connecting-flight,Ina da jirgi mai haɗewa,,ina da dʒirɡi mai haɗewa,a plane that connects onward,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.may-i-have-an-entry-stamp,Zan iya samun tambarin shiga?,,zan ija samun tambarin ʃiɡa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.visa,biza,,biza,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.i-have-no-food-or-plants,Ba ni da abinci ko tsirrai,,ba ni da abintʃi ko tsʼirrai,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.passport-control,bincikar fasfo,,bintʃikar fasfo,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.customs,kwastam,,kwastam,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.baggage-claim,wurin ɗaukar kaya,,wurin ɗaukar kaja,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.customs-declaration,sanarwar kwastam,,sanarwar kwastam,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.arrival-card,katin isowa,,katin isowa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.transit,wucewa,,wutʃewa,,,2,ha-agent-v1;ipa=ha-g2p
+border-customs.boarding-pass,katin hawa jirgi,,katin hawa dʒirɡi,,,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.where-is-the-pickup-point,Ina wurin ɗaukar mutane yake?,,ina wurin ɗaukar mutane jake,,,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.please-send-me-the-pickup-point,Don Allah ka aiko mini da wurin ɗaukar mutane,,don allah ka aiko mini da wurin ɗaukar mutane,,,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.please-pick-us-up-here,Don Allah ku ɗauke mu a nan,,don allah ku ɗauke mu a nan,,,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.meet-us-at,Ku haɗu da mu a {},,ku haɗu da mu a {},you(pl) meet with us at {},,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.please-call-me-a-ride,Don Allah ka kira mini mota,,don allah ka kira mini mota,,,2,ha-agent-v1;ipa=ha-g2p
+pickup-meeting.please-call-a-taxi,Don Allah ka kira taksi,,don allah ka kira taksi,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.high-speed-rail,jirgin ƙasa mai saurin gudu,,dʒirɡin kʼasa mai saurin ɡudu,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.transfer,canjawa,,tʃandʒawa,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.ticket-gate,ƙofar tikiti,,kʼofar tikiti,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.platform,dandamali,,dandamali,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.ticket-office,ofishin tikiti,,ofiʃin tikiti,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.waiting-room,ɗakin jira,,ɗakin dʒira,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.train-number,lambar jirgi,,lambar dʒirɡi,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.carriage,motar jirgi,,motar dʒirɡi,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.seat,kujera,,kudʒera,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.last-train,jirgi na ƙarshe,,dʒirɡi na kʼarʃe,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.delayed,makara,,makara,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.final-stop,tasha ta ƙarshe,,taʃa ta kʼarʃe,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.ticket-validator,na'urar tantance tikiti,,naʔurar tantantʃe tikiti,,,2,ha-agent-v1;ipa=ha-g2p
+rail-station-words.fare,kuɗin sufuri,,kuɗin sufuri,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.open-on,a buɗe,,a buɗe,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.closed-off,a rufe,,a rufe,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.occupied,ana amfani,,ana amfani,in use,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.vacant,wofi,,wofi,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.caution,Hankali,,hankali,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.no-entry,Kada a shiga,,kada a ʃiɡa,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.no-smoking,Kada a sha taba,,kada a ʃa taba,lit. do not drink tobacco,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.no-photography,Kada a ɗauki hoto,,kada a ɗauki hoto,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.do-not-touch,Kada a taɓa,,kada a taba,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.temporarily-closed,An rufe na wani lokaci,,an rufe na wani lokatʃi,,,2,ha-agent-v1;ipa=ha-g2p
+common-signs.open-operating,yana buɗe,,jana buɗe,,,2,ha-agent-v1;fix=Bargery (maguzawa.dyndns.ws) buɗe IV (adv. of state to buɗe -- idonsa yina b. his eye is open) beside rufe IV (k'ofa tana r. the door is shut);was=yana aiki (aiki work -- it is working);rule=the open-for-business sign on a shop door (the concept note) and the time board answer open now;row-corrections-v11;ipa=ha-g2p
+common-signs.closed,rufe,,rufe,"bare sign form, distinct from the fuller a rufe phrase",,2,ha-agent-v1;ipa=ha-g2p
+common-signs.stopped-stop,Tsaya,,tsʼaja,,,2,ha-agent-v1;ipa=ha-g2p
+taxi.please-get-me-there-in-time-for-the-shinkansen,Don Allah ka kai ni can a kan lokaci domin in kama Shinkansen,,don allah ka kai ni tʃan a kan lokatʃi domin in kama ʃinkansen,,,2,ha-notes-v1;ipa=ha-g2p
+taxi.could-you-make-it-colder,Za a iya ƙara AC?,,za a ija kʼara eːsiː,will one be able to increase the AC?,"the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p+loan
+taxi.could-you-make-it-warmer,Za a iya rage AC?,,za a ija raɡe eːsiː,will one be able to reduce the AC?,"the impersonal a after za in place of ka or ki, as in hitchhiking.can-you-give-me-a-ride",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=hitchhiking.can-you-give-me-a-ride;kai-ke-avoided;row-corrections-v4;ipa=ha-g2p+loan
+taxi.may-i-open-the-window,Zan iya buɗe taga?,,zan ija buɗe taɡa,,,2,ha-agent-v1;ipa=ha-g2p
+place-words.scenic-area,wurin shakatawa,,wurin ʃakatawa,,,2,ha-notes-v1;ipa=ha-g2p
+rail-station-words.maglev,jirgin maglev,,dʒirɡin maɡlev,,,2,ha-notes-v1;ipa=ha-g2p
+common-signs.pork-code,Alamomin naman alade,,alamomin naman alade,,,2,ha-notes-v1;ipa=ha-g2p
+transit-rides.where-do-i-pay-the-fare,Ina ake biyan kuɗin sufuri?,,ina ake bijan kuɗin sufuri,where does one pay the fare?,,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
+air-travel.where-is-check-in,Ina wurin shiga yake?,,ina wurin ʃiɡa jake,reuses hotel-words.check-in's shiga (entering),,2,ha-agent-v1;in-pack-neighbour=hotel-words.check-in;ipa=ha-g2p
+air-travel.which-gate,Wace ƙofa?,,watʃe kʼofa,reuses taxi.we-need-the-east-gate-not-the-south-gate's ƙofa (gate),,2,ha-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=ha-g2p
+air-travel.where-is-the-security-check,Ina wurin bincike na tsaro yake?,,ina wurin bintʃike na tsʼaro jake,place of security check; tsaro attested in ha.wikipedia.org's Filin jirgin sama article,,2,ha-agent-v1;src=ha.wikipedia.org Filin_jirgin_sama;ipa=ha-g2p
+air-travel.my-luggage-did-not-arrive,Kayana bai zo ba,,kajana bai zo ba,reuses kayana from border-customs.where-do-i-collect-my-baggage,,2,ha-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=ha-g2p
+air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,seat near the window; taga reused from taxi.may-i-open-the-window,,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
+air-travel.i-would-like-an-aisle-seat,Ina son wurin zama kusa da hanya,,ina son wurin zama kusa da hanja,"seat near the aisle/path, parallel to the window-seat row",,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.can-you-give-me-a-ride,Za a iya ɗauke ni?,,za a ija ɗauke ni,will one be able to take me?,"the impersonal a after za in place of ka or ki, as in board-answers.can-you-walk",2,ha-agent-v1;fix=Bargery a (impers. pron.) I.1(c) in future after za plus verb: ina za a tafi? where is one to go?;in-pack-frame=board-answers.can-you-walk;kai-ke-avoided;row-corrections-v3;ipa=ha-g2p
+hitchhiking.where-are-you-going,Ina za a?,,ina za a,where is one to go?,"Bargery's impersonal a after za, in place of ka or ki",2,ha-agent-v1;fix=Bargery a (impers. pron.) II.1 used after za without a verb: ina za a? where is one to go?;kai-ke-avoided;row-corrections-v2;ipa=ha-g2p
+hitchhiking.i-only-need-to-go-to-the-next-town,Ina bukatar zuwa gari na gaba kawai,,ina bukatar zuwa ɡari na ɡaba kawai,,,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.is-there-room-for-two,Akwai wuri don mutum biyu?,,akwai wuri don mutum biju,,,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.i-can-pay-for-fuel,Zan iya biyan man fetur,,zan ija bijan man fetur,"man fetur = petrol, the word Hausa speakers use at the pump",,2,ha-agent-v1;src=Newman A Hausa-English Dictionary 2007 fetur;ipa=ha-g2p
+hitchhiking.thank-you-for-the-ride,Na gode don ɗaukar ni,,na ɡode don ɗaukar ni,reuses social-basics.thank-you's Na gode,,2,ha-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=ha-g2p
+taxi.please-turn-around,Don Allah juya,,don allah dʒuja,please turn round,"the imperative, which takes no pronoun and is said to a man or a woman, as in taxi.please-stop-here",2,"ha-agent-v1;src=Bargery juya 2 (turn round, changing one's direction);in-pack-frame=taxi.please-stop-here;answers-audit-v1;fix=UCLA Hausa online grammar Verb tense (the Imperative takes no subject pronoun: Tsaya! said to male or female -- neither Imperative nor Subjunctive in itself carries politeness);kai-ke-avoided;row-corrections-v3;ipa=ha-g2p"

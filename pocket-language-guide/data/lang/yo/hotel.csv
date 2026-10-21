@@ -1,68 +1,68 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,páàsípọ́ọ̀tù,,kpa˥a˩si˥kpɔ˥ɔ˩tu˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-words.room-key-card,káàdì kọ́kọ́rọ́ yàrá,,ka˥a˩di˩ kɔ˥kɔ˥rɔ˥ ja˩ra˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-words.check-in,ìwọlé,,i˩wɔle˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-words.check-out,ìjáde,,i˩dʒa˥de,,2,yo-agent-v1;ipa=yo-g2p
-hotel-words.luggage-storage,ìtọ́jú ẹrù,,i˩tɔ˥dʒu˥ ɛru˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.are-any-rooms-available,Ṣé yàrá wà?,,ʃe˥ ja˩ra˥ wa˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.there-are-two-of-us,Àwa méjì ni,,a˩wa me˥dʒi˩ ni,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.i-have-a-reservation,Mo ti ṣe ìfipamọ́ yàrá,,mo ti ʃe i˩fikpamɔ˥ ja˩ra˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.can-i-charge-my-phone,Ṣé mo lè gba iná fún fóònù mi?,,ʃe˥ mo le˩ ɡba ina˥ fũ˥ fo˥o˩nu˩ mi,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.i-would-like-a-non-smoking-room,Mo fẹ́ yàrá tí a kò fi mu sìgá,,mo fɛ˥ ja˩ra˥ ti˥ a ko˩ fi mu si˩ɡa˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.i-would-like-a-quiet-room,Mo fẹ́ yàrá tí ó dákẹ́,,mo fɛ˥ ja˩ra˥ ti˥ o˥ da˥kɛ˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.is-there-a-washing-machine,Ṣé ẹ̀rọ ìfọṣọ wà?,,ʃe˥ ɛ˩rɔ i˩fɔʃɔ wa˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.is-wi-fi-free,Ṣé Wi-Fi ọ̀fẹ́ ni?,,ʃe˥ wajfaj ɔ˩fɛ˥ ni,,2,yo-agent-v1;ipa=yo-g2p+loan
-hotel-basics.how-much-per-night,Èló ni fún òru kan?,,e˩lo˥ ni fũ˥ o˩ru kã,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.is-breakfast-included,Ṣé oúnjẹ àárọ̀ wà nínú owó náà?,,ʃe˥ oũ˥dʒɛ a˩a˥rɔ˩ wa˩ ni˥nu˥ owo˥ na˥a˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.may-i-see-the-room,Ṣé mo lè wo yàrá náà?,,ʃe˥ mo le˩ wo ja˩ra˥ na˥a˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.for-nights,Fún alẹ́ {},,fũ˥ alɛ˥ {},,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.two-beds,"Ẹ jọ̀wọ́, ibùsùn méjì",,"ɛ dʒɔ˩wɔ˥, ibu˩sũ˩ me˥dʒi˩",,2,yo-agent-v1;ipa=yo-g2p
-hotel-basics.is-there-air-conditioning,Ṣé amúlétutù wà?,,ʃe˥ amu˥le˥tutu˩ wa˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.can-i-check-out-later,Ṣé mo lè jáde nígbà tí ó yá?,,ʃe˥ mo le˩ dʒa˥de ni˥ɡba˩ ti˥ o˥ ja˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.what-time-does-breakfast-start,Wákàtí mélòó ni oúnjẹ àárọ̀ ń bẹ̀rẹ̀?,,wa˥ka˩ti˥ me˥lo˩o˥ ni oũ˥dʒɛ a˩a˥rɔ˩ n̩˥ bɛ˩rɛ˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.can-i-store-my-luggage,Ṣé mo lè fi ẹrù mi pamọ́?,,ʃe˥ mo le˩ fi ɛru˩ mi kpamɔ˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.no-housekeeping,Ẹ má ṣe wẹ̀ yàrá yìí,,ɛ ma˥ ʃe wɛ˩ ja˩ra˥ ji˩i˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.another-towel-please,"Ẹ jọ̀wọ́, aṣọ ìnú omi mìíràn",,"ɛ dʒɔ˩wɔ˥, aʃɔ i˩nu˥ omi mi˩i˥rã˩",,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.what-time-is-check-out,Wákàtí mélòó ni àkókò jíjáde?,,wa˥ka˩ti˥ me˥lo˩o˥ ni a˩ko˥ko˩ dʒi˥dʒa˥de,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.can-i-check-in-early,Ṣé mo lè wọlé kété?,,ʃe˥ mo le˩ wɔle˥ ke˥te˥,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.another-night,Ṣé mo lè dúró òru mìíràn?,,ʃe˥ mo le˩ du˥ro˥ o˩ru mi˩i˥rã˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.is-there-a-safe,Ṣé àpótí ìfipamọ́ sí wà?,,ʃe˥ a˩kpo˥ti˥ i˩fikpamɔ˥ si˥ wa˩,,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.another-blanket,"Ẹ jọ̀wọ́, ìbora mìíràn",,"ɛ dʒɔ˩wɔ˥, i˩bora mi˩i˥rã˩",,2,yo-agent-v1;ipa=yo-g2p
-hotel-requests.wake-up-call,"Ẹ jọ̀wọ́, ẹ jí mi ní {}",,"ɛ dʒɔ˩wɔ˥, ɛ dʒi˥ mi ni˥ {}",,2,yo-agent-v1;ipa=yo-g2p
-room-problems.there-is-a-problem-with-the-room,Ìṣòro kan wà pẹ̀lú yàrá náà,,i˩ʃo˩ro kã wa˩ kpɛ˩lu˥ ja˩ra˥ na˥a˩,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-air-conditioning-is-broken,Amúlétutù náà ti bàjẹ́,,amu˥le˥tutu˩ na˥a˩ ti ba˩dʒɛ˥,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.there-is-no-hot-water,Omi gbígbóná kò sí,,omi ɡbi˥ɡbo˥na˥ ko˩ si˥,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.can-i-change-rooms,Ṣé mo lè yí yàrá padà?,,ʃe˥ mo le˩ ji˥ ja˩ra˥ kpada˩,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-room-is-too-noisy,Yàrá náà ń pariwo jù,,ja˩ra˥ na˥a˩ n̩˥ kpariwo dʒu˩,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-key-does-not-work,Kọ́kọ́rọ́ náà kò ṣiṣẹ́,,kɔ˥kɔ˥rɔ˥ na˥a˩ ko˩ ʃiʃɛ˥,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-toilet-will-not-flush,Ìgbọ̀nsẹ̀ kò fọ omi,,i˩ɡbɔ̃˩sɛ˩ ko˩ fɔ omi,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-light-does-not-work,Iná kò tan,,ina˥ ko˩ tã,,2,yo-agent-v1;ipa=yo-g2p
-room-problems.please-send-someone,"Ẹ jọ̀wọ́, ẹ rán ẹnìkan wá láti tún un ṣe",,"ɛ dʒɔ˩wɔ˥, ɛ rã˥ ɛni˩kã wa˥ la˥ti tũ˥ ũ ʃe",,2,yo-agent-v1;ipa=yo-g2p
-room-problems.the-heating-does-not-work,Ẹ̀rọ ìgbóná kò ṣiṣẹ́,,ɛ˩rɔ i˩ɡbo˥na˥ ko˩ ʃiʃɛ˥,,2,yo-agent-v1;ipa=yo-g2p
-laundry.please-wash-these-clothes,"Ẹ jọ̀wọ́, fọ aṣọ yìí",,"ɛ dʒɔ˩wɔ˥, fɔ aʃɔ ji˩i˥",,2,yo-agent-v1;ipa=yo-g2p
-laundry.where-is-a-laundromat,Níbo ni ibi ìfọṣọ wà?,,ni˥bo ni ibi i˩fɔʃɔ wa˩,,2,yo-agent-v1;ipa=yo-g2p
-laundry.when-will-it-be-ready,Ìgbà wo ni yóò ti ṣe?,,i˩ɡba˩ wo ni jo˥o˩ ti ʃe,,2,yo-agent-v1;ipa=yo-g2p
-laundry.how-much-per-kilo,Èló ni fún kìlógíráàmù kan?,,e˩lo˥ ni fũ˥ ki˩lo˥ɡi˥ra˥a˩mu˩ kã,,2,yo-agent-v1;ipa=yo-g2p
-laundry.can-it-be-ready-today,Ṣé ó lè ṣe tán lónìí?,,ʃe˥ o˥ le˩ ʃe tã˥ lo˥ni˩i˥,,2,yo-agent-v1;ipa=yo-g2p
-laundry.please-do-not-use-bleach,"Ẹ jọ̀wọ́, má ṣe lo bilíṣì",,"ɛ dʒɔ˩wɔ˥, ma˥ ʃe lo bili˥ʃi˩",,2,yo-agent-v1;ipa=yo-g2p
-laundry.laundromat,ibi ìfọṣọ,,ibi i˩fɔʃɔ,,2,yo-agent-v1;ipa=yo-g2p
-laundry.please-iron-this,"Ẹ jọ̀wọ́, fọ́n aṣọ yìí",,"ɛ dʒɔ˩wɔ˥, fɔ̃˥ aʃɔ ji˩i˥",,2,yo-agent-v1;ipa=yo-g2p
-laundry.detergent,ọṣẹ ìfọṣọ,,ɔʃɛ i˩fɔʃɔ,,2,yo-agent-v1;ipa=yo-g2p
-laundry.dry-cleaning,fífọ gbígbẹ,,fi˥fɔ ɡbi˥ɡbɛ,,2,yo-agent-v1;ipa=yo-g2p
-laundry.dryer,ẹ̀rọ gbígbẹ aṣọ,,ɛ˩rɔ ɡbi˥ɡbɛ aʃɔ,,2,yo-agent-v1;ipa=yo-g2p
-laundry.coin-operated,fífi owó fàdákà ṣiṣẹ́,,fi˥fi owo˥ fa˩da˥ka˩ ʃiʃɛ˥,,2,yo-agent-v1;ipa=yo-g2p
-massage-spa.please-stop,"Ẹ dúró, ẹ má ṣe tẹ̀síwájú",,"ɛ du˥ro˥, ɛ ma˥ ʃe tɛ˩si˥wa˥dʒu˥","stop, do not continue -- two clauses for the Mandarin row's reason and more sharply here, because Yoruba dúró covers stop and wait alike (this pack uses it for both common-signs.stopped-stop and communication.please-wait-a-moment), so the terminality has to be carried by tẹ̀síwájú rather than by the verb",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;src=jolan-oro-ise-yoruba;ipa=yo-g2p
-massage-spa.please-pause,Ẹ dúró fún ìṣẹ́jú kan,,ɛ du˥ro˥ fũ˥ i˩ʃɛ˥dʒu˥ kã,"stop for a minute -- the duration is what says temporarily, since the verb cannot; built from this pack's own board-answers.please-wait (ìṣẹ́jú kan) and border-customs.i-am-staying-for-days (dúró fún)",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.please-avoid-this-area,"Ẹ jọ̀wọ́, má ṣe fọwọ́ kàn ibi yìí",,"ɛ dʒɔ˩wɔ˥, ma˥ ʃe fɔwɔ˥ kã˩ ibi ji˩i˥","please do not touch this spot -- fọwọ́ kàn, to touch with the hand, from this pack's common-signs.do-not-touch, in the negative-imperative frame of its laundry.please-do-not-use-bleach. Touch rather than press: no pressure-specific verb could be sourced with tone marks",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.stronger-pressure,Ẹ fi agbára díẹ̀ kún un,,ɛ fi aɡba˥ra di˥ɛ˩ kũ˥ ũ,"please add a little force to it -- the same reading as the Mandarin 用力一点, built from this pack's utility-templates.please-do-not-add (fi {} kún un) and its agbára. Six words against the two of Ẹ rọra, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.more-gently,Ẹ rọra,,ɛ rɔra,"gently -- rọra is rọ̀ (to be soft) plus ara (body), so it is not purely a speed word, but it does also carry carefully and slowly and Yoruba gives no pressure-specific comparative pair of the kind German, Finnish and Russian have. The weakest row in this set; a fluent speaker should read it first",2,yo-massage-spa-v1;spa-board-v1;src=wiktionary-rora;ipa=yo-g2p
-massage-spa.that-pressure-is-good,"Ó dára bẹ́ẹ̀, ẹ máa tẹ̀síwájú",,"o˥ da˥ra bɛ˥ɛ˩, ɛ ma˥a tɛ˩si˥wa˥dʒu˥","it is good like that, carry on -- a confirmation with a keep-it-there clause, not praise; Ó dára from this pack's board-answers.stay-here and bẹ́ẹ̀ from its slang.seriously",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;src=jolan-oro-ise-yoruba;ipa=yo-g2p
-massage-spa.focus-on-shoulders,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí èjìká",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ e˩dʒi˩ka˥","please spend a lot of time on the shoulders -- the concept's own reading, since Yoruba has no single settled noun for massage as a bookable service: Glosbe gives the coinages ìpara oníwòsàn and ìpara ìtunilára, and Nigerian spas advertise in English",2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;in-pack-frame;ipa=yo-g2p
-massage-spa.focus-on-back,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí ẹ̀yìn",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ ɛ˩jĩ˩",,2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;in-pack-neighbour;ipa=yo-g2p
-massage-spa.focus-on-neck,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí ọrùn",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ ɔrũ˩","no single Yoruba term grouping the neck with the shoulders could be sourced, so the two rows stand apart on their own words",2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;ipa=yo-g2p
-massage-spa.focus-on-feet,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí àtẹ́lẹ̀sẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ a˩tɛ˥lɛ˩sɛ˩","àtẹ́lẹ̀sẹ̀, the sole, as this pack's body-parts.foot already has it, because ẹsẹ̀ alone is the whole leg",2,yo-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=yo-g2p
-massage-spa.reply-i-will-avoid-that-area,"Ó dára, mi ò fọwọ́ kàn ibi yìí",,"o˥ da˥ra, mi o˩ fɔwɔ˥ kã˩ ibi ji˩i˥","all right, I do not touch this spot -- Yoruba has no gender anywhere in the grammar, so no reply in this set needed steering. Written with the unmarked verb rather than the negative future mi ò ní, which would read as I do not have a hand next to fọwọ́",2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.reply-which-area-exactly,Ibi wo gan-an?,,ibi wo ɡãã,which spot exactly -- wo from this pack's transit-rides.what-is-the-next-stop and gan-an from its question-words.very,2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.reply-cannot-avoid-this-treatment,Ìtọ́jú yìí kò ṣeé ṣe láì fọwọ́ kàn ibi yìí,,i˩tɔ˥dʒu˥ ji˩i˥ ko˩ ʃee˥ ʃe la˥i˩ fɔwɔ˥ kã˩ ibi ji˩i˥,this treatment cannot be done without touching this spot -- kò ṣeé ṣe from this pack's board-answers.not-possible and láì from its dietary-needs.no-meat,2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.reply-does-it-hurt-there,Ṣé ibi yìí ń dùn yín?,,ʃe˥ ibi ji˩i˥ n̩˥ dũ˩ jĩ˥,"does this spot hurt -- ń dùn from this pack's emergency-medical.it-hurts-here, and the formal yín its board-answers.what-is-your-name already uses",2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
-massage-spa.reply-ask-supervisor,"Mi ò mọ̀, màá béèrè lọ́wọ́ ọ̀gá",,"mi o˩ mɔ˩, ma˩a˥ be˥e˩re˩ lɔ˥wɔ˥ ɔ˩ɡa˥","I do not know, I will ask the boss -- ọ̀gá is used of a superior of any sex and is the source of Nigerian Pidgin oga; Mi ò mọ̀ is this pack's social-basics.i-do-not-know verbatim",2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;src=yoruba-oga-pidgin-etymology;ipa=yo-g2p
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+hotel-words.passport,páàsípọ́ọ̀tù,,kpa˥a˩si˥kpɔ˥ɔ˩tu˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-words.room-key-card,káàdì kọ́kọ́rọ́ yàrá,,ka˥a˩di˩ kɔ˥kɔ˥rɔ˥ ja˩ra˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-words.check-in,ìwọlé,,i˩wɔle˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-words.check-out,ìjáde,,i˩dʒa˥de,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-words.luggage-storage,ìtọ́jú ẹrù,,i˩tɔ˥dʒu˥ ɛru˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.are-any-rooms-available,Ṣé yàrá wà?,,ʃe˥ ja˩ra˥ wa˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.there-are-two-of-us,Àwa méjì ni,,a˩wa me˥dʒi˩ ni,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.i-have-a-reservation,Mo ti ṣe ìfipamọ́ yàrá,,mo ti ʃe i˩fikpamɔ˥ ja˩ra˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.can-i-charge-my-phone,Ṣé mo lè gba iná fún fóònù mi?,,ʃe˥ mo le˩ ɡba ina˥ fũ˥ fo˥o˩nu˩ mi,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.i-would-like-a-non-smoking-room,Mo fẹ́ yàrá tí a kò fi mu sìgá,,mo fɛ˥ ja˩ra˥ ti˥ a ko˩ fi mu si˩ɡa˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.i-would-like-a-quiet-room,Mo fẹ́ yàrá tí ó dákẹ́,,mo fɛ˥ ja˩ra˥ ti˥ o˥ da˥kɛ˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.is-there-a-washing-machine,Ṣé ẹ̀rọ ìfọṣọ wà?,,ʃe˥ ɛ˩rɔ i˩fɔʃɔ wa˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.is-wi-fi-free,Ṣé Wi-Fi ọ̀fẹ́ ni?,,ʃe˥ wajfaj ɔ˩fɛ˥ ni,,,2,yo-agent-v1;ipa=yo-g2p+loan
+hotel-basics.how-much-per-night,Èló ni fún òru kan?,,e˩lo˥ ni fũ˥ o˩ru kã,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.is-breakfast-included,Ṣé oúnjẹ àárọ̀ wà nínú owó náà?,,ʃe˥ oũ˥dʒɛ a˩a˥rɔ˩ wa˩ ni˥nu˥ owo˥ na˥a˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.may-i-see-the-room,Ṣé mo lè wo yàrá náà?,,ʃe˥ mo le˩ wo ja˩ra˥ na˥a˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.for-nights,Fún alẹ́ {},,fũ˥ alɛ˥ {},,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.two-beds,"Ẹ jọ̀wọ́, ibùsùn méjì",,"ɛ dʒɔ˩wɔ˥, ibu˩sũ˩ me˥dʒi˩",,,2,yo-agent-v1;ipa=yo-g2p
+hotel-basics.is-there-air-conditioning,Ṣé amúlétutù wà?,,ʃe˥ amu˥le˥tutu˩ wa˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.can-i-check-out-later,Ṣé mo lè jáde nígbà tí ó yá?,,ʃe˥ mo le˩ dʒa˥de ni˥ɡba˩ ti˥ o˥ ja˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.what-time-does-breakfast-start,Wákàtí mélòó ni oúnjẹ àárọ̀ ń bẹ̀rẹ̀?,,wa˥ka˩ti˥ me˥lo˩o˥ ni oũ˥dʒɛ a˩a˥rɔ˩ n̩˥ bɛ˩rɛ˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.can-i-store-my-luggage,Ṣé mo lè fi ẹrù mi pamọ́?,,ʃe˥ mo le˩ fi ɛru˩ mi kpamɔ˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.no-housekeeping,Ẹ má ṣe wẹ̀ yàrá yìí,,ɛ ma˥ ʃe wɛ˩ ja˩ra˥ ji˩i˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.another-towel-please,"Ẹ jọ̀wọ́, aṣọ ìnú omi mìíràn",,"ɛ dʒɔ˩wɔ˥, aʃɔ i˩nu˥ omi mi˩i˥rã˩",,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.what-time-is-check-out,Wákàtí mélòó ni àkókò jíjáde?,,wa˥ka˩ti˥ me˥lo˩o˥ ni a˩ko˥ko˩ dʒi˥dʒa˥de,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.can-i-check-in-early,Ṣé mo lè wọlé kété?,,ʃe˥ mo le˩ wɔle˥ ke˥te˥,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.another-night,Ṣé mo lè dúró òru mìíràn?,,ʃe˥ mo le˩ du˥ro˥ o˩ru mi˩i˥rã˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.is-there-a-safe,Ṣé àpótí ìfipamọ́ sí wà?,,ʃe˥ a˩kpo˥ti˥ i˩fikpamɔ˥ si˥ wa˩,,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.another-blanket,"Ẹ jọ̀wọ́, ìbora mìíràn",,"ɛ dʒɔ˩wɔ˥, i˩bora mi˩i˥rã˩",,,2,yo-agent-v1;ipa=yo-g2p
+hotel-requests.wake-up-call,"Ẹ jọ̀wọ́, ẹ jí mi ní {}",,"ɛ dʒɔ˩wɔ˥, ɛ dʒi˥ mi ni˥ {}",,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.there-is-a-problem-with-the-room,Ìṣòro kan wà pẹ̀lú yàrá náà,,i˩ʃo˩ro kã wa˩ kpɛ˩lu˥ ja˩ra˥ na˥a˩,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-air-conditioning-is-broken,Amúlétutù náà ti bàjẹ́,,amu˥le˥tutu˩ na˥a˩ ti ba˩dʒɛ˥,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.there-is-no-hot-water,Omi gbígbóná kò sí,,omi ɡbi˥ɡbo˥na˥ ko˩ si˥,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.can-i-change-rooms,Ṣé mo lè yí yàrá padà?,,ʃe˥ mo le˩ ji˥ ja˩ra˥ kpada˩,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-room-is-too-noisy,Yàrá náà ń pariwo jù,,ja˩ra˥ na˥a˩ n̩˥ kpariwo dʒu˩,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-key-does-not-work,Kọ́kọ́rọ́ náà kò ṣiṣẹ́,,kɔ˥kɔ˥rɔ˥ na˥a˩ ko˩ ʃiʃɛ˥,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-toilet-will-not-flush,Ìgbọ̀nsẹ̀ kò fọ omi,,i˩ɡbɔ̃˩sɛ˩ ko˩ fɔ omi,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-light-does-not-work,Iná kò tan,,ina˥ ko˩ tã,,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.please-send-someone,"Ẹ jọ̀wọ́, ẹ rán ẹnìkan wá láti tún un ṣe",,"ɛ dʒɔ˩wɔ˥, ɛ rã˥ ɛni˩kã wa˥ la˥ti tũ˥ ũ ʃe",,,2,yo-agent-v1;ipa=yo-g2p
+room-problems.the-heating-does-not-work,Ẹ̀rọ ìgbóná kò ṣiṣẹ́,,ɛ˩rɔ i˩ɡbo˥na˥ ko˩ ʃiʃɛ˥,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.please-wash-these-clothes,"Ẹ jọ̀wọ́, fọ aṣọ yìí",,"ɛ dʒɔ˩wɔ˥, fɔ aʃɔ ji˩i˥",,,2,yo-agent-v1;ipa=yo-g2p
+laundry.where-is-a-laundromat,Níbo ni ibi ìfọṣọ wà?,,ni˥bo ni ibi i˩fɔʃɔ wa˩,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.when-will-it-be-ready,Ìgbà wo ni yóò ti ṣe?,,i˩ɡba˩ wo ni jo˥o˩ ti ʃe,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.how-much-per-kilo,Èló ni fún kìlógíráàmù kan?,,e˩lo˥ ni fũ˥ ki˩lo˥ɡi˥ra˥a˩mu˩ kã,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.can-it-be-ready-today,Ṣé ó lè ṣe tán lónìí?,,ʃe˥ o˥ le˩ ʃe tã˥ lo˥ni˩i˥,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.please-do-not-use-bleach,"Ẹ jọ̀wọ́, má ṣe lo bilíṣì",,"ɛ dʒɔ˩wɔ˥, ma˥ ʃe lo bili˥ʃi˩",,,2,yo-agent-v1;ipa=yo-g2p
+laundry.laundromat,ibi ìfọṣọ,,ibi i˩fɔʃɔ,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.please-iron-this,"Ẹ jọ̀wọ́, fọ́n aṣọ yìí",,"ɛ dʒɔ˩wɔ˥, fɔ̃˥ aʃɔ ji˩i˥",,,2,yo-agent-v1;ipa=yo-g2p
+laundry.detergent,ọṣẹ ìfọṣọ,,ɔʃɛ i˩fɔʃɔ,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.dry-cleaning,fífọ gbígbẹ,,fi˥fɔ ɡbi˥ɡbɛ,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.dryer,ẹ̀rọ gbígbẹ aṣọ,,ɛ˩rɔ ɡbi˥ɡbɛ aʃɔ,,,2,yo-agent-v1;ipa=yo-g2p
+laundry.coin-operated,fífi owó fàdákà ṣiṣẹ́,,fi˥fi owo˥ fa˩da˥ka˩ ʃiʃɛ˥,,,2,yo-agent-v1;ipa=yo-g2p
+massage-spa.please-stop,"Ẹ dúró, ẹ má ṣe tẹ̀síwájú",,"ɛ du˥ro˥, ɛ ma˥ ʃe tɛ˩si˥wa˥dʒu˥","stop, do not continue","two clauses for the Mandarin row's reason and more sharply here, because Yoruba dúró covers stop and wait alike (this pack uses it for both common-signs.stopped-stop and communication.please-wait-a-moment), so the terminality has to be carried by tẹ̀síwájú rather than by the verb",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;src=jolan-oro-ise-yoruba;ipa=yo-g2p
+massage-spa.please-pause,Ẹ dúró fún ìṣẹ́jú kan,,ɛ du˥ro˥ fũ˥ i˩ʃɛ˥dʒu˥ kã,stop for a minute,"the duration is what says temporarily, since the verb cannot; built from this pack's own board-answers.please-wait (ìṣẹ́jú kan) and border-customs.i-am-staying-for-days (dúró fún)",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.please-avoid-this-area,"Ẹ jọ̀wọ́, má ṣe fọwọ́ kàn ibi yìí",,"ɛ dʒɔ˩wɔ˥, ma˥ ʃe fɔwɔ˥ kã˩ ibi ji˩i˥",please do not touch this spot,"fọwọ́ kàn, to touch with the hand, from this pack's common-signs.do-not-touch, in the negative-imperative frame of its laundry.please-do-not-use-bleach. Touch rather than press: no pressure-specific verb could be sourced with tone marks",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.stronger-pressure,Ẹ fi agbára díẹ̀ kún un,,ɛ fi aɡba˥ra di˥ɛ˩ kũ˥ ũ,please add a little force to it,"the same reading as the Mandarin 用力一点, built from this pack's utility-templates.please-do-not-add (fi {} kún un) and its agbára. Six words against the two of Ẹ rọra, because neither button carries a labelKey on the spa board and the owner's own wording is what labels them, side by side",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.more-gently,Ẹ rọra,,ɛ rɔra,gently,"rọra is rọ̀ (to be soft) plus ara (body), so it is not purely a speed word, but it does also carry carefully and slowly and Yoruba gives no pressure-specific comparative pair of the kind German, Finnish and Russian have. The weakest row in this set; a fluent speaker should read it first",2,yo-massage-spa-v1;spa-board-v1;src=wiktionary-rora;ipa=yo-g2p
+massage-spa.that-pressure-is-good,"Ó dára bẹ́ẹ̀, ẹ máa tẹ̀síwájú",,"o˥ da˥ra bɛ˥ɛ˩, ɛ ma˥a tɛ˩si˥wa˥dʒu˥","it is good like that, carry on","a confirmation with a keep-it-there clause, not praise; Ó dára from this pack's board-answers.stay-here and bẹ́ẹ̀ from its slang.seriously",2,yo-massage-spa-v1;spa-board-v1;in-pack-frame;src=jolan-oro-ise-yoruba;ipa=yo-g2p
+massage-spa.focus-on-shoulders,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí èjìká",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ e˩dʒi˩ka˥",please spend a lot of time on the shoulders,"the concept's own reading, since Yoruba has no single settled noun for massage as a bookable service: Glosbe gives the coinages ìpara oníwòsàn and ìpara ìtunilára, and Nigerian spas advertise in English",2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;in-pack-frame;ipa=yo-g2p
+massage-spa.focus-on-back,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí ẹ̀yìn",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ ɛ˩jĩ˩",,,2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;in-pack-neighbour;ipa=yo-g2p
+massage-spa.focus-on-neck,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí ọrùn",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ ɔrũ˩","no single Yoruba term grouping the neck with the shoulders could be sourced, so the two rows stand apart on their own words",,2,yo-massage-spa-v1;spa-board-v1;src=learnyorubafree-awon-eya-ara;ipa=yo-g2p
+massage-spa.focus-on-feet,"Ẹ jọ̀wọ́, ẹ lo àkókò púpọ̀ lórí àtẹ́lẹ̀sẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ lo a˩ko˥ko˩ kpu˥kpɔ˩ lo˥ri˥ a˩tɛ˥lɛ˩sɛ˩","àtẹ́lẹ̀sẹ̀, the sole, as this pack's body-parts.foot already has it, because ẹsẹ̀ alone is the whole leg",,2,yo-massage-spa-v1;spa-board-v1;in-pack-neighbour;ipa=yo-g2p
+massage-spa.reply-i-will-avoid-that-area,"Ó dára, mi ò fọwọ́ kàn ibi yìí",,"o˥ da˥ra, mi o˩ fɔwɔ˥ kã˩ ibi ji˩i˥","all right, I do not touch this spot","Yoruba has no gender anywhere in the grammar, so no reply in this set needed steering. Written with the unmarked verb rather than the negative future mi ò ní, which would read as I do not have a hand next to fọwọ́",2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.reply-which-area-exactly,Ibi wo gan-an?,,ibi wo ɡãã,which spot exactly,wo from this pack's transit-rides.what-is-the-next-stop and gan-an from its question-words.very,2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.reply-cannot-avoid-this-treatment,Ìtọ́jú yìí kò ṣeé ṣe láì fọwọ́ kàn ibi yìí,,i˩tɔ˥dʒu˥ ji˩i˥ ko˩ ʃee˥ ʃe la˥i˩ fɔwɔ˥ kã˩ ibi ji˩i˥,this treatment cannot be done without touching this spot,kò ṣeé ṣe from this pack's board-answers.not-possible and láì from its dietary-needs.no-meat,2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.reply-does-it-hurt-there,Ṣé ibi yìí ń dùn yín?,,ʃe˥ ibi ji˩i˥ n̩˥ dũ˩ jĩ˥,does this spot hurt,"ń dùn from this pack's emergency-medical.it-hurts-here, and the formal yín its board-answers.what-is-your-name already uses",2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;ipa=yo-g2p
+massage-spa.reply-ask-supervisor,"Mi ò mọ̀, màá béèrè lọ́wọ́ ọ̀gá",,"mi o˩ mɔ˩, ma˩a˥ be˥e˩re˩ lɔ˥wɔ˥ ɔ˩ɡa˥","I do not know, I will ask the boss",ọ̀gá is used of a superior of any sex and is the source of Nigerian Pidgin oga; Mi ò mọ̀ is this pack's social-basics.i-do-not-know verbatim,2,yo-massage-spa-v1;spa-reply-v1;in-pack-frame;src=yoruba-oga-pidgin-etymology;ipa=yo-g2p

@@ -1,148 +1,148 @@
-concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-social-basics.hello,السلام علیکم,ہیلو,as-salām alaikum,alsəlˈaːm alˈiːkəm,the universal Muslim greeting; ہیلو is the urban informal,2,ur-agent-v1;ipa=espeak
-social-basics.hello-polite,السلام علیکم ورحمۃ اللہ,آداب,as-salām alaikum wa rahmatullāh,alsəlˈaːm alˈiːkəm ʋˈʌɾəhˌəmət ˈallaːh,آداب is the secular/Lucknow-tradition polite greeting,2,ur-agent-v1;ipa=espeak
-social-basics.good-morning,صبح بخیر,السلام علیکم,subah bakhair,sˌəbˈah baxˈɛːɾ,السلام علیکم serves at any hour,2,ur-agent-v1;ipa=espeak
-social-basics.good-evening,شام بخیر,السلام علیکم,shām bakhair,ʃˈaːm baxˈɛːɾ,,2,ur-agent-v1;ipa=espeak
-social-basics.goodbye,خدا حافظ,اللہ حافظ,khudā hāfiz,xˈʊdaː hˈaːfɪz,"اللہ حافظ is the more religiously marked variant, now commoner in Pakistan",2,ur-agent-v1;ipa=espeak
-social-basics.thank-you,شکریہ,,shukriya,ʃʊkɾˈiːa,,2,ur-agent-v1;ipa=espeak
-social-basics.you-are-welcome,کوئی بات نہیں,,ko’ī bāt nahīñ,kˈoːi bˈaːt nahˈĩː,it is nothing,2,ur-agent-v1;ipa=espeak
-social-basics.excuse-me-sorry,سنیے,معاف کیجیے,suniye,sˈʊnjeː,to get attention,2,ur-agent-v1;ipa=espeak
-social-basics.sorry,معاف کیجیے,سوری,māf kījiye,mˈaːf kˈeːɟjeː,,2,ur-agent-v1;ipa=espeak
-social-basics.no-problem,کوئی مسئلہ نہیں,,ko’ī mas’ala nahīñ,kˈoːi mˈʌsəla nahˈĩː,,2,ur-agent-v1;ipa=espeak
-social-basics.i-do-not-know,مجھے نہیں معلوم,مجھے پتا نہیں,mujhe nahīñ mālūm,mˌʊɟʰeː nahˈĩː mˈaːluːm,,2,ur-agent-v1;ipa=espeak
-social-basics.good-night,شب بخیر,,shab bakhair,ʃˈʌb baxˈɛːɾ,,2,ur-agent-v1;ipa=espeak
-social-basics.okay-fine-i-am-okay,ٹھیک ہے,,ṭhīk hai,ʈʰˈiːk hɛ,,2,ur-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,مجھے {target} نہیں آتی,,mujhe {target} nahīñ ātī,mˌʊɟʰeː {target} nahˈĩː ˈaːti,,2,ur-agent-v1;ipa=espeak
-communication.i-speak-only-a-little-of-this,مجھے {target} تھوڑی سی آتی ہے,,mujhe {target} thoṛī sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽi sˈiː ˈaːti hɛ,,2,ur-agent-v1;ipa=espeak
-communication.do-you-speak-english,کیا آپ کو {source} آتی ہے؟,,kyā āp ko {source} ātī hai?,kjˈaː ˌaːp kˈoː {source} ˈaːti hɛ,,2,ur-agent-v1;ipa=espeak
-communication.please-speak-more-slowly,ذرا آہستہ بولیے,,zarā āhista boliye,zˈʌɾaː aːhˈɪsta bˈoːljeː,,2,ur-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,مجھے سمجھ نہیں آ رہا,,mujhe samajh nahīñ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhaː,"understanding is not coming to me -- the speaker is the dative mujhe, which the verb never agrees with, so a woman says the same; رہا is the impersonal default, and آ رہی, agreeing with samajh (fem.), is not a woman's form",2,"ur-agent-v1;fix=Glassman Spoken Urdu (1976) Lesson 8 p. 68 ānā with kO agrees with the thing known;fix=Platts سمجھ (p. 675, s.f., samajh ānā kisī-ko);row-corrections-v1;ipa=espeak"
-communication.i-cannot-read-understand,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,2,ur-agent-v1;ipa=espeak
-communication.please-say-it-again,پھر سے کہیے,,phir se kahiye,pʰˈɪɾ seː kˈʌhjeː,,2,ur-agent-v1;ipa=espeak
-communication.please-write-it-down,لکھ دیجیے,,likh dījiye,lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-communication.please-wait-a-moment,ذرا رکیے,,zarā rukiye,zˈʌɾaː ɾˈʌkjeː,,2,ur-agent-v1;ipa=espeak
-communication.can-you-help-me,میری مدد کیجیے,,merī madad kījiye,mˈeːɾi mˈʌdəd kˈeːɟjeː,,2,ur-agent-v1;ipa=espeak
-communication.please-show-me-the-text,وہ {target} میں لکھا ہوا دکھائیے,,wah {target} meñ likhā hu’ā dikhā’iye,ʋoː {target} mˈẽ lˈɪkʰaː hˈuːaː dəkʰˈaːjeː,,2,ur-agent-v1;ipa=espeak
-communication.i-cannot-make-out-what-you-are-saying,آپ کی بات سمجھ نہیں آ رہی,,āp kī bāt samajh nahīñ ā rahī,ˌaːp ki bˈaːt sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhi,,2,ur-agent-v1;ipa=espeak
-communication.i-do-not-understand,مجھے سمجھ نہیں آیا,,mujhe samajh nahīñ āyā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaːjaː,,2,ur-agent-v1;ipa=espeak
-communication.i-cannot-read-it,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,2,ur-agent-v1;ipa=espeak
-communication.please-write-it-in-roman-letters,یہ رومن حروف میں لکھ دیجیے,,yah roman hurūf meñ likh dījiye,jeːh ɾˈoːmən hʊɾˈuːf mˈẽ lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-quick-responses.please-go-ahead,کہیے,,kahiye,kˈʌhjeː,,2,ur-agent-v1;ipa=espeak
-quick-responses.yes-right,جی ہاں,ہاں,jī hāñ,ɟˈiː hˈãː,,2,ur-agent-v1;ipa=espeak
-quick-responses.no-not,نہیں,جی نہیں,nahīñ,nahˈĩː,,2,ur-agent-v1;ipa=espeak
-quick-responses.okay-can,ٹھیک ہے,,ṭhīk hai,ʈʰˈiːk hɛ,,2,ur-agent-v1;ipa=espeak
-quick-responses.cannot-not-allowed,منع ہے,,manā hai,mˈʌnaː hɛ,,2,ur-agent-v1;ipa=espeak
-quick-responses.works-okay,چلے گا,,chale gā,cˈʌleː ɡaː,,2,ur-agent-v1;ipa=espeak
-quick-responses.does-not-work-no,نہیں چلے گا,,nahīñ chale gā,nahˈĩː cˈʌleː ɡaː,,2,ur-agent-v1;ipa=espeak
-quick-responses.can-possible,ہو سکتا ہے,,ho saktā hai,hˈoː sˈʌktˌaː hɛ,,2,ur-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,نہیں ہو سکتا,,nahīñ ho saktā,nahˈĩː hˈoː sˈʌktˌaː,,2,ur-agent-v1;ipa=espeak
-quick-responses.okay-fine,بالکل,,bilkul,bˈɪlkˌʊl,absolutely,2,ur-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,نہیں ہو گا,,nahīñ ho gā,nahˈĩː hˈoː ɡaː,,2,ur-agent-v1;ipa=espeak
-phone-translation.i-am-using-phone-translation,فون سے ترجمہ ہو رہا ہے,,fon se tarjuma ho rahā hai,fˈoːn seː tˈaɾɟˌʊma hˈoː ɾˈʌhaː hɛ,,2,ur-agent-v1;ipa=espeak
-phone-translation.please-speak-toward-the-phone,فون کی طرف بولیے,,fon kī taraf boliye,fˈoːn ki taɾˈaf bˈoːljeː,,2,ur-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,جگہ کا نام {target} میں لکھ دیجیے,,jagah kā nām {target} meñ likh dījiye,ɟˈʌɡˌa kaː nˈaːm {target} mˈẽ lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,ایک ایک جملہ بولیے,,ek ek jumla boliye,ˈeːk ˈeːk ɟˈʊmla bˈoːljeː,,2,ur-agent-v1;ipa=espeak
-phone-translation.please-type-it-and-show-me,ٹائپ کر کے دکھائیے,,ṭā’ip kar ke dikhā’iye,ʈˈaɪp kaɾ keː dəkʰˈaːjeː,,2,ur-agent-v1;ipa=espeak
-phone-translation.please-look-at-the-screen,اسکرین دیکھیے,,iskrīn dekhiye,ˌasəkɾˈiːn dˈeːkʰjeː,"Urdu writes an initial s-cluster with a prosthetic alef -- اسکرین, اسٹیشن, اسکول",2,ur-agent-v1;ipa=espeak
-phone-text-power.please-type-it-for-me,میرے لیے ٹائپ کر دیجیے,,mere liye ṭā’ip kar dījiye,mˈeːɾeː lˈiːeː ʈˈaɪp kaɾ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-phone-text-power.please-use-simple-words,آسان الفاظ میں بولیے,,āsān alfāz meñ boliye,aːsˈaːn ʊlfˈaːz mˈẽ bˈoːljeː,,2,ur-agent-v1;ipa=espeak
-phone-text-power.my-phone-battery-is-low,میرے فون کی بیٹری کم ہے,,mere fon kī baiṭrī kam hai,mˈeːɾeː fˈoːn ki bˈeːʈɾˌiː kˈʌm hɛ,,2,ur-agent-v1;ipa=espeak
-phone-text-power.do-you-have-a-power-bank,کیا پاور بینک ہے؟,,kyā pāwar baink hai?,kjˈaː pˈaːʋəɾ bˈeːnk hɛ,,2,ur-agent-v1;ipa=espeak
-phone-text-power.the-translation-may-be-inaccurate,ترجمے میں غلطی ہو سکتی ہے,,tarjume meñ ghaltī ho saktī hai,tˈaɾɟˌʊmeː mˈẽ ɣˈʌltˌiː hˈoː sˈʌktˌiː hɛ,,2,ur-agent-v1;ipa=espeak
-phone-text-power.please-confirm,ذرا تصدیق کر لیجیے,,zarā tasdīq kar lījiye,zˈʌɾaː tˌəsdˈiːq kaɾ lˈiːɟiˌeː,,2,ur-agent-v1;ipa=espeak
-phone-text-power.may-i-charge-my-phone-here,کیا یہاں فون چارج کر لوں؟,,kyā yahāñ fon chārj kar lūñ?,kjˈaː jˈʌhãː fˈoːn cˈaːɾəɟ kaɾ lˈõː,,2,ur-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,مجھے ٹورسٹ سم چاہیے,,mujhe ṭūrisṭ sim chāhiye,mˌʊɟʰeː ʈˈoːɾˌɪsʈ sˈʌm cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
-sim-data.may-i-use-your-wifi,کیا آپ کا وائی فائی استعمال کر لوں؟,,kyā āp kā wā’ī fā’ī istemāl kar lūñ?,kjˈaː ˌaːp kaː ʋˈaːi fˈaːi ˌɪsteːmˈaːl kaɾ lˈõː,,2,ur-agent-v1;ipa=espeak
-sim-data.how-much-data-is-included,کتنا ڈیٹا ملے گا؟,,kitnā ḍeṭā mile gā?,kˈɪtnaː ɖˈeːʈaː mˈɪleː ɡaː,,2,ur-agent-v1;ipa=espeak
-sim-data.do-you-need-my-passport,کیا پاسپورٹ چاہیے؟,,kyā pāsporṭ chāhiye?,kjˈaː pˌaːspˈoːɾʈ cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,کتنے دن چلے گا؟,,kitne din chale gā?,kˈɪtneː dˈɪn cˈʌleː ɡaː,,2,ur-agent-v1;ipa=espeak
-sim-data.please-activate-it,اسے چالو کر دیجیے,,ise chālū kar dījiye,ˌɪseː cˈaːloː kaɾ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,کیا ای سم ہے؟,,kyā ī sim hai?,kjˈaː ˈiː sˈʌm hɛ,,2,ur-agent-v1;ipa=espeak
-sim-data.my-data-is-not-working,میرا ڈیٹا نہیں چل رہا,,merā ḍeṭā nahīñ chal rahā,mˈeːɾaː ɖˈeːʈaː nahˈĩː cˈʌl ɾˈʌhaː,,2,ur-agent-v1;ipa=espeak
-sim-data.does-it-need-registration,کیا رجسٹریشن ضروری ہے؟,,kyā rajisṭreshan zarūrī hai?,kjˈaː ɾˌəɟəsʈəɾˈiːʃən zaɾˈuːɾi hɛ,Pakistan requires biometric registration for every SIM,2,ur-agent-v1;ipa=espeak
-sim-data.i-have-no-signal,سگنل نہیں آ رہا,,signal nahīñ ā rahā,sˈʌɡənˌəl nahˈĩː ˈaː ɾˈʌhaː,,2,ur-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,وائی فائی کا پاس ورڈ لکھ دیجیے,,wā’ī fā’ī kā pās warḍ likh dījiye,ʋˈaːi fˈaːi kaː pˈaːs ʋˈʌɾɖ lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-sim-data.sim-card,سم کارڈ,,sim kārḍ,sˈʌm kˈaːɾɖ,,2,ur-agent-v1;ipa=espeak
-sim-data.where-can-i-buy-a-plug-adapter,پلگ اڈاپٹر کہاں ملے گا؟,,plag aḍāpṭar kahāñ mile gā?,pˈʌləɡ aɖˈaːpəʈˌəɾ kˈʌhãː mˈɪleː ɡaː,,2,ur-agent-v1;ipa=espeak
-sim-data.mobile-data,موبائل ڈیٹا,,mobā’il ḍeṭā,moːbˈaɪl ɖˈeːʈaː,,2,ur-agent-v1;ipa=espeak
-sim-data.can-i-top-up-this-sim,کیا اس میں بیلنس ڈل سکتا ہے؟,,kyā is meñ bailans ḍal saktā hai?,kjˈaː ɪs mˈẽ beːlˈʌns ɖˈʌl sˈʌktˌaː hɛ,Pakistani usage is بیلنس/ایزی لوڈ rather than a word for recharge,2,ur-agent-v1;ipa=espeak
-sim-data.top-up,ایزی لوڈ,بیلنس,aizī loḍ,ˈeːzi lˈoːɖ,the near-universal Pakistani term for a prepaid top-up,2,ur-agent-v1;ipa=espeak
-sim-data.is-there-coverage-in,کیا {} میں سگنل آتا ہے؟,,kyā {} meñ signal ātā hai?,kjˈaː {} mˈẽ sˈʌɡənˌəl ˈaːtaː hɛ,,2,ur-agent-v1;ipa=espeak
-sim-data.signal,سگنل,,signal,sˈʌɡənˌəl,,2,ur-agent-v1;ipa=espeak
-sim-data.esim,ای سم,,ī sim,ˈiː sˈʌm,,2,ur-agent-v1;ipa=espeak
-sim-data.prepaid,پری پیڈ,,prī paiḍ,pˈʌɾi pˈeːɖ,,2,ur-agent-v1;ipa=espeak
-sim-data.roaming,رومنگ,,romiñg,ɾoːmˈʌnɡ,,2,ur-agent-v1;ipa=espeak
-etiquette.is-this-allowed,کیا اس کی اجازت ہے؟,,kyā is kī ijāzat hai?,kjˈaː ɪs ki ɪɟˈaːzat hɛ,,2,ur-agent-v1;ipa=espeak
-etiquette.is-tipping-expected,کیا ٹپ دینی ہوتی ہے؟,,kyā ṭip denī hotī hai?,kjˈaː ʈˈʌp dˈeːni hˈoːti hɛ,,2,ur-agent-v1;ipa=espeak
-etiquette.is-service-included,کیا سروس چارج شامل ہے؟,,kyā sarwis chārj shāmil hai?,kjˈaː sˈaɾʋɪs cˈaːɾəɟ ʃˈaːmɪl hɛ,,2,ur-agent-v1;ipa=espeak
-etiquette.may-i-enter,کیا اندر آ جاؤں؟,,kyā andar ā jā’ūñ?,kjˈaː ˈandaɾ ˈaː ɟaːˈoːn,,2,ur-agent-v1;ipa=espeak
-etiquette.remove-shoes,کیا جوتے اتارنے ہیں؟,,kyā jūte utārne haiñ?,kjˈaː ɟˈoːteː ʊtˈaːɾneː hẽ,,2,ur-agent-v1;ipa=espeak
-etiquette.photo-of-you,کیا آپ کی تصویر لے لوں؟,,kyā āp kī taswīr le lūñ?,kjˈaː ˌaːp ki təsʋˈiːɾ lˈeː lˈõː,,2,ur-agent-v1;ipa=espeak
-etiquette.may-i-sit-here,کیا یہاں بیٹھ جاؤں؟,,kyā yahāñ baiṭh jā’ūñ?,kjˈaː jˈʌhãː bˈeːʈʰ ɟaːˈoːn,,2,ur-agent-v1;ipa=espeak
-etiquette.queue-for,کیا یہ {} کی لائن ہے؟,,kyā yah {} kī lā’in hai?,kjˈaː jeːh {} ki lˈaɪn hɛ,,2,ur-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,کیا میرے کپڑے مناسب ہیں؟,,kyā mere kapṛe munāsib haiñ?,kjˈaː mˈeːɾeː kˈʌpɽˌeː mʊnˈaːsɪb hẽ,,2,ur-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,انجانے میں ہوا، معاف کیجیے,,"anjāne meñ hu’ā, māf kījiye",ˈanɟaːnˌeː mˈẽ hˈuːaː mˈaːf kˈeːɟjeː,"it happened unknowingly, forgive me",2,ur-agent-v1;ipa=espeak
-etiquette.what-is-customary,یہاں کا رواج کیا ہے؟,,yahāñ kā riwāj kyā hai?,jˈʌhãː kaː ɾɪʋˈaːɟ kjˈaː hɛ,,2,ur-agent-v1;ipa=espeak
-etiquette.keep-the-change,باقی رکھ لیجیے,,bāqī rakh lījiye,bˈaːqi ɾˈʌkʰ lˈiːɟiˌeː,,2,ur-agent-v1;ipa=espeak
-children.cannot-find-my-child,میرا بچہ نہیں مل رہا,,merā bachcha nahīñ mil rahā,mˈeːɾaː bˈʌca nahˈĩː mˈɪl ɾˈʌhaː,,2,ur-agent-v1;ipa=espeak
-children.make-an-announcement,اعلان کرا دیجیے,,elān karā dījiye,eːlˈaːn kˈʌɾaː diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-children.child-age,میرا بچہ {} سال کا ہے,,merā bachcha {} sāl kā hai,mˈeːɾaː bˈʌca {} sˈaːl kaː hɛ,masculine child; a girl is بچی ... کی,2,ur-agent-v1;ipa=espeak
-children.high-chair,کیا بچوں کی اونچی کرسی ہے؟,,kyā bachchoñ kī ūñchī kursī hai?,kjˈaː bˈʌcõː ki ˈuːnci kˈʊɾsi hɛ,,2,ur-agent-v1;ipa=espeak
-children.baby-changing-room,بچے کا کپڑا بدلنے کی جگہ کہاں ہے؟,,bachche kā kapṛā badalne kī jagah kahāñ hai?,bˈʌceː kaː kˈʌpɽˌaː bˈʌdəlneː ki ɟˈʌɡˌa kˈʌhãː hɛ,"descriptive: Pakistani buildings rarely sign this, so a fixed term would not be read",2,ur-agent-v1;ipa=espeak
-children.childrens-menu,کیا بچوں کا مینو ہے؟,,kyā bachchoñ kā menū hai?,kjˈaː bˈʌcõː kaː mˈeːnoː hɛ,,2,ur-agent-v1;ipa=espeak
-children.suitable-for-children,کیا یہ بچوں کے لیے ٹھیک ہے؟,,kyā yah bachchoñ ke liye ṭhīk hai?,kjˈaː jeːh bˈʌcõː keː lˈiːeː ʈʰˈiːk hɛ,,2,ur-agent-v1;ipa=espeak
-children.minimum-age,کم از کم کتنی عمر؟,,kam az kam kitnī umr?,kˈʌm ˈaz kˈʌm kˈɪtni ʊmˈaɾ,,2,ur-agent-v1;ipa=espeak
-children.do-children-pay,کیا بچوں کا ٹکٹ لگتا ہے؟,,kyā bachchoñ kā ṭikaṭ lagtā hai?,kjˈaː bˈʌcõː kaː ʈˈɪkɪʈ lˈʌɡtˌaː hɛ,,2,ur-agent-v1;ipa=espeak
-children.crib,کیا بچے کا پالنا ہے؟,,kyā bachche kā pālnā hai?,kjˈaː bˈʌceː kaː pˈaːlnˌaː hɛ,,2,ur-agent-v1;ipa=espeak
-children.warm-this-bottle,یہ بوتل گرم کر دیجیے,,yah botal garam kar dījiye,jeːh bˈoːtəl ɡˈaɾm kaɾ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
-children.car-seat,ہمیں بچے کی کار سیٹ چاہیے,,hameñ bachche kī kār sīṭ chāhiye,hˈʌmẽː bˈʌceː ki kˈaːɾ sˈeːʈ cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
-children.stroller,پرام,بچہ گاڑی,prām,pəɾˈaːm,,2,ur-agent-v1;ipa=espeak
-children.playground,کیا کھیل کا میدان ہے؟,,kyā khel kā maidān hai?,kjˈaː kʰˈeːl kaː meːdˈaːn hɛ,,2,ur-agent-v1;ipa=espeak
-social-basics.politeness-particles,تھائی میں ادب جملے کے آخر میں ایک لفظ سے آتا ہے: مرد تقریباً ہر بات کے بعد کھراپ لگاتے ہیں اور خواتین کھا۔ سوال پوچھتے وقت خاتون کھا کو چڑھتے سُر میں کہتی ہے۔ اِس کارڈ کی سطروں میں یہ لفظ نہیں ہے، کیونکہ درست انتخاب بولنے والے اور جملے کی نوعیت پر ہے؛ اپنے حساب سے لگا لیجیے۔,,,,,2,ur-agent-v1
-board-answers.can-you-walk,کیا چلنا ممکن ہے؟,,kyā chalnā mumkin hai?,kjˈaː cˈʌlnˌaː mˈʊmkˌɪn hɛ,,2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
-board-answers.card-or-cash,کارڈ یا نقد؟,,kārḍ yā naqad?,kˈaːɾɖ jˈaː nˈʌqəd,,2,ur-board-answers-v1;ipa=espeak
-board-answers.help-is-coming,مدد آ رہی ہے,,madad ā rahī hai,mˈʌdəd ˈaː ɾˈʌhi hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.how-many,کتنے چاہئیں؟,,kitne chāhi’eñ?,kˈɪtneː cˈaːhẽː,,2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
-board-answers.i-am-calling-an-ambulance,ایمبولینس بلائی جا رہی ہے,,aimbūlens bulā’ī jā rahī hai,ˌeːmboːlˈiːns bəlˈaːi ɟˈaː ɾˈʌhi hɛ,"an ambulance is being called -- the passive agrees with ایمبولینس (feminine), not with the speaker; the obligative bulānī paṛe gī said 'I will have to call', a necessity rather than the call being made",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);fix=en.wikipedia Hindustani grammar rev 1365420047 (the passive is formed from the perfective participle by addition of the auxiliary jānā);in-pack-frame=massage-spa.reply-cannot-avoid-this-treatment (چھوڑا نہیں جا سکتا);rule=passive-agrees-with-object-not-speaker;row-corrections-v7;ipa=espeak
-board-answers.i-am-calling-the-police,پولیس بلائی جا رہی ہے,,pulis bulā’ī jā rahī hai,pʊlˈiːs bəlˈaːi ɟˈaː ɾˈʌhi hɛ,"the police are being called -- the passive agrees with پولیس (feminine), not with the speaker; the obligative bulānī paṛe gī said 'I will have to call', which also reads as a threat",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);fix=en.wikipedia Hindustani grammar rev 1365420047 (the passive is formed from the perfective participle by addition of the auxiliary jānā);in-pack-frame=massage-spa.reply-cannot-avoid-this-treatment (چھوڑا نہیں جا سکتا);rule=passive-agrees-with-object-not-speaker;row-corrections-v7;ipa=espeak
-board-answers.i-do-not-have-a-phone,میرے پاس فون نہیں ہے,,mere pās fon nahīñ hai,mˈeːɾeː pˈaːs fˈoːn nahˈĩː hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.i-will-find-someone,مدد کرنے والا کوئی مل جائے گا,,madad karne wālā ko’ī mil jā’e gā,mˈʌdəd kˌaɾneː ʋˈaːlaː kˈoːi mˈɪl ɟˈaːeː ɡaː,"someone who can help will be found -- third person, no reference to the speaker",2,"ur-board-answers-v1;rule=third-person-avoids-speaker-agreement;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
-board-answers.i-will-show-you,چلیے، راستہ دکھا دوں,,"chaliye, rāsta dikhā dūñ",cˈʌljeː ɾˈaːstˌa dˈʌkʰaː dˈũː,"come, let me show the way -- the subjunctive dūñ has one form for any speaker and makes an offer, as board-answers.i-will-check (ذرا معلوم کر لوں) does; dikhānā hai was an obligation, 'I have to show the way'",2,"ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions);fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive -- person and number, no gender);in-pack-frame=board-answers.i-will-check (ذرا معلوم کر لوں) and quick-directions.go-straight (سیدھے چلیے);rule=subjunctive-has-no-gender;row-corrections-v7;ipa=espeak"
-board-answers.i-will-write-it-down,ذرا لکھ دوں,,zarā likh dūñ,zˈʌɾaː lˈɪkʰ dˈũː,"let me just write it down -- the subjunctive, one form for any speaker, as board-answers.i-will-check (ذرا معلوم کر لوں); likh denā writes it for the other person, where likh lenā hai was 'I have to write this down' for oneself",2,"ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions);fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive);in-pack-frame=board-answers.i-will-check (ذرا معلوم کر لوں);rule=subjunctive-has-no-gender;row-corrections-v7;ipa=espeak"
-board-answers.it-is-closed,بند ہے,,band hai,bˈʌnd hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.it-is-over-there,وہاں ہے,,wahāñ hai,ʋˈʌhãː hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.none-of-these,ان میں میری بات نہیں ہے,,in meñ merī bāt nahīñ hai,ɪn mˈẽ mˈeːɾi bˈaːt nahˈĩː hɛ,"my point is not among these -- 'merii' agrees with 'baat' (fem.), not the speaker",2,ur-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
-board-answers.not-possible,ایسا نہیں ہو سکتا,,aisā nahīñ ho saktā,ˈeːsaː nahˈĩː hˈoː sˈʌktˌaː,"that cannot happen -- impersonal, saktaa defaults masculine since 'aisaa' has no gender",2,ur-board-answers-v1;ipa=espeak
-board-answers.please-wait,بس ایک منٹ,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnɪʈ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.say-it-again,ایک بار پھر؟,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.stay-here,یہیں رکنا بہتر ہے,,yahīñ ruknā behtar hai,jahˈĩː ɾˈʊknaː bɛhtˈaɾ hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.the-hospital-is-close,ہسپتال پاس ہی ہے,,haspatāl pās hī hai,hˌəsəptˈaːl pˈaːs hˈiː hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.there-is-no-wait,انتظار نہیں ہے، ابھی اندر آ جائیے,,"intazār nahīñ hai, abhī andar ā jā’iye",ˌɪntɪzˈaːɾ nahˈĩː hɛ ˈabʰi ˈandaɾ ˈaː ɟˈaːjeː,"-iye imperative, invariant for gender",2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
-board-answers.we-do-not-have-it,ہمارے پاس یہ نہیں ہے,,hamāre pās yah nahīñ hai,həmˈaːɾeː pˈaːs jeːh nahˈĩː hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.what-is-your-name,نام کیا ہے؟,,nām kyā hai?,nˈaːm kjˈaː hɛ,,2,ur-board-answers-v1;ipa=espeak
-board-answers.where-does-it-hurt,کہاں درد ہے؟,,kahāñ dard hai?,kˈʌhãː dˈʌɾd hɛ,,2,ur-board-answers-v1;ipa=espeak
-kind-words.you-are-very-kind,آپ بہت مہربان ہیں۔,,āp bahut mehrbān haiñ.,ˌaːp bˈahʊt mˈɛhɾəbˌaːn hẽ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-your-help,آپ کی مدد کا شکریہ۔,,āp kī madad kā shukriya.,ˌaːp ki mˈʌdəd kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.this-is-delicious,یہ بہت مزیدار ہے۔,,yih bahut mazedār hai.,jeːh bˈahʊt mˌəzidˈaːɾ hɛ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.it-is-beautiful-here,یہاں بہت خوبصورت ہے۔,,yahāñ bahut khūbṣūrat hai.,jˈʌhãː bˈahʊt xˈuːbsuːɾˌat hɛ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.i-like-it-very-much,مجھے یہ بہت پسند ہے۔,,mujhe yih bahut pasand hai.,mˌʊɟʰeː jeːh bˈahʊt pəsˈʌnd hɛ,"dative-experiencer ""mujhe...pasand"" -- invariant for the speaker's gender",2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.i-had-a-wonderful-time,میں نے بہت اچھا وقت گزارا۔,,maiñ ne bahut achhā waqt guzārā.,mˈẽ neː bˈahʊt ˈacʰaː ʋˈaqt ɡʊzˈaːɾaː,"ergative ""ne"" + perfective participle agrees with the object ""waqt"" (masc.), not with the speaker",2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-everything,ہر چیز کا شکریہ۔,,har chīz kā shukriya.,hˈʌɾ cˈiːz kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-kind-words.thank-you-for-your-hospitality,آپ کی مہمان نوازی کا شکریہ۔,,āp kī mehmān navāzī kā shukriya.,ˌaːp ki mˈɛhmaːn nˈaʋaːzˌiː kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
-board-answers.my-name-is-blank,میرا نام {} ہے,,merā nām {} hai,mˈeːɾaː nˈaːm {} hɛ,,2,ur-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
-board-answers.i-would-rather-not-say,معاف کیجیے، نہ بتاؤں تو بہتر ہے,,"māf kījiye, na batā’ūñ to behtar hai",mˈaːf kˈeːɟjeː nˈa bˌətaːˈoːn tˈoː bɛhtˈaɾ hɛ,"pardon me, it is better if I do not tell -- the subjunctive batā’ūñ has no gender",2,ur-agent-v1;in-pack-neighbour=social-basics.sorry;in-pack-frame=board-answers.stay-here;reply-neutrality-rule;rule=subjunctive-invariant-for-gender;answers-audit-v1;ipa=espeak
-board-answers.what-happened,کیا ہوا؟,,kyā huā?,kjˈaː hˈuːaː,"what happened? -- huā agrees with kyā, not with a person",2,ur-agent-v1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.understood,جی، سمجھ آ گئی,,"jī, samajh ā ga’ī",ɟˈiː sˈʌməɟʰ ˈaː ɡˈai,"yes, understanding has come -- ga’ī agrees with samajh (fem.), not with the speaker",2,"ur-agent-v1;src=Platts سمجھ (p. 675, samajh ānā);reply-neutrality-rule;rule=agrees-with-samajh-not-speaker;answers-audit-v1;ipa=espeak"
-board-answers.i-will-check,ذرا معلوم کر لوں,,zarā mālūm kar lūñ,zˈʌɾaː mˈaːluːm kaɾ lˈõː,let me just find out -- the subjunctive lūñ has no gender,2,"ur-agent-v1;src=Platts معلوم (p. 1049, maʻlūm karnā);in-pack-frame=phone-text-power.please-confirm;reply-neutrality-rule;rule=subjunctive-invariant-for-gender;answers-audit-v1;ipa=espeak"
-board-answers.we-have-it,جی، ہمارے پاس ہے,,"jī, hamāre pās hai",ɟˈiː həmˈaːɾeː pˈaːs hɛ,"yes, we have it",2,ur-agent-v1;in-pack-neighbour=board-answers.we-do-not-have-it;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.we-are-full,جگہ نہیں ہے,,jagah nahīñ hai,ɟˈʌɡˌa nahˈĩː hɛ,there is no room,2,ur-agent-v1;src=Platts جگہ (p. 384);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
-board-answers.it-is-free,مفت ہے,,muft hai,mˈʊft hɛ,,2,ur-agent-v1;src=Platts مفت (p. 1052);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
-board-answers.it-does-not-matter,کوئی فرق نہیں پڑتا,,ko’ī farq nahīñ paṛtā,kˈoːi fˈaɾq nahˈĩː pˈʌɽtˌaː,it makes no difference -- paṛtā agrees with farq,2,"ur-agent-v1;src=Platts فرق (p. 779, farq paṛnā);reply-neutrality-rule;answers-audit-v1;ipa=espeak"
-board-answers.only-for-customers,صرف گاہکوں کے لیے ہے,,sirf gāhakoñ ke liye hai,sˈɪɾf ɡˈaːhkõː keː lˈiːeː hɛ,,2,ur-agent-v1;src=Platts گاہک (p. 894);in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
-board-answers.where-to,کہاں جانا ہے؟,,kahāñ jānā hai?,kˈʌhãː ɟˈaːnaː hɛ,"where is [it] to go? -- infinitive, no gender",2,ur-agent-v1;in-pack-frame=transit-rides.please-tell-me-where-to-get-off;reply-neutrality-rule;rule=obligative-agrees-with-object-not-speaker;answers-audit-v1;ipa=espeak
-board-answers.at-the-next-stop,اگلے اسٹاپ پر,,agle isṭāp par,ˈaɡlˌeː ɪsʈˈaːp pˈʌɾ,,2,ur-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=espeak
-board-answers.pay-on-board,کرایہ گاڑی میں دینا ہے,,kirāya gāṛī meñ denā hai,kˌəɾaːjˈaa ɡˈaːɽi mˈẽ dˈeːnaː hɛ,the fare is to be given in the vehicle -- denā agrees with kirāya,2,ur-agent-v1;src=Platts کرایہ (p. 823);in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;reply-neutrality-rule;rule=obligative-agrees-with-object-not-speaker;answers-audit-v1;ipa=espeak
-board-answers.see-a-doctor,ڈاکٹر کو دکھانا بہتر ہے,,ḍākṭar ko dikhānā behtar hai,ɖˌaːkʈˈaɾ kˈoː dəkʰˈaːnaː bɛhtˈaɾ hɛ,"showing [it] to a doctor is better -- infinitive, no gender",2,ur-agent-v1;src=Platts دکھانا (p. 521);in-pack-frame=board-answers.stay-here;reply-neutrality-rule;answers-audit-v1;ipa=espeak
-board-answers.prescription-only,صرف ڈاکٹر کے نسخے پر,,sirf ḍākṭar ke nuskhe par,sˈɪɾf ɖˌaːkʈˈaɾ keː nˈʌsxˌeː pˈʌɾ,only on a doctor's prescription,2,ur-agent-v1;src=Platts نسخہ (p. 1138);in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
-board-answers.before-food,کھانے سے پہلے,,khāne se pahle,kʰˈaːneː seː pˈɛhleː,,2,ur-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
-board-answers.after-food,کھانے کے بعد,,khāne ke bād,kʰˈaːneː keː bˈaːd,,2,ur-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
+social-basics.hello,السلام علیکم,ہیلو,as-salām alaikum,alsəlˈaːm alˈiːkəm,the universal Muslim greeting; ہیلو is the urban informal,,2,ur-agent-v1;ipa=espeak
+social-basics.hello-polite,السلام علیکم ورحمۃ اللہ,آداب,as-salām alaikum wa rahmatullāh,alsəlˈaːm alˈiːkəm ʋˈʌɾəhˌəmət ˈallaːh,آداب is the secular/Lucknow-tradition polite greeting,,2,ur-agent-v1;ipa=espeak
+social-basics.good-morning,صبح بخیر,السلام علیکم,subah bakhair,sˌəbˈah baxˈɛːɾ,السلام علیکم serves at any hour,,2,ur-agent-v1;ipa=espeak
+social-basics.good-evening,شام بخیر,السلام علیکم,shām bakhair,ʃˈaːm baxˈɛːɾ,,,2,ur-agent-v1;ipa=espeak
+social-basics.goodbye,خدا حافظ,اللہ حافظ,khudā hāfiz,xˈʊdaː hˈaːfɪz,"اللہ حافظ is the more religiously marked variant, now commoner in Pakistan",,2,ur-agent-v1;ipa=espeak
+social-basics.thank-you,شکریہ,,shukriya,ʃʊkɾˈiːa,,,2,ur-agent-v1;ipa=espeak
+social-basics.you-are-welcome,کوئی بات نہیں,,ko’ī bāt nahīñ,kˈoːi bˈaːt nahˈĩː,it is nothing,,2,ur-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,سنیے,معاف کیجیے,suniye,sˈʊnjeː,to get attention,,2,ur-agent-v1;ipa=espeak
+social-basics.sorry,معاف کیجیے,سوری,māf kījiye,mˈaːf kˈeːɟjeː,,,2,ur-agent-v1;ipa=espeak
+social-basics.no-problem,کوئی مسئلہ نہیں,,ko’ī mas’ala nahīñ,kˈoːi mˈʌsəla nahˈĩː,,,2,ur-agent-v1;ipa=espeak
+social-basics.i-do-not-know,مجھے نہیں معلوم,مجھے پتا نہیں,mujhe nahīñ mālūm,mˌʊɟʰeː nahˈĩː mˈaːluːm,,,2,ur-agent-v1;ipa=espeak
+social-basics.good-night,شب بخیر,,shab bakhair,ʃˈʌb baxˈɛːɾ,,,2,ur-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,ٹھیک ہے,,ṭhīk hai,ʈʰˈiːk hɛ,,,2,ur-agent-v1;ipa=espeak
+communication.i-do-not-speak-this-language,مجھے {target} نہیں آتی,,mujhe {target} nahīñ ātī,mˌʊɟʰeː {target} nahˈĩː ˈaːti,,,2,ur-agent-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,مجھے {target} تھوڑی سی آتی ہے,,mujhe {target} thoṛī sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽi sˈiː ˈaːti hɛ,,,2,ur-agent-v1;ipa=espeak
+communication.do-you-speak-english,کیا آپ کو {source} آتی ہے؟,,kyā āp ko {source} ātī hai?,kjˈaː ˌaːp kˈoː {source} ˈaːti hɛ,,,2,ur-agent-v1;ipa=espeak
+communication.please-speak-more-slowly,ذرا آہستہ بولیے,,zarā āhista boliye,zˈʌɾaː aːhˈɪsta bˈoːljeː,,,2,ur-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,مجھے سمجھ نہیں آ رہا,,mujhe samajh nahīñ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhaː,understanding is not coming to me,"the speaker is the dative mujhe, which the verb never agrees with, so a woman says the same; رہا is the impersonal default, and آ رہی, agreeing with samajh (fem.), is not a woman's form",2,"ur-agent-v1;fix=Glassman Spoken Urdu (1976) Lesson 8 p. 68 ānā with kO agrees with the thing known;fix=Platts سمجھ (p. 675, s.f., samajh ānā kisī-ko);row-corrections-v1;ipa=espeak"
+communication.i-cannot-read-understand,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,,2,ur-agent-v1;ipa=espeak
+communication.please-say-it-again,پھر سے کہیے,,phir se kahiye,pʰˈɪɾ seː kˈʌhjeː,,,2,ur-agent-v1;ipa=espeak
+communication.please-write-it-down,لکھ دیجیے,,likh dījiye,lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+communication.please-wait-a-moment,ذرا رکیے,,zarā rukiye,zˈʌɾaː ɾˈʌkjeː,,,2,ur-agent-v1;ipa=espeak
+communication.can-you-help-me,میری مدد کیجیے,,merī madad kījiye,mˈeːɾi mˈʌdəd kˈeːɟjeː,,,2,ur-agent-v1;ipa=espeak
+communication.please-show-me-the-text,وہ {target} میں لکھا ہوا دکھائیے,,wah {target} meñ likhā hu’ā dikhā’iye,ʋoː {target} mˈẽ lˈɪkʰaː hˈuːaː dəkʰˈaːjeː,,,2,ur-agent-v1;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,آپ کی بات سمجھ نہیں آ رہی,,āp kī bāt samajh nahīñ ā rahī,ˌaːp ki bˈaːt sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhi,,,2,ur-agent-v1;ipa=espeak
+communication.i-do-not-understand,مجھے سمجھ نہیں آیا,,mujhe samajh nahīñ āyā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaːjaː,,,2,ur-agent-v1;ipa=espeak
+communication.i-cannot-read-it,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,,2,ur-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,یہ رومن حروف میں لکھ دیجیے,,yah roman hurūf meñ likh dījiye,jeːh ɾˈoːmən hʊɾˈuːf mˈẽ lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,کہیے,,kahiye,kˈʌhjeː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.yes-right,جی ہاں,ہاں,jī hāñ,ɟˈiː hˈãː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.no-not,نہیں,جی نہیں,nahīñ,nahˈĩː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.okay-can,ٹھیک ہے,,ṭhīk hai,ʈʰˈiːk hɛ,,,2,ur-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,منع ہے,,manā hai,mˈʌnaː hɛ,,,2,ur-agent-v1;ipa=espeak
+quick-responses.works-okay,چلے گا,,chale gā,cˈʌleː ɡaː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,نہیں چلے گا,,nahīñ chale gā,nahˈĩː cˈʌleː ɡaː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.can-possible,ہو سکتا ہے,,ho saktā hai,hˈoː sˈʌktˌaː hɛ,,,2,ur-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,نہیں ہو سکتا,,nahīñ ho saktā,nahˈĩː hˈoː sˈʌktˌaː,,,2,ur-agent-v1;ipa=espeak
+quick-responses.okay-fine,بالکل,,bilkul,bˈɪlkˌʊl,absolutely,,2,ur-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,نہیں ہو گا,,nahīñ ho gā,nahˈĩː hˈoː ɡaː,,,2,ur-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,فون سے ترجمہ ہو رہا ہے,,fon se tarjuma ho rahā hai,fˈoːn seː tˈaɾɟˌʊma hˈoː ɾˈʌhaː hɛ,,,2,ur-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,فون کی طرف بولیے,,fon kī taraf boliye,fˈoːn ki taɾˈaf bˈoːljeː,,,2,ur-agent-v1;ipa=espeak
+phone-translation.please-write-the-place-name,جگہ کا نام {target} میں لکھ دیجیے,,jagah kā nām {target} meñ likh dījiye,ɟˈʌɡˌa kaː nˈaːm {target} mˈẽ lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,ایک ایک جملہ بولیے,,ek ek jumla boliye,ˈeːk ˈeːk ɟˈʊmla bˈoːljeː,,,2,ur-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,ٹائپ کر کے دکھائیے,,ṭā’ip kar ke dikhā’iye,ʈˈaɪp kaɾ keː dəkʰˈaːjeː,,,2,ur-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,اسکرین دیکھیے,,iskrīn dekhiye,ˌasəkɾˈiːn dˈeːkʰjeː,Urdu writes an initial s-cluster with a prosthetic alef,"اسکرین, اسٹیشن, اسکول",2,ur-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,میرے لیے ٹائپ کر دیجیے,,mere liye ṭā’ip kar dījiye,mˈeːɾeː lˈiːeː ʈˈaɪp kaɾ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,آسان الفاظ میں بولیے,,āsān alfāz meñ boliye,aːsˈaːn ʊlfˈaːz mˈẽ bˈoːljeː,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,میرے فون کی بیٹری کم ہے,,mere fon kī baiṭrī kam hai,mˈeːɾeː fˈoːn ki bˈeːʈɾˌiː kˈʌm hɛ,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,کیا پاور بینک ہے؟,,kyā pāwar baink hai?,kjˈaː pˈaːʋəɾ bˈeːnk hɛ,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,ترجمے میں غلطی ہو سکتی ہے,,tarjume meñ ghaltī ho saktī hai,tˈaɾɟˌʊmeː mˈẽ ɣˈʌltˌiː hˈoː sˈʌktˌiː hɛ,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.please-confirm,ذرا تصدیق کر لیجیے,,zarā tasdīq kar lījiye,zˈʌɾaː tˌəsdˈiːq kaɾ lˈiːɟiˌeː,,,2,ur-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,کیا یہاں فون چارج کر لوں؟,,kyā yahāñ fon chārj kar lūñ?,kjˈaː jˈʌhãː fˈoːn cˈaːɾəɟ kaɾ lˈõː,,,2,ur-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,مجھے ٹورسٹ سم چاہیے,,mujhe ṭūrisṭ sim chāhiye,mˌʊɟʰeː ʈˈoːɾˌɪsʈ sˈʌm cˈaːhjeː,,,2,ur-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,کیا آپ کا وائی فائی استعمال کر لوں؟,,kyā āp kā wā’ī fā’ī istemāl kar lūñ?,kjˈaː ˌaːp kaː ʋˈaːi fˈaːi ˌɪsteːmˈaːl kaɾ lˈõː,,,2,ur-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,کتنا ڈیٹا ملے گا؟,,kitnā ḍeṭā mile gā?,kˈɪtnaː ɖˈeːʈaː mˈɪleː ɡaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,کیا پاسپورٹ چاہیے؟,,kyā pāsporṭ chāhiye?,kjˈaː pˌaːspˈoːɾʈ cˈaːhjeː,,,2,ur-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,کتنے دن چلے گا؟,,kitne din chale gā?,kˈɪtneː dˈɪn cˈʌleː ɡaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.please-activate-it,اسے چالو کر دیجیے,,ise chālū kar dījiye,ˌɪseː cˈaːloː kaɾ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,کیا ای سم ہے؟,,kyā ī sim hai?,kjˈaː ˈiː sˈʌm hɛ,,,2,ur-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,میرا ڈیٹا نہیں چل رہا,,merā ḍeṭā nahīñ chal rahā,mˈeːɾaː ɖˈeːʈaː nahˈĩː cˈʌl ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,کیا رجسٹریشن ضروری ہے؟,,kyā rajisṭreshan zarūrī hai?,kjˈaː ɾˌəɟəsʈəɾˈiːʃən zaɾˈuːɾi hɛ,Pakistan requires biometric registration for every SIM,,2,ur-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,سگنل نہیں آ رہا,,signal nahīñ ā rahā,sˈʌɡənˌəl nahˈĩː ˈaː ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,وائی فائی کا پاس ورڈ لکھ دیجیے,,wā’ī fā’ī kā pās warḍ likh dījiye,ʋˈaːi fˈaːi kaː pˈaːs ʋˈʌɾɖ lˈɪkʰ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+sim-data.sim-card,سم کارڈ,,sim kārḍ,sˈʌm kˈaːɾɖ,,,2,ur-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,پلگ اڈاپٹر کہاں ملے گا؟,,plag aḍāpṭar kahāñ mile gā?,pˈʌləɡ aɖˈaːpəʈˌəɾ kˈʌhãː mˈɪleː ɡaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.mobile-data,موبائل ڈیٹا,,mobā’il ḍeṭā,moːbˈaɪl ɖˈeːʈaː,,,2,ur-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,کیا اس میں بیلنس ڈل سکتا ہے؟,,kyā is meñ bailans ḍal saktā hai?,kjˈaː ɪs mˈẽ beːlˈʌns ɖˈʌl sˈʌktˌaː hɛ,Pakistani usage is بیلنس/ایزی لوڈ rather than a word for recharge,,2,ur-agent-v1;ipa=espeak
+sim-data.top-up,ایزی لوڈ,بیلنس,aizī loḍ,ˈeːzi lˈoːɖ,the near-universal Pakistani term for a prepaid top-up,,2,ur-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,کیا {} میں سگنل آتا ہے؟,,kyā {} meñ signal ātā hai?,kjˈaː {} mˈẽ sˈʌɡənˌəl ˈaːtaː hɛ,,,2,ur-agent-v1;ipa=espeak
+sim-data.signal,سگنل,,signal,sˈʌɡənˌəl,,,2,ur-agent-v1;ipa=espeak
+sim-data.esim,ای سم,,ī sim,ˈiː sˈʌm,,,2,ur-agent-v1;ipa=espeak
+sim-data.prepaid,پری پیڈ,,prī paiḍ,pˈʌɾi pˈeːɖ,,,2,ur-agent-v1;ipa=espeak
+sim-data.roaming,رومنگ,,romiñg,ɾoːmˈʌnɡ,,,2,ur-agent-v1;ipa=espeak
+etiquette.is-this-allowed,کیا اس کی اجازت ہے؟,,kyā is kī ijāzat hai?,kjˈaː ɪs ki ɪɟˈaːzat hɛ,,,2,ur-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,کیا ٹپ دینی ہوتی ہے؟,,kyā ṭip denī hotī hai?,kjˈaː ʈˈʌp dˈeːni hˈoːti hɛ,,,2,ur-agent-v1;ipa=espeak
+etiquette.is-service-included,کیا سروس چارج شامل ہے؟,,kyā sarwis chārj shāmil hai?,kjˈaː sˈaɾʋɪs cˈaːɾəɟ ʃˈaːmɪl hɛ,,,2,ur-agent-v1;ipa=espeak
+etiquette.may-i-enter,کیا اندر آ جاؤں؟,,kyā andar ā jā’ūñ?,kjˈaː ˈandaɾ ˈaː ɟaːˈoːn,,,2,ur-agent-v1;ipa=espeak
+etiquette.remove-shoes,کیا جوتے اتارنے ہیں؟,,kyā jūte utārne haiñ?,kjˈaː ɟˈoːteː ʊtˈaːɾneː hẽ,,,2,ur-agent-v1;ipa=espeak
+etiquette.photo-of-you,کیا آپ کی تصویر لے لوں؟,,kyā āp kī taswīr le lūñ?,kjˈaː ˌaːp ki təsʋˈiːɾ lˈeː lˈõː,,,2,ur-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,کیا یہاں بیٹھ جاؤں؟,,kyā yahāñ baiṭh jā’ūñ?,kjˈaː jˈʌhãː bˈeːʈʰ ɟaːˈoːn,,,2,ur-agent-v1;ipa=espeak
+etiquette.queue-for,کیا یہ {} کی لائن ہے؟,,kyā yah {} kī lā’in hai?,kjˈaː jeːh {} ki lˈaɪn hɛ,,,2,ur-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,کیا میرے کپڑے مناسب ہیں؟,,kyā mere kapṛe munāsib haiñ?,kjˈaː mˈeːɾeː kˈʌpɽˌeː mʊnˈaːsɪb hẽ,,,2,ur-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,انجانے میں ہوا، معاف کیجیے,,"anjāne meñ hu’ā, māf kījiye",ˈanɟaːnˌeː mˈẽ hˈuːaː mˈaːf kˈeːɟjeː,"it happened unknowingly, forgive me",,2,ur-agent-v1;ipa=espeak
+etiquette.what-is-customary,یہاں کا رواج کیا ہے؟,,yahāñ kā riwāj kyā hai?,jˈʌhãː kaː ɾɪʋˈaːɟ kjˈaː hɛ,,,2,ur-agent-v1;ipa=espeak
+etiquette.keep-the-change,باقی رکھ لیجیے,,bāqī rakh lījiye,bˈaːqi ɾˈʌkʰ lˈiːɟiˌeː,,,2,ur-agent-v1;ipa=espeak
+children.cannot-find-my-child,میرا بچہ نہیں مل رہا,,merā bachcha nahīñ mil rahā,mˈeːɾaː bˈʌca nahˈĩː mˈɪl ɾˈʌhaː,,,2,ur-agent-v1;ipa=espeak
+children.make-an-announcement,اعلان کرا دیجیے,,elān karā dījiye,eːlˈaːn kˈʌɾaː diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+children.child-age,میرا بچہ {} سال کا ہے,,merā bachcha {} sāl kā hai,mˈeːɾaː bˈʌca {} sˈaːl kaː hɛ,masculine child; a girl is بچی ... کی,,2,ur-agent-v1;ipa=espeak
+children.high-chair,کیا بچوں کی اونچی کرسی ہے؟,,kyā bachchoñ kī ūñchī kursī hai?,kjˈaː bˈʌcõː ki ˈuːnci kˈʊɾsi hɛ,,,2,ur-agent-v1;ipa=espeak
+children.baby-changing-room,بچے کا کپڑا بدلنے کی جگہ کہاں ہے؟,,bachche kā kapṛā badalne kī jagah kahāñ hai?,bˈʌceː kaː kˈʌpɽˌaː bˈʌdəlneː ki ɟˈʌɡˌa kˈʌhãː hɛ,"descriptive: Pakistani buildings rarely sign this, so a fixed term would not be read",,2,ur-agent-v1;ipa=espeak
+children.childrens-menu,کیا بچوں کا مینو ہے؟,,kyā bachchoñ kā menū hai?,kjˈaː bˈʌcõː kaː mˈeːnoː hɛ,,,2,ur-agent-v1;ipa=espeak
+children.suitable-for-children,کیا یہ بچوں کے لیے ٹھیک ہے؟,,kyā yah bachchoñ ke liye ṭhīk hai?,kjˈaː jeːh bˈʌcõː keː lˈiːeː ʈʰˈiːk hɛ,,,2,ur-agent-v1;ipa=espeak
+children.minimum-age,کم از کم کتنی عمر؟,,kam az kam kitnī umr?,kˈʌm ˈaz kˈʌm kˈɪtni ʊmˈaɾ,,,2,ur-agent-v1;ipa=espeak
+children.do-children-pay,کیا بچوں کا ٹکٹ لگتا ہے؟,,kyā bachchoñ kā ṭikaṭ lagtā hai?,kjˈaː bˈʌcõː kaː ʈˈɪkɪʈ lˈʌɡtˌaː hɛ,,,2,ur-agent-v1;ipa=espeak
+children.crib,کیا بچے کا پالنا ہے؟,,kyā bachche kā pālnā hai?,kjˈaː bˈʌceː kaː pˈaːlnˌaː hɛ,,,2,ur-agent-v1;ipa=espeak
+children.warm-this-bottle,یہ بوتل گرم کر دیجیے,,yah botal garam kar dījiye,jeːh bˈoːtəl ɡˈaɾm kaɾ diɟˈiːeː,,,2,ur-agent-v1;ipa=espeak
+children.car-seat,ہمیں بچے کی کار سیٹ چاہیے,,hameñ bachche kī kār sīṭ chāhiye,hˈʌmẽː bˈʌceː ki kˈaːɾ sˈeːʈ cˈaːhjeː,,,2,ur-agent-v1;ipa=espeak
+children.stroller,پرام,بچہ گاڑی,prām,pəɾˈaːm,,,2,ur-agent-v1;ipa=espeak
+children.playground,کیا کھیل کا میدان ہے؟,,kyā khel kā maidān hai?,kjˈaː kʰˈeːl kaː meːdˈaːn hɛ,,,2,ur-agent-v1;ipa=espeak
+social-basics.politeness-particles,تھائی میں ادب جملے کے آخر میں ایک لفظ سے آتا ہے: مرد تقریباً ہر بات کے بعد کھراپ لگاتے ہیں اور خواتین کھا۔ سوال پوچھتے وقت خاتون کھا کو چڑھتے سُر میں کہتی ہے۔ اِس کارڈ کی سطروں میں یہ لفظ نہیں ہے، کیونکہ درست انتخاب بولنے والے اور جملے کی نوعیت پر ہے؛ اپنے حساب سے لگا لیجیے۔,,,,,,2,ur-agent-v1
+board-answers.can-you-walk,کیا چلنا ممکن ہے؟,,kyā chalnā mumkin hai?,kjˈaː cˈʌlnˌaː mˈʊmkˌɪn hɛ,,,2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
+board-answers.card-or-cash,کارڈ یا نقد؟,,kārḍ yā naqad?,kˈaːɾɖ jˈaː nˈʌqəd,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,مدد آ رہی ہے,,madad ā rahī hai,mˈʌdəd ˈaː ɾˈʌhi hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.how-many,کتنے چاہئیں؟,,kitne chāhi’eñ?,kˈɪtneː cˈaːhẽː,,,2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
+board-answers.i-am-calling-an-ambulance,ایمبولینس بلائی جا رہی ہے,,aimbūlens bulā’ī jā rahī hai,ˌeːmboːlˈiːns bəlˈaːi ɟˈaː ɾˈʌhi hɛ,an ambulance is being called,"the passive agrees with ایمبولینس (feminine), not with the speaker; the obligative bulānī paṛe gī said 'I will have to call', a necessity rather than the call being made",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);fix=en.wikipedia Hindustani grammar rev 1365420047 (the passive is formed from the perfective participle by addition of the auxiliary jānā);in-pack-frame=massage-spa.reply-cannot-avoid-this-treatment (چھوڑا نہیں جا سکتا);rule=passive-agrees-with-object-not-speaker;row-corrections-v7;ipa=espeak
+board-answers.i-am-calling-the-police,پولیس بلائی جا رہی ہے,,pulis bulā’ī jā rahī hai,pʊlˈiːs bəlˈaːi ɟˈaː ɾˈʌhi hɛ,the police are being called,"the passive agrees with پولیس (feminine), not with the speaker; the obligative bulānī paṛe gī said 'I will have to call', which also reads as a threat",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar XIX Passive forms (perfective participle with jānā -- both parts show concord with subjects);fix=en.wikipedia Hindustani grammar rev 1365420047 (the passive is formed from the perfective participle by addition of the auxiliary jānā);in-pack-frame=massage-spa.reply-cannot-avoid-this-treatment (چھوڑا نہیں جا سکتا);rule=passive-agrees-with-object-not-speaker;row-corrections-v7;ipa=espeak
+board-answers.i-do-not-have-a-phone,میرے پاس فون نہیں ہے,,mere pās fon nahīñ hai,mˈeːɾeː pˈaːs fˈoːn nahˈĩː hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,مدد کرنے والا کوئی مل جائے گا,,madad karne wālā ko’ī mil jā’e gā,mˈʌdəd kˌaɾneː ʋˈaːlaː kˈoːi mˈɪl ɟˈaːeː ɡaː,someone who can help will be found,"third person, no reference to the speaker",2,"ur-board-answers-v1;rule=third-person-avoids-speaker-agreement;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
+board-answers.i-will-show-you,چلیے، راستہ دکھا دوں,,"chaliye, rāsta dikhā dūñ",cˈʌljeː ɾˈaːstˌa dˈʌkʰaː dˈũː,"come, let me show the way","the subjunctive dūñ has one form for any speaker and makes an offer, as board-answers.i-will-check (ذرا معلوم کر لوں) does; dikhānā hai was an obligation, 'I have to show the way'",2,"ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions);fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive -- person and number, no gender);in-pack-frame=board-answers.i-will-check (ذرا معلوم کر لوں) and quick-directions.go-straight (سیدھے چلیے);rule=subjunctive-has-no-gender;row-corrections-v7;ipa=espeak"
+board-answers.i-will-write-it-down,ذرا لکھ دوں,,zarā likh dūñ,zˈʌɾaː lˈɪkʰ dˈũː,let me just write it down,"the subjunctive, one form for any speaker, as board-answers.i-will-check (ذرا معلوم کر لوں); likh denā writes it for the other person, where likh lenā hai was 'I have to write this down' for oneself",2,"ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;fix=McGregor Outline of Hindi Grammar V.4 (subjunctive maiṁ calūṁ, m., f.) and XXI.1 (the subjunctive in asking questions or making suggestions);fix=en.wikipedia Hindustani grammar rev 1365420047 (personal concord (P), used by the subjunctive);in-pack-frame=board-answers.i-will-check (ذرا معلوم کر لوں);rule=subjunctive-has-no-gender;row-corrections-v7;ipa=espeak"
+board-answers.it-is-closed,بند ہے,,band hai,bˈʌnd hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,وہاں ہے,,wahāñ hai,ʋˈʌhãː hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.none-of-these,ان میں میری بات نہیں ہے,,in meñ merī bāt nahīñ hai,ɪn mˈẽ mˈeːɾi bˈaːt nahˈĩː hɛ,my point is not among these,"'merii' agrees with 'baat' (fem.), not the speaker",2,ur-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,ایسا نہیں ہو سکتا,,aisā nahīñ ho saktā,ˈeːsaː nahˈĩː hˈoː sˈʌktˌaː,that cannot happen,"impersonal, saktaa defaults masculine since 'aisaa' has no gender",2,ur-board-answers-v1;ipa=espeak
+board-answers.please-wait,بس ایک منٹ,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnɪʈ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.say-it-again,ایک بار پھر؟,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.stay-here,یہیں رکنا بہتر ہے,,yahīñ ruknā behtar hai,jahˈĩː ɾˈʊknaː bɛhtˈaɾ hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,ہسپتال پاس ہی ہے,,haspatāl pās hī hai,hˌəsəptˈaːl pˈaːs hˈiː hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,انتظار نہیں ہے، ابھی اندر آ جائیے,,"intazār nahīñ hai, abhī andar ā jā’iye",ˌɪntɪzˈaːɾ nahˈĩː hɛ ˈabʰi ˈandaɾ ˈaː ɟˈaːjeː,"-iye imperative, invariant for gender",,2,"ur-board-answers-v1;fix=BGN/PCGN 2007 Romanization of Urdu (GOV.UK PDF): ں ñ, چ ch, ء ’ (U+2019);rule=the column is BGN/PCGN as data/registry/romanizations.csv says;row-corrections-v6;ipa=espeak"
+board-answers.we-do-not-have-it,ہمارے پاس یہ نہیں ہے,,hamāre pās yah nahīñ hai,həmˈaːɾeː pˈaːs jeːh nahˈĩː hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,نام کیا ہے؟,,nām kyā hai?,nˈaːm kjˈaː hɛ,,,2,ur-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,کہاں درد ہے؟,,kahāñ dard hai?,kˈʌhãː dˈʌɾd hɛ,,,2,ur-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,آپ بہت مہربان ہیں۔,,āp bahut mehrbān haiñ.,ˌaːp bˈahʊt mˈɛhɾəbˌaːn hẽ,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,آپ کی مدد کا شکریہ۔,,āp kī madad kā shukriya.,ˌaːp ki mˈʌdəd kaː ʃʊkɾˈiːa,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,یہ بہت مزیدار ہے۔,,yih bahut mazedār hai.,jeːh bˈahʊt mˌəzidˈaːɾ hɛ,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,یہاں بہت خوبصورت ہے۔,,yahāñ bahut khūbṣūrat hai.,jˈʌhãː bˈahʊt xˈuːbsuːɾˌat hɛ,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,مجھے یہ بہت پسند ہے۔,,mujhe yih bahut pasand hai.,mˌʊɟʰeː jeːh bˈahʊt pəsˈʌnd hɛ,"dative-experiencer ""mujhe...pasand""",invariant for the speaker's gender,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,میں نے بہت اچھا وقت گزارا۔,,maiñ ne bahut achhā waqt guzārā.,mˈẽ neː bˈahʊt ˈacʰaː ʋˈaqt ɡʊzˈaːɾaː,"ergative ""ne"" + perfective participle agrees with the object ""waqt"" (masc.), not with the speaker",,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,ہر چیز کا شکریہ۔,,har chīz kā shukriya.,hˈʌɾ cˈiːz kaː ʃʊkɾˈiːa,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,آپ کی مہمان نوازی کا شکریہ۔,,āp kī mehmān navāzī kā shukriya.,ˌaːp ki mˈɛhmaːn nˈaʋaːzˌiː kaː ʃʊkɾˈiːa,,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+board-answers.my-name-is-blank,میرا نام {} ہے,,merā nām {} hai,mˈeːɾaː nˈaːm {} hɛ,,,2,ur-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;rule=possessive-agrees-with-possessed-noun-not-speaker;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,معاف کیجیے، نہ بتاؤں تو بہتر ہے,,"māf kījiye, na batā’ūñ to behtar hai",mˈaːf kˈeːɟjeː nˈa bˌətaːˈoːn tˈoː bɛhtˈaɾ hɛ,"pardon me, it is better if I do not tell",the subjunctive batā’ūñ has no gender,2,ur-agent-v1;in-pack-neighbour=social-basics.sorry;in-pack-frame=board-answers.stay-here;reply-neutrality-rule;rule=subjunctive-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,کیا ہوا؟,,kyā huā?,kjˈaː hˈuːaː,what happened?,"huā agrees with kyā, not with a person",2,ur-agent-v1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.understood,جی، سمجھ آ گئی,,"jī, samajh ā ga’ī",ɟˈiː sˈʌməɟʰ ˈaː ɡˈai,"yes, understanding has come","ga’ī agrees with samajh (fem.), not with the speaker",2,"ur-agent-v1;src=Platts سمجھ (p. 675, samajh ānā);reply-neutrality-rule;rule=agrees-with-samajh-not-speaker;answers-audit-v1;ipa=espeak"
+board-answers.i-will-check,ذرا معلوم کر لوں,,zarā mālūm kar lūñ,zˈʌɾaː mˈaːluːm kaɾ lˈõː,let me just find out,the subjunctive lūñ has no gender,2,"ur-agent-v1;src=Platts معلوم (p. 1049, maʻlūm karnā);in-pack-frame=phone-text-power.please-confirm;reply-neutrality-rule;rule=subjunctive-invariant-for-gender;answers-audit-v1;ipa=espeak"
+board-answers.we-have-it,جی، ہمارے پاس ہے,,"jī, hamāre pās hai",ɟˈiː həmˈaːɾeː pˈaːs hɛ,"yes, we have it",,2,ur-agent-v1;in-pack-neighbour=board-answers.we-do-not-have-it;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,جگہ نہیں ہے,,jagah nahīñ hai,ɟˈʌɡˌa nahˈĩː hɛ,there is no room,,2,ur-agent-v1;src=Platts جگہ (p. 384);in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,مفت ہے,,muft hai,mˈʊft hɛ,,,2,ur-agent-v1;src=Platts مفت (p. 1052);in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,کوئی فرق نہیں پڑتا,,ko’ī farq nahīñ paṛtā,kˈoːi fˈaɾq nahˈĩː pˈʌɽtˌaː,it makes no difference,paṛtā agrees with farq,2,"ur-agent-v1;src=Platts فرق (p. 779, farq paṛnā);reply-neutrality-rule;answers-audit-v1;ipa=espeak"
+board-answers.only-for-customers,صرف گاہکوں کے لیے ہے,,sirf gāhakoñ ke liye hai,sˈɪɾf ɡˈaːhkõː keː lˈiːeː hɛ,,,2,ur-agent-v1;src=Platts گاہک (p. 894);in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
+board-answers.where-to,کہاں جانا ہے؟,,kahāñ jānā hai?,kˈʌhãː ɟˈaːnaː hɛ,where is [it] to go?,"infinitive, no gender",2,ur-agent-v1;in-pack-frame=transit-rides.please-tell-me-where-to-get-off;reply-neutrality-rule;rule=obligative-agrees-with-object-not-speaker;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,اگلے اسٹاپ پر,,agle isṭāp par,ˈaɡlˌeː ɪsʈˈaːp pˈʌɾ,,,2,ur-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,کرایہ گاڑی میں دینا ہے,,kirāya gāṛī meñ denā hai,kˌəɾaːjˈaa ɡˈaːɽi mˈẽ dˈeːnaː hɛ,the fare is to be given in the vehicle,denā agrees with kirāya,2,ur-agent-v1;src=Platts کرایہ (p. 823);in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;reply-neutrality-rule;rule=obligative-agrees-with-object-not-speaker;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,ڈاکٹر کو دکھانا بہتر ہے,,ḍākṭar ko dikhānā behtar hai,ɖˌaːkʈˈaɾ kˈoː dəkʰˈaːnaː bɛhtˈaɾ hɛ,showing [it] to a doctor is better,"infinitive, no gender",2,ur-agent-v1;src=Platts دکھانا (p. 521);in-pack-frame=board-answers.stay-here;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,صرف ڈاکٹر کے نسخے پر,,sirf ḍākṭar ke nuskhe par,sˈɪɾf ɖˌaːkʈˈaɾ keː nˈʌsxˌeː pˈʌɾ,only on a doctor's prescription,,2,ur-agent-v1;src=Platts نسخہ (p. 1138);in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.before-food,کھانے سے پہلے,,khāne se pahle,kʰˈaːneː seː pˈɛhleː,,,2,ur-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+board-answers.after-food,کھانے کے بعد,,khāne ke bād,kʰˈaːneː keː bˈaːd,,,2,ur-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

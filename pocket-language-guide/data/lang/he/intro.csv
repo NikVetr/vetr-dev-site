@@ -1,31 +1,31 @@
-concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-introductions.my-name-is,קוראים לי {},קוֹרְאִים לִי {},qor’im li {},koʁˈim lˈi {},they call me {},2,he-agent-v1;ipa=bgn
-introductions.nice-to-meet-you,נעים להכיר,נָעִים לְהַכִּיר,na‘im lehakir,naˈim lehakˈiʁ,pleasant to become acquainted,2,he-agent-v1;ipa=bgn
-introductions.what-is-your-name,איך קוראים לך?,אֵיךְ קוֹרְאִים לְךָ?,eykh qor’im lekha?,ˈejx koʁˈim lexˈa,to a man; to a woman lakh,2,he-agent-v1;ipa=bgn
-introductions.we-are-traveling-together,אנחנו מטיילים ביחד,אֲנַחְנוּ מְטַיְּילִים בְּיַחַד,anáẖnu metaylim beyáẖad,anˈaxnu metajlˈim bejˈaxad,we are travelling together,2,he-agent-v1;ipa=bgn
-introductions.this-is-my-friend,זה חבר שלי,זֶה חָבֵר שֶׁלִּי,ze ẖaver sheli,zˈe xavˈeʁ ʃelˈi,"of a woman, ẖavera",2,he-agent-v1;ipa=bgn
-introductions.i-am-from,אני מ{},אֲנִי מ{},ani m{},anˈi m {},I am from {},2,he-agent-v1;ipa=bgn
-introductions.where-are-you-from,מאיזו ארץ?,מֵאֵיזוֹ אֶרֶץ?,me’éyzo érets?,meˈejzo ˈeʁets,from which country?,2,he-agent-v1;src=Milog ארץ;reply-neutrality-rule;rule=verbless-question-drops-gendered-pronoun;answers-audit-v1;ipa=bgn
-introductions.how-are-you,מה המצב?,מָה הַמַּצָּב?,ma hamatsav?,mˈa hamatsˈav,how is the situation? -- the everyday greeting,2,he-agent-v1;ipa=bgn
-introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,I am a tourist,2,"he-agent-v1;fix=Pealim (pealim.com) 4933 תַּיָּר (tourist);was=literal a woman says tayeret (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני תיירת serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
-introductions.this-is-my-husband-wife,זה בעלי / זאת אשתי,זֶה בַּעֲלִי / זֹאת אִשְׁתִּי,ze ba‘ali / zot ishti,zˈe baalˈi / zˈot iʃtˈi,this is my husband / this is my wife,2,he-agent-v1;ipa=bgn
-introductions.this-is-my-daughter-son,זאת הבת שלי / זה הבן שלי,זֹאת הַבַּת שֶׁלִּי / זֶה הַבֵּן שֶׁלִּי,zot habat sheli / ze háben sheli,zˈot habˈat ʃelˈi / zˈe hˈaben ʃelˈi,this is my daughter / this is my son,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-husband,זה בעלי,זֶה בַּעֲלִי,ze ba‘ali,zˈe baalˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-wife,זאת אשתי,זֹאת אִשְׁתִּי,zot ishti,zˈot iʃtˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-son,זה הבן שלי,זֶה הַבֵּן שֶׁלִּי,ze háben sheli,zˈe hˈaben ʃelˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-daughter,זאת הבת שלי,זֹאת הַבַּת שֶׁלִּי,zot habat sheli,zˈot habˈat ʃelˈi,,2,he-agent-v1;ipa=bgn
-introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,I am travelling alone,2,"he-agent-v1;fix=Pealim (pealim.com) 743 לְטַיֵּל (to walk -- to travel);was=literal a woman says metayelet (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני מטיילת לבד serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
-about-me.i-am-a-student,אני סטודנט,אֲנִי סְטוּדֶנְט,ani student,anˈi studˈent,,2,he-agent-v1;ipa=bgn
-about-me.i-am-retired,אני גמלאי,אֲנִי גִּמְלָאִי,ani gimla’i,anˈi ɡimlaˈi,,2,he-agent-v1;ipa=bgn
-about-me.i-am-a-teacher,אני מורה,אֲנִי מוֹרֶה,ani moreh,anˈi moʁˈeh,,2,he-agent-v1;ipa=bgn
-about-me.i-am-a-doctor,אני רופא,אֲנִי רוֹפֵא,ani rofe,anˈi ʁofˈe,,2,he-agent-v1;ipa=bgn
-about-me.i-am-a-nurse,אני אח,אֲנִי אָח,ani aẖ,anˈi ˈax,I am a nurse,2,"he-agent-v1;fix=he.wikipedia אח rev 43249508 (אח מוסמך – עובד סיעוד);was=literal אח = male nurse, an extension of ""brother"" (the primary sense) -- a woman says אחות (achot) (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני אחות serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
-about-me.i-am-an-engineer,אני מהנדס,אֲנִי מְהַנְדֵּס,ani mehandes,anˈi mehandˈes,,2,he-agent-v1;ipa=bgn
-about-me.i-work-in-an-office,אני עובד במשרד,אֲנִי עוֹבֵד בְּמִשְׂרָד,ani oved bemisrad,anˈi ovˈed bemisʁˈad,,2,he-agent-v1;ipa=bgn
-about-me.i-have-my-own-business,יש לי עסק משלי,יֵשׁ לִי עֵסֶק מִשֶּׁלִּי,yesh li esek misheli,jˈeʃ lˈi esˈek miʃelˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-mother,זאת אימא שלי,זֹאת אִימָּא שֶׁלִּי,zot ima sheli,zˈot imˈa ʃelˈi,,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (ברוב המקרים תנועת i תסומן באות י' -- לא לפני שווא נח);fix=Academy אימא ואבא (hebrew-academy.org.il: המילה אִמָּא נכתבת בכתיב מלא ביו""ד: אימא);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
-family-intros.this-is-my-father,זה אבא שלי,זֶה אַבָּא שֶׁלִּי,ze aba sheli,zˈe abˈa ʃelˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-brother,זה אח שלי,זֶה אָח שֶׁלִּי,ze aẖ sheli,zˈe ˈax ʃelˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-sister,זאת אחות שלי,זֹאת אָחוֹת שֶׁלִּי,zot aẖot sheli,zˈot axˈot ʃelˈi,,2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-partner,זה בן הזוג שלי,זֶה בֶּן הַזּוּג שֶׁלִּי,ze ben hazug sheli,zˈe bˈen hazˈuɡ ʃelˈi,"ben/bat zug = partner, the neutral civil-status word for a spouse-or-partner regardless of marriage; of a woman, בת הזוג שלי (bat hazug sheli) -- text_alt here is this row's niqqud, not the third-party-gender alternative, so the feminine is noted here instead, matching introductions.this-is-my-friend's own precedent",2,he-agent-v1;ipa=bgn
-family-intros.this-is-my-colleague,זה עמית שלי,זֶה עָמִית שֶׁלִּי,ze amit sheli,zˈe amˈit ʃelˈi,"of a woman, עמיתה שלי (amita sheli)",2,he-agent-v1;ipa=bgn
+concept_id,text,text_alt,romanization_bgn,ipa,literal,note,confidence,provenance
+introductions.my-name-is,קוראים לי {},קוֹרְאִים לִי {},qor’im li {},koʁˈim lˈi {},they call me {},,2,he-agent-v1;ipa=bgn
+introductions.nice-to-meet-you,נעים להכיר,נָעִים לְהַכִּיר,na‘im lehakir,naˈim lehakˈiʁ,pleasant to become acquainted,,2,he-agent-v1;ipa=bgn
+introductions.what-is-your-name,איך קוראים לך?,אֵיךְ קוֹרְאִים לְךָ?,eykh qor’im lekha?,ˈejx koʁˈim lexˈa,to a man; to a woman lakh,,2,he-agent-v1;ipa=bgn
+introductions.we-are-traveling-together,אנחנו מטיילים ביחד,אֲנַחְנוּ מְטַיְּילִים בְּיַחַד,anáẖnu metaylim beyáẖad,anˈaxnu metajlˈim bejˈaxad,we are travelling together,,2,he-agent-v1;ipa=bgn
+introductions.this-is-my-friend,זה חבר שלי,זֶה חָבֵר שֶׁלִּי,ze ẖaver sheli,zˈe xavˈeʁ ʃelˈi,"of a woman, ẖavera",,2,he-agent-v1;ipa=bgn
+introductions.i-am-from,אני מ{},אֲנִי מ{},ani m{},anˈi m {},I am from {},,2,he-agent-v1;ipa=bgn
+introductions.where-are-you-from,מאיזו ארץ?,מֵאֵיזוֹ אֶרֶץ?,me’éyzo érets?,meˈejzo ˈeʁets,from which country?,,2,he-agent-v1;src=Milog ארץ;reply-neutrality-rule;rule=verbless-question-drops-gendered-pronoun;answers-audit-v1;ipa=bgn
+introductions.how-are-you,מה המצב?,מָה הַמַּצָּב?,ma hamatsav?,mˈa hamatsˈav,how is the situation?,the everyday greeting,2,he-agent-v1;ipa=bgn
+introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,I am a tourist,,2,"he-agent-v1;fix=Pealim (pealim.com) 4933 תַּיָּר (tourist);was=literal a woman says tayeret (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני תיירת serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
+introductions.this-is-my-husband-wife,זה בעלי / זאת אשתי,זֶה בַּעֲלִי / זֹאת אִשְׁתִּי,ze ba‘ali / zot ishti,zˈe baalˈi / zˈot iʃtˈi,this is my husband / this is my wife,,2,he-agent-v1;ipa=bgn
+introductions.this-is-my-daughter-son,זאת הבת שלי / זה הבן שלי,זֹאת הַבַּת שֶׁלִּי / זֶה הַבֵּן שֶׁלִּי,zot habat sheli / ze háben sheli,zˈot habˈat ʃelˈi / zˈe hˈaben ʃelˈi,this is my daughter / this is my son,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-husband,זה בעלי,זֶה בַּעֲלִי,ze ba‘ali,zˈe baalˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-wife,זאת אשתי,זֹאת אִשְׁתִּי,zot ishti,zˈot iʃtˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-son,זה הבן שלי,זֶה הַבֵּן שֶׁלִּי,ze háben sheli,zˈe hˈaben ʃelˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-daughter,זאת הבת שלי,זֹאת הַבַּת שֶׁלִּי,zot habat sheli,zˈot habˈat ʃelˈi,,,2,he-agent-v1;ipa=bgn
+introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,I am travelling alone,,2,"he-agent-v1;fix=Pealim (pealim.com) 743 לְטַיֵּל (to walk -- to travel);was=literal a woman says metayelet (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני מטיילת לבד serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
+about-me.i-am-a-student,אני סטודנט,אֲנִי סְטוּדֶנְט,ani student,anˈi studˈent,,,2,he-agent-v1;ipa=bgn
+about-me.i-am-retired,אני גמלאי,אֲנִי גִּמְלָאִי,ani gimla’i,anˈi ɡimlaˈi,,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-teacher,אני מורה,אֲנִי מוֹרֶה,ani moreh,anˈi moʁˈeh,,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-doctor,אני רופא,אֲנִי רוֹפֵא,ani rofe,anˈi ʁofˈe,,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-nurse,אני אח,אֲנִי אָח,ani aẖ,anˈi ˈax,I am a nurse,,2,"he-agent-v1;fix=he.wikipedia אח rev 43249508 (אח מוסמך – עובד סיעוד);was=literal אח = male nurse, an extension of ""brother"" (the primary sense) -- a woman says אחות (achot) (a translator's note on the speaker's gender, printed where a back-translation belongs -- variants.csv speaker_gender=feminine אני אחות serves a woman);rule=literal prints on the card as a back-translation of the base row's own words, which the speaker_gender=feminine variant inherits (its literal is blank) -- the speaker's gender is the variants' to serve, not a note in a printed column;row-corrections-v18;ipa=bgn"
+about-me.i-am-an-engineer,אני מהנדס,אֲנִי מְהַנְדֵּס,ani mehandes,anˈi mehandˈes,,,2,he-agent-v1;ipa=bgn
+about-me.i-work-in-an-office,אני עובד במשרד,אֲנִי עוֹבֵד בְּמִשְׂרָד,ani oved bemisrad,anˈi ovˈed bemisʁˈad,,,2,he-agent-v1;ipa=bgn
+about-me.i-have-my-own-business,יש לי עסק משלי,יֵשׁ לִי עֵסֶק מִשֶּׁלִּי,yesh li esek misheli,jˈeʃ lˈi esˈek miʃelˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-mother,זאת אימא שלי,זֹאת אִימָּא שֶׁלִּי,zot ima sheli,zˈot imˈa ʃelˈi,,,2,"he-agent-v1;fix=he.wikipedia כתיב מלא rev 43545233 (ברוב המקרים תנועת i תסומן באות י' -- לא לפני שווא נח);fix=Academy אימא ואבא (hebrew-academy.org.il: המילה אִמָּא נכתבת בכתיב מלא ביו""ד: אימא);rule=academy-full-spelling;row-corrections-v7;ipa=bgn"
+family-intros.this-is-my-father,זה אבא שלי,זֶה אַבָּא שֶׁלִּי,ze aba sheli,zˈe abˈa ʃelˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-brother,זה אח שלי,זֶה אָח שֶׁלִּי,ze aẖ sheli,zˈe ˈax ʃelˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-sister,זאת אחות שלי,זֹאת אָחוֹת שֶׁלִּי,zot aẖot sheli,zˈot axˈot ʃelˈi,,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-partner,זה בן הזוג שלי,זֶה בֶּן הַזּוּג שֶׁלִּי,ze ben hazug sheli,zˈe bˈen hazˈuɡ ʃelˈi,"ben/bat zug = partner, the neutral civil-status word for a spouse-or-partner regardless of marriage; of a woman, בת הזוג שלי (bat hazug sheli)","text_alt here is this row's niqqud, not the third-party-gender alternative, so the feminine is noted here instead, matching introductions.this-is-my-friend's own precedent",2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-colleague,זה עמית שלי,זֶה עָמִית שֶׁלִּי,ze amit sheli,zˈe amˈit ʃelˈi,"of a woman, עמיתה שלי (amita sheli)",,2,he-agent-v1;ipa=bgn

@@ -1,148 +1,148 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.politeness-particles,"Ang kagandahang-asal sa Thai ay nasa isang salitang idinaragdag sa dulo ng pangungusap: khrap kung lalaki ang nagsasalita, kha kung babae. Kapag nagtatanong ang babae, sinasabi niya ang kha nang pataas ang tono. Wala ito sa mga hanay dito dahil nakadepende ito sa nagsasalita, kaya idagdag na lamang ninyo ang angkop.",,,,2,fil-agent-v1
-social-basics.hello,Kumusta,,kumusta,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.hello-polite,Kumusta po,,kumusta po,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.good-morning,Magandang umaga,,maɡandaŋ umaɡa,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.good-evening,Magandang gabi,,maɡandaŋ ɡabi,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.goodbye,Paalam,,paalam,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.thank-you,Salamat po,,salamat po,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.you-are-welcome,Walang anuman,,walaŋ anuman,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.excuse-me-sorry,Paumanhin po,,paumanhin po,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.sorry,Pasensya na po,,pasɛnsja na po,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.no-problem,Walang problema,,walaŋ pɾoblɛma,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.i-do-not-know,Hindi ko po alam,,hindi ko po alam,,2,fil-agent-v1;ipa=fil-g2p
-social-basics.good-night,Magandang gabi,,maɡandaŋ ɡabi,the same phrase as good-evening; Filipino does not distinguish them,2,fil-agent-v1;ipa=fil-g2p
-social-basics.okay-fine-i-am-okay,Ayos lang,,ajos laŋ,,2,fil-agent-v1;ipa=fil-g2p
-communication.i-do-not-speak-this-language,Hindi po ako marunong ng {target},,hindi po ako maɾunoŋ naŋ {target},,2,fil-agent-v1;ipa=fil-g2p
-communication.i-speak-only-a-little-of-this,Kaunti lang po ang alam kong {target},,kaunti laŋ po aŋ alam koŋ {target},,2,fil-agent-v1;ipa=fil-g2p
-communication.do-you-speak-english,Marunong po ba kayong mag-{source}?,,maɾunoŋ po ba kajoŋ maɡ {source},,2,fil-agent-v1;ipa=fil-g2p
-communication.please-speak-more-slowly,Pakibagalan po ang inyong pagsasalita,,pakibaɡalan po aŋ iɲoŋ paɡsasalita,,2,fil-agent-v1;ipa=fil-g2p
-communication.i-do-not-understand-spoken,Hindi ko po naiintindihan ang sinasabi,,hindi ko po naiintindihan aŋ sinasabi,,2,fil-agent-v1;ipa=fil-g2p
-communication.i-cannot-read-understand,Hindi ko po mabasa / maintindihan,,hindi ko po mabasa / maintindihan,,2,fil-agent-v1;ipa=fil-g2p
-communication.please-say-it-again,Pakiulit po,,pakiulit po,,2,fil-agent-v1;ipa=fil-g2p
-communication.please-write-it-down,Pakisulat po,,pakisulat po,,2,fil-agent-v1;ipa=fil-g2p
-communication.please-wait-a-moment,Sandali po lang,,sandali po laŋ,,2,fil-agent-v1;ipa=fil-g2p
-communication.can-you-help-me,Puwede po ba ninyo akong tulungan?,,puwɛdɛ po ba niɲo akoŋ tuluŋan,,2,fil-agent-v1;ipa=fil-g2p
-communication.please-show-me-the-text,Pakipakita po ang teksto sa {target},,pakipakita po aŋ tɛksto sa {target},,2,fil-agent-v1;ipa=fil-g2p
-communication.i-cannot-make-out-what-you-are-saying,Hindi ko po masyadong maintindihan ang sinasabi niyo,,hindi ko po masjadoŋ maintindihan aŋ sinasabi nijo,,2,fil-agent-v1;ipa=fil-g2p
-communication.i-do-not-understand,Hindi ko po maintindihan,,hindi ko po maintindihan,,2,fil-agent-v1;ipa=fil-g2p
-communication.i-cannot-read-it,Hindi ko po mabasa ito,,hindi ko po mabasa ito,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.is-this-allowed,Puwede po ba ito?,,puwɛdɛ po ba ito,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.is-tipping-expected,Inaasahan po ba ang tip dito?,,inaasahan po ba aŋ tip dito,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.is-service-included,Kasama na po ba ang service charge?,,kasama na po ba aŋ sɛɾvisɛ khaɾɡɛ,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.may-i-enter,Puwede po ba akong pumasok?,,puwɛdɛ po ba akoŋ pumasok,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.remove-shoes,Kailangan ko po bang magtanggal ng sapatos?,,kailaŋan ko po baŋ maɡtaŋɡal naŋ sapatos,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.photo-of-you,Puwede ko po ba kayong kuhanan ng litrato?,,puwɛdɛ ko po ba kajoŋ kuhanan naŋ litɾato,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.may-i-sit-here,Puwede po ba akong umupo dito?,,puwɛdɛ po ba akoŋ umupo dito,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.queue-for,Ito po ba ang pila para sa {}?,,ito po ba aŋ pila paɾa sa {},,2,fil-agent-v1;ipa=fil-g2p
-etiquette.dressed-appropriately,Angkop po ba ang suot ko?,,aŋkop po ba aŋ suot ko,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.did-not-mean-to-offend,Hindi ko po sinadyang makasakit,,hindi ko po sinadjaŋ makasakit,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.what-is-customary,Ano po ang kaugalian dito?,,ano po aŋ kauɡalian dito,,2,fil-agent-v1;ipa=fil-g2p
-etiquette.keep-the-change,Sa inyo na po ang sukli,,sa iɲo na po aŋ sukli,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.please-type-it-for-me,Paki-type po para sa akin,,pakitjpɛ po paɾa sa akin,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.please-use-simple-words,Pakigamit po ng simpleng salita,,pakiɡamit po naŋ simplɛŋ salita,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.my-phone-battery-is-low,Mababa na po ang baterya ng phone ko,,mababa na po aŋ batɛɾja naŋ phonɛ ko,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.do-you-have-a-power-bank,Meron po ba kayong power bank?,,mɛɾon po ba kajoŋ powɛɾ bank,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.the-translation-may-be-inaccurate,Maaaring hindi tumpak ang salin,,maaaɾiŋ hindi tumpak aŋ salin,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.please-confirm,Pakikumpirma po,,pakikumpiɾma po,,2,fil-agent-v1;ipa=fil-g2p
-phone-text-power.may-i-charge-my-phone-here,Puwede ko po bang i-charge ang phone ko dito?,,puwɛdɛ ko po baŋ ikhaɾɡɛ aŋ phonɛ ko dito,,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.i-am-using-phone-translation,Gumagamit po ako ng pagsasalin sa phone,,ɡumaɡamit po ako naŋ paɡsasalin sa phonɛ,,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.please-speak-toward-the-phone,Pakisalita po papunta sa phone,,pakisalita po papunta sa phonɛ,,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.please-write-the-place-name,Pakisulat po ang pangalan ng lugar sa {target},,pakisulat po aŋ paŋalan naŋ luɡaɾ sa {target},,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.one-sentence-at-a-time-please,Isang pangungusap muna po,,isaŋ paŋuŋusap muna po,,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.please-type-it-and-show-me,Paki-type po at ipakita sa akin,,pakitjpɛ po at ipakita sa akin,,2,fil-agent-v1;ipa=fil-g2p
-phone-translation.please-look-at-the-screen,Pakitingnan po ang screen,,pakitiŋnan po aŋ skɾɛɛn,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.please-go-ahead,sige / puwede na,,siɡɛ / puwɛdɛ na,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.yes-right,oo,,oo,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) oo (Pang-abay -- Sagot ng pagsang-ayon);rule=one-reading-on-a-board (tama, right, was the gloss of the range);row-corrections-v7;ipa=fil-g2p"
-quick-responses.no-not,hindi,,hindi,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.okay-can,okay,,okaj,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) ókey (okay Ingles -- 1. Nauukol sa kalagayang naayos o ipinagtibay na (kung sa isang kahilingan ...));rule=one-reading-on-a-board (puwede, can, was the can gloss, quick-responses.can-possible is puwede / maaari);row-corrections-v7;ipa=fil-g2p"
-quick-responses.cannot-not-allowed,bawal,,bawal,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) bawal (Pang-uri -- Hindi pinahihintulutang gawin);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is hindi puwede / hindi maaari);row-corrections-v7;ipa=fil-g2p"
-quick-responses.works-okay,gumagana / ayos,,ɡumaɡana / ajos,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.does-not-work-no,hindi gumagana / hindi,,hindi ɡumaɡana / hindi,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.can-possible,puwede / maaari,,puwɛdɛ / maaaɾi,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.cannot-not-possible,hindi puwede / hindi maaari,,hindi puwɛdɛ / hindi maaaɾi,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.okay-fine,okay / ayos,,okaj / ajos,,2,fil-agent-v1;ipa=fil-g2p
-quick-responses.no-good-not-allowed-will-not-work,hindi maganda / bawal / hindi gagana,,hindi maɡanda / bawal / hindi ɡaɡana,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.i-would-like-a-tourist-sim,Gusto ko po ng SIM card para sa turista,,ɡusto ko po naŋ sim kaɾd paɾa sa tuɾista,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.may-i-use-your-wifi,Puwede ko po bang gamitin ang Wi-Fi niyo?,,puwɛdɛ ko po baŋ ɡamitin aŋ wajfaj nijo,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.how-much-data-is-included,Ilang data po ang kasama?,,ilaŋ data po aŋ kasama,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.do-you-need-my-passport,Kailangan niyo po ba ng pasaporte ko?,,kailaŋan nijo po ba naŋ pasapoɾtɛ ko,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.how-long-is-it-valid,Gaano po katagal itong magagamit?,,ɡaano po kataɡal itoŋ maɡaɡamit,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.please-activate-it,Paki-activate po ito,,pakiaktivatɛ po ito,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.do-you-have-an-esim,Meron po ba kayong eSIM?,,mɛɾon po ba kajoŋ isim,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.my-data-is-not-working,Hindi po gumagana ang data ko,,hindi po ɡumaɡana aŋ data ko,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.does-it-need-registration,Kailangan po ba ito ng rehistro?,,kailaŋan po ba ito naŋ ɾɛhistɾo,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.i-have-no-signal,Walang signal po ako,,walaŋ siɡnal po ako,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.please-write-the-wifi-password,Pakisulat po ang password ng Wi-Fi,,pakisulat po aŋ passwoɾd naŋ wajfaj,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.sim-card,SIM card,,sim kaɾd,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.where-can-i-buy-a-plug-adapter,Saan po ako makakabili ng plug adapter?,,saan po ako makakabili naŋ pluɡ adaptɛɾ,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.mobile-data,mobile data,,mobilɛ data,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.can-i-top-up-this-sim,Puwede ko po bang i-top up ang SIM na ito?,,puwɛdɛ ko po baŋ itop up aŋ sim na ito,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.top-up,top-up,reload,topup,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.is-there-coverage-in,May signal po ba sa {}?,,maj siɡnal po ba sa {},,2,fil-agent-v1;ipa=fil-g2p
-sim-data.signal,signal,,siɡnal,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.esim,eSIM,,isim,,2,fil-agent-v1;ipa=fil-g2p+loan
-sim-data.prepaid,prepaid,,pɾɛpaid,,2,fil-agent-v1;ipa=fil-g2p
-sim-data.roaming,roaming,,ɾoamiŋ,,2,fil-agent-v1;ipa=fil-g2p
-children.cannot-find-my-child,Hindi ko po mahanap ang anak ko,,hindi ko po mahanap aŋ anak ko,,2,fil-agent-v1;ipa=fil-g2p
-children.make-an-announcement,Paki-anunsyo niyo po ito,,pakianunsjo nijo po ito,,2,fil-agent-v1;ipa=fil-g2p
-children.child-age,{} taon na po ang anak ko,,{} taon na po aŋ anak ko,,2,fil-agent-v1;ipa=fil-g2p
-children.high-chair,Meron po ba kayong high chair?,,mɛɾon po ba kajoŋ hiɡh khaiɾ,,2,fil-agent-v1;ipa=fil-g2p
-children.baby-changing-room,Nasaan po ang silid-palitan ng lampin?,,nasaan po aŋ silidpalitan naŋ lampin,,2,fil-agent-v1;ipa=fil-g2p
-children.childrens-menu,May menu po ba para sa bata?,,maj mɛnu po ba paɾa sa bata,,2,fil-agent-v1;ipa=fil-g2p
-children.suitable-for-children,Angkop po ba ito para sa mga bata?,,aŋkop po ba ito paɾa sa maŋa bata,,2,fil-agent-v1;ipa=fil-g2p
-children.minimum-age,Ano po ang pinakamababang edad na pinapayagan?,,ano po aŋ pinakamababaŋ ɛdad na pinapajaɡan,,2,fil-agent-v1;ipa=fil-g2p
-children.do-children-pay,Nagbabayad po ba ang mga bata?,,naɡbabajad po ba aŋ maŋa bata,,2,fil-agent-v1;ipa=fil-g2p
-children.crib,Meron po ba kayong crib?,,mɛɾon po ba kajoŋ kɾib,,2,fil-agent-v1;ipa=fil-g2p
-children.warm-this-bottle,Paki-init po ang boteng ito,,pakiinit po aŋ botɛŋ ito,,2,fil-agent-v1;ipa=fil-g2p
-children.car-seat,Kailangan po namin ng car seat para sa bata,,kailaŋan po namin naŋ kaɾ sɛat paɾa sa bata,,2,fil-agent-v1;ipa=fil-g2p
-children.stroller,stroller,,stɾollɛɾ,,2,fil-agent-v1;ipa=fil-g2p
-children.playground,May playground po ba?,,maj plajɡɾound po ba,,2,fil-agent-v1;ipa=fil-g2p
-communication.please-write-it-in-roman-letters,Pakisulat po ito gamit ang letrang Romano,,pakisulat po ito ɡamit aŋ lɛtɾaŋ ɾomano,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.can-you-walk,Kaya niyo pa bang lumakad?,,kaja nijo pa baŋ lumakad,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.card-or-cash,Card po o cash?,,kaɾd po o kash,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.help-is-coming,Paparating na ang tulong,,papaɾatiŋ na aŋ tuloŋ,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.how-many,Ilan po?,,ilan po,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.i-am-calling-an-ambulance,Tumatawag po ako sa ambulansya,,tumatawaɡ po ako sa ambulansja,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.i-am-calling-the-police,Tumatawag po ako sa pulisya,,tumatawaɡ po ako sa pulisja,,2,fil-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=fil-g2p
-board-answers.i-do-not-have-a-phone,Wala po akong cellphone,,wala po akoŋ sɛllphonɛ,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.i-will-find-someone,Maghahanap po ako ng makakatulong,,maɡhahanap po ako naŋ makakatuloŋ,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.i-will-show-you,Ituturo ko po ang daan,,itutuɾo ko po aŋ daan,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.i-will-write-it-down,Isusulat ko po,,isusulat ko po,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.it-is-closed,Sarado na po,,saɾado na po,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.it-is-over-there,Doon po,,doon po,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.none-of-these,Wala po sa mga ito ang ibig kong sabihin,,wala po sa maŋa ito aŋ ibiɡ koŋ sabihin,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.not-possible,Hindi po puwede,,hindi po puwɛdɛ,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.please-wait,Sandali po lang,,sandali po laŋ,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.say-it-again,Pakiulit po,,pakiulit po,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.stay-here,Dito na lang po kayo,,dito na laŋ po kajo,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.the-hospital-is-close,Malapit lang po ang ospital,,malapit laŋ po aŋ ospital,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.there-is-no-wait,"Hindi na po kailangang maghintay, puwede na pumasok",,"hindi na po kailaŋaŋ maɡhintaj, puwɛdɛ na pumasok",,2,fil-agent-v1;ipa=fil-g2p
-board-answers.we-do-not-have-it,Wala po kami nito,,wala po kami nito,"kami (not tayo) = exclusive we, excludes the customer",2,fil-agent-v1;ipa=fil-g2p
-board-answers.what-is-your-name,Ano po ang pangalan niyo?,,ano po aŋ paŋalan nijo,,2,fil-agent-v1;ipa=fil-g2p
-board-answers.where-does-it-hurt,Saan po masakit?,,saan po masakit,,2,fil-agent-v1;ipa=fil-g2p
-kind-words.you-are-very-kind,Mabait po kayo.,,mabait po kajo,,2,kind-words-v1;ipa=fil-g2p
-kind-words.thank-you-for-your-help,Salamat po sa tulong ninyo.,,salamat po sa tuloŋ niɲo,,2,kind-words-v1;ipa=fil-g2p
-kind-words.this-is-delicious,Masarap po ito.,,masaɾap po ito,,2,kind-words-v1;ipa=fil-g2p
-kind-words.it-is-beautiful-here,Maganda po dito.,,maɡanda po dito,,2,kind-words-v1;ipa=fil-g2p
-kind-words.i-like-it-very-much,Gustong-gusto ko po ito.,,ɡustoŋɡusto ko po ito,,2,kind-words-v1;ipa=fil-g2p
-kind-words.i-had-a-wonderful-time,Naging maganda po ang karanasan ko dito.,,naɡiŋ maɡanda po aŋ kaɾanasan ko dito,,2,kind-words-v1;ipa=fil-g2p
-kind-words.thank-you-for-everything,Salamat po sa lahat.,,salamat po sa lahat,,2,kind-words-v1;ipa=fil-g2p
-kind-words.thank-you-for-your-hospitality,Salamat po sa inyong pagtanggap.,,salamat po sa iɲoŋ paɡtaŋɡap,,2,kind-words-v1;ipa=fil-g2p
-board-answers.my-name-is-blank,Ako po si {},,ako po si {},I [am] {}: si marks a personal name; po is respect for the listener and marks no one's sex,2,fil-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
-board-answers.i-would-rather-not-say,Hindi ko na lang po sasabihin,,hindi ko na laŋ po sasabihin,I will just not say it,2,fil-agent-v1;in-pack-neighbour=board-answers.none-of-these;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
-board-answers.what-happened,Ano po ang nangyari?,,ano po aŋ naŋjaɾi,what happened?,2,fil-agent-v1;src=KWF Diksiyonaryo mangyári;answers-audit-v1;ipa=fil-g2p
-board-answers.understood,"Sige po, naiintindihan ko",,"siɡɛ po, naiintindihan ko","all right, I understand",2,fil-agent-v1;in-pack-neighbour=communication.i-do-not-understand;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
-board-answers.i-will-check,Titingnan ko po muna,,titiŋnan ko po muna,I will look first,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (tingnán);reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
-board-answers.we-have-it,Meron po,,mɛɾon po,there is: the question's own Meron echoed,2,fil-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=fil-g2p
-board-answers.we-are-full,Puno na po,,puno na po,already full,2,fil-agent-v1;src=KWF Diksiyonaryo punô (2);answers-audit-v1;ipa=fil-g2p
-board-answers.it-is-free,Libre po,,libɾɛ po,,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=fil-g2p
-board-answers.it-does-not-matter,Kahit alin po,,kahit alin po,whichever one,2,fil-agent-v1;src=KWF Diksiyonaryo kahit;answers-audit-v1;ipa=fil-g2p
-board-answers.only-for-customers,Para lang po sa mga customer,,paɾa laŋ po sa maŋa kustomɛɾ,only for customers,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=fil-g2p
-board-answers.where-to,Saan po ang punta?,,saan po aŋ punta,where is the going?,2,fil-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=fil-g2p
-board-answers.at-the-next-stop,Sa susunod na hintuan po,,sa susunod na hintuan po,at the next stop,2,fil-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=fil-g2p
-board-answers.pay-on-board,Sa sasakyan na po ang bayad,,sa sasakjan na po aŋ bajad,the payment is on the vehicle,2,fil-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=fil-g2p
-board-answers.see-a-doctor,Mas mabuti pong magpatingin sa doktor,,mas mabuti poŋ maɡpatiŋin sa doktoɾ,it is better to have [it] checked by a doctor,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (magpatingín);in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=fil-g2p
-board-answers.prescription-only,Kailangan po ng reseta,,kailaŋan po naŋ ɾɛsɛta,a prescription is needed,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=fil-g2p
-board-answers.before-food,Bago po kumain,,baɡo po kumain,before eating,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p
-board-answers.after-food,Pagkatapos po kumain,,paɡkatapos po kumain,after eating,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+social-basics.politeness-particles,"Ang kagandahang-asal sa Thai ay nasa isang salitang idinaragdag sa dulo ng pangungusap: khrap kung lalaki ang nagsasalita, kha kung babae. Kapag nagtatanong ang babae, sinasabi niya ang kha nang pataas ang tono. Wala ito sa mga hanay dito dahil nakadepende ito sa nagsasalita, kaya idagdag na lamang ninyo ang angkop.",,,,,2,fil-agent-v1
+social-basics.hello,Kumusta,,kumusta,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.hello-polite,Kumusta po,,kumusta po,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.good-morning,Magandang umaga,,maɡandaŋ umaɡa,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.good-evening,Magandang gabi,,maɡandaŋ ɡabi,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.goodbye,Paalam,,paalam,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.thank-you,Salamat po,,salamat po,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.you-are-welcome,Walang anuman,,walaŋ anuman,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.excuse-me-sorry,Paumanhin po,,paumanhin po,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.sorry,Pasensya na po,,pasɛnsja na po,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.no-problem,Walang problema,,walaŋ pɾoblɛma,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.i-do-not-know,Hindi ko po alam,,hindi ko po alam,,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.good-night,Magandang gabi,,maɡandaŋ ɡabi,the same phrase as good-evening; Filipino does not distinguish them,,2,fil-agent-v1;ipa=fil-g2p
+social-basics.okay-fine-i-am-okay,Ayos lang,,ajos laŋ,,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-do-not-speak-this-language,Hindi po ako marunong ng {target},,hindi po ako maɾunoŋ naŋ {target},,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-speak-only-a-little-of-this,Kaunti lang po ang alam kong {target},,kaunti laŋ po aŋ alam koŋ {target},,,2,fil-agent-v1;ipa=fil-g2p
+communication.do-you-speak-english,Marunong po ba kayong mag-{source}?,,maɾunoŋ po ba kajoŋ maɡ {source},,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-speak-more-slowly,Pakibagalan po ang inyong pagsasalita,,pakibaɡalan po aŋ iɲoŋ paɡsasalita,,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-do-not-understand-spoken,Hindi ko po naiintindihan ang sinasabi,,hindi ko po naiintindihan aŋ sinasabi,,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-cannot-read-understand,Hindi ko po mabasa / maintindihan,,hindi ko po mabasa / maintindihan,,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-say-it-again,Pakiulit po,,pakiulit po,,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-write-it-down,Pakisulat po,,pakisulat po,,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-wait-a-moment,Sandali po lang,,sandali po laŋ,,,2,fil-agent-v1;ipa=fil-g2p
+communication.can-you-help-me,Puwede po ba ninyo akong tulungan?,,puwɛdɛ po ba niɲo akoŋ tuluŋan,,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-show-me-the-text,Pakipakita po ang teksto sa {target},,pakipakita po aŋ tɛksto sa {target},,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-cannot-make-out-what-you-are-saying,Hindi ko po masyadong maintindihan ang sinasabi niyo,,hindi ko po masjadoŋ maintindihan aŋ sinasabi nijo,,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-do-not-understand,Hindi ko po maintindihan,,hindi ko po maintindihan,,,2,fil-agent-v1;ipa=fil-g2p
+communication.i-cannot-read-it,Hindi ko po mabasa ito,,hindi ko po mabasa ito,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.is-this-allowed,Puwede po ba ito?,,puwɛdɛ po ba ito,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.is-tipping-expected,Inaasahan po ba ang tip dito?,,inaasahan po ba aŋ tip dito,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.is-service-included,Kasama na po ba ang service charge?,,kasama na po ba aŋ sɛɾvisɛ khaɾɡɛ,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.may-i-enter,Puwede po ba akong pumasok?,,puwɛdɛ po ba akoŋ pumasok,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.remove-shoes,Kailangan ko po bang magtanggal ng sapatos?,,kailaŋan ko po baŋ maɡtaŋɡal naŋ sapatos,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.photo-of-you,Puwede ko po ba kayong kuhanan ng litrato?,,puwɛdɛ ko po ba kajoŋ kuhanan naŋ litɾato,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.may-i-sit-here,Puwede po ba akong umupo dito?,,puwɛdɛ po ba akoŋ umupo dito,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.queue-for,Ito po ba ang pila para sa {}?,,ito po ba aŋ pila paɾa sa {},,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.dressed-appropriately,Angkop po ba ang suot ko?,,aŋkop po ba aŋ suot ko,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.did-not-mean-to-offend,Hindi ko po sinadyang makasakit,,hindi ko po sinadjaŋ makasakit,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.what-is-customary,Ano po ang kaugalian dito?,,ano po aŋ kauɡalian dito,,,2,fil-agent-v1;ipa=fil-g2p
+etiquette.keep-the-change,Sa inyo na po ang sukli,,sa iɲo na po aŋ sukli,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.please-type-it-for-me,Paki-type po para sa akin,,pakitjpɛ po paɾa sa akin,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.please-use-simple-words,Pakigamit po ng simpleng salita,,pakiɡamit po naŋ simplɛŋ salita,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.my-phone-battery-is-low,Mababa na po ang baterya ng phone ko,,mababa na po aŋ batɛɾja naŋ phonɛ ko,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.do-you-have-a-power-bank,Meron po ba kayong power bank?,,mɛɾon po ba kajoŋ powɛɾ bank,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.the-translation-may-be-inaccurate,Maaaring hindi tumpak ang salin,,maaaɾiŋ hindi tumpak aŋ salin,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.please-confirm,Pakikumpirma po,,pakikumpiɾma po,,,2,fil-agent-v1;ipa=fil-g2p
+phone-text-power.may-i-charge-my-phone-here,Puwede ko po bang i-charge ang phone ko dito?,,puwɛdɛ ko po baŋ ikhaɾɡɛ aŋ phonɛ ko dito,,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.i-am-using-phone-translation,Gumagamit po ako ng pagsasalin sa phone,,ɡumaɡamit po ako naŋ paɡsasalin sa phonɛ,,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.please-speak-toward-the-phone,Pakisalita po papunta sa phone,,pakisalita po papunta sa phonɛ,,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.please-write-the-place-name,Pakisulat po ang pangalan ng lugar sa {target},,pakisulat po aŋ paŋalan naŋ luɡaɾ sa {target},,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.one-sentence-at-a-time-please,Isang pangungusap muna po,,isaŋ paŋuŋusap muna po,,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.please-type-it-and-show-me,Paki-type po at ipakita sa akin,,pakitjpɛ po at ipakita sa akin,,,2,fil-agent-v1;ipa=fil-g2p
+phone-translation.please-look-at-the-screen,Pakitingnan po ang screen,,pakitiŋnan po aŋ skɾɛɛn,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.please-go-ahead,sige / puwede na,,siɡɛ / puwɛdɛ na,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.yes-right,oo,,oo,,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) oo (Pang-abay -- Sagot ng pagsang-ayon);rule=one-reading-on-a-board (tama, right, was the gloss of the range);row-corrections-v7;ipa=fil-g2p"
+quick-responses.no-not,hindi,,hindi,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.okay-can,okay,,okaj,,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) ókey (okay Ingles -- 1. Nauukol sa kalagayang naayos o ipinagtibay na (kung sa isang kahilingan ...));rule=one-reading-on-a-board (puwede, can, was the can gloss, quick-responses.can-possible is puwede / maaari);row-corrections-v7;ipa=fil-g2p"
+quick-responses.cannot-not-allowed,bawal,,bawal,,,2,"fil-agent-v1;fix=KWF Diksiyonaryo ng Wikang Filipino (kwfdiksiyonaryo.ph) bawal (Pang-uri -- Hindi pinahihintulutang gawin);rule=one-reading-on-a-board (the prohibition sets this concept apart from quick-responses.cannot-not-possible, which is hindi puwede / hindi maaari);row-corrections-v7;ipa=fil-g2p"
+quick-responses.works-okay,gumagana / ayos,,ɡumaɡana / ajos,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.does-not-work-no,hindi gumagana / hindi,,hindi ɡumaɡana / hindi,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.can-possible,puwede / maaari,,puwɛdɛ / maaaɾi,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.cannot-not-possible,hindi puwede / hindi maaari,,hindi puwɛdɛ / hindi maaaɾi,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.okay-fine,okay / ayos,,okaj / ajos,,,2,fil-agent-v1;ipa=fil-g2p
+quick-responses.no-good-not-allowed-will-not-work,hindi maganda / bawal / hindi gagana,,hindi maɡanda / bawal / hindi ɡaɡana,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.i-would-like-a-tourist-sim,Gusto ko po ng SIM card para sa turista,,ɡusto ko po naŋ sim kaɾd paɾa sa tuɾista,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.may-i-use-your-wifi,Puwede ko po bang gamitin ang Wi-Fi niyo?,,puwɛdɛ ko po baŋ ɡamitin aŋ wajfaj nijo,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.how-much-data-is-included,Ilang data po ang kasama?,,ilaŋ data po aŋ kasama,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.do-you-need-my-passport,Kailangan niyo po ba ng pasaporte ko?,,kailaŋan nijo po ba naŋ pasapoɾtɛ ko,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.how-long-is-it-valid,Gaano po katagal itong magagamit?,,ɡaano po kataɡal itoŋ maɡaɡamit,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.please-activate-it,Paki-activate po ito,,pakiaktivatɛ po ito,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.do-you-have-an-esim,Meron po ba kayong eSIM?,,mɛɾon po ba kajoŋ isim,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.my-data-is-not-working,Hindi po gumagana ang data ko,,hindi po ɡumaɡana aŋ data ko,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.does-it-need-registration,Kailangan po ba ito ng rehistro?,,kailaŋan po ba ito naŋ ɾɛhistɾo,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.i-have-no-signal,Walang signal po ako,,walaŋ siɡnal po ako,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.please-write-the-wifi-password,Pakisulat po ang password ng Wi-Fi,,pakisulat po aŋ passwoɾd naŋ wajfaj,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.sim-card,SIM card,,sim kaɾd,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.where-can-i-buy-a-plug-adapter,Saan po ako makakabili ng plug adapter?,,saan po ako makakabili naŋ pluɡ adaptɛɾ,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.mobile-data,mobile data,,mobilɛ data,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.can-i-top-up-this-sim,Puwede ko po bang i-top up ang SIM na ito?,,puwɛdɛ ko po baŋ itop up aŋ sim na ito,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.top-up,top-up,reload,topup,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.is-there-coverage-in,May signal po ba sa {}?,,maj siɡnal po ba sa {},,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.signal,signal,,siɡnal,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.esim,eSIM,,isim,,,2,fil-agent-v1;ipa=fil-g2p+loan
+sim-data.prepaid,prepaid,,pɾɛpaid,,,2,fil-agent-v1;ipa=fil-g2p
+sim-data.roaming,roaming,,ɾoamiŋ,,,2,fil-agent-v1;ipa=fil-g2p
+children.cannot-find-my-child,Hindi ko po mahanap ang anak ko,,hindi ko po mahanap aŋ anak ko,,,2,fil-agent-v1;ipa=fil-g2p
+children.make-an-announcement,Paki-anunsyo niyo po ito,,pakianunsjo nijo po ito,,,2,fil-agent-v1;ipa=fil-g2p
+children.child-age,{} taon na po ang anak ko,,{} taon na po aŋ anak ko,,,2,fil-agent-v1;ipa=fil-g2p
+children.high-chair,Meron po ba kayong high chair?,,mɛɾon po ba kajoŋ hiɡh khaiɾ,,,2,fil-agent-v1;ipa=fil-g2p
+children.baby-changing-room,Nasaan po ang silid-palitan ng lampin?,,nasaan po aŋ silidpalitan naŋ lampin,,,2,fil-agent-v1;ipa=fil-g2p
+children.childrens-menu,May menu po ba para sa bata?,,maj mɛnu po ba paɾa sa bata,,,2,fil-agent-v1;ipa=fil-g2p
+children.suitable-for-children,Angkop po ba ito para sa mga bata?,,aŋkop po ba ito paɾa sa maŋa bata,,,2,fil-agent-v1;ipa=fil-g2p
+children.minimum-age,Ano po ang pinakamababang edad na pinapayagan?,,ano po aŋ pinakamababaŋ ɛdad na pinapajaɡan,,,2,fil-agent-v1;ipa=fil-g2p
+children.do-children-pay,Nagbabayad po ba ang mga bata?,,naɡbabajad po ba aŋ maŋa bata,,,2,fil-agent-v1;ipa=fil-g2p
+children.crib,Meron po ba kayong crib?,,mɛɾon po ba kajoŋ kɾib,,,2,fil-agent-v1;ipa=fil-g2p
+children.warm-this-bottle,Paki-init po ang boteng ito,,pakiinit po aŋ botɛŋ ito,,,2,fil-agent-v1;ipa=fil-g2p
+children.car-seat,Kailangan po namin ng car seat para sa bata,,kailaŋan po namin naŋ kaɾ sɛat paɾa sa bata,,,2,fil-agent-v1;ipa=fil-g2p
+children.stroller,stroller,,stɾollɛɾ,,,2,fil-agent-v1;ipa=fil-g2p
+children.playground,May playground po ba?,,maj plajɡɾound po ba,,,2,fil-agent-v1;ipa=fil-g2p
+communication.please-write-it-in-roman-letters,Pakisulat po ito gamit ang letrang Romano,,pakisulat po ito ɡamit aŋ lɛtɾaŋ ɾomano,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.can-you-walk,Kaya niyo pa bang lumakad?,,kaja nijo pa baŋ lumakad,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.card-or-cash,Card po o cash?,,kaɾd po o kash,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.help-is-coming,Paparating na ang tulong,,papaɾatiŋ na aŋ tuloŋ,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.how-many,Ilan po?,,ilan po,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.i-am-calling-an-ambulance,Tumatawag po ako sa ambulansya,,tumatawaɡ po ako sa ambulansja,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.i-am-calling-the-police,Tumatawag po ako sa pulisya,,tumatawaɡ po ako sa pulisja,,,2,fil-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=fil-g2p
+board-answers.i-do-not-have-a-phone,Wala po akong cellphone,,wala po akoŋ sɛllphonɛ,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.i-will-find-someone,Maghahanap po ako ng makakatulong,,maɡhahanap po ako naŋ makakatuloŋ,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.i-will-show-you,Ituturo ko po ang daan,,itutuɾo ko po aŋ daan,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.i-will-write-it-down,Isusulat ko po,,isusulat ko po,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.it-is-closed,Sarado na po,,saɾado na po,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.it-is-over-there,Doon po,,doon po,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.none-of-these,Wala po sa mga ito ang ibig kong sabihin,,wala po sa maŋa ito aŋ ibiɡ koŋ sabihin,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.not-possible,Hindi po puwede,,hindi po puwɛdɛ,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.please-wait,Sandali po lang,,sandali po laŋ,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.say-it-again,Pakiulit po,,pakiulit po,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.stay-here,Dito na lang po kayo,,dito na laŋ po kajo,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.the-hospital-is-close,Malapit lang po ang ospital,,malapit laŋ po aŋ ospital,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.there-is-no-wait,"Hindi na po kailangang maghintay, puwede na pumasok",,"hindi na po kailaŋaŋ maɡhintaj, puwɛdɛ na pumasok",,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.we-do-not-have-it,Wala po kami nito,,wala po kami nito,"kami (not tayo) = exclusive we, excludes the customer",,2,fil-agent-v1;ipa=fil-g2p
+board-answers.what-is-your-name,Ano po ang pangalan niyo?,,ano po aŋ paŋalan nijo,,,2,fil-agent-v1;ipa=fil-g2p
+board-answers.where-does-it-hurt,Saan po masakit?,,saan po masakit,,,2,fil-agent-v1;ipa=fil-g2p
+kind-words.you-are-very-kind,Mabait po kayo.,,mabait po kajo,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-your-help,Salamat po sa tulong ninyo.,,salamat po sa tuloŋ niɲo,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.this-is-delicious,Masarap po ito.,,masaɾap po ito,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.it-is-beautiful-here,Maganda po dito.,,maɡanda po dito,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.i-like-it-very-much,Gustong-gusto ko po ito.,,ɡustoŋɡusto ko po ito,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.i-had-a-wonderful-time,Naging maganda po ang karanasan ko dito.,,naɡiŋ maɡanda po aŋ kaɾanasan ko dito,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-everything,Salamat po sa lahat.,,salamat po sa lahat,,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-your-hospitality,Salamat po sa inyong pagtanggap.,,salamat po sa iɲoŋ paɡtaŋɡap,,,2,kind-words-v1;ipa=fil-g2p
+board-answers.my-name-is-blank,Ako po si {},,ako po si {},I [am] {}: si marks a personal name; po is respect for the listener and marks no one's sex,,2,fil-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.i-would-rather-not-say,Hindi ko na lang po sasabihin,,hindi ko na laŋ po sasabihin,I will just not say it,,2,fil-agent-v1;in-pack-neighbour=board-answers.none-of-these;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.what-happened,Ano po ang nangyari?,,ano po aŋ naŋjaɾi,what happened?,,2,fil-agent-v1;src=KWF Diksiyonaryo mangyári;answers-audit-v1;ipa=fil-g2p
+board-answers.understood,"Sige po, naiintindihan ko",,"siɡɛ po, naiintindihan ko","all right, I understand",,2,fil-agent-v1;in-pack-neighbour=communication.i-do-not-understand;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.i-will-check,Titingnan ko po muna,,titiŋnan ko po muna,I will look first,,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (tingnán);reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.we-have-it,Meron po,,mɛɾon po,there is: the question's own Meron echoed,,2,fil-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=fil-g2p
+board-answers.we-are-full,Puno na po,,puno na po,already full,,2,fil-agent-v1;src=KWF Diksiyonaryo punô (2);answers-audit-v1;ipa=fil-g2p
+board-answers.it-is-free,Libre po,,libɾɛ po,,,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=fil-g2p
+board-answers.it-does-not-matter,Kahit alin po,,kahit alin po,whichever one,,2,fil-agent-v1;src=KWF Diksiyonaryo kahit;answers-audit-v1;ipa=fil-g2p
+board-answers.only-for-customers,Para lang po sa mga customer,,paɾa laŋ po sa maŋa kustomɛɾ,only for customers,,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=fil-g2p
+board-answers.where-to,Saan po ang punta?,,saan po aŋ punta,where is the going?,,2,fil-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=fil-g2p
+board-answers.at-the-next-stop,Sa susunod na hintuan po,,sa susunod na hintuan po,at the next stop,,2,fil-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=fil-g2p
+board-answers.pay-on-board,Sa sasakyan na po ang bayad,,sa sasakjan na po aŋ bajad,the payment is on the vehicle,,2,fil-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=fil-g2p
+board-answers.see-a-doctor,Mas mabuti pong magpatingin sa doktor,,mas mabuti poŋ maɡpatiŋin sa doktoɾ,it is better to have [it] checked by a doctor,,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (magpatingín);in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=fil-g2p
+board-answers.prescription-only,Kailangan po ng reseta,,kailaŋan po naŋ ɾɛsɛta,a prescription is needed,,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=fil-g2p
+board-answers.before-food,Bago po kumain,,baɡo po kumain,before eating,,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p
+board-answers.after-food,Pagkatapos po kumain,,paɡkatapos po kumain,after eating,,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p

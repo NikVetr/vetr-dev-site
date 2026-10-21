@@ -1,8 +1,8 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Kde si mohu koupit vstupenky?,,ɡdˈe si mˈohu kˈoʊpit fstˈupeŋki,,2,cs-agent-v1;ipa=espeak
-attractions-tickets.do-i-need-a-reservation,Potřebuji rezervaci?,,pˈotr̝ebˌuji rˈezervˌatsi,,2,cs-agent-v1;ipa=espeak
-attractions-tickets.what-is-the-latest-entry-time,Jaký je poslední možný vstup?,,jˈakiː je pˈosledɲiː mˈoʒniː fstˈup,,2,cs-agent-v1;ipa=espeak
-attractions-tickets.are-there-lockers,Jsou tu skříňky na zavazadla?,,jsoʊ tˈu skr̝ˈiːɲki na zˈavazˌadla,,2,cs-agent-v1;ipa=espeak
-attractions-tickets.may-i-take-photos,Mohu fotografovat?,,mˈohu fˈotoɡrˌafovat,,2,cs-agent-v1;ipa=espeak
-attractions-tickets.please-take-a-photo-of-us,"Vyfoťte nás, prosím",,"vˈifocte nˈaːs, prˈosiːm",,2,cs-agent-v1;ipa=espeak
-attractions-tickets.could-you-take-a-photo-for-us,Můžete nás prosím vyfotit?,,mˈuːʒete nˈaːs prˈosiːm vˈifocit,"can you please take a photo of us? -- the present tense můžete, one form for a man or a woman, as in children.make-an-announcement (Můžete to prosím vyhlásit rozhlasem?); mohl byste addressed a man (mohla byste to a woman)",2,"cs-agent-v1;fix=cs.wikipedia Vykání rev 26105820 (V množném čísle se používají ... slovesa s výjimkou jmenných tvarů (příčestí). V jednotném čísle zůstávají přídavná jména a příčestí -- mohl byste to a man, mohla byste to a woman);in-pack-frame=children.make-an-announcement;rule=present-tense-invariant-for-gender;row-corrections-v6;ipa=espeak"
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Kde si mohu koupit vstupenky?,,ɡdˈe si mˈohu kˈoʊpit fstˈupeŋki,,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Potřebuji rezervaci?,,pˈotr̝ebˌuji rˈezervˌatsi,,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Jaký je poslední možný vstup?,,jˈakiː je pˈosledɲiː mˈoʒniː fstˈup,,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Jsou tu skříňky na zavazadla?,,jsoʊ tˈu skr̝ˈiːɲki na zˈavazˌadla,,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Mohu fotografovat?,,mˈohu fˈotoɡrˌafovat,,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Vyfoťte nás, prosím",,"vˈifocte nˈaːs, prˈosiːm",,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Můžete nás prosím vyfotit?,,mˈuːʒete nˈaːs prˈosiːm vˈifocit,can you please take a photo of us?,"the present tense můžete, one form for a man or a woman, as in children.make-an-announcement (Můžete to prosím vyhlásit rozhlasem?); mohl byste addressed a man (mohla byste to a woman)",2,"cs-agent-v1;fix=cs.wikipedia Vykání rev 26105820 (V množném čísle se používají ... slovesa s výjimkou jmenných tvarů (příčestí). V jednotném čísle zůstávají přídavná jména a příčestí -- mohl byste to a man, mohla byste to a woman);in-pack-frame=children.make-an-announcement;rule=present-tense-invariant-for-gender;row-corrections-v6;ipa=espeak"

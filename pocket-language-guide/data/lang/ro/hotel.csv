@@ -1,68 +1,68 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,pașaport,,pˌaʃapˈort,,2,ro-agent-v1;ipa=espeak
-hotel-words.room-key-card,cartelă de cameră,,kartˈelə de kˈameɾˌə,,2,ro-agent-v1;ipa=espeak
-hotel-words.check-in,check-in,sosire,kˈekkin,,2,ro-agent-v1;ipa=espeak
-hotel-words.check-out,check-out,plecare,kˈekkoʊt,,2,ro-agent-v1;ipa=espeak
-hotel-words.luggage-storage,depozit de bagaje,,depˈozit de baɡˈaʒe,,2,ro-agent-v1;ipa=espeak
-hotel-basics.are-any-rooms-available,Aveți camere libere?,,avˌetsʲ kamˈeɾe libˈeɾe,,2,ro-agent-v1;ipa=espeak
-hotel-basics.there-are-two-of-us,Suntem doi,,sˌuntem dˈoj,,2,ro-agent-v1;ipa=espeak
-hotel-basics.i-have-a-reservation,Am o rezervare,,am o rezervˈaɾe,,2,ro-agent-v1;ipa=espeak
-hotel-basics.can-i-charge-my-phone,Îmi pot încărca telefonul?,,ˌɨmʲ pot ˌɨnkərkˈa tˌelefˈonul,,2,ro-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-non-smoking-room,Aș dori o cameră pentru nefumători,,ˈaʃ doɾʲˈi o kˈameɾˌə pˌentru nˌefumətˈoɾʲ,,2,ro-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-quiet-room,Aș dori o cameră liniștită,,ˈaʃ doɾʲˈi o kˈameɾˌə lˌiniʃtˈitə,,2,ro-agent-v1;ipa=espeak
-hotel-basics.is-there-a-washing-machine,Există o mașină de spălat?,,eɡzˌistə o maʃˈinə de spəlˈat,"is there a washing machine? -- există, as hotel-requests.is-there-a-safe; este o ... reads first as 'is it a washing machine?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista and s.v. fi, as hotel-requests.is-there-a-safe;in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
-hotel-basics.is-wi-fi-free,Wi-Fi-ul este gratuit?,,wˈifiul jˌeste ɡratwˈit,,2,ro-agent-v1;ipa=espeak
-hotel-basics.how-much-per-night,Cât costă pe noapte?,,kˈɨt kˈostə pe nˈɔapte,,2,ro-agent-v1;ipa=espeak
-hotel-basics.is-breakfast-included,Micul dejun este inclus?,,mˈikul deʒˈun jˌeste inklˈus,,2,ro-agent-v1;ipa=espeak
-hotel-basics.may-i-see-the-room,Pot vedea camera?,,pot vedˈea kˈameɾˌa,,2,ro-agent-v1;ipa=espeak
-hotel-basics.for-nights,Număr de nopți: {},,nˈumər de nˈoptsʲ {},"'number of nights: {}' -- a label, so the number agrees with nothing",2,ro-agent-v1;fix=DEX '09 număr I.1 (Cantitate de elemente de același fel) and DOOM 3 noapte (s. f. -- pl. nopți);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni -- 10 până la 20 de vizitatori -- vreo douăzeci de case);was=Pentru {} nopți (the plural -- wrong for one (pentru o noapte) and from twenty on (pentru 20 de nopți));rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergie la medicamente: {});row-corrections-v13;ipa=espeak
-hotel-basics.two-beds,"Două paturi, vă rog",,"dˈouˌə patˈurʲ, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-hotel-basics.is-there-air-conditioning,Este aer condiționat?,,jˌeste ˈaɪer kˌonditsjonˈat,,2,ro-agent-v1;ipa=espeak
-hotel-requests.can-i-check-out-later,Pot face check-out mai târziu?,,pot fˌatʃe kˈekkoʊt maɪ tɨrzˈiu,,2,ro-agent-v1;ipa=espeak
-hotel-requests.what-time-does-breakfast-start,La ce oră începe micul dejun?,,la tʃe ˈorə ɨntʃˈepe mˈikul deʒˈun,,2,ro-agent-v1;ipa=espeak
-hotel-requests.can-i-store-my-luggage,Îmi puteți păstra bagajele?,,ˌɨmʲ putˌetsʲ pəstrˈa bˌaɡaʒˈele,,2,ro-agent-v1;ipa=espeak
-hotel-requests.no-housekeeping,Fără curățenie,,fˈərə kˌuɾətsˈenje,,2,ro-agent-v1;ipa=espeak
-hotel-requests.another-towel-please,"Încă un prosop, vă rog",,"ˈɨnkə un prosˈop, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-hotel-requests.what-time-is-check-out,La ce oră este check-out-ul?,,la tʃe ˈorə jˌeste kˈekkoʊtul,,2,ro-agent-v1;ipa=espeak
-hotel-requests.can-i-check-in-early,Pot face check-in mai devreme?,,pot fˌatʃe kˈekkin maɪ devrˈeme,,2,ro-agent-v1;ipa=espeak
-hotel-requests.another-night,Pot rămâne încă o noapte?,,pot rəmˈɨne ˈɨnkə o nˈɔapte,,2,ro-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,Există un seif?,,eɡzˌistə un seˈif,"is there a safe? -- există, the existential verb; este without a place named reads first as the copula, 'is it a safe?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
-hotel-requests.another-blanket,"Încă o pătură, vă rog",,"ˈɨnkə o pˈətuɾˌə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
-hotel-requests.wake-up-call,Vă rog treziți-mă la {},,və rˈoɡ trezˈitsʲimə la {},,2,ro-agent-v1;ipa=espeak
-room-problems.there-is-a-problem-with-the-room,Este o problemă cu camera,,jˌeste o problˈemə ku kˈameɾˌa,,2,ro-agent-v1;ipa=espeak
-room-problems.the-air-conditioning-is-broken,Aerul condiționat este stricat,,ˈaɪerul kˌonditsjonˈat jˌeste strikˈat,,2,ro-agent-v1;ipa=espeak
-room-problems.there-is-no-hot-water,Nu este apă caldă,,nu jˌeste ˈapə kˈaldə,,2,ro-agent-v1;ipa=espeak
-room-problems.can-i-change-rooms,Pot schimba camera?,,pot skimbˈa kˈameɾˌa,,2,ro-agent-v1;ipa=espeak
-room-problems.the-room-is-too-noisy,Camera este prea zgomotoasă,,kˈameɾˌa jˌeste prˈea zɡˌomotˈɔasə,,2,ro-agent-v1;ipa=espeak
-room-problems.the-key-does-not-work,Cheia nu funcționează,,kˈeja nu fˌunktsjonˈeazə,,2,ro-agent-v1;ipa=espeak
-room-problems.the-toilet-will-not-flush,Toaleta nu trage apa,,tɔalˈeta nu trˈadʒe ˈapa,,2,ro-agent-v1;ipa=espeak
-room-problems.the-light-does-not-work,Lumina nu funcționează,,lumˈina nu fˌunktsjonˈeazə,,2,ro-agent-v1;ipa=espeak
-room-problems.please-send-someone,Vă rog trimiteți pe cineva să repare,,və rˈoɡ trimˈitetsʲ pe tʃˌinevˈa sə repˈaɾe,,2,ro-agent-v1;ipa=espeak
-room-problems.the-heating-does-not-work,Încălzirea nu funcționează,,ˌɨnkəlzˈiɾea nu fˌunktsjonˈeazə,,2,ro-agent-v1;ipa=espeak
-laundry.please-wash-these-clothes,Vă rog spălați hainele acestea,,və rˈoɡ spəlˈatsʲ haɪnˈele atʃˈestea,,2,ro-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,Unde este o spălătorie?,,ˈunde jˌeste o spˌələtˈoɾje,,2,ro-agent-v1;ipa=espeak
-laundry.when-will-it-be-ready,Când va fi gata?,,kɨnd va fˈi ɡˈata,,2,ro-agent-v1;ipa=espeak
-laundry.how-much-per-kilo,Cât costă pe kilogram?,,kˈɨt kˈostə pe kˌiloɡrˈam,,2,ro-agent-v1;ipa=espeak
-laundry.can-it-be-ready-today,Poate fi gata astăzi?,,pˌɔate fˈi ɡˈata ˈastəzʲ,,2,ro-agent-v1;ipa=espeak
-laundry.please-do-not-use-bleach,Vă rog nu folosiți înălbitor,,və rˈoɡ nu fˌolosˈitsʲ ˌɨnəlbitˈor,,2,ro-agent-v1;ipa=espeak
-laundry.laundromat,spălătorie,,spˌələtˈoɾje,,2,ro-agent-v1;ipa=espeak
-laundry.please-iron-this,Vă rog călcați asta,,və rˈoɡ kəlkˈatsʲ ˈasta,,2,ro-agent-v1;ipa=espeak
-laundry.detergent,detergent,,dˌeterdʒˈent,,2,ro-agent-v1;ipa=espeak
-laundry.dry-cleaning,curățătorie chimică,,kˌuɾətsətˈoɾje kˈimikˌə,,2,ro-agent-v1;ipa=espeak
-laundry.dryer,uscător,,ˌuskətˈor,,2,ro-agent-v1;ipa=espeak
-laundry.coin-operated,cu monede,,ku monˈede,,2,ro-agent-v1;ipa=espeak
-massage-spa.please-stop,"Opriți, nu continuați",,"oprˈitsʲ, nu kˌontinwˈatsʲ",stop; do not continue,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.please-pause,"O pauză scurtă, vă rog",,"o paˈuzə skˈurtə, və rˈoɡ","a short pause, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.please-avoid-this-area,Vă rog evitați zona aceasta,,və rˈoɡ ˌevitˈatsʲ zˈona atʃˈeasta,please avoid this area,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.stronger-pressure,"Apăsați mai tare, vă rog",,"ˌapəsˈatsʲ maɪ tˈaɾe, və rˈoɡ","press harder, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.more-gently,"Mai ușor, vă rog",,"maɪ uʃˈor, və rˈoɡ","more lightly, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.that-pressure-is-good,"Presiunea este bună, țineți așa",,"presjˈunea jˌeste bˈunə, tsˈinetsʲ aʃˈa",the pressure is good; keep it like that,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.focus-on-shoulders,Vă rog insistați pe umeri,,və rˈoɡ ˌinsistˈatsʲ pe ˈumeɾʲ,please work mainly on the shoulders,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.focus-on-back,Vă rog insistați pe spate,,və rˈoɡ ˌinsistˈatsʲ pe spˈate,please work mainly on the back,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.focus-on-neck,Vă rog insistați pe ceafă,,və rˈoɡ ˌinsistˈatsʲ pe tʃˈeafə,"please work mainly on the nape -- ceafa rather than gat, which this pack already uses for the throat",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.focus-on-feet,Vă rog insistați pe tălpi,,və rˈoɡ ˌinsistˈatsʲ pe tˈəlpʲ,please work mainly on the soles of the feet,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.reply-i-will-avoid-that-area,"Bine, evit zona aceasta",,"bˈine, evˈit zˈona atʃˈeasta",fine; I am avoiding this area,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=present-tense-invariant-for-gender;ipa=espeak
-massage-spa.reply-which-area-exactly,"Care zonă, mai exact?",,"kˌaɾe zˈonə, maɪ eɡzˈakt","which area, more exactly?",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.reply-cannot-avoid-this-treatment,La acest tratament zona aceasta nu poate fi ocolită,,la atʃˌest trˌatamˈent zˈona atʃˌeasta nu pˌɔate fˈi ˌokolˈitə,"in this treatment this area cannot be avoided -- ocolita agrees with zona, not with anyone's sex",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.reply-does-it-hurt-there,Vă doare în zona aceasta?,,və dˈɔaɾe ɨn zˈona atʃˈeasta,does it hurt in this area?,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
-massage-spa.reply-ask-supervisor,"Nu știu sigur, întreb persoana responsabilă",,"nu ʃtˈiʊ sˈiɡur, ɨntrˈeb persˈɔana respˌonsabˈilə","I do not know for sure; I will ask the person in charge -- responsabila agrees with persoana, not with the referent",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=adjective-agrees-with-persoana-not-referent;ipa=espeak
+concept_id,text,text_alt,ipa,literal,note,confidence,provenance
+hotel-words.passport,pașaport,,pˌaʃapˈort,,,2,ro-agent-v1;ipa=espeak
+hotel-words.room-key-card,cartelă de cameră,,kartˈelə de kˈameɾˌə,,,2,ro-agent-v1;ipa=espeak
+hotel-words.check-in,check-in,sosire,kˈekkin,,,2,ro-agent-v1;ipa=espeak
+hotel-words.check-out,check-out,plecare,kˈekkoʊt,,,2,ro-agent-v1;ipa=espeak
+hotel-words.luggage-storage,depozit de bagaje,,depˈozit de baɡˈaʒe,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,Aveți camere libere?,,avˌetsʲ kamˈeɾe libˈeɾe,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,Suntem doi,,sˌuntem dˈoj,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,Am o rezervare,,am o rezervˈaɾe,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Îmi pot încărca telefonul?,,ˌɨmʲ pot ˌɨnkərkˈa tˌelefˈonul,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Aș dori o cameră pentru nefumători,,ˈaʃ doɾʲˈi o kˈameɾˌə pˌentru nˌefumətˈoɾʲ,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Aș dori o cameră liniștită,,ˈaʃ doɾʲˈi o kˈameɾˌə lˌiniʃtˈitə,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Există o mașină de spălat?,,eɡzˌistə o maʃˈinə de spəlˈat,is there a washing machine?,"există, as hotel-requests.is-there-a-safe; este o ... reads first as 'is it a washing machine?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista and s.v. fi, as hotel-requests.is-there-a-safe;in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
+hotel-basics.is-wi-fi-free,Wi-Fi-ul este gratuit?,,wˈifiul jˌeste ɡratwˈit,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,Cât costă pe noapte?,,kˈɨt kˈostə pe nˈɔapte,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Micul dejun este inclus?,,mˈikul deʒˈun jˌeste inklˈus,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,Pot vedea camera?,,pot vedˈea kˈameɾˌa,,,2,ro-agent-v1;ipa=espeak
+hotel-basics.for-nights,Număr de nopți: {},,nˈumər de nˈoptsʲ {},number of nights: {},"a label, so the number agrees with nothing",2,ro-agent-v1;fix=DEX '09 număr I.1 (Cantitate de elemente de același fel) and DOOM 3 noapte (s. f. -- pl. nopți);fix=ro.wikipedia Numeral rev 17766397 (mai mult de 30 de oameni -- 10 până la 20 de vizitatori -- vreo douăzeci de case);was=Pentru {} nopți (the plural -- wrong for one (pentru o noapte) and from twenty on (pentru 20 de nopți));rule=a label whose filler follows a colon and agrees with nothing (the pack's frame Alergie la medicamente: {});row-corrections-v13;ipa=espeak
+hotel-basics.two-beds,"Două paturi, vă rog",,"dˈouˌə patˈurʲ, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,Este aer condiționat?,,jˌeste ˈaɪer kˌonditsjonˈat,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,Pot face check-out mai târziu?,,pot fˌatʃe kˈekkoʊt maɪ tɨrzˈiu,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,La ce oră începe micul dejun?,,la tʃe ˈorə ɨntʃˈepe mˈikul deʒˈun,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Îmi puteți păstra bagajele?,,ˌɨmʲ putˌetsʲ pəstrˈa bˌaɡaʒˈele,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,Fără curățenie,,fˈərə kˌuɾətsˈenje,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,"Încă un prosop, vă rog",,"ˈɨnkə un prosˈop, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,La ce oră este check-out-ul?,,la tʃe ˈorə jˌeste kˈekkoʊtul,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,Pot face check-in mai devreme?,,pot fˌatʃe kˈekkin maɪ devrˈeme,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.another-night,Pot rămâne încă o noapte?,,pot rəmˈɨne ˈɨnkə o nˈɔapte,,,2,ro-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Există un seif?,,eɡzˌistə un seˈif,is there a safe?,"există, the existential verb; este without a place named reads first as the copula, 'is it a safe?'",2,"ro-agent-v1;fix=DEX '09 (Academia Română, read on dexonline.ro) s.v. exista (a fi, a se afla, a se găsi în realitate) and s.v. fi (A. verb predicativ 1. a exista ... B. cu funcție copulativă: El este vesel);in-pack=accessibility.step-free (Există acces fără trepte?);rule=a question about whether something exists, not what it is;row-corrections-v9;ipa=espeak"
+hotel-requests.another-blanket,"Încă o pătură, vă rog",,"ˈɨnkə o pˈətuɾˌə, və rˈoɡ",,,2,ro-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,Vă rog treziți-mă la {},,və rˈoɡ trezˈitsʲimə la {},,,2,ro-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,Este o problemă cu camera,,jˌeste o problˈemə ku kˈameɾˌa,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,Aerul condiționat este stricat,,ˈaɪerul kˌonditsjonˈat jˌeste strikˈat,,,2,ro-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,Nu este apă caldă,,nu jˌeste ˈapə kˈaldə,,,2,ro-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,Pot schimba camera?,,pot skimbˈa kˈameɾˌa,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,Camera este prea zgomotoasă,,kˈameɾˌa jˌeste prˈea zɡˌomotˈɔasə,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,Cheia nu funcționează,,kˈeja nu fˌunktsjonˈeazə,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,Toaleta nu trage apa,,tɔalˈeta nu trˈadʒe ˈapa,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,Lumina nu funcționează,,lumˈina nu fˌunktsjonˈeazə,,,2,ro-agent-v1;ipa=espeak
+room-problems.please-send-someone,Vă rog trimiteți pe cineva să repare,,və rˈoɡ trimˈitetsʲ pe tʃˌinevˈa sə repˈaɾe,,,2,ro-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,Încălzirea nu funcționează,,ˌɨnkəlzˈiɾea nu fˌunktsjonˈeazə,,,2,ro-agent-v1;ipa=espeak
+laundry.please-wash-these-clothes,Vă rog spălați hainele acestea,,və rˈoɡ spəlˈatsʲ haɪnˈele atʃˈestea,,,2,ro-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Unde este o spălătorie?,,ˈunde jˌeste o spˌələtˈoɾje,,,2,ro-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,Când va fi gata?,,kɨnd va fˈi ɡˈata,,,2,ro-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,Cât costă pe kilogram?,,kˈɨt kˈostə pe kˌiloɡrˈam,,,2,ro-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,Poate fi gata astăzi?,,pˌɔate fˈi ɡˈata ˈastəzʲ,,,2,ro-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,Vă rog nu folosiți înălbitor,,və rˈoɡ nu fˌolosˈitsʲ ˌɨnəlbitˈor,,,2,ro-agent-v1;ipa=espeak
+laundry.laundromat,spălătorie,,spˌələtˈoɾje,,,2,ro-agent-v1;ipa=espeak
+laundry.please-iron-this,Vă rog călcați asta,,və rˈoɡ kəlkˈatsʲ ˈasta,,,2,ro-agent-v1;ipa=espeak
+laundry.detergent,detergent,,dˌeterdʒˈent,,,2,ro-agent-v1;ipa=espeak
+laundry.dry-cleaning,curățătorie chimică,,kˌuɾətsətˈoɾje kˈimikˌə,,,2,ro-agent-v1;ipa=espeak
+laundry.dryer,uscător,,ˌuskətˈor,,,2,ro-agent-v1;ipa=espeak
+laundry.coin-operated,cu monede,,ku monˈede,,,2,ro-agent-v1;ipa=espeak
+massage-spa.please-stop,"Opriți, nu continuați",,"oprˈitsʲ, nu kˌontinwˈatsʲ",stop; do not continue,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.please-pause,"O pauză scurtă, vă rog",,"o paˈuzə skˈurtə, və rˈoɡ","a short pause, please",,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.please-avoid-this-area,Vă rog evitați zona aceasta,,və rˈoɡ ˌevitˈatsʲ zˈona atʃˈeasta,please avoid this area,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.stronger-pressure,"Apăsați mai tare, vă rog",,"ˌapəsˈatsʲ maɪ tˈaɾe, və rˈoɡ","press harder, please",,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.more-gently,"Mai ușor, vă rog",,"maɪ uʃˈor, və rˈoɡ","more lightly, please",,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.that-pressure-is-good,"Presiunea este bună, țineți așa",,"presjˈunea jˌeste bˈunə, tsˈinetsʲ aʃˈa",the pressure is good; keep it like that,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-shoulders,Vă rog insistați pe umeri,,və rˈoɡ ˌinsistˈatsʲ pe ˈumeɾʲ,please work mainly on the shoulders,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-back,Vă rog insistați pe spate,,və rˈoɡ ˌinsistˈatsʲ pe spˈate,please work mainly on the back,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-neck,Vă rog insistați pe ceafă,,və rˈoɡ ˌinsistˈatsʲ pe tʃˈeafə,please work mainly on the nape,"ceafa rather than gat, which this pack already uses for the throat",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-feet,Vă rog insistați pe tălpi,,və rˈoɡ ˌinsistˈatsʲ pe tˈəlpʲ,please work mainly on the soles of the feet,,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Bine, evit zona aceasta",,"bˈine, evˈit zˈona atʃˈeasta",fine; I am avoiding this area,,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=present-tense-invariant-for-gender;ipa=espeak
+massage-spa.reply-which-area-exactly,"Care zonă, mai exact?",,"kˌaɾe zˈonə, maɪ eɡzˈakt","which area, more exactly?",,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,La acest tratament zona aceasta nu poate fi ocolită,,la atʃˌest trˌatamˈent zˈona atʃˌeasta nu pˌɔate fˈi ˌokolˈitə,in this treatment this area cannot be avoided,"ocolita agrees with zona, not with anyone's sex",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Vă doare în zona aceasta?,,və dˈɔaɾe ɨn zˈona atʃˈeasta,does it hurt in this area?,,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-ask-supervisor,"Nu știu sigur, întreb persoana responsabilă",,"nu ʃtˈiʊ sˈiɡur, ɨntrˈeb persˈɔana respˌonsabˈilə",I do not know for sure; I will ask the person in charge,"responsabila agrees with persoana, not with the referent",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=adjective-agrees-with-persoana-not-referent;ipa=espeak

@@ -1,34 +1,34 @@
-concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
-numbers-money.l-ng,,,pagh,pʰɑɣ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.y,,,wa',wɑʔ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.r,,,cha',tʃɑʔ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.s-n,,,wej,wɛdʒ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.s,,,loS,loʂ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.w,,,vagh,vɑɣ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.li,,,jav,dʒɑv,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.q,,,Soch,ʂotʃ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.b,,,chorgh,tʃorɣ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.ji,,,Hut,xutʰ,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.sh,,,wa'maH,wɑʔmɑx,one ten,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.y-b-i,,,wa'vatlh,wɑʔvɑtɬ,one hundred,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.y-qi-n,,,wa'SaD,wɑʔʂɑɖ,one thousand; wa'SanID is the same number,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.y-w-n,,,wa'netlh,wɑʔnɛtɬ,one ten-thousand,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
-numbers-money.b-n,,,bID,bɪɖ,half,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-atm-cash.where-can-i-change-money,  ,,nuqDaq Huch vItamlaH,nuqʰɖɑqʰ xutʃ vɪtʰɑmlɑx,where can I exchange money?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.do-you-have-change, ,,chuv Daghaj'a',tʃuv ɖɑɣɑdʒʔɑʔ,do you have change?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.banknote, ,,Huch nav,xutʃ nɑv,paper money,3,tlh-attested-v1;src=Klingon Monopoly;native=piqad-csur;ipa=okrand
-atm-cash.coin,,,DeQ,ɖɛqx,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
-atm-cash.change,,,chuv,tʃuv,what is left over,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2020;native=piqad-csur;ipa=okrand
-atm-cash.bank,,,beylI',bɛjlɪʔ,,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
-atm-cash.atm,,,beylI',bɛjlɪʔ,bank -- Klingon has no word for a cash machine,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
-atm-cash.where-is-an-atm,  ,,nuqDaq 'oH beylI''e',nuqʰɖɑqʰ ʔox bɛjlɪʔʔɛʔ,where is the bank?,1,tlh-composed-v1;lex=TNK + TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.money-exchange,  ,,Huch tammeH Daq,xutʃ tʰɑmmɛx ɖɑqʰ,the place for exchanging money,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.fee,,,qav'ap,qʰɑvʔɑpʰ,fee / rent,3,tlh-attested-v1;src=Klingon Monopoly;native=piqad-csur;ipa=okrand
-atm-cash.is-there-a-fee, ,,qav'ap tu'lu''a',qʰɑvʔɑpʰ tʰuʔluʔʔɑʔ,is there a fee?,1,tlh-composed-v1;lex=Klingon Monopoly + CK;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.cash-only, ,,Huch neH,xutʃ nɛx,money only,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.the-card-was-declined,  ,,Qapbe' Huch chaw'wIj,qxɑpʰbɛʔ xutʃ tʃɑwʔwɪdʒ,my credit card does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.the-machine-is-out-of-service, ,,QapHa' jan,qxɑpʰxɑʔ dʒɑn,the device malfunctions,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.no-money-came-out, ,,narghpu'be' Huch,nɑrɣpʰuʔbɛʔ xutʃ,no money emerged,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.the-atm-kept-my-card,   ,,Huch chaw'wIj polpu' beylI',xutʃ tʃɑwʔwɪdʒ pʰolpʰuʔ bɛjlɪʔ,the bank has kept my credit card,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.where-can-i-get-coins,  ,,nuqDaq DeQmey vISuqlaH,nuqʰɖɑqʰ ɖɛqxmɛj vɪʂuqʰlɑx,where can I acquire coins?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-atm-cash.please-give-me-smaller-notes,   ,,Huch nav mach HInob,xutʃ nɑv mɑtʃ xɪnob,give me small paper money,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,note,confidence,provenance
+numbers-money.l-ng,,,pagh,pʰɑɣ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.y,,,wa',wɑʔ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.r,,,cha',tʃɑʔ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.s-n,,,wej,wɛdʒ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.s,,,loS,loʂ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.w,,,vagh,vɑɣ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.li,,,jav,dʒɑv,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.q,,,Soch,ʂotʃ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.b,,,chorgh,tʃorɣ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.ji,,,Hut,xutʰ,,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.sh,,,wa'maH,wɑʔmɑx,one ten,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.y-b-i,,,wa'vatlh,wɑʔvɑtɬ,one hundred,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.y-qi-n,,,wa'SaD,wɑʔʂɑɖ,one thousand; wa'SanID is the same number,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.y-w-n,,,wa'netlh,wɑʔnɛtɬ,one ten-thousand,,3,tlh-attested-v1;src=TKD 5.2;native=piqad-csur;ipa=okrand
+numbers-money.b-n,,,bID,bɪɖ,half,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+atm-cash.where-can-i-change-money,  ,,nuqDaq Huch vItamlaH,nuqʰɖɑqʰ xutʃ vɪtʰɑmlɑx,where can I exchange money?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.do-you-have-change, ,,chuv Daghaj'a',tʃuv ɖɑɣɑdʒʔɑʔ,do you have change?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.banknote, ,,Huch nav,xutʃ nɑv,paper money,,3,tlh-attested-v1;src=Klingon Monopoly;native=piqad-csur;ipa=okrand
+atm-cash.coin,,,DeQ,ɖɛqx,,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+atm-cash.change,,,chuv,tʃuv,what is left over,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2020;native=piqad-csur;ipa=okrand
+atm-cash.bank,,,beylI',bɛjlɪʔ,,,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+atm-cash.atm,,,beylI',bɛjlɪʔ,bank,Klingon has no word for a cash machine,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+atm-cash.where-is-an-atm,  ,,nuqDaq 'oH beylI''e',nuqʰɖɑqʰ ʔox bɛjlɪʔʔɛʔ,where is the bank?,,1,tlh-composed-v1;lex=TNK + TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.money-exchange,  ,,Huch tammeH Daq,xutʃ tʰɑmmɛx ɖɑqʰ,the place for exchanging money,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.fee,,,qav'ap,qʰɑvʔɑpʰ,fee / rent,,3,tlh-attested-v1;src=Klingon Monopoly;native=piqad-csur;ipa=okrand
+atm-cash.is-there-a-fee, ,,qav'ap tu'lu''a',qʰɑvʔɑpʰ tʰuʔluʔʔɑʔ,is there a fee?,,1,tlh-composed-v1;lex=Klingon Monopoly + CK;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.cash-only, ,,Huch neH,xutʃ nɛx,money only,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.the-card-was-declined,  ,,Qapbe' Huch chaw'wIj,qxɑpʰbɛʔ xutʃ tʃɑwʔwɪdʒ,my credit card does not work,,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.the-machine-is-out-of-service, ,,QapHa' jan,qxɑpʰxɑʔ dʒɑn,the device malfunctions,,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.no-money-came-out, ,,narghpu'be' Huch,nɑrɣpʰuʔbɛʔ xutʃ,no money emerged,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.the-atm-kept-my-card,   ,,Huch chaw'wIj polpu' beylI',xutʃ tʃɑwʔwɪdʒ pʰolpʰuʔ bɛjlɪʔ,the bank has kept my credit card,,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.where-can-i-get-coins,  ,,nuqDaq DeQmey vISuqlaH,nuqʰɖɑqʰ ɖɛqxmɛj vɪʂuqʰlɑx,where can I acquire coins?,,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+atm-cash.please-give-me-smaller-notes,   ,,Huch nav mach HInob,xutʃ nɑv mɑtʃ xɪnob,give me small paper money,,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

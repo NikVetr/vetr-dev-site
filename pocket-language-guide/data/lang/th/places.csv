@@ -1,8 +1,8 @@
-concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,ซื้อตั๋วได้ที่ไหน,,sue tua dai thi nai,sɯː˦˥ tua̯˩˩˦ daːj˥˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.do-i-need-a-reservation,ต้องจองไหม,,tong chong mai,tɔŋ˥˩ tɕɔːŋ˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.what-is-the-latest-entry-time,เข้าได้ถึงกี่โมง,,khao dai thueng ki mong,kʰaw˥˩ daːj˥˩ tʰɯŋ˩˩˦ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.are-there-lockers,มีล็อกเกอร์ไหม,,mi lokkoe mai,miː˧ lɔk˦˥kɤː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.may-i-take-photos,ถ่ายรูปได้ไหม,,thai rup dai mai,tʰaːj˨˩ruːp˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.please-take-a-photo-of-us,ช่วยถ่ายรูปให้หน่อย,,chuai thai rup hai noi,tɕʰua̯j˥˩ tʰaːj˨˩ruːp˥˩ haj˥˩ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
-attractions-tickets.could-you-take-a-photo-for-us,ถ่ายรูปให้เราได้ไหม,,thai rup hai rao dai mai,tʰaːj˨˩ruːp˥˩ haj˥˩ raw˧ daːj˥˩ maj˩˩˦,"could you take a photo for us? -- hai rao, for us; the old row did not say whom the photo was for",2,"th-agent-v1;fix=RID-2554 เรา (สรรพนามบุรุษที่ ๑ เป็นคำแทนตัวผู้พูด จะเป็นคนเดียวหรือหลายคนก็ได้), read on dictionary.orst.go.th;in-pack-neighbour=pronouns-verbs.we-us (เรา);rule=say-what-the-concept-says;row-corrections-v7;ipa=thaig2p"
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,note,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,ซื้อตั๋วได้ที่ไหน,,sue tua dai thi nai,sɯː˦˥ tua̯˩˩˦ daːj˥˩ tʰiː˥˩naj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.do-i-need-a-reservation,ต้องจองไหม,,tong chong mai,tɔŋ˥˩ tɕɔːŋ˧ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.what-is-the-latest-entry-time,เข้าได้ถึงกี่โมง,,khao dai thueng ki mong,kʰaw˥˩ daːj˥˩ tʰɯŋ˩˩˦ kiː˨˩ moːŋ˧,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.are-there-lockers,มีล็อกเกอร์ไหม,,mi lokkoe mai,miː˧ lɔk˦˥kɤː˧ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.may-i-take-photos,ถ่ายรูปได้ไหม,,thai rup dai mai,tʰaːj˨˩ruːp˥˩ daːj˥˩ maj˩˩˦,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.please-take-a-photo-of-us,ช่วยถ่ายรูปให้หน่อย,,chuai thai rup hai noi,tɕʰua̯j˥˩ tʰaːj˨˩ruːp˥˩ haj˥˩ nɔj˨˩,,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.could-you-take-a-photo-for-us,ถ่ายรูปให้เราได้ไหม,,thai rup hai rao dai mai,tʰaːj˨˩ruːp˥˩ haj˥˩ raw˧ daːj˥˩ maj˩˩˦,could you take a photo for us?,"hai rao, for us; the old row did not say whom the photo was for",2,"th-agent-v1;fix=RID-2554 เรา (สรรพนามบุรุษที่ ๑ เป็นคำแทนตัวผู้พูด จะเป็นคนเดียวหรือหลายคนก็ได้), read on dictionary.orst.go.th;in-pack-neighbour=pronouns-verbs.we-us (เรา);rule=say-what-the-concept-says;row-corrections-v7;ipa=thaig2p"

@@ -1,31 +1,31 @@
-concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
-introductions.my-name-is,என் பெயர் {},,eṉ peyar {},en pejʌr {},,2,ta-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,உங்களைச் சந்தித்ததில் மகிழ்ச்சி,,uṅkaḷaic cantittatil makiḻcci,uŋɡʌɭaɪtʃː ʌndittʌdil mʌɡiɻtʃːi,,2,ta-agent-v1;ipa=espeak
-introductions.what-is-your-name,உங்கள் பெயர் என்ன?,,uṅkaḷ peyar eṉṉa?,uŋɡʌɭ pejʌr ennʌ,,2,ta-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,நாங்கள் சேர்ந்து பயணம் செய்கிறோம்,,nāṅkaḷ cērntu payaṇam ceykiṟōm,naːŋɡʌɭ seːrndɯ pʌjʌɳʌm sejɡiroːm,,2,ta-agent-v1;ipa=espeak
-introductions.this-is-my-friend,இவர் என் நண்பர்,,ivar eṉ naṇpar,ivʌr en nʌɳbʌr,,2,ta-agent-v1;ipa=espeak
-introductions.i-am-from,என் ஊர் {},,eṉ ūr {},en uːr {},my home place is —,2,"ta-agent-v1; text_alt cleared for fill-in: இல் (locative) fuses onto a noun's oblique stem with a glide (இந்தியாவில், not இந்தியா இல்), which a bare inserted name cannot supply -- the primary text (என் ஊர் {}, zero-copula predicate nominal) already passes the frame check and needs no case device, so the defective alternate is dropped rather than repaired;ipa=espeak"
-introductions.where-are-you-from,நீங்கள் எந்த ஊர்?,,nīṅkaḷ enta ūr?,niːŋɡʌɭ endʌ uːr,which place are you?,2,ta-agent-v1;ipa=espeak
-introductions.how-are-you,நீங்கள் எப்படி இருக்கிறீர்கள்?,எப்படி இருக்கீங்க?,nīṅkaḷ eppaṭi irukkiṟīrkaḷ?,niːŋɡʌɭ eppʌɖi iɾɯkkiriːrɡʌɭ,,2,ta-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,நான் ஒரு சுற்றுலாப் பயணி,,nāṉ oru cuṟṟulāp payaṇi,naːn oɾɯ suʈrɯlaːp pʌjʌɳi,,2,ta-agent-v1;ipa=espeak
-introductions.this-is-my-husband-wife,இவர் என் கணவர் / மனைவி,,ivar eṉ kaṇavar / maṉaivi,ivʌr en kʌɳʌvʌr / mʌnaɪvi,my husband / my wife,2,ta-agent-v1;ipa=espeak
-introductions.this-is-my-daughter-son,இவள் என் மகள் / இவன் என் மகன்,,ivaḷ eṉ makaḷ / ivaṉ eṉ makaṉ,ivʌɭ en mʌɡʌɭ / ivʌn en mʌɡʌn,my daughter / my son,2,ta-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,நான் தனியாகப் பயணம் செய்கிறேன்,,nāṉ taṉiyākap payaṇam ceykiṟēṉ,naːn tʌnijaːɡʌp pʌjʌɳʌm sejɡireːn,,2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-husband,இவர் என் கணவர்,,ivar eṉ kaṇavar,ivʌr en kʌɳʌvʌr,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-wife,இவர் என் மனைவி,,ivar eṉ maṉaivi,ivʌr en mʌnaɪvi,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
-family-intros.this-is-my-son,இவன் என் மகன்,,ivaṉ eṉ makaṉ,ivʌn en mʌɡʌn,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-family-intros.this-is-my-daughter,இவள் என் மகள்,,ivaḷ eṉ makaḷ,ivʌɭ en mʌɡʌɭ,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
-about-me.i-am-a-student,நான் மாணவர்,,nāṉ māṇavar,naːn maːɳʌvʌr,"மாணவர், the common-gender -ர் form, in preference to the sex-marked மாணவன்/மாணவி pair since ta declares no speaker_gender axis",2,ta-agent-v1;ipa=espeak
-about-me.i-am-retired,நான் பணி ஓய்வு பெற்றேன்,,nāṉ paṇi ōyvu peṟṟēṉ,naːn pʌɳi oːjvɯ peʈreːn,,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): பெற்றேன் has ற்ற, ṟṟ;row-corrections-v1;ipa=espeak"
-about-me.i-am-a-teacher,நான் ஆசிரியர்,,nāṉ āciriyar,naːn aːsiɾijʌr,ஆசிரியர் is already common-gender in standard Tamil,2,ta-agent-v1;ipa=espeak
-about-me.i-am-a-doctor,நான் மருத்துவர்,,nāṉ maruttuvar,naːn mʌɾɯttɯvʌr,"மருத்துவர், the common-gender native word, rather than டாக்டர்",2,ta-agent-v1;ipa=espeak
-about-me.i-am-a-nurse,நான் செவிலியர்,நான் தாதி,nāṉ ceviliyar,naːn sevilijʌr,"செவிலியர், the common-gender -ர் form, as ஆசிரியர் and மாணவர் in the rows beside it; text_alt தாதி is the Sri Lankan word, which in India reads first as an ayah or a caretaker",2,ta-agent-v1;fix=Crea Kriyavin Tarkalat Tamil Akarati (DSAL) p.470 செவிலி (female) nurse -- அறுவைச் சிகிச்சையின்போது பல செவிலியர் மருத்துவர் அருகே நின்றிருந்தனர் -- and p.530 தாதி a woman employee to look after the aged or children (ஆயா) and ta.wikipedia செவிலியர் rev 3456315 and உலக செவிலியர் நாள் rev 3793696 (செவிலியர்கள் (தாதிகள்));row-corrections-v9;ipa=espeak
-about-me.i-am-an-engineer,நான் பொறியாளர்,,nāṉ poṟiyāḷar,naːn porijaːɭʌr,"பொறியாளர், common-gender -ர் form",2,ta-agent-v1;ipa=espeak
-about-me.i-work-in-an-office,நான் அலுவலகத்தில் வேலை செய்கிறேன்,,nāṉ aluvalakattil vēlai ceykiṟēṉ,naːn alɯvʌlʌɡʌttil veːlaɪ sejɡireːn,,2,ta-agent-v1;ipa=espeak
-about-me.i-have-my-own-business,எனக்கு என் சொந்த தொழில் இருக்கிறது,,eṉakku eṉ conta toḻil irukkiṟatu,enʌkkɯ en sondʌ toɻil iɾɯkkirʌdɯ,"இருக்கிறது agrees with தொழில் (business), a third-person thing, not the speaker",2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-mother,இவர் என் அம்மா,,ivar eṉ ammā,ivʌr en ammaː,,2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-father,இவர் என் அப்பா,,ivar eṉ appā,ivʌr en appaː,,2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-brother,இவர் என் சகோதரன்,,ivar eṉ cakōtaraṉ,ivʌr en sʌɡoːdʌɾʌn,"சகோதரன், the age-neutral formal word, since Tamil's everyday brother words (அண்ணன் elder / தம்பி younger) force an age choice the concept does not give",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
-family-intros.this-is-my-sister,இவர் என் சகோதரி,,ivar eṉ cakōtari,ivʌr en sʌɡoːdʌɾi,"சகோதரி, the age-neutral counterpart to சகோதரன்",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
-family-intros.this-is-my-partner,இவர் என் துணை,,ivar eṉ tuṇai,ivʌr en tuɳaɪ,"துணை 'companion/spouse', common-gender and not கூட்டாளி (business partner)",2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,இவர் என் சக ஊழியர்,,ivar eṉ caka ūḻiyar,ivʌr en sʌɡʌ uːɻijʌr,"ஊழியர், common-gender -ர் form",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,note,confidence,provenance
+introductions.my-name-is,என் பெயர் {},,eṉ peyar {},en pejʌr {},,,2,ta-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,உங்களைச் சந்தித்ததில் மகிழ்ச்சி,,uṅkaḷaic cantittatil makiḻcci,uŋɡʌɭaɪtʃː ʌndittʌdil mʌɡiɻtʃːi,,,2,ta-agent-v1;ipa=espeak
+introductions.what-is-your-name,உங்கள் பெயர் என்ன?,,uṅkaḷ peyar eṉṉa?,uŋɡʌɭ pejʌr ennʌ,,,2,ta-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,நாங்கள் சேர்ந்து பயணம் செய்கிறோம்,,nāṅkaḷ cērntu payaṇam ceykiṟōm,naːŋɡʌɭ seːrndɯ pʌjʌɳʌm sejɡiroːm,,,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-friend,இவர் என் நண்பர்,,ivar eṉ naṇpar,ivʌr en nʌɳbʌr,,,2,ta-agent-v1;ipa=espeak
+introductions.i-am-from,என் ஊர் {},,eṉ ūr {},en uːr {},my home place is —,,2,"ta-agent-v1; text_alt cleared for fill-in: இல் (locative) fuses onto a noun's oblique stem with a glide (இந்தியாவில், not இந்தியா இல்), which a bare inserted name cannot supply -- the primary text (என் ஊர் {}, zero-copula predicate nominal) already passes the frame check and needs no case device, so the defective alternate is dropped rather than repaired;ipa=espeak"
+introductions.where-are-you-from,நீங்கள் எந்த ஊர்?,,nīṅkaḷ enta ūr?,niːŋɡʌɭ endʌ uːr,which place are you?,,2,ta-agent-v1;ipa=espeak
+introductions.how-are-you,நீங்கள் எப்படி இருக்கிறீர்கள்?,எப்படி இருக்கீங்க?,nīṅkaḷ eppaṭi irukkiṟīrkaḷ?,niːŋɡʌɭ eppʌɖi iɾɯkkiriːrɡʌɭ,,,2,ta-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,நான் ஒரு சுற்றுலாப் பயணி,,nāṉ oru cuṟṟulāp payaṇi,naːn oɾɯ suʈrɯlaːp pʌjʌɳi,,,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,இவர் என் கணவர் / மனைவி,,ivar eṉ kaṇavar / maṉaivi,ivʌr en kʌɳʌvʌr / mʌnaɪvi,my husband / my wife,,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,இவள் என் மகள் / இவன் என் மகன்,,ivaḷ eṉ makaḷ / ivaṉ eṉ makaṉ,ivʌɭ en mʌɡʌɭ / ivʌn en mʌɡʌn,my daughter / my son,,2,ta-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,நான் தனியாகப் பயணம் செய்கிறேன்,,nāṉ taṉiyākap payaṇam ceykiṟēṉ,naːn tʌnijaːɡʌp pʌjʌɳʌm sejɡireːn,,,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,இவர் என் கணவர்,,ivar eṉ kaṇavar,ivʌr en kʌɳʌvʌr,,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,இவர் என் மனைவி,,ivar eṉ maṉaivi,ivʌr en mʌnaɪvi,,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,இவன் என் மகன்,,ivaṉ eṉ makaṉ,ivʌn en mʌɡʌn,,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,இவள் என் மகள்,,ivaḷ eṉ makaḷ,ivʌɭ en mʌɡʌɭ,,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,நான் மாணவர்,,nāṉ māṇavar,naːn maːɳʌvʌr,"மாணவர், the common-gender -ர் form, in preference to the sex-marked மாணவன்/மாணவி pair since ta declares no speaker_gender axis",,2,ta-agent-v1;ipa=espeak
+about-me.i-am-retired,நான் பணி ஓய்வு பெற்றேன்,,nāṉ paṇi ōyvu peṟṟēṉ,naːn pʌɳi oːjvɯ peʈreːn,,,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): பெற்றேன் has ற்ற, ṟṟ;row-corrections-v1;ipa=espeak"
+about-me.i-am-a-teacher,நான் ஆசிரியர்,,nāṉ āciriyar,naːn aːsiɾijʌr,ஆசிரியர் is already common-gender in standard Tamil,,2,ta-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,நான் மருத்துவர்,,nāṉ maruttuvar,naːn mʌɾɯttɯvʌr,"மருத்துவர், the common-gender native word, rather than டாக்டர்",,2,ta-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,நான் செவிலியர்,நான் தாதி,nāṉ ceviliyar,naːn sevilijʌr,"செவிலியர், the common-gender -ர் form, as ஆசிரியர் and மாணவர் in the rows beside it; text_alt தாதி is the Sri Lankan word, which in India reads first as an ayah or a caretaker",,2,ta-agent-v1;fix=Crea Kriyavin Tarkalat Tamil Akarati (DSAL) p.470 செவிலி (female) nurse -- அறுவைச் சிகிச்சையின்போது பல செவிலியர் மருத்துவர் அருகே நின்றிருந்தனர் -- and p.530 தாதி a woman employee to look after the aged or children (ஆயா) and ta.wikipedia செவிலியர் rev 3456315 and உலக செவிலியர் நாள் rev 3793696 (செவிலியர்கள் (தாதிகள்));row-corrections-v9;ipa=espeak
+about-me.i-am-an-engineer,நான் பொறியாளர்,,nāṉ poṟiyāḷar,naːn porijaːɭʌr,"பொறியாளர், common-gender -ர் form",,2,ta-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,நான் அலுவலகத்தில் வேலை செய்கிறேன்,,nāṉ aluvalakattil vēlai ceykiṟēṉ,naːn alɯvʌlʌɡʌttil veːlaɪ sejɡireːn,,,2,ta-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,எனக்கு என் சொந்த தொழில் இருக்கிறது,,eṉakku eṉ conta toḻil irukkiṟatu,enʌkkɯ en sondʌ toɻil iɾɯkkirʌdɯ,"இருக்கிறது agrees with தொழில் (business), a third-person thing, not the speaker",,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,இவர் என் அம்மா,,ivar eṉ ammā,ivʌr en ammaː,,,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-father,இவர் என் அப்பா,,ivar eṉ appā,ivʌr en appaː,,,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,இவர் என் சகோதரன்,,ivar eṉ cakōtaraṉ,ivʌr en sʌɡoːdʌɾʌn,"சகோதரன், the age-neutral formal word, since Tamil's everyday brother words (அண்ணன் elder / தம்பி younger) force an age choice the concept does not give",,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
+family-intros.this-is-my-sister,இவர் என் சகோதரி,,ivar eṉ cakōtari,ivʌr en sʌɡoːdʌɾi,"சகோதரி, the age-neutral counterpart to சகோதரன்",,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
+family-intros.this-is-my-partner,இவர் என் துணை,,ivar eṉ tuṇai,ivʌr en tuɳaɪ,"துணை 'companion/spouse', common-gender and not கூட்டாளி (business partner)",,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,இவர் என் சக ஊழியர்,,ivar eṉ caka ūḻiyar,ivʌr en sʌɡʌ uːɻijʌr,"ஊழியர், common-gender -ர் form",,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/lang/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
