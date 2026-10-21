@@ -1317,6 +1317,9 @@ dialog.quiz legend { font-size: var(--fs--1); color: var(--muted); padding-inlin
 /* A phrase in its own script, at reading size rather than at label size: the whole
    question is whether you can read it. */
 .drill-value { font-size: var(--fs-1); line-height: 1.35; overflow-wrap: anywhere; }
+/* A template's alternatives in their genders' colours, as on the card; lifted toward
+   the ink on a dark page, where the print colours are too dark to read. */
+.gender-alt { color: light-dark(var(--gender), color-mix(in oklab, var(--gender) 55%, white)); }
 
 .drill-options { display: grid; gap: var(--space-1); margin-bottom: var(--space-2); }
 .drill-option {

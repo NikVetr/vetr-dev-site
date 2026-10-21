@@ -531,6 +531,34 @@ const listed = (list) => list.split(',').map((word) => normalise(word)).filter(B
 /** A template's slot as the blank a reader fills, not the `{}` it is stored as. @param {string} text */
 const blank = (text) => text.replaceAll('{}', '____');
 
+/**
+ * A cell's text with each of a template's alternatives in its gender's colour, as
+ * the printed card has them; the slash between them keeps the text's own.
+ * @param {string} text @param {import('../core/alternation.js').Group[]|undefined} groups
+ * @param {string[]|undefined} fills  each gender's colour, in the alternatives' order
+ * @returns {(Node|string)[]}
+ */
+export function painted(text, groups, fills) {
+  if (!groups?.length || !fills) return [blank(text)];
+  /** @type {(Node|string)[]} */ const parts = [];
+  let from = 0;
+  for (const { at, alts } of groups) {
+    let pos = at;
+    alts.forEach((alt, i) => {
+      if (alt && fills[i]) {
+        parts.push(blank(text.slice(from, pos)));
+        const span = el('span', { class: 'gender-alt', text: alt });
+        span.style.setProperty('--gender', fills[i]);
+        parts.push(span);
+        from = pos + alt.length;
+      }
+      pos += alt.length + 1;
+    });
+  }
+  parts.push(blank(text.slice(from)));
+  return parts;
+}
+
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
@@ -578,6 +606,11 @@ export function mountDrill({ root, blocks, corpus, spec, choose, reverse, onAnsw
     lang: TARGET_CELLS.has(field) ? spec.target : spec.source,
     dir: LATIN_CELLS.has(field) ? 'ltr' : direction(TARGET_CELLS.has(field) ? spec.target : spec.source),
   });
+  // The respelling is the target's words in the reader's letters, so, as on the card,
+  // only the gloss and the numeral take the reader's own genders.
+  const shown = (/** @type {Card} */ card, /** @type {FieldId} */ field) => painted(card.values[field] ?? '',
+    card.alternates?.[field],
+    corpus.genders[field === 'gloss' || field === 'numeral' ? spec.source : spec.target]?.map((g) => g.color));
   /** @param {string} code */
   const nameOf = (code) => languageName(code, corpus.languages[code]?.exonym_en ?? code);
 
@@ -891,16 +924,16 @@ export function mountDrill({ root, blocks, corpus, spec, choose, reverse, onAnsw
     const digits = [1, 2, 3, 4].map((n) => new Intl.NumberFormat(spec.source).format(n));
 
     /** One cell of a prompt, in its own language and direction. */
-    const cell = (/** @type {FieldId} */ field, /** @type {string} */ value) => el(
+    const cell = (/** @type {Card} */ row, /** @type {FieldId} */ field) => el(
       'div', { class: 'drill-cell' }, [
         el('span', { class: 'small muted', text: labels[field].caption }),
-        el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir, text: blank(value) }),
+        el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir }, shown(row, field)),
       ]);
 
     /** Every shown column of a row. `drillPool` has already guaranteed all of
      * them are filled, which is why there is nothing to skip here. */
     const promptOf = (/** @type {Card} */ row) => el('div', { class: 'drill-prompt' },
-      prompt.map((field) => cell(field, /** @type {string} */ (row.values[field]))));
+      prompt.map((field) => cell(row, field)));
 
     /**
      * Multiple choice. A selection is right or it is not: the three-valued grade
@@ -929,13 +962,13 @@ export function mountDrill({ root, blocks, corpus, spec, choose, reverse, onAnsw
         });
         buttons[i].focus();
       };
-      options.forEach((value, i) => {
+      options.forEach((_, i) => {
         const button = /** @type {HTMLButtonElement} */ (el('button', {
           type: 'button', class: 'drill-option', role: 'radio', 'aria-checked': 'false',
           tabindex: i ? '-1' : '0',
         }, [
           el('span', { class: 'drill-key small muted', text: String(i + 1) }),
-          el('span', { lang, dir, text: blank(value) }),
+          el('span', { lang, dir }, shown(/** @type {Card[]} */ (question.choices)[i], field)),
         ]));
         button.addEventListener('click', () => choose(i));
         buttons.push(button);
@@ -982,7 +1015,7 @@ export function mountDrill({ root, blocks, corpus, spec, choose, reverse, onAnsw
             const source = question.choices?.[k];
             if (!right && !correct && source) {
               button.append(el('span', { class: 'drill-answers small muted' },
-                prompt.map((f) => el('span', { ...locale(f), text: blank(/** @type {string} */ (source.values[f])) }))));
+                prompt.map((f) => el('span', locale(f), shown(source, f)))));
             }
           });
           mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;

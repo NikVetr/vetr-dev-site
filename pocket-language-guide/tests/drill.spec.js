@@ -293,6 +293,32 @@ test.describe('quiz mode', () => {
     await expect(drill.getByRole('button', { name: 'Start' })).toBeDisabled();
   });
 
+  test('a template\'s alternatives take their genders\' colours, lighter on a dark page', async ({ page }) => {
+    // The printed card colours `el` and `la` by gender, and the quiz shows the same cell.
+    await openDrill(page, 'alts', '/drill.html?target=es&source=en');
+    const paint = (/** @type {string} */ theme) => page.evaluate(async (theme) => {
+      document.documentElement.dataset.theme = theme;
+      const { painted } = await import('/ui/drill.js');
+      const { parseAlternates } = await import('/core/alternation.js');
+      const { text, groups } = parseAlternates('¿Dónde está [el|la] {} más cercan[o|a]?');
+      const cell = document.createElement('span');
+      cell.append(...painted(text, groups, ['#1f5fae', '#c2185b']));
+      document.body.append(cell);
+      const spans = [...cell.querySelectorAll('.gender-alt')].map((s) => [s.textContent, getComputedStyle(s).color]);
+      const shown = cell.textContent;
+      cell.remove();
+      return { shown, spans };
+    }, theme);
+    const light = await paint('light');
+    expect(light.shown).toBe('¿Dónde está el/la ____ más cercano/a?');
+    const blue = 'rgb(31, 95, 174)', pink = 'rgb(194, 24, 91)';
+    expect(light.spans).toEqual([['el', blue], ['la', pink], ['o', blue], ['a', pink]]);
+    const dark = await paint('dark');
+    expect(dark.spans.map(([alt]) => alt)).toEqual(['el', 'la', 'o', 'a']);
+    expect(dark.spans[0][1]).not.toBe(blue);
+    expect(dark.spans[1][1]).not.toBe(pink);
+  });
+
   test('an answer box takes a right-to-left script, and a conscript', async ({ page }) => {
     // Hebrew's pointed column is the one a learner has to be able to read, and the
     // box has to start at the right edge for it.
