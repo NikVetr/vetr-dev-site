@@ -25,7 +25,7 @@ The original nine-organization strict benchmark is preserved as a baseline. The 
 `analysis/decision_ranges/decision_ranges.md` is generated from the live validated app data by `analysis/decision_ranges/compute_decision_ranges.py`; see it for the rules and every view. In July 2026 USD:
 
 - Incumbent base salary: **$271K-$324K**, center **$291K** (main-view median; the range spans the EA-adjacent and functional-only peer medians).
-- Recurring total compensation: **$303K-$387K**, center **$339K**.
+- Recurring total compensation: **$300K-$387K**, center **$338K**.
 - External posting range: **$230K-$276K**, center **$251K** (median advertised minimum and maximum of the five close postings).
 
 These are decision ranges, not estimated population percentiles. The historical report's ranges ($250K-$340K posting, $290K-$350K incumbent base, $340K-$435K total) were analyst judgments fixed in `scripts/normalize_and_analyze.py`; they are retained in the audited report and beside the computed values for comparison.
@@ -37,7 +37,7 @@ These are decision ranges, not estimated population percentiles. The historical 
 - **116 historically frozen primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
 - **17 validated quantitative CEO/ED recruitment advertisements**; the 15 stated in US dollars form the default posting set.
 - **110 independently recovered exact Schedule J base observations among the 116 historically frozen primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
-- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **115 default incumbent cash observations**, of which **109 report Schedule J base**. The default view follows the protocol's main analysis: Schedule J base for organizations with USD 3M-35M filing expenses (**91 observations**), with postings as a separate stream. Center for Public Integrity and Nuclear Threat Initiative remain selectable sensitivity records pending CEO-hours resolution; see [the source audit](../ceo_reference_set_audit.md). The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
+- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **116 default incumbent cash observations**, of which **109 report Schedule J base**. The default view follows the protocol's main analysis: Schedule J base for organizations with USD 3M-35M filing expenses (**91 observations**), with postings as a separate stream. Center for Public Integrity and Nuclear Threat Initiative remain selectable sensitivity records pending CEO-hours resolution; see [the source audit](../ceo_reference_set_audit.md). The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
 
 ## Two different reproduction commands
 

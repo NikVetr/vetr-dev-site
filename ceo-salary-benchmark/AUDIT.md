@@ -1,5 +1,19 @@
 # Compensation benchmark audit
 
+## Frozen-candidate follow-up — 2026-10-25
+
+**Berkeley Existential Risk Initiative enters the default cohort.** The pay-blind screen recorded its disposition before any compensation was extracted: an independent US research-support organization with USD 6.95M expenses and 30 employees, grants about a tenth of expenses, and a 40-hour solo Executive Director as principal officer. Its 2024 filing contains an Executive Director transition, so the 2023 filing is used under the prior-year-due-transition rule already applied to three frozen peers. Schedule J has no row for that executive, so the observation is cash-only: it enters cash, total and pooled-model views but not base-pay views or the base decision ranges. `frozen_candidate_followup_compensation.csv` defines it, and the build checks every reviewed value against the saved IRS XML.
+
+**Machine Intelligence Research Institute and Animal Charity Evaluators were reviewed and stay out.** MIRI's 2024 filing names a full-time CEO but remains under the compensation-expansion review's source-integrity quarantine, and 2023 was a leadership-transition year. ACE's filing lists only board members in Part VII, and grants are about three quarters of expenses.
+
+**Unrounded provisional scores widened the Score column.** GiveWell's and Copenhagen Consensus Center's provisional scores were printed with ten decimals. Scores now display at most one decimal. The Model-view layout test, whose 57-pixel cap predated the change that sizes headers to their labels and controls, now checks that no cell widens the Score column beyond its header.
+
+**The operating-metadata builder used the wrong organization universe.** It compared reviewed metadata with every organization in the published `app-data.js`, including rows the compensation expansion appends after the build's own metadata check, so the documented step failed. It now uses the same pre-expansion universe as the build.
+
+All production and study fits were regenerated for the 150-record cohort; the new observation informs only the cash-inclusive Bayesian models. Adding its organization group again reassigned most outer folds under the documented seeded shuffle, and every production-split score moved even where training data did not change: the categorical GAM with other pay went from 0.265 to 0.289 log RMSE and the exact-only Bayesian linear model from 0.281 to 0.289. Shifts of this size are fold-assignment noise, so single-split rankings should not be read as stable. The three-repetition study again favors exact-only over exact-plus-cash training in every repetition, by 0.028–0.035 log-RMSE units. All 100 production CV fits, 10 full fits and 110 study fits pass the unchanged sampler gates with zero divergences or tree-depth hits; maximum R-hat is 1.024 (CV and study) and 1.005 (full). RP's default-model median stays at $153K, the without-other-pay median is $220K, and medians across the 21 specifications range from $148K to $332K. The base decision ranges are unchanged; the recurring total range is now $300K–$387K, center $338K.
+
+Verification: `npm run build`, `npm run test:data` (42 Python unit tests plus five audits), `npm run test:statistics` (11 Node tests and all R checks) and the full Playwright suite. The long interaction walk-through test now has a 90-second limit because its pooled-view resets add re-renders.
+
 ## Protocol-consistency review — 2026-10-24
 
 An independent review of the workflow confirmed the evidence layer: an independent parser reproduced Schedule J base, Part VII cash, employee count and expenses exactly for all 121 name-matched incumbent XML filings; the CPI-U target (333.918, July 2026) matches BLS; frozen-file hashes match; and the first-expansion comparability scores and tier thresholds reproduce for all 121 scored candidates. It found the following departures from the frozen protocol, now addressed.
