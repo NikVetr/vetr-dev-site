@@ -1427,7 +1427,17 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   }));
   expect(tableModelColumnIndexes.modelData).toBe(tableModelColumnIndexes.paySource + 1);
   expect(tableModelColumnIndexes.score).toBe(tableModelColumnIndexes.modelData + 1);
-  expect(await page.locator("#organization-table .score-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThanOrEqual(57);
+  // Headers size to their label and control rail; score cells must not widen the column beyond that.
+  const scoreColumn = await page.locator("#organization-table .score-column").evaluate((header) => {
+    const style = getComputedStyle(header);
+    const intrinsic = header.querySelector(".header-controls").getBoundingClientRect().width
+      + Number.parseFloat(style.paddingLeft) + Number.parseFloat(style.paddingRight)
+      + Number.parseFloat(style.borderLeftWidth) + Number.parseFloat(style.borderRightWidth);
+    return { width: header.getBoundingClientRect().width, intrinsic };
+  });
+  expect(scoreColumn.width).toBeLessThanOrEqual(scoreColumn.intrinsic + 0.5);
+  expect(await page.locator("#organization-table tbody .score-cell").allTextContents())
+    .toEqual(expect.not.arrayContaining([expect.stringMatching(/\.\d{2,}/)]));
   await expect(page.locator("#organization-table tbody .metadata-evidence-button", { hasText: "Unknown" })).toHaveCount(0);
   await expect(page.locator("#organization-table tbody .metadata-evidence-button", { hasText: "NA" })).not.toHaveCount(0);
   await expect(page.locator("#chart-view-content #model-method-description")).toHaveCount(0);
@@ -1540,7 +1550,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
   await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
   await expect(page.locator("#model-category-inputs")).toBeHidden();
-  await expect(page.locator("#model-settings-note")).toBeHidden();
+  await expect(page.locator("#model-settings-note")).toContainText("core budget");
 
   const bayesianRow = page.locator('#model-comparison-body tr[data-method-key="bayesian"]');
   await bayesianRow.focus();
@@ -1548,7 +1558,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-method")).toHaveValue("bayesian");
   await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
   await expect(page.locator("#model-category-inputs")).toBeVisible();
-  await expect(page.locator("#model-settings-note")).toBeHidden();
+  await expect(page.locator("#model-settings-note")).toContainText("core budget");
 
   const filingOnlyExpected = await page.locator("#stat-n").textContent();
   await page.locator("#model-use-ad-ranges").check();

@@ -42,6 +42,8 @@
     return `${symbol}${Number.isInteger(value) ? value : value.toFixed(2)}`;
   };
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  // Provisional post-freeze scores carry many decimals; frozen scores use at most one.
+  const formatScore = (value) => value == null ? "—" : String(Number(Number(value).toFixed(1)));
   const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
   // The protocol pre-registers empirical quantiles and limits the main CEO
   // filing analysis to USD 3M-35M; links from earlier URL versions keep their defaults.
@@ -4128,7 +4130,7 @@
       !context.reference && detailedPeerGroup !== tier.label ? ["Detailed peer group", detailedPeerGroup] : null,
       !context.reference && colorLabel ? [`Color · ${colorLabel}`, context.category] : null,
       evidence ? ["Pay source", evidence] : null,
-      !context.reference && row.comparabilityScore != null ? ["Similarity score", `${row.comparabilityScore} / 100`] : null,
+      !context.reference && row.comparabilityScore != null ? ["Similarity score", `${formatScore(row.comparabilityScore)} / 100`] : null,
       !context.reference ? ["Weight in results", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)] : null,
     ].filter(Boolean);
     const primaryLabel = context.primaryLabel || measureLabel(row);
@@ -4597,7 +4599,7 @@
       }
 
       const comparability = document.createElement("td");
-      comparability.className = "number-cell score-cell"; comparability.textContent = row.comparabilityScore ?? "—";
+      comparability.className = "number-cell score-cell"; comparability.textContent = formatScore(row.comparabilityScore);
       const tier = document.createElement("td"); tier.className = "tier-cell"; tier.textContent = peerCategoryLabel(row.tier);
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = tableDisplayLabel(row.topic);
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
