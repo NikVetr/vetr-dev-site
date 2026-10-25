@@ -13,9 +13,9 @@ class PositionFamiliesTest(unittest.TestCase):
         data = json.loads((ROOT / "app-data.js").read_text().split("=", 1)[1].strip().rstrip(";"))
         catalog = {p["key"]: p for p in data["positionCatalog"]}
         canonical = data["incumbents"] + data["jobAds"] + [r for group in ("positionObservations", "positionJobAds") for rows in data[group].values() for r in rows]
-        self.assertEqual(len(canonical), 956)
-        self.assertEqual(len({r["id"] for r in canonical}), 956)
-        self.assertEqual(len(data["predictiveModel"]["training"]["records"]), 149)
+        self.assertEqual(len(canonical), 957)
+        self.assertEqual(len({r["id"] for r in canonical}), 957)
+        self.assertEqual(len(data["predictiveModel"]["training"]["records"]), 150)
         for key, _label, members in FAMILIES:
             self.assertEqual(data["positionObservations"][key], [])
             self.assertEqual(data["positionJobAds"][key], [])

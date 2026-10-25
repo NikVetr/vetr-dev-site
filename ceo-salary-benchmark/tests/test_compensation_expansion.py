@@ -61,7 +61,7 @@ class CompensationExpansionTest(unittest.TestCase):
             self.assertNotIn(row["id"], training_ids)
             if row["positionKey"] == "ceo":
                 self.assertFalse(row["defaultIncluded"])
-        self.assertEqual(len(training_ids), 149)
+        self.assertEqual(len(training_ids), 150)
 
     def test_functional_views_share_canonical_observation_identity(self):
         canonical = [r for rows in self.data["positionObservations"].values() for r in rows]

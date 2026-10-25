@@ -41,7 +41,8 @@ async function showAllExpenses(page) {
 }
 
 test("benchmark interactions and validated sources", async ({ page }) => {
-  test.setTimeout(60_000);
+  // The pooled-view resets add several re-renders to this long interaction walk-through.
+  test.setTimeout(90_000);
   const errors = [];
   const wikipediaRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -165,7 +166,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       nominalSalary: { base: 435166, cash: 497770, total: 497770 },
       defaultIncluded: false,
     }],
-    livingPromotions: ["Foresight Institute"],
+    livingPromotions: ["Berkeley Existential Risk Initiative", "Foresight Institute"],
   });
   const explainerCoverage = await page.evaluate(() => ({
     definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
@@ -178,7 +179,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(explainerCoverage).toEqual({
     definitions: 280,
-    rows: 225,
+    rows: 226,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
   });
@@ -197,7 +198,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     };
   });
   expect(wikipediaCoverage).toEqual({
-    organizations: 188,
+    organizations: 189,
     mapped: 100,
     knownUnsafeMappings: ["", "", "", ""],
   });
@@ -533,7 +534,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#measure-select").selectOption("cash");
   // Broader comparisons include sensitivities outside the default filing-expense band.
   await showAllExpenses(page);
-  await expect(page.locator("#stat-n")).toHaveText("158");
+  await expect(page.locator("#stat-n")).toHaveText("159");
   for (const organization of ["Animal Equality", "Compassion in World Farming USA", "Center for Public Integrity", "Nuclear Threat Initiative"]) {
     await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
   }

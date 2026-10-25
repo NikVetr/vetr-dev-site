@@ -28,6 +28,8 @@ CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
+FROZEN_FOLLOWUP_COMPENSATION = ENRICHMENT / "frozen_candidate_followup_compensation.csv"
+FROZEN_FOLLOWUP_SCREENING = "benchmark/enrichment/ea_core_candidate_screening.csv"
 LIVING_PEER_REVIEW = ENRICHMENT / "living_peer_universe_review.csv"
 LIVING_PEER_METHODOLOGY = "benchmark/enrichment/living_peer_universe_methodology.md"
 INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.csv"
@@ -61,6 +63,7 @@ EXPECTED_LIVING_PEER_REVIEW_IDS = {
     "SRC-AD-SEATTLEBG",
     "SRC-AD-CAIF-2026",
     "SRC-AD-EAD-2026",
+    "SRC-990-EXT2-BERKELEY-EXISTENTIAL-RISK-INITIATIVE",
 }
 PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS = {
     "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
@@ -1805,6 +1808,154 @@ def build_ea_roster_incumbents() -> list[dict]:
     return output
 
 
+def build_frozen_followup_incumbents() -> list[dict]:
+    """Build pay-blind-screened frozen candidates, checking every reviewed value against the saved XML."""
+    output: list[dict] = []
+    for row in rows(FROZEN_FOLLOWUP_COMPENSATION):
+        source_id = text(row["source_id"])
+        local_path = text(row["local_path"])
+        organization = text(row["organization"])
+        root = ElementTree.parse(BENCHMARK / local_path).getroot()
+        form990 = next((element for element in root.iter() if local_name(element) == "IRS990"), None)
+        if form990 is None:
+            raise ValueError(f"{organization}: saved filing is not a Form 990")
+        filing = {
+            "ein": first_descendant(root, "EIN"),
+            "tax_period_begin": first_descendant(root, "TaxPeriodBeginDt"),
+            "tax_period_end": first_descendant(root, "TaxPeriodEndDt"),
+            "revenue": number(first_descendant(form990, "CYTotalRevenueAmt")),
+            "expenses": number(first_descendant(
+                next(element for element in form990.iter() if local_name(element) == "TotalFunctionalExpensesGrp"),
+                "TotalAmt",
+            )),
+            "employee_count": number(first_descendant(form990, "TotalEmployeeCnt")),
+        }
+        part_vii = person_record(form990, "Form990PartVIISectionAGrp", text(row["ceo_name"]))
+        optional = lambda element, name: next(
+            (number(child.text) for child in element.iter() if local_name(child) == name and text(child.text)), 0.0
+        )
+        filing.update({
+            "ceo_title": first_descendant(part_vii, "TitleTxt"),
+            "average_hours_per_week": number(first_descendant(part_vii, "AverageHoursPerWeekRt")),
+            "related_hours": optional(part_vii, "AverageHoursPerWeekRltdOrgRt"),
+            "part_vii_org": number(first_descendant(part_vii, "ReportableCompFromOrgAmt")),
+            "part_vii_related": optional(part_vii, "ReportableCompFromRltdOrgAmt"),
+            "part_vii_other": optional(part_vii, "OtherCompensationAmt"),
+        })
+        try:
+            schedule_j = person_record(root, "RltdOrgOfficerTrstKeyEmplGrp", text(row["ceo_name"]))
+        except ValueError:
+            schedule_j = None
+        filing["schedule_j_base"] = (
+            optional(schedule_j, "BaseCompensationFilingOrgAmt") + optional(schedule_j, "CompensationBasedOnRltdOrgsAmt")
+            if schedule_j is not None else None
+        )
+        for field, observed in filing.items():
+            reviewed = text(row[field]) if field in {"ein", "tax_period_begin", "tax_period_end", "ceo_title"} else number(row[field])
+            if field == "ein":
+                reviewed = reviewed.replace("-", "")
+            if reviewed != observed:
+                raise ValueError(f"{organization}: reviewed {field} {reviewed!r} differs from the saved filing {observed!r}")
+
+        year = int(text(row["compensation_calendar_year"]))
+        if text(row["tax_period_end"])[:4] != str(year):
+            raise ValueError(f"{organization}: calendar-year filing does not match compensation year {year}")
+        factor = cpi_factor(year)
+        cash = filing["part_vii_org"] + filing["part_vii_related"]
+        total = cash + filing["part_vii_other"]
+        base = filing["schedule_j_base"]
+        raw_title = filing["ceo_title"]
+        citation = f"benchmark/enrichment/frozen_candidate_followup_compensation.csv | benchmark/{local_path}"
+        output.append({
+            "id": source_id,
+            "sourceId": source_id,
+            "organization": organization,
+            "executive": text(row["ceo_name"]),
+            "title": raw_title,
+            "titleGroup": title_group(raw_title),
+            "rawTitle": raw_title,
+            "tier": text(row["reference_tier"]),
+            "topic": text(row["topic_cluster"]),
+            "eaAffinity": text(row["ea_affinity"]),
+            "location": text(row["country_or_region"]),
+            "remoteStatus": "Not reported in Form 990",
+            "structure": text(row["expected_structure"]),
+            "revenue": filing["revenue"],
+            "expenses": filing["expenses"],
+            "staff": filing["employee_count"],
+            "comparabilityScore": None,
+            "compensationYear": year,
+            "averageHoursPerWeek": filing["average_hours_per_week"],
+            "salary": {
+                "base": round(base * factor, 2) if base is not None else None,
+                "cash": round(cash * factor, 2),
+                "total": round(total * factor, 2),
+            },
+            "nominalSalary": {"base": base, "cash": cash, "total": total},
+            "cpiFactor": factor,
+            "cpiPeriod": f"{year} annual average",
+            "defaultIncluded": False,
+            "structurallyClean": True,
+            "founder": text(row["founder_flag"]).lower() == "yes",
+            "analysisStatus": "sensitivity_only",
+            "auditStatus": "verified_xml",
+            "selectionNote": text(row["selection_note"]),
+            "evidenceText": (
+                f"{text(row['return_type'])} for compensation calendar year {year}. {text(row['ceo_name'])}, {raw_title}. "
+                f"Schedule J base: {money(base)}; Part VII cash/W-2 proxy: {money(cash)}; Part VII other compensation: "
+                f"{money(filing['part_vii_other'])}; filing total: {money(total)}; reported weekly hours: "
+                f"{filing['average_hours_per_week']:g}. {text(row['selection_note'])}"
+            ),
+            "sourceUrl": text(row["source_url"]),
+            "canonicalUrl": text(row["canonical_url"]),
+            "cachedSource": cache_source(source_id, local_path),
+            "localPath": local_path,
+            "sourceType": text(row["return_type"]),
+            "evidenceStream": "incumbents",
+            "homepageUrl": text(row["homepage_url"]),
+            "categoryProvenance": {
+                "sourceId": source_id,
+                "referenceTier": text(row["reference_tier"]),
+                "selectionWave": "frozen candidate follow-up",
+                "tier": {
+                    "value": text(row["reference_tier"]),
+                    "label": f"Tier {text(row['reference_tier'])} · frozen candidate follow-up",
+                    "rationale": text(row["selection_note"]),
+                    "citation": f"{FROZEN_FOLLOWUP_SCREENING} | {citation}",
+                },
+                "ea": {
+                    "value": text(row["ea_affinity"]),
+                    "sourceValue": text(row["ea_affinity"]),
+                    "rationale": "The EA classification frozen with the candidate universe before compensation review.",
+                    "citation": "benchmark/frozen/combined_peer_universe_3wave_precomp.csv",
+                },
+                "structure": {
+                    "expected": text(row["expected_structure"]),
+                    "observationFlag": text(row["structure_flag"]),
+                    "rationale": text(row["selection_note"]),
+                    "citation": citation,
+                },
+                "topic": {
+                    "value": text(row["topic_cluster"]),
+                    "sourceDescription": text(row["topic_cluster"]),
+                    "rationale": "The topic frozen with the candidate universe before compensation review.",
+                    "citation": "benchmark/frozen/combined_peer_universe_3wave_precomp.csv",
+                },
+                "title": {
+                    "raw": raw_title,
+                    "analysisGroup": title_group(raw_title),
+                    "rationale": "The organization-wide executive title is read directly from the preserved Form 990 Part VII row.",
+                    "citation": citation,
+                },
+                "classificationTiming": "pay_blind_screen_2026-10-25",
+                "provenanceType": "frozen_candidate_nonpay_classification + xml_validated_form990_compensation",
+                "confidence": "high for filing values; provisional for the post-freeze tier",
+                "caveats": "The dated living peer-universe review controls current default inclusion.",
+            },
+        })
+    return output
+
+
 def build_lingering_org_app_additions() -> tuple[list[dict], dict[str, list[dict]]]:
     """Build the reviewed LEEP sensitivity addendum without changing frozen extracts."""
     reviewed = rows(LINGERING_ORG_APP_ADDITIONS)
@@ -2884,7 +3035,7 @@ def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[s
         promoted += int(living_default and not legacy_default)
         retained_default += int(living_default and legacy_default)
 
-    if promoted != 1 or retained_default != 2:
+    if promoted != 2 or retained_default != 2:
         raise ValueError(
             f"Unexpected living-review disposition counts: promoted={promoted}, "
             f"retained_default={retained_default}"
@@ -2923,6 +3074,11 @@ def main() -> None:
     if duplicate_lingering_ids:
         raise ValueError(f"Duplicate lingering-organization incumbent IDs: {sorted(duplicate_lingering_ids)}")
     incumbents.extend(lingering_ceo_rows)
+    followup_rows = build_frozen_followup_incumbents()
+    duplicate_followup_ids = {row["id"] for row in incumbents} & {row["id"] for row in followup_rows}
+    if duplicate_followup_ids:
+        raise ValueError(f"Duplicate frozen follow-up incumbent IDs: {sorted(duplicate_followup_ids)}")
+    incumbents.extend(followup_rows)
     jobs = build_job_ads(rationales_by_source)
     living_review_summary = apply_living_peer_review(incumbents, jobs)
     rp_reference = build_rp_reference()

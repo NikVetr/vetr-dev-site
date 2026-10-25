@@ -48,12 +48,15 @@ def load_app_data() -> dict:
 
 
 def app_organizations(data: dict) -> set[str]:
+    # Expansion rows are appended after the build's operating-metadata check and
+    # carry their own reviewed sources, so they are outside this universe.
+    reviewed = lambda rows: [row for row in rows if not row.get("expansionReview")]
     organizations = {
-        row["organization"] for row in [*data["incumbents"], *data["jobAds"]]
+        row["organization"] for row in reviewed([*data["incumbents"], *data["jobAds"]])
     }
     for group in ("positionObservations", "positionJobAds", "rpReferencesByPosition"):
         for group_rows in data[group].values():
-            organizations.update(row["organization"] for row in group_rows)
+            organizations.update(row["organization"] for row in reviewed(group_rows))
     organizations.add(data["rpReference"]["organization"])
     return organizations
 

@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T04:00:14+00:00",
+  "generatedAt": "2026-10-25T15:39:14+00:00",
   "seed": 20260903,
-  "trainingInputSha256": "d39400c3dd2c3a4edb06b3da940cfae530edff8ce5ec009ad29a169d4706d4ab",
+  "trainingInputSha256": "a63e0813228315dfbfd6262fc8bdcdf0368b93e4e7a763e647a7cb29072a3032",
   "target": "log July 2026-adjusted annual base salary",
   "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
   "counts": {
-    "records": 149,
-    "organizations": 146,
+    "records": 150,
+    "organizations": 147,
     "exactFilings": 112,
-    "cashProxyFilings": 10,
+    "cashProxyFilings": 11,
     "advertisedRecords": 27,
     "advertisedRanges": 25,
     "advertisedPointAmounts": 2
   },
   "categoryCounts": {
     "focus_area": {
-      "AI / technology": 16,
+      "AI / technology": 17,
       "Animal welfare / food": 14,
       "Climate / environment": 16,
       "Education / public engagement": 5,
@@ -26,45 +26,45 @@
       "Security / governance": 24
     },
     "ea_relationship": {
-      "EA-adjacent": 77,
+      "EA-adjacent": 78,
       "Functional overlap": 72
     },
     "organization_type": {
       "Affiliated group": 3,
       "Fiscal sponsor / umbrella": 3,
       "Fiscally sponsored project": 2,
-      "Independent nonprofit": 131,
+      "Independent nonprofit": 132,
       "Membership / network": 5,
       "Other organization type": 5
     },
     "title_group": {
       "CEO": 72,
-      "Executive Director": 47,
+      "Executive Director": 48,
       "Other executive title": 9,
       "President": 21
     },
     "location_scope": {
       "International / multi-country": 33,
-      "Location not reported": 42,
+      "Location not reported": 43,
       "Outside United States": 1,
       "United States": 73
     },
     "remote_category": {
       "In-person / hybrid": 66,
-      "Remote": 56,
+      "Remote": 57,
       "Unknown": 27
     },
     "fiscal_sponsor_category": {
       "Does not serve as fiscal sponsor": 3,
       "Serves as fiscal sponsor": 13,
-      "Unknown": 133
+      "Unknown": 134
     }
   },
   "missingContinuous": {
     "expenses": 19,
     "revenue": 27,
     "staff": 18,
-    "highest_other_base": 53
+    "highest_other_base": 54
   },
   "rpProfile": {
     "expenses": 7500000.0,
@@ -81,7 +81,7 @@
     "reference_salary": 155230.03
   },
   "provenance": {
-    "trainingCsvSha256": "56ba136816a0e4240db9b9f95e7a34a17ad968767cc0b83f6dac149e3df05a74",
+    "trainingCsvSha256": "eb9ad68b909a43abe5fc8676d00ac604dd2517c315e54d16d5f0910e2b913cc0",
     "prepareScriptSha256": "4c11dec4d3bc44955673a95138de3b990e76b58773a6d0394cecefe440de2153",
     "fitScriptSha256": "88ebdf089682fd6402f647dd7066c88fbaad6f595d02a91b869175a3099e00f0",
     "stanModelSha256": "184d43343e1fae7418ed2820c80196c67b293710ecc754db6f1746fe1b256d0b",

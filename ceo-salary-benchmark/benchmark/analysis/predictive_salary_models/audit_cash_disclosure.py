@@ -28,7 +28,7 @@ def run():
     sources = {row["id"]: row for row in data["incumbents"]}
     groups = {key: [row for row in training if row["observation"] == key]
               for key in ("exact_base", "cash_proxy")}
-    if len(groups["exact_base"]) != 112 or len(groups["cash_proxy"]) != 10:
+    if len(groups["exact_base"]) != 112 or len(groups["cash_proxy"]) != 11:
         raise ValueError("Reassess the disclosure report for the changed cohort")
     pairs = groups["exact_base"]
     if any(not row["cash_proxy"] or float(row["cash_proxy"]) < float(row["salary_midpoint"]) - .5 for row in pairs):

@@ -60,9 +60,13 @@ The same amendment removes two postings from the default because they state non-
 
 The seven rows remain predictive-model training records through the reviewed `EXTRA_TRAINING_ROWS` contract in `scripts/predictive_model_contract.py`, because each is a full-time organization-wide head and the models condition on scale, organization type and hiring geography. The two LEEP co-executive-director rows leave model training: co-leadership is not the solo organization-wide chief-executive target.
 
+## 2026-10-25 amendment
+
+Berkeley Existential Risk Initiative, a frozen second-expansion EA-core candidate, enters the default as Tier A under the same post-freeze rule. The pay-blind screen in `ea_core_candidate_screening.csv` found an independent US research-support organization inside the protocol scale limits with a 40-hour solo Executive Director. Its 2024 filing contains an Executive Director transition, so its 2023 filing is used as `primary_older_clean`, as for Population Reference Bureau, ideas42 and Technical Assistance Collaborative. Schedule J has no row for that executive, so the observation enters cash and total views but not base-pay views. Its comparability score is unavailable rather than estimated.
+
 ## Count reconciliation
 
-After the 2026-10-24 amendment and the two reported-hours sensitivities (Center for Public Integrity and Nuclear Threat Initiative), the CEO incumbent default contains 115 positive cash rows, 109 with Schedule J base, and the default posting set contains 15 US-dollar postings. The explorer's default view further limits filing expenses to USD 3M-35M, which leaves 91 Schedule J base observations.
+After the 2026-10-24 and 2026-10-25 amendments and the two reported-hours sensitivities (Center for Public Integrity and Nuclear Threat Initiative), the CEO incumbent default contains 116 positive cash rows, 109 with Schedule J base, and the default posting set contains 15 US-dollar postings. The explorer's default view further limits filing expenses to USD 3M-35M, which leaves 91 Schedule J base observations.
 
 The counts below describe the 2026-08-30 amendment as originally applied. That amendment changed the CEO incumbent default from 116 to 122 positive rows. Four of the six promoted rows report Schedule J base, so the default Schedule J sample changes from 110 to 114. With the existing 15 validated recruitment postings, the initial all-evidence base view contains 129 observations representing 126 unique organizations. Leverage Research and Magnify Mentoring appear in cash and total views but not in the base view because no Schedule J base is reported or inferred.
 

@@ -5,7 +5,7 @@
 | Observed cohort | Records / organizations | Median cash pay | Median expenses | Median employees | Other pay observed |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | exact_base | 112 / 112 | $305,761 | $8,702,510 | 41 (111 observed) | 96 |
-| cash_proxy | 10 / 10 | $106,963 | $2,023,864 | 16 (9 observed) | 0 |
+| cash_proxy | 11 / 11 | $107,477 | $2,260,435 | 18 (10 observed) | 0 |
 
 Cash is compared with cash in this table; neither column substitutes cash for base. Pay is in July 2026 USD; organization expenses are the recorded financial-year amounts. These are record-level descriptive medians, not adjusted effects.
 
@@ -15,19 +15,19 @@ Among 112 paired exact-base records, 63 have cash equal to base within $0.50. Am
 
 | Bayesian linear specification | Other pay | Log RMSE | Mean error | 90% coverage | Log score |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Exact base + cash | Yes | 0.310 | 23.3% | 93.8% | -0.210 |
-| Exact base only | Yes | 0.281 | 22.5% | 92.0% | -0.139 |
-| Exact base + cash | No | 0.337 | 24.8% | 92.0% | -0.356 |
-| Exact base only | No | 0.320 | 25.3% | 92.0% | -0.295 |
+| Exact base + cash | Yes | 0.319 | 23.0% | 94.6% | -0.229 |
+| Exact base only | Yes | 0.289 | 22.7% | 92.0% | -0.167 |
+| Exact base + cash | No | 0.326 | 23.3% | 92.9% | -0.337 |
+| Exact base only | No | 0.315 | 25.1% | 92.9% | -0.291 |
 
 All four procedures score the same 112 held-out exact-base records using the same organization-grouped folds, priors, and training-fold preprocessing. They exclude ads. The with-other-pay exact-only CV fits reuse the first repetition of the [three-split measurement study](measurement_sensitivity/README.md). No organization is deleted for a large residual. A validation advantage on base-disclosing organizations does not identify prediction accuracy for cash-only organizations, whose base pay is unobserved.
 
-**10 of 10 cash-only records lack highest-other base pay**, versus 16 of 112 exact-base records. Disclosure cohort and this missing-input pattern are therefore entangled. In the production split, the exact-base-only improvement is larger among held-out records missing other pay:
+**11 of 11 cash-only records lack highest-other base pay**, versus 16 of 112 exact-base records. Disclosure cohort and this missing-input pattern are therefore entangled. In the production split, the exact-base-only improvement is larger among held-out records missing other pay:
 
 | Held-out exact-base stratum | N | Exact + cash log RMSE | Exact-only log RMSE |
 | --- | ---: | ---: | ---: |
 | Other pay observed | 96 | 0.278 | 0.270 |
-| Other pay missing | 16 | 0.458 | 0.338 |
+| Other pay missing | 16 | 0.501 | 0.386 |
 
 This post-hoc stratification is descriptive; the missing-input subgroup has only 16 observations. It does not isolate a defect in imputation or identify a causal disclosure effect.
 
@@ -49,4 +49,4 @@ For an incompletely disclosed highest-other base maximum, preserve the largest k
 
 Run `python3 benchmark/analysis/predictive_salary_models/audit_cash_disclosure.py` after fitting and building. The companion CSVs retain the cohort counts and all cash-only records with raw pay, available hours and source links.
 
-Training CSV SHA-256: `56ba136816a0e4240db9b9f95e7a34a17ad968767cc0b83f6dac149e3df05a74`.
+Training CSV SHA-256: `eb9ad68b909a43abe5fc8676d00ac604dd2517c315e54d16d5f0910e2b913cc0`.
