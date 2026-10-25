@@ -1,0 +1,297 @@
+{
+  "inputPath": "app-data.js",
+  "inputSha256": "eb79ad616f2dee42859011df76ec251ef48595f2f7462f080d46cddb32198a77",
+  "inputGeneratedAt": "2026-10-25T04:31:42+00:00",
+  "priceBasis": "July 2026 USD",
+  "rules": {
+    "mainView": "Default CEO incumbent filings with expenses in USD 3M-35M; RP excluded.",
+    "quantiles": "Linear interpolation (R type 7), unweighted, one observation per organization.",
+    "incumbentRange": "Center is the main-view median; the range spans the medians of the main, strict-scale, Tier A, structurally clean, EA-adjacent and functional-only views.",
+    "totalRange": "Same rule applied to the filing total-compensation proxy.",
+    "postingRange": "Medians of the advertised minimums and maximums for the close posting set (strict primary, primary-title and broad-functional tiers); center is the median midpoint. USD postings only.",
+    "judgment": "Historical judgment ranges are retained for comparison and do not alter computed values."
+  },
+  "views": {
+    "base": {
+      "main": {
+        "n": 91,
+        "p25": 245256.97,
+        "median": 290605.23,
+        "p75": 390530.845,
+        "min": 106379.78,
+        "max": 735901.85
+      },
+      "strict_scale": {
+        "n": 68,
+        "p25": 246291.075,
+        "median": 307729.11,
+        "p75": 409045.21499999997,
+        "min": 166959.62,
+        "max": 735901.85
+      },
+      "tier_a": {
+        "n": 67,
+        "p25": 253483.58000000002,
+        "median": 309553.11,
+        "p75": 410923.77,
+        "min": 166959.62,
+        "max": 735901.85
+      },
+      "structurally_clean": {
+        "n": 71,
+        "p25": 248466.015,
+        "median": 303244.96,
+        "p75": 392670.995,
+        "min": 106379.78,
+        "max": 735901.85
+      },
+      "ea_adjacent": {
+        "n": 46,
+        "p25": 244298.135,
+        "median": 270969.89,
+        "p75": 319986.92000000004,
+        "min": 106379.78,
+        "max": 735901.85
+      },
+      "functional_only": {
+        "n": 45,
+        "p25": 252296.92,
+        "median": 324136.6,
+        "p75": 424371.98,
+        "min": 171782.82,
+        "max": 630528.18
+      },
+      "all_default_any_scale": {
+        "n": 109,
+        "p25": 244832.24,
+        "median": 290605.23,
+        "p75": 393860.56,
+        "min": 106379.78,
+        "max": 890843.4
+      }
+    },
+    "cash": {
+      "main": {
+        "n": 93,
+        "p25": 244832.24,
+        "median": 305616.63,
+        "p75": 394818.6,
+        "min": 106379.78,
+        "max": 851859.08
+      },
+      "strict_scale": {
+        "n": 69,
+        "p25": 252296.92,
+        "median": 331902.73,
+        "p75": 438046.39,
+        "min": 138337.99,
+        "max": 851859.08
+      },
+      "tier_a": {
+        "n": 68,
+        "p25": 253181.94250000003,
+        "median": 333360.19999999995,
+        "p75": 439640.7275,
+        "min": 108536.26,
+        "max": 851859.08
+      },
+      "structurally_clean": {
+        "n": 73,
+        "p25": 250437.83,
+        "median": 320137.32,
+        "p75": 423377.74,
+        "min": 106379.78,
+        "max": 851859.08
+      },
+      "ea_adjacent": {
+        "n": 47,
+        "p25": 244476.16999999998,
+        "median": 271231.62,
+        "p75": 340188.01,
+        "min": 106379.78,
+        "max": 851859.08
+      },
+      "functional_only": {
+        "n": 46,
+        "p25": 252591.9275,
+        "median": 347175.31,
+        "p75": 439330.9675,
+        "min": 138337.99,
+        "max": 726092.59
+      },
+      "all_default_any_scale": {
+        "n": 115,
+        "p25": 236354.125,
+        "median": 299570.22,
+        "p75": 409746.98,
+        "min": 94680.89,
+        "max": 1039871.72
+      }
+    },
+    "total": {
+      "main": {
+        "n": 93,
+        "p25": 266579.59,
+        "median": 339069.23,
+        "p75": 469084.74,
+        "min": 121717.82,
+        "max": 860844.0
+      },
+      "strict_scale": {
+        "n": 69,
+        "p25": 272692.02,
+        "median": 370965.55,
+        "p75": 487914.46,
+        "min": 138337.99,
+        "max": 860844.0
+      },
+      "tier_a": {
+        "n": 68,
+        "p25": 284462.065,
+        "median": 373468.16500000004,
+        "p75": 489116.53500000003,
+        "min": 121717.82,
+        "max": 860844.0
+      },
+      "structurally_clean": {
+        "n": 73,
+        "p25": 279534.55,
+        "median": 361955.73,
+        "p75": 478591.65,
+        "min": 121717.82,
+        "max": 860844.0
+      },
+      "ea_adjacent": {
+        "n": 47,
+        "p25": 259928.81,
+        "median": 302777.65,
+        "p75": 390905.54500000004,
+        "min": 121717.82,
+        "max": 860844.0
+      },
+      "functional_only": {
+        "n": 46,
+        "p25": 295329.955,
+        "median": 386784.91000000003,
+        "p75": 487718.59500000003,
+        "min": 138337.99,
+        "max": 727095.16
+      },
+      "all_default_any_scale": {
+        "n": 115,
+        "p25": 257501.77500000002,
+        "median": 335312.66,
+        "p75": 464293.475,
+        "min": 101479.77,
+        "max": 1089044.68
+      }
+    }
+  },
+  "postings": {
+    "strict": {
+      "n": 3,
+      "organizations": [
+        "PEAK Grantmaking",
+        "San Francisco Estuary Institute",
+        "Technical Assistance Collaborative"
+      ],
+      "median_low": 225606.72031709808,
+      "median_high": 275741.547054231,
+      "median_midpoint": 250674.1336856645,
+      "envelope_low": 199280.86105698507,
+      "envelope_high": 299969.4566883864,
+      "intersection": null
+    },
+    "close": {
+      "n": 5,
+      "organizations": [
+        "Dream.Org",
+        "Hagley Museum and Library",
+        "PEAK Grantmaking",
+        "San Francisco Estuary Institute",
+        "Technical Assistance Collaborative"
+      ],
+      "median_low": 229911.2566366265,
+      "median_high": 275741.547054231,
+      "median_midpoint": 250674.1336856645,
+      "envelope_low": 199280.86105698507,
+      "envelope_high": 299969.4566883864,
+      "intersection": null
+    },
+    "all_default": {
+      "n": 15,
+      "organizations": [
+        "Andy Hill Cancer Research Endowment (CARE) Fund",
+        "Appleseed Foundation",
+        "Dream.Org",
+        "Environmental Leadership Program",
+        "Federal Funds Information for States",
+        "Great Basin Water Network",
+        "Hagley Museum and Library",
+        "Healthcare Career Advancement Program",
+        "New Jersey League of Conservation Voters",
+        "PEAK Grantmaking",
+        "San Francisco Estuary Institute",
+        "Technical Assistance Collaborative",
+        "The 5 Gyres Institute",
+        "The Climate Center",
+        "The LeadersTrust"
+      ],
+      "median_low": 199280.86105698507,
+      "median_high": 224977.0925162898,
+      "median_midpoint": 215579.7549696715,
+      "envelope_low": 110000.0,
+      "envelope_high": 299969.4566883864,
+      "intersection": null
+    }
+  },
+  "computed": {
+    "incumbent_base": {
+      "center": 290605.23,
+      "low": 270969.89,
+      "high": 324136.6,
+      "low_view": "ea_adjacent",
+      "high_view": "functional_only",
+      "peer_p25": 245256.97,
+      "peer_p75": 390530.845,
+      "leave_one_out": {
+        "organizations": 91,
+        "min_median": 290510.06,
+        "max_median": 292281.795
+      }
+    },
+    "recurring_total": {
+      "center": 339069.23,
+      "low": 302777.65,
+      "high": 386784.91000000003,
+      "low_view": "ea_adjacent",
+      "high_view": "functional_only",
+      "peer_p25": 266579.59,
+      "peer_p75": 469084.74
+    },
+    "external_posting": {
+      "low": 229911.2566366265,
+      "high": 275741.547054231,
+      "center": 250674.1336856645
+    }
+  },
+  "historicalJudgment": {
+    "incumbent_base": {
+      "low": 290000,
+      "high": 350000,
+      "center": 320000
+    },
+    "recurring_total": {
+      "low": 340000,
+      "high": 435000,
+      "center": 385000
+    },
+    "external_posting": {
+      "low": 250000,
+      "high": 340000,
+      "center": 295000,
+      "expected_hire_low": 280000,
+      "expected_hire_high": 320000
+    }
+  }
+}
