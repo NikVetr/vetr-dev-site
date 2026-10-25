@@ -28,7 +28,7 @@ def run():
     sources = {row["id"]: row for row in data["incumbents"]}
     groups = {key: [row for row in training if row["observation"] == key]
               for key in ("exact_base", "cash_proxy")}
-    if len(groups["exact_base"]) != 112 or len(groups["cash_proxy"]) != 12:
+    if len(groups["exact_base"]) != 112 or len(groups["cash_proxy"]) != 10:
         raise ValueError("Reassess the disclosure report for the changed cohort")
     pairs = groups["exact_base"]
     if any(not row["cash_proxy"] or float(row["cash_proxy"]) < float(row["salary_midpoint"]) - .5 for row in pairs):
@@ -65,8 +65,7 @@ def run():
         lines.append(f"| {row['cohort']} | {row['records']} / {row['organizations']} | ${row['median_cash']:,.0f} | "
                      f"${row['median_expenses']:,.0f} | {row['median_staff']:g} ({row['staff_observed']} observed) | {row['other_pay_observed']} |")
     lines += ["", "Cash is compared with cash in this table; neither column substitutes cash for base. Pay is in July 2026 USD; "
-        "organization expenses are the recorded financial-year amounts. These are record-level descriptive medians, not adjusted effects. "
-        "The two Lead Exposure Elimination Project records share an organization group and always stay in the same CV fold.", "",
+        "organization expenses are the recorded financial-year amounts. These are record-level descriptive medians, not adjusted effects.", "",
         f"Among {len(pairs)} paired exact-base records, {zero} have cash equal to base within $0.50. "
         f"Among the {len(positive)} positive increments, the median log(cash/base) is {median(positive):.3f} "
         f"(an increase of {100 * math.expm1(median(positive)):.1f}%). "
@@ -80,12 +79,14 @@ def run():
         lines.append(f"| {'Exact base only' if key.startswith('bayesian_exact') else 'Exact base + cash'} | "
             f"{'Yes' if row['includeHighestOtherPay'] else 'No'} | {row['logRmse']:.3f} | "
             f"{row['meanAbsPercentError']:.1%} | {row['coverage90']:.1%} | {row['meanLogPredictiveDensity']:.3f} |")
-    lines += ["", "All four procedures score the same 112 held-out exact-base records using the same organization-grouped folds, "
+    missing_other = {key: sum(not row["highest_other_base"] for row in rows) for key, rows in groups.items()}
+    lines += ["", f"All four procedures score the same {len(pairs)} held-out exact-base records using the same organization-grouped folds, "
         "priors, and training-fold preprocessing. They exclude ads. The with-other-pay exact-only CV fits reuse the "
         "first repetition of the [three-split measurement study](measurement_sensitivity/README.md). "
         "No organization is deleted for a large residual. A validation advantage on base-disclosing organizations does not "
         "identify prediction accuracy for cash-only organizations, whose base pay is unobserved.", "",
-        "**All 12 cash-only records also lack highest-other base pay**, versus 16 of 112 exact-base records. "
+        f"**{missing_other['cash_proxy']} of {len(groups['cash_proxy'])} cash-only records lack highest-other base pay**, "
+        f"versus {missing_other['exact_base']} of {len(pairs)} exact-base records. "
         "Disclosure cohort and this missing-input pattern are therefore entangled. In the production split, "
         "the exact-base-only improvement is larger among held-out records missing other pay:", "",
         "| Held-out exact-base stratum | N | Exact + cash log RMSE | Exact-only log RMSE |",
@@ -100,7 +101,7 @@ def run():
             scores.append(math.sqrt(sum((float(r["predicted_log_salary"]) - float(r["observed_log_salary"])) ** 2
                                         for r in rows) / len(rows)))
         lines.append(f"| Other pay {'observed' if observed else 'missing'} | {len(rows)} | {scores[0]:.3f} | {scores[1]:.3f} |")
-    lines += ["", "This post-hoc stratification is descriptive; the missing-input subgroup has only 16 observations. "
+    lines += ["", f"This post-hoc stratification is descriptive; the missing-input subgroup has only {missing_other['exact_base']} observations. "
         "It does not isolate a defect in imputation or identify a causal disclosure effect.", "",
         "## Why disclosure matters", "",
         "Schedule J generally requires itemized compensation for current listed leaders when Form 990 Part VII "
@@ -129,7 +130,7 @@ def run():
         "The companion CSVs retain the cohort counts and all cash-only records with raw pay, available hours and source links.", "",
         "Training CSV SHA-256: `" + training_hash + "`."]
     (HERE / "cash_disclosure_audit.md").write_text("\n".join(lines) + "\n")
-    print("Wrote disclosure summaries, 12 cash-only source records, and matched model comparison")
+    print(f"Wrote disclosure summaries, {len(cash_rows)} cash-only source records, and matched model comparison")
 
 
 if __name__ == "__main__":

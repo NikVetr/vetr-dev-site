@@ -29,7 +29,9 @@ from predictive_model_contract import (  # noqa: E402
     apply_role_hours_review,
 )
 
-DEFAULT_INPUT = ROOT / "app-data.js"
+# Written by `scripts/build_app_data.py --model-inputs`; the published app data
+# also contains rows appended after the model check, so it cannot stand in.
+DEFAULT_INPUT = ROOT / "tmp" / "predictive-model-inputs.js"
 DEFAULT_OUTPUT = Path(__file__).resolve().parent / "training_data.csv"
 DEFAULT_METADATA = Path(__file__).resolve().parent / "training_metadata.json"
 OPERATING_METADATA = ROOT / "benchmark" / "enrichment" / "organization_operating_metadata.csv"
@@ -434,10 +436,12 @@ def main() -> None:
             key: sum(row[key] is None for row in prepared)
             for key in ("expenses", "revenue", "staff", "highest_other_base")
         },
+        # Consolidated filing scale includes sponsored-project pass-through; the
+        # protocol's core scale is the default prediction profile.
         "rpProfile": {
-            "expenses": positive(data["rpReference"].get("expenses")),
-            "revenue": positive(data["rpReference"].get("revenue")),
-            "staff": positive(data["rpReference"].get("staff")),
+            "expenses": positive(data["rpReference"]["coreScale"]["expenses"]),
+            "revenue": positive(data["rpReference"]["coreScale"]["revenue"]),
+            "staff": positive(data["rpReference"]["coreScale"]["staff"]),
             "highest_other_base": positive(
                 ((data["rpReference"].get("highestPaidOtherEmployee40h") or {}).get("base") or {}).get("adjusted")
             ),

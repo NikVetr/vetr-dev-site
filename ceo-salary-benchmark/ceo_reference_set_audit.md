@@ -4,9 +4,9 @@
 
 This audit tests the live `app-data.js` CEO observations, not frozen historical CSV fields. It reparses locally saved IRS XML when available and tests the current Form 990 overlay path. It manually rereads the seven rendered/PDF incumbent sources and Copenhagen's scanned filing. It does not treat a row's statistical influence as evidence of invalidity.
 
-- Incumbent rows audited: **153**.
+- Incumbent rows audited: **185**.
 - Salary-bearing job-ad rows audited: **38**.
-- Default incumbent cash observations: **120**.
+- Default incumbent cash observations: **115**.
 - Machine-reparsed live IRS XML incumbent observations: **121**.
 - Manually reread rendered/PDF incumbent observations: **7**; Copenhagen Consensus Center: **scanned Form 990 pages 1, 7, and 36**.
 
@@ -15,6 +15,7 @@ This audit tests the live `app-data.js` CEO observations, not frozen historical 
 | Stream | Status | Rows |
 |---|---|---:|
 | incumbent | not_applicable | 24 |
+| incumbent | unverified | 32 |
 | incumbent | verified | 129 |
 | job_ad | unverified | 5 |
 | job_ad | verified | 33 |

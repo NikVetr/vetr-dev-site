@@ -15,7 +15,7 @@ class PositionFamiliesTest(unittest.TestCase):
         canonical = data["incumbents"] + data["jobAds"] + [r for group in ("positionObservations", "positionJobAds") for rows in data[group].values() for r in rows]
         self.assertEqual(len(canonical), 956)
         self.assertEqual(len({r["id"] for r in canonical}), 956)
-        self.assertEqual(len(data["predictiveModel"]["training"]["records"]), 151)
+        self.assertEqual(len(data["predictiveModel"]["training"]["records"]), 149)
         for key, _label, members in FAMILIES:
             self.assertEqual(data["positionObservations"][key], [])
             self.assertEqual(data["positionJobAds"][key], [])

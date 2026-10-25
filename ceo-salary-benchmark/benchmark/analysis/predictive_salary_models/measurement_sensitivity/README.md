@@ -8,18 +8,18 @@ Values are means across the three repetitions; the RMSE range describes split se
 
 | Procedure | Mean log RMSE | RMSE range | Mean absolute % error | 90% coverage | Mean log score | Log CRPS |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Bayesian linear · exact + cash · all categories | 0.325 | 0.316–0.331 | 23.0% | 92.0% | -0.242 | 0.173 |
-| Bayesian linear · exact only · all categories | 0.286 | 0.281–0.290 | 22.4% | 91.4% | -0.160 | 0.157 |
-| Bayesian linear · exact only · numeric inputs | 0.287 | 0.285–0.289 | 22.4% | 92.9% | -0.144 | 0.156 |
-| Numeric linear | 0.291 | 0.286–0.294 | 22.6% | 93.8% | -0.242 | 0.162 |
-| Numeric GAM | 0.288 | 0.285–0.290 | 21.4% | 92.6% | -0.215 | 0.158 |
-| RBF SVR | 0.300 | 0.298–0.302 | 23.0% | 92.6% | -0.295 | 0.166 |
-| RBF GP | 0.295 | 0.289–0.299 | 22.8% | 88.7% | -0.170 | 0.161 |
+| Bayesian linear · exact + cash · all categories | 0.311 | 0.310–0.313 | 22.9% | 93.2% | -0.215 | 0.168 |
+| Bayesian linear · exact only · all categories | 0.284 | 0.281–0.287 | 22.4% | 92.3% | -0.150 | 0.157 |
+| Bayesian linear · exact only · numeric inputs | 0.286 | 0.284–0.289 | 22.6% | 92.0% | -0.139 | 0.157 |
+| Numeric linear | 0.291 | 0.291–0.292 | 22.8% | 94.3% | -0.234 | 0.163 |
+| Numeric GAM | 0.285 | 0.278–0.292 | 21.8% | 93.2% | -0.202 | 0.158 |
+| RBF SVR | 0.293 | 0.284–0.303 | 22.9% | 92.6% | -0.264 | 0.163 |
+| RBF GP | 0.290 | 0.287–0.291 | 22.7% | 88.7% | -0.158 | 0.159 |
 
 ## Matched contrasts
 
-- **Exact-only training minus exact-plus-cash training, holding categories fixed:** log-RMSE changes -0.035, -0.037, -0.044 across repetitions (negative favors the alternate).
-- **Removing categories, holding exact-only training fixed:** log-RMSE changes +0.004, -0.003, +0.001 across repetitions (negative favors the alternate).
+- **Exact-only training minus exact-plus-cash training, holding categories fixed:** log-RMSE changes -0.029, -0.024, -0.028 across repetitions (negative favors the alternate).
+- **Removing categories, holding exact-only training fixed:** log-RMSE changes +0.003, +0.002, -0.000 across repetitions (negative favors the alternate).
 
 These isolate complete fitting procedures on matched outcomes. Removing all categories does not identify which particular category causes a change. Exact-only Bayesian numeric fits still differ from OLS through coefficient priors and joint missing-input inference.
 
@@ -27,9 +27,9 @@ These isolate complete fitting procedures on matched outcomes. Removing all cate
 
 | Other-pay treatment | Log RMSE | Mean absolute % error | 90% coverage | Mean log score | Log CRPS |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Reported other pay | 0.319 | 22.2% | 93.8% | -0.239 | 0.167 |
-| 40-hour equivalent (standard) | 0.316 | 22.5% | 92.0% | -0.239 | 0.169 |
-| Uncertain other-pay maxima missing | 0.311 | 22.3% | 92.9% | -0.219 | 0.167 |
+| Reported other pay | 0.313 | 23.1% | 94.6% | -0.209 | 0.167 |
+| 40-hour equivalent (standard) | 0.310 | 23.3% | 93.8% | -0.210 | 0.169 |
+| Uncertain other-pay maxima missing | 0.303 | 22.8% | 92.9% | -0.191 | 0.165 |
 
 The reported-pay comparison holds the current cohort, work classifications and folds fixed. It therefore isolates the changed other-pay construction more closely than comparing this run with an older app artifact.
 
@@ -41,8 +41,8 @@ Held-out predictions below use the production split and July 2026 USD. They are 
 
 | Organization | Observed base | Reported-pay predictor | 40h predictor | Uncertain maximum missing | Exact-only | Exact-only numeric |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Copenhagen Consensus Center | $463,229 | $100,893 | $99,181 | $103,593 | $170,554 | $159,708 |
-| ORCID | $287,681 | $107,110 | $152,840 | $161,733 | $160,322 | $187,402 |
+| Copenhagen Consensus Center | $463,229 | $136,322 | $130,927 | $135,144 | $200,878 | $179,479 |
+| ORCID | $287,681 | $106,082 | $155,596 | $176,468 | $160,494 | $182,876 |
 
 ## Limits and reproduction
 

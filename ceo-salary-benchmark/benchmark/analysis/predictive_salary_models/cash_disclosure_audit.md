@@ -5,9 +5,9 @@
 | Observed cohort | Records / organizations | Median cash pay | Median expenses | Median employees | Other pay observed |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | exact_base | 112 / 112 | $305,761 | $8,702,510 | 41 (111 observed) | 96 |
-| cash_proxy | 12 / 11 | $104,228 | $2,339,138 | 10 (11 observed) | 0 |
+| cash_proxy | 10 / 10 | $106,963 | $2,023,864 | 16 (9 observed) | 0 |
 
-Cash is compared with cash in this table; neither column substitutes cash for base. Pay is in July 2026 USD; organization expenses are the recorded financial-year amounts. These are record-level descriptive medians, not adjusted effects. The two Lead Exposure Elimination Project records share an organization group and always stay in the same CV fold.
+Cash is compared with cash in this table; neither column substitutes cash for base. Pay is in July 2026 USD; organization expenses are the recorded financial-year amounts. These are record-level descriptive medians, not adjusted effects.
 
 Among 112 paired exact-base records, 63 have cash equal to base within $0.50. Among the 49 positive increments, the median log(cash/base) is 0.078 (an increase of 8.1%). These paired amounts identify the current zero-or-positive increment model inside the base-disclosing cohort. They do not establish its transport to cash-only organizations.
 
@@ -15,19 +15,19 @@ Among 112 paired exact-base records, 63 have cash equal to base within $0.50. Am
 
 | Bayesian linear specification | Other pay | Log RMSE | Mean error | 90% coverage | Log score |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Exact base + cash | Yes | 0.316 | 22.5% | 92.0% | -0.239 |
-| Exact base only | Yes | 0.281 | 22.2% | 91.1% | -0.154 |
-| Exact base + cash | No | 0.336 | 23.4% | 92.9% | -0.366 |
-| Exact base only | No | 0.321 | 24.8% | 92.0% | -0.292 |
+| Exact base + cash | Yes | 0.310 | 23.3% | 93.8% | -0.210 |
+| Exact base only | Yes | 0.281 | 22.5% | 92.0% | -0.139 |
+| Exact base + cash | No | 0.337 | 24.8% | 92.0% | -0.356 |
+| Exact base only | No | 0.320 | 25.3% | 92.0% | -0.295 |
 
 All four procedures score the same 112 held-out exact-base records using the same organization-grouped folds, priors, and training-fold preprocessing. They exclude ads. The with-other-pay exact-only CV fits reuse the first repetition of the [three-split measurement study](measurement_sensitivity/README.md). No organization is deleted for a large residual. A validation advantage on base-disclosing organizations does not identify prediction accuracy for cash-only organizations, whose base pay is unobserved.
 
-**All 12 cash-only records also lack highest-other base pay**, versus 16 of 112 exact-base records. Disclosure cohort and this missing-input pattern are therefore entangled. In the production split, the exact-base-only improvement is larger among held-out records missing other pay:
+**10 of 10 cash-only records lack highest-other base pay**, versus 16 of 112 exact-base records. Disclosure cohort and this missing-input pattern are therefore entangled. In the production split, the exact-base-only improvement is larger among held-out records missing other pay:
 
 | Held-out exact-base stratum | N | Exact + cash log RMSE | Exact-only log RMSE |
 | --- | ---: | ---: | ---: |
-| Other pay observed | 96 | 0.272 | 0.262 |
-| Other pay missing | 16 | 0.504 | 0.374 |
+| Other pay observed | 96 | 0.278 | 0.270 |
+| Other pay missing | 16 | 0.458 | 0.338 |
 
 This post-hoc stratification is descriptive; the missing-input subgroup has only 16 observations. It does not isolate a defect in imputation or identify a causal disclosure effect.
 
@@ -49,4 +49,4 @@ For an incompletely disclosed highest-other base maximum, preserve the largest k
 
 Run `python3 benchmark/analysis/predictive_salary_models/audit_cash_disclosure.py` after fitting and building. The companion CSVs retain the cohort counts and all cash-only records with raw pay, available hours and source links.
 
-Training CSV SHA-256: `39336d9c78d4738d826f019e0fa58fca3f95aa72ed9e5f523a73c2e628e68c43`.
+Training CSV SHA-256: `56ba136816a0e4240db9b9f95e7a34a17ad968767cc0b83f6dac149e3df05a74`.

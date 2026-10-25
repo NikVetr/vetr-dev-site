@@ -190,10 +190,10 @@ class PredictiveModelContractTest(unittest.TestCase):
             {"expenses", "revenue", "staff"},
         )
         self.assertEqual(artifact["eaLevels"], ["Functional overlap", "EA-adjacent"])
-        self.assertEqual(sum(artifact["eaFilingCounts"]), 124)
+        self.assertEqual(sum(artifact["eaFilingCounts"]), 122)
         for feature in artifact["categoricalFeatures"]:
             self.assertEqual(len(feature["filingCounts"]), len(feature["levels"]))
-            self.assertEqual(sum(feature["filingCounts"]), 124)
+            self.assertEqual(sum(feature["filingCounts"]), 122)
 
     def test_browser_baselines_preserve_leakage_safe_residual_provenance(self):
         artifact = json.loads(
@@ -285,7 +285,7 @@ class PredictiveModelContractTest(unittest.TestCase):
                     ads += 1
                 if not row.get("defaultIncluded"):
                     admitted_nondefault.add(row["id"])
-        self.assertEqual((exact, cash, ads), (112, 12, 27))
+        self.assertEqual((exact, cash, ads), (112, 10, 27))
         self.assertEqual(admitted_nondefault, set(EXTRA_TRAINING_ROWS))
 
     def test_known_noncomparable_records_are_not_admitted(self):
@@ -298,6 +298,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             "SRC-AD-CETI", "SRC-AD-NPF", "SRC-AD-SNAP",
             "SRC-AD-ALLCHICAGO", "SRC-AD-INJUSTICEWATCH", "SRC-AD-DRW",
             "SRC-990-EXT-CENTER-FOR-PUBLIC-INTEGRITY", "SRC-990-EXT-NUCLEAR-THREAT-INITIATIVE",
+            "SRC-990-RECOVERY-LEEP::clare-donaldson", "SRC-990-RECOVERY-LEEP::lucia-coulter",
         ):
             self.assertNotIn(row_id, EXTRA_TRAINING_ROWS)
 

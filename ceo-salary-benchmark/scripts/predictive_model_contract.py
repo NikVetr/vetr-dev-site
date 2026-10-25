@@ -13,8 +13,13 @@ import json
 EXTRA_TRAINING_ROWS = {
     "SRC-990-EXT-ANIMAL-EQUALITY": "Organization-wide head of the U.S. legal entity; cash proxy only.",
     "SRC-990-EXT-COMPASSION-IN-WORLD-FARMING-USA": "Organization-wide head of the U.S. affiliate; cash proxy only.",
-    "SRC-990-RECOVERY-LEEP::clare-donaldson": "Organization-wide co-executive; retained as a separate cash-proxy observation.",
-    "SRC-990-RECOVERY-LEEP::lucia-coulter": "Organization-wide co-executive; retained as a separate cash-proxy observation.",
+    "SRC-990-EA-CENTER-FOR-ELECTION-SCIENCE": "Full-time solo organization-wide CEO; excluded from the default peer set for scale, not role validity.",
+    "SRC-990-EA-LEVERAGE-RESEARCH": "Full-time solo organization-wide CEO; excluded from the default peer set for scale, not role validity.",
+    "SRC-990-EA-MAGNIFY-MENTORING": "Full-time solo organization-wide CEO; excluded from the default peer set for scale, not role validity.",
+    "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER": "Full-time solo organization-wide President; excluded from the default peer set for scale, not role validity.",
+    "SRC-990-EA-GIVEWELL": "Full-time solo organization-wide CEO; excluded from the default peer set for grantmaking scale, not role validity.",
+    "SRC-AD-CAIF-2026": "Organization-wide CEO posting; excluded from the default peer set for currency, not role validity; hiring geography is a model input.",
+    "SRC-AD-EAD-2026": "Organization-wide Director posting; excluded from the default peer set for currency, not role validity; hiring geography is a model input.",
     "SRC-AD-MOST-2025": "Organization-wide Executive Director posting; excluded from the default peer set for scale, not role validity.",
     "SRC-AD-MSI": "Organization-wide Executive Director posting; operating-model difference is represented in model inputs.",
     "SRC-AD-CFL-2026": "Organization-wide CEO posting; grantmaking structure is represented in model inputs.",
@@ -51,7 +56,7 @@ ROW_FIELDS = (
     "highestPaidOtherEmployee40h", "otherPayDisclosure",
 )
 RP_FIELDS = (
-    "id", "organization", "expenses", "revenue", "staff", "compensationYear",
+    "id", "organization", "expenses", "revenue", "staff", "coreScale", "compensationYear",
     "salary", "highestPaidOtherEmployee", "remoteCategory", "servesAsFiscalSponsor", "ceoHiringMarket", "ceoHiringMarketBasis",
     "highestPaidOtherEmployee40h", "otherPayDisclosure",
 )

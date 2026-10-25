@@ -8,7 +8,7 @@ test("base-only selection and categorical GAM contrasts preserve their fitted sp
   await expect(page.locator("#model-method")).toHaveValue("bayesian");
   await expect(page.locator("#model-training-count")).toHaveText("112");
   await page.locator("#model-base-only").uncheck();
-  await expect(page.locator("#model-training-count")).toHaveText("124");
+  await expect(page.locator("#model-training-count")).toHaveText("122");
   await page.locator("#model-method").selectOption("gamCategorical");
   await expect(page.locator("#model-base-only")).toBeChecked();
   await expect(page.locator("#model-base-only")).toBeDisabled();

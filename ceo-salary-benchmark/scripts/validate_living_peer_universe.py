@@ -27,21 +27,23 @@ EXPECTED_IDS = {
     "SRC-990-RECOVERY-LEEP::clare-donaldson",
     "SRC-990-RECOVERY-LEEP::lucia-coulter",
     "SRC-AD-SEATTLEBG",
+    "SRC-AD-CAIF-2026",
+    "SRC-AD-EAD-2026",
 }
-EXPECTED_PROMOTIONS = {
+EXPECTED_PROMOTIONS = {"SRC-990-EA-FORESIGHT-INSTITUTE"}
+EXPECTED_PROMOTED_BASE = {"SRC-990-EA-FORESIGHT-INSTITUTE"}
+# The 2026-10-24 amendment reverts post-freeze promotions that override a frozen
+# disposition or fall outside the protocol scale limits, and removes non-USD postings.
+EXPECTED_REVERTED = {
     "SRC-990-EA-CENTER-FOR-ELECTION-SCIENCE",
-    "SRC-990-EA-FORESIGHT-INSTITUTE",
     "SRC-990-EA-LEVERAGE-RESEARCH",
     "SRC-990-EA-MAGNIFY-MENTORING",
     "SRC-990-EA-GIVEWELL",
     "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER",
+    "SRC-AD-CAIF-2026",
+    "SRC-AD-EAD-2026",
 }
-EXPECTED_PROMOTED_BASE = {
-    "SRC-990-EA-CENTER-FOR-ELECTION-SCIENCE",
-    "SRC-990-EA-FORESIGHT-INSTITUTE",
-    "SRC-990-EA-GIVEWELL",
-    "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER",
-}
+REVIEW_DATES = {"2026-08-30", "2026-10-24"}
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -70,7 +72,7 @@ def main() -> None:
     review_rows = rows(REVIEW)
     review_ids = {row["observation_id"] for row in review_rows}
     if review_ids != EXPECTED_IDS or len(review_rows) != len(review_ids):
-        raise ValueError("Living peer-universe review does not contain the audited 16-row boundary")
+        raise ValueError("Living peer-universe review does not contain the audited 18-row boundary")
 
     payload = app_payload()
     observations = payload["incumbents"] + payload["jobAds"]
@@ -106,8 +108,12 @@ def main() -> None:
             raise ValueError(f"Generated pay-blind rationale changed: {observation_id}")
         if living_metadata.get("weightTreatment") != reviewed["weight_treatment"]:
             raise ValueError(f"Generated weighting treatment changed: {observation_id}")
-        if reviewed["review_date"] != "2026-08-30":
+        if reviewed["review_date"] not in REVIEW_DATES:
             raise ValueError(f"Unexpected living-review date: {observation_id}")
+        if (reviewed["review_date"] == "2026-10-24") != (observation_id in EXPECTED_REVERTED):
+            raise ValueError(f"Unexpected 2026-10-24 amendment boundary: {observation_id}")
+        if observation_id in EXPECTED_REVERTED and living:
+            raise ValueError(f"Reverted observation re-entered the default: {observation_id}")
 
         reason = reviewed["nonpay_reason"].casefold()
         if "$" in reason or re.search(r"unusually\s+(?:low|high)|another officer was paid more", reason):
@@ -149,24 +155,33 @@ def main() -> None:
         "default combined base organizations": len({row["organization"] for row in default_base}),
     }
     expected_checks = {
-        "default incumbent cash rows": 120,
-        "default incumbent base rows": 112,
-        "default job-ad rows": 17,
-        "default combined base rows": 129,
-        "default combined base organizations": 126,
+        "default incumbent cash rows": 115,
+        "default incumbent base rows": 109,
+        "default job-ad rows": 15,
+        "default combined base rows": 124,
+        "default combined base organizations": 121,
     }
+    main_view = [
+        row for row in incumbents
+        if row["defaultIncluded"] and row["salary"].get("base") is not None
+        and 3_000_000 <= (row.get("expenses") or 0) <= 35_000_000
+    ]
+    if len(main_view) != 91:
+        raise ValueError(f"Default USD 3M-35M base view changed: {len(main_view)}")
+    if any(row["defaultIncluded"] and row.get("reportedCurrency") != "USD" for row in jobs):
+        raise ValueError("A non-US-currency posting entered the default posting set")
     if checks != expected_checks:
         raise ValueError(f"Living peer-universe count reconciliation changed: {checks}")
 
     summary = payload["summary"]
-    if summary.get("livingPeerReviewedObservations") != 16:
+    if summary.get("livingPeerReviewedObservations") != 18:
         raise ValueError("Generated summary has the wrong living-review row count")
-    if summary.get("livingPeerPromotedObservations") != 6:
+    if summary.get("livingPeerPromotedObservations") != 1:
         raise ValueError("Generated summary has the wrong promotion count")
     print(
-        "Validated the 16-row living peer-universe amendment: six pay-blind promotions, "
-        "120 default incumbent cash rows, 112 default incumbent base rows, and "
-        "129 default all-evidence base observations across 126 organizations."
+        "Validated the 18-row living peer-universe review: one post-freeze promotion, seven 2026-10-24 "
+        "sensitivity reversions, 115 default incumbent cash rows, 109 default incumbent base rows "
+        "(91 within USD 3M-35M), and 15 US-dollar default postings."
     )
 
 

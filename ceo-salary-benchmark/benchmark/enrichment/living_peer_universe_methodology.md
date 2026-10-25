@@ -44,8 +44,26 @@ Qualia Research Institute remains observed-only because the filing reports 15 ho
 
 Center for AI Safety's corrected filing and Project Healthy Children/Sanku's entity-deduplicated current filing remain default observations. Thirty-three other researched candidates do not have an accepted positive, named, entity-resolved CEO point observation. They remain in the enrichment research inventory and cannot enter a salary distribution unless future source evidence resolves that gap.
 
+## 2026-10-24 amendment
+
+The 2026-08-30 promotions relied on provisional comparability scores. Two of them contradicted frozen first-expansion dispositions made before compensation review: GiveWell was classified structural/context only because grantmaking and pass-through activity dominate its filing scale, and Copenhagen Consensus Center was screened out after verification as below scale. Three others report filing expenses below the original protocol's USD 3M main-analysis limit. A post-freeze review cannot override a frozen disposition, and the protocol admits organizations outside USD 3M-35M only as labeled scale sensitivities. The amendment therefore applies one rule: a post-freeze promotion returns to sensitivity when it contradicts a frozen disposition or falls outside USD 3M-35M filing expenses. The following now count as sensitivities, with their filings unchanged:
+
+- Center for Election Science — scale;
+- Leverage Research — scale, structure flagged;
+- Magnify Mentoring — scale, Form 990-EZ;
+- Copenhagen Consensus Center — frozen below-scale screen;
+- GiveWell — frozen structural/grantmaking classification.
+
+Foresight Institute remains the only post-freeze default promotion. The rule refers to filing expenses and frozen dispositions only; compensation magnitude played no part.
+
+The same amendment removes two postings from the default because they state non-US currency ranges for non-US labor markets: Cooperative AI Foundation (GBP) and Effective Altruism Germany (EUR). The original protocol analyzes non-US currency amounts separately instead of pooling exchange-rate conversions with US-dollar postings.
+
+The seven rows remain predictive-model training records through the reviewed `EXTRA_TRAINING_ROWS` contract in `scripts/predictive_model_contract.py`, because each is a full-time organization-wide head and the models condition on scale, organization type and hiring geography. The two LEEP co-executive-director rows leave model training: co-leadership is not the solo organization-wide chief-executive target.
+
 ## Count reconciliation
 
-The amendment changes the CEO incumbent default from 116 to 122 positive rows. Four of the six promoted rows report Schedule J base, so the default Schedule J sample changes from 110 to 114. With the existing 15 validated recruitment postings, the initial all-evidence base view contains 129 observations representing 126 unique organizations. Leverage Research and Magnify Mentoring appear in cash and total views but not in the base view because no Schedule J base is reported or inferred.
+After the 2026-10-24 amendment and the two reported-hours sensitivities (Center for Public Integrity and Nuclear Threat Initiative), the CEO incumbent default contains 115 positive cash rows, 109 with Schedule J base, and the default posting set contains 15 US-dollar postings. The explorer's default view further limits filing expenses to USD 3M-35M, which leaves 91 Schedule J base observations.
+
+The counts below describe the 2026-08-30 amendment as originally applied. That amendment changed the CEO incumbent default from 116 to 122 positive rows. Four of the six promoted rows report Schedule J base, so the default Schedule J sample changes from 110 to 114. With the existing 15 validated recruitment postings, the initial all-evidence base view contains 129 observations representing 126 unique organizations. Leverage Research and Magnify Mentoring appear in cash and total views but not in the base view because no Schedule J base is reported or inferred.
 
 The source archive, selected-reference inventory, incumbent observation inventory, and visible quantitative sample are different denominators. Archived pages can support discovery, classification, exclusion, or multiple observations; they must not be described as salary observations.

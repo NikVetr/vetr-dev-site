@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import csv
 import copy
 import hashlib
+import html
 import json
 import math
 import shutil
@@ -57,6 +59,8 @@ EXPECTED_LIVING_PEER_REVIEW_IDS = {
     "SRC-990-RECOVERY-LEEP::clare-donaldson",
     "SRC-990-RECOVERY-LEEP::lucia-coulter",
     "SRC-AD-SEATTLEBG",
+    "SRC-AD-CAIF-2026",
+    "SRC-AD-EAD-2026",
 }
 PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS = {
     "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
@@ -92,6 +96,12 @@ RP_STAFF_YEAR = 2023
 RP_STAFF_SOURCE_URL = "https://rethinkpriorities.org/wp-content/uploads/2024/11/RP-2023-990-No-Schedule-B.pdf"
 RP_FUNDING_SOURCE_ID = "SRC-RP-FUNDING-NEEDS"
 RP_FUNDING_LOCAL_PATH = "sources/native/supporting/src-rp-funding-needs.html"
+RP_RESULTS_SOURCE_ID = "SRC-RP-2025-RESULTS"
+RP_RESULTS_LOCAL_PATH = "sources/native/supporting/src-rp-2025-results.html"
+# Protocol scale anchor: the 2026 core budget and 2024 FTE count exclude
+# fiscally sponsored and pass-through activity in the consolidated filing.
+RP_CORE_BUDGET = 7_500_000
+RP_CORE_FTE = 57
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -1123,6 +1133,15 @@ def build_rp_reference() -> dict:
     if hashlib.sha256(staff_path.read_bytes()).hexdigest() != RP_STAFF_SHA256:
         raise ValueError("RP 2023 Form 990 PDF is missing or does not match the validated filing")
 
+    core_evidence = {
+        RP_RESULTS_LOCAL_PATH: "core budget of 7.5 million for 2026",
+        RP_FUNDING_LOCAL_PATH: f"{RP_CORE_FTE} full-time equivalent (FTE) staff",
+    }
+    for local_path, phrase in core_evidence.items():
+        page = html.unescape(re.sub(r"<[^>]+>", " ", (BENCHMARK / local_path).read_text(encoding="utf-8")))
+        if phrase not in " ".join(page.split()):
+            raise ValueError(f"RP core-scale source no longer states {phrase!r}: {local_path}")
+
     factor = cpi_factor(2024)
     cached = cache_source(RP_REFERENCE_SOURCE_ID, RP_REFERENCE_LOCAL_PATH)
     cached_staff = cache_source(RP_STAFF_SOURCE_ID, RP_STAFF_LOCAL_PATH)
@@ -1147,6 +1166,17 @@ def build_rp_reference() -> dict:
         "staffYear": RP_STAFF_YEAR,
         "filingStaff": RP_STAFF_COUNT,
         "currentFilingStaff": employees,
+        "coreScale": {
+            "expenses": RP_CORE_BUDGET,
+            "revenue": RP_CORE_BUDGET,
+            "staff": RP_CORE_FTE,
+            "basis": (
+                "Protocol scale anchor: the 2026 core budget excludes fiscally sponsored and pass-through "
+                "activity. No separate core revenue is published, so the core budget is also used as revenue. "
+                "Staff is the 2024 year-end full-time-equivalent count."
+            ),
+            "sourceIds": [RP_RESULTS_SOURCE_ID, RP_FUNDING_SOURCE_ID],
+        },
         "comparabilityScore": None,
         "compensationYear": 2024,
         "salary": {
@@ -2854,7 +2884,7 @@ def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[s
         promoted += int(living_default and not legacy_default)
         retained_default += int(living_default and legacy_default)
 
-    if promoted != 6 or retained_default != 2:
+    if promoted != 1 or retained_default != 2:
         raise ValueError(
             f"Unexpected living-review disposition counts: promoted={promoted}, "
             f"retained_default={retained_default}"
@@ -2867,6 +2897,16 @@ def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[s
 
 
 def main() -> None:
+    global EVIDENCE_DIR
+    parser = argparse.ArgumentParser(description="Build the benchmark explorer data payload.")
+    parser.add_argument(
+        "--model-inputs", type=Path,
+        help="Write the pre-expansion predictive-model inputs to this path and stop before the artifact check.",
+    )
+    args = parser.parse_args()
+    if args.model_inputs:
+        # Keep the tracked published evidence untouched while exporting model inputs.
+        EVIDENCE_DIR = ROOT / "tmp" / "model-input-evidence"
     if EVIDENCE_DIR.exists():
         shutil.rmtree(EVIDENCE_DIR)
     definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
@@ -2987,6 +3027,15 @@ def main() -> None:
     for row in position_rp_rows:
         row["wikipediaTitle"] = ""
         row["wikipediaUrl"] = ""
+    training_inputs = {"incumbents": incumbents, "jobAds": jobs, "rpReference": rp_reference}
+    if args.model_inputs:
+        args.model_inputs.parent.mkdir(parents=True, exist_ok=True)
+        args.model_inputs.write_text(
+            "window.CEO_BENCHMARK_DATA = " + json.dumps(training_inputs, separators=(",", ":")) + ";\n",
+            encoding="utf-8",
+        )
+        print(f"wrote predictive-model inputs to {args.model_inputs}")
+        return
     predictive_model = load_predictive_model_artifact(
         expected_exact=sum(
             predictive_training_eligible("filing", row) and row["salary"]["base"] is not None
@@ -3002,7 +3051,7 @@ def main() -> None:
             and row["salary"]["base"] is not None
             for row in jobs
         ),
-        training_inputs={"incumbents": incumbents, "jobAds": jobs, "rpReference": rp_reference},
+        training_inputs=training_inputs,
     )
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
