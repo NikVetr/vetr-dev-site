@@ -21,6 +21,25 @@ async function selectChartView(page, view) {
   await expect(page.locator("#chart-view-content")).toHaveAttribute("aria-labelledby", `chart-tab-${view}`);
 }
 
+// Many interaction checks were written against the pooled filing-and-posting,
+// lognormal view that preceded the protocol default.
+async function resetToPooledLognormal(page) {
+  await page.locator("#reset-settings").click();
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await page.locator("#stream-select").selectOption("combined");
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
+}
+
+async function showAllExpenses(page) {
+  for (const [selector, value] of [["#expense-range-min", "0"], ["#expense-range-max", "1000"]]) {
+    await page.locator(selector).evaluate((input, position) => {
+      input.value = position;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }, value);
+  }
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+}
+
 test("benchmark interactions and validated sources", async ({ page }) => {
   test.setTimeout(60_000);
   const errors = [];
@@ -39,6 +58,21 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.goto("/ceo-salary-benchmark/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
+  const defaultCounts = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const base = data.incumbents.filter((row) => row.defaultIncluded && row.salary?.base > 0);
+    return {
+      main: base.filter((row) => row.expenses >= 3e6 && row.expenses <= 35e6).length,
+      combined: base.length + data.jobAds.filter((row) => row.defaultIncluded && row.salary?.base > 0).length,
+    };
+  });
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
+  await expect(page.locator("#expense-range-value")).toHaveText("$3.0M–$35M");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.main));
+  // The remaining checks exercise the pooled filing-and-posting view.
+  await page.locator("#stream-select").selectOption("combined");
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
   await expect(page.locator("base[data-runtime-app-base]")).toHaveCount(1);
   await expect(page.locator("base[data-runtime-app-base]")).toHaveAttribute(
     "href",
@@ -93,8 +127,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("Bureau of Labor Statistics CPI-U");
   await expect(page.locator("#help-tooltip")).toContainText("CUUR0000SA0");
   await expect(page.locator("#help-tooltip")).toContainText("333.918");
-  await expect(page.locator("#stat-n")).toHaveText("129");
-  await expect(page.locator(".bar-block")).toHaveCount(129);
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.combined));
+  await expect(page.locator(".bar-block")).toHaveCount(defaultCounts.combined);
   const screenedRosterIntegration = await page.evaluate(() => {
     const incumbents = window.CEO_BENCHMARK_DATA.incumbents.filter((row) => !row.expansionReview);
     const byOrganization = (organization) => incumbents.filter((row) => row.organization === organization);
@@ -125,20 +159,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     }],
     giveWell: [{
       nominalSalary: { base: 423600, cash: 424805, total: 463395 },
-      defaultIncluded: true,
+      defaultIncluded: false,
     }],
     copenhagen: [{
       nominalSalary: { base: 435166, cash: 497770, total: 497770 },
-      defaultIncluded: true,
+      defaultIncluded: false,
     }],
-    livingPromotions: [
-      "Center for Election Science",
-      "Copenhagen Consensus Center",
-      "Foresight Institute",
-      "GiveWell",
-      "Leverage Research",
-      "Magnify Mentoring",
-    ],
+    livingPromotions: ["Foresight Institute"],
   });
   const explainerCoverage = await page.evaluate(() => ({
     definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
@@ -187,7 +214,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect(page.locator(".density-line-outline")).toHaveAttribute("d", await page.locator(".density-line").getAttribute("d"));
   await expect(page.locator(".density-line-outline")).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
-  await expect(page.locator(".rug-line")).toHaveCount(129);
+  await expect(page.locator(".rug-line")).toHaveCount(defaultCounts.combined);
   await expect(page.locator(".rp-reference-guide")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker image")).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
@@ -371,7 +398,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bar", "CEO Salary percentile", "Peer group", "Pay source", "Similarity score", "Weight in results"]);
   const salaryPercentileDetail = page.locator('#chart-tooltip dl div:has(dt:text-is("CEO Salary percentile")) dd');
-  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 129\)$/);
+  await expect(salaryPercentileDetail).toHaveText(new RegExp(`^\\d+(?:\\.\\d)? \\(#\\d+(?:\\.5)? / ${defaultCounts.combined}\\)$`));
   const lognormalPercentile = await salaryPercentileDetail.textContent();
   await page.locator('input[name="distribution"][value="empirical"]').check();
   await page.locator(".bar-block").first().hover();
@@ -385,7 +412,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
   await expect(page.locator("#chart-tooltip")).toContainText("$155,230");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["CEO Salary percentile", "How this record is used", "Pay source"]);
-  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 129\)$/);
+  await expect(salaryPercentileDetail).toHaveText(new RegExp(`^\\d+(?:\\.\\d)? \\(#\\d+(?:\\.5)? / ${defaultCounts.combined}\\)$`));
   await expect(page.locator("#chart-tooltip")).toContainText("shown for context, not included in results");
   await expect(page.locator("#chart-tooltip")).not.toContainText("Weight in results");
   await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("RP reference row");
@@ -444,9 +471,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
   await page.getByLabel("Include American Immigration Council").uncheck();
-  await expect(page.locator("#stat-n")).toHaveText("128");
-  await expect(page.locator(".bar-block")).toHaveCount(128);
-  await page.locator("#reset-settings").click();
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.combined - 1));
+  await expect(page.locator(".bar-block")).toHaveCount(defaultCounts.combined - 1);
+  await resetToPooledLognormal(page);
 
   const cpiContract = await page.evaluate(() => {
     const posting = window.CEO_BENCHMARK_DATA.jobAds.find((row) => row.organization === "Technical Assistance Collaborative");
@@ -479,7 +506,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#dialog-value")).toHaveText("$314,534");
   await expect(page.locator("#dialog-meta")).toContainText("Original reported dollars · no inflation adjustment");
   await page.locator(".dialog-close").click();
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
 
   await expect(page.locator("#show-unavailable")).toHaveCount(0);
   await expect(page.locator(".unavailable-toggle")).toHaveCount(0);
@@ -490,11 +517,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('[data-filter-menu="tier"] .filter-options label').filter({ hasText: /^Form 990 · broadest peers$/ }).locator("input").uncheck();
   await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveAttribute("data-active", "true");
   await expect(page.locator('[data-filter-menu="tier"] .filter-status')).toHaveText(`${tierOptionCount - 1} of ${tierOptionCount} selected`);
-  await expect(page.locator("#stat-n")).not.toHaveText("129");
+  await expect(page.locator("#stat-n")).not.toHaveText(String(defaultCounts.combined));
   const filteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator(".bar-block")).toHaveCount(filteredN);
 
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
   await expect(page.locator("#sample-select")).toContainText("Recommended peers");
   await expect(page.locator("#sample-select")).toContainText("Recommended + broader");
   await expect(page.locator('#sample-select option[value="tierA"]')).toHaveText("Closest peers only");
@@ -504,13 +531,15 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#stat-n")).toHaveText("168");
   await page.locator("#stream-select").selectOption("incumbents");
   await page.locator("#measure-select").selectOption("cash");
+  // Broader comparisons include sensitivities outside the default filing-expense band.
+  await showAllExpenses(page);
   await expect(page.locator("#stat-n")).toHaveText("158");
   for (const organization of ["Animal Equality", "Compassion in World Farming USA", "Center for Public Integrity", "Nuclear Threat Initiative"]) {
     await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
   }
   await page.locator("#sample-select").selectOption("clean");
   await expect(page.locator("#sample-description")).toContainText("organization types most similar to RP");
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
   const titleFilterSummary = page.locator('[data-filter-menu="title"] summary');
   const titleFilterDetails = page.locator('[data-filter-menu="title"] details');
   await titleFilterSummary.click();
@@ -591,16 +620,16 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#salary-range-value")).not.toHaveText("All");
   await expect(page.locator("#salary-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#salary-filter-status")).toContainText("Salary filter");
-  await expect(page.locator("#stat-n")).not.toHaveText("129");
-  await page.locator("#reset-settings").click();
+  await expect(page.locator("#stat-n")).not.toHaveText(String(defaultCounts.combined));
+  await resetToPooledLognormal(page);
   await expect(page.locator("#expense-range-min")).not.toBeVisible();
   await page.locator("#expense-filter-summary").click();
   await page.locator("#expense-range-min").fill("500");
   await expect(page.locator("#expense-range-value")).not.toHaveText("All");
   await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#expense-filter-status")).toContainText("Expense filter");
-  await expect(page.locator("#stat-n")).not.toHaveText("129");
-  await page.locator("#reset-settings").click();
+  await expect(page.locator("#stat-n")).not.toHaveText(String(defaultCounts.combined));
+  await resetToPooledLognormal(page);
   const matchScoreUnfilteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator("#match-score-range-min")).not.toBeVisible();
   await page.locator("#match-score-filter-summary").click();
@@ -629,7 +658,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#match-score-range-value")).toHaveText(matchScoreRangeBeforeBasisChange);
   await expect(page.locator("#match-score-filter-summary")).toHaveAttribute("data-active", "true");
 
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
   const salaryHeader = page.locator('thead button[data-sort="adjustedSalary"]');
   const reportedSalaryHeader = page.locator('thead button[data-sort="reportedSalary"]');
   const titleHeader = page.locator('thead button[data-sort="title"]');
@@ -676,7 +705,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   ).toBe(true);
   await page.locator(".table-panel").screenshot({ path: "tmp/app-dual-salary-columns.png" });
 
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
   await page.locator("#quantile-granularity").selectOption("percentiles");
   await expect(page.locator(".quantile-cell")).toHaveCount(99);
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(0);
@@ -703,7 +732,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(adjacentCurveLabelsOverlap).toBe(false);
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-decluttered-curve-quantiles.png" });
 
-  await page.locator("#reset-settings").click();
+  await resetToPooledLognormal(page);
   await expect(page.getByRole("button", { name: "About auto-weights" })).toHaveCount(0);
   expect(await page.locator('.auto-weight-rule input[value="comparability"]').evaluate((input) => input.closest("#weighting-components"))).toBeNull();
   await expect(page.locator(".component-group-label")).toHaveText("Optional adjustments");
@@ -850,7 +879,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(wikipediaRequests.some((url) => url.includes("titles=NumFOCUS"))).toBe(false);
 
   await page.locator("#stream-select").selectOption("jobAds");
-  await expect(page.locator("#stat-n")).toHaveText("17");
+  await expect(page.locator("#stat-n")).toHaveText("15");
   await expect(page.locator("#chart-legend")).toContainText("Closest peers");
   await expect(page.locator("#chart-legend")).toContainText("Broader peers");
   await expect(page.locator("#chart-legend")).toContainText("Broadest peers");
@@ -874,7 +903,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#stat-n")).toHaveText("23");
   await expect(seattle.locator(".row-toggle")).toBeChecked();
   await page.locator("#sample-select").selectOption("primary");
-  await expect(page.locator("#stat-n")).toHaveText("17");
+  await expect(page.locator("#stat-n")).toHaveText("15");
   await expect(seattle.locator(".row-toggle")).not.toBeChecked();
   await seattle.locator(".preview-button").click();
   await expect(page.locator("#dialog-evidence")).toContainText("$250,000–$290,000");
@@ -918,7 +947,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#stream-select").selectOption("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
   await expect(page.locator(".method-note")).toHaveCount(0);
-  await expect(page.locator("#stat-n")).toHaveText("129");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.combined));
   await page.locator('[data-filter-menu="sourceType"] summary').click();
   await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(3);
   await page.locator('#weighting-components input[value="sourceType"]').check();
@@ -984,6 +1013,8 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
+  // Evidence dialogs are checked across every listed row, including sensitivities outside the default expense band.
+  await page.locator("#stream-select").selectOption("combined");
 
   const metadata = await page.evaluate(() => {
     const data = window.CEO_BENCHMARK_DATA;
@@ -1962,11 +1993,12 @@ test("GoodStructures discoveries retain native pay and conservative sample dispo
   expect(Object.entries(integration)
     .filter(([, row]) => row.defaultIncluded)
     .map(([id]) => id)
-    .sort()).toEqual(["SRC-AD-CAIF-2026", "SRC-AD-EAD-2026"]);
+    .sort()).toEqual([]);
+  // The GBP and EUR postings are currency and labor-market sensitivities.
   expect(Object.entries(integration)
     .filter(([, row]) => row.analysisStatus === "sensitivity_only")
     .map(([id]) => id)
-    .sort()).toEqual(["SRC-AD-SCREWWORM-2025", "SRC-AD-TAIMAKA-2025"]);
+    .sort()).toEqual(["SRC-AD-CAIF-2026", "SRC-AD-EAD-2026", "SRC-AD-SCREWWORM-2025", "SRC-AD-TAIMAKA-2025"]);
   expect(integration["SRC-AD-ALLFED-2026"]).toMatchObject({
     salary: null,
     reportedRange: { low: 60, high: 65 },
@@ -2447,7 +2479,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(organizationStatOptions).toHaveCount(5);
   await expect(page.locator('#axis-numerator optgroup[label="Pay"] option[value="highestPaidOtherEmployee"]')).toHaveCount(1);
   await expect(page.locator("#axis-numerator option")).toHaveCount(positionOptionCount + 7);
-  const expectedCeoCooBasePairs = await page.evaluate((operations) => {
+  const [expectedCeoCooBasePairs, bandedCeoCooBasePairs] = await page.evaluate((operations) => {
     const data = window.CEO_BENCHMARK_DATA;
     const filingSourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
     const coosBySource = new Map();
@@ -2457,11 +2489,12 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
         const sourceId = filingSourceId(row);
         coosBySource.set(sourceId, [...(coosBySource.get(sourceId) || []), row]);
       });
-    return data.incumbents.filter((row) => (
+    const pairs = data.incumbents.filter((row) => (
       row.defaultIncluded
       && row.salary?.base > 0
       && (coosBySource.get(filingSourceId(row)) || []).length === 1
-    )).length;
+    ));
+    return [pairs.length, pairs.filter((row) => row.expenses >= 3e6 && row.expenses <= 35e6).length];
   }, await pooledOperationsRows(page));
   expect(expectedCeoCooBasePairs).toBe(29);
   await expect(page.locator('#axis-numerator option[value="position:operations_leadership"]'))
@@ -2471,10 +2504,10 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("position:operations_leadership");
-  await expect(page.locator("#stat-n")).toHaveText(String(expectedCeoCooBasePairs));
+  await expect(page.locator("#stat-n")).toHaveText(String(bandedCeoCooBasePairs));
   await expect(page.locator("#salary-chart")).toContainText("CEO Salary / Operations leadership salary");
   const checkedCeoCooEligible = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
-  await expect(checkedCeoCooEligible).toHaveCount(expectedCeoCooBasePairs);
+  await expect(checkedCeoCooEligible).toHaveCount(bandedCeoCooBasePairs);
   const checkedCeoCooIneligible = page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked');
   await expect(checkedCeoCooIneligible).not.toHaveCount(0);
   await expect(checkedCeoCooEligible.first()).toHaveCSS("accent-color", "rgb(45, 104, 133)");
@@ -2510,6 +2543,10 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   expect(await page.locator("#organization-table thead th").count()).toBe(await page.locator("tbody .rp-reference-row").first().locator("td").count());
   await page.locator(".table-panel").screenshot({ path: "tmp/app-plot-eligibility-table.png" });
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ceo-coo-ratio.png" });
+  // Postings without reported expenses are listed only in a stream that includes postings;
+  // the remaining fit checks use the pooled lognormal view.
+  await page.locator("#stream-select").selectOption("combined");
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("expenses");
   const leadersTrustRow = page.locator('tbody tr[data-id]:has(.organization-name:text-is("The LeadersTrust"))');
@@ -2638,10 +2675,13 @@ test("highest-paid other employee ratios and reviewed position postings are usab
   await page.goto("/ceo-salary-benchmark/");
   await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
-  const expectedPairs = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents.filter((row) => (
-    row.defaultIncluded && row.salary?.base > 0 && row.highestPaidOtherEmployee40h?.base?.adjusted > 0
-  )).length);
-  expect(expectedPairs).toBeGreaterThan(90);
+  const [allPairs, expectedPairs] = await page.evaluate(() => {
+    const pairs = window.CEO_BENCHMARK_DATA.incumbents.filter((row) => (
+      row.defaultIncluded && row.salary?.base > 0 && row.highestPaidOtherEmployee40h?.base?.adjusted > 0
+    ));
+    return [pairs.length, pairs.filter((row) => row.expenses >= 3e6 && row.expenses <= 35e6).length];
+  });
+  expect(allPairs).toBeGreaterThan(90);
   const organizationsWhereOtherEarnsMore = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents
     .filter((row) => row.defaultIncluded
       && row.salary?.base > 0
@@ -2738,6 +2778,8 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
     const data = window.CEO_BENCHMARK_DATA;
     const selected = (row) => row.defaultIncluded
       || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus);
+    // The default expense band filters the CEO filing rows, not their matched COO rows.
+    const inBand = (row) => row.expenses >= 3e6 && row.expenses <= 35e6;
     const sourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
     const coos = new Map();
     operations.filter((row) => selected(row) && row.salary?.cash > 0).forEach((row) => {
@@ -2745,7 +2787,7 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
       coos.set(key, [...(coos.get(key) || []), row]);
     });
     return data.incumbents.filter((row) => (
-      selected(row) && row.salary?.cash > 0 && (coos.get(sourceId(row)) || []).length === 1
+      selected(row) && inBand(row) && row.salary?.cash > 0 && (coos.get(sourceId(row)) || []).length === 1
     )).length;
   }, await pooledOperationsRows(page));
   await expect(page.locator("#stat-n")).toHaveText(String(expectedSensitivityPairs));
@@ -2758,6 +2800,64 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
   const tomos = page.locator('tbody tr[data-id="SRC-990-RECOVERY-LEEP::tomos-davies"]');
   await expect(tomos).toHaveAttribute("data-plot-eligible", "false");
   await expect(tomos).toHaveAttribute("aria-label", /more than one CEO compensation row/i);
+  expect(errors).toEqual([]);
+});
+
+test("default CEO view follows the protocol main analysis and earlier links keep their defaults", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  const counts = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const base = data.incumbents.filter((row) => row.defaultIncluded && row.salary?.base > 0);
+    return {
+      main: base.filter((row) => row.expenses >= 3e6 && row.expenses <= 35e6).length,
+      combined: base.length + data.jobAds.filter((row) => row.defaultIncluded && row.salary?.base > 0).length,
+      nonUsdDefaultAds: data.jobAds.filter((row) => row.defaultIncluded && row.reportedCurrency !== "USD").length,
+    };
+  });
+  expect(counts.nonUsdDefaultAds).toBe(0);
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
+  await expect(page.locator("#expense-range-value")).toHaveText("$3.0M–$35M");
+  await expect(page.locator("#stat-n")).toHaveText(String(counts.main));
+  await expect(page.locator("#quantile-basis")).toContainText("weighted percentiles of the selected records");
+  expect(new URL(page.url()).searchParams.has("s")).toBe(false);
+
+  // A posting stream does not inherit the filing-scale band.
+  await page.locator("#stream-select").selectOption("combined");
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect(page.locator("#stat-n")).toHaveText(String(counts.combined));
+  await page.locator("#stream-select").selectOption("incumbents");
+  await expect(page.locator("#expense-range-value")).toHaveText("$3.0M–$35M");
+
+  // Widening the band is an explicit, shareable choice.
+  await page.locator("#expense-range-min").evaluate((input) => {
+    input.value = "0";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await page.locator("#expense-range-max").evaluate((input) => {
+    input.value = "1000";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect.poll(() => new URL(page.url()).searchParams.get("s")).not.toBeNull();
+  await page.reload();
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+
+  // Version 9 links were written when the pooled, lognormal, full-range view was the default.
+  const legacy = Buffer.from(JSON.stringify({ v: 9 })).toString("base64url");
+  await page.goto(`/ceo-salary-benchmark/?s=${legacy}`);
+  await expect(page.locator("#stream-select")).toHaveValue("combined");
+  await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect(page.locator("#stat-n")).toHaveText(String(counts.combined));
+
+  await page.locator("#chart-tab-model").click();
+  await expect(page.locator("#model-settings-note")).toContainText("core budget");
+  await expect(page.locator("#model-expenses")).toHaveValue("7500000");
+  await expect(page.locator("#model-staff")).toHaveValue("57");
   expect(errors).toEqual([]);
 });
 
@@ -2850,15 +2950,26 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(page.locator("#weight-profile-comparability")).toContainText("average similarity score");
   await expect(page.locator("#auto-target-ess-field")).toBeHidden();
 
+  const defaultCounts = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const base = data.incumbents.filter((row) => row.defaultIncluded && row.salary?.base > 0);
+    return {
+      incumbents: base.length,
+      main: base.filter((row) => row.expenses >= 3e6 && row.expenses <= 35e6).length,
+      combined: base.length + data.jobAds.filter((row) => row.defaultIncluded && row.salary?.base > 0).length,
+    };
+  });
+  // Links written before version 10 keep their full expense range and pooled or filing-only stream.
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV2}`);
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
-  await expect(page.locator("#stat-n")).toHaveText("112");
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.incumbents));
   const legacyV3 = Buffer.from(JSON.stringify({ v: 3 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV3}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
-  await expect(page.locator("#stat-n")).toHaveText("129");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.combined));
   const legacyV4 = Buffer.from(JSON.stringify({ v: 4, a: 1 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV4}`);
   await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
@@ -2873,12 +2984,14 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV1}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
-  await expect(page.locator("#stat-n")).toHaveText("112");
+  await expect(page.locator("#expense-range-value")).toHaveText("All");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.incumbents));
 
   await page.goto("/ceo-salary-benchmark/?s=not-valid-state");
   await expect(page.locator("#url-state-error")).toBeVisible();
   await expect(page.locator("#url-state-error")).toContainText("default settings");
-  await expect(page.locator("#stat-n")).toHaveText("129");
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator("#stat-n")).toHaveText(String(defaultCounts.main));
   expect(errors).toEqual([]);
 });
 
@@ -2889,6 +3002,7 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   const auto = page.locator('.auto-weight-rule input[value="comparability"]');
   const balance = page.locator('.stream-balance-rule input[value="streamBalanced"]');
 
+  await page.locator("#stream-select").selectOption("combined");
   await auto.check();
   await expect(balance).not.toBeChecked();
   await expect(page.locator("#weight-profile-comparability")).toContainText("Form 990 records");
@@ -2912,8 +3026,8 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   const weight100 = weightsByScore.get(100)[0].weight;
   const weight70 = weightsByScore.get(70)[0].weight;
   expect(weight100).toBeGreaterThan(weight70);
-  expect(weight100).toBeCloseTo(1.33, 2);
-  expect(weight70).toBeCloseTo(0.93, 2);
+  expect(weight100).toBeCloseTo(1.32, 2);
+  expect(weight70).toBeCloseTo(0.92, 2);
   expect(weightsByScore.get(100).every((item) => item.weight === weight100)).toBe(true);
   expect(weightsByScore.get(70).every((item) => item.weight === weight70)).toBe(true);
   expect(postingAutomaticWeights.reduce((sum, item) => sum + item.weight, 0) / postingAutomaticWeights.length).toBeCloseTo(1, 2);
@@ -2921,9 +3035,10 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   expect(weight70).toBeGreaterThanOrEqual(0.5);
 
   await page.locator("#stream-select").selectOption("incumbents");
+  await expect(page.locator("#expense-range-value")).toHaveText("$3.0M–$35M");
   const narrowSample = await page.evaluate(() => {
     const salaries = window.CEO_BENCHMARK_DATA.incumbents
-      .filter((row) => row.defaultIncluded && row.salary?.base > 0)
+      .filter((row) => row.defaultIncluded && row.salary?.base > 0 && row.expenses >= 3e6 && row.expenses <= 35e6)
       .map((row) => row.salary.base)
       .sort((a, b) => b - a);
     const cutoff = Math.floor(salaries[Math.min(4, salaries.length - 1)] / 5_000) * 5_000;
@@ -2981,10 +3096,10 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
       row.querySelector(".weight-input").value,
     ])));
   const baseline = await eligibleWeights();
-  // Plot eligibility also covers six unchecked sensitivity records.
-  expect(Object.keys(baseline).length).toBe(35);
-  await expect(page.locator('tbody tr[data-plot-eligible="true"] .row-toggle:checked')).toHaveCount(29);
-  await expect(page.locator("#stat-n")).toHaveText("29");
+  // Within the default expense band, plot eligibility also covers two unchecked sensitivity records.
+  expect(Object.keys(baseline).length).toBe(28);
+  await expect(page.locator('tbody tr[data-plot-eligible="true"] .row-toggle:checked')).toHaveCount(26);
+  await expect(page.locator("#stat-n")).toHaveText("26");
 
   const ineligibleRow = page.locator('tbody tr[data-id][data-plot-eligible="false"]:has(.row-toggle:checked)').first();
   const ineligibleId = await ineligibleRow.getAttribute("data-id");
@@ -3008,6 +3123,8 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
   await expect(restoredRow.locator(".weight-input")).toHaveValue("2");
   await expect(restoredRow.locator(".weight-input")).toHaveClass(/is-user-modified/);
 
+  // Postings without filing-comparable expenses stay selected but cannot enter the scatterplot.
+  await page.locator("#stream-select").selectOption("combined");
   await selectChartView(page, "scatter");
   const checkedEligible = await page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').count();
   await expect(page.locator(".scatter-point")).toHaveCount(checkedEligible);
@@ -3277,7 +3394,8 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
 
   await page.locator("#reset-settings").click();
   await expect(page.locator("#position-select")).toHaveValue("ceo");
-  await expect(page.locator("#stream-select")).toHaveValue("combined");
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator("#expense-range-value")).toHaveText("$3.0M–$35M");
   await expect(page.locator("#stream-select")).toBeEnabled();
   await expect(page.locator("#measure-select")).toHaveValue("base");
   await expect(page.locator("#app-title")).toHaveAttribute("aria-label", "CEO salary benchmark");
@@ -3434,10 +3552,10 @@ test("named scenarios preserve analytical snapshots and compare side by side", a
   await expect(page.locator("#scenario-count")).toHaveText("1 / 4 saved");
 
   await page.locator("#sample-select").selectOption("sensitivity");
-  await page.locator('input[name="distribution"][value="empirical"]').check();
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
   await page.locator('.weighting-field input[value="comparability"]').check();
   await page.getByRole("tab", { name: /Compare/ }).click();
-  await page.locator("#scenario-name").fill("Broader empirical");
+  await page.locator("#scenario-name").fill("Broader lognormal");
   await page.getByRole("button", { name: "Save current" }).click();
 
   await expect(page.locator(".scenario-name-input")).toHaveCount(2);
@@ -3455,15 +3573,15 @@ test("named scenarios preserve analytical snapshots and compare side by side", a
     weighting: scenario.summary.weighting,
   })));
   expect(storedScenarios.map(({ name, sample, distribution }) => ({ name, sample, distribution }))).toEqual([
-    { name: "Recommended model", sample: "Recommended peers", distribution: "Lognormal" },
-    { name: "Broader empirical", sample: "Recommended + broader", distribution: "Empirical" },
+    { name: "Recommended model", sample: "Recommended peers", distribution: "Empirical" },
+    { name: "Broader lognormal", sample: "Recommended + broader", distribution: "Lognormal" },
   ]);
   expect(storedScenarios[0].encodedState).not.toBe(storedScenarios[1].encodedState);
   expect(storedScenarios[0].weighting).not.toBe(storedScenarios[1].weighting);
   await expect(medianRow.locator("td").first().locator(".scenario-delta")).toHaveCount(0);
   await expect(medianRow.locator("td").nth(1)).toHaveAttribute("headers", /scenario-metric-\d+ scenario-column-1/);
   await expect(page.getByRole("button", { name: "Apply Recommended model" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Update with current Broader empirical" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Update with current Broader lognormal" })).toBeDisabled();
   await expect(page.locator(".scenario-table thead th").nth(2)).toContainText("Current analysis");
   await page.locator(".results-panel").screenshot({ path: "tmp/app-scenario-comparison.png" });
 
@@ -3474,7 +3592,7 @@ test("named scenarios preserve analytical snapshots and compare side by side", a
 
   await page.getByRole("button", { name: "Apply Recommended model" }).click();
   await expect(page.locator("#sample-select")).toHaveValue("primary");
-  await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
   await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
   await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#bin-count")).toHaveValue("47");
@@ -3664,6 +3782,8 @@ test("robustness points explain and apply their salary specifications", async ({
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
+  // The pooled view places several specifications close together, which exercises point disambiguation.
+  await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await expect(page.locator("#chart-title")).toContainText("CEO Salary / Expenses");
 
@@ -3830,7 +3950,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await page.getByRole("button", { name: "Run check" }).click();
   const tooltip = page.locator("#robustness-tooltip");
   const matchingTarget = page.locator(
-    '.robustness-spec-point[data-spec-id="core-primary-lognormal-equal"][data-quantile="q50"]',
+    '.robustness-spec-point[data-spec-id="core-primary-empirical-equal"][data-quantile="q50"]',
   );
   await matchingTarget.focus();
   await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "false");
@@ -3839,7 +3959,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await page.locator('input[name="distribution"][value="gamma"]').check();
   await expect(page.locator(".robustness-current-point").nth(1))
     .not.toHaveAttribute("aria-label", initialCurrentLabel || "");
-  await page.locator('input[name="distribution"][value="lognormal"]').check();
+  await page.locator('input[name="distribution"][value="empirical"]').check();
   await expect(page.locator(".robustness-current-point").nth(1))
     .toHaveAttribute("aria-label", initialCurrentLabel || "");
   await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
@@ -3860,7 +3980,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await page.locator('.weighting-field input[value="comparability"]').check();
   await page.locator("#auto-target-ess").fill("45");
   const automaticTarget = page.locator(
-    '.robustness-spec-point[data-spec-id="core-primary-lognormal-automatic"][data-quantile="q50"]',
+    '.robustness-spec-point[data-spec-id="core-primary-empirical-automatic"][data-quantile="q50"]',
   );
   await automaticTarget.focus();
   await expect(tooltip.locator('[data-setting="weighting"] dd del')).toContainText("target eff. n 45");
@@ -3876,7 +3996,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await expect(tooltip.locator('[data-setting="sample"] dd strong')).toHaveText("Recommended peers");
 
   const currentMedianPoint = page.locator(".robustness-current-point").nth(1);
-  const lognormalCurrentLabel = await currentMedianPoint.getAttribute("aria-label");
+  const defaultCurrentLabel = await currentMedianPoint.getAttribute("aria-label");
   await page.locator('input[name="distribution"][value="gamma"]').check();
   const liveGammaTarget = page.locator(
     '.robustness-spec-point[data-spec-id="core-primary-gamma-equal"][data-quantile="q50"]',
@@ -3884,7 +4004,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await liveGammaTarget.focus();
   await expect(tooltip.locator('[data-setting="distribution"]')).toHaveAttribute("data-changed", "false");
   await expect(currentMedianPoint).toHaveAttribute("aria-label", /current salary specification/i);
-  await expect(currentMedianPoint).not.toHaveAttribute("aria-label", lognormalCurrentLabel || "");
+  await expect(currentMedianPoint).not.toHaveAttribute("aria-label", defaultCurrentLabel || "");
   await currentMedianPoint.focus();
   await expect(tooltip).toContainText("This is the current analysis");
   await expect(tooltip.locator('[data-changed="true"]')).toHaveCount(0);
@@ -3900,6 +4020,7 @@ test("robustness current marker honors row choices and pay-source checks ignore 
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
+  await page.locator("#stream-select").selectOption("combined");
   const eligibleRows = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
   await expect(eligibleRows).not.toHaveCount(0);
   const selectedRowId = await eligibleRows.first().locator("xpath=../..").getAttribute("data-id");
@@ -3941,7 +4062,7 @@ test("benchmark changes can be undone and redone without replacing native field 
   await undo();
   await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
   await undo();
-  await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
 
   await redo();
   await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();

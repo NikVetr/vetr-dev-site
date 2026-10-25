@@ -43,6 +43,11 @@
   };
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
+  // The protocol pre-registers empirical quantiles and limits the main CEO
+  // filing analysis to USD 3M-35M; links from earlier URL versions keep their defaults.
+  const DEFAULT_FIT = "empirical";
+  const LEGACY_DEFAULT_FIT = "lognormal";
+  const CEO_DEFAULT_EXPENSE_BAND = Object.freeze({ low: 3_000_000, high: 35_000_000 });
   const RP_FORM990_PROFILE = Object.freeze({
     expenses: Number(DATA.rpReference?.expenses),
     staff: Number(DATA.rpReference?.staff),
@@ -167,7 +172,12 @@
   }
 
   function defaultPositionStream(key = state.position) {
-    return key === "ceo" || positionJobAds(key).length ? "combined" : "incumbents";
+    if (key === "ceo") return "incumbents";
+    return positionJobAds(key).length ? "combined" : "incumbents";
+  }
+
+  function defaultExpenseBand(stream = state.stream, key = state.position) {
+    return key === "ceo" && stream === "incumbents" ? CEO_DEFAULT_EXPENSE_BAND : null;
   }
 
   function activeRpReferences(key = state.position) {
@@ -200,11 +210,11 @@
 
   const state = {
     position: "ceo",
-    stream: "combined",
+    stream: "incumbents",
     measure: "base",
     inflationAdjusted: true,
     sample: "primary",
-    fit: "lognormal",
+    fit: DEFAULT_FIT,
     weightings: new Set(),
     autoTargetEss: 35,
     discreteWeights: {},
@@ -1752,17 +1762,24 @@
     const expenseMin = expenses.length ? Math.min(...expenses) : 1;
     const expenseMax = expenses.length ? Math.max(expenseMin + 1, Math.max(...expenses)) : 2;
     state.ranges.salary = { min: salaryMin, max: salaryMax, low: salaryMin, high: salaryMax };
-    state.ranges.expenses = {
-      min: expenseMin, max: expenseMax, low: expenseMin, high: expenseMax,
-    };
+    state.ranges.expenses = { min: expenseMin, max: expenseMax, low: expenseMin, high: expenseMax };
+    Object.assign(state.ranges.expenses, defaultExpenseRange());
     state.ranges.matchScore = { min: 0, max: 100, low: 0, high: 100 };
     Object.assign(refs.salaryMin, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMin });
     Object.assign(refs.salaryMax, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMax });
     refs.salaryMin.disabled = !salaries.length; refs.salaryMax.disabled = !salaries.length;
-    refs.expenseMin.value = 0; refs.expenseMax.value = 1000;
+    refs.expenseMin.value = expenseSliderPosition(state.ranges.expenses.low);
+    refs.expenseMax.value = expenseSliderPosition(state.ranges.expenses.high);
     refs.expenseMin.disabled = !expenses.length; refs.expenseMax.disabled = !expenses.length;
     refs.matchScoreMin.value = 0; refs.matchScoreMax.value = 100;
     updateRangeLabels();
+  }
+
+  function defaultExpenseRange(range = state.ranges.expenses, stream = state.stream) {
+    const band = defaultExpenseBand(stream);
+    if (!band || range.min == null || range.max == null) return { low: range.min, high: range.max };
+    const low = clamp(band.low, range.min, range.max);
+    return { low, high: clamp(band.high, low, range.max) };
   }
 
   function expenseFromSlider(position) {
@@ -5423,8 +5440,8 @@
     return available[(current + direction + available.length) % available.length]?.dataset.chartView || "";
   }
 
-  const URL_STATE_VERSION = 9;
-  const SUPPORTED_URL_STATE_VERSIONS = Object.freeze([2, 3, 4, 5, 6, 7, 8, URL_STATE_VERSION]);
+  const URL_STATE_VERSION = 10;
+  const SUPPORTED_URL_STATE_VERSIONS = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, URL_STATE_VERSION]);
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -5615,7 +5632,8 @@
     if (state.weightings.has("comparability") && state.autoTargetEss !== 35) parameters.a = state.autoTargetEss;
     const ranges = {};
     if (state.ranges.salary.low !== state.ranges.salary.min || state.ranges.salary.high !== state.ranges.salary.max) ranges.s = [state.ranges.salary.low, state.ranges.salary.high];
-    if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
+    const expenseDefault = defaultExpenseRange();
+    if (state.ranges.expenses.low !== expenseDefault.low || state.ranges.expenses.high !== expenseDefault.high) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
     if (state.ranges.matchScore.low !== state.ranges.matchScore.min || state.ranges.matchScore.high !== state.ranges.matchScore.max) ranges.m = [state.ranges.matchScore.low, state.ranges.matchScore.high];
     const payload = { v: URL_STATE_VERSION };
     const defaultStream = defaultPositionStream();
@@ -5623,7 +5641,7 @@
     if (state.measure !== positionDefinition().defaultMeasure && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
     if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
-    if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
+    if (state.fit !== DEFAULT_FIT) payload.g = URL_FIT_CODES[state.fit];
     const expressionCode = (expression) => [
       encodeVariableKey(expression.numerator),
       encodeVariableKey(expression.denominator),
@@ -6448,6 +6466,16 @@
     return Boolean(row.defaultIncluded && available);
   }
 
+  // The default expense band is a filing-scale rule; postings mostly lack
+  // filing-comparable expenses, so switching stream drops an unmodified band.
+  function robustnessRangesForStream(ranges, stream) {
+    const expenses = ranges?.expenses;
+    if (!expenses || defaultExpenseBand(stream)) return ranges;
+    const banded = defaultExpenseRange(expenses, "incumbents");
+    if (expenses.low !== banded.low || expenses.high !== banded.high) return ranges;
+    return { ...ranges, expenses: { ...expenses, low: expenses.min, high: expenses.max } };
+  }
+
   function robustnessPassesFilters(row, spec) {
     if (spec.skipFilters) return true;
     const categorical = Object.entries(spec.filters).every(([key, selected]) => {
@@ -6628,7 +6656,7 @@
     delete payload.i;
     if (spec.sample === "primary") delete payload.p;
     else payload.p = URL_SAMPLE_CODES[spec.sample];
-    if (spec.fit === "lognormal") delete payload.g;
+    if (spec.fit === DEFAULT_FIT) delete payload.g;
     else payload.g = URL_FIT_CODES[spec.fit];
     if (spec.weightMode === "equal") {
       delete payload.w;
@@ -6792,8 +6820,9 @@
       ].forEach((option) => {
         const spec = {
           ...baseSpec, stream: option.stream, measure: "base", sample: "primary",
-          fit: "lognormal", weightMode: "equal", weightings: new Set(),
+          fit: DEFAULT_FIT, weightMode: "equal", weightings: new Set(),
           streamBalanced: option.streamBalanced, membershipMode: "preset", filters: sourceFilters,
+          ranges: robustnessRangesForStream(baseSpec.ranges, option.stream),
         };
         source.push(evaluateRobustnessSpec(spec, {
           id: "source-" + option.stream + "-" + Number(option.streamBalanced),
@@ -6805,7 +6834,7 @@
     if (dimensions.has("measure")) {
       const measureBase = {
         ...baseSpec, stream: "incumbents", measure: "base", sample: "primary",
-        fit: "lognormal", weightMode: "equal", weightings: new Set(), streamBalanced: false,
+        fit: DEFAULT_FIT, weightMode: "equal", weightings: new Set(), streamBalanced: false,
         membershipMode: "preset", filters: robustnessFiltersWithoutPaySource(baseSpec.filters),
       };
       const cohort = robustnessCohortIds(measureBase, (row) => ["base", "cash", "total"].every((measure) => {
@@ -6823,8 +6852,9 @@
     if (dimensions.has("posting") && baseSpec.position === "ceo") {
       const postingBase = {
         ...baseSpec, stream: "jobAds", measure: "base", sample: "primary",
-        fit: "lognormal", weightMode: "equal", weightings: new Set(), streamBalanced: false,
+        fit: DEFAULT_FIT, weightMode: "equal", weightings: new Set(), streamBalanced: false,
         membershipMode: "preset", filters: robustnessFiltersWithoutPaySource(baseSpec.filters),
+        ranges: robustnessRangesForStream(baseSpec.ranges, "jobAds"),
       };
       const cohort = robustnessCohortIds(postingBase, (row) => {
         const range = postingBase.inflationAdjusted ? row.range : row.nominalRange;
@@ -7725,7 +7755,9 @@
       && (!Number.isFinite(highestOtherValue) || highestOtherValue < MODEL_PROFILE_BOUNDS.highest_other_base[0]
         || highestOtherValue > MODEL_PROFILE_BOUNDS.highest_other_base[1]),
     ));
-    refs.modelSettingsNote.textContent = intercept ? "Profile inputs are unused." : "";
+    const core = DATA.rpReference?.coreScale;
+    refs.modelSettingsNote.textContent = intercept ? "Profile inputs are unused."
+      : core ? `RP inputs default to its ${compactMoney(core.expenses)} core budget and ${core.staff} FTE; its 2024 filing reports ${compactMoney(DATA.rpReference.expenses)} consolidated expenses, including sponsored projects.` : "";
   }
 
   function syncControlsFromState() {
@@ -7785,7 +7817,7 @@
         pos: POSITION_BY_KEY.has(semanticPosition)
           ? semanticPosition
           : version >= 6 && POSITION_BY_KEY.has(payload.o) ? payload.o : "ceo",
-        s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : "combined",
+        s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : undefined,
         m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
         ia: payload.n !== 1,
         d: URL_FIT_KEYS[payload.g],
@@ -7812,13 +7844,16 @@
     const analysis = payload.a;
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
     state.position = enumValue(analysis.pos, [...POSITION_BY_KEY.keys()], "ceo");
-    state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], sourceVersion === 1 ? "incumbents" : state.stream);
+    // Version 10 changed the CEO stream, fit and expense-range defaults.
+    const legacyDefaults = sourceVersion !== URL_STATE_VERSION;
+    const fallbackStream = sourceVersion === 1 ? "incumbents" : legacyDefaults ? "combined" : defaultPositionStream(state.position);
+    state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], fallbackStream);
     if (!isCeoPosition() && !positionJobAds().length) state.stream = "incumbents";
     state.measure = enumValue(analysis.m, ["base", "cash", "total"], positionDefinition().defaultMeasure);
     state.inflationAdjusted = analysis.ia !== false;
     if (state.stream === "combined") state.measure = positionDefinition().defaultMeasure;
     state.sample = enumValue(analysis.p, ["primary", "sensitivity", "clean", "tierA", "observed"], state.sample);
-    state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
+    state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], legacyDefaults ? LEGACY_DEFAULT_FIT : DEFAULT_FIT);
     const validWeights = [...DISCRETE_WEIGHT_KEYS, "comparability", "size", "staff", "recency", "streamBalanced"];
     state.weightings = new Set((Array.isArray(analysis.w) ? analysis.w : []).filter((value) => validWeights.includes(value)));
     if (state.weightings.has("comparability")) {
@@ -7933,6 +7968,9 @@
     if (Array.isArray(expenseRange) && expenseRange.length === 2) {
       state.ranges.expenses.low = finiteNumber(expenseRange[0], state.ranges.expenses.min, state.ranges.expenses.min, state.ranges.expenses.max);
       state.ranges.expenses.high = finiteNumber(expenseRange[1], state.ranges.expenses.max, state.ranges.expenses.low, state.ranges.expenses.max);
+    } else if (legacyDefaults) {
+      state.ranges.expenses.low = state.ranges.expenses.min;
+      state.ranges.expenses.high = state.ranges.expenses.max;
     }
     if (Array.isArray(matchScoreRange) && matchScoreRange.length === 2) {
       state.ranges.matchScore.low = finiteNumber(matchScoreRange[0], state.ranges.matchScore.min, state.ranges.matchScore.min, state.ranges.matchScore.max);
@@ -7961,7 +7999,7 @@
     urlSyncReady = false;
     activeScenarioId = "";
     Object.assign(state, {
-      position: "ceo", stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {}, autoTargetEss: 35,
+      position: "ceo", stream: defaultPositionStream("ceo"), measure: "base", inflationAdjusted: true, sample: "primary", fit: DEFAULT_FIT, weightings: new Set(), discreteWeights: {}, autoTargetEss: 35,
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram",
       axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },

@@ -50,8 +50,8 @@ layout: null
       <label id="stream-field" class="field">
         <span>Pay source <button class="info-tooltip" type="button" aria-label="About pay sources" data-tooltip="Choose whether to use pay reported for nonprofit leaders in Form 990 filings, salary ranges advertised in job postings, or both.">?</button></span>
         <select id="stream-select">
-          <option value="combined" selected>All sources</option>
-          <option value="incumbents">Form 990s</option>
+          <option value="combined">All sources</option>
+          <option value="incumbents" selected>Form 990s</option>
           <option value="jobAds">Job postings</option>
         </select>
         <small id="stream-description" class="field-description"></small>
@@ -86,8 +86,8 @@ layout: null
 
       <fieldset id="distribution-field" class="choice-group field">
         <legend>Distribution <button class="info-tooltip" type="button" aria-label="About distribution models" data-tooltip="Empirical uses the weighted records directly. Lognormal and gamma fit smooth, right-skewed probability models and overlay their expected histogram density.">?</button></legend>
-        <label><input type="radio" name="distribution" value="empirical"> Empirical</label>
-        <label><input type="radio" name="distribution" value="lognormal" checked> Lognormal</label>
+        <label><input type="radio" name="distribution" value="empirical" checked> Empirical</label>
+        <label><input type="radio" name="distribution" value="lognormal"> Lognormal</label>
         <label><input type="radio" name="distribution" value="gamma"> Gamma</label>
       </fieldset>
 
@@ -359,7 +359,7 @@ layout: null
         <section id="results-panel-quantiles" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-quantiles">
           <h2 class="sr-only">Quantiles</h2>
           <div class="panel-heading inline-heading">
-            <p class="quantile-basis"><span id="quantile-basis">Estimated from the fitted lognormal curve</span> <button class="info-tooltip" type="button" aria-label="About quantiles" data-tooltip="Quantiles are salary cutoffs that divide the selected distribution into ordered shares. The 50th percentile is the median: half of the weighted distribution is below it and half is above it.">?</button></p>
+            <p class="quantile-basis"><span id="quantile-basis">Based on weighted percentiles of the selected records</span> <button class="info-tooltip" type="button" aria-label="About quantiles" data-tooltip="Quantiles are salary cutoffs that divide the selected distribution into ordered shares. The 50th percentile is the median: half of the weighted distribution is below it and half is above it.">?</button></p>
             <div class="quantile-controls">
               <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark graph</label>
               <label class="inline-select">

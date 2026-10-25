@@ -76,10 +76,10 @@ test("pooled roles propagate to ratio axes and matrix features; saved title rati
     expect(await page.locator(`${selector} option[value^="position:"]`).evaluateAll(options => options.map(o => o.value))).toEqual(expected);
   }
   await page.locator("#axis-denominator").selectOption("position:operations_leadership");
-  await expect(page.locator("#stat-n")).toHaveText("29");
+  await expect(page.locator("#stat-n")).toHaveText("26");
   await expect(page.locator("#salary-chart")).toContainText("CEO Salary / Operations leadership salary");
   await page.reload();
-  await expect(page.locator("#stat-n")).toHaveText("29");
+  await expect(page.locator("#stat-n")).toHaveText("26");
   await page.locator('[data-chart-view="scatter"]').click();
   await page.locator("#scatter-plot-mode").selectOption("matrix");
   const features = page.locator('#scatter-matrix .relationship-features input[value^="position:"]');
