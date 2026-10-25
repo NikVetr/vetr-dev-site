@@ -4,11 +4,15 @@ This folder contains the public-record compensation benchmark for Rethink Priori
 
 ## Data and evidence
 
-The empirical Recommended CEO view contains 129 observations across 126 organizations: 112 incumbent Schedule J base salaries and 17 advertised salary midpoints. Cash-pay analysis has 120 default incumbent observations. Rethink Priorities is a display-only reference. CPI converts compensation to July 2026 USD; nominal amounts and exact source measures remain available. Base salary, reported cash, total compensation, and advertised policy ranges remain distinct.
+The default CEO view follows the original protocol's main analysis: Form 990 incumbent Schedule J base salaries for organizations with USD 3M–35M filing expenses (91 observations), summarized with unweighted empirical quantiles. The Recommended incumbent set has 109 Schedule J base and 115 cash observations; the slider widens the scale band. The 15 US-dollar job postings are a separate stream, and combining them with filings is an explicit choice. Links shared before this default (URL state versions before 10) reopen with their original pooled, lognormal, full-range settings. Rethink Priorities is a display-only reference. CPI converts compensation to July 2026 USD; nominal amounts and exact source measures remain available. Base salary, reported cash, total compensation, and advertised policy ranges remain distinct.
+
+`benchmark/analysis/decision_ranges/compute_decision_ranges.py` derives the incumbent, total-compensation and posting decision ranges from the generated app data with fixed rules: the main-view median is the center, the range spans the medians of the pre-registered comparability views (strict scale, Tier A, structurally clean, EA-adjacent and functional-only), and the posting range runs from the median advertised minimum to the median maximum of the close posting set. The historical report's judgment ranges are retained beside the computed values for comparison only.
 
 `benchmark/` contains the frozen acquisition and analysis package, subsequent evidence overlays, the multi-position Form 990 extraction, and predictive models. Historical reports describe their own frozen cohorts. `scripts/build_app_data.py` combines validated layers into `app-data.js`, checks source hashes and model provenance, and publishes referenced source files under `evidence/original/`. Large native archives and intermediate fits are ignored by git.
 
-`ceo_reference_set_audit.md`, its row-level CSV in `benchmark/enrichment/`, and `ceo_peer_recommendations.csv` document the salary/scale extraction review and peer-selection recommendations. Copenhagen Consensus Center and ORCID remain eligible: their disclosed pay is supported, although their organizational structures warrant sensitivity analyses. Center for Public Integrity and Nuclear Threat Initiative are off by default and excluded from model training because their reported CEO hours require resolution. They remain selectable empirical sensitivity observations.
+`ceo_reference_set_audit.md`, its row-level CSV in `benchmark/enrichment/`, and `ceo_peer_recommendations.csv` document the salary/scale extraction review and peer-selection recommendations. ORCID remains eligible: its disclosed pay is supported, although its organizational structure warrants sensitivity analysis. Center for Public Integrity and Nuclear Threat Initiative are off by default and excluded from model training because their reported CEO hours require resolution. They remain selectable empirical sensitivity observations.
+
+`benchmark/enrichment/living_peer_universe_review.csv` applies the frozen admission rules to post-freeze observations. A post-freeze observation enters the default only when it neither contradicts a frozen disposition nor falls outside the USD 3M–35M filing-expense limits; GiveWell, Copenhagen Consensus Center, Center for Election Science, Leverage Research and Magnify Mentoring are therefore sensitivities, and Foresight Institute is the one post-freeze default. Postings stated in non-US currencies are sensitivities. Full-time organization-wide heads excluded only for scale, structure or currency remain model-training records through `scripts/predictive_model_contract.py`; co-leaders do not. `ea_core_candidate_screening.csv` records pay-blind dispositions for all 31 frozen EA-core candidates: none currently contributes a default observation, and Berkeley Existential Risk Initiative is the one structurally eligible peer pending acquisition of its prior clean filing year.
 
 The operating-evidence review covers all 201 organizations in two source-linked JSONL files. Current and historical job ads can support explicitly labeled indirect inferences; unknown remains a valid result. CEO hiring market, general hiring scope, and organizational footprint are separate fields. When executive-specific evidence is unavailable, a sufficiently supported staff market is labeled as an inference. RP's CEO is fully remote; its general hiring policy supports conditional international eligibility. Current policy does not establish the arrangement in an earlier pay year.
 
@@ -32,7 +36,7 @@ The role picker uses a keyboard-accessible menu with Executive leadership direct
 
 `index.html`, `style.css`, and `app.js` provide histogram, scatterplot, and CEO-only Model tabs, source previews, editable weights, filters, quantiles, robustness comparisons, and saved scenarios. Compact URLs preserve analytical settings and support undo/redo. Empirical, lognormal, and gamma summaries share internally consistent densities, quantiles, means, and reference percentiles. Position routes are generated by `scripts/build_position_routes.py` and served locally by `scripts/serve_local.py`.
 
-The Model tab uses a fixed, versioned cohort independently of table filtering. Users edit numeric and categorical organization features, choose fractional focus-area weights, and inspect the support for their profile. “Average category effect” means the unweighted centered category effect; a specified mixture is a weighted log effect, not a mixture of different salary distributions.
+The Model tab uses a fixed, versioned cohort independently of table filtering. RP's default profile uses the protocol's core scale (the USD 7.5M 2026 core budget for expenses and revenue, and 57 FTE) rather than its consolidated filing, which includes sponsored-project pass-through; the build verifies both figures against the saved RP sources. Users edit numeric and categorical organization features, choose fractional focus-area weights, and inspect the support for their profile. “Average category effect” means the unweighted centered category effect; a specified mixture is a weighted log effect, not a mixture of different salary distributions.
 
 Model robustness compares P25, median, and P75 across every fitted variant at the same profile. The shared empirical robustness chart provides point inspection, keyboard navigation, model selection, and an expandable result table. Model predictions are cached by variant and profile; input changes refresh the comparison. Switching models preserves supported profile vocabulary even when a selected category has only prior support in the new training cohort. The CV table sorts numeric metrics and separates method, base-only evidence, categorical-input inclusion, other-pay inclusion, and ad inclusion. Exact-base and cash-inclusive Bayesian linear variants share the Bayesian multilevel family name and a Base only sidebar checkbox; ordinary least squares is labeled OLS.
 
@@ -56,7 +60,7 @@ Form 990 base salary uses Schedule J Part II column B(i), separately from bonuse
 
 ## Predictive analysis
 
-`benchmark/analysis/predictive_salary_models/prepare_model_data.py` prepares 151 records across 147 organization-name groups: 112 exact-base filings, 12 cash proxies, and 27 advertisements. RP never contributes an outcome. The preparation contract records cohort membership, deterministic grouped folds, predictor definitions, and source/code hashes.
+`benchmark/analysis/predictive_salary_models/prepare_model_data.py` prepares 149 records across 146 organization-name groups: 112 exact-base filings, 10 cash proxies, and 27 advertisements. RP never contributes an outcome. The preparation contract records cohort membership, deterministic grouped folds, predictor definitions, and source/code hashes.
 
 `fit_salary_models.R` orchestrates 19 specifications: an intercept baseline; paired OLS, numeric GAM, RBF SVR, and RBF Gaussian-process fits; and eight Bayesian fits crossing linear/additive numeric effects, presence/absence of highest non-CEO pay, and inclusion/exclusion of advertisements. Two exact-base-only Bayesian linear variants retain the multilevel and joint missing-input structure, with/without other pay, while excluding cash-only records and ads. `model_extensions.R` contains spline bases, kernel fits, distribution scores, and uncertainty utilities. `ceo_salary_model.stan` implements the shared multilevel model, joint Gaussian missing inputs, and source-specific pay likelihoods.
 
@@ -78,12 +82,14 @@ Run from this folder:
 
 ```sh
 python3 scripts/build_organization_operating_metadata.py
+python3 scripts/build_app_data.py --model-inputs tmp/predictive-model-inputs.js
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
 Rscript benchmark/analysis/predictive_salary_models/fit_categorical_gam.R .
 Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
 python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
+python3 benchmark/analysis/decision_ranges/compute_decision_ranges.py
 python3 benchmark/analysis/predictive_salary_models/audit_cash_disclosure.py
 python3 scripts/audit_ceo_reference_set.py
 python3 scripts/summarize_work_followup.py
@@ -92,7 +98,7 @@ npm run test:statistics
 npm test
 ```
 
-The model preparation reads the generated app data and applies current review overlays. After changing raw acquisition/extraction layers, rebuild those layers first. A stale model artifact deliberately prevents a production app build; regenerate preparation and fits before publishing. `--quick` is for smoke testing and cannot satisfy production gates. R, CmdStan, and package versions are recorded in the artifact; native evidence files must be present to reproduce source audits.
+The model preparation reads the pre-expansion inputs exported by `build_app_data.py --model-inputs`, which are the rows the build validates the artifact against, and applies current review overlays. The published `app-data.js` also contains expansion rows appended after that check, so it cannot replace that export. After changing raw acquisition/extraction layers, rebuild those layers first. A stale model artifact deliberately prevents a production app build; regenerate preparation and fits before publishing. `--quick` is for smoke testing and cannot satisfy production gates. R, CmdStan, and package versions are recorded in the artifact; native evidence files must be present to reproduce source audits.
 
 Python checks validate source contracts, cohort membership, routes, and artifact structure. R/Node checks cover numerical distributions, held-out outcome independence, conditional imputation, spline and GP calculations, and driver decomposition. Playwright tests cover model robustness and variant selection, numeric CV sorting, driver comparisons, control styling, uncertainty, source dialogs, fractional inputs, URL/history behavior, and the broader explorer.
 

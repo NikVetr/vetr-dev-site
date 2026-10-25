@@ -4,7 +4,7 @@ These models estimate the distribution of **positive annual CEO base salary in J
 
 ## Cohort and specifications
 
-The versioned cohort contains **151 records in 147 organization-name groups**: 112 exact Schedule J base salaries, 12 reported-cash proxies, and 27 recruitment observations (25 ranges and two points). RP is a prediction profile only. Center for Public Integrity and Nuclear Threat Initiative are excluded pending reported-hours resolution; see the [reference-set audit](../../../ceo_reference_set_audit.md).
+The versioned cohort contains **149 records in 146 organization-name groups**: 112 exact Schedule J base salaries, 10 reported-cash proxies, and 27 recruitment observations (25 ranges and two points). It includes full-time organization-wide heads that are sensitivities in the empirical explorer only for scale, structure or currency, because the models condition on those inputs; co-leaders are excluded. RP is a prediction profile only, at its core scale (USD 7.5M core budget and 57 FTE). Center for Public Integrity and Nuclear Threat Initiative are excluded pending reported-hours resolution; see the [reference-set audit](../../../ceo_reference_set_audit.md).
 
 There are 21 browser specifications:
 
@@ -70,7 +70,7 @@ The intercept and OLS models use ordinary least squares on log pay. Constant/col
 
 The categorical GAM adds all seven categorical fields through `s(field, bs = "re")`: one indicator per category with a shared ridge penalty within each field. REML estimates numeric smoothness and each categorical penalty jointly. These are partially pooled random intercepts, equivalent to independent Gaussian effects with empirically estimated variances. Fixed salary-blind factor vocabularies and `drop.unused.levels = FALSE` retain unobserved levels with uncertainty. Displayed category contrasts are centered over the taxonomy; EA uses Functional overlap. Joint coefficient draws include mgcv’s smoothing-parameter covariance correction and preserve dependence with numeric smooths.
 
-Both GAM variants use the same 112 exact-base outcomes, outer folds and nested residual calibration. With other pay, adding categories changes log RMSE from 0.2885 to 0.2823 and mean absolute percentage error from 21.94% to 21.51%. This single split suggests a modest improvement, not a stable ranking. The categorical GAM shares the Bayesian GAM’s predictor fields, but still differs in spline basis, penalties/priors, missing-input treatment and (for cash-inclusive Bayesian models) training evidence.
+Both GAM variants use the same 112 exact-base outcomes, outer folds and nested residual calibration. With other pay, adding categories changes log RMSE from 0.2783 to 0.2655 and mean absolute percentage error from 21.37% to 20.56%. This single split suggests a modest improvement, not a stable ranking. The categorical GAM shares the Bayesian GAM’s predictor fields, but still differs in spline basis, penalties/priors, missing-input treatment and (for cash-inclusive Bayesian models) training evidence.
 
 `fit_categorical_gam.R` adds these two fitted variants to the production registry using the shared preprocessing, scoring and nested calibration functions. `categorical_gam.R` holds fitting and export logic. Independent provenance hashes cover both scripts, training data and R/mgcv versions; full fits are cached under ignored `tmp/categorical-gam/`.
 
@@ -130,6 +130,7 @@ From `ceo-salary-benchmark/`:
 ```sh
 python3 scripts/build_organization_operating_metadata.py
 python3 scripts/summarize_work_followup.py
+python3 scripts/build_app_data.py --model-inputs tmp/predictive-model-inputs.js
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
 Rscript benchmark/analysis/predictive_salary_models/fit_categorical_gam.R .
@@ -142,7 +143,7 @@ npm run test:data
 npm test
 ```
 
-Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 21 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
+Preparation reads the pre-expansion rows exported by `build_app_data.py --model-inputs` (the rows the build validates the artifact against; published `app-data.js` also contains later-appended expansion rows), applies reviewed eligibility/geography overlays, and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 21 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
 
 Large fits are stored under the ignored `tmp/predictive-model-cache/` with signatures covering Stan data, code, version, seed, and sampler settings. For the repository's worker cluster, `SALARY_CLUSTER_PREPARE=<requests-directory> Rscript .../prepare_cluster_fits.R .` exports exact requests for uncached fits. Run `cluster_fit_worker.R LOCAL_STAGE FIT_SIGNATURE PUBLISH_DIRECTORY` on a worker with CmdStan 2.38.0; it publishes integrity manifests plus four CSVs to the explicitly supplied, existing shared directory. Import verifies signatures and CSV checksums before postprocessing.
 

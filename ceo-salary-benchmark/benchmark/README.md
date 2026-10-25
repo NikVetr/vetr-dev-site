@@ -20,22 +20,24 @@ This package extends the independently selected comparison universe for the full
 
 The original nine-organization strict benchmark is preserved as a baseline. The later expansion waves are not blind to that earlier result. To prevent pay-driven peer selection, each new candidate list and combined peer universe was frozen before systematic review of newly added executive compensation.
 
-## Headline result
+## Decision ranges
 
-- External recruitment posting: **$250,000-$340,000 base**, descriptive center **$295,000**, expected hire zone **$280,000-$320,000**.
-- Successful incumbent: **$290,000-$350,000 base**, descriptive center **$320,000**.
-- Recurring total compensation: **$340,000-$435,000**, descriptive center **$385,000**, with low-to-moderate confidence.
+`analysis/decision_ranges/decision_ranges.md` is generated from the live validated app data by `analysis/decision_ranges/compute_decision_ranges.py`; see it for the rules and every view. In July 2026 USD:
 
-These are decision ranges, not estimated population percentiles.
+- Incumbent base salary: **$271K-$324K**, center **$291K** (main-view median; the range spans the EA-adjacent and functional-only peer medians).
+- Recurring total compensation: **$303K-$387K**, center **$339K**.
+- External posting range: **$230K-$276K**, center **$251K** (median advertised minimum and maximum of the five close postings).
+
+These are decision ranges, not estimated population percentiles. The historical report's ranges ($250K-$340K posting, $290K-$350K incumbent base, $340K-$435K total) were analyst judgments fixed in `scripts/normalize_and_analyze.py`; they are retained in the audited report and beside the computed values for comparison.
 
 ## Evidence coverage
 
 - 450 frozen expansion candidates plus two legacy-only original-protocol peers: **452 documented organizations**.
 - **144 historically frozen selected reference organizations**: 79 Tier A, 39 Tier B, and 26 Tier C.
 - **116 historically frozen primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
-- **17 current quantitative CEO/ED recruitment advertisements**.
+- **17 validated quantitative CEO/ED recruitment advertisements**; the 15 stated in US dollars form the default posting set.
 - **110 independently recovered exact Schedule J base observations among the 116 historically frozen primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
-- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **120 default incumbent cash observations**, of which **112 report Schedule J base**; together with the 17 postings, the initial base view contains **129 observations across 126 organizations**. Center for Public Integrity and Nuclear Threat Initiative remain selectable sensitivity records pending CEO-hours resolution; see [the source audit](../ceo_reference_set_audit.md). The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
+- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **115 default incumbent cash observations**, of which **109 report Schedule J base**. The default view follows the protocol's main analysis: Schedule J base for organizations with USD 3M-35M filing expenses (**91 observations**), with postings as a separate stream. Center for Public Integrity and Nuclear Threat Initiative remain selectable sensitivity records pending CEO-hours resolution; see [the source audit](../ceo_reference_set_audit.md). The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
 
 ## Two different reproduction commands
 
@@ -196,6 +198,6 @@ Core Python requirements are `pandas`, `numpy`, `matplotlib`, `mistune`, `weasyp
 
 ## Analytical limitations
 
-In the historically frozen analysis, employee count is unavailable for 73 of 116 primary observations, so the report separately records expense-only, expense-plus-no-known-contradiction, and strict joint expense-and-known-staff views. The current app applies the same missingness rules to its living cohort. Exact filing base salary is used only where Schedule J reports it; no base salary is imputed. See `KNOWN_LIMITATIONS.md` for the complete list.
+In the historically frozen analysis, employee count is unavailable for 73 of 116 primary observations, so the report separately records expense-only, expense-plus-no-known-contradiction, and strict joint expense-and-known-staff views. The current app reads employee counts from the saved filings; among default incumbent observations only Third Way Institute lacks a usable count, because its filing reports zero employees. Exact filing base salary is used only where Schedule J reports it; no base salary is imputed. See `KNOWN_LIMITATIONS.md` for the complete list.
 
 This analysis is not a legal opinion and does not replace board conflict-of-interest, comparability, or compensation-reasonableness procedures.
