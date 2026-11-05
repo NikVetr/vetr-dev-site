@@ -32,6 +32,41 @@ export function polyline(points, close = false, d = 1) {
   return close ? `${p}Z` : p;
 }
 
+/**
+ * Path data made only of M, L and Z (a tool's polygons), mapped by `at` into the canvas and
+ * simplified to within `tolerance` canvas units (Douglas-Peucker on each ring), rounded.
+ * @param {string} path
+ * @param {(x: number, y: number) => number[]} at
+ * @param {number} tolerance
+ */
+export function simplifyPath(path, at, tolerance) {
+  if (/[^MLZ\d\s.,eE+-]/.test(path)) throw new Error('simplifyPath: only M, L and Z are handled');
+  return path.split(/(?=M)/).map((ring) => {
+    const nums = (ring.match(/-?\d*\.?\d+(?:e-?\d+)?/gi) ?? []).map(Number);
+    const points = [];
+    for (let i = 0; i + 1 < nums.length; i += 2) points.push(at(nums[i], nums[i + 1]));
+    const kept = douglasPeucker(points, tolerance);
+    return kept.length < 3 ? '' : polyline(kept, /Z/i.test(ring));
+  }).join('');
+}
+
+/** @param {number[][]} pts @param {number} tol @returns {number[][]} */
+function douglasPeucker(pts, tol) {
+  if (pts.length < 3) return pts;
+  const [ax, ay] = pts[0];
+  const [bx, by] = pts[pts.length - 1];
+  const len = Math.hypot(bx - ax, by - ay);
+  let worst = 0;
+  let index = 0;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [px, py] = pts[i];
+    const d = len ? Math.abs((bx - ax) * (ay - py) - (ax - px) * (by - ay)) / len : Math.hypot(px - ax, py - ay);
+    if (d > worst) { worst = d; index = i; }
+  }
+  if (worst <= tol) return [pts[0], pts[pts.length - 1]];
+  return [...douglasPeucker(pts.slice(0, index + 1), tol).slice(0, -1), ...douglasPeucker(pts.slice(index), tol)];
+}
+
 /** Escapes text for SVG content and attributes. @param {unknown} text */
 export function esc(text) {
   return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
