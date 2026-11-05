@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Make crosswords from your own words and clues, optionally shaped like a picture.">
+  <title>Crossword Generator</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 12h20v8H6zM12 6h8v20h-8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Before first paint, so the page never flashes the wrong theme.
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('crossword:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Crossword Generator</h1>
+        <p class="tagline">Lay out a crossword from your own answers and clues, optionally shaped like a picture. Each crossword is laid out greedily, then refined by Markov chain Monte Carlo.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <div class="column">
+      <section class="card" aria-labelledby="entries-heading">
+        <div class="card-head">
+          <h2 id="entries-heading">Answers and clues</h2>
+          <span id="entry-count" class="muted"></span>
+        </div>
+        <p class="muted">One entry per line, as <code>clue : answer</code>. Spaces in an answer are left out of the grid; other characters, such as a hyphen, take a cell.</p>
+        <div class="toolbar">
+          <button id="load-example" type="button">Load example</button>
+          <button id="clear-entries" type="button">Clear</button>
+        </div>
+        <textarea id="entries" class="entries" rows="14" spellcheck="false" aria-label="Answers and clues, one clue : answer per line"></textarea>
+        <div id="entry-issues" class="issues" role="alert" hidden></div>
+      </section>
+
+      <section class="card" aria-labelledby="target-heading">
+        <h2 id="target-heading">Target picture</h2>
+        <p class="muted">Optional. The crossword is pushed towards the picture's shape: its opaque pixels if it is partly transparent, otherwise its pixels at least as dark as the threshold.</p>
+        <div class="toolbar">
+          <label class="file-button">Choose picture… <input id="target-file" type="file" accept="image/*"></label>
+          <button id="target-example" type="button">Example heart</button>
+          <button id="target-none" type="button">No picture</button>
+        </div>
+        <div class="target-row">
+          <canvas id="target-preview" class="target-preview" width="96" height="96" aria-label="Region to fill"></canvas>
+          <div>
+            <p id="target-status"></p>
+            <label class="inline-field">Darkness threshold (R + G + B, 0 to 3)
+              <input id="dark-threshold" type="number" min="0" max="3" step="0.05" value="2.75">
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <div class="settings">
+          <label>Crosswords
+            <input id="n-xwords" type="number" min="1" max="100" step="1" value="3">
+          </label>
+          <label>MCMC iterations each
+            <input id="n-iter" type="number" min="0" max="100000" step="10" value="50">
+          </label>
+          <label>Seed
+            <span class="input-row">
+              <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
+              <button id="new-seed" type="button">New seed</button>
+            </span>
+          </label>
+          <label>Desired width / height
+            <input id="desired-area-ratio" type="number" min="0.01" step="0.1" value="1">
+          </label>
+          <label>Desired across / down words
+            <input id="desired-hv-ratio" type="number" min="0.01" step="0.1" value="1">
+          </label>
+          <label>Picture distance
+            <select id="picture-distance">
+              <option value="scan">Ring scan, as in R</option>
+              <option value="exact">Exact nearest</option>
+            </select>
+          </label>
+          <label>Failed placements allowed per layout
+            <input id="max-attempts-word" type="number" min="1" max="10000" step="1" value="20">
+          </label>
+          <label>Layout attempts per crossword
+            <input id="max-attempts-xword" type="number" min="1" max="1000" step="1" value="5">
+          </label>
+        </div>
+        <h3>Penalty weights</h3>
+        <div id="weights" class="settings"></div>
+      </section>
+    </div>
+
+    <section class="card results-card" aria-labelledby="results-heading">
+      <div class="card-head">
+        <h2 id="results-heading">Crosswords</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="generate" type="button" class="primary">Generate</button>
+        <button id="refine" type="button" disabled>Refine the one shown</button>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <div id="run-issues" class="issues" role="alert" hidden></div>
+      <figure id="progress-grid" class="grid-figure progress-figure" hidden></figure>
+      <p id="no-result" class="placeholder">Crosswords appear here.</p>
+      <div id="result" hidden>
+        <fieldset class="choice">
+          <legend>Crossword</legend>
+          <div id="crossword-choice" class="choice-list"></div>
+        </fieldset>
+        <fieldset class="choice">
+          <legend>Stage</legend>
+          <div class="choice-list">
+            <label><input type="radio" name="stage" value="refined" checked> After refinement</label>
+            <label><input type="radio" name="stage" value="orig"> Greedy layout</label>
+          </div>
+        </fieldset>
+
+        <h3>Filled</h3>
+        <figure id="grid-filled" class="grid-figure"></figure>
+        <h3>Blank</h3>
+        <figure id="grid-blank" class="grid-figure"></figure>
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <button id="export-svg" type="button">Filled SVG</button>
+          <button id="export-svg-blank" type="button">Blank SVG</button>
+          <button id="export-png" type="button">Filled PNG</button>
+          <button id="export-png-blank" type="button">Blank PNG</button>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+
+        <div class="clues">
+          <div>
+            <h3>Across</h3>
+            <ol id="clues-across" class="clue-list"></ol>
+          </div>
+          <div>
+            <h3>Down</h3>
+            <ol id="clues-down" class="clue-list"></ol>
+          </div>
+        </div>
+
+        <h3>Penalty</h3>
+        <table class="terms">
+          <thead>
+            <tr><th scope="col">Term</th><th scope="col" class="num">Weighted value</th></tr>
+          </thead>
+          <tbody id="terms"></tbody>
+          <tfoot>
+            <tr><th scope="row">Score (lower is better)</th><td id="score" class="num"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>The first answer goes across the middle of an empty grid. Then, one at a time, a random unplaced answer is tried through every matching letter, keeping only placements that create no stray words. Each is scored and one is drawn, lower scores being more likely. This greedy layout is retried if some answer cannot be placed.</p>
+        <p>Refinement repeats a move: take out a few answers (never one whose removal would split the crossword) and put them back greedily. The new layout replaces the old with probability 1 / (1 + e<sup>new − old</sup>), so better scores are usually kept.</p>
+        <p>The score is the sum of seven weighted terms, all lower-is-better:</p>
+        <ul>
+          <li><strong>Area</strong>: the square root of rows × columns.</li>
+          <li><strong>Width / height</strong>: how far the shape is from the desired ratio, squared.</li>
+          <li><strong>Across / down</strong>: how far the word counts are from the desired ratio, cubed.</li>
+          <li><strong>Connections</strong>: minus the sum of squared crossing counts, so well-connected answers score lower.</li>
+          <li><strong>Cycles</strong>: minus the number of chordless 4- and 6-cycles of crossing answers.</li>
+          <li><strong>Picture</strong>: for every cell of the crossword's silhouette off the picture, and every picture cell off the silhouette, its distance to the other shape, to the fourth power.</li>
+          <li><strong>Roundness</strong>: the variance of the concave hull's distances from its centre, squared.</li>
+        </ul>
+        <p>The seed fixes every random choice, so the same answers and settings always give the same crosswords. This is a port of an R program, and its scores match the R code's to floating-point precision.</p>
+        <p>The generator is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2022-06-21">2022-06-21</time>
+    </div>
+  </footer>
+</body>
+</html>
