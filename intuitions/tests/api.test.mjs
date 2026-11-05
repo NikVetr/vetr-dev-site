@@ -27,7 +27,9 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance', 'backpack-fallacy']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance', 'backpack-fallacy', 'samplers']);
+  assert.deepEqual(submit({ entry: 'samplers', params: { iterations: 10 } }).params, { view: 'funnel', coordinates: 'centred', sampler: 'hmc', sdY: 1.5, step: 0.2, leapfrog: 20, iterations: 10, start: [1, 0], seed: 1 });
+  assert.deepEqual(submit({ entry: 'samplers', params: { view: 'hastings', iterations: 10 } }).params, { view: 'hastings', correction: 'missing', sd: 0.5, correlation: 0.6, step: 0.5, iterations: 10, start: [1, 1], seed: 1 });
   assert.deepEqual(submit({ entry: 'backpack-fallacy', params: { sizes: [16, 2], upTo: 1, window: 0 } }).params, { prior: 'cauchy', scale: 1, sizes: [2, 16], upTo: 1, window: 0, at: 2 });
   assert.deepEqual(submit({ entry: 'trait-evolution', params: { model: 'ou' } }).params, { view: 'tree', tree: { tips: 12, seed: 1 }, model: 'ou', sigma2: 1, root: 0, alpha: 4, theta: 1.5, steps: 300, seed: 1 });
   assert.deepEqual(submit({ entry: 'trait-evolution', params: { view: 'bridge', paths: 3 } }).params,

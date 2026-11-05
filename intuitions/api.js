@@ -7,6 +7,7 @@ import * as dagAdjustment from './dag-adjustment/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
 import * as marchenkoPastur from './marchenko-pastur/compute.js';
 import * as nullPvalues from './null-pvalues/compute.js';
+import * as samplers from './samplers/compute.js';
 import * as thresholdModel from './threshold-model/compute.js';
 import * as traitEvolution from './trait-evolution/compute.js';
 import * as treeCovariance from './tree-covariance/compute.js';
@@ -27,6 +28,7 @@ export const ENTRIES = Object.freeze({
   [traitEvolution.ENTRY]: traitEvolution,
   [treeCovariance.ENTRY]: treeCovariance,
   [backpackFallacy.ENTRY]: backpackFallacy,
+  [samplers.ENTRY]: samplers,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];
