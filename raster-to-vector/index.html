@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn a raster image into an SVG of flat-colour regions with smooth outlines, free and in your browser.">
+  <title>Raster to Vector</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M7 24c3-10 8-15 18-17-2 9-7 15-18 17z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Before first paint, so the page never flashes the wrong theme.
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('raster-to-vector:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Raster to Vector</h1>
+        <p class="tagline">Turn a PNG or JPEG into an SVG of flat-colour regions with smooth outlines. Everything runs in your browser; the image never leaves your computer.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <div class="column">
+      <section class="card" aria-labelledby="image-heading">
+        <h2 id="image-heading">Image</h2>
+        <div class="toolbar">
+          <label class="file-button">Choose image… <input id="image-file" type="file" accept="image/png,image/jpeg"></label>
+          <button id="example-cartoon" type="button">Example: cartoon</button>
+          <button id="example-logo" type="button">Example: logo with holes</button>
+        </div>
+        <p id="image-info" class="muted">No image loaded.</p>
+      </section>
+
+      <section class="card" aria-labelledby="options-heading">
+        <h2 id="options-heading">Options</h2>
+        <p class="muted">The defaults are the R version's, except the longest side, which the page sets so that large photos stay quick (leave it empty to keep the size).</p>
+
+        <h3>Size</h3>
+        <div class="settings">
+          <label>Longest side (px, empty: as is)
+            <input data-path="preprocess.maxDim" data-type="int-or-null" type="number" min="8" step="1" value="600">
+          </label>
+          <label>Upscale factor
+            <input data-path="preprocess.scale" data-type="int" type="number" min="1" step="1">
+          </label>
+          <label>Padding (replicated edge pixels)
+            <input data-path="preprocess.pad" data-type="int" type="number" min="0" step="1">
+          </label>
+        </div>
+
+        <h3>Colours</h3>
+        <div class="settings">
+          <label>Number of colours, k
+            <input data-path="quantize.k" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
+          </label>
+          <label>k tried when automatic
+            <input data-path="quantize.kRange" data-type="int-list" type="text" spellcheck="false">
+          </label>
+          <label>Offset added to the chosen k's position
+            <input data-path="quantize.offset" data-type="int" type="number" min="0" step="1">
+          </label>
+          <label>Most frequent colours clustered
+            <input data-path="quantize.nTop" data-type="int" type="number" min="1" step="1">
+          </label>
+          <label>Decimals colours are rounded to
+            <input data-path="quantize.digits" data-type="int" type="number" min="0" max="6" step="1">
+          </label>
+          <label>Transparent below alpha
+            <input data-path="quantize.alphaThreshold" data-type="number" type="number" min="0" max="1" step="0.05">
+          </label>
+          <label>k-means++ seeding
+            <select data-path="quantize.seeding">
+              <option value="weighted">Weighted by colour count</option>
+              <option value="unweighted">Unweighted (original)</option>
+            </select>
+          </label>
+          <label>Colour space
+            <select data-path="quantize.space">
+              <option value="rgb">RGB</option>
+              <option value="oklab">OKLab</option>
+            </select>
+          </label>
+          <label>Seed
+            <input data-path="quantize.seed" data-type="int" type="number" step="1">
+          </label>
+        </div>
+
+        <h3>Cleanup</h3>
+        <div class="settings">
+          <label>Shortest run kept (px; 1: no cleanup)
+            <input data-path="clean.minRun" data-type="int" type="number" min="1" step="1">
+          </label>
+          <label>Passes (rows, then columns)
+            <input data-path="clean.passes" data-type="int" type="number" min="1" step="1">
+          </label>
+        </div>
+
+        <h3>Tracing</h3>
+        <div class="settings">
+          <label>Tracer
+            <select data-path="trace.method">
+              <option value="marching_squares">Marching squares</option>
+              <option value="original">Original (chain following)</option>
+            </select>
+          </label>
+          <label>Shortest contour kept (points)
+            <input data-path="trace.minLength" data-type="int" type="number" min="3" step="1">
+          </label>
+          <label>Original tracer's erosion window (px)
+            <input data-path="trace.kconvInit" data-type="int" type="number" min="1" step="1">
+          </label>
+        </div>
+
+        <h3>Smoothing</h3>
+        <div class="settings">
+          <label>Method
+            <select data-path="smooth.method">
+              <option value="wavelet">Wavelet (MODWT)</option>
+              <option value="fourier">Fourier</option>
+              <option value="hadamard">Walsh–Hadamard</option>
+              <option value="none">None</option>
+            </select>
+          </label>
+          <label>Wavelet filter
+            <select data-path="smooth.wavelet.filter">
+              <option value="haar">haar</option>
+              <option value="d4">d4</option>
+              <option value="mb4">mb4</option>
+              <option value="d6">d6</option>
+              <option value="la8">la8</option>
+            </select>
+          </label>
+          <label>Wavelet levels (auto or a number)
+            <input data-path="smooth.wavelet.nLevels" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
+          </label>
+          <label>Wavelet threshold multiplier
+            <input data-path="smooth.wavelet.thresholdMultiplier" data-type="number" type="number" min="0" step="0.5">
+          </label>
+          <label>Wavelet noise estimate
+            <select data-path="smooth.wavelet.noise">
+              <option value="sd">sd (original)</option>
+              <option value="mad">MAD</option>
+            </select>
+          </label>
+          <label>Fourier threshold
+            <select data-path="smooth.fourier.threshold">
+              <option value="original">Original</option>
+              <option value="universal">Universal</option>
+            </select>
+          </label>
+        </div>
+
+        <h3>Paint order and output</h3>
+        <div class="settings">
+          <label>Share of area inside that counts as contained
+            <input data-path="order.threshold" data-type="number" type="number" min="0.01" max="1" step="0.01">
+          </label>
+          <label>Holes cut into regions
+            <select data-path="output.holes">
+              <option value="transparent">Only where transparent</option>
+              <option value="all">All</option>
+              <option value="none">None</option>
+            </select>
+          </label>
+          <label>Colours not painted below alpha
+            <input data-path="output.transparentAlpha" data-type="number" type="number" min="0" max="1" step="0.05">
+          </label>
+          <label>Decimals in the path data
+            <input data-path="output.digits" data-type="int" type="number" min="0" max="10" step="1">
+          </label>
+        </div>
+        <div class="toolbar">
+          <button id="reset-options" type="button">Reset options</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="card results-card" aria-labelledby="result-heading">
+      <div class="card-head">
+        <h2 id="result-heading">SVG</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="convert" type="button" class="primary">Convert</button>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <div class="previews">
+        <figure class="preview">
+          <canvas id="input-preview" aria-label="Input image"></canvas>
+          <figcaption class="muted">Input</figcaption>
+        </figure>
+        <figure class="preview">
+          <img id="output-preview" alt="The SVG" hidden>
+          <figcaption id="output-caption" class="muted">The SVG appears here.</figcaption>
+        </figure>
+      </div>
+      <div id="result" hidden>
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <button id="export-svg" type="button">SVG</button>
+          <button id="export-result" type="button">Result JSON</button>
+        </div>
+        <h3>Palette</h3>
+        <ul id="palette" class="palette"></ul>
+        <div id="warnings" hidden>
+          <h3>Warnings</h3>
+          <ul id="warning-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>This is a port of the R vectorizer (<a href="https://github.com/NikVetr/raster-to-vector">github.com/NikVetr/raster-to-vector</a>) and gives its results: with the same options and seed, the same SVG.</p>
+        <ol>
+          <li><strong>Colours.</strong> Colours are rounded, and the most frequent are clustered by weighted k-means with k-means++ starts. Every pixel takes its nearest centre. With k automatic, the k with the lowest Davies–Bouldin index wins.</li>
+          <li><strong>Cleanup.</strong> Runs of fewer pixels than the shortest run kept are absorbed into the next run, along rows and then columns.</li>
+          <li><strong>Tracing.</strong> Each colour's regions become closed outlines on the pixel corners. Marching squares follows every pixel edge. The original tracer detects edges, thins them to a one-pixel line and follows chains; it can lose regions where a boundary pinches or branches, and reports them as warnings.</li>
+          <li><strong>Smoothing.</strong> Each outline's x and y are smoothed as circular series: by soft thresholding of wavelet (MODWT) details, by dropping weak Fourier frequencies, or by Walsh–Hadamard thresholding.</li>
+          <li><strong>Paint order.</strong> A shape mostly inside another paints after it. Holes are cut where the colour filling them is transparent, or everywhere, or nowhere.</li>
+        </ol>
+        <p>Scripts and agents can use the same converter: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2023-04-04">2023-04-04</time>
+    </div>
+  </footer>
+</body>
+</html>
