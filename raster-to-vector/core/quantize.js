@@ -6,7 +6,8 @@
 // cleanLabels(): absorb short runs. relabelClusters(): drop emptied colours.
 
 import { rMersenneTwister } from '../../shared/rng.js';
-import { mean, roundR, sum } from './stats.js';
+import { mean, sum } from '../../shared/rstats.js';
+import { roundR } from './stats.js';
 
 /**
  * @typedef {{ kRange: number[], offset: number, nTop: number, digits: number, alphaThreshold: number,

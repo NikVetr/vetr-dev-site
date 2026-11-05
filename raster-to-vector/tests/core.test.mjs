@@ -11,16 +11,11 @@ import { plottingOrder, shapeOverlaps } from '../core/order.js';
 import { rMersenneTwister } from '../../shared/rng.js';
 import { traceLayersMs } from '../core/trace-ms.js';
 import { allInWindow, sobelSum, traceLayersOriginal } from '../core/trace-original.js';
-import { imodwt, modwt, waveletFilter, waveletSmooth } from '../core/wavelet.js';
 import { decodePng } from '../../shared/decode-png.mjs';
 
 const here = (/** @type {string} */ p) => fileURLToPath(new URL(p, import.meta.url));
 const json = (/** @type {string} */ p) => JSON.parse(readFileSync(here(p), 'utf8'));
 const R = json('fixtures/r-parity.json');
-const maxAbs = (/** @type {ArrayLike<number>} */ a, /** @type {ArrayLike<number>} */ b) => {
-  assert.equal(a.length, b.length);
-  return Math.max(0, ...Array.from(a, (v, i) => Math.abs(v - b[i])));
-};
 /** @param {string} name */
 const examplePng = (name) => {
   const png = decodePng(readFileSync(here(`../examples/${name}`)));
@@ -53,22 +48,6 @@ const camel = (v) => (Array.isArray(v) ? (v.length ? v : {}) : v && typeof v ===
 
 // The R test image: background, a square ring with a hole, a disc in the hole, a bar touching the right edge.
 const RING = grid(40, 48, [[5, 29, 5, 29, 2], [11, 23, 11, 23, 1], [14, 20, 14, 20, 3], [33, 37, 19, 47, 2]]);
-
-test('MODWT, its inverse and smoothing match the waveslim fixtures to 1e-12', () => {
-  const filters = json('fixtures/wavelet/filters.json');
-  for (const [name, f] of Object.entries(filters)) {
-    const { g, h } = waveletFilter(/** @type {any} */ (name));
-    assert.deepEqual([g, h], [f.lowpass, f.highpass]);
-  }
-  for (const c of json('fixtures/wavelet/modwt_cases.json').cases) {
-    const w = modwt(c.x, c.filter, c.n_levels, c.boundary);
-    w.d.forEach((dj, j) => assert.ok(maxAbs(dj, c.d[j]) < 1e-12, `${c.name} ${c.filter} d${j + 1}`));
-    assert.ok(maxAbs(w.s, c.s) < 1e-12);
-    assert.ok(maxAbs(imodwt(w), c.reconstruction) < 1e-12);
-    assert.ok(maxAbs(waveletSmooth(c.x, c.filter, c.n_levels, 3, 'sd', c.boundary), c.smooth.sd_3) < 1e-12);
-    assert.ok(maxAbs(waveletSmooth(c.x, c.filter, c.n_levels, 3, 'mad', c.boundary), c.smooth.mad_3) < 1e-12);
-  }
-});
 
 test('the generator reproduces R draws after set.seed()', () => {
   let rng = rMersenneTwister(1);

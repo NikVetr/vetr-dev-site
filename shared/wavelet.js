@@ -1,9 +1,10 @@
-// MODWT wavelet smoothing, as R/wavelet.R: the maximal overlap discrete
-// wavelet transform (Percival & Walden 2000, ch. 5) by the pyramid algorithm,
-// its inverse, and soft thresholding of the detail coefficients. Checked
-// against waveslim's output in tests/fixtures/wavelet.
+// MODWT wavelet smoothing, as raster-to-vector's R/wavelet.R: the maximal
+// overlap discrete wavelet transform (Percival & Walden 2000, ch. 5) by the
+// pyramid algorithm, its inverse, and soft thresholding of the detail
+// coefficients. Checked against waveslim's output in tests/fixtures/wavelet
+// (tests/wavelet.test.mjs). Used by raster-to-vector and signature.
 
-import { mean, sum } from './stats.js';
+import { mean, sum } from './rstats.js';
 
 /** Scaling (low-pass) filters, as waveslim::wave.filter gives them. */
 export const WAVELET_LOWPASS = Object.freeze({

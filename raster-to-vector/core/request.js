@@ -3,7 +3,7 @@
 // are rejected. Problems are collected and thrown together, so the API, the
 // CLI and the page reject the same requests with the same messages.
 
-import { WAVELET_LOWPASS } from './wavelet.js';
+import { WAVELET_LOWPASS } from '../../shared/wavelet.js';
 
 /**
  * @typedef {{ code: string, path: string, message: string }} Issue
@@ -36,7 +36,7 @@ export const DEFAULTS = Object.freeze({
   trace: Object.freeze({ method: /** @type {'marching_squares' | 'original'} */ ('marching_squares'), minLength: 9, kconvInit: 1 }),
   smooth: Object.freeze({
     method: /** @type {'wavelet' | 'fourier' | 'hadamard' | 'none'} */ ('wavelet'),
-    wavelet: Object.freeze({ filter: /** @type {import('./wavelet.js').Filter} */ ('mb4'), nLevels: /** @type {'auto' | number} */ ('auto'), thresholdMultiplier: 3, noise: /** @type {'sd' | 'mad'} */ ('sd') }),
+    wavelet: Object.freeze({ filter: /** @type {import('../../shared/wavelet.js').Filter} */ ('mb4'), nLevels: /** @type {'auto' | number} */ ('auto'), thresholdMultiplier: 3, noise: /** @type {'sd' | 'mad'} */ ('sd') }),
     fourier: Object.freeze({ threshold: /** @type {'original' | 'universal'} */ ('original') }),
   }),
   order: Object.freeze({ threshold: 0.95 }),
