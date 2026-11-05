@@ -31,6 +31,7 @@ const el = {
   status: byId('status'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), plot: byId('plot'),
   scores: byId('scores'), bins: byId('bins'), intervalHeading: byId('interval-heading'),
   dialog: byId('table-dialog'), tableText: byId('table-text'), tableIssues: byId('table-issues'),
+  undoNote: byId('undo-note'), undoText: byId('undo-text'),
 };
 
 /** @type {Row[]} */
@@ -39,6 +40,8 @@ let rows = [];
 let result = null;
 /** @type {object | null} */
 let resultRequest = null;
+/** The table that Load example or Clear replaced, until the table is next changed. @type {Row[] | null} */
+let replaced = null;
 
 // ---------- request <-> page ----------
 
@@ -159,6 +162,7 @@ function fitHeight(area) {
 }
 
 el.rows.addEventListener('input', (/** @type {Event} */ event) => {
+  dropUndo();
   const target = /** @type {any} */ (event.target);
   const row = rows[Number(target.closest('tr').dataset.index)];
   if (target.classList.contains('text')) {
@@ -176,12 +180,14 @@ el.rows.addEventListener('input', (/** @type {Event} */ event) => {
 el.rows.addEventListener('click', (/** @type {Event} */ event) => {
   const button = /** @type {any} */ (event.target).closest('.remove');
   if (!button) return;
+  dropUndo();
   rows.splice(Number(button.closest('tr').dataset.index), 1);
   renderRows();
   schedule();
 });
 
 byId('add-row').addEventListener('click', () => {
+  dropUndo();
   rows.push({ text: '', probability: '', outcome: null });
   renderRows();
   schedule();
@@ -189,8 +195,7 @@ byId('add-row').addEventListener('click', () => {
 });
 
 byId('clear-rows').addEventListener('click', () => {
-  rows = [];
-  renderRows();
+  replaceRows([], `Cleared ${rows.length} prediction${rows.length === 1 ? '' : 's'}.`);
   schedule();
 });
 
@@ -199,11 +204,38 @@ byId('load-example').addEventListener('click', loadExample);
 async function loadExample() {
   const response = await fetch('examples/synthetic.csv');
   if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status})`);
-  rows = rowsFrom(parseTable(await response.text()));
-  renderRows();
+  const example = rowsFrom(parseTable(await response.text()));
+  replaceRows(example, `Replaced your ${rows.length} prediction${rows.length === 1 ? '' : 's'} with the example.`);
   run();
   save();
 }
+
+// Load example and Clear replace the table at once, and offer it back: Undo restores it, until
+// the table is next edited.
+
+/** @param {Row[]} next @param {string} note what the replacement did, shown beside Undo */
+function replaceRows(next, note) {
+  const changed = rows.length > 0 && formatTable(rows) !== formatTable(next);
+  replaced = changed ? rows : null;
+  el.undoText.textContent = note;
+  el.undoNote.hidden = !changed;
+  rows = next;
+  renderRows();
+}
+
+function dropUndo() {
+  replaced = null;
+  el.undoNote.hidden = true;
+}
+
+byId('undo-replace').addEventListener('click', () => {
+  if (!replaced) return;
+  rows = replaced;
+  dropUndo();
+  renderRows();
+  run();
+  save();
+});
 
 /** @param {Issue} issue */
 function describeIssue(issue) {
@@ -412,6 +444,7 @@ byId('table-apply').addEventListener('click', () => {
     return;
   }
   el.dialog.close();
+  dropUndo();
   renderRows();
   run();
   save();
@@ -448,6 +481,7 @@ Object.assign(window, { ForecastCalibration: {
   submit(request) {
     const next = submit(request);
     rows = rowsFrom(typeof request.table === 'string' ? parseTable(request.table) : request.predictions);
+    dropUndo();
     writeSettings(request);
     renderRows();
     result = next;

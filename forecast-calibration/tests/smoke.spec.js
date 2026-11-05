@@ -62,6 +62,17 @@ test('flags a bad row with a glyph and a message, and recovers', async ({ page }
   await expect(page.locator('#result')).not.toHaveAttribute('data-stale');
 });
 
+test('Clear and Load example offer the replaced table back', async ({ page }) => {
+  await open(page);
+  await page.getByLabel('Prediction 1', { exact: true }).fill('My own prediction');
+  await page.getByRole('button', { name: 'Clear' }).click();
+  await expect(page.locator('#undo-note')).toContainText('Cleared 48 predictions.');
+  await expect(page.locator('#issues')).toBeHidden();
+  await page.getByRole('button', { name: 'Undo' }).click();
+  await expect(page.getByLabel('Prediction 1', { exact: true })).toHaveValue('My own prediction');
+  await expect(page.locator('#undo-note')).toBeHidden();
+});
+
 test('fits a 390 px phone without horizontal scrolling, dialog included', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page);

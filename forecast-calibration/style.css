@@ -14,6 +14,10 @@
   --no-soft: #33290f;
 }
 
+/* After Load example or Clear: what was replaced, and a way back. */
+.undo-note { margin: 0.5rem 0; color: var(--muted); }
+.undo-note button { margin-left: 0.4rem; }
+
 /* ---------- Tables ---------- */
 
 /* Long prediction lists scroll inside their frame; every column fits its width. In one
