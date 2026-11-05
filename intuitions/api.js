@@ -7,6 +7,8 @@ import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
 import * as marchenkoPastur from './marchenko-pastur/compute.js';
 import * as nullPvalues from './null-pvalues/compute.js';
 import * as thresholdModel from './threshold-model/compute.js';
+import * as traitEvolution from './trait-evolution/compute.js';
+import * as treeCovariance from './tree-covariance/compute.js';
 import * as typicalSet from './typical-set/compute.js';
 import * as zscoreOutliers from './zscore-outliers/compute.js';
 
@@ -21,6 +23,8 @@ export const ENTRIES = Object.freeze({
   [dagAdjustment.ENTRY]: dagAdjustment,
   [nullPvalues.ENTRY]: nullPvalues,
   [marchenkoPastur.ENTRY]: marchenkoPastur,
+  [traitEvolution.ENTRY]: traitEvolution,
+  [treeCovariance.ENTRY]: treeCovariance,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];

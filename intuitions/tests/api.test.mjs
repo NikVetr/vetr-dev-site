@@ -27,7 +27,12 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance']);
+  assert.deepEqual(submit({ entry: 'trait-evolution', params: { model: 'ou' } }).params, { view: 'tree', tree: { tips: 12, seed: 1 }, model: 'ou', sigma2: 1, root: 0, alpha: 4, theta: 1.5, steps: 300, seed: 1 });
+  assert.deepEqual(submit({ entry: 'trait-evolution', params: { view: 'bridge', paths: 3 } }).params,
+    { view: 'bridge', start: [-5, -4], end: [4, 4.5], rate: [[2, 1], [1, 3]], length: 50, levels: 4, paths: 3, region: 'disc', method: 'stagewise', seed: 1 });
+  assert.deepEqual(submit({ entry: 'tree-covariance', params: { view: 'reroot' } }).params,
+    { view: 'reroot', newick: '(A:50,(B:30,C:35)D:40)E;', values: { A: 3, B: -2, C: 1 }, rate: 0.1, root: { node: 'E', fraction: 0 }, sweep: ['A', 'C'] });
   assert.deepEqual(submit({ entry: 'marchenko-pastur' }).params, { view: 'noise', n: 200, p: 20, variance: 1, replicates: 1000, seed: 1 });
   assert.deepEqual(submit({ entry: 'marchenko-pastur', params: { view: 'spikes', replicates: 2 } }).params, { view: 'spikes', n: 200, p: 100, spikes: [4, 1, 0.5], replicates: 2, seed: 1 });
   assert.deepEqual(submit({ entry: 'null-pvalues' }).params, { scenario: 'batch', alpha: 0.05, perBatch: 10, batches: 2, treatedShare: 0.5 });
@@ -104,6 +109,14 @@ test('the CLI prints the same result and reports errors with exit codes', () => 
   const labOut = spawnSync(process.execPath, [cli], { input: JSON.stringify(lab), encoding: 'utf8' });
   assert.equal(labOut.status, 0);
   assert.deepEqual(JSON.parse(labOut.stdout), JSON.parse(JSON.stringify(submit(lab))));
+  for (const tree of [{ entry: 'trait-evolution', params: { model: 'shift', tree: { tips: 6, seed: 2 } } }, { entry: 'tree-covariance', params: { view: 'pruning' } }]) {
+    const treeOut = spawnSync(process.execPath, [cli], { input: JSON.stringify(tree), encoding: 'utf8' });
+    assert.equal(treeOut.status, 0);
+    assert.deepEqual(JSON.parse(treeOut.stdout), JSON.parse(JSON.stringify(submit(tree))));
+  }
+  const badTree = spawnSync(process.execPath, [cli], { input: JSON.stringify({ entry: 'tree-covariance', params: { newick: '(A:1,B:1' } }), encoding: 'utf8' });
+  assert.equal(badTree.status, 1);
+  assert.equal(JSON.parse(badTree.stderr).error.issues[0].code, 'invalid_newick');
   const missing = spawnSync(process.execPath, [cli, '/nonexistent/request.json'], { encoding: 'utf8' });
   assert.equal(missing.status, 2);
   assert.equal(JSON.parse(missing.stderr).error.code, 'unreadable_input');

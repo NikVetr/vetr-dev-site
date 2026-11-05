@@ -297,7 +297,7 @@ export function vcv(tree) {
 }
 
 /**
- * @typedef {{ node: number, children: [number, number], values: [number[], number[]], branches: [number, number],
+ * @typedef {{ node: number, children: [number[], number[]], values: [number[], number[]], branches: [number, number],
  *   extensions: [number, number], contrast: number[], variance: number, estimate: number[], extension: number }} PruneStep
  */
 
@@ -306,10 +306,14 @@ export function vcv(tree) {
  * b, whose values are xa and xb and whose branches, lengthened by their own pruning, are
  * va and vb: the contrast xa − xb has variance va + vb (times the rate), the node takes
  * the value (vb·xa + va·xb)/(va + vb), and its own branch is lengthened by va·vb/(va + vb).
- * A node with one child passes the value up and adds its branch. `root` is the value at
- * the root node and the variance of that estimate, root edge included. The contrasts are
- * independent, so the restricted likelihood is the product of their densities.
- * Every internal node needs one or two children.
+ * A node with one child passes the value up and adds its branch. A node with more
+ * children, such as a root placed on an internal node, takes them in turn: the first two
+ * merge as above and the merged pair meets the next on a branch of length 0. Each step's
+ * `children` are the two groups of child ids that meet, and `branches` their branch
+ * lengths before the extensions in `extensions` (0 for a merged group). `root` is the
+ * value at the root node and the variance of that estimate, root edge included. The
+ * contrasts are independent, so the restricted likelihood is the product of their
+ * densities.
  * @param {Tree} tree
  * @param {(number[] | null)[]} values by node id: a trait vector for every tip
  * @returns {{ steps: PruneStep[], root: { estimate: number[], variance: number } }}
@@ -321,21 +325,30 @@ export function contrasts(tree, values) {
   const steps = [];
   for (const node of postorder(tree)) {
     const kids = tree.children[node];
-    if (kids.length > 2) throw new Error(`node ${node} has ${kids.length} children; contrasts need a binary tree`);
     if (kids.length === 1) {
       value[node] = value[kids[0]];
       extension[node] = tree.length[kids[0]] + extension[kids[0]];
-    } else if (kids.length === 2) {
-      const [a, b] = /** @type {[number, number]} */ (kids);
-      const va = tree.length[a] + extension[a];
-      const vb = tree.length[b] + extension[b];
-      const estimate = value[a].map((xa, k) => (vb * xa + va * value[b][k]) / (va + vb));
-      value[node] = estimate;
-      extension[node] = (va * vb) / (va + vb);
-      steps.push({
-        node, children: [a, b], values: [value[a], value[b]], branches: [tree.length[a], tree.length[b]], extensions: [extension[a], extension[b]],
-        contrast: value[a].map((xa, k) => xa - value[b][k]), variance: va + vb, estimate, extension: extension[node],
-      });
+    } else if (kids.length >= 2) {
+      let group = [kids[0]];
+      let x = value[kids[0]];
+      let branch = tree.length[kids[0]];
+      let ext = extension[kids[0]];
+      for (const b of kids.slice(1)) {
+        const va = branch + ext;
+        const vb = tree.length[b] + extension[b];
+        const estimate = x.map((xa, k) => (vb * xa + va * value[b][k]) / (va + vb));
+        const merged = (va * vb) / (va + vb);
+        steps.push({
+          node, children: [group, [b]], values: [x, value[b]], branches: [branch, tree.length[b]], extensions: [ext, extension[b]],
+          contrast: x.map((xa, k) => xa - value[b][k]), variance: va + vb, estimate, extension: merged,
+        });
+        group = [...group, b];
+        x = estimate;
+        branch = 0;
+        ext = merged;
+      }
+      value[node] = x;
+      extension[node] = ext;
     }
   }
   return { steps, root: { estimate: value[0], variance: extension[0] + tree.length[0] } };
