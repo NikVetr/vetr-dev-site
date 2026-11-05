@@ -4,7 +4,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## Shared look
 
-`shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector) have in common, so their copies cannot drift apart:
+`shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector, seating) have in common, so their copies cannot drift apart:
 
 - **`shared/base.css`**, linked before each tool's own `style.css`: the colour tokens for both themes, the page frame, the layout (markup in reading order, input then results then settings, so a phone shows the result second; from 1000 px the results take the right column), cards, buttons and the `.file-button` file picker, inputs and the `[aria-invalid]` field style, the `.issues` problem list, the `.stale-banner` and `.stale-dim` for a result that no longer matches its inputs (each tool keeps its last valid result on view, dimmed, and says why), and the dialog with its sticky `.dialog-head`. A tool's `style.css` keeps only what is particular to it.
 - **`shared/theme.js`**, a plain script in each page's `<head>`: one light or dark choice for the whole site, stored in this browser as `vetr:theme`, or else the system setting. It drives each tool's `#theme-toggle` and fires a `themechange` event for pages that draw in theme colours. The landing page loads it too, so it follows the same choice.

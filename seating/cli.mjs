@@ -35,9 +35,16 @@ if (args.length > 1 || args.some((arg) => arg.startsWith('--'))) fail('usage', U
 const input = args[0] ?? '-';
 if (input === '-' && process.stdin.isTTY) fail('usage', USAGE, 2);
 
+/** All of stdin, read as a stream (a synchronous read of a pipe can fail before the writer is done). */
+async function readStdin() {
+  const chunks = [];
+  for await (const chunk of process.stdin) chunks.push(chunk);
+  return Buffer.concat(chunks).toString('utf8');
+}
+
 let text = '';
 try {
-  text = readFileSync(input === '-' ? 0 : input, 'utf8');
+  text = input === '-' ? await readStdin() : readFileSync(input, 'utf8');
 } catch (error) {
   fail('unreadable_input', `cannot read ${input === '-' ? 'stdin' : input}: ${/** @type {Error} */ (error).message}`, 2);
 }
