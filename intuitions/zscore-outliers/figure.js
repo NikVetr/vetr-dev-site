@@ -171,6 +171,7 @@ export function densityFigure(result, { width, height, compact = false, zoom = 1
  */
 export function sweepFigure(result, params, { width, height, log }) {
   const { sweep } = result;
+  if (!sweep) throw new Error('sweepFigure needs a result computed with a sweep parameter, not sweep: null');
   const parameter = sweep.parameter;
   const series = [
     { key: 'stratified', values: sweep.stratified, current: result.overall.stratifiedRemoved, line: 'muted-line', mark: 'hollow-mark', shape: /** @type {const} */ ('diamond'), label: 'Stratified' },

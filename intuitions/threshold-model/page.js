@@ -385,7 +385,7 @@ function renderFit() {
 
   const width = fit.plane.clientWidth;
   if (width > 0) {
-    fit.plane.innerHTML = planeFigure({ means: [0, 0], rho: f.rho, thresholds: f.thresholds }, { width, id: 'fit-plane' }).svg;
+    fit.plane.innerHTML = planeFigure({ means: [0, 0], rho: f.rho, thresholds: f.thresholds }, { width, id: 'fit-plane', handles: false }).svg;
   }
 }
 

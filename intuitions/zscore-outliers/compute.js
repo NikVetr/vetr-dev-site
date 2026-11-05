@@ -10,7 +10,7 @@ import { checkChoice, checkNumber, invalidRequest, isObject, rejectUnknown } fro
 /** @typedef {import('../lib/params.js').Issue} Issue */
 /** @typedef {'meanDifference' | 'sdRatio' | 'proportionA' | 'z'} SweepParameter */
 /**
- * @typedef {{ meanDifference: number, sdRatio: number, proportionA: number, z: number, sweep: SweepParameter }} Params
+ * @typedef {{ meanDifference: number, sdRatio: number, proportionA: number, z: number, sweep: SweepParameter | null }} Params
  */
 
 export const ENTRY = 'zscore-outliers';
@@ -23,7 +23,7 @@ export const RANGES = Object.freeze({
   z: /** @type {[number, number]} */ ([0.5, 6]),
 });
 
-/** @type {Readonly<Params>} */
+/** @type {Readonly<Params & { sweep: SweepParameter }>} */
 export const DEFAULTS = Object.freeze({ meanDifference: 2, sdRatio: 1, proportionA: 0.8, z: 2.5, sweep: 'meanDifference' });
 
 const FIELDS = /** @type {const} */ (['meanDifference', 'sdRatio', 'proportionA', 'z', 'sweep']);
@@ -50,7 +50,8 @@ export function resolveParams(params = {}) {
     sdRatio: number('sdRatio'),
     proportionA: number('proportionA'),
     z: number('z'),
-    sweep: Object.hasOwn(params, 'sweep') ? checkChoice(params.sweep, 'params.sweep', SWEEPS, DEFAULTS.sweep, issues) : DEFAULTS.sweep,
+    sweep: !Object.hasOwn(params, 'sweep') ? DEFAULTS.sweep : params.sweep === null ? null
+      : checkChoice(params.sweep, 'params.sweep', SWEEPS, DEFAULTS.sweep, issues),
   };
   if (issues.length) throw invalidRequest(issues);
   return resolved;
@@ -133,14 +134,19 @@ export function compute(params) {
   const { groups, pooled, cut, shares, overall } = removal(p);
   const pooledTotal = overall('pooled');
 
-  const values = sweepValues(p.sweep);
-  const sweep = { parameter: p.sweep, values, stratified: /** @type {number[]} */ ([]), pooledA: /** @type {number[]} */ ([]), pooledB: /** @type {number[]} */ ([]), pooledOverall: /** @type {number[]} */ ([]) };
-  for (const value of values) {
-    const point = removal({ ...p, [p.sweep]: value });
-    sweep.stratified.push(point.shares[0].stratified);
-    sweep.pooledA.push(point.shares[0].pooled);
-    sweep.pooledB.push(point.shares[1].pooled);
-    sweep.pooledOverall.push(point.overall('pooled'));
+  let sweep = null;
+  if (p.sweep !== null) {
+    const parameter = p.sweep;
+    const values = sweepValues(parameter);
+    const points = values.map((value) => removal({ ...p, [parameter]: value }));
+    sweep = {
+      parameter,
+      values,
+      stratified: points.map((point) => point.shares[0].stratified),
+      pooledA: points.map((point) => point.shares[0].pooled),
+      pooledB: points.map((point) => point.shares[1].pooled),
+      pooledOverall: points.map((point) => point.overall('pooled')),
+    };
   }
 
   return {

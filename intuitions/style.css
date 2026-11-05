@@ -34,7 +34,7 @@
   --b-strong: rgba(235, 104, 52, 0.66);
   --cat-0: #77bfa8; --cat-1: #5fa690; --cat-2: #488e79; --cat-3: #317663; --cat-4: #175f4d; --cat-5: #004939;
   --seq-0: #f3f7fd; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec; --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95;
-  --seq-ink-light: #1b1b1b; --seq-ink-dark: #ffffff;
+  --seq-ink-low: #1b1b1b; --seq-ink-high: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -62,7 +62,7 @@
   --b-strong: rgba(217, 89, 38, 0.74);
   --cat-0: #115a48; --cat-1: #2f7460; --cat-2: #4a8e7a; --cat-3: #64a994; --cat-4: #7fc6af; --cat-5: #9ae3cb;
   --seq-0: #1a2130; --seq-1: #0d366b; --seq-2: #104281; --seq-3: #1c5cab; --seq-4: #2a78d6; --seq-5: #5598e7; --seq-6: #86b6ef;
-  --seq-ink-light: #ffffff; --seq-ink-dark: #10141a;
+  --seq-ink-low: #ffffff; --seq-ink-high: #10141a;
 }
 
 * { box-sizing: border-box; }
@@ -294,16 +294,14 @@ figcaption, .caption { margin: 0.1rem 0 0.5rem; max-width: 75ch; color: var(--mu
 
 .plot .cat-0 { fill: var(--cat-0); } .plot .cat-1 { fill: var(--cat-1); } .plot .cat-2 { fill: var(--cat-2); }
 .plot .cat-3 { fill: var(--cat-3); } .plot .cat-4 { fill: var(--cat-4); } .plot .cat-5 { fill: var(--cat-5); }
-.plot .seq-0 { --cell: var(--seq-0); --cell-ink: var(--seq-ink-light); }
-.plot .seq-1 { --cell: var(--seq-1); --cell-ink: var(--seq-ink-light); }
-.plot .seq-2 { --cell: var(--seq-2); --cell-ink: var(--seq-ink-light); }
-.plot .seq-3 { --cell: var(--seq-3); --cell-ink: var(--seq-ink-light); }
-.plot .seq-4 { --cell: var(--seq-4); --cell-ink: var(--seq-ink-dark); }
-.plot .seq-5 { --cell: var(--seq-5); --cell-ink: var(--seq-ink-dark); }
-.plot .seq-6 { --cell: var(--seq-6); --cell-ink: var(--seq-ink-dark); }
-:root[data-theme="dark"] .plot .seq-0, :root[data-theme="dark"] .plot .seq-1, :root[data-theme="dark"] .plot .seq-2,
-:root[data-theme="dark"] .plot .seq-3 { --cell-ink: var(--seq-ink-light); }
-:root[data-theme="dark"] .plot .seq-4, :root[data-theme="dark"] .plot .seq-5, :root[data-theme="dark"] .plot .seq-6 { --cell-ink: var(--seq-ink-dark); }
+/* Text in a cell takes whichever ink contrasts better with that step (4.5:1 or more). */
+.plot .seq-0 { --cell: var(--seq-0); --cell-ink: var(--seq-ink-low); }
+.plot .seq-1 { --cell: var(--seq-1); --cell-ink: var(--seq-ink-low); }
+.plot .seq-2 { --cell: var(--seq-2); --cell-ink: var(--seq-ink-low); }
+.plot .seq-3 { --cell: var(--seq-3); --cell-ink: var(--seq-ink-low); }
+.plot .seq-4 { --cell: var(--seq-4); --cell-ink: var(--seq-ink-low); }
+.plot .seq-5 { --cell: var(--seq-5); --cell-ink: var(--seq-ink-high); }
+.plot .seq-6 { --cell: var(--seq-6); --cell-ink: var(--seq-ink-high); }
 .plot .cell-fill { fill: var(--cell); }
 .plot .cell-ink { fill: var(--cell-ink); }
 

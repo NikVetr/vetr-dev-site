@@ -116,9 +116,10 @@ export function barsFigure(categories, { width, height }) {
  * Cells are not shaded here: a large cell would look dense for holding a modest share,
  * so cell probabilities live in tableFigure.
  * @param {{ means: number[], rho: number, thresholds: number[][], points?: [number, number][] }} model
- * @param {{ width: number, compact?: boolean, id?: string }} size `id` keeps the clip path unique on the page
+ * @param {{ width: number, compact?: boolean, id?: string, handles?: boolean }} size `id` keeps the clip path unique
+ *   on the page; `handles: false` draws fixed threshold lines (nothing to drag)
  */
-export function planeFigure(model, { width, compact = false, id = 'plane' }) {
+export function planeFigure(model, { width, compact = false, id = 'plane', handles = true }) {
   const left = compact ? 2 : 44;
   const right = compact ? 2 : 30;
   const top = compact ? 2 : 30;
@@ -156,15 +157,15 @@ export function planeFigure(model, { width, compact = false, id = 'plane' }) {
   if (!compact) {
     t1.forEach((t, j) => {
       const px = x(clampX(t));
-      parts.push(el('line', { x1: px, x2: px, y1: top - 8, y2: top + side, class: 'threshold-line' }),
-        el('rect', { x: px - 9, y: top - 26, width: 18, height: side + 26, class: 'handle-hit', 'data-drag': `x${j}` }),
+      parts.push(el('line', { x1: px, x2: px, y1: handles ? top - 8 : top, y2: top + side, class: 'threshold-line' }));
+      if (handles) parts.push(el('rect', { x: px - 9, y: top - 26, width: 18, height: side + 26, class: 'handle-hit', 'data-drag': `x${j}` }),
         el('circle', { cx: px, cy: top - 14, r: 8, class: 'handle', 'data-drag': `x${j}` }),
         text(px, top - 10, String(j + 1), { class: 'handle-label', 'text-anchor': 'middle', 'data-drag': `x${j}` }));
     });
     t2.forEach((t, j) => {
       const py = y(clampX(t));
-      parts.push(el('line', { x1: left, x2: left + side + 8, y1: py, y2: py, class: 'threshold-line' }),
-        el('rect', { x: left, y: py - 9, width: side + 26, height: 18, class: 'handle-hit', 'data-drag': `y${j}` }),
+      parts.push(el('line', { x1: left, x2: handles ? left + side + 8 : left + side, y1: py, y2: py, class: 'threshold-line' }));
+      if (handles) parts.push(el('rect', { x: left, y: py - 9, width: side + 26, height: 18, class: 'handle-hit', 'data-drag': `y${j}` }),
         el('circle', { cx: left + side + 14, cy: py, r: 8, class: 'handle', 'data-drag': `y${j}` }),
         text(left + side + 14, py + 4, String(j + 1), { class: 'handle-label', 'text-anchor': 'middle', 'data-drag': `y${j}` }));
     });

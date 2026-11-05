@@ -7,7 +7,7 @@ import { marker, swatch } from '../lib/plot.js';
 import { compute, DEFAULTS, ENTRY, RANGES, resolveParams } from './compute.js';
 import { densityFigure, sweepFigure } from './figure.js';
 
-/** @typedef {import('./compute.js').Params} Params */
+/** The page always shows a sweep. @typedef {import('./compute.js').Params & { sweep: import('./compute.js').SweepParameter }} Params */
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 const input = (/** @type {string} */ id) => /** @type {HTMLInputElement} */ ($(id));
@@ -47,7 +47,7 @@ function showControls(p) {
 
 /** @param {Partial<Params>} change */
 function update(change) {
-  params = resolveParams({ ...params, ...change });
+  params = /** @type {Params} */ (resolveParams({ ...params, ...change }));
   result = compute(params);
   render();
 }
@@ -144,8 +144,8 @@ renderTable();
 
 installApi({
   entry: ENTRY,
-  load: (/** @type {Params} */ p) => {
-    params = p;
+  load: (/** @type {import('./compute.js').Params} */ p) => {
+    params = { ...p, sweep: p.sweep ?? params.sweep };
     result = compute(params);
     showControls(params);
     render();

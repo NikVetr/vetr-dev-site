@@ -44,13 +44,13 @@ test('zscore: a shifted minority group is over-removed by pooling', () => {
 test('zscore: the sweep covers the swept range and passes through the current value', () => {
   for (const sweep of /** @type {const} */ (['meanDifference', 'sdRatio', 'proportionA', 'z'])) {
     const params = { meanDifference: 1.5, sdRatio: 2, proportionA: 0.4, z: 2.5, sweep };
-    const r = zscore(params);
+    const r = /** @type {any} */ (zscore(params));
     assert.equal(r.sweep.values.length, SWEEP_POINTS);
     assert.equal(r.sweep.pooledA.length, SWEEP_POINTS);
     const i = r.sweep.values.findIndex((v) => Math.abs(v - params[sweep]) < 1e-9);
     if (i >= 0) close(r.sweep.pooledOverall[i], r.overall.pooledRemoved, 1e-12);
   }
-  const s = zscore({ sweep: 'sdRatio' }).sweep.values;
+  const s = /** @type {any} */ (zscore({ sweep: 'sdRatio' })).sweep.values;
   close(s[0], 0.2);
   close(s[s.length - 1], 5);
   close(s[60], 1, 1e-12); // log-spaced: the middle of 0.2..5 is 1
@@ -113,4 +113,11 @@ test('threshold: samples are seeded, tabulated and fitted', () => {
   const small = thresholdModel({ ...params, thresholds: [[0, 1, 2.9], [0, 0.8, 1.9]], sample: { n: 5, seed: 1 } });
   assert.equal(small.sample.fit, null);
   assert.match(small.sample.unfittable, /no one in the sample falls in trait 1 category/);
+});
+
+test('zscore: sweep null skips the sweep and the rest is unchanged', () => {
+  const full = zscore({ z: 3 });
+  const lean = zscore({ z: 3, sweep: null });
+  assert.equal(lean.sweep, null);
+  assert.deepEqual({ ...lean, sweep: full.sweep }, full);
 });

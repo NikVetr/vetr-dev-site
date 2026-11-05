@@ -19,6 +19,8 @@ Tools that scripts and agents can use follow one shape. `forecast-calibration/` 
 - **`api.md`** gives the request and result schema, the errors and one worked example.
 - **`/llms.txt`** lists every tool that has an API and links its `api.md`. Add an entry there when a new tool gains one.
 
+`intuitions/` is a gallery that puts several small entries behind one entry point: the request names the entry, `submit({entry, params}) → {entry, params, result}`, each entry's DOM-free core is `intuitions/<entry>/compute.js`, and the shared library (normal and bivariate-normal functions, seeded RNG, SVG plotting) is `intuitions/lib/`.
+
 `sankey/` predates this shape. Its `window.SankeyApp.submit` needs the page's DOM, so its command line, `sankey/scripts/render.cjs`, drives headless Chromium through Playwright, and its errors carry only a message. `sankey/api.md` describes it.
 
 Core tests run with `node --test` in the tool's folder. Browser smoke tests use Playwright where a tool has them, through `npm ci` or a `node_modules` link to an existing install.
