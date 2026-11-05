@@ -58,14 +58,3 @@ function roundHalfEven(x) {
   if (d !== 0.5) return d < 0.5 ? f : f + 1;
   return f % 2 === 0 ? f : f + 1;
 }
-
-/** seq(from, to, length.out = n) as R computes it. @param {number} from @param {number} to @param {number} n */
-export function seqLength(from, to, n) {
-  if (n === 1) return [from];
-  const n1 = n - 1;
-  const by = (to - from) / n1;
-  const out = [from];
-  for (let i = 1; i < n1; i++) out.push(from + i * by);
-  out.push(to);
-  return out;
-}

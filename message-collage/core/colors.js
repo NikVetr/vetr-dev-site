@@ -81,7 +81,7 @@ function kdeMode(x, y, id) {
 
 /**
  * dnorm((g[i] - v) / h) for every grid point g[i] and every whole number v in the data's range.
- * @param {Float64Array} g @param {Float64Array} data @param {number} h
+ * @param {ArrayLike<number>} g @param {Float64Array} data @param {number} h
  */
 function densities(g, data, h) {
   const lo = Math.min(...data);

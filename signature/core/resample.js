@@ -4,17 +4,12 @@
 // strokes in proportion to their lengths. Each new point carries its raw arc
 // length, so the timing and pressure of the raw samples can be read off it.
 
+import { seqLength } from '../../shared/rstats.js';
+
 /**
  * @typedef {{ x: number, y: number, t?: number, pressure?: number }} RawPoint
  * @typedef {{ x: Float64Array, y: Float64Array, s: Float64Array }} Resampled  s: raw arc length of each point
  */
-
-/** R's seq(from, to, length.out = n). @param {number} from @param {number} to @param {number} n */
-export function seqLength(from, to, n) {
-  if (n === 1) return [from];
-  const by = (to - from) / (n - 1);
-  return Array.from({ length: n }, (_, i) => (i === n - 1 ? to : from + i * by));
-}
 
 /** Cumulative arc length of a polyline, from 0. @param {ArrayLike<number>} x @param {ArrayLike<number>} y */
 export function cumulativeLength(x, y) {

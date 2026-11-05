@@ -1,6 +1,7 @@
 // Table positions and the table-to-table closeness the geography term uses (R/layout.R).
 
-import { rsum, seqLength } from './rmath.js';
+import { seqLength } from '../../shared/rstats.js';
+import { rsum } from './rmath.js';
 
 /**
  * The original script's spiral: points along an Archimedean spiral, each table the first

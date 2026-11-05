@@ -1,41 +1,16 @@
 // The pieces of R's arithmetic the layout and the colouring use, computed as R computes them:
-// round() (halves to even), cumsum() (R accumulates in long double; compensated here, as
-// shared/rstats.js does for sum() and mean()), seq.int(from, to, length.out), quantile() type 7,
-// var(), and dnorm() (src/nmath/dnorm.c, with a correctly rounded exp, as glibc's nearly always is).
+// round() (halves to even), quantile() type 7, var(), and dnorm() (src/nmath/dnorm.c, with a
+// correctly rounded exp, as glibc's nearly always is). sum(), mean(), cumsum() and
+// seq(from, to, length.out) are shared/rstats.js's.
 
 import { exp } from './crmath.js';
 
-export { mean, sum } from '../../shared/rstats.js';
+export { cumsum, mean, seqLength, sum } from '../../shared/rstats.js';
 
 /** R's round(x) for whole numbers: halves to even. @param {number} x */
 export function roundHalfEven(x) {
   const r = Math.round(x);
   return r - x === 0.5 && r % 2 !== 0 ? r - 1 : r;
-}
-
-/** R's cumsum() of doubles. @param {ArrayLike<number>} values */
-export function cumsum(values) {
-  const out = new Float64Array(values.length);
-  let s = 0;
-  let c = 0;
-  for (let i = 0; i < values.length; i++) {
-    const v = values[i];
-    const t = s + v;
-    c += Math.abs(s) >= Math.abs(v) ? (s - t) + v : (v - t) + s;
-    s = t;
-    out[i] = s + c;
-  }
-  return out;
-}
-
-/** R's seq.int(from, to, length.out = n) for n >= 2: from + i * by, ending exactly at `to`. @param {number} from @param {number} to @param {number} n */
-export function seqLength(from, to, n) {
-  const out = new Float64Array(n);
-  out[0] = from;
-  out[n - 1] = to;
-  const by = (to - from) / (n - 1);
-  for (let i = 1; i < n - 1; i++) out[i] = from + i * by;
-  return out;
 }
 
 /**

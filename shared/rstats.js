@@ -34,7 +34,7 @@ export function mean(values) {
   return m + (s + c) / n;
 }
 
-/** cumsum() of doubles, accumulated with compensation as R does in long double. @param {number[]} values */
+/** cumsum() of doubles, accumulated with compensation as R does in long double. @param {ArrayLike<number>} values */
 export function cumsum(values) {
   const out = new Array(values.length);
   let s = 0;
