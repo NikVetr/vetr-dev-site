@@ -89,7 +89,7 @@ export function normalizeRequest(request) {
   const issues = [];
   unknownFields(request, REQUEST_FIELDS, '', 'the fields are', issues);
 
-  /** @type {EntryInput[] | null} */
+  /** @type {(EntryInput | null)[] | null} */
   let inputs = null;
   /** @type {(i: number) => { path: string, line?: number }} */
   let where = (i) => ({ path: `entries[${i}].answer` });
@@ -205,38 +205,44 @@ function readEntriesText(text, issues) {
   return out;
 }
 
-/** @param {unknown} value @param {Issue[]} issues @returns {EntryInput[] | null} */
+/**
+ * The entries array, with null for each item too malformed to read, so issue paths
+ * keep their indices.
+ * @param {unknown} value @param {Issue[]} issues @returns {(EntryInput | null)[] | null}
+ */
 function readEntries(value, issues) {
   if (!Array.isArray(value)) {
     issues.push({ code: 'wrong_type', path: 'entries', message: 'must be an array of {clue, answer} objects' });
     return null;
   }
-  return value.flatMap((item, i) => {
+  return value.map((item, i) => {
     const path = `entries[${i}]`;
     if (!isObject(item)) {
       issues.push({ code: 'wrong_type', path, message: 'must be an object with an answer and a clue' });
-      return [];
+      return null;
     }
     unknownFields(item, ENTRY_FIELDS, path, 'an entry has', issues);
     if (Object.hasOwn(item, 'clue') && typeof item.clue !== 'string') issues.push({ code: 'wrong_type', path: `${path}.clue`, message: 'must be a string' });
     if (typeof item.answer !== 'string') {
       issues.push({ code: item.answer === undefined ? 'missing_field' : 'wrong_type', path: `${path}.answer`, message: 'must be a string' });
-      return [];
+      return null;
     }
-    return [{ clue: typeof item.clue === 'string' ? item.clue : '', answer: item.answer }];
+    return { clue: typeof item.clue === 'string' ? item.clue : '', answer: item.answer };
   });
 }
 
 /**
  * Derives each grid word and checks the list: two cells or more per answer, no
  * answer twice (after lower-casing and removing spaces), 2 to 300 entries.
- * @param {EntryInput[]} inputs @param {(i: number) => { path: string, line?: number }} where @param {string} listPath @param {Issue[]} issues
+ * @param {(EntryInput | null)[]} inputs null for an unreadable item, already reported
+ * @param {(i: number) => { path: string, line?: number }} where @param {string} listPath @param {Issue[]} issues
  * @returns {Entry[]}
  */
 function checkWords(inputs, where, listPath, issues) {
   /** @type {Map<string, number>} */
   const seen = new Map();
-  const entries = inputs.map((input, i) => {
+  const entries = inputs.flatMap((input, i) => {
+    if (!input) return [];
     const word = gridWord(input.answer);
     if (word.cells.length < 2) {
       issues.push({ code: 'out_of_range', ...where(i), message: `answer "${input.answer}" needs at least two letters` });
@@ -252,7 +258,7 @@ function checkWords(inputs, where, listPath, issues) {
     } else {
       seen.set(word.text, i);
     }
-    return { ...input, ...word };
+    return [{ ...input, ...word }];
   });
   if (inputs.length < 2) issues.push({ code: 'out_of_range', path: listPath, message: `has ${inputs.length} entr${inputs.length === 1 ? 'y' : 'ies'}; a crossword needs at least two` });
   if (inputs.length > MAX_ENTRIES) issues.push({ code: 'out_of_range', path: listPath, message: `has ${inputs.length} entries; the most is ${MAX_ENTRIES}` });

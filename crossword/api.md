@@ -81,7 +81,7 @@ Sides are 1 to 4,096 pixels and at least one pixel must be filled. Only the regi
 | `maxAttemptsWord` | 1 to 10,000 | `20` | Failed placements allowed while laying out a crossword, in total, before that layout is abandoned. |
 | `maxAttemptsXword` | 1 to 1,000 | `5` | Layouts tried per crossword before giving up (error `unplaceable`). |
 
-Refinement moves re-place words with up to 20 failed placements each, whatever `maxAttemptsWord` is, as in the R code.
+Each refinement move re-places the words it took out with up to 20 failed placements in total, whatever `maxAttemptsWord` is, as in the R code; if that runs out, the move leaves the crossword as it was.
 
 **init.** A crossword (`orig` or `refined`) from an earlier result for the same entries: its `entries`' `answer`, `row`, `col` and `dir` are used and its other fields are ignored. It must place every entry exactly once, with no clashing letters. Each of the `nXwords` crosswords is then an independent refinement of it, and its `orig` is the layout given. It is centred on a canvas of the size a new crossword would get, so refinement can grow it in any direction.
 

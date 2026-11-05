@@ -280,6 +280,9 @@ test('validation lists every problem', () => {
     'wrong_type search.seed',
   ].sort());
   assert.match(error.message, /^Invalid request: /);
+  // an unreadable entry keeps the others' indices
+  const skipped = rejection({ entries: [{ answer: 5 }, 'x', { answer: 'a' }] });
+  assert.deepEqual(skipped.issues.map((i) => `${i.code} ${i.path}`), ['wrong_type entries[0].answer', 'wrong_type entries[1]', 'out_of_range entries[2].answer']);
 });
 
 test('the text format reports bad lines with their numbers', () => {
