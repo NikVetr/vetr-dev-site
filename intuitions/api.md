@@ -34,7 +34,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the correlation-geometry panel, scrolled into view). An invalid request throws and leaves the page unchanged. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set or dag-adjustment, scrolled into view). An invalid request throws and leaves the page unchanged. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
