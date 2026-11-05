@@ -64,7 +64,12 @@ export function spectrumFigure(data, { width, height, compact = false }) {
     parts.push(el('line', { x1: x(data.variance), x2: x(data.variance), y1: y(0), y2: y(yMax * 0.55), class: 'variance-line' }),
       text(x(data.variance), y(yMax * 0.55) - 5, 'σ²', { class: 'direct-label halo', 'text-anchor': 'middle' }));
     for (const m of marks) parts.push(marker('triangle', x(m.x), y(0) - 9, 5, m.detectable ? 'b-mark' : 'hollow-b'));
-    if (data.zeroShare > 0) parts.push(text(x(0) + 4, top + 12, `${formatNumber(data.zeroShare * 100, 0)}% of the eigenvalues are exactly 0 (not drawn)`, { class: 'axis-label halo' }));
+    if (data.zeroShare > 0) {
+      // Two lines when one would run past the plot.
+      const note = `${formatNumber(data.zeroShare * 100, 0)}% of the eigenvalues are exactly 0 (not drawn)`;
+      const lines = textWidth(note) < width - right - x(0) - 8 ? [note] : [`${formatNumber(data.zeroShare * 100, 0)}% of the eigenvalues`, 'are exactly 0 (not drawn)'];
+      lines.forEach((line, i) => parts.push(text(x(0) + 4, top + 12 + i * 15, line, { class: 'axis-label halo' })));
+    }
     parts.push(axisBottom({ scale: x, y: y(0), ticks: niceTicks(0, xMax, Math.max(3, Math.floor((width - left - right) / 70))), format: tick, label: 'eigenvalue of the sample covariance', labelGap: 34 }));
   }
   return svgRoot({
@@ -141,7 +146,11 @@ export function transitionFigure(result, which, { width, height }) {
   if (which === 'eigenvalue') {
     parts.push(el('line', { x1: left, x2: width - right, y1: y(result.edges.upper), y2: y(result.edges.upper), class: 'edge-line' }),
       el('path', { d: linePath([[x(0), y(1)], [x(xMax), y(1 + xMax)]]), class: 'muted-line' }),
-      text(x(xMax) - 4, y(1 + xMax) + 16, 'population, 1 + θ', { class: 'axis-label halo', 'text-anchor': 'end' }),
+      // Along the dashed line and just below it, where the sample curve, always above, does not reach.
+      text(x(xMax * 0.6), y(1 + xMax * 0.6), 'population, 1 + θ', {
+        class: 'axis-label halo', 'text-anchor': 'middle', dy: 14,
+        transform: `rotate(${(Math.atan2(y(1 + xMax) - y(1), x(xMax) - x(0)) * 180) / Math.PI} ${x(xMax * 0.6)} ${y(1 + xMax * 0.6)})`,
+      }),
       text(left + 4, y(result.edges.upper) - 5, 'upper edge', { class: 'axis-label halo' }));
   }
   /** @type {Point[]} */

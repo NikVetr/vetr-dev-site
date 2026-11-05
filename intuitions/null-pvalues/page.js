@@ -59,7 +59,7 @@ for (const s of SCENARIOS) {
     <div class="figure-head"><h3>Share of p-values at or below each threshold</h3></div>
     <ul class="legend" id="${s}-legend"></ul>
     <div id="${s}-rate" class="plot-box stale-dim"></div>
-    <figcaption class="caption">Above: each analysis's p-values in 20 bins, as a density, so a valid test's bars stand on the dashed line at 1. Below: on log scales, the share of p-values at or below each threshold, against the diagonal a valid test follows; the marks on the vertical line are the false-positive rates at α.</figcaption>
+    <figcaption class="caption">Dashed: what a valid test gives. The marks on the vertical line are the false-positive rates at α. <a href="#reading">Reading the figures</a></figcaption>
     <p class="sim-status" id="${s}-status" aria-live="polite"></p>`;
 }
 
@@ -103,7 +103,9 @@ const READOUTS = {
   stepwise: (r) => `After ${count(state.panels.stepwise.steps)} noise covariates are removed one at a time, the test of the treatment rejects a true null ${plain(r.shortcut)} of the time at α = ${r.alpha}. With all of them in one model it would reject exactly ${formatShare(r.alpha)}.`,
   bootstrap: (r) => `A <var>t</var>-test on ${count(state.panels.bootstrap.resamples)} bootstrap means rejects a true null ${plain(r.shortcut)} of the time at α = ${r.alpha}. The bootstrap distribution of the difference rejects ${plain(r.sound)}.`,
   autocorrelation: (r) => `With φ = ${state.panels.autocorrelation.phi}, the correlation of two unrelated series varies ${formatNumber(r.varianceInflation, 2)} times as much as ${state.panels.autocorrelation.naive === 'pearson' ? "Pearson's test" : "Fisher's z"} assumes, and it rejects ${plain(r.shortcut)} of the time at α = ${r.alpha}. ${REMEDY[state.panels.autocorrelation.fix]} rejects ${plain(r.sound)}.`,
-  'two-step': (r) => (r.selected.shortcut === 0
+  'two-step': (r) => (r.selected.shortcut === 0 && r.selected.sound === 0
+    ? `None of the ${count(r.simulation.features)} variants passes the first step, by either group's test or by the pooled effect, so no interaction is tested.`
+    : r.selected.shortcut === 0
     ? `None of the ${count(r.simulation.features)} variants pass the first step in either group, so the two-step analysis tests nothing. Filtering on the pooled effect keeps ${count(r.selected.sound)}, and their interaction test rejects ${plain(r.sound)} at α = ${r.alpha}.`
     : `Of ${count(r.simulation.features)} variants with no interaction, ${count(r.selected.shortcut)} pass the first step in either group, and the interaction test rejects ${plain(r.shortcut)} of those at α = ${r.alpha}; ${count(r.discoveries.shortcut)} survive Benjamini–Hochberg, all false. Filtering on the pooled effect keeps ${count(r.selected.sound)}, of which ${plain(r.sound)} are rejected.`),
   pairing: (r) => (state.panels.pairing.meanChange === 0

@@ -333,7 +333,7 @@
     <section class="notes card" aria-labelledby="notes-heading">
       <h2 id="notes-heading">How it works</h2>
       <div class="prose" id="notes-prose">
-        <h3>Reading the figures</h3>
+        <h3 id="reading">Reading the figures</h3>
         <p>Each histogram shows one analysis's p-values in 20 bins, as a density, so a valid test's bars stand at height 1 (the dashed line). The plot below them shows, for every threshold from 10⁻⁴ to 1, the share of p-values at or below it. A valid test lies on the diagonal; a curve above it rejects a true null more often than its threshold promises, and one below it is conservative and loses power. The vertical line is α, and the marks on it are the two analyses' false-positive rates.</p>
         <h3>Exact and simulated</h3>
         <p>Where the null distribution has a closed form it is used, and the figure is exact: the batch panel, the joint model of the second panel and the enrichment panel. Elsewhere the data are simulated with a seed, from shared/rng.js's mulberry32 with normals by inversion, so the same seed gives the same p-values in every browser and in Node; each rate there carries its Monte Carlo standard error, and the panel says how many replicates it ran. More replicates narrow the error. Simulations run in a background worker, so the page stays responsive. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
