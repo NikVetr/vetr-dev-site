@@ -303,8 +303,19 @@ async function setK(k, at = {}) {
     plan = await loadPlan(k);
   } catch (error) {
     if (token !== state.loadToken) return;
-    $('loading').hidden = true;
-    listProblem($('load-issues'), `${/** @type {Error} */ (error).message}. Choose the dimensions again to retry.`);
+    listProblem($('load-issues'), `${/** @type {Error} */ (error).message}.${state.plan ? ` Still showing ${state.plan.k} dimensions.` : ''}`);
+    const retry = document.createElement('button');
+    retry.type = 'button';
+    retry.textContent = 'Try again';
+    retry.addEventListener('click', () => setK(k, at));
+    $('load-issues').append(retry);
+    // Keep showing the plan that was on view, if any, under its own k.
+    if (state.plan) {
+      state.k = state.plan.k;
+      $('k').value = String(state.k);
+      $('loading').hidden = true;
+      if (wasPlaying) play();
+    } else $('loading').textContent = 'No plan to show.';
     return;
   }
   if (token !== state.loadToken) return;

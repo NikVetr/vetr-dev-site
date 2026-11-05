@@ -123,3 +123,18 @@ test('390 px: the viewer comes first and nothing scrolls sideways', async ({ pag
   expect(await inked(page)).toBeGreaterThan(100);
   expect(errors).toEqual([]);
 });
+
+test('a plan that fails to load is reported, the old plan stays, and Try again recovers', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  let fail = true;
+  await page.route('**/plans/k5.json', (route) => (fail ? route.fulfill({ status: 404, body: '' }) : route.continue()));
+  await open(page);
+  await page.selectOption('#k', '5');
+  await expect(page.locator('#load-issues')).toContainText('The k = 5 plan could not be loaded (HTTP 404). Still showing 9 dimensions.');
+  await expect(page.locator('#k')).toHaveValue('9');
+  await expect(page.locator('#stage-name')).toHaveText('ennearact (ℝ⁹)');
+  fail = false;
+  await page.getByRole('button', { name: 'Try again' }).click();
+  await expect(page.locator('#load-issues')).toBeHidden();
+  await expect(page.locator('#k')).toHaveValue('5');
+});
