@@ -188,6 +188,7 @@
         const { left, right } = zones[i];
         const inner = right - left - 2 * ZONE_PAD;
         it.badge.style.maxWidth = `${Math.max(44, inner)}px`;
+        fitLabel(it.badge);
         it.badge.classList.toggle('colored', !!it.geo);
         if (it.geo) it.badge.style.setProperty('--col', it.geo.color);
         placeValues(it.list, it.geo);
@@ -210,6 +211,16 @@
         else el.style.removeProperty('--col');
       });
       if (lit) light(lit);
+    }
+
+    // A column name wider than its badge shrinks, down to 8 px, then wraps: it is never cut short.
+    function fitLabel(badge) {
+      const label = badge.querySelector('.strip-label');
+      const over = () => label.scrollWidth > label.clientWidth + 0.5;
+      label.style.fontSize = '';
+      badge.classList.remove('wrapped');
+      for (let px = 11.5; px >= 8 && over(); px -= 0.5) label.style.fontSize = `${px}px`;
+      badge.classList.toggle('wrapped', over());
     }
 
     // A list's width within `room`. Up to the strip's rows of values stack in one column as wide as

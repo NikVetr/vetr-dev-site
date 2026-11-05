@@ -1852,7 +1852,7 @@ test('the corner handle resizes the canvas while the plot keeps its scale', asyn
   expect(Math.abs(after.sy / before.sy - 1)).toBeLessThan(1e-4);
 });
 
-test('dragging a node redraws without fade transitions', async ({ page }) => {
+test('strands and nodes redraw without fade transitions, idle or dragging', async ({ page }) => {
   await page.evaluate(() => window.SankeyApp.loadExample('pathways'));
   const node = await nodeAt(page, 'Surgery');
   await page.mouse.move(node.x, node.y);
@@ -1862,7 +1862,7 @@ test('dragging a node redraws without fade transitions', async ({ page }) => {
   await page.mouse.up();
   expect(durations.every((d) => d === '0s')).toBe(true);
   const idle = await page.evaluate(() => getComputedStyle(document.querySelector('#plot .ribbon')).transitionDuration);
-  expect(idle).not.toBe('0s');
+  expect(idle).toBe('0s');
 });
 
 test('Align lines up the top and bottom nodes of every column; double-click fits the canvas', async ({ page }) => {
@@ -2776,7 +2776,7 @@ test('a value left without rows by another column\'s filter keeps its place in t
   expect(await listed('TR02')).toEqual(first);
 });
 
-test('long value lists flow down numbered sub-columns instead of scrolling, and long values are cut short', async ({ page }) => {
+test('long value lists flow down numbered sub-columns, and long values wrap in full', async ({ page }) => {
   await page.evaluate(() => {
     const T = window.SK.transform;
     const many = Array.from({ length: 14 }, (_, i) => (i === 0 ? 'A value whose name is much too long to show in full in its badge' : `Site ${i + 1}`));
@@ -2796,14 +2796,22 @@ test('long value lists flow down numbered sub-columns instead of scrolling, and 
   expect(chips[5].left).toBeGreaterThan(chips[0].left + 20);
   expect(chips[5].top).toBeCloseTo(chips[0].top, 0);
   expect(chips[10].left).toBeGreaterThan(chips[5].left + 20);
-  expect(await list.evaluate((el) => el.scrollHeight <= el.clientHeight + 1)).toBe(true);
+  // Every value's text lies inside its chip: a long one wraps onto more lines (the list scrolls to them).
+  const cut = await list.locator('.strip-chip').evaluateAll((els) => els.filter((el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const r = range.getBoundingClientRect();
+    const b = el.getBoundingClientRect();
+    return r.right > b.right + 0.5 || r.bottom > b.bottom + 0.5;
+  }).map((el) => el.textContent));
+  expect(cut).toEqual([]);
   const zone = await page.locator('#column-strip .strip-zone[data-strip-zone="site"]').boundingBox();
   const box = await list.boundingBox();
   expect(box.x + box.width).toBeLessThanOrEqual(zone.x + zone.width);
   // Short lists stay in one unnumbered column.
   await expect(page.locator('[data-strip-values="end"]')).not.toHaveClass(/multi/);
   await expect(page.locator('[data-strip-values="end"] .strip-index').first()).toBeHidden();
-  // A long value is cut short, in full in its tooltip and while dragged.
+  // A long value keeps to its sub-column's width, and is in full in its tooltip and while dragged.
   const long = chips.find((c) => c.value.startsWith('A value'));
   expect(long.chip).toBeLessThan(200);
   expect(long.title).toContain(long.value);

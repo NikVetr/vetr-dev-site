@@ -57,7 +57,7 @@
       const geo = columnGeometry();
       if (!geo || !geo[k]) return;
       const box = stageEl.getBoundingClientRect();
-      stageEl.scrollBy({ left: geo[k].cx - (box.left + box.width / 2), behavior: 'smooth' });
+      stageEl.scrollBy({ left: geo[k].cx - (box.left + box.width / 2), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   });
 
@@ -238,6 +238,7 @@
     columnStrip.render(data.sourceTable);
     const box = panelRoom();
     let width = data.style.canvasWidth || Math.max(320, Math.floor(box.width));
+    if (!data.style.canvasWidth && !data.sourceTable) width = Math.max(width, fileCanvasWidth);
     let minHeight = 240;
     if (data.sourceTable && data.matrices.length) {
       const sets = nodeSets(data);
@@ -267,6 +268,11 @@
       svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     }
   }
+
+  // Width a loaded loc's canvas grew to so its strands could turn (computeLayout), until Fit view.
+  let fileCanvasWidth = 0;
+  // Why the example shown at start could not be drawn: the message while no data is loaded.
+  let startupError = '';
 
   const viewFor = (v) => ({ xlim: v.xlim, ylim: v.ylim, width: frame.width - 2 * MARGIN, height: frame.height - frame.margin.top - MARGIN });
   const measure = (data = state) => R.makeMeasure(data.style);
@@ -319,9 +325,12 @@
   // spreadWidth, which belongs to the generated layout. Never during a drag: the drag must stop at
   // a drawable position instead of moving columns frame by frame. Likewise the canvas grows taller
   // (minCanvasHeight, also reset by Fit view) when a node's label reaches into a node above it,
-  // fixed height or not.
+  // fixed height or not. Data from files keeps its loc's x positions: a strand that cannot turn
+  // widens the whole canvas instead (fileCanvasWidth, also reset by Fit view), unless its width is fixed.
   function computeLayout(data, view, opts = {}) {
     const grows = !drag && data.sourceTable;
+    const widens = !drag && !data.sourceTable && !data.style.canvasWidth;
+    const widthBefore = frame.width;
     let taller = 0;
     // Other data keeps its canvas: spreadMoves only rebalances the gaps within it.
     const fixed = !!data.style.canvasWidth || !data.sourceTable;
@@ -342,6 +351,11 @@
       let lay;
       try { lay = R.liftLabels(L.computeLayout(model(data), viewFor(view), { measure: measure(data) }), data.style); }
       catch (err) {
+        if (widens && err.requiredRun && err.flow && pass < passes) {
+          frame.width = Math.ceil(1.25 * frame.width);
+          continue;
+        }
+        if (widens) frame.width = widthBefore;
         if (!grows || !err.requiredRun || !err.flow || err.flow.dir < 0) throw err;
         const px = err.requiredRun - err.flow.dir * (err.flow.endX - err.flow.startX);
         if (!(px > 0)) throw err;
@@ -357,9 +371,13 @@
       }
       // Lay out the moved columns once more; the last pass draws as is.
       const moves = opts.spread && !drag && pass < passes ? spreadMoves(lay, fixed) : new Map();
-      if (!moves.size) return lay;
+      if (!moves.size) {
+        if (widens && frame.width > widthBefore) fileCanvasWidth = frame.width;
+        return lay;
+      }
       move(moves, 'spreadWidth');
     }
+    if (widens) frame.width = widthBefore;
     throw new L.SankeyError('Could not find enough column spacing for constant-width ribbons. Increase column spacing or reduce the value scale.');
   }
 
@@ -605,6 +623,7 @@
     // Fitting recomputes how wide an imported table's canvas must be, so a canvas widened earlier
     // shrinks back unless the current layout still needs the room (keepCanvas: refit within it).
     // spread: a freshly generated layout, whose tight column gaps computeLayout widens.
+    if (opts.fit && !opts.keepCanvas) fileCanvasWidth = 0;
     if (opts.fit && !opts.keepCanvas && state.sourceTable) {
       state.sourceTable.minCanvasWidth = 0;
       state.sourceTable.minCanvasHeight = 0;
@@ -616,7 +635,7 @@
         layout = null;
         svg.innerHTML = '';
         svg.classList.remove('stale');
-        showError(state.matrices.length ? 'Load node locations (loc) or use "Auto-layout nodes".' : '');
+        showError(state.matrices.length ? 'Load node locations (loc) or use "Auto-layout nodes".' : startupError);
       } else {
         if (opts.fit || !state.view) state.view = fitView(state, { spread: opts.spread });
         layout = computeLayout(state, state.view);
@@ -1190,6 +1209,7 @@
   // Every external replacement is checked before it can replace the working data or be saved.
   function validateCandidate(next, prepare) {
     const previousFrame = frame;
+    const previousFileWidth = fileCanvasWidth;
     try {
       const fail = (message) => { throw new L.SankeyError(message); };
       const record = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -1241,6 +1261,7 @@
       }
     } catch (err) {
       frame = previousFrame;
+      fileCanvasWidth = previousFileWidth;
       columnStrip.render(state.sourceTable);
       throw err instanceof L.SankeyError ? err : new L.SankeyError(`Invalid project data: ${err.message}`);
     }
@@ -3336,6 +3357,12 @@
 
   // ---------- startup ----------
 
+  function showHelp() {
+    const dialog = $('#help-dialog');
+    dialog.showModal();
+    dialog.scrollTop = 0;
+  }
+
   function bindChrome() {
     $('#file-input').addEventListener('change', (e) => { loadFileList(e.target.files); e.target.value = ''; });
     document.querySelectorAll('input[type="file"][data-role]').forEach((input) => {
@@ -3437,7 +3464,8 @@
     });
     document.addEventListener('click', () => { menu.hidden = true; });
     document.querySelectorAll('[data-export]').forEach((b) => b.addEventListener('click', () => runExport(b.dataset.export)));
-    $('#help-btn').addEventListener('click', () => $('#help-dialog').showModal());
+    $('#help-btn').addEventListener('click', showHelp);
+    document.querySelectorAll('dialog .dialog-close').forEach((b) => b.addEventListener('click', () => b.closest('dialog').close('cancel')));
     $('#copy-code').addEventListener('click', () => {
       navigator.clipboard.writeText($('#code-text').value).then(() => notify('R code copied.'), () => {
         $('#code-text').select();
@@ -3469,7 +3497,7 @@
         applyHighlight();
         refreshInspector();
       } else if (!typing && e.key === '?') {
-        $('#help-dialog').showModal();
+        showHelp();
       }
     });
 
@@ -3510,8 +3538,19 @@
         notify('The autosaved session could not be restored; loading an example instead.');
       }
     }
-    if (restored) update({ commit: true });
-    else loadExample(window.SK.examples[0].id);
+    if (restored) {
+      update({ commit: true });
+      return;
+    }
+    try {
+      loadExample(window.SK.examples[0].id);
+    } catch (err) {
+      startupError = `The example could not be drawn: ${err instanceof L.SankeyError ? err.message : `unexpected error: ${err.message}`} ` +
+        'Choose another under Examples…, or open your own files.';
+      computeFrame();
+      showError(startupError);
+      if (!(err instanceof L.SankeyError)) console.error(err);
+    }
   }
 
   window.SankeyApp = {
