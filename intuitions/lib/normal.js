@@ -2,6 +2,7 @@
 // floating-point accuracy: pnorm is Cody's rational Chebyshev algorithm (R's
 // pnorm_both), qnorm is Wichura's AS 241 (R's qnorm), dnorm follows R's dnorm4.
 // Upper tails are computed directly rather than as 1 - p, so they stay accurate far out.
+// standardNormal draws by inversion from a seeded uniform generator.
 
 const SQRT_32 = 5.656854249492380195206754896838;
 const ONE_OVER_SQRT_2PI = 0.398942280401432677939946059934;
@@ -169,4 +170,14 @@ export function qnorm(p, mean = 0, sd = 1) {
     if (q < 0) value = -value;
   }
   return mean + sd * value;
+}
+
+/**
+ * A standard normal draw by inversion: the uniform is moved half a step off the
+ * grid so it lies strictly inside (0, 1). Inversion keeps a draw tied to its uniform,
+ * so changing a mean or a correlation moves each simulated point continuously.
+ * @param {() => number} rng uniform on [0, 1), as shared/rng.js's mulberry32
+ */
+export function standardNormal(rng) {
+  return qnorm(rng() + 2 ** -33);
 }

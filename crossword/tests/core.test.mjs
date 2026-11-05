@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { CrosswordError, gridWord, parseEntries, renderPuzzleSvg, renderSvg, submit, TERMS } from '../core/index.js';
 import { adjacency, articulationPoints, findNExtra, findWords, fillAdjElements, numberWords, removableWords, trimState } from '../core/grid.js';
-import { createRng } from '../core/rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 import { countInducedCycles, nearestDistances, preparePicture, scoreTerms } from '../core/score.js';
 import { generateXword, swapWord } from '../core/search.js';
 import { concaveman } from '../vendor/concaveman.js';
@@ -187,7 +187,7 @@ test('the stray-word check flags runs that are not words', () => {
 test('swap proposals leave a consistent, connected crossword', () => {
   const entries = parseEntries(weatherText).map((e) => gridWord(e.answer));
   const objective = { weights: Object.fromEntries(TERMS.map((t) => [t, 1])), desiredAreaRatio: 1, desiredHvRatio: 1, picture: null, pictureDistance: /** @type {const} */ ('scan') };
-  const rng = createRng(3);
+  const rng = mulberry32(3);
   let state = /** @type {State} */ (generateXword(entries, 20, 5, /** @type {any} */ (objective), rng));
   for (let i = 0; i < 25; i++) {
     state = swapWord(state, entries, /** @type {any} */ (objective), rng);

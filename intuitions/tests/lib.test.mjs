@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { bvnRectangle, bvnUpper, dbvnorm, pbvnorm } from '../lib/bvn.js';
 import { formatNumber, formatRatio, formatShare } from '../lib/format.js';
-import { dnorm, pnorm, pnormInterval, pnormUpper, qnorm } from '../lib/normal.js';
-import { createRng, standardNormal } from '../lib/rng.js';
+import { dnorm, pnorm, pnormInterval, pnormUpper, qnorm, standardNormal } from '../lib/normal.js';
+import { mulberry32 } from '../../shared/rng.js';
 import { niceTicks, scaleLinear, scaleLog } from '../lib/plot.js';
 import { arcPoints, orientation, project, quatFromAxisAngle, quatMultiply, renderScene, rotateVector, sphereOutline, turn } from '../lib/geom3d.js';
 import { cross, dot, symmetricEigen } from '../lib/linalg.js';
@@ -59,10 +59,10 @@ test('the density is the derivative of the CDF in r (Plackett)', () => {
 });
 
 test('seeded RNG is reproducible and its normals are standard', () => {
-  const a = createRng(42);
-  const b = createRng(42);
+  const a = mulberry32(42);
+  const b = mulberry32(42);
   for (let i = 0; i < 5; i++) assert.equal(a(), b());
-  const rng = createRng(7);
+  const rng = mulberry32(7);
   const n = 40000;
   let sum = 0;
   let sumSq = 0;

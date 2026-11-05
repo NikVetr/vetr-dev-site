@@ -12,7 +12,7 @@ import { DEFAULTS, TextInImageError, renderSvg, submit } from '../core/index.js'
 import { fitTextSize, layoutPass, prepareText } from '../core/layout.js';
 import { quantizeOklab, toRaster } from '../core/quantize.js';
 import { columnRuns, regionRows, rotateRaster, unrotatePosition } from '../core/region.js';
-import { createRng } from '../core/rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 import { decodePng } from '../decode-png.mjs';
 
 const here = (/** @type {string} */ path) => fileURLToPath(new URL(path, import.meta.url));
@@ -92,7 +92,7 @@ test('OKLab k-means recovers flat colours, keeps the background transparent and 
     for (let c = 0; c < 30; c++) image.data.set([...cols[Math.floor(c / 10)], r < 5 ? 0 : 255], 4 * (r * 30 + c));
   }
   const q = { ...DEFAULTS.quantize, k: 3 };
-  const out = quantizeOklab(toRaster(image, 'white'), /** @type {any} */ (q), createRng(1));
+  const out = quantizeOklab(toRaster(image, 'white'), /** @type {any} */ (q), mulberry32(1));
   assert.equal(out.palette.colors.length, 3);
   for (let p = 0; p < 600; p++) {
     const opaque = p >= 150;
@@ -100,7 +100,7 @@ test('OKLab k-means recovers flat colours, keeps the background transparent and 
     if (opaque) for (let ch = 0; ch < 3; ch++) assert.ok(Math.abs(out.raster.rgba[4 * p + ch] * 255 - image.data[4 * p + ch]) < 1e-9);
   }
   assert.ok(out.palette.error.mean < 1e-12);
-  const again = quantizeOklab(toRaster(image, 'white'), /** @type {any} */ (q), createRng(1));
+  const again = quantizeOklab(toRaster(image, 'white'), /** @type {any} */ (q), mulberry32(1));
   assert.deepEqual(again.raster.rgba, out.raster.rgba);
 
   const error = rejection({ image, text: 'a' });

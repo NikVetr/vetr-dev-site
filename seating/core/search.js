@@ -8,7 +8,7 @@
 import { constraintOffset, groupSums, scoreAssignment, tableOfSeats, tableTerms } from './objective.js';
 import { SeatingError } from './request.js';
 import { rsum } from './rmath.js';
-import { createRng } from './rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 
 /**
  * @typedef {import('./request.js').Problem} Problem
@@ -37,7 +37,7 @@ function barker(x) {
  */
 export function runSearch(problem, { onProgress } = {}) {
   const opt = problem.options;
-  const rng = createRng(opt.seed);
+  const rng = rMersenneTwister(opt.seed);
   const nIter = opt.iterations;
   const n = problem.nSeats;
   const T = problem.tableIds.length;

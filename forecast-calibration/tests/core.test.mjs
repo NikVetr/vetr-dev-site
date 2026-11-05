@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { ForecastCalibrationError, formatTable, parseTable, submit } from '../core/index.js';
-import { createRng } from '../core/rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 
 const here = (/** @type {string} */ path) => fileURLToPath(new URL(path, import.meta.url));
 const exampleCsv = readFileSync(here('../examples/synthetic.csv'), 'utf8');
@@ -26,7 +26,7 @@ function rejection(/** @type {unknown} */ request) {
 
 test('simulated log-loss null matches the closed-form mean and variance', () => {
   // Spread-out probabilities, so every term of both sums matters.
-  const rng = createRng(7);
+  const rng = mulberry32(7);
   const predictions = Array.from({ length: 200 }, () => ({ probability: 0.02 + 0.96 * rng(), outcome: rng() < 0.5 }));
   const S = 100000;
   const { expected, simulated } = submit({ predictions, simulations: S, plotWorlds: 0, seed: 3 }).logLoss;

@@ -8,7 +8,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { submit, RasterToVectorError } from '../core/index.js';
 import { plottingOrder, shapeOverlaps } from '../core/order.js';
-import { createRng } from '../core/rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 import { traceLayersMs } from '../core/trace-ms.js';
 import { allInWindow, sobelSum, traceLayersOriginal } from '../core/trace-original.js';
 import { imodwt, modwt, waveletFilter, waveletSmooth } from '../core/wavelet.js';
@@ -71,12 +71,12 @@ test('MODWT, its inverse and smoothing match the waveslim fixtures to 1e-12', ()
 });
 
 test('the generator reproduces R draws after set.seed()', () => {
-  let rng = createRng(1);
+  let rng = rMersenneTwister(1);
   assert.deepEqual(Array.from({ length: 5 }, rng.unif), R.rng.runif_seed1);
-  rng = createRng(1);
+  rng = rMersenneTwister(1);
   assert.deepEqual(Array.from({ length: 20 }, () => rng.index(300) + 1), R.rng.sample300_seed1);
-  rng = createRng(2);
-  assert.deepEqual(Array.from({ length: 30 }, () => rng.weighted(R.rng.weights) + 1), R.rng.weighted_seed2);
+  rng = rMersenneTwister(2);
+  assert.deepEqual(Array.from({ length: 30 }, () => rng.weighted(R.rng.weights)[0] + 1), R.rng.weighted_seed2);
 });
 
 test('the window and Sobel operations match ImageMagick on binary masks', () => {

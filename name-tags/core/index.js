@@ -14,7 +14,7 @@ import { layoutDnaTag, layoutPlainTag, measureTags } from './layout.js';
 import { logoDrawing, readLogo } from './logo.js';
 import { applyCapsRule } from './names.js';
 import { normalizeRequest } from './request.js';
-import { createRng } from './rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 import { renderSheet } from './svg.js';
 import { assignCells } from './tray.js';
 import { missingChars } from './font.js';
@@ -38,7 +38,7 @@ export function submit(request, { onProgress } = {}) {
   const s = normalizeRequest(request);
   const { tray, style } = s;
   const placements = assignCells(s.names.length, tray.n_cells, s.cells);
-  const rng = createRng(s.seed);
+  const rng = rMersenneTwister(s.seed);
   /** @type {string[]} */
   const warnings = [];
   const origin = (/** @type {number} */ i) => {

@@ -2,7 +2,7 @@
 // forecaster, Monte Carlo p-values and log loss. Ported from playingPreds.R (2019)
 // and 2021-SA-predictions.R; see api.md for the definitions.
 
-import { createRng } from './rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 
 /**
  * @typedef {import('./input.js').Prediction} Prediction
@@ -24,7 +24,7 @@ export function analyze(predictions, settings) {
 
   // One set of simulated worlds serves every test, the envelope and the plot. In each
   // world, every prediction comes true with exactly its stated probability.
-  const rng = createRng(settings.seed);
+  const rng = mulberry32(settings.seed);
   const S = settings.simulations;
   const histograms = bins.map((bin) => new Float64Array(bin.n + 1));
   const exceeded = { weighted: 0, unweighted: 0, logLoss: 0 };

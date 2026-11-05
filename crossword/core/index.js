@@ -3,7 +3,7 @@
 
 import { cloneState, numberWords, trimState } from './grid.js';
 import { CrosswordError, normalizeRequest } from './input.js';
-import { createRng } from './rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 import { scoreTerms, totalScore } from './score.js';
 import { generateXword, hardestWords, runMCMC } from './search.js';
 
@@ -28,7 +28,7 @@ export { renderPuzzleSvg, renderSvg } from './render.js';
  */
 export function submit(request, { onProgress } = {}) {
   const { entries, objective, search, target, init } = normalizeRequest(request);
-  const rng = createRng(search.seed);
+  const rng = mulberry32(search.seed);
   const crosswords = [];
   for (let i = 0; i < search.nXwords; i++) {
     const orig = init ? cloneState(init) : generateXword(entries, search.maxAttemptsWord, search.maxAttemptsXword, objective, rng);

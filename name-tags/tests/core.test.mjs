@@ -15,7 +15,7 @@ import { applyCapsRule, splitNameLines, toUpper } from '../core/names.js';
 import { bfgs, brentMin } from '../core/optim.js';
 import { dnorm, pnorm, rmod } from '../core/rmath.js';
 import { DEFAULT_STYLE } from '../core/request.js';
-import { createRng } from '../core/rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 import { assignCells, trayGeometry } from '../core/tray.js';
 
 const R = JSON.parse(readFileSync(new URL('./fixtures/r-parity.json', import.meta.url), 'utf8'));
@@ -35,9 +35,9 @@ function issuesOf(fn) {
 }
 
 test('random numbers match R set.seed() draws', () => {
-  const a = createRng(1);
+  const a = rMersenneTwister(1);
   assert.deepEqual(R.runif_seed1.map(() => a.unif()), R.runif_seed1);
-  const b = createRng(42);
+  const b = rMersenneTwister(42);
   const z = R.rnorm_seed42.map(() => b.norm());
   z.forEach((/** @type {number} */ v, /** @type {number} */ i) => assert.ok(Math.abs(v - R.rnorm_seed42[i]) < 1e-15));
 });

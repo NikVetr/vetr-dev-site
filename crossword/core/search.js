@@ -3,7 +3,6 @@
 // random-number generator differs.
 
 import { cloneState, emptyState, findNExtra, placeWord, removableWords } from './grid.js';
-import { randomIndex, weightedIndex } from './rng.js';
 import { scoreTerms, totalScore } from './score.js';
 
 /**
@@ -12,6 +11,32 @@ import { scoreTerms, totalScore } from './score.js';
  * @typedef {import('./grid.js').Word} Word
  * @typedef {import('./score.js').Objective} Objective
  */
+
+/**
+ * A uniformly chosen index in [0, n).
+ * @param {() => number} rng
+ * @param {number} n
+ */
+function randomIndex(rng, n) {
+  return Math.floor(rng() * n);
+}
+
+/**
+ * An index chosen with probability proportional to its weight.
+ * @param {() => number} rng
+ * @param {number[]} weights non-negative and finite, with a positive sum
+ */
+function weightedIndex(rng, weights) {
+  let total = 0;
+  for (const w of weights) total += w;
+  if (!(total > 0 && Number.isFinite(total))) throw new Error(`cannot sample from weights summing to ${total}`);
+  let u = rng() * total;
+  for (let i = 0; i < weights.length; i++) {
+    u -= weights[i];
+    if (u < 0) return i;
+  }
+  return weights.length - 1;
+}
 
 /** Placement attempts when a swap proposal re-places its removed words (R's default). */
 export const SWAP_MAX_ATTEMPTS = 20;

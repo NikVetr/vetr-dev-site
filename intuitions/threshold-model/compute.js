@@ -6,9 +6,9 @@
 // Cell probabilities are exact bivariate-normal rectangles, not grid sums.
 
 import { bvnRectangle, dbvnorm } from '../lib/bvn.js';
-import { pnormInterval, qnorm } from '../lib/normal.js';
+import { pnormInterval, qnorm, standardNormal } from '../lib/normal.js';
 import { checkInteger, checkNumber, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
-import { createRng, standardNormal } from '../lib/rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 
 /** @typedef {import('../lib/params.js').Issue} Issue */
 /** @typedef {{ n: number, seed: number }} SampleSpec */
@@ -347,7 +347,7 @@ export function fitTable(table) {
  * @returns {[number, number][]}
  */
 export function samplePoints(means, rho, { n, seed }) {
-  const rng = createRng(seed);
+  const rng = mulberry32(seed);
   const s = Math.sqrt(Math.max(0, 1 - rho * rho));
   return Array.from({ length: n }, () => {
     const z1 = standardNormal(rng);

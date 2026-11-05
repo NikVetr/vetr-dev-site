@@ -16,8 +16,9 @@
 // ~/repos/dissertation_work/one-off_scripts/; see api.md for what was corrected.
 
 import { addScaled, cross, dot, normalize, scale, symmetricEigen } from '../lib/linalg.js';
+import { standardNormal } from '../lib/normal.js';
 import { checkInteger, checkNumber, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
-import { createRng, standardNormal } from '../lib/rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 
 /** @typedef {import('../lib/params.js').Issue} Issue */
 /** @typedef {import('../lib/linalg.js').Vector} Vector */
@@ -499,7 +500,7 @@ const tidy = (R) => R.map((row, i) => row.map((x, j) => (i === j ? 1 : j < i ? R
  * @param {number} p @param {number} seed
  */
 export function uniformMatrix(p, seed) {
-  const rng = createRng(seed);
+  const rng = mulberry32(seed);
   const U = Array.from({ length: p }, () => new Array(p).fill(0));
   let alpha = 1 + (p - 2) / 2;
   const r12 = 2 * betaHalfInteger(rng, alpha, alpha) - 1;
@@ -522,7 +523,7 @@ export function uniformMatrix(p, seed) {
  * @param {number} p @param {number} n @param {number} seed
  */
 export function sampleMatrix(p, n, seed) {
-  const rng = createRng(seed);
+  const rng = mulberry32(seed);
   const columns = Array.from({ length: p }, () => arrowOf(Array.from({ length: n }, () => standardNormal(rng))));
   return tidy(columns.map((a) => columns.map((b) => dot(a, b))));
 }

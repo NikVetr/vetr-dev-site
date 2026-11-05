@@ -12,7 +12,7 @@ import { fitTextSize, prepareText } from './layout.js';
 import { quantizeOklab, toRaster } from './quantize.js';
 import { regionRows, rotateRaster, unrotatePosition } from './region.js';
 import { normalizeRequest, parseColor } from './request.js';
-import { createRng } from './rng.js';
+import { mulberry32 } from '../../shared/rng.js';
 
 export { DEFAULTS, R_REPOSITORY, TextInImageError } from './request.js';
 export { FONT } from './font.js';
@@ -44,7 +44,7 @@ export function submit(request) {
   // 1. colour quantization; quantize: null keeps the image's colours
   const { raster, palette } = timed('quantize', () => (settings.quantize === null
     ? { raster: toRaster(image, 'white'), palette: null }
-    : quantizeOklab(toRaster(image, settings.quantize.transparent_color), settings.quantize, createRng(settings.seed))));
+    : quantizeOklab(toRaster(image, settings.quantize.transparent_color), settings.quantize, mulberry32(settings.seed))));
 
   // 2. paintable region: text at `rotation` degrees counterclockwise is laid
   //    out horizontally on the picture turned clockwise by that angle

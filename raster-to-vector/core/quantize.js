@@ -5,7 +5,7 @@
 // every pixel its nearest centre, and pick k by the Davies-Bouldin index.
 // cleanLabels(): absorb short runs. relabelClusters(): drop emptied colours.
 
-import { createRng } from './rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 import { mean, roundR, sum } from './stats.js';
 
 /**
@@ -25,7 +25,7 @@ const P = 4; // features per colour: three colour coordinates and alpha
  * @returns {Quantized}
  */
 export function quantizeColors(img, q, onK) {
-  const rng = createRng(q.seed);
+  const rng = rMersenneTwister(q.seed);
   const nPix = img.width * img.height;
   const level = Array.from({ length: 256 }, (_, b) => roundR(b / 255, q.digits));
 
@@ -183,7 +183,7 @@ function nearestCenters(x, cents, k) {
  * times the squared distance; "unweighted" ignores the weights when seeding.
  * @param {Float64Array} x n × P features @param {Float64Array} w weights
  * @param {number} k @param {'weighted' | 'unweighted'} seeding
- * @param {ReturnType<typeof createRng>} rng
+ * @param {ReturnType<typeof rMersenneTwister>} rng
  */
 function wkmeans(x, w, k, seeding, rng) {
   const n = w.length;
@@ -195,7 +195,7 @@ function wkmeans(x, w, k, seeding, rng) {
   const draw = (d, cls) => {
     const p = new Float64Array(n);
     for (let i = 0; i < n; i++) p[i] = d[i * k + cls[i]] * (seedW ? seedW[i] : 1);
-    return rng.weighted(p);
+    return rng.weighted(p)[0];
   };
   /** @param {Float64Array} cents @param {number} c @param {number} i */
   const setCenter = (cents, c, i) => cents.set(x.subarray(i * P, i * P + P), c * P);
@@ -203,13 +203,13 @@ function wkmeans(x, w, k, seeding, rng) {
   let best = null;
   for (let run = 0; run < restarts; run++) {
     const cents = new Float64Array(k * P);
-    setCenter(cents, 0, seedW ? rng.weighted(seedW) : rng.index(n));
+    setCenter(cents, 0, seedW ? rng.weighted(seedW)[0] : rng.index(n));
     for (let ki = 1; ki < k; ki++) {
       const d = sqdists(x, cents.subarray(0, ki * P), ki);
       const cls = argmins(d, ki);
       const p = new Float64Array(n);
       for (let i = 0; i < n; i++) p[i] = d[i * ki + cls[i]] * (seedW ? seedW[i] : 1);
-      setCenter(cents, ki, rng.weighted(p));
+      setCenter(cents, ki, rng.weighted(p)[0]);
     }
     let d = sqdists(x, cents, k);
     let cls = argmins(d, k);
