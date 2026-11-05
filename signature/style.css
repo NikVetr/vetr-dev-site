@@ -73,9 +73,17 @@
 .segmented label:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.6rem; align-items: center; }
-.key { display: inline-block; width: 1.6rem; vertical-align: middle; }
-.key-after { height: 0.35rem; background: var(--ink, #1b1b1b); border-radius: 2px; outline: 1px solid var(--border); }
-.key-before { height: 0; border-top: 2px solid #d0312d; }
+/* Legend keys on a scrap of the view's white paper, so the ink shows in either theme. */
+.key {
+  display: inline-block;
+  width: 1.8rem;
+  height: 0.9rem;
+  vertical-align: middle;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+.key-after { background: linear-gradient(var(--ink), var(--ink)) center / 75% 0.32rem no-repeat, #fff; }
+.key-before { background: linear-gradient(#d0312d, #d0312d) center / 75% 1px no-repeat, #fff; }
 
 .settings output { color: var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3rem; }
 .settings input[type="range"] { padding: 0; }
@@ -108,6 +116,7 @@ details.more summary { cursor: pointer; color: var(--primary); font-weight: 600;
 }
 
 .toolbar .spacer { flex: 1; }
+dialog .pad-frame { margin-top: 1rem; }
 
 /* Wide screens: the settings beside the corrected view, then the morph across the page, its
    view beside its controls. */

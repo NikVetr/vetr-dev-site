@@ -101,6 +101,27 @@ test('morphs into the second example and plays when asked', async ({ page }) => 
   await expect(page.locator('#morph-play')).toHaveText('▶ Play');
   await page.locator('#morph-p').fill('120');
   await expect(page.locator('#morph-p-out')).toHaveText('100%');
+  // with reduced motion, Play runs one cycle there and back, then stops on its own
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.locator('#morph-p').fill('0');
+  await page.click('#morph-play');
+  await expect(page.locator('#morph-play')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#morph-play')).toHaveAttribute('aria-pressed', 'false', { timeout: 8000 });
+});
+
+test('a moved slider keeps the thinnest pen at most the thickest, and a bad field is named by its label', async ({ page }) => {
+  await page.goto('./');
+  await page.waitForFunction(() => window.Signature?.getResult());
+  await page.locator('[data-path="width.min"]').fill('6');
+  await expect(page.locator('[data-path="width.max"]')).toHaveValue('6');
+  await expect(page.locator('#issues')).toBeHidden();
+  await page.click('details.more summary >> text=More smoothing settings');
+  await page.locator('[data-path="smooth.wavelet.levels"]').fill('lots');
+  await page.locator('[data-path="smooth.wavelet.levels"]').press('Enter');
+  await page.locator('[data-path="smooth.wavelet.levels"]').blur();
+  await expect(page.locator('#issues')).toContainText('Wavelet levels (auto or 1–12): must be');
+  await expect(page.locator('[data-path="smooth.wavelet.levels"]')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#stale')).toBeVisible();
 });
 
 test('fits a 390 px phone without sideways scrolling and takes a finger-drawn stroke', async ({ browser }) => {

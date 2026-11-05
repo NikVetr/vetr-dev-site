@@ -109,6 +109,10 @@ for (const el of fields) {
     else if (type === 'int-or-auto') v = el.value.trim() === 'auto' ? 'auto' : Number(el.value);
     else if (type === 'number-or-auto') v = el.value.trim() === 'auto' ? 'auto' : Number(el.value);
     setAt(path, v);
+    // the thinnest pen never passes the thickest: moving one past the other takes it along
+    if (path === 'width.min' && settings.width.max < settings.width.min) settings.width.max = settings.width.min;
+    if (path === 'width.max' && settings.width.min > settings.width.max) settings.width.min = settings.width.max;
+    if (path === 'width.min' || path === 'width.max') showSettings();
     showOutputs();
     schedule();
   });
@@ -173,7 +177,9 @@ function showIssues(issues) {
     const ul = document.createElement('ul');
     for (const i of issues) {
       const li = document.createElement('li');
-      li.textContent = i.path ? `${i.path}: ${i.message}` : i.message;
+      const field = fields.find((f) => f.dataset.path === i.path);
+      const name = field ? (field.closest('label')?.firstChild?.textContent ?? i.path).trim() : i.path;
+      li.textContent = name ? `${name}: ${i.message}` : i.message;
       ul.append(li);
     }
     box.append(ul);
@@ -225,7 +231,7 @@ function render() {
   const mode = viewMode();
   const d = /** @type {RegExpMatchArray} */ (result.svg.match(/ d="([^"]*)"/))[1];
   if (mode !== 'before') fillPath(ctx, d, resultView, input('ink').value);
-  if (mode !== 'after') strokePolylines(ctx, pad.getStrokes(), resultView, mode === 'both' ? '#d0312d' : input('ink').value, (mode === 'both' ? 1.2 : 2) * dpr);
+  if (mode !== 'after') strokePolylines(ctx, pad.getStrokes(), resultView, mode === 'both' ? '#d0312d' : input('ink').value, (mode === 'both' ? 0.8 : 2) * dpr);
   drawRegions(ctx, dpr);
   const src = { speed: 'signing speed', curvature: 'curvature', pressure: 'pen pressure', constant: 'one width' }[result.widthSource];
   $('status').textContent = `${result.strokes.length} stroke${result.strokes.length === 1 ? '' : 's'}, width from ${src}`;
@@ -681,6 +687,7 @@ $('draw-done').addEventListener('click', () => {
 // ---------- start ----------
 
 showSettings();
+$('results-card').style.setProperty('--ink', input('ink').value);
 showBrushOutputs();
 showBrushInfo();
 padChanged();
