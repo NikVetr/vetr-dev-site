@@ -5,6 +5,8 @@ import { formatNumber, formatRatio, formatShare } from '../lib/format.js';
 import { dnorm, pnorm, pnormInterval, pnormUpper, qnorm } from '../lib/normal.js';
 import { createRng, standardNormal } from '../lib/rng.js';
 import { niceTicks, scaleLinear, scaleLog } from '../lib/plot.js';
+import { arcPoints, orientation, project, quatFromAxisAngle, quatMultiply, renderScene, rotateVector, sphereOutline, turn } from '../lib/geom3d.js';
+import { cross, dot, symmetricEigen } from '../lib/linalg.js';
 
 const close = (/** @type {number} */ a, /** @type {number} */ b, tol = 1e-14) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
 
@@ -93,4 +95,48 @@ test('scales and ticks', () => {
   const y = scaleLog([1e-4, 1], [100, 0]);
   close(y(1e-2), 50);
   close(y.invert(50), 1e-2);
+});
+
+test('symmetric eigen-decomposition reconstructs the matrix with orthonormal vectors', () => {
+  const A = [[4, 1, -2, 0.5], [1, 3, 0, 1], [-2, 0, 5, -1], [0.5, 1, -1, 2]];
+  const { values, vectors } = symmetricEigen(A);
+  for (let i = 1; i < values.length; i++) assert.ok(values[i - 1] >= values[i]);
+  vectors.forEach((u, a) => vectors.forEach((v, b) => close(dot(u, v), a === b ? 1 : 0, 1e-13)));
+  A.forEach((row, i) => row.forEach((x, j) => close(values.reduce((sum, l, k) => sum + l * vectors[k][i] * vectors[k][j], 0), x, 1e-13)));
+  const repeated = symmetricEigen([[1, 0.5, 0.5], [0.5, 1, 0.5], [0.5, 0.5, 1]]).values;
+  [2, 0.5, 0.5].forEach((v, i) => close(repeated[i], v, 1e-14));
+  assert.deepEqual(cross([1, 0, 0], [0, 1, 0]), [0, 0, 1]);
+});
+
+test('geom3d: rotations, views, projection and arcs', () => {
+  const q = quatFromAxisAngle([0, 0, 1], 90);
+  rotateVector(q, [1, 0, 0]).forEach((v, i) => close(v, [0, 1, 0][i], 1e-15));
+  const both = quatMultiply(quatFromAxisAngle([1, 0, 0], 90), q); // z-turn, then x-turn
+  rotateVector(both, [1, 0, 0]).forEach((v, i) => close(v, [0, 0, 1][i], 1e-15));
+  // The default view puts world z up on screen; turning right brings the front to the right.
+  const view = orientation(0, 0);
+  rotateVector(view, [0, 0, 1]).forEach((v, i) => close(v, [0, 1, 0][i], 1e-15));
+  rotateVector(view, [0, -1, 0]).forEach((v, i) => close(v, [0, 0, 1][i], 1e-15));
+  close(rotateVector(turn(view, 'right', 90), [0, -1, 0])[0], 1, 1e-15);
+  const ortho = { rotation: view, width: 200, height: 100, scale: 50, distance: Infinity };
+  const p = project(ortho, [0, 0, 1]);
+  close(p.x, 100); close(p.y, 0); close(p.f, 1);
+  const near = project({ ...ortho, distance: 5 }, [0, -1, 0]);
+  close(near.f, 5 / 4);
+  const arc = arcPoints([1, 0, 0], [0, 1, 0], 2, 8);
+  close(arc[0][0], 2); close(arc[8][1], 2); close(Math.hypot(...arc[4]), 2, 1e-14);
+  for (const point of sphereOutline(view)) close(rotateVector(view, point)[2], 0, 1e-14);
+});
+
+test('geom3d: the scene is drawn far to near, with labels last', () => {
+  const camera = { rotation: orientation(0, 0), width: 100, height: 100, scale: 40, distance: Infinity };
+  const svg = renderScene(camera, [
+    { kind: 'label', at: [0, 0, 0], text: 'L' },
+    { kind: 'point', at: [0, -1, 0], class: 'near' },
+    { kind: 'point', at: [0, 1, 0], class: 'far' },
+    { kind: 'line', from: [0, 1, 0], to: [0, -1, 0], class: 'cross', backClass: 'cross back' },
+  ], { label: 'test' });
+  assert.ok(svg.indexOf('far') < svg.indexOf('near'));
+  assert.ok(svg.indexOf('near') < svg.indexOf('>L<'));
+  assert.match(svg, /role="img" aria-label="test"/);
 });

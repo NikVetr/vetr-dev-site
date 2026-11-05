@@ -27,7 +27,9 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry']);
+  assert.deepEqual(submit({ entry: 'correlation-geometry' }).params, { view: 'arrows', a: [1, 2, 4], b: [1, 3, 2] });
+  assert.deepEqual(submit({ entry: 'correlation-geometry', params: { view: 'entry-range', matrix: [[1, 0.2], [0.2, 1]] } }).params, { view: 'entry-range', matrix: [[1, 0.2], [0.2, 1]], cell: [0, 1], observations: 6 });
 });
 
 test('unknown entries and fields are rejected, every issue listed', () => {
@@ -51,6 +53,16 @@ test('threshold-model params are checked in full', () => {
     ['conflicting_fields params', 'wrong_type params.table[0][1]']);
   assert.deepEqual(paths(rejection({ entry: 'threshold-model', params: { table: [[1, 0], [3, 0]] } })), ['empty_category params.table[*][1]']);
   assert.deepEqual(paths(rejection({ entry: 'threshold-model', params: { table: [[1, 2], [3]] } })), ['wrong_type params.table[1]']);
+});
+
+test('correlation-geometry params are checked in full', () => {
+  assert.deepEqual(paths(rejection({ entry: 'correlation-geometry', params: { view: 'cone', b: [1, 1, 1], a: [1, '2', 3], r: 0.5 } })),
+    ['unknown_field params.r', 'no_spread params.b', 'wrong_type params.a[1]']);
+  assert.deepEqual(paths(rejection({ entry: 'correlation-geometry', params: { view: 'equicorrelation', k: 1.5, zeroPair: 'yes' } })),
+    ['wrong_type params.zeroPair', 'wrong_type params.k']);
+  assert.deepEqual(paths(rejection({ entry: 'correlation-geometry', params: { view: 'entry-range', matrix: [[1, 0.9, -0.9], [0.9, 1, 0.9], [-0.9, 0.9, 1]] } })),
+    ['not_positive_semidefinite params.matrix']);
+  assert.deepEqual(paths(rejection({ entry: 'correlation-geometry', params: { view: 3 } })), ['wrong_type params.view']);
 });
 
 test('the error message names the first three issues and serialises as {error}', () => {

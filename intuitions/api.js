@@ -1,6 +1,7 @@
 // The gallery's single entry point. Every page's window.Intuitions, cli.mjs and any
 // script call submit(); nothing here touches the DOM. See api.md.
 
+import * as correlationGeometry from './correlation-geometry/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
 import * as thresholdModel from './threshold-model/compute.js';
 import * as zscoreOutliers from './zscore-outliers/compute.js';
@@ -11,6 +12,7 @@ export { IntuitionsError };
 export const ENTRIES = Object.freeze({
   [zscoreOutliers.ENTRY]: zscoreOutliers,
   [thresholdModel.ENTRY]: thresholdModel,
+  [correlationGeometry.ENTRY]: correlationGeometry,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];
