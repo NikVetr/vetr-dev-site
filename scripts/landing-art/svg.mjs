@@ -85,11 +85,12 @@ export function esc(text) {
  * @param {string} [p.loop]    rules that run while playing; `&` stands for the playing scope
  * @param {number} p.period    the loop's period in seconds: every loop animation repeats on it
  * @param {number} [p.frames]  for a flip-book, its number of frames (for the loop checks)
- * @param {string} [p.player]  a script in assets/players/ that plays the loop instead of CSS
+ * @param {string} [p.player]  a script in assets/players/ that plays (part of) the loop
+ * @param {string} [p.playerBox] where it draws, "x y size" on the canvas; .player-still hides then
  * @param {number} [p.width]   the canvas, 320 x 180 unless the tile's shape asks for another
  * @param {number} [p.height]
  */
-export function art({ name, body, defs = '', css = '', loop = '', period, frames, player, width = W, height = H }) {
+export function art({ name, body, defs = '', css = '', loop = '', period, frames, player, playerBox, width = W, height = H }) {
   const scope = `[data-art="${name}"]`;
   const style = [
     css.replaceAll('&', scope),
@@ -97,7 +98,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // under reduced motion (landing.js does not set data-playing then either).
     loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-playing]`)}\n}`,
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}" data-player-box="${playerBox}"` : ''} focusable="false">
 <style>
 ${style}
 </style>
