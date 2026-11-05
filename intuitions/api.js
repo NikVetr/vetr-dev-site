@@ -8,6 +8,7 @@ import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
 import * as jacobianAdjustment from './jacobian-adjustment/compute.js';
 import * as marchenkoPastur from './marchenko-pastur/compute.js';
 import * as nullPvalues from './null-pvalues/compute.js';
+import * as probabilityPuzzles from './probability-puzzles/compute.js';
 import * as samplers from './samplers/compute.js';
 import * as thresholdModel from './threshold-model/compute.js';
 import * as traitEvolution from './trait-evolution/compute.js';
@@ -31,6 +32,7 @@ export const ENTRIES = Object.freeze({
   [backpackFallacy.ENTRY]: backpackFallacy,
   [samplers.ENTRY]: samplers,
   [jacobianAdjustment.ENTRY]: jacobianAdjustment,
+  [probabilityPuzzles.ENTRY]: probabilityPuzzles,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];
