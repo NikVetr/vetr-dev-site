@@ -14,7 +14,6 @@ import {
  * @typedef {{ crossword?: number, stage?: 'orig' | 'refined', style?: 'filled' | 'blank' }} Pick
  */
 
-const THEME_KEY = 'crossword:theme';
 const TERM_LABELS = /** @type {Record<string, string>} */ ({
   area: 'Area', areaRatio: 'Width / height', hvRatio: 'Across / down', nConnections: 'Connections',
   nCycles: 'Cycles', picSimilarity: 'Picture', circularity: 'Roundness',
@@ -31,7 +30,7 @@ const el = {
   generate: byId('generate'), refine: byId('refine'), stop: byId('stop'), status: byId('status'), runIssues: byId('run-issues'),
   progressGrid: byId('progress-grid'), noResult: byId('no-result'), result: byId('result'), crosswordChoice: byId('crossword-choice'),
   gridFilled: byId('grid-filled'), gridBlank: byId('grid-blank'), cluesAcross: byId('clues-across'), cluesDown: byId('clues-down'),
-  terms: byId('terms'), score: byId('score'), themeToggle: byId('theme-toggle'),
+  terms: byId('terms'), score: byId('score'),
 };
 
 /** @type {Target | null} */
@@ -346,7 +345,7 @@ async function exampleTarget() {
 byId('target-example').addEventListener('click', exampleTarget);
 byId('target-none').addEventListener('click', () => setTarget(null));
 
-// ---------- examples, exports, theme ----------
+// ---------- examples and exports ----------
 
 async function loadExample() {
   el.entries.value = await (await fetch('examples/weather.txt')).text();
@@ -398,19 +397,6 @@ byId('export-png-blank').addEventListener('click', async () => download(fileName
 byId('export-result').addEventListener('click', () => download('crossword-result.json', new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' })));
 byId('export-request').addEventListener('click', () => download('crossword-request.json', new Blob([JSON.stringify(resultRequest, null, 2)], { type: 'application/json' })));
 
-function showTheme() {
-  const dark = document.documentElement.dataset.theme === 'dark';
-  el.themeToggle.textContent = dark ? '☾ Dark' : '☀ Light';
-  el.themeToggle.setAttribute('aria-pressed', String(dark));
-  el.themeToggle.title = `Switch to the ${dark ? 'light' : 'dark'} theme`;
-}
-el.themeToggle.addEventListener('click', () => {
-  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  try { localStorage.setItem(THEME_KEY, next); } catch {}
-  showTheme();
-});
-
 // ---------- API for scripts in the page ----------
 
 /** @type {any} */ (window).Crossword = {
@@ -432,6 +418,5 @@ el.themeToggle.addEventListener('click', () => {
   stop: stopRun,
 };
 
-showTheme();
 await loadExample();
 await runFromPage(currentRequest());

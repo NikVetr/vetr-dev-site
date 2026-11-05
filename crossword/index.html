@@ -6,15 +6,9 @@
   <meta name="description" content="Make crosswords from your own words and clues, optionally shaped like a picture.">
   <title>Crossword Generator</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 12h20v8H6zM12 6h8v20h-8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
-  <script>
-    // Before first paint, so the page never flashes the wrong theme.
-    {
-      let theme = null;
-      try { theme = localStorage.getItem('crossword:theme'); } catch {}
-      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    }
-  </script>
+  <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>

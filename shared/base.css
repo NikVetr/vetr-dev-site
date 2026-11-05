@@ -1,0 +1,283 @@
+/* The shared base of vetr.dev's tools: tokens, the page frame and layout, controls, the
+   dialog, problem lists and out-of-date results. Each tool links it before its own
+   style.css, which adds only what is particular to that tool. Plain CSS: no transitions or
+   animation, and text wraps (break-word) rather than being cut short. The theme is set on
+   <html data-theme> by /shared/theme.js. */
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f5f6f8;
+  --text: #1b1b1b;
+  --muted: #5a5a5a;
+  --border: #e3e3e3;
+  --primary: #2b66d5;
+  --primary-soft: #eef3fd;
+  --alert: #b3261e;
+  --alert-soft: #fdecea;
+  --ok: #1d6b36;
+  --warn: #7a5200;
+  --warn-soft: #fbf1dc;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --radius: 16px;
+  --radius-sm: 8px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101216;
+  --surface: #16181d;
+  --surface-2: #1e2128;
+  --text: #e8e8e8;
+  --muted: #a9a9a9;
+  --border: #30343c;
+  --primary: #8ab0ff;
+  --primary-soft: #1b2740;
+  --alert: #ff8a80;
+  --alert-soft: #3b1f1f;
+  --ok: #86d99b;
+  --warn: #f0c674;
+  --warn-soft: #33290f;
+  --shadow: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, "Noto Sans", sans-serif;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: min(100% - 32px, 1240px);
+  margin-inline: auto;
+}
+
+a { color: var(--primary); text-underline-offset: 3px; }
+
+h1, h2, h3 { letter-spacing: -0.01em; line-height: 1.2; }
+h1 { margin: 0; font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem); }
+h2 { margin: 0; font-size: 1.25rem; }
+h3 { margin: 1.4rem 0 0.6rem; font-size: 1.05rem; }
+
+.muted { color: var(--muted); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Header and footer ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.header-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+.tagline { margin: 0.35rem 0 0; max-width: 70ch; color: var(--muted); }
+
+.site-footer { border-top: 1px solid var(--border); margin-top: 2rem; }
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  padding: 1rem 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.footer-row time { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* ---------- Layout ---------- */
+
+.layout {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+.column { display: grid; gap: 1rem; min-width: 0; align-content: start; }
+@media (min-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+  .method-card { grid-column: 1 / -1; }
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+@media (max-width: 480px) {
+  .card { padding: 0.75rem; }
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.8rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+
+/* ---------- Controls ---------- */
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+button, .file-button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0.4rem 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+button:hover, .file-button:hover { background: var(--primary-soft); }
+button.primary { background: var(--primary); border-color: var(--primary); color: var(--surface); }
+button.primary:hover { background: var(--primary); text-decoration: underline; }
+/* Disabled: grey and dashed, so the state does not rest on colour alone. */
+button:disabled, button.primary:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  background: var(--surface-2);
+  border-color: var(--border);
+  border-style: dashed;
+  text-decoration: none;
+}
+.chip { flex-shrink: 0; font-weight: 500; color: var(--text); }
+
+/* A file picker is its label, drawn as a button; the input inside covers it, unseen, and
+   stays in the tab order. */
+.file-button { position: relative; display: inline-block; }
+.file-button:focus-within { outline: 2px solid var(--primary); outline-offset: 1px; }
+.file-button input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+
+input, select, textarea {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 0.35rem 0.5rem;
+  min-width: 0;
+  max-width: 100%;
+}
+input:disabled, select:disabled { color: var(--muted); background: var(--surface-2); }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+/* A field a problem is reported on: a thick red border and a tint, beside the ⚠ message. */
+[aria-invalid="true"] {
+  border: 2px solid var(--alert);
+  background: var(--alert-soft);
+}
+
+.settings {
+  display: grid;
+  gap: 0.75rem 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  margin-top: 0.75rem;
+}
+.settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.settings label > input, .settings label > select { color: var(--text); }
+.settings [hidden] { display: none; }
+.input-row { display: flex; gap: 0.4rem; }
+.input-row input { flex: 1; color: var(--text); }
+
+/* ---------- Problems ---------- */
+
+.issues {
+  border: 1px solid var(--alert);
+  border-radius: var(--radius-sm);
+  background: var(--alert-soft);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  margin: 0.75rem 0;
+}
+.issues ul { margin: 0; padding-left: 1.4rem; }
+.issues li::marker { content: "⚠  "; color: var(--alert); }
+
+/* ---------- Results ---------- */
+
+.placeholder { color: var(--muted); margin: 0.5rem 0; }
+
+/* A result that no longer matches the inputs stays in view, dimmed, under a banner that says
+   why (a dashed border and ⚠ as well as the colour). */
+.stale-banner {
+  border: 1px dashed var(--warn);
+  border-radius: var(--radius-sm);
+  background: var(--warn-soft);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  margin: 0.75rem 0;
+}
+.stale-banner::before { content: "⚠ "; color: var(--warn); font-weight: 700; }
+[data-stale] .stale-dim { opacity: 0.45; filter: grayscale(0.6); }
+
+/* ---------- Method ---------- */
+
+.method-card summary { cursor: pointer; }
+.method-card summary h2 { display: inline; }
+.method-card p, .method-card li { max-width: 80ch; }
+
+/* ---------- Dialog: the title and close control stay in view while it scrolls ---------- */
+
+dialog {
+  width: min(100% - 32px, 760px);
+  max-height: min(100% - 32px, 820px);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  overflow-y: auto;
+}
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+.dialog-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.dialog-head .dialog-close { font-size: 1.2rem; line-height: 1; padding: 0.3rem 0.65rem; }
+.dialog-body { padding: 0 1rem 0.5rem; }

@@ -13,7 +13,6 @@ import {
  */
 
 const STORAGE_KEY = 'forecast-calibration:v1';
-const THEME_KEY = 'forecast-calibration:theme';
 const EXPORT_SIZE = { width: 720, height: 600 };
 const SETTING_LABELS = /** @type {Record<string, string>} */ ({
   bins: 'Number of bins', simulations: 'Simulated worlds', plotWorlds: 'Worlds drawn in the plot',
@@ -32,7 +31,6 @@ const el = {
   status: byId('status'), noResult: byId('no-result'), result: byId('result'), plot: byId('plot'),
   scores: byId('scores'), bins: byId('bins'), intervalHeading: byId('interval-heading'),
   dialog: byId('table-dialog'), tableText: byId('table-text'), tableIssues: byId('table-issues'),
-  themeToggle: byId('theme-toggle'),
 };
 
 /** @type {Row[]} */
@@ -404,19 +402,8 @@ byId('table-apply').addEventListener('click', () => {
   save();
 });
 
-function showTheme() {
-  const dark = document.documentElement.dataset.theme === 'dark';
-  el.themeToggle.textContent = dark ? '☾ Dark' : '☀ Light';
-  el.themeToggle.setAttribute('aria-pressed', String(dark));
-  el.themeToggle.title = `Switch to the ${dark ? 'light' : 'dark'} theme`;
-}
-el.themeToggle.addEventListener('click', () => {
-  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  try { localStorage.setItem(THEME_KEY, next); } catch { /* the choice just is not remembered */ }
-  showTheme();
-  renderPlot();
-});
+// The theme toggle is /shared/theme.js's; the plot is drawn in theme colours.
+document.addEventListener('themechange', renderPlot);
 
 // ---------- persistence (this browser only) ----------
 
@@ -467,7 +454,6 @@ Object.assign(window, { ForecastCalibration: {
 
 // ---------- start ----------
 
-showTheme();
 if (restore()) {
   renderRows();
   run();

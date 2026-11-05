@@ -1,127 +1,13 @@
-/* Text in Image. Plain and functional: the landing page's system type, cards
-   and blue (as forecast-calibration/style.css), light or dark with the system
-   setting. No transitions or animation. */
+/* Text in Image: what is particular to this page, over /shared/base.css (tokens, frame,
+   controls, problems, out-of-date results and the narrow layout). */
 
-:root {
-  color-scheme: light dark;
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f5f6f8;
-  --text: #1b1b1b;
-  --muted: #5a5a5a;
-  --border: #e3e3e3;
-  --primary: #2b66d5;
-  --primary-soft: #eef3fd;
-  --alert: #b3261e;
-  --alert-soft: #fdecea;
-  --ok: #1d6b36;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --radius: 16px;
-  --radius-sm: 8px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #101216;
-    --surface: #16181d;
-    --surface-2: #1e2128;
-    --text: #e8e8e8;
-    --muted: #a9a9a9;
-    --border: #30343c;
-    --primary: #8ab0ff;
-    --primary-soft: #1b2740;
-    --alert: #ff8a80;
-    --alert-soft: #3b1f1f;
-    --ok: #86d99b;
-    --shadow: none;
-  }
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 400 1rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, "Noto Sans", sans-serif;
-  overflow-wrap: break-word;
-}
-
-.container { width: min(100% - 32px, 1240px); margin-inline: auto; }
-a { color: var(--primary); text-underline-offset: 3px; }
-h1, h2, h3 { line-height: 1.2; }
-h1 { margin: 0; font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem); }
-h2 { margin: 0 0 0.75rem; font-size: 1.25rem; }
-h3 { margin: 1.2rem 0 0.5rem; font-size: 1.05rem; }
-.muted { color: var(--muted); }
-
-.site-header { border-bottom: 1px solid var(--border); background: var(--surface); padding: 1rem 0; }
-.tagline { margin: 0.35rem 0 0; max-width: 70ch; color: var(--muted); }
-.site-footer { border-top: 1px solid var(--border); margin-top: 2rem; }
-.footer-row { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; padding: 1rem 0 1.5rem; color: var(--muted); font-size: 0.9rem; }
-.footer-row time { margin-left: auto; font-variant-numeric: tabular-nums; }
-
-.layout { display: grid; gap: 1rem; padding-top: 1rem; grid-template-columns: minmax(0, 1fr); }
-.column { display: grid; gap: 1rem; min-width: 0; align-content: start; }
-@media (min-width: 1000px) {
-  .layout { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; }
-}
-.card {
-  min-width: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  padding: 1rem;
-}
-@media (max-width: 480px) { .card { padding: 0.75rem; } }
-.toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.75rem 0; }
-
-button, input, select, textarea { font: inherit; color: inherit; }
-button {
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  padding: 0.4rem 0.85rem;
-  font-weight: 600;
-  color: var(--primary);
-  cursor: pointer;
-}
-button:hover { background: var(--primary-soft); }
-button:disabled { color: var(--muted); cursor: wait; background: var(--surface-2); }
-button.primary { background: var(--primary); border-color: var(--primary); color: var(--surface); }
-button.primary:disabled { background: var(--surface-2); border-color: var(--border); color: var(--muted); }
-input, select, textarea {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  padding: 0.35rem 0.5rem;
-  min-width: 0;
-  max-width: 100%;
-}
-input[type="color"] { padding: 0.1rem; height: 2.2rem; width: 4rem; }
-input:disabled { color: var(--muted); background: var(--surface-2); }
-input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
-
-.settings { display: grid; gap: 0.75rem 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); }
-.settings label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.92rem; color: var(--muted); }
-.settings label > input, .settings label > select { color: var(--text); width: 100%; }
+.settings label > input, .settings label > select { width: 100%; }
 .settings label.check { flex-direction: row; align-items: flex-start; gap: 0.45rem; color: var(--text); }
 .settings label.check > input { width: auto; margin-top: 0.3rem; flex-shrink: 0; }
+input[type="color"] { padding: 0.1rem; height: 2.2rem; width: 4rem; }
 .text-label { display: block; margin: 0.75rem 0 0.25rem; font-size: 0.92rem; color: var(--muted); }
 textarea { display: block; width: 100%; resize: vertical; line-height: 1.4; }
 
-.issues {
-  border: 1px solid var(--alert);
-  border-radius: var(--radius-sm);
-  background: var(--alert-soft);
-  padding: 0.5rem 0.75rem;
-  margin: 0.75rem 0;
-}
-.issues ul { margin: 0; padding-left: 1.4rem; }
-.issues li::marker { content: "⚠  "; color: var(--alert); }
-
-.placeholder { color: var(--muted); margin: 0.5rem 0; }
 .output { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
 .fit { font-weight: 600; }
 .fit.ok { color: var(--ok); }

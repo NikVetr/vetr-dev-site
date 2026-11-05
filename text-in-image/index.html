@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Write a text inside the shape of a picture: lines follow the picture's outline, each letter takes the colour beneath it, and the size is tuned until the text just fills the shape.">
   <title>Text in Image</title>
+  <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
   <header class="site-header">
-    <div class="container">
-      <h1>Text in Image</h1>
-      <p class="tagline">Write a text inside the shape of a picture. Lines follow the picture's outline, each letter takes the colour beneath it, and the letter size is tuned until the text just fills the shape.</p>
+    <div class="container header-row">
+      <div>
+        <h1>Text in Image</h1>
+        <p class="tagline">Write a text inside the shape of a picture. Lines follow the picture's outline, each letter takes the colour beneath it, and the letter size is tuned until the text just fills the shape.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
     </div>
   </header>
 
@@ -80,8 +85,10 @@
       </section>
     </div>
 
-    <section class="card" aria-labelledby="result-heading">
-      <h2 id="result-heading">Result</h2>
+    <section class="card results-card" aria-labelledby="result-heading">
+      <div class="card-head">
+        <h2 id="result-heading">Result</h2>
+      </div>
       <p id="no-result" class="placeholder">The text fill appears here after rendering.</p>
       <div id="result" hidden>
         <img id="output" class="output" alt="The text written in the shape of the image">

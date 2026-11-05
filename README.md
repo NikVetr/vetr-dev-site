@@ -2,6 +2,15 @@
 
 The static site at https://vetr.dev, served by GitHub Pages with no build step. `index.html`, `style.css` and `assets/` are the landing page. Every tool or project lives in its own top-level folder with its own HTML, CSS, JavaScript and any tests, and the landing page links the public ones.
 
+## Shared look
+
+`shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector) have in common, so their copies cannot drift apart:
+
+- **`shared/base.css`**, linked before each tool's own `style.css`: the colour tokens for both themes, the page frame and two-column layout, cards, buttons and the `.file-button` file picker, inputs and the `[aria-invalid]` field style, the `.issues` problem list, the `.stale-banner` for a result that no longer matches its inputs, and the dialog with its sticky `.dialog-head`. A tool's `style.css` keeps only what is particular to it.
+- **`shared/theme.js`**, a plain script in each page's `<head>`: one light or dark choice for the whole site, stored in this browser as `vetr:theme`, or else the system setting. It drives each tool's `#theme-toggle` and fires a `themechange` event for pages that draw in theme colours. The landing page loads it too, so it follows the same choice.
+
+`sankey/` keeps its own denser visual language and stylesheet, and its tests serve its folder alone, so it does not link `shared/`.
+
 To run it locally, serve the repository root and open http://localhost:8000/:
 
 ```sh

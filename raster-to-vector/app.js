@@ -12,7 +12,6 @@ import { DEFAULTS, RasterToVectorError } from './core/index.js';
  * @typedef {{ width: number, height: number, data: Uint8ClampedArray }} Image
  */
 
-const THEME_KEY = 'raster-to-vector:theme';
 const EXAMPLES = { cartoon: 'examples/cartoon_flat.png', logo: 'examples/logo_holes.png' };
 /** The R defaults, except the longest side, which the page limits so that large photos stay quick. */
 const PAGE_DEFAULTS = { ...structuredClone(DEFAULTS), preprocess: { ...DEFAULTS.preprocess, maxDim: 600 } };
@@ -26,7 +25,7 @@ const el = {
   imageFile: byId('image-file'), imageInfo: byId('image-info'), convert: byId('convert'), stop: byId('stop'),
   status: byId('status'), issues: byId('issues'), inputPreview: byId('input-preview'), outputPreview: byId('output-preview'),
   outputCaption: byId('output-caption'), result: byId('result'), palette: byId('palette'), warnings: byId('warnings'),
-  warningList: byId('warning-list'), themeToggle: byId('theme-toggle'),
+  warningList: byId('warning-list'),
 };
 /** @type {HTMLElement[]} */
 const fields = [...document.querySelectorAll('[data-path]')].map((f) => /** @type {HTMLElement} */ (f));
@@ -324,19 +323,6 @@ byId('reset-options').addEventListener('click', () => { writeOptions(PAGE_DEFAUL
 byId('export-svg').addEventListener('click', () => state.result && download(`${baseName()}.svg`, new Blob([state.result.svg], { type: 'image/svg+xml' })));
 byId('export-result').addEventListener('click', () => state.result && download(`${baseName()}-vector.json`, new Blob([JSON.stringify(state.result, null, 2)], { type: 'application/json' })));
 
-function showTheme() {
-  const dark = document.documentElement.dataset.theme === 'dark';
-  el.themeToggle.textContent = dark ? '☾ Dark' : '☀ Light';
-  el.themeToggle.setAttribute('aria-pressed', String(dark));
-  el.themeToggle.title = `Switch to the ${dark ? 'light' : 'dark'} theme`;
-}
-el.themeToggle.addEventListener('click', () => {
-  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  try { localStorage.setItem(THEME_KEY, next); } catch {}
-  showTheme();
-});
-
 // ---------- API for scripts in the page ----------
 
 /** @type {any} */ (window).RasterToVector = {
@@ -348,7 +334,6 @@ el.themeToggle.addEventListener('click', () => {
   decodeImage,
 };
 
-showTheme();
 writeOptions(PAGE_DEFAULTS);
 if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage();
 document.documentElement.dataset.ready = 'true';

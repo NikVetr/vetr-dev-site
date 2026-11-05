@@ -6,15 +6,9 @@
   <meta name="description" content="Check whether stated probabilities match how often things happened, against thousands of simulated worlds of a calibrated forecaster.">
   <title>Forecast Calibration</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 26 26 6' stroke='%23fff' stroke-width='2.5' stroke-dasharray='3 3'/%3E%3Cpath d='M6 24 13 19 19 17 26 9' fill='none' stroke='%23ffb4b4' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
-  <script>
-    // Before first paint, so the page never flashes the wrong theme.
-    {
-      let theme = null;
-      try { theme = localStorage.getItem('forecast-calibration:theme'); } catch {}
-      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    }
-  </script>
+  <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
