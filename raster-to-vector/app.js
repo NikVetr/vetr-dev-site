@@ -265,18 +265,28 @@ async function convertFromPage() {
 
 // ---------- views ----------
 
-/** @param {Issue[]} issues */
+/** An option's name as its label shows it, without the parenthetical hint. @param {HTMLElement} field */
+function labelOf(field) {
+  const label = /** @type {HTMLLabelElement} */ (field.closest('label'));
+  const text = [...label.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent).join(' ');
+  return text.replace(/\s*\(.*\)\s*$/, '').trim();
+}
+
+/** Lists the problems by the options' labels (and the image), and marks those fields. @param {Issue[]} issues */
 function showIssues(issues) {
   el.issues.hidden = issues.length === 0;
   el.issues.replaceChildren();
-  for (const f of fields) f.removeAttribute('aria-invalid');
+  for (const f of [...fields, el.imageFile]) f.removeAttribute('aria-invalid');
   if (!issues.length) return;
   const list = document.createElement('ul');
   for (const issue of issues) {
+    const field = fields.find((f) => f.dataset.path === issue.path);
+    const image = issue.path === 'image' || issue.path.startsWith('image.');
+    (image ? el.imageFile : field)?.setAttribute('aria-invalid', 'true');
+    const where = image ? 'Image' : field ? labelOf(field) : issue.path;
     const li = document.createElement('li');
-    li.textContent = issue.path ? `${issue.path}: ${issue.message}` : issue.message;
+    li.textContent = where ? `${where}: ${issue.message}` : issue.message;
     list.append(li);
-    fields.find((f) => f.dataset.path === issue.path)?.setAttribute('aria-invalid', 'true');
   }
   el.issues.append(list);
 }

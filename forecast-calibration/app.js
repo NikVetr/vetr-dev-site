@@ -242,10 +242,10 @@ function showIssues(issues) {
     const field = tr.querySelector(`.${match[2] ?? 'probability'}`);
     if (field) field.setAttribute('aria-invalid', 'true');
   }
-  for (const name of ['simulations', 'plotWorlds', 'interval', 'seed', 'worldOpacity']) {
-    el[name].toggleAttribute('aria-invalid', issues.some((issue) => issue.path === name));
-  }
-  el.binsCount.toggleAttribute('aria-invalid', issues.some((issue) => issue.path === 'bins'));
+  // aria-invalid="true", not a bare attribute, which counts as false
+  const mark = (/** @type {HTMLElement} */ field, /** @type {boolean} */ bad) => (bad ? field.setAttribute('aria-invalid', 'true') : field.removeAttribute('aria-invalid'));
+  for (const name of ['simulations', 'plotWorlds', 'interval', 'seed', 'worldOpacity']) mark(el[name], issues.some((issue) => issue.path === name));
+  mark(el.binsCount, issues.some((issue) => issue.path === 'bins'));
 }
 
 // ---------- results ----------

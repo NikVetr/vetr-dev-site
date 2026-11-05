@@ -56,7 +56,7 @@ test('converts the example on load, runs options and uploads, and exposes the AP
   // an invalid option is reported at its field
   await page.getByLabel('Number of colours, k').fill('two');
   await page.getByRole('button', { name: 'Convert' }).click();
-  await expect(page.locator('#issues')).toContainText('quantize.k');
+  await expect(page.locator('#issues')).toContainText('Number of colours, k: must be');
   await expect(page.getByLabel('Number of colours, k')).toHaveAttribute('aria-invalid', 'true');
   await page.getByRole('button', { name: 'Reset options' }).click();
 

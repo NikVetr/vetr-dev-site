@@ -77,7 +77,7 @@ test('flags bad entry lines, and refines the crossword shown', async ({ page }) 
   await open(page);
   const entries = page.locator('#entries');
   await entries.fill('Frozen rain : Hail\nno colon\nMist : Fog\n');
-  await expect(page.locator('#entry-issues')).toContainText('entriesText line 2: has no ":"');
+  await expect(page.locator('#entry-issues')).toContainText('Line 2: has no ":"');
   await expect(entries).toHaveAttribute('aria-invalid', 'true');
   await page.getByRole('button', { name: 'Load example' }).click();
   await expect(page.locator('#entry-issues')).toBeHidden();

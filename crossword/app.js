@@ -136,6 +136,7 @@ function run(request) {
   setRunning(true);
   el.status.textContent = 'Laying out…';
   el.runIssues.hidden = true;
+  markFields([]);
   return new Promise((resolve, reject) => {
     const finish = () => {
       worker?.terminate();
@@ -275,17 +276,49 @@ function formatNumber(x) {
 
 // ---------- issues ----------
 
-/** @param {any} box @param {CrosswordError} error */
+/** The settings field for each request path a problem can be reported on. */
+const FIELDS = /** @type {Record<string, HTMLInputElement>} */ ({
+  'target.darkThreshold': el.darkThreshold, 'objective.desiredAreaRatio': el.desiredAreaRatio,
+  'objective.desiredHvRatio': el.desiredHvRatio, 'objective.pictureDistance': el.pictureDistance,
+  'search.seed': el.seed, 'search.nXwords': el.nXwords, 'search.nIter': el.nIter,
+  'search.maxAttemptsWord': el.maxAttemptsWord, 'search.maxAttemptsXword': el.maxAttemptsXword,
+  ...Object.fromEntries(TERMS.map((t) => [`objective.weights.${t}`, weightInputs[t]])),
+});
+
+/** A field's name as its label shows it (a weight's, with "weight"), without a parenthetical hint. @param {HTMLInputElement} field */
+function labelOf(field) {
+  const label = /** @type {HTMLLabelElement} */ (field.closest('label'));
+  const text = [...label.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent).join(' ');
+  return `${text.replace(/\s*\(.*\)\s*$/, '').trim()}${el.weights.contains(field) ? ' weight' : ''}`;
+}
+
+/** Where a problem is, in the page's words. @param {Issue} issue */
+function describe(issue) {
+  if (!issue.path) return issue.message;
+  if (issue.path === 'entriesText') return issue.line ? `Line ${issue.line}: ${issue.message}` : `Answers and clues: ${issue.message}`;
+  if (FIELDS[issue.path]) return `${labelOf(FIELDS[issue.path])}: ${issue.message}`;
+  if (issue.path === 'target' || issue.path.startsWith('target.')) return `Target picture: ${issue.message}`;
+  return `${issueLocation(issue)}: ${issue.message}`;
+}
+
+/** Lists a run's or the entries' problems and marks the settings fields they are on. @param {any} box @param {CrosswordError} error */
 function showIssues(box, error) {
   const list = document.createElement('ul');
   /** @type {Issue[]} */
   const issues = error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }];
-  list.replaceChildren(...issues.map((issue) => Object.assign(document.createElement('li'), {
-    textContent: issue.path ? `${issueLocation(issue)}: ${issue.message}` : issue.message,
-  })));
+  if (box === el.runIssues) markFields(issues);
+  list.replaceChildren(...issues.map((issue) => Object.assign(document.createElement('li'), { textContent: describe(issue) })));
   if (error.code === 'unplaceable') list.prepend(Object.assign(document.createElement('li'), { textContent: error.message }));
   box.replaceChildren(list);
   box.hidden = false;
+}
+
+/** @param {Issue[]} issues */
+function markFields(issues) {
+  for (const [path, field] of Object.entries(FIELDS)) {
+    if (issues.some((issue) => issue.path === path)) field.setAttribute('aria-invalid', 'true');
+    else field.removeAttribute('aria-invalid');
+  }
 }
 
 let checkTimer = 0;

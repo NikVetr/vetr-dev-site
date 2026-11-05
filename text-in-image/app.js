@@ -211,15 +211,42 @@ async function renderFromPage() {
 
 // ---------- views ----------
 
-/** @param {Pick<Issue, 'path' | 'message'>[]} issues */
+/** The form field for each request path a problem can be reported on. */
+const FIELDS = {
+  image: el.imageFile, text: el.text, seed: el.seed, quantize: el.quantizeOn, 'quantize.k': el.k,
+  'layout.rotation': el.rotation, 'layout.line_height': el.lineHeight, 'layout.line_widths': el.lineWidths,
+  'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
+  'color.ink_compensation': el.ink, 'color.background': el.background, 'render.scale': el.scale,
+};
+
+/** The field a request path belongs to: its own, or that of the nearest enclosing path. @param {string} path */
+function fieldFor(path) {
+  for (let p = path; p; p = p.replace(/(\.[^.[]*|\[\d+\])$/, '')) {
+    if (p in FIELDS) return /** @type {HTMLInputElement} */ (FIELDS[/** @type {keyof typeof FIELDS} */ (p)]);
+    if (!/[.[]/.test(p)) break;
+  }
+  return null;
+}
+
+/** A field's name as its label shows it, without the parenthetical hint. @param {HTMLInputElement} field */
+function labelOf(field) {
+  const label = /** @type {HTMLLabelElement} */ (field.labels?.[0]);
+  const text = [...label.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent).join(' ');
+  return text.replace(/\s*\(.*\)\s*$/, '').trim();
+}
+
+/** Lists the problems by the fields' labels, and marks those fields. @param {Pick<Issue, 'path' | 'message'>[]} issues */
 function showIssues(issues) {
+  for (const field of Object.values(FIELDS)) field.removeAttribute('aria-invalid');
   el.issues.hidden = issues.length === 0;
   el.issues.replaceChildren();
   if (!issues.length) return;
   const list = document.createElement('ul');
   for (const issue of issues) {
+    const field = issue.path ? fieldFor(issue.path) : null;
+    field?.setAttribute('aria-invalid', 'true');
     const item = document.createElement('li');
-    item.textContent = issue.path ? `${issue.path}: ${issue.message}` : issue.message;
+    item.textContent = field ? `${labelOf(field)}: ${issue.message}` : issue.path ? `${issue.path}: ${issue.message}` : issue.message;
     list.append(item);
   }
   el.issues.append(list);

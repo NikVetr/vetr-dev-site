@@ -201,7 +201,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
   outline-offset: 1px;
 }
 /* A field a problem is reported on: a thick red border and a tint, beside the ⚠ message. */
-[aria-invalid="true"] {
+[aria-invalid="true"], .file-button:has(input[aria-invalid="true"]) {
   border: 2px solid var(--alert);
   background: var(--alert-soft);
 }

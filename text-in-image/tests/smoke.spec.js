@@ -57,13 +57,16 @@ test('shows every problem with a setting, and recovers', async ({ page }) => {
   await page.getByLabel('Number of colours').fill('0');
   await page.getByLabel('Size rounds').fill('');
   await page.getByRole('button', { name: 'Render' }).click();
-  await expect(page.locator('#issues li')).toHaveText(['quantize.k: must be an integer from 1 to 256', 'layout.n_rounds: must be an integer from 1 to 50']);
+  await expect(page.locator('#issues li')).toHaveText(['Number of colours: must be an integer from 1 to 256', 'Size rounds: must be an integer from 1 to 50']);
+  await expect(page.getByLabel('Number of colours')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByLabel('Size rounds')).toHaveAttribute('aria-invalid', 'true');
   await expect(page.locator('#status')).toHaveText('Not rendered.');
   await page.getByLabel('Number of colours').fill('6');
   await page.getByLabel('Size rounds').fill('4');
   await page.getByRole('button', { name: 'Render' }).click();
   await expect(page.locator('#palette li')).toHaveCount(6);
   await expect(page.locator('#issues')).toBeHidden();
+  await expect(page.getByLabel('Number of colours')).not.toHaveAttribute('aria-invalid');
 });
 
 test('fits a 390 px phone without horizontal scrolling', async ({ page }) => {
