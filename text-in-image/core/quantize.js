@@ -100,7 +100,7 @@ export function quantizeOklab(raster, q, rng) {
   }
   if (!first.length) throw unusable('image', 'has no opaque pixels (alpha^0.5 at least quantize.transparency_thresh)');
   if (first.length < q.k) {
-    throw unusable('quantize.k', `is ${q.k}, but the image has only ${first.length} distinct colours (OKLab rounded to quantize.grid); use at most ${first.length}, or quantize: null to keep the colours as they are`);
+    throw unusable('quantize.k', `is ${q.k}, but the image has only ${first.length} distinct colour${first.length === 1 ? '' : 's'} (OKLab rounded to quantize.grid); use at most ${first.length}, or quantize: null to keep the colours as they are`);
   }
 
   const points = new Float64Array(first.length * 3);

@@ -31,7 +31,7 @@ const svg = renderSvg(result, { background: '#7f7f7f' });
 | Member | Does |
 | --- | --- |
 | `submit(request)` | Runs the request, loads its image, text and settings into the page, and resolves to the result. An invalid request rejects with a `TextInImageError` and leaves the page unchanged. |
-| `getRequest()` | Returns the request the page's image, text and settings currently describe. |
+| `getRequest()` | Returns the request the page's image, text and settings currently describe. Its `image.data` is a `Uint8ClampedArray`; convert it with `Array.from` before writing the request as JSON. |
 | `getResult()` | Returns the result on display, or `null`. |
 | `exportSvgText()` | Returns the text fill on display as SVG text, on the page's background colour. |
 | `exportPngBlob()` | Returns a Promise of the same fill as a PNG `Blob`, at the result's `canvas` size. |
