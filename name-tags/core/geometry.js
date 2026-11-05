@@ -96,9 +96,22 @@ export function pointInPolygon(x, y, rings) {
   return inside;
 }
 
+/** Every segment of a polygon as [ax, ay, bx, by, xmin, ymin, xmax, ymax]. @param {Polygon} rings */
+function segments(rings) {
+  const out = [];
+  for (const r of rings) {
+    for (let k = 0; k + 3 < r.length; k += 2) {
+      const ax = r[k]; const ay = r[k + 1]; const bx = r[k + 2]; const by = r[k + 3];
+      out.push([ax, ay, bx, by, Math.min(ax, bx), Math.min(ay, by), Math.max(ax, bx), Math.max(ay, by)]);
+    }
+  }
+  return out;
+}
+
 /**
  * st_distance between two polygons: 0 when they overlap or touch, else the
- * least distance between their boundaries.
+ * least distance between their boundaries. Segment pairs whose boxes are
+ * already farther apart than the best distance so far are skipped.
  * @param {Polygon} a @param {Polygon} b
  */
 export function polygonDistance(a, b) {
@@ -106,19 +119,19 @@ export function polygonDistance(a, b) {
   const [bx0, by0, bx1, by1] = bounds(b);
   const boxesMeet = ax0 <= bx1 && bx0 <= ax1 && ay0 <= by1 && by0 <= ay1;
   if (boxesMeet && (pointInPolygon(a[0][0], a[0][1], b) || pointInPolygon(b[0][0], b[0][1], a))) return 0;
+  const sa = segments(a);
+  const sb = segments(b);
   let best = Infinity;
-  for (const ra of a) {
-    for (let i = 0; i + 3 < ra.length; i += 2) {
-      for (const rb of b) {
-        for (let j = 0; j + 3 < rb.length; j += 2) {
-          const seg = [ra[i], ra[i + 1], ra[i + 2], ra[i + 3], rb[j], rb[j + 1], rb[j + 2], rb[j + 3]];
-          if (boxesMeet && segmentsMeet(...seg)) return 0;
-          const d = Math.min(
-            pointSegment(seg[0], seg[1], seg[4], seg[5], seg[6], seg[7]), pointSegment(seg[2], seg[3], seg[4], seg[5], seg[6], seg[7]),
-            pointSegment(seg[4], seg[5], seg[0], seg[1], seg[2], seg[3]), pointSegment(seg[6], seg[7], seg[0], seg[1], seg[2], seg[3]));
-          if (d < best) best = d;
-        }
-      }
+  for (const p of sa) {
+    for (const q of sb) {
+      const gx = Math.max(0, p[4] - q[6], q[4] - p[6]);
+      const gy = Math.max(0, p[5] - q[7], q[5] - p[7]);
+      if (gx * gx + gy * gy >= best * best) continue;
+      if (gx === 0 && gy === 0 && segmentsMeet(p[0], p[1], p[2], p[3], q[0], q[1], q[2], q[3])) return 0;
+      const d = Math.min(
+        pointSegment(p[0], p[1], q[0], q[1], q[2], q[3]), pointSegment(p[2], p[3], q[0], q[1], q[2], q[3]),
+        pointSegment(q[0], q[1], p[0], p[1], p[2], p[3]), pointSegment(q[2], q[3], p[0], p[1], p[2], p[3]));
+      if (d < best) best = d;
     }
   }
   return best;
@@ -126,24 +139,31 @@ export function polygonDistance(a, b) {
 
 // ---------- Clipper ----------
 
-/** A power-of-two scale putting every coordinate within Clipper's fast integer range. @param {Ring[]} rings */
-function clipperScale(rings) {
+/**
+ * Coordinates are shifted to their bounding box's centre and scaled by a
+ * power of two so every one stays within Clipper's fast integer range
+ * (|v| < 47,453,132 in its JavaScript build).
+ * @param {Ring[]} rings
+ */
+function clipperFrame(rings) {
   const [x0, y0, x1, y1] = bounds(rings);
-  const extent = Math.max(Math.abs(x0), Math.abs(y0), Math.abs(x1), Math.abs(y1), 1e-300);
-  return 2 ** Math.floor(Math.log2(1e9 / extent));
+  const cx = (x0 + x1) / 2;
+  const cy = (y0 + y1) / 2;
+  const half = Math.max(x1 - x0, y1 - y0, 1e-300) / 2;
+  return { cx, cy, s: 2 ** Math.floor(Math.log2(4.5e7 / half)) };
 }
 
-/** @param {Ring} r @param {number} s */
-function toPath(r, s) {
+/** @param {Ring} r @param {{ cx: number, cy: number, s: number }} f */
+function toPath(r, f) {
   const path = [];
-  for (let k = 0; k + 2 < r.length; k += 2) path.push({ X: Math.round(r[k] * s), Y: Math.round(r[k + 1] * s) }); // drop the closing point
+  for (let k = 0; k + 2 < r.length; k += 2) path.push({ X: Math.round((r[k] - f.cx) * f.s), Y: Math.round((r[k + 1] - f.cy) * f.s) }); // drop the closing point
   return path;
 }
 
-/** @param {{ X: number, Y: number }[]} path @param {number} s @returns {Ring} */
-function fromPath(path, s) {
+/** @param {{ X: number, Y: number }[]} path @param {{ cx: number, cy: number, s: number }} f @returns {Ring} */
+function fromPath(path, f) {
   const r = [];
-  for (const p of path) r.push(p.X / s, p.Y / s);
+  for (const p of path) r.push(p.X / f.s + f.cx, p.Y / f.s + f.cy);
   r.push(r[0], r[1]);
   return r;
 }
@@ -159,7 +179,7 @@ const FILL = /** @type {const} */ ({ evenodd: 'pftEvenOdd', nonzero: 'pftNonZero
  */
 function clip(op, subject, subjectFill, clip = [], clipFill = 'nonzero') {
   if (!subject.length) return [];
-  const s = clipperScale([...subject, ...clip]);
+  const s = clipperFrame([...subject, ...clip]);
   const c = new ClipperLib.Clipper();
   for (const r of subject) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptSubject, true);
   for (const r of clip) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptClip, true);

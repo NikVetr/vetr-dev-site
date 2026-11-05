@@ -117,7 +117,7 @@ test('geometry: erosion, distance, gaps', () => {
   const sq = [0, 0, 1, 0, 1, 1, 0, 1, 0, 0];
   const e = erode([sq], 0.1);
   assert.equal(e.length, 1);
-  assert.ok(Math.abs(polygonArea(e[0]) - 0.64) < 1e-8); // Clipper works on a ~1e-9 grid
+  assert.ok(Math.abs(polygonArea(e[0]) - 0.64) < 1e-7); // Clipper works on a grid of ~2e-8 of the extent
   const circle = Array.from({ length: 201 }, (_, i) => [Math.cos(2 * Math.PI * i / 200), Math.sin(2 * Math.PI * i / 200)]).flat();
   const ring = erode([circle], 0.1);
   assert.equal(ring.length, 1); // no slivers left at the vertices
