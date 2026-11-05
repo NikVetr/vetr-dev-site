@@ -25,13 +25,13 @@ The size comes from a project's size in code: the hand-written lines of the tool
 | Pocket Language Guide | 39,474 | | 39,474 | 3x3 | |
 | Color Palette Extender | 20,611 | | 20,611 | 3x3 | |
 | Sankey Diagrams | 8,786 | 11,499 (polylines) | 20,285 | 3x3 | |
-| Statistical Intuitions (13 entries) | 20,297 | | 20,297 | 3x3 | |
+| Statistical Intuitions (13 entries) | 20,297 | | 20,297 | 3x3 | its picture shows the hypercube too, which the gallery lists |
 | autoCHAIR | 13,944 | | 13,944 | 2x2 | down: one agenda and timeline, much of its code is styling |
 | Multipanel Layout GUI | 6,943 | | 6,943 | 2x2 | |
 | Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2x2 | |
 | Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 1x3 | down to a tall one-column tile: its room is portrait, and at four columns each 3x3 tile needs a 1x3 beside it |
 | Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2x2 | |
-| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | 1x2 | down: a single figure, and the wall needs its two small tiles to close |
+| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | | no tile of its own: an entry in the Statistical Intuitions gallery, whose tile turns it on hover (as a `1x2` tile, give it back its card) |
 | Signature Correction | 2,952 | 491 | 3,443 | 2x2 | |
 | Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2x3 | up: a whole grid of answers to read |
 | Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 1x3 | down to a tall one-column tile, for the same reason; the tool lays the card out tall |
@@ -68,7 +68,7 @@ The cards that drive a page (agendamatic, layout-gui, sankey) need Playwright: s
 - **`shared/helix.js`**: the DNA double helix of R's `draw_DNA` as geometry, the strands' visible pieces and the base pairs as variable-width lines, and `ribbon()`, R's `polylines()` outline of such a line. name-tags draws its tags' helices with it, and `helix/` (the helix and braid generator) its helices.
 - **`shared/vendor/fontkit.esm.js`**: fontkit, which text-in-image, name-tags and message-collage read glyph outlines and advance widths with. It is a copy of the Pocket Language Guide's bundle; `VERSIONS.md` and `LICENSES.md` beside it say where it comes from.
 
-One tool reads another's files: message-collage loads the upright Inter and Source Serif Pro faces from `name-tags/fonts/` rather than keeping copies, so moving or renaming them breaks it (`message-collage/core/catalogue.js` lists the paths).
+One tool reads another's files: message-collage loads the upright Inter and Source Serif Pro faces from `name-tags/fonts/` rather than keeping copies, so moving or renaming them breaks it (`message-collage/core/catalogue.js` lists the paths). The intuitions gallery's hypercube entry shows the landing page's `assets/cards/hypercube.svg`.
 
 The tools import these by relative path (`../../shared/rng.js`), which works over HTTP from the site root and in Node from a clone. `shared/package.json` marks the folder as ES modules for Node.
 

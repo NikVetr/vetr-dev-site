@@ -1,17 +1,22 @@
-// Statistical Intuitions: the gallery's threshold-model figure at the parameters of its index
-// thumbnail (one trait, liability mean 0.4, thresholds -0.6, 0.5 and 1.4): the normal liability
-// with each category's area filled in the gallery's ordinal teal ramp, numbered as the entry's
-// full figure numbers them. The loop is the entry's main interaction, moving the mean: it swings
-// one SD either way and back, a sine, so the category areas grow and shrink under the fixed
-// thresholds. The density's shape does not depend on its mean, so the move is a translation
-// of the curve, clipped to each category's band.
+// Statistical Intuitions: two of the gallery's entries side by side. The threshold-model figure
+// at the parameters of its index thumbnail (one trait, liability mean 0.4, thresholds -0.6, 0.5
+// and 1.4): the normal liability with each category's area filled in the gallery's ordinal teal
+// ramp, numbered as the entry's full figure numbers them; and the hypercube, which the gallery
+// lists too, as the hypercube card draws it (cards/hypercube.mjs).
+// The loop is both entries' motion at once, over the hypercube plan's 24.8 s cycle: the
+// liability mean swings one SD either way and back, a sine, four times, so the category areas
+// grow and shrink under the fixed thresholds (the density's shape does not depend on its mean,
+// so the move is a translation of the curve, clipped to each category's band); and
+// assets/players/hypercube.js turns the hypercube through the whole plan, which ends where it
+// began. The player keeps time by the swing's CSS animation, so the two wrap together.
 import { compute } from '../../../intuitions/threshold-model/compute.js';
 import { DOMAIN } from '../../../intuitions/threshold-model/figure.js';
 import { dnorm } from '../../../intuitions/lib/normal.js';
 import { H, W, art, num, polyline } from '../svg.mjs';
+import { hypercubeStill } from './hypercube.mjs';
 
-const PERIOD = 6;
 const SWING = 1;   // SD units
+const SWINGS = 4;  // swings of the mean in one hypercube cycle
 
 /** The entry's ramp class of category c of k (figure.js rampClass). @param {number} c @param {number} k */
 const ramp = (c, k) => (k === 1 ? 0 : Math.round((c * 5) / (k - 1)));
@@ -23,11 +28,17 @@ const CAT = {
 
 export function build() {
   const trait = /** @type {any} */ (compute({ means: [0.4], thresholds: [[-0.6, 0.5, 1.4]] })).traits[0];
-  const [pad, top, bottom] = [10, 24, 12];
+  // The liability on the left two thirds, the hypercube on the right.
+  const cube = 112;
+  const figW = W - cube - 14;
+  const [pad, top, bottom] = [8, 24, 12];
   const base = H - bottom;
-  const x = (/** @type {number} */ v) => pad + ((v - DOMAIN[0]) / (DOMAIN[1] - DOMAIN[0])) * (W - 2 * pad);
+  const x = (/** @type {number} */ v) => pad + ((v - DOMAIN[0]) / (DOMAIN[1] - DOMAIN[0])) * (figW - 2 * pad);
   const y = (/** @type {number} */ d) => base - (d / 0.5) * (base - top);
-  const perSd = (W - 2 * pad) / (DOMAIN[1] - DOMAIN[0]);
+  const perSd = (figW - 2 * pad) / (DOMAIN[1] - DOMAIN[0]);
+  const hc = hypercubeStill(W - cube - 4, (H - cube) / 2, cube);
+  const period = hc.plan.frames / hc.plan.stepsPerSecond;
+  const swingPeriod = period / SWINGS;
 
   // The density over the domain widened by the swing, at the still's mean, sampled every 2 units.
   const [lo, hi] = [DOMAIN[0] - SWING, DOMAIN[1] + SWING];
@@ -46,25 +57,29 @@ ${edges.slice(0, -1).map((a, c) => `<clipPath id="intuitions-band${c}">${clip(a,
   const thresholds = trait.thresholds.map((/** @type {number} */ t) => `M${num(x(t))} ${base}V${top - 2}`).join('');
   const body = `${bands}
 <g clip-path="url(#intuitions-domain)"><path class="move ink-line" d="${polyline(curve)}"/></g>
-<path class="baseline" d="M${pad} ${base}H${W - pad}"/>
+<path class="baseline" d="M${pad} ${base}H${num(figW - pad)}"/>
 <path class="threshold" d="${thresholds}"/>
-<g class="labels">${labels}</g>`;
+<g class="labels">${labels}</g>
+${hc.body}`;
 
   // The mean's swing, a sine sampled at 24 stops.
   const stops = Array.from({ length: 25 }, (_, i) => `${num((100 * i) / 24, 3)}% { transform: translateX(${num(SWING * perSd * Math.sin((2 * Math.PI * i) / 24), 2)}px); }`).join(' ');
   const cats = [0, 1, 2, 3, 4, 5].map((i) => `& .cat-${i} { fill: ${CAT.light[i]}; } :root[data-theme="dark"] & .cat-${i} { fill: ${CAT.dark[i]}; }`).join('\n');
   return art({
     name: 'intuitions',
-    period: PERIOD,
+    period,
+    player: 'hypercube',
+    playerBox: hc.box,
     defs,
     body,
-    css: `${cats}
+    css: `${hc.css}
+${cats}
 & .ink-line { fill: none; stroke: var(--art-ink); stroke-width: 2; }
 & .move { will-change: transform; }
 & .baseline { stroke: var(--art-muted); stroke-width: 1; }
 & .threshold { stroke: var(--art-ink); stroke-width: 1.5; }
 & .labels { fill: var(--art-muted); font: 600 11px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; }`,
-    loop: `& .move { animation: intuitions-mean ${PERIOD}s linear infinite; }
+    loop: `& .move { animation: intuitions-mean ${num(swingPeriod, 4)}s linear infinite; }
 @keyframes intuitions-mean { ${stops} }`,
   });
 }

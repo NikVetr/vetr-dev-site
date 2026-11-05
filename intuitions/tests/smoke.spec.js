@@ -14,8 +14,10 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(13);
+  await expect(page.locator('.entry-card')).toHaveCount(14);
+  // Thirteen thumbnails drawn by the entries' own figure code, and the hypercube's still, an image.
   await expect(page.locator('.entry-card .thumb svg')).toHaveCount(13);
+  await expect(page.locator('.entry-card .thumb img[src="/assets/cards/hypercube.svg"]')).toHaveCount(1);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
