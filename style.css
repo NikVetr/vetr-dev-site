@@ -89,6 +89,17 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   letter-spacing: -0.01em;
 }
 .project-card p { margin: 0 0 var(--space-1); color: var(--muted); }
+.project-date {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+}
 
 /* ---------- Links / button ---------- */
 a { color: var(--primary); text-underline-offset: 3px; text-decoration-thickness: 2px; }
