@@ -37,6 +37,8 @@ Tools that scripts and agents can use follow one shape. `forecast-calibration/` 
 
 `hypercube/` replays trajectories solved in R rather than computing them: its plans are data files, `hypercube/plans/k<k>.json`, written by `scripts/export_web_plan.R` in [NikVetr/shape_rotation](https://github.com/NikVetr/shape_rotation), and its core's `submit(request, plan)` takes the decoded plan as a second argument (the page and the CLI load it). It draws its 3-D view with `intuitions/lib/geom3d.js`.
 
+`photomosaic/` takes summaries rather than whole photos: its request carries the target's RGBA pixels and each photo's average colour, which the page and the command line compute from the images (`core/image.js` ports ImageMagick 6's scaling, so the averages are R's). Its command line therefore also takes images, `node photomosaic/cli.mjs --target target.png --photos folder/`, and reads JPEG with jpeg-js's decoder in `photomosaic/vendor/`.
+
 `sankey/` predates this shape. Its `window.SankeyApp.submit` needs the page's DOM, so its command line, `sankey/scripts/render.cjs`, drives headless Chromium through Playwright, and its errors carry only a message. `sankey/api.md` describes it.
 
 Core tests run with `node --test` in the tool's folder. Browser smoke tests use Playwright where a tool has them, through `npm ci` or a `node_modules` link to an existing install.
