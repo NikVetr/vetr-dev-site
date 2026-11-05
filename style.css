@@ -99,9 +99,18 @@ body {
   gap: var(--space-2) var(--space-4);
   padding-block: var(--space-2);
 }
-/* Wherever there is the width, the welcome sits beside the name, so the cards start higher. */
+/* Wherever there is the width, the welcome sits beside the name and takes the rest of the row,
+   set a little larger as the page grows and in as many columns of a comfortable measure (45 to
+   65 characters) as fit, up to three. */
 @media (min-width: 52rem) {
-  .masthead { grid-template-columns: fit-content(18rem) minmax(0, 68ch); align-items: start; }
+  .masthead { grid-template-columns: fit-content(18rem) minmax(0, 1fr); align-items: start; }
+}
+#intro p {
+  max-width: none;
+  font-size: clamp(1rem, 0.75rem + 0.45vw, 1.4rem);
+  line-height: 1.55;
+  columns: 3 22em;
+  column-gap: 2.5em;
 }
 h1 {
   margin: 0;
@@ -114,6 +123,7 @@ h1 {
   color: var(--muted);
 }
 #intro p { margin: 0; }
+#intro h2 { margin-bottom: 0.5rem; }
 
 /* ---------- Main ---------- */
 main.container { padding-block: var(--space-3) var(--space-4); }
