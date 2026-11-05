@@ -348,7 +348,8 @@ export function niceTicks(lo, hi, count = 4) {
 /**
  * Score against iteration. axis 'late' fits the y-axis to the last 80% of iterations, as
  * the R version's trace does, and notes how far below it the opening climb starts; 'all'
- * fits every score. cursor marks an iteration (the state on view in the page).
+ * fits every score. cursor marks an iteration (the state on view in the page); the root's
+ * data-plot-* and data-lo/hi attributes give the scales, so the page can move it.
  * @param {import('./index.js').Result} result
  * @param {{ width?: number, height?: number, theme?: Theme, axis?: 'late' | 'all', cursor?: number }} [options]
  */
@@ -378,7 +379,7 @@ export function renderTraceSvg(result, { width = 720, height = 260, theme = 'lig
     return `${d}H${r2(x(N))}`;
   };
   const fs = 11.5;
-  let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" font-family="${FONT}" role="img" aria-label="Score against iteration" data-plot-left="${m.left}" data-plot-width="${pw}" data-iterations="${N}">`;
+  let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" font-family="${FONT}" role="img" aria-label="Score against iteration" data-plot-left="${m.left}" data-plot-width="${pw}" data-plot-top="${m.top}" data-plot-height="${ph}" data-lo="${lo}" data-hi="${hi}" data-iterations="${N}">`;
   out += `<rect width="100%" height="100%" fill="${c.surface}"/>`;
   out += `<defs><clipPath id="trace-clip"><rect x="${m.left}" y="${m.top}" width="${pw}" height="${ph}"/></clipPath></defs>`;
   for (const v of niceTicks(lo, hi)) {
@@ -412,10 +413,10 @@ export function renderTraceSvg(result, { width = 720, height = 260, theme = 'lig
     let i = 0;
     while (i + 1 < steps.iteration.length && steps.iteration[i + 1] <= cursor) i++;
     const v = steps.score[i];
-    out += `<line class="cursor" x1="${r2(x(cursor))}" x2="${r2(x(cursor))}" y1="${m.top}" y2="${m.top + ph}" stroke="${c.muted}" stroke-dasharray="2 2"/>`;
-    out += v < lo
-      ? `<path d="M${r2(x(cursor) - 5)} ${m.top + ph - 8}h10l-5 7z" fill="${c.current}"/>`
-      : `<circle cx="${r2(x(cursor))}" cy="${r2(y(v))}" r="4.5" fill="${c.current}" stroke="${c.surface}" stroke-width="2"/>`;
+    // the current score's dot, or a ▼ at the bottom edge while it is below the axis
+    out += `<g class="cursor" transform="translate(${r2(x(cursor))} 0)"><line y1="${m.top}" y2="${m.top + ph}" stroke="${c.muted}" stroke-dasharray="2 2"/>`;
+    out += `<path class="cursor-below" d="M-5 ${m.top + ph - 8}h10l-5 7z" fill="${c.current}" visibility="${v < lo ? 'visible' : 'hidden'}"/>`;
+    out += `<circle class="cursor-dot" cy="${r2(v < lo ? m.top + ph : y(v))}" r="4.5" fill="${c.current}" stroke="${c.surface}" stroke-width="2" visibility="${v < lo ? 'hidden' : 'visible'}"/></g>`;
   }
   return `${out}</svg>`;
 }

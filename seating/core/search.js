@@ -152,7 +152,10 @@ export function runSearch(problem, { onProgress } = {}) {
     const prop = newTerms.map((t) => t.table + t.pairs + t.constraints);
     if (C) {
       for (let s = 0; s < n; s++) {
-        d[s] = rsum(fromB.map((j) => C[s * n + j])) - rsum(fromA.map((j) => C[s * n + j]));
+        // a sum of one term is that term, so the common single swap skips rsum
+        d[s] = k === 1
+          ? C[s * n + fromB[0]] - C[s * n + fromA[0]]
+          : rsum(fromB.map((j) => C[s * n + j])) - rsum(fromA.map((j) => C[s * n + j]));
       }
       newTableOf.set(tableOf);
       for (const s of fromA) newTableOf[s] = b;

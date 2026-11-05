@@ -39,6 +39,8 @@ let playing = false;
 let geo = null;
 /** @type {null | { finish: () => void }} */
 let tween = null;
+/** What the score chart on view was drawn for (see drawTrace). */
+let traceKey = '';
 
 const theme = () => /** @type {'light' | 'dark'} */ (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
 const fmt = (/** @type {number} */ x) => x.toLocaleString('en-US');
@@ -87,6 +89,7 @@ export function loadReplay(result, request, { autoplay = false } = {}) {
   };
   el.timeline.max = String(seats.length - 1);
   geo = null;
+  traceKey = '';
   if (autoplay && seats.length > 1) {
     pos = 0;
     final = false;
@@ -126,9 +129,12 @@ function derived(i) {
   return d;
 }
 
+/** The chart's width, as the resize observer last saw it (reading it would force a layout). */
+const chartWidth = () => observedWidth || el.chart.clientWidth;
+
 function geometry() {
   const r = /** @type {NonNullable<typeof run>} */ (run);
-  const width = Math.max(280, Math.floor(el.chart.clientWidth));
+  const width = Math.max(280, Math.floor(chartWidth()));
   if (geo && geo.width === width) return geo;
   const names = r.request.guests.map((/** @type {any} */ g) => g.id);
   const choice = el.arrangement.value;
@@ -227,11 +233,25 @@ function drawStatus() {
 /** @param {string} s */
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+/** The score chart, drawn once for a result, width, theme and axis; each state only moves its cursor. */
 function drawTrace() {
   const r = /** @type {NonNullable<typeof run>} */ (run);
-  const width = Math.max(280, Math.floor(el.trace.clientWidth));
-  const height = Math.round(Math.min(240, Math.max(170, width * 0.34)));
-  el.trace.innerHTML = renderTraceSvg(r.result, { width, height, theme: theme(), axis: el.traceAxis.value, cursor: r.iteration[pos] });
+  const width = Math.max(280, Math.floor(chartWidth()));
+  const key = `${width} ${theme()} ${el.traceAxis.value}`;
+  if (key !== traceKey) {
+    traceKey = key;
+    const height = Math.round(Math.min(240, Math.max(170, width * 0.34)));
+    el.trace.innerHTML = renderTraceSvg(r.result, { width, height, theme: theme(), axis: el.traceAxis.value, cursor: r.iteration[pos] });
+  }
+  const svg = /** @type {SVGSVGElement} */ (el.trace.querySelector('svg'));
+  const d = Object.fromEntries(['plotLeft', 'plotWidth', 'plotTop', 'plotHeight', 'lo', 'hi', 'iterations'].map((k) => [k, Number(svg.dataset[k])]));
+  const v = r.score[pos];
+  const below = v < d.lo;
+  /** @type {SVGGElement} */ (svg.querySelector('.cursor')).setAttribute('transform', `translate(${(d.plotLeft + (r.iteration[pos] / d.iterations) * d.plotWidth).toFixed(2)} 0)`);
+  const dot = /** @type {SVGCircleElement} */ (svg.querySelector('.cursor-dot'));
+  dot.setAttribute('cy', (below ? d.plotTop + d.plotHeight : d.plotTop + ((d.hi - v) / (d.hi - d.lo)) * d.plotHeight).toFixed(2));
+  dot.setAttribute('visibility', below ? 'hidden' : 'visible');
+  /** @type {SVGPathElement} */ (svg.querySelector('.cursor-below')).setAttribute('visibility', below ? 'visible' : 'hidden');
 }
 
 /** @param {Derived} d */
@@ -449,13 +469,13 @@ el.trace.addEventListener('click', (/** @type {PointerEvent} */ event) => {
   draw();
 });
 
-let width = 0;
-new ResizeObserver(() => {
-  if (el.chart.clientWidth !== width) {
-    width = el.chart.clientWidth;
-    geo = null;
-    if (run && !tween) draw();
-  }
+let observedWidth = 0;
+new ResizeObserver(([entry]) => {
+  const w = entry.contentRect.width;
+  if (w === observedWidth) return;
+  observedWidth = w;
+  geo = null;
+  if (run && !tween) draw();
 }).observe(el.chart);
 document.addEventListener('themechange', () => { if (run && !tween) draw(); });
 
