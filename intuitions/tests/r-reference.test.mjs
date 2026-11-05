@@ -12,6 +12,7 @@ import {
   compute as computeCorrelation, det3, entryInterval, equicorrelationEigenvalues, expectedWidthSample, expectedWidthUniform, zeroPairRange,
 } from '../correlation-geometry/compute.js';
 import { compute as computeDag } from '../dag-adjustment/compute.js';
+import { bbp, compute as computeMp, mpDensity, mpDistribution, mpLaw, principalComponents } from '../marchenko-pastur/compute.js';
 import { betaI, gammaP, gammaQ, lgamma, logGammaP, ptTwoSided, qgamma, qtTwoSided } from '../lib/special.js';
 import {
   batchDesign, bhAdjust, circularShiftTest, compute as computeNull, effectiveDfTest, fisherTest, hypergeometric, neweyWestTest, oneSampleTest, pearsonTest, twoStepTests, welchTest,
@@ -522,4 +523,104 @@ test('null-pvalues enrichment: dhyper, phyper and fisher.test exactly; the exact
     nearExact(exact.shortcut.rejectionRate, { rate: script.nonEmpty[i], n: Math.round(2000 * script.nonEmptyShare[i]) }, `script run ${i}, with a hit`);
     assert.ok(script.duplicateShare[i] < 0.002); // genes drawn with replacement: about 0.1% repeats
   });
+});
+
+// ---------- marchenko-pastur, against RMTstat and the original scripts (fixtures/r-marchenko-pastur.json) ----------
+
+const mpRef = JSON.parse(readFileSync(new URL('fixtures/r-marchenko-pastur.json', import.meta.url), 'utf8'));
+/** Results are a union over views; tests read them untyped. @param {unknown} params @returns {any} */
+const mpEntry = (params) => computeMp(params);
+/** A simulated mean within k standard errors (of the two means' difference) of R's. @param {number} a @param {number} sa @param {number} na @param {number} b @param {number} sb @param {number} nb @param {string} what */
+function sameMean(a, sa, na, b, sb, nb, what, k = 4) {
+  assert.ok(Math.abs(a - b) <= k * Math.sqrt((sa * sa) / na + (sb * sb) / nb), `${what}: ${a} vs R ${b}`);
+}
+
+test('marchenko-pastur: the density, edges, distribution function and quantiles match RMTstat (ndf = n − 1)', () => {
+  for (const c of mpRef.density) {
+    const law = mpLaw(c.n, c.p, c.variance);
+    const dist = mpDistribution(law.gamma, c.variance);
+    // With p > n − 1, qmp(0) is the point mass at 0; otherwise the lower edge.
+    assert.ok(Math.abs((law.zeroShare > 0 ? 0 : law.lower) - c.edges[0]) < 1e-15 * c.variance, `lower ${c.n}, ${c.p}`);
+    if (law.zeroShare > 0) assert.equal(dist.quantile(law.zeroShare / 2), 0);
+    assert.ok(relative(law.upper, c.edges[1]) < 1e-13);
+    // The fixture's edges carry 15 digits, so its first and last x can fall a hair inside the support.
+    c.x.forEach((/** @type {number} */ x, /** @type {number} */ i) => {
+      if (i > 0 && i < c.x.length - 1) assert.ok(Math.abs(mpDensity(x, law.gamma, c.variance) - c.density[i]) < 1e-12 * (1 + c.density[i]), `dmp(${x})`);
+    });
+    // The closed form against R's integrate() of dmp from the edge, and against pmp, which
+    // is itself approximate (to about 1e-6 near γ = 1).
+    c.cdfAt.forEach((/** @type {number} */ x, /** @type {number} */ i) => {
+      assert.ok(Math.abs(dist.cdf(x) - c.cdfIntegrated[i]) < 1e-11, `integrate(${x}): ${dist.cdf(x)} vs ${c.cdfIntegrated[i]}`);
+      assert.ok(Math.abs(dist.cdf(x) - c.cdf[i]) < 2e-6, `pmp(${x})`);
+    });
+    // qmp is coarser still: the exact distribution function puts its quantiles within
+    // 1e-4 of their probabilities (pmp(qmp(0.25)) is 0.250014 at n = 200, p = 20), while
+    // this entry's are exact to rounding.
+    c.probs.forEach((/** @type {number} */ q, /** @type {number} */ i) => {
+      if (q <= law.zeroShare) return;
+      assert.ok(Math.abs(dist.cdf(c.quantiles[i]) - q) < 1e-4, `qmp(${q}): F(${c.quantiles[i]}) = ${dist.cdf(c.quantiles[i])}`);
+      assert.ok(Math.abs(dist.cdf(dist.quantile(q)) - q) < 1e-9);
+    });
+    // The script's edges take ndf = n.
+    const script = mpEntry({ view: 'noise', n: c.n, p: Math.min(c.p, 500), variance: c.variance, replicates: 1 }).scriptEdges;
+    assert.ok(relative(script.upper, c.scriptEdges[1]) < 1e-13);
+  }
+});
+
+test("marchenko-pastur noise: marchenko–pastur_intuitions.R's simulation, index by index, and a wide matrix", () => {
+  const ref = mpRef.script;
+  const r = mpEntry({ view: 'noise', n: ref.n, p: ref.p, variance: ref.variance, replicates: ref.replicates, seed: 3 });
+  // Each index's mean, against R's with its own spread.
+  r.sample.byIndex.forEach((/** @type {any} */ b, /** @type {number} */ k) => {
+    sameMean(b.mean, ref.indexSd[k], ref.replicates, ref.indexMean[k], ref.indexSd[k], ref.replicates, `index ${k + 1}`);
+  });
+  const se = (/** @type {number} */ p) => Math.sqrt((p * (1 - p)) * (2 / ref.replicates));
+  assert.ok(Math.abs(r.sample.largest.aboveEdge - ref.largestAboveEdge) < 4 * se(ref.largestAboveEdge));
+  assert.ok(Math.abs(r.sample.smallestBelowEdge - ref.smallestBelowEdge) < 4 * se(ref.smallestBelowEdge));
+  assert.ok(relative(r.edges.upper, ref.threshold) < 1e-13 && relative(r.scriptEdges.upper, ref.scriptThreshold) < 1e-13);
+  const wide = mpRef.wide;
+  const w = mpEntry({ view: 'noise', n: wide.n, p: wide.p, variance: wide.variance, replicates: wide.replicates, seed: 3 });
+  assert.ok(Math.abs(w.zeroShare - wide.zeroShare) < 1e-12);
+  assert.ok(Math.abs(w.sample.largest.mean - wide.largestMean) < 0.15, `${w.sample.largest.mean} vs ${wide.largestMean}`);
+});
+
+test('marchenko-pastur spikes: eigenvalues and eigenvector overlaps against an R simulation and the BBP limits', () => {
+  const ref = mpRef.spiked;
+  const r = mpEntry({ view: 'spikes', n: ref.n, p: ref.p, spikes: ref.spikes, replicates: 300, seed: 5 });
+  r.spikes.forEach((/** @type {any} */ s, /** @type {number} */ k) => {
+    sameMean(s.sample.mean, ref.eigenSd[k], 300, ref.eigenMean[k], ref.eigenSd[k], ref.replicates, `eigenvalue ${k + 1}`);
+    sameMean(s.sample.overlap, ref.overlapSd[k], 300, ref.overlapMean[k], ref.overlapSd[k], ref.replicates, `overlap ${k + 1}`);
+  });
+  sameMean(r.nextLargest.mean, ref.eigenSd[3], 300, ref.eigenMean[3], ref.eigenSd[3], ref.replicates, 'the largest bulk eigenvalue');
+  // At n = 200 the strong spike is already at its limit.
+  const limit = bbp(4, 100 / 199);
+  assert.ok(Math.abs(ref.eigenMean[0] - limit.eigenvalue) < 0.05 && Math.abs(ref.overlapMean[0] - limit.overlap) < 0.01);
+});
+
+test("marchenko-pastur pcs: prcomp() exactly, before and after batch centring, and 1st_two_pc_axes.R over seeds", () => {
+  const ref = mpRef.pca;
+  const rows = () => /** @type {Float64Array[]} */ (ref.Y.map((/** @type {number[]} */ row) => Float64Array.from(row)));
+  const before = principalComponents(rows(), 10);
+  before.eigenvalues.forEach((v, i) => assert.ok(Math.abs(v - ref.eigenvalues[i]) < 1e-10 * ref.eigenvalues[0], `eigenvalue ${i}`));
+  for (const k of [0, 1]) {
+    // Scores agree up to the sign of each axis.
+    const sign = Math.sign(before.scores[k][0] * ref.scores[0][k]);
+    before.scores[k].forEach((v, i) => assert.ok(Math.abs(sign * v - ref.scores[i][k]) < 1e-9, `score ${i}, PC${k + 1}`));
+  }
+  const centred = rows();
+  for (const b of [0, 1]) {
+    const members = centred.filter((_, i) => ref.batch[i] === b);
+    const means = members[0].map((_, j) => members.reduce((s, row) => s + row[j], 0) / members.length);
+    for (const row of members) for (let j = 0; j < row.length; j++) row[j] -= means[j];
+  }
+  const after = principalComponents(centred, 10);
+  ref.corrected.eigenvalues.forEach((/** @type {number} */ v, /** @type {number} */ i) => assert.ok(Math.abs(after.eigenvalues[i] - v) < 1e-10 * ref.corrected.eigenvalues[0], `corrected ${i}`));
+  ref.corrected.batchDifference.forEach((/** @type {number} */ d) => assert.ok(Math.abs(d) < 1e-12));
+  // The script's own model (interactions included) over 12 seeds, against this entry's.
+  const s = mpRef.batchScript;
+  const r = mpEntry({ view: 'pcs', n: s.n, p: s.p, factors: s.factors, batchVariance: s.batchVariance, noiseVariance: s.noiseVariance, interactions: s.interactions, seed: 9 });
+  assert.ok(Math.abs(Math.abs(r.uncorrected.batchDifference[0]) - s.pc1Difference.mean) < 4 * s.pc1Difference.sd);
+  assert.ok(Math.abs(r.uncorrected.eigenvalues[0] - s.top.mean) < 4 * s.top.sd);
+  assert.ok(Math.abs(r.uncorrected.aboveEdge - s.above.mean) <= 4 * s.above.sd + 1);
+  assert.ok(Math.abs(r.corrected.eigenvalues[0] - s.topCentred.mean) < 4 * s.topCentred.sd);
 });

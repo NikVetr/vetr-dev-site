@@ -27,7 +27,9 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur']);
+  assert.deepEqual(submit({ entry: 'marchenko-pastur' }).params, { view: 'noise', n: 200, p: 20, variance: 1, replicates: 1000, seed: 1 });
+  assert.deepEqual(submit({ entry: 'marchenko-pastur', params: { view: 'spikes', replicates: 2 } }).params, { view: 'spikes', n: 200, p: 100, spikes: [4, 1, 0.5], replicates: 2, seed: 1 });
   assert.deepEqual(submit({ entry: 'null-pvalues' }).params, { scenario: 'batch', alpha: 0.05, perBatch: 10, batches: 2, treatedShare: 0.5 });
   assert.deepEqual(submit({ entry: 'null-pvalues', params: { scenario: 'pairing', meanChange: 0.25 } }).params,
     { scenario: 'pairing', alpha: 0.05, pairs: 10, betweenSD: 2, changeSD: 0.5, noiseSD: 1, meanChange: 0.25, replicates: 10000, seed: 1 });

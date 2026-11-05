@@ -4,6 +4,7 @@
 import * as correlationGeometry from './correlation-geometry/compute.js';
 import * as dagAdjustment from './dag-adjustment/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
+import * as marchenkoPastur from './marchenko-pastur/compute.js';
 import * as nullPvalues from './null-pvalues/compute.js';
 import * as thresholdModel from './threshold-model/compute.js';
 import * as typicalSet from './typical-set/compute.js';
@@ -19,6 +20,7 @@ export const ENTRIES = Object.freeze({
   [typicalSet.ENTRY]: typicalSet,
   [dagAdjustment.ENTRY]: dagAdjustment,
   [nullPvalues.ENTRY]: nullPvalues,
+  [marchenkoPastur.ENTRY]: marchenkoPastur,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];
