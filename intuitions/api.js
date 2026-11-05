@@ -1,6 +1,7 @@
 // The gallery's single entry point. Every page's window.Intuitions, cli.mjs and any
 // script call submit(); nothing here touches the DOM. See api.md.
 
+import * as backpackFallacy from './backpack-fallacy/compute.js';
 import * as correlationGeometry from './correlation-geometry/compute.js';
 import * as dagAdjustment from './dag-adjustment/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
@@ -25,6 +26,7 @@ export const ENTRIES = Object.freeze({
   [marchenkoPastur.ENTRY]: marchenkoPastur,
   [traitEvolution.ENTRY]: traitEvolution,
   [treeCovariance.ENTRY]: treeCovariance,
+  [backpackFallacy.ENTRY]: backpackFallacy,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];

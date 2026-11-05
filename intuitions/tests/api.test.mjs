@@ -27,7 +27,8 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance', 'backpack-fallacy']);
+  assert.deepEqual(submit({ entry: 'backpack-fallacy', params: { sizes: [16, 2], upTo: 1, window: 0 } }).params, { prior: 'cauchy', scale: 1, sizes: [2, 16], upTo: 1, window: 0, at: 2 });
   assert.deepEqual(submit({ entry: 'trait-evolution', params: { model: 'ou' } }).params, { view: 'tree', tree: { tips: 12, seed: 1 }, model: 'ou', sigma2: 1, root: 0, alpha: 4, theta: 1.5, steps: 300, seed: 1 });
   assert.deepEqual(submit({ entry: 'trait-evolution', params: { view: 'bridge', paths: 3 } }).params,
     { view: 'bridge', start: [-5, -4], end: [4, 4.5], rate: [[2, 1], [1, 3]], length: 50, levels: 4, paths: 3, region: 'disc', method: 'stagewise', seed: 1 });
