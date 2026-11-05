@@ -52,6 +52,7 @@ export function cumsum(values) {
 /** seq(from, to, length.out = n), n rounded up as R does. @param {number} from @param {number} to @param {number} n */
 export function seqLength(from, to, n) {
   const len = Math.ceil(n);
+  if (len <= 0) return [];
   if (len === 1) return [from];
   if (len === 2) return [from, to];
   if (from === to) return new Array(len).fill(from);
