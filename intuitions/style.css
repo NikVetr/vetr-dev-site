@@ -98,7 +98,8 @@ var, .math { font-family: var(--serif); font-style: italic; }
 
 /* ---------- Buttons and fields ----------
    The gallery's own shapes and weights, over the shared ones; a disabled button takes the
-   shared grey, dashed look. */
+   shared grey, dashed look. On a phone or touch screen the shared floor applies here too:
+   controls and labelled checkboxes at least 44 px high, field text at least 16 px. */
 
 button, .button {
   font-weight: inherit;

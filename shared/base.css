@@ -105,8 +105,9 @@ h3 { margin: 1.4rem 0 0.6rem; font-size: 1.05rem; }
 /* ---------- Layout ----------
    The markup runs in reading order: the primary input card(s), the results card, the settings,
    then the method. Narrow screens show one column in that order, so the result comes right
-   after what it is computed from (keep those inputs short there, and link down to it). From 1000 px the results card takes the right column beside
-   the input and settings cards; a tool with three of those gives the grid one more auto row. */
+   after what it is computed from (keep those inputs short there, and link down to it). From
+   1000 px the results card takes the right column beside the input and settings cards; a tool
+   with three of those gives the grid one more auto row. */
 
 .layout {
   display: grid;
@@ -234,6 +235,24 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 .settings [hidden] { display: none; }
 .input-row { display: flex; gap: 0.4rem; }
 .input-row input { flex: 1; color: var(--text); }
+
+/* ---------- Touch ----------
+   On a phone or other touch screen every control is at least 44 px high, and the text in a field
+   at least 16 px (iOS zooms the page into smaller text on focus). A checkbox or radio is reached
+   through its label, so the label is the target, not the box. These are floors under each tool's
+   own sizes, the intuitions gallery's included, hence !important; desktop controls keep theirs. */
+@media (max-width: 640px), (pointer: coarse) {
+  button, .file-button, summary, select, textarea,
+  input:not([type="checkbox"], [type="radio"], [type="range"]),
+  label:has(> input[type="checkbox"], > input[type="radio"]) { min-height: 44px !important; }
+  .file-button { display: inline-flex; align-items: center; }
+  summary { padding-block: 0.5rem; }
+  /* one line of a checkbox or radio label is 44 px high, centred, and longer ones grow alike */
+  label:has(> input[type="checkbox"], > input[type="radio"]) { padding-block: calc((44px - 1lh) / 2); }
+  /* a taller target for the link, in the same space */
+  .results-link { padding-block: 0.7rem; margin-block: -0.7rem; }
+  select, textarea, input:not([type="checkbox"], [type="radio"], [type="range"]) { font-size: max(16px, 1em) !important; }
+}
 
 /* ---------- Problems ---------- */
 
