@@ -11,6 +11,13 @@ import { axisBottom, axisLeft, el, linePath, logTicks, marker, niceTicks, scaleL
 /** A number for an axis tick: whole when it is, else up to two decimals. @param {number} v */
 const tick = (v) => (Number.isInteger(v) ? v.toLocaleString('en-US') : String(Number(v.toFixed(2))));
 
+/** Index ticks 1, then every 1, 2, 5, 10, … up to `count`, about one per `spacing` px. @param {number} count @param {number} span @param {number} spacing */
+function indexTicks(count, span, spacing) {
+  const raw = count / Math.max(2, Math.floor(span / spacing));
+  const step = [1, 2, 5, 10, 20, 25, 50].find((s) => s >= raw) ?? 100;
+  return [1, ...Array.from({ length: Math.floor(count / step) }, (_, i) => (i + 1) * step)].filter((v, i, a) => a.indexOf(v) === i);
+}
+
 /**
  * Bins eigenvalues into a density histogram on [0, top]; `share` scales it (the share of
  * the law's mass the values stand for, below 1 when some eigenvalues are exactly 0).
@@ -108,9 +115,7 @@ export function indexFigure(result, { width, height }) {
     parts.push(el('line', { x1: x(r.index), x2: x(r.index), y1: y(r.lo), y2: y(r.hi), class: 'a-range' }),
       marker('circle', x(r.index), y(r.median), Math.min(4, Math.max(2.2, step / 3)), 'a-mark'));
   }
-  const every = Math.max(1, Math.ceil(rows.length / Math.max(2, Math.floor((width - left - right) / 40))));
-  const ticks = rows.map((/** @type {any} */ r) => r.index).filter((/** @type {number} */ k) => k === 1 || k % every === 0);
-  parts.push(axisBottom({ scale: x, y: height - bottom, ticks, format: String, label: 'eigenvalue, largest first', labelGap: 34 }));
+  parts.push(axisBottom({ scale: x, y: height - bottom, ticks: indexTicks(rows.length, width - left - right, 40), format: String, label: 'eigenvalue, largest first', labelGap: 34 }));
   return svgRoot({
     width, height,
     label: `The ${rows.length} largest eigenvalues one at a time: the largest has median ${formatNumber(rows[0].median, 3)} and 5–95% range ${formatNumber(rows[0].lo, 3)} to ${formatNumber(rows[0].hi, 3)}, against an upper edge of ${formatNumber(result.edges.upper, 3)}.`,
@@ -220,8 +225,7 @@ export function screeFigure(result, { width, height }) {
   const r = Math.min(3.2, Math.max(1.6, (width - left - right) / count / 2.5));
   before.forEach((/** @type {number} */ v, /** @type {number} */ i) => { if (i < 12) parts.push(marker('triangle', x(i + 1), y(v), r + 0.6, 'b-mark')); });
   after.forEach((/** @type {number} */ v, /** @type {number} */ i) => { if (i < 12) parts.push(marker('circle', x(i + 1), y(v), r, 'a-mark')); });
-  const every = Math.max(1, Math.ceil(count / Math.max(2, Math.floor((width - left - right) / 50))) * 5 / 5);
-  parts.push(axisBottom({ scale: x, y: height - bottom, ticks: [1, ...Array.from({ length: Math.floor(count / every) }, (_, i) => (i + 1) * every)].filter((v, i, a) => a.indexOf(v) === i && v <= count), format: String, label: 'principal component', labelGap: 34 }));
+  parts.push(axisBottom({ scale: x, y: height - bottom, ticks: indexTicks(count, width - left - right, 50), format: String, label: 'principal component', labelGap: 34 }));
   return svgRoot({
     width, height,
     label: `Eigenvalues of the ${count} largest principal components on a log scale, before and after the batch is regressed out: ${result.uncorrected.aboveEdge} and ${result.corrected.aboveEdge} lie above the noise edge of ${formatNumber(result.edges.upper, 1)}.`,
@@ -246,7 +250,6 @@ export function differenceFigure(result, { width, height }) {
   const bar = Math.max(1, (width - left - right) / diffs.length - 2);
   const parts = [axisLeft({ scale: y, x: left, ticks: niceTicks(0, yMax, 4), format: tick, gridTo: width - right })];
   diffs.forEach((/** @type {number} */ d, /** @type {number} */ i) => parts.push(el('rect', { x: x(i + 1) - bar / 2, y: y(d), width: bar, height: y(0) - y(d), class: i === 0 ? 'b-strong' : 'hist-bar' })));
-  const every = Math.max(1, Math.ceil(diffs.length / Math.max(2, Math.floor((width - left - right) / 44))));
-  parts.push(axisBottom({ scale: x, y: height - bottom, ticks: [1, ...Array.from({ length: diffs.length }, (_, i) => i + 1).filter((k) => k % every === 0)], format: String, label: 'principal component', labelGap: 34 }));
+  parts.push(axisBottom({ scale: x, y: height - bottom, ticks: indexTicks(diffs.length, width - left - right, 44), format: String, label: 'principal component', labelGap: 34 }));
   return svgRoot({ width, height, label: `How far apart the batches' mean scores are on each of the first ${diffs.length} components, before the batch is regressed out: ${formatNumber(diffs[0], 2)} SDs on PC 1.` }, ...parts);
 }
