@@ -64,18 +64,24 @@
 }
 .play-button { min-width: 6.5rem; }
 /* On a phone the three buttons keep one row, Play taking the slack, with speed and clock below. */
+/* Speed and clock sit in the transport row; on a phone they share a row of their own. */
+.transport-info { display: contents; }
 @media (max-width: 560px) {
   .transport { display: grid; grid-template-columns: auto 1fr auto; }
-  .transport button { padding-inline: 0.65rem; }
+  .transport button { padding-inline: 0.5rem; white-space: nowrap; }
   .play-button { min-width: 0; }
-  .speed { grid-column: 1 / 2; }
-  .clock { grid-column: 2 / 4; }
+  .transport-info { grid-column: 1 / -1; display: flex; gap: 0.5rem; align-items: center; }
+}
+/* Narrower still, Play takes a row of its own, so no label is ever cut. */
+@media (max-width: 440px) {
+  .transport { grid-template-columns: 1fr 1fr; }
+  .play-button { grid-column: 1 / -1; grid-row: 1; }
 }
 .speed { display: flex; gap: 0.4rem; align-items: center; color: var(--muted); font-size: 0.92rem; }
 .speed select { color: var(--text); }
 .clock { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.92rem; text-align: right; }
 /* The two halves wrap as wholes, never mid-phrase. */
-.clock span { display: inline-block; }
+.clock span { display: inline-block; white-space: nowrap; }
 
 /* The timeline: a step plot of the stage dimension across the loop, under a range input whose
    track is transparent, so the native control keeps its keyboard and screen-reader support. */

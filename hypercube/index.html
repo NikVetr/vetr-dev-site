@@ -37,8 +37,8 @@
       <div class="transport" role="group" aria-label="Playback">
         <button id="step-back" type="button" aria-keyshortcuts=",">◀︎ <span>Frame</span></button>
         <button id="play" type="button" class="primary play-button" aria-keyshortcuts="Space"></button>
-        <button id="step-forward" type="button" aria-keyshortcuts=".">
-          <span>Frame</span> ▶︎</button>
+        <button id="step-forward" type="button" aria-keyshortcuts="."><span>Frame</span> ▶︎</button>
+        <div class="transport-info">
         <label class="speed">Speed
           <select id="speed">
             <option value="0.25">¼×</option>
@@ -48,6 +48,7 @@
           </select>
         </label>
         <output id="clock" class="clock" for="timeline" aria-live="off"><span id="clock-frame"></span> <span id="clock-time"></span></output>
+        </div>
       </div>
 
       <div class="timeline">
