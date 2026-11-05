@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polylines Sankey</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">polylines <span>Sankey</span></div>
+    <div class="actions">
+      <div class="tool-group">
+        <label class="btn primary" title="Load flow matrices, a loc table, color matrices or a project file (CSV/TSV/JSON)">
+          Open files…<input id="file-input" type="file" multiple accept=".csv,.tsv,.txt,.json" hidden>
+        </label>
+        <button class="btn" data-open-import title="Build a Sankey from a long or wide data table">Import table…</button>
+        <select id="example-select" aria-label="Load an example"></select>
+      </div>
+      <div class="tool-group">
+        <button id="undo" class="btn" title="Undo (Ctrl/⌘+Z)" aria-label="Undo">↶</button>
+        <button id="redo" class="btn" title="Redo (Ctrl/⌘+Shift+Z)" aria-label="Redo">↷</button>
+      </div>
+      <div class="tool-group">
+        <button id="fit-panel" class="btn icon-btn" title="Fit the whole drawing inside the panel" aria-label="Fit plot to panel" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m7 7 3 3m-3 0h3V7m7 10-3-3m3 0h-3v3"/></svg></button>
+        <button id="fit-height" class="btn icon-btn" title="Fill the panel height and scroll horizontally" aria-label="Fit plot to height" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18m-4-4 4 4-4 4M7 8l-4 4 4 4M8 3h8M8 21h8"/></svg></button>
+        <button id="zoom-out" class="btn icon-btn" title="Zoom out" aria-label="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6M6 10h8"/></svg></button>
+        <button id="zoom-in" class="btn icon-btn" title="Zoom in" aria-label="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6M6 10h8m-4-4v8"/></svg></button>
+      </div>
+      <div class="tool-group">
+        <button id="fit" class="btn" title="Fit the view to the content (F)">Fit view</button>
+        <button id="auto-layout" class="btn" title="Generate node locations from the matrices, spaced as on import (replaces moved positions; Ctrl/⌘+Z undoes)">Auto-layout</button>
+        <button id="align" class="btn" title="Line up the columns: one x per column, top and bottom nodes on shared lines, even gaps">Align</button>
+        <button id="center-columns" class="btn icon-btn" title="Center each column's nodes on one vertical line (only the picked nodes, where two or more in a column are picked)" aria-label="Center nodes in their columns"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20"/><rect x="7" y="4" width="10" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="8.5" y="16" width="7" height="4" rx="1"/></svg></button>
+        <button id="distribute-columns" class="btn icon-btn" title="Spread each column's nodes evenly between its top and bottom node (only the picked nodes, where three or more in a column are picked)" aria-label="Spread nodes evenly in their columns"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16M4 21h16"/><rect x="8" y="6" width="8" height="2.5" rx="1"/><rect x="8" y="10.75" width="8" height="2.5" rx="1"/><rect x="8" y="15.5" width="8" height="2.5" rx="1"/></svg></button>
+        <button id="space-columns" class="btn icon-btn" title="Even out the gaps between columns, as Auto-layout does, keeping node heights" aria-label="Even out column gaps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="3" height="14" rx="1"/><rect x="10.5" y="5" width="3" height="14" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/><path d="M6.5 12h2.5m-1-1.5 1 1.5-1 1.5M15 12h2.5m-1-1.5 1 1.5-1 1.5"/></svg></button>
+        <button id="merge-nodes" class="btn danger" hidden>Merge nodes</button>
+      </div>
+      <div class="tool-group">
+        <button class="btn" data-export="svg" title="Download the plot as shown, focused substrands included, as an SVG image">SVG</button>
+        <button class="btn" data-export="png" title="Download the plot as shown, focused substrands included, as a PNG image (2×)">PNG</button>
+        <div class="menu">
+          <button id="export-btn" class="btn">Export ▾</button>
+          <div id="export-menu" class="menu-list" hidden>
+            <button data-export="loc">Node locations (loc.csv)</button>
+            <button data-export="bundle">R bundle (.zip: CSVs + sankey.R)</button>
+            <button data-export="rcode">Show R code…</button>
+            <button data-export="project">Project file (.json)</button>
+          </div>
+        </div>
+      </div>
+      <div class="tool-group">
+        <button id="help-btn" class="btn" title="Help (?)" aria-label="Help">?</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <details class="section" open>
+        <summary>Data</summary>
+        <div class="row">
+          <label for="mode-select">Mode</label>
+          <select id="mode-select">
+            <option value="layered">layered stages</option>
+            <option value="graph">graph (square adjacency)</option>
+          </select>
+        </div>
+        <div id="table-controls" class="file-group" hidden></div>
+        <div class="file-group">
+          <div class="file-head"><span>Flow matrices</span>
+            <label class="mini-btn">Load…<input type="file" data-role="stages" multiple accept=".csv,.tsv,.txt" hidden></label>
+          </div>
+          <ol id="stage-list" class="file-list"></ol>
+        </div>
+        <div class="file-group">
+          <div class="file-head"><span>Node locations</span>
+            <label class="mini-btn">Load…<input type="file" data-role="loc" accept=".csv,.tsv,.txt" hidden></label>
+          </div>
+          <div id="loc-name" class="file-note"></div>
+        </div>
+        <div class="file-group">
+          <div class="file-head"><span>Strand colors</span>
+            <span><button id="clear-colors" class="mini-btn" title="Remove color matrices">clear</button>
+            <label class="mini-btn">Load…<input type="file" data-role="colors" multiple accept=".csv,.tsv,.txt" hidden></label></span>
+          </div>
+          <ol id="color-list" class="file-list"></ol>
+        </div>
+        <div class="file-group">
+          <div class="file-head"><span>Mid colors</span>
+            <span><button id="clear-mids" class="mini-btn" title="Remove mid-color matrices">clear</button>
+            <label class="mini-btn">Load…<input type="file" data-role="mids" multiple accept=".csv,.tsv,.txt" hidden></label></span>
+          </div>
+          <ol id="mid-list" class="file-list"></ol>
+        </div>
+        <div class="button-grid">
+          <button class="mini-btn wide-cell" data-open-import title="Build flows from a long or wide data table">Import a data table…</button>
+          <button id="bake-loc" class="mini-btn" title="Write adjusted y positions into loc">Bake adjusted y</button>
+          <button id="clear-order" class="mini-btn" title="Forget strand orders set by dragging">Reset strand order</button>
+          <button id="download-examples" class="mini-btn" title="Download the current example's input files">Example files</button>
+        </div>
+      </details>
+      <div id="controls"></div>
+    </aside>
+
+    <div class="stage-column">
+      <div id="column-strip" class="column-strip" hidden></div>
+      <section id="stage" class="stage">
+        <div class="banners">
+          <div id="banner" class="banner error" role="alert" hidden></div>
+          <div id="warnings" class="banner warn" hidden></div>
+          <div id="notice" class="banner info" role="status" hidden></div>
+        </div>
+        <svg id="plot" xmlns="http://www.w3.org/2000/svg" text-rendering="geometricPrecision"></svg>
+        <div id="canvas-resize" class="canvas-resize" title="Drag to resize the canvas (the plot keeps its scale)"></div>
+        <div id="drop-overlay" class="drop-overlay" hidden>Drop CSV or project files to load them</div>
+      </section>
+      <div id="column-beam" class="column-beam" hidden></div>
+    </div>
+
+    <aside id="inspector" class="inspector">
+      <div id="hover-info" class="hover-info" hidden></div>
+      <div id="inspector-main"></div>
+    </aside>
+    <div id="resize-sidebar" class="panel-resize" role="separator" aria-orientation="vertical" tabindex="0"
+      aria-label="Resize the settings panel" title="Drag to resize the settings panel; double-click to reset"></div>
+    <div id="resize-inspector" class="panel-resize" role="separator" aria-orientation="vertical" tabindex="0"
+      aria-label="Resize the inspector" title="Drag to resize the inspector; double-click to reset"></div>
+  </main>
+
+  <dialog id="merge-dialog">
+    <form id="merge-form" method="dialog">
+      <h2>Merge nodes</h2>
+      <p id="merge-members" class="muted"></p>
+      <div class="row"><label for="merge-name">New node name</label><input id="merge-name" type="text" required></div>
+      <div class="dialog-actions">
+        <button type="button" id="merge-cancel" class="btn">Cancel</button>
+        <button value="ok" class="btn danger">Merge</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="help-dialog">
+    <form method="dialog">
+      <h2>Polylines Sankey</h2>
+      <p>An interactive version of the Sankey ribbons in <code>R/functions.R</code>. It reads the same inputs as
+        <code>sankey_ribbons()</code> / <code>sankey_ribbons_graph()</code>, saved as CSV files.</p>
+      <h3>Files</h3>
+      <ul>
+        <li><b>Flow matrices</b>: one numeric CSV per stage (rows = source nodes, columns = target nodes); adjacent
+          stages must share dimensions. In graph mode, one square matrix over all loc rows. Headers and row names
+          (as written by R's <code>write.csv()</code>) are detected and used as node names.</li>
+        <li><b>Node locations (loc)</b>: columns <code>set, node, x, y</code> plus optional <code>width</code>,
+          <code>label</code>, <code>cex</code>, <code>font</code>, <code>height</code>, <code>color</code> and
+          <code>merge_col</code>. A headerless file is read like R's numeric loc matrix
+          (<code>set, node, x, y [, width [, height]]</code>).</li>
+        <li><b>Strand / mid colors</b>: color matrices shaped like the flow matrices (hex such as <code>#5B8CBAAA</code>,
+          CSS names, R <code>grayNN</code>, or <code>NA</code>).</li>
+        <li><b>Project</b>: a <code>.json</code> file exported from this app restores everything.</li>
+        <li><b>Data tables</b>: other tables open <b>Import table…</b>, which builds flows from wide tables (one row per
+          item, a column per stage), long tables (item, stage, category), link lists (source, target, value) or
+          crosstabs, with options for weights, missing values, node order and grouping small nodes.</li>
+      </ul>
+      <p>Drop files anywhere, or use <b>Open files…</b>; file roles are detected from their contents and names
+        (files whose names contain “mid” are mid colors). Stage order follows file names; reorder with the arrows.</p>
+      <h3>Interaction</h3>
+      <ul>
+        <li>Hover strands or nodes for values and shares, shown in the inspector panel; click to edit them there.</li>
+        <li>A click emphasizes the strand or node clicked (clicking it again releases it); Shift-click adds or removes
+          one more while keeping the rest; clicking empty space clears the emphasis.</li>
+        <li>Drag nodes to move them (Shift: vertical only, Alt: horizontal only).</li>
+        <li>Drag a strand up or down to reorder it within the stack at its nearer end.</li>
+        <li>For an imported table, the strip above the plot holds a badge over each node column, with its values
+          below: drag a badge sideways to reorder the columns, click it (or drag it up) to hide its column, click
+          a value to drop or keep its rows, and drag a value up or down to move its node. The <b>Arrange</b> tab
+          hides or shows the strip.</li>
+        <li>For data imported from a wide or long table, hovering a strand or node traces every pathway through it
+          and breaks them down by node and strand in the inspector; hold Ctrl/⌘ to trace one pathway, or
+          Alt/⌥ for one item when the table has item ids. Ordinary hover pauses above 200 pathways by default;
+          adjust <b>Hover limit (pathways)</b> in Canvas &amp; dragging. Emphasized strands and nodes keep their
+          substrands traced and tabulated together while you hover others.</li>
+        <li>The toolbar's fit-panel and fit-height buttons scale the whole drawing, including text. Fit-height
+          allows horizontal scrolling; the magnifier buttons zoom in and out.</li>
+        <li><b>Auto-layout</b> (toolbar) places the nodes afresh, as an import would.</li>
+        <li>The SVG and PNG buttons export the plot as shown, including any focused substrands.</li>
+        <li>Drag any of several emphasized nodes to move them all together, or merge two or more in one column with the <b>Merge</b> button that appears (Ctrl/⌘+Z undoes).</li>
+        <li>Dragging a node into a neighbour stops at a wall, or pushes it along (Canvas &amp; dragging).</li>
+        <li>Ctrl/⌘+Z and Ctrl/⌘+Shift+Z undo and redo; F fits the view; Esc also clears the emphasis.</li>
+      </ul>
+      <p><b>Export → R bundle</b> writes the CSVs, a <code>loc.csv</code> with your edits and a <code>sankey.R</code>
+        script that redraws the plot with the R functions.</p>
+      <div class="dialog-actions"><button class="btn primary" value="close">Close</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="import-dialog" class="import">
+    <form method="dialog">
+      <h2>Import a data table</h2>
+      <p class="muted">Turn a long or wide table into Sankey flows. Each row counts once, or adds its weight.</p>
+      <div class="import-source">
+        <label class="btn">Choose file…<input id="import-file" type="file" accept=".csv,.tsv,.txt" hidden></label>
+        <span id="import-file-name" class="muted">or paste a table below</span>
+      </div>
+      <textarea id="import-text" spellcheck="false" placeholder="Paste CSV or TSV text with a header row"></textarea>
+      <div id="import-preview" class="table-preview"></div>
+      <div class="import-grid">
+        <div>
+          <div class="row">
+            <label for="import-format">Table layout</label>
+            <select id="import-format">
+              <option value="wide">wide: one row per item, a column per stage</option>
+              <option value="long">long: item, stage and category columns</option>
+              <option value="links">links: source, target, value</option>
+              <option value="crosstab">crosstab: row labels × columns</option>
+            </select>
+          </div>
+          <div id="import-mapping"></div>
+        </div>
+        <div>
+          <div class="row">
+            <label for="import-missing">Missing values</label>
+            <select id="import-missing">
+              <option value="drop">drop the row</option>
+              <option value="keep">keep as “(missing)”</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="import-order">Node order</label>
+            <select id="import-order">
+              <option value="appearance">first appearance</option>
+              <option value="size">largest first</option>
+              <option value="alphabetical">alphabetical</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="import-min-share">Group into “Other”</label>
+            <span class="pair">
+              <input id="import-min-share" type="number" min="0" max="100" step="0.5" placeholder="below %" title="Nodes below this share of their stage">
+              <input id="import-top-n" type="number" min="1" step="1" placeholder="beyond top N" title="Keep the N largest nodes per stage">
+            </span>
+          </div>
+          <div class="row">
+            <label for="import-labels">Labels</label>
+            <select id="import-labels">
+              <option value="above" selected>above nodes</option>
+              <option value="inside">inside node bodies</option>
+              <option value="beside">beside nodes</option>
+              <option value="none">none</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="import-summary" class="import-summary" role="status"></div>
+      <div class="dialog-actions">
+        <button class="btn" value="cancel">Cancel</button>
+        <button id="import-apply" type="button" class="btn primary" disabled>Build Sankey</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="code-dialog">
+    <form method="dialog">
+      <h2>R code</h2>
+      <p class="muted">Reads the files in the R bundle export.</p>
+      <textarea id="code-text" readonly spellcheck="false"></textarea>
+      <div class="dialog-actions">
+        <button id="copy-code" type="button" class="btn">Copy</button>
+        <button class="btn primary" value="close">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/layout.js"></script>
+  <script src="js/color.js"></script>
+  <script src="js/csv.js"></script>
+  <script src="js/transform.js"></script>
+  <script src="js/shapes.js"></script>
+  <script src="js/paths.js"></script>
+  <script src="js/edit.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/glyphs.js"></script>
+  <script src="js/table-controls.js"></script>
+  <script src="js/column-strip.js"></script>
+  <script src="js/zip.js"></script>
+  <script src="js/examples.js"></script>
+  <script src="js/importer.js"></script>
+  <script src="js/submission.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

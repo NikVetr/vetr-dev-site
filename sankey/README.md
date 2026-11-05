@@ -1,0 +1,207 @@
+# Polylines Sankey webapp
+
+An interactive, static (no build step) version of the Sankey ribbons in `../R/functions.R`. It reads the same inputs as `sankey_ribbons()` and `sankey_ribbons_graph()`, saved as CSV files, and exports CSVs plus an R script that redraws the result with the R functions.
+
+## Running
+
+Open `index.html` directly in a browser, or serve the folder:
+
+```sh
+cd webapp
+npm run serve        # python3 -m http.server 4173, then open http://127.0.0.1:4173
+```
+
+## Programmatic submissions
+
+`window.SankeyApp.submit(request)` loads data, validates it, and draws synchronously without opening a dialog. It returns a detached project object, suitable for saving or submitting again. Invalid requests throw a `SankeyError` before replacing the working project; rejected data does not enter history or autosave. Requests must contain JSON data with finite numbers. Unknown request fields and unknown `style`/`params` names are rejected.
+
+For example, in the app's browser context:
+
+```js
+const project = SankeyApp.submit({
+  type: 'table',
+  text: 'id,diagnosis,outcome\nP1,A,Remission\nP2,B,Progression\n',
+  spec: { format: 'wide', columns: ['diagnosis', 'outcome'], id: 'id' },
+  labels: 'above',
+  style: { canvasWidth: 1000, canvasHeight: 650 }
+});
+const svg = SankeyApp.exportSvgText();
+const png = await SankeyApp.exportPngBlob(); // Blob, at 2× resolution
+const bundle = SankeyApp.exportBundle();    // Uint8Array: CSVs, R code and project JSON
+```
+
+Three request types are supported:
+
+| Type | Required input | Optional settings |
+| --- | --- | --- |
+| `table` | `text`: CSV/TSV with a header | `spec`: the mapping described below; `options`: `{order, minShare, topN}`; `labels`: `above` (default), `inside`, `beside`, or `none`; `name`; positive `thickness` multiplier; `style`, `params`, `stageParams` |
+| `matrices` | `matrices`: an array of numeric matrices, including for a single matrix | `mode`: `layered` (default) or `graph`; `loc`: node records (generated when omitted); `dimnames`, `stageNames`, `params`, `stageParams`, `style`, `valueScale`, `colorMatrices`, `midMatrices`, `nodeColors`, `mergeColors`, `paths`, `setNames`, `pathUnit`, `view` |
+| `project` | `project`: an exported version-1 project object | Settings are taken from the project, with the same migration/default handling as file loading. |
+
+Table `spec` uses the same converter as the import dialog:
+
+- Wide: `{format: 'wide', columns: ['A', 'B', 'C'], id: 'id', weight: 'n', missing: 'drop'}`. `id` and `weight` are optional; `missing` can be `keep`.
+- Long: `{format: 'long', id: 'id', stage: 'wave', category: 'answer', weight: 'n', missing: 'keep', stageOrder: 'auto'}`. `weight` is optional; `stages` can explicitly select/order stage values.
+- Links: `{format: 'links', source: 'from', target: 'to', value: 'n', stage: 'step'}`. `value` and `stage` are optional.
+- Crosstab: `{format: 'crosstab'}`.
+
+Omitting `spec` uses the dialog's inference; supplying it makes automated workflows explicit. `options.order` accepts `appearance`, `size` or `alphabetical`; `minShare` is a fraction (0.05 = 5%), and `topN` is a node count. `params` uses the layout names in `layout.js`'s `DEFAULT_PARAMS`, such as `curvature` and `route`. `stageParams` is an array of per-stage routing/order overrides. `style` uses the application names, such as `palette`, `fontSize`, `labelCounts`, `canvasWidth` and `canvasHeight`; explicit style values override label-style defaults. Fresh table/matrix submissions use application defaults, independent of the previous diagram. `SankeyApp.getProject()` returns a detached snapshot of the current project.
+
+For matrix input, values are geometric thicknesses unless `valueScale` is supplied. Graph mode requires one square adjacency matrix. For example:
+
+```js
+SankeyApp.submit({
+  type: 'matrices',
+  matrices: [[[0.1, 0.2], [0.2, 0.1]]],
+  dimnames: [{ rows: ['A', 'B'], cols: ['X', 'Y'] }]
+});
+SankeyApp.submit({ type: 'project', project });
+```
+
+### Headless command line and Python/R workflows
+
+The command-line exporter uses the same browser API in an isolated headless Chromium session. It opens the app from disk, so no server or GUI interaction is required. Install the existing browser-test dependency and its Chromium binary once:
+
+```sh
+cd webapp
+npm ci
+npx playwright install chromium
+npm run render -- examples/submission.json ../tmp/diagram.svg
+npm run render -- examples/submission.json ../tmp/diagram.png
+```
+
+The output extension chooses SVG, PNG, project JSON (`.json`), or R bundle (`.zip`). Use `-` as the input filename to read request JSON from stdin. Rendering/validation failures exit nonzero and leave an existing output file untouched. A fresh browser is used for each invocation; the viewport is 1440 × 900, and explicit canvas dimensions in the request make output sizing independent of automatic panel sizing.
+
+From Python, with the repository as the working directory:
+
+```python
+import json
+import subprocess
+
+request = {
+    "type": "table",
+    "text": "A,B\nx,y\nx,z\n",
+    "spec": {"format": "wide", "columns": ["A", "B"]},
+}
+subprocess.run(
+    ["node", "webapp/scripts/render.cjs", "-", "tmp/diagram.svg"],
+    input=json.dumps(request), text=True, check=True,
+)
+```
+
+R callers can write the same request with `jsonlite::write_json(..., auto_unbox = TRUE)` and invoke `node webapp/scripts/render.cjs request.json output.svg` using `system2()`. Node callers can import `renderSubmission(request, format)` from `scripts/render.cjs`; it returns a promise for an output `Buffer`. The webapp remains static: these are browser and local-process APIs, with no HTTP POST endpoint.
+
+## Input files
+
+| Role | Format |
+| --- | --- |
+| Flow matrices | One numeric CSV per stage (rows = source nodes, columns = target nodes); adjacent stages must share dimensions. In graph mode, one square matrix whose rows/columns are the `loc` rows. A header row and row-name column (as written by R's `write.csv()`) are detected and used as node names. |
+| Node locations (`loc`) | Columns `set, node, x, y` with optional `width`, `label`, `cex`, `font`, `height`, `color`, `merge_col`. Without a header the file is read like R's numeric `loc` matrix: `set, node, x, y [, width [, height]]`. Blank `width` cells fall back to label-derived or default widths. |
+| Strand / mid colors | Color matrices shaped like the flow matrices: hex (`#RRGGBB`, `#RRGGBBAA`), CSS names, R `grayNN`, or `NA`. |
+| Project | A `.json` file exported by the app. |
+
+Drop files anywhere or use **Open files…**. Roles are inferred from content and file names (names containing `mid` are mid colors), stage order follows natural file-name order, and the per-role **Load…** buttons force a role. If flow matrices arrive without a matching `loc`, node locations are generated. Files are validated together before applying them; invalid files show the reason in a red banner and leave the current data, drawing, edits and exports intact.
+
+## Importing data tables
+
+**Import table…** (also opened automatically for any other table you drop) builds flows from ordinary data:
+
+| Layout | Expected columns | Result |
+| --- | --- | --- |
+| wide | one row per item or item group, one column per stage, optional weight and item id | transitions counted between consecutive chosen columns |
+| long | item id, stage, category, optional weight | pivoted to one row per item, then as wide |
+| links | source, target, optional value and stage | one matrix per stage; without a stage column, layers are inferred and links that skip layers produce graph mode |
+| crosstab | row labels, then one numeric column per target | a single stage |
+
+The layout and column roles are guessed from names and types, and everything can be changed in the dialog. Other options:
+- Missing values: drop the row, or keep it as a "(missing)" node.
+- Node order: first appearance, largest first, or alphabetical.
+- Group small nodes: merge nodes below a minimum share of their stage, or outside the top N, into "Other".
+- Labels: above nodes (default: solid nodes as wide as their labels, labels in a darker shade of each node's color), inside node bodies (which fade to a clear centre behind the label), beside nodes, or none. A label above its node that is wider than the node (e.g. one with a width set in loc) shifts to the node's free side (sources and sinks) or rises just above the node's own strands (interior nodes), so strands curving in and out do not cross it. Label position and color can be changed later under Borders & labels, where **Totals in labels** (on by default) follows each label with its node total in parentheses, e.g. "Surgery (232)". Totals of 10,000 or more use compact scientific notation rounded to one significant figure, e.g. "Cohort (1E04)"; hover details keep the full counts. The R bundle draws labels the same way. Toggling totals refits the view to leave room for them. Older saved sessions and projects enable totals and refit once; turning the option off afterward stays saved.
+
+Errors (cycles, duplicated item/stage pairs, non-numeric weights) are shown before anything is built.
+
+Imported values stay as counts. A value scale turns them into strand thickness and is chosen so node columns sit one x unit apart; **Strand thickness** (Layout section) scales it, 1 being the scale the data came with (a log slider from 0.1 to 10; any positive value can be typed). Hover details show raw values, and the R bundle multiplies the exported matrices by the same `value_scale`.
+
+Wide and long imports also keep every trajectory (the sequence of nodes an item visits), merged into weighted pathways. With an item id (always present in long tables, optional in wide ones, guessed from names like `patient_id` that are unique per row), each pathway also lists its items, so single items can be traced.
+
+After building a wide or long table, an **arrange strip** above the plot holds its diagram columns (wide tables: the source columns other than the item id and weight; true long tables: the values of the stage column):
+
+- Each column in the diagram has a zone over its column of nodes, reaching halfway to the neighbouring columns and following them as the plot zooms and pans. Zones are tinted with their column's color (its nodes' colors averaged by their totals), dashed at both edges and set apart by white, with a white band along the strip's foot. The column's badge, filled with its color in white text, sits at the zone's left, with its values listed under it, indented, in the order of their nodes from the top, each followed by its node's count and as wide as it needs within the zone. A zone scrolled partly out of view keeps its badge and values in its visible part; a column scrolled out of view takes them with it, and an arrow at that end of the strip (with how many columns are out of view there) scrolls the plot back to the nearest of them. Kept values take their node's color; dropped ones are greyed out and struck through; kept values without a node (no remaining rows, or grouped into Other) have a dashed edge. A badge shows how many of its values are kept, e.g. "3/4", when some are dropped. The strip is as tall as the longest value list of a shown column, up to six rows (longer lists flow into sub-columns, below).
+- Hovering a badge lights its column: a beam starts as wide as the column's zone at the foot of the strip, narrows to the width of the nodes' drawn bodies by the top of the first label, and runs straight down past the last node; the nodes glow (one halo around each node, also for end nodes drawn in two parts) and their labels turn bold. Hovering a value lights its node the same way.
+- Click a badge to hide its column: it moves up to the grey **Not shown** row, listed from the left. Click it there to show the column again, in its previous place. At least two columns stay in the diagram.
+- Drag a badge sideways to reorder the columns: there is one place between each two shown columns (the pointer between their centres), marked by a blue line in the white between their zones (the badge's own place lights its zone instead; dropping there changes nothing). Drag it up into the grey row to hide it, or a hidden one down to show it at the place marked. Focus a badge and press Alt+←/→ to move it with the keyboard.
+- Click a value to drop the rows with it, or to keep them again; keeping a single value leaves its column in the diagram, and a dropped value keeps its place in the list, greyed out, as does a value left without rows by another column's filters. In wide tables this is the column's row filter (below); in long tables it filters by stage: dropping "Agree" under wave 2 drops the respondents who answered "Agree" in wave 2 (all their rows), not every "Agree". Items without a row at that stage stay. A column's last kept value cannot be dropped.
+- A list longer than the strip's six rows flows down numbered sub-columns side by side, shrinking to a compact size and then narrower sub-columns where the zone is tight, and scrolls only when even those do not fit. Values longer than about 200 px are cut short; the tooltip, and the value while dragged, show them in full.
+- Drag a value up or down its list (or across its sub-columns) to move its node within the column (a blue line marks the place), or focus it and press Alt+↑/↓. The order is kept with the table, so later rebuilds keep it too.
+- The **Arrange** tab at the strip's right end hides or shows it (remembered in this browser).
+
+**Data → Imported table** retains the original input and exposes:
+
+- **Keep rows with these values**: expand any source column, including one that is not plotted, and toggle its values. **only** keeps a single value; a search box helps with larger lists. **All values** clears one column's filter; **Reset row filters** clears all. Values within a column are alternatives; filters across columns must all match. Blank cells have their own `(blank)` option.
+- Counts of matching source rows, plotted flow and omitted incomplete records. Filters run on source rows before building trajectories; for true long tables this means individual visit rows. The selected missing-value policy still determines whether incomplete trajectories are dropped or kept.
+
+In wide tables, choosing a single value here (not in the strip) hides that column from the diagram automatically, provided at least two diagram columns remain. Expanding or resetting the filter restores automatically hidden columns in their existing order. Showing the column again by hand (its badge in the strip) overrides this automatic restoration. Filtering a column you had already hidden leaves it hidden. The filter caption remains visible even when its diagram column is hidden.
+
+Each change rebuilds flow matrices and pathways from the retained source, recalculates the base value scale and node positions, resets manual node/strand edits, and fits labels, bars and endpoint counts. Styling, global layout settings and the chosen strand-thickness multiplier are retained. Per-stage routing settings follow unchanged ordered pairs of adjacent columns; newly adjacent or reversed pairs use the global defaults. Automatic canvases grow and scroll when many columns or categories need more room, and grow taller whenever a node's label would reach into the node above it (for example after thickening the strands), past a fixed canvas height too; explicit canvas sizes remain under your control. Invalid changes, including subsets without any usable flows, show an error and preserve the previous plot and settings.
+
+Active filters appear above the diagram as **column** ∈ {kept values}, wrapping when necessary. This caption is included in SVG, PNG and generated R drawings. Column choices, filters and the original source table are saved in project JSON and browser sessions, and participate in undo/redo. Older saved projects that predate retained source tables need their original table imported once to enable these controls. Loading replacement flow matrices removes the table controls.
+
+## Interaction
+
+- A narrow grey margin sets the canvas off from the strip above it and the settings beside it. **Fit plot to panel** (square icon) scales the entire canvas to fit the panel. **Fit plot to height** (double-headed arrow) fills the panel height and allows horizontal scrolling. The magnifier buttons zoom by factors of 1.25, from 0.1× to 10× the selected fit. Text, outlines, bars and geometry all scale uniformly; pointer hit testing and dragging follow this scale. These controls preserve the layout and its data limits, save with sessions/projects, and support undo/redo. **Fit view** still refits the data limits around the content, 6 px clear of strands, nodes, labels and the share bars shown on hover. SVG and PNG exports crop to what is visible with a 12 px margin, regardless of display zoom: the room kept for substrand counts is left out unless counts are shown. **Crop exports to the drawing** (Canvas & dragging, on by default) can be turned off to export the whole canvas.
+- **Hover limit (pathways)** (Canvas & dragging, default 200) pauses ordinary hover effects when the number of unique pathways exceeds the limit: no bulk traces, dimming, share bars or hover details. Ctrl/⌘ or Shift still traces one pathway; Alt/⌥ traces one item if ids are available. Modifier keys work without moving the pointer again. Raising the limit can slow the browser; zero disables ordinary hover on any pathway diagram. A click or Shift-click emphasizes all pathways through the target below the limit, preserving its usual behavior; above the limit it emphasizes only the single highlighted pathway/item. Click-to-edit stays available.
+- Node fills and outlines share the same sampled curves. Positive-width bodies reserve curved shoulders instead of zero-width transitions, with sampling increased for larger bends. Single-substrand hit testing follows the drawn offset edges and expanded node bodies, including near their top and bottom; node slices are cached per layout to keep modifier hover responsive.
+- Bezier strands retain constant thickness perpendicular to their centerlines. If a wide, steep cubic would fold an offset edge backward, that strand uses two tangent circular arcs joined by a straight section, with horizontal tangents at both node faces. The R engine uses the same geometry. Imported tables move columns apart when a turn needs more room and retain that space in saved projects: the canvas widens to keep the scale, or with a fixed canvas width the drawing shrinks to fit. Layouts from loc files report bends that need more space.
+- Merge fills comprise the node body and the actual ribbon polygons inside each merge band. They preserve gaps as strands separate, rather than filling across the entire bundle to a vertical cutoff. Polygon and border clipping retain every segment crossing. Node outlines are masked against the combined fill so covered internal edges disappear while exposed curves and pointed splits remain outlined; their visible width stays 0.6 px. R merge fills use the same individual bands in solid and gradient drawings.
+- Strand outlines, custom borders and substrand divisions are painted with their own fill, so later strands and node polygons cover those edges together. Node borders follow the same ordering. Hidden edges no longer show through opaque shapes. Pathways tile a stack proportional to their counts at each node face and cross the node on one smooth S-curve of constant perpendicular thickness, from their incoming to their outgoing place. Extra node height for labels does not stretch the substrands. Interior bodies reserve enough width for these turns.
+- **Thin plot outline** (Borders & labels, on by default) draws a 0.6 px black outline along strand and node edges, matching the substrand-line thickness. It disappears while hovering, pinning or pooling a selection; SVG and PNG exports keep the outline's visible state. Custom strand and node borders remain separately configurable.
+- Strand outlines are drawn above all strand fills, but where a strand passes under another (drawn later) its outline hides, ending exactly at the edge of the strand on top, so only that strand is outlined. Strand outlines run just outside the strand's edge, as node outlines do outside the node, so a strand's outline continues its node's without a step where it leaves the node or its merge band. A strand passing behind a node it does not touch shows faintly through the node, so it reads as running behind it. With opaque node trunks, strands run a fraction of a pixel under node bodies, so a node face shows no light seam even without a merge band (Merge length 0).
+- Hover a strand or node for values and shares of source outflow / target inflow; other strands dim, and other nodes fade towards the background while staying opaque, so a node's band and body keep one color. Hover details appear in the inspector panel (or a corner card in narrow windows), not at the pointer, so they never cover the plot. A small bar under every node shows the share of that node the hovered strand, node or traced pathways fill (node color) against the rest (faded node color), with both percentages beside it; nodes they miss show an empty bar at 0%. Bars shrink for narrower node bodies, keeping a 60 px maximum. When space would leave less than 24 px for the bar, percentage text and its spacing shrink; bodies narrower than 72 px reserve one third of their width for the bar. Text stays at 10.5 px when there is room. Placement clears the actual body underneath the bar and measured percentages by 7 px, avoiding extra distance caused by remote ribbon faces; view fitting reserves the widget's bounds. Nodes without a body retain the maximum bar width.
+- Numeric settings are sliders. The number beside each one is also an input: click it to type a value, which may pass the slider's ends except for bounded settings (Curvature, Opacity, Boundary easing, which reject values outside their range). Clearing the number makes Merge length or the canvas Width/Height automatic again. Sliders keep at least 64 px: in a settings panel too narrow for that, setting names sit above their controls.
+- Settings carry small cartoons of what they do: both ends of a slider (e.g. straight vs. strongly curved strands for Curvature), the chosen option of a menu (updating as you switch), and what a checkbox turns on (faded while off). Absolute sizes carry a ruler, while sizes relative to something show that reference, so e.g. Merge length (a ruler under the merged trunk) and Merge fraction (the trunk's share of the strand) look different. Setting names wrap rather than being cut off; hover a name for its help.
+- Drag the borders between the settings panel, the plot and the inspector to resize the side panels (arrow keys work on a focused border; double-click restores the default). The widths are kept in this browser, and the plot panel keeps at least 320 px.
+- Click to select; the inspector edits strand values and colors (including three-way mid colors), node labels, positions, widths, heights, fonts, and node or trunk colors.
+- Drag a node to move it (Shift: vertical only, Alt: horizontal only). A click emphasizes the strand or node clicked, and opens its editor in the inspector; clicking it again, or clicking empty space, clears the emphasis. Shift-click adds or removes one strand or node while keeping the rest, and hovering others previews them on top of the emphasis, which stays. Dragging any of several emphasized nodes moves them all by the same amount, and they stop together at the view's edge or at a wall. The inspector lists what is emphasized, with a **Clear** button.
+- Drag a strand up or down to reorder it within the stack at its nearer end.
+- Over the plot panel the mouse wheel (or a trackpad pinch) zooms about the pointer, and dragging empty space pans; a click on empty space still clears the selection. Double-clicking the canvas fits all of it in the panel, and the handle at its bottom-right corner resizes it while the plot keeps its scale (the extra room opens on the right and below). **Align** (toolbar) gives each column's nodes one x, puts the top and bottom nodes of every column on two shared lines and spaces the rest evenly. Three icon buttons beside it do parts of that: **center** each column's nodes on one vertical line, **spread** each column's nodes evenly between its top and bottom node, and **even out the column gaps** as Auto-layout does (each gap's steepest strand gets the same slope, as far as the widest strands' turns allow) while keeping node heights. Center and spread act on the picked nodes of a column when two or more (spread: three or more) are picked, otherwise on every column.
+- Dragged nodes stay within the plotted area and never widen the canvas (Fit view also recomputes the canvas width, shrinking one that an earlier edit widened while keeping the room a newly generated table layout was given). Dragging a node into a neighbour stops at an invisible wall, or (Canvas & dragging → "Dragged node hits: neighbours") shoves the neighbour along; a node can never be dropped into an invalid layout.
+- **Pathway tracing** (wide and long table imports): hovering a strand or node traces every pathway through it end to end, e.g. which stages and treatments feed Remission, and the inspector breaks the traced items down by node and by strand (counts and shares of the traced total) and lists the largest pathways. Hold Ctrl/⌘ to trace only the pathway (unique trajectory) under the pointer, or Alt/⌥ to trace only the single item there (e.g. patient P091) when the data has item ids. Clicking a strand or node pins its traces and breakdown above its editor in the inspector until you click it again or empty space. Shift-click adds its substrands (all through a strand or node, or with Ctrl/⌘ or Alt/⌥ too one pathway or one item) to the emphasized ones, or removes them when they are all emphasized already; the emphasized substrands are traced, filled into the node bars and tabulated in the inspector as one set, e.g. two nodes' worth of patients, and hovering another strand or node adds its traces to them until the pointer leaves. Nodes and strands made entirely of traced substrands hide their faded copies. Share bars fill an outlined box that stands for 100% of the traced total. Each strand is split into substrands, one per pathway and then one per item, ordered by where they arrive at the strand's source node. Traces are colored like the strands and nodes they cross, curve through interior nodes from band edge to band edge, run into end-node bodies, and fade with the node bodies (through white at labeled node centres); the traced nodes dim like the rest, keeping their labels. With **Gather traces in nodes** (off by default; Canvas & dragging), several traced pathways close up into one contiguous bundle through each node they share, in the order they cross it, set against the node's top or bottom edge (whichever moves them less, so the rest of the node stays in one piece for comparison), and fan back out to their own strands at the node edges. Each trace crosses an interior node on one constant-width S-curve with horizontal tangents at both faces, so substrands bound for different strands start to part as soon as they enter the node (gathered traces bend through their bundle place at the node centre instead); traces remain flat through end-node bodies unless gathered. Substrands keep their arrival order inside a strand, so in a node the ones bound for one strand can sit apart and slide by different amounts to close up; as separate constant-width ribbons, a farther-sliding one would sweep over its neighbour. By default every substrand keeps its full width, and traces are as see-through as the strands (the Opacity setting), so where they overlap both show. Overlaps also darken with each extra substrand (about 8% for two, 27% for five, capped at 45%), so heavy overlaps stand out. Where traced substrands cross, only the one drawn on top keeps its thin edge, as with strands. **No overlaps in nodes** (off by default; Canvas & dragging) instead crosses any node where traced substrands that keep their order would overlap (or where a constant-width turn is too tight to draw) on one shared curve of vertical slices, which never overlap but thin a little on steep stretches; substrands that swap order still cross. A single traced item thinner than 4 px is drawn 4 px wide around its slice. **Substrand lines** (Canvas & dragging) draw the substrand divisions permanently. Tracing switches off (with a warning) if flow values are edited away from the imported data.
+- **Merging nodes**: clicking and Shift-clicking nodes emphasizes them (on any data, with or without pathways), and dragging an emphasized node moves all of them. With two or more nodes emphasized in one column, a red **Merge** button appears in the toolbar; it asks for the new node's name (pre-filled with the members' names joined by " + ") and collapses them into one node: their strands' values are summed, every other node keeps its color, and item-level pathways are re-indexed (pathways that differed only there become one). Layouts made by an import or auto-layout re-stack the merged column and respace the columns as if the data had that node from the start; a loaded loc keeps the merged node at the members' weighted mean height. In an imported table the merge is kept with the table: later rebuilds (from the arrange strip or the row filters) keep the merged node, and the strip lists it as one value, whose click drops or keeps all its members' rows; its ✂ (or Delete on the focused value) splits it back into its members, in its place. Grouped ("Other") and missing-value nodes of an imported table cannot be merged. Ctrl/⌘+Z undoes a merge. Graph mode does not support merging yet.
+- **Substrand counts** (on by default) and **Substrand percentages** (off by default), under Canvas & dragging, annotate the current hover, pinned selection or pool. Each traced pathway or item has a small raw count to the right of its rightmost node. Crowded counts spread vertically and move at least 48 px outward, increasing up to 180 px with their displacement; the count column also clears node labels in its vertical range. Leader lines run horizontally past labels before fanning out, and are masked around label text. Fitted views reserve the gutter for one count per pathway ending at the busiest rightmost node (what a hover or pin labels), including a one-time refit for older saved views; pools of many single items can fan out farther than that. When enabled, white percentages sit near the middle of each of its edge segments, aligned with the substrand's local direction: pathway/item count divided by that edge's full count (e.g. 41/63 = 65.1%, then 41/69 = 59.4%). Labels resize for thin slices, use a subtle dark halo for contrast, and move slightly along crossing ribbons to reduce overlap. Ctrl/⌘ labels one pathway; Alt/⌥ labels one item. Both toggles save with the session/project; SVG/PNG exports keep the visible labels. Older saved sessions fit the view once to make room for the default counts. These annotations require consistent pathway data and enabled tracing; they do not change R bundle drawing settings.
+- With labels above nodes, nodes are as wide as their labels. Newly generated table layouts (imports, **Auto-layout** in the toolbar, merges) also balance their column gaps: the steepest strand of every gap gets the same slope (rise over run between node faces), no gap is narrower than half the widest or too narrow to draw its turns, and if that common slope would exceed 2 the canvas widens until it does not. With a fixed canvas width the gaps are balanced within it. Later drags and edits do not respace the columns.
+- Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z), fit view (F), clear the emphasis (Esc, or click empty space). Undo/redo clears the emphasis because it refers to the previous data. Sessions autosave to the browser.
+
+All `sankey_ribbons()` layout options are available in the sidebar, including per-stage routing and ordering ("Apply to: stage k"), `adjust_loc`, `adjust_node_height`, boundary routing and compensation, plus graph-mode `require_forward` and `balance`.
+
+## Exports
+
+The **SVG** and **PNG** (2×) buttons export the plot as shown in one click: with a pinned selection or pool in focus, the export keeps the faded background, traces, substrand annotations and fill bars. The Export menu has the rest: `loc.csv`, a project JSON, and an **R bundle** zip containing the flow matrices, resolved color matrices, `loc.csv` and a `sankey.R` script that calls `sankey_ribbons()`/`sankey_ribbons_graph()` and `plot_sankey_ribbons()` with the current settings. Strand orders set by dragging are written to `stack_order.csv` and passed to R as `stack_order`.
+
+## Code layout
+
+- `js/layout.js`: geometry core ported from the R code (node tables, stacking and ordering, `adjust_loc`, node heights, Bezier and boundary routing). Computed in isotropic plot pixels, so R's `xyr` is always 1.
+- `js/shapes.js`: merge trunks, node bodies, interior bridges and border paths.
+- `js/render.js`: color resolution and SVG markup.
+- `js/app.js`: state, controls, file loading, interactions, inspector, history and exports.
+- `js/submission.js`: the JSON submission contract for table, matrix and project inputs; `scripts/render.cjs` runs it in isolated headless Chromium for SVG/PNG/JSON/ZIP output.
+- `js/transform.js` and `js/importer.js`: table import converters (wide, long, links, crosstab) and the import dialog.
+- `js/table-controls.js`: retained source-table queries, Data controls for diagram columns/stages and row values, and the subset caption shared by SVG/PNG and R output.
+- `js/column-strip.js`: arrange-strip positioning, column/value dragging, and hover beams, using the source operations in `table-controls.js`.
+- `js/paths.js`: substrand and item-slice stacking, pathway trace geometry and annotation anchors, hit-testing and substrand lines for item-level data.
+- `js/edit.js`: data edits on the app state (merging nodes of one column).
+- `js/glyphs.js`: the small setting cartoons (inline SVG, 30 × 18).
+- `js/csv.js`, `js/color.js`, `js/zip.js`, `js/examples.js`: parsing, color math, a store-only zip writer and the bundled examples (matrix sets, aggregated patient pathways, the same patients one row each with patient ids, and long-format survey waves).
+
+## Tests
+
+```sh
+cd webapp
+npm install                 # Playwright test runner
+npm run test:unit           # geometry parity with R, layout, CSV parsing, table import, pathways and edits (node:test)
+npm run test:e2e            # browser tests (Playwright, Chromium)
+```
+
+Regenerate the R reference geometry from the repository root with `Rscript webapp/tests/r_parity_fixtures.R`.
+
+The parity fixtures are produced by the R functions themselves, so `layout.js` is checked against R's strand offsets, centerlines, edges, adjusted node positions and merge lengths.
