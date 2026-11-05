@@ -1,0 +1,121 @@
+/* Signature Correction: what is particular to this page, over /shared/base.css (tokens, frame,
+   controls, file button, problems, out-of-date results, dialog and the narrow layout). */
+
+.small { font-size: 0.88rem; }
+.card > p.small { margin: 0.4rem 0; }
+
+/* The signing pad: drawing must not scroll or zoom the page. */
+.pad-frame, .result-frame, .morph-frame { position: relative; }
+.pad {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  touch-action: none;
+  cursor: crosshair;
+}
+.pad:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.pad-empty {
+  position: absolute;
+  left: 6%;
+  top: 74%;
+  margin: 0;
+  pointer-events: none;
+  font-size: 0.95rem;
+}
+
+.result, .morph {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2.4 / 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.result.brushing { cursor: cell; touch-action: none; }
+.result-empty[hidden], .legend[hidden] { display: none; }
+.result-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  color: #5a5a5a; /* on the light checkerboard in both themes */
+}
+.morph-frame .result-empty { color: var(--muted); }
+
+/* Radio groups drawn as pills: the chosen one is filled and ticked. */
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.6rem;
+}
+.segmented label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--surface);
+  cursor: pointer;
+}
+.segmented input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.segmented label:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--surface); }
+.segmented label:has(input:checked)::before { content: "✓"; }
+.segmented label:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.6rem; align-items: center; }
+.key { display: inline-block; width: 1.6rem; vertical-align: middle; }
+.key-after { height: 0.35rem; background: var(--ink, #1b1b1b); border-radius: 2px; outline: 1px solid var(--border); }
+.key-before { height: 0; border-top: 2px solid #d0312d; }
+
+.settings output { color: var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3rem; }
+.settings input[type="range"] { padding: 0; }
+.settings input[type="color"] { min-height: 2.2rem; padding: 0.15rem; width: 4rem; }
+.settings label.check { flex-direction: row; align-items: flex-start; gap: 0.5rem; grid-column: 1 / -1; }
+.settings label.check input { margin-top: 0.3rem; }
+.input-row select { flex: none; }
+
+details.more { margin-top: 0.75rem; }
+details.more summary { cursor: pointer; color: var(--primary); font-weight: 600; }
+
+.scrub { display: flex; align-items: center; gap: 0.5rem; flex: 1 1 12rem; color: var(--muted); font-size: 0.92rem; }
+.scrub input { flex: 1; min-width: 6rem; }
+.scrub output { min-width: 3ch; color: var(--text); font-variant-numeric: tabular-nums; }
+
+.filmstrip {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+}
+.filmstrip li { display: flex; flex-direction: column; gap: 0.2rem; align-items: center; }
+.filmstrip canvas {
+  width: 100%;
+  aspect-ratio: 2.4 / 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.toolbar .spacer { flex: 1; }
+
+/* Wide screens: the settings beside the corrected view, then the morph across the page, its
+   view beside its controls. */
+@media (min-width: 1000px) {
+  .layout { grid-template-rows: auto auto 1fr; }
+  .layout > .morph-card { grid-column: 1 / -1; }
+  .morph-body { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 0 1.5rem; align-items: start; }
+  .morph-view { grid-column: 1; grid-row: 1; }
+  .morph-controls { grid-column: 2; grid-row: 1; }
+  .morph-controls .settings { grid-template-columns: minmax(0, 1fr); }
+}

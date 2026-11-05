@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Clean up a signature drawn on a trackpad, mouse or phone: smooth it, give it a pen's natural width, and download a transparent PNG or SVG. Free, and it never leaves your browser.">
+  <title>Signature Correction</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 21c3-9 6-12 7-9s-4 9-1 9 5-8 7-7-1 6 1 6 4-3 6-4' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Signature Correction</h1>
+        <p class="tagline">Sign with a trackpad, mouse, pen or finger, then smooth the wobble and give the line a pen's natural width. Download it as a transparent PNG or SVG for documents. Everything runs in your browser; your signature is never uploaded.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card" aria-labelledby="sign-heading">
+      <div class="card-head">
+        <h2 id="sign-heading">Sign</h2>
+        <span id="pad-info" class="muted" role="status"></span>
+      </div>
+      <div class="pad-frame">
+        <canvas id="pad" class="pad" tabindex="0" aria-label="Signing pad. Draw with a mouse, trackpad, pen or finger. Control+Z undoes the last stroke." aria-describedby="pad-help"></canvas>
+        <p id="pad-empty" class="pad-empty muted" aria-hidden="true">Sign here</p>
+      </div>
+      <p id="pad-help" class="visually-hidden">Drawing needs a pointer. Without one, load the example or import a file.</p>
+      <div class="toolbar">
+        <button id="undo" type="button" aria-keyshortcuts="Control+Z">↶ Undo</button>
+        <button id="clear" type="button">✕ Clear</button>
+        <button id="replay" type="button" aria-pressed="false">▶ Replay</button>
+        <button id="example" type="button">Example signature</button>
+        <label class="file-button">Import… <input id="import" type="file" accept=".csv,.json,.svg,text/csv,application/json,image/svg+xml"></label>
+      </div>
+      <p class="muted small">Import a CSV of <code>x,y</code> (and <code>t</code> in milliseconds, <code>pressure</code>), a JSON list of strokes, or an SVG of pen paths.</p>
+    </section>
+
+    <section id="results-card" class="card results-card" aria-labelledby="result-heading">
+      <div class="card-head">
+        <h2 id="result-heading">Corrected</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="stale" class="stale-banner" hidden></p>
+      <fieldset class="segmented" aria-label="Show">
+        <label><input type="radio" name="view" value="after" checked> After</label>
+        <label><input type="radio" name="view" value="both"> Both</label>
+        <label><input type="radio" name="view" value="before"> Before</label>
+      </fieldset>
+      <div class="result-frame stale-dim">
+        <canvas id="result" class="result" aria-label="The corrected signature"></canvas>
+        <p id="result-empty" class="placeholder result-empty">Sign on the pad, or load the example, to see it corrected here.</p>
+      </div>
+      <p id="view-legend" class="legend muted small" hidden><span class="key key-after" aria-hidden="true"></span> corrected <span class="key key-before" aria-hidden="true"></span> as drawn</p>
+
+      <h3>Brush</h3>
+      <p class="muted small">Paint along part of the signature to smooth it more or less than the rest.</p>
+      <fieldset class="segmented" aria-label="Brush">
+        <label><input type="radio" name="brush" value="off" checked> Off</label>
+        <label><input type="radio" name="brush" value="more"> ＋ Smooth more</label>
+        <label><input type="radio" name="brush" value="less"> − Smooth less</label>
+      </fieldset>
+      <div class="settings">
+        <label>Brush strength <output id="brush-strength-out" for="brush-strength"></output>
+          <input id="brush-strength" type="range" min="1.5" max="6" step="0.5" value="3">
+        </label>
+        <label>Brush size <output id="brush-size-out" for="brush-size"></output>
+          <input id="brush-size" type="range" min="6" max="60" step="2" value="22">
+        </label>
+      </div>
+      <div class="toolbar">
+        <span id="brush-info" class="muted">No brushed regions.</span>
+        <button id="brush-clear" type="button" disabled>Clear brushed regions</button>
+      </div>
+
+      <h3>Download</h3>
+      <div class="settings">
+        <label>Ink
+          <input id="ink" type="color" value="#1b1b1b">
+        </label>
+        <label>Height
+          <span class="input-row"><input id="png-height" type="number" min="1" step="1" value="20" aria-label="Height"><select id="png-unit" aria-label="Unit"><option value="mm" selected>mm</option><option value="in">in</option><option value="px">px</option></select></span>
+        </label>
+        <label>PNG resolution (dpi)
+          <input id="png-dpi" type="number" min="72" max="2400" step="1" value="300">
+        </label>
+      </div>
+      <p id="png-size" class="muted small"></p>
+      <div class="toolbar">
+        <button id="download-png" type="button" class="primary" disabled>Download PNG</button>
+        <button id="download-svg" type="button" disabled>Download SVG</button>
+        <button id="download-json" type="button" disabled>Strokes JSON</button>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="smooth-heading">
+      <h2 id="smooth-heading">Smoothing</h2>
+      <div class="settings">
+        <label>Overall smoothing (Fourier) <output data-out="smooth.fourier.strength"></output>
+          <input data-path="smooth.fourier.strength" type="range" min="0" max="10" step="0.1">
+        </label>
+        <label>Local smoothing (wavelet) <output data-out="wavelet-amount"></output>
+          <input id="wavelet-amount" type="range" min="0" max="50" step="1" aria-describedby="wavelet-help">
+        </label>
+      </div>
+      <p id="wavelet-help" class="muted small">Overall smoothing evens out each whole stroke; 1 is the original R script's level. Local smoothing removes small wobbles, and the brush scales it along the signature. It shows the share of the stroke's detail that is kept.</p>
+      <details class="more">
+        <summary>More smoothing settings</summary>
+        <div class="settings">
+          <label>Wavelet rule
+            <select data-path="smooth.wavelet.rule">
+              <option value="energy">Energy kept (the R script's default)</option>
+              <option value="noise">Noise level × multiplier</option>
+            </select>
+          </label>
+          <label>Noise multiplier (noise rule)
+            <input data-path="smooth.wavelet.noiseMultiplier" data-type="number" type="number" min="0" step="0.5">
+          </label>
+          <label>Wavelet filter
+            <select data-path="smooth.wavelet.filter">
+              <option value="haar">haar</option><option value="d4">d4</option><option value="mb4">mb4</option><option value="d6">d6</option><option value="la8">la8</option>
+            </select>
+          </label>
+          <label>Wavelet levels (auto or 1–12)
+            <input data-path="smooth.wavelet.levels" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
+          </label>
+          <label>Resampling step (auto: height / 100)
+            <input data-path="resample.step" data-type="number-or-auto" type="text" inputmode="decimal" spellcheck="false">
+          </label>
+          <label class="check"><input data-path="smooth.wavelet.thresholdSmooth" type="checkbox"> Also threshold the smooth, as the R script did (pulls strokes inward)</label>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="width-heading">
+      <h2 id="width-heading">Pen width</h2>
+      <div class="settings">
+        <label>Width from
+          <select data-path="width.source" aria-describedby="source-help">
+            <option value="auto">Automatic</option>
+            <option value="speed">Signing speed</option>
+            <option value="curvature">Curvature (two-thirds law)</option>
+            <option value="pressure">Pen pressure</option>
+            <option value="constant">Constant</option>
+          </select>
+        </label>
+        <label>Thinnest (% of height) <output data-out="width.min"></output>
+          <input data-path="width.min" data-scale="100" type="range" min="0.2" max="8" step="0.1">
+        </label>
+        <label>Thickest (% of height) <output data-out="width.max"></output>
+          <input data-path="width.max" data-scale="100" type="range" min="0.5" max="12" step="0.1">
+        </label>
+        <label>Curvature exponent <output data-out="width.exponent"></output>
+          <input data-path="width.exponent" type="range" min="0" max="1" step="0.01">
+        </label>
+        <label>Taper at the ends (% of height) <output data-out="width.taper.length"></output>
+          <input data-path="width.taper.length" data-scale="100" type="range" min="0" max="30" step="0.5">
+        </label>
+      </div>
+      <p id="source-help" class="muted small"></p>
+      <details class="more">
+        <summary>More width settings</summary>
+        <div class="settings">
+          <label>Share of curvature in measured speed <output data-out="width.geometryWeight"></output>
+            <input data-path="width.geometryWeight" type="range" min="0" max="1" step="0.05">
+          </label>
+          <label>Straight above a radius of (× height) <output data-out="width.straightRadius"></output>
+            <input data-path="width.straightRadius" type="range" min="0.1" max="5" step="0.1">
+          </label>
+          <label>Smoothing along the stroke (% of height) <output data-out="width.smoothing"></output>
+            <input data-path="width.smoothing" data-scale="100" type="range" min="0.5" max="20" step="0.5">
+          </label>
+          <label>Width at the very end (% of full) <output data-out="width.taper.floor"></output>
+            <input data-path="width.taper.floor" data-scale="100" type="range" min="0" max="100" step="5">
+          </label>
+        </div>
+      </details>
+      <div class="toolbar">
+        <button id="reset" type="button">Reset settings</button>
+      </div>
+    </section>
+
+    <section class="card morph-card" aria-labelledby="morph-heading">
+      <h2 id="morph-heading">Morph</h2>
+      <div class="morph-body">
+      <div class="morph-controls">
+      <p class="muted small">Turn the corrected signature into a second one, as the original R script animated it.</p>
+      <div class="toolbar">
+        <button id="morph-example" type="button">Second example</button>
+        <button id="morph-draw" type="button">Draw the second…</button>
+        <label class="file-button">Import the second… <input id="morph-import" type="file" accept=".csv,.json,.svg,text/csv,application/json,image/svg+xml"></label>
+        <span id="morph-info" class="muted">No second signature yet.</span>
+      </div>
+      <div class="settings">
+        <label>Interpolate
+          <select id="morph-method">
+            <option value="wavelet">Wavelet coefficients (the R script)</option>
+            <option value="linear">Fourier-smoothed strokes (the R script's comparison)</option>
+            <option value="corrected">Strokes as corrected here</option>
+          </select>
+        </label>
+        <label>Strokes
+          <select id="morph-strokes">
+            <option value="all">All, paired</option>
+            <option value="first">First only (the R script)</option>
+          </select>
+        </label>
+        <label>Loops in the middle <output id="morph-loop-out" for="morph-loop"></output>
+          <input id="morph-loop" type="range" min="0" max="4" step="0.25" value="0">
+        </label>
+      </div>
+      </div>
+      <div class="morph-view">
+      <div class="morph-frame">
+        <canvas id="morph" class="morph" aria-label="The morph"></canvas>
+        <p id="morph-empty" class="placeholder result-empty">Add a second signature to morph into.</p>
+      </div>
+      <div class="toolbar">
+        <button id="morph-play" type="button" aria-pressed="false" disabled>▶ Play</button>
+        <label class="scrub">Position <output id="morph-p-out" for="morph-p"></output>
+          <input id="morph-p" type="range" min="0" max="120" step="1" value="0" disabled>
+        </label>
+        <button id="morph-record" type="button" disabled>Record video</button>
+      </div>
+      <p id="morph-record-info" class="muted small" hidden></p>
+      <ol id="filmstrip" class="filmstrip" aria-label="The morph at five positions"></ol>
+      </div>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <ol>
+          <li><strong>Strokes.</strong> Each stroke is resampled at equal steps along its length, so the smoothing does not depend on how often the device reported the pen.</li>
+          <li><strong>Overall smoothing.</strong> Each stroke, mirrored at its end so it has no jump, is taken apart into frequencies, and the weakest are dropped (Fourier hard thresholding).</li>
+          <li><strong>Local smoothing.</strong> The stroke's wavelet coefficients (the maximal-overlap discrete wavelet transform) are soft-thresholded. A wavelet coefficient describes one stretch of the stroke at one scale, so the brush can raise or lower the threshold along the stroke.</li>
+          <li><strong>Width.</strong> A pen leaves more ink where it moves slowly. With timing, the speed is how far the pen moved between the device's reports, smoothed along the stroke, and steadied by the stroke's shape. Without timing, the speed comes from the shape alone. People speed up on straight runs and slow down in tight turns: the two-thirds power law, under which speed goes as curvature to the power −1/3 (Lacquaniti, Terzuolo &amp; Viviani 1983). The ends taper.</li>
+          <li><strong>Outline.</strong> An SVG line has one width, so each stroke becomes a filled outline, and the outlines are merged where they overlap. The PNG and SVG have no background.</li>
+          <li><strong>Morph.</strong> Both signatures are centred and brought to the same length of ink. Strokes are paired; a stroke the other signature lacks grows from the point where it crosses a paired one.</li>
+        </ol>
+        <p>This is a port of an R script from 2023 by Nik Vetr, with its bugs fixed. Scripts and agents can use the same corrector: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <dialog id="draw-dialog" aria-labelledby="draw-dialog-title">
+    <div class="dialog-head">
+      <h2 id="draw-dialog-title">Draw the second signature</h2>
+      <button type="button" class="dialog-close" data-close aria-label="Close">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div class="pad-frame">
+        <canvas id="pad2" class="pad" tabindex="0" aria-label="Signing pad for the second signature"></canvas>
+      </div>
+      <div class="toolbar">
+        <button id="undo2" type="button">↶ Undo</button>
+        <button id="clear2" type="button">✕ Clear</button>
+        <span class="spacer"></span>
+        <button type="button" data-close>Cancel</button>
+        <button id="draw-done" type="button" class="primary" disabled>Use this signature</button>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2023-08-30">2023-08-30</time>
+    </div>
+  </footer>
+</body>
+</html>
