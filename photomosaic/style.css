@@ -41,6 +41,13 @@
 .target-preview { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #ffffff; }
 .target-row p { margin: 0; flex: 1 1 12rem; }
 
+/* In one column the mosaic comes after these two cards, so the photos and target are shown
+   smaller there: the photos in a shorter scroll, the target beside its description. */
+@media (max-width: 999px) {
+  .contact-scroll { max-height: 7.5rem; }
+  .target-preview { max-width: 7.5rem; }
+}
+
 /* ---------- Mosaic ---------- */
 
 .choice { border: 0; padding: 0; margin: 0 0 0.6rem; min-width: 0; }

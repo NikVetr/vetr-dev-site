@@ -13,9 +13,7 @@
 /* Four input cards on the left (guests, pairs and groups, tables, settings) beside the results. */
 @media (min-width: 1000px) {
   .layout { grid-template-rows: repeat(4, auto) 1fr; }
-  .results-link { display: none; }
 }
-.results-link { margin-left: auto; font-size: 0.92rem; }
 
 /* After Load example or Clear: what was replaced, and a way back. */
 .undo-note { margin: 0.5rem 0; color: var(--muted); }

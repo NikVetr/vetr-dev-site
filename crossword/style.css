@@ -14,6 +14,13 @@
 .target-preview { border: 1px solid var(--border); border-radius: var(--radius-sm); background: #ffffff; image-rendering: pixelated; }
 .inline-field { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.92rem; color: var(--muted); }
 .inline-field input { color: var(--text); max-width: 8rem; }
+.target-row > div { flex: 1 1 12rem; }
+
+/* In one column the crosswords come after these two cards, so the answers box is shorter
+   there (it scrolls, and can be dragged taller). */
+@media (max-width: 999px) {
+  .entries { height: 11rem; }
+}
 
 /* ---------- Results ---------- */
 

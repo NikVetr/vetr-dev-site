@@ -37,6 +37,34 @@
       </div>
     </section>
 
+    <section class="card results-card" aria-labelledby="sheets-heading">
+      <div class="card-head">
+        <h2 id="sheets-heading">Sheets</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="generate" type="button" class="primary">Generate</button>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="warnings" class="muted" hidden></p>
+      <p id="no-result" class="placeholder">The sheets appear here after a run.</p>
+      <div id="result" hidden>
+        <fieldset id="sheet-choice" class="sheet-choice" hidden>
+          <legend>Sheet</legend>
+          <div id="sheet-options" class="toolbar"></div>
+        </fieldset>
+        <figure id="preview" class="preview"></figure>
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <span id="downloads" class="toolbar inline"></span>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+        <p class="muted hint">Sheets are drawn at 96 units per inch with their size in inches, as Inkscape reads them; engraving is filled black, each used cell has a thin grey outline.</p>
+      </div>
+    </section>
+
     <section class="card" aria-labelledby="tray-heading">
       <h2 id="tray-heading">Tray</h2>
       <div class="settings">
@@ -111,34 +139,6 @@
         <label class="file-button">Open logo (SVG, PNG or JPEG)… <input id="logo-file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></label>
       </div>
       <p id="logo-status" class="muted" hidden></p>
-    </section>
-
-    <section class="card results-card" aria-labelledby="sheets-heading">
-      <div class="card-head">
-        <h2 id="sheets-heading">Sheets</h2>
-        <span id="status" class="muted" role="status"></span>
-      </div>
-      <div class="toolbar">
-        <button id="generate" type="button" class="primary">Generate</button>
-        <button id="stop" type="button" disabled>Stop</button>
-      </div>
-      <div id="issues" class="issues" role="alert" hidden></div>
-      <p id="warnings" class="muted" hidden></p>
-      <p id="no-result" class="placeholder">The sheets appear here after a run.</p>
-      <div id="result" hidden>
-        <fieldset id="sheet-choice" class="sheet-choice" hidden>
-          <legend>Sheet</legend>
-          <div id="sheet-options" class="toolbar"></div>
-        </fieldset>
-        <figure id="preview" class="preview"></figure>
-        <div class="toolbar">
-          <span class="muted">Download:</span>
-          <span id="downloads" class="toolbar inline"></span>
-          <button id="export-result" type="button">Result JSON</button>
-          <button id="export-request" type="button">Request JSON</button>
-        </div>
-        <p class="muted hint">Sheets are drawn at 96 units per inch with their size in inches, as Inkscape reads them; engraving is filled black, each used cell has a thin grey outline.</p>
-      </div>
     </section>
 
     <section class="card method-card">
