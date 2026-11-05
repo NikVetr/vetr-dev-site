@@ -2,8 +2,8 @@
    shadow (style.css at the root), on a warm paper plane, with a serif voice for
    titles and prose and the system sans for controls, numbers and figures. No
    transitions or animation. Chart colours were checked with the dataviz validator:
-   groups A/B are categorical slots 1 and 2, categories an ordinal teal ramp,
-   probabilities a sequential blue ramp. */
+   groups A/B (and arrows A/B/C) are categorical slots 1–3, categories an ordinal
+   teal ramp, probabilities a sequential blue ramp. */
 
 :root {
   color-scheme: light;
@@ -32,6 +32,7 @@
   --b: #eb6834;
   --b-soft: rgba(235, 104, 52, 0.16);
   --b-strong: rgba(235, 104, 52, 0.66);
+  --c: #1baf7a;
   --cat-0: #77bfa8; --cat-1: #5fa690; --cat-2: #488e79; --cat-3: #317663; --cat-4: #175f4d; --cat-5: #004939;
   --seq-0: #f3f7fd; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec; --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95;
   --seq-ink-low: #1b1b1b; --seq-ink-high: #ffffff;
@@ -60,6 +61,7 @@
   --b: #d95926;
   --b-soft: rgba(217, 89, 38, 0.22);
   --b-strong: rgba(217, 89, 38, 0.74);
+  --c: #199e70;
   --cat-0: #115a48; --cat-1: #2f7460; --cat-2: #4a8e7a; --cat-3: #64a994; --cat-4: #7fc6af; --cat-5: #9ae3cb;
   --seq-0: #1a2130; --seq-1: #0d366b; --seq-2: #104281; --seq-3: #1c5cab; --seq-4: #2a78d6; --seq-5: #5598e7; --seq-6: #86b6ef;
   --seq-ink-low: #ffffff; --seq-ink-high: #10141a;
@@ -93,6 +95,8 @@ h3 { margin: 1.2rem 0 0.4rem; font-size: 1.08rem; }
 var, .math { font-family: var(--serif); font-style: italic; }
 .num { font-variant-numeric: tabular-nums; }
 .muted { color: var(--muted); }
+
+[hidden] { display: none !important; }
 
 .visually-hidden {
   position: absolute;
@@ -367,3 +371,128 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .entry-card .meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; align-items: center; color: var(--muted); font-size: 0.88rem; }
 .entry-card time { padding: 0.05rem 0.5rem; border: 1px solid var(--border); border-radius: 999px; font-variant-numeric: tabular-nums; }
 .intro { max-width: 72ch; }
+
+/* ---------- Explorable panels (correlation geometry) ---------- */
+
+.panel-nav ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.9rem 0 0; padding-left: 1.2rem; font-size: 0.95rem; }
+.panel-nav li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
+.panel { margin-top: 1.2rem; scroll-margin-top: 1rem; }
+.panel > h2 { font-size: 1.35rem; }
+.panel-number {
+  display: inline-grid;
+  margin-right: 0.5rem;
+  vertical-align: 0.12em;
+  place-items: center;
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 50%;
+  color: var(--primary);
+  font: 600 0.95rem/1 var(--sans);
+}
+.panel-intro { margin: 0 0 0.9rem; max-width: 78ch; font-family: var(--serif); font-size: 1.04rem; line-height: 1.6; }
+.panel-body { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) {
+  .panel-body { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 1.6rem; }
+}
+.panel-side { display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
+.panel-side .control:first-child { border-top: 0; }
+.panel-side .readout { margin: 0.3rem 0 0; }
+.side-heading { margin: 0.6rem 0 0; font-size: 1rem; }
+.curve-block { margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--grid); }
+.curve-block h3 { margin: 0; }
+.panel .tabs { margin: 0 0 0.8rem; }
+.note strong { font-family: var(--sans); }
+
+.scene { border-radius: var(--radius-sm); background: var(--surface-2); cursor: grab; }
+.scene:active { cursor: grabbing; }
+.scene:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.view-controls { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; margin: 0.45rem 0 0.2rem; }
+.view-controls button { min-height: 2.25rem; padding: 0.25rem 0.75rem; font-size: 0.88rem; }
+.view-controls button.icon { min-width: 2.5rem; justify-content: center; }
+.view-controls .hint { color: var(--muted); font-size: 0.85rem; }
+
+.segmented { display: inline-flex; flex-wrap: wrap; gap: 0.35rem; }
+.segmented label { display: inline-flex; gap: 0.35rem; align-items: center; min-height: 2.25rem; padding: 0.25rem 0.8rem; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
+.segmented label:has(input:checked) { border-color: var(--primary); background: var(--primary-soft); font-weight: 600; }
+.segmented input { accent-color: var(--primary); margin: 0; }
+.panel-side > .control { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; align-items: center; }
+.panel-side > .control:has(input[type="range"]) { display: grid; }
+
+.data-row { display: flex; flex-wrap: wrap; gap: 0.8rem 1.2rem; align-items: flex-start; }
+.data-row .table-wrap { flex: none; }
+.data-row .scatter { flex: 1 1 200px; min-width: 180px; max-width: 320px; }
+.data-grid { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.data-grid th { padding: 0.2rem 0.4rem; color: var(--muted); font-weight: 500; font-size: 0.88rem; text-align: center; }
+.data-grid td { padding: 0.15rem; }
+.data-grid input { width: 4.6rem; }
+
+.matrix-grid { border-collapse: separate; border-spacing: 3px; font-variant-numeric: tabular-nums; }
+.matrix-grid th { padding: 0.1rem 0.3rem; color: var(--muted); font-weight: 500; font-size: 0.88rem; text-align: center; }
+.matrix-grid td { min-width: 3.9rem; padding: 0.2rem; border: 2px solid transparent; border-radius: 6px; background: var(--seq-0); color: var(--seq-ink-low); text-align: center; vertical-align: top; }
+.matrix-grid td.diag { background: var(--surface-2); color: var(--muted); vertical-align: middle; }
+.matrix-grid td[data-shade="1"] { background: var(--seq-1); }
+.matrix-grid td[data-shade="2"] { background: var(--seq-2); }
+.matrix-grid td[data-shade="3"] { background: var(--seq-3); }
+.matrix-grid td[data-shade="4"] { background: var(--seq-4); }
+.matrix-grid td[data-shade="5"] { background: var(--seq-5); color: var(--seq-ink-high); }
+.matrix-grid td[data-shade="6"] { background: var(--seq-6); color: var(--seq-ink-high); }
+.matrix-grid td.chosen { border-color: var(--ink); border-style: dashed; }
+.matrix-grid td.primary { border-style: solid; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
+.matrix-grid input { width: 4.1rem; min-height: 2rem; padding: 0.15rem 0.35rem; background: var(--surface); color: var(--text); appearance: textfield; -moz-appearance: textfield; }
+/* The arrow keys still step a cell; the spinner would cover its digits. */
+.matrix-grid input::-webkit-inner-spin-button, .matrix-grid input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.matrix-grid .cell-width { display: block; margin-top: 0.1rem; font-size: 0.75rem; line-height: 1.2; white-space: nowrap; }
+
+/* 3-D scene marks */
+.plot .wire { stroke: var(--border); stroke-width: 1; }
+.plot .wire.back { stroke: var(--grid); stroke-dasharray: 2 3; }
+.plot .sphere-outline { stroke: var(--faint); stroke-width: 1.2; }
+.plot .great-circle { stroke: var(--ink); stroke-width: 2; }
+.plot .great-circle.back { stroke-width: 1.3; stroke-dasharray: 4 4; opacity: 0.55; }
+.plot .plane-patch { fill: var(--faint); fill-opacity: 0.13; }
+.plot .box-patch { fill: var(--primary); fill-opacity: 0.08; stroke: var(--primary); stroke-opacity: 0.35; stroke-width: 0.8; }
+.plot .axis3 { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 1 3; }
+.plot .axis-common { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 6 4; }
+.plot .centred-line { stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.plot .arrow { stroke-width: 3; stroke-linecap: round; }
+.plot .arrow.dashed { stroke-width: 2.2; stroke-dasharray: 6 4; }
+.plot .a-stroke { stroke: var(--a); }
+.plot .b-stroke { stroke: var(--b); }
+.plot .c-stroke { stroke: var(--c); }
+.plot .ink-stroke { stroke: var(--ink); stroke-width: 2.2; }
+.plot .c-mark { fill: var(--c); stroke: var(--surface); stroke-width: 1.5; }
+.plot .b-cone { fill: var(--b); fill-opacity: 0.12; }
+.plot .b-ring { stroke: var(--b); stroke-width: 1.6; }
+.plot .angle-arc { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+.plot .simplex-edge { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.plot .scene-label { fill: var(--text); font-size: 12.5px; paint-order: stroke; stroke: var(--surface-2); stroke-width: 3px; stroke-linejoin: round; }
+.plot .scene-label.strong { font-weight: 700; font-size: 13.5px; }
+.plot .scene-label.small { fill: var(--muted); font-size: 11px; }
+
+/* Intervals, eigenvalues and curves */
+.plot .det-fill { fill: var(--primary); fill-opacity: 0.12; }
+.plot .det-outside { fill: none; stroke: var(--alert); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.plot .range-track { stroke: var(--grid); stroke-width: 8; stroke-linecap: round; }
+.plot .range-bar { stroke: var(--primary); stroke-width: 8; stroke-linecap: round; }
+.plot .range-bar.thin { stroke-width: 5; stroke-opacity: 0.6; }
+.plot .range-end { stroke: var(--primary); stroke-width: 2; }
+.plot .eig-bar { fill: var(--primary); fill-opacity: 0.75; }
+.plot .eig-bar.negative { fill: var(--alert); fill-opacity: 0.85; }
+.plot .feasible-band { fill: var(--primary); fill-opacity: 0.1; }
+.plot .equal-line { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.plot .alert-mark { fill: var(--alert); stroke: var(--surface); stroke-width: 1.5; }
+.plot .c-line { fill: none; stroke: var(--c); stroke-width: 2; }
+.plot .c-line.zero { stroke-width: 3; }
+.plot .hollow-strong { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+
+.entry-card.feature { grid-column: 1 / -1; }
+@media (min-width: 760px) {
+  .entry-card.feature { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-rows: 1fr auto auto auto 1fr; column-gap: 1.6rem; }
+  .entry-card.feature .thumb { grid-row: 1 / -1; }
+  .entry-card.feature > :not(.thumb) { grid-column: 2; }
+  .entry-card.feature h2 { grid-row: 2; }
+  .entry-card.feature p { grid-row: 3; }
+  .entry-card.feature .meta { grid-row: 4; }
+}

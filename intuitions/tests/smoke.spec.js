@@ -12,10 +12,10 @@ async function open(page, path) {
 
 const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
-test('the index lists both entries with thumbnails and exposes submit', async ({ page }) => {
+test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(2);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(2);
+  await expect(page.locator('.entry-card')).toHaveCount(3);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(3);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -97,9 +97,66 @@ test('threshold model: drag a threshold, sample two traits, fit the table', asyn
   expect(errors).toEqual([]);
 });
 
+test('correlation geometry: panels respond to controls, rotation, cell choice and the API', async ({ page }) => {
+  const errors = await open(page, 'correlation-geometry/');
+  await expect(page.locator('#arrows-readout')).toContainText('0.327');
+  await page.locator('input[name="arrows-n"][value="2"]').check();
+  await expect(page.locator('#arrows-readout')).toContainText('can only be 1 or −1');
+  await page.locator('input[name="arrows-n"][value="3"]').check();
+
+  // Rotation by keyboard and by drag both change the drawing; numbers do not change.
+  const scene = page.locator('#cone-scene');
+  await scene.scrollIntoViewIfNeeded();
+  const before = await scene.innerHTML();
+  await scene.focus();
+  await page.keyboard.press('ArrowRight');
+  const turned = await scene.innerHTML();
+  expect(turned).not.toBe(before);
+  const box = /** @type {{ x: number, y: number, width: number, height: number }} */ (await scene.boundingBox());
+  await page.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.5);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.7, box.y + box.height * 0.4, { steps: 4 });
+  await page.mouse.up();
+  expect(await scene.innerHTML()).not.toBe(turned);
+  await page.getByRole('button', { name: 'Reset view' }).nth(1).click();
+  expect(await scene.innerHTML()).toBe(before);
+  await expect(page.locator('#cone-readout')).toContainText('0.80 or −0.80');
+
+  await page.locator('#cos-ab-number').fill('0.3');
+  await expect(page.locator('#cosine-forced')).toContainText('Either sign');
+
+  await page.locator('#equi-k-number').fill('4');
+  await page.getByRole('button', { name: /Go to the limit/ }).click();
+  await expect(page.locator('#equi-r-number')).toHaveValue('-0.33');
+  await page.locator('#equi-r-number').fill('-0.5');
+  await expect(page.locator('#equi-issue')).toContainText('No 4 arrows');
+  await page.getByRole('tab', { name: 'One pair at 0' }).click();
+  await expect(page.locator('#zero-plot svg')).toBeVisible();
+
+  // Choose a cell, then make the matrix invalid and valid again.
+  await page.locator('#entry-grid input[data-cell="1,2"]').focus();
+  await expect(page.locator('#entry-readout')).toContainText('BC');
+  await page.locator('#entry-grid input[data-cell="0,1"]').fill('-0.9');
+  await expect(page.locator('#entry-issues')).toContainText('not positive semidefinite');
+  await expect(page.locator('#entry-result')).toBeHidden();
+  await page.locator('#entry-grid input[data-cell="0,1"]').fill('0.7');
+  await expect(page.locator('#entry-issues')).toBeHidden();
+
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const out = app.submit({ entry: 'correlation-geometry', params: { view: 'cosine-rule', rAB: 0.5, rBC: 0.6, rAC: -0.6 } });
+    return { interval: out.result.interval, request: app.getRequest().params.view };
+  });
+  expect(api.interval[0]).toBeCloseTo(0.3 - Math.sqrt(0.75 * 0.64), 12);
+  expect(api.request).toBe('cosine-rule');
+  await expect(page.locator('#cos-ab-number')).toHaveValue('0.5');
+  await expect(page.locator('#cosine-forced')).toContainText('impossible');
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }
@@ -110,5 +167,9 @@ test('every page and view fits a 390 px phone without horizontal scrolling', asy
   }
   await page.locator('#fit-rows').selectOption('6');
   await page.locator('#fit-cols').selectOption('6');
+  expect(await overflow(page)).toBe(0);
+  await open(page, 'correlation-geometry/');
+  await page.locator('#entry-p').selectOption('8');
+  await page.getByRole('tab', { name: 'One pair at 0' }).click();
   expect(await overflow(page)).toBe(0);
 });

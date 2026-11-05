@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Correlation as geometry: every variable is an arrow and every correlation the cosine of an angle. Rotate the arrows in 3-D to see why a correlation matrix must be positive semidefinite, which correlations can go together, how far apart k variables can be, and how much room one entry has.">
+  <title>The geometry of correlation · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M8 24L24 18M8 24L14 7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M13.4 13A11 11 0 0 1 18 20.5' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('intuitions:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Correlation geometry</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>The geometry of correlation</h1>
+      <p class="lede">Centre a variable's observations and scale them to length 1, and the variable becomes an arrow. The correlation of two variables is the cosine of the angle between their arrows. So a table of correlations is a table of angles, and it is a valid correlation matrix (positive semidefinite) exactly when some set of arrows has those angles. Each panel below turns one consequence of that into something you can rotate and push against.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#arrows">A variable is an arrow</a></li>
+          <li><a href="#cone">Fixing a correlation draws a cone</a></li>
+          <li><a href="#cosine-rule">The cosine rule</a></li>
+          <li><a href="#equicorrelation">How far apart can k arrows be?</a></li>
+          <li><a href="#entry-range">One entry's room to move</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="arrows" aria-labelledby="arrows-heading">
+      <h2 id="arrows-heading"><span class="panel-number">1</span> A variable is an arrow</h2>
+      <p class="panel-intro">Take <var>n</var> observations of two variables, A and B. Subtract each variable's mean and divide what is left by its length: each variable is now an arrow of length 1 in <var>n</var>-dimensional observation space, one axis per observation. The dot product of the two arrows is Pearson's <var>r</var>, so <var>r</var> = cos <var>θ</var> for the angle <var>θ</var> between them. Centring puts every arrow on the plane where the coordinates sum to 0. With three observations that plane cuts the sphere in a great circle; with two, only two arrows are left.</p>
+      <div class="panel-body">
+        <figure class="scene-figure">
+          <div id="arrows-scene" class="plot-box scene" tabindex="0" role="group" aria-roledescription="rotatable 3-D figure" aria-label="Observation space. Drag, or use the arrow keys, to rotate."></div>
+          <div class="view-controls" id="arrows-view" role="group" aria-label="Turn the 3-D view"></div>
+          <figcaption id="arrows-caption" class="caption"></figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="arrows-n-label">Observations</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="arrows-n-label">
+              <label><input type="radio" name="arrows-n" value="2"> 2</label>
+              <label><input type="radio" name="arrows-n" value="3" checked> 3</label>
+            </div>
+          </div>
+          <div class="data-row">
+            <div class="table-wrap">
+              <table class="data-grid" id="arrows-data">
+                <caption class="visually-hidden">Observations of A and B</caption>
+              </table>
+            </div>
+            <div id="arrows-scatter" class="plot-box scatter"></div>
+          </div>
+          <p class="readout" id="arrows-readout" aria-live="polite"></p>
+          <p class="caption">Edit a value, or drag a numbered point in the scatterplot. The arrows ignore the variables' means and scales: shifting or stretching B leaves its arrow, and <var>r</var>, unchanged.</p>
+          <div class="controls-foot"><button type="button" id="arrows-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="cone" aria-labelledby="cone-heading">
+      <h2 id="cone-heading"><span class="panel-number">2</span> Fixing a correlation draws a cone</h2>
+      <p class="panel-intro">Give a third variable, C, correlation <var>r</var><sub>BC</sub> with B. C's arrow must be at angle cos⁻¹ <var>r</var><sub>BC</sub> from B's, so it lies on a cone around B. With three observations C must also lie on the great circle, and the cone meets the circle at only two points, C₁ and C₂: B turned by that angle one way or the other. Any other variable A then has one of exactly two correlations with C. Each extra observation adds a dimension, so with four the two points become a circle of choices.</p>
+      <div class="panel-body">
+        <figure class="scene-figure">
+          <div id="cone-scene" class="plot-box scene" tabindex="0" role="group" aria-roledescription="rotatable 3-D figure" aria-label="B's cone and the great circle. Drag, or use the arrow keys, to rotate."></div>
+          <div class="view-controls" id="cone-view" role="group" aria-label="Turn the 3-D view"></div>
+          <figcaption class="caption">The cone of arrows at angle cos⁻¹ <var>r</var><sub>BC</sub> from B (shaded) cuts the great circle of centred arrows at C₁ and C₂ (dashed). The arcs mark A's angles to them.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="cone-r-number">Correlation of B and C, <var>r</var><sub>BC</sub></label>
+              <input id="cone-r-number" type="number" min="-1" max="1" step="0.01">
+            </div>
+            <input id="cone-r-range" type="range" min="-1" max="1" step="0.01" aria-label="Correlation of B and C, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="cone-b-number">B's position on the circle</label>
+              <span class="value-field"><input id="cone-b-number" type="number" min="0" max="359" step="1"><span class="unit">°</span></span>
+            </div>
+            <input id="cone-b-range" type="range" min="0" max="359" step="1" aria-label="B's position on the circle, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="cone-a-number">A's position on the circle</label>
+              <span class="value-field"><input id="cone-a-number" type="number" min="0" max="359" step="1"><span class="unit">°</span></span>
+            </div>
+            <input id="cone-a-range" type="range" min="0" max="359" step="1" aria-label="A's position on the circle, slider">
+          </div>
+          <p class="readout" id="cone-readout" aria-live="polite"></p>
+          <dl class="stats" id="cone-stats"></dl>
+          <p class="note">These two values are the ends of the interval in panel 3. With only three observations the three arrows share a plane, so <var>r</var><sub>AC</sub> can only be at an end.</p>
+          <div class="controls-foot"><button type="button" id="cone-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="cosine-rule" aria-labelledby="cosine-heading">
+      <h2 id="cosine-heading"><span class="panel-number">3</span> The cosine rule: which <var>r</var><sub>AC</sub> are possible?</h2>
+      <p class="panel-intro">Now let the arrows use as many dimensions as they need. Fix <var>r</var><sub>AB</sub> = cos <var>α</var> and <var>r</var><sub>BC</sub> = cos <var>β</var>. C can sit anywhere on the cone of angle <var>β</var> around B. As it goes round, it comes closest to A on A's side of B, at angle |<var>α</var> − <var>β</var>|, and is farthest on the opposite side, at <var>α</var> + <var>β</var>. So <var>r</var><sub>AC</sub> lies between cos(<var>α</var> + <var>β</var>) and cos(<var>α</var> − <var>β</var>), which is <var>r</var><sub>AB</sub><var>r</var><sub>BC</sub> ± √((1 − <var>r</var><sub>AB</sub>²)(1 − <var>r</var><sub>BC</sub>²)). The bound comes from adding angles, not correlations.</p>
+      <div class="panel-body">
+        <figure class="scene-figure">
+          <div id="cosine-scene" class="plot-box scene" tabindex="0" role="group" aria-roledescription="rotatable 3-D figure" aria-label="Arrows A, B and C with B's cone. Drag, or use the arrow keys, to rotate."></div>
+          <div class="view-controls" id="cosine-view" role="group" aria-label="Turn the 3-D view"></div>
+          <figcaption class="caption">C on B's cone (orange rim). The tetrahedron the three arrows make with the origin (blue) has volume √det <var>R</var> / 6; it flattens to nothing when C reaches either end of its range and the arrows share a plane.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="cos-ab-number">Correlation of A and B, <var>r</var><sub>AB</sub></label>
+              <input id="cos-ab-number" type="number" min="-1" max="1" step="0.01">
+            </div>
+            <input id="cos-ab-range" type="range" min="-1" max="1" step="0.01" aria-label="Correlation of A and B, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="cos-bc-number">Correlation of B and C, <var>r</var><sub>BC</sub></label>
+              <input id="cos-bc-number" type="number" min="-1" max="1" step="0.01">
+            </div>
+            <input id="cos-bc-range" type="range" min="-1" max="1" step="0.01" aria-label="Correlation of B and C, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="cos-phi-number">C's position around B's cone</label>
+              <span class="value-field"><input id="cos-phi-number" type="number" min="0" max="360" step="1"><span class="unit">°</span></span>
+            </div>
+            <input id="cos-phi-range" type="range" min="0" max="360" step="1" aria-label="C's position around B's cone, slider">
+            <p class="hint">0° puts C on A's side of B (largest <var>r</var><sub>AC</sub>), 180° opposite (smallest).</p>
+          </div>
+          <p class="readout" id="cosine-readout" aria-live="polite"></p>
+          <p class="note" id="cosine-forced"></p>
+          <div id="cosine-interval" class="plot-box"></div>
+          <p class="caption">det <var>R</var> = 1 − <var>r</var><sub>AB</sub>² − <var>r</var><sub>BC</sub>² − <var>r</var><sub>AC</sub>² + 2<var>r</var><sub>AB</sub><var>r</var><sub>BC</sub><var>r</var><sub>AC</sub> as <var>r</var><sub>AC</sub> varies: the squared volume of the box the arrows span. It is 0 at both ends of the bar, largest at its centre <var>r</var><sub>AB</sub><var>r</var><sub>BC</sub> (◇), and negative outside, where no arrows exist. The dot is C's current value.</p>
+          <div class="controls-foot"><button type="button" id="cosine-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card panel" id="equicorrelation" aria-labelledby="equi-heading">
+      <h2 id="equi-heading"><span class="panel-number">4</span> How far apart can <var>k</var> arrows be?</h2>
+      <p class="panel-intro">Two arrows can point opposite ways, <var>r</var> = −1. Three can be at most 120° apart in pairs (<var>r</var> = −½), four at most 109.5° (<var>r</var> = −⅓, the corners of a tetrahedron). In general <var>k</var> arrows can all have correlation <var>r</var> only if <var>r</var> ≥ −1/(<var>k</var> − 1). At that limit they are the vertices of a regular simplex centred on the origin, and they add up to zero. Agreement is easy; mutual disagreement is not.</p>
+      <div class="tabs" role="tablist" aria-label="Which pairs">
+        <button type="button" role="tab" id="tab-equal" aria-controls="equi-equal" aria-selected="true">All pairs equal</button>
+        <button type="button" role="tab" id="tab-zero" aria-controls="equi-zero" aria-selected="false" tabindex="-1">One pair at 0</button>
+      </div>
+      <div class="panel-body">
+        <div>
+          <figure class="scene-figure" id="equi-equal" role="tabpanel" aria-labelledby="tab-equal">
+            <div id="equi-scene" class="plot-box scene" tabindex="0" role="group" aria-roledescription="rotatable 3-D figure" aria-label="k arrows with a common correlation. Drag, or use the arrow keys, to rotate."></div>
+            <div class="view-controls" id="equi-view" role="group" aria-label="Turn the 3-D view"></div>
+            <figcaption class="caption" id="equi-caption"></figcaption>
+          </figure>
+          <figure id="equi-zero" role="tabpanel" aria-labelledby="tab-zero" hidden>
+            <div id="zero-plot" class="plot-box"></div>
+            <figcaption class="caption">With variables 1 and 2 held at <var>r</var> = 0, the common correlation <var>c</var> of every other pair must lie in the shaded band. Its top is [(<var>k</var> − 3) + √(<var>k</var>² + 2<var>k</var> − 7)] / (4(<var>k</var> − 2)): 1/√2 for three variables, falling toward ½. The dashed line is −1/(<var>k</var> − 1), the limit when every pair is equal. The dot is your <var>k</var> and <var>c</var>.</figcaption>
+          </figure>
+        </div>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="equi-k-number">Number of variables, <var>k</var></label>
+              <input id="equi-k-number" type="number" min="2" max="8" step="1">
+            </div>
+            <input id="equi-k-range" type="range" min="2" max="8" step="1" aria-label="Number of variables, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="equi-r-number" id="equi-r-label">Common correlation, <var>r</var></label>
+              <input id="equi-r-number" type="number" min="-1" max="1" step="0.01">
+            </div>
+            <input id="equi-r-range" type="range" min="-1" max="1" step="0.01" aria-label="Common correlation, slider">
+          </div>
+          <div class="controls-foot">
+            <button type="button" id="equi-low">Go to the lowest</button>
+            <button type="button" id="equi-high" hidden>Go to the highest</button>
+          </div>
+          <p class="readout" id="equi-readout" aria-live="polite"></p>
+          <div id="equi-issue" class="issues" role="alert" hidden></div>
+          <h3 class="side-heading">Eigenvalues</h3>
+          <div id="equi-eigen" class="plot-box"></div>
+          <p class="caption" id="equi-eigen-caption"></p>
+          <div class="controls-foot"><button type="button" id="equi-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card panel" id="entry-range" aria-labelledby="entry-heading">
+      <h2 id="entry-heading"><span class="panel-number">5</span> One entry's room to move</h2>
+      <p class="panel-intro">Fix every entry of a correlation matrix but one. The free entry, <var>r</var><sub><var>ij</var></sub>, can still move within an interval: its centre is <var>r</var><sub><var>i</var></sub>ᵀ<var>S</var>⁻¹<var>r</var><sub><var>j</var></sub> and its half-width √((1 − <var>r</var><sub><var>i</var></sub>ᵀ<var>S</var>⁻¹<var>r</var><sub><var>i</var></sub>)(1 − <var>r</var><sub><var>j</var></sub>ᵀ<var>S</var>⁻¹<var>r</var><sub><var>j</var></sub>)), where <var>S</var> holds the correlations among the other variables and <var>r</var><sub><var>i</var></sub>, <var>r</var><sub><var>j</var></sub> their correlations with <var>i</var> and <var>j</var>. The half-width is the product of the parts of the two arrows that the others leave unexplained, and the centre is the value that makes det <var>R</var> largest. Choose a cell to see its interval; edit any entry to move it.</p>
+      <div class="panel-body">
+        <div class="panel-side">
+          <div class="control-row">
+            <label for="entry-p">Variables</label>
+            <select id="entry-p"></select>
+            <button type="button" id="entry-uniform">Random matrix</button>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="entry-obs-number">Observations, <var>n</var></label>
+              <input id="entry-obs-number" type="number" min="3" max="200" step="1">
+            </div>
+            <input id="entry-obs-range" type="range" min="3" max="200" step="1" aria-label="Observations, slider">
+            <p class="hint">Used by the button below and by the sample curve under the matrix.</p>
+          </div>
+          <div class="control-row"><button type="button" id="entry-sample">Sample correlation of <span id="entry-sample-n"></span> observations</button></div>
+          <p class="hint" id="entry-source"></p>
+          <div class="table-wrap">
+            <table class="matrix-grid" id="entry-grid"></table>
+          </div>
+          <div id="entry-issues" class="issues" role="alert" hidden></div>
+          <p class="hint">Each cell is shaded by its interval's width, darker for more room, with the width under its value. The chosen cell is outlined and marked ●.</p>
+          <div class="controls-foot"><button type="button" id="entry-reset">Reset</button></div>
+        </div>
+        <div id="entry-result">
+          <p class="readout" id="entry-readout" aria-live="polite"></p>
+          <div id="entry-interval" class="plot-box"></div>
+          <p class="caption" id="entry-caption"></p>
+          <dl class="stats" id="entry-stats"></dl>
+        </div>
+      </div>
+      <div class="curve-block">
+        <div class="figure-head"><h3>Expected room as variables are added</h3></div>
+        <ul class="legend" id="entry-legend"></ul>
+        <div id="entry-curve" class="plot-box"></div>
+        <p class="caption">Expected width of one entry's interval in a <var>p</var> × <var>p</var> matrix, both scales logarithmic. Drawn uniformly from all correlation matrices (LKJ with <var>η</var> = 1), the room shrinks steadily as the other variables explain more of each arrow. The sample correlation matrix of <var>n</var> observations of independent variables shrinks faster: its arrows live in <var>n</var> − 1 dimensions, so it is singular once <var>p</var> ≥ <var>n</var>. At <var>p</var> = <var>n</var> every entry sits at one end of its interval, and from <var>p</var> = <var>n</var> + 1 every interval has width 0: each entry is fixed by the rest. The diamond is the matrix above (its mean width over all cells).</p>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>Why the arrows exist</h3>
+        <p>Centring a variable's <var>n</var> values gives a vector whose entries sum to 0; dividing by its length gives a unit vector. Pearson's <var>r</var> is the sum of products of two such vectors, their dot product, so it is the cosine of the angle between them. A correlation matrix is the Gram matrix of its variables' arrows, which is why it must be positive semidefinite: <var>x</var>ᵀ<var>R</var><var>x</var> is the squared length of a combination of arrows. Conversely, any positive semidefinite matrix with 1s on the diagonal is the Gram matrix of some unit arrows, given enough dimensions.</p>
+        <h3>Determinants are squared volumes</h3>
+        <p>det <var>R</var> is the squared volume of the parallelotope the arrows span (√det <var>R</var> is the volume). It is 1 when the arrows are at right angles and 0 when they are linearly dependent, which happens when the matrix sits on the boundary of the positive semidefinite set.</p>
+        <h3>Counting dimensions</h3>
+        <p>With <var>n</var> observations, the centred arrows live in <var>n</var> − 1 dimensions. A full-rank set of <var>p</var> arrows needs <var>p</var> ≤ <var>n</var> − 1, so a sample correlation matrix is singular whenever <var>p</var> ≥ <var>n</var>. With three observations the arrows have two dimensions to share, which is why panel 2's cone meets the circle in exactly two points; with <var>n</var> observations the arrows at a fixed angle to one arrow form a sphere of dimension <var>n</var> − 3.</p>
+        <h3>The intervals</h3>
+        <p>For one entry, write det <var>R</var> as det <var>S</var> × [(1 − <var>a</var>)(1 − <var>b</var>) − (<var>r</var><sub><var>ij</var></sub> − <var>c</var>)²], with <var>a</var>, <var>b</var> and <var>c</var> the quadratic forms in the panel 5 formula. The bracket is a downward parabola in <var>r</var><sub><var>ij</var></sub>, so the entry's interval is where it is non-negative. When the other variables are themselves linearly dependent the page uses the pseudo-inverse of <var>S</var>, which gives the same interval. The expected widths are exact: in a uniform matrix, the parts of <var>i</var> and <var>j</var> the others leave unexplained are independent products of independent Beta-distributed partial correlations (the C-vine of Lewandowski, Kurowicka and Joe, 2009); in a sample matrix each is Beta((<var>n</var> − <var>p</var> + 1)/2, (<var>p</var> − 2)/2).</p>
+        <h3>The R scripts</h3>
+        <p>The panels come from R scripts written for teaching and for sampling correlation matrices in MCMC. A few statements there are corrected here. The interval function in the three-way constraint script returned the interval's centre as its lower end, because it set the free Cholesky entry to 0 rather than to minus the remaining length; the compound-symmetry script's version is right, and is what this page follows. The scripts call det <var>R</var> the volume the arrows enclose; it is the squared volume. They say the construction of arrows fails when <var>p</var> &gt; <var>n</var>; it fails, for a full-rank matrix, once <var>p</var> ≥ <var>n</var>. Their whitening step multiplied by the inverse of the upper Cholesky factor where column-vector data need the inverse of its transpose, which is why the whitened covariance came out wrong (not a Bessel correction). The numerical searches for the cone's intersections and for the largest correlation with one pair at 0 are replaced by closed forms. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2019-12-03">2019-12-03</time>
+    </div>
+  </footer>
+</body>
+</html>
