@@ -1,6 +1,6 @@
 // Small dense linear algebra for the gallery: vector helpers, the eigen-
-// decomposition of a symmetric matrix (up to a few hundred rows) and a linear solve.
-// Matrices are arrays of rows.
+// decomposition of a symmetric matrix (up to a few hundred rows), the Cholesky factor of
+// a positive-definite one, and a linear solve. Matrices are arrays of rows.
 
 /** @typedef {number[]} Vector */
 /** @typedef {number[][]} Matrix */
@@ -250,4 +250,28 @@ export function solve(matrix, rhs) {
     x[r] = sum / a[r][r];
   }
   return x;
+}
+
+/**
+ * The lower-triangular Cholesky factor L of a symmetric positive-definite matrix
+ * (A = L Lᵀ), or null when a pivot is not positive (the matrix is not positive definite
+ * to working precision).
+ * @param {ArrayLike<number>[]} matrix symmetric
+ * @returns {Matrix | null}
+ */
+export function cholesky(matrix) {
+  const n = matrix.length;
+  const L = Array.from({ length: n }, () => new Array(n).fill(0));
+  for (let j = 0; j < n; j++) {
+    let d = matrix[j][j];
+    for (let k = 0; k < j; k++) d -= L[j][k] * L[j][k];
+    if (!(d > 1e-14 * Math.abs(matrix[j][j]))) return null;
+    L[j][j] = Math.sqrt(d);
+    for (let i = j + 1; i < n; i++) {
+      let s = matrix[i][j];
+      for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
+      L[i][j] = s / L[j][j];
+    }
+  }
+  return L;
 }

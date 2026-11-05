@@ -6,7 +6,7 @@ import { dnorm, pnorm, pnormInterval, pnormUpper, qnorm, standardNormal } from '
 import { mulberry32 } from '../../shared/rng.js';
 import { niceTicks, scaleLinear, scaleLog } from '../lib/plot.js';
 import { arcPoints, orientation, project, quatFromAxisAngle, quatMultiply, renderScene, rotateVector, sphereOutline, turn } from '../lib/geom3d.js';
-import { cross, dot, symmetricEigen } from '../lib/linalg.js';
+import { cholesky, cross, dot, symmetricEigen } from '../lib/linalg.js';
 
 const close = (/** @type {number} */ a, /** @type {number} */ b, tol = 1e-14) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
 
@@ -106,6 +106,15 @@ test('symmetric eigen-decomposition reconstructs the matrix with orthonormal vec
   const repeated = symmetricEigen([[1, 0.5, 0.5], [0.5, 1, 0.5], [0.5, 0.5, 1]]).values;
   [2, 0.5, 0.5].forEach((v, i) => close(repeated[i], v, 1e-14));
   assert.deepEqual(cross([1, 0, 0], [0, 1, 0]), [0, 0, 1]);
+});
+
+test('cholesky: L Lᵀ reproduces the matrix, and a matrix that is not positive definite gives null', () => {
+  const A = [[4, 2, -2], [2, 10, 4], [-2, 4, 9]];
+  const L = /** @type {number[][]} */ (cholesky(A));
+  A.forEach((row, i) => row.forEach((v, j) => close(L[i].reduce((s, x, k) => s + x * L[j][k], 0), v, 1e-13)));
+  assert.equal(L[0][1], 0);
+  assert.equal(cholesky([[1, 2], [2, 1]]), null);
+  assert.equal(cholesky([[1, 1], [1, 1]]), null);
 });
 
 test('geom3d: rotations, views, projection and arcs', () => {
