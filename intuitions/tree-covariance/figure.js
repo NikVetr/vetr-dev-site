@@ -169,18 +169,18 @@ export function sweepFigure(sweep, { width, height }) {
   for (const m of sweep.marks) {
     parts.push(el('line', { x1: x(m.at), x2: x(m.at), y1: top, y2: height - bottom, class: 'grid' }), text(x(m.at), height - bottom + 16, m.label, { class: 'tick strong-tick', 'text-anchor': 'middle' }));
   }
-  // Each branch's curve separately: the ordinary likelihood is unbounded at a tip.
-  const legs = sweep.marks.length - 1;
-  const per = sweep.positions.length / legs;
-  for (let k = 0; k < legs; k++) {
-    parts.push(el('path', { d: linePath(ml.slice(k * per, (k + 1) * per)), class: 'b-line' }));
-  }
+  // The points stop short of the two tips, where the ordinary likelihood is unbounded.
+  parts.push(el('path', { d: linePath(ml), class: 'b-line' }));
   parts.push(el('path', { d: linePath(reml), class: 'ink-line' }));
   if (sweep.current !== null) {
     const cx = x(sweep.current);
     parts.push(el('line', { x1: cx, x2: cx, y1: top - 6, y2: height - bottom, class: 'root-line' }));
   }
   parts.push(text(x(0) + 4, y(sweep.reml[0]) - 7, 'restricted, root integrated out', { class: 'direct-label halo' }));
+  // The ordinary curve is labelled at its lowest point, below it.
+  const low = sweep.ml.indexOf(Math.min(...sweep.ml));
+  const lx = Math.min(width - right - textWidth('ordinary, root estimated') / 2, Math.max(left + textWidth('ordinary, root estimated') / 2, x(sweep.positions[low])));
+  parts.push(text(lx, Math.min(height - bottom - 4, y(sweep.ml[low]) + 16), 'ordinary, root estimated', { class: 'direct-label halo', 'text-anchor': 'middle' }));
   parts.push(text((left + width - right) / 2, height - 6, `where the root is, from ${sweep.tips[0]} to ${sweep.tips[1]}`, { class: 'axis-label', 'text-anchor': 'middle' }));
   return svgRoot({ width, height, label: `Log-likelihoods as the root moves from ${sweep.tips[0]} to ${sweep.tips[1]}: the restricted one stays at ${formatNumber(sweep.reml[0], 3)}; the ordinary one, with the root's state estimated, changes and rises toward each tip.` }, parts);
 }

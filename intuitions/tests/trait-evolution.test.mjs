@@ -164,6 +164,17 @@ test('the bridge: fixed ends, the free midpoint law, regions kept, and the stage
   assert.ok(gap > 4 * Math.hypot(stage.midpoint.sample.distanceSE, whole.midpoint.sample.distanceSE), `gap ${gap}`);
 });
 
+test('the bridge stops at its draw budget and says so', () => {
+  const islands = { view: 'bridge', region: 'dumbbell', start: [-12, -6], end: [14, 4], length: 40, levels: 9, paths: 50 };
+  const whole = run({ ...islands, method: 'whole-path' });
+  assert.equal(whole.exhausted, true);
+  assert.equal(whole.paths.length + whole.failed, 50);
+  assert.equal(whole.paths.length ? whole.midpoint.sample !== null : whole.midpoint.sample, whole.paths.length ? true : null);
+  const stage = run(islands);
+  assert.equal(stage.exhausted, false);
+  assert.equal(stage.paths.length, 50);
+});
+
 test("qualifyingExam_animations.R's OUsim: its sigma2 scales a standard normal step, so it is an SD", () => {
   const o = ref.ousim;
   const se = o.asSD * Math.sqrt(2 / 4000);

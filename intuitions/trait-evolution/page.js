@@ -226,6 +226,8 @@ function renderTree() {
   drawn.pheno = phenogramFigure(r, { width, height: phenoHeight, id: 'tree-pheno', params: p });
   drawn.pheno.height = phenoHeight;
   $('tree-phenogram').innerHTML = drawn.pheno.svg;
+  const hidden = [!drawn.treeFig.showsLabels && 'the tree', !drawn.pheno.showsLabels && 'the trait plot'].filter(Boolean);
+  $('tree-labels-note').textContent = hidden.length ? `With ${tips} tips there is no room for every tip's name in ${hidden.join(' or ')}, so they are left out.` : '';
   drawn.rateOn = s.model === 'eb' || s.model === 'burst';
   $('tree-rate-block').hidden = !drawn.rateOn;
   if (drawn.rateOn) $('tree-rate').innerHTML = rateFigure(r, { width, height: 90, id: 'tree-rate' });

@@ -173,8 +173,8 @@ function renderArrows() {
   const box = $('covariance-scene');
   const width = box.clientWidth;
   if (!r || width <= 0) return;
-  const height = Math.round(Math.max(260, Math.min(400, width * 0.75)));
-  box.innerHTML = arrowsScene(r.arrows, { rotation: arrowRotation, width, height, scale: Math.min(width, height) * 0.36, distance: 7 });
+  const height = Math.round(Math.max(260, Math.min(380, width * 0.7)));
+  box.innerHTML = arrowsScene(r.arrows, { rotation: arrowRotation, width, height, scale: Math.min(width, height) * 0.44, distance: 7 });
 }
 
 // ---------- Panel 2 ----------
