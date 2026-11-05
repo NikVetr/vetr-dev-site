@@ -52,7 +52,10 @@ export const LIMITS = Object.freeze({
 /** The cube view's dimensions, 1 to 1,024 in powers of 2. */
 export const CUBE_DIMENSIONS = Object.freeze(Array.from({ length: 11 }, (_, i) => 2 ** i));
 
-/** The three mixtures drawn in mode_pathologies.R, with its relative masses as weights. */
+/**
+ * The three mixtures drawn in mode_pathologies.R, with its relative masses as weights.
+ * @type {Readonly<Record<'spike' | 'bimodal' | 'bathtub', readonly Readonly<Component>[]>>}
+ */
 export const PRESETS = Object.freeze({
   // dexp(|x|, rate = 50) on both sides (mass 2) plus 90 × N(6, 1).
   spike: Object.freeze([
@@ -71,6 +74,10 @@ export const PRESETS = Object.freeze({
   ]),
 });
 
+/**
+ * @type {Readonly<{ shell: Readonly<Omit<ShellParams, 'view'>>, cube: Readonly<Omit<CubeParams, 'view'>>,
+ *   modes: Readonly<{ components: readonly Readonly<Component>[], level: number }>, sphere: Readonly<Omit<SphereParams, 'view'>> }>}
+ */
 export const DEFAULTS = Object.freeze({
   shell: Object.freeze({ k: 10, coverage: 0.9, radius: 1 }),
   cube: Object.freeze({ family: /** @type {Family} */ ('normal'), sample: null }),

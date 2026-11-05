@@ -321,7 +321,7 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 
 /* ---------- Explorable panels (correlation geometry) ---------- */
 
-.panel-nav ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.9rem 0 0; padding-left: 1.2rem; font-size: 0.95rem; }
+.panel-nav ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.9rem 0 0; padding-left: 0; list-style-position: inside; font-size: 0.95rem; }
 .panel-nav li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
 .panel { margin-top: 1.2rem; scroll-margin-top: 1rem; }
 .panel > h2 { font-size: 1.35rem; }
@@ -444,3 +444,20 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
   .entry-card.feature p { grid-row: 3; }
   .entry-card.feature .meta { grid-row: 4; }
 }
+
+/* ---------- Probability mass (typical set) ---------- */
+
+.plot .b-line.dashed, .plot .ink-line.dashed { stroke-dasharray: 6 4; }
+.plot .mass-fill { fill: var(--ink); fill-opacity: 0.07; }
+.plot .shell-fill { fill: var(--primary); fill-opacity: 0.18; }
+.plot .region-fill { fill: var(--primary); fill-opacity: 0.3; }
+.plot .water-line { stroke: var(--primary); stroke-width: 1.5; stroke-dasharray: 6 3; }
+.plot .ball-line { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.plot .a-range { stroke: var(--a); stroke-width: 2; stroke-linecap: round; opacity: 0.7; }
+.plot .hist-bar { fill: var(--faint); fill-opacity: 0.35; }
+.plot .direct-label.strong { font-weight: 600; }
+.plot .mass-swatch { fill: var(--ink); fill-opacity: 0.15; }
+/* A label that may cross a curve keeps a ring of the card's colour around its letters. */
+.plot .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.panel-side > .hint { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.component-grid select { min-height: 2rem; padding: 0.15rem 0.3rem; }

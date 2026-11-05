@@ -7,6 +7,7 @@ The entries are:
 - [`zscore-outliers`](#zscore-outliers): pooled vs stratified z-score outlier removal for two normal groups.
 - [`threshold-model`](#threshold-model): discrete traits from a hidden normal liability, one or two traits, and the polychoric fit of a contingency table.
 - [`correlation-geometry`](#correlation-geometry): correlations as angles between arrows, in five views: data as arrows, the cone of fixed correlation, the cosine-rule range of a third correlation, how far apart *k* arrows can be, and one matrix entry's feasible interval (a feasible-correlation calculator).
+- [`typical-set`](#typical-set): where the probability mass is, in four views: the chi distribution as density × volume, the original script's cube criterion for six families against sampled radii, one-dimensional mixtures with their highest-density region at a water level, and one coordinate of a uniform point on the sphere.
 
 ## Ways in
 
@@ -205,6 +206,59 @@ With every other entry fixed, entry (*i*, *j*) can take any value in an interval
 - **One entry's interval** follows the fixed `coef_bounds()` in `compound-symmetry_correlation_constraint.R`. The copy in `3-way_correlation_constraint.R` returns the interval's centre as its lower end (it sets the free Cholesky entry to 0 instead of to minus the remaining length). Using the pseudo-inverse keeps the formula right when the other variables are linearly dependent, as in a sample matrix with *p* ≥ *n*.
 - **Expected widths** are exact. Uniform over correlation matrices, the shares of *i* and *j* left unexplained by the other *p* − 2 are independent products of (1 − ρ²) over independent partial correlations ρ ~ 2 Beta(β, β) − 1, β = 1 + (*p* − 1 − *k*)/2 at C-vine level *k* (Lewandowski, Kurowicka and Joe, 2009), and E√(1 − ρ²) = Γ(β + ½)²/(β Γ(β)²). In a sample matrix of *n* observations each share is Beta((*n* − *p* + 1)/2, (*p* − 2)/2), and 0 once *p* ≥ *n* + 1. The dissertation figure (`valid_range_for_naivecorrelationproposal.R`) estimated the uniform curve by Monte Carlo, stepping the entry by 0.001 until the matrix stopped being positive definite.
 - **Facts the scripts state differently:** det *R* is the squared volume of the parallelotope the arrows span (√det *R* is the volume); a full-rank set of *p* centred arrows from *n* observations needs *p* ≤ *n* − 1, so a sample correlation matrix is singular once *p* ≥ *n* (at *p* = *n* each entry sits at an end of its interval, and the intervals have width 0 from *p* = *n* + 1); whitening column-vector data uses the inverse of the transposed (lower) Cholesky factor.
+
+## typical-set
+
+In *k* dimensions a standard normal's density is highest at the mode, but the volume at distance *r* grows like *r*^(*k*−1), so the mass, density × volume, sits in a shell at *r* ≈ √*k*. `params.view` picks one of four computations; the other fields depend on the view. Closed forms throughout; the two optional samples are seeded Monte Carlo.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"shell"`, `"cube"`, `"modes"` or `"sphere"` | `"shell"` | Which computation. |
+
+### view "shell"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `k` | integer 1–1,000 | `10` | Dimensions. |
+| `coverage` | number 0.5–0.99 | `0.9` | Share of the mass in the central shell (and in the ball `hdrRadius`). |
+| `radius` | number 0–60 | `1` | Radius of a ball around the mode whose mass is reported. |
+
+The distance *R* from the mode is chi-distributed with *k* degrees of freedom (*R*² is chi-square). Result: `mode` = √(*k* − 1), where the mass peaks; `mean` = √2 Γ((*k* + 1)/2)/Γ(*k*/2); `sd`; `median`; `shell`, `{lo, hi, width}`, the central `coverage` interval of *R*; `hdrRadius`, the radius of the ball around the mode holding `coverage` (a normal's highest-density region); `ball`, `{radius, mass, log10Mass}`, P(*R* ≤ `radius`), with its log10 so that a share below the smallest double is still reported (`null` for radius 0); `log10DensityRatio`, log10 of the density at `mode` over the density at the mode, −(*k* − 1)/(2 ln 10); `curve`, 241 radii from 0 with `log10Density` (the *k*-dimensional normal density at that distance), `log10Surface` (the area of the sphere of that radius; `null` at 0 for *k* > 1) and `mass` (the chi density, their product); and `sweep`, for 50 dimensions from 1 to 1,000 (about 20 a decade, rounded), `mode`, `mean`, `sd`, `lo`, `hi` and `hdrRadius`.
+
+### view "cube"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `family` | `"normal"`, `"laplace"`, `"uniform"`, `"logistic"`, `"t3"` or `"cauchy"` | `"normal"` | The distribution of each of *k* independent coordinates: normal, Laplace, uniform and logistic with variance 1; *t* with 3 degrees of freedom and the Cauchy at scale 1. |
+| `sample` | `null` or `{n, seed}`: `n` an integer 1–5,000, `seed` an integer 0–4,294,967,295 (default 1) | `null` | Draw `n` points in each dimension and report their distances from the centre. |
+
+`density_x_volume.R` asks which cube [−*a*, *a*]^*k* has the largest minimum density × volume, (2*a* *d*(*a*))^*k*. That is largest at the *a*\* that maximises *a* *d*(*a*), the same for every *k*, so the corner's distance is exactly *a*\*√*k*. Result: `halfWidth` (*a*\*: 1 for the normal, *t* and Cauchy, 1/√2 for the Laplace, √3 for the uniform, 2*su* with *u* tanh *u* = ½ for the logistic); `sd` of one coordinate (`null` for the Cauchy); `withinHalfWidth`, P(|*X*| ≤ *a*\*); `dimensions`, 1 to 1,024 in powers of 2; for each, `distance` (*a*\*√*k*) and `log10CubeMass` (log10 of the cube's mass, *k* log10 `withinHalfWidth`); `exact`, for the normal only, the chi `median`, `lo` (5%) and `hi` (95%) at each dimension (else `null`); and `sample`, `null` or `{n, seed, median, lo, hi}`, the sampled distances' median and 5% and 95% quantiles (R's default type 7) at each dimension.
+
+### view "modes"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `components` | array of 1–3 `{weight, location, scale, shape}`: `weight` 0.001–1,000 (relative), `location` −100 to 100, `scale` 0.001–100, `shape` `"normal"` or `"laplace"` | the "bathtub" mixture below | A mixture. `scale` is the normal's SD or the Laplace's scale *b* (SD √2 *b*). |
+| `level` | number 0–1 | `0.5` | The water level as a share of the peak density. |
+
+The three mixtures of `mode_pathologies.R`, with its relative masses as weights: the spike, `[{"weight": 2, "location": 0, "scale": 0.02, "shape": "laplace"}, {"weight": 90, "location": 6, "scale": 1, "shape": "normal"}]`; two bumps, weights 40 and 40 at −6 and 6 with scale 1; and the bathtub, `[{"weight": 0.9, "location": -10, "scale": 10, "shape": "normal"}, {"weight": 0.1, "location": 10, "scale": 1, "shape": "normal"}]`. Result: `weights` (normalised); `mean`, `sd`, `median`; `modes`, every local maximum `{x, density}`, highest first, and `mode` and `peak` from the first; `densityAtMean` and `densityAtMedian` as shares of the peak; `threshold` (`level` × `peak`); `regions`, the highest-density region where the density exceeds `threshold`, as intervals `{lo, hi, mass, containsMode}` (`null` ends are infinite); `covered`, their total mass; `curve`, `{x, density}` on a grid that resolves every component; and `coverage`, `{level, covered}` for levels 0, 0.01, …, 1.
+
+### view "sphere"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `k` | integer 2–1,000 | `10` | Dimensions. |
+| `band` | number 0.001–1 | `0.1` | Half-width of a band around the equator, \|*x*₁\| < `band`. |
+| `sample` | `null` or `{n, seed}`: `n` an integer 1–20,000 | `null` | Draw `n` uniform points on the sphere (*k* standard normals scaled to length 1). |
+
+One coordinate *x*₁ of a uniform point on the unit sphere in *k* dimensions has density Γ(*k*/2) / (√π Γ((*k* − 1)/2)) (1 − *x*²)^((*k*−3)/2). Result: `sd` (1/√*k*); `bandMass`, P(\|*x*₁\| < `band`) = *I*(`band`²; ½, (*k* − 1)/2), the regularized incomplete beta function, since *x*₁² is Beta(½, (*k* − 1)/2); `normalBandMass`, the same share under the normal approximation *x*₁ ~ N(0, 1/*k*); `curve`, `{x, density}` at 400 cell midpoints in (−1, 1); and `sample`, `null` or `{n, seed, edges, density, bandShare, sd}`: an 80-bin histogram scaled as a density, the sampled share in the band and the sampled root mean square of *x*₁.
+
+### Method
+
+- **Gamma and beta functions** (`lib/special.js`): log-gamma by Lanczos's approximation, the regularized incomplete gamma function by its series or continued fraction (each tail computed directly, and in logs), its inverse by safeguarded Newton steps, and the incomplete beta function by its continued fraction. Against R 4.6 they agree with `lgamma` to 1e-14, `pchisq` and `qchisq` to 1e-12 and `pbeta` to 2e-12 (relative). The chi mean uses Γ(*x* + ½)/Γ(*x*) by recurrence, which keeps the SD accurate at large *k*.
+- **Highest-density regions** are found exactly: each crossing of the density and the level is bracketed on the grid and bisected to rounding, and each region's mass is a difference of the mixture's distribution function.
+- **Samples** are drawn by inversion from mulberry32 (`shared/rng.js`); the *t* coordinates are a normal over the root of a chi-square of three squared normals. The same seed gives the same points in Node and every browser.
+- **What the scripts do differently.** `density_x_volume.R` centres its intervals one grid step left of 0 (on −0.01) and reports the distance to the far end, so each distance is one step (0.01√*k*) too long; its comment says its Laplace has variance 1, but `dexp(abs(x))` has variance 2 (this entry uses the unit-variance Laplace the comment describes); and its unused mass-contained term adds an interval's width where it means the log of the width. The bathtub animation in `mode_pathologies.R` weights its first grid cell by `diff(c(0, x))[1]` = −50 instead of 0.01, which shrinks its normaliser to 0.99934 and puts its printed coverage off the exact value in 19 of 300 frames (3 with equal cells, from the grid alone). `marginal_dist_of_unit_hypersphere.R` computes its constant with `gamma()`, which overflows for *k* ≥ 344 and makes its density NaN there; log-gamma does not. The cube criterion itself is right for what it computes; it does not say where the mass is, since the cube at *a*\* holds a vanishing share of it, and a Cauchy's distance from the centre grows like *k*, not √*k*.
 
 ## Errors
 
@@ -421,3 +475,30 @@ No: the arrows are 36.9° and 45.6° apart, so A and C are at most 82.4° apart 
 ```
 
 Given r_AB = 0.7 and r_BC = 0.6, r_AC can be anything from −0.15 to 0.99; 0.5 sits 57% of the way up. The centre 0.42 = 0.7 × 0.6 is the completion with the largest determinant. A matrix that is not positive semidefinite, such as `[[1, 0.9, 0.9], [0.9, 1, -0.9], [0.9, -0.9, 1]]`, is rejected with exit status 1 and the issue `{"code": "not_positive_semidefinite", "path": "params.matrix", "message": "is not positive semidefinite (its smallest eigenvalue is -0.8), so no set of arrows has these correlations"}`.
+
+**Where is a 100-dimensional normal's mass?** `shell.json`:
+
+```json
+{"entry": "typical-set", "params": {"view": "shell", "k": 100, "radius": 7}}
+```
+
+`node intuitions/cli.mjs shell.json` prints (abridged: `curve`'s arrays have 241 values and `sweep`'s 50, cut here to two):
+
+```json
+{
+  "entry": "typical-set",
+  "params": { "view": "shell", "k": 100, "coverage": 0.9, "radius": 7 },
+  "result": {
+    "view": "shell", "k": 100, "coverage": 0.9,
+    "mode": 9.9498743710662, "mean": 9.97503163955105, "sd": 0.7062179479137426, "median": 9.966650853520875,
+    "shell": { "lo": 8.827766714465069, "hi": 11.150879490157001, "width": 2.323112775691932 },
+    "hdrRadius": 10.885678840157926,
+    "ball": { "radius": 7, "mass": 0.0000041007655781351365, "log10Mass": -5.3871350566165 },
+    "log10DensityRatio": -21.497576854210962,
+    "curve": { "radius": [0, 0.05623098090802725], "log10Density": [-39.908993417905755, -39.90968002080775], "log10Surface": [null, -161.37799094501784], "mass": [0, 5.156191447484109e-202] },
+    "sweep": { "k": [1, 2], "mode": [0, 1], "mean": [0.7978845608028654, 1.2533141373155003], "sd": [0.6028102749890869, 0.6551363775620335], "lo": [0.06270677794321378, 0.3202914122718575], "hi": [1.9599639845400545, 2.447746830680816], "hdrRadius": [1.6448536269514726, 2.1459660262893476] }
+  }
+}
+```
+
+90% of the mass lies between 8.8 and 11.2 from the mode, where the density is 10⁻²¹·⁵ of its value at the mode. A ball of radius 7 around the mode, reaching seven SDs out along every axis, holds 0.0004% of it.

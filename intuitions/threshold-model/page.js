@@ -2,7 +2,7 @@
 // over compute(). Every number shown comes from compute.js.
 
 import { formatNumber } from '../lib/format.js';
-import { bindPair, draggable, installApi, onWidth, setInvalid } from '../lib/page.js';
+import { bindPair, draggable, installApi, integerField, onWidth, setInvalid } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { compute, DEFAULTS, ENTRY, LIMITS, resolveParams, samplePoints } from './compute.js';
 import { barsFigure, liabilityFigure, planeFigure, tableFigure, thresholdName } from './figure.js';
@@ -255,15 +255,6 @@ for (const t of [0, 1]) {
     state.two.thresholds[t] = resize(state.two.thresholds[t], Number(select(`two-k${t}`).value));
     two.editors[t].build();
     renderTwo();
-  });
-}
-/** Applies an integer field when it is in range; marks it otherwise. @param {HTMLInputElement} field @param {(v: number) => void} apply */
-function integerField(field, apply) {
-  field.addEventListener('input', () => {
-    const v = Number(field.value);
-    const ok = field.value.trim() !== '' && Number.isInteger(v) && v >= Number(field.min) && v <= Number(field.max);
-    setInvalid(field, !ok);
-    if (ok) apply(v);
   });
 }
 integerField(input('two-n'), (v) => { state.two.n = v; renderTwo(); });

@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(3);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(3);
+  await expect(page.locator('.entry-card')).toHaveCount(4);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(4);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -161,9 +161,46 @@ test('correlation geometry: panels respond to controls, rotation, cell choice an
   expect(errors).toEqual([]);
 });
 
+test('probability mass: the shell, the cube, the water level and the sphere respond, and invalid fields are marked', async ({ page }) => {
+  const errors = await open(page, 'typical-set/');
+  await expect(page.locator('#shell-readout')).toContainText('between r = 1.99 and 4.28');
+  await page.locator('#shell-k-number').fill('1000');
+  await expect(page.locator('#shell-k-range')).toHaveValue('3');
+  await expect(page.locator('#shell-readout')).toContainText('1,000 dimensions');
+  await page.locator('#shell-k-number').fill('2.5');
+  await expect(page.locator('#shell-k-number')).toHaveAttribute('aria-invalid', 'true');
+
+  await page.locator('#cube-family').getByText('Cauchy').click();
+  await expect(page.locator('#cube-readout')).toContainText('grows like k, not √k');
+  await expect(page.locator('#cube-plot circle')).toHaveCount(11);
+
+  await page.getByRole('button', { name: 'Two bumps' }).click();
+  await expect(page.locator('#modes-stats')).toContainText('0.00');
+  await expect(page.locator('#modes-readout')).toContainText('under 1% of its peak');
+  await page.locator('#modes-components input[data-index="0"][data-key="scale"]').fill('0');
+  await expect(page.locator('#modes-components input[data-index="0"][data-key="scale"]')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#modes-issues')).toContainText('Component 1, scale');
+  await page.locator('#modes-components input[data-index="0"][data-key="scale"]').fill('1');
+  await expect(page.locator('#modes-issues')).toBeHidden();
+
+  await page.locator('#sphere-k-number').fill('3');
+  await expect(page.locator('#sphere-readout')).toContainText('Archimedes');
+  await expect(page.locator('#sphere-plot rect.hist-bar').first()).toBeVisible();
+
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const out = app.submit({ entry: 'typical-set', params: { view: 'shell', k: 100, coverage: 0.5 } });
+    return { mode: out.result.mode, request: app.getRequest().params };
+  });
+  expect(api.mode).toBeCloseTo(Math.sqrt(99), 12);
+  expect(api.request).toEqual({ view: 'shell', k: 100, coverage: 0.5, radius: 1 });
+  await expect(page.locator('#shell-k-number')).toHaveValue('100');
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

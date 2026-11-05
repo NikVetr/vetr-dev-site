@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Where is the probability mass? In k dimensions a normal's density peaks at the mode, but the volume at radius r grows like r^(k−1), so the mass lies in a thin shell at radius about √k. See density × volume as k grows, when a mode or a mean misleads, and how the points of a sphere crowd its equator.">
+  <title>Where is the probability mass? · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='4' stroke-opacity='0.55'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Probability mass</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Where is the probability mass?</h1>
+      <p class="lede">A standard normal in <var>k</var> dimensions has its highest density at the mode, its centre. Yet a draw from it almost never lands near the centre. The density falls with the distance <var>r</var> from the mode, but the volume at distance <var>r</var> grows like <var>r</var><sup><var>k</var>−1</sup>, and the mass, density × volume, piles up in a thin shell at <var>r</var> ≈ √<var>k</var>. The panels below show that shell, the original script's version of the argument, two pictures where a mode or a mean misleads in one dimension, and why the points of a sphere crowd its equator.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#shell">Density × volume</a></li>
+          <li><a href="#cube">The cube criterion, by family</a></li>
+          <li><a href="#modes">When the mode misleads</a></li>
+          <li><a href="#sphere">A sphere's points crowd its equator</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="shell" aria-labelledby="shell-heading">
+      <h2 id="shell-heading"><span class="panel-number">1</span> Density × volume</h2>
+      <p class="panel-intro">The share of the mass at distance <var>r</var> from the mode is the density there, (2π)<sup>−<var>k</var>/2</sup> e<sup>−<var>r</var>²/2</sup>, times the area of the sphere of radius <var>r</var>, which grows like <var>r</var><sup><var>k</var>−1</sup>. Their product is the chi distribution with <var>k</var> degrees of freedom. It peaks at √(<var>k</var> − 1), not at 0, and its spread stays near 1/√2 however large <var>k</var> gets: the mass lives in a shell of fixed thickness that moves outward.</p>
+      <div class="panel-body">
+        <figure>
+          <ul class="legend" id="shell-legend"></ul>
+          <div id="shell-plot" class="plot-box"></div>
+          <figcaption class="caption">Each curve is scaled to its own largest value on this axis, so they share one height. The density falls from the mode, the volume of a thin shell at distance <var>r</var> rises, and the mass is their product. The shaded part of the mass is the central shell holding the chosen share of it; the dotted line is the ball around the mode.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="shell-k-number">Dimensions, <var>k</var></label>
+              <input id="shell-k-number" type="number" min="1" max="1000" step="1">
+            </div>
+            <input id="shell-k-range" type="range" min="0" max="3" step="0.01" aria-label="Dimensions, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="shell-coverage-number">Shell holds</label>
+              <span class="value-field"><input id="shell-coverage-number" type="number" min="50" max="99" step="1"><span class="unit">%</span></span>
+            </div>
+            <input id="shell-coverage-range" type="range" min="50" max="99" step="1" aria-label="Share of the mass in the shell, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="shell-radius-number">Ball around the mode, radius</label>
+              <input id="shell-radius-number" type="number" min="0" max="60" step="0.1">
+            </div>
+            <input id="shell-radius-range" type="range" min="0" max="40" step="0.1" aria-label="Ball radius, slider">
+          </div>
+          <p class="readout" id="shell-readout" aria-live="polite"></p>
+          <dl class="stats" id="shell-stats"></dl>
+          <div class="controls-foot"><button type="button" id="shell-reset">Reset</button></div>
+        </div>
+      </div>
+      <div class="curve-block">
+        <div class="figure-head"><h3>As the dimension grows</h3></div>
+        <div id="shell-sweep" class="plot-box"></div>
+        <p class="caption">The shell's band (shaded, holding the chosen share of the mass) and its mean (solid) against <var>k</var>. The dashed line is the radius of the ball around the mode that holds the same share: the highest-density region of a normal is that ball, and almost all of its mass sits near its edge. The square and diamond mark your <var>k</var>.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="cube" aria-labelledby="cube-heading">
+      <h2 id="cube-heading"><span class="panel-number">2</span> The cube criterion, by family</h2>
+      <p class="panel-intro">The original script made the argument with a cube instead of a sphere. Take the cube [−<var>a</var>, <var>a</var>]<sup><var>k</var></sup> around the centre of <var>k</var> independent coordinates, each with density <var>d</var>. Its volume is (2<var>a</var>)<sup><var>k</var></sup> and its smallest density, at a corner, is <var>d</var>(<var>a</var>)<sup><var>k</var></sup>, so their product is (2<var>a</var> <var>d</var>(<var>a</var>))<sup><var>k</var></sup>. That is largest at the same <var>a</var>* in every dimension, so the corner's distance from the centre, <var>a</var>*√<var>k</var>, grows exactly like √<var>k</var>, for every family. Where the mass actually goes is a different question: compare the sampled radii.</p>
+      <div class="panel-body">
+        <figure>
+          <ul class="legend" id="cube-legend"></ul>
+          <div id="cube-plot" class="plot-box"></div>
+          <figcaption class="caption">Both axes are logarithmic, so √<var>k</var> is a straight line of slope ½. Dashed: the cube criterion's corner. Dots and bars: the median and the 5–95% range of the distance from the centre of sampled points (Monte Carlo, seeded). For the normal, the solid line is the exact chi median.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="cube-family-label">Family</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="cube-family-label" id="cube-family">
+              <label><input type="radio" name="cube-family" value="normal" checked> Normal</label>
+              <label><input type="radio" name="cube-family" value="laplace"> Laplace</label>
+              <label><input type="radio" name="cube-family" value="uniform"> Uniform</label>
+              <label><input type="radio" name="cube-family" value="logistic"> Logistic</label>
+              <label><input type="radio" name="cube-family" value="t3"> <var>t</var> with 3 df</label>
+              <label><input type="radio" name="cube-family" value="cauchy"> Cauchy</label>
+            </div>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="cube-n">Points sampled per dimension</label>
+              <input id="cube-n" type="number" min="0" max="5000" step="50">
+            </div>
+            <p class="hint">0 for none.</p>
+            <div class="control-row">
+              <label for="cube-seed">Seed</label>
+              <input id="cube-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="cube-new-seed">New seed</button>
+            </div>
+          </div>
+          <div class="control-row">
+            <label for="cube-k">Read out at <var>k</var> =</label>
+            <select id="cube-k"></select>
+          </div>
+          <p class="readout" id="cube-readout" aria-live="polite"></p>
+          <dl class="stats" id="cube-stats"></dl>
+          <div class="controls-foot"><button type="button" id="cube-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="modes" aria-labelledby="modes-heading">
+      <h2 id="modes-heading"><span class="panel-number">3</span> When the mode misleads</h2>
+      <p class="panel-intro">Even in one dimension the highest point of a density need not be where the mass is. Lower a water level from the peak: the density above it is the highest-density region, and what it covers is its mass. A tall narrow spike surfaces first however little it holds, two bumps leave the mean and the median stranded between them, and a region can split in two.</p>
+      <div class="panel-body">
+        <figure id="modes-figures">
+          <div id="modes-plot" class="plot-box stale-dim"></div>
+          <figcaption class="caption">The density with the water level (dashed) and the region above it (shaded). Below the axis: the mode (▲), the mean (◆) and the median (■).</figcaption>
+          <div id="coverage-plot" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Mass covered as the level falls from the peak (left) to 0 (right); the dot is the current level.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="modes-preset-label">Start from</span>
+            <div class="control-row" role="group" aria-labelledby="modes-preset-label">
+              <button type="button" data-preset="spike">A spike</button>
+              <button type="button" data-preset="bimodal">Two bumps</button>
+              <button type="button" data-preset="bathtub">Narrow and wide</button>
+            </div>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="modes-level-number">Water level, share of the peak</label>
+              <span class="value-field"><input id="modes-level-number" type="number" min="0" max="100" step="1"><span class="unit">%</span></span>
+            </div>
+            <input id="modes-level-range" type="range" min="0" max="100" step="1" aria-label="Water level, slider">
+          </div>
+          <h3 class="side-heading">Components</h3>
+          <div class="table-wrap">
+            <table class="data-grid component-grid" id="modes-components"></table>
+          </div>
+          <div id="modes-issues" class="issues" role="alert" hidden></div>
+          <div class="controls-foot">
+            <button type="button" id="modes-add">Add a component</button>
+            <button type="button" id="modes-remove">Remove the last</button>
+          </div>
+          <p class="hint">Weights are relative; they need not sum to 1. Scale is the normal's SD or the Laplace's scale <var>b</var> (SD √2 <var>b</var>).</p>
+          <p class="readout" id="modes-readout" aria-live="polite"></p>
+          <dl class="stats" id="modes-stats"></dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card panel" id="sphere" aria-labelledby="sphere-heading">
+      <h2 id="sphere-heading"><span class="panel-number">4</span> A sphere's points crowd its equator</h2>
+      <p class="panel-intro">The same geometry from another side: pick a point uniformly on the unit sphere in <var>k</var> dimensions and look at one coordinate. Its density is Γ(<var>k</var>/2) / (√π Γ((<var>k</var> − 1)/2)) (1 − <var>x</var>²)<sup>(<var>k</var>−3)/2</sup>, so (<var>x</var>₁ + 1)/2 is Beta((<var>k</var> − 1)/2, (<var>k</var> − 1)/2). Its SD is 1/√<var>k</var>: in high dimension almost every point is near the equator of any axis you choose. With three dimensions it is uniform, which is Archimedes' hat-box theorem.</p>
+      <div class="panel-body">
+        <figure>
+          <div id="sphere-plot" class="plot-box"></div>
+          <figcaption class="caption">The exact density (the line) and, behind it, a histogram of sampled points (Monte Carlo: <var>k</var> standard normals scaled to length 1, seeded). The shaded band is |<var>x</var>₁| below the chosen half-width.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="sphere-k-number">Dimensions, <var>k</var></label>
+              <input id="sphere-k-number" type="number" min="2" max="1000" step="1">
+            </div>
+            <input id="sphere-k-range" type="range" min="0.301" max="3" step="0.01" aria-label="Dimensions, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="sphere-band-number">Band half-width</label>
+              <input id="sphere-band-number" type="number" min="0.01" max="1" step="0.01">
+            </div>
+            <input id="sphere-band-range" type="range" min="0.01" max="1" step="0.01" aria-label="Band half-width, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="sphere-n">Sampled points</label>
+              <input id="sphere-n" type="number" min="0" max="20000" step="500">
+            </div>
+            <p class="hint">0 for none.</p>
+            <div class="control-row">
+              <label for="sphere-seed">Seed</label>
+              <input id="sphere-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="sphere-new-seed">New seed</button>
+            </div>
+          </div>
+          <p class="readout" id="sphere-readout" aria-live="polite"></p>
+          <dl class="stats" id="sphere-stats"></dl>
+          <div class="controls-foot"><button type="button" id="sphere-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>The shell</h3>
+        <p>For a standard normal in <var>k</var> dimensions the distance from the mode, <var>R</var>, has density 2<sup>1−<var>k</var>/2</sup> <var>r</var><sup><var>k</var>−1</sup> e<sup>−<var>r</var>²/2</sup> / Γ(<var>k</var>/2): the chi distribution. <var>R</var>² is chi-square with <var>k</var> degrees of freedom, so the share within a ball of radius ρ is <var>P</var>(<var>k</var>/2, ρ²/2), the regularized incomplete gamma function, and every quantile and interval on this page comes from that function and its inverse. The mean is √2 Γ((<var>k</var> + 1)/2) / Γ(<var>k</var>/2), close to √(<var>k</var> − ½), and the variance <var>k</var> minus its square, which tends to ½.</p>
+        <h3>Why a mode is a poor summary</h3>
+        <p>The density at the shell is e<sup>−(<var>k</var>−1)/2</sup> times the density at the mode, yet the shell holds nearly all the mass and a ball of radius 1 around the mode almost none. A sampler or an optimiser that reports the mode reports a point that typical draws never come near. The highest-density region of a normal is a ball around the mode, but in high dimension nearly all of that ball's mass, like nearly all of its volume, lies close to its surface.</p>
+        <h3>Families other than the normal</h3>
+        <p>The cube criterion gives √<var>k</var> for every family because it factorises: its answer is the half-width <var>a</var>* that maximises <var>a</var> <var>d</var>(<var>a</var>), times √<var>k</var>. The cube at <var>a</var>* holds only <var>P</var>(|<var>X</var>| ≤ <var>a</var>*)<sup><var>k</var></sup> of the mass, which vanishes as <var>k</var> grows, so the criterion does not locate the mass. What does is the law of large numbers: <var>R</var>²/<var>k</var> tends to the variance, so for any family with a finite variance σ² the sampled radius tracks σ√<var>k</var>. The Cauchy has none, and its radius grows like <var>k</var>, not √<var>k</var>.</p>
+        <h3>Method</h3>
+        <p>Closed forms throughout, except the two samples, which are seeded Monte Carlo and labelled so: points are drawn by inversion from shared/rng.js's mulberry32, and the same seed gives the same points in every browser and in Node. The highest-density regions are found exactly: the density's crossings of the water level by bisection, and their masses from the normal and Laplace distribution functions. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
+        <h3>The R scripts</h3>
+        <p>The panels come from three R scripts. The cube script centres its intervals one grid step left of 0, on −0.01, and measures the distance to the far end, so each reported distance is one step too long (1.01√<var>k</var> for the normal instead of √<var>k</var>); its comment says its Laplace has variance 1, but dexp(|<var>x</var>|) has variance 2, and this page uses the unit-variance Laplace the comment describes; its mass-contained term adds an interval's width where it means the log of the width (the term is never used). The bathtub animation weighs its first grid cell by −50 instead of 0.01 (diff(c(0, x)) starts from 0, not from the grid), which inflates its normalised density by 0.07% and puts its printed coverage off the exact value in 19 of its 300 frames, against 3 from the grid alone. The sphere script's normalising constant uses gamma(), which overflows from <var>k</var> = 344, so its density there is NaN; this page uses log-gamma.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2022-06-21">2022-06-21</time>
+    </div>
+  </footer>
+</body>
+</html>

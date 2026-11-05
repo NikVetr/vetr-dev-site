@@ -18,12 +18,13 @@ export function setInvalid(field, invalid) {
 
 /**
  * Keeps a range input and a number input in step. The number input accepts exact
- * values within its min and max (marked invalid otherwise, and not applied); the
- * range may be on a transformed scale (for example log) via toRange / fromRange.
+ * values within its min and max (whole numbers only with `integer`; marked invalid
+ * otherwise, and not applied); the range may be on a transformed scale (for example
+ * log) via toRange / fromRange.
  * @param {{ range: HTMLInputElement, number: HTMLInputElement, onInput: (value: number) => void,
- *   toRange?: (value: number) => number, fromRange?: (position: number) => number, decimals?: number }} options
+ *   toRange?: (value: number) => number, fromRange?: (position: number) => number, decimals?: number, integer?: boolean }} options
  */
-export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange = (p) => p, decimals = 2 }) {
+export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange = (p) => p, decimals = 2, integer = false }) {
   const min = Number(number.min);
   const max = Number(number.max);
   range.addEventListener('input', () => {
@@ -34,7 +35,7 @@ export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange
   });
   number.addEventListener('input', () => {
     const value = Number(number.value);
-    const ok = number.value.trim() !== '' && Number.isFinite(value) && value >= min && value <= max;
+    const ok = number.value.trim() !== '' && Number.isFinite(value) && value >= min && value <= max && (!integer || Number.isInteger(value));
     setInvalid(number, !ok);
     if (!ok) return;
     range.value = String(toRange(value));
@@ -48,6 +49,21 @@ export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange
       range.value = String(toRange(value));
     },
   };
+}
+
+/**
+ * Applies a whole-number field when it is within its min and max; marks it invalid
+ * otherwise.
+ * @param {HTMLInputElement} field
+ * @param {(value: number) => void} apply
+ */
+export function integerField(field, apply) {
+  field.addEventListener('input', () => {
+    const v = Number(field.value);
+    const ok = field.value.trim() !== '' && Number.isInteger(v) && v >= Number(field.min) && v <= Number(field.max);
+    setInvalid(field, !ok);
+    if (ok) apply(v);
+  });
 }
 
 /**
