@@ -1,0 +1,384 @@
+{
+  "guests": [
+    {
+      "id": "Ivy Puddle",
+      "category": 4
+    },
+    {
+      "id": "Bea Sprocket",
+      "category": 3
+    },
+    {
+      "id": "Gwen Mopsy",
+      "category": 1
+    },
+    {
+      "id": "Fern Bramble",
+      "category": 1
+    },
+    {
+      "id": "Ada Wobble",
+      "category": 2
+    },
+    {
+      "id": "Ruth Noodle",
+      "category": 3
+    },
+    {
+      "id": "Dot Kettle",
+      "category": 3
+    },
+    {
+      "id": "Gus Pickle",
+      "category": 3
+    },
+    {
+      "id": "Una Biscuit",
+      "category": 4
+    },
+    {
+      "id": "Barty Nubbin",
+      "category": 3
+    },
+    {
+      "id": "Ned Noodle",
+      "category": 3
+    },
+    {
+      "id": "Felix Tumble",
+      "category": 2
+    },
+    {
+      "id": "Jasper Puddle",
+      "category": 1
+    },
+    {
+      "id": "Wally Gherkin",
+      "category": 4
+    },
+    {
+      "id": "Theo Muddle",
+      "category": 3
+    },
+    {
+      "id": "Milo Bramble",
+      "category": 1
+    },
+    {
+      "id": "Ike Pebble",
+      "category": 4
+    },
+    {
+      "id": "Olive Crumb",
+      "category": 2
+    },
+    {
+      "id": "Sid Marrow",
+      "category": 3
+    },
+    {
+      "id": "Flo Tinker",
+      "category": 1
+    },
+    {
+      "id": "Edna Snoot",
+      "category": 2
+    },
+    {
+      "id": "Hazel Bramble",
+      "category": 1
+    },
+    {
+      "id": "Vera Plum",
+      "category": 3
+    },
+    {
+      "id": "June Tumble",
+      "category": 2
+    },
+    {
+      "id": "Pip Crumb",
+      "category": 2
+    },
+    {
+      "id": "Lark Doily",
+      "category": 4
+    },
+    {
+      "id": "Basil Crumb",
+      "category": 2
+    },
+    {
+      "id": "Rex Bramble",
+      "category": 1
+    },
+    {
+      "id": "Percy Grubb",
+      "category": 2
+    },
+    {
+      "id": "Cyril Sprocket",
+      "category": 4
+    },
+    {
+      "id": "Peg Wimble",
+      "category": 4
+    },
+    {
+      "id": "Mabel Puddle",
+      "category": 1
+    },
+    {
+      "id": "Lotte Pickle",
+      "category": 3
+    },
+    {
+      "id": "Otto Puddle",
+      "category": 1
+    },
+    {
+      "id": "Iris Muddle",
+      "category": 3
+    },
+    {
+      "id": "Ozzie Fudge",
+      "category": 4
+    },
+    {
+      "id": "Rosa Thimble",
+      "category": 4
+    },
+    {
+      "id": "Kit Wobble",
+      "category": 2
+    },
+    {
+      "id": "Tilly Puddle",
+      "category": 1
+    }
+  ],
+  "tables": {
+    "seats": 8,
+    "layout": "spiral"
+  },
+  "pairs": [
+    {
+      "a": "Olive Crumb",
+      "b": "Basil Crumb",
+      "score": 4
+    },
+    {
+      "a": "Olive Crumb",
+      "b": "Pip Crumb",
+      "score": 4
+    },
+    {
+      "a": "Basil Crumb",
+      "b": "Pip Crumb",
+      "score": 4
+    },
+    {
+      "a": "Mabel Puddle",
+      "b": "Otto Puddle",
+      "score": 4
+    },
+    {
+      "a": "Mabel Puddle",
+      "b": "Ivy Puddle",
+      "score": 4
+    },
+    {
+      "a": "Mabel Puddle",
+      "b": "Jasper Puddle",
+      "score": 4
+    },
+    {
+      "a": "Mabel Puddle",
+      "b": "Tilly Puddle",
+      "score": 4
+    },
+    {
+      "a": "Otto Puddle",
+      "b": "Ivy Puddle",
+      "score": 4
+    },
+    {
+      "a": "Otto Puddle",
+      "b": "Jasper Puddle",
+      "score": 4
+    },
+    {
+      "a": "Otto Puddle",
+      "b": "Tilly Puddle",
+      "score": 4
+    },
+    {
+      "a": "Ivy Puddle",
+      "b": "Jasper Puddle",
+      "score": 4
+    },
+    {
+      "a": "Ivy Puddle",
+      "b": "Tilly Puddle",
+      "score": 4
+    },
+    {
+      "a": "Jasper Puddle",
+      "b": "Tilly Puddle",
+      "score": 4
+    },
+    {
+      "a": "Hazel Bramble",
+      "b": "Rex Bramble",
+      "score": 4
+    },
+    {
+      "a": "Hazel Bramble",
+      "b": "Fern Bramble",
+      "score": 4
+    },
+    {
+      "a": "Hazel Bramble",
+      "b": "Milo Bramble",
+      "score": 4
+    },
+    {
+      "a": "Rex Bramble",
+      "b": "Fern Bramble",
+      "score": 4
+    },
+    {
+      "a": "Rex Bramble",
+      "b": "Milo Bramble",
+      "score": 4
+    },
+    {
+      "a": "Fern Bramble",
+      "b": "Milo Bramble",
+      "score": 4
+    },
+    {
+      "a": "Dot Kettle",
+      "b": "Sid Marrow",
+      "score": 2
+    },
+    {
+      "a": "Dot Kettle",
+      "b": "Vera Plum",
+      "score": 2
+    },
+    {
+      "a": "Sid Marrow",
+      "b": "Vera Plum",
+      "score": 2
+    },
+    {
+      "a": "Lark Doily",
+      "b": "Ozzie Fudge",
+      "score": 2
+    },
+    {
+      "a": "Lark Doily",
+      "b": "Peg Wimble",
+      "score": 2
+    },
+    {
+      "a": "Ozzie Fudge",
+      "b": "Peg Wimble",
+      "score": 2
+    },
+    {
+      "a": "Rosa Thimble",
+      "b": "Ike Pebble",
+      "score": 2
+    },
+    {
+      "a": "Rosa Thimble",
+      "b": "Una Biscuit",
+      "score": 2
+    },
+    {
+      "a": "Rosa Thimble",
+      "b": "Wally Gherkin",
+      "score": 2
+    },
+    {
+      "a": "Ike Pebble",
+      "b": "Una Biscuit",
+      "score": 2
+    },
+    {
+      "a": "Ike Pebble",
+      "b": "Wally Gherkin",
+      "score": 2
+    },
+    {
+      "a": "Una Biscuit",
+      "b": "Wally Gherkin",
+      "score": 2
+    }
+  ],
+  "together": [
+    [
+      "Ruth Noodle",
+      "Ned Noodle"
+    ],
+    [
+      "Lotte Pickle",
+      "Gus Pickle"
+    ],
+    [
+      "Ada Wobble",
+      "Kit Wobble"
+    ],
+    [
+      "June Tumble",
+      "Felix Tumble"
+    ],
+    [
+      "Iris Muddle",
+      "Theo Muddle"
+    ],
+    [
+      "Bea Sprocket",
+      "Cyril Sprocket"
+    ]
+  ],
+  "apart": [
+    [
+      "Sid Marrow",
+      "Lotte Pickle"
+    ],
+    [
+      "Ozzie Fudge",
+      "Cyril Sprocket"
+    ],
+    [
+      "Milo Bramble",
+      "Cyril Sprocket"
+    ]
+  ],
+  "geography": {
+    "cost": [
+      {
+        "a": "Sid Marrow",
+        "b": "Lotte Pickle",
+        "cost": 10
+      },
+      {
+        "a": "Ozzie Fudge",
+        "b": "Cyril Sprocket",
+        "cost": 10
+      },
+      {
+        "a": "Milo Bramble",
+        "b": "Cyril Sprocket",
+        "cost": 10
+      }
+    ]
+  },
+  "options": {
+    "seed": 1,
+    "record": "moves"
+  }
+}
