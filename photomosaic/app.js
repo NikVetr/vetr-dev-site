@@ -445,12 +445,13 @@ function markFields(issues) {
 
 /** @param {Result} next @param {object} request @param {ReturnType<typeof pageInputs>} inputs @param {Photo[]} runPhotos */
 function showResult(next, request, inputs, runPhotos) {
+  // the middle cell at first, so the close up starts inside the picture
+  if (!result || selected >= next.grid.cells) selected = Math.floor(next.grid.rows / 2) * next.grid.columns + Math.floor(next.grid.columns / 2);
   result = next;
   resultRequest = request;
   resultInputs = inputs;
   resultPhotos = runPhotos;
   failed = false;
-  selected = Math.min(selected, next.grid.cells - 1);
   el.noResult.hidden = true;
   el.result.hidden = false;
   showSummary();

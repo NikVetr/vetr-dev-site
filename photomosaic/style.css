@@ -19,6 +19,7 @@
   border-radius: var(--radius-sm);
   background: var(--surface-2);
 }
+.contact-scroll:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 .contact-sheet { display: block; width: 100%; }
 .contact-key { font-size: 0.88rem; margin: 0.4rem 0 0; }
 /* the key's sample: a faded square struck through, as unused photos are drawn */

@@ -37,7 +37,7 @@
       <progress id="photo-progress" class="progress" max="1" value="0" hidden></progress>
       <p id="photo-status" role="status"></p>
       <div id="photo-issues" class="issues" role="alert" hidden></div>
-      <div class="contact-scroll" id="contact-scroll" hidden>
+      <div class="contact-scroll" id="contact-scroll" role="region" aria-label="The photos read" hidden>
         <canvas id="contact-sheet" class="contact-sheet" role="img"></canvas>
       </div>
       <p id="contact-key" class="muted contact-key" hidden><span class="unused-key" aria-hidden="true"></span> Faded and struck through: not used in the mosaic on view.</p>
@@ -70,7 +70,7 @@
       <p id="no-result" class="placeholder">The mosaic appears here.</p>
       <div id="result" hidden>
         <p id="stale" class="stale-banner" hidden></p>
-        <div class="stale-dim">
+        <div>
           <fieldset class="choice">
             <legend>Show</legend>
             <div class="choice-list">
@@ -78,7 +78,7 @@
               <label><input type="radio" name="view" value="cells"> The target at one colour per cell</label>
             </div>
           </fieldset>
-          <div class="mosaic-wrap">
+          <div class="mosaic-wrap stale-dim">
             <canvas id="mosaic" class="mosaic" tabindex="0" role="img" aria-describedby="detail-caption"></canvas>
             <div id="marker" class="cell-marker" aria-hidden="true"></div>
           </div>
@@ -99,7 +99,7 @@
           </div>
 
           <h3>Close up</h3>
-          <div class="detail-row">
+          <div class="detail-row stale-dim">
             <canvas id="detail" class="detail" role="img" aria-label="The cells around the selected one"></canvas>
             <div class="detail-info">
               <p id="detail-caption" aria-live="polite"></p>
@@ -116,7 +116,7 @@
           </div>
 
           <h3>Summary</h3>
-          <table class="terms">
+          <table class="terms stale-dim">
             <tbody id="summary"></tbody>
           </table>
 
