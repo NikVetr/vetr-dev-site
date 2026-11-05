@@ -1,0 +1,76 @@
+/* Helix and Braid: what is particular to this page, over /shared/base.css (tokens, frame,
+   controls, problems, out-of-date results and the narrow layout). */
+
+.small { font-size: 0.88rem; }
+h3.first { margin-top: 0.75rem; }
+
+/* Radio groups drawn as pills: the chosen one is filled and ticked (as signature's). */
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.6rem;
+}
+.segmented label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--surface);
+  cursor: pointer;
+}
+.segmented input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.segmented label:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--surface); }
+.segmented label:has(input:checked)::before { content: "✓"; }
+.segmented label:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.presets { margin-top: 0.4rem; }
+
+/* A slider and the exact value beside it. */
+.pair { display: flex; gap: 0.5rem; align-items: center; }
+.pair input[type="range"] { flex: 1 1 auto; min-width: 5rem; padding: 0; }
+.pair input[type="number"] { flex: 0 0 5.5rem; width: 5.5rem; color: var(--text); }
+.settings label.check { flex-direction: row; align-items: flex-start; gap: 0.5rem; grid-column: 1 / -1; color: var(--text); }
+.settings label.check input { margin-top: 0.3rem; }
+.input-row input[type="checkbox"] { flex: none; align-self: center; }
+
+/* Colour swatches with their names. */
+.colours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.9rem;
+}
+.colours label { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.92rem; }
+input[type="color"] { min-height: 2.2rem; width: 3rem; padding: 0.15rem; cursor: pointer; }
+.settings input[type="color"] { flex: 1; }
+
+/* The preview: the drawing on a light checkerboard in both themes, so its colours read as
+   they will on paper and a transparent background shows as such. */
+.preview {
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: repeating-conic-gradient(#ececec 0% 25%, #ffffff 0% 50%) 0 0 / 16px 16px;
+}
+.preview svg { display: block; width: 100%; height: auto; max-height: 60vh; }
+.preview[data-style="outline"] svg path { stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.settings label:has(> input:disabled), .settings label:has(.pair input:disabled), .settings label.check:has(input:disabled) { color: var(--muted); }
+
+.png-row { align-items: center; }
+.inline-label { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
+.inline-label input { width: 6.5rem; color: var(--text); }
+
+/* Wide screens: the drawing stays in view beside the settings as they scroll. */
+@media (min-width: 1000px) {
+  .layout { grid-template-rows: auto auto auto auto 1fr; }
+  .layout > .results-card { position: sticky; top: 1rem; }
+  .preview svg { max-height: 52vh; }
+}

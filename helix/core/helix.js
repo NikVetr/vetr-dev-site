@@ -1,7 +1,7 @@
 // Helix mode: draw_DNA (draw_DNA.R, 2024) on the shared helix geometry, as a drawing in
-// true units with y up. Strand 1's visible pieces are painted first, then strand 2's,
-// then the base pairs, as R plots them; each piece is the filled outline of a
-// variable-width line (R's polylines), made simple under R's nonzero fill.
+// true units with y up. The base pairs are painted first, then strand 1's visible pieces,
+// then strand 2's; each piece is the filled outline of a variable-width line (R's
+// polylines), made simple under R's nonzero fill.
 
 import { dnaShape, ribbon } from '../../shared/helix.js';
 import { offset, union } from '../../shared/polygon.js';
@@ -68,10 +68,11 @@ export function helixDrawing(h) {
     const simple = union([ribbon(p.x, p.y, p.lwd, 1)], 'nonzero');
     return h.edgeWidth > 0 ? offset(simple, h.edgeWidth / 2) : simple;
   };
+  // base pairs first, under the strands they hang from (R paints them last, the same in one colour)
   const parts = [
+    { id: 'base-pairs', label: 'Base pairs', color: h.colors.basePairs, pieces: basePairs },
     { id: 'strand-1', label: 'Strand 1', color: h.colors.strand1, pieces: shape.s1 },
     { id: 'strand-2', label: 'Strand 2', color: h.colors.strand2, pieces: shape.s2 },
-    { id: 'base-pairs', label: 'Base pairs', color: h.colors.basePairs, pieces: basePairs },
   ];
   return {
     fills: parts.map((p) => ({ id: p.id, label: p.label, color: p.color, shapes: p.pieces.map(fill) })),

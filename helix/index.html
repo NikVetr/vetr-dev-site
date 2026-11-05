@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Draw DNA double helices and braided multi-strand lines as clean SVG, for figures, logos, laser cutting and decoration, and download them as SVG, cutting outlines, centrelines or PNG.">
+  <title>Helix and Braid</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M11 4c0 6 10 6 10 12s-10 6-10 12M21 4c0 6-10 6-10 12s10 6 10 12M12 8h8M12 24h8M14 13h4M14 19h4' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Helix and Braid</h1>
+        <p class="tagline">Draw a DNA double helix or a braid of coloured strands as clean SVG, for figures, logos, laser cutting and decoration. Shape it with the controls, then download it filled, as cutting outlines, as centrelines or as a PNG.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card" aria-labelledby="shape-heading">
+      <div class="card-head">
+        <h2 id="shape-heading">Shape</h2>
+      </div>
+      <fieldset class="segmented" aria-label="Draw">
+        <label><input type="radio" name="mode" value="helix" checked> Helix</label>
+        <label><input type="radio" name="mode" value="braid"> Braid</label>
+      </fieldset>
+      <h3 class="first">Presets</h3>
+      <div id="presets" class="toolbar presets"></div>
+      <p class="muted small">A preset sets every helix or braid setting below; the size and lines stay as they are.</p>
+    </section>
+
+    <section class="card results-card" aria-labelledby="result-heading">
+      <div class="card-head">
+        <h2 id="result-heading">Drawing</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <fieldset class="segmented" aria-label="Preview as">
+        <label><input type="radio" name="style" value="filled" checked> Filled</label>
+        <label><input type="radio" name="style" value="outline"> Outline</label>
+        <label><input type="radio" name="style" value="strokes"> Strokes</label>
+      </fieldset>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <div id="result">
+        <p id="stale" class="stale-banner" hidden></p>
+        <figure id="preview" class="preview stale-dim" role="img" aria-label="The drawing"></figure>
+        <p id="summary" class="muted small"></p>
+      </div>
+      <h3>Download</h3>
+      <div class="toolbar">
+        <button id="export-svg" type="button" class="primary">SVG</button>
+        <button id="export-outline" type="button">Outline SVG (laser)</button>
+        <button id="export-strokes" type="button">Strokes SVG (plotter)</button>
+      </div>
+      <div class="toolbar">
+        <span class="input-row png-row">
+          <button id="export-png" type="button">PNG</button>
+          <label class="inline-label">width
+            <input id="png-width" type="number" min="16" max="10000" step="100" value="2000" aria-label="PNG width in pixels">
+            px
+          </label>
+        </span>
+        <button id="export-request" type="button">Request JSON</button>
+      </div>
+      <p class="muted small">SVG: the drawing as shown, a path per piece. Outline: the visible edges as hairlines, for a laser or vinyl cutter. Strokes: the centrelines, for a pen plotter. All three share one canvas, so they line up. PNG: the filled drawing.</p>
+    </section>
+
+    <section class="card" aria-labelledby="helix-heading" data-mode="helix">
+      <h2 id="helix-heading">Helix</h2>
+      <div class="settings">
+        <label>Turns<span class="pair"><input type="range" data-path="helix.turns" min="0.25" max="10" step="0.05" aria-label="Turns"><input type="number" data-path="helix.turns" min="0.01" max="100" step="0.05" aria-label="Turns, exact"></span></label>
+        <label>Rotation (° clockwise)<span class="pair"><input type="range" data-path="helix.rotation" min="-180" max="180" step="1" aria-label="Rotation"><input type="number" data-path="helix.rotation" step="1" aria-label="Rotation, exact"></span></label>
+        <label>Strand thickness<span class="pair"><input type="range" data-path="helix.strandThickness" min="0.1" max="8" step="0.05" aria-label="Strand thickness"><input type="number" data-path="helix.strandThickness" min="0.001" step="0.05" aria-label="Strand thickness, exact"></span></label>
+        <label>Base pairs per turn<span class="pair"><input type="range" data-path="helix.basePairsPerTurn" min="0" max="24" step="0.5" aria-label="Base pairs per turn"><input type="number" data-path="helix.basePairsPerTurn" min="0" max="200" step="0.5" aria-label="Base pairs per turn, exact"></span></label>
+        <label>Box width<span class="pair"><input type="range" data-path="helix.box.width" min="5" max="300" step="1" aria-label="Box width"><input type="number" data-path="helix.box.width" min="0.001" step="1" aria-label="Box width, exact"></span></label>
+        <label>Box height<span class="pair"><input type="range" data-path="helix.box.height" min="5" max="300" step="1" aria-label="Box height"><input type="number" data-path="helix.box.height" min="0.001" step="1" aria-label="Box height, exact"></span></label>
+        <label>Fit to the box
+          <select data-path="helix.box.fit">
+            <option value="contain">Keep the shape</option>
+            <option value="stretch">Stretch to fill</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" data-path="helix.box.includeExtension"> Fit the straight extension in the box too</label>
+      </div>
+      <div class="colours">
+        <label><input type="color" data-path="helix.colors.strand1"> Strand 1</label>
+        <label><input type="color" data-path="helix.colors.strand2"> Strand 2</label>
+        <label><input type="color" data-path="helix.colors.basePairs"> Base pairs</label>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="braid-heading" data-mode="braid" hidden>
+      <h2 id="braid-heading">Braid</h2>
+      <div class="settings">
+        <label>Strands<span class="pair"><input type="range" id="strand-count-range" min="1" max="12" step="1" aria-label="Strands"><input type="number" id="strand-count" min="1" max="24" step="1" aria-label="Strands, exact"></span></label>
+        <label>Twists<span class="pair"><input type="range" data-path="braid.twists" min="-10" max="10" step="0.25" aria-label="Twists"><input type="number" data-path="braid.twists" step="0.25" aria-label="Twists, exact"></span></label>
+        <label>Length<span class="pair"><input type="range" data-path="braid.length" min="10" max="400" step="1" aria-label="Length"><input type="number" data-path="braid.length" min="0.001" step="1" aria-label="Length, exact"></span></label>
+        <label>Width<span class="pair"><input type="range" data-path="braid.width" min="1" max="60" step="0.5" aria-label="Width"><input type="number" data-path="braid.width" min="0.001" step="0.5" aria-label="Width, exact"></span></label>
+        <label>Rotation (° clockwise)<span class="pair"><input type="range" data-path="braid.rotation" min="-180" max="180" step="1" aria-label="Rotation"><input type="number" data-path="braid.rotation" step="1" aria-label="Rotation, exact"></span></label>
+        <label>Segments (smoothness)<span class="pair"><input type="range" data-path="braid.minSegments" min="4" max="400" step="1" aria-label="Segments"><input type="number" data-path="braid.minSegments" min="1" max="5000" step="1" aria-label="Segments, exact"></span></label>
+      </div>
+      <p class="muted small">Negative twists turn the braid the other way. More segments make the strands smoother; cuts are added wherever two strands swap depth.</p>
+      <div id="braid-colours" class="colours"></div>
+    </section>
+
+    <section class="card" aria-labelledby="details-heading" data-mode="helix">
+      <h2 id="details-heading">Helix details</h2>
+      <h3 class="first">Strands</h3>
+      <div class="settings">
+        <label>Start angle (°)<span class="pair"><input type="range" data-path="helix.startAngle" min="-180" max="180" step="1" aria-label="Start angle"><input type="number" data-path="helix.startAngle" step="1" aria-label="Start angle, exact"></span></label>
+        <label>Phase between strands (°)<span class="pair"><input type="range" data-path="helix.phaseShift" min="0" max="360" step="1" aria-label="Phase between strands"><input type="number" data-path="helix.phaseShift" min="0" max="360" step="1" aria-label="Phase between strands, exact"></span></label>
+        <label>Frequency (tighter pitch)<span class="pair"><input type="range" data-path="helix.frequency" min="0.2" max="4" step="0.05" aria-label="Frequency"><input type="number" data-path="helix.frequency" min="0.01" max="100" step="0.05" aria-label="Frequency, exact"></span></label>
+        <label>Amplitude<span class="pair"><input type="range" data-path="helix.amplitude" min="0.2" max="4" step="0.05" aria-label="Amplitude"><input type="number" data-path="helix.amplitude" min="0.01" max="100" step="0.05" aria-label="Amplitude, exact"></span></label>
+        <label>Square wave<span class="pair"><input type="range" data-path="helix.squareWave" min="0" max="1" step="0.01" aria-label="Square wave"><input type="number" data-path="helix.squareWave" min="0" max="1" step="0.01" aria-label="Square wave, exact"></span></label>
+        <label>Crossing gap<span class="pair"><input type="range" data-path="helix.crossingGap" min="0" max="2" step="0.01" aria-label="Crossing gap"><input type="number" data-path="helix.crossingGap" min="0" step="0.01" aria-label="Crossing gap, exact"></span></label>
+        <label>Edge<span class="pair"><input type="range" data-path="helix.edgeWidth" min="0" max="4" step="0.05" aria-label="Edge"><input type="number" data-path="helix.edgeWidth" min="0" step="0.05" aria-label="Edge, exact"></span></label>
+        <label>Points per strand<span class="pair"><input type="range" data-path="helix.points" min="50" max="4000" step="10" aria-label="Points per strand"><input type="number" data-path="helix.points" min="10" max="20000" step="10" aria-label="Points per strand, exact"></span></label>
+      </div>
+      <p class="muted small">A phase other than 180° gives a major and a minor groove. The crossing gap is where the strand behind is left out, so the one in front reads as passing over. The edge outlines every piece in its own colour, for a bolder line.</p>
+      <h3>Base pairs</h3>
+      <div class="settings">
+        <label>Gap at the far strand<span class="pair"><input type="range" data-path="helix.basePairGap" min="0" max="0.9" step="0.01" aria-label="Gap at the far strand"><input type="number" data-path="helix.basePairGap" min="0" max="0.99" step="0.01" aria-label="Gap at the far strand, exact"></span></label>
+        <label>Thickness (× strand)<span class="pair"><input type="range" data-path="helix.basePairThickness" min="0" max="4" step="0.05" aria-label="Base-pair thickness"><input type="number" data-path="helix.basePairThickness" min="0" step="0.05" aria-label="Base-pair thickness, exact"></span></label>
+        <label class="check"><input type="checkbox" data-path="helix.alternateSides"> Alternate sides: every second base pair hangs from strand 2</label>
+        <label class="check"><input type="checkbox" data-path="helix.partialDisplacement"> Only half way, so those float between the strands</label>
+      </div>
+      <h3>Straight extension</h3>
+      <div class="settings">
+        <label>Run straight on
+          <select data-path="helix.extension.strands">
+            <option value="none">No</option>
+            <option value="strand1">Strand 1</option>
+            <option value="strand2">Strand 2</option>
+            <option value="both">Both (a ladder)</option>
+          </select>
+        </label>
+        <label>Length (turns)<span class="pair"><input type="range" data-path="helix.extension.length" min="0" max="5" step="0.05" aria-label="Extension length"><input type="number" data-path="helix.extension.length" min="0" max="100" step="0.05" aria-label="Extension length, exact"></span></label>
+        <label class="check"><input type="checkbox" data-path="helix.extension.taper"> Narrow it to the thinnest strand width</label>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="output-heading">
+      <h2 id="output-heading">Size and lines</h2>
+      <div class="settings">
+        <label>Unit
+          <select data-path="output.unit">
+            <option value="mm">mm</option>
+            <option value="in">in</option>
+            <option value="px">px</option>
+          </select>
+        </label>
+        <label>Margin<span class="pair"><input type="range" data-path="output.margin" min="0" max="20" step="0.5" aria-label="Margin"><input type="number" data-path="output.margin" min="0" step="0.5" aria-label="Margin, exact"></span></label>
+        <label>Background
+          <span class="input-row">
+            <input id="background-on" type="checkbox" aria-label="Fill a background">
+            <input type="color" data-path="output.background" value="#ffffff" aria-label="Background colour">
+          </span>
+        </label>
+        <label>Stroke width (blank: automatic)
+          <input type="number" data-path="output.strokeWidth" min="0.001" step="0.1" placeholder="automatic">
+        </label>
+        <label>Outline width (blank: 0.1 mm)
+          <input type="number" data-path="output.outlineWidth" min="0.001" step="0.01" placeholder="0.1 mm">
+        </label>
+      </div>
+      <p class="muted small">Every length on this page is in the unit chosen here, and the SVG opens at that size. Without a background the SVG and the PNG are transparent. The automatic stroke width is the helix's strand thickness, or half a braid strand's width.</p>
+      <div class="toolbar">
+        <button id="reset" type="button">Reset everything</button>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p><strong>Helix.</strong> Two sine waves wind round a common axis, half a turn apart unless you set another phase. A strand is drawn wider where it is in front and narrower behind, so its width shows depth, and where the strands cross, the one behind is left out for a short stretch, so the one in front passes over it. Base pairs run from strand 1 towards strand 2, stopping short of it, and taper on the way. One strand or both can run on straight past the end. The drawing is then turned, scaled to the box and each piece outlined as a line of varying width.</p>
+        <p><strong>Braid.</strong> Each strand swings from side to side across the braid's width, a fraction of a turn behind the one before, while turning in depth. The braid is cut across wherever two strands swap depth, so between two cuts the order from back to front is fixed, and each strand is painted over the ones behind it. What each strand shows is kept as one shape per strand, so the outline and the strokes follow what you see.</p>
+        <p>This is a port of two of Nik Vetr's R functions, <code>draw_DNA</code> and <code>braid_segment</code>, and draws what they draw, with a few of their errors corrected. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2024-09-13">2024-09-13</time>
+    </div>
+  </footer>
+</body>
+</html>
