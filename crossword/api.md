@@ -11,20 +11,21 @@ It is a port of Nik Vetr's R crossword generator. Every penalty term is computed
 ```sh
 node crossword/cli.mjs request.json                 # result JSON on stdout
 node crossword/cli.mjs < request.json               # or read the request from stdin ("-" also works)
-node crossword/cli.mjs request.json --svg out/      # also write each crossword as SVG, filled and blank
+node crossword/cli.mjs request.json --svg out/      # also write each crossword as SVG: filled, blank, and blank with its clues
 ```
 
-On the command line only, the target picture can be a PNG file: `"target": {"png": "heart.png"}`, read relative to the request file (or to the current directory when the request comes from stdin). It is decoded and passed on as `target.rgba`. `--svg dir` writes `crossword-<i>-orig.svg`, `crossword-<i>-refined.svg` and their `-blank.svg` versions.
+On the command line only, the target picture can be a PNG file: `"target": {"png": "heart.png"}`, read relative to the request file (or to the current directory when the request comes from stdin). It is decoded and passed on as `target.rgba`. `--svg dir` writes `crossword-<i>-orig.svg`, `crossword-<i>-refined.svg`, their `-blank.svg` versions, and `-puzzle.svg` versions: the blank grid with the numbered Across and Down clues beneath it, without answers.
 
 The exit status is 0 on success. On failure the CLI writes `{"error": {...}}` (see [Errors](#errors)) to stderr and exits with 1 for an invalid request, invalid JSON or a search that could not place every word, or 2 for a usage problem or an unreadable file.
 
 **ES module.** The core has no DOM access and runs in Node 22 and in browsers:
 
 ```js
-import { submit, renderSvg, parseEntries } from './crossword/core/index.js';
+import { submit, renderSvg, renderPuzzleSvg, parseEntries } from './crossword/core/index.js';
 const result = submit({ entriesText: 'Frozen rain : Hail\nLight rain : Drizzle\nGentle wind : Breeze\n' },
   { onProgress: (p) => console.log(p.crossword, p.iteration, p.score) });
 const svg = renderSvg(result.crosswords[0].refined, { style: 'blank', cellSize: 40 });
+const puzzle = renderPuzzleSvg(result.crosswords[0].refined); // the blank grid and its clues, no answers
 ```
 
 `submit` takes an optional second argument, `{ onProgress }`. It is called once a crossword is laid out (`iteration` 0) and after every MCMC iteration, with `{ crossword, iteration, nIter, score, grid }`: the 0-based crossword index, the iteration, the iteration count, the current score and the current grid (as in [Result](#result)). It is not part of the JSON request, so the command line has no equivalent.
@@ -36,7 +37,7 @@ const svg = renderSvg(result.crosswords[0].refined, { style: 'blank', cellSize: 
 | `submit(request)` | Runs the request, loads it into the page's inputs, shows the result and resolves with it. An invalid request rejects with a `CrosswordError` and leaves the page showing what it showed. |
 | `getRequest()` | Returns the request the page's inputs currently describe. |
 | `getResult()` | Returns the result on display, or `null`. |
-| `exportSvgText(pick)` | Returns a crossword as SVG text. `pick` is optional: `{ crossword, stage, style }`, a 0-based index, `"refined"` or `"orig"`, and `"filled"` or `"blank"`; each defaults to what the page shows, filled. |
+| `exportSvgText(pick)` | Returns a crossword as SVG text. `pick` is optional: `{ crossword, stage, style }`, a 0-based index, `"refined"` or `"orig"`, and `"filled"`, `"blank"` or `"puzzle"` (the blank grid with its clues and no answers); each defaults to what the page shows, filled. |
 | `exportPngBlob(pick)` | Returns a Promise of the same drawing as a PNG `Blob`, at twice the SVG's size. |
 | `stop()` | Stops a running search; the pending `submit` rejects with an `Error`. |
 

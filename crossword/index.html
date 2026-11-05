@@ -83,6 +83,10 @@
           </div>
         </fieldset>
 
+        <label id="outline-field" class="outline-field" hidden>
+          <input id="show-outline" type="checkbox" checked>
+          Outline the target picture on the filled grid <span class="outline-key" aria-hidden="true"></span>
+        </label>
         <h3>Filled</h3>
         <figure id="grid-filled" class="grid-figure stale-dim"></figure>
         <h3>Blank</h3>
@@ -93,6 +97,8 @@
           <button id="export-svg-blank" type="button">Blank SVG</button>
           <button id="export-png" type="button">Filled PNG</button>
           <button id="export-png-blank" type="button">Blank PNG</button>
+          <button id="export-svg-puzzle" type="button" title="The blank grid with the clues beneath it, without the answers">Grid + clues SVG</button>
+          <button id="export-png-puzzle" type="button" title="The blank grid with the clues beneath it, without the answers">Grid + clues PNG</button>
           <button id="export-result" type="button">Result JSON</button>
           <button id="export-request" type="button">Request JSON</button>
         </div>

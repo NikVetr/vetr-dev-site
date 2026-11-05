@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { CrosswordError, gridWord, parseEntries, renderSvg, submit, TERMS } from '../core/index.js';
+import { CrosswordError, gridWord, parseEntries, renderPuzzleSvg, renderSvg, submit, TERMS } from '../core/index.js';
 import { adjacency, articulationPoints, findNExtra, findWords, fillAdjElements, numberWords, removableWords, trimState } from '../core/grid.js';
 import { createRng } from '../core/rng.js';
 import { countInducedCycles, nearestDistances, preparePicture, scoreTerms } from '../core/score.js';
@@ -319,6 +319,18 @@ test('the SVG has one cell per letter and every clue number', () => {
   assert.equal(filled.match(/<rect x=/g)?.length, 2 * letters); // shadow and cell
   assert.equal((filled.match(/<text /g)?.length ?? 0) - (blank.match(/<text /g)?.length ?? 0), letters);
   assert.equal(blank.match(/<text /g)?.length, new Set(cw.entries.map((e) => `${e.row},${e.col}`)).size);
+});
+
+test('the puzzle is the blank grid with every clue and its length, and no answer', () => {
+  const cw = submit({ entriesText: weatherText, search: { nIter: 0 } }).crosswords[0].orig;
+  const puzzle = renderPuzzleSvg(cw);
+  const [grid, clues] = puzzle.split('<g font-family="Helvetica, Arial, sans-serif" font-size="0.34"');
+  assert.equal(grid.match(/<text /g)?.length, renderSvg(cw, { style: 'blank' }).match(/<text /g)?.length);
+  const texts = [...clues.matchAll(/<text [^>]*>([^<]*)<\/text>/g)].map((m) => m[1]);
+  const lines = texts.filter((t) => !/^(Across|Down|\d+\.)$/.test(t)).join(' ');
+  const expected = ['across', 'down'].flatMap((dir) => cw.entries.filter((e) => e.dir === dir).map((e) => `${e.clue} (${e.length})`)).join(' ');
+  assert.equal(lines.replace(/&amp;/g, '&'), expected.replace(/\s+/g, ' '));
+  assert.deepEqual(texts.filter((t) => /^\d+\.$/.test(t)).sort(), cw.entries.map((e) => `${e.number}.`).sort());
 });
 
 test('the command line prints the result, reads PNG targets and reports errors as JSON', () => {

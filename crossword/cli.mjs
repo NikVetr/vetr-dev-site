@@ -9,7 +9,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { CrosswordError, renderSvg, submit } from './core/index.js';
+import { CrosswordError, renderPuzzleSvg, renderSvg, submit } from './core/index.js';
 import { decodePng } from './decode-png.mjs';
 
 const USAGE = 'usage: node cli.mjs [request.json | -] [--svg dir]; reads the request from stdin when no file is given';
@@ -73,6 +73,7 @@ try {
       for (const stage of /** @type {const} */ (['orig', 'refined'])) {
         writeFileSync(join(svgDir, `crossword-${i + 1}-${stage}.svg`), renderSvg(crossword[stage]));
         writeFileSync(join(svgDir, `crossword-${i + 1}-${stage}-blank.svg`), renderSvg(crossword[stage], { style: 'blank' }));
+        writeFileSync(join(svgDir, `crossword-${i + 1}-${stage}-puzzle.svg`), renderPuzzleSvg(crossword[stage]));
       }
     });
   }

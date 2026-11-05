@@ -9,7 +9,7 @@ import { generateXword, hardestWords, runMCMC } from './search.js';
 
 export { CrosswordError, DEFAULTS, formatEntries, gridWord, issueLocation, parseEntries } from './input.js';
 export { maskFromRgba, TERMS } from './score.js';
-export { renderSvg } from './render.js';
+export { renderPuzzleSvg, renderSvg } from './render.js';
 
 /**
  * @typedef {import('./input.js').Entry} Entry

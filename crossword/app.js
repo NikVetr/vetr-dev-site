@@ -3,15 +3,16 @@
 // submit() to scripts and agents running in the page.
 
 import {
-  CrosswordError, DEFAULTS, TERMS, formatEntries, issueLocation, maskFromRgba, parseEntries, renderSvg,
+  CrosswordError, DEFAULTS, TERMS, formatEntries, issueLocation, maskFromRgba, parseEntries, renderPuzzleSvg, renderSvg,
 } from './core/index.js';
+import { preparePicture } from './core/score.js';
 
 /**
  * @typedef {import('./core/input.js').Issue} Issue
  * @typedef {ReturnType<typeof import('./core/index.js').submit>} Result
  * @typedef {Result['crosswords'][number]['refined']} Crossword
  * @typedef {{ label: string, request: { mask: string[] } | { rgba: { width: number, height: number, data: string } }, pixels?: { width: number, height: number, data: Uint8ClampedArray } }} Target
- * @typedef {{ crossword?: number, stage?: 'orig' | 'refined', style?: 'filled' | 'blank' }} Pick
+ * @typedef {{ crossword?: number, stage?: 'orig' | 'refined', style?: 'filled' | 'blank' | 'puzzle' }} Pick
  */
 
 const TERM_LABELS = /** @type {Record<string, string>} */ ({
@@ -30,7 +31,7 @@ const el = {
   generate: byId('generate'), refine: byId('refine'), stop: byId('stop'), status: byId('status'), runIssues: byId('run-issues'),
   progressGrid: byId('progress-grid'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), crosswordChoice: byId('crossword-choice'),
   gridFilled: byId('grid-filled'), gridBlank: byId('grid-blank'), cluesAcross: byId('clues-across'), cluesDown: byId('clues-down'),
-  terms: byId('terms'), score: byId('score'),
+  terms: byId('terms'), score: byId('score'), outlineField: byId('outline-field'), showOutline: byId('show-outline'),
 };
 
 /** @type {Target | null} */
@@ -43,6 +44,8 @@ let resultRequest = null;
 let resultInputs = null;
 /** Whether the last run from the page failed, leaving earlier crosswords on view. */
 let failed = false;
+/** The target picture the crosswords on view were shaped towards, as the score prepares it. @type {ReturnType<typeof preparePicture> | null} */
+let resultPicture = null;
 let shown = { crossword: 0, stage: /** @type {'orig' | 'refined'} */ ('refined') };
 /** @type {Worker | null} */
 let worker = null;
@@ -218,6 +221,8 @@ function showResult(next, request, inputs) {
   result = next;
   resultRequest = request;
   resultInputs = inputs;
+  resultPicture = pictureOf(/** @type {Record<string, any>} */ (request).target);
+  el.outlineField.hidden = !resultPicture;
   failed = false;
   showStale();
   shown = { crossword: 0, stage: 'refined' };
@@ -239,6 +244,7 @@ function renderShown() {
   if (!result) return;
   const cw = result.crosswords[shown.crossword][shown.stage];
   el.gridFilled.innerHTML = renderSvg(cw);
+  if (resultPicture && el.showOutline.checked) el.gridFilled.querySelector('svg').insertAdjacentHTML('beforeend', targetOutline(cw, resultPicture));
   el.gridBlank.innerHTML = renderSvg(cw, { style: 'blank' });
   for (const [list, dir] of [[el.cluesAcross, 'across'], [el.cluesDown, 'down']]) {
     list.replaceChildren(...cw.entries.filter((e) => e.dir === dir).map((e) => {
@@ -256,6 +262,45 @@ function renderShown() {
     return tr;
   }));
   el.score.textContent = formatNumber(cw.score);
+}
+
+el.showOutline.addEventListener('change', renderShown);
+
+/** A request's target picture, prepared as the score compares it, or null. @param {any} t */
+function pictureOf(t) {
+  if (!t) return null;
+  if (t.mask) {
+    return preparePicture({ width: t.mask[0].length, height: t.mask.length, data: Uint8Array.from(t.mask.join(''), (ch) => (ch === '#' ? 1 : 0)) });
+  }
+  const bytes = Uint8ClampedArray.from(atob(t.rgba.data), (ch) => ch.charCodeAt(0));
+  return preparePicture(maskFromRgba(t.rgba.width, t.rgba.height, bytes, t.darkThreshold ?? DEFAULTS.darkThreshold));
+}
+
+/**
+ * The target picture's outline on a crossword's grid (in its SVG's grid-pitch units), placed
+ * as the picture term compares them: both squared and centred, the picture scaled to the
+ * crossword's size. A large picture is first reduced to 8 pixels per cell.
+ * @param {Crossword} cw @param {NonNullable<typeof resultPicture>} picture
+ */
+function targetOutline(cw, picture) {
+  const size = Math.max(cw.rows, cw.cols);
+  const pad = Math.ceil(Math.abs(cw.rows - cw.cols) / 2);
+  const [padR, padC] = cw.rows >= cw.cols ? [0, pad] : [pad, 0];
+  const side = Math.min(picture.size, 8 * size);
+  const cells = new Set(picture.locs.map(([r, c]) => `${Math.ceil((r * side) / picture.size)},${Math.ceil((c * side) / picture.size)}`));
+  const has = (/** @type {number} */ r, /** @type {number} */ c) => cells.has(`${r},${c}`);
+  const k = size / side;
+  const x = (/** @type {number} */ c) => +((c - 1) * k - padC + 0.5).toFixed(3);
+  const y = (/** @type {number} */ r) => +((r - 1) * k - padR + 0.5).toFixed(3);
+  let d = '';
+  for (const cell of cells) {
+    const [r, c] = cell.split(',').map(Number);
+    if (!has(r - 1, c)) d += `M${x(c)} ${y(r)}H${x(c + 1)}`;
+    if (!has(r + 1, c)) d += `M${x(c)} ${y(r + 1)}H${x(c + 1)}`;
+    if (!has(r, c - 1)) d += `M${x(c)} ${y(r)}V${y(r + 1)}`;
+    if (!has(r, c + 1)) d += `M${x(c + 1)} ${y(r)}V${y(r + 1)}`;
+  }
+  return `<path d="${d}" fill="none" stroke="#2b66d5" stroke-width="0.08" stroke-linecap="square"/>`;
 }
 
 el.crosswordChoice.addEventListener('change', (/** @type {Event} */ e) => {
@@ -438,7 +483,8 @@ byId('settings-card').addEventListener('input', showStale);
 /** @param {Pick} [pick] */
 function exportSvgText({ crossword = shown.crossword, stage = shown.stage, style = 'filled' } = {}) {
   if (!result) throw new Error('there is no result yet');
-  return renderSvg(result.crosswords[crossword][stage], { style });
+  const cw = result.crosswords[crossword][stage];
+  return style === 'puzzle' ? renderPuzzleSvg(cw) : renderSvg(cw, { style });
 }
 
 /** The same drawing as a PNG at twice the SVG's size. @param {Pick} [pick] @returns {Promise<Blob>} */
@@ -468,6 +514,8 @@ byId('export-svg').addEventListener('click', () => download(fileName('.svg'), ne
 byId('export-svg-blank').addEventListener('click', () => download(fileName('-blank.svg'), new Blob([exportSvgText({ style: 'blank' })], { type: 'image/svg+xml' })));
 byId('export-png').addEventListener('click', async () => download(fileName('.png'), await exportPngBlob()));
 byId('export-png-blank').addEventListener('click', async () => download(fileName('-blank.png'), await exportPngBlob({ style: 'blank' })));
+byId('export-svg-puzzle').addEventListener('click', () => download(fileName('-puzzle.svg'), new Blob([exportSvgText({ style: 'puzzle' })], { type: 'image/svg+xml' })));
+byId('export-png-puzzle').addEventListener('click', async () => download(fileName('-puzzle.png'), await exportPngBlob({ style: 'puzzle' })));
 byId('export-result').addEventListener('click', () => download('crossword-result.json', new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' })));
 byId('export-request').addEventListener('click', () => download('crossword-request.json', new Blob([JSON.stringify(resultRequest, null, 2)], { type: 'application/json' })));
 
