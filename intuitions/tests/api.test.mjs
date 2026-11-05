@@ -27,7 +27,10 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues']);
+  assert.deepEqual(submit({ entry: 'null-pvalues' }).params, { scenario: 'batch', alpha: 0.05, perBatch: 10, batches: 2, treatedShare: 0.5 });
+  assert.deepEqual(submit({ entry: 'null-pvalues', params: { scenario: 'pairing', meanChange: 0.25 } }).params,
+    { scenario: 'pairing', alpha: 0.05, pairs: 10, betweenSD: 2, changeSD: 0.5, noiseSD: 1, meanChange: 0.25, replicates: 10000, seed: 1 });
   const dag = /** @type {any} */ (submit({ entry: 'dag-adjustment' }).params);
   assert.deepEqual([dag.view, dag.exposure, dag.outcome, dag.adjust, dag.mediator, dag.noise, dag.sample, dag.graph.name], ['adjust', 'X', 'Y', [], null, 'unit', null, 'confounder']);
   assert.deepEqual(submit({ entry: 'typical-set' }).params, { view: 'shell', k: 10, coverage: 0.9, radius: 1 });
@@ -68,6 +71,14 @@ test('correlation-geometry params are checked in full', () => {
   assert.deepEqual(paths(rejection({ entry: 'correlation-geometry', params: { view: 3 } })), ['wrong_type params.view']);
 });
 
+test('null-pvalues params are checked in full, constraints and work included', () => {
+  assert.deepEqual(paths(rejection({ entry: 'null-pvalues', params: { scenario: 'stepwise', n: 30, steps: 28, seed: -1 } })), ['out_of_range params.seed']);
+  assert.deepEqual(paths(rejection({ entry: 'null-pvalues', params: { scenario: 'stepwise', n: 30, steps: 28 } })), ['out_of_range params.steps']);
+  assert.deepEqual(paths(rejection({ entry: 'null-pvalues', params: { scenario: 'two-step', n: 500, features: 100000, replicates: 5 } })), ['unknown_field params.replicates']);
+  assert.deepEqual(paths(rejection({ entry: 'null-pvalues', params: { scenario: 'autocorrelation', n: 1000, fix: 'circular-shift', replicates: 2000 } })), ['too_much_work params.replicates']);
+  assert.deepEqual(paths(rejection({ entry: 'null-pvalues', params: { scenario: 'batch', batches: 2, treatedShare: 0 } })), ['not_estimable params.treatedShare']);
+});
+
 test('the error message names the first three issues and serialises as {error}', () => {
   const error = rejection({ entry: 'zscore-outliers', params: { a: 1, b: 2, c: 3, d: 4 } });
   assert.match(error.message, /^Invalid request: params\.a: unknown field.*; and 1 more$/);
@@ -87,6 +98,10 @@ test('the CLI prints the same result and reports errors with exit codes', () => 
   assert.equal(JSON.parse(json.stderr).error.code, 'invalid_json');
   const usage = spawnSync(process.execPath, [cli, 'a.json', 'b.json'], { encoding: 'utf8' });
   assert.equal(usage.status, 2);
+  const lab = { entry: 'null-pvalues', params: { scenario: 'enrichment', alpha: 0.01 } };
+  const labOut = spawnSync(process.execPath, [cli], { input: JSON.stringify(lab), encoding: 'utf8' });
+  assert.equal(labOut.status, 0);
+  assert.deepEqual(JSON.parse(labOut.stdout), JSON.parse(JSON.stringify(submit(lab))));
   const missing = spawnSync(process.execPath, [cli, '/nonexistent/request.json'], { encoding: 'utf8' });
   assert.equal(missing.status, 2);
   assert.equal(JSON.parse(missing.stderr).error.code, 'unreadable_input');

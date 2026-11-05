@@ -1,6 +1,6 @@
 // The JavaScript against values computed in R (4.6) by the original scripts, mvtnorm
-// and polycor. See tests/fixtures/r-reference.json and r-correlation.json for the
-// source of the values.
+// and polycor. See tests/fixtures/r-reference.json, r-correlation.json and the other
+// fixtures for the source of the values.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
@@ -12,7 +12,10 @@ import {
   compute as computeCorrelation, det3, entryInterval, equicorrelationEigenvalues, expectedWidthSample, expectedWidthUniform, zeroPairRange,
 } from '../correlation-geometry/compute.js';
 import { compute as computeDag } from '../dag-adjustment/compute.js';
-import { betaI, gammaP, gammaQ, lgamma, logGammaP, qgamma } from '../lib/special.js';
+import { betaI, gammaP, gammaQ, lgamma, logGammaP, ptTwoSided, qgamma, qtTwoSided } from '../lib/special.js';
+import {
+  batchDesign, bhAdjust, circularShiftTest, compute as computeNull, effectiveDfTest, fisherTest, hypergeometric, neweyWestTest, oneSampleTest, pearsonTest, twoStepTests, welchTest,
+} from '../null-pvalues/compute.js';
 import { chiLogDensity, compute as computeTypical, CUBE_DIMENSIONS, PRESETS, sphereMarginal } from '../typical-set/compute.js';
 
 /** Results are a union over modes; tests read them untyped. @param {unknown} params @returns {any} */
@@ -379,4 +382,144 @@ test("dag-adjustment colliders: R2_from_Cov(), both ways, and its diag2() failur
   assert.equal(bug.scriptGridHits, 0); // the script's own grid never meets it
   const r = dagEntry({ view: 'colliders', colliders: 1, rYX: 0.5, share: 1 / 3 });
   assert.ok(Math.abs(r.r2 - bug.long.R2) < 1e-12 && Math.abs(r.partialCorrelation - bug.long.pr_yu) < 1e-12);
+});
+
+// ---------- null-pvalues, against the original scripts and base R (fixtures/r-null-pvalues.json) ----------
+
+const pvRef = JSON.parse(readFileSync(new URL('fixtures/r-null-pvalues.json', import.meta.url), 'utf8'));
+/** Results are a union over scenarios; tests read them untyped. @param {unknown} params @returns {any} */
+const nullEntry = (params) => computeNull(params);
+/**
+ * Two simulated rates agree within `k` standard errors of their difference.
+ * @param {number} a @param {number} na @param {number} b @param {number} nb @param {string} what
+ */
+function sameRate(a, na, b, nb, what, k = 4) {
+  const p = (a * na + b * nb) / (na + nb);
+  const se = Math.sqrt(p * (1 - p) * (1 / na + 1 / nb));
+  assert.ok(Math.abs(a - b) <= k * se + 1e-12, `${what}: ${a} (n = ${na}) vs R ${b} (n = ${nb})`);
+}
+/** A simulated rate against an exact one. @param {number} exact @param {{ rate: number, n: number }} r @param {string} what */
+function nearExact(exact, r, what, k = 4) {
+  assert.ok(Math.abs(r.rate - exact) <= k * Math.sqrt((exact * (1 - exact)) / r.n), `${what}: exact ${exact} vs R ${r.rate} (n = ${r.n})`);
+}
+
+test('Student t tails and quantiles match pt and qt', () => {
+  pvRef.t.t.forEach((/** @type {number} */ t, /** @type {number} */ i) => assert.ok(relative(ptTwoSided(t, pvRef.t.df[i]), pvRef.t.twoSided[i]) < 1e-12, `t = ${t}, df = ${pvRef.t.df[i]}`));
+  pvRef.qt.tail.forEach((/** @type {number} */ a, /** @type {number} */ i) => assert.ok(relative(qtTwoSided(a, pvRef.qt.df[i]), pvRef.qt.value[i]) < 1e-11, `tail ${a}, df ${pvRef.qt.df[i]}`));
+});
+
+test('null-pvalues batch: the exact rate, the t identity on R fits, and the script simulated', () => {
+  for (const d of pvRef.batchDesigns) {
+    const design = batchDesign(d);
+    assert.deepEqual(design.treated, d.treated);
+    assert.ok(Math.abs(design.r2 - d.r2) < 1e-12);
+    const r = nullEntry({ scenario: 'batch', perBatch: d.perBatch, batches: d.batches, treatedShare: d.treatedShare });
+    assert.ok(relative(r.tRatio, d.ratio) < 1e-14);
+    // lm() on both steps: the shortcut's t is the model's times the ratio.
+    assert.ok(relative(d.t2 / d.t1, d.ratio) < 1e-10, `${d.t2 / d.t1} vs ${d.ratio}`);
+    d.u.forEach((/** @type {number} */ u, /** @type {number} */ i) => {
+      if (u > 0.5) return;
+      const at = nullEntry({ scenario: 'batch', perBatch: d.perBatch, batches: d.batches, treatedShare: d.treatedShare, alpha: u });
+      assert.ok(relative(at.shortcut.rejectionRate, d.cdf[i]) < 1e-10, `cdf(${u})`);
+    });
+  }
+  const script = pvRef.batchScript;
+  const exact = nullEntry({ scenario: 'batch' });
+  nearExact(exact.shortcut.rejectionRate, script.shortcut, 'batch regressed out');
+  nearExact(0.05, script.model, 'batch in the model');
+  for (const ratio of script.tRatio) assert.ok(relative(ratio, exact.tRatio) < 1e-9);
+  script.histogram.forEach((/** @type {number} */ share, /** @type {number} */ i) => {
+    const p = exact.shortcut.histogram.density[i] / 20;
+    assert.ok(Math.abs(share - p) < 4.5 * Math.sqrt((p * (1 - p)) / script.replicates), `bin ${i}`);
+  });
+});
+
+test("null-pvalues stepwise: the script's simulation, its one-sided 'correction', and σ rescaled", () => {
+  for (const ref of [pvRef.stepwise, pvRef.stepwiseSmall]) {
+    for (const finalDf of /** @type {const} */ (['fitted', 'rescaled'])) {
+      const r = nullEntry({ scenario: 'stepwise', n: ref.n, steps: ref.steps, finalDf, replicates: 4000, seed: 11 });
+      sameRate(r.shortcut.rejectionRate, 4000, ref[finalDf].rate, ref.replicates, `n = ${ref.n}, ${finalDf}`);
+    }
+  }
+  // (1 − pt(t, df)) × 2 with a signed t: half the p-values exceed 1, so the script counts one side only.
+  assert.ok(Math.abs(pvRef.stepwise.scriptAbove1 - 0.5) < 0.03);
+  assert.ok(pvRef.stepwise.script.rate < 0.6 * pvRef.stepwise.fitted.rate);
+});
+
+test('null-pvalues bootstrap: the t-test on bootstrap means and the bootstrap difference, against the script', () => {
+  for (const ref of [pvRef.bootstrap, pvRef.bootstrapSmall]) {
+    const r = nullEntry({ scenario: 'bootstrap', n: ref.n, resamples: ref.resamples, replicates: ref.replicates, seed: 2 });
+    sameRate(r.shortcut.rejectionRate, ref.replicates, ref.ttest.rate, ref.replicates, `t-test, B = ${ref.resamples}`);
+    sameRate(r.sound.rejectionRate, ref.replicates, ref.allPairs.rate, ref.replicates, `difference, B = ${ref.resamples}`);
+  }
+  // The script's 5,000 sampled pairings estimate the all-pairs share, with noise of its own.
+  sameRate(pvRef.bootstrap.diff.rate, 1000, pvRef.bootstrap.allPairs.rate, 1000, 'sampled vs all pairs');
+});
+
+test("null-pvalues autocorrelation: cor.test, Fisher's z and the script's three remedies on R's series, exactly", () => {
+  for (const f of pvRef.autocorrelationFixed) {
+    assert.ok(relative(pearsonTest(f.x, f.y), f.pearson) < 1e-11, `pearson n = ${f.n}`);
+    assert.ok(relative(fisherTest(f.x, f.y), f.fisher) < 1e-11, `fisher n = ${f.n}`);
+    const eff = effectiveDfTest(f.x, f.y);
+    assert.ok(relative(eff.neff, f.neff) < 1e-11 && relative(eff.p, f.effdf) < 1e-11, `effdf n = ${f.n}`);
+    assert.ok(relative(circularShiftTest(f.x, f.y), f.tts) < 1e-14, `tts n = ${f.n}`);
+    assert.ok(relative(neweyWestTest(f.x, f.y), f.hac) < 1e-10, `hac n = ${f.n}: ${neweyWestTest(f.x, f.y)} vs ${f.hac}`);
+  }
+  const ref = pvRef.autocorrelation;
+  const naive = nullEntry({ scenario: 'autocorrelation', replicates: 2000, seed: 4 });
+  sameRate(naive.shortcut.rejectionRate, 2000, ref.pearson.rate, ref.replicates, 'naive');
+  sameRate(naive.sound.rejectionRate, 2000, ref.effdf.rate, ref.replicates, 'effective df');
+  for (const [fix, key] of [['circular-shift', 'tts'], ['newey-west', 'hac']]) {
+    const r = nullEntry({ scenario: 'autocorrelation', fix, replicates: 1000, seed: 4 });
+    sameRate(r.sound.rejectionRate, 1000, ref[key].rate, ref.replicates, fix);
+  }
+});
+
+test('null-pvalues two-step: lm() p-values, p.adjust, the script simulated, and its second part', () => {
+  const f = pvRef.twoStepFixed;
+  const t = twoStepTests(f.x.slice(0, 100), f.y.slice(0, 100), f.x.slice(100), f.y.slice(100));
+  for (const [ours, theirs] of [[t.a, f.A], [t.b, f.B], [t.pooled, f.pooled], [t.interaction, f.interaction]]) assert.ok(relative(ours, theirs) < 1e-10, `${ours} vs ${theirs}`);
+  bhAdjust(pvRef.bh.p).forEach((q, i) => assert.ok(relative(q, pvRef.bh.adjusted[i]) < 1e-14));
+  const ref = pvRef.twoStep;
+  const r = nullEntry({ scenario: 'two-step', features: ref.features, seed: 3 });
+  sameRate(r.sound.rejectionRate, r.sound.count, ref.pooled.rate, ref.pooled.n, 'pooled filter');
+  sameRate(r.shortcut.rejectionRate, r.shortcut.count, ref.either.rate, ref.either.n, 'either-group filter');
+  sameRate(r.selected.sound / ref.features, ref.features, ref.selectedPooled / ref.features, ref.features, 'kept by the pooled effect', 6);
+  // As written, the second part selects with the first part's A and B columns, not its own.
+  assert.deepEqual(pvRef.twoStepPart2.selectionColumns, ['A', 'B']);
+  assert.deepEqual(pvRef.twoStepPart2.columnsAsWritten, ['x', 'f']);
+});
+
+test('null-pvalues pairing: Welch and paired t-tests exactly, and the script simulated with and without an effect', () => {
+  assert.ok(relative(welchTest(pvRef.welchFixed.a, pvRef.welchFixed.b), pvRef.welchFixed.welch) < 1e-12);
+  assert.ok(relative(oneSampleTest(pvRef.welchFixed.a), pvRef.welchFixed.one) < 1e-12);
+  const ref = pvRef.pairing;
+  for (const [meanChange, block] of [[0, ref.null], [0.25, ref.effect]]) {
+    const r = nullEntry({ scenario: 'pairing', meanChange, replicates: 20000, seed: 5 });
+    sameRate(r.shortcut.rejectionRate, 20000, block.twoSample.rate, ref.replicates, `two-sample, change ${meanChange}`);
+    sameRate(r.sound.rejectionRate, 20000, block.oneSample.rate, ref.replicates, `paired, change ${meanChange}`);
+  }
+});
+
+test('null-pvalues enrichment: dhyper, phyper and fisher.test exactly; the exact rates; the script simulated', () => {
+  for (const c of pvRef.hypergeometric) {
+    const { pmf, tail } = hypergeometric(c.genes, c.de, c.size);
+    c.pmf.forEach((/** @type {number} */ p, /** @type {number} */ k) => assert.ok(relative(pmf[k], p) < 1e-12, `pmf ${k} of ${JSON.stringify(c)}`));
+    c.tail.forEach((/** @type {number} */ p, /** @type {number} */ k) => assert.ok(relative(tail[k], p) < 1e-12 && relative(tail[k], c.fisher[k]) < 1e-10, `tail ${k}`));
+  }
+  const ref = pvRef.enrichmentExact;
+  ref.u.forEach((/** @type {number} */ u, /** @type {number} */ i) => {
+    if (u > 0.5) return;
+    const r = nullEntry({ scenario: 'enrichment', alpha: u });
+    assert.ok(relative(r.sound.rejectionRate, ref.all[i]) < 1e-12, `all at ${u}`);
+    assert.ok(relative(r.shortcut.rejectionRate, ref.nonEmpty[i]) < 1e-12, `with a hit at ${u}`);
+    assert.ok(relative(r.nonEmptyShare, ref.nonEmptyShare) < 1e-12);
+  });
+  const script = pvRef.enrichmentScript;
+  const exact = nullEntry({ scenario: 'enrichment' });
+  script.all.forEach((/** @type {number} */ rate, /** @type {number} */ i) => {
+    nearExact(exact.sound.rejectionRate, { rate, n: 2000 }, `script run ${i}, all`);
+    nearExact(exact.shortcut.rejectionRate, { rate: script.nonEmpty[i], n: Math.round(2000 * script.nonEmptyShare[i]) }, `script run ${i}, with a hit`);
+    assert.ok(script.duplicateShare[i] < 0.002); // genes drawn with replacement: about 0.1% repeats
+  });
 });

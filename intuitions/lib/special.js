@@ -1,6 +1,6 @@
 // Gamma and beta functions for the gallery: log-gamma, the regularized incomplete
-// gamma and beta functions and the gamma quantile, which give the chi-square and beta
-// distributions their CDFs and quantiles. Accurate to about 1e-14 relative error for
+// gamma and beta functions and the gamma quantile, which give the chi-square, beta and
+// Student's t distributions their CDFs and quantiles. Accurate to about 1e-14 relative error for
 // the arguments the entries use (shape parameters up to a few thousand).
 
 import { qnorm } from './normal.js';
@@ -166,4 +166,48 @@ function betaFraction(x, a, b) {
     if (Math.abs(step - 1) < EPS) break;
   }
   return h;
+}
+
+/**
+ * The two-sided tail of Student's t, P(|T| ≥ |t|) with `df` degrees of freedom (any
+ * positive df), as I_{df/(df + t²)}(df/2, ½), so a small p-value keeps its precision.
+ * @param {number} t @param {number} df
+ */
+export function ptTwoSided(t, df) {
+  return betaI(df / (df + t * t), df / 2, 0.5);
+}
+
+/** Student's t distribution function P(T ≤ t). @param {number} t @param {number} df */
+export function pt(t, df) {
+  const tail = ptTwoSided(t, df) / 2;
+  return t < 0 ? tail : 1 - tail;
+}
+
+/**
+ * The t value whose two-sided tail is `tail`: P(|T| ≥ t) = tail, for tail in (0, 1].
+ * The tail is I_x(df/2, ½) with x = df/(df + t²), and 1 − I_w(½, df/2) with w = 1 − x;
+ * bisection on log x for small tails and on log w for tails near 1 keeps t's digits
+ * at both ends.
+ * @param {number} tail @param {number} df
+ */
+export function qtTwoSided(tail, df) {
+  if (tail >= 1) return 0;
+  const small = tail < 0.5;
+  const rises = (/** @type {number} */ v) => (small ? betaI(v, df / 2, 0.5) < tail : betaI(v, 0.5, df / 2) < 1 - tail);
+  let lo = -745;
+  let hi = 0;
+  for (let i = 0; i < 200 && hi - lo > 1e-15 * Math.max(1, -lo); i++) {
+    const mid = (lo + hi) / 2;
+    if (rises(Math.exp(mid))) lo = mid;
+    else hi = mid;
+  }
+  const v = Math.exp((lo + hi) / 2);
+  return Math.sqrt(small ? (df * (1 - v)) / v : (df * v) / (1 - v));
+}
+
+/** Student's t quantile: t with P(T ≤ t) = p. @param {number} p in (0, 1) @param {number} df */
+export function qt(p, df) {
+  if (p === 0.5) return 0;
+  const t = qtTwoSided(2 * Math.min(p, 1 - p), df);
+  return p < 0.5 ? -t : t;
 }
