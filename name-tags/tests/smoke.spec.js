@@ -77,7 +77,8 @@ test('runs the other decorations and reports invalid input', async ({ page }) =>
   await page.locator('#decoration').selectOption('dna');
   await page.locator('#names').fill('Ada Lovelace\nMary|Ann|Evans');
   await page.locator('#generate').click();
-  await expect(page.locator('#issues li')).toHaveText(['names[1]: use exactly one "|" between two non-empty lines: "Mary|Ann|Evans"']);
+  await expect(page.locator('#issues li')).toHaveText(['Name 2 (line 2): use exactly one "|" between two non-empty lines: "Mary|Ann|Evans"']);
+  await expect(page.locator('#names')).toHaveAttribute('aria-invalid', 'true');
 });
 
 test('marks the sheets out of date after an edit or a failed run, and their downloads too', async ({ page }) => {
@@ -91,9 +92,13 @@ test('marks the sheets out of date after an edit or a failed run, and their down
   await expect(page.locator('#stale')).toContainText('the names and design changed');
   await page.locator('#generate').click();
   await expect(page.locator('#stale')).toContainText('the last run failed');
+  await expect(page.locator('#issues li')).toHaveText(['Optimizer restarts per tag: must be an integer from 1 to 1000']);
+  await expect(page.locator('#restarts')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#restarts')).toHaveAttribute('aria-describedby', 'issues');
   await page.locator('#restarts').fill('20');
   await page.locator('#generate').click();
   await expect(page.locator('#stale')).toBeHidden();
+  await expect(page.locator('#restarts')).not.toHaveAttribute('aria-invalid');
   await expect(page.locator('#downloads button')).toHaveText(['Sheet SVG']);
   await expect(page.locator('#export-request')).toHaveText('Request JSON');
 });

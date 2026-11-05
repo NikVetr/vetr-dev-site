@@ -310,16 +310,62 @@ function setRunning(running) {
   el.stop.disabled = !running;
 }
 
-/** @param {Issue[]} issues */
+// ---------- problems ----------
+
+/**
+ * The field a problem's request path is on, its label on the page and its inputs: the first
+ * entry the path starts with. Paths of fields the page has no input for are shown as they are.
+ * @type {[string, string, HTMLElement[]][]}
+ */
+const FIELDS = [
+  ['names', 'Names', [el.names]],
+  ['tray', 'Tray', [el.trayChoice, el.trayFile]],
+  ['cells', 'Cells', [el.cells]],
+  ['decoration', 'Decoration', [el.decoration]],
+  ['font', 'Font', [el.font]],
+  ['style.smallcaps_reference_face', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],
+  ['style.smallcaps', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],
+  ['style.optimizer.restarts', 'Optimizer restarts per tag', [el.restarts]],
+  ['seed', 'Seed', [el.seed]],
+  ['logo.use_file_colors', "Keep the SVG's colours", [el.logoColors]],
+  ['logo', 'Logo', [el.logoFile]],
+  ['overlay', 'Tray drawing overlay', [el.overlayFile]],
+];
+/** @param {string} path */
+const fieldOf = (path) => FIELDS.find(([p]) => path !== '' && path.startsWith(p));
+
+/** The names box's line number of each name. */
+const nameLines = () => el.names.value.split(/\r?\n/).flatMap((/** @type {string} */ line, /** @type {number} */ i) => (line.trim() === '' ? [] : [i + 1]));
+
+/** Where a problem is, in the page's words. @param {Issue} issue */
+function describeIssue(issue) {
+  const name = /^names\[(\d+)\]/.exec(issue.path);
+  if (name) return `Name ${Number(name[1]) + 1} (line ${nameLines()[Number(name[1])] ?? '?'}): ${issue.message}`;
+  const field = fieldOf(issue.path);
+  if (!field) return issue.path ? `${issue.path}: ${issue.message}` : issue.message;
+  const rest = issue.path.slice(field[0].length).replace(/^\./, '');
+  return `${field[1]}${rest ? ` (${rest})` : ''}: ${issue.message}`;
+}
+
+/** Lists the problems and marks the fields they are on, pointing each to the list. @param {Issue[]} issues */
 function showIssues(issues) {
   el.issues.hidden = issues.length === 0;
   const ul = document.createElement('ul');
-  for (const issue of issues) {
-    const li = document.createElement('li');
-    li.textContent = issue.path ? `${issue.path}: ${issue.message}` : issue.message;
-    ul.append(li);
-  }
+  ul.replaceChildren(...issues.map((issue) => Object.assign(document.createElement('li'), { textContent: describeIssue(issue) })));
   el.issues.replaceChildren(ul);
+  const bad = new Set(issues.flatMap((issue) => fieldOf(issue.path)?.[2] ?? []));
+  for (const input of new Set(FIELDS.flatMap(([, , inputs]) => inputs))) {
+    const described = (input.getAttribute('aria-describedby') ?? '').split(' ').filter((id) => id !== '' && id !== 'issues');
+    // aria-invalid="true", not a bare attribute, which counts as false; shared/base.css draws it red
+    if (bad.has(input)) {
+      input.setAttribute('aria-invalid', 'true');
+      described.push('issues');
+    } else {
+      input.removeAttribute('aria-invalid');
+    }
+    if (described.length) input.setAttribute('aria-describedby', described.join(' '));
+    else input.removeAttribute('aria-describedby');
+  }
 }
 
 /** @param {string[]} warnings */
