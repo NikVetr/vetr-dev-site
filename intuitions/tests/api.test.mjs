@@ -27,7 +27,9 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment']);
+  const dag = /** @type {any} */ (submit({ entry: 'dag-adjustment' }).params);
+  assert.deepEqual([dag.view, dag.exposure, dag.outcome, dag.adjust, dag.mediator, dag.noise, dag.sample, dag.graph.name], ['adjust', 'X', 'Y', [], null, 'unit', null, 'confounder']);
   assert.deepEqual(submit({ entry: 'typical-set' }).params, { view: 'shell', k: 10, coverage: 0.9, radius: 1 });
   assert.deepEqual(submit({ entry: 'correlation-geometry' }).params, { view: 'arrows', a: [1, 2, 4], b: [1, 3, 2] });
   assert.deepEqual(submit({ entry: 'correlation-geometry', params: { view: 'entry-range', matrix: [[1, 0.2], [0.2, 1]] } }).params, { view: 'entry-range', matrix: [[1, 0.2], [0.2, 1]], cell: [0, 1], observations: 6 });

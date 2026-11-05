@@ -86,3 +86,32 @@ export function symmetricEigen(matrix) {
   const order = Array.from({ length: n }, (_, i) => i).sort((i, j) => a[j][j] - a[i][i]);
   return { values: order.map((i) => a[i][i]), vectors: order.map((i) => v.map((row) => row[i])) };
 }
+
+/**
+ * Solves A x = b for a small square matrix by Gaussian elimination with partial
+ * pivoting. Returns null when A is singular to working precision.
+ * @param {Matrix} matrix @param {Vector} rhs
+ * @returns {Vector | null}
+ */
+export function solve(matrix, rhs) {
+  const n = matrix.length;
+  const a = matrix.map((row, i) => [...row, rhs[i]]);
+  const size = Math.max(1e-300, ...matrix.flat().map(Math.abs));
+  for (let col = 0; col < n; col++) {
+    let pivot = col;
+    for (let r = col + 1; r < n; r++) if (Math.abs(a[r][col]) > Math.abs(a[pivot][col])) pivot = r;
+    if (Math.abs(a[pivot][col]) <= 1e-13 * size) return null;
+    [a[col], a[pivot]] = [a[pivot], a[col]];
+    for (let r = col + 1; r < n; r++) {
+      const f = a[r][col] / a[col][col];
+      for (let c = col; c <= n; c++) a[r][c] -= f * a[col][c];
+    }
+  }
+  const x = new Array(n).fill(0);
+  for (let r = n - 1; r >= 0; r--) {
+    let sum = a[r][n];
+    for (let c = r + 1; c < n; c++) sum -= a[r][c] * x[c];
+    x[r] = sum / a[r][r];
+  }
+  return x;
+}

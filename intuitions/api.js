@@ -2,6 +2,7 @@
 // script call submit(); nothing here touches the DOM. See api.md.
 
 import * as correlationGeometry from './correlation-geometry/compute.js';
+import * as dagAdjustment from './dag-adjustment/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
 import * as thresholdModel from './threshold-model/compute.js';
 import * as typicalSet from './typical-set/compute.js';
@@ -15,6 +16,7 @@ export const ENTRIES = Object.freeze({
   [thresholdModel.ENTRY]: thresholdModel,
   [correlationGeometry.ENTRY]: correlationGeometry,
   [typicalSet.ENTRY]: typicalSet,
+  [dagAdjustment.ENTRY]: dagAdjustment,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];

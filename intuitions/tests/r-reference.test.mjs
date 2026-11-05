@@ -11,6 +11,7 @@ import { compute as zscore } from '../zscore-outliers/compute.js';
 import {
   compute as computeCorrelation, det3, entryInterval, equicorrelationEigenvalues, expectedWidthSample, expectedWidthUniform, zeroPairRange,
 } from '../correlation-geometry/compute.js';
+import { compute as computeDag } from '../dag-adjustment/compute.js';
 import { betaI, gammaP, gammaQ, lgamma, logGammaP, qgamma } from '../lib/special.js';
 import { chiLogDensity, compute as computeTypical, CUBE_DIMENSIONS, PRESETS, sphereMarginal } from '../typical-set/compute.js';
 
@@ -284,4 +285,98 @@ test('typical-set sphere: the Beta-type marginal, without the gamma() overflow, 
   assert.ok(Math.abs(s.bandShare - exact) < 4 * Math.sqrt((exact * (1 - exact)) / s.n), "the script's sampler");
   const ours = typical({ view: 'sphere', k: s.k, band: 0.1, sample: { n: 20000, seed: 1 } }).sample;
   assert.ok(Math.abs(ours.bandShare - exact) < 4 * Math.sqrt((exact * (1 - exact)) / 20000), 'the page sampler');
+});
+
+// ---------- dag-adjustment, against dagitty and the original scripts (fixtures/r-dag.json) ----------
+
+const dagRef = JSON.parse(readFileSync(new URL('fixtures/r-dag.json', import.meta.url), 'utf8'));
+/** @param {unknown} params @returns {any} */
+const dagEntry = (params) => computeDag(params);
+/** Rows and columns of `nodes` from a covariance over `all`. @param {number[][]} m @param {string[]} all @param {string[]} nodes */
+const pick = (m, all, nodes) => nodes.map((a) => nodes.map((b) => m[all.indexOf(a)][all.indexOf(b)]));
+
+test('dag-adjustment presets: implied covariances and adjustment sets match dagitty', () => {
+  for (const ref of dagRef.presets) {
+    for (const noise of ['unit', 'standardized']) {
+      const expected = noise === 'unit' ? ref.unitCovariance : ref.standardizedCovariance;
+      if (!expected) continue;
+      const r = dagEntry({ graph: ref.graph, noise });
+      assert.ok(maxDiff(pick(r.covariance, r.nodes, ref.nodes).flat(), expected.flat()) < 1e-12, `${ref.graph} ${noise} covariance`);
+      for (const s of ref.sets) {
+        const adjust = [s.adjust].flat();
+        const ours = r.sets.find((/** @type {any} */ t) => t.adjust.length === adjust.length && adjust.every((a) => t.adjust.includes(a)));
+        assert.equal(ours.valid, s.valid, `${ref.graph} {${adjust}} validity`);
+        assert.ok(Math.abs(ours.coefficient - s[noise]) < 1e-12, `${ref.graph} {${adjust}} ${noise} coefficient`);
+      }
+    }
+  }
+});
+
+test("dag-adjustment: happiness_numeracy.R's graph, simulated as the script does, and its broken dagitty calls", () => {
+  const h = dagRef.happiness;
+  assert.match(h.scriptAdjustmentSetsError, /USD is not a variable/);
+  assert.equal(h.scriptHelperExists, false);
+  assert.deepEqual(Object.values(h.fixedAdjustmentSets).flat(), ['Illness']);
+  for (const fit of dagRef.happinessSimulated.fits) {
+    const r = dagEntry({ graph: 'happiness', exposure: fit.exposure, adjust: [fit.adjust].flat() });
+    assert.ok(Math.abs(r.estimate.coefficient - fit.estimate) < 4 * fit.se, `${fit.exposure} | ${fit.adjust}: ${r.estimate.coefficient} vs ${fit.estimate} ± ${fit.se}`);
+  }
+  // The fitted interaction in a graph with none is zero within its error.
+  const [, interaction] = dagRef.happinessSimulated.scriptModel;
+  assert.ok(Math.abs(interaction[0]) < 4 * interaction[1]);
+});
+
+test('dag-adjustment: the front door of backdoor_frontdoor.R, and age_causal.R through a given graph', () => {
+  const fd = dagRef.frontDoor;
+  const r = dagEntry({ graph: 'front-door' });
+  assert.equal(Object.keys(fd.adjustmentSets).length, 0); // no observed set works
+  assert.ok(Math.abs(r.frontDoor.estimate - fd.frontDoorEstimate) < 1e-12 && Math.abs(r.effect - fd.effect) < 1e-12);
+  assert.ok(Math.abs(r.estimate.coefficient - fd.backdoorEstimate) < 1e-12);
+  const a = dagRef.age;
+  const graph = {
+    nodes: a.nodes.map((/** @type {string} */ id, /** @type {number} */ i) => ({ id, x: a.positions[i][0], y: -a.positions[i][1] })),
+    edges: a.edges.map((/** @type {{ from: string, to: string }} */ e) => ({ ...e, coefficient: 0.5 })),
+  };
+  const xs = a.nodes.filter((/** @type {string} */ n) => n.startsWith('X'));
+  const marginal = dagEntry({ graph, exposure: 'Age', outcome: 'Dis_2', noise: 'standardized' });
+  const conditional = dagEntry({ graph, exposure: 'Age', outcome: 'Dis_2', adjust: xs, noise: 'standardized' });
+  assert.ok(maxDiff(pick(marginal.covariance, marginal.nodes, a.covarianceNodes).flat(), a.covariance.flat()) < 1e-12);
+  assert.ok(Math.abs(marginal.estimate.coefficient - a.exact[0]) < 1e-12 && Math.abs(conditional.estimate.coefficient - a.exact[1]) < 1e-12);
+  assert.ok(maxDiff(a.script, a.exact) < 1e-12, 'rounding the covariance to 4 decimals changes nothing here');
+  assert.equal(conditional.estimate.valid, false); // the biomarkers descend from Dis_2
+  const alt = dagRef.ageAlternate;
+  const g2 = {
+    nodes: ['Age', 'Org', 'Dis', 'U', 'X_1', 'X_2', 'X_3'].map((id) => ({ id })),
+    edges: [['Age', 'Dis', 0.5], ['Age', 'Org', -0.25], ['U', 'Dis', 0.5], ['Dis', 'Org', -0.5], ...alt.b.map((/** @type {number} */ b, /** @type {number} */ i) => ['Org', `X_${i + 1}`, b])]
+      .map(([from, to, coefficient]) => ({ from, to, coefficient })),
+  };
+  const bio = ['X_1', 'X_2', 'X_3'];
+  assert.ok(Math.abs(dagEntry({ graph: g2, exposure: 'Age', outcome: 'U', adjust: bio, noise: 'standardized' }).estimate.partialCorrelation - alt.partialAgeU) < 1e-12);
+  assert.ok(Math.abs(dagEntry({ graph: g2, exposure: 'Age', outcome: 'Dis', noise: 'standardized' }).estimate.coefficient - alt.marginal) < 1e-12);
+  assert.ok(Math.abs(dagEntry({ graph: g2, exposure: 'Age', outcome: 'Dis', adjust: bio, noise: 'standardized' }).estimate.coefficient - alt.conditional) < 1e-12);
+});
+
+test("dag-adjustment colliders: R2_from_Cov(), both ways, and its diag2() failure at p = 1", () => {
+  for (const c of dagRef.colliders) {
+    const r = dagEntry({ view: 'colliders', colliders: c.p, rYX: c.rYX, share: c.share });
+    // R subtracts B C⁻¹ Bᵀ from 1, which loses digits when the colliders explain almost
+    // all of Y or U (many colliders, or a share near 1); there the agreement is to R's rounding.
+    const tol = c.p > 64 || c.share > 0.9 ? 1e-4 : 1e-10;
+    for (const way of [c.fast, c.long]) {
+      if (!way) continue;
+      const pairs = [[r.r2, way.R2], [r.semipartialCorrelation, way.semipr_yu], [r.covariance, way.cov_yu], [r.partialCorrelation, way.pr_yu]];
+      for (const [ours, theirs] of pairs) assert.ok(Math.abs(ours - theirs) < tol, `p = ${c.p}, r = ${c.rYX}, share = ${c.share}: ${ours} vs ${theirs}`);
+    }
+    assert.ok(Math.abs(r.partialCorrelation) <= 1);
+  }
+  // R's fast path is 4e-5 off here; the cancellation-free form agrees with a 50-digit evaluation.
+  assert.ok(Math.abs(dagEntry({ view: 'colliders', colliders: 1024, rYX: 0.01, share: 0.999 }).partialCorrelation + 0.99515265652850086) < 1e-15);
+  // Where R's rounding shows: its partial correlation falls below -1.
+  const edge = dagRef.colliders.find((/** @type {any} */ c) => c.p === 1024 && c.rYX === 0.95 && c.share === 0.999);
+  assert.ok(edge.fast.pr_yu < -1);
+  const bug = dagRef.diag2Bug;
+  assert.equal(bug.script, 'non-conformable arguments');
+  assert.equal(bug.scriptGridHits, 0); // the script's own grid never meets it
+  const r = dagEntry({ view: 'colliders', colliders: 1, rYX: 0.5, share: 1 / 3 });
+  assert.ok(Math.abs(r.r2 - bug.long.R2) < 1e-12 && Math.abs(r.partialCorrelation - bug.long.pr_yu) < 1e-12);
 });
