@@ -1,0 +1,167 @@
+/* Hypercube Rotation: what is particular to this page, over /shared/base.css (tokens, frame,
+   controls, problems and the narrow layout). The viewer comes first in reading order, so a
+   phone shows the animation before its settings; from 1000 px the settings sit beside it. */
+
+:root {
+  --stage: #b9dff3;
+  --stage-ink: #0d3d52;
+  --stage-now: #00688b;
+  --stage-now-ink: #ffffff;
+}
+:root[data-theme="dark"] {
+  --stage: #1f3a4a;
+  --stage-ink: #cfe9f7;
+  --stage-now: #5fbbe6;
+  --stage-now-ink: #0b1a22;
+}
+
+.viewer-layout {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+@media (min-width: 1000px) {
+  .viewer-layout { grid-template-columns: minmax(0, 1fr) minmax(19rem, 24rem); }
+  .viewer-layout > .method-card { grid-column: 1 / -1; }
+}
+
+/* ---------- Viewer ---------- */
+
+.stage-head { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; align-items: baseline; margin-bottom: 0.6rem; }
+.stage-head h2 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.8rem); }
+.stage-head p { margin: 0; }
+
+/* The canvas is square: as wide as the card allows, but short enough that the transport and
+   timeline stay on screen beneath it on a laptop, and never smaller than a phone's width. */
+.canvas-wrap {
+  position: relative;
+  width: min(100%, max(320px, 100svh - 350px), 760px);
+  margin-inline: auto;
+  aspect-ratio: 1;
+}
+.canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: grab;
+  touch-action: none;
+}
+.canvas-wrap canvas:active { cursor: grabbing; }
+.canvas-wrap canvas:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.canvas-note { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
+.canvas-note[hidden] { display: none; }
+
+.transport {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.75rem 0 0.5rem;
+}
+.play-button { min-width: 6.5rem; }
+/* On a phone the three buttons keep one row, Play taking the slack, with speed and clock below. */
+@media (max-width: 560px) {
+  .transport { display: grid; grid-template-columns: auto 1fr auto; }
+  .transport button { padding-inline: 0.65rem; }
+  .play-button { min-width: 0; }
+  .speed { grid-column: 1 / 2; }
+  .clock { grid-column: 2 / 4; }
+}
+.speed { display: flex; gap: 0.4rem; align-items: center; color: var(--muted); font-size: 0.92rem; }
+.speed select { color: var(--text); }
+.clock { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.92rem; text-align: right; }
+/* The two halves wrap as wholes, never mid-phrase. */
+.clock span { display: inline-block; }
+
+/* The timeline: a step plot of the stage dimension across the loop, under a range input whose
+   track is transparent, so the native control keeps its keyboard and screen-reader support. */
+.timeline { position: relative; height: 3.4rem; }
+.stages { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stages .stage { fill: var(--stage); }
+.stages .stage.now { fill: var(--stage-now); }
+.stages .stage-number { fill: var(--stage-ink); font-size: 11px; font-weight: 600; text-anchor: middle; font-variant-numeric: tabular-nums; }
+.stages .stage-number.now { fill: var(--stage-now-ink); font-weight: 800; }
+.stages .stage-outline { fill: none; stroke: var(--text); stroke-width: 1.5; }
+.stages .playhead { stroke: var(--text); stroke-width: 2; }
+
+.timeline input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.timeline input[type="range"]:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.timeline input[type="range"]::-webkit-slider-runnable-track { height: 100%; background: transparent; }
+.timeline input[type="range"]::-moz-range-track { height: 100%; background: transparent; }
+/* The thumb is the playhead: a bar the timeline's height, with a halo to part it from the blocks. */
+.timeline input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 6px;
+  height: 100%;
+  border: 0;
+  border-radius: 3px;
+  background: var(--text);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.timeline input[type="range"]::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 6px;
+  height: 100%;
+  border: 0;
+  border-radius: 3px;
+  background: var(--text);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+
+.hint { margin: 0.5rem 0 0; font-size: 0.85rem; }
+kbd {
+  font: inherit;
+  font-size: 0.85em;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0 0.3em;
+  background: var(--surface-2);
+}
+
+/* ---------- Settings ---------- */
+
+.settings-card h3 { margin-top: 1.2rem; }
+.style-choice { border: 0; margin: 0.9rem 0 0; padding: 0; display: grid; gap: 0.35rem; }
+.style-choice legend { padding: 0; margin-bottom: 0.25rem; font-size: 0.92rem; color: var(--muted); }
+.style-choice label { display: flex; gap: 0.5rem; align-items: baseline; }
+.settings label.check { flex-direction: row; gap: 0.5rem; align-items: center; color: var(--text); }
+.settings .input-row input[type="range"] { padding: 0; border: 0; }
+.settings output { min-width: 3.4rem; text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+.field-note { font-size: 0.82rem; }
+
+.view-controls { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.view-controls button.icon { min-width: 2.5rem; }
+/* Turned away from the default view: a dashed warning box with ⚠, not colour alone. */
+.view-note { margin: 0.5rem 0 0; font-size: 0.88rem; color: var(--muted); }
+.view-note.turned {
+  border: 1px dashed var(--warn);
+  border-radius: var(--radius-sm);
+  background: var(--warn-soft);
+  color: var(--text);
+  padding: 0.4rem 0.6rem;
+}
+.view-note.turned::before { content: "⚠ "; color: var(--warn); font-weight: 700; }
+.export-status { margin: 0.25rem 0 0; font-size: 0.88rem; }
+.export-status:empty { display: none; }
+#export-webm[aria-pressed="true"] { border-style: solid; border-width: 2px; border-color: var(--alert); color: var(--alert); }
+#export-webm[aria-pressed="true"]::before { content: "■ "; }
+
+.method-card summary { cursor: pointer; }

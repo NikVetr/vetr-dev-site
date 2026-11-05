@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A rigid cube in up to nine dimensions turns; its shadow unfolds from a spinning line through every dimension and folds back into a line, played live in the browser.">
+  <title>Hypercube Rotation</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300688b'/%3E%3Cpath d='M8 11h12v12H8zM12 7h12v12H12zM8 11l4-4M20 11l4-4M8 23l4-4M20 23l4-4' fill='none' stroke='%2387cefa' stroke-width='1.8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Hypercube Rotation</h1>
+        <p class="tagline">A rigid cube in up to nine dimensions, turning a little every frame: its shadow unfolds from a spinning line through every dimension, then folds back, one dimension at a time, into the line.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container viewer-layout">
+    <section class="card viewer-card" aria-labelledby="stage-name">
+      <div class="stage-head">
+        <h2 id="stage-name" aria-live="off">Loading…</h2>
+        <p id="stage-detail" class="muted"></p>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="view" tabindex="0" role="img" aria-roledescription="rotatable view" aria-label="The hypercube's shadow. Drag, or focus it and use the arrow keys, to turn the 3-D view."></canvas>
+        <p id="loading" class="placeholder canvas-note" role="status">Loading the plan…</p>
+      </div>
+      <div id="load-issues" class="issues" role="alert" hidden></div>
+
+      <div class="transport" role="group" aria-label="Playback">
+        <button id="step-back" type="button" aria-keyshortcuts=",">◀︎ <span>Frame</span></button>
+        <button id="play" type="button" class="primary play-button" aria-keyshortcuts="Space"></button>
+        <button id="step-forward" type="button" aria-keyshortcuts=".">
+          <span>Frame</span> ▶︎</button>
+        <label class="speed">Speed
+          <select id="speed">
+            <option value="0.25">¼×</option>
+            <option value="0.5">½×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+          </select>
+        </label>
+        <output id="clock" class="clock" for="timeline" aria-live="off"><span id="clock-frame"></span> <span id="clock-time"></span></output>
+      </div>
+
+      <div class="timeline">
+        <svg id="stages" class="stages" aria-hidden="true" focusable="false"></svg>
+        <input id="timeline" type="range" min="1" max="2" step="1" value="1" aria-label="Frame">
+      </div>
+      <p class="hint muted">Space plays or pauses; <kbd>,</kbd> and <kbd>.</kbd> step one frame. The bar shows each stage's dimension over the loop; drag along it to scrub.</p>
+    </section>
+
+    <section class="card settings-card" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Cube and faces</h2>
+      <div class="settings">
+        <label>Dimensions
+          <select id="k"></select>
+        </label>
+      </div>
+      <fieldset class="style-choice">
+        <legend>Faces</legend>
+        <label><input type="radio" name="style" value="translucent" checked> Translucent</label>
+        <label><input type="radio" name="style" value="opaque"> Opaque and lit</label>
+      </fieldset>
+      <div class="settings">
+        <label id="alpha-field">Face opacity
+          <span class="input-row">
+            <input id="alpha" type="range" min="0" max="1" step="0.001" aria-describedby="alpha-note">
+            <output id="alpha-value" for="alpha"></output>
+          </span>
+          <span id="alpha-note" class="field-note"></span>
+        </label>
+        <label id="numerals-field" class="check" hidden><input id="numerals" type="checkbox" checked> Print dimension numerals on the faces</label>
+      </div>
+
+      <h3>View</h3>
+      <div class="view-controls" role="group" aria-label="Turn the 3-D view">
+        <button type="button" class="icon" data-turn="left" aria-label="Turn left" title="Turn left">◀︎</button>
+        <button type="button" class="icon" data-turn="right" aria-label="Turn right" title="Turn right">▶︎</button>
+        <button type="button" class="icon" data-turn="up" aria-label="Tilt up" title="Tilt up">▲</button>
+        <button type="button" class="icon" data-turn="down" aria-label="Tilt down" title="Tilt down">▼</button>
+        <button id="reset-view" type="button">Reset view</button>
+      </div>
+      <p id="view-note" class="view-note" role="status"></p>
+
+      <h3>Export this frame</h3>
+      <div class="settings">
+        <label>Size (px)
+          <input id="export-size" type="number" min="16" max="4096" step="1" value="800">
+        </label>
+        <label class="check"><input id="export-caption" type="checkbox" checked> Stage name in the corner</label>
+      </div>
+      <div class="toolbar">
+        <button id="export-png" type="button">PNG</button>
+        <button id="export-svg" type="button">SVG</button>
+        <button id="export-webm" type="button">WebM of the loop</button>
+      </div>
+      <p id="export-status" class="muted export-status" role="status"></p>
+      <div id="export-issues" class="issues" role="alert" hidden></div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>A unit cube in <var>k</var> dimensions is rotated by a small rotation every frame, sixty frames a second, and drawn as its orthographic shadow on the first two axes, with the third axis as depth. The cube never changes shape; only its orientation does.</p>
+        <p>At first only the first two axes turn, and the square stands edge-on, so the shadow is a spinning line. It tilts into a square, and then, on a schedule that gives the low dimensions more time, each further axis joins the rotation in turn, blended in gradually, until all <var>k</var> are turning.</p>
+        <p>Then the cube folds back down. For each fold an optimizer nudges the next few small rotations so that one of the cube's edges comes to point straight along the axis that is leaving, just as that axis stops moving: the shadow lands exactly on a cube of one dimension fewer. It tries ten fold durations within 10% of the schedule, from slightly different starts, and keeps the one that strays least from the incoming motion. The last square tilts back into a line, and the line turns, in the same direction, back to where the loop began, so the loop repeats seamlessly.</p>
+        <p><strong>Translucent</strong> faces are R's base renderer: every square face of the cube in one colour and opacity, so overlapping layers add up, with the cube's edges drawn on top. The original opacity is 1/1.25<sup><var>k</var></sup>; with many coincident layers that saturates, so lower it to see the layers. <strong>Opaque</strong> faces are R's lit WebGL renderer: one light above and to the right of the viewer, and each face printed with a dimension numeral. A face keeps its numeral while it can be seen and takes the number of its next appearance only while it is hidden, so numerals never change in view. A line has no face to print 1 on, and an older numeral can stay on a face for several stages until that face is hidden.</p>
+        <p>Dragging turns the camera around the 3-D shadow, not the cube in <var>k</var> dimensions. The numerals' changes were planned for the default camera, which looks straight down the depth axis, so they are hidden while the view is turned; Reset view brings them back.</p>
+        <p>The trajectories are not solved here. Nik Vetr's R pipeline (<a href="https://github.com/NikVetr/shape_rotation">shape_rotation</a>, seed 1 and its default settings) solves one for each <var>k</var> from 3 to 9 and exports each frame's projection as a <var>k</var> × 3 matrix; this page replays them. Vertex positions match R's to about 4 × 10<sup>−8</sup> (the exported matrices are single precision), and faces are drawn in R's order.</p>
+        <p>Every frame is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2025-08-20">2025-08-20</time>
+    </div>
+  </footer>
+</body>
+</html>

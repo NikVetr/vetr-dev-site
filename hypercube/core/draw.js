@@ -43,7 +43,8 @@ const NUMERAL_INK = [0x17 / 255, 0x2c / 255, 0x3a / 255];
 
 export const THEMES = Object.freeze({
   light: { background: '#ffffff', edge: null },
-  dark: { background: '#16181d', edge: '#5fbbe6' },
+  // Dark: the page's surface; edges between R's light faces and that surface in luminance.
+  dark: { background: '#16181d', edge: '#1f7fa8' },
 });
 
 /** @param {string} hex @returns {number[]} */
