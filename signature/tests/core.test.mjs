@@ -3,8 +3,10 @@
 // script), and the waveslim ones from shared/tests/fixtures/wavelet.
 
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import { submit, SignatureError } from '../core/index.js';
 import { pairStrokes, normalizePair, segmentIntersection, waveletInterpolate } from '../core/morph.js';
 import { ribbon, signedArea, unionRings } from '../core/outline.js';
@@ -214,4 +216,28 @@ test('invalid requests are rejected with every problem listed', () => {
   assert.deepEqual(fail({ svg: 'M0 0L1 1', smooth: { local: [{ stroke: 3, from: 0.5, to: 0.2, strength: 1 }] } }).issues.map((i) => `${i.code} ${i.path}`), ['INVALID_FIELD smooth.local[0].to', 'INVALID_FIELD smooth.local[0].stroke']);
   assert.deepEqual(fail({ svg: 'M0 0L1 1', morph: { props: [2] } }).issues.map((i) => `${i.code} ${i.path}`).sort(), ['INVALID_FIELD morph.props', 'MISSING_INPUT morph.target']);
   assert.equal(fail({ strokes: [{ points: [{ x: 3, y: 3 }, { x: 3, y: 3 }] }] }).code, 'DEGENERATE_INPUT');
+});
+
+test('the CLI gives api.md\'s worked example, writes SVG, and reports errors as JSON', () => {
+  const run = (/** @type {string[]} */ args, /** @type {string} */ input = '') => spawnSync(process.execPath, [fileURLToPath(new URL('../cli.mjs', import.meta.url)), ...args], { input, encoding: 'utf8' });
+  const ok = run([fileURLToPath(new URL('../examples/request.json', import.meta.url))]);
+  assert.equal(ok.status, 0, ok.stderr);
+  const r = JSON.parse(ok.stdout);
+  assert.equal(r.widthSource, 'speed');
+  assert.equal(r.height, 50);
+  assert.equal(r.strokes[0].points.length, 222);
+  const w = r.strokes[0].points.map((/** @type {number[]} */ p) => p[2]);
+  assert.equal(Math.min(...w).toFixed(3), '0.275');
+  assert.equal(Math.max(...w).toFixed(3), '3.000');
+  const mean = (/** @type {number[]} */ v) => v.reduce((a, b) => a + b, 0) / v.length;
+  assert.ok(mean(w.slice(20, 70)) < mean(w.slice(150, 200)), 'the fast top bar is thinner than the slow curve');
+  assert.deepEqual(r.outline.map((/** @type {any[]} */ p) => p.map((q) => q.length)), [[460]]);
+  assert.ok(r.svg.startsWith('<svg xmlns="http://www.w3.org/2000/svg" viewBox="8.5 7 42.7 56.6" width="11.3mm" height="15mm"><path fill="#1b1b1b" fill-rule="evenodd" d="M45 9.5L45.5 9.5L45.9 9.6L46.4 9.7'));
+  const svg = run([fileURLToPath(new URL('../examples/avery-quill.csv', import.meta.url)), '--svg', '-']);
+  assert.equal(svg.status, 0, svg.stderr);
+  assert.equal(svg.stdout, submit({ csv: example('avery-quill.csv') }).svg);
+  const bad = run([], JSON.stringify({ csv: 'x,y\n0,0\n1,1', colour: 'red' }));
+  assert.equal(bad.status, 1);
+  assert.equal(JSON.parse(bad.stderr).error.issues[0].path, 'colour');
+  assert.equal(run(['a.json', 'b.json']).status, 2);
 });
