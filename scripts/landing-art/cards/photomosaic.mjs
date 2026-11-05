@@ -5,7 +5,7 @@
 // at one colour per cell", drawn as one square per cell. The loop crossfades from the mosaic to
 // the cells and back, with the page's two-way "Show" choice beside it marking the view.
 import { openPage } from '../browser.mjs';
-import { H, W, art, num } from '../svg.mjs';
+import { H, art, num } from '../svg.mjs';
 
 const TILE_PX = 20;     // pixels per tile in the embedded mosaic, about twice its display size
 const QUALITY = 0.5;    // WebP quality
