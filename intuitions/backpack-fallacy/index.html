@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Two studies report the same p-value, one with fewer people per group. How often does the smaller study have the larger true effect? Computed exactly for t-tests, with true effects that are heavy-tailed (Cauchy) or normal.">
+  <title>The backpack fallacy · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M10 13a6 6 0 0 1 12 0v12H10zM13 7.5h6M12 18h8v4h-8z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">The backpack fallacy</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>The backpack fallacy</h1>
+      <p class="lede">Two studies of the same kind report the same p-value, but one measured 2 people in each group and the other 16. Which of them is more likely to have found the larger true effect? It is tempting to say the small one: to reach the same p-value through so much noise, its effect must be strong, as a runner who keeps pace while carrying a backpack must be fast. Loken and Gelman called this reasoning the backpack fallacy. Whether it is a fallacy depends on how large true effects tend to be, and this page computes the answer exactly.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#curves">At the same p-value</a></li>
+          <li><a href="#at">The true effects behind one p-value</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="curves" aria-labelledby="curves-heading">
+      <h2 id="curves-heading"><span class="panel-number">1</span> At the same p-value</h2>
+      <p class="panel-intro">Each study compares two groups of <var>n</var> people with a two-sample <var>t</var>-test. Every group's true mean is drawn at random, so every study has its own true difference between its groups, and its people vary around their group's mean with SD 1. Take two studies whose p-values come out the same. The figure shows the chance that the one with fewer people per group has the larger true difference, for every p-value down to the smallest shown.</p>
+      <div class="panel-body">
+        <figure id="curves-figures">
+          <ul class="legend" id="curves-legend"></ul>
+          <div id="curves-plot" class="plot-box scrub stale-dim"></div>
+          <figcaption class="caption" id="curves-caption">Each coloured line is the smaller study against one larger size; faint grey lines are the other pairs. The dashed line is even odds. Drag across the figure, or set the p-value in panel 2, to move the vertical line.</figcaption>
+          <p class="sim-status" id="curves-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>True group means drawn from</legend>
+            <div class="segmented" id="curves-prior">
+              <label><input type="radio" name="curves-prior" value="cauchy"> A Cauchy (the script's)</label>
+              <label><input type="radio" name="curves-prior" value="normal"> A normal</label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="curves-scale-number">Their spread, τ</label>
+              <input id="curves-scale-number" type="number" min="0.01" max="100" step="0.01">
+            </div>
+            <input id="curves-scale-range" type="range" min="-2" max="2" step="0.01" aria-label="Spread of the true means, slider (log scale)">
+            <p class="hint" id="curves-scale-hint"></p>
+          </div>
+          <div class="control stacked">
+            <label for="curves-sizes">People per group in each kind of study</label>
+            <input id="curves-sizes" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
+            <p class="hint">2 to 6 sizes from 2 to 100,000, separated by commas. The script's are 2, 16, 128, 1024, 8192.</p>
+          </div>
+          <fieldset class="control choice-list">
+            <legend>The smaller study has</legend>
+            <div class="segmented" id="curves-smaller"></div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="curves-upTo-number">p-values down to 10<sup>−<var>x</var></sup>, <var>x</var></label>
+              <input id="curves-upTo-number" type="number" min="1" max="30" step="1">
+            </div>
+            <input id="curves-upTo-range" type="range" min="1" max="30" step="1" aria-label="Smallest p-value shown, slider">
+          </div>
+          <div class="control stacked">
+            <label class="check-label"><input type="checkbox" id="curves-windowed"> Also draw the script's sliding average</label>
+            <div class="control-head">
+              <label for="curves-window-number">Over ± this much of −log<sub>10</sub> p</label>
+              <input id="curves-window-number" type="number" min="0.05" max="5" step="0.05">
+            </div>
+            <input id="curves-window-range" type="range" min="0.05" max="3" step="0.05" aria-label="Half-width of the sliding average, slider">
+            <p class="hint">backpack_fallacy.R pools the pairs whose −log<sub>10</sub> p is within ±1 of each point, which blurs the curve; the solid lines are exact at each p-value.</p>
+          </div>
+          <div id="curves-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="curves-readout" aria-live="polite"></p>
+          <div class="controls-foot"><button type="button" id="curves-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="at" aria-labelledby="at-heading">
+      <h2 id="at-heading"><span class="panel-number">2</span> The true effects behind one p-value</h2>
+      <p class="panel-intro">The same p-value means different things for different sizes. A study with few people needs a large <var>t</var> to reach it, and its estimate is noisy, so the p-value fits a wide range of true differences, from small ones with lucky noise to large ones. A big study reaches it with a <var>t</var> near the normal's, and its true difference is pinned down. Whether the small study's range sits above the big study's depends on how often large true differences occur at all.</p>
+      <div class="panel-body">
+        <figure id="at-figures">
+          <div id="at-plot" class="plot-box stale-dim"></div>
+          <figcaption class="caption">One row per study size: how likely each true difference is, given the p-value, on a log axis, each row scaled to its own peak. The thick bar is the middle 50%, the thin bar the middle 90%, and the marker the median.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="at-preset-label">Both studies report p =</span>
+            <div class="control-row" role="group" aria-labelledby="at-preset-label">
+              <button type="button" data-at="1.30103">0.05</button>
+              <button type="button" data-at="2">0.01</button>
+              <button type="button" data-at="3">0.001</button>
+              <button type="button" data-at="7.30103">5 × 10⁻⁸</button>
+            </div>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="at-at-number">or −log<sub>10</sub> p</label>
+              <input id="at-at-number" type="number" min="0" max="30" step="0.1">
+            </div>
+            <input id="at-at-range" type="range" min="0" max="30" step="0.05" aria-label="The shared p-value, as −log10 p, slider">
+          </div>
+          <div id="at-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="at-readout" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table class="numbers" id="at-table">
+              <thead><tr><th scope="col">Per group</th><th scope="col"><var>t</var> needed</th><th scope="col">Median true difference</th><th scope="col">Middle 50%</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>The model</h3>
+        <p>As in backpack_fallacy.R, each of a study's two groups has a true mean drawn at random, from a Cauchy with scale τ or a normal with SD τ, and its <var>n</var> people vary around it with SD 1. The study's true difference Δ is then Cauchy with scale 2τ, or normal with SD √2 τ. Its two-sample <var>t</var>-test has 2<var>n</var> − 2 degrees of freedom, and given Δ its <var>t</var> is noncentral <var>t</var> with noncentrality Δ/√(2/<var>n</var>). A p-value fixes |<var>t</var>|, so it gives each study a distribution for |Δ|: the chance of that |<var>t</var>| under each Δ, weighted by how common that Δ is. Two studies are independent, and the chance that the smaller one's |Δ| is the larger follows from their two distributions.</p>
+        <h3>Computed, not simulated</h3>
+        <p>The script simulates ten million tests of each size, sorts them all by p-value, pairs each test with its neighbour, and in a sliding window of −log<sub>10</sub> p reports the share of pairs in which the smaller study has the larger true difference. This page computes the same quantities by numerical integration instead: Simpson's rule on cells placed where each distribution lies, with the noncentral <var>t</var>'s integral tabulated once for each size. Its numbers are accurate to about 10<sup>−5</sup>, and an update takes a fraction of a second, where the script takes minutes and needs ten gigabytes. The script's sliding average is computed exactly too, weighting each p-value by how often a pair of those two sizes meets there. Scripts and agents can get every number here through the <a href="../api.md">API</a>.</p>
+        <h3>Checked against R</h3>
+        <p>Rerun with ten million draws (set.seed(1)), the script's window averages agree with this page's in all 844 windows that hold at least 30 pairs, within their Monte Carlo error (none differs by more than 3 standard errors). The distributions of |Δ| agree with R's own integrals, by integrate() over the <var>t</var> statistic's mixture, to 10<sup>−6</sup> in their quartiles, and the chances of a larger effect to 10<sup>−6</sup>.</p>
+        <h3>What the script does differently</h3>
+        <p>Its two-sided p-value is computed as log1p(exp(<var>l</var>)) + <var>l</var> from the one-sided log p-value <var>l</var>, which is log(<var>p</var>₁(1 + <var>p</var>₁)) rather than log(2<var>p</var>₁), so its axis is about 0.3 too far right for small p-values (the order of the tests, and so the pairing, is unaffected). This page uses the two-sided p-value. The script averages over ±1 of −log<sub>10</sub> p, which near p = 1 pools p-values up to 0.1, so its curves start higher than the exact ones; the dashed lines show its average. It plots the log-odds as well as the chance; this page shows the chance. And it uses the same true means for every size, which does not change the answer, since each size's tests are paired at random.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2023-08-30">2023-08-30</time>
+    </div>
+  </footer>
+</body>
+</html>

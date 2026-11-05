@@ -13,6 +13,7 @@ The entries are:
 - [`marchenko-pastur`](#marchenko-pastur): how many principal components are noise, in three views: the eigenvalues of pure noise against the Marchenko–Pastur law, spiked covariances and the BBP threshold for eigenvalues and eigenvectors, and the first principal components of a batch-and-factors model before and after the batch is regressed out.
 - [`trait-evolution`](#trait-evolution): traits evolving on a tree, in three views: one trait along every branch under Brownian motion, a trend, Ornstein–Uhlenbeck, an early or late burst, a burst partway through, or a clade shifting to a second optimum; two traits under Brownian motion with a rate matrix; and the Brownian bridge between fixed ends, filled in by midpoints, optionally kept inside a region.
 - [`tree-covariance`](#tree-covariance): a tree as a covariance matrix, in three views: the tips' covariance as shared paths with the tips as arrows and simulated tip values, re-rooting with the restricted and ordinary likelihoods, and Felsenstein's pruning step by step against the direct normal likelihood.
+- [`backpack-fallacy`](#backpack-fallacy): two *t*-tests with the same p-value and different group sizes: the chance that the smaller study has the larger true difference, at every p-value, when true means are Cauchy or normal, computed exactly; the script's sliding-window average; and each size's distribution of the true difference at one p-value.
 
 ## Ways in
 
@@ -38,7 +39,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution or tree-covariance, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues and marchenko-pastur pages' own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance or backpack-fallacy, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur and backpack-fallacy pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -575,6 +576,35 @@ Result: `tree`, the re-rooted tree (the old root stays as a node with one child)
 - **Parity.** `lib/tree.js`'s covariance matches ape's `vcv` and its contrasts ape's `pic`, node by node, on five trees up to 30 tips. The pruning likelihood matches pruningAlgorithmTestImplementationIThink.R's `BMpruneLL` and the direct formula (and mvtnorm's density) for two and three traits to 1e-8, and in R `BMpruneLL` gives the same on the unrooted and re-rooted trees.
 - **What the scripts do differently.** `BMpruneLL` keeps the traits as a matrix that drops to a vector with one trait, so it fails then ("incorrect number of dimensions"); this entry takes one to four. exploringFasterPruning.R's `BMpruneLLuvt` rotates by the eigenvectors of the global `cov`, not its argument `sig`, and is right only when they are equal. demonstratingUVBMonTree.R's covariance [[2.5, 1], [1, 1.5]] is the tree `(x1:1.5,x2:0.5):1;`, whose stem this entry counts.
 
+## backpack-fallacy
+
+Each study compares two groups of *n* people by a two-sample *t*-test (2*n* − 2 df). Every group's true mean is drawn from a Cauchy with scale τ or a normal with SD τ, and people vary around their group's mean with SD 1, so a study's true difference Δ is Cauchy(0, 2τ) or N(0, 2τ²) and its *t* given Δ is noncentral *t* with noncentrality Δ/√(2/*n*). Two studies of different sizes that report the same two-sided p-value: what is the chance that the smaller one has the larger |Δ|? This is backpack_fallacy.R's question, which it answers by simulation; this entry integrates.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `prior` | `"cauchy"` or `"normal"` | `"cauchy"` | How the true group means are drawn (the script's is the Cauchy). |
+| `scale` | number 0.01–100 | `1` | τ, their Cauchy scale or normal SD, in units of the people's SD. |
+| `sizes` | 2–6 distinct integers 2–100,000 | `[2, 16, 128, 1024, 8192]` | People per group in each kind of study; returned in ascending order. |
+| `upTo` | number 1–30 | `6` | The curves run from p = 1 to p = 10^−`upTo`. |
+| `window` | number 0–5 | `1` | Half-width, in −log₁₀ p, of the script's sliding average; 0 leaves it out. |
+| `at` | number 0–30 | `2` | −log₁₀ of the p-value at which each study's \|Δ\| is described. |
+
+Result:
+
+| Field | Meaning |
+| --- | --- |
+| `prior`, `scale`, `window` | As given. |
+| `x` | −log₁₀ p from 0 to `upTo`, every 0.05. |
+| `studies` | One per size: `{n, df, se, density}`, where `se` is √(2/*n*) and `density` the density of −log₁₀ p at each `x` (its distribution over all studies of that size). |
+| `pairs` | One per pair of sizes, smaller first: `{smaller, larger, matched, windowed}`. `matched` is P(the smaller study's \|Δ\| is the larger) for two studies with exactly the p-value at each `x`; `windowed` (`null` when `window` is 0) is the script's estimate, the same chance averaged over pairs whose −log₁₀ p lies within ±`window`, weighted as the script's pooled sort pairs them. |
+| `at` | `{x, p, studies, pairs}` at the p-value 10^−`at`: each size's `{n, t, quantiles, curve}`, where `t` is the *t* that gives the p-value, `quantiles` `{q05, q25, q50, q75, q95}` of \|Δ\| and `curve` `{log10, density}` the density of log₁₀ \|Δ\| on 241 shared points; and each pair's `{smaller, larger, matched}`. |
+
+### Method
+
+- **The integrals.** Given |*t*| = *t*₀, |Δ| has density proportional to the prior's density times *f*(*t*₀ \| Δ) + *f*(−*t*₀ \| Δ), *f* the noncentral *t*'s. Writing *t* = (δ + *Z*)/*S* with *S*² ~ χ²_ν/ν, *f*(*t* \| δ) = *C*_ν (2π)^−½ *A*^−(ν+1)/2 e^(−δ²ν/2*A*) *I*_ν(*t*δ/√*A*), *A* = ν + *t*², with *I*_ν(μ) = ∫₀^∞ *y*^ν e^(−(*y* − μ)²/2) d*y*; *I*_ν is computed by the trapezoid rule around its peak (in *y*, or in log *y* when the peak is near 0) and tabulated once per ν on asinh(μ/*c*), read by cubic interpolation. Each distribution of |Δ| is found on a coarse grid, then integrated by Simpson's rule on cells placed where it lies, with more cells near 0 when the prior is narrow; P(|Δ₁| > |Δ₂|) is Simpson's rule over the narrower of the two against the other's distribution function. The density of −log₁₀ p is the normalising constant times d*t*₀/d*x* = *p* ln 10 / (2 *f*_ν(*t*₀)). *t* quantiles are Newton steps on log *p*. Against the same computation on cells four times finer, every chance agrees to 1.4 × 10⁻⁵, and to 10⁻⁶ unless a narrow Cauchy meets 2 per group.
+- **Against R.** The density of |*T*| matches R's `integrate()` over the mixture to 5 × 10⁻⁶ (R's own `dt(…, ncp)` loses precision far out, where it warns), the quartiles of |Δ| R's `integrate()` and `uniroot()` to 10⁻⁶ and the chances of a larger effect to 10⁻⁶. backpack_fallacy.R, rerun with its ten million draws per size and `set.seed(1)` (and its p-value fixed, below), agrees with `windowed` in all 844 windows holding at least 30 pairs, none more than 3 standard errors away.
+- **What the script does differently.** Its two-sided log p-value is `log1p(exp(lp)) + lp`, log(*p*₁(1 + *p*₁)), where log(2*p*₁) was meant, which moves its axis about 0.3 to the right for small p-values without changing the order of the tests or their pairs; this entry uses the two-sided p-value. It shares one draw of true means across the sizes, which leaves the answer unchanged because each size's tests are paired at random. It also plots the log-odds, which this entry does not.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -618,6 +648,7 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `unknown_tip`, `duplicate_tip` (a name that is not one of the tree's tips; a tip named twice)
 - `not_positive_definite` (a rate matrix with a variance of 0 or less or a correlation of ±1 or beyond)
 - `outside_region` (a bridge whose start or end is outside the region it must stay in)
+- `duplicate_size` (a group size listed twice)
 - `too_much_work` (a simulation of more than about a billion random draws, eigendecompositions of more than about 20 billion operations, or more path points than an entry allows)
 
 Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]`, `params.replicates`, `params.tree.newick`, `params.values.A` or `params.root.fraction`. An empty path means the request as a whole.

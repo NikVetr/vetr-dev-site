@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(9);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(9);
+  await expect(page.locator('.entry-card')).toHaveCount(10);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(10);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -409,9 +409,53 @@ test('a tree is a covariance matrix: shared paths, re-rooting, pruning steps and
   expect(errors).toEqual([]);
 });
 
+test('the backpack fallacy: priors, sizes, the shared p-value, the script\'s average and the API', async ({ page }) => {
+  const errors = await open(page, 'backpack-fallacy/');
+  await expect(page.locator('#curves-plot svg')).toBeVisible();
+  await expect(page.locator('#at-readout')).toContainText('96% against 16');
+  await expect(page.locator('#at-table tbody tr')).toHaveCount(5);
+  await expect(page.locator('#curves-figures')).not.toHaveAttribute('data-stale', 'true');
+  // A normal prior with small effects: the backpack reasoning fails.
+  await page.locator('input[name="curves-prior"][value="normal"]').check();
+  await page.locator('#curves-scale-number').fill('0.25');
+  await expect(page.locator('#at-readout')).toContainText('Here it fails');
+  // A preset p-value redraws panel 2 and moves the line in panel 1.
+  await page.getByRole('button', { name: '0.001', exact: true }).click();
+  await expect(page.locator('#at-at-number')).toHaveValue('3');
+  await expect(page.locator('#at-readout')).toContainText('p = 0.001');
+  // Dragging across panel 1 sets the p-value.
+  await page.locator('#curves-plot').scrollIntoViewIfNeeded();
+  const box = /** @type {{ x: number, y: number, width: number, height: number }} */ (await page.locator('#curves-plot svg').boundingBox());
+  await page.mouse.move(box.x + 60, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.7, box.y + box.height / 2, { steps: 4 });
+  await page.mouse.up();
+  expect(Number(await page.locator('#at-at-number').inputValue())).toBeGreaterThan(3);
+  // Sizes that repeat are marked; the last figure stays, dimmed.
+  await page.locator('#curves-sizes').fill('2, 2');
+  await expect(page.locator('#curves-issues')).toContainText('lists a group size twice');
+  await expect(page.locator('#curves-sizes')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#curves-figures')).toHaveAttribute('data-stale', 'true');
+  await page.locator('#curves-sizes').fill('4, 40, 400');
+  await expect(page.locator('#at-table tbody tr')).toHaveCount(3);
+  await page.locator('#curves-windowed').check();
+  await expect(page.locator('#curves-legend')).toContainText('sliding average');
+  await expect(page.locator('#curves-plot .k-line.dashed')).toHaveCount(2);
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'backpack-fallacy', params: { sizes: [2, 16], upTo: 3, window: 0, at: 1.30103 } });
+    return { pairs: r.result.pairs.length, request: app.getRequest() };
+  });
+  expect(api.pairs).toBe(1);
+  expect(api.request.params).toEqual({ prior: 'cauchy', scale: 1, sizes: [2, 16], upTo: 3, window: 0, at: 1.30103 });
+  await expect(page.locator('#curves-sizes')).toHaveValue('2, 16');
+  await expect(page.locator('#at-readout')).toContainText('p = 0.05');
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

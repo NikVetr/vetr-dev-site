@@ -23,6 +23,10 @@
   --b-soft: rgba(235, 104, 52, 0.16);
   --b-strong: rgba(235, 104, 52, 0.66);
   --c: #1baf7a;
+  /* Categorical slots 4–6 of the same validated order, for up to six series. */
+  --d: #eda100;
+  --e: #e87ba4;
+  --f: #008300;
   --cat-0: #77bfa8; --cat-1: #5fa690; --cat-2: #488e79; --cat-3: #317663; --cat-4: #175f4d; --cat-5: #004939;
   --seq-0: #f3f7fd; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec; --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95;
   --seq-ink-low: #1b1b1b; --seq-ink-high: #ffffff;
@@ -40,6 +44,9 @@
   --b-soft: rgba(217, 89, 38, 0.22);
   --b-strong: rgba(217, 89, 38, 0.74);
   --c: #199e70;
+  --d: #c98500;
+  --e: #d55181;
+  --f: #008300;
   --cat-0: #115a48; --cat-1: #2f7460; --cat-2: #4a8e7a; --cat-3: #64a994; --cat-4: #7fc6af; --cat-5: #9ae3cb;
   --seq-0: #1a2130; --seq-1: #0d366b; --seq-2: #104281; --seq-3: #1c5cab; --seq-4: #2a78d6; --seq-5: #5598e7; --seq-6: #86b6ef;
   --seq-ink-low: #ffffff; --seq-ink-high: #10141a;
@@ -644,3 +651,22 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .panel-side > .control.stacked { display: grid; gap: 0.3rem; align-items: start; }
 .step-table td:nth-child(2) { text-align: left; }
 .plot .cell-picked { stroke: var(--ink); stroke-width: 2; }
+
+/* ---------- The backpack fallacy ---------- */
+
+/* One colour per series, in the categorical order: k0 is slot 1 (--a) and k5 slot 6. */
+.plot .k0 { --k: var(--a); } .plot .k1 { --k: var(--b); } .plot .k2 { --k: var(--c); }
+.plot .k3 { --k: var(--d); } .plot .k4 { --k: var(--e); } .plot .k5 { --k: var(--f); }
+.plot .k-line { fill: none; stroke: var(--k); stroke-width: 2; stroke-linejoin: round; }
+.plot .k-line.dashed { stroke-dasharray: 6 4; stroke-width: 1.6; }
+.plot .k-mark { fill: var(--k); stroke: var(--surface); stroke-width: 1.5; }
+.plot .k-hollow { fill: var(--surface); stroke: var(--k); stroke-width: 2; }
+.plot .k-soft { fill: var(--k); fill-opacity: 0.14; }
+.plot .k-bar { stroke: var(--k); stroke-width: 6; stroke-linecap: round; }
+.plot .k-bar.thin { stroke-width: 2; }
+.plot .context-line { fill: none; stroke: var(--faint); stroke-width: 1; stroke-opacity: 0.6; }
+.plot .at-line { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.plot .scrub-hit { fill: transparent; }
+.scrub-plot { cursor: ew-resize; }
+.check-label { display: inline-flex; gap: 0.45rem; align-items: center; min-height: 2rem; }
+.panel-side input[type="text"] { width: 100%; }

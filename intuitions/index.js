@@ -1,6 +1,8 @@
 // The gallery index: thumbnails drawn by each entry's own figure code at its default
 // parameters, and window.Intuitions with the shared submit().
 
+import { compute as backpackFallacy } from './backpack-fallacy/compute.js';
+import { curvesFigure } from './backpack-fallacy/figure.js';
 import { compute as correlationGeometry } from './correlation-geometry/compute.js';
 import { compute as dagAdjustment, PRESETS as DAG_PRESETS } from './dag-adjustment/compute.js';
 import { dagFigure } from './dag-adjustment/figure.js';
@@ -22,6 +24,7 @@ import { compute as typicalSet } from './typical-set/compute.js';
 import { shellFigure } from './typical-set/figure.js';
 import { densityFigure } from './zscore-outliers/figure.js';
 
+const backpack = backpackFallacy({ prior: 'normal', scale: 0.3, sizes: [2, 16, 128, 1024], upTo: 5, window: 0 });
 const thumbs = [
   {
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-correlation-geometry')),
@@ -75,6 +78,10 @@ const thumbs = [
       const r = treeCovariance({ newick: '(((A:1,B:1):1,C:2):0.6,(D:1.2,E:1.2):1.4);', sample: null });
       return covarianceThumbnail(r, ['A', 'B'], { width, height: 150 });
     },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-backpack-fallacy')),
+    draw: (/** @type {number} */ width) => curvesFigure(backpack, { width, height: 150, smaller: 2, at: 2, compact: true }),
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });
