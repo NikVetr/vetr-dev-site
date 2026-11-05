@@ -201,14 +201,14 @@ export function traceFigure(values, { width, height, t, range, quantiles = [], l
   const left = 44;
   const right = 40;
   const upper = 10;
-  const bottom = 36;
+  const bottom = 40;
   const n = values.length - 1;
   const x = scaleLinear([0, n], [left, width - right]);
   const y = scaleLinear(range, [height - bottom, upper]);
   const parts = [
     el('clipPath', { id: `${id}-clip` }, el('rect', { x: left, y: upper, width: width - left - right, height: height - upper - bottom })),
     axisLeft({ scale: y, x: left, ticks: niceTicks(range[0], range[1], 4), format: tick, gridTo: width - right }),
-    axisBottom({ scale: x, y: height - bottom, ticks: niceTicks(0, n, width < 360 ? 3 : 5), format: (v) => v.toLocaleString('en-US'), label: 'iteration', labelGap: 30 }),
+    axisBottom({ scale: x, y: height - bottom, ticks: niceTicks(0, n, width < 360 ? 3 : 5), format: (v) => v.toLocaleString('en-US'), label: 'iteration', labelGap: 34 }),
     text(left - 38, upper - 2, yLabel, { class: 'axis-label', 'text-anchor': 'start', 'dominant-baseline': 'hanging' }),
   ];
   for (const q of quantiles) {

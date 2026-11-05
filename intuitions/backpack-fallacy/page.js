@@ -152,7 +152,7 @@ draggable($('curves-plot'), {
     if (!svg || !result) return;
     const width = svg.clientWidth;
     const left = 44;
-    const right = width < 480 ? 14 : 76;
+    const right = 14;
     const upTo = result.x[result.x.length - 1];
     setAt(((Math.max(left, Math.min(width - right, px)) - left) / (width - right - left)) * upTo);
   },

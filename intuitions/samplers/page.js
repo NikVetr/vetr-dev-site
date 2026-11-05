@@ -343,7 +343,7 @@ function showHints(v) {
   const s = state.panels[v];
   const hmc = v !== 'hastings' && s.sampler === 'hmc';
   $(`${v}-step-label`).innerHTML = v === 'hastings' ? 'Multiplier\'s log SD, λ' : hmc ? 'Step size, ε' : 'Proposal SD';
-  $(`${v}-step-hint`).textContent = v === 'hastings' ? `Each coordinate is multiplied by e^(λZ), between ×${num(Math.exp(-1.96 * s.step))} and ×${num(Math.exp(1.96 * s.step))} 95% of the time.`
+  $(`${v}-step-hint`).innerHTML = v === 'hastings' ? `Each coordinate is multiplied by e<sup>λ<var>Z</var></sup>, between ×${num(Math.exp(-1.96 * s.step))} and ×${num(Math.exp(1.96 * s.step))} 95% of the time.`
     : hmc ? 'The length of one leapfrog step.' : s.sampler === 'gibbs' ? 'Gibbs needs no step.' : 'The SD of the normal step in each coordinate.';
   if (v !== 'hastings') {
     $(`${v}-leapfrog-hint`).textContent = hmc ? `Path length εL = ${num(s.step * s.leapfrog)}.` : '';

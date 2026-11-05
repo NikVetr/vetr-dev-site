@@ -51,7 +51,7 @@ export function curvesFigure(result, { width, height, smaller, at, windowed = fa
   const narrow = width < 480;
   const labelled = !compact && !narrow;
   const left = compact ? 6 : 44;
-  const right = compact ? 6 : labelled ? 76 : 14;
+  const right = compact ? 6 : 14;
   const upper = compact ? 8 : 18;
   const bottom = compact ? 6 : 46;
   const xs = result.x;
@@ -92,15 +92,16 @@ export function curvesFigure(result, { width, height, smaller, at, windowed = fa
       const i = Math.min(xs.length - 1, Math.round(at / (xs[1] - xs[0])));
       parts.push(marker(m.shape, ax, y(p.matched[i]), compact ? 3.6 : 5, m.mark));
     }
-    const end = p.matched[p.matched.length - 1];
-    labels.push({ y: y(end) + 4, line: y(end), k, text: `vs ${p.larger.toLocaleString('en-US')}` });
+    // Labelled where the lines start, at p = 1, since they all converge towards 100%.
+    const first = y(p.matched[0]);
+    labels.push({ y: first < upper + 24 ? first + 16 : first - 7, line: first, k, text: `vs ${p.larger.toLocaleString('en-US')}` });
   }
   if (labelled) {
     labels.sort((a, b) => a.y - b.y);
-    spread(labels, 15, upper + 4, height - bottom);
+    spread(labels, 15, upper + 12, height - bottom - 6);
     for (const l of labels) {
-      parts.push(el('path', { d: `M${width - right + 2} ${l.line}L${width - right + 10} ${l.y - 4}`, class: 'leader' }),
-        text(width - right + 13, l.y, l.text, { class: 'direct-label' }));
+      const m = sizeMark(l.k);
+      parts.push(marker(m.shape, left + 12, l.y - 4, 3.6, m.mark), text(left + 20, l.y, l.text, { class: 'direct-label halo' }));
     }
   }
   if (!compact) {
