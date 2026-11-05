@@ -2,8 +2,9 @@
 // and replay, drawn on a canvas. Points are kept in the signature's own
 // coordinates; the pad shows them through a fitted view, and new strokes are
 // mapped back through the same view, so drawing over an imported signature
-// adds to it. Times are milliseconds from the first point; pressure is kept
-// only when a pen reported every point.
+// adds to it; undo restores the view along with the strokes. Times are
+// milliseconds from the first point; pressure is kept only when a pen
+// reported every point.
 
 /**
  * @typedef {import('./core/resample.js').RawPoint} RawPoint
@@ -22,7 +23,10 @@ export class Pad {
     this.opts = opts;
     /** @type {PadPoint[][]} */
     this.strokes = [];
-    /** @type {PadPoint[][][]} */
+    /**
+     * What undo returns to: the strokes and the view they were shown in.
+     * @type {{ strokes: PadPoint[][], view: { s: number, ox: number, oy: number } }[]}
+     */
     this.history = [];
     this.view = { s: 1, ox: 0, oy: 0 };
     /** @type {PadPoint[] | null} */
@@ -98,15 +102,22 @@ export class Pad {
     if (e.type === 'pointerup') this.add(e);
     const stroke = this.drawing;
     this.drawing = null;
-    this.history.push(this.strokes);
+    this.remember();
     this.strokes = [...this.strokes, stroke];
     this.draw();
     this.opts.onChange();
   }
 
+  /** Keeps what the pad shows now, strokes and view, for undo. */
+  remember() {
+    this.history.push({ strokes: this.strokes, view: this.view });
+  }
+
   undo() {
-    if (!this.history.length) return;
-    this.strokes = /** @type {PadPoint[][]} */ (this.history.pop());
+    const last = this.history.pop();
+    if (!last) return;
+    this.strokes = last.strokes;
+    this.view = last.view;
     this.drawingSince = false;
     this.draw();
     this.opts.onChange();
@@ -114,7 +125,7 @@ export class Pad {
 
   clear() {
     if (!this.strokes.length) return;
-    this.history.push(this.strokes);
+    this.remember();
     this.strokes = [];
     this.view = { s: 1, ox: 0, oy: 0 };
     this.drawingSince = false;
@@ -125,7 +136,7 @@ export class Pad {
   /** Shows a signature, fitted to the pad; undo returns to what was there. @param {RawPoint[][]} strokes */
   load(strokes) {
     this.stopReplay();
-    this.history.push(this.strokes);
+    this.remember();
     this.strokes = strokes.map((s) => s.map((p) => ({ ...p })));
     this.fit();
     this.drawingSince = false;

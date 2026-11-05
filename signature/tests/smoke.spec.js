@@ -87,6 +87,20 @@ test('draws with the mouse, corrects as it goes, undoes, and brushes a region', 
   await expect(page.locator('#brush-info')).toHaveText('No brushed regions.');
 });
 
+test('Undo after Clear or Import shows the signature as it was', async ({ page }) => {
+  await page.goto('./');
+  await page.waitForFunction(() => /** @type {any} */ (window).Signature?.getResult());
+  const pad = () => page.evaluate(() => /** @type {HTMLCanvasElement} */ (document.getElementById('pad')).toDataURL());
+  const before = await pad();
+  await page.click('#clear');
+  await page.click('#undo');
+  expect(await pad()).toBe(before);
+  await page.setInputFiles('#import', new URL('../examples/juno-marsh.csv', import.meta.url).pathname);
+  await expect.poll(pad).not.toBe(before);
+  await page.click('#undo');
+  expect(await pad()).toBe(before);
+});
+
 test('morphs into the second example and plays when asked', async ({ page }) => {
   await page.goto('./');
   await page.waitForFunction(() => window.Signature?.getResult());
