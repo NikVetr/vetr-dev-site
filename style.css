@@ -91,13 +91,19 @@ body {
 .skip-link:focus-visible { translate: none; outline: 2px solid var(--primary); outline-offset: 2px; }
 #projects:focus { outline: none; }
 
-/* ---------- Header ---------- */
+/* ---------- Header: the site's name and the welcome ---------- */
 .site-header {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
-.site-header .container {
-  padding-block: var(--space-1);
+.masthead {
+  display: grid;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-2);
+}
+/* Wherever there is the width, the welcome sits beside the name, so the cards start higher. */
+@media (min-width: 52rem) {
+  .masthead { grid-template-columns: fit-content(18rem) minmax(0, 68ch); align-items: start; }
 }
 h1 {
   margin: 0;
@@ -109,11 +115,11 @@ h1 {
   margin: 0.25rem 0 0;
   color: var(--muted);
 }
+#intro p { margin: 0; }
 
 /* ---------- Main ---------- */
 main.container { padding-block: var(--space-3) var(--space-4); }
-section + section { margin-top: var(--space-3); }
-h2 { font-size: var(--fs-2); margin: 0 0 var(--space-1); letter-spacing: -0.01em; }
+h2 { font-size: var(--fs-2); margin: 0 0 var(--space-1); letter-spacing: -0.01em; line-height: 1.2; }
 p { margin: 0 0 var(--space-2); max-width: 68ch; }
 
 /* ---------- Projects ---------- */
@@ -152,7 +158,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 }
 /* The arrow says "this goes somewhere" alongside the link colour; it is not part of the name. */
 .project-card h3::after { content: "\00a0→" / ""; }
-.project-card p { margin-bottom: 0.75rem; color: var(--muted); }
+.project-card p { margin-bottom: 0.75rem; color: var(--muted); font-size: 0.95em; line-height: 1.55; }
 .project-card:hover { border-color: var(--primary-line); }
 .project-card:hover h3 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
 .project-card:focus-visible {
@@ -183,9 +189,11 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   font-variant-numeric: tabular-nums;
 }
 
-/* A phone on its side: little height, so smaller cards and more of them across. */
+/* A phone on its side: little height, so a tighter masthead and smaller cards, more across. */
 @media (orientation: landscape) and (max-height: 500px) {
   :root { --card-min: 15rem; }
+  .masthead { padding-block: var(--space-1); }
+  #intro h2 { font-size: var(--fs-1); }
 }
 
 /* ---------- Footer (full-bleed image with overlay credit) ---------- */
