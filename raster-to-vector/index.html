@@ -23,162 +23,17 @@
   </header>
 
   <main class="container layout">
-    <div class="column">
-      <section class="card" aria-labelledby="image-heading">
-        <h2 id="image-heading">Image</h2>
-        <div class="toolbar">
-          <label class="file-button">Choose image… <input id="image-file" type="file" accept="image/png,image/jpeg"></label>
-          <button id="example-cartoon" type="button">Example: cartoon</button>
-          <button id="example-logo" type="button">Example: logo with holes</button>
-        </div>
-        <p id="image-info" class="muted">No image loaded.</p>
-      </section>
+    <section class="card" aria-labelledby="image-heading">
+      <h2 id="image-heading">Image</h2>
+      <div class="toolbar">
+        <label class="file-button">Choose image… <input id="image-file" type="file" accept="image/png,image/jpeg"></label>
+        <button id="example-cartoon" type="button">Example: cartoon</button>
+        <button id="example-logo" type="button">Example: logo with holes</button>
+      </div>
+      <p id="image-info" class="muted">No image loaded.</p>
+    </section>
 
-      <section class="card" aria-labelledby="options-heading">
-        <h2 id="options-heading">Options</h2>
-        <p class="muted">The defaults are the R version's, except the longest side, which the page sets so that large photos stay quick (leave it empty to keep the size).</p>
-
-        <h3>Size</h3>
-        <div class="settings">
-          <label>Longest side (px, empty: as is)
-            <input data-path="preprocess.maxDim" data-type="int-or-null" type="number" min="8" step="1" value="600">
-          </label>
-          <label>Upscale factor
-            <input data-path="preprocess.scale" data-type="int" type="number" min="1" step="1">
-          </label>
-          <label>Padding (replicated edge pixels)
-            <input data-path="preprocess.pad" data-type="int" type="number" min="0" step="1">
-          </label>
-        </div>
-
-        <h3>Colours</h3>
-        <div class="settings">
-          <label>Number of colours, k
-            <input data-path="quantize.k" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
-          </label>
-          <label>k tried when automatic
-            <input data-path="quantize.kRange" data-type="int-list" type="text" spellcheck="false">
-          </label>
-          <label>Offset added to the chosen k's position
-            <input data-path="quantize.offset" data-type="int" type="number" min="0" step="1">
-          </label>
-          <label>Most frequent colours clustered
-            <input data-path="quantize.nTop" data-type="int" type="number" min="1" step="1">
-          </label>
-          <label>Decimals colours are rounded to
-            <input data-path="quantize.digits" data-type="int" type="number" min="0" max="6" step="1">
-          </label>
-          <label>Transparent below alpha
-            <input data-path="quantize.alphaThreshold" data-type="number" type="number" min="0" max="1" step="0.05">
-          </label>
-          <label>k-means++ seeding
-            <select data-path="quantize.seeding">
-              <option value="weighted">Weighted by colour count</option>
-              <option value="unweighted">Unweighted (original)</option>
-            </select>
-          </label>
-          <label>Colour space
-            <select data-path="quantize.space">
-              <option value="rgb">RGB</option>
-              <option value="oklab">OKLab</option>
-            </select>
-          </label>
-          <label>Seed
-            <input data-path="quantize.seed" data-type="int" type="number" step="1">
-          </label>
-        </div>
-
-        <h3>Cleanup</h3>
-        <div class="settings">
-          <label>Shortest run kept (px; 1: no cleanup)
-            <input data-path="clean.minRun" data-type="int" type="number" min="1" step="1">
-          </label>
-          <label>Passes (rows, then columns)
-            <input data-path="clean.passes" data-type="int" type="number" min="1" step="1">
-          </label>
-        </div>
-
-        <h3>Tracing</h3>
-        <div class="settings">
-          <label>Tracer
-            <select data-path="trace.method">
-              <option value="marching_squares">Marching squares</option>
-              <option value="original">Original (chain following)</option>
-            </select>
-          </label>
-          <label>Shortest contour kept (points)
-            <input data-path="trace.minLength" data-type="int" type="number" min="3" step="1">
-          </label>
-          <label>Original tracer's erosion window (px)
-            <input data-path="trace.kconvInit" data-type="int" type="number" min="1" step="1">
-          </label>
-        </div>
-
-        <h3>Smoothing</h3>
-        <div class="settings">
-          <label>Method
-            <select data-path="smooth.method">
-              <option value="wavelet">Wavelet (MODWT)</option>
-              <option value="fourier">Fourier</option>
-              <option value="hadamard">Walsh–Hadamard</option>
-              <option value="none">None</option>
-            </select>
-          </label>
-          <label>Wavelet filter
-            <select data-path="smooth.wavelet.filter">
-              <option value="haar">haar</option>
-              <option value="d4">d4</option>
-              <option value="mb4">mb4</option>
-              <option value="d6">d6</option>
-              <option value="la8">la8</option>
-            </select>
-          </label>
-          <label>Wavelet levels (auto or a number)
-            <input data-path="smooth.wavelet.nLevels" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
-          </label>
-          <label>Wavelet threshold multiplier
-            <input data-path="smooth.wavelet.thresholdMultiplier" data-type="number" type="number" min="0" step="0.5">
-          </label>
-          <label>Wavelet noise estimate
-            <select data-path="smooth.wavelet.noise">
-              <option value="sd">sd (original)</option>
-              <option value="mad">MAD</option>
-            </select>
-          </label>
-          <label>Fourier threshold
-            <select data-path="smooth.fourier.threshold">
-              <option value="original">Original</option>
-              <option value="universal">Universal</option>
-            </select>
-          </label>
-        </div>
-
-        <h3>Paint order and output</h3>
-        <div class="settings">
-          <label>Share of area inside that counts as contained
-            <input data-path="order.threshold" data-type="number" type="number" min="0.01" max="1" step="0.01">
-          </label>
-          <label>Holes cut into regions
-            <select data-path="output.holes">
-              <option value="transparent">Only where transparent</option>
-              <option value="all">All</option>
-              <option value="none">None</option>
-            </select>
-          </label>
-          <label>Colours not painted below alpha
-            <input data-path="output.transparentAlpha" data-type="number" type="number" min="0" max="1" step="0.05">
-          </label>
-          <label>Decimals in the path data
-            <input data-path="output.digits" data-type="int" type="number" min="0" max="10" step="1">
-          </label>
-        </div>
-        <div class="toolbar">
-          <button id="reset-options" type="button">Reset options</button>
-        </div>
-      </section>
-    </div>
-
-    <section class="card results-card" aria-labelledby="result-heading">
+    <section id="results-card" class="card results-card" aria-labelledby="result-heading">
       <div class="card-head">
         <h2 id="result-heading">SVG</h2>
         <span id="status" class="muted" role="status"></span>
@@ -188,12 +43,13 @@
         <button id="stop" type="button" disabled>Stop</button>
       </div>
       <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="stale" class="stale-banner" hidden></p>
       <div class="previews">
         <figure class="preview">
           <canvas id="input-preview" aria-label="Input image"></canvas>
           <figcaption class="muted">Input</figcaption>
         </figure>
-        <figure class="preview">
+        <figure class="preview stale-dim">
           <img id="output-preview" alt="The SVG" hidden>
           <figcaption id="output-caption" class="muted">The SVG appears here.</figcaption>
         </figure>
@@ -205,11 +61,154 @@
           <button id="export-result" type="button">Result JSON</button>
         </div>
         <h3>Palette</h3>
-        <ul id="palette" class="palette"></ul>
-        <div id="warnings" hidden>
+        <ul id="palette" class="palette stale-dim"></ul>
+        <div id="warnings" class="stale-dim" hidden>
           <h3>Warnings</h3>
           <ul id="warning-list"></ul>
         </div>
+      </div>
+    </section>
+
+    <section id="options-card" class="card" aria-labelledby="options-heading">
+      <h2 id="options-heading">Options</h2>
+      <p class="muted">The defaults are the R version's, except the longest side, which the page sets so that large photos stay quick (leave it empty to keep the size).</p>
+
+      <h3>Size</h3>
+      <div class="settings">
+        <label>Longest side (px, empty: as is)
+          <input data-path="preprocess.maxDim" data-type="int-or-null" type="number" min="8" step="1" value="600">
+        </label>
+        <label>Upscale factor
+          <input data-path="preprocess.scale" data-type="int" type="number" min="1" step="1">
+        </label>
+        <label>Padding (replicated edge pixels)
+          <input data-path="preprocess.pad" data-type="int" type="number" min="0" step="1">
+        </label>
+      </div>
+
+      <h3>Colours</h3>
+      <div class="settings">
+        <label>Number of colours, k
+          <input data-path="quantize.k" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
+        </label>
+        <label>k tried when automatic
+          <input data-path="quantize.kRange" data-type="int-list" type="text" spellcheck="false">
+        </label>
+        <label>Offset added to the chosen k's position
+          <input data-path="quantize.offset" data-type="int" type="number" min="0" step="1">
+        </label>
+        <label>Most frequent colours clustered
+          <input data-path="quantize.nTop" data-type="int" type="number" min="1" step="1">
+        </label>
+        <label>Decimals colours are rounded to
+          <input data-path="quantize.digits" data-type="int" type="number" min="0" max="6" step="1">
+        </label>
+        <label>Transparent below alpha
+          <input data-path="quantize.alphaThreshold" data-type="number" type="number" min="0" max="1" step="0.05">
+        </label>
+        <label>k-means++ seeding
+          <select data-path="quantize.seeding">
+            <option value="weighted">Weighted by colour count</option>
+            <option value="unweighted">Unweighted (original)</option>
+          </select>
+        </label>
+        <label>Colour space
+          <select data-path="quantize.space">
+            <option value="rgb">RGB</option>
+            <option value="oklab">OKLab</option>
+          </select>
+        </label>
+        <label>Seed
+          <input data-path="quantize.seed" data-type="int" type="number" step="1">
+        </label>
+      </div>
+
+      <h3>Cleanup</h3>
+      <div class="settings">
+        <label>Shortest run kept (px; 1: no cleanup)
+          <input data-path="clean.minRun" data-type="int" type="number" min="1" step="1">
+        </label>
+        <label>Passes (rows, then columns)
+          <input data-path="clean.passes" data-type="int" type="number" min="1" step="1">
+        </label>
+      </div>
+
+      <h3>Tracing</h3>
+      <div class="settings">
+        <label>Tracer
+          <select data-path="trace.method">
+            <option value="marching_squares">Marching squares</option>
+            <option value="original">Original (chain following)</option>
+          </select>
+        </label>
+        <label>Shortest contour kept (points)
+          <input data-path="trace.minLength" data-type="int" type="number" min="3" step="1">
+        </label>
+        <label>Original tracer's erosion window (px)
+          <input data-path="trace.kconvInit" data-type="int" type="number" min="1" step="1">
+        </label>
+      </div>
+
+      <h3>Smoothing</h3>
+      <div class="settings">
+        <label>Method
+          <select data-path="smooth.method">
+            <option value="wavelet">Wavelet (MODWT)</option>
+            <option value="fourier">Fourier</option>
+            <option value="hadamard">Walsh–Hadamard</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+        <label>Wavelet filter
+          <select data-path="smooth.wavelet.filter">
+            <option value="haar">haar</option>
+            <option value="d4">d4</option>
+            <option value="mb4">mb4</option>
+            <option value="d6">d6</option>
+            <option value="la8">la8</option>
+          </select>
+        </label>
+        <label>Wavelet levels (auto or a number)
+          <input data-path="smooth.wavelet.nLevels" data-type="int-or-auto" type="text" inputmode="numeric" spellcheck="false">
+        </label>
+        <label>Wavelet threshold multiplier
+          <input data-path="smooth.wavelet.thresholdMultiplier" data-type="number" type="number" min="0" step="0.5">
+        </label>
+        <label>Wavelet noise estimate
+          <select data-path="smooth.wavelet.noise">
+            <option value="sd">sd (original)</option>
+            <option value="mad">MAD</option>
+          </select>
+        </label>
+        <label>Fourier threshold
+          <select data-path="smooth.fourier.threshold">
+            <option value="original">Original</option>
+            <option value="universal">Universal</option>
+          </select>
+        </label>
+      </div>
+
+      <h3>Paint order and output</h3>
+      <div class="settings">
+        <label>Share of area inside that counts as contained
+          <input data-path="order.threshold" data-type="number" type="number" min="0.01" max="1" step="0.01">
+        </label>
+        <label>Holes cut into regions
+          <select data-path="output.holes">
+            <option value="transparent">Only where transparent</option>
+            <option value="all">All</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+        <label>Colours not painted below alpha
+          <input data-path="output.transparentAlpha" data-type="number" type="number" min="0" max="1" step="0.05">
+        </label>
+        <label>Decimals in the path data
+          <input data-path="output.digits" data-type="int" type="number" min="0" max="10" step="1">
+        </label>
+      </div>
+      <div class="toolbar">
+        <button id="reset-options" type="button">Reset options</button>
       </div>
     </section>
 

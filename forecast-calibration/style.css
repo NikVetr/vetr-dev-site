@@ -16,8 +16,16 @@
 
 /* ---------- Tables ---------- */
 
-/* Long prediction lists scroll inside their frame; every column fits its width. */
+/* Long prediction lists scroll inside their frame; every column fits its width. In one
+   column the frame is shorter, so the page still scrolls past it to the results below. */
 .table-wrap { max-height: 65vh; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.results-link { margin-left: auto; font-size: 0.92rem; }
+@media (max-width: 999px) {
+  .table-wrap { max-height: 45vh; }
+}
+@media (min-width: 1000px) {
+  .results-link { display: none; }
+}
 
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 0.3rem 0.4rem; text-align: left; vertical-align: top; }

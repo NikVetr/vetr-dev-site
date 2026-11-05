@@ -34,3 +34,8 @@
 .terms thead th { background: var(--surface-2); color: var(--muted); font-size: 0.85rem; border-bottom: 1px solid var(--border); }
 .terms tbody tr + tr > *, .terms tfoot tr > * { border-top: 1px solid var(--border); }
 .terms .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Three cards on the left (answers, picture, settings) beside the results. */
+@media (min-width: 1000px) {
+  .layout { grid-template-rows: auto auto 1fr; }
+}

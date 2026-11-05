@@ -21,7 +21,7 @@ const el = {
   lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), justify: byId('justify'),
   ink: byId('ink'), background: byId('background'), scale: byId('scale'), seed: byId('seed'),
   render: byId('render'), status: byId('status'), issues: byId('issues'),
-  noResult: byId('no-result'), result: byId('result'), output: byId('output'),
+  noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), output: byId('output'),
   fitStatus: byId('fit-status'), stats: byId('stats'), palette: byId('palette'),
   exportSvg: byId('export-svg'), exportPng: byId('export-png'),
 };
@@ -34,6 +34,10 @@ const state = {
   /** @type {Result | null} */ result: null,
   svg: '',
   svgUrl: '',
+  /** What has changed since the result on view was rendered. @type {Set<'image' | 'text' | 'settings'>} */
+  changed: new Set(),
+  /** Whether the last render from the page failed, leaving an earlier result on view. */
+  failed: false,
 };
 
 // ---------- worker ----------
@@ -176,6 +180,9 @@ async function run(request, { fromApi }) {
     writeForm(state.settings);
     showResult(result, svg);
     showIssues([]);
+    state.changed.clear();
+    state.failed = false;
+    showStale();
     el.status.textContent = `Done in ${(Object.values(result.timings_ms).reduce((a, b) => a + b, 0) / 1000).toFixed(1)} s.`;
     return result;
   } catch (error) {
@@ -184,6 +191,8 @@ async function run(request, { fromApi }) {
     } else {
       el.status.textContent = 'Not rendered.';
       showIssues(error instanceof TextInImageError ? error.issues : [{ path: '', message: /** @type {Error} */ (error).message }]);
+      state.failed = true;
+      showStale();
     }
     throw error;
   } finally {
@@ -214,6 +223,24 @@ function showIssues(issues) {
     list.append(item);
   }
   el.issues.append(list);
+}
+
+/** Says whether, and why, the result on view no longer matches the page. */
+function showStale() {
+  const parts = ['image', 'text', 'settings'].filter((part) => state.changed.has(/** @type {any} */ (part)));
+  const what = parts.length ? `the ${parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0]} changed since this was rendered` : '';
+  const reason = state.failed
+    ? `the last render failed (see the problems above)${what ? `, and ${what}` : ''}. This is the result before it.`
+    : what && `${what}; press Render to update it.`;
+  el.stale.hidden = !reason;
+  el.stale.textContent = reason ? `Out of date: ${reason}` : '';
+  el.result.toggleAttribute('data-stale', Boolean(reason));
+}
+
+/** @param {'image' | 'text' | 'settings'} part */
+function markChanged(part) {
+  state.changed.add(part);
+  if (state.result) showStale();
 }
 
 /** @param {Result} result @param {string} svg */
@@ -302,6 +329,7 @@ el.imageFile.addEventListener('change', async () => {
   try {
     await loadImage(file, file.name);
     showIssues([]);
+    markChanged('image');
   } catch (error) {
     showIssues([{ path: 'image', message: `could not be read: ${/** @type {Error} */ (error).message}` }]);
   }
@@ -311,12 +339,17 @@ el.maxSide.addEventListener('change', async () => {
   try {
     await loadImage(state.source.blob, state.source.name);
     showIssues([]);
+    markChanged('image');
   } catch (error) {
     showIssues([{ path: 'image', message: /** @type {Error} */ (error).message }]);
   }
 });
 el.quantizeOn.addEventListener('change', () => { el.k.disabled = !el.quantizeOn.checked; });
-el.text.addEventListener('input', showCharCount);
+el.text.addEventListener('input', () => {
+  showCharCount();
+  markChanged('text');
+});
+byId('settings-card').addEventListener('input', () => markChanged('settings'));
 el.render.addEventListener('click', renderFromPage);
 el.loadExample.addEventListener('click', async () => {
   await loadExample();

@@ -52,10 +52,14 @@ test('flags a bad row with a glyph and a message, and recovers', async ({ page }
   await expect(page.locator('#issues')).toContainText('Row 2: probability is exactly 1');
   await expect(page.locator('#rows tr').nth(1)).toHaveClass(/has-issue/);
   await expect(probability).toHaveAttribute('aria-invalid', 'true');
-  await expect(page.locator('#result')).toBeHidden();
+  // The last complete result stays on view, marked out of date.
+  await expect(page.locator('#result')).toBeVisible();
+  await expect(page.locator('#result')).toHaveAttribute('data-stale', '');
+  await expect(page.locator('#stale')).toContainText('Out of date: a problem in the table or settings');
   await probability.fill('95%');
   await expect(page.locator('#issues')).toBeHidden();
-  await expect(page.locator('#result')).toBeVisible();
+  await expect(page.locator('#stale')).toBeHidden();
+  await expect(page.locator('#result')).not.toHaveAttribute('data-stale');
 });
 
 test('fits a 390 px phone without horizontal scrolling, dialog included', async ({ page }) => {

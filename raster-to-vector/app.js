@@ -25,6 +25,7 @@ const el = {
   imageFile: byId('image-file'), imageInfo: byId('image-info'), convert: byId('convert'), stop: byId('stop'),
   status: byId('status'), issues: byId('issues'), inputPreview: byId('input-preview'), outputPreview: byId('output-preview'),
   outputCaption: byId('output-caption'), result: byId('result'), palette: byId('palette'), warnings: byId('warnings'),
+  stale: byId('stale'), resultsCard: byId('results-card'),
   warningList: byId('warning-list'),
 };
 /** @type {HTMLElement[]} */
@@ -35,6 +36,10 @@ const state = {
   /** @type {string | null} */ name: null,
   /** @type {Result | null} */ result: null,
   svgUrl: '',
+  /** What has changed since the SVG on view was made. @type {Set<'image' | 'options'>} */
+  changed: new Set(),
+  /** Whether the last conversion from the page failed, leaving an earlier SVG on view. */
+  failed: false,
 };
 
 // ---------- worker ----------
@@ -146,6 +151,7 @@ function showImage(image, name) {
 async function loadImage(source, name) {
   try {
     showImage(await decodeImage(source), name);
+    markChanged('image');
     return true;
   } catch (error) {
     showIssues([{ code: 'INVALID_IMAGE', path: 'image', message: `${name} could not be read as an image (${/** @type {Error} */ (error).message})` }]);
@@ -231,9 +237,16 @@ async function run(request, { fromApi }) {
       showIssues([]);
     }
     showResult(result);
+    state.changed.clear();
+    state.failed = false;
+    showStale();
     return result;
   } catch (error) {
-    if (!fromApi && error instanceof RasterToVectorError) showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }]);
+    if (!fromApi && error instanceof RasterToVectorError) {
+      showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }]);
+      state.failed = true;
+      showStale();
+    }
     throw error;
   }
 }
@@ -266,6 +279,24 @@ function showIssues(issues) {
     fields.find((f) => f.dataset.path === issue.path)?.setAttribute('aria-invalid', 'true');
   }
   el.issues.append(list);
+}
+
+/** Says whether, and why, the SVG on view no longer matches the page. */
+function showStale() {
+  const parts = ['image', 'options'].filter((part) => state.changed.has(/** @type {any} */ (part)));
+  const what = parts.length ? `the ${parts.join(' and ')} changed since this was converted` : '';
+  const reason = !state.result ? '' : state.failed
+    ? `the last conversion failed (see the problems above)${what ? `, and ${what}` : ''}. This is the SVG from before it.`
+    : what && `${what}; press Convert to update it.`;
+  el.stale.hidden = !reason;
+  el.stale.textContent = reason ? `Out of date: ${reason}` : '';
+  el.resultsCard.toggleAttribute('data-stale', Boolean(reason));
+}
+
+/** @param {'image' | 'options'} part */
+function markChanged(part) {
+  state.changed.add(part);
+  showStale();
 }
 
 /** @param {Result} result */
@@ -319,7 +350,12 @@ el.imageFile.addEventListener('change', async () => {
 });
 byId('example-cartoon').addEventListener('click', async () => { if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage(); });
 byId('example-logo').addEventListener('click', async () => { if (await loadImage(EXAMPLES.logo, 'logo_holes.png')) await convertFromPage(); });
-byId('reset-options').addEventListener('click', () => { writeOptions(PAGE_DEFAULTS); showIssues([]); });
+byId('reset-options').addEventListener('click', () => {
+  writeOptions(PAGE_DEFAULTS);
+  showIssues([]);
+  markChanged('options');
+});
+byId('options-card').addEventListener('input', () => markChanged('options'));
 byId('export-svg').addEventListener('click', () => state.result && download(`${baseName()}.svg`, new Blob([state.result.svg], { type: 'image/svg+xml' })));
 byId('export-result').addEventListener('click', () => state.result && download(`${baseName()}-vector.json`, new Blob([JSON.stringify(state.result, null, 2)], { type: 'application/json' })));
 

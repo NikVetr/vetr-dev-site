@@ -28,7 +28,7 @@ const el = {
   desiredHvRatio: byId('desired-hv-ratio'), pictureDistance: byId('picture-distance'), maxAttemptsWord: byId('max-attempts-word'),
   maxAttemptsXword: byId('max-attempts-xword'), weights: byId('weights'),
   generate: byId('generate'), refine: byId('refine'), stop: byId('stop'), status: byId('status'), runIssues: byId('run-issues'),
-  progressGrid: byId('progress-grid'), noResult: byId('no-result'), result: byId('result'), crosswordChoice: byId('crossword-choice'),
+  progressGrid: byId('progress-grid'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), crosswordChoice: byId('crossword-choice'),
   gridFilled: byId('grid-filled'), gridBlank: byId('grid-blank'), cluesAcross: byId('clues-across'), cluesDown: byId('clues-down'),
   terms: byId('terms'), score: byId('score'),
 };
@@ -39,6 +39,10 @@ let target = null;
 let result = null;
 /** @type {object | null} */
 let resultRequest = null;
+/** The page's inputs when the crosswords on view were requested (see pageInputs). @type {ReturnType<typeof pageInputs> | null} */
+let resultInputs = null;
+/** Whether the last run from the page failed, leaving earlier crosswords on view. */
+let failed = false;
 let shown = { crossword: 0, stage: /** @type {'orig' | 'refined'} */ ('refined') };
 /** @type {Worker | null} */
 let worker = null;
@@ -74,6 +78,29 @@ function currentRequest() {
       maxAttemptsWord: el.maxAttemptsWord.valueAsNumber, maxAttemptsXword: el.maxAttemptsXword.valueAsNumber,
     },
   };
+}
+
+/** What the page's inputs are, to tell whether the crosswords on view still match them. */
+function pageInputs() {
+  const { objective, search } = currentRequest();
+  return { entries: el.entries.value, target, threshold: el.darkThreshold.value, settings: JSON.stringify({ objective, search }) };
+}
+
+/** Says whether, and why, the crosswords on view no longer match the inputs. */
+function showStale() {
+  const now = pageInputs();
+  const parts = !result || !resultInputs ? [] : [
+    now.entries !== resultInputs.entries && 'answers',
+    (now.target !== resultInputs.target || now.threshold !== resultInputs.threshold) && 'picture',
+    now.settings !== resultInputs.settings && 'settings',
+  ].filter(Boolean);
+  const what = parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0];
+  const reason = failed
+    ? 'the last run failed (see the problems above). These are the crosswords made before it.'
+    : what ? `the ${what} changed since these crosswords were made; ${el.entryIssues.hidden ? '' : 'fix the problems under Answers and clues, then '}press Generate to update them.` : '';
+  el.stale.hidden = !reason;
+  el.stale.textContent = reason ? `Out of date: ${reason}` : '';
+  el.result.toggleAttribute('data-stale', Boolean(reason));
 }
 
 /** Puts an accepted request's entries and settings into the inputs. @param {Record<string, any>} request */
@@ -166,10 +193,14 @@ function showProgress(p) {
 
 /** @param {object} request */
 async function runFromPage(request) {
+  const inputs = pageInputs();
   try {
-    showResult(await run(request), request);
+    showResult(await run(request), request, inputs);
   } catch (error) {
-    if (error instanceof CrosswordError) showIssues(el.runIssues, error);
+    if (!(error instanceof CrosswordError)) return;
+    showIssues(el.runIssues, error);
+    failed = true;
+    showStale();
   }
 }
 
@@ -181,10 +212,13 @@ el.stop.addEventListener('click', stopRun);
 
 // ---------- result ----------
 
-/** @param {Result} next @param {object} request */
-function showResult(next, request) {
+/** @param {Result} next @param {object} request @param {ReturnType<typeof pageInputs>} inputs */
+function showResult(next, request, inputs) {
   result = next;
   resultRequest = request;
+  resultInputs = inputs;
+  failed = false;
+  showStale();
   shown = { crossword: 0, stage: 'refined' };
   el.crosswordChoice.replaceChildren(...next.crosswords.map((cw, i) => {
     const label = document.createElement('label');
@@ -267,6 +301,7 @@ function checkEntries() {
     showIssues(el.entryIssues, error);
     el.entries.setAttribute('aria-invalid', 'true');
   }
+  showStale();
 }
 el.entries.addEventListener('input', () => {
   window.clearTimeout(checkTimer);
@@ -285,6 +320,7 @@ function rgbaTarget(label, rgba) {
 function setTarget(next) {
   target = next;
   showTarget();
+  showStale();
 }
 
 /** The region to fill, drawn small, and how many pixels it has. */
@@ -319,7 +355,10 @@ function showTarget() {
   ctx.drawImage(bitmap, 0, 0, mask.width * scale, mask.height * scale);
 }
 
-el.darkThreshold.addEventListener('input', showTarget);
+el.darkThreshold.addEventListener('input', () => {
+  showTarget();
+  showStale();
+});
 el.targetFile.addEventListener('change', async () => {
   const file = el.targetFile.files?.[0];
   if (!file) return;
@@ -359,7 +398,9 @@ byId('clear-entries').addEventListener('click', () => {
 });
 byId('new-seed').addEventListener('click', () => {
   el.seed.value = String(Math.floor(Math.random() * 4294967296));
+  showStale();
 });
+byId('settings-card').addEventListener('input', showStale);
 
 /** @param {Pick} [pick] */
 function exportSvgText({ crossword = shown.crossword, stage = shown.stage, style = 'filled' } = {}) {
@@ -408,7 +449,7 @@ byId('export-request').addEventListener('click', () => download('crossword-reque
   async submit(request) {
     const next = await run(request);
     loadRequest(/** @type {Record<string, any>} */ (request));
-    showResult(next, request);
+    showResult(next, request, pageInputs());
     return next;
   },
   getRequest: currentRequest,

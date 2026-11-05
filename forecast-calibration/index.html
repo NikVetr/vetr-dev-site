@@ -23,80 +23,47 @@
   </header>
 
   <main class="container layout">
-    <div class="column">
-      <section class="card data-card" aria-labelledby="data-heading">
-        <div class="card-head">
-          <h2 id="data-heading">Predictions</h2>
-          <span id="row-count" class="muted"></span>
-        </div>
-        <div class="toolbar">
-          <button id="edit-text" type="button" aria-haspopup="dialog">Paste or edit as CSV/TSV…</button>
-          <button id="load-example" type="button">Load example</button>
-          <button id="clear-rows" type="button">Clear</button>
-        </div>
-        <div id="issues" class="issues" role="alert" hidden></div>
-        <div class="table-wrap">
-          <table class="predictions">
-            <thead>
-              <tr>
-                <th scope="col" class="index">#</th>
-                <th scope="col" class="text-col">Prediction</th>
-                <th scope="col" class="probability-col">Probability</th>
-                <th scope="col" class="outcome-col">Happened?</th>
-                <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
-              </tr>
-            </thead>
-            <tbody id="rows"></tbody>
-          </table>
-        </div>
-        <div class="toolbar">
-          <button id="add-row" type="button">+ Add row</button>
-          <span class="muted">Probability as 0.7 or 70%.</span>
-        </div>
-      </section>
-
-      <section class="card settings-card" aria-labelledby="settings-heading">
-        <h2 id="settings-heading">Settings</h2>
-        <div class="settings">
-          <label>Binning
-            <select id="bins-mode">
-              <option value="distinct">Each stated probability</option>
-              <option value="width">Equal-width bins</option>
-            </select>
-          </label>
-          <label id="bins-count-field" hidden>Number of bins
-            <input id="bins-count" type="number" min="2" max="100" step="1" value="10">
-          </label>
-          <label>Simulated worlds
-            <input id="simulations" type="number" min="100" max="1000000" step="1000" value="100000">
-          </label>
-          <label>Worlds drawn in the plot
-            <input id="plot-worlds" type="number" min="0" max="10000" step="100" value="2000">
-          </label>
-          <label>Interval (share of worlds)
-            <input id="interval" type="number" min="0.01" max="0.999" step="0.01" value="0.95">
-          </label>
-          <label>Seed
-            <span class="input-row">
-              <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
-              <button id="new-seed" type="button">New seed</button>
-            </span>
-          </label>
-          <label>World line opacity
-            <input id="world-opacity" type="number" min="0.001" max="1" step="0.005" value="0.01">
-          </label>
-        </div>
-      </section>
-    </div>
+    <section class="card data-card" aria-labelledby="data-heading">
+      <div class="card-head">
+        <h2 id="data-heading">Predictions</h2>
+        <span id="row-count" class="muted"></span>
+        <a href="#results-heading" class="results-link">Results ↓</a>
+      </div>
+      <div class="toolbar">
+        <button id="edit-text" type="button" aria-haspopup="dialog">Paste or edit as CSV/TSV…</button>
+        <button id="load-example" type="button">Load example</button>
+        <button id="clear-rows" type="button">Clear</button>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <div class="table-wrap">
+        <table class="predictions">
+          <thead>
+            <tr>
+              <th scope="col" class="index">#</th>
+              <th scope="col" class="text-col">Prediction</th>
+              <th scope="col" class="probability-col">Probability</th>
+              <th scope="col" class="outcome-col">Happened?</th>
+              <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="toolbar">
+        <button id="add-row" type="button">+ Add row</button>
+        <span class="muted">Probability as 0.7 or 70%.</span>
+      </div>
+    </section>
 
     <section class="card results-card" aria-labelledby="results-heading">
       <div class="card-head">
-        <h2 id="results-heading">Calibration</h2>
+        <h2 id="results-heading" tabindex="-1">Calibration</h2>
         <span id="status" class="muted"></span>
       </div>
       <p id="no-result" class="placeholder">Results appear here once every row has a probability and an outcome.</p>
       <div id="result" hidden>
-        <figure id="plot" class="plot"></figure>
+        <p id="stale" class="stale-banner" hidden></p>
+        <figure id="plot" class="plot stale-dim"></figure>
         <div class="toolbar">
           <span class="muted">Plot:</span>
           <button id="export-svg" type="button">SVG</button>
@@ -104,10 +71,10 @@
         </div>
 
         <h3>Scores</h3>
-        <dl id="scores" class="scores"></dl>
+        <dl id="scores" class="scores stale-dim"></dl>
 
         <h3>Bins</h3>
-        <table class="bins">
+        <table class="bins stale-dim">
           <thead>
             <tr>
               <th scope="col">Bin</th>
@@ -124,6 +91,39 @@
           <button id="export-result" type="button">Result JSON</button>
           <button id="export-request" type="button">Request JSON</button>
         </div>
+      </div>
+    </section>
+
+    <section class="card settings-card" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Settings</h2>
+      <div class="settings">
+        <label>Binning
+          <select id="bins-mode">
+            <option value="distinct">Each stated probability</option>
+            <option value="width">Equal-width bins</option>
+          </select>
+        </label>
+        <label id="bins-count-field" hidden>Number of bins
+          <input id="bins-count" type="number" min="2" max="100" step="1" value="10">
+        </label>
+        <label>Simulated worlds
+          <input id="simulations" type="number" min="100" max="1000000" step="1000" value="100000">
+        </label>
+        <label>Worlds drawn in the plot
+          <input id="plot-worlds" type="number" min="0" max="10000" step="100" value="2000">
+        </label>
+        <label>Interval (share of worlds)
+          <input id="interval" type="number" min="0.01" max="0.999" step="0.01" value="0.95">
+        </label>
+        <label>Seed
+          <span class="input-row">
+            <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
+            <button id="new-seed" type="button">New seed</button>
+          </span>
+        </label>
+        <label>World line opacity
+          <input id="world-opacity" type="number" min="0.001" max="1" step="0.005" value="0.01">
+        </label>
       </div>
     </section>
 

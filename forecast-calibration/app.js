@@ -28,7 +28,7 @@ const el = {
   binsMode: byId('bins-mode'), binsCount: byId('bins-count'), binsCountField: byId('bins-count-field'),
   simulations: byId('simulations'), plotWorlds: byId('plot-worlds'), interval: byId('interval'),
   seed: byId('seed'), worldOpacity: byId('world-opacity'),
-  status: byId('status'), noResult: byId('no-result'), result: byId('result'), plot: byId('plot'),
+  status: byId('status'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), plot: byId('plot'),
   scores: byId('scores'), bins: byId('bins'), intervalHeading: byId('interval-heading'),
   dialog: byId('table-dialog'), tableText: byId('table-text'), tableIssues: byId('table-issues'),
 };
@@ -103,12 +103,17 @@ function run() {
     if (!(error instanceof ForecastCalibrationError)) throw error;
     issues.push(...error.issues);
   }
-  if (issues.length) {
+  if (!rows.length) {
+    // An empty table is where a new one starts, not a problem to report.
     result = null;
     resultRequest = null;
+    showIssues(issues.filter((issue) => issue.path !== 'predictions'));
+    renderResult();
+    return;
   }
   showIssues(issues);
-  renderResult();
+  // A table with problems keeps the last complete result on view, marked out of date.
+  renderResult(issues.length);
 }
 
 // ---------- predictions table ----------
@@ -256,14 +261,24 @@ function pText(p, simulations) {
   return p < 0.01 ? `p = ${small(p)}` : `p = ${number(p)}`;
 }
 
-function renderResult() {
+/** @param {number} [problems] how many problems keep the shown result from being current */
+function renderResult(problems = 0) {
   el.noResult.hidden = Boolean(result);
+  el.noResult.textContent = rows.length
+    ? 'Results appear here once every row has a probability and an outcome.'
+    : 'Add a row, paste a table or load the example to see the calibration.';
   el.result.hidden = !result;
   for (const button of document.querySelectorAll('[id^="export-"]')) /** @type {any} */ (button).disabled = !result;
+  el.stale.hidden = !problems;
+  el.stale.textContent = problems
+    ? `Out of date: ${problems === 1 ? 'a problem' : `${problems} problems`} in the table or settings, listed under Predictions. This is the last complete result.`
+    : '';
+  el.result.toggleAttribute('data-stale', problems > 0);
   if (!result) {
     el.status.textContent = '';
     return;
   }
+  if (problems) return; // the result on view is still the one drawn
   const { settings } = result;
   el.status.textContent = `${result.n} predictions, ${result.bins.length} bins, ${settings.simulations.toLocaleString('en-US')} simulated worlds, seed ${settings.seed}`;
   renderPlot();
