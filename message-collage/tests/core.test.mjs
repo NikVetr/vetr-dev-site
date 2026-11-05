@@ -163,6 +163,18 @@ test('exports: outlined and embedded SVG, and PDF', async () => {
   });
 });
 
+test('the worked example in api.md is what the core returns', async () => {
+  const doc = readFileSync(new URL('api.md', here), 'utf8');
+  const request = JSON.parse(/** @type {string} */ (/`request.json`:\n\n```json\n([\s\S]*?)```/.exec(doc)?.[1]));
+  const shown = JSON.parse(/** @type {string} */ (/prints \(abridged[^\n]*\n\n```json\n([\s\S]*?)```/.exec(doc)?.[1]));
+  const r = await submit(request);
+  assert.deepEqual(r.card, shown.card);
+  assert.deepEqual(r.messages[0], shown.messages[0]);
+  assert.deepEqual(r.lines.slice(0, 2), shown.lines);
+  assert.deepEqual(r.runs, shown.runs);
+  assert.equal(r.lines.length, 10);
+});
+
 test('the command line prints the result, and errors as JSON with exit status 1 or 2', () => {
   const cli = new URL('cli.mjs', here).pathname;
   const out = JSON.parse(execFileSync('node', [cli, '--messages', new URL('examples/messages.txt', here).pathname], { encoding: 'utf8' }));

@@ -3,7 +3,7 @@
 // requests with the same messages. Field names and defaults are the R version's
 // (R/request.R in NikVetr/message-collage), so a request can be run by both.
 
-import { FAMILIES } from './fonts.js';
+import { FAMILIES } from './catalogue.js';
 
 /**
  * @typedef {{ code: string, path: string, message: string }} Issue

@@ -3,14 +3,16 @@
 
 import { rMersenneTwister } from '../../shared/rng.js';
 import { assignColors, messageLabels } from './colors.js';
-import { faceKey, FAMILIES, loadFaces, missingCharacters } from './fonts.js';
+import { FAMILIES } from './catalogue.js';
+import { faceKey, loadFaces, missingCharacters } from './fonts.js';
 import { layoutMessages, snapLinesRight } from './layout.js';
 import { measureMessages } from './measure.js';
 import { CollageError, normalizeRequest, STYLE_CODES } from './request.js';
 import { mean, roundHalfEven, sum } from './rmath.js';
 
 export { CollageError, DEFAULTS, LIMITS, normalizeRequest, parseMessages, STYLE_NAMES } from './request.js';
-export { FAMILIES, fontUrl, loadFaces } from './fonts.js';
+export { FAMILIES, fontUrl } from './catalogue.js';
+export { loadFaces } from './fonts.js';
 export { renderPdf, renderSvg } from './render.js';
 
 /**
