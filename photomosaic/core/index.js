@@ -96,7 +96,7 @@ export function submit(request, hooks = {}) {
     cost: { total, mean: total / cellCount, perCell },
     cells: Array.from({ length: cellCount }, (_, i) => Array.from(cells.subarray(4 * i, 4 * i + 4))),
     uses,
-    photos: { count: n, used: uses.filter((u) => u > 0).length },
+    photos: { count: n, used: uses.filter((u) => u > 0).length, names: p.names },
     settings: { columns: p.columns, maxUses: p.maxUses, metric: p.metric, seed: p.seed },
     timings: {
       prepareMs: round1(cellsDone - started),
