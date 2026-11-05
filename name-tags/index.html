@@ -50,16 +50,17 @@
       <p id="warnings" class="muted" hidden></p>
       <p id="no-result" class="placeholder">The sheets appear here after a run.</p>
       <div id="result" hidden>
+        <p id="stale" class="stale-banner" hidden></p>
         <fieldset id="sheet-choice" class="sheet-choice" hidden>
           <legend>Sheet</legend>
           <div id="sheet-options" class="toolbar"></div>
         </fieldset>
-        <figure id="preview" class="preview"></figure>
+        <figure id="preview" class="preview stale-dim"></figure>
         <div class="toolbar">
           <span class="muted">Download:</span>
           <span id="downloads" class="toolbar inline"></span>
-          <button id="export-result" type="button">Result JSON</button>
-          <button id="export-request" type="button">Request JSON</button>
+          <button id="export-result" type="button" data-label="result JSON">Result JSON</button>
+          <button id="export-request" type="button" data-label="request JSON">Request JSON</button>
         </div>
         <p class="muted hint">Sheets are drawn at 96 units per inch with their size in inches, as Inkscape reads them; engraving is filled black, each used cell has a thin grey outline.</p>
       </div>

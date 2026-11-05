@@ -10,6 +10,7 @@ import { TRAY_PRESETS } from './core/tray.js';
 /**
  * @typedef {import('./core/index.js').Result} Result
  * @typedef {import('./core/request.js').Issue} Issue
+ * @typedef {{ names: string, tray: string, design: string }} Inputs
  */
 
 /** Request fields the page's inputs set; any others from a loaded request are kept as they were. */
@@ -24,7 +25,7 @@ const el = {
   decoration: byId('decoration'), font: byId('font'), smallcaps: byId('smallcaps'), logoFileField: byId('logo-file-field'), logoFile: byId('logo-file'),
   logoColorsField: byId('logo-colors-field'), logoColors: byId('logo-colors'), logoStatus: byId('logo-status'), restarts: byId('restarts'), seed: byId('seed'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
-  noResult: byId('no-result'), result: byId('result'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
+  noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
   preview: byId('preview'), downloads: byId('downloads'),
 };
 
@@ -32,6 +33,10 @@ const el = {
 let result = null;
 /** @type {object | null} */
 let resultRequest = null;
+/** The page's inputs when the sheets on view were requested. @type {Inputs | null} */
+let resultInputs = null;
+/** Whether the last run since those sheets failed. */
+let failed = false;
 let shownSheet = 0;
 /** @type {Record<string, any> | null} */
 let customTray = null;
@@ -132,9 +137,39 @@ function showInputs() {
   el.logoColorsField.hidden = !logo;
   el.logoStatus.hidden = !logo;
   el.logoStatus.textContent = logoUrl ? `Logo loaded: ${logoName || 'from the request'} (${logoUrl.slice(5, logoUrl.search(/[;,]/))}).` : 'No logo loaded yet.';
+  showStale();
 }
 
-for (const input of [el.names, el.trayChoice, el.decoration, el.cells]) input.addEventListener('input', showInputs);
+for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.restarts, el.seed]) {
+  input.addEventListener('input', showInputs);
+}
+
+/** The page's inputs, by the card they are on, to tell whether the sheets on view still match them. @returns {Inputs} */
+function pageInputs() {
+  const { names, tray, cells, ...design } = currentRequest();
+  return { names: JSON.stringify(names), tray: JSON.stringify([tray, cells]), design: JSON.stringify(design) };
+}
+
+/**
+ * Says whether, and why, the sheets on view no longer match the inputs. They stay on view,
+ * dimmed, and their downloads say they are out of date.
+ */
+function showStale() {
+  const now = pageInputs();
+  const parts = result && resultInputs ? /** @type {(keyof Inputs)[]} */ (['names', 'tray', 'design']).filter((k) => now[k] !== resultInputs?.[k]) : [];
+  const what = parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0];
+  const reason = result && failed
+    ? 'the last run failed (see the problems above). These are the sheets made before it.'
+    : what ? `the ${what} changed since these sheets were made; press Generate to update them.` : '';
+  el.stale.hidden = !reason;
+  el.stale.textContent = reason ? `Out of date: ${reason}` : '';
+  el.result.toggleAttribute('data-stale', Boolean(reason));
+  for (const button of el.result.querySelectorAll('button[data-label]')) {
+    const label = button.dataset.label;
+    button.textContent = reason ? `⚠ Out-of-date ${label}` : label[0].toUpperCase() + label.slice(1);
+  }
+  el.preview.querySelector('svg')?.setAttribute('aria-label', sheetName());
+}
 
 // ---------- files ----------
 
@@ -297,14 +332,20 @@ function showWarnings(warnings) {
 async function runFromPage(request) {
   if (el.trayChoice.value === 'custom' && !customTray) {
     showIssues([{ code: 'missing_field', path: 'tray', message: 'choose a tray layout JSON file, or the big keychain tray' }]);
+    failed = true;
+    showStale();
     return;
   }
   showIssues([]);
+  const inputs = pageInputs();
   try {
-    showResult(await run(request), request);
+    showResult(await run(request), request, inputs);
   } catch (error) {
+    if (/** @type {Error} */ (error).message === 'stopped') return;
     if (error instanceof NameTagsError) showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }]);
-    else if (/** @type {Error} */ (error).message !== 'stopped') showIssues([{ code: 'internal_error', path: '', message: String(error) }]);
+    else showIssues([{ code: 'internal_error', path: '', message: String(error) }]);
+    failed = true;
+    showStale();
   }
 }
 
@@ -313,10 +354,12 @@ el.stop.addEventListener('click', stopRun);
 
 // ---------- result ----------
 
-/** @param {Result} next @param {object} request */
-function showResult(next, request) {
+/** @param {Result} next @param {object} request @param {Inputs} inputs the page's inputs it was made from */
+function showResult(next, request, inputs) {
   result = next;
   resultRequest = request;
+  resultInputs = inputs;
+  failed = false;
   shownSheet = 0;
   showWarnings(next.warnings);
   el.sheetChoice.hidden = next.sheets.length < 2;
@@ -327,13 +370,15 @@ function showResult(next, request) {
     return label;
   }));
   el.downloads.replaceChildren(...next.sheets.map((sheet, i) => {
-    const button = Object.assign(document.createElement('button'), { type: 'button', textContent: next.sheets.length > 1 ? `Sheet ${sheet.sheet} SVG` : 'Sheet SVG' });
+    const button = Object.assign(document.createElement('button'), { type: 'button' });
+    button.dataset.label = next.sheets.length > 1 ? `sheet ${sheet.sheet} SVG` : 'sheet SVG';
     button.addEventListener('click', () => download(sheet.file, exportSvgText(i + 1), 'image/svg+xml'));
     return button;
   }));
   el.noResult.hidden = true;
   el.result.hidden = false;
   renderSheet();
+  showStale();
 }
 
 el.sheetOptions.addEventListener('change', (/** @type {Event} */ event) => {
@@ -341,12 +386,18 @@ el.sheetOptions.addEventListener('change', (/** @type {Event} */ event) => {
   renderSheet();
 });
 
+/** What the sheet on view is, as its preview is named. */
+function sheetName() {
+  if (!result) return '';
+  return `Sheet ${result.sheets[shownSheet].sheet} of ${result.sheets.length}${el.stale.hidden ? '' : ', out of date'}`;
+}
+
 function renderSheet() {
   if (!result) return;
   el.preview.innerHTML = result.sheets[shownSheet].svg.replace(/^<\?xml[^>]*>\s*/, '');
   const svg = el.preview.querySelector('svg');
   svg.setAttribute('role', 'img');
-  svg.setAttribute('aria-label', `Sheet ${result.sheets[shownSheet].sheet} of ${result.sheets.length}`);
+  svg.setAttribute('aria-label', sheetName());
   if (overlay && el.overlayShow.checked) {
     const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
     const x = Number.isFinite(el.overlayX.valueAsNumber) ? el.overlayX.valueAsNumber : 0;
@@ -406,7 +457,7 @@ byId('clear-names').addEventListener('click', () => {
   async submit(request) {
     const next = await run(request);
     loadRequest(request);
-    showResult(next, request);
+    showResult(next, request, pageInputs());
     return next;
   },
   getRequest: currentRequest,

@@ -80,6 +80,24 @@ test('runs the other decorations and reports invalid input', async ({ page }) =>
   await expect(page.locator('#issues li')).toHaveText(['names[1]: use exactly one "|" between two non-empty lines: "Mary|Ann|Evans"']);
 });
 
+test('marks the sheets out of date after an edit or a failed run, and their downloads too', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#stale')).toBeHidden();
+  await page.locator('#names').fill('Changed Name');
+  await expect(page.locator('#stale')).toHaveText('Out of date: the names changed since these sheets were made; press Generate to update them.');
+  await expect(page.locator('#result')).toHaveAttribute('data-stale', '');
+  await expect(page.locator('#downloads button')).toHaveText(['⚠ Out-of-date sheet SVG']);
+  await page.locator('#restarts').fill('0');
+  await expect(page.locator('#stale')).toContainText('the names and design changed');
+  await page.locator('#generate').click();
+  await expect(page.locator('#stale')).toContainText('the last run failed');
+  await page.locator('#restarts').fill('20');
+  await page.locator('#generate').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  await expect(page.locator('#downloads button')).toHaveText(['Sheet SVG']);
+  await expect(page.locator('#export-request')).toHaveText('Request JSON');
+});
+
 test('fits a phone screen without sideways scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page);
