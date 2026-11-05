@@ -33,7 +33,7 @@ test('the command line builds the request from images, draws the mosaic and reru
 });
 
 test('the command line reports problems as JSON with its exit codes', () => {
-  const bad = cli(['-'], JSON.stringify({ target: { width: 1, height: 1, data: 'AAAA' }, photos: [{ mean: [0, 0, 0] }] }));
+  const bad = cli(['-'], JSON.stringify({ target: { width: 1, height: 1, data: 'AAAAAA==' }, photos: [{ mean: [0, 0, 0] }] }));
   assert.equal(bad.status, 1);
   assert.equal(JSON.parse(bad.stderr).error.issues[0].path, 'photos[0].mean');
   const usage = cli(['--target', join(FIXTURES, 'target-wide.png')]);
