@@ -86,7 +86,7 @@ A renderer needs only `card` and `lines`: draw each line's `text` left-aligned a
 ## Exports
 
 - **SVG, outlined text** (`renderSvg(result, faces)`): each glyph's outline once in `<defs>`, placed with `<use>`. Exact in every viewer, as the R version's showtext output is; the text is not selectable. About 0.3 MB for the example.
-- **SVG, selectable text** (`{ text: 'embedded' }`): `<text>` elements in the bundled fonts, embedded as base64 `@font-face` rules, with kerning and ligatures turned off so the measured widths hold. The text can be searched and copied, but the file carries every face used in full (about 2 MB for the example).
+- **SVG, selectable text** (`{ text: 'embedded' }`): `<text>` elements in the bundled fonts, embedded as base64 `@font-face` rules, with kerning and ligatures turned off so the measured widths hold. The text can be searched and copied, but the file carries every face used in full (about 2 MB for the example), and it needs a viewer that reads embedded web fonts, as browsers do; some editors and converters substitute other fonts.
 - **PDF** (`renderPdf(result, faces)`): one page of the card's size, each glyph a form XObject; text as outlines, as in the R version's PDF.
 - **PNG** (page only): the outlined SVG drawn on a canvas at a chosen width.
 
