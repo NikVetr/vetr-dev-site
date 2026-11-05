@@ -1,6 +1,6 @@
 // Browser helpers shared by the gallery's pages: slider-and-number controls,
-// width-aware redraws, dragging marks in a figure, and window.Intuitions. The theme
-// and its toggle are the site's, from shared/theme.js.
+// width-aware redraws, dragging marks in a figure, Monte Carlo in a Web Worker, and
+// window.Intuitions. The theme and its toggle are the site's, from shared/theme.js.
 
 import { ENTRIES, IntuitionsError, submit } from '../api.js';
 
@@ -124,10 +124,47 @@ export function draggable(container, { onStart, onMove, onEnd }) {
 }
 
 /**
+ * Runs requests through submit() in a Web Worker (lib/worker.js), so that Monte Carlo
+ * does not freeze the page. Only the latest request counts: a new one ends the worker
+ * if it is still busy and starts a fresh one, and the superseded promise never
+ * settles, so a slider can be dragged freely.
+ */
+export function workerRunner() {
+  /** @type {Worker | null} */
+  let worker = null;
+  let busy = false;
+  return {
+    /** @param {unknown} request @returns {Promise<{ entry: string, params: any, result: any }>} */
+    run(request) {
+      if (busy && worker) {
+        worker.terminate();
+        worker = null;
+      }
+      if (!worker) worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+      const current = worker;
+      busy = true;
+      return new Promise((resolve, reject) => {
+        current.onmessage = (event) => {
+          busy = false;
+          const { response, error } = event.data;
+          if (error) reject(new IntuitionsError(error.code, error.message, error.issues));
+          else resolve(response);
+        };
+        current.onerror = (event) => {
+          busy = false;
+          reject(new Error(event.message));
+        };
+        current.postMessage(request);
+      });
+    },
+  };
+}
+
+/**
  * Installs window.Intuitions for a page. submit() is the shared entry point; when the
- * request is for this page's entry, the page also shows it (an invalid request
- * throws and leaves the page as it was).
- * @param {{ entry?: string, load?: (params: any) => void, getParams?: () => unknown, getResult?: () => unknown }} page
+ * request is for this page's entry, the page also shows it, given the response's
+ * params and result (an invalid request throws and leaves the page as it was).
+ * @param {{ entry?: string, load?: (params: any, result: any) => void, getParams?: () => unknown }} page
  */
 export function installApi(page) {
   const api = {
@@ -136,7 +173,7 @@ export function installApi(page) {
     /** @param {unknown} request */
     submit(request) {
       const response = submit(request);
-      if (page.entry && response.entry === page.entry) page.load?.(response.params);
+      if (page.entry && response.entry === page.entry) page.load?.(response.params, response.result);
       return response;
     },
     getRequest: () => (page.entry ? { entry: page.entry, params: page.getParams?.() } : null),

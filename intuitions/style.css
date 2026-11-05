@@ -526,3 +526,21 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .plot .seq-line { fill: none; stroke-width: 1.6; }
 .plot .seq-line.s1 { stroke: var(--seq-2); } .plot .seq-line.s2 { stroke: var(--seq-3); } .plot .seq-line.s3 { stroke: var(--seq-4); }
 .plot .seq-line.s4 { stroke: var(--seq-5); } .plot .seq-line.s5 { stroke: var(--seq-6); } .plot .seq-line.s6 { stroke: var(--seq-6); stroke-dasharray: 5 3; }
+
+/* ---------- Null p-values ---------- */
+
+.alpha-row { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; align-items: center; margin: 0.9rem 0 0; }
+.hist-pair { display: grid; gap: 0.4rem 1rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-bottom: 0.8rem; }
+@media (max-width: 359px) { .hist-pair { grid-template-columns: minmax(0, 1fr); } }
+.hist-pair > div { display: flex; flex-direction: column; min-width: 0; }
+.hist-pair .plot-box { margin-top: auto; }
+.hist-title { display: grid; gap: 0.05rem; margin: 0 0 0.2rem; font-size: 0.9rem; line-height: 1.3; overflow-wrap: break-word; }
+.hist-name { font-weight: 600; }
+.hist-name svg { vertical-align: -2px; }
+.hist-rate { color: var(--muted); font-variant-numeric: tabular-nums; }
+.empty-note { margin: 2rem 0; }
+.sim-status { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.88rem; }
+.sim-control .control-row { margin-top: 0.3rem; }
+.plot .alpha-line { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.plot .ink-line.thin-dash { stroke-width: 1.5; }
+.plot .cut-mark { stroke: var(--surface); stroke-width: 3; }

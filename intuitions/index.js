@@ -7,6 +7,8 @@ import { dagFigure } from './dag-adjustment/figure.js';
 import { coneScene, sceneCamera } from './correlation-geometry/figure.js';
 import { orientation } from './lib/geom3d.js';
 import { installApi, onWidth } from './lib/page.js';
+import { compute as nullPvalues } from './null-pvalues/compute.js';
+import { pairThumbnail } from './null-pvalues/figure.js';
 import { compute as thresholdModel } from './threshold-model/compute.js';
 import { liabilityFigure } from './threshold-model/figure.js';
 import { compute as zscoreOutliers } from './zscore-outliers/compute.js';
@@ -42,6 +44,10 @@ const thumbs = [
       const params = { graph: DAG_PRESETS.collider.graph, exposure: 'X', outcome: 'Y', adjust: ['C'], mediator: null };
       return dagFigure(params, dagAdjustment(params), { width, height: 150, id: 'thumb-dag' }).svg;
     },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-null-pvalues')),
+    draw: (/** @type {number} */ width) => pairThumbnail(/** @type {any} */ (nullPvalues({ scenario: 'batch', treatedShare: 0.8 })), { width, height: 150 }),
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });

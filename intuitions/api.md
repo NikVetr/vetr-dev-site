@@ -9,6 +9,7 @@ The entries are:
 - [`correlation-geometry`](#correlation-geometry): correlations as angles between arrows, in five views: data as arrows, the cone of fixed correlation, the cosine-rule range of a third correlation, how far apart *k* arrows can be, and one matrix entry's feasible interval (a feasible-correlation calculator).
 - [`typical-set`](#typical-set): where the probability mass is, in four views: the chi distribution as density × volume, the original script's cube criterion for six families against sampled radii, one-dimensional mixtures with their highest-density region at a water level, and one coordinate of a uniform point on the sphere.
 - [`dag-adjustment`](#dag-adjustment): adjustment sets in linear-Gaussian causal graphs: the regression coefficient each set gives against the causal effect, the adjustment criterion, every path, the front-door estimate, and what conditioning on many colliders does.
+- [`null-pvalues`](#null-pvalues): ways to break a p-value: under a true null, the p-values of a common shortcut beside a sound analysis, and the realised false-positive rate at α, in seven scenarios (a batch regressed out first, covariates removed one at a time, a t-test on bootstrap means, autocorrelated series, two-step filtering, paired data tested as independent, and pathway tests kept only where a pathway has a hit).
 
 ## Ways in
 
@@ -34,7 +35,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set or dag-adjustment, scrolled into view). An invalid request throws and leaves the page unchanged. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment or null-pvalues, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues page's own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -301,6 +302,114 @@ Y and U are independent with variance 1; each X*ᵢ* is caused by both, with Cor
 - **Samples** are drawn in causal order with normal noise by inversion from mulberry32, so a seed gives the same points everywhere.
 - **What the scripts do differently.** `happiness_numeracy.R` asks dagitty for the adjustment sets of nodes `"USD"` and `"JOY"`, which are not in its graph, and calls `is_Illnesser`, which does not exist (it looks like `ggdag::is_confounder` after a find-and-replace of "Confound" with "Illness"); both stop with errors, and the corrected call gives `{Illness}`. Its simulation is unseeded with 10,000 draws; seeded with a million, its regressions agree with the exact values within 4 standard errors. `age_causal.R` rounds its implied covariance to four decimals before conditioning (harmless at its coefficients), and its second graph leaves three coefficients for dagitty to draw at random without a seed. `collider_effects_on_R2.R`'s `diag2()` turns a whole-number 1/(1 − `rXX`) of 2 or more into an identity matrix of that size, so with one collider the Sherman–Morrison step fails ("non-conformable arguments"; its own grid never meets such a value), and its 1 − *BC*⁻¹*B*ᵀ loses digits at many colliders: at 1,024 its partial correlation was off by up to 4 × 10⁻⁵ in the cases checked and fell below −1 at `rYX` = 0.95, `share` = 0.999. Its animation interpolated linearly between grid values of `rYX`.
 
+## null-pvalues
+
+When the null hypothesis is true, a valid test's p-value is uniform on [0, 1], so it falls at or below α a share α of the time. Each scenario analyses null data two ways, a common shortcut and a sound analysis, and describes the p-values each gives. `params.scenario` picks the scenario; every scenario takes `alpha`, and its other fields are below. Closed forms where they exist (`"batch"`, `"enrichment"` and the sound analysis of `"stepwise"`); seeded Monte Carlo otherwise.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `scenario` | `"batch"`, `"stepwise"`, `"bootstrap"`, `"autocorrelation"`, `"two-step"`, `"pairing"` or `"enrichment"` | `"batch"` | Which scenario. |
+| `alpha` | number 0.0001–0.5 | `0.05` | The threshold for the false-positive rates. |
+| `replicates` | integer 100–100,000 | per scenario | Monte Carlo replicates (`"two-step"` has `features` instead). |
+| `seed` | integer 0–4,294,967,295 | `1` | Seed of the Monte Carlo (and of `"enrichment"`'s sample). |
+
+A request whose simulation would take more than about a billion random draws is rejected (`too_much_work`). Every result has `scenario`, `alpha`, `simulation` (`null` when exact, else `{replicates, seed}`, or `{features, seed}`) and two analyses, `shortcut` and `sound`, each with:
+
+| Field | Meaning |
+| --- | --- |
+| `name` | What the analysis does. |
+| `method` | `"exact"` or `"monte-carlo"`. |
+| `count`, `rejections` | How many p-values were simulated and how many are at or below α (`null` when exact). |
+| `rejectionRate` | P(p ≤ α), the realised false-positive rate (the power, in `"pairing"` with a mean change); `null` when there was nothing to test. |
+| `se` | Its Monte Carlo standard error (`null` when exact). |
+| `histogram` | `{edges, density}`: 20 bins of width 0.05, each (a, b] and the first [0, 0.05], as a density, so a uniform's is 1 in every bin. |
+| `curve` | `{threshold, rate}`: the share of p-values at or below each threshold. Exact: 121 thresholds from 10⁻⁴ to 1, evenly spaced in log. Monte Carlo: the empirical distribution function at each of the 20 smallest p-values, then at about 30 ranks a decade. |
+
+### scenario "batch"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `perBatch` | integer 4–100 | `10` | Samples per batch. |
+| `batches` | integer 2–8 | `2` | *k*, the number of batches. |
+| `treatedShare` | number 0–1 | `0.5` | Share treated in each odd-numbered batch, rounded to whole samples; even-numbered batches have the rest treated. |
+
+The shortcut fits lm(y ~ treatment + batch), subtracts the fitted batch effects from y, then tests the treatment in lm(y − batch effects ~ treatment); the sound analysis is the first model's test. Both give the same coefficient and residuals, and the shortcut's *t* is the model's times `tRatio` = √((*n* − 2)/(*n* − *k* − 1)) / √(1 − *R*²), so its distribution is exact. Result: `n`; `treated`, per batch; `r2`, *R*² of the treatment on the batches; `df`, `{model, shortcut}`; `tRatio`. A design that puts each batch wholly in one arm is rejected (`not_estimable`).
+
+### scenario "stepwise"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 20–500 | `100` | Observations. |
+| `steps` | integer 1–200, at most `n` − 3 | `50` | *k*, the noise covariates removed one at a time. |
+| `finalDf` | `"fitted"` or `"rescaled"` | `"fitted"` | The final test as lm() fits it, on *n* − 2 df, or with σ rescaled to *n* − 2 − *k* df. |
+| `replicates` | | `2000` | |
+
+The treatment and each covariate are genotypes (0, 1 or 2 copies at frequency ½) and y is N(0, 2²). Each step regresses y on the treatment and one new covariate and subtracts the covariate times its coefficient; the shortcut then tests the treatment in lm(y ~ treatment). The sound analysis (exact) is one model with the treatment and all *k* covariates, whose *t* has exactly *n* − 2 − *k* df. Result: `df`, `{final, joint}`.
+
+### scenario "bootstrap"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 5–200 | `50` | Observations in each of two N(0, 1) groups. |
+| `resamples` | integer 10–5,000 | `1000` | *B*, bootstrap resamples of each group. |
+| `replicates` | | `500` | |
+
+The shortcut is Welch's *t*-test (R's `t.test`) of one group's *B* bootstrap means against the other's. The sound analysis is p = 1 − \|1 − 2*P*\|, with *P* the share of all *B*² pairs of bootstrap means in which the first group's is the larger.
+
+### scenario "autocorrelation"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 20–1,000 | `200` | Length of each of two independent series. |
+| `phi` | number 0–0.99 | `0.7` | The AR(1) coefficient of each (stationary, variance 1). |
+| `naive` | `"pearson"` or `"fisher"` | `"pearson"` | The shortcut: `cor.test`'s *t* = *r* √((*n* − 2)/(1 − *r*²)) on *n* − 2 df, or Fisher's *z* = atanh(*r*) √(*n* − 3) against the normal. |
+| `fix` | `"effective-df"`, `"circular-shift"` or `"newey-west"` | `"effective-df"` | The sound analysis, one of the script's three (see Method). |
+| `replicates` | | `2000` | |
+
+Result: `varianceInflation`, (1 + φ²)/(1 − φ²), about how many times the variance of *r* exceeds the 1/*n* the shortcut assumes.
+
+### scenario "two-step"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 30–500 | `100` | Observations per group. |
+| `effect` | number 0–1 | `0.1` | The variant's effect in both groups, per SD of the genotype. |
+| `features` | integer 100–100,000 | `20000` | Variants simulated. |
+| `q` | number 0.001–0.5 | `0.05` | The first step's Benjamini–Hochberg cut. |
+
+In each group of each variant, the genotype is scaled to SD 1 and y = `effect` × genotype + N(0, 1), so there is no interaction. The shortcut keeps the variants whose BH-adjusted p-value in either group's own lm(y ~ x) is below `q`; the sound analysis keeps those whose main effect in lm(y ~ x + group) is. Both then test the interaction, the x:group coefficient of lm(y ~ x × group). Result: `selected`, `{shortcut, sound}`, the variants each keeps; `discoveries`, `{shortcut, sound}`, how many of their interaction tests survive BH at α (all false).
+
+### scenario "pairing"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `pairs` | integer 3–200 | `10` | People, each measured twice. |
+| `betweenSD` | number 0–10 | `2` | SD of the people's levels. |
+| `changeSD` | number 0–10 | `0.5` | SD of each person's change. |
+| `noiseSD` | number 0.01–10 | `1` | SD of the noise added to each measurement. |
+| `meanChange` | number −5 to 5 | `0` | The true mean change; 0 is the null. |
+| `replicates` | | `10000` | |
+
+The shortcut is Welch's two-sample `t.test(before, after)`; the sound analysis is the one-sample `t.test(after − before)`. Result: `correlation` of a person's two measurements; `bothReject`, the share of replicates in which both tests reject.
+
+### scenario "enrichment"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `genes` | integer 100–100,000 | `20000` | Genes. |
+| `de` | integer 1–5,000, fewer than `genes` | `50` | DE genes, chosen at random. |
+| `minSize`, `maxSize` | integers 1–1,000, `minSize` ≤ `maxSize` ≤ `genes` | `5`, `50` | Pathway sizes, equally likely. |
+| `pathways` | integer 10–20,000 | `2000` | Pathways in the sample. |
+
+Each pathway is tested by the one-sided hypergeometric (Fisher) test, P(X ≥ x) for its overlap x with the DE genes. The p-value's distribution over pathways is computed exactly: the sound analysis takes every pathway, the shortcut only those with at least one hit. Result: `nonEmptyShare`, the share of pathways with a hit; `sample`, one draw of the script's experiment (the DE genes, then `pathways` pathways of distinct genes): `{pathways, seed, nonEmpty, rejections, discoveries}`, the last two `{shortcut, sound}` counts of p ≤ α and of BH-adjusted p-values below α.
+
+### Method
+
+- **Student's *t*** (`lib/special.js`): the two-sided tail as the regularized incomplete beta function *I*(df/(df + *t*²); df/2, ½), for any positive df, and its inverse by bisection in log space on whichever argument keeps its digits. Against R 4.6 they agree with `pt` to 1e-12 and `qt` to 1e-11 (relative).
+- **The script's tests, on the same data.** On R's own series and samples the JavaScript reproduces `cor.test`, Fisher's *z*, the script's `cor_test_effdf` (the *t* test of *r* on *n* / (1 + 2 Σ ρₓ(*k*) ρᵧ(*k*)) observations, lags 1 to ⌊*n*^⅓⌋ of R's `acf`), `cor_test_tts` (the middle 80% of *x* against every circular shift of *y*, p = (1 + #\|*r*ₛ\| ≥ \|*r*₀\|)/*n*), `cor_test_hac` (`sandwich::NeweyWest` with lag ⌊4 (*n*/100)^(2/9)⌋, VAR(1) prewhitening by least squares, `adjust = TRUE`, and `lmtest::coeftest`'s *t* on *n* − 2 df), `t.test`, the `lm` p-values of the two-step script and `p.adjust(…, "BH")`, all to 1e-10 or better, and `dhyper`, `phyper` and `fisher.test`'s one-sided p-values to 1e-12. The hypergeometric probabilities come from their ratio recurrence from the mode, normalised.
+- **Simulations** draw from mulberry32 (`shared/rng.js`), normals by inversion; the same seed gives the same p-values in Node and every browser. Each scenario's rates agree with the original script's, rerun with seeds, within Monte Carlo error.
+- **What the scripts do differently.** `stepwise_regression_inflate_false_disc.R`'s corrected p-value is `(1 - pt(t, df = n-2-50)) * 2` with a signed *t*: it exceeds 1 whenever *t* < 0, half the time, so the script counts one side only and reports about 10% where the procedure rejects about 21%; and the correction changes only the reference df, keeping σ on *n* − 2 (rescaling σ, `finalDf: "rescaled"`, gives about 6.5%). `bootstrap_ttest_demo.R` estimates the bootstrap difference's share from 5,000 random pairings; this entry uses all *B*² pairs. `fisher-cor-pval_deflation.R` defines `cor.sim` twice, and the second definition, which it runs, offers only `cor.test`, so its remedies are never called; its `cor_test_effdf` is NaN when *n*ₑff < 2, where this entry floors *n*ₑff − 2 at 1 as the script already does for the df. `two-step_multiple-testing.R`'s second part selects with `fits` from the first part (columns A and B) instead of its own combined fits (columns x and f), so its interaction p-values are uniform for the wrong reason; its second part also halves the sample, which this entry does not. `test-1s-vs-2s.R` compares a one-sample test of the paired differences with a two-sample test at a true change of 0.25, which measures power; here the change defaults to 0. `hypergeometric_bias.R` draws each pathway's genes with replacement, so about 0.1% repeat; here a pathway has exactly its stated number of distinct genes. `basic_batch_correction_error.R` is right, and its seeded simulation (20,000 replicates) gives 5.77% ± 0.16% against the exact 5.70%.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -338,8 +447,10 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `not_standardizable` (standardized noise, but a node's coefficients explain all of its variance)
 - `not_symmetric` (a matrix entry that differs from its mirror)
 - `not_positive_semidefinite` (no arrows have these correlations; the message gives the smallest eigenvalue)
+- `not_estimable` (a batch design in which treatment and batch cannot be told apart)
+- `too_much_work` (a simulation of more than about a billion random draws)
 
-Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` or `params.adjust[0]`. An empty path means the request as a whole.
+Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]` or `params.replicates`. An empty path means the request as a whole.
 
 ## Worked examples
 
@@ -587,3 +698,36 @@ Given r_AB = 0.7 and r_BC = 0.6, r_AC can be anything from −0.15 to 0.99; 0.5 
 ```
 
 No. Numeracy's effect, all through income, is +4. Adjusting for income blocks that path and opens Numeracy → Income ← Illness → Satisfaction, where income is a collider, so the coefficient comes out −2. Adjusting for nothing, or for illness, gives 4.
+
+**How wrong is it to regress out a batch first when the treatment is unbalanced across batches?** `batch.json`:
+
+```json
+{"entry": "null-pvalues", "params": {"scenario": "batch", "treatedShare": 0.8}}
+```
+
+`node intuitions/cli.mjs batch.json` prints (abridged: each `histogram` has 21 edges and 20 densities and each `curve` 121 points, cut here to two):
+
+```json
+{
+  "entry": "null-pvalues",
+  "params": { "scenario": "batch", "alpha": 0.05, "perBatch": 10, "batches": 2, "treatedShare": 0.8 },
+  "result": {
+    "scenario": "batch", "alpha": 0.05, "simulation": null,
+    "n": 20, "treated": [8, 2], "r2": 0.36000000000000004, "df": { "model": 17, "shortcut": 18 }, "tRatio": 1.2862393885688164,
+    "shortcut": {
+      "name": "Batch regressed out first", "method": "exact", "count": null, "rejections": null,
+      "rejectionRate": 0.12077052485856765, "se": null,
+      "histogram": { "edges": [0, 0.05], "density": [2.415410497171353, 1.490498250112895] },
+      "curve": { "threshold": [0.0001, 0.00010797751623277097], "rate": [0.0012543786893703596, 0.0013315511380306384] }
+    },
+    "sound": {
+      "name": "Batch in the model", "method": "exact", "count": null, "rejections": null,
+      "rejectionRate": 0.05, "se": null,
+      "histogram": { "edges": [0, 0.05], "density": [1, 1] },
+      "curve": { "threshold": [0.0001, 0.00010797751623277097], "rate": [0.0001, 0.00010797751623277097] }
+    }
+  }
+}
+```
+
+With 8 of 10 treated in one batch and 2 of 10 in the other, the batch accounts for 36% of the treatment's variance. Regressing it out first inflates the treatment's *t* by 1.29, and a test at 0.05 rejects a true null 12.1% of the time; at 0.0001 it rejects 12.5 times too often.

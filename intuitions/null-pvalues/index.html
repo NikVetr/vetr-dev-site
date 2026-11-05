@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ways to break a p-value: under a true null a valid test's p-values are uniform. See what regressing out a batch first, residualising covariates one at a time, a t-test on bootstrap means, autocorrelated series, two-step filtering, ignoring pairing and dropping empty pathways do to them, with the realised false-positive rate at α.">
+  <title>Ways to break a p-value · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 25V9h4v16M12 25V15h4v10M18 25V18h4v7M24 25V20h3v5' fill='%23fff'/%3E%3Cpath d='M5 15.5H27' stroke='%23fff' stroke-width='1.4' stroke-dasharray='2.5 2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Null p-values</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Ways to break a p-value</h1>
+      <p class="lede">When there is nothing to find, a valid test's p-value is equally likely to land anywhere between 0 and 1. Its histogram is flat, and it falls below 0.05 one time in twenty: that is what makes a threshold of 0.05 a 5% false-positive rate. Each panel below makes data in which nothing is going on, analyses it two ways, a common shortcut and a sound alternative, and shows what the shortcut does to the flat histogram and to the share of p-values below the threshold.</p>
+      <div class="alpha-row">
+        <label for="alpha">Threshold for every panel, α</label>
+        <input id="alpha" type="number" min="0.0001" max="0.5" step="0.005">
+      </div>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#batch">Regressing out the batch first</a></li>
+          <li><a href="#stepwise">Covariates removed one at a time</a></li>
+          <li><a href="#bootstrap">A t-test on bootstrap means</a></li>
+          <li><a href="#autocorrelation">Correlating autocorrelated series</a></li>
+          <li><a href="#two-step">An interaction tested where one group found an effect</a></li>
+          <li><a href="#pairing">Paired data tested as independent</a></li>
+          <li><a href="#enrichment">Keeping only pathways with a hit</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="batch" aria-labelledby="batch-heading">
+      <h2 id="batch-heading"><span class="panel-number">1</span> Regressing out the batch first</h2>
+      <p class="panel-intro">Samples are processed in batches, and each batch shifts every measurement a little. A common fix is done in two steps: estimate the batch effects, subtract them from the outcome, then test the treatment on what is left. Fitted in one model, the test knows that <var>k</var> − 1 batch effects were estimated from the same data; in two steps it does not, so its residual variance is too small and its <var>t</var> too large. When the treatment is spread unevenly over the batches, the second step also forgets that the batch took part of the treatment's variance, and the error grows.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="batch-figure" data-shortcut="Batch regressed out first" data-sound="Batch in the model"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="batch-perBatch-number">Samples per batch</label>
+              <input id="batch-perBatch-number" type="number" min="4" max="100" step="1">
+            </div>
+            <input id="batch-perBatch-range" type="range" min="4" max="100" step="1" aria-label="Samples per batch, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="batch-batches-number">Batches, <var>k</var></label>
+              <input id="batch-batches-number" type="number" min="2" max="8" step="1">
+            </div>
+            <input id="batch-batches-range" type="range" min="2" max="8" step="1" aria-label="Batches, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="batch-treatedShare-number">Share treated in odd-numbered batches</label>
+              <input id="batch-treatedShare-number" type="number" min="0" max="1" step="0.05">
+            </div>
+            <input id="batch-treatedShare-range" type="range" min="0" max="1" step="0.05" aria-label="Share treated in odd-numbered batches, slider">
+            <p class="hint">Even-numbered batches have the rest treated. 0.5 balances the treatment across batches, as the original script does.</p>
+          </div>
+          <div id="batch-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="batch-readout" aria-live="polite"></p>
+          <dl class="stats" id="batch-stats"></dl>
+          <div class="controls-foot"><button type="button" id="batch-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="stepwise" aria-labelledby="stepwise-heading">
+      <h2 id="stepwise-heading"><span class="panel-number">2</span> Covariates removed one at a time</h2>
+      <p class="panel-intro">Instead of one model with every covariate, an analysis can remove the covariates one at a time: regress the outcome on the treatment and one covariate, subtract that covariate's part, and go on to the next. Here each covariate is pure noise. Every step removes a little of the outcome's residual variation, so the final standard error shrinks, and every step also moves the treatment's coefficient by a random amount the final model never hears about. Rescaling the residual variance for the <var>k</var> extra parameters undoes the first but not the second.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="stepwise-figure" data-shortcut="One at a time" data-sound="All covariates in one model"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="stepwise-n-number">Observations, <var>n</var></label>
+              <input id="stepwise-n-number" type="number" min="20" max="500" step="1">
+            </div>
+            <input id="stepwise-n-range" type="range" min="20" max="500" step="1" aria-label="Observations, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="stepwise-steps-number">Covariates removed, <var>k</var></label>
+              <input id="stepwise-steps-number" type="number" min="1" max="200" step="1">
+            </div>
+            <input id="stepwise-steps-range" type="range" min="1" max="200" step="1" aria-label="Covariates removed, slider">
+          </div>
+          <div class="control">
+            <span class="label" id="stepwise-finalDf-label">Final test</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="stepwise-finalDf-label">
+              <label><input type="radio" name="stepwise-finalDf" value="fitted" checked> As fitted, <var>n</var> − 2 df</label>
+              <label><input type="radio" name="stepwise-finalDf" value="rescaled"> σ rescaled to <var>n</var> − 2 − <var>k</var> df</label>
+            </div>
+          </div>
+          <div class="control sim-control" data-sim="stepwise"></div>
+          <div id="stepwise-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="stepwise-readout" aria-live="polite"></p>
+          <dl class="stats" id="stepwise-stats"></dl>
+          <div class="controls-foot"><button type="button" id="stepwise-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="bootstrap" aria-labelledby="bootstrap-heading">
+      <h2 id="bootstrap-heading"><span class="panel-number">3</span> A t-test on bootstrap means</h2>
+      <p class="panel-intro">The bootstrap resamples each group's data with replacement and recomputes its mean, <var>B</var> times. The spread of those <var>B</var> means estimates the standard error of the group's mean. A <var>t</var>-test on the bootstrap means treats them as <var>B</var> independent observations and divides that standard error by √<var>B</var> once more, so the more resamples, the smaller the p-value, whatever the data say. Comparing the two groups' bootstrap distributions directly, by the share of resampled differences above 0, gives a p-value close to uniform.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="bootstrap-figure" data-shortcut="t-test on the bootstrap means" data-sound="Bootstrap distribution of the difference"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="bootstrap-n-number">Observations per group</label>
+              <input id="bootstrap-n-number" type="number" min="5" max="200" step="1">
+            </div>
+            <input id="bootstrap-n-range" type="range" min="5" max="200" step="1" aria-label="Observations per group, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bootstrap-resamples-number">Bootstrap resamples, <var>B</var></label>
+              <input id="bootstrap-resamples-number" type="number" min="10" max="5000" step="1">
+            </div>
+            <input id="bootstrap-resamples-range" type="range" min="1" max="3.699" step="0.01" aria-label="Bootstrap resamples, slider (log scale)">
+          </div>
+          <div class="control sim-control" data-sim="bootstrap"></div>
+          <div id="bootstrap-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="bootstrap-readout" aria-live="polite"></p>
+          <dl class="stats" id="bootstrap-stats"></dl>
+          <div class="controls-foot"><button type="button" id="bootstrap-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card panel" id="autocorrelation" aria-labelledby="autocorrelation-heading">
+      <h2 id="autocorrelation-heading"><span class="panel-number">4</span> Correlating autocorrelated series</h2>
+      <p class="panel-intro">Two series measured over time, or along a genome, are each autocorrelated: neighbouring points are alike. The usual test of their correlation assumes <var>n</var> independent pairs. With autocorrelation each series holds fewer independent pieces of information, so the correlation of two unrelated series varies more than the test allows (for two AR(1) series with coefficient φ, (1 + φ²)/(1 − φ²) times as much) and the p-values pile up near 0. Fisher's <var>z</var> makes the same assumption. The original script tries three remedies: an effective number of observations, a test against circular shifts of one series, and a Newey–West standard error.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="autocorrelation-figure" data-shortcut="Test assuming independence" data-sound="Remedy"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="autocorrelation-n-number">Length of each series, <var>n</var></label>
+              <input id="autocorrelation-n-number" type="number" min="20" max="1000" step="1">
+            </div>
+            <input id="autocorrelation-n-range" type="range" min="20" max="1000" step="1" aria-label="Length of each series, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="autocorrelation-phi-number">Autocorrelation, φ</label>
+              <input id="autocorrelation-phi-number" type="number" min="0" max="0.99" step="0.01">
+            </div>
+            <input id="autocorrelation-phi-range" type="range" min="0" max="0.99" step="0.01" aria-label="Autocorrelation, slider">
+          </div>
+          <div class="control">
+            <span class="label" id="autocorrelation-naive-label">Test assuming independence</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="autocorrelation-naive-label">
+              <label><input type="radio" name="autocorrelation-naive" value="pearson" checked> Pearson's <var>t</var></label>
+              <label><input type="radio" name="autocorrelation-naive" value="fisher"> Fisher's <var>z</var></label>
+            </div>
+          </div>
+          <div class="control">
+            <span class="label" id="autocorrelation-fix-label">Remedy</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="autocorrelation-fix-label">
+              <label><input type="radio" name="autocorrelation-fix" value="effective-df" checked> Effective <var>n</var></label>
+              <label><input type="radio" name="autocorrelation-fix" value="circular-shift"> Circular shifts</label>
+              <label><input type="radio" name="autocorrelation-fix" value="newey-west"> Newey–West</label>
+            </div>
+          </div>
+          <div class="control sim-control" data-sim="autocorrelation"></div>
+          <div id="autocorrelation-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="autocorrelation-readout" aria-live="polite"></p>
+          <dl class="stats" id="autocorrelation-stats"></dl>
+          <div class="controls-foot"><button type="button" id="autocorrelation-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card panel" id="two-step" aria-labelledby="two-step-heading">
+      <h2 id="two-step-heading"><span class="panel-number">5</span> An interaction tested where one group found an effect</h2>
+      <p class="panel-intro">A two-step analysis tests each variant's effect on an outcome separately in two groups, keeps the variants that pass a false-discovery cut in either group, then tests the kept ones for a difference between the groups, an interaction. Here every variant has the same small effect in both groups, so there is no interaction to find. A variant passes the first step mostly when its estimate in one group came out high by chance, so the kept variants are those whose two estimates differ, and the interaction test duly finds the difference. Filtering on the pooled effect instead, which does not depend on that difference, leaves the interaction's p-values uniform.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="two-step-figure" data-shortcut="Kept by either group's own test" data-sound="Kept by the pooled effect"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="two-step-n-number">Observations per group</label>
+              <input id="two-step-n-number" type="number" min="30" max="500" step="1">
+            </div>
+            <input id="two-step-n-range" type="range" min="30" max="500" step="1" aria-label="Observations per group, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-step-effect-number">Effect in both groups (per SD)</label>
+              <input id="two-step-effect-number" type="number" min="0" max="1" step="0.01">
+            </div>
+            <input id="two-step-effect-range" type="range" min="0" max="1" step="0.01" aria-label="Effect in both groups, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-step-q-number">First step's false-discovery cut, <var>q</var></label>
+              <input id="two-step-q-number" type="number" min="0.001" max="0.5" step="0.005">
+            </div>
+            <input id="two-step-q-range" type="range" min="0.005" max="0.5" step="0.005" aria-label="First step's false-discovery cut, slider">
+          </div>
+          <div class="control sim-control" data-sim="two-step"></div>
+          <div id="two-step-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="two-step-readout" aria-live="polite"></p>
+          <dl class="stats" id="two-step-stats"></dl>
+          <div class="controls-foot"><button type="button" id="two-step-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="card panel" id="pairing" aria-labelledby="pairing-heading">
+      <h2 id="pairing-heading"><span class="panel-number">6</span> Paired data tested as independent</h2>
+      <p class="panel-intro">Measure the same people before and after. People differ from each other far more than they change, so each person's two values are strongly correlated. A two-sample <var>t</var>-test ignores the pairing and charges the comparison for the whole spread between people. Under a true null its p-values crowd towards 1 and it almost never rejects; with a real change it misses most of them. The paired test works on each person's change and is exact. Set a true mean change to compare their power: the original script's is 0.25.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="pairing-figure" data-shortcut="Two-sample (Welch) t-test" data-sound="Paired t-test"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="pairing-pairs-number">People, each measured twice</label>
+              <input id="pairing-pairs-number" type="number" min="3" max="200" step="1">
+            </div>
+            <input id="pairing-pairs-range" type="range" min="3" max="200" step="1" aria-label="People, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pairing-betweenSD-number">SD between people</label>
+              <input id="pairing-betweenSD-number" type="number" min="0" max="10" step="0.1">
+            </div>
+            <input id="pairing-betweenSD-range" type="range" min="0" max="10" step="0.1" aria-label="SD between people, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pairing-changeSD-number">SD of each person's change</label>
+              <input id="pairing-changeSD-number" type="number" min="0" max="10" step="0.1">
+            </div>
+            <input id="pairing-changeSD-range" type="range" min="0" max="10" step="0.1" aria-label="SD of each person's change, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pairing-noiseSD-number">Measurement noise, SD</label>
+              <input id="pairing-noiseSD-number" type="number" min="0.01" max="10" step="0.1">
+            </div>
+            <input id="pairing-noiseSD-range" type="range" min="0.01" max="10" step="0.01" aria-label="Measurement noise, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pairing-meanChange-number">True mean change</label>
+              <input id="pairing-meanChange-number" type="number" min="-5" max="5" step="0.05">
+            </div>
+            <input id="pairing-meanChange-range" type="range" min="-2" max="2" step="0.05" aria-label="True mean change, slider">
+            <p class="hint">0 is the null. Anything else makes rejections true positives, so the rates become power.</p>
+          </div>
+          <div class="control sim-control" data-sim="pairing"></div>
+          <div id="pairing-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="pairing-readout" aria-live="polite"></p>
+          <dl class="stats" id="pairing-stats"></dl>
+          <div class="controls-foot"><button type="button" id="pairing-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="card panel" id="enrichment" aria-labelledby="enrichment-heading">
+      <h2 id="enrichment-heading"><span class="panel-number">7</span> Keeping only pathways with a hit</h2>
+      <p class="panel-intro">Enrichment analysis asks whether a pathway holds more of the differentially expressed (DE) genes than chance would put there, by a one-sided hypergeometric (Fisher) test. When the DE genes are random, most pathways hold none, and their p-value is exactly 1. The test is discrete, and with so few hits expected it is very conservative. Dropping the empty pathways before correcting for multiple testing looks harmless, but it selects on the outcome: given at least one hit, a small pathway's p-value is already below 0.05.</p>
+      <div class="panel-body">
+        <figure class="pv-figure" id="enrichment-figure" data-shortcut="Pathways with at least one hit" data-sound="All pathways"></figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="enrichment-genes-number">Genes</label>
+              <input id="enrichment-genes-number" type="number" min="100" max="100000" step="100">
+            </div>
+            <input id="enrichment-genes-range" type="range" min="2" max="5" step="0.01" aria-label="Genes, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="enrichment-de-number">DE genes</label>
+              <input id="enrichment-de-number" type="number" min="1" max="5000" step="1">
+            </div>
+            <input id="enrichment-de-range" type="range" min="0" max="3.699" step="0.01" aria-label="DE genes, slider (log scale)">
+          </div>
+          <div class="control-grid">
+            <label for="enrichment-minSize">Smallest pathway</label>
+            <input id="enrichment-minSize" type="number" min="1" max="1000" step="1">
+            <label for="enrichment-maxSize">Largest pathway</label>
+            <input id="enrichment-maxSize" type="number" min="1" max="1000" step="1">
+          </div>
+          <p class="hint">Pathway sizes are equally likely between the two.</p>
+          <div class="control">
+            <div class="control-head">
+              <label for="enrichment-pathways">Pathways in the sample</label>
+              <input id="enrichment-pathways" type="number" min="10" max="20000" step="100">
+            </div>
+            <div class="control-row">
+              <label for="enrichment-seed">Seed</label>
+              <input id="enrichment-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="enrichment-new-seed">New seed</button>
+            </div>
+            <p class="hint">The histograms are exact. The sample is one draw of the original script's experiment, for the Benjamini–Hochberg counts.</p>
+          </div>
+          <div id="enrichment-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="enrichment-readout" aria-live="polite"></p>
+          <dl class="stats" id="enrichment-stats"></dl>
+          <div class="controls-foot"><button type="button" id="enrichment-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose" id="notes-prose">
+        <h3>Reading the figures</h3>
+        <p>Each histogram shows one analysis's p-values in 20 bins, as a density, so a valid test's bars stand at height 1 (the dashed line). The plot below them shows, for every threshold from 10⁻⁴ to 1, the share of p-values at or below it. A valid test lies on the diagonal; a curve above it rejects a true null more often than its threshold promises, and one below it is conservative and loses power. The vertical line is α, and the marks on it are the two analyses' false-positive rates.</p>
+        <h3>Exact and simulated</h3>
+        <p>Where the null distribution has a closed form it is used, and the figure is exact: the batch panel, the joint model of the second panel and the enrichment panel. Elsewhere the data are simulated with a seed, from shared/rng.js's mulberry32 with normals by inversion, so the same seed gives the same p-values in every browser and in Node; each rate there carries its Monte Carlo standard error, and the panel says how many replicates it ran. More replicates narrow the error. Simulations run in a background worker, so the page stays responsive. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <h3>Regressing out the batch</h3>
+        <p>Regressing the outcome on the treatment and the <var>k</var> − 1 batch indicators, then refitting the outcome minus the fitted batch effects on the treatment alone, gives the same coefficient and the same residuals. Only the standard error differs: the refit divides the residual sum of squares by <var>n</var> − 2 instead of <var>n</var> − <var>k</var> − 1, and uses the treatment's whole variance instead of the part the batches leave, 1 − <var>R</var>². So its <var>t</var> is the model's times √((<var>n</var> − 2)/(<var>n</var> − <var>k</var> − 1)) / √(1 − <var>R</var>²), and since the model's <var>t</var> has exactly a <var>t</var> distribution on <var>n</var> − <var>k</var> − 1 degrees of freedom, the shortcut's false-positive rate is exact.</p>
+        <h3>Filtering</h3>
+        <p>The two-step and enrichment panels break the same rule from opposite ends: a filter applied before testing keeps the test valid only if, under the null, it is independent of the test statistic (Bourgon, Gentleman and Huber, <a href="https://doi.org/10.1073/pnas.0914005107">PNAS 2010</a>). Significance in one group is not independent of the difference between groups, and having at least one hit is not independent of the hit count. The pooled effect is, nearly: with equal designs in the two groups the pooled slope and the difference of the slopes are independent, and they share only the residual variance.</p>
+        <h3>The R scripts</h3>
+        <p>The panels come from seven R scripts, rerun with seeds for this page. basic_batch_correction_error.R is right; at its design, 20 samples in two balanced batches, the shortcut's exact rate is 5.70%, and its simulation gives 5.77% ± 0.16%.</p>
+        <p>stepwise_regression_inflate_false_disc.R's "corrected" p-value is (1 − pt(<var>t</var>, <var>n</var> − 2 − 50)) × 2 with a signed <var>t</var>. For a negative <var>t</var> that exceeds 1, as it does in half the replicates, so the script counts rejections on one side only and reports about 10% where the procedure rejects about 21%. The correction also changes only the reference distribution's degrees of freedom and keeps σ estimated on <var>n</var> − 2, which hardly moves the p-value; rescaling σ, this page's second option, brings the rate to about 6.5%.</p>
+        <p>bootstrap_ttest_demo.R is right. It compares 5,000 random pairings of the two groups' bootstrap means where this page uses all <var>B</var>² of them, which estimates the same share with less noise.</p>
+        <p>fisher-cor-pval_deflation.R defines its simulation twice, and the second definition, the one it runs, offers only the naive test, so its three remedies are never called. Through the first definition they reject 4.8% (effective <var>n</var>), 4.8% (circular shifts) and 7.3% (Newey–West) at φ = 0.7, as here. Its effective-<var>n</var> test takes √(<var>n</var><sub>eff</sub> − 2), which is NaN when <var>n</var><sub>eff</sub> falls below 2; this page applies the floor of 1 the script already uses for the degrees of freedom. Despite the file's name it tests with cor.test's <var>t</var>; Fisher's <var>z</var> agrees with it to about three digits.</p>
+        <p>two-step_multiple-testing.R's first part is right. Its second part, meant to filter on the pooled main effect, selects with the first part's p-values (<code>fits</code>, whose columns are A and B, where the new fits' columns are x and f) and applies that selection to different simulations, so its interaction p-values come out uniform for the wrong reason. This page filters on the pooled effect of the same data.</p>
+        <p>test-1s-vs-2s.R compares a one-sample test of the paired differences with a two-sample test, with a true mean change of 0.25, so it measures power rather than behaviour under the null. Here the change is 0 unless you set it.</p>
+        <p>hypergeometric_bias.R draws each pathway's genes with replacement, so about 0.1% of the drawn genes repeat and a pathway of 50 can hold 49; here a pathway has exactly its stated number of genes. In three seeded runs of the script, 17–22% of the pathways with a hit fall below 0.05, against the exact 19.9%.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2021-12-12">2021-12-12</time>
+    </div>
+  </footer>
+</body>
+</html>

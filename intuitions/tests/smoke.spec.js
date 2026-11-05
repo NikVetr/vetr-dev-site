@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(5);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(5);
+  await expect(page.locator('.entry-card')).toHaveCount(6);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(6);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -241,9 +241,50 @@ test('adjustment: presets, sets, node clicks, the front door, invalid noise and 
   expect(errors).toEqual([]);
 });
 
+test('null p-values: exact and simulated panels, more replicates, a shared α, invalid fields and the API', async ({ page }) => {
+  const errors = await open(page, 'null-pvalues/');
+  // Every Monte Carlo panel finishes in its worker.
+  await expect(page.locator('.pv-figure[data-stale]')).toHaveCount(0, { timeout: 20_000 });
+  await expect(page.locator('#batch-readout')).toContainText('5.70%');
+  await expect(page.locator('#stepwise-status')).toContainText('2,000 replicates, seed 1');
+  await expect(page.locator('#bootstrap-shortcut svg rect').first()).toBeVisible();
+
+  await page.locator('#batch-treatedShare-number').fill('0.8');
+  await expect(page.locator('#batch-readout')).toContainText('The batches account for 36.0%');
+  await page.locator('#batch-treatedShare-number').fill('1');
+  await expect(page.locator('#batch-issues')).toContainText('cannot be told apart');
+  await expect(page.locator('#batch-treatedShare-number')).toHaveAttribute('aria-invalid', 'true');
+  await page.getByRole('button', { name: 'Reset' }).first().click();
+  await expect(page.locator('#batch-issues')).toBeHidden();
+
+  await page.locator('#stepwise').getByText('σ rescaled').click();
+  await expect(page.locator('#stepwise-stats')).toContainText('48', { timeout: 20_000 });
+  await page.locator('#pairing-more').click();
+  await expect(page.locator('#pairing-replicates')).toHaveValue('100000');
+  await expect(page.locator('#pairing-more')).toBeDisabled();
+  await expect(page.locator('#pairing-status')).toContainText('100,000 replicates', { timeout: 20_000 });
+  await page.locator('#bootstrap-replicates').fill('100000');
+  await expect(page.locator('#bootstrap-issues')).toContainText('the most a request may ask for is 1 billion');
+
+  await page.locator('#alpha').fill('0.01');
+  await expect(page.locator('#enrichment-readout')).toContainText('p ≤ 0.01');
+  await expect(page.locator('#autocorrelation-readout')).toContainText('α = 0.01', { timeout: 20_000 });
+
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const out = app.submit({ entry: 'null-pvalues', params: { scenario: 'pairing', meanChange: 0.25, replicates: 2000 } });
+    return { paired: out.result.sound.rejectionRate, request: app.getRequest().params };
+  });
+  expect(api.paired).toBeGreaterThan(0.04);
+  expect(api.request).toEqual({ scenario: 'pairing', alpha: 0.05, pairs: 10, betweenSD: 2, changeSD: 0.5, noiseSD: 1, meanChange: 0.25, replicates: 2000, seed: 1 });
+  await expect(page.locator('#pairing-readout')).toContainText('true mean change of 0.25');
+  await expect(page.locator('#alpha')).toHaveValue('0.05');
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

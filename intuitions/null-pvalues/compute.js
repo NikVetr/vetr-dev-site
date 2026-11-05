@@ -151,7 +151,7 @@ function checkScenario(p, issues) {
     work = p.pathways * p.maxSize;
   }
   if (work > MAX_WORK) {
-    issues.push({ code: 'too_much_work', path: p.scenario === 'two-step' ? 'params.features' : 'params.replicates', message: `asks for about ${work.toExponential(1)} draws; the most is ${MAX_WORK.toExponential(0)}: lower it or the sample sizes` });
+    issues.push({ code: 'too_much_work', path: p.scenario === 'two-step' ? 'params.features' : 'params.replicates', message: `asks for about ${Number((work / 1e9).toPrecision(2)).toLocaleString('en-US')} billion random draws, and the most a request may ask for is ${MAX_WORK / 1e9} billion: lower it or the sample sizes` });
   }
 }
 
@@ -159,7 +159,7 @@ function checkScenario(p, issues) {
 
 const EDGES = Array.from({ length: BINS + 1 }, (_, i) => i / BINS);
 /** Thresholds for an exact curve: 121 from 10⁻⁴ to 1, even in log. */
-const THRESHOLDS = Array.from({ length: 121 }, (_, i) => 10 ** (-4 + i / 30));
+const THRESHOLDS = Array.from({ length: 121 }, (_, i) => 10 ** (i / 30) / 1e4);
 
 /**
  * An analysis whose p-value has a known distribution function.
