@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write a text inside the shape of a picture: lines follow the picture's outline, each letter takes the colour beneath it, and the size is tuned until the text just fills the shape.">
+  <title>Text in Image</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Text in Image</h1>
+      <p class="tagline">Write a text inside the shape of a picture. Lines follow the picture's outline, each letter takes the colour beneath it, and the letter size is tuned until the text just fills the shape.</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <div class="column">
+      <section class="card" aria-labelledby="input-heading">
+        <h2 id="input-heading">Image and text</h2>
+        <div class="settings">
+          <label>Image (PNG with a transparent background works best)
+            <input id="image-file" type="file" accept="image/*">
+          </label>
+          <label>Longest image side, px (larger images are scaled down)
+            <input id="max-side" type="number" min="16" max="4000" step="1" value="800">
+          </label>
+        </div>
+        <p id="image-info" class="muted"></p>
+        <label class="text-label" for="text">Text</label>
+        <textarea id="text" rows="10" spellcheck="false"></textarea>
+        <div class="toolbar">
+          <button id="load-example" type="button">Load example</button>
+          <span id="char-count" class="muted"></span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <div class="settings">
+          <label class="check"><input id="quantize-on" type="checkbox" checked> Reduce to a few colours</label>
+          <label>Number of colours
+            <input id="k" type="number" min="1" max="256" step="1" value="15">
+          </label>
+          <label>Rotation, degrees counterclockwise
+            <input id="rotation" type="number" min="-360" max="360" step="1" value="0">
+          </label>
+          <label>Line height (line pitch / capital height)
+            <input id="line-height" type="number" min="0.5" max="10" step="0.01" value="1.21">
+          </label>
+          <label>Line widths (band: where the whole line height fits; row: the one pixel row at the line)
+            <select id="line-widths">
+              <option value="band">Band</option>
+              <option value="row">Row</option>
+            </select>
+          </label>
+          <label>Size rounds
+            <input id="n-rounds" type="number" min="1" max="50" step="1" value="5">
+          </label>
+          <label class="check"><input id="skip-gaps" type="checkbox" checked> Skip gaps in the shape</label>
+          <label class="check"><input id="justify" type="checkbox" checked> Justify lines</label>
+          <label class="check"><input id="ink" type="checkbox"> Ink compensation (brighter letters, so they average to the picture's colour on the background)</label>
+          <label>Background
+            <input id="background" type="color" value="#7f7f7f">
+          </label>
+          <label>Output pixels per image pixel
+            <input id="scale" type="number" min="0.5" max="50" step="0.5" value="5">
+          </label>
+          <label>Seed (colour reduction)
+            <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
+          </label>
+        </div>
+        <div class="toolbar">
+          <button id="render" type="button" class="primary">Render</button>
+          <span id="status" class="muted" role="status"></span>
+        </div>
+        <div id="issues" class="issues" role="alert" hidden></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="result-heading">
+      <h2 id="result-heading">Result</h2>
+      <p id="no-result" class="placeholder">The text fill appears here after rendering.</p>
+      <div id="result" hidden>
+        <img id="output" class="output" alt="The text written in the shape of the image">
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <button id="export-svg" type="button">SVG</button>
+          <button id="export-png" type="button">PNG</button>
+        </div>
+        <p id="fit-status"></p>
+        <dl id="stats" class="stats"></dl>
+        <h3>Palette</h3>
+        <ul id="palette" class="palette"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <a href="examples/SOURCE.md">Example sources</a>
+      <time datetime="2022-06-21">2022-06-21</time>
+    </div>
+  </footer>
+</body>
+</html>

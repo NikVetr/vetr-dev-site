@@ -136,7 +136,7 @@ export function normalizeRequest(request) {
   const text = checkText(request.text, issues);
   const seed = Object.hasOwn(request, 'seed') ? request.seed : DEFAULTS.seed;
   const seedIssue = integer(0, 4294967295)(seed);
-  if (seedIssue) issues.push({ ...seedIssue, path: 'seed' });
+  if (seedIssue) issues.push(at('seed', seedIssue));
 
   /** @type {Record<string, any>} */
   const settings = { seed };
@@ -170,7 +170,7 @@ export function normalizeRequest(request) {
         continue;
       }
       const issue = check(given[key]);
-      if (issue) issues.push({ ...issue, path });
+      if (issue) issues.push(at(path, issue));
     }
     settings[name] = { ...defaults, ...given };
   }
@@ -199,6 +199,11 @@ export function parseColor(text) {
  */
 export function unusable(path, message) {
   return new TextInImageError('unusable_input', `Cannot fit the text: ${path}: ${message}`, [{ code: 'unusable_input', path, message }]);
+}
+
+/** An issue at a path, fields in the documented order. @param {string} path @param {{ code: string, message: string }} issue @returns {Issue} */
+function at(path, { code, message }) {
+  return { code, path, message };
 }
 
 /** @param {Issue[]} issues */
@@ -234,7 +239,7 @@ function checkImage(image, issues) {
   const before = issues.length;
   for (const key of ['width', 'height']) {
     const issue = integer(1, 100000)(image[key]);
-    if (issue) issues.push({ ...issue, path: `image.${key}` });
+    if (issue) issues.push(at(`image.${key}`, issue));
   }
   const { data } = image;
   const typed = data instanceof Uint8Array || data instanceof Uint8ClampedArray;
