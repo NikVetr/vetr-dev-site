@@ -24,7 +24,7 @@ export const RANGES = Object.freeze({
 });
 
 /** @type {Readonly<Params>} */
-export const DEFAULTS = Object.freeze({ meanDifference: 1, sdRatio: 1, proportionA: 0.5, z: 2.5, sweep: 'meanDifference' });
+export const DEFAULTS = Object.freeze({ meanDifference: 2, sdRatio: 1, proportionA: 0.8, z: 2.5, sweep: 'meanDifference' });
 
 const FIELDS = /** @type {const} */ (['meanDifference', 'sdRatio', 'proportionA', 'z', 'sweep']);
 const SWEEPS = /** @type {const} */ (['meanDifference', 'sdRatio', 'proportionA', 'z']);

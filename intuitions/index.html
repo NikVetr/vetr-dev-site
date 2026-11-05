@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive figures that each isolate one statistical idea: move a few parameters and watch the figure respond.">
+  <title>Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M3 25C10 25 11 8 16 8s6 17 13 17' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('intuitions:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="index.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Statistical intuitions</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Statistical intuitions</h1>
+      <p class="lede">Small interactive figures, each isolating one statistical idea. Move a few parameters and watch the figure respond. Everything is computed exactly in your browser, by the same code a script can call through the <a href="api.md">API</a>.</p>
+    </div>
+
+    <div class="gallery">
+      <a class="card entry-card" href="zscore-outliers/">
+        <div class="thumb plot-box" id="thumb-zscore-outliers" aria-hidden="true"></div>
+        <h2>Pooled or stratified outlier removal</h2>
+        <p>A z-score cutoff on pooled groups removes the wrong share of values and takes them unevenly from the groups. See how much, for any gap in means, ratio of spreads, group share and cutoff.</p>
+        <div class="meta"><time datetime="2021-07-14">2021-07-14</time></div>
+      </a>
+      <a class="card entry-card" href="threshold-model/">
+        <div class="thumb plot-box" id="thumb-threshold-model" aria-hidden="true"></div>
+        <h2>The threshold model</h2>
+        <p>Discrete traits from a hidden normal liability. Drag thresholds, let two correlated traits fill a contingency table, and fit a table back to its polychoric correlation.</p>
+        <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+</body>
+</html>

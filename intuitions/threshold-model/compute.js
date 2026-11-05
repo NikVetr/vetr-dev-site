@@ -28,6 +28,7 @@ export const LIMITS = Object.freeze({
   minGap: 0.01,
 });
 
+/** @type {Readonly<{ means: readonly number[], thresholds: readonly (readonly number[])[], rho: number, sample: null }>} */
 export const DEFAULTS = Object.freeze({
   means: Object.freeze([0.75, 0.85]),
   thresholds: Object.freeze([Object.freeze([0, 1, 2]), Object.freeze([0, 0.8, 1.9])]),

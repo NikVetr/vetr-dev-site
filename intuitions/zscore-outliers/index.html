@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pool two groups that differ in mean or spread, then remove values beyond z standard deviations: see how many points the pooled rule removes from each group, compared with standardising each group separately.">
+  <title>Pooled or stratified outlier removal · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M3 25C9 25 9 9 13 9s4 16 9 16 4-10 7-10' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('intuitions:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Outlier removal</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Pooled or stratified outlier removal</h1>
+      <p class="lede">Pool two groups that differ in mean or spread, then drop every value more than <var>z</var> standard deviations from the pooled mean. The gap between the groups inflates the pooled SD, so the rule removes the wrong share of points overall and takes them unevenly from the two groups.</p>
+    </div>
+
+    <div class="bench">
+      <section class="card main" aria-labelledby="density-heading">
+        <div class="figure-head">
+          <h2 id="density-heading">What each rule removes</h2>
+          <label class="control-row">Vertical zoom
+            <select id="zoom">
+              <option value="1">×1</option>
+              <option value="5">×5</option>
+              <option value="25">×25</option>
+            </select>
+          </label>
+        </div>
+        <ul class="legend" id="density-legend"></ul>
+        <div id="density-plot" class="plot-box"></div>
+        <p class="caption">Each group's distribution, scaled by its share of the data, so equal areas are equal numbers of values in both tiers. Darker fill is removed. Dashed lines are each group's own cutoffs; solid lines are the pooled cutoffs. Zoom stretches both tiers alike to show the thin tails.</p>
+      </section>
+
+      <section class="card controls" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">Groups and cutoff</h2>
+        <div class="control">
+          <div class="control-head">
+            <label for="meanDifference-number">Mean difference, B − A</label>
+            <span class="value-field"><input id="meanDifference-number" type="number" min="0" max="6" step="0.05"><span class="unit">SD</span></span>
+          </div>
+          <input id="meanDifference-range" type="range" min="0" max="6" step="0.05" aria-label="Mean difference, B − A, slider">
+        </div>
+        <div class="control">
+          <div class="control-head">
+            <label for="sdRatio-number">SD of B ÷ SD of A</label>
+            <span class="value-field"><input id="sdRatio-number" type="number" min="0.2" max="5" step="0.01"><span class="unit">×</span></span>
+          </div>
+          <input id="sdRatio-range" type="range" min="-2.3219" max="2.3219" step="0.01" aria-label="SD ratio slider (log scale)">
+        </div>
+        <div class="control">
+          <div class="control-head">
+            <label for="proportionA-number">Share of the data in A</label>
+            <span class="value-field"><input id="proportionA-number" type="number" min="1" max="99" step="1"><span class="unit">%</span></span>
+          </div>
+          <input id="proportionA-range" type="range" min="1" max="99" step="1" aria-label="Share of the data in A, slider">
+        </div>
+        <div class="control">
+          <div class="control-head">
+            <label for="z-number">Cutoff <var>z</var></label>
+            <span class="value-field"><input id="z-number" type="number" min="0.5" max="6" step="0.05"><span class="unit">SD</span></span>
+          </div>
+          <input id="z-range" type="range" min="0.5" max="6" step="0.05" aria-label="Cutoff z, slider">
+        </div>
+        <div class="controls-foot">
+          <button id="reset" type="button">Reset</button>
+        </div>
+      </section>
+
+      <div class="stack rest">
+        <section class="card" aria-labelledby="table-heading">
+          <h2 id="table-heading">Share removed, by group</h2>
+          <p id="readout" class="readout" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table class="numbers">
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <p id="decomposition" class="caption"></p>
+        </section>
+
+        <section class="card" aria-labelledby="sweep-heading">
+          <div class="figure-head">
+            <h2 id="sweep-heading">Across a range of</h2>
+            <div class="control-row">
+              <label class="visually-hidden" for="sweep">Parameter to vary</label>
+              <select id="sweep">
+                <option value="meanDifference">mean differences</option>
+                <option value="sdRatio">SD ratios</option>
+                <option value="proportionA">group shares</option>
+                <option value="z">cutoffs</option>
+              </select>
+              <label class="control-row"><input id="log-scale" type="checkbox" checked> Log scale</label>
+            </div>
+          </div>
+          <ul class="legend" id="sweep-legend"></ul>
+          <div id="sweep-plot" class="plot-box scrub"></div>
+          <p class="caption">Share of each group removed by the pooled rule, with the other parameters held at their current values. The stratified rule removes the same share, 2Φ(−<var>z</var>), from every group. Drag across the chart to set the value; the vertical line marks it.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>Why pooling changes the cutoff</h3>
+        <p>The pooled variance is the average variance within the groups plus the spread between their means: with shares <var>w</var><sub>A</sub> and <var>w</var><sub>B</sub> it is <var>w</var><sub>A</sub>σ<sub>A</sub>² + <var>w</var><sub>B</sub>σ<sub>B</sub>² + <var>w</var><sub>A</sub><var>w</var><sub>B</sub>Δμ². A mean difference therefore widens the pooled cutoffs, and the values beyond them come mostly from whichever group sits further out or spreads wider.</p>
+        <p>With equal groups the pooled rule removes too little. A small group far from the majority is different: its whole upper tail can land beyond the pooled cutoff, so pooling removes several times the nominal share from it while barely touching the majority.</p>
+        <h3>What to do instead</h3>
+        <p>Standardise within each known group (sex, batch, tissue, site) before applying a z cutoff, so each value is judged against its own group. When the groups are unknown, a cutoff on pooled data mixes outlier detection with group detection.</p>
+        <h3>Method</h3>
+        <p>Both groups are normal. Units are group A's SD, with the pooled mean at 0. Every share is an exact normal tail probability, computed in closed form; nothing is simulated. The split into values removed by both rules, by pooling only and by stratifying only comes from the R scripts this page was ported from, written for omics quality control. Their first version dropped part of a wide group's tail and fixed the second group's share at one half; this page follows the corrected version. Scripts and agents can run the same computation through the <a href="../api.md">API</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2021-07-14">2021-07-14</time>
+    </div>
+  </footer>
+</body>
+</html>

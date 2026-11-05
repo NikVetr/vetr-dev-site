@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The threshold (liability) model: drag thresholds on a hidden normal liability and watch discrete category frequencies follow; with two traits, see a latent correlation become a contingency table, and fit a table back to its polychoric correlation.">
+  <title>The threshold model · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M3 25C10 25 11 8 16 8s6 17 13 17' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3Cpath d='M12 6v21M20 6v21' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('intuitions:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Threshold model</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>The threshold model</h1>
+      <p class="lede">Many discrete traits behave as if a hidden, normally distributed liability had been cut at thresholds: a disease is present above one cutoff, a survey answer moves up a step at each, a tooth cusp appears past another. Move the thresholds and the mean and the category frequencies follow. With two traits, a correlation between the hidden liabilities becomes a contingency table, and a table can be turned back into that correlation.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="View">
+      <button type="button" role="tab" id="tab-one" aria-controls="panel-one" aria-selected="true">One trait</button>
+      <button type="button" role="tab" id="tab-two" aria-controls="panel-two" aria-selected="false" tabindex="-1">Two traits</button>
+      <button type="button" role="tab" id="tab-fit" aria-controls="panel-fit" aria-selected="false" tabindex="-1">From a table</button>
+    </div>
+
+    <section id="panel-one" role="tabpanel" aria-labelledby="tab-one">
+      <div class="bench">
+        <section class="card main" aria-labelledby="one-heading">
+          <div class="figure-head"><h2 id="one-heading">A hidden liability, cut into categories</h2></div>
+          <div class="figure-row wide-narrow">
+            <div id="liability-plot" class="plot-box"></div>
+            <div id="bars-plot" class="plot-box"></div>
+          </div>
+          <p class="caption">The liability is normal with SD 1. Each category is the area between two thresholds, shown again as a bar. Drag a numbered handle to move its threshold.</p>
+        </section>
+        <section class="card controls" aria-labelledby="one-controls-heading">
+          <h2 id="one-controls-heading">Liability and thresholds</h2>
+          <div class="control">
+            <div class="control-head">
+              <label for="one-mean-number">Mean liability <var>μ</var></label>
+              <input id="one-mean-number" type="number" min="-3" max="3" step="0.05">
+            </div>
+            <input id="one-mean-range" type="range" min="-3" max="3" step="0.05" aria-label="Mean liability, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="one-k">Categories</label>
+              <select id="one-k"></select>
+            </div>
+            <div class="threshold-list" id="one-thresholds"></div>
+            <p class="field-error" id="one-error" hidden></p>
+          </div>
+          <div class="controls-foot"><button type="button" id="one-reset">Reset</button></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="panel-two" role="tabpanel" aria-labelledby="tab-two" hidden>
+      <div class="bench">
+        <section class="card main" aria-labelledby="two-heading">
+          <div class="figure-head"><h2 id="two-heading">Two correlated liabilities make a table</h2></div>
+          <div class="figure-row halves">
+            <div>
+              <div id="plane-plot" class="plot-box"></div>
+              <p class="caption">Liabilities of the two traits. Ellipses hold 50%, 90% and 99% of individuals; lines are the thresholds (drag the numbered handles); dots are the sampled individuals.</p>
+            </div>
+            <div>
+              <div id="table-plot" class="plot-box"></div>
+              <p class="caption">The cells as a table, laid out like the plane: probability of each pair of categories (and the sample's count), with each trait's frequencies in the margins.</p>
+            </div>
+          </div>
+          <dl class="stats" id="two-stats"></dl>
+          <p class="note" id="two-note" hidden></p>
+        </section>
+        <section class="card controls" aria-labelledby="two-controls-heading">
+          <h2 id="two-controls-heading">Liabilities</h2>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-rho-number">Latent correlation <var>ρ</var></label>
+              <input id="two-rho-number" type="number" min="-1" max="1" step="0.01">
+            </div>
+            <input id="two-rho-range" type="range" min="-1" max="1" step="0.01" aria-label="Latent correlation, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-mean0-number">Trait 1 mean <var>μ</var><sub>1</sub></label>
+              <input id="two-mean0-number" type="number" min="-3" max="3" step="0.05">
+            </div>
+            <input id="two-mean0-range" type="range" min="-3" max="3" step="0.05" aria-label="Trait 1 mean, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-mean1-number">Trait 2 mean <var>μ</var><sub>2</sub></label>
+              <input id="two-mean1-number" type="number" min="-3" max="3" step="0.05">
+            </div>
+            <input id="two-mean1-range" type="range" min="-3" max="3" step="0.05" aria-label="Trait 2 mean, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-k0">Trait 1 categories</label>
+              <select id="two-k0"></select>
+            </div>
+            <div class="threshold-list" id="two-thresholds0"></div>
+            <p class="field-error" id="two-error0" hidden></p>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-k1">Trait 2 categories</label>
+              <select id="two-k1"></select>
+            </div>
+            <div class="threshold-list" id="two-thresholds1"></div>
+            <p class="field-error" id="two-error1" hidden></p>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="two-n">Sample of individuals</label>
+              <input id="two-n" type="number" min="0" max="5000" step="50">
+            </div>
+            <p class="hint">0 for none. The same seed draws the same people, so moving a control moves each dot.</p>
+            <div class="control-row">
+              <label for="two-seed">Seed</label>
+              <input id="two-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="two-new-seed">New seed</button>
+            </div>
+          </div>
+          <div class="controls-foot">
+            <button type="button" id="two-to-fit">Fit the sample's table</button>
+            <button type="button" id="two-reset">Reset</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="panel-fit" role="tabpanel" aria-labelledby="tab-fit" hidden>
+      <div class="bench">
+        <section class="card controls" aria-labelledby="fit-controls-heading">
+          <h2 id="fit-controls-heading">Counts</h2>
+          <p class="hint">Rows are trait 1's categories, columns trait 2's, both in order.</p>
+          <div class="control-row">
+            <label for="fit-rows">Rows</label><select id="fit-rows"></select>
+            <label for="fit-cols">Columns</label><select id="fit-cols"></select>
+          </div>
+          <div class="table-wrap"><table class="count-grid" id="count-grid"></table></div>
+          <div class="controls-foot">
+            <button type="button" id="fit-example-2">2 × 2 example</button>
+            <button type="button" id="fit-example-3">3 × 4 example</button>
+          </div>
+        </section>
+        <section class="card main" aria-labelledby="fit-heading">
+          <div class="figure-head"><h2 id="fit-heading">The latent model behind the table</h2></div>
+          <div id="fit-issues" class="issues" role="alert" hidden></div>
+          <div id="fit-result">
+            <dl class="stats" id="fit-stats"></dl>
+            <p class="caption" id="fit-thresholds"></p>
+            <p class="note" id="fit-note" hidden></p>
+            <div class="figure-row halves">
+              <div>
+                <div id="fit-plane" class="plot-box"></div>
+                <p class="caption">The fitted latent model: liabilities standardised to mean 0, thresholds placed so each margin matches, and the correlation that best reproduces the cells.</p>
+              </div>
+              <div>
+                <h3>Observed and fitted counts</h3>
+                <div class="table-wrap"><table class="numbers" id="fit-table"></table></div>
+                <p class="caption">Fitted counts in parentheses. A 2 × 2 table is reproduced exactly; larger tables test whether one bivariate normal can explain every cell.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>Categories from a liability</h3>
+        <p>The liability has SD 1, because only its position relative to the thresholds can be observed: doubling every distance changes nothing you could count. A category's frequency is the normal probability between its two thresholds, so equal steps in the mean make unequal steps in frequency once the bulk of the curve has crossed a threshold.</p>
+        <h3>Correlation shows up attenuated</h3>
+        <p>With two traits, each cell of the table is the bivariate normal probability of a rectangle, computed exactly. Scoring the categories 0, 1, 2, … and correlating the scores gives a smaller number than the latent <var>ρ</var>, more so with few or lopsided categories. The polychoric correlation (tetrachoric for 2 × 2) undoes this by fitting <var>ρ</var> to the table.</p>
+        <h3>Fitting a table</h3>
+        <p>Thresholds come from the cumulative margins (the normal quantile of each running share), then <var>ρ</var> maximises the multinomial likelihood of the cells with the thresholds held fixed. This is the two-step estimate that R's polycor package gives by default; its standard error treats the thresholds as known.</p>
+        <h3>The cos-π shortcut</h3>
+        <p>The original R scripts estimated tetrachoric correlations with cos(π / (1 + √(<var>AD</var>/<var>BC</var>))), where <var>A</var>, <var>D</var> are the concordant and <var>B</var>, <var>C</var> the discordant counts. That formula is exact only when both traits are split at their medians; with lopsided margins it is off, which is why the values here are computed from the bivariate normal instead. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+</body>
+</html>

@@ -168,3 +168,33 @@ export function svgRoot({ width, height, label, description, className }, ...chi
 export function textWidth(content, size = 12) {
   return content.length * size * 0.56;
 }
+
+/** @typedef {'circle' | 'triangle' | 'square' | 'diamond'} Shape */
+
+/**
+ * A point marker. Shapes carry identity alongside colour (circle for A, triangle for
+ * B, and so on), so no series is told apart by colour alone.
+ * @param {Shape} shape
+ * @param {number} x
+ * @param {number} y
+ * @param {number} size radius-like size in px
+ * @param {string} className
+ */
+export function marker(shape, x, y, size, className) {
+  const s = size;
+  if (shape === 'circle') return el('circle', { cx: x, cy: y, r: s, class: className });
+  if (shape === 'square') return el('rect', { x: x - s * 0.88, y: y - s * 0.88, width: s * 1.76, height: s * 1.76, class: className });
+  if (shape === 'diamond') return el('path', { d: `M${r2(x)} ${r2(y - s * 1.2)}L${r2(x + s * 1.2)} ${r2(y)}L${r2(x)} ${r2(y + s * 1.2)}L${r2(x - s * 1.2)} ${r2(y)}Z`, class: className });
+  return el('path', { d: `M${r2(x)} ${r2(y - s * 1.25)}L${r2(x + s * 1.15)} ${r2(y + s * 0.8)}L${r2(x - s * 1.15)} ${r2(y + s * 0.8)}Z`, class: className });
+}
+
+/**
+ * A small legend swatch: a line sample (optional) with a marker on it.
+ * @param {{ line?: string, shape?: Shape, mark?: string, fill?: string }} options classes
+ */
+export function swatch({ line, shape, mark, fill }) {
+  return el('svg', { width: 26, height: 14, viewBox: '0 0 26 14', class: 'plot', 'aria-hidden': 'true' },
+    fill ? el('rect', { x: 1, y: 2, width: 24, height: 10, rx: 2, class: fill }) : '',
+    line ? el('line', { x1: 1, x2: 25, y1: 7, y2: 7, class: line }) : '',
+    shape && mark ? marker(shape, 13, 7, 4, mark) : '');
+}

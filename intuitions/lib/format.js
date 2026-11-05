@@ -48,3 +48,26 @@ export function formatRatio(value) {
   if (value === 0) return '×0';
   return `×${value >= 0.01 ? trimPrecision(value, 3) : value.toExponential(1)}`;
 }
+
+/**
+ * A tick label for a share on a log axis: "10%", "1%", "0.1%", "0.01%", then
+ * "10⁻³%" and below.
+ * @param {number} share
+ */
+export function formatTickShare(share) {
+  const percent = share * 100;
+  const exponent = Math.round(Math.log10(percent));
+  if (exponent >= -2) return `${Number(percent.toPrecision(2))}%`;
+  return `10${String(exponent).split('').map((ch) => SUPERSCRIPT[/** @type {keyof typeof SUPERSCRIPT} */ (ch)]).join('')}%`;
+}
+
+/**
+ * A short percentage for tight spaces: one decimal ("12.3%", "0.3%"), "<0.1%" for
+ * smaller non-zero shares.
+ * @param {number} share
+ */
+export function formatPercentShort(share) {
+  if (share === 0) return '0%';
+  const percent = share * 100;
+  return percent < 0.05 ? '<0.1%' : `${percent.toFixed(1)}%`;
+}

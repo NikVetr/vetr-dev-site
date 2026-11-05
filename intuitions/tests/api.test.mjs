@@ -22,7 +22,7 @@ const paths = (/** @type {IntuitionsError} */ error) => error.issues.map((i) => 
 
 test('submit returns the entry, the resolved params and the result', () => {
   const out = submit({ entry: 'zscore-outliers', params: { z: 3 } });
-  assert.deepEqual(out.params, { meanDifference: 1, sdRatio: 1, proportionA: 0.5, z: 3, sweep: 'meanDifference' });
+  assert.deepEqual(out.params, { meanDifference: 2, sdRatio: 1, proportionA: 0.8, z: 3, sweep: 'meanDifference' });
   assert.equal(out.entry, 'zscore-outliers');
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
