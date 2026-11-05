@@ -4,7 +4,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## Shared look
 
-`shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector, seating) have in common, so their copies cannot drift apart:
+`shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector, seating, hypercube) have in common, so their copies cannot drift apart:
 
 - **`shared/base.css`**, linked before each tool's own `style.css`: the colour tokens for both themes, the page frame, the layout (markup in reading order, input then results then settings, so a phone shows the result second; from 1000 px the results take the right column), cards, buttons and the `.file-button` file picker, inputs and the `[aria-invalid]` field style, the `.issues` problem list, the `.stale-banner` and `.stale-dim` for a result that no longer matches its inputs (each tool keeps its last valid result on view, dimmed, and says why), and the dialog with its sticky `.dialog-head`. A tool's `style.css` keeps only what is particular to it.
 - **`shared/theme.js`**, a plain script in each page's `<head>`: one light or dark choice for the whole site, stored in this browser as `vetr:theme`, or else the system setting. It drives each tool's `#theme-toggle` and fires a `themechange` event for pages that draw in theme colours. The landing page loads it too, so it follows the same choice.
@@ -29,6 +29,8 @@ Tools that scripts and agents can use follow one shape. `forecast-calibration/` 
 - **`/llms.txt`** lists every tool that has an API and links its `api.md`. Add an entry there when a new tool gains one.
 
 `intuitions/` is a gallery that puts several small entries behind one entry point: the request names the entry, `submit({entry, params}) → {entry, params, result}`, each entry's DOM-free core is `intuitions/<entry>/compute.js`, and the shared library (normal and bivariate-normal functions, seeded RNG, SVG plotting) is `intuitions/lib/`.
+
+`hypercube/` replays trajectories solved in R rather than computing them: its plans are data files, `hypercube/plans/k<k>.json`, written by `scripts/export_web_plan.R` in [NikVetr/shape_rotation](https://github.com/NikVetr/shape_rotation), and its core's `submit(request, plan)` takes the decoded plan as a second argument (the page and the CLI load it). It draws its 3-D view with `intuitions/lib/geom3d.js`.
 
 `sankey/` predates this shape. Its `window.SankeyApp.submit` needs the page's DOM, so its command line, `sankey/scripts/render.cjs`, drives headless Chromium through Playwright, and its errors carry only a message. `sankey/api.md` describes it.
 
