@@ -19,6 +19,14 @@ test('lays out the example on load and exposes the API and the exports', async (
   await expect(page.locator('#status')).toContainText('Done in');
   await expect(page.locator('#stale')).toBeHidden();
 
+  // an uploaded file replaces the example, and a second one adds to it
+  const file = (/** @type {string} */ text) => ({ name: 'notes.txt', mimeType: 'text/plain', buffer: Buffer.from(text) });
+  await page.locator('#upload').setInputFiles(file('Thanks for everything.\n\nGood luck!\n'));
+  await expect(page.locator('#message-count')).toHaveText('2 messages');
+  await page.locator('#upload').setInputFiles(file('We will miss you.'));
+  await expect(page.locator('#message-count')).toHaveText('3 messages');
+  await expect(page.locator('#stale')).toContainText('Out of date');
+
   const api = await page.evaluate(async () => {
     const app = /** @type {any} */ (window).MessageCollage;
     const result = await app.submit({ messages: ['Thank you for everything.', 'Good luck out there!', 'We will miss you.'], fill: 0.5, seed: 4, runs: 3 });

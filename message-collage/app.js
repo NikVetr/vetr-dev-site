@@ -410,9 +410,12 @@ function markFields(issues) {
 
 // ---------- messages: paste, upload, example ----------
 
+/** The example as loaded, so pasted or uploaded messages replace it rather than join it. */
+let exampleText = '';
+
 /** @param {string} text */
 function addMessages(text) {
-  const now = el.messages.value.replace(/\s+$/, '');
+  const now = el.messages.value === exampleText ? '' : el.messages.value.replace(/\s+$/, '');
   el.messages.value = now ? `${now}\n${text}` : text;
   countMessages();
 }
@@ -435,6 +438,7 @@ el.upload.addEventListener('change', async () => {
 async function loadExample() {
   const response = await fetch('examples/request.json');
   loadRequest(await response.json());
+  exampleText = el.messages.value;
 }
 byId('load-example').addEventListener('click', loadExample);
 byId('clear').addEventListener('click', () => {
@@ -451,7 +455,7 @@ function showPngNote() {
     el.pngNote.textContent = '';
     return;
   }
-  el.pngNote.textContent = `PNG: ${Math.round(width)} × ${Math.round((width * card.height_in) / card.width_in)} pixels, ${Math.round(width / card.width_in)} per inch.`;
+  el.pngNote.textContent = `The PNG is ${Math.round(width)} × ${Math.round((width * card.height_in) / card.width_in)} pixels, ${Math.round(width / card.width_in)} per inch.`;
 }
 el.pngWidth.addEventListener('input', showPngNote);
 

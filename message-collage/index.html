@@ -28,7 +28,7 @@
         <h2 id="messages-heading">Messages</h2>
         <span id="message-count" class="muted"></span>
       </div>
-      <p class="muted">One message per line. Blank lines are skipped.</p>
+      <p class="muted">One message per line; blank lines are skipped. Paste and Upload add to the messages here, or replace the example.</p>
       <div class="toolbar">
         <button id="paste" type="button">Paste</button>
         <label class="file-button">Upload text file… <input id="upload" type="file" accept=".txt,.text,.csv,text/plain"></label>
@@ -69,14 +69,10 @@
               px
             </label>
           </span>
-        </div>
-        <p id="png-note" class="muted small"></p>
-        <p class="muted small">SVG, PDF and PNG draw the text as outlines, exactly as laid out. <em>SVG with selectable text</em> embeds the fonts instead, so its text can be searched and copied, and the file is larger.</p>
-        <div class="toolbar">
-          <span class="muted">Data:</span>
           <button id="export-result" type="button">Result JSON</button>
           <button id="export-request" type="button">Request JSON</button>
         </div>
+        <p class="muted small"><span id="png-note"></span> SVG, PDF and PNG draw the text as outlines, exactly as laid out; <em>SVG with selectable text</em> embeds the fonts, so its text can be searched and copied, in a larger file.</p>
       </div>
     </section>
 
