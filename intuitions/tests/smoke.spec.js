@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(6);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(6);
+  await expect(page.locator('.entry-card')).toHaveCount(7);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(7);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -282,9 +282,46 @@ test('null p-values: exact and simulated panels, more replicates, a shared α, i
   expect(errors).toEqual([]);
 });
 
+test('Marchenko–Pastur: noise against the law, spikes past the threshold, the batch on PC 1, and the API', async ({ page }) => {
+  const errors = await open(page, 'marchenko-pastur/');
+  await expect(page.locator('[id$="-figures"][data-stale]')).toHaveCount(0, { timeout: 20_000 });
+  await expect(page.locator('#noise-readout')).toContainText('from 0.466 to 1.735');
+  await expect(page.locator('#noise-spectrum rect.hist-bar').first()).toBeVisible();
+  await page.locator('#noise-n-number').fill('100');
+  await page.locator('#noise-p-number').fill('150');
+  await expect(page.locator('#noise-stats')).toContainText('Eigenvalues exactly 0', { timeout: 20_000 });
+  await page.locator('#noise-replicates').fill('5000');
+  await page.locator('#noise-p-number').fill('500');
+  await expect(page.locator('#noise-issues')).toContainText('lower it or n and p');
+  await page.locator('#noise-p-number').fill('600');
+  await expect(page.locator('#noise-p-number')).toHaveAttribute('aria-invalid', 'true');
+
+  await page.locator('#spikes-s0-number').fill('0.3');
+  await expect(page.locator('#spikes-readout')).toContainText('θ = 0.3 stays in the bulk', { timeout: 20_000 });
+  await page.locator('#spikes-s2-number').fill('0');
+  await expect(page.locator('#spikes-stats')).not.toContainText('θ = 0.5', { timeout: 20_000 });
+
+  await expect(page.locator('#pcs-before svg path.b-dot')).toHaveCount(100);
+  await page.locator('#pcs-batchVariance-number').fill('0');
+  await expect(page.locator('#pcs-readout')).toContainText('The batch is 0% of each feature', { timeout: 20_000 });
+  await page.locator('#pcs-interactions').uncheck();
+  await expect(page.locator('#pcs-status')).toContainText('seed 1', { timeout: 20_000 });
+
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const out = app.submit({ entry: 'marchenko-pastur', params: { view: 'spikes', spikes: [0.2, 6, 2, 1, 0.1], replicates: 5 } });
+    return { spikes: out.result.spikes.map((/** @type {any} */ s) => s.strength), request: app.getRequest().params };
+  });
+  expect(api.spikes).toEqual([6, 2, 1, 0.2, 0.1]);
+  expect(api.request).toEqual({ view: 'spikes', n: 200, p: 100, spikes: [6, 2, 1], replicates: 5, seed: 1 });
+  await expect(page.locator('#spikes-s0-number')).toHaveValue('6');
+  await expect(page.locator('#spikes-readout')).toContainText('θ = 6', { timeout: 20_000 });
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

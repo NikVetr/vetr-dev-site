@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How many principal components are noise? The eigenvalues of a sample covariance of pure noise spread over the Marchenko–Pastur law, between σ²(1 − √γ)² and σ²(1 + √γ)². See the law, when a spiked signal leaves the bulk (the BBP threshold), and what the first two principal components show when a batch effect is the signal.">
+  <title>How many components are noise? · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M5 25C7 10 11 9 14 14s5 11 8 11' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3Cpath d='M26 25v-9' stroke='%23fff' stroke-width='2.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Marchenko–Pastur</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>How many principal components are noise?</h1>
+      <p class="lede">Principal components analysis ranks directions by the variance they carry, and the first few components are often read as the structure in the data. But pure noise, with every direction carrying the same variance σ², still gives sample eigenvalues that spread over a range. For <var>n</var> observations of <var>p</var> variables they follow the Marchenko–Pastur law, between σ²(1 − √γ)² and σ²(1 + √γ)², with γ = <var>p</var>/(<var>n</var> − 1). An eigenvalue inside that range is no evidence of anything. The panels show the law, when a real signal escapes it, and what the first two components show when the signal is a batch effect.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#noise">The eigenvalues of pure noise</a></li>
+          <li><a href="#spikes">When a signal leaves the bulk</a></li>
+          <li><a href="#pcs">What the first two components show</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="noise" aria-labelledby="noise-heading">
+      <h2 id="noise-heading"><span class="panel-number">1</span> The eigenvalues of pure noise</h2>
+      <p class="panel-intro">Draw <var>n</var> observations of <var>p</var> independent variables, each with variance σ², and take the eigenvalues of their sample covariance. Every population eigenvalue is σ², but the sample ones spread out: the largest comes out too large and the smallest too small, the more so as <var>p</var> approaches <var>n</var>. As <var>n</var> and <var>p</var> grow together, their histogram settles on the Marchenko–Pastur density. Taken by rank, each eigenvalue has its own place in that spread, and the largest wanders either side of the upper edge.</p>
+      <div class="panel-body">
+        <figure id="noise-figures">
+          <div id="noise-spectrum" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Grey: the eigenvalues of every simulated sample, as a density. Ink: the Marchenko–Pastur density for γ = <var>p</var>/(<var>n</var> − 1), with its edges dashed. σ² is the true variance of every direction.</figcaption>
+          <div class="figure-head"><h3>One eigenvalue at a time</h3></div>
+          <div id="noise-index" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Each eigenvalue across the samples, largest first: the median (dot) and 5–95% range (bar). The dashed line is where the law puts it, its quantile at 1 − (<var>k</var> − ½)/<var>p</var>. Up to 60 are shown.</figcaption>
+          <p class="sim-status" id="noise-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="noise-n-number">Observations, <var>n</var></label>
+              <input id="noise-n-number" type="number" min="3" max="1000" step="1">
+            </div>
+            <input id="noise-n-range" type="range" min="0.477" max="3" step="0.01" aria-label="Observations, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="noise-p-number">Variables, <var>p</var></label>
+              <input id="noise-p-number" type="number" min="1" max="500" step="1">
+            </div>
+            <input id="noise-p-range" type="range" min="0" max="2.699" step="0.01" aria-label="Variables, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="noise-variance-number">Variance of each, σ²</label>
+              <input id="noise-variance-number" type="number" min="0.01" max="100" step="0.1">
+            </div>
+            <input id="noise-variance-range" type="range" min="0.1" max="10" step="0.1" aria-label="Variance, slider">
+          </div>
+          <div class="control sim-control" data-sim="noise"></div>
+          <div id="noise-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="noise-readout" aria-live="polite"></p>
+          <dl class="stats" id="noise-stats"></dl>
+          <div class="controls-foot"><button type="button" id="noise-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="spikes" aria-labelledby="spikes-heading">
+      <h2 id="spikes-heading"><span class="panel-number">2</span> When a signal leaves the bulk</h2>
+      <p class="panel-intro">Now give the population a few directions with extra variance, spikes: population eigenvalues 1 + θ against the noise's 1. A spike shows as a sample eigenvalue beyond the upper edge only when θ exceeds √γ, the Baik–Ben Arous–Péché threshold, and then it comes out too large, near (1 + θ)(1 + γ/θ). Below the threshold the spike is lost in the bulk, and the sample eigenvector that should point along it points nowhere in particular. Above it, the squared cosine between the two is (1 − γ/θ²)/(1 + γ/θ), short of 1 however clear the spike.</p>
+      <div class="panel-body">
+        <figure id="spikes-figures">
+          <ul class="legend" id="spikes-legend"></ul>
+          <div id="spikes-spectrum" class="plot-box stale-dim"></div>
+          <figcaption class="caption">One simulated sample's eigenvalues against the noise's law; the triangles are the sample eigenvalues the spikes give (filled when the spike is past the threshold, hollow when it is not).</figcaption>
+          <div class="figure-head"><h3>Where a spike's eigenvalue ends up</h3></div>
+          <div id="spikes-eigenvalue" class="plot-box stale-dim"></div>
+          <div class="figure-head"><h3>How well its eigenvector points along the truth</h3></div>
+          <div id="spikes-overlap" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Ink: the limits as <var>n</var> and <var>p</var> grow with <var>p</var>/<var>n</var> fixed. Triangles: the simulated spikes, the median and 5–95% range of their eigenvalue, and the mean squared cosine of their eigenvector with the true direction. Dashed: the threshold √γ and, above, the upper edge and the population eigenvalue 1 + θ.</figcaption>
+          <p class="sim-status" id="spikes-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="spikes-n-number">Observations, <var>n</var></label>
+              <input id="spikes-n-number" type="number" min="3" max="1000" step="1">
+            </div>
+            <input id="spikes-n-range" type="range" min="0.477" max="3" step="0.01" aria-label="Observations, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="spikes-p-number">Variables, <var>p</var></label>
+              <input id="spikes-p-number" type="number" min="2" max="500" step="1">
+            </div>
+            <input id="spikes-p-range" type="range" min="0.301" max="2.699" step="0.01" aria-label="Variables, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="spikes-s0-number">Spike 1, θ</label>
+              <input id="spikes-s0-number" type="number" min="0" max="100" step="0.05">
+            </div>
+            <input id="spikes-s0-range" type="range" min="0" max="10" step="0.05" aria-label="Spike 1, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="spikes-s1-number">Spike 2, θ</label>
+              <input id="spikes-s1-number" type="number" min="0" max="100" step="0.05">
+            </div>
+            <input id="spikes-s1-range" type="range" min="0" max="10" step="0.05" aria-label="Spike 2, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="spikes-s2-number">Spike 3, θ</label>
+              <input id="spikes-s2-number" type="number" min="0" max="100" step="0.05">
+            </div>
+            <input id="spikes-s2-range" type="range" min="0" max="10" step="0.05" aria-label="Spike 3, slider">
+            <p class="hint">0 for no spike. The noise has variance 1 in every direction.</p>
+          </div>
+          <div class="control sim-control" data-sim="spikes"></div>
+          <div id="spikes-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="spikes-readout" aria-live="polite"></p>
+          <dl class="stats" id="spikes-stats"></dl>
+          <div class="controls-foot"><button type="button" id="spikes-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="pcs" aria-labelledby="pcs-heading">
+      <h2 id="pcs-heading"><span class="panel-number">3</span> What the first two components show</h2>
+      <p class="panel-intro">The original script measures 200 samples on 500 features. Each feature is shaped by 49 latent factors and noise, and a batch, half the samples, shifts every feature by a small random amount: variance 10 against the 89 or so each feature has in all. Because the shift is shared across all 500 features, it adds up to a spike far above the factors', and the first principal component separates the batches cleanly. Regressing each feature on the batch removes the shift from every component exactly. With interactions, each factor's effect also differs between the batches, which that correction leaves in place.</p>
+      <div class="panel-body">
+        <figure id="pcs-figures">
+          <ul class="legend" id="pcs-legend"></ul>
+          <div class="hist-pair stale-dim">
+            <div><p class="hist-title"><span class="hist-name">As measured</span></p><div id="pcs-before" class="plot-box"></div></div>
+            <div><p class="hist-title"><span class="hist-name">Batch regressed out</span></p><div id="pcs-after" class="plot-box"></div></div>
+          </div>
+          <figcaption class="caption">Each sample on the first two principal components, each scaled to variance 1.</figcaption>
+          <div class="figure-head"><h3>How far apart the batches are on each component</h3></div>
+          <div id="pcs-difference" class="plot-box stale-dim"></div>
+          <figcaption class="caption">The difference between the batches' mean scores, in SDs of the component, as measured. After the batch is regressed out it is 0 on every component.</figcaption>
+          <div class="figure-head"><h3>The eigenvalues against the noise's edge</h3></div>
+          <div id="pcs-scree" class="plot-box stale-dim"></div>
+          <figcaption class="caption">The largest 100 eigenvalues on a log scale, as measured (orange) and with the batch regressed out (blue), against the upper edge the noise alone would give.</figcaption>
+          <p class="sim-status" id="pcs-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="pcs-n-number">Samples, <var>n</var></label>
+              <input id="pcs-n-number" type="number" min="4" max="500" step="1">
+            </div>
+            <input id="pcs-n-range" type="range" min="4" max="500" step="1" aria-label="Samples, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pcs-p-number">Features, <var>p</var></label>
+              <input id="pcs-p-number" type="number" min="2" max="2000" step="1">
+            </div>
+            <input id="pcs-p-range" type="range" min="0.301" max="3.301" step="0.01" aria-label="Features, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pcs-factors-number">Latent factors</label>
+              <input id="pcs-factors-number" type="number" min="0" max="100" step="1">
+            </div>
+            <input id="pcs-factors-range" type="range" min="0" max="100" step="1" aria-label="Latent factors, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pcs-batchVariance-number">Batch shift, variance</label>
+              <input id="pcs-batchVariance-number" type="number" min="0" max="100" step="0.5">
+            </div>
+            <input id="pcs-batchVariance-range" type="range" min="0" max="50" step="0.5" aria-label="Batch shift variance, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="pcs-noiseVariance-number">Noise variance</label>
+              <input id="pcs-noiseVariance-number" type="number" min="0.01" max="100" step="0.5">
+            </div>
+            <input id="pcs-noiseVariance-range" type="range" min="0.5" max="100" step="0.5" aria-label="Noise variance, slider">
+          </div>
+          <label class="control-row check-row"><input id="pcs-interactions" type="checkbox"> Factor effects differ between the batches</label>
+          <div class="control">
+            <div class="control-row">
+              <label for="pcs-seed">Seed</label>
+              <input id="pcs-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="pcs-new-seed">New seed</button>
+            </div>
+          </div>
+          <div id="pcs-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="pcs-readout" aria-live="polite"></p>
+          <dl class="stats" id="pcs-stats"></dl>
+          <div class="controls-foot"><button type="button" id="pcs-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>The law</h3>
+        <p>The sample covariance of <var>n</var> observations divides by <var>n</var> − 1 because the data are centred first, which uses up one degree of freedom, so the law's ratio is γ = <var>p</var>/(<var>n</var> − 1). Its density, √((<var>b</var> − <var>x</var>)(<var>x</var> − <var>a</var>)) / (2π σ² γ <var>x</var>) between the edges <var>a</var> and <var>b</var>, has a closed-form distribution function, which places each eigenvalue's expected position. When <var>p</var> exceeds <var>n</var> − 1 the covariance has rank <var>n</var> − 1, and the other <var>p</var> − <var>n</var> + 1 eigenvalues are exactly 0. The law describes the limit as <var>n</var> and <var>p</var> grow together; at finite sizes the largest eigenvalue fluctuates around the upper edge on a scale of <var>n</var><sup>−2/3</sup> (the Tracy–Widom law), so it falls outside the edge in a fair share of noise-only samples.</p>
+        <h3>Computing</h3>
+        <p>Each sample is drawn from shared/rng.js's mulberry32, normals by inversion, so a seed gives the same eigenvalues in every browser and in Node. The covariance's eigenvalues come from whichever of <var>X</var>ᵀ<var>X</var> and <var>X</var><var>X</var>ᵀ is smaller, reduced to tridiagonal form by Householder reflections and solved by the implicit QL method, in a background worker so the page stays responsive. A spike lies along a coordinate axis; since the noise looks the same in every direction, that changes no eigenvalue. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <h3>Spikes</h3>
+        <p>The threshold and the two limits are those of Baik, Ben Arous and Péché (2005) and Paul (2007). They hold as <var>n</var> and <var>p</var> grow; at finite sizes a spike just past the threshold is lower than its limit and its eigenvector less aligned, and one just below it still lifts the largest eigenvalue a little.</p>
+        <h3>The R scripts</h3>
+        <p>marchenko–pastur_intuitions.R compares the simulated eigenvalues with RMTstat's law at ndf = <var>n</var>, the number of observations, but cov() centres the data, which leaves <var>n</var> − 1 degrees of freedom; at its 200 observations of 20 variables that puts its edges and its decision threshold, <var>σ</var>²(1 + √(<var>p</var>/<var>n</var>))², 0.12% low. This page uses <var>n</var> − 1. RMTstat's distribution function and quantiles are numerical and accurate to about 10⁻⁶ and 10⁻⁴; this page's are exact. The script's follow-up on random orthonormal matrices and rotations, which is about building correlation matrices from eigenvalues, is not part of this page.</p>
+        <p>1st_two_pc_axes.R corrects for the batch by regressing each feature on all 99 simulated variables, which only a simulation knows, and subtracting the batch's term, which leaves the batch means slightly unequal on every component. Here each feature is regressed on the batch alone, as one could with real data, which makes them equal exactly. Its comparison of discriminant analysis and support vector machines on held-out samples is not part of this page. Across 12 seeds of the script, PC 1 separates the batches by 1.72 ± 0.06 SDs and 65 eigenvalues lie above the noise edge; this page's version of its model gives the same.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2022-11-14">2022-11-14</time>
+    </div>
+  </footer>
+</body>
+</html>

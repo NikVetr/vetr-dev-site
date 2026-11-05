@@ -7,6 +7,8 @@ import { dagFigure } from './dag-adjustment/figure.js';
 import { coneScene, sceneCamera } from './correlation-geometry/figure.js';
 import { orientation } from './lib/geom3d.js';
 import { installApi, onWidth } from './lib/page.js';
+import { compute as marchenkoPastur } from './marchenko-pastur/compute.js';
+import { spectrumFigure } from './marchenko-pastur/figure.js';
 import { compute as nullPvalues } from './null-pvalues/compute.js';
 import { pairThumbnail } from './null-pvalues/figure.js';
 import { compute as thresholdModel } from './threshold-model/compute.js';
@@ -48,6 +50,13 @@ const thumbs = [
   {
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-null-pvalues')),
     draw: (/** @type {number} */ width) => pairThumbnail(/** @type {any} */ (nullPvalues({ scenario: 'batch', treatedShare: 0.8 })), { width, height: 150 }),
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-marchenko-pastur')),
+    draw: (/** @type {number} */ width) => {
+      const r = /** @type {any} */ (marchenkoPastur({ view: 'noise', n: 200, p: 60, replicates: 30 }));
+      return spectrumFigure({ histogram: r.sample.histogram, curve: r.curve, edges: r.edges, variance: 1, zeroShare: 0 }, { width, height: 150, compact: true });
+    },
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });

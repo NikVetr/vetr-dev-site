@@ -10,6 +10,7 @@ The entries are:
 - [`typical-set`](#typical-set): where the probability mass is, in four views: the chi distribution as density × volume, the original script's cube criterion for six families against sampled radii, one-dimensional mixtures with their highest-density region at a water level, and one coordinate of a uniform point on the sphere.
 - [`dag-adjustment`](#dag-adjustment): adjustment sets in linear-Gaussian causal graphs: the regression coefficient each set gives against the causal effect, the adjustment criterion, every path, the front-door estimate, and what conditioning on many colliders does.
 - [`null-pvalues`](#null-pvalues): ways to break a p-value: under a true null, the p-values of a common shortcut beside a sound analysis, and the realised false-positive rate at α, in seven scenarios (a batch regressed out first, covariates removed one at a time, a t-test on bootstrap means, autocorrelated series, two-step filtering, paired data tested as independent, and pathway tests kept only where a pathway has a hit).
+- [`marchenko-pastur`](#marchenko-pastur): how many principal components are noise, in three views: the eigenvalues of pure noise against the Marchenko–Pastur law, spiked covariances and the BBP threshold for eigenvalues and eigenvectors, and the first principal components of a batch-and-factors model before and after the batch is regressed out.
 
 ## Ways in
 
@@ -35,7 +36,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment or null-pvalues, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues page's own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues or marchenko-pastur, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues and marchenko-pastur pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -410,6 +411,61 @@ Each pathway is tested by the one-sided hypergeometric (Fisher) test, P(X ≥ x)
 - **Simulations** draw from mulberry32 (`shared/rng.js`), normals by inversion; the same seed gives the same p-values in Node and every browser. Each scenario's rates agree with the original script's, rerun with seeds, within Monte Carlo error.
 - **What the scripts do differently.** `stepwise_regression_inflate_false_disc.R`'s corrected p-value is `(1 - pt(t, df = n-2-50)) * 2` with a signed *t*: it exceeds 1 whenever *t* < 0, half the time, so the script counts one side only and reports about 10% where the procedure rejects about 21%; and the correction changes only the reference df, keeping σ on *n* − 2 (rescaling σ, `finalDf: "rescaled"`, gives about 6.5%). `bootstrap_ttest_demo.R` estimates the bootstrap difference's share from 5,000 random pairings; this entry uses all *B*² pairs. `fisher-cor-pval_deflation.R` defines `cor.sim` twice, and the second definition, which it runs, offers only `cor.test`, so its remedies are never called; its `cor_test_effdf` is NaN when *n*ₑff < 2, where this entry floors *n*ₑff − 2 at 1 as the script already does for the df. `two-step_multiple-testing.R`'s second part selects with `fits` from the first part (columns A and B) instead of its own combined fits (columns x and f), so its interaction p-values are uniform for the wrong reason; its second part also halves the sample, which this entry does not. `test-1s-vs-2s.R` compares a one-sample test of the paired differences with a two-sample test at a true change of 0.25, which measures power; here the change defaults to 0. `hypergeometric_bias.R` draws each pathway's genes with replacement, so about 0.1% repeat; here a pathway has exactly its stated number of distinct genes. `basic_batch_correction_error.R` is right, and its seeded simulation (20,000 replicates) gives 5.77% ± 0.16% against the exact 5.70%.
 
+## marchenko-pastur
+
+For *n* observations of *p* variables, centred, the eigenvalues of the sample covariance of pure noise with variance σ² follow the Marchenko–Pastur law as *n* and *p* grow, with ratio γ = *p*/(*n* − 1): density √((*b* − *x*)(*x* − *a*)) / (2π σ² γ *x*) between the edges *a*, *b* = σ²(1 ∓ √γ)², and, when *p* > *n* − 1, a share 1 − 1/γ of eigenvalues exactly 0. `params.view` picks one of three computations, each seeded Monte Carlo against the law's closed forms.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"noise"`, `"spikes"` or `"pcs"` | `"noise"` | Which computation. |
+
+Every view's result has the law's `gamma`, `lower`, `upper` (also as `edges`, `{lower, upper}`) and `zeroShare`. A request whose eigendecompositions would take more than about 20 billion operations is rejected (`too_much_work`).
+
+### view "noise"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 3–1,000 | `200` | Observations. |
+| `p` | integer 1–500 | `20` | Variables. |
+| `variance` | number 0.01–100 | `1` | σ², every variable's variance. |
+| `replicates` | integer 1–5,000 | `1000` | Samples drawn. |
+| `seed` | integer 0–4,294,967,295 | `1` | |
+
+Result: `scriptEdges`, the edges at γ = *p*/*n*, as marchenko–pastur_intuitions.R computes them; `curve`, `{x, density}`, the law's density at 201 points between the edges (closer together near them); and `sample`: `{replicates, seed, histogram, byIndex, largest, smallestBelowEdge, first}`. `histogram` is `{edges, density}`, 60 bins of the non-zero eigenvalues of every sample, scaled to the law's continuous share; `byIndex` gives, for each of the largest 60 eigenvalues, `{index, mean, lo, median, hi, law}`: its mean, 5%, 50% and 95% quantiles (R's type 7) across samples and the law's quantile at 1 − (*k* − ½)/*p*; `largest` is the same for the largest eigenvalue with `aboveEdge`, the share of samples in which it exceeds the upper edge; `smallestBelowEdge` the share in which the smallest falls below the lower edge (`null` when some eigenvalues are 0); `first` the first sample's *p* eigenvalues, largest first.
+
+### view "spikes"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 3–1,000 | `200` | Observations. |
+| `p` | integer 2–500 | `100` | Variables. |
+| `spikes` | array of 0–5 numbers, each 0–100 | `[4, 1, 0.5]` | Spike strengths θ: population eigenvalues 1 + θ, along the first coordinate axes, over noise with variance 1. |
+| `replicates` | integer 1–2,000 | `100` | Samples drawn. |
+| `seed` | | `1` | |
+
+As *n* and *p* grow, a spike with θ > √γ (the Baik–Ben Arous–Péché threshold) gives a sample eigenvalue beyond the bulk at (1 + θ)(1 + γ/θ), and its sample eigenvector has squared cosine (1 − γ/θ²)/(1 + γ/θ) with the true direction; below the threshold the eigenvalue sits at the upper edge and the cosine is 0. Result: `threshold`, √γ; `curve`, the law's density; `theory`, `{strength, eigenvalue, overlap}`, those limits on 161 strengths from 0; `spikes`, largest first, each `{strength, population, detectable, eigenvalue, overlap, sample}` with the limits and, across samples, the `mean`, `lo`, `median` and `hi` of the matching sample eigenvalue (the largest for the strongest spike, and so on) and the mean squared cosine `overlap`; `nextLargest`, the same summary for the first eigenvalue after the spikes' (`null` if there is none); and `sample`, `{replicates, seed, first}`.
+
+### view "pcs"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 4–500 | `200` | Samples; the first ⌊*n*/2⌋ are batch 1, the rest batch 2. |
+| `p` | integer 2–2,000 | `500` | Features. |
+| `factors` | integer 0–100 | `49` | Latent factors, standard normal, each with standard normal effects on every feature. |
+| `batchVariance` | number 0–100 | `10` | Variance of the shift batch 2 adds to each feature. |
+| `noiseVariance` | number 0.01–100 | `25` | Each feature's own noise. |
+| `interactions` | boolean | `true` | Each factor's effect also differs between the batches, by a standard normal times (batch − ½). |
+| `seed` | | `1` | |
+
+This is 1st_two_pc_axes.R's model. One data set is drawn and analysed as measured and with the batch regressed out of each feature (each feature minus its batch's mean). Result: `batch`, each sample's batch, 0 or 1; `variance`, `{factors, interactions, batch, noise}`, the variance each part adds to a feature; and `uncorrected` and `corrected`, each `{eigenvalues, aboveEdge, scores, batchDifference}`: the sample covariance's eigenvalues (prcomp's sdev²), how many exceed the noise's upper edge, the first two components' scores scaled to variance 1, `{pc1, pc2}`, and on each of the first 50 components the difference between the batches' mean scores.
+
+### Method
+
+- **The law.** The density is RMTstat's `dmp` with ndf = *n* − 1; the distribution function is its integral in closed form, with *R* = √((*b* − *x*)(*x* − *a*)), *R* + ((*a* + *b*)/2) asin((2*x* − *a* − *b*)/(*b* − *a*)) − √(*ab*) asin(((*a* + *b*)*x* − 2*ab*)/(*x*(*b* − *a*))) from *a*, over 2π σ² γ, and the quantiles invert it by bisection. They agree with R's `integrate()` of `dmp` to 1e-11. RMTstat's own `pmp` and `qmp` are numerical, accurate to about 1e-6 and 1e-4.
+- **Eigenvalues** (`lib/linalg.js`): the sample covariance goes through whichever of *X*ᵀ*X* and *X**X*ᵀ is smaller, reduced to tridiagonal form by Householder reflections and solved by the implicit QL method (EISPACK's tred2 and tql2); without eigenvectors, about 8 ms for a 200 × 200 matrix in Node. Principal components agree with `prcomp()` to 1e-10 on the same data, scores up to each axis's sign.
+- **Samples** are drawn from mulberry32, normals by inversion. Each simulation agrees with R's (the script's, and a spiked model, at the defaults) within Monte Carlo error.
+- **What the scripts do differently.** marchenko–pastur_intuitions.R uses ndf = *n* (`dmp(…, ndf = n_obs)`, and the threshold (1 + √(*p*/*n*))²), but `cov()` centres, which leaves *n* − 1; at its 200 observations of 20 variables its edges are 0.12% low. Its follow-up on random orthonormal matrices and rotations is not ported. 1st_two_pc_axes.R regresses each feature on all 99 simulated variables and subtracts the batch term, an oracle correction that leaves the batch means slightly unequal; this entry regresses on the batch alone, which equalises them exactly. Its held-out discriminant analysis and support vector machines are not ported.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -448,7 +504,7 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `not_symmetric` (a matrix entry that differs from its mirror)
 - `not_positive_semidefinite` (no arrows have these correlations; the message gives the smallest eigenvalue)
 - `not_estimable` (a batch design in which treatment and batch cannot be told apart)
-- `too_much_work` (a simulation of more than about a billion random draws)
+- `too_much_work` (a simulation of more than about a billion random draws, or eigendecompositions of more than about 20 billion operations)
 
 Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]` or `params.replicates`. An empty path means the request as a whole.
 
@@ -731,3 +787,35 @@ No. Numeracy's effect, all through income, is +4. Adjusting for income blocks th
 ```
 
 With 8 of 10 treated in one batch and 2 of 10 in the other, the batch accounts for 36% of the treatment's variance. Regressing it out first inflates the treatment's *t* by 1.29, and a test at 0.05 rejects a true null 12.1% of the time; at 0.0001 it rejects 12.5 times too often.
+
+**When does a spike leave the noise?** `spikes.json`:
+
+```json
+{"entry": "marchenko-pastur", "params": {"view": "spikes", "n": 400, "p": 200, "spikes": [3, 0.5], "replicates": 50}}
+```
+
+`node intuitions/cli.mjs spikes.json` prints (abridged: `curve`, `theory` and `sample.first` are left out):
+
+```json
+{
+  "entry": "marchenko-pastur",
+  "params": { "view": "spikes", "n": 400, "p": 200, "spikes": [3, 0.5], "replicates": 50, "seed": 1 },
+  "result": {
+    "view": "spikes", "gamma": 0.5012531328320802, "lower": 0.08526848202250285, "upper": 2.9172377836416574, "zeroShare": 0,
+    "threshold": 0.7079923254047886,
+    "spikes": [
+      {
+        "strength": 3, "population": 4, "detectable": true, "eigenvalue": 4.668337510442774, "overlap": 0.809114769744691,
+        "sample": { "mean": 4.672736197563716, "lo": 4.245131727095144, "median": 4.66284000196525, "hi": 5.115117674897262, "overlap": 0.8095292107380715 }
+      },
+      {
+        "strength": 0.5, "population": 1.5, "detectable": false, "eigenvalue": 2.9172377836416574, "overlap": 0,
+        "sample": { "mean": 2.8646385868258646, "lo": 2.7890544400015087, "median": 2.86201442593891, "hi": 2.9692747410820277, "overlap": 0.03946226213549479 }
+      }
+    ],
+    "nextLargest": { "mean": 2.776920094688793, "lo": 2.702897786723017, "median": 2.778733874482074, "hi": 2.8382656015992005 }
+  }
+}
+```
+
+With 400 observations of 200 variables, γ ≈ 0.5 and the threshold is 0.71. A population eigenvalue of 4 comes out near 4.67, well clear of the bulk's edge at 2.92, and its eigenvector is at a squared cosine of 0.81 with the truth. One of 1.5 comes out at 2.86, inside the bulk, indistinguishable from the largest noise eigenvalue, and its eigenvector is close to random (0.04).
