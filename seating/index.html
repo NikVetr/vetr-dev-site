@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Seat guests at tables so that alike guests sit together, chosen pairs share a table and others are kept apart, and watch the search that finds the seating.">
+  <title>Table Seating</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3Cg fill='%23cde2fb'%3E%3Ccircle cx='16' cy='5.5' r='2.6'/%3E%3Ccircle cx='26.5' cy='16' r='2.6'/%3E%3Ccircle cx='16' cy='26.5' r='2.6'/%3E%3Ccircle cx='5.5' cy='16' r='2.6'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Table Seating</h1>
+        <p class="tagline">Seat guests at tables so that alike guests sit together, chosen pairs share a table and others are kept apart. Then watch the search that found the seating, swap by swap.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card" aria-labelledby="guests-heading">
+      <div class="card-head">
+        <h2 id="guests-heading">Guests</h2>
+        <span id="guest-count" class="muted"></span>
+        <a href="#results-heading" class="results-link">Seating ↓</a>
+      </div>
+      <p class="muted">One row per guest. The category is a number: the closer two guests' numbers, the more alike they count (for example 1 and 2 for the two families, 3 for work, 4 for school).</p>
+      <div class="toolbar">
+        <button id="edit-json" type="button" aria-haspopup="dialog">Paste or edit request JSON…</button>
+        <label class="file-button">Open request file… <input id="request-file" type="file" accept="application/json,.json"></label>
+        <button id="load-example" type="button">Load example</button>
+        <button id="clear-all" type="button">Clear</button>
+      </div>
+      <p id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span> <button id="undo-replace" type="button">Undo</button></p>
+      <div class="table-wrap">
+        <table class="editor guests-editor">
+          <thead>
+            <tr>
+              <th scope="col" class="index">#</th>
+              <th scope="col">Name</th>
+              <th scope="col" class="category-col">Category</th>
+              <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
+            </tr>
+          </thead>
+          <tbody id="guest-rows"></tbody>
+        </table>
+      </div>
+      <div class="toolbar">
+        <button id="add-guest" type="button">+ Add guest</button>
+      </div>
+    </section>
+
+    <section class="card results-card" aria-labelledby="results-heading">
+      <div class="card-head">
+        <h2 id="results-heading" tabindex="-1">Seating</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="run" type="button" class="primary">Find a seating</button>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="no-result" class="placeholder">The seating appears here.</p>
+      <div id="result" hidden>
+        <p id="stale" class="stale-banner" hidden></p>
+        <div class="player" role="group" aria-labelledby="player-heading">
+          <h3 id="player-heading" class="visually-hidden">Replay of the search</h3>
+          <div class="player-buttons">
+            <button id="to-start" type="button" title="The first seating, in guest order">⏮ Start</button>
+            <button id="step-back" type="button" title="One accepted move back">◀ Back</button>
+            <button id="play" type="button" class="primary play">▶ Play</button>
+            <button id="step-forward" type="button" title="One accepted move on">Step ▶</button>
+            <button id="to-best" type="button" title="The best seating found, which is the result">★ Best</button>
+          </div>
+          <div class="player-sliders">
+            <label class="slider">Move
+              <input id="timeline" type="range" min="0" max="0" step="1" value="0">
+              <output id="timeline-out" for="timeline"></output>
+            </label>
+            <label class="slider">Speed
+              <input id="speed" type="range" min="0" max="6" step="1" value="3">
+              <output id="speed-out" for="speed"></output>
+            </label>
+            <label class="check"><input id="animate" type="checkbox" checked> Animate the swaps</label>
+          </div>
+        </div>
+        <p id="replay-status" class="replay-status" aria-live="polite"></p>
+        <div class="stale-dim">
+          <dl id="readout" class="readout"></dl>
+          <figure id="chart" class="chart"></figure>
+          <figure id="trace" class="trace"></figure>
+          <p id="trace-tip" class="trace-tip muted" aria-hidden="true">&nbsp;</p>
+          <h3 id="list-heading">Tables</h3>
+          <div id="table-list" class="table-list"></div>
+        </div>
+        <div class="toolbar">
+          <span class="muted">Download the best seating:</span>
+          <button id="export-csv" type="button">Seating CSV</button>
+          <button id="export-svg" type="button">Chart SVG</button>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="pairs-heading">
+      <div class="card-head">
+        <h2 id="pairs-heading">Pairs and groups</h2>
+        <span id="pair-count" class="muted"></span>
+      </div>
+      <p class="muted">Guests by name, separated by commas. <strong>Together</strong> and <strong>apart</strong> apply to every pair in the group and cost the constraint penalty for each pair broken. A <strong>pair score</strong> is added when the two share a table (negative to keep them apart). A <strong>room cost</strong> pushes the two to far-apart tables, when Geography uses room costs.</p>
+      <div class="table-wrap">
+        <table class="editor pairs-editor">
+          <thead>
+            <tr>
+              <th scope="col" class="index">#</th>
+              <th scope="col" class="kind-col">Kind</th>
+              <th scope="col">Guests</th>
+              <th scope="col" class="value-col">Value</th>
+              <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
+            </tr>
+          </thead>
+          <tbody id="pair-rows"></tbody>
+        </table>
+      </div>
+      <div class="toolbar">
+        <button id="add-pair" type="button">+ Add row</button>
+      </div>
+    </section>
+
+    <section id="tables-card" class="card" aria-labelledby="tables-heading">
+      <h2 id="tables-heading">Tables</h2>
+      <div class="settings">
+        <label>Tables are
+          <select id="tables-mode">
+            <option value="seats">Seats per table</option>
+            <option value="list">A list</option>
+          </select>
+        </label>
+        <label data-mode="seats">Seats per table
+          <input id="seats" type="number" min="1" step="1" value="8">
+        </label>
+        <label data-mode="seats">Room layout
+          <select id="layout">
+            <option value="spiral">Spiral</option>
+            <option value="grid">Grid</option>
+          </select>
+        </label>
+      </div>
+      <p id="seats-note" class="muted" data-mode="seats"></p>
+      <div data-mode="list">
+        <p class="muted">Leave x and y empty to place the tables on the spiral, or give both for every table. Seats left over stay empty.</p>
+        <div class="table-wrap">
+          <table class="editor tables-editor">
+            <thead>
+              <tr>
+                <th scope="col" class="index">#</th>
+                <th scope="col">Name</th>
+                <th scope="col" class="num-col">Seats</th>
+                <th scope="col" class="num-col">x</th>
+                <th scope="col" class="num-col">y</th>
+                <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
+              </tr>
+            </thead>
+            <tbody id="table-rows"></tbody>
+          </table>
+        </div>
+        <div class="toolbar">
+          <button id="add-table" type="button">+ Add table</button>
+          <span class="inline-make">Make <input id="make-count" type="number" min="2" step="1" value="5" aria-label="Number of tables"> tables of <input id="make-seats" type="number" min="1" step="1" value="8" aria-label="Seats per table"> seats <button id="make-tables" type="button">Replace the list</button></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="settings-card" class="card" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Settings</h2>
+      <h3>Objective</h3>
+      <div class="settings">
+        <label>Table term
+          <select id="table-objective">
+            <option value="sqrt_distance">Alike tables</option>
+            <option value="geometric">Few categories</option>
+            <option value="variance">Mixed tables</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+        <label>Table term weight
+          <input id="w-table" type="number" step="0.1" value="1">
+        </label>
+        <label>Pair score weight
+          <input id="w-pairs" type="number" step="0.1" value="1">
+        </label>
+        <label>Geography weight
+          <input id="w-geography" type="number" step="0.1" value="1">
+        </label>
+        <label>Penalty per broken pair
+          <input id="constraint-penalty" type="number" min="0" step="100" value="1000">
+        </label>
+        <label>Geography
+          <select id="geography">
+            <option value="off">Off</option>
+            <option value="pairs">Room costs</option>
+            <option value="category">By category</option>
+          </select>
+        </label>
+        <label class="check-field"><span>Tablemates</span>
+          <span class="check"><input id="tablemates" type="checkbox" checked> Count tablemates as closest</span>
+        </label>
+      </div>
+      <p class="muted settings-help">Table term: <strong>alike tables</strong> is −Σ √|category difference| over each table's pairs of guests; <strong>few categories</strong> is −Σ (1 − 2<sup>−count</sup>) over each table's categories; <strong>mixed tables</strong> is the variance of each table's categories. Geography: <strong>room costs</strong> are the room-cost rows under Pairs and groups; <strong>by category</strong> gives every pair the cost (number of categories − |difference|), as the original script did, which pushes alike guests apart.</p>
+      <h3>Search</h3>
+      <div class="settings">
+        <label>Iterations
+          <input id="iterations" type="number" min="0" step="100" placeholder="">
+        </label>
+        <label>Acceptance scale (logit scale)
+          <input id="logit-scale" type="number" min="0" step="0.5" value="1">
+        </label>
+        <label>Seed
+          <span class="input-row">
+            <input id="seed" type="number" min="0" max="2147483647" step="1" value="1">
+            <button id="new-seed" type="button">New seed</button>
+          </span>
+        </label>
+      </div>
+      <h3>Chart</h3>
+      <div class="settings">
+        <label>Tables in the chart
+          <select id="arrangement">
+            <option value="auto">Auto</option>
+            <option value="room">As in the room</option>
+            <option value="rows">In rows</option>
+          </select>
+        </label>
+        <label>Score axis
+          <select id="trace-axis">
+            <option value="late">Last 80%</option>
+            <option value="all">Every iteration</option>
+          </select>
+        </label>
+      </div>
+      <p class="muted settings-help"><strong>Auto</strong> draws the tables where they are in the room unless the names would be smaller than 9 px, and then in rows. The score axis fits <strong>the last 80%</strong> of iterations, as the R version draws it, so the opening climb starts below it; <strong>every iteration</strong> fits them all.</p>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>A seating's score is the sum of four terms, and higher is better:</p>
+        <ul>
+          <li><strong>Table term</strong>: by default, minus the sum over each table's pairs of guests of the square root of the difference in their categories, so tables of alike guests score highest. Its weight multiplies it.</li>
+          <li><strong>Pairs</strong>: the sum of the pair scores of guests who share a table, times its weight.</li>
+          <li><strong>Constraints</strong>: minus the constraint penalty for every pair that should sit together but does not, or should sit apart but does not. Zero when every constraint holds.</li>
+          <li><strong>Geography</strong>: every guest pays cost × closeness towards every other guest, closeness being (1 − distance / largest distance)² between their tables in the room, so a positive cost pushes two guests far apart. With "Count tablemates as closest" on, tablemates count at closeness 1; off, they are skipped, as in the original script.</li>
+        </ul>
+        <p>The search starts from the guests in list order and repeats one move: pick two tables, the worse-scoring more likely (the worst at most e times as likely as the best), pick k seats at each (k = 1 most often, then 2, 3, … with weights e<sup>−0.4k</sup>), and swap their occupants. Empty seats swap too, so guests move into them. The move is kept with probability 1 / (1 + e<sup>−Δ × scale</sup>), Δ being the change in score: a better seating is likely kept, a worse one sometimes. The temperature is fixed, and the best seating seen is the result. The search goes on after finding it, so the replay ends by returning to it.</p>
+        <p>The replay shows every move that was kept, in order: the two tables of the move are outlined, and their guests change seats. The score chart shows the score after each one and the best so far.</p>
+        <p>This is a port of Nik Vetr's 2023 R script with its geography bookkeeping fixed. It uses R's random number generator and R's arithmetic, so a seed gives exactly the same moves and seating as the R version. The default budget, 50 iterations per guest, may not be enough with many constraints; more iterations, or a larger acceptance scale early on, help.</p>
+        <p>The optimizer is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2023-04-04">2023-04-04</time>
+    </div>
+  </footer>
+
+  <dialog id="json-dialog" aria-labelledby="json-dialog-title">
+    <div class="dialog-head">
+      <h2 id="json-dialog-title">Request JSON</h2>
+      <button type="button" class="dialog-close" aria-label="Close">×</button>
+    </div>
+    <div class="dialog-body">
+      <p>The request the page's inputs make, as the <a href="api.md">API</a> takes it. Edit it or paste another; a request for the R version (seat.R, with options such as <code>logit_scale</code>) works too.</p>
+      <textarea id="json-text" rows="18" spellcheck="false" aria-label="Request JSON"></textarea>
+      <div id="json-issues" class="issues" role="alert" hidden></div>
+      <div class="toolbar">
+        <button id="json-apply" type="button" class="primary">Load and find a seating</button>
+        <button type="button" class="dialog-close">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

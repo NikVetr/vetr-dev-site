@@ -80,8 +80,14 @@ export function seatingGeometry(tables, names, { width, arrangement = 'room' }) 
   /** @type {number} */
   let height;
   if (arrangement === 'rows') {
-    const cols = Math.max(1, Math.min(T, Math.floor(width / 230)));
-    D = Math.min(width / cols, 420);
+    // as wide a disc as 12 px names need (two lines where that is shorter), no wider
+    const ems = names.map((n) => {
+      const parts = splitName(n);
+      return parts ? Math.min(textEms(n), Math.max(textEms(parts[0]), textEms(parts[1]))) : textEms(n);
+    });
+    const needed = (24 + 14 + 2 * MAX_FONT * Math.max(3, ...ems)) / 0.6;
+    const cols = Math.max(1, Math.min(T, Math.floor(width / needed)));
+    D = Math.min(width / cols, 420, 1.15 * needed);
     const left = (width - cols * D) / 2;
     centres = tables.map((_, t) => [left + D * ((t % cols) + 0.5), D * (Math.floor(t / cols) + 0.5)]);
     height = Math.ceil(T / cols) * D;
@@ -350,7 +356,7 @@ export function renderTraceSvg(result, { width = 720, height = 260, theme = 'lig
   const c = CHART_THEMES[theme];
   const steps = scoreSteps(result);
   const N = Math.max(1, result.search.iterations);
-  const m = { left: 64, right: 14, top: 30, bottom: 38 };
+  const m = { left: 64, right: 14, top: width < 480 ? 44 : 30, bottom: 38 };
   const pw = width - m.left - m.right;
   const ph = height - m.top - m.bottom;
   const from = axis === 'late' ? 0.2 * N : 0;
@@ -394,7 +400,12 @@ export function renderTraceSvg(result, { width = 720, height = 260, theme = 'lig
   const below = steps.score.filter((v) => v < lo);
   if (below.length) {
     const note = `▼ starts below the axis, at ${formatScore(Math.min(...below))}`;
-    out += `<text x="${width - m.right}" y="12" font-size="${r2(Math.min(fs, (width - m.left - m.right - 13 * fs) / textEms(note)))}" fill="${c.muted}" text-anchor="end" dominant-baseline="central">${esc(note)}</text>`;
+    const legendWidth = 56 + 12.5 * fs;
+    const besideLegend = textEms(note) * fs <= width - m.left - m.right - legendWidth - 12;
+    const size = r2(Math.min(fs, (width - m.left - m.right) / textEms(note)));
+    out += besideLegend
+      ? `<text x="${width - m.right}" y="12" font-size="${fs}" fill="${c.muted}" text-anchor="end" dominant-baseline="central">${esc(note)}</text>`
+      : `<text x="${m.left}" y="${m.top - 2}" font-size="${size}" fill="${c.muted}">${esc(note)}</text>`;
   }
   if (cursor !== undefined) {
     let i = 0;

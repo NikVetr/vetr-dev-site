@@ -1,0 +1,167 @@
+/* Table Seating: what is particular to this page, over /shared/base.css (tokens, frame,
+   controls, file button, dialog, problems, out-of-date results and the narrow layout). */
+
+:root {
+  --up: #1d6b36;
+  --down: #b3261e;
+}
+:root[data-theme="dark"] {
+  --up: #86d99b;
+  --down: #ff8a80;
+}
+
+/* Four input cards on the left (guests, pairs and groups, tables, settings) beside the results. */
+@media (min-width: 1000px) {
+  .layout { grid-template-rows: repeat(4, auto) 1fr; }
+  .results-link { display: none; }
+}
+.results-link { margin-left: auto; font-size: 0.92rem; }
+
+/* After Load example or Clear: what was replaced, and a way back. */
+.undo-note { margin: 0.5rem 0; color: var(--muted); }
+.undo-note button { margin-left: 0.4rem; }
+
+/* ---------- Editors ---------- */
+
+/* Long lists scroll inside their frame; in one column the frame is shorter, so the page
+   still scrolls past it. */
+.table-wrap { max-height: 60vh; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+@media (max-width: 999px) {
+  .table-wrap { max-height: 45vh; }
+}
+.editor { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.editor th, .editor td { padding: 0.25rem 0.35rem; text-align: left; vertical-align: middle; }
+.editor thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.editor tbody tr + tr > * { border-top: 1px solid var(--border); }
+.editor input, .editor select, .editor textarea { width: 100%; }
+/* Text boxes are one line, grown by app.js to show all of a long name wrapped. */
+.editor textarea { display: block; resize: none; overflow: hidden; line-height: 1.35; field-sizing: content; }
+.editor .index { width: 2.6rem; text-align: right; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.editor tr.has-issue .index { color: var(--alert); font-weight: 700; }
+.editor tr.has-issue .index::before { content: "⚠ "; }
+.editor .category-col { width: 6.5rem; }
+.editor .kind-col { width: 8.5rem; }
+.editor .value-col { width: 5.5rem; }
+.editor .num-col { width: 4.8rem; }
+.editor .remove-col { width: 2.8rem; }
+.editor .remove { padding: 0.2rem 0.55rem; font-size: 1.05rem; line-height: 1.2; }
+.editor .value:disabled { border-style: dashed; }
+.category, .value, .seats, .x, .y { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* On a phone the pair and table rows take two lines each. */
+@media (max-width: 560px) {
+  .pairs-editor, .pairs-editor tbody, .tables-editor, .tables-editor tbody { display: block; }
+  .pairs-editor thead, .tables-editor thead { display: none; }
+  .pairs-editor tr, .tables-editor tr { display: grid; gap: 0.3rem 0.4rem; padding: 0.4rem; }
+  .pairs-editor tr { grid-template-columns: 2.2rem minmax(0, 1fr) 5rem 2.6rem; grid-template-areas: "index kind value remove" "index guests guests guests"; }
+  .tables-editor tr { grid-template-columns: 2.2rem repeat(3, minmax(0, 1fr)) 2.6rem; grid-template-areas: "index name name name remove" "index seats x y y"; }
+  .pairs-editor th, .pairs-editor td, .tables-editor th, .tables-editor td { display: block; width: auto; padding: 0; }
+  .pairs-editor .index, .tables-editor .index { grid-area: index; width: auto; }
+  .pairs-editor .kind-col { grid-area: kind; width: auto; }
+  .pairs-editor .guests-col { grid-area: guests; }
+  .pairs-editor .value-col { grid-area: value; width: auto; }
+  .pairs-editor .remove-col, .tables-editor .remove-col { grid-area: remove; width: auto; }
+  .tables-editor td:nth-child(2) { grid-area: name; }
+  .tables-editor td:nth-child(3) { grid-area: seats; }
+  .tables-editor td:nth-child(4) { grid-area: x; }
+  .tables-editor td:nth-child(5) { grid-area: y; }
+  .tables-editor td:nth-child(3)::before { content: "Seats"; }
+  .tables-editor td:nth-child(4)::before { content: "x"; }
+  .tables-editor td:nth-child(5)::before { content: "y"; }
+  .tables-editor .num-col { width: auto; display: flex; gap: 0.3rem; align-items: center; font-size: 0.85rem; color: var(--muted); }
+  .pairs-editor tbody tr + tr > *, .tables-editor tbody tr + tr > * { border-top: 0; }
+  .pairs-editor tbody tr + tr, .tables-editor tbody tr + tr { border-top: 1px solid var(--border); }
+}
+
+.inline-make { display: inline-flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; color: var(--muted); }
+.inline-make input { width: 4.2rem; text-align: right; color: var(--text); }
+.check { display: inline-flex; gap: 0.4rem; align-items: center; color: var(--text); }
+.settings .check-field .check { min-height: 2.1rem; }
+.settings [data-mode][hidden], [data-mode][hidden] { display: none; }
+.issues-head { margin: 0 0 0.3rem; font-weight: 600; }
+
+/* ---------- Replay ---------- */
+
+.player {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+.player-buttons { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.player-buttons .play { min-width: 6.6rem; }
+.player-sliders { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; align-items: center; }
+.slider { display: flex; flex-wrap: wrap; gap: 0.2rem 0.5rem; align-items: center; font-size: 0.92rem; color: var(--muted); flex: 1 1 14rem; }
+.slider input { flex: 1 1 8rem; accent-color: var(--primary); }
+.slider output { min-width: 5.5rem; color: var(--text); font-variant-numeric: tabular-nums; }
+.player .check { font-size: 0.92rem; }
+
+.replay-status { margin: 0.75rem 0 0.5rem; min-height: 3em; }
+
+.readout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+}
+.readout > div { padding: 0.4rem 0.55rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.readout .total { background: var(--surface-2); }
+.readout dt { font-size: 0.85rem; color: var(--muted); }
+.readout dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0 0.5rem; align-items: baseline; }
+.readout .value { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.readout .total .value { font-size: 1.3rem; }
+.delta, .term-note, .new-best { font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.delta.up { color: var(--up); }
+.delta.down { color: var(--down); }
+.delta.same { color: var(--muted); }
+.term-note { color: var(--muted); }
+.new-best { font-weight: 700; }
+
+.chart, .trace { margin: 0; }
+.chart svg, .trace svg { display: block; width: 100%; height: auto; }
+.trace { margin-top: 0.75rem; cursor: crosshair; }
+.trace-tip { margin: 0.2rem 0 0; font-size: 0.88rem; min-height: 1.4em; }
+
+/* The seating as lists, one card per table. */
+.table-list { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); }
+.table-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.5rem 0.7rem; }
+.table-card h4 { margin: 0; font-size: 1rem; }
+.table-card p { margin: 0.1rem 0 0.35rem; font-size: 0.85rem; }
+.table-card ol { margin: 0; padding-left: 1.6rem; }
+.table-card li { margin: 0.12rem 0; }
+.table-card li.empty { color: var(--muted); }
+.chip-cat {
+  display: inline-block;
+  min-width: 1.5em;
+  margin-right: 0.4rem;
+  padding: 0 0.3em;
+  border-radius: 999px;
+  color: #0b0b0b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.chip-cat[data-dark="true"] { color: #ffffff; }
+.broken { display: block; color: var(--alert); font-size: 0.85rem; font-weight: 600; }
+.settings-help { margin: 0.6rem 0 0; font-size: 0.9rem; max-width: 70ch; }
+
+/* ---------- Request JSON dialog ---------- */
+
+.dialog-body textarea {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  white-space: pre;
+}
