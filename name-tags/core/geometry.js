@@ -4,7 +4,7 @@
 // Boolean operations use the vendored Clipper with integer coordinates at
 // ~1e-8 of an inch; area, length and distance are computed directly.
 
-import ClipperLib from '../vendor/clipper.js';
+import ClipperLib from '../../shared/vendor/clipper.js';
 
 /**
  * @typedef {number[]} Ring

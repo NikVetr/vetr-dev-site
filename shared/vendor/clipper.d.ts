@@ -1,4 +1,4 @@
-// Types for the vendored Clipper build: the parts core/geometry.js uses.
+// Types for the vendored Clipper build: the parts name-tags/core/geometry.js and signature/core/outline.js use.
 declare const ClipperLib: {
   Clipper: { new(): { AddPath(path: { X: number, Y: number }[], type: number, closed: boolean): boolean, Execute(op: number, out: unknown, subjectFill: number, clipFill: number): boolean }, Area(path: { X: number, Y: number }[]): number },
   PolyTree: new () => unknown,
