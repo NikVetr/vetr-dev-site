@@ -135,7 +135,8 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
    of a column, so each shape's picture well has its picture's shape: 3x3 and 2x2 about 16:9 and
    wider, 2x3 about 6:5, 1x3 portrait 2:3, 1x2 about 4:3. Rows grow if a tile's text needs it.
    The column count steps with the width; dense placement packs the tiles with no gaps, and
-   reading-flow takes Tab and screen readers through them row by row as they appear. */
+   assets/landing.js then puts the cards in the order they appear, row by row, for Tab and
+   screen readers. */
 #projects { container-type: inline-size; }
 .grid {
   list-style: none;
@@ -147,7 +148,6 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   grid-auto-rows: minmax(calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.68), auto);
   grid-auto-flow: row dense;
-  reading-flow: grid-rows;
   gap: var(--gap);
 }
 @media (min-width: 36rem)  { .grid { --cols: 2; } }
