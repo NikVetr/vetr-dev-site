@@ -85,8 +85,9 @@ export const PRESETS = Object.freeze({
 /** @typedef {keyof typeof PRESETS} PresetName */
 const PRESET_NAMES = /** @type {PresetName[]} */ (Object.keys(PRESETS));
 
+/** @type {Readonly<{ adjust: Readonly<{ graph: PresetName, adjust: readonly string[], noise: Noise, sample: null }>, colliders: Readonly<Omit<CollidersParams, 'view'>> }>} */
 export const DEFAULTS = Object.freeze({
-  adjust: Object.freeze({ graph: 'confounder', adjust: Object.freeze([]), noise: /** @type {Noise} */ ('unit'), sample: null }),
+  adjust: Object.freeze({ graph: /** @type {PresetName} */ ('confounder'), adjust: Object.freeze([]), noise: /** @type {Noise} */ ('unit'), sample: null }),
   // collider_effects_on_R2.R's example: Cor(Y, X_i) = 0.15.
   colliders: Object.freeze({ colliders: 8, rYX: 0.15, share: 0.5 }),
 });

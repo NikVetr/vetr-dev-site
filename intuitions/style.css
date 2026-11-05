@@ -461,3 +461,68 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .plot .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
 .panel-side > .hint { margin: 0; color: var(--muted); font-size: 0.85rem; }
 .component-grid select { min-height: 2rem; padding: 0.15rem 0.3rem; }
+
+/* ---------- Adjustment (causal graphs) ---------- */
+
+.preset-row { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; align-items: center; margin: 0 0 0.9rem; padding: 0; border-top: 0; }
+.control-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.45rem 0.7rem; align-items: center; }
+.control-grid select { width: 100%; }
+.choice-list { margin: 0.3rem 0 0; padding: 0.55rem 0 0; border: 0; border-top: 1px solid var(--grid); }
+.choice-list legend { padding: 0; font-size: 0.95rem; }
+.checks { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.3rem; }
+.checks label { display: inline-flex; gap: 0.35rem; align-items: center; min-height: 2rem; }
+#adjust-coefficients .control:first-child { border-top: 0; }
+
+.verdict { margin: 0.6rem 0; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); font-family: var(--serif); font-size: 1.05rem; line-height: 1.5; }
+.verdict strong { font-family: var(--sans); }
+.verdict.ok { border: 1.5px solid var(--ok); background: color-mix(in srgb, var(--ok) 8%, var(--surface)); }
+.verdict.bad { border: 2px dashed var(--alert); background: var(--alert-soft); }
+.good { color: var(--ok); font-weight: 600; white-space: nowrap; }
+.poor { color: var(--alert); font-weight: 600; }
+
+.path-list { margin: 0.4rem 0 0; padding: 0; list-style: none; }
+.path-list li { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.35rem 0; border-bottom: 1px solid var(--grid); }
+.path-glyph { flex: none; width: 1rem; text-align: center; }
+.path-text { font-weight: 600; font-variant-numeric: tabular-nums; }
+.path-status { color: var(--muted); font-size: 0.92rem; }
+.path.open.bias .path-glyph, .path.open.bias .path-status { color: var(--alert); }
+.path.open.causal .path-glyph { color: var(--ok); }
+.path.blocked .path-glyph { color: var(--faint); }
+
+.sets-table td, .sets-table th { vertical-align: middle; }
+.set-button { min-height: 2rem; padding: 0.15rem 0.6rem; font-variant-numeric: tabular-nums; }
+.sets-table tr.current .set-button { border-color: var(--primary); background: var(--primary-soft); font-weight: 600; }
+.sample-row { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .sample-row { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 1.6rem; } }
+
+/* Legend chips that repeat the node outlines in the graph. */
+.key { display: inline-block; padding: 0.05rem 0.55rem; border: 1.5px solid var(--faint); border-radius: 999px; color: var(--text); font-size: 0.85rem; }
+.key.exposure { border: 2.5px solid var(--a); }
+.key.outcome { border: 2.5px solid var(--b); }
+.key.adjusted { border: 2px solid var(--ink); border-radius: 2px; background: color-mix(in srgb, var(--ink) 12%, var(--surface)); }
+.key.latent { border-style: dashed; }
+
+.plot.dag { overflow: visible; }
+.plot .dag-node { fill: var(--surface); stroke: var(--faint); stroke-width: 1.5; }
+.plot .dag-node.exposure { stroke: var(--a); stroke-width: 3; }
+.plot .dag-node.outcome { stroke: var(--b); stroke-width: 3; }
+.plot .dag-node.adjusted { fill: color-mix(in srgb, var(--ink) 12%, var(--surface)); stroke: var(--ink); stroke-width: 2; }
+.plot .dag-node.latent { stroke-dasharray: 4 3; }
+.plot .node-label { fill: var(--text); font-size: 13px; font-weight: 600; }
+.plot .node-role { fill: var(--muted); font-size: 11px; }
+.plot .dag-toggle { cursor: pointer; }
+.plot .dag-edge { stroke: var(--ink); stroke-width: 1.6; }
+.plot .dag-edge.thin { stroke-width: 1.1; opacity: 0.8; }
+.plot .dag-edge.zero { stroke: var(--faint); stroke-dasharray: 3 4; }
+.plot .dag-edge.bias { stroke: var(--alert); stroke-width: 2.8; stroke-dasharray: 7 3; }
+.plot .arrow-head { fill: var(--ink); }
+.plot .arrow-head.bias { fill: var(--alert); }
+.plot .arrow-head.zero { fill: var(--faint); }
+.plot .edge-label { fill: var(--text); font-size: 12px; font-variant-numeric: tabular-nums; }
+.plot .edge-label.zero { fill: var(--muted); }
+.plot .sample-dot { fill: var(--a); fill-opacity: 0.35; }
+.plot .effect-line { stroke: var(--c); stroke-width: 2; stroke-dasharray: 6 4; }
+.plot .ink-line.heavy { stroke-width: 3; }
+.plot .seq-line { fill: none; stroke-width: 1.6; }
+.plot .seq-line.s1 { stroke: var(--seq-2); } .plot .seq-line.s2 { stroke: var(--seq-3); } .plot .seq-line.s3 { stroke: var(--seq-4); }
+.plot .seq-line.s4 { stroke: var(--seq-5); } .plot .seq-line.s5 { stroke: var(--seq-6); } .plot .seq-line.s6 { stroke: var(--seq-6); stroke-dasharray: 5 3; }

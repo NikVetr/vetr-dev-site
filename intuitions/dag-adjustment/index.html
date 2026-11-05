@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Which variables to adjust for: pick a causal graph (confounder, mediator, collider, M-bias, front door, income and happiness), set its coefficients, and compare the regression coefficient each adjustment set gives with the causal effect, path by path.">
+  <title>Adjusting for the right variables · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Ccircle cx='16' cy='8' r='3.2' fill='%23fff'/%3E%3Ccircle cx='8' cy='23' r='3.2' fill='%23fff'/%3E%3Ccircle cx='24' cy='23' r='3.2' fill='%23fff'/%3E%3Cpath d='M14 10.5L9.5 20M18 10.5L22.5 20M11.5 23h9' stroke='%23fff' stroke-width='1.8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Adjustment</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Adjusting for the right variables</h1>
+      <p class="lede">To estimate the effect of one variable on another from observational data, you regress the outcome on the exposure and on some other variables. Which others? Adjusting for a common cause removes bias; adjusting for a consequence of the exposure, or for a common effect, adds it. In a linear causal graph the answer is exact: the graph fixes the covariance of everything, and from it the coefficient any adjustment gives, which can be set against the true effect.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#adjust">The adjustment playground</a></li>
+          <li><a href="#colliders">Adjusting for many colliders</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="adjust" aria-labelledby="adjust-heading">
+      <h2 id="adjust-heading"><span class="panel-number">1</span> The adjustment playground</h2>
+      <p class="panel-intro">Each variable is a weighted sum of its causes, the numbers on the arrows, plus noise of its own. The causal effect of the exposure on the outcome is the sum, over the directed paths between them, of the products of their coefficients. An adjustment set gives that number exactly when it blocks every non-causal path and contains nothing the exposure affects on the way to the outcome. Choose a graph, its numbers and what to adjust for; click a node in the graph to adjust for it.</p>
+      <div class="control preset-row">
+        <span class="label" id="adjust-preset-label">Graph</span>
+        <div class="segmented" role="radiogroup" aria-labelledby="adjust-preset-label" id="adjust-preset">
+          <label><input type="radio" name="adjust-preset" value="confounder" checked> Confounder</label>
+          <label><input type="radio" name="adjust-preset" value="mediator"> Mediator</label>
+          <label><input type="radio" name="adjust-preset" value="collider"> Collider</label>
+          <label><input type="radio" name="adjust-preset" value="m-bias"> M-bias</label>
+          <label><input type="radio" name="adjust-preset" value="front-door"> Front door</label>
+          <label><input type="radio" name="adjust-preset" value="happiness"> Income and happiness</label>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div id="adjust-result" class="adjust-main">
+          <figure>
+            <ul class="legend" id="adjust-legend"></ul>
+            <div id="dag-plot" class="plot-box stale-dim"></div>
+            <figcaption class="caption" id="dag-caption"></figcaption>
+          </figure>
+          <div id="adjust-issues" class="issues" role="alert" hidden></div>
+          <p class="verdict stale-dim" id="adjust-verdict" aria-live="polite"></p>
+          <dl class="stats stale-dim" id="adjust-stats"></dl>
+          <p class="note" id="adjust-frontdoor" hidden></p>
+        </div>
+        <div class="panel-side">
+          <div class="control-grid">
+            <label for="adjust-exposure">Exposure</label>
+            <select id="adjust-exposure"></select>
+            <label for="adjust-outcome">Outcome</label>
+            <select id="adjust-outcome"></select>
+          </div>
+          <fieldset class="control choice-list">
+            <legend>Adjust for</legend>
+            <div id="adjust-set" class="checks"></div>
+            <p class="hint" id="adjust-set-hint"></p>
+          </fieldset>
+          <h3 class="side-heading">Coefficients</h3>
+          <div id="adjust-coefficients"></div>
+          <div class="control-grid">
+            <label for="adjust-mediator">Front-door mediator</label>
+            <select id="adjust-mediator"></select>
+            <label for="adjust-noise">Noise</label>
+            <select id="adjust-noise">
+              <option value="unit">variance 1 for each node's own noise</option>
+              <option value="standardized">each variable variance 1 (standardized)</option>
+            </select>
+          </div>
+          <div class="controls-foot"><button type="button" id="adjust-reset">Reset this graph</button></div>
+        </div>
+      </div>
+      <div class="curve-block figure-row halves">
+        <div>
+          <h3>Paths from the exposure to the outcome</h3>
+          <ul class="path-list stale-dim" id="adjust-paths"></ul>
+        </div>
+        <div>
+          <h3>Every adjustment set</h3>
+          <div class="table-wrap">
+            <table class="numbers sets-table stale-dim" id="adjust-sets"></table>
+          </div>
+          <p class="caption">The criterion is the adjustment criterion of Shpitser, VanderWeele and Robins, checked by d-separation. Choose a row to adjust for that set.</p>
+        </div>
+      </div>
+      <div class="curve-block">
+        <div class="figure-head">
+          <h3>A simulated sample</h3>
+          <label class="control-row"><input id="sample-show" type="checkbox" checked> Show</label>
+        </div>
+        <div class="sample-row">
+          <div id="sample-plot" class="plot-box stale-dim"></div>
+          <div class="panel-side">
+            <div class="control-row">
+              <label for="sample-n">Points</label>
+              <input id="sample-n" type="number" min="1" max="5000" step="100">
+              <label for="sample-seed">Seed</label>
+              <input id="sample-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="sample-new-seed">New seed</button>
+            </div>
+            <p class="readout" id="sample-readout"></p>
+            <ul class="legend" id="sample-legend"></ul>
+            <p class="caption">Points drawn from the graph (seeded Monte Carlo), with the adjustment set regressed out of both the exposure and the outcome. By the Frisch–Waugh theorem the slope of this cloud is the adjusted regression coefficient.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="colliders" aria-labelledby="colliders-heading">
+      <h2 id="colliders-heading"><span class="panel-number">2</span> Adjusting for many colliders</h2>
+      <p class="panel-intro">Let Y and U be independent, and let each of <var>p</var> measured variables X₁ … X<sub><var>p</var></sub> be caused by both. Each X has correlation <var>r</var> with Y; of the room left, a share comes from U, so the X's correlate with each other through both. Regress Y on all of them: they explain part of Y, and once they are held fixed, Y and U are no longer independent. With many weak colliders the induced correlation of Y and U nears −1 while the X's explain little of Y.</p>
+      <div class="panel-body">
+        <div>
+          <div id="colliders-schematic" class="plot-box"></div>
+          <figure>
+            <div id="colliders-r2" class="plot-box"></div>
+            <figcaption class="caption">Share of Y's variance the colliders explain (R²), for 1 to 1,024 colliders.</figcaption>
+          </figure>
+          <figure>
+            <div id="colliders-partial" class="plot-box"></div>
+            <figcaption class="caption">The partial correlation of Y and U given all the colliders, which is 0 without adjustment. The line marked ● is your number of colliders; the dot is your share.</figcaption>
+          </figure>
+        </div>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="colliders-p-number">Colliders, <var>p</var></label>
+              <input id="colliders-p-number" type="number" min="1" max="1024" step="1">
+            </div>
+            <input id="colliders-p-range" type="range" min="0" max="3.0103" step="0.01" aria-label="Colliders, slider (log scale)">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="colliders-r-number">Correlation of each X with Y, <var>r</var></label>
+              <input id="colliders-r-number" type="number" min="0" max="0.99" step="0.01">
+            </div>
+            <input id="colliders-r-range" type="range" min="0" max="0.99" step="0.01" aria-label="Correlation of each X with Y, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="colliders-share-number">Share of the rest from U</label>
+              <input id="colliders-share-number" type="number" min="0" max="0.999" step="0.001">
+            </div>
+            <input id="colliders-share-range" type="range" min="0" max="0.999" step="0.001" aria-label="Share of the rest from U, slider">
+            <p class="hint">Cor(X<sub><var>i</var></sub>, U)² is this share of 1 − <var>r</var>², and Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>) = <var>r</var>² + Cor(X, U)².</p>
+          </div>
+          <p class="readout" id="colliders-readout" aria-live="polite"></p>
+          <dl class="stats" id="colliders-stats"></dl>
+          <div class="controls-foot"><button type="button" id="colliders-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>From a graph to a coefficient</h3>
+        <p>In a linear graph each variable is Σ <var>b</var> × parent + noise, so the covariance of all of them is (<var>I</var> − <var>B</var>)<sup>−T</sup> Ω (<var>I</var> − <var>B</var>)<sup>−1</sup>, with <var>B</var> the coefficients and Ω the noise variances. The coefficient of the exposure in a regression on the exposure and an adjustment set is the corresponding entry of Σ<sub>SS</sub><sup>−1</sup>Σ<sub>SY</sub>, the population value a large sample converges to. Nothing here is estimated except the optional sample. Standardized noise sets each node's own variance so that every variable has variance 1, which makes the coefficients path coefficients, as in dagitty's impliedCovarianceMatrix; it is impossible when a node's coefficients would explain all of its variance.</p>
+        <h3>Which sets work</h3>
+        <p>A set is valid for every choice of coefficients exactly when it meets the adjustment criterion: it contains no descendant of a variable on a causal path from the exposure to the outcome, and it blocks every non-causal path between them. A path is blocked by an adjusted variable that is not a collider on it, or by a collider on it that neither it nor any of its descendants is adjusted for. An edge with coefficient 0 counts as absent. A set that fails the criterion can still give the right number when two biases cancel; the table marks that case.</p>
+        <h3>The presets</h3>
+        <p>The front door is the smoking, tar and cancer graph of the original script: the genotype that confounds smoking and cancer is unobserved, so no adjustment works, yet the effect equals the effect of smoking on tar times the effect of tar on cancer given smoking. The income and happiness graph is the one an R script built while reading Bjälkebring and Peters, <a href="https://doi.org/10.1371/journal.pone.0259331">"Money matters (especially if you are good at math): Numeracy, verbal intelligence, education, and income in satisfaction judgments"</a> (PLOS ONE 16(11): e0259331, 2021). In the script, illness lowers income and satisfaction, numeracy raises income, and income raises satisfaction; numeracy has no direct effect, and the simulation has no numeracy-by-income interaction. The coefficients here are the script's simulated ones, not estimates from the paper's data. In that graph, adjusting for income makes numeracy look harmful (−2) although its effect, all through income, is +4.</p>
+        <h3>Many colliders</h3>
+        <p>With exchangeable colliders the conditional covariance of Y and U has a closed form: with <var>d</var> = 1 + (<var>p</var> − 1) Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>), the colliders explain <var>p</var><var>r</var>²/<var>d</var> of Y, and the partial correlation is −<var>p</var> <var>r</var> Cor(X, U) / √((1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>) + <var>p</var> Cor(X, U)²)(1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>) + <var>p</var><var>r</var>²)). Scripts and agents can run every computation on this page through the <a href="../api.md">API</a>, including graphs of their own.</p>
+        <h3>The R scripts</h3>
+        <p>The graphs come from four R scripts. The income and happiness script's dagitty calls name nodes that are not in its graph ("USD", "JOY", "ILL") and a function that does not exist (is_Illnesser, apparently is_confounder after a find-and-replace), so they stop with errors; the corrected call finds the one minimal set, illness. Its simulation was unseeded and drew 10,000 people; with a seed and a million, its regressions agree with the exact values here. The ageing script rounds its implied covariance to four decimals before conditioning, which changes nothing at its coefficients, and its second graph draws the coefficients it leaves unset at random without a seed, so its numbers change from run to run. The many-collider script turns a whole-number 1/(1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>)) into an identity matrix of that size, so with one collider at, say, <var>r</var> = 0.5 and share ⅓ its rank-one inverse fails (its own grid never hits such a value), and it subtracts the explained part from 1, which loses digits when the colliders explain almost all of Y or U: at 1,024 colliders its partial correlation was off by as much as 4 × 10⁻⁵ in the cases checked, and can fall below −1. Its animation interpolated between grid values of <var>r</var>; here every value is exact.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2022-06-21">2022-06-21</time>
+    </div>
+  </footer>
+</body>
+</html>

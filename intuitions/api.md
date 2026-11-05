@@ -8,6 +8,7 @@ The entries are:
 - [`threshold-model`](#threshold-model): discrete traits from a hidden normal liability, one or two traits, and the polychoric fit of a contingency table.
 - [`correlation-geometry`](#correlation-geometry): correlations as angles between arrows, in five views: data as arrows, the cone of fixed correlation, the cosine-rule range of a third correlation, how far apart *k* arrows can be, and one matrix entry's feasible interval (a feasible-correlation calculator).
 - [`typical-set`](#typical-set): where the probability mass is, in four views: the chi distribution as density × volume, the original script's cube criterion for six families against sampled radii, one-dimensional mixtures with their highest-density region at a water level, and one coordinate of a uniform point on the sphere.
+- [`dag-adjustment`](#dag-adjustment): adjustment sets in linear-Gaussian causal graphs: the regression coefficient each set gives against the causal effect, the adjustment criterion, every path, the front-door estimate, and what conditioning on many colliders does.
 
 ## Ways in
 
@@ -260,6 +261,46 @@ One coordinate *x*₁ of a uniform point on the unit sphere in *k* dimensions ha
 - **Samples** are drawn by inversion from mulberry32 (`shared/rng.js`); the *t* coordinates are a normal over the root of a chi-square of three squared normals. The same seed gives the same points in Node and every browser.
 - **What the scripts do differently.** `density_x_volume.R` centres its intervals one grid step left of 0 (on −0.01) and reports the distance to the far end, so each distance is one step (0.01√*k*) too long; its comment says its Laplace has variance 1, but `dexp(abs(x))` has variance 2 (this entry uses the unit-variance Laplace the comment describes); and its unused mass-contained term adds an interval's width where it means the log of the width. The bathtub animation in `mode_pathologies.R` weights its first grid cell by `diff(c(0, x))[1]` = −50 instead of 0.01, which shrinks its normaliser to 0.99934 and puts its printed coverage off the exact value in 19 of 300 frames (3 with equal cells, from the grid alone). `marginal_dist_of_unit_hypersphere.R` computes its constant with `gamma()`, which overflows for *k* ≥ 344 and makes its density NaN there; log-gamma does not. The cube criterion itself is right for what it computes; it does not say where the mass is, since the cube at *a*\* holds a vanishing share of it, and a Cauchy's distance from the centre grows like *k*, not √*k*.
 
+## dag-adjustment
+
+A linear-Gaussian causal graph: each node is Σ *b* × parent + its own normal noise. The graph fixes the covariance of all the nodes, and from it, exactly, the coefficient of the outcome on the exposure in a regression that also includes an adjustment set. That is compared with the causal effect, the sum over directed paths of the products of their coefficients. `params.view` picks one of two computations.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"adjust"` or `"colliders"` | `"adjust"` | Which computation. |
+
+### view "adjust"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `graph` | a preset name, or a graph object (below) | `"confounder"` | The graph. The presets are `"confounder"`, `"mediator"`, `"collider"`, `"m-bias"`, `"front-door"` (backdoor_frontdoor.R's smoking graph, with genotype unobserved) and `"happiness"` (happiness_numeracy.R's graph and simulated coefficients). The response's `params.graph` is always the full object, so it can be edited and sent back. |
+| `exposure`, `outcome` | node ids, different, observed | the preset's (required for a graph object) | Whose effect on whom. |
+| `adjust` | array of node ids | `[]` | The adjustment set: observed nodes other than the exposure and outcome. |
+| `mediator` | a node id or `null` | the preset's (`"Tar"` for `"front-door"`, else `null`) | A mediator for the front-door estimate. |
+| `noise` | `"unit"` or `"standardized"` | `"unit"` | `"unit"`: each node's own noise has variance 1. `"standardized"`: each node's noise variance makes its total variance 1, so the coefficients are standardized path coefficients (dagitty's `impliedCovarianceMatrix`); a graph whose coefficients would explain all of a node's variance is rejected. |
+| `sample` | `null` or `{n, seed}`: `n` an integer 1–5,000 | `null` | Draw `n` points from the graph. |
+
+A graph object is `{name?, nodes, edges}`: 2–12 `nodes`, each `{id, latent?, x?, y?}` (an `id` of up to 24 letters, digits and underscores starting with a letter; `latent: true` for an unobserved node; `x` and `y` place it for drawing, with *y* downward, and when any is missing the page lays the graph out in layers), and up to 40 `edges`, each `{from, to, coefficient}` with a coefficient from −10 to 10, at most one per pair of nodes, with no directed cycle. An edge with coefficient 0 counts as absent, for the verdicts as well as the numbers.
+
+Result: `nodes` (ids in graph order); `covariance`, the implied covariance of all the nodes, latent ones included; `noiseVariances`; `effect`, the causal effect of the exposure on the outcome; `estimate`, for `adjust`: `coefficient` (of the exposure, regressing the outcome on the exposure and the set), `bias` (`coefficient` − `effect`), `unbiased` (|`bias`| ≤ 1e-9 (1 + |`effect`|)), `valid` (the adjustment criterion of Shpitser, VanderWeele and Robins (2010): the set contains no descendant of a node on a causal path from the exposure to the outcome, listed in `forbidden`, and d-separates them in the graph without the first edges of the causal paths), `r2` (of the outcome on the exposure and the set), `partialCorrelation` and `conditionalCovariance` (of the exposure and the outcome given the set); `paths`, every path between the exposure and the outcome ignoring direction (up to 100, with `pathsTruncated`), each `{nodes, arrows, causal, open, blockedBy, openedBy}`: `arrows` gives the direction of each step (`"→"` or `"←"`), `blockedBy` the non-colliders in the set and the colliders with no adjusted descendant that block it, and `openedBy` the colliders the set opens; `sets`, every subset of the observed candidates (when there are at most 6), each `{adjust, coefficient, bias, unbiased, valid}`, else `null`; `frontDoor`, `null` or, with a `mediator` *M*, `{mediator, exposureToMediator, mediatorToOutcome, estimate, bias, unbiased, criterion, conditions}`: the estimate is β(*M* ~ exposure) × β(outcome ~ *M* + exposure), and `criterion` is Pearl's front-door criterion, whose three `conditions` are that *M* intercepts every directed path, that the exposure and *M* share no open back-door path, and that the exposure blocks every back-door path from *M* to the outcome; and `sample`, `null` or `{n, seed, coefficient, points}`: the sample's own regression coefficient and, for each point, the exposure and the outcome with the set regressed out of each (by the Frisch–Waugh theorem their slope is that coefficient).
+
+### view "colliders"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `colliders` | integer 1–1,024 | `8` | *p*, the number of colliders. |
+| `rYX` | number 0–0.99 | `0.15` | Cor(Y, X*ᵢ*). |
+| `share` | number 0–0.999 | `0.5` | Cor(U, X*ᵢ*)² as a share of 1 − `rYX`². |
+
+Y and U are independent with variance 1; each X*ᵢ* is caused by both, with Cor(X*ᵢ*, X*ⱼ*) = `rYX`² + Cor(U, X)² (collider_effects_on_R2.R's setup). Result: `rXX`, `rUX`; `r2`, the share of Y's variance the colliders explain; `partialCorrelation` and `semipartialCorrelation` of Y and U given the colliders, and their conditional `covariance`; and `curves`: `{shares, byCount}`, the script's 101 shares (0 to 0.99 by 0.01, and 0.999) and, for 1, 4, 16, 64, 256 and 1,024 colliders and for `colliders`, `r2` and `partialCorrelation` at each share.
+
+### Method
+
+- **Covariance and regressions.** Σ is built node by node in causal order, which is (*I* − *B*)^−ᵀ Ω (*I* − *B*)^−¹; regression coefficients and conditional covariances solve the normal equations Σ*SS* β = Σ*SY* by Gaussian elimination. Against dagitty 0.3.4 the implied covariances agree to 1e-12, and `valid` matches `isAdjustmentSet` for every set of every preset.
+- **Many colliders.** With *d* = 1 + (*p* − 1)`rXX`, the conditional variances are (1 − `rXX` + *p* Cor(U, X)²)/*d* for Y and (1 − `rXX` + *p* `rYX`²)/*d* for U and the covariance −*p* `rYX` Cor(U, X)/*d*, written without the subtraction from 1 that loses digits when the colliders explain nearly all of Y or U.
+- **Samples** are drawn in causal order with normal noise by inversion from mulberry32, so a seed gives the same points everywhere.
+- **What the scripts do differently.** `happiness_numeracy.R` asks dagitty for the adjustment sets of nodes `"USD"` and `"JOY"`, which are not in its graph, and calls `is_Illnesser`, which does not exist (it looks like `ggdag::is_confounder` after a find-and-replace of "Confound" with "Illness"); both stop with errors, and the corrected call gives `{Illness}`. Its simulation is unseeded with 10,000 draws; seeded with a million, its regressions agree with the exact values within 4 standard errors. `age_causal.R` rounds its implied covariance to four decimals before conditioning (harmless at its coefficients), and its second graph leaves three coefficients for dagitty to draw at random without a seed. `collider_effects_on_R2.R`'s `diag2()` turns a whole-number 1/(1 − `rXX`) of 2 or more into an identity matrix of that size, so with one collider the Sherman–Morrison step fails ("non-conformable arguments"; its own grid never meets such a value), and its 1 − *BC*⁻¹*B*ᵀ loses digits at many colliders: at 1,024 its partial correlation was off by up to 4 × 10⁻⁵ in the cases checked and fell below −1 at `rYX` = 0.95, `share` = 0.999. Its animation interpolated linearly between grid values of `rYX`.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -290,10 +331,15 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `not_applicable` (`rho` or `sample` with one trait)
 - `empty_category` (a table row or column with no counts)
 - `no_spread` (a variable whose values are all equal has no direction)
+- `unknown_node` (a node id that is not in the graph)
+- `not_observed` (an unobserved node as the exposure, outcome, mediator or in the adjustment set)
+- `duplicate_node`, `duplicate_edge` (two nodes with one id; two edges between one pair of nodes)
+- `cyclic` (a directed cycle, or an edge from a node to itself)
+- `not_standardizable` (standardized noise, but a node's coefficients explain all of its variance)
 - `not_symmetric` (a matrix entry that differs from its mirror)
 - `not_positive_semidefinite` (no arrows have these correlations; the message gives the smallest eigenvalue)
 
-Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]` or `params.cell[1]`. An empty path means the request as a whole.
+Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` or `params.adjust[0]`. An empty path means the request as a whole.
 
 ## Worked examples
 
@@ -502,3 +548,42 @@ Given r_AB = 0.7 and r_BC = 0.6, r_AC can be anything from −0.15 to 0.99; 0.5 
 ```
 
 90% of the mass lies between 8.8 and 11.2 from the mode, where the density is 10⁻²¹·⁵ of its value at the mode. A ball of radius 7 around the mode, reaching seven SDs out along every axis, holds 0.0004% of it.
+
+**Does adjusting for income show what numeracy does to satisfaction?** `numeracy.json`, on happiness_numeracy.R's graph:
+
+```json
+{"entry": "dag-adjustment", "params": {"graph": "happiness", "exposure": "Numeracy", "adjust": ["Income"]}}
+```
+
+`node intuitions/cli.mjs numeracy.json` prints (abridged: `params.graph` is the full graph object, and `covariance` and `noiseVariances` are left out):
+
+```json
+{
+  "entry": "dag-adjustment",
+  "params": { "view": "adjust", "graph": { "name": "happiness", "nodes": ["…"], "edges": ["…"] }, "exposure": "Numeracy", "outcome": "Satisfaction", "adjust": ["Income"], "mediator": null, "noise": "unit", "sample": null },
+  "result": {
+    "view": "adjust", "nodes": ["Numeracy", "Satisfaction", "Income", "Illness"],
+    "effect": 4,
+    "estimate": {
+      "adjust": ["Income"], "coefficient": -2, "bias": -6, "unbiased": false, "valid": false, "forbidden": ["Income"],
+      "r2": 0.918918918918919, "partialCorrelation": -0.5547001962252289,
+      "conditionalCovariance": [[0.33333333333333337, -0.6666666666666661], [-0.6666666666666661, 4.333333333333329]]
+    },
+    "paths": [
+      { "nodes": ["Numeracy", "Income", "Satisfaction"], "arrows": ["→", "→"], "causal": true, "open": false, "blockedBy": ["Income"], "openedBy": [] },
+      { "nodes": ["Numeracy", "Income", "Illness", "Satisfaction"], "arrows": ["→", "←", "→"], "causal": false, "open": true, "blockedBy": [], "openedBy": ["Income"] }
+    ],
+    "pathsTruncated": false,
+    "sets": [
+      { "adjust": [], "coefficient": 4, "bias": 0, "unbiased": true, "valid": true },
+      { "adjust": ["Income"], "coefficient": -2, "bias": -6, "unbiased": false, "valid": false },
+      { "adjust": ["Illness"], "coefficient": 4, "bias": 0, "unbiased": true, "valid": true },
+      { "adjust": ["Income", "Illness"], "coefficient": 0, "bias": -4, "unbiased": false, "valid": false }
+    ],
+    "frontDoor": null,
+    "sample": null
+  }
+}
+```
+
+No. Numeracy's effect, all through income, is +4. Adjusting for income blocks that path and opens Numeracy → Income ← Illness → Satisfaction, where income is a collider, so the coefficient comes out −2. Adjusting for nothing, or for illness, gives 4.

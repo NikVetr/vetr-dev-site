@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(4);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(4);
+  await expect(page.locator('.entry-card')).toHaveCount(5);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(5);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -198,9 +198,52 @@ test('probability mass: the shell, the cube, the water level and the sphere resp
   expect(errors).toEqual([]);
 });
 
+test('adjustment: presets, sets, node clicks, the front door, invalid noise and the API', async ({ page }) => {
+  const errors = await open(page, 'dag-adjustment/');
+  await expect(page.locator('#adjust-verdict')).toContainText('Biased');
+  await page.locator('#adjust-set input[value="Z"]').check();
+  await expect(page.locator('#adjust-verdict')).toContainText('✓ Unbiased');
+  await expect(page.locator('#adjust-sets tr.current')).toContainText('{Z}');
+
+  await page.locator('#adjust-preset').getByText('Collider').click();
+  await expect(page.locator('#adjust-verdict')).toContainText('✓ Unbiased');
+  await page.locator('#dag-plot [data-node="C"]').click();
+  await expect(page.locator('#adjust-verdict')).toContainText('✗ Biased');
+  await expect(page.locator('#adjust-paths')).toContainText('opens the collider');
+  await expect(page.locator('#adjust-set input[value="C"]')).toBeChecked();
+
+  await page.locator('#adjust-preset').getByText('Front door').click();
+  await expect(page.locator('#adjust-frontdoor')).toContainText('✓ Front door through Tar');
+  await expect(page.locator('#adjust-set-hint')).toContainText('Genotype is unobserved');
+
+  await page.locator('#adjust-preset').getByText('Income and happiness').click();
+  await page.locator('#adjust-noise').selectOption('standardized');
+  await expect(page.locator('#adjust-issues')).toContainText('explain 500% of its variance');
+  await page.locator('#adjust-noise').selectOption('unit');
+  await expect(page.locator('#adjust-issues')).toBeHidden();
+  await page.locator('#edge-0-number').fill('11');
+  await expect(page.locator('#edge-0-number')).toHaveAttribute('aria-invalid', 'true');
+
+  await page.locator('#colliders-p-number').fill('1024');
+  await expect(page.locator('#colliders-readout')).toContainText('1,024 colliders');
+
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const graph = { nodes: [{ id: 'A' }, { id: 'B' }, { id: 'C' }], edges: [{ from: 'A', to: 'B', coefficient: 0.5 }, { from: 'C', to: 'A', coefficient: 0.5 }, { from: 'C', to: 'B', coefficient: 0.5 }] };
+    const out = app.submit({ entry: 'dag-adjustment', params: { graph, exposure: 'A', outcome: 'B', adjust: ['C'] } });
+    return { effect: out.result.effect, coefficient: out.result.estimate.coefficient, request: app.getRequest().params.exposure };
+  });
+  expect(api.effect).toBeCloseTo(0.5, 12);
+  expect(api.coefficient).toBeCloseTo(0.5, 12);
+  expect(api.request).toBe('A');
+  await expect(page.locator('#adjust-verdict')).toContainText('✓ Unbiased');
+  await expect(page.locator('#dag-plot [data-node="C"] rect')).toHaveClass(/adjusted/);
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

@@ -2,6 +2,8 @@
 // parameters, and window.Intuitions with the shared submit().
 
 import { compute as correlationGeometry } from './correlation-geometry/compute.js';
+import { compute as dagAdjustment, PRESETS as DAG_PRESETS } from './dag-adjustment/compute.js';
+import { dagFigure } from './dag-adjustment/figure.js';
 import { coneScene, sceneCamera } from './correlation-geometry/figure.js';
 import { orientation } from './lib/geom3d.js';
 import { installApi, onWidth } from './lib/page.js';
@@ -33,6 +35,13 @@ const thumbs = [
   {
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-typical-set')),
     draw: (/** @type {number} */ width) => shellFigure(typicalSet({ view: 'shell', k: 25, radius: 0 }), { width, height: 150, compact: true }),
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-dag-adjustment')),
+    draw: (/** @type {number} */ width) => {
+      const params = { graph: DAG_PRESETS.collider.graph, exposure: 'X', outcome: 'Y', adjust: ['C'], mediator: null };
+      return dagFigure(params, dagAdjustment(params), { width, id: 'thumb-dag' }).svg;
+    },
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });
