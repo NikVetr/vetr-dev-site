@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(10);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(10);
+  await expect(page.locator('.entry-card')).toHaveCount(11);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(11);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -453,9 +453,71 @@ test('the backpack fallacy: priors, sizes, the shared p-value, the script\'s ave
   expect(errors).toEqual([]);
 });
 
+test('samplers: coordinates, playback mid-run, the Hastings ratio, Gibbs and the API', async ({ page }) => {
+  const errors = await open(page, 'samplers/');
+  await expect(page.locator('#funnel-target svg')).toBeVisible();
+  await expect(page.locator('#funnel-readout')).toContainText('has not reached the neck');
+  await expect(page.locator('#funnel-space-block')).toBeHidden();
+  await expect(page.locator('#funnel-time-out')).toHaveText('1,000 of 1,000');
+  // Play from the start: the chain and an HMC trajectory move, then pause mid-run.
+  await page.locator('#funnel-play').click();
+  await expect(page.locator('#funnel-play')).toHaveAttribute('aria-pressed', 'true');
+  await page.waitForTimeout(1200);
+  await page.locator('#funnel-play').click();
+  const shown = Number((await page.locator('#funnel-time-out').textContent())?.split(' ')[0].replace(/,/g, ''));
+  expect(shown).toBeGreaterThan(5);
+  expect(shown).toBeLessThan(200);
+  // Non-centred: the sampler's own space appears, and no transition diverges.
+  await page.locator('input[name="funnel-coordinates"][value="non-centred"]').check();
+  await expect(page.locator('#funnel-space-block')).toBeVisible();
+  await expect(page.locator('#funnel-readout')).toContainText('No transition diverged');
+  await expect(page.locator('#funnel-space .contour.c50')).toHaveCount(1);
+  // Random-walk Metropolis has no leapfrog steps.
+  await page.locator('input[name="funnel-sampler"][value="rwm"]').check();
+  await expect(page.locator('[data-leapfrog="funnel"]')).toBeHidden();
+  await expect(page.locator('#funnel-step-number')).toHaveValue('1');
+  // The Hastings ratio: left out, the chain settles on a shifted log-normal; included, on the target.
+  await expect(page.locator('#hastings-readout')).toContainText('shifted by −0.40');
+  await expect(page.locator('#hastings-plot .settled-contour')).toHaveCount(2);
+  await page.locator('input[name="hastings-correction"][value="correct"]').check();
+  await expect(page.locator('#hastings-readout')).toContainText('With the ratio');
+  await expect(page.locator('#hastings-plot .settled-contour')).toHaveCount(0);
+  // Gibbs only for the normal.
+  await expect(page.locator('input[name="target-sampler"][value="gibbs"]')).toBeDisabled();
+  await page.locator('input[name="target-target"][value="normal"]').check();
+  await page.locator('input[name="target-sampler"][value="gibbs"]').check();
+  await expect(page.locator('#target-readout')).toContainText('Every Gibbs move is accepted');
+  await expect(page.locator('[data-step="target"]')).toBeHidden();
+  // An invalid field is marked and the last chain stays, dimmed.
+  await page.locator('#target-iterations-number').fill('5');
+  await expect(page.locator('#target-iterations-number')).toHaveAttribute('aria-invalid', 'true');
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'samplers', params: { view: 'hastings', correction: 'reversed', iterations: 300, seed: 9 } });
+    return { shift: r.result.exact.settled.shift, request: app.getRequest() };
+  });
+  expect(api.shift).toBeCloseTo(-0.8, 12);
+  expect(api.request.params.seed).toBe(9);
+  await expect(page.locator('#hastings-seed')).toHaveValue('9');
+  await expect(page.locator('input[name="hastings-correction"][value="reversed"]')).toBeChecked();
+  expect(errors).toEqual([]);
+});
+
+test('samplers: with reduced motion asked for, a chain plays in tenths', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const errors = await open(page, 'samplers/');
+  await expect(page.locator('#funnel-reduced')).toBeVisible();
+  await page.locator('#funnel-play').click();
+  await page.waitForTimeout(1300);
+  await page.locator('#funnel-play').click();
+  const shown = Number((await page.locator('#funnel-time-out').textContent())?.split(' ')[0].replace(/,/g, ''));
+  expect(shown % 100).toBe(0);
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/', 'samplers/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

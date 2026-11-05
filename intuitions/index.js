@@ -12,6 +12,8 @@ import { installApi, onWidth } from './lib/page.js';
 import { compute as marchenkoPastur } from './marchenko-pastur/compute.js';
 import { spectrumFigure } from './marchenko-pastur/figure.js';
 import { compute as nullPvalues } from './null-pvalues/compute.js';
+import { compute as samplers } from './samplers/compute.js';
+import { chainFigure, chainLayer } from './samplers/figure.js';
 import { pairThumbnail } from './null-pvalues/figure.js';
 import { compute as thresholdModel } from './threshold-model/compute.js';
 import { compute as traitEvolution } from './trait-evolution/compute.js';
@@ -25,6 +27,7 @@ import { shellFigure } from './typical-set/figure.js';
 import { densityFigure } from './zscore-outliers/figure.js';
 
 const backpack = backpackFallacy({ prior: 'normal', scale: 0.3, sizes: [2, 16, 128, 1024], upTo: 5, window: 0 });
+const chain = /** @type {any} */ (samplers({ view: 'funnel', iterations: 400 }));
 const thumbs = [
   {
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-correlation-geometry')),
@@ -82,6 +85,17 @@ const thumbs = [
   {
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-backpack-fallacy')),
     draw: (/** @type {number} */ width) => curvesFigure(backpack, { width, height: 150, smaller: 2, at: 2, compact: true }),
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-samplers')),
+    draw: (/** @type {number} */ width) => {
+      const X = 1.96 * Math.exp(1.645 * 1.5);
+      const path = { a: chain.draws.x, b: chain.draws.y, accepted: chain.accepted, divergent: chain.divergent, trajectories: null, proposals: null };
+      return chainFigure({
+        width, height: 150, domain: { x: [-X, X], y: [-4.5, 4.5] }, walls: 0, xLabel: 'x', yLabel: 'y', id: 'thumb-samplers', label: '', compact: true,
+        layer: (x, y) => chainLayer(path, x, y, chain.accepted.length),
+      }).svg;
+    },
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });

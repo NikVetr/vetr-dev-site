@@ -14,6 +14,7 @@ The entries are:
 - [`trait-evolution`](#trait-evolution): traits evolving on a tree, in three views: one trait along every branch under Brownian motion, a trend, Ornstein–Uhlenbeck, an early or late burst, a burst partway through, or a clade shifting to a second optimum; two traits under Brownian motion with a rate matrix; and the Brownian bridge between fixed ends, filled in by midpoints, optionally kept inside a region.
 - [`tree-covariance`](#tree-covariance): a tree as a covariance matrix, in three views: the tips' covariance as shared paths with the tips as arrows and simulated tip values, re-rooting with the restricted and ordinary likelihoods, and Felsenstein's pruning step by step against the direct normal likelihood.
 - [`backpack-fallacy`](#backpack-fallacy): two *t*-tests with the same p-value and different group sizes: the chance that the smaller study has the larger true difference, at every p-value, when true means are Cauchy or normal, computed exactly; the script's sliding-window average; and each size's distribution of the true difference at one p-value.
+- [`samplers`](#samplers): Markov chain Monte Carlo on two-dimensional targets, every state, proposal and HMC trajectory returned for playback, in three views: Neal's funnel sampled in centred, non-centred or quantile coordinates by HMC or random-walk Metropolis; a multiplier move whose Hastings ratio is included, left out or reversed, against the targets those chains actually sample; and a correlated normal (with Gibbs) and an evil smiley; with acceptance, divergences, bulk ESS and KS distances to the exact marginals.
 
 ## Ways in
 
@@ -39,7 +40,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance or backpack-fallacy, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur and backpack-fallacy pages' own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance, backpack-fallacy or samplers, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur, backpack-fallacy and samplers pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -605,6 +606,62 @@ Result:
 - **Against R.** The density of |*T*| matches R's `integrate()` over the mixture to 5 × 10⁻⁶ (R's own `dt(…, ncp)` loses precision far out, where it warns), the quartiles of |Δ| R's `integrate()` and `uniroot()` to 10⁻⁶ and the chances of a larger effect to 10⁻⁶. backpack_fallacy.R, rerun with its ten million draws per size and `set.seed(1)` (and its p-value fixed, below), agrees with `windowed` in all 844 windows holding at least 30 pairs, none more than 3 standard errors away.
 - **What the script does differently.** Its two-sided log p-value is `log1p(exp(lp)) + lp`, log(*p*₁(1 + *p*₁)), where log(2*p*₁) was meant, which moves its axis about 0.3 to the right for small p-values without changing the order of the tests or their pairs; this entry uses the two-sided p-value. It shares one draw of true means across the sizes, which leaves the answer unchanged because each size's tests are paired at random. It also plots the log-odds, which this entry does not.
 
+## samplers
+
+One seeded Markov chain on a two-dimensional target, with no warm-up and no tuning, started at `start`. `params.view` picks the target and the samplers on offer. Every view takes:
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"funnel"`, `"hastings"` or `"target"` | `"funnel"` | Which panel. |
+| `step` | number 0.001–10 | random-walk Metropolis `1`, HMC `0.2`, the multiplier `0.5` | Random-walk Metropolis: the SD of the normal step in each coordinate. HMC: the leapfrog step size ε. The multiplier: λ, the SD of its log. (Gibbs has none.) |
+| `leapfrog` | integer 1–500 | `20` | HMC's leapfrog steps *L* (not in `"hastings"`). |
+| `iterations` | integer 10–100,000 | `1000` (`"funnel"`), `2000` | Transitions. |
+| `start` | `[x, y]`, numbers −1000 to 1000 | per view | The first state, in the target's own coordinates (positive for `"hastings"`). |
+| `seed` | integer 0–4,294,967,295 | `1` | |
+
+A request that would store more than 400,000 points (iterations times *L* + 2 for HMC, times 2 otherwise) is rejected (`too_much_work`).
+
+### view "funnel"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `coordinates` | `"centred"`, `"non-centred"` or `"quantile"` | `"centred"` | What the sampler moves in: (*x*, *y*) itself; two standard normals *a*, *b* with *x* = *a* e^(σ*b*), *y* = σ*b*; or two standard logistics *u*, *v*, the logits of the quantiles Φ(*x* e^−*y*) and Φ(*y*/σ), as Stan samples truncated_funnel.R's `real<lower=0, upper=1>` parameters. |
+| `sampler` | `"hmc"` or `"rwm"` | `"hmc"` | |
+| `sdY` | number 0.25–3 | `1.5` | σ: *y* ~ N(0, σ²), *x* \| *y* ~ N(0, e^(2*y*)). Neal's funnel is σ = 1.5. |
+
+`start` defaults to `[1, 0]`. Extra result fields: `space`, the chain in the sampler's coordinates, `{a, b}` (`null` when centred, where they are `draws`); `exact.y`, `{quantiles: {q05, q50, q95}, mean, sd}`; and `stats.tails`, `{below05, above95}`, the shares of draws of *y* beyond its exact 5% and 95% quantiles.
+
+### view "hastings"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `correction` | `"correct"`, `"missing"` or `"reversed"` | `"missing"` | The Hastings ratio of the move *x*′ = *x* e^(λ*Z*) on both coordinates: *x*′₁*x*′₂/(*x*₁*x*₂), left out (DoIUnderstandMCMC.R), or its inverse (simplex_proposal_distributions.R). |
+| `sd` | number 0.1–1.5 | `0.5` | *s*: log *x* ~ N(0, Σ), Σ = *s*²[[1, ρ], [ρ, 1]]. |
+| `correlation` | number −0.95–0.95 | `0.6` | ρ. |
+
+`start` defaults to `[1, 1]`. On the log scale the move is a symmetric random walk, so a chain whose ratio is π(*x*′)*h*(*x*′)/π(*x*)*h*(*x*) samples π*h* exactly: *h* = *x*₁*x*₂ gives the log-normal; *h* = 1, log *x* ~ N(−(1 + ρ)*s*²·1, Σ); *h* = 1/(*x*₁*x*₂), N(−2(1 + ρ)*s*²·1, Σ). Extra result fields: `exact`, `{mean, median, settled: {shift, mean, median}}`, the target's mean and median of each coordinate and those of the distribution this chain settles on, with its shift on the log scale (0 when correct); and `stats.settledKs`, the KS distances to that distribution (`null` when correct). `proposals` are on the log scale.
+
+### view "target"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `target` | `"smiley"` or `"normal"` | `"smiley"` | evil_smiley.stan's mixture with evil_smiley_bug.R's data, 0.75 of a banana (*x* ~ N(0, 1), *y* \| *x* ~ N(*x*², 1)) and 0.125 of each of two blobs N((∓1.5, 4), 0.5²*I*); or MCMC_Demo.R's normal, mean (3, −1.5), covariance [[2, 0.7], [0.7, 1]]. |
+| `sampler` | `"rwm"`, `"hmc"` or `"gibbs"` | `"rwm"` | Gibbs, as in MCMC_Demo.R, redraws one coordinate per iteration from its conditional, *y* on odd iterations and *x* on even ones; for the normal only (`not_applicable` otherwise). |
+
+`start` defaults to `[0, 0]`.
+
+### Result
+
+Every view's result has `view`; `sampler` (`"rwm"`, `"hmc"`, `"gibbs"` or `"multiplier"`); `draws`, `{x, y}`, every state in the target's coordinates, the start first (iterations + 1 values); `accepted`, 1 or 0 per transition; `proposals`, the proposed points `{a, b}` in the sampler's coordinates (random-walk Metropolis and the multiplier; else `null`); `trajectories`, for HMC each transition's leapfrog positions `[a₀, b₀, a₁, b₁, …]` in the sampler's coordinates, cut short where it diverged (else `null`); `divergent`, the transitions that diverged; and `stats`: `acceptance`, `divergences`, `gradients` (HMC's gradient evaluations, else `null`), `ess` `{x, y}` (bulk ESS, `null` for a chain that never moved), `ks` `{x, y}` (KS distance of the draws to the exact marginal), `mean` `{x, y}`, and the view's extra fields above.
+
+### Method
+
+- **Samplers.** Random-walk Metropolis moves both coordinates by independent normal steps. HMC draws a standard normal momentum, takes *L* leapfrog steps of size ε (half-step momentum, full-step position, half-step momentum) with an identity mass matrix and accepts with probability min(1, e^−Δ*H*); a transition whose energy error passes 1000, Stan's threshold, or stops being finite, is divergent, stopped there and rejected. Draws come from mulberry32, normals by inversion, so a seed gives the same chain everywhere.
+- **Diagnostics.** `ess` is posterior's `ess_bulk` for one chain: split in halves (the middle draw dropped for an odd count), rank-normalised with ties averaged, then Geyer's initial monotone sequence with posterior's cap; it matches `posterior::ess_bulk` to 1e-9 on R's AR(1) series, with ties, odd lengths and antithetic chains. The funnel's marginal of *x* and the smiley's of *y* are trapezoid integrals over the normal they mix, matching R's `integrate()` to 1e-9; the smiley's log density matches evil_smiley_functions.R's `log_posterior` to 1e-12.
+- **Against the exact targets.** Long seeded chains, thinned to about one draw per effective sample, pass a KS test at 0.1% on both marginals: the normal (random-walk Metropolis, HMC and Gibbs), the non-centred funnel (HMC and random-walk Metropolis) and the quantile one (HMC), a mild centred funnel (σ = 0.5, random-walk Metropolis), and the smiley (both). The multiplier passes against the log-normal with its ratio and against the shifted log-normals without it or with it reversed, which fail against the target by more than ten times the critical value.
+- **The backend.** truncated_funnel.R, funnel_test.R and evil_smiley_bug.R sample with Stan's NUTS (adaptive step size, dynamic trajectory length); this entry's HMC has a fixed ε and *L*, chosen by the request. On the two-dimensional funnel, cmdstan 2.38's NUTS (4 chains, 1,000 warm-up and 1,000 draws each, seed 1) diverges on 355 of 4,000 centred transitions at σ = 1.5 with no draws below *y*'s 5% quantile, and on 310 at σ = 1 with 0.7% there; non-centred and quantile, it has none and 5.3% and 5.4%.
+- **What the scripts do differently.** DoIUnderstandMCMC.R proposes *x* × N(1, 0.01²) and leaves out its Hastings ratio, (*x*/*x*′) φ((*x*/*x*′ − 1)/0.01)/φ((*x*′/*x* − 1)/0.01); rerun as written on N(0, 100²) from 35, its chain collapses to a mean of 0.0006 where the half-normal it can reach has 79.8, and with the ratio and a 10% multiplier it gives 79.7 (KS 0.010). This entry's multiplier is e^(λ*Z*), whose ratio is exactly *x*′/*x*. simplex_proposal_distributions.R's `betaMove` returns log forward − log backward, the ratio inverted; on its Beta(3, 5) example, rerun for a million steps, the mean is 0.406 (KS 0.10), and 0.376 (KS 0.007) with the ratio the right way up; for more than two components its rescaling of the others also needs the factor ((1 − *x*′)/(1 − *x*))^(*K* − 2). truncated_funnel.R's truncated centred and non-centred models omit the per-*y* normalisation of *x*'s truncation while its quantile models include it, so they sample different distributions, and its reference draws take *y* from one and *x* from the other; this entry samples only the untruncated funnel. funnel_test.R defines `stan_code_sqrt` twice, so its first (signed-square) model never runs. MCMC_Demo.R's Metropolis step moves one coordinate by a uniform window; random-walk Metropolis here moves both by a normal step.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -632,7 +689,7 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `wrong_type`
 - `out_of_range`
 - `conflicting_fields` (a table and a model in one request)
-- `not_applicable` (`rho` or `sample` with one trait)
+- `not_applicable` (`rho` or `sample` with one trait; Gibbs sampling for a target without exact conditionals)
 - `empty_category` (a table row or column with no counts)
 - `no_spread` (a variable whose values are all equal has no direction)
 - `unknown_node` (a node id that is not in the graph)

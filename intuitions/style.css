@@ -670,3 +670,25 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .scrub-plot { cursor: ew-resize; }
 .check-label { display: inline-flex; gap: 0.45rem; align-items: center; min-height: 2rem; }
 .panel-side input[type="text"] { width: 100%; }
+
+/* ---------- Samplers ---------- */
+
+.figure-title { margin: 0.3rem 0 0.25rem; font-size: 0.98rem; }
+.figure-row.single { grid-template-columns: minmax(0, 1fr); }
+.plot .contour { fill: none; stroke: var(--muted); stroke-linejoin: round; }
+.plot .contour.c50 { stroke-width: 1.6; }
+.plot .contour.c90 { stroke-width: 1.1; }
+.plot .contour.c99 { stroke-width: 0.9; stroke-dasharray: 1.5 3; }
+.plot .settled-contour { fill: none; stroke: var(--b); stroke-width: 1.8; stroke-dasharray: 6 4; }
+.plot .settled-contour.c90 { stroke-width: 1.2; }
+.plot .settled-line { fill: none; stroke: var(--b); stroke-width: 2; stroke-dasharray: 6 4; }
+.plot .chain-path { fill: none; stroke: var(--a); stroke-width: 1; stroke-opacity: 0.6; stroke-linejoin: round; }
+.plot .trajectory { fill: none; stroke: var(--c); stroke-width: 1.8; stroke-linejoin: round; }
+.plot .proposal { stroke: var(--c); stroke-width: 1.6; }
+.plot .trajectory.rejected, .plot .proposal.rejected { stroke-dasharray: 4 3; }
+.plot .move-mark { fill: var(--c); stroke: var(--surface); stroke-width: 1.5; }
+.plot .move-hollow { fill: var(--surface); stroke: var(--c); stroke-width: 1.8; }
+.plot .divergent-mark { fill: none; stroke: var(--alert); stroke-width: 2.2; stroke-linecap: round; }
+.plot .current-mark { fill: var(--surface); stroke: var(--ink); stroke-width: 2.2; }
+.plot .quantile-line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; stroke-opacity: 0.7; }
+.plot .trace-line { fill: none; stroke: var(--a); stroke-width: 1; stroke-linejoin: round; }

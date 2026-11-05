@@ -4,7 +4,7 @@
 
 import { orientation, attachRotation } from '../lib/geom3d.js';
 import { formatNumber } from '../lib/format.js';
-import { bindPair, installApi, integerField, onWidth, setInvalid, workerRunner } from '../lib/page.js';
+import { bindPair, installApi, integerField, onWidth, playback, setInvalid, workerRunner } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { swatch } from '../lib/plot.js';
 import { parseNewick, tipsBelow } from '../lib/tree.js';
@@ -18,7 +18,6 @@ const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.get
 const input = (/** @type {string} */ id) => /** @type {HTMLInputElement} */ ($(id));
 const stat = (/** @type {string} */ label, /** @type {string} */ value) => `<div><dt>${label}</dt><dd>${value}</dd></div>`;
 const num = (/** @type {number} */ v, d = 2) => formatNumber(v, d);
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const MODEL_VALUES = { drift: 2, alpha: 4, theta: 1.5, theta2: -1.5, change: -4, burstAt: 0.5, delta2: 5, lambda: 8 };
 const freshTree = () => ({ source: 'yule', tips: 12, treeSeed: 1, newick: '((A:1,B:1):1,C:2);', layout: 'rectangular', model: /** @type {Model} */ ('bm'), sigma2: 1, root: 0, steps: 300, seed: 1, clade: /** @type {string[] | null} */ (null), ...MODEL_VALUES });
@@ -114,95 +113,6 @@ function update(v) {
 const bridgeRunners = { main: workerRunner(), other: workerRunner() };
 
 // ---------- Playback ----------
-
-/**
- * A Play/Pause button, a restart button, a time slider and a speed choice in
- * `#<id>-playback`. `max()` is the end; `discrete` plays whole steps of 1 (the bridge's
- * levels). Nothing moves until Play is pressed. With reduced motion, playback jumps a
- * tenth of the way at a time instead of moving continuously.
- * @param {View} id @param {{ max: () => number, seconds: number, discrete?: boolean, label: string, format: (t: number, max: number) => string, onTime: (t: number) => void }} options
- */
-function player(id, { max, seconds, discrete = false, label, format, onTime }) {
-  const box = $(`${id}-playback`);
-  box.innerHTML = `
-    <button type="button" class="play" id="${id}-play" aria-pressed="false"><span class="glyph" aria-hidden="true">▶</span> <span class="play-text">Play</span></button>
-    <button type="button" id="${id}-restart">Back to the start</button>
-    <label class="time-field" for="${id}-time">${label} <output id="${id}-time-out" for="${id}-time"></output></label>
-    <input type="range" id="${id}-time" min="0" max="1" step="any">
-    <label class="speed-field" for="${id}-speed">Speed <select id="${id}-speed"><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
-    <p class="hint reduced-note" id="${id}-reduced" hidden>Your system asks for reduced motion, so playback moves in steps.</p>`;
-  const play = /** @type {HTMLButtonElement} */ ($(`${id}-play`));
-  const slider = input(`${id}-time`);
-  const speed = /** @type {HTMLSelectElement} */ ($(`${id}-speed`));
-  const out = /** @type {HTMLOutputElement} */ ($(`${id}-time-out`));
-  let t = 0;
-  let playing = false;
-  let frame = 0;
-  let timer = 0;
-  const show = () => {
-    const m = max();
-    slider.max = String(m);
-    slider.step = discrete ? '1' : String(m / 500);
-    slider.value = String(t);
-    out.textContent = format(t, m);
-    play.setAttribute('aria-pressed', String(playing));
-    /** @type {HTMLElement} */ (play.querySelector('.glyph')).textContent = playing ? '⏸' : '▶';
-    /** @type {HTMLElement} */ (play.querySelector('.play-text')).textContent = playing ? 'Pause' : 'Play';
-    $(`${id}-reduced`).hidden = !reducedMotion.matches;
-  };
-  const set = (/** @type {number} */ value) => {
-    t = Math.max(0, Math.min(max(), value));
-    show();
-    onTime(t);
-  };
-  const stop = () => {
-    playing = false;
-    cancelAnimationFrame(frame);
-    clearTimeout(timer);
-    show();
-  };
-  const start = () => {
-    const m = max();
-    if (t >= m - 1e-9) set(0);
-    playing = true;
-    show();
-    if (discrete || reducedMotion.matches) {
-      const jump = discrete ? 1 : m / 10;
-      const tick = () => {
-        if (!playing) return;
-        set(Math.min(m, discrete ? Math.floor(t + jump) : t + jump));
-        if (t >= m - 1e-9) stop();
-        else timer = window.setTimeout(tick, 900 / Number(speed.value));
-      };
-      timer = window.setTimeout(tick, discrete ? 600 / Number(speed.value) : 400);
-      return;
-    }
-    let last = performance.now();
-    const step = (/** @type {number} */ now) => {
-      if (!playing) return;
-      const dt = Math.min(0.1, (now - last) / 1000);
-      last = now;
-      set(t + (dt * m * Number(speed.value)) / seconds);
-      if (t >= m - 1e-9) stop();
-      else frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-  };
-  play.addEventListener('click', () => (playing ? stop() : start()));
-  $(`${id}-restart`).addEventListener('click', () => { stop(); set(0); });
-  slider.addEventListener('input', () => {
-    const value = Number(slider.value); // stop() redraws the slider, so read it first
-    stop();
-    set(value);
-  });
-  reducedMotion.addEventListener('change', show);
-  return {
-    get time() { return t; },
-    /** After a new result: stop, and show the whole run. */
-    reset() { stop(); t = max(); show(); },
-    show,
-  };
-}
 
 // ---------- Panel 1: one trait ----------
 
@@ -407,9 +317,9 @@ const RENDER = {
 const render = (v) => RENDER[v]();
 
 const players = {
-  tree: player('tree', { max: () => results.tree?.result.treeHeight ?? 1, seconds: 8, label: 'Time', format: (t, m) => `${num(t)} of ${num(m)}`, onTime: showTreeTime }),
-  bivariate: player('bivariate', { max: () => results.bivariate?.result.treeHeight ?? 1, seconds: 8, label: 'Time', format: (t, m) => `${num(t)} of ${num(m)}`, onTime: renderBivariate }),
-  bridge: player('bridge', { max: () => results.bridge?.params.levels ?? 1, seconds: 6, discrete: true, label: 'Level', format: (t, m) => `${t} of ${m}`, onTime: renderBridge }),
+  tree: playback('tree', { max: () => results.tree?.result.treeHeight ?? 1, seconds: 8, label: 'Time', format: (t, m) => `${num(t)} of ${num(m)}`, onTime: showTreeTime }),
+  bivariate: playback('bivariate', { max: () => results.bivariate?.result.treeHeight ?? 1, seconds: 8, label: 'Time', format: (t, m) => `${num(t)} of ${num(m)}`, onTime: renderBivariate }),
+  bridge: playback('bridge', { max: () => results.bridge?.params.levels ?? 1, seconds: 6, discrete: true, label: 'Level', format: (t, m) => `${t} of ${m}`, onTime: renderBridge }),
 };
 
 // ---------- Controls ----------

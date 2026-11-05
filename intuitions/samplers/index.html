@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Watch Markov chain Monte Carlo samplers step through two-dimensional targets: Neal's funnel in centred, non-centred and quantile coordinates, a multiplier move with its Hastings ratio right, missing or reversed, and a correlated normal and an evil smiley, with acceptance, effective sample size and HMC divergences.">
+  <title>Funnels, coordinates and the Hastings ratio · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 6c6 8 8 8 9 20M26 6c-6 8-8 8-9 20' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Cpath d='M9 20l4-3 2 4 4-5 3 2' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Samplers</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Funnels, coordinates and the Hastings ratio</h1>
+      <p class="lede">A Markov chain Monte Carlo sampler walks through a distribution one step at a time, and in the long run the places it visits are a sample from it. Whether it gets there depends on the distribution's shape in the coordinates the sampler moves in, and on an acceptance rule that is exactly right. Press Play on a panel to watch a chain move; the numbers beside it say how close it has come to the exact answer.</p>
+      <p class="note"><strong>A different sampler from the scripts'.</strong> truncated_funnel.R, funnel_test.R and evil_smiley_bug.R sample with Stan's No-U-Turn sampler, which tunes its step size during warm-up and chooses each trajectory's length. This page runs small samplers written for it instead (random-walk Metropolis, Gibbs, and Hamiltonian Monte Carlo with the step size and number of steps you set), with no warm-up and no tuning, so that every step can be watched. Its chains are checked against the exact targets. Stan, run on the same funnel, fails the same way in the centred coordinates (see <a href="#how">How it works</a>).</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#funnel">One funnel, three coordinates</a></li>
+          <li><a href="#hastings">The Hastings ratio</a></li>
+          <li><a href="#target">A normal and an evil smiley</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="funnel" aria-labelledby="funnel-heading">
+      <h2 id="funnel-heading"><span class="panel-number">1</span> One funnel, three coordinates</h2>
+      <p class="panel-intro">Neal's funnel is the shape a hierarchical model takes when the spread between its groups is uncertain: <var>y</var> is normal with SD σ, and given <var>y</var>, <var>x</var> is normal with SD e<sup><var>y</var></sup>. Low <var>y</var> is a narrow neck and high <var>y</var> a wide mouth, so no one step size suits both. Sampled in these coordinates (centred), a chain hardly enters the neck: steps sized for the mouth overshoot it, and there HMC's trajectories diverge. Written as two independent standard normals, with <var>x</var> = <var>x</var><sub>raw</sub> e<sup>σ<var>y</var><sub>raw</sub></sup> (non-centred), the same distribution is a round blob that a sampler crosses easily. truncated_funnel.R tries a third way: two quantiles in (0, 1) put through Φ⁻¹, which Stan samples on the logit scale.</p>
+      <div class="panel-body">
+        <figure id="funnel-figures">
+          <ul class="legend" id="funnel-legend"></ul>
+          <div class="figure-row halves" id="funnel-row">
+            <div id="funnel-space-block">
+              <h3 class="figure-title" id="funnel-space-title">Where the sampler moves</h3>
+              <div id="funnel-space" class="plot-box stale-dim"></div>
+            </div>
+            <div>
+              <h3 class="figure-title">The funnel, <var>x</var> against <var>y</var></h3>
+              <div id="funnel-target" class="plot-box stale-dim"></div>
+            </div>
+          </div>
+          <div class="playback" id="funnel-playback"></div>
+          <div class="figure-row halves">
+            <div>
+              <h3 class="figure-title"><var>y</var> at each iteration</h3>
+              <div id="funnel-trace" class="plot-box stale-dim"></div>
+            </div>
+            <div>
+              <h3 class="figure-title">The draws of <var>y</var> so far</h3>
+              <div id="funnel-hist" class="plot-box stale-dim"></div>
+            </div>
+          </div>
+          <figcaption class="caption">The funnel's curves hold 50% and 95% of <var>x</var> at each <var>y</var>; in the sampler's own coordinates, the contours hold 50%, 90% and 99% of the mass. Dashed lines on the trace are <var>y</var>'s exact 5%, 50% and 95% quantiles; the curve over the histogram is its exact density.</figcaption>
+          <p class="sim-status" id="funnel-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>Sample in</legend>
+            <div class="segmented" id="funnel-coordinates">
+              <label><input type="radio" name="funnel-coordinates" value="centred"> <var>x</var> and <var>y</var> (centred)</label>
+              <label><input type="radio" name="funnel-coordinates" value="non-centred"> Two standard normals (non-centred)</label>
+              <label><input type="radio" name="funnel-coordinates" value="quantile"> Two quantiles</label>
+            </div>
+          </fieldset>
+          <fieldset class="control choice-list">
+            <legend>Sampler</legend>
+            <div class="segmented" id="funnel-sampler">
+              <label><input type="radio" name="funnel-sampler" value="hmc"> HMC</label>
+              <label><input type="radio" name="funnel-sampler" value="rwm"> Random-walk Metropolis</label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="funnel-sdY-number">SD of <var>y</var>, σ</label>
+              <input id="funnel-sdY-number" type="number" min="0.25" max="3" step="0.05">
+            </div>
+            <input id="funnel-sdY-range" type="range" min="0.25" max="3" step="0.05" aria-label="SD of y, slider">
+            <p class="hint">Neal's funnel is σ = 1.5 (his <var>v</var> = 2<var>y</var> has SD 3); truncated_funnel.R uses 1 with 100 <var>x</var>'s.</p>
+          </div>
+          <div class="control" data-step="funnel"></div>
+          <div class="control" data-leapfrog="funnel"></div>
+          <div class="control" data-run="funnel"></div>
+          <div id="funnel-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="funnel-readout" aria-live="polite"></p>
+          <dl class="stats" id="funnel-stats"></dl>
+          <div class="controls-foot"><button type="button" id="funnel-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="hastings" aria-labelledby="hastings-heading">
+      <h2 id="hastings-heading"><span class="panel-number">2</span> The Hastings ratio</h2>
+      <p class="panel-intro">A Metropolis–Hastings step proposes a move from <var>x</var> to <var>x</var>′ and accepts it with probability min(1, π(<var>x</var>′) <var>q</var>(<var>x</var> | <var>x</var>′) / π(<var>x</var>) <var>q</var>(<var>x</var>′ | <var>x</var>)). When proposals are not symmetric, the ratio <var>q</var>(<var>x</var> | <var>x</var>′)/<var>q</var>(<var>x</var>′ | <var>x</var>) keeps the chain on its target. Multiplying a positive parameter by e<sup>λ<var>Z</var></sup>, a common move for scales and rates, proposes large values more widely than small ones, and its ratio is <var>x</var>′/<var>x</var>. Leave the ratio out, as DoIUnderstandMCMC.R does, and the chain settles on π(<var>x</var>)/<var>x</var>; turn it upside down, as the beta move of simplex_proposal_distributions.R does, and it settles on π(<var>x</var>)/<var>x</var>². Here both coordinates of a log-normal pair are multiplied at each step.</p>
+      <div class="panel-body">
+        <figure id="hastings-figures">
+          <ul class="legend" id="hastings-legend"></ul>
+          <div id="hastings-plot" class="plot-box stale-dim"></div>
+          <div class="playback" id="hastings-playback"></div>
+          <h3 class="figure-title">The draws of <var>x</var><sub>1</sub> so far</h3>
+          <div id="hastings-hist" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Solid contours and curve: the log-normal the chain is meant to sample. Dashed: the distribution a chain with this ratio actually samples, when that is different.</figcaption>
+          <p class="sim-status" id="hastings-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>The Hastings ratio</legend>
+            <div class="checks" id="hastings-correction">
+              <label><input type="radio" name="hastings-correction" value="correct"> Included, <var>x</var>′₁<var>x</var>′₂/(<var>x</var>₁<var>x</var>₂)</label>
+              <label><input type="radio" name="hastings-correction" value="missing"> Left out, as in DoIUnderstandMCMC.R</label>
+              <label><input type="radio" name="hastings-correction" value="reversed"> Upside down, as in simplex_proposal_distributions.R</label>
+            </div>
+          </fieldset>
+          <div class="control" data-step="hastings"></div>
+          <div class="control">
+            <div class="control-head">
+              <label for="hastings-sd-number">SD of each log <var>x</var>, <var>s</var></label>
+              <input id="hastings-sd-number" type="number" min="0.1" max="1.5" step="0.05">
+            </div>
+            <input id="hastings-sd-range" type="range" min="0.1" max="1.5" step="0.05" aria-label="SD of each log x, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="hastings-correlation-number">Their correlation, ρ</label>
+              <input id="hastings-correlation-number" type="number" min="-0.95" max="0.95" step="0.05">
+            </div>
+            <input id="hastings-correlation-range" type="range" min="-0.95" max="0.95" step="0.05" aria-label="Correlation of the logs, slider">
+          </div>
+          <div class="control" data-run="hastings"></div>
+          <div id="hastings-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="hastings-readout" aria-live="polite"></p>
+          <dl class="stats" id="hastings-stats"></dl>
+          <div class="controls-foot"><button type="button" id="hastings-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="target" aria-labelledby="target-heading">
+      <h2 id="target-heading"><span class="panel-number">3</span> A normal and an evil smiley</h2>
+      <p class="panel-intro">Two more of the scripts' targets. MCMC_Demo.R's correlated normal comes with a Gibbs sampler, which redraws one coordinate at a time from its exact conditional distribution, so every move is accepted but each moves along one axis only. The evil smiley of evil_smiley.stan is a mixture: a banana-shaped mouth with three-quarters of the mass and two small eyes above it, which a sampler has to find and travel between.</p>
+      <div class="panel-body">
+        <figure id="target-figures">
+          <ul class="legend" id="target-legend"></ul>
+          <div id="target-plot" class="plot-box stale-dim"></div>
+          <div class="playback" id="target-playback"></div>
+          <div class="figure-row halves">
+            <div>
+              <h3 class="figure-title">The draws of <var>x</var> so far</h3>
+              <div id="target-hist-x" class="plot-box stale-dim"></div>
+            </div>
+            <div>
+              <h3 class="figure-title">The draws of <var>y</var> so far</h3>
+              <div id="target-hist-y" class="plot-box stale-dim"></div>
+            </div>
+          </div>
+          <figcaption class="caption">Contours hold 50%, 90% and 99% of the mass; the curves over the histograms are the exact marginal densities.</figcaption>
+          <p class="sim-status" id="target-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>Target</legend>
+            <div class="segmented" id="target-target">
+              <label><input type="radio" name="target-target" value="smiley"> The evil smiley</label>
+              <label><input type="radio" name="target-target" value="normal"> MCMC_Demo.R's normal</label>
+            </div>
+          </fieldset>
+          <fieldset class="control choice-list">
+            <legend>Sampler</legend>
+            <div class="segmented" id="target-sampler">
+              <label><input type="radio" name="target-sampler" value="rwm"> Random-walk Metropolis</label>
+              <label><input type="radio" name="target-sampler" value="hmc"> HMC</label>
+              <label><input type="radio" name="target-sampler" value="gibbs"> Gibbs</label>
+            </div>
+            <p class="hint" id="target-gibbs-hint">Gibbs needs the exact conditionals, which only the normal has here.</p>
+          </fieldset>
+          <div class="control" data-step="target"></div>
+          <div class="control" data-leapfrog="target"></div>
+          <div class="control" data-run="target"></div>
+          <div id="target-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="target-readout" aria-live="polite"></p>
+          <dl class="stats" id="target-stats"></dl>
+          <div class="controls-foot"><button type="button" id="target-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" id="how" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>The samplers</h3>
+        <p>Random-walk Metropolis proposes a move by a normal step with the SD you set, in both coordinates at once, and accepts it with probability min(1, π(<var>x</var>′)/π(<var>x</var>)). HMC draws a standard normal momentum, follows the target's gradient by the leapfrog method with step size ε for the number of steps you set, and accepts the end point with probability e<sup>−Δ<var>H</var></sup>, the change in total energy; when that change passes 1000 (Stan's threshold), the transition is divergent: it stops there and is rejected. Gibbs, as in MCMC_Demo.R, redraws <var>x</var> and <var>y</var> in turn from their conditionals. Every chain starts at the point shown, with no warm-up, and draws from shared/rng.js's mulberry32, so a seed gives the same chain in every browser and in Node. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <h3>The numbers</h3>
+        <p>The effective sample size is posterior's bulk ESS, as Stan and truncated_funnel.R report it: the chain split in two halves, rank-normalised, with Geyer's initial monotone sequence; on R's own series it agrees with posterior::ess_bulk to 10<sup>−9</sup>. The KS distance is the largest gap between the draws' distribution function and the exact one. The exact marginals are closed forms, or one-dimensional integrals (the funnel's <var>x</var>, the smiley's <var>y</var>) that match R's integrate() to 10<sup>−9</sup>.</p>
+        <h3>Checked against the exact targets</h3>
+        <p>Long seeded chains, thinned to about one draw per effective sample, pass a Kolmogorov–Smirnov test at 0.1% against every exact marginal: the normal by all three samplers, the non-centred and quantile funnels by HMC and random-walk Metropolis, a mild centred funnel (σ = 0.5), and the smiley by both. The multiplier with its ratio reaches the log-normal; without it, or with it reversed, it passes against the shifted log-normal it settles on and fails against the target by more than ten times the critical value.</p>
+        <h3>The scripts, and Stan</h3>
+        <p>On the same two-dimensional funnel (σ = 1.5, four chains of 1,000 after 1,000 of warm-up), Stan's NUTS diverges on 355 of 4,000 centred transitions and none of its draws fall below <var>y</var>'s exact 5% quantile; non-centred and quantile, it has no divergences and 5.3% and 5.4% of its draws there. With the script's σ = 1, 310 centred transitions diverge and 0.7% of draws reach the bottom 5%. So the backend changes how fast a chain fails, not which coordinates fail.</p>
+        <h3>What the scripts do differently</h3>
+        <p>DoIUnderstandMCMC.R multiplies by a normal N(1, 0.01²) draw and accepts without the Hastings ratio, (<var>x</var>/<var>x</var>′) φ((<var>x</var>/<var>x</var>′ − 1)/0.01)/φ((<var>x</var>′/<var>x</var> − 1)/0.01). Rerun as written, its chain on a normal with SD 100 collapses towards 0 (mean 0.0006, against the half-normal's 79.8); with the ratio and a 10% multiplier it reaches 79.7. Its 1% multiplier mixes too slowly to show this in a million steps. This page multiplies by e<sup>λ<var>Z</var></sup>, whose ratio is exactly <var>x</var>′/<var>x</var>, so the wrong chains' targets have closed forms. simplex_proposal_distributions.R's betaMove returns the log of forward over backward, the ratio upside down: on its Beta(3, 5) example its chain's mean is 0.406, against 0.375 exactly and 0.376 with the ratio corrected. truncated_funnel.R's truncated models do not share one target: its centred and non-centred versions truncate without the per-<var>y</var> normalisation, while its quantile versions normalise <var>x</var>'s truncation for each <var>y</var>, and its reference draws mix the two; this page samples only the untruncated funnel. MCMC_Demo.R's Metropolis step moves one coordinate by a uniform window; here random-walk Metropolis moves both by a normal step.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+</body>
+</html>

@@ -307,6 +307,34 @@ export function marginals(p) {
   return { x: smileyXCdf, y: smileyYCdf, settled: null };
 }
 
+/** The normal density. @param {number} v @param {number} m @param {number} s */
+const dnormal = (v, m, s) => Math.exp(-0.5 * ((v - m) / s) ** 2) / (s * Math.sqrt(2 * Math.PI));
+
+/**
+ * The marginal densities matching marginals(): for (x, y), and where a chain settles.
+ * @param {Params} p
+ * @returns {{ x: (v: number) => number, y: (v: number) => number, settled: null | { x: (v: number) => number, y: (v: number) => number } }}
+ */
+export function marginalDensities(p) {
+  if (p.view === 'funnel') {
+    const nodes = normalNodes(p.sdY);
+    return { x: (v) => nodes.reduce((s, { y, w }) => s + w * dnormal(v * Math.exp(-y), 0, 1) * Math.exp(-y), 0), y: (v) => dnormal(v, 0, p.sdY), settled: null };
+  }
+  if (p.view === 'hastings') {
+    const ln = (/** @type {number} */ shift) => (/** @type {number} */ v) => (v > 0 ? dnormal(Math.log(v), shift, p.sd) / v : 0);
+    const shift = settledShift(p.correction, p.sd, p.correlation);
+    return { x: ln(0), y: ln(0), settled: shift === 0 ? null : { x: ln(shift), y: ln(shift) } };
+  }
+  if (p.target === 'normal') return { x: (v) => dnormal(v, NORMAL.mean[0], Math.sqrt(NORMAL.cov[0][0])), y: (v) => dnormal(v, NORMAL.mean[1], Math.sqrt(NORMAL.cov[1][1])), settled: null };
+  const { banana, blobs } = SMILEY;
+  const nodes = normalNodes(banana.sd[0]);
+  return {
+    x: (v) => banana.weight * dnormal(v, banana.mu[0], banana.sd[0]) + blobs.reduce((s, b) => s + b.weight * dnormal(v, b.mu[0], b.sd), 0),
+    y: (v) => banana.weight * nodes.reduce((s, { y: x, w }) => s + w * dnormal(v, banana.mu[1] + (x + banana.mu[0]) ** 2, banana.sd[1]), 0) + blobs.reduce((s, b) => s + b.weight * dnormal(v, b.mu[1], b.sd), 0),
+    settled: null,
+  };
+}
+
 // ---------- Diagnostics ----------
 
 /** posterior's .ess() on the columns of a matrix (an array of chains). @param {number[][]} chains */
