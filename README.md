@@ -4,7 +4,35 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## The landing page
 
-A grid of cards, as many columns as the width allows, newest first by each tool's date (ties by title). Each card is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, and draw its picture.
+A wall of tiles, one per tool, each sized by how big the project is. Each tile is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture.
+
+### Tile sizes
+
+A tile's size is the `data-size` of its `<li>` in `index.html`: 3 large, 2 wide, 1 small. Change that one number to resize a tile. The sizes come from a project's size in code: the hand-written lines of the tool itself (JavaScript, HTML and CSS, without vendored code, tests or data) plus the lines of the R code it reproduces, for the ports that match an R original. That is 10,000 lines or more for large, 2,500 or more for wide. The gallery's thirteen entries show up in its code size.
+
+| Tool | Web lines | R lines reproduced | Total | Size |
+| --- | ---: | ---: | ---: | ---: |
+| Pocket Language Guide | 39,474 | | 39,474 | 3 |
+| Color Palette Extender | 20,611 | | 20,611 | 3 |
+| Sankey Diagrams | 8,786 | 11,499 (polylines) | 20,285 | 3 |
+| Statistical Intuitions (13 entries) | 17,702 | | 17,702 | 3 |
+| autoCHAIR | 13,944 | | 13,944 | 3 |
+| Multipanel Layout GUI | 6,943 | | 6,943 | 2 |
+| Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2 |
+| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 2 |
+| Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2 |
+| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | 2 |
+| Signature Correction | 2,952 | 491 | 3,443 | 2 |
+| Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2 |
+| Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 2 |
+| Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2 |
+| Photomosaic | 1,785 | 110 | 1,895 | 1 |
+| Helix and Braid | 1,373 | 441 | 1,814 | 1 |
+| Forecast Calibration | 1,474 | 39 | 1,513 | 1 |
+
+Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
+
+The column count steps with the width, from one on a phone to seven on an ultrawide screen (`style.css`). Large tiles take two columns and two rows; a whole row when there are three columns; and two columns of one row at five or seven, where the rows of one-column tiles are tall. Wide tiles take two columns, but one at an odd count, which has no room for them. The cards are newest first, moved just enough that at every column count the tiles close up with no gaps in their order, so Tab order is the order you see. `grid-auto-flow: dense` fills any gap a changed size opens by moving a later small tile up.
 
 The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
