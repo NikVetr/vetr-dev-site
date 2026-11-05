@@ -107,6 +107,46 @@ export function logTicks(lo, hi, max) {
   return powers.filter((e) => (top - e) % every === 0).map((e) => 10 ** e);
 }
 
+/**
+ * Isolines of a grid by marching squares, as path data in pixels.
+ * @param {Float64Array} values row-major, ny rows of nx @param {number} nx @param {number} ny
+ * @param {number} level @param {(i: number, j: number) => Point} at pixel of grid point (i, j)
+ */
+export function isoline(values, nx, ny, level, at) {
+  let d = '';
+  const v = (/** @type {number} */ i, /** @type {number} */ j) => values[j * nx + i];
+  const cross = (/** @type {number} */ i0, /** @type {number} */ j0, /** @type {number} */ i1, /** @type {number} */ j1) => {
+    const a = v(i0, j0);
+    const b = v(i1, j1);
+    const t = (level - a) / (b - a);
+    const p0 = at(i0, j0);
+    const p1 = at(i1, j1);
+    return [p0[0] + t * (p1[0] - p0[0]), p0[1] + t * (p1[1] - p0[1])];
+  };
+  for (let j = 0; j + 1 < ny; j++) {
+    for (let i = 0; i + 1 < nx; i++) {
+      const code = (v(i, j) > level ? 1 : 0) | (v(i + 1, j) > level ? 2 : 0) | (v(i + 1, j + 1) > level ? 4 : 0) | (v(i, j + 1) > level ? 8 : 0);
+      if (code === 0 || code === 15) continue;
+      const bottom = () => cross(i, j, i + 1, j);
+      const right = () => cross(i + 1, j, i + 1, j + 1);
+      const top = () => cross(i, j + 1, i + 1, j + 1);
+      const left = () => cross(i, j, i, j + 1);
+      /** @type {Record<number, (() => number[])[][]>} */
+      const SEGMENTS = {
+        1: [[left, bottom]], 2: [[bottom, right]], 3: [[left, right]], 4: [[right, top]], 5: [[left, top], [bottom, right]],
+        6: [[bottom, top]], 7: [[left, top]], 8: [[top, left]], 9: [[top, bottom]], 10: [[bottom, left], [top, right]],
+        11: [[top, right]], 12: [[right, left]], 13: [[right, bottom]], 14: [[bottom, left]],
+      };
+      for (const [from, to] of SEGMENTS[code]) {
+        const p = from();
+        const q = to();
+        d += `M${r2(p[0])} ${r2(p[1])}L${r2(q[0])} ${r2(q[1])}`;
+      }
+    }
+  }
+  return d;
+}
+
 /** @param {Point[]} points */
 export function linePath(points) {
   return points.map(([x, y], i) => `${i ? 'L' : 'M'}${r2(x)} ${r2(y)}`).join('');

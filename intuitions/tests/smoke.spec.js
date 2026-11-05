@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(11);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(11);
+  await expect(page.locator('.entry-card')).toHaveCount(12);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(12);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -515,9 +515,50 @@ test('samplers: with reduced motion asked for, a chain plays in tenths', async (
   expect(errors).toEqual([]);
 });
 
+test('priors on transformed parameters: transforms, the Jacobian term, the χ² degrees of freedom, statements and the API', async ({ page }) => {
+  const errors = await open(page, 'jacobian-adjustment/');
+  await expect(page.locator('#transform-sampled svg')).toBeVisible();
+  // The default: the log-normal product without its term; log a is off, and says so.
+  await expect(page.locator('#transform-verdict')).toHaveClass(/bad/);
+  await expect(page.locator('#transform-verdict')).toContainText('Not as stated');
+  await expect(page.locator('#transform-quantities .ink-line.dashed')).toHaveCount(2);
+  await page.locator('input[name="transform-jacobian"][value="true"]').check();
+  await expect(page.locator('#transform-verdict')).toContainText('As stated');
+  // The normal product without |a| is not a distribution: no mass contours, a warning.
+  await page.locator('input[name="transform-transform"][value="product-normal"]').check();
+  await expect(page.locator('#transform-sampled .sampled-contour')).toHaveCount(2);
+  await page.locator('input[name="transform-jacobian"][value="false"]').check();
+  await expect(page.locator('#transform-verdict')).toContainText('Not a distribution');
+  await expect(page.locator('#transform-sampled .improper-contour')).toHaveCount(2);
+  // The square has a df control only for itself; k = 3 without 2a is one degree short.
+  await expect(page.locator('#transform-df-control')).toBeHidden();
+  await page.locator('input[name="transform-transform"][value="square"]').check();
+  await expect(page.locator('#transform-df-control')).toBeVisible();
+  await page.locator('#transform-df-number').fill('3');
+  await expect(page.locator('#transform-verdict')).toContainText('χ²(2)');
+  await page.locator('#transform-df-number').fill('12');
+  await expect(page.locator('#transform-df-number')).toHaveAttribute('aria-invalid', 'true');
+  // Panel 2: two statements against one.
+  await expect(page.locator('#marginals-table')).toContainText('−0.58');
+  await expect(page.locator('#marginals-ab .draw-dot')).toHaveCount(100);
+  await page.locator('input[name="marginals-statement"][value="joint"]').check();
+  await expect(page.locator('#marginals-readout')).toContainText('one statement');
+  await page.locator('#marginals-n-number').fill('40');
+  await expect(page.locator('#marginals-ab .draw-dot')).toHaveCount(40);
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'jacobian-adjustment', params: { transform: 'sum-difference', jacobian: true } });
+    return { rows: r.result.quantities.length, request: app.getRequest() };
+  });
+  expect(api.rows).toBe(4);
+  expect(api.request.params).toEqual({ view: 'transform', transform: 'sum-difference', jacobian: true });
+  await expect(page.locator('input[name="transform-transform"][value="sum-difference"]')).toBeChecked();
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/', 'samplers/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/', 'samplers/', 'jacobian-adjustment/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

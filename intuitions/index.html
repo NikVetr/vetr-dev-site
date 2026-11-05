@@ -95,6 +95,12 @@
         <p>Watch Markov chain samplers step through a distribution. In Neal's funnel a chain cannot reach the neck until the funnel is rewritten as two standard normals; a move that multiplies a parameter samples the wrong distribution without its Hastings ratio; and HMC's trajectories diverge where the target bends too sharply.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
+      <a class="card entry-card" href="jacobian-adjustment/">
+        <div class="thumb plot-box" id="thumb-jacobian-adjustment" aria-hidden="true"></div>
+        <h2>Priors on transformed parameters</h2>
+        <p>Write a prior on the product or square of Stan parameters and leave out the Jacobian, and the parameters come out wrong, or the model has no distribution at all. See each quantity against the prior written for it, in closed form, and why two correct marginal priors make the wrong joint.</p>
+        <div class="meta"><time datetime="2022-11-14">2022-11-14</time></div>
+      </a>
     </div>
   </main>
 

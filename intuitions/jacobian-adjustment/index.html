@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="What a prior on a transformed parameter does with and without the Jacobian adjustment, in closed form: sums, a square and products of Stan parameters, and why two correct marginal priors do not make the joint distribution you meant.">
+  <title>Priors on transformed parameters · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M5 25V15h8v10zM17 25l4-12h7l-4 12z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M9 11c3-5 9-6 13-3' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Jacobian adjustments</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Priors on transformed parameters</h1>
+      <p class="lede">In Stan a sampling statement can be written on anything the model computes: put the product of two parameters on the left of a <code>~</code> and it reads like a prior on the product. It is not quite one. The statement multiplies the density over the parameters that are actually sampled, and how that density carries over to the product depends on how the product stretches the space. To give the product the distribution written, the model also has to add the log of the transform's Jacobian. And two statements that each give their quantity the right distribution can still make the wrong joint distribution.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#transform">With and without the Jacobian</a></li>
+          <li><a href="#marginals">Two marginals are not a joint</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="transform" aria-labelledby="transform-heading">
+      <h2 id="transform-heading"><span class="panel-number">1</span> With and without the Jacobian</h2>
+      <p class="panel-intro">Stan samples parameters, here <var>a</var> and <var>b</var>, from the density the model block writes. A statement <var>c</var> ~ <var>p</var> with <var>c</var> = <var>f</var>(<var>a</var>, <var>b</var>) multiplies that density by <var>p</var>(<var>f</var>(<var>a</var>, <var>b</var>)). But changing variables from (<var>a</var>, <var>b</var>) to (<var>a</var>, <var>c</var>) divides a density by |∂<var>c</var>/∂<var>b</var>|, so for <var>a</var> and <var>c</var> to come out as stated the model has to multiply by |∂<var>c</var>/∂<var>b</var>| as well: <code>target += log(abs(…))</code>. Where that factor is a constant, as for sums, leaving it out changes nothing. understanding_Jacobian_adjustments.R tries five transforms, each with its adjustment; choose one, and leave the adjustment out.</p>
+      <div class="panel-body wide">
+        <figure id="transform-figures">
+          <ul class="legend" id="transform-legend"></ul>
+          <div class="figure-row halves">
+            <div>
+              <h3 class="figure-title" id="transform-sampled-title">What Stan samples</h3>
+              <div id="transform-sampled" class="plot-box"></div>
+            </div>
+            <div>
+              <h3 class="figure-title">Each quantity</h3>
+              <div id="transform-quantities" class="plot-box"></div>
+            </div>
+          </div>
+          <figcaption class="caption" id="transform-caption"></figcaption>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>The transform and its statements</legend>
+            <div class="choice-stack" id="transform-transform"></div>
+          </fieldset>
+          <fieldset class="control choice-list">
+            <legend>The Jacobian term</legend>
+            <div class="segmented" id="transform-jacobian">
+              <label><input type="radio" name="transform-jacobian" value="true"> <span class="glyph" aria-hidden="true">✓</span> Included</label>
+              <label><input type="radio" name="transform-jacobian" value="false"> <span class="glyph" aria-hidden="true">✗</span> Left out</label>
+            </div>
+            <p class="hint" id="transform-jacobian-hint"></p>
+          </fieldset>
+          <div class="control" id="transform-df-control">
+            <div class="control-head">
+              <label for="transform-df-number">Degrees of freedom of <var>b</var>'s χ², <var>k</var></label>
+              <input id="transform-df-number" type="number" min="1" max="10" step="1">
+            </div>
+            <input id="transform-df-range" type="range" min="1" max="10" step="1" aria-label="Degrees of freedom, slider">
+            <p class="hint">The script uses <var>k</var> = 1.</p>
+          </div>
+          <div id="transform-issues" class="issues" role="alert" hidden></div>
+          <div class="verdict" id="transform-verdict" aria-live="polite"></div>
+          <p class="readout" id="transform-readout"></p>
+          <div class="controls-foot"><button type="button" id="transform-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="marginals" aria-labelledby="marginals-heading">
+      <h2 id="marginals-heading"><span class="panel-number">2</span> Two marginals are not a joint</h2>
+      <p class="panel-intro">Suppose <var>a</var> and <var>b</var> are meant to be independent, <var>a</var> ~ N(0, 1) and <var>b</var> ~ N(0, <var>s</var>²), so that <var>c</var> = <var>a</var> + <var>b</var> ~ N(0, 1 + <var>s</var>²). jacobian-adjustment_marginal-vs-joint.R writes this as <var>a</var> ~ N(0, 1) and <var>c</var> ~ N(0, √2). Each statement gives its quantity the right distribution and the Jacobian is 1, yet <var>b</var> comes out wrong: statements multiply, so these two make <var>a</var> and <var>c</var> independent, which they were never meant to be. One statement for (<var>a</var>, <var>c</var>) together, with their covariance of 1, gives back what was meant. With <var>a</var> fixed as data, as in the script's later models, the difference is in <var>b</var>'s posterior.</p>
+      <div class="panel-body wide">
+        <figure id="marginals-figures">
+          <ul class="legend" id="marginals-legend"></ul>
+          <div class="figure-row halves">
+            <div>
+              <h3 class="figure-title"><var>a</var> and <var>b</var>, with <var>a</var> as data</h3>
+              <div id="marginals-ab" class="plot-box"></div>
+            </div>
+            <div>
+              <h3 class="figure-title"><var>a</var> and <var>c</var></h3>
+              <div id="marginals-ac" class="plot-box"></div>
+            </div>
+          </div>
+          <figcaption class="caption">Ellipses hold 50% and 90% of each joint distribution. Each dot is one value of <var>a</var>, drawn as data, with one draw of <var>b</var> from its posterior; the line is <var>b</var>'s posterior mean given <var>a</var>.</figcaption>
+          <p class="sim-status" id="marginals-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>How the prior is written</legend>
+            <div class="choice-stack" id="marginals-statement">
+              <label><input type="radio" name="marginals-statement" value="separate"> <span>Two statements: <code>a ~ N(0, 1)</code> and <code>c ~ N(0, √(1 + s²))</code>, as in the script</span></label>
+              <label><input type="radio" name="marginals-statement" value="joint"> <span>One joint statement: <code>(a, c) ~ N(0, [[1, 1], [1, 1 + s²]])</code></span></label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="marginals-sdB-number">SD of <var>b</var> meant, <var>s</var></label>
+              <input id="marginals-sdB-number" type="number" min="0.05" max="5" step="0.05">
+            </div>
+            <input id="marginals-sdB-range" type="range" min="0.05" max="3" step="0.05" aria-label="SD of b meant, slider">
+            <p class="hint">The script's is 1, so <var>c</var> ~ N(0, √2).</p>
+          </div>
+          <div class="control stacked">
+            <div class="control-head">
+              <label for="marginals-n-number">Values of <var>a</var> as data</label>
+              <input id="marginals-n-number" type="number" min="1" max="2000" step="1">
+            </div>
+            <div class="control-row"><label for="marginals-seed">Seed</label><input id="marginals-seed" type="number" min="0" max="4294967295" step="1"><button type="button" id="marginals-new-seed">New data</button></div>
+          </div>
+          <div id="marginals-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="marginals-readout" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table class="numbers" id="marginals-table">
+              <thead><tr><th scope="col"></th><th scope="col">Meant</th><th scope="col">As written</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="controls-foot"><button type="button" id="marginals-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" id="how" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>The change of variables</h3>
+        <p>If (<var>a</var>, <var>b</var>) has density <var>p</var>(<var>a</var>, <var>b</var>) and <var>c</var> = <var>f</var>(<var>a</var>, <var>b</var>) is one-to-one in <var>b</var>, then (<var>a</var>, <var>c</var>) has density <var>p</var>(<var>a</var>, <var>b</var>) / |∂<var>c</var>/∂<var>b</var>|. A model whose density over (<var>a</var>, <var>b</var>) is <var>p</var><sub><var>a</var></sub>(<var>a</var>) <var>p</var><sub><var>c</var></sub>(<var>f</var>(<var>a</var>, <var>b</var>)) |∂<var>c</var>/∂<var>b</var>| therefore gives (<var>a</var>, <var>c</var>) the density <var>p</var><sub><var>a</var></sub>(<var>a</var>) <var>p</var><sub><var>c</var></sub>(<var>c</var>): both as stated, and independent. Without the last factor, (<var>a</var>, <var>c</var>) carries 1/|∂<var>c</var>/∂<var>b</var>| as well. For <var>c</var> = <var>ab</var> that is 1/<var>a</var>, which tilts a log-normal <var>a</var> down by one on the log scale and makes a normal <var>a</var>'s integral diverge at 0. Scripts and agents can get every number here through the <a href="../api.md">API</a>.</p>
+        <h3>Computed exactly</h3>
+        <p>Every distribution on this page is a closed form: normals, a Cauchy (the ratio of two independent standard normals), the chi distribution and the χ². The contours of panel 1 hold exactly 50% and 90% of the mass: for a bivariate normal at its Mahalanobis radii, and for the normal product by integrating the standard normal pair (<var>a</var>, <var>ab</var>) over each level set. Panel 2's joint distributions are bivariate normals; with <var>a</var> as data, <var>b</var>'s posterior is the stated prior's conditional distribution given <var>a</var>, from which each dot is one seeded draw.</p>
+        <h3 id="stan">Checked against Stan</h3>
+        <p id="stan-text">Each of the scripts' models was rerun in cmdstan 2.38, four chains of 10,000 draws after 10,000 of warm-up, with the Jacobian as written and left out. The draws' means, second moments, cross moments and quantiles agree with the closed forms here within four Monte Carlo standard errors. Without the Jacobian, the log-normal product's log <var>a</var> averages −0.992 ± 0.008, against −1. The two targets that are not distributions cannot be sampled: without 2<var>a</var>, 34,632 of 40,000 transitions diverge and <var>a</var> collapses to 0; without |<var>a</var>|, <var>a</var> sits at 0 while <var>b</var>'s median drifts to −124. With <var>a</var> as data, Stan's posterior means of <var>b</var> are −<var>a</var> for two statements and 0 for one.</p>
+        <h3>What the scripts do differently</h3>
+        <p id="scripts-text">For <var>c</var> = <var>a</var> + <var>b</var> and <var>d</var> = <var>a</var> − <var>b</var>, the script adds log|−1| = 0, where the map's determinant is −2. Both are constants, so its draws are the same. Its last transform, <var>d</var> = <var>abc</var> with log|<var>ab</var>|, is the normal product with one more factor, and is left out here. The marginal-vs-joint script's prior on the sample correlation is not ported: its <var>t</var> is <var>r</var>√(<var>n</var> − 2 − <var>r</var>²) by operator precedence, not <var>r</var>√((<var>n</var> − 2)/(1 − <var>r</var>²)); its <var>r</var> is not centred; and the scale it gives the <var>t</var> is that distribution's SD rather than 1. Corrected, the posterior mean of <var>r</var> moves from −0.357 to −0.315.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2022-11-14">2022-11-14</time>
+    </div>
+  </footer>
+</body>
+</html>

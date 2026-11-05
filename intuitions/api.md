@@ -15,6 +15,7 @@ The entries are:
 - [`tree-covariance`](#tree-covariance): a tree as a covariance matrix, in three views: the tips' covariance as shared paths with the tips as arrows and simulated tip values, re-rooting with the restricted and ordinary likelihoods, and Felsenstein's pruning step by step against the direct normal likelihood.
 - [`backpack-fallacy`](#backpack-fallacy): two *t*-tests with the same p-value and different group sizes: the chance that the smaller study has the larger true difference, at every p-value, when true means are Cauchy or normal, computed exactly; the script's sliding-window average; and each size's distribution of the true difference at one p-value.
 - [`samplers`](#samplers): Markov chain Monte Carlo on two-dimensional targets, every state, proposal and HMC trajectory returned for playback, in three views: Neal's funnel sampled in centred, non-centred or quantile coordinates by HMC or random-walk Metropolis; a multiplier move whose Hastings ratio is included, left out or reversed, against the targets those chains actually sample; and a correlated normal (with Gibbs) and an evil smiley; with acceptance, divergences, bulk ESS and KS distances to the exact marginals.
+- [`jacobian-adjustment`](#jacobian-adjustment): priors on transformed parameters, in two views: a sum, a sum and a difference, a square and two products, with the Jacobian term included or left out, giving the density over the sampled parameters and each quantity's distribution against the prior stated for it in closed form (or no distribution at all); and two marginal statements against one joint statement, what each makes of the third variable, and its posterior when one variable is data.
 
 ## Ways in
 
@@ -40,7 +41,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance, backpack-fallacy or samplers, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur, backpack-fallacy and samplers pages' own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance, backpack-fallacy, samplers or jacobian-adjustment, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur, backpack-fallacy and samplers pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -662,6 +663,42 @@ Every view's result has `view`; `sampler` (`"rwm"`, `"hmc"`, `"gibbs"` or `"mult
 - **The backend.** truncated_funnel.R, funnel_test.R and evil_smiley_bug.R sample with Stan's NUTS (adaptive step size, dynamic trajectory length); this entry's HMC has a fixed ε and *L*, chosen by the request. On the two-dimensional funnel, cmdstan 2.38's NUTS (4 chains, 1,000 warm-up and 1,000 draws each, seed 1) diverges on 355 of 4,000 centred transitions at σ = 1.5 with no draws below *y*'s 5% quantile, and on 310 at σ = 1 with 0.7% there; non-centred and quantile, it has none and 5.3% and 5.4%.
 - **What the scripts do differently.** DoIUnderstandMCMC.R proposes *x* × N(1, 0.01²) and leaves out its Hastings ratio, (*x*/*x*′) φ((*x*/*x*′ − 1)/0.01)/φ((*x*′/*x* − 1)/0.01); rerun as written on N(0, 100²) from 35, its chain collapses to a mean of 0.0006 where the half-normal it can reach has 79.8, and with the ratio and a 10% multiplier it gives 79.7 (KS 0.010). This entry's multiplier is e^(λ*Z*), whose ratio is exactly *x*′/*x*. simplex_proposal_distributions.R's `betaMove` returns log forward − log backward, the ratio inverted; on its Beta(3, 5) example, rerun for a million steps, the mean is 0.406 (KS 0.10), and 0.376 (KS 0.007) with the ratio the right way up; for more than two components its rescaling of the others also needs the factor ((1 − *x*′)/(1 − *x*))^(*K* − 2). truncated_funnel.R's truncated centred and non-centred models omit the per-*y* normalisation of *x*'s truncation while its quantile models include it, so they sample different distributions, and its reference draws take *y* from one and *x* from the other; this entry samples only the untruncated funnel. funnel_test.R defines `stan_code_sqrt` twice, so its first (signed-square) model never runs. MCMC_Demo.R's Metropolis step moves one coordinate by a uniform window; random-walk Metropolis here moves both by a normal step.
 
+## jacobian-adjustment
+
+A Stan model samples its parameters; a sampling statement on a quantity computed from them, *c* = *f*(*a*, *b*), multiplies the density over (*a*, *b*) by *p*(*f*(*a*, *b*)). Since (*a*, *c*) has the density of (*a*, *b*) divided by |∂*c*/∂*b*|, the quantities come out as stated only when the model adds log|∂*c*/∂*b*| too (`target += …`). Everything is closed form. `params.view` picks the panel.
+
+### view "transform"
+
+understanding_Jacobian_adjustments.R's transforms, with their Jacobian term included or left out.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"transform"` or `"marginals"` | `"transform"` | Which panel. |
+| `transform` | `"sum"`, `"sum-difference"`, `"square"`, `"product-lognormal"` or `"product-normal"` | `"product-lognormal"` | *c* = *a* + *b* with *a* ~ N(0, 1), *c* ~ N(0, √2); *c* = *a* + *b* and *d* = *a* − *b* with *c*, *d* ~ N(0, 1); *b* = *a*², *a* > 0, with *b* ~ χ²(`df`); *c* = *ab*, *a*, *b* > 0, with *a* ~ logN(0, 1), *c* ~ logN(0, √2); *c* = *ab* with *a*, *c* ~ N(0, 1). (Normals are written N(mean, SD), as Stan writes them.) |
+| `jacobian` | boolean | `false` | Whether the model adds log of the Jacobian factor (1, 2, 2*a*, *a* and \|*a*\| for the five). |
+| `df` | integer 1–10 | `1` | *k*, the degrees of freedom of *b*'s χ²; the square only (`not_applicable` otherwise). |
+
+Result: the request's `view`, `transform` and `jacobian`, and `parameters` (what Stan samples), `computed`, `statements`, `factor` (the Jacobian factor), `constant`, `script` (the term the script adds); `proper`, whether the target over the parameters is a distribution, and `improper`, why not, or `null`; `joint`, the density over the sampled parameters in the plotted coordinates (log *a* and log *b* for the log-normal product): `{kind: "normal", x, y, mean, covariance}` or `{kind: "formula", x, y, logDensity}`, with the `window` drawn and `levels` `{q50, q90}`, the log densities whose regions hold 50% and 90% of the mass (`null` without a distribution); `null` for the square, which has `sampled` `{quantity, kernel, window}` instead; and `quantities`, one per quantity: `{quantity, axis, implied, stated, matches, summary, curve}`. `implied` is its distribution under this model and `stated` the prior written for it, each `{family: "normal", mean, sd}`, `{family: "chi" | "chi-squared", df}` or `{family: "cauchy", location, scale}`, or `null` (no distribution, or no statement); `matches` compares them; `summary` is `{mean, sd, q05, q50, q95}` (`mean` and `sd` `null` for the Cauchy); `curve` is `{x, implied, stated}` on 241 points over the plotted scale (`axis`, such as `"log a"`).
+
+### view "marginals"
+
+jacobian-adjustment_marginal-vs-joint.R: *a* and *b* are meant to be independent, *a* ~ N(0, 1) and *b* ~ N(0, *s*²), so *c* = *a* + *b* ~ N(0, 1 + *s*²).
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `statement` | `"separate"` or `"joint"` | `"separate"` | Two statements, *a* ~ N(0, 1) and *c* ~ N(0, √(1 + *s*²)), as in the script, or one, (*a*, *c*) ~ N(0, [[1, 1], [1, 1 + *s*²]]). |
+| `sdB` | number 0.05–5 | `1` | *s*, the SD of *b* meant. |
+| `n` | integer 1–2,000 | `100` | Values of *a* drawn as data. |
+| `seed` | integer 0–4,294,967,295 | `1` | |
+
+Result: `view`, `statement`, `sdB`, `statements` (as text); `meant` and `stated`, each `{covariance, correlation}`: the 3 × 3 covariance of (*a*, *b*, *c*) and the correlations `{ab, ac, bc}`, as meant and as the statement makes it (two statements make *a* and *c* independent, so *b* has variance 2 + *s*² and covariance −1 with *a*); `conditional`, `{slope, sd}`, *b*'s posterior given *a* when *a* is data, N(`slope` × *a*, `sd`²); and `data`, `{a, b}`: `n` seeded standard normal values of *a* and one draw of each *b* from that posterior.
+
+### Method
+
+- **Closed forms.** With the Jacobian, (*a*, *c*) has the product of the stated densities. Without it the density carries 1/|∂*c*/∂*b*|: for the log-normal product, log *a* ~ N(−1, 1) instead of N(0, 1) (log *c* is unchanged and log *b* ~ N(1, 3)); for the square, *a* ~ χ(*k* − 1) instead of χ(*k*) and *b* ~ χ²(*k* − 1), with no distribution at *k* = 1, where the density of *a* is about 1/*a* near 0; for the normal product, no distribution, since φ(*a*)φ(*ab*) integrates over *b* to φ(*a*)/|*a*|. With it, the normal product's *b* = *c*/*a* is a standard Cauchy. The sums' Jacobians are constants (1 and 2), so the term changes nothing. The normal product's `levels` come from the pair (*a*, *ab*), two independent standard normals: the mass above a level is a one-dimensional integral (Simpson's rule), inverted by bisection. The tests marginalise each model block numerically, independently of these forms, and agree to 2 × 10⁻⁴.
+- **Against Stan.** Every model of both scripts was rerun with cmdstan 2.38 (4 chains, 10,000 warm-up and 10,000 draws, 20,000 for the normal product, seed 1), with the Jacobian as written and left out. The draws' means, second moments, cross moments and quantiles agree with the closed forms within 4 Monte Carlo standard errors; without the Jacobian, the log-normal product's log *a* has mean −0.992 ± 0.008 and the χ²(3) square's *a* is the χ(2) (mean 1.261 ± 0.006, against 1.253). The two improper targets cannot be sampled: without 2*a*, 34,632 of 40,000 transitions diverge and the draws of *a* collapse to 0; without |*a*|, *a* sits at 0 while *b*'s median wanders to −124. With *a* as data, the posterior means of the *b*'s are −*a* (two statements) or 0 (one, and the script's non-centred version), with variances 2 and 1.
+- **What the scripts do differently.** For *c* = *a* + *b*, *d* = *a* − *b* the script adds `log(abs(-1))`, 0; the map's determinant is −2. Both are constants, so the draws do not change. Its last transform, *d* = *abc* with log|*ab*|, is the normal product with one more factor and is not included. The marginal-vs-joint script's prior on the sample correlation, `t ~ student_t(n-2, 0, sqrt((n-2.0)/(n-4.0)))` on `t = r * sqrt((n-2.0)/1.0-r^2)`, is not ported: by operator precedence its *t* is *r*√(*n* − 2 − *r*²), not *r*√((*n* − 2)/(1 − *r*²)); its *r* omits the centring of a correlation; and the scale it gives is the *t* distribution's SD, √((*n* − 2)/(*n* − 4)), where a *t* statistic's scale is 1. Rerun as written, the posterior mean of *r* is −0.357; with the three corrected, −0.315. A prior on a many-to-one function of the 100 *b*'s has no Jacobian to add in any case: it reweights the posterior rather than giving *r* that distribution.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -689,7 +726,7 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `wrong_type`
 - `out_of_range`
 - `conflicting_fields` (a table and a model in one request)
-- `not_applicable` (`rho` or `sample` with one trait; Gibbs sampling for a target without exact conditionals)
+- `not_applicable` (`rho` or `sample` with one trait; Gibbs sampling for a target without exact conditionals; `df` for a transform other than the square)
 - `empty_category` (a table row or column with no counts)
 - `no_spread` (a variable whose values are all equal has no direction)
 - `unknown_node` (a node id that is not in the graph)

@@ -8,6 +8,8 @@ import { compute as dagAdjustment, PRESETS as DAG_PRESETS } from './dag-adjustme
 import { dagFigure } from './dag-adjustment/figure.js';
 import { coneScene, sceneCamera } from './correlation-geometry/figure.js';
 import { orientation } from './lib/geom3d.js';
+import { compute as jacobianAdjustment, jointLogDensity } from './jacobian-adjustment/compute.js';
+import { sampledFigure } from './jacobian-adjustment/figure.js';
 import { installApi, onWidth } from './lib/page.js';
 import { compute as marchenkoPastur } from './marchenko-pastur/compute.js';
 import { spectrumFigure } from './marchenko-pastur/figure.js';
@@ -95,6 +97,13 @@ const thumbs = [
         width, height: 150, domain: { x: [-X, X], y: [-4.5, 4.5] }, walls: 0, xLabel: 'x', yLabel: 'y', id: 'thumb-samplers', label: '', compact: true,
         layer: (x, y) => chainLayer(path, x, y, chain.accepted.length),
       }).svg;
+    },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-jacobian-adjustment')),
+    draw: (/** @type {number} */ width) => {
+      const params = /** @type {any} */ ({ view: 'transform', transform: 'product-normal', jacobian: true });
+      return sampledFigure(jacobianAdjustment(params), jointLogDensity(params), { width, height: 150, id: 'thumb-jacobian', compact: true });
     },
   },
 ];
