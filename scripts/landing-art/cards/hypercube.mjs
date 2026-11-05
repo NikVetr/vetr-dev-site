@@ -17,17 +17,18 @@ export function build() {
   const x0 = (W - size) / 2;
   const y0 = (H - size) / 2;
   const frames = [];
-  let style;
+  /** @type {{ fill: string, alpha: number }} */
+  let style = { fill: '#87CEFA', alpha: 0 };
   for (let i = 0; i < plan.frames / STEP; i++) {
     const frame = ((STILL - 1 + i * STEP) % plan.frames) + 1;
-    const { geometry, faceAlpha } = submit({ k: 4, frame, render: 'geometry', size }, plan);
-    style ??= { fill: geometry.faces[0]?.fill ?? '#87CEFA', alpha: faceAlpha };
-    const at = (v) => {
+    const { geometry, faceAlpha } = /** @type {any} */ (submit({ k: 4, frame, render: 'geometry', size }, plan));
+    if (i === 0) style = { fill: geometry.faces[0]?.fill ?? style.fill, alpha: faceAlpha };
+    const at = (/** @type {number} */ v) => {
       const [x, y] = geometry.vertices[v];
       return `${num(x0 + size / 2 + x * geometry.scale)} ${num(y0 + size / 2 - y * geometry.scale)}`;
     };
-    const faces = geometry.faces.map((f) => `<path d="M${f.vertices.map(at).join('L')}Z"/>`).join('');
-    const edges = geometry.edges.map(([a, b]) => `M${at(a)}L${at(b)}`).join('');
+    const faces = geometry.faces.map((/** @type {{ vertices: number[] }} */ f) => `<path d="M${f.vertices.map(at).join('L')}Z"/>`).join('');
+    const edges = geometry.edges.map((/** @type {number[]} */ [a, b]) => `M${at(a)}L${at(b)}`).join('');
     frames.push(`<g class="faces">${faces}</g><path class="edges" d="${edges}"/>`);
   }
   const period = frames.length / FPS;

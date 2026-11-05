@@ -7,7 +7,7 @@ import { W, art, roundPath } from '../svg.mjs';
 const PERIOD = 4;
 
 /** The filled SVG's paths, rounded, with the tool's colour groups kept. */
-function paths(svg) {
+function paths(/** @type {string} */ svg) {
   return [...svg.matchAll(/<g id="[^"]+" fill="(#[0-9a-fA-F]+)"[^>]*>([\s\S]*?)<\/g>/g)]
     .map(([, fill, inner]) => `<g fill="${fill}">${[...inner.matchAll(/d="([^"]+)"/g)].map(([, d]) => `<path d="${roundPath(d)}"/>`).join('')}</g>`)
     .join('\n');
@@ -28,7 +28,8 @@ export function build() {
     },
     output: { unit: 'px' },
   });
-  const xs = helix.geometry.strands.flatMap((s) => s.pieces.flat().map((p) => p[0]));
+  const geometry = /** @type {{ strands: { pieces: number[][][] }[] }} */ (helix.geometry);
+  const xs = geometry.strands.flatMap((s) => s.pieces.flat().map((p) => p[0]));
   const helixLeft = Math.min(...xs);
   if (Math.abs(Math.max(...xs) - helixLeft - 6 * turn) > 0.01) throw new Error('helix: the turns are not 80 px long');
 

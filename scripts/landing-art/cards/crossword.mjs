@@ -13,7 +13,7 @@ const SWEEP = 2.4;   // seconds to clear (and later to fill) every word
 const FADE = 0.15;
 
 export function build() {
-  const read = (f) => readFileSync(new URL(`../../../crossword/examples/${f}`, import.meta.url), 'utf8');
+  const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../crossword/examples/${f}`, import.meta.url), 'utf8');
   const result = submit({
     entriesText: read('weather.txt'),
     target: { mask: read('heart.txt').trim().split('\n') },
@@ -49,7 +49,7 @@ export function build() {
   // PERIOD / 2 - FADE, so the letters are all shown again before any comes up a second time.
   const latest = Math.max(...first.values());
   if (latest > PERIOD / 2 - FADE) throw new Error('crossword: the sweep is too long for the period');
-  const p = (t) => num((100 * t) / PERIOD, 3);
+  const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
   return art({
     name: 'crossword',
     period: PERIOD,

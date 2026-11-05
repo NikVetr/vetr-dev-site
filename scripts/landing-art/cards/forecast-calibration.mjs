@@ -17,15 +17,15 @@ export function build() {
   const result = submit({ table });
   const bins = result.bins;
   const [left, right, top, bottom] = [34, 300, 14, 164];
-  const x = (p) => left + p * (right - left);
-  const y = (f) => bottom - f * (bottom - top);
-  const line = (freqs) => polyline(freqs.map((f, b) => [x(bins[b].meanProbability), y(f)]));
-  const freqs = (world) => world.map((hits, b) => hits / bins[b].n);
+  const x = (/** @type {number} */ p) => left + p * (right - left);
+  const y = (/** @type {number} */ f) => bottom - f * (bottom - top);
+  const line = (/** @type {number[]} */ freqs) => polyline(freqs.map((f, b) => [x(bins[b].meanProbability), y(f)]));
+  const freqs = (/** @type {number[]} */ world) => world.map((hits, b) => hits / bins[b].n);
 
   const worlds = result.worlds.slice(0, WORLDS).map((w) => `<path d="${line(freqs(w))}"/>`).join('');
   const picked = result.worlds.slice(WORLDS, WORLDS + PICKED)
     .map((w, k) => `<path d="${line(freqs(w))}"${k ? ` style="animation-delay:${num(k * STEP, 3)}s"` : ''}/>`).join('');
-  const marker = (bin) => {
+  const marker = (/** @type {typeof bins[number]} */ bin) => {
     const [cx, cy] = [x(bin.meanProbability), y(bin.frequency)];
     if (bin.position === 'inside') return `<circle cx="${num(cx)}" cy="${num(cy)}" r="3.6"/>`;
     const s = 5;
@@ -42,7 +42,7 @@ export function build() {
 <g class="markers">${bins.map(marker).join('')}</g>`;
 
   const period = (PICKED + 1) * STEP;
-  const p = (t) => num((100 * t) / period, 3);
+  const p = (/** @type {number} */ t) => num((100 * t) / period, 3);
   return art({
     name: 'forecast-calibration',
     period,
