@@ -1,7 +1,7 @@
 // Page wiring for the threshold model: three views (one trait, two traits, a table)
 // over compute(). Every number shown comes from compute.js.
 
-import { formatNumber, formatShare } from '../lib/format.js';
+import { formatNumber } from '../lib/format.js';
 import { bindPair, draggable, initTheme, installApi, onWidth } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { compute, DEFAULTS, ENTRY, LIMITS, resolveParams, samplePoints } from './compute.js';

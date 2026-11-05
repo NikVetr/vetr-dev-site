@@ -112,7 +112,7 @@ export function densityFigure(result, { width, height, compact = false, zoom = 1
 
   // Bottom tier: pooled, A stacked under B.
   const y2 = yTo(base2);
-  const pooledParts = groups.map((g, i) => {
+  const pooledParts = groups.map((_, i) => {
     const s = GROUP_STYLE[i];
     const f = densities[i];
     const below = i === 0 ? zero : densities[0];
