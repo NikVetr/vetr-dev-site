@@ -13,7 +13,7 @@ import { fitTextSize, layoutPass, prepareText } from '../core/layout.js';
 import { quantizeOklab, toRaster } from '../core/quantize.js';
 import { columnRuns, regionRows, rotateRaster, unrotatePosition } from '../core/region.js';
 import { mulberry32 } from '../../shared/rng.js';
-import { decodePng } from '../decode-png.mjs';
+import { decodePng } from '../../shared/decode-png.mjs';
 
 const here = (/** @type {string} */ path) => fileURLToPath(new URL(path, import.meta.url));
 const example = {

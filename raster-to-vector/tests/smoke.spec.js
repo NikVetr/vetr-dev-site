@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { submit } from '../core/index.js';
-import { decodePng } from '../decode-png.mjs';
+import { decodePng } from '../../shared/decode-png.mjs';
 
 const here = (/** @type {string} */ p) => fileURLToPath(new URL(p, import.meta.url));
 /** The core's SVG for an example with the page's defaults, computed in Node. @param {string} name @param {object} [options] */

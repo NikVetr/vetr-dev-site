@@ -12,7 +12,7 @@ import { rMersenneTwister } from '../../shared/rng.js';
 import { traceLayersMs } from '../core/trace-ms.js';
 import { allInWindow, sobelSum, traceLayersOriginal } from '../core/trace-original.js';
 import { imodwt, modwt, waveletFilter, waveletSmooth } from '../core/wavelet.js';
-import { decodePng } from '../decode-png.mjs';
+import { decodePng } from '../../shared/decode-png.mjs';
 
 const here = (/** @type {string} */ p) => fileURLToPath(new URL(p, import.meta.url));
 const json = (/** @type {string} */ p) => JSON.parse(readFileSync(here(p), 'utf8'));

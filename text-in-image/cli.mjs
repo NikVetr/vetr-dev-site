@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { TextInImageError, renderSvg, submit } from './core/index.js';
 import { parseColor } from './core/request.js';
-import { decodePng } from './decode-png.mjs';
+import { decodePng } from '../shared/decode-png.mjs';
 
 const USAGE = 'usage: node cli.mjs [request.json | -] [--svg fill.svg] [--background colour]; reads the request from stdin when no file is given';
 

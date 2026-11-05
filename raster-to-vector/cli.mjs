@@ -12,7 +12,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { RasterToVectorError, submit } from './core/index.js';
-import { decodePng } from './decode-png.mjs';
+import { decodePng } from '../shared/decode-png.mjs';
 
 const USAGE = 'usage: node cli.mjs [request.json | -] [--image in.png] [--svg out.svg]; reads the request from stdin when neither a file nor --image is given';
 
