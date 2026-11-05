@@ -4,10 +4,10 @@
 // On the outside of a bend the two offsets meet in a round join; on the inside
 // the edge runs back through the centre point, as Clipper's own offsetting
 // does, so that the overlap is counted twice rather than cut out. The union of
-// all the ribbons under the positive fill rule (Clipper) is then one outline
-// with no seams where strokes cross or a stroke crosses itself.
+// all the ribbons under the positive fill rule (shared/polygon.js) is then one
+// outline with no seams where strokes cross or a stroke crosses itself.
 
-import ClipperLib from '../../shared/vendor/clipper.js';
+import { union } from '../../shared/polygon.js';
 
 /**
  * @typedef {[number, number][]} Ring  closed implicitly
@@ -107,24 +107,15 @@ export function signedArea(r) {
 
 /**
  * The union of rings, each counted where it winds positively: polygons of an
- * outer ring and its holes. Clipper works in integers, so coordinates are
- * scaled by a power of two that keeps them within its fast range.
+ * outer ring and its holes. shared/polygon.js takes flat closed rings, and
+ * Clipper's grid here is scaled about the origin.
  * @param {Ring[]} rings
  * @returns {Polygon[]}
  */
 export function unionRings(rings) {
-  if (!rings.length) return [];
-  let big = 1e-300;
-  for (const r of rings) for (const [x, y] of r) big = Math.max(big, Math.abs(x), Math.abs(y));
-  const scale = 2 ** Math.floor(Math.log2(4.5e7 / big));
-  const c = new ClipperLib.Clipper();
-  for (const r of rings) c.AddPath(r.map(([x, y]) => ({ X: Math.round(x * scale), Y: Math.round(y * scale) })), ClipperLib.PolyType.ptSubject, true);
-  const tree = new ClipperLib.PolyTree();
-  c.Execute(ClipperLib.ClipType.ctUnion, tree, ClipperLib.PolyFillType.pftPositive, ClipperLib.PolyFillType.pftPositive);
-  const back = (/** @type {{ X: number, Y: number }[]} */ path) => /** @type {Ring} */ (path.map((q) => [q.X / scale, q.Y / scale]));
-  const solid = (/** @type {{ X: number, Y: number }[]} */ path) => Math.abs(ClipperLib.Clipper.Area(path)) > 4;
-  return ClipperLib.JS.PolyTreeToExPolygons(tree).filter((e) => solid(e.outer))
-    .map((e) => [back(e.outer), ...e.holes.filter(solid).map(back)]);
+  const flat = rings.map((r) => [...r.flat(), r[0][0], r[0][1]]);
+  const pairs = (/** @type {number[]} */ f) => /** @type {Ring} */ (Array.from({ length: f.length / 2 - 1 }, (_, k) => [f[2 * k], f[2 * k + 1]]));
+  return union(flat, 'positive', 'origin').map((poly) => poly.map(pairs));
 }
 
 /**

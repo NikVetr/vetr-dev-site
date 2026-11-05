@@ -1,5 +1,5 @@
-// Polygons and their boolean operations, standing in for sf/GEOS: name-tags and the helix
-// generator union, cut and offset with the vendored Clipper. A ring is a flat closed array
+// Polygons and their boolean operations, standing in for sf/GEOS: name-tags, signature and the
+// helix generator union, cut and offset with the vendored Clipper. A ring is a flat closed array
 // [x0, y0, ..., x0, y0]; a polygon is an array of rings, the first its shell and the rest
 // holes (sf's POLYGON). Clipper works in integers, so coordinates are moved to a grid of
 // about 1e-8 of the shapes' extent for each operation.
@@ -9,6 +9,7 @@ import ClipperLib from './vendor/clipper.js';
 /**
  * @typedef {number[]} Ring
  * @typedef {Ring[]} Polygon
+ * @typedef {'centre' | 'origin'} Grid
  */
 
 /** Signed area of a ring (positive when counterclockwise, y up). @param {Ring} r */
@@ -40,10 +41,16 @@ export function bounds(rings) {
 /**
  * Coordinates are shifted to their bounding box's centre and scaled by a
  * power of two so every one stays within Clipper's fast integer range
- * (|v| < 47,453,132 in its JavaScript build).
- * @param {Ring[]} rings
+ * (|v| < 47,453,132 in its JavaScript build). The "origin" grid is not
+ * shifted, and is scaled by the largest |coordinate| (signature's outlines).
+ * @param {Ring[]} rings @param {Grid} [grid]
  */
-function clipperFrame(rings) {
+function clipperFrame(rings, grid = 'centre') {
+  if (grid === 'origin') {
+    let big = 1e-300;
+    for (const r of rings) for (const v of r) big = Math.max(big, Math.abs(v));
+    return { cx: 0, cy: 0, s: 2 ** Math.floor(Math.log2(4.5e7 / big)) };
+  }
   const [x0, y0, x1, y1] = bounds(rings);
   const cx = (x0 + x1) / 2;
   const cy = (y0 + y1) / 2;
@@ -79,12 +86,12 @@ const FILL = /** @type {const} */ ({ evenodd: 'pftEvenOdd', nonzero: 'pftNonZero
  * Runs one Clipper operation and returns the result as polygons (shell, then holes).
  * @param {'union' | 'difference'} op
  * @param {Ring[]} subject @param {keyof typeof FILL} subjectFill
- * @param {Ring[]} clip @param {keyof typeof FILL} clipFill
+ * @param {Ring[]} clip @param {keyof typeof FILL} clipFill @param {Grid} [grid]
  * @returns {Polygon[]}
  */
-function clip(op, subject, subjectFill, clip = [], clipFill = 'nonzero') {
+function clip(op, subject, subjectFill, clip = [], clipFill = 'nonzero', grid = 'centre') {
   if (!subject.length) return [];
-  const s = clipperFrame([...subject, ...clip]);
+  const s = clipperFrame([...subject, ...clip], grid);
   const c = new ClipperLib.Clipper();
   for (const r of subject) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptSubject, true);
   for (const r of clip) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptClip, true);
@@ -96,11 +103,12 @@ function clip(op, subject, subjectFill, clip = [], clipFill = 'nonzero') {
 
 /**
  * The union of rings under a fill rule: "evenodd" is GEOS's make-valid of a
- * self-intersecting ring, "nonzero" a plain union of simple pieces.
- * @param {Ring[]} rings @param {keyof typeof FILL} fill
+ * self-intersecting ring, "nonzero" a plain union of simple pieces,
+ * "positive" where the rings' winding number is above 0.
+ * @param {Ring[]} rings @param {keyof typeof FILL} fill @param {Grid} [grid] Clipper's integer grid (see clipperFrame)
  */
-export function union(rings, fill) {
-  return clip('union', rings, fill);
+export function union(rings, fill, grid) {
+  return clip('union', rings, fill, [], 'nonzero', grid);
 }
 
 /**
