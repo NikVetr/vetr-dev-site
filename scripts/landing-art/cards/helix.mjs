@@ -15,13 +15,14 @@ function paths(svg) {
 
 export function build() {
   // The "Two colours" preset's look on a horizontal axis. Six turns of 80 px cover the canvas
-  // plus the turn the loop moves; 241 points put exactly 40 samples in each turn, so every turn's
-  // crossing gaps and base pairs fall at the same places and the shifted helix is the same helix.
+  // plus the turn the loop moves. 145 points put exactly 24 samples in each turn, 3 between base
+  // pairs, which snap to samples: every turn's crossing gaps and base pairs fall at the same
+  // places, so the shifted helix is the same helix.
   const turn = 80;
   const helix = submit({
     mode: 'helix',
     helix: {
-      turns: 6, frequency: 2, rotation: 90, points: 241, strandThickness: 4, basePairsPerTurn: 8,
+      turns: 6, frequency: 2, rotation: 90, points: 145, strandThickness: 4, basePairsPerTurn: 8,
       basePairThickness: 0.6, squareWave: 0, crossingGap: 0.5, box: { width: 6 * turn, height: 200 },
       colors: { strand1: '#2b66d5', strand2: '#d5462b', basePairs: '#8a8a8a' },
     },

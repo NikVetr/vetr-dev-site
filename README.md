@@ -2,6 +2,21 @@
 
 The static site at https://vetr.dev, served by GitHub Pages with no build step. `index.html`, `style.css` and `assets/` are the landing page. Every tool or project lives in its own top-level folder with its own HTML, CSS, JavaScript and any tests, and the landing page links the public ones.
 
+## The landing page
+
+A grid of cards, as many columns as the width allows, newest first by each tool's date (ties by title). Each card is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, and draw its picture.
+
+The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
+
+```sh
+node scripts/landing-art/build.mjs            # every picture
+node scripts/landing-art/build.mjs helix      # one
+```
+
+The cards that drive a page (agendamatic, layout-gui, sankey) need Playwright: set `PLAYWRIGHT` to an installed `playwright` package, or `npm ci` in any tool folder. `scripts/landing-art/svg.mjs` holds what the pictures share: the 320 × 180 canvas, the theme colours (`--art-*` in `style.css`), scoping each picture's style sheet to its card, and the flip-book.
+
+`assets/landing.js` inlines each picture when its card nears the viewport, so it paints in the page's theme. Hovering a card with a mouse or pen, or focusing it from the keyboard, plays the picture's loop, which is seamless (its last frame leads back into its first, which is the still); leaving stops it. Touch never plays it, and nothing moves under `prefers-reduced-motion`. These loops are the page's only motion.
+
 ## Shared code and look
 
 `shared/` holds what the newer tools (forecast-calibration, text-in-image, crossword, raster-to-vector, seating, name-tags, hypercube, signature, message-collage, helix and the intuitions gallery) have in common, so their copies cannot drift apart:
