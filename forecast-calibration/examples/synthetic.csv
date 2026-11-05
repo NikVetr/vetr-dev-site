@@ -1,0 +1,49 @@
+text,probability,outcome
+The power goes out for more than a day,0.1,0
+We adopt a second cat,0.1,1
+I learn to juggle three balls,0.1,0
+The kitchen renovation finishes on schedule,0.1,0
+My sister moves to a new city,0.2,0
+I run a half marathon,0.2,0
+The library extends weekend hours,0.2,0
+The paper is accepted at the first journal,0.2,0
+The local team makes the playoffs,0.3,0
+I take a week fully offline,0.3,0
+The street gets new trees planted,0.3,0
+I learn three songs on the ukulele,0.3,0
+It snows in town at least once,0.5,1
+The bus route changes again,0.5,1
+The book club picks a poetry collection,0.5,1
+I repaint the spare room,0.5,1
+The farmers' market adds a winter season,0.5,1
+I give a talk at a meetup,0.5,1
+I read at least 30 books this year,0.6,1
+The team ships version 2 before October,0.6,0
+The tomato harvest beats last year's,0.6,1
+I fix the squeaky stairs,0.6,1
+"I average 10,000 steps a day in June",0.6,1
+The grant renewal is approved,0.6,1
+I go camping at least twice,0.6,0
+The project wiki gets reorganized,0.6,0
+The new bike lane opens before summer,0.7,1
+I visit a country I have never been to,0.7,1
+I finish the garden fence before the first frost,0.7,0
+I learn to make fresh pasta,0.7,1
+The conference returns to in-person,0.7,0
+I finish the online statistics course,0.7,1
+The houseplants survive while I travel,0.7,0
+I meet the yearly savings goal,0.7,1
+The office moves to the new building by September,0.8,0
+I keep a daily journal through March,0.8,0
+Every quarterly report goes out on time,0.8,1
+The community pool reopens after repairs,0.8,0
+I cook every recipe in one cookbook chapter,0.8,1
+I visit my grandparents every month,0.8,1
+The cherry tree flowers before April,0.8,1
+The sourdough starter is still alive in December,0.9,1
+The neighborhood bakery is still open at year end,0.9,1
+My laptop battery lasts the year,0.9,1
+The coffee shop raises its prices,0.9,1
+I go to a live concert,0.9,1
+Rent goes up at renewal,0.95,1
+My phone screen survives the year uncracked,0.95,1
