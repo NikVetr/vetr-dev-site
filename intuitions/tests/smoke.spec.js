@@ -70,6 +70,13 @@ test('threshold model: drag a threshold, sample two traits, fit the table', asyn
   await page.mouse.up();
   expect(Number(await page.locator('#one-t-0').inputValue())).toBeLessThan(0);
 
+  // A threshold below its neighbour is marked invalid (aria-invalid="true", not ""), and cleared when fixed.
+  await page.locator('#one-t-1').fill('-3.9');
+  await expect(page.locator('#one-t-1')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#one-error')).toBeVisible();
+  await page.locator('#one-t-1').fill('1');
+  await expect(page.locator('#one-t-1')).not.toHaveAttribute('aria-invalid');
+
   await page.getByRole('tab', { name: 'Two traits' }).click();
   await expect(page.locator('#panel-two')).toBeVisible();
   await expect(page.locator('#table-plot .cell-text')).toHaveCount(16);

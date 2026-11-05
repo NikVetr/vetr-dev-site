@@ -2,7 +2,7 @@
 // over compute(). Every number shown comes from compute.js.
 
 import { formatNumber } from '../lib/format.js';
-import { bindPair, draggable, installApi, onWidth } from '../lib/page.js';
+import { bindPair, draggable, installApi, onWidth, setInvalid } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { compute, DEFAULTS, ENTRY, LIMITS, resolveParams, samplePoints } from './compute.js';
 import { barsFigure, liabilityFigure, planeFigure, tableFigure, thresholdName } from './figure.js';
@@ -92,7 +92,7 @@ function thresholdEditor({ list, error, get, set, label, idPrefix }) {
       const lower = j ? values[j - 1] + LIMITS.minGap : -LIMITS.threshold;
       const upper = j < values.length - 1 ? values[j + 1] - LIMITS.minGap : LIMITS.threshold;
       const ok = field.value.trim() !== '' && Number.isFinite(v) && v >= lower - 1e-9 && v <= upper + 1e-9;
-      field.toggleAttribute('aria-invalid', !ok);
+      setInvalid(field, !ok);
       error.hidden = ok;
       if (!ok) {
         error.textContent = `${thresholdName(j)} must be a number from ${formatNumber(lower)} to ${formatNumber(upper)}, between its neighbours.`;
@@ -262,7 +262,7 @@ function integerField(field, apply) {
   field.addEventListener('input', () => {
     const v = Number(field.value);
     const ok = field.value.trim() !== '' && Number.isInteger(v) && v >= Number(field.min) && v <= Number(field.max);
-    field.toggleAttribute('aria-invalid', !ok);
+    setInvalid(field, !ok);
     if (ok) apply(v);
   });
 }
@@ -315,7 +315,7 @@ $('count-grid').addEventListener('input', (event) => {
   const [i, j] = /** @type {string} */ (field.dataset.cell).split(',').map(Number);
   const v = Number(field.value);
   const ok = field.value.trim() !== '' && Number.isInteger(v) && v >= 0;
-  field.toggleAttribute('aria-invalid', !ok);
+  setInvalid(field, !ok);
   state.fit.table[i][j] = ok ? v : NaN;
   renderFit();
 });

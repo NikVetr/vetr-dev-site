@@ -5,6 +5,18 @@
 import { ENTRIES, IntuitionsError, submit } from '../api.js';
 
 /**
+ * Marks a field as invalid (aria-invalid="true", which also draws the red field style) or
+ * clears the mark. The attribute is removed rather than left empty, since an empty
+ * aria-invalid means false.
+ * @param {HTMLElement} field
+ * @param {boolean} invalid
+ */
+export function setInvalid(field, invalid) {
+  if (invalid) field.setAttribute('aria-invalid', 'true');
+  else field.removeAttribute('aria-invalid');
+}
+
+/**
  * Keeps a range input and a number input in step. The number input accepts exact
  * values within its min and max (marked invalid otherwise, and not applied); the
  * range may be on a transformed scale (for example log) via toRange / fromRange.
@@ -17,17 +29,14 @@ export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange
   range.addEventListener('input', () => {
     const value = Number(fromRange(Number(range.value)).toFixed(decimals));
     number.value = String(value);
-    number.removeAttribute('aria-invalid');
+    setInvalid(number, false);
     onInput(value);
   });
   number.addEventListener('input', () => {
     const value = Number(number.value);
     const ok = number.value.trim() !== '' && Number.isFinite(value) && value >= min && value <= max;
-    if (!ok) {
-      number.setAttribute('aria-invalid', 'true');
-      return;
-    }
-    number.removeAttribute('aria-invalid');
+    setInvalid(number, !ok);
+    if (!ok) return;
     range.value = String(toRange(value));
     onInput(value);
   });
@@ -35,7 +44,7 @@ export function bindPair({ range, number, onInput, toRange = (v) => v, fromRange
     /** @param {number} value */
     set(value) {
       number.value = String(Number(value.toFixed(decimals)));
-      number.removeAttribute('aria-invalid');
+      setInvalid(number, false);
       range.value = String(toRange(value));
     },
   };

@@ -3,7 +3,7 @@
 
 import { attachRotation, orientation } from '../lib/geom3d.js';
 import { formatNumber } from '../lib/format.js';
-import { bindPair, draggable, installApi, onWidth } from '../lib/page.js';
+import { bindPair, draggable, installApi, onWidth, setInvalid } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { swatch } from '../lib/plot.js';
 import {
@@ -177,7 +177,7 @@ $('arrows-data').addEventListener('input', (event) => {
   const field = /** @type {HTMLInputElement} */ (event.target);
   const v = Number(field.value);
   const ok = field.value.trim() !== '' && Number.isFinite(v) && Math.abs(v) <= LIMITS.value;
-  field.toggleAttribute('aria-invalid', !ok);
+  setInvalid(field, !ok);
   if (!ok) return;
   state.arrows[/** @type {'a' | 'b'} */ (field.dataset.var)][Number(field.dataset.obs)] = v;
   renderArrows();
@@ -503,7 +503,7 @@ $('entry-grid').addEventListener('input', (event) => {
   const [i, j] = /** @type {string} */ (field.dataset.cell).split(',').map(Number);
   const v = Number(field.value);
   const ok = field.value.trim() !== '' && Number.isFinite(v) && v >= -1 && v <= 1;
-  field.toggleAttribute('aria-invalid', !ok);
+  setInvalid(field, !ok);
   if (!ok) return;
   state.entry.matrix[i][j] = state.entry.matrix[j][i] = v;
   state.entry.cell = [i, j];

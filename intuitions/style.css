@@ -388,6 +388,7 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .matrix-grid td.chosen { border-color: var(--ink); border-style: dashed; }
 .matrix-grid td.primary { border-style: solid; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
 .matrix-grid input { width: 4.1rem; min-height: 2rem; padding: 0.15rem 0.35rem; background: var(--surface); color: var(--text); appearance: textfield; -moz-appearance: textfield; }
+.matrix-grid input[aria-invalid="true"] { background: var(--alert-soft); }
 /* The arrow keys still step a cell; the spinner would cover its digits. */
 .matrix-grid input::-webkit-inner-spin-button, .matrix-grid input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .matrix-grid .cell-width { display: block; margin-top: 0.1rem; font-size: 0.75rem; line-height: 1.2; white-space: nowrap; }
