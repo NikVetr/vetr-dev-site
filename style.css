@@ -1,6 +1,5 @@
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
-html, body { height: 100%; }
 :root {
   color-scheme: light;
   --bg: #fff;
@@ -10,9 +9,16 @@ html, body { height: 100%; }
   --border: #e9e9e9;
   --primary: #2b66d5;
   --primary-soft: #f6f8ff;
-  --primary-line: #ccd7ff;
-  --shadow: 0 10px 30px rgba(0,0,0,0.06);
+  --primary-line: #9fb5ec;
+  --card-border: rgba(16, 24, 40, 0.13);
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 6px 18px rgba(16, 24, 40, 0.06);
   --radius: 16px;
+
+  /* The card pictures (assets/cards/*.svg) paint with these, so they follow the theme. */
+  --art-paper: #f3f5f8;
+  --art-ink: #1b1b1b;
+  --art-muted: #6a707a;
+  --art-line: #d3d8e0;
 
   --space-1: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem);
   --space-2: clamp(1rem, 0.9rem + 0.5vw, 1.4rem);
@@ -20,9 +26,17 @@ html, body { height: 100%; }
   --space-4: clamp(2.4rem, 1.8rem + 2vw, 3.4rem);
 
   --fs-0: clamp(0.98rem, 0.9rem + 0.3vw, 1.06rem);
-  --fs-1: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+  --fs-1: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
   --fs-2: clamp(1.45rem, 1.2rem + 0.9vw, 1.9rem);
   --fs-3: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+
+  /* Page gutters, clear of a notch or rounded corners in landscape (viewport-fit=cover). */
+  --gutter: clamp(1rem, 0.4rem + 2.4vw, 3rem);
+  --gutter-left: max(var(--gutter), env(safe-area-inset-left));
+  --gutter-right: max(var(--gutter), env(safe-area-inset-right));
+  /* Cards are at least this wide; the grid fits as many columns as the width allows. */
+  --card-min: 17.5rem;
+  --card-pad: 0.625rem;
 }
 /* The tools' dark colours (/shared/base.css); shared/theme.js sets data-theme from the
    visitor's choice in any tool, or else the system setting. */
@@ -35,8 +49,14 @@ html, body { height: 100%; }
   --border: #30343c;
   --primary: #8ab0ff;
   --primary-soft: #1b2740;
-  --primary-line: #3d5a8f;
-  --shadow: none;
+  --primary-line: #4d6fae;
+  --card-border: rgba(255, 255, 255, 0.11);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.25);
+
+  --art-paper: #1e2129;
+  --art-ink: #e8e8e8;
+  --art-muted: #9ca2ab;
+  --art-line: #3b414c;
 }
 
 body {
@@ -46,23 +66,38 @@ body {
   font: 400 var(--fs-0)/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Long words wrap rather than overflow; nothing is ever cut short. */
+  overflow-wrap: break-word;
 }
 
 .container {
-  width: min(100% - 2rem, 900px);
+  max-width: 150rem;
   margin-inline: auto;
+  padding-inline: var(--gutter-left) var(--gutter-right);
 }
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter-left);
+  top: 0.5rem;
+  z-index: 20;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: 600;
+  translate: 0 -200%;
+}
+.skip-link:focus-visible { translate: none; outline: 2px solid var(--primary); outline-offset: 2px; }
+#projects:focus { outline: none; }
 
 /* ---------- Header ---------- */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 .site-header .container {
-  padding: var(--space-1) 0;
+  padding-block: var(--space-1);
 }
 h1 {
   margin: 0;
@@ -76,57 +111,81 @@ h1 {
 }
 
 /* ---------- Main ---------- */
-main.container { padding: var(--space-3) 0 var(--space-4); }
-section + section { margin-top: var(--space-4); }
-h2 { font-size: var(--fs-2); margin: 0 0 var(--space-2); letter-spacing: -0.01em; }
+main.container { padding-block: var(--space-3) var(--space-4); }
+section + section { margin-top: var(--space-3); }
+h2 { font-size: var(--fs-2); margin: 0 0 var(--space-1); letter-spacing: -0.01em; }
 p { margin: 0 0 var(--space-2); max-width: 68ch; }
 
 /* ---------- Projects ---------- */
 .grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min)), 1fr));
   gap: var(--space-2);
 }
-@media (min-width: 720px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
+.grid > li { display: flex; }
+
+/* Each card is one link, named by its title (aria-labelledby). Hover and focus change it at
+   once, with no movement; only the picture moves, and only while hovered or focused. */
 .project-card {
-  border: 1px solid var(--border);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-pad);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: var(--space-2);
   background: var(--surface);
   box-shadow: var(--shadow);
+  color: var(--text);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
+.project-card > :not(.card-art) { margin-inline: 0.5rem; }
 .project-card h3 {
-  margin: 0 0 0.4rem;
+  margin-block: 0.75rem 0.3rem;
   font-size: var(--fs-1);
+  line-height: 1.3;
   letter-spacing: -0.01em;
+  color: var(--primary);
 }
-.project-card p { margin: 0 0 var(--space-1); color: var(--muted); }
+/* The arrow says "this goes somewhere" alongside the link colour; it is not part of the name. */
+.project-card h3::after { content: "\00a0→" / ""; }
+.project-card p { margin-bottom: 0.75rem; color: var(--muted); }
+.project-card:hover { border-color: var(--primary-line); }
+.project-card:hover h3 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+.project-card:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-color: var(--primary-line);
+}
+
+/* The picture: an SVG from scripts/landing-art/, inlined by assets/landing.js. Its box is
+   reserved before it arrives, so nothing shifts. */
+.card-art {
+  aspect-ratio: 16 / 9;
+  border-radius: calc(var(--radius) - var(--card-pad));
+  background: var(--art-paper);
+  color: var(--art-ink);
+  overflow: hidden;
+}
+.card-art svg { display: block; width: 100%; height: 100%; }
+
 .project-date {
-  display: inline-block;
-  margin-left: 0.5rem;
+  align-self: flex-start;
+  margin-top: auto;
   padding: 0.1rem 0.55rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   font-size: 0.8rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
-  vertical-align: middle;
 }
 
-/* ---------- Links / button ---------- */
-a { color: var(--primary); text-underline-offset: 3px; text-decoration-thickness: 2px; }
-a:hover { text-decoration: underline; }
-.project-link {
-  display: inline-flex; align-items: center; gap: 0.35rem;
-  text-decoration: none; font-weight: 600;
-  border: 1px solid var(--border);
-  padding: 0.55rem 0.9rem; border-radius: 999px;
-}
-.project-link:hover {
-  background: var(--primary-soft);
-  border-color: var(--primary-line);
+/* A phone on its side: little height, so smaller cards and more of them across. */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root { --card-min: 15rem; }
 }
 
 /* ---------- Footer (full-bleed image with overlay credit) ---------- */
@@ -148,6 +207,22 @@ a:hover { text-decoration: underline; }
   max-width: 4000px;
   margin-inline: auto;
   height: auto;
+}
+
+/* The photo has a white background, which on the dark page would be a white band across the
+   whole width. Dark mode frames it instead, as a print on the page with the cards' corners and
+   border, so the white reads as the photo's own paper. The photo itself is unchanged. */
+:root[data-theme="dark"] .site-footer {
+  border-top: 0;
+  padding: 0 var(--gutter-right) max(var(--space-3), env(safe-area-inset-bottom)) var(--gutter-left);
+}
+:root[data-theme="dark"] .footer-art {
+  max-width: 64rem;
+  margin-inline: auto;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
 /* Beside the credit rather than fixed over it: the bottom-right corner of this page
