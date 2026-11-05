@@ -45,13 +45,14 @@ export function renderSvg(result, { width = 720, height = 600, theme = 'light', 
 
   // Grid and axes.
   const yStep = plotH >= 220 ? 0.1 : 0.2;
+  const xStep = (plotW * 0.1) / (1 - xMin) >= 42 ? 0.1 : 0.2;
   out.push(`<g stroke="${c.grid}" stroke-width="1">`);
   for (const t of ticks(0, 1, yStep)) out.push(`<line x1="${x(xMin)}" x2="${x(1)}" y1="${y(t)}" y2="${y(t)}"/>`);
-  for (const t of ticks(xMin, 1, 0.1)) out.push(`<line x1="${x(t)}" x2="${x(t)}" y1="${y(0)}" y2="${y(1)}"/>`);
+  for (const t of ticks(xMin, 1, xStep)) out.push(`<line x1="${x(t)}" x2="${x(t)}" y1="${y(0)}" y2="${y(1)}"/>`);
   out.push('</g>');
   out.push(`<g fill="${c.muted}">`);
   for (const t of ticks(0, 1, yStep)) out.push(`<text x="${round(x(xMin) - font * 0.5)}" y="${round(y(t) + font * 0.35)}" text-anchor="end">${percentLabel(t)}</text>`);
-  for (const t of ticks(xMin, 1, 0.1)) out.push(`<text x="${x(t)}" y="${round(y(0) + font * 1.4)}" text-anchor="middle">${percentLabel(t)}</text>`);
+  for (const t of ticks(xMin, 1, xStep)) out.push(`<text x="${x(t)}" y="${round(y(0) + font * 1.4)}" text-anchor="middle">${percentLabel(t)}</text>`);
   out.push('</g>');
   out.push(`<g fill="${c.text}" font-size="${round(font * 1.08)}">`);
   out.push(`<text x="${round(margin.left + plotW / 2)}" y="${round(y(0) + font * 2.9)}" text-anchor="middle">Stated probability</text>`);

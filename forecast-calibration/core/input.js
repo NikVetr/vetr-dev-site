@@ -39,7 +39,7 @@ const REQUEST_FIELDS = ['predictions', 'table', 'bins', 'simulations', 'plotWorl
 const PREDICTION_FIELDS = ['text', 'probability', 'outcome'];
 const TABLE_COLUMNS = ['text', 'probability', 'outcome'];
 const OUTCOME_WORDS = new Map([['1', 1], ['0', 0], ['true', 1], ['false', 0], ['yes', 1], ['no', 0]]);
-const PROBABILITY_TEXT = /^(\d+(?:\.\d*)?|\.\d+)\s*(%?)$/;
+const PROBABILITY_TEXT = /^([0-9.eE+-]+)\s*(%?)$/;
 
 /**
  * Validates a request and fills in defaults. Throws one ForecastCalibrationError
@@ -118,8 +118,9 @@ export function formatTable(rows) {
 }
 
 /**
- * Reads "0.7", ".7" or "70%" as a probability. Anything else gives NaN; the range
- * is checked by the caller, so "1.5" comes back as 1.5 and is then rejected.
+ * Reads a number ("0.7", ".7", "7e-1") or a percentage ("70%") as a probability.
+ * Anything else gives NaN. The range is checked by the caller, so "1.5" comes back
+ * as 1.5 and is then rejected. String(p) reads back as exactly p.
  * @param {string} text
  */
 export function parseProbability(text) {

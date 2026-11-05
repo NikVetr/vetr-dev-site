@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check whether stated probabilities match how often things happened, against thousands of simulated worlds of a calibrated forecaster.">
+  <title>Forecast Calibration</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M6 26 26 6' stroke='%23fff' stroke-width='2.5' stroke-dasharray='3 3'/%3E%3Cpath d='M6 24 13 19 19 17 26 9' fill='none' stroke='%23ffb4b4' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Before first paint, so the page never flashes the wrong theme.
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('forecast-calibration:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Forecast Calibration</h1>
+        <p class="tagline">Do the things you call 70% likely happen about 70% of the time? Compare your record with thousands of simulated worlds in which every stated probability is exactly right.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <div class="column">
+      <section class="card data-card" aria-labelledby="data-heading">
+        <div class="card-head">
+          <h2 id="data-heading">Predictions</h2>
+          <span id="row-count" class="muted"></span>
+        </div>
+        <div class="toolbar">
+          <button id="edit-text" type="button" aria-haspopup="dialog">Paste or edit as CSV/TSV…</button>
+          <button id="load-example" type="button">Load example</button>
+          <button id="clear-rows" type="button">Clear</button>
+        </div>
+        <div id="issues" class="issues" role="alert" hidden></div>
+        <div class="table-wrap">
+          <table class="predictions">
+            <thead>
+              <tr>
+                <th scope="col" class="index">#</th>
+                <th scope="col" class="text-col">Prediction</th>
+                <th scope="col" class="probability-col">Probability</th>
+                <th scope="col" class="outcome-col">Happened?</th>
+                <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="toolbar">
+          <button id="add-row" type="button">+ Add row</button>
+          <span class="muted">Probability as 0.7 or 70%.</span>
+        </div>
+      </section>
+
+      <section class="card settings-card" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <div class="settings">
+          <label>Binning
+            <select id="bins-mode">
+              <option value="distinct">Each stated probability</option>
+              <option value="width">Equal-width bins</option>
+            </select>
+          </label>
+          <label id="bins-count-field" hidden>Number of bins
+            <input id="bins-count" type="number" min="2" max="100" step="1" value="10">
+          </label>
+          <label>Simulated worlds
+            <input id="simulations" type="number" min="100" max="1000000" step="1000" value="100000">
+          </label>
+          <label>Worlds drawn in the plot
+            <input id="plot-worlds" type="number" min="0" max="10000" step="100" value="2000">
+          </label>
+          <label>Interval (share of worlds)
+            <input id="interval" type="number" min="0.01" max="0.999" step="0.01" value="0.95">
+          </label>
+          <label>Seed
+            <span class="input-row">
+              <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
+              <button id="new-seed" type="button">New seed</button>
+            </span>
+          </label>
+          <label>World line opacity
+            <input id="world-opacity" type="number" min="0.001" max="1" step="0.005" value="0.01">
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <section class="card results-card" aria-labelledby="results-heading">
+      <div class="card-head">
+        <h2 id="results-heading">Calibration</h2>
+        <span id="status" class="muted"></span>
+      </div>
+      <p id="no-result" class="placeholder">Results appear here once every row has a probability and an outcome.</p>
+      <div id="result" hidden>
+        <figure id="plot" class="plot"></figure>
+        <div class="toolbar">
+          <span class="muted">Plot:</span>
+          <button id="export-svg" type="button">SVG</button>
+          <button id="export-png" type="button">PNG</button>
+        </div>
+
+        <h3>Scores</h3>
+        <dl id="scores" class="scores"></dl>
+
+        <h3>Bins</h3>
+        <table class="bins">
+          <thead>
+            <tr>
+              <th scope="col">Bin</th>
+              <th scope="col" class="num">Happened</th>
+              <th scope="col" class="num">Realized</th>
+              <th scope="col" class="num" id="interval-heading">Middle 95% of worlds</th>
+              <th scope="col">Against worlds</th>
+            </tr>
+          </thead>
+          <tbody id="bins"></tbody>
+        </table>
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <button id="export-csv" type="button">Bins CSV</button>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>Predictions are grouped into bins, by default one per stated probability. For each bin the plot shows the stated probability against the share of its predictions that came true (the red line).</p>
+        <p>The thin lines are simulated worlds. In each one, every prediction comes true with exactly its stated probability, so they show how far a perfectly calibrated forecaster's record would still wander from the diagonal by chance, given how many predictions each bin holds. A bin outside the middle 95% of worlds (or the share you set) is marked with a triangle pointing the way it is out.</p>
+        <p>Three summaries are compared with the same worlds:</p>
+        <ul>
+          <li><strong>Weighted calibration error</strong>: the squared gap between realized frequency and stated probability, averaged over bins with each bin weighted by its share of the predictions.</li>
+          <li><strong>Unweighted calibration error</strong>: the same squared gap, averaged over bins equally.</li>
+          <li><strong>Log loss</strong>: minus the sum of the natural log of the probability given to what actually happened. Lower is better; always saying 50% scores n log 2.</li>
+        </ul>
+        <p>Each p-value is the share of simulated worlds whose value is strictly larger than yours. A small p-value means a calibrated forecaster would rarely do as badly. For log loss, a p-value close to 1 means less loss than calibrated forecasts at these probabilities usually incur, which is what underconfidence looks like.</p>
+        <p>Stated probabilities of exactly 0% or 100% are not accepted: if such a forecast is wrong its log loss is infinite. Use 1% or 99% instead.</p>
+        <p>The seed fixes the simulated worlds, so the same predictions and settings always give the same numbers. Change it to see how much the results move by chance; more simulated worlds make them move less.</p>
+        <p>The analysis is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+
+  <dialog id="table-dialog" aria-labelledby="table-dialog-title">
+    <div class="dialog-head">
+      <h2 id="table-dialog-title">Paste or edit as CSV/TSV</h2>
+      <button type="button" class="dialog-close" aria-label="Close">×</button>
+    </div>
+    <div class="dialog-body">
+      <p>One line per prediction, after a header line naming the columns <code>text</code> (optional), <code>probability</code> and <code>outcome</code>, in any order. Probabilities are written 0.7 or 70%; outcomes 1 or 0, true or false, yes or no. Commas or tabs both work, so cells pasted from a spreadsheet are fine.</p>
+      <textarea id="table-text" rows="14" spellcheck="false" aria-label="Table as CSV or TSV"></textarea>
+      <div id="table-issues" class="issues" role="alert" hidden></div>
+      <div class="toolbar">
+        <button id="table-apply" type="button" class="primary">Replace table</button>
+        <button type="button" class="dialog-close">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
