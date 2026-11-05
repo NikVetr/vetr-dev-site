@@ -226,19 +226,20 @@ function showResult(result, svg) {
   el.noResult.hidden = true;
   el.result.hidden = false;
 
+  // The fit is worded from the counts, which a rounded percentage can contradict ("100.0%" of an
+  // incomplete text), so the core's percentage warning is left out here.
   const placed = result.glyphs.filter((g) => g.placed).length;
-  el.fitStatus.className = result.complete ? 'fit ok' : 'fit short';
-  el.fitStatus.textContent = result.complete
-    ? '✓ The whole text fits.'
-    : `⚠ Only ${(100 * result.fraction_placed).toFixed(1)}% of the text fits; the rest is left out.`;
+  const total = result.glyphs.length;
+  const count = `${placed.toLocaleString('en-US')} of ${total.toLocaleString('en-US')} characters placed`;
+  el.fitStatus.className = placed === total ? 'fit ok' : 'fit short';
+  el.fitStatus.textContent = placed === total ? `✓ ${count}.` : `⚠ ${count}; the rest is left out.`;
   const rows = [
     ['Letter size', `${result.font_size_px.toFixed(1)} px (cex ${result.cex.toFixed(3)})`],
     ['Lines', String(result.lines)],
-    ['Characters placed', `${placed.toLocaleString('en-US')} of ${result.glyphs.length.toLocaleString('en-US')}`],
     ['Output size', `${result.canvas.width} × ${result.canvas.height} px`],
     ...(result.palette ? [['Colour error (OKLab)', `mean ${result.palette.error.mean.toFixed(3)}, 99th percentile ${result.palette.error.p99.toFixed(3)}`]] : []),
     ['Size rounds', result.history.map((h) => `${(12 * h.cex).toFixed(2)} px ${h.complete ? '✓' : '✗'}`).join(', ')],
-    ...result.warnings.map((w) => ['Warning', `⚠ ${w}`]),
+    ...result.warnings.filter((w) => !w.startsWith('text did not fit')).map((w) => ['Warning', `⚠ ${w}`]),
   ];
   el.stats.replaceChildren(...rows.map(([term, value]) => {
     const div = document.createElement('div');

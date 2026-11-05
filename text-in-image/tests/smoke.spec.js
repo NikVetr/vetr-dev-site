@@ -11,7 +11,7 @@ test('renders the example and exposes the API', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await open(page);
-  await expect(page.locator('#fit-status')).toHaveText('✓ The whole text fits.');
+  await expect(page.locator('#fit-status')).toHaveText('✓ 11,201 of 11,201 characters placed.');
   await expect(page.locator('#palette li')).toHaveCount(15);
   await expect(page.locator('#output')).toHaveAttribute('src', /^blob:/);
   await expect(page.locator('#image-info')).toHaveText('alice-drink-me.png, 295 × 540 px');
