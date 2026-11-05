@@ -200,6 +200,10 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 }
 /* The picture keeps its 16:9 drawing, centred, when its well takes another shape. */
 .card-art svg { display: block; width: 100%; height: 100%; }
+/* A scripted loop (assets/players/) draws on a canvas in place of the still. */
+.card-art { position: relative; }
+.card-art .card-player { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card-art:has(.card-player) svg { visibility: hidden; }
 
 /* Large tiles: a bigger title, and the picture takes any height the tile gains from its rows. */
 [data-size="3"] > .project-card h3 { font-size: var(--fs-2); }

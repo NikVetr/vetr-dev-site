@@ -82,8 +82,9 @@ export function esc(text) {
  * @param {string} [p.loop]    rules that run while playing; `&` stands for the playing scope
  * @param {number} p.period    the loop's period in seconds: every loop animation repeats on it
  * @param {number} [p.frames]  for a flip-book, its number of frames (for the loop checks)
+ * @param {string} [p.player]  a script in assets/players/ that plays the loop instead of CSS
  */
-export function art({ name, body, defs = '', css = '', loop = '', period, frames }) {
+export function art({ name, body, defs = '', css = '', loop = '', period, frames, player }) {
   const scope = `[data-art="${name}"]`;
   const style = [
     css.replaceAll('&', scope),
@@ -91,7 +92,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // under reduced motion (landing.js does not set data-playing then either).
     loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-playing]`)}\n}`,
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''} focusable="false">
 <style>
 ${style}
 </style>
