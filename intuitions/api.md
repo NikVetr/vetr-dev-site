@@ -11,6 +11,8 @@ The entries are:
 - [`dag-adjustment`](#dag-adjustment): adjustment sets in linear-Gaussian causal graphs: the regression coefficient each set gives against the causal effect, the adjustment criterion, every path, the front-door estimate, and what conditioning on many colliders does.
 - [`null-pvalues`](#null-pvalues): ways to break a p-value: under a true null, the p-values of a common shortcut beside a sound analysis, and the realised false-positive rate at α, in seven scenarios (a batch regressed out first, covariates removed one at a time, a t-test on bootstrap means, autocorrelated series, two-step filtering, paired data tested as independent, and pathway tests kept only where a pathway has a hit).
 - [`marchenko-pastur`](#marchenko-pastur): how many principal components are noise, in three views: the eigenvalues of pure noise against the Marchenko–Pastur law, spiked covariances and the BBP threshold for eigenvalues and eigenvectors, and the first principal components of a batch-and-factors model before and after the batch is regressed out.
+- [`trait-evolution`](#trait-evolution): traits evolving on a tree, in three views: one trait along every branch under Brownian motion, a trend, Ornstein–Uhlenbeck, an early or late burst, a burst partway through, or a clade shifting to a second optimum; two traits under Brownian motion with a rate matrix; and the Brownian bridge between fixed ends, filled in by midpoints, optionally kept inside a region.
+- [`tree-covariance`](#tree-covariance): a tree as a covariance matrix, in three views: the tips' covariance as shared paths with the tips as arrows and simulated tip values, re-rooting with the restricted and ordinary likelihoods, and Felsenstein's pruning step by step against the direct normal likelihood.
 
 ## Ways in
 
@@ -36,7 +38,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues or marchenko-pastur, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues and marchenko-pastur pages' own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution or tree-covariance, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues and marchenko-pastur pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -466,6 +468,113 @@ This is 1st_two_pc_axes.R's model. One data set is drawn and analysed as measure
 - **Samples** are drawn from mulberry32, normals by inversion. Each simulation agrees with R's (the script's, and a spiked model, at the defaults) within Monte Carlo error.
 - **What the scripts do differently.** marchenko–pastur_intuitions.R uses ndf = *n* (`dmp(…, ndf = n_obs)`, and the threshold (1 + √(*p*/*n*))²), but `cov()` centres, which leaves *n* − 1; at its 200 observations of 20 variables its edges are 0.12% low. Its follow-up on random orthonormal matrices and rotations is not ported. 1st_two_pc_axes.R regresses each feature on all 99 simulated variables and subtracts the batch term, an oracle correction that leaves the batch means slightly unequal; this entry regresses on the batch alone, which equalises them exactly. Its held-out discriminant analysis and support vector machines are not ported.
 
+## trait-evolution
+
+A trait starts at the root and evolves down every branch; at a split both daughters inherit the value and go on independently. Each branch is cut into steps, and each step is drawn from the model's exact transition (normal, with the model's mean and variance over that step), so the step count changes the paths' detail but not the tips' distribution. Draws come from mulberry32 with normals by inversion, so the same seed gives the same random steps under every model. `params.view` picks one of three computations.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"tree"`, `"bivariate"` or `"bridge"` | `"tree"` | Which computation. |
+
+A tree is given as `params.tree`: `{tips, seed}`, a pure-birth tree as phytools' `pbtree(n = tips)` draws it (tips 2–64, seed 0–4,294,967,295, default 1), scaled to height 1 and with tips named A, B, C, … in drawing order; or `{newick}`, a Newick tree with a length on every branch (a length after the outer group is a stem), tips named once each, used in its own units. Times are measured from the base of the stem.
+
+### view "tree"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `tree` | `{tips, seed}` or `{newick}` | `{tips: 12, seed: 1}` | The tree. |
+| `model` | `"bm"`, `"trend"`, `"ou"`, `"eb"`, `"burst"` or `"shift"` | `"bm"` | The model of change. |
+| `sigma2` | number 0.001–100 | `1` | σ², the rate (variance per unit time). |
+| `root` | number −100–100 | `0` | The trait at the base of the tree. |
+| `drift` | number −50–50 | `2` | `"trend"` only: μ, the mean change per unit time. |
+| `alpha` | number 0.001–100 | `4` | `"ou"` and `"shift"`: α, the pull toward the optimum. |
+| `theta` | number −100–100 | `1.5` | `"ou"` and `"shift"`: θ (θ₁ outside the clade). |
+| `theta2` | number −100–100 | `-1.5` | `"shift"` only: θ₂, the clade's optimum. |
+| `clade` | array of tip names | the root's smaller daughter | `"shift"` only: the clade is the smallest holding these tips; it is under θ₂ from the start of its stem branch. |
+| `change` | number −20–20 | `-4` | `"eb"` only: *a* in σ²(*t*) = σ² e^(*a t*); below 0 an early burst, above 0 a late one. |
+| `burstAt` | number 0–1 | `0.5` | `"burst"` only: the burst time *t*ᵦ, as a share of the tree's height. |
+| `delta2` | number 0–1,000 | `5` | `"burst"` only: δ² in σ²(*t*) = σ²(1 + δ² e^(−λ(*t* − *t*ᵦ))) after *t*ᵦ. |
+| `lambda` | number 0.01–200 | `8` | `"burst"` only: λ, how fast the burst decays. |
+| `steps` | integer 10–5,000 | `300` | Steps across the tree's height (each branch gets at least one). |
+| `seed` | integer 0–4,294,967,295 | `1` | |
+
+A field for another model is rejected as `unknown_field`, and a request for more than 200,000 path points as `too_much_work`. Result: `model`; `tree`, `{newick, parent, children, length, label, height}` (node 0 the root; `length[i]` the branch above node *i*; `height` each node's time); `treeHeight`; `clade`, `{node, from, tips}` for a shift (from: when its stem starts), else `null`; `branches`, one per node with a branch, `{node, regime, times, values}` (regime 2 inside the clade); `tips`, `{node, label, value}` in drawing order; `nodeValues`, the trait at every node; and `envelope`, `{times, mean, sd, rate}`: the mean and SD of a single lineage from the root through time and the rate σ²(*t*), with `clade`, the same for a lineage that enters the clade's regime at its `from`.
+
+### view "bivariate"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `tree` | `{tips, seed}` or `{newick}` | `{newick: "((A:0.5,B:0.5):0.5,C:1):0.25;"}` | 3dPlots.R's tree. |
+| `rate` | 2 × 2 symmetric positive-definite matrix | `[[1, 0.5], [0.5, 2]]` | *R*: each step's covariance is *R* times its length. |
+| `root` | `[x, y]`, each −100–100 | `[4, 4]` | Both traits at the base. |
+| `steps` | integer 10–5,000 | `125` | |
+| `seed` | | `1` | |
+
+Result: `tree`, `treeHeight`, `correlation` (*R*'s), `branches`, `{node, times, x, y}`, and `tips`, `{node, label, value: [x, y]}`.
+
+### view "bridge"
+
+Between fixed points *a* at time *s* and *b* at time *u*, Brownian motion with rate matrix *R* passes the midpoint time at a normal point with mean (*a* + *b*)/2 and covariance (*u* − *s*)*R*/4. Each path is filled in by such midpoints, level by level, as truncatedBMapprox.R does.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `start`, `end` | `[x, y]`, each −100–100 | `[-5, -4]`, `[4, 4.5]` | The fixed ends. |
+| `rate` | 2 × 2 symmetric positive-definite matrix | `[[2, 1], [1, 3]]` | *R*. |
+| `length` | number 0.01–1,000 | `50` | The branch's length. |
+| `levels` | integer 1–12 | `4` | Levels of refinement: 2^levels − 1 points between the ends. |
+| `paths` | integer 1–1,000 | `500` | |
+| `region` | `"none"`, `"disc"` or `"dumbbell"` | `"disc"` | Keep the path inside the script's disc (centre (0, 0), radius 10) or its two islands (discs of radius 8 at (±11, 0) joined by the corridor −3.3 < *x* < 3.3, −1 < *y* < 1). The ends must be inside (`outside_region`). |
+| `method` | `"stagewise"` or `"whole-path"` | `"stagewise"` | `"stagewise"` redraws each midpoint that falls outside, as the script does: an approximation, which lets paths crowd the edge. `"whole-path"` redraws a whole path whenever any point leaves: exact for the drawn points. |
+| `seed` | | `1` | |
+
+A request for more than 120,000 points is rejected (`too_much_work`). A midpoint (or, whole-path, a path) is given up after 10,000 draws. Result: `region`, `shape` (the region's geometry or `null`), `method`, `points` (per path), `paths` (each an array of `[x, y]`, ends included; the points added at level *k* are the odd multiples of 2^(levels − *k*)), `failed` (paths given up), `attempts` (paths drawn), `levels`, each `{level, added, draws, rejected}`, and `midpoint`: `free`, `{mean, cov}` of a free bridge's middle point, and `sample`, `{mean, distance, distanceSE}`, the kept paths' middle points and their mean distance from (0, 0), the centre of both regions.
+
+### Method
+
+- **Trees.** `lib/tree.js`'s Yule simulation matches `pbtree(n = 10, b = 1)`'s height, total, external and first-split lengths decile by decile over 4,000 trees, and its Newick reads ape's `write.tree()` text and writes text ape reads back to the same covariance.
+- **Moments.** On 3dPlots.R's tree, Brownian motion and Ornstein–Uhlenbeck tips over 20,000 seeds have the theoretical means and covariances, as does an R simulation with univariate_brownian_motion_animation.R's exact `rOU`; the early and late burst's integrate σ²e^(*a t*); the burst's tip covariance is middleBurst.R's branch-rate rescaling to 1e-9.
+- **What the scripts do differently.** qualifyingExam_animations.R steps Ornstein–Uhlenbeck as *x* + α(θ − *x*) + σ*z*, an Euler approximation, and its argument named sigma2 multiplies the standard normal, so it is σ: its two-optima run (α = 0.1, sigma2 = 0.5) has a long-run variance of 1.32, not the 2.63 a step variance of 0.5 would give. Its early-or-late burst scales each step's SD by e^(−*r t*), this entry's *a* = −2*r*. Here every model uses its exact transition with σ² a variance. The bridge's stagewise rejection is the script's; on its disc the middle point comes out farther from the centre than with whole-path rejection (5.46 ± 0.11 against 4.75 ± 0.10 at the defaults), which the page shows.
+
+## tree-covariance
+
+Under Brownian motion at rate 1, two tips covary by the length of the path they share from the root (a stem counts as shared). `params.view` picks one of three computations. Every view takes `newick`, a tree with a positive length on every branch but the stem, 2 to 64 tips named once each; unnamed internal nodes are named N1, N2, … in drawing order, and a node with more than two children is pruned two at a time, as if joined by branches of length 0. Default: drawingSimple3TipTrees.R's tree, `(A:50,(B:30,C:35)D:40)E;`.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"covariance"`, `"reroot"` or `"pruning"` | `"covariance"` | Which computation. |
+| `newick` | string | `"(A:50,(B:30,C:35)D:40)E;"` | The tree. |
+
+### view "covariance"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `arrows` | 2 or 3 tip names | `["A", "B", "C"]` (else the first three) | The tips drawn as arrows. |
+| `pair` | 2 tip names | `["B", "C"]` (else the first two) | The tips whose simulated values are returned. |
+| `sample` | `{n, seed}` (n 2–5,000) or `null` | `{n: 500, seed: 1}` | Runs of Brownian motion down the tree from 0. |
+
+Result: `tree` (`{newick, parent, children, length, label}`), `tips` (drawing order), `vcv`, `correlation`, `paths` (each tip's branches from the root, by the node below them), `arrows`, `{tips, vectors, lengths, angles}`: 3-D vectors whose dot products are the chosen tips' covariances (rows of its Cholesky factor), their lengths, and for each pair `{tips, shared, correlation, degrees}`; and `sample`, `{n, seed, x, y, correlation}`, or `null`.
+
+### view "reroot"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `values` | object: a number per tip, or an array of 1–4 numbers per tip | `{A: 3, B: -2, C: 1}` | The tip values (traits). |
+| `rate` | number 1e-6–1e6, or a *p* × *p* positive-definite matrix for *p* traits | `0.1` (*p* × *p* identity) | σ², or the rate matrix Σ. |
+| `root` | `{node, fraction}` | the root, `{node: "E", fraction: 0}` | Hang the unrooted tree from the branch above `node`, `fraction` (0–1) of the way up it; 0 puts the root on the node itself, and at a tip that tip's value is the root's state, observed. |
+| `sweep` | 2 tip names | `["A", "C"]` (else the first and last) | The path the root is slid along. |
+
+Result: `tree`, the re-rooted tree (the old root stays as a node with one child); `tips` and `vcv` under this rooting; `observedRoot` (the tip at the root, or `null`); `rootEstimate` and `rootVariance` (μ̂ and its variance over σ², from the matrix); `reml`, the restricted log-likelihood by pruning, and `ml`, the ordinary one at μ̂; `direct`, `{reml, ml}` from the matrix; and `sweep`, `{tips, positions, reml, ml, marks, current}`: both log-likelihoods at 24 points inside each branch along the path (distances from the first tip), the nodes passed `{label, at}`, and where the current root is on the path (`null` if it is not on it).
+
+### view "pruning"
+
+`values` and `rate` as for "reroot". Result: `tree`, `tips`, `vcv`; `steps`, in postorder, each `{node, children, values, branches, extensions, lengths, contrast, variance, scaled, estimate, extension, logDensity, total}`: the two children (a merged pair is named "A+B"), their values and branch lengths, the lengthening each carries from earlier steps and the sum, the contrast (first minus second) and its variance over σ², the contrast over the square root of that variance, the node's new value, the lengthening of its own branch *v*₁*v*₂/(*v*₁ + *v*₂), the contrast's log-density and the running total; `root`, `{estimate, variance}`; `reml` and `ml`; `direct`, `{reml, ml, rootEstimate, rootVariance}`; and for one trait `P`, the tips' covariance times σ², and `Q`, the contrasts' variances times σ² (`P` is `null` for several traits).
+
+### Method
+
+- **Likelihoods.** The restricted log-likelihood is log ∫ N(*X*; 1μᵀ, *C* ⊗ Σ) dμ over a flat prior, −½[(*n* − 1)*p* log 2π + *p* log|*C*| + (*n* − 1) log|Σ| + *p* log 1ᵀ*C*⁻¹1 + tr(Σ⁻¹*R*ᵀ*C*⁻¹*R*)] with *R* the tips' deviations from μ̂; pruning gives it as the sum of the contrasts' log-densities, and the ordinary log-likelihood is it minus ½[*p* log 2π + *p* log Var μ̂ + log|Σ|]. *C* and Σ are factored by Cholesky.
+- **Parity.** `lib/tree.js`'s covariance matches ape's `vcv` and its contrasts ape's `pic`, node by node, on five trees up to 30 tips. The pruning likelihood matches pruningAlgorithmTestImplementationIThink.R's `BMpruneLL` and the direct formula (and mvtnorm's density) for two and three traits to 1e-8, and in R `BMpruneLL` gives the same on the unrooted and re-rooted trees.
+- **What the scripts do differently.** `BMpruneLL` keeps the traits as a matrix that drops to a vector with one trait, so it fails then ("incorrect number of dimensions"); this entry takes one to four. exploringFasterPruning.R's `BMpruneLLuvt` rotates by the eigenvectors of the global `cov`, not its argument `sig`, and is right only when they are equal. demonstratingUVBMonTree.R's covariance [[2.5, 1], [1, 1.5]] is the tree `(x1:1.5,x2:0.5):1;`, whose stem this entry counts.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -504,9 +613,14 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `not_symmetric` (a matrix entry that differs from its mirror)
 - `not_positive_semidefinite` (no arrows have these correlations; the message gives the smallest eigenvalue)
 - `not_estimable` (a batch design in which treatment and batch cannot be told apart)
-- `too_much_work` (a simulation of more than about a billion random draws, or eigendecompositions of more than about 20 billion operations)
+- `invalid_newick` (Newick text that cannot be read; the message gives the character where reading stopped)
+- `unnamed_tip`, `duplicate_label`, `missing_length` (a tip without a name, a name used twice, a branch without a positive length)
+- `unknown_tip`, `duplicate_tip` (a name that is not one of the tree's tips; a tip named twice)
+- `not_positive_definite` (a rate matrix with a variance of 0 or less or a correlation of ±1 or beyond)
+- `outside_region` (a bridge whose start or end is outside the region it must stay in)
+- `too_much_work` (a simulation of more than about a billion random draws, eigendecompositions of more than about 20 billion operations, or more path points than an entry allows)
 
-Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]` or `params.replicates`. An empty path means the request as a whole.
+Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]`, `params.replicates`, `params.tree.newick`, `params.values.A` or `params.root.fraction`. An empty path means the request as a whole.
 
 ## Worked examples
 
@@ -819,3 +933,34 @@ With 8 of 10 treated in one batch and 2 of 10 in the other, the batch accounts f
 ```
 
 With 400 observations of 200 variables, γ ≈ 0.5 and the threshold is 0.71. A population eigenvalue of 4 comes out near 4.67, well clear of the bulk's edge at 2.92, and its eigenvector is at a squared cosine of 0.81 with the truth. One of 1.5 comes out at 2.86, inside the bulk, indistinguishable from the largest noise eigenvalue, and its eigenvector is close to random (0.04).
+
+**Felsenstein's pruning on the script's three-tip tree.** `pruning.json`:
+
+```json
+{"entry": "tree-covariance", "params": {"view": "pruning"}}
+```
+
+`node intuitions/cli.mjs pruning.json` prints (abridged: `tree` keeps only its Newick, and each step's `values`, `extensions` and `scaled` are left out):
+
+```json
+{
+  "entry": "tree-covariance",
+  "params": { "view": "pruning", "newick": "(A:50,(B:30,C:35)D:40)E;", "values": { "A": 3, "B": -2, "C": 1 }, "rate": 0.1 },
+  "result": {
+    "view": "pruning", "tree": { "newick": "(A:50,(B:30,C:35)D:40)E;" }, "tips": ["A", "B", "C"],
+    "vcv": [[50, 0, 0], [0, 70, 40], [0, 40, 75]],
+    "steps": [
+      { "node": "D", "children": ["B", "C"], "branches": [30, 35], "lengths": [30, 35], "contrast": [-3], "variance": 65,
+        "estimate": [-0.6153846153846154], "extension": 16.153846153846153, "logDensity": -2.54714731396316, "total": -2.54714731396316 },
+      { "node": "E", "children": ["A", "D"], "branches": [50, 40], "lengths": [50, 56.15384615384615], "contrast": [3.6153846153846154], "variance": 106.15384615384616,
+        "estimate": [1.297101449275362], "extension": 26.44927536231884, "logDensity": -2.7157540192375684, "total": -5.262901333200729 }
+    ],
+    "root": { "estimate": [1.297101449275362], "variance": 26.44927536231884 },
+    "reml": -5.262901333200729, "ml": -6.668161700618045,
+    "direct": { "reml": -5.262901333200729, "ml": -6.668161700618045, "rootEstimate": [1.297101449275362], "rootVariance": 26.44927536231884 },
+    "P": [[5, 0, 0], [0, 7, 4], [0, 4, 7.5]], "Q": [6.5, 10.615384615384617]
+  }
+}
+```
+
+B and C, the cherry, differ by −3 with variance σ²(30 + 35) = 6.5; D′ takes their weighted average, −0.62, and D's branch grows from 40 to 56.15. A and D′ then differ by 3.62 with variance 10.6. The two log-densities add up to −5.263, the same restricted log-likelihood as the three tips' normal density with covariance σ²·vcv, and the root's estimate, 1.30, is what is left at the root.

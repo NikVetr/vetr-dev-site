@@ -12,6 +12,10 @@ import { spectrumFigure } from './marchenko-pastur/figure.js';
 import { compute as nullPvalues } from './null-pvalues/compute.js';
 import { pairThumbnail } from './null-pvalues/figure.js';
 import { compute as thresholdModel } from './threshold-model/compute.js';
+import { compute as traitEvolution } from './trait-evolution/compute.js';
+import { phenogramFigure } from './trait-evolution/figure.js';
+import { compute as treeCovariance } from './tree-covariance/compute.js';
+import { covarianceThumbnail } from './tree-covariance/figure.js';
 import { liabilityFigure } from './threshold-model/figure.js';
 import { compute as zscoreOutliers } from './zscore-outliers/compute.js';
 import { compute as typicalSet } from './typical-set/compute.js';
@@ -56,6 +60,20 @@ const thumbs = [
     draw: (/** @type {number} */ width) => {
       const r = /** @type {any} */ (marchenkoPastur({ view: 'noise', n: 200, p: 60, replicates: 30 }));
       return spectrumFigure({ histogram: r.sample.histogram, curve: r.curve, edges: r.edges, variance: 1, zeroShare: 0 }, { width, height: 150, compact: true });
+    },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-trait-evolution')),
+    draw: (/** @type {number} */ width) => {
+      const params = { model: 'shift', tree: { tips: 12, seed: 1 } };
+      return phenogramFigure(traitEvolution(params), { width, height: 150, id: 'thumb-te', compact: true, params: { theta: 1.5, theta2: -1.5 } }).svg;
+    },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-tree-covariance')),
+    draw: (/** @type {number} */ width) => {
+      const r = treeCovariance({ newick: '(((A:1,B:1):1,C:2):0.6,(D:1.2,E:1.2):1.4);', sample: null });
+      return covarianceThumbnail(r, ['A', 'B'], { width, height: 150 });
     },
   },
 ];

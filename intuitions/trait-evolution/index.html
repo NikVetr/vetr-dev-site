@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Watch a trait evolve along the branches of a phylogeny under Brownian motion, a trend, an Ornstein–Uhlenbeck pull, an early or late burst, a burst of rate partway through, or a clade shifting to a new optimum; follow two traits through time in 3-D; and fill in a branch between fixed ends with the Brownian bridge.">
+  <title>Traits evolving on a tree · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cpath d='M5 16h7M12 9v14M12 9h15M12 23h7M19 19v8M19 19h8M19 27h8' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Traits on a tree</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Traits evolving on a tree</h1>
+      <p class="lede">A trait evolves along the branches of a phylogeny. It starts at the root and wanders down each branch, and at every split both daughter lineages carry the value on and wander independently from there. Sister species resemble each other because they share history, and how much the tips spread, and how much they still share, depends on the model of change. Press play to watch it happen.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#tree">One trait through time</a></li>
+          <li><a href="#bivariate">Two traits through time</a></li>
+          <li><a href="#bridge">Filling in a branch</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="tree" aria-labelledby="tree-heading">
+      <h2 id="tree-heading"><span class="panel-number">1</span> One trait through time</h2>
+      <p class="panel-intro">Each branch draws its own random path, starting where its parent ended. Under Brownian motion the spread of a lineage grows with the square root of time and the tips' covariance is the time they shared. A trend adds a steady drift. An Ornstein–Uhlenbeck pull draws every lineage toward an optimum θ, so the spread levels off and old history is forgotten. In an early burst the rate falls over time, so most change happens among the first lineages; in a late burst it rises. A burst partway through raises the rate for a while and lets it decay. And a clade can shift to an optimum of its own.</p>
+      <div class="panel-body">
+        <figure id="tree-figures">
+          <ul class="legend" id="tree-legend"></ul>
+          <div id="tree-tree" class="plot-box"></div>
+          <div id="tree-phenogram" class="plot-box"></div>
+          <div id="tree-rate-block" hidden>
+            <div class="figure-head"><h3>The rate through time</h3></div>
+            <div id="tree-rate" class="plot-box"></div>
+          </div>
+          <div class="playback" id="tree-playback" data-player="tree"></div>
+          <figcaption class="caption" id="tree-caption">Top: the tree, its past in ink up to the time shown. Below: the trait along every branch. The shaded band is where 95% of a single lineage would be at each time; dots mark the lineages alive at the time shown.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control stacked" data-tree-control="tree"></div>
+          <div class="control">
+            <div class="control-row">
+              <label for="tree-model">Model</label>
+              <select id="tree-model">
+                <option value="bm">Brownian motion</option>
+                <option value="trend">Brownian motion with a trend</option>
+                <option value="ou">Ornstein–Uhlenbeck, one optimum</option>
+                <option value="eb">Early or late burst</option>
+                <option value="burst">A burst partway through</option>
+                <option value="shift">A clade shifts to a second optimum</option>
+              </select>
+            </div>
+          </div>
+          <div id="tree-model-controls"></div>
+          <div class="control">
+            <div class="control-row">
+              <label for="tree-seed">Seed for the trait</label>
+              <input id="tree-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="tree-new-seed">New draw</button>
+            </div>
+            <p class="hint">Each draw uses the same random steps under every model, so switching models shows what the model alone changes.</p>
+          </div>
+          <div id="tree-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="tree-readout" aria-live="polite"></p>
+          <dl class="stats" id="tree-stats"></dl>
+          <div class="controls-foot"><button type="button" id="tree-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="bivariate" aria-labelledby="bivariate-heading">
+      <h2 id="bivariate-heading"><span class="panel-number">2</span> Two traits through time</h2>
+      <p class="panel-intro">Two traits, such as a height and a width, evolving together. Within a lineage their changes are correlated by the rate matrix; across species they also covary because the species shared history. Here each lineage is a path through trait 1, trait 2 and time, with time running up, and its shadows on the back walls show each trait on its own against time. This is 3dPlots.R's three-tip tree and rate matrix.</p>
+      <div class="panel-body">
+        <figure class="scene-figure" id="bivariate-figures">
+          <ul class="legend" id="bivariate-legend"></ul>
+          <div id="bivariate-scene" class="plot-box scene" tabindex="0" role="group" aria-roledescription="rotatable 3-D figure" aria-label="Two traits through time. Drag, or use the arrow keys, to rotate."></div>
+          <div class="view-controls" id="bivariate-view" role="group" aria-label="Turn the 3-D view"></div>
+          <div class="playback" id="bivariate-playback" data-player="bivariate"></div>
+          <figcaption class="caption">Each lineage's path, up to the time shown, where a translucent plane marks the present. Grey shadows: trait 1 against time on the back wall, trait 2 against time on the left wall.</figcaption>
+        </figure>
+        <div class="panel-side">
+          <div class="control stacked" data-tree-control="bivariate"></div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bivariate-v1-number">Rate of trait 1, σ₁²</label>
+              <input id="bivariate-v1-number" type="number" min="0.01" max="20" step="0.05">
+            </div>
+            <input id="bivariate-v1-range" type="range" min="0.05" max="5" step="0.05" aria-label="Rate of trait 1, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bivariate-v2-number">Rate of trait 2, σ₂²</label>
+              <input id="bivariate-v2-number" type="number" min="0.01" max="20" step="0.05">
+            </div>
+            <input id="bivariate-v2-range" type="range" min="0.05" max="5" step="0.05" aria-label="Rate of trait 2, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bivariate-rho-number">Their correlation, ρ</label>
+              <input id="bivariate-rho-number" type="number" min="-0.99" max="0.99" step="0.01">
+            </div>
+            <input id="bivariate-rho-range" type="range" min="-0.99" max="0.99" step="0.01" aria-label="Correlation, slider">
+          </div>
+          <div class="control">
+            <div class="control-row">
+              <label for="bivariate-seed">Seed</label>
+              <input id="bivariate-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="bivariate-new-seed">New draw</button>
+            </div>
+          </div>
+          <div id="bivariate-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="bivariate-readout" aria-live="polite"></p>
+          <dl class="stats" id="bivariate-stats"></dl>
+          <div class="controls-foot"><button type="button" id="bivariate-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="bridge" aria-labelledby="bridge-heading">
+      <h2 id="bridge-heading"><span class="panel-number">3</span> Filling in a branch</h2>
+      <p class="panel-intro">Suppose the trait's values at both ends of a branch are known, and only what happened in between is not. Under Brownian motion the path between two fixed ends is a Brownian bridge, and it can be drawn one midpoint at a time: the point halfway between two known points is normal, centred between them, with a variance a quarter of their span times the rate. Each level of refinement halves the gaps. Keeping the path inside a region, say an island it cannot leave, is harder, and the original script's shortcut is only approximate.</p>
+      <div class="panel-body">
+        <figure id="bridge-figures">
+          <ul class="legend" id="bridge-legend"></ul>
+          <div id="bridge-plot" class="plot-box stale-dim"></div>
+          <div class="playback" id="bridge-playback" data-player="bridge"></div>
+          <figcaption class="caption">Grey: every path at the level shown. Blue: the first path, with the points added at this level filled and earlier ones hollow. Dashed: where 95% of a free bridge's midpoint falls.</figcaption>
+          <p class="note" id="bridge-note" hidden></p>
+          <p class="sim-status" id="bridge-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="bridge-preset-label">Start from</span>
+            <div class="control-row" role="group" aria-labelledby="bridge-preset-label">
+              <button type="button" data-bridge-preset="disc">The script's disc</button>
+              <button type="button" data-bridge-preset="dumbbell">The script's two islands</button>
+              <button type="button" data-bridge-preset="none">No region</button>
+            </div>
+          </div>
+          <fieldset class="control choice-list">
+            <legend>Keep the path inside</legend>
+            <div class="segmented" id="bridge-region">
+              <label><input type="radio" name="bridge-region" value="none"> Nowhere</label>
+              <label><input type="radio" name="bridge-region" value="disc"> A disc</label>
+              <label><input type="radio" name="bridge-region" value="dumbbell"> Two islands</label>
+            </div>
+          </fieldset>
+          <fieldset class="control choice-list" id="bridge-method-box">
+            <legend>How</legend>
+            <div class="checks" id="bridge-method">
+              <label><input type="radio" name="bridge-method" value="stagewise"> Redraw each midpoint that falls outside (the script's; approximate)</label>
+              <label><input type="radio" name="bridge-method" value="whole-path"> Redraw any whole path that leaves (exact; slower)</label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="bridge-levels-number">Levels of refinement</label>
+              <input id="bridge-levels-number" type="number" min="1" max="12" step="1">
+            </div>
+            <input id="bridge-levels-range" type="range" min="1" max="12" step="1" aria-label="Levels of refinement, slider">
+            <p class="hint" id="bridge-levels-hint"></p>
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bridge-paths-number">Paths</label>
+              <input id="bridge-paths-number" type="number" min="1" max="1000" step="1">
+            </div>
+            <input id="bridge-paths-range" type="range" min="1" max="1000" step="1" aria-label="Paths, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="bridge-length-number">Branch length</label>
+              <input id="bridge-length-number" type="number" min="0.01" max="1000" step="1">
+            </div>
+            <input id="bridge-length-range" type="range" min="1" max="200" step="1" aria-label="Branch length, slider">
+          </div>
+          <div class="control">
+            <span class="label">Ends, (trait 1, trait 2)</span>
+            <div class="point-grid">
+              <label for="bridge-start-x">Start</label>
+              <input id="bridge-start-x" type="number" min="-100" max="100" step="0.5" aria-label="Start, trait 1">
+              <input id="bridge-start-y" type="number" min="-100" max="100" step="0.5" aria-label="Start, trait 2">
+              <label for="bridge-end-x">End</label>
+              <input id="bridge-end-x" type="number" min="-100" max="100" step="0.5" aria-label="End, trait 1">
+              <input id="bridge-end-y" type="number" min="-100" max="100" step="0.5" aria-label="End, trait 2">
+            </div>
+          </div>
+          <div class="control">
+            <div class="control-row">
+              <label for="bridge-seed">Seed</label>
+              <input id="bridge-seed" type="number" min="0" max="4294967295" step="1">
+              <button type="button" id="bridge-new-seed">New draw</button>
+            </div>
+          </div>
+          <div id="bridge-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="bridge-readout" aria-live="polite"></p>
+          <dl class="stats" id="bridge-stats"></dl>
+          <div class="controls-foot"><button type="button" id="bridge-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>Simulating</h3>
+        <p>A pure-birth (Yule) tree grows as phytools' pbtree does: two lineages leave the root, each waits an exponential time to split, and after the last split the tips grow for one more wait; it is then scaled to height 1. A pasted Newick tree is used as written, in its own units, its root edge included as a stem. Each branch is cut into steps, about the tree's height divided by the steps, and each step is drawn from the model's exact transition: normal, with the mean and variance the model gives over that step. So the steps change how detailed the picture is, not how the tips are distributed. Draws come from shared/rng.js's mulberry32, normals by inversion, so a seed gives the same tree and paths in every browser and in Node. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <h3>The models</h3>
+        <p>Brownian motion has variance σ² per unit time. A trend adds a drift μ per unit time to the mean. Ornstein–Uhlenbeck moves the mean toward θ at rate α, θ + (<var>x</var> − θ)e<sup>−α<var>t</var></sup>, with variance σ²(1 − e<sup>−2α<var>t</var></sup>)/2α, so a lineage's spread levels off at σ²/2α. The burst models change σ² with time: σ²e<sup><var>a</var><var>t</var></sup> for an early (<var>a</var> &lt; 0) or late (<var>a</var> &gt; 0) burst, and σ²(1 + δ²e<sup>−λ(<var>t</var> − <var>t</var><sub>b</sub>)</sup>) after a burst at <var>t</var><sub>b</sub>, as in middleBurst.R. A clade shift is Ornstein–Uhlenbeck with a second optimum on the clade's branches, its stem included, as in the qualifying-exam animation's two optima.</p>
+        <h3>The bridge</h3>
+        <p>Between fixed points <var>a</var> at time <var>s</var> and <var>b</var> at time <var>u</var>, Brownian motion with rate matrix <var>R</var> passes the midpoint time at a normal point with mean (<var>a</var> + <var>b</var>)/2 and covariance (<var>u</var> − <var>s</var>)<var>R</var>/4. truncatedBMapprox.R draws these midpoints level by level and redraws any that falls outside the region. That is an approximation: it conditions each new point on the region but not the rest of the path, which lets paths crowd the region's edge. Redrawing whole paths until one stays inside is exact for the drawn points, and this page shows how far apart the two come out.</p>
+        <h3>The R scripts</h3>
+        <p>qualifyingExam_animations.R steps its Ornstein–Uhlenbeck process as <var>x</var> + α(θ − <var>x</var>) + σ<var>z</var> per unit time, an Euler approximation, and its argument named sigma2 multiplies the standard normal step, so it is σ, not σ²: its two-optima run, sigma2 = 0.5, has a long-run variance of 1.32 where σ² = 0.5 would give 2.63. Its early-or-late burst scales each step's SD by e<sup>−<var>r</var><var>t</var></sup>, which is this page's <var>a</var> = −2<var>r</var>. This page draws every model's exact transition, with σ² a variance. The other scripts' simulations (univariate_brownian_motion_animation.R's exact rOU, 3dPlots.R's rate matrix steps, middleBurst.R's integrated burst) are matched as written.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+</body>
+</html>

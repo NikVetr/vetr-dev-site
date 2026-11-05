@@ -45,6 +45,8 @@ const MAX_POINTS = 200000;
 const MAX_BRIDGE_POINTS = 120000;
 /** A midpoint the region keeps rejecting is given up after this many draws, and so is a whole path. */
 const MAX_TRIES = 10000;
+/** The most normal draws one bridge request may make; the paths not finished by then are given up. */
+export const MAX_DRAWS = 2000000;
 
 /** Parameters each model adds to σ², the root state, the steps and the seed. */
 export const MODEL_FIELDS = Object.freeze({
@@ -451,6 +453,7 @@ function bridgeView(p) {
   const N = 2 ** p.levels;
   const dt = p.length / N;
   const draws = new Array(p.levels + 1).fill(0);
+  let spent = 0;
   const rejected = new Array(p.levels + 1).fill(0);
   /** Fills one path by midpoints; with `reject`, each midpoint outside the region is drawn again. @param {boolean} reject */
   const fill = (reject) => {
@@ -468,9 +471,10 @@ function bridgeView(p) {
         let tries = 0;
         let q;
         do {
-          if (tries++ >= MAX_TRIES) return null;
+          if (tries++ >= MAX_TRIES || spent >= MAX_DRAWS) return null;
           q = drawNormal(rng, mean, (gap * dt) / 2, L);
           draws[level] += 1;
+          spent += 1;
           if (reject && !insideRegion(p.region, q)) rejected[level] += 1;
           else break;
         } while (true);
@@ -492,10 +496,10 @@ function bridgeView(p) {
       // Whole-path rejection: draw the bridge freely and keep it only if every point is
       // inside, which conditions the sampled points on the region exactly.
       let path = null;
-      for (let tries = 0; tries < MAX_TRIES && !path; tries++) {
+      for (let tries = 0; tries < MAX_TRIES && !path && spent < MAX_DRAWS; tries++) {
         attempts += 1;
-        const candidate = /** @type {number[][]} */ (fill(false));
-        if (candidate.every((q) => insideRegion(p.region, q))) path = candidate;
+        const candidate = fill(false);
+        if (candidate && candidate.every((q) => insideRegion(p.region, q))) path = candidate;
       }
       if (path) paths.push(path);
       else failed += 1;
@@ -511,14 +515,14 @@ function bridgeView(p) {
   const distance = average(distances);
   return {
     view: 'bridge', region: p.region, shape: p.region === 'none' ? null : REGION_SHAPES[p.region], method: p.method,
-    points: N + 1, paths, failed, attempts,
+    points: N + 1, paths, failed, attempts, exhausted: spent >= MAX_DRAWS,
     levels: Array.from({ length: p.levels }, (_, i) => ({ level: i + 1, added: 2 ** i, draws: draws[i + 1], rejected: rejected[i + 1] })),
     midpoint: {
       free,
-      sample: {
+      sample: middles.length ? {
         mean: [average(middles.map((q) => q[0])), average(middles.map((q) => q[1]))], distance,
-        distanceSE: Math.sqrt(distances.reduce((a, d) => a + (d - distance) ** 2, 0) / Math.max(1, distances.length - 1) / Math.max(1, distances.length)),
-      },
+        distanceSE: Math.sqrt(distances.reduce((a, d) => a + (d - distance) ** 2, 0) / Math.max(1, distances.length - 1) / distances.length),
+      } : null,
     },
   };
 }

@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(7);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(7);
+  await expect(page.locator('.entry-card')).toHaveCount(9);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(9);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -319,9 +319,99 @@ test('Marchenko–Pastur: noise against the law, spikes past the threshold, the 
   expect(errors).toEqual([]);
 });
 
+test('traits on a tree: models, playback, reduced motion, 3-D, the bridge and the API', async ({ page }) => {
+  const errors = await open(page, 'trait-evolution/');
+  await expect(page.locator('#tree-phenogram svg')).toBeVisible();
+  await expect(page.locator('#tree-readout')).toContainText('Brownian motion');
+  await page.selectOption('#tree-model', 'ou');
+  await expect(page.locator('#tree-readout')).toContainText('Pulled toward θ = 1.50');
+  await expect(page.locator('#tree-alpha-number')).toHaveValue('4');
+  // Playback runs only when asked, and pauses mid-way with the time front drawn.
+  await expect(page.locator('#tree-time-out')).toHaveText('1.00 of 1.00');
+  await page.locator('#tree-play').click();
+  await expect(page.locator('#tree-play')).toHaveAttribute('aria-pressed', 'true');
+  await page.waitForTimeout(1500);
+  await page.locator('#tree-play').click();
+  const time = Number((await page.locator('#tree-time-out').textContent())?.split(' ')[0]);
+  expect(time).toBeGreaterThan(0.02);
+  expect(time).toBeLessThan(0.9);
+  expect(await page.locator('#tree-pheno-front .front-dot').count()).toBeGreaterThan(1);
+  await page.locator('input[name="tree-layout"][value="fan"]').check();
+  await expect(page.locator('#tree-tree .front-ring')).toBeVisible();
+  // A shift: the clade's paths are drawn in their own class.
+  await page.selectOption('#tree-model', 'shift');
+  await expect(page.locator('#tree-phenogram .lineage.clade')).toHaveCount(1);
+  // A pasted tree that does not parse is marked, and the last result stays, dimmed.
+  await page.locator('input[name="tree-source"][value="newick"]').check();
+  await page.locator('#tree-newick').fill('((A:1,B:1):1,C:2');
+  await page.locator('#tree-apply').click();
+  await expect(page.locator('#tree-issues')).toContainText('at character 17');
+  await expect(page.locator('#tree-figures')).toHaveAttribute('data-stale', 'true');
+  // Two traits: arrow keys turn the scene.
+  const before = await page.locator('#bivariate-scene svg').innerHTML();
+  await page.locator('#bivariate-scene').focus();
+  await page.keyboard.press('ArrowLeft');
+  expect(await page.locator('#bivariate-scene svg').innerHTML()).not.toBe(before);
+  // The bridge: the islands preset and the exact method.
+  await page.locator('[data-bridge-preset="dumbbell"]').click();
+  await expect(page.locator('#bridge-note')).toContainText('Approximate.');
+  await page.locator('input[name="bridge-method"][value="whole-path"]').check();
+  await expect(page.locator('#bridge-note')).toContainText('Exact for the drawn points.');
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'trait-evolution', params: { view: 'bivariate', seed: 4 } });
+    return { tips: r.result.tips.length, request: app.getRequest() };
+  });
+  expect(api.tips).toBe(3);
+  expect(api.request.params.seed).toBe(4);
+  await expect(page.locator('#bivariate-seed')).toHaveValue('4');
+  expect(errors).toEqual([]);
+});
+
+test('traits on a tree: with reduced motion asked for, playback moves in steps', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const errors = await open(page, 'trait-evolution/');
+  await expect(page.locator('#tree-reduced')).toBeVisible();
+  await page.locator('#tree-play').click();
+  await page.waitForTimeout(1500);
+  const time = Number((await page.locator('#tree-time-out').textContent())?.split(' ')[0]);
+  expect(Math.round(time * 10) / 10).toBeCloseTo(time, 9); // tenths of the height
+  await page.locator('#tree-play').click();
+  expect(errors).toEqual([]);
+});
+
+test('a tree is a covariance matrix: shared paths, re-rooting, pruning steps and the API', async ({ page }) => {
+  const errors = await open(page, 'tree-covariance/');
+  await expect(page.locator('#covariance-readout')).toContainText('B and C share 40');
+  await page.locator('#covariance-matrix button[data-i="A"][data-j="B"]').click();
+  await expect(page.locator('#covariance-readout')).toContainText('share no branch');
+  await expect(page.locator('#covariance-matrix button[data-i="A"][data-j="B"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#covariance-length-2').fill('60'); // D's branch
+  await expect(page.locator('#covariance-newick')).toHaveValue('(A:50,(B:30,C:35)D:60)E;');
+  // Every rooting: the restricted likelihood does not move.
+  for (const name of ['At A', 'At B', 'Halfway along v₄', 'Halfway along v₃', 'At E']) {
+    await page.locator('#reroot-presets').getByRole('button', { name }).click();
+    await expect(page.locator('#reroot-stats dd').first()).toHaveText('−5.263');
+  }
+  await page.locator('#pruning-next').click();
+  await expect(page.locator('#pruning-count')).toHaveText('Step 2 of 2');
+  await expect(page.locator('#pruning-readout')).toContainText('add up to −5.263');
+  await page.locator('#pruning-value-A').fill('1');
+  await expect(page.locator('#pruning-stats dd').first()).not.toHaveText('−5.263');
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'tree-covariance', params: { view: 'reroot', root: { node: 'D', fraction: 0.5 } } });
+    return { reml: r.result.reml, request: app.getRequest() };
+  });
+  expect(api.reml).toBeCloseTo(-5.262901333, 8);
+  expect(api.request.params.root).toEqual({ node: 'D', fraction: 0.5 });
+  await expect(page.locator('#reroot-fraction-number')).toHaveValue('0.5');
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }

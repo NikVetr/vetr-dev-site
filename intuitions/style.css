@@ -554,3 +554,93 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .plot .a-dot { fill: var(--a); fill-opacity: 0.6; }
 .plot .b-dot { fill: var(--b); fill-opacity: 0.6; }
 .check-row { gap: 0.45rem; padding: 0.55rem 0; border-top: 1px solid var(--grid); }
+
+/* ---------- Traits on a tree ---------- */
+
+.playback { display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; align-items: center; margin: 0.5rem 0 0.4rem; padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.playback .play { min-width: 6.2rem; justify-content: center; font-weight: 600; }
+.playback .play[aria-pressed="true"] { border-color: var(--primary); background: var(--primary-soft); }
+.playback .glyph { display: inline-block; width: 1em; text-align: center; }
+.playback input[type="range"] { flex: 1 1 12rem; width: auto; margin: 0; }
+.playback .time-field, .playback .speed-field { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.92rem; white-space: nowrap; }
+.playback output { min-width: 6.5em; font-variant-numeric: tabular-nums; color: var(--muted); }
+.playback .reduced-note { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 0.85rem; }
+.sub-controls { display: grid; gap: 0.3rem; margin-top: 0.4rem; }
+.sub-controls textarea { width: 100%; min-height: 4.5rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; }
+.choice-list.bare { margin: 0; padding: 0; border-top: 0; }
+.panel-side textarea[aria-invalid="true"] { border-color: var(--alert); background: var(--alert-soft); }
+.point-grid { display: grid; grid-template-columns: auto minmax(0, 5.5rem) minmax(0, 5.5rem); gap: 0.35rem 0.5rem; align-items: center; margin-top: 0.3rem; }
+.point-grid input { width: 100%; }
+
+.plot .tree-future { fill: none; stroke: var(--border); stroke-width: 1.4; }
+.plot .tree-branch { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: square; }
+.plot .tree-branch.clade { stroke: var(--b); stroke-width: 2.4; }
+.plot .tip-label { fill: var(--text); font-size: 11.5px; }
+.plot .tip-label.clade { font-weight: 700; }
+.plot .clade-bracket { fill: none; stroke: var(--b); stroke-width: 2; }
+.plot .front-line { stroke: var(--primary); stroke-width: 1.3; stroke-dasharray: 4 3; }
+.plot .front-ring { fill: none; stroke: var(--primary); stroke-width: 1.3; stroke-dasharray: 4 3; }
+.plot .off { display: none; }
+.plot .front-dot { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.plot .front-dot.clade { stroke: var(--b); stroke-width: 2; }
+.plot .lineage { fill: none; stroke: var(--ink); stroke-width: 1.25; stroke-opacity: 0.85; stroke-linejoin: round; }
+.plot .lineage.clade { stroke: var(--b); stroke-opacity: 0.95; }
+.plot .band { fill: var(--a-soft); }
+.plot .band.ink { fill: var(--faint); fill-opacity: 0.16; }
+.plot .band.clade { fill: var(--b-soft); }
+.plot .optimum-line { stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 6 4; }
+.plot .optimum-line.clade { stroke: var(--b); }
+.plot .burst-line { stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 2 3; }
+.plot .leader { fill: none; stroke: var(--faint); stroke-width: 0.8; }
+.plot .band-swatch { fill: var(--a-soft); }
+.plot .band-swatch.ink { fill: var(--faint); fill-opacity: 0.3; }
+.plot .shadow-line { stroke: var(--faint); stroke-width: 1.5; }
+.plot .hollow-a { fill: var(--surface); stroke: var(--a); stroke-width: 1.5; }
+.plot .wall-patch { fill: var(--faint); fill-opacity: 0.07; }
+.plot .now-patch { fill: var(--primary); fill-opacity: 0.09; stroke: var(--primary); stroke-opacity: 0.45; stroke-width: 1; }
+.plot .shadow { fill: none; stroke: var(--faint); stroke-width: 1; stroke-opacity: 0.7; }
+.plot .path3 { fill: none; stroke-width: 2.2; stroke-linejoin: round; }
+.plot .region, .plot .region-swatch { fill: color-mix(in srgb, var(--c) 13%, var(--surface)); stroke: var(--c); stroke-width: 1.5; }
+.plot .bridge-path { fill: none; stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.plot .free-ellipse { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 4; }
+
+/* ---------- A tree is a covariance matrix ---------- */
+
+.plot .branch { stroke: var(--ink); stroke-width: 2; stroke-linecap: square; }
+.plot .branch.strong { stroke: var(--primary); stroke-width: 4.5; }
+.plot .branch.faded { stroke: var(--faint); stroke-width: 1.3; stroke-dasharray: 3 3; }
+.plot .extension { stroke: var(--ink); stroke-width: 2.4; stroke-dasharray: 1.5 3.5; stroke-linecap: round; }
+.plot .length-label { fill: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.plot .length-label.faded { fill: var(--faint); }
+.plot .tip-name { fill: var(--text); font-size: 13px; font-weight: 700; }
+.plot .tip-name.faded { fill: var(--faint); font-weight: 400; }
+.plot .node-name { fill: var(--muted); font-size: 12px; }
+.plot .node-name.strong { fill: var(--text); font-weight: 700; font-size: 13px; }
+.plot .node-note { fill: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.plot .scatter-dots { stroke: var(--a); stroke-width: 3.2; stroke-linecap: round; stroke-opacity: 0.4; }
+.plot .ellipse-ring { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.plot .root-line, .plot .root-swatch { stroke: var(--primary); stroke-width: 2.5; }
+.plot .strong-tick { fill: var(--text); font-weight: 600; }
+.vcv-grid td { min-width: 3.4rem; vertical-align: middle; }
+.vcv-grid td.chosen { border-color: var(--ink); border-style: solid; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
+.cell-button { width: 100%; min-height: 2rem; padding: 0.15rem 0.4rem; justify-content: center; border: 0; border-radius: 4px; background: transparent; color: inherit; font-variant-numeric: tabular-nums; }
+.cell-button:hover:not(:disabled) { background: color-mix(in srgb, var(--surface) 40%, transparent); }
+.cell-button[aria-pressed="true"] { font-weight: 700; }
+.cell-button[aria-pressed="true"]::before { content: "● "; font-size: 0.7em; }
+.step-bar { display: flex; flex-wrap: wrap; gap: 0.45rem 0.6rem; align-items: center; margin: 0 0 0.5rem; padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.step-count { min-width: 9rem; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.step-table tr.current th, .step-table tr.current td { background: var(--primary-soft); font-weight: 600; }
+.step-table tr.future th, .step-table tr.future td { color: var(--faint); }
+.matrix-row { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; align-items: flex-start; }
+.small-matrix .hist-name { margin: 0 0 0.25rem; font-size: 0.9rem; }
+.bracket-matrix { border-collapse: collapse; border-left: 2px solid var(--ink); border-right: 2px solid var(--ink); font-variant-numeric: tabular-nums; }
+.bracket-matrix td { min-width: 2.6rem; padding: 0.2rem 0.45rem; text-align: center; }
+.length-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 0.35rem 0.8rem; align-items: center; }
+.length-grid label { display: inline-flex; justify-content: space-between; gap: 0.4rem; font-size: 0.92rem; }
+.length-grid { grid-template-columns: max-content minmax(0, 6rem) max-content minmax(0, 6rem); }
+.length-grid input { width: 100%; }
+.sub-label { margin: 0.35rem 0 0.15rem; font-size: 0.92rem; color: var(--muted); }
+.panel-side textarea { width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; }
+.panel-side > .control.stacked { display: grid; gap: 0.3rem; align-items: start; }
+.step-table td:nth-child(2) { text-align: left; }
+.plot .cell-picked { stroke: var(--ink); stroke-width: 2; }
