@@ -1,0 +1,170 @@
+// The gallery's SVG plot module. Figures are built as SVG markup strings, with no DOM
+// access, so the same code draws a page's figure, an index thumbnail or a test
+// fixture. Colours come from CSS classes (see style.css), so one SVG serves light
+// and dark themes. Sizes are CSS pixels: pages render at the figure's real width
+// rather than scaling a fixed viewBox, so text stays legible on a phone.
+
+/** @typedef {[number, number]} Point */
+
+/** @param {unknown} value */
+export function escapeXml(value) {
+  return String(value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch] ?? ch);
+}
+
+/** Coordinates to two decimals keep paths compact. @param {number} v */
+export const r2 = (v) => Math.round(v * 100) / 100;
+
+/**
+ * An element as markup. Attributes that are null, undefined or false are left out;
+ * children are markup strings (or nested arrays of them).
+ * @param {string} tag
+ * @param {Record<string, string | number | boolean | null | undefined>} [attrs]
+ * @param {...(string | string[] | null | undefined | false)} children
+ */
+export function el(tag, attrs = {}, ...children) {
+  const attributes = Object.entries(attrs)
+    .filter(([, v]) => v !== null && v !== undefined && v !== false)
+    .map(([k, v]) => (v === true ? ` ${k}` : ` ${k}="${escapeXml(typeof v === 'number' ? r2(v) : v)}"`))
+    .join('');
+  const inner = children.flat().filter(Boolean).join('');
+  return `<${tag}${attributes}${inner ? `>${inner}</${tag}>` : '/>'}`;
+}
+
+/**
+ * A text element; its content is escaped.
+ * @param {number} x
+ * @param {number} y
+ * @param {string} content
+ * @param {Record<string, string | number | boolean | null | undefined>} [attrs]
+ */
+export function text(x, y, content, attrs = {}) {
+  return `<text x="${r2(x)}" y="${r2(y)}"${Object.entries(attrs).filter(([, v]) => v !== null && v !== undefined && v !== false)
+    .map(([k, v]) => ` ${k}="${escapeXml(v)}"`).join('')}>${escapeXml(content)}</text>`;
+}
+
+/**
+ * @typedef {((v: number) => number) & { invert: (p: number) => number, domain: [number, number], range: [number, number] }} Scale
+ */
+
+/**
+ * @param {[number, number]} domain
+ * @param {[number, number]} range
+ * @returns {Scale}
+ */
+export function scaleLinear(domain, range) {
+  const [d0, d1] = domain;
+  const [p0, p1] = range;
+  const k = (p1 - p0) / (d1 - d0);
+  const scale = /** @type {Scale} */ ((/** @type {number} */ v) => p0 + (v - d0) * k);
+  scale.invert = (p) => d0 + (p - p0) / k;
+  scale.domain = domain;
+  scale.range = range;
+  return scale;
+}
+
+/**
+ * Base-10 log scale; the domain must be positive.
+ * @param {[number, number]} domain
+ * @param {[number, number]} range
+ * @returns {Scale}
+ */
+export function scaleLog(domain, range) {
+  const inner = scaleLinear([Math.log10(domain[0]), Math.log10(domain[1])], range);
+  const scale = /** @type {Scale} */ ((/** @type {number} */ v) => inner(Math.log10(v)));
+  scale.invert = (p) => 10 ** inner.invert(p);
+  scale.domain = domain;
+  scale.range = range;
+  return scale;
+}
+
+/**
+ * Round-numbered ticks (steps of 1, 2 or 5 times a power of ten) inside [lo, hi].
+ * @param {number} lo
+ * @param {number} hi
+ * @param {number} count roughly how many
+ */
+export function niceTicks(lo, hi, count) {
+  const raw = (hi - lo) / Math.max(1, count);
+  const power = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 5, 10].map((m) => m * power).find((s) => s >= raw * 0.999) ?? 10 * power;
+  const decimals = Math.max(0, -Math.floor(Math.log10(step) + 1e-9));
+  const ticks = [];
+  for (let i = Math.ceil(lo / step - 1e-9); i * step <= hi + step * 1e-9; i++) ticks.push(Number((i * step).toFixed(decimals)));
+  return ticks;
+}
+
+/**
+ * Powers of ten inside [lo, hi], thinned to at most `max` ticks.
+ * @param {number} lo
+ * @param {number} hi
+ * @param {number} max
+ */
+export function logTicks(lo, hi, max) {
+  const powers = [];
+  for (let e = Math.ceil(Math.log10(lo) - 1e-9); e <= Math.floor(Math.log10(hi) + 1e-9); e++) powers.push(e);
+  const every = Math.ceil(powers.length / Math.max(1, max));
+  const top = powers[powers.length - 1];
+  return powers.filter((e) => (top - e) % every === 0).map((e) => 10 ** e);
+}
+
+/** @param {Point[]} points */
+export function linePath(points) {
+  return points.map(([x, y], i) => `${i ? 'L' : 'M'}${r2(x)} ${r2(y)}`).join('');
+}
+
+/**
+ * A closed area between a top line and either a constant baseline or a bottom line
+ * (given in the same x order as the top).
+ * @param {Point[]} top
+ * @param {number | Point[]} bottom
+ */
+export function areaPath(top, bottom) {
+  if (!top.length) return '';
+  const lower = typeof bottom === 'number' ? [[top[top.length - 1][0], bottom], [top[0][0], bottom]] : [...bottom].reverse();
+  return `${linePath(top)}${lower.map(([x, y]) => `L${r2(x)} ${r2(y)}`).join('')}Z`;
+}
+
+/**
+ * A horizontal axis: baseline, ticks and labels, and an optional title below.
+ * @param {{ scale: Scale, y: number, ticks: number[], format?: (v: number) => string, label?: string, labelGap?: number }} options
+ */
+export function axisBottom({ scale, y, ticks, format = String, label, labelGap = 34 }) {
+  const [x0, x1] = scale.range;
+  return el('g', { class: 'axis' },
+    el('line', { x1: Math.min(x0, x1), x2: Math.max(x0, x1), y1: y, y2: y, class: 'axis-line' }),
+    ticks.map((t) => el('line', { x1: scale(t), x2: scale(t), y1: y, y2: y + 5, class: 'axis-line' })),
+    ticks.map((t) => text(scale(t), y + 18, format(t), { class: 'tick', 'text-anchor': 'middle' })),
+    label ? text((x0 + x1) / 2, y + labelGap, label, { class: 'axis-label', 'text-anchor': 'middle' }) : '');
+}
+
+/**
+ * A vertical axis with optional horizontal gridlines across `gridTo`.
+ * @param {{ scale: Scale, x: number, ticks: number[], format?: (v: number) => string, gridTo?: number }} options
+ */
+export function axisLeft({ scale, x, ticks, format = String, gridTo }) {
+  return el('g', { class: 'axis' },
+    gridTo === undefined ? '' : ticks.map((t) => el('line', { x1: x, x2: gridTo, y1: scale(t), y2: scale(t), class: 'grid' })),
+    ticks.map((t) => text(x - 6, scale(t) + 4, format(t), { class: 'tick', 'text-anchor': 'end' })));
+}
+
+/**
+ * The root element. `label` becomes the accessible name; `description` a <desc>.
+ * @param {{ width: number, height: number, label: string, description?: string, className?: string }} options
+ * @param {...(string | string[])} children
+ */
+export function svgRoot({ width, height, label, description, className }, ...children) {
+  return el('svg', {
+    xmlns: 'http://www.w3.org/2000/svg', width, height, viewBox: `0 0 ${r2(width)} ${r2(height)}`,
+    role: 'img', 'aria-label': label, class: ['plot', className].filter(Boolean).join(' '),
+  }, description ? el('desc', {}, escapeXml(description)) : '', ...children);
+}
+
+/**
+ * Approximate rendered width of a label in the plot font, for placing labels so
+ * that they stay inside the figure.
+ * @param {string} content
+ * @param {number} [size] font size in px
+ */
+export function textWidth(content, size = 12) {
+  return content.length * size * 0.56;
+}
