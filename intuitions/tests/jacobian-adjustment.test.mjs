@@ -7,6 +7,7 @@ import { test } from 'node:test';
 import { dnorm, standardNormal } from '../lib/normal.js';
 import { IntuitionsError } from '../lib/params.js';
 import { mulberry32 } from '../../shared/rng.js';
+import { sampledFigure } from '../jacobian-adjustment/figure.js';
 import { compute as computeJacobian, density, isProper, jointLogDensity, massLevels, moments, quantile, resolveParams, TRANSFORMS } from '../jacobian-adjustment/compute.js';
 
 /** @param {unknown} params @returns {any} */
@@ -257,4 +258,13 @@ test('jacobian: requests are checked in full', () => {
   assert.deepEqual(issues({ view: 'shape' }), ['out_of_range params.view']);
   assert.deepEqual(resolveParams({}), { view: 'transform', transform: 'product-lognormal', jacobian: false });
   assert.deepEqual(resolveParams({ transform: 'square' }), { view: 'transform', transform: 'square', jacobian: false, df: 1 });
+});
+
+test('jacobian: the sampled figure has no NaN at any width, even with a grid point at a = 0', () => {
+  for (const transform of TRANSFORMS) {
+    for (const jacobian of [true, false]) {
+      const p = /** @type {any} */ (resolveParams({ transform, jacobian }));
+      for (let width = 180; width < 700; width += 7) assert.ok(!sampledFigure(compute(p), jointLogDensity(p), { width, height: 200, id: 't' }).includes('NaN'), `${transform} ${jacobian} at ${width}`);
+    }
+  }
 });

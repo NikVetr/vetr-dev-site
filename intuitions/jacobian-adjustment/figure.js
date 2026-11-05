@@ -36,7 +36,8 @@ export function sampledFigure(result, logDensity, { width, height, id, compact =
   let max = -Infinity;
   for (let j = 0; j < ny; j++) {
     for (let i = 0; i < nx; i++) {
-      const v = /** @type {(p: Point) => number} */ (logDensity)([gx(i), gy(j)]);
+      // −∞ (log|a| at a = 0) would make the isolines' interpolation 0/0; any very low value draws the same.
+      const v = Math.max(-1e9, /** @type {(p: Point) => number} */ (logDensity)([gx(i), gy(j)]));
       values[j * nx + i] = v;
       if (v > max) max = v;
     }
