@@ -1,31 +1,8 @@
-// Browser helpers shared by the gallery's pages: the theme toggle, slider-and-number
-// controls, width-aware redraws, dragging marks in a figure, and window.Intuitions.
+// Browser helpers shared by the gallery's pages: slider-and-number controls,
+// width-aware redraws, dragging marks in a figure, and window.Intuitions. The theme
+// and its toggle are the site's, from shared/theme.js.
 
 import { ENTRIES, IntuitionsError, submit } from '../api.js';
-
-const THEME_KEY = 'intuitions:theme';
-
-/**
- * Wires the theme button. The page's head script has already set data-theme.
- * @param {HTMLButtonElement} button
- * @param {() => void} [onChange]
- */
-export function initTheme(button, onChange) {
-  const show = () => {
-    const dark = document.documentElement.dataset.theme === 'dark';
-    button.textContent = dark ? '☾ Dark' : '☀ Light';
-    button.setAttribute('aria-pressed', String(dark));
-    button.title = dark ? 'Switch to the light theme' : 'Switch to the dark theme';
-  };
-  button.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem(THEME_KEY, next); } catch { /* storage unavailable: the choice lasts for this page only */ }
-    show();
-    onChange?.();
-  });
-  show();
-}
 
 /**
  * Keeps a range input and a number input in step. The number input accepts exact

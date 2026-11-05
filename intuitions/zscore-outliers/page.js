@@ -2,7 +2,7 @@
 // figures and table. Everything numeric comes from compute.js.
 
 import { formatRatio, formatShare } from '../lib/format.js';
-import { bindPair, draggable, initTheme, installApi, onWidth } from '../lib/page.js';
+import { bindPair, draggable, installApi, onWidth } from '../lib/page.js';
 import { marker, swatch } from '../lib/plot.js';
 import { compute, DEFAULTS, ENTRY, RANGES, resolveParams } from './compute.js';
 import { densityFigure, sweepFigure } from './figure.js';
@@ -136,7 +136,7 @@ draggable(sweepBox, {
   },
 });
 
-initTheme(/** @type {HTMLButtonElement} */ ($('theme-toggle')), render);
+document.addEventListener('themechange', render);
 showControls(params);
 onWidth(densityBox, renderDensity);
 onWidth(sweepBox, renderSweep);

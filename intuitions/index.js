@@ -4,7 +4,7 @@
 import { compute as correlationGeometry } from './correlation-geometry/compute.js';
 import { coneScene, sceneCamera } from './correlation-geometry/figure.js';
 import { orientation } from './lib/geom3d.js';
-import { initTheme, installApi, onWidth } from './lib/page.js';
+import { installApi, onWidth } from './lib/page.js';
 import { compute as thresholdModel } from './threshold-model/compute.js';
 import { liabilityFigure } from './threshold-model/figure.js';
 import { compute as zscoreOutliers } from './zscore-outliers/compute.js';
@@ -30,5 +30,4 @@ const thumbs = [
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });
-initTheme(/** @type {HTMLButtonElement} */ (document.getElementById('theme-toggle')));
 installApi({});

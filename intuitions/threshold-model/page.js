@@ -2,7 +2,7 @@
 // over compute(). Every number shown comes from compute.js.
 
 import { formatNumber } from '../lib/format.js';
-import { bindPair, draggable, initTheme, installApi, onWidth } from '../lib/page.js';
+import { bindPair, draggable, installApi, onWidth } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { compute, DEFAULTS, ENTRY, LIMITS, resolveParams, samplePoints } from './compute.js';
 import { barsFigure, liabilityFigure, planeFigure, tableFigure, thresholdName } from './figure.js';
@@ -391,7 +391,6 @@ function renderFit() {
 
 // ---------- Start ----------
 
-initTheme(/** @type {HTMLButtonElement} */ ($('theme-toggle')));
 showOneControls();
 showTwoControls();
 showFitControls();

@@ -3,7 +3,7 @@
 
 import { attachRotation, orientation } from '../lib/geom3d.js';
 import { formatNumber } from '../lib/format.js';
-import { bindPair, draggable, initTheme, installApi, onWidth } from '../lib/page.js';
+import { bindPair, draggable, installApi, onWidth } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { swatch } from '../lib/plot.js';
 import {
@@ -549,7 +549,6 @@ onWidth($('entry-curve'), () => renderEntry());
 
 // ---------- Start ----------
 
-initTheme(/** @type {HTMLButtonElement} */ ($('theme-toggle')));
 buildArrowsTable();
 showConeControls();
 showCosineControls();

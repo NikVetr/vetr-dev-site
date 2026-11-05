@@ -12,7 +12,6 @@ import { TRAY_PRESETS } from './core/tray.js';
  * @typedef {import('./core/request.js').Issue} Issue
  */
 
-const THEME_KEY = 'name-tags:theme';
 /** Request fields the page's inputs set; any others from a loaded request are kept as they were. */
 const PAGE_FIELDS = ['names', 'tray', 'cells', 'font', 'decoration', 'logo', 'style', 'seed'];
 
@@ -26,7 +25,7 @@ const el = {
   logoColorsField: byId('logo-colors-field'), logoColors: byId('logo-colors'), logoStatus: byId('logo-status'), restarts: byId('restarts'), seed: byId('seed'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
   noResult: byId('no-result'), result: byId('result'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
-  preview: byId('preview'), downloads: byId('downloads'), themeToggle: byId('theme-toggle'),
+  preview: byId('preview'), downloads: byId('downloads'),
 };
 
 /** @type {Result | null} */
@@ -380,7 +379,7 @@ byId('export-request').addEventListener('click', () => {
   if (resultRequest) download('nametags-request.json', JSON.stringify(resultRequest, null, 2), 'application/json');
 });
 
-// ---------- example, theme ----------
+// ---------- example ----------
 
 async function loadExample() {
   const response = await fetch('examples/historical-figures.txt');
@@ -393,19 +392,6 @@ byId('load-example').addEventListener('click', loadExample);
 byId('clear-names').addEventListener('click', () => {
   el.names.value = '';
   showInputs();
-});
-
-function showTheme() {
-  const dark = document.documentElement.dataset.theme === 'dark';
-  el.themeToggle.textContent = dark ? '☾ Dark' : '☀ Light';
-  el.themeToggle.setAttribute('aria-pressed', String(dark));
-  el.themeToggle.title = `Switch to the ${dark ? 'light' : 'dark'} theme`;
-}
-el.themeToggle.addEventListener('click', () => {
-  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  try { localStorage.setItem(THEME_KEY, next); } catch {}
-  showTheme();
 });
 
 // ---------- API for scripts in the page ----------
@@ -429,7 +415,6 @@ el.themeToggle.addEventListener('click', () => {
   stop: stopRun,
 };
 
-showTheme();
 await loadExample();
 await runFromPage(currentRequest());
 
