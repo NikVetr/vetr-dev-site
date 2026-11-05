@@ -3,6 +3,7 @@
 // them at once. Nothing is coerced: a string "2.5" is not a number.
 
 /** @typedef {{ code: string, path: string, message: string }} Issue */
+/** @typedef {{ n: number, seed: number }} SampleSpec */
 
 export class IntuitionsError extends Error {
   /**
@@ -112,4 +113,27 @@ export function checkChoice(value, path, choices, fallback, issues) {
   if (typeof value === 'string' && choices.includes(/** @type {T} */ (value))) return /** @type {T} */ (value);
   issues.push({ code: typeof value === 'string' ? 'out_of_range' : 'wrong_type', path, message: `must be one of ${choices.map((c) => `"${c}"`).join(', ')}` });
   return fallback;
+}
+
+/**
+ * A seeded sample request: null, or {n, seed} with n from 1 to `max` and seed an
+ * integer from 0 to 2^32 − 1 (default 1), or null after recording an issue.
+ * @param {unknown} value
+ * @param {number} max largest n
+ * @param {string} what what is drawn, for the message ("individuals", "points")
+ * @param {Issue[]} issues
+ * @returns {SampleSpec | null}
+ */
+export function checkSample(value, max, what, issues) {
+  if (value === null) return null;
+  if (!isObject(value)) {
+    issues.push({ code: 'wrong_type', path: 'params.sample', message: 'must be null or an object {n, seed}' });
+    return null;
+  }
+  rejectUnknown(value, ['n', 'seed'], 'params.sample', issues);
+  const n = Object.hasOwn(value, 'n')
+    ? checkInteger(value.n, 'params.sample.n', 1, max, 1, issues)
+    : (issues.push({ code: 'missing_field', path: 'params.sample.n', message: `is missing; give the number of ${what} to draw` }), 1);
+  const seed = Object.hasOwn(value, 'seed') ? checkInteger(value.seed, 'params.sample.seed', 0, 4294967295, 1, issues) : 1;
+  return { n, seed };
 }

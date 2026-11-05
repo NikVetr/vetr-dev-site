@@ -11,6 +11,8 @@ import { compute as zscore } from '../zscore-outliers/compute.js';
 import {
   compute as computeCorrelation, det3, entryInterval, equicorrelationEigenvalues, expectedWidthSample, expectedWidthUniform, zeroPairRange,
 } from '../correlation-geometry/compute.js';
+import { betaI, gammaP, gammaQ, lgamma, logGammaP, qgamma } from '../lib/special.js';
+import { chiLogDensity, compute as computeTypical, CUBE_DIMENSIONS, PRESETS, sphereMarginal } from '../typical-set/compute.js';
 
 /** Results are a union over modes; tests read them untyped. @param {unknown} params @returns {any} */
 const thresholdModel = (params) => computeThreshold(params);
@@ -181,4 +183,105 @@ test('correlation-geometry: the corrections, numerically', () => {
   assert.ok(c.missingEntry.script < c.missingEntry.brute[0]);
   const out = cg({ view: 'entry-range', matrix: [[1, 0.8, 0], [0.8, 1, 0.5], [0, 0.5, 1]], cell: [0, 2] });
   assert.ok(Math.abs(out.centre - c.missingEntry.maxDet) < 1e-6 && maxDiff(out.interval, c.missingEntry.brute) < 1e-8);
+});
+
+// ---------- typical-set, against the original scripts and base R (fixtures/r-typical-set.json) ----------
+
+const tsRef = JSON.parse(readFileSync(new URL('fixtures/r-typical-set.json', import.meta.url), 'utf8'));
+/** @param {unknown} params @returns {any} */
+const typical = (params) => computeTypical(params);
+const within = (/** @type {number} */ a, /** @type {number} */ b, /** @type {number} */ rel, abs = 0) => Math.abs(a - b) <= abs + rel * Math.abs(b);
+
+test('gamma and beta functions match lgamma, pchisq, qchisq and pbeta', () => {
+  tsRef.lgamma.x.forEach((/** @type {number} */ x, /** @type {number} */ i) => assert.ok(within(lgamma(x), tsRef.lgamma.value[i], 1e-14, 1e-15), `lgamma(${x})`));
+  const c = tsRef.pchisq;
+  c.q.forEach((/** @type {number} */ q, /** @type {number} */ i) => {
+    const a = c.df[i] / 2;
+    assert.ok(within(gammaP(a, q / 2), c.lower[i], 1e-11), `pchisq(${q}, ${c.df[i]})`);
+    assert.ok(within(gammaQ(a, q / 2), c.upper[i], 1e-11), `upper(${q}, ${c.df[i]})`);
+    assert.ok(within(logGammaP(a, q / 2), c.logLower[i], 1e-11), `log(${q}, ${c.df[i]})`);
+  });
+  tsRef.qchisq.p.forEach((/** @type {number} */ p, /** @type {number} */ i) => assert.ok(within(2 * qgamma(p, tsRef.qchisq.df[i] / 2), tsRef.qchisq.value[i], 1e-12), `qchisq(${p})`));
+  const b = tsRef.pbeta;
+  b.x.forEach((/** @type {number} */ x, /** @type {number} */ i) => assert.ok(within(betaI(x, b.a[i], b.b[i]), b.value[i], 2e-12, 1e-15), `pbeta(${x}, ${b.a[i]}, ${b.b[i]})`));
+});
+
+test('typical-set shell: the chi distribution matches dchisq, pchisq, qchisq and a simulation', () => {
+  for (const c of tsRef.shell) {
+    const r = typical({ view: 'shell', k: c.k, coverage: 0.9, radius: 1 });
+    for (const key of ['mode', 'mean', 'median', 'hdrRadius']) assert.ok(within(r[key], c[key], 1e-12, 1e-15), `${key} at k = ${c.k}`);
+    assert.ok(within(r.sd, c.sd, 1e-9), `sd at k = ${c.k}`);
+    assert.ok(within(r.shell.lo, c.lo, 1e-12) && within(r.shell.hi, c.hi, 1e-12));
+    assert.ok(within(r.ball.mass, c.ballMass, 1e-11) && within(r.ball.log10Mass, c.ballLog10, 1e-11));
+    c.r.forEach((/** @type {number} */ x, /** @type {number} */ i) => assert.ok(within(Math.exp(chiLogDensity(x, c.k)), c.chiDensity[i], 1e-11, 1e-300), `chi(${x}; ${c.k})`));
+  }
+  // The radius of simulated normals has the chi quantiles (1e5 draws: about ±0.01).
+  const s = tsRef.shellSimulated;
+  const r = typical({ view: 'shell', k: s.k, coverage: 0.9 });
+  assert.ok(Math.abs(s.quantiles[0] - r.shell.lo) < 0.02 && Math.abs(s.quantiles[1] - r.median) < 0.02 && Math.abs(s.quantiles[2] - r.shell.hi) < 0.02);
+});
+
+test('typical-set cube: density_x_volume.R, its off-by-one, and Monte Carlo radii against R draws', () => {
+  for (const c of tsRef.cube) {
+    const r = typical({ view: 'cube', family: c.family });
+    assert.ok(within(r.halfWidth, c.exactHalfWidth, 1e-12), c.family);
+    assert.ok(within(r.withinHalfWidth, c.within, 1e-12), `${c.family} cube mass`);
+    // The script's maximiser does not depend on k: its distance is one half-width times √k.
+    c.ks.forEach((/** @type {number} */ k, /** @type {number} */ i) => assert.ok(within(c.scriptDistance[i], c.scriptHalfWidth * Math.sqrt(k), 1e-12)));
+    // Centring its intervals on x = -0.01 adds a grid step to the distance.
+    const exactOnGrid = c.family === 'laplace' ? 1 : c.exactHalfWidth; // the script's Laplace has scale 1
+    assert.ok(Math.abs(c.centredHalfWidth - exactOnGrid) <= 0.005 + 1e-12, `${c.family} centred grid`);
+    // (The uniform's maximum is at the edge of its support, which both grids reach.)
+    if (c.family !== 'uniform') assert.ok(c.scriptHalfWidth - c.centredHalfWidth > 0.005, `${c.family} off by one step`);
+    if (c.family === 'laplace') assert.ok(Math.abs(c.unitVarianceCentredHalfWidth - r.halfWidth) <= 0.005);
+  }
+  const k64 = CUBE_DIMENSIONS.indexOf(64);
+  for (const c of tsRef.cubeRadii) {
+    const s = typical({ view: 'cube', family: c.family, sample: { n: 2000, seed: 11 } }).sample;
+    // Each sample quantile must sit between R's quantiles about ±4 standard errors of rank away.
+    const [q02, q08, q45, , q55, q92, q98] = c.quantiles;
+    assert.ok(s.lo[k64] > q02 && s.lo[k64] < q08, `${c.family} 5%`);
+    assert.ok(s.median[k64] > q45 && s.median[k64] < q55, `${c.family} median`);
+    assert.ok(s.hi[k64] > q92 && s.hi[k64] < q98, `${c.family} 95%`);
+  }
+});
+
+test("typical-set modes: the bathtub's coverage exactly, and how the script's first cell skews it", () => {
+  const b = tsRef.bathtub;
+  const base = typical({ view: 'modes', components: PRESETS.bathtub, level: 0.5 });
+  assert.ok(within(base.peak, b.peak, 1e-12) && Math.abs(base.mode - b.mode) < 1e-6);
+  b.levels.forEach((/** @type {number} */ level, /** @type {number} */ i) => {
+    if (level > base.peak) return;
+    const r = typical({ view: 'modes', components: PRESETS.bathtub, level: level / base.peak });
+    assert.ok(Math.abs(r.covered - b.exactMass[i]) < 1e-9, `level ${level}`);
+    assert.ok(Math.abs(b.fixedMass[i] - b.exactMass[i]) < 1e-3, 'equal-width cells agree to the grid');
+  });
+  assert.equal(b.firstWeight, -50);
+  assert.ok(b.framesDiffering > b.framesDifferingFixed);
+  const sp = tsRef.spike;
+  sp.levels.forEach((/** @type {number} */ level, /** @type {number} */ i) => {
+    const r = typical({ view: 'modes', components: PRESETS.spike, level });
+    assert.ok(Math.abs(r.covered - sp.mass[i]) < 1e-9 && within(r.peak, sp.peak, 1e-12) && within(r.mean, sp.mean, 1e-14));
+  });
+  const bi = tsRef.bimodal;
+  bi.levels.forEach((/** @type {number} */ level, /** @type {number} */ i) => {
+    const r = typical({ view: 'modes', components: PRESETS.bimodal, level });
+    assert.ok(Math.abs(r.covered - bi.mass[i]) < 1e-9 && within(r.peak, bi.peak, 1e-12) && within(r.densityAtMean * r.peak, bi.densityAtMean, 1e-9));
+  });
+});
+
+test('typical-set sphere: the Beta-type marginal, without the gamma() overflow, and the band mass', () => {
+  for (const c of tsRef.sphere) {
+    c.x.forEach((/** @type {number} */ x, /** @type {number} */ i) => {
+      assert.ok(within(sphereMarginal(x, c.k), c.fixed[i], 1e-12), `k = ${c.k}, x = ${x}`);
+      if (c.k <= 343) assert.ok(within(c.script[i], c.fixed[i], 1e-12));
+      else assert.equal(c.script[i], null); // gamma(k/2) overflows to Inf, and Inf/Inf is NaN
+    });
+    assert.ok(within(typical({ view: 'sphere', k: c.k, band: 0.1 }).bandMass, c.bandMass, 2e-12));
+  }
+  const s = tsRef.sphereSimulated;
+  const exact = typical({ view: 'sphere', k: s.k, band: 0.1 }).bandMass;
+  assert.ok(Math.abs(s.bandShare - exact) < 4 * Math.sqrt((exact * (1 - exact)) / s.n), "the script's sampler");
+  const ours = typical({ view: 'sphere', k: s.k, band: 0.1, sample: { n: 20000, seed: 1 } }).sample;
+  assert.ok(Math.abs(ours.bandShare - exact) < 4 * Math.sqrt((exact * (1 - exact)) / 20000), 'the page sampler');
 });

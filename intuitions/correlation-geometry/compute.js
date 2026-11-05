@@ -18,6 +18,7 @@
 import { addScaled, cross, dot, normalize, scale, symmetricEigen } from '../lib/linalg.js';
 import { standardNormal } from '../lib/normal.js';
 import { checkInteger, checkNumber, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
+import { halfGammaRatio } from '../lib/special.js';
 import { mulberry32 } from '../../shared/rng.js';
 
 /** @typedef {import('../lib/params.js').Issue} Issue */
@@ -383,17 +384,6 @@ export function entryInterval(R, i, j) {
   const residuals = [Math.max(0, 1 - a), Math.max(0, 1 - b)];
   const halfWidth = Math.sqrt(residuals[0] * residuals[1]);
   return { lo: Math.max(-1, c - halfWidth), hi: Math.min(1, c + halfWidth), centre: c, halfWidth, residuals, detOthers };
-}
-
-/** Γ(β + ½) / Γ(β) for β a positive multiple of ½, by the recurrence from β = ½ or 1. @param {number} beta */
-function halfGammaRatio(beta) {
-  let b = Number.isInteger(beta) ? 1 : 0.5;
-  let g = b === 1 ? Math.sqrt(Math.PI) / 2 : 1 / Math.sqrt(Math.PI);
-  while (b < beta - 1e-9) {
-    g *= (b + 0.5) / b;
-    b += 1;
-  }
-  return g;
 }
 
 /**

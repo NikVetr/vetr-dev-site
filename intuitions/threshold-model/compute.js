@@ -7,11 +7,11 @@
 
 import { bvnRectangle, dbvnorm } from '../lib/bvn.js';
 import { pnormInterval, qnorm, standardNormal } from '../lib/normal.js';
-import { checkInteger, checkNumber, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
+import { checkNumber, checkSample, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
 import { mulberry32 } from '../../shared/rng.js';
 
 /** @typedef {import('../lib/params.js').Issue} Issue */
-/** @typedef {{ n: number, seed: number }} SampleSpec */
+/** @typedef {import('../lib/params.js').SampleSpec} SampleSpec */
 /**
  * @typedef {{ means: number[], thresholds: number[][], rho?: number, sample?: SampleSpec | null }} ModelParams
  * @typedef {{ table: number[][] }} TableParams
@@ -87,7 +87,7 @@ export function resolveParams(params = {}) {
   const resolved = { means, thresholds };
   if (traits === 2) {
     resolved.rho = has('rho') ? checkNumber(params.rho, 'params.rho', -1, 1, DEFAULTS.rho, issues) : DEFAULTS.rho;
-    resolved.sample = has('sample') ? checkSample(params.sample, issues) : DEFAULTS.sample;
+    resolved.sample = has('sample') ? checkSample(params.sample, LIMITS.maxSample, 'individuals', issues) : DEFAULTS.sample;
   } else {
     for (const key of ['rho', 'sample']) {
       if (has(key)) issues.push({ code: 'not_applicable', path: `params.${key}`, message: 'applies only to two traits; give two means' });
@@ -116,24 +116,6 @@ function checkThresholds(value, path, issues) {
   return t;
 }
 
-/**
- * @param {unknown} value
- * @param {Issue[]} issues
- * @returns {SampleSpec | null}
- */
-function checkSample(value, issues) {
-  if (value === null) return null;
-  if (!isObject(value)) {
-    issues.push({ code: 'wrong_type', path: 'params.sample', message: 'must be null or an object {n, seed}' });
-    return null;
-  }
-  rejectUnknown(value, ['n', 'seed'], 'params.sample', issues);
-  const n = Object.hasOwn(value, 'n')
-    ? checkInteger(value.n, 'params.sample.n', 1, LIMITS.maxSample, 1, issues)
-    : (issues.push({ code: 'missing_field', path: 'params.sample.n', message: 'is missing; give the number of individuals to draw' }), 1);
-  const seed = Object.hasOwn(value, 'seed') ? checkInteger(value.seed, 'params.sample.seed', 0, 4294967295, 1, issues) : 1;
-  return { n, seed };
-}
 
 /**
  * @param {unknown} value
