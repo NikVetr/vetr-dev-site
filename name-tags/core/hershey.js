@@ -4,12 +4,14 @@
 // "a") and out of the top line. Strokes are smoothed (wavelet shrinkage),
 // given a pen-like varying width, and merged into one filled outline.
 
-import { bounds, bufferZero, mapRings, union } from './geometry.js';
-import { ribbon } from './helix.js';
+import { bounds, union } from '../../shared/polygon.js';
+import { cumsum, seqBy, seqLength } from '../../shared/rstats.js';
+import { ribbon } from '../../shared/helix.js';
+import { bufferZero, mapRings } from './geometry.js';
 import { GLYPHS, SCRIPT_CHARS } from './hershey-data.js';
 import { innerBoxDims } from './layout.js';
 import { toLower } from './names.js';
-import { cumsum, rsum, seqBy, seqLength } from './rmath.js';
+import { rsum } from './rmath.js';
 
 /**
  * @typedef {{ x: number[], y: number[] }} Stroke

@@ -13,8 +13,9 @@
 
 import { placeRectangles, rectInfo } from './boxes.js';
 import { advance, capAscent, lineOutlines } from './font.js';
-import { boundaryLength, bounds, erode, mapRings, polygonArea, polygonDistance } from './geometry.js';
-import { dnaShape } from './helix.js';
+import { dnaShape } from '../../shared/helix.js';
+import { bounds, polygonArea } from '../../shared/polygon.js';
+import { boundaryLength, erode, mapRings, polygonDistance } from './geometry.js';
 import { hasDescender, toUpper } from './names.js';
 import { brentMin } from './optim.js';
 import { NameTagsError } from './request.js';
@@ -290,7 +291,7 @@ export function measureTags(linesList, centers, family, cell, page, style) {
     };
   });
   // one helix twist's top-nucleotide box: width / height, the optimizer's unit for b2
-  const shape = dnaShape({ dhBounds: [-Math.PI / 2, Math.PI / 2], strandThickness: 0.01, extendStraight: 1, extendStraightBy: 0,
+  const shape = dnaShape({ dhBounds: [-Math.PI / 2, Math.PI / 2], rot: 90, strandThickness: 0.01, extendStraight: 1, extendStraightBy: 0,
     topleft: [0, 0], forcedBox: null, boxDNA: false, extensionRealUnits: false, propDist: style.prop_dist, xyr: device.xyr });
   const b2h = Math.max(...shape.bp.map((bp) => Math.max(...bp.y) - Math.min(...bp.y))) * (1 - style.prop_dist);
   const b2w = Math.max(...shape.s1[0].x) - Math.min(...shape.s1[0].x);

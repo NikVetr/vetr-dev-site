@@ -4,7 +4,7 @@
 // unless use_file_colors), strokes dropped; a PNG or JPEG logo is embedded as
 // an image. Logos arrive as data: URLs.
 
-import { bounds, union } from './geometry.js';
+import { bounds, union } from '../../shared/polygon.js';
 import { NameTagsError } from './request.js';
 
 /**

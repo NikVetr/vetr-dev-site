@@ -1,47 +1,20 @@
 // Polygon geometry for the layout, standing in for the sf/GEOS calls of the R
-// version. A ring is a flat closed array [x0, y0, ..., x0, y0]; a polygon is
-// an array of rings, the first its shell and the rest holes (sf's POLYGON).
-// Boolean operations use the vendored Clipper with integer coordinates at
-// ~1e-8 of an inch; area, length and distance are computed directly.
+// version: lengths, distances, GEOS's ring orientation, buffer(0) and the
+// erosion of thinned small capitals. Rings, areas, bounds and the Clipper
+// unions and differences are in shared/polygon.js.
 
-import ClipperLib from '../../shared/vendor/clipper.js';
+import { bounds, difference, ringArea, union } from '../../shared/polygon.js';
 
 /**
- * @typedef {number[]} Ring
- * @typedef {Ring[]} Polygon
+ * @typedef {import('../../shared/polygon.js').Ring} Ring
+ * @typedef {import('../../shared/polygon.js').Polygon} Polygon
  */
-
-/** Signed area of a ring (positive when counterclockwise, y up). @param {Ring} r */
-export function ringArea(r) {
-  let a = 0;
-  for (let k = 0; k + 3 < r.length; k += 2) a += r[k] * r[k + 3] - r[k + 2] * r[k + 1];
-  return a / 2;
-}
-
-/** st_area of a polygon: its shell's area less its holes'. @param {Polygon} rings */
-export function polygonArea(rings) {
-  return rings.reduce((sum, r, i) => sum + (i ? -1 : 1) * Math.abs(ringArea(r)), 0);
-}
 
 /** Total length of a polygon's rings (st_length(st_boundary(.))). @param {Polygon} rings */
 export function boundaryLength(rings) {
   let len = 0;
   for (const r of rings) for (let k = 0; k + 3 < r.length; k += 2) len += Math.hypot(r[k + 2] - r[k], r[k + 3] - r[k + 1]);
   return len;
-}
-
-/** [xmin, ymin, xmax, ymax] of rings. @param {Ring[]} rings */
-export function bounds(rings) {
-  let x0 = Infinity; let y0 = Infinity; let x1 = -Infinity; let y1 = -Infinity;
-  for (const r of rings) {
-    for (let k = 0; k < r.length; k += 2) {
-      if (r[k] < x0) x0 = r[k];
-      if (r[k] > x1) x1 = r[k];
-      if (r[k + 1] < y0) y0 = r[k + 1];
-      if (r[k + 1] > y1) y1 = r[k + 1];
-    }
-  }
-  return [x0, y0, x1, y1];
 }
 
 /** Rings with every point mapped by f. @param {Ring[]} rings @param {(x: number, y: number) => [number, number]} f */
@@ -137,69 +110,7 @@ export function polygonDistance(a, b) {
   return best;
 }
 
-// ---------- Clipper ----------
-
-/**
- * Coordinates are shifted to their bounding box's centre and scaled by a
- * power of two so every one stays within Clipper's fast integer range
- * (|v| < 47,453,132 in its JavaScript build).
- * @param {Ring[]} rings
- */
-function clipperFrame(rings) {
-  const [x0, y0, x1, y1] = bounds(rings);
-  const cx = (x0 + x1) / 2;
-  const cy = (y0 + y1) / 2;
-  const half = Math.max(x1 - x0, y1 - y0, 1e-300) / 2;
-  return { cx, cy, s: 2 ** Math.floor(Math.log2(4.5e7 / half)) };
-}
-
-/** @param {Ring} r @param {{ cx: number, cy: number, s: number }} f */
-function toPath(r, f) {
-  const path = [];
-  for (let k = 0; k + 2 < r.length; k += 2) path.push({ X: Math.round((r[k] - f.cx) * f.s), Y: Math.round((r[k + 1] - f.cy) * f.s) }); // drop the closing point
-  return path;
-}
-
-/** @param {{ X: number, Y: number }[]} path @param {{ cx: number, cy: number, s: number }} f @returns {Ring} */
-function fromPath(path, f) {
-  const r = [];
-  for (const p of path) r.push(p.X / f.s + f.cx, p.Y / f.s + f.cy);
-  r.push(r[0], r[1]);
-  return r;
-}
-
-const FILL = /** @type {const} */ ({ evenodd: 'pftEvenOdd', nonzero: 'pftNonZero', positive: 'pftPositive', negative: 'pftNegative' });
-
-/**
- * Runs one Clipper operation and returns the result as polygons (shell, then holes).
- * @param {'union' | 'difference'} op
- * @param {Ring[]} subject @param {keyof typeof FILL} subjectFill
- * @param {Ring[]} clip @param {keyof typeof FILL} clipFill
- * @returns {Polygon[]}
- */
-function clip(op, subject, subjectFill, clip = [], clipFill = 'nonzero') {
-  if (!subject.length) return [];
-  const s = clipperFrame([...subject, ...clip]);
-  const c = new ClipperLib.Clipper();
-  for (const r of subject) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptSubject, true);
-  for (const r of clip) c.AddPath(toPath(r, s), ClipperLib.PolyType.ptClip, true);
-  const tree = new ClipperLib.PolyTree();
-  c.Execute(op === 'union' ? ClipperLib.ClipType.ctUnion : ClipperLib.ClipType.ctDifference, tree,
-    ClipperLib.PolyFillType[FILL[subjectFill]], ClipperLib.PolyFillType[FILL[clipFill]]);
-  // drop the zero-area fragments Clipper leaves where boundaries touch
-  const solid = (/** @type {any[]} */ path) => Math.abs(ClipperLib.Clipper.Area(path)) > 4;
-  return ClipperLib.JS.PolyTreeToExPolygons(tree).filter((/** @type {{ outer: any[] }} */ e) => solid(e.outer))
-    .map((/** @type {{ outer: any[], holes: any[][] }} */ e) => [fromPath(e.outer, s), ...e.holes.filter(solid).map((h) => fromPath(h, s))]);
-}
-
-/**
- * The union of rings under a fill rule: "evenodd" is GEOS's make-valid of a
- * self-intersecting ring, "nonzero" a plain union of simple pieces.
- * @param {Ring[]} rings @param {keyof typeof FILL} fill
- */
-export function union(rings, fill) {
-  return clip('union', rings, fill);
-}
+// ---------- GEOS ----------
 
 /**
  * st_buffer(ring, 0) of one ring, self-intersecting or not: GEOS keeps the
@@ -291,7 +202,7 @@ export function erode(rings, d) {
       cuts.push(ccw(wedge));
     }
   }
-  return clip('difference', rings, 'evenodd', cuts, 'nonzero');
+  return difference(rings, 'evenodd', cuts, 'nonzero');
 }
 
 /** @param {Ring} r */

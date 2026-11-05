@@ -1,9 +1,9 @@
 // The pieces of R's arithmetic, nmath library and base functions the layout
 // uses, written as R computes them so results match R's to the last bit or
 // two: dnorm and pnorm (src/nmath/dnorm.c, pnorm.c), %% on doubles (myfmod in
-// src/main/arithmetic.c), sum() and cumsum() of doubles, which R accumulates in
-// long double, seq(), median() and round(). R's normal draws, with their qnorm,
-// are in shared/rng.js.
+// src/main/arithmetic.c), sum() of doubles, which R accumulates in long double,
+// median() and round(). R's normal draws, with their qnorm, are in
+// shared/rng.js; cumsum() and seq() in shared/rstats.js.
 
 const M_1_SQRT_2PI = 0.398942280401432677939946059934;
 const M_LN_SQRT_2PI = 0.918938533204672741780329736406;
@@ -137,46 +137,6 @@ export function rsum(values) {
     s = t;
   }
   return s + c;
-}
-
-/** cumsum() of doubles, accumulated with compensation as R does in long double. @param {number[]} values */
-export function cumsum(values) {
-  const out = new Array(values.length);
-  let s = 0;
-  let c = 0;
-  for (let i = 0; i < values.length; i++) {
-    const v = values[i];
-    const t = s + v;
-    c += Math.abs(s) >= Math.abs(v) ? (s - t) + v : (v - t) + s;
-    s = t;
-    out[i] = s + c;
-  }
-  return out;
-}
-
-/** seq(from, to, length.out = n), n rounded up as R does. @param {number} from @param {number} to @param {number} n */
-export function seqLength(from, to, n) {
-  const len = Math.ceil(n);
-  if (len === 1) return [from];
-  if (len === 2) return [from, to];
-  if (from === to) return new Array(len).fill(from);
-  const n1 = len - 1;
-  const by = (to - from) / n1;
-  const out = [from];
-  for (let i = 1; i < n1; i++) out.push(from + i * by);
-  out.push(to);
-  return out;
-}
-
-/** seq(from, to, by = by) for by > 0. @param {number} from @param {number} to @param {number} by */
-export function seqBy(from, to, by) {
-  const del = to - from;
-  if (del === 0 && to === 0) return [to];
-  if (Math.abs(del) / Math.max(Math.abs(to), Math.abs(from)) < 100 * DBL_EPSILON) return [from];
-  const n = Math.trunc(del / by + 1e-10);
-  const out = [];
-  for (let i = 0; i <= n; i++) out.push(Math.min(from + i * by, to));
-  return out;
 }
 
 /** median() of numbers. @param {number[]} values */
