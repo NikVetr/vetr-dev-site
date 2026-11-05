@@ -5,7 +5,9 @@
 // its first word comes up.
 import { readFileSync } from 'node:fs';
 import { submit } from '../../../crossword/core/index.js';
-import { H, W, art, esc, num } from '../svg.mjs';
+import { WIDE, art, esc, num } from '../svg.mjs';
+
+const { width: W, height: H } = WIDE;   // a 2x3 tile
 
 const PERIOD = 7;
 const START = 0.5;   // seconds filled before the first word clears
@@ -53,6 +55,8 @@ export function build() {
   return art({
     name: 'crossword',
     period: PERIOD,
+    width: W,
+    height: H,
     body: `<path class="cells" d="${cells}"/>\n<g class="letters">${letters}</g>`,
     css: `& .cells { fill: var(--surface); stroke: var(--art-ink); stroke-width: 0.8; stroke-linejoin: round; }
 & .letters text { will-change: opacity; }

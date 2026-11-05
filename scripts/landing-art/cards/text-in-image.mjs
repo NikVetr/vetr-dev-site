@@ -1,9 +1,9 @@
 // Text in Image: the page's default picture, Tenniel's Alice with the "Drink me" bottle, beside
 // the tool's text fill of it on the page's grey, through the tool's core with the page's
-// settings. The page's default text is the whole of chapter 1 (11,201 characters), which at card
-// size would be letters a pixel tall; this uses its opening paragraph, and the tool's own fitter
-// sizes the letters to fill the shape. Each letter is drawn where the core places it, in the
-// colour it takes from the picture.
+// settings, on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
+// (11,201 characters), which at tile size would be letters a pixel tall; this uses its opening
+// two paragraphs, and the tool's own fitter sizes the letters to fill the shape. Each letter is
+// drawn where the core places it, in the colour it takes from the picture.
 // The loop clears the text line by line from the top and writes it back in the same order,
 // ending full as it began: every line runs one shared fade, delayed to its turn.
 import { readFileSync } from 'node:fs';
@@ -11,7 +11,7 @@ import { decodePng } from '../../../shared/decode-png.mjs';
 import { measureChars } from '../../../text-in-image/core/font.js';
 import { submit } from '../../../text-in-image/core/index.js';
 import { openPage } from '../browser.mjs';
-import { H, W, art, esc, num } from '../svg.mjs';
+import { WIDE, art, esc, num } from '../svg.mjs';
 
 const BACKGROUND = '#7f7f7f';   // the page's background
 const PERIOD = 6;
@@ -19,14 +19,16 @@ const START = 0.5;   // seconds full before the first line clears
 const SWEEP = 2.2;   // seconds to clear (and later to write) every line
 const FADE = 0.12;
 const PICTURE_PX = 2;   // the picture embedded at this many pixels per display unit
+const PARAGRAPHS = 2;   // of the default text
+const { width: W, height: H } = WIDE;
 
 export async function build() {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
-  const text = chapter.trim().split(/\n\s*\n/)[0];
+  const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
   const result = submit({ image, text, color: { background: BACKGROUND } });
-  if (!result.complete) throw new Error('text-in-image: the opening paragraph did not fit');
+  if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
 
   // The picture's box on the canvas (inside its margins), and its place on the card.
@@ -90,6 +92,8 @@ export async function build() {
   const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
   return art({
     name: 'text-in-image',
+    width: W,
+    height: H,
     period: PERIOD,
     body: `<image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>

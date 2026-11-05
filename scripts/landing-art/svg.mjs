@@ -7,6 +7,9 @@
 
 export const W = 320;
 export const H = 180;
+/** The canvases of the other tile shapes (README, "Tile sizes"): 2x3 tiles and 1x3 tiles. */
+export const WIDE = { width: 264, height: 220 };
+export const TALL = { width: 200, height: 300 };
 
 /** Theme colours from style.css, which defines them for light and dark. */
 export const INK = 'var(--art-ink)';
@@ -83,8 +86,10 @@ export function esc(text) {
  * @param {number} p.period    the loop's period in seconds: every loop animation repeats on it
  * @param {number} [p.frames]  for a flip-book, its number of frames (for the loop checks)
  * @param {string} [p.player]  a script in assets/players/ that plays the loop instead of CSS
+ * @param {number} [p.width]   the canvas, 320 x 180 unless the tile's shape asks for another
+ * @param {number} [p.height]
  */
-export function art({ name, body, defs = '', css = '', loop = '', period, frames, player }) {
+export function art({ name, body, defs = '', css = '', loop = '', period, frames, player, width = W, height = H }) {
   const scope = `[data-art="${name}"]`;
   const style = [
     css.replaceAll('&', scope),
@@ -92,7 +97,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // under reduced motion (landing.js does not set data-playing then either).
     loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-playing]`)}\n}`,
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''} focusable="false">
 <style>
 ${style}
 </style>

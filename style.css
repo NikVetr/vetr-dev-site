@@ -130,36 +130,45 @@ main.container { padding-block: var(--space-3) var(--space-4); }
 h2 { font-size: var(--fs-2); margin: 0 0 var(--space-1); letter-spacing: -0.01em; line-height: 1.2; }
 p { margin: 0 0 var(--space-2); max-width: 68ch; }
 
-/* ---------- Projects: a wall of tiles sized by each project's size ---------- */
-/* A tile's size is its <li>'s data-size: 3 large, 2 wide, 1 small (README, "Tile sizes").
-   The column count steps with the width; at each count the spans below tile the cards in their
-   order with no gaps, so reading and Tab order are the visual order. If a size changes, dense
-   placement fills any gap by moving a later small tile up. Odd counts have no wide tiles, and
-   there large tiles take one row, since rows of one-column tiles are tall. */
+/* ---------- Projects: a wall of tiles of different shapes ---------- */
+/* A tile's shape is its <li>'s data-size, columns x rows (README, "Tile sizes"). A row is 0.68
+   of a column, so each shape's picture well has its picture's shape: 3x3 and 2x2 about 16:9 and
+   wider, 2x3 about 6:5, 1x3 portrait 2:3, 1x2 about 4:3. Rows grow if a tile's text needs it.
+   The column count steps with the width; dense placement packs the tiles with no gaps, and
+   reading-flow takes Tab and screen readers through them row by row as they appear. */
+#projects { container-type: inline-size; }
 .grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
+  --cols: 1;
+  --gap: var(--space-2);
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: minmax(calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.68), auto);
   grid-auto-flow: row dense;
-  gap: var(--space-2);
-  --cols: 1; --large-w: 1; --large-h: 1; --wide-w: 1;
+  reading-flow: grid-rows;
+  gap: var(--gap);
 }
-@media (min-width: 36rem)  { .grid { --cols: 2; --large-w: 2; --large-h: 2; --wide-w: 2; } }
-@media (min-width: 56rem)  { .grid { --cols: 3; --large-w: 3; --large-h: 1; --wide-w: 1; } }
-@media (min-width: 76rem)  { .grid { --cols: 4; --large-w: 2; --large-h: 2; --wide-w: 2; } }
-@media (min-width: 100rem) { .grid { --cols: 5; --large-h: 1; --wide-w: 1; } }
-@media (min-width: 118rem) { .grid { --cols: 6; --large-h: 2; --wide-w: 2; } }
-@media (min-width: 140rem) { .grid { --cols: 7; --large-h: 1; --wide-w: 1; } }
-.grid > li {
-  display: flex;
-  container: tile / inline-size;
-  grid-column: span var(--w, 1);
-  grid-row: span var(--h, 1);
+@media (min-width: 36rem)  { .grid { --cols: 2; } }
+@media (min-width: 56rem)  { .grid { --cols: 3; } }
+@media (min-width: 76rem)  { .grid { --cols: 4; } }
+@media (min-width: 100rem) { .grid { --cols: 5; } }
+@media (min-width: 118rem) { .grid { --cols: 6; } }
+@media (min-width: 140rem) { .grid { --cols: 7; } }
+.grid > li { display: flex; container: tile / inline-size; }
+@media (min-width: 36rem) {
+  .grid > li { grid-column: span var(--w); grid-row: span var(--h); }
+  [data-size="1x2"] { --w: 1; --h: 2; }
+  [data-size="1x3"] { --w: 1; --h: 3; }
+  [data-size="2x2"] { --w: 2; --h: 2; }
+  [data-size="2x3"] { --w: 2; --h: 3; }
+  [data-size="3x3"] { --w: 3; --h: 3; }
 }
-.grid > li[data-size="3"] { --w: var(--large-w); --h: var(--large-h); }
-.grid > li[data-size="2"] { --w: var(--wide-w); }
+/* Two columns: a 3x3 tile keeps its 16:9 well as 2x2. */
+@media (min-width: 36rem) and (max-width: 55.99rem) {
+  [data-size="3x3"] { --w: 2; --h: 2; }
+}
 
 /* Each card is one link, named by its title (aria-labelledby). Hover and focus change it at
    once, with no movement; only the picture moves, and only while hovered or focused. */
@@ -215,30 +224,22 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 .card-art .card-player { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card-art:has(.card-player) svg { visibility: hidden; }
 
-/* Large tiles: a bigger title, and the picture takes any height the tile gains from its rows. */
-[data-size="3"] > .project-card h3 { font-size: var(--fs-2); }
-/* Up to about 4:3, like a deeper mat; only a tile stretched further by taller neighbours lets
-   the rest fall below its text. */
-[data-size="3"] > .project-card > .card-art { flex: 1 0 auto; max-height: 75cqi; }
-
-/* A tile with room beside its picture puts the text there: wide tiles across two columns, and
-   large tiles across a whole row. */
-@container tile (min-width: 30rem) {
-  [data-size="2"] > .project-card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 0.4rem; }
-  [data-size="2"] > .project-card > .card-art { grid-row: 1 / -1; align-self: start; }
-  [data-size="2"] > .project-card > .project-date { align-self: end; }
+/* The picture fills what the tile leaves above its text; a single column has no rows to fill,
+   so there each picture keeps its own shape (one-column tiles beside their text). */
+@media (min-width: 36rem) {
+  .card-art { aspect-ratio: auto; flex: 1 1 0; min-height: 5rem; }
 }
-@container tile (min-width: 48rem) {
-  [data-size="3"] > .project-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 0.75rem; }
-  [data-size="3"] > .project-card > .card-art { grid-row: 1 / -1; }
-  [data-size="3"] > .project-card > .project-date { align-self: end; }
-}
-/* One column (a phone): small tiles become compact rows, picture beside the text. */
 @media (max-width: 35.99rem) {
-  [data-size="1"] > .project-card { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 0.25rem; }
-  [data-size="1"] > .project-card > .card-art { grid-row: 1 / -1; align-self: start; }
-  [data-size="1"] > .project-card h3 { margin-top: 0.2rem; }
-  [data-size="1"] > .project-card > .project-date { align-self: end; }
+  [data-size="2x3"] .card-art { aspect-ratio: 6 / 5; }
+  [data-size="1x3"] .card-art { aspect-ratio: 2 / 3; }
+  [data-size^="1x"] > .project-card { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 0.25rem; }
+  [data-size^="1x"] > .project-card > .card-art { grid-row: 1 / -1; align-self: start; }
+  [data-size^="1x"] > .project-card h3 { margin-top: 0.2rem; }
+  [data-size^="1x"] > .project-card > .project-date { align-self: end; }
+}
+/* The widest tiles get a bigger title. */
+@container tile (min-width: 40rem) {
+  .project-card h3 { font-size: var(--fs-2); }
 }
 
 .project-date {
@@ -253,12 +254,22 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   font-variant-numeric: tabular-nums;
 }
 
-/* A phone on its side: little height, so a tighter masthead, and no picture taller than about
-   half the screen. */
+/* A phone on its side: little height, so a tighter masthead, and rows that follow their content:
+   each picture keeps its own shape, no taller than about 60% of the screen, two-column tiles
+   span the width (a 3x3 tile two columns), and one-column tiles sit beside their text. */
 @media (orientation: landscape) and (max-height: 500px) {
   .masthead { padding-block: var(--space-1); }
   #intro h2 { font-size: var(--fs-1); }
-  .card-art { max-height: 48svh; }
+  .grid { grid-auto-rows: auto; }
+  .grid > li { --h: 1; }
+  [data-size="3x3"] { --w: 2; }
+  .card-art { flex: none; aspect-ratio: 16 / 9; max-height: 60svh; }
+  [data-size="2x3"] .card-art { aspect-ratio: 6 / 5; }
+  [data-size="1x3"] .card-art { aspect-ratio: 2 / 3; }
+  [data-size^="1x"] > .project-card { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 0.25rem; }
+  [data-size^="1x"] > .project-card > .card-art { grid-row: 1 / -1; align-self: start; }
+  [data-size^="1x"] > .project-card h3 { margin-top: 0.2rem; }
+  [data-size^="1x"] > .project-card > .project-date { align-self: end; }
 }
 
 /* ---------- Footer (full-bleed image with overlay credit) ---------- */

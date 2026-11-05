@@ -6,7 +6,9 @@
 import { readFileSync } from 'node:fs';
 import { categoryColour, categoryText } from '../../../seating/core/chart.js';
 import { submit } from '../../../seating/core/index.js';
-import { H, W, art, esc, num } from '../svg.mjs';
+import { TALL, art, esc, num } from '../svg.mjs';
+
+const { width: W, height: H } = TALL;   // a 1x3 tile
 
 const MOVES = 3;
 const HOLD = 0.7;   // seconds at the best seating, start and end
@@ -32,10 +34,10 @@ export async function build() {
   /** @type {[number, number]} */
   const range = [Math.min(...category.values()), Math.max(...category.values())];
 
-  // The room, turned a quarter so its long side runs across the card.
+  // The room as the tool draws it, y up.
   /** @typedef {{ id: string, capacity: number, x: number, y: number, seats: (string | null)[] }} Table */
   /** @type {Table[]} */
-  const tables = result.tables.map((/** @type {Table} */ t) => ({ ...t, x: -t.y, y: -t.x }));
+  const tables = result.tables.map((/** @type {Table} */ t) => ({ ...t, y: -t.y }));
   const dist = (/** @type {Table} */ a, /** @type {Table} */ b) => Math.hypot(a.x - b.x, a.y - b.y);
   const dmin = Math.min(...tables.flatMap((a, i) => tables.slice(i + 1).map((b) => dist(a, b))));
   const [minX, maxX] = [Math.min(...tables.map((t) => t.x)), Math.max(...tables.map((t) => t.x))];
@@ -126,5 +128,5 @@ export async function build() {
 @keyframes seating-m${gi} { 0% { transform: none; } ${stops.join(' ')} 100% { transform: none; } }
 `;
   }
-  return art({ name: 'seating', period, body, css, loop });
+  return art({ name: 'seating', period, width: W, height: H, body, css, loop });
 }

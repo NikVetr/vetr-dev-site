@@ -1,5 +1,6 @@
 // Message Collage: the page's example (its 34 farewell messages, best of 20 layouts, seed 1) laid
-// out by the tool's core as the card the page opens with, each line in its family, style, size
+// out by the tool's core on a portrait card for the tall tile (3.3 × 5 in, the request's own
+// card size, so the tool packs the messages at that shape), each line in its family, style, size
 // and colour on the navy card. The glyphs are the visitor's system fonts in the family's generic
 // kind (the bundled family named first, in case it is installed), with each line pinned to the
 // width the core measured it at (textLength, glyphs and spacing adjusted), so every line keeps the
@@ -8,13 +9,15 @@
 // after the last fades out, and back to seed 1, the still. The card's height follows each layout.
 import { readFileSync } from 'node:fs';
 import { loadFaces, submit } from '../../../message-collage/core/index.js';
-import { H, W, art, esc, num } from '../svg.mjs';
+import { TALL, art, esc, num } from '../svg.mjs';
 
 const SEEDS = [1, 2, 3, 4];
 const HOLD = 1.5;    // seconds each layout is on the card, fades included
 const FADE = 0.2;    // seconds to fade out, and again to fade in
 const MARGIN = 4;
 const PT = 72;       // the core's units: points, 72 per inch
+const CARD = { width_in: 3.3, height_in: 5 };   // about the tall tile's 2:3
+const { width: W, height: H } = TALL;
 
 /** The CSS of each family's kind, named family first. */
 const FAMILY = {
@@ -29,7 +32,7 @@ export async function build() {
   const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
   /** @type {Awaited<ReturnType<typeof submit>>[]} */
   const results = [];
-  for (const seed of SEEDS) results.push(await submit({ ...request, seed }));
+  for (const seed of SEEDS) results.push(await submit({ ...request, ...CARD, seed }));
   const [first] = results;
   const faces = await loadFaces(first.request.fonts, first.request.styles);
   const kind = new Map(first.fonts.map((f) => [f.family, f.category]));
@@ -101,6 +104,8 @@ export async function build() {
 
   return art({
     name: 'message-collage',
+    width: W,
+    height: H,
     period,
     body: `<g transform="translate(${num(x0)} ${num(y0)})"><rect class="card" width="${num(widthPt * k)}" height="${num(tallest * k)}"/></g>
 ${groups.join('\n')}`,

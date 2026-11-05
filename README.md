@@ -4,35 +4,45 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## The landing page
 
-A wall of tiles, one per tool, each sized by how big the project is. Each tile is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture.
+A wall of tiles of different shapes, one per tool, each sized by how big the project is. Each tile is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture on that shape's canvas.
 
 ### Tile sizes
 
-A tile's size is the `data-size` of its `<li>` in `index.html`: 3 large, 2 wide, 1 small. Change that one number to resize a tile. The sizes come from a project's size in code: the hand-written lines of the tool itself (JavaScript, HTML and CSS, without vendored code, tests or data) plus the lines of the R code it reproduces, for the ports that match an R original. That is 10,000 lines or more for large, 2,500 or more for wide. The gallery's thirteen entries show up in its code size.
+A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. Change it to resize a tile. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
 
-| Tool | Web lines | R lines reproduced | Total | Size |
-| --- | ---: | ---: | ---: | ---: |
-| Pocket Language Guide | 39,474 | | 39,474 | 3 |
-| Color Palette Extender | 20,611 | | 20,611 | 3 |
-| Sankey Diagrams | 8,786 | 11,499 (polylines) | 20,285 | 3 |
-| Statistical Intuitions (13 entries) | 17,702 | | 17,702 | 3 |
-| autoCHAIR | 13,944 | | 13,944 | 3 |
-| Multipanel Layout GUI | 6,943 | | 6,943 | 2 |
-| Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2 |
-| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 2 |
-| Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2 |
-| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | 2 |
-| Signature Correction | 2,952 | 491 | 3,443 | 2 |
-| Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2 |
-| Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 2 |
-| Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2 |
-| Photomosaic | 1,785 | 110 | 1,895 | 1 |
-| Helix and Braid | 1,373 | 441 | 1,814 | 1 |
-| Forecast Calibration | 1,474 | 39 | 1,513 | 1 |
+| Shape | Picture | Canvas |
+| --- | --- | --- |
+| `3x3` | landscape, 16:9 | 320 × 180 |
+| `2x3` | about 6:5 | 264 × 220 (`WIDE`) |
+| `2x2` | landscape, 16:9 or wider | 320 × 180 |
+| `1x3` | portrait, 2:3 | 200 × 300 (`TALL`) |
+| `1x2` | about 4:3, a 16:9 picture fits | 320 × 180 |
+
+The size comes from a project's size in code: the hand-written lines of the tool itself (JavaScript, HTML and CSS, without vendored code, tests or data) plus the lines of the R code it reproduces, for the ports that match an R original. That is 10,000 lines or more for the largest tiles (3x3), 2,500 or more for the middle (2x3 or 2x2), less for the smallest (1x3 or 1x2). Within a size, the shape follows the picture. Where code size under-represents how much there is to see, the size is moved up, and the reason is in the last column.
+
+| Tool | Web lines | R lines reproduced | Total | Shape | Adjusted |
+| --- | ---: | ---: | ---: | --- | --- |
+| Pocket Language Guide | 39,474 | | 39,474 | 3x3 | |
+| Color Palette Extender | 20,611 | | 20,611 | 3x3 | |
+| Sankey Diagrams | 8,786 | 11,499 (polylines) | 20,285 | 3x3 | |
+| Statistical Intuitions (13 entries) | 20,297 | | 20,297 | 3x3 | |
+| autoCHAIR | 13,944 | | 13,944 | 2x2 | down: one agenda and timeline, much of its code is styling |
+| Multipanel Layout GUI | 6,943 | | 6,943 | 2x2 | |
+| Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2x2 | |
+| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 1x3 | down to a tall one-column tile: its room is portrait, and at four columns each 3x3 tile needs a 1x3 beside it |
+| Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2x2 | |
+| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | 1x2 | down: a single figure, and the wall needs its two small tiles to close |
+| Signature Correction | 2,952 | 491 | 3,443 | 2x2 | |
+| Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2x3 | up: a whole grid of answers to read |
+| Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 1x3 | down to a tall one-column tile, for the same reason; the tool lays the card out tall |
+| Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2x3 | up: the text in the picture needs room to be read |
+| Photomosaic | 1,785 | 110 | 1,895 | 1x2 | |
+| Helix and Braid | 1,373 | 441 | 1,814 | 1x3 | upright, as the tool draws a helix |
+| Forecast Calibration | 1,474 | 39 | 1,513 | 1x3 | portrait, the plot with its legend below |
 
 Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
-The column count steps with the width, from one on a phone to seven on an ultrawide screen (`style.css`). Large tiles take two columns and two rows; a whole row when there are three columns; and two columns of one row at five or seven, where the rows of one-column tiles are tall. Wide tiles take two columns, but one at an odd count, which has no room for them. The cards are newest first, moved just enough that at every column count the tiles close up with no gaps in their order, so Tab order is the order you see. `grid-auto-flow: dense` fills any gap a changed size opens by moving a later small tile up.
+The column count steps with the width, from one on a phone to seven on an ultrawide screen (`style.css`); at two columns a 3x3 tile is 2x2. Dense placement packs the tiles with no gaps. The cards are newest first, moved as little as packing with no gaps at every column count allows, and `reading-flow: grid-rows` takes Tab and screen readers through them row by row as they appear, where the browser has it (Chrome and Edge 137 and later); elsewhere Tab follows the card order, which differs from what is seen in a few places. On a phone, and on a phone held sideways, rows follow their content instead: each picture keeps its own shape, and one-column tiles sit beside their text.
 
 The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
