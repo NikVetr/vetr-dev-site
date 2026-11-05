@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="7" focusable="false">
 <style>
 [data-art="crossword"] .cells { fill: var(--surface); stroke: var(--art-ink); stroke-width: 0.8; stroke-linejoin: round; }
+[data-art="crossword"] .letters text { will-change: opacity; }
 [data-art="crossword"] .letters { fill: var(--art-ink); font: 500 6.1px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; dominant-baseline: central; }
 @media (prefers-reduced-motion: no-preference) {
 [data-art="crossword"][data-playing] .letters text { animation: crossword-fill 7s linear infinite; }

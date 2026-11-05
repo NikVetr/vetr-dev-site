@@ -60,6 +60,7 @@ ${edges.slice(0, -1).map((a, c) => `<clipPath id="intuitions-band${c}">${clip(a,
     body,
     css: `${cats}
 & .ink-line { fill: none; stroke: var(--art-ink); stroke-width: 2; }
+& .move { will-change: transform; }
 & .baseline { stroke: var(--art-muted); stroke-width: 1; }
 & .threshold { stroke: var(--art-ink); stroke-width: 1.5; }
 & .labels { fill: var(--art-muted); font: 600 11px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; }`,

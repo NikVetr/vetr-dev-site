@@ -55,6 +55,7 @@ export function build() {
     period: PERIOD,
     body: `<path class="cells" d="${cells}"/>\n<g class="letters">${letters}</g>`,
     css: `& .cells { fill: var(--surface); stroke: var(--art-ink); stroke-width: 0.8; stroke-linejoin: round; }
+& .letters text { will-change: opacity; }
 & .letters { fill: var(--art-ink); font: 500 ${num(cell * 0.62)}px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; dominant-baseline: central; }`,
     loop: `& .letters text { animation: crossword-fill ${PERIOD}s linear infinite; }
 @keyframes crossword-fill { 0% { opacity: 1; } ${p(FADE)}% { opacity: 0; } 50% { opacity: 0; } ${p(PERIOD / 2 + FADE)}% { opacity: 1; } 100% { opacity: 1; } }`,

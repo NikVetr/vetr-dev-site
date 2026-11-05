@@ -47,7 +47,7 @@ export async function build() {
 <g class="scan"><rect class="cover" x="0" y="${H}" width="${W}" height="${H + 4}"/><path class="laser" d="M0 ${H + 2}H${W}"/></g>
 <path class="cells" d="${cells}"/>`,
     // The sheet's colours: black engraving (the theme's ink here), #333333 cell outlines.
-    css: `& .engraving { fill: var(--art-ink); fill-rule: evenodd; }
+    css: `& .engraving { fill: var(--art-ink); fill-rule: evenodd; will-change: opacity; }
 & .cells { fill: none; stroke: var(--art-muted); stroke-width: 0.6; stroke-linejoin: round; }
 & .cover { fill: var(--art-paper); }
 & .laser { stroke: #e0302a; stroke-width: 1.2; }`,

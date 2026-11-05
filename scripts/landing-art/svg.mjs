@@ -111,11 +111,14 @@ ${defs ? `<defs>${defs}</defs>\n` : ''}${body}
 export function flipbook(name, frames, period) {
   const n = frames.length;
   const dt = period / n;
-  const body = frames.map((f, k) => `<g class="frame"${k ? ` style="animation-delay:${num(k * dt, 6)}s"` : ''}>${f}</g>`).join('\n');
+  const body = frames.map((f, k) => `<g class="frame${k ? '' : ' first'}"${k ? ` style="animation-delay:${num(k * dt, 6)}s"` : ''}>${f}</g>`).join('\n');
   return {
     frames: n,
     body,
-    css: `& .frame + .frame { opacity: 0; }`,
+    // Frame 0 is drawn at rest as it is drawn while playing (will-change), so the still is
+    // exactly the loop's first frame.
+    css: `& .frame + .frame { opacity: 0; }
+& .frame.first { will-change: opacity; }`,
     loop: `& .frame { animation: ${name}-frame ${period}s step-end infinite; }
 @keyframes ${name}-frame { 0% { opacity: 1; } ${num(100 / n, 6)}% { opacity: 0; } 100% { opacity: 0; } }`,
   };

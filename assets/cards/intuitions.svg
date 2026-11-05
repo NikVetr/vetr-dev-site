@@ -7,6 +7,7 @@
 [data-art="intuitions"] .cat-4 { fill: #175f4d; } :root[data-theme="dark"] [data-art="intuitions"] .cat-4 { fill: #7fc6af; }
 [data-art="intuitions"] .cat-5 { fill: #004939; } :root[data-theme="dark"] [data-art="intuitions"] .cat-5 { fill: #9ae3cb; }
 [data-art="intuitions"] .ink-line { fill: none; stroke: var(--art-ink); stroke-width: 2; }
+[data-art="intuitions"] .move { will-change: transform; }
 [data-art="intuitions"] .baseline { stroke: var(--art-muted); stroke-width: 1; }
 [data-art="intuitions"] .threshold { stroke: var(--art-ink); stroke-width: 1.5; }
 [data-art="intuitions"] .labels { fill: var(--art-muted); font: 600 11px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; }

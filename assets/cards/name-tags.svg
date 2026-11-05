@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="6" focusable="false">
 <style>
-[data-art="name-tags"] .engraving { fill: var(--art-ink); fill-rule: evenodd; }
+[data-art="name-tags"] .engraving { fill: var(--art-ink); fill-rule: evenodd; will-change: opacity; }
 [data-art="name-tags"] .cells { fill: none; stroke: var(--art-muted); stroke-width: 0.6; stroke-linejoin: round; }
 [data-art="name-tags"] .cover { fill: var(--art-paper); }
 [data-art="name-tags"] .laser { stroke: #e0302a; stroke-width: 1.2; }

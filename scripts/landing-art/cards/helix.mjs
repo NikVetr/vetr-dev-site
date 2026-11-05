@@ -52,6 +52,7 @@ ${paths(braid.svg)}
     name: 'helix',
     period: PERIOD,
     body,
+    css: '& .move { will-change: transform; }',
     loop: `& .helix .move { animation: helix-turn ${PERIOD}s linear infinite; }
 & .braid .move { animation: helix-twist ${PERIOD}s linear infinite; }
 @keyframes helix-turn { to { transform: translateX(${turn}px); } }
