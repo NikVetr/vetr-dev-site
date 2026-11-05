@@ -292,12 +292,12 @@ function renderResult() {
   el.bins.replaceChildren(...result.bins.map((bin) => {
     const tr = document.createElement('tr');
     const label = settings.bins === 'distinct' ? bin.label : `${bin.label}, mean ${share(bin.meanProbability)}`;
-    const cells = [label, `${bin.hits} of ${bin.n}`, share(bin.frequency), `${share(bin.interval[0])} to ${share(bin.interval[1])}`, POSITIONS[bin.position]];
+    const cells = [label, `${bin.hits} of ${bin.n}, ${share(bin.frequency)}`, `${share(bin.interval[0])} to ${share(bin.interval[1])}`, POSITIONS[bin.position]];
     cells.forEach((value, i) => {
       const td = document.createElement('td');
       td.textContent = value;
-      if (i > 0 && i < 4) td.className = 'num';
-      if (i === 4) td.className = `position ${bin.position}`;
+      if (i === 1 || i === 2) td.className = 'num';
+      if (i === 3) td.className = `position ${bin.position}`;
       tr.append(td);
     });
     return tr;
@@ -310,7 +310,7 @@ function plotOptions() {
 
 function renderPlot() {
   if (!result) return;
-  const width = Math.max(280, Math.floor(el.plot.clientWidth));
+  const width = Math.floor(el.plot.clientWidth);
   const height = Math.round(Math.min(640, Math.max(360, width * 0.85)));
   el.plot.innerHTML = renderSvg(result, { width, height, ...plotOptions() });
 }

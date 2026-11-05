@@ -233,6 +233,8 @@ thead th {
 tbody tr + tr > * { border-top: 1px solid var(--border); }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
 
+/* Fixed layout: the header sets the column widths and the prediction column takes the rest. */
+.predictions { table-layout: fixed; }
 .predictions .index { width: 2.6rem; text-align: right; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
 .predictions tr.has-issue .index { color: var(--alert); font-weight: 700; }
 .predictions tr.has-issue .index::before { content: "⚠ "; }
@@ -252,7 +254,7 @@ tbody tr + tr > * { border-top: 1px solid var(--border); }
 .outcome[data-state="0"] { background: var(--no-soft); color: var(--no); border-color: var(--no); }
 .outcome[data-state=""] { border-style: dashed; color: var(--muted); }
 .outcome option { background: var(--surface); color: var(--text); }
-.predictions .remove-col { width: 2.4rem; }
+.predictions .remove-col { width: 3rem; }
 .predictions .remove { padding: 0.2rem 0.55rem; font-size: 1.05rem; line-height: 1.2; }
 
 /* On a phone each row takes two lines: the prediction across the full width, then
@@ -282,6 +284,10 @@ tbody tr + tr > * { border-top: 1px solid var(--border); }
 @media (max-width: 480px) {
   .bins { font-size: 0.84rem; }
   .bins th, .bins td { padding: 0.3rem 0.25rem; }
+}
+@media (max-width: 360px) {
+  .bins { font-size: 0.76rem; }
+  .bins th, .bins td { padding: 0.25rem 0.15rem; }
 }
 .position.inside { color: var(--muted); }
 .position.above, .position.below { color: var(--alert); font-weight: 700; }

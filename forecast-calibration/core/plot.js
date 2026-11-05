@@ -25,7 +25,7 @@ export function renderSvg(result, { width = 720, height = 600, theme = 'light', 
   const legend = [
     'Observed frequency',
     `Outside the middle ${percentLabel(result.settings.interval, 2)} of worlds`,
-    `Simulated calibrated worlds (${result.worlds.length.toLocaleString('en-US')} drawn)`,
+    `Calibrated worlds (${result.worlds.length.toLocaleString('en-US')} drawn)`,
     'Perfect calibration',
   ];
   const margin = { top: font, right: font * 1.6, bottom: font * 3.8 + legend.length * row, left: font * 4.4 };
@@ -73,10 +73,13 @@ export function renderSvg(result, { width = 720, height = 600, theme = 'light', 
   }
   out.push('</g>');
 
-  // Legend, one row per mark, below the axes so it never covers data.
+  // Legend, one row per mark, below the axes so it never covers data. Its type shrinks
+  // if the longest label would otherwise run past the edge (0.6 em per character is a
+  // generous estimate for sans-serif text).
   const legendTop = height - legend.length * row;
-  const sampleX = margin.left;
+  const sampleX = Math.min(margin.left, font * 2);
   const textX = sampleX + font * 3.6;
+  const legendFont = Math.min(font, (width - textX - 4) / (0.6 * Math.max(...legend.map((label) => label.length))));
   legend.forEach((label, i) => {
     const cy = round(legendTop + i * row + row / 2);
     const sample = [
@@ -86,7 +89,7 @@ export function renderSvg(result, { width = 720, height = 600, theme = 'light', 
       `<line x1="${sampleX}" x2="${round(sampleX + font * 2.6)}" y1="${cy}" y2="${cy}" stroke="${c.muted}" stroke-width="1.5" stroke-dasharray="6 5"/>`,
     ][i];
     out.push(`<g fill="${c.observed}" stroke="${c.background}" stroke-width="1.5">${sample}</g>`);
-    out.push(`<text x="${round(textX)}" y="${round(cy + font * 0.35)}" fill="${c.text}">${escapeXml(label)}</text>`);
+    out.push(`<text x="${round(textX)}" y="${round(cy + font * 0.35)}" fill="${c.text}" font-size="${round(legendFont)}">${escapeXml(label)}</text>`);
   });
 
   out.push('</svg>');
