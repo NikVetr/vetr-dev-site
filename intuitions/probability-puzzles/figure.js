@@ -191,7 +191,8 @@ export function cutoffFigure(result, { width, height }) {
   ];
   // The two full-information rules are within a point of each other: one line, both numbers.
   parts.push(el('line', { x1: left, x2: width - right, y1: y(e.optimal), y2: y(e.optimal), class: 'k-line k2 dashed' }));
-  parts.push(text(width - right - 4, y(e.optimal) - 6, `knowing the distribution: ${percent(e.optimal)}, or ${percent(e.half)} by the 50% rule`, { class: 'direct-label halo', 'text-anchor': 'end' }));
+  const full = width < 480 ? `knowing the distribution: ${percent(e.optimal)}` : `knowing the distribution: ${percent(e.optimal)}, or ${percent(e.half)} by the 50% rule`;
+  parts.push(text(width - right - 4, y(e.optimal) - 6, full, { class: 'direct-label halo', 'text-anchor': 'end' }));
   parts.push(el('path', { d: linePath(e.curve.map((/** @type {number} */ p, /** @type {number} */ r) => /** @type {Point} */ ([x(r), y(p)]))), class: 'k-line k0' }));
   const r = result.cutoff;
   parts.push(el('line', { x1: x(r), x2: x(r), y1: upper, y2: height - bottom, class: 'at-line' }));
@@ -295,11 +296,14 @@ export function loopsFigure(result, { width }) {
 export function trialsFigure(result, { width, t }) {
   const trials = result.play.trials;
   const k = result.heads;
-  const flip = 15;
-  const LABEL = 86;
+  // Narrow figures get smaller flips and labels, so that two columns of draws fit a phone.
+  const narrow = width < 420;
+  const flip = narrow ? 12 : 15;
+  const LABEL = narrow ? 76 : 86;
   const tileW = LABEL + 8 + (k + 1) * flip;
-  const cols = Math.max(1, Math.min(4, Math.floor((width + 10) / (tileW + 10))));
-  const tile = (width - 10 * (cols - 1)) / cols;
+  const gapX = narrow ? 6 : 10;
+  const cols = Math.max(1, Math.min(4, Math.floor((width + gapX) / (tileW + gapX))));
+  const tile = (width - gapX * (cols - 1)) / cols;
   const rowH = 24;
   const rows = Math.ceil(trials.length / cols);
   const height = rows * rowH + 4;
@@ -307,16 +311,16 @@ export function trialsFigure(result, { width, t }) {
   /** @type {string[]} */
   const parts = [];
   trials.slice(0, step).forEach((/** @type {any} */ tr, /** @type {number} */ i) => {
-    const x0 = (i % cols) * (tile + 10);
+    const x0 = (i % cols) * (tile + gapX);
     const y0 = Math.floor(i / cols) * rowH + 2;
     parts.push(el('rect', { x: x0, y: y0, width: tile, height: rowH - 4, rx: 4, class: `trial${tr.kept ? ' kept' : ''}` }));
-    parts.push(text(x0 + 6, y0 + 14, tr.twoHeaded ? 'two-headed' : 'fair', { class: `coin-label${tr.twoHeaded ? ' two' : ''}` }));
+    parts.push(text(x0 + 5, y0 + 14, tr.twoHeaded ? 'two-headed' : 'fair', { class: `coin-label${tr.twoHeaded ? ' two' : ''}${narrow ? ' small' : ''}` }));
     const flipScale = Math.min(1, (tile - LABEL - 8) / ((k + 1) * flip));
     tr.flips.forEach((/** @type {boolean} */ head, /** @type {number} */ f) => {
       const cx = x0 + LABEL + (f + 0.5) * flip * flipScale;
       const cy = y0 + 10;
       const next = tr.kept && f === k;
-      parts.push(el('circle', { cx, cy, r: 6.2 * Math.max(0.75, flipScale), class: `flip ${head ? 'head' : 'tail'}${next ? ' next' : ''}` }));
+      parts.push(el('circle', { cx, cy, r: flip * 0.42 * Math.max(0.75, flipScale), class: `flip ${head ? 'head' : 'tail'}${next ? ' next' : ''}` }));
       parts.push(text(cx, cy + 3.5, head ? 'H' : 'T', { class: `flip-letter ${head ? 'head' : 'tail'}`, 'text-anchor': 'middle' }));
     });
   });

@@ -202,7 +202,7 @@ export function planeFigure(result, { width, height, pair, compact = false }) {
   if (pair === 'ab' && !compact) {
     for (let i = 0; i < result.data.a.length; i++) shapes.push(el('circle', { cx: x(result.data.a[i]), cy: y(result.data.b[i]), r: 2.4, class: 'draw-dot' }));
     const { slope } = result.conditional;
-    shapes.push(el('line', { x1: x(-X), x2: x(X), y1: y(-X * slope), y2: y(X * slope), class: 'k-line k0 conditional-line' }));
+    shapes.push(el('line', { x1: x(-X), x2: x(X), y1: y(-X * slope), y2: y(X * slope), class: 'k-line k2 conditional-line' }));
   }
   shapes.push(el('path', { d: path(ellipse(meant, 0.9)), class: 'ink-line dashed thin-dash' }), el('path', { d: path(ellipse(meant, 0.5)), class: 'ink-line dashed thin-dash' }));
   shapes.push(el('path', { d: path(ellipse(stated, 0.9)), class: 'k-line k0 thin' }), el('path', { d: path(ellipse(stated, 0.5)), class: 'k-line k0' }));

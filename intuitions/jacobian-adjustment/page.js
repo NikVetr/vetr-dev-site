@@ -201,6 +201,7 @@ function renderMarginals() {
     `<li>${swatch({ line: 'k-line k0' })} as written</li>`,
     `<li>${swatch({ line: 'ink-line dashed' })} as meant</li>`,
     `<li><svg width="26" height="14" viewBox="0 0 26 14" class="plot" aria-hidden="true"><circle cx="13" cy="7" r="3" class="draw-dot"/></svg> <var>a</var> as data, one posterior draw of <var>b</var></li>`,
+    `<li>${swatch({ line: 'k-line k2 conditional-line' })} <var>b</var>'s posterior mean given <var>a</var></li>`,
   ].join('');
   for (const pair of /** @type {const} */ (['ab', 'ac'])) {
     const box = $(`marginals-${pair}`);

@@ -761,3 +761,4 @@ dl.stats dd small.sim-line { display: block; }
 .panel-side input[id$="-replicates-number"] { width: 7.5rem; }
 .plot .box.current { stroke: var(--ink); stroke-width: 2.4; }
 .plot .box-order { fill: var(--text); font-size: 9.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.plot .coin-label.small { font-size: 9.5px; }
