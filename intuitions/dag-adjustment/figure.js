@@ -45,9 +45,9 @@ export function layout(graph) {
  * data-node so a page can toggle adjustment by clicking them.
  * @param {{ graph: Graph, exposure: string, outcome: string, adjust: string[], mediator: string | null }} params
  * @param {any} result the adjust view's result
- * @param {{ width: number, id?: string }} size
+ * @param {{ width: number, height?: number, id?: string }} size its height follows from the rows unless given
  */
-export function dagFigure(params, result, { width, id = 'dag' }) {
+export function dagFigure(params, result, { width, height: fixed, id = 'dag' }) {
   const { graph } = params;
   const at = layout(graph);
   const xs = [...at.values()].map((p) => p[0]);
@@ -59,7 +59,7 @@ export function dagFigure(params, result, { width, id = 'dag' }) {
   const padX = widestBox / 2 + 6;
   const rows = y1 - y0;
   const rowGap = width < 520 ? 92 : 104;
-  const height = Math.round(rows * rowGap + NODE_H + 52);
+  const height = fixed ?? Math.round(rows * rowGap + NODE_H + 52);
   const sx = scaleLinear(x1 > x0 ? [x0, x1] : [x0 - 1, x0 + 1], [padX, width - padX]);
   const sy = scaleLinear(y1 > y0 ? [y0, y1] : [y0 - 1, y0 + 1], [NODE_H / 2 + 12, height - NODE_H / 2 - 30]);
   const pos = (/** @type {string} */ n) => /** @type {Point} */ ([sx(/** @type {Point} */ (at.get(n))[0]), sy(/** @type {Point} */ (at.get(n))[1])]);

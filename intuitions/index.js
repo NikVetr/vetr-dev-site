@@ -40,7 +40,7 @@ const thumbs = [
     box: /** @type {HTMLElement} */ (document.getElementById('thumb-dag-adjustment')),
     draw: (/** @type {number} */ width) => {
       const params = { graph: DAG_PRESETS.collider.graph, exposure: 'X', outcome: 'Y', adjust: ['C'], mediator: null };
-      return dagFigure(params, dagAdjustment(params), { width, id: 'thumb-dag' }).svg;
+      return dagFigure(params, dagAdjustment(params), { width, height: 150, id: 'thumb-dag' }).svg;
     },
   },
 ];

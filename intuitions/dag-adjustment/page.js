@@ -138,6 +138,8 @@ function renderAdjust() {
   }).join('') + (r.pathsTruncated ? '<li class="muted">… more paths not listed.</li>' : '');
 
   const table = $('adjust-sets');
+  // The table is redrawn; a row's button that had focus keeps it.
+  const focused = table.contains(document.activeElement) ? document.activeElement?.getAttribute('data-set') ?? null : null;
   if (r.sets) {
     const head = '<thead><tr><th scope="col">Adjust for</th><th scope="col">Coefficient</th><th scope="col">Bias</th><th scope="col">Criterion</th></tr></thead>';
     const same = (/** @type {string[]} */ s) => s.length === a.adjust.length && s.every((x) => a.adjust.includes(x));
@@ -147,6 +149,7 @@ function renderAdjust() {
       return `<tr${current ? ' class="current"' : ''}><th scope="row"><button type="button" class="set-button" data-set="${s.adjust.join(',')}" aria-pressed="${current}">${current ? '● ' : ''}${setName(s.adjust)}</button></th><td>${formatNumber(s.coefficient, 3)}</td><td>${s.unbiased ? '0' : signed(s.bias)}</td><td>${verdictCell}</td></tr>`;
     }).join('');
     table.innerHTML = `${head}<tbody>${rows}</tbody>`;
+    if (focused !== null) /** @type {HTMLElement | null} */ (table.querySelector(`button[data-set="${focused}"]`))?.focus();
   } else table.innerHTML = '<tbody><tr><td>Too many candidate variables to list every set.</td></tr></tbody>';
 
   const fd = r.frontDoor;
