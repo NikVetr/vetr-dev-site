@@ -12,6 +12,8 @@
 
 /* ---------- Photos ---------- */
 
+.file-button[hidden] { display: none; } /* the folder picker, where the browser has none */
+
 .contact-scroll {
   max-height: 13.5rem;
   overflow-y: auto;
