@@ -78,6 +78,12 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .menu-list button { padding: 6px 10px; text-align: left; border: 0; background: none; border-radius: 5px; cursor: pointer; }
 .menu-list button:hover { background: var(--accent-soft); }
 
+/* Site footer: one thin row under the panels. */
+.site-footer { background: var(--panel); border-top: 1px solid var(--line); }
+.footer-row { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 4px 14px; color: var(--muted); font-size: 12px; }
+.footer-row a { color: var(--accent); }
+.footer-row time { margin-left: auto; font-variant-numeric: tabular-nums; }
+
 .layout {
   --sidebar-width: 310px;
   --inspector-width: 300px;

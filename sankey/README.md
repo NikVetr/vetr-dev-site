@@ -1,14 +1,14 @@
 # Polylines Sankey webapp
 
-An interactive, static (no build step) version of the Sankey ribbons in `../R/functions.R`. It reads the same inputs as `sankey_ribbons()` and `sankey_ribbons_graph()`, saved as CSV files, and exports CSVs plus an R script that redraws the result with the R functions.
+An interactive, static (no build step) version of the Sankey ribbons in [`R/functions.R`](https://github.com/NikVetr/polylines/blob/main/R/functions.R) of the [polylines repository](https://github.com/NikVetr/polylines). It reads the same inputs as `sankey_ribbons()` and `sankey_ribbons_graph()`, saved as CSV files, and exports CSVs plus an R script that redraws the result with the R functions.
 
 ## Running
 
-Open `index.html` directly in a browser, or serve the folder:
+It is published at https://vetr.dev/sankey/. Locally, open `index.html` directly in a browser, or serve the folder:
 
 ```sh
-cd webapp
-npm run serve        # python3 -m http.server 4173, then open http://127.0.0.1:4173
+cd sankey
+npm run serve        # python3 -m http.server 4183, then open http://127.0.0.1:4183
 ```
 
 ## Programmatic submissions
@@ -45,7 +45,7 @@ Table `spec` uses the same converter as the import dialog:
 - Links: `{format: 'links', source: 'from', target: 'to', value: 'n', stage: 'step'}`. `value` and `stage` are optional.
 - Crosstab: `{format: 'crosstab'}`.
 
-Omitting `spec` uses the dialog's inference; supplying it makes automated workflows explicit. `options.order` accepts `appearance`, `size` or `alphabetical`; `minShare` is a fraction (0.05 = 5%), and `topN` is a node count. `params` uses the layout names in `layout.js`'s `DEFAULT_PARAMS`, such as `curvature` and `route`. `stageParams` is an array of per-stage routing/order overrides. `style` uses the application names, such as `palette`, `fontSize`, `labelCounts`, `canvasWidth` and `canvasHeight`; explicit style values override label-style defaults. Fresh table/matrix submissions use application defaults, independent of the previous diagram. `SankeyApp.getProject()` returns a detached snapshot of the current project.
+Omitting `spec` uses the dialog's inference; supplying it makes automated workflows explicit. `options.order` accepts `appearance`, `size` or `alphabetical`; `minShare` is a fraction (0.05 = 5%), and `topN` is a node count. `params` uses the layout names in `layout.js`'s `DEFAULT_PARAMS`, such as `curvature` and `route`. `stageParams` is an array of per-stage routing/order overrides. `style` uses the application names, such as `palette`, `fontSize`, `labelCounts`, `canvasWidth` and `canvasHeight`; explicit style values override label-style defaults. Fresh table/matrix submissions use application defaults, independent of the previous diagram. `SankeyApp.getProject()` returns a detached snapshot of the current project. [`api.md`](api.md) describes the requests, results and errors in full.
 
 For matrix input, values are geometric thicknesses unless `valueScale` is supplied. Graph mode requires one square adjacency matrix. For example:
 
@@ -63,16 +63,16 @@ SankeyApp.submit({ type: 'project', project });
 The command-line exporter uses the same browser API in an isolated headless Chromium session. It opens the app from disk, so no server or GUI interaction is required. Install the existing browser-test dependency and its Chromium binary once:
 
 ```sh
-cd webapp
+cd sankey
 npm ci
 npx playwright install chromium
-npm run render -- examples/submission.json ../tmp/diagram.svg
-npm run render -- examples/submission.json ../tmp/diagram.png
+npm run render -- examples/submission.json diagram.svg
+npm run render -- examples/submission.json diagram.png
 ```
 
 The output extension chooses SVG, PNG, project JSON (`.json`), or R bundle (`.zip`). Use `-` as the input filename to read request JSON from stdin. Rendering/validation failures exit nonzero and leave an existing output file untouched. A fresh browser is used for each invocation; the viewport is 1440 × 900, and explicit canvas dimensions in the request make output sizing independent of automatic panel sizing.
 
-From Python, with the repository as the working directory:
+From Python, with the vetr.dev site repository as the working directory:
 
 ```python
 import json
@@ -84,12 +84,12 @@ request = {
     "spec": {"format": "wide", "columns": ["A", "B"]},
 }
 subprocess.run(
-    ["node", "webapp/scripts/render.cjs", "-", "tmp/diagram.svg"],
+    ["node", "sankey/scripts/render.cjs", "-", "tmp/diagram.svg"],
     input=json.dumps(request), text=True, check=True,
 )
 ```
 
-R callers can write the same request with `jsonlite::write_json(..., auto_unbox = TRUE)` and invoke `node webapp/scripts/render.cjs request.json output.svg` using `system2()`. Node callers can import `renderSubmission(request, format)` from `scripts/render.cjs`; it returns a promise for an output `Buffer`. The webapp remains static: these are browser and local-process APIs, with no HTTP POST endpoint.
+R callers can write the same request with `jsonlite::write_json(..., auto_unbox = TRUE)` and invoke `node sankey/scripts/render.cjs request.json output.svg` using `system2()`. Node callers can import `renderSubmission(request, format)` from `scripts/render.cjs`; it returns a promise for an output `Buffer`. The webapp remains static: these are browser and local-process APIs, with no HTTP POST endpoint.
 
 ## Input files
 
@@ -196,12 +196,12 @@ The **SVG** and **PNG** (2×) buttons export the plot as shown in one click: wit
 ## Tests
 
 ```sh
-cd webapp
+cd sankey
 npm install                 # Playwright test runner
 npm run test:unit           # geometry parity with R, layout, CSV parsing, table import, pathways and edits (node:test)
 npm run test:e2e            # browser tests (Playwright, Chromium)
 ```
 
-Regenerate the R reference geometry from the repository root with `Rscript webapp/tests/r_parity_fixtures.R`.
+The R reference geometry in `tests/fixtures/r_parity.json` is generated from the R code in the [polylines repository](https://github.com/NikVetr/polylines), not here. To regenerate it, run that repository's fixture script from its root (`Rscript webapp/tests/r_parity_fixtures.R` as of polylines commit 462c2b2) and copy the JSON it writes into `tests/fixtures/`.
 
 The parity fixtures are produced by the R functions themselves, so `layout.js` is checked against R's strand offsets, centerlines, edges, adjusted node positions and merge lengths.

@@ -4,6 +4,8 @@
 
 Polylines provides base-R graphics functions for variable-width polygonal lines and Sankey ribbons, plus a static browser editor for Sankey diagrams.
 
+The R paths below are in the [polylines repository](https://github.com/NikVetr/polylines). The browser editor is `sankey/` in the vetr.dev site repository, served at https://vetr.dev/sankey/; its paths below are relative to `sankey/`.
+
 | Path | Responsibility |
 | --- | --- |
 | `R/functions.R` | R utilities, `polylines()`, DNA drawing, Sankey input validation, layout, geometry, colors, and drawing. |
@@ -11,7 +13,7 @@ Polylines provides base-R graphics functions for variable-width polygonal lines 
 | `ggplot2_comparison.R`, `intermediate_workflow.R` | Supporting demonstration scripts. |
 | `images/` | Figures used by the root README. |
 | `tests/test_sankey.R` | R Sankey regression checks. |
-| `webapp/` | Browser application, documentation, and JavaScript/browser tests. |
+| `sankey/` (vetr.dev site) | Browser application, documentation, and JavaScript/browser tests. |
 
 The R code is sourced directly rather than installed as an R package. Base graphics and polygon geometry support vector output. Some operations require `sf`, `igraph`, or `png`; fixture generation uses `jsonlite`.
 
@@ -78,19 +80,19 @@ SVG and PNG capture the visible drawing, including emphasized traces, with optio
 
 ## Verification and running
 
-From `webapp/`:
+From `sankey/`:
 
-- `npm run serve`: Python HTTP server on localhost port 4173.
+- `npm run serve`: Python HTTP server on localhost port 4183.
 - `npm run test:unit`: Node tests for geometry, conversion, paths, edits, glyphs, and CSV handling.
 - `npm run test:e2e`: Playwright Chromium interaction and SVG/pixel checks.
 - `npm test`: both JavaScript suites.
-- `npm run render -- examples/submission.json ../tmp/diagram.svg`: headless export using the bundled request example; requires Playwright Chromium.
+- `npm run render -- examples/submission.json diagram.svg`: headless export using the bundled request example; requires Playwright Chromium.
 
-From the repository root:
+From the polylines repository root:
 
 - `Rscript tests/test_sankey.R`: R regressions.
-- `Rscript webapp/tests/r_parity_fixtures.R`: regenerate 16 R reference cases.
+- `Rscript webapp/tests/r_parity_fixtures.R`: regenerate 16 R reference cases, written to `webapp/tests/fixtures/r_parity.json` there; copy that file to `sankey/tests/fixtures/`.
 
 Parity tests compare JavaScript offsets, centerlines, ribbon edges, adjusted locations, and merge lengths against checked-in R output. This supports maintaining independent R and browser implementations with consistent geometry. Browser tests additionally exercise UI behavior and exported drawings.
 
-`summary.md` and `tmp/` are ignored by the root Git configuration; browser dependencies and test reports are ignored within `webapp/`.
+Browser dependencies and test reports are ignored within `sankey/`.

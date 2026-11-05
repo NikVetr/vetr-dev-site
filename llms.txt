@@ -1,9 +1,10 @@
 # vetr.dev
 
-> Small browser tools. Those listed here can also be driven programmatically: each has one JSON-in, JSON-out function, `submit(request)`, which its web page, a `window.<Name>` object in that page and a Node 22 command-line script (no install needed) all share.
+> Small browser tools. Those listed here can also be driven programmatically: each has one JSON-in, JSON-out function, `submit(request)`, which its web page, a `window.<Name>` object in that page and a command-line script all share. The script runs in plain Node 22 with no install unless its entry says otherwise.
 
 Each entry links the tool's API description: request and result schema, errors, and a worked example.
 
 ## Tools with an API
 
 - [Forecast Calibration](https://vetr.dev/forecast-calibration/api.md): compare stated probabilities with binary outcomes; calibration plot against simulated calibrated worlds, Monte Carlo p-values for calibration error and log loss. Page: https://vetr.dev/forecast-calibration/ ; browser: `window.ForecastCalibration` ; CLI: `node forecast-calibration/cli.mjs request.json`
+- [Sankey Diagrams](https://vetr.dev/sankey/api.md): Sankey diagrams from data tables (wide, long, link list, crosstab), flow matrices or a saved project; returns the project as JSON, exports SVG, PNG or an R bundle. Page: https://vetr.dev/sankey/ ; browser: `window.SankeyApp` ; CLI: `node sankey/scripts/render.cjs request.json diagram.svg` (not plain Node: it drives headless Chromium through Playwright, so it needs `npm ci` and `npx playwright install chromium` in `sankey/` first; errors are plain text)
