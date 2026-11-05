@@ -159,8 +159,12 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 /* The arrow says "this goes somewhere" alongside the link colour; it is not part of the name. */
 .project-card h3::after { content: "\00a0→" / ""; }
 .project-card p { margin-bottom: 0.75rem; color: var(--muted); font-size: 0.95em; line-height: 1.55; }
-.project-card:hover { border-color: var(--primary-line); }
-.project-card:hover h3 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+/* Only where there is a real hover, so a tap does not leave a card looking hovered. */
+@media (hover: hover) {
+  .project-card:hover { border-color: var(--primary-line); }
+  .project-card:hover h3 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+}
+.project-card:active { border-color: var(--primary); }
 .project-card:focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
