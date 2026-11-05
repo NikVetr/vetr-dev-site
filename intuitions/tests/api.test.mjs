@@ -27,7 +27,9 @@ test('submit returns the entry, the resolved params and the result', () => {
   assert.ok('overall' in out.result);
   assert.deepEqual(submit({ entry: 'threshold-model' }).params, { means: [0.75, 0.85], thresholds: [[0, 1, 2], [0, 0.8, 1.9]], rho: 0.4, sample: null });
   assert.deepEqual(submit({ entry: 'threshold-model', params: { means: [1] } }).params, { means: [1], thresholds: [[0, 1, 2]] });
-  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance', 'backpack-fallacy', 'samplers']);
+  assert.deepEqual(Object.keys(ENTRIES), ['zscore-outliers', 'threshold-model', 'correlation-geometry', 'typical-set', 'dag-adjustment', 'null-pvalues', 'marchenko-pastur', 'trait-evolution', 'tree-covariance', 'backpack-fallacy', 'samplers', 'jacobian-adjustment']);
+  assert.deepEqual(submit({ entry: 'jacobian-adjustment', params: { transform: 'square', jacobian: true } }).params, { view: 'transform', transform: 'square', jacobian: true, df: 1 });
+  assert.deepEqual(submit({ entry: 'jacobian-adjustment', params: { view: 'marginals' } }).params, { view: 'marginals', statement: 'separate', sdB: 1, n: 100, seed: 1 });
   assert.deepEqual(submit({ entry: 'samplers', params: { iterations: 10 } }).params, { view: 'funnel', coordinates: 'centred', sampler: 'hmc', sdY: 1.5, step: 0.2, leapfrog: 20, iterations: 10, start: [1, 0], seed: 1 });
   assert.deepEqual(submit({ entry: 'samplers', params: { view: 'hastings', iterations: 10 } }).params, { view: 'hastings', correction: 'missing', sd: 0.5, correlation: 0.6, step: 0.5, iterations: 10, start: [1, 1], seed: 1 });
   assert.deepEqual(submit({ entry: 'backpack-fallacy', params: { sizes: [16, 2], upTo: 1, window: 0 } }).params, { prior: 'cauchy', scale: 1, sizes: [2, 16], upTo: 1, window: 0, at: 2 });
@@ -112,7 +114,7 @@ test('the CLI prints the same result and reports errors with exit codes', () => 
   const labOut = spawnSync(process.execPath, [cli], { input: JSON.stringify(lab), encoding: 'utf8' });
   assert.equal(labOut.status, 0);
   assert.deepEqual(JSON.parse(labOut.stdout), JSON.parse(JSON.stringify(submit(lab))));
-  for (const tree of [{ entry: 'trait-evolution', params: { model: 'shift', tree: { tips: 6, seed: 2 } } }, { entry: 'tree-covariance', params: { view: 'pruning' } }]) {
+  for (const tree of [{ entry: 'trait-evolution', params: { model: 'shift', tree: { tips: 6, seed: 2 } } }, { entry: 'tree-covariance', params: { view: 'pruning' } }, { entry: 'jacobian-adjustment', params: { view: 'marginals', n: 5 } }]) {
     const treeOut = spawnSync(process.execPath, [cli], { input: JSON.stringify(tree), encoding: 'utf8' });
     assert.equal(treeOut.status, 0);
     assert.deepEqual(JSON.parse(treeOut.stdout), JSON.parse(JSON.stringify(submit(tree))));

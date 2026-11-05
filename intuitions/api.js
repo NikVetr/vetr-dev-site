@@ -5,6 +5,7 @@ import * as backpackFallacy from './backpack-fallacy/compute.js';
 import * as correlationGeometry from './correlation-geometry/compute.js';
 import * as dagAdjustment from './dag-adjustment/compute.js';
 import { IntuitionsError, invalidRequest, isObject } from './lib/params.js';
+import * as jacobianAdjustment from './jacobian-adjustment/compute.js';
 import * as marchenkoPastur from './marchenko-pastur/compute.js';
 import * as nullPvalues from './null-pvalues/compute.js';
 import * as samplers from './samplers/compute.js';
@@ -29,6 +30,7 @@ export const ENTRIES = Object.freeze({
   [treeCovariance.ENTRY]: treeCovariance,
   [backpackFallacy.ENTRY]: backpackFallacy,
   [samplers.ENTRY]: samplers,
+  [jacobianAdjustment.ENTRY]: jacobianAdjustment,
 });
 
 const REQUEST_FIELDS = ['entry', 'params'];
