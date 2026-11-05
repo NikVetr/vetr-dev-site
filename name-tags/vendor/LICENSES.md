@@ -114,5 +114,5 @@ any purpose, commercial or otherwise, providing that:
 
 ## Elsewhere on the site
 
-- fontkit (glyph outlines) is loaded from `../../pocket-language-guide/vendor/fontkit.esm.js` (@pdf-lib/fontkit 1.1.1, MIT; see that directory's `VERSIONS.md`).
+- fontkit (glyph outlines) is loaded from `../../shared/vendor/fontkit.esm.js` (@pdf-lib/fontkit 1.1.1, MIT; see that directory's `VERSIONS.md` and `LICENSES.md`).
 - The fonts in `../fonts/` are under the SIL Open Font License 1.1: `Inter-OFL.txt` (Inter 4.000) and `SourceSerifPro-LICENSE.md` (Source Serif Pro 3.001).

@@ -4,7 +4,7 @@
 // is first imported (a file read in Node, a fetch in a browser or worker), so
 // everything after that is synchronous.
 
-import * as fontkit from '../../pocket-language-guide/vendor/fontkit.esm.js';
+import * as fontkit from '../../shared/vendor/fontkit.esm.js';
 
 /**
  * The parts of a fontkit glyph used here.
