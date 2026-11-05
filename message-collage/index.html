@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn a set of short messages, such as farewell or thank-you notes, into a dense collage card, each message in its own font, size and colour.">
+  <title>Message Collage</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23191b30'/%3E%3Cpath d='M6 8h12v3H6zM20 8h6v3h-6zM6 14h7v4H6zM15 14h11v4H15zM6 21h16v3H6z' fill='%23dc863b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Message Collage</h1>
+        <p class="tagline">Turn a set of short messages, such as farewell or thank-you notes, into one dense card, each message in its own font, size and colour. Your messages never leave this browser.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card" aria-labelledby="messages-heading">
+      <div class="card-head">
+        <h2 id="messages-heading">Messages</h2>
+        <span id="message-count" class="muted"></span>
+      </div>
+      <p class="muted">One message per line. Blank lines are skipped.</p>
+      <div class="toolbar">
+        <button id="paste" type="button">Paste</button>
+        <label class="file-button">Upload text file… <input id="upload" type="file" accept=".txt,.text,.csv,text/plain"></label>
+        <button id="load-example" type="button">Load example</button>
+        <button id="clear" type="button">Clear</button>
+      </div>
+      <p id="paste-note" class="muted" role="status" hidden></p>
+      <textarea id="messages" class="messages" rows="14" spellcheck="true" aria-label="Messages, one per line"></textarea>
+      <div id="message-issues" class="issues" role="alert" hidden></div>
+    </section>
+
+    <section class="card results-card" aria-labelledby="card-heading">
+      <div class="card-head">
+        <h2 id="card-heading">Card</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="generate" type="button" class="primary">Generate</button>
+        <button id="reroll" type="button" title="A new seed: new fonts, sizes, order and colours">New layout</button>
+        <button id="stop" type="button" disabled>Stop</button>
+        <progress id="progress" max="1" value="0" hidden></progress>
+      </div>
+      <div id="run-issues" class="issues" role="alert" hidden></div>
+      <p id="no-result" class="placeholder">The card appears here.</p>
+      <div id="result" hidden>
+        <p id="stale" class="stale-banner" hidden></p>
+        <figure id="preview" class="preview stale-dim" role="img" aria-label="The collage card"></figure>
+        <p id="summary" class="summary"></p>
+        <h3>Download</h3>
+        <div class="toolbar">
+          <button id="export-svg" type="button">SVG</button>
+          <button id="export-svg-text" type="button">SVG with selectable text</button>
+          <button id="export-pdf" type="button">PDF</button>
+          <span class="input-row png-row">
+            <button id="export-png" type="button">PNG</button>
+            <label class="inline-label">width
+              <input id="png-width" type="number" min="100" max="8000" step="100" value="1500" aria-describedby="png-note">
+              px
+            </label>
+          </span>
+        </div>
+        <p id="png-note" class="muted small"></p>
+        <p class="muted small">SVG, PDF and PNG draw the text as outlines, exactly as laid out. <em>SVG with selectable text</em> embeds the fonts instead, so its text can be searched and copied, and the file is larger.</p>
+        <div class="toolbar">
+          <span class="muted">Data:</span>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="fonts-card" class="card" aria-labelledby="fonts-heading">
+      <h2 id="fonts-heading">Fonts</h2>
+      <p class="muted">Each message draws one of the ticked families and one of the ticked styles at random. Every family must have every character of every message.</p>
+      <fieldset class="choice">
+        <legend>Families</legend>
+        <div id="families" class="family-list"></div>
+      </fieldset>
+      <fieldset class="choice">
+        <legend>Styles</legend>
+        <div id="styles" class="choice-list"></div>
+      </fieldset>
+    </section>
+
+    <section id="settings-card" class="card" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Card size and layout</h2>
+      <div class="settings">
+        <label>Card
+          <select id="size-preset">
+            <option value="5x5">Square</option>
+            <option value="5.83x4.13">A6 landscape</option>
+            <option value="4.13x5.83">A6 portrait</option>
+            <option value="7x5">7 × 5 landscape</option>
+            <option value="5x7">5 × 7 portrait</option>
+            <option value="8.27x5.83">A5 landscape</option>
+            <option value="11x8.5">Letter landscape</option>
+            <option value="custom">Custom</option>
+          </select>
+        </label>
+        <label>Width (in)
+          <input id="width-in" type="number" min="0.5" max="60" step="0.01" value="5">
+        </label>
+        <label>Height (in; it grows if needed)
+          <input id="height-in" type="number" min="0.5" max="60" step="0.01" value="5">
+        </label>
+        <label>Fill (text size)
+          <input id="fill" type="number" min="0.05" max="2" step="0.05" value="0.7">
+        </label>
+        <label>Layouts to try (best kept)
+          <input id="runs" type="number" min="1" max="1000" step="1" value="20">
+        </label>
+        <label>Seed
+          <span class="input-row">
+            <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
+            <button id="new-seed" type="button">New seed</button>
+          </span>
+        </label>
+        <label>Smallest relative size
+          <input id="size-min" type="number" min="0.1" step="0.1" value="1">
+        </label>
+        <label>Largest relative size
+          <input id="size-max" type="number" min="0.1" step="0.1" value="3">
+        </label>
+        <label>Gap between a message's lines
+          <input id="line-gap" type="number" min="0" step="0.05" value="0.2">
+        </label>
+        <label>Gap below each line
+          <input id="message-gap" type="number" min="0" step="0.05" value="0.4">
+        </label>
+        <label>Layout cells per inch (blank: automatic)
+          <input id="grid-res" type="number" min="1" max="400" step="1" placeholder="automatic">
+        </label>
+        <label class="check-label"><input id="shuffle" type="checkbox" checked> Shuffle the message order</label>
+      </div>
+      <p class="muted small">Gaps are fractions of each message's capital height. Fill sets one scale for all text: at 0.7, the messages set on single lines would cover 0.7² = 49% of the card.</p>
+    </section>
+
+    <section id="colours-card" class="card" aria-labelledby="colours-heading">
+      <h2 id="colours-heading">Colours</h2>
+      <div class="settings">
+        <label>Scheme
+          <select id="scheme"></select>
+        </label>
+        <label>Background
+          <span class="input-row">
+            <input id="background-pick" type="color" value="#191b30" aria-label="Background colour picker">
+            <input id="background" type="text" value="#191b30" spellcheck="false" aria-label="Background colour, #rrggbb">
+          </span>
+        </label>
+      </div>
+      <label class="stack-label">Text colours (#rrggbb, separated by spaces or commas)
+        <textarea id="palette" rows="2" spellcheck="false"></textarea>
+      </label>
+      <div id="swatches" class="swatches" aria-hidden="true"></div>
+      <p class="muted small">Each message takes a colour no nearby message has, as far as the palette allows.</p>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>Each message draws a font family and a style at random, and a size: a number between the smallest and largest relative size, divided by the average of all the messages' numbers. One scale then sets every message's text so that, set on single lines, the messages would cover <em>fill</em>² of the card.</p>
+        <p>The messages are then placed in a shuffled order, line by line, on a grid of small cells. A message's first line takes the top-left-most free block that its first word fits, and as many words as fit there. Each next line starts on the row just below, within the span of the line above, and lines up with its left or right edge when the cells allow. If a message runs into others, it starts again somewhere else. When the messages need more room than the card has, the card grows downward. A line ending close to the right edge is moved flush right.</p>
+        <p>Colours go to the messages in order: first colours not yet used, then colours whose nearest message of the same colour is farthest away, drawn at random with odds that favour distance.</p>
+        <p>This is tried for as many layouts as you ask, each with its own fonts, sizes and colours (the order stays the same), and the layout with the fewest empty cells is kept.</p>
+        <p>The seed fixes every random choice, so the same messages and settings always give the same card. This is a port of an R program, and gives exactly the R version's card for the same fonts, settings and seed. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <a href="fonts/LICENSES.md">Font licences</a>
+      <time datetime="2024-01-10">2024-01-10</time>
+    </div>
+  </footer>
+</body>
+</html>
