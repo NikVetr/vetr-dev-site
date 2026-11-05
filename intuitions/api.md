@@ -6,6 +6,7 @@ The entries are:
 
 - [`zscore-outliers`](#zscore-outliers): pooled vs stratified z-score outlier removal for two normal groups.
 - [`threshold-model`](#threshold-model): discrete traits from a hidden normal liability, one or two traits, and the polychoric fit of a contingency table.
+- [`correlation-geometry`](#correlation-geometry): correlations as angles between arrows, in five views: data as arrows, the cone of fixed correlation, the cosine-rule range of a third correlation, how far apart *k* arrows can be, and one matrix entry's feasible interval (a feasible-correlation calculator).
 
 ## Ways in
 
@@ -31,7 +32,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and, for the threshold model, the matching view). An invalid request throws and leaves the page unchanged. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the correlation-geometry panel, scrolled into view). An invalid request throws and leaves the page unchanged. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -142,6 +143,69 @@ For a table, `{mode: "table", fit}`. A fit has:
 - **The cos-π shortcut**, used by `rtet()` in the original R, equals the latent correlation only when both traits are split at their medians. It is reported for comparison, not used.
 - The original two-trait animation script summed a density grid to get its heatmap and indexed the grid with its axes swapped, so its cells applied trait 1's thresholds to trait 2 and vice versa. The cells here are exact and keep the traits apart.
 
+## correlation-geometry
+
+Centre a variable's observations and scale them to length 1: the variable is an arrow, and the correlation of two variables is the cosine of the angle between their arrows. A correlation matrix is valid (positive semidefinite) exactly when some unit arrows have those angles. `params.view` picks one of five computations, all in closed form; the other fields depend on the view. Angles are in degrees.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"arrows"`, `"cone"`, `"cosine-rule"`, `"equicorrelation"` or `"entry-range"` | `"arrows"` | Which computation. |
+
+### view "arrows"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `a`, `b` | arrays of 2 or 3 numbers (the same length), each −1,000 to 1,000, not all equal | `[1, 2, 4]`, `[1, 3, 2]` | Two variables' observations. |
+
+Result: `n`; `means`; `vectors`, the two centred unit arrows; `r`, their dot product (Pearson's *r*); `angle` = cos⁻¹ *r*; `circleAngles`, with 3 observations each arrow's position on the great circle where the plane *x* + *y* + *z* = 0 meets the unit sphere (measured from (1, −1, 0)/√2 toward (1, 1, −2)/√6; `null` for 2). With 2 observations every arrow is ±(√½, −√½), so *r* is ±1.
+
+### view "cone"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `b`, `a` | arrays of 3 numbers, not all equal | `[1, 0, -1]`, `[-1, 2, -1]` | Observations of B and of a third variable A (3 observations). |
+| `rBC` | number −1 to 1 | `0.6` | The correlation a new variable C must have with B. |
+
+C lies on the cone of half-angle cos⁻¹ `rBC` around B. With three observations it must also lie on the great circle of centred arrows, which the cone meets at two points. Result: `b`, `a` (unit arrows); `halfAngle`; `circle` (`centre` = `rBC`·B and `radius` of the cone's circle on the sphere); `meets`, C's two possible arrows (B turned by ± `halfAngle` within the plane); `rAB`; `withA`, A's correlation with each, and `anglesWithA`; `circleAngles` of `a`, `b` and `meets`. The two values in `withA` are the ends of the `cosine-rule` interval for `rAB` and `rBC`.
+
+### view "cosine-rule"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `rAB`, `rBC` | numbers −1 to 1 | `0.8`, `0.7` | Two correlations. |
+| `rAC` | number −1 to 1, or `null` | `null` | A value of the third to test. |
+
+Result: `angles` (`AB`, `BC`); `interval` = [cos(α + β), cos(α − β)] = `rAB`·`rBC` ∓ √((1 − `rAB`²)(1 − `rBC`²)), the values of r_AC that keep the 3 × 3 matrix PSD; its `centre` and `halfWidth`; `forcedSign`, `"positive"` or `"negative"` when the interval excludes 0 (which happens exactly when `rAB`² + `rBC`² > 1, with the sign of `rAB`·`rBC`), else `null`; `detMax`, det *R* at the centre; and `rAC`: `null`, or `{value, det, feasible, angle}` with det *R* = 1 − `rAB`² − `rBC`² − `rAC`² + 2`rAB``rBC``rAC`.
+
+### view "equicorrelation"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `k` | integer 2–100 (3–100 with `zeroPair`) | `3` | Number of variables. |
+| `r` | number −1 to 1 | `-0.25` | The common correlation of every pair (with `zeroPair`, of every pair but variables 1 and 2). |
+| `zeroPair` | boolean | `false` | Hold the correlation of variables 1 and 2 at 0. |
+
+Result: `range`, the values of `r` for which the matrix is PSD: [−1/(*k* − 1), 1], or with `zeroPair` [(*k* − 3) ∓ √(*k*² + 2*k* − 7)] / (4(*k* − 2)); `feasible`; `eigenvalues`, `{value, multiplicity}` from largest (1 + (*k* − 1)*r* once and 1 − *r* × (*k* − 1); with `zeroPair`, 1, 1 − *r* × (*k* − 3) and the two roots of λ² − (2 + *r*(*k* − 3))λ + 1 + *r*(*k* − 3) − 2(*k* − 2)*r*² = 0); `smallestEigenvalue`; `det`; `angle`; `widestAngle` (cos⁻¹ of the lower end); and `arrows`, for all pairs equal and feasible, `{along, across}`: each arrow's length along the common direction and across it (the parts across are the vertices of a regular simplex; at the lower limit `along` is 0), else `null`.
+
+### view "entry-range"
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `matrix` | square array of 2–20 rows; 1s on the diagonal, symmetric, entries −1 to 1, PSD | a 4 × 4 example | A correlation matrix. |
+| `cell` | `[row, column]`, two different indices counting from 0 | `[0, 3]` (for 2 or 3 variables, `[0, p − 1]`) | The entry to free. |
+| `observations` | integer 3–200 | `6` | *n* for the sample curve in `expectedWidth`. |
+
+With every other entry fixed, entry (*i*, *j*) can take any value in an interval: centre *c* = *r*ᵢᵀ*S*⁺*r*ⱼ ± √((1 − *r*ᵢᵀ*S*⁺*r*ᵢ)(1 − *r*ⱼᵀ*S*⁺*r*ⱼ)), where *S* is the correlation matrix of the other variables, *r*ᵢ and *r*ⱼ their correlations with *i* and *j*, and *S*⁺ the (pseudo-)inverse. Result: `p`; `cell`; `value`; `eigenvalues` (largest first) and `det` of the matrix; `singular` (smallest eigenvalue below 1e-9); `interval`, `centre` (the value that maximises det *R*), `width`, and `position` of `value` in the interval (0 at the lower end, `null` if the width is 0); `unexplained`, the shares of *i* and *j* the other variables leave unexplained (1 − *r*ᵢᵀ*S*⁺*r*ᵢ, 1 − *r*ⱼᵀ*S*⁺*r*ⱼ); `detOthers` (det *S*) and `detMax` (det *R* at the centre), so det *R* = `detOthers` × ((`width`/2)² − (*r* − `centre`)²); `widths`, every entry's interval width (`null` on the diagonal) and their `meanWidth`; and `expectedWidth`: `{observations, dimensions, uniform, sample}`, the expected width of one entry's interval for each *p* from 2 to 200, for a matrix drawn uniformly from all correlation matrices (LKJ, η = 1) and for the sample correlation matrix of `observations` observations of independent normal variables.
+
+### Method
+
+- **Eigenvalues** come from a cyclic Jacobi decomposition, accurate to rounding for these sizes. A matrix counts as PSD when its smallest eigenvalue is at least −1e-9.
+- **The cone's intersections** are B turned by ± cos⁻¹ `rBC` about the normal (1, 1, 1)/√3 of the centred plane. The original script (`correlation-teaching-figures.R`) found them by picking the nearest of 199 samples of the cone's circle, and its circle function divides by the arrow's third coordinate, so it fails when that is 0.
+- **The largest common correlation with one pair at 0** is the larger root of 2(*k* − 2)*c*² − (*k* − 3)*c* − 1 = 0 (from the 2 × 2 block of the matrix on 1₁ + 1₂ and the sum of the others); `corrmat_psd_puzzle.R` searched a grid of steps of 0.001.
+- **One entry's interval** follows the fixed `coef_bounds()` in `compound-symmetry_correlation_constraint.R`. The copy in `3-way_correlation_constraint.R` returns the interval's centre as its lower end (it sets the free Cholesky entry to 0 instead of to minus the remaining length). Using the pseudo-inverse keeps the formula right when the other variables are linearly dependent, as in a sample matrix with *p* ≥ *n*.
+- **Expected widths** are exact. Uniform over correlation matrices, the shares of *i* and *j* left unexplained by the other *p* − 2 are independent products of (1 − ρ²) over independent partial correlations ρ ~ 2 Beta(β, β) − 1, β = 1 + (*p* − 1 − *k*)/2 at C-vine level *k* (Lewandowski, Kurowicka and Joe, 2009), and E√(1 − ρ²) = Γ(β + ½)²/(β Γ(β)²). In a sample matrix of *n* observations each share is Beta((*n* − *p* + 1)/2, (*p* − 2)/2), and 0 once *p* ≥ *n* + 1. The dissertation figure (`valid_range_for_naivecorrelationproposal.R`) estimated the uniform curve by Monte Carlo, stepping the entry by 0.001 until the matrix stopped being positive definite.
+- **Facts the scripts state differently:** det *R* is the squared volume of the parallelotope the arrows span (√det *R* is the volume); a full-rank set of *p* centred arrows from *n* observations needs *p* ≤ *n* − 1, so a sample correlation matrix is singular once *p* ≥ *n* (at *p* = *n* each entry sits at an end of its interval, and the intervals have width 0 from *p* = *n* + 1); whitening column-vector data uses the inverse of the transposed (lower) Cholesky factor.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -171,8 +235,11 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `conflicting_fields` (a table and a model in one request)
 - `not_applicable` (`rho` or `sample` with one trait)
 - `empty_category` (a table row or column with no counts)
+- `no_spread` (a variable whose values are all equal has no direction)
+- `not_symmetric` (a matrix entry that differs from its mirror)
+- `not_positive_semidefinite` (no arrows have these correlations; the message gives the smallest eigenvalue)
 
-Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row) or `params.table[*][1]` (a column). An empty path means the request as a whole.
+Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]` or `params.cell[1]`. An empty path means the request as a whole.
 
 ## Worked examples
 
@@ -301,3 +368,56 @@ Both traits are split at their 69th percentile, so a latent correlation of 0.5 s
 ```
 
 The tetrachoric correlation is 0.66 ± 0.13. With margins of 75/25 and 85/15 the cos-π shortcut overstates it at 0.71, and the 0/1 codes correlate at only 0.40.
+
+**Can A and C be uncorrelated when A~B is 0.8 and B~C is 0.7?** `cosine.json`:
+
+```json
+{"entry": "correlation-geometry", "params": {"view": "cosine-rule", "rAB": 0.8, "rBC": 0.7, "rAC": 0}}
+```
+
+`node intuitions/cli.mjs cosine.json` prints:
+
+```json
+{
+  "entry": "correlation-geometry",
+  "params": { "view": "cosine-rule", "rAB": 0.8, "rBC": 0.7, "rAC": 0 },
+  "result": {
+    "view": "cosine-rule", "rAB": 0.8, "rBC": 0.7,
+    "angles": { "AB": 36.86989764584401, "BC": 45.5729959991943 },
+    "interval": [0.131514294287429, 0.9884857057125709],
+    "centre": 0.5599999999999999, "halfWidth": 0.42848570571257094,
+    "forcedSign": "positive", "detMax": 0.18359999999999996,
+    "rAC": { "value": 0, "det": -0.13000000000000006, "feasible": false, "angle": 90 }
+  }
+}
+```
+
+No: the arrows are 36.9° and 45.6° apart, so A and C are at most 82.4° apart and r_AC is at least 0.13. With r_AC = 0, det *R* would be −0.13.
+
+**The feasible-correlation calculator.** `entry.json` frees entry (0, 2) of a 3 × 3 matrix:
+
+```json
+{"entry": "correlation-geometry", "params": {"view": "entry-range", "matrix": [[1, 0.7, 0.5], [0.7, 1, 0.6], [0.5, 0.6, 1]], "cell": [0, 2]}}
+```
+
+`node intuitions/cli.mjs entry.json` prints (abridged: `expectedWidth`'s four arrays run to p = 200 and are cut here to their first three values):
+
+```json
+{
+  "entry": "correlation-geometry",
+  "params": { "view": "entry-range", "matrix": [[1, 0.7, 0.5], [0.7, 1, 0.6], [0.5, 0.6, 1]], "cell": [0, 2], "observations": 6 },
+  "result": {
+    "view": "entry-range", "p": 3, "cell": [0, 2], "value": 0.5,
+    "eigenvalues": [2.2037112930360805, 0.5135104761655941, 0.2827782307983255],
+    "det": 0.32000000000000006, "singular": false,
+    "interval": [-0.15131427428342809, 0.991314274283428],
+    "centre": 0.42, "width": 1.1426285485668561, "position": 0.5700140042014006,
+    "unexplained": [0.51, 0.64], "detOthers": 1, "detMax": 0.3264000000000001,
+    "widths": [[null, 1.3856406460551018, 1.1426285485668561], [1.3856406460551018, null, 1.2369316876852983], [1.1426285485668561, 1.2369316876852983, null]],
+    "meanWidth": 1.2550669607690854,
+    "expectedWidth": { "observations": 6, "dimensions": [2, 3, 4], "uniform": [2, 1.4410123895799147, 1.1249999999999998], "sample": [2, 1.5614022587660903, 1.1250000000000004] }
+  }
+}
+```
+
+Given r_AB = 0.7 and r_BC = 0.6, r_AC can be anything from −0.15 to 0.99; 0.5 sits 57% of the way up. The centre 0.42 = 0.7 × 0.6 is the completion with the largest determinant. A matrix that is not positive semidefinite, such as `[[1, 0.9, 0.9], [0.9, 1, -0.9], [0.9, -0.9, 1]]`, is rejected with exit status 1 and the issue `{"code": "not_positive_semidefinite", "path": "params.matrix", "message": "is not positive semidefinite (its smallest eigenvalue is -0.8), so no set of arrows has these correlations"}`.
