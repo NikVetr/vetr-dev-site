@@ -246,7 +246,7 @@ tbody tr + tr > * { border-top: 1px solid var(--border); }
   display: block;
   line-height: 1.35;
 }
-.predictions .probability-col { width: 5.6rem; }
+.predictions .probability-col { width: 6.8rem; }
 .predictions .probability { width: 100%; text-align: right; font-variant-numeric: tabular-nums; }
 .predictions .outcome-col { width: 6.4rem; }
 .predictions .outcome { width: 100%; }
