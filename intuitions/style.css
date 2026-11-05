@@ -716,3 +716,48 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .plot .conditional-line { stroke-width: 2; }
 /* Two figures side by side need more of the panel than one does. */
 @media (min-width: 900px) { .panel-body.wide { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+
+/* ---------- Probability puzzles ---------- */
+
+.plot .card-face { fill: var(--surface); stroke: var(--border); stroke-width: 1; }
+.plot .card-face.end { stroke: var(--ink); stroke-width: 2.6; }
+.plot .card-index { fill: var(--faint); font-size: 9.5px; font-variant-numeric: tabular-nums; }
+.plot .card-rank { font-size: 15px; font-weight: 600; }
+.plot .card-rank.small { font-size: 12.5px; }
+.plot .suit-red { fill: var(--alert); }
+.plot .suit-black { fill: var(--text); }
+.plot .card-count { fill: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+.plot .card-end-label { fill: var(--text); font-size: 9.5px; font-weight: 700; }
+.plot .walk-line { stroke-width: 1.7; stroke-opacity: 0.85; }
+.plot .skip-zone, .plot rect.skip-zone { fill: var(--faint); fill-opacity: 0.16; }
+.plot .threshold-curve { fill: none; stroke: var(--b); stroke-width: 1.6; stroke-dasharray: 5 3; }
+.plot .applicant-dot { fill: var(--faint); fill-opacity: 0.6; }
+.plot .best-ring { fill: none; stroke: var(--ink); stroke-width: 2; }
+.plot .box { fill: var(--surface); stroke: var(--faint); stroke-width: 1; }
+.plot .box.open { fill: var(--a-soft); stroke: var(--a); stroke-width: 1.4; }
+.plot .box.own { fill: color-mix(in srgb, var(--ok) 18%, var(--surface)); stroke: var(--ok); stroke-width: 2.4; }
+.plot .box.failed { stroke: var(--alert); stroke-width: 2.4; stroke-dasharray: 4 2; }
+.plot .box-number { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.plot .box-number.small { font-size: 8.5px; }
+.plot .box-ticket { fill: var(--text); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.plot .box-ticket.small { font-size: 10px; }
+.plot .loop-segment { fill: var(--faint); fill-opacity: 0.3; }
+.plot .loop-segment.long { fill: var(--alert-soft); stroke: var(--alert); stroke-width: 1.2; }
+.plot .loop-segment.mine { stroke: var(--ink); stroke-width: 2.4; }
+.plot .loop-label { fill: var(--text); font-size: 12px; font-variant-numeric: tabular-nums; }
+.plot .loop-label.long { fill: var(--alert); font-weight: 700; }
+.plot .trial { fill: none; stroke: var(--grid); stroke-width: 1; }
+.plot .trial.kept { fill: var(--a-soft); stroke: var(--a); stroke-width: 1.4; }
+.plot .coin-label { fill: var(--muted); font-size: 11px; }
+.plot .coin-label.two { fill: var(--text); font-weight: 700; }
+.plot .flip.head { fill: var(--a); }
+.plot .flip.tail { fill: var(--surface); stroke: var(--faint); stroke-width: 1.2; }
+.plot .flip.next { stroke: var(--ink); stroke-width: 2.4; }
+.plot .flip-letter { font-size: 8.5px; font-weight: 700; }
+.plot .flip-letter.head { fill: var(--surface); }
+.plot .flip-letter.tail { fill: var(--muted); }
+.plot .walk-line.shared { stroke: var(--ink); stroke-width: 2.6; stroke-opacity: 0.9; }
+dl.stats dd small.sim-line { display: block; }
+.panel-side input[id$="-replicates-number"] { width: 7.5rem; }
+.plot .box.current { stroke: var(--ink); stroke-width: 2.4; }
+.plot .box-order { fill: var(--text); font-size: 9.5px; font-weight: 600; font-variant-numeric: tabular-nums; }

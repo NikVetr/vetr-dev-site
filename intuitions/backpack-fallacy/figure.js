@@ -2,19 +2,12 @@
 // one colour (categorical slots 1–6, in the order of the sizes) and one marker in every
 // figure, and is named in the legend and beside its line.
 
-import { axisBottom, axisLeft, el, linePath, marker, niceTicks, scaleLinear, svgRoot, text, textWidth } from '../lib/plot.js';
+import { axisBottom, axisLeft, el, linePath, marker, niceTicks, scaleLinear, seriesMark, svgRoot, text, textWidth } from '../lib/plot.js';
 
 /** @typedef {[number, number]} Point */
-/** @typedef {import('../lib/plot.js').Shape} Shape */
 
-const SHAPES = /** @type {const} */ (['circle', 'triangle', 'square', 'diamond', 'circle', 'triangle']);
 const SUPERSCRIPT = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
 const sup = (/** @type {number} */ n) => String(n).split('').map((c) => SUPERSCRIPT[/** @type {keyof typeof SUPERSCRIPT} */ (c)]).join('');
-
-/** The marker of the k-th size: filled shapes first, then hollow ones. @param {number} k */
-export function sizeMark(k) {
-  return { shape: /** @type {Shape} */ (SHAPES[k]), mark: `${k >= 4 ? 'k-hollow' : 'k-mark'} k${k}` };
-}
 
 /** A p-value 10^−x as text: "1", "0.1", "0.01", "0.001", then "10⁻⁴". @param {number} x */
 export function pLabel(x) {
@@ -85,7 +78,7 @@ export function curvesFigure(result, { width, height, smaller, at, windowed = fa
     if (windowed && p.windowed) parts.push(el('path', { d: path(p.windowed), class: `k-line k${k} dashed` }));
     parts.push(el('path', { d: path(p.matched), class: `k-line k${k}` }));
     // Markers at a few points along the line and where it crosses the marked p-value.
-    const m = sizeMark(k);
+    const m = seriesMark(k);
     const every = Math.max(1, Math.round(xs.length / (compact ? 4 : 6)));
     for (let i = Math.round(every / 2) + k * 2; i < xs.length; i += every) parts.push(marker(m.shape, x(xs[i]), y(p.matched[i]), compact ? 3.2 : 4, m.mark));
     if (at <= upTo) {
@@ -100,7 +93,7 @@ export function curvesFigure(result, { width, height, smaller, at, windowed = fa
     labels.sort((a, b) => a.y - b.y);
     spread(labels, 15, upper + 12, height - bottom - 6);
     for (const l of labels) {
-      const m = sizeMark(l.k);
+      const m = seriesMark(l.k);
       parts.push(marker(m.shape, left + 12, l.y - 4, 3.6, m.mark), text(left + 20, l.y, l.text, { class: 'direct-label halo' }));
     }
   }
@@ -161,7 +154,7 @@ export function ridgeFigure(at, { width, height }) {
     const lx = (/** @type {number} */ v) => x(Math.log10(v));
     parts.push(el('line', { x1: lx(q.q05), x2: lx(q.q95), y1: base + 6, y2: base + 6, class: `k-bar k${k} thin` }),
       el('line', { x1: lx(q.q25), x2: lx(q.q75), y1: base + 6, y2: base + 6, class: `k-bar k${k}` }));
-    const m = sizeMark(k);
+    const m = seriesMark(k);
     parts.push(marker(m.shape, lx(q.q50), base + 6, 4.5, m.mark));
     parts.push(text(left - 8, base - 2, name(s.n), { class: 'direct-label', 'text-anchor': 'end' }));
   });

@@ -16,6 +16,7 @@ The entries are:
 - [`backpack-fallacy`](#backpack-fallacy): two *t*-tests with the same p-value and different group sizes: the chance that the smaller study has the larger true difference, at every p-value, when true means are Cauchy or normal, computed exactly; the script's sliding-window average; and each size's distribution of the true difference at one p-value.
 - [`samplers`](#samplers): Markov chain Monte Carlo on two-dimensional targets, every state, proposal and HMC trajectory returned for playback, in three views: Neal's funnel sampled in centred, non-centred or quantile coordinates by HMC or random-walk Metropolis; a multiplier move whose Hastings ratio is included, left out or reversed, against the targets those chains actually sample; and a correlated normal (with Gibbs) and an evil smiley; with acceptance, divergences, bulk ESS and KS distances to the exact marginals.
 - [`jacobian-adjustment`](#jacobian-adjustment): priors on transformed parameters, in two views: a sum, a sum and a difference, a square and two products, with the Jacobian term included or left out, giving the density over the sampled parameters and each quantity's distribution against the prior stated for it in closed form (or no distribution at all); and two marginal statements against one joint statement, what each makes of the third variable, and its posterior when one variable is data.
+- [`probability-puzzles`](#probability-puzzles): four puzzles with seeded play-throughs, exact answers and seeded simulations: the Kruskal count, hiring the best applicant by a cutoff on ranks or a threshold on known qualities, the 100 prisoners following loops or opening boxes at random, and a coin drawn from fair and two-headed ones that has shown *k* heads.
 
 ## Ways in
 
@@ -41,7 +42,7 @@ Each entry is also importable on its own: `intuitions/<entry>/compute.js` export
 
 | Member | Does |
 | --- | --- |
-| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance, backpack-fallacy, samplers or jacobian-adjustment, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur, backpack-fallacy and samplers pages' own controls run theirs in a Web Worker. |
+| `submit(request)` | Runs the request and returns the response. On an entry's own page it also shows the request there (controls, figures and the matching view: the threshold model's tab, or the panel of correlation-geometry, typical-set, dag-adjustment, null-pvalues, marchenko-pastur, trait-evolution, tree-covariance, backpack-fallacy, samplers, jacobian-adjustment or probability-puzzles, scrolled into view). An invalid request throws and leaves the page unchanged. It runs on the page's thread, so a large simulation blocks the page until it returns; the null-pvalues, marchenko-pastur, backpack-fallacy, samplers and probability-puzzles pages' own controls run theirs in a Web Worker. |
 | `getRequest()` | The request the page's controls currently describe (`null` on the index). |
 | `getResult()` | The response for that request (`null` on the index). |
 | `entries` | The entry names. |
@@ -699,6 +700,71 @@ Result: `view`, `statement`, `sdB`, `statements` (as text); `meant` and `stated`
 - **Against Stan.** Every model of both scripts was rerun with cmdstan 2.38 (4 chains, 10,000 warm-up and 10,000 draws, 20,000 for the normal product, seed 1), with the Jacobian as written and left out. The draws' means, second moments, cross moments and quantiles agree with the closed forms within 4 Monte Carlo standard errors; without the Jacobian, the log-normal product's log *a* has mean −0.992 ± 0.008 and the χ²(3) square's *a* is the χ(2) (mean 1.261 ± 0.006, against 1.253). The two improper targets cannot be sampled: without 2*a*, 34,632 of 40,000 transitions diverge and the draws of *a* collapse to 0; without |*a*|, *a* sits at 0 while *b*'s median wanders to −124. With *a* as data, the posterior means of the *b*'s are −*a* (two statements) or 0 (one, and the script's non-centred version), with variances 2 and 1.
 - **What the scripts do differently.** For *c* = *a* + *b*, *d* = *a* − *b* the script adds `log(abs(-1))`, 0; the map's determinant is −2. Both are constants, so the draws do not change. Its last transform, *d* = *abc* with log|*ab*|, is the normal product with one more factor and is not included. The marginal-vs-joint script's prior on the sample correlation, `t ~ student_t(n-2, 0, sqrt((n-2.0)/(n-4.0)))` on `t = r * sqrt((n-2.0)/1.0-r^2)`, is not ported: by operator precedence its *t* is *r*√(*n* − 2 − *r*²), not *r*√((*n* − 2)/(1 − *r*²)); its *r* omits the centring of a correlation; and the scale it gives is the *t* distribution's SD, √((*n* − 2)/(*n* − 4)), where a *t* statistic's scale is 1. Rerun as written, the posterior mean of *r* is −0.357; with the three corrected, −0.315. A prior on a many-to-one function of the 100 *b*'s has no Jacobian to add in any case: it reweights the posterior rather than giving *r* that distribution.
 
+## probability-puzzles
+
+Four puzzles, each with a seeded play-through (the first round drawn from `seed`), the exact answer where one exists, and a seeded simulation of `replicates` more rounds (0 skips it). `params.view` picks the puzzle; every view takes `seed` (integer 0–4,294,967,295, default `1`) and `replicates`. A simulated share is `{rate, se}`.
+
+### view "kruskal"
+
+card_trick.R's Kruskal count: kids stand on the first cards of a shuffled 52-card deck, and each moves on by the value of the card underfoot until the next move would leave the deck.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `view` | `"kruskal"`, `"secretary"`, `"prisoners"` or `"coins"` | `"kruskal"` | Which puzzle. |
+| `deck` | `"exhibit"` or `"kruskal"` | `"exhibit"` | What the cards count: the museum's (A–9 at face value; 10, J, Q, K count 1) or Kruskal's (A 1, 2–10 at face value, J, Q, K 5). |
+| `window` | integer 1–10 | `5` | Kids, one on each of the first cards. |
+| `replicates` | integer 0–200,000 | `10000` | Deals simulated. |
+
+Result: `deck`, `window`, `exact` (`null`: there is no closed form), `play` and `simulation`. `play` is `{cards, walks, ends, together, merged}`: the deal, each card `{rank, suit, value}`; each kid's cards stood on (0-based positions); their last cards; whether those are all one; and the first card on every kid's path (`null` when they do not all meet). `simulation` is `{replicates, allTogether, pairTogether, byWindow, distinctEnds, pairMeeting}`: the share of deals in which all `window` kids end together; the share in which two of them chosen at random do, as the script samples them; for every i from 1 to 52, the share in which kids on all of the first i cards end together; the distribution of the number of different last cards among the `window` kids; and for the random pair, `{cdf, never}`, the share that have met by each card, and the share that never meet.
+
+### view "secretary"
+
+choice_problem_strategies.R: *n* applicants in random order, each hired or turned away on the spot, the aim to hire the best.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `n` | integer 2–1,000 | `100` | Applicants. |
+| `strategy` | `"cutoff"`, `"half"` or `"optimal"` | `"cutoff"` | Ranks only: skip the first `cutoff`, then hire the first best so far. Knowing the distribution of qualities: hire the first best so far whose quality *x* (as a quantile) has *x*^(applicants still to come) ≥ ½, the script's rule with the best-so-far condition it leaves out; or Gilbert and Mosteller's optimal thresholds *b*_*k*, where Σ_{*j*=1}^{*k*} (*b*^−*j* − 1)/*j* = 1 with *k* still to come. |
+| `cutoff` | integer 0 to *n* − 1 | ⌊*n*/e⌋ | *r*, the applicants skipped by the cutoff rule (also simulated when another strategy is played). |
+| `replicates` | integer 0–100,000 | `10000` | Rounds simulated; *n* × `replicates` may be at most 40 million (`too_much_work`). |
+
+Result: `n`, `strategy`, `cutoff`; `exact`, `{cutoff, curve, best, limit, half, optimal, fullInformationLimit}`: the cutoff rule's chance (*r*/*n*) Σ_{*j*=*r*}^{*n*−1} 1/*j* at `cutoff` and for every *r* from 0 to *n* − 1, the best *r* `{cutoff, probability}`, 1/e, the two threshold rules' chances and their limit, 0.580164; `thresholds`, `{half, optimal}`, each rule's threshold for each applicant (0 for the last); `play`, `{values, records, best, pick, won, thresholds}`: the applicants' qualities as uniform quantiles, the best-so-far positions (0-based), the best, the one the strategy hires (−1 for none), whether it is the best, and the thresholds played (`null` for the cutoff rule); and `simulation`, `{replicates, cutoff, half, optimal}`, all three strategies on the same rounds.
+
+### view "prisoners"
+
+prisonerTicketBoxes.R: *n* boxes hold the tickets 1 to *n* in a random order; each of the first *m* prisoners opens up to *t* boxes to find their own number.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `boxes` | integer 2–200 | `100` | *n*. |
+| `prisoners` | integer 1 to `boxes` | `100` (at most `boxes`) | *m*; the script's variant has 5. |
+| `attempts` | integer 1 to `boxes` | `50` (at most `boxes`/2) | *t*; the script's variant has 80. |
+| `strategy` | `"loops"` or `"random"` | `"loops"` | For the play-through: start at the box with one's own number and open the box numbered by each ticket found, or open boxes at random. Both are simulated. |
+| `prisoner` | integer 1 to `prisoners` | `1` | Whose boxes the play-through opens. |
+| `replicates` | integer 0–100,000 | `10000` | Shuffles simulated. |
+
+Result: `boxes`, `prisoners`, `attempts`, `strategy`, `prisoner`; `exact`, `{loops, random}`: the chance that all *m* succeed by following the loops (no loop through one of them longer than *t*) and at random, (*t*/*n*)^*m*; `play`, `{tickets, loops, loopOf, opened, found, failing, longest}`: the ticket in each box, the shuffle's loops (from each loop's lowest box), each box's loop (0-based), the boxes opened in order, whether the prisoner's number turned up, how many of the *m* fail by the loops (`null` at random) and the longest loop; and `simulation`, `{replicates, loops, random}`.
+
+### view "coins"
+
+coinflipping.R: a coin drawn from fair and two-headed ones comes up heads *k* times in a row.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `fair` | integer 0–100 | `9` | Fair coins. |
+| `twoHeaded` | integer 0–100 | `1` | Two-headed coins; `fair` + `twoHeaded` must be at least 1. |
+| `heads` | integer 0–20 | `5` | *k*. |
+| `replicates` | integer 0–1,000,000 | `100000` | Draws simulated. |
+
+Result: `fair`, `twoHeaded`, `heads`; `exact`, `{prior, evidence, posterior, nextHead, curve}`: the chance of drawing a two-headed coin, of *k* heads, of a two-headed coin given them, *D*/(*D* + *F* 2^−*k*), and of heads next, and the same for *k* = 0 … 20; `play`, `{trials}`: the first 24 draws, each `{twoHeaded, flips, kept}`, flipped until a tail or *k* heads and once more if kept; and `simulation`, `{replicates, kept, nextHead, twoHeaded}`, among the kept draws.
+
+### Method
+
+- **Exact answers.** The cutoff rule's chance matches all 720 orders of 6 applicants. The threshold rules: with *G*_*i*(*x*) the chance that no one has been hired by applicant *i* and the best so far is below *x*, *G*_*i*(*x*) = *x* *G*_{*i*−1}(*x*) − [*x* > *t*_*i*] ∫_{*t*_*i*}^*x* *G*_{*i*−1}, and the rule wins with Σ_*i* ∫_{*t*_*i*}^1 *G*_{*i*−1}(*x*) *x*^(*n*−*i*) d*x*; trapezoids on 10,000 points even in log(−log *x*) are within 2 × 10⁻⁷ of 100,000. Two applicants give ¾ for both rules; Gilbert and Mosteller's gives 0.6087 for 10 and 0.5804 for 1,000, towards their limit of 0.5802. The prisoners: a loop through a marked element has length *k* with chance 1/*N*, its other *k* − 1 elements are a uniform subset of the rest, and the rest is a uniform permutation, so *q*(*N*, *M*) = (1/*N*) Σ_{*k*≤*t*} Σ_*j* *H*(*j*) *q*(*N* − *k*, *M* − 1 − *j*) with *H* hypergeometric; it matches every permutation of 3, 5 and 7 boxes, and for *t* ≥ *n*/2 the closed form 1 − Σ_{*k*>*t*} (1/*k*)(1 − C(*n* − *m*, *k*)/C(*n*, *k*)). The coins are Bayes' rule.
+- **Simulations.** Seeded with mulberry32: the play-through is the first round, the simulation's follow. Every simulated share agrees with its exact answer within 4 standard errors in the tests.
+- **Against R.** card_trick.R's second block, rerun with 10,000 deals, agrees with the simulation for every number of kids from 1 to 52 (five: 96.5% against 96.6%), and its coupling block's first shared cards (with `catchup = T`) with `pairMeeting`. choice_problem_strategies.R's `sim_apps_canon`, 100,000 runs: 36.97% ± 0.15% against 37.10% exactly. prisonerTicketBoxes.R as written (5 prisoners, 80 boxes): 78.07% ± 0.13% against 77.81%; with 100 and 50, 30.4% ± 0.3% against 31.18%. coinflipping.R's million draws: 89.03% ± 0.09% against 89.02%.
+- **What the scripts do differently.** card_trick.R's first block builds its deck as `c(rep(1:9, 4), rep(rep(1, 5), 4))`, 56 cards, counting the aces twice; its later blocks have 52. Its coupling block's default `catchup = F` counts two kids as coupled only when they stand on the same card after the same number of jumps, 17.5% of pairs, where the trick needs only that their paths meet, 98.4% (`catchup = T`). choice_problem_strategies.R's `sim_apps_omnisc` hires the first applicant with 1 − *x*^(*n*−*i*) < ½ whether or not they are the best so far, though one who is not cannot be the best: 54.1% as written, 58.0% with the condition, as `"half"` here (57.98% exactly). `sim_apps_sample` and `sim_apps_kde` leave out the same condition and estimate the distribution from a sample that includes the applicant; `sim_apps_kde` stops with "object 'i' not found" (it reads `i` outside its loops), and `sim_apps_bayes` repeats `sim_apps_canon`; none is ported. Its cutoff ⌊*n*/e⌋ = 36 for 100 applicants gives 37.101%; 37 gives 37.104%, the best. prisonerTicketBoxes.R and coinflipping.R are right.
+
 ## Errors
 
 An invalid request throws an `IntuitionsError` (in the CLI, JSON on stderr) that reports every problem at once:
@@ -743,7 +809,7 @@ Each issue has a `code`, a `path` and a `message`. The codes are:
 - `not_positive_definite` (a rate matrix with a variance of 0 or less or a correlation of ±1 or beyond)
 - `outside_region` (a bridge whose start or end is outside the region it must stay in)
 - `duplicate_size` (a group size listed twice)
-- `too_much_work` (a simulation of more than about a billion random draws, eigendecompositions of more than about 20 billion operations, or more path points than an entry allows)
+- `too_much_work` (a simulation of more than about a billion random draws, or than a puzzle allows, eigendecompositions of more than about 20 billion operations, or more path points than an entry allows)
 
 Paths are `entry`, a top-level field, `params`, or a parameter such as `params.z`, `params.thresholds[0][1]`, `params.sample.n`, `params.table[1]` (a row), `params.table[*][1]` (a column), `params.matrix[2][0]`, `params.cell[1]`, `params.components[0].scale`, `params.graph.edges[1].to` `params.adjust[0]`, `params.replicates`, `params.tree.newick`, `params.values.A` or `params.root.fraction`. An empty path means the request as a whole.
 

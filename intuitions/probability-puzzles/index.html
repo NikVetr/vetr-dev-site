@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Four probability puzzles to play through: the Kruskal card count, hiring the best applicant (the secretary problem), the 100 prisoners and their boxes, and a coin that came up heads five times. Each has the exact answer where one exists and a seeded simulation beside it.">
+  <title>Probability puzzles · Statistical intuitions</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Crect x='6' y='7' width='13' height='18' rx='2.5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Crect x='13' y='5' width='13' height='18' rx='2.5' fill='%232b66d5' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M19.5 10.5c-1.6-2.2-4.2 0-2.6 2l2.6 3 2.6-3c1.6-2-1-4.2-2.6-2z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../shared/theme.js"></script>
+  <script type="module" src="page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
+        <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Probability puzzles</span>
+      </nav>
+      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="entry-head">
+      <h1>Probability puzzles</h1>
+      <p class="lede">Four old puzzles with answers that are hard to believe until you watch them happen. Each panel deals, shuffles or flips with a seed you can change, plays the round through when you press Play, gives the exact answer where there is one, and checks it against thousands of seeded rounds.</p>
+      <nav class="panel-nav" aria-label="Panels">
+        <ol>
+          <li><a href="#kruskal">Where will the kids end up?</a></li>
+          <li><a href="#secretary">Hiring the best</a></li>
+          <li><a href="#prisoners">The 100 prisoners</a></li>
+          <li><a href="#coins">Five heads in a row</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- 1 -->
+    <section class="card panel" id="kruskal" aria-labelledby="kruskal-heading">
+      <h2 id="kruskal-heading"><span class="panel-number">1</span> Where will the kids end up?</h2>
+      <p class="panel-intro">At a science museum, kids lay a shuffled deck of 52 big cards end to end and each stands on one of the first five. In turn, each moves on by the value of the card underfoot, ace to 9 at face value and 10 and the court cards as 1, until the next move would run off the end. Before they start, the guide says where they will all stop. Every card's value decides where its walker goes next, so once two kids stand on the same card they walk on together; with steps this short, their paths almost always meet. The guide only has to walk the deck from the first card. This is the Kruskal count; card_trick.R simulates it.</p>
+      <div class="panel-body">
+        <figure id="kruskal-figures">
+          <ul class="legend" id="kruskal-legend"></ul>
+          <div id="kruskal-deal" class="plot-box stale-dim"></div>
+          <div class="playback" id="kruskal-playback"></div>
+          <h3 class="figure-title">How often they all end on one card</h3>
+          <div id="kruskal-curve" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Above, each kid's path to the jump shown; "=1" marks a card that counts other than its rank. Below, the share of seeded deals in which kids on each of the first cards all end together, with its 95% band. There is no closed form.</figcaption>
+          <p class="sim-status" id="kruskal-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>What the cards count</legend>
+            <div class="choice-stack" id="kruskal-deck">
+              <label><input type="radio" name="kruskal-deck" value="exhibit"> <span><span class="choice-main">The museum's</span> <span class="choice-sub">A to 9 at face value; 10, J, Q, K count 1</span></span></label>
+              <label><input type="radio" name="kruskal-deck" value="kruskal"> <span><span class="choice-main">Kruskal's</span> <span class="choice-sub">A counts 1, 2 to 10 at face value; J, Q, K count 5</span></span></label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="kruskal-window-number">Kids, on the first cards</label>
+              <input id="kruskal-window-number" type="number" min="1" max="10" step="1">
+            </div>
+            <input id="kruskal-window-range" type="range" min="1" max="10" step="1" aria-label="Kids, slider">
+          </div>
+          <div class="control stacked" data-run="kruskal"></div>
+          <div id="kruskal-issues" class="issues" role="alert" hidden></div>
+          <div class="verdict" id="kruskal-verdict" aria-live="polite"></div>
+          <p class="readout" id="kruskal-readout"></p>
+          <dl class="stats" id="kruskal-stats"></dl>
+          <div class="controls-foot"><button type="button" id="kruskal-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card panel" id="secretary" aria-labelledby="secretary-heading">
+      <h2 id="secretary-heading"><span class="panel-number">2</span> Hiring the best</h2>
+      <p class="panel-intro"><var>n</var> applicants come in a random order. Each is interviewed and then hired or turned away for good, judged only against those seen so far, and only the very best will do. Skip the first <var>r</var>, then hire the first who beats everyone before. That hires the best with chance (<var>r</var>/<var>n</var>) Σ<sub><var>j</var> = <var>r</var></sub><sup><var>n</var> − 1</sup> 1/<var>j</var>, highest near <var>r</var> = <var>n</var>/e, where it is close to 1/e ≈ 37% for any large <var>n</var>. Knowing how qualities are spread does better: hire the best so far once their quality is high enough for the number still to come. choice_problem_strategies.R tries hiring when the chance that no one later is better reaches ½.</p>
+      <div class="panel-body">
+        <figure id="secretary-figures">
+          <ul class="legend" id="secretary-legend"></ul>
+          <div id="secretary-applicants" class="plot-box stale-dim"></div>
+          <div class="playback" id="secretary-playback"></div>
+          <h3 class="figure-title">The chance of hiring the best</h3>
+          <div id="secretary-curve" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Qualities are drawn uniformly, as quantiles of whatever their distribution is. Below, the line is exact for every <var>r</var>; the hollow square marks the best <var>r</var>, and the triangle with its 95% bar the seeded rounds at the <var>r</var> chosen.</figcaption>
+          <p class="sim-status" id="secretary-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <fieldset class="control choice-list">
+            <legend>How to choose</legend>
+            <div class="choice-stack" id="secretary-strategy">
+              <label><input type="radio" name="secretary-strategy" value="cutoff"> <span><span class="choice-main">Skip <var>r</var>, then take the best so far</span> <span class="choice-sub">ranks only</span></span></label>
+              <label><input type="radio" name="secretary-strategy" value="half"> <span><span class="choice-main">Take the best so far once no one later is likely to beat them</span> <span class="choice-sub">knowing the distribution; the script's 50% rule</span></span></label>
+              <label><input type="radio" name="secretary-strategy" value="optimal"> <span><span class="choice-main">Gilbert and Mosteller's thresholds</span> <span class="choice-sub">knowing the distribution; the best possible</span></span></label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="secretary-n-number">Applicants, <var>n</var></label>
+              <input id="secretary-n-number" type="number" min="2" max="1000" step="1">
+            </div>
+            <input id="secretary-n-range" type="range" min="0.3" max="3" step="0.01" aria-label="Applicants, slider (log scale)">
+          </div>
+          <div class="control" id="secretary-cutoff-control">
+            <div class="control-head">
+              <label for="secretary-cutoff-number">Skipped first, <var>r</var></label>
+              <input id="secretary-cutoff-number" type="number" min="0" max="999" step="1">
+            </div>
+            <input id="secretary-cutoff-range" type="range" min="0" max="99" step="1" aria-label="Applicants skipped, slider">
+            <p class="hint" id="secretary-cutoff-hint"></p>
+          </div>
+          <div class="control stacked" data-run="secretary"></div>
+          <div id="secretary-issues" class="issues" role="alert" hidden></div>
+          <div class="verdict" id="secretary-verdict" aria-live="polite"></div>
+          <p class="readout" id="secretary-readout"></p>
+          <dl class="stats" id="secretary-stats"></dl>
+          <div class="controls-foot"><button type="button" id="secretary-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card panel" id="prisoners" aria-labelledby="prisoners-heading">
+      <h2 id="prisoners-heading"><span class="panel-number">3</span> The 100 prisoners</h2>
+      <p class="panel-intro">100 prisoners each have to find their own number among 100 shuffled tickets in 100 numbered boxes, opening at most 50 boxes each and telling the others nothing. If every one of them finds their number, all go free. Opening boxes at random, each succeeds with chance ½, and all of them together with chance 2<sup>−100</sup>. Instead, each starts at the box with their own number and opens next the box numbered by the ticket inside: they walk round the loop of the shuffle that ends at their own number, so they all succeed exactly when no loop is longer than 50. That happens with chance 1 − Σ<sub><var>k</var> = 51</sub><sup>100</sup> 1/<var>k</var> ≈ 31%. prisonerTicketBoxes.R plays a variant: 5 prisoners, 80 boxes each.</p>
+      <div class="panel-body">
+        <figure id="prisoners-figures">
+          <ul class="legend" id="prisoners-legend"></ul>
+          <div id="prisoners-boxes" class="plot-box stale-dim"></div>
+          <div class="playback" id="prisoners-playback"></div>
+          <h3 class="figure-title">The loops of this shuffle</h3>
+          <div id="prisoners-loops" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Above, the boxes the prisoner has opened, each with the ticket inside. Below, every loop of the shuffle as a stretch as long as the loop, longest first; the followed prisoner's loop is outlined.</figcaption>
+          <p class="sim-status" id="prisoners-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <span class="label" id="prisoners-preset-label">Start from</span>
+            <div class="control-row" role="group" aria-labelledby="prisoners-preset-label">
+              <button type="button" data-preset="classic">The puzzle: 100 and 50</button>
+              <button type="button" data-preset="script">The script's: 5 and 80</button>
+            </div>
+          </div>
+          <fieldset class="control choice-list">
+            <legend>Which boxes to open</legend>
+            <div class="segmented" id="prisoners-strategy">
+              <label><input type="radio" name="prisoners-strategy" value="loops"> Follow the loop</label>
+              <label><input type="radio" name="prisoners-strategy" value="random"> At random</label>
+            </div>
+          </fieldset>
+          <div class="control">
+            <div class="control-head">
+              <label for="prisoners-boxes-number">Boxes, <var>n</var></label>
+              <input id="prisoners-boxes-number" type="number" min="2" max="200" step="1">
+            </div>
+            <input id="prisoners-boxes-range" type="range" min="2" max="200" step="1" aria-label="Boxes, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="prisoners-prisoners-number">Prisoners, <var>m</var></label>
+              <input id="prisoners-prisoners-number" type="number" min="1" max="200" step="1">
+            </div>
+            <input id="prisoners-prisoners-range" type="range" min="1" max="200" step="1" aria-label="Prisoners, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="prisoners-attempts-number">Boxes each may open, <var>t</var></label>
+              <input id="prisoners-attempts-number" type="number" min="1" max="200" step="1">
+            </div>
+            <input id="prisoners-attempts-range" type="range" min="1" max="200" step="1" aria-label="Boxes each may open, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="prisoners-prisoner-number">Follow prisoner</label>
+              <input id="prisoners-prisoner-number" type="number" min="1" max="200" step="1">
+            </div>
+          </div>
+          <div class="control stacked" data-run="prisoners"></div>
+          <div id="prisoners-issues" class="issues" role="alert" hidden></div>
+          <div class="verdict" id="prisoners-verdict" aria-live="polite"></div>
+          <p class="readout" id="prisoners-readout"></p>
+          <dl class="stats" id="prisoners-stats"></dl>
+          <div class="controls-foot"><button type="button" id="prisoners-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card panel" id="coins" aria-labelledby="coins-heading">
+      <h2 id="coins-heading"><span class="panel-number">4</span> Five heads in a row</h2>
+      <p class="panel-intro">A bag holds 9 fair coins and 1 with heads on both sides. You draw one and flip it 5 times: 5 heads. What is the chance that the next flip is heads too? Five heads have chance 1/32 with a fair coin and 1 with the two-headed one, so by Bayes' rule the coin is two-headed with chance 0.1/(0.1 + 0.9/32) ≈ 78%, and the next flip is heads with chance 0.78 + 0.22 × ½ ≈ 89%. coinflipping.R checks it the slow way: draw a coin, flip it, and keep only the draws that started with five heads.</p>
+      <div class="panel-body">
+        <figure id="coins-figures">
+          <ul class="legend" id="coins-legend"></ul>
+          <div id="coins-trials" class="plot-box stale-dim"></div>
+          <div class="playback" id="coins-playback"></div>
+          <h3 class="figure-title">After <var>k</var> heads in a row</h3>
+          <div id="coins-curve" class="plot-box stale-dim"></div>
+          <figcaption class="caption">Above, the first draws of the seeded simulation, each flipped until a tail; a draw that starts with <var>k</var> heads is kept and flipped once more. Below, the exact chances for every <var>k</var>, with the simulation's estimates (hollow squares, 95% bars) at the <var>k</var> chosen.</figcaption>
+          <p class="sim-status" id="coins-status" aria-live="polite"></p>
+        </figure>
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head">
+              <label for="coins-fair-number">Fair coins</label>
+              <input id="coins-fair-number" type="number" min="0" max="100" step="1">
+            </div>
+            <input id="coins-fair-range" type="range" min="0" max="100" step="1" aria-label="Fair coins, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="coins-twoHeaded-number">Two-headed coins</label>
+              <input id="coins-twoHeaded-number" type="number" min="0" max="100" step="1">
+            </div>
+            <input id="coins-twoHeaded-range" type="range" min="0" max="100" step="1" aria-label="Two-headed coins, slider">
+          </div>
+          <div class="control">
+            <div class="control-head">
+              <label for="coins-heads-number">Heads in a row, <var>k</var></label>
+              <input id="coins-heads-number" type="number" min="0" max="20" step="1">
+            </div>
+            <input id="coins-heads-range" type="range" min="0" max="20" step="1" aria-label="Heads in a row, slider">
+          </div>
+          <div class="control stacked" data-run="coins"></div>
+          <div id="coins-issues" class="issues" role="alert" hidden></div>
+          <p class="readout" id="coins-readout" aria-live="polite"></p>
+          <dl class="stats" id="coins-stats"></dl>
+          <div class="controls-foot"><button type="button" id="coins-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes card" id="how" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">How it works</h2>
+      <div class="prose">
+        <h3>Seeded</h3>
+        <p>Every deal, line of applicants, shuffle and coin comes from shared/rng.js's mulberry32, so a seed gives the same play-through and the same simulation in every browser and in Node; the play-through is the first round drawn from it, and the simulation's rounds follow. Each panel runs in a Web Worker. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <h3>The exact answers</h3>
+        <p>Hiring by ranks only wins with (<var>r</var>/<var>n</var>) Σ<sub><var>j</var>=<var>r</var></sub><sup><var>n</var>−1</sup> 1/<var>j</var>. The threshold rules win with an integral over the best quality seen so far, taken applicant by applicant on a grid fine near 1, accurate to 2 × 10<sup>−7</sup>; with two applicants it gives the known ¾, and Gilbert and Mosteller's rule approaches their 58.02% as <var>n</var> grows. The prisoners' chance follows one loop at a time: a loop through a prisoner has each length up to <var>n</var> with chance 1/<var>n</var>, and the rest of the shuffle is again a uniform shuffle; it matches every permutation of up to 7 boxes exactly. The coins are Bayes' rule. The Kruskal count has no closed form, only the simulation.</p>
+        <h3>Checked against R</h3>
+        <p>The scripts were rerun with set seeds and more rounds. card_trick.R's 10,000 deals give 96.5% for five kids against 96.6% here, and agree at every number of kids; its coupling block's first shared cards agree too. choice_problem_strategies.R's skip-36 rule wins 36.97% ± 0.15% of 100,000 rounds, against 37.10% exactly. prisonerTicketBoxes.R's 5 prisoners with 80 boxes each go free in 78.07% ± 0.13%, against 77.81%. coinflipping.R's million draws give 89.03% against 89.02%.</p>
+        <h3>What the scripts do differently</h3>
+        <p id="scripts-text">card_trick.R's first block builds a 56-card deck: <code>rep(rep(1, 5), 4)</code> adds the ace again with 10, J, Q and K, so kids can end on cards 53 to 56. Its later blocks have 52. Its coupling block counts two kids as together only when they stand on the same card after the same number of jumps (<code>catchup = F</code>), which 17.5% of pairs do; the trick needs only that their paths meet, which 98.4% do, as <code>catchup = T</code> counts. choice_problem_strategies.R's 50% rule hires any applicant whose quality is high enough, even one worse than someone already seen, who cannot be the best: as written it wins 54.1%; hiring only a best so far, 58.0%, as here. Its estimated-distribution rules leave out the same condition, and the KDE one stops with "object 'i' not found"; they are not included. It skips ⌊<var>n</var>/e⌋ = 36, where 37 is best for 100 (37.101% against 37.104%). prisonerTicketBoxes.R and coinflipping.R are right.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="../">Statistical intuitions</a>
+      <a href="../api.md">API</a>
+      <time datetime="2019-10-22">2019-10-22</time>
+    </div>
+  </footer>
+</body>
+</html>

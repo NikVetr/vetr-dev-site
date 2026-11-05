@@ -14,6 +14,8 @@ import { installApi, onWidth } from './lib/page.js';
 import { compute as marchenkoPastur } from './marchenko-pastur/compute.js';
 import { spectrumFigure } from './marchenko-pastur/figure.js';
 import { compute as nullPvalues } from './null-pvalues/compute.js';
+import { compute as probabilityPuzzles } from './probability-puzzles/compute.js';
+import { boxesFigure } from './probability-puzzles/figure.js';
 import { compute as samplers } from './samplers/compute.js';
 import { chainFigure, chainLayer } from './samplers/figure.js';
 import { pairThumbnail } from './null-pvalues/figure.js';
@@ -105,6 +107,10 @@ const thumbs = [
       const params = /** @type {any} */ ({ view: 'transform', transform: 'product-normal', jacobian: true });
       return sampledFigure(jacobianAdjustment(params), jointLogDensity(params), { width, height: 150, id: 'thumb-jacobian', compact: true });
     },
+  },
+  {
+    box: /** @type {HTMLElement} */ (document.getElementById('thumb-probability-puzzles')),
+    draw: (/** @type {number} */ width) => boxesFigure(probabilityPuzzles({ view: 'prisoners', seed: 20, replicates: 0 }), { width, t: Infinity, columns: 20 }),
   },
 ];
 for (const { box, draw } of thumbs) onWidth(box, (width) => { box.innerHTML = draw(width); });

@@ -5,9 +5,9 @@
 import { formatNumber } from '../lib/format.js';
 import { bindPair, draggable, installApi, onWidth, setInvalid, workerRunner } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
-import { swatch } from '../lib/plot.js';
+import { seriesMark, swatch } from '../lib/plot.js';
 import { atPoint, DEFAULTS, ENTRY, resolveParams } from './compute.js';
-import { curvesFigure, pLabel, ridgeFigure, sizeMark } from './figure.js';
+import { curvesFigure, pLabel, ridgeFigure } from './figure.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 const input = (/** @type {string} */ id) => /** @type {HTMLInputElement} */ ($(id));
@@ -34,7 +34,7 @@ function renderCurves() {
   box.innerHTML = curvesFigure(result, { width, height: width < 520 ? 320 : 380, smaller: state.smaller, at: state.at, windowed: state.windowed });
   const k = (/** @type {number} */ n) => result.studies.findIndex((/** @type {any} */ s) => s.n === n);
   const larger = result.studies.filter((/** @type {any} */ s) => s.n > state.smaller);
-  $('curves-legend').innerHTML = larger.map((/** @type {any} */ s) => `<li>${swatch({ line: `k-line k${k(s.n)}`, ...sizeMark(k(s.n)) })} ${state.smaller.toLocaleString('en-US')} vs ${s.n.toLocaleString('en-US')} per group</li>`).join('')
+  $('curves-legend').innerHTML = larger.map((/** @type {any} */ s) => `<li>${swatch({ line: `k-line k${k(s.n)}`, ...seriesMark(k(s.n)) })} ${state.smaller.toLocaleString('en-US')} vs ${s.n.toLocaleString('en-US')} per group</li>`).join('')
     + `<li>${swatch({ line: 'context-line' })} the other pairs</li>`
     + (state.windowed ? `<li>${swatch({ line: 'ink-line dashed' })} the script's sliding average</li>` : '');
 }
@@ -46,7 +46,7 @@ function renderAt() {
   const at = result.at;
   box.innerHTML = ridgeFigure(at, { width, height: Math.max(220, 60 + at.studies.length * 62) });
   const rows = at.studies.map((/** @type {any} */ s, /** @type {number} */ k) => {
-    const m = sizeMark(k);
+    const m = seriesMark(k);
     return `<tr><th scope="row"><span class="group-tag">${swatch(m)} ${s.n.toLocaleString('en-US')}</span></th><td>${formatNumber(s.t, s.t < 100 ? 2 : 0)}</td><td>${sd(s.quantiles.q50)} SD</td><td>${sd(s.quantiles.q25)}–${sd(s.quantiles.q75)}</td></tr>`;
   });
   /** @type {HTMLElement} */ ($('at-table').querySelector('tbody')).innerHTML = rows.join('');

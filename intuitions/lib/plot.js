@@ -228,6 +228,18 @@ export function marker(shape, x, y, size, className) {
   return el('path', { d: `M${r2(x)} ${r2(y - s * 1.25)}L${r2(x + s * 1.15)} ${r2(y + s * 0.8)}L${r2(x - s * 1.15)} ${r2(y + s * 0.8)}Z`, class: className });
 }
 
+const SERIES_SHAPES = /** @type {const} */ (['circle', 'triangle', 'square', 'diamond']);
+
+/**
+ * The marker of the k-th series: the categorical colour k mod 6 (style.css's k0–k5) and a
+ * shape, filled for the first four and hollow after, so no two of the first ten share both.
+ * @param {number} k
+ * @returns {{ shape: Shape, mark: string }}
+ */
+export function seriesMark(k) {
+  return { shape: SERIES_SHAPES[k % 4], mark: `${k >= 4 ? 'k-hollow' : 'k-mark'} k${k % 6}` };
+}
+
 /**
  * A small legend swatch: a line sample (optional) with a marker on it.
  * @param {{ line?: string, shape?: Shape, mark?: string, fill?: string }} options classes

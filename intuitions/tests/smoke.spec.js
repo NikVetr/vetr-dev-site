@@ -14,8 +14,8 @@ const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.e
 
 test('the index lists every entry with thumbnails and exposes submit', async ({ page }) => {
   const errors = await open(page, './');
-  await expect(page.locator('.entry-card')).toHaveCount(12);
-  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(12);
+  await expect(page.locator('.entry-card')).toHaveCount(13);
+  await expect(page.locator('.entry-card .thumb svg')).toHaveCount(13);
   const out = await page.evaluate(() => /** @type {any} */ (window).Intuitions.submit({ entry: 'zscore-outliers', params: { z: 3 } }).params.z);
   expect(out).toBe(3);
   expect(errors).toEqual([]);
@@ -556,9 +556,50 @@ test('priors on transformed parameters: transforms, the Jacobian term, the χ² 
   expect(errors).toEqual([]);
 });
 
+test('probability puzzles: deals, playback, strategies, presets, invalid fields and the API', async ({ page }) => {
+  const errors = await open(page, 'probability-puzzles/');
+  for (const v of ['kruskal', 'secretary', 'prisoners', 'coins']) await expect(page.locator(`#${v}-figures`)).not.toHaveAttribute('data-stale', 'true');
+  // The Kruskal count: the default deal ends together; Play from the start moves the kids jump by jump.
+  await expect(page.locator('#kruskal-verdict')).toContainText('All on card 48');
+  await expect(page.locator('#kruskal-deal .card-face')).toHaveCount(52);
+  await page.locator('#kruskal-restart').click();
+  await expect(page.locator('#kruskal-time-out')).toHaveText(/^0 of/);
+  await page.locator('#kruskal-play').click();
+  await expect(page.locator('#kruskal-time-out')).toHaveText(/^1 of/, { timeout: 3000 });
+  await page.locator('#kruskal-play').click();
+  await page.locator('input[name="kruskal-deck"][value="kruskal"]').check();
+  await expect(page.locator('#kruskal-readout')).toContainText('Court cards worth 5');
+  // Hiring: the cutoff control is only for the cutoff rule; the best rule beats the 50% rule.
+  await expect(page.locator('#secretary-cutoff-number')).toHaveValue('36');
+  await page.locator('input[name="secretary-strategy"][value="optimal"]').check();
+  await expect(page.locator('#secretary-cutoff-control')).toBeHidden();
+  await expect(page.locator('#secretary-readout')).toContainText('58.29%');
+  await expect(page.locator('#secretary-applicants .threshold-curve')).toHaveCount(1);
+  // The prisoners: the script's preset, and an invalid number of attempts.
+  await page.getByRole('button', { name: "The script's: 5 and 80" }).click();
+  await expect(page.locator('#prisoners-stats')).toContainText('77.81%');
+  await page.locator('#prisoners-attempts-number').fill('150');
+  await expect(page.locator('#prisoners-attempts-number')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#prisoners-figures')).toHaveAttribute('data-stale', 'true');
+  // The coins: Bayes' rule at the script's numbers, and with no two-headed coin.
+  await expect(page.locator('#coins-readout')).toContainText('89.02%');
+  await page.locator('#coins-twoHeaded-number').fill('0');
+  await expect(page.locator('#coins-readout')).toContainText('heads with chance 50.00%');
+  const api = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    const r = app.submit({ entry: 'probability-puzzles', params: { view: 'prisoners', boxes: 10, prisoners: 4, attempts: 3, replicates: 100 } });
+    return { exact: r.result.exact.loops, request: app.getRequest() };
+  });
+  expect(api.exact).toBeCloseTo(0.05734126984126982, 12);
+  expect(api.request.params).toEqual({ view: 'prisoners', boxes: 10, prisoners: 4, attempts: 3, strategy: 'loops', prisoner: 1, seed: 1, replicates: 100 });
+  await expect(page.locator('#prisoners-boxes-number')).toHaveValue('10');
+  await expect(page.locator('#prisoners-boxes .box')).toHaveCount(10);
+  expect(errors).toEqual([]);
+});
+
 test('every page and view fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/', 'samplers/', 'jacobian-adjustment/']) {
+  for (const path of ['./', 'zscore-outliers/', 'correlation-geometry/', 'typical-set/', 'dag-adjustment/', 'null-pvalues/', 'marchenko-pastur/', 'trait-evolution/', 'tree-covariance/', 'backpack-fallacy/', 'samplers/', 'jacobian-adjustment/', 'probability-puzzles/']) {
     await open(page, path);
     expect(await overflow(page)).toBe(0);
   }
