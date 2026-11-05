@@ -31,6 +31,7 @@ const el = {
   generate: byId('generate'), reroll: byId('reroll'), stop: byId('stop'), progress: byId('progress'), status: byId('status'),
   runIssues: byId('run-issues'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), preview: byId('preview'),
   summary: byId('summary'), pngWidth: byId('png-width'), pngNote: byId('png-note'),
+  undoNote: byId('undo-note'), undoText: byId('undo-text'),
 };
 
 /** @type {Result | null} */
@@ -200,6 +201,7 @@ function countMessages() {
 }
 el.messages.addEventListener('input', countMessages);
 for (const card of ['fonts-card', 'settings-card', 'colours-card']) byId(card).addEventListener('input', showStale);
+for (const input of [el.messages, byId('fonts-card'), byId('settings-card'), byId('colours-card')]) input.addEventListener('input', dropUndo);
 
 // ---------- the worker ----------
 
@@ -415,6 +417,7 @@ let exampleText = '';
 
 /** @param {string} text */
 function addMessages(text) {
+  dropUndo();
   const now = el.messages.value === exampleText ? '' : el.messages.value.replace(/\s+$/, '');
   el.messages.value = now ? `${now}\n${text}` : text;
   countMessages();
@@ -437,12 +440,45 @@ el.upload.addEventListener('change', async () => {
 });
 async function loadExample() {
   const response = await fetch('examples/request.json');
+  const before = { text: el.messages.value, request: currentRequest() };
   loadRequest(await response.json());
   exampleText = el.messages.value;
+  const n = parseMessages(before.text).length;
+  offerUndo(before, `Replaced your ${n} message${n === 1 ? '' : 's'} and the settings with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
 byId('clear').addEventListener('click', () => {
+  const before = { text: el.messages.value, request: currentRequest() };
   el.messages.value = '';
+  countMessages();
+  const n = parseMessages(before.text).length;
+  offerUndo(before, `Cleared ${n} message${n === 1 ? '' : 's'}.`);
+});
+
+// Load example and Clear replace the messages (Load example the settings too) at once, and offer
+// them back: Undo restores them, until the messages or settings are next changed.
+
+/** The messages, as typed, and the settings that Load example or Clear replaced. @type {{ text: string, request: object } | null} */
+let replaced = null;
+
+/** @param {{ text: string, request: object }} before the page's inputs before the replacement @param {string} note what it did, shown beside Undo */
+function offerUndo(before, note) {
+  const changed = before.text.trim() !== '' && (before.text !== el.messages.value || JSON.stringify(before.request) !== JSON.stringify(currentRequest()));
+  replaced = changed ? before : null;
+  el.undoText.textContent = note;
+  el.undoNote.hidden = !changed;
+}
+
+function dropUndo() {
+  replaced = null;
+  el.undoNote.hidden = true;
+}
+
+byId('undo-replace').addEventListener('click', () => {
+  if (!replaced) return;
+  loadRequest(replaced.request);
+  el.messages.value = replaced.text;
+  dropUndo();
   countMessages();
 });
 
@@ -543,6 +579,7 @@ exportButton(byId('export-request'), async () => download('message-collage-reque
   async submit(request) {
     const { result: next, svg } = await run(request);
     loadRequest(next.request);
+    dropUndo();
     showResult(next, svg, request, pageInputs());
     return next;
   },

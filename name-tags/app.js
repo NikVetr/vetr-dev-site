@@ -26,7 +26,7 @@ const el = {
   logoColorsField: byId('logo-colors-field'), logoColors: byId('logo-colors'), logoStatus: byId('logo-status'), restarts: byId('restarts'), seed: byId('seed'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
-  preview: byId('preview'), downloads: byId('downloads'),
+  preview: byId('preview'), downloads: byId('downloads'), undoNote: byId('undo-note'), undoText: byId('undo-text'),
 };
 
 /** @type {Result | null} */
@@ -200,6 +200,7 @@ el.namesFile.addEventListener('change', async () => {
     el.names.value = parseNamesText(text).join('\n');
   }
   el.namesFile.value = '';
+  dropUndo();
   showInputs();
 });
 
@@ -481,13 +482,47 @@ byId('export-request').addEventListener('click', () => {
 async function loadExample() {
   const response = await fetch('examples/historical-figures.txt');
   if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status})`);
-  extraFields = {};
-  el.names.value = parseNamesText(await response.text()).join('\n');
-  showInputs();
+  const n = parseNamesText(el.names.value).length;
+  replaceNames(parseNamesText(await response.text()).join('\n'), {}, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
 byId('clear-names').addEventListener('click', () => {
-  el.names.value = '';
+  const n = parseNamesText(el.names.value).length;
+  replaceNames('', extraFields, `Cleared ${n} name${n === 1 ? '' : 's'}.`);
+});
+
+// Load example and Clear replace the names at once, and offer them back: Undo restores them,
+// until the names are next changed.
+
+/** The names (and request fields the inputs do not show) that Load example or Clear replaced. @type {{ names: string, extraFields: Record<string, any> } | null} */
+let replaced = null;
+
+/**
+ * @param {string} names the names text to show
+ * @param {Record<string, any>} extra the request fields the inputs do not show, from then on
+ * @param {string} note what the replacement did, shown beside Undo
+ */
+function replaceNames(names, extra, note) {
+  const changed = el.names.value.trim() !== '' && el.names.value !== names;
+  replaced = changed ? { names: el.names.value, extraFields } : null;
+  el.undoText.textContent = note;
+  el.undoNote.hidden = !changed;
+  el.names.value = names;
+  extraFields = extra;
+  showInputs();
+}
+
+function dropUndo() {
+  replaced = null;
+  el.undoNote.hidden = true;
+}
+el.names.addEventListener('input', dropUndo);
+
+byId('undo-replace').addEventListener('click', () => {
+  if (!replaced) return;
+  el.names.value = replaced.names;
+  extraFields = replaced.extraFields;
+  dropUndo();
   showInputs();
 });
 
@@ -503,6 +538,7 @@ byId('clear-names').addEventListener('click', () => {
   async submit(request) {
     const next = await run(request);
     loadRequest(request);
+    dropUndo();
     showResult(next, request, pageInputs());
     return next;
   },

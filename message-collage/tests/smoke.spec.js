@@ -84,3 +84,19 @@ test('a phone-width page has no sideways scroll and shows the card after the mes
   expect(preview && messages && preview.y > messages.y).toBe(true);
   expect(preview && preview.width).toBeLessThanOrEqual(390);
 });
+
+test('Clear and Load example offer the messages and settings back', async ({ page }) => {
+  await open(page);
+  await page.locator('#messages').fill('Thank you\nGood luck');
+  await page.locator('#fill').fill('0.5');
+  await page.getByRole('button', { name: 'Clear' }).click();
+  await expect(page.locator('#undo-note')).toContainText('Cleared 2 messages.');
+  await page.getByRole('button', { name: 'Undo' }).click();
+  await expect(page.locator('#messages')).toHaveValue('Thank you\nGood luck');
+  await page.getByRole('button', { name: 'Load example' }).click();
+  await expect(page.locator('#undo-note')).toContainText('Replaced your 2 messages and the settings with the example.');
+  await page.getByRole('button', { name: 'Undo' }).click();
+  await expect(page.locator('#messages')).toHaveValue('Thank you\nGood luck');
+  await expect(page.locator('#fill')).toHaveValue('0.5');
+  await expect(page.locator('#undo-note')).toBeHidden();
+});

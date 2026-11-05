@@ -113,3 +113,17 @@ test('fits a phone screen without sideways scrolling', async ({ page }) => {
   const preview = await page.locator('#preview').boundingBox();
   expect(preview && preview.width <= 390).toBe(true);
 });
+
+test('Clear and Load example offer the names back', async ({ page }) => {
+  await open(page);
+  await page.locator('#names').fill('My own\nnames here');
+  await page.getByRole('button', { name: 'Clear' }).click();
+  await expect(page.locator('#undo-note')).toContainText('Cleared 2 names.');
+  await page.getByRole('button', { name: 'Undo' }).click();
+  await expect(page.locator('#names')).toHaveValue('My own\nnames here');
+  await expect(page.locator('#undo-note')).toBeHidden();
+  await page.getByRole('button', { name: 'Load example' }).click();
+  await expect(page.locator('#undo-note')).toContainText('Replaced your 2 names with the example.');
+  await page.locator('#names').fill('An edit');
+  await expect(page.locator('#undo-note')).toBeHidden();
+});
