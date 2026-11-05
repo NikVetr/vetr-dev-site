@@ -19,8 +19,7 @@ import { renderSheet } from './svg.js';
 import { assignCells } from './tray.js';
 import { missingChars } from './font.js';
 
-export { DEFAULTS, DEFAULT_HERSHEY_EKG, DEFAULT_STYLE, NameTagsError, logoType } from './request.js';
-export { FONTS } from './font.js';
+export { DEFAULTS, DEFAULT_HERSHEY_EKG, DEFAULT_STYLE, FONTS, NameTagsError, logoType } from './request.js';
 export { TRAY_PRESETS } from './tray.js';
 export { parseNamesCsv, parseNamesText, splitNameLines } from './names.js';
 

@@ -9,6 +9,7 @@
 // a fetch in a browser or worker), so everything after that is synchronous.
 
 import * as fontkit from '../../pocket-language-guide/vendor/fontkit.esm.js';
+import { FONTS } from './request.js';
 
 /**
  * The parts of fontkit used here. _getContours() is fontkit's own decoding
@@ -20,11 +21,6 @@ import * as fontkit from '../../pocket-language-guide/vendor/fontkit.esm.js';
  * @typedef {{ char: string, rings: Ring[] }} GlyphOutline
  */
 
-/** The bundled families; face 1 is the plain face, 2 bold, as R's `font`. */
-export const FONTS = /** @type {const} */ ({
-  Inter: { 1: 'fonts/Inter-Regular.ttf', 2: 'fonts/Inter-Bold.ttf' },
-  'Source Serif Pro': { 1: 'fonts/SourceSerifPro-Regular.ttf', 2: 'fonts/SourceSerifPro-Bold.ttf' },
-});
 
 /** @param {string} file */
 async function load(file) {

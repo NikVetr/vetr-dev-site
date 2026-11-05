@@ -3,7 +3,6 @@
 // same things with the same messages. Field names and defaults follow the R
 // version's nametag_defaults(), default_style() and default_hershey_ekg().
 
-import { FONTS } from './font.js';
 import { SCRIPT_CHARS } from './hershey-data.js';
 import { splitNameLines, toLower } from './names.js';
 import { TRAY_PRESETS, trayGeometry } from './tray.js';
@@ -32,6 +31,12 @@ export class NameTagsError extends Error {
     return { error: { code: this.code, message: this.message, issues: this.issues } };
   }
 }
+
+/** The bundled families; face 1 is the plain face, 2 bold, as R's `font`. */
+export const FONTS = /** @type {const} */ ({
+  Inter: { 1: 'fonts/Inter-Regular.ttf', 2: 'fonts/Inter-Bold.ttf' },
+  'Source Serif Pro': { 1: 'fonts/SourceSerifPro-Regular.ttf', 2: 'fonts/SourceSerifPro-Bold.ttf' },
+});
 
 export const R_REPOSITORY = 'the R version (laser-cut name tags, nametag_submit())';
 

@@ -17,6 +17,7 @@ import { boundaryLength, bounds, erode, mapRings, polygonArea, polygonDistance }
 import { dnaShape } from './helix.js';
 import { hasDescender, toUpper } from './names.js';
 import { brentMin } from './optim.js';
+import { NameTagsError } from './request.js';
 import { mean, median, roundHalfEven, rsum } from './rmath.js';
 
 /**
@@ -210,7 +211,7 @@ function applySmallcaps(line, style, scaleBy) {
     const [fx0, fy0, fx1, fy1] = glyphsBounds([first]);
     const remove = 1 - (1 * 0.5 + scaleBy * 0.5);
     const thinned = erode(first, remove * strokeWidth(first)).flat();
-    if (!thinned.length) throw new Error('thinning the first small capital removed it entirely');
+    if (!thinned.length) throw new Error('thinning the first small capital removed it entirely'); // cannot happen: at most half the stroke goes
     // back onto the original glyph's box
     const [tx0, ty0, tx1, ty1] = bounds(thinned);
     glyphs[0] = mapRings(thinned, (x, y) => [(x - tx0) / (tx1 - tx0) * (fx1 - fx0) + fx0, (y - ty0) / (ty1 - ty0) * (fy1 - fy0) + fy0]);
@@ -252,7 +253,8 @@ function lineGlyphs(text, center, cex, family, style, smallcapsOn, scaleBy, devi
   let line = placeText(text, center, cex, family, 1, device);
   const visible = [...text.replaceAll(' ', '')];
   if (visible.length !== line.glyphs.length) {
-    throw new Error(`Expected one outline per visible character in "${text}", got ${line.glyphs.length}`);
+    const message = `"${text}" has characters with no outline other than spaces; remove them`;
+    throw new NameTagsError('unsupported_character', message, [{ code: 'unsupported_character', path: 'names', message }]);
   }
   if (style.raise_J && visible.includes('J') && visible.some((c) => c !== 'J')) {
     const baseline = median(line.glyphs.flatMap((g, i) => (visible[i] === 'J' ? [] : [glyphsBounds([g])[1]])));
@@ -393,7 +395,10 @@ export function layoutDnaTag(m, center, cell, style, meanIar2f, unif, warn) {
     ntwists = roundHalfEven(info.ar2Factor);
     if (ntwists >= 1) break;
     const name = m.metrics.map((x) => x.text).join(' ');
-    if (attempt === 3) throw new Error(`No fit with a whole helix twist for "${name}" after ${restarts} restarts; raise style.optimizer.restarts`);
+    if (attempt === 3) {
+      const message = `no fit with a whole helix twist for "${name}" after ${restarts} restarts; raise style.optimizer.restarts`;
+      throw new NameTagsError('fit_failed', message, [{ code: 'fit_failed', path: 'style.optimizer.restarts', message }]);
+    }
     restarts *= 2;
     warn(`"${name}": fit had no whole helix twist; retrying with ${restarts} restarts`);
   }

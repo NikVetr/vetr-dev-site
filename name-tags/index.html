@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lay out names, one per tag, on a laser-cut tray, each name fitted around a decoration, and download the sheets as SVG for the laser cutter.">
+  <title>Name Tags</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Crect x='5' y='9' width='22' height='14' rx='2' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M9 14h9M12 18h11' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Before first paint, so the page never flashes the wrong theme.
+    {
+      let theme = null;
+      try { theme = localStorage.getItem('name-tags:theme'); } catch {}
+      document.documentElement.dataset.theme = theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1>Name Tags</h1>
+        <p class="tagline">Lay out names, one per tag, in the cells of a laser-cut tray. Each name is fitted around a decoration, and each tray-full is an SVG sheet for the laser cutter.</p>
+      </div>
+      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <div class="column">
+      <section class="card" aria-labelledby="names-heading">
+        <div class="card-head">
+          <h2 id="names-heading">Names</h2>
+          <span id="name-count" class="muted"></span>
+        </div>
+        <p class="muted hint">One name per line. The first word goes on the top line and the rest below; a <code>|</code> sets the break yourself, as in <code>Mary Ann|Evans</code>.</p>
+        <textarea id="names" rows="12" spellcheck="false" aria-label="Names, one per line"></textarea>
+        <div class="toolbar">
+          <button id="load-example" type="button">Load example</button>
+          <button id="clear-names" type="button">Clear</button>
+          <label class="file-button">Open .txt or .csv… <input id="names-file" type="file" accept=".txt,.csv,text/plain,text/csv"></label>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="tray-heading">
+        <h2 id="tray-heading">Tray</h2>
+        <div class="settings">
+          <label>Tray
+            <select id="tray-choice">
+              <option value="keychain_big">Big keychain tray (8 × 8)</option>
+              <option value="custom">Custom tray (JSON file)</option>
+            </select>
+          </label>
+          <label>Cells (optional)
+            <input id="cells" type="text" inputmode="numeric" autocomplete="off" placeholder="in order" aria-describedby="cells-hint">
+          </label>
+        </div>
+        <p id="cells-hint" class="muted hint">Cell numbers, comma-separated, one per name; cell 1 is bottom left. A repeated cell starts a new sheet.</p>
+        <div id="tray-file-field" class="toolbar" hidden>
+          <label class="file-button">Open tray layout JSON… <input id="tray-file" type="file" accept=".json,application/json"></label>
+        </div>
+        <p id="tray-summary" class="muted"></p>
+        <details class="overlay">
+          <summary>Tray drawing overlay (preview only)</summary>
+          <div class="settings">
+            <label>Offset x (in)
+              <input id="overlay-x" type="number" step="0.01" value="0">
+            </label>
+            <label>Offset y (in)
+              <input id="overlay-y" type="number" step="0.01" value="0">
+            </label>
+            <label class="check"><input id="overlay-show" type="checkbox" checked> Show overlay</label>
+          </div>
+          <div class="toolbar">
+            <label class="file-button">Open tray SVG… <input id="overlay-file" type="file" accept=".svg,image/svg+xml"></label>
+          </div>
+          <p id="overlay-status" class="muted">No tray drawing loaded.</p>
+          <p class="muted hint">Drawn behind the preview at its own size, its top-left corner at the page's plus the offset. It is never part of the downloaded sheets.</p>
+        </details>
+      </section>
+
+      <section class="card" aria-labelledby="design-heading">
+        <h2 id="design-heading">Design</h2>
+        <div class="settings">
+          <label>Decoration
+            <select id="decoration">
+              <option value="dna">DNA helix</option>
+              <option value="none">None</option>
+              <option value="hershey_ekg">Hershey script with EKG</option>
+              <option value="logo">Logo (sheet of logos)</option>
+            </select>
+          </label>
+          <label>Font
+            <select id="font">
+              <option value="Inter">Inter</option>
+              <option value="Source Serif Pro">Source Serif Pro</option>
+            </select>
+          </label>
+          <label>Names with descenders (y q p g j) on the top line
+            <select id="smallcaps" aria-describedby="smallcaps-hint">
+              <option value="2">Small caps</option>
+              <option value="1">Full capitals</option>
+              <option value="off">As typed</option>
+            </select>
+          </label>
+          <label id="logo-colors-field" class="check" hidden><input id="logo-colors" type="checkbox"> Keep the SVG's colours</label>
+          <label>Optimizer restarts per tag
+            <input id="restarts" type="number" min="1" max="1000" step="1" value="20">
+          </label>
+          <label>Seed
+            <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
+          </label>
+        </div>
+        <p id="smallcaps-hint" class="muted hint">Such names are set in capitals. Small caps shrink the letters after each line's first, by the stroke weight of the plain face against the bold.</p>
+        <div id="logo-file-field" class="toolbar" hidden>
+          <label class="file-button">Open logo (SVG, PNG or JPEG)… <input id="logo-file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></label>
+        </div>
+        <p id="logo-status" class="muted" hidden></p>
+      </section>
+    </div>
+
+    <section class="card results-card" aria-labelledby="sheets-heading">
+      <div class="card-head">
+        <h2 id="sheets-heading">Sheets</h2>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+      <div class="toolbar">
+        <button id="generate" type="button" class="primary">Generate</button>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="warnings" class="muted" hidden></p>
+      <p id="no-result" class="placeholder">The sheets appear here after a run.</p>
+      <div id="result" hidden>
+        <fieldset id="sheet-choice" class="sheet-choice" hidden>
+          <legend>Sheet</legend>
+          <div id="sheet-options" class="toolbar"></div>
+        </fieldset>
+        <figure id="preview" class="preview"></figure>
+        <div class="toolbar">
+          <span class="muted">Download:</span>
+          <span id="downloads" class="toolbar inline"></span>
+          <button id="export-result" type="button">Result JSON</button>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
+        <p class="muted hint">Sheets are drawn at 96 units per inch with their size in inches, as Inkscape reads them; engraving is filled black, each used cell has a thin grey outline.</p>
+      </div>
+    </section>
+
+    <section class="card method-card">
+      <details>
+        <summary><h2>How this works</h2></summary>
+        <p>Each name becomes one or two lines. A name whose top line has a descender (y, q, p, g or j) is set in capitals, with small capitals after each line's first letter, sized so their strokes about match the plain face.</p>
+        <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>
+        <p>The Hershey design writes the name in single-stroke Hershey script with a heartbeat trace running into the bottom line and out of the top line. The logo decoration draws one logo per cell instead, for example for the backs of the tags; give it the same names and cells as the front.</p>
+        <p>This is a port of an R program; the seed draws the same random starts as R's <code>set.seed()</code>, and fits from the same starts agree with R's. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a href="/">vetr.dev</a>
+      <a href="api.md">API</a>
+      <time datetime="2024-06-14">2024-06-14</time>
+    </div>
+  </footer>
+</body>
+</html>

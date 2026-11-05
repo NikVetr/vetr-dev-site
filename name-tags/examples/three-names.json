@@ -1,0 +1,7 @@
+{
+  "names": ["Ada Lovelace", "Alan Turing", "Grace Hopper"],
+  "tray": "tray-4x3.json",
+  "style": { "optimizer": { "restarts": 5 } },
+  "seed": 1,
+  "output": { "prefix": "demo" }
+}
