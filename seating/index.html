@@ -68,6 +68,7 @@
       <p id="no-result" class="placeholder">The seating appears here.</p>
       <div id="result" hidden>
         <p id="stale" class="stale-banner" hidden></p>
+        <div class="replay-head">
         <div class="player" role="group" aria-labelledby="player-heading">
           <h3 id="player-heading" class="visually-hidden">Replay of the search</h3>
           <div class="player-buttons">
@@ -90,8 +91,9 @@
           </div>
         </div>
         <p id="replay-status" class="replay-status" aria-live="polite"></p>
+        <dl id="readout" class="readout stale-dim"></dl>
+        </div>
         <div class="stale-dim">
-          <dl id="readout" class="readout"></dl>
           <figure id="chart" class="chart"></figure>
           <figure id="trace" class="trace"></figure>
           <p id="trace-tip" class="trace-tip muted" aria-hidden="true">&nbsp;</p>

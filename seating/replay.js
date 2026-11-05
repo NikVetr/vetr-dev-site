@@ -43,6 +43,7 @@ let tween = null;
 const theme = () => /** @type {'light' | 'dark'} */ (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
 const fmt = (/** @type {number} */ x) => x.toLocaleString('en-US');
 const speed = () => SPEEDS[Number(el.speed.value)];
+const speedText = () => `${speed()} move${speed() === 1 ? '' : 's'} a second`;
 
 /**
  * Shows a result for replay, at the best seating, or playing from the first when autoplay.
@@ -162,7 +163,7 @@ function draw(active) {
   const N = r.seats.length - 1;
   el.timeline.value = String(pos);
   el.timelineOut.textContent = `${fmt(pos)} of ${fmt(r.seats.length - 1)}`;
-  el.speedOut.textContent = `${speed()} a second`;
+  el.speedOut.textContent = speedText();
   el.play.textContent = playing ? '❚❚ Pause' : '▶ Play';
   el.play.setAttribute('aria-pressed', String(playing));
   el.back.disabled = pos === 0;
@@ -183,7 +184,7 @@ function drawReadout(d) {
   const delta = (now, before) => {
     if (before === undefined) return '';
     const dv = now - before;
-    if (Math.abs(dv) < 1e-9) return '<span class="delta same">= no change</span>';
+    if (Math.abs(dv) < 1e-9) return '';
     return dv > 0 ? `<span class="delta up">▲ +${formatScore(dv)}</span>` : `<span class="delta down">▼ ${formatScore(dv)}</span>`;
   };
   const brokenPairs = brokenCount(d);
@@ -406,7 +407,7 @@ el.timeline.addEventListener('input', () => {
   final = false;
   draw();
 });
-el.speed.addEventListener('input', () => { el.speedOut.textContent = `${speed()} a second`; });
+el.speed.addEventListener('input', () => { el.speedOut.textContent = speedText(); });
 for (const control of [el.arrangement, el.traceAxis]) {
   control.addEventListener('change', () => {
     geo = null;

@@ -195,6 +195,16 @@ function renderEditors() {
     part(tr, '.remove').setAttribute('aria-label', `Remove table ${i + 1}`);
     return tr;
   }));
+  /** @param {HTMLElement} body @param {number} columns @param {string} text */
+  const emptyRow = (body, columns, text) => {
+    if (body.children.length) return;
+    const tr = document.createElement('tr');
+    tr.className = 'empty-row';
+    tr.append(Object.assign(document.createElement('td'), { colSpan: columns, textContent: text }));
+    body.append(tr);
+  };
+  emptyRow(el.guestRows, 4, 'No guests yet: add one, paste or open a request, or load the example.');
+  emptyRow(el.pairRows, 5, 'No pairs or groups: every guest is free to sit anywhere.');
   for (const area of document.querySelectorAll('.editor textarea')) fitHeight(/** @type {HTMLTextAreaElement} */ (area));
   showTablesMode();
   changed({ keepUndo: true });

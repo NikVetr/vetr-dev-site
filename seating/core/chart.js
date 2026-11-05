@@ -392,8 +392,9 @@ export function renderTraceSvg(result, { width = 720, height = 260, theme = 'lig
   out += `<line x1="${m.left}" x2="${m.left + pw}" y1="${m.top + ph}" y2="${m.top + ph}" stroke="${c.muted}"/>`;
   out += `<text x="${m.left + pw / 2}" y="${height - 6}" font-size="${fs}" fill="${c.muted}" text-anchor="middle">Iteration</text>`;
   out += `<text transform="translate(13 ${m.top + ph / 2}) rotate(-90)" font-size="${fs}" fill="${c.muted}" text-anchor="middle">Score</text>`;
-  out += `<g clip-path="url(#trace-clip)"><path d="${path(steps.score)}" fill="none" stroke="${c.current}" stroke-width="2"/>`;
-  out += `<path d="${path(steps.best)}" fill="none" stroke="${c.ink}" stroke-width="2" stroke-dasharray="6 3"/></g>`;
+  // best so far beneath, so the current score (never above it) shows where they meet
+  out += `<g clip-path="url(#trace-clip)"><path d="${path(steps.best)}" fill="none" stroke="${c.ink}" stroke-width="2" stroke-dasharray="6 3"/>`;
+  out += `<path d="${path(steps.score)}" fill="none" stroke="${c.current}" stroke-width="2"/></g>`;
   // legend above the plot, and a note when the opening climb is below the axis
   out += `<g transform="translate(${m.left} 12)"><line x1="0" x2="22" y1="0" y2="0" stroke="${c.current}" stroke-width="2"/><text x="28" y="0" font-size="${fs}" fill="${c.ink}" dominant-baseline="central">current</text>`;
   out += `<line x1="${28 + 5.5 * fs}" x2="${50 + 5.5 * fs}" y1="0" y2="0" stroke="${c.ink}" stroke-width="2" stroke-dasharray="6 3"/><text x="${56 + 5.5 * fs}" y="0" font-size="${fs}" fill="${c.ink}" dominant-baseline="central">best so far</text></g>`;

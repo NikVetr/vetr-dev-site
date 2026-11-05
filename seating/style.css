@@ -42,6 +42,7 @@
   border-bottom: 1px solid var(--border);
 }
 .editor tbody tr + tr > * { border-top: 1px solid var(--border); }
+.editor .empty-row td { padding: 0.6rem 0.75rem; color: var(--muted); }
 .editor input, .editor select, .editor textarea { width: 100%; }
 /* Text boxes are one line, grown by app.js to show all of a long name wrapped. */
 .editor textarea { display: block; resize: none; overflow: hidden; line-height: 1.35; field-sizing: content; }
@@ -102,9 +103,9 @@
 .player-buttons { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .player-buttons .play { min-width: 6.6rem; }
 .player-sliders { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; align-items: center; }
-.slider { display: flex; flex-wrap: wrap; gap: 0.2rem 0.5rem; align-items: center; font-size: 0.92rem; color: var(--muted); flex: 1 1 14rem; }
+.slider { display: flex; flex-wrap: wrap; gap: 0.2rem 0.5rem; align-items: center; font-size: 0.92rem; color: var(--muted); flex: 1 1 12rem; }
 .slider input { flex: 1 1 8rem; accent-color: var(--primary); }
-.slider output { min-width: 5.5rem; color: var(--text); font-variant-numeric: tabular-nums; }
+.slider output { min-width: 4.5rem; color: var(--text); font-variant-numeric: tabular-nums; }
 .player .check { font-size: 0.92rem; }
 
 .replay-status { margin: 0.75rem 0 0.5rem; min-height: 3em; }
@@ -124,9 +125,19 @@
 .delta, .term-note, .new-best { font-size: 0.85rem; font-variant-numeric: tabular-nums; }
 .delta.up { color: var(--up); }
 .delta.down { color: var(--down); }
-.delta.same { color: var(--muted); }
 .term-note { color: var(--muted); }
 .new-best { font-weight: 700; }
+
+/* On a wide screen the controls, what the move did and the score stay in view while the
+   chart scrolls beneath them. */
+.replay-head { background: var(--surface); }
+@media (min-width: 1000px) and (min-height: 700px) {
+  .replay-head { position: sticky; top: 0; z-index: 2; padding: 0.5rem 0 0.1rem; border-bottom: 1px solid var(--border); margin-bottom: 0.6rem; }
+  .readout { grid-template-columns: repeat(auto-fill, minmax(5.6rem, 1fr)); }
+  .readout .value { font-size: 1.05rem; }
+  .readout .total .value { font-size: 1.15rem; }
+}
+
 
 .chart, .trace { margin: 0; }
 .chart svg, .trace svg { display: block; width: 100%; height: auto; }
