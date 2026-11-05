@@ -122,5 +122,5 @@ export async function build() {
 @keyframes seating-m${gi} { 0% { transform: none; } ${stops.join(' ')} 100% { transform: none; } }
 `;
   }
-  return art({ name: 'seating', period: num(period, 3), body, css, loop });
+  return art({ name: 'seating', period, body, css, loop });
 }

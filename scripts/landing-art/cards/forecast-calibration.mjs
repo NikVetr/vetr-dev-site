@@ -45,7 +45,7 @@ export function build() {
   const p = (t) => num((100 * t) / period, 3);
   return art({
     name: 'forecast-calibration',
-    period: num(period, 3),
+    period,
     body,
     // The tool's colours: black worlds and #c62828 observed on light, white and #ff6b6b on dark.
     css: `& .grid { fill: none; stroke: var(--art-line); stroke-width: 0.6; }

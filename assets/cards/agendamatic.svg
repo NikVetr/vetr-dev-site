@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="6.275" focusable="false">
+<style>
+[data-art="agendamatic"] text { font-family: 'Courier New', ui-monospace, monospace; font-size: 8.5px; fill: var(--art-ink); }
+[data-art="agendamatic"] .head text { font-size: 7.5px; font-weight: 700; text-decoration: underline; }
+[data-art="agendamatic"] .name { font-weight: 700; }
+[data-art="agendamatic"] .chip { stroke-width: 0.7; }
+[data-art="agendamatic"] .box { fill: var(--surface); stroke: var(--art-line); stroke-width: 0.7; }
+[data-art="agendamatic"] .time { fill: var(--art-muted); }
+[data-art="agendamatic"] .ticks { stroke: var(--art-ink); stroke-width: 0.6; }
+[data-art="agendamatic"] .axis { fill: var(--art-ink); }
+[data-art="agendamatic"] .tick { font-size: 7px; font-weight: 700; text-anchor: middle; }
+[data-art="agendamatic"] .tick.minor { font-weight: 400; fill: var(--art-muted); }
+[data-art="agendamatic"] .track { stroke-width: 0.5; }
+[data-art="agendamatic"] .block .base { stroke-width: 0.9; }
+[data-art="agendamatic"] .block .edge { fill: none; stroke-width: 0.9; }
+[data-art="agendamatic"] .block text { font-size: 7px; font-weight: 700; text-anchor: middle; }
+[data-art="agendamatic"] .link { fill: none; stroke-width: 0.8; stroke-linecap: round; }
+[data-art="agendamatic"] .guide { fill: none; stroke-width: 0.9; stroke-dasharray: 0.9 1.5; opacity: 0.76; }
+[data-art="agendamatic"] .marker { transform: translateX(80.308px); }
+[data-art="agendamatic"] .progress .fill { transform: scaleX(0.2308); }
+[data-art="agendamatic"] .row.t1 .bar { fill: #2196f3; } [data-art="agendamatic"] .row.t1 .chip { fill: #e3f2fd; stroke: #bbdefb; } [data-art="agendamatic"] .row.t1 .name { fill: #0d47a1; }
+[data-art="agendamatic"] .block.t1 .base { fill: #e3f2fd; stroke: #2196f3; } [data-art="agendamatic"] .block.t1 text { fill: #0d47a1; } [data-art="agendamatic"] .block.t1 .link { stroke: #2196f3; }
+[data-art="agendamatic"] .block.t1 .active .base { fill: #0d47a1; } [data-art="agendamatic"] .block.t1 .active .edge { stroke: #2196f3; } [data-art="agendamatic"] .block.t1 .active text { fill: #e3f2fd; }
+[data-art="agendamatic"] .block.t1 .done .base { fill: #feffff; stroke: #6696bc; } [data-art="agendamatic"] .block.t1 .done text { fill: #31496e; }
+[data-art="agendamatic"] .block.t1 .done-label text { fill: #2d4366; } [data-art="agendamatic"] .block.t1 .done-label .link { stroke: #5e8bae; }
+[data-art="agendamatic"] .row.t2 .bar { fill: #9c27b0; } [data-art="agendamatic"] .row.t2 .chip { fill: #f3e5f5; stroke: #e1bee7; } [data-art="agendamatic"] .row.t2 .name { fill: #4a148c; }
+[data-art="agendamatic"] .block.t2 .base { fill: #f3e5f5; stroke: #9c27b0; } [data-art="agendamatic"] .block.t2 text { fill: #4a148c; } [data-art="agendamatic"] .block.t2 .link { stroke: #9c27b0; }
+[data-art="agendamatic"] .block.t2 .active .base { fill: #4a148c; } [data-art="agendamatic"] .block.t2 .active .edge { stroke: #9c27b0; } [data-art="agendamatic"] .block.t2 .active text { fill: #f3e5f5; }
+[data-art="agendamatic"] .block.t2 .done .base { fill: #fffaff; stroke: #71417a; } [data-art="agendamatic"] .block.t2 .done text { fill: #392354; }
+[data-art="agendamatic"] .block.t2 .done-label text { fill: #35204e; } [data-art="agendamatic"] .block.t2 .done-label .link { stroke: #693d71; }
+[data-art="agendamatic"] .row.t3 .bar { fill: #4caf50; } [data-art="agendamatic"] .row.t3 .chip { fill: #e8f5e9; stroke: #c8e6c9; } [data-art="agendamatic"] .row.t3 .name { fill: #1b5e20; }
+[data-art="agendamatic"] .block.t3 .base { fill: #e8f5e9; stroke: #4caf50; } [data-art="agendamatic"] .block.t3 text { fill: #1b5e20; } [data-art="agendamatic"] .block.t3 .link { stroke: #4caf50; }
+[data-art="agendamatic"] .block.t3 .active .base { fill: #1b5e20; } [data-art="agendamatic"] .block.t3 .active .edge { stroke: #4caf50; } [data-art="agendamatic"] .block.t3 .active text { fill: #e8f5e9; }
+[data-art="agendamatic"] .block.t3 .done .base { fill: #ffffff; stroke: #82aa83; } [data-art="agendamatic"] .block.t3 .done text { fill: #3d5940; }
+[data-art="agendamatic"] .block.t3 .done-label text { fill: #39523b; } [data-art="agendamatic"] .block.t3 .done-label .link { stroke: #789e7a; }
+[data-art="agendamatic"] .row.t4 .bar { fill: #ff9800; } [data-art="agendamatic"] .row.t4 .chip { fill: #fff3e0; stroke: #ffe0b2; } [data-art="agendamatic"] .row.t4 .name { fill: #e65100; }
+[data-art="agendamatic"] .block.t4 .base { fill: #fff3e0; stroke: #ff9800; } [data-art="agendamatic"] .block.t4 text { fill: #e65100; } [data-art="agendamatic"] .block.t4 .link { stroke: #ff9800; }
+[data-art="agendamatic"] .block.t4 .active .base { fill: #e65100; } [data-art="agendamatic"] .block.t4 .active .edge { stroke: #ff9800; } [data-art="agendamatic"] .block.t4 .active text { fill: #fff3e0; }
+[data-art="agendamatic"] .block.t4 .done .base { fill: #ffffff; stroke: #d6ac6d; } [data-art="agendamatic"] .block.t4 .done text { fill: #a66948; }
+[data-art="agendamatic"] .block.t4 .done-label text { fill: #9a6142; } [data-art="agendamatic"] .block.t4 .done-label .link { stroke: #c69f65; }
+[data-art="agendamatic"] .track { fill: #eeeeee; stroke: #cccccc; } [data-art="agendamatic"] .groove { fill: #dddddd; } [data-art="agendamatic"] .fill { fill: #3498db; }
+[data-art="agendamatic"] .now { fill: #e74c3c; } [data-art="agendamatic"] .guide { stroke: #3498db; }
+:root[data-theme="dark"] [data-art="agendamatic"] .row.t1 .bar { fill: #64b5f6; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t1 .chip { fill: #1e3a5f; stroke: #1e3a5f; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t1 .name { fill: #90caf9; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .base { fill: #1e3a5f; stroke: #64b5f6; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 text { fill: #90caf9; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .link { stroke: #64b5f6; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .active .base { fill: #90caf9; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .active .edge { stroke: #64b5f6; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .active text { fill: #1e3a5f; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .done .base { fill: #313c4c; stroke: #9abbd6; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .done text { fill: #bcd4e7; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .done-label text { fill: #aec4d6; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t1 .done-label .link { stroke: #8eadc6; }
+:root[data-theme="dark"] [data-art="agendamatic"] .row.t2 .bar { fill: #ba68c8; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t2 .chip { fill: #3d2452; stroke: #3d2452; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t2 .name { fill: #ce93d8; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .base { fill: #3d2452; stroke: #ba68c8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 text { fill: #ce93d8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .link { stroke: #ba68c8; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .active .base { fill: #ce93d8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .active .edge { stroke: #ba68c8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .active text { fill: #3d2452; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .done .base { fill: #372d40; stroke: #a281a8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .done text { fill: #c3abc7; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .done-label text { fill: #b49eb8; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t2 .done-label .link { stroke: #96779c; }
+:root[data-theme="dark"] [data-art="agendamatic"] .row.t3 .bar { fill: #81c784; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t3 .chip { fill: #1b4332; stroke: #1b4332; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t3 .name { fill: #a5d6a7; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .base { fill: #1b4332; stroke: #81c784; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 text { fill: #a5d6a7; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .link { stroke: #81c784; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .active .base { fill: #a5d6a7; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .active .edge { stroke: #81c784; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .active text { fill: #1b4332; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .done .base { fill: #31423b; stroke: #adcaae; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .done text { fill: #cadecb; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .done-label text { fill: #bbcdbc; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t3 .done-label .link { stroke: #a0bba1; }
+:root[data-theme="dark"] [data-art="agendamatic"] .row.t4 .bar { fill: #ffb74d; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t4 .chip { fill: #4a3728; stroke: #4a3728; } :root[data-theme="dark"] [data-art="agendamatic"] .row.t4 .name { fill: #ffcc80; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .base { fill: #4a3728; stroke: #ffb74d; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 text { fill: #ffcc80; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .link { stroke: #ffb74d; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .active .base { fill: #ffcc80; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .active .edge { stroke: #ffb74d; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .active text { fill: #4a3728; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .done .base { fill: #453d37; stroke: #e8cb9f; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .done text { fill: #f5e0c1; }
+:root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .done-label text { fill: #e3cfb2; } :root[data-theme="dark"] [data-art="agendamatic"] .block.t4 .done-label .link { stroke: #d7bc93; }
+:root[data-theme="dark"] [data-art="agendamatic"] .track { fill: #16213e; stroke: #444444; } :root[data-theme="dark"] [data-art="agendamatic"] .groove { fill: #dddddd; } :root[data-theme="dark"] [data-art="agendamatic"] .fill { fill: #3498db; }
+:root[data-theme="dark"] [data-art="agendamatic"] .now { fill: #e74c3c; } :root[data-theme="dark"] [data-art="agendamatic"] .guide { stroke: #3498db; }
+
+@media (prefers-reduced-motion: no-preference) {
+[data-art="agendamatic"][data-playing] .b0 { animation: agendamatic-b0 6.275s linear infinite; }
+@keyframes agendamatic-b0 { 0% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .a0 { animation: agendamatic-a0 6.275s linear infinite; }
+@keyframes agendamatic-a0 { 0% { opacity: 0; } 82.072% { opacity: 0; } 84.462% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .d0 { animation: agendamatic-d0 6.275s linear infinite; }
+@keyframes agendamatic-d0 { 0% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 0.42; } 100% { opacity: 0.42; } }
+[data-art="agendamatic"][data-playing] .h0 { animation: agendamatic-h0 6.275s linear infinite; }
+@keyframes agendamatic-h0 { 0% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .g0 { animation: agendamatic-g0 6.275s linear infinite; }
+@keyframes agendamatic-g0 { 0% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 0.42; } 100% { opacity: 0.42; } }
+[data-art="agendamatic"][data-playing] .b1 { animation: agendamatic-b1 6.275s linear infinite; }
+@keyframes agendamatic-b1 { 0% { opacity: 1; } 23.904% { opacity: 1; } 26.295% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .a1 { animation: agendamatic-a1 6.275s linear infinite; }
+@keyframes agendamatic-a1 { 0% { opacity: 1; } 23.904% { opacity: 1; } 26.295% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .d1 { animation: agendamatic-d1 6.275s linear infinite; }
+@keyframes agendamatic-d1 { 0% { opacity: 0; } 23.904% { opacity: 0; } 26.295% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .b2 { animation: agendamatic-b2 6.275s linear infinite; }
+@keyframes agendamatic-b2 { 0% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .a2 { animation: agendamatic-a2 6.275s linear infinite; }
+@keyframes agendamatic-a2 { 0% { opacity: 0; } 23.904% { opacity: 0; } 26.295% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .d2 { animation: agendamatic-d2 6.275s linear infinite; }
+@keyframes agendamatic-d2 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .h2 { animation: agendamatic-h2 6.275s linear infinite; }
+@keyframes agendamatic-h2 { 0% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .g2 { animation: agendamatic-g2 6.275s linear infinite; }
+@keyframes agendamatic-g2 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .b3 { animation: agendamatic-b3 6.275s linear infinite; }
+@keyframes agendamatic-b3 { 0% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .a3 { animation: agendamatic-a3 6.275s linear infinite; }
+@keyframes agendamatic-a3 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .d3 { animation: agendamatic-d3 6.275s linear infinite; }
+@keyframes agendamatic-d3 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .h3 { animation: agendamatic-h3 6.275s linear infinite; }
+@keyframes agendamatic-h3 { 0% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .g3 { animation: agendamatic-g3 6.275s linear infinite; }
+@keyframes agendamatic-g3 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .b4 { animation: agendamatic-b4 6.275s linear infinite; }
+@keyframes agendamatic-b4 { 0% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .a4 { animation: agendamatic-a4 6.275s linear infinite; }
+@keyframes agendamatic-a4 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .d4 { animation: agendamatic-d4 6.275s linear infinite; }
+@keyframes agendamatic-d4 { 0% { opacity: 0; } 59.761% { opacity: 0; } 62.151% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .h4 { animation: agendamatic-h4 6.275s linear infinite; }
+@keyframes agendamatic-h4 { 0% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
+[data-art="agendamatic"][data-playing] .g4 { animation: agendamatic-g4 6.275s linear infinite; }
+@keyframes agendamatic-g4 { 0% { opacity: 0; } 59.761% { opacity: 0; } 62.151% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
+[data-art="agendamatic"][data-playing] .marker { animation: agendamatic-marker 6.275s linear infinite; }
+@keyframes agendamatic-marker { 0% { transform: translateX(80.308px); opacity: 1; } 59.761% { transform: translateX(308px); opacity: 1; } 69.323% { transform: translateX(308px); opacity: 1; } 72.51% { transform: translateX(308px); opacity: 0; } 72.526% { transform: translateX(12px); opacity: 0; } 75.697% { transform: translateX(12px); opacity: 1; } 82.072% { transform: translateX(12px); opacity: 1; } 100% { transform: translateX(80.308px); opacity: 1; } }
+[data-art="agendamatic"][data-playing] .progress .fill { animation: agendamatic-progress 6.275s linear infinite; }
+@keyframes agendamatic-progress { 0% { transform: scaleX(0.2308); opacity: 1; } 59.761% { transform: scaleX(1); opacity: 1; } 69.323% { transform: scaleX(1); opacity: 1; } 72.51% { transform: scaleX(1); opacity: 0; } 72.526% { transform: scaleX(0); opacity: 0; } 75.697% { transform: scaleX(0); opacity: 1; } 82.072% { transform: scaleX(0); opacity: 1; } 100% { transform: scaleX(0.2308); opacity: 1; } }
+
+}
+</style>
+<defs><linearGradient id="agendamatic-glow0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2196f3" stop-opacity="0.32"/><stop offset="0.42" stop-color="#2196f3" stop-opacity="0.1"/><stop offset="1" stop-color="#2196f3" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c27b0" stop-opacity="0.32"/><stop offset="0.42" stop-color="#9c27b0" stop-opacity="0.1"/><stop offset="1" stop-color="#9c27b0" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4caf50" stop-opacity="0.32"/><stop offset="0.42" stop-color="#4caf50" stop-opacity="0.1"/><stop offset="1" stop-color="#4caf50" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9800" stop-opacity="0.32"/><stop offset="0.42" stop-color="#ff9800" stop-opacity="0.1"/><stop offset="1" stop-color="#ff9800" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2196f3" stop-opacity="0.32"/><stop offset="0.42" stop-color="#2196f3" stop-opacity="0.1"/><stop offset="1" stop-color="#2196f3" stop-opacity="0"/></linearGradient></defs>
+<g class="head"><text x="21" y="13">Item</text><text x="129.1" y="13">Lead</text><text x="195.4" y="13">Duration</text><text x="251.9" y="13">Time</text></g>
+<g class="row t1"><rect class="bar" x="12" y="18.5" width="2.6" height="13" rx="1"/><rect class="chip" x="18" y="18.5" width="89.6" height="13" rx="1.5"/><text class="name" x="21" y="27.8">Welcome</text><rect class="box" x="126.1" y="18.5" width="48.8" height="13" rx="1.5"/><text x="129.1" y="27.8">Chair</text><rect class="box" x="193.4" y="18.5" width="40" height="13" rx="1.5"/><text x="195.4" y="27.8">5m</text><text class="time" x="251.9" y="27.8">4:00 - 4:05</text></g>
+<g class="row t2"><rect class="bar" x="12" y="34.5" width="2.6" height="13" rx="1"/><rect class="chip" x="18" y="34.5" width="89.6" height="13" rx="1.5"/><text class="name" x="21" y="43.8">ED Report</text><rect class="box" x="126.1" y="34.5" width="48.8" height="13" rx="1.5"/><text x="129.1" y="43.8">Director</text><rect class="box" x="193.4" y="34.5" width="40" height="13" rx="1.5"/><text x="195.4" y="43.8">30m</text><text class="time" x="251.9" y="43.8">4:05 - 4:35</text></g>
+<g class="row t3"><rect class="bar" x="12" y="50.5" width="2.6" height="13" rx="1"/><rect class="chip" x="18" y="50.5" width="89.6" height="13" rx="1.5"/><text class="name" x="21" y="59.8">Treasurer Report</text><rect class="box" x="126.1" y="50.5" width="48.8" height="13" rx="1.5"/><text x="129.1" y="59.8">CFO</text><rect class="box" x="193.4" y="50.5" width="40" height="13" rx="1.5"/><text x="195.4" y="59.8">15m</text><text class="time" x="251.9" y="59.8">4:35 - 4:50</text></g>
+<g class="row t4"><rect class="bar" x="12" y="66.5" width="2.6" height="13" rx="1"/><rect class="chip" x="18" y="66.5" width="89.6" height="13" rx="1.5"/><text class="name" x="21" y="75.8">Committee Update</text><rect class="box" x="126.1" y="66.5" width="48.8" height="13" rx="1.5"/><text x="129.1" y="75.8">Staff</text><rect class="box" x="193.4" y="66.5" width="40" height="13" rx="1.5"/><text x="195.4" y="75.8">10m</text><text class="time" x="251.9" y="75.8">4:50 - 5:00</text></g>
+<g class="row t1"><rect class="bar" x="12" y="82.5" width="2.6" height="13" rx="1"/><rect class="chip" x="18" y="82.5" width="89.6" height="13" rx="1.5"/><text class="name" x="21" y="91.8">Closing</text><rect class="box" x="126.1" y="82.5" width="48.8" height="13" rx="1.5"/><text x="129.1" y="91.8">Chair</text><rect class="box" x="193.4" y="82.5" width="40" height="13" rx="1.5"/><text x="195.4" y="91.8">5m</text><text class="time" x="251.9" y="91.8">5:00 - 5:05</text></g>
+<path class="ticks" d="M12 125v-4M34.8 125v-4M57.5 125v-2M80.3 125v-2M103.1 125v-2M125.8 125v-2M148.6 125v-2M171.4 125v-4M194.2 125v-2M216.9 125v-2M239.7 125v-4M262.5 125v-2M285.2 125v-4M308 125v-4"/><rect class="axis" x="12" y="124.4" width="296" height="1.2"/>
+<text class="tick" x="12" y="118" style="fill:#2196f3">4:00</text><text class="tick" x="34.8" y="118" style="fill:#9c27b0">4:05</text><text class="tick minor" x="148.6" y="118">4:30</text><text class="tick" x="171.4" y="118" style="fill:#4caf50">4:35</text><text class="tick" x="239.7" y="118" style="fill:#ff9800">4:50</text><text class="tick" x="285.2" y="118" style="fill:#2196f3">5:00</text><text class="tick" x="308" y="118" style="fill:#2196f3">5:05</text>
+<rect class="groove" x="12" y="164" width="296" height="2.4" rx="1.2"/>
+<g class="marker"><path class="guide" d="M0 109.5V166.4"/><path class="now" d="M-3.6 105h7.2l-3.6 4.5z"/></g>
+<g class="progress" transform="translate(12 164)"><rect class="fill" width="296" height="2.4" rx="1.2"/></g>
+<rect class="track" x="12" y="129" width="296" height="18" rx="2"/>
+<g class="block t1"><g class="b0" opacity="0"><rect class="base" x="12.5" y="129.5" width="21.9" height="17.1"/></g><g class="a0 active" opacity="0"><rect class="base" x="12.5" y="129.5" width="21.9" height="17.1"/><rect class="glow" x="12.5" y="129.5" width="21.9" height="17.1" fill="url(#agendamatic-glow0)"/><rect class="edge" x="12.5" y="129.5" width="21.9" height="17.1"/></g><g class="d0 done" opacity="0.42"><rect class="base" x="12.5" y="129.5" width="21.9" height="17.1"/></g><g class="h0" opacity="0"><path class="link" d="M23.4 147C23.4 150 23.4 149 23.4 152"/><text class="hang" x="23.4" y="158">Welcome</text></g><g class="g0 done-label" opacity="0.42"><path class="link" d="M23.4 147C23.4 150 23.4 149 23.4 152"/><text class="hang" x="23.4" y="158">Welcome</text></g></g>
+<g class="block t2"><g class="b1"><rect class="base" x="35.2" y="129.5" width="135.7" height="17.1"/><text x="103.1" y="140.4">ED Report</text></g><g class="a1 active"><rect class="base" x="35.2" y="129.5" width="135.7" height="17.1"/><rect class="glow" x="35.2" y="129.5" width="135.7" height="17.1" fill="url(#agendamatic-glow1)"/><rect class="edge" x="35.2" y="129.5" width="135.7" height="17.1"/><text x="103.1" y="140.4">ED Report</text></g><g class="d1 done" opacity="0"><rect class="base" x="35.2" y="129.5" width="135.7" height="17.1"/><text x="103.1" y="140.4">ED Report</text></g></g>
+<g class="block t3"><g class="b2"><rect class="base" x="171.8" y="129.5" width="67.4" height="17.1"/></g><g class="a2 active" opacity="0"><rect class="base" x="171.8" y="129.5" width="67.4" height="17.1"/><rect class="glow" x="171.8" y="129.5" width="67.4" height="17.1" fill="url(#agendamatic-glow2)"/><rect class="edge" x="171.8" y="129.5" width="67.4" height="17.1"/></g><g class="d2 done" opacity="0"><rect class="base" x="171.8" y="129.5" width="67.4" height="17.1"/></g><g class="h2"><path class="link" d="M205.5 147C205.5 150 169.1 149 169.1 152"/><text class="hang" x="169.1" y="158">Treasurer Report</text></g><g class="g2 done-label" opacity="0"><path class="link" d="M205.5 147C205.5 150 169.1 149 169.1 152"/><text class="hang" x="169.1" y="158">Treasurer Report</text></g></g>
+<g class="block t4"><g class="b3"><rect class="base" x="240.1" y="129.5" width="44.6" height="17.1"/></g><g class="a3 active" opacity="0"><rect class="base" x="240.1" y="129.5" width="44.6" height="17.1"/><rect class="glow" x="240.1" y="129.5" width="44.6" height="17.1" fill="url(#agendamatic-glow3)"/><rect class="edge" x="240.1" y="129.5" width="44.6" height="17.1"/></g><g class="d3 done" opacity="0"><rect class="base" x="240.1" y="129.5" width="44.6" height="17.1"/></g><g class="h3"><path class="link" d="M262.5 147C262.5 150 242.3 149 242.3 152"/><text class="hang" x="242.3" y="158">Committee Update</text></g><g class="g3 done-label" opacity="0"><path class="link" d="M262.5 147C262.5 150 242.3 149 242.3 152"/><text class="hang" x="242.3" y="158">Committee Update</text></g></g>
+<g class="block t1"><g class="b4"><rect class="base" x="285.7" y="129.5" width="21.9" height="17.1"/></g><g class="a4 active" opacity="0"><rect class="base" x="285.7" y="129.5" width="21.9" height="17.1"/><rect class="glow" x="285.7" y="129.5" width="21.9" height="17.1" fill="url(#agendamatic-glow4)"/><rect class="edge" x="285.7" y="129.5" width="21.9" height="17.1"/></g><g class="d4 done" opacity="0"><rect class="base" x="285.7" y="129.5" width="21.9" height="17.1"/></g><g class="h4"><path class="link" d="M296.6 147C296.6 150 296.6 149 296.6 152"/><text class="hang" x="296.6" y="158">Closing</text></g><g class="g4 done-label" opacity="0"><path class="link" d="M296.6 147C296.6 150 296.6 149 296.6 152"/><text class="hang" x="296.6" y="158">Closing</text></g></g>
+</svg>

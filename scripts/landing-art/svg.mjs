@@ -14,25 +14,25 @@ export const MUTED = 'var(--art-muted)';
 export const LINE = 'var(--art-line)';
 export const PAPER = 'var(--art-paper)';
 
-/** A number with at most `d` decimals and no trailing zeros. */
+/** A number with at most `d` decimals and no trailing zeros. @param {number} x */
 export function num(x, d = 1) {
   const s = (Math.round(x * 10 ** d) / 10 ** d).toFixed(d);
   return s.includes('.') ? s.replace(/\.?0+$/, '') : s;
 }
 
-/** Rounds every number in SVG path data to `d` decimals and drops repeated points. */
+/** Rounds every number in SVG path data to `d` decimals and drops repeated points. @param {string} path */
 export function roundPath(path, d = 1) {
-  const rounded = path.replace(/-?\d*\.?\d+(?:e-?\d+)?/gi, (m) => num(Number(m), d));
+  const rounded = path.replace(/-?\d*\.?\d+(?:e-?\d+)?/gi, (/** @type {string} */ m) => num(Number(m), d));
   return rounded.replace(/([ML])(-?[\d.]+)[ ,](-?[\d.]+)(?:L\2[ ,]\3(?![\d.]))+/g, '$1$2 $3');
 }
 
-/** Path data of a polyline [[x, y], ...], optionally closed. */
+/** Path data of a polyline [[x, y], ...], optionally closed. @param {number[][]} points */
 export function polyline(points, close = false, d = 1) {
   const p = points.map(([x, y], i) => `${i ? 'L' : 'M'}${num(x, d)} ${num(y, d)}`).join('');
   return close ? `${p}Z` : p;
 }
 
-/** Escapes text for SVG content and attributes. */
+/** Escapes text for SVG content and attributes. @param {unknown} text */
 export function esc(text) {
   return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -56,7 +56,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // under reduced motion (landing.js does not set data-playing then either).
     loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-playing]`)}\n}`,
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" data-period="${period}"${frames ? ` data-frames="${frames}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''} focusable="false">
 <style>
 ${style}
 </style>
