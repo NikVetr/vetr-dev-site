@@ -1,7 +1,7 @@
 // The tool's single entry point. The page (through its worker), window.Photomosaic and
 // cli.mjs all call submit(); nothing here touches the DOM.
 
-import { createRng } from '../../seating/core/rng.js';
+import { rMersenneTwister } from '../../shared/rng.js';
 import { solveAssignment } from './assign.js';
 import { cost, features } from './color.js';
 import { autoGrid, scaleImage } from './image.js';
@@ -19,29 +19,29 @@ export { solveAssignment } from './assign.js';
  */
 
 /**
- * The grid a request asks for: the R script's rule, or `columns` columns with as many rows
- * as keep the target's shape. Throws if it has no cells or more than the photos can fill.
- * @param {import('./request.js').Problem} p
+ * The grid a request asks for: the R script's rule for count × maxUses photo uses, or
+ * `columns` columns with as many rows as keep the target's shape. Throws a PhotomosaicError
+ * if it has no cells or more than the photos can fill.
+ * @param {{ count: number, width: number, height: number, columns: number | null, maxUses: number }} options
  */
-export function gridFor(p) {
-  const n = p.means.length / 4;
-  const { width, height } = p.target;
-  if (p.columns === null) {
-    const grid = autoGrid(n * p.maxUses, width, height);
+export function gridFor({ count, width, height, columns, maxUses }) {
+  const uses = count * maxUses;
+  if (columns === null) {
+    const grid = autoGrid(uses, width, height);
     if (grid.rows >= 1 && grid.columns >= 1) return { ...grid, rule: /** @type {const} */ ('auto') };
-    let need = n * p.maxUses + 1;
+    let need = uses + 1;
     while (Math.min(...Object.values(autoGrid(need, width, height))) < 1) need++;
     throw invalid([{
       code: 'too_few_photos', path: 'photos',
-      message: `${n * p.maxUses} photo uses are too few for a grid of this target's shape (${width} × ${height}); it needs at least ${need}, or set columns`,
+      message: `${uses} photo uses are too few for a grid of this target's shape (${width} × ${height}); it needs at least ${need}, or set columns`,
     }]);
   }
-  const grid = { rows: Math.max(1, Math.round((p.columns * height) / width)), columns: p.columns, rule: /** @type {const} */ ('columns') };
+  const grid = { rows: Math.max(1, Math.round((columns * height) / width)), columns, rule: /** @type {const} */ ('columns') };
   const cells = grid.rows * grid.columns;
-  if (cells > n * p.maxUses) {
+  if (cells > uses) {
     throw invalid([{
       code: 'too_few_photos', path: 'columns',
-      message: `a ${grid.columns} × ${grid.rows} grid has ${cells} cells, more than ${n} photos used at most ${p.maxUses} time${p.maxUses > 1 ? 's' : ''} each can fill; use fewer columns, or maxUses ${Math.ceil(cells / n)} or more`,
+      message: `a ${grid.columns} × ${grid.rows} grid has ${cells} cells, more than ${count} photos used at most ${maxUses} time${maxUses > 1 ? 's' : ''} each can fill; use fewer columns, or maxUses ${Math.ceil(cells / count)} or more`,
     }]);
   }
   return grid;
@@ -56,8 +56,8 @@ export function gridFor(p) {
 export function submit(request, hooks = {}) {
   const started = performance.now();
   const p = readRequest(request);
-  const grid = gridFor(p);
   const n = p.means.length / 4;
+  const grid = gridFor({ count: n, width: p.target.width, height: p.target.height, columns: p.columns, maxUses: p.maxUses });
   const cellCount = grid.rows * grid.columns;
 
   // the target averaged over each cell, as image_scale() to columns x rows
@@ -66,7 +66,7 @@ export function submit(request, hooks = {}) {
 
   // R's sample(imgs) after set.seed(seed): the order the photos are matched in, which
   // decides only between equal costs
-  const order = createRng(p.seed).uniform(n, n);
+  const order = rMersenneTwister(p.seed).uniform(n, n);
   const shuffled = new Float64Array(4 * n);
   order.forEach((photo, k) => shuffled.set(p.means.subarray(4 * photo, 4 * photo + 4), 4 * k));
   const cellF = features(cells, p.metric);

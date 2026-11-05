@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
-import { decodePng } from '../../crossword/decode-png.mjs';
+import { decodePng } from '../../shared/decode-png.mjs';
 import { cost, features } from '../core/color.js';
 import {
   PhotomosaicError, autoGrid, layoutMosaic, scaleImage, scaledHeight, solveAssignment, submit, summarisePhoto,

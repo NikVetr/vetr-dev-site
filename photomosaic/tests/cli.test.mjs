@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { decodePng } from '../../crossword/decode-png.mjs';
+import { decodePng } from '../../shared/decode-png.mjs';
 
 const HERE = new URL('..', import.meta.url).pathname;
 const FIXTURES = join(HERE, 'tests/fixtures');

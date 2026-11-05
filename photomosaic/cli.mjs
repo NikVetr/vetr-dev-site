@@ -5,14 +5,14 @@
 // Prints the result JSON on stdout. Options --columns, --max-uses, --metric and --seed set those
 // request fields. With images, --png file also draws the mosaic (--tile-width, --fit, --tint)
 // and --request-out file writes the request built. Photos are the folder's .png, .jpg and .jpeg
-// files, by name; PNG reads with crossword's decoder, JPEG with the vendored jpeg-js decoder.
+// files, by name; PNG reads with shared/decode-png.mjs, JPEG with the vendored jpeg-js decoder.
 // Errors go to stderr as {"error": {...}} JSON: exit 1 for an invalid request or JSON, 2 for
 // a usage problem or an unreadable file. See api.md.
 
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
 import { crc32, deflateSync } from 'node:zlib';
-import { decodePng } from '../crossword/decode-png.mjs';
+import { decodePng } from '../shared/decode-png.mjs';
 import { FITS, PhotomosaicError, composeMosaic, layoutMosaic, submit, summarisePhoto } from './core/index.js';
 import decodeJpeg from './vendor/jpeg-js-decoder.cjs';
 
