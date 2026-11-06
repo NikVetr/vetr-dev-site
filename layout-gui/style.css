@@ -310,15 +310,22 @@ canvas {
 }
 
 
-/* Stack panels vertically when the viewport is ≥1.25× taller than wide
-   (height/width ≥ 1.25  ↔  width/height ≤ 0.8) */
-@media (max-aspect-ratio: 4/5) {
+/* Stacked editors use normal page scrolling: a fixed viewport height would squeeze
+   the toolbox to a strip and bury the code behind several nested scroll areas. */
+@media (max-aspect-ratio: 4/5), (max-width: 760px) {
+  body { overflow: auto; }
+  .app {
+    height: auto;
+    min-height: 100vh;
+    grid-template-rows: auto auto auto;
+  }
+
   .main {
     grid-template-columns: 1fr;
     grid-template-rows:
       auto
       /* sidebar (toolbox) */
-      minmax(220px, 1fr)
+      clamp(220px, 45vh, 420px)
       /* canvas */
       6px
       /* split L */
@@ -326,12 +333,31 @@ canvas {
       /* legend */
       6px
       /* split R */
-      minmax(220px, auto)
+      auto
       /* coder */
     ;
 
-    overflow-x: visible;
-    overflow-y: auto;
+    overflow: visible;
+  }
+
+  .main > .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    overflow: visible;
+  }
+
+  .main > .sidebar .chip-toggles {
+    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+  }
+
+  .main > .coderenderer {
+    overflow: visible;
+  }
+
+  .main > .coderenderer textarea {
+    flex: none;
+    min-height: 15rem;
   }
 
   .splitter {
@@ -437,6 +463,15 @@ canvas {
     display: block;
     image-rendering: pixelated;
     cursor: crosshair;
+}
+
+#canvas:focus-visible {
+    outline: 3px solid #2265d6;
+    outline-offset: -3px;
+}
+
+body.dark #canvas:focus-visible {
+    outline-color: #99b7ff;
 }
 
 .legend,

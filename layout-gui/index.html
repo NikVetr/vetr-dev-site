@@ -13,7 +13,8 @@
     </script>
 
   <meta charset="utf-8">
-  <title>Mult-Panel Figure GUI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multipanel Figure Editor</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css">
@@ -22,7 +23,7 @@
 
 <div class="app">
     <header>
-        <h1>multipanel <code>web-gui</code></h1>
+        <h1>Multipanel Figure Editor</h1>
         <button id="helpBtn" class="btn"> ? </button>
         <div id="modIndicators" class="modbar" aria-label="Modifier keys state">
             <div id="modIndMod"   class="modchip">mod</div>
@@ -30,6 +31,7 @@
             <div id="modIndShift" class="modchip">inv</div>
         </div>
         <span class="dim" id="dimText"></span>
+        <p id="canvas-keyboard-hint">Tab to enter or leave. Page Down / Page Up select panels; arrow keys move them. H opens keyboard help.</p>
     </header>
 
 <div class="main">
@@ -95,7 +97,7 @@
 
 
         <div class="canvas-wrap" id="canvasWrap">
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" tabindex="0" role="group" aria-label="Figure layout editor" aria-describedby="canvas-keyboard-hint"></canvas>
         </div>
 
         <div class="splitter" id="splitLeft"></div>

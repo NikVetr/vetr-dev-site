@@ -97,6 +97,8 @@ import {
     flashError
 } from './controls.js';
 
+if (!canvas) throw new Error('Figure layout editor canvas is missing');
+
 function flashCopied() {
     copyBtn.textContent = 'Copied!';
     setTimeout(() => {
@@ -290,6 +292,7 @@ function toggleStickyFocus(hv) {
 
 canvas.addEventListener('pointerdown', e => {
     if (state.modalOpen) return;
+    canvas.focus({ preventScroll: true });
     const {
         x,
         y
@@ -1356,8 +1359,9 @@ labelSwitch.addEventListener('click', e => {
 
 /* keyboard shortcuts */
 
-//events for undo / redo
-document.addEventListener('keydown', e => {
+// Editing shortcuts belong to the canvas, so fields keep their own editing and history.
+canvas.addEventListener('keydown', e => {
+    if (state.modalOpen) return;
     const mod = e.ctrlKey || e.metaKey; // Ctrl on Win/Linux, Cmd on macOS
     if (!mod) return;
 
@@ -1368,7 +1372,8 @@ document.addEventListener('keydown', e => {
     }
 });
 
-document.addEventListener('keydown', (e) => {
+canvas.addEventListener('keydown', (e) => {
+  if (state.modalOpen) return;
   if (state.stickyFocus == null) return;
   if (!state.pwrActive) return;
   if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
@@ -1377,20 +1382,21 @@ document.addEventListener('keydown', (e) => {
 }, true);
 
 
-document.addEventListener('keydown', e => {
+canvas.addEventListener('keydown', e => {
+    if (state.modalOpen) return;
 
-    // nothing to do if no sticky focus AND the key isn't Tab (which can set it)
+    // Page Up/Down select a panel; Tab always enters/leaves the editor normally.
     const hasFocus = state.stickyFocus !== null;
-    // --- Tab / Shift+Tab: cycle sticky focus with rollover
-    if (e.key === 'Tab') {
+    if (e.key === 'PageDown' || e.key === 'PageUp') {
         const n = state.rects.length;
         if (!n) return;
         e.preventDefault();
 
+        const previous = e.key === 'PageUp';
         if (!hasFocus) {
-            state.stickyFocus = e.shiftKey ? (n - 1) : 0;
+            state.stickyFocus = previous ? (n - 1) : 0;
         } else {
-            const delta = e.shiftKey ? -1 : 1;
+            const delta = previous ? -1 : 1;
             state.stickyFocus = (state.stickyFocus + delta + n) % n;
         }
         state.focusSource = 'canvas';
@@ -1478,6 +1484,7 @@ document.addEventListener('keydown', e => {
 
         case 'Delete': case 'Backspace': {
             if (state.stickyFocus == null) return;
+            e.preventDefault();
             commitDelete(state.stickyFocus, {
                 strategy: 'retarget'
             });
@@ -1646,7 +1653,7 @@ function renderHelpHTML() {
     </p>
 
     <p class="blurb" style="margin-top:0.8rem;">
-        …or <b>toggle</b> the chips (click them or press <b>M</b>/<b>P</b>/<b>I</b>):
+        …or <b>toggle</b> the chips (click them or, with the canvas focused, press <b>M</b>/<b>P</b>/<b>I</b>):
         <span class="demo" style="margin-top:0.5rem;">
         <span class="modchip modchip--roundL">mod</span>
         <span class="arrow">→</span>
@@ -1683,7 +1690,8 @@ function renderHelpHTML() {
 
     <div class="section">
       <h3><strong>Canvas</strong> (Left Panel) — Keyboard (Focused)</h3>
-      <div class="row"><span class="kbd">Tab</span>/<span class="kbd">Shift</span> + <span class="kbd">Tab</span> <span class="desc">Cycle focused rectangle (rollover)</span></div>
+      <div class="row"><span class="kbd">Tab</span>/<span class="kbd">Shift</span> + <span class="kbd">Tab</span> <span class="desc">Enter or leave the canvas; shortcuts below apply only while it has keyboard focus</span></div>
+      <div class="row"><span class="kbd">Page Down</span>/<span class="kbd">Page Up</span> <span class="desc">Select the next/previous rectangle (rollover)</span></div>
       <div class="row"><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">↑</span><span class="kbd">↓</span> <span class="desc">Move rectangle by 1 cell (blocked by borders/overlap)</span></div>
       <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Expand 1 cell from that side</span></div>
       <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Shift</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Contract 1 cell from that side</span></div>
@@ -1800,14 +1808,11 @@ helpModal.addEventListener('keydown', (e) => {
     }
 });
 
-// Optional: keyboard 'H' toggles help
-document.addEventListener('keydown', (e) => {
+// H opens help from the editor; Escape and the close button return to it.
+canvas.addEventListener('keydown', (e) => {
+    if (state.modalOpen) return;
     if (e.key.toLowerCase() !== 'h') return;
-    // avoid typing in inputs
-    const t = e.target;
-    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-    if (helpModal.classList.contains('hidden')) openHelp();
-    else closeHelp();
+    openHelp();
 });
 
 // Fill: show red power hint + different tooltip
@@ -1826,10 +1831,9 @@ document.getElementById('modIndMod')  ?.addEventListener('click', () => toggleLa
 document.getElementById('modIndPwr')  ?.addEventListener('click', () => toggleLatch('pwr'));
 document.getElementById('modIndShift')?.addEventListener('click', () => toggleLatch('inv'));
 
-// m / p / i toggle (ignore when typing)
-const isEditable = el => el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
-document.addEventListener('keydown', (e) => {
-  if (isEditable(e.target)) return;
+// m / p / i toggle while the canvas has keyboard focus.
+canvas.addEventListener('keydown', (e) => {
+  if (state.modalOpen) return;
   const k = e.key.toLowerCase();
   if (k === 'm') { e.preventDefault(); toggleLatch('mod'); }
   if (k === 'p') { e.preventDefault(); toggleLatch('pwr'); }
