@@ -1,4 +1,6 @@
-// The landing page's only script, besides the theme.
+// Landing page artwork, playback, grid reading order and thematic outlines.
+import { drawClusters } from './landing-clusters.js';
+import { landingOrders } from './landing-order.js';
 //
 // Card pictures: each .card-art[data-art=name] is filled with assets/cards/<name>.svg (drawn
 // by scripts/landing-art/ from the tool itself) when it comes near the viewport. The SVG is
@@ -83,11 +85,12 @@ addEventListener('pageshow', () => {
 // Reading order. Dense placement can set a later card beside or above an earlier one; so that
 // Tab and screen readers meet the cards in the order they appear, each card is pinned to the
 // cell CSS placed it in and the list is put in that order, row by row. Again whenever the
-// layout changes; without this script the wall is the same and Tab follows the card order.
+// layout changes. Without this script, CSS packs the thematic HTML order.
 /** A tile's span, from the custom properties style.css sets for its shape (1 when unset). @param {HTMLElement} li @param {string} name */
 const span = (li, name) => Number(getComputedStyle(li).getPropertyValue(name)) || 1;
-for (const wall of document.querySelectorAll('.grid')) {
+for (const wall of /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('#projects > .grid'))) {
   const cards = /** @type {HTMLElement[]} */ ([...wall.children]);
+  const byName = new Map(cards.map(card => [card.querySelector('.card-art')?.getAttribute('data-art'), card]));
   let layout = '';
   function readingOrder() {
     // Placement depends only on the column count (as declared: pinned cards can add implicit
@@ -98,7 +101,11 @@ for (const wall of document.querySelectorAll('.grid')) {
     layout = key;
     const focused = document.activeElement;
     for (const li of cards) { li.style.gridRow = ''; li.style.gridColumn = ''; }
-    wall.append(...cards);
+    const names = Number(columnCount) === 1 ? [...byName.keys()] : landingOrders[Number(columnCount)];
+    if (!names || names.length !== cards.length || new Set(names).size !== cards.length || names.some(name => !byName.has(name))) {
+      throw new Error(`Landing arrangement for ${columnCount} columns does not match its cards`);
+    }
+    wall.append(...names.map(name => /** @type {HTMLElement} */ (byName.get(name))));
     // The grid's lines, from its tracks and gaps, and the line nearest each tile's corner.
     const style = getComputedStyle(wall);
     const lines = (/** @type {string} */ tracks, /** @type {number} */ gap) => tracks.split(' ').map(parseFloat).reduce((at, size) => [...at, at[at.length - 1] + size + gap], [0]);
@@ -117,8 +124,9 @@ for (const wall of document.querySelectorAll('.grid')) {
     wall.append(...placed.sort((a, b) => a.row - b.row || a.column - b.column).map((p) => p.li));
     if (focused instanceof HTMLElement && wall.contains(focused)) focused.focus({ preventScroll: true });
   }
-  readingOrder();
-  new ResizeObserver(() => requestAnimationFrame(readingOrder)).observe(wall);
+  const redraw = () => { readingOrder(); drawClusters(wall); };
+  redraw();
+  new ResizeObserver(() => requestAnimationFrame(redraw)).observe(wall);
 }
 
 // The browser's toolbar colour follows the page's theme, which may be the visitor's choice

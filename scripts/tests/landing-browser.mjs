@@ -36,15 +36,15 @@ try {
     await page.evaluate(() => scrollTo(0, 0));
     await page.waitForTimeout(80);
     const result = await page.evaluate(() => {
-      const cards = [...document.querySelectorAll('.grid > li')];
+      const cards = [...document.querySelectorAll('#projects > .grid > li')];
       const sorted = [...cards].sort((a, b) => {
         const ra = a.getBoundingClientRect();
         const rb = b.getBoundingClientRect();
         return ra.top - rb.top || ra.left - rb.left;
       });
       let internalGaps = 0;
-      // Each thematic section has its own grid coordinates; merging them could conceal gaps.
-      for (const grid of document.querySelectorAll('.grid')) {
+      // Packing stays dense even where the category contours interlock.
+      for (const grid of document.querySelectorAll('#projects > .grid')) {
         const cells = new Set();
         for (const card of grid.children) {
           const style = getComputedStyle(card);
@@ -68,19 +68,48 @@ try {
           return c.bottom > r.bottom + 1 || c.right > r.right + 1 || child.scrollWidth > child.clientWidth + 1;
         });
       }).map(card => card.querySelector('h3')?.textContent);
-      return { overflow: document.documentElement.scrollWidth - innerWidth, order: cards.every((card, i) => card === sorted[i]), internalGaps, fullCards, clipped };
+      const paths = /** @type {SVGGeometryElement[]} */ ([...document.querySelectorAll('.cluster-outlines path')]);
+      const contourErrors = [];
+      for (const card of cards) {
+        const r = card.getBoundingClientRect();
+        for (const path of paths) {
+          const matrix = path.getScreenCTM();
+          if (!matrix) throw new Error('Missing SVG screen coordinates');
+          for (const [x, y] of [[r.x + r.width / 2, r.y + r.height / 2], [r.left + 4, r.top + 4], [r.right - 4, r.bottom - 4]]) {
+            const inside = path.isPointInFill(new DOMPoint(x, y).matrixTransform(matrix.inverse()));
+            if (inside !== (path.getAttribute('data-category') === card.getAttribute('data-category'))) contourErrors.push(card.querySelector('h3')?.textContent);
+          }
+        }
+      }
+      const labels = [...document.querySelectorAll('.cluster-label')];
+      const labelOverlaps = labels.filter(label => {
+        const r = label.getBoundingClientRect();
+        return cards.some(card => {
+          const c = card.getBoundingClientRect();
+          return r.left < c.right - 1 && r.right > c.left + 1 && r.top < c.bottom - 1 && r.bottom > c.top + 1;
+        });
+      }).map(label => label.textContent);
+      const wall = document.querySelector('#projects > .grid');
+      if (!wall) throw new Error('Missing landing grid');
+      const columns = Number(getComputedStyle(wall).getPropertyValue('--cols'));
+      return { overflow: document.documentElement.scrollWidth - innerWidth, order: cards.every((card, i) => card === sorted[i]), internalGaps, fullCards, clipped, contourErrors, labelOverlaps, labels: labels.length, paths: paths.length, columns };
     });
     assert.ok(result.overflow <= 1, `${width}×${height}: overflow ${result.overflow}`);
     assert.ok(result.order, `${width}×${height}: DOM and visual order differ`);
     assert.equal(result.internalGaps, 0, `${width}×${height}: internal gaps in the wall`);
     assert.deepEqual(result.clipped, [], `${width}×${height}: clipped card text`);
+    assert.equal(result.paths, 4, `${width}×${height}: missing category contours`);
+    assert.deepEqual(result.contourErrors, [], `${width}×${height}: contours must surround only their own cards`);
+    assert.deepEqual(result.labelOverlaps, [], `${width}×${height}: category labels cover cards`);
+    if (height > 500 && result.columns >= 4) assert.equal(result.labels, 4, `${width}×${height}: fragmented desktop clusters`);
     const minimumFullCards = width === 1366 ? 4 : width === 1440 ? 6 : width === 1920 ? 8 : 0;
     assert.ok(result.fullCards >= minimumFullCards, `${width}×${height}: only ${result.fullCards} full cards visible`);
   }
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
   assert.equal(await page.locator('.project-card').count(), 18);
-  assert.equal(await page.locator('.theme-group').count(), 3);
-  for (const id of ['design-make', 'plan-communicate', 'explore-compare']) {
+  assert.equal(await page.locator('#projects > .grid').count(), 1);
+  assert.ok(!(await page.locator('#intro').textContent()).includes('gift'));
+  for (const id of ['statistics', 'stats-art', 'art', 'everyday']) {
     await page.locator(`.theme-links a[href="#${id}"]`).focus();
     await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(() => document.activeElement?.id), id);
@@ -101,7 +130,7 @@ try {
   assert.equal(await page.locator('a[href="/ceo-salary-benchmark/"]').count(), 1);
   assert.ok(!(await page.locator('[data-art="ceo-salary-benchmark"]').textContent()).includes('Rethink Priorities'));
   assert.deepEqual(errors, []);
-  console.log('Landing: reduced motion, 13 resize states, per-group packing/reading order, density, unclipped text, theme navigation, resize focus and both new cards pass.');
+  console.log('Landing: reduced motion, 13 resize states, dense packing/reading order, category contour coverage, clear labels, density, text fit, theme navigation and focus pass.');
 } finally {
   await session.close();
 }

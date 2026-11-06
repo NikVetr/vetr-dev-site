@@ -4,7 +4,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## The landing page
 
-A compact introduction leads to three outlined groups: **Design & make**, **Plan & communicate**, and **Explore & compare**, with direct links to each group. Each tool has one tile, sized by how big the project is, with a picture, a short description and its source date. To add a tool, copy a card into the appropriate group in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture on that shape's canvas.
+A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Statistics**, **Statistics × Art**, **Art**, and **Everyday tools**. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels, theme jump links and each card's accessible description identify its category as well as colour. Each tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
 
 ### Tile sizes
 
@@ -42,11 +42,13 @@ The size comes from a project's size in code: the hand-written lines of the tool
 
 Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
-The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two columns a 3x3 tile is 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Each theme has an independent grid, ordered to pack without internal gaps at every supported column count. Dense placement can still set a later card beside an earlier one, so `assets/landing.js` pins each card to the cell CSS gave it and puts each list in that order, row by row, whenever its column count changes: Tab and screen readers meet the cards as they appear. Without the script the wall looks the same and Tab follows the source order within each theme. On a phone, and on a phone held sideways, rows follow their content instead: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target.
+The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two columns a 3x3 tile is 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated orders for each column count keep all four categories connected across desktop widths, while CSS dense placement packs without internal gaps. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
+
+Dense placement can set a later card beside an earlier one, so `assets/landing.js` pins each card to the cell CSS gave it and puts the list in that order, row by row, whenever its column count changes: Tab and screen readers meet the cards as they appear. `assets/landing-clusters.js` then draws boundaries from the placed cells and positions their labels in the gutters. Boundaries redraw when actual track sizes change, including text reflow. Without JavaScript, CSS packs the thematic HTML order and links remain usable; decorative outlines are absent. On a phone, and on a phone held sideways, rows follow their content: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target. See [site architecture](docs/architecture.md) for the layout flow.
 
 The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
-The directory also lists **b64 — Base64 Link Decoder** (`1x2`) under Plan & communicate and **Nonprofit Salary Benchmark** (`2x2`) under Explore & compare. b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice.
+The directory also lists **b64 — Base64 Link Decoder** (`1x2`) under Everyday tools and **Nonprofit Salary Benchmark** (`2x2`) under Statistics. b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice.
 
 ```sh
 node scripts/landing-art/build.mjs            # every picture
@@ -57,7 +59,7 @@ The cards that drive a page (agendamatic, layout-gui, sankey) need Playwright: s
 
 `assets/landing.js` inlines each picture when its card nears the viewport, so it paints in the page's theme. Hovering a card with a mouse or pen, or focusing it from the keyboard, plays the picture's loop, which is seamless (its last frame leads back into its first, which is the still); leaving stops it. Touch never plays it, and nothing moves under `prefers-reduced-motion`. These loops are the page's only motion.
 
-Turning reduced motion on also cancels an already-running loop or a pending player download. Run `node scripts/tests/landing-browser.mjs` to check this, per-group packing and reading order, first-viewport density, text fit, theme-link keyboard navigation, focus through resizing, and the b64/benchmark cards using the existing Playwright installation.
+Turning reduced motion on also cancels an already-running loop or a pending player download. Run `node scripts/tests/landing-browser.mjs` to check this, packing and reading order, category-boundary coverage and label clearance, first-viewport density, text fit, theme-link keyboard navigation, focus through resizing, and the b64/benchmark cards using the existing Playwright installation. Run `node --test scripts/tests/cluster-contours.mjs` for the grid-union geometry, including holes, concave boundaries and corner contacts.
 
 ## Finding your way around
 
