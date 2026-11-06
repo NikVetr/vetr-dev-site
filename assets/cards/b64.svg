@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="4" focusable="false">
+<style>
+[data-art="b64"] rect { fill: var(--art-paper); stroke: var(--art-line); }
+[data-art="b64"] text { fill: var(--art-ink); font: 11px ui-monospace, monospace; }
+[data-art="b64"] .number { fill: var(--art-muted); }
+[data-art="b64"] .layer-3 text { fill: var(--primary); }
+@media (prefers-reduced-motion: no-preference) {
+[data-art="b64"][data-playing] .layer rect { animation: b64-layer 4s linear infinite; }
+[data-art="b64"][data-playing] .layer-1 rect { animation-delay: 1s; } [data-art="b64"][data-playing] .layer-2 rect { animation-delay: 2s; } [data-art="b64"][data-playing] .layer-3 rect { animation-delay: 3s; }
+@keyframes b64-layer { 0%, 25%, 100% { stroke: var(--art-line); } 12.5% { stroke: var(--primary); } }
+}
+</style>
+<g class="layer layer-0">
+    <rect x="12" y="12" width="296" height="32" rx="5"/>
+    <text class="number" x="23" y="32">3</text>
+    <text x="46" y="32" textLength="248" lengthAdjust="spacingAndGlyphs">WVVoU01HTklUVFpNZVRreVdsaFNlVXh0VW14a2FUZzk=</text>
+  </g><g class="layer layer-1">
+    <rect x="12" y="51" width="296" height="32" rx="5"/>
+    <text class="number" x="23" y="71">2</text>
+    <text x="46" y="71" textLength="195.2" lengthAdjust="spacingAndGlyphs">YUhSMGNITTZMeTkyWlhSeUxtUmxkaTg9</text>
+  </g><g class="layer layer-2">
+    <rect x="12" y="90" width="296" height="32" rx="5"/>
+    <text class="number" x="23" y="110">1</text>
+    <text x="46" y="110" textLength="146.39999999999998" lengthAdjust="spacingAndGlyphs">aHR0cHM6Ly92ZXRyLmRldi8=</text>
+  </g><g class="layer layer-3">
+    <rect x="12" y="129" width="296" height="32" rx="5"/>
+    <text class="number" x="23" y="149">↗</text>
+    <text x="46" y="149" textLength="103.69999999999999" lengthAdjust="spacingAndGlyphs">https://vetr.dev/</text>
+  </g>
+</svg>

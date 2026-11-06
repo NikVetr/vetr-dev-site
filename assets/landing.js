@@ -28,13 +28,14 @@ const stops = new WeakMap();
 
 /** Starts the picture's loop: CSS alone, or with its script once that is ready. @param {HTMLElement} art */
 async function start(art) {
+  if (reducedMotion.matches || !wanted.has(art)) return;
   const svg = art.querySelector('svg');
   if (!svg) return;   // it starts when it loads
   const name = svg.dataset.player;
   if (!name) { art.dataset.playing = ''; return; }
   const player = await import(`./players/${name}.js`);
   await player.prepare();
-  if (!wanted.has(art) || stops.has(art)) return;
+  if (reducedMotion.matches || !wanted.has(art) || stops.has(art)) return;
   art.dataset.playing = '';
   stops.set(art, player.play(art));
 }
@@ -68,9 +69,15 @@ for (const card of document.querySelectorAll('.project-card')) {
   card.addEventListener('focus', () => { if (card.matches(':focus-visible')) play(); });
   card.addEventListener('blur', () => stop(art));
 }
+// Cancel pending starts as well as active players when the preference changes.
+reducedMotion.addEventListener('change', () => {
+  if (reducedMotion.matches) {
+    for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
+  }
+});
 // Coming back to the page (Back button, bfcache) starts with every picture still.
 addEventListener('pageshow', () => {
-  for (const art of document.querySelectorAll('.card-art[data-playing]')) stop(/** @type {HTMLElement} */ (art));
+  for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
 });
 
 // Reading order. Dense placement can set a later card beside or above an earlier one; so that

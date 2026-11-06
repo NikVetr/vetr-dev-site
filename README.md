@@ -46,6 +46,8 @@ The column count steps with the width, from one on a phone to seven on an ultraw
 
 The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
+The directory also lists **b64 — Base64 Link Decoder** (`1x2`) and **Nonprofit Salary Benchmark** (`2x2`). b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice. Adding these cards preserves the previous cards' relative order, with placement checked for internal gaps at two through seven columns.
+
 ```sh
 node scripts/landing-art/build.mjs            # every picture
 node scripts/landing-art/build.mjs helix      # one
@@ -54,6 +56,16 @@ node scripts/landing-art/build.mjs helix      # one
 The cards that drive a page (agendamatic, layout-gui, sankey) need Playwright: set `PLAYWRIGHT` to an installed `playwright` package, or `npm ci` in any tool folder. `scripts/landing-art/svg.mjs` holds what the pictures share: the 320 × 180 canvas, the theme colours (`--art-*` in `style.css`), scoping each picture's style sheet to its card, and the flip-book.
 
 `assets/landing.js` inlines each picture when its card nears the viewport, so it paints in the page's theme. Hovering a card with a mouse or pen, or focusing it from the keyboard, plays the picture's loop, which is seamless (its last frame leads back into its first, which is the still); leaving stops it. Touch never plays it, and nothing moves under `prefers-reduced-motion`. These loops are the page's only motion.
+
+Turning reduced motion on also cancels an already-running loop or a pending player download. Run `node scripts/tests/landing-browser.mjs` to check this, responsive reading order, and the new cards using the existing Playwright installation.
+
+## Finding your way around
+
+Tool entry pages pair their names with their function: **Palette Town — Color Palette Extender**, **Wanderwart — Pocket Language Guide**, **autoCHAIR — Meeting Agenda Timer**, and **Multipanel Figure Editor**. A small collection navigation strip provides the route back to vetr.dev, the tool's name, Help, Source, and Feedback. `shared/tool-nav.css` styles only that strip and its help panels; `shared/tool-nav.js` opens the tool's existing help or explanation. Tools retain their own visual design and theme controls. Sankey retains its existing interface. Run `node --test shared/tests/tool-nav.browser.mjs` to verify cross-page help and dialog focus return. Wanderwart’s shell/mobile builders synchronize local copies from these shared files so its standalone server, offline cache and native bundle keep working.
+
+The figure editor's canvas is keyboard-focusable. Tab and Shift+Tab enter and leave it normally; Page Down / Page Up select panels, arrows move the selection, and H opens help. Editing shortcuts act only when the canvas has focus. Run `node --test layout-gui/tests/keyboard.mjs` for the focused browser regressions.
+
+The salary benchmark opens with a generic, explicitly illustrative organization profile. `ceo-salary-benchmark/?profile=RP` selects its existing RP presentation and reference values; shared links preserve their profile. This is a presentation preset, not access control: the static source and data remain public. The comparison cohort and fitted models are unchanged; see the benchmark's `summary.md` for scope and URL details.
 
 ## Shared code and look
 
