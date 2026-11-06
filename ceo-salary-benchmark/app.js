@@ -44,24 +44,57 @@
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   // Provisional post-freeze scores carry many decimals; frozen scores use at most one.
   const formatScore = (value) => value == null ? "—" : String(Number(Number(value).toFixed(1)));
-  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
+  // Earlier shared states omitted the RP defaults. Keep their meaning unless the
+  // visitor explicitly requests a different profile; new unqualified visits are generic.
+  const profileParameters = new URLSearchParams(window.location.search);
+  let legacyRpState = false;
+  if (!profileParameters.has("profile") && profileParameters.has("s")) {
+    try {
+      const payload = decodeUrlState(profileParameters.get("s"));
+      legacyRpState = payload && typeof payload === "object" && (payload.v == null || payload.v <= 10);
+    } catch { /* The existing shared-state error handler reports invalid payloads. */ }
+  }
+  const RP_MODE = profileParameters.get("profile")?.toUpperCase() === "RP" || legacyRpState;
+  /** @param {string} rp @param {string} generic */
+  const profileCopy = (rp, generic) => RP_MODE ? rp : generic;
+  /** @param {string | undefined} text */
+  const omitProfileProse = (text) => !RP_MODE && /\bRP\b|Rethink Priorities/i.test(text || "");
+  /** @type {Readonly<{ expenses: number, staff: number }>} */
+  const WEIGHT_TARGET = Object.freeze(RP_MODE
+    ? { expenses: 7_500_000, staff: 57 }
+    : { expenses: 10_000_000, staff: 50 });
+  if (RP_MODE) {
+    for (const [attribute, property] of [["data-rp-text", "textContent"], ["data-rp-tooltip", "data-tooltip"], ["data-rp-label", "aria-label"], ["data-rp-href", "href"]]) {
+      document.querySelectorAll(`[${attribute}]`).forEach((element) => {
+        const value = /** @type {string} */ (element.getAttribute(attribute));
+        if (property === "textContent") element.textContent = value;
+        else element.setAttribute(property, value);
+      });
+    }
+  }
+  document.documentElement.dataset.benchmarkProfile = RP_MODE ? "RP" : "generic";
   // The protocol pre-registers empirical quantiles and limits the main CEO
   // filing analysis to USD 3M-35M; links from earlier URL versions keep their defaults.
   const DEFAULT_FIT = "empirical";
   const LEGACY_DEFAULT_FIT = "lognormal";
   const CEO_DEFAULT_EXPENSE_BAND = Object.freeze({ low: 3_000_000, high: 35_000_000 });
-  const RP_FORM990_PROFILE = Object.freeze({
+  const AUTO_WEIGHT_TARGET = Object.freeze(RP_MODE ? {
     expenses: Number(DATA.rpReference?.expenses),
     staff: Number(DATA.rpReference?.staff),
-  });
-  if (!(RP_FORM990_PROFILE.expenses > 0) || !(RP_FORM990_PROFILE.staff > 0)) {
-    throw new Error("The same-source RP Form 990 scale profile is unavailable.");
+  } : { ...WEIGHT_TARGET });
+  if (!(AUTO_WEIGHT_TARGET.expenses > 0) || !(AUTO_WEIGHT_TARGET.staff > 0)) {
+    throw new Error("The automatic-weight scale profile is unavailable.");
   }
-  const AUTO_WEIGHT_TOOLTIP = `Automatic weights never use salary. Form 990 records receive more weight when their reported expenses and employee counts are closer to RP's Form 990 values (${compactMoney(RP_FORM990_PROFILE.expenses)} and ${RP_FORM990_PROFILE.staff} employees). Job postings use a separate similarity score based only on non-pay information. Missing organization-size information reduces a record's weight. The target effective sample size controls how concentrated the Form 990 weights may become; pay-source balancing and your adjustments are applied afterward.`;
-  const MODEL_PROFILE_DEFAULTS = Object.freeze(Object.fromEntries([
+  const AUTO_WEIGHT_TOOLTIP = `Automatic weights never use salary. Form 990 records receive more weight when their reported expenses and employee counts are closer to ${RP_MODE ? "RP's Form 990 values" : "the illustrative reference"} (${compactMoney(AUTO_WEIGHT_TARGET.expenses)} and ${AUTO_WEIGHT_TARGET.staff} employees). Job postings use a separate similarity score based only on non-pay information. Missing organization-size information reduces a record's weight. The target effective sample size controls how concentrated the Form 990 weights may become; pay-source balancing and your adjustments are applied afterward.`;
+  const MODEL_PROFILE_DEFAULTS = Object.freeze(RP_MODE ? Object.fromEntries([
     "expenses", "revenue", "staff", "highest_other_base", "focus_area", "ea_relationship",
     "organization_type", "title_group", "location_scope", "remote_category", "fiscal_sponsor_category",
-  ].map((key) => [key, PREDICTIVE_MODEL.rpProfile[key]])));
+  ].map((key) => [key, PREDICTIVE_MODEL.rpProfile[key]])) : {
+    expenses: 10_000_000, revenue: 10_000_000, staff: 50, highest_other_base: 150_000,
+    focus_area: "__average__", ea_relationship: "Functional overlap",
+    organization_type: "__average__", title_group: "CEO", location_scope: "__average__",
+    remote_category: "__average__", fiscal_sponsor_category: "__average__",
+  });
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
     description: "Reviewed CEO pay benchmark using Form 990 filings and job postings.",
@@ -183,6 +216,7 @@
   }
 
   function activeRpReferences(key = state.position) {
+    if (!RP_MODE) return [];
     if (key === "ceo") return DATA.rpReference ? [DATA.rpReference] : [];
     if (positionDefinition(key).pooled) {
       return [...new Map(positionDefinition(key).memberPositionKeys.flatMap((member) => activeRpReferences(member)).map((row) => [row.id, {
@@ -220,8 +254,8 @@
     weightings: new Set(),
     autoTargetEss: 35,
     discreteWeights: {},
-    targetExpense: RP_WEIGHT_TARGET.expenses,
-    targetStaff: RP_WEIGHT_TARGET.staff,
+    targetExpense: WEIGHT_TARGET.expenses,
+    targetStaff: WEIGHT_TARGET.staff,
     expenseBandwidth: 0.7,
     staffBandwidth: 0.7,
     recencyHalfLife: 4,
@@ -863,11 +897,11 @@
     tier: "Suggested values give the closest peer groups more influence and broader comparison groups less.",
     eaAffinity: "Suggested values give more influence to organizations with a documented connection to effective altruism, while leaving unclassified records neutral.",
     sourceType: "Suggested values give reported Form 990 pay full influence and job-posting midpoints slightly less because postings are offers rather than pay already received.",
-    topic: "Suggested values give more influence to RP cause areas and research, evidence, evaluation, policy, or advisory work.",
+    topic: profileCopy("Suggested values give more influence to RP cause areas and research, evidence, evaluation, policy, or advisory work.", "Suggested values favor animal welfare, global health, risk reduction, effective giving, and research, evidence, evaluation, policy or advisory work. These are optional research-cohort preferences, not universal nonprofit weights."),
     titleGroup: "Suggested values give CEO roles full influence, followed by Executive Director, President, other executive, and unreported titles.",
     structure: "Suggested values give more influence to independent, board-accountable nonprofits and less to affiliates, sponsored projects, unclear organizations, or subordinate roles.",
-    remoteCategory: "Suggested values give fully remote or distributed organizations more influence because RP operates remotely; unknown cases remain close to neutral.",
-    fiscalSponsorCategory: "Suggested values give organizations that themselves host fiscally sponsored projects more influence because RP also provides fiscal sponsorship; unknown cases remain close to neutral.",
+    remoteCategory: profileCopy("Suggested values give fully remote or distributed organizations more influence because RP operates remotely; unknown cases remain close to neutral.", "Suggested values favor fully remote or distributed organizations; unknown cases remain close to neutral. Edit these optional preferences for your comparison."),
+    fiscalSponsorCategory: profileCopy("Suggested values give organizations that themselves host fiscally sponsored projects more influence because RP also provides fiscal sponsorship; unknown cases remain close to neutral.", "Suggested values favor organizations that host fiscally sponsored projects; unknown cases remain close to neutral. Edit these optional preferences for your comparison."),
   };
 
   function defaultDiscreteWeight(key, value, positionKey = state.position) {
@@ -1030,6 +1064,7 @@
       else rationale += " It has partial functional overlap but a less direct mission or operating-model match.";
       explanation = `${rationale} Salary was not used to assign the mission area.`;
     }
+    if (!RP_MODE) explanation = explanation.replaceAll("RP-like", "research-focused").replaceAll("RP’s", "a research nonprofit’s").replaceAll("RP's", "a research nonprofit's").replace(/\ban RP\b/g, "a research-focused").replace(/\bRP\b/g, "a research-focused nonprofit");
     return `${explanation} Suggested weight: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference. You can edit this value.`;
   }
 
@@ -1540,8 +1575,8 @@
     const staffScale = robustScale(observedStaff);
     const expenseMedian = sampleQuantile(observedExpenses, 0.5);
     const staffMedian = sampleQuantile(observedStaff, 0.5);
-    const rpExpense = Math.log(RP_FORM990_PROFILE.expenses);
-    const rpStaff = Math.log(RP_FORM990_PROFILE.staff);
+    const rpExpense = Math.log(AUTO_WEIGHT_TARGET.expenses);
+    const rpStaff = Math.log(AUTO_WEIGHT_TARGET.staff);
     const distances = candidateRows.map((row, index) => {
       const expenseMissing = !Number.isFinite(logExpenses[index]);
       const staffMissing = !Number.isFinite(logStaff[index]);
@@ -3104,7 +3139,7 @@
         renderTable(); scheduleUrlState();
         if (expanded) renderScatterMatrix();
       },
-      note: "Weighted, pairwise-complete records; each cell reports n. Log scale uses positive values. Gold marks RP (excluded from correlations). Open a pair for ranges, contours and quantile summaries.",
+      note: profileCopy("Weighted, pairwise-complete records; each cell reports n. Log scale uses positive values. Gold marks RP (excluded from correlations). Open a pair for ranges, contours and quantile summaries.", "Weighted, pairwise-complete records; each cell reports n. Log scale uses positive values. Open a pair for ranges, contours and quantile summaries."),
     });
     if (!expanded) {
       const expand = resultElement("button", "text-button", "Expand ↗"); expand.type = "button";
@@ -3120,7 +3155,7 @@
     refs.statNeff.textContent = "Pairwise"; refs.statNeffUnit.textContent = "available cases";
     refs.statCenter.textContent = settings.scale === "log" ? "Log" : "Original"; refs.statCenterUnit.textContent = "value scale";
     refs.chartLegend.replaceChildren(); appendCategoryLegend(colors); appendPointSizeLegend(items);
-    $("#chart-description").textContent = "A selectable matrix of weighted record correlations and pairs plots. Correlations exclude RP reference marks and use the values available in each pair.";
+    $("#chart-description").textContent = profileCopy("A selectable matrix of weighted record correlations and pairs plots. Correlations exclude RP reference marks and use the values available in each pair.", "A selectable matrix of weighted record correlations and pairs plots, using the values available in each pair.");
   }
 
   const MODEL_CONTINUOUS_LABELS = Object.freeze({
@@ -3599,7 +3634,7 @@
 
   function showModelSpecification(row) {
     $("#model-explanation-title").textContent = row.label;
-    $("#model-explanation-content").innerHTML = salaryModelVignette(row, PREDICTIVE_MODEL.models[row.modelKey], PREDICTIVE_MODEL);
+    $("#model-explanation-content").innerHTML = salaryModelVignette(row, PREDICTIVE_MODEL.models[row.modelKey], PREDICTIVE_MODEL, RP_MODE);
     $("#model-explanation-dialog").showModal();
   }
 
@@ -3970,7 +4005,7 @@
       80: [distribution.quantile(.1), distribution.quantile(.9)],
       50: [distribution.quantile(.25), distribution.quantile(.75)],
     };
-    const referenceSalary = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
+    const referenceSalary = RP_MODE ? Number(PREDICTIVE_MODEL.rpProfile.reference_salary) : NaN;
     const compactWidth = width < 480; const compactHeight = height < 230;
     const margin = { top: compactHeight ? 30 : 38, right: compactWidth ? 10 : 18, bottom: compactHeight ? 38 : 48, left: compactWidth ? 58 : 68 };
     const innerWidth = width - margin.left - margin.right; const innerHeight = height - margin.top - margin.bottom;
@@ -4796,7 +4831,13 @@
     $("#dialog-title").textContent = row.organization;
     $("#dialog-measure-label").textContent = measureLabel(row);
     $("#dialog-value").textContent = money(salary(row));
-    $("#dialog-evidence").textContent = row.evidenceText;
+    const evidence = String(row.evidenceText || "");
+    // These descriptions combine source facts with review notes. Omit whole
+    // profile-specific sentences while preserving the remaining source wording.
+    $("#dialog-evidence").textContent = omitProfileProse(evidence)
+      ? evidence.split(/(?<=[.!?])\s+/).filter((sentence) => !omitProfileProse(sentence)).join(" ")
+        + " [Organization-specific comparison note omitted.]"
+      : evidence;
     const meta = $("#dialog-meta");
     meta.replaceChildren();
     [
@@ -4918,6 +4959,18 @@
     details.open = false;
     if (!provenance) return;
 
+    let omittedComparisonNote = false;
+    /** @param {string | undefined} text */
+    const reviewText = (text) => {
+      // Preserve source prose verbatim; organization-specific comparisons belong
+      // to their explicit profile, not a rewritten generic evidence statement.
+      if (omitProfileProse(text)) {
+        omittedComparisonNote = true;
+        return "";
+      }
+      return text || "";
+    };
+    const caveats = reviewText(provenance.caveats);
     const expansion = provenance.provenanceType === "independent_expansion_review";
     $("#dialog-provenance-confidence").textContent = expansion ? provenance.confidence
       : `${humanizeCategory(provenance.confidence || "Unspecified")} confidence in this classification`;
@@ -4925,7 +4978,7 @@
       ? "Organization categories reuse reviewed employer profiles where available. Role scope is assessed separately from disclosed pay."
       : [
       "These categories were assigned without using pay.",
-      provenance.caveats ? `Important note: ${provenance.caveats}` : "",
+      caveats ? `Important note: ${caveats}` : "",
     ].filter(Boolean).join(" ");
 
     const records = $("#dialog-provenance-records");
@@ -4937,7 +4990,7 @@
       ["Peer group", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
       ["Effective Altruism", provenance.ea.value || "Not classified", provenance.ea.rationale, provenance.ea.citation],
       ["Organization type", [provenance.structure.expected && `Expected type: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Record flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Not classified", provenance.structure.rationale, provenance.structure.citation],
-      ["Area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Not classified", provenance.topic.rationale, provenance.topic.citation],
+      ["Area", [provenance.topic.value, reviewText(provenance.topic.sourceDescription)].filter(Boolean).join(" · ") || "Not classified", provenance.topic.rationale, provenance.topic.citation],
       ["Title", provenance.title.analysisGroup || "Not classified", provenance.title.rationale, provenance.title.citation],
     ];
     const observation = row.observationCategoryProvenance;
@@ -4948,7 +5001,7 @@
       categories.push([
         "Review of the filed record",
         [observation.tier.value && `Tier ${observation.tier.value}`, observation.tier.label, observation.structure.observationFlag && `Flag: ${observation.structure.observationFlag}`].filter(Boolean).join(" · "),
-        [observation.tier.rationale, observation.structure.rationale, differences.length ? `Recorded difference: ${differences.join("; ")}.` : "The peer group and mission area agree between the selection and filing reviews."].filter(Boolean).join(" "),
+        [reviewText(observation.tier.rationale), reviewText(observation.structure.rationale), differences.length ? `Recorded difference: ${differences.join("; ")}.` : "The peer group and mission area agree between the selection and filing reviews."].filter(Boolean).join(" "),
         [observation.tier.citation, observation.structure.citation].filter(Boolean).join(" | "),
       ]);
     }
@@ -4972,12 +5025,16 @@
       const headingLabel = document.createElement("span"); headingLabel.textContent = label;
       const headingValue = document.createElement("strong"); headingValue.textContent = value;
       heading.append(headingLabel, headingValue);
-      const description = document.createElement("p"); description.textContent = rationale || "No additional explanation is available.";
+      const visibleRationale = reviewText(rationale);
+      const description = document.createElement("p");
+      description.textContent = visibleRationale || (rationale ? "" : "No additional explanation is available.");
+      description.hidden = !description.textContent;
       const citations = document.createElement("div"); citations.className = "provenance-citations";
       appendCitationLinks(citations, citation);
       section.append(heading, description, citations);
       records.append(section);
     });
+    if (omittedComparisonNote) $("#dialog-provenance-intro").textContent += " Organization-specific comparison notes are omitted here; the original review documents remain linked below.";
 
     const links = $("#dialog-provenance-links");
     links.replaceChildren();
@@ -5088,7 +5145,7 @@
     const balanced = state.weightings.has("streamBalanced") && state.stream === "combined";
     let baseDescription = components.length
       ? state.weightings.has("comparability")
-        ? `Automatic weights compare Form 990 organizations with RP by expenses and staff (target effective sample size ${state.autoTargetEss}); job postings use reviewed non-pay similarity scores. Salary is not used.`
+        ? `Automatic weights compare Form 990 organizations with ${RP_MODE ? "RP" : "the illustrative $10M / 50-person reference"} by expenses and staff (target effective sample size ${state.autoTargetEss}); job postings use reviewed research-cohort non-pay similarity scores. Salary is not used.`
         : `Weights combine ${components.join(" × ")}. Records missing a selected size, staff, or year value receive a reduced weight.`
       : (isCeoPosition()
         ? "No weighting options selected: every included record counts equally."
@@ -5162,7 +5219,7 @@
     const keys = ["comparability", "size", "staff", "recency"].filter((key) => state.weightings.has(key));
     refs.comparabilityProfileField.hidden = !state.weightings.has("comparability");
     refs.autoTargetEssField.hidden = !state.weightings.has("comparability") || state.stream === "jobAds";
-    refs.rpScaleReference.hidden = !keys.some((key) => key === "size" || key === "staff");
+    refs.rpScaleReference.hidden = !RP_MODE || !keys.some((key) => key === "size" || key === "staff");
     refs.weightProfileSlots.forEach((slot) => slot.replaceChildren());
     keys.forEach((key) => {
       let values;
@@ -5196,7 +5253,7 @@
           if (postingCalibration) {
             parameter += `; job postings · effective sample size ${postingCalibration.ess.toFixed(1)} · largest weight ${postingCalibration.maximum.toFixed(2)}`;
           }
-          axisTitle = "Difference in organization size from RP (log scale)";
+          axisTitle = profileCopy("Difference in organization size from RP (log scale)", "Difference from illustrative reference size (log scale)");
         }
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
@@ -5214,7 +5271,7 @@
       if (!values.length) return;
       const postingProfile = key === "comparability" && autoCalibration?.status === "posting_match_score";
       let target = key === "comparability" ? (postingProfile ? null : 0) : key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
-      const rpReference = key === "comparability" ? (postingProfile ? null : 0) : key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
+      const rpReference = !RP_MODE ? null : key === "comparability" ? (postingProfile ? null : 0) : key === "size" ? WEIGHT_TARGET.expenses : key === "staff" ? WEIGHT_TARGET.staff : null;
       const domainValues = [...values, target, rpReference].filter((value) => value != null && Number.isFinite(value));
       const rawMin = Math.min(...domainValues); const rawMax = Math.max(...domainValues);
       if (key === "recency") target = rawMax;
@@ -5318,7 +5375,7 @@
       : `${description} Each selected organization has equal total influence before weighting adjustments.`;
     refs.appTitle.setAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     document.title = `${position.pageLabel} Salary Benchmark · vetr.dev`;
-    refs.appDescription.content = `Interactive Rethink Priorities ${position.pageLabel} salary benchmark explorer`;
+    refs.appDescription.content = `Interactive ${RP_MODE ? "Rethink Priorities" : "nonprofit"} ${position.pageLabel} salary benchmark explorer`;
     refs.tablePanel.setAttribute("aria-label", ceo
       ? "Organization pay table"
       : `${position.pageLabel} pay table`);
@@ -5339,7 +5396,7 @@
       ? ""
       : "This position currently has only pay reported in Form 990 filings.";
     refs.autoWeightNote.textContent = ceo
-      ? "Form 990s: similarity to RP's size · postings: non-pay similarity"
+      ? profileCopy("Form 990s: similarity to RP's size · postings: non-pay similarity", "Form 990s: illustrative $10M / 50-person reference · postings: research-cohort similarity")
       : "Automatic CEO weighting only";
   }
 
@@ -5396,7 +5453,7 @@
     refs.sampleDescription.textContent = {
       primary: `Reviewed ${roleLabel} pay records used in the main benchmark.`,
       sensitivity: "Recommended records plus broader comparisons, including unresolved CEO-hours cases.",
-      clean: "Recommended records from organization types most similar to RP.",
+      clean: profileCopy("Recommended records from organization types most similar to RP.", "Recommended records from independent, board-accountable research nonprofits."),
       tierA: "Only the closest Form 990 peers and job-posting matches.",
       observed: "All records with usable pay, including broader comparisons.",
     }[state.sample];
@@ -5442,8 +5499,8 @@
     return available[(current + direction + available.length) % available.length]?.dataset.chartView || "";
   }
 
-  const URL_STATE_VERSION = 10;
-  const SUPPORTED_URL_STATE_VERSIONS = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, URL_STATE_VERSION]);
+  const URL_STATE_VERSION = 11;
+  const SUPPORTED_URL_STATE_VERSIONS = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, 10, URL_STATE_VERSION]);
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -5547,7 +5604,7 @@
   const shareRowCodes = new Map();
   let urlSyncReady = false;
   let urlSyncScheduled = false;
-  const SCENARIO_STORAGE_KEY = "rp-salary-benchmark.scenarios.v1";
+  const SCENARIO_STORAGE_KEY = RP_MODE ? "rp-salary-benchmark.scenarios.v1" : "nonprofit-salary-benchmark.scenarios.v1";
   const MAX_SCENARIOS = 4;
   let savedScenarios = [];
   let activeScenarioId = "";
@@ -5626,8 +5683,8 @@
     const customOverrides = rows().filter((row) => rowModifiedWeights(row).has(row.id))
       .map((row) => [shareRowCode(row), rowCustomWeights(row).get(row.id) ?? 1]);
     const parameters = {};
-    if (state.weightings.has("size") && state.targetExpense !== RP_WEIGHT_TARGET.expenses) parameters.e = state.targetExpense;
-    if (state.weightings.has("staff") && state.targetStaff !== RP_WEIGHT_TARGET.staff) parameters.s = state.targetStaff;
+    if (state.weightings.has("size") && state.targetExpense !== WEIGHT_TARGET.expenses) parameters.e = state.targetExpense;
+    if (state.weightings.has("staff") && state.targetStaff !== WEIGHT_TARGET.staff) parameters.s = state.targetStaff;
     if (state.weightings.has("size") && state.expenseBandwidth !== 0.7) parameters.b = state.expenseBandwidth;
     if (state.weightings.has("staff") && state.staffBandwidth !== 0.7) parameters.f = state.staffBandwidth;
     if (state.weightings.has("recency") && state.recencyHalfLife !== 4) parameters.r = state.recencyHalfLife;
@@ -5789,7 +5846,7 @@
       const prediction = currentModelPrediction();
       if (!prediction?.distribution.count) throw new Error("The selected model profile does not produce a prediction.");
       const values = [0.25, 0.5, 0.75].map((probability) => prediction.distribution.quantile(probability));
-      const reference = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
+      const reference = RP_MODE ? Number(PREDICTIVE_MODEL.rpProfile.reference_salary) : NaN;
       const referencePercentile = prediction.distribution.cdf(reference) * 100;
       const trainingRows = activeModelTrainingRecords();
       const trainingOrganizations = new Set(trainingRows.map((row) => String(row.organization || row.id).trim().toLowerCase()));
@@ -5986,6 +6043,7 @@
 
   function savedScenarioUrl(scenario) {
     const url = new URL(window.location.href);
+    if (RP_MODE) url.searchParams.set("profile", "RP");
     if (USE_SEMANTIC_POSITION_ROUTES) {
       url.pathname = positionRoutePath(scenario.position);
       url.searchParams.delete("position");
@@ -6365,7 +6423,7 @@
       { key: "weightEdits", label: "Weight edits", numeric: false },
       { key: "basis", label: "Dollar basis", numeric: false },
     ];
-    metrics.forEach((metric, metricIndex) => {
+    metrics.filter((metric) => RP_MODE || !["rpValue", "rpPercentile"].includes(metric.key)).forEach((metric, metricIndex) => {
       const row = document.createElement("tr");
       const heading = document.createElement("th");
       heading.scope = "row";
@@ -7581,6 +7639,7 @@
     urlSyncScheduled = false;
     if (!urlSyncReady) return;
     const url = new URL(window.location.href);
+    if (RP_MODE) url.searchParams.set("profile", "RP");
     const payload = sharePayload();
     if (USE_SEMANTIC_POSITION_ROUTES) {
       url.pathname = positionRoutePath(state.position);
@@ -7603,6 +7662,7 @@
 
   function clearUrlState() {
     const url = new URL(window.location.href);
+    if (RP_MODE) url.searchParams.set("profile", "RP");
     url.pathname = USE_SEMANTIC_POSITION_ROUTES
       ? positionRoutePath("ceo")
       : STANDALONE_ROUTE_PATH;
@@ -7757,9 +7817,9 @@
       && (!Number.isFinite(highestOtherValue) || highestOtherValue < MODEL_PROFILE_BOUNDS.highest_other_base[0]
         || highestOtherValue > MODEL_PROFILE_BOUNDS.highest_other_base[1]),
     ));
-    const core = DATA.rpReference?.coreScale;
+    const core = RP_MODE ? DATA.rpReference?.coreScale : null;
     refs.modelSettingsNote.textContent = intercept ? "Profile inputs are unused."
-      : core ? `RP inputs default to its ${compactMoney(core.expenses)} core budget and ${core.staff} FTE; its 2024 filing reports ${compactMoney(DATA.rpReference.expenses)} consolidated expenses, including sponsored projects.` : "";
+      : core ? `RP inputs default to its ${compactMoney(core.expenses)} core budget and ${core.staff} FTE; its 2024 filing reports ${compactMoney(DATA.rpReference.expenses)} consolidated expenses, including sponsored projects.` : "Illustrative inputs: $10M expenses, $10M revenue, 50 employees and $150K highest-other base pay. Category averages are centered model effects, not an average organization. Edit these inputs for your comparison.";
   }
 
   function syncControlsFromState() {
@@ -7847,7 +7907,7 @@
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
     state.position = enumValue(analysis.pos, [...POSITION_BY_KEY.keys()], "ceo");
     // Version 10 changed the CEO stream, fit and expense-range defaults.
-    const legacyDefaults = sourceVersion !== URL_STATE_VERSION;
+    const legacyDefaults = sourceVersion < 10;
     const fallbackStream = sourceVersion === 1 ? "incumbents" : legacyDefaults ? "combined" : defaultPositionStream(state.position);
     state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], fallbackStream);
     if (!isCeoPosition() && !positionJobAds().length) state.stream = "incumbents";
@@ -8002,7 +8062,7 @@
     activeScenarioId = "";
     Object.assign(state, {
       position: "ceo", stream: defaultPositionStream("ceo"), measure: "base", inflationAdjusted: true, sample: "primary", fit: DEFAULT_FIT, weightings: new Set(), discreteWeights: {}, autoTargetEss: 35,
-      targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
+      targetExpense: WEIGHT_TARGET.expenses, targetStaff: WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram",
       axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
       axisScales: { histogram: "linear", scatterX: "log", scatterY: "linear" },
@@ -8041,7 +8101,7 @@
     syncAxisControls();
     syncModelControls();
     refs.chartColor.value = state.chartColor; refs.showContours.checked = true; refs.showJobAdIntervals.checked = true;
-    refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
+    refs.targetExpense.value = WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.autoTargetEss.value = 35; refs.autoTargetEssValue.value = 35;
     refs.quantileGranularity.value = "quintiles";
@@ -8223,8 +8283,8 @@
     } else state.weightings.delete(input.value);
     renderWeightControls(); renderAll();
   }));
-  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || RP_WEIGHT_TARGET.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
-  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || RP_WEIGHT_TARGET.staff, 1, 1000); renderAll(); });
+  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || WEIGHT_TARGET.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
+  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || WEIGHT_TARGET.staff, 1, 1000); renderAll(); });
   refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });

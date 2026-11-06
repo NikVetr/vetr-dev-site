@@ -1,6 +1,12 @@
 # Leadership compensation benchmark
 
-This folder contains the public-record compensation benchmark for Rethink Priorities and its static HTML/CSS/JavaScript explorer. CEO is canonical at `/ceo-salary-benchmark/`; 36 other title-specific positions and nine pooled functional-leadership views have generated semantic routes. The application is decision support for comparisons among reviewed disclosures, not a representative labor-market survey.
+This folder contains a public-record nonprofit compensation benchmark and its static HTML/CSS/JavaScript explorer. CEO is canonical at `/ceo-salary-benchmark/`; 36 other title-specific positions and nine pooled functional-leadership views have generated semantic routes. The application is decision support for comparisons among reviewed disclosures, not a representative labor-market survey.
+
+## Entry profiles
+
+The unqualified page opens as Nonprofit Salary Benchmark, using the same reviewed research-nonprofit cohort and the same fitted models. It omits organization-specific reference rows and chart markers. Source previews omit RP-specific comparison prose while retaining neutral classifications, evidence and citations; the original review documents remain linked. The prediction inputs start from an explicitly illustrative example: $10M annual expenses and revenue, 50 employees, and $150K highest-other base pay. Categorical inputs use centered average effects, except the CEO title and the model’s Functional overlap EA reference. These values are editable inputs, not estimates for an average employer. Optional weighting retains the reviewed research-cohort preferences; its automatic size comparison uses the illustrative $10M / 50-person reference. Unweighted default empirical results are unchanged.
+
+`/ceo-salary-benchmark/?profile=RP` restores the Rethink Priorities reference rows, markers, weighting reference, model inputs and explanatory copy. The mode follows shared links, role changes and Reset. Earlier compact links (URL-state versions 1–10) without a profile retain their RP defaults; newly written states use version 11. `?profile=generic` explicitly selects generic presentation. Saved scenarios use separate browser storage for each profile so existing RP comparisons cannot unexpectedly appear in the generic page. This is a public presentation preset, not an access boundary: the underlying data, archived evidence and source documentation retain their original provenance.
 
 ## Data and evidence
 

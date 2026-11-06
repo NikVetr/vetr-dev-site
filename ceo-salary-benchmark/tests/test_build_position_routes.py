@@ -88,7 +88,7 @@ class PositionRouteBuildTest(unittest.TestCase):
         self.assertEqual(generated.count('rel="canonical"'), 1)
         self.assertIn(ROUTES.GENERATED_MARKER, generated)
         self.assertIn("<title>COO Salary Benchmark · vetr.dev</title>", generated)
-        self.assertIn('content="Interactive Rethink Priorities COO salary benchmark explorer"', generated)
+        self.assertIn('content="Interactive nonprofit COO salary benchmark explorer"', generated)
         self.assertIn('<h1 id="app-title" aria-label="COO salary benchmark">', generated)
         self.assertIn('<span id="position-selected-label" aria-hidden="true">COO</span>', generated)
         self.assertEqual((self.app_root / "index.html").read_text(encoding="utf-8"), self.source_html)

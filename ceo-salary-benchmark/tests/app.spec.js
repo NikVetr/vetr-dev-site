@@ -1,5 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
+// This suite retains the original RP reference/profile fixtures. Generic entry behavior
+// and old-link migration are covered separately in profiles.spec.js.
 const chartViewTab = (page, view) => page.locator(`[role="tab"][data-chart-view="${view}"]`);
 
 async function pooledOperationsRows(page) {
@@ -56,7 +58,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       } } } }),
     });
   });
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
   const defaultCounts = await page.evaluate(() => {
@@ -1013,7 +1015,7 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
   test.setTimeout(60_000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   // Evidence dialogs are checked across every listed row, including sensitivities outside the default expense band.
   await page.locator("#stream-select").selectOption("combined");
 
@@ -1205,7 +1207,7 @@ test("non-CEO category multipliers change weights and survive robustness evaluat
 test("chart folder tabs expose accessible mouse and keyboard navigation", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const tablist = page.getByRole("tablist", { name: "Analysis view" });
   const histogram = chartViewTab(page, "histogram");
@@ -1271,7 +1273,7 @@ test("chart folder tabs expose accessible mouse and keyboard navigation", async 
 test("model view starts from the RP profile and renders predictions, quantiles, and validation", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const defaults = await page.evaluate(() => {
     const model = window.CEO_BENCHMARK_DATA.predictiveModel;
@@ -1595,7 +1597,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
 test("model diagnostics and saved scenarios use fixed method-specific artifact cohorts", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.evaluate(() => localStorage.removeItem("rp-salary-benchmark.scenarios.v1"));
   await page.reload();
 
@@ -1653,7 +1655,7 @@ test("model diagnostics and saved scenarios use fixed method-specific artifact c
 test("predictive density stays legible for extreme profile predictions", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await selectChartView(page, "model");
   await expect(page.locator("#salary-chart")).toHaveAttribute("data-model-axis-scale", "linear");
 
@@ -1738,7 +1740,7 @@ test("predictive density stays legible for extreme profile predictions", async (
 test("model state round-trips through the compact URL and participates in undo and redo", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await selectChartView(page, "model");
 
   await page.locator("#model-highest-other").fill("");
@@ -1823,7 +1825,7 @@ test("model state round-trips through the compact URL and participates in undo a
 test("model specifications, percentile uncertainty, focus shares and driver figures are interactive", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await selectChartView(page, "model");
   await page.locator("#model-method").selectOption("bayesianGam");
   await expect(page.locator("#model-remote")).toHaveValue("Remote");
@@ -1901,7 +1903,7 @@ test("Model is unavailable outside the CEO benchmark without entering an invalid
 test("scatter advertised ranges are presentation-only and preserve results", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#stream-select").selectOption("jobAds");
   await selectChartView(page, "scatter");
 
@@ -1933,7 +1935,7 @@ test("chart tabs and model chart reflow within narrow and short containers", asy
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await selectChartView(page, "model");
 
   const narrowGeometry = await page.locator("#chart-view-tabs").evaluate((tablist) => {
@@ -1971,7 +1973,7 @@ test("chart tabs and model chart reflow within narrow and short containers", asy
 test("GoodStructures discoveries retain native pay and conservative sample dispositions", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
   const integration = await page.evaluate(() => {
@@ -2050,7 +2052,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
     { width: 900, height: 720, screenshot: "tmp/app-table-header-controls-constrained.png" },
   ]) {
     await page.setViewportSize({ width, height });
-    await page.goto("/ceo-salary-benchmark/");
+    await page.goto("/ceo-salary-benchmark/?profile=RP");
     await page.locator(".table-panel").scrollIntoViewIfNeeded();
 
     const placements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
@@ -2172,7 +2174,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
 });
 
 test("desktop and narrow layouts render", async ({ page }) => {
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const scrollingPanel = page.locator(".settings-panel");
   const overflowPanel = await scrollingPanel.evaluate((element) => ({
     width: element.clientWidth, scrollWidth: element.scrollWidth,
@@ -2259,7 +2261,7 @@ test("panel dividers resize, persist, and make charts reflow to their containers
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.setViewportSize({ width: 1800, height: 1000 });
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const initialUrl = page.url();
 
   const settings = page.locator("#settings-panel");
@@ -2451,7 +2453,7 @@ test("panel dividers resize, persist, and make charts reflow to their containers
 test("clickable value and ratio axes drive plots, fits, quantiles, and correlations", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   const verticalAxis = () => page.locator('.axis-variable-control[aria-label^="Change vertical"]');
@@ -2647,7 +2649,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator("#axis-denominator").selectOption("staff");
   await expect(horizontalAxis()).toContainText("CEO Salary / Staff");
 
-  await expect.poll(() => page.url()).toContain("?s=");
+  await expect.poll(() => new URL(page.url()).searchParams.has("s")).toBe(true);
   const sharedUrl = page.url();
   expect(sharedUrl.length).toBeLessThan(500);
   await page.reload();
@@ -2666,7 +2668,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator('input[name="scatter-y-axis-mode"][value="ratio"]').check();
   await verticalAxis().click();
   await page.locator("#axis-denominator").selectOption("revenue");
-  await expect.poll(() => page.url()).toContain("?s=");
+  await expect.poll(() => new URL(page.url()).searchParams.has("s")).toBe(true);
   await page.waitForTimeout(100);
   const scatterShareUrl = page.url();
   await page.reload();
@@ -2683,7 +2685,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
 test("highest-paid other employee ratios and reviewed position postings are usable", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
   const [allPairs, expectedPairs] = await page.evaluate(() => {
@@ -2763,7 +2765,7 @@ test("highest-paid other employee ratios and reviewed position postings are usab
 test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#stream-select").selectOption("incumbents");
   await page.locator("#measure-select").selectOption("cash");
   await page.locator("#sample-select").selectOption("sensitivity");
@@ -2817,7 +2819,7 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
 test("default CEO view follows the protocol main analysis and earlier links keep their defaults", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const counts = await page.evaluate(() => {
     const data = window.CEO_BENCHMARK_DATA;
     const base = data.incumbents.filter((row) => row.defaultIncluded && row.salary?.base > 0);
@@ -2875,7 +2877,7 @@ test("default CEO view follows the protocol main analysis and earlier links keep
 test("weights and compact shared URLs round-trip", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await selectChartView(page, "scatter");
   await page.locator("#chart-color").selectOption("structure");
   await page.locator("#mark-curve").uncheck();
@@ -3009,7 +3011,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
 test("Auto-weights remain explicit and stable for small filing samples and stream changes", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const auto = page.locator('.auto-weight-rule input[value="comparability"]');
   const balance = page.locator('.stream-balance-rule input[value="streamBalanced"]');
 
@@ -3092,7 +3094,7 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
 test("plot eligibility isolates weights while preserving row intent", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
@@ -3146,7 +3148,7 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
 test("standardized positions switch evidence, labels, controls, and semantic shared state", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const allCatalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
   const catalog = allCatalog.filter((position) => !position.expansion && !position.pooled);
@@ -3427,7 +3429,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
 test("empirical percentile labels remain separated at common browser zooms", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.evaluate(async () => {
     if (document.fonts) {
       await document.fonts.ready;
@@ -3499,7 +3501,7 @@ test("empirical percentile labels remain separated at common browser zooms", asy
 test("fitted percentile labels retain compact line spacing at common browser zooms", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.evaluate(() => document.fonts?.ready);
 
   for (const distribution of ["lognormal", "gamma"]) {
@@ -3546,7 +3548,7 @@ test("fitted percentile labels retain compact line spacing at common browser zoo
 test("named scenarios preserve analytical snapshots and compare side by side", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.evaluate(() => localStorage.removeItem("rp-salary-benchmark.scenarios.v1"));
   await page.reload();
 
@@ -3618,7 +3620,7 @@ test("named scenarios preserve analytical snapshots and compare side by side", a
 test("scenario deltas do not compare different pay definitions", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.evaluate(() => localStorage.removeItem("rp-salary-benchmark.scenarios.v1"));
   await page.reload();
   await page.locator("#stream-select").selectOption("incumbents");
@@ -3637,7 +3639,7 @@ test("scenario deltas do not compare different pay definitions", async ({ page }
 test("invalid saved scenarios are skipped without changing the analysis", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const median = await page.locator("#stat-center").textContent();
   await page.evaluate(() => localStorage.setItem("rp-salary-benchmark.scenarios.v1", JSON.stringify({
     version: 1,
@@ -3657,7 +3659,7 @@ test("invalid saved scenarios are skipped without changing the analysis", async 
 test("robustness dashboard evaluates comparable and separate sensitivity families", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const before = {
     url: page.url(),
     median: await page.locator("#stat-center").textContent(),
@@ -3704,7 +3706,7 @@ test("each completed robustness check expands results once without overriding la
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.setViewportSize({ width: 1600, height: 1000 });
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const results = page.locator("#results-panel");
   const divider = page.locator("#results-panel-resizer");
@@ -3778,7 +3780,7 @@ test("robustness auto-expansion is immediate when reduced motion is requested", 
   page.on("pageerror", (error) => errors.push(error.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1600, height: 1000 });
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.getByRole("tab", { name: "Robustness" }).click();
   await page.getByRole("button", { name: "Run check" }).click();
   await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
@@ -3792,7 +3794,7 @@ test("robustness auto-expansion is immediate when reduced motion is requested", 
 test("robustness points explain and apply their salary specifications", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   // The pooled view places several specifications close together, which exercises point disambiguation.
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
@@ -3948,7 +3950,7 @@ test("robustness points explain and apply their salary specifications", async ({
 test("robustness change markers follow live filters and row choices", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
 
   const tierSummary = page.locator('[data-filter-menu="tier"] summary');
   const tierOptions = page.locator('[data-filter-menu="tier"] .filter-options input');
@@ -4030,7 +4032,7 @@ test("robustness change markers follow live filters and row choices", async ({ p
 test("robustness current marker honors row choices and pay-source checks ignore the pay-source filter", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#stream-select").selectOption("combined");
   const eligibleRows = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
   await expect(eligibleRows).not.toHaveCount(0);
@@ -4051,7 +4053,7 @@ test("robustness current marker honors row choices and pay-source checks ignore 
 });
 
 test("benchmark changes can be undone and redone without replacing native field undo", async ({ page }) => {
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   const undo = () => page.keyboard.press("Control+z");
   const redo = () => page.keyboard.press("Control+Shift+z");
 
@@ -4122,7 +4124,7 @@ test("benchmark changes can be undone and redone without replacing native field 
   await page.keyboard.press("Meta+Shift+z");
   await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
 
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#quantile-granularity").selectOption("custom");
   const customQuantiles = page.locator("#custom-quantiles");
   const originalCustomQuantiles = await customQuantiles.inputValue();

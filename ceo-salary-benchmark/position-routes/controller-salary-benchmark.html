@@ -10,17 +10,26 @@ layout: null
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta id="app-description" name="description" content="Interactive Rethink Priorities Controller salary benchmark explorer">
+  <meta id="app-description" name="description" content="Interactive nonprofit Controller salary benchmark explorer">
   <link rel="canonical" href="https://vetr.dev/controller-salary-benchmark/">
-  <link rel="icon" type="image/png" href="assets/rethink-priorities-favicon.png">
+  <link rel="icon" href="/favicon.svg" data-rp-href="assets/rethink-priorities-favicon.png">
   <title>Controller Salary Benchmark · vetr.dev</title>
   <link rel="stylesheet" href="assets/aspekta/variable/font-face.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/shared/tool-nav.css">
+  <script src="/shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Nonprofit Salary Benchmark</span>
+    <a href="#benchmark-help" data-tool-help="#benchmark-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/ceo-salary-benchmark">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Salary%20Benchmark%3A%20">Feedback</a>
+  </nav>
   <header class="app-header">
     <div>
-      <p class="eyebrow">Rethink Priorities</p>
+      <p class="eyebrow" data-rp-text="Rethink Priorities">Nonprofit compensation</p>
       <h1 id="app-title" aria-label="Controller salary benchmark"><span class="title-position-select">
         <span id="position-selected-label" aria-hidden="true">Controller</span>
         <select id="position-select" aria-label="Benchmark position" aria-hidden="true" tabindex="-1">
@@ -30,6 +39,7 @@ layout: null
       </span><span aria-hidden="true"> salary benchmark</span></h1>
       <div id="position-menu" role="dialog" aria-label="Choose benchmark role" hidden></div>
       <span id="position-description" class="sr-only"></span>
+      <p class="benchmark-scope-note">Explore a reviewed research-nonprofit disclosure cohort. Its pay records are comparisons, not a representative labor-market survey.</p>
     </div>
     <div class="header-meta" aria-label="Dataset status">
       <span id="price-basis-status">July 2026 USD</span>
@@ -73,7 +83,7 @@ layout: null
       </label>
 
       <label id="sample-field" class="field">
-        <span>Sample <button class="info-tooltip" type="button" aria-label="About samples" data-tooltip="Choose a starting group of organizations. Recommended peers pass the main source, role, and reporting-period checks. Broader cases add usable records with known differences. The similar-organization group removes records whose governance or legal setup differs from RP. All usable salaries includes records normally left out. Salary level is never used to assign a group.">?</button></span>
+        <span>Sample <button class="info-tooltip" type="button" aria-label="About samples" data-tooltip="Choose a starting group from the reviewed research-nonprofit cohort. Recommended peers pass the main source, role and reporting-period checks. Broader cases add usable records with known differences. The similar-organization group retains independent, board-accountable research nonprofits. All usable salaries includes records normally left out. Salary level is never used to assign a group." data-rp-tooltip="Choose a starting group of organizations. Recommended peers pass the main source, role, and reporting-period checks. Broader cases add usable records with known differences. The similar-organization group removes records whose governance or legal setup differs from RP. All usable salaries includes records normally left out. Salary level is never used to assign a group.">?</button></span>
         <select id="sample-select">
           <option value="primary">Recommended peers</option>
           <option value="sensitivity">Recommended + broader</option>
@@ -109,7 +119,7 @@ layout: null
       <section id="model-settings" class="model-settings field" hidden aria-labelledby="model-settings-title">
         <div class="model-settings-heading">
           <strong id="model-settings-title">Prediction model</strong>
-          <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
+          <button id="model-reset-profile" class="text-button" type="button" data-rp-text="Reset RP inputs">Reset example inputs</button>
         </div>
         <label class="field compact">
           <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian models and the categorical GAM use numeric and categorical inputs. Other methods use numeric inputs; the intercept baseline uses none.">?</button></span>
@@ -145,7 +155,7 @@ layout: null
         <div id="model-category-inputs" class="model-category-inputs">
           <label><span>Focus area</span><select id="model-focus"></select></label>
           <div id="model-focus-mixture" class="model-focus-mixture" hidden>
-            <p>Focus shares (%) — a user-specified scenario. Enter shares totaling 100; these are not estimated RP team sizes.</p>
+            <p>Focus shares (%) — a user-specified scenario. Enter shares totaling 100; these are not estimated team sizes.</p>
             <div id="model-focus-weights"></div><small id="model-focus-error" role="alert"></small>
           </div>
           <label><span>Effective Altruism</span><select id="model-ea"></select></label>
@@ -206,7 +216,7 @@ layout: null
       </label>
 
       <label id="chart-color-field" class="field">
-        <span>Color by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Peer groups run from closest to broader and broadest comparisons. Other choices color records by the matching table category. Mission area and organization type can contain many categories, so the chart uses lighter and darker versions of the RP palette.">?</button></span>
+        <span>Color by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Peer groups run from closest to broader and broadest research-nonprofit comparisons. Other choices color records by the matching table category. Mission area and organization type use lighter and darker versions of the chart palette." data-rp-tooltip="Peer groups run from closest to broader and broadest comparisons. Other choices color records by the matching table category. Mission area and organization type can contain many categories, so the chart uses lighter and darker versions of the RP palette.">?</button></span>
         <select id="chart-color">
           <option value="tier">Peer group</option>
           <option value="topic">Area</option>
@@ -221,10 +231,10 @@ layout: null
       </label>
 
       <section id="weighting-field" class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
-        <div id="weighting-components-title" class="weighting-title">Weights <button class="info-tooltip" type="button" aria-label="About weighting" data-tooltip="Weights control how much each record affects the chart and quantiles. Automatic weights compare Form 990 organizations with RP by expenses and staff, and job postings by a separately reviewed non-pay similarity score. Salary is never used. You can instead combine optional adjustments or edit an individual row's weight.">?</button></div>
+        <div id="weighting-components-title" class="weighting-title">Weights <button class="info-tooltip" type="button" aria-label="About weighting" data-tooltip="Weights control how much each record affects the chart and quantiles. Automatic weights compare Form 990 organizations with an illustrative $10 million / 50-employee reference, and job postings by a reviewed research-cohort non-pay similarity score. Salary is never used. Optional adjustments and individual row weights remain editable." data-rp-tooltip="Weights control how much each record affects the chart and quantiles. Automatic weights compare Form 990 organizations with RP by expenses and staff, and job postings by a separately reviewed non-pay similarity score. Salary is never used. You can instead combine optional adjustments or edit an individual row's weight.">?</button></div>
         <div class="auto-weight-rule">
           <label><input type="checkbox" value="comparability"> Automatic weights</label>
-          <span id="auto-weight-note">Form 990s: similarity to RP's size · postings: non-pay similarity</span>
+          <span id="auto-weight-note"></span>
         </div>
         <div class="component-group-label">Optional adjustments</div>
         <div id="weighting-components" class="weighting-components">
@@ -258,7 +268,7 @@ layout: null
       <div id="size-controls" class="subsettings" hidden>
         <section id="expense-target-field" class="weight-component-control" hidden>
           <label class="field compact">
-            <span>Reference expenses <button class="info-tooltip" type="button" aria-label="About reference expenses" data-tooltip="The annual-expense reference used when weighting organizations by size. The default is RP's published $7.5 million 2026 core budget, excluding fiscally sponsored Special Projects.">?</button></span>
+            <span>Reference expenses <button class="info-tooltip" type="button" aria-label="About reference expenses" data-tooltip="The annual-expense reference used when weighting by size. The generic example is $10 million; enter the operating scale relevant to your comparison." data-rp-tooltip="The annual-expense reference used when weighting organizations by size. The default is RP's published $7.5 million 2026 core budget, excluding fiscally sponsored Special Projects.">?</button></span>
             <div class="input-with-unit">
               <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
               <span>USD millions</span>
@@ -270,7 +280,7 @@ layout: null
         </section>
         <section id="staff-target-field" class="weight-component-control" hidden>
           <label class="field compact">
-            <span>Reference staff <button class="info-tooltip" type="button" aria-label="About reference staff size" data-tooltip="The staff-size reference used for weighting. The default is RP's published operating scale of 57 full-time-equivalent staff. The table separately shows RP's comparable Form 990 employee count of 43.">?</button></span>
+            <span>Reference staff <button class="info-tooltip" type="button" aria-label="About reference staff size" data-tooltip="The employee-count reference used when weighting by size. The generic example is 50 employees; enter the operating scale relevant to your comparison. Form 990 counts are not necessarily full-time equivalents." data-rp-tooltip="The staff-size reference used for weighting. The default is RP's published operating scale of 57 full-time-equivalent staff. The table separately shows RP's comparable Form 990 employee count of 43.">?</button></span>
             <input id="target-staff" type="number" min="1" max="1000" step="1" value="57">
             <span>Staff matching range <button class="info-tooltip" type="button" aria-label="About staff matching range" data-tooltip="Controls how quickly a record's weight falls as its staff size differs from the reference. Larger values include a wider range of organization sizes.">?</button> <output id="staff-bandwidth-value">0.70×</output></span>
             <input id="staff-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
@@ -284,7 +294,7 @@ layout: null
           </label>
           <div id="weight-profile-recency" class="weight-profile-slot"></div>
         </section>
-        <details id="rp-scale-reference" class="rp-scale-reference">
+        <details id="rp-scale-reference" class="rp-scale-reference" hidden>
           <summary>Why these reference values?</summary>
           <p><b>$7.5 million annual expenses:</b> RP's published 2026 core budget, excluding Special Projects. <a href="https://rethinkpriorities.org/2025-results/" target="_blank" rel="noopener noreferrer">RP plan ↗</a> · <a href="benchmark/sources/native/supporting/src-rp-2025-results.html" target="_blank">saved page</a></p>
           <p><b>57 full-time-equivalent staff:</b> RP's funding-needs page reports 61 permanent staff representing 57 full-time equivalents. This value is used only as an editable weighting reference. It is not treated as the same measure as peer organizations' Form 990 employee counts. <a href="https://rethinkpriorities.org/rethink-priorities-funding-needs/" target="_blank" rel="noopener noreferrer">RP funding needs ↗</a> · <a href="evidence/original/src-rp-funding-needs.html" target="_blank">saved page</a></p>
@@ -482,7 +492,7 @@ layout: null
               </th>
               <th class="filterable-column">
                 <div class="header-controls">
-                  <button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities 2024 Form 990 reports $20.38 million">Expenses</button>
+                  <button type="button" data-sort="expenses" aria-label="Sort by expenses" data-rp-label="Sort by expenses; Rethink Priorities 2024 Form 990 reports $20.38 million">Expenses</button>
                   <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="expenses">
                     <details>
                       <summary id="expense-filter-summary" aria-label="Filter expenses"></summary>
@@ -500,7 +510,7 @@ layout: null
                   </div>
                 </div>
               </th>
-              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
+              <th><button type="button" data-sort="staff" aria-label="Sort by staff" data-rp-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
               <th class="tier-column filterable-column">
                 <div class="header-controls">
                   <button type="button" class="stacked-sort" data-sort="tier"><span><span>Peer </span><span>Group</span></span></button>
@@ -626,5 +636,12 @@ layout: null
   <script src="relationship-plots.js"></script>
   <script src="model-vignettes.js"></script>
   <script src="app.js"></script>
+  <dialog id="benchmark-help" class="collection-help-dialog" aria-labelledby="benchmark-help-title">
+    <form method="dialog"><button aria-label="Close help">Close</button></form>
+    <h2 id="benchmark-help-title">Using the salary benchmark</h2>
+    <p>Choose a role, pay source and comparison group. The histogram and table show the selected disclosure records; the Scatterplot and Model tabs offer other views of the same data.</p>
+    <p>In the Model view, enter the organization's expenses and staff count. The generic starting values are illustrative, not a recommended salary or a description of a real organization. Use the information buttons for definitions and the model details for assumptions and uncertainty.</p>
+    <p>The sample covers a reviewed research-nonprofit cohort. It is not a representative survey of all employers. Share preserves the current settings.</p>
+  </dialog>
 </body>
 </html>

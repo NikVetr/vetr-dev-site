@@ -141,7 +141,7 @@ def render_position_route(source_html: str, canonical_href: str, route: Position
         ),
         (
             r'(<meta\s+id="app-description"\s+name="description"\s+content=")[^"]*(">)',
-            rf"\g<1>Interactive Rethink Priorities {label} salary benchmark explorer\g<2>",
+            rf"\g<1>Interactive nonprofit {label} salary benchmark explorer\g<2>",
             "description metadata",
         ),
         (

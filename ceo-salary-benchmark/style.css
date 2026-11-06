@@ -981,3 +981,12 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .model-comparison-table thead .model-sort-button { white-space: normal; text-decoration: none; }
 
 #empirical-robustness-options[hidden] { display: none; }
+
+.benchmark-scope-note { max-width: 78ch; margin: .5rem 0 0; color: var(--muted, #52646d); font-size: .82rem; line-height: 1.4; }
+
+/* Let the workspace use the height left by navigation and the wrapping header. */
+@media (min-width: 1251px) {
+  body { display: flex; flex-direction: column; height: 100dvh; }
+  .app-header { flex-shrink: 0; }
+  .app-shell { flex: 1 1 0; height: auto; }
+}

@@ -68,7 +68,7 @@ test("record matrix supports features, transformations, layouts and scatter dril
 
 test("joint drivers preserve aligned draws, support model families and place close button at the corner", async ({ page }) => {
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#chart-tab-model").click();
   await page.locator("#results-tab-model-details").click();
   const preview = page.locator("#model-joint-preview");

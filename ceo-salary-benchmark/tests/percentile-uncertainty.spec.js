@@ -1,8 +1,9 @@
 const { test, expect } = require("@playwright/test");
+// Numerical expectations below use the artifact’s RP profile explicitly.
 
 test("expectation target separates log-location uncertainty from predictive spread", async ({ page }) => {
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#chart-tab-model").click();
   await expect(page.locator("#model-target option")).toHaveText(["Estimation + peer variation", "Estimation only (epistemic)"]);
   await page.getByRole("button", { name: "About displayed uncertainty" }).hover();
@@ -71,7 +72,7 @@ test("expectation target separates log-location uncertainty from predictive spre
 
 test("model robustness optionally shows estimation intervals for peer percentiles", async ({ page }) => {
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/ceo-salary-benchmark/");
+  await page.goto("/ceo-salary-benchmark/?profile=RP");
   await page.locator("#chart-tab-model").click();
   await expect(page.locator("#quantile-basis")).toContainText("Predictive salary percentiles:");
   await expect(page.locator("#quantile-basis")).toContainText("peer variation + model uncertainty");
