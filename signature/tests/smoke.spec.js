@@ -101,6 +101,48 @@ test('Undo after Clear or Import shows the signature as it was', async ({ page }
   expect(await pad()).toBe(before);
 });
 
+test('Undo restores local corrections after Clear, import and example replacement', async ({ page }) => {
+  await page.goto('./');
+  await page.waitForFunction(() => /** @type {any} */ (window).Signature?.getResult());
+  const local = [{ stroke: 0, from: 0.1, to: 0.8, strength: 3 }];
+  const before = await page.evaluate((local) => {
+    const request = /** @type {any} */ (window).Signature.getRequest();
+    request.smooth.local = local;
+    /** @type {any} */ (window).Signature.load(request);
+    return /** @type {any} */ (window).Signature.exportSvgText();
+  }, local);
+  const regions = () => page.evaluate(() => /** @type {any} */ (window).Signature.getRequest().smooth.local);
+  const restored = async () => {
+    await expect.poll(regions).toEqual(local);
+    await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).Signature.exportSvgText())).toBe(before);
+    await expect(page.locator('#brush-info')).toHaveText('＋ 1 region smoothed more');
+  };
+
+  await page.click('#clear');
+  await expect.poll(regions).toEqual([]);
+  await page.click('#undo');
+  await restored();
+
+  await page.setInputFiles('#import', new URL('../examples/juno-marsh.csv', import.meta.url).pathname);
+  await expect.poll(regions).toEqual([]);
+  await page.click('#undo');
+  await restored();
+
+  await page.click('#example');
+  await expect.poll(regions).toEqual([]);
+  await page.click('#undo');
+  await restored();
+
+  // A JSON request can carry different local corrections; Undo must retain the previous set.
+  await page.evaluate(() => {
+    const request = /** @type {any} */ (window).Signature.getRequest();
+    request.smooth.local = [{ stroke: 1, from: 0, to: 1, strength: 0.5 }];
+    /** @type {any} */ (window).Signature.load(request);
+  });
+  await page.click('#undo');
+  await restored();
+});
+
 test('morphs into the second example and plays when asked', async ({ page }) => {
   await page.goto('./');
   await page.waitForFunction(() => window.Signature?.getResult());

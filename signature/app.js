@@ -11,7 +11,6 @@ import { Pad } from './pad.js';
 /**
  * @typedef {import('./core/resample.js').RawPoint} RawPoint
  * @typedef {import('./core/index.js').Result} Result
- * @typedef {import('./core/request.js').LocalRegion} LocalRegion
  * @typedef {import('./core/input.js').Issue} Issue
  */
 
@@ -28,8 +27,6 @@ const fresh = () => {
   return /** @type {Record<string, any>} */ (rest);
 };
 let settings = fresh();
-/** @type {LocalRegion[]} */
-let regions = [];
 /** @type {Result | null} */
 let result = null;
 /** @type {RawPoint[][] | null} */
@@ -137,7 +134,7 @@ function currentRequest() {
   return {
     strokes: pad.getStrokes().map((points) => ({ points })),
     ...structuredClone(settings),
-    smooth: { ...structuredClone(settings.smooth), local: regions.map((r) => ({ ...r })) },
+    smooth: { ...structuredClone(settings.smooth), local: pad.localRegions.map((r) => ({ ...r })) },
     output: { ...settings.output, color: input('ink').value, height: height > 0 ? height : null, unit },
   };
 }
@@ -195,7 +192,7 @@ function showIssues(issues) {
 }
 
 function padChanged() {
-  regions = regions.filter((r) => r.stroke < pad.strokes.length);
+  pad.localRegions = pad.localRegions.filter((r) => r.stroke < pad.strokes.length);
   const pts = pad.strokes.flat();
   const timed = pts.length > 0 && pts.every((p) => p.t !== undefined);
   const pen = pts.length > 0 && pts.every((p) => p.pressure !== undefined);
@@ -313,7 +310,7 @@ const endPaint = () => {
     let start = idx[0];
     for (let j = 1; j <= idx.length; j++) {
       if (j === idx.length || idx[j] !== idx[j - 1] + 1) {
-        regions.push({ stroke, from: start / (n - 1), to: idx[j - 1] / (n - 1), strength });
+        pad.localRegions.push({ stroke, from: start / (n - 1), to: idx[j - 1] / (n - 1), strength });
         start = idx[j];
       }
     }
@@ -326,18 +323,18 @@ const endPaint = () => {
 resultCanvas.addEventListener('pointerup', endPaint);
 resultCanvas.addEventListener('pointercancel', endPaint);
 $('brush-clear').addEventListener('click', () => {
-  regions = [];
+  pad.localRegions = [];
   showBrushInfo();
   schedule();
 });
 
 function showBrushInfo() {
-  const more = regions.filter((r) => r.strength > 1).length;
-  const less = regions.length - more;
-  $('brush-info').textContent = regions.length
+  const more = pad.localRegions.filter((r) => r.strength > 1).length;
+  const less = pad.localRegions.length - more;
+  $('brush-info').textContent = pad.localRegions.length
     ? [more && `＋ ${more} region${more === 1 ? '' : 's'} smoothed more`, less && `− ${less} smoothed less`].filter(Boolean).join(', ')
     : 'No brushed regions.';
-  /** @type {HTMLButtonElement} */ ($('brush-clear')).disabled = !regions.length;
+  /** @type {HTMLButtonElement} */ ($('brush-clear')).disabled = !pad.localRegions.length;
 }
 
 /** Brushed regions as halos: solid blue for more, dashed orange for less, and the stroke in progress. @param {CanvasRenderingContext2D} ctx @param {number} dpr */
@@ -356,7 +353,7 @@ function drawRegions(ctx, dpr) {
     pts.forEach((q, i) => (i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])));
     ctx.stroke();
   };
-  for (const r of regions) {
+  for (const r of pad.localRegions) {
     const pts = result.strokes[r.stroke]?.points;
     if (!pts || pts.length < 2) continue;
     const n = pts.length - 1;
@@ -377,7 +374,7 @@ function drawRegions(ctx, dpr) {
 // ---------- the pad's buttons, examples and import ----------
 
 $('undo').addEventListener('click', () => pad.undo());
-$('clear').addEventListener('click', () => { regions = []; pad.clear(); });
+$('clear').addEventListener('click', () => pad.clear());
 $('replay').addEventListener('click', () => {
   const b = $('replay');
   if (pad.replayStop) {
@@ -429,7 +426,6 @@ function signatureOf(req) {
 function load(req) {
   const { strokes, settings: s } = normalizeRequest(req);
   const { morph: _m, input: _i, ...rest } = s;
-  regions = rest.smooth.local.map((r) => ({ ...r }));
   settings = { ...rest, smooth: { ...rest.smooth, local: [] } };
   if (s.output.height !== null) {
     input('png-height').value = String(s.output.height);
@@ -437,14 +433,14 @@ function load(req) {
   }
   if (/^#[0-9a-f]{6}$/i.test(s.output.color)) input('ink').value = s.output.color;
   showSettings();
-  pad.load(strokes);
+  pad.load(strokes, rest.smooth.local);
   recompute();
   return /** @type {Result} */ (result);
 }
 
 $('example').addEventListener('click', async () => {
   const strokes = signatureOf({ csv: await fetchText('examples/avery-quill.csv') });
-  if (strokes) { regions = []; pad.load(strokes); }
+  if (strokes) pad.load(strokes);
 });
 input('import').addEventListener('change', async () => {
   const file = input('import').files?.[0];
@@ -462,7 +458,7 @@ input('import').addEventListener('change', async () => {
     return;
   }
   const strokes = signatureOf(req);
-  if (strokes) { regions = []; pad.load(strokes); }
+  if (strokes) pad.load(strokes);
 });
 
 // ---------- downloads ----------

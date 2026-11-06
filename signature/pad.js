@@ -2,13 +2,14 @@
 // and replay, drawn on a canvas. Points are kept in the signature's own
 // coordinates; the pad shows them through a fitted view, and new strokes are
 // mapped back through the same view, so drawing over an imported signature
-// adds to it; undo restores the view along with the strokes. Times are
+// adds to it; undo restores the view and local corrections along with the strokes. Times are
 // milliseconds from the first point; pressure is kept only when a pen
 // reported every point.
 
 /**
  * @typedef {import('./core/resample.js').RawPoint} RawPoint
  * @typedef {RawPoint & { pen?: boolean }} PadPoint
+ * @typedef {import('./core/request.js').LocalRegion} LocalRegion
  */
 
 const FRAME_W = 1000; // the pad's own units across; its height follows its aspect
@@ -23,9 +24,11 @@ export class Pad {
     this.opts = opts;
     /** @type {PadPoint[][]} */
     this.strokes = [];
+    /** Local corrections belong to these strokes and travel with them through history. @type {LocalRegion[]} */
+    this.localRegions = [];
     /**
-     * What undo returns to: the strokes and the view they were shown in.
-     * @type {{ strokes: PadPoint[][], view: { s: number, ox: number, oy: number } }[]}
+     * What undo returns to: the strokes, their corrections and the view they were shown in.
+     * @type {{ strokes: PadPoint[][], localRegions: LocalRegion[], view: { s: number, ox: number, oy: number } }[]}
      */
     this.history = [];
     this.view = { s: 1, ox: 0, oy: 0 };
@@ -108,15 +111,16 @@ export class Pad {
     this.opts.onChange();
   }
 
-  /** Keeps what the pad shows now, strokes and view, for undo. */
+  /** Keeps what the pad shows now, including its local corrections, for undo. */
   remember() {
-    this.history.push({ strokes: this.strokes, view: this.view });
+    this.history.push({ strokes: this.strokes, localRegions: this.localRegions.map((r) => ({ ...r })), view: this.view });
   }
 
   undo() {
     const last = this.history.pop();
     if (!last) return;
     this.strokes = last.strokes;
+    this.localRegions = last.localRegions;
     this.view = last.view;
     this.drawingSince = false;
     this.draw();
@@ -127,17 +131,19 @@ export class Pad {
     if (!this.strokes.length) return;
     this.remember();
     this.strokes = [];
+    this.localRegions = [];
     this.view = { s: 1, ox: 0, oy: 0 };
     this.drawingSince = false;
     this.draw();
     this.opts.onChange();
   }
 
-  /** Shows a signature, fitted to the pad; undo returns to what was there. @param {RawPoint[][]} strokes */
-  load(strokes) {
+  /** Shows a signature, fitted to the pad; undo returns to what was there. @param {RawPoint[][]} strokes @param {readonly LocalRegion[]} [localRegions] */
+  load(strokes, localRegions = []) {
     this.stopReplay();
     this.remember();
     this.strokes = strokes.map((s) => s.map((p) => ({ ...p })));
+    this.localRegions = localRegions.map((r) => ({ ...r }));
     this.fit();
     this.drawingSince = false;
     this.draw();
