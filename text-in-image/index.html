@@ -9,8 +9,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Text in Image</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/text-in-image">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Text%20in%20Image%3A%20">Feedback</a>
+  </nav>
   <header class="site-header">
     <div class="container header-row">
       <div>
@@ -112,5 +121,9 @@
       <time datetime="2022-06-21">2022-06-21</time>
     </div>
   </footer>
+  <details id="tool-help" class="tool-help">
+    <summary>Using Text in Image</summary>
+    <p>Choose a picture and paste the text you want to fit inside it, or load the example. Adjust the palette, text size and layout settings, then run the layout and download the result. The result uses the picture’s colours; the API link in the footer describes the same inputs for scripts.</p>
+  </details>
 </body>
 </html>

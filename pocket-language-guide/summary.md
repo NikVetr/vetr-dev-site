@@ -4,6 +4,15 @@ Wanderwart is a static, offline-capable language app for printable pocket cards,
 conversation boards and vocabulary practice. It runs entirely on the user's device.
 The repository and npm package retain the working name `pocket-language-guide`.
 
+Every page pairs the Wanderwart name with “Pocket Language Guide” and links to
+vetr.dev, Help, source and feedback. `shared/tool-nav.css` and `shared/tool-nav.js`
+at the site root are the canonical navigation implementation. The shell and mobile
+builders synchronize generated `ui/collection-nav.css` and `.js` copies through
+`scripts/collection_navigation.mjs`, keeping the standalone server, offline shell
+and native bundle self-contained. `npm run shell -- --check` checks those copies
+against their source. The collection link is an absolute HTTPS URL; app Help links
+stay local.
+
 The corpus contains 1,012 concepts in 70 sections, 54 ready targets (53 languages
 plus Morse), 53 reader languages and 53 interface catalogues. The gallery contains
 2,809 ordered language pairs. Quenya, Klingon and Morse have deliberately partial

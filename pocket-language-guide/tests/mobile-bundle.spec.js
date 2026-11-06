@@ -75,6 +75,18 @@ test('the bundle registers no service worker', async ({ page }) => {
   expect(count).toBe(0);
 });
 
+test('bundled subpage Help opens the local guide and Home points to the collection', async ({ page }) => {
+  const { failed, offsite, errors } = await openOffline(page, '/drill.html?target=zh-Hans&source=en');
+  const nav = page.getByRole('navigation', { name: 'Tool navigation' });
+  await expect(nav.getByRole('link', { name: 'vetr.dev' })).toHaveAttribute('href', 'https://vetr.dev/');
+  await nav.getByRole('link', { name: 'Help', exact: true }).click();
+  await expect(page.locator('#tool-help')).toHaveAttribute('open', '');
+  await expect(page.locator('#tool-help p')).toBeVisible();
+  expect(failed).toEqual([]);
+  expect(offsite).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
 test('the website still registers one', async ({ page }) => {
   // The other half of the same switch, and the reason the marker ships on both
   // sides rather than being absent on the web: this must not be turned off for

@@ -6,13 +6,22 @@
   <meta name="theme-color" content="#f6f7f2">
   <meta name="description" content="Paste anywhere to unwrap Base64 links, explore each layer, or encode your own.">
   <meta name="referrer" content="no-referrer">
-  <title>b64 — a little link magic</title>
+  <title>b64 — Base64 Link Decoder</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231f6048'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='34' fill='%23f6f7f2'%3E64%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <script src="decoder.js" defer></script>
   <script src="app.js" defer></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">b64 — Base64 Link Decoder</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/b64">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=b64%3A%20">Feedback</a>
+  </nav>
   <main>
     <header>
       <h1 class="brand">b<span>64</span><span class="brand-spark" aria-hidden="true">✳</span></h1>
@@ -55,5 +64,9 @@
     </div>
     <noscript><p>Enable JavaScript to use this app.</p></noscript>
   </main>
+  <details id="tool-help" class="tool-help">
+    <summary>Using b64</summary>
+    <p>Paste text or an encoded link into Your text. Decode follows nested Base64 layers and lists the links it finds. Encode wraps your text in the number of layers you choose. Copy copies the encoded result; Enter opens the decoded links, and Shift+Enter inserts a newline. Processing stays in your browser.</p>
+  </details>
 </body>
 </html>

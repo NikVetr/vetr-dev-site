@@ -18,11 +18,20 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
 
 <div class="app">
     <header>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Multipanel Figure Editor</span>
+    <a href="#helpModal" data-tool-help="#helpBtn">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/layout-gui">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Multipanel%20Figure%20Editor%3A%20">Feedback</a>
+  </nav>
         <h1>Multipanel Figure Editor</h1>
         <button id="helpBtn" class="btn"> ? </button>
         <div id="modIndicators" class="modbar" aria-label="Modifier keys state">

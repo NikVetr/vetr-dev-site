@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="autoCHAIR - A real-time meeting agenda tracker with timeline visualization">
-    <title>autoCHAIR - Meeting Agenda Tracker</title>
+    <title>autoCHAIR — Meeting Agenda Timer</title>
     <link rel="icon" type="image/svg+xml" href="assets/autoChair-logo-black.svg" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/svg+xml" href="assets/autoChair-logo-white.svg" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/png" href="assets/autoChair-logo-smol.png">
     <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
 
     <div class="main-stage">
         <!-- Page Title -->
         <div class="page-title">
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">autoCHAIR — Meeting Agenda Timer</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/agendamatic">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=autoCHAIR%3A%20">Feedback</a>
+  </nav>
             <h1 class="page-title-text">
                 <span class="visually-hidden">autoCHAIR</span>
                 <img class="page-title-name" src="assets/autoChair-name.png" alt="autoCHAIR">
@@ -611,5 +620,11 @@
     <!-- Load main module -->
     <script type="module" src="js/main.js"></script>
 
+
+<dialog id="tool-help" class="collection-help-dialog" aria-labelledby="collection-help-title">
+  <form method="dialog"><button aria-label="Close help">Close</button></form>
+  <h2 id="collection-help-title">Using autoCHAIR</h2>
+  <p>Add agenda items, their leads and durations, then start the meeting timer. Edit durations or reorder items as the meeting changes. The timeline shows planned and actual progress. Settings controls the display and timing; the import and export controls let you save an agenda for another meeting.</p>
+</dialog>
 </body>
 </html>

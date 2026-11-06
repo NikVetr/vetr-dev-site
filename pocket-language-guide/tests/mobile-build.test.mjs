@@ -37,6 +37,21 @@ async function walk(dir) {
 const files = await walk('');
 const present = new Set(files);
 
+test('collection navigation stays inside the native bundle and Home names the website', async () => {
+  for (const extension of ['css', 'js']) {
+    const path = `ui/collection-nav.${extension}`;
+    assert.ok(present.has(path));
+    assert.deepEqual(await readFile(join(OUT, path)), await readFile(join(ROOT, '../shared', `tool-nav.${extension}`)));
+  }
+  for (const page of files.filter((file) => file.endsWith('.html'))) {
+    const html = await readFile(join(OUT, page), 'utf8');
+    assert.ok(!html.includes('../shared/tool-nav.'));
+    assert.match(html, /class="tool-nav-home" href="https:\/\/vetr\.dev\/"/);
+    assert.match(html, /src="ui\/collection-nav\.js"/);
+    assert.match(html, /href="ui\/collection-nav\.css"/);
+  }
+});
+
 test('every entry point and its stylesheet is in the bundle', async () => {
   for (const page of ['index.html', 'sheet.html', 'customize.html', 'conversation.html',
     'style.css', 'conversation.css', 'manifest.webmanifest']) {

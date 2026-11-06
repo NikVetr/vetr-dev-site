@@ -10,8 +10,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Name Tags</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/name-tags">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Name%20Tags%3A%20">Feedback</a>
+  </nav>
   <header class="site-header">
     <div class="container header-row">
       <div>
@@ -144,7 +153,7 @@
     </section>
 
     <section class="card method-card">
-      <details>
+      <details id="tool-help">
         <summary><h2>How this works</h2></summary>
         <p>Each name becomes one or two lines. A name whose top line has a descender (y, q, p, g or j) is set in capitals, with small capitals after each line's first letter, sized so their strokes about match the plain face.</p>
         <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>

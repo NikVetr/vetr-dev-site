@@ -4764,3 +4764,7 @@ body.popout-body .popout-content:is(.overall-status-box, .current-status-box) {
 .box[data-panel-id] > .timeline-header a {
     cursor: pointer;
 }
+
+/* Keep collection navigation in the scrolling main stage, above the title. */
+.page-title { flex-wrap: wrap; }
+.page-title > .tool-nav { flex: 0 0 100%; padding-inline: 0; }

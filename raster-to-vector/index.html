@@ -10,8 +10,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Raster to Vector</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/raster-to-vector">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Raster%20to%20Vector%3A%20">Feedback</a>
+  </nav>
   <header class="site-header">
     <div class="container header-row">
       <div>
@@ -213,7 +222,7 @@
     </section>
 
     <section class="card method-card">
-      <details>
+      <details id="tool-help">
         <summary><h2>How this works</h2></summary>
         <p>This is a port of the R vectorizer (<a href="https://github.com/NikVetr/raster-to-vector">github.com/NikVetr/raster-to-vector</a>) and gives its results: with the same options and seed, the same SVG.</p>
         <ol>

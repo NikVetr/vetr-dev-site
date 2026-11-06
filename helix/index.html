@@ -10,8 +10,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Helix and Braid</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/helix">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Helix%20and%20Braid%3A%20">Feedback</a>
+  </nav>
   <header class="site-header">
     <div class="container header-row">
       <div>
@@ -176,7 +185,7 @@
     </section>
 
     <section class="card method-card">
-      <details>
+      <details id="tool-help">
         <summary><h2>How this works</h2></summary>
         <p><strong>Helix.</strong> Two sine waves wind round a common axis, half a turn apart unless you set another phase. A strand is drawn wider where it is in front and narrower behind, so its width shows depth, and where the strands cross, the one behind is left out for a short stretch, so the one in front passes over it. Base pairs run from strand 1 towards strand 2, stopping short of it, and taper on the way. One strand or both can run on straight past the end. The drawing is then turned, scaled to the box and each piece outlined as a line of varying width.</p>
         <p><strong>Braid.</strong> Each strand swings from side to side across the braid's width, a fraction of a turn behind the one before, while turning in depth. The braid is cut across wherever two strands swap depth, so between two cuts the order from back to front is fixed, and each strand is painted over the ones behind it. What each strand shows is kept as one shape per strand, so the outline and the strokes follow what you see.</p>

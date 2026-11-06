@@ -10,8 +10,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="../shared/theme.js"></script>
   <script type="module" src="index.js"></script>
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
+  <nav class="tool-nav" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="/">vetr.dev</a>
+    <span class="tool-nav-name">Statistical Intuitions</span>
+    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+  </nav>
   <header class="site-header">
     <div class="container header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
@@ -123,5 +132,9 @@
       <time datetime="2019-10-22">2019-10-22</time>
     </div>
   </footer>
+  <details id="tool-help" class="tool-help">
+    <summary>Using Statistical Intuitions</summary>
+    <p>Choose an entry to explore a statistical idea. Change the labelled controls and compare the figures; each entry includes an explanation of its model and assumptions. Simulations use the displayed seed. The API link provides the same calculations for scripts.</p>
+  </details>
 </body>
 </html>

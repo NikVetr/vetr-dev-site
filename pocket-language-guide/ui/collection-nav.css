@@ -1,0 +1,49 @@
+/* Collection navigation uses each tool's colours without changing its own header. */
+.tool-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem 1rem;
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: .35rem max(1rem, env(safe-area-inset-left));
+  border-bottom: 1px solid var(--border, var(--border-color, #89918b55));
+  color: inherit;
+  background: var(--bg, var(--bg-color, transparent));
+  font: 13px/1.4 system-ui, sans-serif;
+}
+.tool-nav a, .tool-nav button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  box-sizing: border-box;
+  padding: .2rem 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: normal;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tool-nav .tool-nav-home { font-weight: 650; text-decoration: none; }
+.tool-nav .tool-nav-name { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; }
+.tool-nav a:focus-visible, .tool-nav button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.tool-help { max-width: 70ch; margin: 1rem auto; padding: 1rem; color: inherit; font: 14px/1.6 system-ui, sans-serif; }
+.tool-help summary { cursor: pointer; font-weight: 650; }
+.tool-help p { margin: .8rem 0 0; }
+.collection-help-dialog { max-width: min(38rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; box-sizing: border-box; padding: 1.25rem; color: inherit; background: var(--bg-color, Canvas); border: 1px solid currentColor; border-radius: .5rem; font: 15px/1.6 system-ui, sans-serif; }
+.collection-help-dialog::backdrop { background: #0007; }
+.collection-help-dialog form { display: flex; justify-content: end; }
+.collection-help-dialog button { min-height: 44px; padding: .4rem .8rem; }
+@media (max-width: 600px), (pointer: coarse) {
+  .tool-nav { gap: 0 .9rem; }
+  .tool-nav a, .tool-nav button { min-height: 44px; }
+  .tool-nav .tool-nav-name { flex-basis: calc(100% - 6rem); font-size: 12px; }
+}
+@media print { .tool-nav, .tool-help { display: none; } }
