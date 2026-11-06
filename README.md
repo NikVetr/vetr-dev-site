@@ -4,7 +4,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## The landing page
 
-A wall of tiles of different shapes, one per tool, each sized by how big the project is. Each tile is one link, named by its title, with a picture, the description and the date. To add a tool, copy a card in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture on that shape's canvas.
+A compact introduction leads to three outlined groups: **Design & make**, **Plan & communicate**, and **Explore & compare**, with direct links to each group. Each tool has one tile, sized by how big the project is, with a picture, a short description and its source date. To add a tool, copy a card into the appropriate group in `index.html` with the tool's folder name in its ids and `data-art`, give its `<li>` a `data-size`, and draw its picture on that shape's canvas.
 
 ### Tile sizes
 
@@ -42,11 +42,11 @@ The size comes from a project's size in code: the hand-written lines of the tool
 
 Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
-The column count steps with the width, from one on a phone to seven on an ultrawide screen (`style.css`); at two columns a 3x3 tile is 2x2. Dense placement packs the tiles with no gaps. The cards are newest first, moved as little as packing with no gaps at every column count allows. Dense placement can still set a later card beside an earlier one, so `assets/landing.js` pins each card to the cell CSS gave it and puts the list in that order, row by row, whenever the column count changes: Tab and screen readers meet the cards as they appear. Without the script the wall looks the same and Tab follows the card order. On a phone, and on a phone held sideways, rows follow their content instead: each picture keeps its own shape, and one-column tiles sit beside their text.
+The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two columns a 3x3 tile is 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Each theme has an independent grid, ordered to pack without internal gaps at every supported column count. Dense placement can still set a later card beside an earlier one, so `assets/landing.js` pins each card to the cell CSS gave it and puts each list in that order, row by row, whenever its column count changes: Tab and screen readers meet the cards as they appear. Without the script the wall looks the same and Tab follows the source order within each theme. On a phone, and on a phone held sideways, rows follow their content instead: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target.
 
 The pictures are drawn from the tools themselves, from their default examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
-The directory also lists **b64 — Base64 Link Decoder** (`1x2`) and **Nonprofit Salary Benchmark** (`2x2`). b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice. Adding these cards preserves the previous cards' relative order, with placement checked for internal gaps at two through seven columns.
+The directory also lists **b64 — Base64 Link Decoder** (`1x2`) under Plan & communicate and **Nonprofit Salary Benchmark** (`2x2`) under Explore & compare. b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice.
 
 ```sh
 node scripts/landing-art/build.mjs            # every picture
@@ -57,7 +57,7 @@ The cards that drive a page (agendamatic, layout-gui, sankey) need Playwright: s
 
 `assets/landing.js` inlines each picture when its card nears the viewport, so it paints in the page's theme. Hovering a card with a mouse or pen, or focusing it from the keyboard, plays the picture's loop, which is seamless (its last frame leads back into its first, which is the still); leaving stops it. Touch never plays it, and nothing moves under `prefers-reduced-motion`. These loops are the page's only motion.
 
-Turning reduced motion on also cancels an already-running loop or a pending player download. Run `node scripts/tests/landing-browser.mjs` to check this, responsive reading order, and the new cards using the existing Playwright installation.
+Turning reduced motion on also cancels an already-running loop or a pending player download. Run `node scripts/tests/landing-browser.mjs` to check this, per-group packing and reading order, first-viewport density, text fit, theme-link keyboard navigation, focus through resizing, and the b64/benchmark cards using the existing Playwright installation.
 
 ## Finding your way around
 
