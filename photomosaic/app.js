@@ -244,6 +244,28 @@ async function exampleTarget() {
 }
 byId('photos-example').addEventListener('click', examplePhotos);
 byId('target-example').addEventListener('click', exampleTarget);
+byId('sunflower-example').addEventListener('click', async () => {
+  const button = byId('sunflower-example');
+  button.disabled = true;
+  try {
+    await Promise.all([examplePhotos(), readTarget(await fetchBlob('sunflower.jpg'), 'Example: Sunflower')]);
+    el.gridRule.value = 'columns';
+    el.columns.value = '40';
+    el.maxUses.value = '3';
+    el.metric.value = 'hsl-r';
+    el.seed.value = '1';
+    el.fit.value = 'keep';
+    el.tint.value = '45';
+    el.tint.dispatchEvent(new Event('input'));
+    showGridNote();
+    showStale();
+    await generate();
+  } catch (error) {
+    el.targetStatus.textContent = `Sunflower example failed: ${error instanceof Error ? error.message : String(error)}`;
+  } finally {
+    button.disabled = false;
+  }
+});
 
 // ---------- request <-> page ----------
 

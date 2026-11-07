@@ -1,5 +1,5 @@
 // Text in Image: the page's default picture, Tenniel's Alice with the "Drink me" bottle, beside
-// the tool's text fill of it on the page's grey, through the tool's core with the page's
+// the tool's text fill of it on white, through the tool's core with the page's
 // settings, on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
 // (11,201 characters), which at tile size would be letters a pixel tall; this uses its opening
 // two paragraphs, and the tool's own fitter sizes the letters to fill the shape. Each letter is
@@ -13,7 +13,7 @@ import { submit } from '../../../text-in-image/core/index.js';
 import { openPage } from '../browser.mjs';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
-const BACKGROUND = '#7f7f7f';   // the page's background
+const BACKGROUND = '#ffffff';   // the page's background
 const PERIOD = 6;
 const START = 0.5;   // seconds full before the first line clears
 const SWEEP = 2.2;   // seconds to clear (and later to write) every line
@@ -95,7 +95,8 @@ export async function build() {
     width: W,
     height: H,
     period: PERIOD,
-    body: `<image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
+    body: `<rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
+<image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <path class="arrow" d="M${num(left + pw + 6)} ${num(H / 2)}h${num(gap - 14)}m-3 -3l3 3l-3 3"/>
 <g class="fill">

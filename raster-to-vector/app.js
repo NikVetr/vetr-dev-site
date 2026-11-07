@@ -12,7 +12,7 @@ import { DEFAULTS, RasterToVectorError } from './core/index.js';
  * @typedef {{ width: number, height: number, data: Uint8ClampedArray }} Image
  */
 
-const EXAMPLES = { cartoon: 'examples/cartoon_flat.png', logo: 'examples/logo_holes.png' };
+const EXAMPLES = { emoji: 'examples/emoji-compressed.jpg', cartoon: 'examples/cartoon_flat.png', logo: 'examples/logo_holes.png' };
 /** The R defaults, except the longest side, which the page limits so that large photos stay quick. */
 const PAGE_DEFAULTS = { ...structuredClone(DEFAULTS), preprocess: { ...DEFAULTS.preprocess, maxDim: 600 } };
 const STAGES = /** @type {Record<string, string>} */ ({
@@ -359,6 +359,7 @@ el.imageFile.addEventListener('change', async () => {
   if (file && await loadImage(file, file.name)) await convertFromPage();
 });
 byId('example-cartoon').addEventListener('click', async () => { if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage(); });
+byId('example-emoji').addEventListener('click', async () => { if (await loadImage(EXAMPLES.emoji, 'emoji-compressed.jpg')) await convertFromPage(); });
 byId('example-logo').addEventListener('click', async () => { if (await loadImage(EXAMPLES.logo, 'logo_holes.png')) await convertFromPage(); });
 byId('reset-options').addEventListener('click', () => {
   writeOptions(PAGE_DEFAULTS);

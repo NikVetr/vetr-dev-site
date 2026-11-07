@@ -30,7 +30,7 @@ const el = {
 const state = {
   /** @type {Image | null} */ image: null,
   /** @type {{ blob: Blob, name: string } | null} */ source: null,
-  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), color: { ...DEFAULTS.color, background: '#7f7f7f' } },
+  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), color: { ...DEFAULTS.color, background: '#ffffff' } },
   /** @type {Result | null} */ result: null,
   svg: '',
   svgUrl: '',

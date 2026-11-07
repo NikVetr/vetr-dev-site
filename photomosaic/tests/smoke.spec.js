@@ -99,3 +99,29 @@ test('reads chosen photos and target, and fits a phone', async ({ page }) => {
   expect(Math.abs(total - fromR)).toBeLessThan(1e-6 * fromR);
   expect(await overflow(page)).toBeLessThanOrEqual(0);
 });
+
+
+test('sunflower preset makes a denser bounded-reuse mosaic and exports the displayed tint', async ({ page }) => {
+  await open(page);
+  await page.locator('#sunflower-example').click();
+  await expect(page.locator('#sunflower-example')).toBeEnabled();
+  await expect(page.locator('#grid-note')).toContainText('40 columns × 30 rows = 1,200 cells');
+  await expect(page.locator('#tint-value')).toHaveText('45%');
+  await expect(page.locator('#stale')).toBeHidden();
+  const detail = await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).Photomosaic;
+    const result = app.getResult();
+    const uses = new Map();
+    for (const photo of result.assignment) uses.set(photo, (uses.get(photo) ?? 0) + 1);
+    const bitmap = await createImageBitmap(await app.exportPngBlob({ tileWidth: 8 }));
+    const size = [bitmap.width, bitmap.height];
+    bitmap.close();
+    const expected = await app.exportPngBlob({ tileWidth: 8, fit: 'keep', tint: 0.45 });
+    const actual = await app.exportPngBlob({ tileWidth: 8 });
+    return { settings: result.settings, cells: result.assignment.length, maxUses: Math.max(...uses.values()), size,
+      sameTint: Array.from(new Uint8Array(await actual.arrayBuffer())).join() === Array.from(new Uint8Array(await expected.arrayBuffer())).join() };
+  });
+  expect(detail).toEqual({ settings: { columns: 40, maxUses: 3, metric: 'hsl-r', seed: 1 }, cells: 1200, maxUses: 3, size: [320, 240], sameTint: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await overflow(page)).toBeLessThanOrEqual(0);
+});

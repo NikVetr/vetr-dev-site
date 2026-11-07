@@ -1,6 +1,6 @@
-// Photomosaic: the page's default example, Hokusai's Red Fuji as the target and the 442 example
-// photos, matched by the page on load with its defaults (the R script's grid, HSL match, seed 1):
-// 425 photos in 25 columns by 17 rows. The still is the mosaic as the page draws it, taken from
+// Photomosaic: the page's explicit Sunflower preset and the 442 example photos,
+// using the existing HSL matcher, seed 1, up to three uses per photo and 45% display tint:
+// 1,200 cells in 40 columns by 30 rows. The still is the mosaic as the page draws it, taken from
 // its own PNG export at 20 px a tile and embedded as WebP; the other view is the page's "target
 // at one colour per cell", drawn as one square per cell. The loop crossfades from the mosaic to
 // the cells and back, with the page's two-way "Show" choice beside it marking the view.
@@ -21,14 +21,16 @@ export async function build() {
   /** @type {{ url: string, width: number, height: number }} */
   let mosaic;
   try {
-    // The page loads the example photos and target and generates the mosaic on load.
+    // Keep the baseline on-load example intact; select the richer illustrative preset.
     await page.waitForFunction(() => /** @type {any} */ (window).Photomosaic?.getResult(), null, { timeout: 120000 });
+    await page.locator('#sunflower-example').click();
+    await page.waitForFunction(() => /** @type {any} */ (window).Photomosaic?.getResult()?.grid.cells === 1200);
     result = await page.evaluate(() => {
       const r = /** @type {any} */ (window).Photomosaic.getResult();
       return { grid: r.grid, cells: r.cells, settings: r.settings, used: r.photos.used, count: r.photos.count };
     });
     mosaic = await page.evaluate(async (/** @type {number[]} */ [tileWidth, quality]) => {
-      const png = await /** @type {any} */ (window).Photomosaic.exportPngBlob({ tileWidth, fit: 'keep', tint: 0 });
+      const png = await /** @type {any} */ (window).Photomosaic.exportPngBlob({ tileWidth, fit: 'keep', tint: 0.45 });
       const bitmap = await createImageBitmap(png);
       const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
       /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d')).drawImage(bitmap, 0, 0);
