@@ -51,6 +51,7 @@ From R, write the request with `jsonlite::write_json(request, "request.json", au
 | --- | --- |
 | `submit(request)` | Validates the request, replaces the working project with it and draws it. Returns a detached copy of the new project. An invalid request throws before anything is replaced, and the rejected data does not enter undo history or autosave. |
 | `getProject()` | Returns a detached copy of the current project. |
+| `setTextSize(pixels)` | Scales the current diagram's labels, nodes, ribbons and spacing together, preserves raw flows and node coordinates, resets presentation to native size, and records an undo step. Returns a detached project. Requires a finite positive number. |
 | `exportSvgText()` | Returns the plot as shown, as SVG text. |
 | `exportPngBlob()` | Returns a Promise of the plot as a PNG `Blob` at 2× resolution. |
 | `exportBundle()` | Returns the R bundle as zip bytes (a `Uint8Array`). It holds the flow matrices, the resolved color matrices, `loc.csv`, a `sankey.R` script and `project.json`. |
@@ -111,6 +112,8 @@ Wide and long tables also keep each item's trajectory as weighted pathways, with
 - `style` uses the application's names, such as `palette`, `fontSize`, `labelCounts`, `canvasWidth` and `canvasHeight`. Explicit style values override the defaults that come with a `labels` choice.
 - `params` uses the layout names in `js/layout.js`'s `DEFAULT_PARAMS`, such as `curvature`, `route` and `merge_frac`. These follow the arguments of `sankey_ribbons()` in the [polylines R code](https://github.com/NikVetr/polylines).
 - `stageParams` is an array of per-stage overrides for routing and ordering.
+
+`style.fontSize` sets the font size of a fresh submission independently of its canvas. To resize an existing diagram coherently, call `setTextSize(pixels)` in the page. Its returned project contains explicit canvas dimensions and can be passed to a `project` request in the browser, CLI or Node interface.
 
 ## Result
 

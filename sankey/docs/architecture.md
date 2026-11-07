@@ -72,6 +72,8 @@ History keeps up to 100 serialized state snapshots. Browser autosave is debounce
 
 Label rendering, fitted views, and annotation clearance share `render.labelGeometry()`, which combines placement, anchors and full font bounds. The separate compact text-height measure remains available for node sizing.
 
+The toolbar's text-size control and `SankeyApp.setTextSize(pixels)` share a resize operation. It scales the drawable canvas dimensions and retained sizing minima by the font-size ratio, preserving raw matrices, `valueScale`, node coordinates and view limits. Nodes, ribbons and their spacing therefore grow with labels, including manually positioned layouts. Presentation returns to native size so the drawing can scroll. History, projects and exports retain the resulting dimensions; fresh submissions still specify typography and canvas dimensions independently.
+
 ### Exports
 
 SVG and PNG capture the visible drawing, including emphasized traces, with optional cropping. Other exports include location CSV, project JSON, and an R bundle ZIP with matrices, resolved colors, locations, optional manual stack order, and generated R drawing code. The R bundle uses the R renderer; browser interaction overlays are separate.

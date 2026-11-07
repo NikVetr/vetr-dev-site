@@ -11,6 +11,8 @@ cd sankey
 npm run serve        # python3 -m http.server 4183, then open http://127.0.0.1:4183
 ```
 
+The toolbar's **Text size** slider scales labels, node bodies, ribbons and their spacing together. Larger diagrams scroll at their native size; the Fit button remains available. Raw flow values and node coordinates are preserved, and Undo restores the previous size. The exported diagram and saved project keep the chosen size.
+
 ## Programmatic submissions
 
 `window.SankeyApp.submit(request)` loads data, validates it, and draws synchronously without opening a dialog. It returns a detached project object, suitable for saving or submitting again. Invalid requests throw a `SankeyError` before replacing the working project; rejected data does not enter history or autosave. Requests must contain JSON data with finite numbers. Unknown request fields and unknown `style`/`params` names are rejected.
@@ -29,6 +31,8 @@ const svg = SankeyApp.exportSvgText();
 const png = await SankeyApp.exportPngBlob(); // Blob, at 2× resolution
 const bundle = SankeyApp.exportBundle();    // Uint8Array: CSVs, R code and project JSON
 ```
+
+For a diagram already loaded, `SankeyApp.setTextSize(20)` applies the toolbar operation and returns the resized project. Fresh submissions can still set `style.fontSize`, `canvasWidth` and `canvasHeight` independently.
 
 Three request types are supported:
 

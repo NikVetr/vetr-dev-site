@@ -1,8 +1,6 @@
-// Sankey: the page's opening example (the labelled four sources, two mediators and three outcomes),
-// laid out and coloured by the page itself on a 16:9 canvas, its own background set to the card's
-// paper, and exported as SVG. Kept: the strands with their gradients, the node bodies, the faint
-// strands seen through nodes they pass behind, and the node outlines; dropped: the labels, which
-// would be under 2 units tall at card size, and the strand outlines, which would be hairlines.
+// Sankey: the app's fictitious patient-pathways example, laid out and coloured by the app,
+// with larger labels for card-scale reading. Keep the exported strands, nodes and labels;
+// simplify geometry below a pixel, and omit hairline strand outlines.
 // The loop is the page's emphasis, clicking each source in turn: its node and strands stay as they
 // are while every other strand fades to the page's 16%, every other node blends towards the
 // background as the page's dim-node filter does, and the outlines go. It ends with nothing
@@ -11,7 +9,8 @@ import { readFileSync } from 'node:fs';
 import { openPage } from '../browser.mjs';
 import { H, W, art, num } from '../svg.mjs';
 
-const CANVAS = [1720, 900];  // the page's canvas, in its px: about 16:9 once it crops the drawing
+const CANVAS = [900, 500];
+const FONT_SIZE = 26;
 const NONE = 1.3;            // seconds with nothing emphasised (the still), across the wrap
 const EACH = 1.0;            // seconds each source is emphasised
 const FADE = 0.15;
@@ -26,7 +25,7 @@ function papers() {
 }
 
 /**
- * The page's drawing of its opening example, on each background, and what a click on each source
+ * The page's drawing of the patient-pathways example, on each background, and what a click on each source
  * node emphasises.
  * @param {{ light: string, dark: string }} bg
  */
@@ -34,15 +33,16 @@ async function readPage(bg) {
   const { page, errors, close } = await openPage('sankey/');
   try {
     if (errors.length) throw new Error(`sankey: the page failed: ${errors.join('; ')}`);
-    const base = await page.evaluate(() => /** @type {any} */ (window).SankeyApp.getProject());
-    if (base.example !== 'labeled') throw new Error(`sankey: the page opened ${base.example}, not the labelled example`);
     /** @param {string} colour */
-    const draw = (colour) => page.evaluate((/** @type {[any, number, number, string]} */ [project, w, h, bgColour]) => {
+    const draw = (colour) => page.evaluate((/** @type {[number, number, number, string]} */ [w, h, fontSize, bgColour]) => {
       const app = /** @type {any} */ (window).SankeyApp;
-      const p = { ...project, style: { ...project.style, canvasWidth: w, canvasHeight: h, labels: false, bg: bgColour } };
-      app.submit({ type: 'project', project: p });
+      const example = /** @type {any} */ (window).SK.examples.find((/** @type {any} */ e) => e.id === 'pathways');
+      app.submit({ type: 'table', text: example.files[example.table], spec: example.importSpec,
+        options: example.importOptions, params: example.params, labels: 'above',
+        style: { ...example.style, canvasWidth: w, canvasHeight: h, fontSize,
+          labelCounts: false, tracePaths: false, bg: bgColour } });
       return /** @type {string} */ (app.exportSvgText());
-    }, [base, CANVAS[0], CANVAS[1], colour]);
+    }, [CANVAS[0], CANVAS[1], FONT_SIZE, colour]);
     const dark = await draw(bg.dark);
     const light = await draw(bg.light);
     // The sources are the first stage's nodes; a click on each emphasises what highlightSets gives.
@@ -104,6 +104,9 @@ export async function build() {
     }).join('');
   };
   const all = (/** @type {RegExp} */ re, /** @type {string} */ s = light) => [...s.matchAll(re)];
+  const labels = all(/<text class="node-label" data-node="\d+" x="([-\d.]+)" y="([-\d.]+)"[^>]*font-size="([\d.]+)"[^>]*>(.*?)<\/text>/g)
+    .map((m) => `<text x="${num(X(Number(m[1])))}" y="${num(Y(Number(m[2])))}" font-size="${num(Number(m[3]) * k)}">${m[4]}</text>`).join('');
+  if (!labels) throw new Error('sankey: patient-pathways labels are missing');
 
   // Gradients: the strands' are the same on both backgrounds, the node bodies' are not.
   /**
@@ -141,20 +144,30 @@ export async function build() {
   let trunks = '';
   let css = '';
   const nodes = new Map();
-  for (const m of all(/<path class="trunk" data-node="(\d+)" d="([^"]+)" fill="url\(#(gn[^)]+)\)"\/>/g)) {
-    const [id, d, g] = [Number(m[1]), m[2], m[3]];
+  const trunkPattern = /<path class="trunk" data-node="(\d+)" d="([^"]+)" fill="([^"]+)"(?: fill-opacity="([\d.]+)")?\/>/g;
+  const darkTrunks = all(trunkPattern, dark);
+  for (const [i, m] of all(trunkPattern).entries()) {
+    const [id, d, fill] = [Number(m[1]), m[2], m[3]];
+    const piece = path(d);
+    nodes.set(id, [...(nodes.get(id) ?? []), piece]);
+    if (fill.startsWith('#')) {
+      if (darkTrunks[i]?.[2] !== d) throw new Error('sankey: solid node geometry differs between themes');
+      const themed = fill !== darkTrunks[i][3];
+      if (themed) css += `:root[data-theme="dark"] & .body${i} { fill: ${darkTrunks[i][3]}; }\n`;
+      trunks += `<path${themed ? ` class="body${i}"` : ''} d="${piece}" fill="${fill}"${m[4] && m[4] !== '1' ? ` fill-opacity="${m[4]}"` : ''}/>`;
+      continue;
+    }
+    const g = /^url\(#(gn[^)]+)\)$/.exec(fill)?.[1];
+    if (!g) throw new Error(`sankey: unsupported node fill ${fill}`);
     const [a, b] = [gradientOf(light, g), gradientOf(dark, g)];
     if (!a.solid) defs += gradient(g, a);
     // A body's gradient runs through the background, so it differs by theme; a band's does not.
     const themed = a.stops !== b.stops;
     if (themed) {
-      if (a.solid || b.solid) throw new Error(`sankey: ${g} is a gradient on one background only`);
-      defs += gradient(`${g}d`, b);
-      css += `:root[data-theme="dark"] & .${g} { fill: url(#sankey-${g}d); }\n`;
+      if (!b.solid) defs += gradient(`${g}d`, b);
+      css += `:root[data-theme="dark"] & .${g} { fill: ${b.solid ?? `url(#sankey-${g}d)`}; }\n`;
     }
-    const piece = path(d);
     trunks += `<path${themed ? ` class="${g}"` : ''} d="${piece}" fill="${a.solid ?? `url(#sankey-${g})`}"/>`;
-    nodes.set(id, [...(nodes.get(id) ?? []), piece]);
   }
   // A node's outline follows its pieces' outer edges: the page masks off its inward half and
   // where its own strands join, which the same mask does here.
@@ -215,10 +228,12 @@ export async function build() {
 <g class="trunks">${trunks}</g>
 <g class="outline">${outlines}</g>
 <g class="dims">${dims}</g>
-<g class="ghosts">${ghosts}</g>`,
+<g class="ghosts">${ghosts}</g>
+<g class="labels">${labels}</g>`,
     css: `& .outline { fill: none; stroke: #000; stroke-width: 0.6; stroke-linejoin: round; }
 & .dim { fill: var(--art-paper); opacity: 0; }
 & .ghost { opacity: 0.3; }
+& .labels { fill: var(--art-ink); text-anchor: middle; dominant-baseline: central; font-family: Helvetica, Arial, sans-serif; }
 ${css}`,
     loop,
   });

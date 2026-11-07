@@ -34,6 +34,9 @@ button, select, input, textarea { font: inherit; color: inherit; }
 /* Toolbar groups alternate light grey and white so each set of related buttons reads as one. */
 .tool-group { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 2px; border-radius: 7px; }
 .tool-group:nth-child(odd) { background: #e9edf2; }
+.text-size-control { flex: 0 1 245px; max-width: 100%; padding: 4px 8px; }
+.text-size-control .row { grid-template-columns: auto minmax(0, 1fr); gap: 8px; margin: 0; width: 100%; }
+.text-size-control .range { min-width: 120px; }
 
 .btn {
   display: inline-flex;

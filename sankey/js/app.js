@@ -33,9 +33,9 @@
     labelColorBy: 'single',
     labelColor: '#1F2937',
     labelCounts: true,
-    canvasWidth: null,
+    canvasWidth: /** @type {number | null} */ (null),
     cropExports: true,
-    canvasHeight: null,
+    canvasHeight: /** @type {number | null} */ (null),
     collision: 'wall',
     tracePaths: true,
     maxHoverSubstrands: 200,
@@ -64,6 +64,7 @@
   let state = blankState();
   let layout = null;
   let colors = null;
+  /** @type {{width: number, height: number, margin: {top: number, bottom: number, left: number, right: number}, subset: {height: number, lines: {text: string, bold: boolean}[][], markup: string}} | null} */
   let frame = null;
   let displayScale = 1;
   let traces = null; // { subs, paths, total } when item-level pathways can be traced
@@ -809,7 +810,8 @@
         { key: 'labels', target: 'style', type: 'checkbox', label: 'Show labels' },
         { key: 'showIndices', target: 'style', type: 'checkbox', label: 'Number unlabeled nodes',
           showIf: () => state.style.labels },
-        { key: 'fontSize', target: 'style', type: 'range', label: 'Font size (px)', min: 4, max: 36, step: 0.5, fit: true },
+        { key: 'fontSize', target: 'style', type: 'range', label: 'Text size (px)', min: 4, max: 36, step: 0.5,
+          help: 'Resize text, nodes, ribbons and gaps together. Larger drawings scroll; raw flow values and node positions stay unchanged.' },
         { key: 'labelPosition', target: 'style', type: 'select', label: 'Label position',
           options: [['auto', 'inside nodes'], ['above', 'above nodes']],
           help: 'Inside nodes: labels sit in node bodies (beside nodes without one), which fade to a clear centre behind them. Above nodes: node bodies stay solid.' },
@@ -879,7 +881,42 @@
     return state.style[item.key];
   }
 
+  // Typography changes grow the drawing itself, not just its labels. Keeping the view and raw
+  // flows fixed while scaling the plot's pixel dimensions scales nodes, ribbons and gaps with
+  // the text, including hand-positioned and file-based layouts. The canvas can scroll rather
+  // than squeezing the larger labels back into the old viewport.
+  /** @param {number} size */
+  function resizeText(size) {
+    if (!(Number.isFinite(size) && size > 0)) throw new L.SankeyError('Text size must be a positive number.');
+    if (!frame || !state.loc.length) { state.style.fontSize = size; return; }
+    const ratio = size / state.style.fontSize;
+    if (ratio === 1) return;
+    const scaleWidth = (/** @type {number} */ width) => 2 * MARGIN + (width - 2 * MARGIN) * ratio;
+    const verticalMargin = frame.margin.top + MARGIN;
+    const scaleHeight = (/** @type {number} */ height) => verticalMargin + (height - verticalMargin) * ratio;
+    state.style.canvasWidth = scaleWidth(state.style.canvasWidth || frame.width);
+    state.style.canvasHeight = scaleHeight(state.style.canvasHeight || frame.height);
+    const source = /** @type {{minCanvasWidth?: number, minCanvasHeight?: number, spreadWidth?: number} | null} */ (state.sourceTable);
+    if (source) {
+      for (const key of /** @type {const} */ (['minCanvasWidth', 'spreadWidth'])) {
+        if (source[key]) source[key] = scaleWidth(source[key]);
+      }
+      if (source.minCanvasHeight) source.minCanvasHeight = scaleHeight(source.minCanvasHeight);
+    }
+    if (fileCanvasWidth) fileCanvasWidth = scaleWidth(fileCanvasWidth);
+    state.style.fontSize = size;
+    state.presentation = { mode: 'native', zoom: 1 };
+  }
+
+  /** @param {number} size */
+  function setTextSize(size) {
+    resizeText(size);
+    update({ commit: true });
+    return getProject();
+  }
+
   function setValue(item, value) {
+    if (item.target === 'style' && item.key === 'fontSize') { resizeText(value); return; }
     if (item.target === 'params') {
       state.params[item.key] = value;
     } else if (item.target === 'state') {
@@ -924,7 +961,7 @@
         });
         details.appendChild(clear);
       }
-      section.items.forEach((item) => details.appendChild(buildControl(item)));
+      section.items.forEach((item) => (item.key === 'fontSize' ? $('#text-size-control') : details).appendChild(buildControl(item)));
       if (section.title === 'Canvas & dragging') {
         const fit = document.createElement('button');
         fit.className = 'mini-btn wide';
@@ -974,7 +1011,8 @@
       input = document.createElement('span');
       input.className = 'range';
       input.innerHTML = '<input type="range"><input type="number" class="range-value" step="any">';
-      const slider = input.querySelector('input[type="range"]');
+      const slider = /** @type {HTMLInputElement} */ (input.querySelector('input[type="range"]'));
+      slider.setAttribute('aria-label', item.label);
       const box = input.querySelector('.range-value');
       box.id = id;
       if (item.placeholder) box.placeholder = item.placeholder;
@@ -1075,6 +1113,7 @@
   // the chosen option of a select (following the value), and the effect of a checkbox (faded while
   // off). Returns the element to place in the row; setSync replaces the sync.
   function withGlyph(item, input, sync, setSync) {
+    if (item.key === 'fontSize') return input;
     const G = window.SK.glyphs;
     const wrap = (...parts) => {
       const span = document.createElement('span');
@@ -3558,6 +3597,7 @@
     get layout() { return layout; },
     submit,
     getProject,
+    setTextSize,
     exportPngBlob,
     exportBundle: () => window.SK.zip.makeZip(bundleFiles()),
     loadExample,
