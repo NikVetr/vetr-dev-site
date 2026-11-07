@@ -315,17 +315,46 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 
 /* ---------- Gallery index ---------- */
 
-.gallery { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); margin-top: 1.4rem; }
-@media (min-width: 760px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.entry-card { display: grid; gap: 0.6rem; align-content: start; color: inherit; text-decoration: none; }
+/* Keep the teaching pages' narrower reading measure; the index uses the available wall. */
+.gallery-page .container { width: min(100% - 32px, 1760px); }
+.gallery-page .entry-head { padding-top: 1.1rem; }
+.gallery-page .lede { font-size: 1.04rem; }
+.gallery {
+  --cols: 1;
+  --gap: 0.85rem;
+  --wall-width: min(calc(100vw - 2rem), 1760px);
+  --unit: calc((var(--wall-width) - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: 1.1rem;
+}
+@media (min-width: 760px) {
+  .gallery { --cols: 4; grid-auto-rows: minmax(calc(var(--unit) * 0.68), auto); }
+}
+@media (min-width: 1200px) { .gallery { --cols: 6; } }
+@media (min-width: 1680px) { .gallery { --cols: 8; } }
+.entry-card { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.8rem; color: inherit; text-decoration: none; }
 .entry-card:hover { border-color: var(--primary); }
 .entry-card:hover h2 { text-decoration: underline; text-underline-offset: 3px; }
-.entry-card h2 { margin: 0; font-size: 1.3rem; color: var(--text); }
-.entry-card p { margin: 0; color: var(--muted); }
-.entry-card .thumb { border-radius: var(--radius-sm); background: var(--surface-2); padding: 0.5rem; }
-.entry-card .meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; align-items: center; color: var(--muted); font-size: 0.88rem; }
+.entry-card h2 { margin: 0; font-size: 1.22rem; color: var(--text); }
+.entry-card p { margin: 0; color: var(--muted); font-size: 0.93rem; line-height: 1.4; }
+.entry-card .thumb { flex: 1 0 100px; min-height: 100px; border-radius: var(--radius-sm); background: var(--surface-2); }
+.entry-card .thumb svg, .entry-card .thumb img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; padding: 0.4rem; object-fit: contain; }
+.entry-card .meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; align-items: center; color: var(--muted); font-size: 0.8rem; }
 .entry-card time { padding: 0.05rem 0.5rem; border: 1px solid var(--border); border-radius: 999px; font-variant-numeric: tabular-nums; }
+@media (max-width: 759px), (max-height: 540px) {
+  .gallery { --mosaic-flow: 1; grid-auto-rows: auto; }
+  .entry-card .thumb { flex: none; height: clamp(120px, 36vw, 180px); }
+}
+.calibration-observed { stroke: #c62828; }
+.calibration-marker { fill: #c62828; stroke: var(--surface-2); stroke-width: 1; }
+:root[data-theme="dark"] .calibration-observed { stroke: #ff6b6b; }
+:root[data-theme="dark"] .calibration-marker { fill: #ff6b6b; }
 .intro { max-width: 72ch; }
+.first-figure-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 0.4rem; color: var(--primary); font: 600 0.95rem var(--sans); text-underline-offset: 3px; }
+.plot-box[tabindex="-1"] { scroll-margin-top: 3rem; }
+.plot-box[tabindex="-1"]:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 /* ---------- Explorable panels (correlation geometry) ---------- */
 

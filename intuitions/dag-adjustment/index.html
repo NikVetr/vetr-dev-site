@@ -35,6 +35,7 @@
   <main class="container">
     <div class="entry-head">
       <h1>Adjusting for the right variables</h1>
+      <a class="first-figure-link" href="#dag-plot">Jump to the first figure ↓</a>
       <p class="lede">To estimate the effect of one variable on another from observational data, you regress the outcome on the exposure and on some other variables. Which others? Adjusting for a common cause removes bias; adjusting for a consequence of the exposure, or for a common effect, adds it. In a linear causal graph the answer is exact: the graph fixes the covariance of everything, and from it the coefficient any adjustment gives, which can be set against the true effect.</p>
       <nav class="panel-nav" aria-label="Panels">
         <ol>
@@ -63,7 +64,7 @@
         <div id="adjust-result" class="adjust-main">
           <figure>
             <ul class="legend" id="adjust-legend"></ul>
-            <div id="dag-plot" class="plot-box stale-dim"></div>
+            <div id="dag-plot" tabindex="-1" class="plot-box stale-dim"></div>
             <figcaption class="caption" id="dag-caption"></figcaption>
           </figure>
           <div id="adjust-issues" class="issues" role="alert" hidden></div>

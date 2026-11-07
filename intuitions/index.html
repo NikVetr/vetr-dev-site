@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../shared/tool-nav.css">
   <script src="../shared/tool-nav.js" defer></script>
 </head>
-<body>
+<body class="gallery-page">
   <nav class="tool-nav" aria-label="Tool navigation">
     <a class="tool-nav-home" href="/">vetr.dev</a>
     <span class="tool-nav-name">Statistical Intuitions</span>
@@ -34,93 +34,99 @@
   <main class="container">
     <div class="entry-head">
       <h1>Statistical intuitions</h1>
-      <p class="lede">Small interactive figures, each isolating one statistical idea. Move a few parameters and watch the figure respond. Everything is computed in your browser, by the same code a script can call through the <a href="api.md">API</a>.</p>
+      <p class="lede">Interactive figures for exploring statistics, probability and geometry. Choose an idea, change its parameters, and watch what follows.</p>
     </div>
 
     <div class="gallery">
-      <a class="card entry-card feature" href="correlation-geometry/">
+      <a class="card entry-card feature" data-size="3x3" href="correlation-geometry/" data-mosaic-key="correlation-geometry">
         <div class="thumb plot-box" id="thumb-correlation-geometry" aria-hidden="true"></div>
         <h2>The geometry of correlation</h2>
-        <p>Every variable is an arrow and every correlation the cosine of an angle. Rotate the arrows in 3-D to see why a correlation matrix must be positive semidefinite, which correlations can go together, how far apart <var>k</var> variables can be, and how much room one entry has.</p>
+        <p>Rotate variables as arrows to see which correlations can coexist, and why correlation matrices must be positive semidefinite.</p>
         <div class="meta"><time datetime="2019-12-03">2019-12-03</time></div>
       </a>
-      <a class="card entry-card" href="zscore-outliers/">
+      <a class="card entry-card" data-size="2x2" href="zscore-outliers/" data-mosaic-key="zscore-outliers">
         <div class="thumb plot-box" id="thumb-zscore-outliers" aria-hidden="true"></div>
         <h2>Pooled or stratified outlier removal</h2>
-        <p>A z-score cutoff on pooled groups removes the wrong share of values and takes them unevenly from the groups. See how much, for any gap in means, ratio of spreads, group share and cutoff.</p>
+        <p>Compare pooled and within-group z-score cutoffs, and see which values each rule removes.</p>
         <div class="meta"><time datetime="2021-07-14">2021-07-14</time></div>
       </a>
-      <a class="card entry-card" href="threshold-model/">
+      <a class="card entry-card" data-size="2x2" href="threshold-model/" data-mosaic-key="threshold-model">
         <div class="thumb plot-box" id="thumb-threshold-model" aria-hidden="true"></div>
         <h2>The threshold model</h2>
-        <p>Discrete traits from a hidden normal liability. Drag thresholds, let two correlated traits fill a contingency table, and fit a table back to its polychoric correlation.</p>
+        <p>Turn hidden normal traits into categories, then recover a polychoric correlation from a table.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
-      <a class="card entry-card" href="typical-set/">
+      <a class="card entry-card" data-size="2x3" href="typical-set/" data-mosaic-key="typical-set">
         <div class="thumb plot-box" id="thumb-typical-set" aria-hidden="true"></div>
         <h2>Where is the probability mass?</h2>
-        <p>In many dimensions a normal's density peaks at the mode, but its mass lies in a thin shell far from it, because volume grows with the distance. Watch density × volume as the dimension rises, see a mode and a mean mislead, and the points of a sphere crowd its equator.</p>
+        <p>Watch probability concentrate in a thin shell as dimensions increase, even though density peaks at the centre.</p>
         <div class="meta"><time datetime="2022-06-21">2022-06-21</time></div>
       </a>
-      <a class="card entry-card" href="dag-adjustment/">
+      <a class="card entry-card" data-size="2x2" href="dag-adjustment/" data-mosaic-key="dag-adjustment">
         <div class="thumb plot-box" id="thumb-dag-adjustment" aria-hidden="true"></div>
         <h2>Adjusting for the right variables</h2>
-        <p>Confounders, mediators, colliders, M-bias and the front door, in linear causal graphs with numbers you set. See exactly what each adjustment set makes of the effect, which paths it opens or blocks, and how many weak colliders couple two independent variables.</p>
+        <p>Adjust for confounders, mediators and colliders in causal graphs. Compare each estimate with the true effect.</p>
         <div class="meta"><time datetime="2022-06-21">2022-06-21</time></div>
       </a>
-      <a class="card entry-card" href="null-pvalues/">
+      <a class="card entry-card" data-size="2x3" href="null-pvalues/" data-mosaic-key="null-pvalues">
         <div class="thumb plot-box" id="thumb-null-pvalues" aria-hidden="true"></div>
         <h2>Ways to break a p-value</h2>
-        <p>When nothing is going on, a valid test's p-values are spread evenly from 0 to 1. Seven common shortcuts bend them: regressing out a batch first, removing covariates one at a time, a <var>t</var>-test on bootstrap means, correlating autocorrelated series, two-step filtering, ignoring pairing, and dropping pathways with no hits. See the false-positive rate each one really has.</p>
+        <p>See how common shortcuts distort null p-values and false-positive rates.</p>
         <div class="meta"><time datetime="2021-12-12">2021-12-12</time></div>
       </a>
-      <a class="card entry-card" href="marchenko-pastur/">
+      <a class="card entry-card" data-size="2x2" href="marchenko-pastur/" data-mosaic-key="marchenko-pastur">
         <div class="thumb plot-box" id="thumb-marchenko-pastur" aria-hidden="true"></div>
         <h2>How many principal components are noise?</h2>
-        <p>The eigenvalues of pure noise spread over the Marchenko–Pastur law, so a large one is not by itself a signal. See the law for any number of observations and variables, when a real signal leaves the bulk, and why a small batch effect can take over the first principal component.</p>
+        <p>Compare noise eigenvalues with the Marchenko–Pastur law and see when a signal leaves the bulk.</p>
         <div class="meta"><time datetime="2022-11-14">2022-11-14</time></div>
       </a>
-      <a class="card entry-card" href="trait-evolution/">
+      <a class="card entry-card" data-size="2x3" href="trait-evolution/" data-mosaic-key="trait-evolution">
         <div class="thumb plot-box" id="thumb-trait-evolution" aria-hidden="true"></div>
         <h2>Traits evolving on a tree</h2>
-        <p>Watch a trait evolve down the branches of a phylogeny under Brownian motion, a trend, a pull toward an optimum, an early or late burst, or a clade that shifts to an optimum of its own. Follow two traits through time in 3-D, and fill in a branch between fixed ends.</p>
+        <p>Watch traits evolve along phylogenies under Brownian motion, trends, bursts and changing optima.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
-      <a class="card entry-card" href="tree-covariance/">
+      <a class="card entry-card" data-size="2x2" href="tree-covariance/" data-mosaic-key="tree-covariance">
         <div class="thumb plot-box" id="thumb-tree-covariance" aria-hidden="true"></div>
         <h2>A tree is a covariance matrix</h2>
-        <p>Under Brownian motion two species covary by the history they share, so a tree is a covariance matrix and its tips are arrows. Re-root it and the restricted likelihood stays put; step through Felsenstein's pruning, one cherry at a time, to the same number.</p>
+        <p>A tree’s shared history becomes a covariance matrix. Step through likelihood pruning one cherry at a time.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
-      <a class="card entry-card" href="backpack-fallacy/">
+      <a class="card entry-card" data-size="2x2" href="backpack-fallacy/" data-mosaic-key="backpack-fallacy">
         <div class="thumb plot-box" id="thumb-backpack-fallacy" aria-hidden="true"></div>
         <h2>The backpack fallacy</h2>
-        <p>Two studies report the same p-value, one with far fewer people per group. Is its true effect likely to be the larger? Under heavy-tailed effects almost always; when large effects are rare, often not. See the chance for any group sizes, computed exactly.</p>
+        <p>Compare the true effects behind equally significant results from different sample sizes.</p>
         <div class="meta"><time datetime="2023-08-30">2023-08-30</time></div>
       </a>
-      <a class="card entry-card" href="samplers/">
+      <a class="card entry-card" data-size="3x3" href="samplers/" data-mosaic-key="samplers">
         <div class="thumb plot-box" id="thumb-samplers" aria-hidden="true"></div>
         <h2>Funnels, coordinates and the Hastings ratio</h2>
-        <p>Watch Markov chain samplers step through a distribution. In Neal's funnel a chain cannot reach the neck until the funnel is rewritten as two standard normals; a move that multiplies a parameter samples the wrong distribution without its Hastings ratio; and HMC's trajectories diverge where the target bends too sharply.</p>
+        <p>Watch samplers navigate funnels, change coordinates, and account for the Hastings ratio.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
-      <a class="card entry-card" href="jacobian-adjustment/">
+      <a class="card entry-card" data-size="2x2" href="jacobian-adjustment/" data-mosaic-key="jacobian-adjustment">
         <div class="thumb plot-box" id="thumb-jacobian-adjustment" aria-hidden="true"></div>
         <h2>Priors on transformed parameters</h2>
-        <p>Write a prior on the product or square of Stan parameters and leave out the Jacobian, and the parameters come out wrong, or the model has no distribution at all. See each quantity against the prior written for it, in closed form, and why two correct marginal priors make the wrong joint.</p>
+        <p>See how Jacobian adjustments change priors on transformed parameters.</p>
         <div class="meta"><time datetime="2022-11-14">2022-11-14</time></div>
       </a>
-      <a class="card entry-card" href="probability-puzzles/">
+      <a class="card entry-card" data-size="2x2" href="probability-puzzles/" data-mosaic-key="probability-puzzles">
         <div class="thumb plot-box" id="thumb-probability-puzzles" aria-hidden="true"></div>
         <h2>Probability puzzles</h2>
-        <p>Four puzzles to play through, each with its exact answer and a seeded simulation beside it: kids walking a deck of cards who all end on the same one, hiring the best applicant without seeing the rest, 100 prisoners who go free a third of the time by following loops, and a coin that came up heads five times.</p>
+        <p>Explore four puzzles with exact answers and seeded simulations, from hiring to the 100 prisoners.</p>
         <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
-      <a class="card entry-card" href="/hypercube/">
-        <div class="thumb plot-box" aria-hidden="true"><img src="/assets/cards/hypercube.svg" alt="" width="320" height="180" style="display: block; width: 100%; height: 150px; object-fit: contain;"></div>
+      <a class="card entry-card" data-size="2x2" href="/hypercube/" data-mosaic-key="hypercube">
+        <div class="thumb plot-box" aria-hidden="true"><img src="/assets/cards/hypercube.svg" alt="" width="320" height="180" style="display: block; width: 100%; height: 100%; object-fit: contain;"></div>
         <h2>Hypercube rotation</h2>
-        <p>Watch a rigid cube in up to nine dimensions turn, its shadow unfolding from a spinning line through every dimension and folding back, one dimension at a time.</p>
+        <p>Watch a rotating cube’s shadow unfold through up to nine dimensions.</p>
         <div class="meta"><time datetime="2025-08-20">2025-08-20</time></div>
+      </a>
+      <a class="card entry-card" data-size="2x3" href="/forecast-calibration/" data-mosaic-key="forecast-calibration">
+        <div class="thumb plot-box" id="thumb-forecast-calibration" aria-hidden="true"></div>
+        <h2>Forecast calibration</h2>
+        <p>Compare stated probabilities with observed outcomes and simulated calibrated worlds.</p>
+        <div class="meta"><time datetime="2019-10-22">2019-10-22</time></div>
       </a>
     </div>
   </main>

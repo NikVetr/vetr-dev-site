@@ -1,85 +1,114 @@
-// Statistical Intuitions: two of the gallery's entries side by side. The threshold-model figure
-// at the parameters of its index thumbnail (one trait, liability mean 0.4, thresholds -0.6, 0.5
-// and 1.4): the normal liability with each category's area filled in the gallery's ordinal teal
-// ramp, numbered as the entry's full figure numbers them; and the hypercube, which the gallery
-// lists too, as the hypercube card draws it (cards/hypercube.mjs).
-// The loop is both entries' motion at once, over the hypercube plan's 24.8 s cycle: the
-// liability mean swings one SD either way and back, a sine, four times, so the category areas
-// grow and shrink under the fixed thresholds (the density's shape does not depend on its mean,
-// so the move is a translation of the curve, clipped to each category's band); and
-// assets/players/hypercube.js turns the hypercube through the whole plan, which ends where it
-// began. The player keeps time by the swing's CSS animation, so the two wrap together.
-import { compute } from '../../../intuitions/threshold-model/compute.js';
-import { DOMAIN } from '../../../intuitions/threshold-model/figure.js';
+// Six actual gallery entries on one small mosaic. Thresholds use the normal-liability
+// core, correlation arrows are the cone solution projected by the shared 3-D library,
+// radial mass uses the chi density, the phylogeny is a seeded Brownian simulation,
+// calibration uses the app's synthetic CSV, and the hypercube replays its saved plan.
+// No parameter defaults in the applications are changed by these illustrative sweeps.
+import { readFileSync } from 'node:fs';
+import { compute as threshold } from '../../../intuitions/threshold-model/compute.js';
+import { compute as correlation } from '../../../intuitions/correlation-geometry/compute.js';
+import { chiLogDensity } from '../../../intuitions/typical-set/compute.js';
+import { compute as traits } from '../../../intuitions/trait-evolution/compute.js';
 import { dnorm } from '../../../intuitions/lib/normal.js';
-import { H, W, art, num, polyline } from '../svg.mjs';
+import { orientation, project } from '../../../intuitions/lib/geom3d.js';
+import { submit as calibrate } from '../../../forecast-calibration/core/index.js';
+import { art, esc, flipbook, num, polyline } from '../svg.mjs';
 import { hypercubeStill } from './hypercube.mjs';
 
-const SWING = 1;   // SD units
-const SWINGS = 4;  // swings of the mean in one hypercube cycle
+const PW = 100, PH = 60;
+const frames = 48;
+/** @type {[number, number, string, string][]} */
+const titles = [
+  [4, 4, 'Thresholds', 'threshold-model'],
+  [110, 4, 'Correlations', 'correlation-geometry'],
+  [216, 4, 'Hypercube', 'hypercube'],
+  [4, 92, 'Probability mass', 'typical-set'],
+  [110, 92, 'Traits on a tree', 'trait-evolution'],
+  [216, 92, 'Calibration', 'forecast-calibration'],
+];
+const tile = (/** @type {number} */ x, /** @type {number} */ y, /** @type {string} */ body) => `<g transform="translate(${x} ${y})">${body}</g>`;
 
-/** The entry's ramp class of category c of k (figure.js rampClass). @param {number} c @param {number} k */
-const ramp = (c, k) => (k === 1 ? 0 : Math.round((c * 5) / (k - 1)));
-// The gallery's --cat-0 to --cat-5, light and dark (intuitions/style.css).
-const CAT = {
-  light: ['#77bfa8', '#5fa690', '#488e79', '#317663', '#175f4d', '#004939'],
-  dark: ['#115a48', '#2f7460', '#4a8e7a', '#64a994', '#7fc6af', '#9ae3cb'],
-};
+/** @param {number} phase */
+function movingPanels(phase) {
+  const value = /** @type {any} */ (correlation({ view: 'cone', rBC: 0.6 + 0.3 * Math.sin(phase) }));
+  const camera = { rotation: orientation(-20 + 25 * Math.sin(phase), 25), width: PW, height: PH, scale: 24, distance: Infinity };
+  const points = [value.a, value.b, value.meets[0]];
+  const centre = [PW / 2, PH / 2];
+  const arrows = points.map((point, i) => {
+    const projected = project(camera, point);
+    const tip = [projected.x, projected.y];
+    const angle = Math.atan2(tip[1] - centre[1], tip[0] - centre[0]);
+    const wing = (/** @type {number} */ side) => [tip[0] - 5 * Math.cos(angle + side * 0.42), tip[1] - 5 * Math.sin(angle + side * 0.42)];
+    return `<path class="arrow series-${i}" d="${polyline([centre, tip])}${polyline([wing(-1), tip, wing(1)])}"/>`;
+  }).join('');
+  const k = Math.round(10 + 7 * Math.sin(phase));
+  const curve = Array.from({ length: 71 }, (_, i) => {
+    const radius = i / 10;
+    return [6 + radius / 7 * 88, 53 - Math.exp(chiLogDensity(radius, k)) / 0.8 * 43];
+  });
+  return tile(110, 19, `<circle class="sphere" cx="50" cy="30" r="25"/>${arrows}`)
+    + tile(4, 107, `<path class="axis" d="M6 8V53H94"/><path class="mass-fill" d="${polyline(curve)}L94 53H6Z"/><path class="mass" d="${polyline(curve)}"/><text class="parameter" x="8" y="12">k = ${k}</text>`);
+}
 
 export function build() {
-  const trait = /** @type {any} */ (compute({ means: [0.4], thresholds: [[-0.6, 0.5, 1.4]] })).traits[0];
-  // The liability on the left two thirds, the hypercube on the right.
-  const cube = 112;
-  const figW = W - cube - 14;
-  const [pad, top, bottom] = [8, 24, 12];
-  const base = H - bottom;
-  const x = (/** @type {number} */ v) => pad + ((v - DOMAIN[0]) / (DOMAIN[1] - DOMAIN[0])) * (figW - 2 * pad);
-  const y = (/** @type {number} */ d) => base - (d / 0.5) * (base - top);
-  const perSd = (figW - 2 * pad) / (DOMAIN[1] - DOMAIN[0]);
-  const hc = hypercubeStill(W - cube - 4, (H - cube) / 2, cube);
+  const hc = hypercubeStill(234, 18, 64);
   const period = hc.plan.frames / hc.plan.stepsPerSecond;
-  const swingPeriod = period / SWINGS;
+  const sweep = period / 4;
+  const flip = flipbook('intuitions-panels', Array.from({ length: frames }, (_, i) => movingPanels(i * 2 * Math.PI / frames)), sweep);
+  const trait = /** @type {any} */ (threshold({ means: [0.4], thresholds: [[-0.6, 0.5, 1.4]] })).traits[0];
+  const x = (/** @type {number} */ value) => 6 + (value + 4) / 8 * 88;
+  const curve = Array.from({ length: 101 }, (_, i) => -5 + i / 10).map(v => [x(v), 53 - dnorm(v, trait.mean, 1) / 0.5 * 45]);
+  const density = `${polyline(curve)}L${num(x(5))} 53H${num(x(-5))}Z`;
+  const edges = [-4, ...trait.thresholds, 4];
+  const palette = ['#77bfa8', '#488e79', '#175f4d', '#004939'];
+  const defs = `<path id="intuitions-density" d="${density}"/>`
+    + edges.slice(0, -1).map((lo, i) => `<clipPath id="intuitions-category-${i}"><rect x="${num(x(lo))}" y="0" width="${num(x(edges[i + 1]) - x(lo))}" height="${PH}"/></clipPath>`).join('')
+    + '<clipPath id="intuitions-trait-reveal"><rect class="trait-reveal" x="0" y="0" width="100" height="60"/></clipPath>';
+  const densityBands = edges.slice(0, -1).map((_, i) => `<g clip-path="url(#intuitions-category-${i})"><use class="liability" href="#intuitions-density" fill="${palette[i]}"/></g>`).join('');
+  const cutoffs = trait.thresholds.map((/** @type {number} */ value) => `M${num(x(value))} 7V53`).join('');
+  const liability = tile(4, 19, `${densityBands}<path class="thresholds" d="${cutoffs}"/><path class="axis" d="M6 53H94"/>`);
 
-  // The density over the domain widened by the swing, at the still's mean, sampled every 2 units.
-  const [lo, hi] = [DOMAIN[0] - SWING, DOMAIN[1] + SWING];
-  const n = Math.ceil(((hi - lo) * perSd) / 2);
-  const curve = Array.from({ length: n + 1 }, (_, i) => lo + ((hi - lo) * i) / n).map((v) => [x(v), y(dnorm(v, trait.mean, 1))]);
-  const area = `${polyline(curve)}L${num(x(hi))} ${num(base)}L${num(x(lo))} ${num(base)}Z`;
+  const evolution = /** @type {any} */ (traits({ view: 'tree', model: 'bm', tree: { tips: 12, seed: 1 }, steps: 80, seed: 1 }));
+  const values = evolution.branches.flatMap((/** @type {any} */ b) => b.values);
+  const lo = Math.min(...values), hi = Math.max(...values);
+  const branches = evolution.branches.map((/** @type {any} */ branch) => polyline(branch.times.map((/** @type {number} */ time, /** @type {number} */ i) => [5 + time / evolution.treeHeight * 90, 55 - (branch.values[i] - lo) / (hi - lo) * 47]))).join('');
+  const phylogeny = tile(110, 107, `<path class="branch-future" d="${branches}"/><g clip-path="url(#intuitions-trait-reveal)"><path class="branch" d="${branches}"/></g>`);
 
-  const edges = [DOMAIN[0], ...trait.thresholds, DOMAIN[1]];
-  const k = edges.length - 1;
-  const clip = (/** @type {number} */ a, /** @type {number} */ b) => `<rect x="${num(x(a))}" y="0" width="${num(x(b) - x(a))}" height="${H}"/>`;
-  const defs = `<path id="intuitions-area" d="${area}"/>
-${edges.slice(0, -1).map((a, c) => `<clipPath id="intuitions-band${c}">${clip(a, edges[c + 1])}</clipPath>`).join('\n')}
-<clipPath id="intuitions-domain">${clip(DOMAIN[0], DOMAIN[1])}</clipPath>`;
-  const bands = edges.slice(0, -1).map((a, c) => `<g clip-path="url(#intuitions-band${c})"><use class="move cat-${ramp(c, k)}" href="#intuitions-area"/></g>`).join('\n');
-  const labels = edges.slice(0, -1).map((a, c) => `<text x="${num((x(a) + x(edges[c + 1])) / 2)}" y="${top - 8}">${c}</text>`).join('');
-  const thresholds = trait.thresholds.map((/** @type {number} */ t) => `M${num(x(t))} ${base}V${top - 2}`).join('');
-  const body = `${bands}
-<g clip-path="url(#intuitions-domain)"><path class="move ink-line" d="${polyline(curve)}"/></g>
-<path class="baseline" d="M${pad} ${base}H${num(figW - pad)}"/>
-<path class="threshold" d="${thresholds}"/>
-<g class="labels">${labels}</g>
-${hc.body}`;
-
-  // The mean's swing, a sine sampled at 24 stops.
-  const stops = Array.from({ length: 25 }, (_, i) => `${num((100 * i) / 24, 3)}% { transform: translateX(${num(SWING * perSd * Math.sin((2 * Math.PI * i) / 24), 2)}px); }`).join(' ');
-  const cats = [0, 1, 2, 3, 4, 5].map((i) => `& .cat-${i} { fill: ${CAT.light[i]}; } :root[data-theme="dark"] & .cat-${i} { fill: ${CAT.dark[i]}; }`).join('\n');
+  const table = readFileSync(new URL('../../../forecast-calibration/examples/synthetic.csv', import.meta.url), 'utf8');
+  const result = calibrate({ table });
+  const line = (/** @type {number[]} */ frequencies) => polyline(frequencies.map((f, i) => [6 + result.bins[i].meanProbability * 88, 54 - f * 48]));
+  const worlds = result.worlds.slice(0, 40).map(w => `<path d="${line(w.map((hits, i) => hits / result.bins[i].n))}"/>`).join('');
+  const selected = result.worlds.slice(40, 48).map((w, i) => `<path style="animation-delay:${num(i * sweep / 8, 5)}s" d="${line(w.map((hits, j) => hits / result.bins[j].n))}"/>`).join('');
+  const observed = line(result.bins.map(bin => bin.frequency));
+  const forecast = tile(216, 107, `<path class="axis" d="M6 6V54H94"/><path class="diagonal" d="M6 54L94 6"/><g class="worlds">${worlds}</g><g class="picked">${selected}</g><path class="observed" d="${observed}"/>`);
+  const panels = titles.map(([px, py, title, entry]) => `<g data-entry="${entry}"><rect class="mini-paper" x="${px}" y="${py}" width="100" height="80" rx="4"/><text class="mini-title" x="${Number(px) + 5}" y="${Number(py) + 10}">${esc(title)}</text></g>`).join('');
+  const sine = Array.from({ length: 25 }, (_, i) => `${num(i / 24 * 100, 3)}% { transform: translateX(${num(11 * Math.sin(i / 24 * 2 * Math.PI), 3)}px); }`).join(' ');
   return art({
-    name: 'intuitions',
-    period,
-    player: 'hypercube',
-    playerBox: hc.box,
-    defs,
-    body,
-    css: `${hc.css}
-${cats}
-& .ink-line { fill: none; stroke: var(--art-ink); stroke-width: 2; }
-& .move { will-change: transform; }
-& .baseline { stroke: var(--art-muted); stroke-width: 1; }
-& .threshold { stroke: var(--art-ink); stroke-width: 1.5; }
-& .labels { fill: var(--art-muted); font: 600 11px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; }`,
-    loop: `& .move { animation: intuitions-mean ${num(swingPeriod, 4)}s linear infinite; }
-@keyframes intuitions-mean { ${stops} }`,
+    name: 'intuitions', period, player: 'hypercube', playerBox: hc.box, defs,
+    body: `${panels}${liability}${flip.body}${phylogeny}${forecast}${hc.body}`,
+    frames,
+    css: `${hc.css}\n${flip.css}
+& .mini-paper { fill: var(--art-paper); stroke: var(--art-line); stroke-width: .65; }
+& .mini-title { fill: var(--art-ink); font: 600 8.5px ui-sans-serif, system-ui, sans-serif; }
+& .parameter { fill: var(--art-muted); font: 7px ui-sans-serif, system-ui, sans-serif; }
+& .axis, & .thresholds { fill: none; stroke: var(--art-muted); stroke-width: .75; }
+& .sphere { fill: none; stroke: var(--art-line); stroke-width: 1; }
+& .arrow { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+& .series-0 { stroke: #2a78d6; } & .series-1 { stroke: #eb6834; } & .series-2 { stroke: #1baf7a; }
+& .mass-fill { fill: #2a78d6; fill-opacity: .13; }
+& .mass { fill: none; stroke: #2a78d6; stroke-width: 1.7; }
+& .branch-future { fill: none; stroke: var(--art-line); stroke-width: .8; }
+& .branch { fill: none; stroke: #2a78d6; stroke-width: 1; }
+& .diagonal { fill: none; stroke: var(--art-muted); stroke-width: .8; stroke-dasharray: 3 2; }
+& .worlds path { fill: none; stroke: var(--art-ink); stroke-opacity: .06; stroke-width: .6; }
+& .picked path { fill: none; stroke: var(--art-ink); stroke-opacity: .5; stroke-width: 1; opacity: 0; }
+& .observed { fill: none; stroke: #c62828; stroke-width: 1.5; }
+:root[data-theme="dark"] & .observed { stroke: #ff6b6b; }`,
+    loop: `${flip.loop}
+& .liability { animation: intuitions-liability ${num(sweep, 5)}s linear infinite; }
+@keyframes intuitions-liability { ${sine} }
+& .trait-reveal { transform-origin: 0 0; animation: intuitions-traits ${num(sweep, 5)}s ease-in-out infinite; }
+@keyframes intuitions-traits { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.02); } }
+& .picked path { animation: intuitions-world ${num(sweep, 5)}s linear infinite; }
+@keyframes intuitions-world { 0%, 25%, 100% { opacity: 0; } 12.5% { opacity: 1; } }`,
   });
 }

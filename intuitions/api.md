@@ -18,6 +18,8 @@ The entries are:
 - [`jacobian-adjustment`](#jacobian-adjustment): priors on transformed parameters, in two views: a sum, a sum and a difference, a square and two products, with the Jacobian term included or left out, giving the density over the sampled parameters and each quantity's distribution against the prior stated for it in closed form (or no distribution at all); and two marginal statements against one joint statement, what each makes of the third variable, and its posterior when one variable is data.
 - [`probability-puzzles`](#probability-puzzles): four puzzles with seeded play-throughs, exact answers and seeded simulations: the Kruskal count, hiring the best applicant by a cutoff on ranks or a threshold on known qualities, the 100 prisoners following loops or opening boxes at random, and a coin drawn from fair and two-headed ones that has shown *k* heads.
 
+The gallery also links to [Hypercube rotation](../hypercube/) and [Forecast Calibration](../forecast-calibration/). These retain their standalone URLs and APIs: see [Hypercube API](../hypercube/api.md) and [Forecast Calibration API](../forecast-calibration/api.md). They are not entry names accepted by `Intuitions.submit()`.
+
 ## Ways in
 
 **Command line.** This needs Node 22 and nothing else (no npm install):

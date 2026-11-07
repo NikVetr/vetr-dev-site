@@ -35,6 +35,7 @@
   <main class="container">
     <div class="entry-head">
       <h1>Funnels, coordinates and the Hastings ratio</h1>
+      <a class="first-figure-link" href="#funnel-target">Jump to the first figure ↓</a>
       <p class="lede">A Markov chain Monte Carlo sampler walks through a distribution one step at a time, and in the long run the places it visits are a sample from it. Whether it gets there depends on the distribution's shape in the coordinates the sampler moves in, and on an acceptance rule that is exactly right. Press Play on a panel to watch a chain move; the numbers beside it say how close it has come to the exact answer.</p>
       <p class="note"><strong>A different sampler from the scripts'.</strong> truncated_funnel.R, funnel_test.R and evil_smiley_bug.R sample with Stan's No-U-Turn sampler, which tunes its step size during warm-up and chooses each trajectory's length. This page runs small samplers written for it instead (random-walk Metropolis, Gibbs, and Hamiltonian Monte Carlo with the step size and number of steps you set), with no warm-up and no tuning, so that every step can be watched. Its chains are checked against the exact targets. Stan, run on the same funnel, fails the same way in the centred coordinates (see <a href="#how">How it works</a>).</p>
       <nav class="panel-nav" aria-label="Panels">
@@ -60,7 +61,7 @@
             </div>
             <div>
               <h3 class="figure-title">The funnel, <var>x</var> against <var>y</var></h3>
-              <div id="funnel-target" class="plot-box stale-dim"></div>
+              <div id="funnel-target" tabindex="-1" class="plot-box stale-dim"></div>
             </div>
           </div>
           <div class="playback" id="funnel-playback"></div>
