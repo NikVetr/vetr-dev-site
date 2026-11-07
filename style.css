@@ -119,9 +119,7 @@ h1 {
   font-size: 0.9rem;
 }
 #intro p { margin: 0; }
-.theme-links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
-.theme-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--primary); font-size: 0.95rem; text-underline-offset: 3px; }
-.theme-links a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.category-names { display: none; }
 
 /* The legend, contours and their labels share category colours in either theme. */
 [data-category="statistics"] { --category-color: #267b70; }
@@ -132,7 +130,6 @@ h1 {
 :root[data-theme="dark"] [data-category="stats-art"] { --category-color: #b79be8; }
 :root[data-theme="dark"] [data-category="art"] { --category-color: #e8ab73; }
 :root[data-theme="dark"] [data-category="everyday"] { --category-color: #88b8e8; }
-.theme-links a { color: var(--category-color); }
 
 /* ---------- Main ---------- */
 main.container { padding-block: 1rem var(--space-4); }
@@ -161,7 +158,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   --gap: 1.25rem;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   grid-auto-rows: minmax(calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.68), auto);
-  grid-auto-flow: row dense;
+  grid-auto-flow: row; /* Source/Tab order stays coherent without JavaScript. */
   gap: var(--gap);
 }
 @media (min-width: 36rem)  { #projects > .grid { --cols: 2; } }
@@ -271,7 +268,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
    span the width (a 3x3 tile two columns), and one-column tiles sit beside their text. */
 @media (orientation: landscape) and (max-height: 500px) {
   .masthead { padding-block: var(--space-1); }
-  #projects > .grid { grid-auto-rows: auto; }
+  #projects > .grid { grid-auto-rows: auto; --mosaic-flow: 1; }
   #projects > .grid > li { --h: 1; }
   [data-size="3x3"] { --w: 2; }
   .card-art { flex: none; aspect-ratio: 16 / 9; max-height: 60svh; }

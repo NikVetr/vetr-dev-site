@@ -42,7 +42,7 @@ try {
         const rb = b.getBoundingClientRect();
         return ra.top - rb.top || ra.left - rb.left;
       });
-      let internalGaps = 0;
+      let internalGaps = 0, bottomGaps = 0;
       // Packing stays dense even where the category contours interlock.
       for (const grid of document.querySelectorAll('#projects > .grid')) {
         const cells = new Set();
@@ -52,6 +52,9 @@ try {
           const rows = Number(style.getPropertyValue('--h')) || 1, columns = Number(style.getPropertyValue('--w')) || 1;
           for (let y = row; y < row + rows; y++) for (let x = column; x < column + columns; x++) cells.add(`${x},${y}`);
         }
+        const cols = Number(getComputedStyle(grid).getPropertyValue('--cols'));
+        const lastRow = Math.max(...[...cells].map(cell => Number(cell.split(',')[1])));
+        for (let x = 1; x <= cols; x++) if (!cells.has(`${x},${lastRow}`)) bottomGaps++;
         for (const cell of cells) {
           const [x, y] = cell.split(',').map(Number);
           for (let row = 1; row < y; row++) if (!cells.has(`${x},${row}`)) internalGaps++;
@@ -92,11 +95,12 @@ try {
       const wall = document.querySelector('#projects > .grid');
       if (!wall) throw new Error('Missing landing grid');
       const columns = Number(getComputedStyle(wall).getPropertyValue('--cols'));
-      return { overflow: document.documentElement.scrollWidth - innerWidth, order: cards.every((card, i) => card === sorted[i]), internalGaps, fullCards, clipped, contourErrors, labelOverlaps, labels: labels.length, paths: paths.length, columns };
+      return { overflow: document.documentElement.scrollWidth - innerWidth, order: cards.every((card, i) => card === sorted[i]), internalGaps, bottomGaps, fullCards, clipped, contourErrors, labelOverlaps, labels: labels.length, paths: paths.length, columns };
     });
     assert.ok(result.overflow <= 1, `${width}×${height}: overflow ${result.overflow}`);
     assert.ok(result.order, `${width}×${height}: DOM and visual order differ`);
     assert.equal(result.internalGaps, 0, `${width}×${height}: internal gaps in the wall`);
+    assert.equal(result.bottomGaps, 0, `${width}×${height}: mosaic bottom is not flush`);
     assert.deepEqual(result.clipped, [], `${width}×${height}: clipped card text`);
     assert.equal(result.paths, 4, `${width}×${height}: missing category contours`);
     assert.deepEqual(result.contourErrors, [], `${width}×${height}: contours must surround only their own cards`);
@@ -106,15 +110,13 @@ try {
     assert.ok(result.fullCards >= minimumFullCards, `${width}×${height}: only ${result.fullCards} full cards visible`);
   }
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
-  assert.equal(await page.locator('.project-card').count(), 18);
+  assert.equal(await page.locator('.project-card').count(), 17);
   assert.equal(await page.locator('#projects > .grid').count(), 1);
   assert.ok(!(await page.locator('#intro').textContent()).includes('gift'));
+  assert.equal(await page.locator('.theme-links').count(), 0);
+  assert.equal(await page.locator('#projects a[href="/forecast-calibration/"]').count(), 0);
   for (const id of ['statistics', 'stats-art', 'art', 'everyday']) {
-    await page.locator(`.theme-links a[href="#${id}"]`).focus();
-    await page.keyboard.press('Enter');
-    assert.equal(await page.evaluate(() => document.activeElement?.id), id);
-    await page.keyboard.press('Tab');
-    assert.ok(await page.locator(`#${id} .project-card`).first().evaluate((/** @type {HTMLElement} */ el) => el === document.activeElement));
+    assert.ok(await page.locator(`#category-${id}`).textContent(), 'each contour retains its accessible category name');
   }
   const focusedCard = page.locator('a[href="/ceo-salary-benchmark/"]');
   await focusedCard.focus();
@@ -130,7 +132,7 @@ try {
   assert.equal(await page.locator('a[href="/ceo-salary-benchmark/"]').count(), 1);
   assert.ok(!(await page.locator('[data-art="ceo-salary-benchmark"]').textContent()).includes('Rethink Priorities'));
   assert.deepEqual(errors, []);
-  console.log('Landing: reduced motion, 13 resize states, dense packing/reading order, category contour coverage, clear labels, density, text fit, theme navigation and focus pass.');
+  console.log('Landing: reduced motion, 13 resize states, flush packing/reading order, category contour coverage, clear labels, density, text fit, accessible categories and focus pass.');
 } finally {
   await session.close();
 }

@@ -34,27 +34,22 @@ export function drawClusters(wall) {
   svg.setAttribute('viewBox', `0 0 ${origin.width} ${origin.height}`);
   svg.replaceChildren();
   labels.replaceChildren();
-  /** @type {Map<string, {cells: [number, number][], cards: HTMLElement[]}>} */
+  /** @type {Map<string, {cells: [number, number][]}>} */
   const groups = new Map();
   for (const card of /** @type {NodeListOf<HTMLElement>} */ (wall.querySelectorAll(':scope > li'))) {
     const category = card.dataset.category;
     if (!category) throw new Error('Landing card has no category');
-    const group = groups.get(category) ?? { cells: [], cards: [] };
+    const group = groups.get(category) ?? { cells: [] };
     groups.set(category, group);
-    group.cards.push(card);
     const css = getComputedStyle(card);
     const left = parseInt(css.gridColumnStart) - 1, top = parseInt(css.gridRowStart) - 1;
     const width = Number(css.getPropertyValue('--w')) || 1, height = Number(css.getPropertyValue('--h')) || 1;
     if (!Number.isInteger(left) || !Number.isInteger(top)) throw new Error('Cluster outlines require placed grid cards');
     for (let y = top; y < top + height; y++) for (let x = left; x < left + width; x++) group.cells.push([x, y]);
   }
-  for (const [category, { cells, cards }] of groups) {
+  for (const [category, { cells }] of groups) {
     const name = document.getElementById(`category-${category}`)?.textContent?.trim();
     if (!name) throw new Error(`Missing category label: ${category}`);
-    // Jump links lead to the first visible card in the category after every reflow.
-    for (const card of cards) { card.removeAttribute('id'); card.removeAttribute('tabindex'); }
-    cards[0].id = category;
-    cards[0].tabIndex = -1;
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.dataset.category = category;
     path.setAttribute('fill-rule', 'evenodd');
