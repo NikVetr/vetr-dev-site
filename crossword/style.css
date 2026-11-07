@@ -16,7 +16,7 @@
 .inline-field input { color: var(--text); max-width: 8rem; }
 .target-row > div { flex: 1 1 12rem; }
 
-/* In one column the crosswords come after these two cards, so the answers box is shorter
+/* In one column the crosswords come directly after the answers, whose box is shorter
    there (it scrolls, and can be dragged taller). */
 @media (max-width: 999px) {
   .entries { height: 11rem; }

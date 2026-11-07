@@ -254,3 +254,6 @@ The `path` takes one of these forms:
 ```
 
 The greedy layout is 12 × 8 with no cycle. Twenty iterations later the crossword is 9 × 8: Thunder and Blizzard cross both Hail and Drizzle, which makes one 4-cycle, and the score has dropped from −4.73 to −17.13. With a target, add for example `"target": {"mask": [".#.#.", "#####", ".###.", "..#.."]}`, or a PNG on the command line. The page's example, `examples/weather.txt` with the heart in `examples/heart.txt` (the implicit curve (x² + y² − 1)³ − x²y³ ≤ 0, made by `examples/make-heart.mjs`), shows the picture term at work.
+
+
+The page and landing preview load the saved 94-entry weather example from `examples/heart-example.json` immediately. It contains the exact request and the ordinary core's result (seed 1, one crossword, 50 iterations, unchanged default objective). Rebuild it after editing the words or heart with `node crossword/examples/build.mjs`; this takes about two minutes. Generate and Refine still run the core in the worker. Load example and Clear offer Undo for the replaced inputs, picture and settings.

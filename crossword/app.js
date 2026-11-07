@@ -459,22 +459,58 @@ async function exampleTarget() {
   const rows = (await (await fetch('examples/heart.txt')).text()).trim().split('\n');
   setTarget({ label: 'Example heart', request: { mask: rows } });
 }
-byId('target-example').addEventListener('click', exampleTarget);
-byId('target-none').addEventListener('click', () => setTarget(null));
+byId('target-example').addEventListener('click', () => { dropUndo(); return exampleTarget(); });
+byId('target-none').addEventListener('click', () => { dropUndo(); setTarget(null); });
 
 // ---------- examples and exports ----------
 
-async function loadExample() {
-  el.entries.value = await (await fetch('examples/weather.txt')).text();
-  checkEntries();
-  await exampleTarget();
+/** @type {{ request: ReturnType<typeof currentRequest>, target: Target | null } | null} */
+let replaced = null;
+
+function dropUndo() {
+  replaced = null;
+  byId('undo-note').hidden = true;
 }
-byId('load-example').addEventListener('click', loadExample);
+
+/** @param {{ request: ReturnType<typeof currentRequest>, target: Target | null }} before @param {string} note */
+function offerUndo(before, note) {
+  replaced = before;
+  byId('undo-text').textContent = note;
+  byId('undo-note').hidden = false;
+}
+
+async function loadExample() {
+  stopRun();
+  const response = await fetch('examples/heart-example.json');
+  if (!response.ok) throw new Error('The saved crossword example could not be loaded.');
+  const { request, result: example } = await response.json();
+  loadRequest(request);
+  setTarget({ label: 'Example heart', request: request.target });
+  showResult(example, request, pageInputs());
+  el.status.textContent = `Loaded ${example.crosswords[0].refined.entries.length}-entry example`;
+}
+byId('load-example').addEventListener('click', async () => {
+  const before = { request: currentRequest(), target };
+  await loadExample();
+  offerUndo(before, 'Replaced the entries, picture and settings with the example.');
+});
 byId('clear-entries').addEventListener('click', () => {
+  const before = { request: currentRequest(), target };
   el.entries.value = '';
   checkEntries();
+  offerUndo(before, 'Cleared the entries.');
 });
+byId('undo-replace').addEventListener('click', () => {
+  if (!replaced) return;
+  const before = replaced;
+  loadRequest(before.request);
+  setTarget(before.target);
+  dropUndo();
+});
+// Undo restores exactly the last replacement until the user starts another edit.
+document.querySelector('main')?.addEventListener('input', dropUndo);
 byId('new-seed').addEventListener('click', () => {
+  dropUndo();
   el.seed.value = String(Math.floor(Math.random() * 4294967296));
   showStale();
 });
@@ -541,4 +577,3 @@ byId('export-request').addEventListener('click', () => download('crossword-reque
 };
 
 await loadExample();
-await runFromPage(currentRequest());

@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+
+const smallExample = readFileSync(new URL('fixtures/weather.txt', import.meta.url), 'utf8');
 
 /** @param {import('@playwright/test').Page} page */
 async function open(page) {
@@ -8,18 +11,18 @@ async function open(page) {
 
 const overflow = (/** @type {import('@playwright/test').Page} */ page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
-test('generates the example on load and exposes the API', async ({ page }) => {
+test('loads the saved example immediately and exposes the API', async ({ page }) => {
   /** @type {string[]} */
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await open(page);
-  await expect(page.locator('#entry-count')).toHaveText('20 entries');
+  await expect(page.locator('#entry-count')).toHaveText('94 entries');
   await expect(page.locator('#target-status')).toContainText('Example heart: 64 × 64 pixels');
-  await expect(page.locator('#crossword-choice input')).toHaveCount(3);
+  await expect(page.locator('#crossword-choice input')).toHaveCount(1);
   await expect(page.locator('#grid-filled svg text')).not.toHaveCount(0);
-  await expect(page.locator('#clues-across li, #clues-down li')).toHaveCount(20);
+  await expect(page.locator('#clues-across li, #clues-down li')).toHaveCount(94);
   await expect(page.locator('#terms tr')).toHaveCount(7);
-  await expect(page.locator('#status')).toContainText('Done in');
+  await expect(page.locator('#status')).toContainText('Loaded 94-entry example');
 
   await page.getByLabel('Greedy layout').check();
   const greedy = await page.locator('#score').textContent();
@@ -61,16 +64,17 @@ test('generates the example on load and exposes the API', async ({ page }) => {
 
 test('shows the layout while it refines, and stops', async ({ page }) => {
   await open(page);
+  await page.locator('#entries').fill(smallExample);
   await page.getByLabel('MCMC iterations each').fill('100000');
   await page.getByRole('button', { name: 'Generate' }).click();
   await expect(page.locator('#progress-grid svg')).toBeVisible();
-  await expect(page.locator('#status')).toContainText(/Crossword 1 of 3: iteration \d+ of 100000/);
+  await expect(page.locator('#status')).toContainText(/Crossword 1: iteration \d+ of 100000/);
   await expect(page.getByRole('button', { name: 'Generate' })).toBeDisabled();
   await page.getByRole('button', { name: 'Stop' }).click();
   await expect(page.locator('#status')).toHaveText('Stopped');
   await expect(page.locator('#progress-grid')).toBeHidden();
   await expect(page.getByRole('button', { name: 'Generate' })).toBeEnabled();
-  await expect(page.locator('#crossword-choice input')).toHaveCount(3); // the previous result stays
+  await expect(page.locator('#crossword-choice input')).toHaveCount(1); // the previous result stays
 });
 
 test('flags bad entry lines, and refines the crossword shown', async ({ page }) => {
@@ -83,6 +87,7 @@ test('flags bad entry lines, and refines the crossword shown', async ({ page }) 
   await expect(page.locator('#entry-issues')).toBeHidden();
 
   await page.locator('#n-xwords').fill('2');
+  await page.locator('#n-iter').fill('1');
   await page.getByRole('button', { name: 'Refine the one shown' }).click();
   await expect(page.locator('#status')).toContainText('Done in');
   await expect(page.locator('#crossword-choice input')).toHaveCount(2);
@@ -102,6 +107,8 @@ test('reads an uploaded picture with canvas', async ({ page }) => {
   await page.locator('#target-file').setInputFiles({ name: 'square.png', mimeType: 'image/png', buffer: Buffer.from(png, 'base64') });
   await expect(page.locator('#target-status')).toHaveText('square.png: 50 × 40 pixels, 900 to fill.');
   await expect(page.getByLabel(/Darkness threshold/)).toBeEnabled();
+  await page.locator('#entries').fill(smallExample);
+  await page.locator('#n-iter').fill('5');
   await page.getByRole('button', { name: 'Generate' }).click();
   await expect(page.locator('#status')).toContainText('Done in');
   const target = await page.evaluate(() => /** @type {any} */ (window).Crossword.getResult().settings.target);
@@ -112,8 +119,28 @@ test('fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page);
   expect(await overflow(page)).toBe(0);
+  const results = await page.locator('.results-card').boundingBox();
+  const target = await page.locator('#target-heading').boundingBox();
+  expect(results && target && results.y < target.y).toBe(true);
   const svgWidth = await page.locator('#grid-filled svg').evaluate((svg) => svg.getBoundingClientRect().right);
   expect(svgWidth).toBeLessThanOrEqual(390);
   await page.locator('.method-card summary').click();
   expect(await overflow(page)).toBe(0);
+});
+
+test('Load example and Clear preserve replaced entries, settings and target for Undo', async ({ page }) => {
+  await open(page);
+  await page.locator('#entries').fill('A frozen drop : Hail\nMoving air : Wind');
+  await page.locator('#n-iter').fill('17');
+  await page.getByRole('button', { name: 'No picture' }).click();
+  await page.getByRole('button', { name: 'Clear', exact: true }).click();
+  await page.getByRole('button', { name: 'Undo', exact: true }).click();
+  await expect(page.locator('#entries')).toHaveValue('A frozen drop : Hail\nMoving air : Wind');
+  await page.getByRole('button', { name: 'Load example' }).click();
+  await expect(page.locator('#entry-count')).toHaveText('94 entries');
+  await page.getByRole('button', { name: 'Undo', exact: true }).click();
+  await expect(page.locator('#entries')).toHaveValue('A frozen drop : Hail\nMoving air : Wind');
+  await expect(page.locator('#n-iter')).toHaveValue('17');
+  await expect(page.locator('#target-status')).toContainText('No picture');
+  await expect(page.locator('#stale')).toContainText('Out of date');
 });

@@ -1,10 +1,9 @@
 // Crossword Generator: the page's default example (the weather answers, pushed towards the
-// heart picture; three crosswords, seed 1), crossword 1 after refinement, as the filled grid.
+// heart picture; 94 entries, seed 1), crossword 1 after refinement, as the filled grid.
 // The loop clears the answers word by word in clue order and fills them back in the same
 // order, ending filled as it began: every letter runs one shared fade, delayed to the moment
 // its first word comes up.
 import { readFileSync } from 'node:fs';
-import { submit } from '../../../crossword/core/index.js';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
 const { width: W, height: H } = WIDE;   // a 2x3 tile
@@ -16,11 +15,10 @@ const FADE = 0.15;
 
 export function build() {
   const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../crossword/examples/${f}`, import.meta.url), 'utf8');
-  const result = submit({
-    entriesText: read('weather.txt'),
-    target: { mask: read('heart.txt').trim().split('\n') },
-    search: { seed: 1, nXwords: 3, nIter: 50 },
-  });
+  const { request, result } = JSON.parse(read('heart-example.json'));
+  if (request.entriesText !== read('weather.txt') || request.target.mask.join('\n') !== read('heart.txt').trim()) {
+    throw new Error('crossword: regenerate the saved example with node crossword/examples/build.mjs');
+  }
   const xw = result.crosswords[0].refined;
   const cell = Math.min((W - 16) / xw.cols, (H - 12) / xw.rows);
   const x0 = (W - cell * xw.cols) / 2;

@@ -11,9 +11,24 @@ import { generateXword, swapWord } from '../core/search.js';
 import { concaveman } from '../vendor/concaveman.js';
 
 const here = (/** @type {string} */ path) => fileURLToPath(new URL(path, import.meta.url));
-const weatherText = readFileSync(here('../examples/weather.txt'), 'utf8');
+const weatherText = readFileSync(here('fixtures/weather.txt'), 'utf8');
 const heartRows = readFileSync(here('../examples/heart.txt'), 'utf8').trim().split('\n');
 const fixture = JSON.parse(readFileSync(here('fixtures/r-parity.json'), 'utf8'));
+
+test('the saved 94-entry heart matches the example inputs and remains a valid core result', () => {
+  const { request, result } = JSON.parse(readFileSync(here('../examples/heart-example.json'), 'utf8'));
+  assert.equal(request.entriesText, readFileSync(here('../examples/weather.txt'), 'utf8'));
+  assert.deepEqual(request.target.mask, heartRows);
+  const entries = parseEntries(request.entriesText);
+  assert.equal(entries.length, 94);
+  for (const stage of ['orig', 'refined']) {
+    const cw = /** @type {ReturnType<typeof submit>['crosswords'][number]['orig']} */ (result.crosswords[0][stage]);
+    const checked = submit({ ...request, init: cw, search: { ...request.search, nIter: 0 } }).crosswords[0].orig;
+    assert.deepEqual(checked, cw);
+    assert.deepEqual(cw.entries.map(e => [e.answer, e.clue]).sort(), entries.map(e => [e.answer, e.clue]).sort());
+  }
+  assert.ok(result.crosswords[0].refined.score < result.crosswords[0].orig.score);
+});
 
 /** @param {string[]} rows */
 const maskOf = (rows) => ({ width: rows[0].length, height: rows.length, data: Uint8Array.from(rows.join(''), (ch) => (ch === '#' ? 1 : 0)) });
