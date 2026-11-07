@@ -2,7 +2,7 @@
 
 Message Collage lays out a set of short messages, such as farewell or thank-you notes, as one dense card. Each message draws a font family, a style and a size, one global scale sets all the text, and the messages flow line by line into the free cells of a grid in a shuffled order. Several random layouts can be tried, keeping the one with the fewest empty cells. It has a single entry point, `submit(request) → result`. The request and the result are plain JSON. The web page, `window.MessageCollage` and the command line all call this same function, and the same request (seed included) always gives the same result. Messages are never sent anywhere.
 
-It is a port of Nik Vetr's R message collage (NikVetr/message-collage). The request fields, defaults and result fields are the R version's. Text is measured from the font files with fontkit exactly as the R version's showtext engine measures it, and R's random draws are reproduced with R's generator, so for the same request and font files the card is R's to the last bit: every line's cells, the global scale, the empty fraction and the colours.
+It is a port of Nik Vetr's R message collage (NikVetr/message-collage). The layout fields and defaults match the R version; `rotation_deg` adds optional presentation-only angles. Text is measured from the font files with fontkit exactly as the R version's showtext engine measures it, and R's random draws are reproduced with R's generator, so with `rotation_deg: 0` and the same request and font files the card is R's to the last bit: every line's cells, the global scale, the empty fraction and the colours.
 
 ## Ways in
 
@@ -58,6 +58,7 @@ Only `messages` is required. Unknown fields are rejected, and `null` means the d
 | `width_in`, `height_in` | `5`, `5` | Card width, and target height, in inches (0.5 to 60). The card grows downward when the messages need more room. |
 | `grid_res` | `null` | Layout cells per inch (1 to 400). `null` uses the R version's rule, `ceiling(sqrt(total characters / sqrt(width_in × height_in)))`. |
 | `fill` | `0.7` | The global text scale: set on single lines, the messages would cover `fill²` of the card. |
+| `rotation_deg` | `0` | Maximum message angle in degrees (0 to 10). Deterministic angles shrink until conservative glyph bounds avoid other messages and card edges; zero preserves the horizontal R layout. The page example uses 4. |
 | `line_gap` | `0.2` | Gap between a message's lines, as a fraction of its cap height. |
 | `message_gap` | `0.4` | Buffer below every line, as a fraction of its cap height. |
 | `palette` | Royal1 + Royal2 | Text colours as `#rrggbb`. A colour may be repeated, as in R. |
@@ -81,7 +82,9 @@ The R version's `cores` (results do not depend on it) and `text_engine` (this po
 | `fonts[]` | Each requested family's `category` and the face file of each requested style (`files`, relative to `message-collage/`). |
 | `request` | The request with defaults filled in. |
 
-A renderer needs only `card` and `lines`: draw each line's `text` left-aligned at `x_in` on `baseline_in`, in `family` and `style_name` at `font_size_pt`, with characters one advance width apart (no kerning or ligatures), as they were measured. This is the R version's `--layout` JSON, except that it has no `regions` hulls (only the label points, on `messages[]`) and no `timing`.
+With zero rotation, a renderer needs only `card` and `lines`: draw each line's `text` left-aligned at `x_in` on `baseline_in`, in `family` and `style_name` at `font_size_pt`, with characters one advance width apart (no kerning or ligatures), as they were measured. This is the R version's `--layout` JSON, except that it has no `regions` hulls (only the label points, on `messages[]`) and no `timing`.
+
+When present, `messages[].rotation` is `{angle_deg, x_in, y_in}`: rotate all lines of that message clockwise around that point, measured in inches from the card’s top-left corner. The grid coordinates, line breaks, font choices and empty-cell fraction describe the unchanged horizontal layout. SVG, PNG and PDF exports all apply the same rotation. The denser page example uses a 6.5 × 4.8-inch card, 32 grid cells per inch and `fill: 0.75`; the API defaults remain unchanged.
 
 ## Exports
 

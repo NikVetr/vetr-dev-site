@@ -8,6 +8,7 @@ import { test } from 'node:test';
 import { CollageError, loadFaces, parseMessages, renderPdf, renderSvg, STYLE_NAMES, submit } from '../core/index.js';
 import { advances, faceKey } from '../core/fonts.js';
 import { measureMessages } from '../core/measure.js';
+import { inkBoxes, overlaps, rotated } from '../core/rotation.js';
 
 const here = new URL('..', import.meta.url);
 const example = parseMessages(readFileSync(new URL('examples/messages.txt', here), 'utf8'));
@@ -112,6 +113,31 @@ test('the best of the runs is kept, and the same request gives the same result',
   assert.equal(r.card.empty_fraction, Math.min(...r.runs.map((run) => run.empty_fraction)));
   assert.deepEqual(r.runs.map((run) => run.seed), [8, 9]);
   assert.deepEqual(await submit({ messages: example, seed: 7, runs: 2 }), r);
+});
+
+test('gentle angles preserve the layout and keep every message clear of other glyphs and card edges', async () => {
+  const request = JSON.parse(readFileSync(new URL('examples/request.json', here), 'utf8'));
+  const result = await submit(request);
+  const horizontal = await submit({ ...request, rotation_deg: 0 });
+  assert.deepEqual(result.lines, horizontal.lines);
+  assert.deepEqual(result.card, horizontal.card);
+  assert.deepEqual(await submit(request), result);
+  const angles = result.messages.flatMap(m => m.rotation ? [m.rotation.angle_deg] : []);
+  assert.ok(angles.length > 20 && angles.some(a => a < -1) && angles.some(a => a > 1));
+  assert.ok(angles.every(a => Math.abs(a) <= request.rotation_deg));
+  const faces = await loadFaces(result.request.fonts, result.request.styles);
+  const boxes = inkBoxes(result, faces).map(box => {
+    const rotation = result.messages.find(m => m.index === box.message)?.rotation;
+    return { ...box, points: rotation ? rotated(box.points, rotation) : box.points };
+  });
+  for (const [i, a] of boxes.entries()) {
+    assert.ok(a.points.every(([x, y]) => x >= 0 && y >= 0 && x <= result.card.width_in && y <= result.card.height_in));
+    for (const b of boxes.slice(i + 1)) if (a.message !== b.message) assert.ok(!overlaps(a.points, b.points), `messages ${a.message} and ${b.message}`);
+  }
+  assert.match(renderSvg(result, faces), /transform="rotate\(/);
+  assert.match(renderSvg(result, faces, { text: 'embedded' }), /transform="rotate\(/);
+  assert.ok(new TextDecoder().decode(renderPdf(result, faces)).includes(' cm\n'));
+  assert.ok((await rejects({ messages: example, rotation_deg: 11 })).issues.some(i => i.path === 'rotation_deg'));
 });
 
 test('a single message lays out at a low fill, and fails with a hint at the default', async () => {

@@ -36,5 +36,10 @@
     "Thank you for being the person everyone could count on."
   ],
   "seed": 1,
-  "runs": 20
+  "runs": 20,
+  "width_in": 6.5,
+  "height_in": 4.8,
+  "grid_res": 32,
+  "fill": 0.75,
+  "rotation_deg": 4
 }

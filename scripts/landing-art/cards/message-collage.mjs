@@ -1,23 +1,16 @@
-// Message Collage: the page's example (its 34 farewell messages, best of 20 layouts, seed 1) laid
-// out by the tool's core on a portrait card for the tall tile (3.3 × 5 in, the request's own
-// card size, so the tool packs the messages at that shape), each line in its family, style, size
-// and colour on the navy card. The glyphs are the visitor's system fonts in the family's generic
-// kind (the bundled family named first, in case it is installed), with each line pinned to the
-// width the core measured it at (textLength, glyphs and spacing adjusted), so every line keeps the
-// tool's position, size, colour and extent.
-// The loop is the page's "New layout": the same request with seeds 2, 3 and 4, each faded in
-// after the last fades out, and back to seed 1, the still. The card's height follows each layout.
+// Message Collage: the page's dense, gently rotated example, built by its actual core.
+// The larger 2×3 tile uses the 264×220 canvas. Four real layouts crossfade on hover;
+// line positions, relative sizes, colours and collision-checked rotations match the app.
 import { readFileSync } from 'node:fs';
 import { loadFaces, submit } from '../../../message-collage/core/index.js';
-import { TALL, art, esc, num } from '../svg.mjs';
+import { WIDE, art, esc, num } from '../svg.mjs';
 
 const SEEDS = [1, 2, 3, 4];
 const HOLD = 1.5;    // seconds each layout is on the card, fades included
 const FADE = 0.2;    // seconds to fade out, and again to fade in
 const MARGIN = 4;
 const PT = 72;       // the core's units: points, 72 per inch
-const CARD = { width_in: 3.3, height_in: 5 };   // about the tall tile's 2:3
-const { width: W, height: H } = TALL;
+const { width: W, height: H } = WIDE;
 
 /** The CSS of each family's kind, named family first. */
 const FAMILY = {
@@ -32,7 +25,7 @@ export async function build() {
   const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
   /** @type {Awaited<ReturnType<typeof submit>>[]} */
   const results = [];
-  for (const seed of SEEDS) results.push(await submit({ ...request, ...CARD, seed }));
+  for (const seed of SEEDS) results.push(await submit({ ...request, seed }));
   const [first] = results;
   const faces = await loadFaces(first.request.fonts, first.request.styles);
   const kind = new Map(first.fonts.map((f) => [f.family, f.category]));
@@ -66,7 +59,8 @@ export async function build() {
         throw new Error(`message-collage: message ${m.index}'s lines differ in face, size or colour`);
       }
       const cls = `${classOf.get(m.family)}${styleClass[m.style_name]} c${palette.indexOf(m.color)}`;
-      return `<g class="${cls}" font-size="${num(m.font_size_pt * k, 2)}">${own.map((line) => `<text x="${num(x0 + line.x_in * PT * k)}" y="${num(y0 + line.baseline_in * PT * k)}" textLength="${num(lineWidth(line) * k)}" lengthAdjust="spacingAndGlyphs">${esc(line.text)}</text>`).join('')}</g>`;
+      const rotation = m.rotation ? ` transform="rotate(${num(m.rotation.angle_deg)} ${num(x0 + m.rotation.x_in * PT * k)} ${num(y0 + m.rotation.y_in * PT * k)})"` : '';
+      return `<g class="${cls}" font-size="${num(m.font_size_pt * k, 2)}"${rotation}>${own.map((line) => `<text x="${num(x0 + line.x_in * PT * k)}" y="${num(y0 + line.baseline_in * PT * k)}" textLength="${num(lineWidth(line) * k)}" lengthAdjust="spacingAndGlyphs">${esc(line.text)}</text>`).join('')}</g>`;
     }).join('\n');
     if (r.messages.reduce((n, m) => n + r.lines.filter((line) => line.message === m.index).length, 0) !== r.lines.length) throw new Error('message-collage: a line belongs to no message');
     const delay = ((((i * HOLD - shift) % period) + period) % period) - period;

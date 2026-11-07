@@ -36,6 +36,7 @@
       <div class="card-head">
         <h2 id="messages-heading">Messages</h2>
         <span id="message-count" class="muted"></span>
+        <a href="#card-heading" class="results-link">Card ↓</a>
       </div>
       <p class="muted">One message per line; blank lines are skipped. Paste and Upload add to the messages here, or replace the example.</p>
       <div class="toolbar">
@@ -147,9 +148,13 @@
         <label>Layout cells per inch (blank: automatic)
           <input id="grid-res" type="number" min="1" max="400" step="1" placeholder="automatic">
         </label>
+        <label>Maximum message angle (degrees)
+          <input id="rotation" type="number" min="0" max="10" step="0.5" value="4">
+        </label>
         <label class="check-label"><input id="shuffle" type="checkbox" checked> Shuffle the message order</label>
       </div>
       <p class="muted small">Gaps are fractions of each message's capital height. Fill sets one scale for all text: at 0.7, the messages set on single lines would cover 0.7² = 49% of the card.</p>
+      <p class="muted small">Message angles vary gently in both directions. An angle is reduced when needed to keep the text inside the card and clear of neighbouring messages; zero keeps every message horizontal.</p>
     </section>
 
     <section id="colours-card" class="card" aria-labelledby="colours-heading">

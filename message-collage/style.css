@@ -5,6 +5,9 @@
 
 .messages { width: 100%; font-size: 0.95rem; line-height: 1.45; white-space: pre-wrap; }
 .small { font-size: 0.88rem; }
+@media (max-width: 999px) {
+  .messages { height: 11rem; }
+}
 
 /* ---------- Fonts and colours ---------- */
 

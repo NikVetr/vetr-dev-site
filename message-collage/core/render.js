@@ -69,6 +69,10 @@ export function renderSvg(result, faces, { text = 'outlines' } = {}) {
   const w = card.width_in * PT;
   const h = card.height_in * PT;
   const faceOf = lineFace(faces);
+  const rotationOf = (/** @type {Line} */ line) => {
+    const r = result.messages[line.message - 1].rotation;
+    return r ? `rotate(${num(r.angle_deg)} ${num(r.x_in * PT)} ${num(r.y_in * PT)}) ` : '';
+  };
   const head = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${num(card.width_in)}in" height="${num(card.height_in)}in" viewBox="0 0 ${num(w)} ${num(h)}">`;
   const background = `<rect width="${num(w)}" height="${num(h)}" fill="${card.background}"/>`;
 
@@ -85,7 +89,8 @@ export function renderSvg(result, faces, { text = 'outlines' } = {}) {
     }).join('\n');
     const body = result.lines.map((line) => {
       const face = faceOf(line);
-      return `<text x="${num(line.x_in * PT)}" y="${num(line.baseline_in * PT)}" font-family="${used.get(face)}, ${escapeXml(line.family)}" font-size="${num(line.font_size_pt)}" fill="${line.color}">${escapeXml(line.text)}</text>`;
+      const rotation = rotationOf(line);
+      return `<text x="${num(line.x_in * PT)}" y="${num(line.baseline_in * PT)}"${rotation ? ` transform="${rotation.trim()}"` : ''} font-family="${used.get(face)}, ${escapeXml(line.family)}" font-size="${num(line.font_size_pt)}" fill="${line.color}">${escapeXml(line.text)}</text>`;
     }).join('\n');
     return `${head}\n<title>Message collage</title>\n<style>\n${css}\ntext{font-kerning:none;font-variant-ligatures:none;font-feature-settings:"kern" 0,"liga" 0,"clig" 0,"calt" 0;text-rendering:geometricPrecision;white-space:pre}\n</style>\n${background}\n${body}\n</svg>\n`;
   }
@@ -103,7 +108,7 @@ export function renderSvg(result, faces, { text = 'outlines' } = {}) {
       if (!defs.has(id)) defs.set(id, `<path id="${id}" d="${glyphPathData(p.glyph)}"/>`);
       return `<use xlink:href="#${id}" x="${p.x}"/>`;
     }).join('');
-    return `<g fill="${line.color}" transform="translate(${num(line.x_in * PT)} ${num(line.baseline_in * PT)}) scale(${s.toPrecision(8)} ${(-s).toPrecision(8)})"><title>${escapeXml(line.text)}</title>${uses}</g>`;
+    return `<g fill="${line.color}" transform="${rotationOf(line)}translate(${num(line.x_in * PT)} ${num(line.baseline_in * PT)}) scale(${s.toPrecision(8)} ${(-s).toPrecision(8)})"><title>${escapeXml(line.text)}</title>${uses}</g>`;
   }).join('\n');
   return `${head}\n<title>Message collage</title>\n<defs>\n${[...defs.values()].join('\n')}\n</defs>\n${background}\n${body}\n</svg>\n`;
 }
@@ -139,6 +144,12 @@ export function renderPdf(result, faces) {
     const s = line.font_size_pt / face.unitsPerEm;
     const x0 = line.x_in * PT;
     const y0 = h - line.baseline_in * PT;
+    const rotation = result.messages[line.message - 1].rotation;
+    if (rotation) {
+      const angle = -rotation.angle_deg * Math.PI / 180, c = Math.cos(angle), t = Math.sin(angle);
+      const cx = rotation.x_in * PT, cy = h - rotation.y_in * PT;
+      content.push(`q ${c.toPrecision(12)} ${t.toPrecision(12)} ${(-t).toPrecision(12)} ${c.toPrecision(12)} ${num(cx - c * cx + t * cy)} ${num(cy - t * cx - c * cy)} cm`);
+    }
     content.push(`${pdfColor(line.color)} rg`);
     for (const p of placeGlyphs(face, line.text)) {
       if (!p.glyph.path.commands.length) continue;
@@ -146,6 +157,7 @@ export function renderPdf(result, faces) {
       if (!forms.has(key)) forms.set(key, { n: forms.size, data: pdfPath(p.glyph) });
       content.push(`q ${s.toPrecision(8)} 0 0 ${s.toPrecision(8)} ${num(x0 + p.x * s)} ${num(y0)} cm /${key} Do Q`);
     }
+    if (rotation) content.push('Q');
   }
   const formObjects = [...forms].map(([, f]) => f.data);
   const firstForm = 5;

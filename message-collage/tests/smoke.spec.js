@@ -14,6 +14,8 @@ test('lays out the example on load and exposes the API and the exports', async (
   page.on('pageerror', (error) => errors.push(error.message));
   await open(page);
   await expect(page.locator('#message-count')).toHaveText('34 messages');
+  await expect(page.locator('#rotation')).toHaveValue('4');
+  expect(await page.locator('#preview svg g[transform^="rotate("]').count()).toBeGreaterThan(20);
   await expect(page.locator('#preview svg use')).not.toHaveCount(0);
   await expect(page.locator('#summary')).toContainText('the best of 20 layouts');
   await expect(page.locator('#status')).toContainText('Done in');
@@ -83,6 +85,8 @@ test('a phone-width page has no sideways scroll and shows the card after the mes
   const preview = await page.locator('#preview svg').boundingBox();
   expect(preview && messages && preview.y > messages.y).toBe(true);
   expect(preview && preview.width).toBeLessThanOrEqual(390);
+  await page.getByRole('link', { name: 'Card ↓' }).click();
+  await expect(page.locator('#preview svg')).toBeInViewport();
 });
 
 test('Clear and Load example offer the messages and settings back', async ({ page }) => {
