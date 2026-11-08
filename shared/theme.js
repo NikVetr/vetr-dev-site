@@ -4,10 +4,28 @@
 // in theme colours redraws on the document's "themechange" event.
 (() => {
   const KEY = 'vetr:theme';
+  // These three tools previously stored their own choice. Adopt the current page's
+  // preference only until the visitor has made a valid collection-wide choice.
+  /** @type {Record<string, string>} */
+  const LEGACY_KEYS = {
+    crossword: 'crossword:theme',
+    'raster-to-vector': 'raster-to-vector:theme',
+    'forecast-calibration': 'forecast-calibration:theme',
+  };
   const root = document.documentElement;
   const system = matchMedia('(prefers-color-scheme: dark)');
   const chosen = () => {
-    try { return localStorage.getItem(KEY); } catch { return null; }
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved === 'light' || saved === 'dark') return saved;
+      const legacyKey = LEGACY_KEYS[location.pathname.split('/')[1]];
+      const legacy = legacyKey ? localStorage.getItem(legacyKey) : null;
+      if (legacy === 'light' || legacy === 'dark') {
+        try { localStorage.setItem(KEY, legacy); } catch { /* use it for this page */ }
+        return legacy;
+      }
+    } catch { /* storage may be unavailable */ }
+    return null;
   };
   const current = () => chosen() ?? (system.matches ? 'dark' : 'light');
 
