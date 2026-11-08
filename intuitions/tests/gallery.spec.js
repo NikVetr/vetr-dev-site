@@ -54,7 +54,7 @@ test('Forecast Calibration keeps its standalone route and callable API', async (
   await expect.poll(() => page.evaluate(() => typeof /** @type {any} */ (window).ForecastCalibration?.submit)).toBe('function');
 });
 
-for (const [entry, target] of [['dag-adjustment', 'dag-plot'], ['samplers', 'funnel-target']]) {
+for (const [entry, target] of [['dag-adjustment', 'dag-plot'], ['samplers', 'funnel-target'], ['probability-puzzles', 'kruskal-deal']]) {
   test(`${entry}: the early keyboard link reaches the first figure on a phone`, async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(`${entry}/`);
@@ -68,6 +68,7 @@ for (const [entry, target] of [['dag-adjustment', 'dag-plot'], ['samplers', 'fun
     await expect(page.locator(`#${target} svg`)).toBeInViewport();
     await page.keyboard.press('Tab');
     await expect(page.locator(`#${target}`)).not.toBeFocused();
+    if (entry === 'probability-puzzles') await expect(page.locator('#kruskal-play')).toBeFocused();
     if (entry === 'samplers') await expect(page.locator('.note').first()).toContainText("A different sampler from the scripts'.");
   });
 }
