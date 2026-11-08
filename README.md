@@ -122,4 +122,12 @@ Tools that scripts and agents can use follow one shape. `forecast-calibration/` 
 
 Core tests run with `node --test` in the tool's folder. Browser smoke tests use Playwright where a tool has them, through `npm ci` or a `node_modules` link to an existing install.
 
+Teaching figures redraw after resize-observer delivery, coalescing layout changes into the next animation frame. Run `node --test intuitions/tests/resize.browser.mjs` to check that plots fit their containers, settle without continuing redraws, and preserve keyboard navigation. Chromium is the default; for WebKit, select an installed Playwright package that matches the available browser build:
+
+```sh
+PLAYWRIGHT="$PWD/ceo-salary-benchmark/node_modules/playwright" BROWSER_ENGINE=webkit node --test intuitions/tests/resize.browser.mjs
+```
+
+The shared browser helper also accepts Firefox. These engine checks supplement hands-on Safari/iOS and other device checks.
+
 Name Tags starts with **Balanced lines**, using the existing optimizer with stronger preferences for similar name widths and more horizontal overlap. **Original proportions** restores the historical layout; core/CLI omission retains the original defaults. The named preset is available to scripts through `name-tags/presets.js`.
