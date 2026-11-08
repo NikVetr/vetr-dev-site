@@ -20,9 +20,9 @@ const frames = 48;
 const titles = [
   [4, 4, 'Thresholds', 'threshold-model'],
   [110, 4, 'Correlations', 'correlation-geometry'],
-  [216, 4, 'Hypercube', 'hypercube'],
+  [216, 4, 'Geometry', 'hypercube'],
   [4, 92, 'Probability mass', 'typical-set'],
-  [110, 92, 'Traits on a tree', 'trait-evolution'],
+  [110, 92, 'Diffusion Processes', 'trait-evolution'],
   [216, 92, 'Calibration', 'forecast-calibration'],
 ];
 const tile = (/** @type {number} */ x, /** @type {number} */ y, /** @type {string} */ body) => `<g transform="translate(${x} ${y})">${body}</g>`;
@@ -89,6 +89,7 @@ export function build() {
     css: `${hc.css}\n${flip.css}
 & .mini-paper { fill: var(--art-paper); stroke: var(--art-line); stroke-width: .65; }
 & .mini-title { fill: var(--art-ink); font: 600 8.5px ui-sans-serif, system-ui, sans-serif; }
+& [data-entry="trait-evolution"] .mini-title { font-size: 8px; }
 & .parameter { fill: var(--art-muted); font: 7px ui-sans-serif, system-ui, sans-serif; }
 & .axis, & .thresholds { fill: none; stroke: var(--art-muted); stroke-width: .75; }
 & .sphere { fill: none; stroke: var(--art-line); stroke-width: 1; }
