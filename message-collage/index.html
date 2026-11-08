@@ -88,7 +88,7 @@
           <button id="export-result" type="button">Result JSON</button>
           <button id="export-request" type="button">Request JSON</button>
         </div>
-        <p class="muted small"><span id="png-note"></span> SVG, PDF and PNG draw the text as outlines, exactly as laid out; <em>SVG with selectable text</em> embeds the fonts, so its text can be searched and copied, in a larger file that needs a viewer reading embedded fonts, as browsers do.</p>
+        <p class="muted small"><span id="png-note"></span> SVG, PDF and PNG draw the text as outlines, exactly as laid out; <em>SVG with selectable text</em> embeds the fonts, so its text can be searched and copied, in a larger file that needs a viewer reading embedded fonts, as browsers do. With local warp, some viewers may split copied words or fail to search across them.</p>
       </div>
     </section>
 
@@ -156,11 +156,15 @@
         <label>Maximum message angle (degrees)
           <input id="rotation" type="number" min="0" max="10" step="0.5" value="4">
         </label>
+        <label>Local warp (0: off, 1: strongest)
+          <input id="warp-strength" type="number" min="0" max="1" step="0.1" value="0" aria-describedby="warp-note">
+        </label>
         <label class="check-label"><input id="expand-messages" type="checkbox"> Expand messages into spare space</label>
         <label class="check-label"><input id="shuffle" type="checkbox" checked> Shuffle the message order</label>
       </div>
       <p class="muted small">Gaps are fractions of each message's capital height. Fill sets one scale for all text: at 0.7, the messages set on single lines would cover 0.7² = 49% of the card.</p>
       <p class="muted small">Expansion enlarges whole messages into clear space while preserving their text and line breaks. Message angles vary gently in both directions. An angle is reduced when needed to keep the text inside the card and clear of neighbouring messages; zero keeps every message horizontal.</p>
+      <p id="warp-note" class="muted small">Local warp gently bends and stretches the lettering on a smooth grid to use a little more space. The effect is deliberately subtle: letters stay readable, within the card, and clear of new overlaps. Zero keeps the original letter shapes.</p>
     </section>
 
     <section id="colours-card" class="card" aria-labelledby="colours-heading">

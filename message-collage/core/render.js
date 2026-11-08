@@ -22,6 +22,11 @@ const PT = 72;
 /** @param {number} v */
 const num = (v) => String(Math.round(v * 1000) / 1000);
 
+// PDF numbers do not accept exponent notation. Use the same precise decimal
+// serialization for every glyph matrix, including tiny warp/shear coefficients.
+/** @param {number[]} values */
+const matrixNumbers = (values) => values.map(v => v.toFixed(12)).join(' ');
+
 /** @param {string} s */
 const escapeXml = (s) => s.replace(/[&<>"]/g, (ch) => (/** @type {Record<string, string>} */ ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }))[ch]);
 
@@ -89,6 +94,13 @@ export function renderSvg(result, faces, { text = 'outlines' } = {}) {
     }).join('\n');
     const body = result.lines.map((line) => {
       const face = faceOf(line);
+      if (line.glyph_transforms) {
+        const chars = Array.from(line.text).map((ch, i) => {
+          const [a, b, c, d, e, f] = /** @type {number[][]} */ (line.glyph_transforms)[i];
+          return `<text transform="matrix(${matrixNumbers([a, b, -c, -d, e, f])})" font-size="${face.unitsPerEm}">${escapeXml(ch)}</text>`;
+        }).join('');
+        return `<g font-family="${used.get(face)}, ${escapeXml(line.family)}" fill="${line.color}" aria-label="${escapeXml(line.text)}">${chars}</g>`;
+      }
       const rotation = rotationOf(line);
       return `<text x="${num(line.x_in * PT)}" y="${num(line.baseline_in * PT)}"${rotation ? ` transform="${rotation.trim()}"` : ''} font-family="${used.get(face)}, ${escapeXml(line.family)}" font-size="${num(line.font_size_pt)}" fill="${line.color}">${escapeXml(line.text)}</text>`;
     }).join('\n');
@@ -103,11 +115,14 @@ export function renderSvg(result, faces, { text = 'outlines' } = {}) {
     const face = faceOf(line);
     if (!faceIds.has(face)) faceIds.set(face, faceIds.size);
     const s = line.font_size_pt / face.unitsPerEm;
-    const uses = placeGlyphs(face, line.text).filter((p) => p.glyph.path.commands.length > 0).map((p) => {
+    const uses = placeGlyphs(face, line.text).map((p, i) => {
+      if (!p.glyph.path.commands.length) return '';
       const id = `g${faceIds.get(face)}-${p.glyph.id}`;
       if (!defs.has(id)) defs.set(id, `<path id="${id}" d="${glyphPathData(p.glyph)}"/>`);
+      if (line.glyph_transforms) return `<use xlink:href="#${id}" transform="matrix(${matrixNumbers(line.glyph_transforms[i])})"/>`;
       return `<use xlink:href="#${id}" x="${p.x}"/>`;
     }).join('');
+    if (line.glyph_transforms) return `<g fill="${line.color}"><title>${escapeXml(line.text)}</title>${uses}</g>`;
     return `<g fill="${line.color}" transform="${rotationOf(line)}translate(${num(line.x_in * PT)} ${num(line.baseline_in * PT)}) scale(${s.toPrecision(8)} ${(-s).toPrecision(8)})"><title>${escapeXml(line.text)}</title>${uses}</g>`;
   }).join('\n');
   return `${head}\n<title>Message collage</title>\n<defs>\n${[...defs.values()].join('\n')}\n</defs>\n${background}\n${body}\n</svg>\n`;
@@ -144,18 +159,21 @@ export function renderPdf(result, faces) {
     const s = line.font_size_pt / face.unitsPerEm;
     const x0 = line.x_in * PT;
     const y0 = h - line.baseline_in * PT;
-    const rotation = result.messages[line.message - 1].rotation;
+    const rotation = !line.glyph_transforms && result.messages[line.message - 1].rotation;
     if (rotation) {
       const angle = -rotation.angle_deg * Math.PI / 180, c = Math.cos(angle), t = Math.sin(angle);
       const cx = rotation.x_in * PT, cy = h - rotation.y_in * PT;
       content.push(`q ${c.toPrecision(12)} ${t.toPrecision(12)} ${(-t).toPrecision(12)} ${c.toPrecision(12)} ${num(cx - c * cx + t * cy)} ${num(cy - t * cx - c * cy)} cm`);
     }
     content.push(`${pdfColor(line.color)} rg`);
-    for (const p of placeGlyphs(face, line.text)) {
+    for (const [i, p] of placeGlyphs(face, line.text).entries()) {
       if (!p.glyph.path.commands.length) continue;
       const key = `G${faceIds.get(face)}_${p.glyph.id}`;
       if (!forms.has(key)) forms.set(key, { n: forms.size, data: pdfPath(p.glyph) });
-      content.push(`q ${s.toPrecision(8)} 0 0 ${s.toPrecision(8)} ${num(x0 + p.x * s)} ${num(y0)} cm /${key} Do Q`);
+      if (line.glyph_transforms) {
+        const [a, b, c, d, e, f] = line.glyph_transforms[i];
+        content.push(`q ${matrixNumbers([a, -b, c, -d, e, h - f])} cm /${key} Do Q`);
+      } else content.push(`q ${s.toPrecision(8)} 0 0 ${s.toPrecision(8)} ${num(x0 + p.x * s)} ${num(y0)} cm /${key} Do Q`);
     }
     if (rotation) content.push('Q');
   }

@@ -12,7 +12,7 @@ import { FAMILIES } from './catalogue.js';
  *   messages: string[], fonts: string[], styles: StyleName[], size_range: [number, number],
  *   width_in: number, height_in: number, grid_res: number | null, fill: number,
  *   line_gap: number, message_gap: number, palette: string[], background: string,
- *   shuffle: boolean, seed: number, runs: number, rotation_deg: number, expand_messages: boolean,
+ *   shuffle: boolean, seed: number, runs: number, rotation_deg: number, expand_messages: boolean, warp_strength: number,
  * }} Request
  */
 
@@ -57,6 +57,7 @@ export const DEFAULTS = Object.freeze({
   runs: 1,
   rotation_deg: 0,
   expand_messages: false,
+  warp_strength: 0,
 });
 
 export const LIMITS = Object.freeze({
@@ -133,6 +134,7 @@ export function normalizeRequest(request) {
   number('line_gap', (x) => x >= 0, 'a non-negative number');
   number('message_gap', (x) => x >= 0, 'a non-negative number');
   number('rotation_deg', (x) => x >= 0 && x <= 10, 'an angle from 0 to 10 degrees');
+  number('warp_strength', (x) => x >= 0 && x <= 1, 'a number from 0 (off) to 1');
   if (has('grid_res')) number('grid_res', (x) => x >= LIMITS.grid_res[0] && x <= LIMITS.grid_res[1], `null or a number of cells per inch from ${LIMITS.grid_res[0]} to ${LIMITS.grid_res[1]}`);
   const runs = number('runs', (x) => Number.isInteger(x) && x >= 1 && x <= LIMITS.runs, `an integer from 1 to ${LIMITS.runs}`);
   number('seed', (x) => Number.isInteger(x) && Math.abs(x) <= LIMITS.seed, `an integer from -${LIMITS.seed} to ${LIMITS.seed}`);
@@ -167,6 +169,7 @@ export function normalizeRequest(request) {
     runs,
     rotation_deg: get('rotation_deg'),
     expand_messages: get('expand_messages'),
+    warp_strength: get('warp_strength'),
   };
 }
 

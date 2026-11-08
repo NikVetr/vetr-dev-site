@@ -88,3 +88,43 @@ test('undo cancels an active collage without a late status or result overwrite',
   await page.waitForTimeout(100);
   await expect(page.locator('#status')).toHaveText(status ?? '');
 });
+
+test('local warp setting, generated geometry and exports undo and redo together', async ({ page }) => {
+  await open(page);
+  const warp = page.locator('#warp-strength');
+  await expect(warp).toHaveValue('0');
+  await warp.fill('0.8');
+  await shortcut(page, 'Control+z');
+  await expect(warp).toHaveValue('0');
+  await shortcut(page, 'Meta+Shift+z');
+  await expect(warp).toHaveValue('0.8');
+  await page.evaluate(async () => {
+    const w = /** @type {any} */ (window);
+    w.warpBefore = { result: w.MessageCollage.getResult(), svg: await w.MessageCollage.exportSvgText() };
+  });
+  await page.locator('#generate').click();
+  await expect(page.locator('#summary')).toContainText('local warp 0.8');
+  await page.evaluate(async () => {
+    const w = /** @type {any} */ (window);
+    w.warpAfter = { result: w.MessageCollage.getResult(), svg: await w.MessageCollage.exportSvgText() };
+  });
+  await shortcut(page, 'Meta+z');
+  expect(await page.evaluate(async () => {
+    const w = /** @type {any} */ (window);
+    return w.MessageCollage.getResult() === w.warpBefore.result && await w.MessageCollage.exportSvgText() === w.warpBefore.svg;
+  })).toBe(true);
+  await shortcut(page, 'Control+Shift+z');
+  expect(await page.evaluate(async () => {
+    const w = /** @type {any} */ (window);
+    return w.MessageCollage.getResult() === w.warpAfter.result && await w.MessageCollage.exportSvgText() === w.warpAfter.svg;
+  })).toBe(true);
+  const selected = await page.evaluate(async () => {
+    const w = /** @type {any} */ (window);
+    const svg = new DOMParser().parseFromString(await w.MessageCollage.exportSvgText({text:'embedded'}), 'image/svg+xml');
+    return { shown: [...svg.querySelectorAll('text')].map(n => n.textContent).join(''), expected: w.MessageCollage.getResult().lines.map((/** @type {{text:string}} */ l) => l.text).join('') };
+  });
+  expect(selected.shown).toBe(selected.expected);
+  await warp.fill('0.4');
+  await page.locator('h1').click();
+  await expect(page.locator('#redo')).toBeDisabled();
+});
