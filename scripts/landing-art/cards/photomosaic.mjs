@@ -3,7 +3,8 @@
 // 1,200 cells in 40 columns by 30 rows. The still is the mosaic as the page draws it, taken from
 // its own PNG export at 20 px a tile and embedded as WebP; the other view is the page's "target
 // at one colour per cell", drawn as one square per cell. The image fills the artwork at its
-// native 4:3 aspect ratio; the loop crossfades from the mosaic to the cells and back.
+// native 4:3 geometry. Narrow wells crop the sides around the sunflower, preserving square
+// cells while filling their height; the loop crossfades to cell colours and back.
 import { openPage } from '../browser.mjs';
 import { art, num } from '../svg.mjs';
 
@@ -83,5 +84,5 @@ export async function build() {
     css: `& .cells { opacity: 0; }`,
     loop: `& .cells { animation: photomosaic-cells ${PERIOD}s ease-in-out infinite; }
 ${fade('photomosaic-cells', 0, 1)}`,
-  });
+  }).replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
 }

@@ -92,23 +92,25 @@ body {
 #projects:focus { outline: none; }
 
 /* Compact collection navigation stays reachable while scrolling on touch screens. */
-.mobile-bar { display: none; }
+.mobile-bar { display: flex; position: absolute; top: 1rem; right: var(--gutter-right); z-index: 10; }
+.mobile-bar > a { display: none; }
+.mobile-bar button {
+  min-height: 44px; padding: 0.35rem 0.5rem; border: 0;
+  background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; cursor: pointer;
+}
+.mobile-bar button[aria-pressed="false"], .mobile-bar button:disabled { color: var(--muted); }
+.mobile-bar button:disabled { cursor: default; }
+.mobile-bar :focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 3px; }
+@media (min-width: 48rem) { .masthead { padding-right: max(10rem, var(--gutter-right)); } }
 @media (max-width: 47.99rem), (hover: none) and (pointer: coarse) {
   html { scroll-padding-top: calc(3rem + env(safe-area-inset-top)); }
   .mobile-bar {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    position: sticky; top: 0; z-index: 10;
+    position: sticky; top: 0; right: auto; z-index: 10;
     padding: env(safe-area-inset-top) var(--gutter-right) 0 var(--gutter-left);
     background: var(--bg); border-bottom: 1px solid var(--border);
   }
-  .mobile-bar a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 700; padding-block: 0.5rem; }
-  .mobile-bar button {
-    min-height: 44px; padding: 0.35rem 0.5rem; border: 0;
-    background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; cursor: pointer;
-  }
-  .mobile-bar button[aria-pressed="false"], .mobile-bar button:disabled { color: var(--muted); }
-  .mobile-bar button:disabled { cursor: default; }
-  .mobile-bar :focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 3px; }
+  .mobile-bar a { display: block; color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 700; padding-block: 0.5rem; }
   .masthead h1 { display: none; }
 }
 
@@ -299,7 +301,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 }
 @container tile (min-width: 18rem) and (max-width: 32rem) {
   [data-mosaic-key="photomosaic"] > .project-card { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(9rem, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0.5rem; }
-  [data-mosaic-key="photomosaic"] .card-art { grid-row: 1 / -1; align-self: center; aspect-ratio: 4 / 3; min-height: 0; }
+  [data-mosaic-key="photomosaic"] .card-art { grid-row: 1 / -1; align-self: stretch; aspect-ratio: auto; min-height: 0; }
   [data-mosaic-key="photomosaic"] .project-card > :not(.card-art) { margin-inline: 0.25rem; }
   [data-mosaic-key="photomosaic"] h3 { margin-top: 0; }
   [data-mosaic-key="photomosaic"] .project-date { align-self: end; }
