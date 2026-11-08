@@ -1,8 +1,9 @@
 // Text in Image: the page's default picture, Tenniel's Alice with the "Drink me" bottle, beside
-// the tool's text fill of it on white, through the tool's core with the page's
-// settings, on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
+// the tool's text fill of it on white, through the tool's whole-word fitter,
+// on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
 // (11,224 characters, including preserved line breaks), which at tile size would be letters a pixel tall; this uses its opening
-// two paragraphs, and the tool's own fitter sizes the letters to fill the shape. Each letter is
+// ten paragraphs. The longer excerpt and twelve fitting rounds let whole words reach both
+// narrow legs instead of ending at the skirt. Each letter is
 // drawn where the core places it, in the colour it takes from the picture.
 // The loop clears the text line by line from the top and writes it back in the same order,
 // ending full as it began: every line runs one shared fade, delayed to its turn.
@@ -19,7 +20,7 @@ const START = 0.5;   // seconds full before the first line clears
 const SWEEP = 2.2;   // seconds to clear (and later to write) every line
 const FADE = 0.12;
 const PICTURE_PX = 2;   // the picture embedded at this many pixels per display unit
-const PARAGRAPHS = 2;   // of the default text
+const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
 
 export async function build() {
@@ -27,9 +28,18 @@ export async function build() {
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 8 }, color: { background: BACKGROUND } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background: BACKGROUND } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
+  // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
+  // A complete fit can still stop at the skirt: check actual glyphs in both legs as well.
+  const legs = result.glyphs.filter(g => g.placed && g.char.trim() && g.y !== null && g.y < 0.20);
+  const lowerLegs = legs.filter(g => g.y !== null && g.y < 0.12);
+  const leftLeg = lowerLegs.filter(g => g.x !== null && g.x < 0.65);
+  const rightLeg = lowerLegs.filter(g => g.x !== null && g.x >= 0.65);
+  const rows = [...new Set(legs.map(g => /** @type {number} */ (g.y)))].sort((a, b) => a - b);
+  const skipsCalves = rows.some((y, i) => i > 0 && y - rows[i - 1] > 0.03);
+  if (leftLeg.length < 10 || rightLeg.length < 10 || skipsCalves) throw new Error('text-in-image: the excerpt must fill both lower legs without skipping the calves');
 
   // The picture's box on the canvas (inside its margins), and its place on the card.
   const { width: CW, height: CH } = result.canvas;
