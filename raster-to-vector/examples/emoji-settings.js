@@ -6,6 +6,7 @@ import { DEFAULTS } from '../core/request.js';
 export const EMOJI_GLYPH = '🍥';
 export const EMOJI_FONT_PIXELS = 100;
 export const EMOJI_JPEG_QUALITY = 0.7;
+export const EMOJI_RIM_RGB = [240, 182, 200];
 export const EMOJI_SETTINGS = {
   ...structuredClone(DEFAULTS),
   preprocess: { ...DEFAULTS.preprocess, maxDim: 600 },
