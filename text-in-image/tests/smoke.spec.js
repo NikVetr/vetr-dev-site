@@ -11,7 +11,19 @@ test('renders the example and exposes the API', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await open(page);
-  await expect(page.locator('#fit-status')).toHaveText('✓ 11,201 of 11,201 characters placed.');
+  await expect(page.locator('#fit-status')).toHaveText('✓ 11,224 of 11,224 characters placed.');
+  await expect(page.locator('#whole-words')).toBeChecked();
+  const whole = await page.evaluate(() => {
+    const result = /** @type {any} */ (window).TextInImage.getResult();
+    let previous = null;
+    for (const g of result.glyphs) {
+      if (!g.char.trim()) { previous = null; continue; }
+      if (previous && (g.line !== previous.line || g.block !== previous.block)) return false;
+      previous = g;
+    }
+    return result.complete && result.settings.layout.wrap === 'word';
+  });
+  expect(whole).toBe(true);
   await expect(page.locator('#palette li')).toHaveCount(15);
   await expect(page.locator('#output')).toHaveAttribute('src', /^blob:/);
   await expect(page.locator('#image-info')).toHaveText('alice-drink-me.png, 295 × 540 px');
@@ -46,6 +58,7 @@ test('renders the example and exposes the API', async ({ page }) => {
     rOnly: { name: 'TextInImageError', code: 'invalid_request', issues: ['r_only quantize.method'] },
   });
   // The rejected requests left the page showing the accepted one.
+  await expect(page.locator('#whole-words')).not.toBeChecked(); // API omission preserves character-mode defaults.
   await expect(page.locator('#rotation')).toHaveValue('10');
   await expect(page.locator('#text')).toHaveValue('Alice was beginning to get very tired.');
   await expect(page.locator('#issues')).toBeHidden();
@@ -78,4 +91,25 @@ test('fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await page.getByRole('button', { name: 'Render' }).click();
   await expect(page.locator('#status')).toHaveText(/^Done in /);
   expect(await overflow()).toBe(0);
+});
+
+
+test('whole-word mode and explicit newlines round-trip through the browser API and example button', async ({ page }) => {
+  await open(page);
+  await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const request = app.getRequest();
+    await app.submit({ ...request, text: 'first\n\nsecond word', layout: { wrap: 'word' } });
+  });
+  await expect(page.locator('#whole-words')).toBeChecked();
+  const state = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const result = app.getResult();
+    return { mode: app.getRequest().layout.wrap, complete: result.complete, lineGap: result.glyphs[7].line - result.glyphs[0].line, newlineInk: result.glyphs.filter((/** @type {any} */ g) => g.char === '\n').some((/** @type {any} */ g) => g.col !== null) };
+  });
+  expect(state).toEqual({ mode: 'word', complete: true, lineGap: 2, newlineInk: false });
+  await page.locator('#whole-words').uncheck();
+  await page.getByRole('button', { name: 'Load example' }).click();
+  await expect(page.locator('#whole-words')).toBeChecked();
+  await expect(page.locator('#fit-status')).toHaveText('✓ 11,224 of 11,224 characters placed.');
 });

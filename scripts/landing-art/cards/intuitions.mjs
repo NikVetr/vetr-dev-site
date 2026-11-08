@@ -1,6 +1,6 @@
 // Six actual gallery entries on one small mosaic. Thresholds use the normal-liability
 // core, correlation arrows are the cone solution projected by the shared 3-D library,
-// radial mass uses the chi density, the phylogeny is a seeded Brownian simulation,
+// radial mass uses the chi density, the phylogeny is a seeded Brownian simulation with a temporary rate burst,
 // calibration uses the app's synthetic CSV, and the hypercube replays its saved plan.
 // No parameter defaults in the applications are changed by these illustrative sweeps.
 import { readFileSync } from 'node:fs';
@@ -67,11 +67,11 @@ export function build() {
   const cutoffs = trait.thresholds.map((/** @type {number} */ value) => `M${num(x(value))} 7V53`).join('');
   const liability = tile(4, 19, `${densityBands}<path class="thresholds" d="${cutoffs}"/><path class="axis" d="M6 53H94"/>`);
 
-  const evolution = /** @type {any} */ (traits({ view: 'tree', model: 'bm', tree: { tips: 12, seed: 1 }, steps: 80, seed: 1 }));
+  const evolution = /** @type {any} */ (traits({ view: 'tree', model: 'burst', burstAt: 0.35, delta2: 12, lambda: 5, tree: { tips: 12, seed: 1 }, steps: 100, seed: 1 }));
   const values = evolution.branches.flatMap((/** @type {any} */ b) => b.values);
   const lo = Math.min(...values), hi = Math.max(...values);
   const branches = evolution.branches.map((/** @type {any} */ branch) => polyline(branch.times.map((/** @type {number} */ time, /** @type {number} */ i) => [5 + time / evolution.treeHeight * 90, 55 - (branch.values[i] - lo) / (hi - lo) * 47]))).join('');
-  const phylogeny = tile(110, 107, `<path class="branch-future" d="${branches}"/><g clip-path="url(#intuitions-trait-reveal)"><path class="branch" d="${branches}"/></g>`);
+  const phylogeny = tile(110, 107, `<title>Brownian motion with a temporary increase in evolutionary rate</title><g clip-path="url(#intuitions-trait-reveal)"><path class="branch" d="${branches}"/></g>`);
 
   const table = readFileSync(new URL('../../../forecast-calibration/examples/synthetic.csv', import.meta.url), 'utf8');
   const result = calibrate({ table });
@@ -96,7 +96,6 @@ export function build() {
 & .series-0 { stroke: #2a78d6; } & .series-1 { stroke: #eb6834; } & .series-2 { stroke: #1baf7a; }
 & .mass-fill { fill: #2a78d6; fill-opacity: .13; }
 & .mass { fill: none; stroke: #2a78d6; stroke-width: 1.7; }
-& .branch-future { fill: none; stroke: var(--art-line); stroke-width: .8; }
 & .branch { fill: none; stroke: #2a78d6; stroke-width: 1; }
 & .diagonal { fill: none; stroke: var(--art-muted); stroke-width: .8; stroke-dasharray: 3 2; }
 & .worlds path { fill: none; stroke: var(--art-ink); stroke-opacity: .06; stroke-width: .6; }
@@ -106,8 +105,8 @@ export function build() {
     loop: `${flip.loop}
 & .liability { animation: intuitions-liability ${num(sweep, 5)}s linear infinite; }
 @keyframes intuitions-liability { ${sine} }
-& .trait-reveal { transform-origin: 0 0; animation: intuitions-traits ${num(sweep, 5)}s ease-in-out infinite; }
-@keyframes intuitions-traits { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.02); } }
+& .trait-reveal { transform-origin: 0 0; animation: intuitions-traits ${num(sweep, 5)}s linear infinite; }
+@keyframes intuitions-traits { 0%, 8% { transform: scaleX(0); } 90%, 100% { transform: scaleX(1); } }
 & .picked path { animation: intuitions-world ${num(sweep, 5)}s linear infinite; }
 @keyframes intuitions-world { 0%, 25%, 100% { opacity: 0; } 12.5% { opacity: 1; } }`,
   });

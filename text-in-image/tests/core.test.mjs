@@ -289,9 +289,10 @@ test('the PNG decoder reads RGB, RGBA and palette images, filters and transparen
 test('the CLI reads an image path, prints the result and reports errors as JSON', () => {
   const dir = mkdtempSync(join(tmpdir(), 'text-in-image-'));
   const request = join(dir, 'request.json');
-  writeFileSync(request, JSON.stringify({ image: here('../examples/alice-drink-me.png'), text: 'Alice was beginning to get very tired.', layout: { n_rounds: 3 } }));
+  writeFileSync(request, JSON.stringify({ image: here('../examples/alice-drink-me.png'), text: 'Alice was beginning to get very tired.', layout: { n_rounds: 3, wrap: 'word' } }));
   const cli = (/** @type {string[]} */ ...args) => spawnSync(process.execPath, [here('../cli.mjs'), ...args], { encoding: 'utf8' });
   const ok = cli(request, '--svg', join(dir, 'fill.svg'), '--background', 'white');
+  assert.equal(JSON.parse(ok.stdout).settings.layout.wrap, 'word');
   assert.equal(ok.status, 0, ok.stderr);
   const result = JSON.parse(ok.stdout);
   assert.equal(result.glyphs.length, 38);

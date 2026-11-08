@@ -22,7 +22,7 @@ export function glyphColors({ txt, x, y, line }, widths, raster, region, inkCove
   const lines = new Map();
   txt.forEach((_, i) => {
     const l = line[i];
-    if (x[i] === null || l === null) return;
+    if (x[i] === null || l === null || txt[i] === '\n') return; // explicit line breaks carry no ink or colour sample
     if (!lines.has(l)) lines.set(l, []);
     /** @type {number[]} */ (lines.get(l)).push(i);
   });

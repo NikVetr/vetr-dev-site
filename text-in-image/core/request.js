@@ -41,6 +41,7 @@ export const DEFAULTS = Object.freeze({
   layout: Object.freeze({
     n_rounds: 5, line_height: 1.21, justify: true, rotation: 0,
     line_widths: /** @type {'band' | 'row'} */ ('band'), skip_gaps: true,
+    wrap: /** @type {'character' | 'word'} */ ('character'),
   }),
   color: Object.freeze({ ink_compensation: false, background: 'black' }),
   render: Object.freeze({ scale: 5, margin: 0.04 }),
@@ -103,6 +104,7 @@ const SECTIONS = /** @type {Record<string, Record<string, Check>>} */ ({
     justify: boolean,
     rotation: number(-360, 360),
     line_widths: oneOf(['band', 'row']),
+    wrap: oneOf(['character', 'word']),
     skip_gaps: boolean,
   },
   color: { ink_compensation: boolean, background: color },

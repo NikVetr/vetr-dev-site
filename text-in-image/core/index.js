@@ -56,11 +56,12 @@ export function submit(request) {
   // 3. layout and font-size iteration, in the unit square; the canvas is the
   //    rotated picture at `scale` output pixels per image pixel, with `margin`
   //    of padding on every side
-  const txt = prepareText(text);
-  const chars = [...new Set([...txt, ' '])];
+  const txt = prepareText(text, layout.wrap);
+  const chars = [...new Set([...txt.filter(c => c !== '\n'), ' '])];
   const canvas = { width: rotated.width * render.scale, height: rotated.height * render.scale };
   const span = 1 + 2 * render.margin;
   const em = measureChars(chars);
+  if (layout.wrap === 'word') em.width.set('\n', 0);
   const metrics = (/** @type {number} */ cex) => {
     const px = 12 * cex; // R's cex: 12 px per unit on its 72-ppi device
     return {
@@ -75,7 +76,7 @@ export function submit(request) {
     const area = txt.reduce((sum, c) => sum + /** @type {number} */ (m1.w.get(c)), 0) * m1.h * layout.line_height;
     return fitTextSize(txt, region, metrics, Math.sqrt(region.paintableFraction / area), {
       nRounds: layout.n_rounds, lineHeight: layout.line_height, justify: layout.justify,
-      lineWidths: layout.line_widths, skipGaps: layout.skip_gaps,
+      lineWidths: layout.line_widths, skipGaps: layout.skip_gaps, wrap: layout.wrap,
     });
   });
 
@@ -90,7 +91,7 @@ export function submit(request) {
       const yi = y[i];
       const placed = xi !== null && yi !== null;
       const p = placed ? unrotatePosition(xi, yi, layout.rotation, rotated.width, rotated.height) : { x: null, y: null };
-      return /** @type {Glyph} */ ({ char, x: p.x, y: p.y, line: line[i], block: block[i], placed, col: cols[i] });
+      return /** @type {Glyph} */ ({ char, x: p.x, y: p.y, line: line[i], block: block[i], placed, col: char === '\n' ? null : cols[i] });
     });
   });
 

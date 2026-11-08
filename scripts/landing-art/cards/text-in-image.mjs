@@ -1,7 +1,7 @@
 // Text in Image: the page's default picture, Tenniel's Alice with the "Drink me" bottle, beside
 // the tool's text fill of it on white, through the tool's core with the page's
 // settings, on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
-// (11,201 characters), which at tile size would be letters a pixel tall; this uses its opening
+// (11,224 characters, including preserved line breaks), which at tile size would be letters a pixel tall; this uses its opening
 // two paragraphs, and the tool's own fitter sizes the letters to fill the shape. Each letter is
 // drawn where the core places it, in the colour it takes from the picture.
 // The loop clears the text line by line from the top and writes it back in the same order,
@@ -27,7 +27,7 @@ export async function build() {
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, color: { background: BACKGROUND } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 8 }, color: { background: BACKGROUND } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
 

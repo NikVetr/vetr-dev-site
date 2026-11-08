@@ -3,6 +3,7 @@
 // window.TextInImage exposes the same submit() to scripts and agents running
 // in the page.
 
+import { prepareText } from './core/layout.js';
 import { DEFAULTS, TextInImageError, parseColor } from './core/request.js';
 
 /**
@@ -18,7 +19,7 @@ const el = {
   imageFile: byId('image-file'), maxSide: byId('max-side'), imageInfo: byId('image-info'), text: byId('text'),
   loadExample: byId('load-example'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
-  lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), justify: byId('justify'),
+  lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
   ink: byId('ink'), background: byId('background'), scale: byId('scale'), seed: byId('seed'),
   render: byId('render'), status: byId('status'), issues: byId('issues'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), output: byId('output'),
@@ -30,7 +31,7 @@ const el = {
 const state = {
   /** @type {Image | null} */ image: null,
   /** @type {{ blob: Blob, name: string } | null} */ source: null,
-  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), color: { ...DEFAULTS.color, background: '#ffffff' } },
+  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), layout: { ...DEFAULTS.layout, wrap: 'word', n_rounds: 8 }, color: { ...DEFAULTS.color, background: '#ffffff' } },
   /** @type {Result | null} */ result: null,
   svg: '',
   svgUrl: '',
@@ -118,7 +119,7 @@ function readForm() {
   s.quantize = el.quantizeOn.checked ? { ...(s.quantize ?? DEFAULTS.quantize), k: el.k.valueAsNumber } : null;
   s.layout = {
     ...s.layout, rotation: el.rotation.valueAsNumber, line_height: el.lineHeight.valueAsNumber, line_widths: el.lineWidths.value,
-    n_rounds: el.nRounds.valueAsNumber, skip_gaps: el.skipGaps.checked, justify: el.justify.checked,
+    n_rounds: el.nRounds.valueAsNumber, skip_gaps: el.skipGaps.checked, wrap: el.wholeWords.checked ? 'word' : 'character', justify: el.justify.checked,
   };
   s.color = { ...s.color, ink_compensation: el.ink.checked, background: el.background.value };
   s.render = { ...s.render, scale: el.scale.valueAsNumber };
@@ -134,6 +135,7 @@ function writeForm(s) {
   el.lineWidths.value = s.layout.line_widths;
   el.nRounds.value = String(s.layout.n_rounds);
   el.skipGaps.checked = s.layout.skip_gaps;
+  el.wholeWords.checked = s.layout.wrap === 'word';
   el.justify.checked = s.layout.justify;
   el.ink.checked = s.color.ink_compensation;
   const rgb = parseColor(s.color.background) ?? [0, 0, 0];
@@ -149,7 +151,7 @@ function currentRequest() {
 }
 
 function showCharCount() {
-  const n = Array.from(el.text.value.replace(/\s+/g, ' ')).length;
+  const n = prepareText(el.text.value, el.wholeWords.checked ? 'word' : 'character').length;
   el.charCount.textContent = `${n.toLocaleString('en-US')} characters`;
 }
 
@@ -178,6 +180,7 @@ async function run(request, { fromApi }) {
     }
     state.settings = structuredClone(result.settings);
     writeForm(state.settings);
+    showCharCount();
     showResult(result, svg);
     showIssues([]);
     state.changed.clear();
@@ -215,7 +218,7 @@ async function renderFromPage() {
 const FIELDS = {
   image: el.imageFile, text: el.text, seed: el.seed, quantize: el.quantizeOn, 'quantize.k': el.k,
   'layout.rotation': el.rotation, 'layout.line_height': el.lineHeight, 'layout.line_widths': el.lineWidths,
-  'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
+  'layout.wrap': el.wholeWords, 'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
   'color.ink_compensation': el.ink, 'color.background': el.background, 'render.scale': el.scale,
 };
 
@@ -341,6 +344,7 @@ function download(blob, name) {
 // ---------- events ----------
 
 async function loadExample() {
+  el.wholeWords.checked = true;
   const [blob, text] = await Promise.all([
     fetch(EXAMPLE.image).then((r) => r.blob()),
     fetch(EXAMPLE.text).then((r) => r.text()),
@@ -371,6 +375,7 @@ el.maxSide.addEventListener('change', async () => {
     showIssues([{ path: 'image', message: /** @type {Error} */ (error).message }]);
   }
 });
+el.wholeWords.addEventListener('change', showCharCount);
 el.quantizeOn.addEventListener('change', () => { el.k.disabled = !el.quantizeOn.checked; });
 el.text.addEventListener('input', () => {
   showCharCount();

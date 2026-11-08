@@ -1,6 +1,6 @@
 # Text in Image API
 
-Text in Image writes a text inside the shape of a picture. Lines are wrapped to the picture's non-background pixels, each character takes the colour of the pixels beneath it, and the letter size is iterated until the text just fills the shape. It is a port of the R tool [github.com/NikVetr/text-in-image](https://github.com/NikVetr/text-in-image) and keeps its request fields and defaults.
+Text in Image writes a text inside the shape of a picture. Lines are wrapped to the picture's non-background pixels, each character takes the colour of the pixels beneath it, and the letter size is iterated until the text just fills the shape. It is a port of the R tool [github.com/NikVetr/text-in-image](https://github.com/NikVetr/text-in-image) and keeps its existing request defaults, with an optional whole-word layout.
 
 It has a single entry point, `submit(request) → result`. The request and the result are plain JSON. The web page (through a worker), `window.TextInImage` and the command line all call this same function. The same request, seed included, always gives the same result apart from `timings_ms`.
 
@@ -37,7 +37,7 @@ const svg = renderSvg(result, { background: '#7f7f7f' });
 | `exportPngBlob()` | Returns a Promise of the same fill as a PNG `Blob`, at the result's `canvas` size. |
 | `decodeImage(source, maxSide?)` | Decodes a `Blob` or an image URL to `{width, height, data}` with the browser, without colour-profile conversion, optionally scaled down so the longer side is at most `maxSide`. |
 
-The page scales uploaded images down to its "Longest image side" (800 px by default) before building the request. Its background control sets both `color.background` and the SVG background.
+The page scales uploaded images down to its "Longest image side" (800 px by default) before building the request. Its background control sets both `color.background` and the SVG background. The page starts with **Keep words together** enabled (`layout.wrap: "word"`) and eight size rounds to fit the shape more closely. Load example also enables whole words; API and CLI requests that omit `layout.wrap` retain character wrapping for compatibility with R.
 
 ## Request
 
@@ -46,7 +46,7 @@ Unknown fields are rejected at every level. Every section and field except `imag
 | Field | Type | Default | Meaning |
 | --- | --- | --- | --- |
 | `image` | object | (required) | Decoded pixels: `{width, height, data}`, where `data` holds width × height × 4 RGBA values from 0 to 255, row by row from the top left (an array, `Uint8Array` or `Uint8ClampedArray`; a browser `ImageData` works). |
-| `text` | string or array of strings | (required) | The text. Array elements are joined with spaces, and every run of whitespace, line breaks included, becomes one space. |
+| `text` | string or array of strings | (required) | The text. Array elements are joined with spaces. Character mode collapses every whitespace run into one space. Word mode collapses horizontal whitespace, normalizes CRLF/CR to LF, and preserves explicit line breaks and blank lines. |
 | `seed` | integer 0–4,294,967,295 | `1` | Seed for the k-means starts. |
 | `quantize` | object or `null` | see below | Colour reduction. `null` uses the image's colours as they are. |
 | `quantize.method` | `"oklab_kmeans"` | `"oklab_kmeans"` | The quantizer. `"tsne_kde_kmeans"` is refused (see [Not ported](#not-ported)). |
@@ -64,6 +64,7 @@ Unknown fields are rejected at every level. Every section and field except `imag
 | `layout.justify` | boolean | `true` | Spread the spaces of each run of a line so the text spans it, on the last pass. |
 | `layout.rotation` | number −360–360 | `0` | Writing angle, degrees counterclockwise. |
 | `layout.line_widths` | `"band"` or `"row"` | `"band"` | `"band"`: a line may use the columns paintable over the whole height of its capitals. `"row"`: the columns of the single pixel row nearest the line. |
+| `layout.wrap` | `"character"` or `"word"` | `"character"` | Character mode retains the R layout. Word mode keeps each whitespace-delimited word (including attached punctuation) in one connected shape run, preserves explicit newlines, and reduces the font size for long words. |
 | `layout.skip_gaps` | boolean | `true` | Skip lines that fall in a vertical gap of the shape instead of writing into it. |
 | `color.ink_compensation` | boolean | `false` | Brighten each glyph so that, covering only part of its box, it averages with `color.background` to the pixel colour. |
 | `color.background` | colour | `"black"` | The background ink compensation aims for. |
@@ -80,7 +81,7 @@ A colour is written `#rrggbb` or `#rgb`, or is `"black"` or `"white"`.
 | --- | --- |
 | `cex` | Letter size in R's `cex` units (12 px each). |
 | `font_size_px` | Letter size in output pixels, `12 × cex`. |
-| `complete` | Whether the layout found room for the whole text. It is `false` when the layout ran out of lines, even if that happened at the last character. |
+| `complete` | Whether the layout found room for the whole text. It is `false` when the layout ran out of lines, even if that happened at the last character in character mode. In word mode, an unfit word is wholly unplaced; explicit whitespace consumes no ink. |
 | `fraction_placed` | Share of characters placed. |
 | `lines` | Number of lines written. |
 | `history[]` | One entry per layout pass: `round`, `cex`, `ratio` (above 1: the text fit with room to spare; below 1: it did not fit), `complete`, `fraction_placed`. |
@@ -114,7 +115,8 @@ The stages, each as the R version's (file names in `core/`):
 
 1. **Colours** (`quantize.js`). Opaque pixels are converted to OKLab. Their distinct colours (OKLab rounded to `grid`) are clustered by weighted k-means with weighted k-means++ starts, each colour weighing its pixel count ^ `weight_pow`; the best of `restarts` runs is kept. Every opaque pixel then takes its nearest centre, and each palette colour is the mean sRGB of its pixels. Random numbers come from mulberry32 seeded with `seed`.
 2. **Region** (`region.js`). The picture is turned clockwise by `rotation` (nearest neighbour, on a grid large enough to hold it). Paintable pixels are those with alpha above `alpha_thresh` that are not pure white.
-3. **Layout** (`layout.js`). Advance widths and the height of "M" come from the font's units, unhinted and without kerning. Characters fill each horizontal run of the current line left to right and break mid-word; a full line moves down by `line_height` × the height of "M", stepping past rows with no room. The first letter size makes the text's area equal the paintable area. Each pass then grows the size by 1/√(share of the region used) when the text fit and shrinks it by √(share placed) when it did not, damped by half; once both have been seen, it bisects. The last pass uses the fitting size that came closest to filling the region and is the only one justified.
+3. **Layout** (`layout.js`, `word-layout.js`). Advance widths and the height of "M" come from the font's units, unhinted and without kerning. In the default character mode, characters fill each horizontal run of the current line left to right and break mid-word; a full line moves down by `line_height` × the height of "M", stepping past rows with no room. The first letter size makes the text's area equal the paintable area. Each pass then grows the size by 1/√(share of the region used) when the text fit and shrinks it by √(share placed) when it did not, damped by half; once both have been seen, it bisects. The last pass uses the fitting size that came closest to filling the region and is the only one justified.
+   In word mode, each entire word must fit before it is placed: a narrow run is skipped, and long words constrain the initial font size. Before a fitting size is found, unsuccessful passes shrink more quickly; later passes bisect as above. Words are never hyphenated or split, even across disjoint pieces of one line. Justification stretches only spaces (a lone word is centered), and explicit newlines advance a full line. Too few size rounds can still leave text unplaced, reported through `complete`, `fraction_placed` and `warnings`.
 4. **Colour** (`colors.js`). Each placed glyph takes the most frequent colour among the pixels of its line's nearest pixel row, between the midpoints to its neighbours. With ink compensation the colour c becomes (c − background × (1 − p)) / p with p = √(ink coverage), scaled into range, where ink coverage is the glyph's outline area over its advance × "M" height. Positions are then turned back counterclockwise onto the picture.
 
 **Agreement with the R version.** On the R repository's Alice example (689 × 660 px, chapter 1, 11,201 characters) with default settings, the JS result has a letter size within 0.02% of R's (30.18 px), the same 116 lines, all characters placed, 97% of characters on the same line as in R, and the same 15 palette colours to within an OKLab distance of 0.014 with the same colour error (mean 0.0096, 99th percentile 0.077). Rotation, row line widths without gap skipping, ink compensation and `quantize: null` agree as closely, with at most one line more (125 against 124, for `quantize: null`). The small differences come from R's metrics being rounded to whole pixels at its 1200 px measuring size, from the two random number generators, and, for ink compensation, from R estimating ink coverage by counting pixels more than 90% inked, which reads about 5% lower than the exact outline area used here.
@@ -141,7 +143,7 @@ A problem throws a `TextInImageError` (in the CLI, JSON on stderr) that reports 
     "message": "Invalid request: quantize.method: the t-SNE + KDE + weighted k-means quantizer exists only in the R implementation (https://github.com/NikVetr/text-in-image); use \"oklab_kmeans\", or run the R version; layout.rotaton: unknown field; ...",
     "issues": [
       { "code": "r_only", "path": "quantize.method", "message": "the t-SNE + KDE + weighted k-means quantizer exists only in the R implementation (https://github.com/NikVetr/text-in-image); use \"oklab_kmeans\", or run the R version" },
-      { "code": "unknown_field", "path": "layout.rotaton", "message": "unknown field; layout has n_rounds, line_height, justify, rotation, line_widths, skip_gaps" },
+      { "code": "unknown_field", "path": "layout.rotaton", "message": "unknown field; layout has n_rounds, line_height, justify, rotation, line_widths, wrap, skip_gaps" },
       { "code": "out_of_range", "path": "layout.n_rounds", "message": "must be an integer from 1 to 50" }
     ]
   }
@@ -205,7 +207,7 @@ Each issue has a `code`, a `path` (such as `layout.n_rounds`, `image.data[4]`, o
     "quantize": { "method": "oklab_kmeans", "k": 6, "weight_pow": 0.5, "grid": 0.01, "restarts": 5, "transparent_color": "white", "transparency_thresh": 0.99, "denoise": "none" },
     "region": { "alpha_thresh": 0.2 },
     "font": { "family": "Liberation Sans", "face": 2 },
-    "layout": { "n_rounds": 5, "line_height": 1.21, "justify": true, "rotation": 10, "line_widths": "band", "skip_gaps": true },
+    "layout": { "n_rounds": 5, "line_height": 1.21, "justify": true, "rotation": 10, "line_widths": "band", "skip_gaps": true, "wrap": "character" },
     "color": { "ink_compensation": false, "background": "black" },
     "render": { "scale": 5, "margin": 0.04 }
   },

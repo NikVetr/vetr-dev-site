@@ -3,11 +3,12 @@
 // its advance box and its y the line's reference height, which R's
 // text(pos = 4) draws with the baseline a third of the cap height below.
 
+import { layoutWords, wordSizeLimit } from './word-layout.js';
 import { columnRuns, lineColumns, nearestRow } from './region.js';
 
 /**
  * @typedef {import('./region.js').Region} Region
- * @typedef {{ lineWidths: 'band' | 'row', skipGaps: boolean, justify: boolean }} LayoutOptions
+ * @typedef {{ lineWidths: 'band' | 'row', skipGaps: boolean, justify: boolean, wrap?: 'character'|'word' }} LayoutOptions
  * @typedef {{
  *   x: (number | null)[], y: (number | null)[], line: (number | null)[], block: (number | null)[],
  *   complete: boolean, gotThrough: number, propThrough: number | null,
@@ -17,11 +18,14 @@ import { columnRuns, lineColumns, nearestRow } from './region.js';
 
 /**
  * The text as one character per element, with each run of whitespace (line
- * breaks included) collapsed to a single space.
- * @param {string} text
+ * breaks included) collapsed to a single space in character mode. Word mode
+ * preserves explicit line breaks and collapses only horizontal whitespace.
+ * @param {string} text @param {'character'|'word'} [wrap]
  */
-export function prepareText(text) {
-  return Array.from(text.replace(/\s+/g, ' '));
+export function prepareText(text, wrap = 'character') {
+  return Array.from(wrap === 'word'
+    ? text.replace(/\r\n?/g, '\n').replace(/[^\S\n]+/g, ' ')
+    : text.replace(/\s+/g, ' '));
 }
 
 /**
@@ -182,8 +186,9 @@ export function justifyBlock(x, start, end, txt, w, tsw, tswtd, spaceW) {
  * @param {number} initCex
  * @param {{ nRounds: number, lineHeight: number } & LayoutOptions} options
  */
-export function fitTextSize(txt, region, metrics, initCex, { nRounds, lineHeight, justify, lineWidths, skipGaps }) {
-  let cex = initCex;
+export function fitTextSize(txt, region, metrics, initCex, { nRounds, lineHeight, justify, lineWidths, skipGaps, wrap = 'character' }) {
+  const limit = wrap === 'word' ? wordSizeLimit(txt, metrics(1), region) : Infinity;
+  let cex = Math.min(initCex, limit);
   /** @type {{ round: number, cex: number, ratio: number, complete: boolean, fraction_placed: number }[]} */
   const history = [];
   let pass;
@@ -192,7 +197,7 @@ export function fitTextSize(txt, region, metrics, initCex, { nRounds, lineHeight
     m = metrics(cex);
     const widths = m.w;
     const final = round === nRounds;
-    pass = layoutPass(txt, txt.map((c) => /** @type {number} */ (widths.get(c))), m.h * lineHeight, m.h, region,
+    pass = (wrap === 'word' ? layoutWords : layoutPass)(txt, txt.map((c) => /** @type {number} */ (widths.get(c))), m.h * lineHeight, m.h, region,
       /** @type {number} */ (widths.get(' ')), { lineWidths, skipGaps, justify: final && justify });
     const ratio = pass.complete ? 1 / Math.sqrt(/** @type {number} */ (pass.propThrough)) + 1 / 400 : Math.sqrt(pass.gotThrough) - 1 / 400;
     history.push({ round, cex, ratio, complete: pass.complete, fraction_placed: pass.gotThrough });
@@ -200,11 +205,16 @@ export function fitTextSize(txt, region, metrics, initCex, { nRounds, lineHeight
 
     const fits = history.filter((h) => h.ratio > 1);
     const over = history.filter((h) => h.ratio < 1);
-    if (round !== 1 && fits.length && over.length) {
+    if (wrap === 'word' && !fits.length) {
+      // Whole words leave more unused shape fragments than character placement.
+      // Establish a fitting lower bound promptly before spending passes on bisection.
+      cex *= Math.max(0.25, 0.9 * Math.sqrt(pass.gotThrough));
+    } else if (round !== 1 && fits.length && over.length) {
       cex = Math.max(...fits.map((h) => h.cex)) * 0.5 + Math.min(...over.map((h) => h.cex)) * 0.5;
     } else {
       cex = cex * ratio * 0.5 + cex * 0.5;
     }
+    cex = Math.min(cex, limit);
     if (round === nRounds - 1 && fits.length) {
       // last pass: the fitting size that came closest to filling the region
       cex = fits.reduce((best, h) => (h.ratio < best.ratio ? h : best)).cex;
