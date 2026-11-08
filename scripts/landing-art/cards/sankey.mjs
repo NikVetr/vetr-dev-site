@@ -38,6 +38,12 @@ async function readPage(bg) {
         options: example.importOptions, params: example.params, labels: 'above',
         style: { ...example.style, canvasWidth: w, canvasHeight: h, fontSize,
           labelCounts: false, tracePaths: false, bg: bgColour } });
+      // Explicit equal node widths keep the source and destination faces aligned.
+      // All labels fit over their own bodies, so none needs to float above a crossing.
+      const layout = app.layout;
+      const width = Math.max(...layout.nodes.map((/** @type {any} */ n) => n.widthPx)) / layout.tf.sx;
+      for (const row of app.state.loc) row.width = width;
+      app.update({ fit: true, keepCanvas: true });
       const base = /** @type {string} */ (app.exportSvgText());
       const status = app.seekTrajectories(1);
       if (status.kind !== 'records' || status.total !== 560) throw new Error('sankey: expected the bundled 560-record illustrative cohort');
@@ -91,7 +97,7 @@ export async function build() {
   };
   const all = (/** @type {RegExp} */ re, /** @type {string} */ s = light) => [...s.matchAll(re)];
   const labels = all(/<text class="node-label" data-node="\d+" x="([-\d.]+)" y="([-\d.]+)"[^>]*font-size="([\d.]+)"[^>]*>(.*?)<\/text>/g)
-    .map((m) => `<text x="${num(X(Number(m[1])))}" y="${num(Y(Number(m[2])))}" font-size="${num(Number(m[3]) * k)}">${m[4]}</text>`).join('');
+    .map((m) => `<text x="${num(X(Number(m[1])))}" y="${num(Y(Number(m[2]) + 0.22 * Number(m[3])))}" font-size="${num(Number(m[3]) * k)}">${m[4]}</text>`).join('');
   if (!labels) throw new Error('sankey: patient-pathways labels are missing');
 
   // Gradients: the strands' are the same on both backgrounds, the node bodies' are not.
