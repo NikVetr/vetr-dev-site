@@ -15,7 +15,7 @@ export { renderPuzzleSvg, renderSvg } from './render.js';
  * @typedef {import('./input.js').Entry} Entry
  * @typedef {import('./grid.js').State} State
  * @typedef {import('./score.js').Objective} Objective
- * @typedef {{ crossword: number, iteration: number, nIter: number, score: number, grid: string[][] }} Progress
+ * @typedef {{ crossword: number, iteration: number, nIter: number, score: number, grid: string[][], accepted: boolean | null }} Progress
  */
 
 /**
@@ -33,8 +33,8 @@ export function submit(request, { onProgress } = {}) {
   for (let i = 0; i < search.nXwords; i++) {
     const orig = init ? cloneState(init) : generateXword(entries, search.maxAttemptsWord, search.maxAttemptsXword, objective, rng);
     if (!orig) throw unplaceable(entries, search.maxAttemptsXword);
-    /** @param {number} iteration @param {State} state @param {number} score */
-    const report = (iteration, state, score) => onProgress?.({ crossword: i, iteration, nIter: search.nIter, score, grid: gridRows(trimState(state)) });
+    /** @param {number} iteration @param {State} state @param {number} score @param {boolean|null} [accepted] */
+    const report = (iteration, state, score, accepted=null) => onProgress?.({ crossword: i, iteration, nIter: search.nIter, score, accepted, grid: gridRows(trimState(state)) });
     if (onProgress) report(0, orig, totalScore(scoreTerms(orig, objective)));
     const refined = runMCMC(orig, entries, search.nIter, objective, rng, onProgress && report);
     crosswords.push({ orig: describe(orig, entries, objective), refined: describe(refined, entries, objective) });

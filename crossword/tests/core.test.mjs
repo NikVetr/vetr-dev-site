@@ -362,3 +362,14 @@ test('the command line prints the result, reads PNG targets and reports errors a
   assert.equal(JSON.parse(missing.stderr).error.code, 'unreadable_input');
   assert.equal(spawnSync(process.execPath, [cli, 'a.json', 'b.json'], { encoding: 'utf8' }).status, 2);
 });
+
+test('progress observation preserves the exact seeded search and reports accepted states',()=>{
+ const request={entriesText:weatherText,search:{seed:7,nXwords:1,nIter:4}};
+ const baseline=submit(request);
+ /** @type {import('../core/index.js').Progress[]} */const history=[];
+ const observed=submit(request,{onProgress:p=>history.push(p)});
+ assert.deepEqual(observed,baseline);assert.equal(history.length,5);assert.equal(history[0].accepted,null);
+ assert.equal(history[0].score,baseline.crosswords[0].orig.score);
+ assert.deepEqual(history.at(-1)?.grid,baseline.crosswords[0].refined.grid);
+ assert.ok(history.slice(1).every(p=>typeof p.accepted==='boolean'));
+});
