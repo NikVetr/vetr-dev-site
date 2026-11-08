@@ -199,3 +199,47 @@ test('fits a 390 px phone without sideways scrolling and takes a finger-drawn st
   expect(await page.evaluate(() => window.scrollY)).toBe(scrollBefore);
   await context.close();
 });
+
+for (const modifier of ['Control', 'Meta']) test(`${modifier}+Z and Shift+Z preserve pad history and native text undo`, async ({ page }) => {
+  await page.goto('./');
+  await page.waitForFunction(() => window.Signature?.getResult());
+  const original = await page.evaluate(() => window.Signature.getRequest().strokes);
+  await page.click('#clear');
+  await page.locator('#pad').focus();
+  await page.keyboard.press(`${modifier}+z`);
+  await expect.poll(() => page.evaluate(() => window.Signature.getRequest().strokes)).toEqual(original);
+  await page.keyboard.press(`${modifier}+Shift+z`);
+  await expect(page.locator('#result-empty')).toBeVisible();
+  await page.keyboard.press(`${modifier}+z`);
+  await expect.poll(() => page.evaluate(() => window.Signature.getRequest().strokes)).toEqual(original);
+  // An editable field owns its native undo; the signature must stay unchanged.
+  const field = page.locator('[data-path="resample.step"]');
+  await field.locator('xpath=ancestor::details').evaluate(e => e.open = true);
+  await field.fill('auto');
+  await field.press('End');
+  await field.press('a');
+  await field.press(`${modifier}+z`);
+  expect(await page.evaluate(() => window.Signature.getRequest().strokes)).toEqual(original);
+  await field.fill('auto');
+  await page.locator('#pad').focus();
+  await page.keyboard.press(`${modifier}+Alt+z`);
+  expect(await page.evaluate(() => window.Signature.getRequest().strokes)).toEqual(original);
+  await page.click('#clear');
+  await expect(page.locator('#redo')).toBeDisabled();
+  await drawWithMouse(page);
+  await page.keyboard.press(`${modifier}+z`);
+  await expect(page.locator('#result-empty')).toBeVisible();
+  await page.keyboard.press(`${modifier}+Shift+z`);
+  await expect(page.locator('#pad-info')).toContainText('1 stroke,');
+  // A dialog's history is separate from the primary signature.
+  await page.click('#morph-draw');
+  const b = await page.locator('#pad2').boundingBox();
+  await page.mouse.move(b.x + 20, b.y + 20); await page.mouse.down();
+  await page.mouse.move(b.x + 90, b.y + 60, {steps: 10}); await page.mouse.up();
+  await page.locator('#pad2').focus();
+  await page.keyboard.press(`${modifier}+z`);
+  await expect(page.locator('#draw-done')).toBeDisabled();
+  await page.keyboard.press(`${modifier}+Shift+z`);
+  await expect(page.locator('#draw-done')).toBeEnabled();
+  await expect(page.locator('#pad-info')).toContainText('1 stroke,');
+});

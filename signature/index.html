@@ -39,12 +39,13 @@
         <span id="pad-info" class="muted" role="status"></span>
       </div>
       <div class="pad-frame">
-        <canvas id="pad" class="pad" tabindex="0" aria-label="Signing pad. Draw with a mouse, trackpad, pen or finger. Control+Z undoes the last stroke." aria-describedby="pad-help"></canvas>
+        <canvas id="pad" class="pad" tabindex="0" aria-label="Signing pad. Draw with a mouse, trackpad, pen or finger. Command or Control+Z undoes; add Shift to redo." aria-describedby="pad-help"></canvas>
         <p id="pad-empty" class="pad-empty muted" aria-hidden="true">Sign here</p>
       </div>
       <p id="pad-help" class="visually-hidden">Drawing needs a pointer. Without one, load the example or import a file.</p>
       <div class="toolbar">
-        <button id="undo" type="button" aria-keyshortcuts="Control+Z">↶ Undo</button>
+        <button id="undo" type="button" aria-keyshortcuts="Control+Z Meta+Z">↶ Undo</button>
+        <button id="redo" type="button" aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z" disabled>↷ Redo</button>
         <button id="clear" type="button">✕ Clear</button>
         <button id="replay" type="button" aria-pressed="false">▶ Replay</button>
         <button id="example" type="button">Example signature</button>
@@ -250,6 +251,7 @@
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
+        <p>Undo pad edits with Cmd/Ctrl+Z; redo with Cmd/Ctrl+Shift+Z. When drawing a morph target, these shortcuts act on that pad. Text fields keep their usual text undo.</p>
         <ol>
           <li><strong>Strokes.</strong> Each stroke is resampled at equal steps along its length, so the smoothing does not depend on how often the device reported the pen.</li>
           <li><strong>Overall smoothing.</strong> Each stroke, mirrored at its end so it has no jump, is taken apart into frequencies, and the weakest are dropped (Fourier hard thresholding).</li>
@@ -274,6 +276,7 @@
       </div>
       <div class="toolbar">
         <button id="undo2" type="button">↶ Undo</button>
+        <button id="redo2" type="button" disabled>↷ Redo</button>
         <button id="clear2" type="button">✕ Clear</button>
         <span class="spacer"></span>
         <button type="button" data-close>Cancel</button>

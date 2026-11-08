@@ -31,6 +31,8 @@ export class Pad {
      * @type {{ strokes: PadPoint[][], localRegions: LocalRegion[], view: { s: number, ox: number, oy: number } }[]}
      */
     this.history = [];
+    /** @type {typeof this.history} */
+    this.future = [];
     this.view = { s: 1, ox: 0, oy: 0 };
     /** @type {PadPoint[] | null} */
     this.drawing = null;
@@ -42,12 +44,6 @@ export class Pad {
     canvas.addEventListener('pointermove', (e) => this.move(e));
     canvas.addEventListener('pointerup', (e) => this.up(e));
     canvas.addEventListener('pointercancel', (e) => this.up(e));
-    canvas.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
-        e.preventDefault();
-        this.undo();
-      }
-    });
     new ResizeObserver(() => this.draw()).observe(canvas);
   }
 
@@ -111,20 +107,41 @@ export class Pad {
     this.opts.onChange();
   }
 
+  /** Copies the strokes, local corrections and view as one history state. */
+  snapshot() {
+    return structuredClone({ strokes: this.strokes, localRegions: this.localRegions, view: this.view });
+  }
+
   /** Keeps what the pad shows now, including its local corrections, for undo. */
   remember() {
-    this.history.push({ strokes: this.strokes, localRegions: this.localRegions.map((r) => ({ ...r })), view: this.view });
+    this.history.push(this.snapshot());
+    this.future = [];
+  }
+
+  /** @param {ReturnType<Pad['snapshot']>} state */
+  restore(state) {
+    this.stopReplay();
+    this.drawing = null;
+    this.strokes = state.strokes;
+    this.localRegions = state.localRegions;
+    this.view = state.view;
+    this.drawingSince = false;
+    this.draw();
+    this.opts.onChange();
   }
 
   undo() {
     const last = this.history.pop();
     if (!last) return;
-    this.strokes = last.strokes;
-    this.localRegions = last.localRegions;
-    this.view = last.view;
-    this.drawingSince = false;
-    this.draw();
-    this.opts.onChange();
+    this.future.push(this.snapshot());
+    this.restore(last);
+  }
+
+  redo() {
+    const next = this.future.pop();
+    if (!next) return;
+    this.history.push(this.snapshot());
+    this.restore(next);
   }
 
   clear() {

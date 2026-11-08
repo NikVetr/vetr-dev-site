@@ -41,7 +41,7 @@ const theme = () => {
 };
 
 const pad = new Pad(/** @type {HTMLCanvasElement} */ ($('pad')), { onChange: padChanged, colors: theme });
-const pad2 = new Pad(/** @type {HTMLCanvasElement} */ ($('pad2')), { onChange: () => { /** @type {HTMLButtonElement} */ ($('draw-done')).disabled = !pad2.strokes.length; }, colors: theme });
+const pad2 = new Pad(/** @type {HTMLCanvasElement} */ ($('pad2')), { onChange: () => { /** @type {HTMLButtonElement} */ ($('draw-done')).disabled = !pad2.strokes.length; /** @type {HTMLButtonElement} */ ($('undo2')).disabled = !pad2.history.length; /** @type {HTMLButtonElement} */ ($('redo2')).disabled = !pad2.future.length; }, colors: theme });
 
 // ---------- settings controls ----------
 
@@ -201,6 +201,7 @@ function padChanged() {
     : '';
   /** @type {HTMLOptionElement} */ (document.querySelector('[data-path="width.source"] option[value="pressure"]')).disabled = !pen;
   /** @type {HTMLButtonElement} */ ($('undo')).disabled = !pad.history.length;
+  /** @type {HTMLButtonElement} */ ($('redo')).disabled = !pad.future.length;
   /** @type {HTMLButtonElement} */ ($('clear')).disabled = !pts.length;
   /** @type {HTMLButtonElement} */ ($('replay')).disabled = !pts.length;
   showBrushInfo();
@@ -374,6 +375,7 @@ function drawRegions(ctx, dpr) {
 // ---------- the pad's buttons, examples and import ----------
 
 $('undo').addEventListener('click', () => pad.undo());
+$('redo').addEventListener('click', () => pad.redo());
 $('clear').addEventListener('click', () => pad.clear());
 $('replay').addEventListener('click', () => {
   const b = $('replay');
@@ -674,6 +676,15 @@ $('morph-draw').addEventListener('click', () => {
 });
 for (const b of dialog.querySelectorAll('[data-close]')) b.addEventListener('click', () => dialog.close());
 $('undo2').addEventListener('click', () => pad2.undo());
+$('redo2').addEventListener('click', () => pad2.redo());
+document.addEventListener('keydown', (e) => {
+  if (e.defaultPrevented || e.isComposing || e.altKey || !(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== 'z') return;
+  const el = e.target;
+  if (el instanceof HTMLElement && (el.isContentEditable || el.closest('textarea, select, input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=button])'))) return;
+  e.preventDefault();
+  const active = dialog.open ? pad2 : pad;
+  if (e.shiftKey) active.redo(); else active.undo();
+});
 $('clear2').addEventListener('click', () => pad2.clear());
 $('draw-done').addEventListener('click', () => {
   setTarget(pad2.getStrokes(), 'drawn here');
