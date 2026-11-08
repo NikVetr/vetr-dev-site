@@ -43,3 +43,24 @@ test('balanced proportions retain usable fits for short and strongly unequal lin
     }
   }
 });
+
+test('Li Wu rejects a DNA fit with no whole twist and supports an explicit text-only request', () => {
+  for (const [preset, style] of Object.entries(LAYOUT_PRESETS)) {
+    const request = { names: ['Li Wu'], style };
+    assert.throws(() => submit(request), (/** @type {any} */ error) => {
+      assert.equal(error.code, 'fit_failed', preset);
+      assert.match(error.message, /Li Wu/);
+      assert.match(error.message, /Decoration → None/);
+      assert.match(error.message, /more restarts may not help/);
+      assert.equal(error.issues[0].path, 'style.optimizer.restarts');
+      return true;
+    });
+    const result = submit({ ...request, decoration: 'none' });
+    assert.equal(result.tags.length, 1);
+    assert.equal(result.tags[0].name, 'Li Wu');
+    assert.equal(result.tags[0].decoration, 'none');
+    assert.equal(result.tags[0].fit, null);
+    assert.doesNotMatch(result.sheets[0].svg, /NaN|Infinity/);
+    assert.deepEqual(result.warnings, []);
+  }
+});

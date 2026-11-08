@@ -397,7 +397,7 @@ export function layoutDnaTag(m, center, cell, style, meanIar2f, unif, warn) {
     if (ntwists >= 1) break;
     const name = m.metrics.map((x) => x.text).join(' ');
     if (attempt === 3) {
-      const message = `no fit with a whole helix twist for "${name}" after ${restarts} restarts; raise style.optimizer.restarts`;
+      const message = `No DNA layout found for "${name}" after ${restarts} restarts. Some short names do not fit these proportions. Choose Decoration → None to fit the text without a helix; more restarts may not help.`;
       throw new NameTagsError('fit_failed', message, [{ code: 'fit_failed', path: 'style.optimizer.restarts', message }]);
     }
     restarts *= 2;

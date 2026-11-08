@@ -222,3 +222,33 @@ test('compact workspace gives the preview most desktop space and keeps phone con
   await page.setViewportSize({ width: 844, height: 390 });
   expect(await overflow(page)).toBe(0);
 });
+
+test('short-name DNA failure preserves the previous export and explains explicit text-only recovery', async ({ page }) => {
+  await open(page);
+  const previous = await page.evaluate(() => /** @type {any} */ (window).NameTags.exportSvgText());
+  await page.locator('#names').fill('Li Wu');
+  for (const preset of ['original', 'balanced']) {
+    await page.locator('#line-layout').selectOption(preset);
+    await page.locator('#generate').click();
+    await expect(page.locator('#issues')).toContainText('Decoration → None');
+    await expect(page.locator('#stale')).toContainText('the last run failed');
+    await expect(page.locator('#downloads button')).toHaveText('⚠ Out-of-date sheet SVG');
+    expect(await page.evaluate(() => /** @type {any} */ (window).NameTags.exportSvgText())).toBe(previous);
+    expect(await page.evaluate(() => /** @type {any} */ (window).NameTags.getResult().tags.some((/** @type {any} */ tag) => tag.name === 'Li Wu'))).toBe(false);
+  }
+  await page.locator('#decoration').selectOption('none');
+  await page.locator('#generate').click();
+  await expect(page.locator('#issues')).toBeHidden();
+  await expect(page.locator('#stale')).toBeHidden();
+  await expect(page.locator('#preview .tag-caption')).toHaveText('Cell 1 · Li Wu');
+  await expect(page.locator('#downloads button')).toHaveText('Sheet SVG');
+  const bounds = await page.locator('#preview svg').evaluate(svg => {
+    const paths = [...svg.querySelectorAll('path')];
+    const cell = paths[0].getBBox();
+    return paths.slice(1).every(path => {
+      const glyph = path.getBBox();
+      return glyph.x >= cell.x && glyph.y >= cell.y && glyph.x + glyph.width <= cell.x + cell.width && glyph.y + glyph.height <= cell.y + cell.height;
+    });
+  });
+  expect(bounds).toBe(true);
+});

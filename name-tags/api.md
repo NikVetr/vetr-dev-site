@@ -157,7 +157,7 @@ Every failure is a `NameTagsError` with `code`, `message` and `issues`, a list o
 | `invalid_request` | The request failed validation. Its issues have codes `unknown_field`, `missing_field`, `wrong_type`, `invalid_value`, `out_of_range`, `conflicting_fields`, `too_many`, `unsupported_character` (no Hershey glyph), `cli_only` (`names_file` outside the command line) and `r_only` (a setting only the R version has, such as `ncores` above 1 or `output.pdf`). |
 | `invalid_logo` | A logo could not be read (not an SVG, PNG or JPEG, an unsupported SVG element, no filled shapes). |
 | `unsupported_character` | A name holds a non-space character with no outline, such as a zero-width space. |
-| `fit_failed` | No fit with a whole helix twist after doubling the restarts twice; raise `style.optimizer.restarts`. |
+| `fit_failed` | The fitted helix still rounds to zero twists after doubling the restarts twice. Some short names, such as Li Wu, do not fit the DNA proportions; extra restarts may not help. Set `decoration: "none"` to fit text without a helix. No replacement layout is returned automatically. |
 
 The command line adds `usage`, `unreadable_input` and `invalid_json`, with empty `issues`.
 

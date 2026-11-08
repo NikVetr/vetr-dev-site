@@ -178,6 +178,7 @@
         <p>SVG downloads keep the full tray size and tag positions. Black shapes engrave; grey outlines mark used cells. Use the full-sheet preview to check their placement.</p>
         <p>Each name becomes one or two lines. A name whose top line has a descender (y, q, p, g or j) is set in capitals, with small capitals after each line's first letter, sized so their strokes about match the plain face.</p>
         <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>
+        <p>Some short names, such as Li Wu, do not fit the DNA proportions. Choose Decoration → None to fit the text without a helix; extra restarts may not help.</p>
         <p>The Hershey design writes the name in single-stroke Hershey script with a heartbeat trace running into the bottom line and out of the top line. The logo decoration draws one logo per cell instead, for example for the backs of the tags; give it the same names and cells as the front.</p>
         <p>The seed makes the optimizer's random starts repeatable. The <a href="api.md">API</a> provides the same layout inputs and exports.</p>
       </details>
