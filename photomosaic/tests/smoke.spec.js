@@ -20,6 +20,7 @@ test('makes the example mosaic on load, as R does, and exposes the API', async (
   await expect(page.locator('#grid-note')).toHaveText('25 columns × 17 rows = 425 cells for 442 photos (17 left out).');
   await expect(page.locator('#summary')).toContainText('425 of 442, each once');
   await expect(page.locator('#stale')).toBeHidden();
+  await page.locator('#photo-preview summary').click();
   await expect(page.locator('#contact-key')).toBeVisible();
 
   const api = await page.evaluate(async () => {
@@ -85,6 +86,21 @@ test('reads chosen photos and target, and fits a phone', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page);
   expect(await overflow(page)).toBeLessThanOrEqual(0);
+  expect(await page.locator('.results-card').evaluate(el => el.getBoundingClientRect().top + scrollY)).toBeLessThan(1000);
+  expect(await page.locator('#mosaic').evaluate(el => el.getBoundingClientRect().top + scrollY)).toBeLessThan(1100);
+  await expect(page.locator('#photo-preview')).not.toHaveAttribute('open', '');
+  const photoToggle = page.locator('#photo-preview summary');
+  await photoToggle.focus();
+  await photoToggle.press('Enter');
+  await expect(page.locator('#contact-sheet')).toBeVisible();
+  expect(await page.locator('#contact-sheet').evaluate(el => el.clientWidth)).toBeGreaterThan(100);
+  await expect(page.locator('#contact-sheet')).toHaveAttribute('aria-label', '442 photos, 17 of them not used in the mosaic on view');
+  await photoToggle.press('Enter');
+  await page.locator('.results-link').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#results-heading')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#generate')).toBeFocused();
   const photos = readdirSync(`${FIXTURES}photos`).map((f) => `${FIXTURES}photos/${f}`);
   await page.locator('#photo-files').setInputFiles(photos);
   await expect(page.locator('#photo-count')).toHaveText('36 photos');

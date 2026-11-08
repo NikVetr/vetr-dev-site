@@ -28,7 +28,7 @@ const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getEleme
 const el = {
   photoFiles: byId('photo-files'), photoFolder: byId('photo-folder'), folderButton: byId('folder-button'),
   photoCount: byId('photo-count'), photoProgress: byId('photo-progress'), photoStatus: byId('photo-status'),
-  photoIssues: byId('photo-issues'), contactScroll: byId('contact-scroll'), contactSheet: byId('contact-sheet'), contactKey: byId('contact-key'),
+  photoIssues: byId('photo-issues'), photoPreview: byId('photo-preview'), contactScroll: byId('contact-scroll'), contactSheet: byId('contact-sheet'), contactKey: byId('contact-key'),
   targetFile: byId('target-file'), targetPreview: byId('target-preview'), targetStatus: byId('target-status'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), runProgress: byId('run-progress'), runIssues: byId('run-issues'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'),
@@ -611,8 +611,9 @@ function drawDetail() {
 
 /** The photos, small, with those the mosaic on view leaves out faded and struck through. */
 function drawContactSheet() {
+  el.photoPreview.hidden = !photos.length;
   el.contactScroll.hidden = !photos.length;
-  if (!photos.length) return;
+  if (!photos.length || !el.photoPreview.open) return;
   const dpr = window.devicePixelRatio || 1;
   const size = 30;
   const perRow = Math.max(1, Math.floor(el.contactScroll.clientWidth / size));
@@ -715,6 +716,7 @@ el.tint.addEventListener('input', () => {
   drawDetail();
 });
 el.detailSize.addEventListener('change', drawDetail);
+el.photoPreview.addEventListener('toggle', drawContactSheet);
 for (const input of document.querySelectorAll('input[name="view"]')) input.addEventListener('change', drawAll);
 el.tileWidth.addEventListener('input', showExportSize);
 let resizeFrame = 0;

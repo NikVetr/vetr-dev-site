@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Arrange your photos into a grid that, from a distance, reproduces a target picture. Each photo is used once. Everything happens in your browser.">
+  <meta name="description" content="Arrange your photos into a grid that, from a distance, reproduces a target picture. Everything happens in your browser.">
   <title>Photomosaic</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='6' width='6' height='6'/%3E%3Crect x='13' y='6' width='6' height='6' opacity='.6'/%3E%3Crect x='20' y='6' width='6' height='6' opacity='.3'/%3E%3Crect x='6' y='13' width='6' height='6' opacity='.6'/%3E%3Crect x='13' y='13' width='6' height='6' opacity='.3'/%3E%3Crect x='20' y='13' width='6' height='6'/%3E%3Crect x='6' y='20' width='6' height='6' opacity='.3'/%3E%3Crect x='13' y='20' width='6' height='6'/%3E%3Crect x='20' y='20' width='6' height='6' opacity='.6'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="stylesheet" href="../shared/base.css">
@@ -25,7 +25,7 @@
     <div class="container header-row">
       <div>
         <h1>Photomosaic</h1>
-        <p class="tagline">Arrange a set of photos into a grid that, seen from a distance, reproduces a target picture. Each photo goes to one cell, and the Hungarian algorithm finds the arrangement whose colours match best overall. Your photos are read in this browser and never uploaded.</p>
+        <p class="tagline">Arrange photos to reproduce a target picture. Your photos stay in your browser.</p>
       </div>
       <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
     </div>
@@ -38,30 +38,32 @@
         <span id="photo-count" class="muted"></span>
         <a href="#results-heading" class="results-link">Mosaic ↓</a>
       </div>
-      <p class="muted">Any number of pictures; each is used at most once unless you allow more uses under Matching. Choosing photos replaces the set.</p>
+      <p class="muted">Choosing photos replaces the set. Change uses per photo under Matching.</p>
       <div class="toolbar">
         <label class="file-button">Choose photos… <input id="photo-files" type="file" accept="image/*" multiple></label>
-        <label id="folder-button" class="file-button" hidden>Choose a folder… <input id="photo-folder" type="file" webkitdirectory></label>
+        <label id="folder-button" class="file-button" hidden>Folder… <input id="photo-folder" type="file" webkitdirectory></label>
         <button id="photos-example" type="button">Example photos</button>
       </div>
       <progress id="photo-progress" class="progress" max="1" value="0" hidden></progress>
       <p id="photo-status" role="status"></p>
       <div id="photo-issues" class="issues" role="alert" hidden></div>
-      <div class="contact-scroll" id="contact-scroll" role="region" aria-label="The photos read" hidden>
-        <canvas id="contact-sheet" class="contact-sheet" role="img"></canvas>
-      </div>
-      <p id="contact-key" class="muted contact-key" hidden><span class="unused-key" aria-hidden="true"></span> Faded and struck through: not used in the mosaic on view.</p>
+      <details id="photo-preview" class="photo-preview" hidden>
+        <summary>View loaded photos</summary>
+        <div class="contact-scroll" id="contact-scroll" role="region" aria-label="The photos read" tabindex="0" hidden>
+          <canvas id="contact-sheet" class="contact-sheet" role="img"></canvas>
+        </div>
+        <p id="contact-key" class="muted contact-key" hidden><span class="unused-key" aria-hidden="true"></span> Faded and struck through: not used in the mosaic on view.</p>
+      </details>
     </section>
 
     <section class="card" aria-labelledby="target-heading">
       <h2 id="target-heading">Target picture</h2>
-      <p class="muted">The picture the mosaic should look like from a distance.</p>
       <div class="toolbar">
         <label class="file-button">Choose target… <input id="target-file" type="file" accept="image/*"></label>
-        <button id="target-example" type="button">Example target</button>
+        <button id="target-example" type="button">Red Fuji</button>
         <button id="sunflower-example" type="button" aria-describedby="sunflower-note">Sunflower preset</button>
       </div>
-      <p id="sunflower-note" class="muted">Sunflower loads the example photos with 1,200 cells, up to three uses per photo and 45% colour tint.</p>
+      <p id="sunflower-note" class="muted">Sunflower: example photos, 1,200 cells, up to 3 uses per photo, 45% tint.</p>
       <div class="target-row">
         <canvas id="target-preview" class="target-preview" width="240" height="160" role="img" aria-label="The target picture"></canvas>
         <p id="target-status"></p>
@@ -70,7 +72,7 @@
 
     <section class="card results-card" aria-labelledby="results-heading">
       <div class="card-head">
-        <h2 id="results-heading">Mosaic</h2>
+        <h2 id="results-heading" tabindex="-1">Mosaic</h2>
         <span id="status" class="muted" role="status"></span>
       </div>
       <div class="toolbar">
@@ -83,6 +85,11 @@
       <div id="result" hidden>
         <p id="stale" class="stale-banner" hidden></p>
         <div>
+          <div class="mosaic-wrap stale-dim">
+            <canvas id="mosaic" class="mosaic" tabindex="0" role="img" aria-describedby="detail-caption"></canvas>
+            <div id="marker" class="cell-marker" aria-hidden="true"></div>
+          </div>
+          <p class="muted hint">Point at or tap a cell to see it close up; with the mosaic focused, the arrow keys move between cells.</p>
           <fieldset class="choice">
             <legend>Show</legend>
             <div class="choice-list">
@@ -90,11 +97,6 @@
               <label><input type="radio" name="view" value="cells"> The target at one colour per cell</label>
             </div>
           </fieldset>
-          <div class="mosaic-wrap stale-dim">
-            <canvas id="mosaic" class="mosaic" tabindex="0" role="img" aria-describedby="detail-caption"></canvas>
-            <div id="marker" class="cell-marker" aria-hidden="true"></div>
-          </div>
-          <p class="muted hint">Point at or tap a cell to see it close up; with the mosaic focused, the arrow keys move between cells.</p>
           <div class="settings display-settings">
             <label>Tile shape
               <select id="fit">
