@@ -18,7 +18,7 @@ const fixture = JSON.parse(readFileSync(here('fixtures/r-parity.json'), 'utf8'))
 test('the saved 94-entry heart matches the example inputs and remains a valid core result', () => {
   const { request, result } = JSON.parse(readFileSync(here('../examples/heart-example.json'), 'utf8'));
   assert.equal(request.entriesText, readFileSync(here('../examples/weather.txt'), 'utf8'));
-  assert.deepEqual(request.target.mask, heartRows);
+  assert.deepEqual(request.target.mask, readFileSync(here('../examples/heart-notched.txt'), 'utf8').trim().split('\n'));
   const entries = parseEntries(request.entriesText);
   assert.equal(entries.length, 94);
   for (const stage of ['orig', 'refined']) {

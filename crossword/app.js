@@ -456,7 +456,7 @@ el.targetFile.addEventListener('change', async () => {
 });
 
 async function exampleTarget() {
-  const rows = (await (await fetch('examples/heart.txt')).text()).trim().split('\n');
+  const rows = (await (await fetch('examples/heart-notched.txt')).text()).trim().split('\n');
   setTarget({ label: 'Example heart', request: { mask: rows } });
 }
 byId('target-example').addEventListener('click', () => { dropUndo(); return exampleTarget(); });

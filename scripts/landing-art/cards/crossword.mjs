@@ -16,7 +16,7 @@ const FADE = 0.15;
 export function build() {
   const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../crossword/examples/${f}`, import.meta.url), 'utf8');
   const { request, result } = JSON.parse(read('heart-example.json'));
-  if (request.entriesText !== read('weather.txt') || request.target.mask.join('\n') !== read('heart.txt').trim()) {
+  if (request.entriesText !== read('weather.txt') || request.target.mask.join('\n') !== read('heart-notched.txt').trim()) {
     throw new Error('crossword: regenerate the saved example with node crossword/examples/build.mjs');
   }
   const xw = result.crosswords[0].refined;

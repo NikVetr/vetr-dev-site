@@ -27,7 +27,6 @@ A sudden strong burst of wind : Gust
 A very strong wind : Gale
 A short period of rain : Shower
 A very heavy fall of rain : Downpour
-Weather with thunder and lightning : Thunderstorm
 A spinning storm around a low pressure centre : Cyclone
 A tropical cyclone in the northwest Pacific : Typhoon
 Light from the sun : Sunshine
@@ -35,19 +34,13 @@ Covered with clouds : Overcast
 Without clouds : Clear
 A prediction of the coming weather : Forecast
 The usual weather of a region over many years : Climate
-A measure of how hot or cold something is : Temperature
 The force of air pressing on a surface : Pressure
-Water falling from clouds in any form : Precipitation
-Liquid water becoming water vapour : Evaporation
-Water vapour becoming liquid drops : Condensation
 The layer of gases around the Earth : Atmosphere
-Instrument used to measure temperature : Thermometer
 Instrument used to measure wind speed : Anemometer
 Instrument that shows the direction of the wind : Wind vane
 Instrument that collects rainfall for measurement : Rain gauge
 A system that uses radio waves to detect rain : Radar
 An object in orbit that can photograph clouds : Satellite
-The study of weather : Meteorology
 A boundary between two air masses : Front
 A front where warmer air advances : Warm front
 A front where colder air advances : Cold front
@@ -64,19 +57,11 @@ The season between summer and winter : Autumn
 A high thin cloud with wispy streaks : Cirrus
 A puffy cloud with a fairly flat base : Cumulus
 A low cloud that forms a broad layer : Stratus
-A towering storm cloud : Cumulonimbus
-A cloud layer often bringing steady rain : Nimbostratus
-Thin cloud through which the sun looks hazy : Cirrostratus
-Small ripples of high cloud : Cirrocumulus
-A grey or blue midlevel cloud sheet : Altostratus
-Patches of rounded midlevel cloud : Altocumulus
-A low layer of rounded cloud masses : Stratocumulus
 A wind that blows from the sea towards the land : Sea breeze
 A wind that blows from the land towards the sea : Land breeze
 Fine water droplets that reduce visibility : Mist
 Air made less clear by tiny suspended particles : Haze
 The amount of sky covered by clouds : Cloud cover
-The length of time the sun is visible : Sunshine duration
 Water vapour in the air : Moisture
 A layer of snow lying on the ground : Snow cover
 A bank of snow piled up by wind : Snowdrift
@@ -85,10 +70,25 @@ One crystal or cluster of crystals of snow : Snowflake
 A light fall of drifting snow : Flurry
 A sudden brief increase in wind speed : Squall
 A region of relatively low air pressure : Depression
-A region of relatively high air pressure : Anticyclone
 A line joining places with the same temperature : Isotherm
-A map showing weather observations : Weather chart
 A device that records atmospheric pressure over time : Barograph
-A site where weather observations are recorded : Weather station
-The direction from which a wind blows : Wind direction
 A sky with no visible clouds : Clear sky
+A coat that keeps rain off : Raincoat
+A portable shelter held above the head in rain : Umbrella
+A small pool left on the ground by rain : Puddle
+Wet earth : Mud
+A hanging spike of frozen water : Icicle
+A vehicle that slides over snow : Sled
+A covering that keeps a hand warm : Glove
+Footwear that can keep out mud and rain : Boot
+An outer garment worn for warmth : Coat
+A strip of fabric worn around the neck : Scarf
+A warm fibre from sheep : Wool
+To become thoroughly wet : Soak
+An unpleasant feeling of cold : Chill
+Bright with sunlight : Sunny
+Covered or soaked with water : Wet
+Free from moisture : Dry
+Unpleasantly soaked and soft : Soggy
+Slightly wet : Damp
+Pleasant weather with little cloud or rain : Fair
