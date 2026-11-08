@@ -21,9 +21,11 @@ try {
     await route.continue();
   });
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  // Reload with the pointer outside the card, then enter after its listeners are ready.
+  await page.mouse.move(0, 0);
   await page.reload();
   await tile.hover();
-  await page.waitForTimeout(100);
+  for (let n = 0; n < 50 && !intercepted; n++) await page.waitForTimeout(100);
   assert.ok(intercepted, 'the delayed plan request was reached');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   release();
@@ -112,7 +114,7 @@ try {
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
   assert.equal(await page.locator('.project-card').count(), 17);
   assert.equal(await page.locator('#projects > .grid').count(), 1);
-  assert.ok(!(await page.locator('#intro').textContent()).includes('gift'));
+  assert.equal(await page.locator('#intro .tagline').textContent(), 'Tools for statistics, graphics, and everyday tasks.');
   assert.equal(await page.locator('.theme-links').count(), 0);
   assert.equal(await page.locator('#projects a[href="/forecast-calibration/"]').count(), 0);
   for (const id of ['statistics', 'art', 'everyday']) {
