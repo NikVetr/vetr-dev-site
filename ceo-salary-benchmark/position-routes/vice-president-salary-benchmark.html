@@ -54,8 +54,13 @@ layout: null
         <div>
           <h2 id="settings-title">Settings</h2>
         </div>
-        <button id="reset-settings" class="text-button" type="button">Reset</button>
+        <div class="settings-actions">
+          <button class="text-button chart-jump" type="button" aria-controls="analysis-column">Chart ↓</button>
+          <button id="reset-settings" class="text-button" type="button">Reset</button>
+        </div>
       </div>
+
+      <p class="settings-scroll-note">Scroll within this panel for more settings.</p>
 
       <label id="stream-field" class="field">
         <span>Pay source <button class="info-tooltip" type="button" aria-label="About pay sources" data-tooltip="Choose whether to use pay reported for nonprofit leaders in Form 990 filings, salary ranges advertised in job postings, or both.">?</button></span>
@@ -306,7 +311,7 @@ layout: null
 
     <div id="settings-panel-resizer" class="panel-resizer panel-resizer-vertical" data-resizer="settings" role="separator" aria-orientation="vertical" aria-label="Resize settings and chart panels" aria-controls="settings-panel analysis-column" aria-valuemin="0" aria-valuemax="100" aria-valuenow="16" tabindex="0"></div>
 
-    <section id="analysis-column" class="analysis-column" aria-label="Distribution analysis">
+    <section id="analysis-column" class="analysis-column" aria-label="Distribution analysis" tabindex="-1">
       <section id="chart-panel" class="chart-panel">
         <div id="chart-view-tabs" class="chart-view-tabs" role="tablist" aria-label="Analysis view">
           <button id="chart-tab-histogram" class="chart-view-tab" type="button" role="tab" data-chart-view="histogram" aria-selected="true" aria-controls="chart-view-content" tabindex="0">Histogram</button>

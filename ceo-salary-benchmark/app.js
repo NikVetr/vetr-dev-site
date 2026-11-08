@@ -491,6 +491,9 @@
   }
 
   function horizontalPanelMinimums() {
+    if (window.innerWidth > 820 && window.innerWidth <= 1250 && window.innerHeight <= 450) {
+      return { chart: 420, results: 112 };
+    }
     const modelDetailsExpanded = refs.analysisColumn.classList.contains("is-model-details-expanded");
     if (window.innerHeight > 720) {
       return {
@@ -8424,6 +8427,11 @@
   refs.expenseMax.addEventListener("input", () => updateRange("expenses", "high"));
   refs.matchScoreMin.addEventListener("input", () => updateRange("matchScore", "low"));
   refs.matchScoreMax.addEventListener("input", () => updateRange("matchScore", "high"));
+  $(".chart-jump").addEventListener("click", () => {
+    const analysis = /** @type {HTMLElement} */ (refs.analysisColumn);
+    analysis.focus({ preventScroll: true });
+    analysis.scrollIntoView({ block: "start" });
+  });
   refs.reset.addEventListener("click", reset);
   document.addEventListener("toggle", (event) => {
     if (event.target.matches?.(".header-filter-menu details")) activateHeaderFilterPopover(event.target);
