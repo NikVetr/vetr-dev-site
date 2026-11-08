@@ -4,6 +4,7 @@
 // running in the page.
 
 import { DEFAULTS, RasterToVectorError } from './core/index.js';
+import { EMOJI_SETTINGS } from './examples/emoji-settings.js';
 import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 
 /**
@@ -378,9 +379,7 @@ el.imageFile.addEventListener('change', async () => {
 byId('example-cartoon').addEventListener('click', async () => { if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage(); });
 byId('example-emoji').addEventListener('click', async () => {
   if (await loadImage(EXAMPLES.emoji, 'emoji-compressed.jpg')) {
-    // Six colors retain the tangerine's leaf and orange shading.
-    const colors = /** @type {HTMLInputElement} */ (document.querySelector('[data-path="quantize.k"]'));
-    colors.value = '6';
+    writeOptions(EMOJI_SETTINGS);
     await convertFromPage();
   }
 });

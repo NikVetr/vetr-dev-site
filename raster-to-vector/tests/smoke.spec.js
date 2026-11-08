@@ -28,6 +28,42 @@ const cutOptions = (page) => page.evaluate(() => {
 });
 const svgText = (/** @type {import('@playwright/test').Page} */ page) => page.evaluate(() => /** @type {any} */ (window).RasterToVector.exportSvgText());
 
+test('the swirl example smooths real traced contours and Undo restores the startup example', async ({ page }) => {
+  await open(page);
+  const before = await svgText(page);
+  await page.getByRole('button', { name: 'Example: swirl, 3 colours' }).click();
+  await expect(page.locator('#palette li')).toHaveCount(3);
+  await expect(page.locator('[data-path="smooth.wavelet.thresholdMultiplier"]')).toHaveValue('8');
+  const converted = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).RasterToVector;
+    const request = app.getRequest();
+    return { image: { ...request.image, data: Array.from(request.image.data) }, result: app.getResult() };
+  });
+  const smooth = submit({ image: converted.image, ...converted.result.settings });
+  const raw = submit({ image: converted.image, ...converted.result.settings, smooth: { method: 'none' } });
+  expect(smooth.settings.smooth.method).toBe('wavelet');
+  expect(smooth.settings.smooth.wavelet.filter).toBe('mb4');
+  expect(smooth.svg).toBe(converted.result.svg);
+  expect(smooth.warnings).toEqual([]);
+  expect(smooth.regions).toHaveLength(raw.regions.length);
+  // Staircase edges reverse direction repeatedly; the smooth contour should
+  // remove most of that angular variation while retaining each traced ring.
+  const turning = (/** @type {typeof smooth} */ result) => result.regions.filter(region => !region.frame).reduce((total, region) => total + region.outer.reduce((sum, p, i, points) => {
+    const a = points[(i + points.length - 1) % points.length], b = points[(i + 1) % points.length];
+    const u = [p[0] - a[0], p[1] - a[1]], v = [b[0] - p[0], b[1] - p[1]];
+    return sum + Math.abs(Math.atan2(u[0] * v[1] - u[1] * v[0], u[0] * v[0] + u[1] * v[1]));
+  }, 0), 0);
+  expect(turning(smooth)).toBeLessThan(turning(raw) * 0.1);
+  expect(smooth.regions.map(region => region.outer.length)).toEqual(raw.regions.map(region => region.outer.length));
+  await page.locator('#undo').click();
+  expect(await svgText(page)).toBe(before);
+  await expect(page.locator('[data-path="smooth.wavelet.thresholdMultiplier"]')).toHaveValue('3');
+  await page.locator('#redo').click();
+  expect(await svgText(page)).toBe(smooth.svg);
+  await expect(page.locator('#palette li')).toHaveCount(3);
+  await expect(page.locator('[data-path="smooth.wavelet.thresholdMultiplier"]')).toHaveValue('8');
+});
+
 test('converts the example on load, runs options and uploads, and exposes the API', async ({ page }) => {
   /** @type {string[]} */
   const errors = [];

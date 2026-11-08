@@ -42,6 +42,19 @@ The page's "Longest side" is 600 px by default, so that large photos stay quick;
 
 The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
+The **Example: swirl, 3 colours** button loads the fishcake emoji and a named smoothing preset. To reproduce its SVG in the page:
+
+```js
+const image = await RasterToVector.decodeImage('examples/emoji-compressed.jpg');
+const result = await RasterToVector.submit({
+  image,
+  quantize: { k: 3 },
+  smooth: { method: 'wavelet', wavelet: { filter: 'mb4', thresholdMultiplier: 8 } },
+});
+```
+
+Set `smooth.method` to `"none"` to see the traced contours before smoothing. These are explicit example choices; the default threshold multiplier remains 3. The landing preview adds thin strokes to reveal the traced and smoothed boundaries without altering their coordinates.
+
 ## Request
 
 Unknown fields are rejected at every level. Every section and field except `image` is optional.
