@@ -55,7 +55,7 @@ export function renderSvg(result, { background = 'black' } = {}) {
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`,
     `<rect width="${W}" height="${H}" fill="${background}"/>`,
-    `<defs>${defs.join('')}${result.settings.render.glow ? textGlowFilter('text-glow', size, [0, 0, W, H]) : ''}</defs>`,
+    `<defs>${defs.join('')}${result.settings.render.glow ? textGlowFilter('text-glow', size, [0, 0, W, H], result.settings.render.glow) : ''}</defs>`,
     ...(result.settings.render.glow ? ['<g filter="url(#text-glow)">', ...uses, '</g>'] : uses),
     '</svg>',
     '',

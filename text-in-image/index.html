@@ -102,7 +102,9 @@
             <option value="outline">Thin contrasting outline</option>
           </select>
         </label>
-        <label class="check"><input id="glow" type="checkbox"> Soft letter glow</label>
+        <label class="glow-control"><span>Letter glow <output id="glow-value" for="glow" aria-hidden="true">Off</output></span>
+          <input id="glow" type="range" min="0" max="4" step="0.1" value="0" aria-valuetext="Off">
+        </label>
         <label class="check"><input id="ink" type="checkbox"> Ink compensation (brighter letters, so they average to the picture's colour on the background)</label>
       </div>
       <h3>Text layout</h3>

@@ -3,6 +3,7 @@
 // window.TextInImage exposes the same submit() to scripts and agents running
 // in the page.
 
+import { renderSvg } from './core/svg.js';
 import { prepareText } from './core/layout.js';
 import { DEFAULTS, TextInImageError, parseColor } from './core/request.js';
 import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
@@ -21,7 +22,7 @@ const el = {
   loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), redo: byId('redo'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
   lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
-  ink: byId('ink'), background: byId('background'), contrastMode: byId('contrast-mode'), glow: byId('glow'), scale: byId('scale'), seed: byId('seed'),
+  ink: byId('ink'), background: byId('background'), contrastMode: byId('contrast-mode'), glow: byId('glow'), glowValue: byId('glow-value'), scale: byId('scale'), seed: byId('seed'),
   render: byId('render'), status: byId('status'), issues: byId('issues'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), output: byId('output'),
   fitStatus: byId('fit-status'), stats: byId('stats'), palette: byId('palette'),
@@ -54,6 +55,7 @@ const form = /** @type {HTMLElement} */ (document.querySelector('main'));
 function showBusy() {
   const busy = replacing || running > 0;
   for (const button of [el.render, el.loadExample, el.clear]) button.disabled = busy;
+  el.glow.disabled = busy;
   if (busy) document.documentElement.dataset.busy = 'true';
   else delete document.documentElement.dataset.busy;
 }
@@ -153,7 +155,7 @@ function readForm() {
     n_rounds: el.nRounds.valueAsNumber, skip_gaps: el.skipGaps.checked, wrap: el.wholeWords.checked ? 'word' : 'character', justify: el.justify.checked,
   };
   s.color = { ...s.color, ink_compensation: el.ink.checked, background: el.background.value };
-  s.render = { ...s.render, scale: el.scale.valueAsNumber, contrast_outline: el.contrastMode.value === 'outline', contrast_adjust: el.contrastMode.value === 'adjust', glow: el.glow.checked };
+  s.render = { ...s.render, scale: el.scale.valueAsNumber, contrast_outline: el.contrastMode.value === 'outline', contrast_adjust: el.contrastMode.value === 'adjust', glow: el.glow.valueAsNumber };
 }
 
 /** @param {Record<string, any>} s */
@@ -173,7 +175,8 @@ function writeForm(s) {
   el.background.value = `#${rgb.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
   el.scale.value = String(s.render.scale);
   el.contrastMode.value = s.render.contrast_adjust ? 'adjust' : s.render.contrast_outline ? 'outline' : 'none';
-  el.glow.checked = Boolean(s.render.glow);
+  el.glow.value = String(Number(s.render.glow));
+  showGlowValue();
   el.k.disabled = !el.quantizeOn.checked;
 }
 
@@ -316,10 +319,7 @@ function markChanged(part) {
 /** @param {Result} result @param {string} svg */
 function showResult(result, svg) {
   state.result = result;
-  state.svg = svg;
-  if (state.svgUrl) URL.revokeObjectURL(state.svgUrl);
-  state.svgUrl = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
-  el.output.src = state.svgUrl;
+  showDrawing(svg);
   el.noResult.hidden = true;
   el.result.hidden = false;
 
@@ -356,6 +356,35 @@ function showResult(result, svg) {
       return item;
     })
     : [Object.assign(document.createElement('li'), { textContent: 'The image\'s own colours (no colour reduction).' })]));
+}
+
+/** Update just the drawing and exports, without rebuilding layout diagnostics.
+ * @param {string} svg
+ */
+function showDrawing(svg) {
+  state.svg = svg;
+  if (state.svgUrl) URL.revokeObjectURL(state.svgUrl);
+  state.svgUrl = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+  el.output.src = state.svgUrl;
+}
+
+function showGlowValue() {
+  const strength = el.glow.valueAsNumber;
+  const label = strength === 0 ? 'Off' : `${Math.round(strength * 100)}%`;
+  el.glowValue.value = label;
+  el.glow.setAttribute('aria-valuetext', label);
+}
+
+// The slider changes drawing only. Keep immutable saved results and other pending
+// form edits; the normal form change event records one checkpoint per drag.
+function updateGlow() {
+  showGlowValue();
+  const glow = el.glow.valueAsNumber;
+  state.settings.render = { ...state.settings.render, glow };
+  if (!state.result || running || replacing) return;
+  state.result = { ...state.result, settings: { ...state.result.settings,
+    render: { ...state.result.settings.render, glow } } };
+  showDrawing(renderSvg(state.result, { background: state.result.settings.color.background }));
 }
 
 /** @returns {Promise<Blob>} */
@@ -456,7 +485,10 @@ el.text.addEventListener('input', () => {
   showCharCount();
   markChanged('text');
 });
-byId('settings-card').addEventListener('input', () => markChanged('settings'));
+el.glow.addEventListener('input', updateGlow);
+byId('settings-card').addEventListener('input', (/** @type {Event} */ event) => {
+  if (event.target !== el.glow) markChanged('settings');
+});
 el.render.addEventListener('click', renderFromPage);
 el.loadExample.addEventListener('click', async () => {
   const version = revision;

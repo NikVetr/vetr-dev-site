@@ -25,8 +25,8 @@ const PICTURE_PX = 2;   // the picture embedded at this many pixels per display 
 const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
 
-/** @param {{background?:string,glow?:boolean}} [options] */
-export async function build({ background = BACKGROUND, glow = true } = {}) {
+/** @param {{background?:string,glow?:number|boolean}} [options] */
+export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
@@ -112,7 +112,7 @@ export async function build({ background = BACKGROUND, glow = true } = {}) {
     width: W,
     height: H,
     period: PERIOD,
-    defs: glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8]) : '',
+    defs: glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8], result.settings.render.glow) : '',
     body: `<rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
