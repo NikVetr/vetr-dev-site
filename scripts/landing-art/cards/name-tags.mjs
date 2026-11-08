@@ -1,15 +1,10 @@
-// Name Tags: the page's example names (twelve historical figures), each fitted around a DNA
-// helix by the tool's core with its Balanced lines preset, laid out on the tool's own 4 × 3 example tray
-// (examples/tray-4x3.json), which holds exactly those twelve. The engraving is simplified to the
-// card's scale. The loop: the engraving fades, then a laser line scans down the tray and the
-// engraving reappears behind it, back to the finished sheet. The scan is a paper-coloured cover
-// that only translates, with the line along its top edge.
+// Core-fitted layouts converge from illustrative shuffled arrangements, then engrave.
 import { readFileSync } from 'node:fs';
 import { submit } from '../../../name-tags/core/index.js';
 import { BALANCED_STYLE } from '../../../name-tags/presets.js';
 import { H, W, art, num, simplifyPath } from '../svg.mjs';
 
-const PERIOD = 6;
+const PERIOD = 10;
 
 export async function build() {
   const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../name-tags/examples/${f}`, import.meta.url), 'utf8');
@@ -39,24 +34,49 @@ export async function build() {
   const engraving = paths.filter(([, attrs]) => attrs.includes('fill="#000000"')).map(([, , d]) => simplifyPath(d, at, 0.12)).join('');
   if (!cells || !engraving) throw new Error('name-tags: the sheet has no cells or engraving');
 
-  const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
+  // The SVG orders each cell's glyphs by line, followed by its helix.
+  /** @type {string[]} */
+  const groups = [];
+  let tagIndex = -1, glyphIndex = 0;
+  for (const [, attrs, d] of paths) {
+    if (attrs.includes('stroke="#333333"')) { tagIndex++; glyphIndex = 0; continue; }
+    if (!attrs.includes('fill="#000000"')) continue;
+    const counts = result.tags[tagIndex].lines.map((/** @type {string} */ line) => [...line.replaceAll(' ', '')].length);
+    const part = glyphIndex < counts[0] ? 0 : glyphIndex < counts[0] + counts[1] ? 1 : 2;
+    const index = tagIndex * 3 + part;
+    groups[index] = (groups[index] ?? '') + simplifyPath(d, at, 0.12);
+    glyphIndex++;
+  }
+  const motions = groups.map((d, i) => {
+    const dx = Math.sin(i * 13.7 + 2) * 9, dy = Math.cos(i * 7.3 + 1) * 8;
+    const angle = Math.sin(i * 2.1) * 12;
+    return `& .piece-${i} { animation: name-tags-place-${i} ${PERIOD}s ease-in-out infinite; }
+@keyframes name-tags-place-${i} { 0%, 7% { transform: translate(${num(dx)}px, ${num(dy)}px) rotate(${num(angle)}deg) scale(0.82); } 34%, 100% { transform: none; } }`;
+  }).join('\n');
   return art({
-    name: 'name-tags',
-    period: PERIOD,
-    // The cover rests just below the canvas, the laser line 2 units inside it.
-    body: `<path class="engraving" d="${engraving}"/>
-<g class="scan"><rect class="cover" x="0" y="${H}" width="${W}" height="${H + 4}"/><path class="laser" d="M0 ${H + 2}H${W}"/></g>
+    name: 'name-tags', period: PERIOD,
+    defs: `<path id="name-tags-design" d="${engraving}"/>
+<clipPath id="name-tags-etched"><rect class="scan-window" width="${W}" height="${H}"/></clipPath>
+<mask id="name-tags-contact" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><use href="#name-tags-design" fill="white" stroke="white" stroke-width="1"/></mask>`,
+    body: `<g class="layout">${groups.map((d, i) => `<path class="piece piece-${i}" d="${d}"/>`).join('')}</g>
+<g clip-path="url(#name-tags-etched)"><rect class="paper" width="${W}" height="${H}"/><use class="engraving" href="#name-tags-design"/></g>
+<g class="laser-pass"><path class="laser" d="M0 0H${W}"/><g mask="url(#name-tags-contact)"><path class="contact" d="M0 0H${W}"/></g></g>
 <path class="cells" d="${cells}"/>`,
-    // The sheet's colours: black engraving (the theme's ink here), #333333 cell outlines.
-    css: `& .engraving { fill: var(--art-ink); fill-rule: evenodd; will-change: opacity; }
+    css: `& .engraving { fill: var(--art-ink); stroke: var(--art-ink); stroke-width: 0.18; fill-rule: evenodd; }
+& .layout { opacity: 0; }
+& .piece { fill: none; stroke: #8b939c; stroke-width: 0.45; transform-box: fill-box; transform-origin: center; }
 & .cells { fill: none; stroke: var(--art-muted); stroke-width: 0.6; stroke-linejoin: round; }
-& .cover { fill: var(--art-paper); }
-& .laser { stroke: #e0302a; stroke-width: 1.2; }`,
-    // 0-0.8 still; engraving fades 0.8-1.2; the cover jumps over the tray at 1.25, where the
-    // engraving is back under it by 1.35; the scan moves down 1.4-5.0 and rests below to 6.
-    loop: `& .engraving { animation: name-tags-fade ${PERIOD}s linear infinite; }
-& .scan { animation: name-tags-scan ${PERIOD}s linear infinite; }
-@keyframes name-tags-fade { 0%, ${p(0.8)}% { opacity: 1; } ${p(1.2)}%, ${p(1.25)}% { opacity: 0; } ${p(1.35)}%, 100% { opacity: 1; } }
-@keyframes name-tags-scan { 0% { transform: none; } ${p(1.25)}% { transform: none; animation-timing-function: step-end; } ${p(1.26)}%, ${p(1.4)}% { transform: translateY(${-H - 4}px); } ${p(5)}%, 100% { transform: none; } }`,
+& .paper { fill: var(--art-paper); }
+& .laser-pass { opacity: 0; }
+& .laser { stroke: #c92926; stroke-width: 0.6; }
+& .contact { stroke: #ff5145; stroke-width: 2.8; stroke-linecap: round; filter: drop-shadow(0 0 1px #ff3228); }`,
+    loop: `& .layout { opacity: 1; }
+${motions}
+& .scan-window { animation: name-tags-reveal ${PERIOD}s linear infinite; }
+& .laser, & .contact { animation: name-tags-scan ${PERIOD}s linear infinite; }
+& .laser-pass { animation: name-tags-laser ${PERIOD}s linear infinite; }
+@keyframes name-tags-reveal { 0%, 43% { transform: translateY(${-H}px); } 83%, 100% { transform: translateY(0); } }
+@keyframes name-tags-scan { 0%, 43% { transform: translateY(0); } 83%, 100% { transform: translateY(${H}px); } }
+@keyframes name-tags-laser { 0%, 42% { opacity: 0; } 43%, 82% { opacity: 1; } 83%, 100% { opacity: 0; } }`,
   });
 }

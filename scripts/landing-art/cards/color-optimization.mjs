@@ -1,19 +1,23 @@
-// Palette Town: a recorded, real optimization trajectory, with fixed input circles and
-// moving candidate squares in the app's OKLab view. No optimizer runs in the card builder.
+// Palette Town: choose inputs, compare Lab/OKLab, adjust constraints, replay a real
+// optimization trajectory, then inspect Machado CVD views. No optimizer runs in this builder.
 // Provenance: 687995e20636732795822a1be8363d756032d30b, unchanged scientific-summary/example.json
 // (seed 2026, random search, 12 restarts × 160 iterations, 48 trajectory samples).
+// Search settings: hard L constraint width .65, a/b unrestricted, CVD-safe harmonic DE2000.
+// Soft constraint editing is shown before the hard settings are applied and search begins.
 // Regenerate in a checkout of that commit: optimizePalette(example.inputs, example.config,
 // {onProgress: p => runs.push(p)}); retain runs[11].trajectory. The final hex colors must
 // equal example.added. These are the winning restart's 31 actual retained states; the loop
 // plays them forward, holds the result, then restarts. It does not imply real-time duration.
+import { applyCvdHex } from '../../../color-optimization/core/cvd.js';
+import { computeBounds } from '../../../color-optimization/optimizer/bounds.js';
 import { crc32, deflateSync } from 'node:zlib';
 import { decodeColor, encodeColor, isInGamut, projectToGamut } from '../../../color-optimization/core/colorSpaces.js';
 import { contrastColor } from '../../../color-optimization/core/metrics.js';
 import { buildGamutProjectionBoundary, computeGamutExtent, smoothBoundary } from '../../../color-optimization/ui/gamutHull.js';
-import { H, W, art, esc, flipbook, num, polyline } from '../svg.mjs';
+import { art, esc, flipbook, num, polyline } from '../svg.mjs';
 
 const FIELD = 24;
-const PERIOD = 7;
+const PERIOD = 16;
 const INPUTS = ['#4477AA', '#CC6677'];
 const ADDED = ['#284B00', '#660073', '#18D700'];
 /** @type {{hex: string[], raw: {l: number, a: number, b: number}[]}[]} */
@@ -82,78 +86,100 @@ function png(n, rgb) {
 
 
 export async function build() {
-  const space = 'oklab', gamut = 'srgb';
-  if (JSON.stringify(TRACE.at(-1)?.hex) !== JSON.stringify(ADDED)) throw new Error('color-optimization: recorded trace does not reach its verified palette');
-  const range = computeGamutExtent(space, gamut, 1.1);
-  const maxA = Math.max(Math.abs(range.min.a), Math.abs(range.max.a));
-  const maxB = Math.max(Math.abs(range.min.b), Math.abs(range.max.b));
-  const side = 136, px = W - 10 - side, py = (H - side) / 2, half = side / 2;
-  const toXY = (/** @type {{a: number, b: number}} */ v) => [px + half + v.a / maxA * half, py + half - v.b / maxB * half];
-  const projected = TRACE.map((step) => step.raw.map((v) => projectToGamut(v, space, gamut, space)));
-  const inputs = INPUTS.map((hex) => projectToGamut(decodeColor(hex, space), space, gamut, space));
-  for (const v of [...inputs, ...projected.flat()]) {
-    if (![v.l, v.a, v.b].every(Number.isFinite) || Math.abs(v.a) > maxA || Math.abs(v.b) > maxB) throw new Error('color-optimization: a recorded color lies outside the app view');
-  }
-
-  const boundary = smoothBoundary(buildGamutProjectionBoundary(space, gamut, range, true, {l:'l', x:'a', y:'b'})
-    .map((/** @type {{a: number, b: number}} */ v) => {const [x,y] = toXY(v); return {x,y};}), 1);
-  const outline = polyline(boundary.filter((/** @type {unknown} */ _, /** @type {number} */ i) => i % 4 === 0)
-    .map((/** @type {{x: number, y: number}} */ {x,y}) => [x,y]), true);
-  const fieldL = range.min.l + 0.75 * (range.max.l - range.min.l);
-  const field = Array.from({length: FIELD}, (_, yi) => Array.from({length: FIELD}, (_, xi) => {
-    const v = {l: fieldL, a: ((xi + 0.5) / FIELD * 2 - 1) * maxA, b: (1 - (yi + 0.5) / FIELD * 2) * maxB};
-    const hex = encodeColor(isInGamut(v, space, gamut) ? v : projectToGamut(v, space, gamut, space), space);
-    return [1,3,5].map((i) => parseInt(hex.slice(i,i+2), 16));
-  }).flat());
-
-  const sw = {w:70, h:28, gap:6}, sx = [10,88], sy = py + half - (3 * sw.h + 2 * sw.gap - 14) / 2;
-  /** @param {string} hex @param {number} column @param {number} row */
-  const swatch = (hex, column, row) => {
-    const x = sx[column], y = sy + row * (sw.h + sw.gap);
-    return `<rect class="swatch" x="${x}" y="${num(y)}" width="${sw.w}" height="${sw.h}" rx="3" fill="${hex}"/><text class="hex" x="${x+sw.w-4}" y="${num(y+sw.h/2)}" fill="${contrastColor(hex)}">${esc(hex)}</text>`;
-  };
-  /** @param {{l:number, a:number, b:number}} v @param {string} hex @param {boolean} fixed */
-  const marker = (v, hex, fixed) => {
-    const [x,y] = toXY(v), l = Math.min(Math.max((v.l-range.min.l)/(range.max.l-range.min.l),0),1), size=(6+12*l)*0.6;
-    const paint = `fill="${hex}" stroke="${contrastColor(hex)}"`;
-    return fixed ? `<circle class="marker" cx="${num(x)}" cy="${num(y)}" r="${num(size/2)}" ${paint}/>`
-      : `<rect class="marker" x="${num(x-size/2)}" y="${num(y-size/2)}" width="${num(size)}" height="${num(size)}" ${paint}/>`;
-  };
-  const frames = TRACE.map((step,k) => {
-    const trails = step.hex.map((_,i) => `<path class="trail" d="${polyline(projected.slice(0,k+1).map((row)=>toXY(row[i])))}" stroke="${ADDED[i]}"/>`).join('');
-    const candidates = projected[k].map((v,i)=>({v,i})).sort((a,b)=>b.v.l-a.v.l).map(({v,i})=>marker(v,step.hex[i],false)).join('');
-    return `<g data-step="${k}">${trails}${step.hex.map((hex,i)=>swatch(hex,1,i)).join('')}${candidates}</g>`;
+  if (JSON.stringify(TRACE.at(-1)?.hex) !== JSON.stringify(ADDED)) throw new Error('color-optimization: trace endpoint differs from verified palette');
+  const gamut = 'srgb', side = 118, px = 192, py = 31;
+  // All displayed projections and simulations use the app's own color transforms.
+  const views = ['lab', 'oklab'].map(space => {
+    const range = computeGamutExtent(space, gamut, 1.1);
+    const maxA = Math.max(Math.abs(range.min.a), Math.abs(range.max.a));
+    const maxB = Math.max(Math.abs(range.min.b), Math.abs(range.max.b));
+    const toXY = (/** @type {{a:number,b:number}} */ v) => [px + side/2 + v.a/maxA*side/2, py + side/2 - v.b/maxB*side/2];
+    const boundary = smoothBoundary(buildGamutProjectionBoundary(space, gamut, range, true, {l:'l',x:'a',y:'b'})
+      .map((/** @type {{a:number,b:number}} */ v) => {const [x,y]=toXY(v);return {x,y};}),1);
+    const outline = polyline(boundary.filter((/** @type {unknown} */ _,/** @type {number} */ i)=>i%4===0)
+      .map((/** @type {{x:number,y:number}} */ v)=>[v.x,v.y]),true);
+    const field = Array.from({length:FIELD},(_,y)=>Array.from({length:FIELD},(_,x)=>{
+      const v={l:range.min.l+.75*(range.max.l-range.min.l),a:((x+.5)/FIELD*2-1)*maxA,b:(1-(y+.5)/FIELD*2)*maxB};
+      const hex=encodeColor(isInGamut(v,space,gamut)?v:projectToGamut(v,space,gamut,space),space);
+      return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
+    }).flat());
+    return {space,range,toXY,outline,field:png(FIELD,field)};
   });
-  // Keep the finished palette as the still image, and pause there across the loop's seam.
-  const last = frames.at(-1);
-  if (!last) throw new Error('color-optimization: empty recorded trajectory');
-  const book = flipbook('color-optimization', [...Array(4).fill(last), ...frames, ...Array(6).fill(last)], PERIOD);
-  const headY=sy-7;
-  const heads = `<circle cx="${sx[0]+2.6}" cy="${num(headY)}" r="2.6"/><text x="${sx[0]+8}" y="${num(headY)}">input</text>`
-    + `<rect x="${sx[1]}" y="${num(headY-2.5)}" width="5" height="5"/><text x="${sx[1]+8}" y="${num(headY)}">optimize</text>`;
-  let grid='';
-  for(let k=1;k<8;k++)grid+=`M${num(px+k*side/8)} ${py}v${side}M${px} ${num(py+k*side/8)}h${side}`;
-  return art({
-    name:'color-optimization', period:PERIOD, frames:book.frames,
-    defs:`<clipPath id="color-optimization-gamut"><path d="${outline}"/></clipPath>`,
-    body:`
-<g class="heads">${heads}</g>
-<rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><path class="grid" d="${grid}"/>
-<image class="field" href="${png(FIELD,field)}" x="${px}" y="${py}" width="${side}" height="${side}" preserveAspectRatio="none" clip-path="url(#color-optimization-gamut)"/>
-<path class="outline" d="${outline}"/>
-${INPUTS.map((hex,i)=>swatch(hex,0,i)+marker(inputs[i],hex,true)).join('')}
-${book.body}`,
+  const bounds = (/** @type {number} */ width) => computeBounds(INPUTS.map(hex=>decodeColor(hex,'oklab')),'oklab',{
+    constrain:true,widths:[width,0,0],constraintMode:{l:'hard',a:'hard',b:'hard'},constraintTopology:'contiguous',
+  }).boundsL;
+  // The final recorded search uses hard lightness constraints; preliminary soft settings
+  // are edits before Optimize, never relabelled as the configuration of a computed result.
+  const simulationTypes=['none','deutan','protan','tritan'];
+  const simulations=simulationTypes.map(type=>[...INPUTS,...ADDED].map(hex=>applyCvdHex(hex,type,1,'machado2009')));
+  const expected=['#546FA9','#948D75','#4A4109','#193C71','#CAB530'];
+  if (JSON.stringify(simulations[1])!==JSON.stringify(expected)) throw new Error('color-optimization: CVD transform changed from recorded example');
+  /** @param {number} view @param {string[]} hexes @param {number} fixed */
+  const markers=(view,hexes,fixed)=>hexes.map((hex,i)=>{
+    const v=/** @type {{l:number,a:number,b:number}} */ (decodeColor(hex,views[view].space)),[x,y]=views[view].toXY(v);
+    const paint=`fill="${hex}" stroke="${contrastColor(hex)}" stroke-width="1"`;
+    return i<fixed?`<circle cx="${num(x)}" cy="${num(y)}" r="4.2" ${paint}/>`:`<rect x="${num(x-4)}" y="${num(y-4)}" width="8" height="8" ${paint}/>`;
+  }).join('');
+  /** @param {string[]} colors @param {number} count */
+  const swatches=(colors,count)=>colors.slice(0,count).map((hex,i)=>{
+    const x=i<2?9:86,y=48+(i<2?i:i-2)*28;
+    return `<rect x="${x}" y="${y}" width="67" height="23" rx="3" fill="${hex}"/><text class="hex" x="${x+33.5}" y="${y+12}" fill="${contrastColor(hex)}">${hex}</text>`;
+  }).join('');
+  /** @param {{view?:number, colors?:string[], count?:number, title:string, width?:number, soft?:boolean, trail?:number, click?:number[], cvd?:number}} options */
+  const scene=({view=1,colors=[...INPUTS,...ADDED],count=5,title,width=.65,soft=false,trail=-1,click,cvd=0})=>{
+    const [lo,hi]=bounds(width);
+    const tab=(/** @type {string} */ label,/** @type {number} */ x,/** @type {boolean} */ active)=>`<rect class="tab ${active?'active':''}" x="${x}" y="5" width="65" height="18" rx="4"/><text class="tab-label" x="${x+32.5}" y="14">${label}</text>`;
+    let paths='';
+    if(trail>=0) paths=ADDED.map((hex,i)=>`<path class="trail" stroke="${hex}" d="${polyline(TRACE.slice(0,trail+1).map(st=>views[1].toXY(st.raw[i])))}"/>`).join('');
+    return `<g data-stage="${esc(title)}">${tab('Lab',9,view===0)}${tab('OKLab',79,view===1)}
+<text class="small" x="251" y="14">${['Original','Deutan','Protan','Tritan'][cvd]}</text>
+<use href="#color-optimization-view-${view}"/>
+<text class="small" x="42" y="37">Input</text><text class="small" x="120" y="37">${trail>=0?'Optimize':'Added'}</text>
+${swatches(colors,count)}${paths}${markers(view,colors.slice(0,count),Math.min(count,2))}
+<path class="track" d="M177 31V149"/><path class="range ${soft?'soft':''}" d="M177 ${num(149-hi*118)}V${num(149-lo*118)}"/>
+<circle class="handle" cx="177" cy="${num(149-hi*118)}" r="3"/><circle class="handle" cx="177" cy="${num(149-lo*118)}" r="3"/>
+<text class="setting" x="9" y="143">L ${soft?'soft':'hard'} · ${num(width,2)}</text><text class="setting" x="9" y="156">a / b unrestricted</text>
+<text class="caption" x="160" y="172">${title}</text>
+${click?`<circle class="click" cx="${num(click[0])}" cy="${num(click[1])}" r="7"/><path class="cursor" d="M${num(click[0])} ${num(click[1])}l2 13 3-4 5 1Z"/>`:''}</g>`;
+  };
+  /** @type {string[]} */
+  const frames=[];
+  const hold=(/** @type {string} */ frame,/** @type {number} */ n)=>{for(let i=0;i<n;i++)frames.push(frame);};
+  hold(scene({title:'Choose input colours',count:0}),3);
+  const first=views[1].toXY(/** @type {{a:number,b:number}} */ (decodeColor(INPUTS[0],'oklab')));
+  hold(scene({title:'Choose input colours',count:1,click:first}),4);
+  hold(scene({title:'Choose input colours',count:2,click:views[1].toXY(/** @type {{a:number,b:number}} */ (decodeColor(INPUTS[1],'oklab')))}),4);
+  hold(scene({title:'Explore colour spaces',count:2,view:0,click:[41,14]}),5);
+  hold(scene({title:'Explore colour spaces',count:2,click:[111,14]}),4);
+  for(let i=0;i<7;i++) hold(scene({title:'Adjust soft constraints',count:2,width:.2+i*.075,soft:true,click:[177,149-bounds(.2+i*.075)[1]*118]}),1);
+  hold(scene({title:'Set hard lightness limits',count:2,click:[31,143]}),5);
+  for(let i=0;i<TRACE.length;i++) hold(scene({title:'Optimize · best of 12 starts',colors:[...INPUTS,...TRACE[i].hex],trail:i}),1);
+  hold(scene({title:'Compare colour vision',cvd:0}),4);
+  for(let i=1;i<4;i++) hold(scene({title:'Compare colour vision',colors:simulations[i],cvd:i,click:[251,14]}),7);
+  hold(scene({title:'Optimized palette'}),6);
+  // The authored still is the verified final palette; only started motion reveals the workflow.
+  const book=flipbook('color-optimization',frames,PERIOD);
+  return art({name:'color-optimization',period:PERIOD,frames:book.frames,
+    defs:views.map((v,i)=>`<clipPath id="color-optimization-clip-${i}"><path d="${v.outline}"/></clipPath><g id="color-optimization-view-${i}"><rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><image href="${v.field}" x="${px}" y="${py}" width="${side}" height="${side}" clip-path="url(#color-optimization-clip-${i})"/><path class="outline" d="${v.outline}"/></g>`).join(''),
+    body:`<g class="finished">${scene({title:'Optimized palette'})}</g><g class="process">${book.body}</g>`,
     css:`${book.css}
-& text {font-family:ui-sans-serif,system-ui,sans-serif;dominant-baseline:central;}
-& .heads text {fill:var(--art-muted);font-size:8px;}
-& .heads circle, & .heads rect {fill:none;stroke:var(--art-muted);stroke-width:0.9;}
-& .swatch {stroke:var(--art-ink);stroke-opacity:0.15;stroke-width:0.8;}
-& .hex {font-size:8.5px;font-weight:600;text-anchor:end;}
-& .plot {fill:var(--surface);stroke:var(--art-line);stroke-width:1;}
-& .grid {fill:none;stroke:var(--art-line);stroke-width:0.5;}
-& .outline {fill:none;stroke:var(--art-ink);stroke-width:1.2;stroke-linejoin:round;}
-& .marker {stroke-width:0.8;}
-& .trail {fill:none;stroke-width:0.9;stroke-opacity:0.7;stroke-linecap:round;stroke-linejoin:round;}`,
-    loop:book.loop,
+& .process { display:none; }
+& text { font-family:ui-sans-serif,system-ui,sans-serif;dominant-baseline:central; }
+& .small, & .tab-label { font-size:11px;fill:var(--art-ink);text-anchor:middle; }
+& .hex { font-size:10px;font-weight:600;text-anchor:middle; }
+& .caption { font-size:12px;font-weight:600;fill:var(--art-ink);text-anchor:middle; }
+& .setting { font-size:10px;fill:var(--art-muted); }
+& .tab { fill:var(--art-paper);stroke:var(--art-line); }
+& .tab.active { fill:var(--art-line);stroke:var(--art-muted); }
+& .plot { fill:var(--surface);stroke:var(--art-line); }
+& .outline { fill:none;stroke:var(--art-muted);stroke-width:1; }
+& .trail { fill:none;stroke-width:1;stroke-opacity:.6; }
+& .track { fill:none;stroke:var(--art-line);stroke-width:3; }
+& .range { fill:none;stroke:var(--art-ink);stroke-width:3; }
+& .range.soft { stroke:#b080d4;stroke-dasharray:3 2; }
+& .handle { fill:var(--art-paper);stroke:var(--art-ink); }
+& .click { fill:none;stroke:#d46651;stroke-width:1.2; }
+& .cursor { fill:var(--art-ink);stroke:var(--art-paper);stroke-width:.8; }`,
+    loop:`& .finished { display:none; } & .process { display:inline; }\n${book.loop}`,
   });
 }
