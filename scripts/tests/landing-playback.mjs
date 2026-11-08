@@ -193,17 +193,20 @@ test('autoCHAIR turns at agenda checkpoints, pauses, resumes and releases for re
     await page.waitForTimeout(150);
     assert.equal(await sprite.getAttribute('data-frame'), frame, 'paused frame is retained');
     await art.hover();
-    await page.waitForFunction((/** @type {string} */ x) => {
+    // Snapshot the clock in the same browser callback that observes the resumed
+    // frame; a later protocol round trip may outlast this short turn.
+    const resumed = await page.waitForFunction((/** @type {string} */ x) => {
       const sprite = document.querySelector('.autochair-frames');
-      return sprite?.parentElement?.hasAttribute('data-ready') && sprite.getAttribute('data-frame') !== x;
-    }, frame);
-    const phase = await art.evaluate((/** @type {any} */ el) => {
-      const clock = el.querySelector('.marker').getAnimations()[0];
+      const host = sprite?.parentElement;
+      if (!sprite || !host?.hasAttribute('data-ready') || sprite.getAttribute('data-frame') === x) return false;
+      const clock = document.querySelector('[data-art="agendamatic"] .marker')?.getAnimations()[0];
+      if (!clock?.effect) throw new Error('autoCHAIR marker has no animation clock');
       const time = Number(clock.currentTime)/1000, period = Number(clock.effect.getTiming().duration)/1000;
-      const checkpoints = el.querySelector('.logo-turn').getAttribute('data-checkpoints').split(',').map(Number);
-      const latest = checkpoints.filter((/** @type {number} */ t) => t <= time % period).at(-1);
-      return time % period - latest;
-    });
+      const checkpoints = (host.getAttribute('data-checkpoints') ?? '').split(',').map(Number);
+      const latest = checkpoints.filter(t => t <= time % period).at(-1);
+      return { phase: time % period - (latest ?? Infinity) };
+    }, frame);
+    const { phase } = await resumed.jsonValue();
     assert.ok(phase >= 0 && phase < .8, 'turn occurs immediately after an agenda checkpoint');
     await page.waitForFunction(() => !document.querySelector('.logo-turn')?.hasAttribute('data-ready'));
     const resting = await sprite.getAttribute('data-frame');
