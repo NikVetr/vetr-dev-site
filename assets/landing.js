@@ -11,9 +11,18 @@ import { mountMosaic } from '../shared/mosaic.js';
 // the CSS animations attached; removing data-playing pauses them at their current time.
 // A scripted canvas player keeps its current frame too. Both resume on the next interaction.
 // Players load on first play, before their matching CSS clocks start.
-// Touch never plays (a tap opens the tool), and nothing plays under prefers-reduced-motion.
+// On phones/touch screens, the card nearest the viewport centre plays automatically.
+// The compact bar can pause all previews; reduced motion always shows authored stills.
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const mobile = matchMedia('(max-width: 47.99rem), (hover: none) and (pointer: coarse)');
+const motionControl = document.querySelector('#preview-motion');
+if (!(motionControl instanceof HTMLButtonElement)) throw new Error('Missing preview motion control');
+const motionButton = motionControl;
+let enabled = true;
+try { enabled = localStorage.getItem('vetr-preview-motion') !== 'off'; } catch { /* Storage may be unavailable. */ }
+let pageActive = true;
+const canPlay = () => enabled && !reducedMotion.matches && pageActive && !document.hidden;
 
 /** @param {HTMLElement} art */
 async function load(art) {
@@ -30,14 +39,14 @@ const players = new WeakMap();
 
 /** Starts the picture's loop: CSS alone, or with its script once that is ready. @param {HTMLElement} art */
 async function start(art) {
-  if (reducedMotion.matches || !wanted.has(art)) return;
+  if (!canPlay() || !wanted.has(art)) return;
   const svg = art.querySelector('svg');
   if (!svg) return;   // it starts when it loads
   const name = svg.dataset.player;
   if (!name) { art.dataset.started = ''; art.dataset.playing = ''; return; }
   const player = await import(`./players/${name}.js`);
   const plan = await player.prepare();
-  if (reducedMotion.matches || !wanted.has(art)) return;
+  if (!canPlay() || !wanted.has(art)) return;
   art.dataset.started = '';
   art.dataset.playing = '';
   let controller = players.get(art);
@@ -71,39 +80,74 @@ const nearViewport = new IntersectionObserver((entries) => {
   }
 }, { rootMargin: '50% 0px' });
 
-for (const card of document.querySelectorAll('.project-card')) {
-  const art = /** @type {HTMLElement} */ (card.querySelector('.card-art'));
-  nearViewport.observe(art);
-  let hovered = false, focused = false;
-  const update = () => {
-    if (reducedMotion.matches || !(hovered || focused)) { stop(art); return; }
-    if (wanted.has(art)) return;
-    wanted.add(art);
-    start(art);
-  };
-  card.addEventListener('pointerenter', (event) => { hovered = /** @type {PointerEvent} */ (event).pointerType !== 'touch'; update(); });
-  card.addEventListener('pointerleave', () => { hovered = false; update(); });
-  card.addEventListener('focus', () => { focused = card.matches(':focus-visible'); update(); });
-  card.addEventListener('blur', () => { focused = false; update(); });
-}
-// Cancel pending starts as well as active players when the preference changes.
-reducedMotion.addEventListener('change', () => {
-  if (reducedMotion.matches) {
-    for (const art of document.querySelectorAll('.card-art')) reset(/** @type {HTMLElement} */ (art));
+/** Each interaction contributes intent; mobile playback chooses exactly one card. */
+const cards = [...document.querySelectorAll('.project-card')].map(card => ({
+  card, art: /** @type {HTMLElement} */ (card.querySelector('.card-art')), hovered: false, focused: false,
+}));
+/** @type {HTMLElement | null} */
+let centred = null;
+function updatePlayback() {
+  for (const state of cards) {
+    const active = mobile.matches ? state.art === centred : state.hovered || state.focused;
+    if (!canPlay() || !active) { stop(state.art); continue; }
+    if (!wanted.has(state.art)) { wanted.add(state.art); start(state.art); }
   }
+  motionButton.setAttribute('aria-pressed', String(enabled && !reducedMotion.matches));
+  motionButton.disabled = reducedMotion.matches;
+  motionButton.textContent = reducedMotion.matches ? 'Reduced motion' : `Animations ${enabled ? 'on' : 'off'}`;
+  motionButton.title = reducedMotion.matches ? 'Motion is reduced in your device settings' : 'Play or pause panel animations';
+}
+for (const state of cards) {
+  nearViewport.observe(state.art);
+  state.card.addEventListener('pointerenter', event => { state.hovered = /** @type {PointerEvent} */ (event).pointerType !== 'touch'; updatePlayback(); });
+  state.card.addEventListener('pointerleave', () => { state.hovered = false; updatePlayback(); });
+  state.card.addEventListener('focus', () => { state.focused = state.card.matches(':focus-visible'); updatePlayback(); });
+  state.card.addEventListener('blur', () => { state.focused = false; updatePlayback(); });
+}
+// Measure only once per frame, including layout changes after lazy pictures/fonts arrive.
+let selectionFrame = 0;
+function selectCentre() {
+  selectionFrame = 0;
+  centred = null;
+  if (mobile.matches) {
+    const top = document.querySelector('.mobile-bar')?.getBoundingClientRect().bottom ?? 0;
+    const cy = (top + innerHeight) / 2, cx = innerWidth / 2;
+    let closest = Infinity;
+    for (const { card, art } of cards) {
+      const r = card.getBoundingClientRect();
+      if (r.bottom <= top || r.top >= innerHeight || r.right <= 0 || r.left >= innerWidth) continue;
+      const distance = Math.hypot((r.top + r.bottom) / 2 - cy, (r.left + r.right) / 2 - cx);
+      if (distance < closest) { closest = distance; centred = art; }
+    }
+  }
+  updatePlayback();
+}
+function scheduleSelection() {
+  if (!selectionFrame) selectionFrame = requestAnimationFrame(selectCentre);
+}
+addEventListener('scroll', scheduleSelection, { passive: true });
+addEventListener('resize', scheduleSelection);
+mobile.addEventListener('change', scheduleSelection);
+motionButton.addEventListener('click', () => {
+  enabled = !enabled;
+  try { localStorage.setItem('vetr-preview-motion', enabled ? 'on' : 'off'); } catch { /* Keep the in-memory choice. */ }
+  updatePlayback();
 });
-// Back/forward navigation keeps the last frame without running an unseen loop.
-addEventListener('pagehide', () => {
-  for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
+reducedMotion.addEventListener('change', () => {
+  if (reducedMotion.matches) for (const { art } of cards) reset(art);
+  scheduleSelection();
 });
-addEventListener('pageshow', () => {
-  for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
-});
+// Back/forward and background tabs retain their frame without running unseen loops.
+addEventListener('pagehide', () => { pageActive = false; updatePlayback(); });
+addEventListener('pageshow', () => { pageActive = true; scheduleSelection(); });
+document.addEventListener('visibilitychange', () => { updatePlayback(); scheduleSelection(); });
+
+updatePlayback();
 
 // Shared rectangular packing keeps the visual order, keyboard order and lower edge aligned.
 const wall = document.querySelector('#projects > .grid');
 if (!(wall instanceof HTMLElement)) throw new Error('Missing landing mosaic');
-mountMosaic(wall, { layouts: landingLayouts, onLayout: () => drawClusters(wall) });
+mountMosaic(wall, { layouts: landingLayouts, onLayout: () => { drawClusters(wall); scheduleSelection(); } });
 
 // The browser's toolbar colour follows the page's theme, which may be the visitor's choice
 // rather than the system's.

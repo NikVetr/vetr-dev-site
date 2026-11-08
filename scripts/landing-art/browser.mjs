@@ -24,9 +24,9 @@ function playwright() {
  * Opens `path` (relative to the site root, e.g. "agendamatic/") and returns the page and a
  * close() that stops the browser and the server.
  * @param {string} path
- * @param {{ width?: number, height?: number, scheme?: 'light' | 'dark', engine?: 'chromium' | 'webkit' | 'firefox' }} [options]
+ * @param {{ width?: number, height?: number, scheme?: 'light' | 'dark', engine?: 'chromium' | 'webkit' | 'firefox', touch?: boolean }} [options]
  */
-export async function openPage(path, { width = 1440, height = 900, scheme = 'light', engine = 'chromium' } = {}) {
+export async function openPage(path, { width = 1440, height = 900, scheme = 'light', engine = 'chromium', touch = false } = {}) {
   if (!['chromium', 'webkit', 'firefox'].includes(engine)) throw new Error(`Unsupported browser engine: ${engine}`);
   const server = createServer((req, res) => {
     let file = normalize(join(ROOT, decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname)));
@@ -46,7 +46,7 @@ export async function openPage(path, { width = 1440, height = 900, scheme = 'lig
     server.close();
     throw error;
   }
-  const context = await browser.newContext({ viewport: { width, height }, colorScheme: scheme });
+  const context = await browser.newContext({ viewport: { width, height }, colorScheme: scheme, hasTouch: touch });
   // The site's analytics is not needed to draw anything.
   await context.route(/googletagmanager|google-analytics/, (/** @type {any} */ route) => route.abort());
   const page = await context.newPage();

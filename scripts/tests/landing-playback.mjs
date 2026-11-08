@@ -65,7 +65,7 @@ test('canvas previews retain their image on exit, resize and resume', async () =
   } finally { await browser.close(); }
 });
 
-test('keyboard blur pauses; reduced motion resets; touch does not start previews', async () => {
+test('desktop keyboard blur pauses; reduced motion resets; touch entry does not start previews', async () => {
   const browser = await openPage('', { engine });
   const { page, errors } = browser;
   try {
@@ -89,6 +89,49 @@ test('keyboard blur pauses; reduced motion resets; touch does not start previews
     await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
     await card.dispatchEvent('pointerenter', { pointerType: 'touch' });
     assert.equal(await art.getAttribute('data-playing'), null);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+
+test('mobile centre playback, sticky controls, saved pause and reduced motion', async () => {
+  const browser = await openPage('', { engine, width: 390, height: 844, touch: true });
+  const { page, errors } = browser;
+  try {
+    const button = page.locator('#preview-motion');
+    const playing = page.locator('[data-playing]');
+    await page.waitForFunction(() => document.querySelectorAll('[data-playing]').length === 1);
+    const centre = async (/** @type {string} */ name) => {
+      await page.locator(`[data-art="${name}"]`).evaluate((/** @type {HTMLElement} */ el) => el.closest('.project-card')?.scrollIntoView({block: 'center'}));
+      await page.waitForFunction((/** @type {string} */ n) => document.querySelector(`[data-art="${n}"]`)?.hasAttribute('data-playing'), name);
+      assert.equal(await playing.count(), 1, 'only the central panel plays');
+    };
+    await centre('signature');
+    const art = page.locator('[data-art="signature"]');
+    await page.waitForTimeout(180);
+    const before = await times(art);
+    assert.equal(Math.round((await page.locator('.mobile-bar').boundingBox()).y), 0, 'bar stays at viewport top');
+    await button.tap(); assert.ok(await waitPaused(art));
+    assert.equal(await button.getAttribute('aria-pressed'), 'false');
+    const paused = await times(art);
+    await page.waitForTimeout(120); assert.deepEqual(await times(art), paused);
+    await button.tap(); await page.waitForTimeout(120);
+    assert.ok((await times(art))[0] > before[0], 'toggle resumes instead of resetting');
+    await centre('raster-to-vector'); assert.ok(await waitPaused(art));
+    const left = await times(art); await page.waitForTimeout(120); assert.deepEqual(await times(art), left);
+    await centre('signature'); await page.waitForTimeout(120); assert.ok((await times(art))[0] > left[0]);
+    await button.tap(); await page.reload();
+    assert.equal(await button.getAttribute('aria-pressed'), 'false', 'pause persists through reload');
+    assert.equal(await playing.count(), 0);
+    await button.tap(); await page.waitForFunction(() => document.querySelector('[data-playing]'));
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.waitForFunction(() => !document.querySelector('[data-started]'));
+    assert.ok(await button.isDisabled()); assert.equal(await button.textContent(), 'Reduced motion');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.waitForFunction(() => document.querySelectorAll('[data-playing]').length === 1);
+    await page.setViewportSize({width: 844, height: 390});
+    await page.waitForTimeout(150);
+    assert.equal(await playing.count(), 1, 'touch landscape keeps a single active panel');
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });

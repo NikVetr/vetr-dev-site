@@ -91,6 +91,27 @@ body {
 .skip-link:focus-visible { translate: none; outline: 2px solid var(--primary); outline-offset: 2px; }
 #projects:focus { outline: none; }
 
+/* Compact collection navigation stays reachable while scrolling on touch screens. */
+.mobile-bar { display: none; }
+@media (max-width: 47.99rem), (hover: none) and (pointer: coarse) {
+  html { scroll-padding-top: calc(3rem + env(safe-area-inset-top)); }
+  .mobile-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    position: sticky; top: 0; z-index: 10;
+    padding: env(safe-area-inset-top) var(--gutter-right) 0 var(--gutter-left);
+    background: var(--bg); border-bottom: 1px solid var(--border);
+  }
+  .mobile-bar a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 700; padding-block: 0.5rem; }
+  .mobile-bar button {
+    min-height: 44px; padding: 0.35rem 0.5rem; border: 0;
+    background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; cursor: pointer;
+  }
+  .mobile-bar button[aria-pressed="false"], .mobile-bar button:disabled { color: var(--muted); }
+  .mobile-bar button:disabled { cursor: default; }
+  .mobile-bar :focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 3px; }
+  .masthead h1 { display: none; }
+}
+
 /* ---------- Header: name and description ---------- */
 .site-header {
   background: var(--bg);
