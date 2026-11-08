@@ -18,7 +18,7 @@
     <div class="container header-row tool-header-row">
       <div>
         <h1>Helix and Braid</h1>
-        <p class="tagline">Draw a DNA double helix or a braid of coloured strands as clean SVG, for figures, logos, laser cutting and decoration. Shape it with the controls, then download it filled, as cutting outlines, as centrelines or as a PNG.</p>
+        <p class="tagline">Draw DNA helices and braided strands. Adjust the shape, then export SVG, cutting outlines, pen paths or PNG.</p>
       </div>
       <div class="tool-header-actions">
         <nav class="tool-nav" aria-label="Tool navigation">
@@ -33,9 +33,10 @@
   </header>
 
   <main class="container layout">
-    <section class="card" aria-labelledby="shape-heading">
+    <section class="card shape-card" aria-labelledby="shape-heading">
       <div class="card-head">
         <h2 id="shape-heading">Shape</h2>
+        <a class="results-link" href="#result-heading">Drawing ↓</a>
       </div>
       <fieldset class="segmented" aria-label="Draw">
         <label><input type="radio" name="mode" value="helix" checked> Helix</label>
@@ -43,12 +44,12 @@
       </fieldset>
       <h3 class="first">Presets</h3>
       <div id="presets" class="toolbar presets"></div>
-      <p class="muted small">A preset sets every helix or braid setting below; the size and lines stay as they are.</p>
+      <p class="muted small preset-hint">Presets replace the shape settings; size and lines stay unchanged.</p>
     </section>
 
     <section class="card results-card" aria-labelledby="result-heading">
       <div class="card-head">
-        <h2 id="result-heading">Drawing</h2>
+        <h2 id="result-heading" tabindex="-1">Drawing</h2>
         <span id="status" class="muted" role="status"></span>
       </div>
       <fieldset class="segmented" aria-label="Preview as">
@@ -62,27 +63,34 @@
         <figure id="preview" class="preview stale-dim" role="img" aria-label="The drawing"></figure>
         <p id="summary" class="muted small"></p>
       </div>
-      <h3>Download</h3>
-      <div class="toolbar">
-        <button id="export-svg" type="button" class="primary">SVG</button>
-        <button id="export-outline" type="button">Outline SVG (laser)</button>
-        <button id="export-strokes" type="button">Strokes SVG (plotter)</button>
+      <div class="downloads" role="group" aria-label="Download">
+        <div class="toolbar">
+          <button id="export-svg" type="button" class="primary">SVG</button>
+          <button id="export-outline" type="button">Outline SVG (laser)</button>
+          <button id="export-strokes" type="button">Strokes SVG (plotter)</button>
+        </div>
+        <div class="toolbar">
+          <span class="input-row png-row">
+            <button id="export-png" type="button">PNG</button>
+            <label class="inline-label">width
+              <input id="png-width" type="number" min="16" max="10000" step="100" value="2000" aria-label="PNG width in pixels">
+              px
+            </label>
+          </span>
+          <button id="export-request" type="button">Request JSON</button>
+        </div>
       </div>
-      <div class="toolbar">
-        <span class="input-row png-row">
-          <button id="export-png" type="button">PNG</button>
-          <label class="inline-label">width
-            <input id="png-width" type="number" min="16" max="10000" step="100" value="2000" aria-label="PNG width in pixels">
-            px
-          </label>
-        </span>
-        <button id="export-request" type="button">Request JSON</button>
-      </div>
-      <p class="muted small">SVG: the drawing as shown, a path per piece. Outline: the visible edges as hairlines, for a laser or vinyl cutter. Strokes: the centrelines, for a pen plotter. All three share one canvas, so they line up. PNG: the filled drawing.</p>
+      <details class="download-help">
+        <summary>About the download formats</summary>
+        <p>SVG: the drawing as shown, a path per piece. Outline: the visible edges as hairlines, for a laser or vinyl cutter. Strokes: the centrelines, for a pen plotter. All three share one canvas, so they line up. PNG: the filled drawing.</p>
+      </details>
     </section>
 
     <section class="card" aria-labelledby="helix-heading" data-mode="helix">
-      <h2 id="helix-heading">Helix</h2>
+      <div class="card-head">
+        <h2 id="helix-heading">Helix</h2>
+        <a class="results-link" href="#result-heading">Drawing ↑</a>
+      </div>
       <div class="settings">
         <label>Turns<span class="pair"><input type="range" data-path="helix.turns" min="0.25" max="10" step="0.05" aria-label="Turns"><input type="number" data-path="helix.turns" min="0.01" max="100" step="0.05" aria-label="Turns, exact"></span></label>
         <label>Rotation (° clockwise)<span class="pair"><input type="range" data-path="helix.rotation" min="-180" max="180" step="1" aria-label="Rotation"><input type="number" data-path="helix.rotation" step="1" aria-label="Rotation, exact"></span></label>
@@ -106,7 +114,10 @@
     </section>
 
     <section class="card" aria-labelledby="braid-heading" data-mode="braid" hidden>
-      <h2 id="braid-heading">Braid</h2>
+      <div class="card-head">
+        <h2 id="braid-heading">Braid</h2>
+        <a class="results-link" href="#result-heading">Drawing ↑</a>
+      </div>
       <div class="settings">
         <label>Strands<span class="pair"><input type="range" id="strand-count-range" min="1" max="12" step="1" aria-label="Strands"><input type="number" id="strand-count" min="1" max="24" step="1" aria-label="Strands, exact"></span></label>
         <label>Twists<span class="pair"><input type="range" data-path="braid.twists" min="-10" max="10" step="0.25" aria-label="Twists"><input type="number" data-path="braid.twists" step="0.25" aria-label="Twists, exact"></span></label>
@@ -120,7 +131,10 @@
     </section>
 
     <section class="card" aria-labelledby="details-heading" data-mode="helix">
-      <h2 id="details-heading">Helix details</h2>
+      <div class="card-head">
+        <h2 id="details-heading">Helix details</h2>
+        <a class="results-link" href="#result-heading">Drawing ↑</a>
+      </div>
       <h3 class="first">Strands</h3>
       <div class="settings">
         <label>Start angle (°)<span class="pair"><input type="range" data-path="helix.startAngle" min="-180" max="180" step="1" aria-label="Start angle"><input type="number" data-path="helix.startAngle" step="1" aria-label="Start angle, exact"></span></label>
@@ -156,7 +170,10 @@
     </section>
 
     <section class="card" aria-labelledby="output-heading">
-      <h2 id="output-heading">Size and lines</h2>
+      <div class="card-head">
+        <h2 id="output-heading">Size and lines</h2>
+        <a class="results-link" href="#result-heading">Drawing ↑</a>
+      </div>
       <div class="settings">
         <label>Unit
           <select data-path="output.unit">

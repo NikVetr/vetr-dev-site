@@ -96,3 +96,35 @@ test('fits a phone screen without sideways scrolling, the drawing before the set
   const settings = await page.locator('#braid-heading').boundingBox();
   expect(drawing && settings && drawing.width <= 390 && drawing.y < settings.y).toBe(true);
 });
+
+test('desktop keeps drawing and downloads visible while editing deep settings', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 });
+  await open(page);
+  for (const selector of ['#preview', '#export-svg', '#export-png', '#export-request']) {
+    await expect(page.locator(selector)).toBeInViewport({ ratio: 1 });
+  }
+  const baseline = await page.evaluate(() => /** @type {any} */ (window).Helix.exportSvgText());
+  await page.locator('input[type="number"][data-path="helix.frequency"]').scrollIntoViewIfNeeded();
+  await expect(page.locator('#preview')).toBeInViewport({ ratio: 1 });
+  await expect(page.locator('#export-svg')).toBeInViewport({ ratio: 1 });
+  await page.locator('.download-help summary').click();
+  await page.locator('.download-help p').scrollIntoViewIfNeeded();
+  await expect(page.locator('.download-help p')).toBeInViewport({ ratio: 1 });
+  expect(await page.evaluate(() => /** @type {any} */ (window).Helix.exportSvgText())).toBe(baseline);
+  expect(await overflow(page)).toBe(0);
+});
+
+test('phone and landscape can return from settings to the complete drawing by keyboard', async ({ page }) => {
+  await open(page);
+  for (const viewport of [{ width: 390, height: 844 }, { width: 844, height: 390 }]) {
+    await page.setViewportSize(viewport);
+    const jump = page.locator('[aria-labelledby="details-heading"] .results-link');
+    await jump.focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#result-heading')).toBeFocused();
+    await expect(page.locator('#preview')).toBeInViewport({ ratio: 1 });
+    await page.keyboard.press('Tab');
+    await expect(page.locator('input[name="style"][value="filled"]')).toBeFocused();
+    expect(await overflow(page)).toBe(0);
+  }
+});
