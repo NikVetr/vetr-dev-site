@@ -17,7 +17,7 @@ test('CSS previews keep their frame on exit and resume their original clocks', a
   const { page, errors } = browser;
   try {
     // Both continuously interpolated and stacked-frame animations are covered.
-    for (const name of ['b64', 'seating', 'raster-to-vector', 'text-in-image', 'message-collage', 'photomosaic']) {
+    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'message-collage', 'photomosaic']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.scrollIntoViewIfNeeded(); await art.locator('svg').waitFor();
       assert.equal((await times(art)).length, 0, `${name}: starts still`);
@@ -42,7 +42,7 @@ test('canvas previews retain their image on exit, resize and resume', async () =
   const browser = await openPage('', { engine });
   const { page, errors } = browser;
   try {
-    for (const name of ['intuitions']) {
+    for (const name of ['intuitions', 'seating']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.hover(); const canvas = art.locator('canvas'); await canvas.waitFor();
       await page.waitForTimeout(350); await page.mouse.move(0, 0);
@@ -50,11 +50,15 @@ test('canvas previews retain their image on exit, resize and resume', async () =
       const picture = await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => { el.dataset.retained = 'yes'; return el.toDataURL(); });
       const paused = await times(art);
       await page.waitForTimeout(200);
-      assert.equal(await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL()), picture, `${name}: canvas does not reset or keep running`);
+      assert.ok(await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL()) === picture, `${name}: canvas does not reset or keep running`);
       assert.deepEqual(await times(art), paused, `${name}: companion CSS stays paused`);
       await art.hover(); await page.waitForTimeout(160);
       assert.equal(await canvas.getAttribute('data-retained'), 'yes', `${name}: reuses the canvas`);
-      assert.notEqual(await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL()), picture, `${name}: canvas resumes`);
+      assert.ok((await times(art))[0] > paused[0] + 50, `${name}: canvas clock resumes without restarting`);
+      // A workflow may begin with an authored hold; wait for its next moving scene.
+      await page.waitForFunction((/** @type {{name:string,picture:string}} */ {name,picture}) =>
+        /** @type {HTMLCanvasElement} */ (document.querySelector(`[data-art="${name}"] canvas`)).toDataURL() !== picture,
+      {name,picture}, {timeout:4000});
       await page.mouse.move(0, 0);
       await page.setViewportSize({ width: 1280, height: 840 });
       await page.waitForTimeout(80);
