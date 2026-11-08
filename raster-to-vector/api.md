@@ -34,10 +34,13 @@ const result = submit({ image: { width, height, data }, quantize: { k: 6 } }, { 
 | `submit(request)` | Converts the request, loads its image and options into the page, and resolves to the result. An invalid request rejects with a `RasterToVectorError` and leaves the page unchanged. |
 | `getRequest()` | Returns the request the page's image and options currently describe. Its `image.data` is a `Uint8ClampedArray`; convert it with `Array.from` before writing the request as JSON. |
 | `getResult()` | Returns the result on display, or `null`. |
+| `undo()`, `redo()` | Restore the previous or next page checkpoint and return whether one was available. Pending rendering/loading is invalidated; saved results are restored without recomputation. |
 | `exportSvgText()` | Returns the SVG on display, or `null`. |
 | `decodeImage(source)` | Decodes a `Blob` or an image URL to `{width, height, data}` with the browser, without colour-profile conversion. |
 
 The page's "Longest side" is 600 px by default, so that large photos stay quick; the API's `preprocess.maxDim` defaults to `null`, as in R. The page decodes PNG and JPEG through a canvas. For partly transparent pixels, the canvas's premultiplied storage can shift colour values slightly, so on such images the page and the CLI can differ. Pass pixels decoded elsewhere through `submit` to avoid this.
+
+The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
 ## Request
 

@@ -4,6 +4,7 @@
 // running in the page.
 
 import { DEFAULTS, RasterToVectorError } from './core/index.js';
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -40,7 +41,12 @@ const state = {
   changed: new Set(),
   /** Whether the last conversion from the page failed, leaving an earlier SVG on view. */
   failed: false,
+  /** @type {Issue[]} */ issues: [],
 };
+let revision = 0;
+let historyReady = false;
+let imageLoad = 0;
+const form = /** @type {HTMLElement} */ (document.querySelector('main'));
 
 // ---------- worker ----------
 
@@ -133,7 +139,9 @@ async function decodeImage(source) {
   canvas.height = bitmap.height;
   const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
   ctx.drawImage(bitmap, 0, 0);
-  return { width: bitmap.width, height: bitmap.height, data: ctx.getImageData(0, 0, bitmap.width, bitmap.height).data };
+  const image = { width: bitmap.width, height: bitmap.height, data: ctx.getImageData(0, 0, bitmap.width, bitmap.height).data };
+  bitmap.close();
+  return image;
 }
 
 /** @param {Image} image @param {string | null} name */
@@ -149,11 +157,16 @@ function showImage(image, name) {
 
 /** @param {Blob | string} source @param {string} name */
 async function loadImage(source, name) {
+  const version = revision;
+  const load = ++imageLoad;
   try {
-    showImage(await decodeImage(source), name);
+    const image = await decodeImage(source);
+    if (version !== revision || load !== imageLoad) return false;
+    showImage(image, name);
     markChanged('image');
     return true;
   } catch (error) {
+    if (version !== revision || load !== imageLoad) return false;
     showIssues([{ code: 'INVALID_IMAGE', path: 'image', message: `${name} could not be read as an image (${/** @type {Error} */ (error).message})` }]);
     return false;
   }
@@ -227,9 +240,11 @@ function currentRequest() {
  * @param {Record<string, any>} request @param {{ fromApi: boolean }} options
  */
 async function run(request, { fromApi }) {
+  const version = revision;
   if (!fromApi) showIssues([]);
   try {
     const result = await runInWorker(request);
+    if (version !== revision) throw new Error('stopped');
     if (fromApi) {
       const { image } = request;
       if (image && typeof image === 'object') showImage({ width: image.width, height: image.height, data: Uint8ClampedArray.from(image.data) }, null);
@@ -240,9 +255,10 @@ async function run(request, { fromApi }) {
     state.changed.clear();
     state.failed = false;
     showStale();
+    checkpoint();
     return result;
   } catch (error) {
-    if (!fromApi && error instanceof RasterToVectorError) {
+    if (version === revision && !fromApi && error instanceof RasterToVectorError) {
       showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }]);
       state.failed = true;
       showStale();
@@ -274,6 +290,7 @@ function labelOf(field) {
 
 /** Lists the problems by the options' labels (and the image), and marks those fields. @param {Issue[]} issues */
 function showIssues(issues) {
+  state.issues = issues.map(issue => ({ ...issue }));
   el.issues.hidden = issues.length === 0;
   el.issues.replaceChildren();
   for (const f of [...fields, el.imageFile]) f.removeAttribute('aria-invalid');
@@ -372,10 +389,56 @@ byId('reset-options').addEventListener('click', () => {
   writeOptions(PAGE_DEFAULTS);
   showIssues([]);
   markChanged('options');
+  checkpoint();
 });
 byId('options-card').addEventListener('input', () => markChanged('options'));
 byId('export-svg').addEventListener('click', () => state.result && download(`${baseName()}.svg`, new Blob([state.result.svg], { type: 'image/svg+xml' })));
 byId('export-result').addEventListener('click', () => state.result && download(`${baseName()}-vector.json`, new Blob([JSON.stringify(state.result, null, 2)], { type: 'application/json' })));
+
+// Keep immutable decoded images/results by reference; URLs are view resources only.
+function snapshotWork() {
+  return { image: state.image, name: state.name, result: state.result, form: captureForm(form),
+    changed: [...state.changed], failed: state.failed, issues: state.issues.slice(), status: worker ? 'Stopped' : el.status.textContent };
+}
+/** @param {ReturnType<typeof snapshotWork>} saved */
+function restoreWork(saved) {
+  revision++;
+  imageLoad++;
+  cancelRun?.(new Error('stopped'));
+  restoreForm(form, saved.form);
+  el.imageFile.value = '';
+  if (saved.image) showImage(saved.image, saved.name);
+  else {
+    state.image = null;
+    state.name = null;
+    el.inputPreview.getContext('2d').clearRect(0, 0, el.inputPreview.width, el.inputPreview.height);
+    el.imageInfo.textContent = 'No image loaded.';
+  }
+  if (saved.result) showResult(saved.result);
+  else {
+    if (state.svgUrl) URL.revokeObjectURL(state.svgUrl);
+    state.svgUrl = '';
+    state.result = null;
+    el.outputPreview.removeAttribute('src');
+    el.outputPreview.hidden = true;
+    el.outputCaption.textContent = 'The SVG appears here.';
+    el.result.hidden = true;
+  }
+  state.changed = new Set(saved.changed);
+  state.failed = saved.failed;
+  showIssues(saved.issues);
+  showStale();
+  showStatus(saved.status);
+}
+const history = createHistory({ capture: snapshotWork, restore: restoreWork, limit: 20,
+  equal: (a, b) => a.image === b.image && a.result === b.result && a.name === b.name && JSON.stringify(a.form) === JSON.stringify(b.form),
+  onChange: (h) => { byId('undo').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+function checkpoint() { if (historyReady) history.commit(); }
+byId('undo').addEventListener('click', () => history.undo());
+byId('redo').addEventListener('click', () => history.redo());
+bindHistoryShortcuts(history, { filter: () => historyReady });
+bindFormHistory(history, { root: form, filter: () => historyReady });
 
 // ---------- API for scripts in the page ----------
 
@@ -386,8 +449,11 @@ byId('export-result').addEventListener('click', () => state.result && download(`
   getResult: () => state.result,
   exportSvgText: () => state.result?.svg ?? null,
   decodeImage,
+  undo: () => history.undo(), redo: () => history.redo(),
 };
 
 writeOptions(PAGE_DEFAULTS);
 if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage();
+historyReady = true;
+history.reset();
 document.documentElement.dataset.ready = 'true';

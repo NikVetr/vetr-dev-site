@@ -33,11 +33,14 @@ const svg = renderSvg(result, { background: '#7f7f7f' });
 | `submit(request)` | Runs the request, loads its image, text and settings into the page, and resolves to the result. An invalid request rejects with a `TextInImageError` and leaves the page unchanged. |
 | `getRequest()` | Returns the request the page's image, text and settings currently describe. Its `image.data` is a `Uint8ClampedArray`; convert it with `Array.from` before writing the request as JSON. |
 | `getResult()` | Returns the result on display, or `null`. |
+| `undo()`, `redo()` | Restore the previous or next page checkpoint and return whether one was available. Pending rendering/loading is invalidated; saved results are restored without recomputation. |
 | `exportSvgText()` | Returns the text fill on display as SVG text, on the page's background colour. |
 | `exportPngBlob()` | Returns a Promise of the same fill as a PNG `Blob`, at the result's `canvas` size. |
 | `decodeImage(source, maxSide?)` | Decodes a `Blob` or an image URL to `{width, height, data}` with the browser, without colour-profile conversion, optionally scaled down so the longer side is at most `maxSide`. |
 
 The page scales uploaded images down to its "Longest image side" (800 px by default) before building the request. Its background control sets both `color.background` and the SVG background. The page starts with **Keep words together** enabled (`layout.wrap: "word"`) and eight size rounds to fit the shape more closely. Load example also enables whole words; API and CLI requests that omit `layout.wrap` retain character wrapping for compatibility with R.
+
+The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
 ## Request
 

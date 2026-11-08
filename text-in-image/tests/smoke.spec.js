@@ -137,10 +137,11 @@ test('example and Clear can restore the previous image, text, settings and rende
   await expect(page.locator('#image-info')).toHaveText('my-picture.png, 66 × 120 px');
   await page.locator('#clear-inputs').click();
   await page.locator('#text').fill('A later edit');
-  await expect(page.locator('#undo-note')).toBeHidden();
+  await expect(page.locator('#undo-replace')).toBeEnabled();
+  await expect(page.locator('#redo')).toBeDisabled();
 });
 
-test('a failed example fetch preserves work and a successful API request clears old Undo', async ({ page }) => {
+test('a failed example fetch preserves work and a successful API request joins Undo history', async ({ page }) => {
   await open(page);
   await page.locator('#text').fill('Keep this text.');
   await page.locator('#whole-words').uncheck();
@@ -149,15 +150,21 @@ test('a failed example fetch preserves work and a successful API request clears 
   await page.locator('#load-example').click();
   await expect(page.locator('#issues')).toContainText('HTTP 503');
   expect(await page.evaluate(() => JSON.stringify(/** @type {any} */ (window).TextInImage.getRequest()))).toBe(before);
-  await expect(page.locator('#undo-note')).toBeHidden();
+  await expect(page.locator('#undo-replace')).toBeEnabled();
+  await expect(page.locator('#redo')).toBeDisabled();
   await page.locator('#clear-inputs').click();
-  await expect(page.locator('#undo-note')).toBeVisible();
+  await expect(page.locator('#undo-replace')).toBeEnabled();
   await page.evaluate(async () => {
     const app = /** @type {any} */ (window).TextInImage;
     const image = await app.decodeImage('examples/alice-drink-me.png', 120);
     await app.submit({ image, text: 'An API replacement.' });
   });
-  await expect(page.locator('#undo-note')).toBeHidden();
+  await expect(page.locator('#undo-replace')).toBeEnabled();
+  await expect(page.locator('#redo')).toBeDisabled();
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#text')).toHaveValue('');
+  await page.locator('#redo').click();
+  await expect(page.locator('#text')).toHaveValue('An API replacement.');
 });
 
 test('the landscape preview is bounded and fitting errors reveal their collapsed settings', async ({ page }) => {

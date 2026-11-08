@@ -79,6 +79,10 @@
       <div class="toolbar">
         <button id="generate" type="button" class="primary">Generate</button>
         <button id="stop" type="button" disabled>Stop</button>
+        <span class="history-controls" role="group" aria-label="History">
+          <button id="undo" type="button" disabled title="Undo (Ctrl/⌘ Z)">Undo</button>
+          <button id="redo" type="button" disabled title="Redo (Ctrl/⌘ Shift Z)">Redo</button>
+        </span>
       </div>
       <progress id="run-progress" class="progress" max="1" value="0" hidden></progress>
       <div id="run-issues" class="issues" role="alert" hidden></div>

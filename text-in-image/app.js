@@ -5,6 +5,7 @@
 
 import { prepareText } from './core/layout.js';
 import { DEFAULTS, TextInImageError, parseColor } from './core/request.js';
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -17,7 +18,7 @@ const EXAMPLE = { image: 'examples/alice-drink-me.png', text: 'examples/alice-ch
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 const el = {
   imageFile: byId('image-file'), maxSide: byId('max-side'), imageInfo: byId('image-info'), text: byId('text'),
-  loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), undoNote: byId('undo-note'), undoText: byId('undo-text'), charCount: byId('char-count'),
+  loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), redo: byId('redo'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
   lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
   ink: byId('ink'), background: byId('background'), scale: byId('scale'), seed: byId('seed'),
@@ -44,32 +45,41 @@ const state = {
 
 let replacing = false;
 let running = 0;
-/** @type {ReturnType<typeof snapshotWork> | null} */
-let replaced = null;
+let revision = 0;
+let imageLoad = 0;
+let historyReady = false;
+let historyBatch = 0;
+const form = /** @type {HTMLElement} */ (document.querySelector('main'));
 
 function showBusy() {
   const busy = replacing || running > 0;
-  for (const button of [el.render, el.loadExample, el.clear, el.undo]) button.disabled = busy;
+  for (const button of [el.render, el.loadExample, el.clear]) button.disabled = busy;
   if (busy) document.documentElement.dataset.busy = 'true';
   else delete document.documentElement.dataset.busy;
 }
 
 // ---------- worker ----------
 
-const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+/** @type {Worker} */
+let worker;
 let nextId = 0;
 /** @type {Map<number, { resolve: (v: { result: Result, svg: string }) => void, reject: (e: Error) => void }>} */
 const pending = new Map();
-worker.onmessage = (/** @type {MessageEvent} */ { data }) => {
-  const job = /** @type {NonNullable<ReturnType<typeof pending.get>>} */ (pending.get(data.id));
-  pending.delete(data.id);
-  if (data.error) job.reject(new TextInImageError(data.error.code, data.error.message, data.error.issues));
-  else job.resolve(data);
-};
-worker.onerror = (/** @type {ErrorEvent} */ event) => {
-  for (const job of pending.values()) job.reject(new Error(`the renderer failed: ${event.message}`));
-  pending.clear();
-};
+function startWorker() {
+  worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+  worker.onmessage = (/** @type {MessageEvent} */ { data }) => {
+    const job = pending.get(data.id);
+    if (!job) return;
+    pending.delete(data.id);
+    if (data.error) job.reject(new TextInImageError(data.error.code, data.error.message, data.error.issues));
+    else job.resolve(data);
+  };
+  worker.onerror = (/** @type {ErrorEvent} */ event) => {
+    for (const job of pending.values()) job.reject(new Error(`the renderer failed: ${event.message}`));
+    pending.clear();
+  };
+}
+startWorker();
 /** @param {unknown} request @param {string} background */
 const runInWorker = (request, background) => new Promise((resolve, reject) => {
   const id = nextId++;
@@ -94,23 +104,31 @@ async function decodeImage(source, maxSide = Infinity) {
   let bitmap = await createImageBitmap(blob, options);
   const s = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
   if (s < 1) {
-    bitmap = await createImageBitmap(blob, {
+    const resized = await createImageBitmap(blob, {
       ...options, resizeWidth: Math.max(1, Math.round(bitmap.width * s)), resizeHeight: Math.max(1, Math.round(bitmap.height * s)), resizeQuality: 'high',
     });
+    bitmap.close();
+    bitmap = resized;
   }
   const canvas = document.createElement('canvas');
   canvas.width = bitmap.width;
   canvas.height = bitmap.height;
   const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
   ctx.drawImage(bitmap, 0, 0);
-  return { width: bitmap.width, height: bitmap.height, data: ctx.getImageData(0, 0, bitmap.width, bitmap.height).data };
+  const image = { width: bitmap.width, height: bitmap.height, data: ctx.getImageData(0, 0, bitmap.width, bitmap.height).data };
+  bitmap.close();
+  return image;
 }
 
 /** @param {Blob} blob @param {string} name */
 async function loadImage(blob, name) {
   const maxSide = el.maxSide.valueAsNumber;
   if (!(maxSide >= 16)) throw new Error('the longest image side must be at least 16 px');
-  state.image = await decodeImage(blob, maxSide);
+  const version = revision;
+  const load = ++imageLoad;
+  const image = await decodeImage(blob, maxSide);
+  if (version !== revision || load !== imageLoad) throw new Error('stopped');
+  state.image = image;
   state.source = { blob, name };
   showImageInfo();
 }
@@ -177,6 +195,7 @@ function showCharCount() {
  * @param {{ fromApi: boolean }} how
  */
 async function run(request, { fromApi }) {
+  const version = revision;
   const statusBefore = el.status.textContent;
   running++;
   showBusy();
@@ -184,9 +203,9 @@ async function run(request, { fromApi }) {
   try {
     const background = typeof request?.color?.background === 'string' ? request.color.background : 'black';
     const { result, svg } = await runInWorker(request, background);
+    if (version !== revision) throw new Error('stopped');
     if (fromApi) {
-      dropUndo();
-      state.image = request.image;
+      state.image = { ...request.image, data: Uint8ClampedArray.from(request.image.data) };
       state.source = null;
       el.text.value = Array.isArray(request.text) ? request.text.join(' ') : request.text;
       showImageInfo();
@@ -201,8 +220,10 @@ async function run(request, { fromApi }) {
     state.failed = false;
     showStale();
     el.status.textContent = `Done in ${(Object.values(result.timings_ms).reduce((a, b) => a + b, 0) / 1000).toFixed(1)} s.`;
+    checkpoint();
     return result;
   } catch (error) {
+    if (version !== revision) throw error;
     if (fromApi) {
       el.status.textContent = statusBefore;
     } else {
@@ -338,13 +359,17 @@ function showResult(result, svg) {
 /** @returns {Promise<Blob>} */
 async function pngBlob() {
   if (!state.result) throw new Error('nothing has been rendered yet');
+  const result = state.result;
+  const url = URL.createObjectURL(new Blob([state.svg], { type: 'image/svg+xml' }));
   const img = new Image();
-  img.src = state.svgUrl;
-  await img.decode();
+  img.src = url;
   const canvas = document.createElement('canvas');
-  canvas.width = state.result.canvas.width;
-  canvas.height = state.result.canvas.height;
-  /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d')).drawImage(img, 0, 0);
+  canvas.width = result.canvas.width;
+  canvas.height = result.canvas.height;
+  try {
+    await img.decode();
+    /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d')).drawImage(img, 0, 0);
+  } finally { URL.revokeObjectURL(url); }
   return new Promise((resolve, reject) => canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('the PNG could not be made'))), 'image/png'));
 }
 
@@ -359,30 +384,19 @@ function download(blob, name) {
 
 // ---------- events ----------
 
-/** Keep one replacement available without copying the decoded pixels or immutable result. */
+/** Share immutable image/result data; clone only small editable metadata. */
 function snapshotWork() {
   readForm();
   return {
-    image: state.image, source: state.source, text: el.text.value, maxSide: el.maxSide.value,
+    image: state.image, source: state.source, text: el.text.value, maxSide: el.maxSide.value, form: captureForm(form),
     settings: structuredClone(state.settings), result: state.result, svg: state.svg,
-    changed: new Set(state.changed), failed: state.failed, issues: state.issues.slice(), status: el.status.textContent,
+    changed: new Set(state.changed), failed: state.failed, issues: state.issues.slice(), status: running ? 'Not rendered.' : el.status.textContent,
   };
 }
 
-function dropUndo() {
-  replaced = null;
-  el.undoNote.hidden = true;
-}
-
-/** @param {string} note */
-function rememberReplacement(note) {
-  replaced = state.image || el.text.value !== '' ? snapshotWork() : null;
-  el.undoText.textContent = note;
-  el.undoNote.hidden = !replaced;
-}
-
-/** @param {boolean} [remember] */
-async function loadExample(remember = false) {
+async function loadExample() {
+  const version = revision;
+  const load = ++imageLoad;
   // Fetch and decode before changing any input, so a failed load leaves the work intact.
   const read = async (/** @type {string} */ url) => {
     const response = await fetch(url);
@@ -396,7 +410,7 @@ async function loadExample(remember = false) {
   const maxSide = el.maxSide.valueAsNumber;
   if (!(maxSide >= 16)) throw new Error('The longest image side must be at least 16 px.');
   const image = await decodeImage(blob, maxSide);
-  if (remember) rememberReplacement('Example loaded. Undo restores your previous work.');
+  if (version !== revision || load !== imageLoad) throw new Error('stopped');
   state.image = image;
   state.source = { blob, name: EXAMPLE.image.split('/').pop() ?? '' };
   el.imageFile.value = '';
@@ -410,52 +424,57 @@ async function loadExample(remember = false) {
 el.imageFile.addEventListener('change', async () => {
   const file = el.imageFile.files?.[0];
   if (!file) return;
+  const version = revision;
   try {
     await loadImage(file, file.name);
-    dropUndo();
     showIssues([]);
     markChanged('image');
+    checkpoint();
   } catch (error) {
+    if (version !== revision || /** @type {Error} */ (error).message === 'stopped') return;
     showIssues([{ path: 'image', message: `could not be read: ${/** @type {Error} */ (error).message}` }]);
   }
 });
 el.maxSide.addEventListener('change', async () => {
-  if (!state.source) return;
+  if (!state.source) { checkpoint(); return; }
+  const version = revision;
   try {
     await loadImage(state.source.blob, state.source.name);
-    dropUndo();
     showIssues([]);
     markChanged('image');
+    checkpoint();
   } catch (error) {
+    if (version !== revision || /** @type {Error} */ (error).message === 'stopped') return;
     showIssues([{ path: 'image', message: /** @type {Error} */ (error).message }]);
   }
 });
-el.maxSide.addEventListener('input', dropUndo);
 el.wholeWords.addEventListener('change', showCharCount);
 el.quantizeOn.addEventListener('change', () => { el.k.disabled = !el.quantizeOn.checked; });
 el.text.addEventListener('input', () => {
-  dropUndo();
   showCharCount();
   markChanged('text');
 });
-byId('settings-card').addEventListener('input', () => { dropUndo(); markChanged('settings'); });
+byId('settings-card').addEventListener('input', () => markChanged('settings'));
 el.render.addEventListener('click', renderFromPage);
 el.loadExample.addEventListener('click', async () => {
+  const version = revision;
+  historyBatch++;
   replacing = true;
   showBusy();
   try {
-    await loadExample(true);
+    await loadExample();
     await renderFromPage();
   } catch (error) {
+    if (version !== revision) return;
     showIssues([{ path: '', message: /** @type {Error} */ (error).message }]);
   } finally {
-    replacing = false;
+    if (version === revision) { historyBatch--; replacing = false; checkpoint(); }
     showBusy();
   }
 });
 el.clear.addEventListener('click', () => {
+  imageLoad++;
   if (!state.image && el.text.value === '') return;
-  rememberReplacement('Image and text cleared.');
   state.image = null;
   state.source = null;
   el.imageFile.value = '';
@@ -467,16 +486,25 @@ el.clear.addEventListener('click', () => {
   markChanged('image');
   markChanged('text');
   el.status.textContent = 'Image and text cleared.';
+  checkpoint();
 });
-el.undo.addEventListener('click', () => {
-  if (!replaced) return;
-  const before = replaced;
-  dropUndo();
-  Object.assign(state, { image: before.image, source: before.source, settings: before.settings, changed: before.changed, failed: before.failed });
+/** @param {ReturnType<typeof snapshotWork>} before */
+function restoreWork(before) {
+  revision++;
+  imageLoad++;
+  worker.terminate();
+  for (const job of pending.values()) job.reject(new Error('stopped'));
+  pending.clear();
+  startWorker();
+  replacing = false;
+  historyBatch = 0;
+  showBusy();
+  Object.assign(state, { image: before.image, source: before.source, settings: structuredClone(before.settings), changed: new Set(before.changed), failed: before.failed });
   el.text.value = before.text;
   el.maxSide.value = before.maxSide;
   el.imageFile.value = '';
   writeForm(state.settings);
+  restoreForm(form, before.form);
   showImageInfo();
   showCharCount();
   if (before.result) showResult(before.result, before.svg);
@@ -491,8 +519,16 @@ el.undo.addEventListener('click', () => {
   showIssues(before.issues);
   showStale();
   el.status.textContent = before.status;
-  el.text.focus({ preventScroll: true });
+}
+const history = createHistory({ capture: snapshotWork, restore: restoreWork, limit: 20,
+  equal: (a, b) => a.image === b.image && a.source === b.source && a.result === b.result && a.svg === b.svg && JSON.stringify(a.form) === JSON.stringify(b.form),
+  onChange: (h) => { el.undo.disabled = !h.canUndo; el.redo.disabled = !h.canRedo; },
 });
+function checkpoint() { if (historyReady && !historyBatch) history.commit(); }
+el.undo.addEventListener('click', () => history.undo());
+el.redo.addEventListener('click', () => history.redo());
+bindHistoryShortcuts(history, { filter: () => historyReady });
+bindFormHistory(history, { root: form, filter: (field) => historyReady && field.id !== 'max-side' });
 el.exportSvg.addEventListener('click', () => download(new Blob([state.svg], { type: 'image/svg+xml' }), 'text-in-image.svg'));
 el.exportPng.addEventListener('click', async () => download(await pngBlob(), 'text-in-image.png'));
 
@@ -506,9 +542,12 @@ el.exportPng.addEventListener('click', async () => download(await pngBlob(), 'te
   exportSvgText: () => state.svg,
   exportPngBlob: pngBlob,
   decodeImage,
+  undo: () => history.undo(), redo: () => history.redo(),
 };
 
 writeForm(state.settings);
 await loadExample();
 await renderFromPage();
+historyReady = true;
+history.reset();
 document.documentElement.dataset.ready = 'true';

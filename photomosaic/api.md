@@ -39,10 +39,13 @@ const rgba = composeMosaic(layout, (photo) => pixelsOf(photo), result.cells, 0);
 | `generate()` | Runs the page's own photos, target and settings and shows the mosaic, as the Generate button does. |
 | `getRequest()` | Returns the request the page's photos, target and settings describe. |
 | `getResult()` | Returns the result on view, or `null`. |
+| `undo()`, `redo()` | Restore the previous or next page checkpoint and return whether one was available. Pending rendering/loading is invalidated; saved results are restored without recomputation. |
 | `exportPngBlob({tileWidth, fit, tint})` | Resolves with the mosaic as a PNG `Blob`; each option defaults to the page's setting. Photos are drawn from their files when the tile is wider than their thumbnails. |
 | `stop()` | Stops a running assignment (the pending promise rejects with an `Error`). |
 
 The page reads photos with the browser, so it takes whatever the browser decodes, with EXIF orientation applied. It halves a photo until it is at most 400 pixels wide before summarising it, and a target until neither side is over 1600 pixels; halving keeps the average colour to within a fraction of a level.
+
+The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
 ## Request
 

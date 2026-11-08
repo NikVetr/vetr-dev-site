@@ -3,6 +3,7 @@
 // window.Photomosaic exposes the same submit() to scripts and agents running in the page.
 
 import { PhotomosaicError, SUMMARY_WIDTH, gridFor, layoutMosaic, summarisePhoto } from './core/index.js';
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -61,6 +62,15 @@ let mosaicLayout = null;
 let worker = null;
 /** @type {((error: Error) => void) | null} */
 let cancelRun = null;
+let revision = 0;
+let photoLoad = 0;
+let targetLoad = 0;
+let selectionRevision = 0;
+let historyReady = false;
+let historyBatch = 0;
+/** @type {Issue[]} */
+let activeIssues = [];
+const form = /** @type {HTMLElement} */ (document.querySelector('main'));
 
 // ---------- reading pictures ----------
 
@@ -111,8 +121,9 @@ async function readPhoto(file, name) {
  * Reads photos four at a time, showing progress; resolves with those read, in name order, and
  * the names of those that could not be.
  * @param {{ name: string, load: () => Promise<Blob> }[]} items
+ * @param {()=>boolean} current
  */
-async function readPhotos(items) {
+async function readPhotos(items, current) {
   const sorted = [...items].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
   /** @type {(Photo | null)[]} */
   const read = new Array(sorted.length).fill(null);
@@ -123,12 +134,13 @@ async function readPhotos(items) {
   el.photoProgress.hidden = false;
   el.photoProgress.max = sorted.length;
   const show = () => {
+    if (!current()) return;
     el.photoProgress.value = done;
     el.photoStatus.textContent = `Reading photos: ${done} of ${sorted.length}`;
   };
   show();
   const lane = async () => {
-    while (next < sorted.length) {
+    while (current() && next < sorted.length) {
       const i = next++;
       try {
         read[i] = await readPhoto(await sorted[i].load(), sorted[i].name);
@@ -140,17 +152,20 @@ async function readPhotos(items) {
     }
   };
   await Promise.all([lane(), lane(), lane(), lane()]);
-  el.photoProgress.hidden = true;
+  if (current()) el.photoProgress.hidden = true;
   return { read: /** @type {Photo[]} */ (read.filter(Boolean)), unreadable };
 }
 
-/** @param {{ name: string, load: () => Promise<Blob> }[]} items @param {string} label */
-async function setPhotosFrom(items, label) {
+/** @param {{ name: string, load: () => Promise<Blob> }[]} items @param {string} label @param {number} [version] */
+async function setPhotosFrom(items, label, version = revision) {
   if (!items.length) return;
+  if (version !== revision) return;
+  const load = ++photoLoad;
+  const current = () => version === revision && load === photoLoad;
   el.photoIssues.hidden = true;
-  const { read, unreadable } = await readPhotos(items);
-  photos = read;
-  photosVersion++;
+  const { read, unreadable } = await readPhotos(items, current);
+  if (!current()) { for (const photo of read) photo.thumb.close(); return; }
+  if (read.length) { photos = read; photosVersion++; }
   el.photoStatus.textContent = `${label}: ${read.length.toLocaleString('en-US')} photo${read.length === 1 ? '' : 's'} read.`;
   if (unreadable.length) {
     const list = document.createElement('ul');
@@ -162,6 +177,7 @@ async function setPhotosFrom(items, label) {
   }
   showPhotos();
   showStale();
+  checkpoint();
 }
 
 const IMAGE_NAME = /\.(jpe?g|png|gif|bmp|webp|avif|heic|heif|tiff?)$/i;
@@ -184,10 +200,14 @@ if ('webkitdirectory' in el.photoFolder) {
   });
 }
 
-/** Reads a target picture, halved if large, for the request and the preview. @param {Blob} file @param {string} name */
-async function readTarget(file, name) {
+/** Reads a target picture, halved if large, for the request and the preview. @param {Blob} file @param {string} name @param {number} [version] @param {number} [loadId] */
+async function readTarget(file, name, version = revision, loadId) {
+  if (version !== revision) return;
+  const load = loadId ?? ++targetLoad;
+  if (load !== targetLoad) return;
   const bitmap = await createImageBitmap(file, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
   try {
+    if (version !== revision || load !== targetLoad) return;
     const canvas = halved(bitmap, (w, h) => Math.max(w, h) > TARGET_SIDE);
     const pixels = pixelsOf(canvas);
     let binary = '';
@@ -209,15 +229,18 @@ async function readTarget(file, name) {
   }
   showGridNote();
   showStale();
+  checkpoint();
 }
 
 el.targetFile.addEventListener('change', async () => {
+  const version = revision;
   const file = el.targetFile.files?.[0];
   el.targetFile.value = '';
   if (!file) return;
   try {
     await readTarget(file, file.name);
   } catch {
+    if (version !== revision) return;
     el.targetStatus.textContent = `${file.name} could not be read as an image by this browser; the target is unchanged.`;
   }
 });
@@ -235,20 +258,27 @@ const fetchBlob = async (/** @type {string} */ path) => {
 };
 
 async function examplePhotos() {
+  const version = revision;
   const m = await getManifest();
-  await setPhotosFrom(m.photos.map((path) => ({ name: path.replace(/^photos\//, ''), load: () => fetchBlob(path) })), 'Example photos');
+  await setPhotosFrom(m.photos.map((path) => ({ name: path.replace(/^photos\//, ''), load: () => fetchBlob(path) })), 'Example photos', version);
 }
 async function exampleTarget() {
+  const version = revision;
+  const load = ++targetLoad;
   const m = await getManifest();
-  await readTarget(await fetchBlob(m.target), 'Example: Hokusai, Red Fuji');
+  await readTarget(await fetchBlob(m.target), 'Example: Hokusai, Red Fuji', version, load);
 }
 byId('photos-example').addEventListener('click', examplePhotos);
 byId('target-example').addEventListener('click', exampleTarget);
 byId('sunflower-example').addEventListener('click', async () => {
+  const version = revision;
+  const load = ++targetLoad;
+  historyBatch++;
   const button = byId('sunflower-example');
   button.disabled = true;
   try {
-    await Promise.all([examplePhotos(), readTarget(await fetchBlob('sunflower.jpg'), 'Example: Sunflower')]);
+    await Promise.all([examplePhotos(), readTarget(await fetchBlob('sunflower.jpg'), 'Example: Sunflower', version, load)]);
+    if (version !== revision) return;
     el.gridRule.value = 'columns';
     el.columns.value = '40';
     el.maxUses.value = '3';
@@ -261,9 +291,10 @@ byId('sunflower-example').addEventListener('click', async () => {
     showStale();
     await generate();
   } catch (error) {
+    if (version !== revision) return;
     el.targetStatus.textContent = `Sunflower example failed: ${error instanceof Error ? error.message : String(error)}`;
   } finally {
-    button.disabled = false;
+    if (version === revision) { historyBatch--; checkpoint(); button.disabled = false; }
   }
 });
 
@@ -354,25 +385,28 @@ byId('settings-card').addEventListener('input', () => {
 function run(request) {
   stopRun();
   const started = performance.now();
-  worker = new Worker(new URL('worker.js', import.meta.url), { type: 'module' });
+  const w = new Worker(new URL('worker.js', import.meta.url), { type: 'module' });
+  worker = w;
   setRunning(true);
   el.status.textContent = 'Matching…';
   el.runProgress.value = 0;
   el.runProgress.hidden = false;
   return new Promise((resolve, reject) => {
     const finish = () => {
-      worker?.terminate();
-      worker = null;
-      cancelRun = null;
-      setRunning(false);
-      el.runProgress.hidden = true;
+      w.terminate();
+      if (worker === w) {
+        worker = null;
+        cancelRun = null;
+        setRunning(false);
+        el.runProgress.hidden = true;
+      }
     };
     cancelRun = (error) => {
       finish();
       el.status.textContent = 'Stopped';
       reject(error);
     };
-    /** @type {Worker} */ (worker).onmessage = ({ data }) => {
+    w.onmessage = ({ data }) => {
       if (data.type === 'progress') {
         el.runProgress.max = data.progress.rows;
         el.runProgress.value = data.progress.rowsDone;
@@ -387,12 +421,12 @@ function run(request) {
         reject(new PhotomosaicError(data.error.code, data.error.message, data.error.issues));
       }
     };
-    /** @type {Worker} */ (worker).onerror = (event) => {
+    w.onerror = (event) => {
       finish();
       el.status.textContent = 'Failed';
       reject(new Error(`the worker failed: ${event.message}`));
     };
-    /** @type {Worker} */ (worker).postMessage({ request });
+    w.postMessage({ request });
   });
 }
 
@@ -408,17 +442,21 @@ function setRunning(running) {
 
 /** Runs the page's own request and shows its mosaic; a failure is listed and leaves the last mosaic on view. */
 async function generate() {
+  const version = revision;
   const request = currentRequest();
   const inputs = pageInputs();
   const runPhotos = photos;
   el.runIssues.hidden = true;
+  activeIssues = [];
   markFields([]);
   try {
     const next = await run(request);
+    if (version !== revision) throw new Error('stopped');
     showResult(next, request, inputs, runPhotos);
+    checkpoint();
     return next;
   } catch (error) {
-    if (error instanceof PhotomosaicError) {
+    if (version === revision && error instanceof PhotomosaicError) {
       showIssues(error);
       failed = true;
       showStale();
@@ -448,6 +486,7 @@ function describe(issue) {
 /** @param {PhotomosaicError} error */
 function showIssues(error) {
   const issues = error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }];
+  activeIssues = issues.map(issue => ({ ...issue }));
   markFields(issues);
   const list = document.createElement('ul');
   list.replaceChildren(...issues.map((issue) => Object.assign(document.createElement('li'), { textContent: describe(issue) })));
@@ -512,17 +551,17 @@ const rgb = (c) => `rgb(${Math.round(c[0])}, ${Math.round(c[1])}, ${Math.round(c
  * view, the cell's colour.
  * @param {CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D} ctx @param {Tile} tile
  * @param {CanvasImageSource & { width: number }} image the photo, or a smaller copy of it
- * @param {{ tint: number, cells?: boolean }} options @param {number} [dx] @param {number} [dy]
+ * @param {{ tint: number, cells?: boolean, result?: Result|null, photos?: Photo[] }} options @param {number} [dx] @param {number} [dy]
  */
-function drawTile(ctx, tile, image, { tint, cells = false }, dx = 0, dy = 0) {
-  const r = /** @type {Result} */ (result);
+function drawTile(ctx, tile, image, { tint, cells = false, result: painted = result, photos: assets = resultPhotos }, dx = 0, dy = 0) {
+  const r = /** @type {Result} */ (painted);
   const cell = r.cells[tile.cell];
   if (cells) {
     ctx.fillStyle = rgb(cell);
     ctx.fillRect(tile.x - dx, tile.y - dy, tile.width, tile.height);
     return;
   }
-  const k = image.width / resultPhotos[tile.photo].width;
+  const k = image.width / assets[tile.photo].width;
   const [sx, sy, sw, sh] = tile.source;
   ctx.drawImage(image, sx * k, sy * k, sw * k, sh * k, tile.x - dx, tile.y - dy, tile.width, tile.height);
   if (tint > 0) {
@@ -686,16 +725,18 @@ function cellAt(event) {
   return r * columns + c;
 }
 
-/** @param {number} cell */
-function select(cell) {
-  if (cell === selected) return;
+/** @param {number} cell @param {boolean} [remember] */
+function select(cell, remember = false) {
+  if (remember) selectionRevision++;
+  if (cell === selected) { if (remember) checkpoint(); return; }
   selected = cell;
   placeMarker();
   drawDetail();
+  if (remember) checkpoint();
 }
 
 el.mosaic.addEventListener('pointermove', (/** @type {PointerEvent} */ e) => { if (e.pointerType === 'mouse' && mosaicLayout) select(cellAt(e)); });
-el.mosaic.addEventListener('pointerdown', (/** @type {PointerEvent} */ e) => { if (mosaicLayout) select(cellAt(e)); });
+el.mosaic.addEventListener('pointerdown', (/** @type {PointerEvent} */ e) => { if (mosaicLayout) select(cellAt(e), true); });
 el.mosaic.addEventListener('keydown', (/** @type {KeyboardEvent} */ e) => {
   if (!result) return;
   const { rows, columns } = result.grid;
@@ -705,7 +746,7 @@ el.mosaic.addEventListener('keydown', (/** @type {KeyboardEvent} */ e) => {
   const move = moves[e.key];
   if (!move) return;
   e.preventDefault();
-  select(Math.max(0, Math.min(rows - 1, r + move[0])) * columns + Math.max(0, Math.min(columns - 1, c + move[1])));
+  select(Math.max(0, Math.min(rows - 1, r + move[0])) * columns + Math.max(0, Math.min(columns - 1, c + move[1])), true);
 });
 
 el.fit.addEventListener('change', drawAll);
@@ -738,8 +779,11 @@ window.addEventListener('resize', () => {
  */
 async function exportPngBlob({ tileWidth = el.tileWidth.valueAsNumber, fit = drawOptions().fit, tint = drawOptions().tint } = {}) {
   if (!result) throw new Error('there is no mosaic yet');
+  const version = revision;
+  const painted = result;
+  const assets = resultPhotos;
   if (!Number.isInteger(tileWidth) || tileWidth < 1) throw new Error('the tile width must be a whole number of pixels from 1');
-  const layout = layoutMosaic(result.grid, result.assignment, resultPhotos, { tileWidth, fit });
+  const layout = layoutMosaic(painted.grid, painted.assignment, assets, { tileWidth, fit });
   if (layout.width > 16384 || layout.height > 16384 || layout.width * layout.height > 120e6) {
     throw new Error(`a ${layout.width} × ${layout.height} pixel picture is larger than browsers can draw; choose a smaller tile width`);
   }
@@ -750,17 +794,17 @@ async function exportPngBlob({ tileWidth = el.tileWidth.valueAsNumber, fit = dra
   ctx.fillRect(0, 0, layout.width, layout.height);
   let done = 0;
   for (const tile of layout.tiles) {
-    const photo = resultPhotos[tile.photo];
+    const photo = assets[tile.photo];
     if (tile.width <= photo.thumb.width) {
-      drawTile(ctx, tile, photo.thumb, { tint });
+      drawTile(ctx, tile, photo.thumb, { tint, result: painted, photos: assets });
     } else {
       const full = await createImageBitmap(photo.file, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
-      drawTile(ctx, tile, full, { tint });
+      drawTile(ctx, tile, full, { tint, result: painted, photos: assets });
       full.close();
     }
-    if (++done % 25 === 0) el.status.textContent = `Drawing the PNG: ${done} of ${layout.tiles.length} tiles`;
+    if (++done % 25 === 0 && version === revision) el.status.textContent = `Drawing the PNG: ${done} of ${layout.tiles.length} tiles`;
   }
-  el.status.textContent = 'PNG drawn';
+  if (version === revision) el.status.textContent = 'PNG drawn';
   return canvas.convertToBlob({ type: 'image/png' });
 }
 
@@ -781,6 +825,67 @@ byId('export-png').addEventListener('click', async () => {
 byId('export-result').addEventListener('click', () => download('photomosaic-result.json', json(result)));
 byId('export-request').addEventListener('click', () => download('photomosaic-request.json', json(resultRequest)));
 
+// Assets and completed matches are immutable; snapshots only copy small UI metadata.
+function snapshotWork() {
+  return { photos, photosVersion, target, targetVersion, result, resultRequest, resultInputs, resultPhotos,
+    selected, selectionRevision, failed, form: captureForm(form), photoPreview: el.photoPreview.open,
+    status: worker ? 'Stopped' : el.status.textContent, photoStatus: el.photoStatus.textContent, targetStatus: el.targetStatus.textContent,
+    issues: activeIssues.slice(), photoIssues: [...el.photoIssues.childNodes].map(node => node.cloneNode(true)), photoIssuesHidden: el.photoIssues.hidden };
+}
+/** @param {ReturnType<typeof snapshotWork>} saved */
+function restoreWork(saved) {
+  revision++;
+  historyBatch = 0;
+  byId('sunflower-example').disabled = false;
+  photoLoad++;
+  targetLoad++;
+  stopRun();
+  photos = saved.photos; photosVersion = saved.photosVersion;
+  target = saved.target; targetVersion = saved.targetVersion;
+  result = saved.result; resultRequest = saved.resultRequest; resultInputs = saved.resultInputs; resultPhotos = saved.resultPhotos;
+  selected = saved.selected; selectionRevision = saved.selectionRevision; failed = saved.failed;
+  restoreForm(form, saved.form);
+  for (const input of [el.photoFiles, el.photoFolder, el.targetFile]) input.value = '';
+  el.photoPreview.open = saved.photoPreview;
+  el.tintValue.textContent = `${el.tint.value}%`;
+  el.photoProgress.hidden = true;
+  el.photoStatus.textContent = saved.photoStatus;
+  el.targetStatus.textContent = saved.targetStatus;
+  el.photoIssues.replaceChildren(...saved.photoIssues.map(node => node.cloneNode(true)));
+  el.photoIssues.hidden = saved.photoIssuesHidden;
+  const preview = el.targetPreview;
+  if (target) {
+    const bytes = Uint8ClampedArray.from(atob(target.data), character => character.charCodeAt(0));
+    const source = new OffscreenCanvas(target.width, target.height);
+    source.getContext('2d').putImageData(new ImageData(bytes, target.width, target.height), 0, 0);
+    preview.width = Math.min(480, target.width);
+    preview.height = Math.max(1, Math.round(preview.width * target.height / target.width));
+    preview.getContext('2d').drawImage(source, 0, 0, preview.width, preview.height);
+    preview.style.width = `${Math.min(240, preview.width)}px`;
+  } else preview.getContext('2d').clearRect(0, 0, preview.width, preview.height);
+  showPhotos();
+  el.result.hidden = !result;
+  el.noResult.hidden = !!result;
+  if (result) { showSummary(); drawAll(); }
+  else mosaicLayout = null;
+  activeIssues = saved.issues.slice();
+  markFields(activeIssues);
+  if (activeIssues.length) showIssues(new PhotomosaicError('invalid_request', '', activeIssues));
+  else { el.runIssues.replaceChildren(); el.runIssues.hidden = true; }
+  showStale();
+  el.status.textContent = saved.status;
+}
+const history = createHistory({ capture: snapshotWork, restore: restoreWork, limit: 20,
+  equal: (a, b) => a.photos === b.photos && a.target === b.target && a.result === b.result
+    && a.selectionRevision === b.selectionRevision && JSON.stringify(a.form) === JSON.stringify(b.form),
+  onChange: (h) => { byId('undo').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+function checkpoint() { if (historyReady && !historyBatch) history.commit(); }
+byId('undo').addEventListener('click', () => history.undo());
+byId('redo').addEventListener('click', () => history.redo());
+bindHistoryShortcuts(history, { filter: () => historyReady });
+bindFormHistory(history, { root: form, filter: () => historyReady && !historyBatch });
+
 // ---------- API for scripts in the page ----------
 
 /** @type {any} */ (window).Photomosaic = {
@@ -796,8 +901,11 @@ byId('export-request').addEventListener('click', () => download('photomosaic-req
   getResult: () => result,
   exportPngBlob,
   stop: stopRun,
+  undo: () => history.undo(), redo: () => history.redo(),
 };
 
 showGridNote();
 await Promise.all([examplePhotos(), exampleTarget()]);
 await generate().catch(() => {});
+historyReady = true;
+history.reset();
