@@ -80,7 +80,13 @@ export function onWidth(element, render) {
       render(width);
     }
   };
-  new ResizeObserver(run).observe(element);
+  // A responsive SVG can change its container's height. Draw after the observer
+  // delivery finishes, so that height change is measured on the next frame.
+  let pending = 0;
+  new ResizeObserver(() => {
+    cancelAnimationFrame(pending);
+    pending = requestAnimationFrame(run);
+  }).observe(element);
   run();
   return () => render(Math.floor(element.clientWidth));
 }

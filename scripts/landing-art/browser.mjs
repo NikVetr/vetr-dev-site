@@ -24,9 +24,10 @@ function playwright() {
  * Opens `path` (relative to the site root, e.g. "agendamatic/") and returns the page and a
  * close() that stops the browser and the server.
  * @param {string} path
- * @param {{ width?: number, height?: number, scheme?: 'light' | 'dark' }} [options]
+ * @param {{ width?: number, height?: number, scheme?: 'light' | 'dark', engine?: 'chromium' | 'webkit' | 'firefox' }} [options]
  */
-export async function openPage(path, { width = 1440, height = 900, scheme = 'light' } = {}) {
+export async function openPage(path, { width = 1440, height = 900, scheme = 'light', engine = 'chromium' } = {}) {
+  if (!['chromium', 'webkit', 'firefox'].includes(engine)) throw new Error(`Unsupported browser engine: ${engine}`);
   const server = createServer((req, res) => {
     let file = normalize(join(ROOT, decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname)));
     if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
@@ -38,7 +39,13 @@ export async function openPage(path, { width = 1440, height = 900, scheme = 'lig
   await new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(undefined)));
   const address = server.address();
   const port = typeof address === 'object' && address ? address.port : 0;
-  const browser = await playwright().chromium.launch();
+  let browser;
+  try {
+    browser = await playwright()[engine].launch();
+  } catch (error) {
+    server.close();
+    throw error;
+  }
   const context = await browser.newContext({ viewport: { width, height }, colorScheme: scheme });
   // The site's analytics is not needed to draw anything.
   await context.route(/googletagmanager|google-analytics/, (/** @type {any} */ route) => route.abort());
