@@ -1,110 +1,126 @@
-// Table Seating: all 39 guests move together between the example's actual best and
-// initial table assignments. These are presentation routes, not a replay of the search's
-// individual swaps. Within-table seat rotation leaves every objective term unchanged.
-// The still is the best assignment; hover/focus plays the separated swarm paths and back.
-import { readFileSync } from 'node:fs';
-import { categoryColour, categoryText } from '../../../seating/core/chart.js';
-import { submit } from '../../../seating/core/index.js';
-import { TALL, art, esc, num } from '../svg.mjs';
-import { planSwarm, validateSwarm } from '../seating-swarm.mjs';
-
-const { width: W, height: H } = TALL;   // a 1x3 tile
-
-const HOLD = 0.7;
-const MOVE = 5.2;
-
-/** Luminance rule of the tool's chart (inkOn): white numerals on dark discs. */
+// Five actual event rounds from the shared room example. The camera reveals one
+// table, four tables, then the full fifty-table room. Routes are presentation only;
+// the planner's travel terms continue to use the real table-center distances.
+import { readFileSync, writeFileSync } from 'node:fs';
+import { planRounds } from '../../../seating/core/index.js';
+import { roundCategoryColours } from '../../../seating/core/rounds-chart.js';
+import { TALL, art, num } from '../svg.mjs';
+import { planSwarm, softenSwarm, validateSwarm } from '../seating-swarm.mjs';
+const { width: W, height: H } = TALL;
+const TOP = 26;
+/** Choose the stronger black/white text contrast for each category fill. */
 function inkOn(/** @type {string} */ hex) {
   const [r, g, b] = [1, 3, 5].map((i) => {
     const c = parseInt(hex.slice(i, i + 2), 16) / 255;
     return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
   });
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.25 ? '#0b0b0b' : '#ffffff';
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return (luminance + .05) / .05 >= 1.05 / (luminance + .05) ? '#000000' : '#ffffff';
+}
+
+
+/** Derive every displayed seat directly from each planned round, with no seat rotation.
+ * @param {ReturnType<typeof planRounds>} result @param {{id:string}[]} guests
+ */
+export function roomGeometry(result, guests) {
+  const tables = result.rounds[0].tables;
+  const xs = tables.map(t => t.x), ys = tables.map(t => t.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const spacing = Math.min(...tables.flatMap((a, i) => tables.slice(i + 1).map(b => Math.hypot(a.x - b.x, a.y - b.y))));
+  const scale = Math.min((W - 12) / (maxX - minX + spacing), (H - TOP - 10) / (maxY - minY + spacing));
+  const distance = spacing * scale, seatRadius = .36 * distance, radius = Number(num(.085 * distance, 2));
+  const round = (/** @type {number} */ value) => Number(num(value, 2));
+  const centre = (/** @type {{x:number,y:number}} */ t) => /** @type {import('../seating-swarm.mjs').Point} */ ([round(W / 2 + (t.x - (minX + maxX) / 2) * scale), round(TOP + (H - TOP) / 2 + (t.y - (minY + maxY) / 2) * scale)]);
+  const obstacles = tables.map(t => { const [x, y] = centre(t); return { x, y, radius: round(.2 * distance) }; });
+  const rounds = result.rounds.map(r => {
+    /** @type {Map<string,import('../seating-swarm.mjs').Point>} */ const seats = new Map();
+    for (const table of r.tables) {
+      const [cx, cy] = centre(table);
+      table.seats.forEach((guest, j) => {
+        if (guest !== null) seats.set(guest, [round(cx + seatRadius * Math.cos(-Math.PI / 2 + 2 * Math.PI * j / table.capacity)), round(cy + seatRadius * Math.sin(-Math.PI / 2 + 2 * Math.PI * j / table.capacity))]);
+      });
+    }
+    return guests.map(g => {
+      const point = seats.get(g.id);
+      if (!point) throw new Error(`seating: round ${r.round} has no seat for ${g.id}`);
+      return point;
+    });
+  });
+  const focus = obstacles[22], neighbor = obstacles[28];
+  return { rounds, radius, obstacles, camera: { close: { x: focus.x, y: focus.y, scale: 9, height: 240 }, four: { x: (focus.x + neighbor.x) / 2, y: (focus.y + neighbor.y) / 2, scale: 3.2, height: 172 }, full: { x: W / 2, y: TOP + (H - TOP) / 2, scale: 1, height: H - TOP } } };
 }
 
 export async function seatingScene() {
-  const request = JSON.parse(readFileSync(new URL('../../../seating/examples/party.json', import.meta.url), 'utf8'));
-  const result = /** @type {any} */ (await submit(request));
-  /** @type {Map<string, number>} */
-  const category = new Map(request.guests.map((/** @type {{ id: string, category: number }} */ g) => [g.id, g.category]));
-  /** @type {[number, number]} */
-  const range = [Math.min(...category.values()), Math.max(...category.values())];
-
-  // The room as the tool draws it, y up.
-  /** @typedef {{ id: string, capacity: number, x: number, y: number, seats: (string | null)[] }} Table */
-  /** @type {Table[]} */
-  const tables = result.tables.map((/** @type {Table} */ t) => ({ ...t, y: -t.y }));
-  const dist = (/** @type {Table} */ a, /** @type {Table} */ b) => Math.hypot(a.x - b.x, a.y - b.y);
-  const dmin = Math.min(...tables.flatMap((a, i) => tables.slice(i + 1).map((b) => dist(a, b))));
-  const [minX, maxX] = [Math.min(...tables.map((t) => t.x)), Math.max(...tables.map((t) => t.x))];
-  const [minY, maxY] = [Math.min(...tables.map((t) => t.y)), Math.max(...tables.map((t) => t.y))];
-  const k = Math.min((W - 16) / (maxX - minX + dmin), (H - 12) / (maxY - minY + dmin));
-  const D = dmin * k;
-  const centre = (/** @type {{ x: number, y: number }} */ t) => [W / 2 + (t.x - (minX + maxX) / 2) * k, H / 2 + (t.y - (minY + maxY) / 2) * k];
-  const rSeat = 0.36 * D;
-  const mark = Math.min(0.17 * D, (2 * Math.PI * rSeat) / 10 - 1.5);
-  /** @returns {import('../seating-swarm.mjs').Point} */
-  const seatAt = (/** @type {number[]} */ [ti, j]) => {
-    const [cx, cy] = centre(tables[ti]);
-    const a = -Math.PI / 2 + (2 * Math.PI * j) / tables[ti].capacity;
-    return [cx + rSeat * Math.cos(a), cy + rSeat * Math.sin(a)];
-  };
-
-  // The endpoints are actual best/initial table memberships. Rotating seats within a
-  // table changes no objective term, and lets guests who stay at a table move too.
-  const guests = tables.flatMap(t => t.seats).filter(g => g !== null);
-  /** @param {(string|null)[][]} seating @param {number} offset @returns {Map<string, number[]>} */
-  const seatsByGuest = (seating, offset) => new Map(seating.flatMap((seats, ti) => seats.flatMap((g, j) => g === null ? [] : [/** @type {[string, number[]]} */ ([g, [ti, (j + offset) % seats.length]])])));
-  const startSeats = seatsByGuest(tables.map(t => t.seats), 0);
-  const initial = result.trajectory.initial.tables;
-  const endSeats = seatsByGuest(initial, 3);
-  const starts = guests.map(g => seatAt(/** @type {number[]} */ (startSeats.get(g))));
-  const ends = guests.map(g => seatAt(/** @type {number[]} */ (endSeats.get(g))));
-  if (starts.some((p, i) => Math.hypot(p[0] - ends[i][0], p[1] - ends[i][1]) < 1)) throw new Error('seating: a guest would remain still');
-  const obstacles = tables.map(t => { const [x, y] = centre(t); return { x, y, radius: rSeat - .75 * mark }; });
-  const paths = planSwarm(starts, ends, { radius: mark / 2, width: W, height: H, obstacles });
-  // Audit the coordinates the SVG will actually interpolate, including its strokes.
-  const round = (/** @type {number} */ n) => Number(num(n, 2));
-  const origin = starts.map(p => /** @type {import('../seating-swarm.mjs').Point} */ ([round(p[0]), round(p[1])]));
-  const rendered = paths.map((path, i) => path.map(p => /** @type {import('../seating-swarm.mjs').Point} */ ([origin[i][0] + round(p[0] - starts[i][0]), origin[i][1] + round(p[1] - starts[i][1])])));
-  const renderedObstacles = obstacles.map(o => ({ x: round(o.x), y: round(o.y), radius: round(o.radius) }));
-  const radius = round(mark / 2);
-  const clearance = validateSwarm(rendered, { radius: radius + .35, width: W, height: H, obstacles: renderedObstacles.map(o => ({ ...o, radius: o.radius + .5 })) });
-  return { paths: rendered, starts: origin, ends, obstacles: renderedObstacles, radius, guests, category, range, startSeats, endSeats, initial, tables, clearance };
+  const request = JSON.parse(readFileSync(new URL('../../../seating/examples/rounds-room.json', import.meta.url), 'utf8'));
+  const result = planRounds(request);
+  if (result.rounds.length !== 5 || result.rounds[0].tables.length !== 50 || request.guests.length !== 300) throw new Error('Seating camera expects the shared 300-guest, 50-table, five-round example');
+  const geometry = roomGeometry(result, request.guests);
+  const options = { radius: geometry.radius, width: W, height: H, obstacles: geometry.obstacles };
+  const routes = geometry.rounds.slice(1).map((ends, i) => {
+    const route = planSwarm(geometry.rounds[i], ends, options);
+    console.log(`seating round ${i + 1} → ${i + 2}: ${route.priorityRetries} routing priority retries`);
+    return route;
+  });
+  // Remove unused waiting time after everybody has arrived. All routes retain one
+  // common timeline, then every segment is split in two without changing its path.
+  let last = 1;
+  for (const route of routes) for (const path of route.paths) for (let i = 1; i < path.length; i++) if (path[i][0] !== path[i - 1][0] || path[i][1] !== path[i - 1][1]) last = Math.max(last, i);
+  const round = (/** @type {number} */ value) => Number(num(value, 2));
+  const motion = routes.map(route => {
+    const soft = softenSwarm(route.paths.map(path => path.slice(0, last + 1)), options);
+    const paths = soft.map(path => path.flatMap((p, i) => i ? [/** @type {import('../seating-swarm.mjs').Point} */ ([(p[0] + path[i - 1][0]) / 2, (p[1] + path[i - 1][1]) / 2]), p] : [p]).map(p => /** @type {import('../seating-swarm.mjs').Point} */ (p.map(round))));
+    const clearance = validateSwarm(paths, { ...options, radius: geometry.radius + .2, obstacles: geometry.obstacles.map(o => ({ ...o, radius: o.radius + .25 })) });
+    return { paths, clearance, priorityRetries: route.priorityRetries };
+  });
+  return { request, result, geometry, motion };
 }
 
 export async function build() {
-  const { paths, starts, obstacles, radius, guests, category, range } = await seatingScene();
-  const half = 2 * HOLD + MOVE;
-  const period = half * 2;
-  const cats = [...new Set(category.values())].sort((a, b) => a - b);
-  let css = `& .table { fill: var(--surface); stroke: var(--art-line); stroke-width: 1; }
-& .guest circle { stroke: var(--art-ink); stroke-opacity: .35; stroke-width: .7; }
-& .guest text { font: 700 ${num(radius * 1.24)}px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; dominant-baseline: central; }
-`;
-  for (const [i, c] of cats.entries()) {
-    const light = categoryColour(c, range, 'light'), dark = categoryColour(c, range, 'dark');
-    css += `& .c${i} circle { fill: ${light}; } & .c${i} text { fill: ${inkOn(light)}; }
-:root[data-theme="dark"] & .c${i} circle { fill: ${dark}; } :root[data-theme="dark"] & .c${i} text { fill: ${inkOn(dark)}; }
-`;
+  const { request, result, geometry, motion } = await seatingScene();
+  const categories = request.guests.map((/** @type {{category:number}} */ g) => g.category);
+  const codes = [...new Set(categories)].sort((a, b) => a - b);
+  const lightColours = roundCategoryColours(categories), darkColours = roundCategoryColours(categories, 'dark');
+  const guests = request.guests.map((/** @type {{id:string,category:number,fixedSeat?:boolean}} */ g) => {
+    const light = /** @type {string} */ (lightColours.get(g.category)), dark = /** @type {string} */ (darkColours.get(g.category));
+    return { id: g.id, name: g.id.split(' ')[0], category: g.category, fixed: !!g.fixedSeat, light, dark, inkLight: inkOn(light), inkDark: inkOn(dark) };
+  });
+  const samples = motion[0].paths[0].length;
+  const transitions = motion.map(({ paths }) => encodeRoutes(paths));
+  const data = {
+    width: W, height: H, radius: geometry.radius, coordinateScale: 100, samples, encoding: 'delta-runs-v1',
+    tables: geometry.obstacles.map(o => [o.x, o.y, o.radius]), guests, rounds: geometry.rounds, transitions, camera: geometry.camera,
+    provenance: { request: 'seating/examples/rounds-room.json', objective: result.objective, travelMetric: 'table-center Euclidean distance; drawn routes are not objective costs', search: result.search, routing: motion.map(({ clearance, priorityRetries }) => ({ ...clearance, priorityRetries })) },
+  };
+  writeFileSync(new URL('../../../assets/cards/seating-motion.json', import.meta.url), JSON.stringify(data) + '\n');
+  const tables = geometry.obstacles.map(o => `<circle class="table" cx="${o.x}" cy="${o.y}" r="${o.radius}"/>`).join('');
+  const final = /** @type {import('../seating-swarm.mjs').Point[]} */ (geometry.rounds.at(-1));
+  const dots = guests.map((/** @type {typeof guests[number]} */ g, /** @type {number} */ i) => `<circle class="guest c${g.category}${g.fixed ? ' fixed' : ''}" cx="${final[i][0]}" cy="${final[i][1]}" r="${geometry.radius}"/>`).join('');
+  const css = codes.map(c => `& .c${c} { fill: ${lightColours.get(c)}; } :root[data-theme="dark"] & .c${c} { fill: ${darkColours.get(c)}; }`).join('\n');
+  return art({ name: 'seating', width: W, height: H, period: 28, player: 'seating',
+    body: `<g class="player-still"><text class="heading" x="8" y="16">50 tables · 5 rounds</text>${tables}${dots}</g><rect class="seating-clock" width="0" height="0"/>`,
+    css: `& .heading { fill: var(--art-ink); font: 600 11px system-ui, sans-serif; }\n& .table { fill: var(--surface); stroke: var(--art-line); stroke-width: .5; }\n& .guest { stroke: var(--art-ink); stroke-width: .3; }\n& .fixed { stroke-width: .4; }\n${css}`,
+    loop: '& .seating-clock { animation: seating-clock 28s linear infinite; }\n@keyframes seating-clock { from { opacity: .99; } to { opacity: 1; } }',
+  });
+}
+
+/** Lossless integer deltas and repeated-position runs keep the routed asset small.
+ * @param {import('../seating-swarm.mjs').Point[][]} paths
+ */
+export function encodeRoutes(paths) {
+  /** @type {number[]} */ const bytes = [];
+  const put = (/** @type {number} */ value) => { while (value >= 128) { bytes.push((value & 127) | 128); value >>>= 7; } bytes.push(value); };
+  const signed = (/** @type {number} */ value) => value < 0 ? -2 * value - 1 : 2 * value;
+  for (const path of paths) {
+    const points = path.map(p => p.map(value => Math.round(value * 100)));
+    put(points[0][0]); put(points[0][1]);
+    for (let i = 1; i < points.length;) {
+      const dx = points[i][0] - points[i - 1][0], dy = points[i][1] - points[i - 1][1];
+      if (dx === 0 && dy === 0) {
+        let count = 1;
+        while (i + count < points.length && points[i + count][0] === points[i][0] && points[i + count][1] === points[i][1]) count++;
+        put(0); put(count); i += count;
+      } else { put(signed(dx) + 1); put(signed(dy)); i++; }
+    }
   }
-  let body = obstacles.map(o => `<circle class="table" cx="${num(o.x, 2)}" cy="${num(o.y, 2)}" r="${num(o.radius, 2)}"/>`).join('');
-  let loop = '';
-  for (const [i, guest] of guests.entries()) {
-    const [x0, y0] = starts[i];
-    const c = /** @type {number} */ (category.get(guest));
-    body += `<g transform="translate(${num(x0, 2)} ${num(y0, 2)})"><g class="guest c${cats.indexOf(c)} m${i}" data-guest="${esc(guest)}"><circle r="${num(radius, 2)}"/><text>${esc(categoryText(c))}</text></g></g>`;
-    const stops = paths[i].map(([x, y], frame) => {
-      // Inverse cosine spacing eases the whole shared timeline, keeping every segment
-      // synchronized and the continuous separation proof valid.
-      const progress = frame / (paths[i].length - 1);
-      const t = HOLD + MOVE * Math.acos(1 - 2 * progress) / Math.PI;
-      return `${num(100 * t / half, 6)}% { transform: translate(${num(x - x0, 2)}px, ${num(y - y0, 2)}px); }`;
-    });
-    const end = /** @type {import('../seating-swarm.mjs').Point} */ (paths[i].at(-1));
-    loop += `& .m${i} { animation: seating-m${i} ${num(half, 3)}s linear alternate infinite; }
-@keyframes seating-m${i} { 0% { transform: none; } ${stops.join(' ')} 100% { transform: translate(${num(end[0] - x0, 2)}px, ${num(end[1] - y0, 2)}px); } }
-`;
-  }
-  return art({ name: 'seating', period, width: W, height: H, body, css, loop });
+  return Buffer.from(bytes).toString('base64');
 }
