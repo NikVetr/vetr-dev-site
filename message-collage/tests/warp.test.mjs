@@ -4,6 +4,7 @@ import {test} from 'node:test';
 import {submit,loadFaces,renderSvg,renderPdf,CollageError} from '../core/index.js';
 import {applyMatrix,glyphGeometry,warpMessages} from '../core/warp.js';
 import {overlaps} from '../core/rotation.js';
+import {createWarpGrid,gridGradientBound} from '../core/warp-grid.js';
 
 const example=JSON.parse(readFileSync(new URL('../examples/request.json',import.meta.url),'utf8'));
 const baseline=submit({...example,warp_strength:0});
@@ -21,7 +22,7 @@ test('warp is opt-in, deterministic and leaves packing, angles and the baseline 
  assert.deepEqual(after,await submit({...example,warp_strength:1}));
  assert.ok(after.warp);
  assert.ok(after.warp.accepted_steps>0);
- assert.ok(after.warp.glyph_box_area_after>after.warp.glyph_box_area_before);
+ assert.ok(after.warp.glyph_box_area_after>after.warp.glyph_box_area_before*1.03,'the example gains at least 3% glyph-box area, avoiding the ineffective isolated-node result');
  assert.ok(after.warp.max_stretch<=1.12 && after.warp.min_stretch>=0.91);
  const faces=await loadFaces(before.request.fonts,before.request.styles);
  assert.equal(renderSvg(omitted,faces),renderSvg(before,faces));
@@ -34,6 +35,13 @@ test('deformed glyph bounds remain inside the card, with no newly intersecting p
  for(const seed of [1,2]){
   const after=seed===1?await warped:await submit({...example,seed,warp_strength:0.6});
   const faces=await loadFaces(after.request.fonts,after.request.styles);
+  assert.ok(after.warp);
+  const grid=createWarpGrid(after.card.width_in,after.card.height_in);
+  assert.equal(after.warp.basis,'cubic-bspline');
+  assert.deepEqual(after.warp.cells,{x:grid.cellsX,y:grid.cellsY});
+  assert.equal(after.warp.nodes.length,grid.nodes.length);
+  grid.nodes=after.warp.nodes;
+  assert.ok(gridGradientBound(grid)<=after.warp.gradient_bound+1e-12,'the entire grid is certified, including empty regions and free outer controls');
   const glyphs=glyphGeometry(after,faces);
   /** @type {number[][]} */ const affines=[];
   const originals=glyphs.map(g=>g.corners.map(p=>applyMatrix(g.matrix,p)));

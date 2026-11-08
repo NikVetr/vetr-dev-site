@@ -37,7 +37,7 @@ export { renderPdf, renderSvg } from './render.js';
  *   y: number, cap_height: number, x_in: number, center_in: number, baseline_in: number, family: string, style: number,
  *   style_name: StyleName, cex: number, font_size_pt: number, color: string, glyph_transforms?: number[][] }} Line
  * @typedef {{ run: number, seed: number, empty_fraction: number, height_in: number }} Run
- * @typedef {{ card: Card, messages: Message[], lines: Line[], runs: Run[], warp?: {strength:number,nodes: {x:number,y:number,rx:number,ry:number,dx:number,dy:number}[],accepted_steps:number,glyph_box_area_before:number,glyph_box_area_after:number,min_stretch:number,max_stretch:number,max_displacement_in:number,gradient_bound:number},
+ * @typedef {{ card: Card, messages: Message[], lines: Line[], runs: Run[], warp?: {strength:number,basis:'cubic-bspline',cells:{x:number,y:number},nodes: import('./warp-grid.js').Node[],accepted_steps:number,glyph_box_area_before:number,glyph_box_area_after:number,min_stretch:number,max_stretch:number,max_displacement_in:number,gradient_bound:number},
  *   fonts: { family: string, category: string, files: Record<string, string> }[], request: Request }} Result
  */
 

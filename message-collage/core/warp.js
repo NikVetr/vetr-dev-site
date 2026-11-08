@@ -3,10 +3,10 @@
 import { faceKey } from './fonts.js';
 import { overlaps } from './rotation.js';
 import { CollageError } from './request.js';
+import { createWarpGrid, gridWeights, gridGradientBound } from './warp-grid.js';
 
 /** @typedef {[number, number]} Point */
 /** @typedef {[number, number, number, number, number, number]} Matrix */
-/** @typedef {{x:number,y:number,rx:number,ry:number,dx:number,dy:number}} Node */
 /** @typedef {{matrix:Matrix, center:Point, corners:Point[], area:number, line:number, char:number}} Geometry */
 /** @param {Matrix} m @param {Point} p @returns {Point} */
 export const applyMatrix = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
@@ -44,17 +44,6 @@ export function glyphGeometry(result, faces) {
   });
 }
 
-/** Compact C2 basis and derivative. @param {number} u */
-function bump(u) { return Math.abs(u) >= 1 ? [0, 0] : [(1 - u * u) ** 3, -6 * u * (1 - u * u) ** 2]; }
-/** @param {Node} node @param {Point} p */
-function basis(node, [x, y]) {
-  const [bx, dx] = bump((x - node.x) / node.rx), [by, dy] = bump((y - node.y) / node.ry);
-  return [bx * by, dx * by / node.rx, bx * dy / node.ry];
-}
-/** @param {number} lo @param {number} hi @param {boolean} derivative */
-function maximum(lo, hi, derivative) {
-  return Math.max(...[lo, hi, -1 / Math.sqrt(5), 0, 1 / Math.sqrt(5)].filter((v, i) => i < 2 || (v >= lo && v <= hi)).map(v => Math.abs(bump(v)[derivative ? 1 : 0])));
-}
 /** @param {Point[]} points */
 function bounds(points) {
   return { left: Math.min(...points.map(p => p[0])), right: Math.max(...points.map(p => p[0])), top: Math.min(...points.map(p => p[1])), bottom: Math.max(...points.map(p => p[1])) };
@@ -86,7 +75,7 @@ export function collisionPairs(polygons, width, height) {
 }
 
 /** Deterministic coordinate ascent of the summed glyph control-box area. No layout RNG.
- * The grid fixes all four edges. Interval bounds certify ||DF-I||₂ < 1 over the entire
+ * Neighbor-difference bounds certify ||DF-I||₂ < 1 over the entire
  * card, so the smooth field cannot fold; glyph transforms are also checked individually.
  * @param {import('./index.js').Result} result @param {Map<string,import('./fonts.js').Face>} faces
  */
@@ -117,26 +106,14 @@ export function warpMessages(result, faces) {
     const b = components.get(root(i));
     return b ? /** @type {Point} */ ([(b.left + b.right) / 2, (b.top + b.bottom) / 2]) : g.center;
   });
-  /** @type {Node[]} */ const nodes = [];
-  const nx = 12, ny = 10;
-  for (let y = 1; y < ny; y++) for (let x = 1; x < nx; x++) nodes.push({ x: width * x / nx, y: height * y / ny, rx: width / nx, ry: height / ny, dx: 0, dy: 0 });
-  const bases = centers.map(center => nodes.flatMap((n, j) => { const b = basis(n, center); return b.some(v => v !== 0) ? [{ j, b }] : []; }));
-  // Conservative derivative maxima over every rectangle, not just sampled Jacobians.
-  const certificates = Array.from({ length: nx * ny * 4 }, (_, i) => nodes.flatMap((n, j) => {
-    const x0 = (width * (i % (nx * 2)) / (nx * 2) - n.x) / n.rx, x1 = x0 + width / (nx * 2) / n.rx;
-    const y0 = (height * Math.floor(i / (nx * 2)) / (ny * 2) - n.y) / n.ry, y1 = y0 + height / (ny * 2) / n.ry;
-    const dx = maximum(x0, x1, true) / n.rx * maximum(y0, y1, false), dy = maximum(x0, x1, false) * maximum(y0, y1, true) / n.ry;
-    return dx || dy ? [{j,dx,dy}] : [];
-  }));
+  const grid = createWarpGrid(width, height), {nodes} = grid;
+  const bases = centers.map(center => gridWeights(grid, center));
   const originalArea = geometry.reduce((sum, g) => sum + g.area, 0);
   /** @param {boolean} validate */
   function evaluate(validate) {
-    if (validate) for (const certificate of certificates) {
-      let xx = 0, xy = 0, yx = 0, yy = 0;
-      certificate.forEach(({j, dx, dy}) => { const n = nodes[j]; xx += Math.abs(n.dx) * dx; xy += Math.abs(n.dx) * dy; yx += Math.abs(n.dy) * dx; yy += Math.abs(n.dy) * dy; });
-      if (Math.max(xx + xy, yx + yy, xx + yx, xy + yy) > 0.18 * strength) return null;
-    }
+    if (validate && gridGradientBound(grid) > 0.18 * strength) return null;
     let area = 0, maxStretch = 1, minStretch = 1, maxDisplacement = 0;
+    /** @type {number[][]} */ const jacobians = [];
     /** @type {Matrix[]} */ const matrices = [];
     /** @type {Point[][]} */ const polygons = [];
     for (let i = 0; i < geometry.length; i++) {
@@ -147,6 +124,7 @@ export function warpMessages(result, faces) {
       const disc = Math.sqrt(Math.max(0, trace * trace - 4 * det * det));
       const high = Math.sqrt((trace + disc) / 2), low = Math.sqrt((trace - disc) / 2);
       if (validate && (high > 1 + 0.12 * strength || low < 1 - 0.09 * strength || high / low > 1 + 0.16 * strength || Math.abs(Math.atan2(b - c, a + d)) > 0.05 * strength)) return null;
+      jacobians.push([a, b, c, d]);
       maxStretch = Math.max(maxStretch, high); minStretch = Math.min(minStretch, low);
       const [ma, mb, mc, md, mx, my] = g.matrix;
       const center = centers[i];
@@ -158,24 +136,43 @@ export function warpMessages(result, faces) {
       matrices.push(matrix); polygons.push(polygon); area += g.area * det;
     }
     if (validate && [...collisionPairs(polygons, width, height)].some(pair => !originalCollisions.has(pair))) return null;
-    return { matrices, area, maxStretch, minStretch, maxDisplacement };
+    return { matrices, area, maxStretch, minStretch, maxDisplacement, jacobians };
   }
   let best = /** @type {NonNullable<ReturnType<typeof evaluate>>} */ (evaluate(false)), accepted = 0;
-  // Fixed finite work: 99 nodes × two axes × six sweeps. Gradient signs use the
-  // current determinant objective; each accepted step is fully checked before use.
+  // The area gradient proposes collective expansion; the collision and shape
+  // constraints determine which space is available. Move all controls together
+  // first, then refine individual controls. Every accepted proposal satisfies
+  // the strain, card-bound and collision constraints.
+  function gradient() {
+    const out = nodes.map(() => ({dx: 0, dy: 0}));
+    geometry.forEach((g, i) => {
+      const [a, b, c, d] = best.jacobians[i];
+      bases[i].forEach(({j, b: [, vx, vy]}) => { out[j].dx += g.area * (vx * d - vy * b); out[j].dy += g.area * (a * vy - c * vx); });
+    });
+    return out;
+  }
+  // Fixed work: six sweeps, at most four collective steps per sweep, eight
+  // backtracking trials per collective step, and two coordinate trials per node.
   for (let pass = 0; pass < 6; pass++) {
     const step = Math.min(width, height) * 0.004 * strength / (1 << Math.floor(pass / 2));
-    const moves = nodes.flatMap(n => (/** @type {const} */ (['dx', 'dy'])).map(axis => {
-      const previous = n[axis]; n[axis] = previous + step;
-      const score = /** @type {NonNullable<ReturnType<typeof evaluate>>} */ (evaluate(false)).area - best.area; n[axis] = previous;
-      return {n,axis,score};
-    })).sort((a,b) => Math.abs(b.score) - Math.abs(a.score));
-    for (const {n,axis} of moves) {
-      const previous = n[axis];
-      n[axis] = previous + step;
-      const plus = evaluate(false);
-      const sign = plus && plus.area > best.area ? 1 : -1;
-      n[axis] = previous + sign * step;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const grad = gradient(), scale = Math.max(...grad.flatMap(g => [Math.abs(g.dx), Math.abs(g.dy)]));
+      if (scale === 0) break;
+      const previous = nodes.map(n => [n.dx, n.dy]);
+      let moved = false;
+      for (let back = 0; back < 8; back++) {
+        const rate = step / (2 ** back) / scale;
+        nodes.forEach((n, i) => { n.dx = previous[i][0] + rate * grad[i].dx; n.dy = previous[i][1] + rate * grad[i].dy; });
+        const next = evaluate(true);
+        if (next && next.area > best.area + 1e-10) { best = next; accepted++; moved = true; break; }
+      }
+      if (!moved) { nodes.forEach((n, i) => { [n.dx, n.dy] = previous[i]; }); break; }
+    }
+    const grad = gradient();
+    const moves = nodes.flatMap((n, i) => (/** @type {const} */ (['dx', 'dy'])).map(axis => ({n, axis, score: grad[i][axis]})))
+      .sort((a, b) => Math.abs(b.score) - Math.abs(a.score));
+    for (const {n, axis, score} of moves) {
+      const previous = n[axis]; n[axis] += step * Math.sign(score);
       const next = evaluate(true);
       if (next && next.area > best.area + 1e-10) { best = next; accepted++; }
       else n[axis] = previous;
@@ -183,6 +180,6 @@ export function warpMessages(result, faces) {
   }
   result.lines.forEach(line => { line.glyph_transforms = []; });
   geometry.forEach((g, i) => { result.lines[g.line].glyph_transforms?.push(best.matrices[i].map(v => v * 72)); });
-  result.warp = { strength, nodes, accepted_steps: accepted, glyph_box_area_before: originalArea, glyph_box_area_after: best.area,
+  result.warp = { strength, basis: 'cubic-bspline', cells: {x: grid.cellsX, y: grid.cellsY}, nodes, accepted_steps: accepted, glyph_box_area_before: originalArea, glyph_box_area_after: best.area,
     min_stretch: best.minStretch, max_stretch: best.maxStretch, max_displacement_in: best.maxDisplacement, gradient_bound: 0.18 * strength };
 }

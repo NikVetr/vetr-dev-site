@@ -1,4 +1,5 @@
-// Message Collage: the page's dense, gently rotated example, built by its actual core.
+// Message Collage: the page's dense, gently rotated example with local warp at 1.
+// This is an explicit preview setting; the app example and API keep warp off by default.
 // The larger 2×3 tile uses the 264×220 canvas. Four real layouts crossfade on hover;
 // line positions, relative sizes, colours and collision-checked rotations match the app.
 import { readFileSync } from 'node:fs';
@@ -16,7 +17,7 @@ export async function build() {
   const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
   /** @type {Awaited<ReturnType<typeof submit>>[]} */
   const results = [];
-  for (const seed of SEEDS) results.push(await submit({ ...request, seed }));
+  for (const seed of SEEDS) results.push(await submit({ ...request, seed, warp_strength: 1 }));
   const [first] = results;
   const faces = await loadFaces(first.request.fonts, first.request.styles);
   // One scale for every layout, the tallest fitting the canvas; the cards share their top left.
@@ -43,6 +44,12 @@ export async function build() {
     const lines = svg.slice(endDefs + '</defs>'.length).replace(/<rect[^>]+\/>/, '').replace(/<\/svg>\s*$/, '').replace(/xlink:href="#([^"]+)"/g, (_, id) => {
       if (!ids.has(id)) throw new Error(`message-collage: undefined glyph ${id}`);
       return `href="#${ids.get(id)}"`;
+    }).replace(/matrix\(([^)]+)\)/g, (_, /** @type {string} */ values) => {
+      // Compact the thumbnail only: this changes glyph positions by less than
+      // 0.001 px at card size. App and downloadable exports retain full precision.
+      const matrix = values.split(/\s+/).map(Number);
+      if (matrix.length !== 6 || matrix.some(v => !Number.isFinite(v))) throw new Error('message-collage: invalid glyph matrix');
+      return `matrix(${matrix.map((v, j) => num(v, j < 4 ? 7 : 4)).join(' ')})`;
     });
     const delay = ((((i * HOLD - shift) % period) + period) % period) - period;
     return `<g class="layout${i ? '' : ' still'}" style="animation-delay:${num(delay, 3)}s"><g transform="translate(${num(x0, 4)} ${num(y0, 4)}) scale(${num(k, 6)})">\n${lines}\n</g></g>`;
