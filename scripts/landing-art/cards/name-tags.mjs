@@ -3,14 +3,16 @@ import { readFileSync } from 'node:fs';
 import { normalizeRequest } from '../../../name-tags/core/request.js';
 import { submit } from '../../../name-tags/core/index.js';
 import { BALANCED_STYLE } from '../../../name-tags/presets.js';
-import { H, W, art, num, simplifyPath } from '../svg.mjs';
+import { art, num, simplifyPath } from '../svg.mjs';
 
 const PERIOD = 10;
+const W=360,H=125;
 
 export async function build() {
   const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../name-tags/examples/${f}`, import.meta.url), 'utf8');
-  const names = read('historical-figures.txt').trim().split('\n');
-  const tray = JSON.parse(read('tray-4x3.json'));
+  // A real five-column tray fills the wide card; all fifteen names use the same core fit.
+  const names = [...read('historical-figures.txt').trim().split('\n'),'Katherine Johnson','Dorothy Hodgkin','Mary Anning'];
+  const tray = {...JSON.parse(read('tray-4x3.json')),name:'landing_5x3',grid:[5,3],page_in:[15,6]};
   const request={names,tray,style:BALANCED_STYLE};
   const normalized=normalizeRequest(request);
   /** @type {Parameters<NonNullable<NonNullable<Parameters<typeof submit>[1]>['onFitTrace']>>[1][][]} */
@@ -28,7 +30,7 @@ export async function build() {
   const bottom = tray.first_center_in[1] - ch / 2;
   const width = cols * cw + (cols - 1) * sx;
   const height = rows * ch + (rows - 1) * sy;
-  const k = Math.min((W - 14) / width, (H - 14) / height) / 96;
+  const k = Math.min((W - 8) / width, (H - 4) / height) / 96;
   const top = (tray.page_in[1] - bottom - height) * 96;
   const ox = (W - width * 96 * k) / 2 - left * 96 * k;
   const oy = (H - height * 96 * k) / 2 - top * k;
@@ -89,14 +91,14 @@ export async function build() {
     }
   }
   return art({
-    name: 'name-tags', period: PERIOD,
+    name: 'name-tags', period: PERIOD, width:W,height:H,
     defs: `${clips.join('')}<path id="name-tags-design" d="${engraving}"/>
 <clipPath id="name-tags-etched"><rect class="scan-window" width="${W}" height="${H}"/></clipPath>
 <mask id="name-tags-contact" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><use href="#name-tags-design" fill="white" stroke="white" stroke-width="1"/></mask>`,
-    body: `<g class="layout"><g class="fitting">${pieces.join('')}</g><use class="fitted piece" href="#name-tags-design"/></g>
+    body: `<g class="cycle"><g class="layout"><g class="fitting">${pieces.join('')}</g><path class="fitted piece" d="${groups.filter((_,i)=>i%3===2).join('')}"/></g>
 <g clip-path="url(#name-tags-etched)"><rect class="paper" width="${W}" height="${H}"/><use class="engraving" href="#name-tags-design"/></g>
 <g class="laser-pass"><path class="laser" d="M0 0H${W}"/><g mask="url(#name-tags-contact)"><path class="contact" d="M0 0H${W}"/></g></g>
-<path class="cells" d="${cells}"/>`,
+</g><path class="cells" d="${cells}"/>`,
     css: `& .engraving { fill: var(--art-ink); stroke: var(--art-ink); stroke-width: 0.18; fill-rule: evenodd; }
 & .layout { opacity: 0; }
 & .piece { fill: none; stroke: #8b939c; stroke-width: 0.45; transform-origin: 0 0; vector-effect:non-scaling-stroke; }
@@ -107,10 +109,12 @@ export async function build() {
 & .contact { stroke: #ff5145; stroke-width: 2.8; stroke-linecap: round; filter: drop-shadow(0 0 1px #ff3228); }`,
     loop: `& .layout { opacity: 1; }
 ${motions.join('\n')}
-& .fitting { animation:name-tags-fitting ${PERIOD}s step-end infinite; }
-& .fitted { animation:name-tags-fitted ${PERIOD}s step-end infinite; }
-@keyframes name-tags-fitting { 0% { opacity:1; } 35%,100% { opacity:0; } }
-@keyframes name-tags-fitted { 0% { opacity:0; } 35%,100% { opacity:1; } }
+& .cycle { animation:name-tags-cycle ${PERIOD}s linear infinite; }
+& .reservation { animation:name-tags-fitting ${PERIOD}s linear infinite; }
+& .fitted { animation:name-tags-fitted ${PERIOD}s linear infinite; }
+@keyframes name-tags-cycle { 0%,100% { opacity:0; } 4%,94% { opacity:1; } }
+@keyframes name-tags-fitting { 0%,34% { opacity:1; } 40%,100% { opacity:0; } }
+@keyframes name-tags-fitted { 0%,34% { opacity:0; } 40%,100% { opacity:1; } }
 & .scan-window { animation: name-tags-reveal ${PERIOD}s linear infinite; }
 & .laser, & .contact { animation: name-tags-scan ${PERIOD}s linear infinite; }
 & .laser-pass { animation: name-tags-laser ${PERIOD}s linear infinite; }

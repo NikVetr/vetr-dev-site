@@ -2,9 +2,10 @@
 import { readFileSync } from 'node:fs';
 import { DEFAULTS, submit } from '../../../signature/core/index.js';
 import { readSignature } from '../../../signature/core/input.js';
-import { H, W, art, num, polyline } from '../svg.mjs';
+import { art, num, polyline } from '../svg.mjs';
 
 const PERIOD = 10;
+const W=360,H=125;
 export const PREVIEW_SMOOTH={fourier:{strength:10},wavelet:{rule:'energy',keepEnergy:.99,thresholdSmooth:false}};
 
 export function build() {
@@ -16,7 +17,7 @@ export function build() {
   const rawPoints=raw.flat();
   const bx=Math.min(rx,...rawPoints.map(p=>p.x)),by=Math.min(ry,...rawPoints.map(p=>p.y));
   const bw=Math.max(rx+rw,...rawPoints.map(p=>p.x))-bx,bh=Math.max(ry+rh,...rawPoints.map(p=>p.y))-by;
-  const k = Math.min((W - 28) / bw, (H - 28) / bh);
+  const k = Math.min((W - 10) / bw, (H - 10) / bh);
   const ox = (W - bw * k) / 2 - bx * k;
   const oy = (H - bh * k) / 2 - by * k;
   const at = (/** @type {number} */ x, /** @type {number} */ y) => [ox + x * k, oy + y * k];
@@ -35,20 +36,20 @@ export function build() {
 @keyframes signature-draw-${i} { 0%, ${num(from, 3)}% { stroke-dashoffset: 1; opacity:0; } ${num(from+.02,3)}% { opacity:1; } ${num(to, 3)}%, 100% { stroke-dashoffset: 0; opacity:1; } }`);
     return `<path class="stroke-${i}" pathLength="1" d="${polyline(stroke.map(p => at(p.x, p.y)))}"/>`;
   }).join('');
-  return art({ name: 'signature', period: PERIOD,
+  return art({ name: 'signature', period: PERIOD,width:W,height:H,
     defs: `<clipPath id="signature-raw-clip"><rect class="smooth-front" width="${W}" height="${H}"/></clipPath>
 <clipPath id="signature-smooth-clip"><rect class="smooth-front" x="${-W}" width="${W}" height="${H}"/></clipPath>
 <clipPath id="signature-ink-clip"><rect class="ink-front" width="${W}" height="${H}"/></clipPath>`,
     body: `<g class="workflow"><g class="input" clip-path="url(#signature-raw-clip)">${input}</g><path class="centerline" clip-path="url(#signature-smooth-clip)" d="${smooth}"/></g>
-<g clip-path="url(#signature-ink-clip)"><rect class="ink-paper" width="${W}" height="${H}"/><path class="ink" d="${ink}"/></g>
-<path class="scanner" d="M0 9V171"/>`,
+<g class="ink-stage" clip-path="url(#signature-ink-clip)"><rect class="ink-paper" width="${W}" height="${H}"/><path class="ink" d="${ink}"/></g>
+<path class="scanner" d="M0 6V${H-6}"/>`,
     css: `& .ink { fill: var(--art-ink); fill-rule: evenodd; }
 & .ink-paper { fill: var(--art-paper); }
 & .workflow, & .scanner { opacity: 0; }
 & .input, & .centerline { fill: none; stroke: var(--art-ink); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 & .input path { stroke-dasharray: 1; }
 & .scanner { stroke: #d0312d; stroke-width: 1; }`,
-    loop: `& .workflow { opacity: 1; animation: signature-workflow ${PERIOD}s linear infinite; }
+    loop: `& .workflow, & .ink-stage { opacity: 1; animation: signature-workflow ${PERIOD}s linear infinite; }
 & .smooth-front { animation: signature-smooth ${PERIOD}s linear infinite; }
 & .ink-front { animation: signature-ink ${PERIOD}s linear infinite; }
 & .scanner { animation: signature-scan ${PERIOD}s linear infinite; }

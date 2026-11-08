@@ -14,7 +14,7 @@ import { rMersenneTwister } from '../../shared/rng.js';
 
 const EXAMPLES = [
   { file: 'avery-quill.csv', text: 'Avery Quill', seed: 20230830, slant: 0.32, height: 150, rotate: -0.035 },
-  { file: 'avery-quill-rough.csv', text: 'Avery Quill', seed: 20230830, slant: 0.32, height: 150, rotate: -0.035, wobble: 6, tremor: 8 },
+  { file: 'avery-quill-rough.csv', text: 'Avery Quill', seed: 20230830, slant: 0.32, height: 150, rotate: -0.035, wobble: 6, tremor: 1.8 },
   { file: 'juno-marsh.csv', text: 'Juno Marsh', seed: 20230831, slant: 0.18, height: 160, rotate: 0.02 },
 ];
 

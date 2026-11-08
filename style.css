@@ -294,6 +294,11 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   [data-size^="1x"] > .project-card > .project-date { align-self: end; }
 }
 
+/* Wide workflow drawings use their own proportions in content-height phone rows. */
+@media (max-width: 35.99rem), (orientation: landscape) and (max-height: 500px) {
+  .card-art[data-art="signature"], .card-art[data-art="name-tags"] { aspect-ratio: 360 / 125; }
+}
+
 /* The photo is 4:3. Give it a substantial image beside its short description in
    compact cards; larger, taller cards have room for the full image above it. */
 @media (max-width: 35.99rem), (orientation: landscape) and (max-height: 500px) {

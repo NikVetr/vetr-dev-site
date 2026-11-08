@@ -39,7 +39,7 @@ test('Palette field pixels use the same Machado CVD transform as app swatches in
 });
 
 
-test('Signature preview uses the rough input and materially smooths that same input through the actual core',()=>{
+test('Signature preview preserves natural unevenness without excessive tremor and smooths that same input through the core',()=>{
  const csv=readFileSync(new URL('../../../signature/examples/avery-quill-rough.csv',import.meta.url),'utf8');
  const baseline=readFileSync(new URL('../../../signature/examples/avery-quill.csv',import.meta.url),'utf8');
  const raw=readSignature({csv},'',DEFAULTS.input,[],[]),original=readSignature({csv:baseline},'',DEFAULTS.input,[],[]);
@@ -51,8 +51,10 @@ test('Signature preview uses the rough input and materially smooths that same in
  const rawLength=raw.reduce((sum,st)=>sum+length(st.map(p=>[p.x,p.y])),0);
  const originalLength=original.reduce((sum,st)=>sum+length(st.map(p=>[p.x,p.y])),0);
  const correctedLength=corrected.strokes.reduce((sum,st)=>sum+length(st.points),0);
- assert.ok(rawLength>originalLength*1.5);
- assert.ok(correctedLength<rawLength*.8);
+ // The preview should be visibly uneven, without the former tremor-dominated doubling of path length.
+ assert.ok(rawLength>originalLength*1.05);
+ assert.ok(rawLength<originalLength*1.3);
+ assert.ok(correctedLength<rawLength*.9);
  assert.equal(corrected.strokes.length,raw.length);
  assert.deepEqual(corrected.warnings,[]);
 });
