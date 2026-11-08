@@ -28,6 +28,7 @@ const el = {
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
   preview: byId('preview'), downloads: byId('downloads'), undoNote: byId('undo-note'), undoText: byId('undo-text'),
+  previewView: byId('preview-view'), previewNote: byId('preview-note'),
 };
 
 /** @type {Result | null} */
@@ -39,6 +40,7 @@ let resultInputs = null;
 /** Whether the last run since those sheets failed. */
 let failed = false;
 let shownSheet = 0;
+let previewView = 'tags';
 /** @type {Record<string, any> | null} */
 let customTray = null;
 /** @type {string | null} */
@@ -174,7 +176,9 @@ function showStale() {
     const label = button.dataset.label;
     button.textContent = reason ? `⚠ Out-of-date ${label}` : label[0].toUpperCase() + label.slice(1);
   }
-  el.preview.querySelector('svg')?.setAttribute('aria-label', sheetName());
+  for (const svg of el.preview.querySelectorAll('svg')) {
+    svg.setAttribute('aria-label', `${svg.dataset.tagLabel ? `${svg.dataset.tagLabel}; ` : ''}${sheetName()}`);
+  }
 }
 
 // ---------- files ----------
@@ -438,6 +442,10 @@ el.sheetOptions.addEventListener('change', (/** @type {Event} */ event) => {
   shownSheet = Number(/** @type {HTMLInputElement} */ (event.target).value);
   renderSheet();
 });
+el.previewView.addEventListener('change', () => {
+  previewView = el.previewView.value;
+  renderSheet();
+});
 
 /** What the sheet on view is, as its preview is named. */
 function sheetName() {
@@ -451,13 +459,59 @@ function renderSheet() {
   const svg = el.preview.querySelector('svg');
   svg.setAttribute('role', 'img');
   svg.setAttribute('aria-label', sheetName());
-  if (overlay && el.overlayShow.checked) {
+  const showOverlay = overlay && el.overlayShow.checked;
+  const view = showOverlay ? 'sheet' : previewView;
+  el.previewView.value = view;
+  el.previewView.disabled = Boolean(showOverlay);
+  el.preview.dataset.view = view;
+  el.previewNote.textContent = showOverlay
+    ? 'Full sheet shown for tray alignment. Hide the overlay to inspect individual tags.'
+    : view === 'tags'
+      ? 'Individual tags for inspection; downloads keep their full-sheet positions.'
+      : `${result.tray.page_in.join(' × ')} in — exact sheet size and tag positions.`;
+  if (overlay && showOverlay) {
     const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
     const x = Number.isFinite(el.overlayX.valueAsNumber) ? el.overlayX.valueAsNumber : 0;
     const y = Number.isFinite(el.overlayY.valueAsNumber) ? el.overlayY.valueAsNumber : 0;
     for (const [k, v] of Object.entries({ href: overlay.url, x: x * 96, y: y * 96, width: overlay.w * 96, height: overlay.h * 96, opacity: 0.45 })) image.setAttribute(k, String(v));
     svg.querySelector('rect')?.after(image);
+  } else if (view === 'tags') {
+    inspectTags(svg);
   }
+}
+
+/** Reframe the sheet's own drawing nodes, leaving result/export SVGs untouched.
+ * Each registration outline begins one cell in core/svg.js's sheet format.
+ * @param {SVGSVGElement} sheet
+ */
+function inspectTags(sheet) {
+  if (!result) return;
+  /** @type {SVGGraphicsElement[][]} */
+  const cells = [];
+  for (const child of sheet.children) {
+    if (child.matches('path[fill="none"][stroke="#333333"]')) cells.push([]);
+    if (cells.length) cells.at(-1)?.push(/** @type {SVGGraphicsElement} */ (child));
+  }
+  const tags = result.tags.filter(tag => tag.sheet === result?.sheets[shownSheet].sheet);
+  if (cells.length !== tags.length) throw new Error('The sheet drawings do not match its tag list.');
+  const previews = cells.map((nodes, i) => {
+    const boxes = nodes.map(node => node.getBBox());
+    const left = Math.min(...boxes.map(b => b.x)), top = Math.min(...boxes.map(b => b.y));
+    const right = Math.max(...boxes.map(b => b.x + b.width)), bottom = Math.max(...boxes.map(b => b.y + b.height));
+    // Include registration strokes, glyph overshoots, and a little inspection margin.
+    const padding = Math.max(3, Math.min(right - left, bottom - top) * 0.045);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', `${left - padding} ${top - padding} ${right - left + padding * 2} ${bottom - top + padding * 2}`);
+    svg.setAttribute('role', 'img');
+    svg.dataset.tagLabel = `Cell ${tags[i].cell}: ${tags[i].name}`;
+    svg.setAttribute('aria-label', `${svg.dataset.tagLabel}; ${sheetName()}`);
+    svg.append(...nodes.map(node => node.cloneNode(true)));
+    const caption = Object.assign(document.createElement('p'), { className: 'tag-caption', textContent: `Cell ${tags[i].cell} · ${tags[i].name}` });
+    const preview = Object.assign(document.createElement('div'), { className: 'tag-preview' });
+    preview.append(svg, caption);
+    return preview;
+  });
+  el.preview.replaceChildren(...previews);
 }
 
 /** A sheet's SVG text. @param {number} [sheet] 1-based; the sheet on display by default */

@@ -72,6 +72,7 @@ test('runs the other decorations and reports invalid input', async ({ page }) =>
   await expect(page.locator('#tray-summary')).toContainText('tray-4x3.json: 12 cells');
   await page.locator('#generate').click();
   await expect(page.locator('#status')).toContainText('Done in');
+  await page.locator('#preview-view').selectOption('sheet');
   await expect(page.locator('#preview svg')).toHaveAttribute('viewBox', '0 0 1152 576');
 
   await page.locator('#decoration').selectOption('dna');
@@ -145,4 +146,79 @@ test('balanced default and original proportions round-trip through the request a
   expect(await page.evaluate(() => /** @type {any} */ (window).NameTags.exportSvgText())).not.toBe(original);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await overflow(page)).toBeLessThanOrEqual(0);
+});
+
+test('inspection uses exact cell drawings and preserves exports across views, sheets and overlays', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#preview-view')).toHaveValue('tags');
+  await expect(page.locator('#preview .tag-preview')).toHaveCount(12);
+  const before = await page.evaluate(() => ({
+    svg: /** @type {any} */ (window).NameTags.exportSvgText(),
+    result: JSON.stringify(/** @type {any} */ (window).NameTags.getResult()),
+  }));
+  const shapes = await page.locator('#preview svg').evaluateAll(svgs => svgs.flatMap(svg => [...svg.children].map(node => node.outerHTML)));
+  const fits = await page.locator('#preview svg').evaluateAll(svgs => svgs.every(svg => {
+    const view = /** @type {SVGSVGElement} */ (svg).viewBox.baseVal;
+    return [...svg.children].every(node => {
+      const b = /** @type {SVGGraphicsElement} */ (node).getBBox();
+      return b.x > view.x && b.y > view.y && b.x + b.width < view.x + view.width && b.y + b.height < view.y + view.height;
+    });
+  }));
+  expect(fits).toBe(true);
+  await page.locator('#preview-view').selectOption('sheet');
+  await expect(page.locator('#preview svg')).toHaveAttribute('viewBox', '0 0 2281.92 1248');
+  const fullShapes = await page.locator('#preview svg > path, #preview svg > image').evaluateAll(nodes => nodes.map(node => node.outerHTML));
+  expect(shapes).toEqual(fullShapes);
+  await page.locator('#preview-view').selectOption('tags');
+  await page.locator('.overlay summary').click();
+  await page.locator('#overlay-file').setInputFiles(logo);
+  await expect(page.locator('#preview-view')).toHaveValue('sheet');
+  await expect(page.locator('#preview-view')).toBeDisabled();
+  await expect(page.locator('#preview svg > image')).toHaveCount(1);
+  await page.locator('#overlay-show').uncheck();
+  await expect(page.locator('#preview-view')).toHaveValue('tags');
+  expect(await page.evaluate(() => ({
+    svg: /** @type {any} */ (window).NameTags.exportSvgText(),
+    result: JSON.stringify(/** @type {any} */ (window).NameTags.getResult()),
+  }))).toEqual(before);
+
+  await page.evaluate(async () => {
+    await /** @type {any} */ (window).NameTags.submit({ names: ['Ada Lovelace', 'Alan Turing', 'Grace Hopper'], decoration: 'none', tray: { page_in: [6, 3], grid: [2, 1], cell_in: [2.19, 1.22], spacing_in: [0.3, 0], first_center_in: [1.5, 1.5] } });
+  });
+  await expect(page.locator('#preview .tag-preview')).toHaveCount(2);
+  await page.locator('#sheet-options input[value="1"]').check();
+  await expect(page.locator('#preview .tag-preview')).toHaveCount(1);
+  await expect(page.locator('#preview svg')).toHaveAttribute('aria-label', 'Cell 1: Grace Hopper; Sheet 2 of 2');
+  await page.locator('#preview-view').selectOption('sheet');
+  await page.locator('#generate').click();
+  await expect(page.locator('#status')).toContainText('Done in');
+  await expect(page.locator('#preview-view')).toHaveValue('sheet');
+});
+
+test('compact workspace gives the preview most desktop space and keeps phone controls reachable', async ({ page }) => {
+  await open(page);
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 1366, height: 768 }]) {
+    await page.setViewportSize(viewport);
+    const preview = await page.locator('#preview').boundingBox();
+    const names = await page.locator('.names-card').boundingBox();
+    const design = await page.locator('.design-card').boundingBox();
+    expect(preview && names && preview.width > names.width * 2.5).toBe(true);
+    expect(design && design.y).toBeLessThan(500);
+    await expect(page.locator('#downloads button')).toBeInViewport();
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('link', { name: 'Preview ↓' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#sheets-heading')).toBeFocused();
+  await expect(page.locator('#preview')).toBeInViewport();
+  await page.locator('#preview').focus();
+  await page.keyboard.press('PageDown');
+  await expect.poll(() => page.locator('#preview').evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  for (const selector of ['#generate', '#preview-view', '#font', '#names']) {
+    const height = await page.locator(selector).evaluate(element => element.getBoundingClientRect().height);
+    expect(height).toBeGreaterThanOrEqual(44);
+  }
+  expect(await overflow(page)).toBe(0);
+  await page.setViewportSize({ width: 844, height: 390 });
+  expect(await overflow(page)).toBe(0);
 });

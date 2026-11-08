@@ -14,47 +14,49 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Name Tags</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/name-tags">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Name%20Tags%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Name Tags</h1>
         <p class="tagline">Lay out names, one per tag, in the cells of a laser-cut tray. Each name is fitted around a decoration, and each tray-full is an SVG sheet for the laser cutter.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/name-tags">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Name%20Tags%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
-  <main class="container layout">
-    <section class="card" aria-labelledby="names-heading">
+  <main class="container layout name-tags-workspace">
+    <section class="card names-card" aria-labelledby="names-heading">
       <div class="card-head">
         <h2 id="names-heading">Names</h2>
         <span id="name-count" class="muted"></span>
+        <a class="results-link" href="#sheets-heading">Preview ↓</a>
       </div>
-      <p class="muted hint">One name per line. The first word goes on the top line and the rest below; a <code>|</code> sets the break yourself, as in <code>Mary Ann|Evans</code>.</p>
-      <textarea id="names" rows="12" spellcheck="false" aria-label="Names, one per line"></textarea>
+      <p class="muted hint">One name per line; the first word goes above the rest. Use <code>|</code> for a chosen break: <code>Mary Ann|Evans</code>.</p>
+      <textarea id="names" rows="7" spellcheck="false" aria-label="Names, one per line"></textarea>
       <div class="toolbar">
         <button id="load-example" type="button">Load example</button>
         <button id="clear-names" type="button">Clear</button>
-        <label class="file-button">Open .txt or .csv… <input id="names-file" type="file" accept=".txt,.csv,text/plain,text/csv"></label>
+        <label class="file-button">Open file… <input id="names-file" type="file" accept=".txt,.csv,text/plain,text/csv"></label>
       </div>
       <p id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span> <button id="undo-replace" type="button">Undo</button></p>
     </section>
 
     <section class="card results-card" aria-labelledby="sheets-heading">
       <div class="card-head">
-        <h2 id="sheets-heading">Sheets</h2>
+        <h2 id="sheets-heading" tabindex="-1">Sheets</h2>
+        <div class="toolbar run-actions">
+          <button id="generate" type="button" class="primary">Generate</button>
+          <button id="stop" type="button" disabled>Stop</button>
+        </div>
         <span id="status" class="muted" role="status"></span>
-      </div>
-      <div class="toolbar">
-        <button id="generate" type="button" class="primary">Generate</button>
-        <button id="stop" type="button" disabled>Stop</button>
       </div>
       <div id="issues" class="issues" role="alert" hidden></div>
       <p id="warnings" class="muted" hidden></p>
@@ -65,21 +67,78 @@
           <legend>Sheet</legend>
           <div id="sheet-options" class="toolbar"></div>
         </fieldset>
-        <figure id="preview" class="preview stale-dim"></figure>
+        <div class="preview-tools">
+          <label for="preview-view">View</label>
+          <select id="preview-view" aria-describedby="preview-note">
+            <option value="tags">Used tags</option>
+            <option value="sheet">Full sheet</option>
+          </select>
+          <span id="preview-note" class="muted">Individual tags for inspection; downloads keep their full-sheet positions.</span>
+        </div>
+        <figure id="preview" class="preview stale-dim" tabindex="0" aria-label="Tag previews"></figure>
         <div class="toolbar">
           <span class="muted">Download:</span>
           <span id="downloads" class="toolbar inline"></span>
           <button id="export-result" type="button" data-label="result JSON">Result JSON</button>
           <button id="export-request" type="button" data-label="request JSON">Request JSON</button>
         </div>
-        <p class="muted hint">Sheets are drawn at 96 units per inch with their size in inches, as Inkscape reads them; engraving is filled black, each used cell has a thin grey outline.</p>
       </div>
     </section>
 
-    <section class="card" aria-labelledby="tray-heading">
+    <section class="card design-card" aria-labelledby="design-heading">
+      <h2 id="design-heading">Design</h2>
+      <div class="settings">
+        <label>Line layout
+          <select id="line-layout" aria-describedby="line-layout-hint">
+            <option value="balanced" selected>Balanced lines</option>
+            <option value="original">Original proportions</option>
+            <option value="custom" disabled>Custom proportions</option>
+          </select>
+        </label>
+        <label>Decoration
+          <select id="decoration">
+            <option value="dna">DNA helix</option>
+            <option value="none">None</option>
+            <option value="hershey_ekg">Hershey script with EKG</option>
+            <option value="logo">Logo (sheet of logos)</option>
+          </select>
+        </label>
+        <label>Font
+          <select id="font">
+            <option value="Inter">Inter</option>
+            <option value="Source Serif Pro">Source Serif Pro</option>
+          </select>
+        </label>
+        <label class="wide-setting">Top-line descenders (y q p g j)
+          <select id="smallcaps" aria-describedby="smallcaps-hint">
+            <option value="2">Small caps</option>
+            <option value="1">Full capitals</option>
+            <option value="off">As typed</option>
+          </select>
+        </label>
+        <label id="logo-colors-field" class="check wide-setting" hidden><input id="logo-colors" type="checkbox"> Keep the SVG's colours</label>
+        <label>Optimizer restarts per tag
+          <input id="restarts" type="number" min="1" max="1000" step="1" value="20">
+        </label>
+        <label>Seed
+          <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
+        </label>
+      </div>
+      <details class="design-notes">
+        <summary>Line layout and capitals</summary>
+        <p id="line-layout-hint" class="muted hint">Balanced lines favours similar name widths and more horizontal overlap, with a smaller helix beside the lower line.</p>
+        <p id="smallcaps-hint" class="muted hint">Such names are set in capitals. Small caps shrink the letters after each line's first, by the stroke weight of the plain face against the bold.</p>
+      </details>
+      <div id="logo-file-field" class="toolbar" hidden>
+        <label class="file-button">Open logo (SVG, PNG or JPEG)… <input id="logo-file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></label>
+      </div>
+      <p id="logo-status" class="muted" hidden></p>
+    </section>
+
+    <section class="card tray-card" aria-labelledby="tray-heading">
       <h2 id="tray-heading">Tray</h2>
       <div class="settings">
-        <label>Tray
+        <label>Layout
           <select id="tray-choice">
             <option value="keychain_big">Big keychain tray (8 × 8)</option>
             <option value="custom">Custom tray (JSON file)</option>
@@ -113,60 +172,14 @@
       </details>
     </section>
 
-    <section class="card" aria-labelledby="design-heading">
-      <h2 id="design-heading">Design</h2>
-      <div class="settings">
-        <label>Line layout
-          <select id="line-layout" aria-describedby="line-layout-hint">
-            <option value="balanced" selected>Balanced lines</option>
-            <option value="original">Original proportions</option>
-            <option value="custom" disabled>Custom proportions</option>
-          </select>
-        </label>
-        <label>Decoration
-          <select id="decoration">
-            <option value="dna">DNA helix</option>
-            <option value="none">None</option>
-            <option value="hershey_ekg">Hershey script with EKG</option>
-            <option value="logo">Logo (sheet of logos)</option>
-          </select>
-        </label>
-        <label>Font
-          <select id="font">
-            <option value="Inter">Inter</option>
-            <option value="Source Serif Pro">Source Serif Pro</option>
-          </select>
-        </label>
-        <label>Names with descenders (y q p g j) on the top line
-          <select id="smallcaps" aria-describedby="smallcaps-hint">
-            <option value="2">Small caps</option>
-            <option value="1">Full capitals</option>
-            <option value="off">As typed</option>
-          </select>
-        </label>
-        <label id="logo-colors-field" class="check" hidden><input id="logo-colors" type="checkbox"> Keep the SVG's colours</label>
-        <label>Optimizer restarts per tag
-          <input id="restarts" type="number" min="1" max="1000" step="1" value="20">
-        </label>
-        <label>Seed
-          <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
-        </label>
-      </div>
-      <p id="line-layout-hint" class="muted hint">Balanced lines favours similar name widths and more horizontal overlap, with a smaller helix beside the lower line.</p>
-      <p id="smallcaps-hint" class="muted hint">Such names are set in capitals. Small caps shrink the letters after each line's first, by the stroke weight of the plain face against the bold.</p>
-      <div id="logo-file-field" class="toolbar" hidden>
-        <label class="file-button">Open logo (SVG, PNG or JPEG)… <input id="logo-file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></label>
-      </div>
-      <p id="logo-status" class="muted" hidden></p>
-    </section>
-
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
+        <p>SVG downloads keep the full tray size and tag positions. Black shapes engrave; grey outlines mark used cells. Use the full-sheet preview to check their placement.</p>
         <p>Each name becomes one or two lines. A name whose top line has a descender (y, q, p, g or j) is set in capitals, with small capitals after each line's first letter, sized so their strokes about match the plain face.</p>
         <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>
         <p>The Hershey design writes the name in single-stroke Hershey script with a heartbeat trace running into the bottom line and out of the top line. The logo decoration draws one logo per cell instead, for example for the backs of the tags; give it the same names and cells as the front.</p>
-        <p>This is a port of an R program; the seed draws the same random starts as R's <code>set.seed()</code>, and fits from the same starts agree with R's. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+        <p>The seed makes the optimizer's random starts repeatable. The <a href="api.md">API</a> provides the same layout inputs and exports.</p>
       </details>
     </section>
   </main>
