@@ -23,7 +23,7 @@
 :root[data-theme="dark"] [data-art="pocket-language-guide"] text { fill: #E8EDF2; }
 :root[data-theme="dark"] [data-art="pocket-language-guide"] .n, :root[data-theme="dark"] [data-art="pocket-language-guide"] .respell { fill: #A9B4BF; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="pocket-language-guide"][data-playing] .lang { animation: pocket-language-guide-lang 6.65s linear infinite; }
+[data-art="pocket-language-guide"][data-started] .lang { animation: pocket-language-guide-lang 6.65s linear infinite; }
 @keyframes pocket-language-guide-lang { 0% { opacity: 1; } 10.677% { opacity: 1; } 12.481% { opacity: 0; } 98.195% { opacity: 0; } 100% { opacity: 1; } }
 }
 </style>

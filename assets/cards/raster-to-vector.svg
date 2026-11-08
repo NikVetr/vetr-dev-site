@@ -2,7 +2,7 @@
 <style>
 [data-art="raster-to-vector"] .paper {fill:white} [data-art="raster-to-vector"] text {font:11px system-ui,sans-serif;fill:var(--art-ink);text-anchor:middle}
 @media (prefers-reduced-motion: no-preference) {
-[data-art="raster-to-vector"][data-playing] .wipe {animation:raster-to-vector-wipe 6s ease-in-out infinite} @keyframes raster-to-vector-wipe {0%,12%,100%{width:0px}42%,62%{width:144px}88%{width:0px}}
+[data-art="raster-to-vector"][data-started] .wipe {animation:raster-to-vector-wipe 6s ease-in-out infinite} @keyframes raster-to-vector-wipe {0%,12%,100%{width:0px}42%,62%{width:144px}88%{width:0px}}
 }
 </style>
 <defs><clipPath id="raster-to-vector-wipe"><rect class="wipe" x="168" y="8" width="0" height="144"/></clipPath></defs>

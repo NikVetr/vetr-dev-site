@@ -5,8 +5,8 @@
 [data-art="name-tags"] .cover { fill: var(--art-paper); }
 [data-art="name-tags"] .laser { stroke: #e0302a; stroke-width: 1.2; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="name-tags"][data-playing] .engraving { animation: name-tags-fade 6s linear infinite; }
-[data-art="name-tags"][data-playing] .scan { animation: name-tags-scan 6s linear infinite; }
+[data-art="name-tags"][data-started] .engraving { animation: name-tags-fade 6s linear infinite; }
+[data-art="name-tags"][data-started] .scan { animation: name-tags-scan 6s linear infinite; }
 @keyframes name-tags-fade { 0%, 13.333% { opacity: 1; } 20%, 20.833% { opacity: 0; } 22.5%, 100% { opacity: 1; } }
 @keyframes name-tags-scan { 0% { transform: none; } 20.833% { transform: none; animation-timing-function: step-end; } 21%, 23.333% { transform: translateY(-184px); } 83.333%, 100% { transform: none; } }
 }

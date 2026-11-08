@@ -224,6 +224,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 .card-art { position: relative; }
 .card-art .card-player { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card-art:has(.card-player) .player-still { visibility: hidden; }
+.card-art[data-started]:not([data-playing]) * { animation-play-state: paused !important; }
 
 /* The picture fills what the tile leaves above its text; a single column has no rows to fill,
    so there each picture keeps its own shape (one-column tiles beside their text). */

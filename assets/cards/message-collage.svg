@@ -4,9 +4,9 @@
 [data-art="message-collage"] .layout + .layout { opacity: 0; }
 [data-art="message-collage"] .still { will-change: opacity; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="message-collage"][data-playing] .layout { animation: message-collage-layout 6s linear infinite; }
+[data-art="message-collage"][data-started] .layout { animation: message-collage-layout 6s linear infinite; }
 @keyframes message-collage-layout { 0% { opacity: 1; } 18.333% { opacity: 1; } 21.667% { opacity: 0; } 96.667% { opacity: 0; } 100% { opacity: 1; } }
-[data-art="message-collage"][data-playing] .card { animation: message-collage-card 6s linear infinite; }
+[data-art="message-collage"][data-started] .card { animation: message-collage-card 6s linear infinite; }
 @keyframes message-collage-card { 0% { transform: scaleY(0.9875); } 9.167% { transform: scaleY(0.9875); } 12.5% { transform: scaleY(1); } 34.167% { transform: scaleY(1); } 37.5% { transform: scaleY(0.9937); } 59.167% { transform: scaleY(0.9937); } 62.5% { transform: scaleY(1); } 84.167% { transform: scaleY(1); } 87.5% { transform: scaleY(0.9875); } 100% { transform: scaleY(0.9875); } }
 }
 </style>

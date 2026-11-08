@@ -6,8 +6,8 @@
 [data-art="photomosaic"] .dot { fill: var(--art-ink); }
 [data-art="photomosaic"] .dot1 { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="photomosaic"][data-playing] .cells, [data-art="photomosaic"][data-playing] .dot1 { animation: photomosaic-cells 7s ease-in-out infinite; }
-[data-art="photomosaic"][data-playing] .dot0 { animation: photomosaic-mosaic 7s ease-in-out infinite; }
+[data-art="photomosaic"][data-started] .cells, [data-art="photomosaic"][data-started] .dot1 { animation: photomosaic-cells 7s ease-in-out infinite; }
+[data-art="photomosaic"][data-started] .dot0 { animation: photomosaic-mosaic 7s ease-in-out infinite; }
 @keyframes photomosaic-cells { 0% { opacity: 0; } 28.571% { opacity: 0; } 37.143% { opacity: 1; } 77.143% { opacity: 1; } 85.714% { opacity: 0; } 100% { opacity: 0; } }
 @keyframes photomosaic-mosaic { 0% { opacity: 1; } 28.571% { opacity: 1; } 37.143% { opacity: 0; } 77.143% { opacity: 0; } 85.714% { opacity: 1; } 100% { opacity: 1; } }
 }

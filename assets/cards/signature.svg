@@ -4,8 +4,8 @@
 [data-art="signature"] .feather stop { stop-color: var(--art-paper); }
 [data-art="signature"] .input { fill: none; stroke: #d0312d; stroke-width: 0.9; stroke-linejoin: round; stroke-linecap: round; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="signature"][data-playing] .input { animation: signature-input 6s linear infinite; }
-[data-art="signature"][data-playing] .cover { animation: signature-cover 6s ease-in-out infinite; }
+[data-art="signature"][data-started] .input { animation: signature-input 6s linear infinite; }
+[data-art="signature"][data-started] .cover { animation: signature-cover 6s ease-in-out infinite; }
 @keyframes signature-input { 0%, 8.333% { opacity: 0; } 15%, 83.333% { opacity: 1; } 90%, 100% { opacity: 0; } }
 @keyframes signature-cover { 0%, 20% { transform: none; } 43.333%, 53.333% { transform: translateX(320px); } 76.667% { transform: translateX(640px); animation-timing-function: step-end; } 80%, 100% { transform: none; } }
 }

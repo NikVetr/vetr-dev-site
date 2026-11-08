@@ -21,8 +21,9 @@ export function prepare() {
   return plan;
 }
 
-/** Starts the loop in this card picture (after prepare); returns the function that stops it. @param {HTMLElement} art */
-export function play(art) {
+/** Persistent player: pause retains both its canvas and clock.
+ * @param {HTMLElement} art @param {import('../../hypercube/core/plan.js').Plan} p */
+export function create(art, p) {
   const svg = /** @type {SVGSVGElement} */ (art.querySelector('svg'));
   const [bx, by, size] = (svg.dataset.playerBox ?? '').split(' ').map(Number);
   const view = svg.viewBox.baseVal;
@@ -30,28 +31,50 @@ export function play(art) {
   canvas.className = 'card-player';
   const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
   let raf = 0;
-  let stopped = false;
-  prepare().then((p) => {
-    if (stopped) return;
-    const box = { bx, by, size, view };
-    // The still's frame is on the canvas before the canvas takes the still's place.
-    paint(ctx, canvas, art, p, box, STILL);
-    art.append(canvas);
-    let start = -1;
-    /** @param {number} now */
-    const tick = (now) => {
-      if (start < 0) start = now;
-      const css = art.getAnimations({ subtree: true })[0];
-      const elapsed = css && typeof css.currentTime === 'number' ? css.currentTime : now - start;
-      paint(ctx, canvas, art, p, box, ((STILL - 1 + Math.round((elapsed * p.stepsPerSecond) / 1000)) % p.frames) + 1);
-      raf = requestAnimationFrame(tick);
-    };
+  let playing = false;
+  let elapsed = 0;
+  /** @type {number|null} */
+  let last = null;
+  let frame = STILL;
+  const box = { bx, by, size, view };
+  const redraw = () => paint(ctx, canvas, art, p, box, frame);
+  redraw();
+  art.append(canvas);
+  const resize = new ResizeObserver(redraw);
+  resize.observe(art);
+  document.addEventListener('themechange', redraw);
+
+  /** @param {number} now */
+  const tick = (now) => {
+    if (!playing) return;
+    if (last !== null) elapsed += now - last;
+    last = now;
+    // The Intuitions card shares a clock with its other animated scenes.
+    const css = art.getAnimations({ subtree: true })[0];
+    const time = css && typeof css.currentTime === 'number' ? css.currentTime : elapsed;
+    frame = ((STILL - 1 + Math.round((time * p.stepsPerSecond) / 1000)) % p.frames) + 1;
+    redraw();
     raf = requestAnimationFrame(tick);
-  });
-  return () => {
-    stopped = true;
+  };
+  const pause = () => {
+    playing = false;
+    last = null;
     cancelAnimationFrame(raf);
-    canvas.remove();
+  };
+  return {
+    play() {
+      if (playing) return;
+      playing = true;
+      last = null;
+      raf = requestAnimationFrame(tick);
+    },
+    pause,
+    destroy() {
+      pause();
+      resize.disconnect();
+      document.removeEventListener('themechange', redraw);
+      canvas.remove();
+    },
   };
 }
 

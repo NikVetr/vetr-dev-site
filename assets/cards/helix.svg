@@ -2,8 +2,8 @@
 <style>
 [data-art="helix"] .move { will-change: transform; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="helix"][data-playing] .helix .move { animation: helix-turn 4s linear infinite; }
-[data-art="helix"][data-playing] .braid .move { animation: helix-twist 4s linear infinite; }
+[data-art="helix"][data-started] .helix .move { animation: helix-turn 4s linear infinite; }
+[data-art="helix"][data-started] .braid .move { animation: helix-twist 4s linear infinite; }
 @keyframes helix-turn { to { transform: translateY(80px); } }
 @keyframes helix-twist { to { transform: translateY(100px); } }
 }

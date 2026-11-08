@@ -7,11 +7,10 @@ import { mountMosaic } from '../shared/mosaic.js';
 // by scripts/landing-art/ from the tool itself) when it comes near the viewport. The SVG is
 // inlined rather than shown as an <img> so that it paints in the page's theme colours.
 //
-// Hover loops: hovering a card with a mouse or pen, or focusing it from the keyboard, sets
-// data-playing on its picture, which starts the picture's CSS loop; leaving or blurring it
-// removes the attribute, which stops the loop and shows the still again. A picture whose SVG
-// names a data-player also has a script, assets/players/<name>.js, loaded on its first play; its
-// CSS loop starts once the script is ready, so the two run together.
+// Hover loops start on the first mouse/pen hover or keyboard focus. data-started keeps
+// the CSS animations attached; removing data-playing pauses them at their current time.
+// A scripted canvas player keeps its current frame too. Both resume on the next interaction.
+// Players load on first play, before their matching CSS clocks start.
 // Touch never plays (a tap opens the tool), and nothing plays under prefers-reduced-motion.
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -24,10 +23,10 @@ async function load(art) {
   if (wanted.has(art)) start(art);
 }
 
-/** Pictures hovered or focused now, and the stop functions of those whose script is running. */
+/** Pictures hovered or keyboard-focused now, and their persistent canvas players. */
 const wanted = new WeakSet();
-/** @type {WeakMap<HTMLElement, () => void>} */
-const stops = new WeakMap();
+/** @type {WeakMap<HTMLElement, {play:()=>void,pause:()=>void,destroy:()=>void}>} */
+const players = new WeakMap();
 
 /** Starts the picture's loop: CSS alone, or with its script once that is ready. @param {HTMLElement} art */
 async function start(art) {
@@ -35,20 +34,33 @@ async function start(art) {
   const svg = art.querySelector('svg');
   if (!svg) return;   // it starts when it loads
   const name = svg.dataset.player;
-  if (!name) { art.dataset.playing = ''; return; }
+  if (!name) { art.dataset.started = ''; art.dataset.playing = ''; return; }
   const player = await import(`./players/${name}.js`);
-  await player.prepare();
-  if (reducedMotion.matches || !wanted.has(art) || stops.has(art)) return;
+  const plan = await player.prepare();
+  if (reducedMotion.matches || !wanted.has(art)) return;
+  art.dataset.started = '';
   art.dataset.playing = '';
-  stops.set(art, player.play(art));
+  let controller = players.get(art);
+  if (!controller) {
+    controller = player.create(art, plan);
+    players.set(art, /** @type {NonNullable<typeof controller>} */ (controller));
+  }
+  controller?.play();
 }
 
 /** @param {HTMLElement} art */
 function stop(art) {
   wanted.delete(art);
   delete art.dataset.playing;
-  stops.get(art)?.();
-  stops.delete(art);
+  players.get(art)?.pause();
+}
+
+/** Reduced motion returns to the authored still and releases the canvas. @param {HTMLElement} art */
+function reset(art) {
+  stop(art);
+  delete art.dataset.started;
+  players.get(art)?.destroy();
+  players.delete(art);
 }
 
 const nearViewport = new IntersectionObserver((entries) => {
@@ -62,23 +74,28 @@ const nearViewport = new IntersectionObserver((entries) => {
 for (const card of document.querySelectorAll('.project-card')) {
   const art = /** @type {HTMLElement} */ (card.querySelector('.card-art'));
   nearViewport.observe(art);
-  const play = () => {
-    if (reducedMotion.matches || wanted.has(art)) return;
+  let hovered = false, focused = false;
+  const update = () => {
+    if (reducedMotion.matches || !(hovered || focused)) { stop(art); return; }
+    if (wanted.has(art)) return;
     wanted.add(art);
     start(art);
   };
-  card.addEventListener('pointerenter', (event) => { if (/** @type {PointerEvent} */ (event).pointerType !== 'touch') play(); });
-  card.addEventListener('pointerleave', () => stop(art));
-  card.addEventListener('focus', () => { if (card.matches(':focus-visible')) play(); });
-  card.addEventListener('blur', () => stop(art));
+  card.addEventListener('pointerenter', (event) => { hovered = /** @type {PointerEvent} */ (event).pointerType !== 'touch'; update(); });
+  card.addEventListener('pointerleave', () => { hovered = false; update(); });
+  card.addEventListener('focus', () => { focused = card.matches(':focus-visible'); update(); });
+  card.addEventListener('blur', () => { focused = false; update(); });
 }
 // Cancel pending starts as well as active players when the preference changes.
 reducedMotion.addEventListener('change', () => {
   if (reducedMotion.matches) {
-    for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
+    for (const art of document.querySelectorAll('.card-art')) reset(/** @type {HTMLElement} */ (art));
   }
 });
-// Coming back to the page (Back button, bfcache) starts with every picture still.
+// Back/forward navigation keeps the last frame without running an unseen loop.
+addEventListener('pagehide', () => {
+  for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
+});
 addEventListener('pageshow', () => {
   for (const art of document.querySelectorAll('.card-art')) stop(/** @type {HTMLElement} */ (art));
 });

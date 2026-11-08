@@ -23,6 +23,8 @@ flowchart LR
 
 `shared/mosaic.js` performs deterministic row-dense placement, validates the full rectangle, pins cells and normalises DOM order while retaining keyboard focus. Phone and short landscape layouts use content-height rows; their last card expands into unused columns. Both the landing page and the 15-entry Intuitions gallery use this helper with their own arrangements. `assets/landing.js` owns lazy artwork loading and reduced-motion-aware hover playback. A resize observer responds to both breakpoint changes and actual track-height changes.
 
+Landing artwork gains `data-started` on its first interaction, keeping its CSS animations attached thereafter. `data-playing` controls whether their clocks run or pause, so pointer leave and keyboard blur retain the current frame. The Hypercube canvas player likewise retains its clock and canvas, redrawing a paused frame only for a resize or theme change. Reduced motion removes the animation state and canvas to show the authored still, including when a player download is pending.
+
 `assets/cluster-contours.js` is DOM-free geometry: it removes shared cell edges and traces separate outer and hole boundaries. `assets/landing-clusters.js` maps those lattice coordinates to measured grid tracks, insets boundaries within the gutters to separate neighbouring colours, and draws rounded SVG paths. Labels sit on suitable top edges, clear of cards. SVG and labels ignore pointer events and are decorative for assistive technology; category names are also attached to card descriptions.
 
 The contour geometry operates only on the landing layout. It does not change application data, models or artwork. Forecast Calibration is linked from the Intuitions gallery and retains its standalone route and API.

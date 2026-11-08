@@ -11,83 +11,83 @@
 [data-art="layout-gui"] .cursor path { fill: none; stroke: var(--art-ink); stroke-width: 1.3; stroke-linecap: square; }
 [data-art="layout-gui"] .cursor .halo { stroke: var(--art-paper); stroke-width: 3.3; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="layout-gui"][data-playing] .p0 { animation: layout-gui-p0 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .p0 { animation: layout-gui-p0 6.5s step-end infinite; }
 @keyframes layout-gui-p0 { 0% { opacity: 1; } 15.385% { opacity: 0; } 35.385% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="layout-gui"][data-playing] .p1 { animation: layout-gui-p1 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .p1 { animation: layout-gui-p1 6.5s step-end infinite; }
 @keyframes layout-gui-p1 { 0% { opacity: 1; } 15.385% { opacity: 0; } 51.538% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="layout-gui"][data-playing] .p2 { animation: layout-gui-p2 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .p2 { animation: layout-gui-p2 6.5s step-end infinite; }
 @keyframes layout-gui-p2 { 0% { opacity: 1; } 15.385% { opacity: 0; } 67.692% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="layout-gui"][data-playing] .p3 { animation: layout-gui-p3 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .p3 { animation: layout-gui-p3 6.5s step-end infinite; }
 @keyframes layout-gui-p3 { 0% { opacity: 1; } 15.385% { opacity: 0; } 83.846% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="layout-gui"][data-playing] .v0 { animation: layout-gui-v0 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v0 { animation: layout-gui-v0 6.5s step-end infinite; }
 @keyframes layout-gui-v0 { 0% { opacity: 0; } 24.327% { opacity: 1; } 26.077% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v1 { animation: layout-gui-v1 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v1 { animation: layout-gui-v1 6.5s step-end infinite; }
 @keyframes layout-gui-v1 { 0% { opacity: 0; } 26.077% { opacity: 1; } 26.827% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v2 { animation: layout-gui-v2 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v2 { animation: layout-gui-v2 6.5s step-end infinite; }
 @keyframes layout-gui-v2 { 0% { opacity: 0; } 26.827% { opacity: 1; } 28.077% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v3 { animation: layout-gui-v3 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v3 { animation: layout-gui-v3 6.5s step-end infinite; }
 @keyframes layout-gui-v3 { 0% { opacity: 0; } 28.077% { opacity: 1; } 29.327% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v4 { animation: layout-gui-v4 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v4 { animation: layout-gui-v4 6.5s step-end infinite; }
 @keyframes layout-gui-v4 { 0% { opacity: 0; } 29.327% { opacity: 1; } 30.077% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v5 { animation: layout-gui-v5 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v5 { animation: layout-gui-v5 6.5s step-end infinite; }
 @keyframes layout-gui-v5 { 0% { opacity: 0; } 30.077% { opacity: 1; } 31.827% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v6 { animation: layout-gui-v6 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v6 { animation: layout-gui-v6 6.5s step-end infinite; }
 @keyframes layout-gui-v6 { 0% { opacity: 0; } 31.827% { opacity: 1; } 32.077% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v7 { animation: layout-gui-v7 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v7 { animation: layout-gui-v7 6.5s step-end infinite; }
 @keyframes layout-gui-v7 { 0% { opacity: 0; } 32.077% { opacity: 1; } 35.385% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v8 { animation: layout-gui-v8 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v8 { animation: layout-gui-v8 6.5s step-end infinite; }
 @keyframes layout-gui-v8 { 0% { opacity: 0; } 40.897% { opacity: 1; } 42.981% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v9 { animation: layout-gui-v9 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v9 { animation: layout-gui-v9 6.5s step-end infinite; }
 @keyframes layout-gui-v9 { 0% { opacity: 0; } 42.981% { opacity: 1; } 44.231% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v10 { animation: layout-gui-v10 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v10 { animation: layout-gui-v10 6.5s step-end infinite; }
 @keyframes layout-gui-v10 { 0% { opacity: 0; } 44.231% { opacity: 1; } 45.481% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v11 { animation: layout-gui-v11 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v11 { animation: layout-gui-v11 6.5s step-end infinite; }
 @keyframes layout-gui-v11 { 0% { opacity: 0; } 45.481% { opacity: 1; } 47.564% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v12 { animation: layout-gui-v12 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v12 { animation: layout-gui-v12 6.5s step-end infinite; }
 @keyframes layout-gui-v12 { 0% { opacity: 0; } 47.564% { opacity: 1; } 47.981% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v13 { animation: layout-gui-v13 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v13 { animation: layout-gui-v13 6.5s step-end infinite; }
 @keyframes layout-gui-v13 { 0% { opacity: 0; } 47.981% { opacity: 1; } 51.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v14 { animation: layout-gui-v14 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v14 { animation: layout-gui-v14 6.5s step-end infinite; }
 @keyframes layout-gui-v14 { 0% { opacity: 0; } 57.051% { opacity: 1; } 59.135% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v15 { animation: layout-gui-v15 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v15 { animation: layout-gui-v15 6.5s step-end infinite; }
 @keyframes layout-gui-v15 { 0% { opacity: 0; } 59.135% { opacity: 1; } 60.385% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v16 { animation: layout-gui-v16 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v16 { animation: layout-gui-v16 6.5s step-end infinite; }
 @keyframes layout-gui-v16 { 0% { opacity: 0; } 60.385% { opacity: 1; } 61.635% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v17 { animation: layout-gui-v17 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v17 { animation: layout-gui-v17 6.5s step-end infinite; }
 @keyframes layout-gui-v17 { 0% { opacity: 0; } 61.635% { opacity: 1; } 63.718% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v18 { animation: layout-gui-v18 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v18 { animation: layout-gui-v18 6.5s step-end infinite; }
 @keyframes layout-gui-v18 { 0% { opacity: 0; } 63.718% { opacity: 1; } 64.135% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v19 { animation: layout-gui-v19 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v19 { animation: layout-gui-v19 6.5s step-end infinite; }
 @keyframes layout-gui-v19 { 0% { opacity: 0; } 64.135% { opacity: 1; } 67.692% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v20 { animation: layout-gui-v20 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v20 { animation: layout-gui-v20 6.5s step-end infinite; }
 @keyframes layout-gui-v20 { 0% { opacity: 0; } 72.788% { opacity: 1; } 74.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v21 { animation: layout-gui-v21 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v21 { animation: layout-gui-v21 6.5s step-end infinite; }
 @keyframes layout-gui-v21 { 0% { opacity: 0; } 74.538% { opacity: 1; } 75.288% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v22 { animation: layout-gui-v22 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v22 { animation: layout-gui-v22 6.5s step-end infinite; }
 @keyframes layout-gui-v22 { 0% { opacity: 0; } 75.288% { opacity: 1; } 76.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v23 { animation: layout-gui-v23 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v23 { animation: layout-gui-v23 6.5s step-end infinite; }
 @keyframes layout-gui-v23 { 0% { opacity: 0; } 76.538% { opacity: 1; } 77.788% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v24 { animation: layout-gui-v24 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v24 { animation: layout-gui-v24 6.5s step-end infinite; }
 @keyframes layout-gui-v24 { 0% { opacity: 0; } 77.788% { opacity: 1; } 78.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v25 { animation: layout-gui-v25 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v25 { animation: layout-gui-v25 6.5s step-end infinite; }
 @keyframes layout-gui-v25 { 0% { opacity: 0; } 78.538% { opacity: 1; } 80.288% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v26 { animation: layout-gui-v26 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v26 { animation: layout-gui-v26 6.5s step-end infinite; }
 @keyframes layout-gui-v26 { 0% { opacity: 0; } 80.288% { opacity: 1; } 80.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .v27 { animation: layout-gui-v27 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .v27 { animation: layout-gui-v27 6.5s step-end infinite; }
 @keyframes layout-gui-v27 { 0% { opacity: 0; } 80.538% { opacity: 1; } 83.846% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .c0 { animation: layout-gui-c0 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .c0 { animation: layout-gui-c0 6.5s step-end infinite; }
 @keyframes layout-gui-c0 { 0% { opacity: 0; } 15.385% { opacity: 1; } 35.385% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .c1 { animation: layout-gui-c1 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .c1 { animation: layout-gui-c1 6.5s step-end infinite; }
 @keyframes layout-gui-c1 { 0% { opacity: 0; } 35.385% { opacity: 1; } 51.538% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .c2 { animation: layout-gui-c2 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .c2 { animation: layout-gui-c2 6.5s step-end infinite; }
 @keyframes layout-gui-c2 { 0% { opacity: 0; } 51.538% { opacity: 1; } 67.692% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .c3 { animation: layout-gui-c3 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .c3 { animation: layout-gui-c3 6.5s step-end infinite; }
 @keyframes layout-gui-c3 { 0% { opacity: 0; } 67.692% { opacity: 1; } 83.846% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .c4 { animation: layout-gui-c4 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .c4 { animation: layout-gui-c4 6.5s step-end infinite; }
 @keyframes layout-gui-c4 { 0% { opacity: 1; } 15.385% { opacity: 0; } 83.846% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="layout-gui"][data-playing] .cursor-at { animation: layout-gui-cursor-at 6.5s step-end infinite; }
+[data-art="layout-gui"][data-started] .cursor-at { animation: layout-gui-cursor-at 6.5s step-end infinite; }
 @keyframes layout-gui-cursor-at { 0% { opacity: 0; } 19.231% { opacity: 1; } 89.231% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="layout-gui"][data-playing] .cursor { animation: layout-gui-cursor 6.5s linear infinite; }
+[data-art="layout-gui"][data-started] .cursor { animation: layout-gui-cursor 6.5s linear infinite; }
 @keyframes layout-gui-cursor { 0% { transform: translate(0px, 0px); } 23.077% { transform: translate(0px, 0px); } 33.077% { transform: translate(95px, 76px); } 35.385% { transform: translate(95px, 76px); } 38.462% { transform: translate(152px, 76px); } 39.231% { transform: translate(152px, 76px); } 49.231% { transform: translate(95px, 0px); } 51.538% { transform: translate(95px, 0px); } 54.615% { transform: translate(0px, 152px); } 55.385% { transform: translate(0px, 152px); } 65.385% { transform: translate(57px, 76px); } 67.692% { transform: translate(57px, 76px); } 70.769% { transform: translate(152px, 152px); } 71.538% { transform: translate(152px, 152px); } 81.538% { transform: translate(57px, 76px); } 89.231% { transform: translate(57px, 76px); } 99.846% { transform: translate(0px, 0px); } 100% { transform: none; } }
 
 }

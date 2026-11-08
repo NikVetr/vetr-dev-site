@@ -1,6 +1,6 @@
 // What every card picture shares: the 320 × 180 canvas, the theme colours it paints with, the
 // scoping of its style sheet to its own card, and the loop that runs only while the card is
-// hovered or focused (assets/landing.js sets data-playing on the art then).
+// hovered or focused (assets/landing.js starts it once, then pauses and resumes it).
 //
 // A picture is inlined into the landing page, so its <style> applies to the whole document:
 // every selector here starts with the picture's [data-art] scope and every id with its name.
@@ -82,7 +82,7 @@ export function esc(text) {
  * @param {string} p.body      the drawing, as it looks at rest
  * @param {string} [p.defs]    <defs> content (ids must start with `${name}-`)
  * @param {string} [p.css]     rules for the still picture; `&` stands for the card's scope
- * @param {string} [p.loop]    rules that run while playing; `&` stands for the playing scope
+ * @param {string} [p.loop]    rules installed on first play; `&` stands for the started scope
  * @param {number} p.period    the loop's period in seconds: every loop animation repeats on it
  * @param {number} [p.frames]  for a flip-book, its number of frames (for the loop checks)
  * @param {string} [p.player]  a script in assets/players/ that plays (part of) the loop
@@ -94,9 +94,9 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
   const scope = `[data-art="${name}"]`;
   const style = [
     css.replaceAll('&', scope),
-    // The page never animates without the visitor's leave: only while playing, and never
-    // under reduced motion (landing.js does not set data-playing then either).
-    loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-playing]`)}\n}`,
+    // Keep the animation attached after first play so pausing preserves its clock.
+    // style.css pauses started art without data-playing. Reduced motion keeps the still.
+    loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-started]`)}\n}`,
   ].filter(Boolean).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}" data-player-box="${playerBox}"` : ''} focusable="false">
 <style>

@@ -20,13 +20,13 @@
 [data-art="intuitions"] .observed { fill: none; stroke: #c62828; stroke-width: 1.5; }
 :root[data-theme="dark"] [data-art="intuitions"] .observed { stroke: #ff6b6b; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="intuitions"][data-playing] .frame { animation: intuitions-panels-frame 6.2s step-end infinite; }
+[data-art="intuitions"][data-started] .frame { animation: intuitions-panels-frame 6.2s step-end infinite; }
 @keyframes intuitions-panels-frame { 0% { opacity: 1; } 2.083333% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="intuitions"][data-playing] .liability { animation: intuitions-liability 6.2s linear infinite; }
+[data-art="intuitions"][data-started] .liability { animation: intuitions-liability 6.2s linear infinite; }
 @keyframes intuitions-liability { 0% { transform: translateX(0px); } 4.167% { transform: translateX(2.847px); } 8.333% { transform: translateX(5.5px); } 12.5% { transform: translateX(7.778px); } 16.667% { transform: translateX(9.526px); } 20.833% { transform: translateX(10.625px); } 25% { transform: translateX(11px); } 29.167% { transform: translateX(10.625px); } 33.333% { transform: translateX(9.526px); } 37.5% { transform: translateX(7.778px); } 41.667% { transform: translateX(5.5px); } 45.833% { transform: translateX(2.847px); } 50% { transform: translateX(0px); } 54.167% { transform: translateX(-2.847px); } 58.333% { transform: translateX(-5.5px); } 62.5% { transform: translateX(-7.778px); } 66.667% { transform: translateX(-9.526px); } 70.833% { transform: translateX(-10.625px); } 75% { transform: translateX(-11px); } 79.167% { transform: translateX(-10.625px); } 83.333% { transform: translateX(-9.526px); } 87.5% { transform: translateX(-7.778px); } 91.667% { transform: translateX(-5.5px); } 95.833% { transform: translateX(-2.847px); } 100% { transform: translateX(0px); } }
-[data-art="intuitions"][data-playing] .trait-reveal { transform-origin: 0 0; animation: intuitions-traits 6.2s linear infinite; }
+[data-art="intuitions"][data-started] .trait-reveal { transform-origin: 0 0; animation: intuitions-traits 6.2s linear infinite; }
 @keyframes intuitions-traits { 0%, 8% { transform: scaleX(0); } 90%, 100% { transform: scaleX(1); } }
-[data-art="intuitions"][data-playing] .picked path { animation: intuitions-world 6.2s linear infinite; }
+[data-art="intuitions"][data-started] .picked path { animation: intuitions-world 6.2s linear infinite; }
 @keyframes intuitions-world { 0%, 25%, 100% { opacity: 0; } 12.5% { opacity: 1; } }
 }
 </style>

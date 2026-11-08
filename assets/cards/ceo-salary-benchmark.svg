@@ -2,7 +2,7 @@
 <style>
 [data-art="ceo-salary-benchmark"] > svg { background: #fff; border-radius: 4px; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="ceo-salary-benchmark"][data-playing] .bar-block { animation: benchmark-emphasis 4s ease-in-out infinite; }
+[data-art="ceo-salary-benchmark"][data-started] .bar-block { animation: benchmark-emphasis 4s ease-in-out infinite; }
 @keyframes benchmark-emphasis { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
 }
 </style>

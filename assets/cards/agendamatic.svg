@@ -64,55 +64,55 @@
 :root[data-theme="dark"] [data-art="agendamatic"] .now { fill: #e74c3c; } :root[data-theme="dark"] [data-art="agendamatic"] .guide { stroke: #3498db; }
 
 @media (prefers-reduced-motion: no-preference) {
-[data-art="agendamatic"][data-playing] .b0 { animation: agendamatic-b0 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .b0 { animation: agendamatic-b0 6.275s linear infinite; }
 @keyframes agendamatic-b0 { 0% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .a0 { animation: agendamatic-a0 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .a0 { animation: agendamatic-a0 6.275s linear infinite; }
 @keyframes agendamatic-a0 { 0% { opacity: 0; } 82.072% { opacity: 0; } 84.462% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .d0 { animation: agendamatic-d0 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .d0 { animation: agendamatic-d0 6.275s linear infinite; }
 @keyframes agendamatic-d0 { 0% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 0.42; } 100% { opacity: 0.42; } }
-[data-art="agendamatic"][data-playing] .h0 { animation: agendamatic-h0 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .h0 { animation: agendamatic-h0 6.275s linear infinite; }
 @keyframes agendamatic-h0 { 0% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 88.048% { opacity: 1; } 90.438% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .g0 { animation: agendamatic-g0 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .g0 { animation: agendamatic-g0 6.275s linear infinite; }
 @keyframes agendamatic-g0 { 0% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 0.42; } 100% { opacity: 0.42; } }
-[data-art="agendamatic"][data-playing] .b1 { animation: agendamatic-b1 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .b1 { animation: agendamatic-b1 6.275s linear infinite; }
 @keyframes agendamatic-b1 { 0% { opacity: 1; } 23.904% { opacity: 1; } 26.295% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .a1 { animation: agendamatic-a1 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .a1 { animation: agendamatic-a1 6.275s linear infinite; }
 @keyframes agendamatic-a1 { 0% { opacity: 1; } 23.904% { opacity: 1; } 26.295% { opacity: 0; } 88.048% { opacity: 0; } 90.438% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .d1 { animation: agendamatic-d1 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .d1 { animation: agendamatic-d1 6.275s linear infinite; }
 @keyframes agendamatic-d1 { 0% { opacity: 0; } 23.904% { opacity: 0; } 26.295% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .b2 { animation: agendamatic-b2 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .b2 { animation: agendamatic-b2 6.275s linear infinite; }
 @keyframes agendamatic-b2 { 0% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .a2 { animation: agendamatic-a2 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .a2 { animation: agendamatic-a2 6.275s linear infinite; }
 @keyframes agendamatic-a2 { 0% { opacity: 0; } 23.904% { opacity: 0; } 26.295% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .d2 { animation: agendamatic-d2 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .d2 { animation: agendamatic-d2 6.275s linear infinite; }
 @keyframes agendamatic-d2 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .h2 { animation: agendamatic-h2 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .h2 { animation: agendamatic-h2 6.275s linear infinite; }
 @keyframes agendamatic-h2 { 0% { opacity: 1; } 41.833% { opacity: 1; } 44.223% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .g2 { animation: agendamatic-g2 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .g2 { animation: agendamatic-g2 6.275s linear infinite; }
 @keyframes agendamatic-g2 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .b3 { animation: agendamatic-b3 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .b3 { animation: agendamatic-b3 6.275s linear infinite; }
 @keyframes agendamatic-b3 { 0% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .a3 { animation: agendamatic-a3 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .a3 { animation: agendamatic-a3 6.275s linear infinite; }
 @keyframes agendamatic-a3 { 0% { opacity: 0; } 41.833% { opacity: 0; } 44.223% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .d3 { animation: agendamatic-d3 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .d3 { animation: agendamatic-d3 6.275s linear infinite; }
 @keyframes agendamatic-d3 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .h3 { animation: agendamatic-h3 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .h3 { animation: agendamatic-h3 6.275s linear infinite; }
 @keyframes agendamatic-h3 { 0% { opacity: 1; } 53.785% { opacity: 1; } 56.175% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .g3 { animation: agendamatic-g3 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .g3 { animation: agendamatic-g3 6.275s linear infinite; }
 @keyframes agendamatic-g3 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .b4 { animation: agendamatic-b4 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .b4 { animation: agendamatic-b4 6.275s linear infinite; }
 @keyframes agendamatic-b4 { 0% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .a4 { animation: agendamatic-a4 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .a4 { animation: agendamatic-a4 6.275s linear infinite; }
 @keyframes agendamatic-a4 { 0% { opacity: 0; } 53.785% { opacity: 0; } 56.175% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .d4 { animation: agendamatic-d4 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .d4 { animation: agendamatic-d4 6.275s linear infinite; }
 @keyframes agendamatic-d4 { 0% { opacity: 0; } 59.761% { opacity: 0; } 62.151% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .h4 { animation: agendamatic-h4 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .h4 { animation: agendamatic-h4 6.275s linear infinite; }
 @keyframes agendamatic-h4 { 0% { opacity: 1; } 59.761% { opacity: 1; } 62.151% { opacity: 0; } 69.323% { opacity: 0; } 72.51% { opacity: 1; } 100% { opacity: 1; } }
-[data-art="agendamatic"][data-playing] .g4 { animation: agendamatic-g4 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .g4 { animation: agendamatic-g4 6.275s linear infinite; }
 @keyframes agendamatic-g4 { 0% { opacity: 0; } 59.761% { opacity: 0; } 62.151% { opacity: 0.42; } 69.323% { opacity: 0.42; } 72.51% { opacity: 0; } 100% { opacity: 0; } }
-[data-art="agendamatic"][data-playing] .marker { animation: agendamatic-marker 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .marker { animation: agendamatic-marker 6.275s linear infinite; }
 @keyframes agendamatic-marker { 0% { transform: translateX(80.308px); opacity: 1; } 59.761% { transform: translateX(308px); opacity: 1; } 69.323% { transform: translateX(308px); opacity: 1; } 72.51% { transform: translateX(308px); opacity: 0; } 72.526% { transform: translateX(12px); opacity: 0; } 75.697% { transform: translateX(12px); opacity: 1; } 82.072% { transform: translateX(12px); opacity: 1; } 100% { transform: translateX(80.308px); opacity: 1; } }
-[data-art="agendamatic"][data-playing] .progress .fill { animation: agendamatic-progress 6.275s linear infinite; }
+[data-art="agendamatic"][data-started] .progress .fill { animation: agendamatic-progress 6.275s linear infinite; }
 @keyframes agendamatic-progress { 0% { transform: scaleX(0.2308); opacity: 1; } 59.761% { transform: scaleX(1); opacity: 1; } 69.323% { transform: scaleX(1); opacity: 1; } 72.51% { transform: scaleX(1); opacity: 0; } 72.526% { transform: scaleX(0); opacity: 0; } 75.697% { transform: scaleX(0); opacity: 1; } 82.072% { transform: scaleX(0); opacity: 1; } 100% { transform: scaleX(0.2308); opacity: 1; } }
 
 }

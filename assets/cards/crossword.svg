@@ -4,7 +4,7 @@
 [data-art="crossword"] .letters text { will-change: opacity; }
 [data-art="crossword"] .letters { fill: var(--art-ink); font: 500 2.9px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; dominant-baseline: central; }
 @media (prefers-reduced-motion: no-preference) {
-[data-art="crossword"][data-playing] .letters text { animation: crossword-fill 7s linear infinite; }
+[data-art="crossword"][data-started] .letters text { animation: crossword-fill 7s linear infinite; }
 @keyframes crossword-fill { 0% { opacity: 1; } 2.143% { opacity: 0; } 50% { opacity: 0; } 52.143% { opacity: 1; } 100% { opacity: 1; } }
 }
 </style>
