@@ -251,6 +251,9 @@ ${pre}.block.t${t} .done-label text { fill: ${filtered(k.text, done.label.filter
 ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
 `;
   };
+  // Share the turn's first frame and viewport at rest: the app's square SVG has
+  // different padding and would make the chair jump in size at every checkpoint.
+  const logoBox = 'x="328" y="50" width="86" height="73" viewBox="0 0 128 108" overflow="hidden"';
   return art({
     name: 'agendamatic',
     width: 420, height: 180,
@@ -258,9 +261,10 @@ ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
     defs: gradient,
     player: 'autochair',
     body: `<g class="agenda-scene">${agenda}${tracker}${states}</g>
-<g class="logo-scene"><image class="logo-still logo-light" href="agendamatic/assets/autoChair-logo-black.svg" x="328" y="50" width="86" height="73"/>
-<image class="logo-still logo-dark" href="agendamatic/assets/autoChair-logo-white.svg" x="328" y="50" width="86" height="73"/>
-<svg data-checkpoints="${timing.checkpoints.join(',')}" class="logo-turn" x="328" y="50" width="86" height="73" viewBox="0 0 128 108" overflow="hidden"/></g>`,
+<g class="logo-scene"><svg class="logo-still" ${logoBox}>
+<image class="logo-light" href="assets/cards/autochair-turn.webp" width="3072" height="216"/>
+<image class="logo-dark" href="assets/cards/autochair-turn.webp" width="3072" height="216" y="-108"/>
+</svg><svg data-checkpoints="${timing.checkpoints.join(',')}" class="logo-turn" ${logoBox}/></g>`,
     css: `& .logo-scene { pointer-events:none; }
 & .logo-turn { visibility:hidden; }
 & .logo-turn[data-ready] { visibility:visible; }

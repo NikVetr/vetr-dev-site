@@ -148,10 +148,41 @@ test('autoCHAIR turns at agenda checkpoints, pauses, resumes and releases for re
     await art.hover();
     const sprite = art.locator('.autochair-frames');
     await sprite.waitFor({state:'attached'});
-    assert.equal(await art.locator('.agenda-scene').evaluate(el => getComputedStyle(el).opacity), '1');
-    const positions = await art.evaluate(el => ({agenda:el.querySelector('.agenda-scene').getBoundingClientRect().right,
-      chair:el.querySelector('.logo-scene').getBoundingClientRect().left}));
+    assert.equal(await art.locator('.agenda-scene').evaluate((/** @type {any} */ el) => getComputedStyle(el).opacity), '1');
+    const positions = await art.evaluate((/** @type {any} */ el) => ({agenda:el.querySelector('.agenda-scene').getBoundingClientRect().right,
+      chair:el.querySelector('.logo-turn').getScreenCTM().e}));
     assert.ok(positions.chair > positions.agenda, 'chair sits beside the agenda');
+    const logo = await art.evaluate((/** @type {any} */ el) => {
+      const still = el.querySelector('.logo-still'), turn = el.querySelector('.logo-turn');
+      const matrix = turn.getScreenCTM();
+      return {
+        checkpoint: Number(turn.getAttribute('data-checkpoints').split(',')[0]) * 1000,
+        clip: { x: matrix.e, y: matrix.f, width: matrix.a * 128, height: matrix.d * 108 },
+        sameViewport: ['x', 'y', 'width', 'height', 'viewBox'].every(k => still.getAttribute(k) === turn.getAttribute(k)),
+        sameSource: new URL(still.querySelector('image').getAttribute('href'), document.baseURI).href === turn.querySelector('image').getAttribute('href'),
+      };
+    });
+    assert.ok(logo.sameViewport && logo.sameSource, 'rest and turn share the same source and framing');
+    // Freeze the agenda clock without overriding CSS's ownership of play/pause.
+    const seek = async (/** @type {number} */ time) => art.evaluate((/** @type {any} */ el, /** @type {number} */ time) => {
+      for (const animation of el.getAnimations({subtree:true})) {
+        animation.playbackRate = 0;
+        animation.currentTime = time;
+      }
+    }, time);
+    await seek(logo.checkpoint - 10);
+    await page.waitForFunction(() => !document.querySelector('.logo-turn')?.hasAttribute('data-ready'));
+    const still = await page.screenshot({clip:logo.clip});
+    await seek(logo.checkpoint + 1);
+    await page.waitForFunction(() => document.querySelector('.logo-turn')?.hasAttribute('data-ready') &&
+      document.querySelector('.autochair-frames')?.getAttribute('data-frame') === '0');
+    assert.deepEqual(await page.screenshot({clip:logo.clip}), still, 'the first turn frame is pixel-identical to rest');
+    await art.evaluate((/** @type {any} */ el) => {
+      for (const animation of el.getAnimations({subtree:true})) {
+        animation.currentTime = 0;
+        animation.playbackRate = 1;
+      }
+    });
     await page.waitForFunction(() => {
       const sprite = document.querySelector('.autochair-frames');
       const x = Number(sprite?.getAttribute('data-frame'));
@@ -162,15 +193,15 @@ test('autoCHAIR turns at agenda checkpoints, pauses, resumes and releases for re
     await page.waitForTimeout(150);
     assert.equal(await sprite.getAttribute('data-frame'), frame, 'paused frame is retained');
     await art.hover();
-    await page.waitForFunction(x => {
+    await page.waitForFunction((/** @type {string} */ x) => {
       const sprite = document.querySelector('.autochair-frames');
       return sprite?.parentElement?.hasAttribute('data-ready') && sprite.getAttribute('data-frame') !== x;
     }, frame);
-    const phase = await art.evaluate(el => {
+    const phase = await art.evaluate((/** @type {any} */ el) => {
       const clock = el.querySelector('.marker').getAnimations()[0];
       const time = Number(clock.currentTime)/1000, period = Number(clock.effect.getTiming().duration)/1000;
       const checkpoints = el.querySelector('.logo-turn').getAttribute('data-checkpoints').split(',').map(Number);
-      const latest = checkpoints.filter(t => t <= time % period).at(-1);
+      const latest = checkpoints.filter((/** @type {number} */ t) => t <= time % period).at(-1);
       return time % period - latest;
     });
     assert.ok(phase >= 0 && phase < .8, 'turn occurs immediately after an agenda checkpoint');
