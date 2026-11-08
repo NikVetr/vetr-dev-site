@@ -38,7 +38,7 @@ const svg = renderSvg(result, { background: '#7f7f7f' });
 | `exportPngBlob()` | Returns a Promise of the same fill as a PNG `Blob`, at the result's `canvas` size. |
 | `decodeImage(source, maxSide?)` | Decodes a `Blob` or an image URL to `{width, height, data}` with the browser, without colour-profile conversion, optionally scaled down so the longer side is at most `maxSide`. |
 
-The page scales uploaded images down to its "Longest image side" (800 px by default) before building the request. Its background control sets both `color.background` and the SVG background. **Colour contrast** offers original colours, gentle colour adjustment, or a thin contrasting outline. SVG and PNG exports include the chosen rendering, and Undo/Redo restore it with the result. The page starts with **Keep words together** enabled (`layout.wrap: "word"`) and eight size rounds to fit the shape more closely. Load example also enables whole words; API and CLI requests that omit `layout.wrap` retain character wrapping for compatibility with R.
+The page scales uploaded images down to its "Longest image side" (800 px by default) before building the request. Its background control sets both `color.background` and the SVG background. **Colour contrast** offers original colours, gentle colour adjustment, or a thin contrasting outline. **Soft letter glow** adds a faint coloured halo behind crisp letters. It is independent of colour contrast and off by default. SVG and PNG exports include the chosen rendering, and Undo/Redo restore it with the result. The page starts with **Keep words together** enabled (`layout.wrap: "word"`) and eight size rounds to fit the shape more closely. Load example also enables whole words; API and CLI requests that omit `layout.wrap` retain character wrapping for compatibility with R.
 
 The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
@@ -74,6 +74,7 @@ Unknown fields are rejected at every level. Every section and field except `imag
 | `render.scale` | number, 0 < x ≤ 50 | `5` | Output pixels per image pixel. Changes `font_size_px` and the canvas, not the layout. |
 | `render.contrast_adjust` | boolean | `false` | Gently adjust low-contrast glyph fills toward black or white, whichever needs less change. No contrasting stroke; original result colours, layout and fitted size stay unchanged. Mutually exclusive with `contrast_outline`. |
 | `render.contrast_outline` | boolean | `false` | Add a thin contrasting edge only to glyphs with low contrast against the SVG background. Drawing only: original fill colours, layout and fitted size stay unchanged. |
+| `render.glow` | boolean | `false` | Add a soft coloured halo behind crisp glyphs. Drawing only; original colours, fitted positions and size stay unchanged. |
 | `render.margin` | number 0–1 | `0.04` | Padding around the picture on the canvas, as a share of its size on each side. |
 
 A colour is written `#rrggbb` or `#rgb`, or is `"black"` or `"white"`.
@@ -117,6 +118,8 @@ Returns the text fill as an SVG document of `canvas` size: a background rectangl
 With `render.contrast_outline: true` in the request, glyphs whose composited fill/background luminance contrast is below 3:1 receive a black or white outline, whichever contrasts more with the actual export background. Its width is 0.06 times the font size, drawn behind the original fill with round joins; translucent glyphs retain their alpha on the outline. This is a drawing aid, not a guarantee of readable text at every output size. The default `false` preserves the original SVG drawing. The CLI uses the same setting and respects `--background` when choosing the outline.
 
 With `render.contrast_adjust: true`, the renderer uses the smallest blend toward black or white that aims for a modest 1.6:1 luminance contrast, capped at 20% to retain pale colours. The glyph alpha is preserved. Clear colours stay unchanged. This deliberately gentler option may remain below that target for translucent glyphs or some backgrounds; it is an illustration aid, not a readability guarantee. Requests enabling both contrast modes are rejected with `conflicting_options` at `render.contrast_adjust`. Existing `contrast_outline: true` requests keep their original rendering.
+
+With `render.glow: true`, one shared SVG filter blurs the glyph layer by 0.22 times the font size, lightens only the halo by 15%, and composites it at 60% opacity beneath the crisp original. Glyph alpha is retained. SVG, PNG and CLI exports use this same effect; default `false` retains the unfiltered drawing.
 
 ## Method
 
@@ -218,7 +221,7 @@ Each issue has a `code`, a `path` (such as `layout.n_rounds`, `image.data[4]`, o
     "font": { "family": "Liberation Sans", "face": 2 },
     "layout": { "n_rounds": 5, "line_height": 1.21, "justify": true, "rotation": 10, "line_widths": "band", "skip_gaps": true, "wrap": "character" },
     "color": { "ink_compensation": false, "background": "black" },
-    "render": { "scale": 5, "margin": 0.04, "contrast_outline": false, "contrast_adjust": false }
+    "render": { "scale": 5, "margin": 0.04, "contrast_outline": false, "contrast_adjust": false, "glow": false }
   },
   "timings_ms": { "quantize": ..., "region": ..., "layout": ..., "color": ... },
   "warnings": []

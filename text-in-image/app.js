@@ -21,7 +21,7 @@ const el = {
   loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), redo: byId('redo'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
   lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
-  ink: byId('ink'), background: byId('background'), contrastMode: byId('contrast-mode'), scale: byId('scale'), seed: byId('seed'),
+  ink: byId('ink'), background: byId('background'), contrastMode: byId('contrast-mode'), glow: byId('glow'), scale: byId('scale'), seed: byId('seed'),
   render: byId('render'), status: byId('status'), issues: byId('issues'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), output: byId('output'),
   fitStatus: byId('fit-status'), stats: byId('stats'), palette: byId('palette'),
@@ -153,7 +153,7 @@ function readForm() {
     n_rounds: el.nRounds.valueAsNumber, skip_gaps: el.skipGaps.checked, wrap: el.wholeWords.checked ? 'word' : 'character', justify: el.justify.checked,
   };
   s.color = { ...s.color, ink_compensation: el.ink.checked, background: el.background.value };
-  s.render = { ...s.render, scale: el.scale.valueAsNumber, contrast_outline: el.contrastMode.value === 'outline', contrast_adjust: el.contrastMode.value === 'adjust' };
+  s.render = { ...s.render, scale: el.scale.valueAsNumber, contrast_outline: el.contrastMode.value === 'outline', contrast_adjust: el.contrastMode.value === 'adjust', glow: el.glow.checked };
 }
 
 /** @param {Record<string, any>} s */
@@ -173,6 +173,7 @@ function writeForm(s) {
   el.background.value = `#${rgb.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
   el.scale.value = String(s.render.scale);
   el.contrastMode.value = s.render.contrast_adjust ? 'adjust' : s.render.contrast_outline ? 'outline' : 'none';
+  el.glow.checked = Boolean(s.render.glow);
   el.k.disabled = !el.quantizeOn.checked;
 }
 
@@ -255,7 +256,7 @@ const FIELDS = {
   image: el.imageFile, text: el.text, seed: el.seed, quantize: el.quantizeOn, 'quantize.k': el.k,
   'layout.rotation': el.rotation, 'layout.line_height': el.lineHeight, 'layout.line_widths': el.lineWidths,
   'layout.wrap': el.wholeWords, 'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
-  'color.ink_compensation': el.ink, 'color.background': el.background, 'render.scale': el.scale, 'render.contrast_outline': el.contrastMode, 'render.contrast_adjust': el.contrastMode,
+  'color.ink_compensation': el.ink, 'color.background': el.background, 'render.scale': el.scale, 'render.contrast_outline': el.contrastMode, 'render.contrast_adjust': el.contrastMode, 'render.glow': el.glow,
 };
 
 /** The field a request path belongs to: its own, or that of the nearest enclosing path. @param {string} path */

@@ -5,6 +5,7 @@
 import { glyphPath, measureChars } from './font.js';
 import { TextInImageError, parseColor } from './request.js';
 import { contrastOutline, CONTRAST_OUTLINE_EM, adjustedContrastColour } from './contrast.js';
+import { textGlowFilter } from './glow.js';
 
 // R's text(pos = 4) puts the glyph origin half a character height right of x:
 // 0.5 x 1.2 x 12 pt on the 72-ppi device, whatever the glyph size.
@@ -54,8 +55,8 @@ export function renderSvg(result, { background = 'black' } = {}) {
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`,
     `<rect width="${W}" height="${H}" fill="${background}"/>`,
-    `<defs>${defs.join('')}</defs>`,
-    ...uses,
+    `<defs>${defs.join('')}${result.settings.render.glow ? textGlowFilter('text-glow', size, [0, 0, W, H]) : ''}</defs>`,
+    ...(result.settings.render.glow ? ['<g filter="url(#text-glow)">', ...uses, '</g>'] : uses),
     '</svg>',
     '',
   ].join('\n');

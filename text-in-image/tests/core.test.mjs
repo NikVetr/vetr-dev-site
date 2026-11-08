@@ -373,3 +373,18 @@ test('the CLI reads an image path, prints the result and reports errors as JSON'
   assert.deepEqual(JSON.parse(bad.stderr).error.issues.map((/** @type {any} */ i) => i.code), ['unreadable_image']);
   assert.equal(cli(request, '--svg').status, 2);
 });
+
+test('optional glow preserves fitted glyphs and defaults to the original unfiltered SVG', () => {
+  const request = { image: maskImage(16, 16, () => true), text: 'Alice soft glow', quantize: null };
+  const plain = submit(request), glowing = submit({ ...request, render: { glow: true } });
+  assert.equal(plain.settings.render.glow, false);
+  assert.deepEqual(glowing.glyphs, plain.glyphs);
+  assert.deepEqual(glowing.history, plain.history);
+  assert.equal(glowing.font_size_px, plain.font_size_px);
+  assert.doesNotMatch(renderSvg(plain), /<filter/);
+  const glowSvg = renderSvg(glowing, { background: '#14253d' });
+  const plainSvg = renderSvg(plain, { background: '#14253d' });
+  assert.deepEqual(glowSvg.match(/<use [^>]+\/>/g), plainSvg.match(/<use [^>]+\/>/g));
+  assert.match(glowSvg, /<g filter="url\(#text-glow\)">/);
+  assert.deepEqual(rejection({ ...request, render: { glow: 'yes' } }).issues.map(i => [i.path,i.code]), [['render.glow','wrong_type']]);
+});

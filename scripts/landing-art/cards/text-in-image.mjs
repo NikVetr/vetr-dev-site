@@ -1,5 +1,5 @@
 // Text in Image: the page's default picture, Tenniel's Alice with the "Drink me" bottle, beside
-// the tool's text fill of it on white, through the tool's whole-word fitter,
+// the tool's text fill of it on navy, through the tool's whole-word fitter,
 // on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
 // (11,224 characters, including preserved line breaks), which at tile size would be letters a pixel tall; this uses its opening
 // ten paragraphs. The longer excerpt and twelve fitting rounds let whole words reach both
@@ -11,11 +11,12 @@ import { readFileSync } from 'node:fs';
 import { decodePng } from '../../../shared/decode-png.mjs';
 import { measureChars } from '../../../text-in-image/core/font.js';
 import { submit } from '../../../text-in-image/core/index.js';
+import { textGlowFilter } from '../../../text-in-image/core/glow.js';
 import { adjustedContrastColour } from '../../../text-in-image/core/contrast.js';
 import { openPage } from '../browser.mjs';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
-const BACKGROUND = '#ffffff';   // the page's background
+const BACKGROUND = '#14253d';   // selected landing background
 const PERIOD = 6;
 const START = 0.5;   // seconds full before the first line clears
 const SWEEP = 2.2;   // seconds to clear (and later to write) every line
@@ -24,13 +25,13 @@ const PICTURE_PX = 2;   // the picture embedded at this many pixels per display 
 const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
 
-/** @param {{background?:string}} [options] */
-export async function build({ background = BACKGROUND } = {}) {
+/** @param {{background?:string,glow?:boolean}} [options] */
+export async function build({ background = BACKGROUND, glow = true } = {}) {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background }, render: { contrast_adjust: true } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background }, render: { contrast_adjust: true, glow } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
   // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
@@ -111,11 +112,12 @@ export async function build({ background = BACKGROUND } = {}) {
     width: W,
     height: H,
     period: PERIOD,
+    defs: glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8]) : '',
     body: `<rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <path class="arrow" d="M${num(left + pw + 6)} ${num(H / 2)}h${num(gap - 14)}m-3 -3l3 3l-3 3"/>
-<g class="fill">
+<g class="fill"${glow ? ' filter="url(#text-in-image-glow)"' : ''}>
 ${body}
 </g>`,
     css: `& .panel { fill: ${background}; }

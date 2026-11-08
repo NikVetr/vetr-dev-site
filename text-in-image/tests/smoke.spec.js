@@ -269,3 +269,35 @@ test('whole-word mode and explicit newlines round-trip through the browser API a
   await expect(page.locator('#whole-words')).toBeChecked();
   await expect(page.locator('#fit-status')).toHaveText('✓ 11,224 of 11,224 characters placed.');
 });
+
+test('soft letter glow changes SVG and PNG, preserves geometry and follows Undo/Redo', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#glow')).not.toBeChecked();
+  await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage, request = app.getRequest();
+    await app.submit({ ...request, color: {...request.color, background:'#14253d'}, render: {...request.render, contrast_adjust:true} });
+  });
+  const output = () => page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const png = await app.exportPngBlob(), bitmap = await createImageBitmap(png);
+    return {svg:app.exportSvgText(),glyphs:app.getResult().glyphs,size:[bitmap.width,bitmap.height],
+      png:[...new Uint8Array(await crypto.subtle.digest('SHA-256',await png.arrayBuffer()))]};
+  });
+  const before = await output();
+  await page.locator('#glow').check();
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  const after = await output();
+  expect(after.svg).toContain('<g filter="url(#text-glow)">');
+  expect(after.png).not.toEqual(before.png);
+  expect(after.size).toEqual(before.size);
+  expect(after.glyphs).toEqual(before.glyphs);
+  await page.keyboard.press('Control+z');
+  expect((await output()).svg).toBe(before.svg);
+  await page.keyboard.press('Control+Shift+z');
+  expect((await output()).svg).toBe(after.svg);
+  await page.locator('#glow').uncheck();
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  expect((await output()).svg).toBe(before.svg);
+});

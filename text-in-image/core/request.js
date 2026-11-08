@@ -44,7 +44,7 @@ export const DEFAULTS = Object.freeze({
     wrap: /** @type {'character' | 'word'} */ ('character'),
   }),
   color: Object.freeze({ ink_compensation: false, background: 'black' }),
-  render: Object.freeze({ scale: 5, margin: 0.04, contrast_outline: false, contrast_adjust: false }),
+  render: Object.freeze({ scale: 5, margin: 0.04, contrast_outline: false, contrast_adjust: false, glow: false }),
 });
 
 const TOP_FIELDS = ['image', 'text', 'seed', 'quantize', 'region', 'font', 'layout', 'color', 'render'];
@@ -113,6 +113,7 @@ const SECTIONS = /** @type {Record<string, Record<string, Check>>} */ ({
     margin: number(0, 1),
     contrast_outline: boolean,
     contrast_adjust: boolean,
+    glow: boolean,
   },
 });
 
