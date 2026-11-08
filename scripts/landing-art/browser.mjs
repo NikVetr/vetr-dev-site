@@ -21,7 +21,8 @@ function playwright() {
 }
 
 /**
- * Opens `path` (relative to the site root, e.g. "agendamatic/") and returns the page and a
+ * Opens `path` (relative to the site root, e.g. "agendamatic/", or "about:blank" for an
+ * in-memory rendering fixture) and returns the page and a
  * close() that stops the browser and the server.
  * @param {string} path
  * @param {{ width?: number, height?: number, scheme?: 'light' | 'dark', engine?: 'chromium' | 'webkit' | 'firefox', touch?: boolean }} [options]
@@ -53,7 +54,7 @@ export async function openPage(path, { width = 1440, height = 900, scheme = 'lig
   /** @type {string[]} */
   const errors = [];
   page.on('pageerror', (/** @type {Error} */ e) => errors.push(e.message));
-  await page.goto(`http://127.0.0.1:${port}/${path}`, { waitUntil: 'networkidle' });
+  await page.goto(path === 'about:blank' ? path : `http://127.0.0.1:${port}/${path}`, { waitUntil: 'networkidle' });
   return {
     page,
     errors,

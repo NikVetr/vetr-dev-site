@@ -165,8 +165,11 @@ ${click?`<path class="cursor" d="M${num(click[0])} ${num(click[1])}l2 13 3-4 5 1
   hold(scene({title:'Optimized palette'}),6);
   // The authored still is the verified final palette; only started motion reveals the workflow.
   const book=flipbook('color-optimization',frames,PERIOD);
+  // Firefox's <use> shadow tree does not retain the external [data-art] ancestor
+  // for scoped paint selectors. Give reused geometry its paint directly so the
+  // outline cannot become an opaque black polygon over the colorspace image.
   return art({name:'color-optimization',period:PERIOD,frames:book.frames,
-    defs:`<path id="color-optimization-restricted" d="${restricted}"/><path id="color-optimization-excluded" fill-rule="evenodd" d="${views[1].outline}${restricted}"/>`+views.map((v,i)=>`<clipPath id="color-optimization-clip-${i}"><path d="${v.outline}"/></clipPath>${v.fields.map((field,cvd)=>`<g id="color-optimization-view-${i}-${cvd}"><rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><image href="${field}" x="${px}" y="${py}" width="${side}" height="${side}" clip-path="url(#color-optimization-clip-${i})"/><path class="outline" d="${v.outline}"/></g>`).join('')}`).join(''),
+    defs:`<path id="color-optimization-restricted" fill="none" stroke="#334155" stroke-width=".9" stroke-dasharray="3 2" d="${restricted}"/><path id="color-optimization-excluded" fill-rule="evenodd" fill="white" fill-opacity=".52" d="${views[1].outline}${restricted}"/>`+views.map((v,i)=>`<clipPath id="color-optimization-clip-${i}"><path d="${v.outline}"/></clipPath>${v.fields.map((field,cvd)=>`<g id="color-optimization-view-${i}-${cvd}"><rect class="plot" fill="var(--surface)" stroke="var(--art-line)" x="${px}" y="${py}" width="${side}" height="${side}"/><image href="${field}" x="${px}" y="${py}" width="${side}" height="${side}" clip-path="url(#color-optimization-clip-${i})"/><path class="outline" fill="none" stroke="var(--art-muted)" stroke-width="1" d="${v.outline}"/></g>`).join('')}`).join(''),
     body:`<g class="finished">${scene({title:'Optimized palette'})}</g><g class="process">${book.body}</g>`,
     css:`${book.css}
 & .process { display:none; }
@@ -177,15 +180,11 @@ ${click?`<path class="cursor" d="M${num(click[0])} ${num(click[1])}l2 13 3-4 5 1
 & .setting { font-size:10px;fill:var(--art-muted); }
 & .tab { fill:var(--art-paper);stroke:var(--art-line); }
 & .tab.active { fill:var(--art-line);stroke:var(--art-muted); }
-& .plot { fill:var(--surface);stroke:var(--art-line); }
-& .outline { fill:none;stroke:var(--art-muted);stroke-width:1; }
 & .trail { fill:none;stroke-width:1;stroke-opacity:.6; }
 & .track { fill:none;stroke:var(--art-line);stroke-width:3; }
 & .range { fill:none;stroke:var(--art-ink);stroke-width:3; }
 & .range.soft { stroke:#b080d4;stroke-dasharray:3 2; }
 & .handle { fill:var(--art-paper);stroke:var(--art-ink); }
-& .excluded { fill:white;fill-opacity:.52; }
-& .constraint-boundary { fill:none;stroke:#334155;stroke-width:.9;stroke-dasharray:3 2; }
 & .cursor { fill:var(--art-ink);stroke:var(--art-paper);stroke-width:.8; }`,
     loop:`& .finished { display:none; } & .process { display:inline; }\n${book.loop}`,
   });
