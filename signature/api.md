@@ -168,3 +168,78 @@ The result's `widthSource` is `"speed"`, because every point has a time. Its `he
 ```
 
 Its viewBox is the outline's bounds plus a margin of 0.05 × 50 = 2.5 on each side. `height="15mm"` sets its size when placed in a document. The width follows from the aspect: 42.7 / 56.6 × 15 mm = 11.3 mm.
+
+## Optional timeline effects and direct edits
+
+Two optional request fields, `effects` and `warps`, add intentional edits without
+changing `smooth.local` or the defaults of any existing smoother. Each accepts at
+most 100 entries; unknown fields and invalid values produce structured errors.
+Omitting both fields preserves the original result, including its settings shape.
+
+```json
+{
+  "effects": [
+    {"kind":"smooth", "from":0.2, "to":0.4, "strength":0.8, "falloff":0.03, "hairpin":"preserve"},
+    {"kind":"thickness", "from":0.6, "to":1, "strength":1.5, "falloff":0.04}
+  ],
+  "warps": [{"x":100,"y":50,"dx":12,"dy":-4,"radius":30}]
+}
+```
+
+Add one of the normal signature input fields to this example. All entry fields
+have defaults: effects default to `{kind:"smooth",from:0,to:1,strength:1,
+falloff:0.03,hairpin:"preserve"}`; warps default to
+`{x:0,y:0,dx:0,dy:0,radius:1}`.
+
+- `from`, `to`: shares of the **whole raw signature's ink-length timeline**, from
+  0 to 1 with `from ≤ to`. Each pen lift gets a gap equal to 3% of total raw ink
+  length before normalization; a zero-length stroke gets one third of that gap.
+  This keeps dots selectable and lifts visible without inventing timestamps.
+  The first pen-down is 0 and the last pen-up is 1. A 0–1 bar is global.
+- `falloff`: 0–1, distance outside each edge in timeline units. Inside the bar,
+  influence is 1; outside it decays as `1-3t²+2t³` over the falloff distance.
+  Zero is a hard edge. There is no influence beyond this distance.
+- `kind:"smooth"`: runs **after** the existing Fourier/wavelet/brush correction.
+  `strength` is 0–4, with 0 an exact no-op. A Gaussian local average uses a
+  reach of about 3.5% of signature height along the sampled stroke, scaled by
+  strength (at least half a sample). The geometry blends toward this average
+  by `min(1,strength) × influence`. Endpoints stay fixed. This is an additional
+  explicitly selected geometric edit, not a replacement wavelet threshold.
+- `hairpin`: `preserve`, `round` or `loop`. A reversal is detected when the
+  incoming and outgoing reach-length vectors have cosine below −0.65, with
+  separated detections. `preserve` keeps that neighborhood as it was before
+  this bar; it does not restore turns removed by earlier smoothing. `round`
+  applies the Gaussian average there too. `loop` inserts a circular detour
+  oriented along the incoming vector and carried on a linear bridge between the
+  rounded endpoints (zero offset at both ends), radius `height × 0.025 × min(strength,2)`.
+  The loop uses up to four detection reaches on each side (at least eight
+  existing samples where available); very coarse resampling limits its curvature.
+  These are geometric heuristics, not letter recognition. A loop may overlap
+  nearby ink, and partial span coverage blends it rather than forming a full
+  circle. Hairpin mode has no effect on thickness bars.
+- `kind:"thickness"`: multiplies the existing widths by
+  `1 + (strength-1) × influence`. Strength is greater than 0 and at most 4;
+  1 is neutral. It does not move the centreline. Overlapping multipliers
+  multiply. These widths can exceed the base width model's min/max.
+- `warps`: ordered spatial edits in input coordinate units (normalized y-down
+  coordinates when `input.yAxis:"up"`). Within `radius > 0` of `(x,y)`, each
+  point moves by `(dx,dy) × (1-r²)²`, where `r` is distance/radius. Points on
+  or outside the radius stay fixed. Each warp sees the preceding warp's result.
+
+The complete order is resampling → existing Fourier → existing wavelet with
+`smooth.local` → smoothing bars in array order → spatial warps → existing width
+model → thickness bars in array order → outline and export. Geometry edits affect
+curvature-derived widths through this order. Times/pressures remain the captured
+measurements. No selected backend or existing smoothing rule is changed.
+
+The module also exports `timeline(rawStrokes)`, `influence(position,effect)` and
+`suggestEffects(rawStrokes)`. Raw strokes here are arrays of `{x,y,t?,pressure?}`.
+Suggestions are neutral global/local bars; the local span surrounds the largest
+raw second difference and both have strength 0. The browser adds these proposals
+for a new drawing or plain input. Explicit API requests do not acquire proposals.
+
+In a morph, edits apply to the chosen method's **source** endpoint after its own
+smoothing, with spatial warps transformed into morph coordinates. Their geometric
+displacement fades by `1-p`; source thickness multipliers enter the existing width
+interpolation. The target endpoint remains unchanged. As before, a wavelet or
+linear morph can have a source shape different from the separate corrected view.

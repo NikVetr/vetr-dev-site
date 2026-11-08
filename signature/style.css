@@ -128,3 +128,45 @@ dialog .pad-frame { margin-top: 1rem; }
   .morph-controls { grid-column: 2; grid-row: 1; }
   .morph-controls .settings { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Ink-length editing: one shared ruler and a compact stack of explicit spans. */
+.stroke-timeline { position: relative; height: 24px; margin: .5rem 0; border-bottom: 1px solid var(--border); }
+.timeline-stroke { position: absolute; top: 8px; height: 5px; border-radius: 2px; }
+.effect-row { border-top: 1px solid var(--border); padding: .5rem 0; }
+.effect-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; font-size: .88rem; }
+.effect-top button { padding: .15rem .45rem; font-size: .8rem; }
+.effect-track { position: relative; height: 38px; margin: .3rem 0; background: var(--surface-2); }
+.effect-bar { position: absolute; top: 0; height: 100%; min-width: 2px; background: color-mix(in srgb, var(--primary) 18%, var(--surface)); display: flex; }
+.effect-bar button { position: absolute; height: 100%; padding: 0; border-radius: 0; touch-action: none; }
+.span-from, .span-to { width: 24px; z-index: 2; background: var(--surface); }
+.span-from { left: 0; transform: translateX(-50%); }
+.span-to { right: 0; transform: translateX(50%); }
+.span-body { left: 12px; right: 12px; min-width: 0; overflow: hidden; background: transparent; }
+.effect-track { margin-left: 12px; margin-right: 12px; }
+.effect-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(74px,1fr)); gap: .35rem; }
+.effect-controls label { display: flex; flex-direction: column; font-size: .75rem; gap: .2rem; min-width: 0; }
+.effect-controls input, .effect-controls select { width: 100%; min-width: 0; padding: .2rem; font-variant-numeric: tabular-nums; }
+.effect-controls input[type=range] { padding: 0; }
+.effect-row:focus-within { outline: 2px solid var(--primary); outline-offset: 3px; }
+.warp-controls { margin: .7rem 0; }
+.result.warping { touch-action: none; cursor: move; }
+.revealing .effect-row { animation: reveal-effect .4s both; animation-delay: calc(2.3s + var(--row) * .15s); }
+@keyframes reveal-effect { from {opacity:0;transform:translateY(-12px);} to {opacity:1;transform:translateY(0);} }
+@media (max-width:600px) {
+  .effect-controls { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .effect-controls input,.effect-controls select { font-size:16px; }
+  .effect-track,.effect-bar button { height:44px; }
+  .span-from,.span-to { width:32px; }
+}
+@media (prefers-reduced-motion:reduce) { .revealing .effect-row { animation:none; } }
+/* Keep the affected ink in view while adjusting a lower bar or the brush. */
+.results-card > .result-frame { position: sticky; top: .5rem; z-index: 3; background: var(--surface); }
+#effect-editor input, #effect-editor button, #effect-editor select { scroll-margin-top: 19rem; }
+@media (max-width:600px) { #effect-editor input, #effect-editor button, #effect-editor select { scroll-margin-top: 11rem; } }
+.creation-overlay { position: fixed; pointer-events: none; z-index: 6; }
+.effect-top strong { margin-right: auto; }
+.span-move { touch-action: none; }
+@media (max-height: 500px) {
+  .result { height: 140px; aspect-ratio: auto; }
+  #effect-editor input, #effect-editor button, #effect-editor select { scroll-margin-top: 10rem; }
+}

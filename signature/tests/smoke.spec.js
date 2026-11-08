@@ -83,8 +83,11 @@ test('draws with the mouse, corrects as it goes, undoes, and brushes a region', 
   await expect(page.locator('#brush-info')).toContainText('＋ 1 region smoothed more');
   expect(await page.evaluate(() => window.Signature.getRequest().smooth.local.length)).toBeGreaterThan(0);
   await page.click('#undo');
-  await expect(page.locator('#result-empty')).toBeVisible();
   await expect(page.locator('#brush-info')).toHaveText('No brushed regions.');
+  await expect(page.locator('#result-empty')).toBeHidden();
+  await page.click('#undo'); // the smoothing setting
+  await page.click('#undo'); // the drawn stroke
+  await expect(page.locator('#result-empty')).toBeVisible();
 });
 
 test('Undo after Clear or Import shows the signature as it was', async ({ page }) => {
@@ -197,6 +200,14 @@ test('fits a 390 px phone without sideways scrolling and takes a finger-drawn st
   await expect(page.locator('#pad-info')).toContainText('1 stroke,');
   await page.waitForFunction(() => window.Signature.getResult()?.strokes.length === 1);
   expect(await page.evaluate(() => window.scrollY)).toBe(scrollBefore);
+  const handle=page.getByRole('button',{name:'Move effect 2',exact:true});await handle.scrollIntoViewIfNeeded();
+  const h=await handle.boundingBox();const start=await page.evaluate(()=>window.Signature.getRequest().effects[1].from);
+  const scroll=await page.evaluate(()=>scrollY);
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:h.x+h.width/2,y:h.y+h.height/2}]});
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:h.x+h.width/2-15,y:h.y+h.height/2}]});
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().effects[1].from)).toBeLessThan(start);
+  expect(await page.evaluate(()=>scrollY)).toBe(scroll);
   await context.close();
 });
 
@@ -242,4 +253,120 @@ for (const modifier of ['Control', 'Meta']) test(`${modifier}+Z and Shift+Z pres
   await page.keyboard.press(`${modifier}+Shift+z`);
   await expect(page.locator('#draw-done')).toBeEnabled();
   await expect(page.locator('#pad-info')).toContainText('1 stroke,');
+});
+
+test('effect bars, warp, exports and history share one request',async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ await expect(page.locator('.effect-row')).toHaveCount(2);
+ const initial=await page.evaluate(()=>window.Signature.exportSvgText());
+ await page.getByRole('button',{name:'＋ Thickness',exact:true}).click();
+ await page.getByLabel('Width ×, effect 3',{exact:true}).fill('2');
+ await page.getByLabel('Width ×, effect 3',{exact:true}).press('Tab');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.exportSvgText())).not.toEqual(initial);
+ await page.getByRole('button',{name:'Start of effect 3',exact:true}).focus();
+ await page.keyboard.press('ArrowRight');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().effects[2].from)).toBe(.26);
+ await page.keyboard.press('Control+z');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().effects[2].from)).toBe(.25);
+ await page.keyboard.press('Control+Shift+z');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().effects[2].from)).toBe(.26);
+ await page.getByText('Move the ink directly',{exact:true}).click();
+ await page.getByLabel('Centre x',{exact:true}).fill('100');await page.getByLabel('Centre y',{exact:true}).fill('100');
+ await page.getByLabel('Move x',{exact:true}).fill('20');await page.getByLabel('Radius',{exact:true}).fill('1000');
+ await page.getByRole('button',{name:'Apply warp',exact:true}).click();
+ await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().warps.length)).toBe(1);
+ await expect.poll(()=>page.evaluate(()=>window.Signature.submit(window.Signature.getRequest()).svg===window.Signature.exportSvgText())).toBe(true);
+ const warped=await page.evaluate(()=>window.Signature.exportSvgText());
+ await page.getByRole('button',{name:'Clear warps',exact:true}).click();
+ await page.keyboard.press('Meta+z');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.exportSvgText())).toBe(warped);
+ await page.click('#clear');await page.click('#undo');
+ await expect.poll(()=>page.evaluate(()=>window.Signature.exportSvgText())).toBe(warped);
+ await page.getByRole('button',{name:'Remove effect 3',exact:true}).click();
+ await expect(page.locator('.effect-row')).toHaveCount(2);
+});
+
+test('drag spans and warp the canvas; creation respects reduced motion',async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ const bar=page.getByRole('button',{name:'Move effect 2',exact:true});await bar.scrollIntoViewIfNeeded();
+ let b=await bar.boundingBox();const before=await page.evaluate(()=>window.Signature.getRequest().effects[1]);
+ await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.mouse.move(b.x+b.width/2+35,b.y+b.height/2,{steps:6});await page.mouse.up();
+ const after=await page.evaluate(()=>window.Signature.getRequest().effects[1]);expect(after.from).toBeGreaterThan(before.from);expect(after.to-after.from).toBeCloseTo(before.to-before.from,10);
+ await page.getByText('Move the ink directly',{exact:true}).click();await page.getByLabel('Warp on canvas',{exact:true}).check();
+ await page.locator('#result').scrollIntoViewIfNeeded();b=await page.locator('#result').boundingBox();
+ await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.mouse.move(b.x+b.width/2+24,b.y+b.height/2+12,{steps:6});await page.mouse.up();
+ await expect.poll(()=>page.evaluate(()=>window.Signature.getRequest().warps.length)).toBe(1);
+ expect(await page.evaluate(()=>window.Signature.getRequest().warps[0].dx)).toBeGreaterThan(0);
+ await page.getByRole('button',{name:'Show creation',exact:true}).click();await expect(page.locator('.effect-rows')).toHaveClass(/revealing/);
+ await page.emulateMedia({reducedMotion:'reduce'});await expect(page.locator('.effect-rows')).not.toHaveClass(/revealing/);
+ await page.getByRole('button',{name:'Show creation',exact:true}).click();await expect(page.locator('.effect-rows')).not.toHaveClass(/revealing/);
+ await expect(page.locator('.creation-overlay')).toBeHidden();
+});
+
+test('output controls restore together with undo and redo',async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ await page.locator('#png-dpi').fill('600');await page.locator('#png-dpi').press('Tab');
+ await page.locator('#result-heading').click();await page.keyboard.press('Control+z');
+ await expect(page.locator('#png-dpi')).toHaveValue('300');
+ await page.keyboard.press('Control+Shift+z');await expect(page.locator('#png-dpi')).toHaveValue('600');
+});
+
+test('morph target, settings and drawn target participate in main history',async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ const original=await page.evaluate(()=>window.Signature.getRequest().strokes);
+ await page.click('#morph-example');await expect(page.locator('#morph-info')).toContainText('second example');
+ await page.keyboard.press('Control+z');await expect(page.locator('#morph-info')).toHaveText('No second signature yet.');
+ expect(await page.evaluate(()=>window.Signature.getRequest().strokes)).toEqual(original);
+ await expect(page.locator('#morph-empty')).toBeVisible();
+ await page.keyboard.press('Control+Shift+z');await expect(page.locator('#morph-info')).toContainText('second example');
+ await page.locator('#morph-method').selectOption('linear');await page.locator('#morph-method').focus();
+ await page.keyboard.press('Control+z');await expect(page.locator('#morph-method')).toHaveValue('wavelet');
+ await page.keyboard.press('Control+Shift+z');await expect(page.locator('#morph-method')).toHaveValue('linear');
+ await page.keyboard.press('Control+z');
+ await page.locator('#morph-import').setInputFiles({name:'target.csv',mimeType:'text/csv',buffer:Buffer.from('x,y\n0,0\n20,30\n40,0')});
+ await expect(page.locator('#morph-info')).toContainText('target.csv');await expect(page.locator('#redo')).toBeDisabled();
+ await page.click('#morph-draw');const b=await page.locator('#pad2').boundingBox();
+ await page.mouse.move(b.x+20,b.y+20);await page.mouse.down();await page.mouse.move(b.x+80,b.y+60,{steps:10});await page.mouse.up();
+ await page.click('#draw-done');await expect(page.locator('#morph-info')).toContainText('drawn here');
+ await page.keyboard.press('Meta+z');await expect(page.locator('#morph-info')).toContainText('target.csv');
+ await page.keyboard.press('Meta+Shift+z');await expect(page.locator('#morph-info')).toContainText('drawn here');
+ expect(await page.evaluate(()=>window.Signature.getRequest().strokes)).toEqual(original);
+ // Non-text select controls use application history too.
+ await page.getByLabel('Hairpins, effect 1',{exact:true}).selectOption('round');await page.getByLabel('Hairpins, effect 1',{exact:true}).focus();
+ await page.keyboard.press('Control+z');await expect(page.getByLabel('Hairpins, effect 1',{exact:true})).toHaveValue('preserve');
+});
+
+for(const channel of ['main','target']) test(`undo cancels delayed ${channel} example and file reads`,async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ const original=await page.evaluate(()=>window.Signature.getRequest().strokes);
+ // Establish a history state to restore while the request is in flight.
+ await page.locator('[data-path="smooth.fourier.strength"]').fill('2');
+ let release;const delayed=new Promise(resolve=>{release=resolve;});let reached;
+ const started=new Promise(resolve=>{reached=resolve;});
+ await page.route(channel==='main'?'**/examples/avery-quill.csv':'**/examples/juno-marsh.csv',async route=>{reached();await delayed;await route.fulfill({contentType:'text/csv',body:'x,y\n900,900\n950,980\n990,900'});});
+ await page.click(channel==='main'?'#example':'#morph-example');await started;
+ await page.keyboard.press('Control+z');release();await page.waitForTimeout(150);
+ expect(await page.evaluate(()=>window.Signature.getRequest().strokes)).toEqual(original);
+ await expect(page.locator('#morph-info')).toHaveText('No second signature yet.');
+ await page.locator('[data-path="smooth.fourier.strength"]').fill('3');
+ await page.evaluate(()=>{const read=File.prototype.text;File.prototype.text=function(){return new Promise(resolve=>{window.releaseSignatureRead=()=>read.call(this).then(resolve);});};});
+ await page.locator(channel==='main'?'#import':'#morph-import').setInputFiles({name:'delayed.csv',mimeType:'text/csv',buffer:Buffer.from('x,y\n900,900\n950,980\n990,900')});
+ await page.waitForFunction(()=>window.releaseSignatureRead);
+ await page.locator('#result-heading').click();await page.keyboard.press('Meta+z');
+ await page.evaluate(()=>window.releaseSignatureRead());await page.waitForTimeout(150);
+ expect(await page.evaluate(()=>window.Signature.getRequest().strokes)).toEqual(original);
+ await expect(page.locator('#morph-info')).toHaveText('No second signature yet.');
+});
+
+test('colour and imported morph settings restore and branch correctly',async({page})=>{
+ await page.goto('./');await page.waitForFunction(()=>window.Signature?.getResult());
+ const colour=async value=>page.locator('#ink').evaluate((el,v)=>{el.focus();el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));},value);
+ await colour('#123456');await page.keyboard.press('Control+z');await expect(page.locator('#ink')).toHaveValue('#1b1b1b');
+ await expect(page.locator('#results-card')).toHaveCSS('--ink','#1b1b1b');
+ await colour('#abcdef');await expect(page.locator('#redo')).toBeDisabled();
+ await page.keyboard.press('Control+z');await expect(page.locator('#ink')).toHaveValue('#1b1b1b');
+ await page.evaluate(()=>{const req=window.Signature.getRequest();window.Signature.load({...req,morph:{target:{strokes:req.strokes},method:'linear',strokes:'first',loop:2}});});
+ await expect(page.locator('#morph-info')).toContainText('imported request');await expect(page.locator('#morph-method')).toHaveValue('linear');
+ await page.locator('#result-heading').click();await page.keyboard.press('Meta+z');
+ await expect(page.locator('#morph-info')).toHaveText('No second signature yet.');await expect(page.locator('#morph-method')).toHaveValue('wavelet');
 });

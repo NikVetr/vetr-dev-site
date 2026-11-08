@@ -7,6 +7,8 @@ import { DEFAULTS, normalizeRequest, SignatureError } from './core/request.js';
 import { submit } from './core/index.js';
 import { checkerboard, fillPath, fillStrokes, fitView, pngBlob, pngSize, prepare, strokePolylines } from './draw.js';
 import { Pad } from './pad.js';
+import { EffectEditor } from './editor.js';
+import { isTextEditor } from '../shared/history.js';
 
 /**
  * @typedef {import('./core/resample.js').RawPoint} RawPoint
@@ -33,6 +35,12 @@ let result = null;
 let target = null;
 /** @type {{ p: number, strokes: { points: number[][] }[] }[] | null} */
 let frames = null;
+let targetLabel = '';
+let mainRead = 0, targetRead = 0;
+const morphIds = ['morph-method','morph-strokes','morph-loop','morph-p'];
+let morphValues = Object.fromEntries(morphIds.map(id=>[id,input(id).value]));
+const outputIds=['ink','png-height','png-unit','png-dpi'];
+let outputValues=Object.fromEntries(outputIds.map(id=>[id,input(id).value]));
 
 const theme = () => {
   const css = getComputedStyle(document.documentElement);
@@ -40,7 +48,12 @@ const theme = () => {
   return { ink: v('--text'), guide: v('--border'), background: v('--surface-2'), surface: v('--surface'), muted: v('--muted') };
 };
 
-const pad = new Pad(/** @type {HTMLCanvasElement} */ ($('pad')), { onChange: padChanged, colors: theme });
+const pad = new Pad(/** @type {HTMLCanvasElement} */ ($('pad')), { onChange: padChanged, colors: theme, capture:()=>({settings:structuredClone(settings),output:outputValues,target,targetLabel,morphValues:{...morphValues,'morph-p':String(frameIndex)}}),
+  restore:s=>{if(s){settings=s.settings;outputValues=s.output;for(const [id,value] of Object.entries(s.output)) input(id).value=String(value);$('results-card').style.setProperty('--ink',input('ink').value);showSettings();
+    mainRead++;targetRead++;stopPlay();clearTimeout(morphTimer);
+    target=s.target;targetLabel=s.targetLabel;morphValues=s.morphValues;
+    for(const id of morphIds) input(id).value=morphValues[id];
+    frameIndex=Number(morphValues['morph-p']);showMorphSettings();showTarget();computeMorph();}} });
 const pad2 = new Pad(/** @type {HTMLCanvasElement} */ ($('pad2')), { onChange: () => { /** @type {HTMLButtonElement} */ ($('draw-done')).disabled = !pad2.strokes.length; /** @type {HTMLButtonElement} */ ($('undo2')).disabled = !pad2.history.length; /** @type {HTMLButtonElement} */ ($('redo2')).disabled = !pad2.future.length; }, colors: theme });
 
 // ---------- settings controls ----------
@@ -96,7 +109,12 @@ function showOutputs() {
   }[/** @type {'auto'} */ (src)];
 }
 
+const heldSettings = new WeakSet();
 for (const el of fields) {
+  if(el.type==='range') {
+    el.addEventListener('pointerdown',()=>{pad.remember();heldSettings.add(el);});
+    for(const event of ['pointerup','pointercancel','blur']) el.addEventListener(event,()=>heldSettings.delete(el));
+  }
   el.addEventListener(el.type === 'range' || el.type === 'checkbox' ? 'input' : 'change', () => {
     const path = /** @type {string} */ (el.dataset.path);
     const type = el.dataset.type;
@@ -105,6 +123,7 @@ for (const el of fields) {
     else if (el.type === 'range' || type === 'number') v = Number(el.value) / Number(el.dataset.scale ?? 1);
     else if (type === 'int-or-auto') v = el.value.trim() === 'auto' ? 'auto' : Number(el.value);
     else if (type === 'number-or-auto') v = el.value.trim() === 'auto' ? 'auto' : Number(el.value);
+    if(!heldSettings.has(el)) pad.remember();
     setAt(path, v);
     // the thinnest pen never passes the thickest: moving one past the other takes it along
     if (path === 'width.min' && settings.width.max < settings.width.min) settings.width.max = settings.width.min;
@@ -114,12 +133,16 @@ for (const el of fields) {
     schedule();
   });
 }
+input('wavelet-amount').addEventListener('pointerdown',()=>{pad.remember();heldSettings.add(input('wavelet-amount'));});
+for(const event of ['pointerup','pointercancel','blur']) input('wavelet-amount').addEventListener(event,()=>heldSettings.delete(input('wavelet-amount')));
 input('wavelet-amount').addEventListener('input', () => {
+  if(!heldSettings.has(input('wavelet-amount'))) pad.remember();
   settings.smooth.wavelet.keepEnergy = keepFromSlider(Number(input('wavelet-amount').value));
   showOutputs();
   schedule();
 });
 $('reset').addEventListener('click', () => {
+  pad.remember();
   settings = fresh();
   showSettings();
   schedule();
@@ -134,6 +157,7 @@ function currentRequest() {
   return {
     strokes: pad.getStrokes().map((points) => ({ points })),
     ...structuredClone(settings),
+    effects:structuredClone(pad.editing.effects), warps:structuredClone(pad.editing.warps),
     smooth: { ...structuredClone(settings.smooth), local: pad.localRegions.map((r) => ({ ...r })) },
     output: { ...settings.output, color: input('ink').value, height: height > 0 ? height : null, unit },
   };
@@ -146,12 +170,15 @@ function schedule() {
 }
 
 function recompute() {
+  /** @type {HTMLButtonElement} */ ($('undo')).disabled=!pad.history.length;
+  /** @type {HTMLButtonElement} */ ($('redo')).disabled=!pad.future.length;
   const has = pad.strokes.length > 0;
   $('pad-empty').hidden = has;
   if (!has) {
     result = null;
     showIssues([]);
     render();
+    computeMorph();
     return;
   }
   try {
@@ -205,6 +232,7 @@ function padChanged() {
   /** @type {HTMLButtonElement} */ ($('clear')).disabled = !pts.length;
   /** @type {HTMLButtonElement} */ ($('replay')).disabled = !pts.length;
   showBrushInfo();
+  editor.created();
   schedule();
 }
 
@@ -213,6 +241,10 @@ function padChanged() {
 /** @type {import('./draw.js').View} */
 let resultView = { s: 1, ox: 0, oy: 0 };
 const resultCanvas = /** @type {HTMLCanvasElement} */ ($('result'));
+const editor = new EffectEditor({host:$('effect-editor'),canvas:resultCanvas, raw:()=>pad.getStrokes(),
+  state:()=>pad.editing,result:()=>result,remember:()=>pad.remember(),change:()=>{schedule();
+    /** @type {HTMLButtonElement} */ ($('undo')).disabled=!pad.history.length;
+    /** @type {HTMLButtonElement} */ ($('redo')).disabled=!pad.future.length;},render,point:resultPoint});
 
 function render() {
   const { ctx, dpr, w, h } = prepare(resultCanvas);
@@ -225,11 +257,12 @@ function render() {
     $('png-size').textContent = '';
     return;
   }
-  resultView = fitView(result.viewBox, w, h, 0.03);
+  if (!editor.drag) resultView = fitView(result.viewBox, w, h, 0.03);
   const mode = viewMode();
   const d = /** @type {RegExpMatchArray} */ (result.svg.match(/ d="([^"]*)"/))[1];
-  if (mode !== 'before') fillPath(ctx, d, resultView, input('ink').value);
+  if (mode !== 'before' && !editor.colour && editor.active<0 && !editor.animation) fillPath(ctx, d, resultView, input('ink').value);
   if (mode !== 'after') strokePolylines(ctx, pad.getStrokes(), resultView, mode === 'both' ? '#d0312d' : input('ink').value, (mode === 'both' ? 0.8 : 2) * dpr);
+  if (mode !== 'before') editor.draw(ctx, resultView);
   drawRegions(ctx, dpr);
   const src = { speed: 'signing speed', curvature: 'curvature', pressure: 'pen pressure', constant: 'one width' }[result.widthSource];
   $('status').textContent = `${result.strokes.length} stroke${result.strokes.length === 1 ? '' : 's'}, width from ${src}`;
@@ -239,9 +272,19 @@ function render() {
 
 const viewMode = () => /** @type {HTMLInputElement} */ (document.querySelector('input[name="view"]:checked')).value;
 for (const r of document.querySelectorAll('input[name="view"]')) r.addEventListener('change', render);
-for (const id of ['ink', 'png-height', 'png-unit']) $(id).addEventListener('input', schedule);
+for (const id of outputIds) {
+  let remembered=false,revision=pad.revision;
+  $(id).addEventListener('focus',()=>{remembered=false;});
+  $(id).addEventListener('input',()=>{
+    const value=input(id).value;
+    if(value!==outputValues[id]) {
+      if(!remembered||revision!==pad.revision){pad.remember();remembered=true;revision=pad.revision;}
+      outputValues[id]=value;
+    }
+    schedule();
+  });
+}
 $('ink').addEventListener('input', () => $('results-card').style.setProperty('--ink', input('ink').value));
-$('png-dpi').addEventListener('input', render);
 new ResizeObserver(() => { render(); drawMorph(); }).observe(resultCanvas);
 document.addEventListener('themechange', () => { pad.draw(); pad2.draw(); render(); drawMorph(); drawFilmstrip(); });
 
@@ -302,6 +345,7 @@ resultCanvas.addEventListener('pointerdown', (e) => {
 resultCanvas.addEventListener('pointermove', (e) => { if (painting) paint(e); });
 const endPaint = () => {
   if (!painting || !result) return;
+  pad.remember();
   const k = Number(input('brush-strength').value);
   const strength = brushMode() === 'more' ? k : 1 / k;
   for (const [stroke, set] of painting) {
@@ -324,6 +368,7 @@ const endPaint = () => {
 resultCanvas.addEventListener('pointerup', endPaint);
 resultCanvas.addEventListener('pointercancel', endPaint);
 $('brush-clear').addEventListener('click', () => {
+  pad.remember();
   pad.localRegions = [];
   showBrushInfo();
   schedule();
@@ -428,27 +473,40 @@ function signatureOf(req) {
 function load(req) {
   const { strokes, settings: s } = normalizeRequest(req);
   const { morph: _m, input: _i, ...rest } = s;
+  pad.load(strokes, rest.smooth.local, {effects:rest.effects ?? [],warps:rest.warps ?? []});
   settings = { ...rest, smooth: { ...rest.smooth, local: [] } };
   if (s.output.height !== null) {
     input('png-height').value = String(s.output.height);
     if (s.output.unit !== 'pt') input('png-unit').value = s.output.unit;
   }
   if (/^#[0-9a-f]{6}$/i.test(s.output.color)) input('ink').value = s.output.color;
+  outputValues=Object.fromEntries(outputIds.map(id=>[id,input(id).value]));
   showSettings();
-  pad.load(strokes, rest.smooth.local);
+  if(s.morph) {
+    target=s.morph.target;targetLabel='imported request';
+    for(const key of ['method','strokes','loop']) {const id=`morph-${key}`;morphValues[id]=String(s.morph[key]);input(id).value=morphValues[id];}
+    frameIndex=0;morphValues['morph-p']='0';input('morph-p').value='0';
+    showTarget();showMorphSettings();
+  }
   recompute();
   return /** @type {Result} */ (result);
 }
 
 $('example').addEventListener('click', async () => {
-  const strokes = signatureOf({ csv: await fetchText('examples/avery-quill.csv') });
+  const token=++mainRead,revision=pad.revision;
+  const csv=await fetchText('examples/avery-quill.csv');
+  if(token!==mainRead||revision!==pad.revision)return;
+  const strokes = signatureOf({ csv });
   if (strokes) pad.load(strokes);
 });
 input('import').addEventListener('change', async () => {
   const file = input('import').files?.[0];
   if (!file) return;
-  const req = fileRequest(file.name, await file.text());
+  const token=++mainRead,revision=pad.revision;
   input('import').value = '';
+  const text=await file.text();
+  if(token!==mainRead||revision!==pad.revision)return;
+  const req = fileRequest(file.name,text);
   const settingsKeys = Object.keys(req).filter((k) => !['strokes', 'csv', 'matrix', 'svg'].includes(k));
   if (settingsKeys.length) {
     try {
@@ -505,7 +563,11 @@ function scheduleMorph() {
 }
 
 function computeMorph() {
-  if (!target || !pad.strokes.length) return;
+  if (!target || !pad.strokes.length) {
+    frames=null;stopPlay();
+    for(const id of ['morph-play','morph-p','morph-record']) /** @type {HTMLButtonElement} */($(id)).disabled=true;
+    $('morph-empty').hidden=false;drawMorph();drawFilmstrip();return;
+  }
   try {
     const r = submit({
       ...currentRequest(),
@@ -572,37 +634,53 @@ function drawFilmstrip() {
   }
 }
 
-input('morph-p').addEventListener('input', () => {
-  stopPlay();
-  frameIndex = Number(input('morph-p').value);
-  drawMorph();
-});
-for (const id of ['morph-method', 'morph-strokes', 'morph-loop']) {
-  $(id).addEventListener('input', () => {
-    $('morph-loop-out').textContent = input('morph-loop').value;
-    input('morph-loop').disabled = /** @type {HTMLSelectElement} */ ($('morph-method')).value !== 'wavelet';
-    scheduleMorph();
+function showMorphSettings() {
+  $('morph-loop-out').textContent=input('morph-loop').value;
+  input('morph-loop').disabled=input('morph-method').value!=='wavelet';
+}
+function showTarget() {
+  $('morph-info').textContent=target ? `Second signature: ${targetLabel}, ${target.length} stroke${target.length===1?'':'s'}.` : 'No second signature yet.';
+}
+for(const id of morphIds) {
+  const field=input(id);let held=false;
+  if(field.type==='range') {
+    field.addEventListener('pointerdown',()=>{pad.remember();held=true;});
+    for(const event of ['pointerup','pointercancel','blur'])field.addEventListener(event,()=>{held=false;});
+  }
+  field.addEventListener('input',()=>{
+    if(!held)pad.remember();
+    morphValues[id]=field.value;stopPlay();showMorphSettings();
+    if(id==='morph-p'){frameIndex=Number(field.value);drawMorph();}else scheduleMorph();
+    /** @type {HTMLButtonElement} */($('undo')).disabled=!pad.history.length;
+    /** @type {HTMLButtonElement} */($('redo')).disabled=!pad.future.length;
   });
 }
-$('morph-loop-out').textContent = input('morph-loop').value;
+showMorphSettings();
 
 /** @param {RawPoint[][] | null} strokes @param {string} label */
 function setTarget(strokes, label) {
   if (!strokes) return;
-  target = strokes;
-  $('morph-info').textContent = `Second signature: ${label}, ${strokes.length} stroke${strokes.length === 1 ? '' : 's'}.`;
-  frameIndex = 0;
-  input('morph-p').value = '0';
+  pad.remember();stopPlay();targetRead++;
+  target=strokes;targetLabel=label;showTarget();
+  frameIndex=0;input('morph-p').value='0';morphValues['morph-p']='0';
   computeMorph();
+  /** @type {HTMLButtonElement} */($('undo')).disabled=!pad.history.length;
+  /** @type {HTMLButtonElement} */($('redo')).disabled=true;
 }
 
-$('morph-example').addEventListener('click', async () => setTarget(signatureOf({ csv: await fetchText('examples/juno-marsh.csv') }), 'the second example'));
+$('morph-example').addEventListener('click', async () => {
+  const token=++targetRead,revision=pad.revision;
+  const csv=await fetchText('examples/juno-marsh.csv');
+  if(token!==targetRead||revision!==pad.revision)return;
+  setTarget(signatureOf({csv}),'the second example');
+});
 input('morph-import').addEventListener('change', async () => {
   const file = input('morph-import').files?.[0];
   if (!file) return;
-  const strokes = signatureOf(fileRequest(file.name, await file.text()));
-  input('morph-import').value = '';
-  setTarget(strokes, file.name);
+  const token=++targetRead,revision=pad.revision;input('morph-import').value='';
+  const text=await file.text();
+  if(token!==targetRead||revision!==pad.revision)return;
+  setTarget(signatureOf(fileRequest(file.name,text)),file.name);
 });
 
 let playId = 0;
@@ -656,8 +734,9 @@ $('morph-record').addEventListener('click', () => {
   info.textContent = `Recording one cycle (${MORPH_SECONDS * 2} s)…`;
   frameIndex = 0;
   rec.start();
-  const start = performance.now();
+  const start = performance.now(),revision=pad.revision;
   const step = () => {
+    if(revision!==pad.revision){rec.onstop=null;rec.stop();return;}
     const t = (performance.now() - start) / (MORPH_SECONDS * 1000);
     frameIndex = Math.round(MORPH_STEPS * (t < 1 ? t : Math.max(0, 2 - t)));
     drawMorph();
@@ -679,8 +758,7 @@ $('undo2').addEventListener('click', () => pad2.undo());
 $('redo2').addEventListener('click', () => pad2.redo());
 document.addEventListener('keydown', (e) => {
   if (e.defaultPrevented || e.isComposing || e.altKey || !(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== 'z') return;
-  const el = e.target;
-  if (el instanceof HTMLElement && (el.isContentEditable || el.closest('textarea, select, input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=button])'))) return;
+  if (isTextEditor(e.target)) return;
   e.preventDefault();
   const active = dialog.open ? pad2 : pad;
   if (e.shiftKey) active.redo(); else active.undo();
@@ -714,8 +792,9 @@ if (!recordable()) {
 });
 
 // the example, so the page opens on a correction
+const initialRead=++mainRead,initialRevision=pad.revision;
 fetchText('examples/avery-quill.csv').then((csv) => {
-  if (!pad.strokes.length) {
+  if (initialRead===mainRead && initialRevision===pad.revision && !pad.strokes.length) {
     const strokes = signatureOf({ csv });
     if (strokes) pad.load(strokes);
   }

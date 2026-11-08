@@ -118,10 +118,12 @@ export function normalizeRequest(request) {
   const issues = [];
   /** @type {Warning[]} */
   const warnings = [];
-  const { morph, ...rest } = request;
+  const { morph, effects, warps, ...rest } = request;
   const sections = Object.fromEntries(Object.entries(rest).filter(([k]) => !INPUT_FORMS.includes(k)));
   const merged = /** @type {Record<string, any>} */ (merge(sections, { ...DEFAULTS, morph: undefined }, '', issues));
   delete merged.morph;
+  if (effects !== undefined) merged.effects = readEdits(effects, 'effects', issues);
+  if (warps !== undefined) merged.warps = readEdits(warps, 'warps', issues);
   merged.smooth.local = readLocal(rest.smooth?.local, issues);
   const strokes = readSignature(rest, '', merged.input, issues, warnings);
   merged.morph = null;
@@ -152,7 +154,7 @@ export function normalizeRequest(request) {
   return { strokes: /** @type {RawPoint[][]} */ (strokes), settings: /** @type {Settings} */ (merged), warnings };
 }
 
-/** @typedef {Omit<typeof DEFAULTS, 'morph'> & { morph: MorphSettings | null }} Settings */
+/** @typedef {Omit<typeof DEFAULTS, 'morph'> & { morph: MorphSettings | null, effects?: import('./effects.js').Effect[], warps?: import('./effects.js').Warp[] }} Settings */
 
 /** @param {unknown} value @param {Issue[]} issues @returns {LocalRegion[]} */
 function readLocal(value, issues) {
@@ -213,4 +215,26 @@ function invalid(issues) {
 /** @param {unknown} value @returns {value is Record<string, any>} */
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+/** @param {unknown} value @param {'effects'|'warps'} kind @param {Issue[]} issues */
+function readEdits(value,kind,issues) {
+  if(!Array.isArray(value) || value.length>100) {
+    issues.push({code:'INVALID_FIELD',path:kind,message:'must be an array of at most 100 edits'}); return [];
+  }
+  const defaults = kind==='effects' ? {kind:'smooth',from:0,to:1,strength:1,falloff:0.03,hairpin:'preserve'} : {x:0,y:0,dx:0,dy:0,radius:1};
+  return value.map((v,i)=> {
+    const at=`${kind}[${i}]`;
+    if(!isObject(v)) {issues.push({code:'INVALID_FIELD',path:at,message:'must be an edit object'});return defaults;}
+    const out={...defaults,...v};
+    for(const k of Object.keys(v)) if(!(k in defaults)) issues.push({code:'UNKNOWN_FIELD',path:`${at}.${k}`,message:'unknown edit field'});
+    for(const k of Object.keys(defaults)) {
+      const q=out[k];
+      const valid=k==='kind' ? ['smooth','thickness'].includes(q) : k==='hairpin' ? ['preserve','round','loop'].includes(q)
+        : num(q) && (['from','to','falloff'].includes(k) ? unit(q) : k==='radius' ? q>0 : k==='strength' ? q>=0 && q<=4 && (out.kind!=='thickness'||q>0) : true);
+      if(!valid) issues.push({code:'INVALID_FIELD',path:`${at}.${k}`,message:'invalid edit value (shares 0–1, strength 0–4; thickness and radius must be positive)'});
+    }
+    if(kind==='effects' && out.from>out.to) issues.push({code:'INVALID_FIELD',path:`${at}.to`,message:'must be at least from'});
+    return out;
+  });
 }

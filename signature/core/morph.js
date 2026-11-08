@@ -174,6 +174,7 @@ export function waveletInterpolate(va, vb, multipliers, props, loop, filter = 'm
  * @param {import('./request.js').MorphOptions} m
  * @param {{ step: (sig: RawPoint[][]) => number,
  *   smooth: (x: Float64Array, y: Float64Array, sig: 'a' | 'b', stroke: number, s: Float64Array) => { x: Float64Array, y: Float64Array },
+ *   edit?: (strokes: {x:Float64Array,y:Float64Array,s:Float64Array}[], widths:Float64Array[], normalized:RawPoint[][], original:RawPoint[][])=>void,
  *   widths: (strokes: { x: Float64Array, y: Float64Array, s: Float64Array, raw: RawPoint[] }[], sig: RawPoint[][]) => Float64Array[] }} pipeline
  *   the correction pipeline's resampling step, smoothing and widths
  */
@@ -241,6 +242,27 @@ export function morphFrames(rawA, rawB, m, pipeline) {
   };
   const wa = endWidths('a', a);
   const wb = endWidths('b', b);
+  // Optional source edits are applied to the selected method's actual endpoint.
+  // Their displacement fades to zero at the target, preserving its endpoint and
+  // the existing wavelet/linear/corrected interpolation in the absence of edits.
+  if (pipeline.edit) {
+    const source = a.map((raw, stroke) => {
+      const i = sides.findIndex(sd => 'stroke' in sd.pair.a && sd.pair.a.stroke === stroke);
+      const endpoint = m.method === 'wavelet' ? waveletEnd(sides[i], 'a') : ends[i].a;
+      return {x:endpoint.x.slice(),y:endpoint.y.slice(),s:sides[i].a.s};
+    });
+    const before = source.map(st => ({x:st.x.slice(),y:st.y.slice()}));
+    const widths = a.map((_,stroke)=>wa[sides.findIndex(sd=>'stroke' in sd.pair.a && sd.pair.a.stroke===stroke)]);
+    pipeline.edit(source, widths, a, selA);
+    sides.forEach((sd,i)=> {
+      if (!('stroke' in sd.pair.a)) return;
+      const k=sd.pair.a.stroke;
+      m.props.forEach((p,f)=> {for(let t=0;t<sd.n;t++) {
+        coords[i].x[f][t]+=(source[k].x[t]-before[k].x[t])*(1-p);
+        coords[i].y[f][t]+=(source[k].y[t]-before[k].y[t])*(1-p);
+      }});
+    });
+  }
   return m.props.map((p, f) => ({
     p,
     strokes: coords.map((c, i) => ({

@@ -6,6 +6,8 @@
 // widths -> filled outline (the union of each stroke's ribbon) -> SVG; and,
 // when asked, morph frames into a second signature.
 
+import { editGeometry, editWidths, timeline } from './effects.js';
+export { timeline, influence, suggestEffects } from './effects.js';
 import { morphFrames } from './morph.js';
 import { pathData, polygonBounds, ribbon, unionRings } from './outline.js';
 import { normalizeRequest, SignatureError } from './request.js';
@@ -100,11 +102,13 @@ export function correct(sig, s, local) {
     const sm = smoothPoints(r.x, r.y, s.smooth, localProfile(local, i, r.s));
     return { x: sm.x, y: sm.y, s: r.s, raw, rawS, dot: false };
   });
+  if (s.effects?.length || s.warps?.length) editGeometry(strokes, sig, s.effects ?? [], s.warps ?? [], height);
   const source = widthSource(sig, s);
   const lines = strokes.filter((st) => !st.dot);
   const w = lines.length ? strokeWidths(lines, height, { ...s.width, source }) : [];
   let k = 0;
   const widths = strokes.map((st) => (st.dot ? Float64Array.of(s.width.max * height) : w[k++]));
+  if (s.effects?.length) editWidths(widths, strokes, sig, s.effects);
   return { strokes, widths, height, source };
 }
 
@@ -141,6 +145,19 @@ export function submit(request) {
     const { target: _t, ...m } = s.morph;
     const frames = morphFrames(raw, target, m, {
       step: (sig) => stepFor(sig, s),
+      ...(s.effects?.length || s.warps?.length ? {edit: (strokes, widths, normalized, original) => {
+        const scale=signatureHeight(normalized)/signatureHeight(original);
+        let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+        for(const stroke of original) for(const p of stroke) {
+          minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y);
+        }
+        const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+        const firstSpan=timeline(raw)[0].to;
+        const effects=m.strokes==='first' ? (s.effects??[]).map(e=>({...e,from:e.from/firstSpan,to:e.to/firstSpan,falloff:e.falloff/firstSpan})) : s.effects??[];
+        const warps=(s.warps??[]).map(w=>({x:(w.x-cx)*scale,y:(w.y-cy)*scale,dx:w.dx*scale,dy:w.dy*scale,radius:w.radius*scale}));
+        editGeometry(strokes,normalized,effects,warps,signatureHeight(normalized));
+        editWidths(widths,strokes,normalized,effects);
+      }} : {}),
       // local regions belong to this signature
       smooth: (x, y, which, stroke, sArc) => smoothPoints(x, y, s.smooth, which === 'a' ? localProfile(s.smooth.local, stroke, sArc) : undefined),
       widths: (strokes, sig) => {

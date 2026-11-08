@@ -1,3 +1,4 @@
+import { suggestEffects } from './core/effects.js';
 // The signing pad: pointer capture (mouse, trackpad, pen, touch), undo, clear
 // and replay, drawn on a canvas. Points are kept in the signature's own
 // coordinates; the pad shows them through a fitted view, and new strokes are
@@ -17,7 +18,7 @@ const FRAME_W = 1000; // the pad's own units across; its height follows its aspe
 export class Pad {
   /**
    * @param {HTMLCanvasElement} canvas
-   * @param {{ onChange: () => void, colors: () => { ink: string, guide: string, background: string } }} opts
+   * @param {{ onChange: () => void, colors: () => { ink: string, guide: string, background: string }, capture?:()=>any, restore?:(state:any)=>void }} opts
    */
   constructor(canvas, opts) {
     this.canvas = canvas;
@@ -26,11 +27,13 @@ export class Pad {
     this.strokes = [];
     /** Local corrections belong to these strokes and travel with them through history. @type {LocalRegion[]} */
     this.localRegions = [];
+    this.editing = { effects: /** @type {import('./core/effects.js').Effect[]} */([]), warps: /** @type {import('./core/effects.js').Warp[]} */([]) };
     /**
      * What undo returns to: the strokes, their corrections and the view they were shown in.
-     * @type {{ strokes: PadPoint[][], localRegions: LocalRegion[], view: { s: number, ox: number, oy: number } }[]}
+     * @type {{ strokes: PadPoint[][], localRegions: LocalRegion[], view: { s: number, ox: number, oy: number }, editing: typeof this.editing, extra:any }[]}
      */
     this.history = [];
+    this.revision = 0;
     /** @type {typeof this.history} */
     this.future = [];
     this.view = { s: 1, ox: 0, oy: 0 };
@@ -102,6 +105,7 @@ export class Pad {
     const stroke = this.drawing;
     this.drawing = null;
     this.remember();
+    if (!this.strokes.length) this.editing = {effects:suggestEffects([stroke]),warps:[]};
     this.strokes = [...this.strokes, stroke];
     this.draw();
     this.opts.onChange();
@@ -109,22 +113,26 @@ export class Pad {
 
   /** Copies the strokes, local corrections and view as one history state. */
   snapshot() {
-    return structuredClone({ strokes: this.strokes, localRegions: this.localRegions, view: this.view });
+    return structuredClone({ strokes: this.strokes, localRegions: this.localRegions, view: this.view, editing:this.editing, extra:this.opts.capture?.() });
   }
 
   /** Keeps what the pad shows now, including its local corrections, for undo. */
   remember() {
+    this.revision++;
     this.history.push(this.snapshot());
     this.future = [];
   }
 
   /** @param {ReturnType<Pad['snapshot']>} state */
   restore(state) {
+    this.revision++;
     this.stopReplay();
     this.drawing = null;
     this.strokes = state.strokes;
     this.localRegions = state.localRegions;
     this.view = state.view;
+    this.editing = state.editing;
+    this.opts.restore?.(state.extra);
     this.drawingSince = false;
     this.draw();
     this.opts.onChange();
@@ -149,18 +157,20 @@ export class Pad {
     this.remember();
     this.strokes = [];
     this.localRegions = [];
+    this.editing = {effects:[],warps:[]};
     this.view = { s: 1, ox: 0, oy: 0 };
     this.drawingSince = false;
     this.draw();
     this.opts.onChange();
   }
 
-  /** Shows a signature, fitted to the pad; undo returns to what was there. @param {RawPoint[][]} strokes @param {readonly LocalRegion[]} [localRegions] */
-  load(strokes, localRegions = []) {
+  /** Shows a signature, fitted to the pad; undo returns to what was there. @param {RawPoint[][]} strokes @param {readonly LocalRegion[]} [localRegions] @param {typeof this.editing} [editing] */
+  load(strokes, localRegions = [], editing = {effects:suggestEffects(strokes),warps:[]}) {
     this.stopReplay();
     this.remember();
     this.strokes = strokes.map((s) => s.map((p) => ({ ...p })));
     this.localRegions = localRegions.map((r) => ({ ...r }));
+    this.editing = structuredClone(editing);
     this.fit();
     this.drawingSince = false;
     this.draw();
