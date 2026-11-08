@@ -13,6 +13,7 @@
   --card-border: rgba(16, 24, 40, 0.13);
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 6px 18px rgba(16, 24, 40, 0.06);
   --radius: 16px;
+  --category-tint: 11%;
 
   /* The card pictures (assets/cards/*.svg) paint with these, so they follow the theme. */
   --art-paper: #f3f5f8;
@@ -55,6 +56,7 @@
   --art-ink: #e8e8e8;
   --art-muted: #9ca2ab;
   --art-line: #3b414c;
+  --category-tint: 15%;
 }
 
 body {
@@ -111,6 +113,7 @@ h1 {
 .category-names { display: none; }
 
 /* The legend, contours and their labels share category colours in either theme. */
+[data-category] { --category-fill: color-mix(in srgb, var(--category-color) var(--category-tint), var(--bg)); }
 [data-category="statistics"] { --category-color: #267b70; }
 [data-category="art"] { --category-color: #a85e28; }
 [data-category="everyday"] { --category-color: #376fa9; }
@@ -133,7 +136,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 #projects { position: relative; container-type: inline-size; padding: 0.75rem; }
 .cluster-outlines, .cluster-labels { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .cluster-outlines { overflow: visible; }
-.cluster-outlines path { fill: var(--category-color); fill-opacity: 0.035; stroke: var(--category-color); stroke-width: 1.5; }
+.cluster-outlines path { fill: var(--category-fill); stroke: var(--category-color); stroke-width: 1.5; }
 .cluster-labels { z-index: 2; }
 .cluster-label { position: absolute; padding: 0 0.35rem; background: var(--bg); color: var(--category-color); font-size: 0.75rem; font-weight: 650; line-height: 1.2; white-space: nowrap; transform: translateY(-50%); }
 #projects > .grid {
@@ -266,6 +269,30 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   [data-size^="1x"] > .project-card > .card-art { grid-row: 1 / -1; align-self: start; }
   [data-size^="1x"] > .project-card h3 { margin-top: 0.2rem; }
   [data-size^="1x"] > .project-card > .project-date { align-self: end; }
+}
+
+/* The photo is 4:3. Give it a substantial image beside its short description in
+   compact cards; larger, taller cards have room for the full image above it. */
+@media (max-width: 35.99rem), (orientation: landscape) and (max-height: 500px) {
+  .card-art[data-art="photomosaic"] { aspect-ratio: 4 / 3; }
+}
+@container tile (min-width: 18rem) and (max-width: 32rem) {
+  [data-mosaic-key="photomosaic"] > .project-card { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(9rem, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0.5rem; }
+  [data-mosaic-key="photomosaic"] .card-art { grid-row: 1 / -1; align-self: center; aspect-ratio: 4 / 3; min-height: 0; }
+  [data-mosaic-key="photomosaic"] .project-card > :not(.card-art) { margin-inline: 0.25rem; }
+  [data-mosaic-key="photomosaic"] h3 { margin-top: 0; }
+  [data-mosaic-key="photomosaic"] .project-date { align-self: end; }
+}
+/* A wide, short Figure Editor tile benefits from a landscape preview beside the
+   copy. Narrow cards and taller tablet layouts keep their larger picture above. */
+@media (min-width: 75rem), (orientation: landscape) and (max-height: 500px) {
+  @container tile (min-width: 30rem) {
+    [data-mosaic-key="layout-gui"] > .project-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0.5rem; }
+    [data-mosaic-key="layout-gui"] .card-art { grid-row: 1 / -1; align-self: center; aspect-ratio: 16 / 9; min-height: 0; }
+    [data-mosaic-key="layout-gui"] .project-card > :not(.card-art) { margin-inline: 0.25rem; }
+    [data-mosaic-key="layout-gui"] h3 { margin-top: 0; }
+    [data-mosaic-key="layout-gui"] .project-date { align-self: end; }
+  }
 }
 
 /* ---------- Footer (full-bleed image with overlay credit) ---------- */

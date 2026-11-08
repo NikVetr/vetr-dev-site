@@ -27,6 +27,8 @@ Landing artwork gains `data-started` on its first interaction, keeping its CSS a
 
 `assets/cluster-contours.js` is DOM-free geometry: it removes shared cell edges and traces separate outer and hole boundaries. `assets/landing-clusters.js` maps those lattice coordinates to measured grid tracks, insets boundaries within the gutters to separate neighbouring colours, and draws rounded SVG paths. Labels sit on suitable top edges, clear of cards. SVG and labels ignore pointer events and are decorative for assistive technology; category names are also attached to card descriptions.
 
+The same contour paths supply the section fills, with category colours mixed into the active page background in CSS. Their even-odd fill keeps holes and interlocking categories separate. Container queries place the Photomosaic description beside its 4:3 image in compact cards and the Figure Editor description beside its landscape preview when the tile is wide enough; the card remains one accessible link in the same reading order.
+
 The contour geometry operates only on the landing layout. It does not change application data, models or artwork. Forecast Calibration is linked from the Intuitions gallery and retains its standalone route and API.
 
 With JavaScript unavailable, the semantic card links and thematic source order remain available through ordinary CSS placement.

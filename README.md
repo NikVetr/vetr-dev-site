@@ -36,13 +36,15 @@ The size comes from a project's size in code: the hand-written lines of the tool
 | Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2x3 | up: a whole grid of answers to read |
 | Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 2x3 | wider to show the rotated messages |
 | Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2x3 | up: the text in the picture needs room to be read |
-| Photomosaic | 1,785 | 110 | 1,895 | 1x2 | |
+| Photomosaic | 1,785 | 110 | 1,895 | 2x2 | up: the individual photos need room to be seen |
 | Helix and Braid | 1,373 | 441 | 1,814 | 1x3 | upright, as the tool draws a helix |
 | Forecast Calibration | 1,474 | 39 | 1,513 | | listed inside Statistical Intuitions; its existing URL and API remain available |
 
 Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
 The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two or four columns a 3x3 tile becomes 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated sizes and orders for each column count keep all three categories connected across desktop widths, and the shared dense packer fills a rectangle with a flush lower edge. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
+
+Section interiors use a subtle light or dark tint of their outline colour. Preview composition follows the available space: Photomosaic uses its full 4:3 image, with the description beside it in compact cards; the Figure Editor has a wider 3x2 tile at seven columns and puts its description beside the landscape preview. Taller cards keep the image above their text, and the portrait Helix/Seating previews sit beside their descriptions on phones.
 
 `shared/mosaic.js` places cards in the curated order, pins their grid cells and puts the list in visual reading order whenever its column count changes: Tab and screen readers meet the cards as they appear. `assets/landing-clusters.js` then draws boundaries from the placed cells and positions their labels in the gutters. Boundaries redraw when actual track sizes change, including text reflow. Without JavaScript, CSS packs the thematic HTML order and links remain usable; decorative outlines are absent. On a phone, and on a phone held sideways, rows follow their content: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target. See [site architecture](docs/architecture.md) for the layout flow.
 

@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { openPage } from '../landing-art/browser.mjs';
 
-const session = await openPage('');
+const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE || 'chromium');
+const session = await openPage('', { engine });
 const { page, errors } = session;
 const tile = page.locator('.project-card').filter({ has: page.locator('[data-art="intuitions"]') });
 try {
@@ -110,7 +111,29 @@ try {
     if (height > 500 && result.columns >= 4) assert.equal(result.labels, 3, `${width}×${height}: fragmented desktop clusters`);
     const minimumFullCards = width === 1366 ? 4 : width === 1440 ? 6 : width === 1920 ? 8 : 0;
     assert.ok(result.fullCards >= minimumFullCards, `${width}×${height}: only ${result.fullCards} full cards visible`);
+    if ([390, 1366, 1440, 1920].includes(width)) {
+      const photo = page.locator('[data-art="photomosaic"]');
+      await photo.scrollIntoViewIfNeeded();
+      const image = photo.locator('svg > image');
+      await image.waitFor();
+      const bounds = await image.boundingBox();
+      assert.ok(bounds && bounds.width >= 150 && bounds.height >= 112, `${width}×${height}: mosaic image is too small to inspect`);
+    }
   }
+  // Section tints remain distinct when the shared theme changes, without rebuilding paths.
+  /** @type {string[][]} */
+  const fills = [];
+  for (const theme of ['light', 'dark']) {
+    const colors = await page.evaluate((/** @type {string} */ theme) => {
+      document.documentElement.dataset.theme = theme;
+      return [...document.querySelectorAll('.cluster-outlines path')].map(path => getComputedStyle(path).fill);
+    }, theme);
+    assert.equal(new Set(colors).size, 3, `${theme}: section backgrounds must be distinct`);
+    assert.ok(colors.every((/** @type {string} */ color) => color !== 'none' && color !== 'transparent'), `${theme}: missing section fill`);
+    fills.push(colors);
+  }
+  assert.ok(fills[0].every((/** @type {string} */ color, /** @type {number} */ i) => color !== fills[1][i]), 'section fills follow the theme');
+  await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
   assert.equal(await page.locator('.project-card').count(), 17);
   assert.equal(await page.locator('#projects > .grid').count(), 1);
