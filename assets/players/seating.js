@@ -52,16 +52,29 @@ const cameraBetween = (a, b, t) => ({ x: a.x + (b.x - a.x) * ease(t), y: a.y + (
 export function frameAt(p, seconds) {
   const t = seconds % 28;
   let leg = 0, progress = 0, opacity = 1;
-  const starts = [1.2, 7.8, 14.6, 19.4];
+  const starts = [2.9, 10, 15.2, 20.4];
   for (let i = 0; i < starts.length; i++) if (t >= starts[i]) { leg = i; progress = ease((t - starts[i]) / 4.2); }
   let camera = p.camera.close;
-  let view = '1 table';
-  if (t >= 5.8) { camera = cameraBetween(p.camera.close, p.camera.four, (t - 5.8) / 1.4); view = '4 tables'; }
-  if (t >= 12.4) { camera = cameraBetween(p.camera.four, p.camera.full, (t - 12.4) / 1.6); view = '50 tables'; }
+  // Establish the wider view before guests start moving between its tables.
+  if (t >= 1.2) camera = cameraBetween(p.camera.close, p.camera.four, (t - 1.2) / 1.4);
+  if (t >= 7.8) camera = cameraBetween(p.camera.four, p.camera.full, (t - 7.8) / 1.6);
   if (t > 25.5 && t < 26.2) opacity = 1 - (t - 25.5) / .7;
-  if (t >= 26.2) { leg = 0; progress = 0; camera = p.camera.close; view = '1 table'; opacity = Math.min(1, (t - 26.2) / .8); }
-  const round = progress >= 1 ? `${leg + 2}` : progress > 0 ? `${leg + 1} → ${leg + 2}` : `${leg + 1}`;
-  return { leg, progress, camera, view, round, opacity };
+  if (t >= 26.2) { leg = 0; progress = 0; camera = p.camera.close; opacity = Math.min(1, (t - 26.2) / .8); }
+  const round = `${leg + (progress > 0 ? 2 : 1)}`;
+  return { leg, progress, camera, round, opacity };
+}
+
+/** Fade a whole circle before it crosses the camera edge, including the round close-up.
+ * Distances are in preview pixels, so the soft margin stays consistent during zoom.
+ * @param {Camera} camera @param {number} width @param {number} x @param {number} y @param {number} radius
+ */
+export function edgeOpacity(camera, width, x, y, radius) {
+  const r = camera.roundness;
+  const qx = Math.abs(x - camera.x) * camera.scale - (width / 2 - r);
+  const qy = Math.abs(y - camera.y) * camera.scale - (camera.height / 2 - r);
+  const inside = r - Math.hypot(Math.max(0, qx), Math.max(0, qy)) - Math.min(Math.max(qx, qy), 0);
+  const t = Math.max(0, Math.min(1, (inside - radius * camera.scale - 1.5) / 3));
+  return t * t * (3 - 2 * t);
 }
 
 /** @param {HTMLElement} art @param {Plan} p */
@@ -112,22 +125,28 @@ function paint(ctx, canvas, art, p, seconds) {
   ctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * (w - p.width * s) / 2, dpr * (h - p.height * s) / 2);
   ctx.fillStyle = paper; ctx.fillRect(0, 0, p.width, p.height);
   const f = frameAt(p, seconds);
-  canvas.dataset.round = f.round; canvas.dataset.view = f.view;
+  canvas.dataset.round = f.round;
   ctx.globalAlpha = f.opacity;
   ctx.fillStyle = ink; ctx.font = '600 14px system-ui, sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-  ctx.fillText(`Round ${f.round}`, 8, 13); ctx.textAlign = 'right'; ctx.fillText(f.view, p.width - 8, 13);
+  ctx.fillText(`Round ${f.round}`, 8, 13);
   ctx.save();
   ctx.beginPath(); ctx.roundRect(0, 26 + (p.height - 26 - f.camera.height) / 2, p.width, f.camera.height, f.camera.roundness); ctx.clip();
   ctx.translate(p.width / 2, 26 + (p.height - 26) / 2); ctx.scale(f.camera.scale, f.camera.scale); ctx.translate(-f.camera.x, -f.camera.y);
   ctx.fillStyle = surface; ctx.strokeStyle = line; ctx.lineWidth = .5;
-  const visible = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ radius) => Math.abs(x - f.camera.x) <= p.width / (2 * f.camera.scale) + radius && Math.abs(y - f.camera.y) <= f.camera.height / (2 * f.camera.scale) + radius;
-  for (const [x, y, radius] of p.tables) { if (!visible(x, y, radius + .25)) continue; ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+  for (const [x, y, radius] of p.tables) {
+    const opacity = edgeOpacity(f.camera, p.width, x, y, radius + .25);
+    if (!opacity) continue;
+    ctx.globalAlpha = f.opacity * opacity;
+    ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  }
   const at = f.progress * (p.samples - 1), a = Math.min(p.samples - 2, Math.floor(at)), mix = at - a;
   const route = p.paths[f.leg];
   for (const [i, guest] of p.guests.entries()) {
     const k = (i * p.samples + a) * 2;
     const x = route[k] + (route[k + 2] - route[k]) * mix, y = route[k + 1] + (route[k + 3] - route[k + 1]) * mix;
-    if (!visible(x, y, p.radius + .2)) continue;
+    const opacity = edgeOpacity(f.camera, p.width, x, y, p.radius + .2);
+    if (!opacity) continue;
+    ctx.globalAlpha = f.opacity * opacity;
     ctx.beginPath(); ctx.arc(x, y, p.radius, 0, Math.PI * 2);
     ctx.fillStyle = theme === 'dark' ? guest.dark : guest.light; ctx.fill();
     ctx.lineWidth = guest.fixed ? .4 : .3; ctx.strokeStyle = ink; ctx.stroke();

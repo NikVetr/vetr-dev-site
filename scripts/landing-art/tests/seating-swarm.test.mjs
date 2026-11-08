@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { planRounds } from '../../../seating/core/index.js';
 import { roomGeometry, encodeRoutes } from '../cards/seating.mjs';
-import { decodeRoutes, frameAt } from '../../../assets/players/seating.js';
+import { decodeRoutes, frameAt, edgeOpacity } from '../../../assets/players/seating.js';
 import { closestApproach, planSwarm, validateSwarm } from '../seating-swarm.mjs';
 
 test('continuous clearance detects a crossing even when all frame endpoints are apart', () => {
@@ -63,16 +63,24 @@ test('compact route data preserves signed motion and waiting, and rejects trunca
 });
 
 
-test('the labelled close and four-table views reveal exactly those table circles', () => {
+test('the camera establishes wider views before seating changes, with only round numbers', () => {
   const plan = JSON.parse(readFileSync(new URL('../../../assets/cards/seating-motion.json', import.meta.url), 'utf8'));
-  for (const [time, count, label] of /** @type {[number,number,string][]} */ ([[.5, 1, '1 table'], [7.4, 4, '4 tables'], [15, 50, '50 tables']])) {
-    const { camera, view } = frameAt(plan, time);
-    const halfWidth = plan.width / (2 * camera.scale), halfHeight = camera.height / (2 * camera.scale);
-    const visible = plan.tables.filter((/** @type {number[]} */ [x, y, radius]) => {
-      const dx = Math.max(0, Math.abs(x - camera.x) - halfWidth), dy = Math.max(0, Math.abs(y - camera.y) - halfHeight);
-      return Math.hypot(dx, dy) <= radius + .25;
-    });
-    assert.equal(view, label);
+  for (const [time, count] of [[.5, 1], [2.7, 4], [9.6, 50]]) {
+    const { camera } = frameAt(plan, time);
+    const visible = plan.tables.filter((/** @type {number[]} */ [x, y, radius]) => edgeOpacity(camera, plan.width, x, y, radius + .25) > 0);
     assert.equal(visible.length, count);
   }
+  for (const t of [0, .5, 1.3, 2, 2.89]) assert.equal(frameAt(plan,t).progress,0,'guests wait for the first zoom to finish');
+  assert.deepEqual(frameAt(plan,2.8).camera,plan.camera.four);
+  for (const [time,round] of [[0,'1'],[4,'2'],[11,'3'],[17,'4'],[22,'5']]) assert.equal(frameAt(plan,Number(time)).round,round);
+});
+
+test('tables disappear before clipping against rectangular or circular camera edges', () => {
+  const rect = {x:0,y:0,scale:1,height:100,roundness:0};
+  assert.equal(edgeOpacity(rect,100,48,0,3),0,'a partially clipped table is hidden');
+  assert.equal(edgeOpacity(rect,100,40,0,3),1,'an inset table stays fully visible');
+  assert.ok(edgeOpacity(rect,100,44,0,3)>0 && edgeOpacity(rect,100,44,0,3)<1,'whole tables fade smoothly near the edge');
+  const circle = {...rect,roundness:50};
+  assert.equal(edgeOpacity(circle,100,36,36,3),0,'rounded corners exclude circles outside the close-up');
+  assert.equal(edgeOpacity(circle,100,25,25,3),1);
 });

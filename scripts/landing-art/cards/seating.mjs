@@ -108,7 +108,7 @@ export async function build() {
   const dots = guests.map((/** @type {typeof guests[number]} */ g, /** @type {number} */ i) => `<circle class="guest c${g.category}${g.fixed ? ' fixed' : ''}" cx="${final[i][0]}" cy="${final[i][1]}" r="${geometry.radius}"/>`).join('');
   const css = codes.map(c => `& .c${c} { fill: ${lightColours.get(c)}; } :root[data-theme="dark"] & .c${c} { fill: ${darkColours.get(c)}; }`).join('\n');
   return art({ name: 'seating', width: W, height: H, period: 28, player: 'seating',
-    body: `<g class="player-still"><text class="heading" x="8" y="16">50 tables · 5 rounds</text>${tables}${dots}</g><rect class="seating-clock" width="0" height="0"/>`,
+    body: `<g class="player-still"><text class="heading" x="8" y="16">Round 5</text>${tables}${dots}</g><rect class="seating-clock" width="0" height="0"/>`,
     css: `& .heading { fill: var(--art-ink); font: 600 11px system-ui, sans-serif; }\n& .table { fill: var(--surface); stroke: var(--art-line); stroke-width: .5; }\n& .guest { stroke: var(--art-ink); stroke-width: .3; }\n& .fixed { stroke-width: .4; }\n${css}`,
     loop: '& .seating-clock { animation: seating-clock 28s linear infinite; }\n@keyframes seating-clock { from { opacity: .99; } to { opacity: 1; } }',
   });
