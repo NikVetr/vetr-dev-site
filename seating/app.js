@@ -1,17 +1,18 @@
 // The page: editors for guests, pairs and groups, tables and settings that build a request
-// for the core's submit(), which runs in a Web Worker (worker.js), and the replay of its
-// result (replay.js). window.Seating exposes the same submit() to scripts and agents.
+// for the shared static/round dispatcher in a Web Worker (worker.js). Static search replay
+// and event-round navigation render their respective results; window.Seating shares both.
 
 import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
-import { SeatingError, fromRRequest, renderSeatingSvg } from './core/index.js';
+import { SeatingError, fromRRequest, renderSeatingSvg, renderRoundSvg, isRoundPlan, validateRequest } from './core/index.js';
 import { tableLabel } from './core/chart.js';
-import { buildProblem } from './core/request.js';
-import { loadReplay, pause, replayState } from './replay.js';
+import { ROUND_WEIGHTS } from './core/rounds-request.js';
+import {loadRoundPlan,clearRoundPlan,selectedRound,selectRound} from './rounds-view.js';
+import { loadReplay, clearReplay, pause, replayState } from './replay.js';
 
 /**
- * @typedef {import('./core/index.js').Result} Result
+ * @typedef {import('./core/index.js').Result | import('./core/rounds.js').RoundPlan} Result
  * @typedef {import('./core/request.js').Issue} Issue
- * @typedef {{ name: string, category: string }} GuestRow
+ * @typedef {{ name: string, category: string, travelWeight?:string, fixedSeat?:string }} GuestRow
  * @typedef {'together' | 'apart' | 'score' | 'cost'} PairKind
  * @typedef {{ kind: PairKind, guests: string, value: string }} PairRow
  * @typedef {{ name: string, seats: string, x: string, y: string }} TableRow
@@ -28,6 +29,7 @@ const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getEleme
 const part = (/** @type {Element} */ root, /** @type {string} */ selector) => /** @type {any} */ (root.querySelector(selector));
 /** @type {Record<string, any>} */
 const el = {
+  mode: byId('planning-mode'), rounds: byId('round-count'),
   guestRows: byId('guest-rows'), pairRows: byId('pair-rows'), tableRows: byId('table-rows'),
   guestCount: byId('guest-count'), pairCount: byId('pair-count'), issues: byId('issues'),
   tablesMode: byId('tables-mode'), seats: byId('seats'), layout: byId('layout'), seatsNote: byId('seats-note'),
@@ -114,6 +116,19 @@ function buildRequest() {
     seed: numberOr(el.seed.value),
     record: 'moves',
   };
+  if (el.mode.value === 'rounds') {
+    request.mode='rounds';request.rounds=numberOr(el.rounds.value);
+    request.guests=guests.map(g=>{
+      const fixed=(g.fixedSeat??'').trim(),cut=fixed.lastIndexOf(':');
+      return {id:g.name.trim(),category:numberOr(g.category),travelWeight:numberOr(g.travelWeight??'1'),
+        ...(fixed&&{fixedSeat:fixed==='initial'?true:cut<0?fixed:{table:fixed.slice(0,cut),seat:Number(fixed.slice(cut+1))-1}})};
+    });
+    request.roundOptions={weights:Object.fromEntries(Object.keys(ROUND_WEIGHTS).map(k=>[k,numberOr(byId(`round-${k}`).value)])),
+      constraintPenalty:numberOr(byId('round-penalty').value),
+      ...(request.options.iterations!==undefined&&{iterations:request.options.iterations}),seed:request.options.seed,logitScale:request.options.logitScale};
+    delete request.options;delete request.geography;
+    pairs.forEach((p,row)=>{if(p.kind==='cost')pageIssues.push({code:'unsupported_mode',path:`page.pairs[${row}]`,message:'Room cost is for a single chart. Use travel weights for rounds, or remove this row.'})});
+  }
   return { request, rowsOf, pageIssues };
 }
 
@@ -121,8 +136,12 @@ const currentRequest = () => buildRequest().request;
 
 /** Puts a request (this tool's spelling) into the inputs. @param {any} request */
 function loadRequest(request) {
-  const o = request.options ?? {};
-  guests = (request.guests ?? []).map((/** @type {any} */ g) => ({ name: String(g.id ?? ''), category: g.category === undefined ? '' : String(g.category) }));
+  el.mode.value=request.mode==='rounds'?'rounds':'static';
+  const o = (request.mode==='rounds'?request.roundOptions:request.options) ?? {};
+  el.rounds.value=String(request.rounds??3);
+  for(const [k,v]of Object.entries(ROUND_WEIGHTS))byId(`round-${k}`).value=String(o.weights?.[k]??v);
+  byId('round-penalty').value=String(o.constraintPenalty??1000);
+  guests = (request.guests ?? []).map((/** @type {any} */ g) => ({ name: String(g.id ?? ''), category: g.category === undefined ? '' : String(g.category), travelWeight:String(g.travelWeight??1), fixedSeat:g.fixedSeat===true?'initial':g.fixedSeat?`${g.fixedSeat.table}:${g.fixedSeat.seat+1}`:'' }));
   pairs = [
     ...(request.together ?? []).map((/** @type {string[]} */ g) => ({ kind: 'together', guests: g.join(', '), value: '' })),
     ...(request.apart ?? []).map((/** @type {string[]} */ g) => ({ kind: 'apart', guests: g.join(', '), value: '' })),
@@ -159,10 +178,14 @@ function renderEditors() {
     tr.innerHTML = `<th scope="row" class="index"></th>
       <td><textarea class="name" rows="1" spellcheck="false"></textarea></td>
       <td class="category-col"><input class="category" inputmode="decimal" autocomplete="off"></td>
+      <td class="mobility-col" data-planning="rounds"><input class="travelWeight" inputmode="decimal" autocomplete="off"></td>
+      <td class="fixed-col" data-planning="rounds"><input class="fixedSeat" autocomplete="off" placeholder="No lock"></td>
       <td class="remove-col"><button type="button" class="remove">×</button></td>`;
     part(tr, '.index').textContent = String(i + 1);
     Object.assign(part(tr, '.name'), { value: g.name, ariaLabel: `Guest ${i + 1} name` });
     Object.assign(part(tr, '.category'), { value: g.category, ariaLabel: `Guest ${i + 1} category` });
+    Object.assign(part(tr,'.travelWeight'),{value:g.travelWeight??'1',ariaLabel:`Guest ${i+1} travel weight`});
+    Object.assign(part(tr,'.fixedSeat'),{value:g.fixedSeat??'',ariaLabel:`Guest ${i+1} fixed seat`});
     part(tr, '.remove').setAttribute('aria-label', `Remove guest ${i + 1}`);
     return tr;
   }));
@@ -254,11 +277,14 @@ function wireEditor(body, rows) {
   });
 }
 // Narrower columns wrap names onto more lines, so refit every text box.
-let editorWidth = 0;
+let editorWidth = 0, editorFrame = 0;
 new ResizeObserver(() => {
   if (el.guestRows.clientWidth === editorWidth) return;
   editorWidth = el.guestRows.clientWidth;
-  for (const area of document.querySelectorAll('.editor textarea')) fitHeight(/** @type {HTMLTextAreaElement} */ (area));
+  cancelAnimationFrame(editorFrame);
+  editorFrame=requestAnimationFrame(()=>{
+    for(const area of document.querySelectorAll('.editor textarea'))fitHeight(/** @type {HTMLTextAreaElement} */(area));
+  });
 }).observe(el.guestRows);
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && /** @type {HTMLElement} */ (event.target).matches?.('.editor textarea')) event.preventDefault();
@@ -310,6 +336,13 @@ function showTablesMode() {
   }
 }
 
+function showPlanningMode(){
+  const rounds=el.mode.value==='rounds';document.body.classList.toggle('rounds-mode',rounds);
+  for(const node of document.querySelectorAll('[data-planning]'))/** @type {HTMLElement} */(node).hidden=/** @type {HTMLElement} */(node).dataset.planning!==(rounds?'rounds':'static');
+  el.run.textContent=rounds?'Plan rounds':'Find a seating';
+  byId('category-help').textContent=rounds?'One row per guest. Category codes are labels, not quantities: every table is encouraged to reflect the overall mix in every round.':'One row per guest. Categories are numbers: nearer numbers count as more alike. Alike tables favors similarity; Mixed tables favors numeric spread.';
+}
+
 // ---------- checking, staleness, persistence ----------
 
 let checkTimer = 0;
@@ -319,7 +352,8 @@ function changed() {
   el.guestCount.textContent = `${guests.length} guest${guests.length === 1 ? '' : 's'}`;
   el.pairCount.textContent = `${pairs.length} row${pairs.length === 1 ? '' : 's'}`;
   const n = guests.length;
-  el.iterations.placeholder = `${(50 * n).toLocaleString('en-US')} (50 per guest)`;
+  showPlanningMode();
+  el.iterations.placeholder = el.mode.value==='rounds'?`${Math.min(250000,100*n*(Number(el.rounds.value)||3)).toLocaleString('en-US')} (100 per guest per round)`:`${(50*n).toLocaleString('en-US')} (50 per guest)`;
   const seats = Number(el.seats.value);
   if (Number.isInteger(seats) && seats >= 1 && n >= 2) {
     const count = Math.floor(n / seats);
@@ -343,7 +377,7 @@ function check() {
   /** @type {Issue[]} */
   let issues = [...pageIssues];
   try {
-    buildProblem(request);
+    validateRequest(request);
   } catch (error) {
     if (!(error instanceof SeatingError)) throw error;
     issues.push(...error.issues);
@@ -362,6 +396,10 @@ function locate(issue, rowsOf) {
   const p = issue.path;
   /** @type {[RegExp, (m: RegExpExecArray) => [string, Element | null]][]} */
   const rules = [
+    [/^guests\[(\d+)\]\.(travelWeight|fixedSeat)(?:\..*)?$/,m=>[`Guest ${+m[1]+1}, ${m[2]==='travelWeight'?'travel weight':'fixed seat'}`,el.guestRows.children[+m[1]]?.querySelector(`.${m[2]}`)??null]],
+    [/^rounds$/,()=>['Number of rounds',el.rounds]],
+    [/^roundOptions\.weights\.(.+)$/,m=>['Round weight',byId(`round-${m[1]}`)]],
+    [/^roundOptions\.(iterations|seed|logitScale|constraintPenalty)$/,m=>['Round setting',m[1]==='constraintPenalty'?byId('round-penalty'):el[m[1]]]],
     [/^guests\[(\d+)\](?:\.(id|category))?$/, (m) => [`Guest ${+m[1] + 1}${m[2] ? `, ${m[2] === 'id' ? 'name' : 'category'}` : ''}`, el.guestRows.children[+m[1]]?.querySelector(m[2] === 'category' ? '.category' : '.name') ?? null]],
     [/^page\.pairs\[(\d+)\]$/, (m) => [`Pairs and groups row ${+m[1] + 1}`, el.pairRows.children[+m[1]]?.querySelector('.guests') ?? null]],
     [/^(pairs|together|apart|geography\.cost)\[(\d+)\](?:\[(\d+)\]|\.(a|b|score|cost))?$/, (m) => {
@@ -433,12 +471,12 @@ function showStale() {
     !same((r) => r.guests) && 'guests',
     !same((r) => [r.pairs, r.together, r.apart, Array.isArray(r.geography?.cost) && r.geography.cost]) && 'pairs and groups',
     !same((r) => r.tables) && 'tables',
-    !same((r) => [r.options, r.geography?.tablemates, r.geography && (r.geography.cost === 'category')]) && 'settings',
+    !same((r) => [r.mode,r.rounds,r.roundOptions,r.options, r.geography?.tablemates, r.geography && (r.geography.cost === 'category')]) && 'settings',
   ].filter(Boolean);
   const what = parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0];
   const reason = failed
     ? 'the last search did not run (see the problems above). This is the seating found before it.'
-    : what ? `the ${what} changed since this seating was found. Press Find a seating to update it.` : '';
+    : what ? `the ${what} changed since this seating was found. Press ${el.mode.value==='rounds'?'Plan rounds':'Find a seating'} to update it.` : '';
   el.stale.hidden = !reason;
   el.stale.textContent = reason ? `Out of date: ${reason}` : '';
   el.result.toggleAttribute('data-stale', Boolean(reason));
@@ -466,6 +504,7 @@ for (const input of document.querySelectorAll('#tables-card select, #tables-card
     changed();
   });
 }
+el.mode.addEventListener('input',()=>{showPlanningMode();changed()});
 for (const k of ['speed', 'animate']) el[k].addEventListener('change', save);
 byId('new-seed').addEventListener('click', () => {
   history?.commit();
@@ -484,15 +523,15 @@ function replaceAll(next, note) {
 }
 function hideReplacementNote() { el.undoNote.hidden = true; }
 
-async function exampleRequest() {
-  const response = await fetch('examples/party.json');
+async function exampleRequest(rounds=false) {
+  const response = await fetch(rounds?'examples/rounds-demo.json':'examples/party.json');
   if (!response.ok) throw new Error(`could not load the example (HTTP ${response.status})`);
   return response.json();
 }
 
 byId('load-example').addEventListener('click', async () => {
   history?.commit();
-  const epoch = stateEpoch;
+  const epoch = ++stateEpoch;stopRun();
   const next = await exampleRequest();
   if (epoch !== stateEpoch) return;
   const before = guests.length;
@@ -500,12 +539,17 @@ byId('load-example').addEventListener('click', async () => {
   await runFromPage({ checkpoint: false });
   if (epoch === stateEpoch) history?.commit('Load example');
 });
+byId('load-round-example').addEventListener('click',async()=>{
+  history?.commit();const epoch=++stateEpoch;stopRun();const next=await exampleRequest(true);if(epoch!==stateEpoch)return;
+  replaceAll(next,'Loaded the icebreaker rounds example.');await runFromPage({checkpoint:false});
+  if(epoch===stateEpoch)history?.commit('Load rounds example');
+});
 byId('clear-all').addEventListener('click', () => {
-  history?.commit();
+  history?.commit();stateEpoch++;stopRun();
   const n = guests.length;
-  const { tables, geography, options } = currentRequest();
+  const { tables, geography, options, mode, rounds, roundOptions } = currentRequest();
   const keptGeography = geography && { ...geography, cost: geography.cost === 'category' ? 'category' : [] };
-  replaceAll({ guests: [], tables, ...(keptGeography && { geography: keptGeography }), options }, `Cleared ${n} guest${n === 1 ? '' : 's'} and their pairs and groups.`);
+  replaceAll({ guests: [], tables, ...(keptGeography && { geography: keptGeography }), ...(mode==='rounds'?{mode,rounds,roundOptions}:{options}) }, `Cleared ${n} guest${n === 1 ? '' : 's'} and their pairs and groups.`);
   history?.commit('Clear guests');
 });
 // ---------- request JSON: paste, edit, open ----------
@@ -523,7 +567,7 @@ function readRequest(text) {
     return { request: null, issues: [`This is not valid JSON: ${/** @type {Error} */ (error).message}`] };
   }
   try {
-    buildProblem(request);
+    validateRequest(request);
   } catch (error) {
     if (!(error instanceof SeatingError)) throw error;
     return { request: null, issues: error.issues.map((i) => (i.path ? `${i.path}: ${i.message}` : i.message)) };
@@ -555,7 +599,7 @@ byId('json-apply').addEventListener('click', async () => {
     return;
   }
   history?.commit();
-  const epoch = stateEpoch;
+  const epoch = ++stateEpoch;stopRun();
   el.dialog.close();
   hideReplacementNote();
   loadRequest(read.request);
@@ -564,7 +608,7 @@ byId('json-apply').addEventListener('click', async () => {
 });
 el.requestFile.addEventListener('change', async () => {
   history?.commit();
-  const epoch = stateEpoch;
+  const epoch = ++stateEpoch;stopRun();
   const file = el.requestFile.files?.[0];
   el.requestFile.value = '';
   if (!file) return;
@@ -590,6 +634,7 @@ el.requestFile.addEventListener('change', async () => {
  * @returns {Promise<Result>}
  */
 function run(request) {
+  const rounds='mode' in request && request.mode==='rounds';
   stopRun();
   const started = performance.now();
   worker = new Worker(new URL('worker.js', import.meta.url), { type: 'module' });
@@ -610,7 +655,7 @@ function run(request) {
     /** @type {Worker} */ (worker).onmessage = ({ data }) => {
       if (data.type === 'progress') {
         const p = data.progress;
-        el.status.textContent = `Searching: iteration ${p.iteration.toLocaleString('en-US')} of ${p.iterations.toLocaleString('en-US')}, best ${p.best.toLocaleString('en-US', { maximumFractionDigits: 1 })}`;
+        el.status.textContent = `Searching: iteration ${p.iteration.toLocaleString('en-US')} of ${p.iterations.toLocaleString('en-US')}, ${rounds?'lowest cost':'best'} ${(rounds?-p.best:p.best).toLocaleString('en-US', { maximumFractionDigits: 1 })}`;
       } else if (data.type === 'result') {
         finish();
         const r = /** @type {Result} */ (data.result);
@@ -684,7 +729,12 @@ function showResult(next, request, inputs, { autoplay = false } = {}) {
   el.noResult.hidden = true;
   el.result.hidden = false;
   showStale();
-  loadReplay(next, request, { autoplay });
+  const rounds=isRoundPlan(next);
+  byId('round-controls').hidden=!rounds;byId('round-details').hidden=!rounds;
+  document.querySelector('.replay-head')?.toggleAttribute('hidden',rounds);
+  byId('trace').hidden=rounds;byId('trace-tip').hidden=rounds;
+  byId('download-label').textContent=rounds?'Download all rounds (SVG: selected round):':'Download the best seating:';
+  if(rounds){clearReplay();loadRoundPlan(next,request)}else{clearRoundPlan();loadReplay(next, request, { autoplay })}
   document.documentElement.dataset.ready = 'true';
 }
 
@@ -692,7 +742,8 @@ function showResult(next, request, inputs, { autoplay = false } = {}) {
 
 function exportSvgText() {
   if (!result) throw new Error('there is no seating yet');
-  return renderSeatingSvg(result, resultRequest, { theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light' });
+  const theme=document.documentElement.dataset.theme==='dark'?'dark':'light';
+  return isRoundPlan(result)?renderRoundSvg(result,resultRequest,{round:selectedRound(),theme}):renderSeatingSvg(result,resultRequest,{theme});
 }
 
 /** The best seating as CSV: one row per seat. */
@@ -703,8 +754,10 @@ function exportSeatingCsv() {
     const s = v === undefined || v === null ? '' : String(v);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
-  const rows = [['table', 'seat', 'guest', 'category']];
-  for (const t of result.tables) t.seats.forEach((id, j) => rows.push([tableLabel(t.id), String(j + 1), id ?? '', id === null ? '' : categories.get(id)]));
+  const rounds=isRoundPlan(result);
+  const rows = [[...(rounds?['round']:[]),'table', 'seat', 'guest', 'category']];
+  const plans=isRoundPlan(result)?result.rounds:[{round:1,tables:result.tables}];
+  for(const plan of plans)for(const t of plan.tables)t.seats.forEach((id,j)=>rows.push([...(rounds?[String(plan.round)]:[]),tableLabel(t.id),String(j+1),id??'',id===null?'':categories.get(id)]));
   return `${rows.map((r) => r.map(cell).join(',')).join('\n')}\n`;
 }
 
@@ -715,7 +768,7 @@ function download(name, blob) {
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 byId('export-csv').addEventListener('click', () => download('seating.csv', new Blob([exportSeatingCsv()], { type: 'text/csv' })));
-byId('export-svg').addEventListener('click', () => download('seating.svg', new Blob([exportSvgText()], { type: 'image/svg+xml' })));
+byId('export-svg').addEventListener('click', () => download(result&&isRoundPlan(result)?`round-${selectedRound()+1}.svg`:'seating.svg', new Blob([exportSvgText()], { type: 'image/svg+xml' })));
 byId('export-result').addEventListener('click', () => download('seating-result.json', new Blob([`${JSON.stringify(result)}\n`], { type: 'application/json' })));
 byId('export-request').addEventListener('click', () => download('seating-request.json', new Blob([`${JSON.stringify(resultRequest, null, 2)}\n`], { type: 'application/json' })));
 
@@ -730,7 +783,7 @@ byId('export-request').addEventListener('click', () => download('seating-request
    */
   async submit(request) {
     history?.commit();
-    const epoch = stateEpoch;
+    const epoch = ++stateEpoch;
     const next = await run(request);
     if (epoch !== stateEpoch) throw new Error('stopped');
     hideReplacementNote();
@@ -759,7 +812,7 @@ const historyRoot = /** @type {HTMLElement} */ (document.querySelector('main'));
 function captureWorkspace() {
   const form = captureForm(historyRoot, { filter: field => !field.closest('.editor, dialog') && field.id !== 'timeline' });
   const rows = { guests: guests.map(row => ({ ...row })), pairs: pairs.map(row => ({ ...row })), tables: tableRows.map(row => ({ ...row })) };
-  return { form, rows, result, resultRequest, resultInputs, failed, replay: replayState(), status: el.status.textContent,
+  return { form, rows, result, resultRequest, resultInputs, failed, selectedRound:selectedRound(), replay: replayState(), status: el.status.textContent,
     key: JSON.stringify([form, rows, failed]) };
 }
 /** @param {ReturnType<typeof captureWorkspace>} saved */
@@ -772,11 +825,12 @@ function restoreWorkspace(saved) {
   renderEditors(); window.clearTimeout(checkTimer); check();
   if (saved.result) {
     showResult(saved.result, saved.resultRequest, saved.resultInputs);
-    if (saved.replay && !saved.replay.best) {
+    if(isRoundPlan(saved.result))selectRound(saved.selectedRound);
+    else if (saved.replay && !saved.replay.best) {
       byId('timeline').value = String(saved.replay.move);
       byId('timeline').dispatchEvent(new Event('input', { bubbles: true }));
     }
-  } else { result = null; resultRequest = null; resultInputs = null; el.result.hidden = true; el.noResult.hidden = false; }
+  } else { clearReplay();clearRoundPlan();result = null; resultRequest = null; resultInputs = null; el.result.hidden = true; el.noResult.hidden = false; }
   failed = saved.failed; showStale(); hideReplacementNote(); save();
   el.status.textContent = saved.status;
 }

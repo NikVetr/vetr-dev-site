@@ -1,0 +1,1541 @@
+{
+  "mode": "rounds",
+  "guests": [
+    {
+      "id": "Fred 1",
+      "category": 1,
+      "travelWeight": 3
+    },
+    {
+      "id": "Bob 1",
+      "category": 2
+    },
+    {
+      "id": "Sam 1",
+      "category": 3
+    },
+    {
+      "id": "Chris 1",
+      "category": 4
+    },
+    {
+      "id": "Ada 1",
+      "category": 1
+    },
+    {
+      "id": "Eve 1",
+      "category": 2
+    },
+    {
+      "id": "Ben 2",
+      "category": 3
+    },
+    {
+      "id": "Amy 2",
+      "category": 4
+    },
+    {
+      "id": "Dan 2",
+      "category": 1
+    },
+    {
+      "id": "Jo 2",
+      "category": 2
+    },
+    {
+      "id": "Max 2",
+      "category": 3
+    },
+    {
+      "id": "Sue 2",
+      "category": 4
+    },
+    {
+      "id": "Tom 3",
+      "category": 1
+    },
+    {
+      "id": "May 3",
+      "category": 2
+    },
+    {
+      "id": "Jay 3",
+      "category": 3
+    },
+    {
+      "id": "Ann 3",
+      "category": 4
+    },
+    {
+      "id": "Leo 3",
+      "category": 1
+    },
+    {
+      "id": "Liz 3",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Fred 4",
+      "category": 3
+    },
+    {
+      "id": "Bob 4",
+      "category": 4
+    },
+    {
+      "id": "Sam 4",
+      "category": 1,
+      "fixedSeat": true
+    },
+    {
+      "id": "Chris 4",
+      "category": 2
+    },
+    {
+      "id": "Ada 4",
+      "category": 3
+    },
+    {
+      "id": "Eve 4",
+      "category": 4
+    },
+    {
+      "id": "Ben 5",
+      "category": 1
+    },
+    {
+      "id": "Amy 5",
+      "category": 2
+    },
+    {
+      "id": "Dan 5",
+      "category": 3
+    },
+    {
+      "id": "Jo 5",
+      "category": 4
+    },
+    {
+      "id": "Max 5",
+      "category": 1
+    },
+    {
+      "id": "Sue 5",
+      "category": 2
+    },
+    {
+      "id": "Tom 6",
+      "category": 3
+    },
+    {
+      "id": "May 6",
+      "category": 4
+    },
+    {
+      "id": "Jay 6",
+      "category": 1
+    },
+    {
+      "id": "Ann 6",
+      "category": 2
+    },
+    {
+      "id": "Leo 6",
+      "category": 3,
+      "travelWeight": 3
+    },
+    {
+      "id": "Liz 6",
+      "category": 4
+    },
+    {
+      "id": "Fred 7",
+      "category": 1
+    },
+    {
+      "id": "Bob 7",
+      "category": 2
+    },
+    {
+      "id": "Sam 7",
+      "category": 3
+    },
+    {
+      "id": "Chris 7",
+      "category": 4
+    },
+    {
+      "id": "Ada 7",
+      "category": 1
+    },
+    {
+      "id": "Eve 7",
+      "category": 2
+    },
+    {
+      "id": "Ben 8",
+      "category": 3
+    },
+    {
+      "id": "Amy 8",
+      "category": 4
+    },
+    {
+      "id": "Dan 8",
+      "category": 1
+    },
+    {
+      "id": "Jo 8",
+      "category": 2
+    },
+    {
+      "id": "Max 8",
+      "category": 3
+    },
+    {
+      "id": "Sue 8",
+      "category": 4
+    },
+    {
+      "id": "Tom 9",
+      "category": 1
+    },
+    {
+      "id": "May 9",
+      "category": 2
+    },
+    {
+      "id": "Jay 9",
+      "category": 3
+    },
+    {
+      "id": "Ann 9",
+      "category": 4,
+      "travelWeight": 3
+    },
+    {
+      "id": "Leo 9",
+      "category": 1
+    },
+    {
+      "id": "Liz 9",
+      "category": 2
+    },
+    {
+      "id": "Fred 10",
+      "category": 3
+    },
+    {
+      "id": "Bob 10",
+      "category": 4
+    },
+    {
+      "id": "Sam 10",
+      "category": 1
+    },
+    {
+      "id": "Chris 10",
+      "category": 2
+    },
+    {
+      "id": "Ada 10",
+      "category": 3
+    },
+    {
+      "id": "Eve 10",
+      "category": 4
+    },
+    {
+      "id": "Ben 11",
+      "category": 1
+    },
+    {
+      "id": "Amy 11",
+      "category": 2
+    },
+    {
+      "id": "Dan 11",
+      "category": 3
+    },
+    {
+      "id": "Jo 11",
+      "category": 4
+    },
+    {
+      "id": "Max 11",
+      "category": 1
+    },
+    {
+      "id": "Sue 11",
+      "category": 2
+    },
+    {
+      "id": "Tom 12",
+      "category": 3
+    },
+    {
+      "id": "May 12",
+      "category": 4
+    },
+    {
+      "id": "Jay 12",
+      "category": 1,
+      "travelWeight": 3
+    },
+    {
+      "id": "Ann 12",
+      "category": 2
+    },
+    {
+      "id": "Leo 12",
+      "category": 3
+    },
+    {
+      "id": "Liz 12",
+      "category": 4
+    },
+    {
+      "id": "Fred 13",
+      "category": 1
+    },
+    {
+      "id": "Bob 13",
+      "category": 2
+    },
+    {
+      "id": "Sam 13",
+      "category": 3
+    },
+    {
+      "id": "Chris 13",
+      "category": 4
+    },
+    {
+      "id": "Ada 13",
+      "category": 1
+    },
+    {
+      "id": "Eve 13",
+      "category": 2
+    },
+    {
+      "id": "Ben 14",
+      "category": 3
+    },
+    {
+      "id": "Amy 14",
+      "category": 4
+    },
+    {
+      "id": "Dan 14",
+      "category": 1
+    },
+    {
+      "id": "Jo 14",
+      "category": 2
+    },
+    {
+      "id": "Max 14",
+      "category": 3
+    },
+    {
+      "id": "Sue 14",
+      "category": 4
+    },
+    {
+      "id": "Tom 15",
+      "category": 1
+    },
+    {
+      "id": "May 15",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Jay 15",
+      "category": 3
+    },
+    {
+      "id": "Ann 15",
+      "category": 4
+    },
+    {
+      "id": "Leo 15",
+      "category": 1
+    },
+    {
+      "id": "Liz 15",
+      "category": 2
+    },
+    {
+      "id": "Fred 16",
+      "category": 3
+    },
+    {
+      "id": "Bob 16",
+      "category": 4
+    },
+    {
+      "id": "Sam 16",
+      "category": 1
+    },
+    {
+      "id": "Chris 16",
+      "category": 2
+    },
+    {
+      "id": "Ada 16",
+      "category": 3
+    },
+    {
+      "id": "Eve 16",
+      "category": 4
+    },
+    {
+      "id": "Ben 17",
+      "category": 1
+    },
+    {
+      "id": "Amy 17",
+      "category": 2
+    },
+    {
+      "id": "Dan 17",
+      "category": 3
+    },
+    {
+      "id": "Jo 17",
+      "category": 4
+    },
+    {
+      "id": "Max 17",
+      "category": 1
+    },
+    {
+      "id": "Sue 17",
+      "category": 2
+    },
+    {
+      "id": "Tom 18",
+      "category": 3,
+      "travelWeight": 3
+    },
+    {
+      "id": "May 18",
+      "category": 4
+    },
+    {
+      "id": "Jay 18",
+      "category": 1
+    },
+    {
+      "id": "Ann 18",
+      "category": 2
+    },
+    {
+      "id": "Leo 18",
+      "category": 3
+    },
+    {
+      "id": "Liz 18",
+      "category": 4
+    },
+    {
+      "id": "Fred 19",
+      "category": 1
+    },
+    {
+      "id": "Bob 19",
+      "category": 2
+    },
+    {
+      "id": "Sam 19",
+      "category": 3
+    },
+    {
+      "id": "Chris 19",
+      "category": 4
+    },
+    {
+      "id": "Ada 19",
+      "category": 1
+    },
+    {
+      "id": "Eve 19",
+      "category": 2
+    },
+    {
+      "id": "Ben 20",
+      "category": 3
+    },
+    {
+      "id": "Amy 20",
+      "category": 4
+    },
+    {
+      "id": "Dan 20",
+      "category": 1
+    },
+    {
+      "id": "Jo 20",
+      "category": 2
+    },
+    {
+      "id": "Max 20",
+      "category": 3
+    },
+    {
+      "id": "Sue 20",
+      "category": 4,
+      "travelWeight": 3
+    },
+    {
+      "id": "Tom 21",
+      "category": 1
+    },
+    {
+      "id": "May 21",
+      "category": 2
+    },
+    {
+      "id": "Jay 21",
+      "category": 3
+    },
+    {
+      "id": "Ann 21",
+      "category": 4
+    },
+    {
+      "id": "Leo 21",
+      "category": 1
+    },
+    {
+      "id": "Liz 21",
+      "category": 2
+    },
+    {
+      "id": "Fred 22",
+      "category": 3
+    },
+    {
+      "id": "Bob 22",
+      "category": 4
+    },
+    {
+      "id": "Sam 22",
+      "category": 1
+    },
+    {
+      "id": "Chris 22",
+      "category": 2
+    },
+    {
+      "id": "Ada 22",
+      "category": 3
+    },
+    {
+      "id": "Eve 22",
+      "category": 4
+    },
+    {
+      "id": "Ben 23",
+      "category": 1,
+      "fixedSeat": true
+    },
+    {
+      "id": "Amy 23",
+      "category": 2
+    },
+    {
+      "id": "Dan 23",
+      "category": 3
+    },
+    {
+      "id": "Jo 23",
+      "category": 4
+    },
+    {
+      "id": "Max 23",
+      "category": 1,
+      "travelWeight": 3
+    },
+    {
+      "id": "Sue 23",
+      "category": 2
+    },
+    {
+      "id": "Tom 24",
+      "category": 3
+    },
+    {
+      "id": "May 24",
+      "category": 4
+    },
+    {
+      "id": "Jay 24",
+      "category": 1
+    },
+    {
+      "id": "Ann 24",
+      "category": 2
+    },
+    {
+      "id": "Leo 24",
+      "category": 3
+    },
+    {
+      "id": "Liz 24",
+      "category": 4
+    },
+    {
+      "id": "Fred 25",
+      "category": 1
+    },
+    {
+      "id": "Bob 25",
+      "category": 2
+    },
+    {
+      "id": "Sam 25",
+      "category": 3
+    },
+    {
+      "id": "Chris 25",
+      "category": 4
+    },
+    {
+      "id": "Ada 25",
+      "category": 1
+    },
+    {
+      "id": "Eve 25",
+      "category": 2
+    },
+    {
+      "id": "Ben 26",
+      "category": 3
+    },
+    {
+      "id": "Amy 26",
+      "category": 4
+    },
+    {
+      "id": "Dan 26",
+      "category": 1
+    },
+    {
+      "id": "Jo 26",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Max 26",
+      "category": 3
+    },
+    {
+      "id": "Sue 26",
+      "category": 4
+    },
+    {
+      "id": "Tom 27",
+      "category": 1
+    },
+    {
+      "id": "May 27",
+      "category": 2
+    },
+    {
+      "id": "Jay 27",
+      "category": 3
+    },
+    {
+      "id": "Ann 27",
+      "category": 4
+    },
+    {
+      "id": "Leo 27",
+      "category": 1
+    },
+    {
+      "id": "Liz 27",
+      "category": 2
+    },
+    {
+      "id": "Fred 28",
+      "category": 3
+    },
+    {
+      "id": "Bob 28",
+      "category": 4
+    },
+    {
+      "id": "Sam 28",
+      "category": 1
+    },
+    {
+      "id": "Chris 28",
+      "category": 2,
+      "fixedSeat": true
+    },
+    {
+      "id": "Ada 28",
+      "category": 3
+    },
+    {
+      "id": "Eve 28",
+      "category": 4
+    },
+    {
+      "id": "Ben 29",
+      "category": 1
+    },
+    {
+      "id": "Amy 29",
+      "category": 2
+    },
+    {
+      "id": "Dan 29",
+      "category": 3,
+      "travelWeight": 3
+    },
+    {
+      "id": "Jo 29",
+      "category": 4
+    },
+    {
+      "id": "Max 29",
+      "category": 1
+    },
+    {
+      "id": "Sue 29",
+      "category": 2
+    },
+    {
+      "id": "Tom 30",
+      "category": 3
+    },
+    {
+      "id": "May 30",
+      "category": 4
+    },
+    {
+      "id": "Jay 30",
+      "category": 1
+    },
+    {
+      "id": "Ann 30",
+      "category": 2
+    },
+    {
+      "id": "Leo 30",
+      "category": 3
+    },
+    {
+      "id": "Liz 30",
+      "category": 4
+    },
+    {
+      "id": "Fred 31",
+      "category": 1
+    },
+    {
+      "id": "Bob 31",
+      "category": 2
+    },
+    {
+      "id": "Sam 31",
+      "category": 3
+    },
+    {
+      "id": "Chris 31",
+      "category": 4
+    },
+    {
+      "id": "Ada 31",
+      "category": 1
+    },
+    {
+      "id": "Eve 31",
+      "category": 2
+    },
+    {
+      "id": "Ben 32",
+      "category": 3
+    },
+    {
+      "id": "Amy 32",
+      "category": 4,
+      "travelWeight": 3
+    },
+    {
+      "id": "Dan 32",
+      "category": 1
+    },
+    {
+      "id": "Jo 32",
+      "category": 2
+    },
+    {
+      "id": "Max 32",
+      "category": 3
+    },
+    {
+      "id": "Sue 32",
+      "category": 4
+    },
+    {
+      "id": "Tom 33",
+      "category": 1
+    },
+    {
+      "id": "May 33",
+      "category": 2
+    },
+    {
+      "id": "Jay 33",
+      "category": 3
+    },
+    {
+      "id": "Ann 33",
+      "category": 4
+    },
+    {
+      "id": "Leo 33",
+      "category": 1
+    },
+    {
+      "id": "Liz 33",
+      "category": 2
+    },
+    {
+      "id": "Fred 34",
+      "category": 3
+    },
+    {
+      "id": "Bob 34",
+      "category": 4
+    },
+    {
+      "id": "Sam 34",
+      "category": 1
+    },
+    {
+      "id": "Chris 34",
+      "category": 2
+    },
+    {
+      "id": "Ada 34",
+      "category": 3
+    },
+    {
+      "id": "Eve 34",
+      "category": 4
+    },
+    {
+      "id": "Ben 35",
+      "category": 1,
+      "travelWeight": 3
+    },
+    {
+      "id": "Amy 35",
+      "category": 2
+    },
+    {
+      "id": "Dan 35",
+      "category": 3
+    },
+    {
+      "id": "Jo 35",
+      "category": 4
+    },
+    {
+      "id": "Max 35",
+      "category": 1
+    },
+    {
+      "id": "Sue 35",
+      "category": 2
+    },
+    {
+      "id": "Tom 36",
+      "category": 3
+    },
+    {
+      "id": "May 36",
+      "category": 4
+    },
+    {
+      "id": "Jay 36",
+      "category": 1
+    },
+    {
+      "id": "Ann 36",
+      "category": 2
+    },
+    {
+      "id": "Leo 36",
+      "category": 3
+    },
+    {
+      "id": "Liz 36",
+      "category": 4
+    },
+    {
+      "id": "Fred 37",
+      "category": 1
+    },
+    {
+      "id": "Bob 37",
+      "category": 2
+    },
+    {
+      "id": "Sam 37",
+      "category": 3
+    },
+    {
+      "id": "Chris 37",
+      "category": 4
+    },
+    {
+      "id": "Ada 37",
+      "category": 1
+    },
+    {
+      "id": "Eve 37",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Ben 38",
+      "category": 3
+    },
+    {
+      "id": "Amy 38",
+      "category": 4
+    },
+    {
+      "id": "Dan 38",
+      "category": 1
+    },
+    {
+      "id": "Jo 38",
+      "category": 2
+    },
+    {
+      "id": "Max 38",
+      "category": 3
+    },
+    {
+      "id": "Sue 38",
+      "category": 4
+    },
+    {
+      "id": "Tom 39",
+      "category": 1
+    },
+    {
+      "id": "May 39",
+      "category": 2
+    },
+    {
+      "id": "Jay 39",
+      "category": 3
+    },
+    {
+      "id": "Ann 39",
+      "category": 4
+    },
+    {
+      "id": "Leo 39",
+      "category": 1
+    },
+    {
+      "id": "Liz 39",
+      "category": 2
+    },
+    {
+      "id": "Fred 40",
+      "category": 3
+    },
+    {
+      "id": "Bob 40",
+      "category": 4
+    },
+    {
+      "id": "Sam 40",
+      "category": 1
+    },
+    {
+      "id": "Chris 40",
+      "category": 2
+    },
+    {
+      "id": "Ada 40",
+      "category": 3,
+      "travelWeight": 3
+    },
+    {
+      "id": "Eve 40",
+      "category": 4
+    },
+    {
+      "id": "Ben 41",
+      "category": 1
+    },
+    {
+      "id": "Amy 41",
+      "category": 2
+    },
+    {
+      "id": "Dan 41",
+      "category": 3
+    },
+    {
+      "id": "Jo 41",
+      "category": 4
+    },
+    {
+      "id": "Max 41",
+      "category": 1
+    },
+    {
+      "id": "Sue 41",
+      "category": 2
+    },
+    {
+      "id": "Tom 42",
+      "category": 3
+    },
+    {
+      "id": "May 42",
+      "category": 4
+    },
+    {
+      "id": "Jay 42",
+      "category": 1
+    },
+    {
+      "id": "Ann 42",
+      "category": 2
+    },
+    {
+      "id": "Leo 42",
+      "category": 3
+    },
+    {
+      "id": "Liz 42",
+      "category": 4
+    },
+    {
+      "id": "Fred 43",
+      "category": 1
+    },
+    {
+      "id": "Bob 43",
+      "category": 2
+    },
+    {
+      "id": "Sam 43",
+      "category": 3
+    },
+    {
+      "id": "Chris 43",
+      "category": 4,
+      "travelWeight": 3
+    },
+    {
+      "id": "Ada 43",
+      "category": 1
+    },
+    {
+      "id": "Eve 43",
+      "category": 2
+    },
+    {
+      "id": "Ben 44",
+      "category": 3
+    },
+    {
+      "id": "Amy 44",
+      "category": 4
+    },
+    {
+      "id": "Dan 44",
+      "category": 1
+    },
+    {
+      "id": "Jo 44",
+      "category": 2
+    },
+    {
+      "id": "Max 44",
+      "category": 3
+    },
+    {
+      "id": "Sue 44",
+      "category": 4
+    },
+    {
+      "id": "Tom 45",
+      "category": 1
+    },
+    {
+      "id": "May 45",
+      "category": 2
+    },
+    {
+      "id": "Jay 45",
+      "category": 3
+    },
+    {
+      "id": "Ann 45",
+      "category": 4
+    },
+    {
+      "id": "Leo 45",
+      "category": 1
+    },
+    {
+      "id": "Liz 45",
+      "category": 2
+    },
+    {
+      "id": "Fred 46",
+      "category": 3
+    },
+    {
+      "id": "Bob 46",
+      "category": 4
+    },
+    {
+      "id": "Sam 46",
+      "category": 1,
+      "travelWeight": 3
+    },
+    {
+      "id": "Chris 46",
+      "category": 2
+    },
+    {
+      "id": "Ada 46",
+      "category": 3
+    },
+    {
+      "id": "Eve 46",
+      "category": 4
+    },
+    {
+      "id": "Ben 47",
+      "category": 1
+    },
+    {
+      "id": "Amy 47",
+      "category": 2
+    },
+    {
+      "id": "Dan 47",
+      "category": 3
+    },
+    {
+      "id": "Jo 47",
+      "category": 4
+    },
+    {
+      "id": "Max 47",
+      "category": 1
+    },
+    {
+      "id": "Sue 47",
+      "category": 2
+    },
+    {
+      "id": "Tom 48",
+      "category": 3
+    },
+    {
+      "id": "May 48",
+      "category": 4
+    },
+    {
+      "id": "Jay 48",
+      "category": 1
+    },
+    {
+      "id": "Ann 48",
+      "category": 2
+    },
+    {
+      "id": "Leo 48",
+      "category": 3
+    },
+    {
+      "id": "Liz 48",
+      "category": 4
+    },
+    {
+      "id": "Fred 49",
+      "category": 1
+    },
+    {
+      "id": "Bob 49",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Sam 49",
+      "category": 3
+    },
+    {
+      "id": "Chris 49",
+      "category": 4
+    },
+    {
+      "id": "Ada 49",
+      "category": 1
+    },
+    {
+      "id": "Eve 49",
+      "category": 2
+    },
+    {
+      "id": "Ben 50",
+      "category": 3
+    },
+    {
+      "id": "Amy 50",
+      "category": 4
+    },
+    {
+      "id": "Dan 50",
+      "category": 1
+    },
+    {
+      "id": "Jo 50",
+      "category": 2
+    },
+    {
+      "id": "Max 50",
+      "category": 3
+    },
+    {
+      "id": "Sue 50",
+      "category": 4
+    }
+  ],
+  "tables": [
+    {
+      "id": "T1",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 0
+    },
+    {
+      "id": "T2",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 0
+    },
+    {
+      "id": "T3",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 0
+    },
+    {
+      "id": "T4",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 0
+    },
+    {
+      "id": "T5",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 0
+    },
+    {
+      "id": "T6",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 1
+    },
+    {
+      "id": "T7",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 1
+    },
+    {
+      "id": "T8",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 1
+    },
+    {
+      "id": "T9",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 1
+    },
+    {
+      "id": "T10",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 1
+    },
+    {
+      "id": "T11",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 2
+    },
+    {
+      "id": "T12",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 2
+    },
+    {
+      "id": "T13",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 2
+    },
+    {
+      "id": "T14",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 2
+    },
+    {
+      "id": "T15",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 2
+    },
+    {
+      "id": "T16",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 3
+    },
+    {
+      "id": "T17",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 3
+    },
+    {
+      "id": "T18",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 3
+    },
+    {
+      "id": "T19",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 3
+    },
+    {
+      "id": "T20",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 3
+    },
+    {
+      "id": "T21",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 4
+    },
+    {
+      "id": "T22",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 4
+    },
+    {
+      "id": "T23",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 4
+    },
+    {
+      "id": "T24",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 4
+    },
+    {
+      "id": "T25",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 4
+    },
+    {
+      "id": "T26",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 5
+    },
+    {
+      "id": "T27",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 5
+    },
+    {
+      "id": "T28",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 5
+    },
+    {
+      "id": "T29",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 5
+    },
+    {
+      "id": "T30",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 5
+    },
+    {
+      "id": "T31",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 6
+    },
+    {
+      "id": "T32",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 6
+    },
+    {
+      "id": "T33",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 6
+    },
+    {
+      "id": "T34",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 6
+    },
+    {
+      "id": "T35",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 6
+    },
+    {
+      "id": "T36",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 7
+    },
+    {
+      "id": "T37",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 7
+    },
+    {
+      "id": "T38",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 7
+    },
+    {
+      "id": "T39",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 7
+    },
+    {
+      "id": "T40",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 7
+    },
+    {
+      "id": "T41",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 8
+    },
+    {
+      "id": "T42",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 8
+    },
+    {
+      "id": "T43",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 8
+    },
+    {
+      "id": "T44",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 8
+    },
+    {
+      "id": "T45",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 8
+    },
+    {
+      "id": "T46",
+      "capacity": 6,
+      "x": 0.0,
+      "y": 9
+    },
+    {
+      "id": "T47",
+      "capacity": 6,
+      "x": 1.35,
+      "y": 9
+    },
+    {
+      "id": "T48",
+      "capacity": 6,
+      "x": 2.7,
+      "y": 9
+    },
+    {
+      "id": "T49",
+      "capacity": 6,
+      "x": 4.050000000000001,
+      "y": 9
+    },
+    {
+      "id": "T50",
+      "capacity": 6,
+      "x": 5.4,
+      "y": 9
+    }
+  ],
+  "rounds": 5,
+  "roundOptions": {
+    "iterations": 30000,
+    "seed": 4,
+    "weights": {
+      "balance": 8,
+      "repeatPairs": 5,
+      "repeatTables": 10,
+      "totalTravel": 0.15,
+      "maxTravel": 1,
+      "pairs": 1
+    }
+  }
+}

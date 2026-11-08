@@ -1,13 +1,13 @@
-// Runs submit() off the page's main thread, so a long search leaves the page responsive.
+// Runs either planning mode off the page's main thread, so a long search leaves the page responsive.
 // Messages in: { request }. Messages out: { type: 'progress', progress } at most every
 // 100 ms, then { type: 'result', result } or { type: 'error', error: { code, message, issues } }.
 
-import { SeatingError, submit } from './core/index.js';
+import { SeatingError, runRequest } from './core/index.js';
 
 self.onmessage = (/** @type {MessageEvent} */ { data }) => {
   let last = 0;
   try {
-    const result = submit(data.request, {
+    const result = runRequest(data.request, {
       onProgress: (progress) => {
         const now = performance.now();
         if (now - last > 100) {

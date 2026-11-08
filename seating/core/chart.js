@@ -12,7 +12,7 @@
  *   tables: TableGeometry[], lines: Map<string, string[]> }} Geometry
  * @typedef {{ id: string, seats: (string | null)[], score?: number }} ViewTable
  * @typedef {{ tables: ViewTable[], categories: Map<string, number>, broken?: Set<string>,
- *   active?: number[] }} View
+ *   active?: number[], colours?: Map<number,string> }} View
  *   A seating to draw: each table's seats in order (null for an empty seat), each guest's
  *   category, the guests in a broken constraint and the tables of the move being shown.
  */
@@ -179,7 +179,7 @@ export function guestMark(id, seat, geo, view, theme) {
   const c = CHART_THEMES[theme];
   const cat = view.categories.get(id);
   const r = geo.mark / 2;
-  const fill = cat === undefined ? c.muted : categoryColour(cat, rangeOf(view.categories.values()), theme);
+  const fill = cat === undefined ? c.muted : (view.colours?.get(cat) ?? categoryColour(cat, rangeOf(view.categories.values()), theme));
   let out = `<g class="guest" data-guest="${esc(id)}" transform="translate(${r2(seat.x)} ${r2(seat.y)})">`;
   out += `<circle r="${r2(r)}" fill="${fill}" stroke="${c.ink}" stroke-opacity="0.35"/>`;
   if (cat !== undefined) {
@@ -229,7 +229,7 @@ function legend(view, geo, theme, replay) {
   const shown = cats.length <= 12 ? cats : [cats[0], last];
   /** @type {{ draw: string, label: string }[]} */
   const items = shown.map((v) => {
-    const fill = categoryColour(v, range, theme);
+    const fill = view.colours?.get(v) ?? categoryColour(v, range, theme);
     const t = categoryText(v);
     return { draw: `<circle r="${r}" fill="${fill}" stroke="${c.ink}" stroke-opacity="0.35"/><text font-size="${r2(Math.min(8.5, 10 / textEms(t)))}" font-weight="700" fill="${inkOn(fill)}" text-anchor="middle" dominant-baseline="central">${esc(t)}</text>`, label: `${cats.length > 12 && v === last ? '… ' : ''}${String(v)}` };
   });

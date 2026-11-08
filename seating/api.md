@@ -1,8 +1,8 @@
 # Table Seating API
 
-Table Seating seats guests at tables to maximize a score that combines how alike each table's guests are, pair scores (guests who should or should not share a table), must-sit-together and must-sit-apart constraints, and an optional geography term that pushes chosen guests to far-apart tables. It has a single entry point, `submit(request) → result`. The request and the result are plain JSON. The web page, `window.Seating` and the command line all call this same function, and the same request (seed included) always gives the same result.
+Table Seating has two explicit workflows. `submit(request)` preserves the static seating optimizer; `planRounds(request)` plans successive icebreaker rounds. `runRequest(request)` dispatches on `mode: "rounds"` and otherwise runs the static optimizer. The web worker, `window.Seating.submit` and CLI use this dispatcher. All inputs and results are plain JSON, and a request including its seed is repeatable.
 
-It is a port of Nik Vetr's R table-seating optimizer (`seat_tables()`, 2023, with its geography bookkeeping fixed). It uses R's random number generator and R's arithmetic, including the long-double sums that settle ties between table scores, so a request gives the same chain as the R version: the same accepted moves, best seating, scores and trace, to the last bit (checked on 16 runs of 9 instances). The one known source of difference is the spiral layout beyond 23 tables, where V8's `sin` and glibc's differ by one unit in the last place; that can change a run only through an exact tie.
+The static optimizer is a port of Nik Vetr's R table-seating optimizer (`seat_tables()`, 2023, with its geography bookkeeping fixed). It uses R's random number generator and R's arithmetic, including the long-double sums that settle ties between table scores, so a request gives the same chain as the R version: the same accepted moves, best seating, scores and trace, to the last bit (checked on 16 runs of 9 instances). The one known source of difference is the spiral layout beyond 23 tables, where V8's `sin` and glibc's differ by one unit in the last place; that can change a run only through an exact tie.
 
 ## Ways in
 
@@ -34,12 +34,77 @@ const r = submit(fromRRequest(requestForR)); // R's spelling, renamed
 | `submit(request)` | Runs the request, loads it into the page's inputs, shows the result at its best seating and resolves with it. An invalid request rejects with a `SeatingError` and leaves the page showing what it showed. |
 | `getRequest()` | Returns the request the page's inputs currently describe. |
 | `getResult()` | Returns the result on display, or `null`. |
-| `exportSvgText()` | Returns the best seating's chart as SVG text, in the page's theme. |
-| `exportSeatingCsv()` | Returns the best seating as CSV: `table,seat,guest,category`, one row per seat (an empty seat has no guest). |
-| `replay()` | Returns where the replay is: `{ move, moves, iteration, best, playing }`, `best` being whether the best seating is on view as the result. |
+| `exportSvgText()` | Returns the static best chart, or the selected event round, as SVG text in the page's theme. |
+| `exportSeatingCsv()` | Static: `table,seat,guest,category`. Rounds: `round,table,seat,guest,category` for every round. One row per seat; empty seats have no guest. |
+| `replay()` | Returns where the replay is: `{ move, moves, iteration, best, playing }`, `best` being whether the best seating is on view as the result. Returns `null` for an event-round plan. |
 | `pause()`, `stop()` | Pause the replay; stop a running search (the pending `submit` rejects with an `Error`). |
 
-## Request
+## Icebreaker rounds
+
+This is a separate schedule optimizer, not a replay of the static optimizer's proposals. It does not claim R parity; the unchanged static mode retains that contract.
+
+```js
+import { planRounds, runRequest, renderRoundSvg } from './seating/core/index.js';
+const request = {
+  mode: 'rounds',
+  guests: [
+    {id:'Fred', category:1, fixedSeat:{table:'A', seat:0}},
+    {id:'Bob', category:2, travelWeight:3},
+    {id:'Sam', category:1}, {id:'Chris', category:2},
+    {id:'Ada', category:1}, {id:'Jo', category:2}
+  ],
+  tables: [{id:'A', capacity:3, x:0, y:0}, {id:'B', capacity:3, x:2, y:0}],
+  rounds:3,
+  roundOptions:{seed:4, iterations:3000}
+};
+const plan = planRounds(request);
+const secondRound = renderRoundSvg(plan, request, {round:1}); // zero-based index
+```
+
+The page's **Load rounds example** opens [a four-table, 24-guest, four-round request](examples/rounds-demo.json). The landing preview uses [a 50-table, 300-guest, five-round room](examples/rounds-room.json). Both run through the same planner. Run the small example outside the page with:
+
+```sh
+node seating/cli.mjs seating/examples/rounds-demo.json --svg out/
+```
+
+This writes `round-1.svg` through `round-4.svg` and prints the full plan JSON. Static `--svg` filenames stay `seating.svg` and `trace.svg`.
+
+Round requests accept only `mode`, `guests`, `tables`, `rounds`, `roundOptions`, `pairs`, `together`, and `apart`. Every guest needs a finite numeric `category`, interpreted as a **nominal label**: changing numeric distances between the codes does not change the costs. The table specification and pair/group syntax are the same as static mode. Every guest appears exactly once per round; empty seats remain empty slots. Limits are 1,000 guests/seats and 2–12 rounds (default 3).
+
+| Guest field | Default | Meaning |
+| --- | --- | --- |
+| `travelWeight` | `1` | Finite 0–1,000 multiplier on this guest's travel. A larger value discourages their movement; zero removes their travel contribution but does not lock them. |
+| `fixedSeat` | `false` | `true` locks the guest to their original list-order seat. `{table, seat}` names an exact table and **zero-based** seat. These seats are enforced in every round, including the first; duplicate anchors are rejected. |
+
+The GUI's fixed-seat field uses `initial` for `true`, or `Table name:2` for the **second** seat. Its travel table and CSV also number seats from 1.
+
+`roundOptions` contains `weights`, `constraintPenalty` (default 1,000), `iterations` (default min(250,000, 100 × guests × rounds), allowed 0–250,000), `seed` (default 1), and positive `logitScale` (default 1). Omitted individual weights use these defaults:
+
+| Weight | Default | Cost before this weight |
+| --- | --- | --- |
+| `balance` | 8 | Sum over every round/table/category of `(observed − expected)² / table capacity`, where expected is table capacity × that category's total guests / total seats. Empty capacity is included in the denominator and target. |
+| `repeatPairs` | 5 | For each unordered guest pair, encounters after the first: `max(0, meetings−1)`. |
+| `repeatTables` | 10 | Repetitions after the first of an identical nonempty set of tablemates, regardless of table identity or seat order. |
+| `totalTravel` | 0.15 | Sum of all mobility-weighted trips between consecutive rounds. |
+| `maxTravel` | 1 | Largest mobility-weighted **single trip** made by any guest between adjacent rounds, not their cumulative schedule distance. |
+| `pairs` | 1 | Negative of pair scores summed across every round; positive pair scores encourage sharing a table. |
+
+Weights must be finite and nonnegative. Broken together/apart pairs add `constraintPenalty` each, in every round, separately from these weights. They remain soft preferences; exact seat locks are the only hard placement constraints. Repeated meetings can be unavoidable, especially with fixed guests. The result reports them rather than claiming a repeat-free plan.
+
+Travel is **Euclidean distance between table centers in the supplied coordinate units**, not seat-to-seat distance, collision-free animation path length, or an accessible walking route. Use consistent coordinates (e.g. meters) and adjust the travel weights when changing their scale. Seat order within one table does not contribute travel. The landing animation's collision avoidance is visual routing and does not change this objective.
+
+The planner builds seeded greedy rounds using category balance, previous pair encounters, pair preferences and travel, then jointly searches all rounds with cross-table single-seat swaps. Most proposals preserve category counts by swapping equal-category guests; some allow other swaps. A proposal is accepted with probability `1/(1+exp((newCost−oldCost) × logitScale))`. Fixed slots are excluded. The lowest-cost schedule visited is returned and independently rescored. This bounded heuristic does not guarantee a global optimum; zero iterations returns the greedy plan. All-fixed plans return immediately.
+
+The result contains:
+
+- `mode:"rounds"`, `rounds:[{round,tables,violations}]`. Each table has `id,capacity,x,y,seats`; seats are guest IDs or `null`.
+- `objective:{cost,terms}`. Lower is better; `terms` are weighted contributions whose sum is `cost`.
+- `metrics`: unweighted category-balance cost, repeated pair encounters/table groups, raw `totalTravel` and `maxTravel`, and `weightedTotalTravel` / `weightedMaxTravel`. `perGuest` includes `bySwitch`, cumulative `total`, longest `max`, travel weight and fixed seat. `repeatedPairs` lists actual meeting counts.
+- `settings`, `search:{iterations,accepted,bestIteration,initialCost}`, and a bounded search `trace:{iteration,cost,best}`. Search iterations are not event rounds.
+
+`planRounds(request, {onProgress})` reports the same progress envelope as static mode, with `score`/`best` equal to negative costs and `move:null`. Render/export functions consume the returned assignments; they do not rerun the planner.
+
+## Static request
 
 | Field | Required | Meaning |
 | --- | --- | --- |

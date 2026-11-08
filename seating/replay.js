@@ -469,15 +469,19 @@ el.trace.addEventListener('click', (/** @type {PointerEvent} */ event) => {
   draw();
 });
 
-let observedWidth = 0;
+let observedWidth = 0, resizeFrame = 0;
 new ResizeObserver(([entry]) => {
   const w = entry.contentRect.width;
   if (w === observedWidth) return;
   observedWidth = w;
   geo = null;
-  if (run && !tween) draw();
+  cancelAnimationFrame(resizeFrame);
+  resizeFrame=requestAnimationFrame(()=>{if(run&&!tween)draw()});
 }).observe(el.chart);
 document.addEventListener('themechange', () => { if (run && !tween) draw(); });
 
 /** The chart as drawn now, for window.Seating. */
 export const replayState = () => (run ? { move: pos, moves: run.seats.length - 1, iteration: run.iteration[pos], best: final, playing } : null);
+
+/** Release the old static replay before a round plan takes over the chart. */
+export function clearReplay() { pause(); run=null; geo=null; traceKey=''; }

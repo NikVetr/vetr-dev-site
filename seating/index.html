@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Seat guests at tables so that alike guests sit together, chosen pairs share a table and others are kept apart, and watch the search that finds the seating.">
+  <meta name="description" content="Plan balanced icebreaker rounds, limit repeat tablemates and travel, or make a single seating chart.">
   <title>Table Seating</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b66d5'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3Cg fill='%23cde2fb'%3E%3Ccircle cx='16' cy='5.5' r='2.6'/%3E%3Ccircle cx='26.5' cy='16' r='2.6'/%3E%3Ccircle cx='16' cy='26.5' r='2.6'/%3E%3Ccircle cx='5.5' cy='16' r='2.6'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="stylesheet" href="../shared/base.css">
@@ -18,7 +18,7 @@
     <div class="container header-row tool-header-row">
       <div>
         <h1>Table Seating</h1>
-        <p class="tagline">Seat guests at tables so that alike guests sit together, chosen pairs share a table and others are kept apart. Then watch the search that found the seating, swap by swap.</p>
+        <p class="tagline">Plan balanced icebreaker rounds, limit repeat tablemates and travel, or make a single seating chart.</p>
       </div>
       <div class="tool-header-actions">
         <nav class="tool-nav" aria-label="Tool navigation">
@@ -39,11 +39,13 @@
         <span id="guest-count" class="muted"></span>
         <a href="#results-heading" class="results-link">Seating ↓</a>
       </div>
-      <p class="muted">One row per guest. The category is a number: the closer two guests' numbers, the more alike they count (for example 1 and 2 for the two families, 3 for work, 4 for school).</p>
+      <label class="planning-mode">Planning mode <select id="planning-mode"><option value="static">Single seating chart</option><option value="rounds">Icebreaker rounds</option></select></label>
+      <p id="category-help" class="muted">One row per guest. The category is a number: the closer two guests' numbers, the more alike they count (for example 1 and 2 for the two families, 3 for work, 4 for school).</p>
       <div class="toolbar">
         <button id="edit-json" type="button" aria-haspopup="dialog">Paste or edit request JSON…</button>
         <label class="file-button">Open request file… <input id="request-file" type="file" accept="application/json,.json"></label>
         <button id="load-example" type="button">Load example</button>
+        <button id="load-round-example" type="button">Load rounds example</button>
         <button id="clear-all" type="button">Clear</button>
         <span class="history-controls" role="group" aria-label="History">
           <button id="undo-replace" type="button" disabled title="Undo (Ctrl/⌘Z)">Undo</button>
@@ -58,12 +60,15 @@
               <th scope="col" class="index">#</th>
               <th scope="col">Name</th>
               <th scope="col" class="category-col">Category</th>
+              <th scope="col" class="mobility-col" data-planning="rounds" hidden>Travel weight</th>
+              <th scope="col" class="fixed-col" data-planning="rounds" hidden>Fixed seat</th>
               <th scope="col" class="remove-col"><span class="visually-hidden">Remove</span></th>
             </tr>
           </thead>
           <tbody id="guest-rows"></tbody>
         </table>
       </div>
+      <p class="muted" data-planning="rounds" hidden>Travel weight: 1 is standard; larger values discourage movement more. Fixed seat: enter <strong>initial</strong> to stay in the original list-order seat, or a table name and seat number, e.g. <strong>Table 1:2</strong>. Leave empty to allow movement.</p>
       <div class="toolbar">
         <button id="add-guest" type="button">+ Add guest</button>
       </div>
@@ -82,6 +87,10 @@
       <p id="no-result" class="placeholder">The seating appears here.</p>
       <div id="result" hidden>
         <p id="stale" class="stale-banner" hidden></p>
+        <div id="round-controls" hidden>
+          <div class="toolbar"><button id="round-back" type="button" aria-label="Previous round" title="Previous round">←</button><label>Round <select id="round-number"></select></label><button id="round-next" type="button" aria-label="Next round" title="Next round">→</button></div>
+          <p id="round-status" class="muted" aria-live="polite"></p>
+        </div>
         <div class="replay-head">
         <div class="player" role="group" aria-labelledby="player-heading">
           <h3 id="player-heading" class="visually-hidden">Replay of the search</h3>
@@ -111,11 +120,17 @@
           <figure id="chart" class="chart"></figure>
           <figure id="trace" class="trace"></figure>
           <p id="trace-tip" class="trace-tip muted" aria-hidden="true">&nbsp;</p>
+          <details id="round-details" hidden>
+            <summary>Schedule details and travel</summary>
+            <dl id="round-readout" class="readout"></dl>
+            <p id="round-metric-note" class="muted"></p>
+            <details id="travel-details"><summary>Travel by guest</summary><div id="travel-list" class="table-wrap"></div></details>
+          </details>
           <h3 id="list-heading">Tables</h3>
           <div id="table-list" class="table-list"></div>
         </div>
         <div class="toolbar">
-          <span class="muted">Download the best seating:</span>
+          <span id="download-label" class="muted">Download the best seating:</span>
           <button id="export-csv" type="button">Seating CSV</button>
           <button id="export-svg" type="button">Chart SVG</button>
           <button id="export-result" type="button">Result JSON</button>
@@ -195,6 +210,7 @@
 
     <section id="settings-card" class="card" aria-labelledby="settings-heading">
       <h2 id="settings-heading">Settings</h2>
+      <div data-planning="static">
       <h3>Objective</h3>
       <div class="settings">
         <label>Table term
@@ -229,6 +245,21 @@
         </label>
       </div>
       <p class="muted settings-help">Table term: <strong>alike tables</strong> is −Σ √|category difference| over each table's pairs of guests; <strong>few categories</strong> is −Σ (1 − 2<sup>−count</sup>) over each table's categories; <strong>mixed tables</strong> is the variance of each table's categories. Geography: <strong>room costs</strong> are the room-cost rows under Pairs and groups; <strong>by category</strong> gives every pair the cost (number of categories − |difference|), which pushes alike guests apart.</p>
+      </div>
+      <div data-planning="rounds" hidden>
+        <h3>Round plan</h3>
+        <div class="settings">
+          <label>Number of rounds <input id="round-count" type="number" min="2" max="12" value="3"></label>
+          <label>Category balance weight <input id="round-balance" type="number" min="0" step="1" value="8"></label>
+          <label>Repeated pair weight <input id="round-repeatPairs" type="number" min="0" step="1" value="5"></label>
+          <label>Repeated table group weight <input id="round-repeatTables" type="number" min="0" step="1" value="10"></label>
+          <label>Total travel weight <input id="round-totalTravel" type="number" min="0" step="0.05" value="0.15"></label>
+          <label>Longest trip weight <input id="round-maxTravel" type="number" min="0" step="0.1" value="1"></label>
+          <label>Pair score weight <input id="round-pairs" type="number" min="0" step="0.1" value="1"></label>
+          <label>Penalty per broken pair <input id="round-penalty" type="number" min="0" step="100" value="1000"></label>
+        </div>
+        <p class="muted settings-help">Lower schedule cost is better. Categories are nominal labels: every table is encouraged to reflect the whole group. Repeated pair meetings and identical table groups cost extra. Travel uses table-center distances; both total travel and the longest individual switch count, after each guest's travel weight. Fixed seats are enforced. Other terms are preferences, so inspect the result for remaining repeats and broken constraints.</p>
+      </div>
       <h3>Search</h3>
       <div class="settings">
         <label>Iterations
@@ -266,6 +297,10 @@
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
+        <h3>Icebreaker rounds</h3>
+        <p>Each round seats every guest once. The planner balances category counts, discourages repeat tablemates and repeated whole groups, and limits travel between consecutive rounds. It first builds balanced rounds with a seeded greedy placement, then jointly improves them by swapping movable guests between tables. It keeps the lowest-cost schedule found; a global optimum or a repeat-free schedule is not guaranteed.</p>
+        <p>Travel is Euclidean distance between table centers, in your table coordinates, not an accessible walking route. The longest-trip term is the longest single switch after multiplying by that guest's travel weight. A weight of zero removes that guest's travel cost; a fixed seat prevents movement in every round. Pair scores and together/apart preferences apply in every round. Download CSV for all rounds, or the chart SVG for the selected round.</p>
+        <h3>Single seating chart</h3>
         <p>A seating's score is the sum of four terms, and higher is better:</p>
         <ul>
           <li><strong>Table term</strong>: by default, minus the sum over each table's pairs of guests of the square root of the difference in their categories, so tables of alike guests score highest. Its weight multiplies it.</li>

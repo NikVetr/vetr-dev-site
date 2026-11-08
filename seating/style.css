@@ -170,3 +170,16 @@
   font-size: 0.85rem;
   white-space: pre;
 }
+
+/* Round mode shares the editors and chart, with compact mobility fields. */
+[hidden] { display: none !important; }
+.planning-mode { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:.4rem 0; }
+.editor .mobility-col { width:6.5rem; }
+.editor .fixed-col { width:8rem; }
+.rounds-mode .guests-editor { min-width:520px; }
+.travel-table { width:100%; border-collapse:collapse; font-size:.9rem; }
+.travel-table td,.travel-table th { padding:.35rem .5rem; text-align:left; border-bottom:1px solid var(--border); }
+#round-controls .toolbar { align-items:center; }
+#round-controls .toolbar label { display:flex; gap:.4rem; align-items:center; }
+#round-status { font-size:.9rem; }
+#travel-details { margin-top:.8rem; }

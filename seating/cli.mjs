@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-// Command-line access to the same submit() the page uses. Needs only Node 22.
+// Command-line access to the same request dispatcher the page uses. Needs only Node 22.
 //   node cli.mjs request.json [--svg dir]
 //   node cli.mjs < request.json
 // Prints the result JSON on stdout. A request in the R version's spelling (seat.R's, with
 // snake_case options) is read too. --svg writes the best seating's chart and the score trace
-// as dir/seating.svg and dir/trace.svg. Errors go to stderr as {"error": {...}} JSON: exit 1
+// as dir/seating.svg and dir/trace.svg, or round-1.svg etc for event rounds. Errors go to stderr as {"error": {...}} JSON: exit 1
 // for an invalid request or JSON, 2 for a usage problem or an unreadable file. See api.md.
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { SeatingError, fromRRequest, renderSeatingSvg, renderTraceSvg, submit } from './core/index.js';
+import { SeatingError, fromRRequest, renderSeatingSvg, renderTraceSvg, renderRoundSvg, isRoundPlan, runRequest } from './core/index.js';
 
 const USAGE = 'usage: node cli.mjs [request.json | -] [--svg dir]; reads the request from stdin when no file is given';
 
@@ -58,11 +58,15 @@ try {
 }
 
 try {
-  const result = submit(request);
+  const result = runRequest(request);
   if (svgDir) {
     mkdirSync(svgDir, { recursive: true });
-    writeFileSync(join(svgDir, 'seating.svg'), renderSeatingSvg(result, request));
-    writeFileSync(join(svgDir, 'trace.svg'), renderTraceSvg(result));
+    if (isRoundPlan(result)) {
+      result.rounds.forEach((_,round)=>writeFileSync(join(svgDir, `round-${round+1}.svg`),renderRoundSvg(result,request,{round})));
+    } else {
+      writeFileSync(join(svgDir, 'seating.svg'), renderSeatingSvg(result, request));
+      writeFileSync(join(svgDir, 'trace.svg'), renderTraceSvg(result));
+    }
   }
   process.stdout.write(`${JSON.stringify(result)}\n`);
 } catch (error) {

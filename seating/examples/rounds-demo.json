@@ -1,0 +1,145 @@
+{
+  "mode": "rounds",
+  "guests": [
+    {
+      "id": "Fred",
+      "category": 1,
+      "travelWeight": 1,
+      "fixedSeat": true
+    },
+    {
+      "id": "Bob",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Sam",
+      "category": 3
+    },
+    {
+      "id": "Chris",
+      "category": 4
+    },
+    {
+      "id": "Ada",
+      "category": 1
+    },
+    {
+      "id": "Eve",
+      "category": 2
+    },
+    {
+      "id": "Ben",
+      "category": 3
+    },
+    {
+      "id": "Amy",
+      "category": 4
+    },
+    {
+      "id": "Dan",
+      "category": 1
+    },
+    {
+      "id": "Jo",
+      "category": 2
+    },
+    {
+      "id": "Kit",
+      "category": 3
+    },
+    {
+      "id": "Lee",
+      "category": 4
+    },
+    {
+      "id": "Max",
+      "category": 1
+    },
+    {
+      "id": "Nia",
+      "category": 2
+    },
+    {
+      "id": "Pat",
+      "category": 3
+    },
+    {
+      "id": "Robin",
+      "category": 4
+    },
+    {
+      "id": "Alex",
+      "category": 1
+    },
+    {
+      "id": "Dee",
+      "category": 2,
+      "travelWeight": 3
+    },
+    {
+      "id": "Gus",
+      "category": 3
+    },
+    {
+      "id": "Ira",
+      "category": 4
+    },
+    {
+      "id": "Jay",
+      "category": 1,
+      "fixedSeat": true
+    },
+    {
+      "id": "Kai",
+      "category": 2
+    },
+    {
+      "id": "Liz",
+      "category": 3
+    },
+    {
+      "id": "Mo",
+      "category": 4
+    }
+  ],
+  "tables": [
+    {
+      "id": "T1",
+      "capacity": 6,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "T2",
+      "capacity": 6,
+      "x": 2,
+      "y": 0
+    },
+    {
+      "id": "T3",
+      "capacity": 6,
+      "x": 0,
+      "y": 2
+    },
+    {
+      "id": "T4",
+      "capacity": 6,
+      "x": 2,
+      "y": 2
+    }
+  ],
+  "rounds": 4,
+  "roundOptions": {
+    "iterations": 5000,
+    "seed": 4,
+    "weights": {
+      "balance": 8,
+      "repeatPairs": 5,
+      "repeatTables": 10,
+      "totalTravel": 0.15,
+      "maxTravel": 1,
+      "pairs": 1
+    }
+  }
+}
