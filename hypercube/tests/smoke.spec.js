@@ -124,6 +124,47 @@ test('390 px: the viewer comes first and nothing scrolls sideways', async ({ pag
   expect(errors).toEqual([]);
 });
 
+test('short landscape keeps the square, playback and timeline together without changing the frame', async ({ page }) => {
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const errors = await open(page);
+  const view = await page.locator('#view').boundingBox();
+  if (!view) throw new Error('Hypercube canvas is not rendered');
+  expect(view.height).toBeGreaterThanOrEqual(180);
+  expect(view.width).toBe(view.height);
+  expect(view.y + view.height).toBeLessThanOrEqual(390);
+  for (const selector of ['.transport', '.timeline']) {
+    const box = await page.locator(selector).boundingBox();
+    if (!box) throw new Error(`${selector} is not rendered`);
+    expect(box.x).toBeGreaterThan(view.x + view.width);
+    expect(box.y + box.height).toBeLessThanOrEqual(390);
+  }
+  const first = await frame(page);
+  await page.locator('#view').focus();
+  await page.keyboard.press(',');
+  expect(await frame(page)).toBe(first - 1);
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#step-back')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#play')).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(page.locator('#play')).toHaveText('❚❚ Pause');
+  await page.keyboard.press('Space');
+  await expect(page.locator('#play')).toHaveText('▶︎ Play');
+  await page.locator('#timeline').focus();
+  await page.keyboard.press('End');
+  expect(await frame(page)).toBe(1448);
+  const saved = await page.evaluate(() => /** @type {any} */ (window).Hypercube.exportSvgText());
+  for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }, { width: 844, height: 390 }]) {
+    await page.setViewportSize(viewport);
+    expect(await noSideScroll(page)).toBe(true);
+    expect(await page.evaluate(() => /** @type {any} */ (window).Hypercube.exportSvgText())).toBe(saved);
+  }
+  await page.locator('#k').focus();
+  await expect(page.locator('#k')).toBeInViewport();
+  expect(errors).toEqual([]);
+});
+
 test('a plan that fails to load is reported, the old plan stays, and Try again recovers', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   let fail = true;

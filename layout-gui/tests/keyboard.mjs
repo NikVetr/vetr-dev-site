@@ -4,13 +4,18 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { openPage } from '../../scripts/landing-art/browser.mjs';
 
-test('figure shortcuts stay in the canvas while Tab reaches fields, Copy and help', async () => {
-    const app = await openPage('layout-gui/');
+for (const viewport of [{ width: 1440, height: 900 }, { width: 844, height: 390 }]) {
+test(`figure shortcuts stay in the canvas while Tab reaches fields, Copy and help at ${viewport.width} × ${viewport.height}`, async () => {
+    const app = await openPage('layout-gui/', viewport);
     const { page } = app;
     try {
         const canvas = page.locator('#canvas');
         const box = await canvas.boundingBox();
         assert.ok(box);
+        if (viewport.height === 390) {
+            assert.ok(box.height >= 240, 'short landscape retains useful canvas height');
+            assert.ok(box.y + box.height <= viewport.height, 'the full canvas stays on screen');
+        }
         await canvas.dblclick({ position: { x: box.width * 0.2, y: box.height * 0.2 } });
         await canvas.dblclick({ position: { x: box.width * 0.6, y: box.height * 0.6 } });
         const snapshot = () => page.evaluate(async () => {
@@ -86,6 +91,7 @@ test('figure shortcuts stay in the canvas while Tab reaches fields, Copy and hel
         await app.close();
     }
 });
+}
 
 test('stacked figure panels keep the toolbox and code in normal page flow', async () => {
     const app = await openPage('layout-gui/', { width: 390, height: 844 });
