@@ -2,7 +2,7 @@
 
 Message Collage lays out a set of short messages, such as farewell or thank-you notes, as one dense card. Each message draws a font family, a style and a size, one global scale sets all the text, and the messages flow line by line into the free cells of a grid in a shuffled order. Several random layouts can be tried, keeping the one with the fewest empty cells. It has a single entry point, `submit(request) → result`. The request and the result are plain JSON. The web page, `window.MessageCollage` and the command line all call this same function, and the same request (seed included) always gives the same result. Messages are never sent anywhere.
 
-It is a port of Nik Vetr's R message collage (NikVetr/message-collage). The layout fields and defaults match the R version; `rotation_deg` adds optional presentation-only angles. Text is measured from the font files with fontkit exactly as the R version's showtext engine measures it, and R's random draws are reproduced with R's generator, so with `rotation_deg: 0` and the same request and font files the card is R's to the last bit: every line's cells, the global scale, the empty fraction and the colours.
+It is a port of Nik Vetr's R message collage (NikVetr/message-collage). The layout fields and defaults match the R version; `rotation_deg` adds optional angles and `expand_messages` adds a glyph-aware finishing pass. Text is measured from the font files with fontkit exactly as the R version's showtext engine measures it, and R's random draws are reproduced with R's generator, so with `rotation_deg: 0`, `expand_messages: false` and the same request and font files the card is R's to the last bit: every line's cells, the global scale, the empty fraction and the colours.
 
 ## Ways in
 
@@ -59,6 +59,7 @@ Only `messages` is required. Unknown fields are rejected, and `null` means the d
 | `grid_res` | `null` | Layout cells per inch (1 to 400). `null` uses the R version's rule, `ceiling(sqrt(total characters / sqrt(width_in × height_in)))`. |
 | `fill` | `0.7` | The global text scale: set on single lines, the messages would cover `fill²` of the card. |
 | `rotation_deg` | `0` | Maximum message angle in degrees (0 to 10). Deterministic angles shrink until conservative glyph bounds avoid other messages and card edges; zero preserves the horizontal R layout. The page example uses 4. |
+| `expand_messages` | `false` | After angles are assigned, enlarge whole messages into spare space and make small local moves. Preserves text, line breaks, typefaces and angles; conservative glyph bounds must stay clear of other messages and card edges. Up to 1.8× each initial font size. Enabled in the page example. |
 | `line_gap` | `0.2` | Gap between a message's lines, as a fraction of its cap height. |
 | `message_gap` | `0.4` | Buffer below every line, as a fraction of its cap height. |
 | `palette` | Royal1 + Royal2 | Text colours as `#rrggbb`. A colour may be repeated, as in R. |
@@ -76,7 +77,7 @@ The R version's `cores` (results do not depend on it) and `text_engine` (this po
 | Field | Meaning |
 | --- | --- |
 | `card` | `width_in`, `height_in` (final, after growing), `grid_res`, `n_cols`, `n_rows` (final), `target_rows`, `margin` (0.04: the grid sits inside a margin of 4% of its size on each side), `background`, `cex_scale` (the global scale), `empty_fraction`, `seed` (the kept run's), `pointsize` (12). |
-| `messages[]` | In layout order: `index` (1-based), `input_index` (1-based position in the request), `text`, `family`, `style` (R's face code: 1 plain, 2 bold, 3 italic, 4 bold-italic), `style_name`, `size` (relative), `cex` (`size × cex_scale`), `font_size_pt` (`12 × cex`), `color`, `restarts` (times the message started again elsewhere), `label` (`{x, y}`: the density mode of its cells, used for colouring, in plot cells). |
+| `messages[]` | In layout order: `index` (1-based), `input_index` (1-based position in the request), `text`, `family`, `style` (R's face code: 1 plain, 2 bold, 3 italic, 4 bold-italic), `style_name`, `size` (relative), `cex` (`size × cex_scale × expansion`, with expansion 1 when disabled), `font_size_pt` (`12 × cex`), `color`, `restarts` (times the message started again elsewhere), `label` (`{x, y}`: the density mode of its cells, used for colouring, in plot cells). |
 | `lines[]` | One per drawn line, by message then line: `message`, `line`, `text`; cells `col`, `end_col` (after the flush-right snap), `layout_col` (before it), `row`, `end_row` (1-based, row 1 at the top); `width`, `height`, `buffered_height` (cells); `just` (`null` for a first line, else `"left"`, `"right"`, `"more_left"` or `"more_right"`), `snapped`; `x`, `y`, `cap_height` (plot cells, y up: left edge and centre of the cap height); `x_in`, `center_in`, `baseline_in` (inches from the card's top-left corner); `family`, `style`, `style_name`, `cex`, `font_size_pt`, `color`. |
 | `runs[]` | Every layout tried: `run`, `seed`, `empty_fraction`, `height_in`. |
 | `fonts[]` | Each requested family's `category` and the face file of each requested style (`files`, relative to `message-collage/`). |
@@ -84,7 +85,9 @@ The R version's `cores` (results do not depend on it) and `text_engine` (this po
 
 With zero rotation, a renderer needs only `card` and `lines`: draw each line's `text` left-aligned at `x_in` on `baseline_in`, in `family` and `style_name` at `font_size_pt`, with characters one advance width apart (no kerning or ligatures), as they were measured. This is the R version's `--layout` JSON, except that it has no `regions` hulls (only the label points, on `messages[]`) and no `timing`.
 
-When present, `messages[].rotation` is `{angle_deg, x_in, y_in}`: rotate all lines of that message clockwise around that point, measured in inches from the card’s top-left corner. The grid coordinates, line breaks, font choices and empty-cell fraction describe the unchanged horizontal layout. SVG, PNG and PDF exports all apply the same rotation. The denser page example uses a 6.5 × 4.8-inch card, 32 grid cells per inch and `fill: 0.75`; the API defaults remain unchanged.
+When present, `messages[].rotation` is `{angle_deg, x_in, y_in}`: rotate all lines of that message clockwise around that point, measured in inches from the card’s top-left corner. The grid coordinates, line breaks, font choices and empty-cell fraction describe the unchanged horizontal layout. SVG, PNG and PDF exports all apply the same rotation. When expansion is enabled, `messages[].expansion` records the scale applied to that message. The returned physical positions, `cex` and `font_size_pt` already include it; render them directly. Grid coordinates, `size`, `card.cex_scale` and `empty_fraction` retain the underlying R layout for diagnostics. This finishing pass is deterministic and does not consume layout RNG draws.
+
+The denser page example uses a 6.5 × 4.8-inch card, 32 grid cells per inch and `fill: 0.75`; the API defaults remain unchanged.
 
 ## Exports
 
@@ -109,6 +112,7 @@ Every problem throws (or, on the command line, prints) one error:
 | --- | --- | --- |
 | `invalid_request` | The request is not valid. | `wrong_type`, `missing_field`, `unknown_field`, `invalid_value`, `invalid_color`, `unknown_font`, `unknown_style`, `duplicate`, `empty_message`, `too_long`, `too_many` |
 | `missing_glyphs` | A message has characters a requested family lacks. | `missing_glyphs`, one per message and family |
+| `layout_collision` | Expansion could not clear an existing glyph collision. Try another seed or increase the line gaps. | none |
 | `word_too_wide` | At the global scale, a word is wider than the card. With few, short messages the scale gets large; lower `fill` or the spread of `size_range`, or widen the card. | `word_too_wide`, one per message |
 | `degenerate_region` | A message's cells all lie in one row or column of the kept layout, so the density that places its label has no width (R's `kde2d` stops here too). Change the size, `fill` or `seed`. | none |
 | `invalid_json`, `unreadable_input`, `usage` | Command line only. | none |
@@ -184,6 +188,8 @@ In full, the card has 10 lines: the four messages in Courier Prime italic, Couri
 4. **Packing.** Messages in order, line by line, on an occupancy grid extended below its bottom edge. A line's block is its buffered height high; the first line takes the top-left-most free block wide enough for its first word, and takes as many words as fit the free run there. Each next line starts on the row below the previous line, within its span shifted by half the first word, and aligns left or right with it when the cells allow (right when both do and the previous line's centre is in the right half), otherwise as close as the free run allows. If no next line fits, the message's cells are forbidden and it starts again from its first word. Lines past the bottom grow the card. A line ending within 5% of the right edge moves flush right when the cells beside it are free.
 5. **Colours.** Each message's label point is the mode of a kernel density of its cells (MASS's `kde2d`, 50 × 50 grid). In layout order, a message takes an unused colour if any is left, otherwise a colour drawn with probability softmax of its mean-normalised distance to the nearest message of that colour.
 6. **Best of runs.** Steps 1 to 5 are repeated `runs` times with seeds `seed + 1, …`; the run with the smallest empty fraction is kept. Its colours, the last draws of a run, are drawn for it alone, which gives the same colours.
+7. **Optional angles.** Each message receives a deterministic angle, reduced until its conservative glyph bounds clear other messages and the card edges.
+8. **Optional expansion.** Three finite passes try small moves and uniform enlargement of each message around nine anchors. New placements keep a small clearance; the result is checked again for glyph-bound collisions and card overflow. Text, line breaks, fonts and angles stay fixed. This finishing step does not rerank the original grid layouts or change their diagnostics.
 
 The R version's region-growing partition (`expand_blocks`, never called there) and its box fitter (`fit_text_box`, not used by the card) are not ported.
 

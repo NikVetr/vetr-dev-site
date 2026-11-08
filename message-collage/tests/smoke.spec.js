@@ -15,6 +15,8 @@ test('lays out the example on load and exposes the API and the exports', async (
   await open(page);
   await expect(page.locator('#message-count')).toHaveText('34 messages');
   await expect(page.locator('#rotation')).toHaveValue('4');
+  await expect(page.locator('#expand-messages')).toBeChecked();
+  await expect(page.locator('#summary')).toContainText('messages expanded into spare space');
   expect(await page.locator('#preview svg g[transform^="rotate("]').count()).toBeGreaterThan(20);
   await expect(page.locator('#preview svg use')).not.toHaveCount(0);
   await expect(page.locator('#summary')).toContainText('the best of 20 layouts');

@@ -116,7 +116,7 @@ test('the best of the runs is kept, and the same request gives the same result',
 });
 
 test('gentle angles preserve the layout and keep every message clear of other glyphs and card edges', async () => {
-  const request = JSON.parse(readFileSync(new URL('examples/request.json', here), 'utf8'));
+  const request = { ...JSON.parse(readFileSync(new URL('examples/request.json', here), 'utf8')), expand_messages: false };
   const result = await submit(request);
   const horizontal = await submit({ ...request, rotation_deg: 0 });
   assert.deepEqual(result.lines, horizontal.lines);
@@ -138,6 +138,32 @@ test('gentle angles preserve the layout and keep every message clear of other gl
   assert.match(renderSvg(result, faces, { text: 'embedded' }), /transform="rotate\(/);
   assert.ok(new TextDecoder().decode(renderPdf(result, faces)).includes(' cm\n'));
   assert.ok((await rejects({ messages: example, rotation_deg: 11 })).issues.some(i => i.path === 'rotation_deg'));
+});
+
+test('expansion fills spare space without changing text, fonts, line breaks or angles', async () => {
+  const request = JSON.parse(readFileSync(new URL('examples/request.json', here), 'utf8'));
+  for (const seed of [1, 2, 3, 4]) {
+    const baseline = await submit({ ...request, seed, expand_messages: false });
+    const result = await submit({ ...request, seed, expand_messages: true });
+    const faces = await loadFaces(result.request.fonts, result.request.styles);
+    assert.deepEqual(result.card, baseline.card);
+    assert.deepEqual(result.lines.map(l => [l.message, l.text, l.family, l.style_name, l.color]), baseline.lines.map(l => [l.message, l.text, l.family, l.style_name, l.color]));
+    assert.deepEqual(result.messages.map(m => m.rotation?.angle_deg), baseline.messages.map(m => m.rotation?.angle_deg));
+    assert.ok(result.messages.every(m => typeof m.expansion === 'number' && m.expansion >= 1 && m.expansion <= 1.8));
+    const raw = inkBoxes(result, faces);
+    const area = (/** @type {ReturnType<typeof inkBoxes>} */ boxes) => boxes.reduce((sum, b) => sum + (b.points[1][0] - b.points[0][0]) * (b.points[2][1] - b.points[1][1]), 0);
+    assert.ok(area(raw) > area(inkBoxes(baseline, faces)) * 1.08, `seed ${seed}: at least 8% larger text bounds`);
+    const boxes = raw.map(box => {
+      const rotation = result.messages[box.message - 1].rotation;
+      return { ...box, points: rotation ? rotated(box.points, rotation) : box.points };
+    });
+    for (const [i, a] of boxes.entries()) {
+      assert.ok(a.points.every(([x, y]) => x >= 0 && y >= 0 && x <= result.card.width_in && y <= result.card.height_in));
+      for (const b of boxes.slice(i + 1)) if (a.message !== b.message) assert.ok(!overlaps(a.points, b.points), `seed ${seed}: messages ${a.message} and ${b.message}`);
+    }
+    if (seed === 1) assert.deepEqual(await submit({ ...request, seed }), result);
+  }
+  assert.ok((await rejects({ messages: example, expand_messages: 'yes' })).issues.some(i => i.path === 'expand_messages'));
 });
 
 test('a single message lays out at a low fill, and fails with a hint at the default', async () => {

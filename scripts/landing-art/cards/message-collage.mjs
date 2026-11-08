@@ -2,8 +2,8 @@
 // The larger 2×3 tile uses the 264×220 canvas. Four real layouts crossfade on hover;
 // line positions, relative sizes, colours and collision-checked rotations match the app.
 import { readFileSync } from 'node:fs';
-import { loadFaces, submit } from '../../../message-collage/core/index.js';
-import { WIDE, art, esc, num } from '../svg.mjs';
+import { loadFaces, renderSvg, submit } from '../../../message-collage/core/index.js';
+import { WIDE, art, num } from '../svg.mjs';
 
 const SEEDS = [1, 2, 3, 4];
 const HOLD = 1.5;    // seconds each layout is on the card, fades included
@@ -12,15 +12,6 @@ const MARGIN = 4;
 const PT = 72;       // the core's units: points, 72 per inch
 const { width: W, height: H } = WIDE;
 
-/** The CSS of each family's kind, named family first. */
-const FAMILY = {
-  serif: '"Source Serif Pro", serif',
-  'sans-serif': 'Inter, sans-serif',
-  monospace: '"Courier Prime", monospace',
-  script: '"Lobster Two", cursive',
-  display: '"Playfair Display", serif',
-};
-
 export async function build() {
   const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
   /** @type {Awaited<ReturnType<typeof submit>>[]} */
@@ -28,10 +19,6 @@ export async function build() {
   for (const seed of SEEDS) results.push(await submit({ ...request, seed }));
   const [first] = results;
   const faces = await loadFaces(first.request.fonts, first.request.styles);
-  const kind = new Map(first.fonts.map((f) => [f.family, f.category]));
-  const classOf = new Map(first.fonts.map((f, i) => [f.family, `f${i}`]));
-  const palette = [...new Set(results.flatMap((r) => r.lines.map((l) => l.color)))];
-
   // One scale for every layout, the tallest fitting the canvas; the cards share their top left.
   const widthPt = first.card.width_in * PT;
   const tallest = Math.max(...results.map((r) => r.card.height_in)) * PT;
@@ -39,32 +26,26 @@ export async function build() {
   const k = Math.min((W - 2 * MARGIN) / widthPt, (H - 2 * MARGIN) / tallest);
   const [x0, y0] = [(W - widthPt * k) / 2, (H - tallest * k) / 2];
 
-  /** A line's width in points as the core measured it: advance widths, no kerning. */
-  const lineWidth = (/** @type {typeof first.lines[0]} */ line) => {
-    const face = faces.get(`${line.family}|${line.style_name}`);
-    if (!face) throw new Error(`message-collage: no face for ${line.family} ${line.style_name}`);
-    let units = 0;
-    for (const ch of line.text) units += face.font.glyphForCodePoint(/** @type {number} */ (ch.codePointAt(0))).advanceWidth;
-    return (units * line.font_size_pt) / face.unitsPerEm;
-  };
-  const styleClass = { plain: '', bold: ' b', italic: ' i', 'bold-italic': ' b i' };
-
   const period = SEEDS.length * HOLD;
   const shift = (HOLD - 2 * FADE) / 2;   // the still is the middle of the first layout's time
+  // Reuse the core's exact outlines rather than substitute installed browser fonts.
+  // Share identical glyph paths between all four layouts to keep the preview compact.
+  const glyphs = new Map();
   const groups = results.map((r, i) => {
-    // A message's lines share its face, size and colour, so they are one group.
-    const lines = r.messages.map((m) => {
-      const own = r.lines.filter((line) => line.message === m.index);
-      if (own.some((line) => line.family !== m.family || line.style_name !== m.style_name || line.font_size_pt !== m.font_size_pt || line.color !== m.color)) {
-        throw new Error(`message-collage: message ${m.index}'s lines differ in face, size or colour`);
-      }
-      const cls = `${classOf.get(m.family)}${styleClass[m.style_name]} c${palette.indexOf(m.color)}`;
-      const rotation = m.rotation ? ` transform="rotate(${num(m.rotation.angle_deg)} ${num(x0 + m.rotation.x_in * PT * k)} ${num(y0 + m.rotation.y_in * PT * k)})"` : '';
-      return `<g class="${cls}" font-size="${num(m.font_size_pt * k, 2)}"${rotation}>${own.map((line) => `<text x="${num(x0 + line.x_in * PT * k)}" y="${num(y0 + line.baseline_in * PT * k)}" textLength="${num(lineWidth(line) * k)}" lengthAdjust="spacingAndGlyphs">${esc(line.text)}</text>`).join('')}</g>`;
-    }).join('\n');
-    if (r.messages.reduce((n, m) => n + r.lines.filter((line) => line.message === m.index).length, 0) !== r.lines.length) throw new Error('message-collage: a line belongs to no message');
+    const svg = renderSvg(r, faces), endDefs = svg.indexOf('</defs>');
+    if (endDefs < 0) throw new Error('message-collage: outlined SVG has no glyph definitions');
+    const ids = new Map();
+    for (const match of svg.slice(0, endDefs).matchAll(/<path id="([^"]+)" d="([^"]+)"\/>/g)) {
+      const [, oldId, path] = match;
+      if (!glyphs.has(path)) glyphs.set(path, `message-collage-g${glyphs.size}`);
+      ids.set(oldId, glyphs.get(path));
+    }
+    const lines = svg.slice(endDefs + '</defs>'.length).replace(/<rect[^>]+\/>/, '').replace(/<\/svg>\s*$/, '').replace(/xlink:href="#([^"]+)"/g, (_, id) => {
+      if (!ids.has(id)) throw new Error(`message-collage: undefined glyph ${id}`);
+      return `href="#${ids.get(id)}"`;
+    });
     const delay = ((((i * HOLD - shift) % period) + period) % period) - period;
-    return `<g class="layout${i ? '' : ' still'}" style="animation-delay:${num(delay, 3)}s">\n${lines}\n</g>`;
+    return `<g class="layout${i ? '' : ' still'}" style="animation-delay:${num(delay, 3)}s"><g transform="translate(${num(x0, 4)} ${num(y0, 4)}) scale(${num(k, 6)})">\n${lines}\n</g></g>`;
   });
 
   // The card's height, changing while neither layout shows.
@@ -79,15 +60,6 @@ export async function build() {
   if (SEEDS.length * HOLD - shift > period) throw new Error('message-collage: the last change runs past the wrap');
 
   const css = [
-    ...first.fonts.map((f, i) => {
-      const family = FAMILY[/** @type {keyof typeof FAMILY} */ (kind.get(f.family) ?? '')];
-      if (!family) throw new Error(`message-collage: no generic family for ${f.family}'s kind ${kind.get(f.family)}`);
-      return `& .f${i} { font-family: ${family}; }`;
-    }),
-    ...palette.map((c, i) => `& .c${i} { fill: ${c}; }`),
-    '& .b { font-weight: 700; }',
-    '& .i { font-style: italic; }',
-    '& text { font-kerning: none; font-variant-ligatures: none; }',
     `& .card { fill: ${first.card.background}; transform: scaleY(${scale(0)}); }`,
     '& .layout + .layout { opacity: 0; }',
     // The still's group is a layer at rest as the loop makes every group, so its text is drawn
@@ -101,6 +73,7 @@ export async function build() {
     width: W,
     height: H,
     period,
+    defs: [...glyphs].map(([path, id]) => `<path id="${id}" d="${path}"/>`).join('\n'),
     body: `<g transform="translate(${num(x0)} ${num(y0)})"><rect class="card" width="${num(widthPt * k)}" height="${num(tallest * k)}"/></g>
 ${groups.join('\n')}`,
     css,

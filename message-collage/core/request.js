@@ -12,7 +12,7 @@ import { FAMILIES } from './catalogue.js';
  *   messages: string[], fonts: string[], styles: StyleName[], size_range: [number, number],
  *   width_in: number, height_in: number, grid_res: number | null, fill: number,
  *   line_gap: number, message_gap: number, palette: string[], background: string,
- *   shuffle: boolean, seed: number, runs: number, rotation_deg: number,
+ *   shuffle: boolean, seed: number, runs: number, rotation_deg: number, expand_messages: boolean,
  * }} Request
  */
 
@@ -56,6 +56,7 @@ export const DEFAULTS = Object.freeze({
   seed: 1,
   runs: 1,
   rotation_deg: 0,
+  expand_messages: false,
 });
 
 export const LIMITS = Object.freeze({
@@ -144,6 +145,7 @@ export function normalizeRequest(request) {
   }, true);
   const background = get('background');
   if (typeof background !== 'string' || !COLOR.test(background)) issues.push({ code: 'invalid_color', path: 'background', message: 'must be a colour as #rrggbb' });
+  if (typeof get('expand_messages') !== 'boolean') issues.push({ code: 'wrong_type', path: 'expand_messages', message: 'must be true or false' });
   if (typeof get('shuffle') !== 'boolean') issues.push({ code: 'wrong_type', path: 'shuffle', message: 'must be true or false' });
 
   if (issues.length) throw invalid(issues);
@@ -164,6 +166,7 @@ export function normalizeRequest(request) {
     seed: get('seed'),
     runs,
     rotation_deg: get('rotation_deg'),
+    expand_messages: get('expand_messages'),
   };
 }
 

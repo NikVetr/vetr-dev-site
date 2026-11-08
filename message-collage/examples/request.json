@@ -41,5 +41,6 @@
   "height_in": 4.8,
   "grid_res": 32,
   "fill": 0.75,
-  "rotation_deg": 4
+  "rotation_deg": 4,
+  "expand_messages": true
 }

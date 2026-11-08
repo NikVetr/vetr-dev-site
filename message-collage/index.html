@@ -151,10 +151,11 @@
         <label>Maximum message angle (degrees)
           <input id="rotation" type="number" min="0" max="10" step="0.5" value="4">
         </label>
+        <label class="check-label"><input id="expand-messages" type="checkbox"> Expand messages into spare space</label>
         <label class="check-label"><input id="shuffle" type="checkbox" checked> Shuffle the message order</label>
       </div>
       <p class="muted small">Gaps are fractions of each message's capital height. Fill sets one scale for all text: at 0.7, the messages set on single lines would cover 0.7² = 49% of the card.</p>
-      <p class="muted small">Message angles vary gently in both directions. An angle is reduced when needed to keep the text inside the card and clear of neighbouring messages; zero keeps every message horizontal.</p>
+      <p class="muted small">Expansion enlarges whole messages into clear space while preserving their text and line breaks. Message angles vary gently in both directions. An angle is reduced when needed to keep the text inside the card and clear of neighbouring messages; zero keeps every message horizontal.</p>
     </section>
 
     <section id="colours-card" class="card" aria-labelledby="colours-heading">

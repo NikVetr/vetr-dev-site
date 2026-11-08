@@ -10,6 +10,7 @@ import { measureMessages } from './measure.js';
 import { CollageError, normalizeRequest, STYLE_CODES } from './request.js';
 import { mean, roundHalfEven, sum } from './rmath.js';
 import { rotateMessages } from './rotation.js';
+import { expandMessages } from './expand.js';
 
 export { CollageError, DEFAULTS, LIMITS, normalizeRequest, parseMessages, STYLE_NAMES } from './request.js';
 export { FAMILIES, fontUrl } from './catalogue.js';
@@ -29,7 +30,7 @@ export { renderPdf, renderSvg } from './render.js';
  *   margin: number, background: string, cex_scale: number, empty_fraction: number, seed: number, pointsize: number }} Card
  * @typedef {{ index: number, input_index: number, text: string, family: string, style: number, style_name: StyleName,
  *   size: number, cex: number, font_size_pt: number, color: string, restarts: number, label: { x: number, y: number },
- *   rotation?: { angle_deg: number, x_in: number, y_in: number } }} Message
+ *   expansion?: number, rotation?: { angle_deg: number, x_in: number, y_in: number } }} Message
  * @typedef {{ message: number, line: number, text: string, col: number, layout_col: number, row: number, width: number,
  *   height: number, buffered_height: number, end_col: number, end_row: number, just: Just, snapped: boolean, x: number,
  *   y: number, cap_height: number, x_in: number, center_in: number, baseline_in: number, family: string, style: number,
@@ -142,6 +143,7 @@ export function makeCollage(req, faces, { onProgress, measure = measureMessages 
     request: req,
   };
   if (req.rotation_deg > 0) rotateMessages(result, faces);
+  if (req.expand_messages) expandMessages(result, faces);
   return result;
 }
 

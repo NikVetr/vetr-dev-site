@@ -26,7 +26,7 @@ const el = {
   upload: byId('upload'), families: byId('families'), styles: byId('styles'),
   sizePreset: byId('size-preset'), widthIn: byId('width-in'), heightIn: byId('height-in'), fill: byId('fill'), runs: byId('runs'),
   seed: byId('seed'), sizeMin: byId('size-min'), sizeMax: byId('size-max'), lineGap: byId('line-gap'), messageGap: byId('message-gap'),
-  gridRes: byId('grid-res'), rotation: byId('rotation'), shuffle: byId('shuffle'), scheme: byId('scheme'), backgroundPick: byId('background-pick'),
+  gridRes: byId('grid-res'), rotation: byId('rotation'), expand: byId('expand-messages'), shuffle: byId('shuffle'), scheme: byId('scheme'), backgroundPick: byId('background-pick'),
   background: byId('background'), palette: byId('palette'), swatches: byId('swatches'),
   generate: byId('generate'), reroll: byId('reroll'), stop: byId('stop'), progress: byId('progress'), status: byId('status'),
   runIssues: byId('run-issues'), noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), preview: byId('preview'),
@@ -152,6 +152,7 @@ function currentRequest() {
     line_gap: numberOf(el.lineGap),
     message_gap: numberOf(el.messageGap),
     rotation_deg: numberOf(el.rotation),
+    expand_messages: el.expand.checked,
     palette: paletteColours(),
     background: el.background.value.trim(),
     shuffle: el.shuffle.checked,
@@ -173,6 +174,7 @@ function loadRequest(request) {
   el.gridRes.value = r.grid_res === null ? '' : String(r.grid_res);
   for (const [field, key] of [['fill', 'fill'], ['lineGap', 'line_gap'], ['messageGap', 'message_gap'], ['rotation', 'rotation_deg'], ['seed', 'seed'], ['runs', 'runs']]) el[field].value = String(r[key]);
   el.shuffle.checked = r.shuffle;
+  el.expand.checked = r.expand_messages;
   el.palette.value = r.palette.join(' ');
   el.background.value = r.background;
   el.backgroundPick.value = r.background;
@@ -340,7 +342,8 @@ function showResult(next, svg, request, inputs) {
   const sorted = runs.map((r) => r.empty_fraction).sort((a, b) => a - b);
   const chosen = runs.findIndex((r) => r.seed === card.seed) + 1;
   el.summary.textContent = `${inches(card.width_in)} × ${inches(card.height_in)} in card${card.n_rows > card.target_rows ? ' (grown from ' + inches(next.request.height_in) + ' in to fit)' : ''} · `
-    + `${messages.length} messages in ${lines.length} lines · ${percent(card.empty_fraction)} empty, `
+    + `${messages.length} messages in ${lines.length} lines · `
+    + (next.request.expand_messages ? `messages expanded into spare space; ` : `${percent(card.empty_fraction)} empty, `)
     + (runs.length > 1 ? `the best of ${runs.length} layouts (layout ${chosen}; the others ${percent(sorted[1])} to ${percent(sorted.at(-1) ?? 0)})` : 'one layout tried');
   el.noResult.hidden = true;
   el.result.hidden = false;
@@ -354,12 +357,12 @@ function showResult(next, svg, request, inputs) {
 /** The input each request path a problem can be reported on. */
 const FIELDS = /** @type {Record<string, HTMLElement>} */ ({
   messages: el.messages, fonts: el.families, styles: el.styles, size_range: el.sizeMin, width_in: el.widthIn, height_in: el.heightIn,
-  grid_res: el.gridRes, fill: el.fill, line_gap: el.lineGap, message_gap: el.messageGap, rotation_deg: el.rotation, palette: el.palette, background: el.background,
+  grid_res: el.gridRes, fill: el.fill, line_gap: el.lineGap, message_gap: el.messageGap, rotation_deg: el.rotation, expand_messages: el.expand, palette: el.palette, background: el.background,
   shuffle: el.shuffle, seed: el.seed, runs: el.runs,
 });
 const FIELD_LABELS = /** @type {Record<string, string>} */ ({
   fonts: 'Fonts', styles: 'Styles', size_range: 'Relative sizes', width_in: 'Width', height_in: 'Height', grid_res: 'Layout cells per inch',
-  fill: 'Fill', line_gap: 'Gap between a message\'s lines', message_gap: 'Gap below each line', rotation_deg: 'Maximum message angle', palette: 'Text colours',
+  fill: 'Fill', line_gap: 'Gap between a message\'s lines', message_gap: 'Gap below each line', rotation_deg: 'Maximum message angle', expand_messages: 'Expand messages', palette: 'Text colours',
   background: 'Background', shuffle: 'Shuffle', seed: 'Seed', runs: 'Layouts to try',
 });
 
