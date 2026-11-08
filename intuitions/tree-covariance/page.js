@@ -490,6 +490,10 @@ for (const v of /** @type {View[]} */ (['covariance', 'reroot', 'pruning'])) {
 }
 
 installApi({
+  presentation: {
+    capture: () => ({ rotation: [...arrowRotation], step: state.pruning.step }),
+    restore: (saved) => { arrowRotation = saved.rotation; state.pruning.step = saved.step; showControls('pruning'); renderArrows(); renderPruning(); },
+  },
   entry: ENTRY,
   load: (/** @type {any} */ p, /** @type {any} */ result) => {
     const v = /** @type {View} */ (p.view);

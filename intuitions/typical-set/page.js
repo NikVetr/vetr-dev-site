@@ -290,6 +290,10 @@ showSphereControls();
 computeCube();
 
 installApi({
+  presentation: {
+    capture: () => ({ cubeK: state.cube.k }),
+    restore: (saved) => { state.cube.k = saved.cubeK; showCubeControls(); renderCube(); },
+  },
   entry: ENTRY,
   load: (/** @type {any} */ p) => {
     state.view = p.view;

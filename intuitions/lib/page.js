@@ -9,6 +9,8 @@ import { bindFormHistory, bindHistoryShortcuts, createHistory } from '../../shar
 // promise stays unsettled, just as when a newer slider request supersedes it.
 /** @type {Set<(request:{entry?:string,params:any})=>void>} */
 const cancelWorkers = new Set();
+/** @type {Map<string,{capture:()=>{time:number|null,speed:string},restore:(saved:{time:number|null,speed:string})=>void}>} */
+const playbackHistory = new Map();
 
 /**
  * Marks a field as invalid (aria-invalid="true", which also draws the red field style) or
@@ -209,6 +211,8 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
   const speed = /** @type {HTMLSelectElement} */ (get('speed'));
   const out = /** @type {HTMLOutputElement} */ (get('time-out'));
   let t = 0;
+  /** Explicit scrubs are history; animation ticks are not. @type {number|null} */
+  let manualTime = null;
   let playing = false;
   let frame = 0;
   let timer = 0;
@@ -262,17 +266,22 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
     frame = requestAnimationFrame(step);
   };
   play.addEventListener('click', () => (playing ? stop() : start()));
-  get('restart').addEventListener('click', () => { stop(); set(0); });
+  get('restart').addEventListener('click', () => { stop(); manualTime = 0; set(0); });
   slider.addEventListener('input', () => {
     const value = Number(slider.value); // stop() redraws the slider, so read it first
     stop();
+    manualTime = value;
     set(value);
   });
   reducedMotion.addEventListener('change', show);
+  playbackHistory.set(id, {
+    capture: () => ({ time: manualTime, speed: speed.value }),
+    restore: (saved) => { stop(); speed.value = saved.speed; manualTime = saved.time; set(saved.time ?? max()); },
+  });
   return {
     get time() { return t; },
     /** After a new result: stop, and show the whole run. */
-    reset() { stop(); t = max(); show(); },
+    reset() { stop(); manualTime = null; t = max(); show(); },
     show,
   };
 }
@@ -281,7 +290,8 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
  * Installs window.Intuitions for a page. submit() is the shared entry point; when the
  * request is for this page's entry, the page also shows it, given the response's
  * params and result (an invalid request throws and leaves the page as it was).
- * @param {{ entry?: string, load?: (params: any, result: any) => void, getParams?: () => unknown }} page
+ * @param {{ entry?: string, load?: (params: any, result: any) => void, getParams?: () => unknown,
+ * presentation?:{capture:()=>any,restore:(saved:any)=>void} }} page
  */
 export function installApi(page) {
   /** @type {ReturnType<typeof createHistory> | undefined} */
@@ -323,12 +333,16 @@ export function installApi(page) {
           // and application history retain the last applicable parameters.
           if (!(error instanceof IntuitionsError)) throw error;
         }
-        return valid;
+        return { params: valid, presentation: structuredClone(page.presentation?.capture()), playback: [...playbackHistory].map(([id, player]) => ({ id, saved: player.capture() })) };
       },
-      restore: (params) => {
-        for (const cancel of cancelWorkers) cancel({ entry: page.entry, params });
-        const response = submit({ entry: page.entry, params });
-        page.load?.(response.params, response.result);
+      restore: ({ params, presentation, playback: savedPlayback }) => {
+        if (JSON.stringify(params) !== JSON.stringify(valid)) {
+          for (const cancel of cancelWorkers) cancel({ entry: page.entry, params });
+          const response = submit({ entry: page.entry, params });
+          page.load?.(response.params, response.result);
+        }
+        page.presentation?.restore(presentation);
+        for (const { id, saved } of savedPlayback) playbackHistory.get(id)?.restore(saved);
       },
       onChange: (h) => { undo.disabled = !h.canUndo; redo.disabled = !h.canRedo; },
     });

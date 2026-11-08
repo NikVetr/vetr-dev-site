@@ -143,6 +143,10 @@ onWidth(sweepBox, renderSweep);
 renderTable();
 
 installApi({
+  presentation: {
+    capture: () => ({ zoom: zoomSelect.value, log: logScale.checked }),
+    restore: (saved) => { zoomSelect.value = saved.zoom; logScale.checked = saved.log; renderDensity(); renderSweep(); },
+  },
   entry: ENTRY,
   load: (/** @type {import('./compute.js').Params} */ p) => {
     params = { ...p, sweep: p.sweep ?? params.sweep };

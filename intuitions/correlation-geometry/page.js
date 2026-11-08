@@ -59,6 +59,8 @@ for (const view of /** @type {View[]} */ (['arrows', 'cone', 'cosine-rule', 'equ
 
 const TURNS = /** @type {const} */ ([['left', '◀', 'Turn left'], ['right', '▶', 'Turn right'], ['up', '▲', 'Tilt up'], ['down', '▼', 'Tilt down']]);
 
+/** @type {{capture:()=>Quat,restore:(saved:Quat)=>void}[]} */
+const sceneHistory = [];
 /**
  * A rotatable scene in `<id>-scene` with its turn buttons in `<id>-view`. `draw`
  * gets a camera and returns the SVG. Returns the redraw function.
@@ -85,6 +87,7 @@ function scene(id, start, draw) {
     } else control.turnBy(/** @type {'left' | 'right' | 'up' | 'down'} */ (dir));
   });
   onWidth(box, render);
+  sceneHistory.push({ capture: () => /** @type {Quat} */ ([...rotation]), restore: (saved) => { rotation = saved; render(); } });
   return render;
 }
 
@@ -560,6 +563,10 @@ onWidth(arrowsPanel.scatter, () => renderArrows());
 renderCone();
 
 installApi({
+  presentation: {
+    capture: () => sceneHistory.map((scene) => scene.capture()),
+    restore: (saved) => sceneHistory.forEach((scene, i) => scene.restore(saved[i])),
+  },
   entry: ENTRY,
   load: (/** @type {any} */ p) => {
     state.view = p.view;

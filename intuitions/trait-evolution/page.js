@@ -590,6 +590,10 @@ update('bivariate');
 update('bridge');
 
 installApi({
+  presentation: {
+    capture: () => ({ rotation: [...rotation], layout: state.tree.layout }),
+    restore: (saved) => { rotation = saved.rotation; state.tree.layout = saved.layout; showTreePanel(); renderTree(); renderBivariate(); },
+  },
   entry: ENTRY,
   load: (/** @type {any} */ p, /** @type {any} */ result) => {
     const v = /** @type {View} */ (p.view);

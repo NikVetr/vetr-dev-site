@@ -128,3 +128,46 @@ test('all thirteen teaching pages restore their canonical seeded requests', asyn
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
+
+test('teaching display settings, 3-D cameras and explicit scrubs undo independently of playback', async () => {
+  const browser = await openPage('intuitions/zscore-outliers/', { engine });
+  const { page, errors } = browser;
+  const visit = async (entry) => {
+    await page.goto(new URL(`/intuitions/${entry}/`, page.url()).href);
+    await page.waitForSelector('html[data-ready="true"]');
+  };
+  try {
+    await page.locator('#zoom').selectOption('5');
+    await page.keyboard.press('Control+z'); assert.equal(await page.locator('#zoom').inputValue(), '1');
+    await page.keyboard.press('Meta+Shift+z'); assert.equal(await page.locator('#zoom').inputValue(), '5');
+    await page.locator('#log-scale').uncheck();
+    await page.keyboard.press('Meta+z'); assert.equal(await page.locator('#log-scale').isChecked(), true);
+    for (const [entry, id] of [['correlation-geometry', 'arrows'], ['tree-covariance', 'covariance'], ['trait-evolution', 'bivariate']]) {
+      await visit(entry);
+      const scene = page.locator(`#${id}-scene`);
+      await scene.locator('svg').waitFor();
+      const initial = await scene.innerHTML();
+      await page.locator(`#${id}-view [data-turn="left"]`).click();
+      const turned = await scene.innerHTML();
+      assert.notEqual(turned, initial, entry);
+      await page.keyboard.press('Control+z'); assert.equal(await scene.innerHTML(), initial, `${entry} camera undo`);
+      await page.keyboard.press('Control+Shift+z'); assert.equal(await scene.innerHTML(), turned, `${entry} camera redo`);
+    }
+    await page.locator('input[name="tree-layout"][value="fan"]').check();
+    await page.keyboard.press('Control+z'); assert.equal(await page.locator('input[name="tree-layout"][value="rectangular"]').isChecked(), true);
+    await visit('typical-set');
+    await page.locator('#cube-k').selectOption('128');
+    await page.keyboard.press('Control+z'); assert.equal(await page.locator('#cube-k').inputValue(), '64');
+    await page.keyboard.press('Control+Shift+z'); assert.equal(await page.locator('#cube-k').inputValue(), '128');
+    await visit('backpack-fallacy');
+    await page.locator('input[name="curves-smaller"][value="16"]').check();
+    await page.keyboard.press('Control+z'); assert.equal(await page.locator('input[name="curves-smaller"]:checked').inputValue(), '2');
+    await visit('samplers');
+    await page.waitForFunction(() => Number(document.querySelector('#funnel-time').max) > 10);
+    await page.locator('#funnel-time').evaluate((field) => { field.value = '10'; field.dispatchEvent(new Event('input', { bubbles: true })); field.dispatchEvent(new Event('change', { bubbles: true })); });
+    await focusPage(page); await page.keyboard.press('Control+z');
+    assert.equal(await page.locator('#funnel-time').inputValue(), await page.locator('#funnel-time').getAttribute('max'));
+    await page.keyboard.press('Control+Shift+z'); assert.equal(await page.locator('#funnel-time').inputValue(), '10');
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});

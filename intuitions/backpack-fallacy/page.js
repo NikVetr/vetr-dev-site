@@ -169,6 +169,9 @@ function showSmaller() {
   const choices = sizes.slice(0, -1);
   if (choices.length && !choices.includes(state.smaller)) state.smaller = choices[0];
   $('curves-smaller').innerHTML = choices.map((n) => `<label><input type="radio" name="curves-smaller" value="${n}"${n === state.smaller ? ' checked' : ''}> ${n.toLocaleString('en-US')} per group</label>`).join('');
+  // WebKit preserves the focused radio's live checked state across replacement.
+  // Set the property as well as the default attribute when restoring a choice.
+  for (const radio of /** @type {NodeListOf<HTMLInputElement>} */ ($('curves-smaller').querySelectorAll('input'))) radio.checked = Number(radio.value) === state.smaller;
 }
 
 function showWindow() {
@@ -199,6 +202,10 @@ showControls();
 update();
 
 installApi({
+  presentation: {
+    capture: () => ({ smaller: state.smaller }),
+    restore: (saved) => { state.smaller = saved.smaller; showControls(); renderAll(); },
+  },
   entry: ENTRY,
   load: (/** @type {any} */ p, /** @type {any} */ r) => {
     Object.assign(state, { prior: p.prior, scale: p.scale, sizes: [...p.sizes], upTo: p.upTo, windowed: p.window > 0, window: p.window > 0 ? p.window : state.window, at: p.at });
