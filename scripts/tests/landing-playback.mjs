@@ -135,3 +135,28 @@ test('mobile centre playback, sticky controls, saved pause and reduced motion', 
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
+
+test('autoCHAIR logo movie pauses, resumes and is released for reduced motion', async () => {
+  const browser = await openPage('', { engine });
+  const { page, errors } = browser;
+  try {
+    const art = page.locator('[data-art="agendamatic"]');
+    await art.hover();
+    const video = art.locator('video');
+    await video.waitFor();
+    await page.waitForFunction(() => (document.querySelector('.autochair-video') instanceof HTMLVideoElement) &&
+      /** @type {HTMLVideoElement} */ (document.querySelector('.autochair-video')).currentTime > 0.1);
+    await page.mouse.move(0, 0);
+    assert.ok(await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.paused));
+    const time = await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.currentTime);
+    await page.waitForTimeout(150);
+    assert.equal(await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.currentTime), time);
+    await art.hover();
+    await page.waitForFunction((/** @type {number} */ t) => /** @type {HTMLVideoElement} */ (document.querySelector('.autochair-video')).currentTime > t + 0.1, time);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.waitForFunction(() => !document.querySelector('.autochair-video'));
+    assert.equal(await video.count(), 0);
+    assert.equal(await art.getAttribute('data-started'), null);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});

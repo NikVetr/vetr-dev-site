@@ -98,7 +98,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // style.css pauses started art without data-playing. Reduced motion keeps the still.
     loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-started]`)}\n}`,
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}" data-player-box="${playerBox}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''}${playerBox ? ` data-player-box="${playerBox}"` : ''} focusable="false">
 <style>
 ${style}
 </style>

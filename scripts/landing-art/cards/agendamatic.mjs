@@ -255,8 +255,15 @@ ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
     name: 'agendamatic',
     period,
     defs: gradient,
-    body: `${agenda}${tracker}${states}`,
-    css: `& text { font-family: ${FONT}; font-size: ${size}px; fill: var(--art-ink); }
+    player: 'autochair',
+    body: `<g class="agenda-scene">${agenda}${tracker}${states}</g>
+<g class="logo-scene"><image class="logo-still" href="agendamatic/assets/autoChair-logo-black.svg" x="64" y="8" width="192" height="162"/>
+<foreignObject class="logo-movie" x="64" y="8" width="192" height="162"/></g>`,
+    css: `& .logo-scene { opacity:0; pointer-events:none; }
+& .logo-movie video { display:block; width:100%; height:100%; object-fit:contain; }
+& .logo-scene:has([data-ready]) .logo-still { visibility:hidden; }
+:root[data-theme="dark"] & .logo-scene { filter:invert(1) hue-rotate(180deg); }
+& text { font-family: ${FONT}; font-size: ${size}px; fill: var(--art-ink); }
 & .head text { font-size: 7.5px; font-weight: 700; text-decoration: underline; }
 & .name { font-weight: 700; }
 & .chip { stroke-width: 0.7; }
@@ -275,7 +282,11 @@ ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
 & .marker { transform: translateX(${num(X(STILL), 3)}px); }
 & .progress .fill { transform: scaleX(${num(STILL / total, 4)}); }
 ${themeCss(light, '& ')}${themeCss(dark, ':root[data-theme="dark"] & ')}`,
-    loop,
+    loop: `${loop}
+& .logo-scene { animation: autochair-logo-scene ${period}s linear infinite; }
+& .agenda-scene { animation: autochair-agenda-scene ${period}s linear infinite; }
+@keyframes autochair-logo-scene { 0%,36%,100% {opacity:0;} 5%,30% {opacity:1;} }
+@keyframes autochair-agenda-scene { 0%,36%,100% {opacity:1;} 5%,30% {opacity:0;} }`,
   });
 }
 
