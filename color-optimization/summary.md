@@ -5,6 +5,7 @@ This project is a browser-based tool for extending discrete color palettes with 
 ## Architecture
 
 - `index.html`, `style.css`, and `main.js` define the application shell, controls, event flow, optimization orchestration, history, and result selection.
+- On narrow screens, advanced controls use native disclosures, with compact navigation links to input, Run/Stop, previews and hex output. `ui/workspaceNavigation.js` preserves disclosure choices through resizing and reveals invalid controls without changing settings or optimizer state; desktop settings start expanded.
 - `core/` contains color-space conversion, CVD simulation, perceptual distance metrics, aggregation means, random seeding, and resolvability utilities.
 - `optimizer/` contains constraint/bounds construction, the objective function, Nelder-Mead search, and restart initialization. Gamut-aware optimization projects candidate colors into the selected display gamut when optimization clipping is enabled.
 - The solver uses elapsed-time cooperative scheduling and a private seeded random stream per optimization. Prepared constraint bindings and bounded color-coordinate caches reduce repeated work; trajectory decoding shares the output pipeline without repeating the scoring calculation. Progress painting is independent of solver completion, with bounded geometry caches for gamut boundaries and extents.

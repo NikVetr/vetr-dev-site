@@ -56,6 +56,13 @@
       </div>
     </header>
 
+    <nav class="workspace-nav" aria-label="Palette workspace">
+      <a href="#palette-input">Input</a>
+      <a href="#run-btn">Run / Stop</a>
+      <a href="#result-nav">Preview</a>
+      <a href="#results-box">Hex codes</a>
+    </nav>
+
     <section class="layout">
       <div class="controls stack">
         <div class="control-block wide">
@@ -108,8 +115,8 @@
           </div>
         </div>
 
-        <div class="control-block">
-          <h3>Optimization Settings</h3>
+        <details class="control-block settings-section" open>
+          <summary><h3>Optimization Settings</h3></summary>
           <input id="raw-input-values" type="hidden">
           <div class="field">
             <label for="search-strategy">Search strategy</label>
@@ -192,10 +199,10 @@
             </div>
           </div>
           <p class="small">Scores describe exported sRGB hex colors. Discriminability labels are heuristic; they do not certify accessibility.</p>
-        </div>
+        </details>
 
-        <div class="control-block">
-          <h3>Colorvision Settings</h3>
+        <details class="control-block settings-section" open>
+          <summary><h3>Colorvision Settings</h3></summary>
           <div class="field">
             <label for="cvd-model">CVD Model</label>
             <select id="cvd-model">
@@ -228,10 +235,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </details>
 
-        <div class="control-block">
-          <h3>Constraints</h3>
+        <details class="control-block settings-section" open>
+          <summary><h3>Constraints</h3></summary>
           <div class="field two-col">
             <div>
               <label for="constraint-topology">Topology</label>
@@ -312,10 +319,10 @@
           </div>
           <div class="field constraint-individual-panel" id="constraint-individual-panel" hidden>
           </div>
-        </div>
+        </details>
 
-        <div class="control-block">
-          <h3>Visualization</h3>
+        <details class="control-block settings-section" open>
+          <summary><h3>Visualization</h3></summary>
           <div class="field">
             <div class="inline-row between">
               <label for="colorwheel-space">Colorspace</label>
@@ -340,14 +347,14 @@
               <option value="jzazbz">JzAzBz</option>
             </select>
           </div>
-        </div>
+        </details>
 
         <!-- Hidden field for gamut-mode, kept for compatibility -->
         <input id="gamut-mode" type="hidden" value="auto">
       </div>
 
       <div class="right-side">
-        <div class="result-nav" id="result-nav">
+        <div class="result-nav" id="result-nav" tabindex="-1" role="group" aria-label="Palette results">
           <div class="result-nav-left">
             <button id="result-prev" type="button" aria-label="Previous result" class="result-nav-btn">‹</button>
             <div class="result-nav-center">
@@ -444,6 +451,7 @@
     </div>
     <div class="science-body"></div>
   </dialog>
+  <script type="module" src="ui/workspaceNavigation.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>

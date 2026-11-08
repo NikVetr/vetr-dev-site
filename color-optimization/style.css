@@ -340,6 +340,13 @@ button.ghost {
   grid-column: 1 / -1;
 }
 
+.settings-section { flex-shrink: 0; }
+.settings-section > summary { cursor: pointer; font-size: 15px; font-weight: 800; }
+.settings-section > summary h3 { display: inline; margin: 0; }
+.settings-section[open] > summary { margin-bottom: 8px; }
+.settings-section > summary:focus-visible { outline: 2px solid #173cff; outline-offset: 4px; }
+.workspace-nav { display: none; }
+
 label {
   display: block;
   font-weight: 600;
@@ -2682,4 +2689,46 @@ body.image-picker-open .page {
     grid-column: 1;
     grid-row: 3;
   }
+
+  .workspace-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-shrink: 0;
+    background: #eef7ff;
+    border-bottom: 1px solid #dbe3ee;
+  }
+  .workspace-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #344b5b;
+    font-size: 13px;
+    font-weight: 600;
+    text-underline-offset: .2em;
+  }
+  .workspace-nav a:focus-visible { outline: 2px solid #173cff; outline-offset: 2px; }
+  #palette-input, #run-btn, #result-nav, #results-box, .settings-section :is(input, select) { scroll-margin-top: 56px; }
+  .settings-section { padding-block: 0; }
+  .settings-section > summary { padding-block: 13px; min-height: 44px; }
+  .settings-section[open] { padding-bottom: 10px; }
+  .settings-section[open] > summary { margin-bottom: 0; }
+  .results-row button { min-height: 44px; }
+  .hero h1 { font-size: 18px; }
+  .eyebrow-title { font-size: 32px; }
+}
+
+@media (max-width: 720px) {
+  .page { padding: 12px; }
+  .hero { position: relative; padding: 14px; gap: 8px; }
+  .eyebrow-title { font-size: 28px; letter-spacing: .06em; padding-right: 40px; }
+  .hero h1 { font-size: 16px; }
+  .subhead { font-size: 14px; }
+  .hero .science-help { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; }
+  .actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 0; }
+  .undo-redo-row { display: contents; }
+  .actions button { min-width: 0; min-height: 44px; width: 100%; padding: 8px 4px; font-size: 14px; }
 }
