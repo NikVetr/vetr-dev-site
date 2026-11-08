@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "python3 -m http.server 4183 --bind 127.0.0.1",
     "render": "node scripts/render.cjs",
-    "test:unit": "node --test tests/layout.test.js tests/io.test.js tests/transform.test.js tests/paths.test.js tests/edit.test.js tests/glyphs.test.js",
+    "test:unit": "node --test tests/layout.test.js tests/io.test.js tests/transform.test.js tests/paths.test.js tests/playback.test.js tests/edit.test.js tests/glyphs.test.js",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e"
   },

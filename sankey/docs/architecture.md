@@ -43,6 +43,7 @@ The application uses ordinary HTML, CSS, and JavaScript script tags under a shar
 | `table-controls.js` | Retained source operations, sidebar row filters, and subset captions. |
 | `column-strip.js` | Arrange strip positioning, column/value dragging, and hover beams. |
 | `paths.js` | Pathway/member slices, trace geometry, hit testing, and annotation anchors. |
+| `playback.js` | Recorded-member/weighted-path sequencing, progressive trajectory clips and playback controls; uses existing path geometry without changing project data. |
 | `edit.js` | Layered-node merging and remapping related data. |
 | `app.js` | Application state, layout orchestration, controls, interactions, trace overlays, inspector, history, persistence, and exports. |
 | `submission.js`, `scripts/render.cjs` | JSON submission contract and headless CLI/Node export interface. |
@@ -67,6 +68,8 @@ Serializable state includes input matrices, locations, retained source data, sty
 The arrange strip shows columns above their nodes and supports hiding, reordering, filtering values, and ordering nodes; long value lists flow into numbered sub-columns, arrows at its ends scroll to columns out of view, and merges of an imported table's nodes are kept with the table (`sourceTable.merges`, recoded on every rebuild) and listed as one value, which can be split back. Sidebar filters operate on source rows; long-table stage filters operate on whole items. Rebuilds regenerate locations and clear manual node/strand edits, while retaining styling, global parameters and the thickness multiplier. Per-stage routing follows unchanged ordered adjacent column pairs; new or reversed pairs use global defaults.
 
 Clicks and Shift-clicks emphasize nodes, strands, or pathway/item selections. Modifier hover identifies individual pathways or members. Dragging changes node positions or strand stacking. Collision handling constrains or pushes nodes. Traces reuse the base geometry and colors; gathering, overlap handling, count labels, percentages, and persistent substrand lines are configurable.
+
+Trajectory playback uses complete recorded member slices, or whole weighted paths when IDs are absent. It reuses `paths.tracePolygon()` and reveals each full path with an advancing clip; completed slices remain filled. Progress, timers and overlay geometry are ephemeral. Edits reset playback, viewport resizing rebuilds it at the same progress, and reduced motion replaces timed play with discrete steps. SVG/PNG capture the visible frame; project and R exports remain static. No complete trajectories are inferred from marginal flow matrices.
 
 History keeps up to 100 serialized state snapshots. Browser autosave is debounced through localStorage. Project JSON preserves the serializable state and applies defaults/migration flags on load. CSV, table, project, and programmatic imports share candidate validation before replacing state. Validation covers data structure, layout, colors and base rendering; rejected candidates preserve working data and autosave. The import dialog invalidates its conversion immediately when text changes and reparses after a debounce.
 

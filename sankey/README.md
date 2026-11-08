@@ -13,6 +13,10 @@ npm run serve        # python3 -m http.server 4183, then open http://127.0.0.1:4
 
 The toolbar's **Text size** slider scales labels, node bodies, ribbons and their spacing together. Larger diagrams scroll at their native size; the Fit button remains available. Raw flow values and node coordinates are preserved, and Undo restores the previous size. The exported diagram and saved project keep the chosen size.
 
+**Play paths** fills complete recorded trajectories from left to right. Pause, Reset and the progress slider control the accumulating substrands. With reduced motion, **Next path** steps without animation. Imports with IDs play their member records; aggregate tables play weighted complete paths and say “no IDs.” Marginal flow matrices alone cannot establish complete trajectories and cannot play. Display order is not chronology. The bundled patient cohort is an explicitly illustrative set of 560 synthetic records generated from the fictitious patient-pathway counts.
+
+Playback leaves project data and history unchanged. Edits reset it; resizing the viewport preserves progress. SVG/PNG exports capture the current frame. Project and R-bundle exports retain the editable static diagram.
+
 ## Programmatic submissions
 
 `window.SankeyApp.submit(request)` loads data, validates it, and draws synchronously without opening a dialog. It returns a detached project object, suitable for saving or submitting again. Invalid requests throw a `SankeyError` before replacing the working project; rejected data does not enter history or autosave. Requests must contain JSON data with finite numbers. Unknown request fields and unknown `style`/`params` names are rejected.

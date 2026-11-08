@@ -37,6 +37,15 @@ button, select, input, textarea { font: inherit; color: inherit; }
 .text-size-control { flex: 0 1 245px; max-width: 100%; padding: 4px 8px; }
 .text-size-control .row { grid-template-columns: auto minmax(0, 1fr); gap: 8px; margin: 0; width: 100%; }
 .text-size-control .range { min-width: 120px; }
+.trajectory-controls { max-width: 100%; }
+.trajectory-controls input { width: 90px; min-width: 50px; accent-color: var(--accent); }
+.trajectory-controls output { width: 205px; max-width: 100%; font-size: 11px; color: var(--muted); padding: 0 4px; }
+#trajectory-play { min-width: 105px; }
+#plot.playback-active .layer-ribbons, #plot.playback-active .layer-trunks,
+#plot.playback-active .layer-ghosts, #plot.playback-active .layer-strand-outlines { opacity: 0.12; }
+#plot.playback-active .layer-traces, #plot.playback-active .layer-fills,
+#plot.playback-active .layer-trace-labels { display: none; }
+#plot.playback-active .node-label { opacity: 1; }
 
 .btn {
   display: inline-flex;
@@ -534,6 +543,11 @@ dialog.import { width: min(880px, 94vw); max-width: none; }
     box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
     pointer-events: none;
   }
+}
+
+/* A short landscape window scrolls instead of squeezing the plot behind the arrange strip. */
+@media (min-width: 701px) and (max-height: 600px) {
+  .layout { flex: 0 0 420px; }
 }
 
 /* On a phone the plot spans the width above the settings, and the page scrolls. */

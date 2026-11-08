@@ -51,12 +51,19 @@ From R, write the request with `jsonlite::write_json(request, "request.json", au
 | --- | --- |
 | `submit(request)` | Validates the request, replaces the working project with it and draws it. Returns a detached copy of the new project. An invalid request throws before anything is replaced, and the rejected data does not enter undo history or autosave. |
 | `getProject()` | Returns a detached copy of the current project. |
+| `getPlayback()` | Returns playback availability, active/playing flags, progress, completed/total counts, kind (`records` or `paths`), description and any unavailability reason. |
+| `playTrajectories()` | Plays complete trajectories in display order. With reduced motion, advances one completed trajectory without a timer. Throws when complete matching forward paths are unavailable. |
+| `pauseTrajectories()` | Pauses, retaining the filled substrands. |
+| `resetTrajectories()` | Restores the ordinary diagram and clears playback progress. |
+| `seekTrajectories(progress)` | Displays an exact paused frame. Requires a finite fraction from 0 to 1. |
 | `setTextSize(pixels)` | Scales the current diagram's labels, nodes, ribbons and spacing together, preserves raw flows and node coordinates, resets presentation to native size, and records an undo step. Returns a detached project. Requires a finite positive number. |
 | `exportSvgText()` | Returns the plot as shown, as SVG text. |
 | `exportPngBlob()` | Returns a Promise of the plot as a PNG `Blob` at 2× resolution. |
 | `exportBundle()` | Returns the R bundle as zip bytes (a `Uint8Array`). It holds the flow matrices, the resolved color matrices, `loc.csv`, a `sankey.R` script and `project.json`. |
 
 There is no HTTP endpoint.
+
+Playback operations return the same status shape as `getPlayback()`. They do not modify project data or undo history. SVG/PNG export the currently displayed frame; project/R-bundle exports remain static. Data/layout edits reset playback, while viewport resizing preserves it. Member IDs and weights come from the supplied complete paths. Without members, each weighted path stays grouped; the API never fabricates IDs or reconstructs complete trajectories from edge totals. The bundled 560-record patient cohort is synthetic and labeled illustrative.
 
 ## Request
 

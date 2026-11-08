@@ -37,6 +37,12 @@
         <button id="merge-nodes" class="btn danger" hidden>Merge nodes</button>
       </div>
       <div id="text-size-control" class="tool-group text-size-control"></div>
+      <div class="tool-group trajectory-controls" aria-label="Trajectory playback">
+        <button id="trajectory-play" class="btn" disabled>Play paths</button>
+        <button id="trajectory-reset" class="btn" disabled>Reset</button>
+        <input id="trajectory-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Trajectory progress" disabled>
+        <output id="trajectory-status">Load a table with complete paths</output>
+      </div>
       <div class="tool-group">
         <button class="btn" data-export="svg" title="Download the plot as shown, focused substrands included, as an SVG image">SVG</button>
         <button class="btn" data-export="png" title="Download the plot as shown, focused substrands included, as a PNG image (2×)">PNG</button>
@@ -200,6 +206,13 @@
           <li>The toolbar's fit-panel and fit-height buttons scale the whole drawing, including text. Fit-height
             allows horizontal scrolling; the magnifier buttons zoom in and out.</li>
           <li><b>Auto-layout</b> (toolbar) places the nodes afresh, as an import would.</li>
+          <li><b>Play paths</b> progressively fills complete recorded trajectories from left to right, keeping
+            completed slices visible. Pause, Reset or seek with the progress slider. With reduced motion,
+            <b>Next path</b> steps without animation. Display order is not chronology. Tables with IDs play
+            their records; weighted tables without IDs play grouped paths. Edits reset playback; SVG/PNG
+            capture its current frame.</li>
+          <li>The patient examples are fictitious. The one-row-per-patient cohort contains 560 synthetic
+            records derived from the bundled grouped counts; it is an illustration, not a clinical dataset.</li>
           <li>The SVG and PNG buttons export the plot as shown, including any focused substrands.</li>
           <li>Drag any of several emphasized nodes to move them all together, or merge two or more in one column with the <b>Merge</b> button that appears (Ctrl/⌘+Z undoes).</li>
           <li>Dragging a node into a neighbour stops at a wall, or pushes it along (Canvas &amp; dragging).</li>
@@ -305,6 +318,7 @@
   <script src="js/transform.js"></script>
   <script src="js/shapes.js"></script>
   <script src="js/paths.js"></script>
+  <script src="js/playback.js"></script>
   <script src="js/edit.js"></script>
   <script src="js/render.js"></script>
   <script src="js/glyphs.js"></script>

@@ -267,7 +267,9 @@
       const width = Math.abs(SK.layout.pointAtX(f.upper, X)[1] - SK.layout.pointAtX(f.lower, X)[1]);
       return { X, Y, angle, thickness: width * (b - a) * Math.abs(Math.cos(angle)) };
     };
-    return Object.assign({ flow: f.index, length, alternatives: [0.4, 0.6, 0.3, 0.7].map(at) }, at(0.5));
+    // Finer fallback positions leave room between nearby crossings without detaching labels
+    // from their recorded substrand. Prefer the established central positions when they fit.
+    return Object.assign({ flow: f.index, length, alternatives: [0.4, 0.6, 0.3, 0.7, 0.45, 0.55, 0.35, 0.65, 0.25, 0.75].map(at) }, at(0.5));
   }
 
   // How far a trace runs into an end node's body (to the centre of a fading label body), or null.

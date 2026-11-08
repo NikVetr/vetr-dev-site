@@ -1,19 +1,17 @@
 // Sankey: the app's fictitious patient-pathways example, laid out and coloured by the app,
 // with larger labels for card-scale reading. Keep the exported strands, nodes and labels;
 // simplify geometry below a pixel, and omit hairline strand outlines.
-// The loop is the page's emphasis, clicking each source in turn: its node and strands stay as they
-// are while every other strand fades to the page's 16%, every other node blends towards the
-// background as the page's dim-node filter does, and the outlines go. It ends with nothing
-// emphasised, the still, as it starts.
+// The loop fills each complete synthetic patient's real member slice from left to right.
+// It uses the app's existing illustrative cohort (not inferred identities from flow matrices),
+// and the same playback geometry and display order as the app. Completed slices accumulate.
 import { readFileSync } from 'node:fs';
 import { openPage } from '../browser.mjs';
 import { H, W, art, num } from '../svg.mjs';
 
 const CANVAS = [900, 500];
 const FONT_SIZE = 26;
-const NONE = 1.3;            // seconds with nothing emphasised (the still), across the wrap
-const EACH = 1.0;            // seconds each source is emphasised
-const FADE = 0.15;
+const PERIOD = 12;
+const CAPTION = 14;
 const MARGIN = 4;
 
 /** The card's paper colour in each theme, from the landing page's tokens. */
@@ -25,8 +23,7 @@ function papers() {
 }
 
 /**
- * The page's drawing of the patient-pathways example, on each background, and what a click on each source
- * node emphasises.
+ * The page's drawing and complete member-path playback geometry on each background.
  * @param {{ light: string, dark: string }} bg
  */
 async function readPage(bg) {
@@ -36,30 +33,19 @@ async function readPage(bg) {
     /** @param {string} colour */
     const draw = (colour) => page.evaluate((/** @type {[number, number, number, string]} */ [w, h, fontSize, bgColour]) => {
       const app = /** @type {any} */ (window).SankeyApp;
-      const example = /** @type {any} */ (window).SK.examples.find((/** @type {any} */ e) => e.id === 'pathways');
+      const example = /** @type {any} */ (window).SK.examples.find((/** @type {any} */ e) => e.id === 'cohort');
       app.submit({ type: 'table', text: example.files[example.table], spec: example.importSpec,
         options: example.importOptions, params: example.params, labels: 'above',
         style: { ...example.style, canvasWidth: w, canvasHeight: h, fontSize,
           labelCounts: false, tracePaths: false, bg: bgColour } });
-      return /** @type {string} */ (app.exportSvgText());
+      const base = /** @type {string} */ (app.exportSvgText());
+      const status = app.seekTrajectories(1);
+      if (status.kind !== 'records' || status.total !== 560) throw new Error('sankey: expected the bundled 560-record illustrative cohort');
+      return {base, full: /** @type {string} */ (app.exportSvgText())};
     }, [CANVAS[0], CANVAS[1], FONT_SIZE, colour]);
     const dark = await draw(bg.dark);
     const light = await draw(bg.light);
-    // The sources are the first stage's nodes; a click on each emphasises what highlightSets gives.
-    const sources = await page.evaluate(() => /** @type {any} */ (window).SankeyApp.getProject().loc
-      .map((/** @type {any} */ l, /** @type {number} */ i) => ({ set: l.set, i })).filter((/** @type {any} */ l) => l.set === 1).map((/** @type {any} */ l) => l.i));
-    const emphasis = [];
-    for (const id of sources) {
-      await page.locator(`#plot .trunk[data-node="${id}"]`).last().click({ force: true });
-      emphasis.push(await page.evaluate(() => ({
-        flows: [...new Set([...document.querySelectorAll('#plot .ribbon.hl')].map((e) => Number(/** @type {HTMLElement} */ (e).dataset.flow)))],
-        nodes: [...new Set([...document.querySelectorAll('#plot .trunk.hl')].map((e) => Number(/** @type {HTMLElement} */ (e).dataset.node)))],
-        dimmed: /** @type {Element} */ (document.querySelector('#plot')).classList.contains('dimmed'),
-      })));
-      await page.keyboard.press('Escape');
-    }
-    if (emphasis.some((e) => !e.dimmed || !e.flows.length)) throw new Error('sankey: a click did not emphasise its node');
-    return { light, dark, emphasis };
+    return {light:light.base, dark:dark.base, playbackLight:light.full, playbackDark:dark.full};
   } finally {
     await close();
   }
@@ -83,13 +69,13 @@ function simplify(pts, eps) {
 
 export async function build() {
   const bg = papers();
-  const { light, dark, emphasis } = await readPage(bg);
+  const { light, dark, playbackLight, playbackDark } = await readPage(bg);
 
   // The drawing's frame onto the canvas.
   const vb = /viewBox="([-\d.]+) ([-\d.]+) ([\d.]+) ([\d.]+)"/.exec(light)?.slice(1).map(Number);
   if (!vb) throw new Error('sankey: the export has no viewBox');
-  const k = Math.min((W - 2 * MARGIN) / vb[2], (H - 2 * MARGIN) / vb[3]);
-  const [ox, oy] = [(W - vb[2] * k) / 2, (H - vb[3] * k) / 2];
+  const k = Math.min((W - 2 * MARGIN) / vb[2], (H - CAPTION - 2 * MARGIN) / vb[3]);
+  const [ox, oy] = [(W - vb[2] * k) / 2, CAPTION + (H - CAPTION - vb[3] * k) / 2];
   const X = (/** @type {number} */ x) => (x - vb[0]) * k + ox;
   const Y = (/** @type {number} */ y) => (y - vb[1]) * k + oy;
   /** Path data of the export (M/L/Z only) on the canvas, simplified. @param {string} d @param {boolean} [open] */
@@ -98,7 +84,7 @@ export async function build() {
     return d.split('M').filter(Boolean).map((sub) => {
       const closed = sub.trim().endsWith('Z');
       const pts = sub.replace('Z', '').split('L').map((p) => p.trim().split(/[\s,]+/).map(Number)).map(([x, y]) => [X(x), Y(y)]);
-      const kept = simplify(closed && !open ? [...pts, pts[0]] : pts, 0.04);
+      const kept = simplify(closed && !open ? [...pts, pts[0]] : pts, 0.12);
       const out = closed && !open ? kept.slice(0, -1) : kept;
       return `M${out.map(([x, y]) => `${num(x)} ${num(y)}`).join('L')}${closed ? 'Z' : ''}`;
     }).join('');
@@ -182,7 +168,6 @@ export async function build() {
     outlines += `<path d="${path(m[1], true)}" mask="url(#sankey-edge${id})"/>`;
   }
   defs += [...nodes.entries()].map(([id, ds]) => `<path id="sankey-n${id}" d="${ds.join('')}"/>`).join('');
-  const dims = [...nodes.keys()].map((id) => `<use class="dim n${id}" href="#sankey-n${id}"/>`).join('');
 
   // Strands seen faintly through the nodes they pass behind.
   const behind = new Map(all(/<clipPath id="behind(\d+)"><path d="([^"]+)"\/><\/clipPath>/g).map((m) => [m[1], m[2]]));
@@ -190,48 +175,50 @@ export async function build() {
   const ghosts = all(/<use class="ribbon-ghost" data-flow="(\d+)" href="#strand-shape\d+" clip-path="url\(#behind(\d+)\)" opacity="([\d.]+)" fill="url\(#gs\d+\)"\/>/g)
     .map((m) => `<use class="ghost g${m[1]}" href="#sankey-s${m[1]}" clip-path="url(#sankey-behind${m[2]})" fill="url(#sankey-gs${m[1]})"/>`).join('');
 
-  // The loop: nothing, each source, nothing. Every strand, node and ghost with the same opacities
-  // through the states shares one animation.
-  const states = [null, ...emphasis];
-  const period = NONE + emphasis.length * EACH;
-  const starts = states.map((_, i) => (i ? NONE / 2 + (i - 1) * EACH : 0));
-  const p = (/** @type {number} */ t) => num((100 * t) / period, 3);
-  /** @type {Map<string, string[]>} opacities through the states -> selectors */
-  const groups = new Map();
-  const add = (/** @type {string} */ sel, /** @type {number[]} */ values) => groups.set(values.join(' '), [...(groups.get(values.join(' ')) ?? []), sel]);
-  for (const s of strands) add(`.f${s.flow}`, states.map((e) => (!e || e.flows.includes(s.flow) ? 1 : 0.16)));
-  for (const s of strands) add(`.g${s.flow}`, states.map((e) => (!e || e.flows.includes(s.flow) ? 0.3 : 0.05)));
-  for (const id of nodes.keys()) add(`.n${id}`, states.map((e) => (!e || e.nodes.includes(id) ? 0 : 0.65)));
-  add('.outline', states.map((e) => (e ? 0 : 1)));
-  let loop = '';
-  [...groups.entries()].forEach(([key, sels], j) => {
-    const v = key.split(' ');
-    if (v.every((x) => x === v[0])) return;
-    const stops = [`0% { opacity: ${v[0]}; }`];
-    for (let i = 1; i <= states.length; i++) {
-      const [from, to] = [v[i - 1], v[i % states.length]];
-      const t = i < states.length ? starts[i] : NONE / 2 + emphasis.length * EACH;
-      if (from !== to) stops.push(`${p(t)}% { opacity: ${from}; }`, `${p(t + FADE)}% { opacity: ${to}; }`);
+  // Each patient's shape is exported by the same controller that drives app playback.
+  const patientPaths = all(/<path class="playback-unit" data-unit="(\d+)" data-path="(\d+)" data-member="(\d+)" d="([^"]+)" fill="url\(#playback-gradient-\d+\)" clip-path="url\(#playback-clip-\d+\)"\/>/g, playbackLight);
+  if (patientPaths.length !== 560) throw new Error(`sankey: only ${patientPaths.length} complete patient slices were exported`);
+  const gradIds = [...new Set(patientPaths.map(m=>m[2]))];
+  for (const id of gradIds) {
+    for (const [suffix, exported] of [['',playbackLight],['d',playbackDark]]) {
+      const m = new RegExp(`<linearGradient id="playback-gradient-${id}" gradientUnits="userSpaceOnUse" x1="([-\\d.]+)" y1="0" x2="([-\\d.]+)" y2="0">(.*?)</linearGradient>`).exec(exported);
+      if (!m) throw new Error(`sankey: missing patient gradient ${id}`);
+      defs += `<linearGradient id="sankey-pg${id}${suffix}" gradientUnits="userSpaceOnUse" x1="${num(X(Number(m[1])),2)}" x2="${num(X(Number(m[2])),2)}">${m[3].replace(/offset="([\d.]+)%"/g,(_,offset)=>`offset="${num(Number(offset),3)}%"`)}</linearGradient>`;
     }
-    stops.push(`100% { opacity: ${v[0]}; }`);
-    loop += `& :is(${sels.map((s) => `${s}`).join(', ')}) { animation: sankey-e${j} ${num(period, 3)}s linear infinite; }
-@keyframes sankey-e${j} { ${stops.join(' ')} }
+    css += `:root[data-theme="dark"] & .patient${id} { fill: url(#sankey-pg${id}d); }\n`;
+  }
+  let patients = '';
+  let loop = `& .guides { animation: sankey-guide ${PERIOD}s linear infinite; }
+& .patients { animation: sankey-patients ${PERIOD}s linear infinite; }
+@keyframes sankey-guide { 0%,6%,94%,100% { opacity:1; } 10%,90% { opacity:0.12; } }
+@keyframes sankey-patients { 0%,6%,94%,100% { opacity:0; } 10%,90% { opacity:1; } }
+`;
+  const count = patientPaths.length;
+  patientPaths.forEach((m,i)=>{
+    const clip = new RegExp(`<clipPath id="playback-clip-${m[1]}"><rect x="([-\\d.]+)" y="0" width="([-\\d.]+)" height="[\\d.]+"\\/>`).exec(playbackLight);
+    if (!clip) throw new Error(`sankey: missing patient clip ${m[1]}`);
+    defs += `<clipPath id="sankey-pclip${i}"><rect class="reveal${i}" x="${num(X(Number(clip[1])),2)}" y="0" width="${num(Number(clip[2])*k,2)}" height="${H}"/></clipPath>`;
+    patients += `<path class="patient${m[2]}" data-record="${i}" d="${path(m[4])}" fill="url(#sankey-pg${m[2]})" clip-path="url(#sankey-pclip${i})"/>`;
+    const start = 10 + 80 * i/(count-1) * 0.86, end = start + 80 * 0.14;
+    loop += `& .reveal${i} { transform-box:fill-box; transform-origin:left center; animation:sankey-p${i} ${PERIOD}s linear infinite; }
+@keyframes sankey-p${i} { 0%,${num(start,3)}% { transform:scaleX(0); } ${num(end,3)}%,100% { transform:scaleX(1); } }
 `;
   });
-  if (NONE / 2 + emphasis.length * EACH + FADE > period - 0.1) throw new Error('sankey: the last fade runs into the wrap');
 
   return art({
     name: 'sankey',
-    period,
+    period: PERIOD,
     defs,
-    body: `<g class="ribbons">${ribbons.join('')}</g>
+    body: `<text class="caption" x="8" y="9">Illustrative patients · 560 records</text>
+<g class="guides"><g class="ribbons">${ribbons.join('')}</g>
 <g class="trunks">${trunks}</g>
 <g class="outline">${outlines}</g>
-<g class="dims">${dims}</g>
-<g class="ghosts">${ghosts}</g>
+<g class="ghosts">${ghosts}</g></g>
+<g class="patients">${patients}</g>
 <g class="labels">${labels}</g>`,
     css: `& .outline { fill: none; stroke: #000; stroke-width: 0.6; stroke-linejoin: round; }
-& .dim { fill: var(--art-paper); opacity: 0; }
+& .patients { opacity: 0; }
+& .caption { fill: var(--art-muted); font: 8px Helvetica, Arial, sans-serif; }
 & .ghost { opacity: 0.3; }
 & .labels { fill: var(--art-ink); text-anchor: middle; dominant-baseline: central; font-family: Helvetica, Arial, sans-serif; }
 ${css}`,

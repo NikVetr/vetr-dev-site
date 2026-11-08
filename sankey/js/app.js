@@ -1,7 +1,7 @@
 /* Interactive Sankey app: state, controls, file loading, rendering, interaction and export. */
 (function () {
   'use strict';
-  const { layout: L, color: C, csv: CSV, shapes: S, render: R, paths: P } = window.SK;
+  const { layout: L, color: C, csv: CSV, shapes: S, render: R, paths: P, playback: Playback } = window.SK;
   const $ = (selector) => document.querySelector(selector);
   const STORAGE_KEY = 'polylines-sankey-v1';
   const MARGIN = 18;
@@ -62,11 +62,13 @@
   });
 
   let state = blankState();
-  let layout = null;
-  let colors = null;
+  let layout = /** @type {any} */ (null);
+  let colors = /** @type {any} */ (null);
   /** @type {{width: number, height: number, margin: {top: number, bottom: number, left: number, right: number}, subset: {height: number, lines: {text: string, bold: boolean}[][], markup: string}} | null} */
   let frame = null;
   let displayScale = 1;
+  const playback = Playback.create(svg, () => ({ layout, colors, frame, style:state.style,
+    paths:state.paths, illustrative:'example' in state && state.example === 'cohort' }));
   let traces = null; // { subs, paths, total } when item-level pathways can be traced
   let lastPointer = null;
   let selection = null; // { kind: 'flow' | 'node', key, paths, member, single }: traces pinned by the click
@@ -621,6 +623,8 @@
 
   function update(options) {
     const opts = options || {};
+    const priorPlayback = opts.preservePlayback ? playback.snapshot() : null;
+    playback.reset();
     // Fitting recomputes how wide an imported table's canvas must be, so a canvas widened earlier
     // shrinks back unless the current layout still needs the room (keepCanvas: refit within it).
     // spread: a freshly generated layout, whose tight column gaps computeLayout widens.
@@ -687,6 +691,11 @@
       showHoverInfo(null);
     }
     applyHighlight();
+    playback.refresh();
+    if (priorPlayback && priorPlayback.active && playback.snapshot().available) {
+      playback.seek(priorPlayback.progress);
+      if (priorPlayback.playing) playback.play();
+    }
     refreshControls();
     refreshDataPanel();
     if (!opts.keepInspector) refreshInspector();
@@ -696,19 +705,23 @@
 
   // keepInspector: live edits from inspector inputs must not rebuild the input being dragged.
   let queuedKeepInspector = true;
-  function requestRender(keepInspector) {
+  let queuedKeepPlayback = true;
+  function requestRender(keepInspector, keepPlayback = false) {
     queuedKeepInspector = queuedKeepInspector && !!keepInspector;
+    queuedKeepPlayback = queuedKeepPlayback && keepPlayback;
     if (renderQueued) return;
     renderQueued = true;
     requestAnimationFrame(() => {
       const keep = queuedKeepInspector;
+      const preservePlayback = queuedKeepPlayback;
       renderQueued = false;
       queuedKeepInspector = true;
+      queuedKeepPlayback = true;
       if (drag && drag.goal) {
         placeNode(drag, drag.goal);
         drag.goal = null;
       }
-      update({ keepInspector: keep });
+      update({ keepInspector: keep, preservePlayback });
     });
   }
 
@@ -1993,8 +2006,9 @@
         // Prefer the midpoint, moving along the slice only to reduce collisions at crossings.
         const candidates = [a, ...a.alternatives].map((p) => {
           const size = Math.max(minFont, Math.min(font, p.thickness * 0.85));
-          const w = textMeasure(text, size / font, 1).width + 3;
-          const h = size + 3;
+          const measured = textMeasure(text, size / font, 1);
+          const w = measured.width + 3;
+          const h = measured.lineHeight + 3;
           const cos = Math.abs(Math.cos(p.angle));
           const sin = Math.abs(Math.sin(p.angle));
           return { p, size, x: sx(p.X), y: sy(p.Y), w: w * cos + h * sin, h: w * sin + h * cos };
@@ -3006,6 +3020,7 @@
     svg.querySelectorAll('*').forEach((el, i) => {
       const cs = getComputedStyle(el);
       if (cs.opacity !== '1') copies[i].setAttribute('opacity', cs.opacity);
+      if (cs.display === 'none') copies[i].setAttribute('display', 'none');
       if (cs.filter && cs.filter !== 'none') copies[i].setAttribute('filter', cs.filter.replace(/url\("?([^")]+)"?\)/, 'url($1)'));
     });
     clone.querySelectorAll('.layer-hits').forEach((el) => el.remove());
@@ -3558,7 +3573,7 @@
       overlay.hidden = true;
       if (e.dataTransfer.files.length) loadFileList(e.dataTransfer.files);
     });
-    new ResizeObserver(() => requestRender()).observe(stageEl);
+    new ResizeObserver(() => requestRender(false, true)).observe(stageEl);
     stageEl.addEventListener('scroll', () => columnStrip.place(), { passive: true });
   }
 
@@ -3598,6 +3613,11 @@
     submit,
     getProject,
     setTextSize,
+    getPlayback: playback.snapshot,
+    playTrajectories: playback.play,
+    pauseTrajectories: playback.pause,
+    resetTrajectories: playback.reset,
+    seekTrajectories: playback.seek,
     exportPngBlob,
     exportBundle: () => window.SK.zip.makeZip(bundleFiles()),
     loadExample,
