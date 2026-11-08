@@ -4765,6 +4765,6 @@ body.popout-body .popout-content:is(.overall-status-box, .current-status-box) {
     cursor: pointer;
 }
 
-/* Keep collection navigation in the scrolling main stage, above the title. */
-.page-title { flex-wrap: wrap; }
-.page-title > .tool-nav { flex: 0 0 100%; padding-inline: 0; }
+/* Collection links share the original title/action row. */
+.page-title { flex-wrap: wrap; gap: 6px 12px; }
+.page-title-actions { flex-wrap: wrap; flex-shrink: 1; justify-content: flex-end; }

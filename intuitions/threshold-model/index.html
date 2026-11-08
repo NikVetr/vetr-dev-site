@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">The threshold model — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Threshold model</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -200,7 +200,7 @@
         <h3>Fitting a table</h3>
         <p>Thresholds come from the cumulative margins (the normal quantile of each running share), then <var>ρ</var> maximises the multinomial likelihood of the cells with the thresholds held fixed. This is the two-step estimate that R's polycor package gives by default; its standard error treats the thresholds as known.</p>
         <h3>The cos-π shortcut</h3>
-        <p>The original R scripts estimated tetrachoric correlations with cos(π / (1 + √(<var>AD</var>/<var>BC</var>))), where <var>A</var>, <var>D</var> are the concordant and <var>B</var>, <var>C</var> the discordant counts. That formula is exact only when both traits are split at their medians; with lopsided margins it is off, which is why the values here are computed from the bivariate normal instead. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
+        <p>The shortcut cos(π / (1 + √(<var>AD</var>/<var>BC</var>))), where <var>A</var>, <var>D</var> are the concordant and <var>B</var>, <var>C</var> the discordant counts, is exact only when both traits are split at their medians. With unequal margins, use the bivariate normal probabilities fitted here. The <a href="../api.md">API</a> provides the same computations.</p>
       </div>
     </section>
   </main>

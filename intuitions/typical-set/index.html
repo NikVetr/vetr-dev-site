@@ -14,28 +14,28 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Where is the probability mass? — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Probability mass</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="entry-head">
       <h1>Where is the probability mass?</h1>
-      <p class="lede">A standard normal in <var>k</var> dimensions has its highest density at the mode, its centre. Yet a draw from it almost never lands near the centre. The density falls with the distance <var>r</var> from the mode, but the volume at distance <var>r</var> grows like <var>r</var><sup><var>k</var>−1</sup>, and the mass, density × volume, piles up in a thin shell at <var>r</var> ≈ √<var>k</var>. The panels below show that shell, the original script's version of the argument, two pictures where a mode or a mean misleads in one dimension, and why the points of a sphere crowd its equator.</p>
+      <p class="lede">A standard normal in <var>k</var> dimensions has its highest density at the mode, its centre. Yet a draw from it almost never lands near the centre. The density falls with the distance <var>r</var> from the mode, but the volume at distance <var>r</var> grows like <var>r</var><sup><var>k</var>−1</sup>, and the mass, density × volume, piles up in a thin shell at <var>r</var> ≈ √<var>k</var>. The panels below show that shell, a cube-based version of the argument, two pictures where a mode or a mean misleads in one dimension, and why the points of a sphere crowd its equator.</p>
       <nav class="panel-nav" aria-label="Panels">
         <ol>
           <li><a href="#shell">Density × volume</a></li>
@@ -93,7 +93,7 @@
     <!-- 2 -->
     <section class="card panel" id="cube" aria-labelledby="cube-heading">
       <h2 id="cube-heading"><span class="panel-number">2</span> The cube criterion, by family</h2>
-      <p class="panel-intro">The original script made the argument with a cube instead of a sphere. Take the cube [−<var>a</var>, <var>a</var>]<sup><var>k</var></sup> around the centre of <var>k</var> independent coordinates, each with density <var>d</var>. Its volume is (2<var>a</var>)<sup><var>k</var></sup> and its smallest density, at a corner, is <var>d</var>(<var>a</var>)<sup><var>k</var></sup>, so their product is (2<var>a</var> <var>d</var>(<var>a</var>))<sup><var>k</var></sup>. That is largest at the same <var>a</var>* in every dimension, so the corner's distance from the centre, <var>a</var>*√<var>k</var>, grows exactly like √<var>k</var>, for every family. Where the mass actually goes is a different question: compare the sampled radii.</p>
+      <p class="panel-intro">A cube gives another way to compare density with volume. Take the cube [−<var>a</var>, <var>a</var>]<sup><var>k</var></sup> around the centre of <var>k</var> independent coordinates, each with density <var>d</var>. Its volume is (2<var>a</var>)<sup><var>k</var></sup> and its smallest density, at a corner, is <var>d</var>(<var>a</var>)<sup><var>k</var></sup>, so their product is (2<var>a</var> <var>d</var>(<var>a</var>))<sup><var>k</var></sup>. That is largest at the same <var>a</var>* in every dimension, so the corner's distance from the centre, <var>a</var>*√<var>k</var>, grows exactly like √<var>k</var>, for every family. Where the mass actually goes is a different question: compare the sampled radii.</p>
       <div class="panel-body">
         <figure>
           <ul class="legend" id="cube-legend"></ul>
@@ -229,11 +229,9 @@
         <h3>Why a mode is a poor summary</h3>
         <p>The density at the shell is e<sup>−(<var>k</var>−1)/2</sup> times the density at the mode, yet the shell holds nearly all the mass and a ball of radius 1 around the mode almost none. A sampler or an optimiser that reports the mode reports a point that typical draws never come near. The highest-density region of a normal is a ball around the mode, but in high dimension nearly all of that ball's mass, like nearly all of its volume, lies close to its surface.</p>
         <h3>Families other than the normal</h3>
-        <p>The cube criterion gives √<var>k</var> for every family because it factorises: its answer is the half-width <var>a</var>* that maximises <var>a</var> <var>d</var>(<var>a</var>), times √<var>k</var>. The cube at <var>a</var>* holds only <var>P</var>(|<var>X</var>| ≤ <var>a</var>*)<sup><var>k</var></sup> of the mass, which vanishes as <var>k</var> grows, so the criterion does not locate the mass. What does is the law of large numbers: <var>R</var>²/<var>k</var> tends to the variance, so for any family with a finite variance σ² the sampled radius tracks σ√<var>k</var>. The Cauchy has none, and its radius grows like <var>k</var>, not √<var>k</var>.</p>
+        <p>The cube criterion gives √<var>k</var> for every family because it factorises: its answer is the half-width <var>a</var>* that maximises <var>a</var> <var>d</var>(<var>a</var>), times √<var>k</var>. The cube at <var>a</var>* holds only <var>P</var>(|<var>X</var>| ≤ <var>a</var>*)<sup><var>k</var></sup> of the mass, which vanishes as <var>k</var> grows, so the criterion does not locate the mass. What does is the law of large numbers: <var>R</var>²/<var>k</var> tends to the variance, so for any family with a finite variance σ² the sampled radius tracks σ√<var>k</var>. The Laplace family in this comparison has variance 1. The Cauchy has no finite variance, and its radius grows like <var>k</var>, not √<var>k</var>.</p>
         <h3>Method</h3>
-        <p>Closed forms throughout, except the two samples, which are seeded Monte Carlo and labelled so: points are drawn by inversion from shared/rng.js's mulberry32, and the same seed gives the same points in every browser and in Node. The highest-density regions are found exactly: the density's crossings of the water level by bisection, and their masses from the normal and Laplace distribution functions. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
-        <h3>The R scripts</h3>
-        <p>The panels come from three R scripts. The cube script centres its intervals one grid step left of 0, on −0.01, and measures the distance to the far end, so each reported distance is one step too long (1.01√<var>k</var> for the normal instead of √<var>k</var>); its comment says its Laplace has variance 1, but dexp(|<var>x</var>|) has variance 2, and this page uses the unit-variance Laplace the comment describes; its mass-contained term adds an interval's width where it means the log of the width (the term is never used). The bathtub animation weighs its first grid cell by −50 instead of 0.01 (diff(c(0, x)) starts from 0, not from the grid), which inflates its normalised density by 0.07% and puts its printed coverage off the exact value in 19 of its 300 frames, against 3 from the grid alone. The sphere script's normalising constant uses gamma(), which overflows from <var>k</var> = 344, so its density there is NaN; this page uses log-gamma.</p>
+        <p>Closed forms throughout, except the two samples, which are seeded Monte Carlo and labelled so: points are drawn by inversion from a seeded random number generator, and the same seed gives the same points for the same settings. The highest-density regions are found exactly: the density's crossings of the water level by bisection, and their masses from the normal and Laplace distribution functions. The <a href="../api.md">API</a> provides the same computations.</p>
       </div>
     </section>
   </main>

@@ -1852,6 +1852,7 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 .speak.hue-4 { color: light-dark(#6d3aa5, #b89cf0); }
 .speak.hue-5 { color: var(--alert); }
 .site-header .container-gallery { flex-wrap: nowrap; column-gap: var(--space-2); }
+.gallery-header-controls { display: flex; align-items: center; gap: inherit; flex: 1 1 24rem; min-width: 0; }
 .site-header .container-gallery .reader-picker { flex: 1 1 auto; justify-content: flex-end; }
 .site-header .container-gallery #reader { flex: none; }
 .site-header .container-gallery .lang-picker-button { min-width: 0; }

@@ -14,20 +14,21 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Raster to Vector</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/raster-to-vector">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Raster%20to%20Vector%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Raster to Vector</h1>
         <p class="tagline">Turn a PNG or JPEG into an SVG of flat-colour regions with smooth outlines. Everything runs in your browser; the image never leaves your computer.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/raster-to-vector">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Raster%20to%20Vector%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -81,7 +82,7 @@
 
     <section id="options-card" class="card" aria-labelledby="options-heading">
       <h2 id="options-heading">Options</h2>
-      <p class="muted">The defaults are the R version's, except the longest side, which the page sets so that large photos stay quick (leave it empty to keep the size).</p>
+      <p class="muted">Large photos are scaled down to keep conversion quick. Leave the longest side empty to keep the input size.</p>
 
       <h3>Size</h3>
       <div class="settings">
@@ -119,7 +120,7 @@
         <label>k-means++ seeding
           <select data-path="quantize.seeding">
             <option value="weighted">Weighted by colour count</option>
-            <option value="unweighted">Unweighted (original)</option>
+            <option value="unweighted">Unweighted</option>
           </select>
         </label>
         <label>Colour space
@@ -148,13 +149,13 @@
         <label>Tracer
           <select data-path="trace.method">
             <option value="marching_squares">Marching squares</option>
-            <option value="original">Original (chain following)</option>
+            <option value="original">Chain following</option>
           </select>
         </label>
         <label>Shortest contour kept (points)
           <input data-path="trace.minLength" data-type="int" type="number" min="3" step="1">
         </label>
-        <label>Original tracer's erosion window (px)
+        <label>Chain tracer's erosion window (px)
           <input data-path="trace.kconvInit" data-type="int" type="number" min="1" step="1">
         </label>
       </div>
@@ -186,7 +187,7 @@
         </label>
         <label>Wavelet noise estimate
           <select data-path="smooth.wavelet.noise">
-            <option value="sd">sd (original)</option>
+            <option value="sd">Standard deviation</option>
             <option value="mad">MAD</option>
           </select>
         </label>
@@ -225,11 +226,11 @@
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
-        <p>This is a port of the R vectorizer (<a href="https://github.com/NikVetr/raster-to-vector">github.com/NikVetr/raster-to-vector</a>) and gives its results: with the same options and seed, the same SVG.</p>
+        <p>The converter groups pixels into colours, traces their regions and smooths the outlines. Its <a href="https://github.com/NikVetr/raster-to-vector">source</a> is available on GitHub.</p>
         <ol>
           <li><strong>Colours.</strong> Colours are rounded, and the most frequent are clustered by weighted k-means with k-means++ starts. Every pixel takes its nearest centre. With k automatic, the k with the lowest Davies–Bouldin index wins.</li>
           <li><strong>Cleanup.</strong> Runs of fewer pixels than the shortest run kept are absorbed into the next run, along rows and then columns.</li>
-          <li><strong>Tracing.</strong> Each colour's regions become closed outlines on the pixel corners. Marching squares follows every pixel edge. The original tracer detects edges, thins them to a one-pixel line and follows chains; it can lose regions where a boundary pinches or branches, and reports them as warnings.</li>
+          <li><strong>Tracing.</strong> Each colour's regions become closed outlines on the pixel corners. Marching squares follows every pixel edge. The chain tracer detects edges, thins them to a one-pixel line and follows chains; it can lose regions where a boundary pinches or branches, and reports them as warnings.</li>
           <li><strong>Smoothing.</strong> Each outline's x and y are smoothed as circular series: by soft thresholding of wavelet (MODWT) details, by dropping weak Fourier frequencies, or by Walsh–Hadamard thresholding.</li>
           <li><strong>Paint order.</strong> A shape mostly inside another paints after it. Holes are cut where the colour filling them is transparent, or everywhere, or nowhere.</li>
         </ol>

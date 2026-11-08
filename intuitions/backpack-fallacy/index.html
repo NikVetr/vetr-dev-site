@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">The backpack fallacy — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">The backpack fallacy</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -59,7 +59,7 @@
           <fieldset class="control choice-list">
             <legend>True group means drawn from</legend>
             <div class="segmented" id="curves-prior">
-              <label><input type="radio" name="curves-prior" value="cauchy"> A Cauchy (the script's)</label>
+              <label><input type="radio" name="curves-prior" value="cauchy"> A Cauchy</label>
               <label><input type="radio" name="curves-prior" value="normal"> A normal</label>
             </div>
           </fieldset>
@@ -74,7 +74,7 @@
           <div class="control stacked">
             <label for="curves-sizes">People per group in each kind of study</label>
             <input id="curves-sizes" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
-            <p class="hint">2 to 6 sizes from 2 to 100,000, separated by commas. The script's are 2, 16, 128, 1024, 8192.</p>
+            <p class="hint">2 to 6 sizes from 2 to 100,000, separated by commas. The example uses 2, 16, 128, 1024, 8192.</p>
           </div>
           <fieldset class="control choice-list">
             <legend>The smaller study has</legend>
@@ -88,13 +88,13 @@
             <input id="curves-upTo-range" type="range" min="1" max="30" step="1" aria-label="Smallest p-value shown, slider">
           </div>
           <div class="control stacked">
-            <label class="check-label"><input type="checkbox" id="curves-windowed"> Also draw the script's sliding average</label>
+            <label class="check-label"><input type="checkbox" id="curves-windowed"> Also draw the sliding average</label>
             <div class="control-head">
               <label for="curves-window-number">Over ± this much of −log<sub>10</sub> p</label>
               <input id="curves-window-number" type="number" min="0.05" max="5" step="0.05">
             </div>
             <input id="curves-window-range" type="range" min="0.05" max="3" step="0.05" aria-label="Half-width of the sliding average, slider">
-            <p class="hint">backpack_fallacy.R pools the pairs whose −log<sub>10</sub> p is within ±1 of each point, which blurs the curve; the solid lines are exact at each p-value.</p>
+            <p class="hint">The dashed sliding averages pool pairs whose −log<sub>10</sub> p is within ±1 of each point, which blurs the curve; the solid lines are exact at each p-value.</p>
           </div>
           <div id="curves-issues" class="issues" role="alert" hidden></div>
           <p class="readout" id="curves-readout" aria-live="polite"></p>
@@ -145,13 +145,9 @@
       <h2 id="notes-heading">How it works</h2>
       <div class="prose">
         <h3>The model</h3>
-        <p>As in backpack_fallacy.R, each of a study's two groups has a true mean drawn at random, from a Cauchy with scale τ or a normal with SD τ, and its <var>n</var> people vary around it with SD 1. The study's true difference Δ is then Cauchy with scale 2τ, or normal with SD √2 τ. Its two-sample <var>t</var>-test has 2<var>n</var> − 2 degrees of freedom, and given Δ its <var>t</var> is noncentral <var>t</var> with noncentrality Δ/√(2/<var>n</var>). A p-value fixes |<var>t</var>|, so it gives each study a distribution for |Δ|: the chance of that |<var>t</var>| under each Δ, weighted by how common that Δ is. Two studies are independent, and the chance that the smaller one's |Δ| is the larger follows from their two distributions.</p>
-        <h3>Computed, not simulated</h3>
-        <p>The script simulates ten million tests of each size, sorts them all by p-value, pairs each test with its neighbour, and in a sliding window of −log<sub>10</sub> p reports the share of pairs in which the smaller study has the larger true difference. This page computes the same quantities by numerical integration instead: Simpson's rule on cells placed where each distribution lies, with the noncentral <var>t</var>'s integral tabulated once for each size. Its numbers are accurate to about 10<sup>−5</sup>, and an update takes a fraction of a second, where the script takes minutes and needs ten gigabytes. The script's sliding average is computed exactly too, weighting each p-value by how often a pair of those two sizes meets there. Scripts and agents can get every number here through the <a href="../api.md">API</a>.</p>
-        <h3>Checked against R</h3>
-        <p>Rerun with ten million draws (set.seed(1)), the script's window averages agree with this page's in all 844 windows that hold at least 30 pairs, within their Monte Carlo error (none differs by more than 3 standard errors). The distributions of |Δ| agree with R's own integrals, by integrate() over the <var>t</var> statistic's mixture, to 10<sup>−6</sup> in their quartiles, and the chances of a larger effect to 10<sup>−6</sup>.</p>
-        <h3>What the script does differently</h3>
-        <p>Its two-sided p-value is computed as log1p(exp(<var>l</var>)) + <var>l</var> from the one-sided log p-value <var>l</var>, which is log(<var>p</var>₁(1 + <var>p</var>₁)) rather than log(2<var>p</var>₁), so its axis is about 0.3 too far right for small p-values (the order of the tests, and so the pairing, is unaffected). This page uses the two-sided p-value. The script averages over ±1 of −log<sub>10</sub> p, which near p = 1 pools p-values up to 0.1, so its curves start higher than the exact ones; the dashed lines show its average. It plots the log-odds as well as the chance; this page shows the chance. And it uses the same true means for every size, which does not change the answer, since each size's tests are paired at random.</p>
+        <p>Each of a study's two groups has a true mean drawn at random, from a Cauchy with scale τ or a normal with SD τ, and its <var>n</var> people vary around it with SD 1. The study's true difference Δ is then Cauchy with scale 2τ, or normal with SD √2 τ. Its two-sample <var>t</var>-test has 2<var>n</var> − 2 degrees of freedom, and given Δ its <var>t</var> is noncentral <var>t</var> with noncentrality Δ/√(2/<var>n</var>). A p-value fixes |<var>t</var>|, so it gives each study a distribution for |Δ|: the chance of that |<var>t</var>| under each Δ, weighted by how common that Δ is. Two studies are independent, and the chance that the smaller one's |Δ| is the larger follows from their two distributions.</p>
+        <h3>Numerical integration</h3>
+        <p>The probabilities are computed by numerical integration: Simpson's rule on cells placed where each distribution lies, with the noncentral <var>t</var>'s integral tabulated once for each sample size. The numerical accuracy is about 10<sup>−5</sup>. Dashed lines average over ±1 of −log<sub>10</sub> p, weighting each p-value by how often a pair of those sample sizes meets there; solid lines give the probability at each p-value. The <a href="../api.md">API</a> provides the same calculations.</p>
       </div>
     </section>
   </main>

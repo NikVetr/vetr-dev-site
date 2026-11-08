@@ -142,7 +142,7 @@ const RENDER = {
     if (!entry) return;
     const { params: p, result: r } = entry;
     const space = p.target === 'normal' ? normalSpace() : smileySpace();
-    drawChain('target-plot', { domain: domainOf(p), logDensity: space.logDensity, xLabel: 'x', yLabel: 'y', label: `${p.target === 'normal' ? 'MCMC_Demo.R\'s correlated normal' : 'The evil smiley'} and the chain's path through it.` },
+    drawChain('target-plot', { domain: domainOf(p), logDensity: space.logDensity, xLabel: 'x', yLabel: 'y', label: `${p.target === 'normal' ? 'The correlated normal' : 'The evil smiley'} and the chain's path through it.` },
       { a: r.draws.x, b: r.draws.y, accepted: r.accepted, divergent: r.divergent, trajectories: r.trajectories, proposals: r.proposals });
     legend('target', r);
     describe('target');

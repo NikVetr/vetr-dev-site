@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Probability puzzles — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Probability puzzles</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -50,7 +50,7 @@
     <!-- 1 -->
     <section class="card panel" id="kruskal" aria-labelledby="kruskal-heading">
       <h2 id="kruskal-heading"><span class="panel-number">1</span> Where will the kids end up?</h2>
-      <p class="panel-intro">At a science museum, kids lay a shuffled deck of 52 big cards end to end and each stands on one of the first five. In turn, each moves on by the value of the card underfoot, ace to 9 at face value and 10 and the court cards as 1, until the next move would run off the end. Before they start, the guide says where they will all stop. Every card's value decides where its walker goes next, so once two kids stand on the same card they walk on together; with steps this short, their paths almost always meet. The guide only has to walk the deck from the first card. This is the Kruskal count; card_trick.R simulates it.</p>
+      <p class="panel-intro">At a science museum, kids lay a shuffled deck of 52 big cards end to end and each stands on one of the first five. In turn, each moves on by the value of the card underfoot, ace to 9 at face value and 10 and the court cards as 1, until the next move would run off the end. Before they start, the guide says where they will all stop. Every card's value decides where its walker goes next, so once two kids stand on the same card they walk on together; with steps this short, their paths almost always meet. The guide only has to walk the deck from the first card. This is the Kruskal count.</p>
       <div class="panel-body">
         <figure id="kruskal-figures">
           <ul class="legend" id="kruskal-legend"></ul>
@@ -89,7 +89,7 @@
     <!-- 2 -->
     <section class="card panel" id="secretary" aria-labelledby="secretary-heading">
       <h2 id="secretary-heading"><span class="panel-number">2</span> Hiring the best</h2>
-      <p class="panel-intro"><var>n</var> applicants come in a random order. Each is interviewed and then hired or turned away for good, judged only against those seen so far, and only the very best will do. Skip the first <var>r</var>, then hire the first who beats everyone before. That hires the best with chance (<var>r</var>/<var>n</var>) Σ<sub><var>j</var> = <var>r</var></sub><sup><var>n</var> − 1</sup> 1/<var>j</var>, highest near <var>r</var> = <var>n</var>/e, where it is close to 1/e ≈ 37% for any large <var>n</var>. Knowing how qualities are spread does better: hire the best so far once their quality is high enough for the number still to come. choice_problem_strategies.R tries hiring when the chance that no one later is better reaches ½.</p>
+      <p class="panel-intro"><var>n</var> applicants come in a random order. Each is interviewed and then hired or turned away for good, judged only against those seen so far, and only the very best will do. Skip the first <var>r</var>, then hire the first who beats everyone before. That hires the best with chance (<var>r</var>/<var>n</var>) Σ<sub><var>j</var> = <var>r</var></sub><sup><var>n</var> − 1</sup> 1/<var>j</var>, highest near <var>r</var> = <var>n</var>/e, where it is close to 1/e ≈ 37% for any large <var>n</var>. Knowing how qualities are spread does better: hire the best so far once their quality is high enough for the number still to come. The 50% threshold rule hires the best applicant seen so far when the chance that no one later is better reaches ½.</p>
       <div class="panel-body">
         <figure id="secretary-figures">
           <ul class="legend" id="secretary-legend"></ul>
@@ -105,7 +105,7 @@
             <legend>How to choose</legend>
             <div class="choice-stack" id="secretary-strategy">
               <label><input type="radio" name="secretary-strategy" value="cutoff"> <span><span class="choice-main">Skip <var>r</var>, then take the best so far</span> <span class="choice-sub">ranks only</span></span></label>
-              <label><input type="radio" name="secretary-strategy" value="half"> <span><span class="choice-main">Take the best so far once no one later is likely to beat them</span> <span class="choice-sub">knowing the distribution; the script's 50% rule</span></span></label>
+              <label><input type="radio" name="secretary-strategy" value="half"> <span><span class="choice-main">Take the best so far once no one later is likely to beat them</span> <span class="choice-sub">knowing the distribution; 50% threshold rule</span></span></label>
               <label><input type="radio" name="secretary-strategy" value="optimal"> <span><span class="choice-main">Gilbert and Mosteller's thresholds</span> <span class="choice-sub">knowing the distribution; the best possible</span></span></label>
             </div>
           </fieldset>
@@ -137,7 +137,7 @@
     <!-- 3 -->
     <section class="card panel" id="prisoners" aria-labelledby="prisoners-heading">
       <h2 id="prisoners-heading"><span class="panel-number">3</span> The 100 prisoners</h2>
-      <p class="panel-intro">100 prisoners each have to find their own number among 100 shuffled tickets in 100 numbered boxes, opening at most 50 boxes each and telling the others nothing. If every one of them finds their number, all go free. Opening boxes at random, each succeeds with chance ½, and all of them together with chance 2<sup>−100</sup>. Instead, each starts at the box with their own number and opens next the box numbered by the ticket inside: they walk round the loop of the shuffle that ends at their own number, so they all succeed exactly when no loop is longer than 50. That happens with chance 1 − Σ<sub><var>k</var> = 51</sub><sup>100</sup> 1/<var>k</var> ≈ 31%. prisonerTicketBoxes.R plays a variant: 5 prisoners, 80 boxes each.</p>
+      <p class="panel-intro">100 prisoners each have to find their own number among 100 shuffled tickets in 100 numbered boxes, opening at most 50 boxes each and telling the others nothing. If every one of them finds their number, all go free. Opening boxes at random, each succeeds with chance ½, and all of them together with chance 2<sup>−100</sup>. Instead, each starts at the box with their own number and opens next the box numbered by the ticket inside: they walk round the loop of the shuffle that ends at their own number, so they all succeed exactly when no loop is longer than 50. That happens with chance 1 − Σ<sub><var>k</var> = 51</sub><sup>100</sup> 1/<var>k</var> ≈ 31%. You can also vary the number of prisoners and how many boxes each may open.</p>
       <div class="panel-body">
         <figure id="prisoners-figures">
           <ul class="legend" id="prisoners-legend"></ul>
@@ -153,7 +153,7 @@
             <span class="label" id="prisoners-preset-label">Start from</span>
             <div class="control-row" role="group" aria-labelledby="prisoners-preset-label">
               <button type="button" data-preset="classic">The puzzle: 100 and 50</button>
-              <button type="button" data-preset="script">The script's: 5 and 80</button>
+              <button type="button" data-preset="script">5 prisoners, 80 boxes each</button>
             </div>
           </div>
           <fieldset class="control choice-list">
@@ -203,7 +203,7 @@
     <!-- 4 -->
     <section class="card panel" id="coins" aria-labelledby="coins-heading">
       <h2 id="coins-heading"><span class="panel-number">4</span> Five heads in a row</h2>
-      <p class="panel-intro">A bag holds 9 fair coins and 1 with heads on both sides. You draw one and flip it 5 times: 5 heads. What is the chance that the next flip is heads too? Five heads have chance 1/32 with a fair coin and 1 with the two-headed one, so by Bayes' rule the coin is two-headed with chance 0.1/(0.1 + 0.9/32) ≈ 78%, and the next flip is heads with chance 0.78 + 0.22 × ½ ≈ 89%. coinflipping.R checks it the slow way: draw a coin, flip it, and keep only the draws that started with five heads.</p>
+      <p class="panel-intro">A bag holds 9 fair coins and 1 with heads on both sides. You draw one and flip it 5 times: 5 heads. What is the chance that the next flip is heads too? Five heads have chance 1/32 with a fair coin and 1 with the two-headed one, so by Bayes' rule the coin is two-headed with chance 0.1/(0.1 + 0.9/32) ≈ 78%, and the next flip is heads with chance 0.78 + 0.22 × ½ ≈ 89%. The simulation repeatedly draws a coin, flips it, and keeps only the draws that started with five heads.</p>
       <div class="panel-body">
         <figure id="coins-figures">
           <ul class="legend" id="coins-legend"></ul>
@@ -249,13 +249,9 @@
       <h2 id="notes-heading">How it works</h2>
       <div class="prose">
         <h3>Seeded</h3>
-        <p>Every deal, line of applicants, shuffle and coin comes from shared/rng.js's mulberry32, so a seed gives the same play-through and the same simulation in every browser and in Node; the play-through is the first round drawn from it, and the simulation's rounds follow. Each panel runs in a Web Worker. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <p>Every deal, line of applicants, shuffle and coin comes from the seed, so a seed gives the same play-through and the same simulation for the same settings; the play-through is the first round drawn from it, and the simulation's rounds follow. Each panel runs in a Web Worker. The <a href="../api.md">API</a> provides the same computations.</p>
         <h3>The exact answers</h3>
         <p>Hiring by ranks only wins with (<var>r</var>/<var>n</var>) Σ<sub><var>j</var>=<var>r</var></sub><sup><var>n</var>−1</sup> 1/<var>j</var>. The threshold rules win with an integral over the best quality seen so far, taken applicant by applicant on a grid fine near 1, accurate to 2 × 10<sup>−7</sup>; with two applicants it gives the known ¾, and Gilbert and Mosteller's rule approaches their 58.02% as <var>n</var> grows. The prisoners' chance follows one loop at a time: a loop through a prisoner has each length up to <var>n</var> with chance 1/<var>n</var>, and the rest of the shuffle is again a uniform shuffle; it matches every permutation of up to 7 boxes exactly. The coins are Bayes' rule. The Kruskal count has no closed form, only the simulation.</p>
-        <h3>Checked against R</h3>
-        <p>The scripts were rerun with set seeds and more rounds. card_trick.R's 10,000 deals give 96.5% for five kids against 96.6% here, and agree at every number of kids; its coupling block's first shared cards agree too. choice_problem_strategies.R's skip-36 rule wins 36.97% ± 0.15% of 100,000 rounds, against 37.10% exactly. prisonerTicketBoxes.R's 5 prisoners with 80 boxes each go free in 78.07% ± 0.13%, against 77.81%. coinflipping.R's million draws give 89.03% against 89.02%.</p>
-        <h3>What the scripts do differently</h3>
-        <p id="scripts-text">card_trick.R's first block builds a 56-card deck: <code>rep(rep(1, 5), 4)</code> adds the ace again with 10, J, Q and K, so kids can end on cards 53 to 56. Its later blocks have 52. Its coupling block counts two kids as together only when they stand on the same card after the same number of jumps (<code>catchup = F</code>), which 17.5% of pairs do; the trick needs only that their paths meet, which 98.4% do, as <code>catchup = T</code> counts. choice_problem_strategies.R's 50% rule hires any applicant whose quality is high enough, even one worse than someone already seen, who cannot be the best: as written it wins 54.1%; hiring only a best so far, 58.0%, as here. Its estimated-distribution rules leave out the same condition, and the KDE one stops with "object 'i' not found"; they are not included. It skips ⌊<var>n</var>/e⌋ = 36, where 37 is best for 100 (37.101% against 37.104%). prisonerTicketBoxes.R and coinflipping.R are right.</p>
       </div>
     </section>
   </main>

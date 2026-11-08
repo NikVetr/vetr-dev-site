@@ -243,7 +243,7 @@ test.describe('the studio\'s chrome on a phone', () => {
     await expect(page.locator('.panel-toggle')).toHaveCount(2);
   };
 
-  test('the header is one line of actions over one line of information', async ({ page }) => {
+  test('the native actions and information stay compact above the collection links', async ({ page }) => {
     // It was four lines and 156pt tall -- brand, pair, a full-width banner and a row
     // of four buttons -- on an 844pt phone, and sticky, so it cost that on every
     // screen. And it was not aligned: the sheet page's `#status { order: -2 }` is a
@@ -251,7 +251,12 @@ test.describe('the studio\'s chrome on a phone', () => {
     // and put the status line to the *left* of the brand on the first line.
     await studio(page);
     const header = await page.locator('.site-header').boundingBox();
-    expect(header.height).toBeLessThan(96);
+    const collection = await page.locator('.site-header .tool-nav').boundingBox();
+    // Collection links now belong to the same header; the native two rows keep
+    // their original height bound, with one touch-sized navigation row below.
+    const gap = await page.locator('.site-header .container').evaluate((el) => parseFloat(getComputedStyle(el).rowGap));
+    expect(header.height - collection.height - gap).toBeLessThan(96);
+    expect(collection.height).toBe(44);
 
     const box = async (sel) => page.locator(sel).boundingBox();
     const brand = await box('.brand');
@@ -271,6 +276,8 @@ test.describe('the studio\'s chrome on a phone', () => {
     expect(pair.y).toBeGreaterThan(brand.y + brand.height - 1);
     expect(Math.round(pair.y)).toBe(Math.round(status.y));
     expect(pair.x).toBeLessThan(status.x);
+    expect(collection.y).toBeGreaterThanOrEqual(status.y + status.height);
+    expect(collection.y + collection.height).toBeLessThanOrEqual(header.y + header.height);
     // PNG is the phone's primary action and stays out of the menu; the rest are in
     // it, and there is one of each rather than a visible copy and a hidden one.
     await expect(page.locator('.site-header .container > #png')).toBeVisible();

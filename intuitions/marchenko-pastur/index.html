@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">How many components are noise? — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Marchenko–Pastur</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -154,7 +154,7 @@
     <!-- 3 -->
     <section class="card panel" id="pcs" aria-labelledby="pcs-heading">
       <h2 id="pcs-heading"><span class="panel-number">3</span> What the first two components show</h2>
-      <p class="panel-intro">The original script measures 200 samples on 500 features. Each feature is shaped by 49 latent factors and noise, and a batch, half the samples, shifts every feature by a small random amount: variance 10 against the 89 or so each feature has in all. Because the shift is shared across all 500 features, it adds up to a spike far above the factors', and the first principal component separates the batches cleanly. Regressing each feature on the batch removes the shift from every component exactly. With interactions, each factor's effect also differs between the batches, which that correction leaves in place.</p>
+      <p class="panel-intro">The example measures 200 samples on 500 features. Each feature is shaped by 49 latent factors and noise, and a batch, half the samples, shifts every feature by a small random amount: variance 10 against the 89 or so each feature has in all. Because the shift is shared across all 500 features, it adds up to a spike far above the factors', and the first principal component separates the batches cleanly. Regressing each feature on the batch removes the shift from every component exactly. With interactions, each factor's effect also differs between the batches, which that correction leaves in place.</p>
       <div class="panel-body">
         <figure id="pcs-figures">
           <ul class="legend" id="pcs-legend"></ul>
@@ -229,12 +229,9 @@
         <h3>The law</h3>
         <p>The sample covariance of <var>n</var> observations divides by <var>n</var> − 1 because the data are centred first, which uses up one degree of freedom, so the law's ratio is γ = <var>p</var>/(<var>n</var> − 1). Its density, √((<var>b</var> − <var>x</var>)(<var>x</var> − <var>a</var>)) / (2π σ² γ <var>x</var>) between the edges <var>a</var> and <var>b</var>, has a closed-form distribution function, which places each eigenvalue's expected position. When <var>p</var> exceeds <var>n</var> − 1 the covariance has rank <var>n</var> − 1, and the other <var>p</var> − <var>n</var> + 1 eigenvalues are exactly 0. The law describes the limit as <var>n</var> and <var>p</var> grow together; at finite sizes the largest eigenvalue fluctuates around the upper edge on a scale of <var>n</var><sup>−2/3</sup> (the Tracy–Widom law), so it falls outside the edge in a fair share of noise-only samples.</p>
         <h3>Computing</h3>
-        <p>Each sample is drawn from shared/rng.js's mulberry32, normals by inversion, so a seed gives the same eigenvalues in every browser and in Node. The covariance's eigenvalues come from whichever of <var>X</var>ᵀ<var>X</var> and <var>X</var><var>X</var>ᵀ is smaller, reduced to tridiagonal form by Householder reflections and solved by the implicit QL method, in a background worker so the page stays responsive. A spike lies along a coordinate axis; since the noise looks the same in every direction, that changes no eigenvalue. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <p>Each sample is drawn with a seed, so a seed gives the same eigenvalues for the same settings. The covariance's eigenvalues come from whichever of <var>X</var>ᵀ<var>X</var> and <var>X</var><var>X</var>ᵀ is smaller, reduced to tridiagonal form by Householder reflections and solved by the implicit QL method, in a background worker so the page stays responsive. A spike lies along a coordinate axis; since the noise looks the same in every direction, that changes no eigenvalue. The <a href="../api.md">API</a> provides the same computations.</p>
         <h3>Spikes</h3>
         <p>The threshold and the two limits are those of Baik, Ben Arous and Péché (2005) and Paul (2007). They hold as <var>n</var> and <var>p</var> grow; at finite sizes a spike just past the threshold is lower than its limit and its eigenvector less aligned, and one just below it still lifts the largest eigenvalue a little.</p>
-        <h3>The R scripts</h3>
-        <p>marchenko–pastur_intuitions.R compares the simulated eigenvalues with RMTstat's law at ndf = <var>n</var>, the number of observations, but cov() centres the data, which leaves <var>n</var> − 1 degrees of freedom; at its 200 observations of 20 variables that puts its edges and its decision threshold, <var>σ</var>²(1 + √(<var>p</var>/<var>n</var>))², 0.12% low. This page uses <var>n</var> − 1. RMTstat's distribution function and quantiles are numerical and accurate to about 10⁻⁶ and 10⁻⁴; this page's are exact. The script's follow-up on random orthonormal matrices and rotations, which is about building correlation matrices from eigenvalues, is not part of this page.</p>
-        <p>1st_two_pc_axes.R corrects for the batch by regressing each feature on all 99 simulated variables, which only a simulation knows, and subtracting the batch's term, which leaves the batch means slightly unequal on every component. Here each feature is regressed on the batch alone, as one could with real data, which makes them equal exactly. Its comparison of discriminant analysis and support vector machines on held-out samples is not part of this page. Across 12 seeds of the script, PC 1 separates the batches by 1.72 ± 0.06 SDs and 65 eigenvalues lie above the noise edge; this page's version of its model gives the same.</p>
       </div>
     </section>
   </main>

@@ -36,7 +36,7 @@ function renderCurves() {
   const larger = result.studies.filter((/** @type {any} */ s) => s.n > state.smaller);
   $('curves-legend').innerHTML = larger.map((/** @type {any} */ s) => `<li>${swatch({ line: `k-line k${k(s.n)}`, ...seriesMark(k(s.n)) })} ${state.smaller.toLocaleString('en-US')} vs ${s.n.toLocaleString('en-US')} per group</li>`).join('')
     + `<li>${swatch({ line: 'context-line' })} the other pairs</li>`
-    + (state.windowed ? `<li>${swatch({ line: 'ink-line dashed' })} the script's sliding average</li>` : '');
+    + (state.windowed ? `<li>${swatch({ line: 'ink-line dashed' })} sliding average</li>` : '');
 }
 
 function renderAt() {

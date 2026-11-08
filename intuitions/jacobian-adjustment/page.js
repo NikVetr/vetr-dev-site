@@ -109,7 +109,7 @@ function renderTransform() {
     ? `${r.proper ? '' : 'Without a distribution, the density of <var>a</var> is drawn to an arbitrary scale. '}${quantities}`
     : `${r.proper ? 'The contours hold 50% (thick) and 90% of the mass' : 'The lines are at ½ (thick) and 1/20 of the highest density in the window, since there is no total mass to divide by'}${r.transform === 'product-lognormal' ? ', on the log scale' : ''}. ${quantities}`;
   $('transform-df-control').hidden = !square;
-  $('transform-jacobian-hint').innerHTML = `The script's <code>${r.script}</code>, for ${r.factor}${r.constant ? ', a constant' : ''}.`;
+  $('transform-jacobian-hint').innerHTML = `The Jacobian factor is ${r.factor}${r.constant ? '; because it is constant, omitting it does not change the distribution' : '. Add its logarithm to the target density'}.`;
   showVerdict(r);
 }
 
@@ -224,7 +224,7 @@ function renderMarginals() {
   }).join('');
   $('marginals-readout').innerHTML = r.statement === 'separate'
     ? `Written as two statements, <var>a</var> and <var>c</var> both have the distributions meant, but they are independent where they should correlate at ${num(r.meant.correlation.ac)}. So <var>b</var> = <var>c</var> − <var>a</var> has SD ${sd(st[1][1])} instead of ${num(s)}, and correlation ${num(r.stated.correlation.ab)} with <var>a</var>. With <var>a</var> as data, each <var>b</var>'s posterior centres on −<var>a</var>: the model cancels <var>a</var> out of <var>c</var>.`
-    : `Written as one statement, (<var>a</var>, <var>c</var>) has the covariance meant, so <var>b</var> is N(0, ${num(s)}) and independent of <var>a</var>. With <var>a</var> as data, <var>b</var>'s posterior is its prior. The script's non-centred version, which whitens (<var>a</var>, <var>c</var>) by the Cholesky factor, is the same model.`;
+    : `Written as one statement, (<var>a</var>, <var>c</var>) has the covariance meant, so <var>b</var> is N(0, ${num(s)}) and independent of <var>a</var>. With <var>a</var> as data, <var>b</var>'s posterior is its prior. Whitening (<var>a</var>, <var>c</var>) by the Cholesky factor gives a non-centred parameterization of the same model.`;
   $('marginals-status').textContent = `${r.data.a.length.toLocaleString('en-US')} values of a, seed ${state.marginals.seed}.`;
 }
 

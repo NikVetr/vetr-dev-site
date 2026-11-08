@@ -14,20 +14,21 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Photomosaic</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/photomosaic">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Photomosaic%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Photomosaic</h1>
         <p class="tagline">Arrange photos to reproduce a target picture. Your photos stay in your browser.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/photomosaic">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Photomosaic%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -100,14 +101,14 @@
           <div class="settings display-settings">
             <label>Tile shape
               <select id="fit">
-                <option value="keep">Own shape, as in R</option>
+                <option value="keep">Own shape</option>
                 <option value="crop">Centred square</option>
               </select>
             </label>
             <label>Tint towards the target
               <span class="input-row">
                 <input id="tint" type="range" min="0" max="100" step="1" value="0" aria-describedby="tint-value">
-                <output id="tint-value" for="tint">0% (as in R)</output>
+                <output id="tint-value" for="tint">0%</output>
               </span>
             </label>
           </div>
@@ -157,19 +158,19 @@
       <div class="settings">
         <label>Grid
           <select id="grid-rule">
-            <option value="auto">Auto, as in R</option>
+            <option value="auto">Auto</option>
             <option value="columns">Set the columns</option>
           </select>
         </label>
         <label>Columns
           <input id="columns" type="number" min="1" max="1000" step="1" value="40" disabled>
         </label>
-        <label>Uses per photo (1 as in R)
+        <label>Uses per photo
           <input id="max-uses" type="number" min="1" max="1000" step="1" value="1">
         </label>
         <label>Colour match
           <select id="metric">
-            <option value="hsl-r">HSL, as in R</option>
+            <option value="hsl-r">HSL (hue first)</option>
             <option value="lab">CIELAB (lightness counts)</option>
           </select>
         </label>
@@ -183,16 +184,16 @@
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
-        <p>This is a port of an R script that made photo grids and mosaics with ImageMagick (through the magick package), and it computes what the script computes:</p>
+        <p>The mosaic matches each grid cell to a photo in six steps:</p>
         <ul>
           <li><strong>Grid.</strong> With <em>n</em> photos and a target of shape <em>a</em> (height ÷ width), the grid has ⌊√(<em>n</em>/<em>a</em>)·<em>a</em>⌋ rows and ⌊√(<em>n</em>/<em>a</em>)⌋ columns, so it never has more cells than photos. Extra photos are left out.</li>
           <li><strong>Cells.</strong> The target is scaled to one pixel per cell, each pixel the average of the area it covers.</li>
           <li><strong>Photos.</strong> Each photo is scaled to 200 pixels wide and summarised by its average colour.</li>
-          <li><strong>Cost.</strong> Both are turned into hue, saturation, lightness and opacity, and a cell's cost for a photo is the sum of the squared differences. As the script computes them, hue is in degrees and lightness is scaled down by 255, so the match is mostly by hue, then saturation. The CIELAB option compares perceived lightness and colour instead.</li>
-          <li><strong>Assignment.</strong> Each cell gets its own photo, so that the total cost over all cells is as small as possible: the linear assignment problem, solved exactly by the Hungarian algorithm. Photos are first shuffled with the seed, as the script shuffles them, which matters only between equal costs.</li>
-          <li><strong>Drawing.</strong> Each photo is drawn at the tile width with its own shape, rows as tall as their tallest photo, as the script appends them. Cropping to squares and tinting towards the target are options here, off by default.</li>
+          <li><strong>Cost.</strong> Both are turned into hue, saturation, lightness and opacity, and a cell's cost for a photo is the sum of the squared differences. Hue is in degrees and lightness is scaled down by 255, so the match is mostly by hue, then saturation. The CIELAB option compares perceived lightness and colour instead.</li>
+          <li><strong>Assignment.</strong> Each cell gets its own photo, so that the total cost over all cells is as small as possible: the linear assignment problem, solved exactly by the Hungarian algorithm. Photos are first shuffled with the seed, which matters only between equal costs.</li>
+          <li><strong>Drawing.</strong> Each photo is drawn at the tile width with its own shape, rows as tall as their tallest photo. Cropping to squares and tinting towards the target are options here, off by default.</li>
         </ul>
-        <p>On the same photos and seed it gives the R script's summaries, costs and assignment; JPEG photos can differ by a fraction of a colour level, as browsers' decoders differ. Photos larger than 400 pixels wide, and targets larger than 1600 pixels, are first halved in the browser.</p>
+        <p>The same photos, settings and seed reproduce the same assignment. JPEG colours can vary slightly between browser decoders. Photos larger than 400 pixels wide, and targets larger than 1600 pixels, are first halved in the browser.</p>
         <p>The mosaic is also available to scripts and agents: see the <a href="api.md">API description</a>. The example is Hokusai's <cite>Red Fuji</cite> and CC0 photographs from Wikimedia Commons (<a href="examples/SOURCE.md">sources</a>).</p>
       </details>
     </section>

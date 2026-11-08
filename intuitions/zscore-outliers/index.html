@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Pooled or stratified outlier removal — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Outlier removal</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -133,7 +133,7 @@
         <h3>What to do instead</h3>
         <p>Standardise within each known group (sex, batch, tissue, site) before applying a z cutoff, so each value is judged against its own group. When the groups are unknown, a cutoff on pooled data mixes outlier detection with group detection.</p>
         <h3>Method</h3>
-        <p>Both groups are normal. Units are group A's SD, with the pooled mean at 0. Every share is an exact normal tail probability, computed in closed form; nothing is simulated. The split into values removed by both rules, by pooling only and by stratifying only comes from the R scripts this page was ported from, written for omics quality control. Their first version dropped part of a wide group's tail and fixed the second group's share at one half; this page follows the corrected version. Scripts and agents can run the same computation through the <a href="../api.md">API</a>.</p>
+        <p>Both groups are normal. Units are group A's SD, with the pooled mean at 0. Every share is an exact normal tail probability, computed in closed form; nothing is simulated. The display distinguishes values removed by both rules, by pooling only and by stratifying only. The <a href="../api.md">API</a> provides the same computation.</p>
       </div>
     </section>
   </main>

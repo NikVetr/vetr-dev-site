@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Traits evolving on a tree — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Traits on a tree</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -97,7 +97,7 @@
     <!-- 2 -->
     <section class="card panel" id="bivariate" aria-labelledby="bivariate-heading">
       <h2 id="bivariate-heading"><span class="panel-number">2</span> Two traits through time</h2>
-      <p class="panel-intro">Two traits, such as a height and a width, evolving together. Within a lineage their changes are correlated by the rate matrix; across species they also covary because the species shared history. Here each lineage is a path through trait 1, trait 2 and time, with time running up, and its shadows on the back walls show each trait on its own against time. This is 3dPlots.R's three-tip tree and rate matrix.</p>
+      <p class="panel-intro">Two traits, such as a height and a width, evolving together. Within a lineage their changes are correlated by the rate matrix; across species they also covary because the species shared history. Here each lineage is a path through trait 1, trait 2 and time, with time running up, and its shadows on the back walls show each trait on its own against time.</p>
       <div class="panel-body">
         <figure class="scene-figure" id="bivariate-figures">
           <ul class="legend" id="bivariate-legend"></ul>
@@ -147,7 +147,7 @@
     <!-- 3 -->
     <section class="card panel" id="bridge" aria-labelledby="bridge-heading">
       <h2 id="bridge-heading"><span class="panel-number">3</span> Filling in a branch</h2>
-      <p class="panel-intro">Suppose the trait's values at both ends of a branch are known, and only what happened in between is not. Under Brownian motion the path between two fixed ends is a Brownian bridge, and it can be drawn one midpoint at a time: the point halfway between two known points is normal, centred between them, with a variance a quarter of their span times the rate. Each level of refinement halves the gaps. Keeping the path inside a region, say an island it cannot leave, is harder, and the original script's shortcut is only approximate.</p>
+      <p class="panel-intro">Suppose the trait's values at both ends of a branch are known, and only what happened in between is not. Under Brownian motion the path between two fixed ends is a Brownian bridge, and it can be drawn one midpoint at a time: the point halfway between two known points is normal, centred between them, with a variance a quarter of their span times the rate. Each level of refinement halves the gaps. Keeping the path inside a region, say an island it cannot leave, is harder, and redrawing individual midpoints is only approximate.</p>
       <div class="panel-body">
         <figure id="bridge-figures">
           <ul class="legend" id="bridge-legend"></ul>
@@ -161,8 +161,8 @@
           <div class="control">
             <span class="label" id="bridge-preset-label">Start from</span>
             <div class="control-row" role="group" aria-labelledby="bridge-preset-label">
-              <button type="button" data-bridge-preset="disc">The script's disc</button>
-              <button type="button" data-bridge-preset="dumbbell">The script's two islands</button>
+              <button type="button" data-bridge-preset="disc">Disc</button>
+              <button type="button" data-bridge-preset="dumbbell">Two islands</button>
               <button type="button" data-bridge-preset="none">No region</button>
             </div>
           </div>
@@ -177,7 +177,7 @@
           <fieldset class="control choice-list" id="bridge-method-box">
             <legend>How</legend>
             <div class="checks" id="bridge-method">
-              <label><input type="radio" name="bridge-method" value="stagewise"> Redraw each midpoint that falls outside (the script's; approximate)</label>
+              <label><input type="radio" name="bridge-method" value="stagewise"> Redraw each midpoint that falls outside (approximate)</label>
               <label><input type="radio" name="bridge-method" value="whole-path"> Redraw any whole path that leaves (exact; slower)</label>
             </div>
           </fieldset>
@@ -233,13 +233,11 @@
       <h2 id="notes-heading">How it works</h2>
       <div class="prose">
         <h3>Simulating</h3>
-        <p>A pure-birth (Yule) tree grows as phytools' pbtree does: two lineages leave the root, each waits an exponential time to split, and after the last split the tips grow for one more wait; it is then scaled to height 1. A pasted Newick tree is used as written, in its own units, its root edge included as a stem. Each branch is cut into steps, about the tree's height divided by the steps, and each step is drawn from the model's exact transition: normal, with the mean and variance the model gives over that step. So the steps change how detailed the picture is, not how the tips are distributed. Draws come from shared/rng.js's mulberry32, normals by inversion, so a seed gives the same tree and paths in every browser and in Node. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <p>A pure-birth (Yule) tree grows as phytools' pbtree does: two lineages leave the root, each waits an exponential time to split, and after the last split the tips grow for one more wait; it is then scaled to height 1. A pasted Newick tree is used as written, in its own units, its root edge included as a stem. Each branch is cut into steps, about the tree's height divided by the steps, and each step is drawn from the model's exact transition: normal, with the mean and variance the model gives over that step. So the steps change how detailed the picture is, not how the tips are distributed. Draws come with a seed, so a seed gives the same tree and paths for the same settings. The <a href="../api.md">API</a> provides the same computations.</p>
         <h3>The models</h3>
-        <p>Brownian motion has variance σ² per unit time. A trend adds a drift μ per unit time to the mean. Ornstein–Uhlenbeck moves the mean toward θ at rate α, θ + (<var>x</var> − θ)e<sup>−α<var>t</var></sup>, with variance σ²(1 − e<sup>−2α<var>t</var></sup>)/2α, so a lineage's spread levels off at σ²/2α. The burst models change σ² with time: σ²e<sup><var>a</var><var>t</var></sup> for an early (<var>a</var> &lt; 0) or late (<var>a</var> &gt; 0) burst, and σ²(1 + δ²e<sup>−λ(<var>t</var> − <var>t</var><sub>b</sub>)</sup>) after a burst at <var>t</var><sub>b</sub>, as in middleBurst.R. A clade shift is Ornstein–Uhlenbeck with a second optimum on the clade's branches, its stem included, as in the qualifying-exam animation's two optima.</p>
+        <p>Brownian motion has variance σ² per unit time. A trend adds a drift μ per unit time to the mean. Ornstein–Uhlenbeck moves the mean toward θ at rate α, θ + (<var>x</var> − θ)e<sup>−α<var>t</var></sup>, with variance σ²(1 − e<sup>−2α<var>t</var></sup>)/2α, so a lineage's spread levels off at σ²/2α. The burst models change σ² with time: σ²e<sup><var>a</var><var>t</var></sup> for an early (<var>a</var> &lt; 0) or late (<var>a</var> &gt; 0) burst, and σ²(1 + δ²e<sup>−λ(<var>t</var> − <var>t</var><sub>b</sub>)</sup>) after a burst at <var>t</var><sub>b</sub>. A clade shift is Ornstein–Uhlenbeck with a second optimum on the clade's branches, its stem included.</p>
         <h3>The bridge</h3>
-        <p>Between fixed points <var>a</var> at time <var>s</var> and <var>b</var> at time <var>u</var>, Brownian motion with rate matrix <var>R</var> passes the midpoint time at a normal point with mean (<var>a</var> + <var>b</var>)/2 and covariance (<var>u</var> − <var>s</var>)<var>R</var>/4. truncatedBMapprox.R draws these midpoints level by level and redraws any that falls outside the region. That is an approximation: it conditions each new point on the region but not the rest of the path, which lets paths crowd the region's edge. Redrawing whole paths until one stays inside is exact for the drawn points, and this page shows how far apart the two come out.</p>
-        <h3>The R scripts</h3>
-        <p>qualifyingExam_animations.R steps its Ornstein–Uhlenbeck process as <var>x</var> + α(θ − <var>x</var>) + σ<var>z</var> per unit time, an Euler approximation, and its argument named sigma2 multiplies the standard normal step, so it is σ, not σ²: its two-optima run, sigma2 = 0.5, has a long-run variance of 1.32, where a step variance of 0.5 would give 2.63. Its early-or-late burst scales each step's SD by e<sup>−<var>r</var><var>t</var></sup>, which is this page's <var>a</var> = −2<var>r</var>. This page draws every model's exact transition, with σ² a variance. The other scripts' simulations (univariate_brownian_motion_animation.R's exact rOU, 3dPlots.R's rate matrix steps, middleBurst.R's integrated burst) are matched as written.</p>
+        <p>Between fixed points <var>a</var> at time <var>s</var> and <var>b</var> at time <var>u</var>, Brownian motion with rate matrix <var>R</var> passes the midpoint time at a normal point with mean (<var>a</var> + <var>b</var>)/2 and covariance (<var>u</var> − <var>s</var>)<var>R</var>/4. The midpoint method draws these points level by level and redraws any that falls outside the region. That is an approximation: it conditions each new point on the region but not the rest of the path, which lets paths crowd the region's edge. Redrawing whole paths until one stays inside is exact for the drawn points, and this page shows how far apart the two come out.</p>
       </div>
     </section>
   </main>

@@ -21,7 +21,7 @@ const SUMMARY_SOURCE_WIDTH = 2 * SUMMARY_WIDTH;
 const THUMB = 128;
 /** Targets are halved until neither side is longer than this. */
 const TARGET_SIDE = 1600;
-const METRIC_LABELS = /** @type {Record<string, string>} */ ({ 'hsl-r': 'HSL, as in R', lab: 'CIELAB' });
+const METRIC_LABELS = /** @type {Record<string, string>} */ ({ 'hsl-r': 'HSL (hue first)', lab: 'CIELAB' });
 
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 /** @type {Record<string, any>} */
@@ -487,7 +487,7 @@ function showSummary() {
   const { grid, photos: used, settings: s, cost, timings } = result;
   const number = (/** @type {number} */ x) => x.toLocaleString('en-US', { maximumSignificantDigits: 6 });
   const rows = [
-    ['Grid', `${grid.columns} columns × ${grid.rows} rows = ${grid.cells.toLocaleString('en-US')} cells (${grid.rule === 'auto' ? "the R script's rule" : 'columns set'})`],
+    ['Grid', `${grid.columns} columns × ${grid.rows} rows = ${grid.cells.toLocaleString('en-US')} cells (${grid.rule === 'auto' ? 'automatic grid' : 'columns set'})`],
     ['Photos used', `${used.used.toLocaleString('en-US')} of ${used.count.toLocaleString('en-US')}, ${s.maxUses === 1 ? 'each once' : `each at most ${s.maxUses} times`}`],
     ['Colour match', METRIC_LABELS[s.metric]],
     ['Total cost', number(cost.total)],
@@ -711,7 +711,7 @@ el.mosaic.addEventListener('keydown', (/** @type {KeyboardEvent} */ e) => {
 el.fit.addEventListener('change', drawAll);
 el.tint.addEventListener('input', () => {
   const v = el.tint.valueAsNumber;
-  el.tintValue.textContent = v === 0 ? '0% (as in R)' : `${v}%`;
+  el.tintValue.textContent = `${v}%`;
   drawMosaic();
   drawDetail();
 });

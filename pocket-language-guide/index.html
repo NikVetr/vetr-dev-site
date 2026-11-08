@@ -23,23 +23,24 @@
   <script src="ui/collection-nav.js" defer></script>
 </head>
 <body class="page-gallery">
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
-    <span class="tool-nav-name">Wanderwart — Pocket Language Guide</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
-  </nav>
 <a class="skip-link" href="#gallery" data-i18n="nav.skipToLanguages">Skip to the languages</a>
 <header class="site-header">
-  <div class="container container-gallery">
-    <a class="brand" href="./"><img class="brand-mark brand-mark-light" src="data/brand/mark.svg" alt="" width="29" height="20"><img class="brand-mark brand-mark-dark" src="data/brand/mark-dark.svg" alt="" width="29" height="20"><span data-i18n="nav.brand">Wanderwart</span></a>
-    <div class="spacer"></div>
-    <div class="reader-picker">
-      <span id="reader-label">I speak</span>
-      <div id="reader"></div>
+  <div class="container container-gallery tool-native-header">
+    <div class="gallery-header-controls">
+      <a class="brand" href="./"><img class="brand-mark brand-mark-light" src="data/brand/mark.svg" alt="" width="29" height="20"><img class="brand-mark brand-mark-dark" src="data/brand/mark-dark.svg" alt="" width="29" height="20"><span data-i18n="nav.brand">Wanderwart</span></a>
+      <div class="spacer"></div>
+      <div class="reader-picker">
+        <span id="reader-label">I speak</span>
+        <div id="reader"></div>
+      </div>
+      <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
     </div>
-    <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
+    <nav class="tool-nav tool-nav-end" aria-label="Tool navigation">
+      <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
+      <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+      <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
+      <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
+    </nav>
   </div>
 </header>
 

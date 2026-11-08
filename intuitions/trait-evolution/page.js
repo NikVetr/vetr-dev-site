@@ -290,10 +290,10 @@ function describeBridge() {
     const where = (/** @type {any} */ x) => (x.midpoint.sample ? `${num(x.midpoint.sample.distance)} ± ${num(x.midpoint.sample.distanceSE)}` : 'none kept');
     const kept = whole.paths.length
       ? `The middle point's mean distance from the centre: ${where(stage)} redrawing midpoints, ${where(whole)} redrawing whole paths.`
-      : `Redrawing whole paths kept none of ${p.paths.toLocaleString('en-US')} in ${whole.attempts.toLocaleString('en-US')} tries: almost every free path leaves the region somewhere, which is why the script redraws single midpoints instead.`;
+      : `Redrawing whole paths kept none of ${p.paths.toLocaleString('en-US')} in ${whole.attempts.toLocaleString('en-US')} tries: almost every free path leaves the region somewhere. The approximate midpoint method avoids rejecting whole paths.`;
     note.hidden = false;
     note.innerHTML = `<strong>${p.method === 'stagewise' ? 'Approximate.' : 'Exact for the drawn points.'}</strong> ${p.method === 'stagewise'
-      ? 'Each midpoint that falls outside is redrawn on its own, as truncatedBMapprox.R does. That ignores that a point near the edge makes the rest of the path likely to leave, so paths crowd the edge.'
+      ? 'Each midpoint that falls outside is redrawn on its own. That ignores that a point near the edge makes the rest of the path likely to leave, so paths crowd the edge.'
       : 'A whole path is redrawn whenever any of its points leaves, so the kept paths are bridges conditioned to stay inside, at the drawn points.'} ${kept}`;
     $('bridge-readout').innerHTML = p.method === 'stagewise'
       ? `${rejected.toLocaleString('en-US')} of ${total.toLocaleString('en-US')} midpoints (${formatNumber((rejected / Math.max(1, total)) * 100, 1)}%) fell outside and were redrawn.`

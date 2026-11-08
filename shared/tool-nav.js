@@ -1,17 +1,8 @@
-// Help opens the tool's existing explanation or invokes its existing dialog button.
-/** @param {Element} target @param {HTMLElement} [invoker] */
-function revealToolHelp(target, invoker) {
+// Help opens the tool's explanation. Native help buttons keep their own handlers.
+/** @param {Element} target */
+function revealToolHelp(target) {
     if (target instanceof HTMLDialogElement) {
       target.showModal();
-      return;
-    }
-    if (target instanceof HTMLButtonElement) {
-      const dialogId = target.getAttribute('aria-controls');
-      const dialog = dialogId ? document.getElementById(dialogId) : null;
-      if (dialog instanceof HTMLDialogElement && invoker) {
-        dialog.addEventListener('close', () => invoker.focus({ preventScroll: true }), { once: true });
-      }
-      target.click();
       return;
     }
     if (target instanceof HTMLDetailsElement) target.open = true;
@@ -29,7 +20,7 @@ for (const link of document.querySelectorAll('.tool-nav [data-tool-help]')) {
     const target = selector ? document.querySelector(selector) : null;
     if (!target) return; // Cross-page help links use ordinary navigation.
     event.preventDefault();
-    revealToolHelp(target, /** @type {HTMLElement} */ (link));
+    revealToolHelp(target);
   });
 }
 

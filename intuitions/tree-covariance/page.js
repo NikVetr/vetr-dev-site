@@ -21,7 +21,7 @@ const num = (/** @type {number} */ v, d = 3) => formatNumber(v, d);
 const escape = (/** @type {string} */ s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] ?? c);
 
 const PRESETS = [
-  { name: 'The script\'s three tips', newick: SCRIPT_TREE },
+  { name: 'Three-tip example', newick: SCRIPT_TREE },
   { name: 'Two tips with a stem', newick: '(x1:1.5,x2:0.5):1;' },
   { name: 'Four tips, two cherries', newick: '((A:2,B:3):1,(C:1.5,D:2.5):2);' },
   { name: 'Five tips, a ladder', newick: '((((A:1,B:1):1,C:2):1,D:3):1,E:4);' },

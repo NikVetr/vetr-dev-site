@@ -22,18 +22,11 @@
   <script src="ui/collection-nav.js" defer></script>
 </head>
 <body class="page-studio">
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
-    <span class="tool-nav-name">Wanderwart — Pocket Language Guide</span>
-    <a href="./#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
-  </nav>
 <a class="skip-link" href="#face-area" data-i18n="nav.skipToSheet">Skip to the sheet</a>
 <header class="site-header studio-header">
   <!-- The studio is full-width, so its header must be too: the shared .container
        cap left the brand 250px inboard of the panel it sits above. -->
-  <div class="container container-wide">
+  <div class="container container-wide tool-native-header">
     <!-- The way back to the languages, at the head of the line, where a way back is
          looked for -- and at every width: on a phone the rest of the actions fold
          into the menu, and a way out behind a menu was no way out at all. An arrow
@@ -81,6 +74,12 @@
       </details>
     </div>
     <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
+    <nav class="tool-nav tool-nav-end" aria-label="Tool navigation">
+      <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
+      <a href="./#tool-help" data-tool-help="">Help</a>
+      <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
+      <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
+    </nav>
   </div>
 </header>
 

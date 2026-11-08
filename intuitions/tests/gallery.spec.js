@@ -69,7 +69,7 @@ for (const [entry, target] of [['dag-adjustment', 'dag-plot'], ['samplers', 'fun
     await page.keyboard.press('Tab');
     await expect(page.locator(`#${target}`)).not.toBeFocused();
     if (entry === 'probability-puzzles') await expect(page.locator('#kruskal-play')).toBeFocused();
-    if (entry === 'samplers') await expect(page.locator('.note').first()).toContainText("A different sampler from the scripts'.");
+    if (entry === 'samplers') await expect(page.locator('.note').first()).toContainText("no warm-up or automatic tuning");
   });
 }
 

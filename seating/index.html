@@ -14,20 +14,21 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Table Seating</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/seating">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Table%20Seating%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Table Seating</h1>
         <p class="tagline">Seat guests at tables so that alike guests sit together, chosen pairs share a table and others are kept apart. Then watch the search that found the seating, swap by swap.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/seating">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Table%20Seating%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -223,7 +224,7 @@
           <span class="check"><input id="tablemates" type="checkbox" checked> Count tablemates as closest</span>
         </label>
       </div>
-      <p class="muted settings-help">Table term: <strong>alike tables</strong> is −Σ √|category difference| over each table's pairs of guests; <strong>few categories</strong> is −Σ (1 − 2<sup>−count</sup>) over each table's categories; <strong>mixed tables</strong> is the variance of each table's categories. Geography: <strong>room costs</strong> are the room-cost rows under Pairs and groups; <strong>by category</strong> gives every pair the cost (number of categories − |difference|), as the original script did, which pushes alike guests apart.</p>
+      <p class="muted settings-help">Table term: <strong>alike tables</strong> is −Σ √|category difference| over each table's pairs of guests; <strong>few categories</strong> is −Σ (1 − 2<sup>−count</sup>) over each table's categories; <strong>mixed tables</strong> is the variance of each table's categories. Geography: <strong>room costs</strong> are the room-cost rows under Pairs and groups; <strong>by category</strong> gives every pair the cost (number of categories − |difference|), which pushes alike guests apart.</p>
       <h3>Search</h3>
       <div class="settings">
         <label>Iterations
@@ -255,7 +256,7 @@
           </select>
         </label>
       </div>
-      <p class="muted settings-help"><strong>Auto</strong> draws the tables where they are in the room unless the names would be smaller than 9 px, and then in rows. The score axis fits <strong>the last 80%</strong> of iterations, as the R version draws it, so the opening climb starts below it; <strong>every iteration</strong> fits them all.</p>
+      <p class="muted settings-help"><strong>Auto</strong> draws the tables where they are in the room unless the names would be smaller than 9 px, and then in rows. The score axis fits <strong>the last 80%</strong> of iterations, so the opening climb starts below it; <strong>every iteration</strong> fits them all.</p>
     </section>
 
     <section class="card method-card">
@@ -266,11 +267,11 @@
           <li><strong>Table term</strong>: by default, minus the sum over each table's pairs of guests of the square root of the difference in their categories, so tables of alike guests score highest. Its weight multiplies it.</li>
           <li><strong>Pairs</strong>: the sum of the pair scores of guests who share a table, times its weight.</li>
           <li><strong>Constraints</strong>: minus the constraint penalty for every pair that should sit together but does not, or should sit apart but does not. Zero when every constraint holds.</li>
-          <li><strong>Geography</strong>: every guest pays cost × closeness towards every other guest, closeness being (1 − distance / largest distance)² between their tables in the room, so a positive cost pushes two guests far apart. With "Count tablemates as closest" on, tablemates count at closeness 1; off, they are skipped, as in the original script.</li>
+          <li><strong>Geography</strong>: every guest pays cost × closeness towards every other guest, closeness being (1 − distance / largest distance)² between their tables in the room, so a positive cost pushes two guests far apart. With "Count tablemates as closest" on, tablemates count at closeness 1; off, they are skipped.</li>
         </ul>
         <p>The search starts from the guests in list order and repeats one move: pick two tables, the worse-scoring more likely (the worst at most e times as likely as the best), pick k seats at each (k = 1 most often, then 2, 3, … with weights e<sup>−0.4k</sup>), and swap their occupants. Empty seats swap too, so guests move into them. The move is kept with probability 1 / (1 + e<sup>−Δ × scale</sup>), Δ being the change in score: a better seating is likely kept, a worse one sometimes. The temperature is fixed, and the best seating seen is the result. The search goes on after finding it, so the replay ends by returning to it.</p>
         <p>The replay shows every move that was kept, in order: the two tables of the move are outlined, and their guests change seats. The score chart shows the score after each one and the best so far.</p>
-        <p>This is a port of Nik Vetr's 2023 R script with its geography bookkeeping fixed. It uses R's random number generator and R's arithmetic, so a seed gives exactly the same moves and seating as the R version. The default budget, 50 iterations per guest, may not be enough with many constraints; more iterations, or a larger acceptance scale early on, help.</p>
+        <p>The seed makes the search repeatable. The default budget, 50 iterations per guest, may not be enough with many constraints; more iterations, or a larger acceptance scale early on, help.</p>
         <p>The optimizer is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
       </details>
     </section>

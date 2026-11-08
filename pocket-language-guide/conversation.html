@@ -19,16 +19,9 @@
   <script src="ui/collection-nav.js" defer></script>
 </head>
 <body class="board-body page-board">
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
-    <span class="tool-nav-name">Wanderwart — Pocket Language Guide</span>
-    <a href="./#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
-  </nav>
 
 <!-- The owner's side. A header small enough that the grid is what the page is. -->
-<header class="board-header">
+<header class="board-header tool-native-header">
   <a class="brand board-brand" href="./"><img class="brand-mark brand-mark-light" src="data/brand/mark.svg" alt="" width="29" height="20"><img class="brand-mark brand-mark-dark" src="data/brand/mark-dark.svg" alt="" width="29" height="20"><span data-i18n="nav.brand">Wanderwart</span></a>
   <!-- Board title and the pair, as a statement of what is about to be shown to
        whom. Filled by `ui/conversation.js`. -->
@@ -41,6 +34,12 @@
     <!-- Hidden until the page has wired it: pressed before then, it did nothing. -->
     <button type="button" id="site-menu" class="site-menu" hidden><span class="board-menu-bars" aria-hidden="true"></span></button>
   </div>
+  <nav class="tool-nav tool-nav-end" aria-label="Tool navigation">
+    <a class="tool-nav-home" href="https://vetr.dev/">vetr.dev</a>
+    <a href="./#tool-help" data-tool-help="">Help</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/pocket-language-guide">Source</a>
+    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Wanderwart%3A%20">Feedback</a>
+  </nav>
 </header>
 
 <main class="board-main">

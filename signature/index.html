@@ -14,20 +14,21 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Signature Correction</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/signature">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Signature%20Correction%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Signature Correction</h1>
         <p class="tagline">Sign with a trackpad, mouse, pen or finger, then smooth the wobble and give the line a pen's natural width. Download it as a transparent PNG or SVG for documents. Everything runs in your browser; your signature is never uploaded.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/signature">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Signature%20Correction%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -120,7 +121,7 @@
           <input id="wavelet-amount" type="range" min="0" max="50" step="1" aria-describedby="wavelet-help">
         </label>
       </div>
-      <p id="wavelet-help" class="muted small">Overall smoothing evens out each whole stroke; 1 is the original R script's level. Local smoothing removes small wobbles, and the brush scales it along the signature. It shows the share of the stroke's detail that is kept.</p>
+      <p id="wavelet-help" class="muted small">Overall smoothing evens out each whole stroke; the default level is 1. Local smoothing removes small wobbles, and the brush scales it along the signature. It shows the share of the stroke's detail that is kept.</p>
       <details class="more">
         <summary>More smoothing settings</summary>
         <div class="settings">
@@ -144,7 +145,7 @@
           <label>Resampling step (auto: height / 100)
             <input data-path="resample.step" data-type="number-or-auto" type="text" inputmode="decimal" spellcheck="false">
           </label>
-          <label class="check"><input data-path="smooth.wavelet.thresholdSmooth" type="checkbox"> Also threshold the smooth, as the R script did (pulls strokes inward)</label>
+          <label class="check"><input data-path="smooth.wavelet.thresholdSmooth" type="checkbox"> Also threshold the smooth component (pulls strokes inward)</label>
         </div>
       </details>
     </section>
@@ -201,7 +202,7 @@
       <h2 id="morph-heading">Morph</h2>
       <div class="morph-body">
       <div class="morph-controls">
-      <p class="muted small">Turn the corrected signature into a second one, as the original R script animated it.</p>
+      <p class="muted small">Turn the corrected signature into a second one.</p>
       <div class="toolbar">
         <button id="morph-example" type="button">Second example</button>
         <button id="morph-draw" type="button">Draw the second…</button>
@@ -226,7 +227,7 @@
           <input id="morph-loop" type="range" min="0" max="4" step="0.25" value="0">
         </label>
       </div>
-      <p id="morph-method-help" class="muted small">The R script interpolated wavelet coefficients, compared them with Fourier-smoothed strokes, and morphed the first strokes only. Loops swell the wavelet details half-way.</p>
+      <p id="morph-method-help" class="muted small">Choose wavelet coefficients, Fourier-smoothed strokes or the corrected strokes for interpolation. Loops swell the wavelet details half-way.</p>
       </div>
       <div class="morph-view">
       <div class="morph-frame">
@@ -257,7 +258,7 @@
           <li><strong>Outline.</strong> An SVG line has one width, so each stroke becomes a filled outline, and the outlines are merged where they overlap. The PNG and SVG have no background.</li>
           <li><strong>Morph.</strong> Both signatures are centred and brought to the same length of ink. Strokes are paired; a stroke the other signature lacks grows from the point where it crosses a paired one.</li>
         </ol>
-        <p>This is a port of an R script from 2023 by Nik Vetr, with its bugs fixed. Scripts and agents can use the same corrector: see the <a href="api.md">API description</a>.</p>
+        <p>The <a href="api.md">API</a> provides the same smoothing, stroke-width and morph controls.</p>
       </details>
     </section>
   </main>

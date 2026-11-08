@@ -578,7 +578,7 @@ test('probability puzzles: deals, playback, strategies, presets, invalid fields 
   await expect(page.locator('#secretary-readout')).toContainText('58.29%');
   await expect(page.locator('#secretary-applicants .threshold-curve')).toHaveCount(1);
   // The prisoners: the script's preset, and an invalid number of attempts.
-  await page.getByRole('button', { name: "The script's: 5 and 80" }).click();
+  await page.getByRole('button', { name: "5 prisoners, 80 boxes each" }).click();
   await expect(page.locator('#prisoners-stats')).toContainText('77.81%');
   await page.locator('#prisoners-attempts-number').fill('150');
   await expect(page.locator('#prisoners-attempts-number')).toHaveAttribute('aria-invalid', 'true');

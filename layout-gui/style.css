@@ -91,6 +91,8 @@ header h1 {
     font-weight: 600;
 }
 
+header > .tool-nav { margin-inline-start: auto; }
+
 /* stack just the labels you mark with .stack */
 label.stack {
   display: flex;

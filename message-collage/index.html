@@ -14,20 +14,21 @@
   <script src="../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Message Collage</span>
-    <a href="#tool-help" data-tool-help="#tool-help">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/message-collage">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Message%20Collage%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <div>
         <h1>Message Collage</h1>
         <p class="tagline">Turn a set of short messages, such as farewell or thank-you notes, into one dense card, each message in its own font, size and colour. Your messages never leave this browser.</p>
       </div>
-      <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a class="tool-nav-home" href="/">vetr.dev</a>
+          <a href="#tool-help" data-tool-help="#tool-help">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/message-collage">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Message%20Collage%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -185,7 +186,7 @@
         <p>The messages are then placed in a shuffled order, line by line, on a grid of small cells. A message's first line takes the top-left-most free block that its first word fits, and as many words as fit there. Each next line starts on the row just below, within the span of the line above, and lines up with its left or right edge when the cells allow. If a message runs into others, it starts again somewhere else. When the messages need more room than the card has, the card grows downward. A line ending close to the right edge is moved flush right.</p>
         <p>Colours go to the messages in order: first colours not yet used, then colours whose nearest message of the same colour is farthest away, drawn at random with odds that favour distance.</p>
         <p>This is tried for as many layouts as you ask, each with its own fonts, sizes and colours (the order stays the same), and the layout with the fewest empty cells is kept.</p>
-        <p>The seed fixes every random choice, so the same messages and settings always give the same card. This is a port of an R program, and gives exactly the R version's card for the same fonts, settings and seed. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
+        <p>The seed fixes every random choice, so the same messages and settings always give the same card. The tool is also available to scripts and agents: see the <a href="api.md">API description</a>.</p>
       </details>
     </section>
   </main>

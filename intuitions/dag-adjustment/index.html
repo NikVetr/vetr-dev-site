@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Adjusting for the right variables — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Adjustment</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -188,11 +188,9 @@
         <h3>Which sets work</h3>
         <p>A set is valid for every choice of coefficients exactly when it meets the adjustment criterion: it contains no descendant of a variable on a causal path from the exposure to the outcome, and it blocks every non-causal path between them. A path is blocked by an adjusted variable that is not a collider on it, or by a collider on it that neither it nor any of its descendants is adjusted for. An edge with coefficient 0 counts as absent. A set that fails the criterion can still give the right number when two biases cancel; the table marks that case.</p>
         <h3>The presets</h3>
-        <p>The front door is the smoking, tar and cancer graph of the original script: the genotype that confounds smoking and cancer is unobserved, so no adjustment works, yet the effect equals the effect of smoking on tar times the effect of tar on cancer given smoking. The income and happiness graph is the one an R script built while reading Bjälkebring and Peters, <a href="https://doi.org/10.1371/journal.pone.0259331">"Money matters (especially if you are good at math): Numeracy, verbal intelligence, education, and income in satisfaction judgments"</a> (PLOS ONE 16(11): e0259331, 2021). In the script, illness lowers income and satisfaction, numeracy raises income, and income raises satisfaction; numeracy has no direct effect, and the simulation has no numeracy-by-income interaction. The coefficients here are the script's simulated ones, not estimates from the paper's data. In that graph, adjusting for income makes numeracy look harmful (−2) although its effect, all through income, is +4.</p>
+        <p>The front-door preset uses smoking, tar and cancer: the genotype that confounds smoking and cancer is unobserved, so no adjustment works, yet the effect equals the effect of smoking on tar times the effect of tar on cancer given smoking. The income and happiness graph is an illustrative model inspired by Bjälkebring and Peters, <a href="https://doi.org/10.1371/journal.pone.0259331">"Money matters (especially if you are good at math): Numeracy, verbal intelligence, education, and income in satisfaction judgments"</a> (PLOS ONE 16(11): e0259331, 2021). In this model, illness lowers income and satisfaction, numeracy raises income, and income raises satisfaction; numeracy has no direct effect, and the simulation has no numeracy-by-income interaction. The coefficients are illustrative simulation values, not estimates from the paper's data. In that graph, adjusting for income makes numeracy look harmful (−2) although its effect, all through income, is +4.</p>
         <h3>Many colliders</h3>
         <p>With exchangeable colliders the conditional covariance of Y and U has a closed form: with <var>d</var> = 1 + (<var>p</var> − 1) Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>), the colliders explain <var>p</var><var>r</var>²/<var>d</var> of Y, and the partial correlation is −<var>p</var> <var>r</var> Cor(X, U) / √((1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>) + <var>p</var> Cor(X, U)²)(1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>) + <var>p</var><var>r</var>²)). Scripts and agents can run every computation on this page through the <a href="../api.md">API</a>, including graphs of their own.</p>
-        <h3>The R scripts</h3>
-        <p>The graphs come from four R scripts. The income and happiness script's dagitty calls name nodes that are not in its graph ("USD", "JOY", "ILL") and a function that does not exist (is_Illnesser, apparently is_confounder after a find-and-replace), so they stop with errors; the corrected call finds the one minimal set, illness. Its simulation was unseeded and drew 10,000 people; with a seed and a million, its regressions agree with the exact values here. The ageing script rounds its implied covariance to four decimals before conditioning, which changes nothing at its coefficients, and its second graph draws the coefficients it leaves unset at random without a seed, so its numbers change from run to run. The many-collider script turns a whole-number 1/(1 − Cor(X<sub><var>i</var></sub>, X<sub><var>j</var></sub>)) into an identity matrix of that size, so with one collider at, say, <var>r</var> = 0.5 and share ⅓ its rank-one inverse fails (its own grid never hits such a value), and it subtracts the explained part from 1, which loses digits when the colliders explain almost all of Y or U: at 1,024 colliders its partial correlation was off by as much as 4 × 10⁻⁵ in the cases checked, and can fall below −1. Its animation interpolated between grid values of <var>r</var>; here every value is exact.</p>
       </div>
     </section>
   </main>

@@ -2,6 +2,8 @@
 
 The site is static HTML, CSS and browser modules, served from the repository root with no build step. Each application owns its inputs, computation and exports; shared navigation connects its entry page to the collection. Setup and application interfaces are documented in [README.md](../README.md).
 
+Collection navigation is static markup inside each application's native header. `shared/tool-nav.css` provides compact links and header action groups; `shared/tool-nav.js` opens existing explanation sections or dialogs. Applications that already have a help button keep it. The benchmark's generated role pages inherit its canonical header, and Wanderwart's standalone/native builders synchronize local copies of the navigation assets. The newer tools also share `shared/base.css` for compact surfaces, themes, controls and responsive touch targets; application styles own their working layouts.
+
 ## Landing layout
 
 `index.html` supplies the cards, their sizes and subject categories. `style.css` chooses the column count and track sizing. The cards stay in one grid; theme boundaries do not take part in layout.

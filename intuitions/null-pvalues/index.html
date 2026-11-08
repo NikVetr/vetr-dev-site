@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">Ways to break a p-value — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Null p-values</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -80,7 +80,7 @@
               <input id="batch-treatedShare-number" type="number" min="0" max="1" step="0.05">
             </div>
             <input id="batch-treatedShare-range" type="range" min="0" max="1" step="0.05" aria-label="Share treated in odd-numbered batches, slider">
-            <p class="hint">Even-numbered batches have the rest treated. 0.5 balances the treatment across batches, as the original script does.</p>
+            <p class="hint">Even-numbered batches have the rest treated. 0.5 balances the treatment across batches.</p>
           </div>
           <div id="batch-issues" class="issues" role="alert" hidden></div>
           <p class="readout" id="batch-readout" aria-live="polite"></p>
@@ -160,7 +160,7 @@
     <!-- 4 -->
     <section class="card panel" id="autocorrelation" aria-labelledby="autocorrelation-heading">
       <h2 id="autocorrelation-heading"><span class="panel-number">4</span> Correlating autocorrelated series</h2>
-      <p class="panel-intro">Two series measured over time, or along a genome, are each autocorrelated: neighbouring points are alike. The usual test of their correlation assumes <var>n</var> independent pairs. With autocorrelation each series holds fewer independent pieces of information, so the correlation of two unrelated series varies more than the test allows (for two AR(1) series with coefficient φ, (1 + φ²)/(1 − φ²) times as much) and the p-values pile up near 0. Fisher's <var>z</var> makes the same assumption. The original script tries three remedies: an effective number of observations, a test against circular shifts of one series, and a Newey–West standard error.</p>
+      <p class="panel-intro">Two series measured over time, or along a genome, are each autocorrelated: neighbouring points are alike. The usual test of their correlation assumes <var>n</var> independent pairs. With autocorrelation each series holds fewer independent pieces of information, so the correlation of two unrelated series varies more than the test allows (for two AR(1) series with coefficient φ, (1 + φ²)/(1 − φ²) times as much) and the p-values pile up near 0. Fisher's <var>z</var> makes the same assumption. The panel compares three remedies: an effective number of observations, a test against circular shifts of one series, and a Newey–West standard error.</p>
       <div class="panel-body">
         <figure class="pv-figure" id="autocorrelation-figure" data-shortcut="Test assuming independence" data-sound="Remedy"></figure>
         <div class="panel-side">
@@ -242,7 +242,7 @@
     <!-- 6 -->
     <section class="card panel" id="pairing" aria-labelledby="pairing-heading">
       <h2 id="pairing-heading"><span class="panel-number">6</span> Paired data tested as independent</h2>
-      <p class="panel-intro">Measure the same people before and after. People differ from each other far more than they change, so each person's two values are strongly correlated. A two-sample <var>t</var>-test ignores the pairing and charges the comparison for the whole spread between people. Under a true null its p-values crowd towards 1 and it almost never rejects; with a real change it misses most of them. The paired test works on each person's change and is exact. Set a true mean change to compare their power: the original script's is 0.25.</p>
+      <p class="panel-intro">Measure the same people before and after. People differ from each other far more than they change, so each person's two values are strongly correlated. A two-sample <var>t</var>-test ignores the pairing and charges the comparison for the whole spread between people. Under a true null its p-values crowd towards 1 and it almost never rejects; with a real change it misses most of them. The paired test works on each person's change and is exact. Set a true mean change to compare their power.</p>
       <div class="panel-body">
         <figure class="pv-figure" id="pairing-figure" data-shortcut="Two-sample (Welch) t-test" data-sound="Paired t-test"></figure>
         <div class="panel-side">
@@ -329,7 +329,7 @@
               <input id="enrichment-seed" type="number" min="0" max="4294967295" step="1">
               <button type="button" id="enrichment-new-seed">New seed</button>
             </div>
-            <p class="hint">The histograms are exact. The sample is one draw of the original script's experiment, for the Benjamini–Hochberg counts.</p>
+            <p class="hint">The histograms are exact. The Benjamini–Hochberg counts come from one simulated sample.</p>
           </div>
           <div id="enrichment-issues" class="issues" role="alert" hidden></div>
           <p class="readout" id="enrichment-readout" aria-live="polite"></p>
@@ -345,19 +345,11 @@
         <h3 id="reading">Reading the figures</h3>
         <p>Each histogram shows one analysis's p-values in 20 bins, as a density, so a valid test's bars stand at height 1 (the dashed line). The plot below them shows, for every threshold from 10⁻⁴ to 1, the share of p-values at or below it. A valid test lies on the diagonal; a curve above it rejects a true null more often than its threshold promises, and one below it is conservative and loses power. The vertical line is α, and the marks on it are the two analyses' false-positive rates.</p>
         <h3>Exact and simulated</h3>
-        <p>Where the null distribution has a closed form it is used, and the figure is exact: the batch panel, the joint model of the second panel and the enrichment panel. Elsewhere the data are simulated with a seed, from shared/rng.js's mulberry32 with normals by inversion, so the same seed gives the same p-values in every browser and in Node; each rate there carries its Monte Carlo standard error, and the panel says how many replicates it ran. More replicates narrow the error. Simulations run in a background worker, so the page stays responsive. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
+        <p>Where the null distribution has a closed form it is used, and the figure is exact: the batch panel, the joint model of the second panel and the enrichment panel. Elsewhere the data are simulated with a seed, so the same seed gives the same p-values for the same settings; each rate there carries its Monte Carlo standard error, and the panel says how many replicates it ran. More replicates narrow the error. Simulations run in a background worker, so the page stays responsive. The <a href="../api.md">API</a> provides the same computations.</p>
         <h3>Regressing out the batch</h3>
         <p>Regressing the outcome on the treatment and the <var>k</var> − 1 batch indicators, then refitting the outcome minus the fitted batch effects on the treatment alone, gives the same coefficient and the same residuals. Only the standard error differs: the refit divides the residual sum of squares by <var>n</var> − 2 instead of <var>n</var> − <var>k</var> − 1, and uses the treatment's whole variance instead of the part the batches leave, 1 − <var>R</var>². So its <var>t</var> is the model's times √((<var>n</var> − 2)/(<var>n</var> − <var>k</var> − 1)) / √(1 − <var>R</var>²), and since the model's <var>t</var> has exactly a <var>t</var> distribution on <var>n</var> − <var>k</var> − 1 degrees of freedom, the shortcut's false-positive rate is exact.</p>
         <h3>Filtering</h3>
         <p>The two-step and enrichment panels break the same rule from opposite ends: a filter applied before testing keeps the test valid only if, under the null, it is independent of the test statistic (Bourgon, Gentleman and Huber, <a href="https://doi.org/10.1073/pnas.0914005107">PNAS 2010</a>). Significance in one group is not independent of the difference between groups, and having at least one hit is not independent of the hit count. The pooled effect is, nearly: with equal designs in the two groups the pooled slope and the difference of the slopes are independent, and they share only the residual variance.</p>
-        <h3>The R scripts</h3>
-        <p>The panels come from seven R scripts, rerun with seeds for this page. basic_batch_correction_error.R is right; at its design, 20 samples in two balanced batches, the shortcut's exact rate is 5.70%, and its simulation gives 5.77% ± 0.16%.</p>
-        <p>stepwise_regression_inflate_false_disc.R's "corrected" p-value is (1 − pt(<var>t</var>, <var>n</var> − 2 − 50)) × 2 with a signed <var>t</var>. For a negative <var>t</var> that exceeds 1, as it does in half the replicates, so the script counts rejections on one side only and reports about 10% where the procedure rejects about 21%. The correction also changes only the reference distribution's degrees of freedom and keeps σ estimated on <var>n</var> − 2, which hardly moves the p-value; rescaling σ, this page's second option, brings the rate to about 6.5%.</p>
-        <p>bootstrap_ttest_demo.R is right. It compares 5,000 random pairings of the two groups' bootstrap means where this page uses all <var>B</var>² of them, which estimates the same share with less noise.</p>
-        <p>fisher-cor-pval_deflation.R defines its simulation twice, and the second definition, the one it runs, offers only the naive test, so its three remedies are never called. Through the first definition they reject 4.8% (effective <var>n</var>), 4.8% (circular shifts) and 7.3% (Newey–West) at φ = 0.7, as here. Its effective-<var>n</var> test takes √(<var>n</var><sub>eff</sub> − 2), which is NaN when <var>n</var><sub>eff</sub> falls below 2; this page applies the floor of 1 the script already uses for the degrees of freedom. Despite the file's name it tests with cor.test's <var>t</var>; Fisher's <var>z</var> agrees with it to about three digits.</p>
-        <p>two-step_multiple-testing.R's first part is right. Its second part, meant to filter on the pooled main effect, selects with the first part's p-values (<code>fits</code>, whose columns are A and B, where the new fits' columns are x and f) and applies that selection to different simulations, so its interaction p-values come out uniform for the wrong reason. This page filters on the pooled effect of the same data.</p>
-        <p>test-1s-vs-2s.R compares a one-sample test of the paired differences with a two-sample test, with a true mean change of 0.25, so it measures power rather than behaviour under the null. Here the change is 0 unless you set it.</p>
-        <p>hypergeometric_bias.R draws each pathway's genes with replacement, so about 0.1% of the drawn genes repeat and a pathway of 50 can hold 49; here a pathway has exactly its stated number of genes. In three seeded runs of the script, 17–22% of the pathways with a hit fall below 0.05, against the exact 19.9%.</p>
       </div>
     </section>
   </main>

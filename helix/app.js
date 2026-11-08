@@ -28,7 +28,7 @@ const MORE_COLOURS = ['#E41A1C', '#377EB8', '#4DAF4A', '#984EA3', '#FF7F00', '#A
 const PRESETS = {
   helix: [
     { name: 'R default', title: 'draw_DNA() as it stands: 2.5 turns, upright', settings: {} },
-    { name: 'Bold, sideways', title: 'The look of the 2024 script\'s own picture: on its side, with bold edges', settings: { rotation: 270, strandThickness: 0.64, edgeWidth: 0.8, basePairThickness: 1.25 } },
+    { name: 'Bold, sideways', title: 'A sideways helix with bold edges', settings: { rotation: 270, strandThickness: 0.64, edgeWidth: 0.8, basePairThickness: 1.25 } },
     { name: 'Ladder end', title: 'The function\'s example: turned 135°, both strands running on as a ladder', settings: { rotation: 135, extension: { strands: 'both', length: 1, taper: false }, box: { width: 80, height: 140, fit: 'contain', includeExtension: true } } },
     { name: 'Underline', title: 'On its side, strand 1 running on to underline a word, as on the name tags', settings: { turns: 1.5, rotation: 90, strandThickness: 2, extension: { strands: 'strand1', length: 2.5, taper: true }, box: { width: 40, height: 20, fit: 'contain', includeExtension: false } } },
     { name: 'Grooves', title: 'Strands 140° apart, as in B-DNA\'s major and minor grooves, 10.5 base pairs a turn', settings: { phaseShift: 140, basePairsPerTurn: 10.5, turns: 3, strandThickness: 1.5 } },

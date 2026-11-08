@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">A tree is a covariance matrix — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">A tree is a covariance matrix</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -94,7 +94,7 @@
     <!-- 2 -->
     <section class="card panel" id="reroot" aria-labelledby="reroot-heading">
       <h2 id="reroot-heading"><span class="panel-number">2</span> Moving the root</h2>
-      <p class="panel-intro">Brownian motion runs the same forwards and backwards, so the tips only tell us about the unrooted tree. Hang the same tree from another point, as drawingSimple3TipTrees.R draws it five ways, and the covariance matrix changes, since the paths now share different stretches, but the restricted likelihood, with the root's state integrated out, does not. That is Felsenstein's pulley principle. The ordinary likelihood, with the root's state set to its best estimate, does change: the closer the root is to a tip, the more precisely that tip pins the root down.</p>
+      <p class="panel-intro">Brownian motion runs the same forwards and backwards, so the tips only tell us about the unrooted tree. Hang the same tree from another point, and the covariance matrix changes, since the paths now share different stretches, but the restricted likelihood, with the root's state integrated out, does not. That is Felsenstein's pulley principle. The ordinary likelihood, with the root's state set to its best estimate, does change: the closer the root is to a tip, the more precisely that tip pins the root down.</p>
       <div class="panel-body">
         <figure id="reroot-figures">
           <div id="reroot-tree" class="plot-box"></div>
@@ -108,7 +108,7 @@
         <div class="panel-side">
           <div class="control stacked" data-tree-editor="reroot"></div>
           <div class="control">
-            <span class="label" id="reroot-preset-label">The script's rootings</span>
+            <span class="label" id="reroot-preset-label">Rooting presets</span>
             <div class="control-row" role="group" aria-labelledby="reroot-preset-label" id="reroot-presets"></div>
           </div>
           <div class="control">
@@ -158,7 +158,7 @@
           <div class="table-wrap"><table class="numbers step-table" id="pruning-steps"></table></div>
           <div class="figure-head"><h3>From covariance to contrasts</h3></div>
           <div class="matrix-row" id="pruning-matrices"></div>
-          <figcaption class="caption">P is the tips' covariance (σ² times the shared paths); the contrasts y are independent with the diagonal covariance Q, as drawingSimple3TipTrees.R sets them out.</figcaption>
+          <figcaption class="caption">P is the tips' covariance (σ² times the shared paths); the contrasts y are independent with the diagonal covariance Q.</figcaption>
         </figure>
         <div class="panel-side">
           <div class="control stacked" data-tree-editor="pruning"></div>
@@ -177,9 +177,7 @@
         <h3>The likelihoods</h3>
         <p>For <var>n</var> tips with covariance <var>C</var> (times the rate σ²), the restricted log-likelihood integrates the root's state μ out against a flat prior: −½[(<var>n</var> − 1) log 2π + log|<var>C</var>| + log 1ᵀ<var>C</var>⁻¹1 + <var>r</var>ᵀ<var>C</var>⁻¹<var>r</var>] for one trait with σ² = 1, where <var>r</var> is the tips' deviation from the root estimate μ̂ = 1ᵀ<var>C</var>⁻¹<var>x</var> / 1ᵀ<var>C</var>⁻¹1. Pruning gives the same sum one contrast at a time, and μ̂ is the value it leaves at the root, with variance 1/1ᵀ<var>C</var>⁻¹1. The ordinary log-likelihood at μ̂ is the restricted one minus ½ log(2π σ² Var μ̂), which is why it moves with the root and the restricted one does not. Rooted at a tip, that tip's value is the root's state, observed, and the two coincide. A root edge adds its length to every entry of <var>C</var>.</p>
         <h3>Computing</h3>
-        <p>The matrix's log-determinant and inverse come from its Cholesky factor; the pruning never forms a matrix. With several traits and a rate matrix Σ, each contrast is multivariate normal with covariance its variance times Σ, and the direct likelihood uses <var>C</var> ⊗ Σ; the API takes up to four traits. Simulated tips are drawn branch by branch from shared/rng.js's mulberry32, normals by inversion, so a seed gives the same draws everywhere. A node with more than two children is pruned two at a time, as if joined by branches of length 0. Scripts and agents can run every panel through the <a href="../api.md">API</a>.</p>
-        <h3>The R scripts</h3>
-        <p>pruningAlgorithmTestImplementationIThink.R's BMpruneLL computes the multivariate restricted likelihood correctly: on R's trees with two and three traits it agrees with the direct formula from ape's vcv to rounding, rooted, unrooted and re-rooted. It stores the traits as a matrix and drops to a vector when there is one trait, so it fails with one trait ("incorrect number of dimensions"); this page takes one or more. exploringFasterPruning.R's BMpruneLLuvt rotates the traits by the eigenvectors of the global variable cov rather than of its argument sig, so it gives the right answer only when they are the same matrix. demonstratingUVBMonTree.R's covariance, 2.5, 1 and 1.5, is the tree (x1:1.5,x2:0.5):1, with its stem.</p>
+        <p>The matrix's log-determinant and inverse come from its Cholesky factor; the pruning never forms a matrix. With several traits and a rate matrix Σ, each contrast is multivariate normal with covariance its variance times Σ, and the direct likelihood uses <var>C</var> ⊗ Σ; the API takes up to four traits. Simulated tips are drawn branch by branch with a seed, so a seed gives the same draws everywhere. A node with more than two children is pruned two at a time, as if joined by branches of length 0. The <a href="../api.md">API</a> provides the same computations.</p>
       </div>
     </section>
   </main>

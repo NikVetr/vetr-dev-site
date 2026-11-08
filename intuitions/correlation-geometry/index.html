@@ -14,21 +14,21 @@
   <script src="../../shared/tool-nav.js" defer></script>
 </head>
 <body>
-  <nav class="tool-nav" aria-label="Tool navigation">
-    <a class="tool-nav-home" href="/">vetr.dev</a>
-    <span class="tool-nav-name">The geometry of correlation — Statistical Intuitions</span>
-    <a href="../#tool-help" data-tool-help="">Help</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
-    <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
-  </nav>
   <header class="site-header">
-    <div class="container header-row">
+    <div class="container header-row tool-header-row">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">vetr.dev</a><span class="sep" aria-hidden="true">/</span>
         <a href="../">Statistical intuitions</a><span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Correlation geometry</span>
       </nav>
-      <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      <div class="tool-header-actions">
+        <nav class="tool-nav" aria-label="Tool navigation">
+          <a href="../#tool-help" data-tool-help="">Help</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/tree/main/intuitions">Source</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/issues/new?title=Statistical%20Intuitions%3A%20">Feedback</a>
+        </nav>
+        <button id="theme-toggle" type="button" class="quiet" aria-pressed="false"></button>
+      </div>
     </div>
   </header>
 
@@ -264,9 +264,7 @@
         <h3>Counting dimensions</h3>
         <p>With <var>n</var> observations, the centred arrows live in <var>n</var> − 1 dimensions. A full-rank set of <var>p</var> arrows needs <var>p</var> ≤ <var>n</var> − 1, so a sample correlation matrix is singular whenever <var>p</var> ≥ <var>n</var>. With three observations the arrows have two dimensions to share, which is why panel 2's cone meets the circle in exactly two points; with <var>n</var> observations the arrows at a fixed angle to one arrow form a sphere of dimension <var>n</var> − 3.</p>
         <h3>The intervals</h3>
-        <p>For one entry, write det <var>R</var> as det <var>S</var> × [(1 − <var>a</var>)(1 − <var>b</var>) − (<var>r</var><sub><var>ij</var></sub> − <var>c</var>)²], with <var>a</var>, <var>b</var> and <var>c</var> the quadratic forms in the panel 5 formula. The bracket is a downward parabola in <var>r</var><sub><var>ij</var></sub>, so the entry's interval is where it is non-negative. When the other variables are themselves linearly dependent the page uses the pseudo-inverse of <var>S</var>, which gives the same interval. The expected widths are exact: in a uniform matrix, the parts of <var>i</var> and <var>j</var> the others leave unexplained are independent products of independent Beta-distributed partial correlations (the C-vine of Lewandowski, Kurowicka and Joe, 2009); in a sample matrix each is Beta((<var>n</var> − <var>p</var> + 1)/2, (<var>p</var> − 2)/2).</p>
-        <h3>The R scripts</h3>
-        <p>The panels come from R scripts written for teaching and for sampling correlation matrices in MCMC. A few statements there are corrected here. The interval function in the three-way constraint script returned the interval's centre as its lower end, because it set the free Cholesky entry to 0 rather than to minus the remaining length; the compound-symmetry script's version is right, and is what this page follows. The scripts call det <var>R</var> the volume the arrows enclose; it is the squared volume. They say the construction of arrows fails when <var>p</var> &gt; <var>n</var>; it fails, for a full-rank matrix, once <var>p</var> ≥ <var>n</var>. Their whitening step multiplied by the inverse of the upper Cholesky factor where column-vector data need the inverse of its transpose, which is why the whitened covariance came out wrong (not a Bessel correction). The numerical searches for the cone's intersections and for the largest correlation with one pair at 0 are replaced by closed forms. Scripts and agents can run the same computations through the <a href="../api.md">API</a>.</p>
+        <p>For one entry, write det <var>R</var> as det <var>S</var> × [(1 − <var>a</var>)(1 − <var>b</var>) − (<var>r</var><sub><var>ij</var></sub> − <var>c</var>)²], with <var>a</var>, <var>b</var> and <var>c</var> the quadratic forms in the panel 5 formula. The bracket is a downward parabola in <var>r</var><sub><var>ij</var></sub>, so the entry's interval is where it is non-negative. When the other variables are themselves linearly dependent the page uses the pseudo-inverse of <var>S</var>, which gives the same interval. The expected widths are exact: in a uniform matrix, the parts of <var>i</var> and <var>j</var> the others leave unexplained are independent products of independent Beta-distributed partial correlations (the C-vine of Lewandowski, Kurowicka and Joe, 2009); in a sample matrix each is Beta((<var>n</var> − <var>p</var> + 1)/2, (<var>p</var> − 2)/2). The <a href="../api.md">API</a> provides the same computations.</p>
       </div>
     </section>
   </main>

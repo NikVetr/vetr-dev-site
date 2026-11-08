@@ -114,7 +114,7 @@ const RENDER = {
       stat('The 50% rule', `${pct(e.half, 2)}${r.simulation ? ` <small class="sim-line">sim. ${pct(r.simulation.half.rate, 1)}</small>` : ''}`),
       stat('The best rule', `${pct(e.optimal, 2)}${r.simulation ? ` <small class="sim-line">sim. ${pct(r.simulation.optimal.rate, 1)}</small>` : ''}`),
     ].join('');
-    $('secretary-cutoff-hint').innerHTML = `⌊<var>n</var>/e⌋ = ${Math.floor(r.n / Math.E)}, the script's; the best is ${e.best.cutoff}.`;
+    $('secretary-cutoff-hint').innerHTML = `⌊<var>n</var>/e⌋ = ${Math.floor(r.n / Math.E)}; the best cutoff is ${e.best.cutoff}.`;
     $('secretary-status').textContent = `Seed ${results.secretary?.params.seed}; the applicants shown are the first round, then ${count(r.simulation?.replicates ?? 0)} more.`;
   },
   prisoners: () => {
