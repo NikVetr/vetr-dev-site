@@ -95,16 +95,21 @@ export function submit(request) {
     });
   });
 
+  // The historical character-mode size search can flag the final line as
+  // exhausted just after placing the last character. Report actual placement
+  // here without changing that search, its history, or the resulting geometry.
+  const placed = glyphs.filter(g => g.placed).length;
+  const complete = placed === glyphs.length;
   /** @type {string[]} */
   const warnings = [];
-  if (!fit.complete) warnings.push(`text did not fit: ${(100 * fit.fractionPlaced).toFixed(1)}% of characters placed`);
+  if (!complete) warnings.push(`text did not fit: ${placed} of ${glyphs.length} characters placed`);
   const missing = missingChars(chars);
   if (missing.length) warnings.push(`Liberation Sans Bold has no glyph for ${missing.map((c) => JSON.stringify(c)).join(' ')}; they are measured and drawn as its empty-box glyph`);
 
   return {
     cex: fit.cex,
     font_size_px: fit.cex * 12,
-    complete: fit.complete,
+    complete,
     fraction_placed: fit.fractionPlaced,
     lines: glyphs.reduce((most, g) => Math.max(most, g.line ?? 0), 0),
     history: fit.history,

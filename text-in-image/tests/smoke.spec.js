@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 /** @param {import('@playwright/test').Page} page */
 async function open(page) {
@@ -67,6 +68,7 @@ test('renders the example and exposes the API', async ({ page }) => {
 
 test('shows every problem with a setting, and recovers', async ({ page }) => {
   await open(page);
+  await page.locator('#advanced-settings summary').click();
   await page.getByLabel('Number of colours').fill('0');
   await page.getByLabel('Size rounds').fill('');
   await page.getByRole('button', { name: 'Render' }).click();
@@ -87,10 +89,87 @@ test('fits a 390 px phone without horizontal scrolling', async ({ page }) => {
   await open(page);
   const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(await overflow()).toBe(0);
+  await page.getByRole('link', { name: 'Result ↓' }).click();
+  await expect(page.locator('#result-heading')).toBeFocused();
+  expect((await page.locator('#output').boundingBox())?.height).toBeLessThan(500);
   await page.getByLabel('Rotation, degrees counterclockwise').fill('20');
   await page.getByRole('button', { name: 'Render' }).click();
   await expect(page.locator('#status')).toHaveText(/^Done in /);
   expect(await overflow()).toBe(0);
+});
+
+test('example and Clear can restore the previous image, text, settings and rendered result', async ({ page }) => {
+  await open(page);
+  await page.locator('#max-side').fill('160');
+  await page.locator('#image-file').setInputFiles({ name: 'my-picture.png', mimeType: 'image/png', buffer: readFileSync(new URL('../examples/alice-drink-me.png', import.meta.url)) });
+  await expect(page.locator('#image-info')).toHaveText('my-picture.png, 87 × 160 px');
+  await page.locator('#text').fill('My original whole words.');
+  await page.locator('#whole-words').uncheck();
+  await page.locator('#rotation').fill('17');
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  const before = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).TextInImage;
+    return { request: JSON.stringify(app.getRequest()), svg: app.exportSvgText() };
+  });
+  await page.locator('#load-example').click();
+  await expect(page.locator('#undo-replace')).toBeEnabled();
+  await expect(page.locator('#whole-words')).toBeChecked();
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#image-info')).toHaveText('my-picture.png, 87 × 160 px');
+  await expect(page.locator('#whole-words')).not.toBeChecked();
+  await expect(page.locator('#rotation')).toHaveValue('17');
+  await expect(page.locator('#stale')).toBeHidden();
+  expect(await page.evaluate(() => {
+    const app = /** @type {any} */ (window).TextInImage;
+    return { request: JSON.stringify(app.getRequest()), svg: app.exportSvgText() };
+  })).toEqual(before);
+  await page.locator('#clear-inputs').click();
+  await expect(page.locator('#text')).toHaveValue('');
+  await expect(page.locator('#image-info')).toHaveText('No image loaded.');
+  await expect(page.locator('#stale')).toBeVisible();
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#text')).toHaveValue('My original whole words.');
+  await expect(page.locator('#stale')).toBeHidden();
+  // The original uploaded Blob, not just decoded pixels, is available after Undo.
+  await page.locator('#max-side').fill('120');
+  await page.locator('#max-side').blur();
+  await expect(page.locator('#image-info')).toHaveText('my-picture.png, 66 × 120 px');
+  await page.locator('#clear-inputs').click();
+  await page.locator('#text').fill('A later edit');
+  await expect(page.locator('#undo-note')).toBeHidden();
+});
+
+test('a failed example fetch preserves work and a successful API request clears old Undo', async ({ page }) => {
+  await open(page);
+  await page.locator('#text').fill('Keep this text.');
+  await page.locator('#whole-words').uncheck();
+  const before = await page.evaluate(() => JSON.stringify(/** @type {any} */ (window).TextInImage.getRequest()));
+  await page.route('**/examples/alice-chapter-1.txt', route => route.fulfill({ status: 503, body: 'Unavailable' }));
+  await page.locator('#load-example').click();
+  await expect(page.locator('#issues')).toContainText('HTTP 503');
+  expect(await page.evaluate(() => JSON.stringify(/** @type {any} */ (window).TextInImage.getRequest()))).toBe(before);
+  await expect(page.locator('#undo-note')).toBeHidden();
+  await page.locator('#clear-inputs').click();
+  await expect(page.locator('#undo-note')).toBeVisible();
+  await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const image = await app.decodeImage('examples/alice-drink-me.png', 120);
+    await app.submit({ image, text: 'An API replacement.' });
+  });
+  await expect(page.locator('#undo-note')).toBeHidden();
+});
+
+test('the landscape preview is bounded and fitting errors reveal their collapsed settings', async ({ page }) => {
+  await page.setViewportSize({ width: 844, height: 390 });
+  await open(page);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
+  const image = await page.locator('#output').boundingBox();
+  expect(image?.height).toBeLessThanOrEqual(390);
+  await page.evaluate(() => { /** @type {HTMLInputElement} */ (document.querySelector('#n-rounds')).value = ''; });
+  await page.locator('#render').click();
+  await expect(page.locator('#advanced-settings')).toHaveAttribute('open', '');
+  await expect(page.locator('#n-rounds')).toHaveAttribute('aria-invalid', 'true');
 });
 
 

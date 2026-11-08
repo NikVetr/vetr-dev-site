@@ -249,7 +249,19 @@ test('text that cannot fit is reported with the share placed', () => {
   const result = submit({ image: tiny, text: 'abc '.repeat(25), quantize: null, layout: { n_rounds: 1, line_height: 10 } });
   assert.equal(result.complete, false);
   assert.ok(result.fraction_placed < 1);
-  assert.match(result.warnings[0], /^text did not fit/);
+  assert.equal(result.warnings[0], `text did not fit: ${result.glyphs.filter(g => g.placed).length} of ${result.glyphs.length} characters placed`);
+});
+
+test('final completeness reports all placed characters without altering the historical size search', () => {
+  const result = submit({ image: example.image, text: 'A short replacement text.', layout: { n_rounds: 30 } });
+  assert.equal(result.cex, 28.860278639824866); // established character-mode geometry
+  assert.equal(result.history.length, 30);
+  assert.ok(result.history.every(pass => !pass.complete)); // retain the search's final-line stopping rule
+  assert.equal(result.complete, true);
+  assert.equal(result.fraction_placed, 1);
+  assert.equal(result.glyphs.length, 25);
+  assert.ok(result.glyphs.every(g => g.placed));
+  assert.deepEqual(result.warnings, []);
 });
 
 /** A PNG file from raw scanlines (filter byte included) and chunks. */

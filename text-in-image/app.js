@@ -17,7 +17,7 @@ const EXAMPLE = { image: 'examples/alice-drink-me.png', text: 'examples/alice-ch
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 const el = {
   imageFile: byId('image-file'), maxSide: byId('max-side'), imageInfo: byId('image-info'), text: byId('text'),
-  loadExample: byId('load-example'), charCount: byId('char-count'),
+  loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), undoNote: byId('undo-note'), undoText: byId('undo-text'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
   lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
   ink: byId('ink'), background: byId('background'), scale: byId('scale'), seed: byId('seed'),
@@ -39,7 +39,20 @@ const state = {
   changed: new Set(),
   /** Whether the last render from the page failed, leaving an earlier result on view. */
   failed: false,
+  /** @type {Pick<Issue, 'path' | 'message'>[]} */ issues: [],
 };
+
+let replacing = false;
+let running = 0;
+/** @type {ReturnType<typeof snapshotWork> | null} */
+let replaced = null;
+
+function showBusy() {
+  const busy = replacing || running > 0;
+  for (const button of [el.render, el.loadExample, el.clear, el.undo]) button.disabled = busy;
+  if (busy) document.documentElement.dataset.busy = 'true';
+  else delete document.documentElement.dataset.busy;
+}
 
 // ---------- worker ----------
 
@@ -165,13 +178,14 @@ function showCharCount() {
  */
 async function run(request, { fromApi }) {
   const statusBefore = el.status.textContent;
-  el.render.disabled = true;
+  running++;
+  showBusy();
   el.status.textContent = 'Rendering…';
-  document.documentElement.dataset.busy = 'true';
   try {
     const background = typeof request?.color?.background === 'string' ? request.color.background : 'black';
     const { result, svg } = await runInWorker(request, background);
     if (fromApi) {
+      dropUndo();
       state.image = request.image;
       state.source = null;
       el.text.value = Array.isArray(request.text) ? request.text.join(' ') : request.text;
@@ -199,8 +213,8 @@ async function run(request, { fromApi }) {
     }
     throw error;
   } finally {
-    el.render.disabled = false;
-    delete document.documentElement.dataset.busy;
+    running--;
+    showBusy();
   }
 }
 
@@ -240,6 +254,7 @@ function labelOf(field) {
 
 /** Lists the problems by the fields' labels, and marks those fields. @param {Pick<Issue, 'path' | 'message'>[]} issues */
 function showIssues(issues) {
+  state.issues = issues.map(issue => ({ ...issue }));
   for (const field of Object.values(FIELDS)) field.removeAttribute('aria-invalid');
   el.issues.hidden = issues.length === 0;
   el.issues.replaceChildren();
@@ -248,6 +263,8 @@ function showIssues(issues) {
   for (const issue of issues) {
     const field = issue.path ? fieldFor(issue.path) : null;
     field?.setAttribute('aria-invalid', 'true');
+    const details = field?.closest('details');
+    if (details) details.open = true;
     const item = document.createElement('li');
     item.textContent = field ? `${labelOf(field)}: ${issue.message}` : issue.path ? `${issue.path}: ${issue.message}` : issue.message;
     list.append(item);
@@ -283,8 +300,7 @@ function showResult(result, svg) {
   el.noResult.hidden = true;
   el.result.hidden = false;
 
-  // The fit is worded from the counts, which a rounded percentage can contradict ("100.0%" of an
-  // incomplete text), so the core's percentage warning is left out here.
+  // State the fit with counts and omit the duplicate core warning from the details below.
   const placed = result.glyphs.filter((g) => g.placed).length;
   const total = result.glyphs.length;
   const count = `${placed.toLocaleString('en-US')} of ${total.toLocaleString('en-US')} characters placed`;
@@ -295,7 +311,7 @@ function showResult(result, svg) {
     ['Lines', String(result.lines)],
     ['Output size', `${result.canvas.width} × ${result.canvas.height} px`],
     ...(result.palette ? [['Colour error (OKLab)', `mean ${result.palette.error.mean.toFixed(3)}, 99th percentile ${result.palette.error.p99.toFixed(3)}`]] : []),
-    ['Size rounds', result.history.map((h) => `${(12 * h.cex).toFixed(2)} px ${h.complete ? '✓' : '✗'}`).join(', ')],
+    ['Size rounds', result.history.map((h) => `${(12 * h.cex).toFixed(2)} px ${h.fraction_placed === 1 ? '✓' : '✗'}`).join(', ')],
     ...result.warnings.filter((w) => !w.startsWith('text did not fit')).map((w) => ['Warning', `⚠ ${w}`]),
   ];
   el.stats.replaceChildren(...rows.map(([term, value]) => {
@@ -343,15 +359,52 @@ function download(blob, name) {
 
 // ---------- events ----------
 
-async function loadExample() {
-  el.wholeWords.checked = true;
+/** Keep one replacement available without copying the decoded pixels or immutable result. */
+function snapshotWork() {
+  readForm();
+  return {
+    image: state.image, source: state.source, text: el.text.value, maxSide: el.maxSide.value,
+    settings: structuredClone(state.settings), result: state.result, svg: state.svg,
+    changed: new Set(state.changed), failed: state.failed, issues: state.issues.slice(), status: el.status.textContent,
+  };
+}
+
+function dropUndo() {
+  replaced = null;
+  el.undoNote.hidden = true;
+}
+
+/** @param {string} note */
+function rememberReplacement(note) {
+  replaced = state.image || el.text.value !== '' ? snapshotWork() : null;
+  el.undoText.textContent = note;
+  el.undoNote.hidden = !replaced;
+}
+
+/** @param {boolean} [remember] */
+async function loadExample(remember = false) {
+  // Fetch and decode before changing any input, so a failed load leaves the work intact.
+  const read = async (/** @type {string} */ url) => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status}).`);
+    return response;
+  };
   const [blob, text] = await Promise.all([
-    fetch(EXAMPLE.image).then((r) => r.blob()),
-    fetch(EXAMPLE.text).then((r) => r.text()),
+    read(EXAMPLE.image).then((r) => r.blob()),
+    read(EXAMPLE.text).then((r) => r.text()),
   ]);
+  const maxSide = el.maxSide.valueAsNumber;
+  if (!(maxSide >= 16)) throw new Error('The longest image side must be at least 16 px.');
+  const image = await decodeImage(blob, maxSide);
+  if (remember) rememberReplacement('Example loaded. Undo restores your previous work.');
+  state.image = image;
+  state.source = { blob, name: EXAMPLE.image.split('/').pop() ?? '' };
+  el.imageFile.value = '';
+  el.wholeWords.checked = true;
   el.text.value = text;
   showCharCount();
-  await loadImage(blob, EXAMPLE.image.split('/').pop() ?? '');
+  showImageInfo();
+  for (const part of /** @type {const} */ (['image', 'text', 'settings'])) markChanged(part);
 }
 
 el.imageFile.addEventListener('change', async () => {
@@ -359,6 +412,7 @@ el.imageFile.addEventListener('change', async () => {
   if (!file) return;
   try {
     await loadImage(file, file.name);
+    dropUndo();
     showIssues([]);
     markChanged('image');
   } catch (error) {
@@ -369,23 +423,75 @@ el.maxSide.addEventListener('change', async () => {
   if (!state.source) return;
   try {
     await loadImage(state.source.blob, state.source.name);
+    dropUndo();
     showIssues([]);
     markChanged('image');
   } catch (error) {
     showIssues([{ path: 'image', message: /** @type {Error} */ (error).message }]);
   }
 });
+el.maxSide.addEventListener('input', dropUndo);
 el.wholeWords.addEventListener('change', showCharCount);
 el.quantizeOn.addEventListener('change', () => { el.k.disabled = !el.quantizeOn.checked; });
 el.text.addEventListener('input', () => {
+  dropUndo();
   showCharCount();
   markChanged('text');
 });
-byId('settings-card').addEventListener('input', () => markChanged('settings'));
+byId('settings-card').addEventListener('input', () => { dropUndo(); markChanged('settings'); });
 el.render.addEventListener('click', renderFromPage);
 el.loadExample.addEventListener('click', async () => {
-  await loadExample();
-  await renderFromPage();
+  replacing = true;
+  showBusy();
+  try {
+    await loadExample(true);
+    await renderFromPage();
+  } catch (error) {
+    showIssues([{ path: '', message: /** @type {Error} */ (error).message }]);
+  } finally {
+    replacing = false;
+    showBusy();
+  }
+});
+el.clear.addEventListener('click', () => {
+  if (!state.image && el.text.value === '') return;
+  rememberReplacement('Image and text cleared.');
+  state.image = null;
+  state.source = null;
+  el.imageFile.value = '';
+  el.text.value = '';
+  showCharCount();
+  showImageInfo();
+  showIssues([]);
+  state.failed = false;
+  markChanged('image');
+  markChanged('text');
+  el.status.textContent = 'Image and text cleared.';
+});
+el.undo.addEventListener('click', () => {
+  if (!replaced) return;
+  const before = replaced;
+  dropUndo();
+  Object.assign(state, { image: before.image, source: before.source, settings: before.settings, changed: before.changed, failed: before.failed });
+  el.text.value = before.text;
+  el.maxSide.value = before.maxSide;
+  el.imageFile.value = '';
+  writeForm(state.settings);
+  showImageInfo();
+  showCharCount();
+  if (before.result) showResult(before.result, before.svg);
+  else {
+    if (state.svgUrl) URL.revokeObjectURL(state.svgUrl);
+    state.result = null;
+    state.svg = state.svgUrl = '';
+    el.output.removeAttribute('src');
+    el.result.hidden = true;
+    el.noResult.hidden = false;
+  }
+  showIssues(before.issues);
+  showStale();
+  el.status.textContent = before.status;
+  el.text.focus({ preventScroll: true });
 });
 el.exportSvg.addEventListener('click', () => download(new Blob([state.svg], { type: 'image/svg+xml' }), 'text-in-image.svg'));
 el.exportPng.addEventListener('click', async () => download(await pngBlob(), 'text-in-image.png'));

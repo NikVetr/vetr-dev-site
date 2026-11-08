@@ -81,10 +81,10 @@ A colour is written `#rrggbb` or `#rgb`, or is `"black"` or `"white"`.
 | --- | --- |
 | `cex` | Letter size in R's `cex` units (12 px each). |
 | `font_size_px` | Letter size in output pixels, `12 × cex`. |
-| `complete` | Whether the layout found room for the whole text. It is `false` when the layout ran out of lines, even if that happened at the last character in character mode. In word mode, an unfit word is wholly unplaced; explicit whitespace consumes no ink. |
+| `complete` | Whether every character is placed, including whitespace. In word mode, an unfit word is wholly unplaced; explicit whitespace consumes no ink. This final status is computed from the glyphs, independently of the size search's stopping condition. |
 | `fraction_placed` | Share of characters placed. |
 | `lines` | Number of lines written. |
-| `history[]` | One entry per layout pass: `round`, `cex`, `ratio` (above 1: the text fit with room to spare; below 1: it did not fit), `complete`, `fraction_placed`. |
+| `history[]` | One entry per layout pass: `round`, `cex`, `ratio` (above 1: the search considered the pass fitting; below 1: it considered it exhausted), `complete`, `fraction_placed`. These are the original size-search diagnostics: in character mode a pass can have `complete: false` and `fraction_placed: 1` when its last character exhausts the last line. The final `complete` field and warnings report actual placement; the historical size search and output geometry are unchanged. |
 | `glyphs[]` | One entry per character of the text (see below). |
 | `canvas` | `{width, height}` of the output in pixels: the (rotated) picture at `render.scale`. |
 | `image` | `{width, height}` of the input. |
