@@ -61,7 +61,7 @@ node scripts/landing-art/build.mjs            # every picture
 node scripts/landing-art/build.mjs helix      # one
 ```
 
-Workflow previews show input and output stages: Signature draws the raw input, scans to the core’s smoothed centreline, then applies its ink widths; Name Tags illustrates rearrangement into actual fitted layouts before a laser pass; Palette Town shows color-space and constraint setup, its verified best-of-12 optimization trace, then CVD comparisons. autoCHAIR reuses the app’s animated logo before its agenda tracker.
+Workflow previews show input and output stages: Signature draws the raw input, scans to the core’s smoothed centreline, then applies its ink widths; Name Tags illustrates rearrangement into actual fitted layouts before a laser pass; Palette Town shows color-space and constraint setup, its verified best-of-12 optimization trace, then CVD comparisons. autoCHAIR reuses the app’s animated logo before its agenda tracker. Wanderwart pairs its printable cards with a Converse button press; the generic salary benchmark compares equal weights, automatic weights and a scatterplot. Photomosaic moves from source photo through sampled cell colors to the actual matched tiles.
 
 The Alice preview enables Text in Image’s optional low-contrast outline; the app leaves it off by default. The fishcake example tints its outer rim light pink before JPEG compression, so every vectorization stage uses the same input. Photomosaic crops around its subject to fill narrow preview wells without stretching the tiles.
 

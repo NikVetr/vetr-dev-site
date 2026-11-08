@@ -4,16 +4,15 @@
 // its own PNG export at 20 px a tile and embedded as WebP; the other view is the page's "target
 // at one colour per cell", drawn as one square per cell. The image fills the artwork at its
 // native 4:3 geometry. Narrow wells crop the sides around the sunflower, preserving square
-// cells while filling their height; the loop crossfades to cell colours and back.
+// cells while filling their height. Playback shows the source photo, its actual sampled
+// cell colours, then reveals the matched mosaic. The sweep illustrates assembly, not search order.
+import { readFileSync } from 'node:fs';
 import { openPage } from '../browser.mjs';
 import { art, num } from '../svg.mjs';
 
 const TILE_PX = 20;     // pixels per tile in the embedded mosaic, about twice its display size
 const QUALITY = 0.5;    // WebP quality
-const PERIOD = 7;
-const TO_CELLS = 2;     // seconds on the mosaic before it fades to the cells
-const FADE = 0.6;
-const ON_CELLS = 2.8;   // seconds on the cells
+const PERIOD = 10;
 
 export async function build() {
   const { page, errors, close } = await openPage('photomosaic/');
@@ -66,23 +65,24 @@ export async function build() {
     }
   }
 
-  const p = (/** @type {number} */ t) => `${num((100 * t) / PERIOD, 3)}%`;
-  const a = TO_CELLS;
-  const b = a + FADE;
-  const c = b + ON_CELLS;
-  const d = c + FADE;
-  if (d > PERIOD - 0.5) throw new Error('photomosaic: the views do not fit in the period');
-  const fade = (/** @type {string} */ id, /** @type {number} */ from, /** @type {number} */ to) => `@keyframes ${id} { 0% { opacity: ${from}; } ${p(a)} { opacity: ${from}; } ${p(b)} { opacity: ${to}; } ${p(c)} { opacity: ${to}; } ${p(d)} { opacity: ${from}; } 100% { opacity: ${from}; } }`;
+  const target = readFileSync(new URL('../../../photomosaic/examples/sunflower.jpg', import.meta.url)).toString('base64');
 
   return art({
     name: 'photomosaic',
     width,
     height,
     period: PERIOD,
-    body: `<image href="${mosaic.url}" width="${num(width)}" height="${num(height)}" preserveAspectRatio="none"/>
-<g class="cells" transform="scale(${num(tile, 4)})">${cells}</g>`,
-    css: `& .cells { opacity: 0; }`,
-    loop: `& .cells { animation: photomosaic-cells ${PERIOD}s ease-in-out infinite; }
-${fade('photomosaic-cells', 0, 1)}`,
+    defs: `<clipPath id="photomosaic-unfilled"><rect class="unfilled" width="${width}" height="${height}"/></clipPath>`,
+    body: `<image class="mosaic-result" href="${mosaic.url}" width="${num(width)}" height="${num(height)}" preserveAspectRatio="none"/>
+<g class="target"><image href="data:image/jpeg;base64,${target}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice"/></g>
+<g class="cell-stage" clip-path="url(#photomosaic-unfilled)"><g transform="scale(${num(tile, 4)})">${cells}</g></g>`,
+    css: `& .target, & .cell-stage { opacity: 0; }
+& .unfilled { transform-origin: ${width}px 0; }`,
+    loop: `& .target { animation: photomosaic-target ${PERIOD}s linear infinite; }
+& .cell-stage { animation: photomosaic-cells ${PERIOD}s linear infinite; }
+& .unfilled { animation: photomosaic-fill ${PERIOD}s linear infinite; }
+@keyframes photomosaic-target { 0%,30%,100% {opacity:0;} 6%,24% {opacity:1;} }
+@keyframes photomosaic-cells { 0%,24%,88%,100% {opacity:0;} 30%,85% {opacity:1;} }
+@keyframes photomosaic-fill { 0%,48%,100% {transform:scaleX(1);} 85%,99% {transform:scaleX(0);} }`,
   }).replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
 }
