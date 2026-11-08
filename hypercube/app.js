@@ -4,6 +4,7 @@
 // SVG and the API agree. window.Hypercube exposes submit() to scripts in the page.
 
 import { attachRotation } from '../intuitions/lib/geom3d.js';
+import { bindFormHistory, bindHistoryShortcuts, createHistory } from '../shared/history.js';
 import {
   captionLayout, decodePlan, DEFAULT_CAMERA, drawFrame, FONT_FAMILY, HypercubeError, isDefaultCamera, normalizeRequest,
   NUMERAL_TEXTURE, SHIPPED_K, stageAt, stageLabel, STAGE_NAMES, submit,
@@ -18,6 +19,9 @@ const canvas = /** @type {HTMLCanvasElement} */ ($('view'));
 const context = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ALPHA_MIN = 0.001;
+/** @type {ReturnType<typeof createHistory> | undefined} */
+let history;
+let selectedFrame = 1; // Explicit seeks, independent of animation frames.
 
 const state = {
   k: 9,
@@ -257,6 +261,7 @@ function goTo(frame) {
   const plan = /** @type {Plan} */ (state.plan);
   state.frame = ((((frame - 1) % plan.frames) + plan.frames) % plan.frames) + 1;
   state.position = state.frame - 1;
+  selectedFrame = state.frame;
   draw();
 }
 
@@ -265,6 +270,7 @@ function step(by) {
   if (!state.plan) return;
   pause();
   goTo(state.frame + by);
+  history?.commit();
 }
 
 $('play').addEventListener('click', () => (state.playing ? pause() : play()));
@@ -325,10 +331,12 @@ async function setK(k, at = {}) {
   const frame = at.frame ?? Math.round((at.fraction ?? 0) * (plan.frames - 1)) + 1;
   state.frame = Math.min(plan.frames, Math.max(1, frame));
   state.position = state.frame - 1;
+  selectedFrame = state.frame;
   showAlpha();
   drawStages();
   draw();
   if (wasPlaying) play();
+  history?.commit();
 }
 
 $('k').addEventListener('change', () => {
@@ -597,3 +605,35 @@ if (state.plan) {
   } else play();
 }
 document.documentElement.dataset.ready = 'true';
+history = createHistory({
+  capture: () => ({ k: state.plan?.k ?? state.k, plan: state.plan, frame: state.frame, selectedFrame, camera: [...state.camera], style: state.style, faceAlpha: state.faceAlpha, numerals: state.numerals, speed: state.speed, exportSize: $('export-size').value, caption: $('export-caption').checked }),
+  equal: (a, b) => {
+    const { frame: af, plan: ap, ...ac } = a;
+    const { frame: bf, plan: bp, ...bc } = b;
+    return JSON.stringify(ac) === JSON.stringify(bc);
+  },
+  restore: (saved) => {
+    pause(); ++state.loadToken;
+    Object.assign(state, { k: saved.k, plan: saved.plan, frame: saved.frame, position: saved.frame - 1, camera: [...saved.camera], style: saved.style, faceAlpha: saved.faceAlpha, numerals: saved.numerals, speed: saved.speed });
+    selectedFrame = saved.selectedFrame;
+    $('k').value = String(saved.k); $('speed').value = String(saved.speed);
+    $('numerals').checked = saved.numerals;
+    $('export-size').value = saved.exportSize; $('export-caption').checked = saved.caption;
+    $('loading').hidden = true; $('load-issues').hidden = true;
+    $('timeline').max = String(saved.plan?.frames ?? 1);
+    showAlpha(); drawStages(); setStyle(saved.style);
+  },
+  onChange: (h) => { $('undo').disabled = !h.canUndo; $('redo').disabled = !h.canRedo; },
+});
+bindHistoryShortcuts(history);
+bindFormHistory(history, { filter: (field) => field.id !== 'k' }); // Plan loading checkpoints on completion.
+document.addEventListener('click', (event) => {
+  if ((/** @type {Element} */ (event.target)).closest('[data-turn],#reset-view,#alpha-reset')) history?.commit();
+});
+canvas.addEventListener('pointerup', () => history?.commit());
+canvas.addEventListener('pointercancel', () => history?.commit());
+canvas.addEventListener('keyup', (event) => { if (event.key.startsWith('Arrow')) history?.commit(); });
+$('undo').addEventListener('click', () => history?.undo());
+$('redo').addEventListener('click', () => history?.redo());
+Object.assign(/** @type {any} */ (window).Hypercube, { undo: history.undo, redo: history.redo });
+history.refresh();

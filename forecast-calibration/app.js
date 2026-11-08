@@ -5,6 +5,7 @@
 import {
   DEFAULTS, ForecastCalibrationError, binsCsv, formatTable, issueLocation, parseProbability, parseTable, renderSvg, submit,
 } from './core/index.js';
+import { bindFormHistory, bindHistoryShortcuts, createHistory } from '../shared/history.js';
 
 /**
  * @typedef {ReturnType<typeof submit>} Result
@@ -40,8 +41,9 @@ let rows = [];
 let result = null;
 /** @type {object | null} */
 let resultRequest = null;
-/** The table that Load example or Clear replaced, until the table is next changed. @type {Row[] | null} */
-let replaced = null;
+/** @type {ReturnType<typeof createHistory> | undefined} */
+let history;
+let exampleToken = 0;
 
 // ---------- request <-> page ----------
 
@@ -202,21 +204,22 @@ byId('clear-rows').addEventListener('click', () => {
 byId('load-example').addEventListener('click', loadExample);
 
 async function loadExample() {
+  const token = ++exampleToken;
   const response = await fetch('examples/synthetic.csv');
   if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status})`);
   const example = rowsFrom(parseTable(await response.text()));
+  if (token !== exampleToken) return;
   replaceRows(example, `Replaced your ${rows.length} prediction${rows.length === 1 ? '' : 's'} with the example.`);
   run();
   save();
+  history?.commit();
 }
 
-// Load example and Clear replace the table at once, and offer it back: Undo restores it, until
-// the table is next edited.
+// Replacement notes describe the last action; Undo/Redo covers all table and setting edits.
 
 /** @param {Row[]} next @param {string} note what the replacement did, shown beside Undo */
 function replaceRows(next, note) {
   const changed = rows.length > 0 && formatTable(rows) !== formatTable(next);
-  replaced = changed ? rows : null;
   el.undoText.textContent = note;
   el.undoNote.hidden = !changed;
   rows = next;
@@ -224,18 +227,11 @@ function replaceRows(next, note) {
 }
 
 function dropUndo() {
-  replaced = null;
   el.undoNote.hidden = true;
 }
 
-byId('undo-replace').addEventListener('click', () => {
-  if (!replaced) return;
-  rows = replaced;
-  dropUndo();
-  renderRows();
-  run();
-  save();
-});
+byId('undo-replace').addEventListener('click', () => history?.undo());
+byId('redo').addEventListener('click', () => history?.redo());
 
 /** @param {Issue} issue */
 function describeIssue(issue) {
@@ -480,6 +476,7 @@ Object.assign(window, { ForecastCalibration: {
    */
   submit(request) {
     const next = submit(request);
+    history?.commit();
     rows = rowsFrom(typeof request.table === 'string' ? parseTable(request.table) : request.predictions);
     dropUndo();
     writeSettings(request);
@@ -489,6 +486,7 @@ Object.assign(window, { ForecastCalibration: {
     showIssues([]);
     renderResult();
     save();
+    history?.commit();
     return next;
   },
   getRequest: currentRequest,
@@ -509,4 +507,26 @@ if (restore()) {
 } else {
   await loadExample();
 }
+const settingKeys = ['binsMode', 'binsCount', 'simulations', 'plotWorlds', 'interval', 'seed', 'worldOpacity'];
+history = createHistory({
+  capture: () => ({ rows: rows.map((row) => ({ ...row })), settings: settingKeys.map((key) => el[key].value), result, resultRequest }),
+  equal: (a, b) => JSON.stringify([a.rows, a.settings]) === JSON.stringify([b.rows, b.settings]),
+  restore: (saved) => {
+    ++exampleToken;
+    clearTimeout(timer);
+    rows = saved.rows.map((row) => ({ ...row }));
+    settingKeys.forEach((key, i) => { el[key].value = saved.settings[i]; });
+    result = saved.result; resultRequest = saved.resultRequest;
+    dropUndo(); showBinsCount(); renderRows(); run(); save();
+  },
+  onChange: (h) => { byId('undo-replace').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+bindFormHistory(history, { filter: (field) => !field.closest('dialog') });
+bindHistoryShortcuts(history);
+document.addEventListener('click', (event) => {
+  const target = /** @type {Element} */ (event.target);
+  if (target.closest('#add-row,#clear-rows,#new-seed,#table-apply,.remove')) history?.commit();
+});
+Object.assign(/** @type {any} */ (window).ForecastCalibration, { undo: history.undo, redo: history.redo });
+history.refresh();
 document.documentElement.dataset.ready = 'true';

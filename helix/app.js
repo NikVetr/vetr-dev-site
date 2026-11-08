@@ -3,6 +3,7 @@
 // controls, shows the result or the problems, and exports. window.Helix exposes the same.
 
 import { BRAID_DEFAULTS, HELIX_DEFAULTS, HelixError, OUTPUT_DEFAULTS, submit } from './core/index.js';
+import { bindFormHistory, bindHistoryShortcuts, captureForm, createHistory, restoreForm } from '../shared/history.js';
 
 /**
  * @typedef {ReturnType<typeof submit>} Result
@@ -47,6 +48,8 @@ const PRESETS = {
 /** @type {Result | null} */
 let result = null;
 let braidPalette = [...BRAID_DEFAULTS.colors];
+/** @type {ReturnType<typeof createHistory> | undefined} */
+let history;
 
 // ---------- reading and writing the controls ----------
 
@@ -296,11 +299,13 @@ function saveSvg(style, suffix) {
 
 // ---------- the page's API ----------
 
-/** Puts a request into the page and draws it. @param {unknown} request */
-function load(request) {
+/** Puts a request into the page and draws it. @param {unknown} request @param {boolean} [record] */
+function load(request, record = true) {
   const r = submit(request); // throws HelixError, leaving the page as it is
+  if (record) history?.commit();
   setControls(r.request);
   show(r);
+  if (record) history?.commit();
   return r;
 }
 
@@ -349,9 +354,30 @@ $('export-request').addEventListener('click', () => {
 });
 /** Both modes' defaults in the controls, then one mode drawn. @param {'helix' | 'braid'} m */
 function reset(m) {
+  history?.commit();
   setControls({ mode: 'braid', braid: { ...BRAID_DEFAULTS, colors: [...BRAID_DEFAULTS.colors] }, output: { ...OUTPUT_DEFAULTS } });
-  load({ mode: m });
+  load({ mode: m }, false);
+  history?.commit();
 }
 $('reset').addEventListener('click', () => reset(mode()));
 reset('helix');
+history = createHistory({
+  capture: () => ({ form: captureForm(document, { filter: (field) => !field.closest('#braid-colours') }), palette: [...braidPalette], result }),
+  equal: (a, b) => JSON.stringify([a.form, a.palette]) === JSON.stringify([b.form, b.palette]),
+  restore: (saved) => {
+    braidPalette = [...saved.palette];
+    showBraidColours();
+    restoreForm(document, saved.form);
+    showMode(); showDependents();
+    if (saved.result) show(saved.result);
+    draw();
+  },
+  onChange: (h) => { /** @type {HTMLButtonElement} */ ($('undo')).disabled = !h.canUndo; /** @type {HTMLButtonElement} */ ($('redo')).disabled = !h.canRedo; },
+});
+bindFormHistory(history);
+bindHistoryShortcuts(history);
+$('undo').addEventListener('click', () => history?.undo());
+$('redo').addEventListener('click', () => history?.redo());
+Object.assign(/** @type {any} */ (window).Helix, { undo: history.undo, redo: history.redo });
+history.refresh();
 document.documentElement.dataset.ready = 'true';

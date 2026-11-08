@@ -3,6 +3,12 @@
 // controls, and window.Intuitions. The theme and its toggle are the site's, from shared/theme.js.
 
 import { ENTRIES, IntuitionsError, submit } from '../api.js';
+import { bindFormHistory, bindHistoryShortcuts, createHistory } from '../../shared/history.js';
+
+// Stop superseded Monte Carlo work before restoring a teaching state. Its old
+// promise stays unsettled, just as when a newer slider request supersedes it.
+/** @type {Set<(request:{entry?:string,params:any})=>void>} */
+const cancelWorkers = new Set();
 
 /**
  * Marks a field as invalid (aria-invalid="true", which also draws the red field style) or
@@ -139,9 +145,19 @@ export function workerRunner() {
   /** @type {Worker | null} */
   let worker = null;
   let busy = false;
+  /** @type {any} */
+  let latestRequest = null;
+  cancelWorkers.add((request) => {
+    // Other panels may still be drawing their first samples. Only supersede the
+    // restored panel; stopping all workers would leave its neighbours unfinished.
+    if (latestRequest?.entry !== request.entry
+      || (latestRequest?.params?.view ?? latestRequest?.params?.scenario) !== (request.params?.view ?? request.params?.scenario)) return;
+    worker?.terminate(); worker = null; busy = false;
+  });
   return {
     /** @param {unknown} request @returns {Promise<{ entry: string, params: any, result: any }>} */
     run(request) {
+      latestRequest = request;
       if (busy && worker) {
         worker.terminate();
         worker = null;
@@ -268,18 +284,66 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
  * @param {{ entry?: string, load?: (params: any, result: any) => void, getParams?: () => unknown }} page
  */
 export function installApi(page) {
+  /** @type {ReturnType<typeof createHistory> | undefined} */
+  let history;
   const api = {
     entries: Object.keys(ENTRIES),
     IntuitionsError,
     /** @param {unknown} request */
     submit(request) {
       const response = submit(request);
-      if (page.entry && response.entry === page.entry) page.load?.(response.params, response.result);
+      if (page.entry && response.entry === page.entry) {
+        history?.commit();
+        page.load?.(response.params, response.result);
+        history?.commit();
+      }
       return response;
     },
     getRequest: () => (page.entry ? { entry: page.entry, params: page.getParams?.() } : null),
     getResult: () => (page.entry ? submit({ entry: page.entry, params: page.getParams?.() }) : null),
+    undo: () => history?.undo() ?? false,
+    redo: () => history?.redo() ?? false,
   };
+  if (page.entry && page.load && page.getParams) {
+    let valid = structuredClone(page.getParams());
+    const controls = document.createElement('div');
+    controls.className = 'toolbar';
+    controls.id = 'history-controls';
+    controls.setAttribute('role', 'group');
+    controls.setAttribute('aria-label', 'Edit history');
+    controls.innerHTML = '<button type="button" id="history-undo" title="Cmd/Ctrl+Z" disabled>Undo</button><button type="button" id="history-redo" title="Cmd/Ctrl+Shift+Z" disabled>Redo</button>';
+    document.querySelector('.entry-head')?.append(controls);
+    const undo = /** @type {HTMLButtonElement} */ (controls.querySelector('#history-undo'));
+    const redo = /** @type {HTMLButtonElement} */ (controls.querySelector('#history-redo'));
+    history = createHistory({
+      capture: () => {
+        try { valid = structuredClone(page.getParams?.()); }
+        catch (error) {
+          // Invalid drafts are still editable with native field undo. The plots
+          // and application history retain the last applicable parameters.
+          if (!(error instanceof IntuitionsError)) throw error;
+        }
+        return valid;
+      },
+      restore: (params) => {
+        for (const cancel of cancelWorkers) cancel({ entry: page.entry, params });
+        const response = submit({ entry: page.entry, params });
+        page.load?.(response.params, response.result);
+      },
+      onChange: (h) => { undo.disabled = !h.canUndo; redo.disabled = !h.canRedo; },
+    });
+    undo.addEventListener('click', () => history?.undo());
+    redo.addEventListener('click', () => history?.redo());
+    bindHistoryShortcuts(history);
+    bindFormHistory(history, { filter: (field) => !field.closest('dialog') });
+    const checkpoint = (/** @type {Event} */ event) => {
+      if (event.target instanceof Element && !event.target.closest('#history-controls,dialog')) history?.commit();
+    };
+    document.addEventListener('click', checkpoint);
+    document.addEventListener('pointerup', checkpoint);
+    document.addEventListener('pointercancel', checkpoint);
+    document.addEventListener('keyup', (event) => { if (event.key.startsWith('Arrow')) checkpoint(event); });
+  }
   Object.assign(window, { Intuitions: api });
   document.documentElement.dataset.ready = 'true';
   return api;

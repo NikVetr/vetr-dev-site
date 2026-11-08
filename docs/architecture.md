@@ -4,6 +4,8 @@ The site is static HTML, CSS and browser modules, served from the repository roo
 
 Collection navigation is static markup inside each application's native header. `shared/tool-nav.css` provides compact links and header action groups; `shared/tool-nav.js` opens existing explanation sections or dialogs. Applications that already have a help button keep it. The benchmark's generated role pages inherit its canonical header, and Wanderwart's standalone/native builders synchronize local copies of the navigation assets. The newer tools also share `shared/base.css` for compact surfaces, themes, controls and responsive touch targets; application styles own their working layouts.
 
+`shared/history.js` owns bounded Undo/Redo stacks and keyboard routing for the newer tools. App adapters copy editable values and keep immutable results and image assets by reference; restore cancels pending work before replacing page state. Form changes checkpoint at the end of a gesture, while focused text and number inputs retain native Undo. Signature keeps its pad-specific history, and b64 and the benchmark retain their existing implementations. The teaching pages use their canonical request/load interface, including explicit seeds, so a restored simulation uses the same parameters. Playback and worker progress do not create history entries.
+
 ## Landing layout
 
 `index.html` supplies the cards, their sizes and subject categories. `style.css` chooses the column count and track sizing. The cards stay in one grid; theme boundaries do not take part in layout.
