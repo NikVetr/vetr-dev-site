@@ -1,8 +1,9 @@
 # Example signatures
 
-Both are synthetic. No real person's signature is used, and the names are made up.
+All examples are synthetic. No real person's signature is used, and the names are made up.
 
 - `avery-quill.csv`: "Avery Quill" (8 strokes, 358 samples, 7.3 s), the page's default.
+- `avery-quill-rough.csv`: the same seeded Avery Quill path and timestamps, with wobble amplitude 6 px and tremor amplitude 8 px, for the landing workflow. Its correction uses Fourier strength 10 and wavelet energy retention 0.99 without thresholding the smooth coefficients; app defaults stay unchanged.
 - `juno-marsh.csv`: "Juno Marsh" (10 strokes, 394 samples, 8.0 s), the default morph target. Its stroke count differs from Avery Quill's, so the morph pairs leftover strokes.
 
 Columns: `x`, `y` in screen pixels (y down), `t` in milliseconds. Pen lifts are pauses of more than 50 ms, as the R script reads its signature files.

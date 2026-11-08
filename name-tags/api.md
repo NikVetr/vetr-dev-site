@@ -30,7 +30,7 @@ const result = submit({ names: ['Ada Lovelace', 'Alan Turing'] }, { onProgress: 
 // result.sheets[0].svg is the sheet's SVG text
 ```
 
-`submit` takes an optional second argument, `{ onProgress }`, called after each tag with `{ done, total, name }`. It is not part of the JSON request, so the command line has no equivalent. The core also exports `parseNamesText(text)` and `parseNamesCsv(text)` (the names-file formats), `splitNameLines(name)`, `DEFAULTS`, `DEFAULT_STYLE`, `DEFAULT_HERSHEY_EKG`, `TRAY_PRESETS`, `FONTS` and `NameTagsError`.
+`submit` takes optional callbacks in its second argument. `onProgress` is called after each tag with `{ done, total, name }`. `onFitTrace(index, trace)` observes each DNA-box BFGS run: `trace` contains `geometry`, `stage` (1: initial fit, 2: whole-twist refinement), `run`, `steps` (initial parameters and accepted `{ par, value }` iterates), and `result`. The three parameters are `[w1, w2, h2]`; tracing neither changes the optimization nor consumes random draws. The landing preview uses the winning restart and subsequent refinement; other restarts are not animated. These callbacks are not part of the JSON request, so the command line has no equivalent. The core also exports `parseNamesText(text)` and `parseNamesCsv(text)` (the names-file formats), `splitNameLines(name)`, `DEFAULTS`, `DEFAULT_STYLE`, `DEFAULT_HERSHEY_EKG`, `TRAY_PRESETS`, `FONTS` and `NameTagsError`.
 
 **In the page** (https://vetr.dev/name-tags/). The page runs `submit` in a Web Worker, so these calls return promises:
 

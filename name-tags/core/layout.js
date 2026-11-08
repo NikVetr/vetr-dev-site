@@ -366,9 +366,10 @@ function finishTag(m, placed, cell, dimName, style, decoration, fit) {
  * @param {Measured} m @param {number[]} center @param {number[]} cell @param {Style} style @param {number} meanIar2f
  * @param {() => number} unif
  * @param {(message: string) => void} warn
+ * @param {Parameters<typeof placeRectangles>[3]} [onTrace]
  * @returns {Tag}
  */
-export function layoutDnaTag(m, center, cell, style, meanIar2f, unif, warn) {
+export function layoutDnaTag(m, center, cell, style, meanIar2f, unif, warn, onTrace) {
   const dimName = innerBoxDims(style, cell);
   const propDist = style.prop_dist;
   const opt = style.optimizer;
@@ -391,7 +392,7 @@ export function layoutDnaTag(m, center, cell, style, meanIar2f, unif, warn) {
   let info;
   let ntwists = 0;
   for (let attempt = 1; attempt <= 3; attempt++) {
-    rect = placeRectangles(geometry, restarts, unif);
+    rect = placeRectangles(geometry, restarts, unif, onTrace);
     info = rectInfo(rect, propDist, meanIar2f);
     ntwists = roundHalfEven(info.ar2Factor);
     if (ntwists >= 1) break;

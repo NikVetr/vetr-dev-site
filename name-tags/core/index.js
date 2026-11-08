@@ -32,9 +32,9 @@ export { parseNamesCsv, parseNamesText, splitNameLines } from './names.js';
  * Validates a request, lays out its names on the tray and draws the sheets.
  * Same request (seed included), same result.
  * @param {unknown} request see api.md
- * @param {{ onProgress?: (progress: Progress) => void }} [options] onProgress is called after each tag
+ * @param {{ onProgress?: (progress: Progress) => void, onFitTrace?: (index:number, trace: Parameters<NonNullable<Parameters<typeof layoutDnaTag>[7]>>[0]) => void }} [options] onProgress is called after each tag
  */
-export function submit(request, { onProgress } = {}) {
+export function submit(request, { onProgress, onFitTrace } = {}) {
   const s = normalizeRequest(request);
   const { tray, style } = s;
   const placements = assignCells(s.names.length, tray.n_cells, s.cells);
@@ -80,7 +80,7 @@ export function submit(request, { onProgress } = {}) {
       tags = measured.map((m, i) => {
         const dna = s.decoration === 'dna' && m.metrics.length === 2; // one-line names carry no helix
         const tag = dna
-          ? layoutDnaTag(m, centers[i], tray.cell_in, style, meanIar2f, rng.unif, (w) => warnings.push(w))
+          ? layoutDnaTag(m, centers[i], tray.cell_in, style, meanIar2f, rng.unif, (w) => warnings.push(w), onFitTrace ? trace=>onFitTrace(i,trace) : undefined)
           : layoutPlainTag(m, centers[i], tray.cell_in, style);
         /** @type {import('./svg.js').Layer[]} */
         const layers = tag.lines.map((l) => ({ kind: 'glyphs', polygons: l.glyphs, dx: adj[0], dy: adj[1] + l.lowerQ }));

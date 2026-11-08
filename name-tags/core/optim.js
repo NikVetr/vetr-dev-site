@@ -14,10 +14,10 @@
  * parameter or function scaling.
  * @param {(x: number[]) => number} fn
  * @param {number[]} start
- * @param {{ maxit?: number, reltol?: number, abstol?: number, ndeps?: number }} [options]
+ * @param {{ maxit?: number, reltol?: number, abstol?: number, ndeps?: number, onStep?: (step: {par:number[],value:number}) => void }} [options]
  * @returns {BfgsResult}
  */
-export function bfgs(fn, start, { maxit = 100, reltol = 1.4901161193847656e-8, abstol = -Infinity, ndeps = 1e-3 } = {}) {
+export function bfgs(fn, start, { maxit = 100, reltol = 1.4901161193847656e-8, abstol = -Infinity, ndeps = 1e-3, onStep } = {}) {
   const n = start.length;
   const b = start.slice();
   /** central differences, as fmingr */
@@ -34,7 +34,11 @@ export function bfgs(fn, start, { maxit = 100, reltol = 1.4901161193847656e-8, a
       return df;
     });
   };
-  if (maxit <= 0) return { par: b, value: fn(b), fevals: 0, gevals: 0, convergence: 0 };
+  if (maxit <= 0) {
+    const value = fn(b);
+    onStep?.({ par: b.slice(), value });
+    return { par: b, value, fevals: 0, gevals: 0, convergence: 0 };
+  }
 
   const stepredn = 0.2;
   const acctol = 0.0001;
@@ -45,6 +49,7 @@ export function bfgs(fn, start, { maxit = 100, reltol = 1.4901161193847656e-8, a
   const B = Array.from({ length: n }, () => new Array(n).fill(0));
   let f = fn(b);
   if (!Number.isFinite(f)) throw new Error("initial value in 'vmmin' is not finite");
+  onStep?.({ par: b.slice(), value: f });
   let Fmin = f;
   let funcount = 1;
   let gradcount = 1;
@@ -89,6 +94,7 @@ export function bfgs(fn, start, { maxit = 100, reltol = 1.4901161193847656e-8, a
           if (!accpoint) steplength *= stepredn;
         }
       } while (!(count === n || accpoint));
+      if (accpoint) onStep?.({ par: b.slice(), value: f });
       const enough = f > abstol && Math.abs(f - Fmin) > reltol * (Math.abs(Fmin) + reltol);
       // stop if value is small or if relative change is low
       if (!enough) {

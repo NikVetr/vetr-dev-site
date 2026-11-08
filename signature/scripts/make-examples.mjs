@@ -14,6 +14,7 @@ import { rMersenneTwister } from '../../shared/rng.js';
 
 const EXAMPLES = [
   { file: 'avery-quill.csv', text: 'Avery Quill', seed: 20230830, slant: 0.32, height: 150, rotate: -0.035 },
+  { file: 'avery-quill-rough.csv', text: 'Avery Quill', seed: 20230830, slant: 0.32, height: 150, rotate: -0.035, wobble: 6, tremor: 8 },
   { file: 'juno-marsh.csv', text: 'Juno Marsh', seed: 20230831, slant: 0.18, height: 160, rotate: 0.02 },
 ];
 
@@ -60,10 +61,10 @@ function makeSignature(ex) {
     const py = -scale * y;
     return [40 + c * px - s * py, 40 + ex.height * 0.65 + s * px + c * py];
   };
-  const wx = wobble(rng.unif, 3.2, [45, 80, 130]);
-  const wy = wobble(rng.unif, 3.2, [40, 70, 120]);
-  const tx = wobble(rng.unif, 0.9, [7, 11]);
-  const ty = wobble(rng.unif, 0.9, [6, 10]);
+  const wx = wobble(rng.unif, ex.wobble ?? 3.2, [45, 80, 130]);
+  const wy = wobble(rng.unif, ex.wobble ?? 3.2, [40, 70, 120]);
+  const tx = wobble(rng.unif, ex.tremor ?? 0.9, [7, 11]);
+  const ty = wobble(rng.unif, ex.tremor ?? 0.9, [6, 10]);
   const pace = wobble(rng.unif, 0.25, [120, 260]);
   const rows = [];
   let clock = 0;

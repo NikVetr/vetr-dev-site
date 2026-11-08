@@ -13,7 +13,7 @@ import { computeBounds } from '../../../color-optimization/optimizer/bounds.js';
 import { crc32, deflateSync } from 'node:zlib';
 import { decodeColor, encodeColor, isInGamut, projectToGamut } from '../../../color-optimization/core/colorSpaces.js';
 import { contrastColor } from '../../../color-optimization/core/metrics.js';
-import { buildGamutProjectionBoundary, computeGamutExtent, smoothBoundary } from '../../../color-optimization/ui/gamutHull.js';
+import { applyConstrainedChannelsToRange, hardContiguousHiddenConstraintRange, buildGamutProjectionBoundary, computeGamutExtent, smoothBoundary } from '../../../color-optimization/ui/gamutHull.js';
 import { art, esc, flipbook, num, polyline } from '../svg.mjs';
 
 const FIELD = 24;
@@ -88,6 +88,7 @@ function png(n, rgb) {
 export async function build() {
   if (JSON.stringify(TRACE.at(-1)?.hex) !== JSON.stringify(ADDED)) throw new Error('color-optimization: trace endpoint differs from verified palette');
   const gamut = 'srgb', side = 118, px = 192, py = 31;
+  const simulationTypes=['none','deutan','protan','tritan'];
   // All displayed projections and simulations use the app's own color transforms.
   const views = ['lab', 'oklab'].map(space => {
     const range = computeGamutExtent(space, gamut, 1.1);
@@ -98,26 +99,31 @@ export async function build() {
       .map((/** @type {{a:number,b:number}} */ v) => {const [x,y]=toXY(v);return {x,y};}),1);
     const outline = polyline(boundary.filter((/** @type {unknown} */ _,/** @type {number} */ i)=>i%4===0)
       .map((/** @type {{x:number,y:number}} */ v)=>[v.x,v.y]),true);
-    const field = Array.from({length:FIELD},(_,y)=>Array.from({length:FIELD},(_,x)=>{
+    const fields = simulationTypes.map(type=>png(FIELD,Array.from({length:FIELD},(_,y)=>Array.from({length:FIELD},(_,x)=>{
       const v={l:range.min.l+.75*(range.max.l-range.min.l),a:((x+.5)/FIELD*2-1)*maxA,b:(1-(y+.5)/FIELD*2)*maxB};
-      const hex=encodeColor(isInGamut(v,space,gamut)?v:projectToGamut(v,space,gamut,space),space);
+      const hex=applyCvdHex(encodeColor(isInGamut(v,space,gamut)?v:projectToGamut(v,space,gamut,space),space),type,1,'machado2009');
       return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
-    }).flat());
-    return {space,range,toXY,outline,field:png(FIELD,field)};
+    }).flat())));
+    return {space,range,toXY,outline,fields};
   });
-  const bounds = (/** @type {number} */ width) => computeBounds(INPUTS.map(hex=>decodeColor(hex,'oklab')),'oklab',{
+  const constraintBounds = (/** @type {number} */ width) => computeBounds(INPUTS.map(hex=>decodeColor(hex,'oklab')),'oklab',{
     constrain:true,widths:[width,0,0],constraintMode:{l:'hard',a:'hard',b:'hard'},constraintTopology:'contiguous',
-  }).boundsL;
+  });
+  const bounds=(/** @type {number} */ width)=>constraintBounds(width).boundsL;
+  const domain=hardContiguousHiddenConstraintRange(constraintBounds(.65),'oklab',['a','b']);
+  if(!domain)throw new Error('Palette: missing recorded hard lightness domain');
+  const restrictedRange=applyConstrainedChannelsToRange(views[1].range,domain.range,domain.channels);
+  const restricted=polyline(smoothBoundary(buildGamutProjectionBoundary('oklab',gamut,restrictedRange,true,{l:'l',x:'a',y:'b'}).map((/** @type {{a:number,b:number}} */ v)=>{const [x,y]=views[1].toXY(v);return{x,y};}),1).map((/** @type {{x:number,y:number}} */ v)=>[v.x,v.y]),true);
   // The final recorded search uses hard lightness constraints; preliminary soft settings
   // are edits before Optimize, never relabelled as the configuration of a computed result.
-  const simulationTypes=['none','deutan','protan','tritan'];
   const simulations=simulationTypes.map(type=>[...INPUTS,...ADDED].map(hex=>applyCvdHex(hex,type,1,'machado2009')));
   const expected=['#546FA9','#948D75','#4A4109','#193C71','#CAB530'];
   if (JSON.stringify(simulations[1])!==JSON.stringify(expected)) throw new Error('color-optimization: CVD transform changed from recorded example');
-  /** @param {number} view @param {string[]} hexes @param {number} fixed */
-  const markers=(view,hexes,fixed)=>hexes.map((hex,i)=>{
+  /** @param {number} view @param {string[]} hexes @param {number} fixed @param {number} cvd */
+  const markers=(view,hexes,fixed,cvd)=>hexes.map((hex,i)=>{
     const v=/** @type {{l:number,a:number,b:number}} */ (decodeColor(hex,views[view].space)),[x,y]=views[view].toXY(v);
-    const paint=`fill="${hex}" stroke="${contrastColor(hex)}" stroke-width="1"`;
+    const display=applyCvdHex(hex,simulationTypes[cvd],1,'machado2009');
+    const paint=`fill="${display}" stroke="${contrastColor(display)}" stroke-width="1"`;
     return i<fixed?`<circle cx="${num(x)}" cy="${num(y)}" r="4.2" ${paint}/>`:`<rect x="${num(x-4)}" y="${num(y-4)}" width="8" height="8" ${paint}/>`;
   }).join('');
   /** @param {string[]} colors @param {number} count */
@@ -133,34 +139,34 @@ export async function build() {
     if(trail>=0) paths=ADDED.map((hex,i)=>`<path class="trail" stroke="${hex}" d="${polyline(TRACE.slice(0,trail+1).map(st=>views[1].toXY(st.raw[i])))}"/>`).join('');
     return `<g data-stage="${esc(title)}">${tab('Lab',9,view===0)}${tab('OKLab',79,view===1)}
 <text class="small" x="251" y="14">${['Original','Deutan','Protan','Tritan'][cvd]}</text>
-<use href="#color-optimization-view-${view}"/>
+<use href="#color-optimization-view-${view}-${cvd}"/>${view===1&&!soft&&width>0?`<use class="excluded" href="#color-optimization-excluded"/><use class="constraint-boundary" href="#color-optimization-restricted"/>`:""}
 <text class="small" x="42" y="37">Input</text><text class="small" x="120" y="37">${trail>=0?'Optimize':'Added'}</text>
-${swatches(colors,count)}${paths}${markers(view,colors.slice(0,count),Math.min(count,2))}
+${swatches(colors.map(hex=>applyCvdHex(hex,simulationTypes[cvd],1,'machado2009')),count)}${paths}${markers(view,colors.slice(0,count),Math.min(count,2),cvd)}
 <path class="track" d="M177 31V149"/><path class="range ${soft?'soft':''}" d="M177 ${num(149-hi*118)}V${num(149-lo*118)}"/>
 <circle class="handle" cx="177" cy="${num(149-hi*118)}" r="3"/><circle class="handle" cx="177" cy="${num(149-lo*118)}" r="3"/>
 <text class="setting" x="9" y="143">L ${soft?'soft':'hard'} · ${num(width,2)}</text><text class="setting" x="9" y="156">a / b unrestricted</text>
 <text class="caption" x="160" y="172">${title}</text>
-${click?`<circle class="click" cx="${num(click[0])}" cy="${num(click[1])}" r="7"/><path class="cursor" d="M${num(click[0])} ${num(click[1])}l2 13 3-4 5 1Z"/>`:''}</g>`;
+${click?`<path class="cursor" d="M${num(click[0])} ${num(click[1])}l2 13 3-4 5 1Z"/>`:''}</g>`;
   };
   /** @type {string[]} */
   const frames=[];
   const hold=(/** @type {string} */ frame,/** @type {number} */ n)=>{for(let i=0;i<n;i++)frames.push(frame);};
-  hold(scene({title:'Choose input colours',count:0}),3);
+  hold(scene({title:'Choose input colours',width:0,count:0}),3);
   const first=views[1].toXY(/** @type {{a:number,b:number}} */ (decodeColor(INPUTS[0],'oklab')));
-  hold(scene({title:'Choose input colours',count:1,click:first}),4);
-  hold(scene({title:'Choose input colours',count:2,click:views[1].toXY(/** @type {{a:number,b:number}} */ (decodeColor(INPUTS[1],'oklab')))}),4);
-  hold(scene({title:'Explore colour spaces',count:2,view:0,click:[41,14]}),5);
-  hold(scene({title:'Explore colour spaces',count:2,click:[111,14]}),4);
+  hold(scene({title:'Choose input colours',width:0,count:1,click:first}),4);
+  hold(scene({title:'Choose input colours',width:0,count:2,click:views[1].toXY(/** @type {{a:number,b:number}} */ (decodeColor(INPUTS[1],'oklab')))}),4);
+  hold(scene({title:'Explore colour spaces',width:0,count:2,view:0,click:[41,14]}),5);
+  hold(scene({title:'Explore colour spaces',width:0,count:2,click:[111,14]}),4);
   for(let i=0;i<7;i++) hold(scene({title:'Adjust soft constraints',count:2,width:.2+i*.075,soft:true,click:[177,149-bounds(.2+i*.075)[1]*118]}),1);
   hold(scene({title:'Set hard lightness limits',count:2,click:[31,143]}),5);
   for(let i=0;i<TRACE.length;i++) hold(scene({title:'Optimize · best of 12 starts',colors:[...INPUTS,...TRACE[i].hex],trail:i}),1);
   hold(scene({title:'Compare colour vision',cvd:0}),4);
-  for(let i=1;i<4;i++) hold(scene({title:'Compare colour vision',colors:simulations[i],cvd:i,click:[251,14]}),7);
+  for(let i=1;i<4;i++) hold(scene({title:'Compare colour vision',cvd:i,click:[251,14]}),7);
   hold(scene({title:'Optimized palette'}),6);
   // The authored still is the verified final palette; only started motion reveals the workflow.
   const book=flipbook('color-optimization',frames,PERIOD);
   return art({name:'color-optimization',period:PERIOD,frames:book.frames,
-    defs:views.map((v,i)=>`<clipPath id="color-optimization-clip-${i}"><path d="${v.outline}"/></clipPath><g id="color-optimization-view-${i}"><rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><image href="${v.field}" x="${px}" y="${py}" width="${side}" height="${side}" clip-path="url(#color-optimization-clip-${i})"/><path class="outline" d="${v.outline}"/></g>`).join(''),
+    defs:`<path id="color-optimization-restricted" d="${restricted}"/><path id="color-optimization-excluded" fill-rule="evenodd" d="${views[1].outline}${restricted}"/>`+views.map((v,i)=>`<clipPath id="color-optimization-clip-${i}"><path d="${v.outline}"/></clipPath>${v.fields.map((field,cvd)=>`<g id="color-optimization-view-${i}-${cvd}"><rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><image href="${field}" x="${px}" y="${py}" width="${side}" height="${side}" clip-path="url(#color-optimization-clip-${i})"/><path class="outline" d="${v.outline}"/></g>`).join('')}`).join(''),
     body:`<g class="finished">${scene({title:'Optimized palette'})}</g><g class="process">${book.body}</g>`,
     css:`${book.css}
 & .process { display:none; }
@@ -178,7 +184,8 @@ ${click?`<circle class="click" cx="${num(click[0])}" cy="${num(click[1])}" r="7"
 & .range { fill:none;stroke:var(--art-ink);stroke-width:3; }
 & .range.soft { stroke:#b080d4;stroke-dasharray:3 2; }
 & .handle { fill:var(--art-paper);stroke:var(--art-ink); }
-& .click { fill:none;stroke:#d46651;stroke-width:1.2; }
+& .excluded { fill:white;fill-opacity:.52; }
+& .constraint-boundary { fill:none;stroke:#334155;stroke-width:.9;stroke-dasharray:3 2; }
 & .cursor { fill:var(--art-ink);stroke:var(--art-paper);stroke-width:.8; }`,
     loop:`& .finished { display:none; } & .process { display:inline; }\n${book.loop}`,
   });

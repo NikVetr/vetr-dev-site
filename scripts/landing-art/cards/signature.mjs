@@ -1,17 +1,21 @@
-// Actual example input, corrected centerlines, and variable-width outline from Signature's core.
+// Reproducible rough trackpad example, strong core correction, then variable-width ink.
 import { readFileSync } from 'node:fs';
 import { DEFAULTS, submit } from '../../../signature/core/index.js';
 import { readSignature } from '../../../signature/core/input.js';
 import { H, W, art, num, polyline } from '../svg.mjs';
 
 const PERIOD = 10;
+export const PREVIEW_SMOOTH={fourier:{strength:10},wavelet:{rule:'energy',keepEnergy:.99,thresholdSmooth:false}};
 
 export function build() {
-  const csv = readFileSync(new URL('../../../signature/examples/avery-quill.csv', import.meta.url), 'utf8');
-  const result = submit({ csv });
+  const csv = readFileSync(new URL('../../../signature/examples/avery-quill-rough.csv', import.meta.url), 'utf8');
+  const result = submit({ csv, smooth: PREVIEW_SMOOTH });
   const raw = readSignature({ csv }, '', DEFAULTS.input, [], []);
   if (!raw) throw new Error('signature: the example could not be read');
-  const [bx, by, bw, bh] = result.viewBox;
+  const [rx,ry,rw,rh]=result.viewBox;
+  const rawPoints=raw.flat();
+  const bx=Math.min(rx,...rawPoints.map(p=>p.x)),by=Math.min(ry,...rawPoints.map(p=>p.y));
+  const bw=Math.max(rx+rw,...rawPoints.map(p=>p.x))-bx,bh=Math.max(ry+rh,...rawPoints.map(p=>p.y))-by;
   const k = Math.min((W - 28) / bw, (H - 28) / bh);
   const ox = (W - bw * k) / 2 - bx * k;
   const oy = (H - bh * k) / 2 - by * k;
@@ -28,7 +32,7 @@ export function build() {
     elapsed += lengths[i];
     const to = 3 + elapsed / total * 25;
     drawingRules.push(`& .stroke-${i} { animation: signature-draw-${i} ${PERIOD}s linear infinite; }
-@keyframes signature-draw-${i} { 0%, ${num(from, 3)}% { stroke-dashoffset: 1; } ${num(to, 3)}%, 100% { stroke-dashoffset: 0; } }`);
+@keyframes signature-draw-${i} { 0%, ${num(from, 3)}% { stroke-dashoffset: 1; opacity:0; } ${num(from+.02,3)}% { opacity:1; } ${num(to, 3)}%, 100% { stroke-dashoffset: 0; opacity:1; } }`);
     return `<path class="stroke-${i}" pathLength="1" d="${polyline(stroke.map(p => at(p.x, p.y)))}"/>`;
   }).join('');
   return art({ name: 'signature', period: PERIOD,
