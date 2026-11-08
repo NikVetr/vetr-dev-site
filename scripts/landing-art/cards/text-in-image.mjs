@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 import { decodePng } from '../../../shared/decode-png.mjs';
 import { measureChars } from '../../../text-in-image/core/font.js';
 import { submit } from '../../../text-in-image/core/index.js';
+import { contrastOutline, CONTRAST_OUTLINE_EM } from '../../../text-in-image/core/contrast.js';
 import { openPage } from '../browser.mjs';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
@@ -28,7 +29,7 @@ export async function build() {
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background: BACKGROUND } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background: BACKGROUND }, render: { contrast_outline: true } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
   // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
@@ -78,7 +79,11 @@ export async function build() {
   const delay = (/** @type {number} */ i) => START + (i * SWEEP) / Math.max(1, order.length - 1);
   if (delay(order.length - 1) > PERIOD / 2 - FADE) throw new Error('text-in-image: the sweep is too long for the period');
   const body = order.map((n, i) => {
-    const spans = [...(lines.get(n) ?? [])].map(([col, run]) => `<tspan fill="${col}" stroke="${col}" x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`).join('');
+    const spans = [...(lines.get(n) ?? [])].map(([col, run]) => {
+      const outline = contrastOutline(col, BACKGROUND);
+      const stroke = outline ? `stroke="${outline}" stroke-width="${CONTRAST_OUTLINE_EM}em"` : `stroke="${col}"`;
+      return `<tspan fill="${col}" ${stroke} x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`;
+    }).join('');
     return `<text y="${num(lineY.get(n) ?? 0, 1)}" style="animation-delay:${num(delay(i), 3)}s">${spans}</text>`;
   }).join('\n');
 

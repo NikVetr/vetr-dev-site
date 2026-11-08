@@ -242,6 +242,33 @@ test('the example fills its image, and the same request gives the same result', 
   assert.match(renderSvg(turned), / transform="rotate\(-15 /);
 });
 
+test('optional contrast outlines preserve glyph layout and fill, and follow the export background', () => {
+  const request = { image: maskImage(16, 16, () => true), text: 'Alice bright dark', quantize: null };
+  const plain = submit(request);
+  const outlined = submit({ ...request, render: { contrast_outline: true } });
+  assert.deepEqual(outlined.glyphs, plain.glyphs);
+  assert.equal(outlined.font_size_px, plain.font_size_px);
+  assert.deepEqual(outlined.history, plain.history);
+  assert.equal(plain.settings.render.contrast_outline, false);
+  assert.doesNotMatch(renderSvg(plain), / stroke=/);
+  assert.deepEqual(rejection({ ...request, render: { contrast_outline: 'yes' } }).issues.map(i => [i.path, i.code]), [['render.contrast_outline', 'wrong_type']]);
+
+  // A light glyph needs help on white; a dark one does not. Switching the
+  // export background (without refitting) reverses that decision.
+  outlined.glyphs = outlined.glyphs.map((g, i) => ({ ...g, col: i % 2 ? '#101010' : '#fafafa' }));
+  const white = renderSvg(outlined, { background: 'white' });
+  const black = renderSvg(outlined, { background: 'black' });
+  assert.match(white, /fill="#fafafa" stroke="#000000"/);
+  assert.doesNotMatch(white, /fill="#101010" stroke=/);
+  assert.match(black, /fill="#101010" stroke="#ffffff"/);
+  assert.doesNotMatch(black, /fill="#fafafa" stroke=/);
+  assert.match(white, /paint-order="stroke fill"/);
+  assert.equal(white.match(/<use /g)?.length, renderSvg(plain).match(/<use /g)?.length);
+
+  outlined.glyphs[0].col = '#fafafa80';
+  assert.match(renderSvg(outlined, { background: 'white' }), /fill="#fafafa" fill-opacity="0.5" stroke="#000000"[^>]+stroke-opacity="0.5"/);
+});
+
 test('text that cannot fit is reported with the share placed', () => {
   const tiny = { width: 3, height: 3, data: new Uint8ClampedArray(36).fill(255) };
   for (let p = 0; p < 9; p++) tiny.data.set([90, 40, 40], 4 * p);
@@ -301,10 +328,12 @@ test('the PNG decoder reads RGB, RGBA and palette images, filters and transparen
 test('the CLI reads an image path, prints the result and reports errors as JSON', () => {
   const dir = mkdtempSync(join(tmpdir(), 'text-in-image-'));
   const request = join(dir, 'request.json');
-  writeFileSync(request, JSON.stringify({ image: here('../examples/alice-drink-me.png'), text: 'Alice was beginning to get very tired.', layout: { n_rounds: 3, wrap: 'word' } }));
+  writeFileSync(request, JSON.stringify({ image: here('../examples/alice-drink-me.png'), text: 'Alice was beginning to get very tired.', layout: { n_rounds: 3, wrap: 'word' }, render: { contrast_outline: true } }));
   const cli = (/** @type {string[]} */ ...args) => spawnSync(process.execPath, [here('../cli.mjs'), ...args], { encoding: 'utf8' });
   const ok = cli(request, '--svg', join(dir, 'fill.svg'), '--background', 'white');
   assert.equal(JSON.parse(ok.stdout).settings.layout.wrap, 'word');
+  assert.equal(JSON.parse(ok.stdout).settings.render.contrast_outline, true);
+  assert.match(readFileSync(join(dir, 'fill.svg'), 'utf8'), /stroke="#000000"/);
   assert.equal(ok.status, 0, ok.stderr);
   const result = JSON.parse(ok.stdout);
   assert.equal(result.glyphs.length, 38);

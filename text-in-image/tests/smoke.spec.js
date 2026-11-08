@@ -66,6 +66,44 @@ test('renders the example and exposes the API', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('contrast aid is optional, exported to SVG and PNG, and restored by history', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  const before = await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const png = await app.exportPngBlob();
+    return { svg: app.exportSvgText(), glyphs: app.getResult().glyphs, png: [...new Uint8Array(await crypto.subtle.digest('SHA-256', await png.arrayBuffer()))] };
+  });
+  const after = await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    const request = app.getRequest();
+    await app.submit({ ...request, render: { ...request.render, contrast_outline: true } });
+    const png = await app.exportPngBlob();
+    const bitmap = await createImageBitmap(png);
+    return { svg: app.exportSvgText(), glyphs: app.getResult().glyphs, png: [...new Uint8Array(await crypto.subtle.digest('SHA-256', await png.arrayBuffer()))], size: [bitmap.width, bitmap.height] };
+  });
+  await expect(page.locator('#contrast-outline')).toBeChecked();
+  expect(after.glyphs).toEqual(before.glyphs);
+  expect(after.svg).toContain('stroke="#000000"');
+  expect(before.svg).not.toContain(' stroke=');
+  expect(after.png).not.toEqual(before.png);
+  expect(after.size).toEqual([1475, 2700]);
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(before.svg);
+  await page.locator('#redo').click();
+  await expect(page.locator('#contrast-outline')).toBeChecked();
+  expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(after.svg);
+  await page.locator('#contrast-outline').uncheck();
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#contrast-outline')).toBeChecked();
+  await page.locator('#redo').click();
+  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(before.svg);
+});
+
 test('shows every problem with a setting, and recovers', async ({ page }) => {
   await open(page);
   await page.locator('#advanced-settings summary').click();
