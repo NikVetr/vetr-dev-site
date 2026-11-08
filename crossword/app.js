@@ -2,6 +2,7 @@
 // Worker (worker.js), and views of its result. window.Crossword exposes the same
 // submit() to scripts and agents running in the page.
 
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 import {
   CrosswordError, DEFAULTS, TERMS, formatEntries, issueLocation, maskFromRgba, parseEntries, renderPuzzleSvg, renderSvg,
 } from './core/index.js';
@@ -19,6 +20,10 @@ const TERM_LABELS = /** @type {Record<string, string>} */ ({
   area: 'Area', areaRatio: 'Width / height', hvRatio: 'Across / down', nConnections: 'Connections',
   nCycles: 'Cycles', picSimilarity: 'Picture', circularity: 'Roundness',
 });
+
+/** @type {ReturnType<typeof createHistory<any>> | null} */
+let history = null;
+let stateEpoch = 0; // invalidates pending file/example reads when history restores a state
 
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 /** @type {Record<string, any>} */
@@ -58,7 +63,7 @@ for (const term of TERMS) {
   const label = document.createElement('label');
   label.textContent = TERM_LABELS[term];
   const input = document.createElement('input');
-  Object.assign(input, { type: 'number', step: '0.1', value: String(DEFAULTS.weights[term]) });
+  Object.assign(input, { id: `weight-${term}`, type: 'number', step: '0.1', value: String(DEFAULTS.weights[term]) });
   label.append(input);
   el.weights.append(label);
   weightInputs[term] = input;
@@ -197,15 +202,20 @@ function showProgress(p) {
 
 /** @param {object} request */
 async function runFromPage(request) {
+  history?.commit();
+  const epoch = stateEpoch;
   const inputs = pageInputs();
   try {
-    showResult(await run(request), request, inputs);
+    const next = await run(request);
+    if (epoch !== stateEpoch) return;
+    showResult(next, request, inputs);
   } catch (error) {
-    if (!(error instanceof CrosswordError)) return;
+    if (epoch !== stateEpoch || !(error instanceof CrosswordError)) return;
     showIssues(el.runIssues, error);
     failed = true;
     showStale();
   }
+  history?.commit('Generate');
 }
 
 el.generate.addEventListener('click', () => runFromPage(currentRequest()));
@@ -438,10 +448,13 @@ el.darkThreshold.addEventListener('input', () => {
   showStale();
 });
 el.targetFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.targetFile.files?.[0];
   if (!file) return;
   try {
     const bitmap = await createImageBitmap(file, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
+    if (epoch !== stateEpoch) { bitmap.close(); return; }
     const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
     const ctx = /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d'));
     ctx.drawImage(bitmap, 0, 0);
@@ -449,70 +462,67 @@ el.targetFile.addEventListener('change', async () => {
     let binary = '';
     for (let i = 0; i < pixels.length; i += 0x8000) binary += String.fromCharCode(...pixels.subarray(i, i + 0x8000));
     setTarget({ label: file.name, request: { rgba: { width: bitmap.width, height: bitmap.height, data: btoa(binary) } }, pixels: { width: bitmap.width, height: bitmap.height, data: pixels } });
+    bitmap.close();
   } catch {
+    if (epoch !== stateEpoch) return;
     el.targetStatus.textContent = `${file.name} could not be read as an image.`;
   }
   el.targetFile.value = '';
+  history?.commit('Open picture');
 });
 
 async function exampleTarget() {
+  history?.commit();
+  const epoch = stateEpoch;
   const rows = (await (await fetch('examples/heart-notched.txt')).text()).trim().split('\n');
+  if (epoch !== stateEpoch) return;
   setTarget({ label: 'Example heart', request: { mask: rows } });
+  history?.commit('Example picture');
 }
-byId('target-example').addEventListener('click', () => { dropUndo(); return exampleTarget(); });
-byId('target-none').addEventListener('click', () => { dropUndo(); setTarget(null); });
+byId('target-example').addEventListener('click', () => { hideReplacementNote(); return exampleTarget(); });
+byId('target-none').addEventListener('click', () => { history?.commit(); hideReplacementNote(); setTarget(null); history?.commit('Remove picture'); });
 
 // ---------- examples and exports ----------
 
-/** @type {{ request: ReturnType<typeof currentRequest>, target: Target | null } | null} */
-let replaced = null;
-
-function dropUndo() {
-  replaced = null;
-  byId('undo-note').hidden = true;
-}
-
-/** @param {{ request: ReturnType<typeof currentRequest>, target: Target | null }} before @param {string} note */
-function offerUndo(before, note) {
-  replaced = before;
+function hideReplacementNote() { byId('undo-note').hidden = true; }
+/** @param {string} note */
+function replacementNote(note) {
   byId('undo-text').textContent = note;
-  byId('undo-note').hidden = false;
+  byId('undo-note').hidden = !history;
 }
 
 async function loadExample() {
+  history?.commit();
+  const epoch = stateEpoch;
   stopRun();
   const response = await fetch('examples/heart-example.json');
   if (!response.ok) throw new Error('The saved crossword example could not be loaded.');
   const { request, result: example } = await response.json();
+  if (epoch !== stateEpoch) return;
   loadRequest(request);
   setTarget({ label: 'Example heart', request: request.target });
   showResult(example, request, pageInputs());
   el.status.textContent = `Loaded ${example.crosswords[0].refined.entries.length}-entry example`;
+  history?.commit('Load example');
+  return true;
 }
 byId('load-example').addEventListener('click', async () => {
-  const before = { request: currentRequest(), target };
-  await loadExample();
-  offerUndo(before, 'Replaced the entries, picture and settings with the example.');
+  if (await loadExample()) replacementNote('Replaced the entries, picture and settings with the example.');
 });
 byId('clear-entries').addEventListener('click', () => {
-  const before = { request: currentRequest(), target };
+  history?.commit();
   el.entries.value = '';
   checkEntries();
-  offerUndo(before, 'Cleared the entries.');
+  replacementNote('Cleared the entries.');
+  history?.commit('Clear entries');
 });
-byId('undo-replace').addEventListener('click', () => {
-  if (!replaced) return;
-  const before = replaced;
-  loadRequest(before.request);
-  setTarget(before.target);
-  dropUndo();
-});
-// Undo restores exactly the last replacement until the user starts another edit.
-document.querySelector('main')?.addEventListener('input', dropUndo);
+document.querySelector('main')?.addEventListener('input', hideReplacementNote);
 byId('new-seed').addEventListener('click', () => {
-  dropUndo();
+  history?.commit();
+  hideReplacementNote();
   el.seed.value = String(Math.floor(Math.random() * 4294967296));
   showStale();
+  history?.commit('New seed');
 });
 byId('settings-card').addEventListener('input', showStale);
 
@@ -564,9 +574,13 @@ byId('export-request').addEventListener('click', () => download('crossword-reque
    * @param {object} request
    */
   async submit(request) {
+    history?.commit();
+    const epoch = stateEpoch;
     const next = await run(request);
+    if (epoch !== stateEpoch) throw new Error('stopped');
     loadRequest(/** @type {Record<string, any>} */ (request));
     showResult(next, request, pageInputs());
+    history?.commit('Load result');
     return next;
   },
   getRequest: currentRequest,
@@ -577,3 +591,43 @@ byId('export-request').addEventListener('click', () => download('crossword-reque
 };
 
 await loadExample();
+
+// ---------- reversible workspace ----------
+const historyRoot = /** @type {HTMLElement} */ (document.querySelector('main'));
+function captureWorkspace() {
+  const form = captureForm(historyRoot, { filter: field => !field.closest('#crossword-choice') });
+  const invalid = [...historyRoot.querySelectorAll('[aria-invalid=true]')].map(field => ({ id: field.id, described: field.getAttribute('aria-describedby') }));
+  const feedback = ['entry-issues', 'run-issues', 'target-status'].map(id => ({ id, html: byId(id).innerHTML, hidden: byId(id).hidden }));
+  return { form, feedback, invalid, target, result, resultRequest, resultInputs, resultPicture, failed, shown: { ...shown }, status: el.status.textContent,
+    // Entry diagnostics follow the text asynchronously; they are not another edit.
+    key: JSON.stringify([form, feedback.filter(item => item.id !== 'entry-issues'), failed, shown]) };
+}
+/** @param {ReturnType<typeof captureWorkspace>} saved */
+function restoreWorkspace(saved) {
+  stateEpoch++; stopRun(); window.clearTimeout(checkTimer);
+  restoreForm(historyRoot, saved.form);
+  setTarget(saved.target); checkEntries(); markFields([]);
+  if (saved.result) showResult(saved.result, /** @type {object} */ (saved.resultRequest), /** @type {ReturnType<typeof pageInputs>} */ (saved.resultInputs));
+  else { result = null; resultRequest = null; resultInputs = null; resultPicture = null; el.result.hidden = true; el.noResult.hidden = false; el.refine.disabled = true; }
+  shown = { ...saved.shown }; failed = saved.failed; resultPicture = saved.resultPicture;
+  const radio = el.crosswordChoice.querySelector(`input[value="${shown.crossword}"]`);
+  if (radio) radio.checked = true;
+  /** @type {HTMLInputElement} */ (document.querySelector(`input[name="stage"][value="${shown.stage}"]`)).checked = true;
+  for (const item of saved.feedback) { byId(item.id).innerHTML = item.html; byId(item.id).hidden = item.hidden; }
+  for (const field of historyRoot.querySelectorAll('[aria-invalid]')) field.removeAttribute('aria-invalid');
+  for (const item of saved.invalid) {
+    if (!item.id) continue;
+    byId(item.id).setAttribute('aria-invalid', 'true');
+    if (item.described) byId(item.id).setAttribute('aria-describedby', item.described);
+  }
+  renderShown(); showStale(); hideReplacementNote();
+  el.status.textContent = saved.status;
+}
+history = createHistory({ capture: captureWorkspace, restore: restoreWorkspace,
+  equal: (a, b) => a.key === b.key && a.target === b.target && a.result === b.result && a.resultRequest === b.resultRequest,
+  onChange: h => { byId('undo-replace').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+byId('undo-replace').addEventListener('click', () => history?.undo());
+byId('redo').addEventListener('click', () => history?.redo());
+bindHistoryShortcuts(history);
+bindFormHistory(history, { root: historyRoot, filter: field => !field.matches('input[type=file]') });

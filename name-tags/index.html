@@ -44,9 +44,13 @@
       <div class="toolbar">
         <button id="load-example" type="button">Load example</button>
         <button id="clear-names" type="button">Clear</button>
+        <span class="history-controls" role="group" aria-label="History">
+          <button id="undo-replace" type="button" disabled title="Undo (Ctrl/⌘Z)">Undo</button>
+          <button id="redo" type="button" disabled title="Redo (Ctrl/⌘Shift Z)">Redo</button>
+        </span>
         <label class="file-button">Open file… <input id="names-file" type="file" accept=".txt,.csv,text/plain,text/csv"></label>
       </div>
-      <p id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span> <button id="undo-replace" type="button">Undo</button></p>
+      <p id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span></p>
     </section>
 
     <section class="card results-card" aria-labelledby="sheets-heading">

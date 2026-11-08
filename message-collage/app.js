@@ -2,6 +2,7 @@
 // (worker.js) along with the renderers, and the card it returns. window.MessageCollage exposes
 // the same submit() and the exports to scripts and agents running in the page.
 
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 import { FAMILIES, fontUrl } from './core/catalogue.js';
 import { CollageError, DEFAULTS, parseMessages, STYLE_NAMES } from './core/request.js';
 
@@ -18,6 +19,10 @@ const SCHEMES = /** @type {Record<string, { label: string, palette: readonly str
   bold: { label: 'Bright on white', palette: ['#d7263d', '#1b998b', '#2e294e', '#f46036', '#3f88c5', '#7b2d8b'], background: '#ffffff' },
 });
 const STYLE_LABELS = /** @type {Record<string, string>} */ ({ plain: 'Plain', bold: 'Bold', italic: 'Italic', 'bold-italic': 'Bold italic' });
+
+/** @type {ReturnType<typeof createHistory<any>> | null} */
+let history = null;
+let stateEpoch = 0; // invalidates pending file/example reads when history restores a state
 
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 /** @type {Record<string, any>} */
@@ -204,7 +209,7 @@ function countMessages() {
 }
 el.messages.addEventListener('input', countMessages);
 for (const card of ['fonts-card', 'settings-card', 'colours-card']) byId(card).addEventListener('input', showStale);
-for (const input of [el.messages, byId('fonts-card'), byId('settings-card'), byId('colours-card')]) input.addEventListener('input', dropUndo);
+for (const input of [el.messages, byId('fonts-card'), byId('settings-card'), byId('colours-card')]) input.addEventListener('input', hideReplacementNote);
 
 // ---------- the worker ----------
 
@@ -273,6 +278,7 @@ function setRunning(on) {
  * @returns {Promise<{ result: Result, svg: string }>}
  */
 async function run(request) {
+  const epoch = stateEpoch;
   if (running) stop();
   const started = performance.now();
   setRunning(true);
@@ -286,39 +292,47 @@ async function run(request) {
       el.progress.value = p.run;
       el.status.textContent = `Layout ${p.run} of ${p.runs}; best so far ${percent(p.best_empty_fraction)} empty`;
     });
+    if (epoch !== stateEpoch) throw new Error('stopped');
     el.status.textContent = `Done in ${((performance.now() - started) / 1000).toFixed(1)} s`;
     return data;
   } catch (error) {
-    el.status.textContent = error instanceof CollageError ? 'Not laid out' : 'Stopped';
+    if (epoch === stateEpoch) el.status.textContent = error instanceof CollageError ? 'Not laid out' : 'Stopped';
     throw error;
   } finally {
-    setRunning(false);
+    if (epoch === stateEpoch) setRunning(false);
   }
 }
 
 /** @param {object} request */
 async function runFromPage(request) {
+  history?.commit();
+  const epoch = stateEpoch;
   const inputs = pageInputs();
   try {
     const { result: next, svg } = await run(request);
+    if (epoch !== stateEpoch) return;
     showResult(next, svg, request, inputs);
   } catch (error) {
-    if (!(error instanceof CollageError)) return;
+    if (epoch !== stateEpoch || !(error instanceof CollageError)) return;
     showIssues(error);
     failed = true;
     showStale();
   }
+  history?.commit('Generate');
 }
 
 el.generate.addEventListener('click', () => runFromPage(currentRequest()));
 el.reroll.addEventListener('click', () => {
+  history?.commit();
   el.seed.value = String(Math.floor(Math.random() * 2147483000));
   runFromPage(currentRequest());
 });
 el.stop.addEventListener('click', stop);
 byId('new-seed').addEventListener('click', () => {
+  history?.commit();
   el.seed.value = String(Math.floor(Math.random() * 2147483000));
   showStale();
+  history?.commit('New seed');
 });
 
 // ---------- result ----------
@@ -421,70 +435,68 @@ let exampleText = '';
 
 /** @param {string} text */
 function addMessages(text) {
-  dropUndo();
+  history?.commit();
+  hideReplacementNote();
   const now = el.messages.value === exampleText ? '' : el.messages.value.replace(/\s+$/, '');
   el.messages.value = now ? `${now}\n${text}` : text;
   countMessages();
+  history?.commit('Add messages');
 }
 
 byId('paste').addEventListener('click', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   el.pasteNote.hidden = true;
   try {
-    addMessages(await navigator.clipboard.readText());
+    const text = await navigator.clipboard.readText();
+    if (epoch !== stateEpoch) return;
+    addMessages(text);
   } catch {
+    if (epoch !== stateEpoch) return;
     el.pasteNote.hidden = false;
     el.pasteNote.textContent = 'This browser did not let the page read the clipboard. Click in the box below and paste there (Ctrl+V or ⌘V).';
   }
 });
 el.upload.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.upload.files?.[0];
   if (!file) return;
-  addMessages(await file.text());
+  const text = await file.text();
+  if (epoch !== stateEpoch) return;
+  addMessages(text);
   el.upload.value = '';
 });
 async function loadExample() {
+  history?.commit();
+  const epoch = stateEpoch;
   const response = await fetch('examples/request.json');
-  const before = { text: el.messages.value, request: currentRequest() };
-  loadRequest(await response.json());
+  const before = el.messages.value;
+  const request = await response.json();
+  if (epoch !== stateEpoch) return;
+  history?.commit();
+  loadRequest(request);
   exampleText = el.messages.value;
-  const n = parseMessages(before.text).length;
-  offerUndo(before, `Replaced your ${n} message${n === 1 ? '' : 's'} and the settings with the example.`);
+  const n = parseMessages(before).length;
+  replacementNote(before, `Replaced your ${n} message${n === 1 ? '' : 's'} and the settings with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
 byId('clear').addEventListener('click', () => {
-  const before = { text: el.messages.value, request: currentRequest() };
+  history?.commit();
+  const before = el.messages.value;
   el.messages.value = '';
   countMessages();
-  const n = parseMessages(before.text).length;
-  offerUndo(before, `Cleared ${n} message${n === 1 ? '' : 's'}.`);
+  const n = parseMessages(before).length;
+  replacementNote(before, `Cleared ${n} message${n === 1 ? '' : 's'}.`);
 });
 
-// Load example and Clear replace the messages (Load example the settings too) at once, and offer
-// them back: Undo restores them, until the messages or settings are next changed.
-
-/** The messages, as typed, and the settings that Load example or Clear replaced. @type {{ text: string, request: object } | null} */
-let replaced = null;
-
-/** @param {{ text: string, request: object }} before the page's inputs before the replacement @param {string} note what it did, shown beside Undo */
-function offerUndo(before, note) {
-  const changed = before.text.trim() !== '' && (before.text !== el.messages.value || JSON.stringify(before.request) !== JSON.stringify(currentRequest()));
-  replaced = changed ? before : null;
+/** @param {string} before @param {string} note */
+function replacementNote(before, note) {
   el.undoText.textContent = note;
-  el.undoNote.hidden = !changed;
+  el.undoNote.hidden = !history || before === el.messages.value;
+  history?.commit('Replace messages');
 }
-
-function dropUndo() {
-  replaced = null;
-  el.undoNote.hidden = true;
-}
-
-byId('undo-replace').addEventListener('click', () => {
-  if (!replaced) return;
-  loadRequest(replaced.request);
-  el.messages.value = replaced.text;
-  dropUndo();
-  countMessages();
-});
+function hideReplacementNote() { el.undoNote.hidden = true; }
 
 // ---------- exports ----------
 
@@ -555,11 +567,12 @@ const svgBlob = (/** @type {string} */ svg) => new Blob([svg], { type: 'image/sv
 /** @param {HTMLButtonElement} button @param {() => Promise<void>} action */
 function exportButton(button, action) {
   button.addEventListener('click', async () => {
+    const epoch = stateEpoch;
     button.disabled = true;
     try {
       await action();
     } catch (error) {
-      el.status.textContent = `Download failed: ${/** @type {Error} */ (error).message}`;
+      if (epoch === stateEpoch) el.status.textContent = `Download failed: ${/** @type {Error} */ (error).message}`;
     } finally {
       button.disabled = false;
     }
@@ -581,10 +594,14 @@ exportButton(byId('export-request'), async () => download('message-collage-reque
    * @param {object} request
    */
   async submit(request) {
+    history?.commit();
+    const epoch = stateEpoch;
     const { result: next, svg } = await run(request);
+    if (epoch !== stateEpoch) throw new Error('stopped');
     loadRequest(next.request);
-    dropUndo();
+    hideReplacementNote();
     showResult(next, svg, request, pageInputs());
+    history?.commit('Load result');
     return next;
   },
   getRequest: currentRequest,
@@ -597,3 +614,40 @@ exportButton(byId('export-request'), async () => download('message-collage-reque
 
 await loadExample();
 await runFromPage(currentRequest());
+
+// ---------- reversible workspace ----------
+const historyRoot = /** @type {HTMLElement} */ (document.querySelector('main'));
+function captureWorkspace() {
+  const form = captureForm(historyRoot);
+  const invalid = [...historyRoot.querySelectorAll('[aria-invalid=true]')].map(field => ({ id: field.id, described: field.getAttribute('aria-describedby') }));
+  const feedback = ['message-issues', 'run-issues', 'paste-note'].map(id => ({ id, html: byId(id).innerHTML, hidden: byId(id).hidden }));
+  return { form, feedback, invalid, result, resultSvg, resultRequest, resultInputs, failed, exampleText, status: el.status.textContent,
+    key: JSON.stringify([form, feedback, invalid, failed, exampleText]) };
+}
+/** @param {ReturnType<typeof captureWorkspace>} saved */
+function restoreWorkspace(saved) {
+  stateEpoch++; stop(); setRunning(false);
+  restoreForm(historyRoot, saved.form);
+  exampleText = saved.exampleText;
+  matchSizePreset(); showSwatches(); matchScheme(); countMessages(); markFields([]);
+  if (saved.result) showResult(saved.result, saved.resultSvg, /** @type {object} */ (saved.resultRequest), /** @type {string} */ (saved.resultInputs));
+  else { result = null; resultSvg = ''; resultRequest = null; resultInputs = null; el.result.hidden = true; el.noResult.hidden = false; }
+  failed = saved.failed;
+  for (const item of saved.feedback) { byId(item.id).innerHTML = item.html; byId(item.id).hidden = item.hidden; }
+  for (const field of historyRoot.querySelectorAll('[aria-invalid]')) field.removeAttribute('aria-invalid');
+  for (const item of saved.invalid) {
+    if (!item.id) continue;
+    byId(item.id).setAttribute('aria-invalid', 'true');
+    if (item.described) byId(item.id).setAttribute('aria-describedby', item.described);
+  }
+  showStale(); showPngNote(); hideReplacementNote();
+  el.status.textContent = saved.status;
+}
+history = createHistory({ capture: captureWorkspace, restore: restoreWorkspace,
+  equal: (a, b) => a.key === b.key && a.result === b.result && a.resultRequest === b.resultRequest,
+  onChange: h => { byId('undo-replace').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+byId('undo-replace').addEventListener('click', () => history?.undo());
+byId('redo').addEventListener('click', () => history?.redo());
+bindHistoryShortcuts(history);
+bindFormHistory(history, { root: historyRoot, filter: field => !field.matches('input[type=file]') });

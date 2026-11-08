@@ -151,9 +151,10 @@ h3 { margin: 1.4rem 0 0.6rem; font-size: 1.05rem; }
   margin-bottom: 0.5rem;
 }
 
-/* After Load example or Clear: what was replaced, and a way back (Undo) until the next edit. */
+/* Transient replacement notes and paired history actions. */
 .undo-note { margin: 0.5rem 0; color: var(--muted); }
 .undo-note button { margin-left: 0.4rem; }
+.history-controls { display: inline-flex; gap: 6px; flex-wrap: nowrap; }
 
 .toolbar {
   display: flex;

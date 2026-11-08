@@ -2,6 +2,7 @@
 // for the core's submit(), which runs in a Web Worker (worker.js), and the replay of its
 // result (replay.js). window.Seating exposes the same submit() to scripts and agents.
 
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 import { SeatingError, fromRRequest, renderSeatingSvg } from './core/index.js';
 import { tableLabel } from './core/chart.js';
 import { buildProblem } from './core/request.js';
@@ -18,6 +19,10 @@ import { loadReplay, pause, replayState } from './replay.js';
 
 const STORAGE_KEY = 'seating:v1';
 const KINDS = /** @type {const} */ ([['together', 'Together'], ['apart', 'Apart'], ['score', 'Pair score'], ['cost', 'Room cost']]);
+
+/** @type {ReturnType<typeof createHistory<any>> | null} */
+let history = null;
+let stateEpoch = 0; // invalidates pending file/example reads when history restores a state
 
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 const part = (/** @type {Element} */ root, /** @type {string} */ selector) => /** @type {any} */ (root.querySelector(selector));
@@ -49,8 +54,6 @@ let resultRequest = null;
 let resultInputs = null;
 /** Whether the last run from the page failed, leaving the earlier seating on view. */
 let failed = false;
-/** What Load example or Clear replaced, until the inputs are next edited. @type {any} */
-let replaced = null;
 /** @type {Worker | null} */
 let worker = null;
 /** @type {((error: Error) => void) | null} */
@@ -207,7 +210,7 @@ function renderEditors() {
   emptyRow(el.pairRows, 5, 'No pairs or groups: every guest is free to sit anywhere.');
   for (const area of document.querySelectorAll('.editor textarea')) fitHeight(/** @type {HTMLTextAreaElement} */ (area));
   showTablesMode();
-  changed({ keepUndo: true });
+  changed();
 }
 
 /** Grows a one-line text box to show all of its text, wrapped. @param {HTMLTextAreaElement} area */
@@ -243,9 +246,11 @@ function wireEditor(body, rows) {
   body.addEventListener('click', (event) => {
     const button = /** @type {any} */ (event.target).closest('.remove');
     if (!button) return;
-    dropUndo();
+    history?.commit();
+    hideReplacementNote();
     rows().splice(Number(button.closest('tr').dataset.index), 1);
     renderEditors();
+    history?.commit('Remove row');
   });
 }
 // Narrower columns wrap names onto more lines, so refit every text box.
@@ -264,28 +269,36 @@ wireEditor(el.tableRows, () => tableRows);
 
 /** @param {any} body @param {string} selector */
 function addRow(body, selector) {
-  dropUndo();
+  hideReplacementNote();
   renderEditors();
   body.lastElementChild?.querySelector(selector)?.focus();
 }
 byId('add-guest').addEventListener('click', () => {
+  history?.commit();
   guests.push({ name: '', category: guests.at(-1)?.category ?? '1' });
   addRow(el.guestRows, '.name');
+  history?.commit('Edit seating');
 });
 byId('add-pair').addEventListener('click', () => {
+  history?.commit();
   pairs.push({ kind: 'together', guests: '', value: '' });
   addRow(el.pairRows, '.guests');
+  history?.commit('Edit seating');
 });
 byId('add-table').addEventListener('click', () => {
+  history?.commit();
   tableRows.push({ name: `Table ${tableRows.length + 1}`, seats: tableRows.at(-1)?.seats ?? '8', x: '', y: '' });
   addRow(el.tableRows, '.name');
+  history?.commit('Edit seating');
 });
 byId('make-tables').addEventListener('click', () => {
+  history?.commit();
   const count = Math.max(2, Math.min(300, Math.round(byId('make-count').valueAsNumber || 2)));
   const seats = byId('make-seats').value;
-  dropUndo();
+  hideReplacementNote();
   tableRows = Array.from({ length: count }, (_, i) => ({ name: `Table ${i + 1}`, seats, x: '', y: '' }));
   renderEditors();
+  history?.commit('Edit seating');
 });
 
 function showTablesMode() {
@@ -300,9 +313,9 @@ function showTablesMode() {
 // ---------- checking, staleness, persistence ----------
 
 let checkTimer = 0;
-/** After any change to the inputs: recount, recheck and save. @param {{ keepUndo?: boolean }} [options] */
-function changed({ keepUndo = false } = {}) {
-  if (!keepUndo) dropUndo();
+/** After any change to the inputs: recount, recheck and save. */
+function changed() {
+  hideReplacementNote();
   el.guestCount.textContent = `${guests.length} guest${guests.length === 1 ? '' : 's'}`;
   el.pairCount.textContent = `${pairs.length} row${pairs.length === 1 ? '' : 's'}`;
   const n = guests.length;
@@ -455,25 +468,21 @@ for (const input of document.querySelectorAll('#tables-card select, #tables-card
 }
 for (const k of ['speed', 'animate']) el[k].addEventListener('change', save);
 byId('new-seed').addEventListener('click', () => {
+  history?.commit();
   el.seed.value = String(crypto.getRandomValues(new Uint32Array(1))[0] % 2147483648);
   changed();
+  history?.commit('Edit seating');
 });
 
 // ---------- example, clear, undo ----------
 
-/** Replaces every input at once and offers the old ones back. @param {any} next @param {string} note */
+/** @param {any} next @param {string} note */
 function replaceAll(next, note) {
-  const before = currentRequest();
   loadRequest(next);
-  replaced = before.guests.length ? before : null;
   el.undoText.textContent = note;
-  el.undoNote.hidden = !replaced;
+  el.undoNote.hidden = !history;
 }
-
-function dropUndo() {
-  replaced = null;
-  el.undoNote.hidden = true;
-}
+function hideReplacementNote() { el.undoNote.hidden = true; }
 
 async function exampleRequest() {
   const response = await fetch('examples/party.json');
@@ -482,23 +491,23 @@ async function exampleRequest() {
 }
 
 byId('load-example').addEventListener('click', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
+  const next = await exampleRequest();
+  if (epoch !== stateEpoch) return;
   const before = guests.length;
-  replaceAll(await exampleRequest(), `Replaced your ${before} guest${before === 1 ? '' : 's'}, pairs, tables and settings with the example.`);
-  runFromPage();
+  replaceAll(next, `Replaced your ${before} guest${before === 1 ? '' : 's'}, pairs, tables and settings with the example.`);
+  await runFromPage({ checkpoint: false });
+  if (epoch === stateEpoch) history?.commit('Load example');
 });
 byId('clear-all').addEventListener('click', () => {
+  history?.commit();
   const n = guests.length;
   const { tables, geography, options } = currentRequest();
   const keptGeography = geography && { ...geography, cost: geography.cost === 'category' ? 'category' : [] };
   replaceAll({ guests: [], tables, ...(keptGeography && { geography: keptGeography }), options }, `Cleared ${n} guest${n === 1 ? '' : 's'} and their pairs and groups.`);
+  history?.commit('Clear guests');
 });
-byId('undo-replace').addEventListener('click', () => {
-  if (!replaced) return;
-  const back = replaced;
-  dropUndo();
-  loadRequest(back);
-});
-
 // ---------- request JSON: paste, edit, open ----------
 
 /**
@@ -539,30 +548,37 @@ function openDialog(text, issues = []) {
 
 byId('edit-json').addEventListener('click', () => openDialog(JSON.stringify(currentRequest(), null, 2)));
 for (const button of el.dialog.querySelectorAll('.dialog-close')) button.addEventListener('click', () => el.dialog.close());
-byId('json-apply').addEventListener('click', () => {
+byId('json-apply').addEventListener('click', async () => {
   const read = readRequest(el.jsonText.value);
   if (!read.request) {
     listMessages(el.jsonIssues, read.issues);
     return;
   }
+  history?.commit();
+  const epoch = stateEpoch;
   el.dialog.close();
-  dropUndo();
+  hideReplacementNote();
   loadRequest(read.request);
-  runFromPage({ autoplay: true });
+  await runFromPage({ autoplay: true, checkpoint: false });
+  if (epoch === stateEpoch) history?.commit('Apply request');
 });
 el.requestFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.requestFile.files?.[0];
   el.requestFile.value = '';
   if (!file) return;
   const text = await file.text();
+  if (epoch !== stateEpoch) return;
   const read = readRequest(text);
   if (!read.request) {
     openDialog(text, [`${file.name} cannot be loaded as it is:`, ...read.issues]);
     return;
   }
-  dropUndo();
+  hideReplacementNote();
   loadRequest(read.request);
-  runFromPage({ autoplay: true });
+  await runFromPage({ autoplay: true, checkpoint: false });
+  if (epoch === stateEpoch) history?.commit('Open request');
 });
 
 // ---------- running ----------
@@ -626,7 +642,9 @@ function setRunning(running) {
 }
 
 /** Runs the inputs' request and shows the result, playing it when asked to. */
-async function runFromPage({ autoplay = false } = {}) {
+async function runFromPage({ autoplay = false, checkpoint = true } = {}) {
+  if (checkpoint) history?.commit();
+  const epoch = stateEpoch;
   window.clearTimeout(checkTimer);
   const issues = check();
   const request = currentRequest();
@@ -634,16 +652,20 @@ async function runFromPage({ autoplay = false } = {}) {
     failed = Boolean(result);
     showStale();
     el.status.textContent = 'Not run';
+    if (checkpoint) history?.commit('Search failed');
     return;
   }
   try {
-    showResult(await run(request), request, request, { autoplay });
+    const next = await run(request);
+    if (epoch !== stateEpoch) return;
+    showResult(next, request, request, { autoplay });
   } catch (error) {
-    if (!(error instanceof SeatingError)) return;
+    if (epoch !== stateEpoch || !(error instanceof SeatingError)) return;
     showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }], buildRequest().rowsOf);
     failed = Boolean(result);
     showStale();
   }
+  if (checkpoint) history?.commit('Find seating');
 }
 
 el.run.addEventListener('click', () => runFromPage({ autoplay: !matchMedia('(prefers-reduced-motion: reduce)').matches }));
@@ -707,10 +729,14 @@ byId('export-request').addEventListener('click', () => download('seating-request
    * @param {object} request
    */
   async submit(request) {
+    history?.commit();
+    const epoch = stateEpoch;
     const next = await run(request);
-    dropUndo();
+    if (epoch !== stateEpoch) throw new Error('stopped');
+    hideReplacementNote();
     loadRequest(request);
     showResult(next, request, currentRequest());
+    history?.commit('Load result');
     return next;
   },
   getRequest: currentRequest,
@@ -727,3 +753,38 @@ byId('export-request').addEventListener('click', () => download('seating-request
 if (!restore()) loadRequest(await exampleRequest());
 await runFromPage();
 if (!result) document.documentElement.dataset.ready = 'true';
+
+// ---------- reversible workspace ----------
+const historyRoot = /** @type {HTMLElement} */ (document.querySelector('main'));
+function captureWorkspace() {
+  const form = captureForm(historyRoot, { filter: field => !field.closest('.editor, dialog') && field.id !== 'timeline' });
+  const rows = { guests: guests.map(row => ({ ...row })), pairs: pairs.map(row => ({ ...row })), tables: tableRows.map(row => ({ ...row })) };
+  return { form, rows, result, resultRequest, resultInputs, failed, replay: replayState(), status: el.status.textContent,
+    key: JSON.stringify([form, rows, failed]) };
+}
+/** @param {ReturnType<typeof captureWorkspace>} saved */
+function restoreWorkspace(saved) {
+  stateEpoch++; stopRun(); pause(); window.clearTimeout(checkTimer);
+  restoreForm(historyRoot, saved.form);
+  guests = saved.rows.guests.map(row => ({ ...row }));
+  pairs = saved.rows.pairs.map(row => ({ ...row }));
+  tableRows = saved.rows.tables.map(row => ({ ...row }));
+  renderEditors(); window.clearTimeout(checkTimer); check();
+  if (saved.result) {
+    showResult(saved.result, saved.resultRequest, saved.resultInputs);
+    if (saved.replay && !saved.replay.best) {
+      byId('timeline').value = String(saved.replay.move);
+      byId('timeline').dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  } else { result = null; resultRequest = null; resultInputs = null; el.result.hidden = true; el.noResult.hidden = false; }
+  failed = saved.failed; showStale(); hideReplacementNote(); save();
+  el.status.textContent = saved.status;
+}
+history = createHistory({ capture: captureWorkspace, restore: restoreWorkspace,
+  equal: (a, b) => a.key === b.key && a.result === b.result && a.resultRequest === b.resultRequest,
+  onChange: h => { byId('undo-replace').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+byId('undo-replace').addEventListener('click', () => history?.undo());
+byId('redo').addEventListener('click', () => history?.redo());
+bindHistoryShortcuts(history, { filter: event => !(event.target instanceof Element && event.target.closest('dialog')) });
+bindFormHistory(history, { root: historyRoot, filter: field => !field.closest('dialog') && field.id !== 'timeline' });

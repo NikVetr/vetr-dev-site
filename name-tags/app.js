@@ -3,6 +3,7 @@
 // window.NameTags exposes the same submit() to scripts and agents in the page.
 
 // The page imports only the light modules; the fonts load in the worker.
+import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 import { parseNamesCsv, parseNamesText } from './core/names.js';
 import { DEFAULT_STYLE, NameTagsError } from './core/request.js';
 import { TRAY_PRESETS } from './core/tray.js';
@@ -16,6 +17,10 @@ import { LAYOUT_PRESETS } from './presets.js';
 
 /** Request fields the page's inputs set; any others from a loaded request are kept as they were. */
 const PAGE_FIELDS = ['names', 'tray', 'cells', 'font', 'decoration', 'logo', 'style', 'seed'];
+
+/** @type {ReturnType<typeof createHistory<any>> | null} */
+let history = null;
+let stateEpoch = 0; // invalidates pending file/example reads when history restores a state
 
 const byId = (/** @type {string} */ id) => /** @type {any} */ (document.getElementById(id));
 /** @type {Record<string, any>} */
@@ -195,13 +200,17 @@ function readFile(file, as) {
 }
 
 el.namesFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.namesFile.files[0];
   if (!file) return;
   const text = await readFile(file, 'text');
+  if (epoch !== stateEpoch) return;
   if (/\.csv$/i.test(file.name)) {
     const rows = parseNamesCsv(text);
     if (typeof rows === 'string') {
       showIssues([{ code: 'invalid_value', path: 'names', message: `${file.name}: ${rows}` }]);
+      history?.commit('File error');
       return;
     }
     el.names.value = rows.map((r) => r.name).join('\n');
@@ -210,30 +219,42 @@ el.namesFile.addEventListener('change', async () => {
     el.names.value = parseNamesText(text).join('\n');
   }
   el.namesFile.value = '';
-  dropUndo();
+  hideReplacementNote();
   showInputs();
+  history?.commit('Open file');
 });
 
 el.trayFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.trayFile.files[0];
   if (!file) return;
   try {
-    customTray = JSON.parse(await readFile(file, 'text'));
+    const text = await readFile(file, 'text');
+    if (epoch !== stateEpoch) return;
+    customTray = JSON.parse(text);
     trayName = file.name;
     showIssues([]);
   } catch (error) {
+    if (epoch !== stateEpoch) return;
     customTray = null;
     showIssues([{ code: 'invalid_json', path: 'tray', message: `${file.name} is not valid JSON: ${/** @type {Error} */ (error).message}` }]);
   }
   showInputs();
+  history?.commit('Open file');
 });
 
 el.logoFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.logoFile.files[0];
   if (!file) return;
-  logoUrl = await readFile(file, 'dataURL');
+  const url = await readFile(file, 'dataURL');
+  if (epoch !== stateEpoch) return;
+  logoUrl = url;
   logoName = file.name;
   showInputs();
+  history?.commit('Open file');
 });
 
 /** A length attribute of an SVG root in inches (unitless = px at 96/in). @param {string | null} v */
@@ -245,20 +266,27 @@ function inches(v) {
 }
 
 el.overlayFile.addEventListener('change', async () => {
+  history?.commit();
+  const epoch = stateEpoch;
   const file = el.overlayFile.files[0];
   if (!file) return;
   const text = await readFile(file, 'text');
+  if (epoch !== stateEpoch) return;
   const root = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
   const vb = (root.getAttribute('viewBox') ?? '').trim().split(/[\s,]+/).map(Number);
   const w = inches(root.getAttribute('width')) ?? (vb.length === 4 ? vb[2] / 96 : null);
   const h = inches(root.getAttribute('height')) ?? (vb.length === 4 ? vb[3] / 96 : null);
   if (root.nodeName !== 'svg' || !w || !h) {
     showIssues([{ code: 'invalid_value', path: 'overlay', message: `${file.name}: could not read an SVG size from it` }]);
+    history?.commit('File error');
     return;
   }
-  overlay = { url: await readFile(file, 'dataURL'), w, h };
+  const url = await readFile(file, 'dataURL');
+  if (epoch !== stateEpoch) return;
+  overlay = { url, w, h };
   el.overlayStatus.textContent = `${file.name}: ${+w.toFixed(3)} × ${+h.toFixed(3)} in.`;
   renderSheet();
+  history?.commit('Open file');
 });
 for (const input of [el.overlayX, el.overlayY, el.overlayShow]) input.addEventListener('input', renderSheet);
 
@@ -387,23 +415,29 @@ function showWarnings(warnings) {
 
 /** @param {object} request */
 async function runFromPage(request) {
+  history?.commit();
+  const epoch = stateEpoch;
   if (el.trayChoice.value === 'custom' && !customTray) {
     showIssues([{ code: 'missing_field', path: 'tray', message: 'choose a tray layout JSON file, or the big keychain tray' }]);
     failed = true;
     showStale();
+    history?.commit('Run failed');
     return;
   }
   showIssues([]);
   const inputs = pageInputs();
   try {
-    showResult(await run(request), request, inputs);
+    const next = await run(request);
+    if (epoch !== stateEpoch) return;
+    showResult(next, request, inputs);
   } catch (error) {
-    if (/** @type {Error} */ (error).message === 'stopped') return;
+    if (epoch !== stateEpoch || /** @type {Error} */ (error).message === 'stopped') return;
     if (error instanceof NameTagsError) showIssues(error.issues.length ? error.issues : [{ code: error.code, path: '', message: error.message }]);
     else showIssues([{ code: 'internal_error', path: '', message: String(error) }]);
     failed = true;
     showStale();
   }
+  history?.commit('Generate');
 }
 
 el.generate.addEventListener('click', () => runFromPage(currentRequest()));
@@ -540,10 +574,14 @@ byId('export-request').addEventListener('click', () => {
 // ---------- example ----------
 
 async function loadExample() {
+  history?.commit();
+  const epoch = stateEpoch;
   const response = await fetch('examples/historical-figures.txt');
   if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status})`);
+  const text = await response.text();
+  if (epoch !== stateEpoch) return;
   const n = parseNamesText(el.names.value).length;
-  replaceNames(parseNamesText(await response.text()).join('\n'), { style: structuredClone(LAYOUT_PRESETS.balanced) }, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
+  replaceNames(parseNamesText(text).join('\n'), { style: structuredClone(LAYOUT_PRESETS.balanced) }, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
 byId('line-layout').addEventListener('change', () => {
@@ -559,40 +597,19 @@ byId('clear-names').addEventListener('click', () => {
   replaceNames('', extraFields, `Cleared ${n} name${n === 1 ? '' : 's'}.`);
 });
 
-// Load example and Clear replace the names at once, and offer them back: Undo restores them,
-// until the names are next changed.
-
-/** The names (and request fields the inputs do not show) that Load example or Clear replaced. @type {{ names: string, extraFields: Record<string, any> } | null} */
-let replaced = null;
-
-/**
- * @param {string} names the names text to show
- * @param {Record<string, any>} extra the request fields the inputs do not show, from then on
- * @param {string} note what the replacement did, shown beside Undo
- */
+/** Replace names and hidden settings as one step.
+ * @param {string} names @param {Record<string, any>} extra @param {string} note */
 function replaceNames(names, extra, note) {
-  const changed = el.names.value.trim() !== '' && el.names.value !== names;
-  replaced = changed ? { names: el.names.value, extraFields } : null;
-  el.undoText.textContent = note;
-  el.undoNote.hidden = !changed;
+  history?.commit('Edit inputs');
   el.names.value = names;
   extraFields = extra;
+  el.undoText.textContent = note;
+  el.undoNote.hidden = !history;
   showInputs();
+  history?.commit('Replace names');
 }
-
-function dropUndo() {
-  replaced = null;
-  el.undoNote.hidden = true;
-}
-el.names.addEventListener('input', dropUndo);
-
-byId('undo-replace').addEventListener('click', () => {
-  if (!replaced) return;
-  el.names.value = replaced.names;
-  extraFields = replaced.extraFields;
-  dropUndo();
-  showInputs();
-});
+function hideReplacementNote() { el.undoNote.hidden = true; }
+el.names.addEventListener('input', hideReplacementNote);
 
 // ---------- API for scripts in the page ----------
 
@@ -604,10 +621,14 @@ byId('undo-replace').addEventListener('click', () => {
    * @param {Record<string, any>} request
    */
   async submit(request) {
+    history?.commit();
+    const epoch = stateEpoch;
     const next = await run(request);
+    if (epoch !== stateEpoch) throw new Error('stopped');
     loadRequest(request);
-    dropUndo();
+    hideReplacementNote();
     showResult(next, request, pageInputs());
+    history?.commit('Load result');
     return next;
   },
   getRequest: currentRequest,
@@ -620,3 +641,47 @@ await loadExample();
 await runFromPage(currentRequest());
 
 document.documentElement.dataset.ready = 'true';
+
+// ---------- reversible workspace ----------
+const historyRoot = /** @type {HTMLElement} */ (document.querySelector('main'));
+const historyFilter = (/** @type {Element} */ field) => !field.closest('#sheet-options');
+function captureWorkspace() {
+  const form = captureForm(historyRoot, { filter: historyFilter });
+  const invalid = [...historyRoot.querySelectorAll('[aria-invalid=true]')].map(field => ({ id: field.id, described: field.getAttribute('aria-describedby') }));
+  const feedback = ['issues', 'warnings', 'overlay-status'].map(id => ({ id, html: byId(id).innerHTML, hidden: byId(id).hidden }));
+  return { form, feedback, invalid, result, resultRequest, resultInputs, failed, shownSheet, previewView,
+    customTray, logoUrl, logoName, trayName, overlay, extraFields: structuredClone(extraFields), status: el.status.textContent,
+    key: JSON.stringify([form, feedback, invalid, failed, shownSheet, previewView, extraFields, logoName, trayName]) };
+}
+/** @param {ReturnType<typeof captureWorkspace>} saved */
+function restoreWorkspace(saved) {
+  stateEpoch++;
+  stopRun();
+  customTray = saved.customTray; logoUrl = saved.logoUrl; logoName = saved.logoName; trayName = saved.trayName;
+  overlay = saved.overlay; extraFields = structuredClone(saved.extraFields); previewView = saved.previewView;
+  restoreForm(historyRoot, saved.form);
+  showInputs();
+  showIssues([]);
+  if (saved.result) showResult(saved.result, /** @type {object} */ (saved.resultRequest), /** @type {Inputs} */ (saved.resultInputs));
+  else { result = null; resultRequest = null; resultInputs = null; el.result.hidden = true; el.noResult.hidden = false; }
+  shownSheet = saved.shownSheet; failed = saved.failed;
+  const radio = el.sheetOptions.querySelector(`input[value="${shownSheet}"]`);
+  if (radio) radio.checked = true;
+  for (const item of saved.feedback) { byId(item.id).innerHTML = item.html; byId(item.id).hidden = item.hidden; }
+  for (const field of historyRoot.querySelectorAll('[aria-invalid]')) field.removeAttribute('aria-invalid');
+  for (const item of saved.invalid) {
+    if (!item.id) continue;
+    byId(item.id).setAttribute('aria-invalid', 'true');
+    if (item.described) byId(item.id).setAttribute('aria-describedby', item.described);
+  }
+  renderSheet(); showStale(); hideReplacementNote();
+  el.status.textContent = saved.status;
+}
+history = createHistory({ capture: captureWorkspace, restore: restoreWorkspace,
+  equal: (a, b) => a.key === b.key && a.result === b.result && a.resultRequest === b.resultRequest && a.customTray === b.customTray && a.logoUrl === b.logoUrl && a.overlay === b.overlay,
+  onChange: h => { byId('undo-replace').disabled = !h.canUndo; byId('redo').disabled = !h.canRedo; },
+});
+byId('undo-replace').addEventListener('click', () => history?.undo());
+byId('redo').addEventListener('click', () => history?.redo());
+bindHistoryShortcuts(history);
+bindFormHistory(history, { root: historyRoot, filter: field => !field.matches('input[type=file]') });

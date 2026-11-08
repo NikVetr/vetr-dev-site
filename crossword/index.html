@@ -43,8 +43,12 @@
       <div class="toolbar">
         <button id="load-example" type="button">Load example</button>
         <button id="clear-entries" type="button">Clear</button>
+        <span class="history-controls" role="group" aria-label="History">
+          <button id="undo-replace" type="button" disabled title="Undo (Ctrl/⌘Z)">Undo</button>
+          <button id="redo" type="button" disabled title="Redo (Ctrl/⌘Shift Z)">Redo</button>
+        </span>
       </div>
-      <div id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span> <button id="undo-replace" type="button">Undo</button></div>
+      <div id="undo-note" class="undo-note" role="status" hidden><span id="undo-text"></span></div>
       <textarea id="entries" class="entries" rows="14" spellcheck="false" aria-label="Answers and clues, one clue : answer per line"></textarea>
       <div id="entry-issues" class="issues" role="alert" hidden></div>
     </section>
