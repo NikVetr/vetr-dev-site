@@ -78,7 +78,7 @@ export async function build() {
   const delay = (/** @type {number} */ i) => START + (i * SWEEP) / Math.max(1, order.length - 1);
   if (delay(order.length - 1) > PERIOD / 2 - FADE) throw new Error('text-in-image: the sweep is too long for the period');
   const body = order.map((n, i) => {
-    const spans = [...(lines.get(n) ?? [])].map(([col, run]) => `<tspan fill="${col}" x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`).join('');
+    const spans = [...(lines.get(n) ?? [])].map(([col, run]) => `<tspan fill="${col}" stroke="${col}" x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`).join('');
     return `<text y="${num(lineY.get(n) ?? 0, 1)}" style="animation-delay:${num(delay(i), 3)}s">${spans}</text>`;
   }).join('\n');
 
@@ -99,6 +99,8 @@ export async function build() {
     await close();
   }
 
+  // The real bold face still has subpixel stems at thumbnail scale. Strengthen each glyph
+  // with its own colour, preserving the fitter's advances and the image-derived colours.
   const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
   return art({
     name: 'text-in-image',
@@ -114,7 +116,7 @@ ${body}
 </g>`,
     css: `& .panel { fill: ${BACKGROUND}; }
 & .arrow { fill: none; stroke: var(--art-muted); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
-& .fill { font: 700 ${num(size * k, 2)}px 'Liberation Sans', Arial, Helvetica, sans-serif; }`,
+& .fill { font: 700 ${num(size * k, 2)}px 'Liberation Sans', Arial, Helvetica, sans-serif; stroke-width: 0.08em; stroke-linejoin: round; paint-order: stroke fill; }`,
     loop: `& .fill text { animation: text-in-image-line ${PERIOD}s linear infinite; }
 @keyframes text-in-image-line { 0% { opacity: 1; } ${p(FADE)}% { opacity: 0; } 50% { opacity: 0; } ${p(PERIOD / 2 + FADE)}% { opacity: 1; } 100% { opacity: 1; } }`,
   });

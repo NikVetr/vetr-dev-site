@@ -2,10 +2,10 @@
 // using the existing HSL matcher, seed 1, up to three uses per photo and 45% display tint:
 // 1,200 cells in 40 columns by 30 rows. The still is the mosaic as the page draws it, taken from
 // its own PNG export at 20 px a tile and embedded as WebP; the other view is the page's "target
-// at one colour per cell", drawn as one square per cell. The loop crossfades from the mosaic to
-// the cells and back, with the page's two-way "Show" choice beside it marking the view.
+// at one colour per cell", drawn as one square per cell. The image fills the artwork at its
+// native 4:3 aspect ratio; the loop crossfades from the mosaic to the cells and back.
 import { openPage } from '../browser.mjs';
-import { H, art, num } from '../svg.mjs';
+import { art, num } from '../svg.mjs';
 
 const TILE_PX = 20;     // pixels per tile in the embedded mosaic, about twice its display size
 const QUALITY = 0.5;    // WebP quality
@@ -47,12 +47,10 @@ export async function build() {
   const { rows, columns } = result.grid;
   if (mosaic.width !== columns * TILE_PX || mosaic.height !== rows * TILE_PX) throw new Error(`photomosaic: the export is ${mosaic.width} × ${mosaic.height}, not ${columns} × ${rows} square tiles`);
 
-  // The mosaic as tall as the card allows, the view choice to its right.
-  const tile = (H - 10) / rows;
-  const mw = columns * tile;
-  const mh = rows * tile;
-  const mx = 8;
-  const my = (H - mh) / 2;
+  // Use the entire canvas for the image, without a miniature copy of the app's controls.
+  const width = 320;
+  const tile = width / columns;
+  const height = rows * tile;
 
   // The cells, in tile units; each overlaps its right and lower neighbours slightly so no seam
   // of the mosaic shows between them.
@@ -67,11 +65,6 @@ export async function build() {
     }
   }
 
-  // The page's "Show" choice: the mosaic, or the target at one colour per cell.
-  const lx = mx + mw + 10;
-  const ly = H / 2 - 9;
-  const choice = ['mosaic', 'target'].map((label, i) => `<circle class="ring" cx="${num(lx + 3.5)}" cy="${num(ly + i * 18)}" r="3.5"/><circle class="dot dot${i}" cx="${num(lx + 3.5)}" cy="${num(ly + i * 18)}" r="2"/><text x="${num(lx + 10)}" y="${num(ly + i * 18)}">${label}</text>`).join('');
-
   const p = (/** @type {number} */ t) => `${num((100 * t) / PERIOD, 3)}%`;
   const a = TO_CELLS;
   const b = a + FADE;
@@ -82,18 +75,13 @@ export async function build() {
 
   return art({
     name: 'photomosaic',
+    width,
+    height,
     period: PERIOD,
-    body: `<image href="${mosaic.url}" x="${num(mx)}" y="${num(my)}" width="${num(mw)}" height="${num(mh)}" preserveAspectRatio="none"/>
-<g class="cells" transform="translate(${num(mx)} ${num(my)}) scale(${num(tile, 4)})">${cells}</g>
-<g class="choice">${choice}</g>`,
-    css: `& .cells { opacity: 0; }
-& .choice text { fill: var(--art-ink); font: 8px ui-sans-serif, system-ui, sans-serif; dominant-baseline: central; }
-& .ring { fill: none; stroke: var(--art-muted); stroke-width: 0.9; }
-& .dot { fill: var(--art-ink); }
-& .dot1 { opacity: 0; }`,
-    loop: `& .cells, & .dot1 { animation: photomosaic-cells ${PERIOD}s ease-in-out infinite; }
-& .dot0 { animation: photomosaic-mosaic ${PERIOD}s ease-in-out infinite; }
-${fade('photomosaic-cells', 0, 1)}
-${fade('photomosaic-mosaic', 1, 0)}`,
+    body: `<image href="${mosaic.url}" width="${num(width)}" height="${num(height)}" preserveAspectRatio="none"/>
+<g class="cells" transform="scale(${num(tile, 4)})">${cells}</g>`,
+    css: `& .cells { opacity: 0; }`,
+    loop: `& .cells { animation: photomosaic-cells ${PERIOD}s ease-in-out infinite; }
+${fade('photomosaic-cells', 0, 1)}`,
   });
 }
