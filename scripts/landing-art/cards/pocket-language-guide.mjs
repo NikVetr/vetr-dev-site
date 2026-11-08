@@ -6,12 +6,14 @@
 // of its reference theme magnified 1.6 times, the colours its reference theme's, or its dark
 // theme's under the dark site theme. Over the section's rule, the language's own name.
 // The loop turns the card through seven languages and back to Japanese, the still: each fades out
-// and the next fades in while the card's frame stays put.
+// and the next fades in while the card's frame stays put. Then a compact selection of actual
+// Converse buttons appears, Hello is pressed, and its real Japanese phrase fills the card.
 import { readFile } from 'node:fs/promises';
 import { buildContent } from '../../../pocket-language-guide/core/content.js';
 import { resolveField } from '../../../pocket-language-guide/core/fonts.js';
 import { defaultFieldSet, defaultSelection } from '../../../pocket-language-guide/core/pack.js';
 import { createSheetContext, loadFontsFor } from '../../../pocket-language-guide/core/sheet.js';
+import { openPage } from '../browser.mjs';
 import { art, esc, num } from '../svg.mjs';
 
 const LANGS = ['ja', 'hi', 'ar', 'ru', 'th', 'ka', 'zh-Hans'];
@@ -149,7 +151,8 @@ export async function build() {
   // One group of text per language, the first showing at rest. That one is a layer of its own at
   // rest too (will-change), as the loop makes every group: otherwise Chromium draws its text a
   // subpixel apart when the loop starts.
-  const period = LANGS.length * HOLD;
+  const printPeriod = LANGS.length * HOLD;
+  const period = printPeriod + 5.6;
   const shift = (HOLD - 2 * FADE) / 2;   // the still is the middle of Japanese's time on the card
   const text = (/** @type {string} */ cls, /** @type {number} */ x, /** @type {number} */ y, /** @type {string} */ s) => `<text class="${cls}" x="${num(x)}" y="${num(y)}">${esc(s)}</text>`;
   const langs = cards.map((c, i) => {
@@ -166,11 +169,14 @@ export async function build() {
   const c = (/** @type {any} */ t) => t.colors;
   const p = (/** @type {number} */ t) => num((100 * t) / period, 3);
   const font = 'ui-sans-serif, system-ui, sans-serif';
+  const conversation = await conversePreview();
   return art({
     name: 'pocket-language-guide',
     period,
-    body: `${frame}${langs.join('\n')}`,
-    css: `& .paper { fill: ${c(light).paper}; stroke: var(--art-line); stroke-width: 0.8; }
+    body: `<g class="print-view">${frame}${langs.join('\n')}</g>${conversation.body}`,
+    css: `${conversation.css}
+& .converse, & .message { opacity:0; }
+& .paper { fill: ${c(light).paper}; stroke: var(--art-line); stroke-width: 0.8; }
 & .shade { fill: ${c(light).shade}; }
 & .rule { fill: ${c(light).rule}; }
 & .accent { fill: ${c(light).roles.comm}; }
@@ -193,7 +199,78 @@ export async function build() {
 :root[data-theme="dark"] & text { fill: ${c(dark).ink}; }
 :root[data-theme="dark"] & .n, :root[data-theme="dark"] & .respell { fill: ${c(dark).muted}; }`,
     // Each language: on the card, fading out, off, and fading in just before its turn.
-    loop: `& .lang { animation: pocket-language-guide-lang ${num(period, 3)}s linear infinite; }
+    loop: `& .print-view { animation:pocket-language-guide-print ${num(period,3)}s linear infinite; }
+& .converse { animation:pocket-language-guide-board ${num(period,3)}s linear infinite; }
+& .message { animation:pocket-language-guide-message ${num(period,3)}s linear infinite; }
+& .tap { animation:pocket-language-guide-tap ${num(period,3)}s linear infinite; }
+@keyframes pocket-language-guide-print { 0%, ${p(printPeriod-.2)}%,100% { opacity:1; } ${p(printPeriod)}%,98% { opacity:0; } }
+@keyframes pocket-language-guide-board { 0%,${p(printPeriod-.2)}%,${p(printPeriod+2.7)}%,100% { opacity:0; } ${p(printPeriod)}%,${p(printPeriod+2.5)}% { opacity:1; } }
+@keyframes pocket-language-guide-message { 0%,${p(printPeriod+2.5)}%,100% { opacity:0; } ${p(printPeriod+2.7)}%,98% { opacity:1; } }
+@keyframes pocket-language-guide-tap { 0%,${p(printPeriod+1.7)}%,100% { opacity:0; } ${p(printPeriod+2)}%,${p(printPeriod+2.6)}% { opacity:1; } }
+& .lang { animation: pocket-language-guide-lang ${num(period, 3)}s linear infinite; }
 @keyframes pocket-language-guide-lang { 0% { opacity: 1; } ${p(HOLD - 2 * FADE)}% { opacity: 1; } ${p(HOLD - FADE)}% { opacity: 0; } ${p(period - FADE)}% { opacity: 0; } 100% { opacity: 1; } }`,
   });
+}
+
+/** A compact selection of real Converse buttons and the actual result of pressing Hello. */
+async function conversePreview() {
+  const {page,errors,close}=await openPage('pocket-language-guide/conversation.html?target=ja&source=en&board=intro');
+  try {
+    await page.waitForSelector('#board-grid [data-button="hello"]');
+    const ids=['hello','doyou','slowly','write','thanks','bye'];
+    /** @type {string[]} */
+    const buttons=await page.evaluate((/** @type {string[]} */ ids)=>ids.map(id=>{
+      const el=document.querySelector(`#board-grid [data-button="${id}"]`);
+      if(!el)throw new Error(`Converse button ${id} missing`);
+      return el.querySelector('.board-cell-label')?.textContent??'';
+    }),ids);
+    await page.locator('#board-grid [data-button="hello"]').click();
+    await page.waitForSelector('#board-stage .board-message-text');
+    const read=()=>page.evaluate(()=>{
+      const button=document.querySelector('#board-grid [data-button="hello"]');
+      const stage=document.querySelector('#board-stage');
+      const message=document.querySelector('.board-message-text');
+      if(!button||!stage||!message)throw new Error('Converse stage missing');
+      const b=getComputedStyle(button),m=getComputedStyle(message);
+      return {fill:b.backgroundColor,border:b.borderColor,ink:b.color,paper:getComputedStyle(document.body).backgroundColor,
+        stage:getComputedStyle(stage).backgroundColor,messageInk:m.color,
+        script:message.textContent??'',gloss:document.querySelector('.gloss-own')?.textContent??'',respell:document.querySelector('.gloss-say')?.textContent??''};
+    });
+    const light=await read();
+    await page.evaluate(()=>document.documentElement.dataset.theme='dark');
+    const dark=await read();
+    if(!light.script||!light.gloss)throw new Error('Converse returned an empty greeting');
+    if(errors.length)throw new Error(`Converse preview: ${errors.join('; ')}`);
+    const cells=buttons.map((label,i)=>{
+      const x=11+(i%2)*152,y=34+Math.floor(i/2)*45;
+      /** @type {string[]} */
+      const lines=[];
+      for(const word of label.split(' ')){
+        if(lines.length && `${lines.at(-1)} ${word}`.length<=20)lines[lines.length-1]+=` ${word}`;
+        else lines.push(word);
+      }
+      return `<rect class="converse-cell" x="${x}" y="${y}" width="146" height="39" rx="5"/><text class="converse-label" x="${x+73}" y="${y+20-(lines.length-1)*7}">${lines.map((line,j)=>`<tspan x="${x+73}" dy="${j?14:0}">${esc(line)}</tspan>`).join('')}</text>`;
+    }).join('');
+    return {
+      body:`<g class="converse"><rect class="converse-paper" x="5" y="4" width="310" height="172" rx="4"/><text class="converse-heading" x="160" y="22">Converse · English → 日本語</text>${cells}<g class="tap"><circle cx="84" cy="54" r="12"/><path d="M84 54l3 18 4-6 6 1Z"/></g></g>
+<g class="message"><rect class="message-paper" x="5" y="4" width="310" height="172" rx="4"/><text class="message-script" lang="ja" x="160" y="86">${esc(light.script)}</text><text class="message-gloss" x="160" y="132">${esc(light.gloss)}</text><text class="message-respell" x="160" y="153">${esc(light.respell)}</text></g>`,
+      css:`& .converse-paper { fill:${light.paper}; }
+& .converse-cell { fill:${light.fill};stroke:${light.border};stroke-width:.8; }
+& .converse-label, & .converse-heading { fill:${light.ink};text-anchor:middle;dominant-baseline:central; }
+& .converse-label { font-size:12px; }
+& .converse-heading { font-size:13px;font-weight:700; }
+& .message-paper { fill:${light.stage}; }
+& .message .message-script, & .message .message-gloss, & .message .message-respell { fill:${light.messageInk};text-anchor:middle;dominant-baseline:central; }
+& .message-script { font-size:40px;font-weight:600; }
+& .message-gloss { font-size:17px;font-weight:600; }
+& .message-respell { font-size:12px; }
+& .tap circle { fill:none;stroke:${light.border};stroke-width:2; }
+& .tap path { fill:${light.ink};stroke:${light.paper};stroke-width:1; }
+:root[data-theme="dark"] & .converse-paper { fill:${dark.paper}; }
+:root[data-theme="dark"] & .converse-cell { fill:${dark.fill};stroke:${dark.border}; }
+:root[data-theme="dark"] & .converse .converse-label, :root[data-theme="dark"] & .converse .converse-heading { fill:${dark.ink}; }
+:root[data-theme="dark"] & .message-paper { fill:${dark.stage}; }
+:root[data-theme="dark"] & .message .message-script, :root[data-theme="dark"] & .message .message-gloss, :root[data-theme="dark"] & .message .message-respell { fill:${dark.messageInk}; }`,
+    };
+  }finally{await close();}
 }
