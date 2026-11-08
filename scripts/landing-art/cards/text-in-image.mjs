@@ -11,7 +11,7 @@ import { readFileSync } from 'node:fs';
 import { decodePng } from '../../../shared/decode-png.mjs';
 import { measureChars } from '../../../text-in-image/core/font.js';
 import { submit } from '../../../text-in-image/core/index.js';
-import { contrastOutline, CONTRAST_OUTLINE_EM } from '../../../text-in-image/core/contrast.js';
+import { adjustedContrastColour } from '../../../text-in-image/core/contrast.js';
 import { openPage } from '../browser.mjs';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
@@ -24,12 +24,13 @@ const PICTURE_PX = 2;   // the picture embedded at this many pixels per display 
 const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
 
-export async function build() {
+/** @param {{background?:string}} [options] */
+export async function build({ background = BACKGROUND } = {}) {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background: BACKGROUND }, render: { contrast_outline: true } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background }, render: { contrast_adjust: true } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
   // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
@@ -80,9 +81,8 @@ export async function build() {
   if (delay(order.length - 1) > PERIOD / 2 - FADE) throw new Error('text-in-image: the sweep is too long for the period');
   const body = order.map((n, i) => {
     const spans = [...(lines.get(n) ?? [])].map(([col, run]) => {
-      const outline = contrastOutline(col, BACKGROUND);
-      const stroke = outline ? `stroke="${outline}" stroke-width="${CONTRAST_OUTLINE_EM}em"` : `stroke="${col}"`;
-      return `<tspan fill="${col}" ${stroke} x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`;
+      const fill = adjustedContrastColour(col, background);
+      return `<tspan fill="${fill}" x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`;
     }).join('');
     return `<text y="${num(lineY.get(n) ?? 0, 1)}" style="animation-delay:${num(delay(i), 3)}s">${spans}</text>`;
   }).join('\n');
@@ -104,8 +104,7 @@ export async function build() {
     await close();
   }
 
-  // The real bold face still has subpixel stems at thumbnail scale. Strengthen each glyph
-  // with its own colour, preserving the fitter's advances and the image-derived colours.
+  // Use the real bold face with gentle fill-colour adjustment and no glyph stroke.
   const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
   return art({
     name: 'text-in-image',
@@ -119,9 +118,9 @@ export async function build() {
 <g class="fill">
 ${body}
 </g>`,
-    css: `& .panel { fill: ${BACKGROUND}; }
+    css: `& .panel { fill: ${background}; }
 & .arrow { fill: none; stroke: var(--art-muted); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
-& .fill { font: 700 ${num(size * k, 2)}px 'Liberation Sans', Arial, Helvetica, sans-serif; stroke-width: 0.08em; stroke-linejoin: round; paint-order: stroke fill; }`,
+& .fill { font: 700 ${num(size * k, 2)}px 'Liberation Sans', Arial, Helvetica, sans-serif; }`,
     loop: `& .fill text { animation: text-in-image-line ${PERIOD}s linear infinite; }
 @keyframes text-in-image-line { 0% { opacity: 1; } ${p(FADE)}% { opacity: 0; } 50% { opacity: 0; } ${p(PERIOD / 2 + FADE)}% { opacity: 1; } 100% { opacity: 1; } }`,
   });

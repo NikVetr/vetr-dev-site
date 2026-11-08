@@ -24,7 +24,7 @@ test(`raster preview visits four actual stages, pauses and respects reduced moti
     assert.ok(renderedText >= 10, 'stage labels must remain readable in the native card');
     await card.hover();
     await page.waitForFunction(() => document.querySelector('[data-art="raster-to-vector"]')?.hasAttribute('data-playing'));
-    for (const [i, label] of ['Raster', 'Colours', 'Outlines', 'Smooth'].entries()) {
+    for (const [i, label] of ['Raster', 'Colours', 'Trace', 'Smooth'].entries()) {
       const active = await art.evaluate((/** @type {Element} */ el, /** @type {number} */ at) => {
         // Seek without overriding CSS ownership of animation-play-state.
         for (const animation of el.getAnimations({ subtree: true })) animation.currentTime = at;
@@ -32,6 +32,14 @@ test(`raster preview visits four actual stages, pauses and respects reduced moti
       }, i * 2500 + 200);
       assert.deepEqual(active, [label]);
     }
+    const sweep = await art.evaluate((/** @type {Element} */ el) => {
+      for (const animation of el.getAnimations({ subtree: true })) animation.currentTime = 1250;
+      const reveal = el.querySelector('.reveal'), scan = el.querySelector('.scan');
+      if (!reveal || !scan) throw new Error('Missing processing sweep');
+      return { reveal: new DOMMatrix(getComputedStyle(reveal).transform).a, scan: new DOMMatrix(getComputedStyle(scan).transform).e, opacity: Number(getComputedStyle(scan).opacity) };
+    });
+    assert.ok(sweep.reveal > .2 && sweep.reveal < .8, 'the next actual stage is partially revealed');
+    assert.ok(sweep.scan > 0 && sweep.scan < 128 && sweep.opacity > 0, 'the neutral pass crosses the picture');
     await page.mouse.move(0, 0);
     await page.waitForTimeout(80);
     assert.equal(await art.getAttribute('data-playing'), null);

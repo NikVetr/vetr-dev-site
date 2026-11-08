@@ -68,7 +68,7 @@ test('renders the example and exposes the API', async ({ page }) => {
 
 test('contrast aid is optional, exported to SVG and PNG, and restored by history', async ({ page }) => {
   await open(page);
-  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('none');
   const before = await page.evaluate(async () => {
     const app = /** @type {any} */ (window).TextInImage;
     const png = await app.exportPngBlob();
@@ -82,26 +82,58 @@ test('contrast aid is optional, exported to SVG and PNG, and restored by history
     const bitmap = await createImageBitmap(png);
     return { svg: app.exportSvgText(), glyphs: app.getResult().glyphs, png: [...new Uint8Array(await crypto.subtle.digest('SHA-256', await png.arrayBuffer()))], size: [bitmap.width, bitmap.height] };
   });
-  await expect(page.locator('#contrast-outline')).toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('outline');
   expect(after.glyphs).toEqual(before.glyphs);
   expect(after.svg).toContain('stroke="#000000"');
   expect(before.svg).not.toContain(' stroke=');
   expect(after.png).not.toEqual(before.png);
   expect(after.size).toEqual([1475, 2700]);
   await page.locator('#undo-replace').click();
-  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('none');
   expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(before.svg);
   await page.locator('#redo').click();
-  await expect(page.locator('#contrast-outline')).toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('outline');
   expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(after.svg);
-  await page.locator('#contrast-outline').uncheck();
+  await page.locator('#contrast-mode').selectOption('none');
   await page.locator('#undo-replace').click();
-  await expect(page.locator('#contrast-outline')).toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('outline');
   await page.locator('#redo').click();
-  await expect(page.locator('#contrast-outline')).not.toBeChecked();
+  await expect(page.locator('#contrast-mode')).toHaveValue('none');
   await page.locator('#render').click();
   await expect(page.locator('#stale')).toBeHidden();
   expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(before.svg);
+});
+
+test('gentle colour mode exports without outlines, round-trips through the API and restores with Undo', async ({ page }) => {
+  await open(page);
+  const output = () => page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage;
+    return { svg: app.exportSvgText(), glyphs: app.getResult().glyphs, png: [...new Uint8Array(await crypto.subtle.digest('SHA-256', await (await app.exportPngBlob()).arrayBuffer()))] };
+  });
+  const before = await output();
+  await page.evaluate(async () => {
+    const app = /** @type {any} */ (window).TextInImage, request = app.getRequest();
+    await app.submit({ ...request, render: { ...request.render, contrast_adjust: true } });
+  });
+  await expect(page.locator('#contrast-mode')).toHaveValue('adjust');
+  const after = await output();
+  expect(after.glyphs).toEqual(before.glyphs);
+  expect(after.svg).not.toContain(' stroke=');
+  expect(after.svg).not.toBe(before.svg);
+  expect(after.png).not.toEqual(before.png);
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#contrast-mode')).toHaveValue('none');
+  expect((await output()).svg).toBe(before.svg);
+  await page.locator('#redo').click();
+  await expect(page.locator('#contrast-mode')).toHaveValue('adjust');
+  expect((await output()).svg).toBe(after.svg);
+  await page.locator('#contrast-mode').selectOption('outline');
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  const settings = await page.evaluate(() => /** @type {any} */ (window).TextInImage.getRequest().render);
+  expect(settings.contrast_adjust).toBe(false);
+  expect(settings.contrast_outline).toBe(true);
+  expect((await output()).svg).toContain(' stroke=');
 });
 
 test('shows every problem with a setting, and recovers', async ({ page }) => {

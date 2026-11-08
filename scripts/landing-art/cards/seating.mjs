@@ -8,14 +8,26 @@ import { TALL, art, num } from '../svg.mjs';
 import { planSwarm, softenSwarm, validateSwarm } from '../seating-swarm.mjs';
 const { width: W, height: H } = TALL;
 const TOP = 26;
-/** Choose the stronger black/white text contrast for each category fill. */
-function inkOn(/** @type {string} */ hex) {
-  const [r, g, b] = [1, 3, 5].map((i) => {
-    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
-    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  });
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return (luminance + .05) / .05 >= 1.05 / (luminance + .05) ? '#000000' : '#ffffff';
+/** Frame a genuine four-table subset without revealing extra table circles.
+ * @param {import('../seating-swarm.mjs').Obstacle[]} tables @param {number} seatExtent
+ */
+function roomCameras(tables, seatExtent) {
+  const centre = { x: W / 2, y: TOP + (H - TOP) / 2 };
+  const ordered = tables.map((table, i) => ({ table, i })).sort((a, b) => Math.hypot(a.table.x - centre.x, a.table.y - centre.y) - Math.hypot(b.table.x - centre.x, b.table.y - centre.y));
+  for (const { table: focus, i } of ordered) {
+    const near = tables.map((t, j) => ({ t, j })).filter(o => o.j !== i).sort((a, b) => Math.hypot(a.t.x - focus.x, a.t.y - focus.y) - Math.hypot(b.t.x - focus.x, b.t.y - focus.y)).slice(0, 10);
+    for (let a = 0; a < near.length; a++) for (let b = a + 1; b < near.length; b++) for (let c = b + 1; c < near.length; c++) {
+      const group = [focus, near[a].t, near[b].t, near[c].t];
+      const xs = group.map(t => t.x), ys = group.map(t => t.y);
+      const spanX = Math.max(...xs) - Math.min(...xs) + 2 * seatExtent, spanY = Math.max(...ys) - Math.min(...ys) + 2 * seatExtent;
+      const scale = Math.min((W - 12) / spanX, (H - TOP - 12) / spanY);
+      const four = { x: (Math.min(...xs) + Math.max(...xs)) / 2, y: (Math.min(...ys) + Math.max(...ys)) / 2, scale, height: spanY * scale + 12, roundness: 0 };
+      const visible = tables.filter(t => Math.hypot(Math.max(0, Math.abs(t.x - four.x) - W / (2 * scale)), Math.max(0, Math.abs(t.y - four.y) - four.height / (2 * scale))) <= t.radius + .25);
+      if (visible.length !== 4) continue;
+      return { close: { x: focus.x, y: focus.y, scale: (W - 12) / (2 * seatExtent), height: W, roundness: W / 2 }, four, full: { ...centre, scale: 1, height: H - TOP, roundness: 0 } };
+    }
+  }
+  throw new Error('No honest four-table camera fits this room');
 }
 
 
@@ -46,8 +58,7 @@ export function roomGeometry(result, guests) {
       return point;
     });
   });
-  const focus = obstacles[22], neighbor = obstacles[28];
-  return { rounds, radius, obstacles, camera: { close: { x: focus.x, y: focus.y, scale: 9, height: 240 }, four: { x: (focus.x + neighbor.x) / 2, y: (focus.y + neighbor.y) / 2, scale: 3.2, height: 172 }, full: { x: W / 2, y: TOP + (H - TOP) / 2, scale: 1, height: H - TOP } } };
+  return { rounds, radius, obstacles, camera: roomCameras(obstacles, seatRadius + radius + .4) };
 }
 
 export async function seatingScene() {
@@ -82,7 +93,7 @@ export async function build() {
   const lightColours = roundCategoryColours(categories), darkColours = roundCategoryColours(categories, 'dark');
   const guests = request.guests.map((/** @type {{id:string,category:number,fixedSeat?:boolean}} */ g) => {
     const light = /** @type {string} */ (lightColours.get(g.category)), dark = /** @type {string} */ (darkColours.get(g.category));
-    return { id: g.id, name: g.id.split(' ')[0], category: g.category, fixed: !!g.fixedSeat, light, dark, inkLight: inkOn(light), inkDark: inkOn(dark) };
+    return { id: g.id, category: g.category, fixed: !!g.fixedSeat, light, dark };
   });
   const samples = motion[0].paths[0].length;
   const transitions = motion.map(({ paths }) => encodeRoutes(paths));

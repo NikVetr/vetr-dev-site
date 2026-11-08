@@ -1,7 +1,7 @@
 // Authored routes connect actual round assignments; they are presentation geometry,
 // separate from the planner's table-center travel objective.
-/** @typedef {{name:string,light:string,dark:string,inkLight:string,inkDark:string,fixed:boolean}} Guest */
-/** @typedef {{x:number,y:number,scale:number,height:number}} Camera */
+/** @typedef {{light:string,dark:string,fixed:boolean}} Guest */
+/** @typedef {{x:number,y:number,scale:number,height:number,roundness:number}} Camera */
 /** @typedef {{width:number,height:number,radius:number,samples:number,coordinateScale:number,encoding:string,tables:number[][],guests:Guest[],rounds:number[][][],transitions:string[],camera:{close:Camera,four:Camera,full:Camera}}} EncodedPlan */
 /** @typedef {EncodedPlan & {paths:Float64Array[]}} Plan */
 /** @type {Promise<Plan>|undefined} */
@@ -44,7 +44,7 @@ export function decodeRoutes(encoded, guests, samples, scale) {
 }
 const ease = (/** @type {number} */ t) => (1 - Math.cos(Math.PI * Math.max(0, Math.min(1, t)))) / 2;
 /** @param {Camera} a @param {Camera} b @param {number} t */
-const cameraBetween = (a, b, t) => ({ x: a.x + (b.x - a.x) * ease(t), y: a.y + (b.y - a.y) * ease(t), scale: a.scale + (b.scale - a.scale) * ease(t), height: a.height + (b.height - a.height) * ease(t) });
+const cameraBetween = (a, b, t) => ({ x: a.x + (b.x - a.x) * ease(t), y: a.y + (b.y - a.y) * ease(t), scale: a.scale + (b.scale - a.scale) * ease(t), height: a.height + (b.height - a.height) * ease(t), roundness: a.roundness + (b.roundness - a.roundness) * ease(t) });
 
 /** Shared timeline, also seekable through the SVG's paused CSS clock in browser tests.
  * @param {Plan} p @param {number} seconds
@@ -117,7 +117,7 @@ function paint(ctx, canvas, art, p, seconds) {
   ctx.fillStyle = ink; ctx.font = '600 14px system-ui, sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
   ctx.fillText(`Round ${f.round}`, 8, 13); ctx.textAlign = 'right'; ctx.fillText(f.view, p.width - 8, 13);
   ctx.save();
-  ctx.beginPath(); ctx.rect(0, 26 + (p.height - 26 - f.camera.height) / 2, p.width, f.camera.height); ctx.clip();
+  ctx.beginPath(); ctx.roundRect(0, 26 + (p.height - 26 - f.camera.height) / 2, p.width, f.camera.height, f.camera.roundness); ctx.clip();
   ctx.translate(p.width / 2, 26 + (p.height - 26) / 2); ctx.scale(f.camera.scale, f.camera.scale); ctx.translate(-f.camera.x, -f.camera.y);
   ctx.fillStyle = surface; ctx.strokeStyle = line; ctx.lineWidth = .5;
   const visible = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ radius) => Math.abs(x - f.camera.x) <= p.width / (2 * f.camera.scale) + radius && Math.abs(y - f.camera.y) <= f.camera.height / (2 * f.camera.scale) + radius;
@@ -131,11 +131,6 @@ function paint(ctx, canvas, art, p, seconds) {
     ctx.beginPath(); ctx.arc(x, y, p.radius, 0, Math.PI * 2);
     ctx.fillStyle = theme === 'dark' ? guest.dark : guest.light; ctx.fill();
     ctx.lineWidth = guest.fixed ? .4 : .3; ctx.strokeStyle = ink; ctx.stroke();
-    if (f.camera.scale > 4) {
-      ctx.fillStyle = theme === 'dark' ? guest.inkDark : guest.inkLight;
-      ctx.font = '600 1.5px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText(guest.name, x, y, p.radius * 1.8);
-    }
   }
   ctx.restore(); ctx.globalAlpha = 1;
 }

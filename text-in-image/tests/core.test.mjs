@@ -7,6 +7,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { crc32, deflateSync } from 'node:zlib';
 import { glyphColors } from '../core/colors.js';
+import { adjustedContrastColour } from '../core/contrast.js';
 import { inkCoverage, measureChars } from '../core/font.js';
 import { DEFAULTS, TextInImageError, renderSvg, submit } from '../core/index.js';
 import { fitTextSize, layoutPass, prepareText } from '../core/layout.js';
@@ -269,6 +270,27 @@ test('optional contrast outlines preserve glyph layout and fill, and follow the 
   assert.match(renderSvg(outlined, { background: 'white' }), /fill="#fafafa" fill-opacity="0.5" stroke="#000000"[^>]+stroke-opacity="0.5"/);
 });
 
+test('gentle colour adjustment is capped, retains hue and alpha, and does not change the fit', () => {
+  assert.equal(adjustedContrastColour('#ffffff', 'white'), '#cccccc'); // no more than 20% darkening
+  assert.equal(adjustedContrastColour('#ffffff80', 'white'), '#cccccc80');
+  assert.equal(adjustedContrastColour('#111111', 'white'), '#111111'); // already clear
+  assert.equal(adjustedContrastColour('#f5e4c0', 'white'), '#dacbab'); // warm cream stays warm
+  assert.equal(adjustedContrastColour('#111111', 'black'), '#303030'); // uses actual background
+  assert.equal(adjustedContrastColour('#bbbbbb', '#aaaaaa'), '#c9c9c9'); // don't darken toward a mid-grey background
+  const request = { image: maskImage(16, 16, () => true), text: 'Alice pale colours', quantize: null };
+  const plain = submit(request), adjusted = submit({ ...request, render: { contrast_adjust: true } });
+  assert.deepEqual(adjusted.glyphs, plain.glyphs);
+  assert.deepEqual(adjusted.history, plain.history);
+  assert.equal(adjusted.font_size_px, plain.font_size_px);
+  adjusted.glyphs[0].col = '#f5e4c0';
+  const svg = renderSvg(adjusted, { background: 'white' });
+  assert.match(svg, /fill="#dacbab"/);
+  assert.doesNotMatch(svg, / stroke=/);
+  assert.equal(adjusted.glyphs[0].col, '#f5e4c0');
+  assert.deepEqual(rejection({ ...request, render: { contrast_adjust: 'yes' } }).issues.map(i => [i.path, i.code]), [['render.contrast_adjust', 'wrong_type']]);
+  assert.deepEqual(rejection({ ...request, render: { contrast_outline: true, contrast_adjust: true } }).issues.map(i => [i.path, i.code]), [['render.contrast_adjust', 'conflicting_options']]);
+});
+
 test('text that cannot fit is reported with the share placed', () => {
   const tiny = { width: 3, height: 3, data: new Uint8ClampedArray(36).fill(255) };
   for (let p = 0; p < 9; p++) tiny.data.set([90, 40, 40], 4 * p);
@@ -338,6 +360,12 @@ test('the CLI reads an image path, prints the result and reports errors as JSON'
   const result = JSON.parse(ok.stdout);
   assert.equal(result.glyphs.length, 38);
   assert.match(readFileSync(join(dir, 'fill.svg'), 'utf8'), /fill="white"/);
+
+  writeFileSync(request, JSON.stringify({ image: here('../examples/alice-drink-me.png'), text: 'Alice was beginning to get very tired.', render: { contrast_adjust: true } }));
+  const adjusted = cli(request, '--svg', join(dir, 'adjusted.svg'), '--background', 'white');
+  assert.equal(adjusted.status, 0, adjusted.stderr);
+  assert.equal(JSON.parse(adjusted.stdout).settings.render.contrast_adjust, true);
+  assert.doesNotMatch(readFileSync(join(dir, 'adjusted.svg'), 'utf8'), / stroke=/);
 
   writeFileSync(request, JSON.stringify({ image: 'missing.png', text: 'a' }));
   const bad = cli(request);

@@ -44,7 +44,7 @@ export const DEFAULTS = Object.freeze({
     wrap: /** @type {'character' | 'word'} */ ('character'),
   }),
   color: Object.freeze({ ink_compensation: false, background: 'black' }),
-  render: Object.freeze({ scale: 5, margin: 0.04, contrast_outline: false }),
+  render: Object.freeze({ scale: 5, margin: 0.04, contrast_outline: false, contrast_adjust: false }),
 });
 
 const TOP_FIELDS = ['image', 'text', 'seed', 'quantize', 'region', 'font', 'layout', 'color', 'render'];
@@ -112,6 +112,7 @@ const SECTIONS = /** @type {Record<string, Record<string, Check>>} */ ({
     scale: number(0, 50, true),
     margin: number(0, 1),
     contrast_outline: boolean,
+    contrast_adjust: boolean,
   },
 });
 
@@ -178,6 +179,7 @@ export function normalizeRequest(request) {
     settings[name] = { ...defaults, ...given };
   }
 
+  if (settings.render?.contrast_outline === true && settings.render?.contrast_adjust === true) issues.push({ code: 'conflicting_options', path: 'render.contrast_adjust', message: 'choose colour adjustment or an outline, not both' });
   if (issues.length) throw invalid(issues);
   return { image: /** @type {Image} */ (image), text: /** @type {string} */ (text), settings: /** @type {Settings} */ (settings) };
 }

@@ -4,7 +4,7 @@
 
 import { glyphPath, measureChars } from './font.js';
 import { TextInImageError, parseColor } from './request.js';
-import { contrastOutline, CONTRAST_OUTLINE_EM } from './contrast.js';
+import { contrastOutline, CONTRAST_OUTLINE_EM, adjustedContrastColour } from './contrast.js';
 
 // R's text(pos = 4) puts the glyph origin half a character height right of x:
 // 0.5 x 1.2 x 12 pt on the 72-ppi device, whatever the glyph size.
@@ -43,7 +43,8 @@ export function renderSvg(result, { background = 'black' } = {}) {
     if (!id) continue; // blank
     const ax = (g.x + margin) / span * W + POS4_OFFSET_PX;
     const ay = (1 + margin - g.y) / span * H;
-    const fill = g.col.length === 9 ? `${g.col.slice(0, 7)}" fill-opacity="${n(parseInt(g.col.slice(7), 16) / 255)}` : g.col;
+    const colour = result.settings.render.contrast_adjust ? adjustedContrastColour(g.col, background) : g.col;
+    const fill = colour.length === 9 ? `${colour.slice(0, 7)}" fill-opacity="${n(parseInt(colour.slice(7), 16) / 255)}` : colour;
     const turn = theta ? ` transform="rotate(${n(-theta)} ${n(ax)} ${n(ay)})"` : '';
     const stroke = result.settings.render.contrast_outline ? contrastOutline(g.col, background) : null;
     const opacity = g.col.length === 9 ? ` stroke-opacity="${n(parseInt(g.col.slice(7), 16) / 255)}"` : '';
