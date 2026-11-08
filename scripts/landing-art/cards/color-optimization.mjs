@@ -87,7 +87,7 @@ export async function build() {
   const range = computeGamutExtent(space, gamut, 1.1);
   const maxA = Math.max(Math.abs(range.min.a), Math.abs(range.max.a));
   const maxB = Math.max(Math.abs(range.min.b), Math.abs(range.max.b));
-  const side = 136, px = W - 10 - side, py = H - 8 - side, half = side / 2;
+  const side = 136, px = W - 10 - side, py = (H - side) / 2, half = side / 2;
   const toXY = (/** @type {{a: number, b: number}} */ v) => [px + half + v.a / maxA * half, py + half - v.b / maxB * half];
   const projected = TRACE.map((step) => step.raw.map((v) => projectToGamut(v, space, gamut, space)));
   const inputs = INPUTS.map((hex) => projectToGamut(decodeColor(hex, space), space, gamut, space));
@@ -136,7 +136,7 @@ export async function build() {
   return art({
     name:'color-optimization', period:PERIOD, frames:book.frames,
     defs:`<clipPath id="color-optimization-gamut"><path d="${outline}"/></clipPath>`,
-    body:`<text class="title" x="10" y="17">keep 2 · optimize 3</text>
+    body:`
 <g class="heads">${heads}</g>
 <rect class="plot" x="${px}" y="${py}" width="${side}" height="${side}"/><path class="grid" d="${grid}"/>
 <image class="field" href="${png(FIELD,field)}" x="${px}" y="${py}" width="${side}" height="${side}" preserveAspectRatio="none" clip-path="url(#color-optimization-gamut)"/>
@@ -145,7 +145,6 @@ ${INPUTS.map((hex,i)=>swatch(hex,0,i)+marker(inputs[i],hex,true)).join('')}
 ${book.body}`,
     css:`${book.css}
 & text {font-family:ui-sans-serif,system-ui,sans-serif;dominant-baseline:central;}
-& .title {fill:var(--art-ink);font-size:11px;font-weight:600;}
 & .heads text {fill:var(--art-muted);font-size:8px;}
 & .heads circle, & .heads rect {fill:none;stroke:var(--art-muted);stroke-width:0.9;}
 & .swatch {stroke:var(--art-ink);stroke-opacity:0.15;stroke-width:0.8;}

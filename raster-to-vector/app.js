@@ -359,7 +359,14 @@ el.imageFile.addEventListener('change', async () => {
   if (file && await loadImage(file, file.name)) await convertFromPage();
 });
 byId('example-cartoon').addEventListener('click', async () => { if (await loadImage(EXAMPLES.cartoon, 'cartoon_flat.png')) await convertFromPage(); });
-byId('example-emoji').addEventListener('click', async () => { if (await loadImage(EXAMPLES.emoji, 'emoji-compressed.jpg')) await convertFromPage(); });
+byId('example-emoji').addEventListener('click', async () => {
+  if (await loadImage(EXAMPLES.emoji, 'emoji-compressed.jpg')) {
+    // Six colors retain the tangerine's leaf and orange shading.
+    const colors = /** @type {HTMLInputElement} */ (document.querySelector('[data-path="quantize.k"]'));
+    colors.value = '6';
+    await convertFromPage();
+  }
+});
 byId('example-logo').addEventListener('click', async () => { if (await loadImage(EXAMPLES.logo, 'logo_holes.png')) await convertFromPage(); });
 byId('reset-options').addEventListener('click', () => {
   writeOptions(PAGE_DEFAULTS);

@@ -102,10 +102,10 @@ try {
     assert.equal(result.internalGaps, 0, `${width}×${height}: internal gaps in the wall`);
     assert.equal(result.bottomGaps, 0, `${width}×${height}: mosaic bottom is not flush`);
     assert.deepEqual(result.clipped, [], `${width}×${height}: clipped card text`);
-    assert.equal(result.paths, 4, `${width}×${height}: missing category contours`);
+    assert.equal(result.paths, 3, `${width}×${height}: missing category contours`);
     assert.deepEqual(result.contourErrors, [], `${width}×${height}: contours must surround only their own cards`);
     assert.deepEqual(result.labelOverlaps, [], `${width}×${height}: category labels cover cards`);
-    if (height > 500 && result.columns >= 4) assert.equal(result.labels, 4, `${width}×${height}: fragmented desktop clusters`);
+    if (height > 500 && result.columns >= 4) assert.equal(result.labels, 3, `${width}×${height}: fragmented desktop clusters`);
     const minimumFullCards = width === 1366 ? 4 : width === 1440 ? 6 : width === 1920 ? 8 : 0;
     assert.ok(result.fullCards >= minimumFullCards, `${width}×${height}: only ${result.fullCards} full cards visible`);
   }
@@ -115,9 +115,12 @@ try {
   assert.ok(!(await page.locator('#intro').textContent()).includes('gift'));
   assert.equal(await page.locator('.theme-links').count(), 0);
   assert.equal(await page.locator('#projects a[href="/forecast-calibration/"]').count(), 0);
-  for (const id of ['statistics', 'stats-art', 'art', 'everyday']) {
+  for (const id of ['statistics', 'art', 'everyday']) {
     assert.ok(await page.locator(`#category-${id}`).textContent(), 'each contour retains its accessible category name');
   }
+  assert.equal(await page.locator('[data-mosaic-key=ceo-salary-benchmark]').getAttribute('data-category'), 'everyday');
+  assert.equal(await page.locator('[data-category=stats-art]').count(), 0);
+  assert.equal(await page.locator('[data-mosaic-key=b64]').getAttribute('data-size'), '2x2');
   const focusedCard = page.locator('a[href="/ceo-salary-benchmark/"]');
   await focusedCard.focus();
   await page.setViewportSize({ width: 1000, height: 900 });

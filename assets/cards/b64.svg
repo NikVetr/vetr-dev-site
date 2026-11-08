@@ -1,30 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="4" focusable="false">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="6" data-frames="6" focusable="false">
 <style>
-[data-art="b64"] rect { fill: var(--art-paper); stroke: var(--art-line); }
-[data-art="b64"] text { fill: var(--art-ink); font: 11px ui-monospace, monospace; }
-[data-art="b64"] .number { fill: var(--art-muted); }
-[data-art="b64"] .layer-3 text { fill: var(--primary); }
+[data-art="b64"] .frame + .frame { opacity: 0; }
+[data-art="b64"] .frame.first { will-change: opacity; }
+[data-art="b64"] .panel {fill:var(--art-paper);stroke:var(--art-line)}
+[data-art="b64"] text {text-anchor:middle;dominant-baseline:central;fill:var(--art-ink)}
+[data-art="b64"] .caption {font:13px ui-sans-serif,system-ui,sans-serif;fill:var(--art-muted)}
+[data-art="b64"] .value {font:15px ui-monospace,monospace}
+[data-art="b64"] .decoded {font-size:22px;fill:var(--primary)}
+[data-art="b64"] .progress {fill:none;stroke:var(--art-line);stroke-width:2}
+[data-art="b64"] .done {fill:var(--primary)} [data-art="b64"] .waiting {fill:var(--art-line)}
 @media (prefers-reduced-motion: no-preference) {
-[data-art="b64"][data-playing] .layer rect { animation: b64-layer 4s linear infinite; }
-[data-art="b64"][data-playing] .layer-1 rect { animation-delay: 1s; } [data-art="b64"][data-playing] .layer-2 rect { animation-delay: 2s; } [data-art="b64"][data-playing] .layer-3 rect { animation-delay: 3s; }
-@keyframes b64-layer { 0%, 25%, 100% { stroke: var(--art-line); } 12.5% { stroke: var(--primary); } }
+[data-art="b64"][data-playing] .frame { animation: b64-frame 6s step-end infinite; }
+@keyframes b64-frame { 0% { opacity: 1; } 16.666667% { opacity: 0; } 100% { opacity: 0; } }
 }
 </style>
-<g class="layer layer-0">
-    <rect x="12" y="12" width="296" height="32" rx="5"/>
-    <text class="number" x="23" y="32">3</text>
-    <text x="46" y="32" textLength="248" lengthAdjust="spacingAndGlyphs">WVVoU01HTklUVFpNZVRreVdsaFNlVXh0VW14a2FUZzk=</text>
-  </g><g class="layer layer-1">
-    <rect x="12" y="51" width="296" height="32" rx="5"/>
-    <text class="number" x="23" y="71">2</text>
-    <text x="46" y="71" textLength="195.2" lengthAdjust="spacingAndGlyphs">YUhSMGNITTZMeTkyWlhSeUxtUmxkaTg9</text>
-  </g><g class="layer layer-2">
-    <rect x="12" y="90" width="296" height="32" rx="5"/>
-    <text class="number" x="23" y="110">1</text>
-    <text x="46" y="110" textLength="146.39999999999998" lengthAdjust="spacingAndGlyphs">aHR0cHM6Ly92ZXRyLmRldi8=</text>
-  </g><g class="layer layer-3">
-    <rect x="12" y="129" width="296" height="32" rx="5"/>
-    <text class="number" x="23" y="149">↗</text>
-    <text x="46" y="149" textLength="103.69999999999999" lengthAdjust="spacingAndGlyphs">https://vetr.dev/</text>
-  </g>
+<rect class="panel" x="4" y="4" width="312" height="172" rx="8"/><g class="frame first"><text class="caption" x="160" y="30">Decoded link</text>
+<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
+<g class="frame" style="animation-delay:1s"><text class="caption" x="160" y="30">3 encoded layers</text>
+<text class="value " x="160" y="75">WVVoU01HTklUVFpNZVRreVdsaFNl</text><text class="value " x="160" y="97">VXh0VW14a2FUZzk=</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="6" class="done"/><circle cx="144" cy="153" r="4" class="waiting"/><circle cx="176" cy="153" r="4" class="waiting"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
+<g class="frame" style="animation-delay:2s"><text class="caption" x="160" y="30">2 encoded layers</text>
+<text class="value " x="160" y="75">YUhSMGNITTZMeTkyWlhSeUxtUmxk</text><text class="value " x="160" y="97">aTg9</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="6" class="done"/><circle cx="176" cy="153" r="4" class="waiting"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
+<g class="frame" style="animation-delay:3s"><text class="caption" x="160" y="30">1 encoded layer</text>
+<text class="value " x="160" y="86">aHR0cHM6Ly92ZXRyLmRldi8=</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="6" class="done"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
+<g class="frame" style="animation-delay:4s"><text class="caption" x="160" y="30">Decoded link</text>
+<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
+<g class="frame" style="animation-delay:5s"><text class="caption" x="160" y="30">Decoded link</text>
+<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
+<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
 </svg>

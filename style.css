@@ -123,11 +123,9 @@ h1 {
 
 /* The legend, contours and their labels share category colours in either theme. */
 [data-category="statistics"] { --category-color: #267b70; }
-[data-category="stats-art"] { --category-color: #7653ad; }
 [data-category="art"] { --category-color: #a85e28; }
 [data-category="everyday"] { --category-color: #376fa9; }
 :root[data-theme="dark"] [data-category="statistics"] { --category-color: #76c9b8; }
-:root[data-theme="dark"] [data-category="stats-art"] { --category-color: #b79be8; }
 :root[data-theme="dark"] [data-category="art"] { --category-color: #e8ab73; }
 :root[data-theme="dark"] [data-category="everyday"] { --category-color: #88b8e8; }
 

@@ -4,11 +4,11 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 ## The landing page
 
-A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Statistics**, **Statistics × Art**, **Art**, and **Everyday tools**. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
+A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Statistics**, **Art**, and **Everyday tools**. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
 
 ### Tile sizes
 
-A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. Change it to resize a tile. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
+A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. The curated layout can adapt individual spans to fill each breakpoint, including a wider Photomosaic tile where needed. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
 
 | Shape | Picture | Canvas |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ The size comes from a project's size in code: the hand-written lines of the tool
 | autoCHAIR | 13,944 | | 13,944 | 2x2 | down: one agenda and timeline, much of its code is styling |
 | Multipanel Layout GUI | 6,943 | | 6,943 | 2x2 | |
 | Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2x2 | |
-| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 1x3 | down to a tall one-column tile: its room is portrait, and at four columns each 3x3 tile needs a 1x3 beside it |
+| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 1x3 | down to a tall one-column tile: its room is portrait |
 | Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2x2 | |
 | Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | | no tile of its own: an entry in the Statistical Intuitions gallery, whose tile turns it on hover (as a `1x2` tile, give it back its card) |
 | Signature Correction | 2,952 | 491 | 3,443 | 2x2 | |
@@ -42,7 +42,7 @@ The size comes from a project's size in code: the hand-written lines of the tool
 
 Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
-The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two or four columns a 3x3 tile becomes 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated sizes and orders for each column count keep all four categories connected across desktop widths, and the shared dense packer fills a rectangle with a flush lower edge. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
+The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; at two or four columns a 3x3 tile becomes 2x2. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated sizes and orders for each column count keep all three categories connected across desktop widths, and the shared dense packer fills a rectangle with a flush lower edge. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
 
 `shared/mosaic.js` places cards in the curated order, pins their grid cells and puts the list in visual reading order whenever its column count changes: Tab and screen readers meet the cards as they appear. `assets/landing-clusters.js` then draws boundaries from the placed cells and positions their labels in the gutters. Boundaries redraw when actual track sizes change, including text reflow. Without JavaScript, CSS packs the thematic HTML order and links remain usable; decorative outlines are absent. On a phone, and on a phone held sideways, rows follow their content: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target. See [site architecture](docs/architecture.md) for the layout flow.
 
@@ -50,9 +50,9 @@ The pictures are drawn from the tools themselves, from their default or explicit
 
 Palette Town's preview follows 31 recorded states from a real optimizer run, with fixed input colors and moving candidates. Table Seating moves all 39 guests together between actual assignments; its offline route builder checks clearance continuously, including between keyframes. Regressions live in `scripts/landing-art/tests/`.
 
-The image previews use examples available in their applications: Raster to Vector's compressed emoji, Alice on white in Text in Image, and Photomosaic's 1,200-cell Sunflower preset (three uses per photo and 45% display tint). The original photo-matching example stays available. Message Collage exposes a rotation limit and uses denser, gently angled messages; its SVG, PNG and PDF exports share the same geometry. Crossword opens a saved 94-entry heart computed by its existing optimizer, so the page starts immediately; regenerate it with `node crossword/examples/build.mjs`. Load/Clear actions offer Undo.
+The image previews use examples available in their applications: Raster to Vector's gently compressed tangerine emoji, whole-word Alice text on white in Text in Image, and Photomosaic's 1,200-cell Sunflower preset (three uses per photo and 45% display tint). The original photo-matching example stays available. Message Collage exposes a rotation limit and uses denser, gently angled messages; its SVG, PNG and PDF exports share the same geometry. Crossword opens a saved 94-entry heart computed by its existing optimizer, so the page starts immediately; regenerate it with `node crossword/examples/build.mjs`. Load/Clear actions offer Undo.
 
-The directory also lists **b64 — Base64 Link Decoder** (`1x2`) under Everyday tools and **Nonprofit Salary Benchmark** (`2x2`) under Statistics. b64's picture comes from its decoder's real three-layer example. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice.
+The directory also lists **b64 — Base64 Link Decoder** (`2x2`) under Everyday tools and **Nonprofit Salary Benchmark** (`2x2`) under Everyday tools. b64's picture shows one real decoding layer at a time in large type. The benchmark picture is the generic app's actual initial histogram; its compact tile is an editorial size choice.
 
 ```sh
 node scripts/landing-art/build.mjs            # every picture

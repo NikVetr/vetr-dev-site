@@ -15,7 +15,7 @@ flowchart LR
     E --> F[Draw rounded contours and gutter labels]
 ```
 
-`assets/landing-order.js` holds curated sizes and placement orders by column count. Every order must name each card exactly once and fill a rectangle. A tile can gain a row to complete the bottom edge. This keeps desktop categories connected without a runtime optimiser; the browser regression checks the resulting packing, connectivity and density. A single column uses the thematic source order. Changing the card set or its spans requires reviewing these arrangements.
+`assets/landing-order.js` holds curated sizes and placement orders by column count. Every order must name each card exactly once and fill a rectangle. A tile can gain a row or widen to complete the bottom edge. Statistics includes the visualization tools; the salary benchmark is in Everyday tools. This keeps desktop categories connected without a runtime optimiser; the browser regression checks the resulting packing, connectivity and density. A single column uses the thematic source order. Changing the card set or its spans requires reviewing these arrangements.
 
 `shared/mosaic.js` performs deterministic row-dense placement, validates the full rectangle, pins cells and normalises DOM order while retaining keyboard focus. Phone and short landscape layouts use content-height rows; their last card expands into unused columns. Both the landing page and the 15-entry Intuitions gallery use this helper with their own arrangements. `assets/landing.js` owns lazy artwork loading and reduced-motion-aware hover playback. A resize observer responds to both breakpoint changes and actual track-height changes.
 
