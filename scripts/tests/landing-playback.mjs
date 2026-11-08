@@ -140,26 +140,47 @@ test('mobile centre playback, sticky controls, saved pause and reduced motion', 
   } finally { await browser.close(); }
 });
 
-test('autoCHAIR logo movie pauses, resumes and is released for reduced motion', async () => {
+test('autoCHAIR turns at agenda checkpoints, pauses, resumes and releases for reduced motion', async () => {
   const browser = await openPage('', { engine });
   const { page, errors } = browser;
   try {
     const art = page.locator('[data-art="agendamatic"]');
     await art.hover();
-    const video = art.locator('video');
-    await video.waitFor();
-    await page.waitForFunction(() => (document.querySelector('.autochair-video') instanceof HTMLVideoElement) &&
-      /** @type {HTMLVideoElement} */ (document.querySelector('.autochair-video')).currentTime > 0.1);
+    const sprite = art.locator('.autochair-frames');
+    await sprite.waitFor({state:'attached'});
+    assert.equal(await art.locator('.agenda-scene').evaluate(el => getComputedStyle(el).opacity), '1');
+    const positions = await art.evaluate(el => ({agenda:el.querySelector('.agenda-scene').getBoundingClientRect().right,
+      chair:el.querySelector('.logo-scene').getBoundingClientRect().left}));
+    assert.ok(positions.chair > positions.agenda, 'chair sits beside the agenda');
+    await page.waitForFunction(() => {
+      const sprite = document.querySelector('.autochair-frames');
+      const x = Number(sprite?.getAttribute('data-frame'));
+      return sprite?.parentElement?.hasAttribute('data-ready') && x > 0 && x < 12;
+    });
     await page.mouse.move(0, 0);
-    assert.ok(await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.paused));
-    const time = await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.currentTime);
+    const frame = await sprite.getAttribute('data-frame');
     await page.waitForTimeout(150);
-    assert.equal(await video.evaluate((/** @type {HTMLVideoElement} */ el) => el.currentTime), time);
+    assert.equal(await sprite.getAttribute('data-frame'), frame, 'paused frame is retained');
     await art.hover();
-    await page.waitForFunction((/** @type {number} */ t) => /** @type {HTMLVideoElement} */ (document.querySelector('.autochair-video')).currentTime > t + 0.1, time);
+    await page.waitForFunction(x => {
+      const sprite = document.querySelector('.autochair-frames');
+      return sprite?.parentElement?.hasAttribute('data-ready') && sprite.getAttribute('data-frame') !== x;
+    }, frame);
+    const phase = await art.evaluate(el => {
+      const clock = el.querySelector('.marker').getAnimations()[0];
+      const time = Number(clock.currentTime)/1000, period = Number(clock.effect.getTiming().duration)/1000;
+      const checkpoints = el.querySelector('.logo-turn').getAttribute('data-checkpoints').split(',').map(Number);
+      const latest = checkpoints.filter(t => t <= time % period).at(-1);
+      return time % period - latest;
+    });
+    assert.ok(phase >= 0 && phase < .8, 'turn occurs immediately after an agenda checkpoint');
+    await page.waitForFunction(() => !document.querySelector('.logo-turn')?.hasAttribute('data-ready'));
+    const resting = await sprite.getAttribute('data-frame');
+    await page.waitForTimeout(50);
+    assert.equal(await sprite.getAttribute('data-frame'), resting, 'chair stops between checkpoints');
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.waitForFunction(() => !document.querySelector('.autochair-video'));
-    assert.equal(await video.count(), 0);
+    await page.waitForFunction(() => !document.querySelector('.autochair-frames'));
+    assert.equal(await sprite.count(), 0);
     assert.equal(await art.getAttribute('data-started'), null);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }

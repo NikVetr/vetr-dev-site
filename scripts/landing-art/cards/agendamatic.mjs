@@ -12,7 +12,7 @@ import { art, esc, num } from '../svg.mjs';
 import { openPage } from '../browser.mjs';
 
 const STILL = 15;     // minutes into the meeting at rest
-const RATE = 0.075;   // seconds of loop per minute of meeting
+const RATE = 0.15;   // seconds of loop per minute of meeting
 const DONE_HOLD = 0.6; // seconds the finished meeting shows
 const RESET = 0.2;    // seconds the reset fades take, out and in
 const START_HOLD = 0.4; // seconds before the meeting starts again
@@ -253,16 +253,21 @@ ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
   };
   return art({
     name: 'agendamatic',
+    width: 420, height: 180,
     period,
     defs: gradient,
     player: 'autochair',
     body: `<g class="agenda-scene">${agenda}${tracker}${states}</g>
-<g class="logo-scene"><image class="logo-still" href="agendamatic/assets/autoChair-logo-black.svg" x="64" y="8" width="192" height="162"/>
-<foreignObject class="logo-movie" x="64" y="8" width="192" height="162"/></g>`,
-    css: `& .logo-scene { opacity:0; pointer-events:none; }
-& .logo-movie video { display:block; width:100%; height:100%; object-fit:contain; }
+<g class="logo-scene"><image class="logo-still logo-light" href="agendamatic/assets/autoChair-logo-black.svg" x="328" y="50" width="86" height="73"/>
+<image class="logo-still logo-dark" href="agendamatic/assets/autoChair-logo-white.svg" x="328" y="50" width="86" height="73"/>
+<svg data-checkpoints="${timing.checkpoints.join(',')}" class="logo-turn" x="328" y="50" width="86" height="73" viewBox="0 0 128 108" overflow="hidden"/></g>`,
+    css: `& .logo-scene { pointer-events:none; }
+& .logo-turn { visibility:hidden; }
+& .logo-turn[data-ready] { visibility:visible; }
 & .logo-scene:has([data-ready]) .logo-still { visibility:hidden; }
-:root[data-theme="dark"] & .logo-scene { filter:invert(1) hue-rotate(180deg); }
+& .logo-dark { display:none; }
+:root[data-theme="dark"] & .logo-light { display:none; }
+:root[data-theme="dark"] & .logo-dark { display:inline; }
 & text { font-family: ${FONT}; font-size: ${size}px; fill: var(--art-ink); }
 & .head text { font-size: 7.5px; font-weight: 700; text-decoration: underline; }
 & .name { font-weight: 700; }
@@ -282,11 +287,7 @@ ${pre}.now { fill: ${c.red}; } ${pre}.guide { stroke: ${c.blue}; }
 & .marker { transform: translateX(${num(X(STILL), 3)}px); }
 & .progress .fill { transform: scaleX(${num(STILL / total, 4)}); }
 ${themeCss(light, '& ')}${themeCss(dark, ':root[data-theme="dark"] & ')}`,
-    loop: `${loop}
-& .logo-scene { animation: autochair-logo-scene ${period}s linear infinite; }
-& .agenda-scene { animation: autochair-agenda-scene ${period}s linear infinite; }
-@keyframes autochair-logo-scene { 0%,36%,100% {opacity:0;} 5%,30% {opacity:1;} }
-@keyframes autochair-agenda-scene { 0%,36%,100% {opacity:1;} 5%,30% {opacity:0;} }`,
+    loop,
   });
 }
 
@@ -346,5 +347,5 @@ function runTimes(span, total) {
 @keyframes agendamatic-progress { ${b.join(' ')} }
 `;
   };
-  return { period, state, keyframes, marker };
+  return { period, state, keyframes, marker, checkpoints: [...new Set(span.map(s => at(s[1])).concat(restart))].sort((a,b)=>a-b) };
 }

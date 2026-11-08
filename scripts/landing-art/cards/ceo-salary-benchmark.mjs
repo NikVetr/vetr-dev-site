@@ -7,6 +7,10 @@ export async function build() {
   const { page, errors, close } = await openPage('ceo-salary-benchmark/', { width: 1440, height: 900 });
   try {
     await page.waitForSelector('#salary-chart .bar-block');
+    const expenses = Number(await page.locator('#target-expense').inputValue()) * 1e6;
+    const staff = Number(await page.locator('#target-staff').inputValue());
+    if (!(expenses > 0 && staff > 0)) throw new Error('benchmark: invalid reference inputs');
+    const expenseLabel = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1}).format(expenses);
     // Ask the real responsive renderer for the thumbnail's wide chart proportions.
     await page.locator('#chart-wrap').evaluate((/** @type {HTMLElement} */ el)=>{
       el.style.flex='none';el.style.width='640px';el.style.height='200px';el.style.minHeight='0';el.style.maxHeight='none';
@@ -47,12 +51,14 @@ export async function build() {
     await page.waitForSelector('#salary-chart .scatter-point');
     await capture('Weighted scatterplot');
     if(errors.length)throw new Error(`benchmark card: ${errors.join('; ')}`);
-    return art({name:'ceo-salary-benchmark',period:12,width:320,height:125,
-      body:`<rect width="320" height="125" fill="#fff" rx="4"/>${views.map(({label,chart},i)=>`<g class="view view-${i}"><text class="title" x="160" y="14">${esc(label)}</text>${chart}</g>`).join('')}<text class="reference" x="160" y="119">Generic reference · $10m / 50 staff</text>`,
+    return art({name:'ceo-salary-benchmark',period:12,width:410,height:125,
+      body:`<rect width="410" height="125" fill="#fff" rx="4"/>${views.map(({label,chart},i)=>`<g class="view view-${i}"><text class="title" x="160" y="14">${esc(label)}</text>${chart}</g>`).join('')}<path d="M323 28V111" stroke="#e2e7eb"/><g class="inputs"><text class="input-label" x="336" y="39">Expenses</text><text class="input-value" x="336" y="58">${esc(expenseLabel)}</text><text class="input-label" x="336" y="83">Staff</text><text class="input-value" x="336" y="102">${staff}</text></g>`,
       css:`& .view:not(.view-0) { opacity:0; }
-& .title, & .reference { fill:#243542;font-family:ui-sans-serif,system-ui,sans-serif;text-anchor:middle; }
+& .title, & .inputs { fill:#243542;font-family:ui-sans-serif,system-ui,sans-serif;text-anchor:middle; }
 & .title { font-size:13px;font-weight:600; }
-& .reference { font-size:10px; }
+& .inputs { text-anchor:start; }
+& .input-label { font-size:11px; fill:#586875; }
+& .input-value { font-size:17px; font-weight:600; }
 & .view > svg { background:#fff; }`,
       loop:`& .view-0 { animation:benchmark-equal 12s linear infinite; }
 & .view-1 { animation:benchmark-weighted 12s linear infinite; }

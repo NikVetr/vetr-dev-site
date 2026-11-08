@@ -196,16 +196,19 @@ export async function build() {
   let patients = '';
   let loop = `& .guides { animation: sankey-guide ${PERIOD}s linear infinite; }
 & .patients { animation: sankey-patients ${PERIOD}s linear infinite; }
-@keyframes sankey-guide { 0%,6%,94%,100% { opacity:1; } 10%,90% { opacity:0.12; } }
-@keyframes sankey-patients { 0%,6%,94%,100% { opacity:0; } 10%,90% { opacity:1; } }
+@keyframes sankey-guide { 0%,6%,90%,100% { opacity:1; } 10%,74% { opacity:0.12; } }
+@keyframes sankey-patients { 0%,6%,90%,100% { opacity:0; } 10%,74% { opacity:1; } }
 `;
-  const count = patientPaths.length;
-  patientPaths.forEach((m,i)=>{
+  // A distributed subset illustrates individual paths without progressively
+  // repainting every aggregate band. The complete diagram then fades in as one layer.
+  const tracedPatients = patientPaths.filter((_, i) => i % 7 === 0);
+  const count = tracedPatients.length;
+  tracedPatients.forEach((m,i)=>{
     const clip = new RegExp(`<clipPath id="playback-clip-${m[1]}"><rect x="([-\\d.]+)" y="0" width="([-\\d.]+)" height="[\\d.]+"\\/>`).exec(playbackLight);
     if (!clip) throw new Error(`sankey: missing patient clip ${m[1]}`);
     defs += `<clipPath id="sankey-pclip${i}"><rect class="reveal${i}" x="${num(X(Number(clip[1])),2)}" y="0" width="${num(Number(clip[2])*k,2)}" height="${H}"/></clipPath>`;
-    patients += `<path class="patient${m[2]}" data-record="${i}" d="${path(m[4])}" fill="url(#sankey-pg${m[2]})" clip-path="url(#sankey-pclip${i})"/>`;
-    const start = 10 + 80 * i/(count-1) * 0.86, end = start + 80 * 0.14;
+    patients += `<path class="patient${m[2]}" data-record="${m[1]}" d="${path(m[4])}" fill="url(#sankey-pg${m[2]})" clip-path="url(#sankey-pclip${i})"/>`;
+    const start = 10 + 60 * i/(count-1) * 0.86, end = start + 60 * 0.14;
     loop += `& .reveal${i} { transform-box:fill-box; transform-origin:left center; animation:sankey-p${i} ${PERIOD}s linear infinite; }
 @keyframes sankey-p${i} { 0%,${num(start,3)}% { transform:scaleX(0); } ${num(end,3)}%,100% { transform:scaleX(1); } }
 `;

@@ -1,13 +1,4 @@
-// Pocket Language Guide (Wanderwart): the top of a pocket card's first section, Social + basics,
-// for an English reader, as the app prints it: five greetings, each bold in the target's own
-// script with its romanisation under it, and at the other end of the row the English gloss with
-// the app's respelling under it (a right-to-left target takes the far end, as on the card). Rows:
-// the app's own (core/content.js, its default card for the pair), the type sizes and spacing those
-// of its reference theme magnified 1.6 times, the colours its reference theme's, or its dark
-// theme's under the dark site theme. Over the section's rule, the language's own name.
-// The loop turns the card through seven languages and back to Japanese, the still: each fades out
-// and the next fades in while the card's frame stays put. Then a compact selection of actual
-// Converse buttons appears, Hello is pressed, and its real Japanese phrase fills the card.
+// Wanderwart: real button → question → reply-grid → answer exchanges, followed by a short printable-card view.
 import { readFile } from 'node:fs/promises';
 import { buildContent } from '../../../pocket-language-guide/core/content.js';
 import { resolveField } from '../../../pocket-language-guide/core/fonts.js';
@@ -16,12 +7,10 @@ import { createSheetContext, loadFontsFor } from '../../../pocket-language-guide
 import { openPage } from '../browser.mjs';
 import { art, esc, num } from '../svg.mjs';
 
-const LANGS = ['ja', 'hi', 'ar', 'ru', 'th', 'ka', 'zh-Hans'];
+const LANGS = ['ja'];
 const SECTION = 'social-basics';
 const CONCEPTS = ['hello', 'good-morning', 'good-evening', 'goodbye', 'thank-you'];
 const K = 1.6;        // canvas units per point of the card
-const HOLD = 0.95;    // seconds each language is on the card, fades included
-const FADE = 0.12;    // seconds to fade out, and again to fade in
 // The column, the paper around it and the rows' height and baselines, in canvas units.
 const [PAPER_X, PAPER_W, PAPER_PAD] = [10, 300, 7];
 const [COL_L, COL_R] = [PAPER_X + 8, PAPER_X + PAPER_W - 8];
@@ -148,34 +137,26 @@ export async function build() {
     frame += `<rect class="rule" x="${COL_L}" y="${num(y + ROW_H - entry.rulePt * K)}" width="${COL_R - COL_L}" height="${num(entry.rulePt * K, 2)}"/>\n`;
   }
 
-  // One group of text per language, the first showing at rest. That one is a layer of its own at
-  // rest too (will-change), as the loop makes every group: otherwise Chromium draws its text a
-  // subpixel apart when the loop starts.
-  const printPeriod = LANGS.length * HOLD;
-  const period = printPeriod + 5.6;
-  const shift = (HOLD - 2 * FADE) / 2;   // the still is the middle of Japanese's time on the card
+  const period = 19;
   const text = (/** @type {string} */ cls, /** @type {number} */ x, /** @type {number} */ y, /** @type {string} */ s) => `<text class="${cls}" x="${num(x)}" y="${num(y)}">${esc(s)}</text>`;
   const langs = cards.map((c, i) => {
-    const delay = ((((i * HOLD - shift) % period) + period) % period) - period;
     /** @type {[Field, Field][]} the start and end of each line */
     const lines = c.rtl ? [['gloss', 'script'], ['respell', 'roman']] : [['script', 'gloss'], ['roman', 'respell']];
     const rows = c.rows.map((row, j) => lines.map(([a, b], k) => {
       const y = rowsY + j * ROW_H + (k ? BASE_2 : BASE_1);
       return text(a, left, y, row[a]) + text(`${b} e`, right, y, row[b]);
     }).join('')).join('');
-    return `<g class="lang${i ? '' : ' still'}" lang="${c.target}" style="animation-delay:${num(delay, 3)}s">${text('n e', COL_R, headBase, c.endonym)}${rows}</g>`;
+    return `<g class="lang${i ? '' : ' still'}" lang="${c.target}">${text('n e', COL_R, headBase, c.endonym)}${rows}</g>`;
   });
 
   const c = (/** @type {any} */ t) => t.colors;
-  const p = (/** @type {number} */ t) => num((100 * t) / period, 3);
   const font = 'ui-sans-serif, system-ui, sans-serif';
-  const conversation = await conversePreview();
+  const conversation = await conversePreview(period);
   return art({
     name: 'pocket-language-guide',
     period,
     body: `<g class="print-view">${frame}${langs.join('\n')}</g>${conversation.body}`,
-    css: `${conversation.css}
-& .converse, & .message { opacity:0; }
+    css: `& .print-view { opacity:0; }
 & .paper { fill: ${c(light).paper}; stroke: var(--art-line); stroke-width: 0.8; }
 & .shade { fill: ${c(light).shade}; }
 & .rule { fill: ${c(light).rule}; }
@@ -197,80 +178,123 @@ export async function build() {
 :root[data-theme="dark"] & .accent { fill: ${c(dark).roles.comm}; }
 :root[data-theme="dark"] & .icon { stroke: ${c(dark).roles.comm}; }
 :root[data-theme="dark"] & text { fill: ${c(dark).ink}; }
-:root[data-theme="dark"] & .n, :root[data-theme="dark"] & .respell { fill: ${c(dark).muted}; }`,
-    // Each language: on the card, fading out, off, and fading in just before its turn.
-    loop: `& .print-view { animation:pocket-language-guide-print ${num(period,3)}s linear infinite; }
-& .converse { animation:pocket-language-guide-board ${num(period,3)}s linear infinite; }
-& .message { animation:pocket-language-guide-message ${num(period,3)}s linear infinite; }
-& .tap { animation:pocket-language-guide-tap ${num(period,3)}s linear infinite; }
-@keyframes pocket-language-guide-print { 0%, ${p(printPeriod-.2)}%,100% { opacity:1; } ${p(printPeriod)}%,98% { opacity:0; } }
-@keyframes pocket-language-guide-board { 0%,${p(printPeriod-.2)}%,${p(printPeriod+2.7)}%,100% { opacity:0; } ${p(printPeriod)}%,${p(printPeriod+2.5)}% { opacity:1; } }
-@keyframes pocket-language-guide-message { 0%,${p(printPeriod+2.5)}%,100% { opacity:0; } ${p(printPeriod+2.7)}%,98% { opacity:1; } }
-@keyframes pocket-language-guide-tap { 0%,${p(printPeriod+1.7)}%,100% { opacity:0; } ${p(printPeriod+2)}%,${p(printPeriod+2.6)}% { opacity:1; } }
-& .lang { animation: pocket-language-guide-lang ${num(period, 3)}s linear infinite; }
-@keyframes pocket-language-guide-lang { 0% { opacity: 1; } ${p(HOLD - 2 * FADE)}% { opacity: 1; } ${p(HOLD - FADE)}% { opacity: 0; } ${p(period - FADE)}% { opacity: 0; } 100% { opacity: 1; } }`,
+:root[data-theme="dark"] & .n, :root[data-theme="dark"] & .respell { fill: ${c(dark).muted}; }
+${conversation.css}`,
+    loop: `${conversation.loop}
+& .print-view { animation:pocket-language-guide-print ${period}s linear infinite; }
+@keyframes pocket-language-guide-print { 0%,88.4%,100% { opacity:0; } 89.5%,98.5% { opacity:1; } }`,
   });
 }
 
-/** A compact selection of real Converse buttons and the actual result of pressing Hello. */
-async function conversePreview() {
-  const {page,errors,close}=await openPage('pocket-language-guide/conversation.html?target=ja&source=en&board=intro');
+/** Read the actual question, listener-side choices and translated reply for two exchanges. */
+async function conversePreview(/** @type {number} */ period) {
+  const { page, errors, close } = await openPage('pocket-language-guide/conversation.html?target=ja&source=en&board=intro');
   try {
     await page.waitForSelector('#board-grid [data-button="hello"]');
-    const ids=['hello','doyou','slowly','write','thanks','bye'];
+    const ids = ['hello','doyou','slowly','write','thanks','bye'];
     /** @type {string[]} */
-    const buttons=await page.evaluate((/** @type {string[]} */ ids)=>ids.map(id=>{
-      const el=document.querySelector(`#board-grid [data-button="${id}"]`);
-      if(!el)throw new Error(`Converse button ${id} missing`);
-      return el.querySelector('.board-cell-label')?.textContent??'';
-    }),ids);
-    await page.locator('#board-grid [data-button="hello"]').click();
-    await page.waitForSelector('#board-stage .board-message-text');
-    const read=()=>page.evaluate(()=>{
-      const button=document.querySelector('#board-grid [data-button="hello"]');
-      const stage=document.querySelector('#board-stage');
-      const message=document.querySelector('.board-message-text');
-      if(!button||!stage||!message)throw new Error('Converse stage missing');
-      const b=getComputedStyle(button),m=getComputedStyle(message);
-      return {fill:b.backgroundColor,border:b.borderColor,ink:b.color,paper:getComputedStyle(document.body).backgroundColor,
-        stage:getComputedStyle(stage).backgroundColor,messageInk:m.color,
-        script:message.textContent??'',gloss:document.querySelector('.gloss-own')?.textContent??'',respell:document.querySelector('.gloss-say')?.textContent??''};
+    const buttons = await page.evaluate((/** @type {string[]} */ ids) => ids.map(id => {
+      const el = document.querySelector(`#board-grid [data-button="${id}"] .board-cell-label`);
+      if (!el?.textContent) throw new Error(`Missing Converse button ${id}`);
+      return el.textContent;
+    }), ids);
+    const palette = () => page.evaluate(() => {
+      const style = (/** @type {string} */ selector) => {
+        const el = document.querySelector(selector);
+        if (!el) throw new Error(`Missing Converse element ${selector}`);
+        return getComputedStyle(el);
+      };
+      const button = style('#board-grid [data-button="hello"]');
+      const stage = style('#board-stage');
+      return { fill:button.backgroundColor, border:button.borderColor, ink:button.color,
+        paper:getComputedStyle(document.body).backgroundColor, stage:stage.backgroundColor,
+        messageInk:style('.board-message-text').color };
     });
-    const light=await read();
-    await page.evaluate(()=>document.documentElement.dataset.theme='dark');
-    const dark=await read();
-    if(!light.script||!light.gloss)throw new Error('Converse returned an empty greeting');
-    if(errors.length)throw new Error(`Converse preview: ${errors.join('; ')}`);
-    const cells=buttons.map((label,i)=>{
-      const x=11+(i%2)*152,y=34+Math.floor(i/2)*45;
-      /** @type {string[]} */
-      const lines=[];
-      for(const word of label.split(' ')){
-        if(lines.length && `${lines.at(-1)} ${word}`.length<=20)lines[lines.length-1]+=` ${word}`;
-        else lines.push(word);
+    const message = () => page.evaluate(() => ({
+      text:document.querySelector('.board-message-text')?.textContent ?? '',
+      gloss:document.querySelector('.gloss-own')?.textContent ?? '',
+      say:document.querySelector('.gloss-say')?.textContent ?? '',
+      reply:document.querySelector('.board-reply')?.textContent?.trim() ?? '',
+    }));
+    /** @type {{question:Awaited<ReturnType<typeof message>>,response:Awaited<ReturnType<typeof message>>,answers:string[],choice:number}[]} */
+    const exchanges = [];
+    let light, dark;
+    for (const [button, choice] of [['doyou',2],['slowly',0]]) {
+      await page.locator(`#board-grid [data-button="${button}"]`).click();
+      const question = await message();
+      light ??= await palette();
+      await page.evaluate(() => document.documentElement.dataset.theme = 'dark');
+      dark ??= await palette();
+      await page.evaluate(() => delete document.documentElement.dataset.theme);
+      await page.locator('.board-reply').click();
+      const answers = await page.locator('.board-answer').allTextContents();
+      await page.locator('.board-answer').nth(Number(choice)).click();
+      const response = await message();
+      if (!question.text || !response.text || answers.length < 2) throw new Error('Incomplete Converse exchange');
+      exchanges.push({ question, answers, response, choice:Number(choice) });
+      await page.locator('.board-message').click();
+    }
+    if (!light || !dark) throw new Error('Missing Converse theme colours');
+    if (errors.length) throw new Error(`Converse preview: ${errors.join('; ')}`);
+    const lines = (/** @type {string} */ text, /** @type {number} */ limit) => {
+      const words = /[\u3000-\u9fff]/u.test(text) ? [...text] : text.split(' ');
+      const space = words.length && words[0].length === 1 && /[\u3000-\u9fff]/u.test(text) ? '' : ' ';
+      const result = [];
+      for (const word of words) {
+        if (result.length && (result.at(-1) + space + word).length <= limit) result[result.length-1] += space + word;
+        else result.push(word);
       }
-      return `<rect class="converse-cell" x="${x}" y="${y}" width="146" height="39" rx="5"/><text class="converse-label" x="${x+73}" y="${y+20-(lines.length-1)*7}">${lines.map((line,j)=>`<tspan x="${x+73}" dy="${j?14:0}">${esc(line)}</tspan>`).join('')}</text>`;
-    }).join('');
-    return {
-      body:`<g class="converse"><rect class="converse-paper" x="5" y="4" width="310" height="172" rx="4"/><text class="converse-heading" x="160" y="22">Converse · English → 日本語</text>${cells}<g class="tap"><circle cx="84" cy="54" r="12"/><path d="M84 54l3 18 4-6 6 1Z"/></g></g>
-<g class="message"><rect class="message-paper" x="5" y="4" width="310" height="172" rx="4"/><text class="message-script" lang="ja" x="160" y="86">${esc(light.script)}</text><text class="message-gloss" x="160" y="132">${esc(light.gloss)}</text><text class="message-respell" x="160" y="153">${esc(light.respell)}</text></g>`,
-      css:`& .converse-paper { fill:${light.paper}; }
-& .converse-cell { fill:${light.fill};stroke:${light.border};stroke-width:.8; }
-& .converse-label, & .converse-heading { fill:${light.ink};text-anchor:middle;dominant-baseline:central; }
-& .converse-label { font-size:12px; }
-& .converse-heading { font-size:13px;font-weight:700; }
-& .message-paper { fill:${light.stage}; }
-& .message .message-script, & .message .message-gloss, & .message .message-respell { fill:${light.messageInk};text-anchor:middle;dominant-baseline:central; }
-& .message-script { font-size:40px;font-weight:600; }
-& .message-gloss { font-size:17px;font-weight:600; }
-& .message-respell { font-size:12px; }
-& .tap circle { fill:none;stroke:${light.border};stroke-width:2; }
-& .tap path { fill:${light.ink};stroke:${light.paper};stroke-width:1; }
-:root[data-theme="dark"] & .converse-paper { fill:${dark.paper}; }
-:root[data-theme="dark"] & .converse-cell { fill:${dark.fill};stroke:${dark.border}; }
-:root[data-theme="dark"] & .converse .converse-label, :root[data-theme="dark"] & .converse .converse-heading { fill:${dark.ink}; }
-:root[data-theme="dark"] & .message-paper { fill:${dark.stage}; }
-:root[data-theme="dark"] & .message .message-script, :root[data-theme="dark"] & .message .message-gloss, :root[data-theme="dark"] & .message .message-respell { fill:${dark.messageInk}; }`,
+      return result;
     };
-  }finally{await close();}
+    const text = (/** @type {string} */ cls, /** @type {string} */ value, /** @type {number} */ x, /** @type {number} */ y, limit=25, pitch=17) => {
+      const rows = lines(value,limit);
+      return `<text class="${cls}" x="${x}" y="${y-(rows.length-1)*pitch/2}">${rows.map((r,i)=>`<tspan x="${x}" dy="${i?pitch:0}">${esc(r)}</tspan>`).join('')}</text>`;
+    };
+    const background = '<rect class="converse-paper" x="5" y="4" width="310" height="172" rx="4"/>';
+    const board = (/** @type {number} */ selected) => background + text('converse-heading','Converse · English → 日本語',160,21,40) + buttons.map((label,i)=>{
+      const x=11+(i%2)*152,y=34+Math.floor(i/2)*45;
+      return `<rect class="converse-cell${i===selected?' selected':''}" x="${x}" y="${y}" width="146" height="39" rx="5"/>${text('converse-label',label,x+73,y+20,20,14)}`;
+    }).join('');
+    const phrase = (/** @type {Awaited<ReturnType<typeof message>>} */ m, incoming=false) => `<rect class="message-paper${incoming?' incoming':''}" x="5" y="4" width="310" height="172" rx="4"/>`
+      + text('message-script',m.text,160,65,15,28) + text('message-gloss',m.gloss,160,125,36,17)
+      + text('message-respell',m.say,160,151,45,13)
+      + (m.reply?text('reply-control',m.reply,280,101,12,13):'');
+    const answers = (/** @type {typeof exchanges[number]} */ exchange) => background + text('asked',exchange.question.text,160,21,22,16)
+      + exchange.answers.map((label,i)=>{
+        const x=11+(i%2)*152,y=39+Math.floor(i/2)*44;
+        // The app's choice label starts with its keyboard shortcut.
+        label=label.replace(/^\s*\d+\s*/,'');
+        return `<rect class="converse-cell${i===exchange.choice?' selected':''}" x="${x}" y="${y}" width="146" height="38" rx="5"/>${text('answer-label',label,x+73,y+19,11,16)}`;
+      }).join('');
+    /** @type {[number,number,string][]} */
+    const scenes = [
+      [0,2.2,board(1)], [2.2,4.2,phrase(exchanges[0].question)],
+      [4.2,7,answers(exchanges[0])], [7,8.8,phrase(exchanges[0].response,true)],
+      [8.8,11,board(2)], [11,13,phrase(exchanges[1].question)],
+      [13,15.2,answers(exchanges[1])], [15.2,16.8,phrase(exchanges[1].response,true)],
+    ];
+    let loop = '';
+    const percent = (/** @type {number} */ t) => num(100*t/period,3);
+    const body = scenes.map(([start,end,body],i)=>{
+      const a=Number(start),b=Number(end);
+      const stops=i===0?`0% {opacity:1;} ${percent(b-.15)}% {opacity:1;} ${percent(b)}%,99.2% {opacity:0;} 100% {opacity:1;}`:
+        `0%,${percent(a-.15)}%,${percent(b)}%,100% {opacity:0;} ${percent(a)}%,${percent(b-.15)}% {opacity:1;}`;
+      loop+=`& .conversation-${i} {animation:pocket-language-guide-scene-${i} ${period}s linear infinite;}\n@keyframes pocket-language-guide-scene-${i} {${stops}}\n`;
+      return `<g class="conversation conversation-${i}">${body}</g>`;
+    }).join('');
+    const colours = (/** @type {Awaited<ReturnType<typeof palette>>} */ c, /** @type {string} */ pre) => `${pre}.converse-paper {fill:${c.paper};}
+${pre}.converse-cell {fill:${c.fill};stroke:${c.border};stroke-width:.8;}
+${pre}.selected {stroke:${c.ink};stroke-width:1.8;}
+${pre}.conversation text {fill:${c.ink};}
+${pre}.message-paper {fill:${c.stage};}
+${pre}.incoming {fill:${c.fill};}
+${pre}.message-script,${pre}.message-gloss,${pre}.message-respell {fill:${c.messageInk};}`;
+    return { body, loop, css:`& .conversation {opacity:0;} & .conversation-0 {opacity:1;}
+& .conversation text {text-anchor:middle;dominant-baseline:central;font-family:ui-sans-serif,system-ui,sans-serif;}
+& .converse-label {font-size:12px;} & .converse-heading {font-size:13px;font-weight:700;}
+& .answer-label {font-size:13px;} & .asked {font-size:15px;font-weight:600;}
+& .message-script {font-size:25px;font-weight:600;} & .message-gloss {font-size:15px;font-weight:600;}
+& .message-respell,& .reply-control {font-size:11px;}
+${colours(light,'& ')}\n${colours(dark,':root[data-theme="dark"] & ')}` };
+  } finally { await close(); }
 }
