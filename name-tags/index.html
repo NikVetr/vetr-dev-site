@@ -116,6 +116,13 @@
     <section class="card" aria-labelledby="design-heading">
       <h2 id="design-heading">Design</h2>
       <div class="settings">
+        <label>Line layout
+          <select id="line-layout" aria-describedby="line-layout-hint">
+            <option value="balanced" selected>Balanced lines</option>
+            <option value="original">Original proportions</option>
+            <option value="custom" disabled>Custom proportions</option>
+          </select>
+        </label>
         <label>Decoration
           <select id="decoration">
             <option value="dna">DNA helix</option>
@@ -145,6 +152,7 @@
           <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
         </label>
       </div>
+      <p id="line-layout-hint" class="muted hint">Balanced lines favours similar name widths and more horizontal overlap, with a smaller helix beside the lower line.</p>
       <p id="smallcaps-hint" class="muted hint">Such names are set in capitals. Small caps shrink the letters after each line's first, by the stroke weight of the plain face against the bold.</p>
       <div id="logo-file-field" class="toolbar" hidden>
         <label class="file-button">Open logo (SVG, PNG or JPEG)… <input id="logo-file" type="file" accept=".svg,.png,.jpg,.jpeg,image/svg+xml,image/png,image/jpeg"></label>

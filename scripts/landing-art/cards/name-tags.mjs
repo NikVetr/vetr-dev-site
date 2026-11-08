@@ -1,11 +1,12 @@
 // Name Tags: the page's example names (twelve historical figures), each fitted around a DNA
-// helix by the tool's core with its defaults, laid out on the tool's own 4 × 3 example tray
+// helix by the tool's core with its Balanced lines preset, laid out on the tool's own 4 × 3 example tray
 // (examples/tray-4x3.json), which holds exactly those twelve. The engraving is simplified to the
 // card's scale. The loop: the engraving fades, then a laser line scans down the tray and the
 // engraving reappears behind it, back to the finished sheet. The scan is a paper-coloured cover
 // that only translates, with the line along its top edge.
 import { readFileSync } from 'node:fs';
 import { submit } from '../../../name-tags/core/index.js';
+import { BALANCED_STYLE } from '../../../name-tags/presets.js';
 import { H, W, art, num, simplifyPath } from '../svg.mjs';
 
 const PERIOD = 6;
@@ -14,7 +15,7 @@ export async function build() {
   const read = (/** @type {string} */ f) => readFileSync(new URL(`../../../name-tags/examples/${f}`, import.meta.url), 'utf8');
   const names = read('historical-figures.txt').trim().split('\n');
   const tray = JSON.parse(read('tray-4x3.json'));
-  const result = await submit({ names, tray });
+  const result = await submit({ names, tray, style: BALANCED_STYLE });
   if (result.sheets.length !== 1) throw new Error('name-tags: the example should fill one sheet');
   const svg = result.sheets[0].svg;
 

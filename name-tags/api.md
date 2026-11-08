@@ -2,7 +2,7 @@
 
 Name Tags lays out names, one per tag, in the cells of a laser-cut tray, and draws each tray-full as an SVG sheet for the laser cutter. A two-line name is fitted around a decoration by a small optimizer. It has a single entry point, `submit(request) → result`. The request and the result are plain JSON. The web page, `window.NameTags` and the command line all call this same function, and the same request (seed included) always gives the same result.
 
-It is a port of Nik Vetr's R name-tag drawer (`nametag_submit(request)`), with the same request fields and defaults. The random numbers are R's: a seed draws the same optimizer restarts and stroke jitter as `set.seed(seed)` does in R, and the optimizer is R's `optim(method = "BFGS")`, so fits agree with R's (see [Agreement with R](#agreement-with-r)).
+It is a port of Nik Vetr's R name-tag drawer (`nametag_submit(request)`), with the same request fields and core defaults. The random numbers are R's: a seed draws the same optimizer restarts and stroke jitter as `set.seed(seed)` does in R, and the optimizer is R's `optim(method = "BFGS")`, so fits agree with R's (see [Agreement with R](#agreement-with-r)).
 
 ## Ways in
 
@@ -214,3 +214,9 @@ An invalid request, `{"names": ["Mary|Ann|Evans"], "seed": 1.5}`, exits with sta
 ```json
 {"error":{"code":"invalid_request","message":"The request has 2 problems: names[0]: use exactly one \"|\" between two non-empty lines: \"Mary|Ann|Evans\"; seed: must be an integer from -2147483647 to 2147483647","issues":[{"code":"invalid_value","path":"names[0]","message":"use exactly one \"|\" between two non-empty lines: \"Mary|Ann|Evans\""},{"code":"invalid_value","path":"seed","message":"must be an integer from -2147483647 to 2147483647"}]}}
 ```
+
+## Browser layout presets
+
+The browser and landing example start with **Balanced lines**, favouring closer top/bottom name widths and greater horizontal overlap. The **Original proportions** choice restores the R layout. These presets use the existing BFGS cost and expose their full settings through `getRequest()`; loading a request preserves explicit overrides.
+
+The balanced style is exported as `BALANCED_STYLE` from `presets.js`: `degree_name_overlap: 0.8`, and optimizer preferences `ratio_mean_b2b3_w: 0.2`, `ratio_sd_b2b3_w: 0.2`, `ratio_mean_b1_b2b3_w: 0.98`, `ratio_sd_b1_b2b3_w: 0.025`, and `sd_ntwists: 0.7`. Pass this as `style` to `submit()` (or include it in CLI JSON) for the same result. Omitting it retains historical core/CLI defaults. On the 12-name example, average top/bottom width ratio decreases from about 1.74 to 1.55 and horizontal overlap rises from about 77% to 92%; equal widths are a preference rather than a constraint.

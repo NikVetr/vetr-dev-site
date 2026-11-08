@@ -6,6 +6,7 @@
 import { parseNamesCsv, parseNamesText } from './core/names.js';
 import { DEFAULT_STYLE, NameTagsError } from './core/request.js';
 import { TRAY_PRESETS } from './core/tray.js';
+import { LAYOUT_PRESETS } from './presets.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -122,6 +123,11 @@ function loadRequest(request) {
 }
 
 function showInputs() {
+  const style = extraFields.style ?? {};
+  byId('line-layout').value = Object.entries(LAYOUT_PRESETS).find(([, preset]) =>
+    (style.degree_name_overlap ?? DEFAULT_STYLE.degree_name_overlap) === preset.degree_name_overlap &&
+    Object.entries(preset.optimizer).every(([key, value]) => (style.optimizer?.[key] ?? DEFAULT_STYLE.optimizer[/** @type {keyof typeof DEFAULT_STYLE.optimizer} */ (key)]) === value)
+  )?.[0] ?? 'custom';
   const names = parseNamesText(el.names.value);
   el.nameCount.textContent = `${names.length} name${names.length === 1 ? '' : 's'}`;
   el.trayFileField.hidden = el.trayChoice.value !== 'custom';
@@ -483,9 +489,17 @@ async function loadExample() {
   const response = await fetch('examples/historical-figures.txt');
   if (!response.ok) throw new Error(`Could not load the example (HTTP ${response.status})`);
   const n = parseNamesText(el.names.value).length;
-  replaceNames(parseNamesText(await response.text()).join('\n'), {}, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
+  replaceNames(parseNamesText(await response.text()).join('\n'), { style: structuredClone(LAYOUT_PRESETS.balanced) }, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
+byId('line-layout').addEventListener('change', () => {
+  const preset = LAYOUT_PRESETS[byId('line-layout').value];
+  if (!preset) throw new Error('Unknown name layout');
+  const previous = extraFields.style ?? {};
+  extraFields.style = { ...previous, degree_name_overlap: preset.degree_name_overlap,
+    optimizer: { ...previous.optimizer, ...preset.optimizer } };
+  showInputs();
+});
 byId('clear-names').addEventListener('click', () => {
   const n = parseNamesText(el.names.value).length;
   replaceNames('', extraFields, `Cleared ${n} name${n === 1 ? '' : 's'}.`);

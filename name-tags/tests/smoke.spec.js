@@ -16,7 +16,7 @@ test('fits the example on load and exposes the API', async ({ page }) => {
   await open(page);
   await expect(page.locator('#name-count')).toHaveText('12 names');
   await expect(page.locator('#status')).toContainText('Done in');
-  await expect(page.locator('#preview svg path')).toHaveCount(12 + 146 + 45); // cell outlines, glyphs, helix pieces
+  await expect(page.locator('#preview svg path')).toHaveCount(12 + 146 + 39); // balanced preset: cell outlines, glyphs, helix pieces
   await expect(page.locator('#downloads button')).toHaveText(['Sheet SVG']);
   const download = page.waitForEvent('download');
   await page.locator('#downloads button').click();
@@ -126,4 +126,23 @@ test('Clear and Load example offer the names back', async ({ page }) => {
   await expect(page.locator('#undo-note')).toContainText('Replaced your 2 names with the example.');
   await page.locator('#names').fill('An edit');
   await expect(page.locator('#undo-note')).toBeHidden();
+});
+
+
+test('balanced default and original proportions round-trip through the request and preset control', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#line-layout')).toHaveValue('balanced');
+  const first = await page.evaluate(() => /** @type {any} */ (window).NameTags.getRequest());
+  expect(first.style.degree_name_overlap).toBe(0.8);
+  await page.locator('#line-layout').selectOption('original');
+  await expect(page.locator('#stale')).toBeVisible();
+  await page.locator('#generate').click();
+  await expect(page.locator('#stale')).toBeHidden();
+  await expect(page.locator('#preview svg path')).toHaveCount(203);
+  const original = await page.evaluate(() => /** @type {any} */ (window).NameTags.exportSvgText());
+  await page.evaluate(async request => { await /** @type {any} */ (window).NameTags.submit(request); }, first);
+  await expect(page.locator('#line-layout')).toHaveValue('balanced');
+  expect(await page.evaluate(() => /** @type {any} */ (window).NameTags.exportSvgText())).not.toBe(original);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await overflow(page)).toBeLessThanOrEqual(0);
 });

@@ -119,3 +119,5 @@ Tools that scripts and agents can use follow one shape. `forecast-calibration/` 
 `sankey/` predates this shape. Its `window.SankeyApp.submit` needs the page's DOM, so its command line, `sankey/scripts/render.cjs`, drives headless Chromium through Playwright, and its errors carry only a message. `sankey/api.md` describes it.
 
 Core tests run with `node --test` in the tool's folder. Browser smoke tests use Playwright where a tool has them, through `npm ci` or a `node_modules` link to an existing install.
+
+Name Tags starts with **Balanced lines**, using the existing optimizer with stronger preferences for similar name widths and more horizontal overlap. **Original proportions** restores the historical layout; core/CLI omission retains the original defaults. The named preset is available to scripts through `name-tags/presets.js`.
