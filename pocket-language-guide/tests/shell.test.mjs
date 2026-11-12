@@ -12,12 +12,12 @@ import { createHash } from 'node:crypto';
 // lists found no other match; these are the stems their generic rules are built on.
 const TRACKER_STEMS = /^(beacon|analytics|tracking|tracker|track|telemetry|pixel|ads|adserver|advert)[._-]/i;
 
-test('collection navigation is locally precached and matches the shared source', async () => {
+test('shared header styles and switches are locally precached and match their source', async () => {
   const { files } = JSON.parse(await readFile('data/shell.json', 'utf8'));
-  for (const extension of ['css', 'js']) {
-    const path = `ui/collection-nav.${extension}`;
+  for (const [source, local] of [['tool-nav', 'collection-nav'], ['light-switch', 'light-switch']]) for (const extension of ['css', 'js']) {
+    const path = `ui/${local}.${extension}`;
     assert.ok(files.includes(path), `${path} must work offline`);
-    assert.deepEqual(await readFile(path), await readFile(`../shared/tool-nav.${extension}`));
+    assert.deepEqual(await readFile(path), await readFile(`../shared/${source}.${extension}`));
   }
 });
 

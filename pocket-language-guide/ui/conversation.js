@@ -23,7 +23,7 @@ import {
 } from '../core/pack.js';
 import { createRespeller, guessSounds, nameRespeller } from '../core/respell.js';
 import { joinKeys, variantKey } from '../core/speaker.js';
-import { lightSwitch } from './theme.js';
+import { lightSwitch } from './light-switch.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences, MAX_BUTTONS,
 } from '../core/conversation.js';

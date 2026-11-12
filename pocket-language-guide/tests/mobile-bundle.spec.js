@@ -75,11 +75,12 @@ test('the bundle registers no service worker', async ({ page }) => {
   expect(count).toBe(0);
 });
 
-test('bundled subpage Help opens the local guide and Home points to the collection', async ({ page }) => {
+test('bundled subpage keeps native navigation and local guide access', async ({ page }) => {
   const { failed, offsite, errors } = await openOffline(page, '/drill.html?target=zh-Hans&source=en');
-  const nav = page.getByRole('navigation', { name: 'Tool navigation' });
-  await expect(nav.getByRole('link', { name: 'vetr.dev' })).toHaveAttribute('href', 'https://vetr.dev/');
-  await nav.getByRole('link', { name: 'Help', exact: true }).click();
+  await expect(page.locator('.tool-nav')).toHaveCount(0);
+  await page.locator('.brand').click();
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.goto(BUNDLE + '/index.html#tool-help');
   await expect(page.locator('#tool-help')).toHaveAttribute('open', '');
   await expect(page.locator('#tool-help p')).toBeVisible();
   expect(failed).toEqual([]);

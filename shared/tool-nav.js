@@ -1,10 +1,6 @@
-// Help opens the tool's explanation. Native help buttons keep their own handlers.
-/** @param {Element} target */
+// Direct explanation links open their destination without adding header controls.
+/** @param {HTMLDetailsElement} target */
 function revealToolHelp(target) {
-    if (target instanceof HTMLDialogElement) {
-      target.showModal();
-      return;
-    }
     if (target instanceof HTMLDetailsElement) target.open = true;
     const focus = target instanceof HTMLDetailsElement ? target.querySelector('summary') : target;
     if (focus instanceof HTMLElement) {
@@ -12,16 +8,6 @@ function revealToolHelp(target) {
       focus.focus({ preventScroll: true });
     }
     target.scrollIntoView({ block: 'start', behavior: 'instant' });
-}
-
-for (const link of document.querySelectorAll('.tool-nav [data-tool-help]')) {
-  link.addEventListener('click', (event) => {
-    const selector = /** @type {HTMLElement} */ (link).dataset.toolHelp;
-    const target = selector ? document.querySelector(selector) : null;
-    if (!target) return; // Cross-page help links use ordinary navigation.
-    event.preventDefault();
-    revealToolHelp(target);
-  });
 }
 
 // A subpage's Help link lands on a closed <details>; open it on arrival too.

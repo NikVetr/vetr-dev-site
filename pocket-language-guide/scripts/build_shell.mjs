@@ -18,11 +18,11 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseTable } from '../core/csv.js';
-import { syncCollectionNavigation } from './collection_navigation.mjs';
+import { syncSharedUI } from './shared_ui.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const CHECK = process.argv.includes('--check');
-await syncCollectionNavigation({ check: CHECK });
+await syncSharedUI({ check: CHECK });
 const INDEX_PATH = 'data/respell/overrides/index.json';
 const RULES_INDEX_PATH = 'data/respell/rules/index.json';
 const OFFLINE_PATH = 'data/offline.json';
@@ -33,7 +33,7 @@ const CODE_DIRS = ['core', 'render', 'ui'];
 /** Individual files the app cannot start without. */
 const ENTRY_FILES = [
   'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
-  'style.css', 'conversation.css', 'ui/collection-nav.css',
+  'style.css', 'conversation.css', 'ui/collection-nav.css', 'ui/light-switch.css',
   'favicon.svg', 'manifest.webmanifest',
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',
   'data/presets.json', 'data/icons.json', 'data/coverage.json', 'data/native.json',

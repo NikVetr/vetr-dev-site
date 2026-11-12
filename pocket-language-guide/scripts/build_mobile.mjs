@@ -20,7 +20,7 @@
 import { readFile, writeFile, mkdir, rm, cp, stat, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { nativePackManifest, STARTER_LANGUAGES } from './native_packs.mjs';
-import { syncCollectionNavigation } from './collection_navigation.mjs';
+import { syncSharedUI } from './shared_ui.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const OUT = join(ROOT, 'dist/mobile');
@@ -109,7 +109,7 @@ async function report(files) {
   return total;
 }
 
-await syncCollectionNavigation();
+await syncSharedUI();
 const { files, index, languagePacks } = await manifest();
 
 // Rebuilt from nothing every time. An incremental copy accumulates the files a

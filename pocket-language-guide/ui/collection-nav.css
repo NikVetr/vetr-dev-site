@@ -1,55 +1,8 @@
-/* Collection links live in the tool's own header, alongside its original controls. */
-.tool-nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0 .85rem;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 0;
-  color: inherit;
-  background: transparent;
-  font: 13px/1.4 system-ui, sans-serif;
-}
-.tool-nav a, .tool-nav button {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  box-sizing: border-box;
-  padding: .2rem 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  color: inherit;
-  font: inherit;
-  letter-spacing: normal;
-  text-decoration: underline;
-  text-underline-offset: .2em;
-  white-space: nowrap;
-  cursor: pointer;
-}
-.tool-nav .tool-nav-home { font-weight: 650; text-decoration: none; }
-.tool-nav a:focus-visible, .tool-nav button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-.tool-header-row { flex-wrap: wrap; }
-.tool-header-row > :first-child { flex: 1 1 24rem; min-width: 0; }
-.tool-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .85rem; max-width: 100%; }
-.tool-native-header > .tool-nav { margin-inline-start: auto; }
-.site-header .container.tool-native-header { flex-wrap: wrap; }
-.tool-nav-end { order: 20; }
+/* Compact native headers and the tools' in-page explanations. */
+.tool-header-row { flex-wrap: nowrap; }
+.tool-header-row > :first-child { flex: 1 1 auto; min-width: 0; }
+.tool-header-actions { display: flex; flex: 0 0 auto; align-items: center; gap: .25rem .85rem; }
 .tool-help { max-width: 70ch; margin: 1rem auto; padding: 1rem; color: inherit; font: 14px/1.6 system-ui, sans-serif; }
 .tool-help summary { cursor: pointer; font-weight: 650; }
 .tool-help p { margin: .8rem 0 0; }
-.collection-help-dialog { max-width: min(38rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; box-sizing: border-box; padding: 1.25rem; color: inherit; background: var(--bg-color, Canvas); border: 1px solid currentColor; border-radius: .5rem; font: 15px/1.6 system-ui, sans-serif; }
-.collection-help-dialog::backdrop { background: #0007; }
-.collection-help-dialog form { display: flex; justify-content: end; }
-.collection-help-dialog button { min-height: 44px; padding: .4rem .8rem; }
-@media (max-width: 600px), (pointer: coarse) {
-  .tool-nav { gap: 0 .9rem; }
-  .tool-nav a, .tool-nav button { min-height: 44px; }
-  .tool-header-actions { width: 100%; justify-content: space-between; }
-}
-@media (max-width: 1000px) {
-  .tool-native-header > .tool-nav { flex: 1 0 100%; margin-inline-start: 0; }
-}
-@media print { .tool-nav, .tool-help { display: none; } }
+@media print { .tool-help { display: none; } }

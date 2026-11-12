@@ -37,16 +37,16 @@ async function walk(dir) {
 const files = await walk('');
 const present = new Set(files);
 
-test('collection navigation stays inside the native bundle and Home names the website', async () => {
-  for (const extension of ['css', 'js']) {
-    const path = `ui/collection-nav.${extension}`;
+test('shared controls stay inside the native bundle without an extra navigation row', async () => {
+  for (const [source, local] of [['tool-nav', 'collection-nav'], ['light-switch', 'light-switch']]) for (const extension of ['css', 'js']) {
+    const path = `ui/${local}.${extension}`;
     assert.ok(present.has(path));
-    assert.deepEqual(await readFile(join(OUT, path)), await readFile(join(ROOT, '../shared', `tool-nav.${extension}`)));
+    assert.deepEqual(await readFile(join(OUT, path)), await readFile(join(ROOT, '../shared', `${source}.${extension}`)));
   }
   for (const page of files.filter((file) => file.endsWith('.html'))) {
     const html = await readFile(join(OUT, page), 'utf8');
     assert.ok(!html.includes('../shared/tool-nav.'));
-    assert.match(html, /class="tool-nav-home" href="https:\/\/vetr\.dev\/"/);
+    assert.doesNotMatch(html, /class="tool-nav[ "]/);
     assert.match(html, /src="ui\/collection-nav\.js"/);
     assert.match(html, /href="ui\/collection-nav\.css"/);
   }
