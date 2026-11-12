@@ -122,6 +122,13 @@
           <input id="seed" type="number" min="-2147483647" max="2147483647" step="1" value="1">
         </label>
       </div>
+      <div id="custom-decoration-controls">
+        <div class="toolbar">
+          <button id="customize-decoration" type="button">Customize helix or braid…</button>
+          <button id="reset-decoration" type="button" class="quiet" hidden>Use original</button>
+        </div>
+        <p id="decoration-status" class="muted hint">Original DNA design.</p>
+      </div>
       <details class="design-notes">
         <summary>Line layout and capitals</summary>
         <p id="line-layout-hint" class="muted hint">Balanced lines favours similar name widths and more horizontal overlap, with a smaller helix beside the lower line.</p>
@@ -177,11 +184,27 @@
         <p>Each name becomes one or two lines. A name whose top line has a descender (y, q, p, g or j) is set in capitals, with small capitals after each line's first letter, sized so their strokes about match the plain face.</p>
         <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>
         <p>Some short names, such as Li Wu, do not fit the DNA proportions. Choose Decoration → None to fit the text without a helix; extra restarts may not help.</p>
+        <p>Customize the helix or use a braid in the same reserved space. The drawing is scaled uniformly and engraved in black; the name proportions and the underline's descender gaps stay the same. One-line names have no decoration. The <a href="../helix/">standalone Helix and Braid editor</a> also draws along freehand paths and exports SVG or PNG.</p>
         <p>The Hershey design writes the name in single-stroke Hershey script with a heartbeat trace running into the bottom line and out of the top line. The logo decoration draws one logo per cell instead, for example for the backs of the tags; give it the same names and cells as the front.</p>
         <p>The seed makes the optimizer's random starts repeatable. The <a href="api.md">API</a> provides the same layout inputs and exports.</p>
       </details>
     </section>
   </main>
+
+  <dialog id="decoration-dialog" class="decoration-dialog" aria-labelledby="decoration-dialog-title">
+    <div class="decoration-dialog-heading">
+      <h2 id="decoration-dialog-title">Customize helix or braid</h2>
+      <button id="close-decoration" type="button" class="quiet" aria-label="Close decoration editor">×</button>
+    </div>
+    <div id="decoration-editor-host" class="decoration-editor-host"></div>
+    <div class="decoration-dialog-footer">
+      <p id="decoration-editor-status" class="muted hint" role="status">Loading the editor…</p>
+      <div class="toolbar">
+        <button id="cancel-decoration" type="button" class="quiet">Cancel</button>
+        <button id="apply-decoration" type="button" disabled>Apply</button>
+      </div>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="container footer-row">

@@ -8,6 +8,7 @@ import { parseNamesCsv, parseNamesText } from './core/names.js';
 import { DEFAULT_STYLE, NameTagsError } from './core/request.js';
 import { TRAY_PRESETS } from './core/tray.js';
 import { LAYOUT_PRESETS } from './presets.js';
+import { decorationEditor } from './decoration-editor.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -95,6 +96,7 @@ function currentRequest() {
   if (cells) request.cells = cells;
   if (el.decoration.value === 'logo') request.logo = { ...(extra.logo ?? {}), file: logoUrl, use_file_colors: el.logoColors.checked };
   else if (extra.logo) request.logo = extra.logo;
+  if (el.decoration.value !== 'dna') delete request.decoration_design;
   return request;
 }
 
@@ -150,12 +152,31 @@ function showInputs() {
   el.logoColorsField.hidden = !logo;
   el.logoStatus.hidden = !logo;
   el.logoStatus.textContent = logoUrl ? `Logo loaded: ${logoName || 'from the request'} (${logoUrl.slice(5, logoUrl.search(/[;,]/))}).` : 'No logo loaded yet.';
+  byId('custom-decoration-controls').hidden = el.decoration.value !== 'dna';
+  byId('reset-decoration').hidden = !extraFields.decoration_design;
+  byId('decoration-status').textContent = extraFields.decoration_design ? `Custom ${extraFields.decoration_design.mode === 'braid' ? 'braid' : 'helix'}.` : 'Original DNA design.';
   showStale();
 }
 
 for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.restarts, el.seed]) {
   input.addEventListener('input', showInputs);
 }
+
+const designEditor = decorationEditor({
+  getRequest: () => extraFields.decoration_design ?? null,
+  onApply: (request) => {
+    history?.commit('Edit inputs');
+    extraFields.decoration_design = request;
+    showInputs();
+    history?.commit('Customize decoration');
+  },
+});
+byId('reset-decoration').addEventListener('click', () => {
+  history?.commit('Edit inputs');
+  delete extraFields.decoration_design;
+  showInputs();
+  history?.commit('Restore original decoration');
+});
 
 /** The page's inputs, by the card they are on, to tell whether the sheets on view still match them. @returns {Inputs} */
 function pageInputs() {
@@ -656,6 +677,7 @@ function captureWorkspace() {
 /** @param {ReturnType<typeof captureWorkspace>} saved */
 function restoreWorkspace(saved) {
   stateEpoch++;
+  designEditor.close();
   stopRun();
   customTray = saved.customTray; logoUrl = saved.logoUrl; logoName = saved.logoName; trayName = saved.trayName;
   overlay = saved.overlay; extraFields = structuredClone(saved.extraFields); previewView = saved.previewView;

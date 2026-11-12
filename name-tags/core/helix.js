@@ -51,7 +51,7 @@ export function findGaps(xs, ys, y, widen) {
  * descenders cross it. In the tag's frame shifted by `adj` inches.
  * @param {import('./layout.js').Tag} tag @param {number[]} adj
  */
-export function tagHelix(tag, adj) {
+export function tagHelixPieces(tag, adj) {
   const dec = /** @type {import('./layout.js').DnaDecoration} */ (tag.decoration);
   const bottom = dec.bbox[1] + adj[1];
   const xs = [];
@@ -70,5 +70,11 @@ export function tagHelix(tag, adj) {
     extendStraightBy: dec.extend_straight_by, topleft: [dec.topleft[0] + adj[0], dec.topleft[1] + adj[1]], forcedBox: dec.box_dim,
     boxDNA: true, extensionRealUnits: true, propDist: dec.prop_dist, gaps, xyr: 1,
   });
+  return { shape, gaps };
+}
+
+/** @param {import('./layout.js').Tag} tag @param {number[]} adj */
+export function tagHelix(tag, adj) {
+  const { shape, gaps } = tagHelixPieces(tag, adj);
   return { polygons: helixOutline(shape.pieces, 1), gaps };
 }

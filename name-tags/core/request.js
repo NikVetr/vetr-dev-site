@@ -6,6 +6,7 @@
 import { SCRIPT_CHARS } from './hershey-data.js';
 import { splitNameLines, toLower } from './names.js';
 import { TRAY_PRESETS, trayGeometry } from './tray.js';
+import { normalizeRequest as normalizeHelixRequest } from '../../helix/core/request.js';
 
 /**
  * @typedef {{ code: string, path: string, message: string }} Issue
@@ -14,7 +15,8 @@ import { TRAY_PRESETS, trayGeometry } from './tray.js';
  * @typedef {{ name: string, logo: string | null }} NameEntry
  * @typedef {{ file: string | null, margin_div: number, center_adj_prop: readonly number[], use_file_colors: boolean }} LogoOptions
  * @typedef {{ names: NameEntry[], lines: string[][], tray: import('./tray.js').Tray, cells: number[] | null, font: { family: string },
- *   decoration: 'dna' | 'none' | 'hershey_ekg' | 'logo', logo: LogoOptions, style: Style, hershey_ekg: HersheyEkg, seed: number,
+ *   decoration: 'dna' | 'none' | 'hershey_ekg' | 'logo', decoration_design: ReturnType<typeof normalizeHelixRequest> | null,
+ *   logo: LogoOptions, style: Style, hershey_ekg: HersheyEkg, seed: number,
  *   output: { prefix: string } }} Settings
  */
 
@@ -96,7 +98,7 @@ export const DEFAULTS = Object.freeze({
   output: Object.freeze({ prefix: 'nametags' }),
 });
 
-const TOP_FIELDS = ['names', 'names_file', 'tray', 'cells', 'font', 'decoration', 'logo', 'style', 'hershey_ekg', 'seed', 'ncores', 'output'];
+const TOP_FIELDS = ['names', 'names_file', 'tray', 'cells', 'font', 'decoration', 'decoration_design', 'logo', 'style', 'hershey_ekg', 'seed', 'ncores', 'output'];
 const DECORATIONS = ['dna', 'none', 'hershey_ekg', 'logo'];
 const TRAY_FIELDS = ['name', 'page_in', 'cell_in', 'grid', 'spacing_in', 'first_center_in', 'centers_in'];
 const MAX_NAMES = 5000;
@@ -150,6 +152,17 @@ export function logoType(v) {
   return m[1].toLowerCase() === 'svg+xml' ? 'svg' : m[1].toLowerCase() === 'png' ? 'png' : 'jpeg';
 }
 const LOGO_MESSAGE = 'must be a data: URL of an SVG, PNG or JPEG image (the command line also takes a file path)';
+
+/** Validate the optional design through the standalone editor's shared contract.
+ * @param {unknown} request */
+export function normalizeDecorationDesign(request) {
+  if (request === undefined || request === null) return null;
+  try { return normalizeHelixRequest(request); }
+  catch (error) {
+    if (!(error instanceof Error) || !('issues' in error) || !Array.isArray(error.issues)) throw error;
+    throw invalid(error.issues.map((issue) => ({ ...issue, path: `decoration_design${issue.path ? `.${issue.path}` : ''}` })));
+  }
+}
 
 /**
  * Fills defaults into a section and checks each field, collecting issues.
@@ -268,6 +281,10 @@ export function normalizeRequest(request) {
 
   const decoration = request.decoration ?? DEFAULTS.decoration;
   if (!DECORATIONS.includes(decoration)) issues.push({ code: 'invalid_value', path: 'decoration', message: `must be ${DECORATIONS.map((d) => JSON.stringify(d)).join(', ')}` });
+  let decorationDesign = null;
+  try { decorationDesign = normalizeDecorationDesign(request.decoration_design); }
+  catch (error) { if (error instanceof NameTagsError) issues.push(...error.issues); else throw error; }
+  if (decorationDesign && decoration !== 'dna') issues.push({ code: 'conflicting_fields', path: 'decoration_design', message: 'a custom helix or braid requires decoration "dna"' });
 
   const hershey = section(request.hershey_ekg, DEFAULT_HERSHEY_EKG, HERSHEY_CHECKS, 'hershey_ekg', issues);
   const logo = section(request.logo, DEFAULTS.logo, {
@@ -310,7 +327,7 @@ export function normalizeRequest(request) {
   if (issues.length) throw invalid(issues);
   return {
     names, lines, tray: /** @type {import('./tray.js').Tray} */ (tray), cells, font, decoration: /** @type {Settings['decoration']} */ (decoration),
-    logo, style, hershey_ekg: hershey, seed: /** @type {number} */ (seed), output: { prefix: output.prefix },
+    decoration_design: decorationDesign, logo, style, hershey_ekg: hershey, seed: /** @type {number} */ (seed), output: { prefix: output.prefix },
   };
 }
 

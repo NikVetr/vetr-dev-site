@@ -18,6 +18,7 @@ import { rMersenneTwister } from '../../shared/rng.js';
 import { renderSheet } from './svg.js';
 import { assignCells } from './tray.js';
 import { missingChars } from './font.js';
+import { customDecoration, fitCustomDecoration } from './decoration.js';
 
 export { DEFAULTS, DEFAULT_HERSHEY_EKG, DEFAULT_STYLE, FONTS, NameTagsError, logoType } from './request.js';
 export { TRAY_PRESETS } from './tray.js';
@@ -37,10 +38,12 @@ export { parseNamesCsv, parseNamesText, splitNameLines } from './names.js';
 export function submit(request, { onProgress, onFitTrace } = {}) {
   const s = normalizeRequest(request);
   const { tray, style } = s;
+  const decorationDesign = s.decoration_design ? customDecoration(s.decoration_design) : null;
   const placements = assignCells(s.names.length, tray.n_cells, s.cells);
   const rng = rMersenneTwister(s.seed);
   /** @type {string[]} */
   const warnings = [];
+  if (decorationDesign?.path?.narrowed) warnings.push(`The drawn decoration's band was narrowed from ${decorationDesign.path.requestedWidth} to ${Number(decorationDesign.path.width.toPrecision(5))} source units to keep its turns clear, before fitting it to the tag.`);
   const origin = (/** @type {number} */ i) => {
     const [cx, cy] = tray.centers[placements[i].cell - 1];
     return [cx - tray.cell_in[0] / 2, cy - tray.cell_in[1] / 2];
@@ -84,10 +87,12 @@ export function submit(request, { onProgress, onFitTrace } = {}) {
           : layoutPlainTag(m, centers[i], tray.cell_in, style);
         /** @type {import('./svg.js').Layer[]} */
         const layers = tag.lines.map((l) => ({ kind: 'glyphs', polygons: l.glyphs, dx: adj[0], dy: adj[1] + l.lowerQ }));
-        if (dna) layers.push({ kind: 'helix', polygons: tagHelix(tag, adj).polygons, dx: 0, dy: 0 });
+        const custom = dna && decorationDesign ? fitCustomDecoration(tag, adj, decorationDesign) : null;
+        if (custom) layers.push({ kind: 'shape', polygons: custom.polygons, dx: 0, dy: 0 }, { kind: 'helix', polygons: custom.underline, dx: 0, dy: 0 });
+        else if (dna) layers.push({ kind: 'helix', polygons: tagHelix(tag, adj).polygons, dx: 0, dy: 0 });
         drawings.push({ origin: origin(i), layers });
         progress(i);
-        return { name: s.names[i].name, lines: tag.text, sheet: placements[i].sheet, cell: placements[i].cell, decoration: dna ? 'dna' : 'none', fit: tag.fit };
+        return { name: s.names[i].name, lines: tag.text, sheet: placements[i].sheet, cell: placements[i].cell, decoration: dna ? 'dna' : 'none', fit: tag.fit, ...(custom ? { decoration_fit: custom.fit } : {}) };
       });
     }
   }
@@ -105,5 +110,7 @@ export function submit(request, { onProgress, onFitTrace } = {}) {
     sheets,
     tags,
     warnings,
+    ...(s.decoration_design ? { decoration_design: s.decoration_design } : {}),
+    ...(decorationDesign?.path ? { decoration_path: decorationDesign.path } : {}),
   };
 }

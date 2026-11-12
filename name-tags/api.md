@@ -51,6 +51,7 @@ const result = submit({ names: ['Ada Lovelace', 'Alan Turing'] }, { onProgress: 
 | `cells` | array | in order | One cell number per name. A repeated cell starts a new sheet. |
 | `font` | object | `{family: "Inter"}` | `family`: `"Inter"` or `"Source Serif Pro"`, the two bundled families. |
 | `decoration` | string | `"dna"` | `"dna"`, `"none"`, `"hershey_ekg"` or `"logo"` (see [Decorations](#decorations)). |
+| `decoration_design` | object or null | `null` | Optional [Helix/Braid request](../helix/api.md), used with `decoration: "dna"`; uniformly fits its filled geometry in the existing decoration box. |
 | `logo` | object | see below | The logo for `decoration: "logo"`. |
 | `style` | object | see below | Text sizing, small caps, and the optimizer. |
 | `hershey_ekg` | object | see below | Pen widths and placement for the Hershey design. |
@@ -126,12 +127,32 @@ An irregular tray gives `centers_in`, one `[x, y]` per cell in cell order, inste
 | `sheets` | One per tray-full: `{kind, sheet, file, svg}`; `kind` is `"names"` or `"logos"`, `sheet` counts from 1, `file` is the file name and `svg` the SVG text (the command line replaces `svg` by `path`). |
 | `tags` | One per name, in order: `{name, lines, sheet, cell, decoration, fit}`; for logo sheets `{name, sheet, cell, decoration: "logo", logo: {type}}`. |
 | `warnings` | Strings, for example characters the font has no glyph for (drawn as its empty box) or a fit retried with more restarts. |
+| `decoration_design` | Present only for a custom decoration: its fully normalized Helix/Braid request. |
+| `decoration_path` | For a drawn custom design: shared path diagnostics (`length`, `requestedWidth`, actual `width`, `narrowed`, `smoothing`, `minRadius`) before uniform tag fitting. A narrowed band also adds a warning. |
 
 `decoration` is what the tag got: a one-line name under `"dna"` reports `"none"`. `fit` is `null` except for DNA tags, where it holds `objective` (the cost at the solution), `w1`, `w2`, `h2` (the top-line width, helix width and helix height, in inner-box widths), `ar1`, `ar3` (the lines' height / width ratios the fit used), `ntwists` and `restarts` (more than requested if a fit with no whole twist was retried).
 
-**Sheets.** The page is drawn at 96 units per inch, the unit Inkscape calls px, with `width` and `height` in inches, so every program opens it at true size. Engraving is filled black paths (even-odd fill); the helix is also outlined at 0.75 px, as the R version draws it; each used cell has a 0.75 px grey (`#333333`) outline for registration.
+**Sheets.** The page is drawn at 96 units per inch, the unit Inkscape calls px, with `width` and `height` in inches, so every program opens it at true size. Engraving is filled black paths (even-odd fill); the original helix and underline are also outlined at 0.75 px, as the R version draws them. Custom decoration fills use their actual geometry without an added stroke. Each used cell has a 0.75 px grey (`#333333`) outline for registration.
 
 ## Decorations
+
+### Custom helix or braid
+
+```json
+{
+  "names": ["Ada Lovelace", "Alan Turing"],
+  "decoration": "dna",
+  "decoration_design": {"mode": "braid", "braid": {"twists": 3, "width": 20}}
+}
+```
+
+The same field works through the page API and CLI. It accepts the standalone editor's validated request, including its optional drawn `path`. Geometry comes from the shared `designDrawing()` implementation. The actual filled extent is uniformly scaled and centred inside each tag's existing DNA box, in y-up inches. Shape colours, output style/background/margins and SVG stroke settings do not affect engraving: the actual filled shapes are combined in black. Units do not alter this proportional fit. The original straight underline uses its original strand widths and descender gaps. The optimizer, text geometry, name proportions, random draws and historical helix objective do not change; a different custom shape does not resolve a failed DNA fit. One-line names still have no decoration.
+
+Custom two-line tags additionally report `decoration_fit`: `box_in` and `bounds_in` as `[left,bottom,right,top]` in cell-local inches including the existing name nudge, plus `scale` and `offset_in` mapping the source drawing coordinates into the tag. Missing or null `decoration_design` retains the original result fields and SVG exactly. A non-null design with another decoration type is rejected. Nested validation and geometry issues use `decoration_design.…` paths.
+
+In the page, **Customize helix or braid** opens the shared editor in a modal. Changes are a draft until **Apply**, which creates one Undo step and marks existing sheets stale; Generate updates them. Cancel, Close and Escape leave the workspace unchanged. **Use original** removes the customization as an undoable edit. Switching to another decoration temporarily omits the design from the current request; switching back retains the applied custom design. The standalone editor remains available for SVG/PNG export and freehand drawing.
+
+### Original decorations
 
 - `dna`: the top line, a double helix and the bottom line are three boxes inside the tag. The cost (R's `place_rectangles_bfgs`) adds quadratic penalties for missing the inner box's width, exceeding its height, the helix being larger than the top line and the bottom row being narrower than it, plus truncated-normal negative log densities that prefer set ratios and a whole number of helix twists. BFGS with central-difference gradients minimises it from `restarts` starts. Each line is then stretched into its box. The helix's straight end underlines the bottom line, with gaps where that line's descenders cross it, and strands and base pairs are merged into one outline.
 - `none`: the two lines staggered (top flush left, bottom flush right) and scaled as a block to fit the tag.
