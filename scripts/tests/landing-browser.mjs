@@ -135,8 +135,10 @@ try {
   assert.ok(fills[0].every((/** @type {string} */ color, /** @type {number} */ i) => color !== fills[1][i]), 'section fills follow the theme');
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
-  assert.equal(await page.locator('.project-card').count(), 17);
+  assert.equal(await page.locator('.project-card').count(), 16);
   assert.equal(await page.locator('#projects > .grid').count(), 1);
+  assert.equal(await page.locator('#projects > .grid > li').first().getAttribute('data-category'), 'everyday');
+  assert.equal(await page.locator('[data-mosaic-key=helix]').count(), 0);
   assert.equal(await page.locator('#intro .tagline').textContent(), 'Tools for statistics, graphics, and everyday tasks.');
   assert.equal(await page.locator('.theme-links').count(), 0);
   assert.equal(await page.locator('#projects a[href="/forecast-calibration/"]').count(), 0);

@@ -116,7 +116,7 @@ test('mobile centre playback, sticky controls, saved pause and reduced motion', 
     const before = await times(art);
     assert.equal(Math.round((await page.locator('.mobile-bar').boundingBox()).y), 0, 'bar stays at viewport top');
     await button.tap(); assert.ok(await waitPaused(art));
-    assert.equal(await button.getAttribute('aria-pressed'), 'false');
+    assert.equal(await button.getAttribute('aria-checked'), 'false');
     const paused = await times(art);
     await page.waitForTimeout(120); assert.deepEqual(await times(art), paused);
     await button.tap(); await page.waitForTimeout(120);
@@ -125,12 +125,12 @@ test('mobile centre playback, sticky controls, saved pause and reduced motion', 
     const left = await times(art); await page.waitForTimeout(120); assert.deepEqual(await times(art), left);
     await centre('signature'); await page.waitForTimeout(120); assert.ok((await times(art))[0] > left[0]);
     await button.tap(); await page.reload();
-    assert.equal(await button.getAttribute('aria-pressed'), 'false', 'pause persists through reload');
+    assert.equal(await button.getAttribute('aria-checked'), 'false', 'pause persists through reload');
     assert.equal(await playing.count(), 0);
     await button.tap(); await page.waitForFunction(() => document.querySelector('[data-playing]'));
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.waitForFunction(() => !document.querySelector('[data-started]'));
-    assert.ok(await button.isDisabled()); assert.equal(await button.textContent(), 'Reduced motion');
+    assert.ok(await button.isDisabled()); assert.equal(await button.getAttribute('aria-checked'), 'false'); assert.match(await button.getAttribute('title'), /motion.*reduced/i);
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.waitForFunction(() => document.querySelectorAll('[data-playing]').length === 1);
     await page.setViewportSize({width: 844, height: 390});
@@ -218,4 +218,32 @@ test('autoCHAIR turns at agenda checkpoints, pauses, resumes and releases for re
     assert.equal(await art.getAttribute('data-started'), null);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
+});
+
+test('desktop sticky switches are keyboard operable and retain theme and motion choices', async () => {
+  const browser = await openPage('', {engine});
+  const {page,errors}=browser;
+  try {
+    const motion=page.getByRole('switch',{name:'Animations',exact:true});
+    const theme=page.getByRole('switch',{name:'Dark mode',exact:true});
+    assert.equal(await motion.getAttribute('aria-checked'),'true');
+    assert.equal(await theme.getAttribute('aria-checked'),'false');
+    await page.evaluate(()=>scrollTo(0,1000));
+    assert.equal(Math.round((await page.locator('.mobile-bar').boundingBox()).y),0);
+    await theme.focus();await page.keyboard.press('Space');
+    assert.equal(await theme.getAttribute('aria-checked'),'true');
+    assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
+    await motion.focus();await page.keyboard.press('Enter');
+    assert.equal(await motion.getAttribute('aria-checked'),'false');
+    await page.reload();
+    assert.equal(await theme.getAttribute('aria-checked'),'true');
+    assert.equal(await motion.getAttribute('aria-checked'),'false');
+    for(const width of [320,390,844,1440]){
+      await page.setViewportSize({width,height:900});
+      const bounds=await page.locator('.mobile-bar').evaluate((/** @type {HTMLElement} */ el)=>[...el.querySelectorAll('a,button')].map(e=>e.getBoundingClientRect().toJSON()));
+      assert.ok(bounds.every((/** @type {DOMRect} */ r)=>r.x>=0&&r.right<=width&&r.height>=32),`${width}: controls fit`);
+      assert.ok(bounds[1].height>=44&&bounds[2].height>=44,'switches have touch-sized targets');
+    }
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
 });

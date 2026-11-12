@@ -33,8 +33,12 @@
     const button = document.getElementById('theme-toggle');
     if (!button) return;
     const dark = root.dataset.theme === 'dark';
-    button.textContent = dark ? '☾ Dark' : '☀ Light';
-    button.setAttribute('aria-pressed', String(dark));
+    if (button.hasAttribute('data-light-switch')) {
+      button.setAttribute('aria-checked', String(dark));
+    } else {
+      button.textContent = dark ? '☾ Dark' : '☀ Light';
+      button.setAttribute('aria-pressed', String(dark));
+    }
     button.title = `Switch to the ${dark ? 'light' : 'dark'} theme`;
   }
 
@@ -47,12 +51,17 @@
 
   root.dataset.theme = current();
   system.addEventListener('change', () => { if (!chosen()) apply(current()); });
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     showToggle();
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const button = document.getElementById('theme-toggle');
+    const flip = () => {
       const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       try { localStorage.setItem(KEY, next); } catch { /* the choice just is not remembered */ }
       apply(next);
-    });
+    };
+    if (button instanceof HTMLButtonElement && button.hasAttribute('data-light-switch')) {
+      const { lightSwitch } = await import('./light-switch.js');
+      lightSwitch({ button, label: 'Dark mode', dark: () => root.dataset.theme === 'dark', flip });
+    } else button?.addEventListener('click', flip);
   });
 })();

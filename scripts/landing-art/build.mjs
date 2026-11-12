@@ -1,6 +1,6 @@
 // Draws the landing page's card pictures from the tools themselves.
 //   node scripts/landing-art/build.mjs            every card
-//   node scripts/landing-art/build.mjs helix seating   just these
+//   node scripts/landing-art/build.mjs signature seating   just these
 // Each module in cards/ exports `build()`, which returns the picture's SVG text; it is written
 // to assets/cards/<name>.svg, which assets/landing.js inlines into the card with data-art=<name>.
 import { readdirSync, writeFileSync } from 'node:fs';

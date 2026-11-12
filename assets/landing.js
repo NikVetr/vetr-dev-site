@@ -2,6 +2,7 @@
 import { drawClusters } from './landing-clusters.js';
 import { landingLayouts } from './landing-order.js';
 import { mountMosaic } from '../shared/mosaic.js';
+import { lightSwitch } from '../shared/light-switch.js';
 //
 // Card pictures: each .card-art[data-art=name] is filled with assets/cards/<name>.svg (drawn
 // by scripts/landing-art/ from the tool itself) when it comes near the viewport. The SVG is
@@ -23,6 +24,18 @@ let enabled = true;
 try { enabled = localStorage.getItem('vetr-preview-motion') !== 'off'; } catch { /* Storage may be unavailable. */ }
 let pageActive = true;
 const canPlay = () => enabled && !reducedMotion.matches && pageActive && !document.hidden;
+const motionSwitch = lightSwitch({
+  button: motionButton, label: 'Animations', dark: () => enabled && !reducedMotion.matches,
+  marks: [
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M17 5v14" stroke="currentColor" stroke-width="4"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 3 15 9-15 9Z" fill="currentColor"/></svg>',
+  ],
+  flip: () => {
+    enabled = !enabled;
+    try { localStorage.setItem('vetr-preview-motion', enabled ? 'on' : 'off'); } catch { /* Keep the in-memory choice. */ }
+    updatePlayback();
+  },
+});
 
 /** @param {HTMLElement} art */
 async function load(art) {
@@ -92,9 +105,8 @@ function updatePlayback() {
     if (!canPlay() || !active) { stop(state.art); continue; }
     if (!wanted.has(state.art)) { wanted.add(state.art); start(state.art); }
   }
-  motionButton.setAttribute('aria-pressed', String(enabled && !reducedMotion.matches));
+  motionSwitch.show();
   motionButton.disabled = reducedMotion.matches;
-  motionButton.textContent = reducedMotion.matches ? 'Reduced motion' : `Animations ${enabled ? 'on' : 'off'}`;
   motionButton.title = reducedMotion.matches ? 'Motion is reduced in your device settings' : 'Play or pause panel animations';
 }
 for (const state of cards) {
@@ -128,11 +140,6 @@ function scheduleSelection() {
 addEventListener('scroll', scheduleSelection, { passive: true });
 addEventListener('resize', scheduleSelection);
 mobile.addEventListener('change', scheduleSelection);
-motionButton.addEventListener('click', () => {
-  enabled = !enabled;
-  try { localStorage.setItem('vetr-preview-motion', enabled ? 'on' : 'off'); } catch { /* Keep the in-memory choice. */ }
-  updatePlayback();
-});
 reducedMotion.addEventListener('change', () => {
   if (reducedMotion.matches) for (const { art } of cards) reset(art);
   scheduleSelection();

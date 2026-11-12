@@ -91,28 +91,23 @@ body {
 .skip-link:focus-visible { translate: none; outline: 2px solid var(--primary); outline-offset: 2px; }
 #projects:focus { outline: none; }
 
-/* Compact collection navigation stays reachable while scrolling on touch screens. */
-.mobile-bar { display: flex; position: absolute; top: 1rem; right: var(--gutter-right); z-index: 10; }
-.mobile-bar > a { display: none; }
-.mobile-bar button {
-  min-height: 44px; padding: 0.35rem 0.5rem; border: 0;
-  background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; cursor: pointer;
+/* The same compact controls remain reachable on desktop and touch screens. */
+html { scroll-padding-top: calc(3rem + env(safe-area-inset-top)); }
+.mobile-bar {
+  --ink: var(--text); --line: var(--border); --accent: var(--primary); --surface-2: var(--surface);
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  position: sticky; top: 0; z-index: 10;
+  padding: env(safe-area-inset-top) var(--gutter-right) 0 var(--gutter-left);
+  background: var(--bg); border-bottom: 1px solid var(--border);
 }
-.mobile-bar button[aria-pressed="false"], .mobile-bar button:disabled { color: var(--muted); }
-.mobile-bar button:disabled { cursor: default; }
+.mobile-bar > a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 700; padding-block: .5rem; }
+.landing-switches { display: flex; align-items: center; gap: .35rem; }
+.mobile-bar .theme-switch { min-height: 44px; }
+.mobile-bar .theme-switch:disabled { opacity: .5; cursor: default; }
+.motion-label { font-size: .8rem; color: var(--muted); }
 .mobile-bar :focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 3px; }
-@media (min-width: 48rem) { .masthead { padding-right: max(10rem, var(--gutter-right)); } }
-@media (max-width: 47.99rem), (hover: none) and (pointer: coarse) {
-  html { scroll-padding-top: calc(3rem + env(safe-area-inset-top)); }
-  .mobile-bar {
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    position: sticky; top: 0; right: auto; z-index: 10;
-    padding: env(safe-area-inset-top) var(--gutter-right) 0 var(--gutter-left);
-    background: var(--bg); border-bottom: 1px solid var(--border);
-  }
-  .mobile-bar a { display: block; color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 700; padding-block: 0.5rem; }
-  .masthead h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-}
+.masthead h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 30rem) { .motion-label { display: none; } }
 
 /* ---------- Header: name and description ---------- */
 .site-header {
@@ -296,6 +291,8 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 
 /* Wide workflow drawings use their own proportions in content-height phone rows. */
 @media (max-width: 35.99rem), (orientation: landscape) and (max-height: 500px) {
+  .card-art[data-art="ceo-salary-benchmark"] { aspect-ratio: 8 / 7; }
+  .card-art[data-art="color-optimization"] { aspect-ratio: 16 / 9; }
   .card-art[data-art="signature"], .card-art[data-art="name-tags"] { aspect-ratio: 360 / 125; }
 }
 
