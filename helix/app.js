@@ -405,8 +405,10 @@ function reset(m) {
 }
 $('reset').addEventListener('click', () => reset(mode()));
 reset('helix');
+// Focusout checkpoints may run after pointerdown starts a stroke. Capture the
+// committed guide until pointerup; a partly drawn path is never an undo step.
 history = createHistory({
-  capture: () => ({ form: captureForm(document, { filter: (field) => !field.closest('#braid-colours') }), palette: [...braidPalette], points:pathPad.points.map(p=>/** @type {[number,number]} */([...p])), result }),
+  capture: () => ({ form: captureForm(document, { filter: (field) => !field.closest('#braid-colours') }), palette: [...braidPalette], points:(pathPad.before??pathPad.points).map(p=>/** @type {[number,number]} */([...p])), result }),
   equal: (a, b) => JSON.stringify([a.form, a.palette,a.points]) === JSON.stringify([b.form, b.palette,b.points]),
   restore: (saved) => {
     braidPalette = [...saved.palette];

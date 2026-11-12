@@ -22,11 +22,20 @@ test(`drawn path controls, real pointer stroke, history and exports work in ${en
   await page.locator('#redo').click();await page.waitForSelector('#issues:not([hidden])');
   await page.locator('#path-s').click();await page.waitForSelector('#issues[hidden]',{state:'attached'});
   assert.equal(await page.locator('#redo').isDisabled(),true);
+  const beforeStroke=await page.evaluate(()=>(/** @type {any} */(window)).Helix.getResult());
+  // Focus transfer from a form field queues its checkpoint during pointerdown.
+  await page.locator('#path-width').focus();
   const box=await page.locator('#path-pad').boundingBox();assert.ok(box);
   await page.mouse.move(box.x+box.width*.08,box.y+box.height*.65);await page.mouse.down();
   for(let i=1;i<=30;i++)await page.mouse.move(box.x+box.width*(.08+.84*i/30),box.y+box.height*(.65-.35*Math.sin(Math.PI*i/30)));
   await page.mouse.up();await page.waitForSelector('#issues[hidden]',{state:'attached'});
   assert.ok((await page.evaluate(()=>(/** @type {any} */(window)).Helix.getRequest().path.points.length))>=20);
+  const afterStroke=await page.evaluate(()=>(/** @type {any} */(window)).Helix.getResult());
+  await page.locator('#undo').click();
+  assert.deepEqual(await page.evaluate(()=>(/** @type {any} */(window)).Helix.getResult()),beforeStroke);
+  assert.equal(await page.locator('#issues').isVisible(),false);
+  await page.locator('#redo').click();
+  assert.deepEqual(await page.evaluate(()=>(/** @type {any} */(window)).Helix.getResult()),afterStroke);
   const exports=await page.evaluate(async()=>{const a=(/** @type {any} */(window)).Helix;const png=await a.exportPngBlob({width:400});return{svg:a.exportSvgText(),png:[png.type,png.size],request:a.getRequest()};});
   assert.ok(exports.svg.includes('<svg'));assert.equal(exports.png[0],'image/png');assert.ok(exports.png[1]>1000);
   // Native number editing remains native; app undo is reached from a button.
