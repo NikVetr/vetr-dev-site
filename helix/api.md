@@ -33,7 +33,7 @@ It also exports `HELIX_DEFAULTS`, `BRAID_DEFAULTS`, `OUTPUT_DEFAULTS` and `Helix
 | `load(request)` | Puts a request's settings into the page and draws it, returning the result. An invalid request throws a `HelixError` and leaves the page unchanged. |
 | `getRequest()` | The request the page's controls describe. |
 | `getResult()` | The result on display, or `null`. |
-| `exportSvgText(style)` | The SVG of the drawing on display in a style (`"filled"`, `"outline"` or `"strokes"`; default the preview's). |
+| `exportSvgText(style)` | The SVG of the current valid drawing (null while edits are invalid) in a style (`"filled"`, `"outline"` or `"strokes"`; default the preview's). |
 | `exportPngBlob({ width, background })` | A Promise of a PNG of the filled drawing, `width` pixels wide (default 2000), on `background` (a colour, or `null` for transparent; default the request's). |
 
 ## Request
@@ -85,6 +85,23 @@ It also exports `HELIX_DEFAULTS`, `BRAID_DEFAULTS`, `OUTPUT_DEFAULTS` and `Helix
 | `rotation` | `0` | Clockwise turn; at 0 the braid runs left to right. | the direction from `x0, y0` to `x1, y1` |
 
 The work grows as strands × (segments + |twists| × strands²); a request over 40,000 is rejected.
+
+**Drawn guide** (`path`, optional). Omit it or pass `null` for the exact original straight-mode result. A guide bends either design through one open path, using Signature's shared arc-length resampler and Fourier/wavelet smoother. It is an opt-in postprocessing step, not part of the original R algorithms.
+
+```json
+{"mode":"braid","path":{"points":[[0,0],[30,10],[60,0]],"length":100,"width":10,"smoothing":1}}
+```
+
+| Field | Default | Meaning |
+| --- | --- | --- |
+| `points` | required | 2–2048 finite `[x,y]` pairs, y up, each coordinate within ±1,000,000. Coordinates describe shape; translation and absolute scale do not affect the result. |
+| `length` | `100` | Smoothed centreline length in the output unit, more than 0, at most 1,000,000. |
+| `width` | `10` | Requested full band width in the output unit, with the same range. |
+| `smoothing` | `1` | Signature smoothing strength, 0–2. Zero retains the resampled drawn shape. |
+
+The guide sets orientation and final length/width; the mode's `rotation` is ignored while a guide is active. Other shape settings still control the original drawing before it is bent. The guide is resampled at 256 points, smoothed with its endpoints retained, and uniformly scaled to `length`. Source edges are subdivided before mapping through its tangent/normal frame. The full band width is capped at 1.6 times the minimum local radius and 0.8 times nonlocal clearance, then narrowed further if the checked envelope intersects itself (at most four retries). Degenerate, closed and crossing paths fail explicitly. A tight bend may produce a much thinner band; `geometry.path.width` reports the actual value. Filled/outline/strokes SVG and PNG all use this same geometry.
+
+For a drawn request, `geometry` contains `path` (smoothed points, checked envelope, length, requested/actual width, narrowed flag, smoothing and minimum radius), `fills` (colored groups of actual polygons) and `centerlines`. Coordinates are transformed into the SVG canvas. This replaces the straight generator's metadata for that request; scalar straight-strand widths would be misleading after bending. `designDrawing(normalizeRequest(request))` exposes the same raw drawing for uniformly fitted decorations such as Name Tags.
 
 **Output** (`output`):
 

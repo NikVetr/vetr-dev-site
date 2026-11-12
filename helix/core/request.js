@@ -19,8 +19,8 @@
  *   style: 'filled' | 'outline' | 'strokes', unit: 'mm' | 'in' | 'px', margin: number, background: string | null,
  *   strokeWidth: number | null, outlineWidth: number | null,
  * }} OutputSettings
- * @typedef {{ mode: 'helix', helix: HelixSettings, output: OutputSettings }
- *   | { mode: 'braid', braid: BraidSettings, output: OutputSettings }} Request
+ * @typedef {{ mode: 'helix', helix: HelixSettings, output: OutputSettings, path?: import('./path.js').PathSettings }
+ *   | { mode: 'braid', braid: BraidSettings, output: OutputSettings, path?: import('./path.js').PathSettings }} Request
  */
 
 export class HelixError extends Error {
@@ -97,7 +97,8 @@ export function normalizeRequest(request) {
     throw invalid([{ code: 'wrong_type', path: '', message: 'the request must be a JSON object' }]);
   }
   const top = new Fields(request, '', issues);
-  top.allow(['mode', 'helix', 'braid', 'output']);
+  top.allow(['mode', 'helix', 'braid', 'output', 'path']);
+  const path = !top.has('path') || top.raw('path') === null ? undefined : readPath(top.object('path'));
   const mode = top.choice('mode', ['helix', 'braid'], 'helix');
   const other = mode === 'helix' ? 'braid' : 'helix';
   if (Object.hasOwn(request, other)) {
@@ -107,11 +108,30 @@ export function normalizeRequest(request) {
   if (mode === 'helix') {
     const helix = readHelix(top.object('helix'), issues);
     if (issues.length) throw invalid(issues);
-    return { mode, helix, output };
+    return { mode, helix, output, ...(path ? { path } : {}) };
   }
   const braid = readBraid(top.object('braid'), issues);
   if (issues.length) throw invalid(issues);
-  return { mode, braid, output };
+  return { mode, braid, output, ...(path ? { path } : {}) };
+}
+
+/** Optional freehand guide; absent/null preserves the original generator exactly.
+ * @param {Fields} f @returns {import('./path.js').PathSettings}
+ */
+function readPath(f) {
+  f.allow(['points', 'length', 'width', 'smoothing']);
+  const raw = f.raw('points');
+  /** @type {[number, number][]} */ const points = [];
+  if (!Array.isArray(raw) || raw.length < 2 || raw.length > 2048) {
+    f.problem('invalid_points', 'points', 'must contain 2 to 2048 coordinate pairs');
+  } else {
+    raw.forEach((p, i) => {
+      if (!Array.isArray(p) || p.length !== 2 || p.some(v => typeof v !== 'number' || !Number.isFinite(v) || Math.abs(v) > 1e6)) {
+        f.problem('invalid_points', `points[${i}]`, 'must be two finite coordinates between -1000000 and 1000000');
+      } else points.push([p[0], p[1]]);
+    });
+  }
+  return { points, length: f.number('length', 100, {gt: 0, max: 1e6}), width: f.number('width', 10, {gt: 0, max: 1e6}), smoothing: f.number('smoothing', 1, {min: 0, max: 2}) };
 }
 
 /** @param {Fields} f @param {Issue[]} issues @returns {HelixSettings} */

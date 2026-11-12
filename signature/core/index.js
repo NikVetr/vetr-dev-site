@@ -12,7 +12,8 @@ import { morphFrames } from './morph.js';
 import { pathData, polygonBounds, ribbon, unionRings } from './outline.js';
 import { normalizeRequest, SignatureError } from './request.js';
 import { cumulativeLength, resampleStroke } from './resample.js';
-import { fourierSmoothSeries, waveletSmoothSeries } from './smooth.js';
+import { smoothPoints } from './smooth.js';
+export { smoothPoints } from './smooth.js';
 import { strokeWidths } from './width.js';
 
 export { DEFAULTS, MORPH_DEFAULTS, SignatureError } from './request.js';
@@ -55,22 +56,6 @@ export function localProfile(local, stroke, s) {
     for (const r of mine) if (share >= r.from && share <= r.to) k = r.strength;
     return k;
   });
-}
-
-/**
- * One stroke smoothed: each coordinate about its own mean (as hershey_vec.R
- * centres each stroke, so that the energy rule weighs the stroke's shape and
- * not where it sits), Fourier first, then wavelet with the local strength profile.
- * @param {Float64Array} x @param {Float64Array} y @param {Settings['smooth']} sm @param {Float64Array | undefined} profile
- */
-export function smoothPoints(x, y, sm, profile) {
-  const one = (/** @type {Float64Array} */ v) => {
-    const c = v.reduce((a, b) => a + b, 0) / v.length;
-    let u = fourierSmoothSeries(v.map((q) => q - c), sm.fourier.strength);
-    if (sm.wavelet.strength > 0) u = waveletSmoothSeries(u, sm.wavelet, profile);
-    return u.map((q) => q + c);
-  };
-  return { x: one(x), y: one(y) };
 }
 
 /** Width source for a signature: "auto" is speed when every point has a time, else curvature. @param {RawPoint[][]} sig @param {Settings} s */

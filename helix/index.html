@@ -36,6 +36,21 @@
         <label><input type="radio" name="mode" value="helix" checked> Helix</label>
         <label><input type="radio" name="mode" value="braid"> Braid</label>
       </fieldset>
+      <label class="guide-choice">Guide
+        <select id="guide-mode"><option value="straight">Straight</option><option value="drawn">Draw a path</option></select>
+      </label>
+      <div id="path-controls" hidden>
+        <p id="path-instructions" class="muted small">Draw one open line with a mouse or finger. Use a broad turn; crossings are rejected. Or start with a bend below.</p>
+        <p id="path-feedback" class="issues" role="alert" hidden></p>
+        <canvas id="path-pad" tabindex="0" aria-label="Draw a guide path" aria-describedby="path-instructions"></canvas>
+        <div class="toolbar"><button id="path-arc" type="button">Arc</button><button id="path-s" type="button">S bend</button><button id="path-clear" type="button">Clear path</button></div>
+        <div class="settings">
+          <label>Path length<input id="path-length" type="number" value="100" min="0.001" max="1000000" step="1"></label>
+          <label>Band width<input id="path-width" type="number" value="10" min="0.001" max="1000000" step="0.5"></label>
+          <label>Smoothing<input id="path-smoothing" type="range" value="1" min="0" max="2" step="0.05"></label>
+        </div>
+        <p class="muted small">Length and width use the output unit. The band narrows when needed to keep turns clean; the drawing reports its actual width.</p>
+      </div>
       <h3 class="first">Presets</h3>
       <div id="presets" class="toolbar presets"></div>
       <p class="muted small preset-hint">Presets replace the shape settings; size and lines stay unchanged.</p>
@@ -53,6 +68,7 @@
         <label><input type="radio" name="style" value="strokes"> Strokes</label>
       </fieldset>
       <div id="issues" class="issues" role="alert" hidden></div>
+      <p id="path-notice" class="stale-banner" role="status" hidden></p>
       <div id="result">
         <p id="stale" class="stale-banner" hidden></p>
         <figure id="preview" class="preview stale-dim" role="img" aria-label="The drawing"></figure>
@@ -200,6 +216,7 @@
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
+        <p><strong>Drawn paths.</strong> The guide is resampled and smoothed using the same tools as Signature. A single open path controls orientation, length and width. The band is capped at tight bends and nearby sections to avoid folded offsets. Self-crossing paths are rejected. Use broader turns for a thicker band; straight mode keeps the original geometry.</p>
         <p><strong>Helix.</strong> Two sine waves wind round a common axis, half a turn apart unless you set another phase. A strand is drawn wider where it is in front and narrower behind, so its width shows depth, and where the strands cross, the one behind is left out for a short stretch, so the one in front passes over it. Base pairs run from strand 1 towards strand 2, stopping short of it, and taper on the way. One strand or both can run on straight past the end. The drawing is then turned, scaled to the box and each piece outlined as a line of varying width.</p>
         <p><strong>Braid.</strong> Each strand swings from side to side across the braid's width, a fraction of a turn behind the one before, while turning in depth. The braid is cut across wherever two strands swap depth, so between two cuts the order from back to front is fixed, and each strand is painted over the ones behind it. What each strand shows is kept as one shape per strand, so the outline and the strokes follow what you see.</p>
         <p>The <a href="api.md">API</a> provides the same helix and braid designs and exports.</p>

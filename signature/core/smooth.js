@@ -94,3 +94,19 @@ export function fourierSmoothSeries(v, strength) {
   const back = dft(X.re, X.im, true).re;
   return Float64Array.from({ length: n }, (_, i) => back[i] / N);
 }
+
+/**
+ * One stroke smoothed: each coordinate about its own mean (as hershey_vec.R
+ * centres each stroke, so that the energy rule weighs the stroke's shape and
+ * not where it sits), Fourier first, then wavelet with the local strength profile.
+ * @param {Float64Array} x @param {Float64Array} y @param {{fourier:{strength:number},wavelet: Parameters<typeof waveletSmoothSeries>[1]}} sm @param {Float64Array | undefined} profile
+ */
+export function smoothPoints(x, y, sm, profile) {
+  const one = (/** @type {Float64Array} */ v) => {
+    const c = v.reduce((a, b) => a + b, 0) / v.length;
+    let u = fourierSmoothSeries(v.map((q) => q - c), sm.fourier.strength);
+    if (sm.wavelet.strength > 0) u = waveletSmoothSeries(u, sm.wavelet, profile);
+    return u.map((q) => q + c);
+  };
+  return { x: one(x), y: one(y) };
+}
