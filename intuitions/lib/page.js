@@ -193,9 +193,9 @@ export function workerRunner() {
  * `speeds` the choices, as [value, label] with the default marked by a third entry true.
  * @param {string} id
  * @param {{ max: () => number, seconds: number | (() => number), discrete?: boolean, label: string, format: (t: number, max: number) => string, onTime: (t: number) => void,
- *   speeds?: [number, string, boolean?][], speedLabel?: string }} options
+ *   speeds?: [number, string, boolean?][], speedLabel?: string, sliderStep?: 'any' }} options
  */
-export function playback(id, { max, seconds, discrete = false, label, format, onTime, speeds = [[0.5, '½×'], [1, '1×', true], [2, '2×']], speedLabel = 'Speed' }) {
+export function playback(id, { max, seconds, discrete = false, label, format, onTime, speeds = [[0.5, '½×'], [1, '1×', true], [2, '2×']], speedLabel = 'Speed', sliderStep }) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const box = /** @type {HTMLElement} */ (document.getElementById(`${id}-playback`));
   box.innerHTML = `
@@ -219,7 +219,7 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
   const show = () => {
     const m = max();
     slider.max = String(m);
-    slider.step = discrete ? '1' : String(m / 500);
+    slider.step = discrete ? '1' : sliderStep ?? String(m / 500);
     slider.value = String(t);
     out.textContent = format(t, m);
     play.setAttribute('aria-pressed', String(playing));
@@ -280,6 +280,9 @@ export function playback(id, { max, seconds, discrete = false, label, format, on
   });
   return {
     get time() { return t; },
+    pause: stop,
+    /** An explicit teaching step has the same pause/history behavior as a scrub. @param {number} value */
+    seek(value) { stop(); manualTime = value; set(value); },
     /** After a new result: stop, and show the whole run. */
     reset() { stop(); manualTime = null; t = max(); show(); },
     show,

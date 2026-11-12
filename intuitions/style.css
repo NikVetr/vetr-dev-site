@@ -8,6 +8,7 @@
 /* Light: the warm paper plane over the shared tokens. Dark uses the shared tokens as they are. */
 :root {
   --bg: #f6f5f1;
+  --prose-width: 42rem;
   --surface-2: #f3f2ee;
   --border: #e2e0da;
   --faint: #8a8984;
@@ -87,7 +88,7 @@ var, .math { font-family: var(--serif); font-style: italic; }
 .entry-head { padding: 1.6rem 0 0.4rem; }
 .lede {
   margin: 0.6rem 0 0;
-  max-width: 72ch;
+  max-width: var(--prose-width);
   font-family: var(--serif);
   font-size: 1.12rem;
   line-height: 1.55;
@@ -194,7 +195,7 @@ input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: var(--prim
 figure { margin: 0; }
 .figure-head { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; align-items: baseline; justify-content: space-between; margin-bottom: 0.4rem; }
 .figure-head h2 { margin: 0; font-size: 1.12rem; }
-figcaption, .caption { margin: 0.1rem 0 0.5rem; max-width: 75ch; color: var(--muted); font-size: 0.92rem; }
+figcaption, .caption { margin: 0.1rem 0 0.5rem; max-width: var(--prose-width); color: var(--muted); font-size: 0.92rem; }
 .plot-box { position: relative; width: 100%; min-width: 0; touch-action: pan-y; }
 .plot-box svg { display: block; max-width: 100%; height: auto; }
 .plot-box.scrub { cursor: ew-resize; }
@@ -266,7 +267,7 @@ figcaption, .caption { margin: 0.1rem 0 0.5rem; max-width: 75ch; color: var(--mu
 
 /* ---------- Readouts ---------- */
 
-.readout { margin: 0.2rem 0 0.6rem; max-width: 75ch; font-family: var(--serif); font-size: 1.05rem; }
+.readout { margin: 0.2rem 0 0.6rem; max-width: var(--prose-width); font-family: var(--serif); font-size: 1.05rem; }
 .table-wrap { overflow-x: auto; }
 table.numbers { width: 100%; border-collapse: collapse; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
 table.numbers th, table.numbers td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--grid); text-align: right; vertical-align: top; }
@@ -299,8 +300,9 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 /* ---------- Prose notes ---------- */
 
 .notes { margin-top: 1.5rem; }
-.notes .prose { columns: 2 22rem; column-gap: 2.5rem; }
-.prose p, .prose li { font-family: var(--serif); font-size: 1.04rem; line-height: 1.6; max-width: 70ch; }
+.notes .prose { columns: auto; }
+.entry-head > .note, .prose ul, .prose ol { max-width: var(--prose-width); }
+.prose p, .prose li { font-family: var(--serif); font-size: 1.04rem; line-height: 1.6; max-width: var(--prose-width); }
 .prose p { margin: 0 0 0.8rem; break-inside: avoid; }
 .prose h3 { break-after: avoid; }
 .prose h3:first-child { margin-top: 0; }
@@ -351,7 +353,7 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .calibration-marker { fill: #c62828; stroke: var(--surface-2); stroke-width: 1; }
 :root[data-theme="dark"] .calibration-observed { stroke: #ff6b6b; }
 :root[data-theme="dark"] .calibration-marker { fill: #ff6b6b; }
-.intro { max-width: 72ch; }
+.intro { max-width: var(--prose-width); }
 .first-figure-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 0.4rem; color: var(--primary); font: 600 0.95rem var(--sans); text-underline-offset: 3px; }
 .plot-box[tabindex="-1"] { scroll-margin-top: 3rem; }
 .plot-box[tabindex="-1"]:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
@@ -375,7 +377,7 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
   color: var(--primary);
   font: 600 0.95rem/1 var(--sans);
 }
-.panel-intro { margin: 0 0 0.9rem; max-width: 78ch; font-family: var(--serif); font-size: 1.04rem; line-height: 1.6; }
+.panel-intro { margin: 0 0 0.9rem; max-width: var(--prose-width); font-family: var(--serif); font-size: 1.04rem; line-height: 1.6; }
 .panel-body { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
 @media (min-width: 900px) {
   .panel-body { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 1.6rem; }
@@ -792,3 +794,26 @@ dl.stats dd small.sim-line { display: block; }
 .plot .box.current { stroke: var(--ink); stroke-width: 2.4; }
 .plot .box-order { fill: var(--text); font-size: 9.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .plot .coin-label.small { font-size: 9.5px; }
+
+/* The HMC energy panel uses the same recorded transition as the path. */
+#funnel-row.has-space #funnel-energy-block { grid-column: 1 / -1; }
+.integration-detail { margin: 1rem 0; padding-top: .8rem; border-top: 1px solid var(--border); }
+.integration-detail h3 { margin: 0 0 .4rem; }
+.integration-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: .7rem 0; }
+.integration-controls label { display: inline-flex; align-items: center; gap: .4rem; }
+.integration-controls input { width: 6rem; }
+.integration-detail > input[type="range"] { width: 100%; }
+.integration-detail > label { display: block; font-size: .9rem; }
+.integration-phases { display: grid; gap: .4rem; padding: 0; list-style: none; margin: .7rem 0; }
+.integration-phases li { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .45rem .6rem; }
+.integration-phases li[aria-current="step"] { border-color: var(--primary); background: var(--surface-2); box-shadow: inset 3px 0 var(--primary); }
+.integration-phases strong, .integration-phases span { display: block; }
+.integration-phases span { font-size: .88rem; }
+.integration-components { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .5rem; margin: .7rem 0; }
+.integration-components dt { color: var(--muted); font-size: .82rem; }
+.integration-components dd { margin: .2rem 0 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.plot .energy-start { stroke: var(--muted); stroke-width: 1; }
+.plot .energy-threshold { stroke: var(--alert); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.plot .energy-threshold-label { fill: var(--alert); font-size: 11px; }
+.plot .energy-path { fill: none; stroke: var(--a); stroke-width: 2; }
+.plot .energy-point { fill: var(--a); stroke: var(--surface); stroke-width: 1; }

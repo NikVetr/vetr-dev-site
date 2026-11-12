@@ -1,0 +1,61 @@
+{
+  "revision": "f2c64b8044d84b24f2dda55fd91494bef18c411c",
+  "note": "Digests of complete pre-diagnostic results; exclude only additive integration metadata when checking.",
+  "cases": [
+    {
+      "params": {
+        "view": "funnel",
+        "iterations": 120,
+        "seed": 1
+      },
+      "sha256": "b65263207f351b23183bd48ab06c5120f22deeacdb1a803e9a59118ef2b4ea9a"
+    },
+    {
+      "params": {
+        "view": "funnel",
+        "coordinates": "non-centred",
+        "iterations": 50,
+        "seed": 2
+      },
+      "sha256": "548ec16c85d7bf9c5fde8c6b7402130c1ef0457d39983c19de03eda3096bce25"
+    },
+    {
+      "params": {
+        "view": "funnel",
+        "coordinates": "quantile",
+        "iterations": 50,
+        "seed": 3
+      },
+      "sha256": "d99bea32263162ae5a530e21b8835383889ab046433f324e1d33200f5ed04b5b"
+    },
+    {
+      "params": {
+        "view": "target",
+        "target": "normal",
+        "sampler": "hmc",
+        "iterations": 50,
+        "seed": 4
+      },
+      "sha256": "2fcce7390e2b7689744fd97944cecf3e907d7b1385d744d6d16854fc13d35c29"
+    },
+    {
+      "params": {
+        "view": "funnel",
+        "sampler": "rwm",
+        "iterations": 50,
+        "seed": 5
+      },
+      "sha256": "04ebf182ec1fa3165fae76dfa504aff523fd601e5a05e19c8f9d3c4cd91d1937"
+    },
+    {
+      "params": {
+        "view": "target",
+        "target": "normal",
+        "sampler": "gibbs",
+        "iterations": 50,
+        "seed": 6
+      },
+      "sha256": "ae066069be295f96578a0ae5664498f36ae8999691741467666c34cad5382fd0"
+    }
+  ]
+}

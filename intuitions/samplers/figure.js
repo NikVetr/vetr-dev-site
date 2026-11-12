@@ -6,6 +6,7 @@
 // the wrong Hastings ratio settles is orange and dashed.
 
 import { axisBottom, axisLeft, el, isoline, linePath, marker, niceTicks, r2, scaleLinear, svgRoot, text } from '../lib/plot.js';
+import { DIVERGENCE, integrationPart } from './compute.js';
 
 /** @typedef {[number, number]} Point */
 /** @typedef {import('../lib/plot.js').Scale} Scale */
@@ -101,7 +102,7 @@ const tick = (v) => String(v).replace(/^-/, '−');
  * The moving part: the path through the first `i + 1` states, then iteration i's move,
  * drawn up to `fraction` of the way (a leapfrog trajectory step by step, or the proposal),
  * divergent transitions so far as ×, and the current state.
- * @param {{ a: ArrayLike<number>, b: ArrayLike<number>, accepted: ArrayLike<number>, divergent: number[], trajectories: number[][] | null, proposals: { a: ArrayLike<number>, b: ArrayLike<number> } | null }} chain
+ * @param {{ a: ArrayLike<number>, b: ArrayLike<number>, accepted: ArrayLike<number>, divergent: number[], trajectories: number[][] | null, proposals: { a: ArrayLike<number>, b: ArrayLike<number> } | null, substeps?:boolean }} chain
  * @param {Scale} x @param {Scale} y @param {number} t iterations shown (fractional: partway through the next)
  */
 export function chainLayer(chain, x, y, t) {
@@ -127,13 +128,14 @@ export function chainLayer(chain, x, y, t) {
     if (chain.trajectories) {
       const path = chain.trajectories[i];
       const steps = path.length / 2 - 1;
-      const shown = Math.max(1, Math.ceil(fraction * steps));
+      const part = integrationPart(steps,fraction);
+      const shown = chain.substeps ? Math.floor((part+1)/3) : Math.max(1, Math.ceil(fraction * steps));
       /** @type {Point[]} */
       const tp = [];
       for (let s = 0; s <= shown; s++) tp.push([x(path[2 * s]), y(path[2 * s + 1])]);
       parts.push(el('path', { d: linePath(tp), class: `trajectory${ok ? '' : ' rejected'}` }));
       const end = tp[tp.length - 1];
-      if (shown === steps) parts.push(diverged ? cross(end[0], end[1], 'divergent-mark') : marker('circle', end[0], end[1], 4, ok ? 'move-mark' : 'move-hollow'));
+      if (shown === steps && (!chain.substeps || part === steps*3)) parts.push(diverged ? cross(end[0], end[1], 'divergent-mark') : marker('circle', end[0], end[1], 4, ok ? 'move-mark' : 'move-hollow'));
     } else if (chain.proposals) {
       const px = x(chain.proposals.a[i]);
       const py = y(chain.proposals.b[i]);
@@ -143,6 +145,37 @@ export function chainLayer(chain, x, y, t) {
   }
   parts.push(marker('circle', cx, cy, 5.5, 'current-mark'));
   return parts.join('');
+}
+
+/** Total energy is checked only at completed leapfrog steps. Keep the real
+ * divergence threshold visible; explicitly mark values outside the displayed axis.
+ * @param {number[]} energy @param {{width:number,height:number,steps:number,completed:number,id:string}} options
+ */
+export function energyFigure(energy, {width,height,steps,completed,id}) {
+  const h0=energy[0],left=48,right=12,top=32,bottom=42;
+  const label='Total Hamiltonian energy after each completed leapfrog step; dashed line H₀ + 1000 is the divergence threshold.';
+  if(!Number.isFinite(h0))return svgRoot({width,height,label},text(12,35,'Initial energy is not finite.',{class:'axis-label'}));
+  const x=scaleLinear([0,steps],[left,width-right]);
+  const y=scaleLinear([-80,1200],[height-bottom,top]);
+  const parts=[axisLeft({scale:y,x:left,ticks:[0,500,1000],format:v=>tick(Number((h0+v).toPrecision(4))),gridTo:width-right}),
+    axisBottom({scale:x,y:height-bottom,ticks:niceTicks(0,steps,width<300?3:5),format:tick,label:'leapfrog step',labelGap:34}),
+    text(left,15,'Total energy H',{class:'axis-label','text-anchor':'start'}),
+    el('line',{x1:left,x2:width-right,y1:y(0),y2:y(0),class:'energy-start'}),
+    el('line',{x1:left,x2:width-right,y1:y(DIVERGENCE),y2:y(DIVERGENCE),class:'energy-threshold','data-threshold':h0+DIVERGENCE}),
+    text(left+4,y(DIVERGENCE)-7,'H₀ + 1000',{class:'energy-threshold-label','text-anchor':'start'})];
+  const shown=Math.min(completed,energy.length-1);
+  /** @type {Point[]} */const points=[];
+  for(let i=0;i<=shown;i++){
+    const delta=energy[i]-h0;
+    points.push([x(i),y(Number.isFinite(delta)?Math.max(-80,Math.min(1200,delta)):1200)]);
+  }
+  parts.push(el('path',{d:linePath(points),class:'energy-path'}));
+  for(const [px,py]of points)parts.push(marker('circle',px,py,2.8,'energy-point'));
+  const last=energy[shown]-h0;
+  if(!Number.isFinite(last)||last>1200||last< -80){
+    parts.push(text(width-right,top-7,Number.isFinite(last)?`${last<0?'↓':'↑'} off scale`:'non-finite',{class:'energy-threshold-label','text-anchor':'end'}));
+  }
+  return svgRoot({width,height,label},el('g',{'data-h0':h0,'data-completed':shown,id},...parts));
 }
 
 /** An × marker. @param {number} px @param {number} py @param {string} cls */

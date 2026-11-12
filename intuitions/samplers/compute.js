@@ -434,10 +434,57 @@ export function ksDistance(draws, cdf) {
 
 // ---------- Samplers ----------
 
+/** One leapfrog step, shared by the sampler and its on-demand teaching replay.
+ * @param {Space} space @param {Point} q @param {Point} p @param {Point} g @param {number} step
+ * @param {(phase:'momentum-first'|'position'|'momentum-last',q:Point,p:Point,g:Point)=>void} [visit]
+ */
+function leapfrogStep(space, q, p, g, step, visit) {
+  p = [p[0] + 0.5 * step * g[0], p[1] + 0.5 * step * g[1]];
+  visit?.('momentum-first', q, p, g);
+  q = [q[0] + step * p[0], q[1] + step * p[1]];
+  g = space.gradient(q);
+  visit?.('position', q, p, g);
+  p = [p[0] + 0.5 * step * g[0], p[1] + 0.5 * step * g[1]];
+  visit?.('momentum-last', q, p, g);
+  return { q, p, g };
+}
+
+/** A fractional transition includes the start and all three parts of each step.
+ * @param {number} steps @param {number} fraction */
+export function integrationPart(steps, fraction) {
+  return Math.min(3 * steps, Math.max(0, Math.floor(fraction * (3 * steps + 1))));
+}
+
+/** Replay only the inspected transition, using its recorded initial momentum.
+ * The same arithmetic supplies the sampler's steps; no randomness is generated.
+ * @param {Params} params @param {{trajectories:number[][],integration:{momentum:number[]}}} result
+ * @param {number} transition zero-based
+ */
+export function integrationStages(params, result, transition) {
+  const path = result.trajectories?.[transition];
+  if (!Number.isInteger(transition) || transition < 0 || !path || !result.integration) throw new Error('An HMC transition is required');
+  const space = spaceOf(params);
+  let q = /** @type {Point} */ ([path[0], path[1]]);
+  let p = /** @type {Point} */ (result.integration.momentum.slice(2 * transition, 2 * transition + 2));
+  if (p.length !== 2 || ![...q,...p].every(v=>typeof v==='number')) throw new Error('Recorded initial position and momentum must contain numbers');
+  let g = space.gradient(q);
+  /** @type {{phase:string,step:number,q:Point,p:Point,gradient:Point,potential:number,kinetic:number,total:number,checked:boolean}[]} */
+  const stages = [];
+  const record = (/** @type {string} */ phase, /** @type {number} */ step, /** @type {Point} */ q, /** @type {Point} */ p, /** @type {Point} */ g) => {
+    const potential = -space.logDensity(q), kinetic = 0.5 * (p[0] * p[0] + p[1] * p[1]);
+    stages.push({ phase, step, q, p, gradient:g, potential, kinetic, total:potential + kinetic, checked:phase === 'start' || phase === 'momentum-last' });
+  };
+  record('start', 0, q, p, g);
+  for (let step = 1; step < path.length / 2; step++) {
+    ({q,p,g} = leapfrogStep(space, q, p, g, params.step, (phase,q,p,g) => record(phase,step,q,p,g)));
+  }
+  return stages;
+}
+
 /**
  * Runs a chain. Every state, proposal and leapfrog position is in the sampler's
- * coordinates. A divergent HMC transition stops where its energy error passes 1000 (or
- * stops being finite) and is rejected.
+ * coordinates. HMC stops and rejects a divergent transition when its signed energy
+ * increase fails the comparison H − H₀ <= 1000.
  * @param {Space} space
  * @param {{ sampler: Sampler | 'multiplier', step: number, leapfrog?: number, iterations: number, start: Point, seed: number,
  *   correction?: Correction, gibbs?: (rng: () => number, p: Point, coordinate: number) => Point, store?: boolean }} spec
@@ -452,6 +499,7 @@ export function runChain(space, spec) {
   const proposals = store && sampler !== 'gibbs' && sampler !== 'hmc' ? { a: new Float64Array(iterations), b: new Float64Array(iterations) } : null;
   /** @type {Float64Array[] | null} */
   const paths = store && sampler === 'hmc' ? [] : null;
+  const integration = paths ? { momentum:new Float64Array(2 * iterations), energy:/** @type {Float64Array[]} */ ([]) } : null;
   /** @type {number[]} */
   const divergent = [];
   let current = /** @type {Point} */ ([spec.start[0], spec.start[1]]);
@@ -467,6 +515,8 @@ export function runChain(space, spec) {
       let q = /** @type {Point} */ ([current[0], current[1]]);
       let p = /** @type {Point} */ ([standardNormal(rng), standardNormal(rng)]);
       const h0 = -logP + 0.5 * (p[0] * p[0] + p[1] * p[1]);
+      const energy = integration ? new Float64Array(L + 1) : null;
+      if (integration && energy) { integration.momentum[2*i] = p[0]; integration.momentum[2*i+1] = p[1]; energy[0] = h0; }
       const path = paths ? new Float64Array(2 * (L + 1)) : null;
       if (path) { path[0] = q[0]; path[1] = q[1]; }
       let g = space.gradient(q);
@@ -475,20 +525,19 @@ export function runChain(space, spec) {
       let diverged = false;
       let h = h0;
       for (let s = 0; s < L; s++) {
-        p = [p[0] + 0.5 * step * g[0], p[1] + 0.5 * step * g[1]];
-        q = [q[0] + step * p[0], q[1] + step * p[1]];
-        g = space.gradient(q);
+        ({q,p,g} = leapfrogStep(space, q, p, g, step));
         gradients++;
-        p = [p[0] + 0.5 * step * g[0], p[1] + 0.5 * step * g[1]];
         steps = s + 1;
         if (path) { path[2 * steps] = q[0]; path[2 * steps + 1] = q[1]; }
         h = -space.logDensity(q) + 0.5 * (p[0] * p[0] + p[1] * p[1]);
+        if (energy) energy[steps] = h;
         if (!(h - h0 <= DIVERGENCE)) {
           diverged = true;
           break;
         }
       }
       if (paths && path) paths.push(path.slice(0, 2 * (steps + 1)));
+      if (integration && energy) integration.energy.push(energy.slice(0, steps + 1));
       const u = rng();
       if (diverged) {
         divergent.push(i);
@@ -517,7 +566,7 @@ export function runChain(space, spec) {
     a[i + 1] = current[0];
     b[i + 1] = current[1];
   }
-  return { a, b, accepted, proposals, paths, divergent, gradients };
+  return { a, b, accepted, proposals, paths, divergent, gradients, integration };
 }
 
 /** MCMC_Demo.R's Gibbs step: one coordinate redrawn from its conditional. @param {() => number} rng @param {Point} p @param {number} k @returns {Point} */
@@ -588,6 +637,7 @@ export function compute(params) {
     accepted: Array.from(chain.accepted),
     proposals: chain.proposals ? { a: Array.from(chain.proposals.a), b: Array.from(chain.proposals.b) } : null,
     trajectories: chain.paths ? chain.paths.map((path) => Array.from(path)) : null,
+    integration: chain.integration ? { threshold:DIVERGENCE, momentum:Array.from(chain.integration.momentum), energy:chain.integration.energy.map(e=>Array.from(e)) } : null,
     divergent: chain.divergent,
     stats,
   };

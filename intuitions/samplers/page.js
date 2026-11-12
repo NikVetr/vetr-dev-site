@@ -6,8 +6,8 @@ import { formatNumber, formatShare } from '../lib/format.js';
 import { bindPair, installApi, integerField, onWidth, playback, setInvalid, workerRunner } from '../lib/page.js';
 import { IntuitionsError } from '../lib/params.js';
 import { swatch } from '../lib/plot.js';
-import { DEFAULTS, ENTRY, funnelSpace, logNormalDensity, marginalDensities, normalSpace, resolveParams, smileySpace, STEPS, VIEWS } from './compute.js';
-import { chainFigure, chainLayer, histogramFigure, settledContours, traceFigure } from './figure.js';
+import { DEFAULTS, DIVERGENCE, ENTRY, funnelSpace, integrationPart, integrationStages, logNormalDensity, marginalDensities, normalSpace, resolveParams, smileySpace, STEPS, VIEWS } from './compute.js';
+import { chainFigure, chainLayer, energyFigure, histogramFigure, settledContours, traceFigure } from './figure.js';
 
 /** @typedef {import('./compute.js').View} View */
 /** @typedef {[number, number]} Point */
@@ -108,14 +108,17 @@ const RENDER = {
     const { params: p, result: r } = entry;
     const centred = p.coordinates === 'centred';
     $('funnel-space-block').hidden = centred;
-    $('funnel-row').classList.toggle('single', centred);
-    const target = { a: r.draws.x, b: r.draws.y, accepted: r.accepted, divergent: r.divergent, trajectories: centred ? r.trajectories : null, proposals: centred ? r.proposals : null };
+    $('funnel-row').classList.toggle('single', centred && !r.integration);
+    $('funnel-row').classList.toggle('has-space', !centred);
+    $('funnel-energy-block').hidden = !r.integration;
+    $('funnel-integration').hidden = !r.integration;
+    const target = { a: r.draws.x, b: r.draws.y, accepted: r.accepted, divergent: r.divergent, trajectories: centred ? r.trajectories : null, proposals: centred ? r.proposals : null, substeps:true };
     drawChain('funnel-target', { domain: domainOf(p), walls: 0, xLabel: 'x', yLabel: 'y', tall: true, label: `Neal's funnel with σ = ${p.sdY}, and the chain's path through it.` }, target);
     if (!centred) {
       const [xl, yl] = LABELS[/** @type {'non-centred' | 'quantile'} */ (p.coordinates)];
       $('funnel-space-title').textContent = p.coordinates === 'quantile' ? 'Where the sampler moves: the quantiles, on the logit scale' : 'Where the sampler moves: two standard normals';
       drawChain('funnel-space', { domain: domainOf(p, true), logDensity: funnelSpace(p.coordinates, p.sdY).logDensity, xLabel: xl, yLabel: yl, tall: true, label: `The funnel in ${p.coordinates} coordinates, a round target, and the chain's path through it.` },
-        { a: r.space.a, b: r.space.b, accepted: r.accepted, divergent: r.divergent, trajectories: r.trajectories, proposals: r.proposals });
+        { a: r.space.a, b: r.space.b, accepted: r.accepted, divergent: r.divergent, trajectories: r.trajectories, proposals: r.proposals, substeps:true });
     }
     legend('funnel', r);
     describe('funnel');
@@ -159,6 +162,7 @@ function showTime(v, t) {
   if (v === 'funnel') {
     moveChain('funnel-target', t);
     if (p.coordinates !== 'centred') moveChain('funnel-space', t);
+    showIntegration(t);
     const q = r.exact.y.quantiles;
     const range = /** @type {[number, number]} */ ([-3.2 * p.sdY, 3.2 * p.sdY]);
     drawInto('funnel-trace', (w) => traceFigure(r.draws.y, { width: w, height: 200, t, range, id: 'funnel-trace', yLabel: 'y', quantiles: [{ value: q.q05, label: '5%' }, { value: q.q50, label: '50%' }, { value: q.q95, label: '95%' }], label: 'The chain\'s y at each iteration, against y\'s exact 5%, 50% and 95% quantiles.' }));
@@ -173,6 +177,49 @@ function showTime(v, t) {
     drawInto('target-hist-x', (w) => histogramFigure(r.draws.x, { width: w, height: 190, t, range: domain.x, density: dens.x, xLabel: 'x', label: 'A histogram of the chain\'s x so far, against its exact marginal density.' }));
     drawInto('target-hist-y', (w) => histogramFigure(r.draws.y, { width: w, height: 190, t, range: domain.y, density: dens.y, xLabel: 'y', label: 'A histogram of the chain\'s y so far, against its exact marginal density.' }));
   }
+}
+
+/** Only the currently inspected transition needs detailed substep objects. */
+let inspection = { result:/** @type {any} */ (null), transition:-1, stages:/** @type {ReturnType<typeof integrationStages>} */ ([]) };
+/** @param {number} t */
+function integrationAt(t) {
+  const entry=results.funnel;
+  if(!entry?.result.integration)return null;
+  const {params:p,result:r}=entry,n=r.accepted.length;
+  const transition=Math.min(n-1,Math.floor(t));
+  if(inspection.result!==r||inspection.transition!==transition)inspection={result:r,transition,stages:integrationStages(p,r,transition)};
+  const steps=(inspection.stages.length-1)/3;
+  const part=integrationPart(steps,t>=n?1:t-transition);
+  return {p,r,transition,steps,part,stage:inspection.stages[part]};
+}
+const componentNumber=(/** @type {number} */ v)=>Number.isFinite(v)?num(v,3):Number.isNaN(v)?'undefined':v<0?'−∞':'∞';
+/** @param {number} t */
+function showIntegration(t) {
+  const current=integrationAt(t);if(!current)return;
+  const {p,r,transition,steps,part,stage}=current;
+  const h0=r.integration.energy[transition][0],delta=stage.total-h0;
+  input('funnel-transition').max=String(r.accepted.length);
+  input('funnel-transition').value=String(transition+1);
+  setInvalid(input('funnel-transition'),false);
+  input('funnel-part').max=String(steps*3);input('funnel-part').value=String(part);
+  const phaseNames={'start':'Draw standard-normal momentum','momentum-first':'First momentum half-step','position':'Position and new gradient','momentum-last':'Second momentum half-step and energy check'};
+  $('funnel-part-out').textContent=`${part} of ${steps*3} · ${phaseNames[/** @type {keyof typeof phaseNames} */(stage.phase)]}`;
+  input('funnel-part').setAttribute('aria-valuetext', /** @type {string} */ ($('funnel-part-out').textContent));
+  $('funnel-integration').dataset.phase=stage.phase;
+  for(const li of /** @type {NodeListOf<HTMLElement>} */($('funnel-integration').querySelectorAll('[data-integration-phase]'))){
+    if(li.dataset.integrationPhase===stage.phase)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');
+  }
+  const pair=(/** @type {Point} */ q)=>`(${q.map(componentNumber).join(', ')})`;
+  $('funnel-components').innerHTML=[stat('Sampler position q',pair(stage.q)),stat('Momentum p',pair(stage.p)),stat('Gradient ∇log π(q)',pair(stage.gradient)),stat('Potential U = −log π(q)',componentNumber(stage.potential)),stat('Kinetic K = ½pᵀp',componentNumber(stage.kinetic)),stat('Total H = U + K',componentNumber(stage.total))].join('');
+  const completed=Math.floor(part/3),last=part===steps*3;
+  $('funnel-energy-readout').textContent=stage.phase==='start'?`Transition ${transition+1}: H₀ = ${componentNumber(h0)}. The dashed line is H₀ + 1000.`
+    :!stage.checked?`Leapfrog step ${stage.step} of ${p.leapfrog}: partial update; energy is not checked yet.`
+    :!(delta<=DIVERGENCE)?`Divergence at step ${stage.step}: ${Number.isFinite(delta)?`H − H₀ = ${componentNumber(delta)} > 1000`:'the energy comparison is not finite'}. Stop and reject; keep the previous chain state.`
+    :`Step ${stage.step}: H − H₀ = ${componentNumber(delta)} ≤ 1000.${last?` Metropolis decision: ${r.accepted[transition]?'accept':'reject'} the proposed endpoint.`:' Continue the trajectory.'}`;
+  /** @type {HTMLButtonElement} */($('funnel-previous-part')).disabled=part===0;
+  /** @type {HTMLButtonElement} */($('funnel-next-part')).disabled=part===steps*3;
+  /** @type {HTMLButtonElement} */($('funnel-inspect-divergence')).disabled=r.divergent.length===0;
+  drawInto('funnel-energy',width=>energyFigure(r.integration.energy[transition],{width,height:260,steps:p.leapfrog,completed,id:'funnel-energy-plot'}));
 }
 
 /** The readout and the numbers. @param {View} v */
@@ -232,8 +279,27 @@ const players = Object.fromEntries(VIEWS.map((v) => [v, playback(v, {
   format: (t) => `${count(Math.floor(t))} of ${count(results[v]?.params.iterations ?? 0)}`,
   onTime: (t) => showTime(v, t),
   speedLabel: 'Speed',
-  speeds: [[1, '5 a second'], [5, '25 a second', true], [25, '125 a second'], [200, '1,000 a second']],
+  sliderStep:v==='funnel'?'any':undefined,
+  speeds:/** @type {[number,string,boolean?][]} */([...(v==='funnel'?[[.01,'Slow detail']]:[]),[1, '5 a second'], [5, '25 a second', true], [25, '125 a second'], [200, '1,000 a second']]),
 })]));
+
+/** @param {number} transition @param {number} part */
+function seekPart(transition,part) {
+  const r=results.funnel?.result;if(!r?.integration)return;
+  const steps=r.trajectories[transition].length/2-1;
+  players.funnel.seek(transition+(Math.max(0,Math.min(steps*3,part))+.5)/(steps*3+1));
+}
+$('funnel-previous-part').addEventListener('click',()=>{const c=integrationAt(players.funnel.time);if(c)seekPart(c.transition,c.part-1);});
+$('funnel-next-part').addEventListener('click',()=>{const c=integrationAt(players.funnel.time);if(c)seekPart(c.transition,c.part+1);});
+$('funnel-trajectory-start').addEventListener('click',()=>{const c=integrationAt(players.funnel.time);if(c)seekPart(c.transition,0);});
+input('funnel-part').addEventListener('input',()=>{const c=integrationAt(players.funnel.time);if(c)seekPart(c.transition,Number(input('funnel-part').value));});
+integerField(input('funnel-transition'),value=>seekPart(value-1,0));
+for(const id of ['funnel-transition','funnel-part'])input(id).addEventListener('focus',()=>players.funnel.pause());
+$('funnel-inspect-divergence').addEventListener('click',()=>{
+  const r=results.funnel?.result,i=r?.divergent[0];if(i===undefined)return;
+  /** @type {HTMLSelectElement} */($('funnel-speed')).value='0.01';
+  seekPart(i,(r.trajectories[i].length/2-1)*3);
+});
 
 // ---------- Computing ----------
 
@@ -382,6 +448,7 @@ for (const v of VIEWS) {
 onWidth($('funnel-target'), () => RENDER.funnel());
 onWidth($('funnel-space'), () => RENDER.funnel());
 onWidth($('funnel-trace'), () => showTime('funnel', players.funnel.time));
+onWidth($('funnel-energy'), () => showIntegration(players.funnel.time));
 onWidth($('hastings-plot'), () => RENDER.hastings());
 onWidth($('target-plot'), () => RENDER.target());
 onWidth($('target-hist-x'), () => showTime('target', players.target.time));

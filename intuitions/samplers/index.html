@@ -58,8 +58,32 @@
               <h3 class="figure-title">The funnel, <var>x</var> against <var>y</var></h3>
               <div id="funnel-target" tabindex="-1" class="plot-box stale-dim"></div>
             </div>
+            <div id="funnel-energy-block">
+              <h3 class="figure-title">Energy at completed steps</h3>
+              <div id="funnel-energy" class="plot-box stale-dim"></div>
+            </div>
           </div>
           <div class="playback" id="funnel-playback"></div>
+          <section id="funnel-integration" class="integration-detail" aria-labelledby="integration-heading">
+            <h3 id="integration-heading">Inside one HMC transition</h3>
+            <p class="hint">Leapfrog alternates two half updates of momentum with a full position update. The sampler checks the signed increase <var>H</var> − <var>H</var>₀ only after the second half update. Above 1000, it stops and rejects this transition.</p>
+            <div class="integration-controls">
+              <label for="funnel-transition">Transition <input id="funnel-transition" type="number" min="1" max="1000" step="1"></label>
+              <button type="button" id="funnel-trajectory-start">Trajectory start</button>
+              <button type="button" id="funnel-previous-part">Previous part</button>
+              <button type="button" id="funnel-next-part">Next part</button>
+              <button type="button" id="funnel-inspect-divergence">Inspect first divergence</button>
+            </div>
+            <label for="funnel-part">Integration part <output id="funnel-part-out" for="funnel-part"></output></label>
+            <input id="funnel-part" type="range" min="0" max="60" step="1">
+            <ol class="integration-phases" aria-label="Leapfrog updates">
+              <li data-integration-phase="momentum-first"><strong>Momentum ½</strong><span>p ← p + ½ε ∇log π(q)</span></li>
+              <li data-integration-phase="position"><strong>Position + gradient</strong><span>q ← q + εp; recalculate ∇log π(q)</span></li>
+              <li data-integration-phase="momentum-last"><strong>Momentum ½ + check</strong><span>p ← p + ½ε ∇log π(q); check H</span></li>
+            </ol>
+            <dl id="funnel-components" class="integration-components" aria-live="off"></dl>
+            <p id="funnel-energy-readout" class="hint" aria-live="off"></p>
+          </section>
           <div class="figure-row halves">
             <div>
               <h3 class="figure-title"><var>y</var> at each iteration</h3>
@@ -209,7 +233,10 @@
       <h2 id="notes-heading">How it works</h2>
       <div class="prose">
         <h3>The samplers</h3>
-        <p>Random-walk Metropolis proposes a move by a normal step with the SD you set, in both coordinates at once, and accepts it with probability min(1, π(<var>x</var>′)/π(<var>x</var>)). HMC draws a standard normal momentum, follows the target's gradient by the leapfrog method with step size ε for the number of steps you set, and accepts the end point with probability e<sup>−Δ<var>H</var></sup>, the change in total energy; when that change passes 1000 (Stan's threshold), the transition is divergent: it stops there and is rejected. Gibbs redraws <var>x</var> and <var>y</var> in turn from their conditionals. Every chain starts at the point shown, with no warm-up, and draws from the seed, so a seed gives the same chain for the same settings. The <a href="../api.md">API</a> provides the same computations.</p>
+        <p>Random-walk Metropolis proposes a move by a normal step with the SD you set, in both coordinates at once, and accepts it with probability min(1, π(<var>x</var>′)/π(<var>x</var>)). HMC draws a standard normal momentum, follows the target's gradient by the leapfrog method with step size ε for the number of steps you set, and accepts the end point with probability min(1, e<sup>−Δ<var>H</var></sup>), where Δ<var>H</var> is the signed change in total energy; when that change passes 1000 (Stan's threshold), the transition is divergent: it stops there and is rejected. Gibbs redraws <var>x</var> and <var>y</var> in turn from their conditionals. Every chain starts at the point shown, with no warm-up, and draws from the seed, so a seed gives the same chain for the same settings. The <a href="../api.md">API</a> provides the same computations.</p>
+        <h3>Reading the energy check</h3>
+        <p>With unit mass, potential energy is <var>U</var>(q) = −log π(q), kinetic energy is <var>K</var>(p) = ½pᵀp, and total energy is <var>H</var> = <var>U</var> + <var>K</var>. Exact Hamiltonian motion would keep <var>H</var> constant. The plot records <var>H</var> after each completed leapfrog step; its dashed line is that transition's starting energy <var>H</var>₀ + 1000. The rule here checks the signed increase <var>H</var> − <var>H</var>₀, not its absolute value. Values beyond the plot's axis are marked off scale, and a non-finite calculation is marked explicitly.</p>
+        <p>The three highlighted parts show the actual momentum, position and gradient updates. Energy can move between the half updates; those partial states are not divergence checks. A large positive energy error at the completed step stops this implementation's trajectory and rejects its endpoint. Inspect the first divergence to see a recorded example, then use Previous part, Next part or the integration slider. The <a href="https://mc-stan.org/docs/reference-manual/divergent-transitions.html">Stan reference manual</a> explains why numerical integration can fail in a narrow neck. These examples use fixed-length HMC with no warm-up or adaptation.</p>
         <h3>The numbers</h3>
         <p>The effective sample size is bulk ESS: the chain is split in two halves and rank-normalised, with Geyer's initial monotone sequence. The KS distance is the largest gap between the draws' distribution function and the exact one. The exact marginals are closed forms or one-dimensional integrals (the funnel's <var>x</var> and the smiley's <var>y</var>).</p>
       </div>
