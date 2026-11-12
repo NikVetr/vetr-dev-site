@@ -5,11 +5,11 @@
 // ten paragraphs. The longer excerpt and twelve fitting rounds let whole words reach both
 // narrow legs instead of ending at the skirt. Each letter is
 // drawn where the core places it, in the colour it takes from the picture.
-// The loop clears the text line by line from the top and writes it back in the same order,
-// ending full as it began: every line runs one shared fade, delayed to its turn.
+// The loop starts close to Alice’s head, reveals actual whole words from left to right,
+// then zooms out during the fill. A small SVG player follows the single CSS camera clock.
 import { readFileSync } from 'node:fs';
 import { decodePng } from '../../../shared/decode-png.mjs';
-import { measureChars } from '../../../text-in-image/core/font.js';
+import { glyphPath, measureChars } from '../../../text-in-image/core/font.js';
 import { submit } from '../../../text-in-image/core/index.js';
 import { textGlowFilter } from '../../../text-in-image/core/glow.js';
 import { adjustedContrastColour } from '../../../text-in-image/core/contrast.js';
@@ -17,10 +17,8 @@ import { openPage } from '../browser.mjs';
 import { WIDE, art, esc, num } from '../svg.mjs';
 
 const BACKGROUND = '#14253d';   // selected landing background
-const PERIOD = 6;
-const START = 0.5;   // seconds full before the first line clears
-const SWEEP = 2.2;   // seconds to clear (and later to write) every line
-const FADE = 0.12;
+const PERIOD = 18;
+const ZOOM = 8;
 const PICTURE_PX = 2;   // the picture embedded at this many pixels per display unit
 const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
@@ -57,35 +55,21 @@ export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   const fx = left + pw + gap;
   const fy = (H - ph) / 2;
 
-  // Glyph anchors as renderSvg places them, in card units; one <text> per line, one <tspan> per
-  // colour with each letter's own x.
+  // Preserve the core's reading order, then order disconnected runs on a row by x.
+  // Each word is revealed as one group, without changing any glyph position or colour.
   const size = result.font_size_px;
   const baseline = (measureChars(['M']).height * size) / 3;
-  /** @type {Map<number, Map<string, { x: number[], chars: string }>>} */
-  const lines = new Map();
-  /** @type {Map<number, number>} */
-  const lineY = new Map();
-  for (const g of result.glyphs) {
-    if (!g.placed || g.x === null || g.y === null || g.line === null || !g.col || !g.char.trim()) continue;
-    const x = fx + (((g.x + m) / span) * CW + 7.2 - box.x) * k;
-    const y = fy + (((1 + m - g.y) / span) * CH + baseline - box.y) * k;
-    const line = lines.get(g.line) ?? new Map();
-    lines.set(g.line, line);
-    lineY.set(g.line, y);
-    const run = line.get(g.col) ?? { x: [], chars: '' };
-    line.set(g.col, run);
-    run.x.push(x);
-    run.chars += g.char;
-  }
-  const order = [...lines.keys()].sort((a, b) => a - b);
-  const delay = (/** @type {number} */ i) => START + (i * SWEEP) / Math.max(1, order.length - 1);
-  if (delay(order.length - 1) > PERIOD / 2 - FADE) throw new Error('text-in-image: the sweep is too long for the period');
-  const body = order.map((n, i) => {
-    const spans = [...(lines.get(n) ?? [])].map(([col, run]) => {
-      const fill = adjustedContrastColour(col, background);
-      return `<tspan fill="${fill}" x="${run.x.map((x) => num(x, 1)).join(' ')}">${esc(run.chars)}</tspan>`;
+  const words = wordRuns(result.glyphs);
+  const glyphDefs = new Map();
+  const body = words.map((word, i) => {
+    const glyphs = word.glyphs.map(g => {
+      const id = `text-in-image-glyph-${g.char.codePointAt(0)}`;
+      if (!glyphDefs.has(id)) glyphDefs.set(id, `<path id="${id}" d="${glyphPath(g.char, size * k)}"/>`);
+      const x = fx + (((/** @type {number} */ (g.x) + m) / span) * CW + 7.2 - box.x) * k;
+      const y = fy + (((1 + m - /** @type {number} */ (g.y)) / span) * CH + baseline - box.y) * k;
+      return `<use href="#${id}" x="${num(x, 3)}" y="${num(y, 3)}" fill="${adjustedContrastColour(/** @type {string} */ (g.col), background)}"/>`;
     }).join('');
-    return `<text y="${num(lineY.get(n) ?? 0, 1)}" style="animation-delay:${num(delay(i), 3)}s">${spans}</text>`;
+    return `<g class="word" data-word="${i}" data-line="${word.line}" data-left="${num(word.left, 6)}" data-text="${esc(word.text)}" data-reveal="${num(revealTime(i, words.length), 1)}">${glyphs}</g>`;
   }).join('\n');
 
   // The picture, scaled by the browser to twice its size here and embedded as WebP.
@@ -105,25 +89,48 @@ export async function build({ background = BACKGROUND, glow = 3 } = {}) {
     await close();
   }
 
-  // Use the real bold face with gentle fill-colour adjustment and no glyph stroke.
-  const p = (/** @type {number} */ t) => num((100 * t) / PERIOD, 3);
+  // Exact bundled glyph outlines remain sharp in the initial close-up.
+  const focusX = fx + pw * .59;
+  const focusY = fy + H / (2 * ZOOM);
+  const tx = W / 2 - ZOOM * focusX, ty = H / 2 - ZOOM * focusY;
   return art({
-    name: 'text-in-image',
-    width: W,
-    height: H,
-    period: PERIOD,
-    defs: glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8], result.settings.render.glow) : '',
-    body: `<rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
+    name: 'text-in-image', width: W, height: H, period: PERIOD, player: 'text-in-image',
+    defs: [...glyphDefs.values()].join('') + (glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8], result.settings.render.glow) : ''),
+    body: `<g class="clock"/>
+<g class="camera" data-close="${ZOOM},${num(tx,4)},${num(ty,4)}">
+<rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <path class="arrow" d="M${num(left + pw + 6)} ${num(H / 2)}h${num(gap - 14)}m-3 -3l3 3l-3 3"/>
-<g class="fill"${glow ? ' filter="url(#text-in-image-glow)"' : ''}>
-${body}
-</g>`,
+<g class="fill"${glow ? ' filter="url(#text-in-image-glow)"' : ''}>${body}</g></g>`,
     css: `& .panel { fill: ${background}; }
-& .arrow { fill: none; stroke: var(--art-muted); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
-& .fill { font: 700 ${num(size * k, 2)}px 'Liberation Sans', Arial, Helvetica, sans-serif; }`,
-    loop: `& .fill text { animation: text-in-image-line ${PERIOD}s linear infinite; }
-@keyframes text-in-image-line { 0% { opacity: 1; } ${p(FADE)}% { opacity: 0; } 50% { opacity: 0; } ${p(PERIOD / 2 + FADE)}% { opacity: 1; } 100% { opacity: 1; } }`,
+& .arrow { fill: none; stroke: var(--art-muted); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }`,
+    loop: `& .clock { animation:text-in-image-clock ${PERIOD}s linear infinite; }
+@keyframes text-in-image-clock { from { opacity:0; } to { opacity:1; } }`,
   });
+}
+
+/** Whole words from actual fitted glyphs; no re-layout or new text.
+ * @param {import('../../../text-in-image/core/index.js').Glyph[]} glyphs
+ */
+export function wordRuns(glyphs) {
+  /** @type {{line:number,left:number,text:string,glyphs:import('../../../text-in-image/core/index.js').Glyph[]}[]} */
+  const words = [];
+  /** @type {typeof words[number] | null} */
+  let word = null;
+  for (const g of glyphs) {
+    if (!g.char.trim()) { word = null; continue; }
+    if (!g.placed || g.x === null || g.y === null || g.line === null || !g.col) throw new Error('text-in-image: an unplaced visible glyph');
+    if (!word || word.line !== g.line) { word = {line:g.line,left:g.x,text:'',glyphs:[]}; words.push(word); }
+    word.text += g.char; word.glyphs.push(g);
+  }
+  return words.sort((a,b)=>a.line-b.line || a.left-b.left);
+}
+
+/** Milliseconds on the shared camera clock. Let the opening words be read before accelerating.
+ * @param {number} index @param {number} count
+ */
+export function revealTime(index, count) {
+  const slow = Math.min(20, count);
+  return index < slow ? 250 + index * 150 : 3250 + (index - slow) * 10750 / Math.max(1, count - slow - 1);
 }
