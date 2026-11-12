@@ -10,17 +10,34 @@ export async function build() {
     const expenses = Number(await page.locator('#target-expense').inputValue()) * 1e6;
     const staff = Number(await page.locator('#target-staff').inputValue());
     if (!(expenses > 0 && staff > 0)) throw new Error('benchmark: invalid reference inputs');
-    const expenseLabel = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1}).format(expenses);
-    // Ask the real responsive renderer for the thumbnail's wide chart proportions.
+    const expenseLabel = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:0}).format(expenses);
+    // Render at the drawing's native dimensions so axes remain readable on the card.
     await page.locator('#chart-wrap').evaluate((/** @type {HTMLElement} */ el)=>{
-      el.style.flex='none';el.style.width='640px';el.style.height='200px';el.style.minHeight='0';el.style.maxHeight='none';
+      el.style.flex='none';el.style.width='320px';el.style.height='236px';el.style.minHeight='0';el.style.maxHeight='none';
     });
-    await page.waitForFunction(()=>document.querySelector('#salary-chart')?.getAttribute('viewBox')==='0 0 640 200');
+    await page.waitForFunction(()=>document.querySelector('#salary-chart')?.getAttribute('viewBox')==='0 0 320 236');
+    // A single median marker remains readable as weights change in this small view.
+    await page.locator('#quantile-granularity').selectOption('custom');
+    await page.locator('#custom-quantiles').fill('50');
+    await page.locator('#custom-quantiles').blur();
     /** @type {{label:string, chart:string, geometry:string}[]} */
     const views=[];
     const capture=async (/** @type {string} */ label)=>{
       const {chart,geometry}=await page.evaluate((/** @type {number} */ frame)=>{
         const source=/** @type {SVGSVGElement} */ (document.querySelector('#salary-chart'));
+        // Preserve marks and values, but give card-scale axes readable type.
+        // The app's outer ticks otherwise run beyond its narrow chart edge.
+        for(const text of source.querySelectorAll('text'))text.style.fontSize='12px';
+        for(const text of source.querySelectorAll('text.percentile'))text.textContent=text.textContent;
+        for(const child of source.children){
+          if(!(child instanceof SVGTextElement))continue;
+          if(!child.hasAttribute('transform')){
+            if(child.getAttribute('text-anchor')==='end')child.setAttribute('x',String(Number(child.getAttribute('x'))+6));
+            const bounds=child.getBBox();
+            if(bounds.x+bounds.width>316)child.setAttribute('text-anchor','end');
+            if(bounds.x<4)child.setAttribute('text-anchor','start');
+          }
+        }
         const clone=/** @type {SVGSVGElement} */ (source.cloneNode(true));
         const original=[source,...source.querySelectorAll('*')],copied=[clone,...clone.querySelectorAll('*')];
         original.forEach((element,i)=>{
@@ -33,8 +50,8 @@ export async function build() {
             if(attr.value.includes('url(#'))copied[i].setAttribute(attr.name,attr.value.replaceAll('url(#',`url(#ceo-salary-benchmark-${frame}-`));
           }
         });
-        clone.setAttribute('x','0');clone.setAttribute('y','22');
-        clone.setAttribute('width','320');clone.setAttribute('height','88');
+        clone.setAttribute('x','0');clone.setAttribute('y','26');
+        clone.setAttribute('width','320');clone.setAttribute('height','236');
         const geometry=JSON.stringify([...source.querySelectorAll('.bar-block')].map(el=>['x','y','width','height'].map(attr=>el.getAttribute(attr))));
         return {chart:clone.outerHTML,geometry};
       },views.length);
@@ -51,14 +68,12 @@ export async function build() {
     await page.waitForSelector('#salary-chart .scatter-point');
     await capture('Weighted scatterplot');
     if(errors.length)throw new Error(`benchmark card: ${errors.join('; ')}`);
-    return art({name:'ceo-salary-benchmark',period:12,width:410,height:125,
-      body:`<rect width="410" height="125" fill="#fff" rx="4"/>${views.map(({label,chart},i)=>`<g class="view view-${i}"><text class="title" x="160" y="14">${esc(label)}</text>${chart}</g>`).join('')}<path d="M323 28V111" stroke="#e2e7eb"/><g class="inputs"><text class="input-label" x="336" y="39">Expenses</text><text class="input-value" x="336" y="58">${esc(expenseLabel)}</text><text class="input-label" x="336" y="83">Staff</text><text class="input-value" x="336" y="102">${staff}</text></g>`,
+    return art({name:'ceo-salary-benchmark',period:12,width:320,height:280,
+      body:`<rect width="320" height="280" fill="#fff" rx="4"/>${views.map(({label,chart},i)=>`<g class="view view-${i}"><text class="title" x="160" y="17">${esc(label)}</text>${chart}</g>`).join('')}<text class="inputs" x="160" y="276">Example: ${esc(expenseLabel)} expenses · ${staff} staff</text>`,
       css:`& .view:not(.view-0) { opacity:0; }
 & .title, & .inputs { fill:#243542;font-family:ui-sans-serif,system-ui,sans-serif;text-anchor:middle; }
-& .title { font-size:13px;font-weight:600; }
-& .inputs { text-anchor:start; }
-& .input-label { font-size:11px; fill:#586875; }
-& .input-value { font-size:17px; font-weight:600; }
+& .title { font-size:14px;font-weight:600; }
+& .inputs { font-size:12px; fill:#586875; }
 & .view > svg { background:#fff; }`,
       loop:`& .view-0 { animation:benchmark-equal 12s linear infinite; }
 & .view-1 { animation:benchmark-weighted 12s linear infinite; }

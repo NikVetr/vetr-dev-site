@@ -44,6 +44,22 @@ async function readPage(bg) {
       const width = Math.max(...layout.nodes.map((/** @type {any} */ n) => n.widthPx)) / layout.tf.sx;
       for (const row of app.state.loc) row.width = width;
       app.update({ fit: true, keepCanvas: true });
+      const flows = JSON.stringify(app.state.matrices);
+      // Use the app's alignment action: shared column extremes, unchanged node
+      // heights and flow values, with each real member path laid out afterwards.
+      (/** @type {HTMLButtonElement} */ (document.querySelector('#align'))).click();
+      if (JSON.stringify(app.state.matrices) !== flows) throw new Error('sankey: alignment changed flow totals');
+      /** @type {Map<number, {top:number,bottom:number}>} */
+      const extents = new Map();
+      for (const n of app.layout.nodes) {
+        const half = Math.max(n.inPx, n.outPx, n.bodyHeightPx || 0) / 2;
+        const prior = extents.get(n.set);
+        extents.set(n.set, {top:Math.max(prior?.top ?? -Infinity,n.Y+half),bottom:Math.min(prior?.bottom ?? Infinity,n.Y-half)});
+      }
+      for (const edge of /** @type {const} */ (['top','bottom'])) {
+        const values = [...extents.values()].map(e=>e[edge]);
+        if (Math.max(...values)-Math.min(...values) > .1) throw new Error(`sankey: column ${edge} edges are not aligned`);
+      }
       const base = /** @type {string} */ (app.exportSvgText());
       const status = app.seekTrajectories(1);
       if (status.kind !== 'records' || status.total !== 560) throw new Error('sankey: expected the bundled 560-record illustrative cohort');
@@ -218,7 +234,7 @@ export async function build() {
     name: 'sankey',
     period: PERIOD,
     defs,
-    body: `<text class="caption" x="8" y="9">Illustrative patients · 560 records</text>
+    body: `<text class="caption" x="8" y="9">560 records</text>
 <g class="guides"><g class="ribbons">${ribbons.join('')}</g>
 <g class="trunks">${trunks}</g>
 <g class="outline">${outlines}</g>
