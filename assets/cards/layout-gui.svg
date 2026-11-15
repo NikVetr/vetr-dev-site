@@ -10,7 +10,6 @@
 [data-art="layout-gui"] .cursor-at { opacity: 0; }
 [data-art="layout-gui"] .cursor path { fill: none; stroke: var(--art-ink); stroke-width: 1.3; stroke-linecap: square; }
 [data-art="layout-gui"] .cursor .halo { stroke: var(--art-paper); stroke-width: 3.3; }
-@media (prefers-reduced-motion: no-preference) {
 [data-art="layout-gui"][data-started] .p0 { animation: layout-gui-p0 6.5s step-end infinite; }
 @keyframes layout-gui-p0 { 0% { opacity: 1; } 15.385% { opacity: 0; } 35.385% { opacity: 1; } 100% { opacity: 1; } }
 [data-art="layout-gui"][data-started] .p1 { animation: layout-gui-p1 6.5s step-end infinite; }
@@ -90,7 +89,6 @@
 [data-art="layout-gui"][data-started] .cursor { animation: layout-gui-cursor 6.5s linear infinite; }
 @keyframes layout-gui-cursor { 0% { transform: translate(0px, 0px); } 23.077% { transform: translate(0px, 0px); } 33.077% { transform: translate(95px, 76px); } 35.385% { transform: translate(95px, 76px); } 38.462% { transform: translate(152px, 76px); } 39.231% { transform: translate(152px, 76px); } 49.231% { transform: translate(95px, 0px); } 51.538% { transform: translate(95px, 0px); } 54.615% { transform: translate(0px, 152px); } 55.385% { transform: translate(0px, 152px); } 65.385% { transform: translate(57px, 76px); } 67.692% { transform: translate(57px, 76px); } 70.769% { transform: translate(152px, 152px); } 71.538% { transform: translate(152px, 152px); } 81.538% { transform: translate(57px, 76px); } 89.231% { transform: translate(57px, 76px); } 99.846% { transform: translate(0px, 0px); } 100% { transform: none; } }
 
-}
 </style>
 <rect class="canvas" x="10.5" y="14" width="152" height="152"/>
 <path class="grid" d="M10.5 14v152M29.5 14v152M48.5 14v152M67.5 14v152M86.5 14v152M105.5 14v152M124.5 14v152M143.5 14v152M162.5 14v152M10.5 14h152M10.5 33h152M10.5 52h152M10.5 71h152M10.5 90h152M10.5 109h152M10.5 128h152M10.5 147h152M10.5 166h152"/>

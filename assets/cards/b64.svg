@@ -9,10 +9,8 @@
 [data-art="b64"] .decoded {font-size:22px;fill:var(--primary)}
 [data-art="b64"] .progress {fill:none;stroke:var(--art-line);stroke-width:2}
 [data-art="b64"] .done {fill:var(--primary)} [data-art="b64"] .waiting {fill:var(--art-line)}
-@media (prefers-reduced-motion: no-preference) {
 [data-art="b64"][data-started] .frame { animation: b64-frame 6s step-end infinite; }
 @keyframes b64-frame { 0% { opacity: 1; } 16.666667% { opacity: 0; } 100% { opacity: 0; } }
-}
 </style>
 <rect class="panel" x="4" y="4" width="312" height="172" rx="8"/><g class="frame first"><text class="caption" x="160" y="30">Decoded link</text>
 <text class="value decoded" x="160" y="86">https://vetr.dev/</text>

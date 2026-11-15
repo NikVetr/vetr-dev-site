@@ -98,7 +98,7 @@ test('desktop keyboard blur pauses; reduced motion resets; touch entry does not 
 });
 
 
-test('mobile centre playback, sticky controls, saved pause and reduced motion', async () => {
+test('mobile centre playback, sticky controls and saved choice override reduced motion', async () => {
   const browser = await openPage('', { engine, width: 390, height: 844, touch: true });
   const { page, errors } = browser;
   try {
@@ -129,13 +129,61 @@ test('mobile centre playback, sticky controls, saved pause and reduced motion', 
     assert.equal(await playing.count(), 0);
     await button.tap(); await page.waitForFunction(() => document.querySelector('[data-playing]'));
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.waitForFunction(() => !document.querySelector('[data-started]'));
-    assert.ok(await button.isDisabled()); assert.equal(await button.getAttribute('aria-checked'), 'false'); assert.match(await button.getAttribute('title'), /motion.*reduced/i);
+    await centre('signature');
+    assert.ok(await button.isEnabled()); assert.equal(await button.getAttribute('aria-checked'), 'true');
+    const optedIn = await times(art);
+    await page.waitForTimeout(120);
+    assert.ok(optedIn.length && (await times(art))[0] > optedIn[0], 'explicit opt-in keeps CSS playing under reduced motion');
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.waitForFunction(() => document.querySelectorAll('[data-playing]').length === 1);
     await page.setViewportSize({width: 844, height: 390});
     await page.waitForTimeout(150);
     assert.equal(await playing.count(), 1, 'touch landscape keeps a single active panel');
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('reduced motion defaults off but permits persisted opt-in for CSS and canvas previews', async () => {
+  const browser = await openPage('', { engine });
+  const { page, errors } = browser;
+  try {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.reload();
+    const button = page.getByRole('switch', { name: 'Animations', exact: true });
+    const art = page.locator('[data-art="b64"]');
+    await art.hover(); await art.locator('svg').waitFor();
+    assert.ok(await button.isEnabled(), 'system preference must not lock the switch');
+    assert.equal(await button.getAttribute('aria-checked'), 'false');
+    assert.equal(await art.getAttribute('data-started'), null);
+    assert.equal((await times(art)).length, 0, 'starts with authored still');
+    await button.click(); await art.hover();
+    await page.waitForFunction(() => document.querySelector('[data-art="b64"]')?.getAnimations({ subtree: true }).length);
+    const before = await times(art);
+    await page.waitForTimeout(140);
+    assert.ok((await times(art))[0] > before[0] + 50, 'CSS clocks actually run under reduced motion');
+    await page.reload(); await art.hover();
+    await page.waitForFunction(() => document.querySelector('[data-art="b64"]')?.hasAttribute('data-playing'));
+    assert.equal(await button.getAttribute('aria-checked'), 'true', 'opt-in persists on reload');
+    assert.ok((await times(art)).length, 'saved opt-in enables CSS too');
+    const canvasArt = page.locator('[data-art="intuitions"]');
+    await canvasArt.hover();
+    const canvas = canvasArt.locator('canvas'); await canvas.waitFor();
+    const picture = await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL());
+    await page.waitForFunction((/** @type {string} */ snapshot) =>
+      /** @type {HTMLCanvasElement} */ (document.querySelector('[data-art="intuitions"] canvas')).toDataURL() !== snapshot,
+    picture, { timeout: 4000 });
+    await button.click(); await canvasArt.hover();
+    assert.equal(await button.getAttribute('aria-checked'), 'false');
+    assert.ok(await waitPaused(canvasArt), 'opt-out pauses rather than destroying the current frame');
+    const paused = await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL());
+    await page.waitForTimeout(150);
+    assert.equal(await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL()), paused);
+    await page.reload(); await art.hover(); await art.locator('svg').waitFor();
+    assert.equal(await button.getAttribute('aria-checked'), 'false', 'opt-out persists on reload');
+    assert.equal(await art.getAttribute('data-started'), null);
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.waitForTimeout(100);
+    assert.equal(await art.getAttribute('data-started'), null, 'explicit off also overrides the system default');
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });

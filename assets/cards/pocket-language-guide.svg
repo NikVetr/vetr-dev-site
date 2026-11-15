@@ -43,7 +43,6 @@
 :root[data-theme="dark"] [data-art="pocket-language-guide"] .message-paper {fill:rgb(11, 103, 163);}
 :root[data-theme="dark"] [data-art="pocket-language-guide"] .incoming {fill:rgb(29, 52, 70);}
 :root[data-theme="dark"] [data-art="pocket-language-guide"] .message-script,:root[data-theme="dark"] [data-art="pocket-language-guide"] .message-gloss,:root[data-theme="dark"] [data-art="pocket-language-guide"] .message-respell {fill:rgb(255, 255, 255);}
-@media (prefers-reduced-motion: no-preference) {
 [data-art="pocket-language-guide"][data-started] .conversation-0 {animation:pocket-language-guide-scene-0 19s linear infinite;}
 @keyframes pocket-language-guide-scene-0 {0% {opacity:1;} 10.789% {opacity:1;} 11.579%,99.2% {opacity:0;} 100% {opacity:1;}}
 [data-art="pocket-language-guide"][data-started] .conversation-1 {animation:pocket-language-guide-scene-1 19s linear infinite;}
@@ -63,7 +62,6 @@
 
 [data-art="pocket-language-guide"][data-started] .print-view { animation:pocket-language-guide-print 19s linear infinite; }
 @keyframes pocket-language-guide-print { 0%,88.4%,100% { opacity:0; } 89.5%,98.5% { opacity:1; } }
-}
 </style>
 <g class="print-view"><rect class="paper" x="10" y="11.5" width="300" height="157" rx="3"/>
 <g class="icon" transform="translate(18 18.1) scale(0.461)" stroke-width="2"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/></g>

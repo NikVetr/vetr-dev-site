@@ -6,7 +6,6 @@
 [data-art="signature"] .input, [data-art="signature"] .centerline { fill: none; stroke: var(--art-ink); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 [data-art="signature"] .input path { stroke-dasharray: 1; }
 [data-art="signature"] .scanner { stroke: #d0312d; stroke-width: 1; }
-@media (prefers-reduced-motion: no-preference) {
 [data-art="signature"][data-started] .workflow, [data-art="signature"][data-started] .ink-stage { opacity: 1; animation: signature-workflow 10s linear infinite; }
 [data-art="signature"][data-started] .smooth-front { animation: signature-smooth 10s linear infinite; }
 [data-art="signature"][data-started] .ink-front { animation: signature-ink 10s linear infinite; }
@@ -31,7 +30,6 @@
 @keyframes signature-smooth { 0%, 34% { transform: translateX(0); } 55%, 100% { transform: translateX(360px); } }
 @keyframes signature-ink { 0%, 62% { transform: translateX(360px); } 83%, 100% { transform: translateX(0); } }
 @keyframes signature-scan { 0%, 33% { opacity: 0; transform: translateX(0); } 34% { opacity: 1; transform: translateX(0); } 55% { opacity: 1; transform: translateX(360px); } 56%, 61% { opacity: 0; transform: translateX(360px); } 62% { opacity: 1; transform: translateX(360px); } 83% { opacity: 1; transform: translateX(0); } 84%, 100% { opacity: 0; transform: translateX(0); } }
-}
 </style>
 <defs><clipPath id="signature-raw-clip"><rect class="smooth-front" width="360" height="125"/></clipPath>
 <clipPath id="signature-smooth-clip"><rect class="smooth-front" x="-360" width="360" height="125"/></clipPath>

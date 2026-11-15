@@ -70,7 +70,6 @@
 :root[data-theme="dark"] [data-art="agendamatic"] .track { fill: #16213e; stroke: #444444; } :root[data-theme="dark"] [data-art="agendamatic"] .groove { fill: #dddddd; } :root[data-theme="dark"] [data-art="agendamatic"] .fill { fill: #3498db; }
 :root[data-theme="dark"] [data-art="agendamatic"] .now { fill: #e74c3c; } :root[data-theme="dark"] [data-art="agendamatic"] .guide { stroke: #3498db; }
 
-@media (prefers-reduced-motion: no-preference) {
 [data-art="agendamatic"][data-started] .b0 { animation: agendamatic-b0 11.15s linear infinite; }
 @keyframes agendamatic-b0 { 0% { opacity: 0; } 72.646% { opacity: 0; } 74.439% { opacity: 1; } 86.547% { opacity: 1; } 87.892% { opacity: 0; } 100% { opacity: 0; } }
 [data-art="agendamatic"][data-started] .a0 { animation: agendamatic-a0 11.15s linear infinite; }
@@ -122,7 +121,6 @@
 [data-art="agendamatic"][data-started] .progress .fill { animation: agendamatic-progress 11.15s linear infinite; }
 @keyframes agendamatic-progress { 0% { transform: scaleX(0.2308); opacity: 1; } 67.265% { transform: scaleX(1); opacity: 1; } 72.646% { transform: scaleX(1); opacity: 1; } 74.439% { transform: scaleX(1); opacity: 0; } 74.448% { transform: scaleX(0); opacity: 0; } 76.233% { transform: scaleX(0); opacity: 1; } 79.821% { transform: scaleX(0); opacity: 1; } 100% { transform: scaleX(0.2308); opacity: 1; } }
 
-}
 </style>
 <defs><linearGradient id="agendamatic-glow0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2196f3" stop-opacity="0.32"/><stop offset="0.42" stop-color="#2196f3" stop-opacity="0.1"/><stop offset="1" stop-color="#2196f3" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c27b0" stop-opacity="0.32"/><stop offset="0.42" stop-color="#9c27b0" stop-opacity="0.1"/><stop offset="1" stop-color="#9c27b0" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4caf50" stop-opacity="0.32"/><stop offset="0.42" stop-color="#4caf50" stop-opacity="0.1"/><stop offset="1" stop-color="#4caf50" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9800" stop-opacity="0.32"/><stop offset="0.42" stop-color="#ff9800" stop-opacity="0.1"/><stop offset="1" stop-color="#ff9800" stop-opacity="0"/></linearGradient><linearGradient id="agendamatic-glow4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2196f3" stop-opacity="0.32"/><stop offset="0.42" stop-color="#2196f3" stop-opacity="0.1"/><stop offset="1" stop-color="#2196f3" stop-opacity="0"/></linearGradient></defs>
 <g class="agenda-scene"><g class="head"><text x="21" y="13">Item</text><text x="129.1" y="13">Lead</text><text x="195.4" y="13">Duration</text><text x="251.9" y="13">Time</text></g>

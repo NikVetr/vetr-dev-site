@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 180" data-period="9" focusable="false">
 <style>
-@media (prefers-reduced-motion: no-preference) {
 [data-art="motrpac-alphabet"][data-started] .piece-0-0 { animation: motrpac-alphabet-piece-0-0 9s linear infinite; }
     @keyframes motrpac-alphabet-piece-0-0 { 0%,4% {opacity:.12} 7%,94% {opacity:1} 100% {opacity:.12} }
 [data-art="motrpac-alphabet"][data-started] .piece-0-1 { animation: motrpac-alphabet-piece-0-1 9s linear infinite; }
@@ -60,7 +59,6 @@
     @keyframes motrpac-alphabet-paint-18 { 0%,62.4% {fill:var(--art-line)} 64.4%,94% {fill:#A3AEB9} 100% {fill:var(--art-line)} }
 [data-art="motrpac-alphabet"][data-started] .paint-19 { animation: motrpac-alphabet-paint-19 9s linear infinite; }
     @keyframes motrpac-alphabet-paint-19 { 0%,64.2% {fill:var(--art-line)} 66.2%,94% {fill:#A01417} 100% {fill:var(--art-line)} }
-}
 </style>
 <rect width="480" height="180" rx="5" fill="#fff"/>
     <text x="135" y="19" text-anchor="middle" fill="#5e6b78" font-size="12">MotRPAC alphabet</text>

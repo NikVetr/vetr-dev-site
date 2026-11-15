@@ -95,8 +95,9 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
   const style = [
     css.replaceAll('&', scope),
     // Keep the animation attached after first play so pausing preserves its clock.
-    // style.css pauses started art without data-playing. Reduced motion keeps the still.
-    loop && `@media (prefers-reduced-motion: no-preference) {\n${loop.replaceAll('&', `${scope}[data-started]`)}\n}`,
+    // style.css pauses started art without data-playing. landing.js gates data-started
+    // on reduced motion and the visitor's explicit animation preference.
+    loop && loop.replaceAll('&', `${scope}[data-started]`),
   ].filter(Boolean).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''}${playerBox ? ` data-player-box="${playerBox}"` : ''} focusable="false">
 <style>

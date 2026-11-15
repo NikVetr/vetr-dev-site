@@ -13,26 +13,31 @@ import { lightSwitch } from '../shared/light-switch.js';
 // A scripted canvas player keeps its current frame too. Both resume on the next interaction.
 // Players load on first play, before their matching CSS clocks start.
 // On phones/touch screens, the card nearest the viewport centre plays automatically.
-// The compact bar can pause all previews; reduced motion always shows authored stills.
+// Reduced motion defaults to authored stills; the compact bar can explicitly opt in.
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const mobile = matchMedia('(max-width: 47.99rem), (hover: none) and (pointer: coarse)');
 const motionControl = document.querySelector('#preview-motion');
 if (!(motionControl instanceof HTMLButtonElement)) throw new Error('Missing preview motion control');
 const motionButton = motionControl;
-let enabled = true;
-try { enabled = localStorage.getItem('vetr-preview-motion') !== 'off'; } catch { /* Storage may be unavailable. */ }
+/** @type {'on' | 'off' | null} */
+let motionPreference = null;
+try {
+  const saved = localStorage.getItem('vetr-preview-motion');
+  if (saved === 'on' || saved === 'off') motionPreference = saved;
+} catch { /* Storage may be unavailable. */ }
+const motionEnabled = () => motionPreference === null ? !reducedMotion.matches : motionPreference === 'on';
 let pageActive = true;
-const canPlay = () => enabled && !reducedMotion.matches && pageActive && !document.hidden;
+const canPlay = () => motionEnabled() && pageActive && !document.hidden;
 const motionSwitch = lightSwitch({
-  button: motionButton, label: 'Animations', dark: () => enabled && !reducedMotion.matches,
+  button: motionButton, label: 'Animations', dark: motionEnabled,
   marks: [
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M17 5v14" stroke="currentColor" stroke-width="4"/></svg>',
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 3 15 9-15 9Z" fill="currentColor"/></svg>',
   ],
   flip: () => {
-    enabled = !enabled;
-    try { localStorage.setItem('vetr-preview-motion', enabled ? 'on' : 'off'); } catch { /* Keep the in-memory choice. */ }
+    motionPreference = motionEnabled() ? 'off' : 'on';
+    try { localStorage.setItem('vetr-preview-motion', motionPreference); } catch { /* Keep the in-memory choice. */ }
     updatePlayback();
   },
 });
@@ -106,8 +111,9 @@ function updatePlayback() {
     if (!wanted.has(state.art)) { wanted.add(state.art); start(state.art); }
   }
   motionSwitch.show();
-  motionButton.disabled = reducedMotion.matches;
-  motionButton.title = reducedMotion.matches ? 'Motion is reduced in your device settings' : 'Play or pause panel animations';
+  motionButton.title = reducedMotion.matches && motionPreference === null
+    ? 'Animations default off because your device requests reduced motion. Turn on to override.'
+    : 'Play or pause panel animations';
 }
 for (const state of cards) {
   nearViewport.observe(state.art);
@@ -141,7 +147,7 @@ addEventListener('scroll', scheduleSelection, { passive: true });
 addEventListener('resize', scheduleSelection);
 mobile.addEventListener('change', scheduleSelection);
 reducedMotion.addEventListener('change', () => {
-  if (reducedMotion.matches) for (const { art } of cards) reset(art);
+  if (motionPreference === null && reducedMotion.matches) for (const { art } of cards) reset(art);
   scheduleSelection();
 });
 // Back/forward and background tabs retain their frame without running unseen loops.

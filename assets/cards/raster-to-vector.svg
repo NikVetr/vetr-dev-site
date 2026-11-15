@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="10" data-frames="4" focusable="false">
 <style>
 [data-art="raster-to-vector"] .process{display:none} [data-art="raster-to-vector"] text{font-family:system-ui,sans-serif} [data-art="raster-to-vector"] .label{font-size:17px;fill:var(--art-muted)} [data-art="raster-to-vector"] .number{font-size:11px;text-anchor:middle;fill:var(--art-muted)} [data-art="raster-to-vector"] .step circle{fill:var(--art-paper);stroke:var(--art-line)} [data-art="raster-to-vector"] .active circle{fill:#e7a1b9;stroke:#b46b87} [data-art="raster-to-vector"] .active .label{fill:var(--art-ink);font-weight:650} [data-art="raster-to-vector"] .active .number{fill:#482537;font-weight:700} [data-art="raster-to-vector"] .connector{fill:none;stroke:var(--art-line);stroke-width:1.25}
-@media (prefers-reduced-motion: no-preference) {
 [data-art="raster-to-vector"][data-started] .finished{display:none} [data-art="raster-to-vector"][data-started] .process{display:block}
 [data-art="raster-to-vector"][data-started] .reveal { transform-origin: 0 0; animation: raster-to-vector-reveal 2.5s linear infinite; }
 [data-art="raster-to-vector"][data-started] .scan { animation: raster-to-vector-scan 2.5s linear infinite; }
@@ -11,7 +10,6 @@
 [data-art="raster-to-vector"][data-started] .frame.first { will-change: opacity; }
 [data-art="raster-to-vector"][data-started] .frame { animation: raster-to-vector-frame 10s step-end infinite; }
 @keyframes raster-to-vector-frame { 0% { opacity: 1; } 25% { opacity: 0; } 100% { opacity: 0; } }
-}
 </style>
 <defs><clipPath id="raster-to-vector-image-bounds"><rect width="128" height="128"/></clipPath>
 <clipPath id="raster-to-vector-reveal"><rect class="reveal" width="128" height="128"/></clipPath>
