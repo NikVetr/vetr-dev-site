@@ -7,19 +7,15 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="font-export.css">
+    <link rel="stylesheet" href="../shared/light-switch.css">
+    <link rel="stylesheet" href="editor-switch.css">
+    <script type="module" src="editor-switch.js"></script>
   </head>
   <body>
     <div class="app-shell">
       <header class="menu-bar">
         <div class="menu-group">
-          <details class="menu editor-menu">
-            <summary aria-label="Choose logo editor">MotRPAC</summary>
-            <nav class="menu-popover" aria-label="Logo editors">
-              <a href="./" aria-current="page">MotRPAC alphabet</a>
-              <a href="mattlab/">Mattlab logo painter</a>
-              <a href="../">vetr.dev</a>
-            </nav>
-          </details>
+          <button id="editor-switch" data-editor="motrpac" type="button">MotRPAC / Mattlab</button>
           <details class="menu">
             <summary>File</summary>
             <div class="menu-popover">
@@ -29,6 +25,7 @@
               <button id="export-font">Export Font…</button>
               <button id="import-json">Import JSON</button>
               <input id="import-json-file" type="file" accept="application/json,.json" hidden>
+              <a href="../">vetr.dev</a>
             </div>
           </details>
           <details class="menu">

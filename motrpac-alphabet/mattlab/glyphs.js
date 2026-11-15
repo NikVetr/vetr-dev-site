@@ -33,8 +33,10 @@
     return followCorners(fills);
   }
 
-  // These are deliberately limited sketches, not a typeface. The fixed central
-  // opening and whole-polygon constraint do not support every alphabet shape.
+  // Whole-piece studies, not outline-font stencils. The central opening is
+  // immutable: crossbars and bowls are suggested by adjacent facets, while
+  // gaps remain visible. The notes describe the intended reading of each guess.
+  /** @type {Record<string, {pieces:number[], note:string}>} */
   const recipes = {
     C:{pieces:[1,2,7,10,15],note:'Angular open curve.'},
     G:{pieces:[1,2,7,8,9,10,15],note:'Angular C with a rising inner arm; an exploratory G.'},
@@ -65,19 +67,87 @@
     '.':{pieces:[13],note:'Single lower triangular dot.'},
     "'":{pieces:[4],note:'Single upper triangular mark.'},
     '"':{pieces:[1,4],note:'Two upper triangular quotation marks.'},
-    '\u0060':{pieces:[1],note:'Single upper-left triangular mark.'}
+    '\u0060':{pieces:[1],note:'Single upper-left triangular mark.'},
+
+    A:{pieces:[1,2,3,6],note:'Upper-left peaked arch with the inner cap suggesting a crossbar.'},
+    B:{pieces:[1,2,3,6,7,8,9,10,15],note:'Left stem and two inward-turning bowls, separated by the fixed central gap.'},
+    D:{pieces:[1,2,3,4,5,7,8,9,10,11,12,13,14,15,16],note:'Broad outer bowl with an open inner upper cap; an angular D.'},
+    E:{pieces:[1,2,3,6,7,10,15],note:'Left spine with upper, middle and lower terminals.'},
+    F:{pieces:[1,2,3,6,7,15],note:'Upper and middle arms on a left spine, with the lower foot removed.'},
+    H:{pieces:[1,2,3,4,5,6,7,10,11,12,13,15,16],note:'Paired outer stems linked by the upper inner facets; the crossbar bends around the opening.'},
+    J:{pieces:[4,11,12,13,14,16],note:'Long right stem curling inward at its lower end.'},
+    K:{pieces:[1,2,3,7,9,10,15],note:'Left stem with inward upper and lower diagonal arms.'},
+    P:{pieces:[1,2,3,5,6,7,15],note:'Upper inward bowl on a left descending stem.'},
+    Q:{pieces:[1,2,3,4,5,6,7,8,9,11,12,13,14,15,16],note:'Angular ring opened at the lower left, retaining the lower-right diagonal tail.'},
+    R:{pieces:[1,2,3,5,6,7,10,13,14,15],note:'Upper bowl and left stem, with a separate lower-right diagonal leg.'},
+    S:{pieces:[1,2,3,6,7,8,10,12,13,14,15,16],note:'Opposed upper-left and lower-right turns around the central opening.'},
+    T:{pieces:[1,2,3,4,5,6,8,9,10,11],note:'Broad upper crown above a single lower slanted stem.'},
+    U:{pieces:[1,2,4,7,8,9,10,11,12,13,14,15,16],note:'Tall outer stems joined by the lower ribbon; the upper inner facets stay open.'},
+    X:{pieces:[1,3,4,5,6,8,9,10,13,14],note:'Opposing diagonal fans converge toward the narrow central gap.'},
+    Y:{pieces:[1,3,4,5,6,8,9,10],note:'Two upper arms converge above one lower slanted stem.'},
+    Z:{pieces:[1,4,5,6,8,9,10,13,14],note:'Upper caps and a broad lower foot linked by descending diagonal facets.'},
+
+    a:{pieces:[8,9,10,12,13,14,16],note:'Compact lower bowl with a right shoulder and terminal.'},
+    b:{pieces:[1,2,7,8,9,10,12,13,14,15,16],note:'Tall left ascender above a wide lower bowl.'},
+    d:{pieces:[4,7,8,9,10,11,12,13,14,15,16],note:'Wide lower bowl with a tall right ascender.'},
+    e:{pieces:[7,8,9,10,14,15],note:'Lower open curve with a short inward upper arm.'},
+    f:{pieces:[1,2,3,6,8,9,10,15],note:'Upper hooked shoulder above a lower slanted stem.'},
+    g:{pieces:[1,2,3,4,5,6,11,12,13,14,15,16],note:'Upper bowl with a descending right hook.'},
+    h:{pieces:[1,2,7,8,9,10,13,14,15],note:'Left ascender and a lower arch with its right side open.'},
+    i:{pieces:[6,8,9,10],note:'Lower slanted stem with a detached dot directly above it.'},
+    j:{pieces:[6,7,9,10],note:'Detached upper dot above a lower stem and leftward hook.'},
+    k:{pieces:[2,7,8,9,10,14,15],note:'Left stem with a compact lower pair of diagonal arms.'},
+    p:{pieces:[1,2,3,4,5,6,7,10,11,15,16],note:'Upper bowl with a long left descender.'},
+    q:{pieces:[1,2,3,4,5,6,11,12,13,15,16],note:'Upper bowl with a long right descender and no inward hook.'},
+    r:{pieces:[3,6,8,9,10],note:'Lower slanted stem under a short upper shoulder.'},
+    s:{pieces:[2,3,6,7,8,10,13,14,15],note:'Compact opposed turns with shortened upper and lower terminals.'},
+    t:{pieces:[3,5,6,8,9,10],note:'Short upper crosspiece over one lower slanted stem.'},
+    u:{pieces:[7,9,10,12,13,14],note:'Low paired stems and lower return, with the central upper cap removed.'},
+    x:{pieces:[3,5,6,8,9,14],note:'Four compact diagonal arms, inset from the outer caps.'},
+    y:{pieces:[7,8,9,10,13,14],note:'Lower V with a diagonal branch extending to the right foot.'},
+    z:{pieces:[3,5,6,8,9,10,13],note:'Inset upper shoulder, descending diagonal and two lower terminals.'},
+
+    '2':{pieces:[1,3,4,5,6,8,9,10,11,13,14,16],note:'Rounded upper-right shoulder leading into a descending diagonal and broad lower foot.'},
+    '3':{pieces:[4,5,6,8,11,12,13,14,16],note:'Two inward-facing right bowls around the middle waist.'},
+    '4':{pieces:[1,3,4,5,6,11,12,13,16],note:'Short upper-left arm meets the upper bridge beside a long right stem.'},
+    '5':{pieces:[1,2,3,6,8,12,13,14,15,16],note:'Upper-left arm and waist paired with a lower-right bowl.'},
+    '6':{pieces:[1,2,3,7,8,9,10,12,13,14,15,16],note:'Upper-left curl above the closed lower bowl.'},
+    '7':{pieces:[1,2,3,4,5,6,8,9,10],note:'Upper ribbon terminating in one long descending diagonal.'},
+    '8':{pieces:[1,2,3,4,5,6,7,8,9,10,11,12,13,14],note:'Two broad angular bowls with the side waist wedges removed.'},
+    '9':{pieces:[1,2,3,4,5,6,8,11,12,13,14,15,16],note:'Upper loop with a right descender and an inward lower hook.'},
+
+    '!':{pieces:[3,6,8],note:'Upper diagonal stroke and a separate lower triangular dot.'},
+    '#':{pieces:[2,3,5,7,9,11,12,14],note:'Two pairs of crossing diagonal bands; a slanted hash study.'},
+    '$':{pieces:[1,2,3,5,6,8,9,10,12,13,14,15,16],note:'Opposed S-like turns crossed by the inner diagonal stem.'},
+    '%':{pieces:[1,4,5,6,8,9,10,13],note:'Ascending diagonal between isolated upper-left and lower-right triangular dots.'},
+    '&':{pieces:[1,2,3,6,7,8,9,10,13,14,15],note:'Two left-hand loops with an added lower-right diagonal tail.'},
+    '*':{pieces:[3,5,9,14,15,16],note:'Six inward-pointing facets surround the fixed center opening.'},
+    '+':{pieces:[6,8,15,16],note:'Four inward terminals mark the arms of a plus around the central opening.'},
+    ',':{pieces:[13,14],note:'Lower triangular mark extended into a diagonal tail.'},
+    '-':{pieces:[6],note:'One short, flat-ended inner cap suggests a horizontal dash.'},
+    ';':{pieces:[4,13,14],note:'Upper triangular dot above a lower comma-like mark.'},
+    '=':{pieces:[6,8],note:'Two separated, flat-ended inner caps.'},
+    '?':{pieces:[1,3,4,5,6,8,11,16],note:'An upper-right hooked sweep ending above a detached lower dot.'},
+    '@':{pieces:[1,2,3,4,5,6,7,8,9,10,11,12,14,15,16],note:'Angular enclosing ring with an inward return and an open lower-right terminal.'},
+    '[':{pieces:[1,2,3,7,8,9,10,15],note:'Left spine with extended inward top and bottom returns.'},
+    ']':{pieces:[4,5,6,11,12,13,14,16],note:'Right spine with inward top and bottom returns.'},
+    '_':{pieces:[10,13],note:'Two aligned lower caps suggest a low horizontal rule.'},
+    '{':{pieces:[2,3,6,7,8,9,15],note:'Left-pointing waist between two inward-curving returns.'},
+    '|':{pieces:[5,6,8,9],note:'One continuous-direction central stem, interrupted only by the fixed opening.'},
+    '}':{pieces:[5,6,8,11,12,14,16],note:'Right-pointing waist between two inward-curving returns.'},
+    '~':{pieces:[1,3,5,6],note:'A short upper wave descending into the central valley and rising again.'}
   };
   const SEEDS = Object.create(null);
   Core.SEQUENCES.ascii.forEach(function (glyph) {
     const recipe = recipes[glyph];
+    if (!recipe && glyph !== ' ') throw new Error('Missing printable character study: ' + glyph);
     const fills = recipe ? fillsFromNumbers(recipe.pieces) : allWhite();
     const red = ids.filter(function (id) { return fills[id] === CARDINAL; });
     SEEDS[glyph] = Object.freeze({
       glyph:glyph,
       status:recipe ? 'guess' : 'blank',
       red:Object.freeze(red),
-      note:recipe ? recipe.note : glyph === ' ' ? 'Space is intentionally empty.' :
-        'Left blank: no clear whole-polygon construction was found.',
+      note:recipe ? recipe.note : 'Space is intentionally empty.',
       outline:true
     });
   });
@@ -92,39 +162,11 @@
     getSeed(glyph).red.forEach(function (id) { fills[id] = CARDINAL; });
     return fills;
   }
-  function patterned(colors) {
-    const fills = Object.create(null);
-    Core.FACES.forEach(function (face, index) { fills[face.id] = Core.normalizeColor(colors[index] || face.fill); });
-    return followCorners(fills);
-  }
   const DESIGNS = [
     {
       key:'@original', label:'Original', name:'Original', kind:'design', character:'',
       note:'The approved reference colors.', cornerMode:'manual', outline:false,
       fills:Core.presetFills('reference')
-    },
-    {
-      key:'@cardinal-slate', label:'Cardinal + slate', name:'Cardinal + slate', kind:'design', character:'',
-      note:'Cardinal red tones with the original cool grays.', cornerMode:'auto', outline:false,
-      fills:followCorners(Core.presetFills('cardinal'))
-    },
-    {
-      key:'@cardinal-sky', label:'Cardinal + sky', name:'Cardinal + sky', kind:'design', character:'',
-      note:'Cardinal, soft sky blue, and deep slate.', cornerMode:'auto', outline:false,
-      fills:patterned(['#8C1515','#8C1515','#5E0E0E','#8C1515','#8C1515','#B85150',
-        '#405365','#BCD5DB','#BCD5DB','#80949B','#BCD5DB','#405365','#697988','#8C1515','#22292F','#373F46'])
-    },
-    {
-      key:'@ember-navy', label:'Ember + navy', name:'Ember + navy', kind:'design', character:'',
-      note:'Warm red and burnt orange balanced by navy.', cornerMode:'auto', outline:false,
-      fills:patterned(['#CC782E','#8C1515','#8C1515','#CC782E','#8C1515','#E3B68E',
-        '#323753','#323753','#323753','#9093A2','#CC782E','#323753','#9093A2','#8C1515','#22292F','#22292F'])
-    },
-    {
-      key:'@tonal-weave', label:'Tonal weave', name:'Tonal weave', kind:'design', character:'',
-      note:'Three Cardinal tones reveal the intersecting facets.', cornerMode:'auto', outline:false,
-      fills:patterned(['#B85150','#8C1515','#5E0E0E','#B85150','#8C1515','#5E0E0E',
-        '#B85150','#5E0E0E','#8C1515','#B85150','#5E0E0E','#8C1515','#B85150','#5E0E0E','#5E0E0E','#5E0E0E'])
     }
   ];
   DESIGNS.forEach(function (design) { Object.freeze(design.fills); Object.freeze(design); });

@@ -19,11 +19,11 @@
   });
   const CORNER_MODES = Object.freeze(['auto', 'clear', 'manual']);
   const EXTRA_SETTINGS = Object.freeze({
-    remapOnRightClick:false, brushLinked:true, galleryFilter:'uppercase',
+    brushLinked:true, galleryFilter:'uppercase',
     sheetScope:'uppercase', sheetOutlines:true
   });
-  const FILTERS = ['uppercase', 'lowercase', 'digits', 'ascii', 'designs', 'all'];
-  const SHEET_SCOPES = FILTERS.concat(['gallery', 'saved']);
+  const FILTERS = ['uppercase', 'lowercase', 'digits', 'ascii', 'designs', 'all', 'saved'];
+  const SHEET_SCOPES = FILTERS.concat(['gallery']);
   const own = function (object, key) { return Object.prototype.hasOwnProperty.call(object, key); };
   const isObject = function (value) { return value !== null && typeof value === 'object' && !Array.isArray(value); };
   const clone = function (value) { return JSON.parse(JSON.stringify(value)); };
@@ -111,7 +111,7 @@
   function checkedExtraSettings(source, base) {
     const input = isObject(source) ? source : {};
     const result = Object.assign({}, base, EXTRA_SETTINGS);
-    ['remapOnRightClick', 'brushLinked', 'sheetOutlines'].forEach(function (key) {
+    ['brushLinked', 'sheetOutlines'].forEach(function (key) {
       if (typeof input[key] === 'boolean') result[key] = input[key];
     });
     if (FILTERS.includes(input.galleryFilter)) result.galleryFilter = input.galleryFilter;

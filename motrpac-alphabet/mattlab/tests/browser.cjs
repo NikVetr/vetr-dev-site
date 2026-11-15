@@ -10,7 +10,8 @@ const path = require('node:path');
   const {page, errors} = session;
   try {
     await page.waitForFunction(() => !!window.CardinalStudio);
-    assert.equal(await page.locator('.studio-links a').first().getAttribute('href'), '../');
+    assert.equal(await page.locator('#editor-switch').getAttribute('role'), 'switch');
+    assert.equal(await page.locator('#editor-switch').getAttribute('aria-checked'), 'true');
     const first = page.locator('#artworkHost .paintable').first();
     const id = await first.getAttribute('id');
     const initial = await page.evaluate(id => window.CardinalStudio.getFills()[id], id);

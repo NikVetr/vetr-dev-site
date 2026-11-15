@@ -18,6 +18,7 @@
     [752.22,600.55],[664.22,692.85],[569.71,793.28],[1068.76,348.24],
     [1069.76,666.17],[939.79,800.47],[841.33,696.7],[436.35,529.68],
     [1082.23,491.19],[582.49,677.53],[935.51,697.01],[933.37,355.18],[583.6,350.7]];
+  /** @type {InstanceType<typeof import('./model.js').Store>} */
   let store;
   let storageAvailable = true;
   let initialNotice = '';
@@ -63,12 +64,21 @@
   let wheelActionAt = -1000;
   const viewport = $('canvasViewport');
   const host = $('artworkHost');
+  if (!host) throw new Error('Missing artwork container');
   const clamp = function (value, lo, hi) { return Math.min(hi, Math.max(lo, value)); };
   const modulo = function (value, n) { return ((value % n) + n) % n; };
 
   function populateGallery(targetStore) {
     const target = targetStore || store;
     let skipped = 0;
+    // Retire automatic colour-study starters, retaining any saved user edits.
+    ['@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
+      const doc = target.project.documents[key];
+      if (doc && !doc.touched) {
+        delete target.project.documents[key];
+        if (target.project.currentGlyph === key) target.project.currentGlyph = '@original';
+      }
+    });
     function ensure(glyph, fills, metadata) {
       if (!Object.prototype.hasOwnProperty.call(target.project.documents, glyph) &&
         Object.keys(target.project.documents).length >= 256) { skipped += 1; return; }
@@ -84,6 +94,12 @@
         bindings[id] = {familyId:'cardinal', shade:1};
         fills[id] = cardinal.colors[1];
       });
+      const existing = target.project.documents[glyph];
+      if (seed.status === 'guess' && existing && !existing.touched &&
+          existing.kind === 'glyph' && existing.seedStatus === 'blank' &&
+          Object.values(existing.fills).every(function (fill) { return fill === '#FFFFFF'; })) {
+        delete target.project.documents[glyph];
+      }
       ensure(glyph, fills, {bindings:bindings, cornerMode:'auto',
         kind:'glyph', seedStatus:seed.status, name:glyph});
     });
@@ -96,6 +112,11 @@
       ensure(design.key, design.fills, {bindings:bindings,
         cornerMode:design.cornerMode, kind:'design', seedStatus:'design', name:design.name});
     });
+    if (!Object.prototype.hasOwnProperty.call(target.project.documents, target.project.currentGlyph)) {
+      const replacement = Object.keys(target.project.documents)[0];
+      if (!replacement) throw new Error('The project has no available studies.');
+      target.project.currentGlyph = replacement;
+    }
     return skipped;
   }
 
@@ -328,14 +349,12 @@
             settings.family === familyIndex && settings.shade === shadeIndex;
           selectSwatch(familyIndex, repeat ? (shadeIndex + 1) % 3 : shadeIndex);
         });
-        button.addEventListener('contextmenu', function (event) {
-          event.preventDefault();
-          const targetIndex = modulo(familyIndex + (event.shiftKey ? -1 : 1), palettes.length);
-          if (settings.remapOnRightClick) applyFamilyRemap(family.id, palettes[targetIndex].id, false);
-          selectSwatch(targetIndex, shadeIndex);
-        });
         row.appendChild(button);
         paletteButtons.push({button:button, family:familyIndex, shade:shadeIndex, color:hex});
+      });
+      row.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+        cycleFamilyTag(family.id, event.shiftKey ? -1 : 1);
       });
       row.addEventListener('dragover', function (event) {
         if (!remapSource) return;
@@ -443,9 +462,16 @@
     renderBrush();
     queueSave();
   }
-  function stepFamily(delta, remap) {
+  /** @param {string} familyId @param {number} delta */
+  function cycleFamilyTag(familyId, delta) {
+    const source = palettes.findIndex(function (/** @type {{id:string}} */ family) { return family.id === familyId; });
+    if (source < 0) throw new Error('Unknown palette row: ' + familyId);
+    const target = palettes[modulo(source + delta, palettes.length)];
+    applyFamilyRemap(familyId, target.id, false);
+  }
+  /** @param {number} delta */
+  function stepFamily(delta) {
     const target = modulo(settings.family + delta, palettes.length);
-    if (remap && settings.remapOnRightClick && settings.brushLinked) applyFamilyRemap(palettes[settings.family].id, palettes[target].id, false);
     selectSwatch(target, settings.shade);
   }
   function stepShade(delta) { selectSwatch(settings.family, settings.shade + delta); }
@@ -500,7 +526,7 @@
   function glyphLabel(glyph) { return glyph === ' ' ? '␠' : glyph; }
   function galleryKeys(scope) {
     const documents = store.project.documents;
-    const designKeys = Object.keys(documents).filter(function (key) { return documents[key].kind === 'design'; });
+    const designKeys = Object.keys(documents).filter(function (key) { return key === '@original'; });
     const key = scope || settings.galleryFilter || 'uppercase';
     if (key === 'designs') return designKeys;
     if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].touched; });
@@ -650,7 +676,6 @@
     $('nextMode').value = settings.seed;
     $('exportTransparent').checked = settings.exportTransparent !== false;
     $('cornerMode').value = store.doc.cornerMode;
-    $('remapOnRightClick').checked = settings.remapOnRightClick === true;
     $('sheetScope').value = settings.sheetScope || 'uppercase';
     $('sheetOutlines').checked = settings.sheetOutlines !== false;
   }
@@ -743,7 +768,6 @@
     queueSave();
   });
   $('cancelRemapBtn').addEventListener('click', function () { remapSource = null; renderFamilyUsage(); });
-  $('remapOnRightClick').addEventListener('change', function () { settings.remapOnRightClick = this.checked; queueSave(); });
   $('cornerMode').addEventListener('change', function () {
     finishStroke();
     finishPaletteEdit();
@@ -849,7 +873,7 @@
   host.addEventListener('pointerdown', function (event) {
     if (event.button === 1 || event.button === 2) {
       event.preventDefault();
-      stepFamily(event.shiftKey ? -1 : 1, event.button === 2);
+      if (event.button === 1) stepFamily(event.shiftKey ? -1 : 1);
       return;
     }
     if (event.button !== 0 || event.isPrimary === false) return;
@@ -912,7 +936,18 @@
     renderBrush();
     saveNow();
   });
-  host.addEventListener('contextmenu', function (event) { event.preventDefault(); });
+  host.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+    const id = faceFrom(event.target);
+    if (!id) return;
+    const binding = store.doc.bindings[id];
+    if (!binding) {
+      toast('This piece is not linked to a palette row. Paint it with a palette colour first.');
+      return;
+    }
+    cycleFamilyTag(binding.familyId, event.shiftKey ? -1 : 1);
+    showHover(id);
+  });
   host.addEventListener('auxclick', function (event) { event.preventDefault(); });
   host.addEventListener('dragstart', function (event) { event.preventDefault(); });
   host.addEventListener('click', function (event) {
@@ -1185,7 +1220,7 @@
         status:doc.touched ? 'edited' : doc.seedStatus, fills:Object.assign({}, doc.fills)};
     });
     const scopes = {uppercase:'A–Z', lowercase:'a–z', digits:'0–9', ascii:'Printable ASCII',
-      all:'All characters and designs', gallery:'Visible gallery', saved:'Edited studies'};
+      all:'All characters and original', gallery:'Visible gallery', saved:'Edited studies'};
     const options = {title:store.project.title + ' · ' + scopes[scope],
       subtitle:entries.length + ' studies · edited colors and corner settings included',
       outline:$('sheetOutlines').checked, columns:6, scale:2};

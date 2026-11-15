@@ -104,7 +104,4 @@
 
 .family-name{min-width:0;overflow:hidden;text-overflow:ellipsis}.custom-hex[aria-invalid=true]{border-color:#b22d2d;background:#fff3f0}.artwork-host .paintable{outline:none}.artwork-host svg:focus{outline:none}@media(min-width:801px){.palette-grid{max-height:420px;overflow-y:auto;padding:4px 4px 4px 2px;margin:-4px -4px -4px -2px;scrollbar-width:thin}}@media(max-width:350px){.toolbar-left .button{font-size:10px;padding:5px}.toolbar-group+.toolbar-group{padding-left:3px}.canvas-toolbar .icon-button{width:27px}}@media(max-width:590px){input[type=text],select{font-size:16px!important}.custom-hex{width:88px}.custom-family-name{height:36px}.glyph-value{font-size:20px!important}}
 
-/* Related editors share the existing header, without an additional row. */
-.studio-links{display:flex;align-items:center;gap:12px;font-size:11px;white-space:nowrap;margin-right:6px}.studio-links a{text-decoration:none}.studio-links a:hover{text-decoration:underline}.studio-links a:focus-visible{outline:3px solid #a63c3c85;outline-offset:3px}@media(max-width:590px){.studio-links{gap:7px;margin-right:2px;font-size:10px}.studio-links a:last-child{display:none}.brand-symbol{display:none}.brand-name{font-size:14px}.brand-caption{font-size:9px}.header-actions{gap:3px}}
-
 @media(max-width:350px){.tool-section{grid-column:1/-1}.custom-color-row{grid-column:1/-1;grid-row:7;justify-content:flex-start;margin-top:8px}.custom-family-row{grid-row:8}.custom-color-row label{display:block}}

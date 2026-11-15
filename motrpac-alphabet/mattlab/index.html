@@ -8,18 +8,24 @@
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../shared/light-switch.css">
+  <link rel="stylesheet" href="../editor-switch.css">
+  <script type="module" src="../editor-switch.js"></script>
   <meta name="description" content="Paint geometric logo pieces, build character studies, and export SVG, PNG or a character sheet.">
 </head>
 <body>
 <noscript><p style="margin:20px">Enable JavaScript in your browser to paint the polygons and export your designs.</p></noscript>
   <div class="app-shell">
     <header class="app-header">
+      <div class="editor-header-start">
+        <button id="editor-switch" data-editor="mattlab" type="button">MotRPAC / Mattlab</button>
       <div class="brand">
         <div class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M3 19 12 4h5l5 8 5-8h5L23 20h-5l-5-8-5 8Z" fill="currentColor"/><path d="m4 20 9 12h5l5-8 5 8h5l-9-15h-5l-5 8-5-8Z" fill="currentColor" opacity=".65"/></svg></div>
         <div><div class="brand-name">Cardinal <span>Studio</span></div><div class="brand-caption">Mattlab logo painter</div></div>
       </div>
+      </div>
       <div class="header-actions">
-        <nav class="studio-links" aria-label="Related editors"><a href="../">MotRPAC alphabet</a><a href="../../">vetr.dev</a></nav>
+        <a class="editor-collection-link" href="../../">vetr.dev</a>
         <button class="button ghost" id="saveProject" aria-label="Save editable project" type="button" title="Save an editable project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg><span>Save project</span></button>
         <button class="button ghost" id="loadProject" aria-label="Open saved project" type="button" title="Open a saved project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h7l2 2h9l-3 11H3V7Zm0 0V4h7l2 3h7v2"/></svg><span>Open</span></button>
         <input type="file" id="projectFile" accept=".json,application/json" hidden>
@@ -31,8 +37,8 @@
               <dt>Click a piece</dt><dd>Paint with the active brush.</dd>
               <dt>Click selected color</dt><dd>Cycle through that row’s three columns.</dd>
               <dt>Scroll vertically</dt><dd>Move through the three shades.</dd>
-              <dt>Scroll horizontally<br>or middle-click</dt><dd>Change color family.</dd>
-              <dt>Right-click</dt><dd>Next color family, keeping the column. Hold <span class="key">Shift</span> to go back.</dd>
+              <dt>Scroll horizontally<br>or middle-click</dt><dd>Change the brush color family.</dd>
+              <dt>Right-click</dt><dd>Move the hovered piece’s color family, or the hovered palette row, to the next row throughout the study, keeping shade columns. Hold <span class="key">Shift</span> to move to the previous row.</dd>
               <dt>Drag a row marker</dt><dd>Move all its colors in the current design to another row. Or tap the marker, then the destination row’s name.</dd>
               <dt>White / Clear</dt><dd>Hide a piece with white, or make it transparent.</dd>
               <dt>Eyedropper / Alt-click</dt><dd>Pick a color from the artwork.</dd>
@@ -93,7 +99,6 @@
 <div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Peacock blue</button><button class="swatch" type="button" style="background-color:#002133" aria-label="Peacock blue, Dark"></button><button class="swatch" type="button" style="background-color:#005176" aria-label="Peacock blue, Medium"></button><button class="swatch" type="button" style="background-color:#0088C1" aria-label="Peacock blue, Light"></button></div></div>
         <div class="palette-remap-help">
           <div class="remap-status-row"><p class="remap-status" id="paletteRemapStatus" aria-live="polite">A numbered marker shows a row used in this design. Drag it to another row, or tap it and then a row name, to recolor those pieces.</p><button class="button ghost remap-cancel" type="button" id="cancelRemapBtn" hidden>Cancel</button></div>
-          <label class="check-label remap-setting"><input type="checkbox" id="remapOnRightClick">Right-click also moves the used row’s colors</label>
         </div>
         <div class="custom-color-row"><label for="customColor">Custom color</label><input type="color" id="customColor" value="#8c1515" aria-label="Choose a custom color"><input class="custom-hex" type="text" id="customHex" value="#8C1515" maxlength="7" spellcheck="false" aria-label="Custom color hexadecimal code"></div>
         <div class="custom-family-row"><input class="custom-family-name" type="text" id="customFamilyName" placeholder="Name a new color family" maxlength="35" aria-label="New color family name"><button class="icon-button" id="addFamilyBtn" type="button" title="Add dark, medium, and light tones from this custom color" aria-label="Add a color family"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12M12 6v12"/></svg></button></div>
@@ -105,7 +110,7 @@
             <button class="tool-button" type="button" id="clearTool" aria-label="Make transparent" aria-pressed="false" title="Make a piece transparent"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16M4 4l16 16" opacity=".55"/></svg><span>Clear</span></button>
             <button class="tool-button" type="button" id="sampleTool" aria-label="Pick color from artwork" aria-pressed="false" title="Sample a color from the artwork"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5M14 5l3-3 5 5-3 3M15 6 5 16l-1 4 4-1L18 9M8 13l3 3"/></svg><span>Pick</span></button>
           </div>
-          <p class="tool-hint">Click a piece to paint. Clicking the selected swatch cycles columns. Right-click cycles rows; scroll changes the active tone.</p>
+          <p class="tool-hint">Click a piece to paint. Clicking the selected swatch cycles columns. Right-click a piece or palette row to remap that family to the next row; Shift reverses. Middle-click changes only the brush family.</p>
         </div>
       </aside>
 
@@ -225,15 +230,15 @@
         </footer>
         <section class="glyph-shelf" aria-label="Character and design gallery">
           <div class="shelf-heading">
-            <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Cardinal-red suggestions are starting points. Where the geometry gives no convincing character, the tile stays blank.</p></div>
-            <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All studies</option><option value="designs">Designs</option></select>
+            <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Editable starting guesses for letters and symbols; space is left empty.</p></div>
+            <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All characters + original</option><option value="designs">Original</option><option value="saved">Saved studies</option></select>
           </div>
           <div class="glyph-strip" id="glyphStrip" role="group" aria-label="Choose a character or design thumbnail"></div>
           <div class="gallery-meta"><span id="gallerySummary">Choose a thumbnail to open its draft.</span><span class="gallery-legend"><span class="legend-dot" aria-hidden="true"></span> Saved draft · outlines help reveal the pieces</span></div>
           <div class="sheet-bar">
             <div><div class="sheet-title">Export a character sheet</div><div class="sheet-subtitle">One labeled sheet with the chosen studies.</div></div>
             <div class="sheet-actions">
-              <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + designs</option><option value="saved">Saved studies</option></select>
+              <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + original</option><option value="saved">Saved studies</option></select>
               <label class="check-label"><input type="checkbox" id="sheetOutlines" checked>Outlines</label>
               <button class="button" type="button" id="sheetSvgBtn">Sheet SVG</button>
               <button class="button" type="button" id="sheetPngBtn">Sheet PNG</button>
