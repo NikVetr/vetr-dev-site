@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MotRPAC Alphabet Editor</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="font-export.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="menu-bar">
+        <div class="menu-group">
+          <details class="menu editor-menu">
+            <summary aria-label="Choose logo editor">MotRPAC</summary>
+            <nav class="menu-popover" aria-label="Logo editors">
+              <a href="./" aria-current="page">MotRPAC alphabet</a>
+              <a href="mattlab/">Mattlab logo painter</a>
+              <a href="../">vetr.dev</a>
+            </nav>
+          </details>
+          <details class="menu">
+            <summary>File</summary>
+            <div class="menu-popover">
+              <button id="export-json">Export JSON</button>
+              <button id="export-current-svg">Export Current SVG</button>
+              <button id="export-all-svg">Export All SVGs</button>
+              <button id="export-font">Export Font…</button>
+              <button id="import-json">Import JSON</button>
+              <input id="import-json-file" type="file" accept="application/json,.json" hidden>
+            </div>
+          </details>
+          <details class="menu">
+            <summary>Edit</summary>
+            <div class="menu-popover">
+              <button id="copy-shapes">Copy Shapes</button>
+              <button id="paste-shapes">Paste Shapes</button>
+              <button id="duplicate-selected">Duplicate</button>
+              <button id="delete-selected">Delete</button>
+              <button id="clear-letter">Clear Letter</button>
+              <button id="reset-view">Reset View</button>
+            </div>
+          </details>
+          <details class="menu">
+            <summary>Shape</summary>
+            <div class="menu-popover">
+              <button data-add-shape="lollipop-long">Add Long Lollipop</button>
+              <button data-add-shape="lollipop-short-left">Add Short Lollipop</button>
+              <button data-add-shape="lollipop-short-right">Add Reverse Lollipop</button>
+              <button data-add-shape="curved-lollipop">Add Curved Lollipop</button>
+              <button data-add-shape="double-stem">Add Double Stem</button>
+              <button data-add-shape="curved-double-stem">Add Curved Double Stem</button>
+              <button data-add-shape="circle">Add Circle</button>
+            </div>
+          </details>
+        </div>
+        <div class="header-right">
+          <div class="global-variants" aria-label="Global variant selector">
+            <span>Variants:</span>
+            <button type="button" data-global-variant="0">1</button>
+            <button type="button" data-global-variant="1">2</button>
+            <button type="button" data-global-variant="2">3</button>
+          </div>
+          <div class="layout-actions" aria-label="Align and distribute selected shapes">
+            <div class="layout-section" aria-label="Align selected shapes">
+              <span class="layout-section-label">Align</span>
+              <div class="layout-icon-grid align-grid">
+                <button class="layout-icon-button" type="button" data-align-axis="x" data-align-mode="min" title="Align left">
+                  <span class="layout-icon align-x-min" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button class="layout-icon-button" type="button" data-align-axis="x" data-align-mode="mean" title="Align horizontal center">
+                  <span class="layout-icon align-x-mean" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button class="layout-icon-button" type="button" data-align-axis="x" data-align-mode="max" title="Align right">
+                  <span class="layout-icon align-x-max" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button class="layout-icon-button" type="button" data-align-axis="y" data-align-mode="min" title="Align top">
+                  <span class="layout-icon align-y-min" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button class="layout-icon-button" type="button" data-align-axis="y" data-align-mode="mean" title="Align vertical center">
+                  <span class="layout-icon align-y-mean" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button class="layout-icon-button" type="button" data-align-axis="y" data-align-mode="max" title="Align bottom">
+                  <span class="layout-icon align-y-max" aria-hidden="true"><span></span><span></span></span>
+                </button>
+              </div>
+            </div>
+            <div class="layout-section" aria-label="Distribute selected shapes">
+              <span class="layout-section-label">Distribute</span>
+              <div class="layout-icon-grid distribute-grid">
+                <button id="distribute-x" class="layout-icon-button" type="button" title="Distribute selected shapes horizontally">
+                  <span class="layout-icon distribute-x" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <button id="distribute-y" class="layout-icon-button" type="button" title="Distribute selected shapes vertically">
+                  <span class="layout-icon distribute-y" aria-hidden="true"><span></span><span></span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-file-actions" aria-label="File actions">
+            <button id="header-export-json" type="button">Export</button>
+            <button id="header-import-json" type="button">Import</button>
+            <button id="copy-current-json" type="button">Copy JSON</button>
+          </div>
+          <div class="history-controls">
+            <button id="undo-action" type="button">Undo</button>
+            <button id="redo-action" type="button">Redo</button>
+            <button id="reset-app" type="button">Reset</button>
+            <select id="history-jump" aria-label="History"></select>
+          </div>
+          <div class="active-letter">
+            <span>Letter</span>
+            <strong id="active-letter-label">A</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="stage-wrap" aria-label="Alphabet shape editor">
+          <svg id="stage" class="stage" role="img" aria-label="Editable letter workspace">
+            <defs id="stage-defs"></defs>
+            <g id="viewport">
+              <rect id="artboard" x="0" y="0" width="6000" height="4800" rx="0"></rect>
+              <g id="grid-layer"></g>
+              <g id="guide-layer"></g>
+              <g id="shape-layer"></g>
+              <g id="handle-layer"></g>
+              <rect id="selection-box" hidden></rect>
+            </g>
+          </svg>
+          <canvas id="guide-overlay" class="guide-overlay" aria-hidden="true"></canvas>
+        </section>
+
+        <aside class="inspector">
+          <div class="panel-section">
+            <h2>Selection</h2>
+            <div id="selection-count" class="muted">No shapes selected</div>
+          </div>
+
+          <div class="panel-section">
+            <label for="letter-variant">Letter variant</label>
+            <select id="letter-variant"></select>
+            <div class="button-row">
+              <button id="add-variant">Add</button>
+              <button id="duplicate-variant">Copy</button>
+              <button id="delete-variant">Delete</button>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <label for="shape-template">Shape</label>
+            <select id="shape-template">
+              <option value="lollipop-long">Long lollipop</option>
+              <option value="lollipop-long-alt">Long lollipop alt</option>
+              <option value="lollipop-short-left">Short lollipop</option>
+              <option value="lollipop-short-right">Reverse lollipop</option>
+              <option value="curved-lollipop">Curved lollipop</option>
+              <option value="double-stem">Double stem</option>
+              <option value="curved-double-stem">Curved double stem</option>
+              <option value="circle">Circle</option>
+            </select>
+          </div>
+
+          <div class="panel-section">
+            <label for="shape-style">Color / texture</label>
+            <select id="shape-style"></select>
+            <div id="style-swatches" class="swatches"></div>
+          </div>
+
+          <div class="panel-grid">
+            <label for="shape-x">X</label>
+            <input id="shape-x" type="number" step="1">
+            <label for="shape-y">Y</label>
+            <input id="shape-y" type="number" step="1">
+            <label for="shape-angle">Angle</label>
+            <input id="shape-angle" type="number" step="1">
+            <label for="shape-stem">Stem</label>
+            <input id="shape-stem" type="number" step="1">
+          </div>
+
+          <div class="panel-section">
+            <label for="grid-size">Grid</label>
+            <select id="grid-size">
+              <option value="5">5 px</option>
+              <option value="10">10 px</option>
+              <option value="25" selected>25 px</option>
+              <option value="50">50 px</option>
+            </select>
+          </div>
+
+          <div class="panel-section">
+            <label for="angle-step">Angle step</label>
+            <select id="angle-step">
+              <option value="5" selected>5 deg</option>
+              <option value="15">15 deg</option>
+              <option value="30">30 deg</option>
+              <option value="45">45 deg</option>
+              <option value="90">90 deg</option>
+            </select>
+          </div>
+
+          <div class="panel-section">
+            <div class="panel-heading-row">
+              <h2>Polish</h2>
+              <div class="stage-toggle" role="group" aria-label="Polish stage">
+                <button id="polish-stage-1" type="button" data-polish-stage="1">1</button>
+                <button id="polish-stage-2" type="button" data-polish-stage="2">2</button>
+              </div>
+            </div>
+            <div class="panel-grid">
+              <label for="polish-iterations">Steps</label>
+              <input id="polish-iterations" type="number" min="1" max="50" step="1" value="50">
+            </div>
+            <div class="polish-grid">
+              <button id="polish-all">All</button>
+              <button id="polish-lengths">Lengths</button>
+              <button id="polish-positions">Positions</button>
+              <button id="polish-angles">Angles</button>
+              <button id="polish-curve">Curve</button>
+              <button id="polish-size">Size</button>
+              <button id="polish-colors">Colors</button>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Shape Actions</h2>
+            <div class="button-row">
+              <button id="add-shape">Add</button>
+              <button id="duplicate-side">Duplicate</button>
+              <button id="delete-side">Delete</button>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer id="letter-strip" class="letter-strip" aria-label="Alphabet letters"></footer>
+    </div>
+
+    <dialog id="font-dialog" aria-labelledby="font-dialog-title">
+      <form id="font-form">
+        <div class="font-dialog-heading"><h2 id="font-dialog-title">Export alphabet as a font</h2><button id="font-close" type="button" aria-label="Close font export">×</button></div>
+        <p>Uses each letter’s selected variant, keeping their relative sizes and aligning them on one baseline. Lowercase uses the same designs.</p>
+        <div class="font-export-options">
+          <label>Family name <input id="font-family" value="MotRPAC Alphabet" maxlength="80" required></label>
+          <label>Appearance <select id="font-color"><option value="color">Logo colours</option><option value="mono">Single colour</option></select></label>
+        </div>
+        <label class="font-sample-label">Try a word <input id="font-sample" value="MotRPAC ABC XYZ" maxlength="120" spellcheck="false"></label>
+        <div id="font-preview" aria-label="Font preview"></div>
+        <p id="font-status" role="status"></p>
+        <p class="font-note">Downloads a .ttf font. Colour support depends on the application; ordinary outlines are included for applications without it. The thin editor outline is not part of the font.</p>
+        <div class="font-dialog-actions"><button id="font-download" type="submit">Download font</button></div>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+#font-dialog { width: min(40rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.25rem; border: 1px solid #b5bec7; border-radius: 8px; color: #17202a; background: #f8fafc; box-shadow: 0 12px 60px #0004; }
+#font-dialog::backdrop { background: #17202a66; }
+#font-dialog p { line-height: 1.5; margin: .8rem 0; }
+.font-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.font-dialog-heading h2 { margin: 0; font-size: 1.15rem; }
+#font-close { font-size: 1.5rem; padding: 0 .5rem; }
+.font-export-options { display: flex; flex-wrap: wrap; gap: .75rem; }
+.font-export-options label, .font-sample-label { display: flex; flex-direction: column; gap: .35rem; flex: 1; min-width: min(12rem, 100%); }
+.font-export-options input, .font-export-options select, #font-sample { box-sizing: border-box; min-width: 0; width: 100%; padding: .5rem; font-size: 1rem; }
+.font-sample-label { margin-top: .8rem; }
+#font-preview { margin-top: .75rem; min-height: 7rem; padding: .5rem; border: 1px solid #d3dbe2; background: white; color: #17202a; font-size: clamp(36px, 7vw, 64px); line-height: 1.4; overflow-wrap: anywhere; white-space: pre-wrap; }
+#font-status[data-error="true"] { color: #a0182a; }
+#font-dialog .font-note { font-size: .85rem; color: #48545f; }
+.font-dialog-actions { display: flex; justify-content: flex-end; }

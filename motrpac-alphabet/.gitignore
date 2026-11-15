@@ -1,0 +1,5 @@
+AGENTS.md
+tmp/
+.playwright-mcp/
+*-smoke.png
+motrpac-editor-*.png

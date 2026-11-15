@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6000" height="4800" viewBox="0 0 6000 4800">
+  <defs></defs>
+  <g transform="translate(2077.895 674.175) rotate(37.42264142351917 322.105 325.825)">
+    <path d="M 451.598,535.85 A 246.736,246.736 0 1 1 564.517,371.817 L 1037.859,697.66 A 246.736,246.736 0 0 0 924.941,861.693 Z" fill="#46257e" stroke="#17202a" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+  </g>
+  <g transform="translate(1602.895 1749.175) rotate(325.45692699311167 322.105 325.825)">
+    <path d="M 451.598,535.85 A 246.736,246.736 0 1 1 564.517,371.817 L 786.184,524.41 A 246.736,246.736 0 0 0 673.266,688.443 Z" fill="#62a746" stroke="#17202a" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+  </g>
+  <g transform="translate(1074.273 769.471) rotate(320 1675.727 1305.529)">
+    <path d="M 1922.463,1305.529 A 246.736,246.736 0 1 1 1428.992,1305.529 A 246.736,246.736 0 1 1 1922.463,1305.529 Z" fill="#b40e2c" stroke="#17202a" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+  </g>
+  <g transform="translate(1234.3858412265663 1869.936) rotate(18.50937094290481 321.892 1305.064)">
+    <path d="M 421.549,1079.349 A 246.736,246.736 0 1 1 222.407,1079.273 L 222.639,475.008 A 246.736,246.736 0 0 0 421.78,475.084 Z" fill="#3a9fd1" stroke="#17202a" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+  </g>
+  <g transform="translate(2828.108 1869.936) rotate(339.995011571649 321.892 1305.064)">
+    <path d="M 421.549,1079.349 A 246.736,246.736 0 1 1 222.407,1079.273 L 222.642,464.691 A 246.736,246.736 0 0 0 421.783,464.767 Z" fill="#cb9f1c" stroke="#17202a" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+  </g>
+</svg>

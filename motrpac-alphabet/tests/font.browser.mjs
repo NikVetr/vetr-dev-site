@@ -1,0 +1,64 @@
+import assert from 'node:assert/strict';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { openPage } from '../../scripts/landing-art/browser.mjs';
+
+const out = new URL('../../tmp/output/alphabet-font/', import.meta.url);
+await mkdir(out, { recursive: true });
+const run = await openPage('motrpac-alphabet/');
+try {
+  const { page, errors } = run;
+  // Keep native text undo independent of committed editor history.
+  await page.evaluate(() => { state.selectedIds.add(currentShapes()[0].id); renderAll(); });
+  const beforeStyle = await page.evaluate(() => ({style:currentShapes()[0].style, history:historyState.index}));
+  const oldStyle = await page.locator('#shape-style').inputValue();
+  await page.locator('#shape-style').selectOption(oldStyle === 'red' ? 'blue' : 'red');
+  const afterStyle = await page.evaluate(() => ({style:currentShapes()[0].style, history:historyState.index}));
+  assert.notDeepEqual(afterStyle, beforeStyle);
+  const oldX = await page.locator('#shape-x').inputValue();
+  await page.locator('#shape-x').focus();
+  await page.locator('#shape-x').press('Control+a');
+  await page.locator('#shape-x').pressSequentially('4321');
+  await page.locator('#shape-x').press('Control+z');
+  assert.equal(await page.locator('#shape-x').inputValue(), oldX);
+  assert.deepEqual(await page.evaluate(() => ({style:currentShapes()[0].style, history:historyState.index})), afterStyle);
+  await page.locator('#shape-style').focus();
+  await page.locator('#shape-style').press('Control+z');
+  assert.deepEqual(await page.evaluate(() => ({style:currentShapes()[0].style, history:historyState.index})), beforeStyle);
+  await page.locator('#redo-action').focus();
+  await page.locator('#redo-action').press('Control+Shift+z');
+  assert.deepEqual(await page.evaluate(() => ({style:currentShapes()[0].style, history:historyState.index})), afterStyle);
+  await page.locator('.menu summary').filter({ hasText: /^File$/ }).click();
+  await page.locator('#export-font').click();
+  await page.waitForFunction(() => document.querySelector('#font-status').textContent.startsWith('All 26'));
+  assert.equal(await page.locator('#font-download').isEnabled(), true);
+  await page.screenshot({ path: new URL('color-font.png', out).pathname });
+  const downloadPromise = page.waitForEvent('download');
+  await page.locator('#font-download').click();
+  const download = await downloadPromise;
+  assert.equal(download.suggestedFilename(), 'MotRPAC-Alphabet.ttf');
+  await download.saveAs(new URL('motrpac-color.ttf', out).pathname);
+  const original = await page.evaluate(() => JSON.stringify(state.letters));
+  await page.locator('#font-sample').fill('MOTRPAC');
+  await page.locator('#font-sample').press('Control+z');
+  assert.equal(await page.evaluate(() => JSON.stringify(state.letters)), original);
+  await page.locator('#font-color').selectOption('mono');
+  await page.waitForFunction(() => !document.querySelector('#font-download').disabled);
+  await page.screenshot({ path: new URL('mono-font.png', out).pathname });
+  const mono = await page.evaluate(async () => Array.from((await window.MotRPACAlphabet.exportFont({ color: false })).bytes));
+  await writeFile(new URL('motrpac-mono.ttf', out), Uint8Array.from(mono));
+  await page.locator('#font-close').click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('.menu summary').filter({ hasText: /^File$/ }).click();
+  await page.locator('#export-font').click();
+  await page.waitForFunction(() => !document.querySelector('#font-download').disabled);
+  const dialog = await page.locator('#font-dialog').boundingBox();
+  assert.ok(dialog.x >= 0 && dialog.x + dialog.width <= 391);
+  await page.screenshot({ path: new URL('mobile-font.png', out).pathname });
+  await page.locator('#font-close').click();
+  // A deliberately blank selected variant is omitted, not silently replaced.
+  await page.evaluate(() => { state.letters.A.variants[state.letters.A.activeVariant] = []; });
+  const partial = await page.evaluate(async () => (await window.MotRPACAlphabet.exportFont()).missing);
+  assert.deepEqual(partial, ['A']);
+  assert.deepEqual(errors, []);
+  console.log('Font browser checks passed: color/mono FontFace, download, native editing, phone dialog, selected variants.');
+} finally { await run.close(); }
