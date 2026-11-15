@@ -1,0 +1,38 @@
+body { margin: 0; }
+header { display: flex; align-items: center; gap: .85rem; padding: .6rem 1.2rem; border-bottom: 1px solid var(--border); }
+header h1 { font-size: 1.35rem; margin: 0; }
+.home { font-size: .8rem; color: var(--muted); text-decoration: none; }
+.subtitle { color: var(--muted); font-size: .9rem; }
+#theme-toggle { margin-left: auto; }
+main { max-width: 1600px; margin: auto; padding: 1rem 1.2rem 2rem; }
+.toolbar, .panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.intro, .hint { color: var(--muted); font-size: .85rem; }
+.intro { margin: .7rem 0; }
+.editors { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.editors section { min-width: 0; }
+.panel-head { min-height: 2.8rem; }
+.panel-head h2 { font-size: 1rem; margin: 0 auto 0 0; }
+.panel-head label { font-size: .8rem; }
+textarea { display: block; width: 100%; box-sizing: border-box; resize: vertical; font: .875rem/1.5 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; tab-size: 2; border: 1px solid var(--border); border-radius: .35rem; background: var(--surface); color: var(--text); padding: .8rem; }
+#source, #output { height: clamp(320px, 56vh, 640px); margin-bottom: .5rem; }
+#output { background: var(--bg); }
+details { margin-top: .9rem; padding: .65rem .8rem; border: 1px solid var(--border); border-radius: .35rem; }
+summary { cursor: pointer; font-weight: 600; }
+details p { max-width: 90ch; font-size: .85rem; line-height: 1.5; }
+.inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin: .8rem 0; }
+.inputs-grid label { font-size: .85rem; }
+.inputs-grid textarea { margin-top: .3rem; }
+#sample-index { width: 5rem; }
+#error { white-space: pre-wrap; padding: .75rem; border: 1px solid #b74949; border-radius: .35rem; color: #b74949; font-family: ui-monospace, monospace; overflow-wrap: anywhere; }
+#warnings, #stale { font-size: .85rem; color: var(--muted); white-space: pre-wrap; }
+@media (max-width: 700px) {
+  header { padding: .55rem .7rem; gap: .6rem; }
+  .subtitle { display: none; }
+  main { padding: .75rem .7rem 1.5rem; }
+  .editors, .inputs-grid { grid-template-columns: 1fr; }
+  #source, #output { height: 360px; }
+  .panel-head { gap: .35rem; }
+  .panel-head label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .panel-head select { max-width: 10rem; }
+  #mode { max-width: 100%; }
+}

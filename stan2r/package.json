@@ -1,0 +1,1 @@
+{"name":"vetr-stan2r","private":true,"type":"module","scripts":{"test":"node --test tests/core.test.mjs","test:browser":"node --test tests/browser.test.mjs"},"devDependencies":{"@types/node":"22.20.5"}}

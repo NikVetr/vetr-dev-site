@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert Stan models to R for predictive simulation and pointwise densities. A deterministic converter running locally in your browser.">
+  <title>Stan2R — Stan to R converter</title>
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header><a href="../" class="home" aria-label="vetr.dev home">vetr.dev</a><h1>Stan2R</h1><span class="subtitle">Stan → R</span><button id="theme-toggle" class="chip" type="button" aria-pressed="false"></button></header>
+  <main>
+    <div class="toolbar">
+      <label for="mode">Convert for</label>
+      <select id="mode">
+        <option value="prior_predictive">Prior predictive simulation</option>
+        <option value="posterior_predictive">Posterior predictive simulation</option>
+        <option value="posterior_density">Pointwise posterior densities</option>
+        <option value="prior_density">Pointwise prior densities</option>
+      </select>
+      <button id="convert" class="primary" type="button">Convert to R</button>
+      <span id="status" role="status">Ready</span>
+    </div>
+    <p class="intro">Translate a model into R you can step through, adapt, and run. Conversion happens on your device; model text is not uploaded.</p>
+    <div id="error" role="alert" hidden></div>
+    <div class="editors">
+      <section aria-labelledby="stan-heading">
+        <div class="panel-head"><h2 id="stan-heading">Stan model</h2><label for="example">Example</label><select id="example"><option value="normal">Normal observations</option><option value="binomial">Beta–binomial</option></select><button id="load-example" type="button">Load</button></div>
+        <textarea id="source" spellcheck="false" aria-label="Stan source code" autocapitalize="off" autocomplete="off"></textarea>
+        <div class="toolbar"><button id="open-file" type="button">Open .stan…</button><input id="file" type="file" accept=".stan,text/plain" hidden><button id="undo" type="button">Undo</button><button id="redo" type="button">Redo</button><span class="hint">⌘ / Ctrl Z · ⇧ Z</span></div>
+      </section>
+      <section aria-labelledby="r-heading">
+        <div class="panel-head"><h2 id="r-heading">Generated R</h2><button id="copy" type="button" disabled>Copy</button><button id="download" type="button" disabled>Download .R</button></div>
+        <textarea id="output" spellcheck="false" readonly aria-label="Generated R code" placeholder="Your translated R code appears here."></textarea>
+        <p id="warnings" role="status" hidden></p>
+        <p id="stale" hidden>Inputs changed. Convert again to update this output.</p>
+      </section>
+    </div>
+    <details id="inputs"><summary>Data &amp; posterior draws <span class="hint">JSON</span></summary>
+      <div class="inputs-grid"><label>Data<textarea id="data" rows="6" spellcheck="false" aria-label="Data JSON"></textarea></label><label>Posterior draws, by column<textarea id="draws" rows="6" spellcheck="false" aria-label="Posterior draws JSON"></textarea></label></div>
+      <label>Draw number <input id="sample-index" type="number" min="1" step="1" value="1"></label>
+      <p class="hint">Draw numbers start at 1. Use CmdStan column names such as <code>theta[1]</code>. The output embeds the selected parameter draw; it reads observed data from an R list named <code>dat</code>.</p>
+    </details>
+    <details><summary>How to use the result</summary>
+      <p>Define <code>dat</code> in R, then run the downloaded script. Its <code>out</code> list contains the model’s top-level variables. Density modes return ordinary densities or probabilities, not log densities. This tool translates a model; it does not fit it.</p>
+      <p>The first successful conversion downloads the R runtime. Later conversions reuse it. Internet access is needed for this initial download. Stan2R reports unsupported constructs instead of silently omitting them. Provide a self-contained Stan model; external <code>#include</code> files are not supported here.</p>
+      <p><a href="api.md">API &amp; CLI</a> · <a href="https://github.com/NikVetr/Stan2R/tree/hardening">Stan2R source</a></p>
+    </details>
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/NikVetr/Stan2R",
+  "commit": "e4f4b15",
+  "files": {
+    "affine.R": "232d48914ea28a4e1b23acf8d39cd2e543b6225e72146423021eae1f081c558f",
+    "ast.R": "55be0ee3ceb7d1f70de6016a1e20a1d7805e46e98d6a131db6c50d4e9c887ddf",
+    "distributions.R": "84ec61093c693a95f0dda0b1dd22e211dfaa03197523c9efcebaaf7143b4f93b",
+    "draws.R": "8f8cd8267b1a4b9309611eaf3f93a65796d1c20a13e64e7484952fd4f797b787",
+    "frontend.R": "25ebb958518aac9e3f769a84c8fd323591d319fd32529345ee2148f4e1464f7c",
+    "mappings.R": "0630916b7ca95f53b640452396fb2b3b7e3b98fa3b87c0e38a7cceb3bce6eac7",
+    "runtime.R": "98ac826b047905c1159cdf181a90b6e44592f21b218560f204a32028a89a4dec",
+    "sexp.R": "630f3edf02c26e54e9a1a5f5dea02b62163d8b9bfd03fe3f425f0938edff628b",
+    "source_map.R": "0dc355f0bca3f6b958535fc0e4164fd8aab3c50d14185749fadac4d1a41773de",
+    "stan_text.R": "d1f073c1eaaf91a942d5187fd75daa3d878430b6c4c7420da58ce937a0cb0d55",
+    "translate.R": "ebf2ab55718ea754d6024516f668b3c7072db9681d68b2b7529f56d75b81d2ff",
+    "translate_expr.R": "b928b960efa8a5f3e49eca92a0d4ef2404b91d081f11d69895000c4aec46d496"
+  }
+}
