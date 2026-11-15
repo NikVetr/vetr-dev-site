@@ -10,6 +10,14 @@ The landing page and Wanderwart use the same `shared/light-switch.js` and styles
 
 Seating exposes two explicit computation paths through `runRequest`: the existing static `submit` and the nominal-category `planRounds` scheduler. The worker, browser API and CLI share that dispatcher. Round results retain assignments, objective terms and raw/weighted travel diagnostics; the UI, selected-round SVG and all-round CSV use those stored assignments. See [the request and objective contracts](../seating/api.md).
 
+## Alphabet and logo editors
+
+`motrpac-alphabet/` preserves the original SVG shape editor and hand-tuned A–Z seed registry. Its font adapter reads the same transformed SVG contours, then `font-export.js` writes a TrueType font with optional COLR/CPAL colour layers and ordinary fallback outlines. Browser-native geometry supplies the contours; the font writer itself is callable without a DOM. The neighboring `mattlab/` painter retains its supplied geometry, project model, colour engine and sheet exporter as separate modules; its API and CLI call those same exporters. The editors have independent saved-project formats and histories, linked within their native headers.
+
+## Stan2R
+
+`stan2r/` runs the pinned Stan compiler in a worker, then passes its typed AST to the unchanged hardened R translator in webR. A small R bridge replaces compiler/process I/O; it does not replace parsing or translation rules. The runtime downloads on the first valid conversion, and serialized requests share its virtual filesystem. The native CLI uses the same compiler, translator, request validation and bridge through `Rscript`. Vendored-source hashes record provenance. Generated code and warnings are returned together; changing inputs marks displayed output stale.
+
 ## Shared decoration editor
 
 Name Tags embeds the standalone Helix editor in a modal. Same-origin, source-checked messages carry a validated draft; pending or invalid edits disable Apply. Apply creates one Name Tags history entry, while Cancel discards the draft. The shared Helix drawing API supplies filled geometry for uniform fitting into the existing reserved decoration box, leaving the default optimizer and underline gaps intact.
