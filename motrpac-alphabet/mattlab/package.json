@@ -1,0 +1,8 @@
+{
+  "name": "mattlab-logo-painter",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  }
+}

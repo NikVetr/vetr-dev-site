@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8c1515">
+  <title>Mattlab Logo Painter · Cardinal Studio</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Paint geometric logo pieces, build character studies, and export SVG, PNG or a character sheet.">
+</head>
+<body>
+<noscript><p style="margin:20px">Enable JavaScript in your browser to paint the polygons and export your designs.</p></noscript>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M3 19 12 4h5l5 8 5-8h5L23 20h-5l-5-8-5 8Z" fill="currentColor"/><path d="m4 20 9 12h5l5-8 5 8h5l-9-15h-5l-5 8-5-8Z" fill="currentColor" opacity=".65"/></svg></div>
+        <div><div class="brand-name">Cardinal <span>Studio</span></div><div class="brand-caption">Mattlab logo painter</div></div>
+      </div>
+      <div class="header-actions">
+        <nav class="studio-links" aria-label="Related editors"><a href="../">MotRPAC alphabet</a><a href="../../">vetr.dev</a></nav>
+        <button class="button ghost" id="saveProject" aria-label="Save editable project" type="button" title="Save an editable project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg><span>Save project</span></button>
+        <button class="button ghost" id="loadProject" aria-label="Open saved project" type="button" title="Open a saved project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h7l2 2h9l-3 11H3V7Zm0 0V4h7l2 3h7v2"/></svg><span>Open</span></button>
+        <input type="file" id="projectFile" accept=".json,application/json" hidden>
+        <details class="help-details">
+          <summary aria-label="How to use Cardinal Studio" title="Controls & shortcuts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.8 8.5a2.4 2.4 0 0 1 4.6 1c0 1.6-2.4 1.8-2.4 3.3M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg></summary>
+          <div class="help-popover">
+            <h2>Painting & navigation</h2>
+            <dl>
+              <dt>Click a piece</dt><dd>Paint with the active brush.</dd>
+              <dt>Click selected color</dt><dd>Cycle through that row’s three columns.</dd>
+              <dt>Scroll vertically</dt><dd>Move through the three shades.</dd>
+              <dt>Scroll horizontally<br>or middle-click</dt><dd>Change color family.</dd>
+              <dt>Right-click</dt><dd>Next color family, keeping the column. Hold <span class="key">Shift</span> to go back.</dd>
+              <dt>Drag a row marker</dt><dd>Move all its colors in the current design to another row. Or tap the marker, then the destination row’s name.</dd>
+              <dt>White / Clear</dt><dd>Hide a piece with white, or make it transparent.</dd>
+              <dt>Eyedropper / Alt-click</dt><dd>Pick a color from the artwork.</dd>
+              <dt>Pan tool / Space</dt><dd>Drag to move around when zoomed in.</dd>
+              <dt>Undo / Redo</dt><dd><span class="key">Ctrl / ⌘ Z</span> · <span class="key">⇧ Z</span></dd>
+              <dt>Next character</dt><dd>Your current draft is remembered.</dd>
+              <dt>Tiny corners</dt><dd>Automatically follow the terminating leg, stay transparent, or paint them manually.</dd>
+              <dt>Character sheets</dt><dd>Export the chosen gallery or character set as one SVG or PNG.</dd>
+            </dl>
+            <p class="help-note">Scroll controls apply over the artwork. Use the shade and color arrows on a touch screen. Zoom in to reach the four tiny corner pieces. Save a project to keep every character and edit it later.</p>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="palette-panel" aria-label="Brush and color palette">
+        <div class="panel-title"><h2>Your palette</h2><span class="section-eyebrow" id="paletteSummary">15 families · 3 tones</span></div>
+        <div class="active-brush">
+          <div class="active-swatch" id="activeSwatch" aria-hidden="true"></div>
+          <div class="active-color-meta"><div class="active-label">Active brush</div><div class="active-color-name" id="activeColorName">Cardinal · Medium</div><div class="active-hex" id="activeHex">#8C1515</div></div>
+        </div>
+        <div class="brush-steppers">
+          <div class="stepper" aria-label="Change shade">
+            <button class="icon-button" id="shadeDarker" type="button" title="Darker shade" aria-label="Darker shade"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span>Shade</span><button class="icon-button" id="shadeLighter" type="button" title="Lighter shade" aria-label="Lighter shade"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+          </div>
+          <div class="stepper" aria-label="Change color family">
+            <button class="icon-button" id="familyPrev" type="button" title="Previous color family" aria-label="Previous color family"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span>Color</span><button class="icon-button" id="familyNext" type="button" title="Next color family" aria-label="Next color family"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+          </div>
+        </div>
+        <details class="palette-controls" id="paletteControls">
+          <summary>Perceptual color controls</summary>
+          <div class="palette-control-body">
+            <div class="palette-mode-field"><label class="field-label" for="paletteMode">How the three columns differ</label><select class="select-input" id="paletteMode"><option value="perceptual">Lightness + chroma</option><option value="chroma">Equal lightness</option><option value="lightness">Lightness only</option><option value="reference">Original reference shades</option></select></div>
+            <div class="range-control"><div class="range-heading"><label for="lightnessCenter">Common lightness</label><output id="lightnessCenterValue" for="lightnessCenter">41.4%</output></div><input type="range" id="lightnessCenter" min="0.1" max="0.9" step="0.001" value="0.414"></div>
+            <div class="range-control"><div class="range-heading"><label for="lightnessSpread">Lightness spread</label><output id="lightnessSpreadValue" for="lightnessSpread">±18%</output></div><input type="range" id="lightnessSpread" min="0" max="0.45" step="0.005" value="0.18"></div>
+            <div class="range-control"><div class="range-heading"><label for="chromaScale">Chroma / colorfulness</label><output id="chromaScaleValue" for="chromaScale">1.00×</output></div><input type="range" id="chromaScale" min="0" max="3" step="0.01" value="1"></div>
+            <div class="range-control"><div class="range-heading"><label for="chromaSpread">Chroma spread</label><output id="chromaSpreadValue" for="chromaSpread">±35%</output></div><input type="range" id="chromaSpread" min="0" max="1" step="0.01" value="0.35"></div>
+            <p class="palette-controls-note">Perceptual modes share perceived lightness across color families. Equal lightness varies only chroma. Updates linked colors in every draft; custom hex colors stay fixed.</p>
+            <div class="palette-control-footer"><span>OKLCH · hue from each row</span><button class="button small" type="button" id="resetPaletteBtn">Reset to Cardinal</button></div>
+          </div>
+        </details>
+        <div class="palette-heading" aria-hidden="true"><span class="used-heading">Use</span><span>Color</span><span id="paletteTone1">Low</span><span id="paletteTone2">Mid</span><span id="paletteTone3">High</span></div>
+        <div class="palette-grid" id="paletteGrid" aria-label="Color families, each with three tone columns"><div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Cardinal</button><button class="swatch" type="button" style="background-color:#400002" aria-label="Cardinal, Dark"></button><button class="swatch" type="button" style="background-color:#8C1515" aria-label="Cardinal, Medium"></button><button class="swatch" type="button" style="background-color:#DF3531" aria-label="Cardinal, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Slate</button><button class="swatch" type="button" style="background-color:#161F27" aria-label="Slate, Dark"></button><button class="swatch" type="button" style="background-color:#3E4D5B" aria-label="Slate, Medium"></button><button class="swatch" type="button" style="background-color:#6B8196" aria-label="Slate, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Charcoal</button><button class="swatch" type="button" style="background-color:#1A1E22" aria-label="Charcoal, Dark"></button><button class="swatch" type="button" style="background-color:#444C54" aria-label="Charcoal, Medium"></button><button class="swatch" type="button" style="background-color:#74808B" aria-label="Charcoal, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Sage</button><button class="swatch" type="button" style="background-color:#1F1F05" aria-label="Sage, Dark"></button><button class="swatch" type="button" style="background-color:#4D4E21" aria-label="Sage, Medium"></button><button class="swatch" type="button" style="background-color:#818341" aria-label="Sage, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Burgundy</button><button class="swatch" type="button" style="background-color:#3B0A02" aria-label="Burgundy, Dark"></button><button class="swatch" type="button" style="background-color:#802B1A" aria-label="Burgundy, Medium"></button><button class="swatch" type="button" style="background-color:#CD5137" aria-label="Burgundy, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Gray</button><button class="swatch" type="button" style="background-color:#1E1E1E" aria-label="Gray, Dark"></button><button class="swatch" type="button" style="background-color:#4B4B4B" aria-label="Gray, Medium"></button><button class="swatch" type="button" style="background-color:#7E7E7E" aria-label="Gray, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Mustard</button><button class="swatch" type="button" style="background-color:#2A1A00" aria-label="Mustard, Dark"></button><button class="swatch" type="button" style="background-color:#644400" aria-label="Mustard, Medium"></button><button class="swatch" type="button" style="background-color:#A67400" aria-label="Mustard, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Sky blue</button><button class="swatch" type="button" style="background-color:#142023" aria-label="Sky blue, Dark"></button><button class="swatch" type="button" style="background-color:#3A5055" aria-label="Sky blue, Medium"></button><button class="swatch" type="button" style="background-color:#65858C" aria-label="Sky blue, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Burnt orange</button><button class="swatch" type="button" style="background-color:#311600" aria-label="Burnt orange, Dark"></button><button class="swatch" type="button" style="background-color:#723B00" aria-label="Burnt orange, Medium"></button><button class="swatch" type="button" style="background-color:#BB6400" aria-label="Burnt orange, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Emerald</button><button class="swatch" type="button" style="background-color:#132212" aria-label="Emerald, Dark"></button><button class="swatch" type="button" style="background-color:#395337" aria-label="Emerald, Medium"></button><button class="swatch" type="button" style="background-color:#638A61" aria-label="Emerald, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Fawn</button><button class="swatch" type="button" style="background-color:#2D180C" aria-label="Fawn, Dark"></button><button class="swatch" type="button" style="background-color:#66412D" aria-label="Fawn, Medium"></button><button class="swatch" type="button" style="background-color:#A66F52" aria-label="Fawn, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Navy</button><button class="swatch" type="button" style="background-color:#191C2D" aria-label="Navy, Dark"></button><button class="swatch" type="button" style="background-color:#444966" aria-label="Navy, Medium"></button><button class="swatch" type="button" style="background-color:#737BA6" aria-label="Navy, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Violet</button><button class="swatch" type="button" style="background-color:#320D29" aria-label="Violet, Dark"></button><button class="swatch" type="button" style="background-color:#70305F" aria-label="Violet, Medium"></button><button class="swatch" type="button" style="background-color:#B4579C" aria-label="Violet, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Chocolate</button><button class="swatch" type="button" style="background-color:#261B15" aria-label="Chocolate, Dark"></button><button class="swatch" type="button" style="background-color:#5A473C" aria-label="Chocolate, Medium"></button><button class="swatch" type="button" style="background-color:#947867" aria-label="Chocolate, Light"></button></div>
+<div class="palette-row"><button type="button" class="family-use" data-used="false" disabled>·</button><button type="button" class="family-name">Peacock blue</button><button class="swatch" type="button" style="background-color:#002133" aria-label="Peacock blue, Dark"></button><button class="swatch" type="button" style="background-color:#005176" aria-label="Peacock blue, Medium"></button><button class="swatch" type="button" style="background-color:#0088C1" aria-label="Peacock blue, Light"></button></div></div>
+        <div class="palette-remap-help">
+          <div class="remap-status-row"><p class="remap-status" id="paletteRemapStatus" aria-live="polite">A numbered marker shows a row used in this design. Drag it to another row, or tap it and then a row name, to recolor those pieces.</p><button class="button ghost remap-cancel" type="button" id="cancelRemapBtn" hidden>Cancel</button></div>
+          <label class="check-label remap-setting"><input type="checkbox" id="remapOnRightClick">Right-click also moves the used row’s colors</label>
+        </div>
+        <div class="custom-color-row"><label for="customColor">Custom color</label><input type="color" id="customColor" value="#8c1515" aria-label="Choose a custom color"><input class="custom-hex" type="text" id="customHex" value="#8C1515" maxlength="7" spellcheck="false" aria-label="Custom color hexadecimal code"></div>
+        <div class="custom-family-row"><input class="custom-family-name" type="text" id="customFamilyName" placeholder="Name a new color family" maxlength="35" aria-label="New color family name"><button class="icon-button" id="addFamilyBtn" type="button" title="Add dark, medium, and light tones from this custom color" aria-label="Add a color family"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12M12 6v12"/></svg></button></div>
+        <div class="tool-section">
+          <div class="section-eyebrow">Brush tools</div>
+          <div class="tool-grid" role="group" aria-label="Brush tools">
+            <button class="tool-button" type="button" id="paintTool" aria-label="Paint with active color" aria-pressed="true" title="Paint with the active color"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 2.5 2.5m3-2 8 8-8 8-8-8 8-8Zm-6 10h12M19.5 15s-2 2.4-2 3.6a2 2 0 0 0 4 0c0-1.2-2-3.6-2-3.6Z"/></svg><span>Paint</span></button>
+            <button class="tool-button" type="button" id="whiteTool" aria-label="Paint white" aria-pressed="false" title="Paint a piece white"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 16 16 8" opacity=".3"/></svg><span>White</span></button>
+            <button class="tool-button" type="button" id="clearTool" aria-label="Make transparent" aria-pressed="false" title="Make a piece transparent"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16M4 4l16 16" opacity=".55"/></svg><span>Clear</span></button>
+            <button class="tool-button" type="button" id="sampleTool" aria-label="Pick color from artwork" aria-pressed="false" title="Sample a color from the artwork"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5M14 5l3-3 5 5-3 3M15 6 5 16l-1 4 4-1L18 9M8 13l3 3"/></svg><span>Pick</span></button>
+          </div>
+          <p class="tool-hint">Click a piece to paint. Clicking the selected swatch cycles columns. Right-click cycles rows; scroll changes the active tone.</p>
+        </div>
+      </aside>
+
+      <main class="studio" aria-label="Logo painting studio">
+        <div class="study-bar">
+          <div class="field name-field"><label for="designName">Study name</label><input class="text-input name-input" type="text" id="designName" value="Cardinal study" maxlength="100" placeholder="Name this study" spellcheck="false"></div>
+          <div class="field glyph-field">
+            <span class="field-label">Character</span>
+            <div class="glyph-navigation">
+              <select class="select-input glyph-set" id="glyphSet" aria-label="Character set"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option></select>
+              <button class="icon-button" type="button" id="prevGlyph" aria-label="Previous character" title="Previous character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+              <input class="text-input glyph-value" type="text" id="glyphInput" value="A" maxlength="16" spellcheck="false" aria-label="Current character">
+              <button class="button next-button" type="button" id="nextGlyph" title="Remember this draft and move to the next character">Next<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+            </div>
+          </div>
+          <div class="field next-field"><label for="nextMode">New custom drafts</label><select class="select-input next-mode" id="nextMode"><option value="blank">Blank</option><option value="copy">Copy current</option><option value="reference">Reference</option></select></div>
+        </div>
+
+        <section class="stage-card" aria-label="Artwork">
+          <div class="canvas-toolbar">
+            <div class="toolbar-left">
+              <div class="toolbar-group" role="group" aria-label="History">
+                <button class="icon-button" type="button" id="undoBtn" title="Undo (Ctrl / ⌘ Z)" aria-label="Undo" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h10a6 6 0 0 1 0 12M3 10l5-5M3 10l5 5" transform="translate(0 -3)"/></svg></button>
+                <button class="icon-button" type="button" id="redoBtn" title="Redo (Ctrl / ⌘ Shift Z)" aria-label="Redo" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10H11a6 6 0 0 0 0 12M21 10l-5-5M21 10l-5 5" transform="translate(0 -3)"/></svg></button>
+              </div>
+              <div class="toolbar-group" role="group" aria-label="Whole artwork actions">
+                <button class="button ghost" type="button" id="fillAllBtn" title="Fill all 20 pieces with the active brush">Fill all</button>
+                <button class="button ghost" type="button" id="blankBtn" title="Start a blank character">Blank</button>
+                <button class="button ghost" type="button" id="restoreBtn" title="Restore the original colors">Reference</button>
+                <button class="button ghost" type="button" id="cardinalBtn" title="Fill every piece with Cardinal Red #8C1515">Cardinal</button>
+              </div>
+            </div>
+            <div class="toolbar-right">
+              <div class="toolbar-group" role="group" aria-label="Artwork guides">
+                <label class="check-label"><input type="checkbox" id="showOutlines" checked>Edges</label>
+                <label class="check-label"><input type="checkbox" id="showLabels">IDs</label>
+                <select class="select-input background-select" id="canvasBackground" aria-label="Canvas backdrop"><option value="white">White</option><option value="checker">Checker</option></select>
+              </div>
+              <div class="toolbar-group" role="group" aria-label="Zoom">
+                <button class="icon-button" type="button" id="panTool" aria-pressed="false" title="Pan the canvas (or hold Space and drag)" aria-label="Pan canvas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12V6a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-6a1.5 1.5 0 0 1 3 0v7-3a1.5 1.5 0 0 1 3 0v6c0 4-2 6-6 6h-1c-2 0-3.2-1-4.5-2.5L4 13a1.5 1.5 0 0 1 2-2l2 1Z"/></svg></button>
+                <button class="icon-button" type="button" id="zoomOut" title="Zoom out" aria-label="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+                <button class="button ghost zoom-percent" type="button" id="zoomReset" title="Fit artwork to the canvas">100%</button>
+                <button class="icon-button" type="button" id="zoomIn" title="Zoom in" aria-label="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12M12 6v12"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="corner-bar">
+            <label for="cornerMode">Tiny corners</label>
+            <select class="select-input corner-select" id="cornerMode"><option value="auto">Auto · ending leg</option><option value="clear">Transparent</option><option value="manual">Paint manually</option></select>
+            <p class="corner-note">Automatic corners join the ending leg instead of extending the outer triangle.</p>
+          </div>
+          <div class="canvas-viewport" id="canvasViewport" tabindex="0" aria-label="Painting canvas. Choose a color, then click a polygon.">
+            <div class="artwork-host" id="artworkHost"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="logo-title logo-description">
+<title id="logo-title">Cardinal study — A</title>
+<desc id="logo-description">Twenty editable solid-color polygons, using the approved original geometry.</desc>
+<defs><clipPath id="logo-outline"><path fill-rule="evenodd" clip-rule="evenodd" d="M 292.8558,529.5 C 292.8558,518.0472119128207 298.38623184258034,500.11870155972076 304.08825144874487,490.5 L 479.2622895619024,195.0 C 490.08848083245454,176.7373649947967 509.0470486404823,162.0 531.0,162.0 L 640.0,162.0 C 666.5871813220442,162.0 679.3156257026287,180.69130663797705 691.3253482096642,200.0 L 769.5,325.6857 L 850.4817404609325,192.0 C 861.2135572285184,174.28377868047204 880.3330215342836,162.0 901.0,162.0 L 1009.0,162.0 C 1041.737756127476,162.0 1057.4867909661505,186.86613597591926 1071.6593933326117,212.0 L 1219.9610798066076,475.0 C 1224.4999716953419,483.04932563559487 1232.0207,501.48919626500003 1232.0207,510.5 C 1232.0207,528.4047078547809 1226.8577562696194,538.6840626886552 1217.8908268805358,554.0 L 1064.7919999802384,815.5 C 1053.940982894358,834.034047748162 1042.1545878755874,848.0 1018.0,848.0 L 869.5,848.0 C 843.9751081931558,848.0 832.603285216802,835.030847151305 820.7371888928335,815.5 L 747.5,694.9562 L 678.6026674038376,810.0 C 667.8202629250861,828.0043078248531 654.9801050446299,848.0 630.0,848.0 L 491.0,848.0 C 468.82279900260335,848.0 455.2647550278725,831.3623143629453 445.71842960022093,815.0 L 305.1109105762495,574.0 C 296.5595842350292,559.3431049595382 292.8558,546.5637236506378 292.8558,529.5 Z M 491.9493,518.5 C 491.9493,526.3680445141385 495.2838865642808,543.8893230248204 499.1398912137753,550.0 L 576.5374810705852,672.6532935675806 C 579.2945433300841,677.0224576116296 585.672546418103,677.0018387951543 588.4013020671664,672.61494019201 L 643.5219101585058,584.0 C 654.9594869569303,565.6123185314939 666.0840875736768,552.55 690.0,552.55 L 823.0,552.55 C 846.9792245308579,552.55 859.847140802406,574.2637933729702 873.913569162723,598.0 L 929.5115260740035,691.8180296719702 C 932.2150483678655,696.3800522511292 938.8120791339368,696.3962183642591 941.5379274204196,691.8475005311501 L 1006.7654890535355,583.0 C 1015.7812756716875,567.9550433261973 1025.7167,549.763574605703 1025.7167,531.5 C 1025.7167,518.171741830444 1014.9122159825521,498.4794090601627 1006.4192136626002,483.0 L 939.2899883154791,360.6497756748736 C 936.7073548976596,355.9426488402369 930.0053783076319,355.7755903569314 927.1914312848273,360.3481979894583 L 873.2511969300334,448.0 C 858.2116316949638,472.4389927125296 849.8047544824499,486.1 823.0,486.1 L 700.0,486.1 C 677.7244339255325,486.1 667.9470435070339,475.91223297322745 656.9489878505575,459.0 L 589.6588517748435,355.5247591339012 C 586.8258140298242,351.1682623255315 580.4009337733006,351.3087603768257 577.7610472625635,355.7849380449335 L 505.6830563099666,478.0 C 499.8062945975195,487.9646062173714 491.9493,506.01244588943484 491.9493,518.5 Z"/></clipPath></defs>
+<g id="logo" clip-path="url(#logo-outline)">
+<g id="seam-undercoats" aria-hidden="true" stroke-width="1.2" stroke-linejoin="round">
+<use xlink:href="#face-red_top-left-leg-cell-1" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_top-left-leg-cell-2" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_top-connector" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_top-right-leg-cell-1" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_top-right-leg-cell-2" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_top-right-leg-cell-3" fill="#A01417" stroke="#A01417"/>
+<use xlink:href="#face-red_left" fill="#AD1D23" stroke="#AD1D23"/>
+<use xlink:href="#face-red_bottom-cell-1" fill="#901315" stroke="#901315"/>
+<use xlink:href="#face-red_bottom-cell-2" fill="#901315" stroke="#901315"/>
+<use xlink:href="#face-red_bottom-cell-3" fill="#901315" stroke="#901315"/>
+<use xlink:href="#face-gray_top" fill="#A3AEB9" stroke="#A3AEB9"/>
+<use xlink:href="#face-gray_right-cell-1" fill="#697988" stroke="#697988"/>
+<use xlink:href="#face-gray_right-cell-2" fill="#697988" stroke="#697988"/>
+<use xlink:href="#face-gray_bottom" fill="#505860" stroke="#505860"/>
+<use xlink:href="#face-charcoal_left" fill="#353D44" stroke="#353D44"/>
+<use xlink:href="#face-charcoal_right" fill="#373F46" stroke="#373F46"/>
+<use xlink:href="#inner-fillet-lower-left" fill="#AD1D23" stroke="#AD1D23"/>
+<use xlink:href="#inner-fillet-lower-right" fill="#697988" stroke="#697988"/>
+<use xlink:href="#inner-fillet-upper-right" fill="#A3AEB9" stroke="#A3AEB9"/>
+<use xlink:href="#inner-fillet-upper-left" fill="#A01417" stroke="#A01417"/>
+</g><g id="editable-faces">
+<path id="face-red_top-left-leg-cell-1" fill="#A01417" d="M 490.05108743101005,180.84306206407632 C 500.84730210892985,169.68964504579586 515.1424480833077,162.0 531.0,162.0 L 640.0,162.0 C 657.479966688482,162.0 668.9694722017733,170.07934714406895 678.2027440404213,181.10166004782687 C 639.0946182557368,231.01113278443836 614.5350146968916,293.43119248513045 583.5,346.054 C 555.4917565413159,302.9843926676162 528.2270388426758,224.6827734672557 490.05108743101005,180.84306206407632 Z"/>
+<path id="face-red_top-left-leg-cell-2" fill="#A01417" d="M 583.5,346.054 L 539.0038435615705,421.5014485763821 L 304.5,516.0003 C 299.4913779970635,518.0186422979517 292.8558,523.7 292.8558,529.5 C 292.8558,518.0472119128207 298.38623184258034,500.11870155972076 304.08825144874487,490.5 L 479.2622895619024,195.0 C 482.26826170467916,189.92924420902625 485.9011882991558,185.13026429024478 490.05108743101005,180.84306206407632 C 528.2270388426758,224.6827734672557 555.4917565413159,302.9843926676162 583.5,346.054 Z"/>
+<path id="face-red_top-connector" fill="#A01417" d="M 678.2027440404213,181.10166004782687 C 683.0133589519473,186.84438091004395 687.2115190964438,193.3859700051852 691.3253482096642,200.0 L 769.5,325.6857 C 738.447309691207,376.94788104458854 713.1285982670755,432.55741575965567 671.8657322971576,477.0739353091296 C 666.3574744461441,472.5362355784323 661.7705336709282,466.41432019915106 656.9489878505575,459.0 L 583.5,346.054 C 614.5350146968916,293.43119248513045 639.0946182557368,231.01113278443836 678.2027440404213,181.10166004782687 Z"/>
+<path id="face-red_top-right-leg-cell-1" fill="#A01417" d="M 858.913876230864,180.95286774247077 C 869.8885083066563,169.3814418233842 884.9792960146447,162.0 901.0,162.0 L 1009.0,162.0 C 1026.5148304733548,162.0 1039.1669914870827,169.11741619239723 1049.3166255418876,179.5854006618146 C 1006.3924568231743,228.56584566746793 968.0450095918077,293.96195032074843 933.5,350.0969 C 912.7516132174137,312.2807362634586 889.3357216968246,223.01552493432825 858.913876230864,180.95286774247077 Z"/>
+<path id="face-red_top-right-leg-cell-2" fill="#A01417" d="M 933.5,350.0969 L 873.2511969300334,448.0 C 865.5304468687642,460.54606443294216 859.5576829832606,470.2516862788761 851.9464659926917,476.72681527851773 C 815.5915086763378,437.2945610787182 793.8676736694015,364.86295314241704 769.5,325.6857 L 850.4817404609325,192.0 C 852.8944282400321,188.01710394473483 855.7310477489373,184.30877650892617 858.913876230864,180.95286774247077 C 889.3357216968246,223.01552493432825 912.7516132174137,312.2807362634586 933.5,350.0969 Z"/>
+<path id="face-red_top-right-leg-cell-3" fill="#A01417" d="M 851.9464659926917,476.72681527851773 C 844.7314817023564,482.8648552356228 836.0441964757528,486.1 823.0,486.1 L 700.0,486.1 C 687.4900384885077,486.1 678.9219358601006,482.8868318498063 671.8657322971576,477.0739353091296 C 713.1285982670755,432.55741575965567 738.447309691207,376.94788104458854 769.5,325.6857 C 793.8676736694015,364.86295314241704 815.5915086763378,437.2945610787182 851.9464659926917,476.72681527851773 Z"/>
+<path id="face-red_left" fill="#AD1D23" d="M 292.8558,529.5 C 292.8558,534.5 299.31605739311783,536.9464092436077 303.5,538.6031 L 554.7186766510886,638.0766584461359 L 582.5,682.1022 C 558.5390299713924,720.6231815267117 539.6779161948594,752.4675473149239 514.3516769207116,790.9179580440159 C 500.7144711577089,811.6220253596808 485.2027615522025,834.2414548179678 468.00109800623545,840.944058261154 C 458.50439013915786,834.5763761367236 451.4007269171565,824.7394055658432 445.71842960022093,815.0 L 305.1109105762495,574.0 C 296.5595842350292,559.3431049595382 292.8558,546.5637236506378 292.8558,529.5 Z"/>
+<path id="face-red_bottom-cell-1" fill="#901315" d="M 681.4955501766964,553.1638420544176 C 684.1426460155785,552.7598661049747 686.9685670238297,552.55 690.0,552.55 L 823.0,552.55 C 824.9121023262541,552.55 826.7535538356424,552.6880663017579 828.5305958948952,552.9542149151526 C 799.7455333935134,598.2157283054705 774.8135225670524,649.3484629644086 747.5,694.9562 C 729.6462439940899,665.5700421509537 700.5685643873668,587.3186972320298 681.4955501766964,553.1638420544176 Z"/>
+<path id="face-red_bottom-cell-2" fill="#901315" d="M 747.5,694.9562 L 678.6026674038376,810.0 C 672.0888008125507,820.8767631070297 664.823934443026,832.4803038756675 654.5851435505308,839.9629058640148 C 624.8797766198196,808.4410092836177 598.4973168758486,707.4534235548564 582.5,682.1022 L 643.5219101585058,584.0 C 653.5097305413623,567.9430271812544 663.258888147785,555.9469573272355 681.4955501766964,553.1638420544176 C 700.5685643873668,587.3186972320298 729.6462439940899,665.5700421509537 747.5,694.9562 Z"/>
+<path id="face-red_bottom-cell-3" fill="#901315" d="M 654.5851435505308,839.9629058640148 C 647.8756621336252,844.8662562222798 639.8891230639674,848.0 630.0,848.0 L 491.0,848.0 C 482.0234227064244,848.0 474.4589695520058,845.2741559939092 468.00109800623545,840.944058261154 C 485.2027615522025,834.2414548179678 500.7144711577089,811.6220253596808 514.3516769207116,790.9179580440159 C 539.6779161948594,752.4675473149239 558.5390299713924,720.6231815267117 582.5,682.1022 C 598.4973168758486,707.4534235548564 624.8797766198196,808.4410092836177 654.5851435505308,839.9629058640148 Z"/>
+<path id="face-gray_top" fill="#A3AEB9" d="M 933.5,350.0969 C 968.0450095918077,293.96195032074843 1006.3924568231743,228.56584566746793 1049.3166255418876,179.5854006618146 C 1058.1381282602763,188.6835960208194 1065.0691899200758,200.31285375975256 1071.6593933326117,212.0 L 1219.9610798066076,475.0 C 1224.4999716953419,483.04932563559487 1232.0207,501.48919626500003 1232.0207,510.5 C 1232.0207,500.66628754951387 1222.599482896138,495.9754527232993 1214.5,492.6726 L 953.2819531254892,386.1516345806149 L 933.5,350.0969 Z"/>
+<path id="face-gray_right-cell-1" fill="#697988" d="M 935.5,701.9232 L 1004.624320048703,586.5730431822928 C 1072.3659705278483,560.6490363142589 1143.2665845559297,539.3545393770152 1213.5,521.2891 C 1218.848312208444,519.9134071142121 1232.0207,518.6031857002282 1232.0207,510.5 C 1232.0207,528.4047078547809 1226.8577562696194,538.6840626886552 1217.8908268805358,554.0 L 1064.7919999802384,815.5 C 1057.8077923953972,827.4293551780468 1050.4360769617829,837.4662422995714 1039.6283042002212,843.1047315906719 C 1003.8211328888734,807.1530187440623 961.4880721063547,745.776425108288 935.5,701.9232 Z"/>
+<path id="face-gray_right-cell-2" fill="#697988" d="M 1039.6283042002212,843.1047315906719 C 1033.644576212212,846.2264835857953 1026.6075977165813,848.0 1018.0,848.0 L 869.5,848.0 C 859.4395918608808,848.0 851.5778230834519,845.9852786499922 845.0178558829703,842.3481563353699 C 880.2343130039708,803.1005945991104 908.2829090950199,747.3413061281939 935.5,701.9232 C 961.4880721063547,745.776425108288 1003.8211328888734,807.1530187440623 1039.6283042002212,843.1047315906719 Z"/>
+<path id="face-gray_bottom" fill="#505860" d="M 747.5,694.9562 C 774.8135225670524,649.3484629644086 799.7455333935134,598.2157283054705 828.5305958948952,552.9542149151526 C 849.0390193959928,556.0257733227372 860.9687971910535,576.156517462091 873.913569162723,598.0 L 935.5,701.9232 C 908.2829090950199,747.3413061281939 880.2343130039708,803.1005945991104 845.0178558829703,842.3481563353699 C 834.9341192959632,836.7573077480963 827.9263693285545,827.3329381794756 820.7371888928335,815.5 L 747.5,694.9562 Z"/>
+<path id="face-charcoal_left" fill="#353D44" d="M 292.8558,529.5 C 292.8558,523.7 299.4913779970635,518.0186422979517 304.5,516.0003 L 539.0038435615705,421.5014485763821 L 505.6830563099666,478.0 C 499.8062945975195,487.9646062173714 491.9493,506.01244588943484 491.9493,518.5 C 491.9493,526.3680445141385 495.2838865642808,543.8893230248204 499.1398912137753,550.0 L 554.7186766510886,638.0766584461359 L 303.5,538.6031 C 299.31605739311783,536.9464092436077 292.8558,534.5 292.8558,529.5 Z"/>
+<path id="face-charcoal_right" fill="#373F46" d="M 953.2819531254892,386.1516345806149 L 1214.5,492.6726 C 1222.599482896138,495.9754527232993 1232.0207,500.66628754951387 1232.0207,510.5 C 1232.0207,518.6031857002282 1218.848312208444,519.9134071142121 1213.5,521.2891 C 1143.2665845559297,539.3545393770152 1072.3659705278483,560.6490363142589 1004.624320048703,586.5730431822928 L 1006.7654890535355,583.0 C 1015.7812756716875,567.9550433261973 1025.7167,549.763574605703 1025.7167,531.5 C 1025.7167,518.171741830444 1014.9122159825521,498.4794090601627 1006.4192136626002,483.0 L 953.2819531254892,386.1516345806149 Z"/>
+<path id="inner-fillet-lower-left" fill="#AD1D23" d="M 576.5374810705852,672.6532935675806 C 579.2945433300841,677.0224576116296 585.672546418103,677.0018387951543 588.4013020671664,672.61494019201 L 582.5,682.1022 L 576.5374810705852,672.6532935675806 Z"/>
+<path id="inner-fillet-lower-right" fill="#697988" d="M 929.5115260740035,691.8180296719702 C 932.2150483678655,696.3800522511292 938.8120791339368,696.3962183642591 941.5379274204195,691.8475005311501 L 935.5,701.9232 L 929.5115260740035,691.8180296719702 Z"/>
+<path id="inner-fillet-upper-right" fill="#A3AEB9" d="M 939.2899883154791,360.6497756748736 C 936.7073548976596,355.9426488402369 930.0053783076319,355.7755903569314 927.1914312848273,360.34819798945836 L 933.5,350.0969 L 939.2899883154791,360.6497756748736 Z"/>
+<path id="inner-fillet-upper-left" fill="#A01417" d="M 589.6588517748435,355.5247591339012 C 586.8258140298242,351.1682623255315 580.4009337733006,351.3087603768257 577.7610472625636,355.7849380449333 L 583.5,346.054 L 589.6588517748435,355.5247591339012 Z"/>
+</g>
+</g></svg></div>
+          </div>
+          <div class="canvas-footer">
+            <span class="hover-info" id="hoverInfo">Pick a color, then click a piece.</span>
+            <div class="canvas-meta"><span class="piece-count">20 pieces</span><span class="status-dot" aria-hidden="true"></span><span class="save-indicator" id="saveIndicator">Saved in this browser</span></div>
+          </div>
+        </section>
+
+        <footer class="export-bar">
+          <div class="export-caption"><strong>Keep a study.</strong> Every export carries its name & character.</div>
+          <div class="export-options">
+            <label class="check-label" title="Export without a background rectangle"><input type="checkbox" id="exportTransparent" checked>Transparent background</label>
+            <button class="button primary" type="button" id="exportSvg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/></svg>Export SVG</button>
+            <button class="button" type="button" id="exportPng" title="Export a PNG at 2× resolution (3072 × 2048)">PNG · 2×</button>
+            <button class="button ghost export-next-button" type="button" id="exportAndNext" title="Export SVG and move to the next character">Export & Next<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+          </div>
+        </footer>
+        <section class="glyph-shelf" aria-label="Character and design gallery">
+          <div class="shelf-heading">
+            <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Cardinal-red suggestions are starting points. Where the geometry gives no convincing character, the tile stays blank.</p></div>
+            <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All studies</option><option value="designs">Designs</option></select>
+          </div>
+          <div class="glyph-strip" id="glyphStrip" role="group" aria-label="Choose a character or design thumbnail"></div>
+          <div class="gallery-meta"><span id="gallerySummary">Choose a thumbnail to open its draft.</span><span class="gallery-legend"><span class="legend-dot" aria-hidden="true"></span> Saved draft · outlines help reveal the pieces</span></div>
+          <div class="sheet-bar">
+            <div><div class="sheet-title">Export a character sheet</div><div class="sheet-subtitle">One labeled sheet with the chosen studies.</div></div>
+            <div class="sheet-actions">
+              <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + designs</option><option value="saved">Saved studies</option></select>
+              <label class="check-label"><input type="checkbox" id="sheetOutlines" checked>Outlines</label>
+              <button class="button" type="button" id="sheetSvgBtn">Sheet SVG</button>
+              <button class="button" type="button" id="sheetPngBtn">Sheet PNG</button>
+            </div>
+          </div>
+        </section>
+        <p class="mobile-tip">Choose a swatch above, then tap a piece. Zoom in for the tiny corners.</p>
+      </main>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="color-engine.js"></script>
+<script src="core.js"></script>
+<script src="glyphs.js"></script>
+<script src="model.js"></script>
+<script src="sheet.js"></script>
+<script src="api.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
