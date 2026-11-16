@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["types.d.ts", "app.js", "explorer.js", "model-spec.js", "examples.js", "cli.mjs", "core/*.js", "core/*.mjs", "tests/*.mjs"],
+  "include": ["types.d.ts", "app.js", "explorer.js", "model-spec.js", "diagram-projection.js", "examples.js", "cli.mjs", "core/*.js", "core/*.mjs", "tests/*.mjs"],
   "exclude": ["node_modules", "vendor"]
 }

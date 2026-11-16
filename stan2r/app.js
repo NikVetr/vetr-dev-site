@@ -37,7 +37,7 @@ const captureInputs = () => Object.fromEntries(Object.entries(fields).map(([key,
 const capture = () => ({inputs:captureInputs(),exploration:explorer?.capture()??null});
 /** Node selection and expansion are navigation, not edits.
  * @param {ReturnType<typeof capture>} snapshot */
-const historyKey = snapshot => JSON.stringify({...snapshot, exploration:snapshot.exploration ? {...snapshot.exploration,selected:'',expanded:[]} : null});
+const historyKey = snapshot => JSON.stringify({...snapshot, exploration:snapshot.exploration ? {...snapshot.exploration,selected:'',expanded:[],showStructure:false} : null});
 function exportKey() {
   const state = explorer?.capture();
   return JSON.stringify([captureInputs(),format.value,state?.builtSource,state?.builtData,state?.overrides,state?.draws,state?.seed]);

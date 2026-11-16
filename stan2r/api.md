@@ -1,4 +1,4 @@
-# StanTheExplorer API
+# stan-the-explorer API
 
 Browser: `await window.Stan2R.submit(request)` on `/stan2r/`, or import `submit` from `core/browser.js`. Node: import `submit` from `core/native.mjs`, or run `node stan2r/cli.mjs request.json`. The Node version needs Rscript on PATH; the browser loads R through pinned webR.
 
@@ -114,3 +114,9 @@ The existing CLI retains R conversion when `action` is omitted. Add one of `grap
 ```
 
 `graph` returns `{model}`; `explore` returns `{model,samples,draws,seed,warnings}`; `latex`, `python`, and `pymc` return `{code,format}`. The GUI's Graph JSON export additionally includes the scenario overrides alongside the original graph. CLI errors use the same stderr JSON and exit codes as R conversion.
+
+## Diagram presentation
+
+The model returned by `analyze` remains complete. Compact presentation does not alter it. `diagramProjection(model, overrides, {showStructure:false})` from `diagram-projection.js` returns visible `nodes`, classified/labeled `edges`, conservative shared `plates`, and explanatory `notes`. `showStructure:true` includes size and declared data-bound dependencies; genuine parameter bounds stay visible in either view.
+
+`layoutDiagram(projection, sizes, plateView, engine)` from `diagram-layout.js` returns a promise for node positions, plate rectangles, routed polylines, and overall dimensions. `sizes` maps node IDs to `{width,height,anchor}` (the symbol center’s vertical offset inside its measured box); `engine` is the pinned ELK instance, available as `new window.ELK()` on the app page. `movedRoute` and `bridgePath` share the GUI’s drag-offset and crossing-jump geometry. These functions only affect presentation, never simulations or model exports.

@@ -16,3 +16,15 @@
 .model-node [data-toggle-node]:focus { outline: none; }
 .model-node:has([data-toggle-node]:focus) .node-shape { stroke-dasharray: 4 2; }
 #model-graph { margin-inline: auto; }
+.model-plates .plate-outline { fill: color-mix(in srgb, var(--muted) 3%, var(--surface)); stroke: var(--muted); stroke-width: 1.25; stroke-dasharray: none; }
+.model-plates .plate-label { font: 13px ui-serif, Georgia, serif; }
+.node-card-shape { fill: var(--surface); stroke: var(--border); stroke-width: 1; }
+.node-observed circle.node-shape { fill: color-mix(in srgb, #4f9b81 28%, var(--surface)); }
+.node-input circle.node-shape { fill: color-mix(in srgb, var(--muted) 22%, var(--surface)); }
+.node-element { fill: var(--muted); font: 10px ui-monospace, monospace; pointer-events: none; }
+.dependency-halo { fill:none; stroke:var(--surface); stroke-width:5; stroke-linejoin:round; }
+.dependency-edge { opacity:.85; stroke-linejoin:round; }
+.dimension-edge { stroke-dasharray:3 4; opacity:.55; }
+.edge-label { fill:var(--muted); stroke:var(--surface); stroke-width:4; paint-order:stroke; font:10px system-ui; }
+#diagram-notes { margin:.5rem 0; font-size:.75rem; }
+.node-symbol { fill:var(--text); font:italic 20px Georgia, serif; pointer-events:none; }

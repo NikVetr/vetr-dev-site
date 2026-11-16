@@ -7,8 +7,10 @@ import { openPage } from '../../scripts/landing-art/browser.mjs';
 /** @typedef {import('../../name-tags/node_modules/playwright').Page} Page */
 /** @param {Page} page */
 async function ready(page) {
-  await page.waitForFunction(() => /^1,000 draws/.test(document.querySelector('#explore-status')?.textContent ?? '') && !document.querySelector('#marginals')?.classList.contains('is-stale') && !!document.querySelector('[data-marginal]'));
+  await page.waitForFunction(() => /^1,000 draws/.test(document.querySelector('#explore-status')?.textContent ?? '') && !document.querySelector('#marginals')?.classList.contains('is-stale') && !!document.querySelector('[data-marginal]') && document.querySelector('#model-graph')?.getAttribute('aria-busy') !== 'true');
 }
+async function settled(/** @type {Page} */page) { await page.waitForFunction(()=>document.querySelector('#model-graph')?.getAttribute('aria-busy')!=='true'); }
+const edgeNames=async(/** @type {Page} */page)=>(await page.locator('.dependency-edge title').allTextContents()).map(text=>text.split(' · ')[0]);
 /** @param {Page} page @param {string} id */
 const summary = (page, id) => page.locator(`[data-marginal="${id}"] > p`).innerText();
 /** @param {Page} page @param {string} id @param {string} expected */
@@ -38,7 +40,7 @@ test('explorer simulates without webR, applies priors and fixed scenarios, and r
     const runtimeRequests = [];
     page.on('request', request => { if (/webr\.r-wasm\.org/.test(request.url())) runtimeRequests.push(request.url()); });
     await page.reload(); await ready(page);
-    assert.deepEqual(await page.locator('[data-node]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-node')).sort()), ['N','mu','sigma','y']);
+    assert.deepEqual(await page.locator('[data-node]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-node')).sort()), ['mu','sigma','y']);
     assert.deepEqual(await page.locator('[data-marginal]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-marginal')).sort()), ['mu','sigma','y']);
     const initial = await summary(page, 'mu');
     assert.equal(initial, await expectedSummary(page, {}));
@@ -54,7 +56,7 @@ test('explorer simulates without webR, applies priors and fixed scenarios, and r
     await page.locator('#reset-scenario').focus(); await page.keyboard.press('Control+z');
     await waitSummary(page, 'mu', initial);
     await page.keyboard.press('Control+Shift+z'); await waitSummary(page, 'mu', expected);
-    await page.getByRole('checkbox', {name:'Fix mu',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Fix mu',exact:true}).check();await settled(page);
     await page.getByRole('spinbutton', {name:'Fixed value for mu',exact:true}).fill('3');
     await waitSummary(page, 'mu', 'Mean 3.00 · SD 0.00');
     assert.ok(await page.getByRole('slider', {name:'mu SD',exact:true}).isDisabled());
@@ -95,11 +97,11 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
     assert.ok(await page.locator('.expanded-node-controls input').first().isDisabled());
     await page.locator('#build-model').click(); await ready(page);
     assert.equal(await page.locator('[data-marginal="theta"]').count(),1);
-    const edges = await page.locator('.dependency-edge title').allTextContents();
+    const edges = await edgeNames(page);
     for (const edge of ['mu → theta','tau → theta','z → theta','theta → y']) assert.ok(edges.includes(edge),edge);
     await page.locator('#graph-view').selectOption('plate');
-    assert.equal(await page.locator('[data-node="theta"] .plate-outline').count(),1);
-    assert.match(await page.locator('[data-node="theta"] .plate-label').textContent() ?? '',/N/);
+    assert.equal(await page.locator('[data-plate][data-members~="theta"] .plate-outline').count(),1);
+    assert.match(await page.locator('[data-node="theta"] .node-element').textContent() ?? '',/N/);
     await page.getByRole('combobox',{name:'theta element',exact:true}).selectOption('2');
     await waitSummary(page,'theta',await expectedSummary(page,{},'theta',2));
     assert.match(await page.locator('[data-marginal="theta"] svg').getAttribute('aria-label')??'',/element 3/);
@@ -175,32 +177,34 @@ test('linked priors retain only real dependencies, selection preserves focus and
     await page.locator('#data').fill('{"N":3}');
     await page.locator('#build-model').click();await ready(page);
     const node=page.locator('[data-node="b"]');
-    await node.focus();await page.keyboard.press('Enter');
+    await node.focus();await page.keyboard.press('Enter');await settled(page);
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-node')),'b');
     assert.ok(await page.locator('[data-marginal="b"]').evaluate(el=>el.classList.contains('selected')));
-    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).check();
+    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).check();await settled(page);
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Use constant for b Location');
-    assert.ok((await page.locator('.dependency-edge title').allTextContents()).includes('a → b'),'scale still depends on a');
-    await page.getByRole('checkbox',{name:'Use constant for b SD',exact:true}).check();
-    const edges=await page.locator('.dependency-edge title').allTextContents();
+    assert.ok((await edgeNames(page)).includes('a → b'),'scale still depends on a');
+    await page.getByRole('checkbox',{name:'Use constant for b SD',exact:true}).check();await settled(page);
+    const edges=await edgeNames(page);
     assert.ok(!edges.includes('a → b'),'both arguments are constants now');
-    assert.ok(edges.includes('N → b'),'the vector dimension is still an actual dependency');
-    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).uncheck();
-    assert.ok((await page.locator('.dependency-edge title').allTextContents()).includes('a → b'));
+    assert.ok(!edges.includes('N → b'),'the plate label carries dimension-only dependencies by default');
+    await page.locator('#show-structure').check();await settled(page);
+    assert.ok((await edgeNames(page)).includes('N → b'),'dimension toggle reveals the actual structural dependency');
+    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).uncheck();await settled(page);
+    assert.ok((await edgeNames(page)).includes('a → b'));
     // Numeric values outside the initial slider range must not leave a different thumb value.
     await page.getByRole('spinbutton',{name:'b SD value',exact:true}).fill('25');
     assert.equal(await page.getByRole('slider',{name:'b SD',exact:true}).inputValue(),'25');
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'b SD value');
     await page.locator('#reset-scenario').click();await ready(page);
-    await page.getByRole('checkbox',{name:'Fix b',exact:true}).check();
+    await page.getByRole('checkbox',{name:'Fix b',exact:true}).check();await settled(page);
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Fix b');
-    assert.deepEqual(await page.locator('.dependency-edge title').allTextContents(),['N → b']);
+    assert.deepEqual(await edgeNames(page),['N → b']);
     await page.locator('#reset-scenario').click();await ready(page);
     await page.locator('#graph-view').selectOption('plate');
     const element=page.getByRole('combobox',{name:'b element',exact:true});
     await element.focus();await element.selectOption('2');
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'b element');
-    assert.match(await page.locator('[data-node="b"] .plate-label').textContent()??'',/\[3\]/);
+    assert.match(await page.locator('[data-node="b"] .node-element').textContent()??'',/\[3\]/);
     assert.ok(await page.locator('[data-node="b"]').evaluate(el=>el.classList.contains('selected')));
     // Pick a different marginal after a real edit: Undo should undo that edit, not selection.
     await page.locator('[data-marginal="a"] [data-select-node]').click();
@@ -220,15 +224,15 @@ test('grouped model shows indexed transforms and exports a PyMC fitting model', 
   try {
     await ready(page);await page.locator('#example').selectOption('grouped');await page.locator('#load-example').click();
     await page.locator('#build-model').click();await ready(page);
-    const edges=await page.locator('.dependency-edge title').allTextContents();
+    const edges=await edgeNames(page);
     assert.ok(edges.includes('theta → eta'));assert.ok(edges.includes('group → eta'));
     assert.equal(await page.getByRole('combobox',{name:'theta element',exact:true}).locator('option').count(),3);
     assert.equal(await page.getByRole('combobox',{name:'eta element',exact:true}).locator('option').count(),6);
     await page.getByRole('combobox',{name:'eta element',exact:true}).selectOption('4');
     await waitSummary(page,'eta',await expectedSummary(page,{},'theta',2));
     await page.locator('#graph-view').selectOption('plate');
-    assert.match(await page.locator('[data-node="theta"] .plate-label').textContent()??'',/J/);
-    assert.match(await page.locator('[data-node="eta"] .plate-label').textContent()??'',/N.*\[5\]/);
+    assert.match(await page.locator('[data-node="theta"] .node-element').textContent()??'',/J/);
+    assert.match(await page.locator('[data-node="eta"] .node-element').textContent()??'',/N.*\[5\]/);
     await page.locator('.export-panel > summary').click();await page.locator('#explore-format').selectOption('pymc');
     await page.locator('#export-model').click();
     assert.match(await page.locator('#explore-output').inputValue(),/import pymc/);
@@ -246,7 +250,7 @@ test('multiple nodes expand in place, sliders remain live during a pointer drag,
     await ready(page);
     const mu=page.locator('[data-toggle-node="mu"]'),sigma=page.locator('[data-toggle-node="sigma"]');
     assert.equal(await mu.getAttribute('aria-expanded'),'true');
-    await sigma.click();
+    await sigma.click();await settled(page);
     assert.equal(await sigma.getAttribute('aria-expanded'),'true');
     assert.equal(await page.locator('.expanded-node-controls').count(),2);
     for(const id of ['mu','sigma']) {
@@ -273,22 +277,47 @@ test('multiple nodes expand in place, sliders remain live during a pointer drag,
     const y=(/** @type {string|null} */t)=>Number(t?.match(/,([^,)]+)\)/)?.[1]);
     assert.equal(y(moved)-y(beforeMove),5,'expanded node moves by the requested keyboard step');
     await page.keyboard.press('Control+z');
-    await sigma.focus();await page.keyboard.press('Enter');
+    await sigma.focus();await page.keyboard.press('Enter');await settled(page);
     assert.equal(await sigma.getAttribute('aria-expanded'),'false');
     assert.equal(await page.locator('[data-controls-for="sigma"]').count(),0);
     assert.equal(await page.locator('[data-controls-for="mu"]').count(),1);
     assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-toggle-node')),'sigma');
-    await page.keyboard.press('Space');assert.equal(await sigma.getAttribute('aria-expanded'),'true');
+    await page.keyboard.press('Space');await settled(page);assert.equal(await sigma.getAttribute('aria-expanded'),'true');
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-    const viewport=await page.evaluate(()=>{
-      const pageY=scrollY;/** @type {HTMLButtonElement} */(document.querySelector('[data-select-node="sigma"]')).click();
+    const pageY=await page.evaluate(()=>scrollY);
+    await page.locator('[data-select-node="sigma"]').evaluate(el=>/** @type {HTMLButtonElement} */(el).click());
+    await settled(page);
+    const viewport=await page.evaluate(pageY=>{
       const card=/** @type {Element} */(document.querySelector('[data-controls-for="sigma"]')).getBoundingClientRect();
       const area=/** @type {Element} */(document.querySelector('.graph-scroll')).getBoundingClientRect();
       return {samePagePosition:pageY===scrollY,visible:card.left>=area.left&&card.right<=area.right};
-    });
+    },pageY);
     assert.ok(viewport.samePagePosition,'selecting a node scrolls only the diagram');assert.ok(viewport.visible,'the expanded card fits within the mobile diagram viewport');
     await mkdir(screenshotDir,{recursive:true});await page.screenshot({path:`${screenshotDir}/expanded-mobile.png`,fullPage:true});
+    assert.deepEqual(browser.errors,[]);
+  }finally{await browser.close();}
+});
+
+test('plate view groups matching repeated variables and reveals hidden structure through linked equations', {timeout:60000}, async()=>{
+  const browser=await openPage('stan2r/');const page=/** @type {Page} */(browser.page);
+  try {
+    await ready(page);await page.locator('#example').selectOption('hierarchical');await page.locator('#load-example').click();await page.locator('#build-model').click();await ready(page);
+    assert.equal(await page.locator('#graph-view').inputValue(),'plate');
+    const shared=page.locator('[data-plate][data-members~="theta"]');
+    const members=(await shared.getAttribute('data-members'))?.split(' ')??[];
+    for(const name of ['z','theta','y'])assert.ok(members.includes(name),`${name} shares the observation plate`);
+    assert.equal(await page.locator('[data-node="N"]').count(),0,'dimension-only input is hidden');
+    assert.equal(await page.locator('[data-node="theta"] path.node-shape').count(),1,'deterministic symbol is a diamond');
+    assert.equal(await page.locator('[data-node="y"] circle.node-shape').count(),1,'observed symbol is a filled circle');
+    const before=await summary(page,'theta');
+    await page.locator('[data-equation-control="N"]').click();await settled(page);
+    assert.ok(await page.locator('#show-structure').isChecked());
+    assert.equal(await page.locator('[data-node="N"] [data-toggle-node]').getAttribute('aria-expanded'),'true');
+    assert.ok(await page.locator('.dimension-edge').count()>0);
+    await page.locator('#graph-view').selectOption('flow');await settled(page);
+    assert.equal(await page.locator('[data-plate]').count(),0);
+    assert.equal(await summary(page,'theta'),before,'diagram view changes leave simulation draws unchanged');
     assert.deepEqual(browser.errors,[]);
   }finally{await browser.close();}
 });

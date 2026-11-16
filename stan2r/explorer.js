@@ -1,5 +1,7 @@
 import { analyze, simulateInBrowser } from './core/explorer-browser.js';
-import { expressionText, expressionVariables } from './core/expressions.js';
+import { expressionText } from './core/expressions.js';
+import { diagramProjection } from './diagram-projection.js';
+import { layoutDiagram, movedRoute, bridgePath } from './diagram-layout.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 /** @param {string} name @param {Record<string,string|number>} [attrs] @param {string} [text] */
@@ -10,13 +12,14 @@ function svgElement(name, attrs = {}, text = '') {
 }
 /** @typedef {import('./core/model.js').Model} Model */
 /** @typedef {ReturnType<typeof import('./core/simulation.js').simulate>} Result */
-/** @typedef {{model:Model|null,builtSource:string,builtData:string,overrides:Record<string,{fixed?:number|number[],args?:Record<string,number>}>,positions:Record<string,{x:number,y:number}>,selected:string,expanded:string[],draws:number,seed:number,view:string}} Snapshot */
+/** @typedef {{model:Model|null,builtSource:string,builtData:string,overrides:Record<string,{fixed?:number|number[],args?:Record<string,number>}>,positions:Record<string,{x:number,y:number}>,selected:string,expanded:string[],draws:number,seed:number,view:string,showStructure:boolean}} Snapshot */
 /** @param {{root:HTMLElement,readSource:()=>string,readData:()=>string,checkpoint:()=>void,refresh:()=>void,onChange?:(snapshot:Snapshot,stale:boolean)=>void}} options */
 export function mountExplorer({ root, readSource, readData, checkpoint, refresh, onChange = () => {} }) {
   root.innerHTML = `
     <div class="panel-head"><h2>Model explorer</h2><button type="button" id="build-model" class="primary">Build &amp; simulate</button></div>
     <div class="explore-settings">
-      <label>View <select id="graph-view"><option value="flow">Dependency flow</option><option value="plate">Plate diagram</option></select></label>
+      <label>View <select id="graph-view"><option value="plate">Plate diagram</option><option value="flow">Dependency flow</option></select></label>
+      <label id="structure-choice"><input type="checkbox" id="show-structure"> Show sizes &amp; data bounds</label>
       <label>Draws <select id="simulation-draws"><option>500</option><option selected>1000</option><option>4000</option></select></label>
       <label>Seed <input id="simulation-seed" type="number" min="0" max="4294967295" value="12345"></label>
       <button type="button" id="reset-layout">Arrange</button>
@@ -25,7 +28,8 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     <p id="explore-error" role="alert" hidden></p>
     <p id="explore-stale" hidden>Source or data changed. Build again to update the graph and predictions.</p>
     <div class="graph-scroll"><svg id="model-graph" viewBox="0 0 800 320" aria-label="Model dependencies" role="group"></svg></div>
-    <div class="graph-key"><span class="key-input">● Input</span><span class="key-stochastic">○ Parameter</span><span class="key-deterministic">◇ Transform</span><span class="key-observed">● Predicted data</span><span>Click nodes to expand · drag headers to move · arrow keys move a focused node</span></div>
+    <p id="diagram-notes" class="hint"></p>
+    <div class="graph-key"><span class="key-input">● Fixed input</span><span class="key-stochastic">○ Latent parameter</span><span class="key-deterministic">◇ Deterministic</span><span class="key-observed">● Observed / replicated data</span><span id="dimension-key" hidden>┄ Size / data-bound dependency</span><span>Click nodes to expand · drag headers to move · arrow keys move a focused node</span></div>
     <div class="scenario-line"><span id="scenario-label">Original model</span><button type="button" id="reset-scenario" disabled>Reset changes</button></div>
     <div id="marginals" class="marginals" aria-label="Prior predictive marginal distributions"></div>
     <p id="comparison-key" class="hint" hidden><span class="reference-mark"></span> Original model · colored bars show your changes on the same scale.</p>
@@ -37,9 +41,10 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   const build = /** @type {HTMLButtonElement} */ (get('build-model'));
   const view = /** @type {HTMLSelectElement} */ (get('graph-view'));
   const draws = /** @type {HTMLSelectElement} */ (get('simulation-draws'));
+  const structure = /** @type {HTMLInputElement} */ (get('show-structure'));
   const seed = /** @type {HTMLInputElement} */ (get('simulation-seed'));
   /** @type {Snapshot} */
-  let state = { model: null, builtSource: '', builtData: '', overrides: {}, positions: {}, selected: '', expanded: [], draws: 1000, seed: 12345, view: 'flow' };
+  let state = { model: null, builtSource: '', builtData: '', overrides: {}, positions: {}, selected: '', expanded: [], draws: 1000, seed: 12345, view: 'plate', showStructure: false };
   /** @type {Result|null} */
   let result = null;
   /** @type {Result|null} */
@@ -56,6 +61,11 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   const nodeControls = new Map();
   /** @type {Record<string,{x:number,y:number}>} */
   let displayedPositions = {};
+  /** @type {import('./diagram-layout.js').DiagramLayout|null} */let diagram=null;
+  /** @type {ReturnType<typeof diagramProjection>|null} */let projection=null;
+  let layoutKey='',layoutRevision=0;
+  /** @type {Promise<void>|null} */let pendingLayout=null;
+  const engine=new window.ELK();
   const notify = () => onChange(state, isStale());
   const isStale = () => state.builtSource !== readSource() || state.builtData !== readData();
   /** Keep keyboard focus on its logical control when a view is redrawn. @param {Element} container */
@@ -70,20 +80,6 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
       const replacement = [...container.querySelectorAll(`[${key}]`)].find(el => el.getAttribute(key) === value);
       if (replacement instanceof HTMLElement || replacement instanceof SVGElement) replacement.focus({ preventScroll: true });
     };
-  }
-  /** @param {import('./core/model.js').ModelNode} node */
-  function activeParents(node) {
-    const override = state.overrides[node.id];
-    const expressions = [...node.dimensions, ...Object.values(node.bounds)];
-    if (override?.fixed === undefined) {
-      if (node.expression) expressions.push(node.expression);
-      if (node.distribution) {
-        expressions.push(...node.distribution.args.filter((_, index) => override?.args?.[index] === undefined));
-        if (node.distribution.lower) expressions.push(node.distribution.lower);
-        if (node.distribution.upper) expressions.push(node.distribution.upper);
-      }
-    }
-    return new Set(expressions.flatMap(expressionVariables));
   }
   function highlightSelection() {
     for (const node of graph.querySelectorAll('[data-node]')) {
@@ -110,65 +106,69 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     notify();
     get('marginals').classList.toggle('is-stale', stale);
   }
-  function dependencyLevels() {
-    /** @type {Map<string,number>} */ const levels = new Map();
-    for (const id of state.model?.order??[]) {
-      const node = state.model?.nodes.find(n => n.id === id);
-      levels.set(id, Math.max(0, ...(node?.parents.map(p => (levels.get(p) ?? 0) + 1) ?? [])));
-    }
-    return levels;
-  }
-  function arrange() {
-    if(!state.model)return;
-    const levels=dependencyLevels();
-    state.positions = {};
-    const width=Math.max(560,(Math.max(...[...levels.values()].map(level=>[...levels.values()].filter(d=>d===level).length))+1)*280);
-    for (const [id, level] of levels) {
-      const peers = [...levels].filter(([,depth]) => depth === level).map(([name]) => name);
-      state.positions[id] = { x: (peers.indexOf(id) + 1) * width / (peers.length + 1) - 130, y: 62 + level * 112 };
-    }
+  /** @param {import('./core/model.js').ModelNode} node */
+  function nodeSize(node) {
+    const expanded=state.expanded.includes(node.id),plate=state.view==='plate';
+    const controls=nodeControls.get(node.id),content=expanded?Number(controls?.dataset.height||140):0;
+    return {width:expanded?260:168,height:(plate?116:60)+(expanded?6+content:0),anchor:plate?36:30,expanded,shape:plate?(node.kind==='deterministic'||state.overrides[node.id]?.fixed!==undefined?'diamond':'circle'):'rect'};
   }
   /** @param {import('./core/model.js').ModelNode} node */
-  function nodeHeight(node) {
-    if (!state.expanded.includes(node.id)) return 60;
-    const controls = nodeControls.get(node.id);
-    return controls ? 66 + Number(controls.dataset.height || 140) : 220;
+  const nodeHeight=node=>nodeSize(node).height;
+  async function updateLayout() {
+    if(!state.model){diagram=null;projection=null;layoutKey='';layoutRevision++;return;}
+    const next=diagramProjection(state.model,state.overrides,{showStructure:state.view==='flow'||state.showStructure});
+    const sizes=Object.fromEntries(next.nodes.map(node=>[node.id,nodeSize(node)]));
+    const key=JSON.stringify([next.nodes.map(n=>n.id),next.edges,next.plates,sizes,state.view]);
+    projection=next;get('dimension-key').hidden=state.view==='plate'&&!state.showStructure;get('diagram-notes').textContent=state.view==='plate'?next.notes.join(' '):'Complete dependency graph, including shape and bound inputs.';
+    if(key===layoutKey){if(pendingLayout)await pendingLayout;return;}
+    layoutKey=key;const generation=++layoutRevision;graph.setAttribute('aria-busy','true');
+    pendingLayout=(async()=>{
+      try {
+        const nextDiagram=await layoutDiagram(next,sizes,state.view==='plate',engine);
+        if(generation!==layoutRevision)return;
+        diagram=nextDiagram;drawGraph(true);
+      }catch(error){if(generation===layoutRevision){layoutKey='';showError(error);}}
+      finally{if(generation===layoutRevision){pendingLayout=null;graph.setAttribute('aria-busy','false');}}
+    })();
+    await pendingLayout;
   }
-  function layoutPositions() {
-    const positions = {...state.positions};
-    // Expansion adds space below each original row without replacing the user's saved positions.
-    const levels=dependencyLevels(),rows=[...new Set(levels.values())].sort((a,b)=>a-b);
-    let offset=0;
-    for (const level of rows) {
-      const members=state.model?.nodes.filter(n => levels.get(n.id)===level) ?? [];
-      for (const node of members) positions[node.id]={...state.positions[node.id], y:state.positions[node.id].y+offset};
-      offset += Math.max(0,...members.map(n => nodeHeight(n)-60));
-    }
-    return positions;
+  async function arrange() {
+    state.positions={};layoutKey='';await updateLayout();
   }
   function drawEdges() {
-    const layer=graph.querySelector('.dependency-edges'); if(!layer||!state.model)return;
-    layer.replaceChildren();const levels=dependencyLevels();
-    for (const edge of state.model.edges) {
-      const target=state.model.nodes.find(n=>n.id===edge.to),source=state.model.nodes.find(n=>n.id===edge.from);
-      if(!target||!source||!activeParents(target).has(edge.from))continue;
-      const a=displayedPositions[edge.from],b=displayedPositions[edge.to];if(!a||!b)continue;
-      const ah=nodeHeight(source),bh=nodeHeight(target),aw=state.expanded.includes(source.id)?130:78,bw=state.expanded.includes(target.id)?130:78;
-      const ac={x:a.x,y:a.y+(ah-60)/2},bc={x:b.x,y:b.y+(bh-60)/2};
-      const dx=bc.x-ac.x,dy=bc.y-ac.y,distance=Math.hypot(dx,dy);if(distance<1)continue;
-      const startBoundary=Math.min(aw/Math.abs(dx),(ah/2)/Math.abs(dy));
-      const endBoundary=Math.min(bw/Math.abs(dx),(bh/2)/Math.abs(dy));
-      let pathData=`M${ac.x+dx*(startBoundary+2/distance)},${ac.y+dy*(startBoundary+2/distance)} L${bc.x-dx*(endBoundary+6/distance)},${bc.y-dy*(endBoundary+6/distance)}`;
-      const sourceRow=levels.get(source.id);
-      const rowBottom=Math.max(...state.model.nodes.filter(n=>levels.get(n.id)===sourceRow).map(n=>displayedPositions[n.id].y+nodeHeight(n)-30));
-      if(b.y-30>rowBottom+12) {
-        // Route through the gap beneath this row, so expanded siblings do not cover incoming edges.
-        const lane=(rowBottom+b.y-30)/2;
-        pathData=`M${a.x},${a.y+ah-28} V${lane} H${b.x} V${b.y-36}`;
+    const layer=graph.querySelector('.dependency-edges');if(!layer||!diagram)return;
+    layer.replaceChildren();
+    /** @type {import('./diagram-layout.js').Point[][]} */const preceding=[];
+    /** @type {SVGElement[]} */const labels=[];
+    for(const route of diagram.routes) {
+      if(!projection?.edges.some(edge=>edge.from===route.from&&edge.to===route.to))continue;
+      const moved=movedRoute(route,state.positions),pathData=bridgePath(moved.points,preceding);preceding.push(moved.points);
+      layer.append(svgElement('path',{d:pathData,class:'dependency-halo'}));
+      const path=svgElement('path',{d:pathData,class:`dependency-edge${route.kind==='dimension'?' dimension-edge':''}`,'marker-end':'url(#dependency-arrow)'});
+      path.append(svgElement('title',{},`${route.from} → ${route.to}${route.label?' · '+route.label:''}`));layer.append(path);
+      if(route.label) {
+        const points=moved.points;let best=0;
+        for(let i=1;i<points.length;i++)if(Math.abs(points[i].y-points[i-1].y)<.1&&Math.abs(points[i].x-points[i-1].x)>Math.abs(points[best+1]?.x-points[best]?.x||0))best=i-1;
+        const a=points[best],b=points[best+1]??a;
+        labels.push(svgElement('text',{x:(a.x+b.x)/2+4,y:(a.y+b.y)/2-6,class:'edge-label'},route.label));
       }
-      const path=svgElement('path',{d:pathData,class:'dependency-edge','marker-end':'url(#dependency-arrow)'});
-      path.append(svgElement('title',{},`${edge.from} → ${edge.to}`));layer.append(path);
     }
+    layer.append(...labels);
+  }
+  function drawPlates() {
+    if(!diagram||state.view!=='plate')return;
+    const layer=svgElement('g',{class:'model-plates'});
+    for(const plate of diagram.plates) {
+      const members=plate.members.map(id=>({node:state.model?.nodes.find(n=>n.id===id),p:displayedPositions[id]})).filter(item=>item.node&&item.p);
+      const left=Math.min(plate.x,...members.map(({node,p})=>p.x-nodeSize(/** @type {import('./core/model.js').ModelNode} */(node)).width/2-20));
+      const top=Math.min(plate.y,...members.map(({node,p})=>p.y-nodeSize(/** @type {import('./core/model.js').ModelNode} */(node)).anchor-20));
+      const right=Math.max(plate.x+plate.width,...members.map(({node,p})=>p.x+nodeSize(/** @type {import('./core/model.js').ModelNode} */(node)).width/2+20));
+      const bottom=Math.max(plate.y+plate.height,...members.map(({node,p})=>p.y-nodeSize(/** @type {import('./core/model.js').ModelNode} */(node)).anchor+nodeHeight(/** @type {import('./core/model.js').ModelNode} */(node))+32));
+      const group=svgElement('g',{'data-plate':plate.id,'data-members':plate.members.join(' ')});
+      group.append(svgElement('rect',{x:left,y:top,width:right-left,height:bottom-top,rx:5,class:'plate-outline'}),svgElement('text',{x:right-12,y:bottom-12,'text-anchor':'end',class:'plate-label'},plate.label));
+      layer.append(group);
+    }
+    graph.append(layer);
   }
   /** @param {boolean} [force] */
   function drawGraph(force=false) {
@@ -176,38 +176,43 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
 
     const restoreFocus = retainFocus(graph);
     graph.replaceChildren();
-    if (!state.model) return;
-    displayedPositions=layoutPositions();
-    const height = Math.max(240, ...state.model.nodes.map(n => (displayedPositions[n.id]?.y??0) + nodeHeight(n) + 10));
-    const width = Math.max(560, ...Object.values(displayedPositions).map(p => p.x + 150));
+    if (!state.model||!diagram||!projection) return;
+    displayedPositions=Object.fromEntries(Object.entries(diagram.positions).map(([id,p])=>[id,{x:p.x+(state.positions[id]?.x??0),y:p.y+(state.positions[id]?.y??0)}]));
+    const height = Math.max(240,diagram.height, ...projection.nodes.map(n => (displayedPositions[n.id]?.y??0) + nodeHeight(n) + 50));
+    const width = Math.max(360,diagram.width, ...Object.values(displayedPositions).map(p => p.x + 160));
     graph.setAttribute('viewBox', `0 0 ${width} ${height}`);
     graph.style.width=`${width}px`;graph.style.minWidth=`${width}px`;
     const defs = svgElement('defs');
     const marker = svgElement('marker', { id: 'dependency-arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
     marker.append(svgElement('path', { d: 'M 0 0 L 10 5 L 0 10 Z', fill: 'currentColor' })); defs.append(marker); graph.append(defs);
-    graph.append(svgElement('g',{class:'dependency-edges'}));drawEdges();
-    for (const node of state.model.nodes) {
+    drawPlates();graph.append(svgElement('g',{class:'dependency-edges'}));drawEdges();
+    for (const node of projection.nodes) {
       const p = displayedPositions[node.id]; if (!p) continue;
-      const expanded=state.expanded.includes(node.id),height=nodeHeight(node);
+      const expanded=state.expanded.includes(node.id),size=nodeSize(node),height=size.height,plate=state.view==='plate';
       const g = svgElement('g', { transform:`translate(${p.x},${p.y})`, class:`model-node node-${node.kind}${state.selected === node.id ? ' selected' : ''}`, 'data-node':node.id, tabindex:-1, role:'group', 'aria-label':`${node.id}, ${node.kind}. ${expanded?'Collapse':'Expand'} controls; arrow keys move.`, 'aria-expanded':String(expanded), 'aria-pressed':String(state.selected===node.id) });
-      if (state.view === 'plate' && node.dimensions.length) {
-        const element = node.kind !== 'input' && node.block !== 'transformed data' && result?.samples[node.id]?.[0]?.length ? ` · [${(components[node.id] ?? 0) + 1}]` : '';
-        g.append(svgElement('rect', { x:expanded?-140:-88,y:-49,width:expanded?280:176,height:height+44,rx:4,class:'plate-outline' }));
-        g.append(svgElement('text', {x:expanded?130:80,y:height+18,'text-anchor':'end',class:'plate-label'}, node.dimensions.map(d => `1…${expressionText(d)}`).join(' × ') + element));
-      }
-      g.append(svgElement('title', {}, node.dimensions.length ? `${node.id}: dimensions ${node.dimensions.map(expressionText).join(' × ')}. The bracketed index identifies the displayed marginal element.` : `${node.id}: ${node.block}`));
-      g.append(svgElement(state.view==='plate'&&!expanded ? 'ellipse' : 'rect', state.view==='plate'&&!expanded ? {cx:0,cy:0,rx:70,ry:32,class:'node-shape'} : {x:expanded?-130:-78,y:-30,width:expanded?260:156,height,rx:node.kind==='deterministic'?2:12,class:'node-shape'}));
+      g.append(svgElement('title', {}, node.dimensions.length ? `${node.id}: dimensions ${node.dimensions.map(expressionText).join(' × ')}.` : `${node.id}: ${node.block}`));
+      if(plate) {
+        if(expanded)g.append(svgElement('rect',{x:-130,y:-36,width:260,height,rx:8,class:'node-card-shape'}));
+        const fixed=state.overrides[node.id]?.fixed!==undefined,deterministic=node.kind==='deterministic'||fixed;
+        g.append(svgElement(deterministic?'path':'circle',deterministic?{d:'M0,-30 L36,0 L0,30 L-36,0 Z',class:'node-shape'}:{cx:0,cy:0,r:30,class:'node-shape'}));
+        if(node.dimensions.length) {
+          const element=node.kind!=='input'&&node.block!=='transformed data'&&result?.samples[node.id]?.[0]?.length?` · [${(components[node.id]??0)+1}]`:'';
+          g.append(svgElement('text',{x:0,y:72,'text-anchor':'middle',class:'node-element'},`${node.dimensions.map(expressionText).join(' × ')}${element}`));
+        }
+      } else g.append(svgElement('rect',{x:expanded?-130:-84,y:-30,width:size.width,height,rx:node.kind==='deterministic'?2:12,class:'node-shape'}));
       const labelSize=Math.min(17,(expanded?218:108)/(node.id.length*.62));
       const header=svgElement('g',{tabindex:0,role:'button','data-toggle-node':node.id,'aria-expanded':String(expanded),'aria-label':`${expanded?'Collapse':'Expand'} ${node.id}`});
-      header.append(svgElement('rect',{x:expanded?-130:-78,y:-30,width:expanded?260:156,height:56,fill:'transparent'}));
+      header.append(svgElement('rect',{x:-size.width/2,y:-size.anchor,width:size.width,height:plate?116:56,fill:'transparent'}));
       header.append(svgElement('title', {}, node.id));
-      header.append(svgElement('text', { x:-6,y:-3,'text-anchor':'middle',class:'node-name',style:`font-size:${labelSize}px` }, node.id));
+      header.append(svgElement('text', { x:plate?0:-6,y:plate?46:-3,'text-anchor':'middle',class:'node-name',style:`font-size:${labelSize}px` }, node.id));
       const caption = state.overrides[node.id]?.fixed !== undefined ? 'fixed scenario' : node.distribution?.name || (node.expression ? 'transform' : 'input');
-      header.append(svgElement('text', { y:15,'text-anchor':'middle',class:'node-caption' }, caption));
-      header.append(svgElement('text',{x:expanded?115:65,y:-3,'text-anchor':'end',class:'node-caption'},expanded?'−':'+'));
+      const symbols=/** @type {Record<string,string>} */({mu:'μ',sigma:'σ',tau:'τ',theta:'θ',alpha:'α',beta:'β',phi:'φ',epsilon:'ε'});
+      const stem=node.id.split('_')[0],symbol=symbols[stem]??(stem.length<=8?stem:stem.slice(0,6)+'…');
+      header.append(svgElement('text', { y:plate?6:15,'text-anchor':'middle',class:plate?'node-symbol':'node-caption',...(plate?{style:`font-size:${Math.min(20,43/(symbol.length*.55))}px`}:{}) }, plate?symbol:caption));
+      header.append(svgElement('text',{x:expanded?115:65,y:plate?-25:-3,'text-anchor':'end',class:'node-caption'},expanded?'−':'+'));
       g.append(header);
       if(expanded) {
-        const foreign=svgElement('foreignObject',{x:-130,y:26,width:260,height:height-56});
+        const foreign=svgElement('foreignObject',{x:-130,y:plate?80:26,width:260,height:height-(plate?116:56)});
         const controls=nodeControls.get(node.id);if(controls)foreign.append(controls);
         for(const event of ['pointerdown','click'])foreign.addEventListener(event,e=>e.stopPropagation());
         foreign.addEventListener('keydown',raw=>{const e=/** @type {KeyboardEvent} */(raw);if(!e.ctrlKey&&!e.metaKey)e.stopPropagation();});
@@ -219,14 +224,14 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
         if (e.key==='Enter' || e.key===' ') { e.preventDefault(); toggleNode(node.id); return; }
         const delta = /** @type {Record<string,number[]>} */ ({ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]})[e.key];
         if (!delta) return; e.preventDefault(); checkpoint();
-        state.positions = {...state.positions,[node.id]:{x:Math.max(90,Math.min(width-90,state.positions[node.id].x+delta[0]*(e.shiftKey?20:5))),y:Math.max(55,state.positions[node.id].y+delta[1]*(e.shiftKey?20:5))}};
+        state.positions = {...state.positions,[node.id]:{x:Math.max(size.width/2+12-(diagram?.positions[node.id].x??0),(state.positions[node.id]?.x??0)+delta[0]*(e.shiftKey?20:5)),y:Math.max(size.anchor+12-(diagram?.positions[node.id].y??0),(state.positions[node.id]?.y??0)+delta[1]*(e.shiftKey?20:5))}};
         drawGraph();
         /** @type {SVGElement|null} */ (graph.querySelector(`[data-node="${node.id}"]`))?.focus(); checkpoint();
       });
       g.addEventListener('pointerdown', raw => {
         const e=/** @type {PointerEvent} */(raw); if(e.button!==0) return;
         const point=graphPoint(e);
-        drag={id:node.id,startX:point.x,startY:point.y,x:state.positions[node.id].x,y:state.positions[node.id].y,moved:false}; graph.setPointerCapture(e.pointerId);
+        drag={id:node.id,startX:point.x,startY:point.y,x:state.positions[node.id]?.x??0,y:state.positions[node.id]?.y??0,moved:false}; graph.setPointerCapture(e.pointerId);
       }); graph.append(g);
     }
     restoreFocus();
@@ -238,7 +243,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     if(!drag) return; const p=graphPoint(event); if(Math.hypot(p.x-drag.startX,p.y-drag.startY)<3) return;
     if (!drag.moved) checkpoint();
     drag.moved=true;
-    state.positions={...state.positions,[drag.id]:{x:Math.max(90,Math.min(graph.viewBox.baseVal.width-90,drag.x+p.x-drag.startX)),y:Math.max(55,drag.y+p.y-drag.startY)}}; drawGraph();
+    state.positions={...state.positions,[drag.id]:{x:Math.max(142-(diagram?.positions[drag.id].x??0),drag.x+p.x-drag.startX),y:Math.max(48-(diagram?.positions[drag.id].y??0),drag.y+p.y-drag.startY)}}; drawGraph();
   });
   graph.addEventListener('pointerup', event => {
     if(!drag) return;
@@ -248,16 +253,16 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     setTimeout(()=>{suppressClick=false;},0);
   });
   graph.addEventListener('pointercancel', () => {const moved=drag?.moved;drag=null;if(moved)checkpoint();});
-  function renderSelection() {
-    const restoreFocus=retainFocus(graph);renderControls();drawGraph(true);highlightSelection();notify();restoreFocus();
+  async function renderSelection() {
+    const restoreFocus=retainFocus(graph);renderControls();notify();await updateLayout();drawGraph(true);highlightSelection();restoreFocus();
   }
   /** Scroll only the diagram viewport, leaving the source/specification in place. @param {string} id */
   function revealNode(id) {
     const node=state.model?.nodes.find(n=>n.id===id),p=displayedPositions[id],holder=graph.parentElement;
     if(!node||!p||!holder)return;
     const graphRect=graph.getBoundingClientRect(),holderRect=holder.getBoundingClientRect();
-    const left=graphRect.left-holderRect.left+holder.scrollLeft+p.x-(state.expanded.includes(id)?130:78);
-    const right=left+(state.expanded.includes(id)?260:156),top=p.y-36,bottom=top+nodeHeight(node);
+    const size=nodeSize(node),left=graphRect.left-holderRect.left+holder.scrollLeft+p.x-size.width/2;
+    const right=left+size.width,top=p.y-size.anchor,bottom=top+size.height;
     if(left<holder.scrollLeft)holder.scrollLeft=left-8;
     else if(right>holder.scrollLeft+holder.clientWidth)holder.scrollLeft=right-holder.clientWidth+8;
     if(top<holder.scrollTop)holder.scrollTop=top-8;
@@ -266,7 +271,8 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   /** @param {string} id */
   function selectNode(id) {
     if(!state.model?.nodes.some(node=>node.id===id))return;
-    state.selected=id;if(!state.expanded.includes(id))state.expanded=[...state.expanded,id];renderSelection();revealNode(id);
+    if(state.view==='plate'&&!projection?.nodes.some(node=>node.id===id)){state.showStructure=true;structure.checked=true;}
+    state.selected=id;if(!state.expanded.includes(id))state.expanded=[...state.expanded,id];renderSelection().then(()=>revealNode(id));
   }
   /** @param {string} id */
   function toggleNode(id) {
@@ -420,14 +426,15 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
       const model=await analyze(source);
       if(source!==readSource()||data!==readData()){get('explore-status').textContent='Inputs changed; build again.';inputChanged();return;}
       state={...state,model,builtSource:source,builtData:data,overrides:{},selected:model.nodes.find(n=>n.kind==='stochastic')?.id||model.nodes[0]?.id||''};
-      state.expanded=[state.selected];arrange();result=null;inputChanged();renderSelection();drawMarginals();updateScenario();revealNode(state.selected);checkpoint();await run();
-    }catch(error){state.model=null;result=null;drawGraph();drawMarginals();renderControls();showError(error);}
+      state.expanded=[state.selected];renderControls();await arrange();result=null;inputChanged();await renderSelection();drawMarginals();updateScenario();revealNode(state.selected);checkpoint();await run();
+    }catch(error){state.model=null;result=null;diagram=null;drawGraph();drawMarginals();renderControls();showError(error);}
     finally{build.disabled=false;}
   }
   build.onclick=buildModel;
-  get('reset-layout').onclick=()=>{checkpoint();arrange();drawGraph();checkpoint();};
+  get('reset-layout').onclick=async()=>{checkpoint();await arrange();drawGraph();checkpoint();};
   get('reset-scenario').onclick=()=>{checkpoint();state.overrides={};renderSelection();updateScenario();notify();schedule();checkpoint();};
-  view.onchange=()=>{checkpoint();state.view=view.value;drawGraph();checkpoint();};
+  view.onchange=async()=>{checkpoint();state.view=view.value;get('structure-choice').hidden=state.view!=='plate';renderControls();await updateLayout();drawGraph();revealNode(state.selected);checkpoint();};
+  structure.onchange=async()=>{checkpoint();state.showStructure=structure.checked;await updateLayout();drawGraph();checkpoint();};
   draws.onchange=()=>{checkpoint();state.draws=Number(draws.value);notify();schedule();checkpoint();};
   seed.onchange=()=>{checkpoint();state.seed=Number(seed.value);notify();schedule();checkpoint();};
   return {
@@ -438,7 +445,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
       if(!snapshot)return;
       const resim=!result||snapshot.model!==state.model||snapshot.builtData!==state.builtData||snapshot.draws!==state.draws||snapshot.seed!==state.seed||JSON.stringify(snapshot.overrides)!==JSON.stringify(state.overrides);
       revision++;state={...snapshot,expanded:[...(snapshot.expanded??[])],overrides:structuredClone(snapshot.overrides),positions:structuredClone(snapshot.positions)};
-      view.value=state.view;draws.value=String(state.draws);seed.value=String(state.seed);notify();
+      view.value=state.view;structure.checked=state.showStructure;get('structure-choice').hidden=state.view!=='plate';draws.value=String(state.draws);seed.value=String(state.seed);notify();
       if(resim)result=null;
       inputChanged();renderSelection();drawMarginals();updateScenario();if(resim)schedule();
     },

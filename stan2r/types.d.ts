@@ -1,6 +1,7 @@
 export {};
 declare global {
   interface Window {
+    ELK: typeof import('./vendor/elk/elk-api').default;
     katex: {renderToString: (latex:string, options: {output:string,throwOnError:boolean,trust:boolean,displayMode:boolean}) => string};
     StanTheExplorer: Window["Stan2R"];
     Stan2R: {

@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Explore Stan model dependencies and prior predictions. Export R, LaTeX, NumPy simulations or PyMC models, locally in your browser.">
-  <title>StanTheExplorer — Model explorer &amp; exports</title>
+  <title>stan-the-explorer — Model explorer &amp; exports</title>
   <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="explorer-nodes.css">
   <script defer src="vendor/katex/katex.min.js"></script>
+  <script defer src="vendor/elk/elk.bundled.js"></script>
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <header><a href="../" class="home" aria-label="vetr.dev home">vetr.dev</a><h1>StanTheExplorer</h1><span class="subtitle">Explore · simulate · translate</span><button id="theme-toggle" class="chip" type="button" aria-pressed="false"></button></header>
+  <header><a href="../" class="home" aria-label="vetr.dev home">vetr.dev</a><h1>stan-the-explorer</h1><span class="subtitle">Explore · simulate · translate</span><button id="theme-toggle" class="chip" type="button" aria-pressed="false"></button></header>
   <main>
     <p class="intro">Follow a model from priors to predictions. Explore its dependencies, adjust a prior, or translate it into code. Everything runs on your device.</p>
     <div id="error" role="alert" hidden></div>
@@ -47,9 +48,9 @@
     </details>
     <details><summary>How to use the result</summary>
       <p>The explorer uses Stan’s type checker and a supported generative subset: scalar/vector priors, deterministic transforms, and sampled data. It reports unsupported constructs explicitly. Expand nodes to adjust prior arguments or fix parameters, including hyperparameters. Multiple nodes can stay open together. These exploration changes leave the Stan source untouched; LaTeX and Python exports include them.</p>
-      <p>Prior predictive histograms are independent Monte Carlo draws, not posterior estimates. No analytic approximation or MCMC fitting is performed. Arrow dependencies include shape and bound inputs; a plate marks repeated elements. Fixing a node is an intervention in the generative graph, not conditioning a fitted model.</p>
+      <p>Prior predictive histograms are independent Monte Carlo draws, not posterior estimates. No analytic approximation or MCMC fitting is performed. Shared plates mark repeated elements; scalar parents stay outside. Show sizes &amp; data bounds adds structural inputs and dashed arrows. Small edge jumps mark crossings rather than connections. Fixing a node is an intervention in the generative graph, not conditioning a fitted model.</p>
       <p>R exports translate the original Stan source, without graphical scenario changes. Define <code>dat</code> in R, then run the downloaded script. Its <code>out</code> list contains the model’s top-level variables. Density modes return ordinary densities or probabilities, not log densities. The R converter supports more Stan constructs than the explorer.</p>
-      <p>The first successful conversion downloads the R runtime. Later conversions reuse it. Internet access is needed for this initial download. StanTheExplorer reports unsupported constructs instead of silently omitting them. Provide a self-contained Stan model; external <code>#include</code> files are not supported here.</p>
+      <p>The first successful conversion downloads the R runtime. Later conversions reuse it. Internet access is needed for this initial download. stan-the-explorer reports unsupported constructs instead of silently omitting them. Provide a self-contained Stan model; external <code>#include</code> files are not supported here.</p>
       <p><a href="api.md">API &amp; CLI</a> · <a href="https://github.com/NikVetr/Stan2R/tree/hardening">Stan2R source</a></p>
     </details>
   </main>
