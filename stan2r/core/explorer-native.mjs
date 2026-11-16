@@ -1,15 +1,14 @@
-import { createRequire } from 'node:module';
-import { checkedAST, validateRequest, Stan2RError } from './request.js';
+import { validateRequest, Stan2RError } from './request.js';
+import { compile } from './native-compiler.mjs';
 import { buildModel } from './model.js';
 import { simulate } from './simulation.js';
 import { exportLatex, exportPython } from './exports.js';
 import { exportPyMC } from './pymc.js';
-const { stanc } = createRequire(import.meta.url)('../vendor/stanc.js');
 /** @param {string} source */
 export function analyze(source) {
   validateRequest({ source });
-  const {ast,warnings}=checkedAST(stanc('model',source,['debug-typed-ast']));
-  const model=buildModel(ast,source);model.warnings.unshift(...warnings);return model;
+  const parsed=compile(source);
+  const model=buildModel(parsed.ast,parsed.source);model.warnings.unshift(...parsed.warnings);model.syntax=parsed.syntax;return model;
 }
 /** @param {{source:string,data?:Record<string,any>,draws?:number,seed?:number,overrides?:any}} request */
 export function explore(request) {

@@ -1,4 +1,4 @@
-import { validateRequest, conversionCall, checkedAST, Stan2RError } from './request.js';
+import { validateRequest, conversionCall, Stan2RError } from './request.js';
 
 const WEBR_URL = 'https://webr.r-wasm.org/v0.5.8/webr.mjs';
 /** @type {Promise<any> | undefined} webR's loader is dynamically imported from its pinned CDN. */
@@ -10,7 +10,7 @@ let serial = Promise.resolve();
 let nextId = 0;
 const pending = new Map();
 
-/** @param {string} source @returns {Promise<{ast: string, warnings: string[]}>} */
+/** @param {string} source @returns {Promise<ReturnType<typeof import('./compilation.js').compileCompatible>>} */
 export function compile(source) {
   if (!compiler) {
     compiler = new Worker(new URL('./compiler-worker.js', import.meta.url));
@@ -18,8 +18,8 @@ export function compile(source) {
       const task = pending.get(data.id);
       pending.delete(data.id);
       if (!task) return;
-      if (data.error) task.reject(new Stan2RError('COMPILER_ERROR', data.error));
-      else { try { task.resolve(checkedAST(data.compilation)); } catch (e) { task.reject(e); } }
+      if (data.error) task.reject(new Stan2RError(data.error.code, data.error.message, 'source'));
+      else task.resolve(data.result);
     };
     compiler.onerror = event => {
       for (const task of pending.values()) task.reject(new Stan2RError('COMPILER_ERROR', event.message));
@@ -62,10 +62,10 @@ async function runtime() {
 /** @param {ReturnType<typeof validateRequest>} request */
 async function convert(request) {
   // Reject invalid Stan before downloading the larger R runtime.
-  const { ast, warnings } = await compile(request.source);
+  const { ast, warnings, source, syntax } = await compile(request.source);
   const webR = await runtime();
   await webR.FS.writeFile('model.ast', new TextEncoder().encode(ast));
-  await webR.FS.writeFile('model.stan', new TextEncoder().encode(request.source));
+  await webR.FS.writeFile('model.stan', new TextEncoder().encode(source));
   await webR.evalRVoid(`.stan2r_result <- ${conversionCall(request)}`);
   const error = await webR.evalRString('.stan2r_result$error');
   if (error) throw new Stan2RError(await webR.evalRString('.stan2r_result$error_code'), error, 'source');
@@ -73,7 +73,7 @@ async function convert(request) {
   const extra = await webR.evalRString('paste(.stan2r_result$warnings, collapse="\\n")');
   await webR.evalRVoid('rm(.stan2r_result)');
   await webR.flush();
-  return { code, mode: request.mode, warnings: [...warnings, ...(extra ? [extra] : [])], compiler: 'stanc 2.38.0', translator: 'Stan2R e4f4b15' };
+  return { code, mode: request.mode, warnings: [...warnings, ...(extra ? [extra] : [])], compiler: syntax.compiler, syntax, translator: 'Stan2R e4f4b15' };
 }
 
 /** @param {Parameters<typeof validateRequest>[0]} request */

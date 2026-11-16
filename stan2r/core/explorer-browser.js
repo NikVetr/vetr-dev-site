@@ -11,8 +11,9 @@ const pending = new Map();
 /** Parse through Stan's type checker without loading R. @param {string} source */
 export async function analyze(source) {
   validateRequest({ source });
-  const { ast, warnings } = await compile(source);
-  const model = buildModel(ast, source);
+  const { ast, warnings, source: parsedSource, syntax } = await compile(source);
+  const model = buildModel(ast, parsedSource);
+  model.syntax = syntax;
   model.warnings.unshift(...warnings);
   return model;
 }

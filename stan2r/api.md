@@ -32,6 +32,8 @@ Unknown fields are rejected. Posterior draws must contain every model parameter 
   mode: "prior_predictive",
   warnings: [],
   compiler: "stanc 2.38.0",
+  syntax: {compiler: "stanc 2.38.0", detected: "undetermined", migrated: false,
+           description: "No version-specific syntax identified. Exact authoring version is unknown."},
   translator: "Stan2R e4f4b15"
 }
 ```
@@ -39,6 +41,14 @@ Unknown fields are rejected. Posterior draws must contain every model parameter 
 The generated script expects an R list named `dat` and writes an `out` list. In posterior modes the selected draw is embedded in the script. Density modes return densities or probability masses, not logs. Model fitting and executing the generated script are outside this API.
 
 The browser's conversions are queued, so concurrent calls cannot overwrite each other's input files. The compiler and R worker are reused until the page is closed. Model text is not sent to a server. First successful use downloads webR from its official CDN; offline initialization fails explicitly.
+
+### Stan syntax generations
+
+Both the R and graphical APIs first check source with pinned **stanc 2.38.0**. If that fails, a lazily loaded, official **stanc 2.32.2** canonicalizer attempts to modernize supported deprecated syntax. The result must pass the maintained compiler before either translation or simulation. This handles postfix array declarations, old `<-` assignment, `#` comments, and deprecated density function/target syntax where the official canonicalizer has an equivalent replacement. It does not provide arbitrary historical Stan runtimes or support syntax introduced after 2.38.0. The graph's separate supported-model restrictions still apply.
+
+Successful conversions return `syntax`; graphs return `model.syntax`. It contains `compiler`, `detected` (`modern`, `legacy`, or `undetermined`), `description`, and `migrated`. Array keyword syntax identifies a minimum syntax generation of Stan 2.26; syntax shared across releases does not identify the version that authored the file. `legacy` means the official migration succeeded, not that the author used one particular release. A migrated result additionally contains `migrationCompiler` and `normalizedSource`; its warnings disclose the migration. The original request source is preserved. Graph declaration `line` values and R translator source mapping refer to `normalizedSource` when migrated, and to the original source otherwise. `line` is one-based (zero if no source was provided to the low-level graph builder).
+
+For a text-only hint, import `detectSyntax(source)` from `core/compilation.js`; this never validates or rewrites code. Prefer compilation metadata for acceptance decisions. Official references: [removed syntax and release boundaries](https://mc-stan.org/docs/reference-manual/removals.html), [deprecation canonicalization](https://mc-stan.org/cmdstanr/articles/deprecations.html).
 
 ## Errors and warnings
 

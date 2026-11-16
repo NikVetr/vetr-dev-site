@@ -1,10 +1,11 @@
 import { FUNCTIONS, modelError, expressionVariables, expressionText } from './expressions.js';
 import { validateTransformedSupports } from './support.js';
+import { declarationLines } from './source-lines.js';
 /** @typedef {import('./expressions.js').Expr} Expr */
 /** @typedef {{lower?:Expr,upper?:Expr}} Bounds */
 /** @typedef {{id:string,block:string,kind:'input'|'stochastic'|'deterministic'|'observed',type:string,dimensions:Expr[],bounds:Bounds,expression?:Expr,distribution?:{name:string,args:Expr[],lower?:Expr,upper?:Expr},parents:string[],line:number}} ModelNode */
 /** @typedef {ModelNode} Node */
-/** @typedef {{nodes:ModelNode[],edges:{from:string,to:string}[],order:string[],warnings:string[]}} Model */
+/** @typedef {{nodes:ModelNode[],edges:{from:string,to:string}[],order:string[],warnings:string[],syntax?:import('./compilation.js').SyntaxInfo}} Model */
 export const DISTRIBUTIONS = {normal:2,lognormal:2,exponential:1,gamma:2,beta:2,uniform:2,student_t:3,cauchy:2,bernoulli:1,bernoulli_logit:1,binomial:2,beta_binomial:3,poisson:1,poisson_log:1};
 
 /** Read stanc's s-expression format, not Stan source. @param {string} text @returns {any} */
@@ -153,6 +154,7 @@ export function validateModelNormalization(model,overrides={}) {
 export function buildModel(ast,source='') {
   if(typeof ast!=='string'||!ast.startsWith('((functionblock')) modelError('Expected a typed syntax tree from stanc 2.38.');
   const program=record(readSexp(ast));
+  const sourceLines=declarationLines(source);
   /** @type {ModelNode[]} */ const nodes=[];
   /** @type {Map<string,ModelNode>} */ const byName=new Map();
   /** @param {string} name */ const get=name=>{const n=byName.get(name); if(!n) modelError(`Unknown declared variable ${name}.`); return n;};
@@ -178,7 +180,7 @@ export function buildModel(ast,source='') {
       for(const rawVariable of fields.variables) {
         const variable=record(rawVariable),id=identifier(variable.identifier);
         if(byName.has(id)) modelError(`Repeated declaration ${id}.`);
-        /** @type {ModelNode} */ const node={id,block,kind:block==='data'?'input':block==='parameters'?'stochastic':'deterministic',...shape,bounds:constraint,parents:[],line:0};
+        /** @type {ModelNode} */ const node={id,block,kind:block==='data'?'input':block==='parameters'?'stochastic':'deterministic',...shape,bounds:constraint,parents:[],line:sourceLines.get(id)??0};
         if(variable.initial_value.length) node.expression=expression(variable.initial_value[0]);
         nodes.push(node);byName.set(id,node);
       }
