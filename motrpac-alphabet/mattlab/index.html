@@ -46,7 +46,7 @@
               <dt>Undo / Redo</dt><dd><span class="key">Ctrl / ⌘ Z</span> · <span class="key">⇧ Z</span></dd>
               <dt>Next character</dt><dd>Your current draft is remembered.</dd>
               <dt>Tiny corners</dt><dd>Automatically follow the terminating leg, stay transparent, or paint them manually.</dd>
-              <dt>Character sheets</dt><dd>Export the chosen gallery or character set as one SVG or PNG.</dd>
+              <dt>Character sheets</dt><dd>Export the chosen gallery or character set as one SVG or PNG. “Nonblank only” omits cells whose pieces are all white or transparent.</dd>
             </dl>
             <p class="help-note">Scroll controls apply over the artwork. Use the shade and color arrows on a touch screen. Zoom in to reach the four tiny corner pieces. Save a project to keep every character and edit it later.</p>
           </div>
@@ -230,7 +230,7 @@
         </footer>
         <section class="glyph-shelf" aria-label="Character and design gallery">
           <div class="shelf-heading">
-            <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Editable starting guesses for letters and symbols; space is left empty.</p></div>
+            <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Edited letter and number studies, selected symbols, and blank cells for new designs.</p></div>
             <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All characters + original</option><option value="designs">Original</option><option value="saved">Saved studies</option></select>
           </div>
           <div class="glyph-strip" id="glyphStrip" role="group" aria-label="Choose a character or design thumbnail"></div>
@@ -240,6 +240,7 @@
             <div class="sheet-actions">
               <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + original</option><option value="saved">Saved studies</option></select>
               <label class="check-label"><input type="checkbox" id="sheetOutlines" checked>Outlines</label>
+              <label class="check-label"><input type="checkbox" id="sheetNonblankOnly">Nonblank only</label>
               <button class="button" type="button" id="sheetSvgBtn">Sheet SVG</button>
               <button class="button" type="button" id="sheetPngBtn">Sheet PNG</button>
             </div>
@@ -252,7 +253,8 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="color-engine.js"></script>
 <script src="core.js"></script>
-<script src="glyphs.js"></script>
+<script src="edited-glyphs.js"></script>
+  <script src="glyphs.js"></script>
 <script src="model.js"></script>
 <script src="sheet.js"></script>
 <script src="api.js"></script>

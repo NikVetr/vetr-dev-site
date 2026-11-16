@@ -1,0 +1,47 @@
+{
+  "faceOrder": [
+    "face-red_top-left-leg-cell-1",
+    "face-red_top-left-leg-cell-2",
+    "face-red_top-connector",
+    "face-red_top-right-leg-cell-1",
+    "face-red_top-right-leg-cell-2",
+    "face-red_top-right-leg-cell-3",
+    "face-red_left",
+    "face-red_bottom-cell-1",
+    "face-red_bottom-cell-2",
+    "face-red_bottom-cell-3",
+    "face-gray_top",
+    "face-gray_right-cell-1",
+    "face-gray_right-cell-2",
+    "face-gray_bottom",
+    "face-charcoal_left",
+    "face-charcoal_right",
+    "inner-fillet-lower-left",
+    "inner-fillet-lower-right",
+    "inner-fillet-upper-right",
+    "inner-fillet-upper-left"
+  ],
+  "sources": [
+    {
+      "file": "Cardinal-study-character-sheet-digits.svg",
+      "sha256": "e37fe7a33d6f390a8c7f2d466d73b21f6cc327f383ba582074d993817e9319bc",
+      "bytes": 54263,
+      "characters": "0123456789",
+      "blank": "23"
+    },
+    {
+      "file": "Cardinal-study-character-sheet-uppercase.svg",
+      "sha256": "74b3512a4031c87cdb431fbd269ded4040528a86ed70b87659c26508aeb524e1",
+      "bytes": 120540,
+      "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "blank": "BDEFKPRZ"
+    },
+    {
+      "file": "Cardinal-study-character-sheet-lowercase.svg",
+      "sha256": "8b91c22d731e276604c41891b55687c1699929313bee0ee128fdee9e9044d575",
+      "bytes": 120999,
+      "characters": "abcdefghijklmnopqrstuvwxyz",
+      "blank": "defghkpqsz"
+    }
+  ]
+}

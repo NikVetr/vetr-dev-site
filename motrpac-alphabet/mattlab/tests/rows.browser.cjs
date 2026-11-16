@@ -1,4 +1,6 @@
 const assert = require('node:assert/strict');
+const Glyphs = require('../glyphs.js');
+const Edited = require('../edited-glyphs.js');
 /** @typedef {Window & {CardinalStudio: {getProject:()=>any}, PainterModel: typeof import('../model.js')}} StudioWindow */
 
 (async () => {
@@ -11,6 +13,11 @@ const assert = require('node:assert/strict');
       const project = app.CardinalStudio.getProject();
       return { project, doc: project.documents[project.currentGlyph], palettes: app.PainterModel.getPalettes(project) };
     });
+    const defaults = (await read()).project;
+    for (const glyph of Object.keys(Edited)) {
+      assert.deepEqual(defaults.documents[glyph].fills, {...Glyphs.seedFills(glyph)}, 'Exact imported defaults for ' + glyph);
+      assert.equal(defaults.documents[glyph].cornerMode, 'manual');
+    }
     await page.locator('.palette-row[data-family-id="navy"] .swatch').first().click();
     const before = await read();
     const faceId = Object.keys(before.doc.bindings).find(id => before.doc.bindings[id]?.familyId === 'cardinal');
@@ -128,19 +135,27 @@ const assert = require('node:assert/strict');
     // Load an older project: upgrade untouched blank starters, keep deliberate edits,
     // and move edited retired studies out of the ordinary character gallery.
     const legacy = (await read()).project;
-    for (const glyph of ['B','D']) {
+    for (const glyph of ['A','D']) {
       legacy.documents[glyph].fills = Object.fromEntries(Object.keys(before.doc.fills).map(id=>[id,'#FFFFFF']));
       legacy.documents[glyph].bindings = {};
       legacy.documents[glyph].seedStatus = 'blank';
       legacy.documents[glyph].touched = glyph === 'D';
     }
+    legacy.documents['!'].fills = {...legacy.documents['@original'].fills};
+    legacy.documents['!'].seedStatus = 'guess';
+    legacy.documents['!'].touched = false;
+    legacy.documents['?'].fills = {...legacy.documents['@original'].fills};
+    legacy.documents['?'].touched = true;
+    legacy.documents['?'].cornerMode = 'manual';
     legacy.documents['@cardinal-slate'] = {...structuredClone(legacy.documents['@original']),glyph:'@cardinal-slate',touched:false};
     legacy.documents['@tonal-weave'] = {...structuredClone(legacy.documents['@original']),glyph:'@tonal-weave',touched:true};
     const buffer = Buffer.from(JSON.stringify(legacy));
     await page.locator('#projectFile').setInputFiles({name:'legacy.json',mimeType:'application/json',buffer});
-    await page.waitForFunction(()=>(/** @type {StudioWindow} */ (/** @type {unknown} */ (window))).CardinalStudio.getProject().documents.B.seedStatus==='guess');
+    await page.waitForFunction(()=>(/** @type {StudioWindow} */ (/** @type {unknown} */ (window))).CardinalStudio.getProject().documents.A.seedStatus==='curated');
     const restored = (await read()).project;
-    assert.ok(Object.values(restored.documents.B.fills).some(fill=>fill!=='#FFFFFF'));
+    assert.deepEqual(restored.documents.A.fills, {...Glyphs.seedFills('A')});
+    assert.ok(Object.values(restored.documents['!'].fills).every(fill=>fill==='#FFFFFF'));
+    assert.deepEqual(restored.documents['?'].fills, legacy.documents['?'].fills);
     assert.ok(Object.values(restored.documents.D.fills).every(fill=>fill==='#FFFFFF'));
     assert.equal(restored.documents['@cardinal-slate'],undefined);
     assert.ok(restored.documents['@tonal-weave'].touched);

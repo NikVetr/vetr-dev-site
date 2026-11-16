@@ -20,7 +20,7 @@
   const CORNER_MODES = Object.freeze(['auto', 'clear', 'manual']);
   const EXTRA_SETTINGS = Object.freeze({
     brushLinked:true, galleryFilter:'uppercase',
-    sheetScope:'uppercase', sheetOutlines:true
+    sheetScope:'uppercase', sheetOutlines:true, sheetNonblankOnly:false
   });
   const FILTERS = ['uppercase', 'lowercase', 'digits', 'ascii', 'designs', 'all', 'saved'];
   const SHEET_SCOPES = FILTERS.concat(['gallery']);
@@ -111,7 +111,7 @@
   function checkedExtraSettings(source, base) {
     const input = isObject(source) ? source : {};
     const result = Object.assign({}, base, EXTRA_SETTINGS);
-    ['brushLinked', 'sheetOutlines'].forEach(function (key) {
+    ['brushLinked', 'sheetOutlines', 'sheetNonblankOnly'].forEach(function (key) {
       if (typeof input[key] === 'boolean') result[key] = input[key];
     });
     if (FILTERS.includes(input.galleryFilter)) result.galleryFilter = input.galleryFilter;

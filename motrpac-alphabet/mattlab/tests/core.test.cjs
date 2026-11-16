@@ -53,3 +53,32 @@ test('CLI and callable API produce the same exported SVG', () => {
   assert.equal(cli.status, 0);
   assert.deepEqual(JSON.parse(cli.stdout), submit(request));
 });
+
+test('nonblank sheets filter actual fills independently of metadata and match CLI/PNG sizing', () => {
+  const Sheet = require('../sheet.js');
+  const white = Core.presetFills('white');
+  const transparent = Object.fromEntries(Core.FACES.map(face => [face.id, 'none']));
+  const oneColored = {...white, [Core.FACES[19].id]:'#FEFFFF'};
+  const entries = [
+    {key:'white',fills:white,status:'edited'},
+    {key:'transparent',fills:transparent,status:'guess'},
+    {key:'mixed',fills:{...white,[Core.FACES[0].id]:'none'},status:'edited'},
+    {key:'ink',fills:oneColored,status:'blank'}
+  ];
+  const request = {operation:'sheet',entries,options:{nonblankOnly:true}};
+  const output = submit(request);
+  assert.equal(output.ok, true);
+  assert.match(output.svg, /Character sheet containing 1 studies/);
+  assert.match(output.svg, /aria-label="ink"/);
+  assert.doesNotMatch(output.svg, /aria-label="white"/);
+  assert.equal(Sheet.layout(entries,{nonblankOnly:true}).count,1);
+  assert.deepEqual(Sheet.pngDimensions(entries,{nonblankOnly:true}),Sheet.pngDimensions([entries[3]]));
+  assert.equal(Sheet.layout(entries,{nonblankOnly:false}).count,4);
+  const cli = spawnSync(process.execPath,[path.join(__dirname,'../cli.cjs')],{input:JSON.stringify(request),encoding:'utf8'});
+  assert.equal(cli.status,0);
+  assert.deepEqual(JSON.parse(cli.stdout),output);
+  const blank = submit({...request,entries:entries.slice(0,3)});
+  assert.equal(blank.ok,false);
+  assert.match(blank.error?.message ?? '',/No nonblank studies/);
+  assert.equal(submit({...request,options:{nonblankOnly:'yes'}}).ok,false);
+});

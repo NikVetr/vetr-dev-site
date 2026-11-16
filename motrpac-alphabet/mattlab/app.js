@@ -65,6 +65,7 @@
   let wheelActionAt = -1000;
   const viewport = $('canvasViewport');
   const host = $('artworkHost');
+  const sheetNonblankOnly = /** @type {HTMLInputElement} */ ($('sheetNonblankOnly'));
   if (!host) throw new Error('Missing artwork container');
   const clamp = function (value, lo, hi) { return Math.min(hi, Math.max(lo, value)); };
   const modulo = function (value, n) { return ((value % n) + n) % n; };
@@ -92,16 +93,19 @@
       const fills = Glyphs.seedFills(glyph);
       const bindings = Object.create(null);
       seed.red.forEach(function (id) {
-        bindings[id] = {familyId:'cardinal', shade:1};
-        fills[id] = cardinal.colors[1];
+        // Imported artwork keeps its exact color even when a saved palette differs.
+        if (seed.status !== 'curated') fills[id] = cardinal.colors[1];
+        const binding = target.inferBinding(fills[id]);
+        if (binding) bindings[id] = binding;
       });
       const existing = target.project.documents[glyph];
-      if (seed.status === 'guess' && existing && !existing.touched &&
-          existing.kind === 'glyph' && existing.seedStatus === 'blank' &&
-          Object.values(existing.fills).every(function (fill) { return fill === '#FFFFFF'; })) {
+      if (existing && !existing.touched && existing.kind === 'glyph' &&
+          ['guess', 'blank'].includes(existing.seedStatus) &&
+          (existing.seedStatus !== seed.status || existing.cornerMode !== seed.cornerMode ||
+           Core.FACES.some(function (/** @type {{id:string}} */ face) { return existing.fills[face.id] !== fills[face.id]; }))) {
         delete target.project.documents[glyph];
       }
-      ensure(glyph, fills, {bindings:bindings, cornerMode:'auto',
+      ensure(glyph, fills, {bindings:bindings, cornerMode:seed.cornerMode,
         kind:'glyph', seedStatus:seed.status, name:glyph});
     });
     Glyphs.DESIGNS.forEach(function (design) {
@@ -570,7 +574,7 @@
       letter.textContent = doc.kind === 'design' ? doc.name : glyphLabel(glyph);
       const status = document.createElement('span');
       status.className = 'glyph-status';
-      status.textContent = doc.touched ? 'Edited' : doc.kind === 'design' ? '' : doc.seedStatus === 'guess' ? 'Guess' : 'Blank';
+      status.textContent = doc.touched ? 'Edited' : doc.kind === 'design' ? '' : !Sheet.hasVisibleFills(doc.fills) ? 'Blank' : doc.seedStatus === 'curated' ? 'Curated' : 'Guess';
       caption.appendChild(letter);
       caption.appendChild(status);
       button.appendChild(caption);
@@ -580,8 +584,7 @@
     });
     $('galleryFilter').value = settings.galleryFilter || 'uppercase';
     const characters = keys.filter(function (key) { return store.project.documents[key].kind !== 'design'; });
-    const guesses = characters.filter(function (key) { return store.project.documents[key].seedStatus === 'guess'; });
-    $('gallerySummary').textContent = characters.length + ' characters · ' + guesses.length + ' starting guesses · ' +
+    $('gallerySummary').textContent = characters.length + ' characters · ' +
       (keys.length - characters.length) + ' designs';
     updateGlyphStates();
   }
@@ -599,7 +602,7 @@
       item.button.setAttribute('aria-label', item.button.title);
       if (active) {
         item.preview.innerHTML = thumbnail(doc.fills, doc.kind !== 'design');
-        item.status.textContent = doc.touched ? 'Edited' : doc.kind === 'design' ? '' : doc.seedStatus === 'guess' ? 'Guess' : 'Blank';
+        item.status.textContent = doc.touched ? 'Edited' : doc.kind === 'design' ? '' : !Sheet.hasVisibleFills(doc.fills) ? 'Blank' : doc.seedStatus === 'curated' ? 'Curated' : 'Guess';
       }
     });
     $('glyphInput').value = store.doc.kind === 'design' ? '' : store.project.currentGlyph;
@@ -685,6 +688,7 @@
     $('cornerMode').value = store.doc.cornerMode;
     $('sheetScope').value = settings.sheetScope || 'uppercase';
     $('sheetOutlines').checked = settings.sheetOutlines !== false;
+    sheetNonblankOnly.checked = settings.sheetNonblankOnly === true;
   }
 
   const paletteFields = [
@@ -787,6 +791,7 @@
   });
   $('sheetScope').addEventListener('change', function () { settings.sheetScope = this.value; queueSave(); });
   $('sheetOutlines').addEventListener('change', function () { settings.sheetOutlines = this.checked; queueSave(); });
+  sheetNonblankOnly.addEventListener('change', function () { settings.sheetNonblankOnly = sheetNonblankOnly.checked; queueSave(); });
 
   function fitArtwork(preserveCenter) {
     const availableWidth = viewport.clientWidth || 900;
@@ -1224,11 +1229,13 @@
     const scope = $('sheetScope').value;
     const keys = sheetKeys(scope);
     if (!keys.length) { toast('No edited studies yet. Choose a character set or the visible gallery.'); return; }
-    const entries = keys.map(function (key) {
+    let entries = keys.map(function (key) {
       const doc = store.project.documents[key];
       return {key:key, label:doc.kind === 'design' ? doc.name : key, kind:doc.kind,
         status:doc.touched ? 'edited' : doc.seedStatus, fills:Object.assign({}, doc.fills)};
     });
+    try { entries = Sheet.selectEntries(entries, {nonblankOnly:sheetNonblankOnly.checked}); }
+    catch (error) { toast(error instanceof Error ? error.message : String(error)); return; }
     const scopes = {uppercase:'A–Z', lowercase:'a–z', digits:'0–9', ascii:'Printable ASCII',
       all:'All characters and original', gallery:'Visible gallery', saved:'Edited studies'};
     const options = {title:store.project.title + ' · ' + scopes[scope],

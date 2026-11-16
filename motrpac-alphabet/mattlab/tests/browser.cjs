@@ -47,6 +47,21 @@ const path = require('node:path');
     const sheetPng = await download('#sheetPngBtn');
     assert.deepEqual([...sheetPng.subarray(0,8)], [137,80,78,71,13,10,26,10]);
 
+    // Omit genuinely blank cells, including intentionally erased imported glyphs.
+    await page.locator('#sheetScope').selectOption('digits');
+    await page.locator('#sheetNonblankOnly').check();
+    const compactSheet = (await download('#sheetSvgBtn')).toString();
+    assert.match(compactSheet, /Character sheet containing 8 studies/);
+    assert.doesNotMatch(compactSheet, /aria-label="[23]"/);
+    const compactPng = await download('#sheetPngBtn');
+    assert.deepEqual([...compactPng.subarray(0,8)], [137,80,78,71,13,10,26,10]);
+    await page.locator('#sheetNonblankOnly').uncheck();
+    assert.match((await download('#sheetSvgBtn')).toString(), /Character sheet containing 10 studies/);
+    await page.locator('#sheetNonblankOnly').check();
+    await page.waitForTimeout(400);
+    await page.reload();
+    assert.equal(await page.locator('#sheetNonblankOnly').isChecked(),true);
+
     // Import via the existing file control, then verify reload persistence.
     await page.locator('#projectFile').setInputFiles({name:'study.json',mimeType:'application/json',buffer:saved});
     await page.waitForTimeout(400);

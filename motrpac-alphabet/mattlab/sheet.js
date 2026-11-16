@@ -33,6 +33,19 @@
         status:entry.status === 'blank' ? 'blank' : entry.status === 'guess' ? 'guess' : 'edited'};
     });
   }
+  /** @param {unknown} fills */
+  function hasVisibleFills(fills) {
+    return Object.values(normalizedFills(fills)).some(function (fill) { return fill !== '#FFFFFF' && fill !== 'none'; });
+  }
+  /** @param {unknown} entries @param {{nonblankOnly?:boolean}} [options] */
+  function selectEntries(entries, options) {
+    const opts = options || {};
+    if (opts.nonblankOnly !== undefined && typeof opts.nonblankOnly !== 'boolean') throw new Error('nonblankOnly must be true or false.');
+    const normalized = normalizeEntries(entries);
+    const selected = opts.nonblankOnly ? normalized.filter(function (entry) { return hasVisibleFills(entry.fills); }) : normalized;
+    if (!selected.length) throw new Error('No nonblank studies in this selection. Turn off “Nonblank only” to include empty cells.');
+    return selected;
+  }
   function wrappedText(value, maxCharacters) {
     const words = value.split(/\s+/).filter(Boolean);
     const lines = [];
@@ -72,7 +85,7 @@
       height:subtitleY + (subtitleLines.length - 1) * 16 + 27};
   }
   function layout(entries, options) {
-    const count = typeof entries === 'number' ? entries : Array.isArray(entries) ? entries.length : 0;
+    const count = typeof entries === 'number' ? entries : Array.isArray(entries) ? selectEntries(entries, options).length : 0;
     if (!Number.isInteger(count) || count < 1 || count > 512) throw new Error('A sheet needs 1–512 designs.');
     const opts = options || {};
     const columns = Math.min(count,Math.max(1,Math.min(12,Math.round(Number(opts.columns) || 6))));
@@ -111,7 +124,7 @@
     return parts.join('');
   }
   function svgString(entries, options) {
-    const data = normalizeEntries(entries);
+    const data = selectEntries(entries, options);
     const opts = options || {};
     const grid = layout(data,opts);
     const title = grid.headerInfo.title;
@@ -205,7 +218,7 @@
     } finally { URL.revokeObjectURL(url); }
   }
   const API = Object.freeze({
-    CROP:CROP,layout:layout,pngDimensions:pngDimensions,thumbnailSvg:thumbnailSvg,
+    CROP:CROP,hasVisibleFills:hasVisibleFills,selectEntries:selectEntries,layout:layout,pngDimensions:pngDimensions,thumbnailSvg:thumbnailSvg,
     svgString:svgString,svgBlob:svgBlob,pngBlob:pngBlob
   });
   global.PainterSheet = API;
