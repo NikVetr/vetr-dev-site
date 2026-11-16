@@ -13,25 +13,25 @@ function svgElement(name, attrs = {}, text = '') {
 /** @typedef {import('./core/model.js').Model} Model */
 /** @typedef {ReturnType<typeof import('./core/simulation.js').simulate>} Result */
 /** @typedef {{model:Model|null,builtSource:string,builtData:string,overrides:Record<string,{fixed?:number|number[],args?:Record<string,number>}>,positions:Record<string,{x:number,y:number}>,selected:string,expanded:string[],draws:number,seed:number,view:string,showStructure:boolean}} Snapshot */
-/** @param {{root:HTMLElement,readSource:()=>string,readData:()=>string,checkpoint:()=>void,refresh:()=>void,onChange?:(snapshot:Snapshot,stale:boolean)=>void}} options */
-export function mountExplorer({ root, readSource, readData, checkpoint, refresh, onChange = () => {} }) {
+/** @param {{root:HTMLElement,buildButton:HTMLButtonElement,readSource:()=>string,readData:()=>string,checkpoint:()=>void,refresh:()=>void,onChange?:(snapshot:Snapshot,stale:boolean)=>void}} options */
+export function mountExplorer({ root, buildButton, readSource, readData, checkpoint, refresh, onChange = () => {} }) {
   root.innerHTML = `
-    <div class="panel-head"><h2>Model graph</h2><button type="button" id="build-model" class="primary">Build &amp; simulate</button></div>
+    <div class="panel-head"><h2>Model graph</h2></div>
     <div class="explore-settings">
       <label>View <select id="graph-view"><option value="plate">Plate diagram</option><option value="flow">Dependency flow</option></select></label>
       <label id="structure-choice"><input type="checkbox" id="show-structure"> Show sizes &amp; data bounds</label>
       <label>Draws <select id="simulation-draws"><option>500</option><option selected>1000</option><option>4000</option></select></label>
       <label>Seed <input id="simulation-seed" type="number" min="0" max="4294967295" value="12345"></label>
       <button type="button" id="reset-layout">Arrange</button>
-      <label>Zoom <select id="graph-zoom"><option value="fit">Fit</option><option value="1">100%</option><option value="0.75">75%</option><option value="1.25">125%</option></select></label>
+      <label>Zoom <select id="graph-zoom"><option value="fit">Fit</option><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option><option value="1.25">125%</option></select></label>
     </div>
-    <p id="explore-status" role="status">Build a graph to explore priors and their predictions.</p>
+    <p id="explore-status" role="status">Load a model to explore priors and their predictions.</p>
     <p id="explore-error" role="alert" hidden></p>
-    <p id="explore-stale" hidden>Source or data changed. Build again to update the graph and predictions.</p>
+    <p id="explore-stale" hidden>Source or data changed. Select Load to update the graph and predictions.</p>
     <div class="graph-scroll"><svg id="model-graph" viewBox="0 0 800 320" aria-label="Model dependencies" role="group"></svg></div>
     <details class="diagram-help"><summary>Diagram key &amp; controls</summary>
     <p id="diagram-notes" class="hint"></p>
-    <div class="graph-key"><span class="key-input">● Fixed input</span><span class="key-stochastic">○ Latent parameter</span><span class="key-deterministic">◇ Deterministic</span><span class="key-observed">● Observed / replicated data</span><span id="dimension-key" hidden>┄ Size / data-bound dependency</span><span>Click nodes to expand · drag headers to move · arrow keys move a focused node</span></div>
+    <div class="graph-key"><span class="key-input">● Fixed input</span><span class="key-stochastic">○ Latent parameter</span><span class="key-deterministic">◇ Deterministic</span><span class="key-observed">● Observed / replicated data</span><span id="dimension-key" hidden>┄ Size / data-bound dependency</span><span>Click nodes to expand · drag nodes to move · drag the background to pan · arrow keys move a focused node</span></div>
     </details>
     <section class="distribution-panel" aria-labelledby="distribution-title"><div class="panel-head"><h2 id="distribution-title">Prior predictive draws</h2><button id="toggle-distributions" type="button" aria-expanded="true" aria-controls="distribution-content">Hide</button></div>
     <div id="distribution-content">
@@ -45,16 +45,19 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   const get = id => /** @type {T} */ (root.querySelector(`#${id}`));
   const graph = /** @type {SVGSVGElement} */ (root.querySelector('#model-graph'));
   const zoom = /** @type {HTMLSelectElement} */ (get('graph-zoom'));
+  const holder = /** @type {HTMLElement} */ (graph.parentElement);
   let graphScale = 1;
   function sizeGraph() {
-    const box=graph.viewBox.baseVal,holder=graph.parentElement;
-    if(!holder||!box.width||!box.height)return;
-    graphScale=zoom.value==='fit'?Math.min(1,Math.max(1,holder.clientWidth-2)/box.width,Math.max(1,holder.clientHeight-2)/box.height):Number(zoom.value);
+    const box=graph.viewBox.baseVal;
+    if(!box.width||!box.height)return;
+    const fitScale=Math.min(1,Math.max(1,holder.clientWidth-2)/box.width,Math.max(1,holder.clientHeight-2)/box.height);
+    graphScale=zoom.value==='fit'?fitScale:Number(zoom.value);
+    zoom.options[0].textContent=`Fit (${Math.round(fitScale*100)}%)`;
     graph.style.width=`${box.width*graphScale}px`;graph.style.minWidth=`${box.width*graphScale}px`;graph.style.height=`${box.height*graphScale}px`;
   }
   zoom.onchange=sizeGraph;
-  new ResizeObserver(sizeGraph).observe(/** @type {HTMLElement} */(graph.parentElement));
-  const build = /** @type {HTMLButtonElement} */ (get('build-model'));
+  new ResizeObserver(sizeGraph).observe(holder);
+  const build = buildButton;
   const view = /** @type {HTMLSelectElement} */ (get('graph-view'));
   const draws = /** @type {HTMLSelectElement} */ (get('simulation-draws'));
   const structure = /** @type {HTMLInputElement} */ (get('show-structure'));
@@ -228,7 +231,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
       const symbols=/** @type {Record<string,string>} */({mu:'μ',sigma:'σ',tau:'τ',theta:'θ',alpha:'α',beta:'β',phi:'φ',epsilon:'ε'});
       const stem=node.id.split('_')[0],symbol=symbols[stem]??(stem.length<=8?stem:stem.slice(0,6)+'…');
       header.append(svgElement('text', { y:plate?6:15,'text-anchor':'middle',class:plate?'node-symbol':'node-caption',...(plate?{style:`font-size:${Math.min(20,43/(symbol.length*.55))}px`}:{}) }, plate?symbol:caption));
-      header.append(svgElement('text',{x:expanded?115:65,y:plate?-25:-3,'text-anchor':'end',class:'node-caption'},expanded?'−':'+'));
+      if(expanded)header.append(svgElement('text',{x:115,y:plate?-25:-3,'text-anchor':'end',class:'node-caption'},'−'));
       g.append(header);
       if(expanded) {
         const foreign=svgElement('foreignObject',{x:-130,y:plate?80:26,width:260,height:height-(plate?116:56)});
@@ -249,6 +252,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
       });
       g.addEventListener('pointerdown', raw => {
         const e=/** @type {PointerEvent} */(raw); if(e.button!==0) return;
+        e.preventDefault();header.focus({preventScroll:true});
         const point=graphPoint(e);
         drag={id:node.id,startX:point.x,startY:point.y,x:state.positions[node.id]?.x??0,y:state.positions[node.id]?.y??0,moved:false}; graph.setPointerCapture(e.pointerId);
       }); graph.append(g);
@@ -261,17 +265,40 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   graph.addEventListener('pointermove', event => {
     if(!drag) return; const p=graphPoint(event); if(Math.hypot(p.x-drag.startX,p.y-drag.startY)<3) return;
     if (!drag.moved) checkpoint();
-    drag.moved=true;
+    drag.moved=true;holder.classList.add('is-dragging-node');
     state.positions={...state.positions,[drag.id]:{x:Math.max(142-(diagram?.positions[drag.id].x??0),drag.x+p.x-drag.startX),y:Math.max(48-(diagram?.positions[drag.id].y??0),drag.y+p.y-drag.startY)}}; drawGraph();
   });
   graph.addEventListener('pointerup', event => {
     if(!drag) return;
     const {id,moved}=drag; if(graph.hasPointerCapture(event.pointerId)) graph.releasePointerCapture(event.pointerId);
-    state.selected=id;drag=null;suppressClick=true;
+    state.selected=id;drag=null;holder.classList.remove('is-dragging-node');suppressClick=true;
     if(moved){renderSelection();checkpoint();}else toggleNode(id);
     setTimeout(()=>{suppressClick=false;},0);
   });
-  graph.addEventListener('pointercancel', () => {const moved=drag?.moved;drag=null;if(moved)checkpoint();});
+  graph.addEventListener('pointercancel', () => {const moved=drag?.moved;drag=null;holder.classList.remove('is-dragging-node');if(moved)checkpoint();});
+  /** @type {{pointerId:number,x:number,y:number,left:number,top:number}|null} */
+  let pan=null;
+  holder.addEventListener('pointerdown',event=>{
+    if(event.button!==0 || !(event.target instanceof Element) || event.target.closest('.model-node'))return;
+    const rect=holder.getBoundingClientRect();
+    if(event.clientX>=rect.left+holder.clientWidth || event.clientY>=rect.top+holder.clientHeight)return;
+    event.preventDefault();
+    pan={pointerId:event.pointerId,x:event.clientX,y:event.clientY,left:holder.scrollLeft,top:holder.scrollTop};
+    holder.setPointerCapture(event.pointerId);holder.classList.add('is-panning');
+  });
+  holder.addEventListener('pointermove',event=>{
+    if(!pan||pan.pointerId!==event.pointerId)return;
+    holder.scrollLeft=pan.left+pan.x-event.clientX;holder.scrollTop=pan.top+pan.y-event.clientY;
+  });
+  /** @param {PointerEvent} event */
+  function finishPan(event) {
+    if(!pan||pan.pointerId!==event.pointerId)return;
+    pan=null;holder.classList.remove('is-panning');
+    if(holder.hasPointerCapture(event.pointerId))holder.releasePointerCapture(event.pointerId);
+  }
+  holder.addEventListener('pointerup',finishPan);
+  holder.addEventListener('pointercancel',finishPan);
+  holder.addEventListener('lostpointercapture',finishPan);
   async function renderSelection() {
     const restoreFocus=retainFocus(graph);renderControls();notify();await updateLayout();drawGraph(true);highlightSelection();restoreFocus();
   }
@@ -291,13 +318,11 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   function selectNode(id) {
     if(!state.model?.nodes.some(node=>node.id===id))return;
     if(state.view==='plate'&&!projection?.nodes.some(node=>node.id===id)){state.showStructure=true;structure.checked=true;}
-    if(zoom.value==='fit'&&graphScale<.85)zoom.value='1';
     state.selected=id;if(!state.expanded.includes(id))state.expanded=[...state.expanded,id];renderSelection().then(()=>revealNode(id));
   }
   /** @param {string} id */
   function toggleNode(id) {
-    if(zoom.value==='fit'&&graphScale<.85&&!state.expanded.includes(id))zoom.value='1';
-    state.selected=id;state.expanded=state.expanded.includes(id)?state.expanded.filter(name=>name!==id):[...state.expanded,id];renderSelection();
+    state.selected=id;state.expanded=state.expanded.includes(id)?state.expanded.filter(name=>name!==id):[...state.expanded,id];renderSelection().then(()=>revealNode(id));
   }
   /** @param {string} id @param {{fixed?:number|number[],args?:Record<string,number>}} change */
   function setOverride(id, change) {
@@ -340,7 +365,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     equation.textContent=node.distribution ? `${node.id} ~ ${node.distribution.name}(${node.distribution.args.map(expressionText).join(', ')})` : node.expression ? `${node.id} = ${expressionText(node.expression)}` : 'Fixed input from Data JSON.';
     controls.append(equation);
     if(!node.distribution || node.kind==='observed') {
-      const note=document.createElement('span');note.className='hint';note.textContent=node.kind==='observed'?'Predicted from its parents. Select a parameter above to change its prior.':'Edit the Stan source or Data JSON, then build again.';controls.append(note);return;
+      const note=document.createElement('span');note.className='hint';note.textContent=node.kind==='observed'?'Predicted from its parents. Select a parameter above to change its prior.':'Edit the Stan source or Data JSON, then select Load.';controls.append(note);return;
     }
     const current=state.overrides[node.id]||{};
     const fixLabel=document.createElement('label');fixLabel.className='fixed-choice';
@@ -440,18 +465,22 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     }catch(error){if(version===revision){result=null;get('marginals').replaceChildren();showError(error);}}
     finally{running=false;if(queued){queued=false;run();}}
   }
-  async function buildModel() {
-    checkpoint();build.disabled=true;for(const controls of nodeControls.values())controls.disabled=true;notify();get('marginals').classList.add('is-stale');get('explore-error').hidden=true;get('explore-status').textContent='Checking Stan and building dependencies…';
-    const source=readSource(),data=readData();revision++;
+  let buildRevision=0;
+  /** @param {{checkpointBefore?:boolean}} [options] */
+  async function buildModel({checkpointBefore=true} = {}) {
+    if(checkpointBefore)checkpoint();build.disabled=true;for(const controls of nodeControls.values())controls.disabled=true;notify();get('marginals').classList.add('is-stale');get('explore-error').hidden=true;get('explore-status').textContent='Checking Stan and building dependencies…';
+    const source=readSource(),data=readData(),request=++buildRevision;revision++;
+    const current=()=>request===buildRevision&&source===readSource()&&data===readData();
     try {
       const model=await analyze(source);
-      if(source!==readSource()||data!==readData()){get('explore-status').textContent='Inputs changed; build again.';inputChanged();return;}
+      if(request!==buildRevision)return;
+      if(!current()){get('explore-status').textContent='Inputs changed; select Load again.';inputChanged();return;}
       state={...state,model,builtSource:source,builtData:data,overrides:{},selected:model.nodes.find(n=>n.kind==='stochastic')?.id||model.nodes[0]?.id||''};
-      state.expanded=[state.selected];renderControls();await arrange();result=null;inputChanged();await renderSelection();drawMarginals();updateScenario();revealNode(state.selected);checkpoint();await run();
-    }catch(error){state.model=null;result=null;diagram=null;drawGraph();drawMarginals();renderControls();showError(error);}
-    finally{build.disabled=false;}
+      state.expanded=[state.selected];zoom.value='fit';renderControls();await arrange();if(!current())return;result=null;inputChanged();await renderSelection();if(!current())return;drawMarginals();updateScenario();revealNode(state.selected);checkpoint();await run();
+    }catch(error){if(current()){state.model=null;result=null;diagram=null;drawGraph();drawMarginals();renderControls();showError(error);}}
+    finally{if(request===buildRevision)build.disabled=false;}
   }
-  build.onclick=buildModel;
+  build.onclick=()=>buildModel();
   get('reset-layout').onclick=async()=>{checkpoint();await arrange();drawGraph();checkpoint();};
   get('reset-scenario').onclick=()=>{checkpoint();state.overrides={};renderSelection();updateScenario();notify();schedule();checkpoint();};
   view.onchange=async()=>{checkpoint();state.view=view.value;get('structure-choice').hidden=state.view!=='plate';renderControls();await updateLayout();drawGraph();revealNode(state.selected);checkpoint();};

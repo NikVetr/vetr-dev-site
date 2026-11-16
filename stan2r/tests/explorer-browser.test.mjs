@@ -91,11 +91,7 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
   const page = /** @type {Page} */ (browser.page);
   try {
     await ready(page);
-    await page.locator('#example').selectOption('hierarchical'); await page.locator('#load-example').click();
-    assert.ok(await page.locator('#explore-stale').isVisible());
-    assert.equal(await page.locator('.expanded-node-controls').first().getAttribute('disabled'), '');
-    assert.ok(await page.locator('.expanded-node-controls input').first().isDisabled());
-    await page.locator('#build-model').click(); await ready(page);
+    await page.locator('#example').selectOption('hierarchical'); await ready(page);
     assert.equal(await page.locator('[data-marginal="theta"]').count(),1);
     const edges = await edgeNames(page);
     for (const edge of ['mu → theta','tau → theta','z → theta','theta → y']) assert.ok(edges.includes(edge),edge);
@@ -123,7 +119,7 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
     await page.getByRole('combobox',{name:'y element',exact:true}).selectOption('1');
     assert.ok(await page.locator('#marginals').evaluate(el=>el.classList.contains('is-stale')), 'changing displayed element cannot make stale results current');
     await page.locator('#export-model').click();
-    assert.match(await page.locator('#error').innerText(),/Build the current model/);
+    assert.match(await page.locator('#error').innerText(),/Load the current model/);
     assert.equal(await page.locator('#explore-output').inputValue(),'');
     await page.locator('#build-model').click(); await ready(page);
     await page.setViewportSize({width:390,height:844});
@@ -222,8 +218,7 @@ test('grouped model shows indexed transforms and exports a PyMC fitting model', 
   const browser=await openPage('stan2r/');
   const page=/** @type {Page} */(browser.page);
   try {
-    await ready(page);await page.locator('#example').selectOption('grouped');await page.locator('#load-example').click();
-    await page.locator('#build-model').click();await ready(page);
+    await ready(page);await page.locator('#example').selectOption('grouped');await ready(page);
     const edges=await edgeNames(page);
     assert.ok(edges.includes('theta → eta'));assert.ok(edges.includes('group → eta'));
     assert.equal(await page.getByRole('combobox',{name:'theta element',exact:true}).locator('option').count(),3);
@@ -302,7 +297,7 @@ test('multiple nodes expand in place, sliders remain live during a pointer drag,
 test('plate view groups matching repeated variables and reveals hidden structure through linked equations', {timeout:60000}, async()=>{
   const browser=await openPage('stan2r/');const page=/** @type {Page} */(browser.page);
   try {
-    await ready(page);await page.locator('#example').selectOption('hierarchical');await page.locator('#load-example').click();await page.locator('#build-model').click();await ready(page);
+    await ready(page);await page.locator('#example').selectOption('hierarchical');await ready(page);
     assert.equal(await page.locator('#graph-view').inputValue(),'plate');
     const shared=page.locator('[data-plate][data-members~="theta"]');
     const members=(await shared.getAttribute('data-members'))?.split(' ')??[];

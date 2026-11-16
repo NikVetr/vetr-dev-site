@@ -34,7 +34,7 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Generated');
     assert.match(await page.locator('#explore-output').inputValue(),/sigma <-/);
     const original=await page.locator('#source').inputValue();
-    await page.selectOption('#example','binomial');await page.click('#load-example');
+    await page.selectOption('#example','binomial');await page.waitForFunction(()=>/^1,000 draws/.test(document.querySelector('#explore-status')?.textContent??'')&&!document.querySelector('#marginals')?.classList.contains('is-stale'));
     assert.match(await page.locator('#source').inputValue(),/binomial/);
     await page.click('#undo');assert.equal(await page.locator('#source').inputValue(),original);
     await page.locator('#redo').focus();await page.keyboard.press('Control+Shift+z');
@@ -43,7 +43,7 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     assert.ok(!(await page.locator('#source').inputValue()).endsWith('// edit'));
     await page.locator('#source').fill('parameters {real x;} model {x ~ invalid(1);}');await page.click('#export-model');
     await page.waitForFunction(()=>document.getElementById('error')?.hidden===false);assert.match(await page.locator('#error').innerText(),/Semantic error/);
-    await page.click('#load-example');await page.click('#export-model');await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Generated');
+    await page.selectOption('#example','normal');await page.click('#export-model');await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Generated');
     const [download] = await Promise.all([page.waitForEvent('download'), page.click('#download-exploration')]);
     assert.equal(download.suggestedFilename(), 'model.R');
     const downloadedPath = await download.path();

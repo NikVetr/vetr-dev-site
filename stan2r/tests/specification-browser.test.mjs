@@ -36,7 +36,7 @@ test('rendered model shares export equations, tracks changes and links source to
     await page.locator('#explore-format').selectOption('pymc');await page.locator('#export-model').click();
     assert.match(await page.locator('#explore-output').inputValue(),/import pymc as pm/);
     for(const example of ['hierarchical','grouped','multilevel']){
-      await page.selectOption('#example',example);await page.click('#load-example');await page.click('#build-model');await ready(page);
+      await page.selectOption('#example',example);await ready(page);
       assert.ok(await page.locator('#model-spec math').count()>4);
       assert.equal(await page.locator('#model-spec .katex-error').count(),0);
       assert.doesNotMatch(await page.locator('#model-spec').innerText(),/Could not render/);

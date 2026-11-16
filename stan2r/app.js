@@ -68,14 +68,14 @@ bindFormHistory(history, { filter: el => Object.values(fields).includes(/** @typ
 undo.onclick = () => history.undo(); redo.onclick = () => history.redo();
 for (const field of Object.values(fields)) field.addEventListener('input', showStale);
 mode.onchange = () => { if (mode.value.startsWith('posterior')) /** @type {HTMLDetailsElement} */ (byId('inputs')).open = true; };
-byId('load-example').onclick = () => { history.commit(); loadExample(/** @type {HTMLSelectElement} */ (byId('example')).value); history.commit(); };
+byId('example').onchange = () => { history.commit(); loadExample(/** @type {HTMLSelectElement} */ (byId('example')).value); explorer?.build({checkpointBefore:false}); };
 byId('open-file').onclick = () => byId('file').click();
 byId('file').onchange = async event => {
   const input = /** @type {HTMLInputElement} */ (event.target), file = input.files?.[0];
   if (!file) return;
   try {
     if (file.size > 800000) throw new Error('Choose a Stan file smaller than 800 KB.');
-    const text = await file.text(); history.commit(); source.value = text; history.commit(); showStale(); status.textContent = `Opened ${file.name}`;
+    const text = await file.text(); history.commit(); source.value = text; showStale(); status.textContent = `Opened ${file.name}`; explorer?.build({checkpointBefore:false});
   } catch (error) { showError(error); }
   input.value = '';
 };
@@ -103,7 +103,7 @@ generate.onclick = async () => {
       if (revision === exportRevision && key === exportKey()) showSyntax(result.syntax);
     } else {
       const state = explorer?.capture();
-      if (!state?.model || state.builtSource !== source.value || state.builtData !== data.value) throw new Error('Build the current model before exporting.');
+      if (!state?.model || state.builtSource !== source.value || state.builtData !== data.value) throw new Error('Load the current model before exporting.');
       const options = { data:parseJSON(data.value,'Data')??{}, draws:state.draws, seed:state.seed, overrides:state.overrides };
       code = selectedFormat === 'latex' ? exportLatex(state.model,options) : selectedFormat === 'python' ? exportPython(state.model,options) : selectedFormat === 'pymc' ? exportPyMC(state.model,options) : JSON.stringify({model:state.model,overrides:state.overrides},null,2);
       filename = `model.${selectedFormat === 'latex' ? 'tex' : ['python','pymc'].includes(selectedFormat) ? 'py' : 'json'}`;
@@ -122,7 +122,9 @@ download.onclick = () => {
 };
 /** @param {import('./core/compilation.js').SyntaxInfo|undefined} syntax @param {boolean} [stale] */
 function showSyntax(syntax,stale=false) {
-  byId('syntax-status').textContent = syntax ? `${stale ? 'Previous build · ' : ''}${syntax.description} Checked with ${syntax.compiler}.` : '';
+  const description = !syntax ? '' : syntax.migrated ? 'Legacy syntax modernized.' : syntax.detected === 'modern' ? 'Array syntax (Stan 2.26+).' : 'No version-specific syntax identified.';
+  byId('syntax-status').textContent = syntax ? `${stale ? 'Previous model · ' : ''}${description}` : '';
+  byId('syntax-status').title = syntax ? `Checked with ${syntax.compiler}. Exact authoring version is unknown.` : '';
   byId('syntax-migration').hidden = !syntax?.migrated;
   byId('normalized-source').textContent = syntax?.normalizedSource ?? '';
 }
@@ -147,7 +149,7 @@ function changed(state,stale) {
   showSyntax(state.model?.syntax,stale);
   byId('spec-scenario').textContent = Object.keys(state.overrides).length ? 'Exploratory changes' : 'Original model';
 }
-explorer = mountExplorer({root:byId('explorer'),readSource:()=>source.value,readData:()=>data.value,checkpoint:()=>history.commit(),refresh:()=>history.refresh(),onChange:changed});
+explorer = mountExplorer({root:byId('explorer'),buildButton:/** @type {HTMLButtonElement} */(byId('build-model')),readSource:()=>source.value,readData:()=>data.value,checkpoint:()=>history.commit(),refresh:()=>history.refresh(),onChange:changed});
 const workspace = mountWorkspace();
 history.replace(); showExportScope();
 const api = { submit, explore, analyze, simulate:simulateInBrowser, exportLatex, exportPython, exportPyMC };

@@ -42,7 +42,7 @@ button[aria-pressed="true"] { border-color: var(--accent, #3c709a); background: 
 #model-graph { display: block; width: 100%; min-width: 430px; max-height: 540px; touch-action: pan-y; }
 .dependency-edge { fill: none; stroke: var(--muted); stroke-width: 1.4; opacity: .65; }
 #dependency-arrow { color: var(--muted); }
-.model-node { cursor: grab; touch-action: none; outline: none; }
+.model-node { cursor: pointer; touch-action: none; outline: none; }
 .node-shape { fill: var(--surface); stroke: #6384a0; stroke-width: 1.5; }
 .node-input .node-shape { fill: color-mix(in srgb, var(--muted) 12%, var(--surface)); stroke: var(--muted); }
 .node-observed .node-shape { fill: color-mix(in srgb, #4f9b81 18%, var(--surface)); stroke: #43856f; }
@@ -80,7 +80,7 @@ button[aria-pressed="true"] { border-color: var(--accent, #3c709a); background: 
   .explore-settings { gap: .45rem; }
   .prior-argument { flex-wrap: wrap; }
 }
-#model-graph { touch-action: pan-x pan-y; }
+#model-graph { touch-action: none; }
 .hist-reference { stroke: var(--muted); stroke-width: 1.2; fill: none; stroke-linejoin: round; }
 .reference-mark { display: inline-block; width: 1.3em; height: .6em; margin-right: .25em; border: 1px solid var(--muted); vertical-align: middle; }
 .graph-scroll { max-height: 500px; }
@@ -107,3 +107,6 @@ button[aria-pressed="true"] { border-color: var(--accent, #3c709a); background: 
 
 .equation-line[aria-pressed="true"] { background: transparent; color: var(--text); }
 .model-equation { box-sizing: border-box; cursor: pointer; }
+
+.graph-scroll { cursor: grab; touch-action: none; }
+.graph-scroll.is-panning, .graph-scroll.is-panning *, .graph-scroll.is-dragging-node, .graph-scroll.is-dragging-node * { cursor: grabbing; }
