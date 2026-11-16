@@ -14,7 +14,7 @@
   const CORNER_OWNERS = Core.CORNER_PARENTS;
   const CORNER_MODES = Object.freeze(['auto', 'clear', 'manual']);
   const EXTRA_SETTINGS = Object.freeze({
-    brushLinked:true, galleryFilter:'uppercase',
+    brushLinked:true, galleryFilter:'designs',
     sheetScope:'uppercase', sheetOutlines:true, sheetNonblankOnly:false
   });
   const FILTERS = ['uppercase', 'lowercase', 'digits', 'ascii', 'designs', 'all', 'saved'];

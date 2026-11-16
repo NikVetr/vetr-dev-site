@@ -78,8 +78,8 @@
     const seed = getSeed(glyph);
     return Object.assign(allWhite(), seed.fills || {});
   }
-  const DESIGNS = ['nv-1','nv-2','cardinal','original-warm'].map(function (id) {
-    const name = id === 'original-warm' ? 'Original' : id === 'cardinal' ? 'Cardinal' : id.toUpperCase();
+  const DESIGNS = ['nv-1','nv-2','original-warm'].map(function (id) {
+    const name = id === 'original-warm' ? 'Original' : id.toUpperCase();
     return {key:'@' + id, label:name, name:name, kind:'design', character:'',
       note:id === 'original-warm' ? 'Warm reference scheme approximated with existing Cardinal and Mustard palette shades.' : 'Color arrangement with corners following the ending legs.',
       cornerMode:'auto', outline:false, fills:followCorners(Core.presetFills(id))};

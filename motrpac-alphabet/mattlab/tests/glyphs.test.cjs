@@ -51,11 +51,11 @@ test('the latest ASCII sheet supplies all visible defaults; omitted symbols rema
 });
 
 test('NV presets replace Original and retain supplied colors with corrected automatic corners', () => {
-  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2','@cardinal','@original-warm']);
+  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2','@original-warm']);
   assert.equal(Glyphs.getDesign('@original'), null);
   const expected = [
     ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'],
-    ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#161F27','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27']
+    ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#8C1515','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27']
   ];
   Glyphs.DESIGNS.slice(0,2).forEach((design,index) => {
     assert.equal(design.name, 'NV-' + (index + 1));

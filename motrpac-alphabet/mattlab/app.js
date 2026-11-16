@@ -77,7 +77,7 @@
     const target = targetStore || store;
     let skipped = 0;
     // Retire automatic colour-study starters, retaining any saved user edits.
-    ['@original', '@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
+    ['@original', '@cardinal', '@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
       const doc = target.project.documents[key];
       if (doc && !doc.touched) {
         delete target.project.documents[key];
@@ -117,6 +117,11 @@
         const binding = target.inferBinding(design.fills[face.id]);
         if (binding) bindings[face.id] = binding;
       });
+      const existing = target.project.documents[design.key];
+      if (existing && !existing.touched && (existing.cornerMode !== design.cornerMode ||
+          Core.FACES.some(function (/** @type {{id:string}} */ face) { return existing.fills[face.id] !== design.fills[face.id]; }))) {
+        delete target.project.documents[design.key];
+      }
       ensure(design.key, design.fills, {bindings:bindings,
         cornerMode:design.cornerMode, kind:'design', seedStatus:'design', name:design.name});
     });
@@ -539,40 +544,34 @@
   }
 
   function glyphLabel(glyph) { return glyph === ' ' ? '␠' : glyph; }
-  /** @param {string} [scope] */
-  function designGalleryKeys(scope) {
+  function designGalleryKeys() {
     const documents = store.project.documents;
-    if ((scope || settings.galleryFilter) === 'saved') {
-      return Object.keys(documents).filter(function (key) { return documents[key].kind === 'design' && documents[key].touched; });
-    }
     return /** @type {string[]} */ (Glyphs.DESIGNS.map(function (/** @type {{key:string}} */ design) { return design.key; }).filter(function (/** @type {string} */ key) { return !!documents[key]; }));
   }
+  /** @param {string} [scope] @returns {string[]} */
   function galleryKeys(scope) {
     const documents = store.project.documents;
-    const key = scope || settings.galleryFilter || 'uppercase';
-    if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].kind !== 'design' && documents[item].touched; });
+    const key = scope || settings.galleryFilter || 'designs';
+    if (key === 'designs') return designGalleryKeys();
+    if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].touched; });
     if (key === 'all') return Object.keys(documents).filter(function (item) { return documents[item].kind !== 'design'; });
     const sequence = Core.SEQUENCES[key] || Core.SEQUENCES.uppercase;
     return sequence.filter(function (item) { return Object.prototype.hasOwnProperty.call(documents, item); });
   }
   function sheetKeys(scope) {
-    if (scope === 'gallery') return designGalleryKeys().concat(galleryKeys());
-    if (scope === 'all' || scope === 'saved') return designGalleryKeys(scope).concat(galleryKeys(scope));
-    return (Core.SEQUENCES[scope] || Core.SEQUENCES.uppercase).filter(function (key) {
-      return Object.prototype.hasOwnProperty.call(store.project.documents, key);
-    });
+    if (scope === 'gallery') return galleryKeys();
+    if (scope === 'all') return designGalleryKeys().concat(galleryKeys('all'));
+    return galleryKeys(scope);
   }
   function thumbnail(fills, outline) {
     return Sheet.thumbnailSvg(fills, {outline:outline, background:settings.background});
   }
   function renderGlyphStrip() {
-    const strip = $('glyphStrip');
-    const designStrip = /** @type {HTMLElement} */ ($('designStrip'));
+    const strip = /** @type {HTMLElement} */ ($('glyphStrip'));
     strip.replaceChildren();
-    designStrip.replaceChildren();
     glyphButtons = [];
-    if (settings.galleryFilter === 'designs') settings.galleryFilter = 'uppercase';
-    const keys = designGalleryKeys().concat(galleryKeys());
+    strip.classList.toggle('designs-only', settings.galleryFilter === 'designs');
+    const keys = galleryKeys();
     keys.forEach(function (glyph) {
       const doc = store.project.documents[glyph];
       const button = document.createElement('button');
@@ -597,9 +596,9 @@
       button.appendChild(caption);
       button.addEventListener('click', function () { switchGlyph(glyph); });
       glyphButtons.push({button:button, preview:preview, status:status, glyph:glyph});
-      (doc.kind === 'design' ? designStrip : strip).appendChild(button);
+      strip.appendChild(button);
     });
-    $('galleryFilter').value = settings.galleryFilter || 'uppercase';
+    $('galleryFilter').value = settings.galleryFilter || 'designs';
     const characters = keys.filter(function (key) { return store.project.documents[key].kind !== 'design'; });
     $('gallerySummary').textContent = characters.length + ' characters · ' +
       (keys.length - characters.length) + ' designs';

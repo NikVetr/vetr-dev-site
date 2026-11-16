@@ -374,7 +374,7 @@ function presetFills(preset) {
   if (kind === 'nv-1' || kind === 'nv-2') {
     const colors = kind === 'nv-1' ?
       ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'] :
-      ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#161F27','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27'];
+      ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#8C1515','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27'];
     FACES.slice(0,16).forEach(function (face, index) { result[face.id] = colors[index]; });
     Object.entries(CORNER_PARENTS).forEach(function ([corner, owner]) { result[corner] = result[owner]; });
   }

@@ -14,9 +14,14 @@ const path = require('node:path');
     assert.equal(await page.locator('#editor-switch').getAttribute('aria-checked'), 'true');
     assert.equal(await page.locator('.glyph-card[data-glyph="@original"]').count(), 0);
     assert.equal(await page.locator('#nv1Btn,#nv2Btn,#cardinalBtn').count(), 0);
+    assert.equal(await page.locator('#galleryFilter').inputValue(), 'designs');
+    assert.equal(await page.locator('#glyphStrip .glyph-card').count(), 3);
+    assert.equal(await page.locator('.glyph-card[data-glyph="@cardinal"]').count(), 0);
+    await page.selectOption('#galleryFilter', 'uppercase');
+    assert.equal(await page.locator('#glyphStrip .glyph-card').count(), 26);
     assert.equal(await page.locator('#glyphStrip .glyph-card[data-glyph^="@"]').count(), 0);
-    assert.equal(await page.locator('#designStrip .glyph-card').count(), 4);
-    for (const name of ['original-warm','cardinal','nv-2','nv-1']) {
+    await page.selectOption('#galleryFilter', 'designs');
+    for (const name of ['original-warm','nv-2','nv-1']) {
       await page.locator(`.glyph-card[data-glyph="@${name}"]`).click();
       const fills = await page.evaluate(() => (/** @type {Window & {CardinalStudio:{getFills:()=>Record<string,string>}}} */ (/** @type {unknown} */ (window))).CardinalStudio.getFills());
       assert.equal(fills['inner-fillet-upper-right'], fills['face-gray_top']);
