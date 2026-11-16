@@ -5,7 +5,7 @@ import { openPage } from '../../scripts/landing-art/browser.mjs';
 
 const output = new URL('../../tmp/output/editor-switch/', import.meta.url);
 const switchName = 'Mattlab editor (off: MotRPAC, on: Mattlab)';
-const viewports = [[1440, 900], [390, 844], [320, 844], [844, 390]];
+const viewports = [[2560, 1440], [1440, 900], [1024, 768], [390, 844], [320, 844], [844, 390]];
 await mkdir(output, { recursive: true });
 
 // This function is serialized into the browser by page.evaluate.
@@ -25,6 +25,8 @@ try {
     await page.setViewportSize({ width, height });
     const alphabetSwitch = page.getByRole('switch', { name: switchName });
     assert.equal(await alphabetSwitch.getAttribute('aria-checked'), 'false');
+    const beforeBox = await alphabetSwitch.boundingBox();
+    assert.ok(beforeBox);
 
     // Space activates the native button; the shared switch does not intercept keys.
     await alphabetSwitch.focus();
@@ -34,6 +36,16 @@ try {
 
     const mattlabSwitch = page.getByRole('switch', { name: switchName });
     assert.equal(await mattlabSwitch.getAttribute('aria-checked'), 'true');
+    const afterBox = await mattlabSwitch.boundingBox();
+    assert.ok(afterBox);
+    for (const key of /** @type {const} */ (['x','y','width','height'])) assert.ok(Math.abs(afterBox[key]-beforeBox[key])<.1, `Switch ${key} stays identical at ${width}×${height}`);
+    if (width > 800 && height > 640) {
+      const frame = await page.locator('.workspace').boundingBox(), canvas = await page.locator('.canvas-viewport').boundingBox(), gallery = await page.locator('.glyph-shelf').boundingBox();
+      assert.ok(frame && frame.x < 20 && frame.width > width-40, 'Mattlab uses the viewport width');
+      assert.ok(canvas && canvas.width > 400 && canvas.height > 180, 'painting canvas remains usable');
+      assert.ok(gallery && gallery.y+gallery.height <= height, 'gallery and sheet export remain within the desktop viewport');
+      assert.equal(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight), true, 'desktop workspace fits vertically');
+    }
     const mattlabLayout = await page.evaluate(() => {
       const toggleNode = document.querySelector('#editor-switch');
       const actionsNode = document.querySelector('.header-actions');

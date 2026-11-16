@@ -4,13 +4,25 @@
   --surface-2: var(--soft, #eef2f5);
   --radius-sm: 6px;
   flex: 0 0 auto;
+  height: 34px;
   min-height: 34px;
+  width: 180px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  justify-content: space-between;
   min-width: 0;
   padding: 4px;
   gap: 7px;
 }
 .editor-switch .switch-word { font-size: 12px; }
-.editor-switch .theme-switch-track { flex: 0 0 auto; }
+.editor-switch .theme-switch-track { flex: 0 0 auto; inline-size: 44px; block-size: 24px; }
+/* Match the alphabet menu bar, without imposing its extra toolbar row on Mattlab. */
+.app-header { height: 58px; padding: 0 14px; border-bottom: 1px solid var(--line); }
+@media (max-width: 700px) {
+  .app-header { height: 48px; padding: 7px 10px 6px; align-items: flex-start; }
+}
+@media (max-height: 600px) and (min-width: 600px) {
+  .app-header { height: 48px; padding: 0 10px; align-items: center; }
+}
 .editor-header-start { display: flex; align-items: center; gap: 24px; min-width: 0; }
 .editor-collection-link { font-size: 11px; text-decoration: none; margin-right: 7px; }
 .editor-collection-link:hover { text-decoration: underline; }
@@ -28,7 +40,7 @@
   .app-header .header-actions { gap: 3px; }
 }
 @media (max-width: 400px) {
-  .editor-switch { gap: 5px; padding: 3px; }
+  .editor-switch { width: 164px; gap: 5px; padding: 3px; }
   .editor-switch .switch-word { font-size: 11px; }
   .menu-group { gap: 2px; }
   .menu-group .menu summary { padding: 0 6px; font-size: 12px; }

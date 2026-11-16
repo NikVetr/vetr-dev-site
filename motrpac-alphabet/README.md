@@ -4,7 +4,7 @@ Build letters from the MotRPAC logo’s geometric pieces, adjust their positions
 stems and colours, and export SVG artwork or an installable font. The starting
 alphabet includes hand-tuned designs; edits and selected variants are saved in
 this browser. The MotRPAC/Mattlab lightswitch at the start of either header opens
-the other editor, preserving their independent saved projects.
+the other editor, preserving their independent saved projects. Its position and dimensions match across both pages at each screen size.
 
 Serve the repository root with `python3 -m http.server 8000`, then open
 `http://localhost:8000/motrpac-alphabet/`. There is no build step or runtime
