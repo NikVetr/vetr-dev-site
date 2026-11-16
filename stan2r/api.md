@@ -73,7 +73,7 @@ Options:
 - `data`: finite scalar/vector values by data-variable name. Unknown names are rejected.
 - `draws`: integer 1–10,000, default 1,000.
 - `seed`: unsigned 32-bit integer, default 12,345. Streams are deterministic per node. Results do not match Stan's or NumPy's RNG sequence.
-- `overrides`: parameter-name map. `{args:{"0":2,"1":4}}` replaces specified distribution arguments with scalar constants. `{fixed:0}` replaces the parameter's draw with a fixed intervention; for vector parameters a scalar is broadcast, or supply an exact-length vector. Bounds are still checked. Use one of `args` or `fixed`, not both. These explicitly change the model; they are not posterior conditioning, and the original source is not rewritten.
+- `overrides`: parameter-name map. `{args:{"0":2,"1":4}}` replaces specified distribution arguments with scalar constants. `{fixed:0}` replaces the parameter's draw with a fixed intervention; for vector parameters a scalar is broadcast, or supply an exact-length vector. Bounds are still checked. Use one of `args` or `fixed`, not both. These explicitly change the model; they are not posterior conditioning, and the original source is not rewritten. Overrides are rechecked against conditional normalization and any proven transformed bounds, so a previously safe constraint cannot silently become a restriction on the new scenario.
 
 The explorer supports at most 64 declarations, one-dimensional sizes up to 512 (sampled variables must be nonempty), and 1,000,000 returned values. Rejection attempts and total random operations are bounded; exceeding a limit returns `SIMULATION_LIMIT`, never a partial result. Invalid requests, unsupported models and numerical/domain failures have codes `INVALID_REQUEST`, `UNSUPPORTED_MODEL`, and `SIMULATION_ERROR`. Compiler errors retain `STAN_ERROR`. The browser simulation worker reports these as rejected promises and stays separate from the interface thread.
 
@@ -84,11 +84,12 @@ See [supported constructs and limitations](README.md#explorer-support) before us
 ```js
 window.Stan2R.exportLatex(model, { overrides: { mu: { fixed: 0 } } });
 window.Stan2R.exportPython(model, { data: { N: 4 }, draws: 1000, seed: 12345 });
+window.Stan2R.exportPyMC(model, { data: { N: 4, y: [0.4, 1.1, -0.2, 0.8] } });
 ```
 
-Both return source text. Direct module exports are in `core/exports.js`. LaTeX is an `amsmath` equation block, including named distribution parameterizations, repeated-element indices and supports. The Normal equation uses variance notation (squaring Stan's SD argument). Python produces a NumPy prior simulator, with editable settings and `simulate(dat, draws, seed)` returning arrays per variable. It is **not a PyMC fitting model**. Both annotate overrides; exports fail explicitly with structured errors for invalid scenarios. LaTeX supports symbolic data dimensions without numeric data; Python needs the unsampled input data.
+All return source text. LaTeX/NumPy module exports are in `core/exports.js`; PyMC is in `core/pymc.js`. LaTeX is an `amsmath` equation block, including named distribution parameterizations, repeated-element indices and supports. The Normal equation uses variance notation (squaring Stan's SD argument). Python produces a NumPy prior simulator, with editable settings and `simulate(dat, draws, seed)` returning arrays per variable. It is **not a PyMC fitting model**. The separate `exportPyMC` returns `build_model(dat)` using PyMC 6.4.0, with observed likelihoods, named vector coordinates and deterministic transforms. It requires the supplied observations, data-only index selectors/replication counts, and includes optional, commented fitting calls. Fixed interventions with parameter-dependent bounds fail explicitly at export. All formats annotate overrides; exports fail explicitly with structured errors for invalid scenarios. LaTeX supports symbolic data dimensions without numeric data; Python needs the unsampled input data.
 
-The existing CLI retains R conversion when `action` is omitted. Add one of `graph`, `explore`, `latex`, or `python` for the new paths, which do not require Rscript:
+The existing CLI retains R conversion when `action` is omitted. Add one of `graph`, `explore`, `latex`, `python`, or `pymc` for the new paths, which do not require Rscript:
 
 ```json
 {
@@ -100,4 +101,4 @@ The existing CLI retains R conversion when `action` is omitted. Add one of `grap
 }
 ```
 
-`graph` returns `{model}`; `explore` returns `{model,samples,draws,seed,warnings}`; `latex` and `python` return `{code,format}`. The GUI's Graph JSON export additionally includes the scenario overrides alongside the original graph. CLI errors use the same stderr JSON and exit codes as R conversion.
+`graph` returns `{model}`; `explore` returns `{model,samples,draws,seed,warnings}`; `latex`, `python`, and `pymc` return `{code,format}`. The GUI's Graph JSON export additionally includes the scenario overrides alongside the original graph. CLI errors use the same stderr JSON and exit codes as R conversion.

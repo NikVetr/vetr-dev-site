@@ -16,8 +16,8 @@ test('CLI graph and simulation actions work without an R installation',()=>{
   const result=invoke({action:'explore',source,draws:12,seed:3,overrides:{mu:{fixed:4}}});
   assert.equal(result.status,0,result.stderr);assert.deepEqual(JSON.parse(result.stdout).samples.mu,Array.from({length:12},()=>[4]));
 });
-test('CLI LaTeX and Python exports describe the current scenario',()=>{
-  for(const action of ['latex','python']) {
+test('CLI LaTeX, NumPy and PyMC exports describe the current scenario',()=>{
+  for(const action of ['latex','python','pymc']) {
     const result=invoke({action,source,overrides:{mu:{fixed:4}}});assert.equal(result.status,0,result.stderr);
     const out=JSON.parse(result.stdout);assert.equal(out.format,action);assert.match(out.code,/4/);assert.match(out.code,/intervention|override/i);
   }

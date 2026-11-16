@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Convert Stan models to R for predictive simulation and pointwise densities. A deterministic converter running locally in your browser.">
+  <meta name="description" content="Explore Stan model dependencies and prior predictions. Export R, LaTeX, NumPy simulations or PyMC models, locally in your browser.">
   <title>Stan2R — Model explorer &amp; converter</title>
   <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
@@ -32,7 +32,7 @@
     <div id="error" role="alert" hidden></div>
     <div class="editors exploring">
       <section aria-labelledby="stan-heading">
-        <div class="panel-head"><h2 id="stan-heading">Stan model</h2><label for="example">Example</label><select id="example"><option value="normal">Normal observations</option><option value="binomial">Beta–binomial</option><option value="hierarchical">Hierarchical normal</option></select><button id="load-example" type="button">Load</button></div>
+        <div class="panel-head"><h2 id="stan-heading">Stan model</h2><label for="example">Example</label><select id="example"><option value="normal">Normal observations</option><option value="binomial">Beta–binomial</option><option value="hierarchical">Hierarchical normal</option><option value="grouped">Grouped normal</option><option value="multilevel">Multilevel beta–binomial</option></select><button id="load-example" type="button">Load</button></div>
         <textarea id="source" spellcheck="false" aria-label="Stan source code" autocapitalize="off" autocomplete="off"></textarea>
         <div class="toolbar"><button id="open-file" type="button">Open .stan…</button><input id="file" type="file" accept=".stan,text/plain" hidden><button id="undo" type="button">Undo</button><button id="redo" type="button">Redo</button><span class="hint">⌘ / Ctrl Z · ⇧ Z</span></div>
     <details id="inputs"><summary>Data &amp; posterior draws <span class="hint">JSON</span></summary>

@@ -18,7 +18,7 @@ Seating exposes two explicit computation paths through `runRequest`: the existin
 
 `stan2r/` runs the pinned Stan compiler in a worker, then passes its typed AST to the unchanged hardened R translator in webR. A small R bridge replaces compiler/process I/O; it does not replace parsing or translation rules. The runtime downloads on the first valid conversion, and serialized requests share its virtual filesystem. The native CLI uses the same compiler, translator, request validation and bridge through `Rscript`. Vendored-source hashes record provenance. Generated code and warnings are returned together; changing inputs marks displayed output stale.
 
-The explorer is a separate consumer of the same typed AST. `model.js` lowers a checked generative subset to a graph; `expressions.js` and `simulation.js` evaluate it with explicit domain, shape, normalization and resource checks. Independent full-range loops are normalized before simulation. Unsupported joint densities fail rather than becoming a different generative model. Original supplied observations are validated separately from replicated outcomes.
+The explorer is a separate consumer of the same typed AST. `model.js` lowers a checked generative subset to a graph; `expressions.js` and `simulation.js` evaluate it with explicit domain, shape, normalization and resource checks. Independent full-range loops, including static group-index gathers, are normalized before simulation. `support.js` conservatively proves redundant transformed-parameter bounds; scenario edits recheck that proof and conditional prior normalization. Unsupported joint densities fail rather than becoming a different generative model. Original supplied observations are validated separately from replicated outcomes.
 
 ```mermaid
 flowchart LR
@@ -26,7 +26,7 @@ flowchart LR
     C --> R[Unchanged R translator]
     C --> G[Checked generative graph]
     G --> W[JavaScript simulation worker]
-    G --> E[LaTeX and NumPy exports]
+    G --> E[LaTeX, NumPy and PyMC exports]
     G --> V[Draggable flow and plate views]
     V --> O[Explicit scenario overrides]
     O --> W
@@ -34,7 +34,7 @@ flowchart LR
     W --> H[Per-variable marginal histograms]
 ```
 
-`explorer-browser.js` shares compilation with the R converter while the simulation worker stays independent of webR. `explorer-native.mjs` exposes identical graph/simulation/export operations through CLI actions. The interface debounces prior edits, ignores obsolete results, keeps original and current histograms on shared axes, and stores graph/scenario edits in the existing history. Diagram position is presentation state; explicit interventions leave source unchanged and are labeled in exports. Source/data edits invalidate the current exploration. There is no fitting backend or analytic-composition shortcut in this path.
+`explorer-browser.js` shares compilation with the R converter while the simulation worker stays independent of webR. `explorer-native.mjs` exposes identical graph/simulation/export operations through CLI actions. The interface debounces prior edits, ignores obsolete results, keeps original and current histograms on shared axes, and stores graph/scenario edits in the existing history. Diagram position is presentation state; explicit interventions leave source unchanged and are labeled in exports. Source/data edits invalidate the current exploration. There is no browser fitting backend or analytic-composition shortcut in this path. `pymc.js` generates a Python model with supplied observations and symbolic transforms, reusing the numeric expression emitter and validation helpers from the NumPy exporter. The generated model is validated in a pinned, isolated PyMC environment; fitting runs only when a user explicitly executes its fitting calls.
 
 ## Shared decoration editor
 

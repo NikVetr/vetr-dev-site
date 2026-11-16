@@ -3,6 +3,7 @@ import { checkedAST, validateRequest, Stan2RError } from './request.js';
 import { buildModel } from './model.js';
 import { simulate } from './simulation.js';
 import { exportLatex, exportPython } from './exports.js';
+import { exportPyMC } from './pymc.js';
 const { stanc } = createRequire(import.meta.url)('../vendor/stanc.js');
 /** @param {string} source */
 export function analyze(source) {
@@ -27,5 +28,6 @@ export function dispatchExploration(request) {
   if(action==='graph')return {model};
   if(action==='latex')return {code:exportLatex(model,options),format:'latex'};
   if(action==='python')return {code:exportPython(model,options),format:'python'};
+  if(action==='pymc')return {code:exportPyMC(model,options),format:'pymc'};
   throw new Stan2RError('INVALID_REQUEST',`Unknown action: ${action}`);
 }

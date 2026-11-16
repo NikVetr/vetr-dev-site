@@ -112,11 +112,14 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
     assert.ok(await page.locator('#download-exploration').isDisabled());
     await page.locator('#export-model').click();
     assert.match(await page.locator('#explore-output').inputValue(),/numpy/);
+    await page.locator('[data-node="mu"]').click();
     await page.locator('#source').fill(`${await page.locator('#source').inputValue()}\n// changed`);
     assert.equal(await page.locator('#node-controls').getAttribute('disabled'), '');
     assert.ok(await page.locator('#node-controls input').first().isDisabled());
     assert.equal(await page.locator('#explore-output').inputValue(),'');
     assert.ok(await page.locator('#download-exploration').isDisabled());
+    await page.getByRole('combobox',{name:'y element',exact:true}).selectOption('1');
+    assert.ok(await page.locator('#marginals').evaluate(el=>el.classList.contains('is-stale')), 'changing displayed element cannot make stale results current');
     await page.locator('#export-model').click();
     assert.match(await page.locator('#explore-error').innerText(),/Build the current model/);
     assert.equal(await page.locator('#explore-output').inputValue(),'');
@@ -160,4 +163,79 @@ test('rapid prior edits keep the latest result and source edits discard pending 
     assert.ok(await page.locator('#explore-stale').isVisible());
     assert.deepEqual(browser.errors,[]);
   } finally { await browser.close(); }
+});
+
+test('linked priors retain only real dependencies, selection preserves focus and does not consume Undo', {timeout:60000}, async () => {
+  const browser = await openPage('stan2r/');
+  const page = /** @type {Page} */ (browser.page);
+  try {
+    await ready(page);
+    await page.locator('#source').fill('data {int<lower=1> N;} parameters {real a; vector[N] b;} model {a ~ normal(0,1); b ~ normal(a, exp(a));}');
+    await page.locator('#inputs').evaluate(el=>el.setAttribute('open',''));
+    await page.locator('#data').fill('{"N":3}');
+    await page.locator('#build-model').click();await ready(page);
+    const node=page.locator('[data-node="b"]');
+    await node.focus();await page.keyboard.press('Enter');
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-node')),'b');
+    assert.ok(await page.locator('[data-marginal="b"]').evaluate(el=>el.classList.contains('selected')));
+    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).check();
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Use constant for b Location');
+    assert.ok((await page.locator('.dependency-edge title').allTextContents()).includes('a → b'),'scale still depends on a');
+    await page.getByRole('checkbox',{name:'Use constant for b SD',exact:true}).check();
+    const edges=await page.locator('.dependency-edge title').allTextContents();
+    assert.ok(!edges.includes('a → b'),'both arguments are constants now');
+    assert.ok(edges.includes('N → b'),'the vector dimension is still an actual dependency');
+    await page.getByRole('checkbox',{name:'Use constant for b Location',exact:true}).uncheck();
+    assert.ok((await page.locator('.dependency-edge title').allTextContents()).includes('a → b'));
+    // Numeric values outside the initial slider range must not leave a different thumb value.
+    await page.getByRole('spinbutton',{name:'b SD value',exact:true}).fill('25');
+    assert.equal(await page.getByRole('slider',{name:'b SD',exact:true}).inputValue(),'25');
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'b SD value');
+    await page.locator('#reset-scenario').click();await ready(page);
+    await page.getByRole('checkbox',{name:'Fix b',exact:true}).check();
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Fix b');
+    assert.deepEqual(await page.locator('.dependency-edge title').allTextContents(),['N → b']);
+    await page.locator('#reset-scenario').click();await ready(page);
+    await page.locator('#graph-view').selectOption('plate');
+    const element=page.getByRole('combobox',{name:'b element',exact:true});
+    await element.focus();await element.selectOption('2');
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'b element');
+    assert.match(await page.locator('[data-node="b"] .plate-label').textContent()??'',/\[3\]/);
+    assert.ok(await page.locator('[data-node="b"]').evaluate(el=>el.classList.contains('selected')));
+    // Pick a different marginal after a real edit: Undo should undo that edit, not selection.
+    await page.locator('[data-marginal="a"] [data-select-node]').click();
+    const before=await summary(page,'a');
+    await page.getByRole('slider',{name:'a SD',exact:true}).fill('2');
+    await waitSummary(page,'a',await expectedSummary(page,{a:{args:{1:2}}},'a'));
+    await page.locator('[data-node="b"]').click();
+    await page.locator('#undo').click();
+    await waitSummary(page,'a',before);
+    assert.deepEqual(browser.errors,[]);
+  } finally {await browser.close();}
+});
+
+test('grouped model shows indexed transforms and exports a PyMC fitting model', {timeout:60000}, async () => {
+  const browser=await openPage('stan2r/');
+  const page=/** @type {Page} */(browser.page);
+  try {
+    await ready(page);await page.locator('#example').selectOption('grouped');await page.locator('#load-example').click();
+    await page.locator('#build-model').click();await ready(page);
+    const edges=await page.locator('.dependency-edge title').allTextContents();
+    assert.ok(edges.includes('theta → eta'));assert.ok(edges.includes('group → eta'));
+    assert.equal(await page.getByRole('combobox',{name:'theta element',exact:true}).locator('option').count(),3);
+    assert.equal(await page.getByRole('combobox',{name:'eta element',exact:true}).locator('option').count(),6);
+    await page.getByRole('combobox',{name:'eta element',exact:true}).selectOption('4');
+    await waitSummary(page,'eta',await expectedSummary(page,{},'theta',2));
+    await page.locator('#graph-view').selectOption('plate');
+    assert.match(await page.locator('[data-node="theta"] .plate-label').textContent()??'',/J/);
+    assert.match(await page.locator('[data-node="eta"] .plate-label').textContent()??'',/N.*\[5\]/);
+    await page.locator('.export-panel > summary').click();await page.locator('#explore-format').selectOption('pymc');
+    await page.locator('#export-model').click();
+    assert.match(await page.locator('#explore-output').inputValue(),/import pymc/);
+    const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#download-exploration').click()]);
+    assert.equal(download.suggestedFilename(),'model.py');
+    assert.deepEqual(browser.errors,[]);
+    await mkdir(screenshotDir,{recursive:true});
+    await page.screenshot({path:`${screenshotDir}/grouped.png`,fullPage:true});
+  } finally {await browser.close();}
 });

@@ -1,6 +1,7 @@
 import { analyze, simulateInBrowser } from './core/explorer-browser.js';
 import { expressionText, expressionVariables } from './core/expressions.js';
 import { exportLatex, exportPython } from './core/exports.js';
+import { exportPyMC } from './core/pymc.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 /** @param {string} name @param {Record<string,string|number>} [attrs] @param {string} [text] */
@@ -39,7 +40,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     <p id="comparison-key" class="hint" hidden><span class="reference-mark"></span> Original model · colored bars show your changes on the same scale.</p>
     <p class="hint">Independent Monte Carlo draws, not a posterior fit. Vector histograms show one element at a time. Inputs stay fixed; sampled data nodes are generated anew.</p>
     <details class="export-panel"><summary>Export this model</summary>
-      <div class="toolbar"><label for="explore-format">Format</label><select id="explore-format"><option value="latex">LaTeX equations</option><option value="python">Python · NumPy simulation</option><option value="graph">Graph JSON</option></select><button type="button" id="export-model">Generate</button><button type="button" id="download-exploration" disabled>Download</button></div>
+      <div class="toolbar"><label for="explore-format">Format</label><select id="explore-format"><option value="latex">LaTeX equations</option><option value="python">Python · NumPy simulation</option><option value="pymc">Python · PyMC model</option><option value="graph">Graph JSON</option></select><button type="button" id="export-model">Generate</button><button type="button" id="download-exploration" disabled>Download</button></div>
       <textarea id="explore-output" rows="8" readonly spellcheck="false" aria-label="Exported model"></textarea>
     </details>`;
   /** @template {HTMLElement} T @param {string} id @returns {T} */
@@ -69,6 +70,44 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
   let exportFilename = '';
   const isStale = () => state.builtSource !== readSource() || state.builtData !== readData();
   const selectedNode = () => state.model?.nodes.find(node => node.id === state.selected);
+  /** Keep keyboard focus on its logical control when a view is redrawn. @param {Element} container */
+  function retainFocus(container) {
+    const active = document.activeElement;
+    if (!(active instanceof Element) || !container.contains(active)) return () => {};
+    const attributes = ['data-node', 'aria-label', 'data-select-node'];
+    const key = attributes.find(name => active.hasAttribute(name));
+    const value = key && active.getAttribute(key);
+    return () => {
+      if (!key || value === null) return;
+      const replacement = [...container.querySelectorAll(`[${key}]`)].find(el => el.getAttribute(key) === value);
+      if (replacement instanceof HTMLElement || replacement instanceof SVGElement) replacement.focus({ preventScroll: true });
+    };
+  }
+  /** @param {import('./core/model.js').ModelNode} node */
+  function activeParents(node) {
+    const override = state.overrides[node.id];
+    const expressions = [...node.dimensions, ...Object.values(node.bounds)];
+    if (override?.fixed === undefined) {
+      if (node.expression) expressions.push(node.expression);
+      if (node.distribution) {
+        expressions.push(...node.distribution.args.filter((_, index) => override?.args?.[index] === undefined));
+        if (node.distribution.lower) expressions.push(node.distribution.lower);
+        if (node.distribution.upper) expressions.push(node.distribution.upper);
+      }
+    }
+    return new Set(expressions.flatMap(expressionVariables));
+  }
+  function highlightSelection() {
+    for (const node of graph.querySelectorAll('[data-node]')) {
+      const selected = node.getAttribute('data-node') === state.selected;
+      node.classList.toggle('selected', selected); node.setAttribute('aria-pressed', String(selected));
+    }
+    for (const panel of root.querySelectorAll('[data-marginal]')) {
+      const selected = panel.getAttribute('data-marginal') === state.selected;
+      panel.classList.toggle('selected', selected);
+      panel.querySelector('[data-select-node]')?.setAttribute('aria-pressed', String(selected));
+    }
+  }
   /** @param {unknown} error */
   function showError(error) {
     get('explore-error').hidden = false;
@@ -101,6 +140,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     }
   }
   function drawGraph() {
+    const restoreFocus = retainFocus(graph);
     graph.replaceChildren();
     if (!state.model) return;
     const height = Math.max(240, ...Object.values(state.positions).map(p => p.y + 62));
@@ -112,8 +152,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     marker.append(svgElement('path', { d: 'M 0 0 L 10 5 L 0 10 Z', fill: 'currentColor' })); defs.append(marker); graph.append(defs);
     for (const edge of state.model.edges) {
       const target=state.model.nodes.find(n=>n.id===edge.to);
-      if(target && state.overrides[target.id]?.fixed!==undefined &&
-        ![...target.dimensions,...Object.values(target.bounds)].some(e=>expressionVariables(e).includes(edge.from)))continue;
+      if(target && !activeParents(target).has(edge.from))continue;
       const a = state.positions[edge.from], b = state.positions[edge.to]; if (!a || !b) continue;
       const dx = b.x-a.x, dy = b.y-a.y, distance = Math.hypot(dx,dy);
       if(distance<1)continue;
@@ -126,11 +165,15 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
       const p = state.positions[node.id]; if (!p) continue;
       const g = svgElement('g', { transform:`translate(${p.x},${p.y})`, class:`model-node node-${node.kind}${state.selected === node.id ? ' selected' : ''}`, 'data-node':node.id, tabindex:0, role:'button', 'aria-label':`${node.id}, ${node.kind}. Select to edit; arrow keys move.`, 'aria-pressed':String(state.selected===node.id) });
       if (state.view === 'plate' && node.dimensions.length) {
+        const element = node.kind !== 'input' && node.block !== 'transformed data' && result?.samples[node.id]?.[0]?.length ? ` · [${(components[node.id] ?? 0) + 1}]` : '';
         g.append(svgElement('rect', { x:-88,y:-49,width:176,height:104,rx:4,class:'plate-outline' }));
-        g.append(svgElement('text', {x:80,y:48,'text-anchor':'end',class:'plate-label'}, node.dimensions.map(d => `1…${expressionText(d)}`).join(' × ')));
+        g.append(svgElement('text', {x:80,y:48,'text-anchor':'end',class:'plate-label'}, node.dimensions.map(d => `1…${expressionText(d)}`).join(' × ') + element));
       }
+      g.append(svgElement('title', {}, node.dimensions.length ? `${node.id}: dimensions ${node.dimensions.map(expressionText).join(' × ')}. The bracketed index identifies the displayed marginal element.` : `${node.id}: ${node.block}`));
       g.append(svgElement(state.view==='plate' ? 'ellipse' : 'rect', state.view==='plate' ? {cx:0,cy:0,rx:70,ry:32,class:'node-shape'} : {x:-78,y:-30,width:156,height:60,rx:node.kind==='deterministic'?2:12,class:'node-shape'}));
-      g.append(svgElement('text', { y:-3,'text-anchor':'middle',class:'node-name' }, node.id));
+      const labelSize=Math.min(17,124/(node.id.length*.62));
+      g.append(svgElement('title', {}, node.id));
+      g.append(svgElement('text', { y:-3,'text-anchor':'middle',class:'node-name',style:`font-size:${labelSize}px` }, node.id));
       const caption = state.overrides[node.id]?.fixed !== undefined ? 'fixed scenario' : node.distribution?.name || (node.expression ? 'transform' : 'input');
       g.append(svgElement('text', { y:15,'text-anchor':'middle',class:'node-caption' }, caption));
       g.addEventListener('click', () => { if (drag?.moved) return; state.selected=node.id; renderSelection(); });
@@ -145,34 +188,34 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
       });
       g.addEventListener('pointerdown', raw => {
         const e=/** @type {PointerEvent} */(raw); if(e.button!==0) return;
-        checkpoint(); const point=graphPoint(e);
+        const point=graphPoint(e);
         drag={id:node.id,startX:point.x,startY:point.y,x:p.x,y:p.y,moved:false}; graph.setPointerCapture(e.pointerId);
       }); graph.append(g);
     }
+    restoreFocus();
   }
   /** @param {PointerEvent} event */
   function graphPoint(event) { const point=graph.createSVGPoint();point.x=event.clientX;point.y=event.clientY;return point.matrixTransform(graph.getScreenCTM()?.inverse()); }
   graph.addEventListener('pointermove', event => {
     if(!drag) return; const p=graphPoint(event); if(Math.hypot(p.x-drag.startX,p.y-drag.startY)<3) return;
+    if (!drag.moved) checkpoint();
     drag.moved=true;
     state.positions={...state.positions,[drag.id]:{x:Math.max(90,Math.min(graph.viewBox.baseVal.width-90,drag.x+p.x-drag.startX)),y:Math.max(55,drag.y+p.y-drag.startY)}}; drawGraph();
   });
   graph.addEventListener('pointerup', event => {
     if(!drag) return;
-    const id=drag.id; if(graph.hasPointerCapture(event.pointerId)) graph.releasePointerCapture(event.pointerId);
-    state.selected=id; drag=null; renderSelection(); checkpoint();
+    const {id,moved}=drag; if(graph.hasPointerCapture(event.pointerId)) graph.releasePointerCapture(event.pointerId);
+    state.selected=id; drag=null; renderSelection(); if(moved)checkpoint();
   });
-  graph.addEventListener('pointercancel', () => {drag=null;checkpoint();});
+  graph.addEventListener('pointercancel', () => {const moved=drag?.moved;drag=null;if(moved)checkpoint();});
   function renderSelection() {
-    const focused=graph.contains(document.activeElement)?document.activeElement?.getAttribute('data-node'):null;
-    drawGraph(); renderControls();
-    if(focused)/** @type {SVGElement|null} */(graph.querySelector(`[data-node="${focused}"]`))?.focus();
+    drawGraph(); renderControls(); highlightSelection();
   }
   /** @param {string} id @param {{fixed?:number|number[],args?:Record<string,number>}} change */
   function setOverride(id, change) {
     state.overrides={...state.overrides};
     if(change.fixed===undefined && !Object.keys(change.args??{}).length)delete state.overrides[id];else state.overrides[id]=change;
-    invalidateExport(); updateScenario(); schedule(); refresh();
+    invalidateExport(); updateScenario(); drawGraph(); schedule(); refresh();
   }
   function updateScenario() {
     const changed=Object.keys(state.overrides).length;
@@ -186,6 +229,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     }
   }
   function renderControls() {
+    const restoreFocus = retainFocus(controls);
     controls.replaceChildren(); controls.disabled=isStale();
     const legend=document.createElement('legend'); const node=selectedNode();
     legend.textContent=node ? `${node.id} · ${node.block}` : 'Select a node to explore it'; controls.append(legend);
@@ -194,7 +238,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     equation.textContent=node.distribution ? `${node.id} ~ ${node.distribution.name}(${node.distribution.args.map(expressionText).join(', ')})` : node.expression ? `${node.id} = ${expressionText(node.expression)}` : 'Fixed input from Data JSON.';
     controls.append(equation);updateScenario();
     if(!node.distribution || node.kind==='observed') {
-      const note=document.createElement('span');note.className='hint';note.textContent=node.kind==='observed'?'Predicted from its parents. Select a parameter above to change its prior.':'Edit the Stan source or Data JSON, then build again.';controls.append(note);return;
+      const note=document.createElement('span');note.className='hint';note.textContent=node.kind==='observed'?'Predicted from its parents. Select a parameter above to change its prior.':'Edit the Stan source or Data JSON, then build again.';controls.append(note);restoreFocus();return;
     }
     const current=state.overrides[node.id]||{};
     const fixLabel=document.createElement('label');fixLabel.className='fixed-choice';
@@ -207,17 +251,33 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     fixed.oninput=()=>{if(fixed.value.trim()&&Number.isFinite(fixed.valueAsNumber)) setOverride(node.id,{fixed:fixed.valueAsNumber});};fixed.onchange=()=>checkpoint();
     const argNames=/** @type {Record<string,string[]>} */({normal:['Location','SD'],lognormal:['Log location','Log SD'],student_t:['Degrees of freedom','Location','Scale'],beta:['Alpha','Beta'],gamma:['Shape','Rate'],exponential:['Rate'],uniform:['Lower','Upper'],cauchy:['Location','Scale'],bernoulli:['Probability'],binomial:['Trials','Probability'],poisson:['Rate']});
     node.distribution.args.forEach((arg,index)=>{
-      const label=document.createElement('label');label.className='prior-argument';
+      const label=document.createElement('div');label.className='prior-argument';
       const title=document.createElement('span');title.textContent=argNames[node.distribution?.name||'']?.[index] || `Argument ${index+1}`;label.append(title);
       const initial=arg.kind==='number'?arg.value:arg.kind==='unary'&&arg.op==='-'&&arg.arg.kind==='number'?-arg.arg.value:undefined;
-      if(initial===undefined) {const link=document.createElement('code');link.textContent=expressionText(arg);label.append(link);controls.append(label);return;}
-      const value=current.args?.[index]??initial;
       const positive=/SD|Scale|Rate|Shape|Alpha|Beta|Degrees/.test(title.textContent);
       const probability=title.textContent==='Probability';
-      const slider=document.createElement('input');slider.type='range';slider.min=String(probability?0:positive?0.01:Math.min(-5,initial*3));slider.max=String(probability?1:Math.max(5,Math.abs(initial)*3,value*1.2));slider.step=String(title.textContent==='Trials'?1:0.01);slider.value=String(value);slider.disabled=fix.checked;slider.setAttribute('aria-label',`${node.id} ${title.textContent}`);
+      const value=current.args?.[index]??initial??(positive?1:probability?.5:0);
+      if(initial===undefined) {
+        const link=document.createElement('code');link.textContent=expressionText(arg);label.append(link);
+        const constantLabel=document.createElement('label');constantLabel.className='fixed-choice';
+        const constant=document.createElement('input');constant.type='checkbox';constant.checked=current.args?.[index]!==undefined;constant.disabled=fix.checked;
+        constant.setAttribute('aria-label',`Use constant for ${node.id} ${title.textContent}`);constantLabel.append(constant,' Use constant');label.append(constantLabel);
+        constant.onchange=()=>{
+          checkpoint();const args={...state.overrides[node.id]?.args};
+          if(constant.checked)args[index]=value;else delete args[index];
+          setOverride(node.id,{args});renderControls();checkpoint();
+        };
+        if(!constant.checked){controls.append(label);return;}
+      }
+      const slider=document.createElement('input');slider.type='range';slider.min=String(probability?0:positive?Math.min(.01,value):Math.min(-5,value*3));slider.max=String(probability?1:Math.max(5,Math.abs(initial??value)*3,value*1.2));slider.step=String(title.textContent==='Trials'?1:0.01);slider.value=String(value);slider.disabled=fix.checked;slider.setAttribute('aria-label',`${node.id} ${title.textContent}`);
       const number=document.createElement('input');number.type='number';number.step=slider.step;number.value=String(value);number.disabled=fix.checked;number.setAttribute('aria-label',`${node.id} ${title.textContent} value`);
       const change=(/** @type {HTMLInputElement} */ from)=>{
         if(!from.value.trim()||!Number.isFinite(from.valueAsNumber)) return;
+        // Numeric entry can extend the slider instead of leaving its thumb clamped
+        // to a different value than the one being simulated.
+        slider.min=String(Math.min(Number(slider.min),from.valueAsNumber));
+        slider.max=String(Math.max(Number(slider.max),from.valueAsNumber));
+        if(from===number && title.textContent!=='Trials')slider.step='any';
         slider.value=number.value=from.value;
         setOverride(node.id,{args:{...state.overrides[node.id]?.args,[index]:from.valueAsNumber}});
       };
@@ -225,21 +285,23 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
       label.append(slider,number);controls.append(label);
     });
     const note=document.createElement('p');note.className='hint';note.textContent='To collapse a prior to zero variance, use Fix value. This changes the generative scenario; it does not condition a posterior.';controls.append(note);
+    restoreFocus();
   }
   function drawMarginals() {
-    const holder=get('marginals');holder.replaceChildren();
+    const holder=get('marginals'),restoreFocus=retainFocus(holder);holder.replaceChildren();
     const comparing=!!baseline&&!!Object.keys(state.overrides).length;
     get('comparison-key').hidden=!comparing||!result;
     if(!result||!state.model) return;
-    holder.classList.remove('is-stale');
+    holder.classList.toggle('is-stale',isStale());
     for(const id of state.model.order) {
       const node=state.model.nodes.find(n=>n.id===id);
       if(!node||node.kind==='input'||node.block==='transformed data')continue;
       const rows=result.samples[node.id];if(!rows?.length) continue;
       const panel=document.createElement('section');panel.className=`marginal node-${node.kind}`;panel.dataset.marginal=node.id;
-      const head=document.createElement('div');head.className='marginal-head';const title=document.createElement('button');title.type='button';title.textContent=node.id;title.onclick=()=>{state.selected=node.id;renderSelection();};head.append(title);
+      const head=document.createElement('div');head.className='marginal-head';const title=document.createElement('button');title.type='button';title.textContent=node.id;title.dataset.selectNode=node.id;title.onclick=()=>{state.selected=node.id;renderSelection();};head.append(title);
       const index=Math.min(components[node.id]??0,rows[0].length-1);
-      if(rows[0].length>1) {const select=document.createElement('select');select.setAttribute('aria-label',`${node.id} element`);for(let i=0;i<rows[0].length;i++){const o=document.createElement('option');o.value=String(i);o.textContent=`[${i+1}]`;select.append(o);}select.value=String(index);select.onchange=()=>{components[node.id]=Number(select.value);drawMarginals();};head.append(select);}
+      components[node.id]=Math.max(0,index);
+      if(rows[0].length>1) {const select=document.createElement('select');select.setAttribute('aria-label',`${node.id} element`);for(let i=0;i<rows[0].length;i++){const o=document.createElement('option');o.value=String(i);o.textContent=`[${i+1}]`;select.append(o);}select.value=String(index);select.onchange=()=>{components[node.id]=Number(select.value);state.selected=node.id;drawMarginals();renderSelection();};head.append(select);}
       panel.append(head);
       if(!rows[0].length){const empty=document.createElement('p');empty.textContent='Empty vector · 0 elements';panel.append(empty);holder.append(panel);continue;}
       const values=rows.map(row=>row[index]);
@@ -255,6 +317,7 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
       svg.append(svgElement('line',{x1:8,y1:91,x2:248,y2:91,class:'hist-axis'}),svgElement('text',{x:8,y:108,class:'hist-tick'},lo.toPrecision(3)),svgElement('text',{x:248,y:108,'text-anchor':'end',class:'hist-tick'},hi.toPrecision(3)));
       panel.append(svg);const stats=document.createElement('p');stats.textContent=`Mean ${mean.toPrecision(3)} · SD ${sd.toPrecision(3)}`;panel.append(stats);holder.append(panel);
     }
+    drawGraph();highlightSelection();restoreFocus();
   }
   function schedule() {revision++;if(timer)clearTimeout(timer);timer=setTimeout(()=>{timer=undefined;run();},100);}
   async function run() {
@@ -298,8 +361,8 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh 
     if(!state.model||isStale()){showError(new Error('Build the current model before exporting.'));return;}
     try {
       const options={data:state.builtData.trim()?JSON.parse(state.builtData):{},draws:state.draws,seed:state.seed,overrides:state.overrides};
-      output.value=format.value==='latex'?exportLatex(state.model,options):format.value==='python'?exportPython(state.model,options):JSON.stringify({model:state.model,overrides:state.overrides},null,2);
-      exportFilename=`model.${format.value==='latex'?'tex':format.value==='python'?'py':'json'}`;
+      output.value=format.value==='latex'?exportLatex(state.model,options):format.value==='python'?exportPython(state.model,options):format.value==='pymc'?exportPyMC(state.model,options):JSON.stringify({model:state.model,overrides:state.overrides},null,2);
+      exportFilename=`model.${format.value==='latex'?'tex':['python','pymc'].includes(format.value)?'py':'json'}`;
       /** @type {HTMLButtonElement} */(get('download-exploration')).disabled=false;
     }catch(error){showError(error);}
   };
