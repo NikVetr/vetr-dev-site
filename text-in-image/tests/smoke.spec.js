@@ -12,8 +12,9 @@ test('renders the example and exposes the API', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await open(page);
-  await expect(page.locator('#fit-status')).toHaveText('✓ 11,224 of 11,224 characters placed.');
+  await expect(page.locator('#fit-status')).toHaveText('✓ 11,201 of 11,201 characters placed.');
   await expect(page.locator('#whole-words')).toBeChecked();
+  await expect(page.locator('#line-breaks')).not.toBeChecked();
   const whole = await page.evaluate(() => {
     const result = /** @type {any} */ (window).TextInImage.getResult();
     let previous = null;
@@ -22,7 +23,10 @@ test('renders the example and exposes the API', async ({ page }) => {
       if (previous && (g.line !== previous.line || g.block !== previous.block)) return false;
       previous = g;
     }
-    return result.complete && result.settings.layout.wrap === 'word';
+    const lines = [...new Set(result.glyphs.filter((/** @type {any} */ g) => g.char.trim()).map((/** @type {any} */ g) => g.line))];
+    return result.complete && result.settings.layout.wrap === 'word'
+      && result.settings.layout.preserve_line_breaks === false
+      && lines.every((line, i) => line === i + 1);
   });
   expect(whole).toBe(true);
   await expect(page.locator('#palette li')).toHaveCount(15);
@@ -267,7 +271,33 @@ test('whole-word mode and explicit newlines round-trip through the browser API a
   await page.locator('#whole-words').uncheck();
   await page.getByRole('button', { name: 'Load example' }).click();
   await expect(page.locator('#whole-words')).toBeChecked();
+  await expect(page.locator('#line-breaks')).not.toBeChecked();
+  await expect(page.locator('#fit-status')).toHaveText('✓ 11,201 of 11,201 characters placed.');
+});
+
+test('source line breaks can be restored without changing the input text, with Undo/Redo', async ({ page }) => {
+  await open(page);
+  const input = await page.locator('#text').inputValue();
+  const original = await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText());
+  await page.locator('#line-breaks').check();
+  await page.locator('#render').click();
+  await expect(page.locator('#stale')).toBeHidden();
   await expect(page.locator('#fit-status')).toHaveText('✓ 11,224 of 11,224 characters placed.');
+  const preserved = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).TextInImage;
+    return { svg: app.exportSvgText(), lineBreaks: app.getResult().glyphs.filter((/** @type {any} */ g) => g.char === '\n').length };
+  });
+  expect(preserved.lineBreaks).toBe(46);
+  expect(preserved.svg).not.toBe(original);
+  await expect(page.locator('#text')).toHaveValue(input);
+  await page.locator('#undo-replace').click(); // rendered result
+  await page.locator('#undo-replace').click(); // setting
+  await expect(page.locator('#line-breaks')).not.toBeChecked();
+  expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(original);
+  await page.locator('#redo').click();
+  await page.locator('#redo').click();
+  await expect(page.locator('#line-breaks')).toBeChecked();
+  expect(await page.evaluate(() => /** @type {any} */ (window).TextInImage.exportSvgText())).toBe(preserved.svg);
 });
 
 test('glow slider updates SVG and PNG live, preserves geometry and follows Undo/Redo', async ({ page }) => {

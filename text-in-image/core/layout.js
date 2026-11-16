@@ -19,11 +19,11 @@ import { columnRuns, lineColumns, nearestRow } from './region.js';
 /**
  * The text as one character per element, with each run of whitespace (line
  * breaks included) collapsed to a single space in character mode. Word mode
- * preserves explicit line breaks and collapses only horizontal whitespace.
- * @param {string} text @param {'character'|'word'} [wrap]
+ * optionally preserves explicit line breaks, collapsing only horizontal whitespace.
+ * @param {string} text @param {'character'|'word'} [wrap] @param {boolean} [preserveLineBreaks]
  */
-export function prepareText(text, wrap = 'character') {
-  return Array.from(wrap === 'word'
+export function prepareText(text, wrap = 'character', preserveLineBreaks = true) {
+  return Array.from(wrap === 'word' && preserveLineBreaks
     ? text.replace(/\r\n?/g, '\n').replace(/[^\S\n]+/g, ' ')
     : text.replace(/\s+/g, ' '));
 }

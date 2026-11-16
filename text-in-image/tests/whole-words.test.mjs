@@ -51,6 +51,21 @@ test('word mode preserves explicit and blank lines and never renders newline box
   assert.ok(!renderSvg(result).includes('NaN'));
 });
 
+test('continuous word filling reflows paragraphs without blank lines or changing the words', () => {
+  const source = 'first\r\n\r\nsecond\tword\nlast';
+  assert.equal(prepareText(source, 'word', false).join(''), 'first second word last');
+  const request = { image: image(120, 100), quantize: null, layout: { wrap: 'word', preserve_line_breaks: false } };
+  const result = submit({ ...request, text: source });
+  const flattened = submit({ ...request, text: 'first second word last' });
+  assert.ok(result.complete);
+  assertWholeWords(result);
+  assert.deepEqual(result.glyphs, flattened.glyphs);
+  assert.deepEqual(result.history, flattened.history);
+  assert.equal(result.glyphs.filter(g => g.char === '\n').length, 0);
+  assert.equal(DEFAULTS.layout.preserve_line_breaks, true, 'existing API requests retain explicit newlines');
+  assert.throws(() => submit({ ...request, text: source, layout: { preserve_line_breaks: 'false' } }), /must be true or false/);
+});
+
 test('a long word is shrunk to fit instead of being split or overflowing', () => {
   const result = submit({ image: image(100, 100), text: 'Ab'.repeat(500), quantize: null, layout: { wrap: 'word' } });
   assert.ok(result.complete);

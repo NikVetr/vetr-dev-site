@@ -21,7 +21,7 @@ const el = {
   imageFile: byId('image-file'), maxSide: byId('max-side'), imageInfo: byId('image-info'), text: byId('text'),
   loadExample: byId('load-example'), clear: byId('clear-inputs'), undo: byId('undo-replace'), redo: byId('redo'), charCount: byId('char-count'),
   quantizeOn: byId('quantize-on'), k: byId('k'), rotation: byId('rotation'), lineHeight: byId('line-height'),
-  lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), justify: byId('justify'),
+  lineWidths: byId('line-widths'), nRounds: byId('n-rounds'), skipGaps: byId('skip-gaps'), wholeWords: byId('whole-words'), lineBreaks: byId('line-breaks'), justify: byId('justify'),
   ink: byId('ink'), background: byId('background'), contrastMode: byId('contrast-mode'), glow: byId('glow'), glowValue: byId('glow-value'), scale: byId('scale'), seed: byId('seed'),
   render: byId('render'), status: byId('status'), issues: byId('issues'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), output: byId('output'),
@@ -33,7 +33,7 @@ const el = {
 const state = {
   /** @type {Image | null} */ image: null,
   /** @type {{ blob: Blob, name: string } | null} */ source: null,
-  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), layout: { ...DEFAULTS.layout, wrap: 'word', n_rounds: 8 }, color: { ...DEFAULTS.color, background: '#ffffff' } },
+  /** @type {Record<string, any>} */ settings: { ...structuredClone(DEFAULTS), layout: { ...DEFAULTS.layout, wrap: 'word', preserve_line_breaks: false, n_rounds: 8 }, color: { ...DEFAULTS.color, background: '#ffffff' } },
   /** @type {Result | null} */ result: null,
   svg: '',
   svgUrl: '',
@@ -153,6 +153,7 @@ function readForm() {
   s.layout = {
     ...s.layout, rotation: el.rotation.valueAsNumber, line_height: el.lineHeight.valueAsNumber, line_widths: el.lineWidths.value,
     n_rounds: el.nRounds.valueAsNumber, skip_gaps: el.skipGaps.checked, wrap: el.wholeWords.checked ? 'word' : 'character', justify: el.justify.checked,
+    preserve_line_breaks: el.lineBreaks.checked,
   };
   s.color = { ...s.color, ink_compensation: el.ink.checked, background: el.background.value };
   s.render = { ...s.render, scale: el.scale.valueAsNumber, contrast_outline: el.contrastMode.value === 'outline', contrast_adjust: el.contrastMode.value === 'adjust', glow: el.glow.valueAsNumber };
@@ -169,6 +170,8 @@ function writeForm(s) {
   el.nRounds.value = String(s.layout.n_rounds);
   el.skipGaps.checked = s.layout.skip_gaps;
   el.wholeWords.checked = s.layout.wrap === 'word';
+  el.lineBreaks.checked = s.layout.preserve_line_breaks;
+  el.lineBreaks.disabled = !el.wholeWords.checked;
   el.justify.checked = s.layout.justify;
   el.ink.checked = s.color.ink_compensation;
   const rgb = parseColor(s.color.background) ?? [0, 0, 0];
@@ -187,7 +190,7 @@ function currentRequest() {
 }
 
 function showCharCount() {
-  const n = prepareText(el.text.value, el.wholeWords.checked ? 'word' : 'character').length;
+  const n = prepareText(el.text.value, el.wholeWords.checked ? 'word' : 'character', el.lineBreaks.checked).length;
   el.charCount.textContent = `${n.toLocaleString('en-US')} characters`;
 }
 
@@ -258,7 +261,7 @@ async function renderFromPage() {
 const FIELDS = {
   image: el.imageFile, text: el.text, seed: el.seed, quantize: el.quantizeOn, 'quantize.k': el.k,
   'layout.rotation': el.rotation, 'layout.line_height': el.lineHeight, 'layout.line_widths': el.lineWidths,
-  'layout.wrap': el.wholeWords, 'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
+  'layout.wrap': el.wholeWords, 'layout.preserve_line_breaks': el.lineBreaks, 'layout.n_rounds': el.nRounds, 'layout.skip_gaps': el.skipGaps, 'layout.justify': el.justify,
   'color.ink_compensation': el.ink, 'color.background': el.background, 'render.scale': el.scale, 'render.contrast_outline': el.contrastMode, 'render.contrast_adjust': el.contrastMode, 'render.glow': el.glow,
 };
 
@@ -446,6 +449,8 @@ async function loadExample() {
   state.source = { blob, name: EXAMPLE.image.split('/').pop() ?? '' };
   el.imageFile.value = '';
   el.wholeWords.checked = true;
+  el.lineBreaks.checked = false;
+  el.lineBreaks.disabled = false;
   el.text.value = text;
   showCharCount();
   showImageInfo();
@@ -479,7 +484,8 @@ el.maxSide.addEventListener('change', async () => {
     showIssues([{ path: 'image', message: /** @type {Error} */ (error).message }]);
   }
 });
-el.wholeWords.addEventListener('change', showCharCount);
+el.wholeWords.addEventListener('change', () => { el.lineBreaks.disabled = !el.wholeWords.checked; showCharCount(); });
+el.lineBreaks.addEventListener('change', showCharCount);
 el.quantizeOn.addEventListener('change', () => { el.k.disabled = !el.quantizeOn.checked; });
 el.text.addEventListener('input', () => {
   showCharCount();

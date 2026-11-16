@@ -56,7 +56,7 @@ export function submit(request) {
   // 3. layout and font-size iteration, in the unit square; the canvas is the
   //    rotated picture at `scale` output pixels per image pixel, with `margin`
   //    of padding on every side
-  const txt = prepareText(text, layout.wrap);
+  const txt = prepareText(text, layout.wrap, layout.preserve_line_breaks);
   const chars = [...new Set([...txt.filter(c => c !== '\n'), ' '])];
   const canvas = { width: rotated.width * render.scale, height: rotated.height * render.scale };
   const span = 1 + 2 * render.margin;
