@@ -1,6 +1,8 @@
-# Stan2R API
+# StanTheExplorer API
 
 Browser: `await window.Stan2R.submit(request)` on `/stan2r/`, or import `submit` from `core/browser.js`. Node: import `submit` from `core/native.mjs`, or run `node stan2r/cli.mjs request.json`. The Node version needs Rscript on PATH; the browser loads R through pinned webR.
+
+The `/stan2r/` route remains stable. `window.StanTheExplorer` and `window.Stan2R` expose the same browser API.
 
 ## Request
 

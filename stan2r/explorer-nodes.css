@@ -1,0 +1,18 @@
+/* Controls are part of expandable nodes; the diagram retains readable 1:1 text sizing. */
+.expanded-node-controls { box-sizing: border-box; width: 260px; border: 0; margin: 0; padding: 0 12px 10px; color: var(--text); font: 12px/1.4 system-ui; cursor: default; }
+.expanded-node-controls legend { font-size: 11px; color: var(--muted); padding: 0 0 7px; }
+.expanded-node-controls .node-equation { font-size: 11px; line-height: 1.5; margin-bottom: 9px; }
+.expanded-node-controls .prior-argument { display: grid; grid-template-columns: 1fr 64px; gap: 4px 7px; margin-top: 10px; font-size: 12px; }
+.expanded-node-controls .prior-argument > span, .expanded-node-controls .prior-argument > code, .expanded-node-controls .prior-argument > label { grid-column: 1/-1; }
+.expanded-node-controls code { overflow-wrap: anywhere; }
+.expanded-node-controls .prior-argument input[type=range] { width: 100%; min-width: 0; touch-action: none; }
+.expanded-node-controls .prior-argument input[type=number] { width: 100%; min-width: 0; box-sizing: border-box; padding: 3px; font-size: 12px; }
+.expanded-node-controls .fixed-choice { font-size: 12px; display: flex; gap: 4px; align-items: center; }
+.expanded-node-controls .fixed-value { margin-top: 5px; padding: 3px; }
+.expanded-node-controls .hint { font-size: 11px; margin: 9px 0 0; line-height: 1.4; }
+.model-node foreignObject { overflow: hidden; touch-action: pan-x pan-y; }
+.node-measure { position: absolute; left: -10000px; top: 0; width: 260px; visibility: hidden; }
+.model-node:focus-within .node-shape { stroke-width: 3; }
+.model-node [data-toggle-node]:focus { outline: none; }
+.model-node:has([data-toggle-node]:focus) .node-shape { stroke-dasharray: 4 2; }
+#model-graph { margin-inline: auto; }

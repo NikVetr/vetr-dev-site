@@ -69,7 +69,7 @@ test('explorer simulates without webR, applies priors and fixed scenarios, and r
     await page.keyboard.press('Control+z'); assert.equal(await node.getAttribute('transform'), before);
     assert.equal(await page.locator('[data-marginal="mu"] svg').count(),1,'position-only undo retains current histograms');
     await page.keyboard.press('Control+Shift+z'); assert.equal(await node.getAttribute('transform'), moved);
-    const box = await node.boundingBox(); assert.ok(box);
+    const box = await node.locator('.node-name').boundingBox(); assert.ok(box);
     await page.mouse.move(box.x+box.width/2,box.y+box.height/2); await page.mouse.down();
     await page.mouse.move(box.x+box.width/2+40,box.y+box.height/2+15,{steps:5}); await page.mouse.up();
     const dragged = await node.getAttribute('transform'); assert.notEqual(dragged,moved);
@@ -91,8 +91,8 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
     await ready(page);
     await page.locator('#example').selectOption('hierarchical'); await page.locator('#load-example').click();
     assert.ok(await page.locator('#explore-stale').isVisible());
-    assert.equal(await page.locator('#node-controls').getAttribute('disabled'), '');
-    assert.ok(await page.locator('#node-controls input').first().isDisabled());
+    assert.equal(await page.locator('.expanded-node-controls').first().getAttribute('disabled'), '');
+    assert.ok(await page.locator('.expanded-node-controls input').first().isDisabled());
     await page.locator('#build-model').click(); await ready(page);
     assert.equal(await page.locator('[data-marginal="theta"]').count(),1);
     const edges = await page.locator('.dependency-edge title').allTextContents();
@@ -112,16 +112,16 @@ test('hierarchical plates, transformed marginals, vector selection, exports and 
     assert.ok(await page.locator('#download-exploration').isDisabled());
     await page.locator('#export-model').click();
     assert.match(await page.locator('#explore-output').inputValue(),/numpy/);
-    await page.locator('[data-node="mu"]').click();
+    await page.locator('[data-select-node="mu"]').click();
     await page.locator('#source').fill(`${await page.locator('#source').inputValue()}\n// changed`);
-    assert.equal(await page.locator('#node-controls').getAttribute('disabled'), '');
-    assert.ok(await page.locator('#node-controls input').first().isDisabled());
+    assert.equal(await page.locator('.expanded-node-controls').first().getAttribute('disabled'), '');
+    assert.ok(await page.locator('.expanded-node-controls input').first().isDisabled());
     assert.equal(await page.locator('#explore-output').inputValue(),'');
     assert.ok(await page.locator('#download-exploration').isDisabled());
     await page.getByRole('combobox',{name:'y element',exact:true}).selectOption('1');
     assert.ok(await page.locator('#marginals').evaluate(el=>el.classList.contains('is-stale')), 'changing displayed element cannot make stale results current');
     await page.locator('#export-model').click();
-    assert.match(await page.locator('#explore-error').innerText(),/Build the current model/);
+    assert.match(await page.locator('#error').innerText(),/Build the current model/);
     assert.equal(await page.locator('#explore-output').inputValue(),'');
     await page.locator('#build-model').click(); await ready(page);
     await page.setViewportSize({width:390,height:844});
@@ -207,7 +207,7 @@ test('linked priors retain only real dependencies, selection preserves focus and
     const before=await summary(page,'a');
     await page.getByRole('slider',{name:'a SD',exact:true}).fill('2');
     await waitSummary(page,'a',await expectedSummary(page,{a:{args:{1:2}}},'a'));
-    await page.locator('[data-node="b"]').click();
+    await page.locator('[data-toggle-node="b"]').click();
     await page.locator('#undo').click();
     await waitSummary(page,'a',before);
     assert.deepEqual(browser.errors,[]);
@@ -238,4 +238,57 @@ test('grouped model shows indexed transforms and exports a PyMC fitting model', 
     await mkdir(screenshotDir,{recursive:true});
     await page.screenshot({path:`${screenshotDir}/grouped.png`,fullPage:true});
   } finally {await browser.close();}
+});
+
+test('multiple nodes expand in place, sliders remain live during a pointer drag, and cards collapse accessibly', {timeout:60000}, async()=>{
+  const browser=await openPage('stan2r/');const page=/** @type {Page} */(browser.page);
+  try {
+    await ready(page);
+    const mu=page.locator('[data-toggle-node="mu"]'),sigma=page.locator('[data-toggle-node="sigma"]');
+    assert.equal(await mu.getAttribute('aria-expanded'),'true');
+    await sigma.click();
+    assert.equal(await sigma.getAttribute('aria-expanded'),'true');
+    assert.equal(await page.locator('.expanded-node-controls').count(),2);
+    for(const id of ['mu','sigma']) {
+      assert.equal(await page.locator(`[data-node="${id}"] .expanded-node-controls`).count(),1);
+      assert.ok(await page.locator(`[data-controls-for="${id}"]`).evaluate(el=>el.getBoundingClientRect().bottom <= /** @type {Element} */(el.parentElement).getBoundingClientRect().bottom+1),'expanded controls fit inside their node');
+    }
+    const range=page.getByRole('slider',{name:'mu SD',exact:true});
+    await range.scrollIntoViewIfNeeded();const box=await range.boundingBox();assert.ok(box);
+    await page.mouse.move(box.x+box.width*.3,box.y+box.height/2);await page.mouse.down();
+    await page.mouse.move(box.x+box.width*.55,box.y+box.height/2,{steps:4});
+    await page.waitForTimeout(180); // A simulation finishes while the pointer is still down.
+    await page.mouse.move(box.x+box.width*.8,box.y+box.height/2,{steps:4});await page.mouse.up();
+    const value=Number(await range.inputValue());assert.ok(value>4,'thumb continues moving after the simulation refresh');
+    await waitSummary(page,'mu',await expectedSummary(page,{mu:{args:{1:value}}}));
+    await range.focus();await page.keyboard.press('Control+z');
+    await waitSummary(page,'mu',await expectedSummary(page,{}));
+    await page.keyboard.press('Control+Shift+z');
+    await waitSummary(page,'mu',await expectedSummary(page,{mu:{args:{1:value}}}));
+    const beforeMove=await page.locator('[data-node="mu"]').getAttribute('transform');
+    const siblingBefore=await page.locator('[data-node="sigma"]').getAttribute('transform');
+    await mu.focus();await page.keyboard.press('ArrowDown');
+    assert.equal(await page.locator('[data-node="sigma"]').getAttribute('transform'),siblingBefore,'moving one expanded node does not reflow its sibling');
+    const moved=await page.locator('[data-node="mu"]').getAttribute('transform');
+    const y=(/** @type {string|null} */t)=>Number(t?.match(/,([^,)]+)\)/)?.[1]);
+    assert.equal(y(moved)-y(beforeMove),5,'expanded node moves by the requested keyboard step');
+    await page.keyboard.press('Control+z');
+    await sigma.focus();await page.keyboard.press('Enter');
+    assert.equal(await sigma.getAttribute('aria-expanded'),'false');
+    assert.equal(await page.locator('[data-controls-for="sigma"]').count(),0);
+    assert.equal(await page.locator('[data-controls-for="mu"]').count(),1);
+    assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-toggle-node')),'sigma');
+    await page.keyboard.press('Space');assert.equal(await sigma.getAttribute('aria-expanded'),'true');
+    await page.setViewportSize({width:390,height:844});
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    const viewport=await page.evaluate(()=>{
+      const pageY=scrollY;/** @type {HTMLButtonElement} */(document.querySelector('[data-select-node="sigma"]')).click();
+      const card=/** @type {Element} */(document.querySelector('[data-controls-for="sigma"]')).getBoundingClientRect();
+      const area=/** @type {Element} */(document.querySelector('.graph-scroll')).getBoundingClientRect();
+      return {samePagePosition:pageY===scrollY,visible:card.left>=area.left&&card.right<=area.right};
+    });
+    assert.ok(viewport.samePagePosition,'selecting a node scrolls only the diagram');assert.ok(viewport.visible,'the expanded card fits within the mobile diagram viewport');
+    await mkdir(screenshotDir,{recursive:true});await page.screenshot({path:`${screenshotDir}/expanded-mobile.png`,fullPage:true});
+    assert.deepEqual(browser.errors,[]);
+  }finally{await browser.close();}
 });

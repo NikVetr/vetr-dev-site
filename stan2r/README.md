@@ -1,8 +1,8 @@
-# Stan2R
+# StanTheExplorer
 
 An interactive model explorer and browser interface to the deterministic [Stan2R converter](https://github.com/NikVetr/Stan2R/tree/hardening). It uses Stan's compiler to parse and type-check a model, then the same R translator as the native package to produce generative R code. Models stay on the user's device.
 
-Serve the repository root (`python3 -m http.server 8000`) and open `/stan2r/`. The **Model explorer** starts with a normal model. Choose an example or edit/open a self-contained Stan model, then select **Build & simulate**. For the existing translator, select **R converter**, choose a conversion mode and select **Convert to R**. The first successful conversion downloads the pinned webR runtime from `https://webr.r-wasm.org/v0.5.8/`. The generated script can be copied or downloaded; the R converter does not execute that script or fit a model. The explorer runs its own explicit JavaScript prior simulation.
+Serve the repository root (`python3 -m http.server 8000`) and open `/stan2r/`. The **Model explorer** starts with a normal model. Choose an example or edit/open a self-contained Stan model, then select **Build & simulate**. Open **Export this model** and choose **R · Stan2R converter** for the existing translator, select a conversion mode, then **Generate**. The first successful conversion downloads the pinned webR runtime from `https://webr.r-wasm.org/v0.5.8/`. The generated script can be copied or downloaded; the R converter does not execute that script or fit a model. The explorer runs its own explicit JavaScript prior simulation.
 
 The data and posterior-draw controls accept JSON. Data values may be numbers, numeric vectors, or rectangular numeric matrices. Posterior draws are columns of numbers keyed by CmdStan names (including `theta[1]`). Select a one-based draw number. The converter embeds that parameter draw in the result; the generated script reads data from an R list named `dat` and leaves its results in `out`. Density modes return ordinary densities/probabilities, not log densities.
 
@@ -11,13 +11,15 @@ Text fields keep their native Undo/Redo shortcuts. The Undo/Redo buttons and Ctr
 
 ## Interactive model explorer
 
+The source editor sits beside a typeset model specification. Each equation links to its node and declaration line; graphical changes update the equations without rewriting the Stan source. The specification and LaTeX download share the same equation generator. KaTeX compiles those equations to native MathML locally.
+
 The explorer builds a generative dependency graph from Stan's **typed compiler AST**, then draws independent Monte Carlo samples in a browser worker. It needs no webR download. Dependency-flow and plate views share the same graph; drag nodes or use arrow keys while a node is focused. Repositioning changes only the drawing, not the model. Plates label repeated elements; edges include shape/bound dependencies as well as distribution arguments.
 
-Select a parameter to adjust literal prior arguments with sliders or number inputs. A linked argument can be explicitly replaced with a constant and then restored; its dependency arrow updates accordingly. Selecting a node highlights its histogram, and selecting a histogram focuses the matching node. Selection is navigation and does not add an Undo step. Hyperparameters are ordinary selectable nodes, so their changes propagate through the graph. **Fix value** makes a parameter deterministic (a scalar fixed value broadcasts across a vector). This is an explicitly labeled intervention, not posterior conditioning; zero-variance scenarios use Fix instead of passing an invalid zero SD to a distribution. Controls modify an exploration scenario while preserving the original source.
+Click a node header to expand or collapse its controls; several nodes can remain open together. Adjust literal prior arguments with sliders or number inputs directly inside each node. A linked argument can be explicitly replaced with a constant and then restored; its dependency arrow updates accordingly. Selecting a node highlights its histogram, and selecting a histogram focuses the matching node. Selection and expansion are navigation and do not add an Undo step. Hyperparameters are ordinary selectable nodes, so their changes propagate through the graph. **Fix value** makes a parameter deterministic (a scalar fixed value broadcasts across a vector). This is an explicitly labeled intervention, not posterior conditioning; zero-variance scenarios use Fix instead of passing an invalid zero SD to a distribution. Controls modify an exploration scenario while preserving the original source.
 
 Histograms cover parameters, transformed parameters, and sampled data. Vector elements have separate selectors rather than being pooled. Colored bars show the current scenario; when it changes, a thin outline shows the original distribution on the same axes. Fixed seeds and per-variable random streams make changes easier to compare. Larger graphs scroll horizontally on small screens. Source/data edits mark the graph stale and disable its controls until rebuilt. Slider gestures, fixed values, diagram movement and view settings support Undo/Redo; stale worker replies cannot overwrite a newer edit.
 
-**Export this model** produces LaTeX equations, a NumPy prior simulation script, a PyMC fitting model, or graph JSON. LaTeX and Python incorporate the current scenario and annotate its interventions. The NumPy export samples the prior. The separate PyMC export attaches the supplied observations and creates a model that can be fitted locally in Python; no fitting runs in the browser. The R converter continues to translate the original Stan source and uses its existing broader support boundary. A hierarchical normal example demonstrates a scale hyperprior and a transformed vector; setting `tau` to zero collapses the group deviations. **Grouped normal** maps several observations to each latent group. **Multilevel beta–binomial** is the original Stan2R README model, with its source preserved unchanged.
+**Export this model** gathers R conversion, LaTeX equations, NumPy prior simulation, PyMC fitting models, and graph JSON in one menu. R retains all four conversion modes and remains available even when a model is outside the graphical subset. LaTeX and Python incorporate the current scenario and annotate its interventions. The NumPy export samples the prior. The separate PyMC export attaches the supplied observations and creates a model that can be fitted locally in Python; no fitting runs in the browser. The R converter continues to translate the original Stan source and uses its existing broader support boundary. A hierarchical normal example demonstrates a scale hyperprior and a transformed vector; setting `tau` to zero collapses the group deviations. **Grouped normal** maps several observations to each latent group. **Multilevel beta–binomial** is the original Stan2R README model, with its source preserved unchanged.
 
 ### Explorer support
 
@@ -31,6 +33,12 @@ This is not a general Stan interpreter. Unsupported constructs include arbitrary
 
 A Stan distribution statement contributes a density factor; it is not necessarily a generative instruction. The support checks follow that distinction and the normalizing terms needed for truncation. See the [Stan statements reference](https://mc-stan.org/docs/reference-manual/statements.html) and [prior predictive checks guide](https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html).
 
+
+### Stan syntax versions
+
+Stan syntax is checked with pinned **stanc 2.38.0**. If needed, an official **stanc 2.32.2** canonicalizer modernizes supported older syntax, then 2.38 checks the result. This includes older array declarations, `<-` assignments, `#` comments and supported deprecated density syntax. The legacy compiler loads only when current compilation fails. The app discloses the migration and its normalized source; your original editor text stays unchanged. Line links refer to the normalized source when migration occurred.
+
+Detection identifies syntax generations, not an exact authoring version. Future syntax and historical features unsupported by these compilers fail explicitly. Successful syntax migration does not broaden the graphical simulator’s supported model subset. See [syntax compatibility details and Stan references](api.md#stan-syntax-generations).
 
 ### PyMC export
 
@@ -54,7 +62,7 @@ This implementation addresses the original README's model-visualization/LaTeX id
 
 ## Programmatic use
 
-`window.Stan2R.submit(request)` returns a promise for `{code, mode, warnings, compiler, translator}`. See [api.md](api.md). The CLI shares the request mapping, compiler, R translator, and host adapter:
+`window.StanTheExplorer.submit(request)` (also available as `window.Stan2R.submit(request)` for existing callers) returns a promise for `{code, mode, warnings, compiler, syntax, translator}`. See [api.md](api.md). The CLI shares the request mapping, compiler, R translator, and host adapter:
 
 ```sh
 node stan2r/cli.mjs request.json
@@ -72,8 +80,8 @@ The CLI needs Node 22+. R-conversion requests also need `Rscript` on `PATH`; the
 - `core/native.mjs` supplies the same bridge through a temporary `Rscript` process; `cli.mjs` is its JSON interface.
 - `core/model.js` lowers the typed AST into the checked generative graph; `expressions.js` shares evaluation/rendering, `support.js` checks redundant transformed bounds, and `simulation.js` provides bounded, seeded Monte Carlo. `simulation-worker.js` keeps sampling off the UI thread. `explorer-browser.js` and `explorer-native.mjs` expose the same graph/simulation through browser APIs and CLI actions.
 - `core/exports.js` generates LaTeX and executable NumPy code from that graph; `core/pymc.js` shares its expression renderer and numeric validation while generating PyMC models.
-- `explorer.js` owns graph layout, scenario controls, marginal histograms, exports and stale-response protection.
-- `app.js` renders state and uses the collection's shared history and theme controls.
+- `explorer.js` owns graph layout, expandable scenario controls, marginal histograms and stale-response protection. `model-spec.js` renders the shared LaTeX equations as MathML and links selection back to the graph.
+- `app.js` owns the source/data inputs, unified exports, model specification and shared history/theme controls. The existing `/stan2r/` URL remains stable.
 
 The browser needs an initial network connection to fetch webR. A failed load is shown in the interface and can be retried. webR's PostMessage transport does not support interrupting R evaluation; conversion is serialized and the interface remains responsive. Current Stan2R limitations are preserved: unsupported constructs produce errors, while the existing bounded-prior and ordered-parameter approximations produce visible warnings. External Stan includes, model fitting, and the package's plotting/flattening workflows are not exposed by this interface. Input arrays above two dimensions are rejected explicitly; they are not flattened silently.
 
@@ -83,7 +91,7 @@ The R runtime uses substantially more memory than a small JavaScript-only tool. 
 
 ```sh
 node --test stan2r/tests/core.test.mjs
-node --test stan2r/tests/browser.test.mjs stan2r/tests/explorer-browser.test.mjs
+npm run test:browser --prefix stan2r
 node --test stan2r/tests/explorer-core.test.mjs stan2r/tests/exports.test.mjs stan2r/tests/explorer-audit.test.mjs stan2r/tests/explorer-cli.test.mjs stan2r/tests/support.test.mjs
 ```
 

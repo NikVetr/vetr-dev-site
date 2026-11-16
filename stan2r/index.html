@@ -4,33 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Explore Stan model dependencies and prior predictions. Export R, LaTeX, NumPy simulations or PyMC models, locally in your browser.">
-  <title>Stan2R — Model explorer &amp; converter</title>
+  <title>StanTheExplorer — Model explorer &amp; exports</title>
   <link rel="stylesheet" href="../shared/base.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="explorer-nodes.css">
+  <script defer src="vendor/katex/katex.min.js"></script>
   <script src="../shared/theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <header><a href="../" class="home" aria-label="vetr.dev home">vetr.dev</a><h1>Stan2R</h1><span class="subtitle">Explore · simulate · translate</span><button id="theme-toggle" class="chip" type="button" aria-pressed="false"></button></header>
+  <header><a href="../" class="home" aria-label="vetr.dev home">vetr.dev</a><h1>StanTheExplorer</h1><span class="subtitle">Explore · simulate · translate</span><button id="theme-toggle" class="chip" type="button" aria-pressed="false"></button></header>
   <main>
-    <div class="toolbar">
-      <button id="show-explorer" type="button" aria-pressed="true">Model explorer</button>
-      <button id="show-converter" type="button" aria-pressed="false">R converter</button>
-    </div>
-    <div class="toolbar conversion-toolbar" hidden>
-      <label for="mode">Convert for</label>
-      <select id="mode">
-        <option value="prior_predictive">Prior predictive simulation</option>
-        <option value="posterior_predictive">Posterior predictive simulation</option>
-        <option value="posterior_density">Pointwise posterior densities</option>
-        <option value="prior_density">Pointwise prior densities</option>
-      </select>
-      <button id="convert" class="primary" type="button">Convert to R</button>
-      <span id="status" role="status">Ready</span>
-    </div>
     <p class="intro">Follow a model from priors to predictions. Explore its dependencies, adjust a prior, or translate it into code. Everything runs on your device.</p>
     <div id="error" role="alert" hidden></div>
-    <div class="editors exploring">
+    <div class="editors">
       <section aria-labelledby="stan-heading">
         <div class="panel-head"><h2 id="stan-heading">Stan model</h2><label for="example">Example</label><select id="example"><option value="normal">Normal observations</option><option value="binomial">Beta–binomial</option><option value="hierarchical">Hierarchical normal</option><option value="grouped">Grouped normal</option><option value="multilevel">Multilevel beta–binomial</option></select><button id="load-example" type="button">Load</button></div>
         <textarea id="source" spellcheck="false" aria-label="Stan source code" autocapitalize="off" autocomplete="off"></textarea>
@@ -41,19 +28,28 @@
       <p class="hint">Draw numbers start at 1. Use CmdStan column names such as <code>theta[1]</code>. The output embeds the selected parameter draw; it reads observed data from an R list named <code>dat</code>.</p>
     </details>
       </section>
-      <section id="explorer" aria-label="Interactive model explorer"></section>
-      <section id="r-panel" aria-labelledby="r-heading" hidden>
-        <div class="panel-head"><h2 id="r-heading">Generated R</h2><button id="copy" type="button" disabled>Copy</button><button id="download" type="button" disabled>Download .R</button></div>
-        <textarea id="output" spellcheck="false" readonly aria-label="Generated R code" placeholder="Your translated R code appears here."></textarea>
-        <p id="warnings" role="status" hidden></p>
-        <p id="stale" hidden>Inputs changed. Convert again to update this output.</p>
+      <section id="spec-panel" aria-labelledby="spec-heading">
+        <div class="panel-head"><h2 id="spec-heading">Model specification</h2><span id="spec-scenario" class="hint">Original model</span></div>
+        <p class="hint spec-hint">Equations follow source order. Select a row to expand its node below. Normal uses mean and variance.</p>
+        <div id="model-spec" aria-label="Rendered model equations"></div>
+        <p id="syntax-status" class="hint" role="status"></p>
+        <details id="syntax-migration" hidden><summary>View modernized Stan source</summary><p class="hint">Compiler-generated syntax update. Your original source is preserved; line references below use this modernized source.</p><pre id="normalized-source"></pre></details>
       </section>
     </div>
+    <section id="explorer" aria-label="Interactive model explorer"></section>
+    <details class="export-panel"><summary>Export this model</summary>
+      <div class="toolbar"><label for="explore-format">Format</label><select id="explore-format"><option value="latex">LaTeX equations</option><option value="python">Python · NumPy simulation</option><option value="pymc">Python · PyMC model</option><option value="r">R · Stan2R converter</option><option value="graph">Graph JSON</option></select><button type="button" id="export-model" class="primary">Generate</button><button type="button" id="copy" disabled>Copy</button><button type="button" id="download-exploration" disabled>Download</button></div>
+      <div id="r-options" class="toolbar" hidden><label for="mode">R output</label><select id="mode"><option value="prior_predictive">Prior predictive simulation</option><option value="posterior_predictive">Posterior predictive simulation</option><option value="posterior_density">Pointwise posterior densities</option><option value="prior_density">Pointwise prior densities</option></select></div>
+      <p id="export-scope" class="hint"></p>
+      <p id="status" role="status">Ready</p>
+      <textarea id="explore-output" rows="10" readonly spellcheck="false" aria-label="Exported model" placeholder="Choose a format and generate an export."></textarea>
+      <p id="warnings" role="status" hidden></p>
+    </details>
     <details><summary>How to use the result</summary>
-      <p>The explorer uses Stan’s type checker and a supported generative subset: scalar/vector priors, deterministic transforms, and sampled data. It reports unsupported constructs explicitly. Select a node to adjust literal prior arguments or fix a parameter, including hyperparameters. These exploration changes leave the Stan source untouched; LaTeX and Python exports include them.</p>
+      <p>The explorer uses Stan’s type checker and a supported generative subset: scalar/vector priors, deterministic transforms, and sampled data. It reports unsupported constructs explicitly. Expand nodes to adjust prior arguments or fix parameters, including hyperparameters. Multiple nodes can stay open together. These exploration changes leave the Stan source untouched; LaTeX and Python exports include them.</p>
       <p>Prior predictive histograms are independent Monte Carlo draws, not posterior estimates. No analytic approximation or MCMC fitting is performed. Arrow dependencies include shape and bound inputs; a plate marks repeated elements. Fixing a node is an intervention in the generative graph, not conditioning a fitted model.</p>
-      <p>For the R converter, define <code>dat</code> in R, then run the downloaded script. Its <code>out</code> list contains the model’s top-level variables. Density modes return ordinary densities or probabilities, not log densities. The R converter supports more Stan constructs than the explorer.</p>
-      <p>The first successful conversion downloads the R runtime. Later conversions reuse it. Internet access is needed for this initial download. Stan2R reports unsupported constructs instead of silently omitting them. Provide a self-contained Stan model; external <code>#include</code> files are not supported here.</p>
+      <p>R exports translate the original Stan source, without graphical scenario changes. Define <code>dat</code> in R, then run the downloaded script. Its <code>out</code> list contains the model’s top-level variables. Density modes return ordinary densities or probabilities, not log densities. The R converter supports more Stan constructs than the explorer.</p>
+      <p>The first successful conversion downloads the R runtime. Later conversions reuse it. Internet access is needed for this initial download. StanTheExplorer reports unsupported constructs instead of silently omitting them. Provide a self-contained Stan model; external <code>#include</code> files are not supported here.</p>
       <p><a href="api.md">API &amp; CLI</a> · <a href="https://github.com/NikVetr/Stan2R/tree/hardening">Stan2R source</a></p>
     </details>
   </main>

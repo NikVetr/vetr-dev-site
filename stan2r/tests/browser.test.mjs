@@ -30,9 +30,9 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     assert.equal(unsupported,'UNSUPPORTED_CONSTRUCT');
     const warned=await page.evaluate(()=>window.Stan2R.submit({source:'parameters {real mu; real<lower=0> sigma;} model {mu ~ normal(0,1); sigma ~ normal(mu,1);}'}));
     assert.match(warned.warnings.join('\n'),/draws differ from Stan's joint prior/);
-    await page.click('#show-converter');await page.click('#convert');
-    await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Converted');
-    assert.match(await page.locator('#output').inputValue(),/sigma <-/);
+    await page.locator('.export-panel > summary').click();await page.selectOption('#explore-format','r');await page.click('#export-model');
+    await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Generated');
+    assert.match(await page.locator('#explore-output').inputValue(),/sigma <-/);
     const original=await page.locator('#source').inputValue();
     await page.selectOption('#example','binomial');await page.click('#load-example');
     assert.match(await page.locator('#source').inputValue(),/binomial/);
@@ -41,14 +41,14 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     assert.match(await page.locator('#source').inputValue(),/binomial/);
     await page.locator('#source').focus();await page.keyboard.press('Control+End');await page.keyboard.type('\n// edit');await page.keyboard.press('Control+z');
     assert.ok(!(await page.locator('#source').inputValue()).endsWith('// edit'));
-    await page.locator('#source').fill('parameters {real x;} model {x ~ invalid(1);}');await page.click('#convert');
+    await page.locator('#source').fill('parameters {real x;} model {x ~ invalid(1);}');await page.click('#export-model');
     await page.waitForFunction(()=>document.getElementById('error')?.hidden===false);assert.match(await page.locator('#error').innerText(),/Semantic error/);
-    await page.click('#load-example');await page.click('#convert');await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Converted');
-    const [download] = await Promise.all([page.waitForEvent('download'), page.click('#download')]);
+    await page.click('#load-example');await page.click('#export-model');await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Generated');
+    const [download] = await Promise.all([page.waitForEvent('download'), page.click('#download-exploration')]);
     assert.equal(download.suggestedFilename(), 'model.R');
     const downloadedPath = await download.path();
     assert.ok(downloadedPath);
-    assert.equal(await readFile(downloadedPath, 'utf8'), await page.locator('#output').inputValue());
+    assert.equal(await readFile(downloadedPath, 'utf8'), await page.locator('#explore-output').inputValue());
     const screenshotDir=fileURLToPath(new URL('../../tmp/output/stan2r-review/',import.meta.url));await mkdir(screenshotDir,{recursive:true});
     await page.screenshot({path:`${screenshotDir}/desktop.png`,fullPage:true});
     await page.setViewportSize({width:390,height:844});await page.click('#theme-toggle');
@@ -56,10 +56,10 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     await page.screenshot({path:`${screenshotDir}/mobile.png`,fullPage:true});
     assert.deepEqual(errors,[]);
     const context=await browser.newContext();const offline=await context.newPage();
-    await offline.route('https://webr.r-wasm.org/**',route=>route.abort());await offline.goto(`${base}/stan2r/`);await offline.click('#show-converter');await offline.click('#convert');
+    await offline.route('https://webr.r-wasm.org/**',route=>route.abort());await offline.goto(`${base}/stan2r/`);await offline.locator('.export-panel > summary').click();await offline.selectOption('#explore-format','r');await offline.click('#export-model');
     await offline.waitForFunction(()=>document.getElementById('error')?.hidden===false);
     assert.match(await offline.locator('#error').innerText(),/Could not start the R runtime/);
-    assert.equal(await offline.locator('#convert').isEnabled(),true);
+    assert.equal(await offline.locator('#export-model').isEnabled(),true);
     await context.close();
   } finally {await browser.close();server.kill();}
 });
