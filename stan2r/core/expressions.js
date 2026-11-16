@@ -1,8 +1,8 @@
 import { Stan2RError } from './request.js';
 
-/** @typedef {{kind:'number',value:number}|{kind:'variable',name:string}|{kind:'binary',op:string,left:Expr,right:Expr}|{kind:'unary',op:string,arg:Expr}|{kind:'call',name:string,args:Expr[]}|{kind:'index',arg:Expr,indices:Expr[]}|{kind:'array',items:Expr[]}} Expr */
+/** @typedef {{kind:'number',value:number}|{kind:'variable',name:string}|{kind:'binary',op:string,left:Expr,right:Expr}|{kind:'unary',op:string,arg:Expr}|{kind:'call',name:string,args:Expr[]}|{kind:'index',arg:Expr,indices:Expr[],gather?:boolean}|{kind:'array',items:Expr[]}} Expr */
 /** @typedef {number | number[]} Value */
-export const FUNCTIONS = ['exp','log','log1p','expm1','sqrt','square','inv_logit','logit','inv','fabs','abs','pow','sum','mean','rep_vector','rep_row_vector','rep_array','to_vector','fmin','fmax'];
+export const FUNCTIONS = ['exp','log','log1p','expm1','sqrt','square','inv_logit','logit','inv','fabs','abs','pow','sum','mean','min','max','rep_vector','rep_row_vector','rep_array','to_vector','fmin','fmax'];
 /** @param {string} message @returns {never} */
 export function modelError(message) { throw new Stan2RError('UNSUPPORTED_MODEL', message, 'source'); }
 /** @param {Expr} expr @returns {string[]} */
@@ -49,9 +49,14 @@ export function evaluateExpression(expr,env) {
     }
     case 'array': return expr.items.map(x=>scalar(evaluateExpression(x,env),'Array element'));
     case 'index': {
-      const x=evaluateExpression(expr.arg,env), i=scalar(evaluateExpression(expr.indices[0],env),'Index');
-      if (expr.indices.length !== 1 || !Array.isArray(x) || !Number.isInteger(i) || i<1 || i>x.length) throw new Stan2RError('SIMULATION_ERROR','Index is outside the one-dimensional variable.');
-      return x[i-1];
+      if(expr.indices.length!==1)throw new Stan2RError('SIMULATION_ERROR','Expected one index for a one-dimensional variable.');
+      const x=evaluateExpression(expr.arg,env), selector=evaluateExpression(expr.indices[0],env);
+      if(!Array.isArray(x))throw new Stan2RError('SIMULATION_ERROR','Only one-dimensional arrays or vectors can be indexed.');
+      if(expr.gather ? !Array.isArray(selector) : typeof selector!=='number')throw new Stan2RError('SIMULATION_ERROR',expr.gather?'A gather requires an integer-array index.':'A scalar index must be an integer, not a vector.');
+      const indexes=Array.isArray(selector)?selector:[selector];
+      if(indexes.some(i=>!Number.isInteger(i)||i<1||i>x.length))throw new Stan2RError('SIMULATION_ERROR',`Index is outside the one-dimensional variable (valid range 1:${x.length}).`);
+      const selected=indexes.map(i=>x[i-1]);
+      return expr.gather ? selected : selected[0];
     }
     case 'unary': value=binary(0,evaluateExpression(expr.arg,env),expr.op==='-' ? (a,b)=>a-b : (a,b)=>a+b); break;
     case 'binary': {
@@ -63,9 +68,9 @@ export function evaluateExpression(expr,env) {
     }
     case 'call': {
       const args=expr.args.map(x=>evaluateExpression(x,env)), a=args[0];
-      if (['sum','mean'].includes(expr.name)) {
-        if (!Array.isArray(a) || (expr.name==='mean'&&!a.length)) throw new Stan2RError('SIMULATION_ERROR',`${expr.name} needs a nonempty vector.`);
-        value=a.reduce((x,y)=>x+y,0)/(expr.name==='mean'?a.length:1); break;
+      if (['sum','mean','min','max'].includes(expr.name)) {
+        if (!Array.isArray(a) || (expr.name!=='sum'&&!a.length)) throw new Stan2RError('SIMULATION_ERROR',`${expr.name} needs a nonempty vector.`);
+        value=expr.name==='min'?Math.min(...a):expr.name==='max'?Math.max(...a):a.reduce((x,y)=>x+y,0)/(expr.name==='mean'?a.length:1); break;
       }
       if (['rep_vector','rep_row_vector','rep_array'].includes(expr.name)) {
         const n=scalar(args[1],'Replication count');

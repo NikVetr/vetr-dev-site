@@ -138,3 +138,20 @@ test('NumPy export rejects zero-size stochastic variables explicitly', () => {
     assert.throws(()=>python(code,'simulate(DEFAULT_DATA)'), /zero-size stochastic variables are not supported/);
   }
 });
+
+test('NumPy and LaTeX exports retain grouped beta-binomial gathers, std_normal and max/min reductions', async () => {
+  const {examples}=await import('../examples.js');
+  const example=examples.multilevel;
+  const graph=model(example.source);
+  const latex=exportLatex(graph);
+  assert.match(latex,/beta\\_binomial/);
+  assert.match(latex,/operatorname\{max\}/);
+  const stats=python(exportPython(graph,{data:example.data,draws:300,seed:51}), `out=simulate(DEFAULT_DATA)
+group=np.asarray(DEFAULT_DATA["group"])-1
+k_scaled=np.asarray(DEFAULT_DATA["k"])/max(DEFAULT_DATA["k"])
+expected=out["theta_intercept"]+out["theta_slope"]*k_scaled+out["theta_group"][:,group]*out["theta_group_sd"]
+print(json.dumps({"theta_error":float(np.max(np.abs(out["theta"]-expected))),"shape":list(out["x"].shape),"valid":bool(np.all((out["x"]>=0)&(out["x"]<=DEFAULT_DATA["k"])))}))`);
+  assert.ok(stats.theta_error<1e-12);
+  assert.deepEqual(stats.shape,[300,example.data.n]);
+  assert.equal(stats.valid,true);
+});

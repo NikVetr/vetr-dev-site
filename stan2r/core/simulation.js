@@ -1,4 +1,6 @@
 import { Stan2RError } from './request.js';
+import { validateModelNormalization } from './model.js';
+import { validateTransformedSupports } from './support.js';
 import { evaluateExpression, scalar } from './expressions.js';
 /** @typedef {import('./expressions.js').Value} Value */
 /** @typedef {import('./model.js').Model} Model */
@@ -42,6 +44,8 @@ export function validateOverrides(model,overrides={}) {
       for(const [index,value] of Object.entries(override.args))if(!/^(0|[1-9][0-9]*)$/.test(index)||Number(index)>=node.distribution.args.length||typeof value!=='number'||!Number.isFinite(value))fail(`Invalid prior argument ${index} for ${id}.`,'INVALID_REQUEST');
     }
   }
+  validateModelNormalization(model,overrides);
+  validateTransformedSupports(model,overrides);
   return overrides;
 }
 
@@ -65,7 +69,7 @@ function gamma(shape,rng) {
   }
   return fail('Gamma sampler exceeded its rejection limit.','SIMULATION_LIMIT');
 }
-/** @param {string} name @param {number[]} a @param {()=>number} rng */
+/** @param {string} name @param {number[]} a @param {()=>number} rng @returns {number} */
 function drawDistribution(name,a,rng) {
   /** @param {boolean} valid @param {string} requirement */ const require=(valid,requirement)=>{if(!valid)fail(`${name}: ${requirement}.`);};
   const [x,y,z]=a;
@@ -80,6 +84,7 @@ function drawDistribution(name,a,rng) {
     case 'cauchy':require(y>0,'scale must be positive');return x+y*Math.tan(Math.PI*(rng()-.5));
     case 'bernoulli':require(x>=0&&x<=1,'probability must be between 0 and 1');return Number(rng()<x);
     case 'bernoulli_logit':return Number(rng()<(x>=0?1/(1+Math.exp(-x)):Math.exp(x)/(1+Math.exp(x))));
+    case 'beta_binomial': {require(Number.isInteger(x)&&x>=0&&x<=10000,'trials must be an integer between 0 and 10,000');const probability=drawDistribution('beta',[y,z],rng);return drawDistribution('binomial',[x,probability],rng);}
     case 'binomial': {require(Number.isInteger(x)&&x>=0&&x<=10000,'trials must be an integer between 0 and 10,000');require(y>=0&&y<=1,'probability must be between 0 and 1');let total=0;for(let i=0;i<x;i++)total+=Number(rng()<y);return total;}
     case 'poisson':case 'poisson_log': {
       let rate=name==='poisson_log'?Math.exp(x):x;require(Number.isFinite(rate)&&rate>=0&&rate<=1000,'rate must be between 0 and 1,000 for this browser sampler');let total=0;
@@ -114,6 +119,14 @@ function checkValue(value,node,size,env,checkBounds) {
     if(xs.some((x,i)=>x<lower[i]||x>upper[i]))fail(`${node.id}: value violates declared bounds.`);
   }
 }
+/** Validate supplied observations against the original supplied data, never their replicates.
+ * @param {Model} model @param {Record<string,Value>} data */
+export function validateDataValues(model,data) {
+  for(const node of model.nodes)if(node.block==='data'&&Object.hasOwn(data,node.id)) {
+    checkValue(data[node.id],node,sizeOf(node,data),data,true);
+  }
+}
+
 /**
  * Direct, seeded Monte Carlo through a supported generative graph. Array outputs
  * are [draw][element], so coordinates are never silently pooled into one marginal.
@@ -131,11 +144,7 @@ export function simulate(model,options={}) {
     return [node.id,randomGenerator(streamSeed,budget)];
   }));
   /** @type {Record<string,number[][]>} */const samples=Object.fromEntries(model.nodes.map(n=>[n.id,[]]));
-  // Stan validates observed inputs before any predictive draws. In particular,
-  // bounds such as y <= n refer to supplied n, never to its replicate.
-  for(const node of model.nodes)if(node.block==='data'&&Object.hasOwn(data,node.id)) {
-    checkValue(data[node.id],node,sizeOf(node,data),data,true);
-  }
+  validateDataValues(model,data);
   const warnings=[...model.warnings];
   if(Object.keys(overrides).length)warnings.push('Scenario overrides change the generative model; the Stan source remains unchanged.');
   let totalSize=0;

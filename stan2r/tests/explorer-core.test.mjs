@@ -133,3 +133,64 @@ test('zero-length sampled variables fail explicitly rather than bypassing distri
   const emptyInput=model('data {vector[0] x;}transformed data {real total=sum(x);}parameters{real z;}model{z~normal(total,1);}');
   assert.deepEqual(simulate(emptyInput,{data:{x:[]},draws:1}).samples.total,[[0]]);
 });
+
+test('static group gathers preserve repeated group effects, coordinates and dependence',()=>{
+  const source=`data {int<lower=1> N;int<lower=1> J;array[N] int<lower=1,upper=J> group;vector[N] y;}
+  parameters {real mu;real<lower=0> tau;vector[J] theta;}
+  transformed parameters {vector[N] eta=theta[group];}
+  model {mu~std_normal();tau~exponential(1);theta~normal(mu,tau);y~normal(eta,0.5);}`;
+  const m=model(source),data={N:4,J:2,group:[1,1,2,2]};
+  assert.ok(m.edges.some(e=>e.from==='group'&&e.to==='eta'));
+  assert.ok(m.edges.some(e=>e.from==='theta'&&e.to==='eta'));
+  const r=simulate(m,{data,draws:10000,seed:530,overrides:{mu:{fixed:0},tau:{fixed:2}}});
+  for(let i=0;i<r.draws;i++)assert.deepEqual(r.samples.eta[i],[r.samples.theta[i][0],r.samples.theta[i][0],r.samples.theta[i][1],r.samples.theta[i][1]]);
+  /** @param {number} a @param {number} b */
+  const covariance=(a,b)=>{
+    const meanA=r.samples.y.reduce((v,row)=>v+row[a],0)/r.draws,meanB=r.samples.y.reduce((v,row)=>v+row[b],0)/r.draws;
+    return r.samples.y.reduce((v,row)=>v+(row[a]-meanA)*(row[b]-meanB),0)/r.draws;
+  };
+  near(covariance(0,1),4,.2);near(covariance(0,2),0,.15);
+  const single=simulate(m,{data:{N:1,J:2,group:[2]},draws:20});
+  assert.ok(single.samples.eta.every((x,i)=>x.length===1&&x[0]===single.samples.theta[i][1]),'length-one gathers keep a vector dimension');
+  assert.throws(()=>simulate(m,{data:{N:1,J:2,group:[0]}}),/bounds|Index/);
+  assert.throws(()=>simulate(m,{data:{N:1,J:2,group:[3]}}),/bounds|Index/);
+  assert.throws(()=>simulate(m,{data:{N:1,J:2,group:[1.5]}}),/integer/);
+  assert.throws(()=>simulate(m,{data:{N:1,J:2,group:1}}),/shape/);
+});
+
+test('indexed group loops and vectorized gathers are identical generative programs',()=>{
+  const prefix=`data {int N;int J;array[N] int group;vector[N] x;vector[N] y;}
+  parameters {vector[J] alpha;vector[J] beta;real<lower=0> sigma;}model{alpha~std_normal();beta~std_normal();sigma~exponential(1);`;
+  const vector=model(prefix+'y~normal(alpha[group]+beta[group].*x,sigma);}');
+  const loop=model(prefix+'for(n in 1:N)y[n]~normal(alpha[group[n]]+beta[group[n]]*x[n],sigma);}');
+  const options={data:{N:4,J:2,group:[2,1,2,1],x:[-2,0,1,3]},draws:100};
+  assert.deepEqual(simulate(loop,options),simulate(vector,options));
+  const invalid={...options,data:{...options.data,group:[2,1,3,1]}};
+  assert.throws(()=>simulate(loop,invalid),/Index.*valid range 1:2/);
+  assert.throws(()=>model(prefix+'for(n in 1:N)y[n]~normal(alpha[group[n]+1],sigma);}'),/index arithmetic/);
+  assert.throws(()=>model(prefix+'group~bernoulli(0.5);y~normal(alpha[group],sigma);}'),/fixed data/);
+});
+
+test('std_normal is an exact alias and symmetric half-normal hyperpriors retain the right scale mixture',()=>{
+  const alias=model('parameters{real a;vector[2] b;}model{a~std_normal();b~std_normal();}');
+  const explicit=model('parameters{real a;vector[2] b;}model{a~normal(0,1);b~normal(0,1);}');
+  assert.deepEqual(simulate(alias,{draws:100}),simulate(explicit,{draws:100}));
+  const m=model('parameters{real<lower=0> tau;real<lower=0> sigma;real<upper=0> negative;}model{tau~exponential(1);sigma~normal(0,tau);negative~normal(0,tau);}');
+  const r=simulate(m,{draws:10000,seed:70});
+  near(moments(r.samples.sigma).mean,Math.sqrt(2/Math.PI),.035);
+  near(r.samples.sigma.reduce((v,x)=>v+x[0]**2,0)/r.draws,2,.2);
+  assert.ok(r.samples.negative.every(([x])=>x<=0));
+  assert.throws(()=>simulate(m,{draws:1,overrides:{sigma:{args:{0:1}}}}),/normalizing constant/);
+  assert.doesNotThrow(()=>simulate(m,{draws:1,overrides:{sigma:{args:{0:1}},tau:{fixed:2}}}));
+  assert.throws(()=>model('parameters{real<lower=0> tau;real<lower=0,upper=1> x;}model{tau~exponential(1);x~normal(0,tau);}'),/normalizing constant/);
+  assert.throws(()=>model('parameters{real<lower=0> tau;real<lower=0> x;}model{tau~exponential(1);x~normal(0,tau) T[-1,];}'),/normalizing constant/);
+});
+
+test('compound beta-binomial agrees with analytic moments and max/min preserve array reductions',()=>{
+  const m=model('data{array[3]int trials;int y;}transformed data{int nmax=max(trials);int nmin=min(trials);}model{y~beta_binomial(nmax,2,3);}');
+  const r=simulate(m,{data:{trials:[10,20,4]},draws:10000,seed:75});
+  assert.ok(r.samples.nmax.every(([x])=>x===20));assert.ok(r.samples.nmin.every(([x])=>x===4));
+  near(moments(r.samples.y).mean,8,.2);near(moments(r.samples.y).variance,20,.8);
+  assert.ok(r.samples.y.every(([x])=>Number.isInteger(x)&&x>=0&&x<=20));
+  assert.throws(()=>simulate(model('data{int y;}model{y~beta_binomial(5,0,2);}'),{draws:1}),/shape parameters/);
+});

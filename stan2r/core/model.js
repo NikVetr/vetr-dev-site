@@ -1,10 +1,11 @@
 import { FUNCTIONS, modelError, expressionVariables, expressionText } from './expressions.js';
+import { validateTransformedSupports } from './support.js';
 /** @typedef {import('./expressions.js').Expr} Expr */
 /** @typedef {{lower?:Expr,upper?:Expr}} Bounds */
 /** @typedef {{id:string,block:string,kind:'input'|'stochastic'|'deterministic'|'observed',type:string,dimensions:Expr[],bounds:Bounds,expression?:Expr,distribution?:{name:string,args:Expr[],lower?:Expr,upper?:Expr},parents:string[],line:number}} ModelNode */
 /** @typedef {ModelNode} Node */
 /** @typedef {{nodes:ModelNode[],edges:{from:string,to:string}[],order:string[],warnings:string[]}} Model */
-export const DISTRIBUTIONS = {normal:2,lognormal:2,exponential:1,gamma:2,beta:2,uniform:2,student_t:3,cauchy:2,bernoulli:1,bernoulli_logit:1,binomial:2,poisson:1,poisson_log:1};
+export const DISTRIBUTIONS = {normal:2,lognormal:2,exponential:1,gamma:2,beta:2,uniform:2,student_t:3,cauchy:2,bernoulli:1,bernoulli_logit:1,binomial:2,beta_binomial:3,poisson:1,poisson_log:1};
 
 /** Read stanc's s-expression format, not Stan source. @param {string} text @returns {any} */
 function readSexp(text) {
@@ -46,7 +47,13 @@ function expression(x) {
       if(['rep_array','rep_vector','rep_row_vector'].includes(name)&&args.length!==2) modelError('Explorer supports only one-dimensional replication.');
       return {kind:'call',name,args};
     }
-    case 'Indexed': return {kind:'index',arg:expression(e[1]),indices:e[2].map((/** @type {any} */ index)=>{if(index[0]!=='Single') modelError('Explorer supports scalar indexes, not slices.'); return expression(index[1]);})};
+    case 'Indexed': {
+      if(e[2].length!==1||e[2][0][0]!=='Single')modelError('Explorer supports one scalar or integer-array index, not slices or multidimensional indexing.');
+      const rawIndex=e[2][0][1],type=record(record(rawIndex).emeta).type_;
+      const gather=Array.isArray(type)&&type[0]==='UArray'&&type[1]==='UInt';
+      if(type!=='UInt'&&!gather)modelError('An index must be an integer or a one-dimensional integer array.');
+      return {kind:'index',arg:expression(e[1]),indices:[expression(rawIndex)],...(gather?{gather:true}:{})};
+    }
     case 'ArrayExpr': case 'RowVectorExpr': return {kind:'array',items:e[1].map(expression)};
     default: return modelError(`Explorer does not support expression ${e[0]}.`);
   }
@@ -75,7 +82,7 @@ const boundExpressions=b=>Object.values(b);
 /** @param {Expr|undefined} x @param {Expr|undefined} y */
 const sameExpression=(x,y)=>x===undefined?y===undefined:y!==undefined&&expressionText(x)===expressionText(y);
 /** A declaration whose bound only states the distribution's natural support adds no normalizer. @param {ModelNode} node */
-function naturalBounds(node) {
+export function naturalBounds(node) {
   const d=node.distribution; if(!d) return false;
   const lo=node.bounds.lower,hi=node.bounds.upper;
   const lowerSafe=lo===undefined||(lo.kind==='number'&&lo.value<=0&&['gamma','exponential','lognormal','beta','poisson','poisson_log','bernoulli','bernoulli_logit','binomial'].includes(d.name));
@@ -88,16 +95,54 @@ function liftLoopExpression(expr,index) {
   if(expr.kind==='number')return expr;
   if(expr.kind==='index') {
     if(expr.indices.length===1&&expr.indices[0].kind==='variable'&&expr.indices[0].name===index&&expr.arg.kind==='variable')return expr.arg;
-    if(expressionVariables(expr).includes(index))modelError('Explorer supports direct matching loop indices, not indirect indexing or recurrences.');
+    const selector=expr.indices[0];
+    if(expr.indices.length===1&&expr.arg.kind==='variable'&&selector.kind==='index'&&selector.arg.kind==='variable'&&selector.indices.length===1&&selector.indices[0].kind==='variable'&&selector.indices[0].name===index) {
+      return {...expr,indices:[selector.arg],gather:true};
+    }
+    if(expressionVariables(expr).includes(index))modelError('Explorer supports matching loop indices or static group[index] gathers, not recurrences or arbitrary index arithmetic.');
     return expr;
   }
   if(expr.kind==='binary')return {...expr,op:expr.op==='*'?'.*':expr.op==='/'?'./':expr.op,left:liftLoopExpression(expr.left,index),right:liftLoopExpression(expr.right,index)};
   if(expr.kind==='unary')return {...expr,arg:liftLoopExpression(expr.arg,index)};
   if(expr.kind==='call') {
-    if(['sum','mean','to_vector','rep_array','rep_vector','rep_row_vector'].includes(expr.name)&&expressionVariables(expr).includes(index))modelError('Explorer cannot lift reductions or container construction across a sampling loop.');
+    if(['sum','mean','min','max','to_vector','rep_array','rep_vector','rep_row_vector'].includes(expr.name)&&expressionVariables(expr).includes(index))modelError('Explorer cannot lift reductions or container construction across a sampling loop.');
     return {...expr,args:expr.args.map(x=>liftLoopExpression(x,index))};
   }
   return modelError('Array expressions inside sampling loops are not supported.');
+}
+
+/** Gather indices must remain fixed data, not a sampled variable masquerading as metadata. @param {Expr} expr @param {(id:string)=>boolean} randomAncestor */
+function validateGatherSelectors(expr,randomAncestor) {
+  if(expr.kind==='number'||expr.kind==='variable')return;
+  if(expr.kind==='index'&&expr.gather&&expr.indices.some(selector=>expressionVariables(selector).some(randomAncestor)))modelError('Explorer gather indices must depend only on fixed data, not on sampled variables.');
+  const children=expr.kind==='binary'?[expr.left,expr.right]:expr.kind==='call'?expr.args:expr.kind==='array'?expr.items:expr.kind==='index'?[expr.arg,...expr.indices]:[expr.arg];
+  for(const child of children)validateGatherSelectors(child,randomAncestor);
+}
+/** Normal(0, scale) puts exactly half its mass on either half-line for every valid scale. @param {ModelNode} node */
+function symmetricNormalBounds(node) {
+  const d=node.distribution;if(!d||d.name!=='normal'||d.lower||d.upper)return false;
+  if(d.args[0]?.kind!=='number'||d.args[0].value!==0)return false;
+  const lo=node.bounds.lower,hi=node.bounds.upper;
+  return (!hi&&lo?.kind==='number'&&lo.value===0)||(!lo&&hi?.kind==='number'&&hi.value===0);
+}
+/** Recheck conditional normalization when scenario edits change the model. @param {Model} model @param {Record<string,{fixed?:unknown,args?:Record<string,number>}>} [overrides] */
+export function validateModelNormalization(model,overrides={}) {
+  const byName=new Map(model.nodes.map(n=>[n.id,n]));
+  /** @param {string} id @returns {boolean} */
+  function randomAncestor(id) {
+    if(Object.hasOwn(overrides[id]??{},'fixed'))return false;
+    const n=byName.get(id);if(!n)modelError(`Unknown declared variable ${id}.`);
+    return n.kind==='stochastic'||n.kind==='observed'||n.parents.some(randomAncestor);
+  }
+  for(const original of model.nodes) {
+    if(original.kind!=='stochastic'||!original.distribution||!Object.keys(original.bounds).length||Object.hasOwn(overrides[original.id]??{},'fixed'))continue;
+    const edits=overrides[original.id]?.args;
+    const distribution={...original.distribution,args:original.distribution.args.map((x,i)=>edits?.[i]===undefined?x:/** @type {Expr} */({kind:'number',value:edits[i]}))};
+    const node={...original,distribution};
+    if(naturalBounds(node)||symmetricNormalBounds(node))continue;
+    const explicit=sameExpression(node.bounds.lower,distribution.lower)&&sameExpression(node.bounds.upper,distribution.upper);
+    if(!explicit&&[...distribution.args,...boundExpressions(node.bounds)].some(x=>expressionVariables(x).some(randomAncestor)))modelError(`Declared bounds for ${node.id} have a parameter-dependent normalizing constant. Use matching explicit T[lower, upper] truncation to specify a normalized conditional prior, or use the R converter's documented approximation.`);
+  }
 }
 
 /**
@@ -163,9 +208,9 @@ export function buildModel(ast,source='') {
       if(loop&&fields.args.some((/** @type {any} */ x)=>!['UInt','UReal'].includes(record(record(x).emeta).type_)))modelError('Sampling-loop arguments must be scalars; a vector argument would add multiple density factors per element.');
       if(!['data','parameters'].includes(n.block)) modelError(`Sampling statements on ${n.block} variables need inverse transforms/Jacobians and are not supported.`);
       if(n.distribution) modelError(`Multiple density factors for ${n.id} cannot be treated as independent draws.`);
-      const name=identifier(fields.distribution);
-      if(!Object.hasOwn(DISTRIBUTIONS,name)||fields.kind[0]!=='StanLib') modelError(`Explorer does not support distribution ${name}.`);
-      const distribution={name,args:fields.args.map(expression),...bounds(fields.truncation)};
+      const originalName=identifier(fields.distribution),name=originalName==='std_normal'?'normal':originalName;
+      if(!Object.hasOwn(DISTRIBUTIONS,name)||fields.kind[0]!=='StanLib') modelError(`Explorer does not support distribution ${originalName}.`);
+      const distribution={name,args:originalName==='std_normal'?[{kind:'number',value:0},{kind:'number',value:1}]:fields.args.map(expression),...bounds(fields.truncation)};
       if(loop) {
         distribution.args=distribution.args.map((/** @type {Expr} */ x)=>liftLoopExpression(x,loop.index));
         if(distribution.lower)distribution.lower=liftLoopExpression(distribution.lower,loop.index);
@@ -182,7 +227,6 @@ export function buildModel(ast,source='') {
   }
   if(nodes.length>64) modelError('Explorer supports at most 64 declared variables.');
   for(const n of nodes) {
-    if(n.block==='transformed parameters'&&Object.keys(n.bounds).length) modelError(`Constrained transformed parameter ${n.id} can restrict the joint prior; explorer requires unconstrained transformed parameters.`);
     if(n.kind==='deterministic'&&!n.expression) modelError(`Transformed variable ${n.id} has no defining expression.`);
     if(n.kind==='stochastic'&&!n.distribution) {
       if(n.type==='real'&&n.bounds.lower&&n.bounds.upper) n.distribution={name:'uniform',args:[n.bounds.lower,n.bounds.upper]};
@@ -201,11 +245,12 @@ export function buildModel(ast,source='') {
   for(const n of nodes) {
     if(n.block==='transformed data'&&n.parents.some(randomAncestor)) modelError(`Transformed data ${n.id} depends on a sampled outcome. The explorer cannot infer whether outcome-dependent preprocessing should be fixed or recomputed for prediction.`);
     if(n.dimensions.some(x=>expressionVariables(x).some(randomAncestor))) modelError(`The size of ${n.id} depends on a random variable.`);
-    if(n.kind==='stochastic'&&n.distribution&&Object.keys(n.bounds).length&&!naturalBounds(n)) {
-      const d=n.distribution;
-      const explicit=sameExpression(n.bounds.lower,d.lower)&&sameExpression(n.bounds.upper,d.upper);
-      if(!explicit&&[...d.args,...boundExpressions(n.bounds)].some(x=>expressionVariables(x).some(randomAncestor))) modelError(`Declared bounds for ${n.id} have a parameter-dependent normalizing constant. Use matching explicit T[lower, upper] truncation to specify a normalized conditional prior, or use the R converter's documented approximation.`);
-    }
+    const expressions=[...n.dimensions,...boundExpressions(n.bounds),...(n.expression?[n.expression]:[]),...(n.distribution?[...n.distribution.args,...boundExpressions({lower:n.distribution.lower,upper:n.distribution.upper})].filter(Boolean):[])];
+    for(const expr of expressions)validateGatherSelectors(expr,randomAncestor);
+
   }
-  return {nodes,edges:nodes.flatMap(n=>n.parents.map(from=>({from,to:n.id}))),order,warnings:[]};
+  const model={nodes,edges:nodes.flatMap(n=>n.parents.map(from=>({from,to:n.id}))),order,warnings:[]};
+  validateModelNormalization(model);
+  validateTransformedSupports(model);
+  return model;
 }
