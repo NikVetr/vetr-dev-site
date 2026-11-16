@@ -39,9 +39,12 @@ const Edited = require('../edited-glyphs.js');
       });
     };
     let point = await pointForFace();
-    const index = before.palettes.findIndex((/** @type {{id:string}} */ row) => row.id === 'cardinal');
-    const next = before.palettes[(index+1)%before.palettes.length];
-    const nextAgain = before.palettes[(index+2)%before.palettes.length];
+    const otherFamilies = new Set(Object.values(before.doc.bindings).filter(Boolean).map(binding => binding.familyId));
+    otherFamilies.delete('cardinal');
+    const cycleRows = before.palettes.filter((/** @type {{id:string}} */ row) => !otherFamilies.has(row.id));
+    const index = cycleRows.findIndex((/** @type {{id:string}} */ row) => row.id === 'cardinal');
+    const next = cycleRows[(index+1)%cycleRows.length];
+    const nextAgain = cycleRows[(index+2)%cycleRows.length];
     await page.mouse.click(point.x, point.y, {button:'right'});
     const after = await read();
     for (const [id,binding] of Object.entries(before.doc.bindings)) {
@@ -64,8 +67,7 @@ const Edited = require('../edited-glyphs.js');
     await page.mouse.click(point.x,point.y,{button:'right'});
     await page.keyboard.up('Shift');
     const reversed = await read();
-    // Moving into an occupied row combines its pieces, as dragging a row marker does.
-    // Shift reverses the destination; Undo (checked above) restores the prior grouping.
+    // Shift reverses the destination without merging the two color groups.
     for (const [id,binding] of Object.entries(second.doc.bindings)) {
       if (binding?.familyId === nextAgain.id) {
         assert.deepEqual(reversed.doc.bindings[id],{familyId:next.id,shade:binding.shade});
@@ -75,6 +77,29 @@ const Edited = require('../edited-glyphs.js');
     await page.locator(`.palette-row[data-family-id="${next.id}"] .swatch`).first().click({button:'right'});
     assert.equal((await read()).doc.bindings[faceId].familyId,nextAgain.id);
     assert.equal((await read()).project.settings.brush,before.project.settings.brush);
+
+    // Cycle through every available row and wrap in both directions. Other
+    // groups must retain their exact fills and links, even across occupied rows.
+    for (const direction of [1, -1]) {
+      if (direction < 0) await page.keyboard.down('Shift');
+      for (let step = 1; step <= cycleRows.length; step += 1) {
+        const current = await read();
+        const family = current.doc.bindings[faceId].familyId;
+        await page.locator(`.palette-row[data-family-id="${family}"] .swatch`).first().click({button:'right'});
+        const cycled = await read();
+        const expected = cycleRows[((index+2+direction*step)%cycleRows.length+cycleRows.length)%cycleRows.length];
+        for (const [id, binding] of Object.entries(before.doc.bindings)) {
+          if (binding?.familyId === 'cardinal') {
+            assert.deepEqual(cycled.doc.bindings[id], {familyId:expected.id, shade:binding.shade});
+            assert.equal(cycled.doc.fills[id], expected.colors[binding.shade]);
+          } else {
+            assert.deepEqual(cycled.doc.bindings[id], binding, 'Other color groups remain independent');
+            assert.equal(cycled.doc.fills[id], before.doc.fills[id]);
+          }
+        }
+      }
+      if (direction < 0) await page.keyboard.up('Shift');
+    }
 
     // Repeated paint clicks include a genuine unlinked white/blank step.
     await page.locator('#whiteTool').click();

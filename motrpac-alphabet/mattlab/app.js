@@ -472,8 +472,15 @@
   function cycleFamilyTag(familyId, delta) {
     const source = palettes.findIndex(function (/** @type {{id:string}} */ family) { return family.id === familyId; });
     if (source < 0) throw new Error('Unknown palette row: ' + familyId);
-    const target = palettes[modulo(source + delta, palettes.length)];
-    applyFamilyRemap(familyId, target.id, false);
+    const occupied = new Set(store.usedFamilies().map(function (/** @type {{familyId:string}} */ entry) { return entry.familyId; }));
+    for (let step = 1; step < palettes.length; step += 1) {
+      const target = palettes[modulo(source + delta * step, palettes.length)];
+      if (!occupied.has(target.id)) {
+        applyFamilyRemap(familyId, target.id, false);
+        return;
+      }
+    }
+    toast('All other palette rows are in use. No colors changed.');
   }
   /** @param {number} delta */
   function stepFamily(delta) {
