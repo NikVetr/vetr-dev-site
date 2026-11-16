@@ -171,7 +171,7 @@ const Edited = require('../edited-glyphs.js');
     for (const glyph of ['A','D']) {
       legacy.documents[glyph].fills = Object.fromEntries(Object.keys(before.doc.fills).map(id=>[id,'#FFFFFF']));
       legacy.documents[glyph].bindings = {};
-      legacy.documents[glyph].seedStatus = 'blank';
+      legacy.documents[glyph].seedStatus = 'curated';
       legacy.documents[glyph].touched = glyph === 'D';
     }
     legacy.documents['!'].fills = {...legacy.documents['@nv-1'].fills};

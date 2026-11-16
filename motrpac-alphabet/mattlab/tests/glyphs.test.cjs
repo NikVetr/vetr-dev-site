@@ -8,10 +8,8 @@ const Edited = require('../edited-glyphs.js');
 const Sheet = require('../sheet.js');
 const provenance = require('../edited-glyphs.provenance.json');
 
-const punctuation = new Set(['*','+',"'",'"','%',',','(',')','/','\\',';','<','>',':']);
-
-test('edited sheets supply exact fills for all 62 letters and digits, including deliberate blanks', () => {
-  assert.equal(Object.keys(Edited).length, 62);
+test('edited sheets supply exact fills for 83 supplied characters, including deliberate blanks', () => {
+  assert.equal(Object.keys(Edited).length, 83);
   assert.deepEqual(provenance.faceOrder, Core.FACES.map(face => face.id));
   const imported = [];
   /** @type {Record<string,string>} */
@@ -32,24 +30,24 @@ test('edited sheets supply exact fills for all 62 letters and digits, including 
     }
     assert.equal(blanks.join(''), source.blank);
   }
-  // Exact face colors extracted independently from the three supplied SVG sheets.
-  assert.equal(createHash('sha256').update(JSON.stringify(imported)).digest('hex'), '99df3165abc30115b7504422aeb06f49f669ef57515abe7136955a985d809cb2');
-  assert.equal(Object.values(Edited).filter(pattern => pattern.includes('r')).length, 42);
+  // Exact face colors extracted independently from the supplied SVG sheets.
+  assert.equal(createHash('sha256').update(JSON.stringify(imported)).digest('hex'), '1f9022d6ace8a956561b64b0a40282b3cd55607f4fffad23f000f20eb4dab75a');
+  assert.equal(Object.values(Edited).filter(pattern => pattern.includes('r')).length, 64);
   assert.equal(Glyphs.seedFills('D')[Core.FACES[0].id], 'none');
 });
 
-test('only requested punctuation survives; remaining punctuation and space are blank', () => {
+test('the latest ASCII sheet supplies all visible defaults; omitted symbols remain blank', () => {
   assert.equal(Core.SEQUENCES.ascii.length, 95);
-  assert.equal(Glyphs.guessCount, 14);
+  assert.equal(Glyphs.guessCount, 0);
   const ids = Core.FACES.map(face => face.id).sort();
   for (const glyph of Core.SEQUENCES.ascii) {
     const fills = Glyphs.seedFills(glyph);
     assert.deepEqual(Object.keys(fills).sort(), ids);
     if (Object.hasOwn(Edited, glyph)) continue;
-    assert.equal(Sheet.hasVisibleFills(fills), punctuation.has(glyph), JSON.stringify(glyph));
-    assert.equal(Glyphs.getSeed(glyph).status, punctuation.has(glyph) ? 'guess' : 'blank');
+    assert.equal(Sheet.hasVisibleFills(fills), false, JSON.stringify(glyph));
+    assert.equal(Glyphs.getSeed(glyph).status, 'blank');
   }
-  assert.equal(Core.SEQUENCES.ascii.filter(glyph => Sheet.hasVisibleFills(Glyphs.seedFills(glyph))).length, 56);
+  assert.equal(Core.SEQUENCES.ascii.filter(glyph => Sheet.hasVisibleFills(Glyphs.seedFills(glyph))).length, 64);
 });
 
 test('NV presets replace Original and retain supplied colors with corrected automatic corners', () => {

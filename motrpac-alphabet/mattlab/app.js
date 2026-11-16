@@ -103,7 +103,7 @@
       });
       const existing = target.project.documents[glyph];
       if (existing && !existing.touched && existing.kind === 'glyph' &&
-          ['guess', 'blank'].includes(existing.seedStatus) &&
+          ['guess', 'blank', 'curated'].includes(existing.seedStatus) &&
           (existing.seedStatus !== seed.status || existing.cornerMode !== seed.cornerMode ||
            Core.FACES.some(function (/** @type {{id:string}} */ face) { return existing.fills[face.id] !== fills[face.id]; }))) {
         delete target.project.documents[glyph];

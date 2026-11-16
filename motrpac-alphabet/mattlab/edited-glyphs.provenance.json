@@ -26,22 +26,29 @@
       "file": "Cardinal-study-character-sheet-digits.svg",
       "sha256": "e37fe7a33d6f390a8c7f2d466d73b21f6cc327f383ba582074d993817e9319bc",
       "bytes": 54263,
-      "characters": "0123456789",
-      "blank": "23"
+      "characters": "3",
+      "blank": "3"
     },
     {
       "file": "Cardinal-study-character-sheet-uppercase.svg",
       "sha256": "74b3512a4031c87cdb431fbd269ded4040528a86ed70b87659c26508aeb524e1",
       "bytes": 120540,
-      "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "characters": "BDEFKPRZ",
       "blank": "BDEFKPRZ"
     },
     {
       "file": "Cardinal-study-character-sheet-lowercase.svg",
       "sha256": "8b91c22d731e276604c41891b55687c1699929313bee0ee128fdee9e9044d575",
       "bytes": 120999,
-      "characters": "abcdefghijklmnopqrstuvwxyz",
+      "characters": "defghkpqsz",
       "blank": "defghkpqsz"
+    },
+    {
+      "file": "Cardinal-study-character-sheet-ascii.svg",
+      "sha256": "1ed390dd17a39836d05a38ed7f05fdf9ac469b46d29adab8f9201f7486f4e6b7",
+      "bytes": 279642,
+      "characters": "\"%'()*+,/012456789:;<=>?ACGHIJLMNOQSTUVWXY[\\]abcijlmnortuvwxy{}~",
+      "blank": ""
     }
   ]
 }
