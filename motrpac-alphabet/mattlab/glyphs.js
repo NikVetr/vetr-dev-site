@@ -78,13 +78,12 @@
     const seed = getSeed(glyph);
     return Object.assign(allWhite(), seed.fills || {});
   }
-  const DESIGNS = [
-    {
-      key:'@original', label:'Original', name:'Original', kind:'design', character:'',
-      note:'The approved reference colors.', cornerMode:'manual', outline:false,
-      fills:Core.presetFills('reference')
-    }
-  ];
+  const DESIGNS = ['nv-1','nv-2'].map(function (id) {
+    const name = id.toUpperCase();
+    return {key:'@' + id, label:name, name:name, kind:'design', character:'',
+      note:'Nik’s supplied color arrangement, with corners following the ending legs.',
+      cornerMode:'auto', outline:false, fills:Core.presetFills(id)};
+  });
   DESIGNS.forEach(function (design) { Object.freeze(design.fills); Object.freeze(design); });
   Object.freeze(DESIGNS);
   function getDesign(key) { return DESIGNS.find(function (design) { return design.key === key; }) || null; }

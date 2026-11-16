@@ -12,6 +12,15 @@ const path = require('node:path');
     await page.waitForFunction(() => !!window.CardinalStudio);
     assert.equal(await page.locator('#editor-switch').getAttribute('role'), 'switch');
     assert.equal(await page.locator('#editor-switch').getAttribute('aria-checked'), 'true');
+    assert.equal(await page.locator('.glyph-card[data-glyph="@original"]').count(), 0);
+    for (const name of ['nv-2','nv-1']) {
+      await page.locator(`.glyph-card[data-glyph="@${name}"]`).click();
+      const fills = await page.evaluate(() => (/** @type {Window & {CardinalStudio:{getFills:()=>Record<string,string>}}} */ (/** @type {unknown} */ (window))).CardinalStudio.getFills());
+      assert.equal(fills['inner-fillet-upper-right'], fills['face-gray_top']);
+      assert.equal(fills['inner-fillet-lower-left'], fills['face-red_left']);
+      await page.mouse.move(10, 10);
+      await page.locator('#artworkHost').screenshot({path:path.join(output,name+'.png')});
+    }
     const first = page.locator('#artworkHost .paintable').first();
     const id = await first.getAttribute('id');
     const initial = await page.evaluate(id => window.CardinalStudio.getFills()[id], id);

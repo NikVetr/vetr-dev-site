@@ -77,11 +77,11 @@
     const target = targetStore || store;
     let skipped = 0;
     // Retire automatic colour-study starters, retaining any saved user edits.
-    ['@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
+    ['@original', '@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
       const doc = target.project.documents[key];
       if (doc && !doc.touched) {
         delete target.project.documents[key];
-        if (target.project.currentGlyph === key) target.project.currentGlyph = '@original';
+        if (target.project.currentGlyph === key) target.project.currentGlyph = '@nv-1';
       }
     });
     function ensure(glyph, fills, metadata) {
@@ -541,7 +541,8 @@
   function glyphLabel(glyph) { return glyph === ' ' ? '␠' : glyph; }
   function galleryKeys(scope) {
     const documents = store.project.documents;
-    const designKeys = Object.keys(documents).filter(function (key) { return key === '@original'; });
+    /** @type {string[]} */
+    const designKeys = Glyphs.DESIGNS.map(function (/** @type {{key:string}} */ design) { return design.key; }).filter(function (/** @type {string} */ key) { return !!documents[key]; });
     const key = scope || settings.galleryFilter || 'uppercase';
     if (key === 'designs') return designKeys;
     if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].touched; });
@@ -1120,8 +1121,9 @@
     });
     if (store.setFills(fills, 'Fill all pieces', bindings)) afterEdit();
   });
-  $('blankBtn').addEventListener('click', function () { applyPreset('white'); });
-  $('restoreBtn').addEventListener('click', function () { applyPreset('reference'); });
+  $('blankBtn').addEventListener('click', function () { applyPreset('blank'); });
+  $('nv1Btn').addEventListener('click', function () { applyPreset('nv-1'); });
+  (/** @type {HTMLButtonElement} */ ($('nv2Btn'))).addEventListener('click', function () { applyPreset('nv-2'); });
   $('cardinalBtn').title = 'Use Cardinal red tones with the original cool grays';
   $('cardinalBtn').addEventListener('click', function () { applyPreset('cardinal'); });
   $('designName').addEventListener('change', commitName);
@@ -1249,7 +1251,7 @@
     try { entries = Sheet.selectEntries(entries, {nonblankOnly:sheetNonblankOnly.checked}); }
     catch (error) { toast(error instanceof Error ? error.message : String(error)); return; }
     const scopes = {uppercase:'A–Z', lowercase:'a–z', digits:'0–9', ascii:'Printable ASCII',
-      all:'All characters and original', gallery:'Visible gallery', saved:'Edited studies'};
+      all:'All characters and designs', gallery:'Visible gallery', saved:'Edited studies'};
     const options = {title:store.project.title + ' · ' + scopes[scope],
       subtitle:entries.length + ' studies · edited colors and corner settings included',
       outline:$('sheetOutlines').checked, background:settings.backgroundColor, columns:6, scale:2};

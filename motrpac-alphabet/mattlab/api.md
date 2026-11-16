@@ -16,6 +16,8 @@ Operations:
 - `sheet`: supply `entries`, an array of `{key, label, fills}` studies, and optional `options` (`title`, `columns`, `outline`, `labels`, `nonblankOnly`, `background`). This uses the character-sheet exporter on a white sheet by default; a hex `background` changes the sheet color with automatic text/outline contrast. `nonblankOnly: true` omits entries whose actual fills are all white or transparent, independently of their status; it defaults to false. An entirely blank filtered selection returns `INVALID_REQUEST`.
 - `validate`: supply `project`, a saved project JSON object. Returns `{ok:true, project}` with the validated current model, including migration of supported older projects.
 
+`PainterCore.presetFills("nv-1")` and `presetFills("nv-2")` return the supplied logo arrangements with corrected corners. The older `reference` preset remains callable for existing integrations, while the editor gallery uses NV-1/NV-2.
+
 The lower-level modules are also callable: `PainterCore` owns geometry and SVG/PNG export, `PainterModel` owns saved studies and Undo/Redo, `PainterColor` owns color transformations, `PainterGlyphs` owns the starting letter studies, and `PainterSheet` owns sheet layout and SVG/PNG export. PNG functions return promises of blobs and require a browser canvas. Node consumers can require the corresponding `.js` files. They throw descriptive errors for invalid inputs.
 
 ```js

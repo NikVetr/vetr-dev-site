@@ -155,12 +155,12 @@
     const base = Core.createProject();
     const source = base.documents.A;
     const doc = {
-      glyph:'@original', name:'Original', fills:source.fills, touched:false, updatedAt:source.updatedAt,
-      bindings:inferredBindings(source.fills, base), cornerMode:'manual', kind:'design', seedStatus:'reference'
+      glyph:'@nv-1', name:'NV-1', fills:Core.presetFills('nv-1'), touched:false, updatedAt:source.updatedAt,
+      bindings:inferredBindings(Core.presetFills('nv-1'), base), cornerMode:'auto', kind:'design', seedStatus:'design'
     };
     base.documents = Object.create(null);
-    base.documents['@original'] = doc;
-    base.currentGlyph = '@original';
+    base.documents['@nv-1'] = doc;
+    base.currentGlyph = '@nv-1';
     base.version = VERSION;
     base.paletteConfig = Color.normalizeConfig();
     base.settings = Object.assign({}, base.settings, EXTRA_SETTINGS);
@@ -349,7 +349,7 @@
       const seed = options && options.seed || this.project.settings.seed || 'blank';
       if (!['blank', 'copy', 'reference'].includes(seed)) throw new Error('Unknown new-character starting point.');
       if (!own(this.project.documents, glyph)) {
-        const fills = seed === 'copy' ? this.doc.fills : Core.presetFills(seed === 'blank' ? 'white' : 'reference');
+        const fills = seed === 'copy' ? this.doc.fills : Core.presetFills(seed === 'blank' ? 'blank' : 'reference');
         this.ensureDocument(glyph, fills, {
           bindings:seed === 'copy' ? this.doc.bindings : seed === 'reference' ? inferredBindings(fills, this.project) : nullBindings(),
           cornerMode:seed === 'copy' ? this.doc.cornerMode : 'auto', kind:'glyph',

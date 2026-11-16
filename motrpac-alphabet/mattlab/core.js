@@ -277,6 +277,8 @@ const SEQUENCES = {
   ascii:Array.from({length:95}, function(_, i) { return String.fromCharCode(i + 32); })
 };
 const PRESETS = [
+  {id:'nv-1',name:'NV-1'},
+  {id:'nv-2',name:'NV-2'},
   {id:'reference',name:'Original colors'},
   {id:'cardinal',name:'Cardinal palette'},
   {id:'monochrome',name:'All Cardinal'},
@@ -361,6 +363,13 @@ function presetFills(preset) {
       kind === 'monochrome' || kind === 'mono' ? '#8C1515' :
       kind === 'cardinal' ? cardinalMap[face.fill] || face.fill : face.fill;
   });
+  if (kind === 'nv-1' || kind === 'nv-2') {
+    const colors = kind === 'nv-1' ?
+      ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'] :
+      ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#161F27','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27'];
+    FACES.slice(0,16).forEach(function (face, index) { result[face.id] = colors[index]; });
+    Object.entries(CORNER_PARENTS).forEach(function ([corner, owner]) { result[corner] = result[owner]; });
+  }
   return result;
 }
 

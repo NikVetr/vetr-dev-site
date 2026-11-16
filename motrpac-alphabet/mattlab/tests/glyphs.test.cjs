@@ -52,8 +52,17 @@ test('only requested punctuation survives; remaining punctuation and space are b
   assert.equal(Core.SEQUENCES.ascii.filter(glyph => Sheet.hasVisibleFills(Glyphs.seedFills(glyph))).length, 56);
 });
 
-test('the original logo palette is preserved', () => {
-  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@original']);
-  assert.deepEqual(Glyphs.getDesign('@original')?.fills, Core.presetFills('reference'));
-  for (const key of ['@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave']) assert.equal(Glyphs.getDesign(key), null);
+test('NV presets replace Original and retain supplied colors with corrected automatic corners', () => {
+  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2']);
+  assert.equal(Glyphs.getDesign('@original'), null);
+  const expected = [
+    ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'],
+    ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#161F27','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27']
+  ];
+  Glyphs.DESIGNS.forEach((design,index) => {
+    assert.equal(design.name, 'NV-' + (index + 1));
+    assert.equal(design.cornerMode, 'auto');
+    assert.deepEqual(Core.FACES.slice(0,16).map(face => design.fills[face.id]), expected[index]);
+    for (const [corner,owner] of Object.entries(Core.CORNER_PARENTS)) assert.equal(design.fills[corner], design.fills[owner]);
+  });
 });

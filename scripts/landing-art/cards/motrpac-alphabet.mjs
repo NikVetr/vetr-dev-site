@@ -1,4 +1,4 @@
-// Exact editor seed geometry and the supplied Mattlab painter’s reference design.
+// Exact editor seed geometry and the supplied Mattlab painter’s NV-1 design.
 import { createRequire } from 'node:module';
 import { openPage } from '../browser.mjs';
 import { art, esc, num } from '../svg.mjs';
@@ -29,8 +29,8 @@ export async function build() {
     if (errors.length) throw new Error(errors.join('\n'));
   } finally { await close(); }
   const name = 'motrpac-alphabet';
-  const design = Glyphs.getDesign('@original');
-  if (!design) throw new Error('Missing Mattlab reference design');
+  const design = Glyphs.getDesign('@nv-1');
+  if (!design) throw new Error('Missing Mattlab NV-1 design');
   const fill = design.fills;
   const faces = Core.FACES.map((/** @type {{id:string,d:string}} */ face, /** @type {number} */ i) =>
     `<path class="paint-${i}" d="${esc(face.d)}" fill="${fill[face.id]}"/>`).join('');

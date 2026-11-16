@@ -138,7 +138,8 @@
               <div class="toolbar-group" role="group" aria-label="Whole artwork actions">
                 <button class="button ghost" type="button" id="fillAllBtn" title="Fill all 20 pieces with the active brush">Fill all</button>
                 <button class="button ghost" type="button" id="blankBtn" title="Start a blank character">Blank</button>
-                <button class="button ghost" type="button" id="restoreBtn" title="Restore the original colors">Reference</button>
+                <button class="button ghost" type="button" id="nv1Btn" title="Apply NV-1 colors">NV-1</button>
+                <button class="button ghost" type="button" id="nv2Btn" title="Apply NV-2 colors">NV-2</button>
                 <button class="button ghost" type="button" id="cardinalBtn" title="Fill every piece with Cardinal Red #8C1515">Cardinal</button>
               </div>
             </div>
@@ -231,14 +232,14 @@
         <section class="glyph-shelf" aria-label="Character and design gallery">
           <div class="shelf-heading">
             <div><h2 class="gallery-title">Character & design gallery</h2><p class="gallery-description">Edited letter and number studies, selected symbols, and blank cells for new designs.</p></div>
-            <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All characters + original</option><option value="designs">Original</option><option value="saved">Saved studies</option></select>
+            <select class="select-input gallery-filter" id="galleryFilter" aria-label="Filter gallery"><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">ASCII</option><option value="all">All characters + designs</option><option value="designs">NV designs</option><option value="saved">Saved studies</option></select>
           </div>
           <div class="glyph-strip" id="glyphStrip" role="group" aria-label="Choose a character or design thumbnail"></div>
           <div class="gallery-meta"><span id="gallerySummary">Choose a thumbnail to open its draft.</span><span class="gallery-legend"><span class="legend-dot" aria-hidden="true"></span> Saved draft · outlines help reveal the pieces</span></div>
           <div class="sheet-bar">
             <div><div class="sheet-title">Export a character sheet</div><div class="sheet-subtitle">One labeled sheet with the chosen studies.</div></div>
             <div class="sheet-actions">
-              <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + original</option><option value="saved">Saved studies</option></select>
+              <select class="select-input sheet-scope" id="sheetScope" aria-label="Character sheet contents"><option value="gallery">Visible gallery</option><option value="uppercase">A–Z</option><option value="lowercase">a–z</option><option value="digits">0–9</option><option value="ascii">Printable ASCII</option><option value="all">All characters + designs</option><option value="saved">Saved studies</option></select>
               <label class="check-label"><input type="checkbox" id="sheetOutlines" checked>Outlines</label>
               <label class="check-label"><input type="checkbox" id="sheetNonblankOnly">Nonblank only</label>
               <button class="button" type="button" id="sheetSvgBtn">Sheet SVG</button>
