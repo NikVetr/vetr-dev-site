@@ -16,28 +16,44 @@ function svgElement(name, attrs = {}, text = '') {
 /** @param {{root:HTMLElement,readSource:()=>string,readData:()=>string,checkpoint:()=>void,refresh:()=>void,onChange?:(snapshot:Snapshot,stale:boolean)=>void}} options */
 export function mountExplorer({ root, readSource, readData, checkpoint, refresh, onChange = () => {} }) {
   root.innerHTML = `
-    <div class="panel-head"><h2>Model explorer</h2><button type="button" id="build-model" class="primary">Build &amp; simulate</button></div>
+    <div class="panel-head"><h2>Model graph</h2><button type="button" id="build-model" class="primary">Build &amp; simulate</button></div>
     <div class="explore-settings">
       <label>View <select id="graph-view"><option value="plate">Plate diagram</option><option value="flow">Dependency flow</option></select></label>
       <label id="structure-choice"><input type="checkbox" id="show-structure"> Show sizes &amp; data bounds</label>
       <label>Draws <select id="simulation-draws"><option>500</option><option selected>1000</option><option>4000</option></select></label>
       <label>Seed <input id="simulation-seed" type="number" min="0" max="4294967295" value="12345"></label>
       <button type="button" id="reset-layout">Arrange</button>
+      <label>Zoom <select id="graph-zoom"><option value="fit">Fit</option><option value="1">100%</option><option value="0.75">75%</option><option value="1.25">125%</option></select></label>
     </div>
     <p id="explore-status" role="status">Build a graph to explore priors and their predictions.</p>
     <p id="explore-error" role="alert" hidden></p>
     <p id="explore-stale" hidden>Source or data changed. Build again to update the graph and predictions.</p>
     <div class="graph-scroll"><svg id="model-graph" viewBox="0 0 800 320" aria-label="Model dependencies" role="group"></svg></div>
+    <details class="diagram-help"><summary>Diagram key &amp; controls</summary>
     <p id="diagram-notes" class="hint"></p>
     <div class="graph-key"><span class="key-input">● Fixed input</span><span class="key-stochastic">○ Latent parameter</span><span class="key-deterministic">◇ Deterministic</span><span class="key-observed">● Observed / replicated data</span><span id="dimension-key" hidden>┄ Size / data-bound dependency</span><span>Click nodes to expand · drag headers to move · arrow keys move a focused node</span></div>
+    </details>
+    <section class="distribution-panel" aria-labelledby="distribution-title"><div class="panel-head"><h2 id="distribution-title">Prior predictive draws</h2><button id="toggle-distributions" type="button" aria-expanded="true" aria-controls="distribution-content">Hide</button></div>
+    <div id="distribution-content">
     <div class="scenario-line"><span id="scenario-label">Original model</span><button type="button" id="reset-scenario" disabled>Reset changes</button></div>
     <div id="marginals" class="marginals" aria-label="Prior predictive marginal distributions"></div>
     <p id="comparison-key" class="hint" hidden><span class="reference-mark"></span> Original model · colored bars show your changes on the same scale.</p>
-    <p class="hint">Independent Monte Carlo draws, not a posterior fit. Vector histograms show one element at a time. Inputs stay fixed; sampled data nodes are generated anew. Fix value replaces a prior with a constant; it does not condition a posterior.</p>
+    <details class="simulation-help"><summary>About these draws</summary><p class="hint">Independent Monte Carlo draws, not a posterior fit. Vector histograms show one element at a time. Inputs stay fixed; sampled data nodes are generated anew. Fix value replaces a prior with a constant; it does not condition a posterior.</p></details>
+    </div></section>
 `;
   /** @template {HTMLElement} T @param {string} id @returns {T} */
   const get = id => /** @type {T} */ (root.querySelector(`#${id}`));
   const graph = /** @type {SVGSVGElement} */ (root.querySelector('#model-graph'));
+  const zoom = /** @type {HTMLSelectElement} */ (get('graph-zoom'));
+  let graphScale = 1;
+  function sizeGraph() {
+    const box=graph.viewBox.baseVal,holder=graph.parentElement;
+    if(!holder||!box.width||!box.height)return;
+    graphScale=zoom.value==='fit'?Math.min(1,Math.max(1,holder.clientWidth-2)/box.width,Math.max(1,holder.clientHeight-2)/box.height):Number(zoom.value);
+    graph.style.width=`${box.width*graphScale}px`;graph.style.minWidth=`${box.width*graphScale}px`;graph.style.height=`${box.height*graphScale}px`;
+  }
+  zoom.onchange=sizeGraph;
+  new ResizeObserver(sizeGraph).observe(/** @type {HTMLElement} */(graph.parentElement));
   const build = /** @type {HTMLButtonElement} */ (get('build-model'));
   const view = /** @type {HTMLSelectElement} */ (get('graph-view'));
   const draws = /** @type {HTMLSelectElement} */ (get('simulation-draws'));
@@ -118,13 +134,14 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     if(!state.model){diagram=null;projection=null;layoutKey='';layoutRevision++;return;}
     const next=diagramProjection(state.model,state.overrides,{showStructure:state.view==='flow'||state.showStructure});
     const sizes=Object.fromEntries(next.nodes.map(node=>[node.id,nodeSize(node)]));
-    const key=JSON.stringify([next.nodes.map(n=>n.id),next.edges,next.plates,sizes,state.view]);
+    const direction = root.clientWidth >= 680 ? 'RIGHT' : 'DOWN';
+    const key=JSON.stringify([next.nodes.map(n=>n.id),next.edges,next.plates,sizes,state.view,direction]);
     projection=next;get('dimension-key').hidden=state.view==='plate'&&!state.showStructure;get('diagram-notes').textContent=state.view==='plate'?next.notes.join(' '):'Complete dependency graph, including shape and bound inputs.';
     if(key===layoutKey){if(pendingLayout)await pendingLayout;return;}
     layoutKey=key;const generation=++layoutRevision;graph.setAttribute('aria-busy','true');
     pendingLayout=(async()=>{
       try {
-        const nextDiagram=await layoutDiagram(next,sizes,state.view==='plate',engine);
+        const nextDiagram=await layoutDiagram(next,sizes,state.view==='plate',engine,direction);
         if(generation!==layoutRevision)return;
         diagram=nextDiagram;drawGraph(true);
       }catch(error){if(generation===layoutRevision){layoutKey='';showError(error);}}
@@ -132,6 +149,8 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     })();
     await pendingLayout;
   }
+  new ResizeObserver(() => { if(state.model) void updateLayout(); }).observe(root);
+  matchMedia('(max-width: 640px), (pointer: coarse)').addEventListener('change', () => { if(state.model) void renderSelection(); });
   async function arrange() {
     state.positions={};layoutKey='';await updateLayout();
   }
@@ -178,10 +197,10 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     graph.replaceChildren();
     if (!state.model||!diagram||!projection) return;
     displayedPositions=Object.fromEntries(Object.entries(diagram.positions).map(([id,p])=>[id,{x:p.x+(state.positions[id]?.x??0),y:p.y+(state.positions[id]?.y??0)}]));
-    const height = Math.max(240,diagram.height, ...projection.nodes.map(n => (displayedPositions[n.id]?.y??0) + nodeHeight(n) + 50));
+    const height = Math.max(240,diagram.height, ...projection.nodes.map(n => (displayedPositions[n.id]?.y??0) - nodeSize(n).anchor + nodeHeight(n) + 24));
     const width = Math.max(360,diagram.width, ...Object.values(displayedPositions).map(p => p.x + 160));
     graph.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    graph.style.width=`${width}px`;graph.style.minWidth=`${width}px`;
+    sizeGraph();
     const defs = svgElement('defs');
     const marker = svgElement('marker', { id: 'dependency-arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
     marker.append(svgElement('path', { d: 'M 0 0 L 10 5 L 0 10 Z', fill: 'currentColor' })); defs.append(marker); graph.append(defs);
@@ -261,8 +280,8 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
     const node=state.model?.nodes.find(n=>n.id===id),p=displayedPositions[id],holder=graph.parentElement;
     if(!node||!p||!holder)return;
     const graphRect=graph.getBoundingClientRect(),holderRect=holder.getBoundingClientRect();
-    const size=nodeSize(node),left=graphRect.left-holderRect.left+holder.scrollLeft+p.x-size.width/2;
-    const right=left+size.width,top=p.y-size.anchor,bottom=top+size.height;
+    const size=nodeSize(node),left=graphRect.left-holderRect.left+holder.scrollLeft+(p.x-size.width/2)*graphScale;
+    const right=left+size.width*graphScale,top=(p.y-size.anchor)*graphScale,bottom=top+size.height*graphScale;
     if(left<holder.scrollLeft)holder.scrollLeft=left-8;
     else if(right>holder.scrollLeft+holder.clientWidth)holder.scrollLeft=right-holder.clientWidth+8;
     if(top<holder.scrollTop)holder.scrollTop=top-8;
@@ -272,10 +291,12 @@ export function mountExplorer({ root, readSource, readData, checkpoint, refresh,
   function selectNode(id) {
     if(!state.model?.nodes.some(node=>node.id===id))return;
     if(state.view==='plate'&&!projection?.nodes.some(node=>node.id===id)){state.showStructure=true;structure.checked=true;}
+    if(zoom.value==='fit'&&graphScale<.85)zoom.value='1';
     state.selected=id;if(!state.expanded.includes(id))state.expanded=[...state.expanded,id];renderSelection().then(()=>revealNode(id));
   }
   /** @param {string} id */
   function toggleNode(id) {
+    if(zoom.value==='fit'&&graphScale<.85&&!state.expanded.includes(id))zoom.value='1';
     state.selected=id;state.expanded=state.expanded.includes(id)?state.expanded.filter(name=>name!==id):[...state.expanded,id];renderSelection();
   }
   /** @param {string} id @param {{fixed?:number|number[],args?:Record<string,number>}} change */

@@ -6,6 +6,7 @@ import { explore, analyze, simulateInBrowser } from './core/explorer-browser.js'
 import { exportLatex, exportPython } from './core/exports.js';
 import { exportPyMC } from './core/pymc.js';
 import { renderModelSpec } from './model-spec.js';
+import { mountWorkspace } from './workspace.js';
 
 /** @param {string} id */
 function byId(id) {
@@ -137,6 +138,7 @@ function changed(state,stale) {
       const node = state.model?.nodes.find(node=>node.id===id);
       if (!node) return;
       if (state.model?.syntax?.migrated) { /** @type {HTMLDetailsElement} */ (byId('syntax-migration')).open = true; return; }
+      workspace.show('code');
       const offset = source.value.split('\n').slice(0,node.line-1).reduce((n,line)=>n+line.length+1,0);
       source.setSelectionRange(offset,offset+(source.value.split('\n')[node.line-1]?.length??0));
       source.scrollTop = Math.max(0,(node.line-3)*parseFloat(getComputedStyle(source).lineHeight));
@@ -146,7 +148,8 @@ function changed(state,stale) {
   byId('spec-scenario').textContent = Object.keys(state.overrides).length ? 'Exploratory changes' : 'Original model';
 }
 explorer = mountExplorer({root:byId('explorer'),readSource:()=>source.value,readData:()=>data.value,checkpoint:()=>history.commit(),refresh:()=>history.refresh(),onChange:changed});
+const workspace = mountWorkspace();
 history.replace(); showExportScope();
 const api = { submit, explore, analyze, simulate:simulateInBrowser, exportLatex, exportPython, exportPyMC };
-Object.assign(window, { Stan2R:api, StanTheExplorer:api });
+Object.assign(window, { Stan2R:api, StanTheExplorer:api, StanStudio:api });
 explorer.build();

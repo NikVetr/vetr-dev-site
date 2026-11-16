@@ -4,12 +4,9 @@ header h1 { font-size: 1.35rem; margin: 0; }
 .home { font-size: .8rem; color: var(--muted); text-decoration: none; }
 .subtitle { color: var(--muted); font-size: .9rem; }
 #theme-toggle { margin-left: auto; }
-main { max-width: 1600px; margin: auto; padding: 1rem 1.2rem 2rem; }
 .toolbar, .panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
 .intro, .hint { color: var(--muted); font-size: .85rem; }
 .intro { margin: .7rem 0; }
-.editors { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.editors section { min-width: 0; }
 .panel-head { min-height: 2.8rem; }
 .panel-head h2 { font-size: 1rem; margin: 0 auto 0 0; }
 .panel-head label { font-size: .8rem; }
@@ -27,8 +24,6 @@ details p { max-width: 90ch; font-size: .85rem; line-height: 1.5; }
 @media (max-width: 700px) {
   header { padding: .55rem .7rem; gap: .6rem; }
   .subtitle { display: none; }
-  main { padding: .75rem .7rem 1.5rem; }
-  .editors, .inputs-grid { grid-template-columns: 1fr; }
   .panel-head { gap: .35rem; }
   .panel-head label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .panel-head select { max-width: 10rem; }
@@ -93,9 +88,8 @@ button[aria-pressed="true"] { border-color: var(--accent, #3c709a); background: 
 @media (max-width: 700px) { .graph-scroll { max-height: 440px; } }
 .marginal.selected { border-color: #6384a0; box-shadow: inset 0 0 0 1px #6384a0; }
 
-/* Source and mathematical specification share a row; the graph uses the full workspace. */
-.editors { grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr); }
-#model-spec { border: 1px solid var(--border); border-radius: .35rem; background: var(--surface); min-height: 280px; max-height: clamp(280px, 40vh, 420px); overflow: auto; padding: .5rem; }
+/* Mathematical specification and linked equations. */
+#model-spec { border: 1px solid var(--border); border-radius: .35rem; background: var(--surface); overflow: auto; padding: .5rem; }
 .spec-hint { margin-top: 0; }
 .model-equation { display: flex; align-items: center; gap: .8rem; width: 100%; min-width: 0; padding: .7rem .45rem; text-align: left; background: transparent; border: 1px solid transparent; color: var(--text); border-radius: .25rem; }
 .model-equation + .model-equation { margin-top: .15rem; }
@@ -103,13 +97,11 @@ button[aria-pressed="true"] { border-color: var(--accent, #3c709a); background: 
 .equation-line { flex: none; color: var(--muted); font: .7rem ui-monospace, monospace; width: 2.8em; border: 0; background: transparent; padding: .4rem .1rem; cursor: pointer; }
 .equation-math { display: block; min-width: 0; overflow-x: auto; padding: .2rem; font-size: 1.15rem; }
 .equation-math math { margin: 0; }
-#explorer { margin-top: 1rem; }
 #normalized-source { overflow: auto; max-height: 280px; font-size: .8rem; }
 #export-scope { margin-bottom: .3rem; }
 #status { color: var(--muted); font-size: .8rem; }
 #explore-output { min-height: 240px; }
 #syntax-status { overflow-wrap: anywhere; }
-@media (max-width: 900px) { .editors { grid-template-columns: 1fr; } #model-spec { min-height: 0; max-height: 370px; } #source { height: 300px; } }
 @media (max-width: 480px) { header h1 { font-size: 1.15rem; } #explore-format { max-width: 100%; } .equation-math { font-size: 1rem; } }
 
 

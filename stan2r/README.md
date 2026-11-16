@@ -1,8 +1,8 @@
-# stan-the-explorer
+# Stan Studio
 
 An interactive model explorer and browser interface to the deterministic [Stan2R converter](https://github.com/NikVetr/Stan2R/tree/hardening). It uses Stan's compiler to parse and type-check a model, then the same R translator as the native package to produce generative R code. Models stay on the user's device.
 
-Serve the repository root (`python3 -m http.server 8000`) and open `/stan2r/`. The **Model explorer** starts with a normal model. Choose an example or edit/open a self-contained Stan model, then select **Build & simulate**. Open **Export this model** and choose **R · Stan2R converter** for the existing translator, select a conversion mode, then **Generate**. The first successful conversion downloads the pinned webR runtime from `https://webr.r-wasm.org/v0.5.8/`. The generated script can be copied or downloaded; the R converter does not execute that script or fit a model. The explorer runs its own explicit JavaScript prior simulation.
+Serve the repository root (`python3 -m http.server 8000`) and open `/stan2r/`. The **Model graph** starts with a normal model. Choose an example or edit/open a self-contained Stan model, then select **Build & simulate**. Open **Export this model** and choose **R · Stan2R converter** for the existing translator, select a conversion mode, then **Generate**. The first successful conversion downloads the pinned webR runtime from `https://webr.r-wasm.org/v0.5.8/`. The generated script can be copied or downloaded; the R converter does not execute that script or fit a model. The explorer runs its own explicit JavaScript prior simulation.
 
 The data and posterior-draw controls accept JSON. Data values may be numbers, numeric vectors, or rectangular numeric matrices. Posterior draws are columns of numbers keyed by CmdStan names (including `theta[1]`). Select a one-based draw number. The converter embeds that parameter draw in the result; the generated script reads data from an R list named `dat` and leaves its results in `out`. Density modes return ordinary densities/probabilities, not log densities.
 
@@ -11,7 +11,9 @@ Text fields keep their native Undo/Redo shortcuts. The Undo/Redo buttons and Ctr
 
 ## Interactive model explorer
 
-The source editor sits beside a typeset model specification. Each equation links to its node and declaration line; graphical changes update the equations without rewriting the Stan source. The specification and LaTeX download share the same equation generator. KaTeX compiles those equations to native MathML locally.
+The full-width workspace places source and typeset equations in a resizable left dock, beside the graph and prior predictive histograms. **Code**, **Equations**, and **Focus graph** control the dock; **Hide** beside the distributions gives the graph more height. Drag the divider or focus it and use arrow keys (Shift for larger steps); double-click resets its width. Narrow screens stack the panels. Panel navigation does not consume Undo. Graph layout runs left-to-right in wide panes and top-to-bottom in narrow ones; **Zoom** offers a fitted overview and readable fixed scales. Opening a node from a small fitted overview returns to 100% for its controls.
+
+Each equation links to its node and declaration line; graphical changes update the equations without rewriting the Stan source. The specification and LaTeX download share the same equation generator. KaTeX compiles those equations to native MathML locally.
 
 The explorer builds a generative dependency graph from Stan's **typed compiler AST**, then draws independent Monte Carlo samples in a browser worker. It needs no webR download. Dependency-flow and plate views share the same model; drag nodes or use arrow keys while a node is focused. Repositioning changes only the drawing, not the model. Shared plates label repeated elements. The compact plate view omits size and declared data-bound arrows; full dependencies remain available in the flow view. Parameter bounds and distribution arguments remain visible dependencies.
 
@@ -66,7 +68,7 @@ This implementation addresses the original README's model-visualization/LaTeX id
 
 ## Programmatic use
 
-`window.StanTheExplorer.submit(request)` (also available as `window.Stan2R.submit(request)` for existing callers) returns a promise for `{code, mode, warnings, compiler, syntax, translator}`. See [api.md](api.md). The CLI shares the request mapping, compiler, R translator, and host adapter:
+`window.StanStudio.submit(request)` (also available as `window.Stan2R.submit(request)` and `window.StanTheExplorer.submit(request)` for existing callers) returns a promise for `{code, mode, warnings, compiler, syntax, translator}`. See [api.md](api.md). The CLI shares the request mapping, compiler, R translator, and host adapter:
 
 ```sh
 node stan2r/cli.mjs request.json

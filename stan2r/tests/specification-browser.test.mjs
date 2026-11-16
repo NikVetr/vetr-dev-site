@@ -13,7 +13,7 @@ test('rendered model shares export equations, tracks changes and links source to
   const browser = await openPage('stan2r/'); const page=/** @type {Page} */(browser.page);
   try {
     await ready(page);
-    assert.equal(await page.title(),'stan-the-explorer — Model explorer & exports');
+    assert.equal(await page.title(),'Stan Studio — Model explorer & exports');
     assert.equal(await page.evaluate(()=>window.Stan2R === window.StanTheExplorer),true);
     assert.equal(await page.locator('#model-spec math').count(),4);
     assert.equal(await page.locator('#model-spec .katex-error').count(),0);

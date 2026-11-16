@@ -19,10 +19,10 @@ function crossesBox(a,b,rect){
 }
 
 test('ELK arranges shared plates and expanded controls without node overlaps or unrelated-node crossings',async()=>{
-  for(const key of ['hierarchical','grouped','multilevel']){
+  for(const direction of /** @type {const} */ (['DOWN','RIGHT']))for(const key of ['hierarchical','grouped','multilevel']){
     const model=analyze(examples[/** @type {'hierarchical'|'grouped'|'multilevel'} */(key)].source),projection=diagramProjection(model);
     const sizes=Object.fromEntries(projection.nodes.map(node=>[node.id,{width:node.kind==='stochastic'?260:168,height:node.kind==='stochastic'?310:116,anchor:36}]));
-    const diagram=await layoutDiagram(projection,sizes,true,engine);
+    const diagram=await layoutDiagram(projection,sizes,true,engine,direction);
     assert.deepEqual(Object.keys(diagram.positions).sort(),projection.nodes.map(n=>n.id).sort());
     const boxes=Object.fromEntries(projection.nodes.map(node=>{const p=diagram.positions[node.id],size=sizes[node.id];return [node.id,{x:p.x-size.width/2,y:p.y-size.anchor,width:size.width,height:size.height}];}));
     for(const [i,a]of Object.entries(boxes))for(const [j,b]of Object.entries(boxes))if(i<j)assert.ok(!overlaps(a,b),`${key}: ${i}/${j} overlap`);

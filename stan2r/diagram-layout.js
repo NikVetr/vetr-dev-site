@@ -7,8 +7,8 @@
 /** ELK owns ranking, crossing minimization, compound placement and orthogonal routes.
  * Layout coordinates are presentation only; the simulator never receives them.
  * @param {Projection} projection @param {Record<string,Size>} sizes @param {boolean} plateView
- * @param {{layout:(graph:any)=>Promise<any>}} engine @returns {Promise<DiagramLayout>} */
-export async function layoutDiagram(projection,sizes,plateView,engine) {
+ * @param {{layout:(graph:any)=>Promise<any>}} engine @param {'DOWN'|'RIGHT'} [direction] @returns {Promise<DiagramLayout>} */
+export async function layoutDiagram(projection,sizes,plateView,engine,direction='DOWN') {
   const edgeId=(/** @type {number} */i)=>`edge-${i}`;
   const nodes=projection.nodes.map(node=>{
     const size=sizes[node.id],shape=size.shape??(node.kind==='deterministic'?'diamond':'circle'),expanded=size.expanded??size.height>116;
@@ -18,9 +18,11 @@ export async function layoutDiagram(projection,sizes,plateView,engine) {
     const ports=[...outgoing.map(({index},i)=>{
       const offset=spread(i,outgoing.length),symbolPort=plateView&&!expanded;
       const radius=shape==='diamond'?36*(1-Math.abs(offset)/30):Math.sqrt(30**2-offset**2);
+      if(direction==='RIGHT')return {id:`${edgeId(index)}-out`,width:0,height:0,x:symbolPort?size.width/2+radius:size.width,y:size.anchor+offset,layoutOptions:{'elk.port.side':'EAST'}};
       return {id:`${edgeId(index)}-out`,width:0,height:0,x:symbolPort?size.width/2+radius:size.width/2+offset,y:symbolPort?size.anchor+offset:size.height,layoutOptions:{'elk.port.side':symbolPort?'EAST':'SOUTH'}};
     }),...incoming.map(({index},i)=>{
       const offset=spread(i,incoming.length),radius=shape==='diamond'?30*(1-Math.abs(offset)/36):Math.sqrt(30**2-offset**2);
+      if(direction==='RIGHT'){const horizontalRadius=shape==='diamond'?36*(1-Math.abs(offset)/30):Math.sqrt(30**2-offset**2);return {id:`${edgeId(index)}-in`,width:0,height:0,x:plateView?size.width/2-horizontalRadius:0,y:size.anchor+offset,layoutOptions:{'elk.port.side':'WEST'}};}
       return {id:`${edgeId(index)}-in`,width:0,height:0,x:size.width/2+offset,y:plateView?size.anchor-radius:0,layoutOptions:{'elk.port.side':'NORTH'}};
     })];
     return {id:node.id,width:size.width,height:size.height,layoutOptions:{'elk.portConstraints':'FIXED_POS'},ports};
@@ -28,7 +30,7 @@ export async function layoutDiagram(projection,sizes,plateView,engine) {
   const grouped=new Set(plateView?projection.plates.flatMap(plate=>plate.members):[]);
   const groups=plateView?projection.plates.map(plate=>({id:plate.id,layoutOptions:{'elk.padding':'[top=30,left=25,bottom=38,right=25]'},children:nodes.filter(node=>plate.members.includes(node.id))})):[];
   const graph={id:'__diagram-root',layoutOptions:{
-    'elk.algorithm':'layered','elk.direction':'DOWN','elk.edgeRouting':'ORTHOGONAL',
+    'elk.algorithm':'layered','elk.direction':direction,'elk.edgeRouting':'ORTHOGONAL',
     'elk.hierarchyHandling':'INCLUDE_CHILDREN','elk.layered.crossingMinimization.strategy':'LAYER_SWEEP',
     'elk.layered.nodePlacement.strategy':'NETWORK_SIMPLEX','elk.layered.mergeEdges':'false',
     'elk.spacing.nodeNode':'34','elk.spacing.edgeNode':'18','elk.spacing.edgeEdge':'12',
