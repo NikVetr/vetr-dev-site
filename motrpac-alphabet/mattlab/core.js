@@ -277,6 +277,7 @@ const SEQUENCES = {
   ascii:Array.from({length:95}, function(_, i) { return String.fromCharCode(i + 32); })
 };
 const PRESETS = [
+  {id:'original-warm',name:'Original'},
   {id:'nv-1',name:'NV-1'},
   {id:'nv-2',name:'NV-2'},
   {id:'reference',name:'Original colors'},
@@ -363,6 +364,13 @@ function presetFills(preset) {
       kind === 'monochrome' || kind === 'mono' ? '#8C1515' :
       kind === 'cardinal' ? cardinalMap[face.fill] || face.fill : face.fill;
   });
+  if (kind === 'original-warm') {
+    // Existing Cardinal tones (including the perceptual high tone) and Mustard.
+    const red = '#8C1515', coral = '#DF3531', gold = '#E5AE4F', dark = '#5E0E0E';
+    const colors = [red,red,red,red,red,red,coral,gold,gold,gold,coral,gold,gold,dark,dark,dark];
+    FACES.slice(0,16).forEach(function (face, index) { result[face.id] = colors[index]; });
+    Object.entries(CORNER_PARENTS).forEach(function ([corner, owner]) { result[corner] = result[owner]; });
+  }
   if (kind === 'nv-1' || kind === 'nv-2') {
     const colors = kind === 'nv-1' ?
       ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'] :

@@ -436,7 +436,7 @@
     $('activeColorName').textContent = settings.tool === 'pick' ? 'Pick from artwork' :
       settings.tool === 'paint' && settings.brushLinked ? palettes[settings.family].name + ' · ' + toneName(settings.shade) :
       settings.tool === 'paint' ? 'Custom color · fixed' : colorName(color);
-    $('activeHex').textContent = settings.tool === 'pick' ? 'Click a piece to sample' : color === 'none' ? 'No fill · transparent' : color;
+    $('activeHex').textContent = settings.tool === 'pick' ? 'Click a piece to sample' : color === 'none' ? 'Transparent' : color;
     if (settings.brush !== 'none') {
       $('customColor').value = settings.brush.toLowerCase();
       if (document.activeElement !== $('customHex')) $('customHex').value = settings.brush;
@@ -539,20 +539,25 @@
   }
 
   function glyphLabel(glyph) { return glyph === ' ' ? '␠' : glyph; }
+  /** @param {string} [scope] */
+  function designGalleryKeys(scope) {
+    const documents = store.project.documents;
+    if ((scope || settings.galleryFilter) === 'saved') {
+      return Object.keys(documents).filter(function (key) { return documents[key].kind === 'design' && documents[key].touched; });
+    }
+    return /** @type {string[]} */ (Glyphs.DESIGNS.map(function (/** @type {{key:string}} */ design) { return design.key; }).filter(function (/** @type {string} */ key) { return !!documents[key]; }));
+  }
   function galleryKeys(scope) {
     const documents = store.project.documents;
-    /** @type {string[]} */
-    const designKeys = Glyphs.DESIGNS.map(function (/** @type {{key:string}} */ design) { return design.key; }).filter(function (/** @type {string} */ key) { return !!documents[key]; });
     const key = scope || settings.galleryFilter || 'uppercase';
-    if (key === 'designs') return designKeys;
-    if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].touched; });
-    if (key === 'all') return designKeys.concat(Object.keys(documents).filter(function (item) { return documents[item].kind !== 'design'; }));
+    if (key === 'saved') return Object.keys(documents).filter(function (item) { return documents[item].kind !== 'design' && documents[item].touched; });
+    if (key === 'all') return Object.keys(documents).filter(function (item) { return documents[item].kind !== 'design'; });
     const sequence = Core.SEQUENCES[key] || Core.SEQUENCES.uppercase;
-    return designKeys.concat(sequence.filter(function (item) { return Object.prototype.hasOwnProperty.call(documents, item); }));
+    return sequence.filter(function (item) { return Object.prototype.hasOwnProperty.call(documents, item); });
   }
   function sheetKeys(scope) {
-    if (scope === 'gallery') return galleryKeys();
-    if (scope === 'all' || scope === 'saved') return galleryKeys(scope);
+    if (scope === 'gallery') return designGalleryKeys().concat(galleryKeys());
+    if (scope === 'all' || scope === 'saved') return designGalleryKeys(scope).concat(galleryKeys(scope));
     return (Core.SEQUENCES[scope] || Core.SEQUENCES.uppercase).filter(function (key) {
       return Object.prototype.hasOwnProperty.call(store.project.documents, key);
     });
@@ -562,9 +567,12 @@
   }
   function renderGlyphStrip() {
     const strip = $('glyphStrip');
+    const designStrip = /** @type {HTMLElement} */ ($('designStrip'));
     strip.replaceChildren();
+    designStrip.replaceChildren();
     glyphButtons = [];
-    const keys = galleryKeys();
+    if (settings.galleryFilter === 'designs') settings.galleryFilter = 'uppercase';
+    const keys = designGalleryKeys().concat(galleryKeys());
     keys.forEach(function (glyph) {
       const doc = store.project.documents[glyph];
       const button = document.createElement('button');
@@ -589,7 +597,7 @@
       button.appendChild(caption);
       button.addEventListener('click', function () { switchGlyph(glyph); });
       glyphButtons.push({button:button, preview:preview, status:status, glyph:glyph});
-      strip.appendChild(button);
+      (doc.kind === 'design' ? designStrip : strip).appendChild(button);
     });
     $('galleryFilter').value = settings.galleryFilter || 'uppercase';
     const characters = keys.filter(function (key) { return store.project.documents[key].kind !== 'design'; });
@@ -1122,10 +1130,6 @@
     if (store.setFills(fills, 'Fill all pieces', bindings)) afterEdit();
   });
   $('blankBtn').addEventListener('click', function () { applyPreset('blank'); });
-  $('nv1Btn').addEventListener('click', function () { applyPreset('nv-1'); });
-  (/** @type {HTMLButtonElement} */ ($('nv2Btn'))).addEventListener('click', function () { applyPreset('nv-2'); });
-  $('cardinalBtn').title = 'Use Cardinal red tones with the original cool grays';
-  $('cardinalBtn').addEventListener('click', function () { applyPreset('cardinal'); });
   $('designName').addEventListener('change', commitName);
   $('designName').addEventListener('keydown', function (event) { if (event.key === 'Enter') { commitName(); this.blur(); } });
   $('nextGlyph').addEventListener('click', function () { nextGlyph(1); });

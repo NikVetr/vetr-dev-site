@@ -78,11 +78,11 @@
     const seed = getSeed(glyph);
     return Object.assign(allWhite(), seed.fills || {});
   }
-  const DESIGNS = ['nv-1','nv-2'].map(function (id) {
-    const name = id.toUpperCase();
+  const DESIGNS = ['nv-1','nv-2','cardinal','original-warm'].map(function (id) {
+    const name = id === 'original-warm' ? 'Original' : id === 'cardinal' ? 'Cardinal' : id.toUpperCase();
     return {key:'@' + id, label:name, name:name, kind:'design', character:'',
-      note:'Nik’s supplied color arrangement, with corners following the ending legs.',
-      cornerMode:'auto', outline:false, fills:Core.presetFills(id)};
+      note:id === 'original-warm' ? 'Warm reference scheme approximated with existing Cardinal and Mustard palette shades.' : 'Color arrangement with corners following the ending legs.',
+      cornerMode:'auto', outline:false, fills:followCorners(Core.presetFills(id))};
   });
   DESIGNS.forEach(function (design) { Object.freeze(design.fills); Object.freeze(design); });
   Object.freeze(DESIGNS);

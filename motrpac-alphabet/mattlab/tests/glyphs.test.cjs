@@ -51,16 +51,30 @@ test('the latest ASCII sheet supplies all visible defaults; omitted symbols rema
 });
 
 test('NV presets replace Original and retain supplied colors with corrected automatic corners', () => {
-  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2']);
+  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2','@cardinal','@original-warm']);
   assert.equal(Glyphs.getDesign('@original'), null);
   const expected = [
     ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'],
     ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#3E4D5B','#161F27','#161F27','#3E4D5B','#6B8196','#8C1515','#8C1515','#8C1515','#161F27','#161F27']
   ];
-  Glyphs.DESIGNS.forEach((design,index) => {
+  Glyphs.DESIGNS.slice(0,2).forEach((design,index) => {
     assert.equal(design.name, 'NV-' + (index + 1));
     assert.equal(design.cornerMode, 'auto');
     assert.deepEqual(Core.FACES.slice(0,16).map(face => design.fills[face.id]), expected[index]);
     for (const [corner,owner] of Object.entries(Core.CORNER_PARENTS)) assert.equal(design.fills[corner], design.fills[owner]);
   });
+});
+
+
+test('warm Original uses existing swatches and keeps ending-leg corners linked', () => {
+  const design = Glyphs.getDesign('@original-warm');
+  assert.ok(design);
+  assert.equal(design.name, 'Original');
+  const store = new Model.Store();
+  const swatches = new Set(Core.PALETTES.concat(Model.getPalettes(store.project)).flatMap(row => row.colors));
+  for (const color of Object.values(design.fills)) assert.ok(swatches.has(color));
+  for (const [corner,owner] of Object.entries(Core.CORNER_PARENTS)) assert.equal(design.fills[corner],design.fills[owner]);
+  assert.equal(design.fills['face-red_bottom-cell-2'], '#E5AE4F');
+  assert.equal(design.fills['face-gray_top'], '#DF3531');
+  for (const color of Object.values(design.fills)) assert.ok(store.inferBinding(color), 'Every preset color links to a palette row');
 });

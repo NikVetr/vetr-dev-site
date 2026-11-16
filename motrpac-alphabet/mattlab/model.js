@@ -78,10 +78,12 @@
       '#353D44':['charcoal',1], '#373F46':['charcoal',1]
     };
     if (own(reference, hex)) return {familyId:reference[hex][0], shade:reference[hex][1]};
-    const palettes = Core.getPalettes(project);
-    for (let row = 0; row < palettes.length; row += 1) {
-      const shade = palettes[row].colors.indexOf(hex);
-      if (shade !== -1) return {familyId:palettes[row].id, shade:shade};
+    for (let pass = 0; pass < 2; pass += 1) {
+      const palettes = pass === 0 ? Core.getPalettes(project) : getPalettes(project);
+      for (let row = 0; row < palettes.length; row += 1) {
+        const shade = palettes[row].colors.indexOf(hex);
+        if (shade !== -1) return {familyId:palettes[row].id, shade:shade};
+      }
     }
     return null;
   }

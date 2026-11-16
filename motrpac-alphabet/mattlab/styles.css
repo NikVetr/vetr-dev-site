@@ -129,3 +129,15 @@
   .sheet-bar { margin-top: 6px; padding-top: 6px; }
   .gallery-description { display: none; }
 }
+
+/* Logo studies and character shapes share controls, but occupy separate galleries. */
+.gallery-columns{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:16px;min-height:0;flex:1}
+.design-gallery,.character-gallery{min-width:0;min-height:0;display:flex;flex-direction:column}
+.design-gallery{padding-right:16px;border-right:1px solid var(--line)}
+.gallery-columns .shelf-heading{align-items:center;min-height:32px}
+.design-gallery .glyph-strip{grid-template-columns:repeat(4,minmax(0,1fr));align-content:start}
+.design-gallery .glyph-card{min-height:100px;padding:6px}
+@media(max-width:800px){
+  .gallery-columns{grid-template-columns:minmax(0,1fr);gap:16px}
+  .design-gallery{padding:0 0 12px;border-right:0;border-bottom:1px solid var(--line)}
+}

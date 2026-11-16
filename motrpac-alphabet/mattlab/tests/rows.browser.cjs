@@ -199,7 +199,7 @@ const Edited = require('../edited-glyphs.js');
     assert.ok(Object.values(restored.documents.D.fills).every(fill=>fill==='#FFFFFF'));
     assert.equal(restored.documents['@cardinal-slate'],undefined);
     assert.ok(restored.documents['@tonal-weave'].touched);
-    assert.equal(await page.locator('.glyph-card[data-glyph^="@"]').count(),2);
+    assert.equal(await page.locator('.glyph-card[data-glyph^="@"]').count(),4);
     assert.equal(await page.locator('.glyph-card[data-glyph="@original"]').count(),0);
     await page.selectOption('#galleryFilter','saved');
     assert.equal(await page.locator('.glyph-card[data-glyph="@tonal-weave"]').count(),1);
