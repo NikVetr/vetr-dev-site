@@ -27,7 +27,8 @@ export function contrastOutline(fill, background) {
 }
 
 /** Gentle alternative to an outline: make the smallest neutral blend toward
- * black/white that reaches the modest target, capped to preserve pale colours.
+ * black/white that reaches the modest target, capped to preserve pale colours on light backgrounds. Dark backgrounds allow
+ * the extra lightening needed to cross their luminance before reaching the target.
  * The original result/palette and alpha remain unchanged; this is drawing only.
  * @param {string} fill validated glyph colour, optionally with an alpha byte
  * @param {string} background validated opaque background
@@ -45,7 +46,10 @@ export function adjustedContrastColour(fill, background) {
   const initial = contrast(0, 0);
   if (initial >= CONTRAST_ADJUST_TARGET) return fill;
   const candidates = [0, 255].map(target => {
-    let lo = 0, hi = CONTRAST_ADJUST_MAX_BLEND;
+    // A dark glyph may first lose contrast while being lightened toward a
+    // navy background. Allow that path to cross the background luminance;
+    // the bisection still chooses only the smallest blend reaching the target.
+    let lo = 0, hi = bg < .1 && target === 255 ? 1 : CONTRAST_ADJUST_MAX_BLEND;
     const reaches = contrast(hi, target) >= CONTRAST_ADJUST_TARGET;
     if (reaches) for (let i = 0; i < 14; i++) {
       const mid = (lo + hi) / 2;

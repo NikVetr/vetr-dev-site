@@ -270,7 +270,7 @@ test('optional contrast outlines preserve glyph layout and fill, and follow the 
   assert.match(renderSvg(outlined, { background: 'white' }), /fill="#fafafa" fill-opacity="0.5" stroke="#000000"[^>]+stroke-opacity="0.5"/);
 });
 
-test('gentle colour adjustment is capped, retains hue and alpha, and does not change the fit', () => {
+test('gentle colour adjustment preserves pale colours, hue, alpha and fitted geometry', () => {
   assert.equal(adjustedContrastColour('#ffffff', 'white'), '#cccccc'); // no more than 20% darkening
   assert.equal(adjustedContrastColour('#ffffff80', 'white'), '#cccccc80');
   assert.equal(adjustedContrastColour('#111111', 'white'), '#111111'); // already clear
@@ -289,6 +289,18 @@ test('gentle colour adjustment is capped, retains hue and alpha, and does not ch
   assert.equal(adjusted.glyphs[0].col, '#f5e4c0');
   assert.deepEqual(rejection({ ...request, render: { contrast_adjust: 'yes' } }).issues.map(i => [i.path, i.code]), [['render.contrast_adjust', 'wrong_type']]);
   assert.deepEqual(rejection({ ...request, render: { contrast_outline: true, contrast_adjust: true } }).issues.map(i => [i.path, i.code]), [['render.contrast_adjust', 'conflicting_options']]);
+});
+
+test('gentle adjustment lifts dark ink clear of navy instead of leaving apparent holes', () => {
+  const lum = (/** @type {string} */ hex) => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4)
+    .reduce((sum, c, i) => sum + c * [.2126, .7152, .0722][i], 0);
+  const paper = '#14253d';
+  for (const ink of ['#060204', '#14253d', '#161019', '#444634']) {
+    const adjusted = adjustedContrastColour(ink, paper), bg = lum(paper), fg = lum(adjusted);
+    assert.ok((Math.max(fg, bg) + .05) / (Math.min(fg, bg) + .05) >= 1.58, `${ink} stays distinguishable from navy`);
+    assert.notEqual(adjusted, '#ffffff', 'only the modest target is needed');
+  }
 });
 
 test('text that cannot fit is reported with the share placed', () => {

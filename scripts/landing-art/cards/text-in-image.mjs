@@ -29,7 +29,7 @@ export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12 }, color: { background }, render: { contrast_adjust: true, glow } });
+  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12, preserve_line_breaks: false }, color: { background }, render: { contrast_adjust: true, glow } });
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
   // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
@@ -92,17 +92,17 @@ export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   // Exact bundled glyph outlines remain sharp in the initial close-up.
   const focusX = fx + pw * .59;
   const focusY = fy + H / (2 * ZOOM);
-  const tx = W / 2 - ZOOM * focusX, ty = H / 2 - ZOOM * focusY;
+  const tx = fx + pw / 2 - ZOOM * focusX, ty = H / 2 - ZOOM * focusY;
   return art({
     name: 'text-in-image', width: W, height: H, period: PERIOD, player: 'text-in-image',
-    defs: [...glyphDefs.values()].join('') + (glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8], result.settings.render.glow) : ''),
+    defs: `<clipPath id="text-in-image-output-bounds"><rect x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/></clipPath>` + [...glyphDefs.values()].join('') + (glow ? textGlowFilter('text-in-image-glow', size * k, [fx - 4, fy - 4, pw + 8, ph + 8], result.settings.render.glow) : ''),
     body: `<g class="clock"/>
-<g class="camera" data-close="${ZOOM},${num(tx,4)},${num(ty,4)}">
+<g class="original">
 <rect class="panel" x="${num(left - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
-<image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/>
+<image href="${picture}" x="${num(left)}" y="${num(fy)}" width="${num(pw)}" height="${num(ph)}" preserveAspectRatio="none"/></g>
 <rect class="panel" x="${num(fx - 4)}" y="${num(fy - 4)}" width="${num(pw + 8)}" height="${num(ph + 8)}" rx="3"/>
 <path class="arrow" d="M${num(left + pw + 6)} ${num(H / 2)}h${num(gap - 14)}m-3 -3l3 3l-3 3"/>
-<g class="fill"${glow ? ' filter="url(#text-in-image-glow)"' : ''}>${body}</g></g>`,
+<g clip-path="url(#text-in-image-output-bounds)"><g class="camera" data-close="${ZOOM},${num(tx,4)},${num(ty,4)}"><g class="fill"${glow ? ' filter="url(#text-in-image-glow)"' : ''}>${body}</g></g></g>`,
     css: `& .panel { fill: ${background}; }
 & .arrow { fill: none; stroke: var(--art-muted); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }`,
     loop: `& .clock { animation:text-in-image-clock ${PERIOD}s linear infinite; }

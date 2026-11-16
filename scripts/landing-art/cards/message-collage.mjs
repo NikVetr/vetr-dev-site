@@ -1,6 +1,7 @@
 // Message Collage: the page's dense, gently rotated example with local warp at 1.
 // This is an explicit preview setting; the app example and API keep warp off by default.
-// The larger 2×3 tile uses the 264×220 canvas. Four real layouts crossfade on hover;
+// The larger 2×3 tile uses a 264-wide canvas fitted to the real output height.
+// Four real layouts crossfade on hover;
 // line positions, relative sizes, colours and collision-checked rotations match the app.
 import { readFileSync } from 'node:fs';
 import { loadFaces, renderSvg, submit } from '../../../message-collage/core/index.js';
@@ -11,7 +12,7 @@ const HOLD = 1.5;    // seconds each layout is on the card, fades included
 const FADE = 0.2;    // seconds to fade out, and again to fade in
 const MARGIN = 4;
 const PT = 72;       // the core's units: points, 72 per inch
-const { width: W, height: H } = WIDE;
+const { width: W } = WIDE;
 
 export async function build() {
   const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
@@ -24,7 +25,8 @@ export async function build() {
   const widthPt = first.card.width_in * PT;
   const tallest = Math.max(...results.map((r) => r.card.height_in)) * PT;
   if (results.some((r) => r.card.width_in * PT !== widthPt)) throw new Error('message-collage: the layouts differ in width');
-  const k = Math.min((W - 2 * MARGIN) / widthPt, (H - 2 * MARGIN) / tallest);
+  const k = (W - 2 * MARGIN) / widthPt;
+  const H = tallest * k + 2 * MARGIN;
   const [x0, y0] = [(W - widthPt * k) / 2, (H - tallest * k) / 2];
 
   const period = SEEDS.length * HOLD;

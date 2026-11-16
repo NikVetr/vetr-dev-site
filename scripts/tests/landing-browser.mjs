@@ -167,7 +167,8 @@ try {
     await page.locator(`[data-art="${name}"] > svg`).waitFor();
   }
   assert.ok(await page.locator('[data-art="motrpac-alphabet"] path').count() >= 25, 'alphabet and Mattlab preview contains actual geometry');
-  assert.ok((await page.locator('[data-art="stan2r"]').textContent()).includes('rbeta'), 'Stan2R preview shows generated R');
+  assert.equal(await page.locator('[data-art="stan2r"] .model-edges > path').count(), 2, 'Stan Studio preview shows the actual model dependencies');
+  assert.equal(await page.locator('[data-art="stan2r"] [data-draws="1024"] [data-variable]').count(), 2, 'Stan Studio preview includes prior and predictive Monte Carlo histograms');
   assert.deepEqual(errors, []);
   console.log('Landing: reduced motion, 13 resize states, flush packing/reading order, category contour coverage, clear labels, density, text fit, accessible categories and focus pass.');
 } finally {

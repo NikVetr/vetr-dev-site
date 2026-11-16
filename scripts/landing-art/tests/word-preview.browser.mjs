@@ -26,10 +26,12 @@ test(`Alice uses word order and a readable head close-up; pause/reduced motion w
     return{flags,due,scale:(/** @type {SVGGraphicsElement} */(camera)).transform.baseVal.consolidate()?.matrix.a??1,letterHeight:box.height*Math.hypot(m?.b??0,m?.d??0)};
    },t);
   };
+  const original=await art.locator('.original').boundingBox();
   const opening=await seek(1000);assert.ok(opening.scale>7.8);assert.ok(opening.letterHeight>=9,'the initial enlarged word must be readable at the native tile scale');assert.deepEqual(opening.flags,opening.due,'every due whole word follows the actual retained clock');assert.ok(opening.flags.some(Boolean)&&!opening.flags.every(Boolean));
   await art.screenshot({path:`tmp/agent/output/preview-polish-2026-11-11/alice-${engine}-head.png`});
   const middle=await seek(9000);assert.ok(middle.scale>1&&middle.scale<opening.scale);const visible=middle.flags.filter(Boolean).length;assert.ok(visible>100&&visible<900);assert.ok(middle.flags.every((/** @type {boolean} */v,/** @type {number} */i)=>v===(i<visible)),'words appear as a complete left-to-right prefix, not whole-line fades');
   await art.screenshot({path:`tmp/agent/output/preview-polish-2026-11-11/alice-${engine}-middle.png`});
+  assert.deepEqual(await art.locator('.original').boundingBox(),original,'the input picture stays fixed during the output close-up');
   const full=await seek(15000);assert.equal(full.scale,1);assert.ok(full.flags.every(Boolean));
   await art.screenshot({path:`tmp/agent/output/preview-polish-2026-11-11/alice-${engine}-full.png`});
   await seek(6500);await p.mouse.move(0,0);await p.waitForTimeout(70);const frozen=await art.screenshot();await p.waitForTimeout(160);assert.deepEqual(await art.screenshot(),frozen,'camera and word reveal pause together');

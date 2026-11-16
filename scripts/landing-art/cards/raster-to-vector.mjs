@@ -76,10 +76,12 @@ export async function build() {
 <g id="raster-to-vector-colors"><image href="${colors}" width="128" height="128" image-rendering="pixelated"/></g>
 <g id="raster-to-vector-traced" clip-path="url(#raster-to-vector-image-bounds)">${outlined(raw)}</g>
 <g id="raster-to-vector-smooth" clip-path="url(#raster-to-vector-image-bounds)">${outlined(smooth)}</g>`;
+    // Each operation reveals its output while that operation is highlighted;
+    // in particular, Smooth must show Trace → Smooth rather than a finished hold.
     const ids = ['input', 'colors', 'traced', 'smooth'];
     const frame = (/** @type {number} */ active, processing = false) => `<rect x="6" y="6" width="168" height="168" rx="6" fill="white"/>
-<use href="#raster-to-vector-${ids[active]}" transform="translate(8 8) scale(1.28125)"/>
-${processing && active < 3 ? `<g transform="translate(8 8) scale(1.28125)" clip-path="url(#raster-to-vector-image-bounds)"><g clip-path="url(#raster-to-vector-reveal)"><use href="#raster-to-vector-${ids[active + 1]}"/></g><path class="scan" d="M0 0V128" fill="none" stroke="#df3949" stroke-width=".75"/></g>` : ''}
+<use href="#raster-to-vector-${ids[processing && active > 0 ? active - 1 : active]}" transform="translate(8 8) scale(1.28125)"/>
+${processing && active > 0 ? `<g transform="translate(8 8) scale(1.28125)" clip-path="url(#raster-to-vector-image-bounds)"><g clip-path="url(#raster-to-vector-reveal)"><use href="#raster-to-vector-${ids[active]}"/></g><path class="scan" d="M0 0V128" fill="none" stroke="#df3949" stroke-width=".75"/></g>` : ''}
 ${stages.map((label, i) => `<g class="step${i === active ? ' active' : ''}"><circle cx="202" cy="${31 + i * 39}" r="11"/><text class="number" x="202" y="${35 + i * 39}">${i + 1}</text><text class="label" x="221" y="${36 + i * 39}">${label}</text></g>${i < 3 ? `<path class="connector" d="M202 ${45 + i * 39}v10m-3-3 3 3 3-3"/>` : ''}`).join('')}`;
     const frames = stages.map((_, i) => frame(i, true));
     const loop = flipbook('raster-to-vector', frames, 10);
