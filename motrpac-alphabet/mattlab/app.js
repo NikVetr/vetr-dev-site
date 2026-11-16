@@ -58,7 +58,8 @@
   let exportBusy = false;
   let artworkWidth = 0;
   let artworkHeight = 0;
-  let wheelAxis = '';
+  /** @type {string|null} */
+  let cycleWhiteFace = null;
   let wheelAmount = 0;
   let wheelLast = 0;
   let wheelActionAt = -1000;
@@ -450,9 +451,10 @@
     host.classList.toggle('is-sampling', settings.tool === 'pick' && !panMode && !spaceHeld);
     host.classList.toggle('is-panning', panMode || spaceHeld);
     host.classList.toggle('is-dragging', !!drag);
-    viewport.setAttribute('aria-label', 'Painting canvas. Active ' + (panMode ? 'pan tool' : colorName(color)) + '. Arrow up/down changes shade; left/right changes color family.');
+    viewport.setAttribute('aria-label', 'Painting canvas. Active ' + (panMode ? 'pan tool' : colorName(color)) + '. Scroll changes brush tool; arrow up/down changes shade; left/right changes color family.');
   }
   function selectSwatch(family, shade) {
+    cycleWhiteFace = null;
     settings.family = modulo(family, palettes.length);
     settings.shade = clamp(shade, 0, 2);
     settings.brush = palettes[settings.family].colors[settings.shade];
@@ -477,6 +479,7 @@
   function stepShade(delta) { selectSwatch(settings.family, settings.shade + delta); }
   function setTool(tool) {
     finishStroke();
+    cycleWhiteFace = null;
     settings.tool = tool;
     panMode = false;
     renderBrush();
@@ -610,6 +613,7 @@
     if (changed) { renderHistory(); queueSave(); }
   }
   function switchGlyph(glyph) {
+    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     commitName();
@@ -628,6 +632,7 @@
     }
   }
   function nextGlyph(delta) {
+    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     commitName();
@@ -649,6 +654,7 @@
     queueSave();
   }
   function renderEverything() {
+    cycleWhiteFace = null;
     settings = store.project.settings;
     palettes = Model.getPalettes(store.project);
     remapSource = null;
@@ -661,6 +667,7 @@
     fitArtwork(true);
   }
   function applyPreset(preset) {
+    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     if (store.reset(preset)) afterEdit();
@@ -865,9 +872,14 @@
     return false;
   }
   function cycleMatchingFace(id) {
-    if (settings.tool === 'paint' && settings.brushLinked && store.doc.fills[id] === settings.brush) {
-      selectSwatch(settings.family, (settings.shade + 1) % 3);
-    }
+    if (cycleWhiteFace === id && settings.tool === 'white' && store.doc.fills[id] === '#FFFFFF') {
+      selectSwatch(settings.family, 0);
+    } else if (settings.tool === 'paint' && settings.brushLinked && store.doc.fills[id] === settings.brush) {
+      if (settings.shade === 2) {
+        setTool('white');
+        cycleWhiteFace = id;
+      } else selectSwatch(settings.family, settings.shade + 1);
+    } else cycleWhiteFace = null;
   }
 
   host.addEventListener('pointerdown', function (event) {
@@ -968,17 +980,15 @@
     if (!delta) return;
     event.preventDefault();
     const now = performance.now();
-    const axis = horizontal ? 'family' : 'shade';
-    if (axis !== wheelAxis || now - wheelLast > 200 || Math.sign(delta) !== Math.sign(wheelAmount)) wheelAmount = 0;
-    wheelAxis = axis;
+    if (now - wheelLast > 200 || Math.sign(delta) !== Math.sign(wheelAmount)) wheelAmount = 0;
     wheelLast = now;
     wheelAmount += delta;
     if (Math.abs(wheelAmount) < 28 || now - wheelActionAt < 95) return;
     const direction = wheelAmount > 0 ? 1 : -1;
     wheelAmount = 0;
     wheelActionAt = now;
-    if (horizontal) stepFamily(direction);
-    else stepShade(-direction);
+    const tools = ['paint', 'white', 'clear', 'pick'];
+    setTool(tools[modulo(tools.indexOf(settings.tool) + direction, tools.length)]);
   }, {passive:false});
 
   function isTyping(target) {

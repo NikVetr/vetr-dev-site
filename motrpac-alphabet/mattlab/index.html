@@ -34,10 +34,10 @@
           <div class="help-popover">
             <h2>Painting & navigation</h2>
             <dl>
-              <dt>Click a piece</dt><dd>Paint with the active brush.</dd>
+              <dt>Click a piece</dt><dd>Paint with the active brush. Repeated clicks cycle the linked row’s shades, then white, then back to the first shade.</dd>
               <dt>Click selected color</dt><dd>Cycle through that row’s three columns.</dd>
-              <dt>Scroll vertically</dt><dd>Move through the three shades.</dd>
-              <dt>Scroll horizontally<br>or middle-click</dt><dd>Change the brush color family.</dd>
+              <dt>Scroll over artwork</dt><dd>Cycle Paint, White, Clear and Pick tools. Scroll backward to reverse.</dd>
+              <dt>Middle-click</dt><dd>Change the brush color family.</dd>
               <dt>Right-click</dt><dd>Move the hovered piece’s color family, or the hovered palette row, to the next row throughout the study, keeping shade columns. Hold <span class="key">Shift</span> to move to the previous row.</dd>
               <dt>Drag a row marker</dt><dd>Move all its colors in the current design to another row. Or tap the marker, then the destination row’s name.</dd>
               <dt>White / Clear</dt><dd>Hide a piece with white, or make it transparent.</dd>
@@ -110,7 +110,7 @@
             <button class="tool-button" type="button" id="clearTool" aria-label="Make transparent" aria-pressed="false" title="Make a piece transparent"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16M4 4l16 16" opacity=".55"/></svg><span>Clear</span></button>
             <button class="tool-button" type="button" id="sampleTool" aria-label="Pick color from artwork" aria-pressed="false" title="Sample a color from the artwork"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5M14 5l3-3 5 5-3 3M15 6 5 16l-1 4 4-1L18 9M8 13l3 3"/></svg><span>Pick</span></button>
           </div>
-          <p class="tool-hint">Click a piece to paint. Clicking the selected swatch cycles columns. Right-click a piece or palette row to remap that family to the next row; Shift reverses. Middle-click changes only the brush family.</p>
+          <p class="tool-hint">Click a piece repeatedly to cycle shades and white. Scroll over artwork to change tools. Right-click a piece or palette row to remap that family; Shift reverses. Middle-click changes only the brush family.</p>
         </div>
       </aside>
 

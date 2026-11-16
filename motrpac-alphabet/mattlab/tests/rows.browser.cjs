@@ -15,7 +15,9 @@ const assert = require('node:assert/strict');
     const before = await read();
     const faceId = Object.keys(before.doc.bindings).find(id => before.doc.bindings[id]?.familyId === 'cardinal');
     assert.ok(faceId);
-    const point = await page.locator(`#${faceId}`).evaluate((/** @type {SVGGeometryElement} */ path) => {
+    const pointForFace = async () => {
+      await page.locator(`#${faceId}`).scrollIntoViewIfNeeded();
+      return page.locator(`#${faceId}`).evaluate((/** @type {SVGGeometryElement} */ path) => {
       const box = path.getBBox();
       for (let x = 1; x < 10; x++) for (let y = 1; y < 10; y++) {
         const p = new DOMPoint(box.x + box.width*x/10, box.y + box.height*y/10);
@@ -27,7 +29,9 @@ const assert = require('node:assert/strict');
         }
       }
       throw new Error('No paintable interior point');
-    });
+      });
+    };
+    let point = await pointForFace();
     const index = before.palettes.findIndex((/** @type {{id:string}} */ row) => row.id === 'cardinal');
     const next = before.palettes[(index+1)%before.palettes.length];
     const nextAgain = before.palettes[(index+2)%before.palettes.length];
@@ -65,6 +69,62 @@ const assert = require('node:assert/strict');
     assert.equal((await read()).doc.bindings[faceId].familyId,nextAgain.id);
     assert.equal((await read()).project.settings.brush,before.project.settings.brush);
 
+    // Repeated paint clicks include a genuine unlinked white/blank step.
+    await page.locator('#whiteTool').click();
+    point = await pointForFace();
+    await page.mouse.click(point.x, point.y);
+    await page.locator('.palette-row[data-family-id="navy"] .swatch').first().click();
+    await page.locator('.palette-row[data-family-id="navy"] .swatch').nth(1).click();
+    await page.locator('.palette-row[data-family-id="navy"] .swatch').first().click();
+    const navy = (await read()).palettes.find((/** @type {{id:string}} */ row) => row.id === 'navy');
+    point = await pointForFace();
+    for (const fill of [...navy.colors, '#FFFFFF', navy.colors[0]]) {
+      await page.mouse.click(point.x, point.y);
+      const state = await read();
+      assert.equal(state.doc.fills[faceId], fill);
+      if (fill === '#FFFFFF') assert.equal(state.doc.bindings[faceId], null);
+    }
+    await page.keyboard.press('Control+z');
+    assert.equal((await read()).doc.fills[faceId], '#FFFFFF');
+    await page.keyboard.press('Control+Shift+z');
+    assert.equal((await read()).doc.fills[faceId], navy.colors[0]);
+    await page.locator('#whiteTool').click();
+    point = await pointForFace();
+    await page.mouse.click(point.x, point.y);
+    await page.mouse.click(point.x, point.y);
+    assert.equal((await read()).doc.fills[faceId], '#FFFFFF', 'Explicit White tool remains white');
+
+    // Wheel changes tools only within the artwork, with a threshold for trackpads.
+    await page.locator('#paintTool').click();
+    /** @param {number} deltaY @param {WheelEventInit} extra */
+    const wheel = (deltaY, extra = {}) => page.locator('#canvasViewport').evaluate((/** @type {Element} */ element, /** @type {WheelEventInit} */ init) => {
+      const event = new WheelEvent('wheel', {bubbles:true,cancelable:true,...init});
+      element.dispatchEvent(event);
+      return event.defaultPrevented;
+    }, {deltaY,...extra});
+    assert.equal(await wheel(1), true);
+    assert.equal((await read()).project.settings.tool, 'paint', 'Tiny trackpad movement does not switch tool');
+    const artworkBeforeWheel = (await read()).doc.fills;
+    point = await pointForFace();
+    await page.mouse.move(point.x, point.y);
+    for (const tool of ['white','clear','pick','paint']) {
+      await page.waitForTimeout(110);
+      await page.mouse.wheel(0, 100);
+      await page.waitForFunction((/** @type {string} */ expected) => (/** @type {StudioWindow} */ (/** @type {unknown} */ (window))).CardinalStudio.getProject().settings.tool === expected, tool);
+    }
+    await page.waitForTimeout(110);
+    await page.mouse.wheel(0, -100);
+    await page.waitForFunction(() => (/** @type {StudioWindow} */ (/** @type {unknown} */ (window))).CardinalStudio.getProject().settings.tool === 'pick');
+    assert.deepEqual((await read()).doc.fills, artworkBeforeWheel, 'Tool cycling does not alter artwork');
+    assert.equal(await wheel(100, {ctrlKey:true}), false, 'Pinch/browser zoom is not captured');
+    const outside = await page.locator('.app-header').evaluate((/** @type {Element} */ element) => {
+      const event = new WheelEvent('wheel', {deltaY:100,bubbles:true,cancelable:true});
+      element.dispatchEvent(event);
+      return event.defaultPrevented;
+    });
+    assert.equal(outside, false, 'Page scrolling outside artwork is not captured');
+    assert.equal((await read()).project.settings.tool, 'pick');
+
     // Load an older project: upgrade untouched blank starters, keep deliberate edits,
     // and move edited retired studies out of the ordinary character gallery.
     const legacy = (await read()).project;
@@ -91,6 +151,6 @@ const assert = require('node:assert/strict');
     await page.reload();
     assert.equal(await page.locator('#galleryFilter').inputValue(),'saved');
     assert.deepEqual(errors,[]);
-    console.log('Row remapping, shade preservation, history, repeated/reverse cycling, and safe starter migration pass.');
+    console.log('Row remapping, shade/white click cycling, wheel tool selection, history, and safe starter migration pass.');
   } finally { await session.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
