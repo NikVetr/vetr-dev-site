@@ -82,3 +82,64 @@ test('nonblank sheets filter actual fills independently of metadata and match CL
   assert.match(blank.error?.message ?? '',/No nonblank studies/);
   assert.equal(submit({...request,options:{nonblankOnly:'yes'}}).ok,false);
 });
+
+
+test('blank shade, background settings and retired White tool survive project loading', () => {
+  const store = new Model.Store();
+  Object.assign(store.project.settings, {tool:'paint',shade:3,brush:'none',brushLinked:true,background:'#152238',backgroundColor:'#152238'});
+  const restored = new Model.Store(JSON.parse(Model.projectString(store)));
+  assert.equal(restored.project.settings.shade, 3);
+  restored.updatePalette({lightness:0.6});
+  assert.equal(restored.project.settings.brush, 'none');
+  assert.equal(restored.project.settings.background, '#152238');
+  const legacy = store.toJSON();
+  legacy.settings.tool = 'white';
+  const migrated = new Model.Store(legacy);
+  assert.equal(migrated.project.settings.tool, 'paint');
+  assert.equal(migrated.project.settings.brush, '#FFFFFF');
+  assert.equal(migrated.project.settings.brushLinked, false);
+  assert.deepEqual(migrated.doc.fills, store.doc.fills);
+  for (const background of ['#152238', 'white', 'transparent']) {
+    const response = submit({operation:'svg',fills:Core.presetFills('blank'),options:{background,outline:true}});
+    assert.equal(response.ok, true);
+    if (background === 'transparent') assert.doesNotMatch(response.svg, /id="background"/);
+    else assert.match(response.svg, new RegExp('id="background"[^>]+fill="'+Core.normalizeBackground(background)+'"'));
+    assert.match(response.svg, new RegExp('id="polygon-outlines"[^>]+stroke="'+Core.backgroundContrast(background)+'"'));
+  }
+  assert.equal(Core.backgroundContrast('#152238'), '#FFFFFF');
+  assert.equal(Core.backgroundContrast('#FFFFFF'), '#172D38');
+  assert.equal(submit({operation:'svg',options:{background:'invalid'}}).ok, false);
+});
+
+test('automatic tiny corners follow ending legs, including color links and history', () => {
+  const store = new Model.Store();
+  const owners = {
+    'inner-fillet-upper-left':'face-red_top-connector',
+    'inner-fillet-upper-right':'face-gray_top',
+    'inner-fillet-lower-left':'face-red_left',
+    'inner-fillet-lower-right':'face-gray_bottom'
+  };
+  store.setCornerMode('manual');
+  for (const corner of Object.keys(owners)) store.paint(corner, '#FFFFFF');
+  const manual = structuredClone(store.doc.fills);
+  store.setCornerMode('auto');
+  const slate = Model.getPalettes(store.project).find((/** @type {{id:string}} */ row) => row.id === 'slate');
+  for (const [corner, owner] of Object.entries(owners)) {
+    store.paint(owner, slate.colors[2], {familyId:'slate',shade:2});
+    assert.equal(store.doc.fills[corner], slate.colors[2]);
+    assert.deepEqual(store.doc.bindings[corner], {familyId:'slate',shade:2});
+  }
+  const auto = structuredClone(store.doc.fills);
+  store.paint('face-gray_top', 'none');
+  assert.equal(store.doc.fills['inner-fillet-upper-right'], 'none');
+  assert.equal(store.doc.bindings['inner-fillet-upper-right'], null);
+  store.undo();
+  assert.deepEqual({...store.doc.fills}, auto);
+  store.redo();
+  assert.equal(store.doc.fills['inner-fillet-upper-right'], 'none');
+  const restored = new Model.Store(store.toJSON());
+  assert.equal(restored.doc.fills['inner-fillet-upper-right'], 'none');
+  store.setCornerMode('manual');
+  store.setFills(manual, 'Manual colors');
+  assert.deepEqual({...new Model.Store(store.toJSON()).doc.fills}, manual);
+});

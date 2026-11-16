@@ -283,6 +283,13 @@ const PRESETS = [
   {id:'white',name:'All white'},
   {id:'blank',name:'Clear all'}
 ];
+// Inner tips follow the ending leg, not the adjacent outer diamond.
+const CORNER_PARENTS = Object.freeze({
+  'inner-fillet-upper-left':'face-red_top-connector',
+  'inner-fillet-upper-right':'face-gray_top',
+  'inner-fillet-lower-left':'face-red_left',
+  'inner-fillet-lower-right':'face-gray_bottom'
+});
 const FACE_IDS = FACES.map(function(face) { return face.id; });
 const FACE_ID_SET = new Set(FACE_IDS);
 const HISTORY_LIMIT = 80;
@@ -291,7 +298,7 @@ const MAX_CUSTOM_PALETTES = 8;
 const MAX_PROJECT_BYTES = 2 * 1024 * 1024;
 const DEFAULT_SETTINGS = {
   family:0, shade:1, brush:'#8C1515', tool:'paint', showGuides:true,
-  showIds:false, background:'white', exportTransparent:true, seed:'blank', exportType:'svg',
+  showIds:false, background:'white', backgroundColor:'#FFFFFF', exportTransparent:true, seed:'blank', exportType:'svg',
   pngScale:2, zoom:1
 };
 const own = function(object, key) { return Object.prototype.hasOwnProperty.call(object, key); };
@@ -384,17 +391,25 @@ function validDate(value) {
 function checkedSettings(value, paletteCount) {
   const input = isObject(value) ? value : {};
   const result = Object.assign({}, DEFAULT_SETTINGS);
-  ['showGuides','showIds','exportTransparent'].forEach(function(key) { if (typeof input[key] === 'boolean') result[key] = input[key]; });
+  (/** @type {const} */ (['showGuides','showIds','exportTransparent'])).forEach(function(key) { if (typeof input[key] === 'boolean') result[key] = input[key]; });
   const allowed = {
-    tool:['paint','white','clear','pick'],background:['white','transparent'],
+    tool:['paint','clear','pick'],
     seed:['blank','copy','reference'],exportType:['svg','png']
   };
-  Object.keys(allowed).forEach(function(key) { if (allowed[key].includes(input[key])) result[key] = input[key]; });
+  (/** @type {const} */ (['tool','seed','exportType'])).forEach(function(key) { if (allowed[key].includes(input[key])) result[key] = input[key]; });
   if (Number.isInteger(input.family)) result.family = Math.min(Math.max(input.family,0),paletteCount - 1);
-  if (Number.isInteger(input.shade)) result.shade = Math.min(Math.max(input.shade,0),2);
+  if (Number.isInteger(input.shade)) result.shade = Math.min(Math.max(input.shade,0),3);
   if (Number.isFinite(input.pngScale)) result.pngScale = Math.min(Math.max(input.pngScale,0.25),4);
   if (Number.isFinite(input.zoom)) result.zoom = Math.min(Math.max(input.zoom,0.4),16);
   if (own(input,'brush')) result.brush = normalizeColor(input.brush);
+  // Old projects may have selected the retired White tool; keep that paint color.
+  if (input.tool === 'white') { result.tool = 'paint'; result.brush = '#FFFFFF'; }
+  if (own(input,'background')) {
+    const background = normalizeBackground(input.background);
+    result.background = background === 'none' ? 'transparent' : background;
+  }
+  result.backgroundColor = normalizeBackground(input.backgroundColor || (result.background === 'transparent' ? 'white' : result.background));
+  if (result.backgroundColor === 'none') throw new Error('Choose an opaque background color.');
   return result;
 }
 
@@ -605,6 +620,22 @@ function xmlEscape(value) {
   });
 }
 
+/** @param {string} [value] */
+function normalizeBackground(value) {
+  return normalizeColor(value === undefined || value === 'white' ? '#FFFFFF' : value === 'transparent' ? 'none' : value);
+}
+
+/** @param {string} [value] */
+function backgroundContrast(value) {
+  const color = normalizeBackground(value);
+  if (color === 'none') return '#172D38';
+  const rgb = [1,3,5].map(function (offset) {
+    const channel = parseInt(color.slice(offset, offset + 2), 16) / 255;
+    return channel <= 0.04045 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+  });
+  return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722 < 0.179 ? '#FFFFFF' : '#172D38';
+}
+
 function svgString(fills, options) {
   const opts = options || {};
   const colors = fills === undefined ? presetFills('reference') : checkedFills(fills);
@@ -612,9 +643,9 @@ function svgString(fills, options) {
   const label = opts.glyph === undefined ? '' : ' — ' + validGlyph(opts.glyph);
   const outlineOnly = opts.outlineOnly === true;
   const outline = outlineOnly || opts.outline === true;
-  const outlineColor = normalizeColor(opts.outlineColor || '#27323C');
+  const outlineColor = normalizeColor(opts.outlineColor || backgroundContrast(opts.background));
   const outlineWidth = Number.isFinite(opts.outlineWidth) ? Math.min(Math.max(opts.outlineWidth,0.25),8) : 1.35;
-  const background = opts.background === 'transparent' ? 'transparent' : 'white';
+  const background = normalizeBackground(opts.background);
   const displayed = Object.create(null);
   FACE_IDS.forEach(function(id) { displayed[id] = outlineOnly ? '#FFFFFF' : colors[id]; });
   const parts = [
@@ -624,7 +655,7 @@ function svgString(fills, options) {
     '<desc id="logo-description">Twenty editable solid-color polygons, using the approved original geometry.</desc>',
     '<defs><clipPath id="logo-outline"><path fill-rule="evenodd" clip-rule="evenodd" d="' + SILHOUETTE + '"/></clipPath></defs>'
   ];
-  if (background === 'white') parts.push('<rect id="background" width="1536" height="1024" fill="#FFFFFF"/>');
+  if (background !== 'none') parts.push('<rect id="background" width="1536" height="1024" fill="' + background + '"/>');
   parts.push('<g id="logo" clip-path="url(#logo-outline)">');
   parts.push('<g id="seam-undercoats" aria-hidden="true" stroke-width="1.2" stroke-linejoin="round">');
   FACES.forEach(function(face) {
@@ -710,8 +741,10 @@ PALETTES.forEach(function(family) { Object.freeze(family.colors); Object.freeze(
 Object.keys(SEQUENCES).forEach(function(key) { Object.freeze(SEQUENCES[key]); });
 Object.freeze(FACES); Object.freeze(PALETTES); Object.freeze(SEQUENCES); Object.freeze(SHADES);
 const API = {
+  CORNER_PARENTS:CORNER_PARENTS,
   FACES:FACES,SILHOUETTE:SILHOUETTE,GEOMETRY_ID:GEOMETRY_ID,SCHEMA:SCHEMA,VERSION:VERSION,
   WIDTH:WIDTH,HEIGHT:HEIGHT,VIEWBOX:VIEWBOX,PALETTES:PALETTES,SHADES:SHADES,SEQUENCES:SEQUENCES,
+  normalizeBackground:normalizeBackground,backgroundContrast:backgroundContrast,
   PRESETS:PRESETS,DEFAULT_SETTINGS:DEFAULT_SETTINGS,Store:Store,createProject:createProject,
   getPalettes:getPalettes,makeFamily:makeFamily,normalizeColor:normalizeColor,presetFills:presetFills,
   validateProject:validateProject,svgString:svgString,svgBlob:svgBlob,pngBlob:pngBlob,

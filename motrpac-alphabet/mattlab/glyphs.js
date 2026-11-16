@@ -6,12 +6,7 @@
   const CARDINAL = '#8C1515';
   const WHITE = '#FFFFFF';
   const ids = Core.FACES.map(function (face) { return face.id; });
-  const CORNER_PARENTS = Object.freeze({
-    'inner-fillet-lower-left':'face-red_bottom-cell-2',
-    'inner-fillet-lower-right':'face-gray_bottom',
-    'inner-fillet-upper-right':'face-red_top-right-leg-cell-2',
-    'inner-fillet-upper-left':'face-red_top-connector'
-  });
+  const CORNER_PARENTS = Core.CORNER_PARENTS;
   function numbered(numbers) {
     return numbers.map(function (number) {
       if (!Number.isInteger(number) || number < 1 || number > 20) throw new Error('Unknown polygon number.');

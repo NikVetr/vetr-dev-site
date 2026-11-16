@@ -11,12 +11,7 @@
   const MAX_BYTES = 2 * 1024 * 1024;
   const FACE_IDS = Core.FACES.map(function (face) { return face.id; });
   const FACE_SET = new Set(FACE_IDS);
-  const CORNER_OWNERS = Object.freeze({
-    'inner-fillet-upper-left':'face-red_top-connector',
-    'inner-fillet-upper-right':'face-red_top-right-leg-cell-2',
-    'inner-fillet-lower-left':'face-red_bottom-cell-2',
-    'inner-fillet-lower-right':'face-gray_bottom'
-  });
+  const CORNER_OWNERS = Core.CORNER_PARENTS;
   const CORNER_MODES = Object.freeze(['auto', 'clear', 'manual']);
   const EXTRA_SETTINGS = Object.freeze({
     brushLinked:true, galleryFilter:'uppercase',
@@ -114,6 +109,7 @@
     ['brushLinked', 'sheetOutlines', 'sheetNonblankOnly'].forEach(function (key) {
       if (typeof input[key] === 'boolean') result[key] = input[key];
     });
+    if (input.tool === 'white') result.brushLinked = false;
     if (FILTERS.includes(input.galleryFilter)) result.galleryFilter = input.galleryFilter;
     if (SHEET_SCOPES.includes(input.sheetScope)) result.sheetScope = input.sheetScope;
     return result;
@@ -320,7 +316,7 @@
         });
         if (this.project.settings.brushLinked) {
           const row = palettes[this.project.settings.family] || palettes[0];
-          this.project.settings.brush = row.colors[this.project.settings.shade];
+          this.project.settings.brush = this.project.settings.shade === 3 ? 'none' : row.colors[this.project.settings.shade];
         }
         return true;
       }, false);

@@ -34,7 +34,11 @@
   if (skippedStarters) initialNotice = 'Your existing studies are preserved. Some starter thumbnails were skipped because this project is full.';
   let palettes = Model.getPalettes(store.project);
   let settings = store.project.settings;
-  let svg, guides, labels, hoverHalo, hoverLine;
+  let svg, hoverHalo, hoverLine;
+  /** @type {Element} */
+  let guides;
+  /** @type {Element} */
+  let labels;
   let pathNodes = new Map();
   let undercoatNodes = new Map();
   let paletteButtons = [];
@@ -58,12 +62,11 @@
   let exportBusy = false;
   let artworkWidth = 0;
   let artworkHeight = 0;
-  /** @type {string|null} */
-  let cycleWhiteFace = null;
   let wheelAmount = 0;
   let wheelLast = 0;
   let wheelActionAt = -1000;
-  const viewport = $('canvasViewport');
+  const viewport = /** @type {HTMLElement} */ ($('canvasViewport'));
+  const backgroundColorControl = /** @type {HTMLInputElement} */ ($('backgroundColor'));
   const host = $('artworkHost');
   const sheetNonblankOnly = /** @type {HTMLInputElement} */ ($('sheetNonblankOnly'));
   if (!host) throw new Error('Missing artwork container');
@@ -165,12 +168,12 @@
     return 'Custom color';
   }
   function toneName(shade) {
+    if (shade === 3) return 'Blank';
     return store.project.paletteConfig.mode === 'chroma' ?
       ['Low chroma','Mid chroma','High chroma'][shade] : ['Low','Mid','High'][shade];
   }
   function paintColor() {
     if (settings.tool === 'clear') return 'none';
-    if (settings.tool === 'white') return '#FFFFFF';
     return settings.brush;
   }
   function showHover(id) {
@@ -446,11 +449,11 @@
     paletteRows.forEach(function (item, index) {
       item.row.classList.toggle('is-active', settings.tool === 'paint' && settings.brushLinked && index === settings.family);
     });
-    [['paintTool','paint'],['whiteTool','white'],['clearTool','clear'],['sampleTool','pick']].forEach(function (pair) {
+    [['paintTool','paint'],['clearTool','clear'],['sampleTool','pick']].forEach(function (pair) {
       $(pair[0]).setAttribute('aria-pressed', String(!panMode && settings.tool === pair[1]));
     });
     $('shadeDarker').disabled = settings.shade <= 0;
-    $('shadeLighter').disabled = settings.shade >= 2;
+    $('shadeLighter').disabled = settings.shade >= 3;
     $('panTool').setAttribute('aria-pressed', String(panMode));
     host.classList.toggle('is-sampling', settings.tool === 'pick' && !panMode && !spaceHeld);
     host.classList.toggle('is-panning', panMode || spaceHeld);
@@ -458,10 +461,9 @@
     viewport.setAttribute('aria-label', 'Painting canvas. Active ' + (panMode ? 'pan tool' : colorName(color)) + '. Scroll changes brush tool; arrow up/down changes shade; left/right changes color family.');
   }
   function selectSwatch(family, shade) {
-    cycleWhiteFace = null;
     settings.family = modulo(family, palettes.length);
-    settings.shade = clamp(shade, 0, 2);
-    settings.brush = palettes[settings.family].colors[settings.shade];
+    settings.shade = clamp(shade, 0, 3);
+    settings.brush = settings.shade === 3 ? 'none' : palettes[settings.family].colors[settings.shade];
     settings.brushLinked = true;
     settings.tool = 'paint';
     panMode = false;
@@ -490,7 +492,6 @@
   function stepShade(delta) { selectSwatch(settings.family, settings.shade + delta); }
   function setTool(tool) {
     finishStroke();
-    cycleWhiteFace = null;
     settings.tool = tool;
     panMode = false;
     renderBrush();
@@ -556,7 +557,7 @@
     });
   }
   function thumbnail(fills, outline) {
-    return Sheet.thumbnailSvg(fills, {outline:outline, background:'white'});
+    return Sheet.thumbnailSvg(fills, {outline:outline, background:settings.background});
   }
   function renderGlyphStrip() {
     const strip = $('glyphStrip');
@@ -623,7 +624,6 @@
     if (changed) { renderHistory(); queueSave(); }
   }
   function switchGlyph(glyph) {
-    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     commitName();
@@ -642,7 +642,6 @@
     }
   }
   function nextGlyph(delta) {
-    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     commitName();
@@ -664,7 +663,6 @@
     queueSave();
   }
   function renderEverything() {
-    cycleWhiteFace = null;
     settings = store.project.settings;
     palettes = Model.getPalettes(store.project);
     remapSource = null;
@@ -677,7 +675,6 @@
     fitArtwork(true);
   }
   function applyPreset(preset) {
-    cycleWhiteFace = null;
     finishStroke();
     finishPaletteEdit();
     if (store.reset(preset)) afterEdit();
@@ -688,7 +685,12 @@
     $('showOutlines').checked = settings.showGuides;
     $('showLabels').checked = settings.showIds;
     const checker = settings.background === 'transparent';
-    $('canvasBackground').value = checker ? 'checker' : 'white';
+    $('canvasBackground').value = checker ? 'checker' : 'color';
+    backgroundColorControl.value = settings.backgroundColor;
+    viewport.style.backgroundColor = checker ? '#FFFFFF' : Core.normalizeBackground(settings.background);
+    const contrast = Core.backgroundContrast(settings.background);
+    guides.setAttribute('stroke', contrast);
+    labels.setAttribute('fill', contrast);
     viewport.classList.toggle('checker', checker);
     $('nextMode').value = settings.seed;
     $('exportTransparent').checked = settings.exportTransparent !== false;
@@ -734,7 +736,7 @@
     store.updatePalette(config);
     settings = store.project.settings;
     palettes = Model.getPalettes(store.project);
-    if (settings.brushLinked) settings.brush = palettes[settings.family].colors[settings.shade];
+    if (settings.brushLinked) settings.brush = settings.shade === 3 ? 'none' : palettes[settings.family].colors[settings.shade];
     renderPalette();
     renderPaletteControls();
     renderFills();
@@ -780,7 +782,7 @@
     store.updatePalette(Color.DEFAULTS);
     settings = store.project.settings;
     palettes = Model.getPalettes(store.project);
-    if (settings.brushLinked) settings.brush = palettes[settings.family].colors[settings.shade];
+    if (settings.brushLinked) settings.brush = settings.shade === 3 ? 'none' : palettes[settings.family].colors[settings.shade];
     store.endEdit();
     renderEverything();
     queueSave();
@@ -844,7 +846,7 @@
     if (!id || visitedInStroke.has(id)) return;
     if (Glyphs.CORNER_PARENTS[id] && store.doc.cornerMode !== 'manual') return;
     visitedInStroke.add(id);
-    const binding = settings.tool === 'paint' && settings.brushLinked ?
+    const binding = settings.tool === 'paint' && settings.brushLinked && settings.shade < 3 ?
       {familyId:palettes[settings.family].id, shade:settings.shade} : null;
     if (store.paint(id, paintColor(), binding)) {
       renderFills();
@@ -871,7 +873,7 @@
     if (settings.tool === 'pick') { pickFace(id); return; }
     if (!canPaintFace(id)) return;
     cycleMatchingFace(id);
-    const binding = settings.tool === 'paint' && settings.brushLinked ?
+    const binding = settings.tool === 'paint' && settings.brushLinked && settings.shade < 3 ?
       {familyId:palettes[settings.family].id, shade:settings.shade} : null;
     if (store.paint(id, paintColor(), binding)) afterEdit();
     showHover(id);
@@ -884,14 +886,9 @@
     return false;
   }
   function cycleMatchingFace(id) {
-    if (cycleWhiteFace === id && settings.tool === 'white' && store.doc.fills[id] === '#FFFFFF') {
-      selectSwatch(settings.family, 0);
-    } else if (settings.tool === 'paint' && settings.brushLinked && store.doc.fills[id] === settings.brush) {
-      if (settings.shade === 2) {
-        setTool('white');
-        cycleWhiteFace = id;
-      } else selectSwatch(settings.family, settings.shade + 1);
-    } else cycleWhiteFace = null;
+    if (settings.tool === 'paint' && settings.brushLinked && store.doc.fills[id] === settings.brush) {
+      selectSwatch(settings.family, (settings.shade + 1) % 4);
+    }
   }
 
   host.addEventListener('pointerdown', function (event) {
@@ -999,7 +996,7 @@
     const direction = wheelAmount > 0 ? 1 : -1;
     wheelAmount = 0;
     wheelActionAt = now;
-    const tools = ['paint', 'white', 'clear', 'pick'];
+    const tools = ['paint', 'clear', 'pick'];
     setTool(tools[modulo(tools.indexOf(settings.tool) + direction, tools.length)]);
   }, {passive:false});
 
@@ -1075,7 +1072,7 @@
   $('familyNext').addEventListener('click', function () { stepFamily(1); });
   $('shadeDarker').addEventListener('click', function () { stepShade(-1); });
   $('shadeLighter').addEventListener('click', function () { stepShade(1); });
-  [['paintTool','paint'],['whiteTool','white'],['clearTool','clear'],['sampleTool','pick']].forEach(function (pair) {
+  [['paintTool','paint'],['clearTool','clear'],['sampleTool','pick']].forEach(function (pair) {
     $(pair[0]).addEventListener('click', function () { setTool(pair[1]); });
   });
   $('panTool').addEventListener('click', function () {
@@ -1118,7 +1115,7 @@
     const fills = {};
     const bindings = {};
     Core.FACES.forEach(function (face) { fills[face.id] = paintColor(); });
-    if (settings.tool === 'paint' && settings.brushLinked) Core.FACES.forEach(function (face) {
+    if (settings.tool === 'paint' && settings.brushLinked && settings.shade < 3) Core.FACES.forEach(function (face) {
       bindings[face.id] = {familyId:palettes[settings.family].id, shade:settings.shade};
     });
     if (store.setFills(fills, 'Fill all pieces', bindings)) afterEdit();
@@ -1163,8 +1160,16 @@
     queueSave();
   });
   $('canvasBackground').addEventListener('change', function () {
-    settings.background = this.value === 'checker' ? 'transparent' : 'white';
+    settings.background = this.value === 'checker' ? 'transparent' : settings.backgroundColor;
     renderViewOptions();
+    renderGlyphStrip();
+    queueSave();
+  });
+  backgroundColorControl.addEventListener('input', function () {
+    settings.backgroundColor = Core.normalizeColor(backgroundColorControl.value);
+    settings.background = settings.backgroundColor;
+    renderViewOptions();
+    renderGlyphStrip();
     queueSave();
   });
   $('exportTransparent').addEventListener('change', function () {
@@ -1204,7 +1209,7 @@
     const name = store.project.title;
     const fills = Object.assign({}, store.doc.fills);
     const options = {name:name, glyph:store.doc.kind === 'design' ? store.doc.name : glyph,
-      background:$('exportTransparent').checked ? 'transparent' : 'white', scale:2};
+      background:$('exportTransparent').checked ? 'transparent' : settings.backgroundColor, scale:2};
     exportBusy = true;
     $('exportSvg').disabled = true;
     $('exportPng').disabled = true;
@@ -1247,7 +1252,7 @@
       all:'All characters and original', gallery:'Visible gallery', saved:'Edited studies'};
     const options = {title:store.project.title + ' · ' + scopes[scope],
       subtitle:entries.length + ' studies · edited colors and corner settings included',
-      outline:$('sheetOutlines').checked, columns:6, scale:2};
+      outline:$('sheetOutlines').checked, background:settings.backgroundColor, columns:6, scale:2};
     sheetBusy = true;
     $('sheetSvgBtn').disabled = true;
     $('sheetPngBtn').disabled = true;

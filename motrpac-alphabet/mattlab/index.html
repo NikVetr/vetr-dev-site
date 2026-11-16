@@ -34,13 +34,13 @@
           <div class="help-popover">
             <h2>Painting & navigation</h2>
             <dl>
-              <dt>Click a piece</dt><dd>Paint with the active brush. Repeated clicks cycle the linked row’s shades, then white, then back to the first shade.</dd>
+              <dt>Click a piece</dt><dd>Paint with the active brush. Repeated clicks cycle the linked row’s shades, then transparent blank, then back to the first shade.</dd>
               <dt>Click selected color</dt><dd>Cycle through that row’s three columns.</dd>
-              <dt>Scroll over artwork</dt><dd>Cycle Paint, White, Clear and Pick tools. Scroll backward to reverse.</dd>
+              <dt>Scroll over artwork</dt><dd>Cycle Paint, Erase and Pick tools. Scroll backward to reverse.</dd>
               <dt>Middle-click</dt><dd>Change the brush color family.</dd>
               <dt>Right-click</dt><dd>Move the hovered piece’s color family, or the hovered palette row, to the next unused row throughout the study, keeping shade columns and color groups separate. Hold <span class="key">Shift</span> to move to the previous row.</dd>
               <dt>Drag a row marker</dt><dd>Move all its colors in the current design to another row. Or tap the marker, then the destination row’s name.</dd>
-              <dt>White / Clear</dt><dd>Hide a piece with white, or make it transparent.</dd>
+              <dt>Erase / Background</dt><dd>Erase reveals the background. Choose its color beside Solid/Checker; edges turn white on dark backgrounds. Opaque exports use the chosen color.</dd>
               <dt>Eyedropper / Alt-click</dt><dd>Pick a color from the artwork.</dd>
               <dt>Pan tool / Space</dt><dd>Drag to move around when zoomed in.</dd>
               <dt>Undo / Redo</dt><dd><span class="key">Ctrl / ⌘ Z</span> · <span class="key">⇧ Z</span></dd>
@@ -106,11 +106,10 @@
           <div class="section-eyebrow">Brush tools</div>
           <div class="tool-grid" role="group" aria-label="Brush tools">
             <button class="tool-button" type="button" id="paintTool" aria-label="Paint with active color" aria-pressed="true" title="Paint with the active color"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 2.5 2.5m3-2 8 8-8 8-8-8 8-8Zm-6 10h12M19.5 15s-2 2.4-2 3.6a2 2 0 0 0 4 0c0-1.2-2-3.6-2-3.6Z"/></svg><span>Paint</span></button>
-            <button class="tool-button" type="button" id="whiteTool" aria-label="Paint white" aria-pressed="false" title="Paint a piece white"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 16 16 8" opacity=".3"/></svg><span>White</span></button>
-            <button class="tool-button" type="button" id="clearTool" aria-label="Make transparent" aria-pressed="false" title="Make a piece transparent"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16M4 4l16 16" opacity=".55"/></svg><span>Clear</span></button>
+            <button class="tool-button" type="button" id="clearTool" aria-label="Erase to background" aria-pressed="false" title="Erase a piece to reveal the background"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16M4 4l16 16" opacity=".55"/></svg><span>Erase</span></button>
             <button class="tool-button" type="button" id="sampleTool" aria-label="Pick color from artwork" aria-pressed="false" title="Sample a color from the artwork"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4 5 5M14 5l3-3 5 5-3 3M15 6 5 16l-1 4 4-1L18 9M8 13l3 3"/></svg><span>Pick</span></button>
           </div>
-          <p class="tool-hint">Click a piece repeatedly to cycle shades and white. Scroll over artwork to change tools. Right-click a piece or palette row to remap that family; Shift reverses. Middle-click changes only the brush family.</p>
+          <p class="tool-hint">Click a piece repeatedly to cycle shades and blank. Scroll over artwork to change tools. Right-click a piece or palette row to remap that family; Shift reverses. Middle-click changes only the brush family.</p>
         </div>
       </aside>
 
@@ -147,7 +146,8 @@
               <div class="toolbar-group" role="group" aria-label="Artwork guides">
                 <label class="check-label"><input type="checkbox" id="showOutlines" checked>Edges</label>
                 <label class="check-label"><input type="checkbox" id="showLabels">IDs</label>
-                <select class="select-input background-select" id="canvasBackground" aria-label="Canvas backdrop"><option value="white">White</option><option value="checker">Checker</option></select>
+                <select class="select-input background-select" id="canvasBackground" aria-label="Background style"><option value="color">Solid</option><option value="checker">Checker</option></select>
+                <input type="color" id="backgroundColor" value="#ffffff" aria-label="Background color" title="Background color; outlines adjust automatically">
               </div>
               <div class="toolbar-group" role="group" aria-label="Zoom">
                 <button class="icon-button" type="button" id="panTool" aria-pressed="false" title="Pan the canvas (or hold Space and drag)" aria-label="Pan canvas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12V6a1.5 1.5 0 0 1 3 0v5-7a1.5 1.5 0 0 1 3 0v7-6a1.5 1.5 0 0 1 3 0v7-3a1.5 1.5 0 0 1 3 0v6c0 4-2 6-6 6h-1c-2 0-3.2-1-4.5-2.5L4 13a1.5 1.5 0 0 1 2-2l2 1Z"/></svg></button>

@@ -101,8 +101,8 @@ const Edited = require('../edited-glyphs.js');
       if (direction < 0) await page.keyboard.up('Shift');
     }
 
-    // Repeated paint clicks include a genuine unlinked white/blank step.
-    await page.locator('#whiteTool').click();
+    // Repeated paint clicks include an unlinked blank step without leaving Paint.
+    await page.locator('#clearTool').click();
     point = await pointForFace();
     await page.mouse.click(point.x, point.y);
     await page.locator('.palette-row[data-family-id="navy"] .swatch').first().click();
@@ -110,21 +110,29 @@ const Edited = require('../edited-glyphs.js');
     await page.locator('.palette-row[data-family-id="navy"] .swatch').first().click();
     const navy = (await read()).palettes.find((/** @type {{id:string}} */ row) => row.id === 'navy');
     point = await pointForFace();
-    for (const fill of [...navy.colors, '#FFFFFF', navy.colors[0]]) {
+    for (const fill of [...navy.colors, 'none', navy.colors[0]]) {
       await page.mouse.click(point.x, point.y);
       const state = await read();
       assert.equal(state.doc.fills[faceId], fill);
-      if (fill === '#FFFFFF') assert.equal(state.doc.bindings[faceId], null);
+      if (fill === 'none') {
+        assert.equal(state.doc.bindings[faceId], null);
+        await page.waitForTimeout(250);
+        await page.reload();
+        point = await pointForFace();
+        assert.equal((await read()).project.settings.shade, 3, 'Blank shade persists across reload');
+        assert.equal((await read()).project.settings.tool, 'paint');
+      }
+      assert.equal(state.project.settings.tool, 'paint', 'Blank remains a paint shade');
     }
     await page.keyboard.press('Control+z');
-    assert.equal((await read()).doc.fills[faceId], '#FFFFFF');
+    assert.equal((await read()).doc.fills[faceId], 'none');
     await page.keyboard.press('Control+Shift+z');
     assert.equal((await read()).doc.fills[faceId], navy.colors[0]);
-    await page.locator('#whiteTool').click();
+    await page.locator('#clearTool').click();
     point = await pointForFace();
     await page.mouse.click(point.x, point.y);
     await page.mouse.click(point.x, point.y);
-    assert.equal((await read()).doc.fills[faceId], '#FFFFFF', 'Explicit White tool remains white');
+    assert.equal((await read()).doc.fills[faceId], 'none', 'Erase remains transparent on repeated clicks');
 
     // Wheel changes tools only within the artwork, with a threshold for trackpads.
     await page.locator('#paintTool').click();
@@ -139,7 +147,7 @@ const Edited = require('../edited-glyphs.js');
     const artworkBeforeWheel = (await read()).doc.fills;
     point = await pointForFace();
     await page.mouse.move(point.x, point.y);
-    for (const tool of ['white','clear','pick','paint']) {
+    for (const tool of ['clear','pick','paint']) {
       await page.waitForTimeout(110);
       await page.mouse.wheel(0, 100);
       await page.waitForFunction((/** @type {string} */ expected) => (/** @type {StudioWindow} */ (/** @type {unknown} */ (window))).CardinalStudio.getProject().settings.tool === expected, tool);
@@ -191,6 +199,6 @@ const Edited = require('../edited-glyphs.js');
     await page.reload();
     assert.equal(await page.locator('#galleryFilter').inputValue(),'saved');
     assert.deepEqual(errors,[]);
-    console.log('Row remapping, shade/white click cycling, wheel tool selection, history, and safe starter migration pass.');
+    console.log('Row remapping, shade/blank click cycling, wheel tool selection, history, and safe starter migration pass.');
   } finally { await session.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

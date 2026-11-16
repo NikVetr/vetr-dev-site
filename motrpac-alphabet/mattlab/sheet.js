@@ -115,10 +115,12 @@
     const title = cleanText(opts.title,'Polygon study',120);
     const parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="260 132 1004 748" width="100%" height="100%" role="img" aria-label="' + escape(title) + '">'];
     // No IDs, uses, clip paths, or external references: safe to repeat in a gallery.
-    if (opts.background !== 'transparent') parts.push('<rect x="260" y="132" width="1004" height="748" fill="#FFFFFF"/>');
+    const background = Core.normalizeBackground(opts.background);
+    const contrast = Core.backgroundContrast(opts.background);
+    if (background !== 'none') parts.push('<rect x="260" y="132" width="1004" height="748" fill="' + background + '"/>');
     Core.FACES.forEach(function (face) {
       parts.push('<path d="' + face.d + '" fill="' + colors[face.id] + '"' +
-        (outline ? ' stroke="#929AA0" stroke-width="2.5" stroke-linejoin="round"' : '') + '/>');
+        (outline ? ' stroke="' + contrast + '" stroke-opacity="0.5" stroke-width="2.5" stroke-linejoin="round"' : '') + '/>');
     });
     parts.push('</svg>');
     return parts.join('');
@@ -130,7 +132,9 @@
     const title = grid.headerInfo.title;
     const outline = opts.outline !== false;
     const showLabels = opts.labels !== false;
-    const outlineColor = Core.normalizeColor(opts.outlineColor || '#8E989F');
+    const background = Core.normalizeBackground(opts.background);
+    const contrast = Core.backgroundContrast(opts.background);
+    const outlineColor = Core.normalizeColor(opts.outlineColor || contrast);
     const outlineWidth = Math.max(0.5,Math.min(8,Number(opts.outlineWidth) || 2.5));
     const parts = [
       '<?xml version="1.0" encoding="UTF-8"?>',
@@ -142,15 +146,15 @@
     ];
     Core.FACES.forEach(function (face, index) { parts.push('<path id="sheet-piece-' + index + '" d="' + face.d + '"/>'); });
     parts.push('</defs>');
-    parts.push('<rect width="' + grid.width + '" height="' + grid.height + '" fill="#FFFFFF"/>');
-    parts.push('<g font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" fill="#25363D">');
+    if (background !== 'none') parts.push('<rect width="' + grid.width + '" height="' + grid.height + '" fill="' + background + '"/>');
+    parts.push('<g font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" fill="' + contrast + '">');
     grid.headerInfo.titleLines.forEach(function (line,index) {
       parts.push('<text x="' + grid.margin + '" y="' + (grid.headerInfo.titleY + index * grid.headerInfo.titleStep) +
         '" font-size="' + grid.headerInfo.titleSize + '" font-weight="650">' + escape(line) + '</text>');
     });
     grid.headerInfo.subtitleLines.forEach(function (line,index) {
       parts.push('<text x="' + grid.margin + '" y="' + (grid.headerInfo.subtitleY + index * 16) +
-        '" font-size="12" fill="#68777F">' + escape(line) + '</text>');
+        '" font-size="12" fill="' + contrast + '">' + escape(line) + '</text>');
     });
     data.forEach(function (entry,index) {
       const x = grid.margin + (index % grid.columns) * grid.cellWidth;
@@ -160,7 +164,7 @@
       const scale = (grid.cellWidth - 28) / CROP.width;
       const label = entry.label;
       parts.push('<g id="sheet-cell-' + index + '" aria-label="' + escape(label) + '">');
-      parts.push('<rect x="' + x + '" y="' + y + '" width="' + (grid.cellWidth - 12) + '" height="' + (grid.cellHeight - 12) + '" rx="10" fill="#FFFFFF" stroke="#E2E6E8" stroke-width="1"/>');
+      parts.push('<rect x="' + x + '" y="' + y + '" width="' + (grid.cellWidth - 12) + '" height="' + (grid.cellHeight - 12) + '" rx="10" fill="' + background + '" stroke="#E2E6E8" stroke-width="1"/>');
       parts.push('<g transform="translate(' + artX + ' ' + artY + ') scale(' + scale + ') translate(-' + CROP.x + ' -' + CROP.y + ')">');
       parts.push('<g clip-path="url(#sheet-logo-outline)">');
       parts.push('<g stroke-width="1.2" stroke-linejoin="round" aria-hidden="true">');
