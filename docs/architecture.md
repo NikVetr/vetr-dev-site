@@ -74,3 +74,7 @@ The same contour paths supply the section fills, with category colours mixed int
 The contour geometry operates only on the landing layout. It does not change application data, models or artwork. Forecast Calibration is linked from the Intuitions gallery and retains its standalone route and API.
 
 With JavaScript unavailable, the semantic card links and thematic source order remain available through ordinary CSS placement.
+
+## Collage preview selection
+
+`message-collage/core/whitespace.js` measures coverage and large blank rectangles from the same rotated/warped glyph boxes used by the renderer. It does not replace the app’s buffered-grid selection. `scripts/landing-art/collage-search.mjs` screens independent starts at three aspect ratios, finishes a small shortlist with the existing expansion/rotation/warp pipeline, and saves the selected results with source hashes and scoring provenance. The card builder consumes those results and shares glyph paths across the three compositions. Container queries select a composition for the actual preview well; each nested SVG preserves its own aspect ratio.

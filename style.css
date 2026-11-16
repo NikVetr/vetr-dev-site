@@ -390,5 +390,5 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Match the collage preview to its compact card instead of a tall empty picture well. */
-.card-art[data-art="message-collage"] { flex: 0 0 auto; aspect-ratio: 4 / 3; }
+/* Regenerated collage canvases adapt to the full available picture well. */
+.card-art[data-art="message-collage"] { container: collage-preview / size; }

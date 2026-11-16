@@ -1,94 +1,51 @@
-// Message Collage: the page's dense, gently rotated example with local warp at 1.
-// This is an explicit preview setting; the app example and API keep warp off by default.
-// The larger 2×3 tile uses a 264-wide canvas fitted to the real output height.
-// Four real layouts crossfade on hover;
-// line positions, relative sizes, colours and collision-checked rotations match the app.
-import { readFileSync } from 'node:fs';
-import { loadFaces, renderSvg, submit } from '../../../message-collage/core/index.js';
-import { WIDE, art, num } from '../svg.mjs';
-
-const SEEDS = [1, 2, 3, 4];
-const HOLD = 1.5;    // seconds each layout is on the card, fades included
-const FADE = 0.2;    // seconds to fade out, and again to fade in
-const MARGIN = 4;
-const PT = 72;       // the core's units: points, 72 per inch
-const { width: W } = WIDE;
+// Independently optimized aspect-specific compositions; exact core glyph geometry.
+// Regenerate the curated fixture with ../collage-search.mjs before building the art.
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadFaces,renderSvg} from '../../../message-collage/core/index.js';
+import {art,num} from '../svg.mjs';
 
 export async function build() {
-  const request = JSON.parse(readFileSync(new URL('../../../message-collage/examples/request.json', import.meta.url), 'utf8'));
-  /** @type {Awaited<ReturnType<typeof submit>>[]} */
-  const results = [];
-  for (const seed of SEEDS) results.push(await submit({ ...request, seed, warp_strength: 1 }));
-  const [first] = results;
-  const faces = await loadFaces(first.request.fonts, first.request.styles);
-  // One scale for every layout, the tallest fitting the canvas; the cards share their top left.
-  const widthPt = first.card.width_in * PT;
-  const tallest = Math.max(...results.map((r) => r.card.height_in)) * PT;
-  if (results.some((r) => r.card.width_in * PT !== widthPt)) throw new Error('message-collage: the layouts differ in width');
-  const k = (W - 2 * MARGIN) / widthPt;
-  const H = tallest * k + 2 * MARGIN;
-  const [x0, y0] = [(W - widthPt * k) / 2, (H - tallest * k) / 2];
-
-  const period = SEEDS.length * HOLD;
-  const shift = (HOLD - 2 * FADE) / 2;   // the still is the middle of the first layout's time
-  // Reuse the core's exact outlines rather than substitute installed browser fonts.
-  // Share identical glyph paths between all four layouts to keep the preview compact.
-  const glyphs = new Map();
-  const groups = results.map((r, i) => {
-    const svg = renderSvg(r, faces), endDefs = svg.indexOf('</defs>');
-    if (endDefs < 0) throw new Error('message-collage: outlined SVG has no glyph definitions');
-    const ids = new Map();
-    for (const match of svg.slice(0, endDefs).matchAll(/<path id="([^"]+)" d="([^"]+)"\/>/g)) {
-      const [, oldId, path] = match;
-      if (!glyphs.has(path)) glyphs.set(path, `message-collage-g${glyphs.size}`);
-      ids.set(oldId, glyphs.get(path));
+  /** @type {{provenance:{request_sha256:string,fonts_sha256:Record<string,string>},layouts:{profile:string,target_ratio:number,result:import('../../../message-collage/core/index.js').Result}[]}} */
+  const fixture=JSON.parse(readFileSync(new URL('../fixtures/collage-layouts.json',import.meta.url),'utf8'));
+  const request=readFileSync(new URL('../../../message-collage/examples/request.json',import.meta.url));
+  if(createHash('sha256').update(request).digest('hex')!==fixture.provenance.request_sha256)throw new Error('Collage example changed; regenerate collage-layouts.json with collage-search.mjs');
+  if(fixture.layouts.map(layout=>layout.profile).join(',')!=='portrait,square,wide')throw new Error('Expected all three collage aspect profiles');
+  const faces=await loadFaces(fixture.layouts[0].result.request.fonts,fixture.layouts[0].result.request.styles);
+  for(const face of faces.values())if(createHash('sha256').update(face.bytes).digest('hex')!==fixture.provenance.fonts_sha256[face.file])throw new Error(`Collage font changed: ${face.file}; regenerate the preview fixture`);
+  /** @type {Map<string,string>} */
+  const glyphs=new Map();
+  const layouts=fixture.layouts.map(({profile,result})=>{
+    const svg=renderSvg(result,faces),end=svg.indexOf('</defs>');
+    if(end<0)throw new Error('Missing collage glyph outlines');
+    /** @type {Map<string,string>} */
+    const ids=new Map();
+    for(const [,oldId,path] of svg.slice(0,end).matchAll(/<path id="([^"]+)" d="([^"]+)"\/>/g)){
+      if(!glyphs.has(path))glyphs.set(path,`message-collage-g${glyphs.size}`);
+      ids.set(oldId,/** @type {string} */(glyphs.get(path)));
     }
-    const lines = svg.slice(endDefs + '</defs>'.length).replace(/<rect[^>]+\/>/, '').replace(/<\/svg>\s*$/, '').replace(/xlink:href="#([^"]+)"/g, (_, id) => {
-      if (!ids.has(id)) throw new Error(`message-collage: undefined glyph ${id}`);
+    let line=0;
+    const body=svg.slice(end+7).replace(/<\/svg>\s*$/,'').replace(/xlink:href="#([^"]+)"/g,(_,id)=>{
+      if(!ids.has(id))throw new Error(`Unknown collage glyph ${id}`);
       return `href="#${ids.get(id)}"`;
-    }).replace(/matrix\(([^)]+)\)/g, (_, /** @type {string} */ values) => {
-      // Compact the thumbnail only: this changes glyph positions by less than
-      // 0.001 px at card size. App and downloadable exports retain full precision.
-      const matrix = values.split(/\s+/).map(Number);
-      if (matrix.length !== 6 || matrix.some(v => !Number.isFinite(v))) throw new Error('message-collage: invalid glyph matrix');
-      return `matrix(${matrix.map((v, j) => num(v, j < 4 ? 7 : 4)).join(' ')})`;
+    }).replace(/matrix\(([^)]+)\)/g,(_,/** @type {string} */values)=>{
+      const matrix=values.split(/\s+/).map(Number);
+      if(matrix.length!==6||matrix.some(v=>!Number.isFinite(v)))throw new Error('Invalid collage glyph transform');
+      return `matrix(${matrix.map((v,i)=>num(v,i<4?7:4)).join(' ')})`;
+    }).replace(/<g fill=/g,()=>{
+      const message=result.lines[line++].message;
+      return `<g class="collage-line" style="--arrival:${num((message-1)/result.messages.length*2,4)}s" fill=`;
     });
-    const delay = ((((i * HOLD - shift) % period) + period) % period) - period;
-    return `<g class="layout${i ? '' : ' still'}" style="animation-delay:${num(delay, 3)}s"><g transform="translate(${num(x0, 4)} ${num(y0, 4)}) scale(${num(k, 6)})">\n${lines}\n</g></g>`;
+    if(line!==result.lines.length)throw new Error('Not all collage lines were preserved');
+    return `<svg class="collage-layout collage-${profile}" data-profile="${profile}" width="100%" height="100%" viewBox="0 0 ${num(result.card.width_in*72,4)} ${num(result.card.height_in*72,4)}" preserveAspectRatio="xMidYMid meet">${body}</svg>`;
   });
-
-  // The card's height, changing while neither layout shows.
-  const scale = (/** @type {number} */ i) => num((results[i].card.height_in * PT) / tallest, 4);
-  const p = (/** @type {number} */ t) => num((100 * t) / period, 3);
-  const stops = [`0% { transform: scaleY(${scale(0)}); }`];
-  for (let i = 1; i <= SEEDS.length; i++) {
-    const t = i * HOLD - shift;   // the next layout is fully in
-    stops.push(`${p(t - 2 * FADE)}% { transform: scaleY(${scale(i - 1)}); }`, `${p(t - FADE)}% { transform: scaleY(${scale(i % SEEDS.length)}); }`);
-  }
-  stops.push(`100% { transform: scaleY(${scale(0)}); }`);
-  if (SEEDS.length * HOLD - shift > period) throw new Error('message-collage: the last change runs past the wrap');
-
-  const css = [
-    `& .card { fill: ${first.card.background}; transform: scaleY(${scale(0)}); }`,
-    '& .layout + .layout { opacity: 0; }',
-    // The still's group is a layer at rest as the loop makes every group, so its text is drawn
-    // the same when the loop starts.
-    '& .still { will-change: opacity; }',
-  ].join('\n');
-  if (results.some((r) => r.card.background !== first.card.background)) throw new Error('message-collage: the layouts differ in background');
-
-  return art({
-    name: 'message-collage',
-    width: W,
-    height: H,
-    period,
-    defs: [...glyphs].map(([path, id]) => `<path id="${id}" d="${path}"/>`).join('\n'),
-    body: `<g transform="translate(${num(x0)} ${num(y0)})"><rect class="card" width="${num(widthPt * k)}" height="${num(tallest * k)}"/></g>
-${groups.join('\n')}`,
-    css,
-    loop: `& .layout { animation: message-collage-layout ${num(period, 3)}s linear infinite; }
-@keyframes message-collage-layout { 0% { opacity: 1; } ${p(HOLD - 2 * FADE)}% { opacity: 1; } ${p(HOLD - FADE)}% { opacity: 0; } ${p(period - FADE)}% { opacity: 0; } 100% { opacity: 1; } }
-& .card { animation: message-collage-card ${num(period, 3)}s linear infinite; }
-@keyframes message-collage-card { ${stops.join(' ')} }`,
+  return art({name:'message-collage',responsive:true,period:8,
+    defs:[...glyphs].map(([path,id])=>`<path id="${id}" d="${path}"/>`).join('\n'),
+    body:`<rect width="100%" height="100%" fill="${fixture.layouts[0].result.card.background}"/>${layouts.join('\n')}`,
+    css:`& .collage-layout{display:none}& .collage-square{display:block}
+@container collage-preview (max-aspect-ratio:1/1){& .collage-square{display:none}& .collage-portrait{display:block}}
+@container collage-preview (min-aspect-ratio:1.32/1){& .collage-square{display:none}& .collage-wide{display:block}}`,
+    loop:`& .collage-line{animation:message-collage-write 8s ease-in-out infinite both;animation-delay:var(--arrival)}
+@keyframes message-collage-write{0%,5%{opacity:0}15%,85%{opacity:1}100%{opacity:0}}`,
   });
 }

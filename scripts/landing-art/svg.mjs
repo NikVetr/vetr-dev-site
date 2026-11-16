@@ -89,8 +89,9 @@ export function esc(text) {
  * @param {string} [p.playerBox] where it draws, "x y size" on the canvas; .player-still hides then
  * @param {number} [p.width]   the canvas, 320 x 180 unless the tile's shape asks for another
  * @param {number} [p.height]
+ * @param {boolean} [p.responsive] omit the outer viewBox when child SVGs own responsive canvases
  */
-export function art({ name, body, defs = '', css = '', loop = '', period, frames, player, playerBox, width = W, height = H }) {
+export function art({ name, body, defs = '', css = '', loop = '', period, frames, player, playerBox, width = W, height = H, responsive = false }) {
   const scope = `[data-art="${name}"]`;
   const style = [
     css.replaceAll('&', scope),
@@ -99,7 +100,7 @@ export function art({ name, body, defs = '', css = '', loop = '', period, frames
     // on reduced motion and the visitor's explicit animation preference.
     loop && loop.replaceAll('&', `${scope}[data-started]`),
   ].filter(Boolean).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''}${playerBox ? ` data-player-box="${playerBox}"` : ''} focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg"${responsive ? '' : ` viewBox="0 0 ${width} ${height}"`} data-period="${num(period, 3)}"${frames ? ` data-frames="${frames}"` : ''}${player ? ` data-player="${player}"` : ''}${playerBox ? ` data-player-box="${playerBox}"` : ''} focusable="false">
 <style>
 ${style}
 </style>
