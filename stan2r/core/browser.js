@@ -11,7 +11,7 @@ let nextId = 0;
 const pending = new Map();
 
 /** @param {string} source @returns {Promise<{ast: string, warnings: string[]}>} */
-function compile(source) {
+export function compile(source) {
   if (!compiler) {
     compiler = new Worker(new URL('./compiler-worker.js', import.meta.url));
     compiler.onmessage = ({ data }) => {

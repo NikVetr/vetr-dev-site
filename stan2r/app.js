@@ -1,6 +1,9 @@
 import { submit } from './core/browser.js';
 import { examples } from './examples.js';
 import { createHistory, bindHistoryShortcuts, bindFormHistory } from '../shared/history.js';
+import { mountExplorer } from './explorer.js';
+import { explore, analyze, simulateInBrowser } from './core/explorer-browser.js';
+import { exportLatex, exportPython } from './core/exports.js';
 
 /** @param {string} id */
 function byId(id) {
@@ -24,9 +27,12 @@ const redo = /** @type {HTMLButtonElement} */ (byId('redo'));
 /** @type {Record<string, HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>} */
 const fields = { source, data, draws, mode, sampleIndex };
 let lastInput = '';
+/** @type {ReturnType<typeof mountExplorer>|undefined} */
+let explorer;
 
-const capture = () => Object.fromEntries(Object.entries(fields).map(([key, el]) => [key, el.value]));
-function showStale() { byId('stale').hidden = !output.value || JSON.stringify(capture()) === lastInput; }
+const captureInputs = () => Object.fromEntries(Object.entries(fields).map(([key, el]) => [key, el.value]));
+const capture = () => ({inputs:captureInputs(),exploration:explorer?.capture()??null});
+function showStale() { byId('stale').hidden = !output.value || JSON.stringify(captureInputs()) === lastInput; explorer?.inputChanged(); }
 /** @param {string} key */
 function loadExample(key) {
   const example = examples[/** @type {keyof typeof examples} */ (key)];
@@ -39,7 +45,7 @@ function loadExample(key) {
 loadExample('normal');
 const history = createHistory({
   capture,
-  restore(snapshot) { for (const [key, value] of Object.entries(snapshot)) fields[key].value = value; showStale(); },
+  restore(snapshot) { for (const [key, value] of Object.entries(snapshot.inputs)) fields[key].value = value; explorer?.restore(snapshot.exploration); showStale(); },
   onChange(h) { undo.disabled = !h.canUndo; redo.disabled = !h.canRedo; },
 });
 history.refresh();
@@ -74,11 +80,12 @@ function showError(error) {
   status.textContent = 'Could not convert';
 }
 convert.onclick = async () => {
+  showView(false);
   history.commit();
   errorBox.hidden = true;
   byId('warnings').hidden = true;
   convert.disabled = true;
-  const snapshot = JSON.stringify(capture());
+  const snapshot = JSON.stringify(captureInputs());
   status.textContent = 'Converting… first run loads the R runtime';
   try {
     let parsedData, parsedDraws;
@@ -106,4 +113,17 @@ download.onclick = () => {
   const a = document.createElement('a'); a.href = url; a.download = 'model.R'; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
-Object.assign(window, { Stan2R: { submit } });
+function showView(exploring = true) {
+  byId('explorer').hidden = !exploring;
+  byId('r-panel').hidden = exploring;
+  /** @type {HTMLElement} */(document.querySelector('.conversion-toolbar')).hidden = exploring;
+  document.querySelector('.editors')?.classList.toggle('exploring', exploring);
+  byId('show-explorer').setAttribute('aria-pressed', String(exploring));
+  byId('show-converter').setAttribute('aria-pressed', String(!exploring));
+}
+byId('show-explorer').onclick = () => showView(true);
+byId('show-converter').onclick = () => showView(false);
+explorer = mountExplorer({root:byId('explorer'),readSource:()=>source.value,readData:()=>data.value,checkpoint:()=>history.commit(),refresh:()=>history.refresh()});
+history.replace();
+Object.assign(window, { Stan2R: { submit, explore, analyze, simulate:simulateInBrowser, exportLatex, exportPython } });
+explorer.build();

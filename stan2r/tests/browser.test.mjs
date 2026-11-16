@@ -30,7 +30,7 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     assert.equal(unsupported,'UNSUPPORTED_CONSTRUCT');
     const warned=await page.evaluate(()=>window.Stan2R.submit({source:'parameters {real mu; real<lower=0> sigma;} model {mu ~ normal(0,1); sigma ~ normal(mu,1);}'}));
     assert.match(warned.warnings.join('\n'),/draws differ from Stan's joint prior/);
-    await page.click('#convert');
+    await page.click('#show-converter');await page.click('#convert');
     await page.waitForFunction(()=>document.getElementById('status')?.textContent==='Converted');
     assert.match(await page.locator('#output').inputValue(),/sigma <-/);
     const original=await page.locator('#source').inputValue();
@@ -56,7 +56,7 @@ test('browser conversion, failures, history, and responsive layout', {timeout:24
     await page.screenshot({path:`${screenshotDir}/mobile.png`,fullPage:true});
     assert.deepEqual(errors,[]);
     const context=await browser.newContext();const offline=await context.newPage();
-    await offline.route('https://webr.r-wasm.org/**',route=>route.abort());await offline.goto(`${base}/stan2r/`);await offline.click('#convert');
+    await offline.route('https://webr.r-wasm.org/**',route=>route.abort());await offline.goto(`${base}/stan2r/`);await offline.click('#show-converter');await offline.click('#convert');
     await offline.waitForFunction(()=>document.getElementById('error')?.hidden===false);
     assert.match(await offline.locator('#error').innerText(),/Could not start the R runtime/);
     assert.equal(await offline.locator('#convert').isEnabled(),true);

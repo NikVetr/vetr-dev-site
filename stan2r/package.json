@@ -1,1 +1,1 @@
-{"name":"vetr-stan2r","private":true,"type":"module","scripts":{"test":"node --test tests/core.test.mjs","test:browser":"node --test tests/browser.test.mjs"},"devDependencies":{"@types/node":"22.20.5"}}
+{"name":"vetr-stan2r","private":true,"type":"module","scripts":{"test":"node --test tests/core.test.mjs tests/explorer-core.test.mjs tests/exports.test.mjs tests/explorer-audit.test.mjs tests/explorer-cli.test.mjs","test:browser":"node --test tests/browser.test.mjs tests/explorer-browser.test.mjs"},"devDependencies":{"@types/node":"22.20.5"}}
