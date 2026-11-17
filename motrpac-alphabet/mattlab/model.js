@@ -412,7 +412,12 @@
       let suffix = 1;
       while (used.has('custom-' + suffix)) suffix += 1;
       const family = Core.makeFamily(name, medium, 'custom-' + suffix);
-      this._mutate('Add color family', () => { this.project.customPalettes.push(family); return true; }, false);
+      this._mutate('Add color family', () => {
+        const selectedId = getPalettes(this.project)[this.project.settings.family].id;
+        this.project.customPalettes.push(family);
+        this.project.settings.family = getPalettes(this.project).findIndex(function (/** @type {{id:string}} */ row) { return row.id === selectedId; });
+        return true;
+      }, false);
       return family;
     }
     undo() {

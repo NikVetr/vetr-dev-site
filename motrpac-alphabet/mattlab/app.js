@@ -77,7 +77,7 @@
     const target = targetStore || store;
     let skipped = 0;
     // Retire automatic colour-study starters, retaining any saved user edits.
-    ['@original', '@cardinal', '@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
+    ['@original', '@original-warm', '@cardinal', '@cardinal-slate', '@cardinal-sky', '@ember-navy', '@tonal-weave'].forEach(function (key) {
       const doc = target.project.documents[key];
       if (doc && !doc.touched) {
         delete target.project.documents[key];
@@ -306,6 +306,7 @@
     palettes.forEach(function (family, familyIndex) {
       const row = document.createElement('div');
       row.className = 'palette-row';
+      if (family.fixed) row.title = 'Fixed reference swatches; perceptual controls leave this row unchanged.';
       row.setAttribute('data-family-id', family.id);
       const use = document.createElement('button');
       use.type = 'button';
@@ -338,7 +339,7 @@
       const name = document.createElement('button');
       name.type = 'button';
       name.className = 'family-name';
-      name.textContent = family.name;
+      name.textContent = family.name + (family.fixed ? ' · fixed' : '');
       name.title = family.name;
       name.addEventListener('click', function () {
         if (remapSource) applyFamilyRemap(remapSource, family.id);
@@ -1097,12 +1098,12 @@
   $('addFamilyBtn').addEventListener('click', function () {
     try {
       const base = Core.normalizeColor($('customHex').value);
-      store.addFamily($('customFamilyName').value || 'Custom ' + (store.project.customPalettes.length + 1), base);
+      const added = store.addFamily($('customFamilyName').value || 'Custom ' + (store.project.customPalettes.length + 1), base);
       renderHistory();
       renderPalette();
-      selectSwatch(palettes.length - 1, 1);
+      selectSwatch(palettes.findIndex(function (/** @type {{id:string}} */ row) { return row.id === added.id; }), 1);
       $('customFamilyName').value = '';
-      toast(palettes[palettes.length - 1].name + ': three tones added.');
+      toast(added.name + ': three tones added.');
     } catch (error) { toast(error.message); }
   });
   $('customFamilyName').addEventListener('keydown', function (event) {

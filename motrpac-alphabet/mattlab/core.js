@@ -268,7 +268,9 @@ const PALETTES = [
       "#0C5F87",
       "#7CA9BE"
     ]
-  }
+  },
+  {id:'logo-red', name:'Logo red', fixed:true, colors:['#800019','#C00026','#FF5C50']},
+  {id:'logo-gold', name:'Logo gold', fixed:true, colors:['#B77819','#FFBD43','#FFDA8A']}
 ];
 const SEQUENCES = {
   uppercase:Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
@@ -365,8 +367,11 @@ function presetFills(preset) {
       kind === 'cardinal' ? cardinalMap[face.fill] || face.fill : face.fill;
   });
   if (kind === 'original-warm') {
-    // Existing Cardinal tones (including the perceptual high tone) and Mustard.
-    const red = '#8C1515', coral = '#DF3531', gold = '#E5AE4F', dark = '#5E0E0E';
+    const reds = PALETTES.find(function (row) { return row.id === 'logo-red'; });
+    const golds = PALETTES.find(function (row) { return row.id === 'logo-gold'; });
+    if (!reds || !golds) throw new Error('Original logo palette rows are missing.');
+    const [dark, red, coral] = reds.colors;
+    const gold = golds.colors[1];
     const colors = [red,red,red,red,red,red,coral,gold,gold,gold,coral,gold,gold,dark,dark,dark];
     FACES.slice(0,16).forEach(function (face, index) { result[face.id] = colors[index]; });
     Object.entries(CORNER_PARENTS).forEach(function ([corner, owner]) { result[corner] = result[owner]; });
@@ -382,7 +387,10 @@ function presetFills(preset) {
 }
 
 function getPalettes(project) {
-  return PALETTES.concat(project && Array.isArray(project.customPalettes) ? project.customPalettes : []);
+  // Keep existing custom-row indices stable; fixed logo swatches come last.
+  return PALETTES.filter(function (row) { return !row.fixed; }).concat(
+    project && Array.isArray(project.customPalettes) ? project.customPalettes : [],
+    PALETTES.filter(function (row) { return row.fixed; }));
 }
 
 function mixHex(first, second, fraction) {
@@ -624,7 +632,11 @@ class Store {
     let suffix = 1;
     while (used.has('custom-' + suffix)) suffix += 1;
     const family = makeFamily(name,medium,'custom-' + suffix);
+    const selected = getPalettes(this.project)[this.project.settings.family];
+    if (!selected) throw new Error('Selected palette row is missing.');
+    const selectedId = selected.id;
     this.project.customPalettes.push(family);
+    this.project.settings.family = getPalettes(this.project).findIndex(function (row) { return row.id === selectedId; });
     this.project.updatedAt = now();
     return family;
   }

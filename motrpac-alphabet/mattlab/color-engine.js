@@ -175,7 +175,7 @@
       !Array.isArray(family.colors) || family.colors.length !== 3) {
       throw new Error('A color family needs an identifier, name, and three solid hex colors.');
     }
-    return {id:family.id, name:family.name, colors:family.colors.map(normalizeHex)};
+    return {id:family.id, name:family.name, colors:family.colors.map(normalizeHex), fixed:family.fixed === true};
   }
   function buildPalettes(seedFamilies, value) {
     if (!Array.isArray(seedFamilies) || seedFamilies.length > 256) throw new Error('Choose a valid array of color families.');
@@ -185,7 +185,7 @@
       const seed = checkedFamily(family);
       const base = hexToOklch(seed.colors[1]);
       let meta;
-      if (config.mode === 'reference') {
+      if (config.mode === 'reference' || seed.fixed) {
         meta = seed.colors.map(function (hex) {
           const lch = hexToOklch(hex);
           return {hex:hex, requested:lch, mapped:lch, actual:lch, gamutReduced:false,
@@ -200,6 +200,7 @@
       return {
         id:seed.id,
         name:seed.name,
+        fixed:seed.fixed,
         colors:meta.map(function (tone) { return tone.hex; }),
         seed:seed.colors[1],
         sourceColors:seed.colors.slice(),

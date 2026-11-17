@@ -80,8 +80,8 @@
   }
   const DESIGNS = ['nv-1','nv-2','original-warm'].map(function (id) {
     const name = id === 'original-warm' ? 'Original' : id.toUpperCase();
-    return {key:'@' + id, label:name, name:name, kind:'design', character:'',
-      note:id === 'original-warm' ? 'Warm reference scheme approximated with existing Cardinal and Mustard palette shades.' : 'Color arrangement with corners following the ending legs.',
+    return {key:id === 'original-warm' ? '@original-logo' : '@' + id, label:name, name:name, kind:'design', character:'',
+      note:id === 'original-warm' ? 'Warm reference scheme using the fixed Logo red and Logo gold palette rows.' : 'Color arrangement with corners following the ending legs.',
       cornerMode:'auto', outline:false, fills:followCorners(Core.presetFills(id))};
   });
   DESIGNS.forEach(function (design) { Object.freeze(design.fills); Object.freeze(design); });

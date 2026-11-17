@@ -22,9 +22,9 @@ const Edited = require('../edited-glyphs.js');
     const before = await read();
     const faceId = Object.keys(before.doc.bindings).find(id => before.doc.bindings[id]?.familyId === 'cardinal');
     assert.ok(faceId);
-    const pointForFace = async () => {
-      await page.locator(`#${faceId}`).scrollIntoViewIfNeeded();
-      return page.locator(`#${faceId}`).evaluate((/** @type {SVGGeometryElement} */ path) => {
+    const pointForFace = async (id = faceId) => {
+      await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+      return page.locator(`#${id}`).evaluate((/** @type {SVGGeometryElement} */ path) => {
       const box = path.getBBox();
       for (let x = 1; x < 10; x++) for (let y = 1; y < 10; y++) {
         const p = new DOMPoint(box.x + box.width*x/10, box.y + box.height*y/10);
@@ -187,6 +187,7 @@ const Edited = require('../edited-glyphs.js');
     legacy.documents['@nv-2'].fills['face-red_bottom-cell-1'] = '#161F27';
     legacy.documents['@nv-2'].bindings = {};
     legacy.documents['@nv-2'].touched = false;
+    legacy.documents['@original-warm'] = {...structuredClone(legacy.documents['@nv-1']),glyph:'@original-warm',name:'Original',touched:true};
     const untouchedOriginal = structuredClone(legacy);
     untouchedOriginal.documents['@original'].touched = false;
     untouchedOriginal.currentGlyph = '@original';
@@ -210,6 +211,8 @@ const Edited = require('../edited-glyphs.js');
     await page.selectOption('#galleryFilter','saved');
     assert.equal(await page.locator('.glyph-card[data-glyph="@tonal-weave"]').count(),1);
     assert.equal(await page.locator('.glyph-card[data-glyph="@original"]').count(),1);
+    assert.deepEqual((await read()).project.documents['@original-warm'].fills,legacy.documents['@original-warm'].fills);
+    assert.equal(await page.locator('.glyph-card[data-glyph="@original-warm"]').count(),1);
     assert.deepEqual(restored.documents['@original'].fills,legacy.documents['@original'].fills);
     // Explicitly edited NV-2 and Cardinal studies must survive a default refresh.
     const edited = (await read()).project;
@@ -223,6 +226,44 @@ const Edited = require('../edited-glyphs.js');
     await page.waitForTimeout(400);
     await page.reload();
     assert.equal(await page.locator('#galleryFilter').inputValue(),'saved');
+    // The Original preset must use the visible swatches and round-trip exactly,
+    // including after saving halfway through a cycle.
+    await page.selectOption('#galleryFilter','designs');
+    await page.locator('.glyph-card[data-glyph="@original-logo"]').click();
+    const original = await read();
+    for (const [id,binding] of Object.entries(original.doc.bindings)) {
+      assert.ok(binding);
+      const row = original.palettes.find((/** @type {{id:string}} */ item) => item.id === binding.familyId);
+      assert.equal(original.doc.fills[id],row.colors[binding.shade]);
+    }
+    for (const family of ['logo-gold','logo-red']) {
+      const id = Object.keys(original.doc.bindings).find(key => original.doc.bindings[key].familyId === family);
+      assert.ok(id);
+      const cycleLength = original.palettes.length - 1;
+      for (const direction of [1,-1]) {
+        for (let step = 0; step < cycleLength; step++) {
+          const point = await pointForFace(id);
+          if (direction < 0) await page.keyboard.down('Shift');
+          await page.mouse.click(point.x,point.y,{button:'right'});
+          if (direction < 0) await page.keyboard.up('Shift');
+          assert.equal((await read()).doc.bindings[id].shade, original.doc.bindings[id].shade);
+          if (step === 3) {
+            await page.waitForTimeout(400);
+            await page.reload();
+          }
+        }
+        assert.deepEqual((await read()).doc.fills,original.doc.fills);
+        assert.deepEqual((await read()).doc.bindings,original.doc.bindings);
+      }
+    }
+    await page.locator('#customFamilyName').fill('My blue');
+    await page.locator('#customHex').fill('#123456');
+    await page.locator('#addFamilyBtn').click();
+    const addedState = await read();
+    const selectedRow = addedState.palettes[addedState.project.settings.family];
+    assert.equal(selectedRow.name,'My blue');
+    assert.equal(addedState.project.settings.brush,selectedRow.colors[1]);
+    assert.deepEqual(addedState.doc.fills,original.doc.fills);
     assert.deepEqual(errors,[]);
     console.log('Row remapping, shade/blank click cycling, wheel tool selection, history, and safe starter migration pass.');
   } finally { await session.close(); }

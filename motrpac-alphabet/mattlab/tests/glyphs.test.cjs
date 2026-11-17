@@ -51,7 +51,7 @@ test('the latest ASCII sheet supplies all visible defaults; omitted symbols rema
 });
 
 test('NV presets replace Original and retain supplied colors with corrected automatic corners', () => {
-  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2','@original-warm']);
+  assert.deepEqual(Glyphs.DESIGNS.map(design => design.key), ['@nv-1','@nv-2','@original-logo']);
   assert.equal(Glyphs.getDesign('@original'), null);
   const expected = [
     ['#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#8C1515','#6B8196','#3E4D5B','#3E4D5B','#161F27','#161F27','#161F27'],
@@ -66,15 +66,33 @@ test('NV presets replace Original and retain supplied colors with corrected auto
 });
 
 
-test('warm Original uses existing swatches and keeps ending-leg corners linked', () => {
-  const design = Glyphs.getDesign('@original-warm');
+test('warm Original uses visible fixed swatches and keeps ending-leg corners linked', () => {
+  const design = Glyphs.getDesign('@original-logo');
   assert.ok(design);
   assert.equal(design.name, 'Original');
   const store = new Model.Store();
-  const swatches = new Set(Core.PALETTES.concat(Model.getPalettes(store.project)).flatMap(row => row.colors));
+  const swatches = new Set(Model.getPalettes(store.project).flatMap((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.colors));
   for (const color of Object.values(design.fills)) assert.ok(swatches.has(color));
   for (const [corner,owner] of Object.entries(Core.CORNER_PARENTS)) assert.equal(design.fills[corner],design.fills[owner]);
-  assert.equal(design.fills['face-red_bottom-cell-2'], '#E5AE4F');
-  assert.equal(design.fills['face-gray_top'], '#DF3531');
+  assert.equal(design.fills['face-red_bottom-cell-2'], '#FFBD43');
+  assert.equal(design.fills['face-gray_top'], '#FF5C50');
   for (const color of Object.values(design.fills)) assert.ok(store.inferBinding(color), 'Every preset color links to a palette row');
+});
+
+test('logo rows remain exact across palette controls and custom-row insertion preserves selection', () => {
+  const store = new Model.Store();
+  const expected = Model.getPalettes(store.project).filter((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.fixed).map((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.colors);
+  for (const mode of ['reference','perceptual','lightness','chroma']) {
+    store.updatePalette({mode,lightness:0.7,chroma:1.3});
+    assert.deepEqual(Model.getPalettes(store.project).filter((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.fixed).map((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.colors), expected);
+  }
+  store.project.settings.family = Model.getPalettes(store.project).findIndex((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.id === 'logo-gold');
+  const previous = store.project.settings.family;
+  const added = store.addFamily('My blue', '#123456');
+  assert.equal(Model.getPalettes(store.project)[store.project.settings.family].id, 'logo-gold');
+  assert.equal(Model.getPalettes(store.project).findIndex((/** @type {{id:string, fixed?:boolean, colors:string[]}} */ row) => row.id === added.id), 15);
+  const reopened = new Model.Store(store.toJSON());
+  assert.equal(Model.getPalettes(reopened.project)[reopened.project.settings.family].id, 'logo-gold');
+  assert.ok(store.undo());
+  assert.equal(store.project.settings.family, previous);
 });
