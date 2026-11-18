@@ -202,6 +202,7 @@ function measureTemplates() {
   els.shapeLayer.removeChild(group);
 }
 
+/** @returns {Record<string, ReturnType<typeof makeLetterState>>} */
 function makeEmptyLetters() {
   return LETTERS.reduce((acc, letter) => {
     acc[letter] = makeLetterState();
@@ -225,6 +226,11 @@ function defaultLetters() {
       variants: seeded[letter]
     };
   });
+  for (const [letter, shapes] of Object.entries(recoveredLetterShapes())) {
+    const recovered = shapes.map(makeShapeFromConfig);
+    if (letter === "B") letters.B.variants.push(recovered);
+    else letters[letter].variants[0] = recovered;
+  }
   letters.A.variants[0] = defaultAShapes();
   letters.D.variants[0] = defaultDShapes();
   letters.G.variants[0] = defaultGShapes();
@@ -299,6 +305,131 @@ function defaultAShapes() {
       lastLollipopTemplate: "lollipop-long-alt"
     })
   ];
+}
+
+// Editable shape settings recovered from the author’s July export and local editor project.
+function recoveredLetterShapes() {
+  return {
+    B: [
+      {
+        template: "lollipop-long", style: "green",
+        x: -1022.9800046055241, y: 213.32691303815244, angle: 2.103345344829904,
+        stemOffset: -18.719053470262438,
+        lastLollipopTemplate: "lollipop-long"
+      },
+      {
+        template: "lollipop-long", style: "blue",
+        x: -915.1977398738763, y: 2026.8287466805073, angle: 170.33634317271685,
+        stemOffset: -118.01677043416939,
+        lastLollipopTemplate: "lollipop-long"
+      },
+      {
+        template: "lollipop-short-left", style: "purple",
+        x: 1950.6396316984844, y: 450.0269466044759, angle: 153.7805960346799,
+        stemOffset: 783.7608865900488, stemSeedAngle: 188.61675760682772,
+        lastLollipopTemplate: "lollipop-short-left"
+      },
+      {
+        template: "lollipop-short-right", style: "yellow",
+        x: 1124.6604078926187, y: 640.3040241474883, angle: 214.9500430392868,
+        stemOffset: 721.6465048042738,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "double-stem", style: "purple",
+        x: 1460.8973728695873, y: 2247.9500709127565, angle: 171.51848386221695,
+        stemOffset: -42.198477555279396, stemSeedAngle: 152.3131360671564,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "circle", style: "red",
+        x: -1059.1142520476114, y: 195.44373420588747, angle: 0,
+        lastLollipopTemplate: null
+      }
+    ],
+    C: [
+      {
+        template: "circle", style: "purple",
+        x: 699.7461639354391, y: -119.2336909935005, angle: 0,
+        stemSeedAngle: 181.99709593507964,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "circle", style: "green",
+        x: 709.8147874162214, y: 1001.9456135234051, angle: 0,
+        lastLollipopTemplate: null
+      },
+      {
+        template: "curved-double-stem", style: "red",
+        x: 2050.7301204267574, y: 1749.8464893712187, angle: 269.48547558702126,
+        stemOffset: 125.90661348959338, stemSeedAngle: 270.152142253688,
+        curveOffset: -900, curveStartOffset: -1106.6666666666667, curveEndOffset: -1106.6666666666667,
+        curveStartPull: 49.3472, curveEndPull: 49.3472,
+        lastLollipopTemplate: null
+      }
+    ],
+    F: [
+      {
+        template: "lollipop-long", style: "green",
+        x: -824.8746964631846, y: 73.7638348448894, angle: 359.9925072326487,
+        stemOffset: 91.73181174957405, stemSeedAngle: 91.33667812614385,
+        lastLollipopTemplate: "lollipop-long"
+      },
+      {
+        template: "lollipop-short-right", style: "purple",
+        x: 1075.0322075103352, y: -411.36942772982553, angle: 216.81823503151588,
+        stemOffset: 436.79082545064244,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "lollipop-short-right", style: "blue",
+        x: 1075.1812905131792, y: 661.8915361254892, angle: 216.81891528581946,
+        stemOffset: 437.8829329640014,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "lollipop-long", style: "yellow",
+        x: -825.1203223570714, y: 2220.2349324605834, angle: 179.90480227705734,
+        stemOffset: 91.7106777489462, stemSeedAngle: 268.68828650444607,
+        lastLollipopTemplate: "lollipop-long"
+      },
+      {
+        template: "circle", style: "red",
+        x: -825.6445542913939, y: 167.0158983138922, angle: 0,
+        lastLollipopTemplate: null
+      }
+    ],
+    K: [
+      {
+        template: "lollipop-long", style: "green",
+        x: -1025.901, y: 374.465, angle: 359.94213419201606,
+        stemOffset: 818.1900823684482,
+        lastLollipopTemplate: "lollipop-long"
+      },
+      {
+        template: "lollipop-short-right", style: "purple",
+        x: 1125.1623175171687, y: -270.61425482894134, angle: 185.85499042673632,
+        stemOffset: 937.1071944746781,
+        lastLollipopTemplate: "lollipop-short-right"
+      },
+      {
+        template: "lollipop-short-left", style: "red",
+        x: 327.996603868188, y: 1114.1212369019966, angle: 356.4231225739052,
+        stemOffset: 895.6387804141226,
+        lastLollipopTemplate: "lollipop-short-left"
+      },
+      {
+        template: "circle", style: "blue",
+        x: -1025.727, y: 1394.471, angle: 0,
+        lastLollipopTemplate: null
+      },
+      {
+        template: "circle", style: "yellow",
+        x: 474.0419545302119, y: 1034.3055229738197, angle: 0,
+        lastLollipopTemplate: null
+      }
+    ],
+  };
 }
 
 function defaultDShapes() {
@@ -539,7 +670,7 @@ function seedAlphabetVariants() {
 function seedLetterPlans() {
   return {
     A: [["L4->C0", "R4->C0", "L2->R2"], ["L4->C0", "R4->C0", "C2->R2"]],
-    B: [["L0->L2", "L2->L4", "R1->L0", "R2->L2", "R3->L4"], ["L0->L4", "R0->L0", "L2->R2", "R2->L2", "R4->L4"]],
+    B: [["L4->L0", "L0->C0", "C0->R1", "R1->C2", "L2->C2", "C2->R3", "R3->C4", "C4->L4"], ["L0->L4", "R0->L0", "L2->R2", "R2->L2", "R4->L4"]],
     C: [["R0->C0", "C0->L1", "L1->L3", "L3->C4", "C4->R4"], ["R1->C0", "C0->L0", "L0->L3", "L3->C4", "C4->R3"]],
     D: [["L0->L4", "R1->L0", "R2->R1", "R3->L4"], ["L0->L4", "R0->L0", "R2->R0", "R3->R2", "R4->L4"]],
     E: [["L0->L4", "R0->L0", "R2->L2", "R4->L4"], ["L0->L4", "L1->R1", "L2->R2", "L4->R4"]],

@@ -42,3 +42,8 @@ formats; a font contains the finished outlines.
 Browser artifacts are written to ignored `tmp/output/alphabet-font/` at the
 repository root. The font writer adds no dependencies. See
 [summary.md](summary.md) for the editor’s geometry and persistence model.
+
+The starting C, F and K use recovered hand-edited shapes. B starts with two
+closed bowls and includes the July exported design as its third variant.
+Fresh projects and the editor’s reset-to-defaults action use these designs.
+Opening an existing project restores its saved variants and selections.
