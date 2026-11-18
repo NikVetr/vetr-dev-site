@@ -1,0 +1,342 @@
+{
+  "given": 4,
+  "trainingUsers": 156913,
+  "eligibleRevealTrainingUsers": 154192,
+  "validationUsers": 2000,
+  "testUsers": 3000,
+  "testRatings": 196480,
+  "criterion": "respondent-mean category log loss",
+  "validation": [
+    {
+      "reveal": "stars",
+      "revealStrength": 0.0,
+      "offsetVariance": 0.0,
+      "label": "stars",
+      "logLoss": 1.5894069451689352,
+      "rmse": 0.89975660363993,
+      "brier": 0.19122258610103376
+    },
+    {
+      "reveal": "stars",
+      "revealStrength": 0.0,
+      "offsetVariance": 0.25,
+      "label": "stars",
+      "logLoss": 1.5909556841684553,
+      "rmse": 0.9019380850869707,
+      "brier": 0.19155812319773535
+    },
+    {
+      "reveal": "stars",
+      "revealStrength": 0.0,
+      "offsetVariance": 1.0,
+      "label": "stars",
+      "logLoss": 1.5942266903639752,
+      "rmse": 0.906489866999479,
+      "brier": 0.19225007549622586
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.25,
+      "offsetVariance": 0.0,
+      "label": "genre",
+      "logLoss": 1.58848957957729,
+      "rmse": 0.8996396954970307,
+      "brier": 0.1911922730845576
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.25,
+      "offsetVariance": 0.25,
+      "label": "genre",
+      "logLoss": 1.590028168274912,
+      "rmse": 0.9018026974163014,
+      "brier": 0.1915261289778225
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.25,
+      "offsetVariance": 1.0,
+      "label": "genre",
+      "logLoss": 1.5932878628176441,
+      "rmse": 0.9063354395442962,
+      "brier": 0.19221699845665047
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.0,
+      "label": "genre",
+      "logLoss": 1.5877113160044598,
+      "rmse": 0.899532014442271,
+      "brier": 0.19116564250737647
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.25,
+      "label": "genre",
+      "logLoss": 1.5892389445427912,
+      "rmse": 0.9016757686976293,
+      "brier": 0.1914975592613914
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 0.5,
+      "offsetVariance": 1.0,
+      "label": "genre",
+      "logLoss": 1.592486525152818,
+      "rmse": 0.9061885244567279,
+      "brier": 0.19218705978357364
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 1.0,
+      "offsetVariance": 0.0,
+      "label": "genre",
+      "logLoss": 1.5865480817508997,
+      "rmse": 0.8993428846942769,
+      "brier": 0.19112278054110612
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 1.0,
+      "offsetVariance": 0.25,
+      "label": "genre",
+      "logLoss": 1.5880515787981209,
+      "rmse": 0.9014461934927708,
+      "brier": 0.1914501262041312
+    },
+    {
+      "reveal": "genre",
+      "revealStrength": 1.0,
+      "offsetVariance": 1.0,
+      "label": "genre",
+      "logLoss": 1.5912727546338215,
+      "rmse": 0.9059164478968628,
+      "brier": 0.1921361062483684
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.25,
+      "offsetVariance": 0.0,
+      "label": "title",
+      "logLoss": 1.5733394034852646,
+      "rmse": 0.8986985270053961,
+      "brier": 0.19096108806968995
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.25,
+      "offsetVariance": 0.25,
+      "label": "title",
+      "logLoss": 1.5748090542279114,
+      "rmse": 0.9008169121198153,
+      "brier": 0.19129368774436245
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.25,
+      "offsetVariance": 1.0,
+      "label": "title",
+      "logLoss": 1.5779796630961467,
+      "rmse": 0.9052686179109095,
+      "brier": 0.19198148408618945
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.0,
+      "label": "title",
+      "logLoss": 1.5690006468297037,
+      "rmse": 0.8983127565208937,
+      "brier": 0.19087037216825678
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.25,
+      "label": "title",
+      "logLoss": 1.570373968203718,
+      "rmse": 0.9003412701215644,
+      "brier": 0.19119011716076326
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 1.0,
+      "label": "title",
+      "logLoss": 1.5734278498767837,
+      "rmse": 0.904639067127402,
+      "brier": 0.1918612639372781
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 1.0,
+      "offsetVariance": 0.0,
+      "label": "title",
+      "logLoss": 1.5694131341940039,
+      "rmse": 0.8983222679732724,
+      "brier": 0.19088261470397883
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 1.0,
+      "offsetVariance": 0.25,
+      "label": "title",
+      "logLoss": 1.5705760119182972,
+      "rmse": 0.9001503543292492,
+      "brier": 0.19116182481440588
+    },
+    {
+      "reveal": "title",
+      "revealStrength": 1.0,
+      "offsetVariance": 1.0,
+      "label": "title",
+      "logLoss": 1.5733940110753033,
+      "rmse": 0.9041538809377256,
+      "brier": 0.19178812827994532
+    }
+  ],
+  "holdout": {
+    "baseline": {
+      "reveal": "stars",
+      "revealStrength": 0.0,
+      "offsetVariance": 0.0,
+      "label": "stars",
+      "logLoss": 1.5954739039222887,
+      "rmse": 0.9083057971971679,
+      "brier": 0.19425203729134255,
+      "pairedLogLossVersusBaseline": {
+        "difference": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "offsetOnly": {
+      "reveal": "stars",
+      "revealStrength": 0.0,
+      "offsetVariance": 0.25,
+      "label": "stars",
+      "logLoss": 1.5973613586238744,
+      "rmse": 0.9113158356395514,
+      "brier": 0.1946912358811885,
+      "pairedLogLossVersusBaseline": {
+        "difference": 0.001887454701589326,
+        "ci95": [
+          0.001258537709339668,
+          0.0025163716938389835
+        ]
+      }
+    },
+    "genreOnly": {
+      "reveal": "genre",
+      "revealStrength": 1.0,
+      "offsetVariance": 0.0,
+      "label": "genre",
+      "logLoss": 1.5925600548730259,
+      "rmse": 0.9080507580201859,
+      "brier": 0.19415123945035687,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.0029138490492629115,
+        "ci95": [
+          -0.00365686234854631,
+          -0.002170835749979513
+        ]
+      }
+    },
+    "titleOnly": {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.0,
+      "label": "title",
+      "logLoss": 1.5736339546691815,
+      "rmse": 0.9062214183102842,
+      "brier": 0.1936493940599734,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.021839949253107675,
+        "ci95": [
+          -0.02439291853530032,
+          -0.019286979970915028
+        ]
+      }
+    },
+    "combined": {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.25,
+      "label": "title",
+      "logLoss": 1.57547131596997,
+      "rmse": 0.9091373840252107,
+      "brier": 0.19410167330104947,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.020002587952319188,
+        "ci95": [
+          -0.022620909630677248,
+          -0.017384266273961127
+        ]
+      }
+    },
+    "selected": {
+      "reveal": "title",
+      "revealStrength": 0.5,
+      "offsetVariance": 0.0,
+      "label": "title",
+      "logLoss": 1.5736339546691815,
+      "rmse": 0.9062214183102842,
+      "brier": 0.1936493940599734,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.021839949253107675,
+        "ci95": [
+          -0.02439291853530032,
+          -0.019286979970915028
+        ]
+      }
+    }
+  },
+  "extremitySensitivity": [
+    {
+      "title": "Matrix, The (1999)",
+      "recorded": 70407,
+      "endpointToMiddleRecordingRatio": 1,
+      "mean": 4.153869643643388,
+      "chanceAtLeastFour": 0.7666993338730523
+    },
+    {
+      "title": "Matrix, The (1999)",
+      "recorded": 70407,
+      "endpointToMiddleRecordingRatio": 2,
+      "mean": 3.9863739364429076,
+      "chanceAtLeastFour": 0.686336178648165
+    },
+    {
+      "title": "Matrix, The (1999)",
+      "recorded": 70407,
+      "endpointToMiddleRecordingRatio": 4,
+      "mean": 3.8122009323372907,
+      "chanceAtLeastFour": 0.5939222507855231
+    },
+    {
+      "title": "Spirited Away (Sen to Chihiro no kamikakushi) (2001)",
+      "recorded": 21995,
+      "endpointToMiddleRecordingRatio": 1,
+      "mean": 4.213503068879291,
+      "chanceAtLeastFour": 0.7980450102295976
+    },
+    {
+      "title": "Spirited Away (Sen to Chihiro no kamikakushi) (2001)",
+      "recorded": 21995,
+      "endpointToMiddleRecordingRatio": 2,
+      "mean": 4.072347430048526,
+      "chanceAtLeastFour": 0.7294822243176544
+    },
+    {
+      "title": "Spirited Away (Sen to Chihiro no kamikakushi) (2001)",
+      "recorded": 21995,
+      "endpointToMiddleRecordingRatio": 4,
+      "mean": 3.9183599962605538,
+      "chanceAtLeastFour": 0.6468839168531038
+    }
+  ]
+}
