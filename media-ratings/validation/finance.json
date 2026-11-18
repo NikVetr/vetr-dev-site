@@ -1,0 +1,65 @@
+{
+  "given": 4,
+  "trainingUsers": 156913,
+  "validationUsers": 2000,
+  "testUsers": 3000,
+  "testRatings": 196480,
+  "fields": [
+    "budget",
+    "revenue"
+  ],
+  "coverage": {
+    "budget": 479,
+    "revenue": 481
+  },
+  "baseline": "finance 0%",
+  "selected": "finance 0%",
+  "bestPositiveWeight": "finance 10%",
+  "validation": [
+    {
+      "label": "finance 0%",
+      "logLoss": 1.5894069451689352,
+      "rmse": 0.89975660363993,
+      "brier": 0.19122258610103376
+    },
+    {
+      "label": "finance 10%",
+      "logLoss": 1.5898086735005965,
+      "rmse": 0.9002830383729585,
+      "brier": 0.19134596827655106
+    },
+    {
+      "label": "finance 25%",
+      "logLoss": 1.5917378725117008,
+      "rmse": 0.9029270897387255,
+      "brier": 0.1918528589521483
+    },
+    {
+      "label": "finance 50%",
+      "logLoss": 1.5973613681145675,
+      "rmse": 0.9104089305557924,
+      "brier": 0.19325765406493634
+    }
+  ],
+  "holdout": [
+    {
+      "label": "finance 0%",
+      "logLoss": 1.5954739039222887,
+      "rmse": 0.9083057971971678,
+      "brier": 0.19425203729134255
+    },
+    {
+      "label": "finance 10%",
+      "logLoss": 1.595491706478053,
+      "rmse": 0.9081842955361065,
+      "brier": 0.19431044304945508
+    }
+  ],
+  "finalistMinusBaselineLogLoss": {
+    "difference": 1.7802555764969232e-05,
+    "ci95": [
+      -0.0003035969995542083,
+      0.00033920211108414675
+    ]
+  }
+}
