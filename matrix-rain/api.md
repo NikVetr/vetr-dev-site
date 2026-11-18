@@ -1,10 +1,10 @@
 # Matrix Rain
 
-Use the settings panel to choose **Opening with reflection** or **Rain only**. Enter one hidden name or phrase per line. Each reads downward in a falling column, and the seed repeats its placement. **Add original lab names** appends the names from the R animation. Upload a PNG, JPEG or WebP to use your own reflection, or use the included green-lit portrait adapted from Nik’s headshot.
+Use the settings panel to choose **Opening with reflection** or **Rain only**. Enter one hidden name or phrase per line. Each reads downward in a falling column, and the seed repeats its placement. **Add original lab names** appends the names from the R animation. Upload a PNG, JPEG or WebP to use your own reflection, or use the included green-lit portrait adapted from Nik’s recent photograph.
 
 Play or scrub the 16-second preview. **Save frame as PNG** captures the current frame. **Record video** captures the full sequence at 960 × 540 using the browser’s video encoder. Keep the tab visible during recording. The file format depends on the available encoder.
 
-The opening draws on `montgomery_lab/Matrix_GreenRain.R` at `fa27daf`. The rain moves toward the title, which locks into place at the center. Once the title dissolves, a faint outline appears on the glass. The final zoom brings the reflection into focus as the rain blurs. CRT slots and image details magnify together. The landing card shows the title lock with its own title, “The Extracellular Matrix.”
+The opening draws on `montgomery_lab/Matrix_GreenRain.R` at `fa27daf`. The rain moves toward the title, which locks into place at the center. Once the title dissolves, a faint outline appears at the bottom edge of the glass. The camera moves in toward the face as the rain blurs. For an uploaded portrait, crop the image where the torso should meet the bottom of the screen. CRT slots and image details magnify together. The landing card shows the title lock with its own title, “The Extracellular Matrix.”
 
 ## Frame API
 

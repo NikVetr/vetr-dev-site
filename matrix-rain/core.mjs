@@ -11,6 +11,8 @@ const columns = 84,
   rows = 30,
   dx = 960 / columns,
   dy = 540 / rows;
+const finalZoom = 12;
+const reflectionSize = 1 / 8;
 
 export function makeScene({
   title = 'The Correlation Matrix',
@@ -103,7 +105,7 @@ export function frame(scene, time) {
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
   const focus = opening ? ease(time, 13.85, 16) : 0;
-  const zoom = opening ? 1 + (titleZoom - 1) * ease(time, 6, 10) + (12 - titleZoom) * focus : 1;
+  const zoom = opening ? 1 + (titleZoom - 1) * ease(time, 6, 10) + (finalZoom - titleZoom) * focus : 1;
   const center = columns / 2 + (scene.centerColumn - columns / 2) * (opening ? ease(time, 6, 10) : 0);
   const glyphs = [];
   for (const [i, s] of scene.streams.entries()) {
@@ -146,7 +148,7 @@ export function frame(scene, time) {
     size: dy * zoom,
     outlineAlpha: opening ? 0.62 * ease(time, 12.8, 13.42) * (1 - focus) : 0,
     imageAlpha: focus,
-    imageZoom: zoom / 8,
+    imageZoom: zoom * reflectionSize,
     maskPitch: 1.25 * zoom,
     rainAlpha: 1 - 0.84 * focus,
     rainBlur: 8 * focus,
@@ -263,18 +265,23 @@ export function paint(ctx, f, image) {
     ctx.restore();
   } else drawGlyphs(ctx, f);
   if (image && (f.outlineAlpha > 0 || f.imageAlpha > 0)) {
-    const scale = Math.min(960 / image.width, 540 / image.height) * f.imageZoom;
-    const w = image.width * scale,
-      h = image.height * scale;
+    const fit = Math.min(960 / image.width, 540 / image.height);
+    const w = image.width * fit * f.imageZoom,
+      h = image.height * fit * f.imageZoom;
+    // The shirt meets the bezel on first reveal. As the camera moves in,
+    // let the lower torso pass below the glass so the face stays in view.
+    const finalHeight = image.height * fit * finalZoom * reflectionSize;
+    const x = (960 - w) / 2,
+      y = 540 - h + f.imageAlpha * Math.max(0, finalHeight - 540);
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
     if (f.outlineAlpha > 0) {
       ctx.globalAlpha = f.outlineAlpha;
-      ctx.drawImage(outlineOf(image), (960 - w) / 2, 270 - 0.37 * h, w, h);
+      ctx.drawImage(outlineOf(image), x, y, w, h);
     }
     if (f.imageAlpha > 0) {
       ctx.globalAlpha = f.imageAlpha;
-      ctx.drawImage(image, (960 - w) / 2, 270 - 0.37 * h, w, h);
+      ctx.drawImage(image, x, y, w, h);
     }
     ctx.restore();
   }
