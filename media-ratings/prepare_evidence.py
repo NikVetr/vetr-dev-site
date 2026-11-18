@@ -1,4 +1,7 @@
 """Aggregate marginal and paired rating counts for the browser's evidence view."""
+from array import array
+import gzip
+import sys
 import argparse
 import csv
 import json
@@ -32,7 +35,7 @@ def aggregate(catalog, ratings_path, links_path=None):
     for scores in users.values():
         for (i, a), (j, b) in combinations(sorted(scores.items()), 2):
             pairs[j*(j-1)//2+i][a*n+b] += 1
-    data: dict[str, object] = dict(ids=ids, scale=scale, counts=counts, pairs=pairs)
+    data: dict = dict(ids=ids, scale=scale, counts=counts, pairs=pairs)
     if links_path:
         with links_path.open(newline="", encoding="utf-8-sig") as source:
             data["imdb"] = {row["movieId"]: row["imdbId"] for row in csv.DictReader(source)
@@ -45,6 +48,16 @@ if __name__ == "__main__":
     for arg in ["catalog", "ratings", "output"]:
         parser.add_argument(arg, type=Path)
     parser.add_argument("--links", type=Path)
+    parser.add_argument("--pack-pairs", action="store_true", help="Store triangular grids as gzipped little-endian uint16 counts.")
     args = parser.parse_args()
     result = aggregate(json.loads(args.catalog.read_text()), args.ratings, args.links)
+    if args.pack_pairs:
+        packed = array('H', (n for row in result.pop('pairs') for n in row))
+        if packed.itemsize != 2:
+            raise ValueError('Expected two-byte unsigned shorts')
+        if sys.byteorder != 'little':
+            packed.byteswap()
+        target = args.output.with_suffix('.bin.gz')
+        target.write_bytes(gzip.compress(packed.tobytes(), mtime=0))
+        result['packedFile'] = target.name
     args.output.write_text(json.dumps(result, separators=(",", ":"))+"\n")

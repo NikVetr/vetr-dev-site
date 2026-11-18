@@ -3,7 +3,7 @@ source("media-ratings/fit.R")
 source("media-ratings/latent_class.R")
 
 candidate_grid <- function(scale, search = list()) {
-  allowed <- c("ordinalK","classK","priorStrength")
+  allowed <- c("ordinalK","classK","priorStrength","families")
   if (!is.list(search) || length(setdiff(names(search),allowed))) stop("Unknown search grid option.")
   values <- function(name, default, integer = FALSE) {
     x <- if (name %in% names(search)) unlist(search[[name]]) else default
@@ -21,6 +21,11 @@ candidate_grid <- function(scale, search = list()) {
   grid <- rbind(dense, classes)
   if (min(scale) > 0) grid <- rbind(grid, data.frame(k = 1L, strength = NA_integer_,
                                                      model = "reference", family = "logit-point"))
+  if (!is.null(search$families)) {
+    families <- unlist(search$families)
+    if (!length(families) || !all(families %in% grid$family)) stop("Unknown model family.")
+    grid <- grid[grid$family %in% families,,drop = FALSE]
+  }
   grid
 }
 
@@ -104,6 +109,7 @@ select_catalog <- function(ratings, items, template_file, out_catalog, out_repor
   test$mse <- NULL
   # Preserve existing public keys and include the CV winner for each family.
   legacy <- candidate_grid(template$scale)
+  legacy <- legacy[legacy$family %in% grid$family,]
   keep <- c(best_family,"ordinal","ordinal1","reference")
   release <- grid[grid$model %in% keep,]
   release <- rbind(release,legacy[legacy$model %in% keep & !legacy$model %in% release$model,])
@@ -119,7 +125,7 @@ select_catalog <- function(ratings, items, template_file, out_catalog, out_repor
            ifelse(spec$family == "ordinal-probit", paste0("Ordinal probit, K=",spec$k),
                   paste0("Latent class, K=",spec$k,", prior=",spec$strength)))
   }
-  template$selection <- list(model = key(winner), ordinalModel = key(best_family[1]),
+  template$selection <- list(model = key(winner), ordinalModel = if ("ordinal-probit" %in% grid$family) key(unname(best_family[1])) else NULL,
     metric = "user-mean category log loss", folds = 4, validationUsers = scores$users[1],
     testUsers = test$users[1], testRatings = test$targets[1],
     cv = transform(scores[order(scores$logLoss),], label = labels(model))[,c("label","logLoss","rmse","brier")],

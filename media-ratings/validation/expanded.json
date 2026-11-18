@@ -1,0 +1,479 @@
+{
+  "catalog": "MovieLens 25M · 500 most-rated films",
+  "splitSeed": 1789,
+  "winner": "class8_prior8",
+  "grid": [
+    {
+      "k": 1,
+      "strength": 8,
+      "model": "class1_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 2,
+      "strength": 8,
+      "model": "class2_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 4,
+      "strength": 8,
+      "model": "class4_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 8,
+      "strength": 8,
+      "model": "class8_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 1,
+      "strength": 64,
+      "model": "class1_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 2,
+      "strength": 64,
+      "model": "class2_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 4,
+      "strength": 64,
+      "model": "class4_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 8,
+      "strength": 64,
+      "model": "class8_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 1,
+      "strength": null,
+      "model": "reference",
+      "family": "logit-point"
+    }
+  ],
+  "cv": [
+    {
+      "model": "class1_prior8",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.77925236311,
+      "rmse": 0.9647264902355,
+      "brier": 0.2150191758664
+    },
+    {
+      "model": "class2_prior8",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.696140663917,
+      "rmse": 0.9500446484396,
+      "brier": 0.2081834498601
+    },
+    {
+      "model": "class4_prior8",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.670985813543,
+      "rmse": 0.9328855759473,
+      "brier": 0.2021315868605
+    },
+    {
+      "model": "class8_prior8",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.663032302231,
+      "rmse": 0.9254651044445,
+      "brier": 0.1995934197336
+    },
+    {
+      "model": "class1_prior64",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.777452703112,
+      "rmse": 0.9647034699322,
+      "brier": 0.2150087185829
+    },
+    {
+      "model": "class2_prior64",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.706774264646,
+      "rmse": 0.9510977485651,
+      "brier": 0.2086396364744
+    },
+    {
+      "model": "class4_prior64",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.693152446209,
+      "rmse": 0.9429052176551,
+      "brier": 0.2060690539317
+    },
+    {
+      "model": "class8_prior64",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.69679415814,
+      "rmse": 0.9398860051269,
+      "brier": 0.2048088265509
+    },
+    {
+      "model": "reference",
+      "users": 4123,
+      "targets": 269125,
+      "logLoss": 1.93753037468,
+      "rmse": 0.9107533267614,
+      "brier": 0.198424156128
+    }
+  ],
+  "folds": [
+    {
+      "model": "class1_prior8",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.757203290047,
+      "mse": 0.8864544695082,
+      "brier": 0.2116242090356,
+      "fold": 1
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.674089003197,
+      "mse": 0.8594875696605,
+      "brier": 0.2046176133587,
+      "fold": 1
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.646253064998,
+      "mse": 0.8274828907898,
+      "brier": 0.1980028195783,
+      "fold": 1
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.641096689952,
+      "mse": 0.8158964611001,
+      "brier": 0.1959690078324,
+      "fold": 1
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.756002720224,
+      "mse": 0.8864207971668,
+      "brier": 0.2116154303598,
+      "fold": 1
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.686029399964,
+      "mse": 0.858401846639,
+      "brier": 0.2045988769002,
+      "fold": 1
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.672519162372,
+      "mse": 0.8444219065582,
+      "brier": 0.2020331050982,
+      "fold": 1
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.676115214552,
+      "mse": 0.8390364638152,
+      "brier": 0.2011410990415,
+      "fold": 1
+    },
+    {
+      "model": "reference",
+      "users": 1033,
+      "targets": 68982,
+      "logLoss": 1.924395095843,
+      "mse": 0.802473725494,
+      "brier": 0.1966406412124,
+      "fold": 1
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.786652000079,
+      "mse": 0.9599320075871,
+      "brier": 0.2140384933824,
+      "fold": 2
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.707162683812,
+      "mse": 0.9298877753981,
+      "brier": 0.2073220898795,
+      "fold": 2
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.675624626863,
+      "mse": 0.9000540867833,
+      "brier": 0.202074620161,
+      "fold": 2
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.670742890641,
+      "mse": 0.8860026103989,
+      "brier": 0.1988066362711,
+      "fold": 2
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.784406266725,
+      "mse": 0.9598775967889,
+      "brier": 0.2140250449583,
+      "fold": 2
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.714788665775,
+      "mse": 0.9332703652057,
+      "brier": 0.2077754787634,
+      "fold": 2
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.70122801652,
+      "mse": 0.9209003980859,
+      "brier": 0.2059159241469,
+      "fold": 2
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.701972408207,
+      "mse": 0.9101492503157,
+      "brier": 0.20318310234,
+      "fold": 2
+    },
+    {
+      "model": "reference",
+      "users": 1031,
+      "targets": 65351,
+      "logLoss": 1.935940048317,
+      "mse": 0.8504508089415,
+      "brier": 0.1966098529243,
+      "fold": 2
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.775907607815,
+      "mse": 0.9301545720564,
+      "brier": 0.2158386131743,
+      "fold": 3
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.682576412638,
+      "mse": 0.9060715456263,
+      "brier": 0.2096851032009,
+      "fold": 3
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.669570024381,
+      "mse": 0.8766525303855,
+      "brier": 0.2036240625404,
+      "fold": 3
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.655972922363,
+      "mse": 0.860042995977,
+      "brier": 0.2009952587193,
+      "fold": 3
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.77401978875,
+      "mse": 0.930107700438,
+      "brier": 0.2158308108838,
+      "fold": 3
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.69642054892,
+      "mse": 0.9069734281981,
+      "brier": 0.2100018656534,
+      "fold": 3
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.686113824996,
+      "mse": 0.8896873583985,
+      "brier": 0.2070965971222,
+      "fold": 3
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.694003216692,
+      "mse": 0.8892155604328,
+      "brier": 0.2066643336443,
+      "fold": 3
+    },
+    {
+      "model": "reference",
+      "users": 1029,
+      "targets": 67248,
+      "logLoss": 1.942859645496,
+      "mse": 0.8320196256818,
+      "brier": 0.1998985013521,
+      "fold": 3
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.797300343654,
+      "mse": 0.9463477068898,
+      "brier": 0.2185870238152,
+      "fold": 4
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.720774913993,
+      "mse": 0.9149948488896,
+      "brier": 0.2111216731204,
+      "fold": 4
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.692561696807,
+      "mse": 0.8770144019869,
+      "brier": 0.2048383750111,
+      "fold": 4
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.684366256327,
+      "mse": 0.8640935881588,
+      "brier": 0.2026154575273,
+      "fold": 4
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.795434428467,
+      "mse": 0.9463049734233,
+      "brier": 0.2185752246641,
+      "fold": 4
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.72990103274,
+      "mse": 0.9198110579057,
+      "brier": 0.2121962553237,
+      "fold": 4
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.712794203919,
+      "mse": 0.9013710746772,
+      "brier": 0.2092434908347,
+      "fold": 4
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.715138285964,
+      "mse": 0.8952503845395,
+      "brier": 0.2082608337156,
+      "fold": 4
+    },
+    {
+      "model": "reference",
+      "users": 1030,
+      "targets": 67544,
+      "logLoss": 1.946971685213,
+      "mse": 0.8330030690084,
+      "brier": 0.2005560165895,
+      "fold": 4
+    }
+  ],
+  "holdout": [
+    {
+      "model": "class8_prior8",
+      "users": 1032,
+      "targets": 67554,
+      "logLoss": 1.643247307442,
+      "brier": 0.198360025306,
+      "rmse": 0.9397257705329
+    },
+    {
+      "model": "reference",
+      "users": 1032,
+      "targets": 67554,
+      "logLoss": 1.934702900464,
+      "brier": 0.1970208368113,
+      "rmse": 0.9225245828116
+    }
+  ]
+}
