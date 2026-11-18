@@ -4,8 +4,8 @@ import { pnorm, pnormInterval, qnorm } from '../intuitions/lib/normal.js';
 import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
-/** @typedef {{weight:number,mean:number[],covariance:number[][]}} Component */
-/** @typedef {{kind:string,cuts:number[],endpoint?:number,components:Component[]}} Model */
+/** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components:Component[]}} Model */
 /** @typedef {{name:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
 /** @typedef {{model:string,ratings?:Record<string,number>,threshold?:number,samples?:number}} Request */
 /** @param {number[]} a */
@@ -46,6 +46,32 @@ export function validateCatalog(catalog) {
     requireValue(model && typeof model === 'object', 'Expected model parameters.');
     const { kind, components, cuts } = model;
     requireValue(
+      Array.isArray(components) &&
+        components.length &&
+        components.every((c) => c && typeof c === 'object') &&
+        Math.abs(components.reduce((s, c) => s + c.weight, 0) - 1) < 1e-7,
+      'Component weights must sum to one.',
+    );
+    if (kind === 'latent-class') {
+      for (const { weight, probabilities } of components) {
+        requireValue(
+          Number.isFinite(weight) &&
+            weight > 0 &&
+            Array.isArray(probabilities) &&
+            probabilities.length === d &&
+            probabilities.every(
+              (row) =>
+                Array.isArray(row) &&
+                row.length === scale.length &&
+                row.every((p) => Number.isFinite(p) && p >= 0 && p <= 1) &&
+                Math.abs(row.reduce((sum, p) => sum + p, 0) - 1) < 1e-8,
+            ),
+          'Each latent-class item needs a probability distribution on the rating scale.',
+        );
+      }
+      continue;
+    }
+    requireValue(
       ['ordinal-probit', 'logit-point'].includes(kind) &&
         increasing(cuts) &&
         cuts.length === scale.length - 1,
@@ -60,13 +86,6 @@ export function validateCatalog(catalog) {
           components?.length === 1,
         'Invalid logit reference.',
       );
-    requireValue(
-      Array.isArray(components) &&
-        components.length &&
-        components.every((c) => c && typeof c === 'object') &&
-        Math.abs(components.reduce((s, c) => s + c.weight, 0) - 1) < 1e-7,
-      'Component weights must sum to one.',
-    );
     for (const { weight, mean, covariance: S } of components) {
       requireValue(
         Number.isFinite(weight) &&
@@ -146,6 +165,68 @@ function draws(component, model, obs, values, scale, L, uniform) {
 /** @param {number[]} scale */
 export const defaultCutoff = (scale) => scale[Math.round((scale.length - 1) * 0.75)];
 
+function summarize(item, probs, prior, personalized, scale, threshold) {
+  const expected = dot(probs, scale);
+  const variance = probs.reduce((v, p, j) => v + p * (scale[j] - expected) ** 2, 0);
+  const chance = probs.slice(scale.indexOf(threshold)).reduce((a, b) => a + b, 0);
+  return {
+    ...item,
+    expected,
+    prior: personalized ? prior : expected,
+    shift: personalized ? expected - prior : 0,
+    sd: Math.sqrt(variance),
+    chance,
+    probabilities: probs,
+  };
+}
+
+// Each observation updates a class likelihood once. Given the class, target
+// distributions are already tabulated, so no draws or factorizations are needed.
+function predictLatentClass(model, items, scale, obs, values, threshold) {
+  const logWeights = model.components.map((c) =>
+    obs.reduce((sum, i, j) => sum + Math.log(c.probabilities[i][values[j]]), Math.log(c.weight)),
+  );
+  const max = Math.max(...logWeights);
+  requireValue(Number.isFinite(max), 'All classes assign zero probability to these observations.');
+  const masses = logWeights.map((logWeight) => Math.exp(logWeight - max));
+  const total = masses.reduce((a, b) => a + b);
+  const weights = model.components.map((c, g) => ({
+    prior: c.weight,
+    posterior: masses[g] / total,
+    effectiveSamples: null,
+  }));
+  const observed = new Set(obs);
+  const predictions = [];
+  for (const [i, item] of items.entries()) {
+    if (observed.has(i)) continue;
+    const probs = scale.map(() => 0);
+    let prior = 0;
+    for (const [g, c] of model.components.entries()) {
+      const distribution = c.probabilities[i];
+      prior += c.weight * dot(distribution, scale);
+      for (let j = 0; j < scale.length; j++) probs[j] += weights[g].posterior * distribution[j];
+    }
+    predictions.push(summarize(item, probs, prior, obs.length > 0, scale, threshold));
+  }
+  return { scale, threshold, weights, predictions: predictions.sort((a, b) => b.expected - a.expected) };
+}
+
+// Evaluate each shared category boundary once, using the smaller normal tail.
+function accumulateNormal(probs, cuts, mean, sd, weight) {
+  let previousTail = 0,
+    previousRight = false;
+  for (let j = 0; j < cuts.length; j++) {
+    const z = (cuts[j] - mean) / sd,
+      right = z > 0,
+      tail = pnorm(-Math.abs(z));
+    const mass = previousRight ? previousTail - tail : right ? 1 - previousTail - tail : tail - previousTail;
+    probs[j] += weight * mass;
+    previousTail = tail;
+    previousRight = right;
+  }
+  probs[cuts.length] += weight * (previousRight ? previousTail : 1 - previousTail);
+}
+
 /** Predict with a previously validated catalog. Each observation is an itemId → rating pair.
  * @param {Catalog} catalog @param {Request} request */
 export function predict(
@@ -169,6 +250,7 @@ export function predict(
     requireValue(indices.has(id) && scale.includes(v), 'Unknown item or rating outside the scale.');
   const obs = items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => scale.indexOf(ratings[items[i].itemId]));
+  if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);
   const uniform = model.kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
   const blocks = model.components.map((c) => {
     const L = cholesky(obs.map((i) => obs.map((j) => c.covariance[i][j])));
@@ -200,21 +282,10 @@ export function predict(
         const w = weights[g][s] / total;
         if (!w) continue;
         const m = c.mean[i] + dot(beta, state.z);
-        for (let t = 0; t < scale.length; t++) probs[t] += w * pnormInterval(cuts[t], cuts[t + 1], m, condSD);
+        accumulateNormal(probs, model.cuts, m, condSD, w);
       }
     }
-    const expected = dot(probs, scale);
-    const variance = probs.reduce((v, p, j) => v + p * (scale[j] - expected) ** 2, 0);
-    const chance = probs.slice(scale.indexOf(threshold)).reduce((a, b) => a + b, 0);
-    predictions.push({
-      ...items[i],
-      expected,
-      prior: obs.length ? prior : expected,
-      shift: obs.length ? expected - prior : 0,
-      sd: Math.sqrt(variance),
-      chance,
-      probabilities: probs,
-    });
+    predictions.push(summarize(items[i], probs, prior, obs.length > 0, scale, threshold));
   }
   return {
     threshold,

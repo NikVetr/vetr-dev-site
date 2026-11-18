@@ -143,3 +143,54 @@ test('a polarizing film can win on expected stars and lose on the chance of four
   close(polarizing.chance, 0.8, 1e-6);
   assert.ok(consistent.sd < polarizing.sd);
 });
+
+test('categorical class likelihoods, missing items and uncertainty have exact finite-mixture predictions', () => {
+  const catalog = {
+    name: 'Class example',
+    scale: [1, 5],
+    items: ['a', 'b', 'c'].map((itemId) => ({ itemId, title: itemId })),
+    models: {
+      m: {
+        kind: 'latent-class',
+        components: [
+          {
+            weight: 0.4,
+            probabilities: [
+              [0.8, 0.2],
+              [0.4, 0.6],
+              [1, 0],
+            ],
+          },
+          {
+            weight: 0.6,
+            probabilities: [
+              [0.1, 0.9],
+              [0.2, 0.8],
+              [0, 1],
+            ],
+          },
+        ],
+      },
+    },
+  };
+  const score = (ratings) => submit({ catalog, model: 'm', ratings, threshold: 5 });
+  assert.deepEqual(
+    score({}).weights.map((w) => w.posterior),
+    [0.4, 0.6],
+  );
+  const r = score({ a: 5, b: 1 });
+  const p = (0.6 * 0.9 * 0.2) / (0.4 * 0.2 * 0.4 + 0.6 * 0.9 * 0.2);
+  close(r.weights[1].posterior, p);
+  close(r.predictions[0].chance, p);
+  close(r.predictions[0].expected, 1 + 4 * p);
+  close(r.predictions[0].sd, 4 * Math.sqrt(p * (1 - p)));
+  close(r.predictions[0].prior, 1 + 4 * 0.6);
+  assert.equal(score({ a: 1, b: 1, c: 1 }).predictions.length, 0);
+  assert.deepEqual(
+    score({ c: 1 }).weights.map((w) => w.posterior),
+    [1, 0],
+  );
+  const bad = structuredClone(catalog);
+  bad.models.m.components[0].probabilities[0] = [1, 1];
+  assert.throws(() => submit({ catalog: bad, model: 'm' }), /probability distribution/);
+});

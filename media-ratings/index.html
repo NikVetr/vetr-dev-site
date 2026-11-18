@@ -55,6 +55,12 @@
               </select></label
             ><label>Rating cutoff<select id="threshold"></select></label>
           </div>
+          <details id="validation" hidden>
+            <summary>Compare validation scores</summary>
+            <p id="evaluation"></p>
+            <p>Lower scores are better. Log loss measures the full rating distribution, RMSE measures expected-rating error and the Brier score measures the catalog’s default cutoff event. K is the component count. Prior is the number of pooled ratings used to smooth each item within a class.</p>
+            <div id="scores" class="tablewrap"></div>
+          </details>
           <p id="weights"></p>
           <div class="tablewrap">
             <table>
@@ -80,10 +86,11 @@
               floored at 0.01 squared rating units.
             </p>
             <p>
-              The historical reference treats ratings as points on a logit scale. The experimental ordinal
+              The historical reference treats ratings as points on a logit scale. The ordinal
               model treats them as intervals and updates the probability of each taste component. Its
-              predictions integrate over latent ratings. Both models report expectations on the displayed
-              rating scale.
+              predictions integrate over latent ratings. The latent-class model instead learns a separate distribution
+              over the rating categories for each item in each class. Given a class, items are independent.
+              All models report expectations on the displayed rating scale.
             </p>
           </details>
         </section>

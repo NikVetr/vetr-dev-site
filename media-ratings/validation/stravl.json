@@ -1,0 +1,579 @@
+{
+  "catalog": "Stravl · destination preferences",
+  "splitSeed": 1789,
+  "winner": "class8_prior8",
+  "grid": [
+    {
+      "k": 1,
+      "strength": null,
+      "model": "ordinal1",
+      "family": "ordinal-probit"
+    },
+    {
+      "k": 2,
+      "strength": null,
+      "model": "ordinal",
+      "family": "ordinal-probit"
+    },
+    {
+      "k": 4,
+      "strength": null,
+      "model": "ordinal4",
+      "family": "ordinal-probit"
+    },
+    {
+      "k": 1,
+      "strength": 8,
+      "model": "class1_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 2,
+      "strength": 8,
+      "model": "class2_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 4,
+      "strength": 8,
+      "model": "class4_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 8,
+      "strength": 8,
+      "model": "class8_prior8",
+      "family": "latent-class"
+    },
+    {
+      "k": 1,
+      "strength": 64,
+      "model": "class1_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 2,
+      "strength": 64,
+      "model": "class2_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 4,
+      "strength": 64,
+      "model": "class4_prior64",
+      "family": "latent-class"
+    },
+    {
+      "k": 8,
+      "strength": 64,
+      "model": "class8_prior64",
+      "family": "latent-class"
+    }
+  ],
+  "cv": [
+    {
+      "model": "ordinal1",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6929748531985,
+      "rmse": 0.8150290010372,
+      "brier": 0.1780017154617
+    },
+    {
+      "model": "ordinal",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6965474343244,
+      "rmse": 0.8165755961911,
+      "brier": 0.1783897352575
+    },
+    {
+      "model": "ordinal4",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6865396017152,
+      "rmse": 0.8159547660888,
+      "brier": 0.177972546594
+    },
+    {
+      "model": "class1_prior8",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.7980404663068,
+      "rmse": 0.9642851628523,
+      "brier": 0.2410876968436
+    },
+    {
+      "model": "class2_prior8",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6510704545443,
+      "rmse": 0.8295133039031,
+      "brier": 0.1852740531913
+    },
+    {
+      "model": "class4_prior8",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6125298866532,
+      "rmse": 0.8190228685513,
+      "brier": 0.1772527604258
+    },
+    {
+      "model": "class8_prior8",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6091654530741,
+      "rmse": 0.8159959173422,
+      "brier": 0.175995717301
+    },
+    {
+      "model": "class1_prior64",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.7980406842602,
+      "rmse": 0.9642854048762,
+      "brier": 0.2410878008734
+    },
+    {
+      "model": "class2_prior64",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6599482185238,
+      "rmse": 0.8367954400642,
+      "brier": 0.1883403023249
+    },
+    {
+      "model": "class4_prior64",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6384702005239,
+      "rmse": 0.8350617276649,
+      "brier": 0.1839527827497
+    },
+    {
+      "model": "class8_prior64",
+      "users": 4737,
+      "targets": 5035,
+      "logLoss": 0.6386296450929,
+      "rmse": 0.8351334695906,
+      "brier": 0.1839808419768
+    }
+  ],
+  "folds": [
+    {
+      "model": "ordinal1",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6848256868885,
+      "mse": 0.6628668315152,
+      "brier": 0.1778783412718,
+      "fold": 1
+    },
+    {
+      "model": "ordinal",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6938427439692,
+      "mse": 0.6662681961523,
+      "brier": 0.1790979948384,
+      "fold": 1
+    },
+    {
+      "model": "ordinal4",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6818903256208,
+      "mse": 0.6691841637145,
+      "brier": 0.1792039968555,
+      "fold": 1
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.7896339554306,
+      "mse": 0.926476014287,
+      "brier": 0.2397612405806,
+      "fold": 1
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6416502435341,
+      "mse": 0.6868088132357,
+      "brier": 0.1851927541079,
+      "fold": 1
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.5979896361129,
+      "mse": 0.6628076639294,
+      "brier": 0.1740358995001,
+      "fold": 1
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.5943662494283,
+      "mse": 0.6585289861697,
+      "brier": 0.1729146357828,
+      "fold": 1
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.7896341538248,
+      "mse": 0.9264767109077,
+      "brier": 0.2397613886365,
+      "fold": 1
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6515005131753,
+      "mse": 0.7011967152373,
+      "brier": 0.1888452359872,
+      "fold": 1
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6258035681172,
+      "mse": 0.6946376963542,
+      "brier": 0.1825471364369,
+      "fold": 1
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1195,
+      "targets": 1273,
+      "logLoss": 0.6259354789914,
+      "mse": 0.6947350641257,
+      "brier": 0.1825707000724,
+      "fold": 1
+    },
+    {
+      "model": "ordinal1",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.7014714185824,
+      "mse": 0.6725332337595,
+      "brier": 0.1797512743908,
+      "fold": 2
+    },
+    {
+      "model": "ordinal",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.7069930060469,
+      "mse": 0.6834781443914,
+      "brier": 0.1817931905489,
+      "fold": 2
+    },
+    {
+      "model": "ordinal4",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6998508995217,
+      "mse": 0.6763689453705,
+      "brier": 0.1800702096124,
+      "fold": 2
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.7972723789242,
+      "mse": 0.9310824083867,
+      "brier": 0.241068187979,
+      "fold": 2
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6526227759916,
+      "mse": 0.6922012043571,
+      "brier": 0.1858374045939,
+      "fold": 2
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6146027814638,
+      "mse": 0.6775759158644,
+      "brier": 0.1785062918721,
+      "fold": 2
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6118208507094,
+      "mse": 0.672795239033,
+      "brier": 0.1773130511185,
+      "fold": 2
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.7972723235202,
+      "mse": 0.9310823287961,
+      "brier": 0.2410681723254,
+      "fold": 2
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6611673599894,
+      "mse": 0.7026821399314,
+      "brier": 0.1884870248041,
+      "fold": 2
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6386042439124,
+      "mse": 0.7003967152493,
+      "brier": 0.1843700819081,
+      "fold": 2
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1179,
+      "targets": 1256,
+      "logLoss": 0.6387951300661,
+      "mse": 0.700560232646,
+      "brier": 0.1844075356877,
+      "fold": 2
+    },
+    {
+      "model": "ordinal1",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.7071764580332,
+      "mse": 0.6859077862149,
+      "brier": 0.1821944076273,
+      "fold": 3
+    },
+    {
+      "model": "ordinal",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6981762402028,
+      "mse": 0.6754714654874,
+      "brier": 0.1794943117669,
+      "fold": 3
+    },
+    {
+      "model": "ordinal4",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6885657190777,
+      "mse": 0.6742381400537,
+      "brier": 0.1793460596151,
+      "fold": 3
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.7982753141355,
+      "mse": 0.9396120534691,
+      "brier": 0.2430007317463,
+      "fold": 3
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6575240367167,
+      "mse": 0.7019342377739,
+      "brier": 0.1873359302718,
+      "fold": 3
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.627724032276,
+      "mse": 0.6885318141319,
+      "brier": 0.1823707414706,
+      "fold": 3
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6249181503479,
+      "mse": 0.6838581917663,
+      "brier": 0.1812246261973,
+      "fold": 3
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.798275379179,
+      "mse": 0.9396120072897,
+      "brier": 0.2430007033499,
+      "fold": 3
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6658399892193,
+      "mse": 0.7149143886559,
+      "brier": 0.1906316723087,
+      "fold": 3
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6511090706027,
+      "mse": 0.7151218095558,
+      "brier": 0.1885359296316,
+      "fold": 3
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1147,
+      "targets": 1215,
+      "logLoss": 0.6512279151437,
+      "mse": 0.7152218412712,
+      "brier": 0.1885552686145,
+      "fold": 3
+    },
+    {
+      "model": "ordinal1",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6793494933361,
+      "mse": 0.6372360015882,
+      "brier": 0.1724718505485,
+      "fold": 4
+    },
+    {
+      "model": "ordinal",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6875412958139,
+      "mse": 0.6429558007327,
+      "brier": 0.1733519118661,
+      "fold": 4
+    },
+    {
+      "model": "ordinal4",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6762911709621,
+      "mse": 0.644198173703,
+      "brier": 0.1734329518599,
+      "fold": 4
+    },
+    {
+      "model": "class1_prior8",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.8068249934957,
+      "mse": 0.922746619566,
+      "brier": 0.240605678054,
+      "fold": 4
+    },
+    {
+      "model": "class2_prior8",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6527355091652,
+      "mse": 0.6723133254647,
+      "brier": 0.1828628591863,
+      "fold": 4
+    },
+    {
+      "model": "class4_prior8",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.610477231542,
+      "mse": 0.6553529171617,
+      "brier": 0.174371108265,
+      "fold": 4
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6062756428533,
+      "mse": 0.6493217423396,
+      "brier": 0.1728141361657,
+      "fold": 4
+    },
+    {
+      "model": "class1_prior64",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.8068256399436,
+      "mse": 0.9227478739959,
+      "brier": 0.2406059797717,
+      "fold": 4
+    },
+    {
+      "model": "class2_prior64",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6615105368754,
+      "mse": 0.6830380946108,
+      "brier": 0.1855404808606,
+      "fold": 4
+    },
+    {
+      "model": "class4_prior64",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6388664214042,
+      "mse": 0.6802127201157,
+      "brier": 0.1806064687383,
+      "fold": 4
+    },
+    {
+      "model": "class8_prior64",
+      "users": 1216,
+      "targets": 1291,
+      "logLoss": 0.6390607355202,
+      "mse": 0.6803309140049,
+      "brier": 0.1806380626488,
+      "fold": 4
+    }
+  ],
+  "holdout": [
+    {
+      "model": "ordinal4",
+      "users": 1157,
+      "targets": 1230,
+      "logLoss": 0.6906592834579,
+      "brier": 0.1786036192372,
+      "rmse": 0.8176115888598
+    },
+    {
+      "model": "class8_prior8",
+      "users": 1157,
+      "targets": 1230,
+      "logLoss": 0.6183740648905,
+      "brier": 0.1762634624643,
+      "rmse": 0.8162561966615
+    }
+  ]
+}

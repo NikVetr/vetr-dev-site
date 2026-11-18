@@ -17,16 +17,16 @@ function install(data) {
   ratings = Object.create(null);
   el('name').textContent = data.name;
   select('model').replaceChildren(
-    ...Object.entries(data.models).map(([key, m]) =>
-      option(
-        m.kind === 'ordinal-probit'
-          ? 'Ordinal probit · ' + m.components.length + ' component' + (m.components.length === 1 ? '' : 's')
-          : 'Historical logit reference',
-        key,
-      ),
-    ),
+    ...Object.entries(data.models).map(([key, m]) => {
+      const family = m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit';
+      const label =
+        m.kind === 'logit-point' ? 'Historical logit reference' : family + ' · K=' + m.components.length;
+      return option(label + (key === data.selection?.model ? ' · CV pick' : ''), key);
+    }),
   );
-  if (data.models.reference) select('model').value = 'reference';
+  const defaultModel = data.models.reference ? 'reference' : data.selection?.ordinalModel;
+  if (defaultModel && Object.hasOwn(data.models, defaultModel)) select('model').value = defaultModel;
+  showValidation(data.selection);
   for (const id of ['value', 'threshold']) {
     select(id).replaceChildren(
       ...data.scale.map((v) => option(data.scaleLabels ? v + ' · ' + scaleLabel(v) : String(v), v)),
@@ -34,6 +34,48 @@ function install(data) {
     select(id).value = String(defaultCutoff(data.scale));
   }
   update();
+}
+function showValidation(selection) {
+  const details = el('validation');
+  const validRows = (rows) =>
+    Array.isArray(rows) &&
+    rows.length &&
+    rows.every(
+      (r) => r && typeof r.label === 'string' && [r.logLoss, r.rmse, r.brier].every(Number.isFinite),
+    );
+  details.hidden = !(validRows(selection?.cv) && validRows(selection?.holdout));
+  if (details.hidden) return;
+  el('evaluation').textContent =
+    selection.folds +
+    ' validation folds, ' +
+    selection.validationUsers +
+    ' eligible respondents. The CV pick minimized category log loss, giving each person equal weight. ' +
+    'After selection, ' +
+    selection.testUsers +
+    ' separate respondents contributed ' +
+    selection.testRatings +
+    ' test ratings.';
+  const tables = el('scores');
+  tables.replaceChildren();
+  for (const [title, rows] of [
+    ['Held-out test · family finalists', selection.holdout],
+    ['Cross-validation · all candidates', selection.cv],
+  ]) {
+    const table = node('table', ''),
+      header = node('tr', '');
+    table.append(node('caption', title));
+    for (const label of ['Model', 'Log loss', 'RMSE', 'Brier']) header.append(node('th', label));
+    table.createTHead().append(header);
+    const body = table.createTBody();
+    for (const r of rows) {
+      const tr = node('tr', '');
+      tr.append(
+        ...[r.label, r.logLoss.toFixed(3), r.rmse.toFixed(3), r.brier.toFixed(3)].map((x) => node('td', x)),
+      );
+      body.append(tr);
+    }
+    tables.append(table);
+  }
 }
 function update() {
   try {
@@ -138,7 +180,14 @@ select('rank').onchange = () => {
   if (result) render();
 };
 select('model').onchange = update;
-select('threshold').onchange = update;
+select('threshold').onchange = () => {
+  if (!result) return;
+  result.threshold = Number(select('threshold').value);
+  const start = result.scale.indexOf(result.threshold);
+  for (const p of result.predictions) p.chance = p.probabilities.slice(start).reduce((a, b) => a + b, 0);
+  el('event').textContent = 'P(≥ ' + result.threshold + ')';
+  render();
+};
 let revision = 0,
   activeCatalog = 'movielens';
 async function openCatalog(key) {

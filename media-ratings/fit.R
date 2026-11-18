@@ -1,5 +1,5 @@
 # Fit a catalog from explicit, ordered user ratings. Matrix and jsonlite are the only packages.
-read_catalog <- function(ratings_file, items_file, scale, top) {
+read_catalog <- function(ratings_file, items_file, scale, top, ids = NULL) {
   ratings <- read.csv(ratings_file, colClasses = "character", check.names = FALSE)
   items <- read.csv(items_file, colClasses = "character", check.names = FALSE)
   id <- if ("itemId" %in% names(ratings)) "itemId" else "movieId"
@@ -12,7 +12,8 @@ read_catalog <- function(ratings_file, items_file, scale, top) {
             !anyNA(ratings$userId), all(nzchar(ratings$userId)), !anyNA(items$itemId),
             all(nzchar(items$itemId)), !anyDuplicated(items$itemId), !anyNA(items$title),
             all(nzchar(items$title)), all(ratings$itemId %in% items$itemId), top >= 2)
-  ids <- head(names(sort(table(ratings$itemId), decreasing = TRUE)), top)
+  if (is.null(ids)) ids <- head(names(sort(table(ratings$itemId), decreasing = TRUE)), top)
+  stopifnot(length(ids) > 0, !anyDuplicated(ids), all(ids %in% items$itemId))
   rows <- ratings[ratings$itemId %in% ids, ]
   users <- unique(rows$userId)
   y <- matrix(NA_integer_, length(users), length(ids), dimnames = list(users, ids))
@@ -50,7 +51,6 @@ fit_ordinal <- function(y, levels, k, iterations, seed) {
                                                   covariance = diag(d), weight = mean(group == g)))
   stats <- lapply(seq_len(k), function(g) list(n = 0, sum = numeric(d), cross = matrix(0, d, d)))
   for (iter in seq_len(iterations)) {
-    logp <- matrix(0, n, k)
     factors <- lapply(params, function(p) chol(p$covariance))
     for (g in seq_len(k)) {
       p <- params[[g]]
@@ -73,19 +73,26 @@ fit_ordinal <- function(y, levels, k, iterations, seed) {
       }
       z[index,] <- sweep(centered, 2, p$mean, "+")
     }
-    for (g in seq_len(k)) {
-      p <- params[[g]]
-      U <- factors[[g]]
-      white <- forwardsolve(t(U), t(sweep(z, 2, p$mean)))
-      logp[,g] <- log(p$weight) - sum(log(diag(U))) - colSums(white^2)/2
-    }
-    probs <- exp(logp - apply(logp, 1, max))
-    u <- runif(n)*rowSums(probs)
-    group <- rep(1L, n)
-    cumulative <- numeric(n)
-    for (g in seq_len(k-1L)) {
-      cumulative <- cumulative + probs[,g]
-      group <- group + as.integer(u > cumulative)
+    # One draw per respondent preserves seeded runs, including the K=1 reference.
+    uniform <- runif(n)
+    if (k > 1L) {
+      logp <- matrix(0, n, k)
+      for (g in seq_len(k)) {
+        p <- params[[g]]
+        U <- factors[[g]]
+        white <- forwardsolve(t(U), t(sweep(z, 2, p$mean)))
+        logp[,g] <- log(p$weight) - sum(log(diag(U))) - colSums(white^2)/2
+      }
+      largest <- logp[,1]
+      for (g in 2:k) largest <- pmax(largest, logp[,g])
+      probs <- exp(logp - largest)
+      u <- uniform*rowSums(probs)
+      group <- rep(1L, n)
+      cumulative <- numeric(n)
+      for (g in seq_len(k-1L)) {
+        cumulative <- cumulative + probs[,g]
+        group <- group + as.integer(u > cumulative)
+      }
     }
     rate <- max(1, iter - floor(iterations/3))^-0.7
     for (g in seq_len(k)) {
