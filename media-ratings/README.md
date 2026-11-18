@@ -1,6 +1,8 @@
 # Fitting and using rating catalogs
 
-The browser opens on 100 popular MovieLens films. Enter a few ratings, then compare expected stars, upward and downward surprises, or the probability of clearing a cutoff. Expand any prediction for the distribution across individual rating values. Selecting **Stravl destinations** switches to an ordered no/maybe/yes scale. The [JSON API](api.md) supplies the same predictions, including prior and posterior component weights.
+Choose **Films** or **Destinations** in the left panel. The searchable catalog is ordered by the selected model’s unconditional expected rating. Click either half of a star for MovieLens (½–5 stars), or select No, Maybe, or Yes for Stravl. **Clear** removes one rating. With **Auto-update** off, use **Update predictions** to apply a batch. Switching datasets keeps each set of ratings for the current page session.
+
+The six scrollable lists rank unrated entries by expected rating, chance of reaching your cutoff, absolute surprise, rise, fall, and mean divided by variance. Select a recommendation in any list to compare its fitted population and personalized rating distributions. For the bundled datasets, the third series shows observed rating frequencies. The co-rating grid counts people who rated both entries. It initially compares the selected item with the supplied rating having the largest absolute Pearson correlation among co-raters. The outlined row marks your rating for the comparison item. These pairwise counts describe the sample. The prediction uses all applied ratings jointly. Films link directly to IMDb through the MovieLens ID mapping and destinations link to OpenStreetMap searches. The [JSON API](api.md) supplies the same model predictions.
 
 ## Fit a catalog
 
@@ -10,7 +12,7 @@ From the repository root, use R with `Matrix` and `jsonlite` installed. Provide 
 Rscript media-ratings/fit.R ratings.csv items.csv catalog.json 'My catalog' '1,2,3,4,5' 50 2 180 417
 ```
 
-The last four arguments set the maximum number of items (by rating count), number of components, iteration count and random seed. An optional final comma-separated argument names the scale levels. Load the result under **Use another catalog**. Catalog selection defines the prediction universe. Fitting uses dense covariance matrices per component, so the item count affects memory quadratically. The browser downloads fitted summaries only.
+The last four arguments set the maximum number of items (by rating count), number of components, iteration count and random seed. An optional final comma-separated argument names the scale levels. Open the result using **Import fitted catalog**. Catalog selection defines the prediction universe. Fitting uses dense covariance matrices per component, so the item count affects memory quadratically. The browser downloads fitted summaries only.
 
 ### Movies
 
@@ -35,6 +37,15 @@ Rscript media-ratings/fit.R stravl-input/ratings.csv stravl-input/items.csv stra
 ```
 
 Starting with the most-rated destination, the preparation script adds the destination with the largest minimum pairwise overlap with the selected set. The resulting 12 destinations have at least 125 co-raters for every pair and 27,047 responses from 12,905 respondents. The output predicts interest in an offered destination. The movie validation below evaluates a different population and outcome.
+
+### Rebuild the observed-rating summaries
+
+From the repository root, run these commands with the same source files and selected catalogs used above. The outputs contain marginal rating counts and joint counts for every unordered pair in catalog order. Each joint grid stores the lower item index on its rows and the higher index on its columns. The MovieLens summary also keeps the published IMDb IDs, including leading zeros. Only these aggregates and the fitted catalogs are served to the browser.
+
+```sh
+python3 media-ratings/prepare_evidence.py media-ratings/movielens.json ml-latest-small/ratings.csv media-ratings/movielens-evidence.json --links ml-latest-small/links.csv
+python3 media-ratings/prepare_evidence.py media-ratings/stravl.json stravl-input/ratings.csv media-ratings/stravl-evidence.json
+```
 
 ### Books and anime
 

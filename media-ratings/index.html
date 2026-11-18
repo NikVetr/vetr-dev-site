@@ -5,103 +5,103 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Media Ratings · vetr.dev</title>
     <link rel="stylesheet" href="../shared/base.css" />
+    <link rel="stylesheet" href="../shared/tool-nav.css" />
+    <link rel="stylesheet" href="../shared/light-switch.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="../shared/theme.js"></script>
   </head>
   <body>
-    <main>
-      <a href="../">← vetr.dev</a>
-      <h1>Media Ratings</h1>
-      <p class="intro">Rate a few films or destinations to see what rises, falls, or becomes a safer bet.</p>
-      <div class="workspace">
-        <aside>
-          <h2>Your ratings</h2>
-          <label>Item<select id="item"></select></label>
-          <div class="pair">
-            <label>Rating<select id="value"></select></label><button id="add" disabled>Add rating</button>
+    <header class="site-header">
+      <div class="header-row tool-header-row">
+        <h1>Media Ratings</h1>
+        <div class="tool-header-actions">
+          <a href="../">vetr.dev</a
+          ><button id="theme-toggle" data-light-switch type="button" aria-label="Dark mode"></button>
+        </div>
+      </div>
+    </header>
+    <main class="workspace">
+      <aside class="library" aria-label="Datasets and ratings">
+        <div class="library-tools">
+          <h2>Datasets</h2>
+          <div id="domains" aria-label="Choose dataset">
+            <button data-key="movielens">Films <small>MovieLens</small></button>
+            <button data-key="stravl">Destinations <small>Stravl</small></button>
+            <button id="custom-domain" data-key="custom" hidden>Imported catalog</button>
           </div>
-          <ul id="rated"></ul>
-          <p id="empty">Choose an item you know.</p>
-          <hr />
-          <h2>Catalog</h2>
-          <label
-            >Dataset<select id="catalog">
-              <option value="movielens">MovieLens films</option>
-              <option value="stravl">Stravl destinations</option>
-              <option value="custom" hidden disabled>Imported catalog</option>
-            </select></label
-          >
-          <p id="name"></p>
-          <label>Model<select id="model"></select></label>
-          <details>
-            <summary>Use another catalog</summary>
-            <label
-              >Open a fitted JSON catalog<input type="file" id="file" accept=".json,application/json"
-            /></label>
-            <p><a href="README.md">Fit your own catalog</a></p>
-          </details>
-        </aside>
-        <section>
-          <h2>Predictions</h2>
-          <div class="toolbar">
-            <label
-              >Rank by<select id="rank">
-                <option value="expected">Expected rating</option>
-                <option value="chance">Chance of reaching cutoff</option>
-                <option value="absolute">Biggest surprise</option>
-                <option value="up">Biggest rise</option>
-                <option value="down">Biggest fall</option>
-                <option value="precision">Mean / variance</option>
-              </select></label
+          <label class="import"
+            >Import fitted catalog<input id="file" type="file" accept=".json,application/json"
+          /></label>
+          <div class="section-line">
+            <h2>Your ratings</h2>
+            <span id="rated-count"></span>
+          </div>
+          <p id="scale-help"></p>
+          <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
+          <div class="catalog-tools">
+            <span>By catalog mean</span><label><input type="checkbox" id="rated-only" /> Rated only</label>
+          </div>
+        </div>
+        <a class="skip" href="#recommendations">Skip to recommendations</a>
+        <ul id="library" aria-label="Entries in descending catalog mean"></ul>
+        <div class="apply">
+          <label><input type="checkbox" id="auto" checked /> Auto-update</label
+          ><button class="primary" id="apply" disabled>Update predictions</button>
+        </div>
+        <a class="jump" href="#recommendations">Go to recommendations ↓</a>
+      </aside>
+      <section class="analysis" aria-labelledby="recommendations">
+        <div class="analysis-head">
+          <div>
+            <h2 id="recommendations" tabindex="-1">Recommendations</h2>
+            <p id="context">Loading catalog…</p>
+          </div>
+          <div class="model-controls">
+            <label>Prediction model<select id="model"></select></label
             ><label>Rating cutoff<select id="threshold"></select></label>
           </div>
-          <details id="validation" hidden>
-            <summary>Compare validation scores</summary>
-            <p id="evaluation"></p>
-            <p>Lower scores are better. Log loss measures the full rating distribution, RMSE measures expected-rating error and the Brier score measures the catalog’s default cutoff event. K is the component count. Prior is the number of pooled ratings used to smooth each item within a class.</p>
-            <div id="scores" class="tablewrap"></div>
-          </details>
-          <p id="weights"></p>
-          <div class="tablewrap">
-            <table>
-              <caption id="caption"></caption>
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Expected</th>
-                  <th>Shift</th>
-                  <th id="event">Chance</th>
-                  <th>SD</th>
-                </tr>
-              </thead>
-              <tbody id="rows"></tbody>
-            </table>
+        </div>
+        <p id="status" role="status"></p>
+        <p id="pending" role="status" hidden></p>
+        <div id="boards" aria-label="Ranked recommendations"></div>
+        <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
+          <div class="detail-head">
+            <div>
+              <p class="eyebrow">Selected recommendation</p>
+              <h2 id="detail-title" tabindex="-1"></h2>
+            </div>
+            <a id="external" hidden target="_blank" rel="noopener noreferrer"></a>
           </div>
-          <details>
-            <summary>How to read the rankings</summary>
-            <p>
-              Shift is the change from the catalog expectation after entering your ratings. Select an item to
-              inspect its full predicted distribution. The cutoff ranking counts all probability at or above
-              your chosen rating. Mean / variance divides the expected rating by its conditional variance,
-              floored at 0.01 squared rating units.
-            </p>
-            <p>
-              The historical reference treats ratings as points on a logit scale. The ordinal
-              model treats them as intervals and updates the probability of each taste component. Its
-              predictions integrate over latent ratings. The latent-class model instead learns a separate distribution
-              over the rating categories for each item in each class. Given a class, items are independent.
-              All models report expectations on the displayed rating scale.
-            </p>
-          </details>
+          <div class="explanation">
+            <section>
+              <h3>Rating distribution</h3>
+              <div id="legend"></div>
+              <div id="distribution"></div>
+            </section>
+            <section>
+              <h3>How the score changes</h3>
+              <dl id="metrics"></dl>
+              <p id="formula"></p>
+            </section>
+            <section id="comparison"></section>
+          </div>
         </section>
-      </div>
-      <p id="status" role="status"></p>
-      <footer>
-        Movie pilot based on individual ratings from GroupLens.
-        <a href="MOVIELENS-LICENSE.txt">MovieLens terms and citation</a>. Destination preferences from
-        <a href="https://github.com/Stravl/Stravl-Data">Stravl</a>.
-        <a href="README.md">Methods and datasets</a>
-      </footer>
+        <p id="weights"></p>
+        <details id="validation" hidden>
+          <summary>Compare validation scores</summary>
+          <p id="evaluation"></p>
+          <p>
+            Lower scores are better. Log loss measures the full distribution, RMSE measures expected-rating
+            error, and Brier scores use the catalog’s default cutoff.
+          </p>
+          <div id="scores"></div>
+        </details>
+        <footer>
+          <a href="README.md">Methods and datasets</a> ·
+          <a href="MOVIELENS-LICENSE.txt">MovieLens terms and citation</a> ·
+          <a href="https://github.com/Stravl/Stravl-Data">Stravl data</a>
+        </footer>
+      </section>
     </main>
     <script type="module" src="app.mjs"></script>
   </body>
