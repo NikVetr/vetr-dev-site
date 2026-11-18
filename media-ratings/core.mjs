@@ -425,15 +425,18 @@ export function submit(input) {
 // Population PCs stay fixed when ratings change. Conditioning only requires
 // the two projected-to-observed covariance rows and the observed Cholesky block.
 const gaussianAxes = new WeakMap();
-export function gaussianProjection(catalog, { model: key, ratings = {}, samples = 256 }) {
+export function gaussianProjection(
+  catalog,
+  { model: key, ratings = {}, samples = 256, axisIndices = undefined },
+) {
   const { components, kind } = catalog.models[key],
     model = catalog.models[key];
   requireValue(
     kind === 'logit-point' || kind === 'ordinal-probit',
     'Projection requires Gaussian liabilities.',
   );
-  let axes = gaussianAxes.get(model);
-  if (!axes) {
+  let basis = gaussianAxes.get(model);
+  if (!basis) {
     const ids = catalog.items.map((_, i) => i),
       center = ids.map((i) => components.reduce((s, c) => s + c.weight * c.mean[i], 0));
     const total = ids.map((i) =>
@@ -446,19 +449,35 @@ export function gaussianProjection(catalog, { model: key, ratings = {}, samples 
     );
     const eig = symmetricEigen(total),
       trace = eig.values.reduce((a, b) => a + b, 0);
-    axes = eig.vectors.slice(0, 2).map((v, index) => {
-      const ordered = [...ids].sort((a, b) => v[b] - v[a]);
-      return {
-        fraction: eig.values[index] / trace,
-        high: ordered[0],
-        low: ordered.at(-1),
-        loadings: v,
-        scores: components.map((c) => dot(v, c.mean) - dot(v, center)),
-        cross: components.map((c) => c.covariance.map((row) => dot(row, v))),
-      };
-    });
-    gaussianAxes.set(model, axes);
+    const spectrum = eig.values.map((value) => Math.max(0, value) / trace);
+    basis = { center, vectors: eig.vectors, spectrum, calculated: new Map() };
+    gaussianAxes.set(model, basis);
   }
+  // Only form covariance products and posterior moments for the displayed plane.
+  const indices = axisIndices ?? (basis.spectrum.length > 1 ? [0, 1] : [0]);
+  requireValue(
+    Array.isArray(indices) &&
+      indices.length >= 1 &&
+      indices.length <= 2 &&
+      new Set(indices).size === indices.length &&
+      indices.every((i) => Number.isInteger(i) && i >= 0 && i < basis.spectrum.length),
+    'Choose one or two distinct principal component indices within this catalog.',
+  );
+  const axes = indices.map((index) => {
+    if (!basis.calculated.has(index)) {
+      const v = basis.vectors[index];
+      basis.calculated.set(index, {
+        index,
+        fraction: basis.spectrum[index],
+        high: v.indexOf(Math.max(...v)),
+        low: v.indexOf(Math.min(...v)),
+        loadings: v,
+        scores: components.map((c) => dot(v, c.mean) - dot(v, basis.center)),
+        cross: components.map((c) => c.covariance.map((row) => dot(row, v))),
+      });
+    }
+    return basis.calculated.get(index);
+  });
   const obs = catalog.items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => catalog.scale.indexOf(ratings[catalog.items[i].itemId]));
   requireValue(
@@ -507,6 +526,7 @@ export function gaussianProjection(catalog, { model: key, ratings = {}, samples 
   const covariance = second.map((row, i) => row.map((x, j) => x / totalMass - mean[i] * mean[j]));
   return {
     projection: axes,
+    spectrum: basis.spectrum,
     weights: weights.map((w) => w / totalMass),
     mean,
     covariance,

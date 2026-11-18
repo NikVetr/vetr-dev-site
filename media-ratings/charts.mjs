@@ -45,15 +45,20 @@ function html(tag, text = '') {
 function signedValue(value, digits = 2) {
   return (value > 0 ? '+' : '') + value.toFixed(digits);
 }
-function fingerprintPanels(fp, catalog) {
+function varianceShare(fraction) {
+  const pct = 100 * fraction;
+  return (pct > 0 && pct < 0.1 ? Number(pct.toPrecision(2)) : pct.toFixed(1)) + '%';
+}
+function membershipPanel(fp, bind) {
   document.getElementById('profile-count').textContent = fp.ratedCount
     ? fp.ratedCount + (fp.ratedCount === 1 ? ' applied rating' : ' applied ratings')
     : 'Catalog baseline';
   const membership = document.getElementById('memberships');
   membership.replaceChildren(html('h3', fp.ratedCount ? 'Class probabilities' : 'Catalog classes'));
   for (const { index, label, probability, prior } of fp.classes) {
-    const row = html('div');
+    const row = html('button');
     row.className = 'class-weight';
+    bind(row, index);
     row.style.setProperty('--class-color', colors[index % colors.length]);
     const id = html('span', String(index + 1));
     id.className = 'component-id';
@@ -68,14 +73,29 @@ function fingerprintPanels(fp, catalog) {
     row.append(id, name, html('b', (100 * probability).toFixed(1) + '%'), rail);
     membership.append(row);
   }
+}
+function classDetails(fp, catalog, inspected, pinned) {
   const signature = document.getElementById('class-signature');
-  signature.replaceChildren(html('h3', fp.match ? 'Closest class' : 'Class match'));
-  if (fp.match) {
-    const heading = html('strong', fp.match.label);
+  const title = inspected
+    ? pinned
+      ? 'Pinned class'
+      : 'Class details'
+    : fp.match
+      ? 'Closest class'
+      : 'Class match';
+  signature.replaceChildren(html('h3', title));
+  const shown = inspected ?? fp.match;
+  if (shown) {
+    const heading = html('strong', shown.label);
     heading.className = 'match-name';
     const p = html(
       'p',
-      'Class ' + (fp.match.index + 1) + ' · ' + (fp.match.probability * 100).toFixed(1) + '% probability',
+      'Class ' +
+        (shown.index + 1) +
+        ' · ' +
+        (100 * shown.prior).toFixed(1) +
+        '% in catalog' +
+        (fp.ratedCount ? ' → ' + (100 * shown.probability).toFixed(1) + '% for you' : ''),
     );
     signature.append(heading, p);
   } else {
@@ -94,19 +114,40 @@ function fingerprintPanels(fp, catalog) {
     tile.append(html('span', label), html('b', value));
     dist.append(tile);
   };
-  metric('Class-weighted mean', fp.mean.toFixed(2));
+  const mass = inspected?.mass ?? fp.mass;
+  metric(inspected ? 'Class mean' : 'Class-weighted mean', (inspected?.mean ?? fp.mean).toFixed(2));
+  metric('Catalog mean', fp.populationMean.toFixed(2));
   if (fp.usesHalfStars)
     metric(
       'Half-star use',
-      Math.round(100 * fp.mass.reduce((sum, v, i) => sum + (Number.isInteger(catalog.scale[i]) ? 0 : v), 0)) +
+      Math.round(100 * mass.reduce((sum, v, i) => sum + (Number.isInteger(catalog.scale[i]) ? 0 : v), 0)) +
         '%',
     );
   else
     metric(
       'Chance of ' + (catalog.scaleLabels?.at(-1) ?? catalog.scale.at(-1)),
-      Math.round(100 * fp.mass.at(-1)) + '%',
+      Math.round(100 * mass.at(-1)) + '%',
     );
   signature.append(dist);
+  if (inspected) {
+    const signal = inspected.signal;
+    if (signal) {
+      const answer = catalog.scaleLabels?.[catalog.scale.indexOf(signal.value)] ?? signal.value;
+      signature.append(
+        html('h4', 'Most distinctive answer'),
+        html(
+          'p',
+          signal.title +
+            ' · ' +
+            answer +
+            '. This answer is ' +
+            Number(signal.ratio.toPrecision(2)) +
+            '× as likely in this class as in the catalog.',
+        ),
+      );
+    }
+    return;
+  }
   if (
     fp.ratedCount &&
     fp.affinities.length > 1 &&
@@ -124,7 +165,7 @@ function fingerprintPanels(fp, catalog) {
     signature.append(group);
   }
 }
-export function renderTaste(profile, catalog, fp, domain) {
+export function renderTaste(profile, catalog, fp, domain, prefs, onAxesChange) {
   const host = document.getElementById('taste'),
     plot = document.getElementById('taste-plot'),
     legend = document.getElementById('axes');
@@ -142,19 +183,104 @@ export function renderTaste(profile, catalog, fp, domain) {
       games: 'Game preference',
     }[domain] ?? 'Preference';
   document.getElementById('projection-title').textContent = domainTitle + ' fingerprint';
-  fingerprintPanels(fp, catalog);
-  const details = document.getElementById('axis-loadings');
-  details.replaceChildren();
+  const members = new Map(fp.classes.map((c) => [c.index, c]));
+  function inspect(index) {
+    classDetails(fp, catalog, members.get(index), index !== null && index === prefs.pinned);
+    for (const control of host.querySelectorAll('[data-class-index]')) {
+      const k = Number(control.getAttribute('data-class-index'));
+      control.classList.toggle('inspected', index === k);
+      control.setAttribute('aria-pressed', String(prefs.pinned === k));
+    }
+  }
+  function bind(control, index) {
+    control.dataset.classIndex = index;
+    control.onpointerenter = (e) => {
+      if (e.pointerType !== 'touch') inspect(index);
+    };
+    control.onpointerleave = () => inspect(prefs.pinned);
+    control.onfocus = () => inspect(index);
+    control.onblur = () => inspect(prefs.pinned);
+    const toggle = () => {
+      prefs.pinned = prefs.pinned === index ? null : index;
+      inspect(prefs.pinned);
+    };
+    control.onclick = toggle;
+    control.onkeydown = (e) => {
+      if (e.key === 'Escape') {
+        prefs.pinned = null;
+        inspect(null);
+      }
+      if (control instanceof SVGElement && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        toggle();
+      }
+    };
+  }
+  membershipPanel(fp, bind);
+  const selectors = document.getElementById('map-axes');
+  selectors.replaceChildren();
+  const numbers = axes.map((a) => a.index);
+  if (profile.spectrum.length > 1) {
+    numbers.forEach((selected, slot) => {
+      const label = html('label', slot === 0 ? 'X' : 'Y');
+      const select = /** @type {HTMLSelectElement} */ (html('select'));
+      select.ariaLabel = (slot === 0 ? 'Horizontal' : 'Vertical') + ' principal component';
+      profile.spectrum.forEach((fraction, i) => {
+        select.add(new Option('PC' + (i + 1) + ' · ' + varianceShare(fraction), String(i)));
+      });
+      select.value = String(selected);
+      select.onchange = () => {
+        const chosen = Number(select.value),
+          other = 1 - slot;
+        prefs.axes = [...numbers];
+        if (chosen === numbers[other]) prefs.axes[other] = selected;
+        prefs.axes[slot] = chosen;
+        onAxesChange();
+        const replacement = selectors.querySelector('select[aria-label="' + select.ariaLabel + '"]');
+        if (replacement instanceof HTMLSelectElement) replacement.focus({ preventScroll: true });
+      };
+      label.append(select);
+      selectors.append(label);
+    });
+  }
+  if (!continuous) {
+    const center = /** @type {HTMLInputElement} */ (html('input'));
+    center.type = 'checkbox';
+    center.checked = prefs.centerClassMeans;
+    center.onchange = () => {
+      prefs.centerClassMeans = center.checked;
+      prefs.axes = undefined;
+      onAxesChange();
+      selectors.querySelector('input')?.focus({ preventScroll: true });
+    };
+    const label = html('label');
+    label.className = 'center-classes';
+    label.title =
+      'Subtract each class’s average across all titles before PCA. Class probabilities and forecasts stay the same.';
+    label.append(center, 'Remove overall rating level');
+    selectors.append(label);
+  }
+  inspect(prefs.pinned);
   legend.replaceChildren();
   plot.replaceChildren();
   document.getElementById('profile-help').textContent =
-    'The closest class has the highest probability given your applied ratings. Each entry counts equally in the class-weighted mean and response frequencies. Relative affinities compare group shifts after removing the overall shift. ' +
+    'Hover or focus a class to inspect it. Click to pin it. The closest class has the highest probability given your applied ratings. Each entry counts equally in the class-weighted mean and response frequencies. Relative affinities compare group shifts after removing the overall shift. ' +
     (fp.usesHalfStars ? 'A half-step class uses half stars on at least one in five ratings. ' : '') +
     (continuous
       ? 'The map uses Gaussian liabilities. Each contour shows one projected standard deviation.'
-      : 'The map projects the class mean ratings. The diamond averages their positions using your class probabilities.');
+      : (prefs.centerClassMeans
+          ? 'Each class profile is centered on its own average before projection. '
+          : 'The map projects the class mean ratings. ') +
+        'The diamond averages class positions using your probabilities.');
   if (!axes.length) {
-    plot.append(html('p', 'The class centers have no measurable spread.'));
+    plot.append(
+      html(
+        'p',
+        prefs.centerClassMeans
+          ? 'The classes have no measurable differences after centering.'
+          : 'The class centers have no measurable spread.',
+      ),
+    );
     return;
   }
   const xs = axes[0].scores,
@@ -178,10 +304,13 @@ export function renderTaste(profile, catalog, fp, domain) {
   const x = (v) => 167 + (v * 123) / limitX,
     y = (v) => 91 - (v * 62) / limitY;
   const svg = figure(
-    'Class centers on ' + (axes.length > 1 ? 'PC1 and PC2' : 'PC1') + '. Diamond marks the projected mean.',
+    'Class centers on ' +
+      numbers.map((i) => 'PC' + (i + 1)).join(' and ') +
+      '. Diamond marks the projected mean.',
     324,
     188,
   );
+  svg.setAttribute('role', 'group');
   for (const i of [-1, -0.5, 0, 0.5, 1]) {
     const tx = i * limitX,
       ty = i * limitY,
@@ -197,8 +326,8 @@ export function renderTaste(profile, catalog, fp, domain) {
       );
   }
   svg.append(
-    shape('text', { x: 313, y: 174, 'text-anchor': 'middle' }, 'PC1'),
-    shape('text', { x: 28, y: 15 }, axes.length > 1 ? 'PC2' : ''),
+    shape('text', { x: 291, y: 187, 'text-anchor': 'middle' }, 'PC' + (numbers[0] + 1)),
+    shape('text', { x: 28, y: 15 }, axes.length > 1 ? 'PC' + (numbers[1] + 1) : ''),
   );
   function contour(cx, cy, cov, color) {
     const [a, b] = radii(cov),
@@ -234,8 +363,25 @@ export function renderTaste(profile, catalog, fp, domain) {
       stroke: 'var(--surface)',
       'stroke-width': 1.4,
     });
-    circle.append(shape('title', {}, 'Class ' + (k + 1) + ' · ' + (100 * w).toFixed(1) + '%'));
-    svg.append(circle);
+    const cls = members.get(k);
+    const description =
+      'Class ' +
+      (k + 1) +
+      ' · ' +
+      cls.label +
+      ' · ' +
+      (100 * cls.prior).toFixed(1) +
+      '% in catalog → ' +
+      (100 * w).toFixed(1) +
+      '% for you';
+    const mark = shape('g', { role: 'button', tabindex: 0, 'aria-label': description });
+    bind(mark, k);
+    mark.append(
+      shape('title', {}, description),
+      shape('circle', { cx, cy, r: 10, fill: 'transparent' }),
+      circle,
+    );
+    svg.append(mark);
     const offsets = [
       [10, -9],
       [11, 15],
@@ -253,7 +399,7 @@ export function renderTaste(profile, catalog, fp, domain) {
           markers.every(([mx, my]) => Math.hypot(cx + a - mx, cy + b - 4 - my) > 10),
       ) ?? offsets[0];
     placed.push([cx + dx, cy + dy]);
-    svg.append(
+    mark.append(
       shape('line', {
         x1: cx,
         y1: cy,
@@ -271,26 +417,46 @@ export function renderTaste(profile, catalog, fp, domain) {
   });
   const px = x(yourX),
     py = y(yourY);
-  svg.append(
-    shape('path', {
-      d: 'M' + px + ' ' + (py - 7) + 'l7 7 -7 7 -7 -7z',
-      fill: 'var(--surface)',
-      stroke: 'var(--accent)',
-      'stroke-width': 2.5,
-    }),
-  );
-  const key = html('p', fp.ratedCount ? '◇ Your position' : '◇ Catalog center');
+  const diamond = shape('path', {
+    d: 'M' + px + ' ' + (py - 7) + 'l7 7 -7 7 -7 -7z',
+    fill: 'var(--surface)',
+    stroke: 'var(--accent)',
+    'stroke-width': 2.5,
+  });
+  const position =
+    (fp.ratedCount ? 'Your position' : 'Catalog center') +
+    ' · ' +
+    fp.axes.map((a, i) => 'PC' + (numbers[i] + 1) + ' ' + signedValue(a.score)).join(', ');
+  diamond.append(shape('title', {}, position));
+  svg.append(diamond);
+  const key = html('button', fp.ratedCount ? '◇ Your position' : '◇ Catalog center');
+  key.title = position + '. Return to your fingerprint.';
   key.className = 'projection-key';
-  plot.append(svg, key);
+  key.onclick = () => {
+    prefs.pinned = null;
+    inspect(null);
+  };
+  const variance = html(
+    'span',
+    varianceShare(axes.reduce((sum, a) => sum + a.fraction, 0)) +
+      ' of ' +
+      (continuous ? 'latent' : 'between-class') +
+      ' variance shown',
+  );
+  const caption = html('div');
+  caption.className = 'map-caption';
+  caption.append(key, variance);
+  plot.append(svg, caption);
+  inspect(prefs.pinned);
   for (const [i, a] of fp.axes.entries()) {
     const card = html('section'),
       top = html('div');
     top.className = 'axis-summary';
     top.append(
-      html('h3', 'PC' + (i + 1) + ' · ' + a.label),
+      html('h3', 'PC' + (numbers[i] + 1) + ' · ' + a.label),
       html(
         'small',
-        (100 * a.fraction).toFixed(1) + '% of ' + (continuous ? 'latent variance' : 'between-class variance'),
+        varianceShare(a.fraction) + ' of ' + (continuous ? 'latent variance' : 'between-class variance'),
       ),
     );
     const rail = html('div');
@@ -302,26 +468,25 @@ export function renderTaste(profile, catalog, fp, domain) {
     const ends = html('div');
     ends.className = 'axis-ends';
     ends.append(html('span', a.low), html('span', a.high));
-    card.append(top, rail, ends);
-    legend.append(card);
     const axis = axes[i];
-    details.append(
-      html(
-        'p',
-        'PC' +
-          (i + 1) +
-          ' · projected score ' +
-          signedValue(a.score) +
-          '. Lowest loading: ' +
-          catalog.items[axis.low].title +
-          ' (' +
-          axis.loadings[axis.low].toFixed(3) +
-          '). Highest: ' +
-          catalog.items[axis.high].title +
-          ' (' +
-          axis.loadings[axis.high].toFixed(3) +
-          ').',
-      ),
-    );
+    const loadings = axis.loadings
+      .map((value, j) => ({ value, title: catalog.items[j].title }))
+      .sort((a, b) => a.value - b.value);
+    const details = html('details');
+    const summary = html('summary', 'Title loadings');
+    summary.title = 'Lowest: ' + loadings[0].title + ' · highest: ' + loadings.at(-1).title;
+    details.append(summary);
+    for (const [label, entries] of [
+      ['Lowest', loadings.slice(0, 3)],
+      ['Highest', loadings.slice(-3).reverse()],
+    ]) {
+      details.append(html('b', label));
+      const list = html('ul');
+      for (const entry of entries)
+        list.append(html('li', entry.title + ' (' + signedValue(entry.value, 3) + ')'));
+      details.append(list);
+    }
+    card.append(top, rail, ends, details);
+    legend.append(card);
   }
 }

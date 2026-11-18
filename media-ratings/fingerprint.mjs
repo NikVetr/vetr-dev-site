@@ -115,7 +115,13 @@ function classSignatures(catalog, model) {
 
 export function preferenceFingerprint(
   catalog,
-  { model: requested = undefined, ratings = {}, samples = 256 } = {},
+  {
+    model: requested = undefined,
+    ratings = {},
+    samples = 256,
+    centerClassMeans = false,
+    axisIndices = undefined,
+  } = {},
   projection = null,
 ) {
   const key =
@@ -130,13 +136,38 @@ export function preferenceFingerprint(
   const view =
     projection ??
     (categorical
-      ? tasteProfile(catalog, ratings, key)
-      : gaussianProjection(catalog, { model: key, ratings, samples }));
+      ? tasteProfile(catalog, ratings, key, null, centerClassMeans)
+      : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices }));
   const { weights } = view;
   const { classes, groups, usesHalfStars } = classSignatures(catalog, model);
   const positions = view.mean ?? view.projection.map((axis) => dot(axis.scores, weights));
+  const evidence = catalog.items.flatMap((it, i) => {
+    if (!categorical || !Object.hasOwn(ratings, it.itemId)) return [];
+    const value = ratings[it.itemId];
+    const probabilities = model.components.map((c) => c.probabilities[i][catalog.scale.indexOf(value)]);
+    const base = classes.reduce((sum, c, k) => sum + c.prior * probabilities[k], 0);
+    return [{ title: it.title, value, probabilities, base }];
+  });
   const types = classes
-    .map((p, i) => ({ index: i, label: p.label, prior: p.prior, probability: weights[i] }))
+    .map((p, index) => {
+      const signals = evidence
+        .filter((r) => r.base > 0)
+        .map((r) => ({
+          title: r.title,
+          value: r.value,
+          ratio: r.probabilities[index] / r.base,
+        }));
+      signals.sort((a, b) => Math.abs(Math.log(b.ratio)) - Math.abs(Math.log(a.ratio)));
+      return {
+        index,
+        label: p.label,
+        prior: p.prior,
+        probability: weights[index],
+        mean: p.mean,
+        mass: p.mass,
+        signal: signals[0] ?? null,
+      };
+    })
     .sort((a, b) => b.probability - a.probability);
   const ratedCount = Object.keys(ratings).length;
   const affinities = groups
@@ -177,6 +208,7 @@ export function preferenceFingerprint(
     axes,
     affinities,
     mean: dot(mass, catalog.scale),
+    populationMean: classes.reduce((s, p) => s + p.mean * p.prior, 0),
     mass,
     usesHalfStars,
     categorical,

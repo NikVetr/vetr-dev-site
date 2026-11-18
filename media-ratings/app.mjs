@@ -1,4 +1,4 @@
-import { tasteProfile } from './taste.mjs';
+import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
 import { ratingsCSV, forecastsCSV, importRatings, importForecasts, saveCSV } from './exchange.mjs';
@@ -52,14 +52,8 @@ const panels = [
     format: (n) => n.toFixed(2),
   },
   { key: 'chance', title: 'Above cutoff', hint: 'Probability', score: (p) => p.chance, format: percent },
-  { key: 'up', title: 'Biggest rise', hint: 'Shift ↑', score: (p) => p.shift, format: signed },
-  {
-    key: 'down',
-    title: 'Biggest fall',
-    hint: 'Shift ↓',
-    score: (p) => -p.shift,
-    format: (_, p) => signed(p.shift),
-  },
+  { key: 'ratingChange', title: 'Rating change', hint: 'Mean shift', score: (p) => p.shift, format: signed },
+  { key: 'rankChange', title: 'Rank change', hint: 'Places', score: (p) => p.shift, format: signed },
   {
     key: 'precision',
     title: 'Mean / variance',
@@ -85,7 +79,8 @@ function useState(data, key) {
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
     threshold: defaultCutoff(data.scale),
     weightByFamiliarity: true,
-    shiftBasis: 'rating',
+    directions: { ratingChange: 'up', rankChange: 'both' },
+    fingerprintViews: new Map(),
     draft: Object.create(null),
     applied: Object.create(null),
     selection: null,
@@ -163,6 +158,7 @@ function showValidation(selection) {
     selection.testRatings +
     ' test ratings.';
   const full = selection.full;
+  el('selection-study').hidden = !isFilm(active);
   if (full)
     el('evaluation').textContent =
       'The deployed fit uses ' +
@@ -526,12 +522,7 @@ function update(ratings) {
       ? state.model
       : Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
     taste = tasteProfile(catalog, state.applied, classKey, usesClasses ? next : null);
-    const view = usesClasses
-      ? taste
-      : gaussianProjection(catalog, { model: state.model, ratings: state.applied });
-    const fp = preferenceFingerprint(catalog, { model: state.model, ratings: state.applied }, view);
-    const domain = active === 'expanded' ? 'movies' : active === 'stravl' ? 'cities' : catalog.domain;
-    renderTaste(view, catalog, fp, domain);
+    renderFingerprint();
     renderSnapshot();
     renderBoards();
     renderDetail();
@@ -547,6 +538,26 @@ function update(ratings) {
     el('status').textContent = error.message;
   }
   syncDraft();
+}
+function renderFingerprint() {
+  const model = catalog.models[state.model];
+  const categorical = ['latent-class', 'class-similarity'].includes(model.kind);
+  let prefs = state.fingerprintViews.get(state.model);
+  if (!prefs) {
+    prefs = { axes: undefined, pinned: null, centerClassMeans: false };
+    state.fingerprintViews.set(state.model, prefs);
+  }
+  const request = { model: state.model, ratings: state.applied, axisIndices: prefs.axes };
+  let view;
+  if (categorical) {
+    const base = model.kind === 'class-similarity' ? catalog.models[model.base] : model;
+    const all = prefs.centerClassMeans ? projectClasses(base, catalog.scale, true) : taste.projection;
+    const indices = prefs.axes ?? all.slice(0, 2).map((axis) => axis.index);
+    view = { ...taste, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
+  } else view = gaussianProjection(catalog, request);
+  const fp = preferenceFingerprint(catalog, request, view);
+  const domain = active === 'expanded' ? 'movies' : active === 'stravl' ? 'cities' : catalog.domain;
+  renderTaste(view, catalog, fp, domain, prefs, renderFingerprint);
 }
 function recommendationHeader(spec, title, count, isShift, weighted) {
   const head = node('div');
@@ -565,24 +576,27 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     heading.append(controls);
   }
   if (isShift) {
-    const basis = node('select');
-    basis.className = 'shift-basis';
-    basis.setAttribute('aria-label', spec.title + ' comparison');
-    basis.append(new Option('By rating', 'rating'), new Option('By rank', 'rank'));
-    basis.value = state.shiftBasis;
-    head.append(basis);
+    const group = node('span');
+    group.className = 'shift-directions';
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', spec.title + ' direction');
+    for (const [dir, symbol, label] of [
+      ['up', '↑', 'Biggest gains'],
+      ['down', '↓', 'Biggest falls'],
+      ['both', '↕', 'Largest moves either way'],
+    ]) {
+      if (dir === 'both' && spec.key !== 'rankChange') continue;
+      const button = node('button', symbol);
+      button.dataset.board = spec.key;
+      button.dataset.direction = dir;
+      button.title = button.ariaLabel = label;
+      button.setAttribute('aria-pressed', String(state.directions[spec.key] === dir));
+      group.append(button);
+    }
+    head.append(group);
   }
   head.append(
-    node(
-      'small',
-      count +
-        ' · ' +
-        (isShift && state.shiftBasis === 'rank'
-          ? 'Places'
-          : weighted && spec.key === 'information'
-            ? 'weighted bits'
-            : spec.hint),
-    ),
+    node('small', count + ' · ' + (weighted && spec.key === 'information' ? 'weighted bits' : spec.hint)),
   );
   if (spec.key === 'information' && taste && taste.weights.length > 1) {
     const label = node('label'),
@@ -657,7 +671,7 @@ function renderBoards() {
   );
   ratingObserver?.disconnect();
   const visible = result.predictions.filter((p) => inFacet(p.itemId));
-  const ranks = state.shiftBasis === 'rank' ? rankChanges(visible) : null;
+  const rankMovements = rankChanges(visible);
   const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
   const fragment = document.createDocumentFragment();
   for (const spec of panels) {
@@ -666,7 +680,9 @@ function renderBoards() {
     board.className = 'board';
     list.className = 'ranks';
     list.dataset.key = spec.key;
-    const isShift = ['up', 'down'].includes(spec.key);
+    const direction = state.directions[spec.key];
+    const isShift = Boolean(direction);
+    const ranks = spec.key === 'rankChange' ? rankMovements : null;
     const title = spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
     if (spec.key === 'information') {
       board.classList.add('information');
@@ -687,8 +703,11 @@ function renderBoards() {
       why.className = 'info-note';
       board.append(why);
     }
-    const orderScore =
-      ranks && isShift ? (p) => ranks.get(p.itemId).change * (spec.key === 'up' ? 1 : -1) : spec.score;
+    const orderScore = (p) => {
+      const delta = ranks ? ranks.get(p.itemId).change : spec.score(p);
+      if (direction === 'both') return Math.abs(delta);
+      return direction === 'down' ? -delta : delta;
+    };
     const items = visible
       .filter((p) =>
         isShift
@@ -707,7 +726,7 @@ function renderBoards() {
           : spec.key === 'information' && (!taste || taste.weights.length < 2)
             ? 'This catalog has no competing taste classes.'
             : isShift && visible.length
-              ? emptyShiftMessage(spec.key, visible, ranks)
+              ? emptyShiftMessage(direction, visible, ranks)
               : 'No matching entries.';
       const note = node('p', msg);
       note.className = 'note';
@@ -731,8 +750,9 @@ function renderBoards() {
   for (const row of info.querySelectorAll('.info-row'))
     if (!row.querySelector('.choices')) ratingObserver.observe(row);
 }
-function emptyShiftMessage(key, items, ranks) {
-  const up = key === 'up';
+function emptyShiftMessage(direction, items, ranks) {
+  if (direction === 'both') return 'The unrated entries kept their catalog ranks.';
+  const up = direction === 'up';
   if (ranks) return 'No unrated entries in this view ' + (up ? 'gained' : 'lost') + ' places.';
   const opposite = items.every((p) => (up ? p.shift < 0 : p.shift > 0));
   const reason = opposite
@@ -742,7 +762,7 @@ function emptyShiftMessage(key, items, ranks) {
       (items.length === 1 ? 'rating ' : 'ratings ') +
       (up ? 'fell.' : 'rose.')
     : 'No predicted rating ' + (up ? 'rose' : 'fell') + ' in this view.';
-  return reason + ' Choose By rank to compare places.';
+  return reason + ' See Rank change to compare places.';
 }
 function mountChoices(row) {
   if (row?.isConnected && !row.querySelector('.choices')) {
@@ -810,6 +830,15 @@ el('boards').onclick = (event) => {
   const target = /** @type {HTMLElement} */ (event.target);
   const action = target.closest('button');
   if (!(action instanceof HTMLButtonElement)) return;
+  if (action.dataset.direction) {
+    const { board, direction } = action.dataset;
+    state.directions[board] = direction;
+    renderBoards();
+    el('boards').querySelector('.ranks[data-key="' + board + '"]').scrollTop = 0;
+    const toggled = el('boards').querySelector('button[data-board="' + board + '"][aria-pressed=true]');
+    if (toggled instanceof HTMLElement) toggled.focus({ preventScroll: true });
+    return;
+  }
   const row = action.closest('.forecast-row');
   const inline = action.matches('.quick-rate');
   const btn = row?.querySelector('.rank') ?? action;
@@ -830,17 +859,6 @@ el('boards').onclick = (event) => {
 };
 el('boards').onchange = (event) => {
   const radio = event.target;
-  if (radio instanceof HTMLSelectElement && radio.matches('.shift-basis')) {
-    state.shiftBasis = radio.value;
-    const label = radio.getAttribute('aria-label');
-    renderBoards();
-    for (const list of el('boards').querySelectorAll('.ranks[data-key=up], .ranks[data-key=down]'))
-      list.scrollTop = 0;
-    for (const basis of el('boards').querySelectorAll('.shift-basis'))
-      if (basis instanceof HTMLSelectElement && basis.getAttribute('aria-label') === label)
-        basis.focus({ preventScroll: true });
-    return;
-  }
   if (radio instanceof HTMLInputElement && radio.id === 'weight-familiarity') {
     state.weightByFamiliarity = radio.checked;
     renderBoards();

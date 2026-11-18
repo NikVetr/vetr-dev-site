@@ -72,6 +72,44 @@ test('Gaussian fingerprints project the conditional liability and describe class
   assert.equal(single.match, null);
   assert.equal(single.classes[0].label, 'Full population');
 });
+test('centering class profiles removes an overall rating direction without changing membership', () => {
+  const c = {
+    name: 'Two levels',
+    items: [
+      { itemId: 'a', title: 'A' },
+      { itemId: 'b', title: 'B' },
+    ],
+    scale: [1, 5],
+    models: {
+      classes: {
+        kind: 'latent-class',
+        components: [0.1, 0.9].map((p) => ({
+          weight: 0.5,
+          probabilities: [
+            [p, 1 - p],
+            [p, 1 - p],
+          ],
+        })),
+      },
+    },
+  };
+  const ratings = { a: 5 };
+  const ordinary = preferenceFingerprint(c, { ratings });
+  const relative = preferenceFingerprint(c, { ratings, centerClassMeans: true });
+  assert.equal(ordinary.axes.length, 1);
+  assert.equal(relative.axes.length, 0);
+  assert.deepEqual(relative.classes, ordinary.classes);
+  close(relative.mean, ordinary.mean);
+});
+test('selecting Gaussian PCs reorders projected conditional means and covariances', () => {
+  const c = catalog([component(1, [0, 0], 0.6)]);
+  const request = { model: 'ordinal', ratings: { a: 5 } };
+  const first = gaussianProjection(c, request);
+  const swap = gaussianProjection(c, { ...request, axisIndices: [1, 0] });
+  assert.deepEqual(swap.mean, [...first.mean].reverse());
+  assert.deepEqual(swap.covariance, first.covariance.map((row) => [...row].reverse()).reverse());
+  assert.throws(() => gaussianProjection(c, { ...request, axisIndices: [1, 1] }), /distinct/);
+});
 test('one ordinal observation integrates over its half-plane', () => {
   const c = catalog([component(1, [0, 0], 0.75)]);
   const r = submit({ catalog: c, model: 'ordinal', ratings: { a: 5 }, threshold: 5, samples: 2048 });

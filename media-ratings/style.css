@@ -730,7 +730,7 @@ body {
 .board-head small {
   white-space: nowrap;
 }
-.board-head:has(#threshold, .shift-basis),
+.board-head:has(#threshold, .shift-directions),
 .information .board-head {
   display: flex;
   flex-wrap: wrap;
@@ -770,9 +770,21 @@ body {
 .familiarity-option:has(:disabled) {
   color: var(--muted);
 }
-.shift-basis {
-  font-size: 0.72rem;
-  padding: 0.08rem 0.18rem;
+.shift-directions {
+  display: inline-flex;
+  gap: 2px;
+}
+.shift-directions button {
+  min-width: 1.85rem;
+  padding: 0.08rem 0.3rem;
+  line-height: 1.25;
+  font-size: 1rem;
+  color: var(--muted);
+}
+.shift-directions button[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
 }
 #threshold {
   flex: none;
@@ -1033,6 +1045,63 @@ body {
   font-variant-numeric: tabular-nums;
   padding: 0.12rem 0;
 }
+.class-weight {
+  width: 100%;
+  color: var(--text);
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+}
+.class-weight.inspected,
+.class-weight[aria-pressed='true'] {
+  background: var(--surface-2);
+  border-color: var(--class-color);
+}
+#taste-plot [role='button'] {
+  cursor: pointer;
+}
+#taste-plot .inspected circle:nth-of-type(2) {
+  stroke: var(--text);
+  stroke-width: 2.6;
+}
+#map-axes,
+.map-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+#map-axes:not(:empty) {
+  margin-bottom: 0.4rem;
+}
+#map-axes .center-classes {
+  flex-basis: 100%;
+  cursor: pointer;
+}
+#map-axes label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+#map-axes select {
+  font-size: inherit;
+  padding: 0.12rem;
+}
+.map-caption {
+  padding: 0.18rem 0.4rem;
+}
+.map-caption button {
+  background: transparent;
+  border: 0;
+}
+#class-signature h4 {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+}
 .component-id {
   grid-row: span 2;
   width: 1.16rem;
@@ -1115,6 +1184,18 @@ body {
   min-width: 0;
   border-top: 1px solid var(--edge);
   padding-top: 0.4rem;
+}
+#axes details {
+  font-size: 0.77rem;
+  margin-top: 0.25rem;
+}
+#axes details summary {
+  cursor: pointer;
+  color: var(--primary);
+}
+#axes details ul {
+  margin: 0.12rem 0 0.45rem;
+  padding-inline-start: 1.2rem;
 }
 .axis-summary,
 .axis-ends {
@@ -1238,5 +1319,10 @@ body {
   .info-row .star span,
   #threshold .star span {
     font-size: 1.4rem;
+  }
+}
+@media (max-width: 360px) {
+  #memberships {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

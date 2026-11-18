@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { openPage } from '../scripts/landing-art/browser.mjs';
-import { predict } from './core.mjs';
+import { predict, rankChanges } from './core.mjs';
 import { jointCounts } from './detail.mjs';
 
 test('paired counts preserve comparison rows and target columns on either item order', () => {
@@ -60,17 +60,18 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.ok(await page.locator('#pending').isHidden());
     assert.equal(await page.locator('#profile-count').innerText(), '2 applied ratings');
     const expected = predict(films, { model: 'reference', ratings });
+    const places = rankChanges(expected.predictions);
     const score = {
       expected: (p) => p.expected,
       chance: (p) => p.chance,
-      up: (p) => p.shift,
-      down: (p) => -p.shift,
+      ratingChange: (p) => p.shift,
+      rankChange: (p) => Math.abs(places.get(p.itemId).change),
 
       precision: (p) => p.expected / Math.max(0.01, p.sd ** 2),
     };
     for (const [key, fn] of Object.entries(score)) {
       const sorted = [...expected.predictions]
-        .filter((p) => !['up', 'down'].includes(key) || fn(p) > 0)
+        .filter((p) => !['ratingChange', 'rankChange'].includes(key) || fn(p) > 0)
         .sort((a, b) => fn(b) - fn(a));
       assert.deepEqual(
         await page
@@ -134,7 +135,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     );
     assert.equal(await page.locator('#projection-title').innerText(), 'City preference fingerprint');
     await page.locator('#model').selectOption('latentClass');
-    await page.locator('#taste details summary').click();
+    await page.locator('#profile-method summary').click();
     assert.match(await page.locator('#weights').innerText(), /Taste components/);
     await page.setViewportSize({ width: 320, height: 844 });
     const choicesFitOneLine = () =>
@@ -251,7 +252,13 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     );
     await p.locator('.info-row[data-id="' + id + '"]').waitFor({ state: 'detached' });
     assert.equal(await p.locator('#library .entry').count(), 500);
-    const shift = p.locator('.ranks:is([data-key=up],[data-key=down]) .rank').first();
+    const changeBoard = p.locator('[data-key=ratingChange]');
+    if (!(await changeBoard.locator('.rank').count()))
+      await p
+        .getByRole('group', { name: 'Rating change direction' })
+        .getByRole('button', { name: 'Biggest falls' })
+        .click();
+    const shift = changeBoard.locator('.rank').first();
     const target = await shift.getAttribute('data-id');
     assert.match(await shift.locator('.score').innerText(), /\d+\.\d{2} → \d+\.\d{2} \([+-]\d+\.\d{2}\)/);
     assert.equal(
@@ -304,6 +311,9 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#model').selectOption('reference');
     assert.match(await p.locator('#axes').innerText(), /latent variance/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
+    await p.getByLabel('Vertical principal component').selectOption('499');
+    assert.match(await p.locator('#axes').innerText(), /PC500/);
+    assert.equal(await p.locator('#taste-plot polyline').count(), 2);
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -329,15 +339,49 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
         .locator('#library .entry[data-id="' + id + '"]')
         .getByRole('radio', { name: '5 stars', exact: true })
         .check();
-    assert.match(await p.locator('[data-key=down] .note').innerText(), /All 498 predicted ratings rose/);
-    await p.getByLabel('Biggest fall comparison').selectOption('rank');
-    assert.equal(await p.locator('[data-key=down] .rank').count(), 237);
+    const direction = (panel, name) =>
+      p.getByRole('group', { name: panel + ' direction' }).getByRole('button', { name });
+    assert.equal(await direction('Rating change', 'Biggest gains').getAttribute('aria-pressed'), 'true');
+    assert.equal(await p.locator('[data-key=ratingChange] .rank').count(), 498);
+    await direction('Rating change', 'Biggest falls').click();
     assert.match(
-      await p.locator('[data-key=down] .rank .score').first().innerText(),
+      await p.locator('[data-key=ratingChange] .note').innerText(),
+      /All 498 predicted ratings rose/,
+    );
+    await direction('Rank change', 'Biggest falls').click();
+    assert.equal(await p.locator('[data-key=rankChange] .rank').count(), 237);
+    assert.match(
+      await p.locator('[data-key=rankChange] .rank .score').first().innerText(),
       /^#\d+ → #\d+ \(-\d+\)$/,
     );
+    await direction('Rating change', 'Biggest gains').click();
+    const horizontal = p.getByLabel('Horizontal principal component');
+    const vertical = p.getByLabel('Vertical principal component');
+    assert.equal(await horizontal.locator('option').count(), 7);
+    await horizontal.selectOption('6');
+    await vertical.selectOption('6');
+    assert.equal(await horizontal.inputValue(), '1'); // selecting the other axis swaps positions
+    assert.match(await p.locator('#axes').innerText(), /PC7/);
+    const center = p.getByRole('checkbox', { name: 'Remove overall rating level' });
+    const expectedFirst = await p.locator('[data-key=expected] .rank').first().innerText();
+    await center.check();
+    assert.equal(await horizontal.inputValue(), '0');
+    assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), expectedFirst);
+    await p.locator('#axes summary').first().click();
+    assert.ok(await p.locator('#axes details').first().locator('li').first().isVisible());
+    await center.uncheck();
+    const member = p.locator('#memberships button[data-class-index="2"]');
+    await member.hover();
+    assert.match(await p.locator('#class-signature').innerText(), /Most distinctive answer/);
+    await member.click();
+    await p.mouse.move(0, 0);
+    assert.equal(await member.getAttribute('aria-pressed'), 'true');
+    assert.match(await p.locator('#class-signature').innerText(), /Pinned class/);
+    await member.focus();
+    await p.keyboard.press('Escape');
+    assert.equal(await member.getAttribute('aria-pressed'), 'false');
     await p.locator('#auto').uncheck();
-    for (const key of ['expected', 'chance', 'down', 'up', 'precision']) {
+    for (const key of ['expected', 'chance', 'rankChange', 'ratingChange', 'precision']) {
       const row = p.locator('.ranks[data-key=' + key + '] .forecast-row').first();
       await row.locator('.quick-rate').click();
       const id = await row.getAttribute('data-id');
