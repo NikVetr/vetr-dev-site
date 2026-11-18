@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { submit, gaussianProjection } from './core.mjs';
+import { submit, gaussianProjection, rankChanges } from './core.mjs';
 import { tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { latentPairs } from './latent.mjs';
@@ -278,10 +278,32 @@ test('informative ratings separate classes, and previously supplied redundant ra
     after = tasteProfile(c, { signal: 0 });
   close(before.information.get('copy'), 1);
   close(before.information.get('noise'), 0);
+  assert.equal(before.weightedInformation, null);
+  const counted = {
+    ...c,
+    fit: { users: 100 },
+    items: c.items.map((it, i) => ({ ...it, annotations: { ratingCount: [10, 90, 100][i] } })),
+  };
+  const weighted = tasteProfile(counted, {});
+  close(weighted.weightedInformation.get('signal'), 0.1);
+  close(weighted.weightedInformation.get('copy'), 0.9);
+  close(weighted.information.get('signal'), 1);
   close(after.information.get('copy'), 0);
   close(before.projection[0].fraction, 1);
   assert.equal(before.projection.length, 1);
   assert.deepEqual(after.weights, [1, 0]);
+});
+test('rank drops can coexist with universally rising means, and tied means share places', () => {
+  const p = [
+    { itemId: 'a', prior: 3, expected: 3.1 },
+    { itemId: 'b', prior: 2, expected: 3.5 },
+    { itemId: 'c', prior: 2, expected: 3.5 },
+    { itemId: 'd', prior: 1, expected: 1.4 },
+  ];
+  const changes = rankChanges(p);
+  assert.deepEqual(changes.get('a'), { from: 1, to: 3, change: -2 });
+  assert.deepEqual(changes.get('c'), { from: 2, to: 1, change: 1 });
+  assert.deepEqual(changes.get('d'), { from: 4, to: 4, change: 0 });
 });
 test('projected ordinal posterior recovers truncated-normal moments in original coordinates', () => {
   const c = catalog([component(1, [0, 0], 0.6)]);

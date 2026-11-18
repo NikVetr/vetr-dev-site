@@ -196,6 +196,29 @@ function draws(component, model, obs, values, scale, L, uniform) {
 /** @param {number[]} scale */
 export const defaultCutoff = (scale) => scale[Math.round((scale.length - 1) * 0.75)];
 
+// Rank the same set of unrated items on both sides. Tied means share a place.
+export function rankChanges(predictions) {
+  const ranks = (key) => {
+    const sorted = [...predictions].sort((a, b) => b[key] - a[key]);
+    let place = 0;
+    return new Map(
+      sorted.map((p, i) => {
+        if (!i || Math.abs(p[key] - sorted[place - 1][key]) > 1e-10) place = i + 1;
+        return [p.itemId, place];
+      }),
+    );
+  };
+  const before = ranks('prior'),
+    after = ranks('expected');
+  return new Map(
+    predictions.map(({ itemId }) => {
+      const from = before.get(itemId),
+        to = after.get(itemId);
+      return [itemId, { from, to, change: from - to }];
+    }),
+  );
+}
+
 function summarize(item, probs, prior, personalized, scale, threshold) {
   const expected = dot(probs, scale);
   const variance = probs.reduce((v, p, j) => v + p * (scale[j] - expected) ** 2, 0);

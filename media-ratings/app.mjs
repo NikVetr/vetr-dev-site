@@ -2,7 +2,7 @@ import { tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
 import { ratingsCSV, forecastsCSV, importRatings, importForecasts, saveCSV } from './exchange.mjs';
-import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection } from './core.mjs';
+import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges } from './core.mjs';
 import { node, percent, signed, showDetail } from './detail.mjs';
 
 const el = (id) => document.getElementById(id);
@@ -12,6 +12,7 @@ Object.assign(window, {
   MediaRatings: {
     submit,
     tasteProfile,
+    rankChanges,
     preferenceFingerprint,
     gaussianProjection,
     importRatings,
@@ -39,7 +40,8 @@ const panels = [
     key: 'information',
     title: 'Most informative to rate',
     hint: 'bits',
-    score: (p) => taste?.information.get(p.itemId) ?? 0,
+    score: (p) =>
+      ((state.weightByFamiliarity && taste?.weightedInformation) || taste?.information)?.get(p.itemId) ?? 0,
     format: (n) => n.toFixed(3),
   },
   {
@@ -82,6 +84,8 @@ function useState(data, key) {
     data,
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
     threshold: defaultCutoff(data.scale),
+    weightByFamiliarity: true,
+    shiftBasis: 'rating',
     draft: Object.create(null),
     applied: Object.create(null),
     selection: null,
@@ -250,7 +254,7 @@ function ratingControls(id, surface) {
   return scaleChoices(surface + '-rating-' + id, 'Rate ' + titles.get(id));
 }
 function scaleChoices(name, groupLabel) {
-  const choices = node('div');
+  const choices = node('span');
   choices.className = 'choices';
   choices.setAttribute('role', 'radiogroup');
   choices.setAttribute('aria-label', groupLabel);
@@ -285,6 +289,16 @@ function syncRow(li) {
   li.querySelector('.clear').hidden = !rated;
   li.querySelector('.rating-readout').textContent = rated && isFilm(active) ? value + ' / 5' : '';
 }
+const moneyBands = [
+  [1e7, 'Under $10M'],
+  [5e7, '$10M to <$50M'],
+  [1e8, '$50M to <$100M'],
+  [5e8, '$100M to <$500M'],
+  [Infinity, '$500M or more'],
+];
+function moneyBand(value) {
+  return value > 0 ? [moneyBands.find(([end]) => value < end)[1]] : [];
+}
 function facets(a) {
   return {
     Genre: a.genres,
@@ -292,6 +306,8 @@ function facets(a) {
     Certificate: a.certificate ? [a.certificate] : [],
     Decade: a.year ? [Math.floor(a.year / 10) * 10 + 's'] : [],
     Collection: a.collection ? [a.collection] : [],
+    'Production budget': moneyBand(a.budget),
+    'Reported box office': moneyBand(a.revenue),
     Country: a.country ? [a.country] : [],
     Region: a.region ? [a.region] : [],
     Coast: a.coast ? [a.coast] : [],
@@ -332,7 +348,10 @@ function setupFilters() {
   for (const [group, values] of groups) {
     const opt = document.createElement('optgroup');
     opt.label = group;
-    for (const value of values.sort((a, b) => a.localeCompare(b))) {
+    const ordered = ['Production budget', 'Reported box office'].includes(group)
+      ? moneyBands.map((b) => b[1]).filter((value) => values.includes(value))
+      : values.sort((a, b) => a.localeCompare(b));
+    for (const value of ordered) {
       const key = group + '/' + value;
       opt.append(new Option(value + ' (' + facetIds.get(key).size + ')', key));
     }
@@ -343,6 +362,9 @@ function setupFilters() {
   if (catalog.items.some((it) => it.annotations?.year))
     select('sort').add(new Option('Newest first', 'year'));
   for (const [key, label] of [
+    ['ratingCount', 'Most rated'],
+    ['revenue', 'Highest reported box office'],
+    ['budget', 'Highest production budget'],
     ['gdp', 'Country GDP per capita'],
     ['population', 'Place population'],
     ['temperature', 'Warmest first'],
@@ -384,6 +406,8 @@ function reveal(id, focus = false) {
     filterRows();
   }
   const list = el('library');
+  list.querySelector('.catalog-highlight')?.classList.remove('catalog-highlight');
+  row.classList.add('catalog-highlight');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   list.scrollTo({
     top:
@@ -393,16 +417,8 @@ function reveal(id, focus = false) {
       (list.clientHeight - row.offsetHeight) / 2,
     behavior: reduced ? 'instant' : 'smooth',
   });
-  if (!reduced)
-    row.animate(
-      [
-        { outline: '2px solid var(--accent)', outlineOffset: '-3px' },
-        { outline: '2px solid transparent', outlineOffset: '-3px' },
-      ],
-      1400,
-    );
   if (focus) {
-    row.querySelector('input').focus({ preventScroll: true });
+    (row.querySelector('input:checked') ?? row.querySelector('input')).focus({ preventScroll: true });
     if (matchMedia('(max-width:690px)').matches)
       list.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'center' });
   }
@@ -486,7 +502,8 @@ function update(ratings) {
       (count ? count + ' applied rating' + (count === 1 ? '' : 's') : 'Catalog baseline') +
       ' · ' +
       result.predictions.length +
-      ' unrated';
+      ' unrated' +
+      (state.contextError ? ' · ' + state.contextError : '');
     const model = catalog.models[state.model];
     el('weights').textContent =
       model.kind === 'class-similarity'
@@ -531,6 +548,108 @@ function update(ratings) {
   }
   syncDraft();
 }
+function recommendationHeader(spec, title, count, isShift, weighted) {
+  const head = node('div');
+  head.className = 'board-head';
+  const heading = node('h3', title);
+  head.append(heading);
+  if (spec.key === 'chance') {
+    heading.className = 'cutoff-heading';
+    heading.textContent = 'Chance of ≥';
+    const cutoff = scaleChoices('chance-cutoff', 'Minimum rating for chance ranking');
+    cutoff.id = 'threshold';
+    markChoices(cutoff, state.threshold);
+    const controls = node('span');
+    controls.className = 'cutoff-value';
+    controls.append(cutoff, node('span', '(' + state.threshold + ')'));
+    heading.append(controls);
+  }
+  if (isShift) {
+    const basis = node('select');
+    basis.className = 'shift-basis';
+    basis.setAttribute('aria-label', spec.title + ' comparison');
+    basis.append(new Option('By rating', 'rating'), new Option('By rank', 'rank'));
+    basis.value = state.shiftBasis;
+    head.append(basis);
+  }
+  head.append(
+    node(
+      'small',
+      count +
+        ' · ' +
+        (isShift && state.shiftBasis === 'rank'
+          ? 'Places'
+          : weighted && spec.key === 'information'
+            ? 'weighted bits'
+            : spec.hint),
+    ),
+  );
+  if (spec.key === 'information' && taste && taste.weights.length > 1) {
+    const label = node('label'),
+      check = node('input');
+    check.type = 'checkbox';
+    check.id = 'weight-familiarity';
+    check.disabled = !taste.weightedInformation;
+    check.checked = weighted;
+    label.className = 'familiarity-option';
+    label.append(check, 'Weight by familiarity');
+    label.title = check.disabled
+      ? 'Item response counts are unavailable for this catalog.'
+      : 'Use the fraction of catalog respondents who rated each entry as a proxy for familiarity.';
+    head.append(label);
+  }
+  return head;
+}
+function recommendationRow(p, index, spec, isShift, ranks, weighted) {
+  const btn = node('button');
+  btn.className = 'rank';
+  btn.tabIndex = index === 0 ? 0 : -1;
+  btn.dataset.id = p.itemId;
+  btn.setAttribute('aria-pressed', String(selected === p.itemId));
+  const pos = node('span', String(index + 1)),
+    score = node(
+      'span',
+      isShift ? p.prior.toFixed(2) + ' → ' + p.expected.toFixed(2) : spec.format(spec.score(p), p),
+    );
+  if (isShift) {
+    const place = ranks?.get(p.itemId);
+    const change = place ? place.change : p.shift;
+    if (place) score.textContent = '#' + place.from + ' → #' + place.to;
+    const delta = node('span', '(' + (place ? (change > 0 ? '+' : '') + change : signed(change)) + ')');
+    delta.className = 'shift-delta ' + (change > 0 ? 'rise' : 'fall');
+    score.append(' ', delta);
+    score.title = place
+      ? 'Catalog rank → your rank among these unrated entries'
+      : 'Catalog mean → your mean (change)';
+  }
+  if (spec.key === 'information' && weighted)
+    score.title =
+      taste.information.get(p.itemId).toFixed(3) +
+      ' bits × ' +
+      metadata.get(p.itemId).ratingCount.toLocaleString() +
+      ' / ' +
+      catalog.fit.users.toLocaleString() +
+      ' respondents';
+  pos.className = 'rank-index';
+  score.className = 'score';
+  btn.append(pos, node('span', titles.get(p.itemId)), score);
+  const row = node('div');
+  row.dataset.id = p.itemId;
+  row.append(btn);
+  if (spec.key === 'information') {
+    row.className = 'info-row';
+    if (index < 12) row.append(ratingControls(p.itemId, 'information'));
+  } else {
+    row.className = 'forecast-row';
+    const rate = node('button', 'Rate');
+    rate.className = 'quick-rate';
+    rate.tabIndex = btn.tabIndex;
+    rate.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId) + ' here');
+    rate.setAttribute('aria-expanded', 'false');
+    row.append(rate);
+  }
+  return row;
+}
 function renderBoards() {
   const host = el('boards');
   const positions = new Map(
@@ -538,52 +657,48 @@ function renderBoards() {
   );
   ratingObserver?.disconnect();
   const visible = result.predictions.filter((p) => inFacet(p.itemId));
+  const ranks = state.shiftBasis === 'rank' ? rankChanges(visible) : null;
+  const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
   const fragment = document.createDocumentFragment();
   for (const spec of panels) {
     const board = node('section'),
-      head = node('div'),
       list = node('div');
     board.className = 'board';
-    head.className = 'board-head';
     list.className = 'ranks';
     list.dataset.key = spec.key;
     const isShift = ['up', 'down'].includes(spec.key);
     const title = spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
-    head.append(node('h3', title));
     if (spec.key === 'information') {
       board.classList.add('information');
-      head.title = 'Expected reduction in categorical class uncertainty, given the applied ratings.';
     }
     list.setAttribute('role', 'toolbar');
     list.setAttribute('aria-orientation', 'vertical');
     list.setAttribute('aria-label', title);
-    board.append(head, list);
+    board.append(list);
     if (spec.key === 'information' && taste) {
       const why = node(
         'p',
-        'Expected information about ' + taste.weights.length + ' taste classes, given your applied ratings.',
+        weighted
+          ? 'Information gain × the share of respondents who rated each entry.'
+          : 'Expected information about ' +
+              taste.weights.length +
+              ' taste classes, given your applied ratings.',
       );
       why.className = 'info-note';
       board.append(why);
     }
+    const orderScore =
+      ranks && isShift ? (p) => ranks.get(p.itemId).change * (spec.key === 'up' ? 1 : -1) : spec.score;
     const items = visible
       .filter((p) =>
-        spec.key === 'up'
-          ? p.shift > 0
-          : spec.key === 'down'
-            ? p.shift < 0
-            : spec.key === 'information'
-              ? !!taste && taste.weights.length > 1 && !Object.hasOwn(state.draft, p.itemId)
-              : true,
+        isShift
+          ? orderScore(p) > 0
+          : spec.key === 'information'
+            ? !!taste && taste.weights.length > 1 && !Object.hasOwn(state.draft, p.itemId)
+            : true,
       )
-      .sort((a, b) => spec.score(b) - spec.score(a));
-    head.append(node('small', items.length + ' · ' + spec.hint));
-    if (spec.key === 'chance') {
-      const cutoff = scaleChoices('chance-cutoff', 'Minimum rating for chance ranking');
-      cutoff.id = 'threshold';
-      markChoices(cutoff, state.threshold);
-      head.append(cutoff);
-    }
+      .sort((a, b) => orderScore(b) - orderScore(a));
+    board.prepend(recommendationHeader(spec, title, items.length, isShift, weighted));
     if (!items.length) {
       const msg = !result.predictions.length
         ? 'All entries rated. Clear one to predict it.'
@@ -592,43 +707,14 @@ function renderBoards() {
           : spec.key === 'information' && (!taste || taste.weights.length < 2)
             ? 'This catalog has no competing taste classes.'
             : isShift && visible.length
-              ? (spec.key === 'up'
-                  ? 'No unrated title in this view rises above'
-                  : 'No unrated title in this view falls below') +
-                ' its catalog mean with your current ratings.'
+              ? emptyShiftMessage(spec.key, visible, ranks)
               : 'No matching entries.';
       const note = node('p', msg);
       note.className = 'note';
       list.append(note);
     }
     for (const [index, p] of items.entries()) {
-      const btn = node('button');
-      btn.className = 'rank';
-      btn.tabIndex = index === 0 ? 0 : -1;
-      btn.dataset.id = p.itemId;
-      btn.setAttribute('aria-pressed', String(selected === p.itemId));
-      const pos = node('span', String(index + 1)),
-        score = node(
-          'span',
-          isShift ? p.prior.toFixed(2) + ' → ' + p.expected.toFixed(2) : spec.format(spec.score(p), p),
-        );
-      if (isShift) {
-        const delta = node('span', '(' + signed(p.shift) + ')');
-        delta.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
-        score.append(' ', delta);
-        score.title = 'Catalog mean → your mean (change)';
-      }
-      pos.className = 'rank-index';
-      score.className = 'score';
-      btn.append(pos, node('span', titles.get(p.itemId)), score);
-      if (spec.key === 'information') {
-        const row = node('div');
-        row.className = 'info-row';
-        row.dataset.id = p.itemId;
-        row.append(btn);
-        if (index < 12) row.append(ratingControls(p.itemId, 'information'));
-        list.append(row);
-      } else list.append(btn);
+      list.append(recommendationRow(p, index, spec, isShift, ranks, weighted));
     }
     fragment.append(board);
   }
@@ -644,6 +730,19 @@ function renderBoards() {
   );
   for (const row of info.querySelectorAll('.info-row'))
     if (!row.querySelector('.choices')) ratingObserver.observe(row);
+}
+function emptyShiftMessage(key, items, ranks) {
+  const up = key === 'up';
+  if (ranks) return 'No unrated entries in this view ' + (up ? 'gained' : 'lost') + ' places.';
+  const opposite = items.every((p) => (up ? p.shift < 0 : p.shift > 0));
+  const reason = opposite
+    ? 'All ' +
+      items.length +
+      ' predicted ' +
+      (items.length === 1 ? 'rating ' : 'ratings ') +
+      (up ? 'fell.' : 'rose.')
+    : 'No predicted rating ' + (up ? 'rose' : 'fell') + ' in this view.';
+  return reason + ' Choose By rank to compare places.';
 }
 function mountChoices(row) {
   if (row?.isConnected && !row.querySelector('.choices')) {
@@ -669,13 +768,17 @@ function renderDetail() {
     message: state.evidenceMessage,
   });
 }
-// One tab stop per ranking; arrow keys move through its scrollable entries.
+// Arrow keys move between titles. Tab reaches the active title's rating shortcut.
 el('boards').addEventListener('focusin', (event) => {
   const button = event.target;
   if (button instanceof HTMLElement && button.closest('.info-row')) mountChoices(button.closest('.info-row'));
-  if (!(button instanceof HTMLButtonElement) || !button.matches('.rank')) return;
-  for (const peer of button.closest('.ranks').querySelectorAll('button'))
-    peer.tabIndex = peer.dataset.id === button.dataset.id ? 0 : -1;
+  if (!(button instanceof HTMLButtonElement) || !button.matches('.rank, .quick-rate')) return;
+  const rank = button.closest('.forecast-row')?.querySelector('.rank') ?? button;
+  for (const peer of button.closest('.ranks').querySelectorAll('button[tabindex="0"]'))
+    peer.setAttribute('tabindex', '-1');
+  rank.setAttribute('tabindex', '0');
+  const rate = rank.nextElementSibling;
+  if (rate?.matches('.quick-rate')) rate.setAttribute('tabindex', '0');
 });
 el('boards').onkeydown = (event) => {
   const button = event.target;
@@ -695,40 +798,81 @@ el('boards').onkeydown = (event) => {
     next[event.key]?.focus();
   }
 };
+function showRatingChoices(row) {
+  const choices = ratingControls(row.dataset.id, 'recommendation');
+  markChoices(choices, state.draft[row.dataset.id]);
+  row.append(choices);
+  row.querySelector('.quick-rate').setAttribute('aria-expanded', 'true');
+  const first = choices.querySelector('input:checked') ?? choices.querySelector('input');
+  if (first instanceof HTMLInputElement) first.focus({ preventScroll: true });
+}
 el('boards').onclick = (event) => {
   const target = /** @type {HTMLElement} */ (event.target);
-  const btn = target.closest('button.rank');
-  if (!(btn instanceof HTMLButtonElement)) return;
-  selected = state.selection = btn.dataset.id;
-  for (const b of el('boards').querySelectorAll('button'))
-    if (b.classList.contains('rank')) b.setAttribute('aria-pressed', String(b.dataset.id === selected));
+  const action = target.closest('button');
+  if (!(action instanceof HTMLButtonElement)) return;
+  const row = action.closest('.forecast-row');
+  const inline = action.matches('.quick-rate');
+  const btn = row?.querySelector('.rank') ?? action;
+  selected = state.selection = btn.getAttribute('data-id');
+  for (const b of el('boards').querySelectorAll('.rank[aria-pressed="true"]'))
+    b.setAttribute('aria-pressed', 'false');
+  for (const b of el('boards').querySelectorAll('.rank[data-id="' + CSS.escape(selected) + '"]'))
+    b.setAttribute('aria-pressed', 'true');
   renderDetail();
-  if (['up', 'down'].includes(btn.closest('.ranks').getAttribute('data-key'))) {
-    reveal(selected, true);
-    return;
+  const previous = el('boards').querySelector('.forecast-row .choices');
+  const closing = inline && previous?.parentElement === row;
+  if (previous) {
+    previous.parentElement.querySelector('.quick-rate').setAttribute('aria-expanded', 'false');
+    previous.remove();
   }
-  const heading = el('detail-title');
-  if (matchMedia('(max-width:690px)').matches || heading.getBoundingClientRect().top > innerHeight - 60)
-    heading.focus();
+  reveal(selected, !inline);
+  if (inline && !closing) showRatingChoices(row);
 };
 el('boards').onchange = (event) => {
   const radio = event.target;
+  if (radio instanceof HTMLSelectElement && radio.matches('.shift-basis')) {
+    state.shiftBasis = radio.value;
+    const label = radio.getAttribute('aria-label');
+    renderBoards();
+    for (const list of el('boards').querySelectorAll('.ranks[data-key=up], .ranks[data-key=down]'))
+      list.scrollTop = 0;
+    for (const basis of el('boards').querySelectorAll('.shift-basis'))
+      if (basis instanceof HTMLSelectElement && basis.getAttribute('aria-label') === label)
+        basis.focus({ preventScroll: true });
+    return;
+  }
+  if (radio instanceof HTMLInputElement && radio.id === 'weight-familiarity') {
+    state.weightByFamiliarity = radio.checked;
+    renderBoards();
+    el('boards').querySelector('.information .ranks').scrollTop = 0;
+    el('weight-familiarity').focus({ preventScroll: true });
+    return;
+  }
   if (!(radio instanceof HTMLInputElement) || radio.type !== 'radio') return;
   if (radio.closest('#threshold')) {
     setCutoff(Number(radio.value));
     return;
   }
-  const row = radio.closest('div.info-row');
+  const row = radio.closest('.info-row, .forecast-row');
   if (!(row instanceof HTMLElement)) return;
   const list = row.parentElement;
   const index = [...list.children].indexOf(row);
   const height = row.offsetHeight;
   const id = row.dataset.id;
+  const boardKey = list.dataset.key;
   edit(entries.get(id), Number(radio.value));
-  const updated = el('boards').querySelector('.information .ranks');
+  const updated = el('boards').querySelector('.ranks[data-key="' + boardKey + '"]');
+  if (!updated) {
+    reveal(id);
+    return;
+  }
   const next = updated.children[index] ?? updated.lastElementChild;
-  if (next) next.querySelector('button')?.focus({ preventScroll: true });
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (boardKey !== 'information' && !input('auto').checked) {
+    showRatingChoices(updated.querySelector('.forecast-row[data-id="' + CSS.escape(id) + '"]'));
+  } else if (next?.querySelector('button')) {
+    next.querySelector('button').focus({ preventScroll: true });
+  } else entries.get(id).querySelector('input:checked')?.focus({ preventScroll: true });
+  if (boardKey === 'information' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     row.classList.add('departing');
     row.inert = true;
     row.setAttribute('aria-hidden', 'true');
@@ -763,12 +907,20 @@ function setCutoff(value) {
   renderBoards();
   renderDetail();
   const checked = el('threshold').querySelector(':checked');
+  el('boards').querySelector('.ranks[data-key=chance]').scrollTop = 0;
   if (checked instanceof HTMLInputElement) checked.focus({ preventScroll: true });
 }
 async function readJSON(path) {
   const resp = await fetch(path);
   if (!resp.ok) throw new Error('Unable to load ' + path + ' (' + resp.status + ').');
   return resp.json();
+}
+async function readOptionalJSON(path) {
+  try {
+    return { data: await readJSON(path), error: null };
+  } catch (error) {
+    return { data: null, error: error.message };
+  }
 }
 async function loadEvidence(key, s) {
   try {
@@ -792,6 +944,14 @@ async function loadEvidence(key, s) {
       if (data.packed.length !== ((data.ids.length * (data.ids.length - 1)) / 2) * data.scale.length ** 2)
         throw new Error('Incomplete paired counts.');
     }
+    if (key === 'stravl') {
+      const counts = data.counts.map((row) => row.reduce((sum, n) => sum + n, 0));
+      if (counts.reduce((sum, n) => sum + n, 0) !== s.data.fit.ratings)
+        throw new Error('Unexpected destination response totals.');
+      s.data.items.forEach((item, i) => {
+        item.annotations = { ...item.annotations, ratingCount: counts[i] };
+      });
+    }
     s.evidence = data;
   } catch (e) {
     s.evidenceMessage = e.message;
@@ -804,30 +964,42 @@ async function openCatalog(key, file = null) {
     let s = file ? null : states.get(key);
     if (!s) {
       el('status').textContent = 'Loading catalog…';
-      const [data, references] = file
-        ? [JSON.parse(await file.text()), null]
+      const [data, references, context] = file
+        ? [JSON.parse(await file.text()), null, null]
         : await Promise.all([
             readJSON(key + '.json'),
-            readJSON(key === 'expanded' ? 'film-links.json' : 'destination-links.json')
-              .then((links) => ({ links, error: null }))
-              .catch((error) => ({ links: null, error: error.message })),
+            readOptionalJSON(key === 'expanded' ? 'film-links.json' : 'destination-links.json'),
+            key === 'expanded' ? readOptionalJSON('film-context.json') : null,
           ]);
       if (seq !== revision) return;
-      if (references?.links && key === 'expanded') {
+      if (key === 'expanded') {
         for (const it of data.items) {
-          const certificate = references.links[it.itemId]?.certificate;
+          if (context?.data) {
+            const record = context.data[it.itemId];
+            if (
+              !Number.isSafeInteger(record?.ratingCount) ||
+              record.ratingCount <= 0 ||
+              record.ratingCount > data.fit.users
+            )
+              throw new Error('Invalid film rating count for ' + it.title);
+            it.annotations = { ...it.annotations, ...record };
+          }
+          const certificate = references?.data?.[it.itemId]?.certificate;
           if (certificate && !it.annotations?.certificate)
             it.annotations = { ...it.annotations, certificate };
         }
       }
       s = useState(data, key);
-      s.links = references?.links;
+      s.links = references?.data;
       s.linkError = references?.error;
-      states.set(key, s);
+      s.contextError = context?.error ? 'Film finances and familiarity counts unavailable.' : null;
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';
         el('custom-domain').hidden = false;
-      } else void loadEvidence(key, s);
+      } else if (key === 'stravl') await loadEvidence(key, s);
+      else void loadEvidence(key, s);
+      if (seq !== revision) return;
+      states.set(key, s);
     }
     if (seq === revision) install(key, s);
   } catch (e) {

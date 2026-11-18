@@ -18,6 +18,17 @@ export function tasteProfile(
     predict(catalog, { model: selected.kind === 'class-similarity' ? selected.base : key, ratings });
   const weights = result.weights.map((w) => w.posterior);
   const information = new Map();
+  const respondents = catalog.fit?.users;
+  const haveCounts =
+    Number.isSafeInteger(respondents) &&
+    respondents > 0 &&
+    catalog.items.every(
+      (it) =>
+        Number.isSafeInteger(it.annotations?.ratingCount) &&
+        it.annotations.ratingCount >= 0 &&
+        it.annotations.ratingCount <= respondents,
+    );
+  const weightedInformation = haveCounts ? new Map() : null;
   catalog.items.forEach(({ itemId }, i) => {
     if (Object.hasOwn(ratings, itemId)) return;
     const mass = catalog.scale.map((_, a) =>
@@ -31,8 +42,13 @@ export function tasteProfile(
       }
     }
     information.set(itemId, Math.max(0, bits));
+    if (weightedInformation)
+      weightedInformation.set(
+        itemId,
+        (information.get(itemId) * catalog.items[i].annotations.ratingCount) / respondents,
+      );
   });
-  return { weights, information, projection: projectClasses(model, catalog.scale) };
+  return { weights, information, weightedInformation, projection: projectClasses(model, catalog.scale) };
 }
 const projections = new WeakMap();
 function projectClasses(model, scale) {

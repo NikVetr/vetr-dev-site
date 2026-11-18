@@ -55,7 +55,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     }
     assert.ok(await page.locator('#pending').isVisible());
     assert.equal(await page.locator('#profile-count').innerText(), 'Catalog baseline');
-    assert.equal(await page.locator('[data-key=expected] button').count(), 500);
+    assert.equal(await page.locator('[data-key=expected] .rank').count(), 500);
     await page.locator('#apply').click();
     assert.ok(await page.locator('#pending').isHidden());
     assert.equal(await page.locator('#profile-count').innerText(), '2 applied ratings');
@@ -74,17 +74,17 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
         .sort((a, b) => fn(b) - fn(a));
       assert.deepEqual(
         await page
-          .locator('.ranks[data-key=' + key + '] button')
+          .locator('.ranks[data-key=' + key + '] .rank')
           .evaluateAll((els) => els.map((el) => el.dataset.id)),
         sorted.map((p) => p.itemId),
       );
     }
-    const pick = page.locator('.ranks[data-key=expected] button').first();
+    const pick = page.locator('.ranks[data-key=expected] .rank').first();
     await pick.focus();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     const item = await page.locator('#detail').getAttribute('data-id');
-    assert.equal(item, await page.locator('.ranks[data-key=expected] button').nth(1).getAttribute('data-id'));
+    assert.equal(item, await page.locator('.ranks[data-key=expected] .rank').nth(1).getAttribute('data-id'));
     assert.match(
       await page.locator('#external').getAttribute('href'),
       /^https:\/\/www\.imdb\.com\/title\/tt\d+\/$/,
@@ -117,13 +117,13 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       .getByRole('button', { name: /Clear rating/ })
       .click();
     assert.equal(await page.locator('#rated-list .entry').count(), 1);
-    assert.equal(await page.locator('.ranks[data-key=expected] button').count(), 499);
+    assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 499);
     await page.locator('[data-key=stravl]').click();
     await rows.first().getByRole('radio', { name: 'No', exact: true }).check();
     assert.equal(await threshold.getByRole('radio').count(), 3);
     await threshold.getByRole('radio', { name: 'Maybe', exact: true }).click();
     assert.ok(await threshold.getByRole('radio', { name: 'Maybe', exact: true }).isChecked());
-    assert.equal(await page.locator('.ranks[data-key=expected] button').count(), 11);
+    assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 11);
     assert.match(
       await page.locator('#external').getAttribute('href'),
       /^https:\/\/www\.openstreetmap\.org\/(node|way|relation)\/\d+$/,
@@ -157,8 +157,10 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.equal(await page.locator('#library .entry:visible').count(), 1);
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-    await page.locator('.ranks[data-key=expected] button').first().click();
-    assert.ok(await page.locator('#detail-title').evaluate((e) => e === document.activeElement));
+    await page.locator('.ranks[data-key=expected] .rank').first().click();
+    assert.ok(
+      await page.locator('#library .catalog-highlight').evaluate((e) => e.contains(document.activeElement)),
+    );
     const custom = {
       name: 'Two entries',
       domain: 'books',
@@ -214,7 +216,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#library .entry').first().waitFor();
     assert.equal(await p.locator('#model').inputValue(), 'ratingsTags');
     assert.equal(await p.locator('#library .entry').count(), 500);
-    await p.locator('.ranks[data-key=expected] button[data-id="50"]').click();
+    await p.locator('.ranks[data-key=expected] .rank[data-id="50"]').click();
     assert.equal(
       await p.getByRole('link', { name: 'Rotten Tomatoes' }).getAttribute('href'),
       'https://www.rottentomatoes.com/m/usual_suspects',
@@ -302,6 +304,81 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#model').selectOption('reference');
     assert.match(await p.locator('#axes').innerText(), /latent variance/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});
+
+test('familiar next ratings, rank drops and in-place rating work across recommendation boards', async () => {
+  const app = await openPage('media-ratings/');
+  const p = app.page;
+  try {
+    const firstInfo = p.locator('.info-row').first();
+    const familiar = p.getByRole('checkbox', { name: 'Weight by familiarity' });
+    await firstInfo.waitFor();
+    assert.ok(await familiar.isChecked());
+    assert.equal(await firstInfo.getAttribute('data-id'), '356'); // Forrest Gump
+    await familiar.uncheck();
+    assert.equal(await firstInfo.getAttribute('data-id'), '786'); // Eraser
+    await familiar.check();
+    const cutoffHeading = p.locator('h3:has(#threshold)');
+    assert.match(await cutoffHeading.innerText(), /Chance of ≥\s*\(4\)/);
+    for (const id of ['2571', '5618'])
+      await p
+        .locator('#library .entry[data-id="' + id + '"]')
+        .getByRole('radio', { name: '5 stars', exact: true })
+        .check();
+    assert.match(await p.locator('[data-key=down] .note').innerText(), /All 498 predicted ratings rose/);
+    await p.getByLabel('Biggest fall comparison').selectOption('rank');
+    assert.equal(await p.locator('[data-key=down] .rank').count(), 237);
+    assert.match(
+      await p.locator('[data-key=down] .rank .score').first().innerText(),
+      /^#\d+ → #\d+ \(-\d+\)$/,
+    );
+    await p.locator('#auto').uncheck();
+    for (const key of ['expected', 'chance', 'down', 'up', 'precision']) {
+      const row = p.locator('.ranks[data-key=' + key + '] .forecast-row').first();
+      await row.locator('.quick-rate').click();
+      const id = await row.getAttribute('data-id');
+      await row.getByRole('radio', { name: '2.5 stars', exact: true }).check();
+      assert.ok(
+        await p
+          .locator('#library .catalog-highlight[data-id="' + id + '"]')
+          .getByRole('radio', { name: '2.5 stars', exact: true })
+          .isChecked(),
+      );
+      assert.ok(await row.getByRole('radio', { name: '2.5 stars', exact: true }).isChecked());
+      await row.locator('.quick-rate').click();
+      assert.equal(await row.locator('.choices').count(), 0);
+    }
+    const row = p.locator('[data-key=expected] .forecast-row').nth(15);
+    const id = await row.getAttribute('data-id');
+    await p.locator('#search').fill('absent title');
+    await row.locator('.rank').click();
+    assert.equal(await p.locator('#search').inputValue(), '');
+    assert.ok(
+      await p
+        .locator('#library .catalog-highlight[data-id="' + id + '"]')
+        .evaluate((e) => e.contains(document.activeElement)),
+    );
+    await p.getByLabel('Catalog sort order').selectOption('budget');
+    await p
+      .getByLabel('Filter catalog and rankings by annotation')
+      .selectOption('Production budget/$100M to <$500M');
+    assert.ok((await p.locator('#library .entry:visible').count()) > 0);
+    assert.match(await p.locator('#annotations').innerText(), /production budget/);
+    await p.locator('#domains [data-key=stravl]').click();
+    await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
+    assert.ok(await familiar.isChecked());
+    assert.match(await firstInfo.locator('.score').getAttribute('title'), /12,905 respondents/);
+    await p.locator('#auto').check();
+    const city = p.locator('[data-key=chance] .forecast-row').first();
+    const cityId = await city.getAttribute('data-id');
+    await city.locator('.quick-rate').click();
+    await city.getByRole('radio', { name: 'Yes', exact: true }).click();
+    assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), cityId);
+    assert.equal(await p.locator('.forecast-row[data-id="' + cityId + '"]').count(), 0);
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();

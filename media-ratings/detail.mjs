@@ -251,6 +251,16 @@ export function showDetail({
     a.certificate,
     ...(a.tags ?? []),
     a.collection ? a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '') : '',
+    a.budget > 0 ? '$' + a.budget.toLocaleString('en-US') + ' production budget' : '',
+    a.revenue > 0 ? '$' + a.revenue.toLocaleString('en-US') + ' reported box office' : '',
+    Number.isSafeInteger(a.ratingCount)
+      ? a.ratingCount.toLocaleString() +
+        (domain === 'expanded'
+          ? ' MovieLens 25M ratings'
+          : domain === 'stravl'
+            ? ' Stravl responses'
+            : ' ratings')
+      : '',
     a.region,
     a.coast,
     a.temperature != null ? a.temperature + ' °C annual mean' : '',
@@ -306,7 +316,10 @@ export function showDetail({
     ['Predicted SD', numeric(p.sd)],
   ]) {
     const row = node('div');
-    row.append(node('dt', name), node('dd', value));
+    const amount = node('dd', value);
+    if (name === 'Surprise (difference)' && p.shift)
+      amount.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
+    row.append(node('dt', name), amount);
     metrics.append(row);
   }
   const conditioning = {
