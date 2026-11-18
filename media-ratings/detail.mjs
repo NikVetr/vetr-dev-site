@@ -227,6 +227,8 @@ export function showDetail({
   prior,
   catalog,
   evidence,
+  links: targets,
+  linkError,
   domain,
   ratings,
   titles,
@@ -260,32 +262,31 @@ export function showDetail({
   el('annotations').hidden = !annotationText.length;
   const link = /** @type {HTMLAnchorElement} */ (el('external'));
   const imdb = evidence?.imdb?.[p.itemId];
-  link.hidden = !(imdb || domain === 'stravl');
-  if (!link.hidden) {
-    link.href = imdb
-      ? 'https://www.imdb.com/title/tt' + imdb + '/'
-      : 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(p.title);
-    link.textContent = imdb ? 'View on IMDb ↗' : 'View on map ↗';
-  }
+  const primary =
+    domain === 'stravl'
+      ? targets?.openStreetMap
+      : (targets?.imdb ?? (imdb ? 'https://www.imdb.com/title/tt' + imdb + '/' : null));
+  link.hidden = !primary;
+  if (primary) {
+    link.href = primary;
+    link.textContent = domain === 'stravl' ? 'OpenStreetMap ↗' : 'IMDb ↗';
+  } else link.removeAttribute('href');
   const links = el('item-links');
   links.replaceChildren(link);
-  const extra = (label, url) => {
+  for (const [key, label] of [
+    ['rottenTomatoes', 'Rotten Tomatoes'],
+    ['wikipedia', 'Wikipedia'],
+    ['googleMaps', 'Google Maps'],
+    ['appleMaps', 'Apple Maps'],
+  ]) {
+    if (!targets?.[key]) continue;
     const a = node('a', label + ' ↗');
-    a.href = url;
+    a.href = targets[key];
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
     links.append(a);
-  };
-  if (domain === 'stravl') {
-    const q = encodeURIComponent(p.title);
-    extra('Google Maps', 'https://www.google.com/maps/search/?api=1&query=' + q);
-    extra('Apple Maps', 'https://maps.apple.com/?q=' + q);
-  } else if (domain === 'expanded')
-    extra(
-      'Search Rotten Tomatoes',
-      'https://www.rottentomatoes.com/search?search=' +
-        encodeURIComponent(titles.get(p.itemId).replace(/ \(\d{4}\)$/, '')),
-    );
+  }
+  if (linkError) links.append(node('small', 'Article and map links unavailable.'));
   distribution(
     catalog.scale,
     label,

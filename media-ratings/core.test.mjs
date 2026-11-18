@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { submit, gaussianProjection } from './core.mjs';
 import { tasteProfile } from './taste.mjs';
+import { preferenceFingerprint } from './fingerprint.mjs';
 import { latentPairs } from './latent.mjs';
 import { pnorm } from '../intuitions/lib/normal.js';
 const close = (x, y, tol = 1e-8) => assert.ok(Math.abs(x - y) < tol, x + ' ≠ ' + y);
@@ -24,6 +25,53 @@ function catalog(components) {
     models: { ordinal: { kind: 'ordinal-probit', cuts: [0], components } },
   };
 }
+test('a class match requires evidence and a unique leader; affinities use the recorded scale', () => {
+  const genres = ['History', 'History', 'Fantasy', 'Fantasy'];
+  const books = {
+    name: 'Books',
+    domain: 'books',
+    scale: [1, 5],
+    items: genres.map((genre, i) => ({
+      itemId: String(i),
+      title: genre + ' ' + i,
+      annotations: { genres: [genre] },
+    })),
+    models: {
+      classes: {
+        kind: 'latent-class',
+        components: [0, 1].map((k) => ({
+          weight: 0.5,
+          probabilities: genres.map((_, i) => (i < 2 === (k === 0) ? [0.1, 0.9] : [0.9, 0.1])),
+        })),
+      },
+    },
+  };
+  const baseline = preferenceFingerprint(books);
+  assert.equal(baseline.match, null);
+  close(baseline.mean, 3);
+  const match = preferenceFingerprint(books, { ratings: { 0: 5 } });
+  assert.equal(match.match.label, 'History leaning');
+  close(match.match.probability, 0.9);
+  close(match.mean, 3);
+  close(match.affinities[0].shift, 1.28);
+  assert.equal(match.affinities[0].count, 2);
+  assert.equal(match.axes.length, 1);
+  assert.deepEqual(new Set([match.axes[0].low, match.axes[0].high]), new Set(['History', 'Fantasy']));
+  assert.equal(preferenceFingerprint(books, { ratings: { 0: 5, 2: 5 } }).match, null);
+});
+test('Gaussian fingerprints project the conditional liability and describe classes in rating units', () => {
+  const c = catalog([component(0.5, [-1, -1]), component(0.5, [1, 1])]);
+  const f = preferenceFingerprint(c, { ratings: { a: 5 } });
+  const probability = pnorm(1);
+  close(f.match.probability, probability);
+  close(f.mass[1], probability ** 2 + (1 - probability) ** 2);
+  close(f.mean, 1 + 4 * f.mass[1]);
+  assert.equal(f.axes[0].label, 'Overall rating');
+  assert.ok(Math.abs(f.axes[0].score) > 0);
+  const single = preferenceFingerprint(catalog([component(1, [0, 0])]), { ratings: { b: 5 } });
+  assert.equal(single.match, null);
+  assert.equal(single.classes[0].label, 'Full population');
+});
 test('one ordinal observation integrates over its half-plane', () => {
   const c = catalog([component(1, [0, 0], 0.75)]);
   const r = submit({ catalog: c, model: 'ordinal', ratings: { a: 5 }, threshold: 5, samples: 2048 });

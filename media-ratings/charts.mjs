@@ -1,5 +1,3 @@
-import { dot } from '../intuitions/lib/linalg.js';
-
 function shape(tag, attrs, text = '') {
   const n = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
@@ -44,113 +42,163 @@ function html(tag, text = '') {
   e.textContent = text;
   return e;
 }
-function descriptors(axis, items) {
-  const groups = new Map();
-  items.forEach((it, i) => {
-    const a = it.annotations;
-    const labels = a?.genres ?? (a?.region ? [a.region] : []);
-    for (const label of labels) {
-      if (!groups.has(label)) groups.set(label, []);
-      groups.get(label).push(axis.loadings[i]);
-    }
-  });
-  const sorted = [...groups]
-    .filter(([, v]) => v.length >= (items.length > 100 ? 10 : 2))
-    .map(([name, v]) => ({ name, n: v.length, mean: v.reduce((sum, x) => sum + x, 0) / v.length }))
-    .sort((a, b) => a.mean - b.mean);
-  if (sorted.length < 2) return '';
-  const low = sorted[0],
-    high = sorted.at(-1);
-  return (
-    'Mean loading by group: ' +
-    low.name +
-    ' (' +
-    low.mean.toFixed(3) +
-    ', n=' +
-    low.n +
-    ') to ' +
-    high.name +
-    ' (' +
-    high.mean.toFixed(3) +
-    ', n=' +
-    high.n +
-    ').'
-  );
+function signedValue(value, digits = 2) {
+  return (value > 0 ? '+' : '') + value.toFixed(digits);
 }
-export function renderTaste(profile, catalog) {
+function fingerprintPanels(fp, catalog) {
+  document.getElementById('profile-count').textContent = fp.ratedCount
+    ? fp.ratedCount + (fp.ratedCount === 1 ? ' applied rating' : ' applied ratings')
+    : 'Catalog baseline';
+  const membership = document.getElementById('memberships');
+  membership.replaceChildren(html('h3', fp.ratedCount ? 'Class probabilities' : 'Catalog classes'));
+  for (const { index, label, probability, prior } of fp.classes) {
+    const row = html('div');
+    row.className = 'class-weight';
+    row.style.setProperty('--class-color', colors[index % colors.length]);
+    const id = html('span', String(index + 1));
+    id.className = 'component-id';
+    const name = html('span', label),
+      rail = html('span'),
+      bar = html('i');
+    name.className = 'component-name';
+    rail.className = 'weight-rail';
+    bar.style.width = 100 * probability + '%';
+    rail.append(bar);
+    row.title = 'Class ' + (index + 1) + ' · ' + (100 * prior).toFixed(1) + '% of the fitted population';
+    row.append(id, name, html('b', (100 * probability).toFixed(1) + '%'), rail);
+    membership.append(row);
+  }
+  const signature = document.getElementById('class-signature');
+  signature.replaceChildren(html('h3', fp.match ? 'Closest class' : 'Class match'));
+  if (fp.match) {
+    const heading = html('strong', fp.match.label);
+    heading.className = 'match-name';
+    const p = html(
+      'p',
+      'Class ' + (fp.match.index + 1) + ' · ' + (fp.match.probability * 100).toFixed(1) + '% probability',
+    );
+    signature.append(heading, p);
+  } else {
+    const text =
+      fp.classes.length === 1
+        ? 'Single-component model'
+        : fp.ratedCount
+          ? 'Tied class probabilities'
+          : 'Rate an entry to find your class.';
+    signature.append(html('p', text));
+  }
+  const dist = html('div');
+  dist.className = 'class-stats';
+  const metric = (label, value) => {
+    const tile = html('div');
+    tile.append(html('span', label), html('b', value));
+    dist.append(tile);
+  };
+  metric('Class-weighted mean', fp.mean.toFixed(2));
+  if (fp.usesHalfStars)
+    metric(
+      'Half-star use',
+      Math.round(100 * fp.mass.reduce((sum, v, i) => sum + (Number.isInteger(catalog.scale[i]) ? 0 : v), 0)) +
+        '%',
+    );
+  else
+    metric(
+      'Chance of ' + (catalog.scaleLabels?.at(-1) ?? catalog.scale.at(-1)),
+      Math.round(100 * fp.mass.at(-1)) + '%',
+    );
+  signature.append(dist);
+  if (
+    fp.ratedCount &&
+    fp.affinities.length > 1 &&
+    fp.affinities[0].shift - fp.affinities.at(-1).shift >= 0.01
+  ) {
+    const group = html('div');
+    group.className = 'class-affinities';
+    group.append(html('h4', 'Relative affinities'));
+    for (const a of [fp.affinities[0], fp.affinities.at(-1)]) {
+      const row = html('div');
+      row.append(html('span', a.label), html('b', signedValue(a.shift)));
+      row.title = 'Average shift for ' + a.count + ' entries, centered on the catalog-wide shift';
+      group.append(row);
+    }
+    signature.append(group);
+  }
+}
+export function renderTaste(profile, catalog, fp, domain) {
   const host = document.getElementById('taste'),
     plot = document.getElementById('taste-plot'),
     legend = document.getElementById('axes');
   host.hidden = !profile;
   if (!profile) return;
-  const { projection: axes, weights } = profile;
-  const continuous = Boolean(profile.covariance);
-  document.getElementById('projection-title').textContent = continuous
-    ? 'Gaussian latent space'
-    : 'Taste-class projection';
-  document.getElementById('projection-help').textContent = continuous
-    ? 'Contours enclose one standard deviation of projected liabilities. The diamond marks your conditional mean.'
-    : 'Each number represents a class of rating profiles. The diamond locates the average profile implied by your ratings.';
-  plot.replaceChildren();
+  const { projection: axes, weights } = profile,
+    continuous = Boolean(profile.covariance);
+  const domainTitle =
+    {
+      movies: 'Movie preference',
+      cities: 'City preference',
+      books: 'Book preference',
+      music: 'Music preference',
+      anime: 'Anime preference',
+      games: 'Game preference',
+    }[domain] ?? 'Preference';
+  document.getElementById('projection-title').textContent = domainTitle + ' fingerprint';
+  fingerprintPanels(fp, catalog);
+  const details = document.getElementById('axis-loadings');
+  details.replaceChildren();
   legend.replaceChildren();
-  const membership = document.getElementById('memberships');
-  membership.replaceChildren(html('h3', 'Class probability'));
-  const sortedWeights = weights.map((weight, i) => ({ weight, i })).sort((a, b) => b.weight - a.weight);
-  for (const { weight, i } of sortedWeights) {
-    const row = html('div');
-    row.className = 'class-weight';
-    row.style.setProperty('--class-color', colors[i % colors.length]);
-    const label = html('span', 'Class ' + (i + 1)),
-      rail = html('span'),
-      bar = html('i');
-    rail.className = 'weight-rail';
-    bar.style.width = weight * 100 + '%';
-    rail.append(bar);
-    row.append(label, rail, html('b', (100 * weight).toFixed(1) + '%'));
-    membership.append(row);
-  }
+  plot.replaceChildren();
+  document.getElementById('profile-help').textContent =
+    'The closest class has the highest probability given your applied ratings. Each entry counts equally in the class-weighted mean and response frequencies. Relative affinities compare group shifts after removing the overall shift. ' +
+    (fp.usesHalfStars ? 'A half-step class uses half stars on at least one in five ratings. ' : '') +
+    (continuous
+      ? 'The map uses Gaussian liabilities. Each contour shows one projected standard deviation.'
+      : 'The map projects the class mean ratings. The diamond averages their positions using your class probabilities.');
   if (!axes.length) {
-    legend.textContent = 'The fitted class means have no between-class spread.';
+    plot.append(html('p', 'The class centers have no measurable spread.'));
     return;
   }
   const xs = axes[0].scores,
     ys = axes[1]?.scores ?? weights.map(() => 0);
-  const yourX = profile.mean?.[0] ?? dot(xs, weights),
-    yourY = profile.mean?.[1] ?? dot(ys, weights);
+  const yourX = fp.axes[0].score,
+    yourY = fp.axes[1]?.score ?? 0;
   const radii = (cov) => [Math.sqrt(Math.max(0, cov[0][0])), Math.sqrt(Math.max(0, cov[1]?.[1] ?? 0))];
-  const sizes = continuous
-    ? [...profile.classCovariance, profile.covariance].flatMap((cov, k) => {
-        const [a, b] = radii(cov);
-        return [Math.abs(xs[k] ?? yourX) + a, Math.abs(ys[k] ?? yourY) + b];
-      })
-    : [];
-  const extent = Math.max(1e-8, ...xs.map(Math.abs), ...ys.map(Math.abs), ...sizes);
-  const step = 10 ** Math.floor(Math.log10(extent));
-  const limit = (Math.ceil((extent / step) * 2) * step) / 2;
-  const x = (v) => 235 + (v * 178) / limit,
-    y = (v) => 127 - (v * 96) / limit;
+  function axisLimit(scores, mean, coord) {
+    const extents = [Math.abs(mean), ...scores.map(Math.abs)];
+    if (continuous) {
+      extents.push(Math.abs(mean) + radii(profile.covariance)[coord]);
+      profile.classCovariance.forEach((cov, k) => extents.push(Math.abs(scores[k]) + radii(cov)[coord]));
+    }
+    const extent = Math.max(...extents);
+    if (!extent) return 1;
+    const step = 10 ** Math.floor(Math.log10(extent)) / 2;
+    return Math.ceil(extent / step) * step;
+  }
+  const limitX = axisLimit(xs, yourX, 0),
+    limitY = axisLimit(ys, yourY, 1);
+  const x = (v) => 167 + (v * 123) / limitX,
+    y = (v) => 91 - (v * 62) / limitY;
   const svg = figure(
-    'Projected class centers and your conditional position. PC1 horizontal, PC2 vertical.',
-    460,
-    264,
+    'Class centers on ' + (axes.length > 1 ? 'PC1 and PC2' : 'PC1') + '. Diamond marks the projected mean.',
+    324,
+    188,
   );
   for (const i of [-1, -0.5, 0, 0.5, 1]) {
-    const t = i * limit,
-      label = String(+t.toPrecision(2));
-    const style = i === 0 ? 'axis-line' : 'gridline';
+    const tx = i * limitX,
+      ty = i * limitY,
+      style = i === 0 ? 'axis-line' : 'gridline';
     svg.append(
-      shape('line', { x1: x(t), x2: x(t), y1: 24, y2: 226, class: style }),
-      shape('text', { x: x(t), y: 242, 'text-anchor': 'middle' }, label),
+      shape('line', { x1: x(tx), x2: x(tx), y1: 21, y2: 159, class: style }),
+      shape('text', { x: x(tx), y: 174, 'text-anchor': 'middle' }, String(+tx.toPrecision(2))),
     );
     if (axes.length > 1)
       svg.append(
-        shape('line', { x1: 49, x2: 422, y1: y(t), y2: y(t), class: style }),
-        shape('text', { x: 41, y: y(t) + 4, 'text-anchor': 'end' }, label),
+        shape('line', { x1: 38, x2: 299, y1: y(ty), y2: y(ty), class: style }),
+        shape('text', { x: 33, y: y(ty) + 4, 'text-anchor': 'end' }, String(+ty.toPrecision(2))),
       );
   }
   svg.append(
-    shape('text', { x: 235, y: 260, 'text-anchor': 'middle' }, 'PC1'),
-    shape('text', { x: 40, y: 15 }, axes.length > 1 ? 'PC2' : ''),
+    shape('text', { x: 313, y: 174, 'text-anchor': 'middle' }, 'PC1'),
+    shape('text', { x: 28, y: 15 }, axes.length > 1 ? 'PC2' : ''),
   );
   function contour(cx, cy, cov, color) {
     const [a, b] = radii(cov),
@@ -173,6 +221,7 @@ export function renderTaste(profile, catalog) {
   // Nearby projected centers can overlap. Place their numbers in separate
   // positions and lead each displaced label back to the actual center.
   const placed = [];
+  const markers = xs.map((v, k) => [x(v), y(ys[k])]).concat([[x(yourX), y(yourY)]]);
   weights.forEach((w, k) => {
     const cx = x(xs[k]),
       cy = y(ys[k]),
@@ -198,8 +247,11 @@ export function renderTaste(profile, catalog) {
       [-26, -5],
     ];
     const [dx, dy] =
-      offsets.find(([a, b]) => placed.every(([px, py]) => Math.hypot(cx + a - px, cy + b - py) > 15)) ??
-      offsets[0];
+      offsets.find(
+        ([a, b]) =>
+          placed.every(([px, py]) => Math.hypot(cx + a - px, cy + b - py) > 15) &&
+          markers.every(([mx, my]) => Math.hypot(cx + a - mx, cy + b - 4 - my) > 10),
+      ) ?? offsets[0];
     placed.push([cx + dx, cy + dy]);
     svg.append(
       shape('line', {
@@ -227,35 +279,49 @@ export function renderTaste(profile, catalog) {
       'stroke-width': 2.5,
     }),
   );
-  const key = html('p', '◇  Your projected mean');
+  const key = html('p', fp.ratedCount ? '◇ Your position' : '◇ Catalog center');
   key.className = 'projection-key';
   plot.append(svg, key);
-  for (const [i, a] of axes.entries()) {
-    const section = html('section');
-    section.append(
+  for (const [i, a] of fp.axes.entries()) {
+    const card = html('section'),
+      top = html('div');
+    top.className = 'axis-summary';
+    top.append(
+      html('h3', 'PC' + (i + 1) + ' · ' + a.label),
       html(
-        'h3',
-        'PC' +
-          (i + 1) +
-          ' · ' +
-          (100 * a.fraction).toFixed(1) +
-          '% of ' +
-          (continuous ? 'latent variance' : 'between-class variance'),
+        'small',
+        (100 * a.fraction).toFixed(1) + '% of ' + (continuous ? 'latent variance' : 'between-class variance'),
       ),
     );
-    for (const [name, j] of [
-      ['Low', a.low],
-      ['High', a.high],
-    ]) {
-      const line = html('p');
-      line.append(
-        html('b', name + '  '),
-        document.createTextNode(catalog.items[j].title + ' (' + a.loadings[j].toFixed(2) + ')'),
-      );
-      section.append(line);
-    }
-    const groups = descriptors(a, catalog.items);
-    if (groups) section.append(html('small', groups));
-    legend.append(section);
+    const rail = html('div');
+    rail.className = 'axis-track';
+    const mark = html('i');
+    mark.style.left = 50 + (50 * a.score) / (i === 0 ? limitX : limitY) + '%';
+    rail.append(mark);
+    rail.title = (fp.ratedCount ? 'Your score ' : 'Catalog center ') + signedValue(a.score);
+    const ends = html('div');
+    ends.className = 'axis-ends';
+    ends.append(html('span', a.low), html('span', a.high));
+    card.append(top, rail, ends);
+    legend.append(card);
+    const axis = axes[i];
+    details.append(
+      html(
+        'p',
+        'PC' +
+          (i + 1) +
+          ' · projected score ' +
+          signedValue(a.score) +
+          '. Lowest loading: ' +
+          catalog.items[axis.low].title +
+          ' (' +
+          axis.loadings[axis.low].toFixed(3) +
+          '). Highest: ' +
+          catalog.items[axis.high].title +
+          ' (' +
+          axis.loadings[axis.high].toFixed(3) +
+          ').',
+      ),
+    );
   }
 }

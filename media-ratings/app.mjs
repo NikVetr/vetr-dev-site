@@ -1,4 +1,5 @@
 import { tasteProfile } from './taste.mjs';
+import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
 import { ratingsCSV, forecastsCSV, importRatings, importForecasts, saveCSV } from './exchange.mjs';
 import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection } from './core.mjs';
@@ -11,6 +12,7 @@ Object.assign(window, {
   MediaRatings: {
     submit,
     tasteProfile,
+    preferenceFingerprint,
     gaussianProjection,
     importRatings,
     importForecasts,
@@ -18,7 +20,6 @@ Object.assign(window, {
     forecastsCSV,
   },
 });
-const cutoff = select('threshold');
 const states = new Map();
 let active,
   state,
@@ -124,8 +125,6 @@ function install(key, next) {
       }),
   );
   select('model').value = state.model;
-  cutoff.replaceChildren(...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))));
-  cutoff.value = String(state.threshold);
   el('scale-help').textContent = isFilm(key)
     ? 'Choose a half or whole star.'
     : catalog.scaleLabels
@@ -248,10 +247,13 @@ function entryRow(p, surface) {
   return li;
 }
 function ratingControls(id, surface) {
+  return scaleChoices(surface + '-rating-' + id, 'Rate ' + titles.get(id));
+}
+function scaleChoices(name, groupLabel) {
   const choices = node('div');
   choices.className = 'choices';
   choices.setAttribute('role', 'radiogroup');
-  choices.setAttribute('aria-label', 'Rate ' + titles.get(id));
+  choices.setAttribute('aria-label', groupLabel);
   for (const v of catalog.scale) {
     const star = isFilm(active),
       label = node('label'),
@@ -259,9 +261,9 @@ function ratingControls(id, surface) {
       glyph = node('span', star ? '' : scaleLabel(v));
     label.className = star ? 'choice star' : 'choice';
     radio.type = 'radio';
-    radio.name = surface + '-rating-' + id;
+    radio.name = name;
     radio.value = String(v);
-    const description = scaleLabel(v) + (star ? ' stars' : '');
+    const description = star ? `${scaleLabel(v)} ${v === 1 ? 'star' : 'stars'}` : scaleLabel(v);
     radio.setAttribute('aria-label', description);
     label.title = description;
     label.append(radio, glyph);
@@ -269,14 +271,17 @@ function ratingControls(id, surface) {
   }
   return choices;
 }
+function markChoices(group, value) {
+  for (const r of group.querySelectorAll('input')) {
+    r.checked = Number(r.value) === value;
+    r.parentElement.classList.toggle('filled', value !== undefined && Number(r.value) <= value);
+  }
+}
 function syncRow(li) {
   const value = state.draft[li.dataset.id],
     rated = value !== undefined;
   li.classList.toggle('rated', rated);
-  for (const r of li.querySelectorAll('input')) {
-    r.checked = rated && Number(r.value) === value;
-    r.parentElement.classList.toggle('filled', rated && Number(r.value) <= value);
-  }
+  markChoices(li.querySelector('.choices'), value);
   li.querySelector('.clear').hidden = !rated;
   li.querySelector('.rating-readout').textContent = rated && isFilm(active) ? value + ' / 5' : '';
 }
@@ -507,7 +512,9 @@ function update(ratings) {
     const view = usesClasses
       ? taste
       : gaussianProjection(catalog, { model: state.model, ratings: state.applied });
-    renderTaste(view, catalog);
+    const fp = preferenceFingerprint(catalog, { model: state.model, ratings: state.applied }, view);
+    const domain = active === 'expanded' ? 'movies' : active === 'stravl' ? 'cities' : catalog.domain;
+    renderTaste(view, catalog, fp, domain);
     renderSnapshot();
     renderBoards();
     renderDetail();
@@ -542,12 +549,7 @@ function renderBoards() {
     list.dataset.key = spec.key;
     const isShift = ['up', 'down'].includes(spec.key);
     const title = spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
-    const heading = node('h3', spec.key === 'chance' ? 'Chance of ≥ ' : title);
-    head.append(heading);
-    if (spec.key === 'chance') {
-      cutoff.hidden = false;
-      heading.append(cutoff);
-    }
+    head.append(node('h3', title));
     if (spec.key === 'information') {
       board.classList.add('information');
       head.title = 'Expected reduction in categorical class uncertainty, given the applied ratings.';
@@ -576,6 +578,12 @@ function renderBoards() {
       )
       .sort((a, b) => spec.score(b) - spec.score(a));
     head.append(node('small', items.length + ' · ' + spec.hint));
+    if (spec.key === 'chance') {
+      const cutoff = scaleChoices('chance-cutoff', 'Minimum rating for chance ranking');
+      cutoff.id = 'threshold';
+      markChoices(cutoff, state.threshold);
+      head.append(cutoff);
+    }
     if (!items.length) {
       const msg = !result.predictions.length
         ? 'All entries rated. Clear one to predict it.'
@@ -604,7 +612,12 @@ function renderBoards() {
           'span',
           isShift ? p.prior.toFixed(2) + ' → ' + p.expected.toFixed(2) : spec.format(spec.score(p), p),
         );
-      if (isShift) score.title = 'Catalog mean → your mean (' + signed(p.shift) + ')';
+      if (isShift) {
+        const delta = node('span', '(' + signed(p.shift) + ')');
+        delta.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
+        score.append(' ', delta);
+        score.title = 'Catalog mean → your mean (change)';
+      }
       pos.className = 'rank-index';
       score.className = 'score';
       btn.append(pos, node('span', titles.get(p.itemId)), score);
@@ -645,6 +658,8 @@ function renderDetail() {
     prior: baseline.get(selected),
     catalog,
     evidence: state.evidence,
+    links: state.links?.[selected],
+    linkError: state.linkError,
     domain: active,
     ratings: state.applied,
     titles,
@@ -699,6 +714,10 @@ el('boards').onclick = (event) => {
 el('boards').onchange = (event) => {
   const radio = event.target;
   if (!(radio instanceof HTMLInputElement) || radio.type !== 'radio') return;
+  if (radio.closest('#threshold')) {
+    setCutoff(Number(radio.value));
+    return;
+  }
   const row = radio.closest('div.info-row');
   if (!(row instanceof HTMLElement)) return;
   const list = row.parentElement;
@@ -735,15 +754,17 @@ select('model').onchange = () => {
   rebuildBaseline();
   update(input('auto').checked ? state.draft : state.applied);
 };
-cutoff.onchange = () => {
-  state.threshold = Number(cutoff.value);
+function setCutoff(value) {
+  state.threshold = value;
   if (!result) return;
   result.threshold = state.threshold;
   const start = catalog.scale.indexOf(state.threshold);
   for (const p of result.predictions) p.chance = p.probabilities.slice(start).reduce((a, b) => a + b, 0);
   renderBoards();
   renderDetail();
-};
+  const checked = el('threshold').querySelector(':checked');
+  if (checked instanceof HTMLInputElement) checked.focus({ preventScroll: true });
+}
 async function readJSON(path) {
   const resp = await fetch(path);
   if (!resp.ok) throw new Error('Unable to load ' + path + ' (' + resp.status + ').');
@@ -783,8 +804,25 @@ async function openCatalog(key, file = null) {
     let s = file ? null : states.get(key);
     if (!s) {
       el('status').textContent = 'Loading catalog…';
-      s = useState(file ? JSON.parse(await file.text()) : await readJSON(key + '.json'), key);
+      const [data, references] = file
+        ? [JSON.parse(await file.text()), null]
+        : await Promise.all([
+            readJSON(key + '.json'),
+            readJSON(key === 'expanded' ? 'film-links.json' : 'destination-links.json')
+              .then((links) => ({ links, error: null }))
+              .catch((error) => ({ links: null, error: error.message })),
+          ]);
       if (seq !== revision) return;
+      if (references?.links && key === 'expanded') {
+        for (const it of data.items) {
+          const certificate = references.links[it.itemId]?.certificate;
+          if (certificate && !it.annotations?.certificate)
+            it.annotations = { ...it.annotations, certificate };
+        }
+      }
+      s = useState(data, key);
+      s.links = references?.links;
+      s.linkError = references?.error;
       states.set(key, s);
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';

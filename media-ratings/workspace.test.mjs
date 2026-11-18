@@ -30,6 +30,8 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     const ratings = {};
     const films = JSON.parse(readFileSync(new URL('expanded.json', import.meta.url), 'utf8'));
     await page.locator('#library .entry').first().waitFor();
+    assert.equal(await page.locator('#projection-title').innerText(), 'Movie preference fingerprint');
+    assert.equal(await page.locator('#profile-count').innerText(), 'Catalog baseline');
     await page.locator('#model').selectOption('reference');
     const rows = page.locator('#library .entry');
     await rows.first().waitFor();
@@ -52,9 +54,11 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       ratings[ids[idx]] = value;
     }
     assert.ok(await page.locator('#pending').isVisible());
+    assert.equal(await page.locator('#profile-count').innerText(), 'Catalog baseline');
     assert.equal(await page.locator('[data-key=expected] button').count(), 500);
     await page.locator('#apply').click();
     assert.ok(await page.locator('#pending').isHidden());
+    assert.equal(await page.locator('#profile-count').innerText(), '2 applied ratings');
     const expected = predict(films, { model: 'reference', ratings });
     const score = {
       expected: (p) => p.expected,
@@ -90,8 +94,20 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     const comp = page.locator('#comparison select');
     await comp.selectOption(ids[0]);
     assert.equal(await heat.locator('.observed th').innerText(), '1.5');
-    await page.locator('#threshold').selectOption('5');
-    assert.equal(await page.locator('.board h3 #threshold').inputValue(), '5');
+    const threshold = page.getByRole('radiogroup', { name: 'Minimum rating for chance ranking' });
+    assert.equal(await threshold.getByRole('radio').count(), 10);
+    await threshold.getByRole('radio', { name: '5 stars', exact: true }).click();
+    await page.keyboard.press('ArrowLeft');
+    assert.ok(await threshold.getByRole('radio', { name: '4.5 stars', exact: true }).isChecked());
+    await page.keyboard.press('ArrowRight');
+    assert.ok(await threshold.getByRole('radio', { name: '5 stars', exact: true }).isChecked());
+    const atFive = predict(films, { model: 'reference', ratings, threshold: 5 }).predictions.sort(
+      (a, b) => b.chance - a.chance,
+    );
+    assert.equal(
+      await page.locator('.ranks[data-key=chance] .rank').first().getAttribute('data-id'),
+      atFive[0].itemId,
+    );
     assert.equal(await comp.inputValue(), ids[0]);
     assert.equal(await page.locator('#rated-list .entry').count(), 2);
     await page.locator('#auto').check();
@@ -104,15 +120,39 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.equal(await page.locator('.ranks[data-key=expected] button').count(), 499);
     await page.locator('[data-key=stravl]').click();
     await rows.first().getByRole('radio', { name: 'No', exact: true }).check();
+    assert.equal(await threshold.getByRole('radio').count(), 3);
+    await threshold.getByRole('radio', { name: 'Maybe', exact: true }).click();
+    assert.ok(await threshold.getByRole('radio', { name: 'Maybe', exact: true }).isChecked());
     assert.equal(await page.locator('.ranks[data-key=expected] button').count(), 11);
     assert.match(
       await page.locator('#external').getAttribute('href'),
-      /^https:\/\/www\.openstreetmap\.org\/search/,
+      /^https:\/\/www\.openstreetmap\.org\/(node|way|relation)\/\d+$/,
     );
+    assert.match(
+      await page.getByRole('link', { name: 'Wikipedia' }).getAttribute('href'),
+      /^https:\/\/en\.wikipedia\.org\/wiki\//,
+    );
+    assert.equal(await page.locator('#projection-title').innerText(), 'City preference fingerprint');
     await page.locator('#model').selectOption('latentClass');
+    await page.locator('#taste details summary').click();
     assert.match(await page.locator('#weights').innerText(), /Taste components/);
+    await page.setViewportSize({ width: 320, height: 844 });
+    const choicesFitOneLine = () =>
+      page.locator('#threshold, .info-row .choices').evaluateAll(
+        (groups) =>
+          groups.length > 1 &&
+          groups.every((group) => {
+            const cells = group.querySelectorAll('label');
+            return (
+              group.scrollWidth <= group.clientWidth + 1 &&
+              cells[0].getBoundingClientRect().top === cells[cells.length - 1].getBoundingClientRect().top
+            );
+          }),
+      );
+    assert.ok(await choicesFitOneLine());
     await page.locator('#domains [data-key=expanded]').click();
     assert.equal(await page.locator('#rated-count').innerText(), '1 / 500 rated');
+    assert.ok(await choicesFitOneLine());
     await page.locator('#search').fill('Shawshank');
     assert.equal(await page.locator('#library .entry:visible').count(), 1);
     await page.setViewportSize({ width: 390, height: 844 });
@@ -121,6 +161,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.ok(await page.locator('#detail-title').evaluate((e) => e === document.activeElement));
     const custom = {
       name: 'Two entries',
+      domain: 'books',
       items: [
         { itemId: '356', title: 'Alpha' },
         { itemId: '2', title: 'Beta' },
@@ -147,6 +188,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       buffer: Buffer.from(JSON.stringify(custom)),
     });
     await page.getByRole('radio', { name: '0', exact: true }).first().check();
+    assert.equal(await page.locator('#projection-title').innerText(), 'Book preference fingerprint');
     assert.ok(await page.locator('#external').isHidden());
     await rows.getByRole('radio', { name: '3', exact: true }).last().check();
     assert.ok(await page.locator('#detail').isHidden());
@@ -172,6 +214,15 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#library .entry').first().waitFor();
     assert.equal(await p.locator('#model').inputValue(), 'ratingsTags');
     assert.equal(await p.locator('#library .entry').count(), 500);
+    await p.locator('.ranks[data-key=expected] button[data-id="50"]').click();
+    assert.equal(
+      await p.getByRole('link', { name: 'Rotten Tomatoes' }).getAttribute('href'),
+      'https://www.rottentomatoes.com/m/usual_suspects',
+    );
+    assert.equal(
+      await p.getByRole('link', { name: 'Wikipedia' }).getAttribute('href'),
+      'https://en.wikipedia.org/wiki/The_Usual_Suspects',
+    );
     await p.locator('#search').fill('Harry Potter');
     assert.equal(await p.locator('#library .entry:visible').count(), 8);
     await p.locator('#search').fill('');
@@ -200,7 +251,11 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     assert.equal(await p.locator('#library .entry').count(), 500);
     const shift = p.locator('.ranks:is([data-key=up],[data-key=down]) .rank').first();
     const target = await shift.getAttribute('data-id');
-    assert.match(await shift.locator('.score').innerText(), /\d+\.\d{2} → \d+\.\d{2}/);
+    assert.match(await shift.locator('.score').innerText(), /\d+\.\d{2} → \d+\.\d{2} \([+-]\d+\.\d{2}\)/);
+    assert.equal(
+      await shift.locator('.shift-delta').evaluate((el) => el.classList.contains('rise')),
+      (await shift.locator('.shift-delta').innerText()).startsWith('(+'),
+    );
     await p.locator('#search').fill('not-a-film');
     await shift.click();
     assert.ok(await p.locator('#library .entry[data-id="' + target + '"]').isVisible());
@@ -217,7 +272,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.getByText('Sampled latent scores', { exact: true }).click();
     await p.locator('#comparison svg circle').first().waitFor();
     assert.match(await p.locator('#axes').innerText(), /between-class variance/);
-    await p.locator('#threshold').selectOption('4.5');
+    await p.locator('#threshold').getByRole('radio', { name: '4.5 stars', exact: true }).click();
     await p.locator('#exchange summary').click();
     const download = p.waitForEvent('download');
     await p.locator('#save-forecasts').click();

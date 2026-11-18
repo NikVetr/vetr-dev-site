@@ -95,7 +95,6 @@
         </div>
         <p id="status" role="status"></p>
         <p id="pending" role="status" hidden></p>
-        <select hidden id="threshold" aria-label="Threshold for chance ranking"></select>
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
           <div class="detail-head">
@@ -120,20 +119,31 @@
             <section id="comparison"></section>
           </div>
         </section>
-        <section id="taste" class="inspector" hidden>
-          <h2 id="projection-title">Taste-class projection</h2>
-          <p id="projection-help"></p>
+        <section id="taste" class="inspector" aria-labelledby="projection-title" hidden>
+          <div class="fingerprint-head">
+            <h2 id="projection-title">Preference fingerprint</h2>
+            <span id="profile-count"></span>
+          </div>
           <div class="taste-layout">
-            <div id="taste-plot"></div>
-            <div id="memberships"></div>
+            <section id="taste-map">
+              <h3>Preference map</h3>
+              <div id="taste-plot"></div>
+            </section>
+            <section id="memberships"></section>
+            <section id="class-signature"></section>
           </div>
           <div id="axes"></div>
+          <details id="profile-method">
+            <summary>How to read this fingerprint</summary>
+            <p id="profile-help"></p>
+            <div id="axis-loadings"></div>
+            <p id="weights"></p>
+          </details>
         </section>
         <details id="snapshot" hidden>
           <summary>Imported predictions</summary>
           <div id="snapshot-body"></div>
         </details>
-        <p id="weights"></p>
         <details id="validation" hidden>
           <summary>Compare validation scores</summary>
           <p id="evaluation"></p>
