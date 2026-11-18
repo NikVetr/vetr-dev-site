@@ -2,9 +2,9 @@
 
 Use the settings panel to choose **Opening with reflection** or **Rain only**. Enter one hidden name or phrase per line. Each reads downward in a falling column, and the seed repeats its placement. **Add original lab names** appends the names from the R animation. Upload a PNG, JPEG or WebP to use your own reflection, or use the included green-lit portrait adapted from Nik’s recent photograph.
 
-Play or scrub the 16-second preview. **Save frame as PNG** captures the current frame. **Record video** captures the full sequence at 960 × 540 using the browser’s video encoder. Keep the tab visible during recording. The file format depends on the available encoder.
+Play or scrub the 16-second preview. The 16:9 film fits beside the settings on desktop and above them on a phone. **Save frame as PNG** captures the current frame. **Record video** captures the full sequence at 960 × 540 using the browser’s video encoder. Keep the tab visible during recording. The file format depends on the available encoder.
 
-The opening draws on `montgomery_lab/Matrix_GreenRain.R` at `fa27daf`. The rain moves toward the title, which locks into place at the center. Once the title dissolves, a faint outline appears at the bottom edge of the glass. The camera moves in toward the face as the rain blurs. For an uploaded portrait, crop the image where the torso should meet the bottom of the screen. CRT slots and image details magnify together. The landing card shows the title lock with its own title, “The Extracellular Matrix.”
+The opening draws on `montgomery_lab/Matrix_GreenRain.R` at `fa27daf`. The rain moves toward the title, which locks into place at the center. Once the title dissolves, a faint outline appears against the bottom edge of the glass. The default portrait fills about three quarters of the frame height at this point. The camera moves in toward the face as the rain blurs. For an uploaded portrait, crop the image where the torso should meet the bottom of the screen. CRT slots and image details magnify together. The landing card shows the title lock with its own title, “The Extracellular Matrix.”
 
 ## Frame API
 

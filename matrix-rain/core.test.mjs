@@ -26,7 +26,7 @@ test('invalid time, controls and unknown fields produce request errors', () => {
 });
 
 test('the title centers on the optical axis; outline precedes focus and the mask follows the image', () => {
-  for (const title of ['The Extracellular Matrix', 'The Correlation Matrix', 'ODD']) {
+  for (const title of ['The Extracellular Matrix', 'The Correlation Matrix', 'ODD', 'Q'.repeat(40)]) {
     const s = makeScene({ title });
     const f = frame(s, 11.3);
     const line = [...title].map((char, i) => {
@@ -39,6 +39,9 @@ test('the title centers on the optical axis; outline precedes focus and the mask
       end = frame(s, 16);
     assert.equal(f.imageAlpha + f.outlineAlpha, 0);
     assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom === f.zoom);
+    assert.ok(outline.imageZoom >= 0.75 && outline.imageZoom < 0.85);
+    assert.ok(midway.imageZoom > outline.imageZoom && midway.imageZoom < end.imageZoom);
+    assert.ok(Math.abs(end.imageZoom - 1.5) < 1e-10);
     assert.ok(midway.imageAlpha > 0 && midway.rainBlur > 0 && midway.zoom > outline.zoom);
     assert.ok(end.imageAlpha > midway.imageAlpha && end.rainAlpha < midway.rainAlpha);
     for (const shot of [midway, end])

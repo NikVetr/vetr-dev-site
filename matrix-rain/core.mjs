@@ -12,7 +12,8 @@ const columns = 84,
   dx = 960 / columns,
   dy = 540 / rows;
 const finalZoom = 12;
-const reflectionSize = 1 / 8;
+const outlineScale = 0.78;
+const closeupScale = 1.5;
 
 export function makeScene({
   title = 'The Correlation Matrix',
@@ -105,8 +106,13 @@ export function frame(scene, time) {
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
   const focus = opening ? ease(time, 13.85, 16) : 0;
-  const zoom = opening ? 1 + (titleZoom - 1) * ease(time, 6, 10) + (finalZoom - titleZoom) * focus : 1;
-  const center = columns / 2 + (scene.centerColumn - columns / 2) * (opening ? ease(time, 6, 10) : 0);
+  const approach = opening ? ease(time, 6, 10) : 0;
+  const titleCamera = 1 + (titleZoom - 1) * approach;
+  const zoom = titleCamera + (finalZoom - titleZoom) * focus;
+  // The reflected face starts closer than the falling code. Keep the CRT
+  // slots attached to the reflection throughout the final focus change.
+  const glassZoom = titleCamera + titleZoom * (closeupScale / outlineScale - 1) * focus;
+  const center = columns / 2 + (scene.centerColumn - columns / 2) * approach;
   const glyphs = [];
   for (const [i, s] of scene.streams.entries()) {
     const x = 480 + (i + 0.5 - center) * dx * zoom;
@@ -148,17 +154,17 @@ export function frame(scene, time) {
     size: dy * zoom,
     outlineAlpha: opening ? 0.62 * ease(time, 12.8, 13.42) * (1 - focus) : 0,
     imageAlpha: focus,
-    imageZoom: zoom * reflectionSize,
-    maskPitch: 1.25 * zoom,
+    imageZoom: opening ? (glassZoom / titleZoom) * outlineScale : 1 / 8,
+    maskPitch: 1.25 * glassZoom,
     rainAlpha: 1 - 0.84 * focus,
     rainBlur: 8 * focus,
   };
 }
 
-// Cache the outline by decoded image, at a bounded working resolution.
-const outlines = new WeakMap();
-function outlineOf(image) {
-  if (outlines.has(image)) return outlines.get(image);
+// Prepare each decoded reflection at a bounded working resolution.
+const reflections = new WeakMap();
+function prepareReflection(image) {
+  if (reflections.has(image)) return reflections.get(image);
   const canvas = document.createElement('canvas');
   const ratio = Math.min(1, 960 / Math.max(image.width, image.height));
   const w = (canvas.width = Math.max(1, Math.round(image.width * ratio)));
@@ -202,8 +208,9 @@ function outlineOf(image) {
       ink[4 * i + 3] = 1.3 * Math.max(sobel(luma, i), translucent ? sobel(opacity, i) : 0);
     }
   ctx.putImageData(pixels, 0, 0);
-  outlines.set(image, canvas);
-  return canvas;
+  const reflection = { outline: canvas, cutout: translucent };
+  reflections.set(image, reflection);
+  return reflection;
 }
 function drawGlyphs(ctx, f) {
   ctx.font = '600 ' + f.size + 'px monospace';
@@ -265,21 +272,25 @@ export function paint(ctx, f, image) {
     ctx.restore();
   } else drawGlyphs(ctx, f);
   if (image && (f.outlineAlpha > 0 || f.imageAlpha > 0)) {
+    const reflection = prepareReflection(image);
     const fit = Math.min(960 / image.width, 540 / image.height);
     const w = image.width * fit * f.imageZoom,
       h = image.height * fit * f.imageZoom;
     // The shirt meets the bezel on first reveal. As the camera moves in,
     // let the lower torso pass below the glass so the face stays in view.
-    const finalHeight = image.height * fit * finalZoom * reflectionSize;
+    const finalHeight = image.height * fit * closeupScale;
     const x = (960 - w) / 2,
       y = 540 - h + f.imageAlpha * Math.max(0, finalHeight - 540);
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
     if (f.outlineAlpha > 0) {
       ctx.globalAlpha = f.outlineAlpha;
-      ctx.drawImage(outlineOf(image), x, y, w, h);
+      ctx.drawImage(reflection.outline, x, y, w, h);
     }
     if (f.imageAlpha > 0) {
+      // Honor a cutout's opaque areas, including the black lenses. A full
+      // photo still blends into the glass across its rectangular background.
+      if (reflection.cutout) ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = f.imageAlpha;
       ctx.drawImage(image, x, y, w, h);
     }
@@ -297,7 +308,7 @@ export function paint(ctx, f, image) {
     // The old CRT also had independent, low-alpha row and column intensity drift.
     ctx.save();
     ctx.translate(480, 270);
-    ctx.scale(f.zoom, f.zoom);
+    ctx.scale(f.maskPitch / 1.25, f.maskPitch / 1.25);
     ctx.translate(-480, -270);
     const tick = Math.floor(f.time * 5);
     for (let i = 0; i < 24; i++) {
