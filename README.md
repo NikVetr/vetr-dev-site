@@ -134,6 +134,8 @@ python3 -m http.server 8000
 
 ## Programmatic access
 
+[Base64 Link Finder](b64/api.md), [Wanderwart](pocket-language-guide/api.md), [autoCHAIR](agendamatic/api.md) and the [Multipanel Figure Editor](layout-gui/api.md) each accept a JSON request in the browser or via `node <tool>/cli.mjs request.json`. The figure and agenda editors can also return a snapshot of the current project for use in a script.
+
 Tools that scripts and agents can use follow one shape. `forecast-calibration/` is the reference implementation.
 
 - **`core/`** holds ES modules with no DOM access, importable from Node 22 and from the browser. Anything random uses a seeded generator from `shared/rng.js`, so results are reproducible.

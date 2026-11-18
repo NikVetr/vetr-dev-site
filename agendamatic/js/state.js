@@ -401,16 +401,7 @@ function roundToTenth(value) {
 
 function timeOnReferenceDate(timeValue, referenceValue = new Date()) {
     const reference = validDate(referenceValue) || new Date();
-    const parsed = parseTime(timeValue);
-    return new Date(
-        reference.getFullYear(),
-        reference.getMonth(),
-        reference.getDate(),
-        parsed.getHours(),
-        parsed.getMinutes(),
-        0,
-        0
-    );
+    return parseTime(timeValue, reference);
 }
 
 function normalizeString(value, fallback = '') {
@@ -429,7 +420,7 @@ function normalizeEnum(value, allowed, fallback) {
     return allowed.includes(value) ? value : fallback;
 }
 
-function normalizeClockTime(value, fallback) {
+export function normalizeClockTime(value, fallback) {
     const match = normalizeString(value).trim().match(/^(\d{1,2}):(\d{2})\s*(am|pm)?$/i);
     if (!match) return fallback;
     let hours = Number(match[1]);
@@ -761,7 +752,7 @@ function normalizeTracker(tracker, items, settings) {
     };
 }
 
-function normalizeState(state) {
+export function normalizeState(state) {
     const source = state && typeof state === 'object' ? state : {};
     const seenIds = new Set();
     const items = normalizeItems(source.items, seenIds);
@@ -1423,9 +1414,9 @@ export function retreatToPreviousItem() {
     return true;
 }
 
-function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue, scheduledStartAt = null) {
+function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue, scheduledStartAt = null, referenceDate = new Date()) {
     if (!planItems || planItems.length === 0) return [];
-    const startTime = validDate(scheduledStartAt) || parseTime(startTimeValue);
+    const startTime = validDate(scheduledStartAt) || timeOnReferenceDate(startTimeValue, referenceDate);
     const buffer = bufferValue || 0;
 
     let currentTime = new Date(startTime);
@@ -1544,15 +1535,16 @@ export function updateIntervalTime(index, position, targetTime) {
  * Takes into account locked items and adjusts unlocked items proportionally
  * @returns {Array} Items with calculated start and end times
  */
-export function calculateIntervals() {
-    const { items, settings, tracker } = currentState;
+export function calculateIntervals(state = currentState, at = new Date()) {
+    const { items, settings, tracker } = state;
     const intervals = calculateIntervalsFromPlan(
         items,
         settings.startTime,
         settings.buffer || 0,
         tracker?.startedAt
             ? planStartFromActiveAnchor(items, tracker, settings.buffer)
-            : null
+            : null,
+        at
     );
     return intervals.map((item, index) => {
         const recorded = tracker?.completedIntervalsById?.[item.id];
@@ -1571,8 +1563,8 @@ export function calculateIntervals() {
  * Returns null when variance mode is not active.
  * @returns {Object|null}
  */
-export function getExpectedVsActualData() {
-    const tracker = currentState.tracker || {};
+export function getExpectedVsActualData(state = currentState, at = new Date()) {
+    const tracker = state.tracker || {};
     const snapshot = tracker.expectedSnapshot;
     if (!tracker.varianceMode || !snapshot || !Array.isArray(snapshot.items) || snapshot.items.length === 0) {
         return null;
@@ -1580,11 +1572,11 @@ export function getExpectedVsActualData() {
 
     const expectedIntervals = calculateIntervalsFromPlan(
         snapshot.items,
-        snapshot.startTime || currentState.settings.startTime,
-        snapshot.buffer ?? currentState.settings.buffer ?? 0,
-        snapshot.scheduledStartAt || null
+        snapshot.startTime || state.settings.startTime,
+        snapshot.buffer ?? state.settings.buffer ?? 0,
+        snapshot.scheduledStartAt || null, at
     );
-    const actualIntervals = calculateIntervals();
+    const actualIntervals = calculateIntervals(state, at);
     const expectedById = new Map(expectedIntervals.map(item => [item.id, item]));
 
     const rows = actualIntervals.map(actual => {
@@ -1719,8 +1711,8 @@ function scaleLiveFutureDurations(items, targetTotal) {
  * @param {Date} currentTime - Current wall-clock time
  * @returns {Object} Adjusted items and status info
  */
-export function calculateAdjustedIntervals(currentTime = new Date()) {
-    const { items, settings, tracker } = currentState;
+export function calculateAdjustedIntervals(currentTime = new Date(), state = currentState) {
+    const { items, settings, tracker } = state;
     if (!tracker.isRunning && tracker.pausedAt) {
         const pausedTime = new Date(tracker.pausedAt);
         if (!Number.isNaN(pausedTime.getTime())) currentTime = pausedTime;
@@ -1734,7 +1726,7 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
     // If tracker hasn't started, return scheduled intervals
     if (!tracker.isRunning && !tracker.startedAt) {
         return {
-            items: calculateIntervals(),
+            items: calculateIntervals(state, currentTime),
             status: 'on-time',
             difference: 0,
             signedDifference: 0,
@@ -1742,10 +1734,10 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
         };
     }
 
-    const scheduledItems = calculateIntervals();
+    const scheduledItems = calculateIntervals(state, currentTime);
     const scheduledStart = scheduledItems[0]?.startTime || (tracker.startedAt
-        ? (validDate(tracker.scheduledStartAt) || parseTime(settings.startTime))
-        : parseTime(settings.startTime));
+        ? (validDate(tracker.scheduledStartAt) || timeOnReferenceDate(settings.startTime, currentTime))
+        : timeOnReferenceDate(settings.startTime, currentTime));
     if (tracker.completedAt) {
         const signedDifference = Number(tracker.overallDeltaMinutes) || 0;
         return {

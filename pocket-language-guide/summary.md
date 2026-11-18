@@ -20,6 +20,8 @@ coverage. Optional profanity sections start disabled.
 
 ## Architecture
 
+The sheet API resolves settings with the studio’s default builder and uses the same loader-backed solver. The browser loads the typesetter on the first API call. The CLI uses the tool directory for corpus and font reads. [Sheet API](api.md)
+
 The browser loads plain JavaScript ES modules; JSDoc and TypeScript check their
 interfaces without compiling the app. No server, account or database is required.
 

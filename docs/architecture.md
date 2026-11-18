@@ -10,6 +10,8 @@ The landing page and Wanderwart use the same `shared/light-switch.js` and styles
 
 Seating exposes two explicit computation paths through `runRequest`: the existing static `submit` and the nominal-category `planRounds` scheduler. The worker, browser API and CLI share that dispatcher. Round results retain assignments, objective terms and raw/weighted travel diagnostics; the UI, selected-round SVG and all-round CSV use those stored assignments. See [the request and objective contracts](../seating/api.md).
 
+The Figure Editor reads controls into a project snapshot before calling its DOM-free code generator. autoCHAIR can calculate intervals and render an agenda from an explicit state and timestamp independently of browser persistence. Wanderwart's studio and sheet API share the defaults, loader-backed sheet context and layout solver, and b64's JSON adapter calls the same transform as its editor worker. Each tool's CLI accepts the browser request format.
+
 ## Alphabet and logo editors
 
 `motrpac-alphabet/` preserves the original SVG shape editor and hand-tuned A–Z seed registry. Its font adapter reads the same transformed SVG contours, then `font-export.js` writes a TrueType font with optional COLR/CPAL colour layers and ordinary fallback outlines. Browser-native geometry supplies the contours; the font writer itself is callable without a DOM. The neighboring `mattlab/` painter retains its supplied geometry, project model, colour engine and sheet exporter as separate modules; its API and CLI call those same exporters. The editors have independent saved-project formats and histories, connected by the same shared lightswitch at the start of their native headers.

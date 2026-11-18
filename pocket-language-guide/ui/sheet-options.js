@@ -3,6 +3,7 @@
 // Deliberately a subset of the studio, sharing its controls so the two pages read
 // as one app rather than two. Everything not offered here is a studio decision.
 
+import { THEME_IDS } from '../core/sheet-spec.js';
 import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
@@ -74,7 +75,7 @@ async function main() {
   // encoding, so a reader who cannot use the default needs it before they print,
   // not after they find the studio.
   const themes = Object.fromEntries(await Promise.all(
-    ['latex-reference', 'cvd-safe', 'dark', 'parchment'].map(async (id) => [id, await ctx.theme(id)]),
+    THEME_IDS.map(async (id) => [id, await ctx.theme(id)]),
   ));
 
   const target = ctx.corpus.languages[choice.target];

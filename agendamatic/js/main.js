@@ -3,6 +3,7 @@
  * Initializes all modules and wires together the application
  */
 
+import { submit } from './api.js';
 import {
     initializeState,
     getState,
@@ -865,3 +866,5 @@ if (document.readyState === 'loading') {
 } else {
     init();
 }
+
+Object.assign(window, { AutoChair: { submit, getAgenda: () => structuredClone(getState()) } });

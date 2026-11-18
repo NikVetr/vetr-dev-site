@@ -17,6 +17,8 @@ autoCHAIR is a static, browser-only agenda builder and real-time meeting tracker
 
 ## State and timing model
 
+The browser and JSON CLI can calculate intervals, variance and formatted minutes from an explicit agenda and time. The snapshot path shares scheduling and export functions with the live editor. [Callable interface](api.md)
+
 The normalized schema is versioned. Agenda items have stable IDs, positive durations rounded to tenths of a minute, optional locks and authored details, and either preset or custom colors. Metadata uses canonical attendee-group and action-item collections. Structurally invalid imports fail without changing state; compatible legacy or malformed field values are migrated, clamped, regenerated, or reset to documented defaults during normalization.
 
 The tracker records a scheduled start, active-item elapsed-time and wall-clock anchors, stable active item ID, accumulated paused time, and completion time. Completed items retain their own wall-clock start/end timestamps and duration excluding pauses, so resuming, reloading, or completing a run does not shift earlier intervals in the timeline or exported minutes. Recorded durations support sub-minute items independently of the positive minimum for planned durations. Explicit Next and Previous operations preserve identity across reorders, account for configured buffers and locked durations, and accumulate completed-item variance against the original run plan. Advancing the final item completes the meeting; rewinding a completed meeting reopens it paused, while every rewind retains the recorded variance until that item advances again. Pinned boundaries govern manual interval adjustments.

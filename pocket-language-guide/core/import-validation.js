@@ -40,7 +40,7 @@ const band = shape({
   left: slots, center: slots, right: slots, text,
   fill: colorRole, colour: colorRole, fillReach: oneOf(['band', 'corner', 'edge']),
 }, true);
-const spec = shape({
+export const validSpecSettings = shape({
   target: identifier, source: identifier, accent: identifier, romanization: text,
   register: identifier, region: text, speaker: record(text), fieldSet: list(oneOf(fields)),
   geometry: shape({
@@ -97,7 +97,7 @@ export function cardProblems(value, stored = false) {
     else if (key !== 'name' && !identifier(value[key])) problems.push(`card.${key}: invalid identifier`);
   }
   if (!plain(value.spec)) problems.push('card.spec: not an object');
-  else if (!spec(value.spec)) problems.push('card.spec: invalid settings');
+  else if (!validSpecSettings(value.spec)) problems.push('card.spec: invalid settings');
   if (!shape({ mode: oneOf(['', 'cut', 'fold']), flip: oneOf(['short-edge', 'long-edge']) })(value.finish)) problems.push('card.finish: invalid finish');
   if (!shape({ sections: count, items: count, faces, width: dimension, height: dimension })(value.summary)) problems.push('card.summary: invalid summary');
   if (!number(36, 2400)(value.dpi)) problems.push('card.dpi: expected a number from 36 to 2400');

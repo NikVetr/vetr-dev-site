@@ -4,6 +4,7 @@
 // told to sync afterwards, so no control ever has to read a value back out of the
 // DOM -- which is how a dragged margin used to get overwritten by a dropdown.
 
+import { THEME_IDS } from '../core/sheet-spec.js';
 import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
@@ -47,7 +48,6 @@ const BANNER_KEY = 'plg.banner-hidden';
 // has to be long enough that working down a list of checkboxes coalesces into one
 // solve rather than queueing one per click.
 const SOLVE_DEBOUNCE_MS = 260;
-const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark', 'parchment'];
 /** How much of a phone's column the content list opens to when a lock-screen level is
  * chosen: enough to see which sections lit up and how many of their rows came. */
 const LOCK_SHARE = 0.36;

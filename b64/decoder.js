@@ -164,5 +164,24 @@
     return { ...findLinks(input), encoding: encodeLayers(input, layers) };
   }
 
-  globalThis.B64 = { findLinks, encodeLayers, transform, MAX_INPUT, MAX_DEPTH };
+  /** Compute both the scan and the encoding without changing an open editor. */
+  function submit(request) {
+    function invalid(path, message) {
+      throw Object.assign(new Error(message), {
+        code: "invalid_request", issues: [{ code: "invalid_value", path, message }]
+      });
+    }
+    if (!request || typeof request !== "object" || Array.isArray(request)) invalid("", "Expected an object.");
+    for (const key of Object.keys(request)) {
+      if (key !== "text" && key !== "layers") invalid(key, "Unknown request field.");
+    }
+    if (typeof request.text !== "string" || request.text.length > MAX_INPUT) {
+      invalid("text", "Expected text of at most 256,000 UTF-16 code units.");
+    }
+    const layers = Object.hasOwn(request, "layers") ? request.layers : 1;
+    if (!Number.isInteger(layers) || layers < 1 || layers > MAX_DEPTH) invalid("layers", "Choose 1–99 layers.");
+    return transform(request.text, layers);
+  }
+
+  globalThis.B64 = { submit, findLinks, encodeLayers, transform, MAX_INPUT, MAX_DEPTH };
 })();

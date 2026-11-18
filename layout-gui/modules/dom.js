@@ -22,10 +22,10 @@ export const wrap = document.getElementById('canvasWrap');
 export const squareEl = document.getElementById('squareCells');
 export const darkEl = document.getElementById('darkMode');
 
-export const incSetupEl = document.getElementById('incSetup');
-export const incURLEl = document.getElementById('incURL');
-export const incExampleEl = document.getElementById('incExample');
-export const incLabelsEl = document.getElementById('incLabels');
+export const incSetupEl = /** @type {HTMLInputElement} */ (document.getElementById('incSetup'));
+export const incURLEl = /** @type {HTMLInputElement} */ (document.getElementById('incURL'));
+export const incExampleEl = /** @type {HTMLInputElement} */ (document.getElementById('incExample'));
+export const incLabelsEl = /** @type {HTMLInputElement} */ (document.getElementById('incLabels'));
 export const renderRadios = document.getElementById('renderRadios');
 
 export const aspectEl    = document.getElementById('aspect');

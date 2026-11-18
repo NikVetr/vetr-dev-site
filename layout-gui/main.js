@@ -1,3 +1,4 @@
+import { submit } from './api.js';
 import {
   darkEl, dimText, rowsEl, colsEl, squareEl, renderRadios, aspectEl
 }                       from './modules/dom.js';
@@ -7,7 +8,7 @@ import { decodeState, norm, syncURL }  from './modules/helpers.js';
 import { repaint }      from './modules/canvas.js';
 import { legend }       from './modules/legend.js';
 import {
-  generateCode, renderer,
+  generateCode, getProject, renderer,
 }                       from './modules/code-generator.js';
 import { resizeCanvas, update, rescaleSplitWidths, handleViewportResize } from './modules/controls.js';
 
@@ -59,3 +60,5 @@ history();
 resizeCanvas();
 update();
 syncURL();
+
+Object.assign(window, { FigureEditor: { submit, getProject } });

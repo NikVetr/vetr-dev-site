@@ -63,11 +63,11 @@ export function formatDuration(minutes) {
  * @param {string} timeStr - Time string
  * @returns {Date} - Date object with the specified time
  */
-export function parseTime(timeStr) {
-    if (!timeStr) return new Date();
+export function parseTime(timeStr, reference = new Date()) {
+    if (!timeStr) return new Date(reference);
 
     const str = timeStr.toString().trim();
-    const now = new Date();
+    const now = new Date(reference);
 
     // Check for AM/PM format
     const ampmMatch = str.match(/^(\d{1,2}):(\d{2})\s*(am|pm)?$/i);
