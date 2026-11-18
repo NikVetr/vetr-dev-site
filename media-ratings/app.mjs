@@ -29,9 +29,18 @@ let active,
   selected,
   taste,
   revision = 0;
-const isFilm = (k) => k === 'expanded' || k === 'movielens';
+const isFilm = (k) => k === 'expanded';
 const entries = new Map();
+const copies = new Map();
+let ratingObserver;
 const panels = [
+  {
+    key: 'information',
+    title: 'Most informative to rate',
+    hint: 'bits',
+    score: (p) => taste?.information.get(p.itemId) ?? 0,
+    format: (n) => n.toFixed(3),
+  },
   {
     key: 'expected',
     title: 'Highest expected',
@@ -40,13 +49,6 @@ const panels = [
     format: (n) => n.toFixed(2),
   },
   { key: 'chance', title: 'Above cutoff', hint: 'Probability', score: (p) => p.chance, format: percent },
-  {
-    key: 'information',
-    title: 'Most informative to rate',
-    hint: 'bits',
-    score: (p) => taste?.information.get(p.itemId) ?? 0,
-    format: (n) => n.toFixed(3),
-  },
   { key: 'up', title: 'Biggest rise', hint: 'Shift ↑', score: (p) => p.shift, format: signed },
   {
     key: 'down',
@@ -115,7 +117,8 @@ function install(key, next) {
       ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
       : 'Choose a value on the rating scale.';
   input('search').value = '';
-
+  el('boards').replaceChildren();
+  setupFilters();
   el('library').scrollTop = 0;
   showValidation(catalog.selection);
   rebuildBaseline();
@@ -141,10 +144,33 @@ function showValidation(selection) {
     ' separate respondents contributed ' +
     selection.testRatings +
     ' test ratings.';
+  const full = selection.full;
+  if (full)
+    el('evaluation').textContent =
+      'The deployed fit uses ' +
+      full.releaseRatings.toLocaleString() +
+      ' ratings from ' +
+      full.releaseUsers.toLocaleString() +
+      ' respondents. Each of ' +
+      full.testUsers.toLocaleString() +
+      ' independent test users supplied four ratings. The models predicted ' +
+      full.testRatings.toLocaleString() +
+      ' remaining ratings. Item-similarity families and strengths were selected on ' +
+      full.validationUsers.toLocaleString() +
+      ' separate users. The original four-fold comparison selected K on the 1/32 sample.';
   const tables = el('scores');
   tables.replaceChildren();
   for (const [title, rows] of [
-    ['Held-out test · family finalists', selection.holdout],
+    ...(full
+      ? [
+          ['Learning curve · matched test users', full.learningCurve],
+          ['Item similarities · matched test users', full.holdout],
+        ]
+      : []),
+    [
+      full ? 'Original 1/32 sample · held-out finalists' : 'Held-out test · family finalists',
+      selection.holdout,
+    ],
     ['Cross-validation · all candidates', selection.cv],
   ]) {
     const table = node('table', ''),
@@ -170,20 +196,19 @@ function rebuildBaseline() {
   const empty = node('li', 'No matching entries.');
   empty.id = 'empty-list';
   empty.className = 'note';
-  const lists = [[], []];
+  copies.clear();
   for (const p of population.predictions) {
-    const li = entryRow(p);
-    entries.set(p.itemId, li);
-    lists[Number(Object.hasOwn(state.draft, p.itemId))].push(li);
+    entries.set(p.itemId, entryRow(p, 'catalog'));
+    if (Object.hasOwn(state.draft, p.itemId)) copies.set(p.itemId, entryRow(p, 'rated'));
   }
-  el('library').replaceChildren(...lists[0], empty);
+  el('library').replaceChildren(...entries.values(), empty);
   const none = node('li', 'Your rated entries appear here.');
   none.id = 'empty-rated';
   none.className = 'note';
-  el('rated-list').replaceChildren(...lists[1], none);
-  filterRows();
+  el('rated-list').replaceChildren(...copies.values(), none);
+  sortCatalog();
 }
-function entryRow(p) {
+function entryRow(p, surface) {
   const li = node('li');
   li.className = 'entry';
   li.dataset.id = p.itemId;
@@ -194,27 +219,9 @@ function entryRow(p) {
   mean.className = 'entry-meta';
   mean.title = 'Catalog expected rating';
   head.append(name, mean);
-  const body = node('div'),
-    choices = node('div');
+  const body = node('div');
   body.className = 'rating-row';
-  choices.className = 'choices';
-  choices.setAttribute('role', 'radiogroup');
-  choices.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId));
-  for (const v of catalog.scale) {
-    const star = isFilm(active),
-      label = node('label'),
-      radio = document.createElement('input'),
-      glyph = node('span', star ? '' : scaleLabel(v));
-    label.className = star ? 'choice star' : 'choice';
-    radio.type = 'radio';
-    radio.name = 'rating-' + p.itemId;
-    radio.value = String(v);
-    const description = scaleLabel(v) + (star ? ' stars' : '');
-    radio.setAttribute('aria-label', description);
-    label.title = description;
-    label.append(radio, glyph);
-    choices.append(label);
-  }
+  const choices = ratingControls(p.itemId, surface);
   const readout = node('span');
   readout.className = 'rating-readout';
   const clear = node('button', 'Clear');
@@ -224,6 +231,28 @@ function entryRow(p) {
   li.append(head, body);
   syncRow(li);
   return li;
+}
+function ratingControls(id, surface) {
+  const choices = node('div');
+  choices.className = 'choices';
+  choices.setAttribute('role', 'radiogroup');
+  choices.setAttribute('aria-label', 'Rate ' + titles.get(id));
+  for (const v of catalog.scale) {
+    const star = isFilm(active),
+      label = node('label'),
+      radio = document.createElement('input'),
+      glyph = node('span', star ? '' : scaleLabel(v));
+    label.className = star ? 'choice star' : 'choice';
+    radio.type = 'radio';
+    radio.name = surface + '-rating-' + id;
+    radio.value = String(v);
+    const description = scaleLabel(v) + (star ? ' stars' : '');
+    radio.setAttribute('aria-label', description);
+    label.title = description;
+    label.append(radio, glyph);
+    choices.append(label);
+  }
+  return choices;
 }
 function syncRow(li) {
   const value = state.draft[li.dataset.id],
@@ -236,22 +265,127 @@ function syncRow(li) {
   li.querySelector('.clear').hidden = !rated;
   li.querySelector('.rating-readout').textContent = rated && isFilm(active) ? value + ' / 5' : '';
 }
+function facets(a) {
+  return {
+    Genre: a.genres,
+    Tag: a.tags,
+    Certificate: a.certificate ? [a.certificate] : [],
+    Decade: a.year ? [Math.floor(a.year / 10) * 10 + 's'] : [],
+    Collection: a.collection ? [a.collection] : [],
+    Country: a.country ? [a.country] : [],
+    Region: a.region ? [a.region] : [],
+    Coast: a.coast ? [a.coast] : [],
+    'Annual temperature': Number.isFinite(a.temperature)
+      ? [a.temperature < 10 ? 'Under 10 °C' : a.temperature < 15 ? '10 to <15 °C' : '15 °C or warmer']
+      : [],
+    'Annual precipitation': Number.isFinite(a.precipitation)
+      ? [
+          a.precipitation < 600
+            ? 'Under 600 mm'
+            : a.precipitation < 800
+              ? '600 to <800 mm'
+              : '800 mm or wetter',
+        ]
+      : [],
+  };
+}
+let metadata, facetIds;
+function setupFilters() {
+  metadata = new Map(catalog.items.map((it) => [it.itemId, it.annotations ?? {}]));
+  facetIds = new Map();
+  const groups = new Map();
+  for (const [id, a] of metadata) {
+    for (const [group, values] of Object.entries(facets(a))) {
+      for (const value of values ?? []) {
+        const key = group + '/' + value;
+        if (!facetIds.has(key)) {
+          facetIds.set(key, new Set());
+          if (!groups.has(group)) groups.set(group, []);
+          groups.get(group).push(value);
+        }
+        facetIds.get(key).add(id);
+      }
+    }
+  }
+  const facet = select('facet');
+  facet.replaceChildren(new Option('All categories', ''));
+  for (const [group, values] of groups) {
+    const opt = document.createElement('optgroup');
+    opt.label = group;
+    for (const value of values.sort((a, b) => a.localeCompare(b))) {
+      const key = group + '/' + value;
+      opt.append(new Option(value + ' (' + facetIds.get(key).size + ')', key));
+    }
+    facet.append(opt);
+  }
+  facet.disabled = !groups.size;
+  select('sort').replaceChildren(new Option('Catalog mean', 'mean'), new Option('Title A–Z', 'title'));
+  if (catalog.items.some((it) => it.annotations?.year))
+    select('sort').add(new Option('Newest first', 'year'));
+  for (const [key, label] of [
+    ['gdp', 'Country GDP per capita'],
+    ['population', 'Place population'],
+    ['temperature', 'Warmest first'],
+    ['precipitation', 'Wettest first'],
+  ])
+    if (catalog.items.some((it) => Number.isFinite(it.annotations?.[key])))
+      select('sort').add(new Option(label, key));
+}
+function sortCatalog() {
+  const key = select('sort').value;
+  const sorted = [...entries.keys()].sort((a, b) => {
+    if (key === 'title') return titles.get(a).localeCompare(titles.get(b));
+    if (key === 'mean') return baseline.get(b).expected - baseline.get(a).expected;
+    return (metadata.get(b)[key] ?? 0) - (metadata.get(a)[key] ?? 0);
+  });
+  const empty = el('empty-list');
+  el('library').replaceChildren(...sorted.map((id) => entries.get(id)), empty);
+  filterRows();
+}
+function inFacet(id) {
+  return !select('facet').value || facetIds.get(select('facet').value).has(id);
+}
 function filterRows() {
   if (!state) return;
   const query = input('search').value.trim().toLocaleLowerCase();
-  let available = 0,
-    rated = 0;
+  let count = 0;
   for (const [id, li] of entries) {
-    li.hidden = !titles.get(id).toLocaleLowerCase().includes(query);
-    if (!li.hidden) {
-      if (Object.hasOwn(state.draft, id)) rated++;
-      else available++;
-    }
+    li.hidden = !inFacet(id) || !titles.get(id).toLocaleLowerCase().includes(query);
+    if (!li.hidden) count++;
   }
-  el('empty-list').hidden = available > 0;
-  el('empty-rated').hidden = rated > 0;
-  el('empty-rated').textContent = query ? 'No rated entries match.' : 'Your rated entries appear here.';
-  el('unrated-count').textContent = String(available);
+  el('empty-list').hidden = count > 0;
+  el('empty-rated').hidden = copies.size > 0;
+  el('unrated-count').textContent = String(count);
+}
+function reveal(id, focus = false) {
+  const row = entries.get(id);
+  if (row.hidden) {
+    input('search').value = '';
+    filterRows();
+  }
+  const list = el('library');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  list.scrollTo({
+    top:
+      list.scrollTop +
+      row.getBoundingClientRect().top -
+      list.getBoundingClientRect().top -
+      (list.clientHeight - row.offsetHeight) / 2,
+    behavior: reduced ? 'instant' : 'smooth',
+  });
+  if (!reduced)
+    row.animate(
+      [
+        { outline: '2px solid var(--accent)', outlineOffset: '-3px' },
+        { outline: '2px solid transparent', outlineOffset: '-3px' },
+      ],
+      1400,
+    );
+  if (focus) {
+    row.querySelector('input').focus({ preventScroll: true });
+    if (matchMedia('(max-width:690px)').matches)
+      list.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'center' });
+  }
 }
 function syncDraft() {
   const count = Object.keys(state.draft).length,
@@ -264,20 +398,29 @@ function syncDraft() {
 function edit(li, value) {
   if (value === undefined) delete state.draft[li.dataset.id];
   else state.draft[li.dataset.id] = value;
-  const focused = li.contains(document.activeElement) ? document.activeElement : null;
-  const dest = el(value === undefined ? 'library' : 'rated-list');
-  if (li.parentElement !== dest) {
-    const next = Array.from(dest.querySelectorAll('li')).find(
+  const id = li.dataset.id;
+  syncRow(entries.get(id));
+  if (value === undefined) {
+    if (copies.get(id)?.contains(document.activeElement))
+      entries.get(id).querySelector('input').focus({ preventScroll: true });
+    copies.get(id)?.remove();
+    copies.delete(id);
+  } else if (copies.has(id)) syncRow(copies.get(id));
+  else {
+    const copy = entryRow(baseline.get(id), 'rated');
+    copies.set(id, copy);
+    const list = el('rated-list');
+    const next = [...list.children].find(
       (row) =>
-        !row.dataset.id || baseline.get(row.dataset.id).expected < baseline.get(li.dataset.id).expected,
+        !row.getAttribute('data-id') ||
+        baseline.get(row.getAttribute('data-id')).expected < baseline.get(id).expected,
     );
-    dest.insertBefore(li, next ?? null);
+    list.insertBefore(copy, next);
   }
-  syncRow(li);
-  if (focused instanceof HTMLElement) focused.focus({ preventScroll: true });
   filterRows();
   syncDraft();
   if (input('auto').checked) update(state.draft);
+  else if (result) renderBoards();
 }
 el('shelves').onchange = (event) => {
   const r = /** @type {HTMLInputElement} */ (event.target);
@@ -292,6 +435,20 @@ el('shelves').onclick = (event) => {
   }
 };
 input('search').oninput = filterRows;
+select('sort').onchange = sortCatalog;
+select('facet').onchange = () => {
+  filterRows();
+  if (result) {
+    selectVisibleItem();
+    renderBoards();
+    renderDetail();
+  }
+};
+function selectVisibleItem() {
+  if (!result.predictions.some((p) => p.itemId === selected && inFacet(p.itemId)))
+    selected = result.predictions.find((p) => inFacet(p.itemId))?.itemId;
+  state.selection = selected;
+}
 
 input('apply').onclick = () => update(state.draft);
 input('auto').onchange = () => {
@@ -311,18 +468,19 @@ function update(ratings) {
       result.predictions.length +
       ' unrated';
     el('weights').textContent =
-      result.weights.length > 1
-        ? 'Taste components (catalog → yours)  ' +
-          result.weights
-            .map((w, i) => i + 1 + '. ' + percent(w.prior) + ' → ' + percent(w.posterior))
-            .join('   ·   ')
-        : '';
+      catalog.models[state.model].kind === 'latent-class'
+        ? 'Taste components each learn a star or response distribution for every title. Each answer updates your class probabilities. The forecast averages each class’s distribution using those probabilities.'
+        : result.weights.length > 1
+          ? 'Taste components (catalog → yours)  ' +
+            result.weights
+              .map((w, i) => i + 1 + '. ' + percent(w.prior) + ' → ' + percent(w.posterior))
+              .join('   ·   ')
+          : '';
     if (
       result.weights.some((w) => w.posterior > 0.01 && w.effectiveSamples !== null && w.effectiveSamples < 20)
     )
       el('weights').textContent += ' Integration is imprecise for these ratings.';
-    if (!result.predictions.some((p) => p.itemId === selected)) selected = result.predictions[0]?.itemId;
-    state.selection = selected;
+    selectVisibleItem();
     const classKey = Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
     taste = tasteProfile(catalog, state.applied, classKey, classKey === state.model ? next : null);
     const view =
@@ -348,6 +506,11 @@ function update(ratings) {
 }
 function renderBoards() {
   const host = el('boards');
+  const positions = new Map(
+    [...host.querySelectorAll('.ranks')].map((list) => [list.getAttribute('data-key'), list.scrollTop]),
+  );
+  ratingObserver?.disconnect();
+  const visible = result.predictions.filter((p) => inFacet(p.itemId));
   const fragment = document.createDocumentFragment();
   for (const spec of panels) {
     const board = node('section'),
@@ -381,14 +544,14 @@ function renderBoards() {
       why.className = 'info-note';
       board.append(why);
     }
-    const items = result.predictions
+    const items = visible
       .filter((p) =>
         spec.key === 'up'
           ? p.shift > 0
           : spec.key === 'down'
             ? p.shift < 0
             : spec.key === 'information'
-              ? !!taste && taste.weights.length > 1
+              ? !!taste && taste.weights.length > 1 && !Object.hasOwn(state.draft, p.itemId)
               : true,
       )
       .sort((a, b) => spec.score(b) - spec.score(a));
@@ -398,9 +561,14 @@ function renderBoards() {
         ? 'All entries rated. Clear one to predict it.'
         : isShift && !Object.keys(state.applied).length
           ? 'Rate an entry to see shifts from the catalog mean.'
-          : spec.key === 'information'
+          : spec.key === 'information' && (!taste || taste.weights.length < 2)
             ? 'This catalog has no competing taste classes.'
-            : 'No shifts in this direction.';
+            : isShift && visible.length
+              ? (spec.key === 'up'
+                  ? 'No unrated title in this view rises above'
+                  : 'No unrated title in this view falls below') +
+                ' its catalog mean with your current ratings.'
+              : 'No matching entries.';
       const note = node('p', msg);
       note.className = 'note';
       list.append(note);
@@ -412,25 +580,43 @@ function renderBoards() {
       btn.dataset.id = p.itemId;
       btn.setAttribute('aria-pressed', String(selected === p.itemId));
       const pos = node('span', String(index + 1)),
-        score = node('span', spec.format(spec.score(p), p));
+        score = node(
+          'span',
+          isShift ? p.prior.toFixed(2) + ' → ' + p.expected.toFixed(2) : spec.format(spec.score(p), p),
+        );
+      if (isShift) score.title = 'Catalog mean → your mean (' + signed(p.shift) + ')';
       pos.className = 'rank-index';
       score.className = 'score';
       btn.append(pos, node('span', titles.get(p.itemId)), score);
       if (spec.key === 'information') {
         const row = node('div');
         row.className = 'info-row';
-        const rate = node('button', 'Rate');
-        rate.className = 'quick';
-        rate.tabIndex = btn.tabIndex;
-        rate.dataset.id = p.itemId;
-        rate.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId));
-        row.append(btn, rate);
+        row.dataset.id = p.itemId;
+        row.append(btn);
+        if (index < 12) row.append(ratingControls(p.itemId, 'information'));
         list.append(row);
       } else list.append(btn);
     }
     fragment.append(board);
   }
   host.replaceChildren(fragment);
+  for (const list of host.querySelectorAll('.ranks'))
+    list.scrollTop = positions.get(list.getAttribute('data-key')) ?? 0;
+  const info = host.querySelector('.information .ranks');
+  ratingObserver = new IntersectionObserver(
+    (records) => {
+      for (const r of records) if (r.isIntersecting) mountChoices(r.target);
+    },
+    { root: info, rootMargin: '200px' },
+  );
+  for (const row of info.querySelectorAll('.info-row'))
+    if (!row.querySelector('.choices')) ratingObserver.observe(row);
+}
+function mountChoices(row) {
+  if (row?.isConnected && !row.querySelector('.choices')) {
+    row.append(ratingControls(row.dataset.id, 'information'));
+    ratingObserver?.unobserve(row);
+  }
 }
 function renderDetail() {
   if (!result) return;
@@ -451,6 +637,7 @@ function renderDetail() {
 // One tab stop per ranking; arrow keys move through its scrollable entries.
 el('boards').addEventListener('focusin', (event) => {
   const button = event.target;
+  if (button instanceof HTMLElement && button.closest('.info-row')) mountChoices(button.closest('.info-row'));
   if (!(button instanceof HTMLButtonElement) || !button.matches('.rank')) return;
   for (const peer of button.closest('.ranks').querySelectorAll('button'))
     peer.tabIndex = peer.dataset.id === button.dataset.id ? 0 : -1;
@@ -475,36 +662,53 @@ el('boards').onkeydown = (event) => {
 };
 el('boards').onclick = (event) => {
   const target = /** @type {HTMLElement} */ (event.target);
-  const quick = target.closest('button.quick');
-  if (quick instanceof HTMLButtonElement) {
-    const chooser = document.createElement('select');
-    chooser.setAttribute('aria-label', 'Rating for ' + titles.get(quick.dataset.id));
-    chooser.replaceChildren(
-      new Option('Rate…', ''),
-      ...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))),
-    );
-    chooser.onchange = () => {
-      if (chooser.value) {
-        edit(entries.get(quick.dataset.id), Number(chooser.value));
-        if (chooser.isConnected) chooser.replaceWith(quick);
-      }
-    };
-    chooser.onblur = () => {
-      if (chooser.isConnected) chooser.replaceWith(quick);
-    };
-    quick.replaceWith(chooser);
-    chooser.focus();
-    return;
-  }
   const btn = target.closest('button.rank');
   if (!(btn instanceof HTMLButtonElement)) return;
   selected = state.selection = btn.dataset.id;
   for (const b of el('boards').querySelectorAll('button'))
     if (b.classList.contains('rank')) b.setAttribute('aria-pressed', String(b.dataset.id === selected));
   renderDetail();
+  if (['up', 'down'].includes(btn.closest('.ranks').getAttribute('data-key'))) {
+    reveal(selected, true);
+    return;
+  }
   const heading = el('detail-title');
   if (matchMedia('(max-width:690px)').matches || heading.getBoundingClientRect().top > innerHeight - 60)
     heading.focus();
+};
+el('boards').onchange = (event) => {
+  const radio = event.target;
+  if (!(radio instanceof HTMLInputElement) || radio.type !== 'radio') return;
+  const row = radio.closest('div.info-row');
+  if (!(row instanceof HTMLElement)) return;
+  const list = row.parentElement;
+  const index = [...list.children].indexOf(row);
+  const height = row.offsetHeight;
+  const id = row.dataset.id;
+  edit(entries.get(id), Number(radio.value));
+  const updated = el('boards').querySelector('.information .ranks');
+  const next = updated.children[index] ?? updated.lastElementChild;
+  if (next) next.querySelector('button')?.focus({ preventScroll: true });
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    row.classList.add('departing');
+    row.inert = true;
+    row.setAttribute('aria-hidden', 'true');
+    updated.insertBefore(row, updated.children[index] ?? null);
+    row
+      .animate(
+        [
+          { height: height + 'px', opacity: 1 },
+          { height: height + 'px', opacity: 0, offset: 0.55 },
+          { height: '0px', opacity: 0 },
+        ],
+        { duration: 620, easing: 'ease-in-out', fill: 'forwards' },
+      )
+      .finished.then(() => row.remove());
+  }
+  reveal(id);
+  const copy = copies.get(id),
+    rated = el('rated-list');
+  rated.scrollTop += copy.getBoundingClientRect().top - rated.getBoundingClientRect().top;
 };
 select('model').onchange = () => {
   state.model = select('model').value;

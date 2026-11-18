@@ -243,6 +243,21 @@ export function showDetail({
   if (!p) return;
   detail.dataset.id = p.itemId;
   el('detail-title').textContent = titles.get(p.itemId);
+  const a = catalog.items.find((it) => it.itemId === p.itemId)?.annotations ?? {};
+  const annotationText = [
+    ...(a.genres ?? []),
+    a.certificate,
+    ...(a.tags ?? []),
+    a.collection ? a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '') : '',
+    a.region,
+    a.coast,
+    a.temperature != null ? a.temperature + ' °C annual mean' : '',
+    a.precipitation != null ? a.precipitation + ' mm/year' : '',
+    a.population ? a.population.toLocaleString() + ' residents (GeoNames)' : '',
+    a.gdp ? '$' + a.gdp.toLocaleString() + ' per capita (country, 2023)' : '',
+  ].filter(Boolean);
+  el('annotations').textContent = annotationText.join(' · ');
+  el('annotations').hidden = !annotationText.length;
   const link = /** @type {HTMLAnchorElement} */ (el('external'));
   const imdb = evidence?.imdb?.[p.itemId];
   link.hidden = !(imdb || domain === 'stravl');
@@ -265,7 +280,7 @@ export function showDetail({
     const q = encodeURIComponent(p.title);
     extra('Google Maps', 'https://www.google.com/maps/search/?api=1&query=' + q);
     extra('Apple Maps', 'https://maps.apple.com/?q=' + q);
-  } else if (domain === 'expanded' || domain === 'movielens')
+  } else if (domain === 'expanded')
     extra(
       'Search Rotten Tomatoes',
       'https://www.rottentomatoes.com/search?search=' +

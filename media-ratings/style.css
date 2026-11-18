@@ -704,37 +704,11 @@ body {
 .information .board-head {
   background: color-mix(in srgb, var(--taste-ink) 16%, var(--surface));
 }
-.info-row {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--edge);
-}
-.info-row .rank {
-  border: 0;
-  min-width: 0;
-}
-.quick,
-.info-row select {
-  font-size: 0.73rem;
-  padding: 0.13rem 0.3rem;
-  margin: 0 0.3rem;
-  color: var(--taste-ink);
-}
 .board-head small {
   white-space: nowrap;
 }
 .board-head select {
   padding: 0.05rem 0.15rem;
-}
-#taste {
-  margin-top: 1rem;
-}
-.taste-layout {
-  display: grid;
-  grid-template-columns: minmax(180px, 330px) 1fr;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.85rem;
 }
 .rating-chart {
   display: block;
@@ -769,18 +743,12 @@ body {
     flex: auto;
     min-height: 18rem;
   }
-  .taste-layout {
-    grid-template-columns: 1fr;
-  }
   .ranks {
     height: 10rem;
   }
   .board-head {
     display: flex;
     flex-wrap: wrap;
-  }
-  .quick {
-    padding: 0.1rem;
   }
   .library-tools {
     padding-bottom: 0.2rem;
@@ -800,4 +768,167 @@ body {
   padding: 0.2rem 0.4rem;
   font-size: 0.82rem;
   text-align: left;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+.filters select {
+  width: 100%;
+  font-size: 0.78rem;
+}
+.info-row {
+  border-bottom: 1px solid var(--edge);
+  display: block;
+  min-height: 3.25rem;
+  overflow: hidden;
+}
+.info-row .rank {
+  border: 0;
+  min-width: 0;
+  padding-bottom: 0.06rem;
+}
+.info-row .choices {
+  padding: 0 0 0.2rem 1.85rem;
+  min-height: 1.45rem;
+  align-content: center;
+}
+.info-row .star span {
+  font-size: 1.32rem;
+}
+.info-row.departing {
+  pointer-events: none;
+  min-height: 0;
+  background: var(--selected);
+}
+.info-row .choice input {
+  z-index: 1;
+}
+#annotations {
+  flex: 1 1 12rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+#taste {
+  margin-top: 1rem;
+  padding: clamp(14px, 1.5vw, 26px);
+  border-top: 3px solid var(--accent);
+}
+#projection-title {
+  font:
+    600 clamp(1.45rem, 2.3vw, 2.2rem) / 1.1 Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+#projection-help {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.4rem 0 1rem;
+  max-width: 75ch;
+}
+.taste-layout {
+  display: grid;
+  font-size: 0.85rem;
+  grid-template-columns: minmax(0, 1.8fr) minmax(140px, 1fr);
+  align-items: center;
+  gap: clamp(14px, 3vw, 56px);
+}
+#taste-plot {
+  background: color-mix(in srgb, var(--surface-2) 66%, var(--surface));
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+}
+#taste-plot .rating-chart {
+  max-height: 19rem;
+  background: none;
+}
+#taste-plot .gridline {
+  stroke: var(--edge);
+  stroke-width: 1;
+}
+.axis-line {
+  stroke: var(--prior);
+  stroke-dasharray: 3 3;
+}
+#taste-plot .class-number {
+  font-weight: 750;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 2.5px;
+}
+.projection-key {
+  margin: 0;
+  text-align: center;
+  color: var(--accent);
+  font-size: 0.78rem;
+  padding: 0.3rem;
+  border-top: 1px solid var(--edge);
+}
+#memberships h3 {
+  margin: 0 0 0.65rem;
+}
+.class-weight {
+  display: grid;
+  grid-template-columns: 3.15rem 1fr 3.3rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.22rem 0;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+.class-weight b {
+  text-align: right;
+  font-weight: 550;
+}
+.weight-rail {
+  background: var(--surface-2);
+  height: 7px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.weight-rail i {
+  display: block;
+  height: 100%;
+  background: var(--class-color);
+}
+#axes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin-top: 1rem;
+}
+#axes section {
+  border-top: 1px solid var(--edge);
+  padding-top: 0.55rem;
+}
+#axes h3 {
+  font-size: 0.83rem;
+  margin: 0 0 0.4rem;
+}
+#axes p,
+#axes small {
+  line-height: 1.4;
+  margin: 0.18rem 0;
+  font-size: 0.78rem;
+}
+#axes small {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+@media (max-width: 690px) {
+  .taste-layout,
+  #axes {
+    grid-template-columns: 1fr;
+  }
+  .info-row .choices {
+    padding-left: 0.45rem;
+  }
+  .info-row .star span {
+    font-size: 1.4rem;
+  }
 }
