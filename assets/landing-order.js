@@ -13,6 +13,8 @@ export const landingLayouts = {
     { id: "sankey", width: 2, height: 2 },
     { id: "layout-gui", width: 2, height: 2 },
     { id: "stan2r", width: 2, height: 2 },
+    { id: "media-ratings", width: 2, height: 2 },
+    { id: "matrix-rain", width: 2, height: 2 },
     { id: "text-in-image", width: 2, height: 3 },
     { id: "crossword", width: 2, height: 3 },
     { id: "name-tags", width: 2, height: 2 },
@@ -34,6 +36,8 @@ export const landingLayouts = {
     { id: "layout-gui", width: 2, height: 2 },
     { id: "stan2r", width: 2, height: 2 },
     { id: "text-in-image", width: 2, height: 3 },
+    { id: "media-ratings", width: 2, height: 2 },
+    { id: "matrix-rain", width: 2, height: 2 },
     { id: "crossword", width: 2, height: 3 },
     { id: "name-tags", width: 2, height: 2 },
     { id: "motrpac-alphabet", width: 2, height: 2 },
@@ -58,6 +62,8 @@ export const landingLayouts = {
     { id: "motrpac-alphabet", width: 2, height: 2 },
     { id: "sankey", width: 3, height: 3 },
     { id: "message-collage", width: 2, height: 3 },
+    { id: "media-ratings", width: 3, height: 2 },
+    { id: "matrix-rain", width: 2, height: 2 },
     { id: "signature", width: 3, height: 2 },
     { id: "raster-to-vector", width: 2, height: 2 },
     { id: "photomosaic", width: 3, height: 2 }
@@ -79,6 +85,8 @@ export const landingLayouts = {
     { id: "signature", width: 2, height: 2 },
     { id: "layout-gui", width: 2, height: 2 },
     { id: "message-collage", width: 2, height: 3 },
+    { id: "media-ratings", width: 2, height: 2 },
+    { id: "matrix-rain", width: 4, height: 2 },
     { id: "raster-to-vector", width: 2, height: 3 },
     { id: "photomosaic", width: 2, height: 2 }
   ],
@@ -95,12 +103,14 @@ export const landingLayouts = {
     { id: "text-in-image", width: 2, height: 3 },
     { id: "stan2r", width: 2, height: 3 },
     { id: "color-optimization", width: 3, height: 3 },
+    { id: "media-ratings", width: 5, height: 2 },
     { id: "crossword", width: 2, height: 3 },
     { id: "raster-to-vector", width: 2, height: 3 },
     { id: "sankey", width: 3, height: 3 },
     { id: "motrpac-alphabet", width: 3, height: 2 },
     { id: "message-collage", width: 2, height: 3 },
-    { id: "photomosaic", width: 2, height: 2 }
+    { id: "photomosaic", width: 2, height: 2 },
+    { id: "matrix-rain", width: 2, height: 2 }
   ],
   "8": [
     { id: "ceo-salary-benchmark", width: 2, height: 3 },
@@ -111,6 +121,8 @@ export const landingLayouts = {
     { id: "intuitions", width: 3, height: 3 },
     { id: "stan2r", width: 2, height: 2 },
     { id: "color-optimization", width: 3, height: 3 },
+    { id: "media-ratings", width: 3, height: 2 },
+    { id: "matrix-rain", width: 5, height: 2 },
     { id: "sankey", width: 3, height: 3 },
     { id: "text-in-image", width: 2, height: 3 },
     { id: "name-tags", width: 3, height: 2 },
@@ -134,6 +146,8 @@ export const landingLayouts = {
     { id: "intuitions", width: 3, height: 3 },
     { id: "color-optimization", width: 3, height: 3 },
     { id: "name-tags", width: 2, height: 2 },
+    { id: "media-ratings", width: 3, height: 2 },
+    { id: "matrix-rain", width: 2, height: 2 },
     { id: "sankey", width: 3, height: 3 },
     { id: "crossword", width: 2, height: 3 },
     { id: "motrpac-alphabet", width: 3, height: 2 },
@@ -160,6 +174,8 @@ export const landingLayouts = {
     { id: "signature", width: 2, height: 2 },
     { id: "text-in-image", width: 2, height: 3 },
     { id: "raster-to-vector", width: 2, height: 3 },
+    { id: "media-ratings", width: 4, height: 2 },
+    { id: "matrix-rain", width: 5, height: 2 },
     { id: "photomosaic", width: 2, height: 2 }
   ],
 };

@@ -135,7 +135,7 @@ try {
   assert.ok(fills[0].every((/** @type {string} */ color, /** @type {number} */ i) => color !== fills[1][i]), 'section fills follow the theme');
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
-  assert.equal(await page.locator('.project-card').count(), 18);
+  assert.equal(await page.locator('.project-card').count(), 20);
   assert.equal(await page.locator('#projects > .grid').count(), 1);
   assert.equal(await page.locator('#projects > .grid > li').first().getAttribute('data-category'), 'everyday');
   assert.equal(await page.locator('[data-mosaic-key=helix]').count(), 0);
@@ -161,7 +161,7 @@ try {
   await page.locator('[data-art="ceo-salary-benchmark"] svg').first().waitFor();
   assert.equal(await page.locator('a[href="/ceo-salary-benchmark/"]').count(), 1);
   assert.ok(!(await page.locator('[data-art="ceo-salary-benchmark"]').textContent()).includes('Rethink Priorities'));
-  for (const name of ['motrpac-alphabet', 'stan2r']) {
+  for (const name of ['motrpac-alphabet', 'stan2r', 'media-ratings', 'matrix-rain']) {
     assert.equal(await page.locator(`a[href="/${name}/"]`).count(), 1);
     await page.locator(`[data-art="${name}"]`).scrollIntoViewIfNeeded();
     await page.locator(`[data-art="${name}"] > svg`).waitFor();

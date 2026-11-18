@@ -80,3 +80,9 @@ With JavaScript unavailable, the semantic card links and thematic source order r
 ## Collage preview selection
 
 `message-collage/core/whitespace.js` measures coverage and large blank rectangles from the same rotated/warped glyph boxes used by the renderer. It does not replace the app’s buffered-grid selection. `scripts/landing-art/collage-search.mjs` screens independent starts at three aspect ratios, finishes a small shortlist with the existing expansion/rotation/warp pipeline, and saves the selected results with source hashes and scoring provenance. The card builder consumes those results and shares glyph paths across the three compositions. Container queries select a composition for the actual preview well; each nested SVG preserves its own aspect ratio.
+
+## Matrix Rain and Media Ratings
+
+Matrix Rain builds a seeded set of character streams, samples a scene at any point on its timeline and paints the resulting frame on Canvas. Playback, PNG capture, browser video recording and the landing preview share the renderer. The JSON CLI can sample the timeline without a browser.
+
+Media Ratings fits catalogs offline in R and serves their item labels, scale cutpoints, component weights, means and covariance matrices as static JSON. Its browser and Node entry points use the same normal interval functions and Cholesky factorization as Statistical Intuitions. The logit reference conditions on point observations. The ordinal model integrates over observed rating intervals, then combines component predictions using posterior class probabilities. [Model, data and evaluation](../media-ratings/README.md)
