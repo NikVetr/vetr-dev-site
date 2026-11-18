@@ -16,11 +16,54 @@ test('frames are reproducible across seeking, with independent rain and opening 
 });
 function openTitle(f) {
   return f.glyphs
-    .filter((g) => g.hot && g.y === 270 + f.size / 2)
+    .filter((g) => g.hot && g.y === 270)
     .map((g) => g.char)
     .join('');
 }
 test('invalid time, controls and unknown fields produce request errors', () => {
   for (const v of [{ time: -1 }, { crt: 5 }, { seed: 0.25 }, { alphabet: '' }, { seedValue: 1 }])
     assert.throws(() => submit(v), { code: 'invalid_request' });
+});
+
+test('the title centers on the optical axis; outline precedes focus and the mask follows the image', () => {
+  for (const title of ['The Extracellular Matrix', 'The Correlation Matrix', 'ODD']) {
+    const s = makeScene({ title });
+    const f = frame(s, 11.3);
+    const line = [...title].map((char, i) => {
+      const x = 480 + (i - (title.length - 1) / 2) * (960 / 84) * f.zoom;
+      return f.glyphs.find((g) => g.char === char && g.y === 270 && Math.abs(g.x - x) < 1e-9);
+    });
+    assert.ok(line.every(Boolean));
+    const outline = frame(s, 13.5),
+      midway = frame(s, 15),
+      end = frame(s, 16);
+    assert.equal(f.imageAlpha + f.outlineAlpha, 0);
+    assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom === f.zoom);
+    assert.ok(midway.imageAlpha > 0 && midway.rainBlur > 0 && midway.zoom > outline.zoom);
+    assert.ok(end.imageAlpha > midway.imageAlpha && end.rainAlpha < midway.rainAlpha);
+    for (const shot of [midway, end])
+      assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - outline.maskPitch / outline.imageZoom) < 1e-10);
+  }
+});
+test('each hidden phrase is readable top to bottom during an early drop in both modes', () => {
+  for (const mode of ['opening', 'rain']) {
+    const s = makeScene({ mode, alphabet: '0', title: 'ODD', hiddenWords: ['Ada Lovelace', 'PAGÉ'] });
+    const planted = s.streams.flatMap((stream, i) => (stream.word.length ? [{ stream, i }] : []));
+    assert.equal(planted.length, 4);
+    for (const { stream, i } of planted) {
+      const t = stream.start + (stream.word.length + 2.1) / stream.speed;
+      const f = frame(s, t);
+      const column = f.glyphs
+        .filter((g) => Math.abs(g.x - ((i + 0.5) * 960) / 84) < 1e-8)
+        .sort((a, b) => a.y - b.y);
+      assert.ok(
+        column
+          .map((g) => g.char)
+          .join('')
+          .includes(stream.word.join('')),
+      );
+    }
+  }
+  for (const hiddenWords of ['NAME', [''], ['a'.repeat(31)], Array(85).fill('a')])
+    assert.throws(() => submit({ hiddenWords }), { code: 'invalid_request' });
 });

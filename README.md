@@ -92,7 +92,7 @@ Name Tags offers **Customize helix or braid** inside its existing decoration con
 
 **[Stan Studio](stan2r/)** explores supported Stan models as draggable dependency/plate diagrams, with JavaScript prior predictive histograms, expandable node controls, a typeset model beside the source, and a unified R/LaTeX/Python export menu. It supports static group indexing and the original multilevel beta–binomial example. Its original converter produces R for prior/posterior predictive simulation or pointwise densities. It runs the hardened R translator unchanged, using Stan's typed AST and a lazily downloaded webR runtime. Conversion stays on the device; the first valid conversion needs internet access to fetch the runtime. The CLI uses the same R sources with a local `Rscript` installation. Unsupported constructs produce explicit errors; the app does not fit models. See [setup and limitations](stan2r/README.md) and the [API](stan2r/api.md).
 
-**[Matrix Rain](matrix-rain/)** creates a seeded character-rain opening with title locks, a CRT screen and an uploaded image. Scrub the timeline or export a PNG or video. [Frame API](matrix-rain/api.md)
+**[Matrix Rain](matrix-rain/)** hides words in falling code, locks a title into place, then zooms into a reflection on CRT glass. Use the included portrait or upload your own. Scrub the timeline or export a PNG or video. [Frame API](matrix-rain/api.md)
 
 **[Media Ratings](media-ratings/)** predicts unrated films and destination preferences from individual ratings. Compare expected scores, surprises, threshold probabilities and taste-component weights. Fit another catalog from two CSV files. [Fitting, datasets and held-out results](media-ratings/README.md) · [Prediction API](media-ratings/api.md)
 

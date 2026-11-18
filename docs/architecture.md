@@ -83,7 +83,7 @@ With JavaScript unavailable, the semantic card links and thematic source order r
 
 ## Matrix Rain and Media Ratings
 
-Matrix Rain builds a seeded set of character streams, samples a scene at any point on its timeline and paints the resulting frame on Canvas. Playback, PNG capture, browser video recording and the landing preview share the renderer. The JSON CLI can sample the timeline without a browser.
+Matrix Rain builds a seeded set of character streams, samples a scene at any point on its timeline and paints the resulting frame on Canvas. A separate seeded shuffle assigns hidden words to columns. The renderer caches the reflection’s edge image and scales the image and CRT mask with the same camera. Playback, PNG capture, browser video recording and the landing preview share the renderer. The JSON CLI can sample the timeline without a browser.
 
 Media Ratings fits catalogs offline in R and serves their item labels, scale cutpoints, component weights, means and covariance matrices as static JSON. Its browser and Node entry points use the same normal interval functions and Cholesky factorization as Statistical Intuitions. The logit reference conditions on point observations. The ordinal model integrates over observed rating intervals, then combines component predictions using posterior class probabilities. [Model, data and evaluation](../media-ratings/README.md)
 

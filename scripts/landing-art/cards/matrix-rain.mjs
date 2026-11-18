@@ -5,17 +5,26 @@ export async function build() {
   try {
     const frames = await browser.page.evaluate(async () => {
       const { makeScene, frame, paint } = await import(new URL('core.mjs', location.href).href);
-      const scene = makeScene({ title: 'THE MATRIX' });
+      const scene = makeScene({ title: 'The Extracellular Matrix' });
       const canvas = document.createElement('canvas');
-      canvas.width = 320;
-      canvas.height = 180;
+      canvas.width = 640;
+      canvas.height = 360;
       const ctx = canvas.getContext('2d');
-      return [10.9, 11.2, 11.5, 11.8, 12.1, 12.4].map((time) => {
+      return [11.05, 11.23, 11.41, 11.59, 11.77, 11.95].map((time) => {
         paint(ctx, frame(scene, time), null);
-        return '<image width="320" height="180" href="' + canvas.toDataURL('image/webp', 0.82) + '"/>';
+        return '<image width="100%" y="50%" href="' + canvas.toDataURL('image/webp', 0.82) + '"/>';
       });
     });
-    return art({ name: 'matrix-rain', period: 1.8, ...flipbook('matrix-rain', frames, 1.8) });
+    const book = flipbook('matrix-rain', frames, 1.8);
+    return art({
+      name: 'matrix-rain',
+      period: 1.8,
+      responsive: true,
+      ...book,
+      css:
+        book.css +
+        ' & {background:#010704} & image {height:auto;transform-box:fill-box;transform:translateY(-50%)}',
+    });
   } finally {
     await browser.close();
   }

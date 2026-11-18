@@ -16,7 +16,7 @@ let scene,
   imageLoading = false;
 function show(t) {
   input('time').value = t.toFixed(2);
-  el('clock').textContent = t.toFixed(2) + ' s';
+  el('clock').textContent = t.toFixed(2) + ' / ' + duration + ' s';
   paint(ctx, frame(scene, t), picture);
 }
 function configure() {
@@ -25,9 +25,17 @@ function configure() {
       title: input('title').value,
       alphabet: input('alphabet').value,
       seed: input('seed').valueAsNumber,
+      hiddenWords: input('words')
+        .value.split(/\r?\n/)
+        .map((w) => w.trim())
+        .filter(Boolean),
       mode: input('mode').value,
       crt: input('crt').valueAsNumber,
     });
+    const rainOnly = scene.mode === 'rain';
+    input('title').disabled = rainOnly;
+    input('image').disabled = rainOnly;
+    input('reset-image').disabled = rainOnly;
     status.textContent = '';
     show(input('time').valueAsNumber);
     play.disabled = false;
@@ -72,7 +80,7 @@ input('time').oninput = () => {
   stop();
   show(input('time').valueAsNumber);
 };
-for (const key of ['title', 'alphabet', 'mode', 'seed', 'crt']) input(key).oninput = configure;
+for (const key of ['title', 'alphabet', 'words', 'mode', 'seed', 'crt']) input(key).oninput = configure;
 async function loadImage(url) {
   const id = ++pendingImage;
   imageLoading = true;
@@ -83,6 +91,7 @@ async function loadImage(url) {
     await img.decode();
     if (id === pendingImage) {
       picture = img;
+      el('reset-image').hidden = url === demo;
       show(input('time').valueAsNumber);
       status.textContent = '';
     }
@@ -96,7 +105,24 @@ async function loadImage(url) {
     if (url.startsWith('blob:')) URL.revokeObjectURL(url);
   }
 }
-const demo = '../assets/pets_footer_1000.webp';
+const demo = './nik-reflection.webp';
+const labNames =
+  'NATHAN OLIVIA MARIANNE TIFFANY NICOLE MIKE PAGÉ EMILY TANNER STEPHEN DANIEL KAMERON JAROD KEVIN NIKKI RACHEL NIKOLAI'.split(
+    ' ',
+  );
+el('lab-names').onclick = () => {
+  const words = input('words');
+  const existing = words.value
+    .split(/\r?\n/)
+    .map((w) => w.trim())
+    .filter(Boolean);
+  words.value = [...new Set([...existing, ...labNames])].join('\n');
+  configure();
+};
+el('reset-image').onclick = () => {
+  input('image').value = '';
+  return loadImage(demo);
+};
 input('image').onchange = () => {
   const file = input('image').files[0];
   return loadImage(file ? URL.createObjectURL(file) : demo);

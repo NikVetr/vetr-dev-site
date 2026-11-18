@@ -2,54 +2,81 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matrix Rain · vetr.dev</title>
     <link rel="stylesheet" href="../shared/base.css" />
+    <link rel="stylesheet" href="../shared/tool-nav.css" />
+    <link rel="stylesheet" href="../shared/light-switch.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="../shared/theme.js"></script>
   </head>
   <body>
-    <main>
-      <a href="../">← vetr.dev</a>
-      <h1>Matrix Rain</h1>
-      <p>Build a green-rain title sequence around your own image.</p>
-      <div class="monitor">
-        <canvas
-          id="screen"
-          width="960"
-          height="540"
-          aria-label="Opening preview with green falling characters, a title reveal and the selected image"
-        ></canvas>
+    <header class="site-header">
+      <div class="container header-row tool-header-row">
+        <div>
+          <h1>Matrix Rain</h1>
+          <p class="tagline">Hide words in falling code and reveal a reflection on CRT glass.</p>
+        </div>
+        <div class="tool-header-actions">
+          <a href="../">vetr.dev</a
+          ><button id="theme-toggle" type="button" data-light-switch aria-label="Dark mode"></button>
+        </div>
       </div>
-      <div class="transport">
-        <button id="play">Play</button><label for="time">Time</label
-        ><input id="time" type="range" min="0" max="16" step="0.01" value="4" /><output id="clock"
-          >4.00 s</output
-        >
-      </div>
-      <fieldset id="settings">
-        <legend>Sequence</legend>
-        <div class="controls">
+    </header>
+    <main class="container studio">
+      <section class="card preview" aria-labelledby="preview-heading">
+        <div class="preview-heading">
+          <h2 id="preview-heading">Preview</h2>
+          <output id="clock" for="time">4.00 / 16 s</output>
+        </div>
+        <div class="monitor">
+          <canvas id="screen" width="960" height="540" aria-label="Matrix rain animation preview"></canvas>
+        </div>
+        <div class="transport">
+          <button id="play" type="button" class="primary">Play</button>
+          <label for="time" class="visually-hidden">Time in seconds</label
+          ><input id="time" type="range" min="0" max="16" step="0.01" value="4" />
+        </div>
+        <div class="actions">
+          <button id="still" type="button">Save frame as PNG</button
+          ><button id="video" type="button">Record video</button>
+        </div>
+        <output id="status" role="status"></output>
+      </section>
+      <aside class="card controls" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <fieldset id="settings">
+          <legend class="visually-hidden">Sequence settings</legend>
           <label
             >Mode<select id="mode">
-              <option value="opening">Opening with image</option>
+              <option value="opening">Opening with reflection</option>
               <option value="rain">Rain only</option>
             </select></label
           >
-          <label>Title<input id="title" maxlength="40" value="THE MATRIX: CORRELATIONS" /></label
-          ><label>Rain alphabet<input id="alphabet" maxlength="64" value="ACGT" required /></label>
+          <label>Opening title<input id="title" maxlength="40" value="The Correlation Matrix" /></label>
           <label
-            >Seed<input type="number" id="seed" min="0" max="4294967295" step="1" value="777" required
+            >Reflection image<input type="file" id="image" accept="image/png,image/jpeg,image/webp"
           /></label>
+          <button type="button" id="reset-image" hidden>Use Nik’s portrait</button>
+          <div class="pair">
+            <label>Rain alphabet<input id="alphabet" maxlength="64" value="ACGT" required /></label>
+            <label
+              >Seed<input type="number" id="seed" min="0" max="4294967295" step="1" value="777" required
+            /></label>
+          </div>
+          <label
+            >Hidden words<textarea
+              id="words"
+              rows="4"
+              placeholder="One name or phrase per line"
+              aria-describedby="words-hint"
+            ></textarea>
+          </label>
+          <p id="words-hint">Each line reads down a falling column.</p>
+          <button type="button" id="lab-names">Add original lab names</button>
           <label>CRT strength<input type="range" id="crt" min="0" max="1" step="0.01" value=".76" /></label>
-          <label
-            >Opening image<input type="file" id="image" accept="image/png,image/jpeg,image/webp"
-          /></label>
-        </div>
-      </fieldset>
-      <div class="actions">
-        <button id="still">Save frame as PNG</button><button id="video">Record opening</button
-        ><output id="status" role="status"></output>
-      </div>
+        </fieldset>
+      </aside>
     </main>
     <script type="module" src="app.mjs"></script>
   </body>
