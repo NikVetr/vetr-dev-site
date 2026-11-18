@@ -1,0 +1,101 @@
+body {
+  background: #09140f;
+  color: #daf5e6;
+  color-scheme: dark;
+  font:
+    1rem/1.45 ui-sans-serif,
+    system-ui,
+    sans-serif;
+}
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 42px);
+}
+main > a {
+  color: #93e8b5;
+}
+h1 {
+  font:
+    600 clamp(2rem, 6vw, 3.7rem) / 1 ui-monospace,
+    monospace;
+  letter-spacing: -0.06em;
+  margin: 0.5em 0 0.18em;
+}
+p {
+  color: #a6bcb0;
+  margin: 0 0 1.25rem;
+}
+.monitor {
+  background: #19261f;
+  padding: clamp(5px, 1vw, 12px);
+  border: 1px solid #46594d;
+  border-radius: 14px;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.transport,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+#time {
+  flex: 1;
+  min-width: 55px;
+}
+output {
+  font:
+    0.9rem ui-monospace,
+    monospace;
+}
+#clock {
+  min-width: 6ch;
+}
+fieldset {
+  border: 1px solid #405447;
+  padding: 1rem;
+  border-radius: 6px;
+}
+legend {
+  padding: 0 0.4rem;
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 0.85rem;
+}
+label {
+  display: grid;
+  gap: 0.25rem;
+}
+input,
+select,
+button {
+  max-width: 100%;
+  min-width: 0;
+  color: #e2f8e9;
+  background: #192a20;
+  border: 1px solid #647b6b;
+  border-radius: 4px;
+  padding: 0.45rem 0.65rem;
+  font: inherit;
+}
+input[type='range'] {
+  accent-color: #79e99b;
+  padding: 0;
+}
+button {
+  cursor: pointer;
+}
+#play {
+  background: #b9f2c8;
+  color: #102316;
+  min-width: 5rem;
+}

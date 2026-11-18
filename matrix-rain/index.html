@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Matrix Rain · vetr.dev</title>
+    <link rel="stylesheet" href="../shared/base.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <a href="../">← vetr.dev</a>
+      <h1>Matrix Rain</h1>
+      <p>Build a green-rain title sequence around your own image.</p>
+      <div class="monitor">
+        <canvas
+          id="screen"
+          width="960"
+          height="540"
+          aria-label="Opening preview with green falling characters, a title reveal and the selected image"
+        ></canvas>
+      </div>
+      <div class="transport">
+        <button id="play">Play</button><label for="time">Time</label
+        ><input id="time" type="range" min="0" max="16" step="0.01" value="4" /><output id="clock"
+          >4.00 s</output
+        >
+      </div>
+      <fieldset id="settings">
+        <legend>Sequence</legend>
+        <div class="controls">
+          <label
+            >Mode<select id="mode">
+              <option value="opening">Opening with image</option>
+              <option value="rain">Rain only</option>
+            </select></label
+          >
+          <label>Title<input id="title" maxlength="40" value="THE MATRIX: CORRELATIONS" /></label
+          ><label>Rain alphabet<input id="alphabet" maxlength="64" value="ACGT" required /></label>
+          <label
+            >Seed<input type="number" id="seed" min="0" max="4294967295" step="1" value="777" required
+          /></label>
+          <label>CRT strength<input type="range" id="crt" min="0" max="1" step="0.01" value=".76" /></label>
+          <label
+            >Opening image<input type="file" id="image" accept="image/png,image/jpeg,image/webp"
+          /></label>
+        </div>
+      </fieldset>
+      <div class="actions">
+        <button id="still">Save frame as PNG</button><button id="video">Record opening</button
+        ><output id="status" role="status"></output>
+      </div>
+    </main>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
