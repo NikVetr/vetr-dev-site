@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Media Ratings · vetr.dev</title>
+    <link rel="stylesheet" href="../shared/base.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="../shared/theme.js"></script>
+  </head>
+  <body>
+    <main>
+      <a href="../">← vetr.dev</a>
+      <h1>Media Ratings</h1>
+      <p class="intro">Rate a few films or destinations to see what rises, falls, or becomes a safer bet.</p>
+      <div class="workspace">
+        <aside>
+          <h2>Your ratings</h2>
+          <label>Item<select id="item"></select></label>
+          <div class="pair">
+            <label>Rating<select id="value"></select></label><button id="add" disabled>Add rating</button>
+          </div>
+          <ul id="rated"></ul>
+          <p id="empty">Choose an item you know.</p>
+          <hr />
+          <h2>Catalog</h2>
+          <label
+            >Dataset<select id="catalog">
+              <option value="movielens">MovieLens films</option>
+              <option value="stravl">Stravl destinations</option>
+              <option value="custom" hidden disabled>Imported catalog</option>
+            </select></label
+          >
+          <p id="name"></p>
+          <label>Model<select id="model"></select></label>
+          <details>
+            <summary>Use another catalog</summary>
+            <label
+              >Open a fitted JSON catalog<input type="file" id="file" accept=".json,application/json"
+            /></label>
+            <p><a href="README.md">Fit your own catalog</a></p>
+          </details>
+        </aside>
+        <section>
+          <h2>Predictions</h2>
+          <div class="toolbar">
+            <label
+              >Rank by<select id="rank">
+                <option value="expected">Expected rating</option>
+                <option value="chance">Chance of reaching cutoff</option>
+                <option value="absolute">Biggest surprise</option>
+                <option value="up">Biggest rise</option>
+                <option value="down">Biggest fall</option>
+                <option value="precision">Mean / variance</option>
+              </select></label
+            ><label>Rating cutoff<select id="threshold"></select></label>
+          </div>
+          <p id="weights"></p>
+          <div class="tablewrap">
+            <table>
+              <caption id="caption"></caption>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Expected</th>
+                  <th>Shift</th>
+                  <th id="event">Chance</th>
+                  <th>SD</th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <details>
+            <summary>How to read the rankings</summary>
+            <p>
+              Shift is the change from the catalog expectation after entering your ratings. Select an item to
+              inspect its full predicted distribution. The cutoff ranking counts all probability at or above
+              your chosen rating. Mean / variance divides the expected rating by its conditional variance,
+              floored at 0.01 squared rating units.
+            </p>
+            <p>
+              The historical reference treats ratings as points on a logit scale. The experimental ordinal
+              model treats them as intervals and updates the probability of each taste component. Its
+              predictions integrate over latent ratings. Both models report expectations on the displayed
+              rating scale.
+            </p>
+          </details>
+        </section>
+      </div>
+      <p id="status" role="status"></p>
+      <footer>
+        Movie pilot based on individual ratings from GroupLens.
+        <a href="MOVIELENS-LICENSE.txt">MovieLens terms and citation</a>. Destination preferences from
+        <a href="https://github.com/Stravl/Stravl-Data">Stravl</a>.
+        <a href="README.md">Methods and datasets</a>
+      </footer>
+    </main>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
