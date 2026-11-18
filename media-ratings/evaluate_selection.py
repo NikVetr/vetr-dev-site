@@ -12,7 +12,6 @@ from itertools import product
 from pathlib import Path
 
 import numpy as np
-
 from evaluate_full import SCALE, film_vectors, paired, profiles, read, summary
 
 
@@ -132,7 +131,7 @@ def benchmark(root: Path, catalog: Path, output: Path) -> None:
     with (root / "split.csv").open() as f:
         split = list(csv.DictReader(f))
     excluded = [int(row["row"]) for row in split]
-    if len(excluded) != len(set(excluded)) or set(r["partition"] for r in split) != {
+    if len(excluded) != len(set(excluded)) or {r["partition"] for r in split} != {
         "validation",
         "test",
     }:
