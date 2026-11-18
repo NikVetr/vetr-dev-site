@@ -11,8 +11,42 @@ from pathlib import Path
 from zipfile import ZipFile
 
 import numpy as np
-
 from evaluate_full import film_vectors
+from evaluate_selection import reveal_models
+
+
+def title_choice_model(root, data):
+    items = data["items"]
+    if [item["itemId"] for item in items] != list(
+        json.loads((root / "film-annotations.json").read_text())
+    ):
+        raise ValueError("Film IDs do not match the training matrix column order")
+    matrix = np.memmap(root / "ratings.u8", dtype="uint8", mode="r").reshape(
+        -1, len(items)
+    )
+    if (
+        len(matrix) != data["fit"]["users"]
+        or np.count_nonzero(matrix) != data["fit"]["ratings"]
+    ):
+        raise ValueError("Rating matrix and packaged fit counts disagree")
+    components = data["models"]["latentClass"]["components"]
+    ratios, eligible = reveal_models(
+        matrix,
+        np.arange(len(matrix)),
+        np.array([c["probabilities"] for c in components]),
+        np.array([c["weight"] for c in components]),
+        items,
+    )
+    return {
+        "kind": "class-similarity",
+        "base": "latentClass",
+        "similarityFrom": "ratingsTags",
+        "titleChoice": {
+            "strength": 0.5,
+            "logRatios": ratios["title"].tolist(),
+            "trainingUsers": eligible,
+        },
+    }
 
 
 def package(root, archive, catalog, report):
@@ -77,6 +111,7 @@ def package(root, archive, catalog, report):
         "ridge": 0.5,
         "strength": 0.5,
     }
+    data["models"]["titleChoice"] = title_choice_model(root, data)
     data["defaultModel"] = "ratingsTags"
     catalog.write_text(
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"

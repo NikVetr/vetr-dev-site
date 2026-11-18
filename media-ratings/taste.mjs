@@ -9,6 +9,7 @@ export function tasteProfile(
   key = Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class'),
   existing = null,
   centerClassMeans = false,
+  volunteered = [],
 ) {
   if (!key) return null;
   const selected = catalog.models[key];
@@ -16,7 +17,11 @@ export function tasteProfile(
   if (model.kind !== 'latent-class') throw new Error('Taste profiles require a categorical mixture.');
   const result =
     existing ??
-    predict(catalog, { model: selected.kind === 'class-similarity' ? selected.base : key, ratings });
+    predict(catalog, {
+      model: selected.kind === 'class-similarity' && !selected.titleChoice ? selected.base : key,
+      ratings,
+      volunteered,
+    });
   const weights = result.weights.map((w) => w.posterior);
   const information = new Map();
   const respondents = catalog.fit?.users;

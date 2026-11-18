@@ -120,6 +120,7 @@ export function preferenceFingerprint(
     ratings = {},
     samples = 256,
     centerClassMeans = false,
+    volunteered = [],
     axisIndices = undefined,
   } = {},
   projection = null,
@@ -136,7 +137,7 @@ export function preferenceFingerprint(
   const view =
     projection ??
     (categorical
-      ? tasteProfile(catalog, ratings, key, null, centerClassMeans)
+      ? tasteProfile(catalog, ratings, key, null, centerClassMeans, volunteered)
       : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices }));
   const { weights } = view;
   const { classes, groups, usesHalfStars } = classSignatures(catalog, model);

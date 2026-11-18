@@ -5,9 +5,9 @@ import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
 /** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
-/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number}} Model */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:{strength:number,logRatios:number[][]}}} Model */
 /** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
-/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number}} Request */
+/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[]}} Request */
 /** @param {number[]} a */
 const increasing = (a) => Array.isArray(a) && a.every((v, i) => Number.isFinite(v) && (!i || v > a[i - 1]));
 /** @param {unknown} ok @param {string} message */
@@ -56,6 +56,37 @@ export function validateCatalog(catalog) {
         typeof base === 'string' && Object.hasOwn(models, base) && models[base]?.kind === 'latent-class',
         'The similarity model must reference a fitted latent-class model.',
       );
+      if (model.titleChoice !== undefined) {
+        const choice = model.titleChoice;
+        requireValue(
+          choice &&
+            Number.isFinite(choice.strength) &&
+            choice.strength > 0 &&
+            Array.isArray(choice.logRatios) &&
+            choice.logRatios.length === models[base].components?.length &&
+            choice.logRatios.every(
+              (row) => Array.isArray(row) && row.length === d && row.every(Number.isFinite),
+            ),
+          'Title-choice evidence requires a positive strength and a finite class-by-item table.',
+        );
+      }
+      if (model.similarityFrom !== undefined) {
+        const source =
+          typeof model.similarityFrom === 'string' &&
+          Object.hasOwn(models, model.similarityFrom) &&
+          models[model.similarityFrom];
+        requireValue(
+          source &&
+            source.kind === kind &&
+            source.base === base &&
+            source.similarityFrom === undefined &&
+            model.features === undefined &&
+            ridge === undefined &&
+            strength === undefined,
+          'Inherited film similarities must reference a direct similarity fit with the same classes.',
+        );
+        continue;
+      }
       requireValue(
         Number.isFinite(ridge) && ridge > 0 && Number.isFinite(strength) && strength >= 0,
         'Invalid similarity ridge penalty or tilt strength.',
@@ -259,8 +290,25 @@ function similarityCoefficients(rows, residuals, ridge) {
   return rows[0].map((_, j) => rows.reduce((s, row, i) => s + coef[i] * row[j], 0));
 }
 
-function predictLatentClass(model, items, scale, obs, values, threshold, similarity = null) {
-  const evidence = model.components.map((c) => obs.map((i, j) => Math.log(c.probabilities[i][values[j]])));
+function predictLatentClass(
+  model,
+  items,
+  scale,
+  obs,
+  values,
+  threshold,
+  similarity = null,
+  choice = null,
+  volunteered = new Set(),
+) {
+  const evidence = model.components.map((c, k) =>
+    obs.map((i, j) => {
+      const stars = Math.log(c.probabilities[i][values[j]]);
+      return choice && volunteered.has(items[i].itemId)
+        ? stars + choice.strength * choice.logRatios[k][i]
+        : stars;
+    }),
+  );
   const logWeights = model.components.map((c, k) => evidence[k].reduce((s, v) => s + v, Math.log(c.weight)));
   const post = classMasses(logWeights);
   const weights = model.components.map((c, k) => ({
@@ -342,6 +390,7 @@ export function predict(
   {
     model: key = catalog.defaultModel,
     ratings = {},
+    volunteered = [],
     threshold = defaultCutoff(catalog.scale),
     samples = 256,
   },
@@ -361,10 +410,26 @@ export function predict(
   const indices = new Map(items.map((it, i) => [it.itemId, i]));
   for (const [id, v] of Object.entries(ratings))
     requireValue(indices.has(id) && scale.includes(v), 'Unknown item or rating outside the scale.');
+  requireValue(
+    Array.isArray(volunteered) &&
+      volunteered.every((id) => typeof id === 'string' && Object.hasOwn(ratings, id)) &&
+      new Set(volunteered).size === volunteered.length,
+    'Volunteered titles must be unique IDs with supplied ratings.',
+  );
   const obs = items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => scale.indexOf(ratings[items[i].itemId]));
   if (model.kind === 'class-similarity')
-    return predictLatentClass(catalog.models[model.base], items, scale, obs, values, threshold, model);
+    return predictLatentClass(
+      catalog.models[model.base],
+      items,
+      scale,
+      obs,
+      values,
+      threshold,
+      model.similarityFrom !== undefined ? catalog.models[model.similarityFrom] : model,
+      model.titleChoice,
+      new Set(volunteered),
+    );
   if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);
   const uniform = model.kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
   const blocks = model.components.map((c) => {
@@ -417,7 +482,7 @@ export function predict(
 
 /** @param {Request & {catalog:Catalog}} input */
 export function submit(input) {
-  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'threshold', 'samples']);
+  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'volunteered', 'threshold', 'samples']);
   const { catalog, ...request } = input;
   return predict(validateCatalog(catalog), request);
 }

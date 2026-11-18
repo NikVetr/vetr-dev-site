@@ -450,3 +450,64 @@ test('similarity tilt uses leave-one-out residuals, preserves class weights and 
   model.features = [[1], [0, 1], [1]];
   assert.throws(() => submit({ catalog }), /equal-length/);
 });
+
+test('title choice uses only volunteered identities and carries the posterior into the fingerprint', () => {
+  const films = {
+    name: 'Film choices',
+    items: ['a', 'b', 'c'].map((itemId) => ({ itemId, title: itemId })),
+    scale: [1, 5],
+    defaultModel: 'hybrid',
+    models: {
+      classes: {
+        kind: 'latent-class',
+        components: [0.2, 0.8].map((p) => ({
+          weight: 0.5,
+          probabilities: [
+            [0.5, 0.5],
+            [0.5, 0.5],
+            [p, 1 - p],
+          ],
+        })),
+      },
+      hybrid: {
+        kind: 'class-similarity',
+        base: 'classes',
+        ridge: 0.5,
+        strength: 0.5,
+        features: [[0], [0], [0]],
+      },
+      choice: {
+        kind: 'class-similarity',
+        base: 'classes',
+        similarityFrom: 'hybrid',
+        titleChoice: {
+          strength: 0.5,
+          logRatios: [
+            [Math.log(1.6), Math.log(0.4), 0],
+            [Math.log(0.4), Math.log(1.6), 0],
+          ],
+        },
+      },
+    },
+  };
+  const ratings = { a: 5, b: 1 };
+  const request = { catalog: films, model: 'choice', ratings };
+  const baseline = submit({ catalog: films, ratings });
+  assert.deepEqual(submit(request), baseline);
+  assert.deepEqual(submit({ catalog: films, ratings, volunteered: ['a'] }), baseline);
+  const personalized = submit({ ...request, volunteered: ['a'] });
+  close(personalized.weights[0].posterior, 2 / 3);
+  close(personalized.predictions[0].expected, 3.4);
+  close(submit({ ...request, volunteered: ['a', 'b'] }).weights[0].posterior, 0.5);
+  const fingerprint = preferenceFingerprint(films, { ...request, volunteered: ['a'] });
+  close(fingerprint.match.probability, 2 / 3);
+  assert.equal(fingerprint.match.index, 0);
+  for (const volunteered of [['a', 'a'], ['c'], ['absent']]) {
+    assert.throws(() => submit({ ...request, volunteered }), /unique IDs with supplied ratings/);
+  }
+  films.models.choice.similarityFrom = 'choice';
+  assert.throws(() => submit(request), /direct similarity fit/);
+  films.models.choice.similarityFrom = 'hybrid';
+  films.models.choice.titleChoice.logRatios[0].pop();
+  assert.throws(() => submit(request), /class-by-item table/);
+});
