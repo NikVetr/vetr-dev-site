@@ -1,0 +1,3493 @@
+{
+  "1": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0114709/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/toy_story",
+    "wikidata": "https://www.wikidata.org/wiki/Q171048",
+    "wikipedia": "https://en.wikipedia.org/wiki/Toy_Story"
+  },
+  "10": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0113189/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/goldeneye",
+    "wikidata": "https://www.wikidata.org/wiki/Q19089",
+    "wikipedia": "https://en.wikipedia.org/wiki/GoldenEye"
+  },
+  "1028": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0058331/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mary_poppins",
+    "wikidata": "https://www.wikidata.org/wiki/Q209170",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mary_Poppins_(film)"
+  },
+  "1035": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0059742/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sound_of_music",
+    "wikidata": "https://www.wikidata.org/wiki/Q60072",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Sound_of_Music_(film)"
+  },
+  "1036": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0095016/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/die_hard",
+    "wikidata": "https://www.wikidata.org/wiki/Q105598",
+    "wikipedia": "https://en.wikipedia.org/wiki/Die_Hard"
+  },
+  "104": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0116483/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/happy_gilmore",
+    "wikidata": "https://www.wikidata.org/wiki/Q1313063",
+    "wikipedia": "https://en.wikipedia.org/wiki/Happy_Gilmore"
+  },
+  "104841": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1454468/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gravity_2013",
+    "wikidata": "https://www.wikidata.org/wiki/Q2579784",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gravity_(2013_film)"
+  },
+  "106782": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0993846/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_wolf_of_wall_street_2013",
+    "wikidata": "https://www.wikidata.org/wiki/Q1392744",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Wolf_of_Wall_Street_(2013_film)"
+  },
+  "1073": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0067992/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/willy_wonka_and_the_chocolate_factory",
+    "wikidata": "https://www.wikidata.org/wiki/Q936327",
+    "wikipedia": "https://en.wikipedia.org/wiki/Willy_Wonka_%26_the_Chocolate_Factory"
+  },
+  "1079": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0095159/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/a_fish_called_wanda",
+    "wikidata": "https://www.wikidata.org/wiki/Q466186",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Fish_Called_Wanda"
+  },
+  "1080": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0079470/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/monty_pythons_life_of_brian",
+    "wikidata": "https://www.wikidata.org/wiki/Q24953",
+    "wikipedia": "https://en.wikipedia.org/wiki/Monty_Python's_Life_of_Brian"
+  },
+  "1088": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0092890/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dirty_dancing",
+    "wikidata": "https://www.wikidata.org/wiki/Q253978",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dirty_Dancing"
+  },
+  "1089": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0105236/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/reservoir_dogs",
+    "wikidata": "https://www.wikidata.org/wiki/Q72962",
+    "wikipedia": "https://en.wikipedia.org/wiki/Reservoir_Dogs"
+  },
+  "1090": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0091763/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/platoon",
+    "wikidata": "https://www.wikidata.org/wiki/Q190643",
+    "wikipedia": "https://en.wikipedia.org/wiki/Platoon_(film)"
+  },
+  "109374": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt2278388/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_grand_budapest_hotel",
+    "wikidata": "https://www.wikidata.org/wiki/Q3521099",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Grand_Budapest_Hotel"
+  },
+  "1094": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0104036/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/crying_game",
+    "wikidata": "https://www.wikidata.org/wiki/Q182727",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Crying_Game"
+  },
+  "109487": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0816692/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/interstellar_2014",
+    "wikidata": "https://www.wikidata.org/wiki/Q13417189",
+    "wikipedia": "https://en.wikipedia.org/wiki/Interstellar_(film)"
+  },
+  "1097": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0083866/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/et_the_extraterrestrial",
+    "wikidata": "https://www.wikidata.org/wiki/Q11621",
+    "wikipedia": "https://en.wikipedia.org/wiki/E.T._the_Extra-Terrestrial"
+  },
+  "11": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0112346/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/american_president",
+    "wikidata": "https://www.wikidata.org/wiki/Q429311",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_American_President"
+  },
+  "110": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112573/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1065684-braveheart",
+    "wikidata": "https://www.wikidata.org/wiki/Q162729",
+    "wikipedia": "https://en.wikipedia.org/wiki/Braveheart"
+  },
+  "1101": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0092099/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/top_gun",
+    "wikidata": "https://www.wikidata.org/wiki/Q110138",
+    "wikipedia": "https://en.wikipedia.org/wiki/Top_Gun"
+  },
+  "111": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0075314/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/taxi_driver",
+    "wikidata": "https://www.wikidata.org/wiki/Q47221",
+    "wikipedia": "https://en.wikipedia.org/wiki/Taxi_Driver"
+  },
+  "111759": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1631867/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/live_die_repeat_edge_of_tomorrow",
+    "wikidata": "https://www.wikidata.org/wiki/Q1187607",
+    "wikipedia": "https://en.wikipedia.org/wiki/Edge_of_Tomorrow"
+  },
+  "112556": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt2267998/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gone_girl",
+    "wikidata": "https://www.wikidata.org/wiki/Q14920425",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gone_Girl_(film)"
+  },
+  "1127": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0096754/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/abyss",
+    "wikidata": "https://www.wikidata.org/wiki/Q336517",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Abyss"
+  },
+  "112852": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt2015381/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/guardians_of_the_galaxy",
+    "wikidata": "https://www.wikidata.org/wiki/Q5887360",
+    "wikipedia": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_(film)"
+  },
+  "1136": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0071853/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/monty_python_and_the_holy_grail",
+    "wikidata": "https://www.wikidata.org/wiki/Q25043",
+    "wikipedia": "https://en.wikipedia.org/wiki/Monty_Python_and_the_Holy_Grail"
+  },
+  "1148": {
+    "imdb": "https://www.imdb.com/title/tt0108598/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/wallace_and_gromit_the_wrong_trousers",
+    "wikidata": "https://www.wikidata.org/wiki/Q1969617",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Wrong_Trousers"
+  },
+  "115713": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0470752/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ex_machina",
+    "wikidata": "https://www.wikidata.org/wiki/Q16635326",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ex_Machina_(film)"
+  },
+  "116797": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt2084970/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_imitation_game",
+    "wikidata": "https://www.wikidata.org/wiki/Q14918344",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Imitation_Game"
+  },
+  "1183": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116209/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/english_patient",
+    "wikidata": "https://www.wikidata.org/wiki/Q63026",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_English_Patient_(film)"
+  },
+  "1193": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0073486/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/one_flew_over_the_cuckoos_nest",
+    "wikidata": "https://www.wikidata.org/wiki/Q171669",
+    "wikipedia": "https://en.wikipedia.org/wiki/One_Flew_Over_the_Cuckoo's_Nest_(film)"
+  },
+  "1196": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0080684/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_v_the_empire_strikes_back",
+    "wikidata": "https://www.wikidata.org/wiki/Q181795",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Empire_Strikes_Back"
+  },
+  "1197": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0093779/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/princess_bride",
+    "wikidata": "https://www.wikidata.org/wiki/Q506418",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Princess_Bride"
+  },
+  "1198": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0082971/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/raiders_of_the_lost_ark",
+    "wikidata": "https://www.wikidata.org/wiki/Q174284",
+    "wikipedia": "https://en.wikipedia.org/wiki/Raiders_of_the_Lost_Ark"
+  },
+  "1199": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0088846/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1003033-brazil",
+    "wikidata": "https://www.wikidata.org/wiki/Q25057",
+    "wikipedia": "https://en.wikipedia.org/wiki/Brazil_(1985_film)"
+  },
+  "1200": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0090605/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1000617-aliens",
+    "wikidata": "https://www.wikidata.org/wiki/Q104814",
+    "wikipedia": "https://en.wikipedia.org/wiki/Aliens_(film)"
+  },
+  "1201": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0060196/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_good_the_bad_and_the_ugly",
+    "wikidata": "https://www.wikidata.org/wiki/Q41483",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Good,_the_Bad_and_the_Ugly"
+  },
+  "1203": {
+    "imdb": "https://www.imdb.com/title/tt0050083/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1000013_12_angry_men",
+    "wikidata": "https://www.wikidata.org/wiki/Q2345",
+    "wikipedia": "https://en.wikipedia.org/wiki/12_Angry_Men"
+  },
+  "1204": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0056172/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lawrence_of_arabia",
+    "wikidata": "https://www.wikidata.org/wiki/Q228186",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)"
+  },
+  "1206": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0066921/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/clockwork_orange",
+    "wikidata": "https://www.wikidata.org/wiki/Q181086",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Clockwork_Orange_(film)"
+  },
+  "1207": {
+    "imdb": "https://www.imdb.com/title/tt0056592/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/to_kill_a_mockingbird",
+    "wikidata": "https://www.wikidata.org/wiki/Q177922",
+    "wikipedia": "https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird_(film)"
+  },
+  "1208": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0078788/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/apocalypse_now",
+    "wikidata": "https://www.wikidata.org/wiki/Q182692",
+    "wikipedia": "https://en.wikipedia.org/wiki/Apocalypse_Now"
+  },
+  "1210": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0086190/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_vi_return_of_the_jedi",
+    "wikidata": "https://www.wikidata.org/wiki/Q181803",
+    "wikipedia": "https://en.wikipedia.org/wiki/Return_of_the_Jedi"
+  },
+  "1213": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0099685/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1032176-goodfellas",
+    "wikidata": "https://www.wikidata.org/wiki/Q42047",
+    "wikipedia": "https://en.wikipedia.org/wiki/Goodfellas"
+  },
+  "1214": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0078748/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/alien",
+    "wikidata": "https://www.wikidata.org/wiki/Q103569",
+    "wikipedia": "https://en.wikipedia.org/wiki/Alien_(film)"
+  },
+  "1215": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0106308/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/army_of_darkness",
+    "wikidata": "https://www.wikidata.org/wiki/Q471992",
+    "wikipedia": "https://en.wikipedia.org/wiki/Army_of_Darkness"
+  },
+  "1219": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0054215/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/psycho",
+    "wikidata": "https://www.wikidata.org/wiki/Q163038",
+    "wikipedia": "https://en.wikipedia.org/wiki/Psycho_(1960_film)"
+  },
+  "1220": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0080455/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/blues_brothers",
+    "wikidata": "https://www.wikidata.org/wiki/Q109767",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Blues_Brothers_(film)"
+  },
+  "1221": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0071562/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_godfather_part_ii",
+    "wikidata": "https://www.wikidata.org/wiki/Q184768",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Godfather_Part_II"
+  },
+  "1222": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0093058/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/full_metal_jacket",
+    "wikidata": "https://www.wikidata.org/wiki/Q243439",
+    "wikipedia": "https://en.wikipedia.org/wiki/Full_Metal_Jacket"
+  },
+  "1225": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0086879/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/amadeus",
+    "wikidata": "https://www.wikidata.org/wiki/Q190956",
+    "wikipedia": "https://en.wikipedia.org/wiki/Amadeus_(film)"
+  },
+  "122882": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1392190/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mad_max_fury_road",
+    "wikidata": "https://www.wikidata.org/wiki/Q1757288",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mad_Max:_Fury_Road"
+  },
+  "122886": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt2488496/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_vii_the_force_awakens",
+    "wikidata": "https://www.wikidata.org/wiki/Q6074",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Wars:_The_Force_Awakens"
+  },
+  "122904": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1431045/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/deadpool",
+    "wikidata": "https://www.wikidata.org/wiki/Q19347291",
+    "wikipedia": "https://en.wikipedia.org/wiki/Deadpool_(film)"
+  },
+  "1230": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0075686/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/annie_hall",
+    "wikidata": "https://www.wikidata.org/wiki/Q233464",
+    "wikipedia": "https://en.wikipedia.org/wiki/Annie_Hall"
+  },
+  "1233": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0082096/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/das_boot",
+    "wikidata": "https://www.wikidata.org/wiki/Q62730",
+    "wikipedia": "https://en.wikipedia.org/wiki/Das_Boot"
+  },
+  "1234": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0070735/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1020130-sting",
+    "wikidata": "https://www.wikidata.org/wiki/Q62665",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Sting"
+  },
+  "1240": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0088247/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/terminator",
+    "wikidata": "https://www.wikidata.org/wiki/Q162255",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Terminator"
+  },
+  "1242": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0097441/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1008415-glory",
+    "wikidata": "https://www.wikidata.org/wiki/Q862317",
+    "wikipedia": "https://en.wikipedia.org/wiki/Glory_(1989_film)"
+  },
+  "1246": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0097165/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dead_poets_society",
+    "wikidata": "https://www.wikidata.org/wiki/Q106316",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dead_Poets_Society"
+  },
+  "1247": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0061722/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/graduate",
+    "wikidata": "https://www.wikidata.org/wiki/Q217627",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Graduate"
+  },
+  "1250": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0050212/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bridge_on_the_river_kwai",
+    "wikidata": "https://www.wikidata.org/wiki/Q188718",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Bridge_on_the_River_Kwai"
+  },
+  "1252": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0071315/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/chinatown",
+    "wikidata": "https://www.wikidata.org/wiki/Q644987",
+    "wikipedia": "https://en.wikipedia.org/wiki/Chinatown_(1974_film)"
+  },
+  "1258": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0081505/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shining",
+    "wikidata": "https://www.wikidata.org/wiki/Q186341",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Shining_(film)"
+  },
+  "1259": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0092005/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/stand_by_me_1986",
+    "wikidata": "https://www.wikidata.org/wiki/Q494722",
+    "wikipedia": "https://en.wikipedia.org/wiki/Stand_by_Me_(film)"
+  },
+  "1262": {
+    "imdb": "https://www.imdb.com/title/tt0057115/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_great_escape",
+    "wikidata": "https://www.wikidata.org/wiki/Q110354",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Great_Escape_(film)"
+  },
+  "1263": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0077416/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_deer_hunter",
+    "wikidata": "https://www.wikidata.org/wiki/Q201674",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Deer_Hunter"
+  },
+  "1265": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0107048/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/groundhog_day",
+    "wikidata": "https://www.wikidata.org/wiki/Q488655",
+    "wikipedia": "https://en.wikipedia.org/wiki/Groundhog_Day_(film)"
+  },
+  "1266": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0105695/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1041911-unforgiven",
+    "wikidata": "https://www.wikidata.org/wiki/Q104137",
+    "wikipedia": "https://en.wikipedia.org/wiki/Unforgiven"
+  },
+  "1270": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0088763/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/back_to_the_future",
+    "wikidata": "https://www.wikidata.org/wiki/Q91540",
+    "wikipedia": "https://en.wikipedia.org/wiki/Back_to_the_Future"
+  },
+  "1275": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0091203/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/highlander",
+    "wikidata": "https://www.wikidata.org/wiki/Q156539",
+    "wikipedia": "https://en.wikipedia.org/wiki/Highlander_(film)"
+  },
+  "1276": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0061512/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/cool_hand_luke",
+    "wikidata": "https://www.wikidata.org/wiki/Q684150",
+    "wikipedia": "https://en.wikipedia.org/wiki/Cool_Hand_Luke"
+  },
+  "1278": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0072431/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/young_frankenstein",
+    "wikidata": "https://www.wikidata.org/wiki/Q651923",
+    "wikipedia": "https://en.wikipedia.org/wiki/Young_Frankenstein"
+  },
+  "1282": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0032455/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/fantasia",
+    "wikidata": "https://www.wikidata.org/wiki/Q943192",
+    "wikipedia": "https://en.wikipedia.org/wiki/Fantasia_(1940_film)"
+  },
+  "1288": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0088258/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/this_is_spinal_tap",
+    "wikidata": "https://www.wikidata.org/wiki/Q7810384",
+    "wikipedia": "https://en.wikipedia.org/wiki/This_Is_Spinal_Tap"
+  },
+  "1291": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0097576/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/indiana_jones_and_the_last_crusade",
+    "wikidata": "https://www.wikidata.org/wiki/Q185658",
+    "wikipedia": "https://en.wikipedia.org/wiki/Indiana_Jones_and_the_Last_Crusade"
+  },
+  "1302": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0097351/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/field_of_dreams",
+    "wikidata": "https://www.wikidata.org/wiki/Q517958",
+    "wikipedia": "https://en.wikipedia.org/wiki/Field_of_Dreams"
+  },
+  "1304": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0064115/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1003318-butch_cassidy_and_the_sundance_kid",
+    "wikidata": "https://www.wikidata.org/wiki/Q232000",
+    "wikipedia": "https://en.wikipedia.org/wiki/Butch_Cassidy_and_the_Sundance_Kid"
+  },
+  "1307": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0098635/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/when_harry_met_sally",
+    "wikidata": "https://www.wikidata.org/wiki/Q471169",
+    "wikipedia": "https://en.wikipedia.org/wiki/When_Harry_Met_Sally..."
+  },
+  "1320": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0103644/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/alien3",
+    "wikidata": "https://www.wikidata.org/wiki/Q108543",
+    "wikipedia": "https://en.wikipedia.org/wiki/Alien_3"
+  },
+  "1333": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0056869/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1002448-birds",
+    "wikidata": "https://www.wikidata.org/wiki/Q110043",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Birds_(film)"
+  },
+  "134130": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt3659388/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_martian",
+    "wikidata": "https://www.wikidata.org/wiki/Q18547944",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Martian_(film)"
+  },
+  "134853": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt2096673/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/inside_out_2015",
+    "wikidata": "https://www.wikidata.org/wiki/Q6144664",
+    "wikipedia": "https://en.wikipedia.org/wiki/Inside_Out"
+  },
+  "1356": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0117731/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_trek_first_contact",
+    "wikidata": "https://www.wikidata.org/wiki/Q221236",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Trek:_First_Contact"
+  },
+  "1358": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0117666/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sling_blade",
+    "wikidata": "https://www.wikidata.org/wiki/Q2264347",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sling_Blade"
+  },
+  "1370": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0099423/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/die_hard_2_1990",
+    "wikidata": "https://www.wikidata.org/wiki/Q105993",
+    "wikipedia": "https://en.wikipedia.org/wiki/Die_Hard_2"
+  },
+  "1374": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0084726/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_trek_ii_the_wrath_of_khan",
+    "wikidata": "https://www.wikidata.org/wiki/Q465478",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Trek_II:_The_Wrath_of_Khan"
+  },
+  "1376": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0092007/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_trek_iv_the_voyage_home",
+    "wikidata": "https://www.wikidata.org/wiki/Q471842",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Trek_IV:_The_Voyage_Home"
+  },
+  "1377": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0103776/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/batman_returns",
+    "wikidata": "https://www.wikidata.org/wiki/Q189054",
+    "wikipedia": "https://en.wikipedia.org/wiki/Batman_Returns"
+  },
+  "1380": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0077631/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/grease",
+    "wikidata": "https://www.wikidata.org/wiki/Q267721",
+    "wikipedia": "https://en.wikipedia.org/wiki/Grease_(film)"
+  },
+  "1387": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0073195/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/jaws",
+    "wikidata": "https://www.wikidata.org/wiki/Q189505",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jaws_(film)"
+  },
+  "1391": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0116996/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mars_attacks",
+    "wikidata": "https://www.wikidata.org/wiki/Q271690",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mars_Attacks!"
+  },
+  "1393": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116695/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/jerry_maguire",
+    "wikidata": "https://www.wikidata.org/wiki/Q329131",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jerry_Maguire"
+  },
+  "1394": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0093822/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/raising_arizona",
+    "wikidata": "https://www.wikidata.org/wiki/Q670439",
+    "wikipedia": "https://en.wikipedia.org/wiki/Raising_Arizona"
+  },
+  "1396": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0105435/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sneakers",
+    "wikidata": "https://www.wikidata.org/wiki/Q497082",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sneakers_(1992_film)"
+  },
+  "1407": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0117571/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1074316-scream",
+    "wikidata": "https://www.wikidata.org/wiki/Q27411",
+    "wikipedia": "https://en.wikipedia.org/wiki/Scream_(1996_film)"
+  },
+  "1408": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0104691/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1040678-last_of_the_mohicans",
+    "wikidata": "https://www.wikidata.org/wiki/Q144483",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Last_of_the_Mohicans_(1992_film)"
+  },
+  "141": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0115685/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/birdcage",
+    "wikidata": "https://www.wikidata.org/wiki/Q1160005",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Birdcage"
+  },
+  "145": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112442/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1062483-bad_boys",
+    "wikidata": "https://www.wikidata.org/wiki/Q460379",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bad_Boys_(1995_film)"
+  },
+  "1485": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119528/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/liar_liar",
+    "wikidata": "https://www.wikidata.org/wiki/Q48980",
+    "wikipedia": "https://en.wikipedia.org/wiki/Liar_Liar"
+  },
+  "150": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0112384/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/apollo_13",
+    "wikidata": "https://www.wikidata.org/wiki/Q106428",
+    "wikipedia": "https://en.wikipedia.org/wiki/Apollo_13_(film)"
+  },
+  "1500": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119229/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/grosse_pointe_blank",
+    "wikidata": "https://www.wikidata.org/wiki/Q288355",
+    "wikipedia": "https://en.wikipedia.org/wiki/Grosse_Pointe_Blank"
+  },
+  "151": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114287/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1061000-rob_roy",
+    "wikidata": "https://www.wikidata.org/wiki/Q1141727",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rob_Roy_(1995_film)"
+  },
+  "1517": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0118655/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/austin_powers_international_man_of_mystery",
+    "wikidata": "https://www.wikidata.org/wiki/Q501703",
+    "wikipedia": "https://en.wikipedia.org/wiki/Austin_Powers:_International_Man_of_Mystery"
+  },
+  "1527": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119116/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/fifth_element",
+    "wikidata": "https://www.wikidata.org/wiki/Q106506",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Fifth_Element"
+  },
+  "153": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0112462/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/batman_forever",
+    "wikidata": "https://www.wikidata.org/wiki/Q221345",
+    "wikipedia": "https://en.wikipedia.org/wiki/Batman_Forever"
+  },
+  "1544": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119567/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lost_world_jurassic_park",
+    "wikidata": "https://www.wikidata.org/wiki/Q200873",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Lost_World:_Jurassic_Park"
+  },
+  "1552": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118880/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/con_air",
+    "wikidata": "https://www.wikidata.org/wiki/Q607910",
+    "wikipedia": "https://en.wikipedia.org/wiki/Con_Air"
+  },
+  "1573": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119094/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/faceoff",
+    "wikidata": "https://www.wikidata.org/wiki/Q223887",
+    "wikipedia": "https://en.wikipedia.org/wiki/Face/Off"
+  },
+  "158": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0112642/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/casper",
+    "wikidata": "https://www.wikidata.org/wiki/Q1048166",
+    "wikipedia": "https://en.wikipedia.org/wiki/Casper_(film)"
+  },
+  "1580": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119654/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/men_in_black",
+    "wikidata": "https://www.wikidata.org/wiki/Q51416",
+    "wikipedia": "https://en.wikipedia.org/wiki/Men_in_Black_(1997_film)"
+  },
+  "1584": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0118884/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1078021-contact",
+    "wikidata": "https://www.wikidata.org/wiki/Q270215",
+    "wikipedia": "https://en.wikipedia.org/wiki/Contact_(1997_American_film)"
+  },
+  "16": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112641/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1067987-casino",
+    "wikidata": "https://www.wikidata.org/wiki/Q220910",
+    "wikipedia": "https://en.wikipedia.org/wiki/Casino_(1995_film)"
+  },
+  "160": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0112715/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/congo",
+    "wikidata": "https://www.wikidata.org/wiki/Q598860",
+    "wikipedia": "https://en.wikipedia.org/wiki/Congo_(film)"
+  },
+  "1608": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118571/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/air_force_one",
+    "wikidata": "https://www.wikidata.org/wiki/Q407184",
+    "wikipedia": "https://en.wikipedia.org/wiki/Air_Force_One_(film)"
+  },
+  "161": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112740/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/crimson_tide",
+    "wikidata": "https://www.wikidata.org/wiki/Q1140085",
+    "wikipedia": "https://en.wikipedia.org/wiki/Crimson_Tide_(film)"
+  },
+  "1610": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0099810/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/hunt_for_red_october",
+    "wikidata": "https://www.wikidata.org/wiki/Q507994",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Hunt_for_Red_October_(film)"
+  },
+  "1617": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119488/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/la_confidential",
+    "wikidata": "https://www.wikidata.org/wiki/Q339876",
+    "wikipedia": "https://en.wikipedia.org/wiki/L.A._Confidential_(film)"
+  },
+  "1625": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119174/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_game",
+    "wikidata": "https://www.wikidata.org/wiki/Q723187",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Game_(1997_film)"
+  },
+  "163": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112851/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/desperado",
+    "wikidata": "https://www.wikidata.org/wiki/Q465009",
+    "wikipedia": "https://en.wikipedia.org/wiki/Desperado_(film)"
+  },
+  "1639": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118842/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/chasing_amy",
+    "wikidata": "https://www.wikidata.org/wiki/Q40115",
+    "wikipedia": "https://en.wikipedia.org/wiki/Chasing_Amy"
+  },
+  "1641": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119164/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/full_monty",
+    "wikidata": "https://www.wikidata.org/wiki/Q775970",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Full_Monty"
+  },
+  "1645": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118971/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/devils_advocate",
+    "wikidata": "https://www.wikidata.org/wiki/Q224647",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Devil's_Advocate_(1997_film)"
+  },
+  "165": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112864/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/die_hard_with_a_vengeance",
+    "wikidata": "https://www.wikidata.org/wiki/Q106871",
+    "wikipedia": "https://en.wikipedia.org/wiki/Die_Hard_with_a_Vengeance"
+  },
+  "1653": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119177/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gattaca",
+    "wikidata": "https://www.wikidata.org/wiki/Q491800",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gattaca"
+  },
+  "1673": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118749/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/boogie_nights",
+    "wikidata": "https://www.wikidata.org/wiki/Q291170",
+    "wikipedia": "https://en.wikipedia.org/wiki/Boogie_Nights"
+  },
+  "1676": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120201/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/starship_troopers",
+    "wikidata": "https://www.wikidata.org/wiki/Q478626",
+    "wikipedia": "https://en.wikipedia.org/wiki/Starship_Troopers_(film)"
+  },
+  "168": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0113071/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/first_knight",
+    "wikidata": "https://www.wikidata.org/wiki/Q333971",
+    "wikipedia": "https://en.wikipedia.org/wiki/First_Knight"
+  },
+  "1682": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0120382/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/truman_show",
+    "wikidata": "https://www.wikidata.org/wiki/Q214801",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Truman_Show"
+  },
+  "1690": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118583/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/alien_resurrection",
+    "wikidata": "https://www.wikidata.org/wiki/Q458314",
+    "wikipedia": "https://en.wikipedia.org/wiki/Alien_Resurrection"
+  },
+  "17": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0114388/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1068832-sense_and_sensibility",
+    "wikidata": "https://www.wikidata.org/wiki/Q643263",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sense_and_Sensibility_(1995_film)"
+  },
+  "1704": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119217/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/good_will_hunting",
+    "wikidata": "https://www.wikidata.org/wiki/Q193835",
+    "wikipedia": "https://en.wikipedia.org/wiki/Good_Will_Hunting"
+  },
+  "172": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0113481/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/johnny_mnemonic",
+    "wikidata": "https://www.wikidata.org/wiki/Q1129069",
+    "wikipedia": "https://en.wikipedia.org/wiki/Johnny_Mnemonic_(film)"
+  },
+  "1721": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120338/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/titanic",
+    "wikidata": "https://www.wikidata.org/wiki/Q44578",
+    "wikipedia": "https://en.wikipedia.org/wiki/Titanic_(1997_film)"
+  },
+  "1722": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120347/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/tomorrow_never_dies",
+    "wikidata": "https://www.wikidata.org/wiki/Q207916",
+    "wikipedia": "https://en.wikipedia.org/wiki/Tomorrow_Never_Dies"
+  },
+  "1729": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0119396/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/jackie_brown",
+    "wikidata": "https://www.wikidata.org/wiki/Q431252",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jackie_Brown"
+  },
+  "173": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0113492/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/judge_dredd",
+    "wikidata": "https://www.wikidata.org/wiki/Q645597",
+    "wikipedia": "https://en.wikipedia.org/wiki/Judge_Dredd_(film)"
+  },
+  "1732": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118715/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_big_lebowski",
+    "wikidata": "https://www.wikidata.org/wiki/Q337078",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Big_Lebowski"
+  },
+  "1748": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0118929/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dark_city",
+    "wikidata": "https://www.wikidata.org/wiki/Q1127281",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dark_City_(1998_film)"
+  },
+  "1777": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120888/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/wedding_singer",
+    "wikidata": "https://www.wikidata.org/wiki/Q1133316",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Wedding_Singer"
+  },
+  "1784": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119822/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/as_good_as_it_gets",
+    "wikidata": "https://www.wikidata.org/wiki/Q221594",
+    "wikipedia": "https://en.wikipedia.org/wiki/As_Good_as_It_Gets"
+  },
+  "185": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0113957/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/net",
+    "wikidata": "https://www.wikidata.org/wiki/Q466884",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Net_(1995_film)"
+  },
+  "1876": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120647/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/deep_impact",
+    "wikidata": "https://www.wikidata.org/wiki/Q49498",
+    "wikipedia": "https://en.wikipedia.org/wiki/Deep_Impact_(film)"
+  },
+  "19": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0112281/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ace_ventura_when_nature_calls",
+    "wikidata": "https://www.wikidata.org/wiki/Q340127",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ace_Ventura:_When_Nature_Calls"
+  },
+  "1909": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120902/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/xfiles_fight_the_future",
+    "wikidata": "https://www.wikidata.org/wiki/Q1129381",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_X-Files_(film)"
+  },
+  "1917": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120591/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/armageddon",
+    "wikidata": "https://www.wikidata.org/wiki/Q208344",
+    "wikipedia": "https://en.wikipedia.org/wiki/Armageddon_(1998_film)"
+  },
+  "1923": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0129387/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/theres_something_about_mary",
+    "wikidata": "https://www.wikidata.org/wiki/Q177374",
+    "wikipedia": "https://en.wikipedia.org/wiki/There's_Something_About_Mary"
+  },
+  "1954": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0075148/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1017776-rocky",
+    "wikidata": "https://www.wikidata.org/wiki/Q188652",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rocky"
+  },
+  "196": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114508/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/species",
+    "wikidata": "https://www.wikidata.org/wiki/Q337747",
+    "wikipedia": "https://en.wikipedia.org/wiki/Species_(film)"
+  },
+  "1961": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0095953/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/rain_man",
+    "wikidata": "https://www.wikidata.org/wiki/Q188845",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rain_Man"
+  },
+  "1968": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0088847/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/breakfast_club",
+    "wikidata": "https://www.wikidata.org/wiki/Q499152",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Breakfast_Club"
+  },
+  "1997": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0070047/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/exorcist",
+    "wikidata": "https://www.wikidata.org/wiki/Q274167",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Exorcist"
+  },
+  "2": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0113497/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1068044-jumanji",
+    "wikidata": "https://www.wikidata.org/wiki/Q222939",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jumanji_(film)"
+  },
+  "2000": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0093409/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lethal_weapon",
+    "wikidata": "https://www.wikidata.org/wiki/Q462447",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lethal_Weapon"
+  },
+  "2001": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0097733/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lethal_weapon_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q751767",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lethal_Weapon_2"
+  },
+  "2003": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0087363/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gremlins",
+    "wikidata": "https://www.wikidata.org/wiki/Q241958",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gremlins"
+  },
+  "2005": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0089218/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/goonies",
+    "wikidata": "https://www.wikidata.org/wiki/Q636043",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Goonies"
+  },
+  "2006": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120746/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mask_of_zorro",
+    "wikidata": "https://www.wikidata.org/wiki/Q309621",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Mask_of_Zorro"
+  },
+  "2011": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0096874/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/back_to_the_future_part_ii",
+    "wikidata": "https://www.wikidata.org/wiki/Q109331",
+    "wikipedia": "https://en.wikipedia.org/wiki/Back_to_the_Future_Part_II"
+  },
+  "2012": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0099088/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/back_to_the_future_part_iii",
+    "wikidata": "https://www.wikidata.org/wiki/Q230552",
+    "wikipedia": "https://en.wikipedia.org/wiki/Back_to_the_Future_Part_III"
+  },
+  "2019": {
+    "imdb": "https://www.imdb.com/title/tt0047478/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/seven_samurai_1956",
+    "wikidata": "https://www.wikidata.org/wiki/Q189540",
+    "wikipedia": "https://en.wikipedia.org/wiki/Seven_Samurai"
+  },
+  "2028": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120815/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/saving_private_ryan",
+    "wikidata": "https://www.wikidata.org/wiki/Q165817",
+    "wikipedia": "https://en.wikipedia.org/wiki/Saving_Private_Ryan"
+  },
+  "2054": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0097523/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/honey_i_shrunk_the_kids",
+    "wikidata": "https://www.wikidata.org/wiki/Q1426248",
+    "wikipedia": "https://en.wikipedia.org/wiki/Honey,_I_Shrunk_the_Kids"
+  },
+  "208": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0114898/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/waterworld",
+    "wikidata": "https://www.wikidata.org/wiki/Q272595",
+    "wikipedia": "https://en.wikipedia.org/wiki/Waterworld"
+  },
+  "2081": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0097757/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_little_mermaid_1989",
+    "wikidata": "https://www.wikidata.org/wiki/Q190135",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Little_Mermaid_(1989_film)"
+  },
+  "21": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0113161/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/get_shorty",
+    "wikidata": "https://www.wikidata.org/wiki/Q261923",
+    "wikipedia": "https://en.wikipedia.org/wiki/Get_Shorty_(film)"
+  },
+  "2115": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0087469/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/indiana_jones_and_the_temple_of_doom",
+    "wikidata": "https://www.wikidata.org/wiki/Q179215",
+    "wikipedia": "https://en.wikipedia.org/wiki/Indiana_Jones_and_the_Temple_of_Doom"
+  },
+  "2167": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120611/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1083484-blade",
+    "wikidata": "https://www.wikidata.org/wiki/Q3429263",
+    "wikipedia": "https://en.wikipedia.org/wiki/Blade_(1998_film)"
+  },
+  "2174": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0094721/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/beetlejuice",
+    "wikidata": "https://www.wikidata.org/wiki/Q320384",
+    "wikipedia": "https://en.wikipedia.org/wiki/Beetlejuice"
+  },
+  "2194": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0094226/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/untouchables",
+    "wikidata": "https://www.wikidata.org/wiki/Q108525",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Untouchables_(film)"
+  },
+  "223": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109445/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/clerks",
+    "wikidata": "https://www.wikidata.org/wiki/Q747877",
+    "wikipedia": "https://en.wikipedia.org/wiki/Clerks_(film)"
+  },
+  "225": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109635/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/disclosure",
+    "wikidata": "https://www.wikidata.org/wiki/Q1330619",
+    "wikipedia": "https://en.wikipedia.org/wiki/Disclosure_(1994_film)"
+  },
+  "2268": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0104257/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/few_good_men",
+    "wikidata": "https://www.wikidata.org/wiki/Q108946",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Few_Good_Men"
+  },
+  "2273": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120812/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/rush_hour",
+    "wikidata": "https://www.wikidata.org/wiki/Q255342",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rush_Hour_(1998_film)"
+  },
+  "2291": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0099487/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/edward_scissorhands",
+    "wikidata": "https://www.wikidata.org/wiki/Q217182",
+    "wikipedia": "https://en.wikipedia.org/wiki/Edward_Scissorhands"
+  },
+  "2302": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0104952/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/my_cousin_vinny",
+    "wikidata": "https://www.wikidata.org/wiki/Q838154",
+    "wikipedia": "https://en.wikipedia.org/wiki/My_Cousin_Vinny"
+  },
+  "231": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109686/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dumb_and_dumber",
+    "wikidata": "https://www.wikidata.org/wiki/Q462418",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dumb_and_Dumber"
+  },
+  "2321": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120789/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pleasantville",
+    "wikidata": "https://www.wikidata.org/wiki/Q729794",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pleasantville_(film)"
+  },
+  "2324": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0118799/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1084398-life_is_beautiful",
+    "wikidata": "https://www.wikidata.org/wiki/Q19355",
+    "wikipedia": "https://en.wikipedia.org/wiki/Life_Is_Beautiful"
+  },
+  "2329": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120586/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/american_history_x",
+    "wikidata": "https://www.wikidata.org/wiki/Q208572",
+    "wikipedia": "https://en.wikipedia.org/wiki/American_History_X"
+  },
+  "235": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109707/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ed_wood",
+    "wikidata": "https://www.wikidata.org/wiki/Q639481",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ed_Wood_(film)"
+  },
+  "2353": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120660/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/enemy_of_the_state",
+    "wikidata": "https://www.wikidata.org/wiki/Q177930",
+    "wikipedia": "https://en.wikipedia.org/wiki/Enemy_of_the_State_(film)"
+  },
+  "2355": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0120623/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/a_bugs_life",
+    "wikidata": "https://www.wikidata.org/wiki/Q216153",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Bug's_Life"
+  },
+  "236": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0113117/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/french_kiss",
+    "wikidata": "https://www.wikidata.org/wiki/Q1455280",
+    "wikipedia": "https://en.wikipedia.org/wiki/French_Kiss_(1995_film)"
+  },
+  "2395": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0128445/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/rushmore",
+    "wikidata": "https://www.wikidata.org/wiki/Q1347393",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rushmore_(film)"
+  },
+  "2396": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0138097/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shakespeare_in_love",
+    "wikidata": "https://www.wikidata.org/wiki/Q182944",
+    "wikipedia": "https://en.wikipedia.org/wiki/Shakespeare_in_Love"
+  },
+  "2406": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0088011/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/romancing_the_stone",
+    "wikidata": "https://www.wikidata.org/wiki/Q502629",
+    "wikipedia": "https://en.wikipedia.org/wiki/Romancing_the_Stone"
+  },
+  "2424": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0128853/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/youve_got_mail",
+    "wikidata": "https://www.wikidata.org/wiki/Q284229",
+    "wikipedia": "https://en.wikipedia.org/wiki/You've_Got_Mail"
+  },
+  "2470": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0090555/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/crocodile_dundee",
+    "wikidata": "https://www.wikidata.org/wiki/Q615254",
+    "wikipedia": "https://en.wikipedia.org/wiki/Crocodile_Dundee"
+  },
+  "25": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0113627/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/leaving_las_vegas",
+    "wikidata": "https://www.wikidata.org/wiki/Q280918",
+    "wikipedia": "https://en.wikipedia.org/wiki/Leaving_Las_Vegas"
+  },
+  "2502": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0151804/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/office_space",
+    "wikidata": "https://www.wikidata.org/wiki/Q1044523",
+    "wikipedia": "https://en.wikipedia.org/wiki/Office_Space"
+  },
+  "2529": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0063442/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1016397-planet_of_the_apes",
+    "wikidata": "https://www.wikidata.org/wiki/Q59534",
+    "wikipedia": "https://en.wikipedia.org/wiki/Planet_of_the_Apes_(1968_film)"
+  },
+  "253": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0110148/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/interview_with_the_vampire",
+    "wikidata": "https://www.wikidata.org/wiki/Q318910",
+    "wikipedia": "https://en.wikipedia.org/wiki/Interview_with_the_Vampire_(film)"
+  },
+  "2542": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120735/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lock_stock_and_two_smoking_barrels",
+    "wikidata": "https://www.wikidata.org/wiki/Q851095",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lock,_Stock_and_Two_Smoking_Barrels"
+  },
+  "2571": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0133093/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/matrix",
+    "wikidata": "https://www.wikidata.org/wiki/Q83495",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Matrix"
+  },
+  "2572": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0147800/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/10_things_i_hate_about_you",
+    "wikidata": "https://www.wikidata.org/wiki/Q169082",
+    "wikipedia": "https://en.wikipedia.org/wiki/10_Things_I_Hate_About_You"
+  },
+  "2599": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0126886/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/election",
+    "wikidata": "https://www.wikidata.org/wiki/Q1206261",
+    "wikipedia": "https://en.wikipedia.org/wiki/Election_(1999_film)"
+  },
+  "260": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0076759/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_iv_a_new_hope",
+    "wikidata": "https://www.wikidata.org/wiki/Q17738",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Wars_(film)"
+  },
+  "2617": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120616/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_mummy",
+    "wikidata": "https://www.wikidata.org/wiki/Q202508",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Mummy_(1999_film)"
+  },
+  "2628": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0120915/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_i_the_phantom_menace",
+    "wikidata": "https://www.wikidata.org/wiki/Q165713",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+  },
+  "2640": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0078346/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/superman_the_movie",
+    "wikidata": "https://www.wikidata.org/wiki/Q213053",
+    "wikipedia": "https://en.wikipedia.org/wiki/Superman_(1978_film)"
+  },
+  "2657": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0073629/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/rocky_horror_picture_show",
+    "wikidata": "https://www.wikidata.org/wiki/Q751921",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Rocky_Horror_Picture_Show"
+  },
+  "266": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0110322/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/legends_of_the_fall",
+    "wikidata": "https://www.wikidata.org/wiki/Q913324",
+    "wikipedia": "https://en.wikipedia.org/wiki/Legends_of_the_Fall"
+  },
+  "2671": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0125439/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/notting_hill",
+    "wikidata": "https://www.wikidata.org/wiki/Q200672",
+    "wikipedia": "https://en.wikipedia.org/wiki/Notting_Hill_(film)"
+  },
+  "2683": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0145660/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/austin_powers_the_spy_who_shagged_me",
+    "wikidata": "https://www.wikidata.org/wiki/Q487978",
+    "wikipedia": "https://en.wikipedia.org/wiki/Austin_Powers:_The_Spy_Who_Shagged_Me"
+  },
+  "2692": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0130827/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/run_lola_run",
+    "wikidata": "https://www.wikidata.org/wiki/Q468697",
+    "wikipedia": "https://en.wikipedia.org/wiki/Run_Lola_Run"
+  },
+  "2699": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0099052/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/arachnophobia",
+    "wikidata": "https://www.wikidata.org/wiki/Q624609",
+    "wikipedia": "https://en.wikipedia.org/wiki/Arachnophobia_(film)"
+  },
+  "2700": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0158983/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/south_park_bigger_longer_and_uncut",
+    "wikidata": "https://www.wikidata.org/wiki/Q656118",
+    "wikipedia": "https://en.wikipedia.org/wiki/South_Park:_Bigger,_Longer_%26_Uncut"
+  },
+  "2701": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120891/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/wild_wild_west",
+    "wikidata": "https://www.wikidata.org/wiki/Q740528",
+    "wikipedia": "https://en.wikipedia.org/wiki/Wild_Wild_West"
+  },
+  "2706": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0163651/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/american_pie",
+    "wikidata": "https://www.wikidata.org/wiki/Q220713",
+    "wikipedia": "https://en.wikipedia.org/wiki/American_Pie_(film)"
+  },
+  "2710": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0185937/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/blair_witch_project",
+    "wikidata": "https://www.wikidata.org/wiki/Q644554",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Blair_Witch_Project"
+  },
+  "2712": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120663/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/eyes_wide_shut",
+    "wikidata": "https://www.wikidata.org/wiki/Q209481",
+    "wikipedia": "https://en.wikipedia.org/wiki/Eyes_Wide_Shut"
+  },
+  "2716": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0087332/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ghostbusters",
+    "wikidata": "https://www.wikidata.org/wiki/Q108745",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ghostbusters"
+  },
+  "2762": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0167404/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sixth_sense",
+    "wikidata": "https://www.wikidata.org/wiki/Q183063",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Sixth_Sense"
+  },
+  "2763": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0155267/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_thomas_crown_affair_1999",
+    "wikidata": "https://www.wikidata.org/wiki/Q1216770",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Thomas_Crown_Affair_(1999_film)"
+  },
+  "27773": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0364569/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/oldboy",
+    "wikidata": "https://www.wikidata.org/wiki/Q475693",
+    "wikipedia": "https://en.wikipedia.org/wiki/Oldboy_(2003_film)"
+  },
+  "2791": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0080339/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/airplane",
+    "wikidata": "https://www.wikidata.org/wiki/Q497256",
+    "wikipedia": "https://en.wikipedia.org/wiki/Airplane!"
+  },
+  "2797": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0094737/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/big",
+    "wikidata": "https://www.wikidata.org/wiki/Q858467",
+    "wikipedia": "https://en.wikipedia.org/wiki/Big_(film)"
+  },
+  "2804": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0085334/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1004151-christmas_story",
+    "wikidata": "https://www.wikidata.org/wiki/Q556933",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Christmas_Story"
+  },
+  "2858": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0169547/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/american_beauty",
+    "wikidata": "https://www.wikidata.org/wiki/Q25139",
+    "wikipedia": "https://en.wikipedia.org/wiki/American_Beauty_(1999_film)"
+  },
+  "288": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0110632/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/natural_born_killers",
+    "wikidata": "https://www.wikidata.org/wiki/Q748986",
+    "wikipedia": "https://en.wikipedia.org/wiki/Natural_Born_Killers"
+  },
+  "2890": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120188/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/three_kings",
+    "wikidata": "https://www.wikidata.org/wiki/Q1357016",
+    "wikipedia": "https://en.wikipedia.org/wiki/Three_Kings_(1999_film)"
+  },
+  "2916": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0100802/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/total_recall",
+    "wikidata": "https://www.wikidata.org/wiki/Q222018",
+    "wikipedia": "https://en.wikipedia.org/wiki/Total_Recall_(1990_film)"
+  },
+  "2918": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0091042/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ferris_buellers_day_off",
+    "wikidata": "https://www.wikidata.org/wiki/Q498906",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ferris_Bueller's_Day_Off"
+  },
+  "292": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114069/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/outbreak",
+    "wikidata": "https://www.wikidata.org/wiki/Q495513",
+    "wikipedia": "https://en.wikipedia.org/wiki/Outbreak_(1995_film)"
+  },
+  "293": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0110413/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/leon_the_professional",
+    "wikidata": "https://www.wikidata.org/wiki/Q484675",
+    "wikipedia": "https://en.wikipedia.org/wiki/L%C3%A9on:_The_Professional"
+  },
+  "2947": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0058150/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/goldfinger",
+    "wikidata": "https://www.wikidata.org/wiki/Q106440",
+    "wikipedia": "https://en.wikipedia.org/wiki/Goldfinger_(film)"
+  },
+  "2959": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0137523/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/fight_club",
+    "wikidata": "https://www.wikidata.org/wiki/Q190050",
+    "wikipedia": "https://en.wikipedia.org/wiki/Fight_Club"
+  },
+  "296": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0110912/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pulp_fiction",
+    "wikidata": "https://www.wikidata.org/wiki/Q104123",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pulp_Fiction"
+  },
+  "2985": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0093870/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1017712-robocop",
+    "wikidata": "https://www.wikidata.org/wiki/Q372514",
+    "wikipedia": "https://en.wikipedia.org/wiki/RoboCop"
+  },
+  "2987": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0096438/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/who_framed_roger_rabbit",
+    "wikidata": "https://www.wikidata.org/wiki/Q379873",
+    "wikipedia": "https://en.wikipedia.org/wiki/Who_Framed_Roger_Rabbit"
+  },
+  "2997": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120601/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/being_john_malkovich",
+    "wikidata": "https://www.wikidata.org/wiki/Q649165",
+    "wikipedia": "https://en.wikipedia.org/wiki/Being_John_Malkovich"
+  },
+  "3": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0113228/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/grumpier_old_men",
+    "wikidata": "https://www.wikidata.org/wiki/Q782465",
+    "wikipedia": "https://en.wikipedia.org/wiki/Grumpier_Old_Men"
+  },
+  "300": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0110932/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/quiz_show",
+    "wikidata": "https://www.wikidata.org/wiki/Q651722",
+    "wikipedia": "https://en.wikipedia.org/wiki/Quiz_Show_(film)"
+  },
+  "3000": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0119698/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/princess_mononoke",
+    "wikidata": "https://www.wikidata.org/wiki/Q186572",
+    "wikipedia": "https://en.wikipedia.org/wiki/Princess_Mononoke"
+  },
+  "3033": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0094012/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/spaceballs",
+    "wikidata": "https://www.wikidata.org/wiki/Q498442",
+    "wikipedia": "https://en.wikipedia.org/wiki/Spaceballs"
+  },
+  "3052": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120655/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dogma",
+    "wikidata": "https://www.wikidata.org/wiki/Q40187",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dogma_(film)"
+  },
+  "30707": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0405159/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/million_dollar_baby",
+    "wikidata": "https://www.wikidata.org/wiki/Q184255",
+    "wikipedia": "https://en.wikipedia.org/wiki/Million_Dollar_Baby"
+  },
+  "30749": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0395169/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/hotel_rwanda",
+    "wikidata": "https://www.wikidata.org/wiki/Q223884",
+    "wikipedia": "https://en.wikipedia.org/wiki/Hotel_Rwanda"
+  },
+  "30793": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0367594/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/charlie_and_the_chocolate_factory",
+    "wikidata": "https://www.wikidata.org/wiki/Q218235",
+    "wikipedia": "https://en.wikipedia.org/wiki/Charlie_and_the_Chocolate_Factory_(film)"
+  },
+  "3081": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0162661/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sleepy_hollow",
+    "wikidata": "https://www.wikidata.org/wiki/Q208592",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sleepy_Hollow_(film)"
+  },
+  "3114": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0120363/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/toy_story_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q187266",
+    "wikipedia": "https://en.wikipedia.org/wiki/Toy_Story_2"
+  },
+  "3147": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0120689/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/green_mile",
+    "wikidata": "https://www.wikidata.org/wiki/Q208263",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Green_Mile_(film)"
+  },
+  "316": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0111282/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/stargate",
+    "wikidata": "https://www.wikidata.org/wiki/Q105801",
+    "wikipedia": "https://en.wikipedia.org/wiki/Stargate_(film)"
+  },
+  "3160": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0175880/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/magnolia",
+    "wikidata": "https://www.wikidata.org/wiki/Q588420",
+    "wikipedia": "https://en.wikipedia.org/wiki/Magnolia_(film)"
+  },
+  "317": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0111070/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/santa_clause",
+    "wikidata": "https://www.wikidata.org/wiki/Q497850",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Santa_Clause"
+  },
+  "3175": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0177789/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/galaxy_quest",
+    "wikidata": "https://www.wikidata.org/wiki/Q502067",
+    "wikipedia": "https://en.wikipedia.org/wiki/Galaxy_Quest"
+  },
+  "3176": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0134119/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/talented_mr_ripley",
+    "wikidata": "https://www.wikidata.org/wiki/Q390052",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Talented_Mr._Ripley_(film)"
+  },
+  "318": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0111161/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shawshank_redemption",
+    "wikidata": "https://www.wikidata.org/wiki/Q172241",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Shawshank_Redemption"
+  },
+  "32": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114746/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/12_monkeys",
+    "wikidata": "https://www.wikidata.org/wiki/Q175038",
+    "wikipedia": "https://en.wikipedia.org/wiki/12_Monkeys"
+  },
+  "3253": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0105793/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/waynes_world",
+    "wikidata": "https://www.wikidata.org/wiki/Q1146194",
+    "wikipedia": "https://en.wikipedia.org/wiki/Wayne's_World_(film)"
+  },
+  "32587": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0401792/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sin_city",
+    "wikidata": "https://www.wikidata.org/wiki/Q192115",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sin_City_(film)"
+  },
+  "329": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0111280/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_trek_generations",
+    "wikidata": "https://www.wikidata.org/wiki/Q723679",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Trek_Generations"
+  },
+  "33166": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0375679/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1144992-crash",
+    "wikidata": "https://www.wikidata.org/wiki/Q188000",
+    "wikipedia": "https://en.wikipedia.org/wiki/Crash_(2004_film)"
+  },
+  "33493": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0121766/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_iii_revenge_of_the_sith",
+    "wikidata": "https://www.wikidata.org/wiki/Q42051",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Wars:_Episode_III_%E2%80%93_Revenge_of_the_Sith"
+  },
+  "33679": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0356910/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mr_and_mrs_smith",
+    "wikidata": "https://www.wikidata.org/wiki/Q191040",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mr._%26_Mrs._Smith_(2005_film)"
+  },
+  "337": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0108550/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/whats_eating_gilbert_grape",
+    "wikidata": "https://www.wikidata.org/wiki/Q660894",
+    "wikipedia": "https://en.wikipedia.org/wiki/What's_Eating_Gilbert_Grape"
+  },
+  "33794": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0372784/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/batman_begins",
+    "wikidata": "https://www.wikidata.org/wiki/Q166262",
+    "wikipedia": "https://en.wikipedia.org/wiki/Batman_Begins"
+  },
+  "339": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0114924/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/while_you_were_sleeping",
+    "wikidata": "https://www.wikidata.org/wiki/Q492093",
+    "wikipedia": "https://en.wikipedia.org/wiki/While_You_Were_Sleeping_(film)"
+  },
+  "34": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0112431/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1065598-babe",
+    "wikidata": "https://www.wikidata.org/wiki/Q720724",
+    "wikipedia": "https://en.wikipedia.org/wiki/Babe_(film)"
+  },
+  "3408": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0195685/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/erin_brockovich",
+    "wikidata": "https://www.wikidata.org/wiki/Q220955",
+    "wikipedia": "https://en.wikipedia.org/wiki/Erin_Brockovich_(film)"
+  },
+  "3418": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0103074/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/thelma_and_louise",
+    "wikidata": "https://www.wikidata.org/wiki/Q658041",
+    "wikipedia": "https://en.wikipedia.org/wiki/Thelma_%26_Louise"
+  },
+  "3421": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0077975/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/national_lampoons_animal_house",
+    "wikidata": "https://www.wikidata.org/wiki/Q960125",
+    "wikipedia": "https://en.wikipedia.org/wiki/Animal_House"
+  },
+  "344": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109040/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ace_ventura_pet_detective",
+    "wikidata": "https://www.wikidata.org/wiki/Q340138",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ace_Ventura:_Pet_Detective"
+  },
+  "34405": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0379786/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/serenity",
+    "wikidata": "https://www.wikidata.org/wiki/Q691611",
+    "wikipedia": "https://en.wikipedia.org/wiki/Serenity_(2005_film)"
+  },
+  "3448": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0093105/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/good_morning_vietnam",
+    "wikidata": "https://www.wikidata.org/wiki/Q741878",
+    "wikipedia": "https://en.wikipedia.org/wiki/Good_Morning,_Vietnam"
+  },
+  "3471": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0075860/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/close_encounters_of_the_third_kind",
+    "wikidata": "https://www.wikidata.org/wiki/Q320588",
+    "wikipedia": "https://en.wikipedia.org/wiki/Close_Encounters_of_the_Third_Kind"
+  },
+  "3481": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0146882/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1095420-high_fidelity",
+    "wikidata": "https://www.wikidata.org/wiki/Q1473804",
+    "wikipedia": "https://en.wikipedia.org/wiki/High_Fidelity_(film)"
+  },
+  "349": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109444/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/clear_and_present_danger",
+    "wikidata": "https://www.wikidata.org/wiki/Q1392442",
+    "wikipedia": "https://en.wikipedia.org/wiki/Clear_and_Present_Danger_(film)"
+  },
+  "350": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109446/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/client",
+    "wikidata": "https://www.wikidata.org/wiki/Q255376",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Client_(1994_film)"
+  },
+  "3527": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0093773/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/predator",
+    "wikidata": "https://www.wikidata.org/wiki/Q200804",
+    "wikipedia": "https://en.wikipedia.org/wiki/Predator_(film)"
+  },
+  "353": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109506/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_crow",
+    "wikidata": "https://www.wikidata.org/wiki/Q250912",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Crow_(1994_film)"
+  },
+  "3535": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0144084/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/american_psycho",
+    "wikidata": "https://www.wikidata.org/wiki/Q1405126",
+    "wikipedia": "https://en.wikipedia.org/wiki/American_Psycho_(film)"
+  },
+  "356": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109830/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/forrest_gump",
+    "wikidata": "https://www.wikidata.org/wiki/Q134773",
+    "wikipedia": "https://en.wikipedia.org/wiki/Forrest_Gump"
+  },
+  "357": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109831/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/four_weddings_and_a_funeral",
+    "wikidata": "https://www.wikidata.org/wiki/Q901213",
+    "wikipedia": "https://en.wikipedia.org/wiki/Four_Weddings_and_a_Funeral"
+  },
+  "3578": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0172495/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gladiator",
+    "wikidata": "https://www.wikidata.org/wiki/Q128518",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gladiator_(2000_film)"
+  },
+  "35836": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0405422/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_40_year_old_virgin",
+    "wikidata": "https://www.wikidata.org/wiki/Q1139794",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_40-Year-Old_Virgin"
+  },
+  "36": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0112818/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1068779-dead_man_walking",
+    "wikidata": "https://www.wikidata.org/wiki/Q587891",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dead_Man_Walking_(film)"
+  },
+  "3623": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120755/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mission_impossible_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q505790",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mission:_Impossible_2"
+  },
+  "364": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0110357/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_lion_king",
+    "wikidata": "https://www.wikidata.org/wiki/Q36479",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Lion_King"
+  },
+  "367": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0110475/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1053779-mask",
+    "wikidata": "https://www.wikidata.org/wiki/Q219421",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Mask_(1994_film)"
+  },
+  "3671": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0071230/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/blazing_saddles",
+    "wikidata": "https://www.wikidata.org/wiki/Q957323",
+    "wikipedia": "https://en.wikipedia.org/wiki/Blazing_Saddles"
+  },
+  "368": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0110478/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/maverick",
+    "wikidata": "https://www.wikidata.org/wiki/Q675520",
+    "wikipedia": "https://en.wikipedia.org/wiki/Maverick_(film)"
+  },
+  "370": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0110622/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_naked_gun_33_13_the_final_insult_1994",
+    "wikidata": "https://www.wikidata.org/wiki/Q385309",
+    "wikipedia": "https://en.wikipedia.org/wiki/Naked_Gun_33_1/3:_The_Final_Insult"
+  },
+  "3717": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0187078/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1097865-gone_in_60_seconds",
+    "wikidata": "https://www.wikidata.org/wiki/Q502384",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gone_in_60_Seconds_(2000_film)"
+  },
+  "3751": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0120630/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/chicken_run",
+    "wikidata": "https://www.wikidata.org/wiki/Q156401",
+    "wikipedia": "https://en.wikipedia.org/wiki/Chicken_Run"
+  },
+  "3753": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0187393/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1098149-patriot",
+    "wikidata": "https://www.wikidata.org/wiki/Q646633",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Patriot_(2000_film)"
+  },
+  "377": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0111257/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/speed_1994",
+    "wikidata": "https://www.wikidata.org/wiki/Q108006",
+    "wikipedia": "https://en.wikipedia.org/wiki/Speed_(1994_film)"
+  },
+  "3785": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0175142/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/scary_movie",
+    "wikidata": "https://www.wikidata.org/wiki/Q219424",
+    "wikipedia": "https://en.wikipedia.org/wiki/Scary_Movie"
+  },
+  "3793": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120903/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/xmen",
+    "wikidata": "https://www.wikidata.org/wiki/Q106182",
+    "wikipedia": "https://en.wikipedia.org/wiki/X-Men_(film)"
+  },
+  "380": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0111503/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/true_lies",
+    "wikidata": "https://www.wikidata.org/wiki/Q110397",
+    "wikipedia": "https://en.wikipedia.org/wiki/True_Lies"
+  },
+  "3897": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0181875/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/almost_famous",
+    "wikidata": "https://www.wikidata.org/wiki/Q726294",
+    "wikipedia": "https://en.wikipedia.org/wiki/Almost_Famous"
+  },
+  "39": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0112697/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/clueless",
+    "wikidata": "https://www.wikidata.org/wiki/Q931165",
+    "wikipedia": "https://en.wikipedia.org/wiki/Clueless"
+  },
+  "3948": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0212338/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/meet_the_parents",
+    "wikidata": "https://www.wikidata.org/wiki/Q623724",
+    "wikipedia": "https://en.wikipedia.org/wiki/Meet_the_Parents"
+  },
+  "3949": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0180093/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/requiem_for_a_dream",
+    "wikidata": "https://www.wikidata.org/wiki/Q487181",
+    "wikipedia": "https://en.wikipedia.org/wiki/Requiem_for_a_Dream"
+  },
+  "3977": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0160127/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/charlies_angels",
+    "wikidata": "https://www.wikidata.org/wiki/Q229599",
+    "wikipedia": "https://en.wikipedia.org/wiki/Charlie's_Angels_(2000_film)"
+  },
+  "3994": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0217869/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/unbreakable",
+    "wikidata": "https://www.wikidata.org/wiki/Q650613",
+    "wikipedia": "https://en.wikipedia.org/wiki/Unbreakable_(film)"
+  },
+  "3996": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0190332/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/crouching_tiger_hidden_dragon",
+    "wikidata": "https://www.wikidata.org/wiki/Q273978",
+    "wikipedia": "https://en.wikipedia.org/wiki/Crouching_Tiger,_Hidden_Dragon"
+  },
+  "4011": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0208092/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/snatch",
+    "wikidata": "https://www.wikidata.org/wiki/Q335160",
+    "wikipedia": "https://en.wikipedia.org/wiki/Snatch_(film)"
+  },
+  "4014": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0241303/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/chocolat",
+    "wikidata": "https://www.wikidata.org/wiki/Q220423",
+    "wikipedia": "https://en.wikipedia.org/wiki/Chocolat_(2000_film)"
+  },
+  "4018": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0207201/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/what_women_want",
+    "wikidata": "https://www.wikidata.org/wiki/Q156394",
+    "wikipedia": "https://en.wikipedia.org/wiki/What_Women_Want"
+  },
+  "4022": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0162222/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/cast_away",
+    "wikidata": "https://www.wikidata.org/wiki/Q213411",
+    "wikipedia": "https://en.wikipedia.org/wiki/Cast_Away"
+  },
+  "4025": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0212346/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/miss_congeniality",
+    "wikidata": "https://www.wikidata.org/wiki/Q532372",
+    "wikipedia": "https://en.wikipedia.org/wiki/Miss_Congeniality_(film)"
+  },
+  "4027": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0190590/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/o_brother_where_art_thou",
+    "wikidata": "https://www.wikidata.org/wiki/Q501874",
+    "wikipedia": "https://en.wikipedia.org/wiki/O_Brother,_Where_Art_Thou%3F"
+  },
+  "4034": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0181865/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1103281-traffic",
+    "wikidata": "https://www.wikidata.org/wiki/Q142292",
+    "wikipedia": "https://en.wikipedia.org/wiki/Traffic_(2000_film)"
+  },
+  "40815": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0330373/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_goblet_of_fire",
+    "wikidata": "https://www.wikidata.org/wiki/Q102225",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Goblet_of_Fire_(film)"
+  },
+  "4085": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0086960/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/beverly_hills_cop",
+    "wikidata": "https://www.wikidata.org/wiki/Q722267",
+    "wikipedia": "https://en.wikipedia.org/wiki/Beverly_Hills_Cop"
+  },
+  "410": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0106220/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/addams_family_values",
+    "wikidata": "https://www.wikidata.org/wiki/Q204725",
+    "wikipedia": "https://en.wikipedia.org/wiki/Addams_Family_Values"
+  },
+  "41566": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0363771/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/chronicles_of_narnia_lion_witch_wardrobe",
+    "wikidata": "https://www.wikidata.org/wiki/Q485803",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Chronicles_of_Narnia:_The_Lion,_the_Witch_and_the_Wardrobe"
+  },
+  "420": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0109254/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/beverly_hills_cop_3",
+    "wikidata": "https://www.wikidata.org/wiki/Q654736",
+    "wikipedia": "https://en.wikipedia.org/wiki/Beverly_Hills_Cop_III"
+  },
+  "4226": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0209144/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/memento",
+    "wikidata": "https://www.wikidata.org/wiki/Q190525",
+    "wikipedia": "https://en.wikipedia.org/wiki/Memento_(film)"
+  },
+  "4246": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0243155/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bridget_jones_diary",
+    "wikidata": "https://www.wikidata.org/wiki/Q752313",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bridget_Jones's_Diary"
+  },
+  "4262": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0086250/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/scarface",
+    "wikidata": "https://www.wikidata.org/wiki/Q47075",
+    "wikipedia": "https://en.wikipedia.org/wiki/Scarface_(1983_film)"
+  },
+  "4306": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0126029/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shrek",
+    "wikidata": "https://www.wikidata.org/wiki/Q483815",
+    "wikipedia": "https://en.wikipedia.org/wiki/Shrek"
+  },
+  "4308": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0203009/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/moulin_rouge_2001",
+    "wikidata": "https://www.wikidata.org/wiki/Q193573",
+    "wikipedia": "https://en.wikipedia.org/wiki/Moulin_Rouge!"
+  },
+  "432": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0109439/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/city_slickers_ii_the_legend_of_curlys_gold",
+    "wikidata": "https://www.wikidata.org/wiki/Q1218462",
+    "wikipedia": "https://en.wikipedia.org/wiki/City_Slickers_II:_The_Legend_of_Curly's_Gold"
+  },
+  "434": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0106582/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1044214-cliffhanger",
+    "wikidata": "https://www.wikidata.org/wiki/Q824389",
+    "wikipedia": "https://en.wikipedia.org/wiki/Cliffhanger_(1993_film)"
+  },
+  "435": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0106598/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/coneheads",
+    "wikidata": "https://www.wikidata.org/wiki/Q1211928",
+    "wikipedia": "https://en.wikipedia.org/wiki/Coneheads_(film)"
+  },
+  "4370": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0212720/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ai_artificial_intelligence",
+    "wikidata": "https://www.wikidata.org/wiki/Q221113",
+    "wikipedia": "https://en.wikipedia.org/wiki/A.I._Artificial_Intelligence"
+  },
+  "440": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0106673/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dave",
+    "wikidata": "https://www.wikidata.org/wiki/Q539658",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dave_(film)"
+  },
+  "44191": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0434409/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/v_for_vendetta",
+    "wikidata": "https://www.wikidata.org/wiki/Q5890",
+    "wikipedia": "https://en.wikipedia.org/wiki/V_for_Vendetta_(film)"
+  },
+  "442": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0106697/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/demolition_man",
+    "wikidata": "https://www.wikidata.org/wiki/Q470891",
+    "wikipedia": "https://en.wikipedia.org/wiki/Demolition_Man_(film)"
+  },
+  "4447": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0250494/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/legally_blonde",
+    "wikidata": "https://www.wikidata.org/wiki/Q500093",
+    "wikipedia": "https://en.wikipedia.org/wiki/Legally_Blonde"
+  },
+  "454": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0106918/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1044522-firm",
+    "wikidata": "https://www.wikidata.org/wiki/Q821692",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Firm_(1993_film)"
+  },
+  "457": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0106977/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1046129-fugitive",
+    "wikidata": "https://www.wikidata.org/wiki/Q156309",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Fugitive_(1993_film)"
+  },
+  "45722": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0383574/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pirates_of_the_caribbean_dead_mans_chest",
+    "wikidata": "https://www.wikidata.org/wiki/Q161087",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pirates_of_the_Caribbean:_Dead_Man's_Chest"
+  },
+  "46578": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0449059/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/little_miss_sunshine",
+    "wikidata": "https://www.wikidata.org/wiki/Q192073",
+    "wikipedia": "https://en.wikipedia.org/wiki/Little_Miss_Sunshine"
+  },
+  "466": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107144/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/hot_shots_part_deux",
+    "wikidata": "https://www.wikidata.org/wiki/Q843198",
+    "wikipedia": "https://en.wikipedia.org/wiki/Hot_Shots!_Part_Deux"
+  },
+  "47": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114369/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/seven",
+    "wikidata": "https://www.wikidata.org/wiki/Q190908",
+    "wikipedia": "https://en.wikipedia.org/wiki/Seven_(1995_film)"
+  },
+  "4720": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0230600/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1109257-others",
+    "wikidata": "https://www.wikidata.org/wiki/Q332515",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Others_(2001_film)"
+  },
+  "474": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0107206/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/in_the_line_of_fire",
+    "wikidata": "https://www.wikidata.org/wiki/Q427386",
+    "wikipedia": "https://en.wikipedia.org/wiki/In_the_Line_of_Fire"
+  },
+  "47610": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0443543/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/illusionist",
+    "wikidata": "https://www.wikidata.org/wiki/Q645735",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Illusionist_(2006_film)"
+  },
+  "48": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0114148/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pocahontas",
+    "wikidata": "https://www.wikidata.org/wiki/Q218894",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pocahontas_(1995_film)"
+  },
+  "480": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107290/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/jurassic_park",
+    "wikidata": "https://www.wikidata.org/wiki/Q167726",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jurassic_Park"
+  },
+  "48385": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0443453/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/borat",
+    "wikidata": "https://www.wikidata.org/wiki/Q186323",
+    "wikipedia": "https://en.wikipedia.org/wiki/Borat"
+  },
+  "48394": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0457430/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pans_labyrinth",
+    "wikidata": "https://www.wikidata.org/wiki/Q216006",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pan's_Labyrinth"
+  },
+  "4848": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0166924/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mulholland_dr",
+    "wikidata": "https://www.wikidata.org/wiki/Q272608",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mulholland_Drive_(film)"
+  },
+  "485": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107362/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/last_action_hero",
+    "wikidata": "https://www.wikidata.org/wiki/Q858840",
+    "wikipedia": "https://en.wikipedia.org/wiki/Last_Action_Hero"
+  },
+  "48516": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0407887/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/departed",
+    "wikidata": "https://www.wikidata.org/wiki/Q172975",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Departed"
+  },
+  "48774": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0206634/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/children_of_men",
+    "wikidata": "https://www.wikidata.org/wiki/Q221090",
+    "wikipedia": "https://en.wikipedia.org/wiki/Children_of_Men"
+  },
+  "4878": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0246578/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/donnie_darko",
+    "wikidata": "https://www.wikidata.org/wiki/Q426828",
+    "wikipedia": "https://en.wikipedia.org/wiki/Donnie_Darko"
+  },
+  "48780": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0482571/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/prestige",
+    "wikidata": "https://www.wikidata.org/wiki/Q46551",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Prestige"
+  },
+  "4886": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0198781/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/monsters_inc",
+    "wikidata": "https://www.wikidata.org/wiki/Q187726",
+    "wikipedia": "https://en.wikipedia.org/wiki/Monsters,_Inc."
+  },
+  "4896": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0241527/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_sorcerers_stone",
+    "wikidata": "https://www.wikidata.org/wiki/Q102438",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Philosopher's_Stone_(film)"
+  },
+  "49272": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0381061/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/casino_royale",
+    "wikidata": "https://www.wikidata.org/wiki/Q151904",
+    "wikipedia": "https://en.wikipedia.org/wiki/Casino_Royale_(2006_film)"
+  },
+  "494": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116253/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/executive_decision",
+    "wikidata": "https://www.wikidata.org/wiki/Q1142051",
+    "wikipedia": "https://en.wikipedia.org/wiki/Executive_Decision"
+  },
+  "49530": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0450259/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/blood_diamond",
+    "wikidata": "https://www.wikidata.org/wiki/Q74958",
+    "wikipedia": "https://en.wikipedia.org/wiki/Blood_Diamond"
+  },
+  "4963": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0240772/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/oceans_eleven",
+    "wikidata": "https://www.wikidata.org/wiki/Q205447",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ocean's_Eleven"
+  },
+  "497": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107616/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1045992-much_ado_about_nothing",
+    "wikidata": "https://www.wikidata.org/wiki/Q550205",
+    "wikipedia": "https://en.wikipedia.org/wiki/Much_Ado_About_Nothing_(1993_film)"
+  },
+  "4973": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0211915/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/amelie",
+    "wikidata": "https://www.wikidata.org/wiki/Q484048",
+    "wikipedia": "https://en.wikipedia.org/wiki/Am%C3%A9lie"
+  },
+  "4979": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0265666/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_royal_tenenbaums",
+    "wikidata": "https://www.wikidata.org/wiki/Q935105",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Royal_Tenenbaums"
+  },
+  "4993": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120737/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_lord_of_the_rings_the_fellowship_of_the_ring",
+    "wikidata": "https://www.wikidata.org/wiki/Q127367",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring"
+  },
+  "4995": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0268978/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/beautiful_mind",
+    "wikidata": "https://www.wikidata.org/wiki/Q164103",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Beautiful_Mind"
+  },
+  "5": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0113041/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/father_of_the_bride_part_ii",
+    "wikidata": "https://www.wikidata.org/wiki/Q1304560",
+    "wikipedia": "https://en.wikipedia.org/wiki/Father_of_the_Bride_Part_II"
+  },
+  "50": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0114814/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/usual_suspects",
+    "wikidata": "https://www.wikidata.org/wiki/Q132351",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Usual_Suspects"
+  },
+  "500": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107614/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mrs_doubtfire",
+    "wikidata": "https://www.wikidata.org/wiki/Q483852",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mrs._Doubtfire"
+  },
+  "5010": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0265086/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/black_hawk_down",
+    "wikidata": "https://www.wikidata.org/wiki/Q221384",
+    "wikipedia": "https://en.wikipedia.org/wiki/Black_Hawk_Down_(film)"
+  },
+  "5060": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0066026/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mash",
+    "wikidata": "https://www.wikidata.org/wiki/Q494085",
+    "wikipedia": "https://en.wikipedia.org/wiki/M%2AA%2AS%2AH_(film)"
+  },
+  "508": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107818/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/philadelphia",
+    "wikidata": "https://www.wikidata.org/wiki/Q204057",
+    "wikipedia": "https://en.wikipedia.org/wiki/Philadelphia_(film)"
+  },
+  "50872": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0382932/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ratatouille",
+    "wikidata": "https://www.wikidata.org/wiki/Q170035",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ratatouille_(film)"
+  },
+  "509": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0107822/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/piano",
+    "wikidata": "https://www.wikidata.org/wiki/Q117315",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Piano"
+  },
+  "51255": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0425112/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/hot_fuzz",
+    "wikidata": "https://www.wikidata.org/wiki/Q729788",
+    "wikipedia": "https://en.wikipedia.org/wiki/Hot_Fuzz"
+  },
+  "51662": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0416449/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/300",
+    "wikidata": "https://www.wikidata.org/wiki/Q131390",
+    "wikipedia": "https://en.wikipedia.org/wiki/300_(film)"
+  },
+  "520": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0107977/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/robin_hood_men_in_tights",
+    "wikidata": "https://www.wikidata.org/wiki/Q1334948",
+    "wikipedia": "https://en.wikipedia.org/wiki/Robin_Hood:_Men_in_Tights"
+  },
+  "5218": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0268380/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ice_age",
+    "wikidata": "https://www.wikidata.org/wiki/Q305250",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ice_Age_(2002_film)"
+  },
+  "527": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0108052/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/schindlers_list",
+    "wikidata": "https://www.wikidata.org/wiki/Q483941",
+    "wikipedia": "https://en.wikipedia.org/wiki/Schindler's_List"
+  },
+  "5299": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0259446/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/my_big_fat_greek_wedding",
+    "wikidata": "https://www.wikidata.org/wiki/Q525415",
+    "wikipedia": "https://en.wikipedia.org/wiki/My_Big_Fat_Greek_Wedding"
+  },
+  "53125": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0449088/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pirates_of_the_caribbean_3",
+    "wikidata": "https://www.wikidata.org/wiki/Q54274",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pirates_of_the_Caribbean:_At_World's_End"
+  },
+  "5349": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0145487/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/spiderman",
+    "wikidata": "https://www.wikidata.org/wiki/Q484442",
+    "wikipedia": "https://en.wikipedia.org/wiki/Spider-Man_(2002_film)"
+  },
+  "5378": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0121765/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_wars_episode_ii_attack_of_the_clones",
+    "wikidata": "https://www.wikidata.org/wiki/Q181069",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Wars:_Episode_II_%E2%80%93_Attack_of_the_Clones"
+  },
+  "539": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0108160/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sleepless_in_seattle",
+    "wikidata": "https://www.wikidata.org/wiki/Q107167",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sleepless_in_Seattle"
+  },
+  "54001": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0373889/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_order_of_the_phoenix",
+    "wikidata": "https://www.wikidata.org/wiki/Q102235",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Order_of_the_Phoenix_(film)"
+  },
+  "541": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0083658/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/blade_runner",
+    "wikidata": "https://www.wikidata.org/wiki/Q184843",
+    "wikipedia": "https://en.wikipedia.org/wiki/Blade_Runner"
+  },
+  "5418": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0258463/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bourne_identity",
+    "wikidata": "https://www.wikidata.org/wiki/Q105624",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Bourne_Identity_(2002_film)"
+  },
+  "54286": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0440963/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bourne_ultimatum",
+    "wikidata": "https://www.wikidata.org/wiki/Q107226",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Bourne_Ultimatum_(film)"
+  },
+  "543": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0108174/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/so_i_married_an_axe_murderer",
+    "wikidata": "https://www.wikidata.org/wiki/Q1753552",
+    "wikipedia": "https://en.wikipedia.org/wiki/So_I_Married_an_Axe_Murderer"
+  },
+  "5445": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0181689/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/minority_report",
+    "wikidata": "https://www.wikidata.org/wiki/Q244604",
+    "wikipedia": "https://en.wikipedia.org/wiki/Minority_Report"
+  },
+  "54503": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0829482/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/superbad",
+    "wikidata": "https://www.wikidata.org/wiki/Q679611",
+    "wikipedia": "https://en.wikipedia.org/wiki/Superbad"
+  },
+  "5459": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0120912/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/men_in_black_ii",
+    "wikidata": "https://www.wikidata.org/wiki/Q156597",
+    "wikipedia": "https://en.wikipedia.org/wiki/Men_in_Black_II"
+  },
+  "5502": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0286106/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/signs",
+    "wikidata": "https://www.wikidata.org/wiki/Q22432",
+    "wikipedia": "https://en.wikipedia.org/wiki/Signs_(film)"
+  },
+  "551": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0107688/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_nightmare_before_christmas",
+    "wikidata": "https://www.wikidata.org/wiki/Q322328",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Nightmare_Before_Christmas"
+  },
+  "552": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0108333/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1046772-three_musketeers",
+    "wikidata": "https://www.wikidata.org/wiki/Q508931",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Three_Musketeers_(1993_film)"
+  },
+  "553": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0108358/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/tombstone",
+    "wikidata": "https://www.wikidata.org/wiki/Q1420651",
+    "wikipedia": "https://en.wikipedia.org/wiki/Tombstone_(film)"
+  },
+  "555": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0108399/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/true_romance",
+    "wikidata": "https://www.wikidata.org/wiki/Q1127709",
+    "wikipedia": "https://en.wikipedia.org/wiki/True_Romance"
+  },
+  "55820": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0477348/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/no_country_for_old_men",
+    "wikidata": "https://www.wikidata.org/wiki/Q183081",
+    "wikipedia": "https://en.wikipedia.org/wiki/No_Country_for_Old_Men"
+  },
+  "56174": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0480249/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/i_am_legend",
+    "wikidata": "https://www.wikidata.org/wiki/Q212689",
+    "wikipedia": "https://en.wikipedia.org/wiki/I_Am_Legend_(film)"
+  },
+  "5618": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0245429/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/spirited_away",
+    "wikidata": "https://www.wikidata.org/wiki/Q155653",
+    "wikipedia": "https://en.wikipedia.org/wiki/Spirited_Away"
+  },
+  "56367": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0467406/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/juno",
+    "wikidata": "https://www.wikidata.org/wiki/Q79503",
+    "wikipedia": "https://en.wikipedia.org/wiki/Juno_(film)"
+  },
+  "5669": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0310793/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bowling_for_columbine",
+    "wikidata": "https://www.wikidata.org/wiki/Q165394",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bowling_for_Columbine"
+  },
+  "5679": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0298130/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/ring",
+    "wikidata": "https://www.wikidata.org/wiki/Q212804",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Ring_(2002_film)"
+  },
+  "5816": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0295297/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_chamber_of_secrets",
+    "wikidata": "https://www.wikidata.org/wiki/Q102244",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Chamber_of_Secrets_(film)"
+  },
+  "58559": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0468569/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_dark_knight",
+    "wikidata": "https://www.wikidata.org/wiki/Q163872",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Dark_Knight"
+  },
+  "586": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0099785/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/home_alone",
+    "wikidata": "https://www.wikidata.org/wiki/Q105031",
+    "wikipedia": "https://en.wikipedia.org/wiki/Home_Alone"
+  },
+  "587": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0099653/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1031086-ghost",
+    "wikidata": "https://www.wikidata.org/wiki/Q49003",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ghost_(1990_film)"
+  },
+  "588": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0103639/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/aladdin_1992",
+    "wikidata": "https://www.wikidata.org/wiki/Q215518",
+    "wikipedia": "https://en.wikipedia.org/wiki/Aladdin_(1992_Disney_film)"
+  },
+  "589": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0103064/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/terminator_2_judgment_day",
+    "wikidata": "https://www.wikidata.org/wiki/Q170564",
+    "wikipedia": "https://en.wikipedia.org/wiki/Terminator_2:_Judgment_Day"
+  },
+  "590": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0099348/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dances_with_wolves",
+    "wikidata": "https://www.wikidata.org/wiki/Q20456",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dances_With_Wolves"
+  },
+  "592": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0096895/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/batman",
+    "wikidata": "https://www.wikidata.org/wiki/Q116852",
+    "wikipedia": "https://en.wikipedia.org/wiki/Batman_(1989_film)"
+  },
+  "593": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0102926/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/silence_of_the_lambs",
+    "wikidata": "https://www.wikidata.org/wiki/Q133654",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Silence_of_the_Lambs_(film)"
+  },
+  "59315": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0371746/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/iron_man",
+    "wikidata": "https://www.wikidata.org/wiki/Q192724",
+    "wikipedia": "https://en.wikipedia.org/wiki/Iron_Man_(2008_film)"
+  },
+  "59369": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0936501/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/taken",
+    "wikidata": "https://www.wikidata.org/wiki/Q277080",
+    "wikipedia": "https://en.wikipedia.org/wiki/Taken_(film)"
+  },
+  "594": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0029583/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/snow_white_and_the_seven_dwarfs",
+    "wikidata": "https://www.wikidata.org/wiki/Q134430",
+    "wikipedia": "https://en.wikipedia.org/wiki/Snow_White_and_the_Seven_Dwarfs_(film)"
+  },
+  "595": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0101414/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/beauty_and_the_beast_1991",
+    "wikidata": "https://www.wikidata.org/wiki/Q179673",
+    "wikipedia": "https://en.wikipedia.org/wiki/Beauty_and_the_Beast_(1991_film)"
+  },
+  "5952": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0167261/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_lord_of_the_rings_the_two_towers",
+    "wikidata": "https://www.wikidata.org/wiki/Q164963",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Two_Towers"
+  },
+  "596": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0032910/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pinocchio_1940",
+    "wikidata": "https://www.wikidata.org/wiki/Q4341553",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pinocchio_(1940_film)"
+  },
+  "597": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0100405/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pretty_woman",
+    "wikidata": "https://www.wikidata.org/wiki/Q207954",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pretty_Woman"
+  },
+  "59784": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0441773/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/kung_fu_panda",
+    "wikidata": "https://www.wikidata.org/wiki/Q129193",
+    "wikipedia": "https://en.wikipedia.org/wiki/Kung_Fu_Panda_(film)"
+  },
+  "5989": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0264464/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/catch_me_if_you_can",
+    "wikidata": "https://www.wikidata.org/wiki/Q208108",
+    "wikipedia": "https://en.wikipedia.org/wiki/Catch_Me_If_You_Can"
+  },
+  "5995": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0253474/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pianist",
+    "wikidata": "https://www.wikidata.org/wiki/Q150804",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Pianist_(2002_film)"
+  },
+  "6": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0113277/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/heat_1995",
+    "wikidata": "https://www.wikidata.org/wiki/Q42198",
+    "wikipedia": "https://en.wikipedia.org/wiki/Heat_(1995_film)"
+  },
+  "60069": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0910970/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/wall_e",
+    "wikidata": "https://www.wikidata.org/wiki/Q104905",
+    "wikipedia": "https://en.wikipedia.org/wiki/WALL-E"
+  },
+  "6016": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0317248/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/city_of_god",
+    "wikidata": "https://www.wikidata.org/wiki/Q220741",
+    "wikipedia": "https://en.wikipedia.org/wiki/City_of_God_(2002_film)"
+  },
+  "60684": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0409459/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/watchmen",
+    "wikidata": "https://www.wikidata.org/wiki/Q162182",
+    "wikipedia": "https://en.wikipedia.org/wiki/Watchmen_(2009_film)"
+  },
+  "608": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116282/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/fargo",
+    "wikidata": "https://www.wikidata.org/wiki/Q222720",
+    "wikipedia": "https://en.wikipedia.org/wiki/Fargo_(1996_film)"
+  },
+  "62": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0113862/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mr_hollands_opus",
+    "wikidata": "https://www.wikidata.org/wiki/Q564893",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mr._Holland's_Opus"
+  },
+  "63082": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1010048/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/slumdog_millionaire",
+    "wikidata": "https://www.wikidata.org/wiki/Q125076",
+    "wikipedia": "https://en.wikipedia.org/wiki/Slumdog_Millionaire"
+  },
+  "6333": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0290334/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/x2_xmen_united",
+    "wikidata": "https://www.wikidata.org/wiki/Q219776",
+    "wikipedia": "https://en.wikipedia.org/wiki/X2_(film)"
+  },
+  "6365": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0234215/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/matrix_reloaded",
+    "wikidata": "https://www.wikidata.org/wiki/Q189600",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Matrix_Reloaded"
+  },
+  "6373": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0315327/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bruce_almighty",
+    "wikidata": "https://www.wikidata.org/wiki/Q207816",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bruce_Almighty"
+  },
+  "6377": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0266543/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/finding_nemo",
+    "wikidata": "https://www.wikidata.org/wiki/Q132863",
+    "wikipedia": "https://en.wikipedia.org/wiki/Finding_Nemo"
+  },
+  "6378": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0317740/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/italian_job",
+    "wikidata": "https://www.wikidata.org/wiki/Q648312",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Italian_Job_(2003_film)"
+  },
+  "64614": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1205489/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gran_torino",
+    "wikidata": "https://www.wikidata.org/wiki/Q126699",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gran_Torino"
+  },
+  "648": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0117060/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mission_impossible",
+    "wikidata": "https://www.wikidata.org/wiki/Q1741232",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mission:_Impossible_(film)"
+  },
+  "6502": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0289043/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/28_days_later",
+    "wikidata": "https://www.wikidata.org/wiki/Q221075",
+    "wikipedia": "https://en.wikipedia.org/wiki/28_Days_Later"
+  },
+  "653": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0116136/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dragonheart",
+    "wikidata": "https://www.wikidata.org/wiki/Q330612",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dragonheart"
+  },
+  "6537": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0181852/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/terminator_3_rise_of_the_machines",
+    "wikidata": "https://www.wikidata.org/wiki/Q29054009",
+    "wikipedia": "https://en.wikipedia.org/wiki/Terminator_3:_Rise_of_the_Machines"
+  },
+  "6539": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0325980/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/pirates_of_the_caribbean_the_curse_of_the_black_pearl",
+    "wikidata": "https://www.wikidata.org/wiki/Q46717",
+    "wikipedia": "https://en.wikipedia.org/wiki/Pirates_of_the_Caribbean:_The_Curse_of_the_Black_Pearl"
+  },
+  "6711": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0335266/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/lost_in_translation",
+    "wikidata": "https://www.wikidata.org/wiki/Q107270",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lost_in_Translation"
+  },
+  "68157": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0361748/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/inglourious_basterds",
+    "wikidata": "https://www.wikidata.org/wiki/Q153723",
+    "wikipedia": "https://en.wikipedia.org/wiki/Inglourious_Basterds"
+  },
+  "68358": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0796366/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/star_trek_11",
+    "wikidata": "https://www.wikidata.org/wiki/Q213081",
+    "wikipedia": "https://en.wikipedia.org/wiki/Star_Trek_(2009_film)"
+  },
+  "6863": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0332379/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/school_of_rock",
+    "wikidata": "https://www.wikidata.org/wiki/Q820753",
+    "wikipedia": "https://en.wikipedia.org/wiki/School_of_Rock"
+  },
+  "6870": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0327056/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/mystic_river",
+    "wikidata": "https://www.wikidata.org/wiki/Q221586",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mystic_River_(film)"
+  },
+  "6874": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0266697/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/kill_bill_vol_1",
+    "wikidata": "https://www.wikidata.org/wiki/Q165325",
+    "wikipedia": "https://en.wikipedia.org/wiki/Kill_Bill:_Volume_1"
+  },
+  "68954": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt1049413/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/up",
+    "wikidata": "https://www.wikidata.org/wiki/Q174811",
+    "wikipedia": "https://en.wikipedia.org/wiki/Up_(2009_film)"
+  },
+  "69122": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1119646/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/10010667-hangover",
+    "wikidata": "https://www.wikidata.org/wiki/Q219315",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Hangover"
+  },
+  "6934": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0242653/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/matrix_revolutions",
+    "wikidata": "https://www.wikidata.org/wiki/Q207536",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Matrix_Revolutions"
+  },
+  "6942": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0314331/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/love_actually",
+    "wikidata": "https://www.wikidata.org/wiki/Q190588",
+    "wikipedia": "https://en.wikipedia.org/wiki/Love_Actually"
+  },
+  "69757": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1022603/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/500_days_of_summer",
+    "wikidata": "https://www.wikidata.org/wiki/Q154935",
+    "wikipedia": "https://en.wikipedia.org/wiki/500_Days_of_Summer"
+  },
+  "69844": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0417741/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_half_blood_prince",
+    "wikidata": "https://www.wikidata.org/wiki/Q161687",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Half-Blood_Prince_(film)"
+  },
+  "7": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0114319/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1068326-sabrina",
+    "wikidata": "https://www.wikidata.org/wiki/Q900708",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sabrina_(1995_film)"
+  },
+  "70": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116367/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/from_dusk_till_dawn",
+    "wikidata": "https://www.wikidata.org/wiki/Q196004",
+    "wikipedia": "https://en.wikipedia.org/wiki/From_Dusk_till_Dawn"
+  },
+  "70286": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1136608/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/district_9",
+    "wikidata": "https://www.wikidata.org/wiki/Q201819",
+    "wikipedia": "https://en.wikipedia.org/wiki/District_9"
+  },
+  "708": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0117979/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/truth_about_cats_and_dogs",
+    "wikidata": "https://www.wikidata.org/wiki/Q1880307",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Truth_About_Cats_%26_Dogs"
+  },
+  "7143": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0325710/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/last_samurai",
+    "wikidata": "https://www.wikidata.org/wiki/Q207130",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Last_Samurai"
+  },
+  "7147": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0319061/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1127787-big_fish",
+    "wikidata": "https://www.wikidata.org/wiki/Q278997",
+    "wikipedia": "https://en.wikipedia.org/wiki/Big_Fish"
+  },
+  "7153": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0167260/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_lord_of_the_rings_the_return_of_the_king",
+    "wikidata": "https://www.wikidata.org/wiki/Q131074",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Return_of_the_King"
+  },
+  "71535": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1156398/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/zombieland",
+    "wikidata": "https://www.wikidata.org/wiki/Q219810",
+    "wikipedia": "https://en.wikipedia.org/wiki/Zombieland"
+  },
+  "7254": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0289879/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/butterfly_effect",
+    "wikidata": "https://www.wikidata.org/wiki/Q221109",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Butterfly_Effect"
+  },
+  "72998": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0499549/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/avatar",
+    "wikidata": "https://www.wikidata.org/wiki/Q24871",
+    "wikipedia": "https://en.wikipedia.org/wiki/Avatar_(2009_film)"
+  },
+  "73017": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0988045/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/sherlock_holmes_2009",
+    "wikidata": "https://www.wikidata.org/wiki/Q200396",
+    "wikipedia": "https://en.wikipedia.org/wiki/Sherlock_Holmes_(2009_film)"
+  },
+  "733": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0117500/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1072011-rock",
+    "wikidata": "https://www.wikidata.org/wiki/Q216720",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Rock_(film)"
+  },
+  "736": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0117998/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1071167-twister",
+    "wikidata": "https://www.wikidata.org/wiki/Q683663",
+    "wikipedia": "https://en.wikipedia.org/wiki/Twister_(1996_film)"
+  },
+  "7361": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0338013/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/eternal_sunshine_of_the_spotless_mind",
+    "wikidata": "https://www.wikidata.org/wiki/Q208269",
+    "wikipedia": "https://en.wikipedia.org/wiki/Eternal_Sunshine_of_the_Spotless_Mind"
+  },
+  "7438": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0378194/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/kill_bill_volume_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q928019",
+    "wikipedia": "https://en.wikipedia.org/wiki/Kill_Bill:_Volume_2"
+  },
+  "74458": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1130884/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1198124-shutter_island",
+    "wikidata": "https://www.wikidata.org/wiki/Q210364",
+    "wikipedia": "https://en.wikipedia.org/wiki/Shutter_Island_(film)"
+  },
+  "745": {
+    "imdb": "https://www.imdb.com/title/tt0112691/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/wallace_and_gromit_in_a_close_shave",
+    "wikidata": "https://www.wikidata.org/wiki/Q400097",
+    "wikipedia": "https://en.wikipedia.org/wiki/A_Close_Shave"
+  },
+  "750": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0057012/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/dr_strangelove",
+    "wikidata": "https://www.wikidata.org/wiki/Q105702",
+    "wikipedia": "https://en.wikipedia.org/wiki/Dr._Strangelove"
+  },
+  "76093": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0892769/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/how_to_train_your_dragon",
+    "wikidata": "https://www.wikidata.org/wiki/Q373096",
+    "wikipedia": "https://en.wikipedia.org/wiki/How_to_Train_Your_Dragon_(2010_film)"
+  },
+  "77561": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1228705/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/iron_man_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q205028",
+    "wikipedia": "https://en.wikipedia.org/wiki/Iron_Man_2"
+  },
+  "778": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0117951/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/trainspotting",
+    "wikidata": "https://www.wikidata.org/wiki/Q109135",
+    "wikipedia": "https://en.wikipedia.org/wiki/Trainspotting_(film)"
+  },
+  "780": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0116629/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1071806-independence_day",
+    "wikidata": "https://www.wikidata.org/wiki/Q105387",
+    "wikipedia": "https://en.wikipedia.org/wiki/Independence_Day_(1996_film)"
+  },
+  "784": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0115798/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/cable_guy",
+    "wikidata": "https://www.wikidata.org/wiki/Q824133",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Cable_Guy"
+  },
+  "78499": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0435761/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/toy_story_3",
+    "wikidata": "https://www.wikidata.org/wiki/Q187278",
+    "wikipedia": "https://en.wikipedia.org/wiki/Toy_Story_3"
+  },
+  "786": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0116213/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/eraser",
+    "wikidata": "https://www.wikidata.org/wiki/Q370326",
+    "wikipedia": "https://en.wikipedia.org/wiki/Eraser_(film)"
+  },
+  "788": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0117218/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_nutty_professor_1996",
+    "wikidata": "https://www.wikidata.org/wiki/Q936576",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Nutty_Professor_(1996_film)"
+  },
+  "79132": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1375666/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/inception",
+    "wikidata": "https://www.wikidata.org/wiki/Q25188",
+    "wikipedia": "https://en.wikipedia.org/wiki/Inception"
+  },
+  "802": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0117333/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/phenomenon",
+    "wikidata": "https://www.wikidata.org/wiki/Q464716",
+    "wikipedia": "https://en.wikipedia.org/wiki/Phenomenon_(film)"
+  },
+  "80463": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1285016/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the-social-network",
+    "wikidata": "https://www.wikidata.org/wiki/Q185888",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Social_Network"
+  },
+  "81591": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0947798/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/black_swan_2010",
+    "wikidata": "https://www.wikidata.org/wiki/Q180214",
+    "wikipedia": "https://en.wikipedia.org/wiki/Black_Swan_(film)"
+  },
+  "81834": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0926084/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_1",
+    "wikidata": "https://www.wikidata.org/wiki/Q161678",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_1"
+  },
+  "81845": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1504320/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_kings_speech",
+    "wikidata": "https://www.wikidata.org/wiki/Q160060",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_King's_Speech"
+  },
+  "832": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0117438/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1074298-ransom",
+    "wikidata": "https://www.wikidata.org/wiki/Q752362",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ransom_(1996_film)"
+  },
+  "8360": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0298148/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shrek_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q485983",
+    "wikipedia": "https://en.wikipedia.org/wiki/Shrek_2"
+  },
+  "8368": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0304141/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_prisoner_of_azkaban",
+    "wikidata": "https://www.wikidata.org/wiki/Q102448",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Prisoner_of_Azkaban_(film)"
+  },
+  "858": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0068646/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_godfather",
+    "wikidata": "https://www.wikidata.org/wiki/Q47703",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Godfather"
+  },
+  "8636": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0316654/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/spiderman_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q190145",
+    "wikipedia": "https://en.wikipedia.org/wiki/Spider-Man_2"
+  },
+  "8644": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0343818/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/i_robot",
+    "wikidata": "https://www.wikidata.org/wiki/Q200572",
+    "wikipedia": "https://en.wikipedia.org/wiki/I,_Robot_(film)"
+  },
+  "8665": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0372183/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/bourne_supremacy",
+    "wikidata": "https://www.wikidata.org/wiki/Q156608",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Bourne_Supremacy_(film)"
+  },
+  "8784": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0333766/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/garden_state",
+    "wikidata": "https://www.wikidata.org/wiki/Q59931",
+    "wikipedia": "https://en.wikipedia.org/wiki/Garden_State_(film)"
+  },
+  "88125": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1201607/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2",
+    "wikidata": "https://www.wikidata.org/wiki/Q232009",
+    "wikipedia": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_2"
+  },
+  "8874": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0365748/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/shaun_of_the_dead",
+    "wikidata": "https://www.wikidata.org/wiki/Q858724",
+    "wikipedia": "https://en.wikipedia.org/wiki/Shaun_of_the_Dead"
+  },
+  "8961": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0317705/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_incredibles",
+    "wikidata": "https://www.wikidata.org/wiki/Q213326",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Incredibles"
+  },
+  "89745": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt0848228/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/marvels_the_avengers",
+    "wikidata": "https://www.wikidata.org/wiki/Q182218",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Avengers_(2012_film)"
+  },
+  "903": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0052357/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/vertigo",
+    "wikidata": "https://www.wikidata.org/wiki/Q202548",
+    "wikipedia": "https://en.wikipedia.org/wiki/Vertigo_(film)"
+  },
+  "904": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0047396/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1017289-rear_window",
+    "wikidata": "https://www.wikidata.org/wiki/Q34414",
+    "wikipedia": "https://en.wikipedia.org/wiki/Rear_Window"
+  },
+  "908": {
+    "imdb": "https://www.imdb.com/title/tt0053125/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/north_by_northwest",
+    "wikidata": "https://www.wikidata.org/wiki/Q223139",
+    "wikipedia": "https://en.wikipedia.org/wiki/North_by_Northwest"
+  },
+  "910": {
+    "imdb": "https://www.imdb.com/title/tt0053291/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/some_like_it_hot",
+    "wikidata": "https://www.wikidata.org/wiki/Q190086",
+    "wikipedia": "https://en.wikipedia.org/wiki/Some_Like_It_Hot"
+  },
+  "912": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0034583/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1003707-casablanca",
+    "wikidata": "https://www.wikidata.org/wiki/Q132689",
+    "wikipedia": "https://en.wikipedia.org/wiki/Casablanca_(film)"
+  },
+  "913": {
+    "imdb": "https://www.imdb.com/title/tt0033870/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1013139-maltese_falcon",
+    "wikidata": "https://www.wikidata.org/wiki/Q221462",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Maltese_Falcon_(1941_film)"
+  },
+  "91500": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1392170/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_hunger_games",
+    "wikidata": "https://www.wikidata.org/wiki/Q212965",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Hunger_Games_(film)"
+  },
+  "91529": {
+    "certificate": "PG-13",
+    "imdb": "https://www.imdb.com/title/tt1345836/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_dark_knight_rises",
+    "wikidata": "https://www.wikidata.org/wiki/Q189330",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Dark_Knight_Rises"
+  },
+  "919": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0032138/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_wizard_of_oz_1939",
+    "wikidata": "https://www.wikidata.org/wiki/Q193695",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Wizard_of_Oz"
+  },
+  "920": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0031381/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/gone_with_the_wind",
+    "wikidata": "https://www.wikidata.org/wiki/Q2875",
+    "wikipedia": "https://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)"
+  },
+  "92259": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1675434/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/the_intouchables",
+    "wikidata": "https://www.wikidata.org/wiki/Q595",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Intouchables"
+  },
+  "923": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0033467/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/citizen_kane",
+    "wikidata": "https://www.wikidata.org/wiki/Q24815",
+    "wikipedia": "https://en.wikipedia.org/wiki/Citizen_Kane"
+  },
+  "924": {
+    "certificate": "G",
+    "imdb": "https://www.imdb.com/title/tt0062622/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/2001_a_space_odyssey",
+    "wikidata": "https://www.wikidata.org/wiki/Q103474",
+    "wikipedia": "https://en.wikipedia.org/wiki/2001:_A_Space_Odyssey"
+  },
+  "95": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt0115759/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/1069241-broken_arrow",
+    "wikidata": "https://www.wikidata.org/wiki/Q392915",
+    "wikipedia": "https://en.wikipedia.org/wiki/Broken_Arrow_(1996_film)"
+  },
+  "953": {
+    "certificate": "PG",
+    "imdb": "https://www.imdb.com/title/tt0038650/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/its_a_wonderful_life",
+    "wikidata": "https://www.wikidata.org/wiki/Q204191",
+    "wikipedia": "https://en.wikipedia.org/wiki/It's_a_Wonderful_Life"
+  },
+  "99114": {
+    "certificate": "R",
+    "imdb": "https://www.imdb.com/title/tt1853728/",
+    "rottenTomatoes": "https://www.rottentomatoes.com/m/django_unchained_2012",
+    "wikidata": "https://www.wikidata.org/wiki/Q571032",
+    "wikipedia": "https://en.wikipedia.org/wiki/Django_Unchained"
+  }
+}

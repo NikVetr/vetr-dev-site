@@ -1,0 +1,74 @@
+{
+  "356": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Milos",
+    "openStreetMap": "https://www.openstreetmap.org/relation/531969",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Milos%2C+Greece&query_place_id=ChIJOz8yn6sgmRQRmME0rPbcRng",
+    "appleMaps": "https://maps.apple.com/place?coordinate=36.6875,24.4325&name=Milos%20island"
+  },
+  "338": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Rostock",
+    "openStreetMap": "https://www.openstreetmap.org/relation/62405",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Rostock%2C+Germany&query_place_id=ChIJNzjcO6xQrEcRw55Zj-bj9tI",
+    "appleMaps": "https://maps.apple.com/place?place-id=I13C44F6B1E921CBA"
+  },
+  "821": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Istanbul",
+    "openStreetMap": "https://www.openstreetmap.org/node/1882099475",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Istanbul%2C+Turkey&query_place_id=ChIJawhoAASnyhQR0LABvJj-zOE",
+    "appleMaps": "https://maps.apple.com/place?place-id=I59D8B9199DB13EB1"
+  },
+  "207": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Paphos",
+    "openStreetMap": "https://www.openstreetmap.org/relation/533386",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Paphos%2C+Cyprus&query_place_id=ChIJyeIt9GMG5xQR57X0UP_9BWw",
+    "appleMaps": "https://maps.apple.com/place?place-id=IE2F02B3AB24ADA7E"
+  },
+  "732": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Barcelona",
+    "openStreetMap": "https://www.openstreetmap.org/relation/347950",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Barcelona%2C+Spain&query_place_id=ChIJ5TCOcRaYpBIRCmZHTz37sEQ",
+    "appleMaps": "https://maps.apple.com/place?place-id=I1F674CE9E37792A4"
+  },
+  "49": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Wei%C3%9Fenkirchen_in_der_Wachau",
+    "openStreetMap": "https://www.openstreetmap.org/relation/416890",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Wei%C3%9Fenkirchen+in+der+Wachau%2C+Austria&query_place_id=ChIJ9R1djdKIckcRL3CrDnoj9qM",
+    "appleMaps": "https://maps.apple.com/place?place-id=I241505EA291C2AC"
+  },
+  "439": {
+    "wikipedia": "https://en.wikipedia.org/wiki/La_Spezia",
+    "openStreetMap": "https://www.openstreetmap.org/relation/42842",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=La+Spezia%2C+Italy&query_place_id=ChIJrV7xusD81BIRgE9aKK2HMjI",
+    "appleMaps": "https://maps.apple.com/place?place-id=IB325B2D400A920D5"
+  },
+  "275": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Porto-Vecchio",
+    "openStreetMap": "https://www.openstreetmap.org/relation/89326",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Porto-Vecchio%2C+Corsica%2C+France&query_place_id=ChIJSRtsHX2B2RIRxqV-tOoz2fU",
+    "appleMaps": "https://maps.apple.com/place?place-id=IC14D4F6402CCD2CA"
+  },
+  "212": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Prague",
+    "openStreetMap": "https://www.openstreetmap.org/relation/435514",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Prague%2C+Czech+Republic&query_place_id=ChIJi3lwCZyTC0cRkEAWZg-vAAQ",
+    "appleMaps": "https://maps.apple.com/place?place-id=IE4D7E8713FD79FAA"
+  },
+  "189": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Split,_Croatia",
+    "openStreetMap": "https://www.openstreetmap.org/relation/11153757",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Split%2C+Croatia&query_place_id=ChIJF_W8a_xdNRMRmJ-0MfaPeaE",
+    "appleMaps": "https://maps.apple.com/place?place-id=IFF717170ACE3133A"
+  },
+  "327": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Kiel",
+    "openStreetMap": "https://www.openstreetmap.org/relation/27021",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Kiel%2C+Germany&query_place_id=ChIJrZfujw1WskcRIANYxmOJJAQ",
+    "appleMaps": "https://maps.apple.com/place?place-id=IF96050BD477B76EE"
+  },
+  "274": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Calvi,_Haute-Corse",
+    "openStreetMap": "https://www.openstreetmap.org/relation/1151255",
+    "googleMaps": "https://www.google.com/maps/search/?api=1&query=Calvi%2C+Corsica%2C+France&query_place_id=ChIJ00H3T2jr0BIRsFWV_aUZCAQ",
+    "appleMaps": "https://maps.apple.com/place?place-id=I5FE33A9661897982"
+  }
+}
