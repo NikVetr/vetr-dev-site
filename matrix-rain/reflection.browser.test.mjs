@@ -48,13 +48,15 @@ test('the reflected figure reaches the bezel from its first outline through the 
       paint(ctx, closeup, null);
       const background = greenAtLenses();
       paint(ctx, closeup, portrait);
-      return { samples, lenses: { background, composed: greenAtLenses() } };
+      const composed = greenAtLenses();
+      paint(ctx, { ...closeup, glyphs: [] }, portrait);
+      return { samples, lenses: { background, composed, tint: greenAtLenses() } };
     });
     assert.equal(samples[0].top, 540, 'the title lock precedes the reflection');
     assert.ok(samples[1].top > 100 && samples[1].top < 160, 'the outline fills about 3/4 of the screen');
     assert.ok(samples.slice(1).every((s) => s.bottomPixels > 5), 'a visible reflection meets the lower edge');
     assert.ok(lenses.background.every((green) => green > 200));
-    assert.ok(lenses.composed.every((green) => green < 5), 'the lenses block the bright rain behind them');
+    assert.deepEqual(lenses.composed, lenses.tint, 'rain behind the lenses preserves their photographed tint');
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
