@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { submit } from './core.mjs';
+import { submit, gaussianProjection } from './core.mjs';
+import { tasteProfile } from './taste.mjs';
+import { latentPairs } from './latent.mjs';
 import { pnorm } from '../intuitions/lib/normal.js';
 const close = (x, y, tol = 1e-8) => assert.ok(Math.abs(x - y) < tol, x + ' ≠ ' + y);
 const component = (weight, mean, r = 0) => ({
@@ -193,4 +195,81 @@ test('categorical class likelihoods, missing items and uncertainty have exact fi
   const bad = structuredClone(catalog);
   bad.models.m.components[0].probabilities[0] = [1, 1];
   assert.throws(() => submit({ catalog: bad, model: 'm' }), /probability distribution/);
+});
+
+test('informative ratings separate classes, and previously supplied redundant ratings lose information', () => {
+  const c = {
+    name: 'Class test',
+    items: ['signal', 'copy', 'noise'].map((itemId) => ({ itemId, title: itemId })),
+    scale: [0, 1],
+    models: {
+      fit: {
+        kind: 'latent-class',
+        components: [
+          {
+            weight: 0.5,
+            probabilities: [
+              [1, 0],
+              [1, 0],
+              [0.5, 0.5],
+            ],
+          },
+          {
+            weight: 0.5,
+            probabilities: [
+              [0, 1],
+              [0, 1],
+              [0.5, 0.5],
+            ],
+          },
+        ],
+      },
+    },
+  };
+  const before = tasteProfile(c, {}),
+    after = tasteProfile(c, { signal: 0 });
+  close(before.information.get('copy'), 1);
+  close(before.information.get('noise'), 0);
+  close(after.information.get('copy'), 0);
+  close(before.projection[0].fraction, 1);
+  assert.equal(before.projection.length, 1);
+  assert.deepEqual(after.weights, [1, 0]);
+});
+test('projected ordinal posterior recovers truncated-normal moments in original coordinates', () => {
+  const c = catalog([component(1, [0, 0], 0.6)]);
+  const { projection, mean, covariance } = gaussianProjection(c, {
+    model: 'ordinal',
+    ratings: { a: 5 },
+    samples: 4096,
+  });
+  for (const [i, coef] of [1, 0.6].entries()) {
+    close(
+      mean.reduce((s, m, k) => s + m * projection[k].loadings[i], 0),
+      coef * Math.sqrt(2 / Math.PI),
+      0.0002,
+    );
+    let v = 0;
+    for (let a = 0; a < 2; a++)
+      for (let b = 0; b < 2; b++)
+        v += projection[a].loadings[i] * covariance[a][b] * projection[b].loadings[i];
+    close(v, 1 - (coef ** 2 * 2) / Math.PI, 0.001);
+  }
+});
+test('latent draws preserve category support and observed cell frequencies', () => {
+  const c = catalog([component(1, [0, 0], 0.6)]);
+  const cells = [
+      [5, 3],
+      [4, 9],
+    ],
+    pts = latentPairs(c.models.ordinal, c.scale, 0, 1, cells);
+  const actual = [
+    [0, 0],
+    [0, 0],
+  ];
+  for (const [x, y] of pts) {
+    assert.ok(x >= 1 && x <= 5 && y >= 1 && y <= 5);
+    actual[Number(y >= 3)][Number(x >= 3)]++;
+  }
+  assert.deepEqual(actual, cells);
+  assert.deepEqual(pts, latentPairs(c.models.ordinal, c.scale, 0, 1, cells));
 });

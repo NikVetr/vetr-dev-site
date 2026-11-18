@@ -29,7 +29,8 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     /** @type {Record<string, number>} */
     const ratings = {};
     const films = JSON.parse(readFileSync(new URL('movielens.json', import.meta.url), 'utf8'));
-    const rows = page.locator('.entry');
+    await page.locator('#domains [data-key=movielens]').click();
+    const rows = page.locator('#library .entry');
     await rows.first().waitFor();
     const ids = await rows.evaluateAll((els) => els.map((el) => el.dataset.id));
     assert.deepEqual(
@@ -45,7 +46,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       [0, 1.5],
       [1, 5],
     ]) {
-      const row = rows.nth(idx);
+      const row = page.locator('.entry[data-id="' + ids[idx] + '"]');
       await row.getByRole('radio', { name: value + ' stars', exact: true }).check();
       ratings[ids[idx]] = value;
     }
@@ -59,12 +60,12 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       chance: (p) => p.chance,
       up: (p) => p.shift,
       down: (p) => -p.shift,
-      absolute: (p) => Math.abs(p.shift),
+
       precision: (p) => p.expected / Math.max(0.01, p.sd ** 2),
     };
     for (const [key, fn] of Object.entries(score)) {
       const sorted = [...expected.predictions]
-        .filter((p) => !['absolute', 'up', 'down'].includes(key) || fn(p) > 0)
+        .filter((p) => !['up', 'down'].includes(key) || fn(p) > 0)
         .sort((a, b) => fn(b) - fn(a));
       assert.deepEqual(
         await page
@@ -73,12 +74,12 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
         sorted.map((p) => p.itemId),
       );
     }
-    const pick = page.locator('.ranks[data-key=absolute] button').first();
+    const pick = page.locator('.ranks[data-key=expected] button').first();
     await pick.focus();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     const item = await page.locator('#detail').getAttribute('data-id');
-    assert.equal(item, await page.locator('.ranks[data-key=absolute] button').nth(1).getAttribute('data-id'));
+    assert.equal(item, await page.locator('.ranks[data-key=expected] button').nth(1).getAttribute('data-id'));
     assert.match(
       await page.locator('#external').getAttribute('href'),
       /^https:\/\/www\.imdb\.com\/title\/tt\d+\/$/,
@@ -89,16 +90,16 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     await comp.selectOption(ids[0]);
     assert.equal(await heat.locator('.observed th').innerText(), '1.5');
     await page.locator('#threshold').selectOption('5');
-    assert.equal(await page.locator('.board h3').nth(1).innerText(), 'Chance of ≥ 5');
+    assert.equal(await page.locator('.board h3 #threshold').inputValue(), '5');
     assert.equal(await comp.inputValue(), ids[0]);
-    await page.locator('#rated-only').check();
-    assert.equal(await page.locator('.entry:visible').count(), 2);
+    assert.equal(await page.locator('#rated-list .entry').count(), 2);
     await page.locator('#auto').check();
-    await rows
+    await page
+      .locator('#rated-list .entry')
       .first()
       .getByRole('button', { name: /Clear rating/ })
       .click();
-    assert.equal(await page.locator('.entry:visible').count(), 1);
+    assert.equal(await page.locator('#rated-list .entry').count(), 1);
     assert.equal(await page.locator('.ranks[data-key=expected] button').count(), 99);
     await page.locator('[data-key=stravl]').click();
     await rows.first().getByRole('radio', { name: 'No', exact: true }).check();
@@ -139,16 +140,14 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
         },
       },
     };
-    await page
-      .locator('#file')
-      .setInputFiles({
-        name: 'catalog.json',
-        mimeType: 'application/json',
-        buffer: Buffer.from(JSON.stringify(custom)),
-      });
+    await page.locator('#file').setInputFiles({
+      name: 'catalog.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(JSON.stringify(custom)),
+    });
     await page.getByRole('radio', { name: '0', exact: true }).first().check();
     assert.ok(await page.locator('#external').isHidden());
-    await page.getByRole('radio', { name: '3', exact: true }).last().check();
+    await rows.getByRole('radio', { name: '3', exact: true }).last().check();
     assert.ok(await page.locator('#detail').isHidden());
     assert.match(await page.locator('.board').first().innerText(), /All entries rated/);
     await page
@@ -159,6 +158,64 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       .getByText(/Could not open catalog/)
       .waitFor();
     assert.equal(await page.locator('#rated-count').innerText(), '2 / 2 rated');
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});
+
+test('expanded catalog, information ratings, sampled scatter, projections, and exchange', async () => {
+  const app = await openPage('media-ratings/');
+  const p = app.page;
+  try {
+    await p.locator('#library .entry').first().waitFor();
+    assert.equal(await p.locator('#library .entry').count(), 500);
+    await p.locator('#search').fill('Harry Potter');
+    assert.equal(await p.locator('#library .entry:visible').count(), 8);
+    await p.locator('#search').fill('');
+    const d = p.locator('#divider');
+    await d.focus();
+    await p.keyboard.press('ArrowUp');
+    assert.equal(await d.getAttribute('aria-valuenow'), '60');
+    const box = await d.boundingBox();
+    await p.mouse.move(box.x + 50, box.y + box.height / 2);
+    await p.mouse.down();
+    await p.mouse.move(box.x + 50, box.y - 20);
+    await p.mouse.up();
+    assert.ok(Number(await d.getAttribute('aria-valuenow')) < 60);
+    const quick = p.locator('.quick').first(),
+      id = await quick.getAttribute('data-id');
+    await quick.click();
+    await p.locator('.info-row select').selectOption('4.5');
+    assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
+    assert.equal(await p.locator('.quick[data-id="' + id + '"]').count(), 0);
+    await p.locator('.heat').waitFor();
+    await p.getByText('Sampled latent scores', { exact: true }).click();
+    await p.locator('#comparison svg circle').first().waitFor();
+    assert.match(await p.locator('#axes').innerText(), /between-class variance/);
+    await p.locator('#threshold').selectOption('4.5');
+    await p.locator('#exchange summary').click();
+    const download = p.waitForEvent('download');
+    await p.locator('#save-forecasts').click();
+    const f = await download;
+    await p
+      .locator('#prediction-file')
+      .setInputFiles({ name: 'predictions.csv', mimeType: 'text/csv', buffer: readFileSync(await f.path()) });
+    await p.locator('#snapshot tbody tr').first().waitFor();
+    assert.equal(await p.locator('#snapshot tbody tr').count(), 499);
+    assert.equal(await p.locator('#snapshot tbody tr').first().locator('td').nth(5).innerText(), '4.5');
+    const ratingfile = p.waitForEvent('download');
+    await p.locator('#save-ratings').click();
+    const supplied = readFileSync(await (await ratingfile).path());
+    await p.locator('#rated-list .clear').click();
+    await p
+      .locator('#rating-file')
+      .setInputFiles({ name: 'ratings.csv', mimeType: 'text/csv', buffer: supplied });
+    await p.locator('#rated-list .entry').waitFor();
+    assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
+    await p.locator('#model').selectOption('reference');
+    assert.match(await p.locator('#axes').innerText(), /latent variance/);
+    assert.equal(await p.locator('#taste-plot polyline').count(), 2);
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();

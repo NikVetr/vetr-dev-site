@@ -1,3 +1,5 @@
+import { latentPairs } from './latent.mjs';
+import { pairPlot } from './charts.mjs';
 // The counts for an unordered pair are stored once. Rows here always represent
 // the rated comparison and columns always represent the selected recommendation.
 export function jointCounts(data, target, rated) {
@@ -7,7 +9,8 @@ export function jointCounts(data, target, rated) {
   const hi = Math.max(i, j),
     lo = Math.min(i, j),
     n = data.scale.length;
-  const cells = data.pairs[(hi * (hi - 1)) / 2 + lo];
+  const pair = (hi * (hi - 1)) / 2 + lo;
+  const cells = data.packed ? data.packed.subarray(pair * n * n, (pair + 1) * n * n) : data.pairs[pair];
   const rows = data.scale.map((_, a) => data.scale.map((_, b) => cells[j < i ? a * n + b : b * n + a]));
   let total = 0,
     x = 0,
@@ -42,14 +45,13 @@ export const percent = (n) => (n * 100).toFixed(1) + '%';
 export const signed = (n) => (n > 0 ? '+' : '') + n.toFixed(2);
 const numeric = (n) => n.toFixed(2);
 
-function distribution(scale, label, baseline, forecast, counts) {
+function distribution(scale, label, baseline, forecast, counts, source) {
   const observed = counts?.reduce((a, b) => a + b, 0);
   const series = [
     { name: 'Catalog model', values: baseline, color: 'var(--prior)' },
     { name: 'For you', values: forecast, color: 'var(--accent)' },
   ];
-  if (observed)
-    series.push({ name: 'Observed', values: counts.map((n) => n / observed), color: 'var(--raw)' });
+  if (observed) series.push({ name: source, values: counts.map((n) => n / observed), color: 'var(--raw)' });
   const legend = el('legend');
   legend.replaceChildren();
   for (const s of series) {
@@ -97,7 +99,7 @@ function distribution(scale, label, baseline, forecast, counts) {
   note.className = 'evidence-note';
   el('distribution').replaceChildren(note, chart, details);
 }
-function coRatings(data, p, ratings, titles, label, message, preferred) {
+function coRatings(data, p, ratings, titles, label, message, preferred, gaussian, source) {
   const host = el('comparison');
   host.replaceChildren(node('h3', 'Observed co-ratings'));
   const note = (text) => {
@@ -131,7 +133,11 @@ function coRatings(data, p, ratings, titles, label, message, preferred) {
     const c = comparisons.find((c) => c.id === select.value);
     const caption = node(
       'p',
-      c.total + ' co-raters · ' + (c.r === null ? 'Correlation undefined' : 'Pearson r = ' + c.r.toFixed(2)),
+      source +
+        ' · ' +
+        c.total +
+        ' co-raters · ' +
+        (c.r === null ? 'Correlation undefined' : 'Pearson r on recorded scores = ' + c.r.toFixed(2)),
     );
     caption.className = 'evidence-note';
     const table = node('table');
@@ -150,8 +156,11 @@ function coRatings(data, p, ratings, titles, label, message, preferred) {
       tr.append(node('th', label(data.scale[a])));
       for (const [b, n] of counts.entries()) {
         const cell = node('td', n ? String(n) : '·');
-        cell.style.background =
-          'color-mix(in srgb,var(--accent) ' + 42 * Math.sqrt(n / peak) + '%,var(--surface))';
+        if (n) {
+          const intensity = Math.sqrt(n / peak);
+          cell.style.background = 'hsl(' + (190 + 42 * intensity) + ' 60% ' + (95 - 60 * intensity) + '%)';
+          cell.style.color = intensity > 0.7 ? 'white' : '#142136';
+        }
         cell.title = label(data.scale[a]) + ' × ' + label(data.scale[b]) + ' · ' + n + ' co-raters';
         tr.append(cell);
       }
@@ -163,7 +172,46 @@ function coRatings(data, p, ratings, titles, label, message, preferred) {
         ' rating for the comparison.',
     );
     help.className = 'evidence-note';
-    panel.replaceChildren(caption, table, help);
+    const key = node('p', 'Cell count  ·  0  ');
+    key.className = 'heat-key';
+    key.append(node('i'), node('span', '  ' + peak));
+    panel.replaceChildren(caption, table, key, help);
+    if (gaussian && c.total) {
+      const details = node('details');
+      details.append(node('summary', 'Sampled latent scores'));
+      details.ontoggle = () => {
+        if (!details.open || details.childElementCount > 1) return;
+        try {
+          const pts = latentPairs(
+            gaussian,
+            data.scale,
+            data.ids.indexOf(p.itemId),
+            data.ids.indexOf(c.id),
+            c.rows,
+          );
+          const lo = gaussian.kind === 'logit-point' ? 0 : data.scale[0];
+          details.append(
+            pairPlot(pts, lo, data.scale.at(-1)),
+            node(
+              'p',
+              pts.length +
+                ' simulated pairs within the recorded rating bins. Horizontal: ' +
+                titles.get(p.itemId) +
+                '. Vertical: ' +
+                titles.get(c.id) +
+                '. ' +
+                (gaussian.kind === 'logit-point'
+                  ? 'Logit reference, transformed with the inverse logit.'
+                  : 'Ordinal Gaussian mixture, mapped between category cutpoints.') +
+                ' Each draw represents uncertainty within an observed pair.',
+            ),
+          );
+        } catch (e) {
+          details.append(node('p', e.message));
+        }
+      };
+      panel.append(details);
+    }
   }
   if (comparisons.length > 1) note('Comparisons are ordered by absolute correlation among co-raters.');
   select.onchange = () => {
@@ -184,9 +232,10 @@ export function showDetail({
   titles,
   label,
   threshold,
-  kind,
+  model,
   message,
 }) {
+  const kind = model.kind;
   const detail = el('detail'),
     oldTitle = detail.dataset.id;
   const previous = oldTitle === p?.itemId ? el('comparison').querySelector('select')?.dataset.chosen : null;
@@ -203,12 +252,32 @@ export function showDetail({
       : 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(p.title);
     link.textContent = imdb ? 'View on IMDb ↗' : 'View on map ↗';
   }
+  const links = el('item-links');
+  links.replaceChildren(link);
+  const extra = (label, url) => {
+    const a = node('a', label + ' ↗');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    links.append(a);
+  };
+  if (domain === 'stravl') {
+    const q = encodeURIComponent(p.title);
+    extra('Google Maps', 'https://www.google.com/maps/search/?api=1&query=' + q);
+    extra('Apple Maps', 'https://maps.apple.com/?q=' + q);
+  } else if (domain === 'expanded' || domain === 'movielens')
+    extra(
+      'Search Rotten Tomatoes',
+      'https://www.rottentomatoes.com/search?search=' +
+        encodeURIComponent(titles.get(p.itemId).replace(/ \(\d{4}\)$/, '')),
+    );
   distribution(
     catalog.scale,
     label,
     prior.probabilities,
     p.probabilities,
     evidence?.counts[evidence.ids.indexOf(p.itemId)],
+    domain === 'expanded' ? 'Observed · MovieLens small' : 'Observed',
   );
   const metrics = el('metrics');
   metrics.className = 'metrics';
@@ -232,5 +301,21 @@ export function showDetail({
   el('formula').textContent =
     (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
     'Each mean weights the rating values by their probabilities. Surprise is your mean minus the catalog mean.';
-  coRatings(evidence, p, ratings, titles, label, message, previous);
+  const gaussian =
+    kind === 'latent-class'
+      ? (catalog.models.reference ??
+        catalog.models[catalog.selection?.ordinalModel] ??
+        Object.values(catalog.models).find((m) => m.kind === 'ordinal-probit'))
+      : model;
+  coRatings(
+    evidence,
+    p,
+    ratings,
+    titles,
+    label,
+    message,
+    previous,
+    gaussian,
+    domain === 'expanded' ? 'MovieLens small' : domain === 'stravl' ? 'Stravl' : 'MovieLens',
+  );
 }

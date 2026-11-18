@@ -1,8 +1,14 @@
 # Fitting and using rating catalogs
 
-Choose **Films** or **Destinations** in the left panel. The searchable catalog is ordered by the selected model’s unconditional expected rating. Click either half of a star for MovieLens (½–5 stars), or select No, Maybe, or Yes for Stravl. **Clear** removes one rating. With **Auto-update** off, use **Update predictions** to apply a batch. Switching datasets keeps each set of ratings for the current page session.
+**Films** opens a 500-title catalog. **Film pilot** opens the earlier 100-title fit, and **Destinations** uses No, Maybe and Yes. Click a star or half-star to rate a film. The sidebar sorts both shelves by catalog expectation. Drag the divider, or focus it and use the arrow keys, to give either shelf more space. With **Auto-update** off, use **Update predictions** to apply your edits.
 
-The six scrollable lists rank unrated entries by expected rating, chance of reaching your cutoff, absolute surprise, rise, fall, and mean divided by variance. Select a recommendation in any list to compare its fitted population and personalized rating distributions. For the bundled datasets, the third series shows observed rating frequencies. The co-rating grid counts people who rated both entries. It initially compares the selected item with the supplied rating having the largest absolute Pearson correlation among co-raters. The outlined row marks your rating for the comparison item. These pairwise counts describe the sample. The prediction uses all applied ratings jointly. Films link directly to IMDb through the MovieLens ID mapping and destinations link to OpenStreetMap searches. The [JSON API](api.md) supplies the same model predictions.
+Each ranking shows its result count and scrolls independently. The chance ranking includes the selected cutoff. Choose another value directly in its heading. Rise and fall rank positive and negative changes from the unconditional mean. **Most informative to rate** estimates how much a new answer would reduce uncertainty about the categorical taste class given your applied ratings. Its score is mutual information in bits, computed by averaging over all possible answers. This panel uses the catalog’s categorical fit even when a Gaussian forecast is selected. You can enter the suggested rating in place.
+
+Select a recommendation to inspect the model and observed distributions. The colored co-rating grid counts respondents who rated both entries. Pearson’s correlation uses their **recorded numeric ratings**. The scatterplot takes up to 350 observed pairs and samples plausible Gaussian coordinates conditional on both recorded rating bins. It uses stratified importance resampling for the first coordinate and a conditional truncated normal for the second. The logit model uses the inverse logit to return to stars. Ordinal models interpolate between rating midpoints at their cutpoints. The categorical model uses its companion Gaussian fit for this display. The chart labels the fit and axes.
+
+The projection uses the active prediction model. For Gaussian models, the axes are population principal components of the full mixture covariance. For each component we condition the two projected coordinates on the supplied ratings using the same triangular solves, interval draws and weights as the prediction engine. The user's contour shows one projected standard deviation, including within- and between-component uncertainty. For categorical models the PCA uses the class mean rating profiles weighted by prior membership. The diamond then marks the posterior-weighted class center. The view identifies each axis by its variance share and its smallest and largest item loadings.
+
+**Import / export CSV** saves supplied ratings or the predictions from the last update. Importing ratings merges by item ID and validates the entire file before applying it. Importing a prediction snapshot opens a comparison table with current means. It adds no ratings. Movie links use IMDb IDs and Rotten Tomatoes title searches. Destination links use location searches on OpenStreetMap, Google Maps and Apple Maps. The [JSON API](api.md) supplies the forecasts.
 
 ## Fit a catalog
 
@@ -16,7 +22,21 @@ The last four arguments set the maximum number of items (by rating count), numbe
 
 ### Movies
 
-The source script `side_projects/movieRatingPersonalization.R` at `249e278` reads MovieLens and selects its 500 most-rated films. Its IMDb table does not enter the fit. The browser pilot uses the 100 most-rated films from the September 2018 MovieLens small release, covering 16,185 ratings from 592 users. Download and extract the archive, then run the following commands from the repository root. The included parameters are distributed under the [MovieLens terms and citation](MOVIELENS-LICENSE.txt). [GroupLens data and file descriptions](https://files.grouplens.org/datasets/movielens/ml-latest-small-README.html) · [MovieLens archive](https://files.grouplens.org/datasets/movielens/ml-latest-small.zip)
+The saved R script `side_projects/movieRatingPersonalization.R` at `249e278` reads `IDMB_top250.csv` and then selects the 500 most frequently rated MovieLens titles independently of that file. Its worked example enters high ratings for titles starting with “Harry”. The original browser pilot used the 100 most-rated films in MovieLens small, with 16,185 ratings from 592 respondents.
+
+The **500-film** catalog selects the most-rated titles across the complete [MovieLens 25M release](https://grouplens.org/datasets/movielens/25m/). It includes the eight Harry Potter films. A deterministic 1/32 hash sample of respondents contributes 357,181 in-catalog ratings from 5,165 people. Both training and validation retain each sampled person's complete in-catalog profile. The site serves fitted parameters. The observed charts and IMDb mappings for both movie catalogs use MovieLens small, distributed under the [small-release terms](MOVIELENS-LICENSE.txt). The expanded fit and the observed charts therefore describe different samples.
+
+Four respondent-grouped folds compared the historical logit reference and categorical fits with 1, 2, 4 or 8 classes at prior strengths 8 and 64. The eight-class, strength-8 model opens by default. On 67,554 held-out ratings from 1,032 people its log loss was 1.643 and RMSE was 0.940 stars. The reference scored 1.935 and 0.923. The 100-film pilot retains the full-covariance ordinal fits. [Expanded selection report](validation/expanded.json)
+
+To reproduce the expanded fit from the repository root, download the 25M archive and the small release linked below. Use MovieLens 25M under its [research terms](https://files.grouplens.org/datasets/movielens/ml-25m-README.html). The last command produces small-release observed counts and packs the paired grids separately.
+
+```sh
+python3 media-ratings/prepare_expanded.py ml-25m.zip expanded-input
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 Rscript media-ratings/select.R expanded-input/sample.csv expanded-input/movies.csv expanded-input/template.json media-ratings/expanded.json media-ratings/validation/expanded.json media-ratings/expanded-grid.json
+python3 media-ratings/prepare_evidence.py media-ratings/expanded.json ml-latest-small/ratings.csv media-ratings/expanded-evidence.json --links ml-latest-small/links.csv --pack-pairs
+```
+
+For the 100-film pilot, download and extract the archive, then run the following commands from the repository root. The included parameters are distributed under the [MovieLens terms and citation](MOVIELENS-LICENSE.txt). [GroupLens data and file descriptions](https://files.grouplens.org/datasets/movielens/ml-latest-small-README.html) · [MovieLens archive](https://files.grouplens.org/datasets/movielens/ml-latest-small.zip)
 
 ```sh
 Rscript media-ratings/fit.R ml-latest-small/ratings.csv ml-latest-small/movies.csv movielens.json 'MovieLens · 100 most-rated films' '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5' 100 2 180 417
@@ -68,7 +88,7 @@ A surprise is the personalized mean minus the catalog mean. The cutoff ranking m
 
 ## Choosing the model by cross-validation
 
-The model menu marks the lowest cross-validated category log loss as **CV pick**. **Compare validation scores** shows every candidate and the separate holdout results. Movies open with the historical logit reference. Destinations open with the cross-validated full-covariance ordinal model. Select the latent-class model to use the categorical probabilities directly.
+The model menu marks the lowest cross-validated category log loss as **CV pick**. **Compare validation scores** shows every candidate and the separate holdout results. The 100-film pilot opens with the historical logit reference. Destinations open with the cross-validated full-covariance ordinal model. Select the latent-class model to use the categorical probabilities directly.
 
 The latent-class model fits one rating distribution per item and class. A sparse respondent-by-item/category matrix supplies the observed-data likelihood and expected counts for EM. Unrated items contribute no evidence. For each item and class, a positive number of pseudo-ratings shrinks the distribution toward the pooled training distribution for that item. Class weights receive one pseudo-respondent each. Two seeded initializations compete on the penalized training objective. The browser updates class probabilities directly from observed ratings and sums the class-specific distributions for each target. This computation is exact given the fitted parameters. The dependence between items comes entirely from class membership. A class can reflect how often someone uses half-stars as well as which titles they prefer. [Polytomous latent class analysis](https://www.jstatsoft.org/article/view/v042i10)
 

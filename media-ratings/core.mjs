@@ -1,5 +1,5 @@
 import { checkRequestKeys, invalidRequest } from '../shared/request.js';
-import { cholesky, dot } from '../intuitions/lib/linalg.js';
+import { cholesky, dot, symmetricEigen } from '../intuitions/lib/linalg.js';
 import { pnorm, pnormInterval, qnorm } from '../intuitions/lib/normal.js';
 import { mulberry32 } from '../shared/rng.js';
 
@@ -305,4 +305,97 @@ export function submit(input) {
   checkRequestKeys(input, ['catalog', 'model', 'ratings', 'threshold', 'samples']);
   const { catalog, ...request } = input;
   return predict(validateCatalog(catalog), request);
+}
+
+// Population PCs stay fixed when ratings change. Conditioning only requires
+// the two projected-to-observed covariance rows and the observed Cholesky block.
+const gaussianAxes = new WeakMap();
+export function gaussianProjection(catalog, { model: key, ratings = {}, samples = 256 }) {
+  const { components, kind } = catalog.models[key],
+    model = catalog.models[key];
+  requireValue(
+    kind === 'logit-point' || kind === 'ordinal-probit',
+    'Projection requires Gaussian liabilities.',
+  );
+  let axes = gaussianAxes.get(model);
+  if (!axes) {
+    const ids = catalog.items.map((_, i) => i),
+      center = ids.map((i) => components.reduce((s, c) => s + c.weight * c.mean[i], 0));
+    const total = ids.map((i) =>
+      ids.map((j) =>
+        components.reduce(
+          (s, c) => s + c.weight * (c.covariance[i][j] + (c.mean[i] - center[i]) * (c.mean[j] - center[j])),
+          0,
+        ),
+      ),
+    );
+    const eig = symmetricEigen(total),
+      trace = eig.values.reduce((a, b) => a + b, 0);
+    axes = eig.vectors.slice(0, 2).map((v, index) => {
+      const ordered = [...ids].sort((a, b) => v[b] - v[a]);
+      return {
+        fraction: eig.values[index] / trace,
+        high: ordered[0],
+        low: ordered.at(-1),
+        loadings: v,
+        scores: components.map((c) => dot(v, c.mean) - dot(v, center)),
+        cross: components.map((c) => c.covariance.map((row) => dot(row, v))),
+      };
+    });
+    gaussianAxes.set(model, axes);
+  }
+  const obs = catalog.items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
+  const values = obs.map((i) => catalog.scale.indexOf(ratings[catalog.items[i].itemId]));
+  requireValue(
+    Object.keys(ratings).length === obs.length &&
+      values.every((v) => v >= 0) &&
+      Number.isInteger(samples) &&
+      samples >= 16 &&
+      samples <= 8192,
+    'Invalid projection ratings or sample count.',
+  );
+  const uniform = kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
+  const blocks = components.map((c, k) => {
+    const L = cholesky(obs.map((i) => obs.map((j) => c.covariance[i][j])));
+    const states = draws(c, model, obs, values, catalog.scale, L, uniform);
+    const beta = axes.map((a) =>
+      forward(
+        L,
+        obs.map((i) => a.cross[k][i]),
+      ),
+    );
+    const covariance = axes.map((a) => axes.map((b) => dot(a.loadings, b.cross[k])));
+    const residual = covariance.map((row, i) => row.map((n, j) => n - dot(beta[i], beta[j])));
+    return { states, beta, covariance, residual };
+  });
+  const max = Math.max(...blocks.map((b) => b.states.reduce((m, s) => Math.max(m, s.logWeight), -Infinity)));
+  requireValue(Number.isFinite(max), 'Projection likelihood below numerical precision.');
+  const mean = axes.map(() => 0),
+    second = axes.map(() => axes.map(() => 0));
+  let totalMass = 0;
+  const weights = blocks.map((b, k) => {
+    let mass = 0;
+    for (const s of b.states) {
+      const w = Math.exp(s.logWeight - max);
+      if (!w) continue;
+      const m = axes.map((a, i) => a.scores[k] + dot(b.beta[i], s.z));
+      mass += w;
+      m.forEach((x, i) => {
+        mean[i] += w * x;
+        m.forEach((y, j) => (second[i][j] += w * (b.residual[i][j] + x * y)));
+      });
+    }
+    totalMass += mass;
+    return mass;
+  });
+  mean.forEach((x, i) => (mean[i] = x / totalMass));
+  const covariance = second.map((row, i) => row.map((x, j) => x / totalMass - mean[i] * mean[j]));
+  return {
+    projection: axes,
+    weights: weights.map((w) => w / totalMass),
+    mean,
+    covariance,
+    classCovariance: blocks.map((b) => b.covariance),
+    kind,
+  };
 }

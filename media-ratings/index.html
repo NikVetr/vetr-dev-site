@@ -25,7 +25,8 @@
         <div class="library-tools">
           <h2>Datasets</h2>
           <div id="domains" aria-label="Choose dataset">
-            <button data-key="movielens">Films <small>MovieLens</small></button>
+            <button data-key="expanded">Films <small>500 titles</small></button
+            ><button data-key="movielens">Film pilot <small>100 titles</small></button>
             <button data-key="stravl">Destinations <small>Stravl</small></button>
             <button id="custom-domain" data-key="custom" hidden>Imported catalog</button>
           </div>
@@ -39,15 +40,46 @@
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
           <div class="catalog-tools">
-            <span>By catalog mean</span><label><input type="checkbox" id="rated-only" /> Rated only</label>
+            <span>Unrated · by catalog mean</span><span id="unrated-count"></span>
           </div>
         </div>
         <a class="skip" href="#recommendations">Skip to recommendations</a>
-        <ul id="library" aria-label="Entries in descending catalog mean"></ul>
+        <div id="shelves">
+          <ul id="library" aria-label="Unrated entries in descending catalog mean"></ul>
+          <div
+            id="divider"
+            role="separator"
+            aria-orientation="horizontal"
+            aria-controls="library rated-list"
+            tabindex="0"
+            aria-label="Resize unrated and rated lists"
+            aria-valuemin="15"
+            aria-valuemax="85"
+            aria-valuenow="65"
+          >
+            <span>Already rated</span><b aria-hidden="true">═</b>
+          </div>
+          <ul id="rated-list" aria-label="Already rated entries"></ul>
+        </div>
         <div class="apply">
           <label><input type="checkbox" id="auto" checked /> Auto-update</label
           ><button class="primary" id="apply" disabled>Update predictions</button>
         </div>
+        <details id="exchange">
+          <summary>Import / export CSV</summary>
+          <div>
+            <label class="import"
+              >Import supplied ratings<input id="rating-file" type="file" accept=".csv,text/csv"
+            /></label>
+            <label class="import"
+              >Import saved predictions<input
+                id="prediction-file"
+                type="file"
+                accept=".csv,text/csv" /></label
+            ><button id="save-ratings">Export supplied ratings</button
+            ><button id="save-forecasts">Export applied predictions</button>
+          </div>
+        </details>
         <a class="jump" href="#recommendations">Go to recommendations ↓</a>
       </aside>
       <section class="analysis" aria-labelledby="recommendations">
@@ -57,12 +89,12 @@
             <p id="context">Loading catalog…</p>
           </div>
           <div class="model-controls">
-            <label>Prediction model<select id="model"></select></label
-            ><label>Rating cutoff<select id="threshold"></select></label>
+            <label>Prediction model<select id="model"></select></label>
           </div>
         </div>
         <p id="status" role="status"></p>
         <p id="pending" role="status" hidden></p>
+        <select hidden id="threshold" aria-label="Threshold for chance ranking"></select>
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
           <div class="detail-head">
@@ -70,7 +102,7 @@
               <p class="eyebrow">Selected recommendation</p>
               <h2 id="detail-title" tabindex="-1"></h2>
             </div>
-            <a id="external" hidden target="_blank" rel="noopener noreferrer"></a>
+            <div id="item-links"><a id="external" hidden target="_blank" rel="noopener noreferrer"></a></div>
           </div>
           <div class="explanation">
             <section>
@@ -86,6 +118,20 @@
             <section id="comparison"></section>
           </div>
         </section>
+        <section id="taste" class="inspector" hidden>
+          <h2 id="projection-title">Taste-class projection</h2>
+          <div class="taste-layout">
+            <div id="taste-plot"></div>
+            <div>
+              <p id="projection-help"></p>
+              <div id="axes"></div>
+            </div>
+          </div>
+        </section>
+        <details id="snapshot" hidden>
+          <summary>Imported predictions</summary>
+          <div id="snapshot-body"></div>
+        </details>
         <p id="weights"></p>
         <details id="validation" hidden>
           <summary>Compare validation scores</summary>

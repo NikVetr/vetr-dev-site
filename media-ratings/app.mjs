@@ -1,10 +1,24 @@
-import { validateCatalog, predict, submit, defaultCutoff } from './core.mjs';
+import { tasteProfile } from './taste.mjs';
+import { renderTaste } from './charts.mjs';
+import { ratingsCSV, forecastsCSV, importRatings, importForecasts, saveCSV } from './exchange.mjs';
+import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection } from './core.mjs';
 import { node, percent, signed, showDetail } from './detail.mjs';
 
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-Object.assign(window, { MediaRatings: { submit } });
+Object.assign(window, {
+  MediaRatings: {
+    submit,
+    tasteProfile,
+    gaussianProjection,
+    importRatings,
+    importForecasts,
+    ratingsCSV,
+    forecastsCSV,
+  },
+});
+const cutoff = select('threshold');
 const states = new Map();
 let active,
   state,
@@ -13,7 +27,10 @@ let active,
   baseline,
   titles,
   selected,
+  taste,
   revision = 0;
+const isFilm = (k) => k === 'expanded' || k === 'movielens';
+const entries = new Map();
 const panels = [
   {
     key: 'expected',
@@ -24,11 +41,11 @@ const panels = [
   },
   { key: 'chance', title: 'Above cutoff', hint: 'Probability', score: (p) => p.chance, format: percent },
   {
-    key: 'absolute',
-    title: 'Biggest surprise',
-    hint: 'Absolute shift',
-    score: (p) => Math.abs(p.shift),
-    format: (_, p) => signed(p.shift),
+    key: 'information',
+    title: 'Most informative to rate',
+    hint: 'bits',
+    score: (p) => taste?.information.get(p.itemId) ?? 0,
+    format: (n) => n.toFixed(3),
   },
   { key: 'up', title: 'Biggest rise', hint: 'Shift ↑', score: (p) => p.shift, format: signed },
   {
@@ -49,9 +66,14 @@ const panels = [
 const scaleLabel = (v) => catalog.scaleLabels?.[catalog.scale.indexOf(v)] ?? String(v);
 const sameRatings = (a, b) =>
   Object.keys(a).length === Object.keys(b).length && Object.entries(a).every(([k, v]) => b[k] === v);
-function useState(data) {
+function useState(data, key) {
   validateCatalog(data);
-  const model = data.models.reference ? 'reference' : data.selection?.ordinalModel;
+  const model =
+    key === 'expanded'
+      ? data.selection.model
+      : data.models.reference
+        ? 'reference'
+        : data.selection?.ordinalModel;
   return {
     data,
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
@@ -64,7 +86,7 @@ function useState(data) {
   };
 }
 function titleOf(it) {
-  if (active !== 'movielens') return it.title;
+  if (!isFilm(active)) return it.title;
   return it.title.replace(/^(.+), (The|An|A) (\(\d{4}\))$/, '$2 $1 $3');
 }
 function install(key, next) {
@@ -85,16 +107,15 @@ function install(key, next) {
     }),
   );
   select('model').value = state.model;
-  select('threshold').replaceChildren(...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))));
-  select('threshold').value = String(state.threshold);
-  el('scale-help').textContent =
-    key === 'movielens'
-      ? 'Choose a half or whole star.'
-      : catalog.scaleLabels
-        ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
-        : 'Choose a value on the rating scale.';
+  cutoff.replaceChildren(...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))));
+  cutoff.value = String(state.threshold);
+  el('scale-help').textContent = isFilm(key)
+    ? 'Choose a half or whole star.'
+    : catalog.scaleLabels
+      ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
+      : 'Choose a value on the rating scale.';
   input('search').value = '';
-  input('rated-only').checked = false;
+
   el('library').scrollTop = 0;
   showValidation(catalog.selection);
   rebuildBaseline();
@@ -145,10 +166,21 @@ function showValidation(selection) {
 function rebuildBaseline() {
   const population = predict(catalog, { model: state.model });
   baseline = new Map(population.predictions.map((p) => [p.itemId, p]));
+  entries.clear();
   const empty = node('li', 'No matching entries.');
   empty.id = 'empty-list';
   empty.className = 'note';
-  el('library').replaceChildren(...population.predictions.map(entryRow), empty);
+  const lists = [[], []];
+  for (const p of population.predictions) {
+    const li = entryRow(p);
+    entries.set(p.itemId, li);
+    lists[Number(Object.hasOwn(state.draft, p.itemId))].push(li);
+  }
+  el('library').replaceChildren(...lists[0], empty);
+  const none = node('li', 'Your rated entries appear here.');
+  none.id = 'empty-rated';
+  none.className = 'note';
+  el('rated-list').replaceChildren(...lists[1], none);
   filterRows();
 }
 function entryRow(p) {
@@ -169,7 +201,7 @@ function entryRow(p) {
   choices.setAttribute('role', 'radiogroup');
   choices.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId));
   for (const v of catalog.scale) {
-    const star = active === 'movielens',
+    const star = isFilm(active),
       label = node('label'),
       radio = document.createElement('input'),
       glyph = node('span', star ? '' : scaleLabel(v));
@@ -202,22 +234,24 @@ function syncRow(li) {
     r.parentElement.classList.toggle('filled', rated && Number(r.value) <= value);
   }
   li.querySelector('.clear').hidden = !rated;
-  li.querySelector('.rating-readout').textContent = rated && active === 'movielens' ? value + ' / 5' : '';
+  li.querySelector('.rating-readout').textContent = rated && isFilm(active) ? value + ' / 5' : '';
 }
 function filterRows() {
   if (!state) return;
   const query = input('search').value.trim().toLocaleLowerCase();
-  let visible = 0;
-  for (const li of el('library').querySelectorAll('li')) {
-    if (!li.classList.contains('entry')) continue;
-    const id = li.dataset.id;
-    li.hidden = !(
-      titles.get(id).toLocaleLowerCase().includes(query) &&
-      (!input('rated-only').checked || Object.hasOwn(state.draft, id))
-    );
-    if (!li.hidden) visible++;
+  let available = 0,
+    rated = 0;
+  for (const [id, li] of entries) {
+    li.hidden = !titles.get(id).toLocaleLowerCase().includes(query);
+    if (!li.hidden) {
+      if (Object.hasOwn(state.draft, id)) rated++;
+      else available++;
+    }
   }
-  el('empty-list').hidden = visible > 0;
+  el('empty-list').hidden = available > 0;
+  el('empty-rated').hidden = rated > 0;
+  el('empty-rated').textContent = query ? 'No rated entries match.' : 'Your rated entries appear here.';
+  el('unrated-count').textContent = String(available);
 }
 function syncDraft() {
   const count = Object.keys(state.draft).length,
@@ -230,16 +264,26 @@ function syncDraft() {
 function edit(li, value) {
   if (value === undefined) delete state.draft[li.dataset.id];
   else state.draft[li.dataset.id] = value;
+  const focused = li.contains(document.activeElement) ? document.activeElement : null;
+  const dest = el(value === undefined ? 'library' : 'rated-list');
+  if (li.parentElement !== dest) {
+    const next = Array.from(dest.querySelectorAll('li')).find(
+      (row) =>
+        !row.dataset.id || baseline.get(row.dataset.id).expected < baseline.get(li.dataset.id).expected,
+    );
+    dest.insertBefore(li, next ?? null);
+  }
   syncRow(li);
+  if (focused instanceof HTMLElement) focused.focus({ preventScroll: true });
   filterRows();
   syncDraft();
   if (input('auto').checked) update(state.draft);
 }
-el('library').onchange = (event) => {
+el('shelves').onchange = (event) => {
   const r = /** @type {HTMLInputElement} */ (event.target);
   if (r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
 };
-el('library').onclick = (event) => {
+el('shelves').onclick = (event) => {
   const button = /** @type {HTMLElement} */ (event.target).closest('.clear');
   if (button) {
     const li = button.closest('.entry');
@@ -248,7 +292,7 @@ el('library').onclick = (event) => {
   }
 };
 input('search').oninput = filterRows;
-input('rated-only').onchange = filterRows;
+
 input('apply').onclick = () => update(state.draft);
 input('auto').onchange = () => {
   if (state && input('auto').checked) update(state.draft);
@@ -279,12 +323,21 @@ function update(ratings) {
       el('weights').textContent += ' Integration is imprecise for these ratings.';
     if (!result.predictions.some((p) => p.itemId === selected)) selected = result.predictions[0]?.itemId;
     state.selection = selected;
+    const classKey = Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
+    taste = tasteProfile(catalog, state.applied, classKey, classKey === state.model ? next : null);
+    const view =
+      catalog.models[state.model].kind === 'latent-class'
+        ? taste
+        : gaussianProjection(catalog, { model: state.model, ratings: state.applied });
+    renderTaste(view, catalog);
+    renderSnapshot();
     renderBoards();
     renderDetail();
     el('status').textContent = '';
   } catch (error) {
     // A failed model calculation must never leave rankings labeled as a new fit.
     result = null;
+    el('taste').hidden = true;
     el('boards').replaceChildren();
     el('detail').hidden = true;
     el('weights').textContent = '';
@@ -304,30 +357,50 @@ function renderBoards() {
     head.className = 'board-head';
     list.className = 'ranks';
     list.dataset.key = spec.key;
-    const isShift = ['up', 'down', 'absolute'].includes(spec.key);
+    const isShift = ['up', 'down'].includes(spec.key);
     const title = spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
-    head.append(node('h3', title), node('small', spec.hint));
+    const heading = node('h3', spec.key === 'chance' ? 'Chance of ≥ ' : title);
+    head.append(heading);
+    if (spec.key === 'chance') {
+      cutoff.hidden = false;
+      heading.append(cutoff);
+    }
+    if (spec.key === 'information') {
+      board.classList.add('information');
+      head.title = 'Expected reduction in categorical class uncertainty, given the applied ratings.';
+    }
     list.setAttribute('role', 'toolbar');
     list.setAttribute('aria-orientation', 'vertical');
     list.setAttribute('aria-label', title);
     board.append(head, list);
+    if (spec.key === 'information' && taste) {
+      const why = node(
+        'p',
+        'Expected information about ' + taste.weights.length + ' taste classes, given your applied ratings.',
+      );
+      why.className = 'info-note';
+      board.append(why);
+    }
     const items = result.predictions
       .filter((p) =>
         spec.key === 'up'
           ? p.shift > 0
           : spec.key === 'down'
             ? p.shift < 0
-            : spec.key === 'absolute'
-              ? Math.abs(p.shift) > 0
+            : spec.key === 'information'
+              ? !!taste && taste.weights.length > 1
               : true,
       )
       .sort((a, b) => spec.score(b) - spec.score(a));
+    head.append(node('small', items.length + ' · ' + spec.hint));
     if (!items.length) {
       const msg = !result.predictions.length
         ? 'All entries rated. Clear one to predict it.'
         : isShift && !Object.keys(state.applied).length
           ? 'Rate an entry to see shifts from the catalog mean.'
-          : 'No shifts in this direction.';
+          : spec.key === 'information'
+            ? 'This catalog has no competing taste classes.'
+            : 'No shifts in this direction.';
       const note = node('p', msg);
       note.className = 'note';
       list.append(note);
@@ -343,7 +416,17 @@ function renderBoards() {
       pos.className = 'rank-index';
       score.className = 'score';
       btn.append(pos, node('span', titles.get(p.itemId)), score);
-      list.append(btn);
+      if (spec.key === 'information') {
+        const row = node('div');
+        row.className = 'info-row';
+        const rate = node('button', 'Rate');
+        rate.className = 'quick';
+        rate.tabIndex = btn.tabIndex;
+        rate.dataset.id = p.itemId;
+        rate.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId));
+        row.append(btn, rate);
+        list.append(row);
+      } else list.append(btn);
     }
     fragment.append(board);
   }
@@ -360,7 +443,7 @@ function renderDetail() {
     ratings: state.applied,
     titles,
     label: scaleLabel,
-    kind: catalog.models[state.model].kind,
+    model: catalog.models[state.model],
     threshold: state.threshold,
     message: state.evidenceMessage,
   });
@@ -368,19 +451,22 @@ function renderDetail() {
 // One tab stop per ranking; arrow keys move through its scrollable entries.
 el('boards').addEventListener('focusin', (event) => {
   const button = event.target;
-  if (!(button instanceof HTMLButtonElement)) return;
-  for (const peer of button.parentElement.querySelectorAll('button'))
-    peer.tabIndex = peer === button ? 0 : -1;
+  if (!(button instanceof HTMLButtonElement) || !button.matches('.rank')) return;
+  for (const peer of button.closest('.ranks').querySelectorAll('button'))
+    peer.tabIndex = peer.dataset.id === button.dataset.id ? 0 : -1;
 });
 el('boards').onkeydown = (event) => {
   const button = event.target;
   if (!(button instanceof HTMLButtonElement)) return;
-  const list = button.parentElement;
+  const list = button.closest('.ranks');
+  if (!list || !button.matches('.rank')) return;
+  const buttons = Array.from(list.querySelectorAll('button.rank'));
+  const idx = buttons.indexOf(button);
   const next = {
-    ArrowDown: button.nextElementSibling,
-    ArrowUp: button.previousElementSibling,
-    Home: list.firstElementChild,
-    End: list.lastElementChild,
+    ArrowDown: buttons[idx + 1],
+    ArrowUp: buttons[idx - 1],
+    Home: buttons[0],
+    End: buttons.at(-1),
   };
   if (Object.hasOwn(next, event.key)) {
     event.preventDefault();
@@ -388,11 +474,33 @@ el('boards').onkeydown = (event) => {
   }
 };
 el('boards').onclick = (event) => {
-  const btn = /** @type {HTMLElement} */ (event.target).closest('button.rank');
+  const target = /** @type {HTMLElement} */ (event.target);
+  const quick = target.closest('button.quick');
+  if (quick instanceof HTMLButtonElement) {
+    const chooser = document.createElement('select');
+    chooser.setAttribute('aria-label', 'Rating for ' + titles.get(quick.dataset.id));
+    chooser.replaceChildren(
+      new Option('Rate…', ''),
+      ...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))),
+    );
+    chooser.onchange = () => {
+      if (chooser.value) {
+        edit(entries.get(quick.dataset.id), Number(chooser.value));
+        if (chooser.isConnected) chooser.replaceWith(quick);
+      }
+    };
+    chooser.onblur = () => {
+      if (chooser.isConnected) chooser.replaceWith(quick);
+    };
+    quick.replaceWith(chooser);
+    chooser.focus();
+    return;
+  }
+  const btn = target.closest('button.rank');
   if (!(btn instanceof HTMLButtonElement)) return;
   selected = state.selection = btn.dataset.id;
   for (const b of el('boards').querySelectorAll('button'))
-    b.setAttribute('aria-pressed', String(b.dataset.id === selected));
+    if (b.classList.contains('rank')) b.setAttribute('aria-pressed', String(b.dataset.id === selected));
   renderDetail();
   const heading = el('detail-title');
   if (matchMedia('(max-width:690px)').matches || heading.getBoundingClientRect().top > innerHeight - 60)
@@ -403,9 +511,10 @@ select('model').onchange = () => {
   rebuildBaseline();
   update(input('auto').checked ? state.draft : state.applied);
 };
-select('threshold').onchange = () => {
-  state.threshold = Number(select('threshold').value);
+cutoff.onchange = () => {
+  state.threshold = Number(cutoff.value);
   if (!result) return;
+  result.threshold = state.threshold;
   const start = catalog.scale.indexOf(state.threshold);
   for (const p of result.predictions) p.chance = p.probabilities.slice(start).reduce((a, b) => a + b, 0);
   renderBoards();
@@ -424,6 +533,20 @@ async function loadEvidence(key, s) {
       JSON.stringify(s.data.scale) !== JSON.stringify(data.scale)
     )
       throw new Error('Co-rating data does not match this catalog.');
+    if (data.packedFile) {
+      const resp = await fetch('./' + data.packedFile);
+      if (!resp.ok) throw new Error('Co-rating counts unavailable.');
+      const bytes = new Uint8Array(await resp.arrayBuffer());
+      const buffer =
+        bytes[0] === 31 && bytes[1] === 139
+          ? await new Response(
+              new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')),
+            ).arrayBuffer()
+          : bytes.buffer;
+      data.packed = new Uint16Array(buffer);
+      if (data.packed.length !== ((data.ids.length * (data.ids.length - 1)) / 2) * data.scale.length ** 2)
+        throw new Error('Incomplete paired counts.');
+    }
     s.evidence = data;
   } catch (e) {
     s.evidenceMessage = e.message;
@@ -436,7 +559,7 @@ async function openCatalog(key, file = null) {
     let s = file ? null : states.get(key);
     if (!s) {
       el('status').textContent = 'Loading catalog…';
-      s = useState(file ? JSON.parse(await file.text()) : await readJSON(key + '.json'));
+      s = useState(file ? JSON.parse(await file.text()) : await readJSON(key + '.json'), key);
       if (seq !== revision) return;
       states.set(key, s);
       if (file) {
@@ -458,4 +581,108 @@ input('file').onchange = () => {
   input('file').value = '';
   if (f) void openCatalog('custom', f);
 };
-void openCatalog('movielens');
+void openCatalog('expanded');
+
+const divider = el('divider'),
+  shelves = el('shelves');
+function resize(ratio) {
+  const value = Math.max(15, Math.min(85, Math.round(ratio)));
+  shelves.style.setProperty('--top', value + 'fr');
+  shelves.style.setProperty('--bottom', 100 - value + 'fr');
+  divider.setAttribute('aria-valuenow', String(value));
+}
+divider.onkeydown = (e) => {
+  const delta = { ArrowUp: -5, ArrowDown: 5, Home: -100, End: 100 }[e.key];
+  if (delta) {
+    e.preventDefault();
+    resize(Number(divider.getAttribute('aria-valuenow')) + delta);
+  }
+};
+divider.onpointerdown = (e) => {
+  divider.setPointerCapture(e.pointerId);
+};
+divider.onpointermove = (e) => {
+  if (divider.hasPointerCapture(e.pointerId)) {
+    const b = shelves.getBoundingClientRect();
+    resize((100 * (e.clientY - b.top - divider.offsetHeight / 2)) / (b.height - divider.offsetHeight));
+  }
+};
+input('rating-file').onchange = async () => {
+  const f = input('rating-file').files[0],
+    current = state;
+  input('rating-file').value = '';
+  if (!f || !current) return;
+  try {
+    const rows = importRatings(await f.text(), current.data);
+    if (state !== current) return;
+    Object.assign(state.draft, rows);
+    rebuildBaseline();
+    syncDraft();
+    if (input('auto').checked) update(state.draft);
+    if (result) el('status').textContent = 'Imported ' + Object.keys(rows).length + ' ratings.';
+  } catch (e) {
+    if (state === current) el('status').textContent = e.message;
+  }
+};
+el('save-ratings').onclick = () => {
+  if (state) saveCSV(active + '-ratings.csv', ratingsCSV(catalog, state.draft));
+};
+el('save-forecasts').onclick = () => {
+  if (result) saveCSV(active + '-predictions.csv', forecastsCSV(catalog, result, state.model));
+};
+
+function renderSnapshot() {
+  const snapshot = state.snapshot,
+    details = el('snapshot');
+  details.hidden = !snapshot;
+  if (!snapshot) {
+    el('snapshot-body').replaceChildren();
+    return;
+  }
+  const table = node('table'),
+    h = table.createTHead().insertRow();
+  for (const label of [
+    'Item',
+    'Saved model',
+    'Saved mean',
+    'Applied mean',
+    'Saved shift',
+    'Saved cutoff',
+    'Saved chance',
+  ])
+    h.append(node('th', label));
+  const body = table.createTBody(),
+    live = new Map(result?.predictions.map((p) => [p.itemId, p.expected]));
+  for (const row of snapshot) {
+    const tr = body.insertRow();
+    for (const value of [
+      titles.get(row.itemId),
+      row.model,
+      row.expected.toFixed(2),
+      live.has(row.itemId) ? Number(live.get(row.itemId)).toFixed(2) : '—',
+      signed(row.shift),
+      scaleLabel(row.cutoff),
+      percent(row.chance),
+    ])
+      tr.append(node('td', value));
+  }
+  el('snapshot-body').replaceChildren(table);
+}
+input('prediction-file').onchange = async () => {
+  const f = input('prediction-file').files[0],
+    current = state;
+  input('prediction-file').value = '';
+  if (!f || !current) return;
+  try {
+    const saved = importForecasts(await f.text(), current.data);
+    if (state !== current) return;
+    state.snapshot = saved;
+    renderSnapshot();
+    const details = /** @type {HTMLDetailsElement} */ (el('snapshot'));
+    details.open = true;
+    details.scrollIntoView({ block: 'nearest' });
+    el('status').textContent = 'Opened ' + saved.length + ' saved predictions.';
+  } catch (e) {
+    if (state === current) el('status').textContent = e.message;
+  }
+};
