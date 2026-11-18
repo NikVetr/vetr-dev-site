@@ -312,12 +312,14 @@ export function showDetail({
     'logit-point': 'Your ratings condition the joint model on the logit scale.',
     'ordinal-probit': 'Your rating intervals update the latent scores and component weights.',
     'latent-class': 'Your ratings update the taste-class weights used to mix the class distributions.',
+    'class-similarity':
+      'Your ratings update the taste classes. The model then shifts the probabilities using how much you liked similar films compared with what your other ratings predicted.',
   };
   el('formula').textContent =
     (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
     'Each mean weights the rating values by their probabilities. Surprise is your mean minus the catalog mean.';
   const gaussian =
-    kind === 'latent-class'
+    kind === 'latent-class' || kind === 'class-similarity'
       ? (catalog.models.reference ??
         catalog.models[catalog.selection?.ordinalModel] ??
         Object.values(catalog.models).find((m) => m.kind === 'ordinal-probit'))

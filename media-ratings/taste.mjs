@@ -10,9 +10,12 @@ export function tasteProfile(
   existing = null,
 ) {
   if (!key) return null;
-  const model = catalog.models[key];
+  const selected = catalog.models[key];
+  const model = selected.kind === 'class-similarity' ? catalog.models[selected.base] : selected;
   if (model.kind !== 'latent-class') throw new Error('Taste profiles require a categorical mixture.');
-  const result = existing ?? predict(catalog, { model: key, ratings });
+  const result =
+    existing ??
+    predict(catalog, { model: selected.kind === 'class-similarity' ? selected.base : key, ratings });
   const weights = result.weights.map((w) => w.posterior);
   const information = new Map();
   catalog.items.forEach(({ itemId }, i) => {

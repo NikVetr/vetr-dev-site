@@ -5,9 +5,9 @@ import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
 /** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
-/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components:Component[]}} Model */
-/** @typedef {{name:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
-/** @typedef {{model:string,ratings?:Record<string,number>,threshold?:number,samples?:number}} Request */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number}} Model */
+/** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
+/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number}} Request */
 /** @param {number[]} a */
 const increasing = (a) => Array.isArray(a) && a.every((v, i) => Number.isFinite(v) && (!i || v > a[i - 1]));
 /** @param {unknown} ok @param {string} message */
@@ -41,10 +41,41 @@ export function validateCatalog(catalog) {
     models && typeof models === 'object' && !Array.isArray(models) && Object.keys(models).length,
     'Expected at least one fitted model.',
   );
+  if (catalog.defaultModel !== undefined)
+    requireValue(
+      typeof catalog.defaultModel === 'string' && Object.hasOwn(models, catalog.defaultModel),
+      'The catalog default must name a fitted model.',
+    );
   const d = items.length;
   for (const model of Object.values(models)) {
     requireValue(model && typeof model === 'object', 'Expected model parameters.');
     const { kind, components, cuts } = model;
+    if (kind === 'class-similarity') {
+      const { base, features, ridge, strength } = model;
+      requireValue(
+        typeof base === 'string' && Object.hasOwn(models, base) && models[base]?.kind === 'latent-class',
+        'The similarity model must reference a fitted latent-class model.',
+      );
+      requireValue(
+        Number.isFinite(ridge) && ridge > 0 && Number.isFinite(strength) && strength >= 0,
+        'Invalid similarity ridge penalty or tilt strength.',
+      );
+      requireValue(
+        Array.isArray(features) &&
+          features.length === d &&
+          Array.isArray(features[0]) &&
+          features[0].length > 0 &&
+          features.every(
+            (row) =>
+              Array.isArray(row) &&
+              row.length === features[0].length &&
+              row.every(Number.isFinite) &&
+              dot(row, row) <= 1 + 1e-8,
+          ),
+        'Expected one bounded, equal-length similarity vector per item.',
+      );
+      continue;
+    }
     requireValue(
       Array.isArray(components) &&
         components.length &&
@@ -180,21 +211,65 @@ function summarize(item, probs, prior, personalized, scale, threshold) {
   };
 }
 
-// Each observation updates a class likelihood once. Given the class, target
-// distributions are already tabulated, so no draws or factorizations are needed.
-function predictLatentClass(model, items, scale, obs, values, threshold) {
-  const logWeights = model.components.map((c) =>
-    obs.reduce((sum, i, j) => sum + Math.log(c.probabilities[i][values[j]]), Math.log(c.weight)),
-  );
+function classMasses(logWeights) {
   const max = Math.max(...logWeights);
   requireValue(Number.isFinite(max), 'All classes assign zero probability to these observations.');
-  const masses = logWeights.map((logWeight) => Math.exp(logWeight - max));
-  const total = masses.reduce((a, b) => a + b);
-  const weights = model.components.map((c, g) => ({
+  const masses = logWeights.map((v) => Math.exp(v - max));
+  const total = masses.reduce((a, b) => a + b, 0);
+  return masses.map((v) => v / total);
+}
+
+// Ridge regression in the smaller of observation space and feature space.
+// Both systems yield the same feature coefficients X' (X X' + ridge I)^-1 r.
+function similarityCoefficients(rows, residuals, ridge) {
+  const dual = rows.length <= rows[0].length;
+  const basis = dual ? rows : rows[0].map((_, j) => rows.map((row) => row[j]));
+  const gram = basis.map((a, i) => basis.map((b, j) => dot(a, b) + (i === j ? ridge : 0)));
+  const L = cholesky(gram);
+  requireValue(L, 'Could not factor the similarity ridge system.');
+  const coef = forward(L, dual ? residuals : basis.map((col) => dot(col, residuals)));
+  for (let j = coef.length - 1; j >= 0; j--) {
+    for (let i = j + 1; i < coef.length; i++) coef[j] -= L[i][j] * coef[i];
+    coef[j] /= L[j][j];
+  }
+  if (!dual) return coef;
+  return rows[0].map((_, j) => rows.reduce((s, row, i) => s + coef[i] * row[j], 0));
+}
+
+function predictLatentClass(model, items, scale, obs, values, threshold, similarity = null) {
+  const evidence = model.components.map((c) => obs.map((i, j) => Math.log(c.probabilities[i][values[j]])));
+  const logWeights = model.components.map((c, k) => evidence[k].reduce((s, v) => s + v, Math.log(c.weight)));
+  const post = classMasses(logWeights);
+  const weights = model.components.map((c, k) => ({
     prior: c.weight,
-    posterior: masses[g] / total,
+    posterior: post[k],
     effectiveSamples: null,
   }));
+  let coef;
+  if (similarity && obs.length && obs.length < items.length) {
+    const residuals = obs.map((i, j) => {
+      const leaveOneOut = classMasses(
+        logWeights.map((v, k) => {
+          if (evidence[k][j] !== -Infinity) return v - evidence[k][j];
+          // Imported categorical fits can contain structural zeros.
+          return evidence[k].reduce(
+            (sum, logp, t) => (t === j ? sum : sum + logp),
+            Math.log(model.components[k].weight),
+          );
+        }),
+      );
+      const mean = model.components.reduce(
+        (sum, c, k) => sum + leaveOneOut[k] * dot(c.probabilities[i], scale),
+        0,
+      );
+      return scale[values[j]] - mean;
+    });
+    coef = similarityCoefficients(
+      obs.map((i) => similarity.features[i]),
+      residuals,
+      similarity.ridge,
+    );
+  }
   const observed = new Set(obs);
   const predictions = [];
   for (const [i, item] of items.entries()) {
@@ -205,6 +280,16 @@ function predictLatentClass(model, items, scale, obs, values, threshold) {
       const distribution = c.probabilities[i];
       prior += c.weight * dot(distribution, scale);
       for (let j = 0; j < scale.length; j++) probs[j] += weights[g].posterior * distribution[j];
+    }
+    if (coef) {
+      const tilt = similarity.strength * dot(similarity.features[i], coef);
+      const center = (scale[0] + scale.at(-1)) / 2;
+      let sum = 0;
+      for (let j = 0; j < scale.length; j++) {
+        probs[j] *= Math.exp(Math.min(50, Math.max(-50, tilt * (scale[j] - center))));
+        sum += probs[j];
+      }
+      for (let j = 0; j < scale.length; j++) probs[j] /= sum;
     }
     predictions.push(summarize(item, probs, prior, obs.length > 0, scale, threshold));
   }
@@ -231,7 +316,12 @@ function accumulateNormal(probs, cuts, mean, sd, weight) {
  * @param {Catalog} catalog @param {Request} request */
 export function predict(
   catalog,
-  { model: key, ratings = {}, threshold = defaultCutoff(catalog.scale), samples = 256 },
+  {
+    model: key = catalog.defaultModel,
+    ratings = {},
+    threshold = defaultCutoff(catalog.scale),
+    samples = 256,
+  },
 ) {
   const { items, scale } = catalog;
   const model = Object.hasOwn(catalog.models, key) && catalog.models[key];
@@ -250,6 +340,8 @@ export function predict(
     requireValue(indices.has(id) && scale.includes(v), 'Unknown item or rating outside the scale.');
   const obs = items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => scale.indexOf(ratings[items[i].itemId]));
+  if (model.kind === 'class-similarity')
+    return predictLatentClass(catalog.models[model.base], items, scale, obs, values, threshold, model);
   if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);
   const uniform = model.kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
   const blocks = model.components.map((c) => {

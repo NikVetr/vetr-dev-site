@@ -71,11 +71,12 @@ const sameRatings = (a, b) =>
 function useState(data, key) {
   validateCatalog(data);
   const model =
-    key === 'expanded'
+    data.defaultModel ??
+    (key === 'expanded'
       ? data.selection.model
       : data.models.reference
         ? 'reference'
-        : data.selection?.ordinalModel;
+        : data.selection?.ordinalModel);
   return {
     data,
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
@@ -100,13 +101,27 @@ function install(key, next) {
   for (const btn of el('domains').querySelectorAll('button'))
     btn.setAttribute('aria-pressed', String(btn.dataset.key === key));
   select('model').replaceChildren(
-    ...Object.entries(catalog.models).map(([k, m]) => {
-      const name =
-        m.kind === 'logit-point'
-          ? 'Historical logit'
-          : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') + ' · K=' + m.components.length;
-      return new Option(name + (k === catalog.selection?.model ? ' · CV pick' : ''), k);
-    }),
+    ...Object.entries(catalog.models)
+      .sort(([a], [b]) => Number(b === catalog.defaultModel) - Number(a === catalog.defaultModel))
+      .map(([k, m]) => {
+        const name =
+          m.kind === 'class-similarity'
+            ? 'Ratings + tags'
+            : m.kind === 'logit-point'
+              ? 'Historical logit'
+              : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
+                ' · K=' +
+                m.components.length;
+        return new Option(
+          name +
+            (k === catalog.defaultModel
+              ? ' · default'
+              : !catalog.defaultModel && k === catalog.selection?.model
+                ? ' · CV pick'
+                : ''),
+          k,
+        );
+      }),
   );
   select('model').value = state.model;
   cutoff.replaceChildren(...catalog.scale.map((v) => new Option(scaleLabel(v), String(v))));
@@ -467,26 +482,31 @@ function update(ratings) {
       ' · ' +
       result.predictions.length +
       ' unrated';
+    const model = catalog.models[state.model];
     el('weights').textContent =
-      catalog.models[state.model].kind === 'latent-class'
-        ? 'Taste components each learn a star or response distribution for every title. Each answer updates your class probabilities. The forecast averages each class’s distribution using those probabilities.'
-        : result.weights.length > 1
-          ? 'Taste components (catalog → yours)  ' +
-            result.weights
-              .map((w, i) => i + 1 + '. ' + percent(w.prior) + ' → ' + percent(w.posterior))
-              .join('   ·   ')
-          : '';
+      model.kind === 'class-similarity'
+        ? 'Your ratings update the taste-class probabilities. Ratings above or below what the classes predict also shift the forecasts for similar films. Similarity uses rating patterns and MovieLens tags.'
+        : model.kind === 'latent-class'
+          ? 'Taste components each learn a star or response distribution for every title. Each answer updates your class probabilities. The forecast averages each class’s distribution using those probabilities.'
+          : result.weights.length > 1
+            ? 'Taste components (catalog → yours)  ' +
+              result.weights
+                .map((w, i) => i + 1 + '. ' + percent(w.prior) + ' → ' + percent(w.posterior))
+                .join('   ·   ')
+            : '';
     if (
       result.weights.some((w) => w.posterior > 0.01 && w.effectiveSamples !== null && w.effectiveSamples < 20)
     )
       el('weights').textContent += ' Integration is imprecise for these ratings.';
     selectVisibleItem();
-    const classKey = Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
-    taste = tasteProfile(catalog, state.applied, classKey, classKey === state.model ? next : null);
-    const view =
-      catalog.models[state.model].kind === 'latent-class'
-        ? taste
-        : gaussianProjection(catalog, { model: state.model, ratings: state.applied });
+    const usesClasses = model.kind === 'latent-class' || model.kind === 'class-similarity';
+    const classKey = usesClasses
+      ? state.model
+      : Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
+    taste = tasteProfile(catalog, state.applied, classKey, usesClasses ? next : null);
+    const view = usesClasses
+      ? taste
+      : gaussianProjection(catalog, { model: state.model, ratings: state.applied });
     renderTaste(view, catalog);
     renderSnapshot();
     renderBoards();

@@ -273,3 +273,72 @@ test('latent draws preserve category support and observed cell frequencies', () 
   assert.deepEqual(actual, cells);
   assert.deepEqual(pts, latentPairs(c.models.ordinal, c.scale, 0, 1, cells));
 });
+
+test('similarity tilt uses leave-one-out residuals, preserves class weights and admits repeated features', () => {
+  const items = ['a', 'b', 'target'].map((itemId) => ({ itemId, title: itemId }));
+  const base = {
+    kind: 'latent-class',
+    components: [0.8, 0.2].map((p) => ({
+      weight: 0.5,
+      probabilities: [
+        [1 - p, p],
+        [1 - p, p],
+        [0.5, 0.5],
+      ],
+    })),
+  };
+  const model = {
+    kind: 'class-similarity',
+    base: 'classes',
+    ridge: 0.5,
+    strength: 0.5,
+    features: [[1], [1], [1]],
+  };
+  const catalog = {
+    name: 'Similarity',
+    scale: [0, 2],
+    items,
+    models: { classes: base, hybrid: model },
+    defaultModel: 'hybrid',
+  };
+  assert.deepEqual(submit({ catalog }), submit({ catalog, model: 'classes' }));
+  const ratings = { a: 2, b: 2 };
+  const raw = submit({ catalog, model: 'classes', ratings });
+  // With either rating held out, the other gives mean 1.36 and residual .64.
+  // The identical observed vectors give signal (2 * .64)/(2 + .5).
+  const probability = 1 / (1 + Math.exp(-0.512));
+  for (const features of [
+    [[1], [1], [1]],
+    [
+      [1, 0, 0],
+      [1, 0, 0],
+      [1, 0, 0],
+    ],
+  ]) {
+    model.features = features;
+    const adjusted = submit({ catalog, ratings });
+    assert.deepEqual(raw.weights, adjusted.weights);
+    const p = adjusted.predictions[0];
+    close(p.chance, probability);
+    close(p.expected, 2 * probability);
+    close(p.shift, 2 * probability - 1);
+    close(p.sd, 2 * Math.sqrt(probability * (1 - probability)));
+  }
+  base.components[0].probabilities[0] = [0, 1];
+  base.components[1].probabilities[0] = [1, 0];
+  close(
+    submit({ catalog, ratings: { a: 2 } }).predictions.find((p) => p.itemId === 'target').chance,
+    1 / (1 + Math.exp(-1 / 1.5)),
+  );
+  assert.equal(submit({ catalog, ratings: { ...ratings, target: 0 } }).predictions.length, 0);
+  model.features = [[1], [1], [-1]];
+  assert.ok(submit({ catalog, ratings: { a: 2 } }).predictions.find((p) => p.itemId === 'target').shift < 0);
+  model.base = 'missing';
+  assert.throws(() => submit({ catalog }), /reference a fitted/);
+  model.base = 'classes';
+  model.ridge = 0;
+  assert.throws(() => submit({ catalog }), /penalty/);
+  model.ridge = 0.5;
+  model.features = [[1], [0, 1], [1]];
+  assert.throws(() => submit({ catalog }), /equal-length/);
+});

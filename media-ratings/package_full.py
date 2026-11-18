@@ -10,6 +10,10 @@ from collections import defaultdict
 from pathlib import Path
 from zipfile import ZipFile
 
+import numpy as np
+
+from evaluate_full import film_vectors
+
 
 def package(root, archive, catalog, report):
     data = json.loads(catalog.read_text())
@@ -58,6 +62,22 @@ def package(root, archive, catalog, report):
         iterations=fitted["model"]["iterations"],
     )
     data["selection"]["full"] = json.loads(report.read_text())
+    if data["selection"]["full"]["selected"] != "ratings+tags × 0.5":
+        raise ValueError("The selection report does not match the approved film model")
+    ratings, tags = film_vectors(
+        data["models"]["reference"]["components"][0]["covariance"],
+        np.load(root / "genome.npy"),
+    )
+    # A row dot product is the mean of the two cosine similarities.
+    features = np.concatenate((ratings, tags), axis=1) / np.sqrt(2)
+    data["models"]["ratingsTags"] = {
+        "kind": "class-similarity",
+        "base": "latentClass",
+        "features": features.tolist(),
+        "ridge": 0.5,
+        "strength": 0.5,
+    }
+    data["defaultModel"] = "ratingsTags"
     catalog.write_text(
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"
     )

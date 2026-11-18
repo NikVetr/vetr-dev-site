@@ -24,11 +24,17 @@ def cosine(embedding):
     return x @ x.T
 
 
-def factors(gram):
+def factor_vectors(gram):
     eigen, vectors = np.linalg.eigh(gram)
     embedding = vectors[:, -32:] * np.sqrt(np.maximum(eigen[-32:], 0))
     embedding[np.diag(gram) == 0] = 0
-    return cosine(embedding)
+    norms = np.linalg.norm(embedding, axis=1, keepdims=True)
+    return embedding / np.maximum(norms, 1e-12)
+
+
+def factors(gram):
+    vectors = factor_vectors(gram)
+    return vectors @ vectors.T
 
 
 def dialogue_documents(archive, items):
@@ -73,14 +79,20 @@ def dialogue_kernel(archive, items):
     return factors(cosine(x)), matched
 
 
-def kernels(root, items):
-    cov = np.array(read(root / "large-reference.json")["components"][0]["covariance"])
+def film_vectors(covariance, genome):
+    cov = np.asarray(covariance)
     sd = np.sqrt(np.diag(cov))
-    collaborative = factors(cov / np.outer(sd, sd))
-    x = np.load(root / "genome.npy")
+    collaborative = factor_vectors(cov / np.outer(sd, sd))
+    x = genome.copy()
     observed = x.any(axis=1)
     x[observed] -= x[observed].mean(axis=0)
-    content = factors(x @ x.T)
+    return collaborative, factor_vectors(x @ x.T)
+
+
+def kernels(root, items):
+    covariance = read(root / "large-reference.json")["components"][0]["covariance"]
+    ratings, tags = film_vectors(covariance, np.load(root / "genome.npy"))
+    collaborative, content = ratings @ ratings.T, tags @ tags.T
     hybrid = (collaborative + content) / 2
     dialogue, matched = dialogue_kernel(root / "dialogues.zip", items)
     return {

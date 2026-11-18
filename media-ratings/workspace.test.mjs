@@ -170,6 +170,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
   const p = app.page;
   try {
     await p.locator('#library .entry').first().waitFor();
+    assert.equal(await p.locator('#model').inputValue(), 'ratingsTags');
     assert.equal(await p.locator('#library .entry').count(), 500);
     await p.locator('#search').fill('Harry Potter');
     assert.equal(await p.locator('#library .entry:visible').count(), 8);
@@ -236,6 +237,13 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
       .setInputFiles({ name: 'ratings.csv', mimeType: 'text/csv', buffer: supplied });
     await p.locator('#rated-list .entry').waitFor();
     assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
+    const hybrid = await p.locator('[data-key=expected] .rank').first().innerText();
+    await p.locator('#model').selectOption('latentClass');
+    assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
+    assert.match(await p.locator('#axes').innerText(), /between-class variance/);
+    await p.locator('#model').selectOption('ratingsTags');
+    assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), hybrid);
+    assert.match(await p.locator('#formula').innerText(), /similar films/);
     await p.locator('#model').selectOption('reference');
     assert.match(await p.locator('#axes').innerText(), /latent variance/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);

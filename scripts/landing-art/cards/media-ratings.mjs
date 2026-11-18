@@ -10,7 +10,7 @@ export function build() {
   const colors = ['#659c99', '#b78159', '#898bc1', '#c77593', '#77a26b', '#7191bc', '#b49b60', '#a783aa'];
   const frames = [5, 4, 3, 2, 1, 2, 3, 4].map((rating) => {
     const given = { 2571: rating },
-      model = 'latentClass';
+      model = catalog.defaultModel;
     const result = predict(catalog, { model, ratings: given });
     const { weights, projection } = tasteProfile(catalog, given, model, result);
     const extent = Math.max(...projection.flatMap((a) => a.scores.map(Math.abs)));
