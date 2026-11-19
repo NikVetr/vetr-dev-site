@@ -105,10 +105,9 @@
       </aside>
       <section class="analysis" aria-labelledby="recommendations">
         <div class="analysis-head">
-          <div>
-            <h2 id="recommendations" tabindex="-1">Recommendations</h2>
-            <p id="context">Loading catalog…</p>
-            <p id="choice-note" hidden></p>
+          <div class="recommendations-heading">
+            <i id="recommendation-icon" aria-hidden="true"></i><h2 id="recommendations" tabindex="-1">Recommendations</h2>
+            <button type="button" id="about-open" aria-label="About these recommendations" aria-haspopup="dialog" aria-controls="about-recommendations" disabled>?</button>
           </div>
           <div class="model-controls">
             <button id="facet" aria-haspopup="dialog" aria-controls="recommendation-filters" disabled>Filters</button>
@@ -120,7 +119,8 @@
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
           <div class="detail-head">
-            <div>
+            <figure id="detail-image" hidden></figure>
+            <div class="detail-heading">
               <p class="eyebrow">Selected recommendation</p>
               <h2 id="detail-title" tabindex="-1"></h2>
             </div>
@@ -201,10 +201,18 @@
           </p>
         </details>
         <footer>
-          <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md">Methods and datasets</a><span id="dataset-source"></span>
+          <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md">Methods and datasets</a>
         </footer>
       </section>
     </main>
+    <dialog id="about-recommendations" aria-labelledby="about-title">
+      <header><h2 id="about-title">About these recommendations</h2><form method="dialog"><button aria-label="Close recommendation help">×</button></form></header>
+      <h3>Dataset</h3><p id="context">Loading catalog…</p><div id="dataset-source"></div>
+      <h3>Prediction model</h3><p id="about-model"></p><p id="choice-note" hidden></p>
+      <h3>Rating and ranking</h3><p>Rate entries in the catalog or use Quick rate with the keyboard. Choose Filters to narrow the recommendations. With Auto-update off, choose Update predictions to apply your edits.</p>
+      <p>In Most informative to rate, move the slider toward Information for questions that distinguish taste classes, or toward Familiarity for entries you are more likely to recognize.</p>
+      <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md" target="_blank" rel="noopener noreferrer">Dataset sources and model evaluations ↗</a>
+    </dialog>
     <dialog id="recommendation-filters" aria-labelledby="filter-title">
       <header><h2 id="filter-title">Filter recommendations</h2><button type="button" id="filter-close" aria-label="Close filters">×</button></header>
       <div id="filter-fields"></div>
@@ -218,7 +226,7 @@
       </header>
       <div class="rapid-order">
         <label for="rapid-order">Suggest by</label
-        ><select id="rapid-order"></select>
+        ><select id="rapid-order"></select><span id="rapid-balance"></span>
       </div>
       <div
         id="rapid-card"

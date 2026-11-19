@@ -1,5 +1,6 @@
+import { familiarityControl } from './question-control.mjs';
 import { node, shortAnnotations } from './detail.mjs';
-import { recognitionFor } from './recognition.mjs';
+import { recognitionLink as link, showRecognition } from './recognition.mjs';
 
 function shortcuts(scale, stars) {
   if (stars) return scale.map((v) => ({ digit: Math.ceil(v), shift: !Number.isInteger(v) }));
@@ -9,15 +10,7 @@ function shortcuts(scale, stars) {
   return scale.map((v, i) => ({ digit: sameValue ? v : i < 10 ? (i + 1) % 10 : null, shift: false }));
 }
 
-function link(text, url) {
-  const a = node('a', text);
-  a.href = url;
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  return a;
-}
-
-export function openRapidRating({ catalog, stars, ids, titles, links, criteria, rank, save }) {
+export function openRapidRating({ catalog, stars, ids, titles, links, criteria, rank, familiarity, save }) {
   const dialog = /** @type {HTMLDialogElement} */ (document.getElementById('rapid-rating'));
   if (dialog.open) return;
   const el = (id) => document.getElementById(id);
@@ -34,9 +27,16 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     history = [];
   let current,
     selectedIndex,
-    order,
-    cardVersion = 0;
+    order;
   picker.replaceChildren(...criteria.map(([key, caption]) => new Option(caption, key)));
+  const balance = el('rapid-balance');
+  balance.replaceChildren();
+  balance.hidden = !familiarity || picker.value !== 'info';
+  if (familiarity) balance.append(familiarityControl('rapid-familiarity', familiarity.weight, weight => {
+    familiarity.set(weight);
+    order = null;
+    advance();
+  }));
   const focusCard = () => stage.focus({ preventScroll: true });
   const labelAt = (i) => String(catalog.scaleLabels?.[i] ?? scale[i]) + (stars ? ' ★' : '');
   el('rapid-instructions').textContent = stars
@@ -64,14 +64,13 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
   }
   function present(id, lastIndex = null) {
     current = id;
-    const version = ++cardVersion,
-      item = items.get(id);
+    const item = items.get(id);
     const imageSlot = el('rapid-image'),
       description = el('rapid-description'),
       article = el('rapid-article');
-    imageSlot.replaceChildren();
-    imageSlot.hidden = true;
-    description.textContent = '';
+    const reference = links?.[id];
+    if (stage.dataset.id !== id || !item) description.textContent = '';
+    showRecognition(imageSlot, reference, titles.get(id), text => { description.textContent = text; });
     article.replaceChildren();
     back.disabled = !history.length;
     skip.disabled = !item;
@@ -95,54 +94,8 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
       ? [catalog.responsePrompt, shortAnnotations(item.annotations ?? {})].filter(Boolean).join(' · ')
       : '';
     if (!item) return;
-    function showImages(photos) {
-      const [photo, ...fallback] = photos;
-      if (!photo || !dialog.open || version !== cardVersion) return;
-      const img = node('img');
-      img.alt = photo.title + ' · ' + titles.get(id);
-      img.referrerPolicy = 'no-referrer';
-      img.onload = () => {
-        if (version === cardVersion && dialog.open) imageSlot.hidden = false;
-      };
-      img.onerror = () => showImages(fallback);
-      const source = link('', photo.sourceUrl);
-      source.ariaLabel = photo.title + ' · image source';
-      source.append(img);
-      const credit = node('figcaption');
-      if (photo.caption) credit.append(node('strong', photo.caption), ' · ');
-      credit.append(link(photo.credit || 'Image source', photo.sourceUrl));
-      if (photo.license)
-        credit.append(' · ', photo.licenseUrl ? link(photo.license, photo.licenseUrl) : photo.license);
-      imageSlot.replaceChildren(source, credit);
-      img.src = photo.url;
-    }
-    const reference = links?.[id];
-    if (reference?.sourceUrl) {
-      article.append(link(reference.label + ' ↗', reference.sourceUrl));
-      if (reference.imageUrl)
-        showImages([
-          {
-            url: reference.imageUrl,
-            sourceUrl: reference.sourceUrl,
-            title: titles.get(id),
-            credit: reference.label,
-          },
-        ]);
-    }
-    const wiki = reference?.wikipedia;
-    if (wiki) {
-      article.append(link('Wikipedia ↗', wiki));
-      Promise.resolve(reference.recognition ?? recognitionFor(wiki))
-        .then((card) => {
-          if (!dialog.open || version !== cardVersion || !card) return;
-          description.textContent = card.description;
-          showImages([card.poster, card.image].filter(Boolean));
-        })
-        .catch(() => {
-          if (version === cardVersion && dialog.open)
-            description.textContent = 'Article preview unavailable.';
-        });
-    }
+    if (reference?.sourceUrl) article.append(link(reference.label + ' ↗', reference.sourceUrl));
+    if (reference?.wikipedia) article.append(link('Wikipedia ↗', reference.wikipedia));
   }
   function accept(i) {
     if (!current || i === null) return;
@@ -171,12 +124,13 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
   skip.onclick = pass;
   back.onclick = previous;
   picker.onchange = () => {
+    balance.hidden = !familiarity || picker.value !== 'info';
     order = null;
     advance();
     focusCard();
   };
   dialog.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.metaKey || e.isComposing || e.target === picker) return;
+    if (e.ctrlKey || e.altKey || e.metaKey || e.isComposing || e.target === picker || e.target instanceof HTMLInputElement) return;
     if (
       e.repeat &&
       (e.key === 'Enter' ||
@@ -213,7 +167,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     }
   };
   dialog.onclose = () => {
-    ++cardVersion;
+    showRecognition(el('rapid-image'), null, '');
     dialog.onkeydown = null;
     dialog.onclose = null;
     save(answers);

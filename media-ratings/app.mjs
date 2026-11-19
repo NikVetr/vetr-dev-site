@@ -2,7 +2,8 @@ import { recommendationFilters } from './filters.mjs';
 import { openRapidRating } from './rapid.mjs';
 import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
-import { projectClasses, tasteProfile } from './taste.mjs';
+import { familiarityControl } from './question-control.mjs';
+import { projectClasses, tasteProfile, questionScores } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
 import {
@@ -19,7 +20,7 @@ import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-const api = { submit, tasteProfile, rankChanges, preferenceFingerprint, gaussianProjection,
+const api = { submit, tasteProfile, questionScores, rankChanges, preferenceFingerprint, gaussianProjection,
   importRatings, importRatingEntries, importForecasts, ratingsCSV, forecastsCSV };
 Object.assign(window, { RatingPrediction: api, MediaRatings: api });
 const states = new Map();
@@ -60,10 +61,7 @@ const panels = [
   {
     key: 'information',
     title: 'Most informative to rate',
-    hint: 'bits',
-    score: (p) =>
-      ((state.weightByFamiliarity && taste?.weightedInformation) || taste?.information)?.get(p.itemId) ?? 0,
-    format: (n) => scoreText(n, 3),
+    hint: 'Question score',
   },
   {
     key: 'expected',
@@ -99,7 +97,7 @@ function useState(data, key) {
     data,
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
     threshold: defaultCutoff(data.scale),
-    weightByFamiliarity: true,
+    familiarityWeight: 0.5,
     directions: { ratingChange: 'up', rankChange: 'up' },
     fingerprintViews: new Map(),
     draftDates: Object.create(null),
@@ -150,9 +148,10 @@ function install(key, next) {
   }
   for (const btn of el('domains').querySelectorAll('button'))
     btn.setAttribute('aria-pressed', String(btn.dataset.key === domain));
-  el('domains')
-    .querySelector('button[aria-pressed=true]')
-    .setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
+  const domainButton = el('domains').querySelector('button[aria-pressed=true]');
+  domainButton.setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
+  el('recommendation-icon').textContent = domainButton.querySelector('i').textContent;
+  input('about-open').disabled = false;
   revealCatalogButton();
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
@@ -200,7 +199,7 @@ function install(key, next) {
   if (source) {
     const link = node('a', source.title);
     link.href = source.url;
-    attribution.append(' · ', link);
+    attribution.append(link);
     if (source.author) attribution.append(' · ' + source.author);
     if (source.license && source.licenseUrl) {
       const license = node('a', source.license);
@@ -208,6 +207,14 @@ function install(key, next) {
       attribution.append(' · ', license);
     }
     if (source.notes) attribution.append(node('p', source.notes));
+  }
+  const creditDocs = { expanded: 'creator-credits.md', tv: 'creator-credits.md', anime: 'book-anime-data.md', books: 'book-anime-data.md' };
+  if (Object.hasOwn(creditDocs, key)) {
+    const credits = node('a', 'Creator credit sources and coverage');
+    credits.href = 'https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/' + creditDocs[key];
+    const sources = node('p');
+    sources.append(credits);
+    attribution.append(sources);
   }
   el('distribution-title').textContent = catalog.responsePrompt
     ? 'Response distribution'
@@ -228,6 +235,7 @@ function install(key, next) {
   rebuildBaseline();
   update(input('auto').checked);
 }
+el('about-open').onclick = () => /** @type {HTMLDialogElement} */ (el('about-recommendations')).showModal();
 function showValidation(selection) {
   const details = el('validation');
   const validRows = (rows) =>
@@ -425,8 +433,12 @@ function facets(a) {
       podcasts: 'Topic',
     }[catalog.domain] ?? 'Genre']: a.genres,
     Tag: a.tags,
-    [active === 'albums' ? 'Artist' : active === 'boardgames' ? 'Brand' : 'Author']:
+    [creditLabel('authors')]:
       a.authors ?? (a.author ? [a.author] : []),
+    Director: a.directors,
+    [creditLabel('cast')]: a.cast,
+    Illustrator: a.illustrators, Translator: a.translators, Editor: a.editors, Creator: a.creators,
+    Studio: a.studios,
     Platform: a.platforms,
     Mode: a.modes,
     Developer: a.developers,
@@ -484,12 +496,32 @@ function setupFilters() {
   ])
     if (catalog.items.some((it) => Number.isFinite(it.annotations?.[key])))
       select('sort').add(new Option(label, key));
+  for (const key of Object.keys(creditSorts)) {
+    if (catalog.items.some(it => creditValues(it.annotations ?? {}, key).length))
+      select('sort').add(new Option(creditLabel(key) + ' A–Z', key));
+  }
+}
+const creditSorts = {
+  authors: 'Author', directors: 'Director', cast: 'Cast', studios: 'Studio', publishers: 'Publisher',
+  creators: 'Creator', illustrators: 'Illustrator', translators: 'Translator', editors: 'Editor',
+};
+function creditLabel(key) {
+  if (key === 'authors') return { albums: 'Artist', boardgames: 'Brand' }[active] ?? 'Author';
+  if (key === 'cast' && active === 'anime') return 'Voice cast';
+  return creditSorts[key];
+}
+function creditValues(annotations, key) {
+  return annotations[key] ?? (key === 'authors' && annotations.author ? [annotations.author] : []);
 }
 function sortCatalog() {
   const key = select('sort').value;
   const sorted = [...entries.keys()].sort((a, b) => {
     if (key === 'title') return titles.get(a).localeCompare(titles.get(b));
     if (key === 'mean') return baseline.get(b).expected - baseline.get(a).expected;
+    if (Object.hasOwn(creditSorts, key)) {
+      const left = creditValues(metadata.get(a), key)[0], right = creditValues(metadata.get(b), key)[0];
+      return Number(!left) - Number(!right) || (left ?? '').localeCompare(right ?? '') || titles.get(a).localeCompare(titles.get(b));
+    }
     return (metadata.get(b)[key] ?? 0) - (metadata.get(a)[key] ?? 0);
   });
   const empty = el('empty-list');
@@ -603,9 +635,8 @@ input('quick-session').onclick = () => {
     .map((it) => it.itemId)
     .filter((id) => !Object.hasOwn(state.draft, id) && filters.matchesRatingItem(id));
   const criteria = [];
-  if (taste?.weights.length > 1) {
-    if (taste.weightedInformation) criteria.push(['familiarInfo', 'Information × familiarity']);
-    criteria.push(['info', 'Most informative']);
+  if (taste && (taste.weights.length > 1 || taste.familiarity)) {
+    criteria.push(['info', taste.familiarity ? 'Information and familiarity' : 'Most informative']);
   }
   if (catalog.items.some((it) => Number.isFinite(it.annotations?.ratingCount)))
     criteria.push(['count', catalog.activityCountLabel ?? 'Most rated']);
@@ -640,8 +671,8 @@ input('quick-session').onclick = () => {
     const profile = reuse
       ? taste
       : tasteProfile(catalog, ratings, classKey, null, false, volunteered, ratedOn);
-    const info = criterion === 'familiarInfo' ? profile.weightedInformation : profile.information;
-    return [...ids].filter((id) => info.has(id)).sort((a, b) => info.get(b) - info.get(a));
+    const info = questionScores(profile, opened.familiarityWeight);
+    return [...ids].filter((id) => info.has(id)).sort((a, b) => info.get(b) - info.get(a) || a.localeCompare(b));
   }
   openRapidRating({
     catalog,
@@ -651,6 +682,10 @@ input('quick-session').onclick = () => {
     links: state.links,
     criteria,
     rank,
+    familiarity: taste?.familiarity ? {
+      weight: opened.familiarityWeight,
+      set(weight) { opened.familiarityWeight = weight; renderBoards(true); },
+    } : null,
     save(answers) {
       if (!answers.size) return;
       for (const [id, a] of answers) {
@@ -735,6 +770,11 @@ function update(applyDraft = true) {
       result.predictions.length +
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
+    el('about-model').textContent = select('model').selectedOptions[0].textContent + '. ' +
+      (model.kind === 'class-similarity' ? 'Your responses update learned taste classes. Similar items also influence each forecast.' + (isFilm(active) && state.model === 'personalized' ? ' Film similarity uses ratings, tags and shared cast, directors and studios.' : '')
+      : model.kind === 'latent-class' ? 'Your answers update the probability of each learned taste class. Their rating distributions combine into each forecast.'
+      : model.kind === 'logit-point' ? 'The model conditions a multivariate Gaussian on your transformed ratings.'
+      : 'The model conditions on the latent intervals corresponding to your ratings and combines the component forecasts.');
     const choiceNote = el('choice-note');
     const notes = catalog.activityNote ? [catalog.activityNote] : [];
     choiceNote.hidden = !notes.length && !model.titleChoice && !model.ratingYear;
@@ -757,7 +797,7 @@ function update(applyDraft = true) {
     el('weights').textContent =
       model.kind === 'class-similarity'
         ? 'Your ratings update the taste-class probabilities. Ratings above or below what those classes predict also shift forecasts for similar ' +
-          (isFilm(active) ? 'films, using rating patterns and MovieLens tags.' : 'entries.')
+          (isFilm(active) ? (state.model === 'personalized' ? 'films, using rating patterns, MovieLens tags and shared credits.' : 'films, using rating patterns and MovieLens tags.') : 'entries.')
         : model.kind === 'latent-class'
           ? 'Taste components each learn a star or response distribution for every title. Each answer updates your class probabilities. The forecast averages each class’s distribution using those probabilities.'
           : result.weights.length > 1
@@ -838,7 +878,7 @@ function renderFingerprint() {
     result.predictions,
   );
 }
-function recommendationHeader(spec, title, count, isShift, weighted) {
+function recommendationHeader(spec, title, count, isShift) {
   const head = node('div');
   head.className = 'board-head';
   const heading = node('h3', title);
@@ -872,29 +912,15 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     head.append(button);
   }
   if (spec.key === 'information') {
-    const label = node('label'),
-      check = node('input');
-    check.type = 'checkbox';
-    check.id = 'weight-familiarity';
-    check.disabled = !taste?.weightedInformation || taste.weights.length < 2;
-    check.checked = weighted;
-    label.className = 'familiarity-option';
-    check.setAttribute('aria-label', 'Weight by familiarity');
-    const caption = node('span', 'familiarity');
-    const prefix = node('span', 'Weight by ');
-    prefix.className = 'weight-prefix';
-    caption.prepend(prefix);
-    label.append(check, caption);
-    label.title = check.disabled
-      ? 'Item response counts are unavailable for this catalog.'
-      : catalog.activityNote
-        ? 'Weight by the fraction of accounts with this recorded action.'
-        : 'Use the fraction of catalog respondents who rated each entry as a proxy for familiarity.';
-    head.append(label);
+    if (taste?.familiarity) head.append(familiarityControl('weight-familiarity', state.familiarityWeight, weight => {
+      state.familiarityWeight = weight;
+      renderBoards(true);
+      el('weight-familiarity').focus({ preventScroll: true });
+    }));
   } else head.append(node('small', count + ' · ' + spec.hint));
   return head;
 }
-function recommendationRow(p, index, spec, isShift, ranks, weighted) {
+function recommendationRow(p, index, spec, isShift, ranks) {
   const btn = node('button');
   btn.className = 'rank';
   btn.tabIndex = index === 0 ? 0 : -1;
@@ -926,14 +952,10 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
       ? 'Catalog rank → your rank among these unrated entries'
       : 'Catalog mean → your mean (change)';
   }
-  if (spec.key === 'information' && weighted)
-    score.title =
-      scoreText(taste.information.get(p.itemId), 3) +
-      ' bits × ' +
-      metadata.get(p.itemId).ratingCount.toLocaleString() +
-      ' / ' +
-      catalog.fit.users.toLocaleString() +
-      ' respondents';
+  if (spec.key === 'information') {
+    score.title = scoreText(taste.information.get(p.itemId), 3) + ' bits of information';
+    if (taste.familiarity) score.title += ' · familiarity percentile ' + Math.round(100 * taste.familiarity.get(p.itemId));
+  }
   pos.className = 'rank-index';
   score.className = 'score';
   btn.append(pos, node('span', titles.get(p.itemId)));
@@ -964,7 +986,7 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
   return row;
 }
 const fillRankings = new WeakMap();
-function renderBoards() {
+function renderBoards(informationOnly = false) {
   closeRatingChoices();
   const host = el('boards');
   const positions = new Map(
@@ -974,9 +996,10 @@ function renderBoards() {
     ]),
   );
   ratingObserver?.disconnect();
-  const visible = result.predictions.filter((p) => filters.matches(p.itemId));
-  const rankMovements = rankChanges(visible);
-  const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
+  const visible = informationOnly ? [] : result.predictions.filter((p) => filters.matches(p.itemId));
+  const rankMovements = informationOnly ? null : rankChanges(visible);
+  const questions = taste ? questionScores(taste, state.familiarityWeight) : null;
+  const weighted = Boolean(taste?.familiarity && state.familiarityWeight > 0);
   const fragment = document.createDocumentFragment();
   const activity = binary();
   const shown = activity
@@ -1002,7 +1025,12 @@ function renderBoards() {
         )
     : panels;
   host.classList.toggle('activity-boards', activity);
-  for (const spec of shown) {
+  for (const original of shown) {
+    if (informationOnly && original.key !== 'information') continue;
+    const spec = original.key === 'information' ? {
+      ...original, score: p => (weighted ? questions : taste?.information)?.get(p.itemId) ?? 0,
+      format: n => weighted ? Math.round(n * 100) + '/100' : scoreText(n, 3),
+    } : original;
     const board = node('section'),
       list = node('div');
     board.className = 'board';
@@ -1023,9 +1051,8 @@ function renderBoards() {
       const why = node(
         'p',
         weighted
-          ? catalog.activityNote
-            ? 'Information gain in bits × the share of accounts with the recorded action.'
-            : 'Information gain in bits × the share of respondents who rated each entry.'
+          ? (state.familiarityWeight === 1 ? 'Ranked by estimated familiarity.' : 'Blends information and familiarity ranks.')
+            + ' Familiarity uses past response frequency and similarity to entries you rated.'
           : 'Expected information in bits about ' +
               taste.weights.length +
               ' taste classes, given your applied ratings.',
@@ -1043,13 +1070,13 @@ function renderBoards() {
           ? orderScore(p) > 0
           : spec.key === 'information'
             ? !!taste &&
-              taste.weights.length > 1 &&
+              (taste.weights.length > 1 || weighted) &&
               !Object.hasOwn(state.draft, p.itemId) &&
               filters.matchesRatingItem(p.itemId)
             : true,
       )
-      .sort((a, b) => orderScore(b) - orderScore(a));
-    board.prepend(recommendationHeader(spec, title, items.length, isShift, weighted));
+      .sort((a, b) => orderScore(b) - orderScore(a) || (spec.key === 'information' ? a.itemId.localeCompare(b.itemId) : 0));
+    board.prepend(recommendationHeader(spec, title, items.length, isShift));
     if (!items.length) {
       const msg = !result.predictions.length
         ? 'All entries rated. Clear one to predict it.'
@@ -1069,7 +1096,7 @@ function renderBoards() {
     function fill(stop) {
       const rows = document.createDocumentFragment();
       while (rendered < Math.min(items.length, stop)) {
-        const row = recommendationRow(items[rendered], rendered, spec, isShift, ranks, weighted);
+        const row = recommendationRow(items[rendered], rendered, spec, isShift, ranks);
         rows.append(row);
         if (list.isConnected && spec.key === 'information') ratingObserver.observe(row);
         rendered++;
@@ -1077,7 +1104,7 @@ function renderBoards() {
       list.append(rows);
       if (rendered === items.length) list.onscroll = null;
     }
-    const position = positions.get(spec.key);
+    const position = informationOnly ? null : positions.get(spec.key);
     fill(items.length <= 600 ? items.length : position?.top ? Math.max(100, position.count) : 100);
     if (rendered < items.length) {
       fillRankings.set(list, fill);
@@ -1087,8 +1114,9 @@ function renderBoards() {
     }
     fragment.append(board);
   }
-  host.replaceChildren(fragment);
-  for (const list of host.querySelectorAll('.ranks'))
+  if (informationOnly) host.querySelector('.information').replaceWith(fragment);
+  else host.replaceChildren(fragment);
+  for (const list of informationOnly ? [] : host.querySelectorAll('.ranks'))
     list.scrollTop = positions.get(list.getAttribute('data-key'))?.top ?? 0;
   const info = host.querySelector('.information .ranks');
   ratingObserver = new IntersectionObserver(
@@ -1267,13 +1295,6 @@ el('boards').onclick = (event) => {
 };
 el('boards').onchange = (event) => {
   const radio = event.target;
-  if (radio instanceof HTMLInputElement && radio.id === 'weight-familiarity') {
-    state.weightByFamiliarity = radio.checked;
-    renderBoards();
-    el('boards').querySelector('.information .ranks').scrollTop = 0;
-    el('weight-familiarity').focus({ preventScroll: true });
-    return;
-  }
   if (!(radio instanceof HTMLInputElement) || radio.type !== 'radio') return;
   if (radio.closest('#threshold')) {
     setCutoff(Number(radio.value));
@@ -1393,8 +1414,9 @@ async function openCatalog(key, file = null, replace = false) {
     let s = file ? null : states.get(key);
     if (!s) {
       el('status').textContent = 'Loading catalog…';
-      const [data, references, context] = file
-        ? [JSON.parse(await file.text()), null, null]
+      const creditsFile = { expanded: 'film-creators', tv: 'tv-creators', anime: 'anime-credits', books: 'books-credits' }[key];
+      const [data, references, context, credits] = file
+        ? [JSON.parse(await file.text()), null, null, null]
         : await Promise.all([
             readJSON(key + '.json'),
             key === 'expanded'
@@ -1403,6 +1425,7 @@ async function openCatalog(key, file = null, replace = false) {
                 ? readOptionalJSON('destinations-links.json')
                 : null,
             key === 'expanded' ? readOptionalJSON('film-context.json') : null,
+            creditsFile ? readOptionalJSON(creditsFile + '.json') : null,
           ]);
       if (seq !== revision) return;
       if (key === 'expanded') {
@@ -1422,6 +1445,12 @@ async function openCatalog(key, file = null, replace = false) {
             it.annotations = { ...it.annotations, certificate };
         }
       }
+      if (credits?.data) {
+        for (const item of data.items) {
+          const credit = credits.data[item.itemId];
+          if (credit) item.annotations = { ...item.annotations, ...credit };
+        }
+      }
       s = useState(data, key);
       s.links = references?.data;
       if (!file && data.sourceLabel && !s.links) {
@@ -1439,7 +1468,7 @@ async function openCatalog(key, file = null, replace = false) {
         );
       }
       s.linkError = references?.error;
-      s.contextError = context?.error ? 'Film finances and familiarity counts unavailable.' : null;
+      s.contextError = [context?.error && 'Film finances and familiarity counts unavailable.', credits?.error && 'Creator credits unavailable.'].filter(Boolean).join(' ');
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';
         el('custom-domain').hidden = false;

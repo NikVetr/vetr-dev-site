@@ -404,18 +404,19 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
   const p = app.page;
   try {
     const firstInfo = p.locator('.info-row').first();
-    const familiar = p.getByRole('checkbox', { name: 'Weight by familiarity' });
+    const familiar = p.locator('#weight-familiarity');
     await firstInfo.waitFor();
-    assert.ok(await familiar.isChecked());
-    assert.equal(await firstInfo.getAttribute('data-id'), '356'); // Forrest Gump
-    await familiar.uncheck();
+    assert.equal(await familiar.inputValue(), '50');
+    await familiar.press('End');
+    assert.equal(await firstInfo.getAttribute('data-id'), '356'); // Most rated in the catalog.
+    await familiar.press('Home');
     assert.equal(await firstInfo.getAttribute('data-id'), '786'); // Eraser
-    await familiar.check();
+    await familiar.fill('50');
     const header = p.locator('.information .board-head');
     assert.equal(await header.locator('small').count(), 0);
     const left = await header.locator('h3').boundingBox(),
       right = await familiar.boundingBox();
-    assert.ok(right.x > left.x + left.width && right.y < left.y + left.height);
+    assert.ok(right.x >= left.x + left.width && right.y < left.y + left.height + 15);
     await yearFilter(p, 1999);
     const from1999 = p.locator('[data-key=expected] .rank');
     assert.ok((await from1999.count()) > 1);
@@ -531,8 +532,8 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     assert.match(await p.locator('#more-metadata dl').innerText(), /Production budget/);
     await p.locator('#domains [data-key=destinations]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
-    assert.ok(await familiar.isChecked());
-    assert.match(await firstInfo.locator('.score').getAttribute('title'), /61,130 respondents/);
+    assert.equal(await familiar.inputValue(), '50');
+    assert.match(await firstInfo.locator('.score').getAttribute('title'), /familiarity percentile/);
     await p.locator('#auto').check();
     const city = p.locator('[data-key=chance] .forecast-row').first();
     const cityId = await city.getAttribute('data-id');
@@ -584,7 +585,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     await p.locator('#auto').uncheck();
     await load(Buffer.from('itemId,rating,source\n' + followed + ',4,volunteered\n'));
     await model.selectOption('latentClass');
-    assert.ok(await note.isHidden());
+    assert.equal(await note.evaluate(el => el.hidden), true);
     await model.selectOption('personalized');
     assert.ok(await p.locator('#pending').isVisible());
     assert.match(await note.innerText(), /picked 1 of 3/);
@@ -615,7 +616,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     await p.locator('#domains [data-key=destinations]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
     assert.equal(await model.locator('option[value=titleChoice]').count(), 0);
-    assert.ok(await note.isHidden());
+    assert.equal(await note.evaluate(el => el.hidden), true);
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -651,7 +652,7 @@ test('dated ratings round-trip and update the catalog prior, rankings and automa
     await p.locator('#apply').click();
     assert.match(await note.innerText(), /uses 2000/);
     const expected = predict(films, {
-      model: 'ratingYear',
+      model: 'personalized', volunteered: [],
       ratings: { 2571: 5, 356: 2 },
       ratedOn: { 2571: '2000-04-05' },
     });
@@ -682,9 +683,8 @@ test('dated ratings round-trip and update the catalog prior, rankings and automa
     await file(Buffer.from('itemId,rating,ratedOn\n2571,5,\n'));
     await p.locator('#auto').check();
     assert.match(await note.innerText(), /Undated/);
-    const undated = await p.locator('[data-key=expected] .forecast-row').first().innerText();
-    await model.selectOption('ratingsTags');
-    assert.equal(await p.locator('[data-key=expected] .forecast-row').first().innerText(), undated);
+    const undated = predict(films, { model: 'personalized', ratings: { 2571: 5, 356: 2 }, volunteered: [] });
+    assert.equal(await p.locator('[data-key=expected] .forecast-row').first().getAttribute('data-id'), undated.predictions[0].itemId);
     assert.equal(await p.locator('.rating-date').count(), 0);
     assert.deepEqual(app.errors, []);
   } finally {
@@ -706,7 +706,11 @@ test('quick rating uses the full catalog, supports undo and attributes prompted 
     assert.equal(await p.locator('.info-row').first().getAttribute('data-id'), first);
     await p.locator('#auto').uncheck();
     await start.click();
-    assert.equal(await p.locator('#rapid-order').inputValue(), 'familiarInfo');
+    assert.equal(await p.locator('#rapid-order').inputValue(), 'info');
+    await p.locator('#rapid-familiarity').press('End');
+    assert.equal(await p.locator('#weight-familiarity').inputValue(), '100');
+    await p.locator('#rapid-familiarity').fill('50');
+    await card.focus();
     assert.equal(await card.getAttribute('data-id'), first);
     assert.equal(await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'), 'Rate 3 ★');
     assert.match(await p.locator('#rapid-progress').innerText(), /500 remaining/);
@@ -954,4 +958,52 @@ test('a catalog address opens its named source and Back restores the ratings ent
     assert.equal(new URL(page.url()).searchParams.has('catalog'), false);
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
+});
+
+test('quick rate and selected recommendations share credited artwork and contextual help', async () => {
+  const session = await openPage('media-ratings/');
+  const { page } = session;
+  try {
+    const dialog = page.locator('#about-recommendations');
+    const open = page.locator('#about-open');
+    await open.click();
+    assert.ok(await dialog.isVisible());
+    assert.match(await dialog.locator('#context').innerText(), /MovieLens 25M/);
+    assert.match(await dialog.locator('#about-model').innerText(), /shared cast/);
+    assert.match(await dialog.locator('#dataset-source a').first().innerText(), /MovieLens terms/);
+    await page.keyboard.press('Escape');
+    assert.ok(await open.evaluate(el => document.activeElement === el));
+    assert.equal(await page.locator('.analysis-head #context, .analysis-head #choice-note').count(), 0);
+    const glyph = await page.locator('#recommendation-icon').textContent();
+    assert.ok(glyph && glyph === await page.locator('#domains [aria-pressed=true] i').textContent());
+
+    // Keep external image availability independent of this navigation and attribution check.
+    await page.route(/^https:\/\/(upload|thumb)\.wikimedia\.org\//, route => route.fulfill({
+      contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="120"><rect width="80" height="120" fill="#268"/></svg>',
+    }));
+    await page.locator('#quick-session').click();
+    const id = await page.locator('#rapid-card').getAttribute('data-id');
+    const quick = page.locator('#rapid-image');
+    await quick.waitFor();
+    const url = await quick.locator('img').getAttribute('src');
+    const credit = await quick.locator('figcaption a').first().getAttribute('href');
+    await page.keyboard.press('Escape');
+    await page.locator('.info-row[data-id="' + id + '"] .rank').click();
+    const detail = page.locator('#detail-image');
+    await detail.waitFor();
+    assert.equal(await detail.locator('img').getAttribute('src'), url);
+    assert.equal(await detail.locator('figcaption a').first().getAttribute('href'), credit);
+    await page.locator('#more-metadata summary').click();
+    assert.match(await page.locator('#more-metadata').innerText(), /Directors/);
+    await page.getByLabel('Catalog sort order').selectOption('directors');
+    await page.locator('#facet').click();
+    await page.locator('#filter-fields summary').getByText('Director', { exact: true }).click();
+    await page.getByRole('searchbox', { name: 'Search director' }).fill('Steven Spielberg');
+    const director = page.locator('#filter-fields').getByRole('checkbox', { name: /^Steven Spielberg / });
+    await director.check();
+    await page.locator('#filter-apply').click();
+    assert.ok(await page.locator('[data-key=expected] .rank').count() < 500);
+    assert.equal(await page.locator('#library .entry:visible').count(), 500);
+    assert.deepEqual(session.errors, []);
+  } finally { await session.close(); }
 });

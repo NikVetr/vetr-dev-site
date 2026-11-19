@@ -1,3 +1,4 @@
+import { showRecognition } from './recognition.mjs';
 import { pairIndex, comparisonGrids } from './evidence.mjs';
 import { latentPairs } from './latent.mjs';
 import { pairPlot } from './charts.mjs';
@@ -292,6 +293,7 @@ export function showDetail({
     oldTitle = detail.dataset.id;
   const previous = oldTitle === p?.itemId ? el('comparison').querySelector('select')?.dataset.chosen : null;
   detail.hidden = !p;
+  showRecognition(el('detail-image'), p ? targets : null, p ? titles.get(p.itemId) : '');
   if (!p) return;
   detail.dataset.id = p.itemId;
   el('detail-title').textContent = titles.get(p.itemId);
@@ -309,6 +311,12 @@ export function showDetail({
     ['Modes', a.modes?.join(' · ')],
     ['Developers', a.developers?.join(' · ')],
     ['Publishers', a.publishers?.join(' · ')],
+    ['Authors', (a.authors ?? (a.author ? [a.author] : [])).join(' · ')],
+    ['Studios', a.studios?.join(' · ')],
+    ['Directors', a.directors?.join(' · ')],
+    [catalog.domain === 'anime' ? 'Voice cast' : 'Cast', a.cast?.join(' · ')],
+    ['Creators', a.creators?.join(' · ')], ['Illustrators', a.illustrators?.join(' · ')],
+    ['Translators', a.translators?.join(' · ')], ['Editors', a.editors?.join(' · ')],
     ['Tags', a.tags?.join(' · ')],
     ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
     ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
