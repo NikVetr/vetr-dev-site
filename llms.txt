@@ -7,7 +7,7 @@ Each entry links the tool's API description: request and result schema, errors, 
 ## Tools with an API
 
 - [Matrix Rain](https://vetr.dev/matrix-rain/api.md) samples reproducible opening and rain frames, with local image, PNG and video support in the browser. CLI `node matrix-rain/cli.mjs request.json`.
-- [Media Ratings](https://vetr.dev/media-ratings/api.md) conditions a fitted ratings catalog on a user's observations and reports star probabilities, shifts and posterior mixture weights. CLI `node media-ratings/cli.mjs request.json`.
+- [Rating Prediction](https://vetr.dev/media-ratings/api.md) conditions a fitted ratings catalog on a user's observations and reports star probabilities, shifts and posterior mixture weights. CLI `node media-ratings/cli.mjs request.json`.
 
 - [Base64 Link Finder](https://vetr.dev/b64/api.md): scan text for nested encoded links and generate layered Base64. Browser: `B64.submit`. CLI: `node b64/cli.mjs request.json`.
 - [Wanderwart](https://vetr.dev/pocket-language-guide/api.md): generate a resolved pocket-language sheet and its printable page plan using the studio solver. Browser: `Wanderwart.submit`. CLI: `node pocket-language-guide/cli.mjs request.json`.

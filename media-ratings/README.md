@@ -1,6 +1,6 @@
-# Fitting and using rating catalogs
+# Rating Prediction
 
-**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between fourteen domains. Recipes offers both Food.com and Taste of Home. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV, books, anime, podcasts, albums, tabletop games, recipes and cocktails use their source rating scales. Video games offer Steam thumbs and Metacritic player scores from 0 to 10. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies.
+**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between fourteen domains. Recipes offers both Food.com and Taste of Home. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV, books, anime, podcasts, albums, tabletop games, recipes and cocktails use their source rating scales. Video games offer Steam thumbs and Metacritic player scores from 0 to 10. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies. You can bookmark or share any built-in catalog, including an alternate source such as Metacritic. The link opens that catalog with a fresh ratings sheet.
 
 Rate a film in half-star increments. The main shelf keeps every title, including ones you have rated. Your rated shelf gives you a second, synchronized place to edit those answers. Search and sort the full catalog on the left. Use **Filters** by the prediction model to narrow recommendations. Select multiple alternatives within a field and combine fields. Dated catalogs also offer an inclusive year range. Enable **Also filter items to rate** to narrow All titles, Quick rate and Most informative to rate. Already rated always shows all your answers. Every supplied rating still contributes to predictions. Drag the divider, or focus it and use the arrow keys, to give either shelf more space. With **Auto-update** off, use **Update predictions** to apply your edits.
 
@@ -117,6 +117,8 @@ The Video games tab offers 1,136 Steam games with 16,654,154 thumbs-up or thumbs
 The 383 TV shows use MovieLens ratings linked to series by IMDb ID. The 1,777 cocktail recipes use reviews of individual mixed drinks on Food.com. [TV and cocktail datasets](tv-cocktail-catalogs.md)
 
 Fanfiction and original web fiction use public AO3 kudos. A work can lack kudos because the reader never saw it. The joint fanfiction model covers 10,466 works, with at least 200 works available in 42 of its 56 fandoms. Search the Fandom filter to see counts and select one or more. Ratings from other fandoms still inform the recommendations. Original web fiction covers 320 works. [Source, selection and held-out evaluation](ao3-catalogs.md)
+
+For Royal Road, an offline importer can fit a catalog from individual half-star reviews. [Sources, data requirements and import instructions](royalroad-data.md)
 
 Subreddits model whether an active account recorded a reply in one of 500 communities in a four-week period in 2014. The highest-probability ranking and both change rankings use this binary event. [Reddit data and validation](subreddit-catalog.md)
 

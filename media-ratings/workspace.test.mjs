@@ -386,7 +386,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#model').selectOption('reference');
     await p
       .locator('#library .entry[data-id="' + id + '"]')
-      .getByRole('radio', { name: '4.5', exact: true })
+      .getByRole('radio', { name: '4.5 stars', exact: true })
       .check();
     assert.match(await p.locator('#axes').innerText(), /latent variance/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
@@ -920,6 +920,38 @@ test('Metacritic scores include both endpoints and stay separate from Steam vote
     await p.locator('#game-dataset').selectOption('metacritic');
     await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
     assert.deepEqual(await values(), ['0', '10']);
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});
+
+test('a catalog address opens its named source and Back restores the ratings entered there', async () => {
+  const app = await openPage('media-ratings/?catalog=metacritic&from=test#top');
+  const page = app.page;
+  const active = key => page.locator(`#domains [data-key="${key}"][aria-pressed="true"]`).waitFor();
+  try {
+    await active('games');
+    assert.equal(await page.locator('#game-dataset').inputValue(), 'metacritic');
+    await page.locator('#quick-session').click();
+    await page.keyboard.press('5');
+    await page.locator('#rapid-rating form button').click();
+    await page.locator('#rated-list .entry').first().waitFor();
+    await page.locator('#domains [data-key="webfiction"]').click();
+    await active('webfiction');
+    assert.equal(new URL(page.url()).searchParams.get('catalog'), 'webfiction');
+    assert.ok(page.url().endsWith('&from=test#top'));
+    await page.goBack();
+    await active('games');
+    assert.equal(await page.locator('#game-dataset').inputValue(), 'metacritic');
+    assert.equal(await page.locator('#rated-list .entry').count(), 1);
+    await page.goForward();
+    await active('webfiction');
+    await page.reload();
+    await active('webfiction');
+    assert.equal(await page.locator('#rated-list .entry').count(), 0);
+    assert.ok(await page.evaluate(() => window['RatingPrediction'] === window['MediaRatings'] && typeof window['RatingPrediction'].submit === 'function'));
+    await page.goto(new URL('?catalog=unknown', page.url()).href);
+    await active('expanded');
+    assert.equal(new URL(page.url()).searchParams.has('catalog'), false);
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });

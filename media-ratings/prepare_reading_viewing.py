@@ -179,7 +179,7 @@ def main():
                              author='Zygmunt Zając' if book else 'Ramazan Turan',
                              license='CC BY-SA 4.0' if book else 'CC BY 4.0',
                              licenseUrl='https://creativecommons.org/licenses/' + ('by-sa' if book else 'by') + '/4.0/',
-                             notes='Subset, metadata and fitted aggregates adapted for Media Ratings.')
+                             notes='Subset, metadata and fitted aggregates adapted for Rating Prediction.')
     for path, data in [(args.out / f'{args.domain}.json', catalog),
                        (args.out / 'validation' / f'{args.domain}.json', dict(**report, sourceCounts=audit))]:
         path.parent.mkdir(parents=True, exist_ok=True)

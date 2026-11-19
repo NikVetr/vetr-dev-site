@@ -19,20 +19,9 @@ import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-Object.assign(window, {
-  MediaRatings: {
-    submit,
-    tasteProfile,
-    rankChanges,
-    preferenceFingerprint,
-    gaussianProjection,
-    importRatings,
-    importRatingEntries,
-    importForecasts,
-    ratingsCSV,
-    forecastsCSV,
-  },
-});
+const api = { submit, tasteProfile, rankChanges, preferenceFingerprint, gaussianProjection,
+  importRatings, importRatingEntries, importForecasts, ratingsCSV, forecastsCSV };
+Object.assign(window, { RatingPrediction: api, MediaRatings: api });
 const states = new Map();
 let active,
   state,
@@ -46,7 +35,7 @@ let active,
   revision = 0;
 const isFilm = (k) => k === 'expanded';
 const halfStars = () =>
-  isFilm(active) || (active === 'tv' && catalog.scale.join(',') === '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5');
+  !catalog.scaleLabels && catalog.scale.join(',') === '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5';
 const wholeStars = () => !catalog.scaleLabels && catalog.scale.join(',') === '1,2,3,4,5';
 const binary = () => Boolean(catalog.responsePrompt && catalog.scale.join(',') === '0,1');
 const entries = new Map();
@@ -143,6 +132,8 @@ new ResizeObserver(revealCatalogButton).observe(el('domains'));
 const sourceMenus = [...document.querySelectorAll('[data-source-domain] > select')]
   .filter(menu => menu instanceof HTMLSelectElement);
 function install(key, next) {
+  for (const dialog of document.querySelectorAll('dialog[open]'))
+    /** @type {HTMLDialogElement} */ (dialog).close();
   active = key;
   state = next;
   catalog = state.data;
@@ -1379,7 +1370,24 @@ async function loadEvidence(key, s) {
   }
   if (s === state) renderDetail();
 }
-async function openCatalog(key, file = null) {
+const publicCatalogs = new Set([
+  ...Array.from(el('domains').querySelectorAll('button[data-key]:not(#custom-domain)'), btn => btn.getAttribute('data-key')),
+  ...sourceMenus.flatMap(menu => Array.from(menu.options, option => option.value)),
+]);
+function catalogFromAddress() {
+  const key = new URL(location.href).searchParams.get('catalog');
+  if (key && publicCatalogs.has(key)) return key;
+  return !key && history.state?.localCatalog && states.has('custom') ? 'custom' : 'expanded';
+}
+function setCatalogAddress(key, replace) {
+  const url = new URL(location.href);
+  const localCatalog = key === 'custom';
+  if (localCatalog || key === 'expanded') url.searchParams.delete('catalog');
+  else url.searchParams.set('catalog', key);
+  if (url.href === location.href && Boolean(history.state?.localCatalog) === localCatalog) return;
+  history[replace ? 'replaceState' : 'pushState']({ localCatalog }, '', url);
+}
+async function openCatalog(key, file = null, replace = false) {
   const seq = ++revision;
   try {
     let s = file ? null : states.get(key);
@@ -1439,7 +1447,10 @@ async function openCatalog(key, file = null) {
       if (seq !== revision) return;
       states.set(key, s);
     }
-    if (seq === revision) install(key, s);
+    if (seq === revision) {
+      install(key, s);
+      setCatalogAddress(key, replace);
+    }
   } catch (e) {
     if (seq === revision) el('status').textContent = 'Could not open catalog. ' + e.message;
   }
@@ -1457,7 +1468,15 @@ input('file').onchange = () => {
   input('file').value = '';
   if (f) void openCatalog('custom', f);
 };
-void openCatalog('expanded');
+window.addEventListener('popstate', () => {
+  const key = catalogFromAddress();
+  if (key !== active) void openCatalog(key, null, true);
+  else {
+    ++revision; // A back navigation can cancel an in-flight switch.
+    if (el('status').textContent === 'Loading catalog…') el('status').textContent = '';
+  }
+});
+void openCatalog(catalogFromAddress(), null, true);
 
 const divider = el('divider'),
   shelves = el('shelves');
