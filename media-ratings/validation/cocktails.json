@@ -2,102 +2,102 @@
   "model": "latentClass",
   "metric": "user-mean category log loss",
   "folds": 3,
-  "validationUsers": 161,
-  "testUsers": 32,
-  "testRatings": 193,
+  "validationUsers": 265,
+  "testUsers": 66,
+  "testRatings": 501,
   "cv": [
     {
       "label": "Latent class, K=8",
-      "logLoss": 0.4935613680719333,
-      "rmse": 0.42364109861429416,
-      "brier": 0.01541768610013048
+      "logLoss": 0.500224887654259,
+      "rmse": 0.43962630606527475,
+      "brier": 0.020269891465620155
     },
     {
       "label": "Latent class, K=4",
-      "logLoss": 0.4950709103312294,
-      "rmse": 0.4241829439218361,
-      "brier": 0.015481216070776233
+      "logLoss": 0.5012557330809215,
+      "rmse": 0.4400684049913768,
+      "brier": 0.020311410140036665
     },
     {
       "label": "Latent class, K=2",
-      "logLoss": 0.49809805909479227,
-      "rmse": 0.4251090753730216,
-      "brier": 0.015609160246296225
+      "logLoss": 0.5033149596918634,
+      "rmse": 0.44093981993350234,
+      "brier": 0.020397531612309085
     },
     {
       "label": "Latent class, K=1",
-      "logLoss": 0.5042634545632314,
-      "rmse": 0.4270655810944812,
-      "brier": 0.01579326065908766
+      "logLoss": 0.5078157536292327,
+      "rmse": 0.44282483071194717,
+      "brier": 0.02057943737921129
     }
   ],
   "holdout": [
     {
       "label": "Latent class, K=1",
-      "logLoss": 0.6959454888932459,
-      "rmse": 0.5302767152078998,
-      "brier": 0.032633333120041075
+      "logLoss": 0.6564871272645435,
+      "rmse": 0.5121594775538078,
+      "brier": 0.02819555726058425
     },
     {
       "label": "Latent class, K=8",
-      "logLoss": 0.6827127978493133,
-      "rmse": 0.5279913454503149,
-      "brier": 0.03252028016139913
+      "logLoss": 0.6399220415563318,
+      "rmse": 0.5061986967293487,
+      "brier": 0.027566513893057944
     }
   ],
   "selectedK": 8,
-  "cvPoolUsers": 1608,
-  "developmentUsers": 1608,
+  "cvPoolUsers": 2480,
+  "developmentUsers": 2480,
   "suppliedRatings": 4,
   "maxTargetRatings": 12,
   "brierThreshold": 4.0,
   "finalFit": {
-    "users": 2009,
-    "ratings": 5975,
-    "iterations": 8,
+    "users": 3099,
+    "ratings": 11634,
+    "iterations": 11,
     "seed": 42
   },
   "splitSensitivity": [
     {
       "selectedK": 8,
-      "testUsers": 37,
-      "testRatings": 253,
+      "testUsers": 73,
+      "testRatings": 544,
       "holdout": [
         {
           "label": "Latent class, K=1",
-          "logLoss": 0.34685579821429396,
-          "rmse": 0.33836931030894135,
-          "brier": 0.007397989822824878
+          "logLoss": 0.5941106565752056,
+          "rmse": 0.48813242722326755,
+          "brier": 0.028412870021068945
         },
         {
           "label": "Latent class, K=8",
-          "logLoss": 0.3422560464745354,
-          "rmse": 0.3333183139442907,
-          "brier": 0.007035709400790906
+          "logLoss": 0.5839126712742493,
+          "rmse": 0.48453115173224987,
+          "brier": 0.027811921794843923
         }
       ],
       "seed": 41
     },
     {
       "selectedK": 8,
-      "testUsers": 40,
-      "testRatings": 226,
+      "testUsers": 78,
+      "testRatings": 555,
       "holdout": [
         {
           "label": "Latent class, K=1",
-          "logLoss": 0.3946908141721678,
-          "rmse": 0.39817507672767294,
-          "brier": 0.01724160259398195
+          "logLoss": 0.5833932491697207,
+          "rmse": 0.5723550559012799,
+          "brier": 0.0358488763020532
         },
         {
           "label": "Latent class, K=8",
-          "logLoss": 0.40043290269166026,
-          "rmse": 0.39809443062920413,
-          "brier": 0.017131337314672708
+          "logLoss": 0.5768357600812313,
+          "rmse": 0.5711937465037167,
+          "brier": 0.03541199895203346
         }
       ],
       "seed": 43
     }
   ],
-  "respondentsWithFiveRatings": 193
+  "respondentsWithFiveRatings": 331
 }

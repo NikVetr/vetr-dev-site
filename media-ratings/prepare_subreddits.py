@@ -55,7 +55,7 @@ def read_panel(archive):
                 raise ValueError(f'Expected eleven four-week periods for {name}')
     if len(counts) != 2046 or len(cohort) < 12000:
         raise ValueError(f'Unexpected source coverage: {len(counts)} communities, {len(cohort)} sampled accounts')
-    names = sorted(counts, key=lambda name: (-counts[name], name))[:120]
+    names = sorted(counts, key=lambda name: (-counts[name], name))[:500]
     accounts = sorted(cohort)[:12000]
     index = {key: i for i, key in enumerate(accounts)}
     panel = np.ones((len(index), len(names)), dtype=np.uint8)
@@ -107,13 +107,14 @@ def main():
         for j, name in enumerate(names)]
     profiles = sparse.csr_matrix(panel)
     print(f'Fitting {len(names)} communities, {len(panel)} active accounts, {np.sum(panel == 2)} positive observations', flush=True)
-    catalog, report = fit_catalog('Reddit · 120 communities', items, [0, 1], profiles)
+    catalog, report = fit_catalog('Reddit · 500 communities', items, [0, 1], profiles)
     catalog.update(domain='subreddits', sourceLabel='SNAP · November 2014', linkLabel='Reddit',
                    scaleLabels=['No reply', 'Replied'], responsePrompt='Did you reply in this community in a four-week period?',
                    activityNote='Estimates a recorded reply during four weeks among active 2014 Reddit commenters. Reading and voting are unobserved.',
                    activityCountLabel='Accounts that replied',
                    source=dict(title='Reddit interaction networks', author='Hamilton, Zhang et al.', url=SOURCE))
-    report.update(communitySelection='120 largest communities by distinct repliers in the preceding four weeks',
+    catalog['legacyRatingCatalogs'] = ['Reddit · 120 communities']
+    report.update(communitySelection='500 largest communities by distinct repliers in the preceding four weeks',
                   observation='At least one outgoing reply to another included account, Nov 3–30, 2014',
                   positiveObservations=int(np.sum(panel == 2)), source=SOURCE,
                   heldOutPositiveRanks=rank_known_activity(panel, profiles, report['selectedK']))

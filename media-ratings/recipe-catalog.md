@@ -1,6 +1,16 @@
 # Recipe ratings
 
-The recipe catalog covers all 100 entries in the Taste of Home list archived by Amir Ali, Stanislaw Matuszewski and Jacek Czupyt in 2023. The UCI release includes the original list position and a shared identifier for reviews of the same recipe. That preserves distinctions such as Cheeseburger Soup and Cheeseburger Paradise Soup. The browser displays the archived title. Its source link opens the publisher's current page when the IDs match. The checked-in catalog includes 95 verified links and the publisher's available course labels. [UCI dataset and citation](https://doi.org/10.24432/C5FG95) · [Taste of Home collection](https://www.tasteofhome.com/collection/our-100-highest-rated-recipes-ever/)
+The Recipes tab opens **1,600 Food.com recipes**. Each of eight courses contributes its 200 most widely reviewed recipes with at least ten distinct reviewers. The training data contain 210,613 individual star ratings from 75,081 people. With four supplied scores, the cross-validated eight-class fit reduced log loss from 0.6624 to 0.6477 on 10,077 further scores from 1,577 held-out people. A course filter can narrow suggestions while a rating from any course contributes to the same forecast. [FoodRS archive](https://huggingface.co/datasets/jiava/foodrs-data) · [Course counts and validation](validation/food.json)
+
+To rebuild, use the FoodRS DuckDB download in the [cocktail source instructions](tv-cocktail-catalogs.md) and run:
+
+```sh
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/prepare_food.py tmp/agent/tv-drinks/foodrs.duckdb media-ratings
+```
+
+## Taste of Home
+
+Choose **Taste of Home** in the recipe catalog selector to use the separate UCI data and its own ratings shelf. That catalog covers all 100 entries in the Taste of Home list archived by Amir Ali, Stanislaw Matuszewski and Jacek Czupyt in 2023. The UCI release includes the original list position and a shared identifier for reviews of the same recipe. That preserves distinctions such as Cheeseburger Soup and Cheeseburger Paradise Soup. The browser displays the archived title. Its source link opens the publisher's current page when the IDs match. The checked-in catalog includes 95 verified links and the publisher's available course labels. [UCI dataset and citation](https://doi.org/10.24432/C5FG95) · [Taste of Home collection](https://www.tasteofhome.com/collection/our-100-highest-rated-recipes-ever/)
 
 Scores range from one to five whole stars. The archive contains 18,182 comments, including 1,696 without a star rating. The fit keeps each person's most recent explicit rating of each recipe. This yields 15,795 ratings from 12,420 people. Only 224 people rated at least five recipes, and 83.7% of the retained ratings were five stars. Predictions describe the scores these reviewers posted for these recipes.
 

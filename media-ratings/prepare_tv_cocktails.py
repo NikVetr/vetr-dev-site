@@ -54,16 +54,20 @@ def clean_name(value):
 
 def cocktail_candidates(connection):
     rows = connection.execute("""
-        SELECT RecipeId::INTEGER, Name, RecipeIngredientParts, RecipeCategory, Images[1], year(DatePublished)
+        SELECT RecipeId::INTEGER, Name, RecipeIngredientParts, RecipeCategory, Images[1], year(DatePublished), RecipeInstructions
         FROM recipes_raw WHERE RecipeCategory IN ('Beverages', 'Punch Beverage')
     """).fetchall()
     candidates = {}
-    for recipe_id, name, ingredients, category, image, year in rows:
+    for recipe_id, name, ingredients, category, image, year, directions in rows:
         title = clean_name(name)
         if recipe_id in NON_COCKTAIL_RECIPES or PREPARATIONS.search(title) or LIQUEUR_PREP.search(title):
             continue
         ingredients = [i for i in (ingredients or []) if not NON_ALCOHOL.search(i)]
-        bases = [key for key, pattern in SPIRIT_PATTERNS.items() if any(pattern.search(i) for i in ingredients)]
+        # Some FoodRS ingredient lists omit entries that are explicit in the directions.
+        # Search ingredient phrases, excluding substitutes, serving vessels and flavorings.
+        phrases = [*ingredients, title, *(directions or [])]
+        phrases = [phrase for phrase in phrases if not NON_ALCOHOL.search(phrase)]
+        bases = [key for key, pattern in SPIRIT_PATTERNS.items() if any(pattern.search(i) for i in phrases)]
         if not bases:
             continue
         slug = unicodedata.normalize('NFKD', title).encode('ascii', 'ignore').decode().lower()
@@ -125,17 +129,17 @@ def tv_candidates(connection, movielens, metadata, imdb: Path):
     return candidates
 
 
-def make_profiles(candidates, observations, min_reviews, limit=None):
+def make_profiles(candidates, observations, min_reviews, distinct_names=True):
     users, item_ids, codes = observations.T
     ids, counts = np.unique(item_ids, return_counts=True)
     ranked = sorted(zip(ids, counts), key=lambda pair: (-pair[1], pair[0]))
     items, index, titles = [], {}, set()
     for key, count in ranked:
-        if count < min_reviews or (limit and len(items) >= limit):
+        if count < min_reviews:
             break
         item = candidates[key]
         label = item['title'].casefold()
-        if label in titles:
+        if distinct_names and label in titles:
             continue
         titles.add(label)
         index[key] = len(items)
@@ -170,8 +174,8 @@ def main():
             SELECT userId, movieId, CAST(rating * 2 AS INTEGER)
             FROM read_csv(?) WHERE movieId IN (SELECT unnest(?))
         """, [str(args.movielens / 'ratings.csv'), list(candidates)]).fetchall()
-        items, profiles = make_profiles(candidates, np.array(rows, dtype=np.int32), min_reviews=10)
-        name, source, scale = 'MovieLens · television series & miniseries', TV_SOURCE, [i / 2 for i in range(1, 11)]
+        items, profiles = make_profiles(candidates, np.array(rows, dtype=np.int32), min_reviews=3)
+        name, source, scale = f'MovieLens · {len(items)} television series & miniseries', TV_SOURCE, [i / 2 for i in range(1, 11)]
         label, link = 'MovieLens 32M', 'TVmaze'
     else:
         db = duckdb.connect(str(args.foodrs), read_only=True, config=options)
@@ -182,8 +186,8 @@ def main():
             QUALIFY row_number() OVER (PARTITION BY AuthorId, RecipeId
                 ORDER BY coalesce(DateModified, DateSubmitted) DESC, ReviewId DESC) = 1
         """, [list(candidates)]).fetchall()
-        items, profiles = make_profiles(candidates, np.array(rows, dtype=np.int32), min_reviews=5, limit=500)
-        name, source, scale = 'Food.com · popular cocktail recipes', DRINK_SOURCE, list(range(1, 6))
+        items, profiles = make_profiles(candidates, np.array(rows, dtype=np.int32), min_reviews=3, distinct_names=False)
+        name, source, scale = f'Food.com · {len(items):,} cocktail recipes', DRINK_SOURCE, list(range(1, 6))
         label = link = 'Food.com'
     db.close()
     catalog, selection = fit_catalog(name, items, scale, profiles)
@@ -197,6 +201,7 @@ def main():
             result = {key: replicate[key] for key in ('selectedK', 'testUsers', 'testRatings', 'holdout')}
             sensitivity.append({**result, 'seed': seed})
         report['splitSensitivity'] = sensitivity
+    catalog['legacyRatingCatalogs'] = ['MovieLens · television series & miniseries' if args.domain == 'tv' else 'Food.com · popular cocktail recipes']
     catalog.update(domain=args.domain, sourceLabel=label, linkLabel=link, source=source)
     report['respondentsWithFiveRatings'] = int(np.sum(np.diff(profiles.indptr) >= 5))
     args.output.mkdir(parents=True, exist_ok=True)
