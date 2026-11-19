@@ -1,0 +1,75 @@
+{
+  "model": "latentClass",
+  "metric": "user-mean category log loss",
+  "folds": 3,
+  "validationUsers": 949,
+  "testUsers": 230,
+  "testRatings": 656,
+  "cv": [
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 0.87397536678953,
+      "rmse": 0.7835494628074529,
+      "brier": 0.08470556405940576
+    },
+    {
+      "label": "Latent class, K=16",
+      "logLoss": 0.8774667475321178,
+      "rmse": 0.7851235642847999,
+      "brier": 0.08479448642508955
+    },
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 0.8778626195343127,
+      "rmse": 0.7821270422256666,
+      "brier": 0.08456008037209359
+    },
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 0.8779728792783401,
+      "rmse": 0.7853179684072189,
+      "brier": 0.0848244490697366
+    },
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.8843453976723787,
+      "rmse": 0.7861311681332402,
+      "brier": 0.08496563262464145
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.8530895164301655,
+      "rmse": 0.814356688794874,
+      "brier": 0.0877827976512704
+    },
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 0.8479435296055213,
+      "rmse": 0.8101589158145837,
+      "brier": 0.08740203001364723
+    }
+  ],
+  "selectedK": 4,
+  "cvPoolUsers": 171713,
+  "developmentUsers": 171713,
+  "suppliedRatings": 4,
+  "maxTargetRatings": 12,
+  "brierThreshold": 4.0,
+  "finalFit": {
+    "users": 214641,
+    "ratings": 252018,
+    "iterations": 50,
+    "seed": 42
+  },
+  "respondentsWithFiveRatings": 1179,
+  "groupCoverage": {
+    "Board Games": 489,
+    "Card Games": 397,
+    "Tile Games": 160,
+    "Stacking Games": 49
+  },
+  "validationSampling": "All development respondents with five or more catalog ratings",
+  "eligibleItems": 14656
+}

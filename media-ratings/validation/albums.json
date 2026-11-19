@@ -1,0 +1,87 @@
+{
+  "model": "latentClass",
+  "metric": "user-mean category log loss",
+  "folds": 3,
+  "validationUsers": 810,
+  "testUsers": 210,
+  "testRatings": 808,
+  "cv": [
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 1.0285887366226676,
+      "rmse": 0.9581366109969581,
+      "brier": 0.1200318005568447
+    },
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 1.0288961700097383,
+      "rmse": 0.9610127267805338,
+      "brier": 0.12016450861455157
+    },
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 1.0291697341136141,
+      "rmse": 0.9626798455367166,
+      "brier": 0.12066027326697329
+    },
+    {
+      "label": "Latent class, K=16",
+      "logLoss": 1.0333047789548613,
+      "rmse": 0.9643884399825421,
+      "brier": 0.12095345656589425
+    },
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 1.0473525423455166,
+      "rmse": 0.9696666862119672,
+      "brier": 0.12179407119431021
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 1.0923424363712206,
+      "rmse": 0.9299393428486517,
+      "brier": 0.11414985033373048
+    },
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 1.0660468129887957,
+      "rmse": 0.9135968387266346,
+      "brier": 0.11107507991483966
+    }
+  ],
+  "selectedK": 2,
+  "cvPoolUsers": 100556,
+  "developmentUsers": 100556,
+  "suppliedRatings": 4,
+  "maxTargetRatings": 12,
+  "brierThreshold": 4.0,
+  "finalFit": {
+    "users": 125695,
+    "ratings": 147285,
+    "iterations": 25,
+    "seed": 42
+  },
+  "respondentsWithFiveRatings": 1020,
+  "groupCoverage": {
+    "Pop": 311,
+    "Rock": 251,
+    "Classical": 251,
+    "Latin Music": 250,
+    "New Age": 189,
+    "Jazz": 151,
+    "Country": 150,
+    "Dance & Electronic": 123,
+    "R&B": 72,
+    "Alternative Rock": 72,
+    "Folk": 67,
+    "Metal": 65,
+    "Rap & Hip-Hop": 59,
+    "Gospel": 44,
+    "Blues": 24,
+    "Reggae": 8
+  },
+  "validationSampling": "All development respondents with five or more catalog ratings",
+  "eligibleItems": 62744
+}
