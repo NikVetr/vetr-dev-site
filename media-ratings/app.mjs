@@ -61,7 +61,6 @@ const panels = [
   {
     key: 'information',
     title: 'Most informative to rate',
-    hint: 'Question score',
   },
   {
     key: 'expected',
@@ -221,11 +220,7 @@ function install(key, next) {
     : 'Rating distribution';
   el('scale-help').textContent =
     catalog.responsePrompt ??
-    (halfStars()
-      ? 'Choose a half or whole star.'
-      : catalog.scaleLabels
-        ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
-        : 'Choose a value on the rating scale.');
+    (catalog.scaleLabels ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ') : '');
   input('search').value = '';
   el('boards').replaceChildren();
   setupFilters();
@@ -538,7 +533,6 @@ function filterRows() {
   }
   el('empty-list').hidden = count > 0;
   el('empty-rated').hidden = copies.size > 0;
-  el('unrated-count').textContent = String(count);
 }
 function reveal(id, focus = false) {
   const row = entries.get(id);
@@ -954,7 +948,7 @@ function recommendationRow(p, index, spec, isShift, ranks) {
       : 'Catalog mean → your mean (change)';
   }
   if (spec.key === 'information') {
-    score.title = scoreText(taste.information.get(p.itemId), 3) + ' bits of information';
+    score.title = score.textContent + ' of expected information about your taste class';
     if (taste.familiarity) score.title += ' · familiarity percentile ' + Math.round(100 * taste.familiarity.get(p.itemId));
   }
   pos.className = 'rank-index';
@@ -999,8 +993,8 @@ function renderBoards(informationOnly = false) {
   ratingObserver?.disconnect();
   const visible = informationOnly ? [] : result.predictions.filter((p) => filters.matches(p.itemId));
   const rankMovements = informationOnly ? null : rankChanges(visible);
-  const questions = taste ? questionScores(taste, state.familiarityWeight) : null;
   const weighted = Boolean(taste?.familiarity && state.familiarityWeight > 0);
+  const questions = weighted ? questionScores(taste, state.familiarityWeight) : taste?.information;
   const fragment = document.createDocumentFragment();
   const activity = binary();
   const shown = activity
@@ -1029,8 +1023,9 @@ function renderBoards(informationOnly = false) {
   for (const original of shown) {
     if (informationOnly && original.key !== 'information') continue;
     const spec = original.key === 'information' ? {
-      ...original, score: p => (weighted ? questions : taste?.information)?.get(p.itemId) ?? 0,
-      format: n => weighted ? Math.round(n * 100) + '/100' : scoreText(n, 3),
+      ...original,
+      score: p => questions?.get(p.itemId) ?? 0,
+      format: (_, p) => scoreText(taste.information.get(p.itemId), 3) + ' bits',
     } : original;
     const board = node('section'),
       list = node('div');
@@ -1053,7 +1048,7 @@ function renderBoards(informationOnly = false) {
         'p',
         weighted
           ? (state.familiarityWeight === 1 ? 'Ranked by estimated familiarity.' : 'Blends information and familiarity ranks.')
-            + ' Familiarity uses past response frequency and similarity to entries you rated.'
+            + ' Each score is the expected information gained about your taste class.'
           : 'Expected information in bits about ' +
               taste.weights.length +
               ' taste classes, given your applied ratings.',
@@ -1268,7 +1263,7 @@ function showRatingChoices(row) {
 }
 el('boards').onclick = (event) => {
   const target = /** @type {HTMLElement} */ (event.target);
-  const action = target.closest('button');
+  const action = target.closest('button.rank, button.quick-rate, button[data-direction]');
   if (!(action instanceof HTMLButtonElement)) return;
   if (action.dataset.direction) {
     const { board, direction } = action.dataset;

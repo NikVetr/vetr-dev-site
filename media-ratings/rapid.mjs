@@ -131,7 +131,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     focusCard();
   };
   dialog.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.metaKey || e.isComposing || e.target === picker || e.target instanceof HTMLInputElement) return;
+    if (e.ctrlKey || e.altKey || e.metaKey || e.isComposing || e.target === picker || (e.target instanceof Node && balance.contains(e.target))) return;
     if (
       e.repeat &&
       (e.key === 'Enter' ||

@@ -408,16 +408,26 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     const familiar = p.locator('#weight-familiarity');
     await firstInfo.waitFor();
     assert.equal(await familiar.inputValue(), '50');
-    await familiar.press('End');
+    assert.equal(await p.locator('#scale-help').isVisible(), false);
+    assert.equal(await p.locator('.catalog-tools').getByText(/All titles/).count(), 0);
+    const information = p.locator('.information');
+    const eraser = information.locator('.info-row[data-id="786"] .score');
+    const bits = await eraser.textContent();
+    assert.match(bits, /^0\.\d{3} bits$/);
+    await information.getByRole('button', { name: /Set familiarity weight to 100%/ }).click();
+    assert.equal(await familiar.inputValue(), '100');
     assert.equal(await firstInfo.getAttribute('data-id'), '356'); // Most rated in the catalog.
-    await familiar.press('Home');
+    assert.equal(await eraser.textContent(), bits);
+    await information.getByRole('button', { name: /Set familiarity weight to 0%/ }).click();
+    assert.equal(await familiar.inputValue(), '0');
+    assert.equal(await eraser.textContent(), bits);
     assert.equal(await firstInfo.getAttribute('data-id'), '786'); // Eraser
     await familiar.fill('50');
     const header = p.locator('.information .board-head');
     assert.equal(await header.locator('small').count(), 0);
     const left = await header.locator('h3').boundingBox(),
       right = await familiar.boundingBox();
-    assert.ok(right.x >= left.x + left.width && right.y < left.y + left.height + 15);
+    assert.ok(right.width >= 96 && right.x >= left.x + left.width && right.y < left.y + left.height + 15);
     await yearFilter(p, 1999);
     const from1999 = p.locator('[data-key=expected] .rank');
     assert.ok((await from1999.count()) > 1);
@@ -522,7 +532,7 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
         .locator('#library .catalog-highlight[data-id="' + id + '"]')
         .evaluate((e) => e.contains(document.activeElement)),
     );
-    await p.getByLabel('Catalog sort order').selectOption('budget');
+    await p.getByRole('combobox', { name: 'Sort by', exact: true }).selectOption('budget');
     await p.locator('#facet').click();
     await p.locator('#filter-fields summary').getByText('Production budget', { exact: true }).click();
     await p
@@ -1006,7 +1016,7 @@ test('quick rate and selected recommendations share credited artwork and context
     assert.ok(Math.abs(art.height - panel.height) <= 3, 'poster spans the detail panel');
     await page.locator('#more-metadata summary').click();
     assert.match(await page.locator('#more-metadata').innerText(), /Directors/);
-    await page.getByLabel('Catalog sort order').selectOption('directors');
+    await page.getByRole('combobox', { name: 'Sort by', exact: true }).selectOption('directors');
     await page.locator('#facet').click();
     await page.locator('#filter-fields summary').getByText('Director', { exact: true }).click();
     await page.getByRole('searchbox', { name: 'Search director' }).fill('Steven Spielberg');

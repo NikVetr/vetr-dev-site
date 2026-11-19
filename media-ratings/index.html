@@ -57,8 +57,8 @@
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
           <div class="catalog-tools">
-            <span>All titles <span id="unrated-count"></span></span>
-            <select id="sort" aria-label="Catalog sort order"></select>
+            <label for="sort">Sort by</label>
+            <select id="sort"></select>
           </div>
         </div>
         <a class="skip" href="#recommendations">Skip to recommendations</a>
@@ -217,7 +217,7 @@
       <h3>Dataset</h3><p id="context">Loading catalog…</p><div id="dataset-source"></div>
       <h3>Prediction model</h3><p id="about-model"></p><p id="choice-note" hidden></p>
       <h3>Rating and ranking</h3><p>Rate entries in the catalog or use Quick rate with the keyboard. Choose Filters to narrow the recommendations. With Auto-update off, choose Update predictions to apply your edits.</p>
-      <p>In Most informative to rate, move the slider toward Information for questions that distinguish taste classes, or toward Familiarity for entries you are more likely to recognize.</p>
+      <p>Familiarity weight sets the order in Most informative to rate and Quick rate. Choose 0% for the most informative questions or 100% for entries you are most likely to recognize. Each score in the panel shows the expected information gained about your taste class, in bits.</p>
       <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md" target="_blank" rel="noopener noreferrer">Dataset sources and model evaluations ↗</a>
     </dialog>
     <dialog id="recommendation-filters" aria-labelledby="filter-title">
