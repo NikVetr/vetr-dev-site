@@ -1,0 +1,93 @@
+{
+  "lastTrainingYear": 2017,
+  "validationYear": 2018,
+  "testYear": 2019,
+  "given": 4,
+  "trainingUsers": 149913,
+  "trainingRatings": 10036987,
+  "validationUsers": 6239,
+  "validationRatings": 395150,
+  "testUsers": 5657,
+  "testRatings": 357068,
+  "kernel": "32 training-only collaborative factors",
+  "outOfRangeCalendar": "use final training year",
+  "validation": [
+    {
+      "releaseWeight": 0.0,
+      "calendarWeight": 0.0,
+      "sessionDecayDays": 0,
+      "label": "0/0/0",
+      "logLoss": 1.8324436598109377,
+      "rmse": 0.9534048285540038,
+      "brier": 0.20130609340006247
+    },
+    {
+      "releaseWeight": 0.0,
+      "calendarWeight": 0.5,
+      "sessionDecayDays": 0,
+      "label": "0/0.5/0",
+      "logLoss": 1.8285042821752744,
+      "rmse": 0.9502363984980325,
+      "brier": 0.2002668738023976
+    },
+    {
+      "releaseWeight": 0.0,
+      "calendarWeight": 1.0,
+      "sessionDecayDays": 0,
+      "label": "0/1/0",
+      "logLoss": 1.833508686873273,
+      "rmse": 0.9485588855482238,
+      "brier": 0.19971092222293346
+    }
+  ],
+  "holdout": {
+    "baseline": {
+      "releaseWeight": 0.0,
+      "calendarWeight": 0.0,
+      "sessionDecayDays": 0,
+      "label": "0/0/0",
+      "logLoss": 1.8045136483616127,
+      "rmse": 0.9190925362864509,
+      "brier": 0.19914555828296257,
+      "pairedLogLossVersusBaseline": {
+        "difference": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "bestPositive": {
+      "releaseWeight": 0.0,
+      "calendarWeight": 0.5,
+      "sessionDecayDays": 0,
+      "label": "0/0.5/0",
+      "logLoss": 1.8006020551600623,
+      "rmse": 0.9159834922522498,
+      "brier": 0.19813543197918337,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.003911593201547164,
+        "ci95": [
+          -0.004624734198979685,
+          -0.0031984522041146424
+        ]
+      }
+    },
+    "selected": {
+      "releaseWeight": 0.0,
+      "calendarWeight": 0.5,
+      "sessionDecayDays": 0,
+      "label": "0/0.5/0",
+      "logLoss": 1.8006020551600623,
+      "rmse": 0.9159834922522498,
+      "brier": 0.19813543197918337,
+      "pairedLogLossVersusBaseline": {
+        "difference": -0.003911593201547164,
+        "ci95": [
+          -0.004624734198979685,
+          -0.0031984522041146424
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,803 @@
+{
+  "trainingUsers": 156913,
+  "trainingRatings": 10594494,
+  "given": 4,
+  "sourceYears": [
+    1995,
+    2019
+  ],
+  "releaseBandwidthYears": 10,
+  "sessionVariance": 0.25,
+  "calendarPriorCount": 100,
+  "trainingHistory": [
+    {
+      "year": 1995,
+      "ratings": 3,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 1996,
+      "ratings": 941720,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 1997,
+      "ratings": 314365,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 1998,
+      "ratings": 123116,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 1999,
+      "ratings": 450561,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 2000,
+      "ratings": 667055,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 2001,
+      "ratings": 404324,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 2002,
+      "ratings": 271686,
+      "fractionHalfStar": 0.0
+    },
+    {
+      "year": 2003,
+      "ratings": 339664,
+      "fractionHalfStar": 0.28144283762777333
+    },
+    {
+      "year": 2004,
+      "ratings": 452880,
+      "fractionHalfStar": 0.43161323087793674
+    },
+    {
+      "year": 2005,
+      "ratings": 742370,
+      "fractionHalfStar": 0.4310101431900535
+    },
+    {
+      "year": 2006,
+      "ratings": 482020,
+      "fractionHalfStar": 0.42276669017883073
+    },
+    {
+      "year": 2007,
+      "ratings": 426050,
+      "fractionHalfStar": 0.42745452411688767
+    },
+    {
+      "year": 2008,
+      "ratings": 474404,
+      "fractionHalfStar": 0.42646141263564386
+    },
+    {
+      "year": 2009,
+      "ratings": 335476,
+      "fractionHalfStar": 0.4246920793141685
+    },
+    {
+      "year": 2010,
+      "ratings": 334881,
+      "fractionHalfStar": 0.42240676538830213
+    },
+    {
+      "year": 2011,
+      "ratings": 271087,
+      "fractionHalfStar": 0.4199500529350356
+    },
+    {
+      "year": 2012,
+      "ratings": 259328,
+      "fractionHalfStar": 0.4108850567620928
+    },
+    {
+      "year": 2013,
+      "ratings": 210328,
+      "fractionHalfStar": 0.4028469818569092
+    },
+    {
+      "year": 2014,
+      "ratings": 194558,
+      "fractionHalfStar": 0.3998601959312904
+    },
+    {
+      "year": 2015,
+      "ratings": 672076,
+      "fractionHalfStar": 0.36266731738672414
+    },
+    {
+      "year": 2016,
+      "ratings": 718281,
+      "fractionHalfStar": 0.3687400891851518
+    },
+    {
+      "year": 2017,
+      "ratings": 629231,
+      "fractionHalfStar": 0.36927296970428986
+    },
+    {
+      "year": 2018,
+      "ratings": 468057,
+      "fractionHalfStar": 0.36497264222092607
+    },
+    {
+      "year": 2019,
+      "ratings": 410973,
+      "fractionHalfStar": 0.3712968978497371
+    }
+  ],
+  "random": {
+    "validationUsers": 2000,
+    "testUsers": 3000,
+    "testRatings": 196480,
+    "validation": [
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0/0/0",
+        "logLoss": 1.5894069451689352,
+        "rmse": 0.89975660363993,
+        "brier": 0.19122258610103376
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0/0/1",
+        "logLoss": 1.5911368979875389,
+        "rmse": 0.9021058930543191,
+        "brier": 0.19170792933626463
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0/0/30",
+        "logLoss": 1.5910869204955636,
+        "rmse": 0.9020466500096803,
+        "brier": 0.1916532791917413
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0/0.5/0",
+        "logLoss": 1.58246689212198,
+        "rmse": 0.8983800732723115,
+        "brier": 0.19092174651725996
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0/0.5/1",
+        "logLoss": 1.584535197796346,
+        "rmse": 0.9012305599989471,
+        "brier": 0.19150724891345303
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0/0.5/30",
+        "logLoss": 1.5844760625193197,
+        "rmse": 0.9011570789590487,
+        "brier": 0.19144948867498598
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.5817324380855204,
+        "rmse": 0.8972596187354581,
+        "brier": 0.19084710759172516
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0/1/1",
+        "logLoss": 1.5837984363327753,
+        "rmse": 0.9001496598090828,
+        "brier": 0.1914363122608463
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0/1/30",
+        "logLoss": 1.5837226408904799,
+        "rmse": 0.9000465005516416,
+        "brier": 0.19137229589194227
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/0/0",
+        "logLoss": 1.5896012965853195,
+        "rmse": 0.8999817526451357,
+        "brier": 0.1912897163916609
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0.1/0/1",
+        "logLoss": 1.5914062569361966,
+        "rmse": 0.9024367152824655,
+        "brier": 0.19178781394543076
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0.1/0/30",
+        "logLoss": 1.591339926834224,
+        "rmse": 0.9023427892039115,
+        "brier": 0.19172957272162325
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0.1/0.5/0",
+        "logLoss": 1.5827892552910419,
+        "rmse": 0.8987663735543546,
+        "brier": 0.19102597989859438
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0.1/0.5/1",
+        "logLoss": 1.5848644325570869,
+        "rmse": 0.9016388688508393,
+        "brier": 0.1916041763628839
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0.1/0.5/30",
+        "logLoss": 1.584786393656838,
+        "rmse": 0.9015282391112375,
+        "brier": 0.19154258820238715
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/1/0",
+        "logLoss": 1.5820536424337825,
+        "rmse": 0.8976472038536722,
+        "brier": 0.19095221497347828
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0.1/1/1",
+        "logLoss": 1.5841221483611607,
+        "rmse": 0.9005621316966056,
+        "brier": 0.19153353468533735
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0.1/1/30",
+        "logLoss": 1.5840270668643757,
+        "rmse": 0.9004200473373754,
+        "brier": 0.19146573106318435
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.25/0/0",
+        "logLoss": 1.590617106476107,
+        "rmse": 0.9013305025423345,
+        "brier": 0.19157089304351016
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0.25/0/1",
+        "logLoss": 1.5923987695065647,
+        "rmse": 0.9037564226500688,
+        "brier": 0.19205286622705542
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0.25/0/30",
+        "logLoss": 1.5923066944386834,
+        "rmse": 0.9036151477132257,
+        "brier": 0.19199072390806107
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0.25/0.5/0",
+        "logLoss": 1.5839480761353035,
+        "rmse": 0.9002961714048129,
+        "brier": 0.19134711137646632
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0.25/0.5/1",
+        "logLoss": 1.5859279828490083,
+        "rmse": 0.9030519457780571,
+        "brier": 0.1918885914842385
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0.25/0.5/30",
+        "logLoss": 1.5858212281133233,
+        "rmse": 0.902891872635272,
+        "brier": 0.19182288840964135
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0.25/1/0",
+        "logLoss": 1.5832027744998542,
+        "rmse": 0.899157466631829,
+        "brier": 0.1912705461205755
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0.25/1/1",
+        "logLoss": 1.585172201162393,
+        "rmse": 0.9019653694210117,
+        "brier": 0.19181526737813587
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0.25/1/30",
+        "logLoss": 1.5850474611553396,
+        "rmse": 0.9017698577903611,
+        "brier": 0.19174316703851446
+      }
+    ],
+    "holdout": {
+      "baseline": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0/0/0",
+        "logLoss": 1.5954739039222887,
+        "rmse": 0.9083057971971678,
+        "brier": 0.19425203729134255,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "releaseOnly": {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/0/0",
+        "logLoss": 1.595807893125394,
+        "rmse": 0.9087233772997979,
+        "brier": 0.19436198453535378,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.00033398920310478633,
+          "ci95": [
+            5.7671000993641446e-05,
+            0.0006103074052159312
+          ]
+        }
+      },
+      "calendarOnly": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.5850946169201137,
+        "rmse": 0.9060950093202796,
+        "brier": 0.1940571194133212,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.010379287002175192,
+          "ci95": [
+            -0.013483081061140652,
+            -0.007275492943209731
+          ]
+        }
+      },
+      "sessionOnly": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0/0/30",
+        "logLoss": 1.597910609897147,
+        "rmse": 0.9124373490585204,
+        "brier": 0.19485945269654215,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0024367059748588147,
+          "ci95": [
+            0.0015294022859951304,
+            0.003344009663722499
+          ]
+        }
+      },
+      "selected": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.5850946169201137,
+        "rmse": 0.9060950093202796,
+        "brier": 0.1940571194133212,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.010379287002175192,
+          "ci95": [
+            -0.013483081061140652,
+            -0.007275492943209731
+          ]
+        }
+      }
+    }
+  },
+  "chronological": {
+    "validationUsers": 1998,
+    "testUsers": 2998,
+    "testRatings": 191266,
+    "validation": [
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0/0/0",
+        "logLoss": 1.6317538762816204,
+        "rmse": 0.9241279482281347,
+        "brier": 0.20027985620676717
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0/0/1",
+        "logLoss": 1.6352120977890725,
+        "rmse": 0.9285082691479487,
+        "brier": 0.20115406913675116
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0/0/30",
+        "logLoss": 1.6353409251388045,
+        "rmse": 0.9285976061416968,
+        "brier": 0.20121806012765311
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0/0.5/0",
+        "logLoss": 1.625630005396442,
+        "rmse": 0.9235583331149924,
+        "brier": 0.20012662723387778
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0/0.5/1",
+        "logLoss": 1.6292779719484192,
+        "rmse": 0.9280903895893811,
+        "brier": 0.20106584268446184
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0/0.5/30",
+        "logLoss": 1.6293951201318986,
+        "rmse": 0.9281760790265094,
+        "brier": 0.20112644625392662
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.6238507810348772,
+        "rmse": 0.9223176859871748,
+        "brier": 0.19994697811526582
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0/1/1",
+        "logLoss": 1.6273527065484694,
+        "rmse": 0.926611725599391,
+        "brier": 0.2008481586333218
+      },
+      {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0/1/30",
+        "logLoss": 1.627464891655725,
+        "rmse": 0.9267025404377548,
+        "brier": 0.20090644706172095
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/0/0",
+        "logLoss": 1.6325341128576767,
+        "rmse": 0.9252098587161184,
+        "brier": 0.20047790412520922
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0.1/0/1",
+        "logLoss": 1.6358680174472544,
+        "rmse": 0.9294147338425645,
+        "brier": 0.20129420516057608
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0.1/0/30",
+        "logLoss": 1.6359873038048047,
+        "rmse": 0.9294997000880002,
+        "brier": 0.20135837702709444
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0.1/0.5/0",
+        "logLoss": 1.6264894196031656,
+        "rmse": 0.9247148796387344,
+        "brier": 0.2003544218895677
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0.1/0.5/1",
+        "logLoss": 1.629953588850416,
+        "rmse": 0.9290027793190798,
+        "brier": 0.20121573524667516
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0.1/0.5/30",
+        "logLoss": 1.6300606369802477,
+        "rmse": 0.9290825230275863,
+        "brier": 0.20127619529269938
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/1/0",
+        "logLoss": 1.6246741334298593,
+        "rmse": 0.9234325380196597,
+        "brier": 0.20017025175837075
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0.1/1/1",
+        "logLoss": 1.6279995559099785,
+        "rmse": 0.9274872298425536,
+        "brier": 0.20099442442326543
+      },
+      {
+        "releaseWeight": 0.1,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0.1/1/30",
+        "logLoss": 1.628101687351414,
+        "rmse": 0.9275718400318359,
+        "brier": 0.20105248413188415
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.25/0/0",
+        "logLoss": 1.6343873354961056,
+        "rmse": 0.9277179941676322,
+        "brier": 0.20093451089992106
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0.25/0/1",
+        "logLoss": 1.6374524750465915,
+        "rmse": 0.9315696867335735,
+        "brier": 0.20164801427050447
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 30,
+        "label": "0.25/0/30",
+        "logLoss": 1.6375590535999018,
+        "rmse": 0.9316466033992571,
+        "brier": 0.20171225596283346
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0.25/0.5/0",
+        "logLoss": 1.628407800359886,
+        "rmse": 0.9272543039236092,
+        "brier": 0.2008349138720627
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 1,
+        "label": "0.25/0.5/1",
+        "logLoss": 1.631549723679743,
+        "rmse": 0.9311314296362954,
+        "brier": 0.2015765185793953
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 30,
+        "label": "0.25/0.5/30",
+        "logLoss": 1.6316433544780755,
+        "rmse": 0.9312007982288156,
+        "brier": 0.20163663576991975
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0.25/1/0",
+        "logLoss": 1.6265319865334396,
+        "rmse": 0.9258770177224884,
+        "brier": 0.20063904923445575
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 1,
+        "label": "0.25/1/1",
+        "logLoss": 1.629547850305744,
+        "rmse": 0.9295368260261873,
+        "brier": 0.20134665285702003
+      },
+      {
+        "releaseWeight": 0.25,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 30,
+        "label": "0.25/1/30",
+        "logLoss": 1.6296365387439995,
+        "rmse": 0.9296101654448002,
+        "brier": 0.2014042342970889
+      }
+    ],
+    "holdout": {
+      "baseline": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0/0/0",
+        "logLoss": 1.6365065069518758,
+        "rmse": 0.9288975984938008,
+        "brier": 0.20066669846560556,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "releaseOnly": {
+        "releaseWeight": 0.1,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 0,
+        "label": "0.1/0/0",
+        "logLoss": 1.6376044558493201,
+        "rmse": 0.9303757330497628,
+        "brier": 0.20091150292348897,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0010979488974467533,
+          "ci95": [
+            0.0007425965602440797,
+            0.0014533012346494268
+          ]
+        }
+      },
+      "calendarOnly": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.6259429211899454,
+        "rmse": 0.9244106670089743,
+        "brier": 0.2000072272373118,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.010563585761929166,
+          "ci95": [
+            -0.013981339273517844,
+            -0.0071458322503404875
+          ]
+        }
+      },
+      "sessionOnly": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.0,
+        "sessionDecayDays": 1,
+        "label": "0/0/1",
+        "logLoss": 1.6419707540009918,
+        "rmse": 0.9368212473182655,
+        "brier": 0.20196601833206768,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0054642470491174395,
+          "ci95": [
+            0.004555339056694021,
+            0.006373155041540858
+          ]
+        }
+      },
+      "selected": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 1.0,
+        "sessionDecayDays": 0,
+        "label": "0/1/0",
+        "logLoss": 1.6259429211899454,
+        "rmse": 0.9244106670089743,
+        "brier": 0.2000072272373118,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.010563585761929166,
+          "ci95": [
+            -0.013981339273517844,
+            -0.0071458322503404875
+          ]
+        }
+      }
+    }
+  }
+}
