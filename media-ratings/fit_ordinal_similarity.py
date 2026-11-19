@@ -29,7 +29,7 @@ def metadata_features(items):
     return label_features(rows)
 
 
-def label_features(rows):
+def shared_label_vectors(rows):
     counts = Counter(tag for row in rows for tag in row)
     columns = {tag: index for index, tag in enumerate(sorted(tag for tag, n in counts.items() if n >= 2))}
     coords = [(i, columns[tag], np.log1p(len(rows) / counts[tag]))
@@ -39,7 +39,11 @@ def label_features(rows):
     r, c, v = zip(*coords)
     design = sparse.csr_matrix((v, (r, c)), shape=(len(rows), len(columns)))
     norm = np.sqrt(np.asarray(design.multiply(design).sum(axis=1)).ravel())
-    unit = design.multiply((1 / np.maximum(norm, 1.e-12))[:, None]).tocsr()
+    return design.multiply((1 / np.maximum(norm, 1.e-12))[:, None]).tocsr()
+
+
+def label_features(rows):
+    unit = shared_label_vectors(rows)
     return embedding((unit @ unit.T).toarray())
 
 

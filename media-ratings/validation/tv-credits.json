@@ -1,0 +1,71 @@
+{
+  "validationUsers": 650,
+  "testUsers": 451,
+  "testRatings": 1808,
+  "sharedCredits": 186,
+  "showsWithSharedCredits": 245,
+  "testTargetsSharingACredit": 386,
+  "given": 4,
+  "candidateTilt": 1.0,
+  "adopted": false,
+  "comparison": {
+    "difference": 0.0056876704528110965,
+    "ci95": [
+      -0.012850877823126133,
+      0.024226218728748326
+    ]
+  },
+  "validation": [
+    {
+      "tilt": 0.0,
+      "label": "Latent class, K=16",
+      "logLoss": 1.6452069638926115,
+      "rmse": 0.817311068027322,
+      "brier": 0.16578730542364137
+    },
+    {
+      "tilt": 0.125,
+      "label": "K=16 + shared credits",
+      "logLoss": 1.6423778196746557,
+      "rmse": 0.8130147794853336,
+      "brier": 0.16498157002486172
+    },
+    {
+      "tilt": 0.25,
+      "label": "K=16 + shared credits",
+      "logLoss": 1.6401079074132119,
+      "rmse": 0.8099979233705479,
+      "brier": 0.16434000498287693
+    },
+    {
+      "tilt": 0.5,
+      "label": "K=16 + shared credits",
+      "logLoss": 1.637127285802372,
+      "rmse": 0.8068756157410657,
+      "brier": 0.1634735119746623
+    },
+    {
+      "tilt": 1.0,
+      "label": "K=16 + shared credits",
+      "logLoss": 1.636932782132487,
+      "rmse": 0.8109008986404281,
+      "brier": 0.16317057601739732
+    }
+  ],
+  "holdout": [
+    {
+      "tilt": 0.0,
+      "label": "Latent class, K=16",
+      "logLoss": 1.668962935408907,
+      "rmse": 0.8611054654262374,
+      "brier": 0.1740507503512255
+    },
+    {
+      "tilt": 1.0,
+      "label": "K=16 + shared credits",
+      "logLoss": 1.6746506058617203,
+      "rmse": 0.8673986072428324,
+      "brier": 0.17289020988378534
+    }
+  ]
+}

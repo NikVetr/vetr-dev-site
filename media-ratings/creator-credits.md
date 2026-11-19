@@ -24,6 +24,12 @@ The comparison fixed the existing title-choice and calendar model, varied only t
 
 The intervals use paired respondent-level differences. The gains are small and consistent across these two tests. The film default uses the selected weight. Its population forecasts and class membership calculations still use the original class distributions. Shared credits adjust predictions for unrated films after the user supplies ratings.
 
+## TV series holdout
+
+The TV comparison recovered all 49,275 catalog ratings from MovieLens 32M and reproduced the published 16-class baseline. Each test respondent supplied four series ratings. An additional adjustment transferred the difference from the leave-one-out predicted rating to series with explicitly shared cast, directors or production companies. Credit names were matched within role, weighted by inverse frequency and cosine-normalized. Across 383 series, 186 credits recur and 245 series have at least one recurring credit. On the holdout, 386 of 1,808 targets shared a credit with at least one of the respondent’s four inputs.
+
+Three-fold validation on 650 respondents selected a tilt of 1 from 0, 0.125, 0.25, 0.5 and 1. Validation log loss improved from 1.64521 to 1.63693. On the separate 451-person holdout, the adjustment increased log loss from 1.66896 to 1.67465 across 1,808 target ratings. The paired difference was +0.00569 (95% CI −0.01285 to +0.02423). RMSE increased from 0.86111 to 0.86740 stars. The TV catalog keeps its 16-class predictor and exposes credits for browsing. [Complete TV comparison](validation/tv-credits.json) · [TV source and respondent splits](tv-cocktail-catalogs.md)
+
 ## Reproduction
 
 Use the input archives and train-only fits from the [film fitting guide](README.md), [forward holdout](rating-dates.md) and [TV catalog](tv-cocktail-catalogs.md). The uncompressed `credits.csv` SHA-256 is `b968359c8e77aebcb7329608378b3b11cc1834726e157aae934bc89f291458ec`. The `movies_metadata.csv` SHA-256 is `37ec322786b136a24604564e55160be75f8937546f11cb1a990076971fa895fd`. The preparation script accepts plain or gzip-compressed credits. TV preparation caches Wikidata queries and TVmaze responses, so the same cache reproduces the same output. A fresh cache reads the latest provider credits. [Pinned CSV mirror](https://huggingface.co/datasets/gaygaaa/TheMoviesDataset/tree/287abcb9999f332e13d93b17c9b0352b96875941)
@@ -34,6 +40,8 @@ python3 media-ratings/prepare_creator_credits.py film \
   media-ratings/film-creators.json
 python3 media-ratings/prepare_creator_credits.py tv \
   tmp/agent/tv-drinks/ml-32m.zip tmp/agent/media-creators/cache media-ratings/tv-creators.json
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/evaluate_tv_credits.py \
+  tmp/agent/tv-drinks/ml-32m.zip media-ratings/validation/tv-credits.json
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/evaluate_creator_credits.py \
   tmp/agent/media-full tmp/agent/media-expanded/ml-25m.zip media-ratings/expanded.json \
   media-ratings/film-creators.json tmp/agent/media-dates/through2017 media-ratings/validation/creator-credits.json
