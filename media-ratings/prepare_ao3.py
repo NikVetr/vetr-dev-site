@@ -10,6 +10,8 @@ import pandas as pd
 from scipy import sparse
 from scipy.special import expit, logit, logsumexp
 
+from fit_catalog import shard_evidence
+
 ARCHIVE = 'https://huggingface.co/datasets/sdeangroup/NavigatingSensitivity'
 METADATA = 'https://huggingface.co/datasets/yrtsk/archiveofourown-meta'
 LICENSE = 'https://creativecommons.org/licenses/by-nc/4.0/'
@@ -36,6 +38,69 @@ FANDOMS = {
 QUOTAS = {'Harry Potter': 500, 'Naruto': 500, 'Worm': 500, 'Supernatural': 250,
           'Teen Wolf': 250, 'Sherlock': 250, 'Marvel Cinematic Universe': 250,
           'Star Wars': 250, 'My Hero Academia': 250, 'Game of Thrones / A Song of Ice and Fire': 250}
+# Add shelves for the other source fandoms represented in the launch catalog.
+# Exact aliases join adaptations under the named IP. Real-person-fiction tags
+# for actors in fictional franchises are separate fandoms.
+EXTENDED_FANDOMS = {
+    'Merlin (BBC)': ('Merlin (TV)', 'Merlin (BBC)'),
+    'BTS': ('방탄소년단 | Bangtan Boys | BTS',),
+    'Hannibal (TV)': ('Hannibal (TV)',),
+    'Star Trek': ('Star Trek', 'Star Trek: Alternate Original Series (Movies)', 'Star Trek (2009)', 'Star Trek: 2009',
+                  'Star Trek XI', 'Star Trek: The Original Series', 'Star Trek: The Original Series (Movies)',
+                  'Star Trek: Deep Space Nine', 'Star Trek: Voyager', 'Star Trek: The Next Generation',
+                  'Star Trek: Enterprise', 'Star Trek: Discovery'),
+    'Voltron: Legendary Defender': ('Voltron: Legendary Defender',),
+    'Batman': ('Batman - All Media Types', 'Batman (Comics)', 'Batman (Movies - Nolan)',
+               'Batman: The Animated Series', 'Batman and Robin (Comics)', 'Batman: Arkham (Video Games)'),
+    'Haikyuu!!': ('Haikyuu!!',),
+    'One Direction': ('One Direction (Band)', 'One Direction'),
+    'Rise of the Guardians': ('Rise of the Guardians (2012)', 'rise of the guardians'),
+    'Avatar: The Last Airbender': ('Avatar: The Last Airbender',),
+    'One Piece': ('One Piece',),
+    'Stranger Things': ('Stranger Things (TV 2016)',),
+    'The Hobbit': ('The Hobbit - All Media Types', 'The Hobbit (Jackson Movies)', 'The Hobbit (2012)',
+                   'The Hobbit - J. R. R. Tolkien'),
+    'X-Men': ('X-Men: First Class (2011) - Fandom', 'X-Men - All Media Types', 'X-Men (Movieverse)',
+              'X-Men (Alternate Timeline Movies)', 'X-Men (Movies)', 'X-Men (Comicverse)',
+              'X-Men: Days of Future Past (2014) - Fandom', 'X-Men (Original Timeline Movies)'),
+    'Check Please!': ('Check Please! (Webcomic)',),
+    'The Chronicles of Narnia': ('Chronicles of Narnia (Movies)', 'Chronicles of Narnia - C. S. Lewis',
+                                 'Chronicles of Narnia - All Media Types', 'Chronicles of Narnia'),
+    'DC Universe': ('DCU', 'DCU (Animated)', 'DCU Animated', 'DCU (Comics)', 'DCU - Comicverse', 'DCU (Movies)'),
+    'Fantastic Beasts': ('Fantastic Beasts and Where to Find Them (Movies)',),
+    'Final Fantasy XV': ('Final Fantasy XV',),
+    'Free!': ('Free!',),
+    'Fullmetal Alchemist': ('Fullmetal Alchemist', 'Fullmetal Alchemist: Brotherhood & Manga',
+                            'Fullmetal Alchemist - All Media Types', 'Fullmetal Alchemist (Anime 2003)'),
+    'Good Omens': ('Good Omens - Neil Gaiman & Terry Pratchett', 'Good Omens (TV)'),
+    'Hawaii Five-0': ('Hawaii Five-0 (2010)',),
+    'House M.D.': ('House M.D.',),
+    'Mass Effect': ('Mass Effect', 'Mass Effect Trilogy', 'Mass Effect - All Media Types', 'Mass Effect: Andromeda',
+                    'Mass Effect 2 - Fandom', 'Mass Effect (Comics)'),
+    'Miraculous Ladybug': ('Miraculous Ladybug',),
+    'Mulan': ('Mulan (1998)',),
+    'Once Upon a Time': ('Once Upon a Time (TV)',),
+    'Overwatch': ('Overwatch (Video Game)',),
+    'Spirited Away': ('Sen to Chihiro no Kamikakushi | Spirited Away',),
+    'Shadowhunters': ('Shadowhunters (TV)', 'Shadowhunters'),
+    'She-Ra and the Princesses of Power': ('She-Ra and the Princesses of Power', 'She-Ra and the Princesses of Power (2018)'),
+    'Attack on Titan': ('Shingeki no Kyojin | Attack on Titan',),
+    'Supergirl': ('Supergirl (TV 2015)',),
+    'The Man from U.N.C.L.E.': ('The Man From U.N.C.L.E. (2015)', 'The Man From U.N.C.L.E. (TV)',
+                                'The Man From U.N.C.L.E.', 'Man From U.N.C.L.E.'),
+    'Welcome to Night Vale': ('Welcome to Night Vale',),
+    "JoJo's Bizarre Adventure": ("ジョジョの奇妙な冒険 | JoJo no Kimyou na Bouken | JoJo's Bizarre Adventure",),
+    "Heaven Official's Blessing": ('天官赐福 - 墨香铜臭 | Tiān Guān Cì Fú - Mòxiāng Tóngxiù',),
+    'Bungou Stray Dogs': ('文豪ストレイドッグス | Bungou Stray Dogs',),
+    'Grandmaster of Demonic Cultivation': ('魔道祖师 - 墨香铜臭 | Módào Zǔshī - Mòxiāng Tóngxiù',
+                                           '魔道祖师 | Módào Zǔshī (Cartoon)', '魔道祖师 | Módào Zǔshī - All Media Types'),
+    'Criminal Minds': ('Criminal Minds',), 'Inception': ('Inception (2010)',), 'Leverage': ('Leverage',),
+    'NCIS': ('NCIS',), 'Young Justice': ('Young Justice (Cartoon)',),
+    'The Avengers': ('The Avengers (Marvel) - All Media Types',),
+}
+ORIGINAL_ALIASES = dict(FANDOMS)
+FANDOMS.update({alias: fandom for fandom, aliases in EXTENDED_FANDOMS.items() for alias in aliases})
+FANDOMS.update({'Captain America (2011)': 'Marvel Cinematic Universe', 'Rogue One: A Star Wars Story (2016)': 'Star Wars'})
 SEED = 8824
 
 
@@ -62,24 +127,25 @@ def read_actions(raw):
     return pairs, dict(zip(ids.tolist(), counts.tolist()))
 
 
-def work_fandoms(metadata):
+def work_fandoms(metadata, aliases=FANDOMS):
     single = metadata.get('Fandom')
     if single and isinstance(single, str) and not metadata.get('Fandoms'):
-        return [FANDOMS.get(single, single)] if single != 'No Fandom' else []
+        return [aliases.get(single, single)] if single != 'No Fandom' else []
     # A comma can be part of a fandom's name. Match complete curated aliases only
     # on the flattened multi-tag field; never infer an IP from a character or title.
     multi = metadata.get('Fandoms', '')
     if isinstance(multi, list):
-        return sorted({FANDOMS[tag] for tag in multi if isinstance(tag, str) and tag in FANDOMS})
+        return sorted({aliases[tag] for tag in multi if isinstance(tag, str) and tag in aliases})
     if not isinstance(multi, str) or not multi:
         return []
     record = ', ' + multi + ', '
-    return sorted({family for tag, family in FANDOMS.items() if ', ' + tag + ', ' in record})
+    return sorted({family for tag, family in aliases.items() if ', ' + tag + ', ' in record})
 
 
-def select_works(raw, counts):
+def select_works(raw, counts, inventory=None):
     by_domain = {'fanfiction': {}, 'webfiction': {}}
     former_eligible = []
+    original_pools = {fandom: set() for fandom in QUOTAS}
     with (raw / 'ao3_metadata.jsonl').open('rb') as archive:
         for line in archive:
             first_field = line.partition(b',')[0]
@@ -111,6 +177,9 @@ def select_works(raw, counts):
                                'Crossover' if m.get('Fandoms') else 'Fanfiction')
             if not original:
                 annotations['genres'] = fandoms
+                for fandom in work_fandoms(m, ORIGINAL_ALIASES):
+                    if fandom in original_pools:
+                        original_pools[fandom].add(work)
             chapters = re.fullmatch(r'(\d+)/(\d+|\?)', str(m.get('chapters', '')))
             if chapters:
                 annotations['chapterCount'] = int(chapters[1])
@@ -132,8 +201,21 @@ def select_works(raw, counts):
         # alongside each dedicated franchise shelf. This preserves the launch inventory.
         picked = set(sorted(set(former_eligible), key=lambda w: (-counts[w], w))[:300])
         for fandom, limit in QUOTAS.items():
-            picked.update([w for w in order if fandom in works[w]['annotations']['genres']][:limit])
+            picked.update([w for w in order if w in original_pools[fandom]][:limit])
+        additional = {fandom: [] for fandom in EXTENDED_FANDOMS}
+        eligible = dict.fromkeys([*QUOTAS, *EXTENDED_FANDOMS], 0)
+        for w in order:
+            for fandom in works[w]['annotations']['genres']:
+                if fandom in eligible:
+                    eligible[fandom] += 1
+                if w not in picked and fandom in additional and len(additional[fandom]) < 200:
+                    additional[fandom].append(w)
+        picked.update(w for shelf in additional.values() for w in shelf)
         selected[domain] = [works[w] for w in order if w in picked]
+        if inventory is not None:
+            inventory.update({name: {'eligible': count, 'selected': sum(
+                name in item['annotations']['genres'] for item in selected[domain])}
+                for name, count in eligible.items()})
     return selected
 
 
@@ -258,7 +340,9 @@ def evaluate(model, cases):
             sq[truth] = (1 - pred[truth])**2
             scores['brier'] += sq.sum() / (d - len(given))
             pred[given] = -1
-            first = np.argsort(-pred, kind='stable')[:10]
+            cutoff = np.partition(pred, -10)[-10] if d >= 10 else -np.inf
+            above = np.flatnonzero(pred > cutoff)
+            first = np.r_[above, np.flatnonzero(pred == cutoff)[:10-len(above)]]
             scores['recallAt10'] += np.isin(first, truth).sum() / len(truth)
     return {metric: float(value / len(cases)) for metric, value in scores.items()}
 
@@ -315,7 +399,7 @@ def train(x, items):
     test = []
     finalist = None
     groups = {name: np.asarray([i for i, item in enumerate(items) if name in item['annotations'].get('genres', [])],
-                               dtype=int) for name in QUOTAS}
+                               dtype=int) for name in [*QUOTAS, *EXTENDED_FANDOMS]}
     fandom_scores = {}
     for k, strength in sorted({(1, 0.), selected}):
         warm = fit_kudos(x[cv_rows], k, SEED) if k > 1 and len(dev) > len(cv_rows) else None
@@ -347,37 +431,47 @@ def write_grids(path, x, items):
     """Derive each binary contingency table from co-kudos and marginal counts, in app order (i,j)."""
     n, d = x.shape
     counts = np.asarray(x.sum(axis=0)).ravel()
-    pairs = (x.T @ x).toarray()
+    by_title = x.tocsc()
     packed = path.with_suffix('.bin.gz')
     with packed.open('wb') as out, gzip.GzipFile(fileobj=out, mode='wb', mtime=0) as gz:
-        for j in range(1, d):
-            both = pairs[j, :j]
-            if both.max(initial=0) > 65535:
-                raise ValueError('Positive overlap exceeds uint16')
-            gz.write(both.astype('<u2').tobytes())
+        for first in range(0, d, 128):
+            stop = min(first+128, d)
+            intersections = (by_title[:, first:stop].T @ by_title[:, :stop]).toarray()
+            for j in range(first, stop):
+                both = intersections[j-first, :j]
+                if both.max(initial=0) > 65535:
+                    raise ValueError('Positive overlap exceeds uint16')
+                gz.write(both.astype('<u2').tobytes())
     path.write_text(json.dumps(dict(ids=[it['itemId'] for it in items], scale=[0, 1],
                                     counts=np.column_stack([n - counts, counts]).tolist(),
                                     packedFile=packed.name, packedLayout='binary-overlap', cohortSize=n), separators=(',', ':')) + '\n')
+    shard_evidence(path)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('raw', type=Path)
     parser.add_argument('--out', type=Path, default=Path(__file__).parent)
+    parser.add_argument('--domain', choices=('fanfiction', 'webfiction'), help='Rebuild just one domain')
     args = parser.parse_args()
     if (args.raw / 'ao3_metadata.jsonl').stat().st_size != 7_361_797_072:
         raise ValueError('Incomplete or different AO3 work metadata archive')
     pairs, counts = read_actions(args.raw)
-    selected = select_works(args.raw, counts)
+    inventory = {}
+    selected = select_works(args.raw, counts, inventory)
+    if args.domain:
+        selected = {args.domain: selected[args.domain]}
     profiles = profiles_for(pairs, selected)
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / 'validation').mkdir(exist_ok=True)
     for domain, items in selected.items():
         x, audit = profiles[domain]
+        if domain == 'fanfiction':
+            audit['fandomInventory'] = inventory
         print(domain, len(items), audit, flush=True)
         components, report, step = train(x, items)
         name = 'Fanfiction' if domain == 'fanfiction' else 'Original web fiction'
-        catalog = dict(name=f'{name} · {len(items):,} AO3 works', legacyRatingCatalogs=[f'{name} · AO3 public kudos'], domain=domain, sourceLabel='AO3 public kudos', linkLabel='AO3',
+        catalog = dict(name=f'{name} · {len(items):,} AO3 works', legacyRatingCatalogs=([f'{name} · AO3 public kudos', 'Fanfiction · 2,873 AO3 works'] if domain == 'fanfiction' else [f'{name} · AO3 public kudos']), domain=domain, sourceLabel='AO3 public kudos', linkLabel='AO3',
                        responsePrompt='Did you give this work kudos?', activityCountLabel='Readers who gave kudos',
                        activityNote='Among readers with public kudos on at least one title here in the 2024 snapshot, an absent kudos can also mean an unread work.', scale=[0, 1], scaleLabels=['No kudos', 'Gave kudos'],
                        sourceUrl=ARCHIVE, items=items, defaultModel='latentClass',

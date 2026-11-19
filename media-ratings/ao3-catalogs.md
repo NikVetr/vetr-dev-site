@@ -6,17 +6,23 @@ Kovacs, Chee and Dean collected 45,936,871 public reader–work kudos during Mar
 
 ## Catalogs
 
-The fanfiction catalog contains **2,873 works** across fandoms. Selection uses the number of distinct public readers who gave each work kudos. The deeper shelves take the most-kudosed eligible works in each named franchise, including crossovers. A separate cross-fandom shelf keeps the top 300 single-fandom works of at least 1,000 words and ten kudos. All 300 previously listed works remain available. Tagged crossovers can appear in more than one filter, with a single ID and prediction per work.
+The fanfiction catalog contains **10,466 works in 56 fandoms**, including the previous 2,873 titles. Within each fandom the inventory prioritizes distinct public readers who gave kudos. The catalog combines the top 300 eligible single-fandom works of at least 1,000 words and ten kudos, dedicated shelves for ten franchises, and up to 200 additional works per other fandom present in those selections. A crossover has one work ID and may qualify for several shelves. The 42 fandoms with at least 200 works include the following.
 
 | Fandom | Works | Fandom | Works |
 | --- | ---: | --- | ---: |
-| Harry Potter | 506 | Naruto | 500 |
-| Marvel Cinematic Universe | 266 | Teen Wolf | 261 |
-| Star Wars | 254 | My Hero Academia | 252 |
-| Game of Thrones / A Song of Ice and Fire | 251 | Sherlock | 250 |
-| Supernatural | 250 | Worm / Parahumans | 8 |
+| Harry Potter | 564 | Naruto | 501 |
+| Marvel Cinematic Universe | 478 | Batman | 290 |
+| Supernatural | 274 | Teen Wolf | 272 |
+| Sherlock | 259 | Star Wars | 258 |
+| My Hero Academia | 254 | Game of Thrones / A Song of Ice and Fire | 251 |
+| DC Universe | 236 | Merlin (BBC) | 234 |
+| BTS | 218 | Star Trek | 216 |
+| Hannibal (TV) | 214 | Voltron: Legendary Defender | 211 |
+| One Piece | 210 | The Hobbit | 208 |
 
-The original web fiction catalog includes **all 320 eligible works** whose sole fandom is *Original Work*, including all 146 titles in the previous catalog. Both catalogs require an English-language work of at least 100 words, a title, at least three distinct public readers in the snapshot, and an author-assigned **General Audiences**, **Teen And Up Audiences**, or **Mature** rating. Work dates, word counts, chapter counts, completion status, audience ratings, source links and author credits come from the metadata snapshot. The fanfiction catalog includes 742 works with multiple source fandom tags. Among the 18 English Worm works identified across the joined public release, eight meet the audience scope and the other ten carry the Explicit rating.
+Fourteen fandoms have fewer than 200 eligible matches in this particular join of ratings and metadata. All qualifying works in those shelves are included. Examples are *Avatar: The Last Airbender* (195), *Welcome to Night Vale* (91), *The Chronicles of Narnia* (78), *Worm* (8), and *Heaven Official's Blessing* (3). The validation file lists the eligible and selected counts for all 56 fandoms under `sourceCounts.fandomInventory`. [Complete fandom inventory](validation/fanfiction.json)
+
+The original web fiction catalog includes **all 320 eligible works** whose sole fandom is *Original Work*, including all 146 titles in the previous catalog. Both catalogs require an English-language work of at least 100 words, a title, at least three distinct public readers in the snapshot, and an author-assigned **General Audiences**, **Teen And Up Audiences**, or **Mature** rating. Work dates, word counts, chapter counts, completion status, audience ratings, source links and author credits come from the metadata snapshot. The fanfiction catalog includes 2,191 works with multiple source fandom tags. Among the 18 English Worm works identified across the joined public release, eight meet the audience scope and the other ten carry the Explicit rating.
 
 FanFiction.net's Flipper project offers a substantial offline recommendation database as part of a server bundle. Its instructions describe local hosting and leave the database's separate redistribution terms unspecified. Royal Road Breakout publishes one row per book, including aggregate followers and text embeddings. The mining-royal-road project supplies collection code. Fitting the same kind of model for those sites would require reader-by-title observations with usable terms. [Flipper](https://github.com/Zeks/flipper), [Royal Road Breakout data card](https://huggingface.co/datasets/syuanbo/royalroad-breakout), [Royal Road mining project](https://github.com/p-manivannan/mining-royal-road)
 
@@ -28,12 +34,12 @@ A seeded test split reserves 20% of readers, capped at 10,000, before model sele
 
 | Domain | Readers in final fit | Public kudos | Held-out readers scored | Hidden kudos | Log loss, pooled → personalized | Recall@10, pooled → personalized |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Fanfiction | 532,253 | 3,284,678 | 6,310 | 39,611 | 0.01435 → 0.01216 | 4.88% → 20.43% |
+| Fanfiction | 698,137 | 5,610,834 | 7,027 | 55,932 | 0.00563 → 0.00486 | 2.80% → 10.71% |
 | Original web fiction | 7,160 | 9,314 | 276 | 300 | 0.01948 → 0.01509 | 38.66% → 65.06% |
 
-Both catalogs selected 64 classes, the largest grid value. Fanfiction selected full activity shrinkage and original web fiction selected half shrinkage. Within-fandom Recall@10 rose from 15.84% to 26.24% for 1,873 Harry Potter readers and from 23.77% to 29.43% for 595 Naruto readers with at least one hidden kudos in those fandoms. Among readers supplying at least one kudos outside the target fandom, the corresponding comparisons were 18.08% → 25.22% and 25.14% → 30.56%. Worm has only eight titles, so Recall@10 includes the entire candidate list. [Fanfiction metrics](validation/fanfiction.json), [original web fiction metrics](validation/webfiction.json)
+Fanfiction selected 32 classes and full activity shrinkage. Original web fiction selected 64 classes and half shrinkage. Within-fandom Recall@10 rose from 14.98% to 21.00% for 1,535 Harry Potter readers and from 23.90% to 27.02% for 477 Naruto readers with at least one hidden kudos in those fandoms. Among readers supplying at least one kudos outside the target fandom, the corresponding comparisons were 15.79% → 21.33% and 24.13% → 27.11%. Across the 53 fandoms with more than ten titles and at least 20 test readers, personalization improved within-fandom Recall@10 in 42. The report gives comparisons and sample sizes for every fandom. For shelves of ten or fewer titles, Recall@10 includes the entire candidate list. [Fanfiction metrics](validation/fanfiction.json), [original web fiction metrics](validation/webfiction.json)
 
-Each released evidence file stores a pair's count of readers who gave both kudos as a little-endian 16-bit integer. The evidence manifest stores each work's full marginal counts and the cohort size. These suffice to reconstruct all four cells in either order, including counts greater than 65,535 for the joint absence of a kudos.
+Each released evidence file stores a pair's count of readers who gave both kudos as a little-endian 16-bit integer. The evidence manifest stores each work's full marginal counts and the cohort size. The larger fanfiction evidence table is partitioned in triangular pair order, with at most 4 MiB of uncompressed counts per file. Selecting a comparison loads its shard on demand. The overlap and marginals suffice to reconstruct all four cells in either order, including counts greater than 65,535 for the joint absence of a kudos.
 
 ## Rebuild
 

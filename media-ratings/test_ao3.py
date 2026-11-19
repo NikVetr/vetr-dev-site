@@ -8,6 +8,7 @@ import unittest
 import numpy as np
 from scipy.sparse import csr_matrix
 
+from fit_catalog import shard_evidence
 from prepare_ao3 import calibrate_activity, evaluate, filtered_recall, fit_kudos, test_cases as make_cases, work_fandoms, write_grids
 
 
@@ -60,9 +61,26 @@ class KudosTests(unittest.TestCase):
                 np.add.at(observed, (dense[:, i], dense[:, j]), 1)
                 np.testing.assert_array_equal(observed, [[len(dense)-a-b+joint,b-joint],[a-joint,joint]])
 
+    def test_sharded_overlaps_preserve_pair_order(self):
+        rng = np.random.default_rng(62)
+        x = csr_matrix(rng.integers(0, 2, size=(50, 17)), dtype=np.int32)
+        with TemporaryDirectory() as temp:
+            path = Path(temp) / 'kudos.json'
+            write_grids(path, x, [dict(itemId=str(i)) for i in range(17)])
+            shard_evidence(path, chunk_bytes=16)
+            manifest = json.loads(path.read_text())
+            self.assertEqual(manifest['pairsPerFile'], 8)
+            encoded = [np.frombuffer(gzip.decompress((path.parent / part).read_bytes()), '<u2')
+                       for part in manifest['packedFiles']]
+        both = (x.T @ x).toarray()
+        np.testing.assert_array_equal(np.concatenate(encoded), both[np.tril_indices(17, -1)])
+
     def test_crossovers_and_filtered_recommendations(self):
         self.assertEqual(work_fandoms({'Fandoms': 'Naruto, Worm - Wildbow, Worm (Parahumans)'}), ['Naruto', 'Worm'])
         self.assertEqual(work_fandoms({'Fandoms': 'Not Naruto, Unknown'}), [])
+        self.assertEqual(work_fandoms({'Fandoms': 'Merlin (TV), Merlin (BBC), Star Trek (2009)'}),
+                         ['Merlin (BBC)', 'Star Trek'])
+        self.assertEqual(work_fandoms({'Fandoms': 'Merlin (TV) RPF, Star Trek RPF'}), [])
         # Twelve candidates in the fandom; a thirteenth supplied work outside it
         # favors the class that gives the hidden title a high probability.
         p = np.full((2, 13), 0.2)
