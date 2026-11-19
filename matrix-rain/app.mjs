@@ -8,6 +8,7 @@ const status = el('status'),
 const video = /** @type {HTMLButtonElement} */ (el('video'));
 let scene,
   picture,
+  focalPoint,
   playing = false,
   start = 0,
   raf = 0,
@@ -17,7 +18,7 @@ let scene,
 function show(t) {
   input('time').value = t.toFixed(2);
   el('clock').textContent = t.toFixed(2) + ' / ' + duration + ' s';
-  paint(ctx, frame(scene, t), picture);
+  paint(ctx, frame(scene, t), picture, focalPoint);
 }
 function configure() {
   try {
@@ -91,6 +92,7 @@ async function loadImage(url) {
     await img.decode();
     if (id === pendingImage) {
       picture = img;
+      focalPoint = url === demo ? undefined : { x: 0.5, y: 0.5 };
       el('reset-image').hidden = url === demo;
       show(input('time').valueAsNumber);
       status.textContent = '';

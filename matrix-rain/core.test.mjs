@@ -12,6 +12,7 @@ test('frames are reproducible across seeking, with independent rain and opening 
   const rain = submit({ mode: 'rain', time: 16 });
   assert.equal(rain.zoom, 1);
   assert.equal(rain.imageAlpha, 0);
+  assert.equal(rain.blackout, 0);
   assert.ok(rain.glyphs.length);
 });
 function openTitle(f) {
@@ -41,9 +42,15 @@ test('the title centers on the optical axis; outline precedes focus and the mask
     assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom === f.zoom);
     assert.ok(outline.imageZoom >= 0.75 && outline.imageZoom < 0.85);
     assert.ok(midway.imageZoom > outline.imageZoom && midway.imageZoom < end.imageZoom);
-    assert.ok(Math.abs(end.imageZoom - 1.5) < 1e-10);
+    assert.ok(0.09 * 810 * end.imageZoom > 800, 'one lens nearly spans the film');
+    assert.equal(frame(s, 15.55).blackout, 0);
+    assert.ok(frame(s, 15.75).blackout > 0 && frame(s, 15.75).blackout < 1);
+    assert.equal(end.blackout, 1);
     assert.ok(midway.imageAlpha > 0 && midway.rainBlur > 0 && midway.zoom > outline.zoom);
-    assert.ok(end.imageAlpha > midway.imageAlpha && end.rainAlpha < midway.rainAlpha);
+    assert.equal(end.imageAlpha, 1);
+    assert.ok(frame(s, 14.2).rainAlpha > end.rainAlpha);
+    const progress = (t) => frame(s, t).cameraProgress;
+    assert.ok(progress(14.85) - progress(14.35) > 3 * (progress(14.0) - progress(13.5)));
     for (const shot of [midway, end])
       assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - outline.maskPitch / outline.imageZoom) < 1e-10);
   }

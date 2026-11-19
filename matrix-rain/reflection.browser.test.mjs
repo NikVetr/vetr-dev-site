@@ -6,7 +6,7 @@ test('the reflected figure reaches the bezel from its first outline through the 
   const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
   const app = await openPage('matrix-rain/', { engine });
   try {
-    const { samples, lenses } = await app.page.evaluate(async () => {
+    const { samples, lenses, black } = await app.page.evaluate(async () => {
       const { makeScene, frame, paint } = await import(new URL('core.mjs', location.href).href);
       const portrait = new Image();
       portrait.src = 'nik-reflection.webp';
@@ -16,7 +16,7 @@ test('the reflected figure reaches the bezel from its first outline through the 
       canvas.height = 540;
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
       const scene = makeScene();
-      const samples = [11.25, 13.16, 13.79, 14.5, 15.1, 16].map((time) => {
+      const samples = [11.25, 13.16, 13.79, 14.5, 15.1, 15.55].map((time) => {
         const shot = frame(scene, time);
         // Compare with the same rain to measure only the visible person.
         const read = () => ctx.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -37,26 +37,55 @@ test('the reflected figure reaches the bezel from its first outline through the 
         }
         return { top, bottomPixels };
       });
-      // Put a bright glyph directly behind each lens in the final shot.
-      const lensCenters = [394, 538];
-      const y = 238;
+      // At full magnification a bright glyph behind the lens must leave its
+      // photographed tint intact. Both edges of the frame should sample glass.
       const closeup = {
-        ...frame(scene, 16), crt: 0, rainBlur: 0, size: 90,
-        glyphs: lensCenters.map((x) => ({ x, y, char: '█', alpha: 1, hot: true })),
+        ...frame(scene, 15.55),
+        crt: 0,
+        rainBlur: 0,
+        size: 90,
+        glyphs: [{ x: 480, y: 270, char: '█', alpha: 1, hot: true }],
       };
-      const greenAtLenses = () => lensCenters.map((x) => ctx.getImageData(x, y, 1, 1).data[1]);
+      const green = (x) => ctx.getImageData(x, 270, 1, 1).data[1];
       paint(ctx, closeup, null);
-      const background = greenAtLenses();
+      const background = green(480);
       paint(ctx, closeup, portrait);
-      const composed = greenAtLenses();
+      const composed = green(480);
       paint(ctx, { ...closeup, glyphs: [] }, portrait);
-      return { samples, lenses: { background, composed, tint: greenAtLenses() } };
+      const tint = green(480);
+      const source = document.createElement('canvas');
+      source.width = portrait.width;
+      source.height = portrait.height;
+      const photo = source.getContext('2d');
+      photo.drawImage(portrait, 0, 0);
+      const scale = Math.min(960 / portrait.width, 540 / portrait.height) * closeup.imageZoom;
+      for (const x of [120, 480, 840]) {
+        const srcX = Math.floor(0.557 * portrait.width + (x - 480) / scale);
+        const srcY = Math.floor(0.3 * portrait.height);
+        const expected = photo.getImageData(srcX, srcY, 1, 1).data[1];
+        if (Math.abs(green(x) - expected) > 4) throw new Error('Final crop missed the sunglass lens');
+      }
+      paint(ctx, frame(scene, 16), portrait);
+      const pixels = ctx.getImageData(0, 0, 960, 540).data;
+      return {
+        samples,
+        lenses: { background, composed, tint },
+        black: pixels.every((v, i) => v === (i % 4 === 3 ? 255 : 0)),
+      };
     });
     assert.equal(samples[0].top, 540, 'the title lock precedes the reflection');
     assert.ok(samples[1].top > 100 && samples[1].top < 160, 'the outline fills about 3/4 of the screen');
-    assert.ok(samples.slice(1).every((s) => s.bottomPixels > 5), 'a visible reflection meets the lower edge');
-    assert.ok(lenses.background.every((green) => green > 200));
-    assert.deepEqual(lenses.composed, lenses.tint, 'rain behind the lenses preserves their photographed tint');
+    assert.ok(
+      samples.slice(1).every((s) => s.bottomPixels > 5),
+      'a visible reflection meets the lower edge',
+    );
+    assert.ok(lenses.background > 200);
+    assert.ok(black, 'the opening ends at full black');
+    assert.deepEqual(
+      lenses.composed,
+      lenses.tint,
+      'rain behind the lenses preserves their photographed tint',
+    );
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -67,7 +96,13 @@ test('the studio fills a wide viewport and keeps the whole film and transport vi
   const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
   const app = await openPage('matrix-rain/', { engine });
   try {
-    const viewports = [[2543, 1209], [1440, 900], [1024, 600], [390, 844], [320, 665]];
+    const viewports = [
+      [2543, 1209],
+      [1440, 900],
+      [1024, 600],
+      [390, 844],
+      [320, 665],
+    ];
     for (const [width, height] of viewports) {
       await app.page.setViewportSize({ width, height });
       const layout = await app.page.evaluate(() => {
@@ -86,8 +121,8 @@ test('the studio fills a wide viewport and keeps the whole film and transport vi
       assert.equal(layout.pageWidth, width);
       assert.equal(layout.header.width, width);
       assert.ok(layout.playback.bottom <= height);
-      assert.ok(Math.abs(layout.film.width - layout.film.height * 16 / 9) < 1);
-      const fittedWidth = Math.min(layout.stage.width, layout.stage.height * 16 / 9);
+      assert.ok(Math.abs(layout.film.width - (layout.film.height * 16) / 9) < 1);
+      const fittedWidth = Math.min(layout.stage.width, (layout.stage.height * 16) / 9);
       assert.ok(Math.abs(layout.film.width - fittedWidth) < 1);
       if (width > 760) {
         assert.equal(layout.pageHeight, height);

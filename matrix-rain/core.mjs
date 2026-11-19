@@ -7,13 +7,20 @@ function ease(time, start, end) {
   const x = clamp((time - start) / (end - start));
   return x * x * (3 - 2 * x);
 }
+// The R opening adds two logistic pushes. Normalize the tails so a seek
+// before or after each move lands exactly on the parked camera position.
+function cameraEase(time, start, end, steepness) {
+  const t = clamp((time - start) / (end - start));
+  const tail = 1 / (1 + Math.exp(steepness / 2));
+  return (1 / (1 + Math.exp((0.5 - t) * steepness)) - tail) / (1 - 2 * tail);
+}
 const columns = 84,
   rows = 30,
   dx = 960 / columns,
   dy = 540 / rows;
 const finalZoom = 12;
 const outlineScale = 0.78;
-const closeupScale = 1.5;
+const closeupScale = 11.5;
 
 export function makeScene({
   title = 'The Correlation Matrix',
@@ -105,13 +112,12 @@ export function frame(scene, time) {
     throw invalidRequest('time', 'Frame time must be between 0 and 16 seconds.');
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
-  const focus = opening ? ease(time, 13.85, 16) : 0;
-  const approach = opening ? ease(time, 6, 10) : 0;
+  const focus = opening ? ease(time, 13.5, 14.75) : 0;
+  const approach = opening ? cameraEase(time, 6, 10, 8) : 0;
+  const travel = opening ? cameraEase(time, 13.5, 15.55, 9) : 0;
   const titleCamera = 1 + (titleZoom - 1) * approach;
-  const zoom = titleCamera + (finalZoom - titleZoom) * focus;
-  // The reflected face starts closer than the falling code. Keep the CRT
-  // slots attached to the reflection throughout the final focus change.
-  const glassZoom = titleCamera + titleZoom * (closeupScale / outlineScale - 1) * focus;
+  const zoom = titleCamera * (finalZoom / titleZoom) ** travel;
+  const glassZoom = titleCamera * (closeupScale / outlineScale) ** travel;
   const center = columns / 2 + (scene.centerColumn - columns / 2) * approach;
   const glyphs = [];
   for (const [i, s] of scene.streams.entries()) {
@@ -154,6 +160,8 @@ export function frame(scene, time) {
     size: dy * zoom,
     outlineAlpha: opening ? 0.62 * ease(time, 12.8, 13.42) * (1 - focus) : 0,
     imageAlpha: focus,
+    cameraProgress: travel,
+    blackout: opening ? ease(time, 15.55, 15.92) : 0,
     imageZoom: opening ? (glassZoom / titleZoom) * outlineScale : 1 / 8,
     maskPitch: 1.25 * glassZoom,
     rainAlpha: 1 - 0.84 * focus,
@@ -244,7 +252,7 @@ function slotMask(ctx) {
   return masks.get(ctx);
 }
 /** @param {CanvasRenderingContext2D} ctx @param {ReturnType<typeof frame>} f @param {HTMLImageElement | null} image */
-export function paint(ctx, f, image) {
+export function paint(ctx, f, image, focalPoint = { x: 0.557, y: 0.3 }) {
   const { width, height } = ctx.canvas;
   ctx.save();
   ctx.scale(width / 960, height / 540);
@@ -271,16 +279,25 @@ export function paint(ctx, f, image) {
     ctx.drawImage(layer.canvas, 0, 0, 960, 540);
     ctx.restore();
   } else drawGlyphs(ctx, f);
+  let glassX = 480,
+    glassY = 270;
   if (image && (f.outlineAlpha > 0 || f.imageAlpha > 0)) {
     const reflection = prepareReflection(image);
     const fit = Math.min(960 / image.width, 540 / image.height);
     const w = image.width * fit * f.imageZoom,
       h = image.height * fit * f.imageZoom;
-    // The shirt meets the bezel on first reveal. As the camera moves in,
-    // let the lower torso pass below the glass so the face stays in view.
-    const finalHeight = image.height * fit * closeupScale;
-    const x = (960 - w) / 2,
-      y = 540 - h + f.imageAlpha * Math.max(0, finalHeight - 540);
+    // Track one point on the photographed glass from its original position to
+    // screen center. A shallow arc gives the push a little lateral movement.
+    const startX = (focalPoint.x - 0.5) * image.width * fit * outlineScale;
+    const startY = 270 - (1 - focalPoint.y) * image.height * fit * outlineScale;
+    const progress = f.cameraProgress;
+    const arc = Math.sin(Math.PI * progress) ** 2;
+    const targetX = 480 + startX * (1 - progress) + 24 * arc;
+    const targetY = 270 + startY * (1 - progress) - 10 * arc;
+    const x = targetX - focalPoint.x * w,
+      y = targetY - focalPoint.y * h;
+    glassX = targetX - (startX * f.imageZoom) / outlineScale;
+    glassY = targetY - (startY * f.imageZoom) / outlineScale;
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
     if (f.outlineAlpha > 0) {
@@ -298,16 +315,16 @@ export function paint(ctx, f, image) {
   }
   if (f.crt > 0) {
     ctx.save();
-    ctx.translate(480, 270);
+    ctx.translate(glassX, glassY);
     const scale = f.maskPitch / 20;
     ctx.scale(scale, scale);
     ctx.fillStyle = slotMask(ctx);
     ctx.globalAlpha = 0.58 * f.crt * (1 - 0.4 * f.imageAlpha);
-    ctx.fillRect(-480 / scale, -270 / scale, 960 / scale, 540 / scale);
+    ctx.fillRect(-glassX / scale, -glassY / scale, 960 / scale, 540 / scale);
     ctx.restore();
     // The old CRT also had independent, low-alpha row and column intensity drift.
     ctx.save();
-    ctx.translate(480, 270);
+    ctx.translate(glassX, glassY);
     ctx.scale(f.maskPitch / 1.25, f.maskPitch / 1.25);
     ctx.translate(-480, -270);
     const tick = Math.floor(f.time * 5);
@@ -322,6 +339,11 @@ export function paint(ctx, f, image) {
     vignette.addColorStop(0, 'transparent');
     vignette.addColorStop(1, 'rgba(0,4,2,' + 0.75 * f.crt + ')');
     ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, 960, 540);
+  }
+  if (f.blackout > 0) {
+    ctx.globalAlpha = f.blackout;
+    ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, 960, 540);
   }
   ctx.restore();
