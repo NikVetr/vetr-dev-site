@@ -1,0 +1,88 @@
+{
+  "model": "latentClass",
+  "metric": "user-mean category log loss",
+  "folds": 3,
+  "validationUsers": 7196,
+  "testUsers": 1787,
+  "testRatings": 5386,
+  "cv": [
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 0.8790137126915887,
+      "rmse": 1.3064863890321465,
+      "brier": 0.1453285561850356
+    },
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 0.8897850967870315,
+      "rmse": 1.3218431847820806,
+      "brier": 0.1492293940541928
+    },
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 0.9010020437641111,
+      "rmse": 1.3458400390454055,
+      "brier": 0.1543367836092175
+    },
+    {
+      "label": "Latent class, K=16",
+      "logLoss": 0.9060864729584287,
+      "rmse": 1.3589216135268496,
+      "brier": 0.15706975059037498
+    },
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.9440983274338797,
+      "rmse": 1.4066198430576138,
+      "brier": 0.1665450103208754
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.9057283885016024,
+      "rmse": 1.354190494940854,
+      "brier": 0.16245336512725642
+    },
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 0.843710676572033,
+      "rmse": 1.2528956063563885,
+      "brier": 0.14120983980274773
+    }
+  ],
+  "selectedK": 2,
+  "cvPoolUsers": 676788,
+  "developmentUsers": 676788,
+  "suppliedRatings": 4,
+  "maxTargetRatings": 12,
+  "brierThreshold": 4.0,
+  "finalFit": {
+    "users": 845984,
+    "ratings": 1056345,
+    "iterations": 70,
+    "seed": 42
+  },
+  "respondentsWithFiveRatings": 8983,
+  "topicCoverage": {
+    "Society & Culture": 671,
+    "Comedy": 453,
+    "Education": 384,
+    "News": 335,
+    "Business": 334,
+    "Arts": 316,
+    "Health & Fitness": 308,
+    "TV & Film": 287,
+    "Leisure": 279,
+    "Religion & Spirituality": 277,
+    "Sports": 277,
+    "Kids & Family": 259,
+    "History": 259,
+    "True Crime": 255,
+    "Technology": 255,
+    "Music": 251,
+    "Science": 250,
+    "Fiction": 209,
+    "Government": 110
+  }
+}
