@@ -117,6 +117,7 @@ select_catalog <- function(ratings, items, template_file, out_catalog, out_repor
   key <- function(x) ifelse(startsWith(x,"class"),"latentClass",x)
   names(models) <- key(names(models))
   template$models <- models
+  template$defaultModel <- key(winner)
   template$fit$users <- nrow(y)
   template$fit$ratings <- sum(!is.na(y))
   labels <- function(keys) {

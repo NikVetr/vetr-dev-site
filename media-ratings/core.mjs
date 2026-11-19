@@ -1,3 +1,4 @@
+import { modelEvidence } from './evidence.mjs';
 import { latestRatingDate, populationModel, validRatingDate } from './calendar.mjs';
 import { checkRequestKeys, invalidRequest } from '../shared/request.js';
 import { cholesky, dot, symmetricEigen } from '../intuitions/lib/linalg.js';
@@ -6,7 +7,7 @@ import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
 /** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
-/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:{strength:number,logRatios:number[][]},ratingYear?:{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:string|{strength:number,logRatios:number[][]},ratingYear?:string|{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
 /** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
 /** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[],ratedOn?:Record<string,string>}} Request */
 /** @param {number[]} a */
@@ -58,7 +59,7 @@ export function validateCatalog(catalog) {
         'The similarity model must reference a fitted latent-class model.',
       );
       if (model.titleChoice !== undefined) {
-        const choice = model.titleChoice;
+        const choice = modelEvidence(catalog, model, 'titleChoice');
         requireValue(
           choice &&
             Number.isFinite(choice.strength) &&
@@ -72,7 +73,7 @@ export function validateCatalog(catalog) {
         );
       }
       if (model.ratingYear !== undefined) {
-        const calendar = model.ratingYear;
+        const calendar = modelEvidence(catalog, model, 'ratingYear');
         requireValue(
           calendar &&
             Number.isSafeInteger(calendar.firstYear) &&
@@ -463,7 +464,7 @@ export function predict(
       values,
       threshold,
       model.similarityFrom !== undefined ? catalog.models[model.similarityFrom] : model,
-      model.titleChoice,
+      modelEvidence(catalog, model, 'titleChoice'),
       new Set(volunteered),
       date ? obs.map((i) => populationModel(catalog, model, ratedOn[items[i].itemId])) : null,
     );

@@ -581,6 +581,34 @@ test('submission-year calibration conditions on each dated answer and compares t
   close(fp.classes.find((c) => c.index === 0).probability, result.weights[0].posterior);
   assert.throws(() => submit({ ...request, ratedOn: { c: '2000-10-01' } }), /supplied item IDs/);
   assert.throws(() => submit({ ...request, ratedOn: { a: '2001-02-29' } }), /YYYY-MM-DD/);
+  const choice = {
+    strength: 0.5,
+    logRatios: [
+      [Math.log(4), 0, 0],
+      [0, 0, 0],
+    ],
+  };
+  const models = /** @type {Record<string, any>} */ (films.models);
+  models.choice = { kind: 'class-similarity', base: 'base', similarityFrom: 'hybrid', titleChoice: choice };
+  models.both = { ...models.choice, titleChoice: 'choice', ratingYear: 'date' };
+  films.defaultModel = 'both';
+  const both = { catalog: films, ratings, ratedOn, volunteered: ['a'] };
+  const combined = submit(both);
+  close(combined.weights[0].posterior, (2 * w[0]) / (2 * w[0] + w[1]));
+  close(combined.predictions[0].prior, result.predictions[0].prior);
+  close(combined.predictions[0].chance, (2 * w[0] * target[0] + w[1] * target[1]) / (2 * w[0] + w[1]));
+  assert.deepEqual(submit({ ...both, volunteered: [] }), result);
+  assert.deepEqual(submit({ ...both, ratedOn: {} }), submit({ ...both, ratedOn: {}, model: 'choice' }));
+  assert.deepEqual(submit({ catalog: films, ratings }), submit({ catalog: films, ratings, model: 'hybrid' }));
+  const jointProfile = preferenceFingerprint(films, { ratings, ratedOn, volunteered: ['a'] });
+  close(jointProfile.classes.find((c) => c.index === 0).probability, combined.weights[0].posterior);
+  models.both.ratingYear = 'both';
+  assert.throws(() => submit(both), /category counts/);
+  models.both.ratingYear = 'date';
+  models.both.titleChoice = 'hybrid';
+  assert.throws(() => submit(both), /class-by-item/);
+  delete models.both;
+  films.defaultModel = 'hybrid';
   calendar.counts[0].pop();
   assert.throws(() => submit(request), /category counts/);
 });

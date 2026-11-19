@@ -1,6 +1,6 @@
 # Which films a person chooses to rate
 
-The film model forecasts stars on the scale MovieLens members used. Its eight classes differ in overall rating level, use of half-stars, and relative preferences across films. Giving both *The Matrix* and *Spirited Away* five stars moves the production model's probability on its two “Generous” classes from 26.9% to 53.9%. Across all 500 titles, the class-weighted expected score rises from 3.72 to 3.96 before the item-specific adjustment. The model also transfers a rating above or below its leave-one-out expectation to similar films. These two effects can coexist.
+The film model forecasts stars on the scale MovieLens members used. Its eight classes differ in overall rating level, use of half-stars, and relative preferences across films. Giving both *The Matrix* and *Spirited Away* five stars moves the eight-class model's probability on its two “Generous” classes from 26.9% to 53.9%. Across all 500 titles, the class-weighted expected score rises from 3.72 to 3.96 before the item-specific adjustment. The model also transfers a rating above or below its leave-one-out expectation to similar films. These two effects can coexist.
 
 MovieLens 25M records ratings, tags and timestamps. The release has no complete record of which films each person saw, which titles they were offered, or which offers they declined. Randomly withholding four inputs from a person's recorded ratings tests prediction of their other recorded ratings. Predicting what they would say after watching an arbitrary film requires assumptions about selection. [MovieLens 25M data description](https://files.grouplens.org/datasets/movielens/ml-25m-README.html)
 
@@ -8,7 +8,7 @@ MovieLens 25M records ratings, tags and timestamps. The release has no complete 
 
 We kept the published 500-film catalog, eight-class fit, item-similarity correction, respondent splits and scoring protocol. We selected among 21 variants by average validation log loss on 2,000 respondents. Each finalist was then scored on the same 3,000 previously held-out respondents and 196,480 target ratings used in earlier comparisons. Each respondent contributes equally. Lower values are better. [All validation choices and held-out scores](validation/selection.json)
 
-| Evidence added to the default predictor | Category log loss | RMSE, stars | Brier, ≥4 stars |
+| Evidence added to the ratings-and-tags predictor | Category log loss | RMSE, stars | Brier, ≥4 stars |
 | --- | ---: | ---: | ---: |
 | Baseline | 1.5955 | 0.9083 | 0.19425 |
 | Shared residual generosity | 1.5974 | 0.9113 | 0.19469 |
@@ -26,7 +26,7 @@ The generosity experiment fitted a single additional offset to the four leave-on
 
 The title signal is useful when someone chooses which ratings to supply. It can partly reflect genre taste, release era, popularity, or the site's earlier recommendations. A high rating for an unusual genre need not have a fixed extra weight. How diagnostic it is depends on both how likely the person was to select that title and how surprising the stars were for that title.
 
-For a title the app picked, part of the explanation for its presence is known. Treating a click on a suggested film as a freely chosen submission could misclassify the person. In the app, **Ratings + tags + title choice** uses the identities of films marked **Picked by me**. App suggestions and imported ratings with an unspecified source contribute only their stars. The deployed frequency estimates use the refitted classes and all 159,192 eligible respondents. The film evidence here comes from the MovieLens four-reveal protocol. Extending it to other media or asking a long run of adaptive questions requires its own check.
+For a title the app picked, part of the explanation for its presence is known. Treating a click on a suggested film as a freely chosen submission could misclassify the person. In the app, **Title choice + rating year** uses the identities of films marked **Picked by me**. App suggestions and imported ratings with an unspecified source contribute stars and any supplied date. The public JSON API keeps the title-only comparison under `titleChoice`. [Combined predictor and tests](predictor-comparison.md) The deployed frequency estimates use the refitted classes and all 159,192 eligible respondents. The film evidence here comes from the MovieLens four-reveal protocol. Extending it to other media or asking a long run of adaptive questions requires its own check.
 
 Model comparisons also depend on the scoring rule. A MovieLens 25M and Netflix study found different leaders for uncertainty in predicted stars and for ranking by the chance of clearing a threshold. For this app, a candidate needs to predict an entire rating distribution from a handful of answers. We use category log loss to choose among candidates and report star RMSE and threshold Brier alongside it. [Coscrato and Bridge, comparison of probabilistic rating predictors](https://www.cs.ucc.ie/~dgb/papers/Coscrato-Bridge-2023.pdf)
 

@@ -1,4 +1,4 @@
-"""Verify a packaged film year model against the NumPy calibration used for evaluation."""
+"""Verify both packaged film predictors using rating year against the NumPy calibration used for evaluation."""
 
 import argparse
 import json
@@ -24,10 +24,15 @@ def run_cli(catalog, request):
     return json.loads(proc.stdout)
 
 
-def check(catalog):
+def check(catalog, key):
     items = catalog["items"]
     scale = np.array(catalog["scale"])
     model = catalog["models"]["ratingYear"]
+    choice = (
+        catalog["models"]["titleChoice"]["titleChoice"]
+        if key == "personalized"
+        else None
+    )
     year = model["ratingYear"]
     counts = np.array(year["counts"]).reshape(-1, len(items), len(scale))
     if counts.sum() != catalog["fit"]["ratings"]:
@@ -71,12 +76,24 @@ def check(catalog):
             for i, y in zip(obs, dates, strict=True)
             if y is not None
         }
-        request = {"ratings": ratings, "ratedOn": rated_on, "threshold": 4}
-        actual = run_cli(catalog, {"model": "ratingYear", **request})
+        picked = np.arange(len(obs)) % 2 == 0
+        if label == "upper boundary":
+            picked[:] = False
+        volunteered = [items[i]["itemId"] for i in obs[picked]]
+        request = {
+            "ratings": ratings,
+            "ratedOn": rated_on,
+            "threshold": 4,
+            "volunteered": volunteered,
+        }
+        actual = run_cli(catalog, {"model": key, **request})
         if not rated_on:
             original = run_cli(
                 catalog,
-                {"model": model["similarityFrom"], "ratings": ratings, "threshold": 4},
+                {
+                    **request,
+                    "model": "titleChoice" if choice else model["similarityFrom"],
+                },
             )
             assert actual["weights"] == original["weights"]
             for a, b in zip(
@@ -107,6 +124,10 @@ def check(catalog):
                 axis=1,
             )
             logs = np.log(observations[:, np.arange(len(obs)), vals])
+            if choice:
+                logs += (
+                    choice["strength"] * np.array(choice["logRatios"])[:, obs] * picked
+                )
             logw = log_prior + logs.sum(axis=1)
             weights = np.exp(logw - logw.max())
             weights /= weights.sum()
@@ -141,11 +162,14 @@ def check(catalog):
             np.testing.assert_allclose(got, expected, atol=1e-11, rtol=0, err_msg=label)
         total_categories += forecast.size
     print(
-        f"Verified {len(cases)} profiles and {total_categories:,} forecast category probabilities."
+        f"Verified {key} across {len(cases)} profiles and {total_categories:,} forecast category probabilities."
     )
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("catalog", type=Path)
-    check(read(parser.parse_args().catalog))
+    catalog = read(parser.parse_args().catalog)
+    check(catalog, "ratingYear")
+    if "personalized" in catalog["models"]:
+        check(catalog, "personalized")

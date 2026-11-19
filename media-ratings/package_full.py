@@ -144,7 +144,14 @@ def package(root, archive, catalog, report):
     matrix = training_matrix(root, data)
     data["models"]["titleChoice"] = title_choice_model(matrix, data)
     data["models"]["ratingYear"] = rating_year_model(archive, matrix, data)
-    data["defaultModel"] = "ratingsTags"
+    data["models"]["personalized"] = {
+        "kind": "class-similarity",
+        "base": "latentClass",
+        "similarityFrom": "ratingsTags",
+        "titleChoice": "titleChoice",
+        "ratingYear": "ratingYear",
+    }
+    data["defaultModel"] = "personalized"
     catalog.write_text(
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"
     )

@@ -43,9 +43,9 @@ All 2019 profiles received the same reference year. That gain supports recent pe
 
 ## Rating years in the app
 
-**Ratings + tags + rating year** uses the half-strength adjustment selected in the forward-calendar test. Its annual tables count all 10,944,737 in-catalog ratings from MovieLens 25M across the 500 films and ten star values. The model shares its eight classes, film vectors and residual regression with the default predictor.
+The film default **Title choice + rating year** uses the half-strength adjustment selected in the forward-calendar test. Its annual tables count all 10,944,737 in-catalog ratings from MovieLens 25M across the 500 films and ten star values. It shares its eight classes, film vectors and residual regression with **Ratings + tags**. The public JSON API also supports the year-only comparison under `ratingYear`.
 
-Each dated input uses that year’s class-specific star probabilities. An undated input uses the all-year probabilities. The latest supplied date sets the year for both the personalized forecast and the catalog mean used to measure its shift. Dates outside 1995–2019 use the nearest endpoint year. If all inputs are undated, predictions equal the default model’s. For a rating you recorded elsewhere, enter the date you gave it those stars. [Prediction API](api.md)
+Each dated input uses that year’s class-specific star probabilities. An undated input uses the all-year probabilities. The latest supplied date sets the year for both the personalized forecast and the catalog mean used to measure its shift. Dates outside 1995–2019 use the nearest endpoint year. With undated inputs the default uses stars and any volunteered identities. The year-only comparison with undated inputs reproduces **Ratings + tags**. For a rating you recorded elsewhere, enter the date you gave it those stars. [Prediction API](api.md)
 
 ## Reproduce
 

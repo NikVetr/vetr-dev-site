@@ -1,3 +1,5 @@
+import { modelEvidence } from './evidence.mjs';
+
 // Counts are in catalog item and rating-scale order within each calendar year.
 export function validRatingDate(value) {
   if (typeof value !== 'string' || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) || value.startsWith('0000'))
@@ -17,11 +19,11 @@ export function calibrationYear(calendar, date) {
 const calendarFits = new WeakMap();
 export function populationModel(catalog, selected, date = '') {
   const base = selected.kind === 'class-similarity' ? catalog.models[selected.base] : selected;
-  const calendar = selected.ratingYear;
+  const calendar = modelEvidence(catalog, selected, 'ratingYear');
   if (!calendar || !date) return base;
   const year = calibrationYear(calendar, date);
-  if (!calendarFits.has(selected)) calendarFits.set(selected, new WeakMap());
-  const byBase = calendarFits.get(selected);
+  if (!calendarFits.has(calendar)) calendarFits.set(calendar, new WeakMap());
+  const byBase = calendarFits.get(calendar);
   const levels = catalog.scale.length;
   if (!byBase.has(base)) {
     const pooled = new Float64Array(catalog.items.length * levels).fill(1 / levels);
