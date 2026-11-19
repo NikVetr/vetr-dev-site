@@ -7,27 +7,31 @@ from itertools import combinations
 from pathlib import Path
 
 
-def prepare(responses, destinations, output):
-    names = destinations.read_text(encoding="utf-8").splitlines()
-    counts = Counter()
-    pairs = Counter()
-    profiles = []
+def swipe_profiles(responses, destination_count):
     with responses.open(encoding="utf-8", newline="") as source:
         for row in csv.DictReader(source):
             scores = {}
             ambiguous = set()
             for value, column in enumerate(("no_swipes", "maybe_swipes", "yes_swipes")):
                 for index in json.loads(row[column] or "[]"):
-                    if type(index) is not int or not 0 <= index < len(names):
+                    if type(index) is not int or not 0 <= index < destination_count:
                         raise ValueError(f"Unknown destination index {index!r}")
                     if index in scores and scores[index] != value:
                         ambiguous.add(index)
                     scores[index] = value
             for index in ambiguous:
                 del scores[index]
-            profiles.append(scores)
-            counts.update(scores.keys())
-            pairs.update(combinations(sorted(scores), 2))
+            yield scores
+
+
+def prepare(responses, destinations, output):
+    names = destinations.read_text(encoding="utf-8").splitlines()
+    counts = Counter()
+    pairs = Counter()
+    profiles = list(swipe_profiles(responses, len(names)))
+    for scores in profiles:
+        counts.update(scores.keys())
+        pairs.update(combinations(sorted(scores), 2))
 
     # The provider offered different groups of destinations to different respondents.
     # Choose a small panel for which every pair actually received joint responses.

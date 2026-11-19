@@ -1,0 +1,1744 @@
+{
+  "selected": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+  "holdoutTrainingUsers": 58549,
+  "holdoutTrainingSwipes": 767653,
+  "sourceUsersWithSwipes": 61130,
+  "sourceSwipes": 813802,
+  "sourceDestinations": 1452,
+  "catalogUsers": 12905,
+  "catalogSwipes": 27047,
+  "developmentUsers": 4737,
+  "developmentTargets": 5035,
+  "validation": [
+    {
+      "label": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6136951116925888,
+      "rmse": 0.8149828528185321,
+      "brier": 0.17569847433267566
+    },
+    {
+      "label": "K8 / ratings x 0.25 / Maybe variance 1",
+      "logLoss": 0.6137771997199732,
+      "rmse": 0.8151196267775412,
+      "brier": 0.1757616958008231
+    },
+    {
+      "label": "K8 / ratings+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.613860770974878,
+      "rmse": 0.8149190418011535,
+      "brier": 0.17564527219014975
+    },
+    {
+      "label": "K8 / geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6139194482209943,
+      "rmse": 0.8151473267990218,
+      "brier": 0.17575839960559195
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6139285681909332,
+      "rmse": 0.8150748054592964,
+      "brier": 0.17573374375803144
+    },
+    {
+      "label": "K8 / ratings x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6139418859592376,
+      "rmse": 0.8150568750946623,
+      "brier": 0.17570640765844575
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6140242814362389,
+      "rmse": 0.8155177625080365,
+      "brier": 0.17601421078832818
+    },
+    {
+      "label": "K8 / geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6140865384648151,
+      "rmse": 0.8150826786682607,
+      "brier": 0.1757070869725584
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6140970788292736,
+      "rmse": 0.8150139093290034,
+      "brier": 0.17568336024562914
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6142550293682267,
+      "rmse": 0.8158733088788327,
+      "brier": 0.17615100231711334
+    },
+    {
+      "label": "wideK8 / all-factors x 0.25 / Maybe variance 1",
+      "logLoss": 0.6143114838480331,
+      "rmse": 0.815733128612599,
+      "brier": 0.1761148064544049
+    },
+    {
+      "label": "K16 / ratings+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6143295753075637,
+      "rmse": 0.8158235507491505,
+      "brier": 0.17600598562705216
+    },
+    {
+      "label": "wideK8 / geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6143452851831492,
+      "rmse": 0.8158696208889977,
+      "brier": 0.176143519338792
+    },
+    {
+      "label": "K16 / ratings x 0.25 / Maybe variance 1",
+      "logLoss": 0.6144444569421099,
+      "rmse": 0.8159719940132817,
+      "brier": 0.17607432239052392
+    },
+    {
+      "label": "wideK8 / ratings x 0.25 / Maybe variance 1",
+      "logLoss": 0.6144650697280919,
+      "rmse": 0.8161795819934222,
+      "brier": 0.17628158847419395
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6144985370867415,
+      "rmse": 0.8160677048040292,
+      "brier": 0.17622080309518323
+    },
+    {
+      "label": "K16 / geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6145280559616216,
+      "rmse": 0.8159771053293481,
+      "brier": 0.17606122175912325
+    },
+    {
+      "label": "K8 / all-factors x 0.25 / Maybe variance 1",
+      "logLoss": 0.6145379985482775,
+      "rmse": 0.8155686040256436,
+      "brier": 0.17593786270180445
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.25 / Maybe variance 1",
+      "logLoss": 0.6145430005225222,
+      "rmse": 0.8158863061788816,
+      "brier": 0.17602914261111136
+    },
+    {
+      "label": "K16 / ratings+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6145510643236729,
+      "rmse": 0.8157526787598957,
+      "brier": 0.17595281898795193
+    },
+    {
+      "label": "K16 / ratings x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.614664858206169,
+      "rmse": 0.8159018338458465,
+      "brier": 0.17601893581241537
+    },
+    {
+      "label": "K8 / ratings+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6147086403355437,
+      "rmse": 0.8160629737511124,
+      "brier": 0.17616907412374902
+    },
+    {
+      "label": "K8 / all-factors x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6147089277238896,
+      "rmse": 0.8155116378988289,
+      "brier": 0.17588898342714696
+    },
+    {
+      "label": "K8 / ratings x 0.5 / Maybe variance 1",
+      "logLoss": 0.6147389703986949,
+      "rmse": 0.8161883247703422,
+      "brier": 0.17623050150906472
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6147490627209048,
+      "rmse": 0.8156749969100754,
+      "brier": 0.17636914309955418
+    },
+    {
+      "label": "K16 / geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6147510586229369,
+      "rmse": 0.815905681496952,
+      "brier": 0.17601003676356755
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6147672226122338,
+      "rmse": 0.8158180601814461,
+      "brier": 0.17597861231735384
+    },
+    {
+      "label": "K8 / ratings+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6148685813416116,
+      "rmse": 0.8159872227892115,
+      "brier": 0.1761012741836134
+    },
+    {
+      "label": "K8 / ratings x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6148971821988125,
+      "rmse": 0.8161153814370696,
+      "brier": 0.1761589607497763
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6149664767671684,
+      "rmse": 0.8160939919166119,
+      "brier": 0.17617762333639186
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6149744666955835,
+      "rmse": 0.8160250033709763,
+      "brier": 0.1765003131926803
+    },
+    {
+      "label": "wideK8 / all-factors x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6150407618903013,
+      "rmse": 0.8158965755994264,
+      "brier": 0.17647425584257118
+    },
+    {
+      "label": "K8 / Maybe variance 1",
+      "logLoss": 0.6150480206510802,
+      "rmse": 0.8159475875934894,
+      "brier": 0.1760715021542617
+    },
+    {
+      "label": "wideK8 / geography x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6150676212986247,
+      "rmse": 0.8160219343846468,
+      "brier": 0.1764958974665499
+    },
+    {
+      "label": "K8 / ratings+geography x 0.25",
+      "logLoss": 0.615067909494704,
+      "rmse": 0.8149455868672947,
+      "brier": 0.17584731923851102
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6150964826622799,
+      "rmse": 0.8168286109821542,
+      "brier": 0.1765156896382012
+    },
+    {
+      "label": "K16 / ratings+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6151082624394439,
+      "rmse": 0.8167202955477707,
+      "brier": 0.17640239802218924
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6151320124047513,
+      "rmse": 0.816023506248302,
+      "brier": 0.1761152765244845
+    },
+    {
+      "label": "K8 / ratings x 0.25",
+      "logLoss": 0.6151481809219651,
+      "rmse": 0.8150837798553967,
+      "brier": 0.17590706733223632
+    },
+    {
+      "label": "K16 / all-factors x 0.25 / Maybe variance 1",
+      "logLoss": 0.6151691525368898,
+      "rmse": 0.8163675670644805,
+      "brier": 0.17622829318375421
+    },
+    {
+      "label": "wideK8 / ratings x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6151818422240529,
+      "rmse": 0.8163305891068213,
+      "brier": 0.17662749220204757
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6151971318012904,
+      "rmse": 0.8161958786556505,
+      "brier": 0.1765394525958056
+    },
+    {
+      "label": "K16 / ratings x 0.5 / Maybe variance 1",
+      "logLoss": 0.6152031069090843,
+      "rmse": 0.8168658095611434,
+      "brier": 0.17647286291103348
+    },
+    {
+      "label": "K8 / Maybe variance 0.25",
+      "logLoss": 0.6152223046083187,
+      "rmse": 0.8158991423402684,
+      "brier": 0.17603471416469643
+    },
+    {
+      "label": "wideK8 / all-factors x 0.5 / Maybe variance 1",
+      "logLoss": 0.6152876143516052,
+      "rmse": 0.8166654884994158,
+      "brier": 0.1764884404380312
+    },
+    {
+      "label": "K8 / geography x 0.25",
+      "logLoss": 0.6152947073010804,
+      "rmse": 0.8151089599988739,
+      "brier": 0.17591037374945992
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.25",
+      "logLoss": 0.6153054774489043,
+      "rmse": 0.8150417673911686,
+      "brier": 0.1758870028066774
+    },
+    {
+      "label": "K16 / ratings+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6153240103921548,
+      "rmse": 0.8166376566106403,
+      "brier": 0.17633495431147542
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6153282251628134,
+      "rmse": 0.8166944429904479,
+      "brier": 0.17638759671048831
+    },
+    {
+      "label": "wideK8 / ratings x 0.5 / Maybe variance 1",
+      "logLoss": 0.6153606163240263,
+      "rmse": 0.8172303664346648,
+      "brier": 0.1766879518439716
+    },
+    {
+      "label": "K16 / all-factors x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6153956134501208,
+      "rmse": 0.8163028273344437,
+      "brier": 0.17617904170947865
+    },
+    {
+      "label": "K16 / ratings x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6154169152405141,
+      "rmse": 0.8167853692594651,
+      "brier": 0.1764014401790084
+    },
+    {
+      "label": "K8 / generosity x 0.25 / Maybe variance 1",
+      "logLoss": 0.6154942921339777,
+      "rmse": 0.8170770413077068,
+      "brier": 0.17658725866487585
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6155493198817584,
+      "rmse": 0.816616581413089,
+      "brier": 0.17632528817516363
+    },
+    {
+      "label": "K8 / generosity x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6156535428005543,
+      "rmse": 0.8170087330956401,
+      "brier": 0.17652346142234984
+    },
+    {
+      "label": "K16 / ratings+geography x 0.25",
+      "logLoss": 0.6157778866270862,
+      "rmse": 0.81577550669705,
+      "brier": 0.17615390978997297
+    },
+    {
+      "label": "wideK8 / Maybe variance 1",
+      "logLoss": 0.6157844335752717,
+      "rmse": 0.8169835512801336,
+      "brier": 0.17664550223386508
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6157847342934845,
+      "rmse": 0.8169460472446259,
+      "brier": 0.17682324234121793
+    },
+    {
+      "label": "K8 / geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6158777280016445,
+      "rmse": 0.8170495289525368,
+      "brier": 0.17656495708589773
+    },
+    {
+      "label": "K16 / ratings x 0.25",
+      "logLoss": 0.6158907903744365,
+      "rmse": 0.8159248744298481,
+      "brier": 0.17621858695169745
+    },
+    {
+      "label": "K8 / all-factors x 0.25",
+      "logLoss": 0.6159180447408494,
+      "rmse": 0.8155410614233961,
+      "brier": 0.176093298797983
+    },
+    {
+      "label": "K16 / Maybe variance 1",
+      "logLoss": 0.6159339657421775,
+      "rmse": 0.8169955145658857,
+      "brier": 0.1764635638026933
+    },
+    {
+      "label": "K16 / geography x 0.25",
+      "logLoss": 0.6159789444316266,
+      "rmse": 0.815928361681567,
+      "brier": 0.17621239880234224
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.25",
+      "logLoss": 0.615995261716682,
+      "rmse": 0.8158421073020157,
+      "brier": 0.17618123348488074
+    },
+    {
+      "label": "wideK8 / all-factors x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6159962321249653,
+      "rmse": 0.816807251080955,
+      "brier": 0.1768167453961185
+    },
+    {
+      "label": "wideK8 / geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6160262262369383,
+      "rmse": 0.8175530242360877,
+      "brier": 0.17680651193481514
+    },
+    {
+      "label": "K8 / geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6160414907403993,
+      "rmse": 0.8169729598563606,
+      "brier": 0.17650141158170388
+    },
+    {
+      "label": "wideK8 / ratings x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6160440590715053,
+      "rmse": 0.8173475840803073,
+      "brier": 0.1769891728785097
+    },
+    {
+      "label": "K8 / ratings+geography x 0.5",
+      "logLoss": 0.6160732505291624,
+      "rmse": 0.8160073097484248,
+      "brier": 0.17629413139006492
+    },
+    {
+      "label": "K8 / ratings x 0.5",
+      "logLoss": 0.6161002197889537,
+      "rmse": 0.8161364195456069,
+      "brier": 0.1763491547406526
+    },
+    {
+      "label": "K16 / Maybe variance 0.25",
+      "logLoss": 0.616164145986342,
+      "rmse": 0.8169399232631027,
+      "brier": 0.17642652844585216
+    },
+    {
+      "label": "K16 / generosity x 0.25 / Maybe variance 1",
+      "logLoss": 0.6162027514118965,
+      "rmse": 0.8179681015321868,
+      "brier": 0.1769180701262911
+    },
+    {
+      "label": "K16 / geography x 0.5 / Maybe variance 1",
+      "logLoss": 0.6162285941867319,
+      "rmse": 0.8176878567713791,
+      "brier": 0.1767899754854331
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.5",
+      "logLoss": 0.6163391066994288,
+      "rmse": 0.8160459338153131,
+      "brier": 0.17631120838834846
+    },
+    {
+      "label": "K8 / all-factors x 0.5 / Maybe variance 1",
+      "logLoss": 0.6163592564421297,
+      "rmse": 0.8172278508533134,
+      "brier": 0.17664225968438843
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.25",
+      "logLoss": 0.6163958650339071,
+      "rmse": 0.8158223054529415,
+      "brier": 0.1768163214129898
+    },
+    {
+      "label": "K16 / generosity x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6164179939662425,
+      "rmse": 0.8178929807828629,
+      "brier": 0.1768546669106435
+    },
+    {
+      "label": "K8",
+      "logLoss": 0.6164334243524535,
+      "rmse": 0.8159339039115319,
+      "brier": 0.1762467732879044
+    },
+    {
+      "label": "K16 / geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6164483130524968,
+      "rmse": 0.8176049261303348,
+      "brier": 0.17672695233513955
+    },
+    {
+      "label": "K8 / all-factors x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6165306137673476,
+      "rmse": 0.8171660656241168,
+      "brier": 0.17658358070955002
+    },
+    {
+      "label": "wideK8 / Maybe variance 0.25",
+      "logLoss": 0.6165392150009279,
+      "rmse": 0.8171725334596233,
+      "brier": 0.17703874138859482
+    },
+    {
+      "label": "K16 / ratings+geography x 0.5",
+      "logLoss": 0.6165483432767204,
+      "rmse": 0.8166540812892658,
+      "brier": 0.17652699096973845
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.25",
+      "logLoss": 0.6166185559217218,
+      "rmse": 0.8161692727952364,
+      "brier": 0.17694388814005493
+    },
+    {
+      "label": "K16 / all-factors x 0.25",
+      "logLoss": 0.6166243046891707,
+      "rmse": 0.816328291010529,
+      "brier": 0.1763822522393528
+    },
+    {
+      "label": "K16 / ratings x 0.5",
+      "logLoss": 0.6166395315836577,
+      "rmse": 0.816802486874556,
+      "brier": 0.17659072156950303
+    },
+    {
+      "label": "wideK8 / all-factors x 0.25",
+      "logLoss": 0.6166896757287171,
+      "rmse": 0.8160471843900226,
+      "brier": 0.1769244058443481
+    },
+    {
+      "label": "wideK8 / geography x 0.25",
+      "logLoss": 0.6167133708566395,
+      "rmse": 0.8161666403047414,
+      "brier": 0.17694123604271672
+    },
+    {
+      "label": "wideK8 / geography x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6167210580401773,
+      "rmse": 0.8176719657829319,
+      "brier": 0.17712063623085156
+    },
+    {
+      "label": "K16 / all-factors x 0.5 / Maybe variance 1",
+      "logLoss": 0.6167565720823515,
+      "rmse": 0.8178017978590806,
+      "brier": 0.1768420842853393
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.5",
+      "logLoss": 0.6167759848555979,
+      "rmse": 0.8166351970010299,
+      "brier": 0.17652028904077333
+    },
+    {
+      "label": "wideK8 / ratings x 0.25",
+      "logLoss": 0.6168243456976489,
+      "rmse": 0.8164743524494587,
+      "brier": 0.17706907101825353
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.5",
+      "logLoss": 0.6168304297212709,
+      "rmse": 0.8163261966475618,
+      "brier": 0.17696664631476547
+    },
+    {
+      "label": "K8 / generosity x 0.25",
+      "logLoss": 0.616858189555254,
+      "rmse": 0.8170331053977176,
+      "brier": 0.17671960502362985
+    },
+    {
+      "label": "K16 / all-factors x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6169831596596521,
+      "rmse": 0.817732050030542,
+      "brier": 0.17678308471077253
+    },
+    {
+      "label": "K8 / geography x 0.5",
+      "logLoss": 0.6172487383911812,
+      "rmse": 0.8169930392602174,
+      "brier": 0.17669701844199395
+    },
+    {
+      "label": "wideK8 / generosity x 0.25 / Maybe variance 1",
+      "logLoss": 0.6173437572602513,
+      "rmse": 0.8191797161788877,
+      "brier": 0.17749529267483966
+    },
+    {
+      "label": "K16",
+      "logLoss": 0.6173949913559251,
+      "rmse": 0.8169709561076389,
+      "brier": 0.1766375114679219
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.5",
+      "logLoss": 0.6174128314854659,
+      "rmse": 0.8170705264189357,
+      "brier": 0.1772433033759217
+    },
+    {
+      "label": "wideK8 / all-factors x 0.5",
+      "logLoss": 0.6176341611114666,
+      "rmse": 0.8169445273772157,
+      "brier": 0.177249879357087
+    },
+    {
+      "label": "K16 / generosity x 0.25",
+      "logLoss": 0.6176423866181868,
+      "rmse": 0.8179137279139128,
+      "brier": 0.17705001523704686
+    },
+    {
+      "label": "wideK8 / ratings x 0.5",
+      "logLoss": 0.6176692041013923,
+      "rmse": 0.8174715111722922,
+      "brier": 0.17740528595583446
+    },
+    {
+      "label": "K16 / geography x 0.5",
+      "logLoss": 0.6176752844112953,
+      "rmse": 0.8176215573611335,
+      "brier": 0.17692179307273848
+    },
+    {
+      "label": "K8 / all-factors x 0.5",
+      "logLoss": 0.617739552740885,
+      "rmse": 0.8171919257950749,
+      "brier": 0.17678102311936764
+    },
+    {
+      "label": "wideK8 / generosity x 0.25 / Maybe variance 0.25",
+      "logLoss": 0.6180464395575197,
+      "rmse": 0.8193155501308009,
+      "brier": 0.1778202133175018
+    },
+    {
+      "label": "wideK8",
+      "logLoss": 0.6182013282237697,
+      "rmse": 0.8173377071206827,
+      "brier": 0.17750607737133606
+    },
+    {
+      "label": "K16 / all-factors x 0.5",
+      "logLoss": 0.6182115479196411,
+      "rmse": 0.8177539076144442,
+      "brier": 0.17697946372487935
+    },
+    {
+      "label": "wideK8 / geography x 0.5",
+      "logLoss": 0.618352872079719,
+      "rmse": 0.8177974936127294,
+      "brier": 0.17754447105270038
+    },
+    {
+      "label": "wideK8 / generosity x 0.25",
+      "logLoss": 0.6196823329644887,
+      "rmse": 0.8194505191567084,
+      "brier": 0.17824970426799133
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 1 / Maybe variance 1",
+      "logLoss": 0.6215969338983046,
+      "rmse": 0.8219476353669899,
+      "brier": 0.1786304708945486
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6222551550957376,
+      "rmse": 0.8220271698195292,
+      "brier": 0.17888313431759006
+    },
+    {
+      "label": "K8 / ratings+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6226128031139985,
+      "rmse": 0.8153805527919563,
+      "brier": 0.17723054095648105
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6226322821658314,
+      "rmse": 0.815734828464004,
+      "brier": 0.17734105438779177
+    },
+    {
+      "label": "K8 / ratings x 0.25 / Maybe variance 4",
+      "logLoss": 0.6226953188108685,
+      "rmse": 0.8155166527138609,
+      "brier": 0.17729651721813758
+    },
+    {
+      "label": "K8 / ratings x 1 / Maybe variance 1",
+      "logLoss": 0.6227487580966776,
+      "rmse": 0.8226490810906905,
+      "brier": 0.1789565181622446
+    },
+    {
+      "label": "K8 / geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6228359483694748,
+      "rmse": 0.8155456177511152,
+      "brier": 0.1772879769553012
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6228393353089553,
+      "rmse": 0.8154649723845778,
+      "brier": 0.17726149270571195
+    },
+    {
+      "label": "K16 / ratings x 1 / Maybe variance 1",
+      "logLoss": 0.6228527338740274,
+      "rmse": 0.8230417511053412,
+      "brier": 0.17908511267149307
+    },
+    {
+      "label": "K16 / all-factors+geography x 1 / Maybe variance 1",
+      "logLoss": 0.6228637385173127,
+      "rmse": 0.8227669377731432,
+      "brier": 0.17895682238275987
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6228724434317038,
+      "rmse": 0.8161008747202539,
+      "brier": 0.17748544690415152
+    },
+    {
+      "label": "K8 / ratings x 1 / Maybe variance 0.25",
+      "logLoss": 0.6229035365583613,
+      "rmse": 0.8225683302428523,
+      "brier": 0.17885928547880778
+    },
+    {
+      "label": "wideK8 / all-factors x 0.25 / Maybe variance 4",
+      "logLoss": 0.6229111561785001,
+      "rmse": 0.8159399058145305,
+      "brier": 0.17743592539631306
+    },
+    {
+      "label": "K8 / all-factors+geography x 1 / Maybe variance 1",
+      "logLoss": 0.6229453075252854,
+      "rmse": 0.8224934775103568,
+      "brier": 0.17887794426768802
+    },
+    {
+      "label": "wideK8 / geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6229587401845244,
+      "rmse": 0.8160953613735228,
+      "brier": 0.17747334102324072
+    },
+    {
+      "label": "K16 / ratings x 1 / Maybe variance 0.25",
+      "logLoss": 0.6230630487389186,
+      "rmse": 0.8229537542025088,
+      "brier": 0.1789886034354238
+    },
+    {
+      "label": "wideK8 / ratings x 0.25 / Maybe variance 4",
+      "logLoss": 0.6230859861615887,
+      "rmse": 0.8164091582844413,
+      "brier": 0.17762106556182616
+    },
+    {
+      "label": "K16 / all-factors+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6230871613180974,
+      "rmse": 0.8226790825450984,
+      "brier": 0.17887597982458
+    },
+    {
+      "label": "K8 / all-factors+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6231133800693005,
+      "rmse": 0.8224126365275618,
+      "brier": 0.17879648030580045
+    },
+    {
+      "label": "K16 / ratings+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6231295209816268,
+      "rmse": 0.8162315724868919,
+      "brier": 0.17753957966623413
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6231521115152667,
+      "rmse": 0.8163221139664666,
+      "brier": 0.17758898004425167
+    },
+    {
+      "label": "K16 / ratings+geography x 1 / Maybe variance 1",
+      "logLoss": 0.6231869557783419,
+      "rmse": 0.8232974097324339,
+      "brier": 0.1791831752642764
+    },
+    {
+      "label": "K8 / ratings+geography x 1 / Maybe variance 1",
+      "logLoss": 0.623204201087105,
+      "rmse": 0.8229264177192228,
+      "brier": 0.17906507734177043
+    },
+    {
+      "label": "wideK8 / ratings x 1 / Maybe variance 1",
+      "logLoss": 0.623209613050507,
+      "rmse": 0.8235863962496622,
+      "brier": 0.17928519208806443
+    },
+    {
+      "label": "K16 / ratings x 0.25 / Maybe variance 4",
+      "logLoss": 0.6232451411761486,
+      "rmse": 0.8163800617317669,
+      "brier": 0.17761102388750202
+    },
+    {
+      "label": "wideK8 / ratings+geography x 1 / Maybe variance 1",
+      "logLoss": 0.6232875927915023,
+      "rmse": 0.8235629850497604,
+      "brier": 0.17926935930563667
+    },
+    {
+      "label": "K16 / geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6233265758216048,
+      "rmse": 0.816385110522839,
+      "brier": 0.17759203450991148
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.25 / Maybe variance 4",
+      "logLoss": 0.6233362417402795,
+      "rmse": 0.8162873357890094,
+      "brier": 0.1775588029795092
+    },
+    {
+      "label": "K8 / ratings+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6233616552225738,
+      "rmse": 0.8228379816082055,
+      "brier": 0.17897373674737754
+    },
+    {
+      "label": "K8 / generosity x 0.5 / Maybe variance 1",
+      "logLoss": 0.6233748961094351,
+      "rmse": 0.8238456740034978,
+      "brier": 0.1794221730265495
+    },
+    {
+      "label": "K16 / ratings+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6234002813242716,
+      "rmse": 0.8232025278458556,
+      "brier": 0.17909287083492603
+    },
+    {
+      "label": "K8 / all-factors x 0.25 / Maybe variance 4",
+      "logLoss": 0.6234414640014307,
+      "rmse": 0.8159500682717774,
+      "brier": 0.1774628162260924
+    },
+    {
+      "label": "K8 / generosity x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6235262732777408,
+      "rmse": 0.8237683063937452,
+      "brier": 0.17933700390309568
+    },
+    {
+      "label": "K8 / ratings+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6236497744634841,
+      "rmse": 0.8164867180742617,
+      "brier": 0.17771685618230748
+    },
+    {
+      "label": "K8 / ratings x 0.5 / Maybe variance 4",
+      "logLoss": 0.623680132817868,
+      "rmse": 0.8166089381151086,
+      "brier": 0.1777827996670938
+    },
+    {
+      "label": "wideK8 / ratings+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6237687084963588,
+      "rmse": 0.8171035416189223,
+      "brier": 0.17789886112879313
+    },
+    {
+      "label": "wideK8 / ratings x 1 / Maybe variance 0.25",
+      "logLoss": 0.6238413461111649,
+      "rmse": 0.8236512987606218,
+      "brier": 0.17950615139272597
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 1",
+      "logLoss": 0.6238671790527497,
+      "rmse": 0.8221272320475245,
+      "brier": 0.17927135058061164
+    },
+    {
+      "label": "K8 / all-factors+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6238936211080793,
+      "rmse": 0.8165036626617163,
+      "brier": 0.17771706322218647
+    },
+    {
+      "label": "wideK8 / all-factors x 0.5 / Maybe variance 4",
+      "logLoss": 0.6239224829073634,
+      "rmse": 0.8168970565454089,
+      "brier": 0.17784349553027418
+    },
+    {
+      "label": "wideK8 / ratings+geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.623926780470845,
+      "rmse": 0.8236241457293304,
+      "brier": 0.17950105946048578
+    },
+    {
+      "label": "K16 / ratings+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.623931753435488,
+      "rmse": 0.8171541002900824,
+      "brier": 0.1779511841769502
+    },
+    {
+      "label": "wideK8 / all-factors x 1 / Maybe variance 1",
+      "logLoss": 0.6239365738057137,
+      "rmse": 0.8234977691630138,
+      "brier": 0.17930301476925448
+    },
+    {
+      "label": "K8 / Maybe variance 4",
+      "logLoss": 0.6239392074857366,
+      "rmse": 0.8163156361077719,
+      "brier": 0.17758515457799404
+    },
+    {
+      "label": "K16 / generosity x 0.5 / Maybe variance 1",
+      "logLoss": 0.6239437095624867,
+      "rmse": 0.8246295229711694,
+      "brier": 0.17971349065237407
+    },
+    {
+      "label": "K16 / all-factors x 0.25 / Maybe variance 4",
+      "logLoss": 0.6239555265863802,
+      "rmse": 0.8167608006577766,
+      "brier": 0.17775570694729992
+    },
+    {
+      "label": "K16 / ratings x 0.5 / Maybe variance 4",
+      "logLoss": 0.6240271928477206,
+      "rmse": 0.8172977334344541,
+      "brier": 0.17802680761426742
+    },
+    {
+      "label": "wideK8 / ratings x 0.5 / Maybe variance 4",
+      "logLoss": 0.624038710801153,
+      "rmse": 0.8175070305661623,
+      "brier": 0.17808008716947493
+    },
+    {
+      "label": "K8 / ratings x 1",
+      "logLoss": 0.6241047842285283,
+      "rmse": 0.8225837244205135,
+      "brier": 0.17903139300288057
+    },
+    {
+      "label": "K16 / all-factors+geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6241381980909098,
+      "rmse": 0.8171151353674554,
+      "brier": 0.1779287246206775
+    },
+    {
+      "label": "K16 / generosity x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.624151289426777,
+      "rmse": 0.8245459706151258,
+      "brier": 0.17962943033509932
+    },
+    {
+      "label": "K16 / ratings x 1",
+      "logLoss": 0.6242838444700065,
+      "rmse": 0.8229653178691224,
+      "brier": 0.17916006430971293
+    },
+    {
+      "label": "K16 / all-factors+geography x 1",
+      "logLoss": 0.6243153489273985,
+      "rmse": 0.8226915138895456,
+      "brier": 0.17905790787747708
+    },
+    {
+      "label": "K8 / all-factors+geography x 1",
+      "logLoss": 0.6243220907478019,
+      "rmse": 0.8224286910460683,
+      "brier": 0.17897906700199379
+    },
+    {
+      "label": "wideK8 / Maybe variance 4",
+      "logLoss": 0.6243421091890171,
+      "rmse": 0.8171598406669707,
+      "brier": 0.1779262149174903
+    },
+    {
+      "label": "K8 / generosity x 0.25 / Maybe variance 4",
+      "logLoss": 0.6244361052777629,
+      "rmse": 0.8174924215730167,
+      "brier": 0.178134200061067
+    },
+    {
+      "label": "K8 / ratings+geography x 1",
+      "logLoss": 0.6245659578071666,
+      "rmse": 0.8228508283771659,
+      "brier": 0.179150770249667
+    },
+    {
+      "label": "wideK8 / all-factors x 1 / Maybe variance 0.25",
+      "logLoss": 0.6246186284632625,
+      "rmse": 0.8236061900597242,
+      "brier": 0.1795764673283711
+    },
+    {
+      "label": "K16 / ratings+geography x 1",
+      "logLoss": 0.6246242643047871,
+      "rmse": 0.8232118789030921,
+      "brier": 0.1792693699624075
+    },
+    {
+      "label": "wideK8 / geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6246898466340036,
+      "rmse": 0.8178246915012983,
+      "brier": 0.17817980690982108
+    },
+    {
+      "label": "K16 / Maybe variance 4",
+      "logLoss": 0.6247072819691297,
+      "rmse": 0.8173740873333337,
+      "brier": 0.17797922526451668
+    },
+    {
+      "label": "K8 / generosity x 0.5",
+      "logLoss": 0.624727945225556,
+      "rmse": 0.8237872314578005,
+      "brier": 0.17951966199609629
+    },
+    {
+      "label": "K8 / geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6248156706504226,
+      "rmse": 0.8174742581125867,
+      "brier": 0.17810728778156548
+    },
+    {
+      "label": "K16 / generosity x 0.25 / Maybe variance 4",
+      "logLoss": 0.6250268080010579,
+      "rmse": 0.818393784832284,
+      "brier": 0.17846613512600712
+    },
+    {
+      "label": "K16 / geography x 0.5 / Maybe variance 4",
+      "logLoss": 0.6250484988205358,
+      "rmse": 0.8181215731560803,
+      "brier": 0.17833277332698838
+    },
+    {
+      "label": "K8 / all-factors x 0.5 / Maybe variance 4",
+      "logLoss": 0.6252698827672968,
+      "rmse": 0.8176185913055664,
+      "brier": 0.17817483244053003
+    },
+    {
+      "label": "K16 / generosity x 0.5",
+      "logLoss": 0.6253727834672732,
+      "rmse": 0.8245615097958214,
+      "brier": 0.17981160507082994
+    },
+    {
+      "label": "wideK8 / ratings x 1",
+      "logLoss": 0.6254390812550161,
+      "rmse": 0.8237422063131103,
+      "brier": 0.17987312157520668
+    },
+    {
+      "label": "wideK8 / ratings+geography x 1",
+      "logLoss": 0.6255294525282392,
+      "rmse": 0.8237144155190597,
+      "brier": 0.17987566427048668
+    },
+    {
+      "label": "K16 / all-factors x 0.5 / Maybe variance 4",
+      "logLoss": 0.6255508444961988,
+      "rmse": 0.8182049212461259,
+      "brier": 0.17837725393755366
+    },
+    {
+      "label": "wideK8 / generosity x 0.25 / Maybe variance 4",
+      "logLoss": 0.625998066445648,
+      "rmse": 0.8194364339395711,
+      "brier": 0.17886361288013758
+    },
+    {
+      "label": "wideK8 / generosity x 0.5 / Maybe variance 1",
+      "logLoss": 0.6261068796787759,
+      "rmse": 0.8265310255284521,
+      "brier": 0.18050354563697132
+    },
+    {
+      "label": "wideK8 / all-factors x 1",
+      "logLoss": 0.6262414569634975,
+      "rmse": 0.8237204706063276,
+      "brier": 0.17997622331193017
+    },
+    {
+      "label": "K16 / all-factors x 1 / Maybe variance 1",
+      "logLoss": 0.6263393821099351,
+      "rmse": 0.8252496817769527,
+      "brier": 0.17996709461520818
+    },
+    {
+      "label": "K8 / all-factors x 1 / Maybe variance 1",
+      "logLoss": 0.6263418662874484,
+      "rmse": 0.8250201086311099,
+      "brier": 0.1799046495964157
+    },
+    {
+      "label": "K8 / all-factors x 1 / Maybe variance 0.25",
+      "logLoss": 0.6265250242923011,
+      "rmse": 0.8249571941422282,
+      "brier": 0.17983209691937996
+    },
+    {
+      "label": "K16 / all-factors x 1 / Maybe variance 0.25",
+      "logLoss": 0.6265774018015696,
+      "rmse": 0.8251796124073867,
+      "brier": 0.17989486379392575
+    },
+    {
+      "label": "wideK8 / generosity x 0.5 / Maybe variance 0.25",
+      "logLoss": 0.6267675575239439,
+      "rmse": 0.8266248575943518,
+      "brier": 0.18076723520290144
+    },
+    {
+      "label": "K8 / all-factors x 1",
+      "logLoss": 0.627738855839263,
+      "rmse": 0.8249801269786982,
+      "brier": 0.18001794459223056
+    },
+    {
+      "label": "K16 / all-factors x 1",
+      "logLoss": 0.6278105322697128,
+      "rmse": 0.8251989719600931,
+      "brier": 0.1800799535937555
+    },
+    {
+      "label": "wideK8 / geography x 1 / Maybe variance 1",
+      "logLoss": 0.627875838623793,
+      "rmse": 0.8272209340133795,
+      "brier": 0.18079065467972333
+    },
+    {
+      "label": "K16 / geography x 1 / Maybe variance 1",
+      "logLoss": 0.6280520826848909,
+      "rmse": 0.8271629036535794,
+      "brier": 0.18078398663601786
+    },
+    {
+      "label": "K8 / geography x 1 / Maybe variance 1",
+      "logLoss": 0.6281490025352603,
+      "rmse": 0.8268103071268433,
+      "brier": 0.180674506452932
+    },
+    {
+      "label": "K16 / geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6282772589537788,
+      "rmse": 0.8270715481945757,
+      "brier": 0.1807044981868688
+    },
+    {
+      "label": "K8 / geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6283180699529476,
+      "rmse": 0.8267245288510311,
+      "brier": 0.18059373994096492
+    },
+    {
+      "label": "wideK8 / generosity x 0.5",
+      "logLoss": 0.6283822368630825,
+      "rmse": 0.8267345225631307,
+      "brier": 0.18116085028328027
+    },
+    {
+      "label": "wideK8 / geography x 1 / Maybe variance 0.25",
+      "logLoss": 0.6285315813146118,
+      "rmse": 0.827288270243499,
+      "brier": 0.18103789407179802
+    },
+    {
+      "label": "K16 / geography x 1",
+      "logLoss": 0.6295085814186757,
+      "rmse": 0.8270837075362099,
+      "brier": 0.18088775534642712
+    },
+    {
+      "label": "K8 / geography x 1",
+      "logLoss": 0.6295296164852092,
+      "rmse": 0.8267398364511509,
+      "brier": 0.18077746567897282
+    },
+    {
+      "label": "wideK8 / geography x 1",
+      "logLoss": 0.6301433829917119,
+      "rmse": 0.8273824748067383,
+      "brier": 0.18142143946248346
+    },
+    {
+      "label": "wideK8 / all-factors+geography x 1 / Maybe variance 4",
+      "logLoss": 0.6303258320258992,
+      "rmse": 0.8222629658863286,
+      "brier": 0.18006632462963856
+    },
+    {
+      "label": "K16 / all-factors+geography x 1 / Maybe variance 4",
+      "logLoss": 0.6316963281250317,
+      "rmse": 0.8232154483804577,
+      "brier": 0.18051262479050698
+    },
+    {
+      "label": "K16 / ratings x 1 / Maybe variance 4",
+      "logLoss": 0.6317105532378505,
+      "rmse": 0.8235018745663825,
+      "brier": 0.18066130734360805
+    },
+    {
+      "label": "K8 / ratings x 1 / Maybe variance 4",
+      "logLoss": 0.6317231601697653,
+      "rmse": 0.8230979819193616,
+      "brier": 0.18053181173334393
+    },
+    {
+      "label": "K8 / all-factors+geography x 1 / Maybe variance 4",
+      "logLoss": 0.6318943435629683,
+      "rmse": 0.8229310588675621,
+      "brier": 0.180432825025735
+    },
+    {
+      "label": "wideK8 / ratings x 1 / Maybe variance 4",
+      "logLoss": 0.631982117885549,
+      "rmse": 0.8239343651393165,
+      "brier": 0.18076321294389533
+    },
+    {
+      "label": "K16 / ratings+geography x 1 / Maybe variance 4",
+      "logLoss": 0.632046752516953,
+      "rmse": 0.8237676331544236,
+      "brier": 0.18075290639493638
+    },
+    {
+      "label": "wideK8 / ratings+geography x 1 / Maybe variance 4",
+      "logLoss": 0.6320527381998331,
+      "rmse": 0.8239152772214914,
+      "brier": 0.1807334548274478
+    },
+    {
+      "label": "K8 / ratings+geography x 1 / Maybe variance 4",
+      "logLoss": 0.6321814762202176,
+      "rmse": 0.8233870768890768,
+      "brier": 0.1806348765666424
+    },
+    {
+      "label": "K8 / generosity x 0.5 / Maybe variance 4",
+      "logLoss": 0.632358605547832,
+      "rmse": 0.8242920351494653,
+      "brier": 0.18099264952105923
+    },
+    {
+      "label": "wideK8 / all-factors x 1 / Maybe variance 4",
+      "logLoss": 0.6326205606270662,
+      "rmse": 0.8237637514205045,
+      "brier": 0.18070831619629427
+    },
+    {
+      "label": "K16 / generosity x 0.5 / Maybe variance 4",
+      "logLoss": 0.6328096135223974,
+      "rmse": 0.825085476574597,
+      "brier": 0.18128410432462275
+    },
+    {
+      "label": "wideK8 / generosity x 0.5 / Maybe variance 4",
+      "logLoss": 0.6348455665540236,
+      "rmse": 0.8268504544951678,
+      "brier": 0.18194421078062603
+    },
+    {
+      "label": "K16 / all-factors x 1 / Maybe variance 4",
+      "logLoss": 0.6351334881749628,
+      "rmse": 0.8256597294849761,
+      "brier": 0.1815070713584724
+    },
+    {
+      "label": "K8 / all-factors x 1 / Maybe variance 4",
+      "logLoss": 0.635251083482397,
+      "rmse": 0.8254182672388259,
+      "brier": 0.18144268617491913
+    },
+    {
+      "label": "wideK8 / geography x 1 / Maybe variance 4",
+      "logLoss": 0.6366200686539585,
+      "rmse": 0.8275639405822101,
+      "brier": 0.18223141950857366
+    },
+    {
+      "label": "K16 / geography x 1 / Maybe variance 4",
+      "logLoss": 0.6369008244683141,
+      "rmse": 0.82762950539334,
+      "brier": 0.18233943339454486
+    },
+    {
+      "label": "K8 / geography x 1 / Maybe variance 4",
+      "logLoss": 0.6371157417947076,
+      "rmse": 0.8272690281255353,
+      "brier": 0.18223090354905386
+    },
+    {
+      "label": "K8 / generosity x 1 / Maybe variance 1",
+      "logLoss": 0.656959447854463,
+      "rmse": 0.8448624455510346,
+      "brier": 0.18831829223677757
+    },
+    {
+      "label": "K8 / generosity x 1 / Maybe variance 0.25",
+      "logLoss": 0.6571197618177238,
+      "rmse": 0.8448047606920179,
+      "brier": 0.1882099348534538
+    },
+    {
+      "label": "K16 / generosity x 1 / Maybe variance 1",
+      "logLoss": 0.6573477196728421,
+      "rmse": 0.8455468914076173,
+      "brier": 0.18857797471536009
+    },
+    {
+      "label": "K16 / generosity x 1 / Maybe variance 0.25",
+      "logLoss": 0.6575649950438558,
+      "rmse": 0.8454849208239401,
+      "brier": 0.1884723527534159
+    },
+    {
+      "label": "K8 / generosity x 1",
+      "logLoss": 0.6583269918241453,
+      "rmse": 0.8448297186599312,
+      "brier": 0.18837384736102591
+    },
+    {
+      "label": "K16 / generosity x 1",
+      "logLoss": 0.6587923615022451,
+      "rmse": 0.8455072704349639,
+      "brier": 0.18863648272579803
+    },
+    {
+      "label": "wideK8 / generosity x 1 / Maybe variance 1",
+      "logLoss": 0.6608367919000264,
+      "rmse": 0.8476533984807126,
+      "brier": 0.18939563049496866
+    },
+    {
+      "label": "wideK8 / generosity x 1 / Maybe variance 0.25",
+      "logLoss": 0.661448657889466,
+      "rmse": 0.8477104720228688,
+      "brier": 0.18956342726004002
+    },
+    {
+      "label": "wideK8 / generosity x 1",
+      "logLoss": 0.663038077765071,
+      "rmse": 0.847791889025831,
+      "brier": 0.18989434551707543
+    },
+    {
+      "label": "K8 / generosity x 1 / Maybe variance 4",
+      "logLoss": 0.6659882800487339,
+      "rmse": 0.8452986278552038,
+      "brier": 0.18989583378010286
+    },
+    {
+      "label": "K16 / generosity x 1 / Maybe variance 4",
+      "logLoss": 0.6662580602947561,
+      "rmse": 0.8459898683555052,
+      "brier": 0.19015324413205936
+    },
+    {
+      "label": "wideK8 / generosity x 1 / Maybe variance 4",
+      "logLoss": 0.6696934899476671,
+      "rmse": 0.8480158180676097,
+      "brier": 0.1909238111224606
+    }
+  ],
+  "holdout": {
+    "random": {
+      "users": 1157,
+      "targets": 1230,
+      "inputs": {
+        "1": 366,
+        "2": 291,
+        "3": 257,
+        "4": 243
+      },
+      "scores": [
+        {
+          "label": "K8",
+          "logLoss": 0.6126062234790102,
+          "rmse": 0.8106433371026065,
+          "brier": 0.1731695758779502,
+          "versusK8": {
+            "difference": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "label": "K16",
+          "logLoss": 0.612697448824274,
+          "rmse": 0.8105561367457241,
+          "brier": 0.17316504978038214,
+          "versusK8": {
+            "difference": 9.122534526340083e-05,
+            "ci95": [
+              -0.00041534991527748274,
+              0.0005978006058042845
+            ]
+          }
+        },
+        {
+          "label": "wideK8",
+          "logLoss": 0.6126153362075082,
+          "rmse": 0.8110712703040722,
+          "brier": 0.17389922768464264,
+          "versusK8": {
+            "difference": 9.112728497720968e-06,
+            "ci95": [
+              -0.0058098034915283385,
+              0.00582802894852378
+            ]
+          }
+        },
+        {
+          "label": "K8 / Maybe variance 1",
+          "logLoss": 0.6143463487742661,
+          "rmse": 0.8108623009681788,
+          "brier": 0.17296504557593442,
+          "versusK8": {
+            "difference": 0.0017401252952546165,
+            "ci95": [
+              -0.0025704945420106755,
+              0.006050745132519908
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25",
+          "logLoss": 0.6109513730146072,
+          "rmse": 0.8091255224826456,
+          "brier": 0.1726106796895626,
+          "versusK8": {
+            "difference": -0.0016548504644024761,
+            "ci95": [
+              -0.004444579862954916,
+              0.0011348789341499635
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+          "logLoss": 0.6127167077555705,
+          "rmse": 0.8093520168400291,
+          "brier": 0.17242590183360365,
+          "versusK8": {
+            "difference": 0.00011048427656046848,
+            "ci95": [
+              -0.005075208832920665,
+              0.0052961773860416015
+            ]
+          }
+        }
+      ]
+    },
+    "popular": {
+      "users": 1157,
+      "targets": 1230,
+      "inputs": {
+        "1": 366,
+        "2": 291,
+        "3": 257,
+        "4": 243
+      },
+      "scores": [
+        {
+          "label": "K8",
+          "logLoss": 0.6196852485562465,
+          "rmse": 0.8203626396756311,
+          "brier": 0.17888566034458311,
+          "versusK8": {
+            "difference": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "label": "K16",
+          "logLoss": 0.6200129389278226,
+          "rmse": 0.8204584071445741,
+          "brier": 0.17893398869348387,
+          "versusK8": {
+            "difference": 0.0003276903715764337,
+            "ci95": [
+              -0.0001616832037426165,
+              0.0008170639468954839
+            ]
+          }
+        },
+        {
+          "label": "wideK8",
+          "logLoss": 0.6236720654032605,
+          "rmse": 0.8219303392192254,
+          "brier": 0.1794474266447287,
+          "versusK8": {
+            "difference": 0.0039868168470143526,
+            "ci95": [
+              -0.002043780025899231,
+              0.010017413719927936
+            ]
+          }
+        },
+        {
+          "label": "K8 / Maybe variance 1",
+          "logLoss": 0.6203779278274927,
+          "rmse": 0.8206659878019784,
+          "brier": 0.17923640912144476,
+          "versusK8": {
+            "difference": 0.0006926792712472947,
+            "ci95": [
+              -0.0033299629509306915,
+              0.00471532149342528
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25",
+          "logLoss": 0.6194321052843131,
+          "rmse": 0.8205079605253194,
+          "brier": 0.17898229435969903,
+          "versusK8": {
+            "difference": -0.0002531432719323745,
+            "ci95": [
+              -0.0031560913056137437,
+              0.0026498047617489946
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+          "logLoss": 0.6201492669705758,
+          "rmse": 0.8207856935955976,
+          "brier": 0.17932885971534693,
+          "versusK8": {
+            "difference": 0.0004640184143306661,
+            "ci95": [
+              -0.004576400283611075,
+              0.0055044371122724076
+            ]
+          }
+        }
+      ]
+    },
+    "informative": {
+      "users": 1157,
+      "targets": 1230,
+      "inputs": {
+        "1": 366,
+        "2": 291,
+        "3": 257,
+        "4": 243
+      },
+      "scores": [
+        {
+          "label": "K8",
+          "logLoss": 0.6078111790351552,
+          "rmse": 0.8087309334746017,
+          "brier": 0.1736042470747672,
+          "versusK8": {
+            "difference": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "label": "K16",
+          "logLoss": 0.6080519735126422,
+          "rmse": 0.8086944450615744,
+          "brier": 0.17359233109101918,
+          "versusK8": {
+            "difference": 0.00024079447748718246,
+            "ci95": [
+              -0.00023013961379639704,
+              0.000711728568770762
+            ]
+          }
+        },
+        {
+          "label": "wideK8",
+          "logLoss": 0.6097276920786965,
+          "rmse": 0.8095339783368286,
+          "brier": 0.17410910852140266,
+          "versusK8": {
+            "difference": 0.0019165130435422773,
+            "ci95": [
+              -0.003829965091326445,
+              0.007662991178411
+            ]
+          }
+        },
+        {
+          "label": "K8 / Maybe variance 1",
+          "logLoss": 0.6083967885597331,
+          "rmse": 0.80896507197183,
+          "brier": 0.1738948928541511,
+          "versusK8": {
+            "difference": 0.0005856095245787377,
+            "ci95": [
+              -0.0034992613417661298,
+              0.004670480390923605
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25",
+          "logLoss": 0.6070188459904966,
+          "rmse": 0.808507333418088,
+          "brier": 0.17348350625360234,
+          "versusK8": {
+            "difference": -0.0007923330446580933,
+            "ci95": [
+              -0.0035270728133860846,
+              0.001942406724069898
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+          "logLoss": 0.6076324816192132,
+          "rmse": 0.8087375363817916,
+          "brier": 0.17378717831102738,
+          "versusK8": {
+            "difference": -0.0001786974159415405,
+            "ci95": [
+              -0.005154563940961217,
+              0.004797169109078137
+            ]
+          }
+        }
+      ]
+    },
+    "exactly-four": {
+      "users": 243,
+      "targets": 316,
+      "inputs": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 243
+      },
+      "scores": [
+        {
+          "label": "K8",
+          "logLoss": 0.4848880159241975,
+          "rmse": 0.7358154288921408,
+          "brier": 0.14067480629317664,
+          "versusK8": {
+            "difference": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "label": "K16",
+          "logLoss": 0.4852311209247465,
+          "rmse": 0.7356599081576005,
+          "brier": 0.14059720473432274,
+          "versusK8": {
+            "difference": 0.0003431050005490411,
+            "ci95": [
+              -0.0010652377084478155,
+              0.0017514477095458977
+            ]
+          }
+        },
+        {
+          "label": "wideK8",
+          "logLoss": 0.5045092761507812,
+          "rmse": 0.7487602566603772,
+          "brier": 0.144746325761673,
+          "versusK8": {
+            "difference": 0.01962126022658348,
+            "ci95": [
+              0.004071606856599786,
+              0.03517091359656717
+            ]
+          }
+        },
+        {
+          "label": "K8 / Maybe variance 1",
+          "logLoss": 0.48349893204348227,
+          "rmse": 0.7358281524838002,
+          "brier": 0.14056960270446064,
+          "versusK8": {
+            "difference": -0.0013890838807155185,
+            "ci95": [
+              -0.006878311258534305,
+              0.004100143497103269
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25",
+          "logLoss": 0.4820944124399366,
+          "rmse": 0.7340401366133588,
+          "brier": 0.13997428297918002,
+          "versusK8": {
+            "difference": -0.002793603484260905,
+            "ci95": [
+              -0.007899773402172922,
+              0.0023125664336511123
+            ]
+          }
+        },
+        {
+          "label": "K8 / ratings+geography x 0.25 / Maybe variance 1",
+          "logLoss": 0.4807341413022223,
+          "rmse": 0.7341192658788578,
+          "brier": 0.13993564858869934,
+          "versusK8": {
+            "difference": -0.0041538746219755285,
+            "ci95": [
+              -0.011546640933303081,
+              0.003238891689352023
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -6,10 +6,16 @@ rating_design <- function(y, levels) {
   d <- ncol(y)
   X <- Matrix::sparseMatrix(i = observed[,1], j = (observed[,2]-1L)*levels + y[observed],
                             x = 1, dims = c(nrow(y), d*levels))
+  categorical_design(X, levels)
+}
+
+categorical_design <- function(X, levels) {
+  d <- ncol(X) / levels
+  stopifnot(d == as.integer(d), d >= 1, nrow(X) >= 1)
   counts <- matrix(Matrix::colSums(X), levels, d)
   global <- (rowSums(counts) + 0.5)/(sum(counts) + levels/2)
   pooled <- sweep(counts + 5*global, 2, colSums(counts) + 5, "/")
-  list(X = X, pooled = pooled, levels = levels, d = d, n = nrow(y), observed = nrow(observed))
+  list(X = X, pooled = pooled, levels = levels, d = d, n = nrow(X), observed = sum(counts))
 }
 
 # MAP-EM with a pooled item distribution supplying 'strength' pseudo-ratings
