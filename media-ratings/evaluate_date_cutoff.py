@@ -27,7 +27,7 @@ CUTOFF = 2017
 CANDIDATES = [(0.0, a, 0) for a in (0.0, 0.5, 1.0)]
 
 
-def benchmark(root, archive, catalog, work, output):
+def cutoff_data(root, archive, catalog, work, reuse_fit=False):
     work.mkdir(parents=True, exist_ok=True)
     if work.resolve() == root.resolve():
         raise ValueError("Use a separate scratch directory for the calendar cutoff")
@@ -56,23 +56,37 @@ def benchmark(root, archive, catalog, work, output):
         later[row[~old], film[~old]] = stamp[~old]
 
     early = train.any(axis=1)
-    train[early].tofile(work / "ratings.u8")
-    np.savetxt(
-        work / "users.csv",
-        users[early],
-        delimiter=",",
-        fmt="%d",
-        header="user,bucket",
-        comments="",
-    )
     if counts.sum() != np.count_nonzero(train):
         raise ValueError("Training counts differ from training observations")
-    del train
-    # Each fitter's release output uses every respondent in the censored matrix.
-    for script in ("fit_full.R", "full_reference.R"):
-        subprocess.run(
-            ["Rscript", "media-ratings/" + script, str(work), str(catalog)], check=True
+    if reuse_fit:
+        fitted_users = np.loadtxt(
+            work / "users.csv", delimiter=",", skiprows=1, dtype=int
         )
+        fitted_ratings = np.memmap(
+            work / "ratings.u8", mode="r", dtype="uint8"
+        ).reshape(-1, len(items))
+        if not np.array_equal(fitted_users, users[early]) or not np.array_equal(
+            fitted_ratings, train[early]
+        ):
+            raise ValueError(
+                "Existing cutoff fit uses different source ratings or users"
+            )
+    else:
+        train[early].tofile(work / "ratings.u8")
+        np.savetxt(
+            work / "users.csv",
+            users[early],
+            delimiter=",",
+            fmt="%d",
+            header="user,bucket",
+            comments="",
+        )
+        for script in ("fit_full.R", "full_reference.R"):
+            subprocess.run(
+                ["Rscript", "media-ratings/" + script, str(work), str(catalog)],
+                check=True,
+            )
+    del train
     fit = read(work / "release.json")
     if fit["users"] != early.sum() or fit["ratings"] != counts.sum():
         raise ValueError("Cutoff fit includes unexpected users or ratings")
@@ -95,7 +109,13 @@ def benchmark(root, archive, catalog, work, output):
         stars = np.where(times < stop, unseen[members], 0)
         slots = np.flatnonzero(np.count_nonzero(stars, axis=1) >= 5)
         cohorts.append(list(dated_profiles(stars, times, slots, year, True, years)))
-    val, test = cohorts
+    return fit, prior, models, similarity, cohorts, (stars, times, slots, years)
+
+
+def benchmark(root, archive, catalog, work, output):
+    fit, prior, models, similarity, (val, test), _ = cutoff_data(
+        root, archive, catalog, work
+    )
     valid = score(val, models, prior, similarity, CANDIDATES)
     selected = min(CANDIDATES, key=lambda key: valid[key][:, 0].mean())
     challenger = min(CANDIDATES[1:], key=lambda key: valid[key][:, 0].mean())

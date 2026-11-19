@@ -74,8 +74,10 @@ def calendar_records(archive, items, users, rows, ratings):
     return counts, stamps
 
 
-def dated_profiles(matrix, stamps, slots, seed, forward, release_years):
+def dated_profiles(matrix, stamps, slots, seed, forward, release_years, given_count=4):
     if not forward:
+        if given_count != 4:
+            raise ValueError("The matched random-reveal benchmark uses four inputs")
         for slot, sample in zip(slots, profiles(matrix, slots, seed), strict=True):
             given, values, targets, truth = sample
             yield given, values, targets, truth, stamps[slot, given]
@@ -87,7 +89,9 @@ def dated_profiles(matrix, stamps, slots, seed, forward, release_years):
         # Break timestamp ties independently of film popularity and the stars.
         rng.shuffle(seen)
         order = seen[np.argsort(stamps[slot, seen], kind="stable")]
-        given = order[:4]
+        if len(order) <= given_count:
+            continue
+        given = order[:given_count]
         as_of = stamps[slot, given[-1]]
         as_of_year = YEARS[np.searchsorted(EPOCHS, as_of, side="right") - 1]
         targets = order[

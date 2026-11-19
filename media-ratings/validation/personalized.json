@@ -1,0 +1,1372 @@
+{
+  "trainingUsers": 156913,
+  "eligibleTrainingUsers": 154192,
+  "given": 4,
+  "selection": "lowest respondent-average validation category log loss on four volunteered ratings",
+  "volunteered": {
+    "validationRespondents": 2000,
+    "testRespondents": 3000,
+    "targetRatings": 196480,
+    "validation": [
+      {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.5894069451689354,
+        "rmse": 0.89975660363993,
+        "brier": 0.1912225861010338
+      },
+      {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.5690006468297037,
+        "rmse": 0.8983127565208937,
+        "brier": 0.19087037216825675
+      },
+      {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.58246689212198,
+        "rmse": 0.8983800732723116,
+        "brier": 0.19092174651725988
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5664887217301866,
+        "rmse": 0.8962943204923637,
+        "brier": 0.19031041815888644
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0.25,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0.25, target=0",
+        "logLoss": 1.5686921178554936,
+        "rmse": 0.8963017673325117,
+        "brier": 0.19034384015741726
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 1,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=1, target=0",
+        "logLoss": 1.579837730763123,
+        "rmse": 0.8964853426990422,
+        "brier": 0.19065624205837778
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 4,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=4, target=0",
+        "logLoss": 1.6073948425634126,
+        "rmse": 0.8968986620023358,
+        "brier": 0.19130671121895387
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.5661934519729965,
+        "rmse": 0.8962775265277296,
+        "brier": 0.19030501149701468
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.566338905924504,
+        "rmse": 0.8963160340526288,
+        "brier": 0.19031474882710034
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.5676932391022795,
+        "rmse": 0.896520662161815,
+        "brier": 0.1903720918396852
+      }
+    ],
+    "test": {
+      "ratingsTags": {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.595473903922289,
+        "rmse": 0.9083057971971678,
+        "brier": 0.19425203729134255,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0252671184386773,
+          "ci95": [
+            0.02214131296874794,
+            0.028392923908606663
+          ]
+        }
+      },
+      "titleChoice": {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.5736339546691818,
+        "rmse": 0.9062214183102842,
+        "brier": 0.1936493940599734,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02183994925310767,
+          "ci95": [
+            -0.024392918535300318,
+            -0.019286979970915025
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0034271691855696316,
+          "ci95": [
+            0.001966743884963242,
+            0.004887594486176022
+          ]
+        }
+      },
+      "ratingYear": {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.5876413590679477,
+        "rmse": 0.9073931854433562,
+        "brier": 0.19413677128538337,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.007832544854343211,
+          "ci95": [
+            -0.009514228700019348,
+            -0.0061508610086670745
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.017434573584334093,
+          "ci95": [
+            0.014796102523025068,
+            0.02007304464564312
+          ]
+        }
+      },
+      "bothSignals": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5702067854836077,
+        "rmse": 0.9042856006045716,
+        "brier": 0.1931608352917124,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.0252671184386773,
+          "ci95": [
+            -0.028392923908606663,
+            -0.02214131296874794
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selected": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5702067854836077,
+        "rmse": 0.9042856006045716,
+        "brier": 0.1931608352917124,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.0252671184386773,
+          "ci95": [
+            -0.028392923908606663,
+            -0.02214131296874794
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "volunteeredTarget": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.5695136936618546,
+        "rmse": 0.90414090760909,
+        "brier": 0.19312428547082322,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.025960210260435664,
+          "ci95": [
+            -0.029154155066716612,
+            -0.022766265454154715
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": -0.0006930918217583597,
+          "ci95": [
+            -0.0009448121217744244,
+            -0.00044137152174229496
+          ]
+        }
+      }
+    }
+  },
+  "chronological": {
+    "validationRespondents": 1998,
+    "testRespondents": 2998,
+    "targetRatings": 191266,
+    "validation": [
+      {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.6317538762816204,
+        "rmse": 0.9241279482281347,
+        "brier": 0.20027985620676717
+      },
+      {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.6085528822636213,
+        "rmse": 0.9236360435772737,
+        "brier": 0.20009747458692406
+      },
+      {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.625630005396442,
+        "rmse": 0.9235583331149924,
+        "brier": 0.20012662723387778
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6049062904682208,
+        "rmse": 0.9216309953940036,
+        "brier": 0.19962242871353114
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0.25,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0.25, target=0",
+        "logLoss": 1.607917944305001,
+        "rmse": 0.9216852884402644,
+        "brier": 0.19968380413407721
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 1,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=1, target=0",
+        "logLoss": 1.620289399671096,
+        "rmse": 0.921922063779956,
+        "brier": 0.20001009048722362
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 4,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=4, target=0",
+        "logLoss": 1.6511719421650048,
+        "rmse": 0.922401495249825,
+        "brier": 0.20065436084211435
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.6043717106097406,
+        "rmse": 0.9215390887798376,
+        "brier": 0.19959194681093886
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.6044719376096808,
+        "rmse": 0.9215170118213243,
+        "brier": 0.19958201632852335
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.606245442552065,
+        "rmse": 0.9216333599058334,
+        "brier": 0.1996144124635171
+      }
+    ],
+    "test": {
+      "ratingsTags": {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.6365065069518758,
+        "rmse": 0.9288975984938009,
+        "brier": 0.20066669846560556,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.02929142322998222,
+          "ci95": [
+            0.026050517477118763,
+            0.03253232898284568
+          ]
+        }
+      },
+      "titleChoice": {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.6118719806092747,
+        "rmse": 0.9285110718801154,
+        "brier": 0.2004419806664741,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02463452634260267,
+          "ci95": [
+            -0.02732414171615062,
+            -0.021944910969054716
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.004656896887379549,
+          "ci95": [
+            0.0031304813222742716,
+            0.006183312452484826
+          ]
+        }
+      },
+      "ratingYear": {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.6283698822130288,
+        "rmse": 0.9266758578173916,
+        "brier": 0.20030562949846115,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.008136624738850169,
+          "ci95": [
+            -0.009891114590562694,
+            -0.006382134887137644
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.02115479849113205,
+          "ci95": [
+            0.018398993941356634,
+            0.023910603040907467
+          ]
+        }
+      },
+      "bothSignals": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6072150837218868,
+        "rmse": 0.9255158174498059,
+        "brier": 0.19982055147074013,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02929142322998222,
+          "ci95": [
+            -0.03253232898284568,
+            -0.026050517477118763
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selected": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6072150837218868,
+        "rmse": 0.9255158174498059,
+        "brier": 0.19982055147074013,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02929142322998222,
+          "ci95": [
+            -0.03253232898284568,
+            -0.026050517477118763
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "volunteeredTarget": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.6064316727032983,
+        "rmse": 0.9254704166749339,
+        "brier": 0.1998102946107995,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.030074834248576324,
+          "ci95": [
+            -0.03341268489745051,
+            -0.026736983599702144
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": -0.0007834110185941041,
+          "ci95": [
+            -0.0010936721832397437,
+            -0.00047314985394846475
+          ]
+        }
+      }
+    }
+  },
+  "mixed": {
+    "validationRespondents": 2000,
+    "testRespondents": 3000,
+    "targetRatings": 196480,
+    "validation": [
+      {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.6065107870271644,
+        "rmse": 0.9072423432535781,
+        "brier": 0.19523103318824983
+      },
+      {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.5907075517227056,
+        "rmse": 0.9068980674663663,
+        "brier": 0.19501073207068992
+      },
+      {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.5980948126083776,
+        "rmse": 0.9064471922570789,
+        "brier": 0.19503241884478073
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5855877535834288,
+        "rmse": 0.9053722616034237,
+        "brier": 0.19448556998671335
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0.25,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0.25, target=0",
+        "logLoss": 1.5878574596398076,
+        "rmse": 0.9054823809309922,
+        "brier": 0.19460293598409795
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 1,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=1, target=0",
+        "logLoss": 1.597915754936212,
+        "rmse": 0.905782116349958,
+        "brier": 0.19499736956412256
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 4,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=4, target=0",
+        "logLoss": 1.6224596122741735,
+        "rmse": 0.9062660766268323,
+        "brier": 0.19567187059016727
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.5844372682280201,
+        "rmse": 0.9051174805328507,
+        "brier": 0.19440229818169483
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.58398688933137,
+        "rmse": 0.9049407340320048,
+        "brier": 0.1943453339395302
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.584766796662143,
+        "rmse": 0.9047721519054344,
+        "brier": 0.1942903086104806
+      }
+    ],
+    "test": {
+      "ratingsTags": {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.6104097618304234,
+        "rmse": 0.912675870753625,
+        "brier": 0.19680758274807297,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.021208564360341357,
+          "ci95": [
+            0.018443376368501692,
+            0.02397375235218102
+          ]
+        }
+      },
+      "titleChoice": {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.5944246985740007,
+        "rmse": 0.9116476938983319,
+        "brier": 0.1965015658624396,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.015985063256425062,
+          "ci95": [
+            -0.01800023091342141,
+            -0.013969895599428713
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.005223501103916294,
+          "ci95": [
+            0.0036031646980233326,
+            0.006843837509809256
+          ]
+        }
+      },
+      "ratingYear": {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.6012882288622001,
+        "rmse": 0.911817702983205,
+        "brier": 0.19655878508420355,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.009121532968222561,
+          "ci95": [
+            -0.01090539495890944,
+            -0.007337670977535683
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.012087031392118794,
+          "ci95": [
+            0.010013962478707158,
+            0.01416010030553043
+          ]
+        }
+      },
+      "bothSignals": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5892011974700844,
+        "rmse": 0.9099008275495675,
+        "brier": 0.19598817811467165,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.021208564360341357,
+          "ci95": [
+            -0.02397375235218102,
+            -0.018443376368501692
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selected": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.5892011974700844,
+        "rmse": 0.9099008275495675,
+        "brier": 0.19598817811467165,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.021208564360341357,
+          "ci95": [
+            -0.02397375235218102,
+            -0.018443376368501692
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "volunteeredTarget": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.5871258174324587,
+        "rmse": 0.9094779920179565,
+        "brier": 0.19587576784648247,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.023283944397962057,
+          "ci95": [
+            -0.026262490436529767,
+            -0.020305398359394346
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": -0.0020753800376206977,
+          "ci95": [
+            -0.0027293523624859453,
+            -0.0014214077127554501
+          ]
+        }
+      }
+    }
+  },
+  "prompted": {
+    "validationRespondents": 2000,
+    "testRespondents": 3000,
+    "targetRatings": 196480,
+    "validation": [
+      {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.622144337438067,
+        "rmse": 0.9121294303306516,
+        "brier": 0.19816234161957794
+      },
+      {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.622144337438067,
+        "rmse": 0.9121294303306516,
+        "brier": 0.19816234161957794
+      },
+      {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.6129985798464253,
+        "rmse": 0.91181670726837,
+        "brier": 0.19797435994798207
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6129985798464253,
+        "rmse": 0.91181670726837,
+        "brier": 0.19797435994798207
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0.25,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0.25, target=0",
+        "logLoss": 1.6158441627382787,
+        "rmse": 0.91187174329075,
+        "brier": 0.19813184311993542
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 1,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=1, target=0",
+        "logLoss": 1.6259408031038423,
+        "rmse": 0.9120260401135533,
+        "brier": 0.19854485788747195
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 4,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=4, target=0",
+        "logLoss": 1.6492726739612442,
+        "rmse": 0.9122264321580196,
+        "brier": 0.19916610242541752
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.6100905893149184,
+        "rmse": 0.9112721608441072,
+        "brier": 0.19777181958916681
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.6080963385369826,
+        "rmse": 0.9108230847490846,
+        "brier": 0.19762737883633438
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.6069712945589605,
+        "rmse": 0.9102448520426932,
+        "brier": 0.1974901689406494
+      }
+    ],
+    "test": {
+      "ratingsTags": {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.62553398972108,
+        "rmse": 0.9176906068626263,
+        "brier": 0.1999576436467758,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.009738549644261579,
+          "ci95": [
+            0.007913327211348953,
+            0.011563772077174204
+          ]
+        }
+      },
+      "titleChoice": {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.62553398972108,
+        "rmse": 0.9176906068626263,
+        "brier": 0.1999576436467758,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.009738549644261579,
+          "ci95": [
+            0.007913327211348953,
+            0.011563772077174204
+          ]
+        }
+      },
+      "ratingYear": {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.6157954400768164,
+        "rmse": 0.9164909224492946,
+        "brier": 0.1997203984121938,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.009738549644261579,
+          "ci95": [
+            -0.011563772077174204,
+            -0.007913327211348953
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "bothSignals": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6157954400768164,
+        "rmse": 0.9164909224492946,
+        "brier": 0.1997203984121938,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.009738549644261579,
+          "ci95": [
+            -0.011563772077174204,
+            -0.007913327211348953
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selected": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.6157954400768164,
+        "rmse": 0.9164909224492946,
+        "brier": 0.1997203984121938,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.009738549644261579,
+          "ci95": [
+            -0.011563772077174204,
+            -0.007913327211348953
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "volunteeredTarget": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.6080463718311058,
+        "rmse": 0.9151690587406511,
+        "brier": 0.19923878951949464,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.017487617889970688,
+          "ci95": [
+            -0.019792904848711677,
+            -0.015182330931229698
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": -0.007749068245709109,
+          "ci95": [
+            -0.009320044464269055,
+            -0.006178092027149163
+          ]
+        }
+      }
+    }
+  },
+  "informative4": {
+    "given": 4,
+    "testRespondents": 3000,
+    "targetRatings": 196480,
+    "ratingsTags": {
+      "label": "Ratings and tags",
+      "logLoss": 1.6100098416036641,
+      "rmse": 0.9155167393658528,
+      "brier": 0.19730909658485465
+    },
+    "selected": {
+      "label": "Selected model",
+      "logLoss": 1.6047326286630497,
+      "rmse": 0.9144905224813555,
+      "brier": 0.19715486793619827
+    },
+    "pairedLogLossVersusBaseline": {
+      "difference": -0.005277212940612607,
+      "ci95": [
+        -0.007250843898846096,
+        -0.0033035819823791167
+      ]
+    }
+  },
+  "informative20": {
+    "given": 20,
+    "testRespondents": 2394,
+    "targetRatings": 152218,
+    "ratingsTags": {
+      "label": "Ratings and tags",
+      "logLoss": 1.5229836115324074,
+      "rmse": 0.8552750791735617,
+      "brier": 0.1874481112080318
+    },
+    "selected": {
+      "label": "Selected model",
+      "logLoss": 1.5273998795104746,
+      "rmse": 0.8527224468287125,
+      "brier": 0.1866469212055752
+    },
+    "pairedLogLossVersusBaseline": {
+      "difference": 0.0044162679780668955,
+      "ci95": [
+        0.0019795074233308185,
+        0.0068530285328029725
+      ]
+    }
+  },
+  "future2019": {
+    "validationRespondents": 6239,
+    "testRespondents": 5657,
+    "targetRatings": 357068,
+    "validation": [
+      {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.8324436598109377,
+        "rmse": 0.9534048285540038,
+        "brier": 0.20130609340006247
+      },
+      {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.80861912049477,
+        "rmse": 0.9519403373004476,
+        "brier": 0.20097205309049823
+      },
+      {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.8285042821752744,
+        "rmse": 0.9502363984980325,
+        "brier": 0.20026687380239755
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.8067205661476122,
+        "rmse": 0.9492926092347826,
+        "brier": 0.20005691225452654
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0.25,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0.25, target=0",
+        "logLoss": 1.8114729690236493,
+        "rmse": 0.9498026381579969,
+        "brier": 0.2002435269896779
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 1,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=1, target=0",
+        "logLoss": 1.833958424695691,
+        "rmse": 0.9508942776110774,
+        "brier": 0.20098937668476718
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 4,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=4, target=0",
+        "logLoss": 1.8954290754663372,
+        "rmse": 0.9526099376784591,
+        "brier": 0.20244320190658274
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.8064180091668138,
+        "rmse": 0.9493859234901939,
+        "brier": 0.20008016130187678
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.5,
+        "label": "title=True, year=True, variance=0, target=0.5",
+        "logLoss": 1.8067138945299792,
+        "rmse": 0.9494282577006701,
+        "brier": 0.20009422764016752
+      },
+      {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 1.0,
+        "label": "title=True, year=True, variance=0, target=1",
+        "logLoss": 1.8089605263088009,
+        "rmse": 0.9493689797699056,
+        "brier": 0.20010132681587117
+      }
+    ],
+    "test": {
+      "ratingsTags": {
+        "title": false,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=False, variance=0, target=0",
+        "logLoss": 1.8045136483616127,
+        "rmse": 0.9190925362864509,
+        "brier": 0.19914555828296257,
+        "pairedLogLossVersusBaseline": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.027933915553159477,
+          "ci95": [
+            0.025479181785171525,
+            0.03038864932114743
+          ]
+        }
+      },
+      "titleChoice": {
+        "title": true,
+        "calendar": false,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=False, variance=0, target=0",
+        "logLoss": 1.778747999990481,
+        "rmse": 0.9178553171518631,
+        "brier": 0.19877926796969517,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02576564837113608,
+          "ci95": [
+            -0.02806970056908468,
+            -0.023461596173187476
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.002168267182023395,
+          "ci95": [
+            0.0014599248708654761,
+            0.0028766094931813135
+          ]
+        }
+      },
+      "ratingYear": {
+        "title": false,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=False, year=True, variance=0, target=0",
+        "logLoss": 1.8006020551600628,
+        "rmse": 0.9159834922522497,
+        "brier": 0.1981354319791834,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.003911593201547164,
+          "ci95": [
+            -0.004624734198979685,
+            -0.0031984522041146424
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.02402232235161231,
+          "ci95": [
+            0.021689059844861094,
+            0.026355584858363527
+          ]
+        }
+      },
+      "bothSignals": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.7765797328084565,
+        "rmse": 0.9152572127753607,
+        "brier": 0.19785531985107216,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.027933915553159477,
+          "ci95": [
+            -0.03038864932114743,
+            -0.025479181785171525
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selected": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0,
+        "label": "title=True, year=True, variance=0, target=0",
+        "logLoss": 1.7765797328084565,
+        "rmse": 0.9152572127753607,
+        "brier": 0.19785531985107216,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.027933915553159477,
+          "ci95": [
+            -0.03038864932114743,
+            -0.025479181785171525
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "volunteeredTarget": {
+        "title": true,
+        "calendar": true,
+        "halfStarVariance": 0,
+        "targetChoiceStrength": 0.25,
+        "label": "title=True, year=True, variance=0, target=0.25",
+        "logLoss": 1.7762423568356935,
+        "rmse": 0.9154675570448975,
+        "brier": 0.1978901616078108,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.02827129152591621,
+          "ci95": [
+            -0.03082449586934334,
+            -0.02571808718248908
+          ]
+        },
+        "pairedLogLossVersusBothSignals": {
+          "difference": -0.0003373759727567345,
+          "ci95": [
+            -0.0006039237087339788,
+            -7.082823677949021e-05
+          ]
+        }
+      }
+    },
+    "trainingUsers": 149913,
+    "trainingRatings": 10036987,
+    "eligibleTrainingUsers": 147210,
+    "lastFitYear": 2017,
+    "validationYear": 2018
+  },
+  "future2019Twenty_volunteered": {
+    "given": 20,
+    "testRespondents": 4631,
+    "targetRatings": 271643,
+    "ratingsTags": {
+      "label": "Through-2017 baseline",
+      "logLoss": 1.7156200954726066,
+      "rmse": 0.8440104530405795,
+      "brier": 0.18548313791716192
+    },
+    "selected": {
+      "label": "Selected model",
+      "logLoss": 1.7005149395210482,
+      "rmse": 0.8405143546093953,
+      "brier": 0.18465857121313403
+    },
+    "pairedLogLossVersusBaseline": {
+      "difference": -0.015105155951562541,
+      "ci95": [
+        -0.01994034808422381,
+        -0.010269963818901273
+      ]
+    }
+  },
+  "future2019Twenty_starsOnly": {
+    "given": 20,
+    "testRespondents": 4631,
+    "targetRatings": 271643,
+    "ratingsTags": {
+      "label": "Through-2017 baseline",
+      "logLoss": 1.7156200954726066,
+      "rmse": 0.8440104530405795,
+      "brier": 0.18548313791716192
+    },
+    "selected": {
+      "label": "Selected model",
+      "logLoss": 1.714905447888703,
+      "rmse": 0.8414933213476611,
+      "brier": 0.18483047534866753
+    },
+    "pairedLogLossVersusBaseline": {
+      "difference": -0.0007146475839063028,
+      "ci95": [
+        -0.0018446710567411098,
+        0.0004153758889285043
+      ]
+    }
+  }
+}
