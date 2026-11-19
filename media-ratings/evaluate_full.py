@@ -113,12 +113,15 @@ def profiles(matrix, indices, seed):
         yield given, row[given].astype(int) - 1, targets, row[targets].astype(int) - 1
 
 
-def evaluate(model, samples, candidates):
+def evaluate(model, samples, candidates, scale=SCALE, threshold=4, baseline="K8"):
+    """Evaluate class posteriors and ordinal exponential tilts on matched respondents."""
     components = model["components"]
     e = np.array([c["probabilities"] for c in components])
     logprior = np.log([c["weight"] for c in components])
-    means = e @ SCALE
-    scores = {name: [] for name in ["K8", *candidates]}
+    means = e @ scale
+    center = (scale[0] + scale[-1]) / 2
+    upper = scale >= threshold
+    scores = {name: [] for name in [baseline, *candidates]}
     for given, values, targets, truth in samples:
         evidence = np.log(e[:, given, values])
         logw = logprior + evidence.sum(axis=1)
@@ -128,13 +131,13 @@ def evaluate(model, samples, candidates):
         # Center each observed rating on its predictive mean from the other three.
         leave_one_out = logw[:, None] - evidence
         weights = np.exp(leave_one_out - leave_one_out.max(axis=0))
-        residual = SCALE[values] - (weights * means[:, given]).sum(
+        residual = scale[values] - (weights * means[:, given]).sum(
             axis=0
         ) / weights.sum(axis=0)
         signals = {}
         for name in scores:
             probs = base
-            if name != "K8":
+            if name != baseline:
                 family, kernel, beta = candidates[name]
                 if family not in signals:
                     signals[family] = kernel[np.ix_(targets, given)] @ np.linalg.solve(
@@ -142,15 +145,15 @@ def evaluate(model, samples, candidates):
                         residual,
                     )
                 tilted = np.clip(
-                    beta * signals[family][:, None] * (SCALE - 2.75), -50, 50
+                    beta * signals[family][:, None] * (scale - center), -50, 50
                 )
                 probs = base * np.exp(tilted)
                 probs = probs / probs.sum(axis=1, keepdims=True)
             scores[name].append(
                 [
                     -np.log(probs[np.arange(len(truth)), truth]).mean(),
-                    np.mean((probs @ SCALE - SCALE[truth]) ** 2),
-                    np.mean((probs[:, 7:].sum(axis=1) - (SCALE[truth] >= 4)) ** 2),
+                    np.mean((probs @ scale - scale[truth]) ** 2),
+                    np.mean((probs[:, upper].sum(axis=1) - (scale[truth] >= threshold)) ** 2),
                 ]
             )
     return {name: np.array(rows) for name, rows in scores.items()}

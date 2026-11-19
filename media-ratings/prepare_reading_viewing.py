@@ -11,6 +11,7 @@ import pandas as pd
 from scipy import sparse
 
 from fit_catalog import fit_catalog, write_evidence
+from fit_ordinal_similarity import add_similarity
 
 
 BOOK_SOURCE = 'https://github.com/zygmuntz/goodbooks-10k'
@@ -76,6 +77,14 @@ def anime_items(raw, selected):
     return items
 
 
+# Select the most widely scored entries within common browsing genres. Multi-genre
+# works can satisfy several quotas and appear exactly once in the joint model.
+BOOK_GENRES = ('Fantasy', 'Romance', 'Mystery', 'Historical Fiction', 'Science Fiction', 'Thriller',
+               'Horror', 'Biography', 'Classics', 'Young Adult', 'Nonfiction', 'Contemporary')
+ANIME_GENRES = ('Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Romance', 'Sci-Fi',
+                'Slice of Life', 'Sports', 'Mystery', 'Horror', 'Suspense')
+
+
 def load_profiles(raw, domain):
     is_book = domain == 'books'
     filename = 'book-ratings.csv' if is_book else 'animelist-ratings.csv'
@@ -105,23 +114,43 @@ def load_profiles(raw, domain):
         samples.append(pd.DataFrame(dict(user=user[keep], item=item[keep], score=encoded)))
     if is_book and zero_count:
         raise ValueError('Goodbooks entries should be integer star ratings')
-    selected = np.lexsort((np.arange(len(counts)), -counts))[:500]
-    sample = pd.concat(samples, ignore_index=True)
-    sample = pd.DataFrame(sample.loc[sample['item'].isin(selected.tolist())]).drop_duplicates()
+    ranked = np.lexsort((np.arange(len(counts)), -counts))
+    initial = set(ranked[:500])
+    sample = pd.concat(samples, ignore_index=True).drop_duplicates()
     conflicting = sample.duplicated(['user', 'item'], keep=False)
     dropped = int(conflicting.sum())
     sample = pd.DataFrame(sample.loc[~conflicting])
+    observed = pd.Series(sample['item']).value_counts()
+    supported_ids = observed.index.to_numpy()[observed.to_numpy() >= 40]
+    eligible = ranked[np.isin(ranked, supported_ids)]
+    candidates = book_items(raw, eligible) if is_book else anime_items(raw, eligible)
+    genres = BOOK_GENRES if is_book else ANIME_GENRES
+    covered = {g: 0 for g in genres}
+    retained = []
+    items = []
+    for key, it in zip(eligible, candidates):
+        tags = it['annotations']['genres']
+        if key not in initial and not any(g in covered and covered[g] < 200 for g in tags):
+            continue
+        retained.append(key)
+        items.append(it)
+        for g in tags:
+            if g in covered:
+                covered[g] += 1
+    selected = np.asarray(retained, dtype=np.int32)
+    if not initial.issubset(retained):
+        raise ValueError('Expanded catalog must preserve the original 500 entries')
+    sample = pd.DataFrame(sample.loc[sample['item'].isin(retained)])
     users = np.unique(sample['user'].to_numpy())
     features = np.zeros(len(counts), dtype=np.int32)
     features[selected] = np.arange(len(selected))
     profiles = sparse.csr_matrix((sample['score'].to_numpy(), (np.searchsorted(users, sample['user'].to_numpy()),
                                  features[sample['item'].to_numpy()])), shape=(len(users), len(selected)))
-    items = book_items(raw, selected) if is_book else anime_items(raw, selected)
     fit_counts = np.bincount(profiles.indices, minlength=len(items))
     for i, it in enumerate(items):
         it['annotations']['ratingCount'] = int(fit_counts[i])
     audit = dict(sourceRows=read_count, missingOrUnrated=zero_count, fractionalRatings=fractional_count,
-                 top500RatingEntries=int(counts[selected].sum()), respondentFraction=1 if is_book else 1/32,
+                 selectedRatingEntries=int(counts[selected].sum()), genreCoverage=covered, respondentFraction=1 if is_book else 1/32,
                  conflictingRowsExcluded=dropped)
     return profiles, items, list(range(1, max_score + 1)), audit
 
@@ -136,8 +165,10 @@ def main():
     print(args.domain, profiles.shape, profiles.nnz, audit, flush=True)
     book = args.domain == 'books'
     label = 'Goodbooks-10k' if book else 'User Animelist'
-    catalog, report = fit_catalog(label + (' · 500 most-rated books' if book else ' · 500 most-rated anime'),
+    catalog, report = fit_catalog(f'{label} · {len(items):,} {args.domain}',
                                   items, scale, profiles)
+    add_similarity(catalog, report, profiles)
+    catalog['legacyRatingCatalogs'] = [label + (' · 500 most-rated books' if book else ' · 500 most-rated anime')]
     catalog['domain'] = args.domain
     catalog['linkLabel'] = 'Goodreads' if book else 'MyAnimeList'
     catalog['sourceLabel'] = label
