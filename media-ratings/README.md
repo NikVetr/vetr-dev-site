@@ -1,6 +1,6 @@
 # Fitting and using rating catalogs
 
-**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between ten catalogs. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV shows, books, anime, recipes and cocktails use their source rating scales. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies.
+**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between fourteen domains. Recipes offers both Food.com and Taste of Home. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV, books, anime, podcasts, albums, tabletop games, recipes and cocktails use their source rating scales. Video games use explicit Steam thumbs-up and thumbs-down reviews. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies.
 
 Rate a film in half-star increments. The main shelf keeps every title, including ones you have rated. Your rated shelf gives you a second, synchronized place to edit those answers. Search and sort the full catalog on the left. Use **Filters** by the prediction model to narrow recommendations. Select multiple alternatives within a field and combine fields. Dated catalogs also offer an inclusive year range. Enable **Also filter items to rate** to narrow All titles, Quick rate and Most informative to rate. Already rated always shows all your answers. Every supplied rating still contributes to predictions. Drag the divider, or focus it and use the arrow keys, to give either shelf more space. With **Auto-update** off, use **Update predictions** to apply your edits.
 
@@ -108,13 +108,17 @@ The expanded catalog fits 812,990 explicit swipes from 61,130 respondents across
 
 The earlier 12-place catalog is available for reproducing the ordinal and geographic comparisons. [Pilot catalog](stravl.json) · [Pilot transfer experiments](city-transfer.md)
 
+### Video games, albums, podcasts and tabletop games
+
+The video game catalog covers 1,136 Steam games using all 16,654,154 eligible thumbs-up and thumbs-down reviews. The 2,057 albums, 3,670 podcasts and 1,095 tabletop games use individual one-to-five-star reviews. Filter albums by artist or genre, podcasts by topic, and tabletop products by game type. [Steam selection and validation](game-catalog.md) · [Album and tabletop sources and validation](album-tabletop-catalogs.md) · [Podcast source and validation](podcast-catalog.md)
+
 ### TV shows, cocktails and online communities
 
-TV shows use MovieLens ratings linked to television series by IMDb ID. Cocktails use Food.com reviews of individual mixed-drink recipes. [TV and cocktail datasets](tv-cocktail-catalogs.md)
+The 383 TV shows use MovieLens ratings linked to series by IMDb ID. The 1,777 cocktail recipes use reviews of individual mixed drinks on Food.com. [TV and cocktail datasets](tv-cocktail-catalogs.md)
 
-Fanfiction and web fiction use public AO3 kudos. A work can lack kudos because the reader never saw it. The fanfiction catalog includes fandom filters. [Source, selection and held-out evaluation](ao3-catalogs.md)
+Fanfiction and original web fiction use public AO3 kudos. A work can lack kudos because the reader never saw it. The joint fanfiction model covers 10,466 works, with at least 200 works available in 42 of its 56 fandoms. Search the Fandom filter to see counts and select one or more. Ratings from other fandoms still inform the recommendations. Original web fiction covers 320 works. [Source, selection and held-out evaluation](ao3-catalogs.md)
 
-Subreddits model whether an active account recorded a reply in one of 120 communities in a four-week period in 2014. The highest-probability ranking and both change rankings use this binary event. [Reddit data and validation](subreddit-catalog.md)
+Subreddits model whether an active account recorded a reply in one of 500 communities in a four-week period in 2014. The highest-probability ranking and both change rankings use this binary event. [Reddit data and validation](subreddit-catalog.md)
 
 ### Rebuild the observed-rating summaries
 
@@ -127,9 +131,9 @@ python3 media-ratings/prepare_evidence.py media-ratings/stravl.json stravl-input
 
 ### Books, anime and recipes
 
-The books and anime catalogs each contain the 500 most-rated works in their source archive. The book fit uses all 2,399,375 ratings for those works in Goodbooks-10k. The anime fit uses a 1/32 sample of whole respondents after selecting titles from the complete User Animelist release. Both open with the 16-class model selected by respondent-level cross-validation. [Data, licenses, held-out scores and reproduction](book-anime-data.md)
+The book and anime catalogs keep their original 500 most-rated works and include at least 200 titles in each of twelve genres. They cover 1,369 books and 1,487 anime. The book fit uses every Goodbooks rating of these titles, and the anime fit uses a 1/32 sample of whole respondents. Both use a cross-validated similarity adjustment on top of categorical taste classes. [Genre selection, licenses and held-out forecasts](book-anime-data.md)
 
-The recipe catalog contains the 100 Taste of Home recipes in the UCI archive. Most reviewers rated only one dish, so the independent comparison of personalized forecasts covers just 38 reviewers. [Recipe sources, links and validation](recipe-catalog.md)
+The Recipes tab opens 1,600 Food.com recipes with 200 entries per course. The catalog selector also opens the separate 100-recipe Taste of Home study. [Recipe sources and validation](recipe-catalog.md)
 
 ## Model and ranking
 

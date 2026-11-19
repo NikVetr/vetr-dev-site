@@ -17,7 +17,7 @@ export function recommendationFilters(catalog, facets) {
   }
   const minYear = Math.min(...years.values()),
     maxYear = Math.max(...years.values());
-  const yearLabel = ['books', 'cocktails', 'fanfiction', 'webfiction'].includes(catalog.domain)
+  const yearLabel = ['recipes', 'books', 'cocktails', 'fanfiction', 'webfiction'].includes(catalog.domain)
     ? 'Publication year'
     : 'Release year';
   const blank = () => ({ choices: new Map(), years: null, forRating: false });
@@ -125,31 +125,69 @@ export function recommendationFilters(catalog, facets) {
             heading = node('summary'),
             list = node('div');
           details.open =
-            ['Genre', 'Course', 'Fandom', 'Base spirit'].includes(group) || draft.choices.has(group);
+            ['Genre', 'Course', 'Fandom', 'Base spirit', 'Game type', 'Topic'].includes(group) ||
+            draft.choices.has(group);
           const updateHeading = () => {
             const n = draft.choices.get(group)?.size;
             heading.textContent = n ? group + ' (' + n + ')' : group;
           };
           updateHeading();
           list.className = 'filter-options';
-          for (const [value, ids] of [...options].sort(([a], [b]) => a.localeCompare(b))) {
-            const label = node('label'),
-              box = node('input');
-            box.type = 'checkbox';
-            box.checked = draft.choices.get(group)?.has(value) ?? false;
-            box.onchange = () => {
-              const set = draft.choices.get(group) ?? new Set();
-              if (box.checked) set.add(value);
-              else set.delete(value);
-              if (set.size) draft.choices.set(group, set);
-              else draft.choices.delete(group);
-              updateHeading();
-              preview();
-            };
-            label.append(box, node('span', value), node('small', String(ids.size)));
-            list.append(label);
-          }
-          details.append(heading, list);
+          const search = node('input'),
+            more = node('button');
+          search.type = 'search';
+          search.placeholder = 'Search ' + group.toLowerCase();
+          search.setAttribute('aria-label', search.placeholder);
+          more.type = 'button';
+          more.className = 'more-options';
+          let sorted,
+            limit = 100;
+          const fill = () => {
+            if (!details.open) return;
+            sorted ??= [...options].sort(
+              ([a, aa], [b, bb]) => (group === 'Fandom' ? bb.size - aa.size : 0) || a.localeCompare(b),
+            );
+            const query = search.value.trim().toLocaleLowerCase();
+            const matches = query
+              ? sorted.filter(([value]) => value.toLocaleLowerCase().includes(query))
+              : sorted;
+            list.replaceChildren();
+            more.hidden = matches.length <= limit;
+            if (!more.hidden) more.textContent = 'Show ' + Math.min(100, matches.length - limit) + ' more';
+            if (!matches.length) list.append(node('small', 'No matching options.'));
+            for (const [value, ids] of matches.slice(0, limit)) {
+              const label = node('label'),
+                box = node('input');
+              box.type = 'checkbox';
+              box.checked = draft.choices.get(group)?.has(value) ?? false;
+              box.onchange = () => {
+                const set = draft.choices.get(group) ?? new Set();
+                if (box.checked) set.add(value);
+                else set.delete(value);
+                if (set.size) draft.choices.set(group, set);
+                else draft.choices.delete(group);
+                updateHeading();
+                preview();
+              };
+              label.append(box, node('span', value), node('small', String(ids.size)));
+              list.append(label);
+            }
+          };
+          search.oninput = () => {
+            limit = 100;
+            fill();
+          };
+          more.onclick = () => {
+            limit += 100;
+            fill();
+          };
+          details.append(heading);
+          if (options.size > 24) details.append(search);
+          details.append(list, more);
+          details.ontoggle = () => {
+            if (!list.childElementCount) fill();
+          };
+          fill();
           fields.append(details);
         }
         preview();

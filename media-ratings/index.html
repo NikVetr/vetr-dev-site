@@ -18,11 +18,15 @@
           <button type="button" data-key="expanded"><i aria-hidden="true">&#xe29b;</i>Films</button>
           <button type="button" data-key="tv"><i aria-hidden="true">&#xe195;</i>TV shows</button>
           <button type="button" data-key="anime"><i aria-hidden="true">&#xe412;</i>Anime</button>
+          <button type="button" data-key="games"><i aria-hidden="true">&#xe0df;</i>Video games</button>
+          <button type="button" data-key="boardgames"><i aria-hidden="true">&#xe2c5;</i>Tabletop</button>
+          <button type="button" data-key="albums"><i aria-hidden="true">&#xe494;</i>Albums</button>
+          <button type="button" data-key="podcasts"><i aria-hidden="true">&#xe1fa;</i>Podcasts</button>
           <button type="button" data-key="books"><i aria-hidden="true">&#xe05f;</i>Books</button>
           <button type="button" data-key="fanfiction"><i aria-hidden="true">&#xe0be;</i>Fanfiction</button>
           <button type="button" data-key="webfiction"><i aria-hidden="true">&#xe45f;</i>Web fiction</button>
           <button type="button" data-key="destinations"><i aria-hidden="true">&#xe111;</i>Destinations</button>
-          <button type="button" data-key="recipes"><i aria-hidden="true">&#xe584;</i>Recipes</button>
+          <button type="button" data-key="food"><i aria-hidden="true">&#xe584;</i>Recipes</button>
           <button type="button" data-key="cocktails"><i aria-hidden="true">&#xe2e3;</i>Cocktails</button>
           <button type="button" data-key="subreddits"><i aria-hidden="true">&#xe40d;</i>Subreddits</button>
           <button type="button" data-key="custom" id="custom-domain" hidden><i aria-hidden="true">&#xe247;</i>Imported</button>
@@ -40,6 +44,9 @@
             <h2>Your ratings</h2>
             <button id="quick-session" disabled>Quick rate</button>
           </div>
+          <label id="recipe-source" hidden>Recipe catalog
+            <select id="recipe-dataset"><option value="food">Food.com</option><option value="recipes">Taste of Home</option></select>
+          </label>
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
           <div class="catalog-tools">

@@ -1,6 +1,6 @@
 import { recommendationFilters } from './filters.mjs';
 import { openRapidRating } from './rapid.mjs';
-import { modelEvidence } from './evidence.mjs';
+import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
 import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
@@ -14,7 +14,7 @@ import {
   saveCSV,
 } from './exchange.mjs';
 import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges } from './core.mjs';
-import { node, percent, signed, showDetail } from './detail.mjs';
+import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
@@ -48,9 +48,25 @@ const isFilm = (k) => k === 'expanded';
 const halfStars = () =>
   isFilm(active) || (active === 'tv' && catalog.scale.join(',') === '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5');
 const wholeStars = () => !catalog.scaleLabels && catalog.scale.join(',') === '1,2,3,4,5';
+const binary = () => Boolean(catalog.responsePrompt && catalog.scale.join(',') === '0,1');
 const entries = new Map();
 const copies = new Map();
 let ratingObserver;
+const shelfObserver = new IntersectionObserver(
+  (records) => {
+    for (const entry of records) if (entry.isIntersecting) mountShelfChoices(entry.target);
+  },
+  { root: el('library'), rootMargin: '200px' },
+);
+
+function mountShelfChoices(row) {
+  if (row.classList.contains('deferred') && row.isConnected) {
+    row.classList.remove('deferred');
+    row.append(entryControls(row.dataset.id, 'catalog'));
+    syncRow(row);
+  }
+  shelfObserver.unobserve(row);
+}
 const panels = [
   {
     key: 'information',
@@ -58,7 +74,7 @@ const panels = [
     hint: 'bits',
     score: (p) =>
       ((state.weightByFamiliarity && taste?.weightedInformation) || taste?.information)?.get(p.itemId) ?? 0,
-    format: (n) => n.toFixed(3),
+    format: (n) => scoreText(n, 3),
   },
   {
     key: 'expected',
@@ -131,11 +147,13 @@ function install(key, next) {
   selected = state.selection;
   titles = new Map(catalog.items.map((it) => [it.itemId, titleOf(it)]));
   for (const btn of el('domains').querySelectorAll('button'))
-    btn.setAttribute('aria-pressed', String(btn.dataset.key === key));
+    btn.setAttribute('aria-pressed', String(btn.dataset.key === (key === 'recipes' ? 'food' : key)));
   el('domains')
     .querySelector('button[aria-pressed=true]')
     .setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
   revealCatalogButton();
+  el('recipe-source').hidden = !['food', 'recipes'].includes(key);
+  if (!el('recipe-source').hidden) select('recipe-dataset').value = key;
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
       .filter(
@@ -153,7 +171,7 @@ function install(key, next) {
               : m.titleChoice
                 ? 'Ratings + tags + title choice'
                 : m.kind === 'class-similarity'
-                  ? 'Ratings + tags'
+                  ? (m.label ?? (isFilm(key) ? 'Ratings + tags' : 'Ratings + item similarity'))
                   : m.kind === 'logit-point'
                     ? 'Historical logit'
                     : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
@@ -229,7 +247,7 @@ function showValidation(selection) {
     selection.testUsers +
     ' separate respondents contributed ' +
     selection.testRatings +
-    (catalog.responsePrompt ? ' held-out activity observations.' : ' test ratings.');
+    (catalog.activityNote ? ' held-out activity observations.' : ' test ratings.');
   const full = selection.full;
   el('selection-study').hidden = !isFilm(active);
   if (full)
@@ -287,7 +305,7 @@ function rebuildBaseline(
     const list = el('rated-list');
     let index = 0;
     for (const p of population.predictions) {
-      const mean = p.expected.toFixed(2);
+      const mean = binary() ? percent(p.expected) : p.expected.toFixed(2);
       entries.get(p.itemId).querySelector('.entry-meta').textContent = mean;
       const copy = copies.get(p.itemId);
       if (copy) {
@@ -299,6 +317,7 @@ function rebuildBaseline(
     sortCatalog();
     return;
   }
+  shelfObserver.disconnect();
   entries.clear();
   const empty = node('li', 'No matching entries.');
   empty.id = 'empty-list';
@@ -308,7 +327,7 @@ function rebuildBaseline(
     entries.set(p.itemId, entryRow(p, 'catalog'));
     if (Object.hasOwn(state.draft, p.itemId)) copies.set(p.itemId, entryRow(p, 'rated'));
   }
-  el('library').replaceChildren(...entries.values(), empty);
+  el('library').replaceChildren(empty);
   const none = node('li', 'Your rated entries appear here.');
   none.id = 'empty-rated';
   none.className = 'note';
@@ -321,23 +340,29 @@ function entryRow(p, surface) {
   li.dataset.id = p.itemId;
   const head = node('div'),
     name = node('strong', titles.get(p.itemId)),
-    mean = node('span', catalog.activityNote ? percent(p.expected) : p.expected.toFixed(2));
+    mean = node('span', binary() ? percent(p.expected) : p.expected.toFixed(2));
   head.className = 'entry-head';
   mean.className = 'entry-meta';
-  mean.title = catalog.activityNote ? 'Catalog probability of a recorded action' : 'Catalog expected rating';
+  mean.title = binary() ? 'Catalog probability of ' + scaleLabel(1) : 'Catalog expected rating';
   head.append(name, mean);
+  li.append(head);
+  if (surface === 'catalog' && catalog.items.length > 700) {
+    li.classList.add('deferred');
+    shelfObserver.observe(li);
+  } else li.append(entryControls(p.itemId, surface));
+  syncRow(li);
+  return li;
+}
+function entryControls(id, surface) {
   const body = node('div');
   body.className = 'rating-row';
-  const choices = ratingControls(p.itemId, surface);
   const readout = node('span');
   readout.className = 'rating-readout';
   const clear = node('button', 'Clear');
   clear.className = 'clear';
-  clear.setAttribute('aria-label', 'Clear rating for ' + titles.get(p.itemId));
-  body.append(choices, readout, clear);
-  li.append(head, body);
-  syncRow(li);
-  return li;
+  clear.setAttribute('aria-label', 'Clear rating for ' + titles.get(id));
+  body.append(ratingControls(id, surface), readout, clear);
+  return body;
 }
 function ratingControls(id, surface) {
   return scaleChoices(surface + '-rating-' + id, 'Rate ' + titles.get(id));
@@ -374,6 +399,7 @@ function syncRow(li) {
   const value = state.draft[li.dataset.id],
     rated = value !== undefined;
   li.classList.toggle('rated', rated);
+  if (li.classList.contains('deferred')) return;
   markChoices(li.querySelector('.choices'), value);
   li.querySelector('.clear').hidden = !rated;
   li.querySelector('.rating-readout').textContent =
@@ -391,15 +417,21 @@ function moneyBand(value) {
 }
 function facets(a) {
   return {
-    [active === 'recipes'
-      ? 'Course'
-      : active === 'fanfiction'
-        ? 'Fandom'
-        : active === 'cocktails'
-          ? 'Base spirit'
-          : 'Genre']: a.genres,
+    [{
+      recipes: 'Course',
+      fanfiction: 'Fandom',
+      cocktails: 'Base spirit',
+      boardgames: 'Game type',
+      podcasts: 'Topic',
+    }[catalog.domain] ?? 'Genre']: a.genres,
     Tag: a.tags,
-    Author: a.authors ?? (a.author ? [a.author] : []),
+    [active === 'albums' ? 'Artist' : active === 'boardgames' ? 'Brand' : 'Author']:
+      a.authors ?? (a.author ? [a.author] : []),
+    Platform: a.platforms,
+    Mode: a.modes,
+    Developer: a.developers,
+    Publisher: a.publishers,
+    Completion: a.completion ? [a.completion] : [],
     Format: a.format ? [a.format] : [],
     Certificate: a.certificate ? [a.certificate] : [],
     Collection: a.collection ? [a.collection] : [],
@@ -440,6 +472,8 @@ function setupFilters() {
   if (catalog.items.some((it) => it.annotations?.year))
     select('sort').add(new Option('Newest first', 'year'));
   for (const [key, label] of [
+    ['wordCount', 'Longest first'],
+    ['chapterCount', 'Most chapters'],
     ['ratingCount', catalog.activityCountLabel ?? 'Most rated'],
     ['revenue', 'Highest reported box office'],
     ['budget', 'Highest production budget'],
@@ -476,6 +510,7 @@ function filterRows() {
 }
 function reveal(id, focus = false) {
   const row = entries.get(id);
+  mountShelfChoices(row);
   if (!filters.matchesRatingItem(id)) return;
   if (row.hidden) {
     input('search').value = '';
@@ -530,8 +565,10 @@ function edit(li, value, fromSuggestion = false) {
   }
   syncRow(entries.get(id));
   if (value === undefined) {
-    if (copies.get(id)?.contains(document.activeElement))
+    if (copies.get(id)?.contains(document.activeElement)) {
+      mountShelfChoices(entries.get(id));
       entries.get(id).querySelector('input').focus({ preventScroll: true });
+    }
     copies.get(id)?.remove();
     copies.delete(id);
   } else if (copies.has(id)) syncRow(copies.get(id));
@@ -719,7 +756,8 @@ function update(applyDraft = true) {
     choiceNote.textContent = notes.join(' ');
     el('weights').textContent =
       model.kind === 'class-similarity'
-        ? 'Your ratings update the taste-class probabilities. Ratings above or below what the classes predict also shift the forecasts for similar films. Similarity uses rating patterns and MovieLens tags.'
+        ? 'Your ratings update the taste-class probabilities. Ratings above or below what those classes predict also shift forecasts for similar ' +
+          (isFilm(active) ? 'films, using rating patterns and MovieLens tags.' : 'entries.')
         : model.kind === 'latent-class'
           ? 'Taste components each learn a star or response distribution for every title. Each answer updates your class probabilities. The forecast averages each class’s distribution using those probabilities.'
           : result.weights.length > 1
@@ -869,7 +907,7 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
     );
   if (isShift) {
     const place = ranks?.get(p.itemId);
-    if (!place && catalog.activityNote) score.textContent = percent(p.prior) + ' → ' + percent(p.expected);
+    if (!place && binary()) score.textContent = percent(p.prior) + ' → ' + percent(p.expected);
     const change = place ? place.change : p.shift;
     if (place) score.textContent = '#' + place.from + ' → #' + place.to;
     const delta = node(
@@ -877,7 +915,7 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
       '(' +
         (place
           ? (change > 0 ? '+' : '') + change
-          : catalog.activityNote
+          : binary()
             ? signed(change * 100) + ' pp'
             : signed(change)) +
         ')',
@@ -890,7 +928,7 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
   }
   if (spec.key === 'information' && weighted)
     score.title =
-      taste.information.get(p.itemId).toFixed(3) +
+      scoreText(taste.information.get(p.itemId), 3) +
       ' bits × ' +
       metadata.get(p.itemId).ratingCount.toLocaleString() +
       ' / ' +
@@ -925,18 +963,22 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
   }
   return row;
 }
+const fillRankings = new WeakMap();
 function renderBoards() {
   closeRatingChoices();
   const host = el('boards');
   const positions = new Map(
-    [...host.querySelectorAll('.ranks')].map((list) => [list.getAttribute('data-key'), list.scrollTop]),
+    [...host.querySelectorAll('.ranks')].map((list) => [
+      list.getAttribute('data-key'),
+      { top: list.scrollTop, count: list.children.length },
+    ]),
   );
   ratingObserver?.disconnect();
   const visible = result.predictions.filter((p) => filters.matches(p.itemId));
   const rankMovements = rankChanges(visible);
   const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
   const fragment = document.createDocumentFragment();
-  const activity = Boolean(catalog.responsePrompt && catalog.scale.join(',') === '0,1');
+  const activity = binary();
   const shown = activity
     ? panels
         .filter((p) => !['chance', 'precision'].includes(p.key))
@@ -946,6 +988,7 @@ function renderBoards() {
                 ...p,
                 title:
                   {
+                    games: 'Chance of thumbs up',
                     subreddits: 'Chance of a reply',
                     fanfiction: 'Chance of kudos',
                     webfiction: 'Chance of kudos',
@@ -1021,14 +1064,32 @@ function renderBoards() {
       note.className = 'note';
       list.append(note);
     }
-    for (const [index, p] of items.entries()) {
-      list.append(recommendationRow(p, index, spec, isShift, ranks, weighted));
+    // Long catalogs keep every result in rank order and materialize more rows on scroll.
+    let rendered = 0;
+    function fill(stop) {
+      const rows = document.createDocumentFragment();
+      while (rendered < Math.min(items.length, stop)) {
+        const row = recommendationRow(items[rendered], rendered, spec, isShift, ranks, weighted);
+        rows.append(row);
+        if (list.isConnected && spec.key === 'information') ratingObserver.observe(row);
+        rendered++;
+      }
+      list.append(rows);
+      if (rendered === items.length) list.onscroll = null;
+    }
+    const position = positions.get(spec.key);
+    fill(items.length <= 600 ? items.length : position?.top ? Math.max(100, position.count) : 100);
+    if (rendered < items.length) {
+      fillRankings.set(list, fill);
+      list.onscroll = () => {
+        if (list.scrollTop + list.clientHeight >= list.scrollHeight - 240) fill(rendered + 100);
+      };
     }
     fragment.append(board);
   }
   host.replaceChildren(fragment);
   for (const list of host.querySelectorAll('.ranks'))
-    list.scrollTop = positions.get(list.getAttribute('data-key')) ?? 0;
+    list.scrollTop = positions.get(list.getAttribute('data-key'))?.top ?? 0;
   const info = host.querySelector('.information .ranks');
   ratingObserver = new IntersectionObserver(
     (records) => {
@@ -1093,6 +1154,9 @@ el('boards').onkeydown = (event) => {
   if (!(button instanceof HTMLButtonElement)) return;
   const list = button.closest('.ranks');
   if (!list || !button.matches('.rank')) return;
+  if (event.key === 'End') fillRankings.get(list)?.(Infinity);
+  else if (event.key === 'ArrowDown' && button.closest('[data-id]')?.parentElement === list.lastElementChild)
+    fillRankings.get(list)?.(list.children.length + 100);
   const buttons = Array.from(list.querySelectorAll('button.rank'));
   const idx = buttons.indexOf(button);
   const next = {
@@ -1292,20 +1356,7 @@ async function loadEvidence(key, s) {
       JSON.stringify(s.data.scale) !== JSON.stringify(data.scale)
     )
       throw new Error('Co-rating data does not match this catalog.');
-    if (data.packedFile) {
-      const resp = await fetch('./' + data.packedFile);
-      if (!resp.ok) throw new Error('Co-rating counts unavailable.');
-      const bytes = new Uint8Array(await resp.arrayBuffer());
-      const buffer =
-        bytes[0] === 31 && bytes[1] === 139
-          ? await new Response(
-              new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')),
-            ).arrayBuffer()
-          : bytes.buffer;
-      data.packed = new Uint16Array(buffer);
-      if (data.packed.length !== ((data.ids.length * (data.ids.length - 1)) / 2) * data.scale.length ** 2)
-        throw new Error('Incomplete paired counts.');
-    }
+    await prepareCounts(data);
     if (key === 'destinations') {
       const counts = data.counts.map((row) => row.reduce((sum, n) => sum + n, 0));
       if (counts.reduce((sum, n) => sum + n, 0) !== s.data.fit.ratings)
@@ -1363,7 +1414,7 @@ async function openCatalog(key, file = null) {
             .map((it) => [
               it.itemId,
               {
-                label: data.linkLabel ?? data.sourceLabel,
+                label: it.annotations.linkLabel ?? data.linkLabel ?? data.sourceLabel,
                 sourceUrl: it.annotations.sourceUrl,
                 imageUrl: it.annotations.imageUrl?.startsWith('https://') ? it.annotations.imageUrl : null,
               },
@@ -1388,6 +1439,7 @@ el('domains').onclick = (event) => {
   const btn = /** @type {HTMLElement} */ (event.target).closest('[data-key]');
   if (btn instanceof HTMLButtonElement) void openCatalog(btn.dataset.key);
 };
+select('recipe-dataset').onchange = () => void openCatalog(select('recipe-dataset').value);
 input('file').onchange = () => {
   const f = input('file').files[0];
   input('file').value = '';

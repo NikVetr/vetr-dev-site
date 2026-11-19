@@ -56,6 +56,31 @@ test('paired counts preserve comparison rows and target columns on either item o
   assert.equal(ab.r, ba.r);
 });
 
+test('overlap and on-demand evidence retain both orientations and large cohort totals', () => {
+  const data = {
+    ids: ['a', 'b', 'c'],
+    scale: [0, 1],
+    cohortSize: 100000,
+    counts: [
+      [99990, 10],
+      [99980, 20],
+      [99920, 80],
+    ],
+    packedLayout: 'binary-overlap',
+    packed: Uint16Array.of(3, 5, 12),
+  };
+  const cells = [99912, 68, 8, 12];
+  const grids = { ids: data.ids, scale: data.scale, pairGrids: new Map([[2, cells]]) };
+  assert.deepEqual(jointCounts(data, 'c', 'b').rows, [
+    [99912, 68],
+    [8, 12],
+  ]);
+  assert.deepEqual(jointCounts(data, 'b', 'c'), jointCounts(grids, 'b', 'c'));
+  assert.equal(jointCounts(data, 'b', 'c').total, 100000);
+  const sharded = { ...data, packed: undefined, pairGrids: new Map([[2, Uint16Array.of(12)]]) };
+  assert.deepEqual(jointCounts(sharded, 'c', 'b'), jointCounts(data, 'c', 'b'));
+});
+
 test('catalog edits feed all rankings, detail and co-ratings at the chosen update time', async () => {
   const app = await openPage('media-ratings/');
   const { page } = app;
@@ -159,7 +184,10 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.equal(await threshold.getByRole('radio').count(), 3);
     await threshold.getByRole('radio', { name: 'Maybe', exact: true }).click();
     assert.ok(await threshold.getByRole('radio', { name: 'Maybe', exact: true }).isChecked());
-    assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 1418);
+    const destinationRanks = page.locator('.ranks[data-key=expected] .rank');
+    await destinationRanks.first().press('End');
+    assert.equal(await destinationRanks.count(), 1418);
+    assert.equal(await destinationRanks.last().evaluate((el) => el === document.activeElement), true);
     await page.locator('.ranks[data-key=expected] .rank[data-id="338"]').click(); // Rostock has verified map and article links.
     assert.match(
       await page.locator('#external').getAttribute('href'),
@@ -760,16 +788,26 @@ test('new catalogs use their native scales, source links, observed pairs and ind
   const app = await openPage('media-ratings/', { width: 390, height: 844 });
   const p = app.page;
   try {
-    for (const [key, fingerprint, midpoint, count, source] of [
-      ['books', 'Book', '3 ★', 500, 'Goodreads'],
-      ['anime', 'Anime', '6', 500, 'MyAnimeList'],
-      ['recipes', 'Recipe', '3 ★', 100, 'Taste of Home'],
-      ['tv', 'TV', '3 ★', 256, 'TVmaze'],
-      ['cocktails', 'Cocktail', '3 ★', 500, 'Food.com'],
+    for (const [key, fingerprint, midpoint, source] of [
+      ['books', 'Book', '3 ★', 'Goodreads'],
+      ['anime', 'Anime', '6', 'MyAnimeList'],
+      ['podcasts', 'Podcast', '3 ★', 'Apple Podcasts'],
+      ['albums', 'Album', '3 ★', 'MusicBrainz'],
+      ['boardgames', 'Tabletop', '3 ★', 'Amazon'],
+      ['food', 'Recipe', '3 ★', 'Food.com'],
+      ['recipes', 'Recipe', '3 ★', 'Taste of Home'],
+      ['tv', 'TV', '3 ★', 'TVmaze'],
+      ['cocktails', 'Cocktail', '3 ★', 'Food.com'],
     ]) {
-      await p.locator('#domains [data-key="' + key + '"]').click();
+      const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
+      if (key === 'recipes') await p.locator('#recipe-dataset').selectOption('recipes');
+      else await p.locator('#domains [data-key="' + key + '"]').click();
+      await p.waitForFunction(
+        (name) => document.querySelector('#context').textContent.startsWith(name),
+        data.name,
+      );
       await p.getByRole('heading', { name: fingerprint + ' preference fingerprint' }).waitFor();
-      assert.equal(await p.locator('#library .entry').count(), count);
+      assert.equal(await p.locator('#library .entry').count(), data.items.length);
       await p.locator('#quick-session').click();
       assert.equal(
         await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'),
@@ -779,7 +817,12 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       await p.locator('#rapid-rating form button').click();
       await p.locator('#comparison .heat').waitFor();
       assert.equal(await p.locator('#rated-list .entry').count(), 1);
-      assert.equal(await p.locator('#external').innerText(), source + ' ↗');
+      const selectedId = await p.locator('#detail').getAttribute('data-id');
+      const selectedItem = data.items.find((it) => it.itemId === selectedId);
+      assert.equal(
+        await p.locator('#external').innerText(),
+        (selectedItem.annotations.linkLabel ?? data.linkLabel ?? source) + ' ↗',
+      );
       if (key === 'books') {
         await p.locator('#facet').click();
         await p.getByRole('checkbox', { name: 'Publication year', exact: true }).waitFor();
@@ -792,15 +835,22 @@ test('new catalogs use their native scales, source links, observed pairs and ind
   }
 });
 
-test('binary activity catalogs predict replies and kudos and distinguish a negative answer from a skip', async () => {
+test('binary catalogs predict explicit recommendations or recorded actions and distinguish no from a skip', async () => {
   const app = await openPage('media-ratings/', { width: 1440, height: 900 });
   const p = app.page;
   try {
-    for (const key of ['subreddits', 'fanfiction', 'webfiction']) {
+    for (const key of ['subreddits', 'fanfiction', 'webfiction', 'games']) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
       await p.locator('header #domains button[data-key="' + key + '"]').click();
       await p
-        .getByRole('heading', { name: key === 'subreddits' ? 'Chance of a reply' : 'Chance of kudos' })
+        .getByRole('heading', {
+          name:
+            key === 'games'
+              ? 'Chance of thumbs up'
+              : key === 'subreddits'
+                ? 'Chance of a reply'
+                : 'Chance of kudos',
+        })
         .waitFor();
       // Fanfiction and original fiction share a probability heading; wait for the actual switch.
       await p.waitForFunction(
@@ -808,7 +858,8 @@ test('binary activity catalogs predict replies and kudos and distinguish a negat
         key,
       );
       assert.equal(await p.locator('#library .entry').count(), data.items.length);
-      assert.equal(await p.locator('#choice-note').innerText(), data.activityNote);
+      if (data.activityNote) assert.equal(await p.locator('#choice-note').innerText(), data.activityNote);
+      else assert.equal(await p.locator('#scale-help').innerText(), data.responsePrompt);
       assert.equal(await p.locator('#rated-list .entry').count(), 0);
       await p.locator('#quick-session').click();
       await p.locator('#rapid-skip').click();
@@ -821,10 +872,23 @@ test('binary activity catalogs predict replies and kudos and distinguish a negat
       assert.match(await p.locator('[data-key=expected] .score').first().innerText(), /%$/);
       if (key === 'fanfiction') {
         await p.locator('#facet').click();
+        const fandomSearch = p.getByRole('searchbox', { name: 'Search fandom' });
         for (const label of ['Harry Potter', 'Naruto', 'Worm']) {
+          await fandomSearch.fill(label);
           await p.getByRole('checkbox', { name: new RegExp('^' + label + ' ') }).waitFor();
         }
-        await p.keyboard.press('Escape');
+        await p.getByRole('checkbox', { name: /^Worm / }).check();
+        await p.locator('#filter-apply').click();
+        assert.equal(await p.locator('#library .entry:visible').count(), data.items.length);
+        const rankedIds = await p
+          .locator('[data-key=expected] .rank')
+          .evaluateAll((rows) => rows.map((row) => row.dataset.id));
+        assert.ok(rankedIds.length > 0);
+        assert.ok(
+          rankedIds.every((key) =>
+            data.items.find((it) => it.itemId === key).annotations.genres.includes('Worm'),
+          ),
+        );
       }
     }
     assert.deepEqual(app.errors, []);

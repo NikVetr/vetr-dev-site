@@ -164,7 +164,20 @@ function tastePatterns(catalog, predictions, count) {
   const films = catalog.items.some((it) => it.annotations?.genres?.length);
   const regions = catalog.items.some((it) => it.annotations?.region);
   host.replaceChildren(
-    html('h3', films ? 'Genre preferences' : regions ? 'Regional preferences' : 'Forecast changes'),
+    html(
+      'h3',
+      films
+        ? ({
+            fanfiction: 'Fandom preferences',
+            recipes: 'Course preferences',
+            cocktails: 'Base spirit preferences',
+            boardgames: 'Game type preferences',
+            podcasts: 'Topic preferences',
+          }[catalog.domain] ?? 'Genre preferences')
+        : regions
+          ? 'Regional preferences'
+          : 'Forecast changes',
+    ),
   );
   if (!count || !predictions.length) {
     host.append(
@@ -251,7 +264,10 @@ export function renderTaste(
       books: 'Book preference',
       music: 'Music preference',
       anime: 'Anime preference',
-      games: 'Game preference',
+      games: 'Video game preference',
+      boardgames: 'Tabletop preference',
+      albums: 'Album preference',
+      podcasts: 'Podcast preference',
       recipes: 'Recipe preference',
       tv: 'TV preference',
       cocktails: 'Cocktail preference',

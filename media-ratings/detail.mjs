@@ -1,3 +1,4 @@
+import { pairIndex, comparisonGrids } from './evidence.mjs';
 import { latentPairs } from './latent.mjs';
 import { pairPlot } from './charts.mjs';
 // The counts for an unordered pair are stored once. Rows here always represent
@@ -9,8 +10,16 @@ export function jointCounts(data, target, rated) {
   const hi = Math.max(i, j),
     lo = Math.min(i, j),
     n = data.scale.length;
-  const pair = (hi * (hi - 1)) / 2 + lo;
-  const cells = data.packed ? data.packed.subarray(pair * n * n, (pair + 1) * n * n) : data.pairs[pair];
+  const pair = pairIndex(hi, lo);
+  let cells;
+  if (data.packedLayout === 'binary-overlap') {
+    const both = data.pairGrids ? data.pairGrids.get(pair)[0] : data.packed[pair],
+      left = data.counts[lo][1],
+      right = data.counts[hi][1];
+    cells = [data.cohortSize - left - right + both, right - both, left - both, both];
+    if (cells.some((n) => n < 0)) throw new Error('Inconsistent binary co-rating counts.');
+  } else if (data.pairGrids) cells = data.pairGrids.get(pair);
+  else cells = data.packed ? data.packed.subarray(pair * n * n, (pair + 1) * n * n) : data.pairs[pair];
   const rows = data.scale.map((_, a) => data.scale.map((_, b) => cells[j < i ? a * n + b : b * n + a]));
   let total = 0,
     x = 0,
@@ -41,8 +50,11 @@ export function node(tag, text = '') {
   n.textContent = text;
   return n;
 }
-export const percent = (n) => (n * 100).toFixed(1) + '%';
-export const signed = (n) => (n > 0 ? '+' : '') + n.toFixed(2);
+// Preserve small but material score differences in sparse activity catalogs.
+export const scoreText = (n, digits) =>
+  Math.abs(n) >= 1e-12 && Math.abs(n) < 0.5 * 10 ** -digits ? n.toPrecision(2) : n.toFixed(digits);
+export const percent = (n) => scoreText(n * 100, 1) + '%';
+export const signed = (n) => (n > 0 ? '+' : '') + scoreText(n, 2);
 const numeric = (n) => n.toFixed(2);
 
 export function shortAnnotations(a) {
@@ -124,7 +136,32 @@ function coRatings(data, p, ratings, titles, label, message, preferred, gaussian
     note(message);
     return;
   }
-  const comparisons = Object.keys(ratings)
+  const ids = Object.keys(ratings).filter((id) => id !== p.itemId);
+  if (ids.length && data.packedFiles && !data.pairGrids) {
+    const loading = node('p', 'Loading observed co-ratings…');
+    loading.className = 'evidence-note';
+    host.append(loading);
+    comparisonGrids(data, p.itemId, ids, () => loading.isConnected)
+      .then((parts) => {
+        if (loading.isConnected)
+          coRatings(
+            { ...data, pairGrids: parts },
+            p,
+            ratings,
+            titles,
+            label,
+            message,
+            preferred,
+            gaussian,
+            source,
+          );
+      })
+      .catch((error) => {
+        loading.textContent = error.message;
+      });
+    return;
+  }
+  const comparisons = ids
     .map((id) => ({ id, ...jointCounts(data, p.itemId, id) }))
     .sort(
       (a, b) =>
@@ -265,6 +302,13 @@ export function showDetail({
     ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
     ['Year', a.year],
     ['Episodes', a.episodes],
+    ['Words', a.wordCount?.toLocaleString()],
+    ['Chapters', a.chapterCount],
+    ['Status', a.completion],
+    ['Platforms', a.platforms?.join(' · ')],
+    ['Modes', a.modes?.join(' · ')],
+    ['Developers', a.developers?.join(' · ')],
+    ['Publishers', a.publishers?.join(' · ')],
     ['Tags', a.tags?.join(' · ')],
     ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
     ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
@@ -330,7 +374,7 @@ export function showDetail({
   const metrics = el('metrics');
   metrics.className = 'metrics';
   metrics.replaceChildren();
-  for (const [name, value] of catalog.activityNote
+  for (const [name, value] of catalog.responsePrompt && catalog.scale.join(',') === '0,1'
     ? [
         ['Catalog probability', percent(p.prior)],
         ['With your answers', percent(p.expected)],
