@@ -1,0 +1,39 @@
+{
+  "trainingRespondents": 156913,
+  "validationRespondents": 2000,
+  "testRespondents": 3000,
+  "given": 4,
+  "outcome": "Fraction of the top 20 suggested titles with another recorded MovieLens rating by the same respondent",
+  "validation": [
+    {
+      "strength": 0,
+      "recordedInTop20": 0.37920000000000037
+    },
+    {
+      "strength": 0.5,
+      "recordedInTop20": 0.39615000000000006
+    },
+    {
+      "strength": 1,
+      "recordedInTop20": 0.40759999999999946
+    },
+    {
+      "strength": 2,
+      "recordedInTop20": 0.4063500000000002
+    },
+    {
+      "strength": 4,
+      "recordedInTop20": 0.37919999999999954
+    }
+  ],
+  "selected": 1,
+  "test": {
+    "counts": 0.3731333333333327,
+    "withProximity": 0.40039999999999987,
+    "difference": 0.02726666666666656,
+    "ci95": [
+      0.0242693970385191,
+      0.030263936294814022
+    ]
+  }
+}

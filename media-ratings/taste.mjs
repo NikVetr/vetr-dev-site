@@ -1,5 +1,7 @@
 import { latestRatingDate, populationModel } from './calendar.mjs';
 import { dot, symmetricEigen } from '../intuitions/lib/linalg.js';
+import { familiarityRanks } from './questions.mjs';
+export { questionScores } from './questions.mjs';
 import { predict } from './core.mjs';
 
 // A separate diagnostic of the categorical mixture. Its classes have a fitted
@@ -64,6 +66,7 @@ export function tasteProfile(
     weights,
     information,
     weightedInformation,
+    familiarity: familiarityRanks(catalog, ratings),
     projection: projectClasses(model, catalog.scale, centerClassMeans),
   };
 }
