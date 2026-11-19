@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from prepare_ao3 import calibrate_activity, evaluate, fit_kudos, test_cases as make_cases, write_grids
+from prepare_ao3 import calibrate_activity, evaluate, filtered_recall, fit_kudos, test_cases as make_cases, work_fandoms, write_grids
 
 
 class KudosTests(unittest.TestCase):
@@ -49,13 +49,31 @@ class KudosTests(unittest.TestCase):
             data = json.loads(path.read_text())
             pairs = np.frombuffer(gzip.decompress((path.parent / data['packedFile']).read_bytes()), '<u2')
         dense = x.toarray()
-        pairs = pairs.reshape(-1, 2, 2)
+        self.assertEqual(data['packedLayout'], 'binary-overlap')
+        self.assertEqual(data['cohortSize'], len(dense))
         for j in range(3):
             np.testing.assert_array_equal(data['counts'][j], np.bincount(dense[:, j], minlength=2))
             for i in range(j):
+                joint = int(pairs[j*(j-1)//2 + i])
+                a, b = data['counts'][i][1], data['counts'][j][1]
                 observed = np.zeros((2, 2), dtype=int)
                 np.add.at(observed, (dense[:, i], dense[:, j]), 1)
-                np.testing.assert_array_equal(observed, pairs[j*(j-1)//2 + i])
+                np.testing.assert_array_equal(observed, [[len(dense)-a-b+joint,b-joint],[a-joint,joint]])
+
+    def test_crossovers_and_filtered_recommendations(self):
+        self.assertEqual(work_fandoms({'Fandoms': 'Naruto, Worm - Wildbow, Worm (Parahumans)'}), ['Naruto', 'Worm'])
+        self.assertEqual(work_fandoms({'Fandoms': 'Not Naruto, Unknown'}), [])
+        # Twelve candidates in the fandom; a thirteenth supplied work outside it
+        # favors the class that gives the hidden title a high probability.
+        p = np.full((2, 13), 0.2)
+        p[:, 0], p[:, 12] = [0.001, 1 - 0.001], [0.001, 1 - 0.001]
+        model = (np.asarray([0.90, 0.10]), p, 1)
+        group = np.arange(12)
+        positive = [(np.array([12]), np.array([0]))]
+        result = filtered_recall(model, positive, group)
+        self.assertEqual((result['crossFandomReaders'], result['crossFandomRecallAt10']), (1, 1.))
+        pooled = (np.ones(1), (model[0] @ p)[None,:], 1)
+        self.assertEqual(filtered_recall(pooled, positive, group)['recallAt10'], 0.)
 
 
 if __name__ == '__main__':
