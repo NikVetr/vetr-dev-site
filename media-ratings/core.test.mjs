@@ -511,3 +511,76 @@ test('title choice uses only volunteered identities and carries the posterior in
   films.models.choice.titleChoice.logRatios[0].pop();
   assert.throws(() => submit(request), /class-by-item table/);
 });
+
+test('submission-year calibration conditions on each dated answer and compares targets in the forecast year', () => {
+  const components = [
+    {
+      weight: 0.5,
+      probabilities: [
+        [0.8, 0.2],
+        [0.3, 0.7],
+        [0.2, 0.8],
+      ],
+    },
+    {
+      weight: 0.5,
+      probabilities: [
+        [0.4, 0.6],
+        [0.7, 0.3],
+        [0.9, 0.1],
+      ],
+    },
+  ];
+  const calendar = {
+    firstYear: 2000,
+    lastYear: 2001,
+    strength: 0.5,
+    counts: [
+      [0, 100, 0, 100, 0, 100],
+      [100, 0, 100, 0, 100, 0],
+    ],
+  };
+  const films = {
+    name: 'Dated',
+    scale: [1, 5],
+    items: ['a', 'b', 'c'].map((itemId) => ({ itemId, title: itemId })),
+    defaultModel: 'hybrid',
+    models: {
+      base: { kind: 'latent-class', components },
+      hybrid: {
+        kind: 'class-similarity',
+        base: 'base',
+        strength: 0.5,
+        ridge: 0.5,
+        features: [[0], [0], [0]],
+      },
+      date: { kind: 'class-similarity', base: 'base', similarityFrom: 'hybrid', ratingYear: calendar },
+    },
+  };
+  const ratings = { a: 5, b: 1 };
+  const request = { catalog: films, ratings, model: 'date' };
+  assert.deepEqual(submit(request), submit({ catalog: films, ratings }));
+  const ratedOn = { a: '1999-12-31', b: '2026-11-18' };
+  // With 100 counts and 100 pseudo-ratings each year's category multiplier
+  // ratio is sqrt(3) in favor of its common category.
+  const odds = Math.sqrt(3);
+  const first = (p) => (p * odds) / (1 - p + p * odds);
+  const last = (p) => p / ((1 - p) * odds + p);
+  const w = components.map((c) => first(c.probabilities[0][1]) * (1 - last(c.probabilities[1][1])));
+  const target = components.map((c) => last(c.probabilities[2][1]));
+  const result = submit({ ...request, ratedOn });
+  close(result.weights[0].posterior, w[0] / (w[0] + w[1]));
+  close(result.predictions[0].prior, 1 + (4 * (target[0] + target[1])) / 2);
+  close(result.predictions[0].chance, (w[0] * target[0] + w[1] * target[1]) / (w[0] + w[1]));
+  assert.deepEqual(result, submit({ ...request, ratedOn: { a: '2000-02-29', b: '2001-01-01' } }));
+  assert.deepEqual(submit({ catalog: films, ratings, ratedOn }), submit({ catalog: films, ratings }));
+  const mixed = submit({ ...request, ratedOn: { b: ratedOn.b } });
+  const un = components.map((c) => c.probabilities[0][1] * (1 - last(c.probabilities[1][1])));
+  close(mixed.weights[0].posterior, un[0] / (un[0] + un[1]));
+  const fp = preferenceFingerprint(films, { model: 'date', ratings, ratedOn });
+  close(fp.classes.find((c) => c.index === 0).probability, result.weights[0].posterior);
+  assert.throws(() => submit({ ...request, ratedOn: { c: '2000-10-01' } }), /supplied item IDs/);
+  assert.throws(() => submit({ ...request, ratedOn: { a: '2001-02-29' } }), /YYYY-MM-DD/);
+  calendar.counts[0].pop();
+  assert.throws(() => submit(request), /category counts/);
+});

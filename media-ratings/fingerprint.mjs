@@ -1,3 +1,4 @@
+import { latestRatingDate, populationModel } from './calendar.mjs';
 import { dot } from '../intuitions/lib/linalg.js';
 import { pnormInterval } from '../intuitions/lib/normal.js';
 import { gaussianProjection } from './core.mjs';
@@ -121,6 +122,7 @@ export function preferenceFingerprint(
     samples = 256,
     centerClassMeans = false,
     volunteered = [],
+    ratedOn = {},
     axisIndices = undefined,
   } = {},
   projection = null,
@@ -132,12 +134,12 @@ export function preferenceFingerprint(
     Object.keys(catalog.models)[0];
   if (!Object.hasOwn(catalog.models, key)) throw new Error('Choose a fitted fingerprint model.');
   const active = catalog.models[key];
-  const model = active.kind === 'class-similarity' ? catalog.models[active.base] : active;
+  const model = populationModel(catalog, active, latestRatingDate(ratedOn));
   const categorical = model.kind === 'latent-class';
   const view =
     projection ??
     (categorical
-      ? tasteProfile(catalog, ratings, key, null, centerClassMeans, volunteered)
+      ? tasteProfile(catalog, ratings, key, null, centerClassMeans, volunteered, ratedOn)
       : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices }));
   const { weights } = view;
   const { classes, groups, usesHalfStars } = classSignatures(catalog, model);
@@ -145,7 +147,8 @@ export function preferenceFingerprint(
   const evidence = catalog.items.flatMap((it, i) => {
     if (!categorical || !Object.hasOwn(ratings, it.itemId)) return [];
     const value = ratings[it.itemId];
-    const probabilities = model.components.map((c) => c.probabilities[i][catalog.scale.indexOf(value)]);
+    const observed = populationModel(catalog, active, ratedOn[it.itemId]);
+    const probabilities = observed.components.map((c) => c.probabilities[i][catalog.scale.indexOf(value)]);
     const base = classes.reduce((sum, c, k) => sum + c.prior * probabilities[k], 0);
     return [{ title: it.title, value, probabilities, base }];
   });

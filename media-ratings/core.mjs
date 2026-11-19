@@ -1,3 +1,4 @@
+import { latestRatingDate, populationModel, validRatingDate } from './calendar.mjs';
 import { checkRequestKeys, invalidRequest } from '../shared/request.js';
 import { cholesky, dot, symmetricEigen } from '../intuitions/lib/linalg.js';
 import { pnorm, pnormInterval, qnorm } from '../intuitions/lib/normal.js';
@@ -5,9 +6,9 @@ import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
 /** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
-/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:{strength:number,logRatios:number[][]}}} Model */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:{strength:number,logRatios:number[][]},ratingYear?:{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
 /** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
-/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[]}} Request */
+/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[],ratedOn?:Record<string,string>}} Request */
 /** @param {number[]} a */
 const increasing = (a) => Array.isArray(a) && a.every((v, i) => Number.isFinite(v) && (!i || v > a[i - 1]));
 /** @param {unknown} ok @param {string} message */
@@ -68,6 +69,29 @@ export function validateCatalog(catalog) {
               (row) => Array.isArray(row) && row.length === d && row.every(Number.isFinite),
             ),
           'Title-choice evidence requires a positive strength and a finite class-by-item table.',
+        );
+      }
+      if (model.ratingYear !== undefined) {
+        const calendar = model.ratingYear;
+        requireValue(
+          calendar &&
+            Number.isSafeInteger(calendar.firstYear) &&
+            calendar.firstYear >= 1 &&
+            Number.isSafeInteger(calendar.lastYear) &&
+            calendar.lastYear <= 9999 &&
+            calendar.lastYear >= calendar.firstYear &&
+            Number.isFinite(calendar.strength) &&
+            calendar.strength > 0 &&
+            calendar.strength <= 1 &&
+            Array.isArray(calendar.counts) &&
+            calendar.counts.length === calendar.lastYear - calendar.firstYear + 1 &&
+            calendar.counts.every(
+              (row) =>
+                Array.isArray(row) &&
+                row.length === d * scale.length &&
+                row.every((n) => Number.isSafeInteger(n) && n >= 0),
+            ),
+          'Rating-year calibration requires ordered years, a strength in (0, 1] and a complete table of nonnegative category counts.',
         );
       }
       if (model.similarityFrom !== undefined) {
@@ -300,10 +324,12 @@ function predictLatentClass(
   similarity = null,
   choice = null,
   volunteered = new Set(),
+  inputModels = null,
 ) {
   const evidence = model.components.map((c, k) =>
     obs.map((i, j) => {
-      const stars = Math.log(c.probabilities[i][values[j]]);
+      const distribution = (inputModels?.[j]?.components[k] ?? c).probabilities[i];
+      const stars = Math.log(distribution[values[j]]);
       return choice && volunteered.has(items[i].itemId)
         ? stars + choice.strength * choice.logRatios[k][i]
         : stars;
@@ -330,7 +356,8 @@ function predictLatentClass(
         }),
       );
       const mean = model.components.reduce(
-        (sum, c, k) => sum + leaveOneOut[k] * dot(c.probabilities[i], scale),
+        (sum, c, k) =>
+          sum + leaveOneOut[k] * dot((inputModels?.[j]?.components[k] ?? c).probabilities[i], scale),
         0,
       );
       return scale[values[j]] - mean;
@@ -391,6 +418,7 @@ export function predict(
     model: key = catalog.defaultModel,
     ratings = {},
     volunteered = [],
+    ratedOn = {},
     threshold = defaultCutoff(catalog.scale),
     samples = 256,
   },
@@ -416,11 +444,19 @@ export function predict(
       new Set(volunteered).size === volunteered.length,
     'Volunteered titles must be unique IDs with supplied ratings.',
   );
+  requireValue(
+    ratedOn &&
+      typeof ratedOn === 'object' &&
+      !Array.isArray(ratedOn) &&
+      Object.entries(ratedOn).every(([id, date]) => Object.hasOwn(ratings, id) && validRatingDate(date)),
+    'Rating dates must be valid YYYY-MM-DD dates for supplied item IDs.',
+  );
   const obs = items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => scale.indexOf(ratings[items[i].itemId]));
-  if (model.kind === 'class-similarity')
+  if (model.kind === 'class-similarity') {
+    const date = model.ratingYear ? latestRatingDate(ratedOn) : '';
     return predictLatentClass(
-      catalog.models[model.base],
+      populationModel(catalog, model, date),
       items,
       scale,
       obs,
@@ -429,7 +465,9 @@ export function predict(
       model.similarityFrom !== undefined ? catalog.models[model.similarityFrom] : model,
       model.titleChoice,
       new Set(volunteered),
+      date ? obs.map((i) => populationModel(catalog, model, ratedOn[items[i].itemId])) : null,
     );
+  }
   if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);
   const uniform = model.kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
   const blocks = model.components.map((c) => {
@@ -482,7 +520,7 @@ export function predict(
 
 /** @param {Request & {catalog:Catalog}} input */
 export function submit(input) {
-  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'volunteered', 'threshold', 'samples']);
+  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'volunteered', 'ratedOn', 'threshold', 'samples']);
   const { catalog, ...request } = input;
   return predict(validateCatalog(catalog), request);
 }

@@ -1,3 +1,4 @@
+import { latestRatingDate, populationModel } from './calendar.mjs';
 import { dot, symmetricEigen } from '../intuitions/lib/linalg.js';
 import { predict } from './core.mjs';
 
@@ -10,17 +11,22 @@ export function tasteProfile(
   existing = null,
   centerClassMeans = false,
   volunteered = [],
+  ratedOn = {},
 ) {
   if (!key) return null;
   const selected = catalog.models[key];
-  const model = selected.kind === 'class-similarity' ? catalog.models[selected.base] : selected;
+  const model = populationModel(catalog, selected, latestRatingDate(ratedOn));
   if (model.kind !== 'latent-class') throw new Error('Taste profiles require a categorical mixture.');
   const result =
     existing ??
     predict(catalog, {
-      model: selected.kind === 'class-similarity' && !selected.titleChoice ? selected.base : key,
+      model:
+        selected.kind === 'class-similarity' && !selected.titleChoice && !selected.ratingYear
+          ? selected.base
+          : key,
       ratings,
       volunteered,
+      ratedOn,
     });
   const weights = result.weights.map((w) => w.posterior);
   const information = new Map();

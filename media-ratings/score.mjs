@@ -9,8 +9,8 @@ for (const model of Object.keys(catalog.models)) {
     logLoss = 0,
     mse = 0,
     brier = 0;
-  for (const { ratings, targets, volunteered } of profiles) {
-    const { predictions } = predict(catalog, { model, ratings, volunteered, threshold });
+  for (const { ratings, targets, volunteered, ratedOn } of profiles) {
+    const { predictions } = predict(catalog, { model, ratings, volunteered, ratedOn, threshold });
     const count = Object.keys(targets).length;
     n += count;
     for (const p of predictions) {
