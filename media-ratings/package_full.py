@@ -79,6 +79,38 @@ def rating_year_model(archive, matrix, data):
     }
 
 
+def creator_similarity(items):
+    directory = Path(__file__).resolve().parent
+    records = json.loads((directory / "film-creators.json").read_text())
+    study = json.loads((directory / "validation/creator-credits.json").read_text())
+    weight = study["selected"]
+    if not 0 < weight < 0.5:
+        raise ValueError(
+            "The selected shared-credit weight must be positive and below the ridge"
+        )
+    ids = [it["itemId"] for it in items]
+    if set(records) != set(ids):
+        raise ValueError("Creator metadata and packaged film catalog disagree")
+    # Each role has its own vocabulary. Compact integer IDs keep the scorer
+    # self-contained; individual names live in the human-readable metadata.
+    roles = ("directors", "cast", "studios")
+    indices = {
+        r: {
+            n: i
+            for i, n in enumerate(
+                sorted({n for row in records.values() for n in row[r]})
+            )
+        }
+        for r in roles
+    }
+    return {
+        "weight": weight,
+        "items": [
+            [[indices[r][n] for n in records[it][r]] for r in roles] for it in ids
+        ],
+    }
+
+
 def package(root, archive, catalog, report):
     data = json.loads(catalog.read_text())
     annotations = json.loads((root / "film-annotations.json").read_text())
@@ -150,6 +182,7 @@ def package(root, archive, catalog, report):
         "similarityFrom": "ratingsTags",
         "titleChoice": "titleChoice",
         "ratingYear": "ratingYear",
+        "creatorSimilarity": creator_similarity(data["items"]),
     }
     data["defaultModel"] = "personalized"
     catalog.write_text(

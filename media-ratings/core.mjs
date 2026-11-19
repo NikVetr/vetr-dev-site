@@ -7,7 +7,8 @@ import { mulberry32 } from '../shared/rng.js';
 
 /** @typedef {{itemId:string,title:string}} Item */
 /** @typedef {{weight:number,mean?:number[],covariance?:number[][],probabilities?:number[][]}} Component */
-/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,titleChoice?:string|{strength:number,logRatios:number[][]},ratingYear?:string|{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
+/** @typedef {{weight:number,items:number[][][]}} CreatorSimilarity */
+/** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,creatorSimilarity?:CreatorSimilarity,titleChoice?:string|{strength:number,logRatios:number[][]},ratingYear?:string|{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
 /** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
 /** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[],ratedOn?:Record<string,string>}} Request */
 /** @param {number[]} a */
@@ -58,6 +59,31 @@ export function validateCatalog(catalog) {
         typeof base === 'string' && Object.hasOwn(models, base) && models[base]?.kind === 'latent-class',
         'The similarity model must reference a fitted latent-class model.',
       );
+      if (model.creatorSimilarity !== undefined) {
+        const credits = model.creatorSimilarity;
+        const source = model.similarityFrom === undefined ? model : models[model.similarityFrom];
+        requireValue(
+          credits &&
+            Number.isFinite(credits.weight) &&
+            credits.weight > 0 &&
+            credits.weight < (source?.ridge ?? 0) &&
+            Array.isArray(credits.items) &&
+            credits.items.length === d &&
+            credits.items.every(
+              (roles) =>
+                Array.isArray(roles) &&
+                roles.length === 3 &&
+                roles.every(
+                  (ids) =>
+                    Array.isArray(ids) &&
+                    new Set(ids).size === ids.length &&
+                    ids.every((id) => Number.isSafeInteger(id) && id >= 0),
+                ) &&
+                roles.some((ids) => ids.length),
+            ),
+          'Creator similarity requires three credit lists per item and a weight below the similarity ridge.',
+        );
+      }
       if (model.titleChoice !== undefined) {
         const choice = modelEvidence(catalog, model, 'titleChoice');
         requireValue(
@@ -298,21 +324,66 @@ function classMasses(logWeights) {
   return masses.map((v) => v / total);
 }
 
-// Ridge regression in the smaller of observation space and feature space.
-// Both systems yield the same feature coefficients X' (X X' + ridge I)^-1 r.
-function similarityCoefficients(rows, residuals, ridge) {
-  const dual = rows.length <= rows[0].length;
-  const basis = dual ? rows : rows[0].map((_, j) => rows.map((row) => row[j]));
-  const gram = basis.map((a, i) => basis.map((b, j) => dot(a, b) + (i === j ? ridge : 0)));
+/** @param {number[][]} gram @param {number[]} right */
+function solveSimilarity(gram, right) {
   const L = cholesky(gram);
-  requireValue(L, 'Could not factor the similarity ridge system.');
-  const coef = forward(L, dual ? residuals : basis.map((col) => dot(col, residuals)));
+  if (!L) throw invalidRequest('$', 'Could not factor the similarity ridge system.');
+  const coef = forward(L, right);
   for (let j = coef.length - 1; j >= 0; j--) {
     for (let i = j + 1; i < coef.length; i++) coef[j] -= L[i][j] * coef[i];
     coef[j] /= L[j][j];
   }
-  if (!dual) return coef;
-  return rows[0].map((_, j) => rows.reduce((s, row, i) => s + coef[i] * row[j], 0));
+  return coef;
+}
+
+// Sparse director, cast and studio membership. Build just the observed rows
+// of the credit matrix. Distinct roles have independent ID namespaces.
+/** @param {CreatorSimilarity} credits @param {number[]} obs */
+function creditSimilarities(credits, obs) {
+  const postings = [new Map(), new Map(), new Map()];
+  const normalized = credits.items.map((roles, i) => {
+    const active = roles.filter((ids) => ids.length).length;
+    return roles.map((ids, k) => {
+      const scale = ids.length ? 1 / Math.sqrt(active * ids.length) : 0;
+      for (const id of ids) {
+        if (!postings[k].has(id)) postings[k].set(id, []);
+        postings[k].get(id).push([i, scale]);
+      }
+      return scale;
+    });
+  });
+  return obs.map((i) => {
+    const row = new Float64Array(credits.items.length);
+    for (const [k, ids] of credits.items[i].entries()) {
+      for (const id of ids) {
+        for (const [j, scale] of postings[k].get(id)) row[j] += credits.weight * normalized[i][k] * scale;
+      }
+    }
+    row[i] = 0; // Preserve the existing self-similarity and ridge on the diagonal.
+    return row;
+  });
+}
+
+/**
+ * @param {{features:number[][],ridge:number}} similarity
+ * @param {CreatorSimilarity|null} credits @param {number[]} obs @param {number[]} residuals
+ * @returns {(i:number) => number}
+ */
+function similarityTransfer(similarity, credits, obs, residuals) {
+  const { features, ridge } = similarity;
+  const rows = obs.map((i) => features[i]);
+  const extra = credits ? creditSimilarities(credits, obs) : null;
+  // With ordinary dense features, solve in the smaller of feature and observation
+  // space. Shared credit adds a sparse kernel, making the observation system exact.
+  const dual = extra !== null || rows.length <= rows[0].length;
+  const basis = dual ? rows : rows[0].map((_, j) => rows.map((row) => row[j]));
+  const gram = basis.map((a, i) =>
+    basis.map((b, j) => dot(a, b) + (i === j ? ridge : 0) + (extra?.[i][obs[j]] ?? 0)),
+  );
+  const solved = solveSimilarity(gram, dual ? residuals : basis.map((col) => dot(col, residuals)));
+  const beta = dual ? rows[0].map((_, j) => rows.reduce((s, row, i) => s + solved[i] * row[j], 0)) : solved;
+  return (i) =>
+    dot(features[i], beta) + (extra ? extra.reduce((sum, row, h) => sum + row[i] * solved[h], 0) : 0);
 }
 
 function predictLatentClass(
@@ -326,6 +397,7 @@ function predictLatentClass(
   choice = null,
   volunteered = new Set(),
   inputModels = null,
+  credits = null,
 ) {
   const evidence = model.components.map((c, k) =>
     obs.map((i, j) => {
@@ -343,7 +415,7 @@ function predictLatentClass(
     posterior: post[k],
     effectiveSamples: null,
   }));
-  let coef;
+  let transfer;
   if (similarity && obs.length && obs.length < items.length) {
     const residuals = obs.map((i, j) => {
       const leaveOneOut = classMasses(
@@ -363,11 +435,7 @@ function predictLatentClass(
       );
       return scale[values[j]] - mean;
     });
-    coef = similarityCoefficients(
-      obs.map((i) => similarity.features[i]),
-      residuals,
-      similarity.ridge,
-    );
+    transfer = similarityTransfer(similarity, credits, obs, residuals);
   }
   const observed = new Set(obs);
   const predictions = [];
@@ -380,8 +448,8 @@ function predictLatentClass(
       prior += c.weight * dot(distribution, scale);
       for (let j = 0; j < scale.length; j++) probs[j] += weights[g].posterior * distribution[j];
     }
-    if (coef) {
-      const tilt = similarity.strength * dot(similarity.features[i], coef);
+    if (transfer) {
+      const tilt = similarity.strength * transfer(i);
       const center = (scale[0] + scale.at(-1)) / 2;
       let sum = 0;
       for (let j = 0; j < scale.length; j++) {
@@ -467,6 +535,7 @@ export function predict(
       modelEvidence(catalog, model, 'titleChoice'),
       new Set(volunteered),
       date ? obs.map((i) => populationModel(catalog, model, ratedOn[items[i].itemId])) : null,
+      model.creatorSimilarity,
     );
   }
   if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);

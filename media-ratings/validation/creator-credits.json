@@ -1,0 +1,131 @@
+{
+  "trainingUsers": 156913,
+  "validationUsers": 2000,
+  "testUsers": 3000,
+  "given": 4,
+  "testRatings": 196480,
+  "selected": 0.3,
+  "bestPositiveWeight": 0.3,
+  "validation": [
+    {
+      "label": "Shared credits \u00d7 0",
+      "logLoss": 1.5664887217301866,
+      "rmse": 0.8962943204923637,
+      "brier": 0.19031041815888644,
+      "weight": 0.0,
+      "pairedLogLossVersusDefault": {
+        "difference": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "label": "Shared credits \u00d7 0.05",
+      "logLoss": 1.56641622512703,
+      "rmse": 0.896238305422504,
+      "brier": 0.19029962192564562,
+      "weight": 0.05,
+      "pairedLogLossVersusDefault": {
+        "difference": -7.249660315976996e-05,
+        "ci95": [
+          -0.00011045769506721933,
+          -3.453551125232059e-05
+        ]
+      }
+    },
+    {
+      "label": "Shared credits \u00d7 0.15",
+      "logLoss": 1.5662961889630718,
+      "rmse": 0.8961683601907074,
+      "brier": 0.19028398935154556,
+      "weight": 0.15,
+      "pairedLogLossVersusDefault": {
+        "difference": -0.00019253276711557989,
+        "ci95": [
+          -0.000304557345141941,
+          -8.050818908921875e-05
+        ]
+      }
+    },
+    {
+      "label": "Shared credits \u00d7 0.3",
+      "logLoss": 1.5661782944942018,
+      "rmse": 0.8961624354169658,
+      "brier": 0.19027500524821625,
+      "weight": 0.3,
+      "pairedLogLossVersusDefault": {
+        "difference": -0.0003104272359896391,
+        "ci95": [
+          -0.000530475497977235,
+          -9.03789740020433e-05
+        ]
+      }
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Shared credits \u00d7 0",
+      "logLoss": 1.5702067854836077,
+      "rmse": 0.9042856006045716,
+      "brier": 0.1931608352917124,
+      "weight": 0.0,
+      "pairedLogLossVersusDefault": {
+        "difference": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "label": "Shared credits \u00d7 0.3",
+      "logLoss": 1.5699236998911001,
+      "rmse": 0.9040262311376395,
+      "brier": 0.1930876321816821,
+      "weight": 0.3,
+      "pairedLogLossVersusDefault": {
+        "difference": -0.00028308559251036833,
+        "ci95": [
+          -0.00047093329748410873,
+          -9.523788753662793e-05
+        ]
+      }
+    }
+  ],
+  "future2019": {
+    "testUsers": 5657,
+    "testRatings": 357068,
+    "holdout": [
+      {
+        "label": "Shared credits \u00d7 0",
+        "logLoss": 1.7765797328084565,
+        "rmse": 0.9152572127753607,
+        "brier": 0.19785531985107216,
+        "weight": 0.0,
+        "pairedLogLossVersusDefault": {
+          "difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "label": "Shared credits \u00d7 0.3",
+        "logLoss": 1.7759402223494136,
+        "rmse": 0.9144745093747011,
+        "brier": 0.1976729357270875,
+        "weight": 0.3,
+        "pairedLogLossVersusDefault": {
+          "difference": -0.0006395104590370174,
+          "ci95": [
+            -0.0008178868315757243,
+            -0.00046113408649831056
+          ]
+        }
+      }
+    ]
+  }
+}
