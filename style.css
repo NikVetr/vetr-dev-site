@@ -392,3 +392,21 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 
 /* Regenerated collage canvases adapt to the full available picture well. */
 .card-art[data-art="message-collage"] { container: collage-preview / size; }
+.card-art[data-art="media-ratings"] { container: ratings-preview / size; }
+
+/* Two-row desktop tiles can span three to five columns in the packed wall.
+   Share their width between the drawing and its copy once both fit side by side. */
+@media (min-width: 62rem) and (min-height: 501px) {
+  @container tile (min-width: 30rem) {
+    [data-wide-span] > .project-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.85fr) minmax(11rem, 1fr);
+      grid-template-rows: 1fr auto auto auto 1fr;
+      column-gap: clamp(.75rem, 2cqi, 1.5rem);
+    }
+    [data-wide-span] .card-art { grid-area: 1 / 1 / -1 / 2; align-self: stretch; min-height: 0; aspect-ratio: auto; }
+    [data-wide-span] .project-card h3 { grid-area: 2 / 2; margin: 0 .25rem .3rem 0; }
+    [data-wide-span] .project-card p { grid-area: 3 / 2; margin: 0 .25rem .55rem 0; }
+    [data-wide-span] .project-date { grid-area: 4 / 2; align-self: start; margin: 0; }
+  }
+}

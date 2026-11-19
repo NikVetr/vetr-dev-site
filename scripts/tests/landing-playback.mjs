@@ -17,7 +17,7 @@ test('CSS previews keep their frame on exit and resume their original clocks', a
   const { page, errors } = browser;
   try {
     // Both continuously interpolated and stacked-frame animations are covered.
-    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'matrix-rain', 'message-collage', 'photomosaic']) {
+    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'matrix-rain', 'media-ratings', 'message-collage', 'photomosaic']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.scrollIntoViewIfNeeded(); await art.locator(':scope > svg').waitFor();
       assert.equal((await times(art)).length, 0, `${name}: starts still`);
@@ -294,4 +294,30 @@ test('desktop sticky switches are keyboard operable and retain theme and motion 
     }
     assert.deepEqual(errors,[]);
   }finally{await browser.close();}
+});
+
+test('Media Ratings fills a wide card and interpolates its forecasts across the loop seam', async () => {
+  const browser = await openPage('#media-ratings-title', { engine, width: 1440, height: 900 });
+  const { page } = browser;
+  try {
+    const art = page.locator('[data-art="media-ratings"]');
+    await art.locator('.bin-9').waitFor();
+    await art.hover();
+    await page.waitForFunction(() => document.querySelector('[data-art="media-ratings"]')?.hasAttribute('data-playing'));
+    const heightAt = (/** @type {number} */ time) => art.evaluate((el, t) => {
+      for (const a of el.getAnimations({ subtree: true })) { a.pause(); a.currentTime = t; }
+      return el.querySelector('.bin-9').getBoundingClientRect().height;
+    }, time);
+    const first = await heightAt(0), middle = await heightAt(1000), next = await heightAt(1500);
+    assert.ok(middle > Math.min(first, next) + 1 && middle < Math.max(first, next) - 1);
+    assert.ok(Math.abs(first - await heightAt(12000)) < 0.1);
+    const picture = await art.boundingBox();
+    const title = await page.locator('#media-ratings-title').boundingBox();
+    assert.ok(picture.width > 500 && title.x >= picture.x + picture.width);
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      const film = await art.locator('.film').boundingBox(), stars = await art.locator('.stars').boundingBox();
+      assert.ok(stars.x > film.x + film.width, 'the stars clear the film title on a phone');
+    }
+  } finally { await browser.close(); }
 });

@@ -67,6 +67,7 @@ export function mountMosaic(wall, { layouts, onLayout = () => {} }) {
         const card = /** @type {HTMLElement} */ (cards.get(tile.id));
         card.style.setProperty('--w', String(tile.width));
         card.style.setProperty('--h', String(tile.height));
+        card.toggleAttribute('data-wide-span', !flow && tile.width > tile.height);
         card.style.gridColumn = `${tile.column} / span ${tile.width}`;
         card.style.gridRow = `${tile.row} / span ${tile.height}`;
       }

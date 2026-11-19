@@ -6,6 +6,8 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Statistics**, and **Art**, with Everyday tools first. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
 
+Short, wide desktop tiles place the preview beside the description. The Media Ratings preview interpolates between fitted forecasts as the example film rating changes.
+
 ### Tile sizes
 
 A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. The curated layout can adapt individual spans to fill each breakpoint, including a wider Photomosaic tile where needed. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
