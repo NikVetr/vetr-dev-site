@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import { openPage } from '../scripts/landing-art/browser.mjs';
 import { predict, rankChanges } from './core.mjs';
 import { jointCounts } from './detail.mjs';
@@ -32,13 +33,14 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     await page.locator('#library .entry').first().waitFor();
     assert.equal(await page.locator('#projection-title').innerText(), 'Movie preference fingerprint');
     assert.equal(await page.locator('#profile-count').innerText(), 'Catalog baseline');
-    await page.locator('#model').selectOption('reference');
+    assert.equal(await page.locator('#model option[value=reference]').count(), 0);
+    await page.locator('#model').selectOption('ratingsTags');
     const rows = page.locator('#library .entry');
     await rows.first().waitFor();
     const ids = await rows.evaluateAll((els) => els.map((el) => el.dataset.id));
     assert.deepEqual(
       ids,
-      predict(films, { model: 'reference' }).predictions.map((p) => p.itemId),
+      predict(films, { model: 'ratingsTags' }).predictions.map((p) => p.itemId),
     );
     assert.equal(await page.locator('.board').count(), 6);
     const box = await page.locator('.analysis').boundingBox(),
@@ -59,7 +61,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     await page.locator('#apply').click();
     assert.ok(await page.locator('#pending').isHidden());
     assert.equal(await page.locator('#profile-count').innerText(), '2 applied ratings');
-    const expected = predict(films, { model: 'reference', ratings });
+    const expected = predict(films, { model: 'ratingsTags', ratings });
     const places = rankChanges(expected.predictions);
     const score = {
       expected: (p) => p.expected,
@@ -102,7 +104,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     assert.ok(await threshold.getByRole('radio', { name: '4.5 stars', exact: true }).isChecked());
     await page.keyboard.press('ArrowRight');
     assert.ok(await threshold.getByRole('radio', { name: '5 stars', exact: true }).isChecked());
-    const atFive = predict(films, { model: 'reference', ratings, threshold: 5 }).predictions.sort(
+    const atFive = predict(films, { model: 'ratingsTags', ratings, threshold: 5 }).predictions.sort(
       (a, b) => b.chance - a.chance,
     );
     assert.equal(
@@ -309,7 +311,14 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#model').selectOption('personalized');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), hybrid);
     assert.match(await p.locator('#formula').innerText(), /similar films/);
+    // The 500-axis reference remains usable when explicitly supplied in an imported catalog.
+    await p.locator('#file').setInputFiles(fileURLToPath(new URL('expanded.json', import.meta.url)));
+    await p.locator('#domains [data-key=custom][aria-pressed=true]').waitFor();
     await p.locator('#model').selectOption('reference');
+    await p
+      .locator('#library .entry[data-id="' + id + '"]')
+      .getByRole('radio', { name: '4.5', exact: true })
+      .check();
     assert.match(await p.locator('#axes').innerText(), /latent variance/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
     await p.getByLabel('Vertical principal component').selectOption('499');

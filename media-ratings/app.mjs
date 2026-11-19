@@ -122,7 +122,9 @@ function install(key, next) {
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
       .filter(
-        ([k]) => !(isFilm(key) && catalog.models.personalized && ['titleChoice', 'ratingYear'].includes(k)),
+        ([k]) =>
+          !isFilm(key) ||
+          (k !== 'reference' && !(catalog.models.personalized && ['titleChoice', 'ratingYear'].includes(k))),
       )
       .sort(([a], [b]) => Number(b === catalog.defaultModel) - Number(a === catalog.defaultModel))
       .map(([k, m]) => {
