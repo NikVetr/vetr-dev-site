@@ -123,7 +123,11 @@ test('mobile centre playback, sticky controls and saved choice override reduced 
     assert.ok((await times(art))[0] > before[0], 'toggle resumes instead of resetting');
     await centre('raster-to-vector'); assert.ok(await waitPaused(art));
     const left = await times(art); await page.waitForTimeout(120); assert.deepEqual(await times(art), left);
-    await centre('signature'); await page.waitForTimeout(120); assert.ok((await times(art))[0] > left[0]);
+    await centre('signature');
+    await page.waitForFunction((/** @type {number} */ previous) => {
+      const preview = document.querySelector('[data-art="signature"][data-playing]');
+      return Number(preview?.getAnimations({ subtree: true })[0]?.currentTime) > previous;
+    }, left[0], { timeout: 3000 });
     await button.tap(); await page.reload();
     assert.equal(await button.getAttribute('aria-checked'), 'false', 'pause persists through reload');
     assert.equal(await playing.count(), 0);
