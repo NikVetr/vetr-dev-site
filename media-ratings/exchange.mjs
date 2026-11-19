@@ -1,3 +1,4 @@
+import { validRatingDate } from './calendar.mjs';
 import { parseTable, serialize, stripFormulaGuard } from '../pocket-language-guide/core/csv.js';
 
 export const ratingSources = {
@@ -6,9 +7,9 @@ export const ratingSources = {
   unknown: 'Unspecified',
 };
 
-export function ratingsCSV(catalog, ratings, sources = null) {
+export function ratingsCSV(catalog, ratings, sources = null, ratedOn = null) {
   return serialize(
-    ['catalog', 'itemId', 'title', 'rating', ...(sources ? ['source'] : [])],
+    ['catalog', 'itemId', 'title', 'rating', ...(sources ? ['source'] : []), ...(ratedOn ? ['ratedOn'] : [])],
     catalog.items
       .filter((i) => Object.hasOwn(ratings, i.itemId))
       .map((i) => ({
@@ -16,6 +17,7 @@ export function ratingsCSV(catalog, ratings, sources = null) {
         ...i,
         rating: String(ratings[i.itemId]),
         source: sources?.[i.itemId] ?? 'unknown',
+        ratedOn: ratedOn?.[i.itemId] ?? '',
       })),
   );
 }
@@ -23,7 +25,8 @@ export function importRatings(text, catalog) {
   return importRatingEntries(text, catalog).ratings;
 }
 export function importRatingEntries(text, catalog) {
-  const sources = Object.create(null);
+  const sources = Object.create(null),
+    ratedOn = Object.create(null);
   const entries = parseTable(text, 'Ratings CSV'),
     items = new Set(catalog.items.map((i) => i.itemId));
   if (!entries.length) throw new Error('Ratings CSV is empty.');
@@ -48,9 +51,15 @@ export function importRatingEntries(text, catalog) {
         throw new Error('Unknown rating source in row ' + (i + 2) + '.');
       sources[id] = source;
     }
+    if (row.ratedOn !== undefined) {
+      const date = row.ratedOn.trim();
+      if (date && !validRatingDate(date))
+        throw new Error('Expected a YYYY-MM-DD rating date in row ' + (i + 2) + '.');
+      ratedOn[id] = date;
+    }
     ratings[id] = value;
   }
-  return { ratings, sources };
+  return { ratings, sources, ratedOn };
 }
 export function forecastsCSV(catalog, result, model) {
   const header = [

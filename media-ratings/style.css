@@ -1385,7 +1385,8 @@ body {
   font-size: 0.78rem;
   color: var(--muted);
 }
-.source-label select {
+.source-label select,
+.source-label input {
   font-size: inherit;
   padding: 0.1rem 0.25rem;
 }

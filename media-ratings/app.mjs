@@ -1,3 +1,4 @@
+import { calibrationYear, latestRatingDate, populationModel, validRatingDate } from './calendar.mjs';
 import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
@@ -36,6 +37,7 @@ let active,
   catalog,
   result,
   baseline,
+  baselineModel,
   titles,
   selected,
   taste,
@@ -90,6 +92,9 @@ function useState(data, key) {
     weightByFamiliarity: true,
     directions: { ratingChange: 'up', rankChange: 'both' },
     fingerprintViews: new Map(),
+    trackDates: Object.values(data.models).some((fit) => !!fit.ratingYear),
+    draftDates: Object.create(null),
+    appliedDates: Object.create(null),
     draftSources: Object.create(null),
     appliedSources: Object.create(null),
     followedSuggestions: new Set(),
@@ -116,15 +121,17 @@ function install(key, next) {
     ...Object.entries(catalog.models)
       .sort(([a], [b]) => Number(b === catalog.defaultModel) - Number(a === catalog.defaultModel))
       .map(([k, m]) => {
-        const name = m.titleChoice
-          ? 'Ratings + tags + title choice'
-          : m.kind === 'class-similarity'
-            ? 'Ratings + tags'
-            : m.kind === 'logit-point'
-              ? 'Historical logit'
-              : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
-                ' · K=' +
-                m.components.length;
+        const name = m.ratingYear
+          ? 'Ratings + tags + rating year'
+          : m.titleChoice
+            ? 'Ratings + tags + title choice'
+            : m.kind === 'class-similarity'
+              ? 'Ratings + tags'
+              : m.kind === 'logit-point'
+                ? 'Historical logit'
+                : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
+                  ' · K=' +
+                  m.components.length;
         return new Option(
           name +
             (k === catalog.defaultModel
@@ -216,9 +223,29 @@ function showValidation(selection) {
     tables.append(table);
   }
 }
-function rebuildBaseline() {
-  const population = predict(catalog, { model: state.model });
+function rebuildBaseline(
+  dates = input('auto').checked ? state.draftDates : state.appliedDates,
+  refreshMeans = false,
+) {
+  baselineModel = populationModel(catalog, catalog.models[state.model], latestRatingDate(dates));
+  const population = predict({ ...catalog, models: { population: baselineModel } }, { model: 'population' });
   baseline = new Map(population.predictions.map((p) => [p.itemId, p]));
+  if (refreshMeans) {
+    const list = el('rated-list');
+    let index = 0;
+    for (const p of population.predictions) {
+      const mean = p.expected.toFixed(2);
+      entries.get(p.itemId).querySelector('.entry-meta').textContent = mean;
+      const copy = copies.get(p.itemId);
+      if (copy) {
+        copy.querySelector('.entry-meta').textContent = mean;
+        if (copy !== list.children[index]) list.insertBefore(copy, list.children[index]);
+        index++;
+      }
+    }
+    sortCatalog();
+    return;
+  }
   entries.clear();
   const empty = node('li', 'No matching entries.');
   empty.id = 'empty-list';
@@ -266,6 +293,16 @@ function entryRow(p, surface) {
     label.append(source);
     li.append(label);
   }
+  if (surface === 'rated' && catalog.models[state.model].ratingYear) {
+    const label = node('label', 'Rated on');
+    const date = node('input');
+    date.type = 'date';
+    date.className = 'rating-date';
+    date.setAttribute('aria-label', 'Rating date for ' + titles.get(p.itemId));
+    label.className = 'source-label';
+    label.append(date);
+    li.append(label);
+  }
   syncRow(li);
   return li;
 }
@@ -303,6 +340,8 @@ function markChoices(group, value) {
 function syncRow(li) {
   const value = state.draft[li.dataset.id],
     rated = value !== undefined;
+  const date = li.querySelector('.rating-date');
+  if (date) date.value = state.draftDates[li.dataset.id] ?? '';
   const source = li.querySelector('.rating-source');
   if (source) source.value = state.draftSources[li.dataset.id] ?? 'unknown';
   li.classList.toggle('rated', rated);
@@ -454,7 +493,9 @@ function reveal(id, focus = false) {
 function syncDraft() {
   const count = Object.keys(state.draft).length,
     dirty =
-      !sameRatings(state.draft, state.applied) || !sameRatings(state.draftSources, state.appliedSources);
+      !sameRatings(state.draft, state.applied) ||
+      !sameRatings(state.draftSources, state.appliedSources) ||
+      !sameRatings(state.draftDates, state.appliedDates);
   el('rated-count').textContent = count + ' / ' + catalog.items.length + ' rated';
   input('apply').disabled = !dirty;
   el('pending').hidden = !dirty;
@@ -465,8 +506,11 @@ function edit(li, value, fromSuggestion = false) {
   if (value === undefined) {
     delete state.draft[id];
     delete state.draftSources[id];
+    delete state.draftDates[id];
     state.followedSuggestions.delete(id);
   } else {
+    if (state.trackDates && !Object.hasOwn(state.draft, id))
+      state.draftDates[id] = new Date().toISOString().slice(0, 10);
     state.draft[id] = value;
     state.draftSources[id] ??=
       fromSuggestion || state.followedSuggestions.has(id) ? 'suggested' : 'volunteered';
@@ -496,7 +540,13 @@ function edit(li, value, fromSuggestion = false) {
 }
 el('shelves').onchange = (event) => {
   const r = event.target;
-  if (r instanceof HTMLSelectElement && r.matches('.rating-source')) {
+  if (r instanceof HTMLInputElement && r.matches('.rating-date')) {
+    if (r.validity.badInput || (r.value && !validRatingDate(r.value))) return;
+    const li = r.closest('li');
+    if (r.value) state.draftDates[li.dataset.id] = r.value;
+    else delete state.draftDates[li.dataset.id];
+    edit(li, state.draft[li.dataset.id]);
+  } else if (r instanceof HTMLSelectElement && r.matches('.rating-source')) {
     const li = r.closest('li');
     state.draftSources[li.dataset.id] = r.value;
     edit(li, state.draft[li.dataset.id]);
@@ -534,11 +584,22 @@ function update(applyDraft = true) {
   try {
     const ratings = applyDraft ? state.draft : state.applied;
     const sources = applyDraft ? state.draftSources : state.appliedSources;
+    const ratedOn = applyDraft ? state.draftDates : state.appliedDates;
+    const model = catalog.models[state.model];
+    const latest = latestRatingDate(ratedOn);
     const volunteered = Object.keys(ratings).filter((id) => sources[id] === 'volunteered');
-    const next = predict(catalog, { model: state.model, ratings, volunteered, threshold: state.threshold });
+    const next = predict(catalog, {
+      model: state.model,
+      ratings,
+      volunteered,
+      ratedOn,
+      threshold: state.threshold,
+    });
     result = next;
     state.applied = { ...ratings };
     state.appliedSources = { ...sources };
+    state.appliedDates = { ...ratedOn };
+    if (populationModel(catalog, model, latest) !== baselineModel) rebuildBaseline(ratedOn, true);
     const count = Object.keys(state.applied).length;
     el('context').textContent =
       catalog.name +
@@ -548,10 +609,14 @@ function update(applyDraft = true) {
       result.predictions.length +
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
-    const model = catalog.models[state.model];
     const choiceNote = el('choice-note');
-    choiceNote.hidden = !model.titleChoice;
-    if (model.titleChoice) {
+    choiceNote.hidden = !model.titleChoice && !model.ratingYear;
+    if (model.ratingYear) {
+      const range = model.ratingYear;
+      choiceNote.textContent = latest
+        ? `Forecast calibration uses ${calibrationYear(range, latest)}. Your latest dated rating was ${latest}. Edit dates under Already rated.`
+        : 'Supply a rating date to use calendar calibration. Undated ratings use the all-year fit.';
+    } else if (model.titleChoice) {
       choiceNote.textContent = count
         ? `You picked ${volunteered.length} of ${count} rated film${count === 1 ? '' : 's'}. Other films contribute stars only. Change the source under Already rated.`
         : 'Films you pick contribute both their title and stars. App suggestions contribute stars only.';
@@ -576,7 +641,15 @@ function update(applyDraft = true) {
     const classKey = usesClasses
       ? state.model
       : Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
-    taste = tasteProfile(catalog, state.applied, classKey, usesClasses ? next : null);
+    taste = tasteProfile(
+      catalog,
+      state.applied,
+      classKey,
+      usesClasses ? next : null,
+      false,
+      volunteered,
+      ratedOn,
+    );
     renderFingerprint();
     renderSnapshot();
     renderBoards();
@@ -603,11 +676,17 @@ function renderFingerprint() {
     prefs = { axes: undefined, pinned: null, centerClassMeans: false };
     state.fingerprintViews.set(state.model, prefs);
   }
-  const request = { model: state.model, ratings: state.applied, axisIndices: prefs.axes };
+  const request = {
+    model: state.model,
+    ratings: state.applied,
+    ratedOn: state.appliedDates,
+    axisIndices: prefs.axes,
+  };
   let view;
   if (categorical) {
-    const base = model.kind === 'class-similarity' ? catalog.models[model.base] : model;
-    const all = prefs.centerClassMeans ? projectClasses(base, catalog.scale, true) : taste.projection;
+    const all = prefs.centerClassMeans
+      ? projectClasses(baselineModel, catalog.scale, true)
+      : taste.projection;
     const indices = prefs.axes ?? all.slice(0, 2).map((axis) => axis.index);
     view = { ...taste, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
   } else view = gaussianProjection(catalog, request);
@@ -1189,10 +1268,14 @@ input('rating-file').onchange = async () => {
   input('rating-file').value = '';
   if (!f || !current) return;
   try {
-    const { ratings: rows, sources } = importRatingEntries(await f.text(), current.data);
+    const { ratings: rows, sources, ratedOn } = importRatingEntries(await f.text(), current.data);
     if (state !== current) return;
     for (const id of Object.keys(rows)) {
       state.draftSources[id] = sources[id] ?? state.draftSources[id] ?? 'unknown';
+      if (state.trackDates && Object.hasOwn(ratedOn, id)) {
+        if (ratedOn[id]) state.draftDates[id] = ratedOn[id];
+        else delete state.draftDates[id];
+      }
     }
     Object.assign(state.draft, rows);
     rebuildBaseline();
@@ -1209,7 +1292,12 @@ el('save-ratings').onclick = () => {
   const trackSources = Object.values(catalog.models).some((model) => model.titleChoice);
   saveCSV(
     active + '-ratings.csv',
-    ratingsCSV(catalog, state.draft, trackSources ? state.draftSources : null),
+    ratingsCSV(
+      catalog,
+      state.draft,
+      trackSources ? state.draftSources : null,
+      state.trackDates ? state.draftDates : null,
+    ),
   );
 };
 el('save-forecasts').onclick = () => {

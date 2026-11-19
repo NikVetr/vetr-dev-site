@@ -531,3 +531,74 @@ test('volunteered and prompted film ratings keep their source through model swit
     await app.close();
   }
 });
+
+test('dated ratings round-trip and update the catalog prior, rankings and editable submission date', async () => {
+  const app = await openPage('media-ratings/');
+  const p = app.page;
+  try {
+    const rated = (id) => p.locator('#rated-list .entry[data-id="' + id + '"]');
+    const file = (buffer) =>
+      p.locator('#rating-file').setInputFiles({ name: 'ratings.csv', mimeType: 'text/csv', buffer });
+    await p.locator('#library .entry').first().waitFor();
+    const model = p.locator('#model');
+    await p
+      .locator('#library .entry[data-id="2571"]')
+      .getByRole('radio', { name: '5 stars', exact: true })
+      .click();
+    await model.selectOption('ratingYear');
+    assert.equal(
+      await rated('2571').locator('.rating-date').inputValue(),
+      new Date().toISOString().slice(0, 10),
+    );
+    await p.locator('#auto').uncheck();
+    await rated('2571').locator('.rating-date').fill('2000-04-05');
+    const note = p.locator('#choice-note');
+    assert.match(await note.innerText(), /uses 2019/);
+    await p.locator('#exchange summary').click();
+    await file(Buffer.from('itemId,rating\n356,2\n'));
+    await rated('356').waitFor();
+    assert.equal(await rated('356').locator('.rating-date').inputValue(), '');
+    await p.locator('#apply').click();
+    assert.match(await note.innerText(), /uses 2000/);
+    const films = JSON.parse(readFileSync(new URL('expanded.json', import.meta.url), 'utf8'));
+    const expected = predict(films, {
+      model: 'ratingYear',
+      ratings: { 2571: 5, 356: 2 },
+      ratedOn: { 2571: '2000-04-05' },
+    });
+    const top = expected.predictions[0],
+      first = p.locator('[data-key=expected] .forecast-row').first();
+    assert.equal(await first.getAttribute('data-id'), top.itemId);
+    await first.locator('.rank').click();
+    assert.equal(await p.locator('#metrics dd').first().innerText(), top.prior.toFixed(2));
+    assert.equal(
+      await p.locator('#library .entry[data-id="' + top.itemId + '"] .entry-meta').innerText(),
+      top.prior.toFixed(2),
+    );
+    await file(Buffer.from('itemId,rating,ratedOn\n2571,1,2015-02-29\n'));
+    await p
+      .locator('#status')
+      .getByText(/YYYY-MM-DD/)
+      .waitFor();
+    assert.equal(await rated('2571').locator('.rating-date').inputValue(), '2000-04-05');
+    const download = p.waitForEvent('download');
+    await p.locator('#save-ratings').click();
+    const csv = readFileSync(await (await download).path());
+    assert.match(csv.toString(), /ratedOn/);
+    await rated('2571').locator('.clear').click();
+    await file(csv);
+    await rated('2571').waitFor();
+    assert.equal(await rated('2571').locator('.rating-date').inputValue(), '2000-04-05');
+    assert.equal(await rated('356').locator('.rating-date').inputValue(), '');
+    await rated('2571').locator('.rating-date').fill('');
+    await p.locator('#auto').check();
+    assert.match(await note.innerText(), /Undated/);
+    const undated = await p.locator('[data-key=expected] .forecast-row').first().innerText();
+    await model.selectOption('ratingsTags');
+    assert.equal(await p.locator('[data-key=expected] .forecast-row').first().innerText(), undated);
+    assert.equal(await p.locator('.rating-date').count(), 0);
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});
