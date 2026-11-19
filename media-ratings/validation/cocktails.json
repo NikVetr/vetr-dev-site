@@ -1,0 +1,103 @@
+{
+  "model": "latentClass",
+  "metric": "user-mean category log loss",
+  "folds": 3,
+  "validationUsers": 161,
+  "testUsers": 32,
+  "testRatings": 193,
+  "cv": [
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 0.4935613680719333,
+      "rmse": 0.42364109861429416,
+      "brier": 0.01541768610013048
+    },
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 0.4950709103312294,
+      "rmse": 0.4241829439218361,
+      "brier": 0.015481216070776233
+    },
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 0.49809805909479227,
+      "rmse": 0.4251090753730216,
+      "brier": 0.015609160246296225
+    },
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.5042634545632314,
+      "rmse": 0.4270655810944812,
+      "brier": 0.01579326065908766
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 0.6959454888932459,
+      "rmse": 0.5302767152078998,
+      "brier": 0.032633333120041075
+    },
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 0.6827127978493133,
+      "rmse": 0.5279913454503149,
+      "brier": 0.03252028016139913
+    }
+  ],
+  "selectedK": 8,
+  "cvPoolUsers": 1608,
+  "developmentUsers": 1608,
+  "suppliedRatings": 4,
+  "maxTargetRatings": 12,
+  "brierThreshold": 4.0,
+  "finalFit": {
+    "users": 2009,
+    "ratings": 5975,
+    "iterations": 8,
+    "seed": 42
+  },
+  "splitSensitivity": [
+    {
+      "selectedK": 8,
+      "testUsers": 37,
+      "testRatings": 253,
+      "holdout": [
+        {
+          "label": "Latent class, K=1",
+          "logLoss": 0.34685579821429396,
+          "rmse": 0.33836931030894135,
+          "brier": 0.007397989822824878
+        },
+        {
+          "label": "Latent class, K=8",
+          "logLoss": 0.3422560464745354,
+          "rmse": 0.3333183139442907,
+          "brier": 0.007035709400790906
+        }
+      ],
+      "seed": 41
+    },
+    {
+      "selectedK": 8,
+      "testUsers": 40,
+      "testRatings": 226,
+      "holdout": [
+        {
+          "label": "Latent class, K=1",
+          "logLoss": 0.3946908141721678,
+          "rmse": 0.39817507672767294,
+          "brier": 0.01724160259398195
+        },
+        {
+          "label": "Latent class, K=8",
+          "logLoss": 0.40043290269166026,
+          "rmse": 0.39809443062920413,
+          "brier": 0.017131337314672708
+        }
+      ],
+      "seed": 43
+    }
+  ],
+  "respondentsWithFiveRatings": 193
+}
