@@ -3,6 +3,7 @@ from collections import Counter
 from typing import Any
 
 import numpy as np
+from scipy import sparse
 from scipy.linalg import eigh
 from scipy.special import expit, logit, softmax
 
@@ -89,7 +90,19 @@ def fit_classes(train, k, seed):
     tendency = (positive + 1)/(count + 2) + np.random.default_rng(seed).normal(0, .15, len(count))
     initial = np.empty(len(count), dtype=np.int32)
     initial[np.argsort(tendency)] = np.arange(len(count))*k//len(count)
-    return fit_mixture(train, 2, k, seed, initial_classes=initial)
+    # A one-review player contributes exactly the same likelihood as any other
+    # player with the same game and vote. Preserve the initial soft assignment too.
+    singleton = count == 1
+    offset = train.indptr[:-1][singleton]
+    group = (train.indices[offset]*2 + train.data[offset]-1)*k + initial[singleton]
+    totals = np.bincount(group, minlength=train.shape[1]*2*k)
+    codes = np.flatnonzero(totals)
+    single_rows = sparse.csr_matrix(((codes//k%2 + 1).astype(train.dtype), codes//(2*k),
+                                    np.arange(len(codes)+1)), shape=(len(codes), train.shape[1]))
+    distinct = sparse.vstack([train[~singleton], single_rows], format='csr')
+    labels = np.r_[initial[~singleton], codes % k]
+    frequencies = np.r_[np.ones(np.count_nonzero(~singleton), dtype=int), totals[codes]]
+    return fit_mixture(distinct, 2, k, seed, initial_classes=labels, frequencies=frequencies)
 
 
 def fit_games(items, profiles, seed=42):
@@ -138,6 +151,22 @@ def fit_games(items, profiles, seed=42):
     ref = test_metrics[f'Latent class, K={best}'][:, 0]
     delta = test_metrics[human_label(*selected)][:, 0] - ref
     holdout = [describe(key, val) for key, val in test_metrics.items()]
+    # Compare training set sizes on identical test players, catalog and chosen settings.
+    quarter = profiles[development[:len(development)//4]]
+    small_model = fit_classes(quarter, best, seed)
+    if use_similarity:
+        vectors = similarity_features(quarter, content)[name]
+        small_metrics = similarity_scores(small_model, test_cases, {name: vectors @ vectors.T}, [strength])[selected]
+        full_metrics = test_metrics[human_label(*selected)]
+    else:
+        small_metrics = score_model(small_model, test_cases, SCALE, 1)
+        full_metrics = test_metrics[f'Latent class, K={best}']
+    size_delta = full_metrics[:, 0] - small_metrics[:, 0]
+    size_check = dict(quarterUsers=quarter.shape[0], wholeUsers=train.shape[0],
+                      quarter=describe('One-quarter training sample', small_metrics),
+                      full=describe('Full training sample', full_metrics),
+                      lossDifference=float(size_delta.mean()),
+                      pairedPlayerSE=float(size_delta.std(ddof=1)/np.sqrt(len(size_delta))))
     weights, probs, iterations = fit_classes(profiles, best, seed)
     components = [dict(weight=float(weights[c]), probabilities=probs[c].round(11).tolist())
                   for c in np.argsort(-weights)]
@@ -160,5 +189,5 @@ def fit_games(items, profiles, seed=42):
                   selectedStrength=(strength if use_similarity else 0), developmentUsers=len(development),
                   testPoolUsers=len(test), suppliedRatings=4, maxTargetRatings=12, brierThreshold=1,
                   similarityMinusClassLoss=float(delta.mean()), pairedPlayerSE=float(delta.std(ddof=1)/np.sqrt(len(delta))),
-                  finalFit=catalog['fit'])
+                  trainingSizeComparison=size_check, finalFit=catalog['fit'])
     return catalog, report

@@ -6,6 +6,9 @@ from tempfile import TemporaryDirectory
 import unittest
 
 import numpy as np
+from scipy.sparse import csr_matrix
+
+from fit_catalog import fit_mixture
 
 from fit_games import RIDGE, similarity_scores
 from prepare_games import collect
@@ -13,7 +16,7 @@ from prepare_games import collect
 
 class GamesTests(unittest.TestCase):
     def test_duplicate_review_ids_and_conflicting_pairs_never_contribute_a_vote(self):
-        players = [str(i) for i in range(1, 50) if ((i * 2654435761) & 0xffffffff) < 2**30]
+        players = ['100', '101']
         edges = {players[0]: [[11, 20], [12, 21], [13, 22], [14, 22]],
                  players[1]: [[11, 23], [15, 24], [16, 24]]}
         votes = {i: {'voted_up': i != 13} for i in (11, 12, 13, 14, 15, 16)}
@@ -28,6 +31,17 @@ class GamesTests(unittest.TestCase):
         self.assertEqual(audit['excludedRepeatedReviewIds'], 1)
         self.assertEqual(audit['conflictingPlayerGames'], 1)
         self.assertEqual(audit['duplicateVotes'], 1)
+
+    def test_frequency_weighted_mixture_matches_the_repeated_player_fit(self):
+        rng = np.random.default_rng(2871)
+        rows = rng.integers(0, 3, size=(37, 5))
+        counts = rng.integers(1, 91, size=len(rows))
+        initial = rng.integers(0, 6, size=len(rows))
+        explicit = fit_mixture(csr_matrix(np.repeat(rows, counts, axis=0)), 2, 6, 81, np.repeat(initial, counts))
+        weighted = fit_mixture(csr_matrix(rows), 2, 6, 81, initial, frequencies=counts)
+        np.testing.assert_allclose(weighted[0], explicit[0], rtol=1.e-10)
+        np.testing.assert_allclose(weighted[1], explicit[1], rtol=1.e-10)
+        self.assertEqual(weighted[2], explicit[2])
 
     def test_binary_tilt_scoring_matches_served_implementation(self):
         weights = np.array([.25, .75])

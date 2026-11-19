@@ -16,15 +16,26 @@ def category_design(profiles, levels):
                               profiles.indptr), shape=(profiles.shape[0], profiles.shape[1] * levels))
 
 
-def fit_mixture(profiles, levels, k, seed, initial_classes=None):
+def fit_mixture(profiles, levels, k, seed, initial_classes=None, frequencies=None):
+    """Fit EM with optional positive counts for repeated identical profiles."""
     x = category_design(profiles, levels)
-    counts = np.asarray(x.sum(axis=0)).reshape(-1, levels)
+    n = profiles.shape[0]
+    total_users, total_ratings = n, x.nnz
+    if frequencies is None:
+        counts = np.asarray(x.sum(axis=0)).reshape(-1, levels)
+    else:
+        frequencies = np.asarray(frequencies)
+        if (frequencies.shape != (n,) or not np.issubdtype(frequencies.dtype, np.integer)
+                or np.any(frequencies < 1)):
+            raise ValueError('Expected one positive profile frequency per row')
+        counts = (x.T @ frequencies).reshape(-1, levels)
+        total_users = frequencies.sum()
+        total_ratings = counts.sum()
     global_counts = counts.sum(axis=0) + 0.5
     pooled = counts + 5 * global_counts / global_counts.sum()
     pooled /= pooled.sum(axis=1, keepdims=True)
     prior = 16 * pooled
     rng = np.random.default_rng(seed)
-    n = profiles.shape[0]
     if initial_classes is None:
         resp = rng.exponential(size=(n, k))
         resp /= resp.sum(axis=1, keepdims=True)
@@ -37,7 +48,9 @@ def fit_mixture(profiles, levels, k, seed, initial_classes=None):
         resp[np.arange(n), labels] += .8
     previous = -np.inf
     for iteration in range(1, 501):
-        weights = (resp.sum(axis=0) + 1) / (len(resp) + k)
+        if frequencies is not None:
+            resp *= frequencies[:, None]
+        weights = (resp.sum(axis=0) + 1) / (total_users + k)
         emissions = (x.T @ resp).T.reshape(k, -1, levels) + prior
         emissions /= emissions.sum(axis=2, keepdims=True)
         if k == 1:
@@ -45,10 +58,11 @@ def fit_mixture(profiles, levels, k, seed, initial_classes=None):
         logs = np.log(emissions)
         joint = x @ logs.reshape(k, -1).T + np.log(weights)
         margin = np.asarray(logsumexp(joint, axis=1, return_sign=False))
-        objective = margin.sum() + (logs * prior).sum() + np.log(weights).sum()
-        if objective < previous - 1.e-7 * x.nnz:
+        likelihood = margin.sum() if frequencies is None else margin @ frequencies
+        objective = likelihood + (logs * prior).sum() + np.log(weights).sum()
+        if objective < previous - 1.e-7 * total_ratings:
             raise ArithmeticError('Penalized EM likelihood decreased')
-        if objective - previous <= 2.e-5 * x.nnz:
+        if objective - previous <= 2.e-5 * total_ratings:
             break
         resp = np.exp(joint - margin[:, None])
         previous = objective
@@ -165,9 +179,9 @@ def write_evidence(path, profiles, items, scale):
 
 
 def shard_evidence(path, chunk_bytes=4 * 1024 ** 2):
-    """Split ordinal grids at pair boundaries for on-demand browser comparisons."""
+    """Split large count arrays at pair boundaries for on-demand browser comparisons."""
     manifest = json.loads(path.read_text())
-    cells = len(manifest['scale']) ** 2
+    cells = 1 if manifest.get('packedLayout') == 'binary-overlap' else len(manifest['scale']) ** 2
     size = len(manifest['ids'])
     pairs = size * (size - 1) // 2
     if pairs * cells * 2 <= 8 * chunk_bytes:

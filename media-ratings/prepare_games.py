@@ -58,10 +58,8 @@ def collect(raw):
     game_ids, values, indptr = array('I'), array('B'), array('I', [0])
     conflicts = duplicate_rows = users = 0
     with (raw / 'edges').open('rb') as file:
-        for player, records in ijson.kvitems(file, ''):
+        for _, records in ijson.kvitems(file, ''):
             users += 1
-            # Knuth's multiplicative hash on Steam's account number. Entire profiles stay together.
-            sampled = ((int(player) * 2654435761) & 0xffffffff) < 2**30
             by_game = {}
             for review, game in records:
                 record = votes[review]
@@ -79,18 +77,20 @@ def collect(raw):
             for game, vote in by_game.items():
                 if vote:
                     counts[game] += 1
-                    if sampled:
-                        game_ids.append(game)
-                        values.append(vote)
-            if sampled and len(values) > indptr[-1]:
+                    game_ids.append(game)
+                    values.append(vote)
+            if len(values) > indptr[-1]:
                 indptr.append(len(values))
     unique, columns = np.unique(np.asarray(game_ids), return_inverse=True)
     profiles = sparse.csr_matrix((np.asarray(values), columns, np.asarray(indptr)),
                                  shape=(len(indptr)-1, len(unique)))
     profiles.sort_indices()
-    audit: dict[str, Any] = dict(graphVotes=num_reviews, graphPlayers=users, graphGames=len(counts), graphEdges=edges, excludedRepeatedReviewIds=repeated_ids, repeatedReviewEdges=edges-unique_reviews,
-                 conflictingPlayerGames=conflicts, duplicateVotes=duplicate_rows, sampledPlayers=len(indptr)-1,
-                 sampledVotes=profiles.nnz, respondentFraction=1/4)
+    audit: dict[str, Any] = dict(
+        graphVotes=num_reviews, graphPlayers=users, graphGames=len(counts), graphEdges=edges,
+        excludedRepeatedReviewIds=repeated_ids, repeatedReviewEdges=edges-unique_reviews,
+        conflictingPlayerGames=conflicts, duplicateVotes=duplicate_rows, cleanPlayers=len(indptr)-1,
+        cleanVotes=profiles.nnz,
+    )
     return counts, unique, profiles, audit
 
 
@@ -130,17 +130,19 @@ def game_details(raw):
 def prepare(raw):
     counts, columns, profiles, audit = collect(raw)
     details = game_details(raw)
-    sample_counts = np.bincount(profiles.indices, minlength=len(columns))
     positions = {int(app): i for i, app in enumerate(columns)}
-    eligible = [app for app in details if app in positions and sample_counts[positions[app]] >= 20]
+    eligible = [app for app in details if app in positions and counts[app] >= 20]
     eligible.sort(key=lambda app: (-counts[app], app))
+    totals = {g: sum(g in details[app]['annotations']['genres'] for app in eligible) for g in GENRES}
+    print('Eligible by genre before selection', totals, flush=True)
+    audit['eligibleGamesByGenre'] = totals
     coverage = Counter({g: 0 for g in GENRES})
     selected, items = [], []
     for rank, app in enumerate(eligible):
         item = details[app]
         genres = [g for g in item['annotations']['genres'] if g in GENRES]
         if rank < 500 or any(coverage[g] < 200 for g in genres):
-            item['annotations']['ratingCount'] = int(sample_counts[positions[app]])
+            item['annotations']['ratingCount'] = counts[app]
             selected.append(positions[app])
             items.append(item)
             coverage.update(genres)
