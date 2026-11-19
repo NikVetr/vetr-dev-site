@@ -17,7 +17,7 @@ test('CSS previews keep their frame on exit and resume their original clocks', a
   const { page, errors } = browser;
   try {
     // Both continuously interpolated and stacked-frame animations are covered.
-    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'matrix-rain', 'media-ratings', 'message-collage', 'photomosaic']) {
+    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'media-ratings', 'message-collage', 'photomosaic']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.scrollIntoViewIfNeeded(); await art.locator(':scope > svg').waitFor();
       assert.equal((await times(art)).length, 0, `${name}: starts still`);
@@ -52,7 +52,7 @@ test('canvas previews retain their image on exit, resize and resume', async () =
   const browser = await openPage('', { engine });
   const { page, errors } = browser;
   try {
-    for (const name of ['intuitions', 'seating']) {
+    for (const name of ['intuitions', 'seating', 'matrix-rain']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.hover(); const canvas = art.locator('canvas'); await canvas.waitFor();
       await page.waitForTimeout(350); await page.mouse.move(0, 0);
@@ -87,7 +87,7 @@ test('desktop keyboard blur pauses; reduced motion resets; touch entry does not 
     const card = page.locator('.project-card').filter({ has: art });
     for (let i = 0; i < 30 && !(await card.evaluate((/** @type {HTMLElement} */ el) => el === document.activeElement)); i++) await page.keyboard.press('Tab');
     assert.ok(await card.evaluate((/** @type {HTMLElement} */ el) => el === document.activeElement), 'Tab reaches the card');
-    await art.locator('svg').waitFor();
+    await art.locator(':scope > svg').waitFor();
     await page.waitForFunction(() => document.querySelector('[data-art="b64"]')?.hasAttribute('data-playing'));
     await page.waitForTimeout(180);
     assert.equal(await art.getAttribute('data-playing'), '');
@@ -165,7 +165,7 @@ test('reduced motion defaults off but permits persisted opt-in for CSS and canva
     await page.reload();
     const button = page.getByRole('switch', { name: 'Animations', exact: true });
     const art = page.locator('[data-art="b64"]');
-    await art.hover(); await art.locator('svg').waitFor();
+    await art.hover(); await art.locator(':scope > svg').waitFor();
     assert.ok(await button.isEnabled(), 'system preference must not lock the switch');
     assert.equal(await button.getAttribute('aria-checked'), 'false');
     assert.equal(await art.getAttribute('data-started'), null);
@@ -192,7 +192,7 @@ test('reduced motion defaults off but permits persisted opt-in for CSS and canva
     const paused = await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL());
     await page.waitForTimeout(150);
     assert.equal(await canvas.evaluate((/** @type {HTMLCanvasElement} */ el) => el.toDataURL()), paused);
-    await page.reload(); await art.hover(); await art.locator('svg').waitFor();
+    await page.reload(); await art.hover(); await art.locator(':scope > svg').waitFor();
     assert.equal(await button.getAttribute('aria-checked'), 'false', 'opt-out persists on reload');
     assert.equal(await art.getAttribute('data-started'), null);
     await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -345,32 +345,43 @@ test('Rating Prediction fills a wide card and interpolates its forecasts across 
   } finally { await browser.close(); }
 });
 
-test('Matrix rain advances between refreshes and wraps one complete glyph strip per layer', async () => {
+test('Matrix card renders the shared title impacts, last letters and reflection at the card aspect', async () => {
   const session = await openPage('#matrix-rain-title', { engine });
-  const { page } = session;
   try {
+    const { page } = session;
     const art = page.locator('[data-art="matrix-rain"]');
+    await art.locator(':scope > svg').waitFor();
+    assert.equal(await art.locator('canvas').count(), 0);
     await art.hover();
-    await page.waitForFunction(() => document.querySelector('[data-art="matrix-rain"]')?.hasAttribute('data-playing'));
-    const shifts = time => art.evaluate((el, ms) => {
-      for (const animation of el.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = ms; }
-      return [...el.querySelectorAll('rect[class^="fall-"]')].map(rect =>
-        new DOMMatrixReadOnly(getComputedStyle(rect).transform).f);
-    }, time);
-    const start = await shifts(0), first = await shifts(16), second = await shifts(32), end = await shifts(7999);
-    const pitches = await art.locator('pattern[id^="matrix-rain-code-"]').evaluateAll(els => els.map(el => Number(el.getAttribute('height'))));
-    assert.equal(pitches.length, 3);
-    for (const [i, pitch] of pitches.entries()) {
-      assert.equal(start[i], 0);
-      assert.ok(first[i] > 0 && Math.abs(2 * first[i] - second[i]) < .002);
-      assert.ok(Math.abs(end[i] - pitch) < .1, 'final position matches the next copy of the repeating strip');
-    }
-    assert.deepEqual(await shifts(8000), start);
+    const canvas = art.locator('canvas');
+    await canvas.waitFor();
     for (const [width, height] of [[560, 135], [175, 280]]) {
       await art.evaluate((el, [w, h]) => { el.style.cssText = `width:${w}px;height:${h}px;min-height:0;flex:none;aspect-ratio:auto`; }, [width, height]);
-      const [title, box] = await art.evaluate(el => [el.querySelector('.locked'), el].map(node => node.getBoundingClientRect().toJSON()));
-      assert.ok(Math.abs(title.x + title.width / 2 - box.x - box.width / 2) < 1);
-      assert.ok(title.left >= box.left && title.right <= box.right);
+      await art.hover();
+      const shots = await art.evaluate(async (el) => {
+        const { frame, makeScene, paint } = await import(new URL('matrix-rain/core.mjs', location.href).href);
+        const clock = el.querySelector('.matrix-clock').getAnimations()[0];
+        const preview = el.querySelector('canvas');
+        const image = new Image(); image.src = 'matrix-rain/nik-reflection.webp'; await image.decode();
+        const scene = makeScene({ title: 'The Extracellular Matrix' });
+        const next = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        clock.pause(); await clock.ready;
+        const samples = [];
+        for (const t of [4, 4.032, 8.65, 11.1, 12.42, 13.6, 15.99]) {
+          clock.currentTime = t * 625;
+          await next();
+          const ref = document.createElement('canvas');
+          ref.width = preview.width; ref.height = preview.height;
+          paint(ref.getContext('2d'), frame(scene, Number(clock.currentTime) / 625, ref.width / ref.height), image);
+          const actual = preview.toDataURL();
+          samples.push({ matches: actual === ref.toDataURL(), size: actual.length });
+        }
+        clock.play();
+        return samples;
+      });
+      assert.ok(shots.every(x => x.matches), JSON.stringify(shots));
+      assert.notEqual(shots[0].size, shots[1].size);
+      assert.ok(shots[5].size > shots[6].size);
     }
     assert.deepEqual(session.errors, []);
   } finally { await session.close(); }

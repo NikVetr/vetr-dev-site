@@ -142,3 +142,41 @@ test('the studio fills a wide viewport and keeps the whole film and transport vi
     await app.close();
   }
 });
+
+test('an uploaded image supplies its own green edges and then the original color photograph', async () => {
+  const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
+  const app = await openPage('matrix-rain/', { engine });
+  try {
+    const { page } = app;
+    const photo = await page.evaluate(() => {
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 160;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 160, 160);
+      ctx.fillStyle = '#ff2040'; ctx.fillRect(52, 24, 56, 112);
+      return canvas.toDataURL().split(',')[1];
+    });
+    await page.locator('#image').setInputFiles({ name: 'custom.png', mimeType: 'image/png', buffer: Buffer.from(photo, 'base64') });
+    await page.locator('#reset-image').waitFor();
+    const pixels = await page.evaluate(() => {
+      const seek = /** @type {HTMLInputElement} */ (document.getElementById('time'));
+      const crt = /** @type {HTMLInputElement} */ (document.getElementById('crt'));
+      crt.value = '0'; crt.dispatchEvent(new Event('input'));
+      const ctx = document.querySelector('canvas').getContext('2d');
+      function inspect(time) {
+        seek.value = time; seek.dispatchEvent(new Event('input'));
+        return ctx.getImageData(0, 0, 960, 540).data;
+      }
+      const outline = inspect('13.49');
+      const indices = [];
+      for (let x = 300; x <= 660; x++)
+        if (outline[4 * (300 * 960 + x) + 1] > 30) indices.push(x);
+      const face = inspect('15.5');
+      return { indices, center: [...face.slice(4 * (270 * 960 + 480), 4 * (270 * 960 + 480) + 3)] };
+    });
+    assert.ok(pixels.indices.length >= 4 && pixels.indices.length < 22);
+    assert.ok(pixels.indices[0] < 415 && pixels.indices.at(-1) > 545);
+    assert.ok(pixels.center[0] > 180 && pixels.center[1] < 55);
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});

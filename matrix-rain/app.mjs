@@ -56,21 +56,16 @@ function stop() {
   play.textContent = 'Play';
   if (recorder?.state === 'recording') recorder.stop();
 }
-let last = 0;
 function tick(now) {
   if (!playing) return;
   const t = Math.min(duration, (now - start) / 1000);
-  if (now - last >= 1000 / 30 || t === duration) {
-    show(t);
-    last = now;
-  }
+  show(t);
   if (t === duration) stop();
   else raf = requestAnimationFrame(tick);
 }
 function begin(t) {
   show(t);
   start = performance.now() - t * 1000;
-  last = 0;
   playing = true;
   play.textContent = 'Pause';
   raf = requestAnimationFrame(tick);

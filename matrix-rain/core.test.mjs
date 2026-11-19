@@ -29,7 +29,7 @@ test('invalid time, controls and unknown fields produce request errors', () => {
 test('the title centers on the optical axis; outline precedes focus and the mask follows the image', () => {
   for (const title of ['The Extracellular Matrix', 'The Correlation Matrix', 'ODD', 'Q'.repeat(40)]) {
     const s = makeScene({ title });
-    const f = frame(s, 11.3);
+    const f = frame(s, 11.15);
     const line = [...title].map((char, i) => {
       const x = 480 + (i - (title.length - 1) / 2) * (960 / 84) * f.zoom;
       return f.glyphs.find((g) => g.char === char && g.y === 270 && Math.abs(g.x - x) < 1e-9);
@@ -39,7 +39,7 @@ test('the title centers on the optical axis; outline precedes focus and the mask
       midway = frame(s, 15),
       end = frame(s, 16);
     assert.equal(f.imageAlpha + f.outlineAlpha, 0);
-    assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom === f.zoom);
+    assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom > f.zoom);
     assert.ok(outline.imageZoom >= 0.75 && outline.imageZoom < 0.85);
     assert.ok(midway.imageZoom > outline.imageZoom && midway.imageZoom < end.imageZoom);
     assert.ok(0.09 * 810 * end.imageZoom > 800, 'one lens nearly spans the film');
@@ -50,7 +50,7 @@ test('the title centers on the optical axis; outline precedes focus and the mask
     assert.equal(end.imageAlpha, 1);
     assert.ok(frame(s, 14.2).rainAlpha > end.rainAlpha);
     const progress = (t) => frame(s, t).cameraProgress;
-    assert.ok(progress(14.85) - progress(14.35) > 3 * (progress(14.0) - progress(13.5)));
+    assert.ok(progress(14.85) - progress(14.35) > 2 * (progress(14.0) - progress(13.5)));
     for (const shot of [midway, end])
       assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - outline.maskPitch / outline.imageZoom) < 1e-10);
   }
@@ -64,7 +64,7 @@ test('each hidden phrase is readable top to bottom during an early drop in both 
       const t = stream.start + (stream.word.length + 2.1) / stream.speed;
       const f = frame(s, t);
       const column = f.glyphs
-        .filter((g) => Math.abs(g.x - ((i + 0.5) * 960) / 84) < 1e-8)
+        .filter((g) => g.column === i)
         .sort((a, b) => a.y - b.y);
       assert.ok(
         column
@@ -76,4 +76,28 @@ test('each hidden phrase is readable top to bottom during an early drop in both 
   }
   for (const hiddenWords of ['NAME', [''], ['a'.repeat(31)], Array(85).fill('a')])
     assert.throws(() => submit({ hiddenWords }), { code: 'invalid_request' });
+});
+
+test('rain becomes the title at impact, clears before blinking, and the last letters stay under the camera', () => {
+  for (const aspect of [16/9, 3.8, .8]) {
+    const scene = makeScene({ title: 'THE MONTGOMERY LAB' });
+    const midY = 480 / aspect;
+    const titles = scene.streams.map((s, i) => ({ ...s, i })).filter(s => s.letter.trim());
+    for (const { i, lock, letter } of titles) {
+      const before = frame(scene, lock - .001, aspect).glyphs.filter(g => g.column === i);
+      assert.ok(before.some(g => g.kind === 'rain' && g.y < midY && g.y > midY - 2));
+      const at = frame(scene, lock, aspect).glyphs.filter(g => g.column === i);
+      assert.ok(at.some(g => g.kind === 'title' && g.char === letter && g.y === midY));
+      assert.ok(at.every(g => g.kind !== 'rain' || g.y < midY));
+    }
+    assert.ok(frame(scene, 3, aspect).zoom > frame(scene, 1, aspect).zoom);
+    for (const t of [10.86, 11.8, 12.42, 13.5])
+      assert.ok(frame(scene, t, aspect).glyphs.every(g => g.kind === 'title'));
+    const pair = frame(scene, 12.42, aspect).glyphs;
+    assert.equal(pair.map(g => g.char).join(''), 'GO');
+    assert.equal(frame(scene, 12.8, aspect).glyphs.length, 0);
+    const z = t => frame(scene, t, aspect).zoom;
+    assert.ok(z(12.15) - z(12) > z(11.43) - z(11.28));
+  }
+  for (const title of ['', '  ', 'X', '𐐷 Y']) assert.doesNotThrow(() => frame(makeScene({ title }), 12.4));
 });

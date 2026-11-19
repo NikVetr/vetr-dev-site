@@ -7,12 +7,24 @@ function ease(time, start, end) {
   const x = clamp((time - start) / (end - start));
   return x * x * (3 - 2 * x);
 }
-// The R opening adds two logistic pushes. Normalize the tails so a seek
-// before or after each move lands exactly on the parked camera position.
-function cameraEase(time, start, end, steepness) {
-  const t = clamp((time - start) / (end - start));
-  const tail = 1 / (1 + Math.exp(steepness / 2));
-  return (1 / (1 + Math.exp((0.5 - t) * steepness)) - tail) / (1 - 2 * tail);
+// Integrating a sinusoidal speed gives a smooth push with parked endpoints.
+function push(time, start, end) {
+  return (1 - Math.cos(Math.PI * clamp((time - start) / (end - start)))) / 2;
+}
+function lastLetters(letters) {
+  const historic = letters.join('').toUpperCase() === 'THE MONTGOMERY LAB';
+  if (historic) {
+    const go = letters.join('').toUpperCase().indexOf('GO');
+    return [go, go + 1];
+  }
+  const mid = (letters.length - 1) / 2;
+  const visible = letters.map((c, i) => c.trim() ? i : -1).filter(i => i >= 0);
+  const pairs = visible.filter(i => letters[i + 1]?.trim());
+  if (pairs.length) {
+    const i = pairs.reduce((a, b) => Math.abs(a + .5 - mid) <= Math.abs(b + .5 - mid) ? a : b);
+    return [i, i + 1];
+  }
+  return visible.sort((a, b) => Math.abs(a - mid) - Math.abs(b - mid)).slice(0, 1);
 }
 const columns = 84,
   rows = 30,
@@ -75,10 +87,11 @@ export function makeScene({
   const letters = [...title],
     glyphs = [...alphabet];
   const first = Math.floor((columns - letters.length) / 2);
+  const survivors = lastLetters(letters);
   const streams = Array.from({ length: columns }, (_, i) => {
     const word = planted.get(i) ?? [];
-    const lock = 8 + 3 * rand(),
-      fade = 12.05 + 0.55 * rand(),
+    const lock = 7.1 + 3.2 * rand(),
+      blink = 11.45 + 0.64 * rand(),
       length = Math.max(9 + Math.floor(rand() * 16), word.length + 5);
     const start = 0.1 + rand() * 0.9,
       period = rows + length + 4;
@@ -87,7 +100,7 @@ export function makeScene({
     return {
       word,
       lock,
-      fade,
+      fade: survivors.includes(i - first) ? 12.43 + .16 * survivors.indexOf(i - first) : blink,
       length,
       start,
       speed,
@@ -102,40 +115,54 @@ export function makeScene({
     mode,
     crt,
     streams,
+    targetColumn: survivors.length ? first + .5 + (survivors[0] + survivors.at(-1)) / 2 : columns / 2,
     centerColumn: letters.length ? first + letters.length / 2 : columns / 2,
     letters: letters.filter((c) => c.trim()),
   };
 }
 /** @param {ReturnType<typeof makeScene>} scene @param {number} time */
-export function frame(scene, time) {
+export function frame(scene, time, aspect = 16 / 9) {
   if (!Number.isFinite(time) || time < 0 || time > duration)
     throw invalidRequest('time', 'Frame time must be between 0 and 16 seconds.');
+  if (!Number.isFinite(aspect) || aspect <= 0) throw invalidRequest('aspect', 'Aspect ratio must be positive.');
+  const viewHeight = 960 / aspect, midY = viewHeight / 2;
+  const middleRow = Math.max(1, Math.round(midY / dy));
+  const rowCount = middleRow * 2, rowStep = midY / middleRow;
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
   const focus = opening ? ease(time, 13.5, 14.75) : 0;
-  const approach = opening ? cameraEase(time, 6, 10, 8) : 0;
-  const travel = opening ? cameraEase(time, 13.5, 15.55, 9) : 0;
-  const titleCamera = 1 + (titleZoom - 1) * approach;
-  const zoom = titleCamera * (finalZoom / titleZoom) ** travel;
-  const glassZoom = titleCamera * (closeupScale / outlineScale) ** travel;
-  const center = columns / 2 + (scene.centerColumn - columns / 2) * approach;
+  const approach = opening ? push(time, 5.4, 10.5) : 0;
+  const intoTitle = opening ? push(time, 11.28, 12.83) : 0;
+  const travel = opening ? push(time, 13.5, 15.55) : 0;
+  const drift = opening ? 0.32 * Math.min(time / 10.5, 1) : 0;
+  const titleCamera = 1 + drift + (titleZoom - 1.32) * approach;
+  const lastZoom = 7.5;
+  const zoom = titleCamera + (lastZoom - titleZoom) * intoTitle + (finalZoom - lastZoom) * travel;
+  const glassZoom = zoom * (closeupScale / outlineScale * lastZoom / finalZoom) ** travel;
+  const center = columns / 2 + (scene.centerColumn - columns / 2) * approach +
+    (scene.targetColumn - scene.centerColumn) * intoTitle;
   const glyphs = [];
   for (const [i, s] of scene.streams.entries()) {
     const x = 480 + (i + 0.5 - center) * dx * zoom;
     if (x < -dx * zoom || x > 960 + dx * zoom) continue;
-    const phase = Math.floor((time - s.start) * s.speed);
+    const period = rowCount + s.length + 4;
+    const speed = opening && s.letter ? (period + middleRow) / (s.lock - s.start) : s.speed;
+    const phase = (time - s.start) * speed;
     if (phase < 0) continue;
-    const head = phase % s.period;
     const locked = opening && s.letter && time >= s.lock;
-    const fade = locked ? clamp((s.fade + 0.28 - time) / 0.28) : 1;
-    for (let tail = 0; tail < s.length; tail++) {
+    // A title stream makes one pass, then its next head lands on the title.
+    // Subsequent tail glyphs are absorbed at that cell, never restarting below it.
+    const head = locked ? middleRow + (time - s.lock) * speed : phase % period;
+    const fade = locked ? 1 - ease(time, s.fade, s.fade + .12) : 0;
+    const rain = opening ? (1 - ease(time, 10.22, 10.85)) * (locked ? 1 - ease(time, s.lock, s.lock + .65) : 1) : 1;
+    for (let tail = 0; rain > 0 && tail < s.length; tail++) {
       const row = head - tail;
-      if (row < 0 || row >= rows || (locked && fade > 0 && row >= rows / 2)) continue;
-      const y = 270 + (row * dy - 270) * zoom;
-      if (y < -dy * zoom || y > 540 + dy * zoom) continue;
-      const index = (phase - tail + Math.floor(time * 3 + i * 0.37)) % s.sequence.length;
+      if (row < 0 || row >= rowCount || (locked && row >= middleRow - .001)) continue;
+      const y = midY + (row - middleRow) * rowStep * zoom;
+      if (y < -dy * zoom || y > viewHeight + dy * zoom) continue;
+      const index = (Math.floor(phase) - tail + Math.floor(time * 3 + i * 0.37)) % s.sequence.length;
       const glitch =
-        Math.imul((i + 1) * 101 + (row + 1) * 787 + Math.floor(time * 4) * 1543, 2654435761) >>> 0;
+        Math.imul((i + 1) * 101 + (Math.floor(row) + 1) * 787 + Math.floor(time * 4) * 1543, 2654435761) >>> 0;
       const wordIndex = s.word.length - tail; // read downwards, one glyph behind the head
       const char =
         s.word[wordIndex] ??
@@ -146,14 +173,16 @@ export function frame(scene, time) {
         x,
         y,
         char,
-        alpha: (1 - tail / s.length) * (locked ? 0.45 + 0.55 * fade : 1),
+        alpha: (1 - tail / s.length) * rain,
+        kind: 'rain', column: i,
         hot: tail === 0 && s.bright,
       });
     }
-    if (locked && fade > 0) glyphs.push({ x, y: 270, char: s.letter, alpha: fade, hot: true });
+    if (locked && fade > 0) glyphs.push({ x, y: midY, char: s.letter, alpha: fade, hot: true, kind: 'title', column: i });
   }
   return {
     time,
+    viewHeight,
     zoom,
     glyphs,
     crt: scene.crt,
@@ -161,8 +190,8 @@ export function frame(scene, time) {
     outlineAlpha: opening ? 0.62 * ease(time, 12.8, 13.42) * (1 - focus) : 0,
     imageAlpha: focus,
     cameraProgress: travel,
-    blackout: opening ? ease(time, 15.55, 15.92) : 0,
-    imageZoom: opening ? (glassZoom / titleZoom) * outlineScale : 1 / 8,
+    blackout: opening ? Math.max(1 - ease(time, 0, .15), ease(time, 15.55, 15.92)) : 0,
+    imageZoom: opening ? (glassZoom / lastZoom) * outlineScale : 1 / 8,
     maskPitch: 1.25 * glassZoom,
     rainAlpha: 1 - 0.84 * focus,
     rainBlur: 8 * focus,
@@ -254,11 +283,12 @@ function slotMask(ctx) {
 /** @param {CanvasRenderingContext2D} ctx @param {ReturnType<typeof frame>} f @param {HTMLImageElement | null} image */
 export function paint(ctx, f, image, focalPoint = { x: 0.557, y: 0.3 }) {
   const { width, height } = ctx.canvas;
+  const stageHeight = f.viewHeight ?? 540, midY = stageHeight / 2;
   ctx.save();
-  ctx.scale(width / 960, height / 540);
+  ctx.scale(width / 960, height / stageHeight);
   ctx.fillStyle = '#010704';
-  ctx.fillRect(0, 0, 960, 540);
-  if (f.rainBlur > 0.1) {
+  ctx.fillRect(0, 0, 960, stageHeight);
+  if (f.glyphs.length && f.rainBlur > 0.1) {
     // Defocus the entire glyph plane once; the reflected image stays sharp.
     let layer = rainLayers.get(ctx);
     if (!layer) {
@@ -276,24 +306,24 @@ export function paint(ctx, f, image, focalPoint = { x: 0.557, y: 0.3 }) {
     ctx.save();
     ctx.globalAlpha = f.rainAlpha;
     ctx.filter = 'blur(' + (f.rainBlur * width) / 960 + 'px)';
-    ctx.drawImage(layer.canvas, 0, 0, 960, 540);
+    ctx.drawImage(layer.canvas, 0, 0, 960, stageHeight);
     ctx.restore();
   } else drawGlyphs(ctx, f);
   let glassX = 480,
-    glassY = 270;
+    glassY = midY;
   if (image && (f.outlineAlpha > 0 || f.imageAlpha > 0)) {
     const reflection = prepareReflection(image);
-    const fit = Math.min(960 / image.width, 540 / image.height);
+    const fit = Math.min(960 / image.width, stageHeight / image.height);
     const w = image.width * fit * f.imageZoom,
       h = image.height * fit * f.imageZoom;
     // Track one point on the photographed glass from its original position to
     // screen center. A shallow arc gives the push a little lateral movement.
     const startX = (focalPoint.x - 0.5) * image.width * fit * outlineScale;
-    const startY = 270 - (1 - focalPoint.y) * image.height * fit * outlineScale;
+    const startY = midY - (1 - focalPoint.y) * image.height * fit * outlineScale;
     const progress = f.cameraProgress;
     const arc = Math.sin(Math.PI * progress) ** 2;
     const targetX = 480 + startX * (1 - progress) + 24 * arc;
-    const targetY = 270 + startY * (1 - progress) - 10 * arc;
+    const targetY = midY + startY * (1 - progress) - 10 * arc;
     const x = targetX - focalPoint.x * w,
       y = targetY - focalPoint.y * h;
     glassX = targetX - (startX * f.imageZoom) / outlineScale;
@@ -320,31 +350,31 @@ export function paint(ctx, f, image, focalPoint = { x: 0.557, y: 0.3 }) {
     ctx.scale(scale, scale);
     ctx.fillStyle = slotMask(ctx);
     ctx.globalAlpha = 0.58 * f.crt * (1 - 0.4 * f.imageAlpha);
-    ctx.fillRect(-glassX / scale, -glassY / scale, 960 / scale, 540 / scale);
+    ctx.fillRect(-glassX / scale, -glassY / scale, 960 / scale, stageHeight / scale);
     ctx.restore();
     // The old CRT also had independent, low-alpha row and column intensity drift.
     ctx.save();
     ctx.translate(glassX, glassY);
     ctx.scale(f.maskPitch / 1.25, f.maskPitch / 1.25);
-    ctx.translate(-480, -270);
+    ctx.translate(-480, -midY);
     const tick = Math.floor(f.time * 5);
     for (let i = 0; i < 24; i++) {
       ctx.globalAlpha = f.crt * (0.02 + 0.025 * (1 + Math.sin(i * 13.4 + tick * 1.7)));
       ctx.fillStyle = '#001006';
-      ctx.fillRect(i * 40, 0, 40, 540);
-      ctx.fillRect(0, i * 22.5, 960, 22.5);
+      ctx.fillRect(i * 40, 0, 40, stageHeight);
+      ctx.fillRect(0, i * stageHeight / 24, 960, stageHeight / 24);
     }
     ctx.restore();
-    const vignette = ctx.createRadialGradient(480, 270, 140, 480, 270, 565);
+    const vignette = ctx.createRadialGradient(480, midY, Math.min(140, midY * .55), 480, midY, Math.hypot(480, midY));
     vignette.addColorStop(0, 'transparent');
     vignette.addColorStop(1, 'rgba(0,4,2,' + 0.75 * f.crt + ')');
     ctx.fillStyle = vignette;
-    ctx.fillRect(0, 0, 960, 540);
+    ctx.fillRect(0, 0, 960, stageHeight);
   }
   if (f.blackout > 0) {
     ctx.globalAlpha = f.blackout;
     ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, 960, 540);
+    ctx.fillRect(0, 0, 960, stageHeight);
   }
   ctx.restore();
 }

@@ -6,7 +6,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Statistics**, and **Art**, with Everyday tools first. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
 
-Short, wide desktop tiles place the preview beside the description. Rating Prediction arranges its input and two charts side by side or stacks them as the picture well changes shape. The bars interpolate between fitted forecasts. Matrix Rain fills its well with three continuously falling layers of seeded glyphs and keeps the title centered.
+Short, wide desktop tiles place the preview beside the description. Rating Prediction arranges its input and two charts side by side or stacks them as the picture well changes shape. The bars interpolate between fitted forecasts. Matrix Rain fits its opening to the card. Falling letters form the title before the camera moves through the last two letters into the reflection.
 
 ### Tile sizes
 
