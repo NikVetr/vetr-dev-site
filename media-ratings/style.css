@@ -44,28 +44,69 @@ body {
 .analysis {
   padding: clamp(12px, 1.25vw, 24px);
 }
-#domains {
+@font-face {
+  font-family: "Catalog pictograms";
+  src: url("catalog-icons.woff2") format("woff2");
+  font-display: block;
+}
+.header-row.tool-header-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5px;
-  margin: 0.55rem 0 0.2rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.6rem clamp(10px, 1vw, 18px);
+}
+#domains {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px;
 }
 #domains button {
-  flex: 1;
-  text-align: left;
-  color: var(--text);
-  line-height: 1.25;
-  padding: 0.45rem 0.65rem;
-}
-#domains small {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
+  padding: 0.36rem 0.27rem;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  white-space: nowrap;
   color: var(--muted);
-  font-weight: 400;
+  border: 1px solid transparent;
+  background: transparent;
+}
+#domains button[hidden] { display: none; }
+#domains button:hover { background: var(--surface-2); color: var(--text); }
+#domains i {
+  font: normal 1.05rem/1 "Catalog pictograms";
 }
 #domains [aria-pressed='true'] {
   background: var(--selected);
   border-color: var(--accent);
   color: var(--accent);
+}
+@media (max-width: 1399px) {
+  .header-row.tool-header-row { grid-template-columns: 1fr auto; }
+  #domains { grid-row: 2; grid-column: 1 / -1; }
+}
+@media (max-width: 690px) {
+  #domains {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-items: start;
+    column-gap: 0.35rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    padding: 2px;
+  }
+}
+.filter-scope {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-block: 1px solid var(--edge);
+  background: var(--surface-2);
 }
 .import {
   display: inline-block;
@@ -98,7 +139,7 @@ body {
   gap: 0.5rem;
 }
 .section-line {
-  margin: 1.2rem 0 0.45rem;
+  margin: 0 0 0.45rem;
 }
 .section-line span,
 .catalog-tools,
@@ -973,7 +1014,7 @@ body {
 .familiarity-option {
   white-space: nowrap;
 }
-@container (max-width: 19rem) {
+@container (max-width: 22rem) {
   .weight-prefix {
     display: none;
   }
@@ -1867,4 +1908,8 @@ body {
   margin-inline-start: auto;
   font-size: 0.8rem;
   color: var(--muted);
+}
+
+@container (min-width: 48rem) {
+  #boards.activity-boards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

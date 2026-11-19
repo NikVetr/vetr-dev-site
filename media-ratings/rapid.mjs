@@ -89,7 +89,9 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
       : ids.length
         ? 'You’ve reached the end'
         : 'No unrated entries in this view';
-    el('rapid-meta').textContent = item ? shortAnnotations(item.annotations ?? {}) : '';
+    el('rapid-meta').textContent = item
+      ? [catalog.responsePrompt, shortAnnotations(item.annotations ?? {})].filter(Boolean).join(' · ')
+      : '';
     if (!item) return;
     function showImages(photos) {
       const [photo, ...fallback] = photos;
@@ -128,7 +130,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     const wiki = reference?.wikipedia;
     if (wiki) {
       article.append(link('Wikipedia ↗', wiki));
-      recognitionFor(wiki)
+      Promise.resolve(reference.recognition ?? recognitionFor(wiki))
         .then((card) => {
           if (!dialog.open || version !== cardVersion || !card) return;
           description.textContent = card.description;

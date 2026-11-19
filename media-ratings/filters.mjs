@@ -17,8 +17,10 @@ export function recommendationFilters(catalog, facets) {
   }
   const minYear = Math.min(...years.values()),
     maxYear = Math.max(...years.values());
-  const yearLabel = catalog.domain === 'books' ? 'Publication year' : 'Release year';
-  const blank = () => ({ choices: new Map(), years: null });
+  const yearLabel = ['books', 'cocktails', 'fanfiction', 'webfiction'].includes(catalog.domain)
+    ? 'Publication year'
+    : 'Release year';
+  const blank = () => ({ choices: new Map(), years: null, forRating: false });
   let applied = blank();
   function matches(id, filter = applied) {
     if (
@@ -52,6 +54,11 @@ export function recommendationFilters(catalog, facets) {
           n.toLocaleString() + (n === 1 ? ' matching title' : ' matching titles');
       }
       function draw() {
+        const scope = /** @type {HTMLInputElement} */ (el('filter-rating-items'));
+        scope.checked = draft.forRating;
+        scope.onchange = () => {
+          draft.forRating = scope.checked;
+        };
         fields.replaceChildren();
         if (years.size) {
           const section = node('fieldset'),
@@ -117,7 +124,8 @@ export function recommendationFilters(catalog, facets) {
           const details = node('details'),
             heading = node('summary'),
             list = node('div');
-          details.open = group === 'Genre' || group === 'Course' || draft.choices.has(group);
+          details.open =
+            ['Genre', 'Course', 'Fandom', 'Base spirit'].includes(group) || draft.choices.has(group);
           const updateHeading = () => {
             const n = draft.choices.get(group)?.size;
             heading.textContent = n ? group + ' (' + n + ')' : group;
@@ -161,5 +169,5 @@ export function recommendationFilters(catalog, facets) {
       dialog.showModal();
     };
   }
-  return { attach, matches };
+  return { attach, matches, matchesRatingItem: (id) => !applied.forRating || matches(id) };
 }

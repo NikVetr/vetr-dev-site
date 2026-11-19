@@ -253,6 +253,11 @@ export function renderTaste(
       anime: 'Anime preference',
       games: 'Game preference',
       recipes: 'Recipe preference',
+      tv: 'TV preference',
+      cocktails: 'Cocktail preference',
+      fanfiction: 'Fanfiction kudos',
+      webfiction: 'Web fiction kudos',
+      subreddits: 'Community activity',
     }[domain] ?? 'Preference';
   document.getElementById('projection-title').textContent = domainTitle + ' fingerprint';
   const members = new Map(fp.classes.map((c) => [c.index, c]));

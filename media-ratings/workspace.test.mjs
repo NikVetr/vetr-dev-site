@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { openPage } from '../scripts/landing-art/browser.mjs';
 import { predict, rankChanges } from './core.mjs';
-import { importRatingEntries } from './exchange.mjs';
+import { importForecasts, importRatingEntries, ratingsCSV } from './exchange.mjs';
 import { jointCounts } from './detail.mjs';
 
 async function yearFilter(page, year) {
@@ -26,6 +26,18 @@ async function exportedRatings(page) {
   await page.locator('#save-ratings').click();
   return readFileSync(await (await pending).path(), 'utf8');
 }
+
+test('old destination ratings import by stable ID while old forecasts retain their catalog identity', () => {
+  const load = (name) => JSON.parse(readFileSync(new URL(name + '.json', import.meta.url), 'utf8'));
+  const old = load('stravl'),
+    current = load('destinations');
+  const csv = ratingsCSV(old, { 356: 0, 338: 2 });
+  assert.deepEqual({ ...importRatingEntries(csv, current).ratings }, { 356: 0, 338: 2 });
+  assert.throws(
+    () => importForecasts('catalog,model,itemId\n' + old.name + ',latentClass,356', current),
+    /current catalog/,
+  );
+});
 
 test('paired counts preserve comparison rows and target columns on either item order', () => {
   const data = { scale: [0, 2], ids: ['a', 'b'], pairs: [[7, 0, 3, 5]] };
@@ -142,12 +154,13 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       .click();
     assert.equal(await page.locator('#rated-list .entry').count(), 1);
     assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 499);
-    await page.locator('[data-key=stravl]').click();
-    await rows.first().getByRole('radio', { name: 'No', exact: true }).check();
+    await page.locator('[data-key=destinations]').click();
+    await rows.locator('input[aria-label=No]').first().check();
     assert.equal(await threshold.getByRole('radio').count(), 3);
     await threshold.getByRole('radio', { name: 'Maybe', exact: true }).click();
     assert.ok(await threshold.getByRole('radio', { name: 'Maybe', exact: true }).isChecked());
-    assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 11);
+    assert.equal(await page.locator('.ranks[data-key=expected] .rank').count(), 1418);
+    await page.locator('.ranks[data-key=expected] .rank[data-id="338"]').click(); // Rostock has verified map and article links.
     assert.match(
       await page.locator('#external').getAttribute('href'),
       /^https:\/\/www\.openstreetmap\.org\/(node|way|relation)\/\d+$/,
@@ -488,10 +501,10 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     assert.match(await p.locator('#annotations').innerText(), /Adventure/);
     await p.locator('#more-metadata summary').click();
     assert.match(await p.locator('#more-metadata dl').innerText(), /Production budget/);
-    await p.locator('#domains [data-key=stravl]').click();
+    await p.locator('#domains [data-key=destinations]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
     assert.ok(await familiar.isChecked());
-    assert.match(await firstInfo.locator('.score').getAttribute('title'), /12,905 respondents/);
+    assert.match(await firstInfo.locator('.score').getAttribute('title'), /61,130 respondents/);
     await p.locator('#auto').check();
     const city = p.locator('[data-key=chance] .forecast-row').first();
     const cityId = await city.getAttribute('data-id');
@@ -571,7 +584,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     await quick.locator('.quick-rate').click();
     await stars(quick, 4);
     assert.equal((await sources())[quickId], 'suggested');
-    await p.locator('#domains [data-key=stravl]').click();
+    await p.locator('#domains [data-key=destinations]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
     assert.equal(await model.locator('option[value=titleChoice]').count(), 0);
     assert.ok(await note.isHidden());
@@ -702,7 +715,7 @@ test('quick rating uses the full catalog, supports undo and attributes prompted 
     await p.locator('#clear-all').click();
     assert.equal(importRatingEntries(await exportedRatings(p), films).sources[first], 'suggested');
     assert.ok(await p.locator('#pending').isHidden());
-    await p.locator('#domains [data-key=stravl]').click();
+    await p.locator('#domains [data-key=destinations]').click();
     await p.getByRole('heading', { name: 'City preference fingerprint' }).waitFor();
     await start.click();
     assert.equal(await dialog.locator('#rapid-values button').count(), 3);
@@ -710,12 +723,33 @@ test('quick rating uses the full catalog, supports undo and attributes prompted 
       await dialog.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'),
       'Rate Maybe',
     );
-    for (let i = 0; i < 12; i++) await p.keyboard.press('s');
+    await p.keyboard.press('Escape');
+    await p.locator('#facet').click();
+    await p.locator('#filter-fields summary').getByText('Country', { exact: true }).click();
+    const singleCountry = p
+      .locator('#filter-fields details[open] label')
+      .filter({ has: p.locator('small', { hasText: /^1$/ }) })
+      .first();
+    await singleCountry.locator('input').check();
+    await p.locator('#filter-rating-items').check();
+    await p.locator('#filter-apply').click();
+    assert.equal(await p.locator('#library .entry:visible').count(), 1);
+    assert.equal(await p.locator('.info-row').count(), 1);
+    await start.click();
+    assert.match(await p.locator('#rapid-progress').innerText(), /1 remaining/);
+    await p.keyboard.press('s');
     assert.ok(await dialog.getByText('You’ve reached the end').isVisible());
     await dialog.locator('#rapid-back').click();
     await dialog.getByRole('button', { name: 'Rate Yes', exact: true }).click();
     await dialog.getByRole('button', { name: 'Done', exact: true }).click();
     assert.equal(await p.locator('#rated-list input:checked').inputValue(), '2');
+    await p.locator('#facet').click();
+    await p.locator('#filter-reset').click();
+    assert.equal(await p.locator('#filter-rating-items').isChecked(), false);
+    await p.keyboard.press('Escape');
+    assert.equal(await p.locator('#library .entry:visible').count(), 1);
+    await resetFilters(p);
+    assert.equal(await p.locator('#library .entry:visible').count(), 1419);
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -730,6 +764,8 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       ['books', 'Book', '3 ★', 500, 'Goodreads'],
       ['anime', 'Anime', '6', 500, 'MyAnimeList'],
       ['recipes', 'Recipe', '3 ★', 100, 'Taste of Home'],
+      ['tv', 'TV', '3 ★', 256, 'TVmaze'],
+      ['cocktails', 'Cocktail', '3 ★', 500, 'Food.com'],
     ]) {
       await p.locator('#domains [data-key="' + key + '"]').click();
       await p.getByRole('heading', { name: fingerprint + ' preference fingerprint' }).waitFor();
@@ -747,6 +783,47 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       if (key === 'books') {
         await p.locator('#facet').click();
         await p.getByRole('checkbox', { name: 'Publication year', exact: true }).waitFor();
+        await p.keyboard.press('Escape');
+      }
+    }
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});
+
+test('binary activity catalogs predict replies and kudos and distinguish a negative answer from a skip', async () => {
+  const app = await openPage('media-ratings/', { width: 1440, height: 900 });
+  const p = app.page;
+  try {
+    for (const key of ['subreddits', 'fanfiction', 'webfiction']) {
+      const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
+      await p.locator('header #domains button[data-key="' + key + '"]').click();
+      await p
+        .getByRole('heading', { name: key === 'subreddits' ? 'Chance of a reply' : 'Chance of kudos' })
+        .waitFor();
+      // Fanfiction and original fiction share a probability heading; wait for the actual switch.
+      await p.waitForFunction(
+        (k) => document.querySelector('#domains button[aria-pressed=true]')?.getAttribute('data-key') === k,
+        key,
+      );
+      assert.equal(await p.locator('#library .entry').count(), data.items.length);
+      assert.equal(await p.locator('#choice-note').innerText(), data.activityNote);
+      assert.equal(await p.locator('#rated-list .entry').count(), 0);
+      await p.locator('#quick-session').click();
+      await p.locator('#rapid-skip').click();
+      const id = await p.locator('#rapid-card').getAttribute('data-id');
+      await p.getByRole('button', { name: 'Rate ' + data.scaleLabels[0], exact: true }).click();
+      await p.getByRole('button', { name: 'Done', exact: true }).click();
+      assert.equal(await p.locator('#rated-list .entry').count(), 1);
+      assert.equal(await p.locator('#rated-list input:checked').inputValue(), '0');
+      assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
+      assert.match(await p.locator('[data-key=expected] .score').first().innerText(), /%$/);
+      if (key === 'fanfiction') {
+        await p.locator('#facet').click();
+        for (const label of ['Harry Potter', 'Naruto', 'Worm']) {
+          await p.getByRole('checkbox', { name: new RegExp('^' + label + ' ') }).waitFor();
+        }
         await p.keyboard.press('Escape');
       }
     }

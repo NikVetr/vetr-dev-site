@@ -269,10 +269,10 @@ export function showDetail({
     ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
     ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
     [
-      'Ratings',
+      catalog.activityCountLabel ?? 'Ratings',
       Number.isSafeInteger(a.ratingCount) &&
         a.ratingCount.toLocaleString() +
-          (domain === 'expanded' ? ' · MovieLens 25M' : domain === 'stravl' ? ' · Stravl' : ''),
+          (domain === 'expanded' ? ' · MovieLens 25M' : domain === 'destinations' ? ' · Stravl' : ''),
     ],
     ['Coast', a.coast],
     ['Annual temperature', a.temperature != null && a.temperature + ' °C'],
@@ -291,13 +291,15 @@ export function showDetail({
   const link = /** @type {HTMLAnchorElement} */ (el('external'));
   const imdb = evidence?.imdb?.[p.itemId];
   const primary =
-    domain === 'stravl'
-      ? targets?.openStreetMap
+    domain === 'destinations'
+      ? (targets?.openStreetMap ?? targets?.sourceUrl)
       : (targets?.sourceUrl ?? targets?.imdb ?? (imdb ? 'https://www.imdb.com/title/tt' + imdb + '/' : null));
   link.hidden = !primary;
   if (primary) {
     link.href = primary;
-    link.textContent = (targets?.label ?? (domain === 'stravl' ? 'OpenStreetMap' : 'IMDb')) + ' ↗';
+    link.textContent =
+      (domain === 'destinations' && targets?.openStreetMap ? 'OpenStreetMap' : (targets?.label ?? 'IMDb')) +
+      ' ↗';
   } else link.removeAttribute('href');
   const links = el('item-links');
   links.replaceChildren(link);
@@ -328,16 +330,22 @@ export function showDetail({
   const metrics = el('metrics');
   metrics.className = 'metrics';
   metrics.replaceChildren();
-  for (const [name, value] of [
-    ['Catalog expectation', numeric(p.prior)],
-    ['With your ratings', numeric(p.expected)],
-    ['Rating change', signed(p.shift)],
-    ['Chance of ≥ ' + label(threshold), percent(p.chance)],
-    ['Predicted SD', numeric(p.sd)],
-  ]) {
+  for (const [name, value] of catalog.activityNote
+    ? [
+        ['Catalog probability', percent(p.prior)],
+        ['With your answers', percent(p.expected)],
+        ['Probability change', signed(p.shift * 100) + ' percentage points'],
+      ]
+    : [
+        ['Catalog expectation', numeric(p.prior)],
+        ['With your ratings', numeric(p.expected)],
+        ['Rating change', signed(p.shift)],
+        ['Chance of ≥ ' + label(threshold), percent(p.chance)],
+        ['Predicted SD', numeric(p.sd)],
+      ]) {
     const row = node('div');
     const amount = node('dd', value);
-    if (name === 'Rating change' && p.shift)
+    if (['Rating change', 'Probability change'].includes(name) && p.shift)
       amount.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
     row.append(node('dt', name), amount);
     metrics.append(row);
@@ -351,11 +359,12 @@ export function showDetail({
         ? 'Ratings above or below expectation shift the forecast for similar films.'
         : 'Ratings above or below expectation shift the forecast for similar entries.',
   };
-  el('formula').textContent =
-    (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
-    (model.titleChoice ? 'Films you picked help identify your taste class. ' : '') +
-    (model.ratingYear ? 'Both means use the same forecast year. ' : '') +
-    'Each mean weights the possible ratings by their probabilities.';
+  el('formula').textContent = catalog.activityNote
+    ? 'Your answers update the probabilities of the learned activity classes. The forecast averages the chance of the recorded action across those classes.'
+    : (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
+      (model.titleChoice ? 'Films you picked help identify your taste class. ' : '') +
+      (model.ratingYear ? 'Both means use the same forecast year. ' : '') +
+      'Each mean weights the possible ratings by their probabilities.';
   const gaussian =
     kind === 'latent-class' || kind === 'class-similarity'
       ? (catalog.models.reference ??
@@ -373,7 +382,7 @@ export function showDetail({
     gaussian,
     domain === 'expanded'
       ? 'MovieLens small'
-      : domain === 'stravl'
+      : domain === 'destinations'
         ? 'Stravl'
         : (catalog.sourceLabel ?? 'Observed ratings'),
   );

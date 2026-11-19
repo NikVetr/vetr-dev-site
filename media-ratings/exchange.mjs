@@ -36,7 +36,8 @@ export function importRatingEntries(text, catalog) {
       raw = stripFormulaGuard(row.rating ?? '').trim(),
       value = Number(raw);
     if (
-      (row.catalog && stripFormulaGuard(row.catalog) !== catalog.name) ||
+      (row.catalog &&
+        ![catalog.name, ...(catalog.legacyRatingCatalogs ?? [])].includes(stripFormulaGuard(row.catalog))) ||
       !items.has(id) ||
       !raw ||
       !catalog.scale.includes(value) ||

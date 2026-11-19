@@ -45,7 +45,9 @@ let active,
   taste,
   revision = 0;
 const isFilm = (k) => k === 'expanded';
-const wholeStars = () => ['books', 'recipes'].includes(active) && catalog.scale.join(',') === '1,2,3,4,5';
+const halfStars = () =>
+  isFilm(active) || (active === 'tv' && catalog.scale.join(',') === '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5');
+const wholeStars = () => !catalog.scaleLabels && catalog.scale.join(',') === '1,2,3,4,5';
 const entries = new Map();
 const copies = new Map();
 let ratingObserver;
@@ -111,6 +113,17 @@ function titleOf(it) {
   if (!isFilm(active)) return it.title;
   return it.title.replace(/^(.+), (The|An|A) (\(\d{4}\))$/, '$2 $1 $3');
 }
+function revealCatalogButton() {
+  const nav = el('domains');
+  if (nav.scrollWidth <= nav.clientWidth) return;
+  const current = nav.querySelector('button[aria-pressed=true]');
+  if (!current) return;
+  const button = current.getBoundingClientRect(),
+    bounds = nav.getBoundingClientRect();
+  if (button.left < bounds.left) nav.scrollLeft += button.left - bounds.left;
+  else if (button.right > bounds.right) nav.scrollLeft += button.right - bounds.right;
+}
+new ResizeObserver(revealCatalogButton).observe(el('domains'));
 function install(key, next) {
   active = key;
   state = next;
@@ -119,6 +132,10 @@ function install(key, next) {
   titles = new Map(catalog.items.map((it) => [it.itemId, titleOf(it)]));
   for (const btn of el('domains').querySelectorAll('button'))
     btn.setAttribute('aria-pressed', String(btn.dataset.key === key));
+  el('domains')
+    .querySelector('button[aria-pressed=true]')
+    .setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
+  revealCatalogButton();
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
       .filter(
@@ -159,11 +176,9 @@ function install(key, next) {
   const source =
     key === 'expanded'
       ? { title: 'MovieLens terms and citation', url: 'MOVIELENS-LICENSE.txt' }
-      : key === 'stravl'
-        ? { title: 'Stravl data', url: 'https://github.com/Stravl/Stravl-Data' }
-        : key !== 'custom'
-          ? catalog.source
-          : null;
+      : key !== 'custom'
+        ? catalog.source
+        : null;
   if (source) {
     const link = node('a', source.title);
     link.href = source.url;
@@ -174,12 +189,18 @@ function install(key, next) {
       license.href = source.licenseUrl;
       attribution.append(' · ', license);
     }
+    if (source.notes) attribution.append(node('p', source.notes));
   }
-  el('scale-help').textContent = isFilm(key)
-    ? 'Choose a half or whole star.'
-    : catalog.scaleLabels
-      ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
-      : 'Choose a value on the rating scale.';
+  el('distribution-title').textContent = catalog.responsePrompt
+    ? 'Response distribution'
+    : 'Rating distribution';
+  el('scale-help').textContent =
+    catalog.responsePrompt ??
+    (halfStars()
+      ? 'Choose a half or whole star.'
+      : catalog.scaleLabels
+        ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ')
+        : 'Choose a value on the rating scale.');
   input('search').value = '';
   el('boards').replaceChildren();
   setupFilters();
@@ -208,7 +229,7 @@ function showValidation(selection) {
     selection.testUsers +
     ' separate respondents contributed ' +
     selection.testRatings +
-    ' test ratings.';
+    (catalog.responsePrompt ? ' held-out activity observations.' : ' test ratings.');
   const full = selection.full;
   el('selection-study').hidden = !isFilm(active);
   if (full)
@@ -300,10 +321,10 @@ function entryRow(p, surface) {
   li.dataset.id = p.itemId;
   const head = node('div'),
     name = node('strong', titles.get(p.itemId)),
-    mean = node('span', p.expected.toFixed(2));
+    mean = node('span', catalog.activityNote ? percent(p.expected) : p.expected.toFixed(2));
   head.className = 'entry-head';
   mean.className = 'entry-meta';
-  mean.title = 'Catalog expected rating';
+  mean.title = catalog.activityNote ? 'Catalog probability of a recorded action' : 'Catalog expected rating';
   head.append(name, mean);
   const body = node('div');
   body.className = 'rating-row';
@@ -327,7 +348,7 @@ function scaleChoices(name, groupLabel) {
   choices.setAttribute('role', 'radiogroup');
   choices.setAttribute('aria-label', groupLabel);
   for (const v of catalog.scale) {
-    const star = isFilm(active) || wholeStars(),
+    const star = halfStars() || wholeStars(),
       label = node('label'),
       radio = document.createElement('input'),
       glyph = node('span', star ? '' : scaleLabel(v));
@@ -356,7 +377,7 @@ function syncRow(li) {
   markChoices(li.querySelector('.choices'), value);
   li.querySelector('.clear').hidden = !rated;
   li.querySelector('.rating-readout').textContent =
-    rated && (isFilm(active) || wholeStars()) ? value + ' / 5' : '';
+    rated && (halfStars() || wholeStars()) ? value + ' / 5' : '';
 }
 const moneyBands = [
   [1e7, 'Under $10M'],
@@ -370,7 +391,13 @@ function moneyBand(value) {
 }
 function facets(a) {
   return {
-    [active === 'recipes' ? 'Course' : 'Genre']: a.genres,
+    [active === 'recipes'
+      ? 'Course'
+      : active === 'fanfiction'
+        ? 'Fandom'
+        : active === 'cocktails'
+          ? 'Base spirit'
+          : 'Genre']: a.genres,
     Tag: a.tags,
     Author: a.authors ?? (a.author ? [a.author] : []),
     Format: a.format ? [a.format] : [],
@@ -402,6 +429,7 @@ function setupFilters() {
   filters = state.filters;
   filters.attach(
     () => {
+      filterRows();
       selectVisibleItem();
       renderBoards();
       renderDetail();
@@ -412,7 +440,7 @@ function setupFilters() {
   if (catalog.items.some((it) => it.annotations?.year))
     select('sort').add(new Option('Newest first', 'year'));
   for (const [key, label] of [
-    ['ratingCount', 'Most rated'],
+    ['ratingCount', catalog.activityCountLabel ?? 'Most rated'],
     ['revenue', 'Highest reported box office'],
     ['budget', 'Highest production budget'],
     ['gdp', 'Country GDP per capita'],
@@ -439,7 +467,7 @@ function filterRows() {
   const query = input('search').value.trim().toLocaleLowerCase();
   let count = 0;
   for (const [id, li] of entries) {
-    li.hidden = !titles.get(id).toLocaleLowerCase().includes(query);
+    li.hidden = !filters.matchesRatingItem(id) || !titles.get(id).toLocaleLowerCase().includes(query);
     if (!li.hidden) count++;
   }
   el('empty-list').hidden = count > 0;
@@ -448,6 +476,7 @@ function filterRows() {
 }
 function reveal(id, focus = false) {
   const row = entries.get(id);
+  if (!filters.matchesRatingItem(id)) return;
   if (row.hidden) {
     input('search').value = '';
     filterRows();
@@ -533,14 +562,16 @@ function refreshRatingShelves() {
 input('quick-session').onclick = () => {
   if (!state || !result) return;
   const opened = state;
-  const ids = catalog.items.map((it) => it.itemId).filter((id) => !Object.hasOwn(state.draft, id));
+  const ids = catalog.items
+    .map((it) => it.itemId)
+    .filter((id) => !Object.hasOwn(state.draft, id) && filters.matchesRatingItem(id));
   const criteria = [];
   if (taste?.weights.length > 1) {
     if (taste.weightedInformation) criteria.push(['familiarInfo', 'Information × familiarity']);
     criteria.push(['info', 'Most informative']);
   }
   if (catalog.items.some((it) => Number.isFinite(it.annotations?.ratingCount)))
-    criteria.push(['count', 'Most rated']);
+    criteria.push(['count', catalog.activityCountLabel ?? 'Most rated']);
   criteria.push(['expected', 'Highest expected rating'], ['title', 'Title A–Z']);
   const volunteered = Object.keys(state.draft).filter((id) => state.draftSources[id] === 'volunteered');
   const model = catalog.models[state.model];
@@ -577,7 +608,7 @@ input('quick-session').onclick = () => {
   }
   openRapidRating({
     catalog,
-    stars: isFilm(active) || wholeStars(),
+    stars: halfStars() || wholeStars(),
     ids,
     titles,
     links: state.links,
@@ -668,8 +699,8 @@ function update(applyDraft = true) {
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
     const choiceNote = el('choice-note');
-    choiceNote.hidden = !model.titleChoice && !model.ratingYear;
-    const notes = [];
+    const notes = catalog.activityNote ? [catalog.activityNote] : [];
+    choiceNote.hidden = !notes.length && !model.titleChoice && !model.ratingYear;
     if (model.titleChoice) {
       notes.push(
         count
@@ -756,7 +787,7 @@ function renderFingerprint() {
     view = { ...taste, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
   } else view = gaussianProjection(catalog, request);
   const fp = preferenceFingerprint(catalog, request, view);
-  const domain = active === 'expanded' ? 'movies' : active === 'stravl' ? 'cities' : catalog.domain;
+  const domain = active === 'expanded' ? 'movies' : active === 'destinations' ? 'cities' : catalog.domain;
   renderTaste(
     view,
     catalog,
@@ -818,7 +849,9 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     label.append(check, caption);
     label.title = check.disabled
       ? 'Item response counts are unavailable for this catalog.'
-      : 'Use the fraction of catalog respondents who rated each entry as a proxy for familiarity.';
+      : catalog.activityNote
+        ? 'Weight by the fraction of accounts with this recorded action.'
+        : 'Use the fraction of catalog respondents who rated each entry as a proxy for familiarity.';
     head.append(label);
   } else head.append(node('small', count + ' · ' + spec.hint));
   return head;
@@ -836,9 +869,19 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
     );
   if (isShift) {
     const place = ranks?.get(p.itemId);
+    if (!place && catalog.activityNote) score.textContent = percent(p.prior) + ' → ' + percent(p.expected);
     const change = place ? place.change : p.shift;
     if (place) score.textContent = '#' + place.from + ' → #' + place.to;
-    const delta = node('span', '(' + (place ? (change > 0 ? '+' : '') + change : signed(change)) + ')');
+    const delta = node(
+      'span',
+      '(' +
+        (place
+          ? (change > 0 ? '+' : '') + change
+          : catalog.activityNote
+            ? signed(change * 100) + ' pp'
+            : signed(change)) +
+        ')',
+    );
     delta.className = 'shift-delta ' + (change > 0 ? 'rise' : 'fall');
     score.append(' ', delta);
     score.title = place
@@ -893,7 +936,30 @@ function renderBoards() {
   const rankMovements = rankChanges(visible);
   const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
   const fragment = document.createDocumentFragment();
-  for (const spec of panels) {
+  const activity = Boolean(catalog.responsePrompt && catalog.scale.join(',') === '0,1');
+  const shown = activity
+    ? panels
+        .filter((p) => !['chance', 'precision'].includes(p.key))
+        .map((p) =>
+          p.key === 'expected'
+            ? {
+                ...p,
+                title:
+                  {
+                    subreddits: 'Chance of a reply',
+                    fanfiction: 'Chance of kudos',
+                    webfiction: 'Chance of kudos',
+                  }[catalog.domain] ?? 'Chance of ' + scaleLabel(1),
+                hint: 'Probability',
+                format: percent,
+              }
+            : p.key === 'ratingChange'
+              ? { ...p, title: 'Probability change', hint: 'Points' }
+              : p,
+        )
+    : panels;
+  host.classList.toggle('activity-boards', activity);
+  for (const spec of shown) {
     const board = node('section'),
       list = node('div');
     board.className = 'board';
@@ -914,7 +980,9 @@ function renderBoards() {
       const why = node(
         'p',
         weighted
-          ? 'Information gain in bits × the share of respondents who rated each entry.'
+          ? catalog.activityNote
+            ? 'Information gain in bits × the share of accounts with the recorded action.'
+            : 'Information gain in bits × the share of respondents who rated each entry.'
           : 'Expected information in bits about ' +
               taste.weights.length +
               ' taste classes, given your applied ratings.',
@@ -931,7 +999,10 @@ function renderBoards() {
         isShift
           ? orderScore(p) > 0
           : spec.key === 'information'
-            ? !!taste && taste.weights.length > 1 && !Object.hasOwn(state.draft, p.itemId)
+            ? !!taste &&
+              taste.weights.length > 1 &&
+              !Object.hasOwn(state.draft, p.itemId) &&
+              filters.matchesRatingItem(p.itemId)
             : true,
       )
       .sort((a, b) => orderScore(b) - orderScore(a));
@@ -1235,13 +1306,12 @@ async function loadEvidence(key, s) {
       if (data.packed.length !== ((data.ids.length * (data.ids.length - 1)) / 2) * data.scale.length ** 2)
         throw new Error('Incomplete paired counts.');
     }
-    if (key === 'stravl') {
+    if (key === 'destinations') {
       const counts = data.counts.map((row) => row.reduce((sum, n) => sum + n, 0));
       if (counts.reduce((sum, n) => sum + n, 0) !== s.data.fit.ratings)
         throw new Error('Unexpected destination response totals.');
-      s.data.items.forEach((item, i) => {
-        item.annotations = { ...item.annotations, ratingCount: counts[i] };
-      });
+      if (s.data.items.some((it, i) => it.annotations?.ratingCount !== counts[i]))
+        throw new Error('Destination counts differ from the catalog.');
     }
     s.evidence = data;
   } catch (e) {
@@ -1261,8 +1331,8 @@ async function openCatalog(key, file = null) {
             readJSON(key + '.json'),
             key === 'expanded'
               ? readOptionalJSON('film-links.json')
-              : key === 'stravl'
-                ? readOptionalJSON('destination-links.json')
+              : key === 'destinations'
+                ? readOptionalJSON('destinations-links.json')
                 : null,
             key === 'expanded' ? readOptionalJSON('film-context.json') : null,
           ]);
@@ -1305,8 +1375,7 @@ async function openCatalog(key, file = null) {
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';
         el('custom-domain').hidden = false;
-      } else if (key === 'stravl') await loadEvidence(key, s);
-      else void loadEvidence(key, s);
+      } else void loadEvidence(key, s);
       if (seq !== revision) return;
       states.set(key, s);
     }
