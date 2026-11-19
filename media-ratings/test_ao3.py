@@ -9,10 +9,15 @@ import numpy as np
 from scipy.sparse import csr_matrix
 
 from fit_catalog import shard_evidence
-from prepare_ao3 import calibrate_activity, evaluate, filtered_recall, fit_kudos, test_cases as make_cases, work_fandoms, write_grids
+from prepare_ao3 import calibrate_activity, evaluate, filtered_recall, fit_kudos, named_authors, test_cases as make_cases, work_fandoms, write_grids
 
 
 class KudosTests(unittest.TestCase):
+    def test_named_author_bylines(self):
+        self.assertEqual(named_authors('Lee (handle), Anonymous, orphan_account, Other'), ['Lee (handle)', 'Other'])
+        self.assertEqual(named_authors('old pseud (orphan_account)'), [])
+        self.assertEqual(named_authors('Lee (name, other), Lee (name, other)'), ['Lee (name, other)'])
+
     def test_masked_positives_and_all_other_opportunities(self):
         x = csr_matrix([[1, 0, 1, 0], [0, 1, 0, 0], [1, 1, 1, 1]], dtype=np.int32)
         cases = make_cases(x, [0, 1, 2], 33)

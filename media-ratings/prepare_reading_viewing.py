@@ -12,6 +12,7 @@ from scipy import sparse
 
 from fit_catalog import fit_catalog, write_evidence
 from fit_ordinal_similarity import add_similarity
+from fit_credit_similarity import add_credit_similarity
 
 
 BOOK_SOURCE = 'https://github.com/zygmuntz/goodbooks-10k'
@@ -168,6 +169,8 @@ def main():
     catalog, report = fit_catalog(f'{label} · {len(items):,} {args.domain}',
                                   items, scale, profiles)
     add_similarity(catalog, report, profiles)
+    credits_path = Path(__file__).with_name(args.domain + '-credits.json')
+    add_credit_similarity(catalog, report, profiles, json.loads(credits_path.read_text()))
     catalog['legacyRatingCatalogs'] = [label + (' · 500 most-rated books' if book else ' · 500 most-rated anime')]
     catalog['domain'] = args.domain
     catalog['linkLabel'] = 'Goodreads' if book else 'MyAnimeList'
@@ -179,7 +182,8 @@ def main():
                              author='Zygmunt Zając' if book else 'Ramazan Turan',
                              license='CC BY-SA 4.0' if book else 'CC BY 4.0',
                              licenseUrl='https://creativecommons.org/licenses/' + ('by-sa' if book else 'by') + '/4.0/',
-                             notes='Subset, metadata and fitted aggregates adapted for Rating Prediction.')
+                             notes=('Book credits from Goodbooks XML and Open Library editions.' if book else
+                                    'Studio credits from lyfesan’s MAL dataset (MIT); staff and voice credits from Wikidata (CC0).'))
     for path, data in [(args.out / f'{args.domain}.json', catalog),
                        (args.out / 'validation' / f'{args.domain}.json', dict(**report, sourceCounts=audit))]:
         path.parent.mkdir(parents=True, exist_ok=True)

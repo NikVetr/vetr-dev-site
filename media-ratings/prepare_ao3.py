@@ -127,6 +127,13 @@ def read_actions(raw):
     return pairs, dict(zip(ids.tolist(), counts.tolist()))
 
 
+def named_authors(byline):
+    """Preserve credited pseudonyms; shared anonymity and orphan placeholders identify no author."""
+    credits = [credit.strip() for credit in re.split(r',\s+(?![^()]*\))', byline)]
+    return list(dict.fromkeys(c for c in credits if c and c.casefold() not in {'orphan_account', 'anonymous'}
+                              and not c.casefold().endswith('(orphan_account)')))
+
+
 def work_fandoms(metadata, aliases=FANDOMS):
     single = metadata.get('Fandom')
     if single and isinstance(single, str) and not metadata.get('Fandoms'):
@@ -190,6 +197,7 @@ def select_works(raw, counts, inventory=None):
                 annotations['year'] = int(date[:4])
             if m.get('author'):
                 annotations['author'] = m['author'].removeprefix('by ')
+                annotations['authors'] = named_authors(annotations['author'])
             by_domain[domain][work] = dict(itemId=str(work), title=row['title'].strip(), annotations=annotations)
     selected = {}
     for domain, works in by_domain.items():

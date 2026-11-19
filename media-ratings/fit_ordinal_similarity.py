@@ -26,14 +26,18 @@ def metadata_features(items):
         if attrs.get('episodes', 0) > 0:
             labels.add(f"episodes-log2:{int(np.log2(attrs['episodes']))}")
         rows.append(labels)
+    return label_features(rows)
+
+
+def label_features(rows):
     counts = Counter(tag for row in rows for tag in row)
     columns = {tag: index for index, tag in enumerate(sorted(tag for tag, n in counts.items() if n >= 2))}
-    coords = [(i, columns[tag], np.log1p(len(items) / counts[tag]))
+    coords = [(i, columns[tag], np.log1p(len(rows) / counts[tag]))
               for i, row in enumerate(rows) for tag in sorted(row) if tag in columns]
     if not coords:
         raise ValueError('Metadata similarity requires shared annotations')
     r, c, v = zip(*coords)
-    design = sparse.csr_matrix((v, (r, c)), shape=(len(items), len(columns)))
+    design = sparse.csr_matrix((v, (r, c)), shape=(len(rows), len(columns)))
     norm = np.sqrt(np.asarray(design.multiply(design).sum(axis=1)).ravel())
     unit = design.multiply((1 / np.maximum(norm, 1.e-12))[:, None]).tocsr()
     return embedding((unit @ unit.T).toarray())
