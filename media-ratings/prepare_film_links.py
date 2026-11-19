@@ -21,7 +21,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode, urlsplit, unquote
 from urllib.request import Request, urlopen
 
-USER_AGENT = "vetr.dev Rating Prediction (https://vetr.dev/media-ratings/)"
+USER_AGENT = "vetr.dev Rating Prediction (https://vetr.dev/rating-prediction/)"
 MOVIE_PATH = re.compile(r"/m/[A-Za-z0-9._%-]+")
 CERTIFICATES = {
     "G",

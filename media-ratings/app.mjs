@@ -1354,7 +1354,7 @@ function setCutoff(value) {
   if (checked instanceof HTMLInputElement) checked.focus({ preventScroll: true });
 }
 async function readJSON(path) {
-  const resp = await fetch(path);
+  const resp = await fetch(new URL(path, import.meta.url));
   if (!resp.ok) throw new Error('Unable to load ' + path + ' (' + resp.status + ').');
   return resp.json();
 }

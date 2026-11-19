@@ -82,7 +82,7 @@ test('overlap and on-demand evidence retain both orientations and large cohort t
 });
 
 test('catalog edits feed all rankings, detail and co-ratings at the chosen update time', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const { page } = app;
   try {
     /** @type {Record<string, number>} */
@@ -280,7 +280,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
 });
 
 test('expanded catalog, information ratings, sampled scatter, projections, and exchange', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
     await p.locator('#library .entry').first().waitFor();
@@ -401,7 +401,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
 });
 
 test('familiar next ratings, rank drops and in-place rating work across recommendation boards', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
     const firstInfo = p.locator('.info-row').first();
@@ -566,7 +566,7 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
 });
 
 test('volunteered and prompted film ratings keep their source through model switches, drafts and CSV', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
     const model = p.locator('#model');
@@ -642,7 +642,7 @@ test('volunteered and prompted film ratings keep their source through model swit
 });
 
 test('dated ratings round-trip and update the catalog prior, rankings and automatically recorded submission date', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
     const rated = (id) => p.locator('#rated-list .entry[data-id="' + id + '"]');
@@ -711,7 +711,7 @@ test('dated ratings round-trip and update the catalog prior, rankings and automa
 });
 
 test('quick rating uses the full catalog, supports undo and attributes prompted answers correctly', async () => {
-  const app = await openPage('media-ratings/');
+  const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
     const card = p.locator('#rapid-card'),
@@ -807,7 +807,7 @@ test('quick rating uses the full catalog, supports undo and attributes prompted 
 });
 
 test('new catalogs use their native scales, source links, observed pairs and independent rating shelves', async () => {
-  const app = await openPage('media-ratings/', { width: 390, height: 844 });
+  const app = await openPage('rating-prediction/', { width: 390, height: 844 });
   const p = app.page;
   try {
     for (const [key, fingerprint, midpoint, source] of [
@@ -858,7 +858,7 @@ test('new catalogs use their native scales, source links, observed pairs and ind
 });
 
 test('binary catalogs predict explicit recommendations or recorded actions and distinguish no from a skip', async () => {
-  const app = await openPage('media-ratings/', { width: 1440, height: 900 });
+  const app = await openPage('rating-prediction/', { width: 1440, height: 900 });
   const p = app.page;
   try {
     for (const key of ['subreddits', 'fanfiction', 'webfiction', 'games']) {
@@ -920,7 +920,7 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
 });
 
 test('Metacritic scores include both endpoints and stay separate from Steam votes', async () => {
-  const app = await openPage('media-ratings/', { width: 390, height: 844 });
+  const app = await openPage('rating-prediction/', { width: 390, height: 844 });
   const p = app.page;
   try {
     await p.locator('#domains [data-key="games"]').click();
@@ -946,12 +946,14 @@ test('Metacritic scores include both endpoints and stay separate from Steam vote
   } finally { await app.close(); }
 });
 
-test('a catalog address opens its named source and Back restores the ratings entered there', async () => {
+test('a legacy catalog address redirects and Back restores the ratings entered there', async () => {
   const app = await openPage('media-ratings/?catalog=metacritic&from=test#top');
   const page = app.page;
   const active = key => page.locator(`#domains [data-key="${key}"][aria-pressed="true"]`).waitFor();
   try {
     await active('games');
+    assert.equal(new URL(page.url()).pathname, '/rating-prediction/');
+    assert.ok(page.url().endsWith('?catalog=metacritic&from=test#top'));
     assert.equal(await page.locator('#game-dataset').inputValue(), 'metacritic');
     await page.locator('#quick-session').click();
     await page.keyboard.press('5');
@@ -979,7 +981,7 @@ test('a catalog address opens its named source and Back restores the ratings ent
 });
 
 test('quick rate and selected recommendations share credited artwork and contextual help', async () => {
-  const session = await openPage('media-ratings/');
+  const session = await openPage('rating-prediction/');
   const { page } = session;
   try {
     const dialog = page.locator('#about-recommendations');
@@ -1030,7 +1032,7 @@ test('quick rate and selected recommendations share credited artwork and context
 });
 
 test('Royal Road Kindle editions have a separate whole-star shelf, serial links and co-rating evidence', async () => {
-  const app = await openPage('media-ratings/?catalog=royalroad-kindle');
+  const app = await openPage('rating-prediction/?catalog=royalroad-kindle');
   const { page } = app;
   const catalog = JSON.parse(readFileSync(new URL('royalroad-kindle.json', import.meta.url), 'utf8'));
   try {

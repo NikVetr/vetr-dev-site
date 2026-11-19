@@ -14,7 +14,7 @@ export function pairIndex(i, j) {
 }
 
 async function packedCounts(file, length) {
-  const response = await fetch('./' + file);
+  const response = await fetch(new URL('./' + file, import.meta.url));
   if (!response.ok) throw new Error('Co-rating counts unavailable.');
   const bytes = new Uint8Array(await response.arrayBuffer());
   const buffer =

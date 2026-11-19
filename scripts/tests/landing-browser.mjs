@@ -164,10 +164,11 @@ try {
   await page.locator('[data-art="ceo-salary-benchmark"] svg').first().waitFor();
   assert.equal(await page.locator('a[href="/ceo-salary-benchmark/"]').count(), 1);
   assert.ok(!(await page.locator('[data-art="ceo-salary-benchmark"]').textContent()).includes('Rethink Priorities'));
-  for (const name of ['motrpac-alphabet', 'stan2r', 'media-ratings', 'matrix-rain']) {
-    assert.equal(await page.locator(`a[href="/${name}/"]`).count(), 1);
-    await page.locator(`[data-art="${name}"]`).scrollIntoViewIfNeeded();
-    await page.locator(`[data-art="${name}"] > svg`).waitFor();
+  for (const name of ['motrpac-alphabet', 'stan2r', 'rating-prediction', 'matrix-rain']) {
+    const card = page.locator(`a[href="/${name}/"]`);
+    assert.equal(await card.count(), 1);
+    await card.scrollIntoViewIfNeeded();
+    await card.locator('.card-art > svg').waitFor();
   }
   assert.ok(await page.locator('[data-art="motrpac-alphabet"] path').count() >= 25, 'alphabet and Mattlab preview contains actual geometry');
   assert.equal(await page.locator('[data-art="stan2r"] .model-edges > path').count(), 2, 'Stan Studio preview shows the actual model dependencies');
