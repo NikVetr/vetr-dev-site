@@ -16,7 +16,7 @@ def category_design(profiles, levels):
                               profiles.indptr), shape=(profiles.shape[0], profiles.shape[1] * levels))
 
 
-def fit_mixture(profiles, levels, k, seed):
+def fit_mixture(profiles, levels, k, seed, initial_classes=None):
     x = category_design(profiles, levels)
     counts = np.asarray(x.sum(axis=0)).reshape(-1, levels)
     global_counts = counts.sum(axis=0) + 0.5
@@ -24,8 +24,17 @@ def fit_mixture(profiles, levels, k, seed):
     pooled /= pooled.sum(axis=1, keepdims=True)
     prior = 16 * pooled
     rng = np.random.default_rng(seed)
-    resp = rng.exponential(size=(profiles.shape[0], k))
-    resp /= resp.sum(axis=1, keepdims=True)
+    n = profiles.shape[0]
+    if initial_classes is None:
+        resp = rng.exponential(size=(n, k))
+        resp /= resp.sum(axis=1, keepdims=True)
+    else:
+        labels = np.asarray(initial_classes)
+        if (labels.shape != (n,) or not np.issubdtype(labels.dtype, np.integer)
+                or labels.min() < 0 or labels.max() >= k):
+            raise ValueError('Initial class assignments must be one valid index per respondent')
+        resp = np.full((n, k), .2/k)
+        resp[np.arange(n), labels] += .8
     previous = -np.inf
     for iteration in range(1, 501):
         weights = (resp.sum(axis=0) + 1) / (len(resp) + k)
@@ -82,7 +91,7 @@ def summary(k, metrics):
     return dict(label=f'Latent class, K={k}', logLoss=float(loss), rmse=float(np.sqrt(mse)), brier=float(brier))
 
 
-def fit_catalog(name, items, scale, profiles, seed=42):
+def fit_catalog(name, items, scale, profiles, seed=42, *, validation_limit: int | None = 2000):
     """Return the browser catalog and its reproducible respondent-disjoint evaluation."""
     scale = np.asarray(scale)
     levels = len(scale)
@@ -105,7 +114,7 @@ def fit_catalog(name, items, scale, profiles, seed=42):
     scores = {k: [] for k in k_grid}
     for fold, valid in enumerate(np.array_split(development, 3)):
         train = profiles[np.setdiff1d(development, valid)]
-        cases = scoring_cases(profiles, valid[:2000], rng)
+        cases = scoring_cases(profiles, valid[:validation_limit], rng)
         for k in k_grid:
             model = fit_mixture(train, levels, k, seed + fold)
             scores[k].append(score_model(model, cases, scale, threshold))
@@ -152,3 +161,34 @@ def write_evidence(path, profiles, items, scale):
         json.dump(dict(ids=[i['itemId'] for i in items], scale=list(scale), counts=counts,
                        packedFile=packed.name), out, separators=(',', ':'))
         out.write('\n')
+    shard_evidence(path)
+
+
+def shard_evidence(path, chunk_bytes=4 * 1024 ** 2):
+    """Split ordinal grids at pair boundaries for on-demand browser comparisons."""
+    manifest = json.loads(path.read_text())
+    cells = len(manifest['scale']) ** 2
+    size = len(manifest['ids'])
+    pairs = size * (size - 1) // 2
+    if pairs * cells * 2 <= 8 * chunk_bytes:
+        return
+    per_file = chunk_bytes // (2 * cells)
+    packed = path.parent / manifest['packedFile']
+    folder = path.parent / (path.stem + '-parts')
+    folder.mkdir(exist_ok=True)
+    files = []
+    with gzip.GzipFile(filename=packed, mode='rb') as stream:
+        for first in range(0, pairs, per_file):
+            length = min(per_file, pairs - first) * cells * 2
+            block = stream.read(length)
+            if len(block) != length:
+                raise ValueError('Incomplete co-rating table')
+            part = folder / f'{len(files):03}.bin.gz'
+            part.write_bytes(gzip.compress(block, compresslevel=6, mtime=0))
+            files.append(str(part.relative_to(path.parent)))
+        if stream.read(1):
+            raise ValueError('Trailing co-rating cells')
+    del manifest['packedFile']
+    manifest.update(packedFiles=files, pairsPerFile=per_file)
+    path.write_text(json.dumps(manifest, separators=(',', ':')) + '\n')
+    packed.unlink()

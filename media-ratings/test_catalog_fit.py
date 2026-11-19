@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from fit_catalog import fit_mixture, scoring_cases, write_evidence
+from fit_catalog import fit_mixture, scoring_cases, shard_evidence, write_evidence
 
 
 class CatalogFitTests(unittest.TestCase):
@@ -24,6 +24,11 @@ class CatalogFitTests(unittest.TestCase):
             evidence = json.loads(path.read_text())
             packed = np.frombuffer(gzip.decompress((path.parent / evidence['packedFile']).read_bytes()),
                                    dtype='<u2').reshape(-1, 3, 3)
+            shard_evidence(path, chunk_bytes=72)
+            shards = json.loads(path.read_text())
+            self.assertEqual(shards['pairsPerFile'], 4)
+            joined = b''.join(gzip.decompress((path.parent / f).read_bytes()) for f in shards['packedFiles'])
+            self.assertEqual(joined, packed.astype('<u2').tobytes())
         self.assertEqual(len(packed), 55)
         for j in range(11):
             np.testing.assert_array_equal(evidence['counts'][j], np.bincount(data[:, j], minlength=4)[1:])
