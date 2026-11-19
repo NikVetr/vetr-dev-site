@@ -1,3 +1,4 @@
+import { renderAxisRails } from './axis-rails.mjs';
 function shape(tag, attrs, text = '') {
   const n = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
@@ -55,14 +56,14 @@ function membershipPanel(fp, bind) {
     : 'Catalog baseline';
   const membership = document.getElementById('memberships');
   membership.replaceChildren(html('h3', fp.ratedCount ? 'Class probabilities' : 'Catalog classes'));
-  for (const { index, label, probability, prior } of fp.classes) {
+  for (const { index, mean, probability, prior } of fp.classes) {
     const row = html('button');
     row.className = 'class-weight';
     bind(row, index);
     row.style.setProperty('--class-color', colors[index % colors.length]);
     const id = html('span', String(index + 1));
     id.className = 'component-id';
-    const name = html('span', label),
+    const name = html('span', 'Average ' + mean.toFixed(2)),
       rail = html('span'),
       bar = html('i');
     name.className = 'component-name';
@@ -74,7 +75,7 @@ function membershipPanel(fp, bind) {
     membership.append(row);
   }
 }
-function classDetails(fp, catalog, inspected, pinned, ratings, baseline) {
+function classDetails(fp, catalog, inspected, ratings, baseline, clearGroup) {
   const signature = document.getElementById('class-signature');
   if (!inspected) {
     signature.replaceChildren(html('h3', 'How you rate'));
@@ -125,21 +126,20 @@ function classDetails(fp, catalog, inspected, pinned, ratings, baseline) {
     signature.append(ends);
     return;
   }
-  signature.replaceChildren(html('h3', pinned ? 'Pinned class' : 'Class details'));
-  const heading = html('strong', inspected.label);
-  heading.className = 'match-name';
-  signature.append(
-    heading,
-    html(
-      'p',
-      'Class ' +
-        (inspected.index + 1) +
-        ' · ' +
-        (100 * inspected.prior).toFixed(1) +
-        '% in catalog' +
-        (fp.ratedCount ? ' → ' + (100 * inspected.probability).toFixed(1) + '% for you' : ''),
-    ),
-  );
+  signature.replaceChildren(html('h3', 'Viewer group ' + (inspected.index + 1)));
+  const mean = inspected.mean.toFixed(2);
+  signature.append(html('p', 'This group averages ' + mean + ' on the ' + catalog.scale[0] + '–' + catalog.scale.at(-1) + ' scale.'));
+  if (fp.usesHalfStars) {
+    const half = inspected.mass.reduce((sum, p, i) => sum + (Number.isInteger(catalog.scale[i]) ? 0 : p), 0);
+    signature.append(html('p', 'Half stars account for ' + Math.round(100 * half) + '% of its ratings.'));
+  }
+  signature.append(html('p', (100 * inspected.prior).toFixed(1) + '% of the fitted population' +
+    (fp.ratedCount ? ' · ' + (100 * inspected.probability).toFixed(1) + '% match given your ratings.' : '.')));
+  if (clearGroup) {
+    const back = html('button', 'Back to your ratings');
+    back.onclick = clearGroup;
+    signature.append(back);
+  }
   if (inspected.signal) {
     const { title, value, ratio } = inspected.signal;
     const answer = catalog.scaleLabels?.[catalog.scale.indexOf(value)] ?? value;
@@ -282,9 +282,9 @@ export function renderTaste(
       fp,
       catalog,
       members.get(index),
-      index !== null && index === prefs.pinned,
       ratings,
       baseline,
+      index !== null && index === prefs.pinned ? () => { prefs.pinned = null; inspect(null); } : null,
     );
     for (const control of host.querySelectorAll('[data-class-index]')) {
       const k = Number(control.getAttribute('data-class-index'));
@@ -344,29 +344,19 @@ export function renderTaste(
       selectors.append(label);
     });
   }
-  if (!continuous) {
-    const center = /** @type {HTMLInputElement} */ (html('input'));
-    center.type = 'checkbox';
-    center.checked = prefs.centerClassMeans;
-    center.onchange = () => {
-      prefs.centerClassMeans = center.checked;
-      prefs.axes = undefined;
-      onAxesChange();
-      selectors.querySelector('input')?.focus({ preventScroll: true });
-    };
-    const label = html('label');
-    label.className = 'center-classes';
-    label.title =
-      'Subtract each class’s average across all titles before PCA. Class probabilities and forecasts stay the same.';
-    label.append(center, 'Remove overall rating level');
-    selectors.append(label);
-  }
+  const center = /** @type {HTMLInputElement} */ (document.getElementById('center-profile'));
+  center.checked = prefs.centerClassMeans;
+  center.onchange = () => {
+    prefs.centerClassMeans = center.checked;
+    prefs.axes = undefined;
+    onAxesChange();
+  };
   inspect(prefs.pinned);
-  legend.replaceChildren();
+  renderAxisRails(legend, fp.allAxes, profile.allAxes ?? axes, catalog.items, fp.ratedCount, continuous);
   plot.replaceChildren();
   document.getElementById('profile-help').textContent =
-    'Hover or focus a class to inspect it. Click to pin it. Class probabilities describe similarities in how respondents scored titles. The category comparisons use personalized forecasts across unrated titles. ' +
-    (fp.usesHalfStars ? 'A half-step class uses half stars on at least one in five ratings. ' : '') +
+    'Hover or focus a class to inspect it. Select a group to keep its details open. Class probabilities describe similarities in how respondents scored titles. The category comparisons use personalized forecasts across unrated titles. ' +
+    'PCA summarizes how ratings vary. Changing the projection only changes this view. ' +
     (continuous
       ? 'The map uses Gaussian liabilities. Each contour shows one projected standard deviation.'
       : (prefs.centerClassMeans
@@ -466,10 +456,10 @@ export function renderTaste(
     });
     const cls = members.get(k);
     const description =
-      'Class ' +
+      'Viewer group ' +
       (k + 1) +
-      ' · ' +
-      cls.label +
+      ' · Average ' +
+      cls.mean.toFixed(2) +
       ' · ' +
       (100 * cls.prior).toFixed(1) +
       '% in catalog → ' +
@@ -549,45 +539,4 @@ export function renderTaste(
   caption.append(key, variance);
   plot.append(svg, caption);
   inspect(prefs.pinned);
-  for (const [i, a] of fp.axes.entries()) {
-    const card = html('section'),
-      top = html('div');
-    top.className = 'axis-summary';
-    top.append(
-      html('h3', 'PC' + (numbers[i] + 1) + ' · ' + a.label),
-      html(
-        'small',
-        varianceShare(a.fraction) + ' of ' + (continuous ? 'latent variance' : 'between-class variance'),
-      ),
-    );
-    const rail = html('div');
-    rail.className = 'axis-track';
-    const mark = html('i');
-    mark.style.left = 50 + (50 * a.score) / (i === 0 ? limitX : limitY) + '%';
-    rail.append(mark);
-    rail.title = (fp.ratedCount ? 'Your score ' : 'Catalog center ') + signedValue(a.score);
-    const ends = html('div');
-    ends.className = 'axis-ends';
-    ends.append(html('span', a.low), html('span', a.high));
-    const axis = axes[i];
-    const loadings = axis.loadings
-      .map((value, j) => ({ value, title: catalog.items[j].title }))
-      .sort((a, b) => a.value - b.value);
-    const details = html('details');
-    const summary = html('summary', 'Title loadings');
-    summary.title = 'Lowest: ' + loadings[0].title + ' · highest: ' + loadings.at(-1).title;
-    details.append(summary);
-    for (const [label, entries] of [
-      ['Lowest', loadings.slice(0, 3)],
-      ['Highest', loadings.slice(-3).reverse()],
-    ]) {
-      details.append(html('b', label));
-      const list = html('ul');
-      for (const entry of entries)
-        list.append(html('li', entry.title + ' (' + signedValue(entry.value, 3) + ')'));
-      details.append(list);
-    }
-    card.append(top, rail, ends, details);
-    legend.append(card);
-  }
 }

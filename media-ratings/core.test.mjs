@@ -61,7 +61,7 @@ test('a class match requires evidence and a unique leader; affinities use the re
 });
 test('Gaussian fingerprints project the conditional liability and describe classes in rating units', () => {
   const c = catalog([component(0.5, [-1, -1]), component(0.5, [1, 1])]);
-  const f = preferenceFingerprint(c, { ratings: { a: 5 } });
+  const f = preferenceFingerprint(c, { ratings: { a: 5 }, centerClassMeans: false });
   const probability = pnorm(1);
   close(f.match.probability, probability);
   close(f.mass[1], probability ** 2 + (1 - probability) ** 2);
@@ -94,8 +94,8 @@ test('centering class profiles removes an overall rating direction without chang
     },
   };
   const ratings = { a: 5 };
-  const ordinary = preferenceFingerprint(c, { ratings });
-  const relative = preferenceFingerprint(c, { ratings, centerClassMeans: true });
+  const ordinary = preferenceFingerprint(c, { ratings, centerClassMeans: false });
+  const relative = preferenceFingerprint(c, { ratings });
   assert.equal(ordinary.axes.length, 1);
   assert.equal(relative.axes.length, 0);
   assert.deepEqual(relative.classes, ordinary.classes);
@@ -611,4 +611,21 @@ test('submission-year calibration conditions on each dated answer and compares t
   films.defaultModel = 'hybrid';
   calendar.counts[0].pop();
   assert.throws(() => submit(request), /category counts/);
+});
+
+test('all fingerprint coordinates match separate Gaussian projections, including after removing the level direction', () => {
+  const c = catalog([component(.65, [-.25, .5], .35), component(.35, [.5, -.25], -.2)]);
+  for (const centerClassMeans of [true, false]) {
+    const request = { model: 'ordinal', ratings: { a: 5 }, centerClassMeans };
+    const full = gaussianProjection(c, { ...request, overview: true });
+    assert.equal(full.allAxes.length, centerClassMeans ? 1 : 2);
+    for (const [i, axis] of full.allAxes.entries()) {
+      if (centerClassMeans) close(axis.loadings.reduce((s, v) => s + v, 0), 0);
+      const one = gaussianProjection(c, { ...request, axisIndices: [i] });
+      close(full.allScores[i], one.mean[0]);
+    }
+    const fp = preferenceFingerprint(c, request);
+    assert.equal(fp.allAxes.length, full.allAxes.length);
+    fp.allAxes.forEach((a, i) => close(a.standardScore, full.allScores[i] / Math.sqrt(full.allAxes[i].variance)));
+  }
 });

@@ -352,7 +352,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('.heat').waitFor();
     await p.getByText('Sampled latent scores', { exact: true }).click();
     await p.locator('#comparison svg circle').first().waitFor();
-    assert.match(await p.locator('#axes').innerText(), /between-class variance/);
+    assert.match(await p.locator('#axes .axis-fraction').first().getAttribute('title'), /between-group variance/);
     await p.locator('#threshold').getByRole('radio', { name: '4.5 stars', exact: true }).click();
     await p.locator('#exchange summary').click();
     const download = p.waitForEvent('download');
@@ -376,7 +376,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     const hybrid = await p.locator('[data-key=expected] .rank').first().innerText();
     await p.locator('#model').selectOption('latentClass');
     assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
-    assert.match(await p.locator('#axes').innerText(), /between-class variance/);
+    assert.match(await p.locator('#axes .axis-fraction').first().getAttribute('title'), /between-group variance/);
     await p.locator('#model').selectOption('personalized');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), hybrid);
     assert.match(await p.locator('#formula').innerText(), /similar films/);
@@ -388,7 +388,8 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
       .locator('#library .entry[data-id="' + id + '"]')
       .getByRole('radio', { name: '4.5 stars', exact: true })
       .check();
-    assert.match(await p.locator('#axes').innerText(), /latent variance/);
+    assert.equal(await p.locator('#axes .axis-row').count(), 499);
+    await p.getByRole('checkbox', { name: 'Remove overall rating level' }).uncheck();
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
     await p.getByLabel('Vertical principal component').selectOption('499');
     assert.match(await p.locator('#axes').innerText(), /PC500/);
@@ -471,12 +472,18 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     assert.match(await p.locator('#axes').innerText(), /PC7/);
     const center = p.getByRole('checkbox', { name: 'Remove overall rating level' });
     const expectedFirst = await p.locator('[data-key=expected] .rank').first().innerText();
-    await center.check();
+    assert.ok(await center.isChecked());
+    await center.uncheck();
     assert.equal(await horizontal.inputValue(), '0');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), expectedFirst);
-    await p.locator('#axes summary').first().click();
-    assert.ok(await p.locator('#axes details').first().locator('li').first().isVisible());
-    await center.uncheck();
+    assert.equal(await p.locator('#axes .axis-row').count(), 7);
+    const rail = p.locator('#axes input').first(), examples = p.locator('#axes .axis-examples').first();
+    await rail.focus();
+    await rail.press('Home');
+    const low = await examples.innerText();
+    await rail.press('End');
+    assert.notEqual(await examples.innerText(), low);
+    await center.check();
     await p.locator('#profile-method summary').click();
     const member = p.locator('#memberships button[data-class-index="2"]');
     await member.hover();
@@ -484,7 +491,8 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await member.click();
     await p.mouse.move(0, 0);
     assert.equal(await member.getAttribute('aria-pressed'), 'true');
-    assert.match(await p.locator('#class-signature').innerText(), /Pinned class/);
+    assert.match(await p.locator('#class-signature').innerText(), /Viewer group 3/);
+    assert.match(await p.locator('#class-signature').innerText(), /Half stars account for/);
     await member.focus();
     await p.keyboard.press('Escape');
     assert.equal(await member.getAttribute('aria-pressed'), 'false');
@@ -986,13 +994,16 @@ test('quick rate and selected recommendations share credited artwork and context
     const quick = page.locator('#rapid-image');
     await quick.waitFor();
     const url = await quick.locator('img').getAttribute('src');
-    const credit = await quick.locator('figcaption a').first().getAttribute('href');
+    const credit = await quick.locator('a:has(img)').getAttribute('href');
     await page.keyboard.press('Escape');
     await page.locator('.info-row[data-id="' + id + '"] .rank').click();
     const detail = page.locator('#detail-image');
     await detail.waitFor();
     assert.equal(await detail.locator('img').getAttribute('src'), url);
-    assert.equal(await detail.locator('figcaption a').first().getAttribute('href'), credit);
+    assert.equal(await detail.locator('a:has(img)').getAttribute('href'), credit);
+    assert.doesNotMatch(await detail.innerText(), /Poster file and rights/);
+    const art = await detail.boundingBox(), panel = await page.locator('#detail').boundingBox();
+    assert.ok(Math.abs(art.height - panel.height) <= 3, 'poster spans the detail panel');
     await page.locator('#more-metadata summary').click();
     assert.match(await page.locator('#more-metadata').innerText(), /Directors/);
     await page.getByLabel('Catalog sort order').selectOption('directors');

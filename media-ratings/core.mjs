@@ -328,7 +328,10 @@ function classMasses(logWeights) {
 function solveSimilarity(gram, right) {
   const L = cholesky(gram);
   if (!L) throw invalidRequest('$', 'Could not factor the similarity ridge system.');
-  const coef = forward(L, right);
+  return solveTransposedFactor(L, forward(L, right));
+}
+
+function solveTransposedFactor(L, coef) {
   for (let j = coef.length - 1; j >= 0; j--) {
     for (let i = j + 1; i < coef.length; i++) coef[j] -= L[i][j] * coef[i];
     coef[j] /= L[j][j];
@@ -600,7 +603,7 @@ export function submit(input) {
 const gaussianAxes = new WeakMap();
 export function gaussianProjection(
   catalog,
-  { model: key, ratings = {}, samples = 256, axisIndices = undefined },
+  { model: key, ratings = {}, samples = 256, axisIndices = undefined, centerClassMeans = false, overview = false },
 ) {
   const { components, kind } = catalog.models[key],
     model = catalog.models[key];
@@ -608,7 +611,9 @@ export function gaussianProjection(
     kind === 'logit-point' || kind === 'ordinal-probit',
     'Projection requires Gaussian liabilities.',
   );
-  let basis = gaussianAxes.get(model);
+  if (!gaussianAxes.has(model)) gaussianAxes.set(model, new Map());
+  const cached = gaussianAxes.get(model);
+  let basis = cached.get(centerClassMeans);
   if (!basis) {
     const ids = catalog.items.map((_, i) => i),
       center = ids.map((i) => components.reduce((s, c) => s + c.weight * c.mean[i], 0));
@@ -620,17 +625,30 @@ export function gaussianProjection(
         ),
       ),
     );
-    const eig = symmetricEigen(total),
-      trace = eig.values.reduce((a, b) => a + b, 0);
-    const spectrum = eig.values.map((value) => Math.max(0, value) / trace);
-    basis = { center, vectors: eig.vectors, spectrum, calculated: new Map() };
-    gaussianAxes.set(model, basis);
+    // Remove the all-items direction from the display covariance (H C H).
+    // The original components still condition on the supplied scores.
+    if (centerClassMeans) {
+      const rowMeans = total.map(row => row.reduce((a, b) => a + b, 0) / ids.length);
+      const grand = rowMeans.reduce((a, b) => a + b, 0) / ids.length;
+      total.forEach((row, i) => row.forEach((v, j) => { row[j] = v - rowMeans[i] - rowMeans[j] + grand; }));
+    }
+    const eig = symmetricEigen(total);
+    const values = centerClassMeans ? eig.values.filter(v => v > Math.max(1e-12, eig.values[0] * 1e-10)) : eig.values;
+    const trace = values.reduce((a, v) => a + Math.max(0, v), 0);
+    const spectrum = values.map(v => Math.max(0, v) / trace);
+    const all = values.map((variance, index) => {
+      const loadings = eig.vectors[index];
+      return { index, fraction: spectrum[index], loadings, variance,
+        high: loadings.indexOf(Math.max(...loadings)), low: loadings.indexOf(Math.min(...loadings)) };
+    });
+    basis = { center, all, spectrum, calculated: new Map() };
+    cached.set(centerClassMeans, basis);
   }
-  // Only form covariance products and posterior moments for the displayed plane.
-  const indices = axisIndices ?? (basis.spectrum.length > 1 ? [0, 1] : [0]);
+  // Only the chosen map axes need full conditional covariance products.
+  const indices = axisIndices ?? basis.all.slice(0, 2).map(axis => axis.index);
   requireValue(
     Array.isArray(indices) &&
-      indices.length >= 1 &&
+      (indices.length >= 1 || !basis.all.length) &&
       indices.length <= 2 &&
       new Set(indices).size === indices.length &&
       indices.every((i) => Number.isInteger(i) && i >= 0 && i < basis.spectrum.length),
@@ -638,13 +656,9 @@ export function gaussianProjection(
   );
   const axes = indices.map((index) => {
     if (!basis.calculated.has(index)) {
-      const v = basis.vectors[index];
+      const axis = basis.all[index], v = axis.loadings;
       basis.calculated.set(index, {
-        index,
-        fraction: basis.spectrum[index],
-        high: v.indexOf(Math.max(...v)),
-        low: v.indexOf(Math.min(...v)),
-        loadings: v,
+        ...axis,
         scores: components.map((c) => dot(v, c.mean) - dot(v, basis.center)),
         cross: components.map((c) => c.covariance.map((row) => dot(row, v))),
       });
@@ -673,24 +687,34 @@ export function gaussianProjection(
     );
     const covariance = axes.map((a) => axes.map((b) => dot(a.loadings, b.cross[k])));
     const residual = covariance.map((row, i) => row.map((n, j) => n - dot(beta[i], beta[j])));
-    return { states, beta, covariance, residual };
+    return { states, beta, covariance, residual, L };
   });
   const max = Math.max(...blocks.map((b) => b.states.reduce((m, s) => Math.max(m, s.logWeight), -Infinity)));
   requireValue(Number.isFinite(max), 'Projection likelihood below numerical precision.');
   const mean = axes.map(() => 0),
     second = axes.map(() => axes.map(() => 0));
+  const itemShift = overview ? catalog.items.map(() => 0) : null;
   let totalMass = 0;
   const weights = blocks.map((b, k) => {
     let mass = 0;
+    const observedMean = overview ? obs.map(() => 0) : null;
     for (const s of b.states) {
       const w = Math.exp(s.logWeight - max);
       if (!w) continue;
       const m = axes.map((a, i) => a.scores[k] + dot(b.beta[i], s.z));
       mass += w;
+      if (observedMean) s.z.forEach((z, j) => { observedMean[j] += w * z; });
       m.forEach((x, i) => {
         mean[i] += w * x;
         m.forEach((y, j) => (second[i][j] += w * (b.residual[i][j] + x * y)));
       });
+    }
+    if (itemShift && observedMean) {
+      const coef = solveTransposedFactor(b.L, observedMean), c = components[k];
+      for (let i = 0; i < itemShift.length; i++) {
+        itemShift[i] += mass * (c.mean[i] - basis.center[i]);
+        for (let j = 0; j < obs.length; j++) itemShift[i] += c.covariance[i][obs[j]] * coef[j];
+      }
     }
     totalMass += mass;
     return mass;
@@ -699,6 +723,7 @@ export function gaussianProjection(
   const covariance = second.map((row, i) => row.map((x, j) => x / totalMass - mean[i] * mean[j]));
   return {
     projection: axes,
+    ...(itemShift ? { allAxes: basis.all, allScores: basis.all.map(a => dot(a.loadings, itemShift) / totalMass) } : {}),
     spectrum: basis.spectrum,
     weights: weights.map((w) => w / totalMass),
     mean,

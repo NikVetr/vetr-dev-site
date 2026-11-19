@@ -97,6 +97,7 @@ export function projectClasses(model, scale, centerClassMeans = false) {
     const ordered = loadings.map((_, i) => i).sort((x, y) => loadings[y] - loadings[x]);
     axes.push({
       index: a,
+      variance: value,
       fraction: value / sum,
       scores: u.map((v, k) => (root * v) / Math.sqrt(groups[k].weight)),
       low: ordered.at(-1),

@@ -114,13 +114,64 @@ function classSignatures(catalog, model) {
   return signature;
 }
 
+// Use actual tags or examples from the fitted catalog. Weak group averages
+// should not lend a psychological name to a direction defined by individual works.
+const axisDescriptions = new WeakMap();
+const axisGroups = new WeakMap();
+function annotatedGroups(catalog) {
+  if (axisGroups.has(catalog)) return axisGroups.get(catalog);
+  const groups = new Map();
+  for (const [i, { annotations: a = {} }] of catalog.items.entries()) {
+    const labels = new Set([...(a.genres ?? []), ...(a.tags ?? []), a.region, a.country, a.format]);
+    if (Number.isInteger(a.year)) labels.add(Math.floor(a.year / 10) * 10 + 's');
+    for (const label of labels) {
+      if (!label) continue;
+      if (!groups.has(label)) groups.set(label, []);
+      groups.get(label).push(i);
+    }
+  }
+  const n = catalog.items.length;
+  const supported = [...groups].filter(([, ids]) => ids.length >= (n >= 100 ? 10 : 2) && ids.length < n);
+  axisGroups.set(catalog, supported);
+  return supported;
+}
+function axisDescription(catalog, axis) {
+  if (axisDescriptions.has(axis.loadings)) return axisDescriptions.get(axis.loadings);
+  const lo = axis.loadings[axis.low], hi = axis.loadings[axis.high];
+  let low = catalog.items[axis.low].title, high = catalog.items[axis.high].title;
+  let label = 'Title contrast';
+  if (lo > 0 || hi < 0) {
+    label = 'Overall rating';
+    low = lo > 0 ? 'Lower scores' : 'Higher scores';
+    high = lo > 0 ? 'Higher scores' : 'Lower scores';
+  } else {
+    const groups = annotatedGroups(catalog);
+    const n = axis.loadings.length;
+    const mean = average(axis.loadings);
+    const norm = Math.sqrt(axis.loadings.reduce((sum, v) => sum + (v - mean) ** 2, 0));
+    // Point-biserial correlation between a tag and item loading balances both
+    // contrast and coverage. An unsupported pole keeps its actual extreme title.
+    let lowest = -.15, highest = .15;
+    for (const [name, ids] of groups) {
+      const groupMean = ids.reduce((sum, i) => sum + axis.loadings[i], 0) / ids.length;
+      const r = (groupMean - mean) * Math.sqrt(n * ids.length / (n - ids.length)) / norm;
+      if (r < lowest && groupMean < 0) { lowest = r; low = name; }
+      if (r > highest && groupMean > 0) { highest = r; high = name; }
+    }
+    if (low !== catalog.items[axis.low].title || high !== catalog.items[axis.high].title) label = 'Preference contrast';
+  }
+  const description = {label, low, high};
+  axisDescriptions.set(axis.loadings, description);
+  return description;
+}
+
 export function preferenceFingerprint(
   catalog,
   {
     model: requested = undefined,
     ratings = {},
     samples = 256,
-    centerClassMeans = false,
+    centerClassMeans = true,
     volunteered = [],
     ratedOn = {},
     axisIndices = undefined,
@@ -140,7 +191,7 @@ export function preferenceFingerprint(
     projection ??
     (categorical
       ? tasteProfile(catalog, ratings, key, null, centerClassMeans, volunteered, ratedOn)
-      : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices }));
+      : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices, centerClassMeans, overview: true }));
   const { weights } = view;
   const { classes, groups, usesHalfStars } = classSignatures(catalog, model);
   const positions = view.mean ?? view.projection.map((axis) => dot(axis.scores, weights));
@@ -181,28 +232,15 @@ export function preferenceFingerprint(
       shift: classes.reduce((s, p, k) => s + weights[k] * p.affinities[j], 0),
     }))
     .sort((a, b) => b.shift - a.shift);
-  const axes = view.projection.map((axis, i) => {
-    const byGroup = groups
-      .map(([label, ids]) => ({ label, loading: average(ids.map((j) => axis.loadings[j])) }))
-      .sort((a, b) => a.loading - b.loading);
-    const lo = axis.loadings[axis.low],
-      hi = axis.loadings[axis.high];
-    let low = catalog.items[axis.low].title,
-      high = catalog.items[axis.high].title,
-      label = 'Title contrast';
-    if (lo > 0 || hi < 0) {
-      label = 'Overall rating';
-      low = lo > 0 ? 'Lower scores' : 'Higher scores';
-      high = lo > 0 ? 'Higher scores' : 'Lower scores';
-    } else if (byGroup.length > 1 && byGroup[0].loading < 0 && byGroup.at(-1).loading > 0) {
-      label = catalog.items.some((it) => it.annotations?.genres?.length)
-        ? 'Genre contrast'
-        : 'Region contrast';
-      low = byGroup[0].label;
-      high = byGroup.at(-1).label;
-    }
-    return { label, low, high, score: positions[i], fraction: axis.fraction };
-  });
+  const all = view.allAxes ?? view.projection;
+  const allScores = view.allScores ?? (view.allAxes ? all.map(axis => dot(axis.scores, weights)) : positions);
+  const allAxes = all.map((axis, i) => ({
+    ...axisDescription(catalog, axis),
+    index: axis.index, score: allScores[i], fraction: axis.fraction,
+    standardScore: axis.variance > 0 ? allScores[i] / Math.sqrt(axis.variance) : 0,
+  }));
+  const byIndex = new Map(allAxes.map(axis => [axis.index, axis]));
+  const axes = view.projection.map(axis => byIndex.get(axis.index));
   const mass = catalog.scale.map((_, j) => classes.reduce((s, p, k) => s + p.mass[j] * weights[k], 0));
   const uniqueLeader = types.length > 1 && types[0].probability - types[1].probability > 1e-12;
   return {
@@ -210,6 +248,7 @@ export function preferenceFingerprint(
     classes: types,
     match: ratedCount && uniqueLeader ? types[0] : null,
     axes,
+    allAxes,
     affinities,
     mean: dot(mass, catalog.scale),
     populationMean: classes.reduce((s, p) => s + p.mean * p.prior, 0),

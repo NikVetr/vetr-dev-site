@@ -118,8 +118,8 @@
         <p id="pending" role="status" hidden></p>
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
+          <figure id="detail-image" hidden></figure>
           <div class="detail-head">
-            <figure id="detail-image" hidden></figure>
             <div class="detail-heading">
               <p class="eyebrow">Selected recommendation</p>
               <h2 id="detail-title" tabindex="-1"></h2>
@@ -156,6 +156,11 @@
             <h2 id="projection-title">Preference fingerprint</h2>
             <span id="profile-count"></span>
           </div>
+          <section class="fingerprint-axes" aria-labelledby="axis-heading">
+            <div class="fingerprint-axes-head"><h3 id="axis-heading">Preference axes</h3><label><input type="checkbox" id="center-profile" checked /> Remove overall rating level</label></div>
+            <p id="axis-guide">Each dot shows your position from the catalog average (center) to three standard deviations in either direction. Hover, tap, or use the arrow keys to find titles most associated with each part of a line.</p>
+            <div id="axes"></div>
+          </section>
           <div class="taste-layout">
             <section id="taste-map">
               <h3>Preference map</h3>
@@ -165,7 +170,6 @@
             <section id="taste-patterns"></section>
             <section id="class-signature"></section>
           </div>
-          <div id="axes"></div>
           <details id="profile-method">
             <summary>Class probabilities and model details</summary>
             <div id="memberships"></div>

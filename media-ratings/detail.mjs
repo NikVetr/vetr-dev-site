@@ -273,6 +273,29 @@ function coRatings(data, p, ratings, titles, label, message, preferred, gaussian
   draw();
 }
 
+// Fit the whole poster to the detail height when the available column allows it.
+// The width cap in CSS preserves room for the three charts as details expand.
+let posterObserver;
+function fitSelectedArtwork(panel) {
+  if (posterObserver) return;
+  const figure = el('detail-image');
+  let scheduled = false;
+  const fit = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      const image = figure.querySelector('img');
+      if (!image?.naturalHeight || figure.hidden) return;
+      const width = Math.round(panel.clientHeight * image.naturalWidth / image.naturalHeight);
+      panel.style.setProperty('--artwork-width', width + 'px');
+    });
+  };
+  figure.addEventListener('load', fit, true);
+  posterObserver = new ResizeObserver(fit);
+  posterObserver.observe(panel);
+}
+
 export function showDetail({
   p,
   prior,
@@ -293,6 +316,7 @@ export function showDetail({
     oldTitle = detail.dataset.id;
   const previous = oldTitle === p?.itemId ? el('comparison').querySelector('select')?.dataset.chosen : null;
   detail.hidden = !p;
+  fitSelectedArtwork(detail);
   showRecognition(el('detail-image'), p ? targets : null, p ? titles.get(p.itemId) : '');
   if (!p) return;
   detail.dataset.id = p.itemId;

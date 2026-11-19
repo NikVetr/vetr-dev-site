@@ -46,7 +46,7 @@ export function showRecognition(figure, reference, title, describe = undefined) 
     url: reference.imageUrl, sourceUrl: reference.sourceUrl, title, credit: reference.label,
   }] : [];
   const current = () => displayed.get(figure) === selection;
-  function show(photos) {
+  function show(photos, poster = null) {
     if (!current()) return;
     const [photo, ...fallback] = photos;
     if (!photo) { figure.hidden = true; figure.replaceChildren(); return; }
@@ -55,22 +55,23 @@ export function showRecognition(figure, reference, title, describe = undefined) 
     img.decoding = 'async';
     img.referrerPolicy = 'no-referrer';
     img.onload = () => { if (current()) figure.hidden = false; };
-    img.onerror = () => show(fallback);
+    img.onerror = () => show(fallback, poster);
     const source = recognitionLink('', photo.sourceUrl);
-    source.ariaLabel = photo.title + ' · image source';
+    source.ariaLabel = photo === poster ? title + ' poster · file and rights' : img.alt + ' · image source';
     source.append(img);
     const credit = document.createElement('figcaption');
     if (photo.caption) credit.append(photo.caption + ' · ');
     credit.append(recognitionLink(photo.credit || 'Image source', photo.sourceUrl));
     if (photo.license) credit.append(' · ', photo.licenseUrl ? recognitionLink(photo.license, photo.licenseUrl) : photo.license);
-    figure.replaceChildren(source, credit);
+    figure.replaceChildren(source);
+    if (photo !== poster || photo.license || photo.caption) figure.append(credit);
     img.src = photo.url;
   }
   if (!reference.wikipedia) { show(direct); return; }
   Promise.resolve(reference.recognition ?? recognitionFor(reference.wikipedia)).then(card => {
     if (!current()) return;
     if (describe && card?.description) describe(card.description);
-    show([card?.poster, card?.image, ...direct].filter(Boolean));
+    show([card?.poster, card?.image, ...direct].filter(Boolean), card?.poster);
   }).catch(() => {
     if (!current()) return;
     if (describe) describe('Article preview unavailable.');

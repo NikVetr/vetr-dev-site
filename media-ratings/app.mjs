@@ -820,7 +820,7 @@ function update(applyDraft = true) {
       state.applied,
       classKey,
       usesClasses ? next : null,
-      false,
+      true,
       volunteered,
       ratedOn,
     );
@@ -847,7 +847,7 @@ function renderFingerprint() {
   const categorical = ['latent-class', 'class-similarity'].includes(model.kind);
   let prefs = state.fingerprintViews.get(state.model);
   if (!prefs) {
-    prefs = { axes: undefined, pinned: null, centerClassMeans: false };
+    prefs = { axes: undefined, pinned: null, centerClassMeans: true };
     state.fingerprintViews.set(state.model, prefs);
   }
   const request = {
@@ -855,14 +855,15 @@ function renderFingerprint() {
     ratings: state.applied,
     ratedOn: state.appliedDates,
     axisIndices: prefs.axes,
+    centerClassMeans: prefs.centerClassMeans, overview: true,
   };
   let view;
   if (categorical) {
     const all = prefs.centerClassMeans
-      ? projectClasses(baselineModel, catalog.scale, true)
-      : taste.projection;
+      ? taste.projection
+      : projectClasses(baselineModel, catalog.scale, false);
     const indices = prefs.axes ?? all.slice(0, 2).map((axis) => axis.index);
-    view = { ...taste, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
+    view = { ...taste, allAxes: all, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
   } else view = gaussianProjection(catalog, request);
   const fp = preferenceFingerprint(catalog, request, view);
   const domain = active === 'expanded' ? 'movies' : active === 'destinations' ? 'cities' : catalog.domain;
