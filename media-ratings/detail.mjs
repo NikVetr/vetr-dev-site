@@ -331,6 +331,7 @@ export function showDetail({
   };
   el('formula').textContent =
     (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
+    (model.titleChoice ? 'The class weights also use the identities of films you volunteered. ' : '') +
     'Each mean weights the rating values by their probabilities. Surprise is your mean minus the catalog mean.';
   const gaussian =
     kind === 'latent-class' || kind === 'class-similarity'

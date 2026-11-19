@@ -1,7 +1,15 @@
 import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
-import { ratingsCSV, forecastsCSV, importRatings, importForecasts, saveCSV } from './exchange.mjs';
+import {
+  ratingsCSV,
+  forecastsCSV,
+  importRatings,
+  importRatingEntries,
+  ratingSources,
+  importForecasts,
+  saveCSV,
+} from './exchange.mjs';
 import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges } from './core.mjs';
 import { node, percent, signed, showDetail } from './detail.mjs';
 
@@ -16,6 +24,7 @@ Object.assign(window, {
     preferenceFingerprint,
     gaussianProjection,
     importRatings,
+    importRatingEntries,
     importForecasts,
     ratingsCSV,
     forecastsCSV,
@@ -81,6 +90,9 @@ function useState(data, key) {
     weightByFamiliarity: true,
     directions: { ratingChange: 'up', rankChange: 'both' },
     fingerprintViews: new Map(),
+    draftSources: Object.create(null),
+    appliedSources: Object.create(null),
+    followedSuggestions: new Set(),
     draft: Object.create(null),
     applied: Object.create(null),
     selection: null,
@@ -104,8 +116,9 @@ function install(key, next) {
     ...Object.entries(catalog.models)
       .sort(([a], [b]) => Number(b === catalog.defaultModel) - Number(a === catalog.defaultModel))
       .map(([k, m]) => {
-        const name =
-          m.kind === 'class-similarity'
+        const name = m.titleChoice
+          ? 'Ratings + tags + title choice'
+          : m.kind === 'class-similarity'
             ? 'Ratings + tags'
             : m.kind === 'logit-point'
               ? 'Historical logit'
@@ -135,7 +148,7 @@ function install(key, next) {
   el('library').scrollTop = 0;
   showValidation(catalog.selection);
   rebuildBaseline();
-  update(input('auto').checked ? state.draft : state.applied);
+  update(input('auto').checked);
 }
 function showValidation(selection) {
   const details = el('validation');
@@ -243,6 +256,16 @@ function entryRow(p, surface) {
   clear.setAttribute('aria-label', 'Clear rating for ' + titles.get(p.itemId));
   body.append(choices, readout, clear);
   li.append(head, body);
+  if (surface === 'rated' && catalog.models[state.model].titleChoice) {
+    const label = node('label', 'Title source');
+    const source = node('select');
+    source.className = 'rating-source';
+    source.setAttribute('aria-label', 'Title source for ' + titles.get(p.itemId));
+    for (const [key, text] of Object.entries(ratingSources)) source.add(new Option(text, key));
+    label.className = 'source-label';
+    label.append(source);
+    li.append(label);
+  }
   syncRow(li);
   return li;
 }
@@ -280,6 +303,8 @@ function markChoices(group, value) {
 function syncRow(li) {
   const value = state.draft[li.dataset.id],
     rated = value !== undefined;
+  const source = li.querySelector('.rating-source');
+  if (source) source.value = state.draftSources[li.dataset.id] ?? 'unknown';
   li.classList.toggle('rated', rated);
   markChoices(li.querySelector('.choices'), value);
   li.querySelector('.clear').hidden = !rated;
@@ -421,16 +446,24 @@ function reveal(id, focus = false) {
 }
 function syncDraft() {
   const count = Object.keys(state.draft).length,
-    dirty = !sameRatings(state.draft, state.applied);
+    dirty =
+      !sameRatings(state.draft, state.applied) || !sameRatings(state.draftSources, state.appliedSources);
   el('rated-count').textContent = count + ' / ' + catalog.items.length + ' rated';
   input('apply').disabled = !dirty;
   el('pending').hidden = !dirty;
   el('pending').textContent = 'Ratings have changed. Choose Update predictions to refresh the rankings.';
 }
-function edit(li, value) {
-  if (value === undefined) delete state.draft[li.dataset.id];
-  else state.draft[li.dataset.id] = value;
+function edit(li, value, fromSuggestion = false) {
   const id = li.dataset.id;
+  if (value === undefined) {
+    delete state.draft[id];
+    delete state.draftSources[id];
+    state.followedSuggestions.delete(id);
+  } else {
+    state.draft[id] = value;
+    state.draftSources[id] ??=
+      fromSuggestion || state.followedSuggestions.has(id) ? 'suggested' : 'volunteered';
+  }
   syncRow(entries.get(id));
   if (value === undefined) {
     if (copies.get(id)?.contains(document.activeElement))
@@ -451,12 +484,16 @@ function edit(li, value) {
   }
   filterRows();
   syncDraft();
-  if (input('auto').checked) update(state.draft);
+  if (input('auto').checked) update();
   else if (result) renderBoards();
 }
 el('shelves').onchange = (event) => {
-  const r = /** @type {HTMLInputElement} */ (event.target);
-  if (r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
+  const r = event.target;
+  if (r instanceof HTMLSelectElement && r.matches('.rating-source')) {
+    const li = r.closest('li');
+    state.draftSources[li.dataset.id] = r.value;
+    edit(li, state.draft[li.dataset.id]);
+  } else if (r instanceof HTMLInputElement && r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
 };
 el('shelves').onclick = (event) => {
   const button = /** @type {HTMLElement} */ (event.target).closest('.clear');
@@ -482,15 +519,19 @@ function selectVisibleItem() {
   state.selection = selected;
 }
 
-input('apply').onclick = () => update(state.draft);
+input('apply').onclick = () => update();
 input('auto').onchange = () => {
-  if (state && input('auto').checked) update(state.draft);
+  if (state && input('auto').checked) update();
 };
-function update(ratings) {
+function update(applyDraft = true) {
   try {
-    const next = predict(catalog, { model: state.model, ratings, threshold: state.threshold });
+    const ratings = applyDraft ? state.draft : state.applied;
+    const sources = applyDraft ? state.draftSources : state.appliedSources;
+    const volunteered = Object.keys(ratings).filter((id) => sources[id] === 'volunteered');
+    const next = predict(catalog, { model: state.model, ratings, volunteered, threshold: state.threshold });
     result = next;
     state.applied = { ...ratings };
+    state.appliedSources = { ...sources };
     const count = Object.keys(state.applied).length;
     el('context').textContent =
       catalog.name +
@@ -501,6 +542,13 @@ function update(ratings) {
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
     const model = catalog.models[state.model];
+    const choiceNote = el('choice-note');
+    choiceNote.hidden = !model.titleChoice;
+    if (model.titleChoice) {
+      choiceNote.textContent = count
+        ? `You picked ${volunteered.length} of ${count} rated film${count === 1 ? '' : 's'}. Other films contribute stars only. Change the source under Already rated.`
+        : 'Films you pick contribute both their title and stars. App suggestions contribute stars only.';
+    }
     el('weights').textContent =
       model.kind === 'class-similarity'
         ? 'Your ratings update the taste-class probabilities. Ratings above or below what the classes predict also shift the forecasts for similar films. Similarity uses rating patterns and MovieLens tags.'
@@ -534,6 +582,7 @@ function update(ratings) {
     el('boards').replaceChildren();
     el('detail').hidden = true;
     el('weights').textContent = '';
+    el('choice-note').hidden = true;
     el('context').textContent = catalog.name;
     el('status').textContent = error.message;
   }
@@ -843,6 +892,7 @@ el('boards').onclick = (event) => {
   const inline = action.matches('.quick-rate');
   const btn = row?.querySelector('.rank') ?? action;
   selected = state.selection = btn.getAttribute('data-id');
+  state.followedSuggestions.add(selected);
   for (const b of el('boards').querySelectorAll('.rank[aria-pressed="true"]'))
     b.setAttribute('aria-pressed', 'false');
   for (const b of el('boards').querySelectorAll('.rank[data-id="' + CSS.escape(selected) + '"]'))
@@ -878,7 +928,7 @@ el('boards').onchange = (event) => {
   const height = row.offsetHeight;
   const id = row.dataset.id;
   const boardKey = list.dataset.key;
-  edit(entries.get(id), Number(radio.value));
+  edit(entries.get(id), Number(radio.value), true);
   const updated = el('boards').querySelector('.ranks[data-key="' + boardKey + '"]');
   if (!updated) {
     reveal(id);
@@ -914,7 +964,7 @@ el('boards').onchange = (event) => {
 select('model').onchange = () => {
   state.model = select('model').value;
   rebuildBaseline();
-  update(input('auto').checked ? state.draft : state.applied);
+  update(input('auto').checked);
 };
 function setCutoff(value) {
   state.threshold = value;
@@ -1065,19 +1115,28 @@ input('rating-file').onchange = async () => {
   input('rating-file').value = '';
   if (!f || !current) return;
   try {
-    const rows = importRatings(await f.text(), current.data);
+    const { ratings: rows, sources } = importRatingEntries(await f.text(), current.data);
     if (state !== current) return;
+    for (const id of Object.keys(rows)) {
+      state.draftSources[id] = sources[id] ?? state.draftSources[id] ?? 'unknown';
+    }
     Object.assign(state.draft, rows);
     rebuildBaseline();
     syncDraft();
-    if (input('auto').checked) update(state.draft);
+    if (input('auto').checked) update();
+    else if (result) renderBoards();
     if (result) el('status').textContent = 'Imported ' + Object.keys(rows).length + ' ratings.';
   } catch (e) {
     if (state === current) el('status').textContent = e.message;
   }
 };
 el('save-ratings').onclick = () => {
-  if (state) saveCSV(active + '-ratings.csv', ratingsCSV(catalog, state.draft));
+  if (!state) return;
+  const trackSources = Object.values(catalog.models).some((model) => model.titleChoice);
+  saveCSV(
+    active + '-ratings.csv',
+    ratingsCSV(catalog, state.draft, trackSources ? state.draftSources : null),
+  );
 };
 el('save-forecasts').onclick = () => {
   if (result) saveCSV(active + '-predictions.csv', forecastsCSV(catalog, result, state.model));

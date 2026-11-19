@@ -428,3 +428,75 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await app.close();
   }
 });
+
+test('volunteered and prompted film ratings keep their source through model switches, drafts and CSV', async () => {
+  const app = await openPage('media-ratings/');
+  const p = app.page;
+  try {
+    const model = p.locator('#model');
+    await p.locator('#library .entry').first().waitFor();
+    assert.equal(await model.inputValue(), 'ratingsTags');
+    const shelf = (id) => p.locator('#library .entry[data-id="' + id + '"]');
+    const source = (id) => p.locator('#rated-list .entry[data-id="' + id + '"] .rating-source');
+    const stars = (row, value) => row.getByRole('radio', { name: value + ' stars', exact: true }).click();
+    await stars(shelf('2571'), 5);
+    const prompt = p.locator('.info-row').first();
+    const suggested = await prompt.getAttribute('data-id');
+    await stars(prompt, 4);
+    await model.selectOption('titleChoice');
+    const note = p.locator('#choice-note');
+    assert.match(await note.innerText(), /picked 1 of 2/);
+    assert.equal(await source('2571').inputValue(), 'volunteered');
+    assert.equal(await source(suggested).inputValue(), 'suggested');
+    const rank = p.locator('[data-key=expected] .forecast-row').first();
+    const followed = await rank.getAttribute('data-id');
+    await rank.locator('.rank').click();
+    await stars(shelf(followed), 3);
+    assert.equal(await source(followed).inputValue(), 'suggested');
+    await stars(shelf(followed), 4);
+    assert.equal(await source(followed).inputValue(), 'suggested');
+    await p.locator('#auto').uncheck();
+    await source(followed).selectOption('volunteered');
+    await model.selectOption('latentClass');
+    assert.ok(await note.isHidden());
+    await model.selectOption('titleChoice');
+    assert.ok(await p.locator('#pending').isVisible());
+    assert.match(await note.innerText(), /picked 1 of 3/);
+    await p.locator('#apply').click();
+    assert.match(await note.innerText(), /picked 2 of 3/);
+    await p.locator('#exchange summary').click();
+    const download = p.waitForEvent('download');
+    await p.locator('#save-ratings').click();
+    const file = readFileSync(await (await download).path());
+    const load = (buffer) =>
+      p.locator('#rating-file').setInputFiles({ name: 'ratings.csv', mimeType: 'text/csv', buffer });
+    for (const id of [followed, suggested])
+      await p.locator('#rated-list .entry[data-id="' + id + '"] .clear').click();
+    await load(file);
+    await source(suggested).waitFor();
+    assert.equal(await source(suggested).inputValue(), 'suggested');
+    assert.equal(await source(followed).inputValue(), 'volunteered');
+    const legacy = await p.locator('[data-key=expected] .rank').first().getAttribute('data-id');
+    await load(Buffer.from('itemId,rating\n' + legacy + ',3\n2571,4\n'));
+    await source(legacy).waitFor();
+    assert.equal(await source(legacy).inputValue(), 'unknown');
+    assert.equal(await source('2571').inputValue(), 'volunteered');
+    await load(Buffer.from('itemId,rating,source\n2571,5,unknown\n' + legacy + ',5,typo\n'));
+    await p.locator('#status').getByText('Unknown rating source in row 3.').waitFor();
+    assert.equal(await source('2571').inputValue(), 'volunteered');
+    await p.locator('#auto').check();
+    assert.match(await note.innerText(), /picked 2 of 4/);
+    const quick = p.locator('[data-key=chance] .forecast-row').first();
+    const quickId = await quick.getAttribute('data-id');
+    await quick.locator('.quick-rate').click();
+    await stars(quick, 4);
+    assert.equal(await source(quickId).inputValue(), 'suggested');
+    await p.locator('#domains [data-key=stravl]').click();
+    await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
+    assert.equal(await model.locator('option[value=titleChoice]').count(), 0);
+    assert.ok(await note.isHidden());
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});

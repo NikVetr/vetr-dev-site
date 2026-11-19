@@ -1,14 +1,29 @@
 import { parseTable, serialize, stripFormulaGuard } from '../pocket-language-guide/core/csv.js';
 
-export function ratingsCSV(catalog, ratings) {
+export const ratingSources = {
+  volunteered: 'Picked by me',
+  suggested: 'App suggestion',
+  unknown: 'Unspecified',
+};
+
+export function ratingsCSV(catalog, ratings, sources = null) {
   return serialize(
-    ['catalog', 'itemId', 'title', 'rating'],
+    ['catalog', 'itemId', 'title', 'rating', ...(sources ? ['source'] : [])],
     catalog.items
       .filter((i) => Object.hasOwn(ratings, i.itemId))
-      .map((i) => ({ catalog: catalog.name, ...i, rating: String(ratings[i.itemId]) })),
+      .map((i) => ({
+        catalog: catalog.name,
+        ...i,
+        rating: String(ratings[i.itemId]),
+        source: sources?.[i.itemId] ?? 'unknown',
+      })),
   );
 }
 export function importRatings(text, catalog) {
+  return importRatingEntries(text, catalog).ratings;
+}
+export function importRatingEntries(text, catalog) {
+  const sources = Object.create(null);
   const entries = parseTable(text, 'Ratings CSV'),
     items = new Set(catalog.items.map((i) => i.itemId));
   if (!entries.length) throw new Error('Ratings CSV is empty.');
@@ -27,9 +42,15 @@ export function importRatings(text, catalog) {
       throw new Error(
         'Row ' + (i + 2) + ' requires a unique itemId and a rating on the current catalog scale.',
       );
+    const source = row.source?.trim();
+    if (source) {
+      if (!Object.hasOwn(ratingSources, source))
+        throw new Error('Unknown rating source in row ' + (i + 2) + '.');
+      sources[id] = source;
+    }
     ratings[id] = value;
   }
-  return ratings;
+  return { ratings, sources };
 }
 export function forecastsCSV(catalog, result, model) {
   const header = [

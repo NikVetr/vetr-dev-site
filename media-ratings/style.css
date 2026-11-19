@@ -1326,3 +1326,20 @@ body {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.source-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.source-label select {
+  font-size: inherit;
+  padding: 0.1rem 0.25rem;
+}
+#choice-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.25rem 0;
+}
