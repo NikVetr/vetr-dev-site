@@ -1920,7 +1920,7 @@ body {
   #boards.activity-boards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-#recipe-source { display: flex; align-items: center; gap: 0.55rem; margin-block-start: 0.45rem; font-size: 0.85rem; }
-#recipe-source[hidden] { display: none; }
+[data-source-domain] { display: flex; align-items: center; gap: 0.55rem; margin-block-start: 0.45rem; font-size: 0.85rem; }
+[data-source-domain][hidden] { display: none; }
 #library .rating-row, #library .entry.deferred::after { min-height: 1.6rem; }
 #library .entry.deferred::after { content: ""; display: block; }

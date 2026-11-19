@@ -55,3 +55,16 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/prepare_games.py 
 | edges | `791904ae2665540f8240e4d4abda64a904c7784c1a03c107f401064ad91ce7e2` |
 | games.parquet | `775b17f2a5a52b96a8441739cd0dd4939916335b6edeebbfc4a1b238388c5a77` |
 | metadata-old.parquet | `ca508f6240901d0d225228e8d3efb8a18833d06a0af0e1374128f080bd4842e9` |
+
+## Metacritic player scores
+
+The Game ratings menu also offers 180 titles scored from 0 to 10. The two game sources keep independent answers. Wada1's Metacritic snapshot contains 260,768 reviews for 200 game titles. We group by source title across platforms, count each exact reviewer alias once per title, omit conflicting scores for the same pair, and require 20 distinct reviewers per title. A zero is an explicit score. An unreviewed game has no score. The resulting fit uses 255,386 scores from 178,833 reviewers. The platform filter identifies platforms reviewed in this snapshot. Remasters with separate source titles keep separate entries. [Metacritic data and attribution](https://huggingface.co/datasets/Wada1/Metacritic_Games_Reviews_Dataset/tree/9109e48069fe4509421b71a98c7b6ef104253913)
+
+Three-fold validation over held-out reviewers chose four taste classes from 1, 2, 4, 8 and 16. After four supplied scores, the model predicted 3,744 further scores from 978 separate test reviewers. Mean reviewer log loss fell from 1.8761 for game-specific frequencies to 1.7106, and RMSE fell from 2.623 to 2.448 on the 0–10 scale. These results apply to posted scores by people who reviewed at least five catalog titles. [Validation results](validation/metacritic.json)
+
+To reproduce the catalog and aggregate co-ratings, use the same Python environment as the Steam fit. The Parquet file has SHA-256 `ea4d4163e20f63e2d088a9014bd3b960ae0e203dedf88aa7076dbfd85c6fd18a`. The source release is attributed to Wada1 under CC BY 4.0. The public artifacts contain fitted probabilities and aggregate counts. [License](https://creativecommons.org/licenses/by/4.0/)
+
+```sh
+curl -fL https://huggingface.co/datasets/Wada1/Metacritic_Games_Reviews_Dataset/resolve/9109e48069fe4509421b71a98c7b6ef104253913/data/train-00000-of-00001.parquet -o "$game_dir/metacritic.parquet"
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/prepare_metacritic.py "$game_dir/metacritic.parquet" media-ratings
+```

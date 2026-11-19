@@ -896,3 +896,30 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
     await app.close();
   }
 });
+
+test('Metacritic scores include both endpoints and stay separate from Steam votes', async () => {
+  const app = await openPage('media-ratings/', { width: 390, height: 844 });
+  const p = app.page;
+  try {
+    await p.locator('#domains [data-key="games"]').click();
+    await p.getByRole('heading', { name: 'Chance of thumbs up' }).waitFor();
+    await p.locator('#game-dataset').selectOption('metacritic');
+    await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
+    await p.locator('#quick-session').click();
+    assert.equal(await p.locator('#rapid-values button').count(), 11);
+    assert.equal(await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'), 'Rate 5');
+    await p.keyboard.press('0');
+    await p.keyboard.press('Shift+Digit0');
+    await p.locator('#rapid-rating form button').click();
+    const values = () => p.locator('#rated-list input:checked').evaluateAll(inputs => inputs.map(input => input.value).sort());
+    assert.deepEqual(await values(), ['0', '10']);
+    await p.locator('#comparison .heat').waitFor();
+    await p.locator('#game-dataset').selectOption('games');
+    await p.getByRole('heading', { name: 'Chance of thumbs up' }).waitFor();
+    assert.deepEqual(await values(), []);
+    await p.locator('#game-dataset').selectOption('metacritic');
+    await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
+    assert.deepEqual(await values(), ['0', '10']);
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});

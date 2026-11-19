@@ -140,20 +140,29 @@ function revealCatalogButton() {
   else if (button.right > bounds.right) nav.scrollLeft += button.right - bounds.right;
 }
 new ResizeObserver(revealCatalogButton).observe(el('domains'));
+const sourceMenus = [...document.querySelectorAll('[data-source-domain] > select')]
+  .filter(menu => menu instanceof HTMLSelectElement);
 function install(key, next) {
   active = key;
   state = next;
   catalog = state.data;
   selected = state.selection;
   titles = new Map(catalog.items.map((it) => [it.itemId, titleOf(it)]));
+  let domain = key;
+  for (const menu of sourceMenus) {
+    const label = menu.parentElement;
+    label.hidden = ![...menu.options].some(option => option.value === key);
+    if (!label.hidden) {
+      menu.value = key;
+      domain = label.dataset.sourceDomain;
+    }
+  }
   for (const btn of el('domains').querySelectorAll('button'))
-    btn.setAttribute('aria-pressed', String(btn.dataset.key === (key === 'recipes' ? 'food' : key)));
+    btn.setAttribute('aria-pressed', String(btn.dataset.key === domain));
   el('domains')
     .querySelector('button[aria-pressed=true]')
     .setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
   revealCatalogButton();
-  el('recipe-source').hidden = !['food', 'recipes'].includes(key);
-  if (!el('recipe-source').hidden) select('recipe-dataset').value = key;
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
       .filter(
@@ -1437,9 +1446,12 @@ async function openCatalog(key, file = null) {
 }
 el('domains').onclick = (event) => {
   const btn = /** @type {HTMLElement} */ (event.target).closest('[data-key]');
-  if (btn instanceof HTMLButtonElement) void openCatalog(btn.dataset.key);
+  if (btn instanceof HTMLButtonElement) {
+    const menu = sourceMenus.find(menu => menu.parentElement.dataset.sourceDomain === btn.dataset.key);
+    void openCatalog(menu?.value ?? btn.dataset.key);
+  }
 };
-select('recipe-dataset').onchange = () => void openCatalog(select('recipe-dataset').value);
+for (const menu of sourceMenus) menu.onchange = () => void openCatalog(menu.value);
 input('file').onchange = () => {
   const f = input('file').files[0];
   input('file').value = '';

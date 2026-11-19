@@ -1,6 +1,6 @@
 # Fitting and using rating catalogs
 
-**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between fourteen domains. Recipes offers both Food.com and Taste of Home. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV, books, anime, podcasts, albums, tabletop games, recipes and cocktails use their source rating scales. Video games use explicit Steam thumbs-up and thumbs-down reviews. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies.
+**Films** opens 500 titles with **Title choice + rating year** as the default predictor. The header switches between fourteen domains. Recipes offers both Food.com and Taste of Home. **Destinations** includes 1,419 places rated No, Maybe or Yes. TV, books, anime, podcasts, albums, tabletop games, recipes and cocktails use their source rating scales. Video games offer Steam thumbs and Metacritic player scores from 0 to 10. Fanfiction and original web fiction predict public AO3 kudos. Subreddits predict recorded replies.
 
 Rate a film in half-star increments. The main shelf keeps every title, including ones you have rated. Your rated shelf gives you a second, synchronized place to edit those answers. Search and sort the full catalog on the left. Use **Filters** by the prediction model to narrow recommendations. Select multiple alternatives within a field and combine fields. Dated catalogs also offer an inclusive year range. Enable **Also filter items to rate** to narrow All titles, Quick rate and Most informative to rate. Already rated always shows all your answers. Every supplied rating still contributes to predictions. Drag the divider, or focus it and use the arrow keys, to give either shelf more space. With **Auto-update** off, use **Update predictions** to apply your edits.
 
@@ -110,7 +110,7 @@ The earlier 12-place catalog is available for reproducing the ordinal and geogra
 
 ### Video games, albums, podcasts and tabletop games
 
-The video game catalog covers 1,136 Steam games using all 16,654,154 eligible thumbs-up and thumbs-down reviews. The 2,057 albums, 3,670 podcasts and 1,095 tabletop games use individual one-to-five-star reviews. Filter albums by artist or genre, podcasts by topic, and tabletop products by game type. [Steam selection and validation](game-catalog.md) · [Album and tabletop sources and validation](album-tabletop-catalogs.md) · [Podcast source and validation](podcast-catalog.md)
+The Video games tab offers 1,136 Steam games with 16,654,154 thumbs-up or thumbs-down reviews and 180 Metacritic games with 255,386 player scores on a 0–10 scale. Each source keeps its own ratings and predictions. The 2,057 albums, 3,670 podcasts and 1,095 tabletop games use individual one-to-five-star reviews. Filter albums by artist or genre, podcasts by topic, and tabletop products by game type. [Video game sources and validation](game-catalog.md) · [Album and tabletop sources and validation](album-tabletop-catalogs.md) · [Podcast source and validation](podcast-catalog.md)
 
 ### TV shows, cocktails and online communities
 

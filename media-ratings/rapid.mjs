@@ -3,6 +3,8 @@ import { recognitionFor } from './recognition.mjs';
 
 function shortcuts(scale, stars) {
   if (stars) return scale.map((v) => ({ digit: Math.ceil(v), shift: !Number.isInteger(v) }));
+  if (scale.length === 11 && scale.every((v, i) => v === i))
+    return scale.map(v => ({ digit: v % 10, shift: v === 10 }));
   const sameValue = scale.every((v) => Number.isInteger(v) && v >= 0 && v <= 9);
   return scale.map((v, i) => ({ digit: sameValue ? v : i < 10 ? (i + 1) % 10 : null, shift: false }));
 }

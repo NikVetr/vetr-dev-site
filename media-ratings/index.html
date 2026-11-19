@@ -44,8 +44,11 @@
             <h2>Your ratings</h2>
             <button id="quick-session" disabled>Quick rate</button>
           </div>
-          <label id="recipe-source" hidden>Recipe catalog
+          <label data-source-domain="food" id="recipe-source" hidden>Recipe catalog
             <select id="recipe-dataset"><option value="food">Food.com</option><option value="recipes">Taste of Home</option></select>
+          </label>
+          <label data-source-domain="games" hidden>Game ratings
+            <select id="game-dataset"><option value="games">Steam · thumbs up or down</option><option value="metacritic">Metacritic · 0–10</option></select>
           </label>
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />

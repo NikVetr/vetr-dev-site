@@ -1,0 +1,66 @@
+{
+  "model": "latentClass",
+  "metric": "user-mean category log loss",
+  "folds": 3,
+  "validationUsers": 3998,
+  "testUsers": 978,
+  "testRatings": 3744,
+  "cv": [
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 1.7392454262581278,
+      "rmse": 2.468891437982709,
+      "brier": 0.16765171126457581
+    },
+    {
+      "label": "Latent class, K=8",
+      "logLoss": 1.7433368330681869,
+      "rmse": 2.470071525836858,
+      "brier": 0.16837566237209362
+    },
+    {
+      "label": "Latent class, K=16",
+      "logLoss": 1.7474906746002623,
+      "rmse": 2.487272586476314,
+      "brier": 0.17023126325058838
+    },
+    {
+      "label": "Latent class, K=2",
+      "logLoss": 1.765253448510586,
+      "rmse": 2.5908643827333018,
+      "brier": 0.1793365153004995
+    },
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 1.8670005250276078,
+      "rmse": 2.6246191902251614,
+      "brier": 0.18083818444466648
+    }
+  ],
+  "holdout": [
+    {
+      "label": "Latent class, K=1",
+      "logLoss": 1.876062864801229,
+      "rmse": 2.622664522664513,
+      "brier": 0.17552435112173126
+    },
+    {
+      "label": "Latent class, K=4",
+      "logLoss": 1.7106106239904175,
+      "rmse": 2.447794897799321,
+      "brier": 0.1615648833478124
+    }
+  ],
+  "selectedK": 4,
+  "cvPoolUsers": 143067,
+  "developmentUsers": 143067,
+  "suppliedRatings": 4,
+  "maxTargetRatings": 12,
+  "brierThreshold": 8.0,
+  "finalFit": {
+    "users": 178833,
+    "ratings": 255386,
+    "iterations": 102,
+    "seed": 42
+  }
+}
