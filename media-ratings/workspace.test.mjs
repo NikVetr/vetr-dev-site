@@ -1018,3 +1018,37 @@ test('quick rate and selected recommendations share credited artwork and context
     assert.deepEqual(session.errors, []);
   } finally { await session.close(); }
 });
+
+test('Royal Road Kindle editions have a separate whole-star shelf, serial links and co-rating evidence', async () => {
+  const app = await openPage('media-ratings/?catalog=royalroad-kindle');
+  const { page } = app;
+  const catalog = JSON.parse(readFileSync(new URL('royalroad-kindle.json', import.meta.url), 'utf8'));
+  try {
+    const source = page.locator('#webfiction-dataset');
+    await page.locator('#domains [data-key=webfiction][aria-pressed=true]').waitFor();
+    assert.equal(await source.inputValue(), 'royalroad-kindle');
+    assert.equal(await page.locator('#library .entry').count(), catalog.items.length);
+    const first = page.locator('[data-key=expected] .rank').first();
+    await first.click();
+    const id = await first.getAttribute('data-id');
+    const ann = catalog.items.find(it => it.itemId === id).annotations;
+    assert.equal(await page.locator('#item-links').getByRole('link', { name: /^Royal Road/ }).getAttribute('href'), ann.royalRoadUrl);
+    assert.equal(await page.locator('#external').getAttribute('href'), ann.sourceUrl);
+    await page.locator('#quick-session').click();
+    const quick = page.locator('#rapid-rating');
+    assert.equal(await quick.locator('#rapid-values button').count(), 5);
+    assert.match(await quick.getByRole('link', { name: /^Royal Road/ }).getAttribute('href'), /^https:\/\/www\.royalroad\.com\/fiction\/\d+$/);
+    await quick.getByRole('button', { name: 'Rate 4 ★', exact: true }).click();
+    await quick.locator('form button').click();
+    await page.locator('#rated-list .entry').waitFor();
+    await page.locator('#comparison select').waitFor();
+    assert.equal(await page.locator('#axes .axis-row').count(), catalog.models[catalog.defaultModel].components.length - 1);
+    await source.selectOption('webfiction');
+    await page.waitForURL(/catalog=webfiction/);
+    assert.equal(await page.locator('#rated-list .entry').count(), 0);
+    await page.goBack();
+    await page.locator('#rated-list .entry').waitFor();
+    assert.equal(await source.inputValue(), 'royalroad-kindle');
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});

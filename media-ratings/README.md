@@ -120,7 +120,7 @@ The 383 TV shows use MovieLens ratings linked to series by IMDb ID. The 1,777 co
 
 Fanfiction and original web fiction use public AO3 kudos. A work can lack kudos because the reader never saw it. The joint fanfiction model covers 10,466 works, with at least 200 works available in 42 of its 56 fandoms. Search the Fandom filter to see counts and select one or more. Ratings from other fandoms still inform the recommendations. Original web fiction covers 320 works. [Source, selection and held-out evaluation](ao3-catalogs.md)
 
-For Royal Road, an offline importer can fit a catalog from individual half-star reviews. [Sources, data requirements and import instructions](royalroad-data.md)
+**Web fiction → Royal Road · Kindle edition stars** forecasts whole-star ratings for Kindle editions linked to Royal Road serials. Each entry links to the publication and the serial. The AO3 option uses kudos and maintains its own rating shelf. A separate offline importer fits native Royal Road half-star reviews when an authorized review export is available. [Sources, data requirements and import instructions](royalroad-data.md)
 
 Subreddits model whether an active account recorded a reply in one of 500 communities in a four-week period in 2014. The highest-probability ranking and both change rankings use this binary event. [Reddit data and validation](subreddit-catalog.md)
 

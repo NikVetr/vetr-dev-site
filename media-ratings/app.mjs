@@ -1463,6 +1463,7 @@ async function openCatalog(key, file = null, replace = false) {
               {
                 label: it.annotations.linkLabel ?? data.linkLabel ?? data.sourceLabel,
                 sourceUrl: it.annotations.sourceUrl,
+                royalRoad: /^https:\/\/www\.royalroad\.com\/fiction\/[1-9]\d*$/.test(it.annotations.royalRoadUrl) ? it.annotations.royalRoadUrl : null,
                 imageUrl: it.annotations.imageUrl?.startsWith('https://') ? it.annotations.imageUrl : null,
               },
             ]),

@@ -380,6 +380,7 @@ export function showDetail({
   const links = el('item-links');
   links.replaceChildren(link);
   for (const [key, label] of [
+    ['royalRoad', 'Royal Road'],
     ['rottenTomatoes', 'Rotten Tomatoes'],
     ['wikipedia', 'Wikipedia'],
     ['googleMaps', 'Google Maps'],

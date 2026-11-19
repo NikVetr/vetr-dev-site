@@ -95,6 +95,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
       : '';
     if (!item) return;
     if (reference?.sourceUrl) article.append(link(reference.label + ' ↗', reference.sourceUrl));
+    if (reference?.royalRoad) article.append(link('Royal Road ↗', reference.royalRoad));
     if (reference?.wikipedia) article.append(link('Wikipedia ↗', reference.wikipedia));
   }
   function accept(i) {

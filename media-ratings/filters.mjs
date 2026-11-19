@@ -17,7 +17,7 @@ export function recommendationFilters(catalog, facets) {
   }
   const minYear = Math.min(...years.values()),
     maxYear = Math.max(...years.values());
-  const yearLabel = ['recipes', 'books', 'cocktails', 'fanfiction', 'webfiction'].includes(catalog.domain)
+  const yearLabel = ['recipes', 'books', 'cocktails', 'fanfiction', 'webfiction', 'royalroad'].includes(catalog.domain)
     ? 'Publication year'
     : 'Release year';
   const blank = () => ({ choices: new Map(), years: null, forRating: false });

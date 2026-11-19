@@ -273,6 +273,7 @@ export function renderTaste(
       cocktails: 'Cocktail preference',
       fanfiction: 'Fanfiction kudos',
       webfiction: 'Web fiction kudos',
+      royalroad: 'Web fiction preference',
       subreddits: 'Community activity',
     }[domain] ?? 'Preference';
   document.getElementById('projection-title').textContent = domainTitle + ' fingerprint';
