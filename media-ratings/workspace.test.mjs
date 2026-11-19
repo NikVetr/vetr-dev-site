@@ -65,7 +65,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       expected: (p) => p.expected,
       chance: (p) => p.chance,
       ratingChange: (p) => p.shift,
-      rankChange: (p) => Math.abs(places.get(p.itemId).change),
+      rankChange: (p) => places.get(p.itemId).change,
 
       precision: (p) => p.expected / Math.max(0.01, p.sd ** 2),
     };
@@ -152,7 +152,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       );
     assert.ok(await choicesFitOneLine());
     await page.locator('#domains [data-key=expanded]').click();
-    assert.equal(await page.locator('#rated-count').innerText(), '1 / 500 rated');
+    assert.equal(await page.locator('#rated-count').innerText(), '1 / 500');
     assert.ok(await choicesFitOneLine());
     await page.locator('#search').fill('Shawshank');
     assert.equal(await page.locator('#library .entry:visible').count(), 1);
@@ -207,7 +207,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       .locator('#status')
       .getByText(/Could not open catalog/)
       .waitFor();
-    assert.equal(await page.locator('#rated-count').innerText(), '2 / 2 rated');
+    assert.equal(await page.locator('#rated-count').innerText(), '2 / 2');
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -219,7 +219,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
   const p = app.page;
   try {
     await p.locator('#library .entry').first().waitFor();
-    assert.equal(await p.locator('#model').inputValue(), 'ratingsTags');
+    assert.equal(await p.locator('#model').inputValue(), 'personalized');
     assert.equal(await p.locator('#library .entry').count(), 500);
     await p.locator('.ranks[data-key=expected] .rank[data-id="50"]').click();
     assert.equal(
@@ -258,10 +258,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     assert.equal(await p.locator('#library .entry').count(), 500);
     const changeBoard = p.locator('[data-key=ratingChange]');
     if (!(await changeBoard.locator('.rank').count()))
-      await p
-        .getByRole('group', { name: 'Rating change direction' })
-        .getByRole('button', { name: 'Biggest falls' })
-        .click();
+      await p.getByRole('button', { name: 'Rating change: biggest gains. Show falls' }).click();
     const shift = changeBoard.locator('.forecast-row').first();
     const target = await shift.getAttribute('data-id');
     assert.match(await shift.locator('.score').innerText(), /\d+\.\d{2} → \d+\.\d{2} \([+-]\d+\.\d{2}\)/);
@@ -309,7 +306,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#model').selectOption('latentClass');
     assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
     assert.match(await p.locator('#axes').innerText(), /between-class variance/);
-    await p.locator('#model').selectOption('ratingsTags');
+    await p.locator('#model').selectOption('personalized');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), hybrid);
     assert.match(await p.locator('#formula').innerText(), /similar films/);
     await p.locator('#model').selectOption('reference');
@@ -365,27 +362,27 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     assert.ok(await metric.evaluate((e) => e === document.activeElement));
     const cutoffHeading = p.locator('h3:has(#threshold)');
     assert.match(await cutoffHeading.innerText(), /Chance of ≥\s*\(4\)/);
+    await p.locator('#model').selectOption('ratingsTags'); // Reproduce the all-rising two-film baseline.
     for (const id of ['2571', '5618'])
       await p
         .locator('#library .entry[data-id="' + id + '"]')
         .getByRole('radio', { name: '5 stars', exact: true })
         .check();
-    const direction = (panel, name) =>
-      p.getByRole('group', { name: panel + ' direction' }).getByRole('button', { name });
-    assert.equal(await direction('Rating change', 'Biggest gains').getAttribute('aria-pressed'), 'true');
+    const direction = (panel) => p.getByRole('button', { name: new RegExp('^' + panel + ': biggest') });
+    assert.equal(await direction('Rating change').getAttribute('data-direction'), 'up');
     assert.equal(await p.locator('[data-key=ratingChange] .rank').count(), 498);
-    await direction('Rating change', 'Biggest falls').click();
+    await direction('Rating change').click();
     assert.match(
       await p.locator('[data-key=ratingChange] .note').innerText(),
       /All 498 predicted ratings rose/,
     );
-    await direction('Rank change', 'Biggest falls').click();
+    await direction('Rank change').click();
     assert.equal(await p.locator('[data-key=rankChange] .rank').count(), 237);
     assert.match(
       await p.locator('[data-key=rankChange] .forecast-row .score').first().innerText(),
       /^#\d+ → #\d+ \(-\d+\)$/,
     );
-    await direction('Rating change', 'Biggest gains').click();
+    await direction('Rating change').click();
     const horizontal = p.getByLabel('Horizontal principal component');
     const vertical = p.getByLabel('Vertical principal component');
     assert.equal(await horizontal.locator('option').count(), 7);
@@ -401,6 +398,7 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await p.locator('#axes summary').first().click();
     assert.ok(await p.locator('#axes details').first().locator('li').first().isVisible());
     await center.uncheck();
+    await p.locator('#profile-method summary').click();
     const member = p.locator('#memberships button[data-class-index="2"]');
     await member.hover();
     assert.match(await p.locator('#class-signature').innerText(), /Most distinctive answer/);
@@ -442,7 +440,8 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
       .getByLabel('Filter catalog and rankings by annotation')
       .selectOption('Production budget/$100M to <$500M');
     assert.ok((await p.locator('#library .entry:visible').count()) > 0);
-    assert.match(await p.locator('#annotations').innerText(), /production budget/);
+    await p.locator('#more-metadata summary').click();
+    assert.match(await p.locator('#more-metadata dl').innerText(), /Production budget/);
     await p.locator('#domains [data-key=stravl]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
     assert.ok(await familiar.isChecked());
@@ -466,7 +465,8 @@ test('volunteered and prompted film ratings keep their source through model swit
   try {
     const model = p.locator('#model');
     await p.locator('#library .entry').first().waitFor();
-    assert.equal(await model.inputValue(), 'ratingsTags');
+    assert.equal(await model.inputValue(), 'personalized');
+    await model.selectOption('ratingsTags');
     const shelf = (id) => p.locator('#library .entry[data-id="' + id + '"]');
     const source = (id) => p.locator('#rated-list .entry[data-id="' + id + '"] .rating-source');
     const stars = (row, value) => row.getByRole('radio', { name: value + ' stars', exact: true }).click();
@@ -474,7 +474,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     const prompt = p.locator('.info-row').first();
     const suggested = await prompt.getAttribute('data-id');
     await stars(prompt, 4);
-    await model.selectOption('titleChoice');
+    await model.selectOption('personalized');
     const note = p.locator('#choice-note');
     assert.match(await note.innerText(), /picked 1 of 2/);
     assert.equal(await source('2571').inputValue(), 'volunteered');
@@ -490,7 +490,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     await source(followed).selectOption('volunteered');
     await model.selectOption('latentClass');
     assert.ok(await note.isHidden());
-    await model.selectOption('titleChoice');
+    await model.selectOption('personalized');
     assert.ok(await p.locator('#pending').isVisible());
     assert.match(await note.innerText(), /picked 1 of 3/);
     await p.locator('#apply').click();
@@ -545,11 +545,12 @@ test('dated ratings round-trip and update the catalog prior, rankings and editab
       .locator('#library .entry[data-id="2571"]')
       .getByRole('radio', { name: '5 stars', exact: true })
       .click();
-    await model.selectOption('ratingYear');
+    await model.selectOption('personalized');
     assert.equal(
       await rated('2571').locator('.rating-date').inputValue(),
       new Date().toISOString().slice(0, 10),
     );
+    await rated('2571').locator('.rating-source').selectOption('suggested'); // Isolate the calendar contribution.
     await p.locator('#auto').uncheck();
     await rated('2571').locator('.rating-date').fill('2000-04-05');
     const note = p.locator('#choice-note');
@@ -597,6 +598,70 @@ test('dated ratings round-trip and update the catalog prior, rankings and editab
     await model.selectOption('ratingsTags');
     assert.equal(await p.locator('[data-key=expected] .forecast-row').first().innerText(), undated);
     assert.equal(await p.locator('.rating-date').count(), 0);
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});
+
+test('quick rating uses the active shelf, supports undo and attributes prompted answers correctly', async () => {
+  const app = await openPage('media-ratings/');
+  const p = app.page;
+  try {
+    const card = p.locator('#rapid-card'),
+      dialog = p.locator('#rapid-rating');
+    const start = p.getByRole('button', { name: 'Quick rate', exact: true });
+    const rated = (id) => p.locator('#rated-list .entry[data-id="' + id + '"]');
+    await p.locator('.info-row').first().waitFor();
+    await p.locator('#facet').selectOption('Release year/1999');
+    const first = await p.locator('.info-row').first().getAttribute('data-id');
+    await p.locator('#auto').uncheck();
+    await start.click();
+    assert.equal(await p.locator('#rapid-order').inputValue(), 'familiarInfo');
+    assert.equal(await card.getAttribute('data-id'), first);
+    await p.keyboard.press('Shift+Digit4');
+    const second = await card.getAttribute('data-id');
+    assert.notEqual(first, second);
+    await p.keyboard.press('s');
+    assert.notEqual(await card.getAttribute('data-id'), second);
+    await p.keyboard.press('b');
+    assert.equal(await card.getAttribute('data-id'), second);
+    await p.keyboard.press('Backspace');
+    assert.equal(await card.getAttribute('data-id'), first);
+    await p.keyboard.press('ArrowRight'); // Revise the previous 3.5 to four stars.
+    await p.keyboard.press('Enter');
+    await p.locator('#rapid-order').selectOption('title');
+    const alphabetical = await card.getAttribute('data-id');
+    await p.keyboard.press('1');
+    await p.keyboard.press('Escape');
+    await dialog.waitFor({ state: 'hidden' });
+    assert.equal(await rated(first).locator('input:checked').inputValue(), '4');
+    assert.equal(await rated(alphabetical).locator('input:checked').inputValue(), '1');
+    assert.equal(await rated(first).locator('.rating-source').inputValue(), 'suggested');
+    assert.equal(
+      await rated(first).locator('.rating-date').inputValue(),
+      new Date().toISOString().slice(0, 10),
+    );
+    assert.equal(await p.locator('#profile-count').innerText(), 'Catalog baseline');
+    await p.locator('#apply').click();
+    assert.equal(await p.locator('#profile-count').innerText(), '2 applied ratings');
+    assert.ok((await p.locator('#rated-list input:checked').count()) === 2);
+    await p.locator('#clear-all').click();
+    assert.equal(await p.locator('#rated-list .entry').count(), 0);
+    assert.ok(await p.locator('#pending').isVisible());
+    await p.locator('#clear-all').click();
+    assert.equal(await rated(first).locator('.rating-source').inputValue(), 'suggested');
+    assert.ok(await p.locator('#pending').isHidden());
+    await p.locator('#domains [data-key=stravl]').click();
+    await p.getByRole('heading', { name: 'City preference fingerprint' }).waitFor();
+    await start.click();
+    assert.equal(await dialog.locator('#rapid-values button').count(), 3);
+    for (let i = 0; i < 12; i++) await p.keyboard.press('s');
+    assert.ok(await dialog.getByText('You’ve reached the end').isVisible());
+    await dialog.locator('#rapid-back').click();
+    await dialog.getByRole('button', { name: 'Rate Yes', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Done', exact: true }).click();
+    assert.equal(await p.locator('#rated-list input:checked').inputValue(), '2');
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();

@@ -74,98 +74,169 @@ function membershipPanel(fp, bind) {
     membership.append(row);
   }
 }
-function classDetails(fp, catalog, inspected, pinned) {
+function classDetails(fp, catalog, inspected, pinned, ratings, baseline) {
   const signature = document.getElementById('class-signature');
-  const title = inspected
-    ? pinned
-      ? 'Pinned class'
-      : 'Class details'
-    : fp.match
-      ? 'Closest class'
-      : 'Class match';
-  signature.replaceChildren(html('h3', title));
-  const shown = inspected ?? fp.match;
-  if (shown) {
-    const heading = html('strong', shown.label);
-    heading.className = 'match-name';
-    const p = html(
-      'p',
-      'Class ' +
-        (shown.index + 1) +
-        ' · ' +
-        (100 * shown.prior).toFixed(1) +
-        '% in catalog' +
-        (fp.ratedCount ? ' → ' + (100 * shown.probability).toFixed(1) + '% for you' : ''),
-    );
-    signature.append(heading, p);
-  } else {
-    const text =
-      fp.classes.length === 1
-        ? 'Single-component model'
-        : fp.ratedCount
-          ? 'Tied class probabilities'
-          : 'Rate an entry to find your class.';
-    signature.append(html('p', text));
-  }
-  const dist = html('div');
-  dist.className = 'class-stats';
-  const metric = (label, value) => {
-    const tile = html('div');
-    tile.append(html('span', label), html('b', value));
-    dist.append(tile);
-  };
-  const mass = inspected?.mass ?? fp.mass;
-  metric(inspected ? 'Class mean' : 'Class-weighted mean', (inspected?.mean ?? fp.mean).toFixed(2));
-  metric('Catalog mean', fp.populationMean.toFixed(2));
-  if (fp.usesHalfStars)
-    metric(
-      'Half-star use',
-      Math.round(100 * mass.reduce((sum, v, i) => sum + (Number.isInteger(catalog.scale[i]) ? 0 : v), 0)) +
-        '%',
-    );
-  else
-    metric(
-      'Chance of ' + (catalog.scaleLabels?.at(-1) ?? catalog.scale.at(-1)),
-      Math.round(100 * mass.at(-1)) + '%',
-    );
-  signature.append(dist);
-  if (inspected) {
-    const signal = inspected.signal;
-    if (signal) {
-      const answer = catalog.scaleLabels?.[catalog.scale.indexOf(signal.value)] ?? signal.value;
+  if (!inspected) {
+    signature.replaceChildren(html('h3', 'How you rate'));
+    const supplied = Object.entries(ratings);
+    if (!supplied.length) {
       signature.append(
-        html('h4', 'Most distinctive answer'),
-        html(
-          'p',
-          signal.title +
-            ' · ' +
-            answer +
-            '. This answer is ' +
-            Number(signal.ratio.toPrecision(2)) +
-            '× as likely in this class as in the catalog.',
-        ),
+        html('p', 'Your answers will appear here alongside the catalog’s scores for the same titles.'),
       );
+      return;
     }
+    const average = (sum) => (sum / supplied.length).toFixed(2);
+    const stats = html('div');
+    stats.className = 'class-stats';
+    for (const [label, value] of [
+      ['Your average', average(supplied.reduce((sum, [, v]) => sum + v, 0))],
+      ['Same titles, catalog', average(supplied.reduce((sum, [id]) => sum + baseline.get(id).prior, 0))],
+    ]) {
+      const tile = html('div');
+      tile.append(html('span', label), html('b', value));
+      stats.append(tile);
+    }
+    signature.append(stats);
+    const counts = catalog.scale.map((v) => supplied.filter(([, score]) => score === v).length);
+    const chart = html('div');
+    chart.className = 'answer-distribution';
+    chart.setAttribute('role', 'img');
+    const labels = counts.map(
+      (n, i) =>
+        (catalog.scaleLabels?.[i] ?? catalog.scale[i]) + ' · ' + n + (n === 1 ? ' rating' : ' ratings'),
+    );
+    chart.setAttribute('aria-label', labels.join(', '));
+    const max = Math.max(...counts);
+    counts.forEach((n, i) => {
+      const col = html('span');
+      col.title = labels[i];
+      const bar = html('i');
+      bar.style.height = (n / max) * 100 + '%';
+      col.append(bar);
+      chart.append(col);
+    });
+    signature.append(chart);
+    const ends = html('div');
+    ends.className = 'scale-ends';
+    ends.append(
+      html('span', String(catalog.scaleLabels?.[0] ?? catalog.scale[0])),
+      html('span', String(catalog.scaleLabels?.at(-1) ?? catalog.scale.at(-1))),
+    );
+    signature.append(ends);
     return;
   }
-  if (
-    fp.ratedCount &&
-    fp.affinities.length > 1 &&
-    fp.affinities[0].shift - fp.affinities.at(-1).shift >= 0.01
-  ) {
-    const group = html('div');
-    group.className = 'class-affinities';
-    group.append(html('h4', 'Relative affinities'));
-    for (const a of [fp.affinities[0], fp.affinities.at(-1)]) {
-      const row = html('div');
-      row.append(html('span', a.label), html('b', signedValue(a.shift)));
-      row.title = 'Average shift for ' + a.count + ' entries, centered on the catalog-wide shift';
-      group.append(row);
-    }
-    signature.append(group);
+  signature.replaceChildren(html('h3', pinned ? 'Pinned class' : 'Class details'));
+  const heading = html('strong', inspected.label);
+  heading.className = 'match-name';
+  signature.append(
+    heading,
+    html(
+      'p',
+      'Class ' +
+        (inspected.index + 1) +
+        ' · ' +
+        (100 * inspected.prior).toFixed(1) +
+        '% in catalog' +
+        (fp.ratedCount ? ' → ' + (100 * inspected.probability).toFixed(1) + '% for you' : ''),
+    ),
+  );
+  if (inspected.signal) {
+    const { title, value, ratio } = inspected.signal;
+    const answer = catalog.scaleLabels?.[catalog.scale.indexOf(value)] ?? value;
+    signature.append(
+      html('h4', 'Most distinctive answer'),
+      html(
+        'p',
+        title +
+          ' · ' +
+          answer +
+          '. This answer is ' +
+          Number(ratio.toPrecision(2)) +
+          '× as likely in this class as in the catalog.',
+      ),
+    );
   }
 }
-export function renderTaste(profile, catalog, fp, domain, prefs, onAxesChange) {
+
+// Compare the same unrated items on both sides, centering out a person's general rating level.
+function tastePatterns(catalog, predictions, count) {
+  const host = document.getElementById('taste-patterns');
+  const films = catalog.items.some((it) => it.annotations?.genres?.length);
+  const regions = catalog.items.some((it) => it.annotations?.region);
+  host.replaceChildren(
+    html('h3', films ? 'Genre preferences' : regions ? 'Regional preferences' : 'Forecast changes'),
+  );
+  if (!count || !predictions.length) {
+    host.append(
+      html(
+        'p',
+        count ? 'All entries have been rated.' : 'Rate a few entries to see which preferences emerge.',
+      ),
+    );
+    return;
+  }
+  const byId = new Map(predictions.map((p) => [p.itemId, p]));
+  const overall = predictions.reduce((sum, p) => sum + p.shift, 0) / predictions.length;
+  const groups = new Map();
+  for (const it of catalog.items) {
+    const p = byId.get(it.itemId);
+    if (!p) continue;
+    const labels = it.annotations?.genres ?? (it.annotations?.region ? [it.annotations.region] : []);
+    for (const k of new Set(labels)) {
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(p);
+    }
+  }
+  const summaries = [];
+  for (const [label, rows] of groups) {
+    if (rows.length < (catalog.items.length >= 100 ? 10 : 2) || rows.length === predictions.length) continue;
+    const shift = rows.reduce((sum, p) => sum + p.shift, 0) / rows.length;
+    const example = rows.reduce((a, b) => (Math.abs(a.shift - shift) <= Math.abs(b.shift - shift) ? a : b));
+    summaries.push({ label, change: shift - overall, example: example.title });
+  }
+  const grouped = summaries.length > 1;
+  if (!grouped) {
+    host.firstElementChild.textContent = 'Forecast changes';
+    summaries.length = 0;
+    for (const p of predictions) summaries.push({ label: p.title, change: p.shift, example: '' });
+  }
+  summaries.sort((a, b) => b.change - a.change);
+  const extremes = [summaries[0], summaries.at(-1)].filter(
+    (v, i) => v && (i === 0 ? v.change >= 0.005 : v.change <= -0.005),
+  );
+  if (!extremes.length) {
+    host.append(html('p', 'Your forecasts are close to the catalog pattern.'));
+    return;
+  }
+  for (const row of extremes) {
+    const line = html('div');
+    line.className = 'taste-example';
+    const delta = html('b', signedValue(row.change));
+    delta.className = 'shift-delta ' + (row.change > 0 ? 'rise' : 'fall');
+    line.append(html('strong', row.label), delta);
+    if (row.example) line.append(html('small', 'e.g. ' + row.example));
+    host.append(line);
+  }
+  host.append(
+    html(
+      'p',
+      grouped
+        ? 'Average change on the rating scale, relative to your overall shift.'
+        : 'Change from the catalog mean on the rating scale.',
+    ),
+  );
+}
+export function renderTaste(
+  profile,
+  catalog,
+  fp,
+  domain,
+  prefs,
+  onAxesChange,
+  ratings,
+  baseline,
+  predictions,
+) {
   const host = document.getElementById('taste'),
     plot = document.getElementById('taste-plot'),
     legend = document.getElementById('axes');
@@ -185,7 +256,14 @@ export function renderTaste(profile, catalog, fp, domain, prefs, onAxesChange) {
   document.getElementById('projection-title').textContent = domainTitle + ' fingerprint';
   const members = new Map(fp.classes.map((c) => [c.index, c]));
   function inspect(index) {
-    classDetails(fp, catalog, members.get(index), index !== null && index === prefs.pinned);
+    classDetails(
+      fp,
+      catalog,
+      members.get(index),
+      index !== null && index === prefs.pinned,
+      ratings,
+      baseline,
+    );
     for (const control of host.querySelectorAll('[data-class-index]')) {
       const k = Number(control.getAttribute('data-class-index'));
       control.classList.toggle('inspected', index === k);
@@ -217,6 +295,7 @@ export function renderTaste(profile, catalog, fp, domain, prefs, onAxesChange) {
     };
   }
   membershipPanel(fp, bind);
+  tastePatterns(catalog, predictions, fp.ratedCount);
   const selectors = document.getElementById('map-axes');
   selectors.replaceChildren();
   const numbers = axes.map((a) => a.index);
@@ -264,7 +343,7 @@ export function renderTaste(profile, catalog, fp, domain, prefs, onAxesChange) {
   legend.replaceChildren();
   plot.replaceChildren();
   document.getElementById('profile-help').textContent =
-    'Hover or focus a class to inspect it. Click to pin it. The closest class has the highest probability given your applied ratings. Each entry counts equally in the class-weighted mean and response frequencies. Relative affinities compare group shifts after removing the overall shift. ' +
+    'Hover or focus a class to inspect it. Click to pin it. Class probabilities describe similarities in how respondents scored titles. The category comparisons use personalized forecasts across unrated titles. ' +
     (fp.usesHalfStars ? 'A half-step class uses half stars on at least one in five ratings. ' : '') +
     (continuous
       ? 'The map uses Gaussian liabilities. Each contour shows one projected standard deviation.'

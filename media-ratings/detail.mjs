@@ -45,6 +45,10 @@ export const percent = (n) => (n * 100).toFixed(1) + '%';
 export const signed = (n) => (n > 0 ? '+' : '') + n.toFixed(2);
 const numeric = (n) => n.toFixed(2);
 
+export function shortAnnotations(a) {
+  return [...(a.genres ?? []), a.certificate, a.country, a.region].filter(Boolean).join(' · ');
+}
+
 function distribution(scale, label, baseline, forecast, counts, source) {
   const observed = counts?.reduce((a, b) => a + b, 0);
   const series = [
@@ -246,30 +250,33 @@ export function showDetail({
   detail.dataset.id = p.itemId;
   el('detail-title').textContent = titles.get(p.itemId);
   const a = catalog.items.find((it) => it.itemId === p.itemId)?.annotations ?? {};
-  const annotationText = [
-    ...(a.genres ?? []),
-    a.certificate,
-    ...(a.tags ?? []),
-    a.collection ? a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '') : '',
-    a.budget > 0 ? '$' + a.budget.toLocaleString('en-US') + ' production budget' : '',
-    a.revenue > 0 ? '$' + a.revenue.toLocaleString('en-US') + ' reported box office' : '',
-    Number.isSafeInteger(a.ratingCount)
-      ? a.ratingCount.toLocaleString() +
-        (domain === 'expanded'
-          ? ' MovieLens 25M ratings'
-          : domain === 'stravl'
-            ? ' Stravl responses'
-            : ' ratings')
-      : '',
-    a.region,
-    a.coast,
-    a.temperature != null ? a.temperature + ' °C annual mean' : '',
-    a.precipitation != null ? a.precipitation + ' mm/year' : '',
-    a.population ? a.population.toLocaleString() + ' residents (GeoNames)' : '',
-    a.gdp ? '$' + a.gdp.toLocaleString() + ' per capita (country, 2023)' : '',
-  ].filter(Boolean);
-  el('annotations').textContent = annotationText.join(' · ');
-  el('annotations').hidden = !annotationText.length;
+  el('annotations').textContent = shortAnnotations(a);
+  const more = /** @type {HTMLDetailsElement} */ (el('more-metadata'));
+  const facts = [
+    ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
+    ['Tags', a.tags?.join(' · ')],
+    ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
+    ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
+    [
+      'Ratings',
+      Number.isSafeInteger(a.ratingCount) &&
+        a.ratingCount.toLocaleString() +
+          (domain === 'expanded' ? ' · MovieLens 25M' : domain === 'stravl' ? ' · Stravl' : ''),
+    ],
+    ['Coast', a.coast],
+    ['Annual temperature', a.temperature != null && a.temperature + ' °C'],
+    ['Annual precipitation', a.precipitation != null && a.precipitation + ' mm'],
+    ['Population', a.population && a.population.toLocaleString() + ' · GeoNames'],
+    ['GDP per capita', a.gdp && '$' + a.gdp.toLocaleString() + ' · country, 2023'],
+  ].filter(([, v]) => v);
+  more.hidden = !facts.length;
+  more.querySelector('dl').replaceChildren(
+    ...facts.map(([k, v]) => {
+      const row = node('div');
+      row.append(node('dt', k), node('dd', v));
+      return row;
+    }),
+  );
   const link = /** @type {HTMLAnchorElement} */ (el('external'));
   const imdb = evidence?.imdb?.[p.itemId];
   const primary =
@@ -311,13 +318,13 @@ export function showDetail({
   for (const [name, value] of [
     ['Catalog expectation', numeric(p.prior)],
     ['With your ratings', numeric(p.expected)],
-    ['Surprise (difference)', signed(p.shift)],
+    ['Rating change', signed(p.shift)],
     ['Chance of ≥ ' + label(threshold), percent(p.chance)],
     ['Predicted SD', numeric(p.sd)],
   ]) {
     const row = node('div');
     const amount = node('dd', value);
-    if (name === 'Surprise (difference)' && p.shift)
+    if (name === 'Rating change' && p.shift)
       amount.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
     row.append(node('dt', name), amount);
     metrics.append(row);
@@ -327,15 +334,15 @@ export function showDetail({
     'ordinal-probit': 'Your rating intervals update the latent scores and component weights.',
     'latent-class': 'Your ratings update the taste-class weights used to mix the class distributions.',
     'class-similarity':
-      'Your ratings update the taste classes. The model then shifts the probabilities using how much you liked similar films compared with what your other ratings predicted.',
+      domain === 'expanded'
+        ? 'Ratings above or below expectation shift the forecast for similar films.'
+        : 'Ratings above or below expectation shift the forecast for similar entries.',
   };
   el('formula').textContent =
     (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
-    (model.titleChoice ? 'The class weights also use the identities of films you volunteered. ' : '') +
-    (model.ratingYear
-      ? 'Dated ratings use their submission year. Both target distributions use the latest supplied year within the calibration range. '
-      : '') +
-    'Each mean weights the rating values by their probabilities. Surprise is your mean minus the catalog mean.';
+    (model.titleChoice ? 'Films you picked help identify your taste class. ' : '') +
+    (model.ratingYear ? 'Both means use the same forecast year. ' : '') +
+    'Each mean weights the possible ratings by their probabilities.';
   const gaussian =
     kind === 'latent-class' || kind === 'class-similarity'
       ? (catalog.models.reference ??

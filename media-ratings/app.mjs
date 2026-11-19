@@ -1,3 +1,5 @@
+import { openRapidRating } from './rapid.mjs';
+import { modelEvidence } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel, validRatingDate } from './calendar.mjs';
 import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
@@ -90,7 +92,7 @@ function useState(data, key) {
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
     threshold: defaultCutoff(data.scale),
     weightByFamiliarity: true,
-    directions: { ratingChange: 'up', rankChange: 'both' },
+    directions: { ratingChange: 'up', rankChange: 'up' },
     fingerprintViews: new Map(),
     trackDates: Object.values(data.models).some((fit) => !!fit.ratingYear),
     draftDates: Object.create(null),
@@ -119,19 +121,25 @@ function install(key, next) {
     btn.setAttribute('aria-pressed', String(btn.dataset.key === key));
   select('model').replaceChildren(
     ...Object.entries(catalog.models)
+      .filter(
+        ([k]) => !(isFilm(key) && catalog.models.personalized && ['titleChoice', 'ratingYear'].includes(k)),
+      )
       .sort(([a], [b]) => Number(b === catalog.defaultModel) - Number(a === catalog.defaultModel))
       .map(([k, m]) => {
-        const name = m.ratingYear
-          ? 'Ratings + tags + rating year'
-          : m.titleChoice
-            ? 'Ratings + tags + title choice'
-            : m.kind === 'class-similarity'
-              ? 'Ratings + tags'
-              : m.kind === 'logit-point'
-                ? 'Historical logit'
-                : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
-                  ' · K=' +
-                  m.components.length;
+        const name =
+          k === 'personalized'
+            ? 'Title choice + rating year'
+            : m.ratingYear
+              ? 'Ratings + tags + rating year'
+              : m.titleChoice
+                ? 'Ratings + tags + title choice'
+                : m.kind === 'class-similarity'
+                  ? 'Ratings + tags'
+                  : m.kind === 'logit-point'
+                    ? 'Historical logit'
+                    : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
+                      ' · K=' +
+                      m.components.length;
         return new Option(
           name +
             (k === catalog.defaultModel
@@ -152,6 +160,7 @@ function install(key, next) {
   input('search').value = '';
   el('boards').replaceChildren();
   setupFilters();
+  input('quick-session').disabled = false;
   el('library').scrollTop = 0;
   showValidation(catalog.selection);
   rebuildBaseline();
@@ -496,12 +505,16 @@ function syncDraft() {
       !sameRatings(state.draft, state.applied) ||
       !sameRatings(state.draftSources, state.appliedSources) ||
       !sameRatings(state.draftDates, state.appliedDates);
-  el('rated-count').textContent = count + ' / ' + catalog.items.length + ' rated';
+  el('rated-count').textContent = count + ' / ' + catalog.items.length;
+  const clear = input('clear-all');
+  clear.disabled = !count && !state.cleared;
+  clear.textContent = state.cleared ? 'Undo clear' : 'Clear all';
   input('apply').disabled = !dirty;
   el('pending').hidden = !dirty;
   el('pending').textContent = 'Ratings have changed. Choose Update predictions to refresh the rankings.';
 }
 function edit(li, value, fromSuggestion = false) {
+  state.cleared = null;
   const id = li.dataset.id;
   if (value === undefined) {
     delete state.draft[id];
@@ -538,6 +551,101 @@ function edit(li, value, fromSuggestion = false) {
   if (input('auto').checked) update();
   else if (result) renderBoards();
 }
+function refreshRatingShelves() {
+  rebuildBaseline();
+  if (input('auto').checked) update();
+  else {
+    syncDraft();
+    if (result) renderBoards();
+  }
+}
+input('quick-session').onclick = () => {
+  if (!state || !result) return;
+  const opened = state;
+  const ids = catalog.items
+    .map((it) => it.itemId)
+    .filter((id) => inFacet(id) && !Object.hasOwn(state.draft, id));
+  const criteria = [];
+  if (taste?.weights.length > 1) {
+    if (taste.weightedInformation) criteria.push(['familiarInfo', 'Information × familiarity']);
+    criteria.push(['info', 'Most informative']);
+  }
+  if (catalog.items.some((it) => Number.isFinite(it.annotations?.ratingCount)))
+    criteria.push(['count', 'Most rated']);
+  criteria.push(['expected', 'Highest expected rating'], ['title', 'Title A–Z']);
+  const volunteered = Object.keys(state.draft).filter((id) => state.draftSources[id] === 'volunteered');
+  const model = catalog.models[state.model];
+  const classKey = ['latent-class', 'class-similarity'].includes(model.kind)
+    ? state.model
+    : Object.keys(catalog.models).find((k) => catalog.models[k].kind === 'latent-class');
+  function rank(criterion, answers) {
+    if (criterion === 'title') return [...ids].sort((a, b) => titles.get(a).localeCompare(titles.get(b)));
+    if (criterion === 'count')
+      return [...ids].sort((a, b) => (metadata.get(b).ratingCount ?? 0) - (metadata.get(a).ratingCount ?? 0));
+    const ratings = { ...state.draft },
+      ratedOn = { ...state.draftDates };
+    for (const [id, a] of answers) {
+      ratings[id] = a.value;
+      if (state.trackDates) ratedOn[id] = a.date;
+    }
+    const reuse =
+      !answers.size &&
+      sameRatings(ratings, state.applied) &&
+      sameRatings(ratedOn, state.appliedDates) &&
+      sameRatings(state.draftSources, state.appliedSources);
+    if (criterion === 'expected') {
+      const forecasts = reuse
+        ? result
+        : predict(catalog, { model: state.model, ratings, ratedOn, volunteered });
+      const pool = new Set(ids);
+      return forecasts.predictions.filter((p) => pool.has(p.itemId)).map((p) => p.itemId);
+    }
+    const profile = reuse
+      ? taste
+      : tasteProfile(catalog, ratings, classKey, null, false, volunteered, ratedOn);
+    const info = criterion === 'familiarInfo' ? profile.weightedInformation : profile.information;
+    return [...ids].filter((id) => info.has(id)).sort((a, b) => info.get(b) - info.get(a));
+  }
+  openRapidRating({
+    catalog,
+    stars: isFilm(active),
+    ids,
+    titles,
+    links: state.links,
+    criteria,
+    rank,
+    filterLabel: select('facet').value ? select('facet').selectedOptions[0].textContent : '',
+    save(answers) {
+      if (!answers.size) return;
+      for (const [id, a] of answers) {
+        opened.draft[id] = a.value;
+        opened.draftSources[id] = 'suggested';
+        if (opened.trackDates) opened.draftDates[id] = a.date;
+      }
+      opened.cleared = null;
+      if (opened === state) refreshRatingShelves();
+    },
+  });
+};
+input('clear-all').onclick = () => {
+  if (!state) return;
+  if (state.cleared) {
+    Object.assign(state, state.cleared);
+    state.cleared = null;
+  } else {
+    state.cleared = {
+      draft: state.draft,
+      draftSources: state.draftSources,
+      draftDates: state.draftDates,
+      followedSuggestions: state.followedSuggestions,
+    };
+    state.draft = Object.create(null);
+    state.draftSources = Object.create(null);
+    state.draftDates = Object.create(null);
+    state.followedSuggestions = new Set();
+  }
+  refreshRatingShelves();
+};
 el('shelves').onchange = (event) => {
   const r = event.target;
   if (r instanceof HTMLInputElement && r.matches('.rating-date')) {
@@ -611,16 +719,23 @@ function update(applyDraft = true) {
       (state.contextError ? ' · ' + state.contextError : '');
     const choiceNote = el('choice-note');
     choiceNote.hidden = !model.titleChoice && !model.ratingYear;
-    if (model.ratingYear) {
-      const range = model.ratingYear;
-      choiceNote.textContent = latest
-        ? `Forecast calibration uses ${calibrationYear(range, latest)}. Your latest dated rating was ${latest}. Edit dates under Already rated.`
-        : 'Supply a rating date to use calendar calibration. Undated ratings use the all-year fit.';
-    } else if (model.titleChoice) {
-      choiceNote.textContent = count
-        ? `You picked ${volunteered.length} of ${count} rated film${count === 1 ? '' : 's'}. Other films contribute stars only. Change the source under Already rated.`
-        : 'Films you pick contribute both their title and stars. App suggestions contribute stars only.';
+    const notes = [];
+    if (model.titleChoice) {
+      notes.push(
+        count
+          ? `You picked ${volunteered.length} of ${count} rated titles. App suggestions contribute stars only.`
+          : 'Films you pick contribute their titles and stars. App suggestions contribute stars only.',
+      );
     }
+    if (model.ratingYear && (latest || count || !model.titleChoice)) {
+      const range = modelEvidence(catalog, model, 'ratingYear');
+      notes.push(
+        latest
+          ? `Forecast calibration uses ${calibrationYear(range, latest)} (latest rating: ${latest}).`
+          : 'Undated ratings use the all-year fit.',
+      );
+    }
+    choiceNote.textContent = notes.join(' ');
     el('weights').textContent =
       model.kind === 'class-similarity'
         ? 'Your ratings update the taste-class probabilities. Ratings above or below what the classes predict also shift the forecasts for similar films. Similarity uses rating patterns and MovieLens tags.'
@@ -692,7 +807,17 @@ function renderFingerprint() {
   } else view = gaussianProjection(catalog, request);
   const fp = preferenceFingerprint(catalog, request, view);
   const domain = active === 'expanded' ? 'movies' : active === 'stravl' ? 'cities' : catalog.domain;
-  renderTaste(view, catalog, fp, domain, prefs, renderFingerprint);
+  renderTaste(
+    view,
+    catalog,
+    fp,
+    domain,
+    prefs,
+    renderFingerprint,
+    state.applied,
+    baseline,
+    result.predictions,
+  );
 }
 function recommendationHeader(spec, title, count, isShift, weighted) {
   const head = node('div');
@@ -711,31 +836,28 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     heading.append(controls);
   }
   if (isShift) {
-    const group = node('span');
-    group.className = 'shift-directions';
-    group.setAttribute('role', 'group');
-    group.setAttribute('aria-label', spec.title + ' direction');
-    for (const [dir, symbol, label] of [
-      ['up', '↑', 'Biggest gains'],
-      ['down', '↓', 'Biggest falls'],
-      ['both', '↕', 'Largest moves either way'],
-    ]) {
-      if (dir === 'both' && spec.key !== 'rankChange') continue;
-      const button = node('button', symbol);
-      button.dataset.board = spec.key;
-      button.dataset.direction = dir;
-      button.title = button.ariaLabel = label;
-      button.setAttribute('aria-pressed', String(state.directions[spec.key] === dir));
-      group.append(button);
+    const button = node('button');
+    const direction = state.directions[spec.key];
+    button.className = 'shift-directions';
+    button.dataset.board = spec.key;
+    button.dataset.direction = direction;
+    button.ariaLabel =
+      spec.title + (direction === 'up' ? ': biggest gains. Show falls' : ': biggest falls. Show gains');
+    button.title = button.ariaLabel;
+    for (const dir of ['up', 'down']) {
+      const caret = node('i');
+      caret.className = 'caret ' + dir;
+      caret.setAttribute('aria-hidden', 'true');
+      button.append(caret);
     }
-    head.append(group);
+    head.append(button);
   }
-  if (spec.key === 'information' && taste && taste.weights.length > 1) {
+  if (spec.key === 'information') {
     const label = node('label'),
       check = node('input');
     check.type = 'checkbox';
     check.id = 'weight-familiarity';
-    check.disabled = !taste.weightedInformation;
+    check.disabled = !taste?.weightedInformation || taste.weights.length < 2;
     check.checked = weighted;
     label.className = 'familiarity-option';
     check.setAttribute('aria-label', 'Weight by familiarity');
@@ -852,7 +974,6 @@ function renderBoards() {
     }
     const orderScore = (p) => {
       const delta = ranks ? ranks.get(p.itemId).change : spec.score(p);
-      if (direction === 'both') return Math.abs(delta);
       return direction === 'down' ? -delta : delta;
     };
     const items = visible
@@ -898,7 +1019,6 @@ function renderBoards() {
     if (!row.querySelector('.choices')) ratingObserver.observe(row);
 }
 function emptyShiftMessage(direction, items, ranks) {
-  if (direction === 'both') return 'The unrated entries kept their catalog ranks.';
   const up = direction === 'up';
   if (ranks) return 'No unrated entries in this view ' + (up ? 'gained' : 'lost') + ' places.';
   const opposite = items.every((p) => (up ? p.shift < 0 : p.shift > 0));
@@ -1038,10 +1158,10 @@ el('boards').onclick = (event) => {
   if (!(action instanceof HTMLButtonElement)) return;
   if (action.dataset.direction) {
     const { board, direction } = action.dataset;
-    state.directions[board] = direction;
+    state.directions[board] = direction === 'up' ? 'down' : 'up';
     renderBoards();
     el('boards').querySelector('.ranks[data-key="' + board + '"]').scrollTop = 0;
-    const toggled = el('boards').querySelector('button[data-board="' + board + '"][aria-pressed=true]');
+    const toggled = el('boards').querySelector('button[data-board="' + board + '"]');
     if (toggled instanceof HTMLElement) toggled.focus({ preventScroll: true });
     return;
   }
@@ -1278,10 +1398,8 @@ input('rating-file').onchange = async () => {
       }
     }
     Object.assign(state.draft, rows);
-    rebuildBaseline();
-    syncDraft();
-    if (input('auto').checked) update();
-    else if (result) renderBoards();
+    state.cleared = null;
+    refreshRatingShelves();
     if (result) el('status').textContent = 'Imported ' + Object.keys(rows).length + ' ratings.';
   } catch (e) {
     if (state === current) el('status').textContent = e.message;

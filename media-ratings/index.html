@@ -34,31 +34,33 @@
           /></label>
           <div class="section-line">
             <h2>Your ratings</h2>
-            <span id="rated-count"></span>
+            <button id="quick-session" disabled>Quick rate</button>
           </div>
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
-          <div class="filters">
-            <select id="facet" aria-label="Filter catalog and rankings by annotation"></select>
+          <div class="catalog-tools">
+            <span>All titles <span id="unrated-count"></span></span>
             <select id="sort" aria-label="Catalog sort order"></select>
           </div>
-          <div class="catalog-tools"><span>All titles</span><span id="unrated-count"></span></div>
         </div>
         <a class="skip" href="#recommendations">Skip to recommendations</a>
         <div id="shelves">
           <ul id="library" aria-label="All catalog entries"></ul>
-          <div
-            id="divider"
-            role="separator"
-            aria-orientation="horizontal"
-            aria-controls="library rated-list"
-            tabindex="0"
-            aria-label="Resize catalog and rated lists"
-            aria-valuemin="15"
-            aria-valuemax="85"
-            aria-valuenow="65"
-          >
-            <span>Already rated</span><b aria-hidden="true">═</b>
+          <div class="rated-shelf-head">
+            <div
+              id="divider"
+              role="separator"
+              aria-orientation="horizontal"
+              aria-controls="library rated-list"
+              tabindex="0"
+              aria-label="Resize catalog and rated lists"
+              aria-valuemin="15"
+              aria-valuemax="85"
+              aria-valuenow="65"
+            >
+              <span>Already rated <small id="rated-count"></small></span><b aria-hidden="true">═</b>
+            </div>
+            <button id="clear-all" disabled>Clear all</button>
           </div>
           <ul id="rated-list" aria-label="Already rated entries"></ul>
         </div>
@@ -91,6 +93,9 @@
             <p id="choice-note" hidden></p>
           </div>
           <div class="model-controls">
+            <label
+              >Filter titles<select id="facet" aria-label="Filter catalog and rankings by annotation"></select
+            ></label>
             <label>Prediction model<select id="model"></select></label>
           </div>
         </div>
@@ -103,8 +108,18 @@
               <p class="eyebrow">Selected recommendation</p>
               <h2 id="detail-title" tabindex="-1"></h2>
             </div>
-            <p id="annotations"></p>
-            <div id="item-links"><a id="external" hidden target="_blank" rel="noopener noreferrer"></a></div>
+            <div class="detail-actions">
+              <div id="item-links">
+                <a id="external" hidden target="_blank" rel="noopener noreferrer"></a>
+              </div>
+            </div>
+            <div class="detail-meta">
+              <span id="annotations"></span>
+              <details id="more-metadata">
+                <summary>Title details</summary>
+                <dl></dl>
+              </details>
+            </div>
           </div>
           <div class="explanation">
             <section>
@@ -131,12 +146,13 @@
               <div id="map-axes"></div>
               <div id="taste-plot"></div>
             </section>
-            <section id="memberships"></section>
+            <section id="taste-patterns"></section>
             <section id="class-signature"></section>
           </div>
           <div id="axes"></div>
           <details id="profile-method">
-            <summary>How to read this fingerprint</summary>
+            <summary>Class probabilities and model details</summary>
+            <div id="memberships"></div>
             <p id="profile-help"></p>
             <p id="weights"></p>
           </details>
@@ -154,9 +170,18 @@
           </p>
           <div id="scores"></div>
           <p id="selection-study" hidden>
-            These scores evaluate other ratings people recorded. MovieLens does not record every film a person saw.
-            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/selection-study.md">Volunteered ratings and rater generosity</a> ·
-            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/rating-dates.md">Film release years and rating dates</a>
+            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/predictor-comparison.md"
+              >Default film predictor and matched comparisons</a
+            >
+            · These scores evaluate other ratings people recorded. MovieLens does not record every film a
+            person saw.
+            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/selection-study.md"
+              >Volunteered ratings and rater generosity</a
+            >
+            ·
+            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/rating-dates.md"
+              >Film release years and rating dates</a
+            >
           </p>
         </details>
         <footer>
@@ -166,6 +191,39 @@
         </footer>
       </section>
     </main>
+    <dialog id="rapid-rating" aria-labelledby="rapid-heading">
+      <header class="rapid-head">
+        <h2 id="rapid-heading">Quick rate</h2>
+        <form method="dialog"><button>Done</button></form>
+      </header>
+      <div class="rapid-order">
+        <label for="rapid-order">Suggest by</label
+        ><select id="rapid-order"></select>
+      </div>
+      <div
+        id="rapid-card"
+        tabindex="0"
+        role="group"
+        aria-labelledby="rapid-title"
+        aria-describedby="rapid-instructions"
+      >
+        <div class="rapid-preview">
+          <div>
+            <h3 id="rapid-title" aria-live="polite"></h3>
+            <p id="rapid-meta"></p>
+            <p id="rapid-description"></p>
+            <span id="rapid-article"></span>
+          </div>
+          <figure id="rapid-image" hidden></figure>
+        </div>
+        <div id="rapid-values" aria-label="Rating choices"></div>
+        <p id="rapid-instructions">Use the keys shown, or choose with ← → and press Enter.</p>
+      </div>
+      <div class="rapid-nav">
+        <button id="rapid-back" title="Undo the last rating or skip">Back <kbd>B</kbd></button
+        ><span id="rapid-progress"></span><button id="rapid-skip">Skip <kbd>S</kbd></button>
+      </div>
+    </dialog>
     <script type="module" src="app.mjs"></script>
   </body>
 </html>
