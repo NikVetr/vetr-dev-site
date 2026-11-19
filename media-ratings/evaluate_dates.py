@@ -251,6 +251,7 @@ def benchmark(root, archive, catalog, output):
         losses = {key: values[:, 0].mean() for key, values in validation.items()}
         choices = {
             "baseline": BASELINE,
+            "publishedRatingYear": (0.0, 0.5, 0),
             "releaseOnly": min(
                 (c for c in GRID if c[0] > 0 and c[1] == c[2] == 0),
                 key=losses.__getitem__,

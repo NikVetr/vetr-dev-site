@@ -17,7 +17,8 @@ The baseline uses the eight-class model with learned rating and tag similarities
 | Ratings and tags | 1.5955 | 1.6365 |
 | With release-year similarity | 1.5958 | 1.6376 |
 | With session effect | 1.5979 | 1.6420 |
-| With rating year | **1.5851** | **1.6259** |
+| With rating year, full strength | **1.5851** | **1.6259** |
+| Published rating-year option, half strength | 1.5876 | 1.6284 |
 
 The random-reveal test scored 196,480 target ratings from 3,000 respondents. The forward ordering scored 191,266 from 2,998. It breaks timestamp ties among inputs with a fixed seed, excludes targets recorded in the same second as the fourth input, and considers films whose release year had arrived by that input. Both validations selected full-strength rating-year calibration with zero weight on the other additions. In the forward ordering RMSE fell from 0.9289 to 0.9244 stars. The paired 95% interval for the log-loss improvement was 0.0071–0.0140.
 
@@ -38,7 +39,13 @@ The pre-2018 fit used 10,036,987 ratings from 149,913 people. The 6,239 new resp
 | Eight classes and collaborative film factors | 1.8045 | 0.9191 | 0.19915 |
 | With 2017 rating distributions at half strength | **1.8006** | **0.9160** | **0.19814** |
 
-All 2019 profiles received the same reference year. That gain supports recent per-film calibration across a two-year gap. It gives no estimate of how tastes drifted within 2019 or how well the archive’s final year represents someone rating films today. These date-aware models are available in the offline comparison.
+All 2019 profiles received the same reference year. That gain supports recent per-film calibration across a two-year gap. It gives no estimate of how tastes drifted within 2019 or how well the archive’s final year represents someone rating films today.
+
+## Rating years in the app
+
+**Ratings + tags + rating year** uses the half-strength adjustment selected in the forward-calendar test. Its annual tables count all 10,944,737 in-catalog ratings from MovieLens 25M across the 500 films and ten star values. The model shares its eight classes, film vectors and residual regression with the default predictor.
+
+Each dated input uses that year’s class-specific star probabilities. An undated input uses the all-year probabilities. The latest supplied date sets the year for both the personalized forecast and the catalog mean used to measure its shift. Dates outside 1995–2019 use the nearest endpoint year. If all inputs are undated, predictions equal the default model’s. For a rating you recorded elsewhere, enter the date you gave it those stars. [Prediction API](api.md)
 
 ## Reproduce
 
@@ -48,4 +55,5 @@ Run from the repository root after the full MovieLens data preparation, class fi
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 python3 media-ratings/evaluate_dates.py work ml-25m.zip media-ratings/expanded.json dates.json
 python3 media-ratings/evaluate_date_cutoff.py work ml-25m.zip media-ratings/expanded.json work-through-2017 date-cutoff.json
+python3 media-ratings/check_rating_year.py media-ratings/expanded.json
 ```

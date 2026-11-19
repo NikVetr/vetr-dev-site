@@ -11,11 +11,12 @@ from pathlib import Path
 from zipfile import ZipFile
 
 import numpy as np
+from evaluate_dates import YEARS, archived_ratings
 from evaluate_full import film_vectors
 from evaluate_selection import reveal_models
 
 
-def title_choice_model(root, data):
+def training_matrix(root, data):
     items = data["items"]
     if [item["itemId"] for item in items] != list(
         json.loads((root / "film-annotations.json").read_text())
@@ -29,6 +30,11 @@ def title_choice_model(root, data):
         or np.count_nonzero(matrix) != data["fit"]["ratings"]
     ):
         raise ValueError("Rating matrix and packaged fit counts disagree")
+    return matrix
+
+
+def title_choice_model(matrix, data):
+    items = data["items"]
     components = data["models"]["latentClass"]["components"]
     ratios, eligible = reveal_models(
         matrix,
@@ -45,6 +51,30 @@ def title_choice_model(root, data):
             "strength": 0.5,
             "logRatios": ratios["title"].tolist(),
             "trainingUsers": eligible,
+        },
+    }
+
+
+def rating_year_model(archive, matrix, data):
+    items = data["items"]
+    levels = len(data["scale"])
+    counts = np.zeros((len(YEARS), len(items), levels), dtype=np.int64)
+    for _, film, value, _, year in archived_ratings(archive, items):
+        np.add.at(counts, (year, film, value), 1)
+    totals = np.stack([(matrix == k).sum(axis=0) for k in range(1, levels + 1)], axis=1)
+    if not np.array_equal(counts.sum(axis=0), totals):
+        raise ValueError(
+            "Per-film calendar counts disagree with the fitted rating matrix"
+        )
+    return {
+        "kind": "class-similarity",
+        "base": "latentClass",
+        "similarityFrom": "ratingsTags",
+        "ratingYear": {
+            "firstYear": int(YEARS[0]),
+            "lastYear": int(YEARS[-1]),
+            "strength": 0.5,
+            "counts": counts.reshape(len(YEARS), -1).tolist(),
         },
     }
 
@@ -111,7 +141,9 @@ def package(root, archive, catalog, report):
         "ridge": 0.5,
         "strength": 0.5,
     }
-    data["models"]["titleChoice"] = title_choice_model(root, data)
+    matrix = training_matrix(root, data)
+    data["models"]["titleChoice"] = title_choice_model(matrix, data)
+    data["models"]["ratingYear"] = rating_year_model(archive, matrix, data)
     data["defaultModel"] = "ratingsTags"
     catalog.write_text(
         json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"

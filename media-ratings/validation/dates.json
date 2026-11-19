@@ -402,6 +402,22 @@
           ]
         }
       },
+      "publishedRatingYear": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0/0.5/0",
+        "logLoss": 1.587641359067948,
+        "rmse": 0.9073931854433561,
+        "brier": 0.19413677128538337,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.007832544854343216,
+          "ci95": [
+            -0.009514228700019353,
+            -0.00615086100866708
+          ]
+        }
+      },
       "releaseOnly": {
         "releaseWeight": 0.1,
         "calendarWeight": 0.0,
@@ -731,6 +747,22 @@
           "ci95": [
             0.0,
             0.0
+          ]
+        }
+      },
+      "publishedRatingYear": {
+        "releaseWeight": 0.0,
+        "calendarWeight": 0.5,
+        "sessionDecayDays": 0,
+        "label": "0/0.5/0",
+        "logLoss": 1.6283698822130288,
+        "rmse": 0.9266758578173916,
+        "brier": 0.20030562949846115,
+        "pairedLogLossVersusBaseline": {
+          "difference": -0.008136624738850162,
+          "ci95": [
+            -0.009891114590562687,
+            -0.006382134887137637
           ]
         }
       },
