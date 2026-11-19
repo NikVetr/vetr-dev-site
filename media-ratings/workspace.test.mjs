@@ -166,7 +166,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       name: 'Two entries',
       domain: 'books',
       items: [
-        { itemId: '356', title: 'Alpha' },
+        { itemId: '356', title: 'Alpha', annotations: { year: 1984 } },
         { itemId: '2', title: 'Beta' },
       ],
       scale: [0, 3],
@@ -190,6 +190,10 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       mimeType: 'application/json',
       buffer: Buffer.from(JSON.stringify(custom)),
     });
+    await page.locator('#facet').selectOption('Publication year/1984');
+    assert.equal(await page.locator('#library .entry:visible').count(), 1);
+    assert.equal(await page.locator('[data-key=expected] .rank').count(), 1);
+    await page.locator('#facet').selectOption('');
     await page.getByRole('radio', { name: '0', exact: true }).first().check();
     assert.equal(await page.locator('#projection-title').innerText(), 'Book preference fingerprint');
     assert.ok(await page.locator('#external').isHidden());
@@ -258,7 +262,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
         .getByRole('group', { name: 'Rating change direction' })
         .getByRole('button', { name: 'Biggest falls' })
         .click();
-    const shift = changeBoard.locator('.rank').first();
+    const shift = changeBoard.locator('.forecast-row').first();
     const target = await shift.getAttribute('data-id');
     assert.match(await shift.locator('.score').innerText(), /\d+\.\d{2} → \d+\.\d{2} \([+-]\d+\.\d{2}\)/);
     assert.equal(
@@ -266,7 +270,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
       (await shift.locator('.shift-delta').innerText()).startsWith('(+'),
     );
     await p.locator('#search').fill('not-a-film');
-    await shift.click();
+    await shift.locator('.rank').click();
     assert.ok(await p.locator('#library .entry[data-id="' + target + '"]').isVisible());
     assert.ok(
       await p
@@ -332,6 +336,33 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await familiar.uncheck();
     assert.equal(await firstInfo.getAttribute('data-id'), '786'); // Eraser
     await familiar.check();
+    const header = p.locator('.information .board-head');
+    assert.equal(await header.locator('small').count(), 0);
+    const left = await header.locator('h3').boundingBox(),
+      right = await familiar.boundingBox();
+    assert.ok(right.x > left.x + left.width && right.y < left.y + left.height);
+    await p.locator('#facet').selectOption('Release year/1999');
+    const from1999 = p.locator('#library .entry:visible');
+    assert.ok((await from1999.count()) > 1);
+    assert.ok((await from1999.allTextContents()).every((t) => t.includes('(1999)')));
+    assert.equal(await p.locator('[data-key=expected] .rank').count(), await from1999.count());
+    await p.locator('#facet').selectOption('');
+    const firstRow = p.locator('[data-key=expected] .forecast-row').first();
+    const metric = firstRow.locator('.quick-rate');
+    await firstRow.locator('.rank').hover();
+    assert.equal(await metric.locator('.rate-cue').evaluate((e) => getComputedStyle(e).opacity), '0');
+    await metric.hover();
+    assert.equal(await metric.locator('.score').evaluate((e) => getComputedStyle(e).opacity), '0');
+    const rowHeight = (await firstRow.boundingBox()).height;
+    await metric.click();
+    const pop = firstRow.locator(':popover-open');
+    const buttonBox = await metric.boundingBox(),
+      popBox = await pop.boundingBox();
+    assert.ok(popBox.x >= buttonBox.x + buttonBox.width);
+    assert.equal((await firstRow.boundingBox()).height, rowHeight);
+    await p.keyboard.press('Escape');
+    assert.equal(await metric.getAttribute('aria-expanded'), 'false');
+    assert.ok(await metric.evaluate((e) => e === document.activeElement));
     const cutoffHeading = p.locator('h3:has(#threshold)');
     assert.match(await cutoffHeading.innerText(), /Chance of ≥\s*\(4\)/);
     for (const id of ['2571', '5618'])
@@ -351,7 +382,7 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await direction('Rank change', 'Biggest falls').click();
     assert.equal(await p.locator('[data-key=rankChange] .rank').count(), 237);
     assert.match(
-      await p.locator('[data-key=rankChange] .rank .score').first().innerText(),
+      await p.locator('[data-key=rankChange] .forecast-row .score').first().innerText(),
       /^#\d+ → #\d+ \(-\d+\)$/,
     );
     await direction('Rating change', 'Biggest gains').click();

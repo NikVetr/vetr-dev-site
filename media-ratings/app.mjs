@@ -321,10 +321,17 @@ function moneyBand(value) {
   return value > 0 ? [moneyBands.find(([end]) => value < end)[1]] : [];
 }
 function facets(a) {
+  const yearGroup =
+    catalog.domain === 'books'
+      ? 'Publication year'
+      : isFilm(active) || catalog.domain === 'movies'
+        ? 'Release year'
+        : 'Year';
   return {
     Genre: a.genres,
     Tag: a.tags,
     Certificate: a.certificate ? [a.certificate] : [],
+    [yearGroup]: Number.isInteger(a.year) ? [String(a.year)] : [],
     Decade: a.year ? [Math.floor(a.year / 10) * 10 + 's'] : [],
     Collection: a.collection ? [a.collection] : [],
     'Production budget': moneyBand(a.budget),
@@ -644,9 +651,6 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     }
     head.append(group);
   }
-  head.append(
-    node('small', count + ' · ' + (weighted && spec.key === 'information' ? 'weighted bits' : spec.hint)),
-  );
   if (spec.key === 'information' && taste && taste.weights.length > 1) {
     const label = node('label'),
       check = node('input');
@@ -655,12 +659,17 @@ function recommendationHeader(spec, title, count, isShift, weighted) {
     check.disabled = !taste.weightedInformation;
     check.checked = weighted;
     label.className = 'familiarity-option';
-    label.append(check, 'Weight by familiarity');
+    check.setAttribute('aria-label', 'Weight by familiarity');
+    const caption = node('span', 'familiarity');
+    const prefix = node('span', 'Weight by ');
+    prefix.className = 'weight-prefix';
+    caption.prepend(prefix);
+    label.append(check, caption);
     label.title = check.disabled
       ? 'Item response counts are unavailable for this catalog.'
       : 'Use the fraction of catalog respondents who rated each entry as a proxy for familiarity.';
     head.append(label);
-  }
+  } else head.append(node('small', count + ' · ' + spec.hint));
   return head;
 }
 function recommendationRow(p, index, spec, isShift, ranks, weighted) {
@@ -695,25 +704,35 @@ function recommendationRow(p, index, spec, isShift, ranks, weighted) {
       ' respondents';
   pos.className = 'rank-index';
   score.className = 'score';
-  btn.append(pos, node('span', titles.get(p.itemId)), score);
+  btn.append(pos, node('span', titles.get(p.itemId)));
   const row = node('div');
   row.dataset.id = p.itemId;
   row.append(btn);
   if (spec.key === 'information') {
     row.className = 'info-row';
+    btn.append(score);
     if (index < 12) row.append(ratingControls(p.itemId, 'information'));
   } else {
     row.className = 'forecast-row';
-    const rate = node('button', 'Rate');
+    const rate = node('button');
+    const cue = node('span', 'Rate');
+    cue.className = 'rate-cue';
+    cue.setAttribute('aria-hidden', 'true');
+    score.id = 'score-' + spec.key + '-' + index;
+    btn.setAttribute('aria-describedby', score.id);
+    rate.append(score, cue);
     rate.className = 'quick-rate';
     rate.tabIndex = btn.tabIndex;
     rate.setAttribute('aria-label', 'Rate ' + titles.get(p.itemId) + ' here');
+    rate.setAttribute('aria-describedby', score.id);
+    rate.title = 'Rate ' + titles.get(p.itemId);
     rate.setAttribute('aria-expanded', 'false');
     row.append(rate);
   }
   return row;
 }
 function renderBoards() {
+  closeRatingChoices();
   const host = el('boards');
   const positions = new Map(
     [...host.querySelectorAll('.ranks')].map((list) => [list.getAttribute('data-key'), list.scrollTop]),
@@ -744,8 +763,8 @@ function renderBoards() {
       const why = node(
         'p',
         weighted
-          ? 'Information gain × the share of respondents who rated each entry.'
-          : 'Expected information about ' +
+          ? 'Information gain in bits × the share of respondents who rated each entry.'
+          : 'Expected information in bits about ' +
               taste.weights.length +
               ' taste classes, given your applied ratings.',
       );
@@ -867,11 +886,70 @@ el('boards').onkeydown = (event) => {
     next[event.key]?.focus();
   }
 };
+// The top layer lets a rating scale extend past the scrolling list without
+// changing the row's height. It stays in the row's DOM for keyboard navigation.
+let openRating = null;
+function closeRatingChoices(restoreFocus = false) {
+  if (!openRating) return;
+  const { choices, trigger, listeners } = openRating;
+  openRating = null;
+  listeners.abort();
+  choices.hidePopover();
+  choices.remove();
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.removeAttribute('aria-controls');
+  if (restoreFocus && trigger.isConnected) trigger.focus({ preventScroll: true });
+}
 function showRatingChoices(row) {
+  closeRatingChoices();
   const choices = ratingControls(row.dataset.id, 'recommendation');
+  const trigger = row.querySelector('.quick-rate');
   markChoices(choices, state.draft[row.dataset.id]);
+  choices.id = 'recommendation-rating';
+  choices.popover = 'manual';
   row.append(choices);
-  row.querySelector('.quick-rate').setAttribute('aria-expanded', 'true');
+  trigger.setAttribute('aria-expanded', 'true');
+  trigger.setAttribute('aria-controls', choices.id);
+  const listeners = new AbortController();
+  const { signal } = listeners;
+  openRating = { choices, trigger, listeners };
+  choices.showPopover();
+  const position = () => {
+    const anchor = trigger.getBoundingClientRect();
+    const list = row.closest('.ranks').getBoundingClientRect();
+    const width = document.documentElement.clientWidth;
+    const height = document.documentElement.clientHeight;
+    if (anchor.bottom <= Math.max(0, list.top) || anchor.top >= Math.min(list.bottom, height)) {
+      closeRatingChoices();
+      return;
+    }
+    const gap = 6,
+      w = choices.offsetWidth,
+      h = choices.offsetHeight;
+    const x = anchor.right + gap + w <= width ? anchor.right + gap : anchor.left - gap - w;
+    choices.style.left = Math.max(gap, Math.min(width - w - gap, x)) + 'px';
+    choices.style.top =
+      Math.max(gap, Math.min(height - h - gap, (anchor.top + anchor.bottom - h) / 2)) + 'px';
+  };
+  position();
+  if (!openRating) return;
+  window.addEventListener('scroll', position, { capture: true, passive: true, signal });
+  window.addEventListener('resize', position, { signal });
+  const dismissOutside = (event) => {
+    if (!choices.contains(event.target) && !trigger.contains(event.target)) closeRatingChoices();
+  };
+  document.addEventListener('pointerdown', dismissOutside, { capture: true, signal });
+  document.addEventListener('focusin', dismissOutside, { signal });
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeRatingChoices(true);
+      }
+    },
+    { signal },
+  );
   const first = choices.querySelector('input:checked') ?? choices.querySelector('input');
   if (first instanceof HTMLInputElement) first.focus({ preventScroll: true });
 }
@@ -898,12 +976,8 @@ el('boards').onclick = (event) => {
   for (const b of el('boards').querySelectorAll('.rank[data-id="' + CSS.escape(selected) + '"]'))
     b.setAttribute('aria-pressed', 'true');
   renderDetail();
-  const previous = el('boards').querySelector('.forecast-row .choices');
-  const closing = inline && previous?.parentElement === row;
-  if (previous) {
-    previous.parentElement.querySelector('.quick-rate').setAttribute('aria-expanded', 'false');
-    previous.remove();
-  }
+  const closing = inline && openRating?.trigger === action;
+  closeRatingChoices();
   reveal(selected, !inline);
   if (inline && !closing) showRatingChoices(row);
 };
