@@ -12,7 +12,6 @@ export function build() {
     body: `<g class="player-still"><rect width="100%" height="100%" fill="#010704"/>
 <svg width="100%" height="100%" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid slice"><g text-anchor="middle" dominant-baseline="central" font-family="monospace" font-weight="600" font-size="${num(shot.size)}">${drops}</g></svg>
 <svg x="4%" y="39%" width="92%" height="22%" viewBox="0 0 480 44"><text class="locked" x="240" y="32" text-anchor="middle" fill="#cdfbdf" font-family="monospace" font-size="32" font-weight="bold">${esc(scene.title)}</text></svg>
-<rect width="100%" height="100%" fill="url(#matrix-rain-slots)"/></g><g class="matrix-clock"/>`,
-    loop: '& .matrix-clock{animation:matrix-opening-clock 10s linear infinite}@keyframes matrix-opening-clock{to{opacity:.99}}',
+<rect width="100%" height="100%" fill="url(#matrix-rain-slots)"/></g>`,
   });
 }

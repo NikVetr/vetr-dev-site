@@ -1,4 +1,4 @@
-import { makeScene, frame, paint, duration, submit } from './core.mjs';
+import { makeScene, frame, paint, duration, submit, prepareReflection } from './core.mjs';
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const canvas = /** @type {HTMLCanvasElement} */ (el('screen'));
@@ -86,6 +86,7 @@ async function loadImage(url) {
   try {
     await img.decode();
     if (id === pendingImage) {
+      prepareReflection(img);
       picture = img;
       focalPoint = url === demo ? undefined : { x: 0.5, y: 0.5 };
       el('reset-image').hidden = url === demo;

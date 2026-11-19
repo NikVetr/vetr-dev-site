@@ -1,12 +1,15 @@
 // The landing cut runs the full opening on the card's own aspect ratio.
-import { makeScene, frame, paint, duration } from '../../matrix-rain/core.mjs';
+import { makeScene, frame, paint, duration, prepareReflection } from '../../matrix-rain/core.mjs';
 const scene = makeScene({ title: 'The Extracellular Matrix' });
 let portrait;
 export function prepare() {
   if (!portrait) {
     const image = new Image();
     image.src = new URL('../../matrix-rain/nik-reflection.webp', import.meta.url).href;
-    portrait = image.decode().then(() => image).catch(error => { portrait = undefined; throw error; });
+    portrait = image.decode().then(() => {
+      prepareReflection(image);
+      return image;
+    }).catch(error => { portrait = undefined; throw error; });
   }
   return portrait;
 }
@@ -19,9 +22,11 @@ export function create(art, image) {
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Matrix Rain requires a 2D canvas.');
   const svg = art.querySelector('svg');
-  const clock = art.querySelector('.matrix-clock').getAnimations()[0];
   const period = Number(svg.dataset.period) * 1000;
   art.append(canvas);
+  // A clock with no painted keyframes avoids invalidating the landing page's inline SVGs.
+  const clock = canvas.animate([], { duration: period, iterations: Infinity });
+  clock.pause();
   let raf = 0;
   function draw() {
     if (!art.clientWidth || !art.clientHeight) return;
@@ -34,9 +39,9 @@ export function create(art, image) {
   function tick() { draw(); raf = requestAnimationFrame(tick); }
   const resize = new ResizeObserver(draw);
   resize.observe(art);
-  const pause = () => { cancelAnimationFrame(raf); raf = 0; };
+  const pause = () => { clock.pause(); cancelAnimationFrame(raf); raf = 0; };
   return {
-    play() { if (!raf) tick(); }, pause,
-    destroy() { pause(); resize.disconnect(); canvas.remove(); },
+    play() { if (!raf) { clock.play(); tick(); } }, pause,
+    destroy() { pause(); clock.cancel(); resize.disconnect(); canvas.remove(); },
   };
 }

@@ -200,7 +200,7 @@ export function frame(scene, time, aspect = 16 / 9) {
 
 // Prepare each decoded reflection at a bounded working resolution.
 const reflections = new WeakMap();
-function prepareReflection(image) {
+export function prepareReflection(image) {
   if (reflections.has(image)) return reflections.get(image);
   const canvas = document.createElement('canvas');
   const ratio = Math.min(1, 960 / Math.max(image.width, image.height));

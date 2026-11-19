@@ -360,7 +360,7 @@ test('Matrix card renders the shared title impacts, last letters and reflection 
       await art.hover();
       const shots = await art.evaluate(async (el) => {
         const { frame, makeScene, paint } = await import(new URL('matrix-rain/core.mjs', location.href).href);
-        const clock = el.querySelector('.matrix-clock').getAnimations()[0];
+        const clock = el.querySelector('canvas').getAnimations()[0];
         const preview = el.querySelector('canvas');
         const image = new Image(); image.src = 'matrix-rain/nik-reflection.webp'; await image.decode();
         const scene = makeScene({ title: 'The Extracellular Matrix' });
