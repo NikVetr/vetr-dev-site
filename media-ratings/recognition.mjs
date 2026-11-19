@@ -60,11 +60,17 @@ export function showRecognition(figure, reference, title, describe = undefined) 
     source.ariaLabel = photo === poster ? title + ' poster · file and rights' : img.alt + ' · image source';
     source.append(img);
     const credit = document.createElement('figcaption');
-    if (photo.caption) credit.append(photo.caption + ' · ');
-    credit.append(recognitionLink(photo.credit || 'Image source', photo.sourceUrl));
-    if (photo.license) credit.append(' · ', photo.licenseUrl ? recognitionLink(photo.license, photo.licenseUrl) : photo.license);
+    if (photo.caption) credit.append(photo.caption);
+    if (photo !== poster || photo.credit !== 'Poster file and rights') {
+      if (credit.hasChildNodes()) credit.append(' · ');
+      credit.append(recognitionLink(photo.credit || 'Image source', photo.sourceUrl));
+    }
+    if (photo.license) {
+      if (credit.hasChildNodes()) credit.append(' · ');
+      credit.append(photo.licenseUrl ? recognitionLink(photo.license, photo.licenseUrl) : photo.license);
+    }
     figure.replaceChildren(source);
-    if (photo !== poster || photo.license || photo.caption) figure.append(credit);
+    if (credit.hasChildNodes()) figure.append(credit);
     img.src = photo.url;
   }
   if (!reference.wikipedia) { show(direct); return; }
