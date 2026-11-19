@@ -7,7 +7,8 @@ Rounak Banik's 2017 TMDB movie metadata snapshot (plain or gzip-compressed):
       tmp/agent/media-recognition/cache media-ratings/recognition.json
 
 Wikidata descriptions and TMDB billing order supply the text cues. The image
-comes from Wikipedia's free lead image, the item's Wikidata logo or image,
+prefers the film poster from the verified English article. The fallback comes
+from Wikipedia's free lead image, the item's Wikidata logo or image,
 or a labeled cast portrait joined by TMDB person ID. The Commons file page
 supplies the credit, license and thumbnail. Use a fresh cache to refresh.
 https://www.mediawiki.org/wiki/API:Pageimages
@@ -73,7 +74,11 @@ def query(cache, domain, params):
         }
     )
     result = cached(cache, domain, url, lambda: fetch(url, json.load))
-    if "error" in result or "continue" in result:
+    more = result.get("continue", {})
+    # Only the current file revision is wanted. imageinfo can offer an older revision
+    # even when the current image for every requested file is already in this batch.
+    older_images = params.get("prop") == "imageinfo" and set(more) == {"iistart", "continue"}
+    if "error" in result or (more and not older_images):
         raise ValueError(
             f"Incomplete MediaWiki response: {result.get('error', result.get('continue'))}"
         )
@@ -122,6 +127,61 @@ def article_info(titles, cache):
         title: (page["pageprops"]["wikibase_item"], page.get("pageimage"))
         for title, page in resolved_pages(doc, titles)
     }
+
+
+def film_leads(titles, cache):
+    doc = query(cache, "en.wikipedia", {
+        "titles": "|".join(titles), "prop": "pageimages",
+        "pilicense": "any", "piprop": "name|thumbnail",
+        "pithumbsize": 250, "pilimit": len(titles),
+    })
+    return {
+        title: (page["pageimage"].replace("_", " "), page["thumbnail"]["source"].split("?")[0])
+        for title, page in resolved_pages(doc, titles)
+        if page.get("pageimage") and page.get("thumbnail")
+    }
+
+
+def infobox_posters(titles, cache):
+    """Recover a poster explicitly identified in the film infobox when PageImages skips it."""
+    doc = query(cache, "en.wikipedia", {
+        "titles": "|".join(titles), "prop": "revisions", "rvprop": "content",
+        "rvslots": "main", "rvsection": 0,
+    })
+    out = {}
+    for title, page in resolved_pages(doc, titles):
+        intro = page["revisions"][0]["slots"]["main"]["content"]
+        box = re.search(r"{{infobox film\s*\n(.*?)(?:\n}})", intro, re.I | re.S)
+        if not box or not re.search(r"^\|\s*caption\s*=.*poster", box[1], re.I | re.M):
+            continue
+        name = re.search(r"^\|\s*image\s*=\s*([^\n|{}]+?\.(?:jpe?g|png))\s*$", box[1], re.I | re.M)
+        if name:
+            out[title] = name[1].strip().replace("_", " ")
+    return out
+
+
+def poster_files(names, cache, from_infobox=False):
+    titles = ["File:" + n for n in names]
+    doc = query(cache, "en.wikipedia", {
+        "titles": "|".join(titles), "prop": "imageinfo", "iiprop": "url|extmetadata", "iiurlwidth": 250,
+        "iiextmetadatafilter": "Categories|LicenseShortName|LicenseUrl|Artist|Attribution",
+    })
+    out = {}
+    for title, page in resolved_pages(doc, titles):
+        info = next(iter(page.get("imageinfo", [])), {})
+        md = {k: plain(v["value"]) for k, v in info.get("extmetadata", {}).items()}
+        if not from_infobox and "poster" not in (title + "|" + md.get("Categories", "")).lower():
+            continue
+        source = info.get("descriptionurl")
+        if not source or not info.get("thumburl") or not md.get("LicenseShortName"):
+            continue
+        out[title[5:]] = {
+            "title": "Film poster", "sourceUrl": source, "url": info["thumburl"].split("?")[0],
+            "credit": md.get("Attribution") or md.get("Artist") or "Poster file and rights",
+            "license": md["LicenseShortName"] if md["LicenseShortName"] != "Fair use" else "",
+            "licenseUrl": md.get("LicenseUrl", "").replace("http://", "https://"),
+        }
+    return out
 
 
 def sparql(cache, query_text):
@@ -286,6 +346,15 @@ def main():
         raise ValueError("Article identities must be unique across bundled catalogs")
     cast = film_credits(args.links, args.credits, films)
     with ThreadPoolExecutor(max_workers=2) as pool:
+        film_titles = [t for t, r in articles.items() if "imdb" in r]
+        leads = collect(pool, film_titles, 35, film_leads, args.cache)
+        posters = collect(pool, {n for n, _ in leads.values()}, 25, poster_files, args.cache)
+        missing = [t for t in film_titles if t not in leads or leads[t][0] not in posters]
+        extra = collect(pool, missing, 20, infobox_posters, args.cache)
+        if extra:
+            fallback = poster_files(sorted(set(extra.values())), args.cache, from_infobox=True)
+            posters.update(fallback)
+            leads.update({t: (name, fallback[name]["url"]) for t, name in extra.items() if name in fallback})
         pages = collect(pool, articles.keys(), 35, article_info, args.cache)
         data = collect(
             pool, {qid for qid, _ in pages.values()}, 80, entities, args.cache
@@ -344,6 +413,10 @@ def main():
                 if portrait:
                     available = {**portrait, "caption": name + " · cast"}
                     break
+        if title in leads:
+            name, url = leads[title]
+            if name in posters:
+                card["poster"] = {**posters[name], "url": url}
         if available:
             card["image"] = available
         out[r["wikipedia"]] = card

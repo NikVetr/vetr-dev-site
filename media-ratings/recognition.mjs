@@ -1,12 +1,12 @@
 // The manifest is keyed by the verified article URL across both catalogs.
 let cards;
 
+/** @typedef {{url: string, sourceUrl: string, title: string, credit: string, license?: string, licenseUrl?: string, caption?: string}} RecognitionImage */
+
 /**
  * Fetch the bundled recognition cues once on first use.
  * @param {string | null | undefined} articleUrl
- * @returns {Promise<{articleUrl: string, description: string, image?: {
- *   url: string, sourceUrl: string, title: string, credit: string, license: string, licenseUrl: string, caption?: string
- * }} | null>}
+ * @returns {Promise<{description: string, image?: RecognitionImage, poster?: RecognitionImage} | null>}
  */
 export async function recognitionFor(articleUrl) {
   if (!articleUrl) return null;

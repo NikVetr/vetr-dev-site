@@ -1,6 +1,7 @@
+import { recommendationFilters } from './filters.mjs';
 import { openRapidRating } from './rapid.mjs';
 import { modelEvidence } from './evidence.mjs';
-import { calibrationYear, latestRatingDate, populationModel, validRatingDate } from './calendar.mjs';
+import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
 import { projectClasses, tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
@@ -9,7 +10,6 @@ import {
   forecastsCSV,
   importRatings,
   importRatingEntries,
-  ratingSources,
   importForecasts,
   saveCSV,
 } from './exchange.mjs';
@@ -45,6 +45,7 @@ let active,
   taste,
   revision = 0;
 const isFilm = (k) => k === 'expanded';
+const wholeStars = () => ['books', 'recipes'].includes(active) && catalog.scale.join(',') === '1,2,3,4,5';
 const entries = new Map();
 const copies = new Map();
 let ratingObserver;
@@ -94,7 +95,6 @@ function useState(data, key) {
     weightByFamiliarity: true,
     directions: { ratingChange: 'up', rankChange: 'up' },
     fingerprintViews: new Map(),
-    trackDates: Object.values(data.models).some((fit) => !!fit.ratingYear),
     draftDates: Object.create(null),
     appliedDates: Object.create(null),
     draftSources: Object.create(null),
@@ -154,6 +154,27 @@ function install(key, next) {
       }),
   );
   select('model').value = state.model;
+  const attribution = el('dataset-source');
+  attribution.replaceChildren();
+  const source =
+    key === 'expanded'
+      ? { title: 'MovieLens terms and citation', url: 'MOVIELENS-LICENSE.txt' }
+      : key === 'stravl'
+        ? { title: 'Stravl data', url: 'https://github.com/Stravl/Stravl-Data' }
+        : key !== 'custom'
+          ? catalog.source
+          : null;
+  if (source) {
+    const link = node('a', source.title);
+    link.href = source.url;
+    attribution.append(' · ', link);
+    if (source.author) attribution.append(' · ' + source.author);
+    if (source.license && source.licenseUrl) {
+      const license = node('a', source.license);
+      license.href = source.licenseUrl;
+      attribution.append(' · ', license);
+    }
+  }
   el('scale-help').textContent = isFilm(key)
     ? 'Choose a half or whole star.'
     : catalog.scaleLabels
@@ -294,26 +315,6 @@ function entryRow(p, surface) {
   clear.setAttribute('aria-label', 'Clear rating for ' + titles.get(p.itemId));
   body.append(choices, readout, clear);
   li.append(head, body);
-  if (surface === 'rated' && catalog.models[state.model].titleChoice) {
-    const label = node('label', 'Title source');
-    const source = node('select');
-    source.className = 'rating-source';
-    source.setAttribute('aria-label', 'Title source for ' + titles.get(p.itemId));
-    for (const [key, text] of Object.entries(ratingSources)) source.add(new Option(text, key));
-    label.className = 'source-label';
-    label.append(source);
-    li.append(label);
-  }
-  if (surface === 'rated' && catalog.models[state.model].ratingYear) {
-    const label = node('label', 'Rated on');
-    const date = node('input');
-    date.type = 'date';
-    date.className = 'rating-date';
-    date.setAttribute('aria-label', 'Rating date for ' + titles.get(p.itemId));
-    label.className = 'source-label';
-    label.append(date);
-    li.append(label);
-  }
   syncRow(li);
   return li;
 }
@@ -326,11 +327,11 @@ function scaleChoices(name, groupLabel) {
   choices.setAttribute('role', 'radiogroup');
   choices.setAttribute('aria-label', groupLabel);
   for (const v of catalog.scale) {
-    const star = isFilm(active),
+    const star = isFilm(active) || wholeStars(),
       label = node('label'),
       radio = document.createElement('input'),
       glyph = node('span', star ? '' : scaleLabel(v));
-    label.className = star ? 'choice star' : 'choice';
+    label.className = star ? (wholeStars() ? 'choice star whole-star' : 'choice star') : 'choice';
     radio.type = 'radio';
     radio.name = name;
     radio.value = String(v);
@@ -351,14 +352,11 @@ function markChoices(group, value) {
 function syncRow(li) {
   const value = state.draft[li.dataset.id],
     rated = value !== undefined;
-  const date = li.querySelector('.rating-date');
-  if (date) date.value = state.draftDates[li.dataset.id] ?? '';
-  const source = li.querySelector('.rating-source');
-  if (source) source.value = state.draftSources[li.dataset.id] ?? 'unknown';
   li.classList.toggle('rated', rated);
   markChoices(li.querySelector('.choices'), value);
   li.querySelector('.clear').hidden = !rated;
-  li.querySelector('.rating-readout').textContent = rated && isFilm(active) ? value + ' / 5' : '';
+  li.querySelector('.rating-readout').textContent =
+    rated && (isFilm(active) || wholeStars()) ? value + ' / 5' : '';
 }
 const moneyBands = [
   [1e7, 'Under $10M'],
@@ -371,18 +369,12 @@ function moneyBand(value) {
   return value > 0 ? [moneyBands.find(([end]) => value < end)[1]] : [];
 }
 function facets(a) {
-  const yearGroup =
-    catalog.domain === 'books'
-      ? 'Publication year'
-      : isFilm(active) || catalog.domain === 'movies'
-        ? 'Release year'
-        : 'Year';
   return {
-    Genre: a.genres,
+    [active === 'recipes' ? 'Course' : 'Genre']: a.genres,
     Tag: a.tags,
+    Author: a.authors ?? (a.author ? [a.author] : []),
+    Format: a.format ? [a.format] : [],
     Certificate: a.certificate ? [a.certificate] : [],
-    [yearGroup]: Number.isInteger(a.year) ? [String(a.year)] : [],
-    Decade: a.year ? [Math.floor(a.year / 10) * 10 + 's'] : [],
     Collection: a.collection ? [a.collection] : [],
     'Production budget': moneyBand(a.budget),
     'Reported box office': moneyBand(a.revenue),
@@ -403,39 +395,19 @@ function facets(a) {
       : [],
   };
 }
-let metadata, facetIds;
+let metadata, filters;
 function setupFilters() {
   metadata = new Map(catalog.items.map((it) => [it.itemId, it.annotations ?? {}]));
-  facetIds = new Map();
-  const groups = new Map();
-  for (const [id, a] of metadata) {
-    for (const [group, values] of Object.entries(facets(a))) {
-      for (const value of values ?? []) {
-        const key = group + '/' + value;
-        if (!facetIds.has(key)) {
-          facetIds.set(key, new Set());
-          if (!groups.has(group)) groups.set(group, []);
-          groups.get(group).push(value);
-        }
-        facetIds.get(key).add(id);
-      }
-    }
-  }
-  const facet = select('facet');
-  facet.replaceChildren(new Option('All categories', ''));
-  for (const [group, values] of groups) {
-    const opt = document.createElement('optgroup');
-    opt.label = group;
-    const ordered = ['Production budget', 'Reported box office'].includes(group)
-      ? moneyBands.map((b) => b[1]).filter((value) => values.includes(value))
-      : values.sort((a, b) => a.localeCompare(b));
-    for (const value of ordered) {
-      const key = group + '/' + value;
-      opt.append(new Option(value + ' (' + facetIds.get(key).size + ')', key));
-    }
-    facet.append(opt);
-  }
-  facet.disabled = !groups.size;
+  state.filters ??= recommendationFilters(catalog, facets);
+  filters = state.filters;
+  filters.attach(
+    () => {
+      selectVisibleItem();
+      renderBoards();
+      renderDetail();
+    },
+    () => result?.predictions.map((p) => p.itemId) ?? [],
+  );
   select('sort').replaceChildren(new Option('Catalog mean', 'mean'), new Option('Title A–Z', 'title'));
   if (catalog.items.some((it) => it.annotations?.year))
     select('sort').add(new Option('Newest first', 'year'));
@@ -462,15 +434,12 @@ function sortCatalog() {
   el('library').replaceChildren(...sorted.map((id) => entries.get(id)), empty);
   filterRows();
 }
-function inFacet(id) {
-  return !select('facet').value || facetIds.get(select('facet').value).has(id);
-}
 function filterRows() {
   if (!state) return;
   const query = input('search').value.trim().toLocaleLowerCase();
   let count = 0;
   for (const [id, li] of entries) {
-    li.hidden = !inFacet(id) || !titles.get(id).toLocaleLowerCase().includes(query);
+    li.hidden = !titles.get(id).toLocaleLowerCase().includes(query);
     if (!li.hidden) count++;
   }
   el('empty-list').hidden = count > 0;
@@ -524,7 +493,7 @@ function edit(li, value, fromSuggestion = false) {
     delete state.draftDates[id];
     state.followedSuggestions.delete(id);
   } else {
-    if (state.trackDates && !Object.hasOwn(state.draft, id))
+    if (!Object.hasOwn(state.draft, id) || state.draft[id] !== value)
       state.draftDates[id] = new Date().toISOString().slice(0, 10);
     state.draft[id] = value;
     state.draftSources[id] ??=
@@ -564,9 +533,7 @@ function refreshRatingShelves() {
 input('quick-session').onclick = () => {
   if (!state || !result) return;
   const opened = state;
-  const ids = catalog.items
-    .map((it) => it.itemId)
-    .filter((id) => inFacet(id) && !Object.hasOwn(state.draft, id));
+  const ids = catalog.items.map((it) => it.itemId).filter((id) => !Object.hasOwn(state.draft, id));
   const criteria = [];
   if (taste?.weights.length > 1) {
     if (taste.weightedInformation) criteria.push(['familiarInfo', 'Information × familiarity']);
@@ -588,7 +555,7 @@ input('quick-session').onclick = () => {
       ratedOn = { ...state.draftDates };
     for (const [id, a] of answers) {
       ratings[id] = a.value;
-      if (state.trackDates) ratedOn[id] = a.date;
+      ratedOn[id] = a.date;
     }
     const reuse =
       !answers.size &&
@@ -610,19 +577,18 @@ input('quick-session').onclick = () => {
   }
   openRapidRating({
     catalog,
-    stars: isFilm(active),
+    stars: isFilm(active) || wholeStars(),
     ids,
     titles,
     links: state.links,
     criteria,
     rank,
-    filterLabel: select('facet').value ? select('facet').selectedOptions[0].textContent : '',
     save(answers) {
       if (!answers.size) return;
       for (const [id, a] of answers) {
         opened.draft[id] = a.value;
         opened.draftSources[id] = 'suggested';
-        if (opened.trackDates) opened.draftDates[id] = a.date;
+        opened.draftDates[id] = a.date;
       }
       opened.cleared = null;
       if (opened === state) refreshRatingShelves();
@@ -650,17 +616,7 @@ input('clear-all').onclick = () => {
 };
 el('shelves').onchange = (event) => {
   const r = event.target;
-  if (r instanceof HTMLInputElement && r.matches('.rating-date')) {
-    if (r.validity.badInput || (r.value && !validRatingDate(r.value))) return;
-    const li = r.closest('li');
-    if (r.value) state.draftDates[li.dataset.id] = r.value;
-    else delete state.draftDates[li.dataset.id];
-    edit(li, state.draft[li.dataset.id]);
-  } else if (r instanceof HTMLSelectElement && r.matches('.rating-source')) {
-    const li = r.closest('li');
-    state.draftSources[li.dataset.id] = r.value;
-    edit(li, state.draft[li.dataset.id]);
-  } else if (r instanceof HTMLInputElement && r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
+  if (r instanceof HTMLInputElement && r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
 };
 el('shelves').onclick = (event) => {
   const button = /** @type {HTMLElement} */ (event.target).closest('.clear');
@@ -672,17 +628,9 @@ el('shelves').onclick = (event) => {
 };
 input('search').oninput = filterRows;
 select('sort').onchange = sortCatalog;
-select('facet').onchange = () => {
-  filterRows();
-  if (result) {
-    selectVisibleItem();
-    renderBoards();
-    renderDetail();
-  }
-};
 function selectVisibleItem() {
-  if (!result.predictions.some((p) => p.itemId === selected && inFacet(p.itemId)))
-    selected = result.predictions.find((p) => inFacet(p.itemId))?.itemId;
+  if (!result.predictions.some((p) => p.itemId === selected && filters.matches(p.itemId)))
+    selected = result.predictions.find((p) => filters.matches(p.itemId))?.itemId;
   state.selection = selected;
 }
 
@@ -941,7 +889,7 @@ function renderBoards() {
     [...host.querySelectorAll('.ranks')].map((list) => [list.getAttribute('data-key'), list.scrollTop]),
   );
   ratingObserver?.disconnect();
-  const visible = result.predictions.filter((p) => inFacet(p.itemId));
+  const visible = result.predictions.filter((p) => filters.matches(p.itemId));
   const rankMovements = rankChanges(visible);
   const weighted = state.weightByFamiliarity && !!taste?.weightedInformation;
   const fragment = document.createDocumentFragment();
@@ -978,7 +926,7 @@ function renderBoards() {
       const delta = ranks ? ranks.get(p.itemId).change : spec.score(p);
       return direction === 'down' ? -delta : delta;
     };
-    const items = visible
+    const items = (spec.key === 'information' ? result.predictions : visible)
       .filter((p) =>
         isShift
           ? orderScore(p) > 0
@@ -1311,7 +1259,11 @@ async function openCatalog(key, file = null) {
         ? [JSON.parse(await file.text()), null, null]
         : await Promise.all([
             readJSON(key + '.json'),
-            readOptionalJSON(key === 'expanded' ? 'film-links.json' : 'destination-links.json'),
+            key === 'expanded'
+              ? readOptionalJSON('film-links.json')
+              : key === 'stravl'
+                ? readOptionalJSON('destination-links.json')
+                : null,
             key === 'expanded' ? readOptionalJSON('film-context.json') : null,
           ]);
       if (seq !== revision) return;
@@ -1334,6 +1286,20 @@ async function openCatalog(key, file = null) {
       }
       s = useState(data, key);
       s.links = references?.data;
+      if (!file && data.sourceLabel && !s.links) {
+        s.links = Object.fromEntries(
+          data.items
+            .filter((it) => it.annotations?.sourceUrl?.startsWith('https://'))
+            .map((it) => [
+              it.itemId,
+              {
+                label: data.linkLabel ?? data.sourceLabel,
+                sourceUrl: it.annotations.sourceUrl,
+                imageUrl: it.annotations.imageUrl?.startsWith('https://') ? it.annotations.imageUrl : null,
+              },
+            ]),
+        );
+      }
       s.linkError = references?.error;
       s.contextError = context?.error ? 'Film finances and familiarity counts unavailable.' : null;
       if (file) {
@@ -1394,7 +1360,7 @@ input('rating-file').onchange = async () => {
     if (state !== current) return;
     for (const id of Object.keys(rows)) {
       state.draftSources[id] = sources[id] ?? state.draftSources[id] ?? 'unknown';
-      if (state.trackDates && Object.hasOwn(ratedOn, id)) {
+      if (Object.hasOwn(ratedOn, id)) {
         if (ratedOn[id]) state.draftDates[id] = ratedOn[id];
         else delete state.draftDates[id];
       }
@@ -1412,12 +1378,7 @@ el('save-ratings').onclick = () => {
   const trackSources = Object.values(catalog.models).some((model) => model.titleChoice);
   saveCSV(
     active + '-ratings.csv',
-    ratingsCSV(
-      catalog,
-      state.draft,
-      trackSources ? state.draftSources : null,
-      state.trackDates ? state.draftDates : null,
-    ),
+    ratingsCSV(catalog, state.draft, trackSources ? state.draftSources : null, state.draftDates),
   );
 };
 el('save-forecasts').onclick = () => {

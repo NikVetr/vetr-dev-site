@@ -15,7 +15,7 @@ function link(text, url) {
   return a;
 }
 
-export function openRapidRating({ catalog, stars, ids, titles, links, criteria, rank, save, filterLabel }) {
+export function openRapidRating({ catalog, stars, ids, titles, links, criteria, rank, save }) {
   const dialog = /** @type {HTMLDialogElement} */ (document.getElementById('rapid-rating'));
   if (dialog.open) return;
   const el = (id) => document.getElementById(id);
@@ -38,7 +38,9 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
   const focusCard = () => stage.focus({ preventScroll: true });
   const labelAt = (i) => String(catalog.scaleLabels?.[i] ?? scale[i]) + (stars ? ' ★' : '');
   el('rapid-instructions').textContent = stars
-    ? '1–5 rate whole stars. Hold Shift for the half-star below. Or choose with ← → and press Enter.'
+    ? '1–5 rate whole stars. ' +
+      (scale.some((v) => !Number.isInteger(v)) ? 'Hold Shift for the half-star below. ' : '') +
+      'Or choose with ← → and press Enter.'
     : 'Use the keys shown, or choose with ← → and press Enter.';
   const controls = scale.map((_, i) => {
     const b = node('button');
@@ -80,9 +82,8 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
       skipped.size +
       ' skipped · ' +
       (ids.length - answers.size - skipped.size) +
-      ' remaining' +
-      (filterLabel ? ' · ' + filterLabel : '');
-    highlight(lastIndex);
+      ' remaining';
+    highlight(lastIndex ?? Math.floor(scale.length / 2));
     el('rapid-title').textContent = item
       ? titles.get(id)
       : ids.length
@@ -90,35 +91,54 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
         : 'No unrated entries in this view';
     el('rapid-meta').textContent = item ? shortAnnotations(item.annotations ?? {}) : '';
     if (!item) return;
-    const wiki = links?.[id]?.wikipedia;
-    if (!wiki) return;
-    article.append(link('Wikipedia ↗', wiki));
-    recognitionFor(wiki)
-      .then((card) => {
-        if (!dialog.open || version !== cardVersion || !card) return;
-        description.textContent = card.description;
-        if (!card.image) return;
-        const photo = card.image;
-        const img = node('img');
-        img.alt = photo.title;
-        img.referrerPolicy = 'no-referrer';
-        img.onload = () => {
-          if (version === cardVersion && dialog.open) imageSlot.hidden = false;
-        };
-        const source = link('', photo.sourceUrl);
-        source.ariaLabel = photo.title + ' · image source';
-        source.append(img);
-        const credit = node('figcaption');
-        if (photo.caption) credit.append(node('strong', photo.caption), ' · ');
-        credit.append(link(photo.credit || 'Image source', photo.sourceUrl));
-        if (photo.license)
-          credit.append(' · ', photo.licenseUrl ? link(photo.license, photo.licenseUrl) : photo.license);
-        imageSlot.append(source, credit);
-        img.src = photo.url;
-      })
-      .catch(() => {
-        if (version === cardVersion && dialog.open) description.textContent = 'Article preview unavailable.';
-      });
+    function showImages(photos) {
+      const [photo, ...fallback] = photos;
+      if (!photo || !dialog.open || version !== cardVersion) return;
+      const img = node('img');
+      img.alt = photo.title + ' · ' + titles.get(id);
+      img.referrerPolicy = 'no-referrer';
+      img.onload = () => {
+        if (version === cardVersion && dialog.open) imageSlot.hidden = false;
+      };
+      img.onerror = () => showImages(fallback);
+      const source = link('', photo.sourceUrl);
+      source.ariaLabel = photo.title + ' · image source';
+      source.append(img);
+      const credit = node('figcaption');
+      if (photo.caption) credit.append(node('strong', photo.caption), ' · ');
+      credit.append(link(photo.credit || 'Image source', photo.sourceUrl));
+      if (photo.license)
+        credit.append(' · ', photo.licenseUrl ? link(photo.license, photo.licenseUrl) : photo.license);
+      imageSlot.replaceChildren(source, credit);
+      img.src = photo.url;
+    }
+    const reference = links?.[id];
+    if (reference?.sourceUrl) {
+      article.append(link(reference.label + ' ↗', reference.sourceUrl));
+      if (reference.imageUrl)
+        showImages([
+          {
+            url: reference.imageUrl,
+            sourceUrl: reference.sourceUrl,
+            title: titles.get(id),
+            credit: reference.label,
+          },
+        ]);
+    }
+    const wiki = reference?.wikipedia;
+    if (wiki) {
+      article.append(link('Wikipedia ↗', wiki));
+      recognitionFor(wiki)
+        .then((card) => {
+          if (!dialog.open || version !== cardVersion || !card) return;
+          description.textContent = card.description;
+          showImages([card.poster, card.image].filter(Boolean));
+        })
+        .catch(() => {
+          if (version === cardVersion && dialog.open)
+            description.textContent = 'Article preview unavailable.';
+        });
+    }
   }
   function accept(i) {
     if (!current || i === null) return;
@@ -181,13 +201,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     } else if (current && ['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp'].includes(e.key)) {
       e.preventDefault();
       const forward = e.key === 'ArrowRight' || e.key === 'ArrowUp';
-      highlight(
-        selectedIndex === null
-          ? forward
-            ? 0
-            : scale.length - 1
-          : Math.min(scale.length - 1, Math.max(0, selectedIndex + (forward ? 1 : -1))),
-      );
+      highlight(Math.min(scale.length - 1, Math.max(0, selectedIndex + (forward ? 1 : -1))));
       focusCard();
     } else if (e.key === 'Enter' && e.target === stage && selectedIndex !== null) {
       e.preventDefault();

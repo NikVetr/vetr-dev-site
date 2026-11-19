@@ -26,7 +26,10 @@
           <h2>Datasets</h2>
           <div id="domains" aria-label="Choose dataset">
             <button data-key="expanded">Films <small>500 titles</small></button>
-            <button data-key="stravl">Destinations <small>Stravl</small></button>
+            <button data-key="stravl">Destinations <small>12 places</small></button>
+            <button data-key="books">Books <small>500 titles</small></button>
+            <button data-key="anime">Anime <small>500 titles</small></button>
+            <button data-key="recipes">Recipes <small>100 recipes</small></button>
             <button id="custom-domain" data-key="custom" hidden>Imported catalog</button>
           </div>
           <label class="import"
@@ -93,9 +96,7 @@
             <p id="choice-note" hidden></p>
           </div>
           <div class="model-controls">
-            <label
-              >Filter titles<select id="facet" aria-label="Filter catalog and rankings by annotation"></select
-            ></label>
+            <button id="facet" aria-haspopup="dialog" aria-controls="recommendation-filters" disabled>Filters</button>
             <label>Prediction model<select id="model"></select></label>
           </div>
         </div>
@@ -185,12 +186,15 @@
           </p>
         </details>
         <footer>
-          <a href="README.md">Methods and datasets</a> ·
-          <a href="MOVIELENS-LICENSE.txt">MovieLens terms and citation</a> ·
-          <a href="https://github.com/Stravl/Stravl-Data">Stravl data</a>
+          <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md">Methods and datasets</a><span id="dataset-source"></span>
         </footer>
       </section>
     </main>
+    <dialog id="recommendation-filters" aria-labelledby="filter-title">
+      <header><h2 id="filter-title">Filter recommendations</h2><button type="button" id="filter-close" aria-label="Close filters">×</button></header>
+      <div id="filter-fields"></div>
+      <footer><button type="button" id="filter-reset">Reset</button><span id="filter-matches" role="status"></span><button type="button" id="filter-apply" class="primary">Apply</button></footer>
+    </dialog>
     <dialog id="rapid-rating" aria-labelledby="rapid-heading">
       <header class="rapid-head">
         <h2 id="rapid-heading">Quick rate</h2>

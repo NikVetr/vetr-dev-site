@@ -45,8 +45,8 @@ body {
   padding: clamp(12px, 1.25vw, 24px);
 }
 #domains {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 5px;
   margin: 0.55rem 0 0.2rem;
 }
@@ -252,6 +252,8 @@ input {
 .star:nth-child(even) span::before {
   left: -0.53em;
 }
+.whole-star span { width: 1.06em; }
+.whole-star:nth-child(even) span::before { left: 0; }
 .star.filled span::before {
   content: '★';
   color: var(--accent);
@@ -1420,18 +1422,6 @@ body {
   }
 }
 
-.source-label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-.source-label select,
-.source-label input {
-  font-size: inherit;
-  padding: 0.1rem 0.25rem;
-}
 #choice-note {
   font-size: 0.8rem;
   color: var(--muted);
@@ -1557,6 +1547,9 @@ body {
 }
 #comparison {
   max-width: none;
+  /* Keep long option text in WebKit’s native co-rating selector inside its panel. */
+  overflow-x: clip;
+  overflow-clip-margin: 3px;
 }
 #comparison select {
   width: 100%;
@@ -1647,9 +1640,8 @@ body {
 }
 #rapid-image img {
   width: 100%;
-  height: 7rem;
+  height: clamp(8rem, 24dvh, 14rem);
   object-fit: contain;
-  background: #e9e9e7;
   border-radius: var(--radius-sm);
 }
 #rapid-image figcaption {
@@ -1725,4 +1717,154 @@ body {
 
 .rapid-nav button {
   white-space: nowrap;
+}
+
+#facet {
+  justify-self: end;
+  align-self: end;
+  font-size: 0.84rem;
+}
+#recommendation-filters {
+  width: min(32rem, calc(100% - 1.4rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1rem 4rem #0005;
+}
+#recommendation-filters[open] {
+  display: flex;
+  flex-direction: column;
+}
+#recommendation-filters::backdrop {
+  background: #070b12a8;
+}
+#recommendation-filters header,
+#recommendation-filters footer {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  flex: none;
+}
+#recommendation-filters h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+#filter-close {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+#filter-fields {
+  padding: 0.1rem 1rem 0.65rem;
+  overflow: auto;
+}
+#filter-fields details {
+  border-top: 1px solid var(--edge);
+}
+#filter-fields summary {
+  cursor: pointer;
+  padding: 0.6rem 0.1rem;
+  font-weight: 600;
+}
+.filter-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.15rem 0.75rem;
+  max-height: 13rem;
+  overflow: auto;
+  padding: 0.2rem 0 0.7rem;
+}
+.filter-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+}
+.filter-options small {
+  margin-inline-start: auto;
+  color: var(--muted);
+}
+#filter-fields fieldset {
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.85rem 0.8rem;
+  margin: 0 0 0.75rem;
+}
+#filter-fields legend {
+  font-weight: 600;
+}
+.year-endpoints,
+.year-endpoints label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+.year-endpoints label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.year-endpoints input {
+  width: 4.8rem;
+}
+.year-track {
+  position: relative;
+  height: 1.5rem;
+  margin-top: 0.4rem;
+}
+.year-track::before {
+  content: '';
+  position: absolute;
+  inset: calc(50% - 2px) 0.5rem;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    var(--edge) var(--lo),
+    var(--accent) var(--lo),
+    var(--accent) var(--hi),
+    var(--edge) var(--hi)
+  );
+}
+.year-track input {
+  appearance: none;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.year-track input::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1px solid var(--surface);
+  cursor: ew-resize;
+}
+.year-track input::-moz-range-thumb {
+  pointer-events: auto;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: ew-resize;
+}
+#recommendation-filters footer {
+  border-top: 1px solid var(--edge);
+}
+#filter-matches {
+  margin-inline-start: auto;
+  font-size: 0.8rem;
+  color: var(--muted);
 }

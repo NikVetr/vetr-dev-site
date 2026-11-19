@@ -46,7 +46,16 @@ export const signed = (n) => (n > 0 ? '+' : '') + n.toFixed(2);
 const numeric = (n) => n.toFixed(2);
 
 export function shortAnnotations(a) {
-  return [...(a.genres ?? []), a.certificate, a.country, a.region].filter(Boolean).join(' · ');
+  return [
+    a.author ?? a.authors?.join(', '),
+    a.format,
+    ...(a.genres ?? []),
+    a.certificate,
+    a.country,
+    a.region,
+  ]
+    .filter(Boolean)
+    .join(' · ');
 }
 
 function distribution(scale, label, baseline, forecast, counts, source) {
@@ -254,6 +263,8 @@ export function showDetail({
   const more = /** @type {HTMLDetailsElement} */ (el('more-metadata'));
   const facts = [
     ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
+    ['Year', a.year],
+    ['Episodes', a.episodes],
     ['Tags', a.tags?.join(' · ')],
     ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
     ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
@@ -282,11 +293,11 @@ export function showDetail({
   const primary =
     domain === 'stravl'
       ? targets?.openStreetMap
-      : (targets?.imdb ?? (imdb ? 'https://www.imdb.com/title/tt' + imdb + '/' : null));
+      : (targets?.sourceUrl ?? targets?.imdb ?? (imdb ? 'https://www.imdb.com/title/tt' + imdb + '/' : null));
   link.hidden = !primary;
   if (primary) {
     link.href = primary;
-    link.textContent = domain === 'stravl' ? 'OpenStreetMap ↗' : 'IMDb ↗';
+    link.textContent = (targets?.label ?? (domain === 'stravl' ? 'OpenStreetMap' : 'IMDb')) + ' ↗';
   } else link.removeAttribute('href');
   const links = el('item-links');
   links.replaceChildren(link);
@@ -310,7 +321,9 @@ export function showDetail({
     prior.probabilities,
     p.probabilities,
     evidence?.counts[evidence.ids.indexOf(p.itemId)],
-    domain === 'expanded' ? 'Observed · MovieLens small' : 'Observed',
+    domain === 'expanded'
+      ? 'Observed · MovieLens small'
+      : 'Observed' + (catalog.sourceLabel ? ' · ' + catalog.sourceLabel : ''),
   );
   const metrics = el('metrics');
   metrics.className = 'metrics';
@@ -358,6 +371,10 @@ export function showDetail({
     message,
     previous,
     gaussian,
-    domain === 'expanded' ? 'MovieLens small' : domain === 'stravl' ? 'Stravl' : 'MovieLens',
+    domain === 'expanded'
+      ? 'MovieLens small'
+      : domain === 'stravl'
+        ? 'Stravl'
+        : (catalog.sourceLabel ?? 'Observed ratings'),
   );
 }
