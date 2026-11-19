@@ -950,6 +950,9 @@ body {
 }
 .model-controls label {
   min-width: 0;
+  /* WebKit counts the closed native select’s longest option toward page overflow. */
+  overflow: clip;
+  overflow-clip-margin: 3px;
 }
 .analysis {
   container-type: inline-size;
