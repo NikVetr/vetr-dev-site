@@ -7,7 +7,7 @@
 // corner, as the page's snap() rounds it, and each release commits the panel and updates the
 // code, ending on the layout it starts from.
 import { openPage } from '../browser.mjs';
-import { H, W, art, esc, num } from '../svg.mjs';
+import { art, esc, num } from '../svg.mjs';
 
 /** Each drag runs from one grid corner to the opposite one, [row, col], starting in empty space. */
 const DRAGS = [[[0, 0], [4, 5]], [[4, 8], [0, 5]], [[8, 0], [4, 3]], [[8, 8], [4, 3]]];
@@ -103,12 +103,7 @@ export async function build() {
   // The canvas, square cells, and the code panel beside it.
   const side = 152;
   const cell = side / rows;
-  const codeW = 137;
-  const gx = (W - side - 10 - codeW) / 2;
-  const gy = (H - side) / 2;
-  const cx = gx + side + 10;
-  const font = 7.2;
-  const lead = font * 1.4;
+  const gx = 1, gy = 1;
   const xy = (/** @type {number} */ r, /** @type {number} */ c) => [gx + c * cell, gy + r * cell];
   const rect = (/** @type {{ r0: number, c0: number, r1: number, c1: number }} */ R, inset = 0) => {
     const [x, y] = xy(R.r0, R.c0);
@@ -162,15 +157,13 @@ export async function build() {
 
   // The code panel: the page's code for each state, shown from that state's release (the cleared
   // grid's from the Clear) until the next.
-  body += `<rect class="code-panel" x="${num(cx)}" y="${num(gy)}" width="${num(codeW)}" height="${num(side)}" rx="3"/>\n`;
+  const codeFrames = [], allLines = states.flatMap(s => s.code.split('\n'));
+  const longest = Math.max(...allLines.map(line => line.length));
+  const lineCount = Math.max(...states.map(s => s.code.split('\n').length));
   for (const [s, { code }] of states.entries()) {
     const lines = code.split('\n');
-    const longest = Math.max(...lines.map((l) => l.length));
-    if (longest * font * 0.6 > codeW - 8) throw new Error(`layout-gui: code lines of ${longest} characters do not fit`);
-    const top = gy + (side - lines.length * lead) / 2 + lead / 2;
-    // Leading spaces as no-break spaces, so the indentation survives without xml:space.
-    const text = lines.map((l, i) => `<tspan x="${num(cx + 6)}" y="${num(top + i * lead)}">${esc(l).replace(/^ +/, (m) => ' '.repeat(m.length))}</tspan>`).join('');
-    body += `<text class="code c${s}">${text}</text>\n`;
+    const split = Math.ceil(lines.length / 2);
+    codeFrames.push(`<pre class="code c${s}" style="--split:${split}">${lines.map(line => `<span>${esc(line) || ' '}</span>`).join('')}</pre>`);
     const from = s === 0 ? CLEAR : up[s - 1];
     if (s === states.length - 1) anim(`c${s}`, [[0, 'opacity: 1;'], [CLEAR, 'opacity: 0;'], [up[s - 1], 'opacity: 1;']]);
     else anim(`c${s}`, [[0, 'opacity: 0;'], [from, 'opacity: 1;'], [up[s], 'opacity: 0;']]);
@@ -207,15 +200,22 @@ ${stepFrames('layout-gui-cursor-at', [[0, 'opacity: 0;'], [start[0] - 0.25, 'opa
   return art({
     name: 'layout-gui',
     period: PERIOD,
-    body,
+    responsive: true,
+    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="drawing-layout">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side+2} ${side+2}">${body}</svg><div class="code-panel">${codeFrames.join('')}</div></div></foreignObject>`,
     // The canvas's own drawing: pastel panels with a faint dark edge and #222 bold labels in both
     // themes; the drag preview at 60% over the canvas with a blue edge; the crosshair cursor, haloed.
-    css: `& .canvas, & .code-panel { fill: var(--surface); stroke: var(--art-line); stroke-width: 1; }
+    css: `& .drawing-layout{display:grid;grid-template-columns:minmax(0,min(48%,94cqh)) minmax(0,1fr);gap:2cqw;height:100%;box-sizing:border-box;padding:3cqh 2cqw}
+& .drawing-layout > svg{width:100%;height:100%;min-height:0}
+& .code-panel{position:relative;container-type:size;border:1px solid var(--art-line);border-radius:3px;background:var(--surface);min-width:0;min-height:0}
+@container layout-preview (max-aspect-ratio:1.2/1){& .drawing-layout{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+& .canvas { fill: var(--surface); stroke: var(--art-line); stroke-width: 1; }
 & .grid { fill: none; stroke: var(--art-line); stroke-width: 0.6; }
 & .panel rect { stroke: #00000025; stroke-width: 0.8; }
 & .panel text { fill: #222; font-weight: 700; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; text-anchor: middle; dominant-baseline: central; }
 & .preview { fill-opacity: 0.6; stroke: #3b82f6; stroke-width: 1.2; opacity: 0; }
-& .code { fill: var(--art-ink); font: ${num(font)}px ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace; dominant-baseline: central; }
+& .code{position:absolute;inset:0;display:grid;align-content:center;margin:0;padding:0 3%;color:var(--art-ink);font:min(${num(94/(longest*0.61),2)}cqw,${num(92/(lineCount*1.35),2)}cqh) / 1.35 ui-monospace,monospace}
+@container (min-aspect-ratio:1.9/1){& .code{grid-auto-flow:column;grid-template-rows:repeat(var(--split),auto);grid-auto-columns:minmax(0,1fr);gap:0 3%;font-size:min(${num(45/(longest*0.61),2)}cqw,${num(92/(Math.ceil(lineCount/2)*1.35),2)}cqh)}}
 ${states.slice(0, -1).map((_, s) => `& .c${s}`).join(', ')} { opacity: 0; }
 & .cursor-at { opacity: 0; }
 & .cursor path { fill: none; stroke: var(--art-ink); stroke-width: 1.3; stroke-linecap: square; }

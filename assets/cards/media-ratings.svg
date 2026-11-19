@@ -1,10 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" data-period="12" focusable="false">
 <style>
-[data-art="media-ratings"] text{fill:var(--art-ink);font-family:system-ui,sans-serif}
-[data-art="media-ratings"] .film{font:bold clamp(16px,min(7.4cqw,15cqh),38px) Georgia,serif}
+[data-art="media-ratings"] .forecast-layout{height:100%;box-sizing:border-box;padding:2.5cqh 3cqw;display:grid;grid-template:"input input" auto "taste forecast" minmax(0,1fr) / minmax(0,1fr) minmax(0,1fr);gap:3cqh 3cqw;color:var(--art-ink);font-family:system-ui,sans-serif}
+[data-art="media-ratings"] .rating-input{grid-area:input;display:flex;align-items:center;justify-content:space-between;gap:2cqw;border-bottom:1px solid var(--art-line);padding-bottom:2cqh}
+[data-art="media-ratings"] .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;white-space:nowrap}
+[data-art="media-ratings"] .stars{width:min(40%,73cqh);height:auto;max-height:17cqh}
+[data-art="media-ratings"] .forecast-plot{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqh;min-width:0;min-height:0}
+[data-art="media-ratings"] .forecast-plot svg{width:100%;height:100%;min-height:0}
+[data-art="media-ratings"] .tastes{grid-area:taste;border-right:1px solid var(--art-line);padding-right:3cqw}
+[data-art="media-ratings"] .distribution{grid-area:forecast}
 [data-art="media-ratings"] .label{font-size:clamp(11px,min(4.5cqw,10cqh),22px);font-weight:650}
-[data-art="media-ratings"] .caption{fill:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
-[data-art="media-ratings"] line,[data-art="media-ratings"] .axis,[data-art="media-ratings"] .baseline{stroke:var(--art-line);fill:none}
+[data-art="media-ratings"] .caption{color:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
+[data-art="media-ratings"] .scale{display:flex;justify-content:space-between}
+@container ratings-preview (min-aspect-ratio:2.45/1){
+  [data-art="media-ratings"] .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.95fr) minmax(0,1fr) minmax(0,1.2fr);padding:5cqh 2cqw;gap:2cqw}
+  [data-art="media-ratings"] .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh}
+  [data-art="media-ratings"] .film{font-size:clamp(15px,4.4cqw,36px)} [data-art="media-ratings"] .stars{width:94%}
+}
+@container ratings-preview (max-aspect-ratio:1.2/1){
+  [data-art="media-ratings"] .forecast-layout{grid-template:"input" auto "taste" minmax(0,1fr) "forecast" minmax(0,1fr) / minmax(0,1fr);padding:3cqh 5cqw;gap:2cqh}
+  [data-art="media-ratings"] .tastes{border-right:0;border-bottom:1px solid var(--art-line);padding:0 0 1.5cqh}
+}
+[data-art="media-ratings"] .axis,[data-art="media-ratings"] .baseline{stroke:var(--art-line);fill:none}
 [data-art="media-ratings"] .axis{stroke-dasharray:3 3}
 [data-art="media-ratings"] .stars{fill:var(--art-ink)}
 [data-art="media-ratings"] .outline{fill:none;stroke:var(--art-ink);stroke-width:1}
@@ -82,16 +98,12 @@
 @keyframes media-ratings-star-4{0%,4.5%{opacity:1}12.5%,17%{opacity:0}25%,29.5%{opacity:0}37.5%,42%{opacity:0}50%,54.5%{opacity:0}62.5%,67%{opacity:0}75%,79.5%{opacity:0}87.5%,92%{opacity:0}100%{opacity:1}}
 </style>
 <defs><path id="media-ratings-star" d="m10 1 2.6 6.2 6.8.6-5.1 4.4 1.6 6.6-5.9-3.5-5.9 3.5 1.6-6.6L.6 7.8l6.8-.6z"/></defs>
-<text x="4%" y="20%" class="film">The Matrix</text>
-<svg x="54%" y="6%" width="42%" height="16%" viewBox="0 0 115 21" preserveAspectRatio="xMaxYMid meet" class="stars"><use href="#media-ratings-star" x="1" class="outline"/><use href="#media-ratings-star" x="1" class="star-0"/><use href="#media-ratings-star" x="24" class="outline"/><use href="#media-ratings-star" x="24" class="star-1"/><use href="#media-ratings-star" x="47" class="outline"/><use href="#media-ratings-star" x="47" class="star-2"/><use href="#media-ratings-star" x="70" class="outline"/><use href="#media-ratings-star" x="70" class="star-3"/><use href="#media-ratings-star" x="93" class="outline"/><use href="#media-ratings-star" x="93" class="star-4"/></svg>
-<line x1="4%" x2="96%" y1="28%" y2="28%"/>
-<text x="4%" y="41%" class="label">Taste classes</text><text x="52%" y="41%" class="label">Terminator 2</text>
-<line x1="48%" x2="48%" y1="35%" y2="93%"/>
-<svg x="4%" y="44%" width="40%" height="41%" viewBox="0 0 126 80">
-<path d="M2 40h122M63 2v76" class="axis"/><circle class="dot class-0" cx="57.2" cy="68.1" r="6.4" fill="#659c99"/><circle class="dot class-1" cx="62.4" cy="28.2" r="6.4" fill="#b78159"/><circle class="dot class-2" cx="36.5" cy="38.8" r="6.4" fill="#898bc1"/><circle class="dot class-3" cx="41.6" cy="20.4" r="6.4" fill="#c77593"/><circle class="dot class-4" cx="68.9" cy="21.2" r="6.4" fill="#77a26b"/><circle class="dot class-5" cx="83.5" cy="69" r="6.4" fill="#7191bc"/><circle class="dot class-6" cx="85.9" cy="30.2" r="6.4" fill="#b49b60"/><circle class="dot class-7" cx="114" cy="18.3" r="6.4" fill="#a783aa"/>
-<path class="position" d="m0 -4.8 4.8 4.8L0 4.8 -4.8 0z"/></svg>
-<svg x="52%" y="45%" width="44%" height="40%" viewBox="0 0 100 81" preserveAspectRatio="none">
-<rect class="bar bin-0" x="1" y="3" width="8" height="76"/><rect class="bar bin-1" x="11" y="3" width="8" height="76"/><rect class="bar bin-2" x="21" y="3" width="8" height="76"/><rect class="bar bin-3" x="31" y="3" width="8" height="76"/><rect class="bar bin-4" x="41" y="3" width="8" height="76"/><rect class="bar bin-5" x="51" y="3" width="8" height="76"/><rect class="bar bin-6" x="61" y="3" width="8" height="76"/><rect class="bar bin-7" x="71" y="3" width="8" height="76"/><rect class="bar bin-8" x="81" y="3" width="8" height="76"/><rect class="bar bin-9" x="91" y="3" width="8" height="76"/><path class="baseline" d="M0 79.5h100" vector-effect="non-scaling-stroke"/></svg>
-<text x="4%" y="94%" class="caption">◇ Your position</text>
-<text x="52%" y="94%" class="caption">½ ★</text><text x="96%" y="94%" text-anchor="end" class="caption">5 ★</text>
+<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="forecast-layout">
+<div class="rating-input"><span class="film">The Matrix</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 21" class="stars"><use href="#media-ratings-star" x="1" class="outline"/><use href="#media-ratings-star" x="1" class="star-0"/><use href="#media-ratings-star" x="24" class="outline"/><use href="#media-ratings-star" x="24" class="star-1"/><use href="#media-ratings-star" x="47" class="outline"/><use href="#media-ratings-star" x="47" class="star-2"/><use href="#media-ratings-star" x="70" class="outline"/><use href="#media-ratings-star" x="70" class="star-3"/><use href="#media-ratings-star" x="93" class="outline"/><use href="#media-ratings-star" x="93" class="star-4"/></svg></div>
+<div class="forecast-plot tastes"><span class="label">Taste classes</span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126 80"><path d="M2 40h122M63 2v76" class="axis"/><circle class="dot class-0" cx="57.2" cy="68.1" r="6.4" fill="#659c99"/><circle class="dot class-1" cx="62.4" cy="28.2" r="6.4" fill="#b78159"/><circle class="dot class-2" cx="36.5" cy="38.8" r="6.4" fill="#898bc1"/><circle class="dot class-3" cx="41.6" cy="20.4" r="6.4" fill="#c77593"/><circle class="dot class-4" cx="68.9" cy="21.2" r="6.4" fill="#77a26b"/><circle class="dot class-5" cx="83.5" cy="69" r="6.4" fill="#7191bc"/><circle class="dot class-6" cx="85.9" cy="30.2" r="6.4" fill="#b49b60"/><circle class="dot class-7" cx="114" cy="18.3" r="6.4" fill="#a783aa"/><path class="position" d="m0 -4.8 4.8 4.8L0 4.8 -4.8 0z"/></svg>
+<span class="caption">◇ Your position</span></div>
+<div class="forecast-plot distribution"><span class="label">Terminator 2</span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 81" preserveAspectRatio="none"><rect class="bar bin-0" x="1" y="3" width="8" height="76"/><rect class="bar bin-1" x="11" y="3" width="8" height="76"/><rect class="bar bin-2" x="21" y="3" width="8" height="76"/><rect class="bar bin-3" x="31" y="3" width="8" height="76"/><rect class="bar bin-4" x="41" y="3" width="8" height="76"/><rect class="bar bin-5" x="51" y="3" width="8" height="76"/><rect class="bar bin-6" x="61" y="3" width="8" height="76"/><rect class="bar bin-7" x="71" y="3" width="8" height="76"/><rect class="bar bin-8" x="81" y="3" width="8" height="76"/><rect class="bar bin-9" x="91" y="3" width="8" height="76"/><path class="baseline" d="M0 79.5h100" vector-effect="non-scaling-stroke"/></svg>
+<span class="caption scale"><span>½ ★</span><span>5 ★</span></span></div></div></foreignObject>
 </svg>

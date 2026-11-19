@@ -66,23 +66,35 @@ export function build() {
   return art({
     name: 'media-ratings', responsive: true, period,
     defs: '<path id="media-ratings-star" d="m10 1 2.6 6.2 6.8.6-5.1 4.4 1.6 6.6-5.9-3.5-5.9 3.5 1.6-6.6L.6 7.8l6.8-.6z"/>',
-    body: `<text x="4%" y="20%" class="film">The Matrix</text>
-<svg x="54%" y="6%" width="42%" height="16%" viewBox="0 0 115 21" preserveAspectRatio="xMaxYMid meet" class="stars">${stars}</svg>
-<line x1="4%" x2="96%" y1="28%" y2="28%"/>
-<text x="4%" y="41%" class="label">Taste classes</text><text x="52%" y="41%" class="label">Terminator 2</text>
-<line x1="48%" x2="48%" y1="35%" y2="93%"/>
-<svg x="4%" y="44%" width="40%" height="41%" viewBox="0 0 126 80">
-<path d="M2 40h122M63 2v76" class="axis"/>${points}
-<path class="position" d="m0 -4.8 4.8 4.8L0 4.8 -4.8 0z"/></svg>
-<svg x="52%" y="45%" width="44%" height="40%" viewBox="0 0 100 81" preserveAspectRatio="none">
-${bars}<path class="baseline" d="M0 79.5h100" vector-effect="non-scaling-stroke"/></svg>
-<text x="4%" y="94%" class="caption">◇ Your position</text>
-<text x="52%" y="94%" class="caption">½ ★</text><text x="96%" y="94%" text-anchor="end" class="caption">5 ★</text>`,
-    css: `& text{fill:var(--art-ink);font-family:system-ui,sans-serif}
-& .film{font:bold clamp(16px,min(7.4cqw,15cqh),38px) Georgia,serif}
+    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="forecast-layout">
+<div class="rating-input"><span class="film">The Matrix</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 21" class="stars">${stars}</svg></div>
+<div class="forecast-plot tastes"><span class="label">Taste classes</span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126 80"><path d="M2 40h122M63 2v76" class="axis"/>${points}<path class="position" d="m0 -4.8 4.8 4.8L0 4.8 -4.8 0z"/></svg>
+<span class="caption">◇ Your position</span></div>
+<div class="forecast-plot distribution"><span class="label">Terminator 2</span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 81" preserveAspectRatio="none">${bars}<path class="baseline" d="M0 79.5h100" vector-effect="non-scaling-stroke"/></svg>
+<span class="caption scale"><span>½ ★</span><span>5 ★</span></span></div></div></foreignObject>`,
+    css: `& .forecast-layout{height:100%;box-sizing:border-box;padding:2.5cqh 3cqw;display:grid;grid-template:"input input" auto "taste forecast" minmax(0,1fr) / minmax(0,1fr) minmax(0,1fr);gap:3cqh 3cqw;color:var(--art-ink);font-family:system-ui,sans-serif}
+& .rating-input{grid-area:input;display:flex;align-items:center;justify-content:space-between;gap:2cqw;border-bottom:1px solid var(--art-line);padding-bottom:2cqh}
+& .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;white-space:nowrap}
+& .stars{width:min(40%,73cqh);height:auto;max-height:17cqh}
+& .forecast-plot{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqh;min-width:0;min-height:0}
+& .forecast-plot svg{width:100%;height:100%;min-height:0}
+& .tastes{grid-area:taste;border-right:1px solid var(--art-line);padding-right:3cqw}
+& .distribution{grid-area:forecast}
 & .label{font-size:clamp(11px,min(4.5cqw,10cqh),22px);font-weight:650}
-& .caption{fill:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
-& line,& .axis,& .baseline{stroke:var(--art-line);fill:none}
+& .caption{color:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
+& .scale{display:flex;justify-content:space-between}
+@container ratings-preview (min-aspect-ratio:2.45/1){
+  & .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.95fr) minmax(0,1fr) minmax(0,1.2fr);padding:5cqh 2cqw;gap:2cqw}
+  & .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh}
+  & .film{font-size:clamp(15px,4.4cqw,36px)} & .stars{width:94%}
+}
+@container ratings-preview (max-aspect-ratio:1.2/1){
+  & .forecast-layout{grid-template:"input" auto "taste" minmax(0,1fr) "forecast" minmax(0,1fr) / minmax(0,1fr);padding:3cqh 5cqw;gap:2cqh}
+  & .tastes{border-right:0;border-bottom:1px solid var(--art-line);padding:0 0 1.5cqh}
+}
+& .axis,& .baseline{stroke:var(--art-line);fill:none}
 & .axis{stroke-dasharray:3 3}
 & .stars{fill:var(--art-ink)}
 & .outline{fill:none;stroke:var(--art-ink);stroke-width:1}

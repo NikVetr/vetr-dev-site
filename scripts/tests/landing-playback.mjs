@@ -29,9 +29,19 @@ test('CSS previews keep their frame on exit and resume their original clocks', a
       await page.waitForTimeout(200);
       assert.deepEqual(await times(art), paused, `${name}: clock stays frozen`);
       assert.deepEqual(await art.screenshot(), picture, `${name}: visible frame stays frozen`);
-      await art.hover(); await page.waitForTimeout(140);
-      const resumed = await times(art);
-      assert.ok(resumed.every((time, i) => time > paused[i] + 60), `${name}: resumes instead of restarting`);
+      const frozen = await art.evaluateHandle(el => el.getAnimations({ subtree: true }));
+      await art.hover();
+      try {
+        assert.ok(await art.evaluate((el, original) => {
+          const resumed = el.getAnimations({ subtree: true });
+          return original.length === resumed.length && original.every(a => resumed.includes(a));
+        }, frozen), `${name}: retains the same animations`);
+        await page.waitForFunction(({ name, paused }) => {
+          const art = document.querySelector(`[data-art="${name}"]`);
+          const clocks = art?.getAnimations({ subtree: true }) ?? [];
+          return clocks.length === paused.length && clocks.every((a, i) => a.playState === 'running' && Number(a.currentTime) > paused[i] + 60);
+        }, { name, paused }, { timeout: 4000 });
+      } finally { await frozen.dispose(); }
       await page.mouse.move(0, 0);
     }
     assert.deepEqual(errors, []);
@@ -300,7 +310,7 @@ test('desktop sticky switches are keyboard operable and retain theme and motion 
   }finally{await browser.close();}
 });
 
-test('Media Ratings fills a wide card and interpolates its forecasts across the loop seam', async () => {
+test('Rating Prediction fills a wide card and interpolates its forecasts across the loop seam', async () => {
   const browser = await openPage('#media-ratings-title', { engine, width: 1440, height: 900 });
   const { page } = browser;
   try {
@@ -323,5 +333,45 @@ test('Media Ratings fills a wide card and interpolates its forecasts across the 
       const film = await art.locator('.film').boundingBox(), stars = await art.locator('.stars').boundingBox();
       assert.ok(stars.x > film.x + film.width, 'the stars clear the film title on a phone');
     }
+    for (const [width, height] of [[530, 150], [230, 280]]) {
+      await art.evaluate((el, [w, h]) => {
+        Object.assign(el.style, { width: w + 'px', height: h + 'px', aspectRatio: 'auto', flex: 'none' });
+      }, [width, height]);
+      const input = await art.locator('.rating-input').boundingBox(), taste = await art.locator('.tastes').boundingBox();
+      const forecast = await art.locator('.distribution').boundingBox();
+      if (width > height) assert.ok(taste.x >= input.x + input.width - 1 && forecast.x >= taste.x + taste.width - 1);
+      else assert.ok(taste.y >= input.y + input.height - 1 && forecast.y >= taste.y + taste.height - 1);
+    }
   } finally { await browser.close(); }
+});
+
+test('Matrix rain advances between refreshes and wraps one complete glyph strip per layer', async () => {
+  const session = await openPage('#matrix-rain-title', { engine });
+  const { page } = session;
+  try {
+    const art = page.locator('[data-art="matrix-rain"]');
+    await art.hover();
+    await page.waitForFunction(() => document.querySelector('[data-art="matrix-rain"]')?.hasAttribute('data-playing'));
+    const shifts = time => art.evaluate((el, ms) => {
+      for (const animation of el.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = ms; }
+      return [...el.querySelectorAll('rect[class^="fall-"]')].map(rect =>
+        new DOMMatrixReadOnly(getComputedStyle(rect).transform).f);
+    }, time);
+    const start = await shifts(0), first = await shifts(16), second = await shifts(32), end = await shifts(7999);
+    const pitches = await art.locator('pattern[id^="matrix-rain-code-"]').evaluateAll(els => els.map(el => Number(el.getAttribute('height'))));
+    assert.equal(pitches.length, 3);
+    for (const [i, pitch] of pitches.entries()) {
+      assert.equal(start[i], 0);
+      assert.ok(first[i] > 0 && Math.abs(2 * first[i] - second[i]) < .002);
+      assert.ok(Math.abs(end[i] - pitch) < .1, 'final position matches the next copy of the repeating strip');
+    }
+    assert.deepEqual(await shifts(8000), start);
+    for (const [width, height] of [[560, 135], [175, 280]]) {
+      await art.evaluate((el, [w, h]) => { el.style.cssText = `width:${w}px;height:${h}px;min-height:0;flex:none;aspect-ratio:auto`; }, [width, height]);
+      const [title, box] = await art.evaluate(el => [el.querySelector('.locked'), el].map(node => node.getBoundingClientRect().toJSON()));
+      assert.ok(Math.abs(title.x + title.width / 2 - box.x - box.width / 2) < 1);
+      assert.ok(title.left >= box.left && title.right <= box.right);
+    }
+    assert.deepEqual(session.errors, []);
+  } finally { await session.close(); }
 });

@@ -1,33 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" data-period="6" data-frames="6" focusable="false">
+<svg xmlns="http://www.w3.org/2000/svg" data-period="6" data-frames="6" focusable="false">
 <style>
 [data-art="b64"] .frame + .frame { opacity: 0; }
 [data-art="b64"] .frame.first { will-change: opacity; }
-[data-art="b64"] .panel {fill:var(--art-paper);stroke:var(--art-line)}
-[data-art="b64"] text {text-anchor:middle;dominant-baseline:central;fill:var(--art-ink)}
-[data-art="b64"] .caption {font:13px ui-sans-serif,system-ui,sans-serif;fill:var(--art-muted)}
-[data-art="b64"] .value {font:15px ui-monospace,monospace}
-[data-art="b64"] .decoded {font-size:22px;fill:var(--primary)}
-[data-art="b64"] .progress {fill:none;stroke:var(--art-line);stroke-width:2}
-[data-art="b64"] .done {fill:var(--primary)} [data-art="b64"] .waiting {fill:var(--art-line)}
+[data-art="b64"] .decode-stage{box-sizing:border-box;width:100%;height:100%;padding:5cqh 5cqw;display:grid;grid-template-rows:auto minmax(0,1fr) auto;align-items:center;justify-items:center;border:1px solid var(--art-line);color:var(--art-ink);text-align:center}
+[data-art="b64"] .caption{font:clamp(11px,min(4.6cqw,11cqh),20px) system-ui,sans-serif;color:var(--art-muted)}
+[data-art="b64"] .value{font:clamp(12px,min(5.2cqw,13cqh),28px)/1.3 ui-monospace,monospace;overflow-wrap:anywhere;min-width:0}
+[data-art="b64"] .decoded{font-size:clamp(15px,min(7.8cqw,20cqh),40px);color:var(--primary)}
+[data-art="b64"] .steps{width:55%;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(var(--art-line),var(--art-line)) center / 100% 2px no-repeat}
+[data-art="b64"] .steps i{width:clamp(6px,2.4cqw,11px);aspect-ratio:1;border-radius:50%;background:var(--art-line)}
+[data-art="b64"] .steps .done{background:var(--primary)} [data-art="b64"] .steps .current{transform:scale(1.45)}
 [data-art="b64"][data-started] .frame { animation: b64-frame 6s step-end infinite; }
 @keyframes b64-frame { 0% { opacity: 1; } 16.666667% { opacity: 0; } 100% { opacity: 0; } }
 </style>
-<rect class="panel" x="4" y="4" width="312" height="172" rx="8"/><g class="frame first"><text class="caption" x="160" y="30">Decoded link</text>
-<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
-<g class="frame" style="animation-delay:1s"><text class="caption" x="160" y="30">3 encoded layers</text>
-<text class="value " x="160" y="75">WVVoU01HTklUVFpNZVRreVdsaFNl</text><text class="value " x="160" y="97">VXh0VW14a2FUZzk=</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="6" class="done"/><circle cx="144" cy="153" r="4" class="waiting"/><circle cx="176" cy="153" r="4" class="waiting"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
-<g class="frame" style="animation-delay:2s"><text class="caption" x="160" y="30">2 encoded layers</text>
-<text class="value " x="160" y="75">YUhSMGNITTZMeTkyWlhSeUxtUmxk</text><text class="value " x="160" y="97">aTg9</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="6" class="done"/><circle cx="176" cy="153" r="4" class="waiting"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
-<g class="frame" style="animation-delay:3s"><text class="caption" x="160" y="30">1 encoded layer</text>
-<text class="value " x="160" y="86">aHR0cHM6Ly92ZXRyLmRldi8=</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="6" class="done"/><circle cx="208" cy="153" r="4" class="waiting"/></g>
-<g class="frame" style="animation-delay:4s"><text class="caption" x="160" y="30">Decoded link</text>
-<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
-<g class="frame" style="animation-delay:5s"><text class="caption" x="160" y="30">Decoded link</text>
-<text class="value decoded" x="160" y="86">https://vetr.dev/</text>
-<path class="progress" d="M112 153h96"/><circle cx="112" cy="153" r="4" class="done"/><circle cx="144" cy="153" r="4" class="done"/><circle cx="176" cy="153" r="4" class="done"/><circle cx="208" cy="153" r="6" class="done"/></g>
+<g class="frame first"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">Decoded link</span>
+<code class="value decoded">https://vetr.dev/</code><span class="steps"><i class="done "></i><i class="done "></i><i class="done "></i><i class="done current"></i></span></div></foreignObject></g>
+<g class="frame" style="animation-delay:1s"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">3 encoded layers</span>
+<code class="value ">WVVoU01HTklUVFpNZVRreVdsaFNlVXh0VW14a2FUZzk=</code><span class="steps"><i class="done current"></i><i class=" "></i><i class=" "></i><i class=" "></i></span></div></foreignObject></g>
+<g class="frame" style="animation-delay:2s"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">2 encoded layers</span>
+<code class="value ">YUhSMGNITTZMeTkyWlhSeUxtUmxkaTg9</code><span class="steps"><i class="done "></i><i class="done current"></i><i class=" "></i><i class=" "></i></span></div></foreignObject></g>
+<g class="frame" style="animation-delay:3s"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">1 encoded layer</span>
+<code class="value ">aHR0cHM6Ly92ZXRyLmRldi8=</code><span class="steps"><i class="done "></i><i class="done "></i><i class="done current"></i><i class=" "></i></span></div></foreignObject></g>
+<g class="frame" style="animation-delay:4s"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">Decoded link</span>
+<code class="value decoded">https://vetr.dev/</code><span class="steps"><i class="done "></i><i class="done "></i><i class="done "></i><i class="done current"></i></span></div></foreignObject></g>
+<g class="frame" style="animation-delay:5s"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="decode-stage">
+<span class="caption">Decoded link</span>
+<code class="value decoded">https://vetr.dev/</code><span class="steps"><i class="done "></i><i class="done "></i><i class="done "></i><i class="done current"></i></span></div></foreignObject></g>
 </svg>

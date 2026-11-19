@@ -36,8 +36,11 @@ try {
 
   for (const [width, height] of [[390, 844], [844, 390], [640, 900], [768, 1024], [1000, 900], [1200, 900], [1366, 768], [1440, 900], [1700, 1000], [1920, 1080], [2560, 1080], [720, 450], [1440, 900]]) {
     await page.setViewportSize({ width, height });
-    await page.evaluate(() => scrollTo(0, 0));
-    await page.waitForTimeout(80);
+    await page.evaluate(async () => {
+      scrollTo(0, 0);
+      // The grid's ResizeObserver schedules the contour redraw on the next frame.
+      for (let frame = 0; frame < 3; frame++) await new Promise(resolve => requestAnimationFrame(resolve));
+    });
     const result = await page.evaluate(() => {
       const cards = [...document.querySelectorAll('#projects > .grid > li')];
       const sorted = [...cards].sort((a, b) => {

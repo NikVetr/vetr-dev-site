@@ -6,7 +6,7 @@ The static site at https://vetr.dev, served by GitHub Pages with no build step. 
 
 A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Statistics**, and **Art**, with Everyday tools first. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
 
-Short, wide desktop tiles place the preview beside the description. The Media Ratings preview interpolates between fitted forecasts as the example film rating changes.
+Short, wide desktop tiles place the preview beside the description. Rating Prediction arranges its input and two charts side by side or stacks them as the picture well changes shape. The bars interpolate between fitted forecasts. Matrix Rain fills its well with three continuously falling layers of seeded glyphs and keeps the title centered.
 
 ### Tile sizes
 
@@ -76,7 +76,7 @@ The Alice preview starts close to the head, fills whole words from left to right
 
 The chair's lossless frame strip is regenerated from the original WebM with `node scripts/landing-art/autochair-frames.mjs` (requires FFmpeg with libvpx-vp9/libwebp). Ordinary preview builds reuse this small asset.
 
-The cards that drive a page (agendamatic, layout-gui, matrix-rain, sankey) need Playwright: set `PLAYWRIGHT` to an installed `playwright` package, or `npm ci` in any tool folder. `scripts/landing-art/svg.mjs` holds what the pictures share: the 320 × 180 canvas, the theme colours (`--art-*` in `style.css`), scoping each picture's style sheet to its card, and the flip-book.
+The cards that drive a page (for example, agendamatic, layout-gui and sankey) need Playwright: set `PLAYWRIGHT` to an installed `playwright` package, or `npm ci` in any tool folder. `scripts/landing-art/svg.mjs` holds what the pictures share: the 320 × 180 canvas, the theme colours (`--art-*` in `style.css`), scoping each picture's style sheet to its card, and the flip-book.
 
 `assets/landing.js` inlines each picture when its card nears the viewport, so it paints in the page's theme. Hovering a card with a mouse or pen, or focusing it from the keyboard, plays its loop. Leaving pauses at the current frame; returning resumes from that point. CSS clocks and canvas players both retain their position. On narrow screens and devices with a coarse touch pointer, the panel nearest the viewport centre plays automatically. A compact sticky `vetr.dev` bar keeps horizontal animation and dark-mode switches available on desktop and phones; both choices persist in the browser. The controls share Wanderwart’s `shared/light-switch.js` and stylesheet. Background tabs pause playback. `prefers-reduced-motion` defaults to authored stills; the animation switch remains available to opt in, and an explicit on/off choice overrides that default. These loops are the page's only motion.
 
@@ -96,7 +96,7 @@ Name Tags offers **Customize helix or braid** inside its existing decoration con
 
 **[Matrix Rain](matrix-rain/)** hides words in falling code, locks a title into place, then zooms into a reflection on CRT glass. Use the included portrait or upload your own. Scrub the timeline or export a PNG or video. [Frame API](matrix-rain/api.md)
 
-**[Media Ratings](media-ratings/)** predicts how you would rate films, TV, books, anime, video games, tabletop games, albums, podcasts, recipes, cocktails and destinations. It also estimates kudos for fanfiction and original fiction, and subreddit replies. Filter recommendations by fandom, genre, year or other metadata while continuing to rate across the catalog. [Datasets and held-out evaluations](media-ratings/README.md)
+**[Rating Prediction](media-ratings/)** predicts how you would rate films, TV, books, anime, video games, tabletop games, albums, podcasts, recipes, cocktails and destinations. It also estimates kudos for fanfiction and original fiction, and subreddit replies. Filter recommendations by fandom, genre, year or other metadata while continuing to rate across the catalog. [Datasets and held-out evaluations](media-ratings/README.md)
 
 Tool entry pages pair their names with their function: **Palette Town — Color Palette Extender**, **Wanderwart — Pocket Language Guide**, **autoCHAIR — Meeting Agenda Timer**, and **Multipanel Figure Editor**. Each app keeps its native header and controls without an added collection-link row. Native Help buttons and teaching-page breadcrumbs keep their original roles. `shared/tool-nav.css` provides compact header action groups and in-page help styling; `shared/tool-nav.js` opens explanation sections reached by direct links. Run `node --test shared/tests/tool-nav.browser.mjs` for compact-header, native-help and keyboard checks. Wanderwart’s shell/mobile builders synchronize local copies of those styles and the shared light-switch component, keeping its standalone server, offline cache and native bundle self-contained.
 

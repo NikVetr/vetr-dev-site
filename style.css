@@ -239,7 +239,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   color: var(--art-ink);
   overflow: hidden;
 }
-/* The picture keeps its 16:9 drawing, centred, when its well takes another shape. */
+/* Each preview owns the composition inside its available picture area. */
 .card-art > svg { display: block; width: 100%; height: 100%; }
 /* A scripted loop (assets/players/) draws on a canvas in place of the still. */
 .card-art { position: relative; }
@@ -313,7 +313,7 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
 @media (min-width: 75rem), (orientation: landscape) and (max-height: 500px) {
   @container tile (min-width: 30rem) {
     [data-mosaic-key="layout-gui"] > .project-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 0.5rem; }
-    [data-mosaic-key="layout-gui"] .card-art { grid-row: 1 / -1; align-self: center; aspect-ratio: 16 / 9; min-height: 0; }
+    [data-mosaic-key="layout-gui"] .card-art { grid-row: 1 / -1; align-self: stretch; aspect-ratio: auto; min-height: 0; }
     [data-mosaic-key="layout-gui"] .project-card > :not(.card-art) { margin-inline: 0.25rem; }
     [data-mosaic-key="layout-gui"] h3 { margin-top: 0; }
     [data-mosaic-key="layout-gui"] .project-date { align-self: end; }
@@ -390,8 +390,11 @@ p { margin: 0 0 var(--space-2); max-width: 68ch; }
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Regenerated collage canvases adapt to the full available picture well. */
+/* Preview layouts respond to the dimensions of their own card. */
 .card-art[data-art="message-collage"] { container: collage-preview / size; }
+.card-art[data-art="layout-gui"] { container: layout-preview / size; }
+.card-art[data-art="motrpac-alphabet"] { container: alphabet-preview / size; }
+.card-art[data-art="b64"] { container-type: size; }
 .card-art[data-art="media-ratings"] { container: ratings-preview / size; }
 
 /* Two-row desktop tiles can span three to five columns in the packed wall.
