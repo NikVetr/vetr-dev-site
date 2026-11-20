@@ -356,10 +356,22 @@ input {
   margin: 0.2rem 0 0;
 }
 .model-controls {
-  display: flex;
-  align-items: end;
-  gap: 0.65rem;
-  max-width: 100%;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-areas: ". . caption" "filters plot model";
+  align-items: center;
+  gap: .2rem .65rem;
+  width: min(32.4rem, 100%);
+}
+.model-controls > button { font-size: .84rem; }
+#facet { grid-area: filters; }
+#scatter-toggle { grid-area: plot; }
+#model-choice:not([hidden]) { display: contents; }
+#model-choice > .choice-label { grid-area: caption; }
+#model { grid-area: model; min-width: 0; }
+.model-controls:has(#model-choice[hidden]) { display: flex; justify-self: end; width: auto; }
+@container (max-width: 30rem) {
+  .model-controls { grid-template-areas: "filters plot ." "caption caption caption" "model model model"; }
 }
 .model-controls label {
   display: grid;
@@ -621,9 +633,6 @@ footer {
   #boards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .model-controls {
-    flex-wrap: wrap;
-  }
 }
 @media (max-width: 690px) {
   body {
@@ -675,7 +684,7 @@ footer {
     font-size: 0.76rem;
   }
   .model-controls {
-    gap: 0.4rem;
+    column-gap: .4rem;
   }
   .detail-head {
     flex-wrap: wrap;
@@ -1739,11 +1748,6 @@ body {
     gap: 0.35rem;
   }
 }
-.model-controls {
-  display: grid;
-  width: min(32.4rem, 100%);
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.14fr);
-}
 .model-controls select { max-width: 100%; }
 @container (min-width: 49rem) {
   .analysis-head {
@@ -1765,11 +1769,6 @@ body {
   white-space: nowrap;
 }
 
-#facet {
-  justify-self: end;
-  align-self: end;
-  font-size: 0.84rem;
-}
 #recommendation-filters {
   width: min(32rem, calc(100% - 1.4rem));
   max-height: calc(100dvh - 2rem);
@@ -1949,12 +1948,7 @@ body {
 #source-choices small { white-space: nowrap; }
 #source-choices .choice-segments > label { min-height: 2.55rem; }
 .choice-label, .minor-components { color: var(--muted); font-size: .76rem; }
-#model-choice > .choice-label { display: block; margin-bottom: .2rem; }
 .minor-components { cursor: pointer; }
-.model-controls { width: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
-#model-choice { min-width: 0; max-width: 100%; }
-#model-choice:has(.choice-segments) { flex: 1 1 16rem; }
-.model-controls:has(#model-choice[hidden]) { justify-self: end; }
 @media (forced-colors: active) {
   .choice-segments > label:has(input:checked) { border-color: Highlight; color: Highlight; }
 }

@@ -300,6 +300,12 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
   try {
     await p.locator('#library .entry').first().waitFor();
     assert.equal(await choiceValue(p, 'model'), 'personalized');
+    const centers = await Promise.all(['#facet', '#scatter-toggle', '#model'].map(selector =>
+      p.locator(selector).evaluate(element => {
+        const {top, height} = element.getBoundingClientRect();
+        return top + height / 2;
+      })));
+    assert.ok(Math.max(...centers) - Math.min(...centers) < 1, 'Header controls share a vertical center');
     assert.equal(await p.locator('#library .entry').count(), 500);
     await p.locator('.ranks[data-key=expected] .rank[data-id="50"]').click();
     assert.equal(

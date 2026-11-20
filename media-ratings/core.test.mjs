@@ -9,7 +9,7 @@ import { pnorm } from '../intuitions/lib/normal.js';
 const close = (x, y, tol = 1e-8) => assert.ok(Math.abs(x - y) < tol, x + ' ≠ ' + y);
 test('fingerprint labels require distinct recurring traits and meaningful variance', () => {
   const items = Array.from({ length: 16 }, (_, i) => ({
-    title: 'Title ' + i, annotations: { genres: [i < 8 ? 'Mystery' : 'Comedy'], tags: [i < 8 ? 'Title 0' : 'Title 1'] },
+    title: 'Title ' + i, annotations: { genres: [i < 8 ? 'chick flick' : 'PG-13'], tags: [i < 8 ? 'Title 0' : 'Title 1'] },
   }));
   const cat = { items, scale: [0, 1] };
   const component = (fraction, loadings) => ({
@@ -19,7 +19,7 @@ test('fingerprint labels require distinct recurring traits and meaningful varian
   const axes = [component(.6, ordered), component(.3, ordered.map(v => -v)), component(minimumAxisShare / 2, ordered)];
   const uniform = items.map(() => .5);
   const labels = describeAxes(cat, axes, uniform, uniform);
-  assert.deepEqual([labels[0].low, labels[0].high], ['Mystery', 'Comedy']);
+  assert.deepEqual([labels[0].low, labels[0].high], ['Chick Flick', 'PG-13']);
   assert.match(labels[0].evidence, /8 entries/);
   assert.ok(labels.slice(1).every(axis => !axis.interpretable && axis.low === null && axis.high === null));
   const unannotated = { ...cat, items: items.map(({title}) => ({title})) };

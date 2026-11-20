@@ -87,7 +87,10 @@ function indexFor(catalog) {
       const values = annotations[field];
       for (const value of Array.isArray(values) ? values : [values]) {
         if (typeof value !== 'string' || !value.trim()) continue;
-        const name = groupLabel(field, value.trim(), domain);
+        const label = groupLabel(field, value.trim(), domain);
+        const name = label === label.toLowerCase()
+          ? label.replace(/(^|[\s-])\p{Ll}/gu, initial => initial.toUpperCase())
+          : label;
         const id = normalize(name);
         if ((field === 'tags' || field === 'genres') && titles.has(id)) continue;
         if (seen.has(id)) continue;
