@@ -104,6 +104,7 @@
           </div>
           <div class="model-controls">
             <button id="facet" aria-haspopup="dialog" aria-controls="recommendation-filters" disabled>Filters</button>
+            <button type="button" id="scatter-toggle" aria-pressed="false" aria-controls="boards" disabled>Scatterplot</button>
             <div id="model-choice" hidden></div>
           </div>
         </div>
@@ -168,6 +169,14 @@
             <section id="taste-patterns"></section>
             <section id="class-signature"></section>
           </div>
+          <section id="rating-surprises" aria-labelledby="surprise-heading">
+            <div class="surprise-head"><h3 id="surprise-heading">Your unexpected ratings</h3>
+              <select aria-label="Order unexpected ratings"><option value="gap">Largest score gap</option><option value="probability">Least likely answer</option></select>
+            </div>
+            <p></p><button class="check-ratings" hidden></button>
+            <div class="surprise-columns" aria-hidden="true" hidden><span>Rated entry</span><span>Predicted</span><span>Your answer</span><span>Gap</span><span>Chance of answer</span></div>
+            <ol></ol>
+          </section>
           <details id="profile-method">
             <summary>Class probabilities and model details</summary>
             <div id="memberships"></div>

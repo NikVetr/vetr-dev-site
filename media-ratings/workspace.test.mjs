@@ -1196,3 +1196,46 @@ test('either ratings shelf opens item information and predicts a rated title fro
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });
+
+test('the recommendation scatterplot and held-out rating list open the corresponding item', async () => {
+  const app = await openPage('rating-prediction/?catalog=metacritic', { width: 390, height: 844 });
+  const p = app.page;
+  try {
+    const toggle = p.getByRole('button', { name: 'Scatterplot', exact: true });
+    await toggle.click();
+    const plot = p.locator('.recommendation-plot'),
+      canvas = plot.locator('canvas');
+    const entries = p.locator('#library .entry');
+    await entries.nth(0).getByRole('radio').last().check();
+    await entries.nth(1).getByRole('radio').first().check();
+    assert.match(await plot.locator('.plot-meta').innerText(), /178 unrated/);
+    await canvas.focus();
+    await canvas.press('End');
+    await canvas.press('Enter');
+    assert.equal(
+      await plot.locator('.plot-readout strong').innerText(),
+      await p.locator('#detail-title').innerText(),
+    );
+    await plot.locator('select').selectOption('rank');
+    await canvas.scrollIntoViewIfNeeded();
+    const point = await plot.locator('.hover-marker').boundingBox();
+    await p.mouse.move(point.x + point.width / 2, point.y + point.height / 2);
+    assert.ok(await plot.locator('.plot-tip').isVisible());
+    const clicked = await plot.locator('.plot-tip strong').innerText();
+    await p.mouse.click(point.x + point.width / 2, point.y + point.height / 2);
+    assert.equal(await p.locator('#detail-title').innerText(), clicked);
+    const surprises = p.locator('#rating-surprises');
+    await surprises.scrollIntoViewIfNeeded();
+    await surprises.locator('li').first().waitFor();
+    assert.equal(await surprises.locator('li').count(), 2);
+    await surprises.locator('select').selectOption('probability');
+    const rated = await surprises.locator('li strong').first().innerText();
+    await surprises.locator('li button').first().click();
+    assert.equal(await p.locator('#detail-title').innerText(), rated);
+    await toggle.click();
+    assert.equal(await p.locator('#boards .board').count(), 6);
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});

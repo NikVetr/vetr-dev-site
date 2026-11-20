@@ -1,3 +1,5 @@
+import { recommendationPlot } from './recommendation-plot.mjs';
+import { surprisePanel } from './rating-surprises.mjs';
 import { recommendationFilters } from './filters.mjs';
 import { catalogForDomain, renderChoice, showSources, sourceDomains } from './catalog-choices.mjs';
 import { minimumAxisShare } from './axis-annotations.mjs';
@@ -17,13 +19,13 @@ import {
   importForecasts,
   saveCSV,
 } from './exchange.mjs';
-import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges } from './core.mjs';
+import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges, heldOutRatings } from './core.mjs';
 import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-const api = { submit, tasteProfile, questionScores, discoveryRanking, rankChanges, preferenceFingerprint, gaussianProjection,
+const api = { submit, heldOutRatings, tasteProfile, questionScores, discoveryRanking, rankChanges, preferenceFingerprint, gaussianProjection,
   importRatings, importRatingEntries, importForecasts, ratingsCSV, forecastsCSV };
 Object.assign(window, { RatingPrediction: api, MediaRatings: api });
 const states = new Map();
@@ -794,6 +796,7 @@ function setSelection(id, fromShelf) {
     shelf.get(id)?.querySelector('.entry-title').setAttribute('aria-current', 'true');
   }
   selected = state.selection = id;
+  scatter.select(id);
   state.inspectFromShelf = fromShelf;
 }
 
@@ -806,6 +809,25 @@ function inspectItem(id, fromShelf) {
   renderDetail();
 }
 
+const scatter = recommendationPlot((id, visit) => {
+  state.followedSuggestions.add(id);
+  inspectItem(id, false);
+  reveal(id);
+  if (visit) {
+    el('detail-title').focus({preventScroll:true});
+    el('detail').scrollIntoView({block:'nearest'});
+  }
+});
+input('scatter-toggle').onclick = () => {
+  if (!result) return;
+  state.scatter = !state.scatter;
+  renderBoards();
+};
+const updateSurprises = surprisePanel(el('rating-surprises'), id => {
+  inspectItem(id, true);
+  el('detail-title').focus({preventScroll:true});
+  el('detail').scrollIntoView({block:'nearest'});
+});
 input('apply').onclick = () => update();
 input('auto').onchange = () => {
   if (state && input('auto').checked) update();
@@ -895,6 +917,7 @@ function update(applyDraft = true) {
       ratedOn,
     );
     renderFingerprint();
+    updateSurprises(catalog, {model:state.model, ratings:state.applied, ratedOn:state.appliedDates, volunteered}, titles);
     renderSnapshot();
     renderBoards();
     renderDetail();
@@ -902,8 +925,10 @@ function update(applyDraft = true) {
   } catch (error) {
     // A failed model calculation must never leave rankings labeled as a new fit.
     result = null;
+    updateSurprises(null,null,null);
     el('taste').hidden = true;
     el('boards').replaceChildren();
+    input('scatter-toggle').disabled = true;
     el('detail').hidden = true;
     el('weights').textContent = '';
     el('choice-note').hidden = true;
@@ -1068,6 +1093,7 @@ function recommendationRow(p, index, spec, isShift, ranks) {
 const fillRankings = new WeakMap();
 function renderBoards(only = '') {
   closeRatingChoices();
+  if (state.scatter && only === 'expected') return;
   const host = el('boards');
   const positions = new Map(
     [...host.querySelectorAll('.ranks')].map((list) => [
@@ -1106,6 +1132,7 @@ function renderBoards(only = '') {
     : panels;
   host.classList.toggle('activity-boards', activity);
   for (const original of shown) {
+    if (state.scatter && !['information','ratingChange'].includes(original.key)) continue;
     if (only && original.key !== only) continue;
     const spec = original.key === 'information' ? {
       ...original,
@@ -1115,6 +1142,7 @@ function renderBoards(only = '') {
     const board = node('section'),
       list = node('div');
     board.className = 'board';
+    board.dataset.panel = spec.key;
     list.className = 'ranks';
     list.dataset.key = spec.key;
     const direction = state.directions[spec.key];
@@ -1209,7 +1237,21 @@ function renderBoards(only = '') {
     fragment.append(board);
   }
   if (only) host.querySelector('.ranks[data-key="' + only + '"]').closest('.board').replaceWith(fragment);
-  else host.replaceChildren(fragment);
+  else {
+    host.replaceChildren(fragment);
+    const toggle = input('scatter-toggle');
+    toggle.disabled = false;
+    toggle.setAttribute('aria-pressed', String(Boolean(state.scatter)));
+    host.classList.toggle('scatter-mode', Boolean(state.scatter));
+    if (state.scatter) {
+      host.append(scatter.panel);
+      scatter.render({
+        rows: visible, ranks: rankMovements, titles, scale: catalog.scale, binary: activity,
+        rated: Object.keys(state.applied).length,
+        expectedLabel: activity ? shown.find(spec => spec.key === 'expected').title : 'Expected rating',
+      }, selected);
+    }
+  }
   for (const list of only ? [] : host.querySelectorAll('.ranks'))
     list.scrollTop = positions.get(list.getAttribute('data-key'))?.top ?? 0;
   if (only === 'expected') return;
@@ -1256,11 +1298,10 @@ function inspectionForecast() {
   delete ratings[selected];
   delete ratedOn[selected];
   const volunteered = Object.keys(ratings).filter(id => state.appliedSources[id] === 'volunteered');
-  const p = predict(catalog, { model: state.model, ratings, volunteered, ratedOn, threshold: state.threshold })
-    .predictions.find(item => item.itemId === selected);
+  const p = predict(catalog, { model: state.model, ratings, volunteered, ratedOn, threshold: state.threshold, targetId: selected }).predictions[0];
   const population = populationModel(catalog, catalog.models[state.model], latestRatingDate(ratedOn));
   const comparison = population === baselineModel ? prior :
-    predict({ ...catalog, models: { population } }, { model: 'population' }).predictions.find(item => item.itemId === selected);
+    predict({ ...catalog, models: { population } }, { model: 'population', targetId: selected }).predictions[0];
   lastHeldOut = { result, id: selected, threshold: state.threshold, p, prior: comparison };
   return lastHeldOut;
 }
