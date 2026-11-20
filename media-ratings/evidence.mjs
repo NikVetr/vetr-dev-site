@@ -18,19 +18,17 @@ async function packedCounts(file, length) {
   async function read() {
     const response = await fetch(url);
     if (!response.ok) throw new Error('Co-rating counts unavailable (' + response.status + ').');
-    return new Uint8Array(await response.arrayBuffer());
+    const buffer = await response.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+    if (bytes[0] !== 31 || bytes[1] !== 139) return buffer;
+    const decoded = new Response(buffer).body.pipeThrough(new DecompressionStream('gzip'));
+    return new Response(decoded).arrayBuffer();
   }
   // WebKit can interrupt the first response body while loading a large catalog.
-  const bytes = await read().catch(error => {
+  const buffer = await read().catch(error => {
     if (!(error instanceof TypeError) && !['NetworkError', 'NotReadableError'].includes(error.name)) throw error;
     return read();
   });
-  const buffer =
-    bytes[0] === 31 && bytes[1] === 139
-      ? await new Response(
-          new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')),
-        ).arrayBuffer()
-      : bytes.buffer;
   if (buffer.byteLength !== length * 2) throw new Error('Incomplete paired counts.');
   return new Uint16Array(buffer);
 }

@@ -10,6 +10,7 @@ games are never given a negative vote. See discovery-study.md for the protocol.
 import argparse
 import json
 from pathlib import Path
+from typing import TypedDict
 
 import numpy as np
 from scipy.special import expit, logit, softmax
@@ -33,17 +34,21 @@ def approval(given, values, weights, emissions, kernel):
     return expit(logit(base) + kernel[:, given] @ beta)
 
 
-def interval(values):
+class PairedInterval(TypedDict):
+    difference: float
+    ci95: list[float]
+
+
+def interval(values) -> PairedInterval:
     values = values[np.isfinite(values)]
-    mean = values.mean()
-    width = 1.96 * values.std(ddof=1) / np.sqrt(len(values))
-    return dict(difference=mean, ci95=[mean - width, mean + width])
+    mean = float(values.mean())
+    width = float(1.96 * values.std(ddof=1) / np.sqrt(len(values)))
+    return {"difference": mean, "ci95": [mean - width, mean + width]}
 
 
-def score(cohort, matrix, model, popular, bumps, seed, rules):
+def discovery_cases(cohort, matrix, model, seed):
     rng = np.random.default_rng(seed)
     weights, emissions, kernel = model
-    results = {}
     for i in cohort:
         begin, end = matrix.indptr[i : i + 2]
         items, votes = matrix.indices[begin:end], matrix.data[begin:end] - 1
@@ -55,7 +60,28 @@ def score(cohort, matrix, model, popular, bumps, seed, rules):
         # the catalog order for identical predicted scores.
         order = np.argsort(-raw, kind="stable")
         ids = order[~np.isin(order, given)]
-        relevance = rankdata(raw[ids])
+        yield given, values, hidden, truth, raw, ids, rankdata(raw[ids])
+
+
+def retrieval_metrics(titles, hidden, truth, raw):
+    positive_count = (truth == 1).sum()
+    hits = np.isin(hidden, titles)
+    positive_hits = (hits & (truth == 1)).sum()
+    return [
+        hits.mean(),
+        positive_hits / positive_count if positive_count else np.nan,
+        raw[titles].mean(),
+        hits.any(),
+        hits.sum(),
+        positive_hits,
+    ]
+
+
+def score(cohort, matrix, model, popular, bumps, seed, rules):
+    results = {}
+    for given, values, hidden, truth, raw, ids, relevance in discovery_cases(
+        cohort, matrix, model, seed
+    ):
         pop = popular[ids]
         rankings = {
             "approval": ids[:20],
@@ -70,19 +96,9 @@ def score(cohort, matrix, model, popular, bumps, seed, rules):
             for w in (0.25, 0.5, 0.75, 1.0):
                 mix = (1 - w) * relevance + w * affinity
                 rankings[f"{rule} {w:g}"] = ids[np.argsort(-mix, kind="stable")[:20]]
-        positives = hidden[truth == 1]
         for name, titles in rankings.items():
-            hits = np.isin(hidden, titles)
-            positive_hits = (hits & (truth == 1)).sum()
             results.setdefault(name, []).append(
-                [
-                    hits.mean(),
-                    positive_hits / len(positives) if len(positives) else np.nan,
-                    raw[titles].mean(),
-                    hits.any(),
-                    hits.sum(),
-                    positive_hits,
-                ]
+                retrieval_metrics(titles, hidden, truth, raw)
             )
     return {name: np.asarray(rows) for name, rows in results.items()}
 

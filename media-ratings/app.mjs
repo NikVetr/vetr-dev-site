@@ -233,7 +233,7 @@ function install(key, next) {
   if (state.reviewContext) {
     contextGuide.append('Match my picks changes the order using the titles you chose to rate. Both likes and dislikes count as choices. App suggestions and imports with unknown sources contribute only their ratings. At 0% the list ranks by predicted rating.');
     if (key === 'games') {
-      contextGuide.append(' At 100% it ranks by shared Steam reviewers and review frequency. Steam records posted reviews. The approval interval estimates the share of reviewers who recommend each game.');
+      contextGuide.append(' At 100% it ranks by shared Steam reviewers and review frequency. With at least four picks, it also considers how widely reviewed your games are. Picks entirely in the most-reviewed tenth already carry that signal through shared reviewers. The approval interval estimates the share of Steam reviewers who recommend each game.');
       const study = node('a', 'Steam ranking evaluation');
       study.href = 'https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/discovery-study.md';
       contextGuide.append(' ', study);

@@ -37,10 +37,17 @@ function steamIndex(catalog, data) {
       }
     }
     const total = data.counts.reduce((a, b) => a + b, 0);
+    const prior = data.counts.map((n) => n / total);
+    const logCounts = data.counts.map(Math.log);
+    const mean = logCounts.reduce((sum, v, i) => sum + prior[i] * v, 0);
+    const sd = Math.sqrt(logCounts.reduce((sum, v, i) => sum + prior[i] * (v - mean) ** 2, 0));
+    const byCount = data.ids.map((_, i) => i).sort((a, b) => data.counts[b] - data.counts[a]);
     indices.set(data, {
       catalog,
       positions: new Map(data.ids.map((id, i) => [id, i])),
-      prior: data.counts.map((v) => v / total),
+      prior,
+      popularity: sd > 1e-12 ? logCounts.map((v) => (v - mean) / sd) : null,
+      mostReviewed: new Set(byCount.slice(0, Math.ceil(data.ids.length / 10))),
     });
   }
   const index = indices.get(data);
@@ -57,14 +64,20 @@ function reviewAffinity(catalog, discovery, anchors, predictions) {
   const values = index.prior.slice();
   let linked = false;
   const eligible = new Set(predictions.map((p) => p.itemId));
-  for (const id of anchors) {
-    const row = discovery.excess[index.positions.get(id)];
+  const positions = anchors.map((id) => index.positions.get(id));
+  for (const anchor of positions) {
+    const row = discovery.excess[anchor];
     for (let j = 0; j < row.length; j += 2) {
       values[row[j]] += row[j + 1] / (discovery.units * anchors.length);
       if (eligible.has(discovery.ids[row[j]])) linked = true;
     }
   }
   if (!linked) return null;
+  if (positions.length >= 4 && index.popularity && positions.some((i) => !index.mostReviewed.has(i))) {
+    // Four revealed games validated a half-shrunk mean; longer lists retain that shrinkage.
+    const center = positions.reduce((sum, i) => sum + index.popularity[i], 0) / (2 * positions.length);
+    for (let i = 0; i < values.length; i++) values[i] = Math.log(values[i]) + center * index.popularity[i];
+  }
   return new Map(predictions.map((p) => [p.itemId, values[index.positions.get(p.itemId)]]));
 }
 
@@ -76,7 +89,7 @@ function reviewAffinity(catalog, discovery, anchors, predictions) {
  */
 export function discoveryRanking(
   catalog,
-  { ratings = {}, volunteered = [], predictions, weight = 0, discovery },
+  { ratings = {}, volunteered = [], predictions, weight = 0, discovery = null },
 ) {
   if (!Number.isFinite(weight) || weight < 0 || weight > 1)
     throw new RangeError('Review context weight must be between 0 and 1.');
