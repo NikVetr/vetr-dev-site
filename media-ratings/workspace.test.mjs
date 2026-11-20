@@ -1064,3 +1064,50 @@ test('Royal Road Kindle editions have a separate whole-star shelf, serial links 
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });
+
+test('either ratings shelf opens item information and predicts a rated title from the other answers', async () => {
+  const app = await openPage('rating-prediction/?catalog=games');
+  const { page } = app;
+  const catalog = JSON.parse(readFileSync(new URL('games.json', import.meta.url), 'utf8'));
+  const portal = catalog.items.find(i => i.itemId === '400');
+  try {
+    const shelf = (id) => page.locator(`#library .entry[data-id="${id}"]`);
+    await page.route('**/steam/**/header*.jpg*', route => route.fulfill({
+      contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215"></svg>',
+    }));
+    await page.locator('#search').fill('Portal');
+    await shelf('400').getByRole('button', { name: 'Portal', exact: true }).press('Enter');
+    assert.equal(await page.locator('#detail-kind').innerText(), 'Video Game Information');
+    assert.equal(await page.locator('#detail-title').innerText(), 'Portal');
+    assert.equal(await page.locator('#detail-image figcaption').count(), 0);
+    assert.equal(await page.locator('#external').getAttribute('href'), portal.annotations.sourceUrl);
+    await shelf('620').getByRole('radio', { name: 'Thumbs up', exact: true }).check();
+    await shelf('400').getByRole('radio', { name: 'Thumbs down', exact: true }).check();
+    await page.locator('#rated-list').getByRole('button', { name: 'Portal', exact: true }).click();
+    const expected = predict(catalog, { ratings: { '620': 1 } }).predictions.find(p => p.itemId === '400');
+    const metrics = page.locator('#metrics');
+    assert.match(await metrics.innerText(), /Your rating\s+Thumbs down/);
+    assert.equal(await metrics.getByText('From your other answers').locator('..').locator('dd').innerText(), (expected.expected * 100).toFixed(1) + '%');
+    assert.match(await page.locator('#record-count').innerText(), /Steam reviews/);
+    assert.equal(await page.locator('#comparison select').inputValue(), '620');
+
+    await page.locator('#facet').click();
+    const min = page.getByRole('spinbutton', { name: 'Minimum review count' });
+    const max = page.getByRole('spinbutton', { name: 'Maximum review count' });
+    await min.fill('10000'); await max.fill('9999');
+    assert.ok(await page.locator('#filter-apply').isDisabled());
+    await max.fill('15000');
+    await page.locator('#filter-apply').click();
+    assert.equal(await page.locator('#detail-title').innerText(), 'Portal');
+    const eligible = catalog.items.filter(it => it.annotations.ratingCount >= 10000 && it.annotations.ratingCount <= 15000);
+    assert.equal(await page.locator('[data-key=expected] .rank').count(), eligible.length);
+    assert.ok(await shelf('400').isVisible());
+    await page.locator('#facet').click(); await page.locator('#filter-rating-items').check(); await page.locator('#filter-apply').click();
+    assert.ok(await shelf('400').isHidden());
+    await page.locator('#rated-list').getByRole('button', { name: 'Portal', exact: true }).press('Enter');
+    assert.equal(await page.locator('#detail-title').innerText(), 'Portal');
+    assert.ok(await page.locator('#detail-title').evaluate(e => e === document.activeElement));
+    assert.equal(await page.locator('#rated-list .entry').count(), 2);
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});

@@ -3,9 +3,11 @@ import { node } from './detail.mjs';
 // Alternatives within a field are a union. Active fields and the inclusive year interval intersect.
 export function recommendationFilters(catalog, facets) {
   const groups = new Map(),
-    years = new Map();
+    years = new Map(), counts = new Map();
   for (const { itemId, annotations = {} } of catalog.items) {
     if (Number.isInteger(annotations.year)) years.set(itemId, annotations.year);
+    if (Number.isSafeInteger(annotations.ratingCount) && annotations.ratingCount >= 0)
+      counts.set(itemId, annotations.ratingCount);
     for (const [group, values] of Object.entries(facets(annotations))) {
       for (const value of values ?? []) {
         if (!groups.has(group)) groups.set(group, new Map());
@@ -20,7 +22,8 @@ export function recommendationFilters(catalog, facets) {
   const yearLabel = ['recipes', 'books', 'cocktails', 'fanfiction', 'webfiction', 'royalroad'].includes(catalog.domain)
     ? 'Publication year'
     : 'Release year';
-  const blank = () => ({ choices: new Map(), years: null, forRating: false });
+  const countLabel = catalog.activityCountLabel ?? (catalog.domain === 'games' ? 'Review count' : 'Rating count');
+  const blank = () => ({ choices: new Map(), years: null, minCount: null, maxCount: null, forRating: false });
   let applied = blank();
   function matches(id, filter = applied) {
     if (
@@ -28,6 +31,11 @@ export function recommendationFilters(catalog, facets) {
       (!years.has(id) || years.get(id) < filter.years[0] || years.get(id) > filter.years[1])
     )
       return false;
+    if (filter.minCount !== null || filter.maxCount !== null) {
+      const count = counts.get(id);
+      if (count === undefined || (filter.minCount !== null && count < filter.minCount) ||
+          (filter.maxCount !== null && count > filter.maxCount)) return false;
+    }
     for (const [group, selected] of filter.choices) {
       if (![...selected].some((value) => groups.get(group).get(value).has(id))) return false;
     }
@@ -38,9 +46,10 @@ export function recommendationFilters(catalog, facets) {
     const trigger = /** @type {HTMLButtonElement} */ (el('facet'));
     const dialog = /** @type {HTMLDialogElement} */ (el('recommendation-filters'));
     function updateTrigger() {
-      const count = applied.choices.size + Number(!!applied.years);
+      const count = applied.choices.size + Number(!!applied.years) +
+        Number(applied.minCount !== null || applied.maxCount !== null);
       trigger.textContent = count ? 'Filters (' + count + ')' : 'Filters';
-      trigger.disabled = !groups.size && !years.size;
+      trigger.disabled = !groups.size && !years.size && !counts.size;
       trigger.setAttribute('aria-label', 'Filter recommendations' + (count ? ', ' + count + ' active' : ''));
     }
     updateTrigger();
@@ -49,6 +58,12 @@ export function recommendationFilters(catalog, facets) {
       const pool = candidates();
       const fields = el('filter-fields');
       function preview() {
+        const invalid = fields.querySelector('input:invalid');
+        el('filter-apply').toggleAttribute('disabled', !!invalid);
+        if (invalid instanceof HTMLInputElement) {
+          el('filter-matches').textContent = invalid.validationMessage;
+          return;
+        }
         const n = pool.filter((id) => matches(id, draft)).length;
         el('filter-matches').textContent =
           n.toLocaleString() + (n === 1 ? ' matching title' : ' matching titles');
@@ -118,6 +133,33 @@ export function recommendationFilters(catalog, facets) {
           active.onchange = updateRange;
           updateRange();
           section.append(legend, endpoints, track);
+          fields.append(section);
+        }
+        if (counts.size) {
+          const section = node('fieldset'), bounds = node('div');
+          const minimum = node('input'), maximum = node('input');
+          bounds.className = 'count-bounds';
+          for (const [i, field] of [minimum, maximum].entries()) {
+            const caption = i ? 'At most' : 'At least';
+            const value = i ? draft.maxCount : draft.minCount;
+            const label = node('label', caption);
+            field.type = 'number';
+            field.min = '0';
+            field.step = '1';
+            field.placeholder = i ? 'No limit' : '0';
+            field.setAttribute('aria-label', (i ? 'Maximum ' : 'Minimum ') + countLabel.toLowerCase());
+            field.value = value === null ? '' : String(value);
+            field.oninput = () => {
+              draft.minCount = minimum.value === '' ? null : minimum.valueAsNumber;
+              draft.maxCount = maximum.value === '' ? null : maximum.valueAsNumber;
+              maximum.setCustomValidity(draft.minCount !== null && draft.maxCount !== null && draft.minCount > draft.maxCount
+                ? 'The maximum must be at least the minimum.' : '');
+              preview();
+            };
+            label.append(field);
+            bounds.append(label);
+          }
+          section.append(node('legend', countLabel), bounds);
           fields.append(section);
         }
         for (const [group, options] of groups) {

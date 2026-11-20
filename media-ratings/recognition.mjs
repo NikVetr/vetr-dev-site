@@ -34,7 +34,7 @@ export function recognitionLink(text, url) {
 }
 
 // Each surface owns its selection. An old fetch or image error cannot overwrite a newer title.
-export function showRecognition(figure, reference, title, describe = undefined) {
+export function showRecognition(figure, reference, title, describe = undefined, linkedSource = null) {
   const previous = displayed.get(figure);
   if (previous && previous.reference === reference && previous.title === title) return;
   const selection = { reference, title };
@@ -54,16 +54,22 @@ export function showRecognition(figure, reference, title, describe = undefined) 
     img.alt = photo.title === title ? title : photo.title + ' · ' + title;
     img.decoding = 'async';
     img.referrerPolicy = 'no-referrer';
-    img.onload = () => { if (current()) figure.hidden = false; };
+    img.onload = () => {
+      if (!current()) return;
+      figure.classList.toggle('landscape-art', img.naturalWidth > img.naturalHeight);
+      figure.style.setProperty('--image-ratio', String(img.naturalWidth / img.naturalHeight));
+      figure.hidden = false;
+    };
     img.onerror = () => show(fallback, poster);
     const source = recognitionLink('', photo.sourceUrl);
     source.ariaLabel = photo === poster ? title + ' poster · file and rights' : img.alt + ' · image source';
     source.append(img);
     const credit = document.createElement('figcaption');
     if (photo.caption) credit.append(photo.caption);
-    if (photo !== poster || photo.credit !== 'Poster file and rights') {
+    const duplicatesSource = direct.includes(photo) && photo.sourceUrl === linkedSource;
+    if (photo.credit && photo.credit !== 'Poster file and rights' && !duplicatesSource) {
       if (credit.hasChildNodes()) credit.append(' · ');
-      credit.append(recognitionLink(photo.credit || 'Image source', photo.sourceUrl));
+      credit.append(recognitionLink(photo.credit, photo.sourceUrl));
     }
     if (photo.license) {
       if (credit.hasChildNodes()) credit.append(' · ');

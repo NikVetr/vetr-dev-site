@@ -123,36 +123,40 @@
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
           <figure id="detail-image" hidden></figure>
-          <div class="detail-head">
-            <div class="detail-heading">
-              <p class="eyebrow">Selected recommendation</p>
-              <h2 id="detail-title" tabindex="-1"></h2>
-            </div>
-            <div class="detail-actions">
-              <div id="item-links">
-                <a id="external" hidden target="_blank" rel="noopener noreferrer"></a>
+          <div class="detail-content">
+            <div class="detail-head">
+              <div class="detail-heading">
+                <p class="eyebrow" id="detail-kind"></p>
+                <h2 id="detail-title" tabindex="-1"></h2>
+              </div>
+              <div class="detail-actions">
+                <div id="item-links">
+                  <a id="external" hidden target="_blank" rel="noopener noreferrer"></a>
+                </div>
+              </div>
+              <div class="detail-meta">
+                <span id="annotations"></span>
+                <span id="record-count" hidden></span>
+                <details id="more-metadata">
+                  <summary>Title details</summary>
+                  <dl></dl>
+                </details>
               </div>
             </div>
-            <div class="detail-meta">
-              <span id="annotations"></span>
-              <details id="more-metadata">
-                <summary>Title details</summary>
-                <dl></dl>
-              </details>
+            <div class="explanation">
+              <section>
+                <h3 id="distribution-title">Rating distribution</h3>
+                <div id="legend"></div>
+                <div id="distribution"></div>
+                <p class="evidence-note" id="review-approval" hidden></p>
+              </section>
+              <section>
+                <h3>How the score changes</h3>
+                <dl id="metrics"></dl>
+                <p id="formula"></p>
+              </section>
+              <section id="comparison"></section>
             </div>
-          </div>
-          <div class="explanation">
-            <section>
-              <h3 id="distribution-title">Rating distribution</h3>
-              <div id="legend"></div>
-              <div id="distribution"></div>
-            </section>
-            <section>
-              <h3>How the score changes</h3>
-              <dl id="metrics"></dl>
-              <p id="formula"></p>
-            </section>
-            <section id="comparison"></section>
           </div>
         </section>
         <section id="taste" class="inspector" aria-labelledby="projection-title" hidden>

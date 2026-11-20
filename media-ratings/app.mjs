@@ -191,7 +191,7 @@ function install(key, next) {
   attribution.replaceChildren();
   const source =
     key === 'expanded'
-      ? { title: 'MovieLens terms and citation', url: 'MOVIELENS-LICENSE.txt' }
+      ? { title: 'MovieLens terms and citation', url: new URL('./MOVIELENS-LICENSE.txt', import.meta.url).href }
       : key !== 'custom'
         ? catalog.source
         : null;
@@ -342,9 +342,13 @@ function entryRow(p, surface) {
   li.className = 'entry';
   li.dataset.id = p.itemId;
   const head = node('div'),
-    name = node('strong', titles.get(p.itemId)),
+    name = node('button', titles.get(p.itemId)),
     mean = node('span', binary() ? percent(p.expected) : p.expected.toFixed(2));
   head.className = 'entry-head';
+  name.type = 'button';
+  name.className = 'entry-title';
+  name.setAttribute('aria-controls', 'detail');
+  if (selected === p.itemId) name.setAttribute('aria-current', 'true');
   mean.className = 'entry-meta';
   mean.title = binary() ? 'Catalog probability of ' + scaleLabel(1) : 'Catalog expected rating';
   head.append(name, mean);
@@ -612,14 +616,20 @@ function edit(li, value, fromSuggestion = false) {
   filterRows();
   syncDraft();
   if (input('auto').checked) update();
-  else if (result) renderBoards();
+  else if (result) {
+    renderBoards();
+    if (id === selected) renderDetail();
+  }
 }
 function refreshRatingShelves() {
   rebuildBaseline();
   if (input('auto').checked) update();
   else {
     syncDraft();
-    if (result) renderBoards();
+    if (result) {
+      renderBoards();
+      renderDetail();
+    }
   }
 }
 input('quick-session').onclick = () => {
@@ -716,9 +726,14 @@ el('shelves').onchange = (event) => {
   if (r instanceof HTMLInputElement && r.type === 'radio') edit(r.closest('.entry'), Number(r.value));
 };
 el('shelves').onclick = (event) => {
-  const button = /** @type {HTMLElement} */ (event.target).closest('.clear');
-  if (button) {
-    const li = button.closest('.entry');
+  const button = /** @type {HTMLElement} */ (event.target).closest('button');
+  const li = button?.closest('.entry');
+  if (!li) return;
+  if (button.matches('.entry-title') && result) {
+    inspectItem(li.getAttribute('data-id'), true);
+    el('detail-title').focus({ preventScroll: true });
+    el('detail').scrollIntoView({ block: 'nearest' });
+  } else if (button.matches('.clear')) {
     li.querySelector('input').focus();
     edit(li, undefined);
   }
@@ -726,9 +741,27 @@ el('shelves').onclick = (event) => {
 input('search').oninput = filterRows;
 select('sort').onchange = sortCatalog;
 function selectVisibleItem() {
+  if (state.inspectFromShelf && titles.has(selected)) return;
   if (!result.predictions.some((p) => p.itemId === selected && filters.matches(p.itemId)))
-    selected = result.predictions.find((p) => filters.matches(p.itemId))?.itemId;
-  state.selection = selected;
+    setSelection(result.predictions.find((p) => filters.matches(p.itemId))?.itemId, false);
+}
+
+function setSelection(id, fromShelf) {
+  for (const shelf of [entries, copies]) {
+    shelf.get(selected)?.querySelector('.entry-title').removeAttribute('aria-current');
+    shelf.get(id)?.querySelector('.entry-title').setAttribute('aria-current', 'true');
+  }
+  selected = state.selection = id;
+  state.inspectFromShelf = fromShelf;
+}
+
+function inspectItem(id, fromShelf) {
+  setSelection(id, fromShelf);
+  for (const b of el('boards').querySelectorAll('.rank[aria-pressed="true"]'))
+    b.setAttribute('aria-pressed', 'false');
+  for (const b of el('boards').querySelectorAll('.rank[data-id="' + CSS.escape(id) + '"]'))
+    b.setAttribute('aria-pressed', 'true');
+  renderDetail();
 }
 
 input('apply').onclick = () => update();
@@ -1143,11 +1176,34 @@ function mountChoices(row) {
     ratingObserver?.unobserve(row);
   }
 }
+// A shelf selection can already be rated. Withhold its answer, title evidence and date
+// when comparing it with the forecast from the person's other applied ratings.
+let lastHeldOut;
+function inspectionForecast() {
+  if (selected == null) return { p: null, prior: null };
+  const prior = baseline.get(selected);
+  if (!Object.hasOwn(state.applied, selected))
+    return { prior, p: result.predictions.find(item => item.itemId === selected) };
+  if (lastHeldOut?.result === result && lastHeldOut.id === selected && lastHeldOut.threshold === state.threshold)
+    return lastHeldOut;
+  const ratings = { ...state.applied }, ratedOn = { ...state.appliedDates };
+  delete ratings[selected];
+  delete ratedOn[selected];
+  const volunteered = Object.keys(ratings).filter(id => state.appliedSources[id] === 'volunteered');
+  const p = predict(catalog, { model: state.model, ratings, volunteered, ratedOn, threshold: state.threshold })
+    .predictions.find(item => item.itemId === selected);
+  const population = populationModel(catalog, catalog.models[state.model], latestRatingDate(ratedOn));
+  const comparison = population === baselineModel ? prior :
+    predict({ ...catalog, models: { population } }, { model: 'population' }).predictions.find(item => item.itemId === selected);
+  lastHeldOut = { result, id: selected, threshold: state.threshold, p, prior: comparison };
+  return lastHeldOut;
+}
 function renderDetail() {
   if (!result) return;
   showDetail({
-    p: result.predictions.find((p) => p.itemId === selected),
-    prior: baseline.get(selected),
+    ...inspectionForecast(),
+    ownRating: state.draft[selected],
+    excluded: Object.hasOwn(state.applied, selected),
     catalog,
     evidence: state.evidence,
     links: state.links?.[selected],
@@ -1277,13 +1333,9 @@ el('boards').onclick = (event) => {
   const row = action.closest('.forecast-row');
   const inline = action.matches('.quick-rate');
   const btn = row?.querySelector('.rank') ?? action;
-  selected = state.selection = btn.getAttribute('data-id');
-  state.followedSuggestions.add(selected);
-  for (const b of el('boards').querySelectorAll('.rank[aria-pressed="true"]'))
-    b.setAttribute('aria-pressed', 'false');
-  for (const b of el('boards').querySelectorAll('.rank[data-id="' + CSS.escape(selected) + '"]'))
-    b.setAttribute('aria-pressed', 'true');
-  renderDetail();
+  const id = btn.getAttribute('data-id');
+  state.followedSuggestions.add(id);
+  inspectItem(id, false);
   const closing = inline && openRating?.trigger === action;
   closeRatingChoices();
   reveal(selected, !inline);

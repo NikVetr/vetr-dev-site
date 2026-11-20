@@ -54,7 +54,10 @@ export function node(tag, text = '') {
 // Preserve small but material score differences in sparse activity catalogs.
 export const scoreText = (n, digits) =>
   Math.abs(n) >= 1e-12 && Math.abs(n) < 0.5 * 10 ** -digits ? n.toPrecision(2) : n.toFixed(digits);
-export const percent = (n) => scoreText(n * 100, 1) + '%';
+export const percent = (n) => {
+  if (n < 1 && n >= .99995) return '>99.99%';
+  return scoreText(n * 100, n < 1 && n >= .9995 ? 2 : 1) + '%';
+};
 export const signed = (n) => (n > 0 ? '+' : '') + scoreText(n, 2);
 const numeric = (n) => n.toFixed(2);
 
@@ -71,11 +74,11 @@ export function shortAnnotations(a) {
     .join(' · ');
 }
 
-function distribution(scale, label, baseline, forecast, counts, source) {
+function distribution(scale, label, baseline, forecast, counts, source, otherRatings) {
   const observed = counts?.reduce((a, b) => a + b, 0);
   const series = [
     { name: 'Catalog model', values: baseline, color: 'var(--prior)' },
-    { name: 'For you', values: forecast, color: 'var(--accent)' },
+    { name: otherRatings ? 'From other ratings' : 'For you', values: forecast, color: 'var(--accent)' },
   ];
   if (observed) series.push({ name: source, values: counts.map((n) => n / observed), color: 'var(--raw)' });
   const legend = el('legend');
@@ -169,7 +172,7 @@ function coRatings(data, p, ratings, titles, label, message, preferred, gaussian
         (b.r === null ? -1 : Math.abs(b.r)) - (a.r === null ? -1 : Math.abs(a.r)) || b.total - a.total,
     );
   if (!comparisons.length) {
-    note('Rate an entry to compare its observed ratings with this recommendation.');
+    note('Rate another entry to compare the scores people gave both.');
     return;
   }
   const select = document.createElement('select');
@@ -299,6 +302,8 @@ function fitSelectedArtwork(panel) {
 export function showDetail({
   p,
   prior,
+  ownRating,
+  excluded,
   catalog,
   evidence,
   links: targets,
@@ -317,12 +322,26 @@ export function showDetail({
   const previous = oldTitle === p?.itemId ? el('comparison').querySelector('select')?.dataset.chosen : null;
   detail.hidden = !p;
   fitSelectedArtwork(detail);
-  showRecognition(el('detail-image'), p ? targets : null, p ? titles.get(p.itemId) : '');
-  if (!p) return;
+  if (!p) {
+    showRecognition(el('detail-image'), null, '');
+    delete detail.dataset.id;
+    return;
+  }
   detail.dataset.id = p.itemId;
   el('detail-title').textContent = titles.get(p.itemId);
+  const itemType = {
+    movies: 'Film', cities: 'Destination', books: 'Book', music: 'Music', anime: 'Anime',
+    games: 'Video Game', boardgames: 'Tabletop Game', albums: 'Album', podcasts: 'Podcast',
+    recipes: 'Recipe', tv: 'TV Show', cocktails: 'Cocktail', fanfiction: 'Fanfiction',
+    webfiction: 'Web Fiction', royalroad: 'Web Fiction', subreddits: 'Subreddit',
+  }[catalog.domain] ?? (domain === 'expanded' ? 'Film' : 'Item');
+  el('detail-kind').textContent = itemType + ' Information';
   const a = catalog.items.find((it) => it.itemId === p.itemId)?.annotations ?? {};
   el('annotations').textContent = shortAnnotations(a);
+  const recordCount = el('record-count');
+  recordCount.hidden = !Number.isSafeInteger(a.ratingCount);
+  recordCount.textContent = recordCount.hidden ? '' : a.ratingCount.toLocaleString() + ' ' +
+    (catalog.activityCountLabel?.toLocaleLowerCase() ?? (domain === 'games' ? 'Steam reviews' : 'ratings'));
   const more = /** @type {HTMLDetailsElement} */ (el('more-metadata'));
   const facts = [
     ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
@@ -344,12 +363,6 @@ export function showDetail({
     ['Tags', a.tags?.join(' · ')],
     ['Production budget', a.budget > 0 && '$' + a.budget.toLocaleString('en-US')],
     ['Reported box office', a.revenue > 0 && '$' + a.revenue.toLocaleString('en-US')],
-    [
-      catalog.activityCountLabel ?? 'Ratings',
-      Number.isSafeInteger(a.ratingCount) &&
-        a.ratingCount.toLocaleString() +
-          (domain === 'expanded' ? ' · MovieLens 25M' : domain === 'destinations' ? ' · Stravl' : ''),
-    ],
     ['Coast', a.coast],
     ['Annual temperature', a.temperature != null && a.temperature + ' °C'],
     ['Annual precipitation', a.precipitation != null && a.precipitation + ' mm'],
@@ -371,6 +384,7 @@ export function showDetail({
       ? (targets?.openStreetMap ?? targets?.sourceUrl)
       : (targets?.sourceUrl ?? targets?.imdb ?? (imdb ? 'https://www.imdb.com/title/tt' + imdb + '/' : null));
   link.hidden = !primary;
+  showRecognition(el('detail-image'), targets, titles.get(p.itemId), undefined, primary);
   if (primary) {
     link.href = primary;
     link.textContent =
@@ -394,6 +408,7 @@ export function showDetail({
     links.append(a);
   }
   if (linkError) links.append(node('small', 'Article and map links unavailable.'));
+  const otherRatings = excluded || ownRating !== undefined;
   distribution(
     catalog.scale,
     label,
@@ -403,23 +418,26 @@ export function showDetail({
     domain === 'expanded'
       ? 'Observed · MovieLens small'
       : 'Observed' + (catalog.sourceLabel ? ' · ' + catalog.sourceLabel : ''),
+    otherRatings,
   );
   const metrics = el('metrics');
   metrics.className = 'metrics';
   metrics.replaceChildren();
-  for (const [name, value] of catalog.responsePrompt && catalog.scale.join(',') === '0,1'
+  const rows = catalog.responsePrompt && catalog.scale.join(',') === '0,1'
     ? [
         ['Catalog probability', percent(p.prior)],
-        ['With your answers', percent(p.expected)],
+        [otherRatings ? 'From your other answers' : 'With your answers', percent(p.expected)],
         ['Probability change', signed(p.shift * 100) + ' percentage points'],
       ]
     : [
         ['Catalog expectation', numeric(p.prior)],
-        ['With your ratings', numeric(p.expected)],
+        [otherRatings ? 'From your other ratings' : 'With your ratings', numeric(p.expected)],
         ['Rating change', signed(p.shift)],
         ['Chance of ≥ ' + label(threshold), percent(p.chance)],
         ['Predicted SD', numeric(p.sd)],
-      ]) {
+      ];
+  if (ownRating !== undefined) rows.unshift(['Your rating', label(ownRating)]);
+  for (const [name, value] of rows) {
     const row = node('div');
     const amount = node('dd', value);
     if (['Rating change', 'Probability change'].includes(name) && p.shift)
@@ -442,6 +460,15 @@ export function showDetail({
       (model.titleChoice ? 'Films you picked help identify your taste class. ' : '') +
       (model.ratingYear ? 'Both means use the same forecast year. ' : '') +
       'Each mean weights the possible ratings by their probabilities.';
+  const approval = el('review-approval');
+  const stats = domain === 'games' && catalog.fit?.approvalPrior && a.approval;
+  approval.hidden = !stats;
+  if (stats) {
+    const { positive, negative, mean, lower, upper } = stats;
+    approval.textContent = positive.toLocaleString() + ' of ' + (positive + negative).toLocaleString() +
+      ' reviews recommend this game. Estimated approval among Steam reviewers is ' + percent(mean) +
+      ' (95% credible interval ' + percent(lower) + '–' + percent(upper) + ').';
+  }
   const gaussian =
     kind === 'latent-class' || kind === 'class-similarity'
       ? (catalog.models.reference ??

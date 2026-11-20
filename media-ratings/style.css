@@ -209,9 +209,21 @@ input {
 .entry-head {
   align-items: baseline;
 }
-.entry-head strong {
-  font-weight: 600;
-  font-size: 0.87rem;
+.entry-title {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: start;
+  font-size: .87rem;
+  line-height: inherit;
+}
+.entry-title:is(:hover, :focus-visible, [aria-current="true"]) {
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: .15em;
 }
 .entry-meta {
   white-space: nowrap;
@@ -1134,11 +1146,13 @@ body {
     padding-block: 0.12rem;
   }
 }
+#annotations, #record-count {
+  font-size: .78rem;
+  color: var(--muted);
+}
 #annotations {
   flex: 1 1 12rem;
   margin: 0;
-  color: var(--muted);
-  font-size: 0.78rem;
 }
 #taste {
   margin-top: 1rem;
@@ -1844,6 +1858,9 @@ body {
 .year-endpoints input {
   width: 4.8rem;
 }
+.count-bounds { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+.count-bounds label { display: flex; align-items: center; gap: .35rem; color: var(--muted); font-size: .82rem; }
+.count-bounds input { width: 7rem; }
 .year-track {
   position: relative;
   height: 1.5rem;
@@ -1928,13 +1945,32 @@ body {
 #about-recommendations h3 { margin: 1rem 0 .25rem; }
 #about-recommendations p { margin: .35rem 0; }
 #about-recommendations > a { display: inline-block; margin-top: .75rem; }
-#detail:has(#detail-image:not([hidden])) {
-  display: grid; grid-template: "picture heading" auto "picture charts" 1fr / clamp(8.5rem, var(--artwork-width, 20cqi), 34cqi) minmax(0, 1fr);
-  column-gap: clamp(.75rem, 1.15vw, 1.2rem); padding-left: 0;
+#detail {
+  --art-connector: clamp(.75rem, 1.3vw, 1.4rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
-#detail:has(#detail-image:not([hidden])) .detail-head { grid-area: heading; }
-#detail:has(#detail-image:not([hidden])) .explanation { grid-area: charts; }
-#detail-image { grid-area: picture; min-width: 0; min-height: 0; position: relative; margin: -.8rem 0; overflow: hidden; border-radius: var(--radius) 0 0 var(--radius); background: var(--surface-2); }
+.detail-content, #detail-image {
+  min-width: 0;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.detail-content { padding: .8rem clamp(10px, 1vw, 20px); }
+#detail:has(#detail-image:not([hidden])) {
+  display: grid;
+  grid-template: "picture connector info" auto / clamp(8.5rem, var(--artwork-width, 20cqi), 31cqi) var(--art-connector) minmax(0, 1fr);
+}
+#detail:has(#detail-image:not([hidden]))::before {
+  content: "";
+  grid-area: connector;
+  align-self: center;
+  border-top: 1px solid var(--muted);
+}
+#detail .detail-content { grid-area: info; }
+#detail-image { grid-area: picture; min-height: 0; position: relative; margin: 0; overflow: hidden; background: var(--surface-2); }
+#detail-image.landscape-art { align-self: center; aspect-ratio: var(--image-ratio); }
 #detail-image > a { position: absolute; inset: 0; display: block; }
 #detail-image > a:focus-visible { outline-offset: -3px; }
 #detail-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -1943,9 +1979,18 @@ body {
 #rapid-balance { margin-left: auto; }
 @container (max-width: 48rem) {
   #detail:has(#detail-image:not([hidden])) {
-    grid-template: "picture heading" auto "charts charts" auto / clamp(5rem, 18cqi, 8rem) minmax(0, 1fr);
-    padding-left: clamp(10px, 1vw, 20px);
+    grid-template: "picture connector heading" auto "charts charts charts" auto / clamp(5rem, 24cqi, 10rem) var(--art-connector) minmax(0, 1fr);
+    row-gap: .6rem;
   }
-  #detail-image { min-height: 8rem; margin: 0; border-radius: var(--radius-sm); }
-  #detail-image img { object-fit: contain; }
+  #detail:has(#detail-image:not([hidden])) .detail-content { display: contents; }
+  #detail:has(#detail-image:not([hidden])) :is(.detail-head, .explanation) {
+    min-width: 0;
+    padding: .7rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  #detail .detail-head { grid-area: heading; }
+  #detail .explanation { grid-area: charts; }
+  #detail-image { min-height: 0; aspect-ratio: var(--image-ratio); align-self: center; }
 }
