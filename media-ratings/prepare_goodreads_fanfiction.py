@@ -22,6 +22,15 @@ from prepare_ao3 import named_authors, work_fandoms
 
 
 SOURCE = 'https://cseweb.ucsd.edu/~jmcauley/datasets/goodreads.html'
+CATALOG_METADATA = dict(
+    domain='fanfiction', sourceLabel='Goodreads', linkLabel='Goodreads', sourceUrl=SOURCE,
+    source=dict(
+        title='UCSD Goodreads Book Graph', url=SOURCE, author='Mengting Wan and Julian McAuley',
+        notes='This noncommercial academic demo uses ratings from public Goodreads shelves collected in 2017. '
+              'Story identities and metadata come from yrtsk’s AO3 archive and mrzjy’s FanFiction.net archive.',
+    ),
+    observationsNote='The research demo publishes fitted rating probabilities. Individual co-rating tables are omitted.',
+)
 SHELVES = {'ao3', 'archiveofourown', 'fanfiction', 'fanfic', 'fanfictionnet', 'ffnet', 'ffn'}
 PUBLISHERS = SHELVES | {'archiveofourownorg', 'selfpublishedonao3', 'wwwfanfictionnet',
                         'hpmorcomfanfictionnet', 'selfpublished', 'livejournal', 'lj', ''}
@@ -278,8 +287,7 @@ def build(raw, ao3, ffn, out):
     print(json.dumps(audit), flush=True)
     catalog, report = fit_catalog('Fanfiction · Goodreads stars', items, [1, 2, 3, 4, 5], profile, validation_limit=None)
     report = dict(**report, sourceCounts=audit, nestedValidation=nested_validation(profile))
-    catalog.update(domain='fanfiction', sourceLabel='Goodreads', linkLabel='Goodreads', sourceUrl=SOURCE,
-                   source=dict(title='UCSD Goodreads Book Graph', url=SOURCE))
+    catalog.update(CATALOG_METADATA)
     (out / 'validation').mkdir(parents=True, exist_ok=True)
     for file, obj in [('goodreads-fanfiction.json', catalog), ('validation/goodreads-fanfiction.json', report)]:
         (out / file).write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + '\n')

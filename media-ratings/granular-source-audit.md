@@ -2,6 +2,8 @@
 
 ## Goodreads stars for fanfiction
 
+Select **Fanfiction → Goodreads stars** to use the [365-story fitted catalog](goodreads-fanfiction.json). Each entry links to its Goodreads rating page and its independently verified original on AO3 or FanFiction.net. This noncommercial academic demo publishes fitted rating probabilities, the number of ratings per story, and factual metadata. Individual review histories and co-rating grids stay out of the public files.
+
 The UCSD Book Graph records individual Goodreads reviewers’ whole-star scores. A Goodreads edition can represent a fan work posted on AO3 or FanFiction.net. The story link identifies the original, while the Goodreads link identifies where people rated it. AO3 kudos and FanFiction.net audience certificates measure different things from those Goodreads stars. The source snapshot covers public shelves collected in late 2017. [Wan and McAuley, RecSys 2018](https://doi.org/10.1145/3240323.3240369) · [Wan et al., ACL 2019](https://aclanthology.org/P19-1248/) · [UCSD Goodreads Book Graph](https://cseweb.ucsd.edu/~jmcauley/datasets/goodreads.html)
 
 ### Matching ratings to stories
@@ -28,7 +30,7 @@ Before the three-reader cutoff, 714 independent originals were verified and 703 
 
 ### Reproduction and terms
 
-Obtain the four files listed below from the UCSD source. The authors specify academic use only and prohibit redistribution and commercial use of their datasets. The code reads locally supplied files and writes fitted category probabilities, source links, counts and a validation report. It exports no reader histories, review text or pairwise score grids. AO3 metadata is attributed to yrtsk under CC BY-NC 4.0. The FFN publisher labels the release “cc” without a license version. Original authors retain rights to their stories. [UCSD terms and files](https://cseweb.ucsd.edu/~jmcauley/datasets/goodreads.html) · [AO3 release](https://huggingface.co/datasets/yrtsk/archiveofourown-meta) · [FFN release](https://huggingface.co/datasets/mrzjy/fanfiction_meta)
+Obtain the four files listed below from the UCSD source. The authors specify academic use only and prohibit redistribution and commercial use of their datasets. The builder reads locally supplied files and writes the catalog and aggregate validation report for the noncommercial research demo. The AO3 metadata archive is by yrtsk under CC BY-NC 4.0. The FFN archive publisher, mrzjy, labels the release “cc” without a license version. Original authors retain rights to their stories. [UCSD terms and files](https://cseweb.ucsd.edu/~jmcauley/datasets/goodreads.html) · [AO3 release](https://huggingface.co/datasets/yrtsk/archiveofourown-meta) · [FFN release](https://huggingface.co/datasets/mrzjy/fanfiction_meta)
 
 Run from the repository root. The command reads only account and story metadata from the two archive snapshots. Approximately 15 GB of space accommodates the inputs. No chapter text or live crawling is required.
 
