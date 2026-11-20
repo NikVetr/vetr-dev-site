@@ -10,7 +10,7 @@ import { mulberry32 } from '../shared/rng.js';
 /** @typedef {{weight:number,items:number[][][]}} CreatorSimilarity */
 /** @typedef {{kind:string,cuts?:number[],endpoint?:number,components?:Component[],base?:string,features?:number[][],ridge?:number,strength?:number,similarityFrom?:string,creatorSimilarity?:CreatorSimilarity,titleChoice?:string|{strength:number,logRatios:number[][]},ratingYear?:string|{strength:number,firstYear:number,lastYear:number,counts:number[][]}}} Model */
 /** @typedef {{name:string,defaultModel?:string,items:Item[],scale:number[],scaleLabels?:string[],models:Record<string,Model>}} Catalog */
-/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[],ratedOn?:Record<string,string>}} Request */
+/** @typedef {{model?:string,ratings?:Record<string,number>,threshold?:number,samples?:number,volunteered?:string[],ratedOn?:Record<string,string>,targetId?:string}} Request */
 /** @param {number[]} a */
 const increasing = (a) => Array.isArray(a) && a.every((v, i) => Number.isFinite(v) && (!i || v > a[i - 1]));
 /** @param {unknown} ok @param {string} message */
@@ -324,13 +324,6 @@ function classMasses(logWeights) {
   return masses.map((v) => v / total);
 }
 
-/** @param {number[][]} gram @param {number[]} right */
-function solveSimilarity(gram, right) {
-  const L = cholesky(gram);
-  if (!L) throw invalidRequest('$', 'Could not factor the similarity ridge system.');
-  return solveTransposedFactor(L, forward(L, right));
-}
-
 function solveTransposedFactor(L, coef) {
   for (let j = coef.length - 1; j >= 0; j--) {
     for (let i = j + 1; i < coef.length; i++) coef[j] -= L[i][j] * coef[i];
@@ -367,26 +360,70 @@ function creditSimilarities(credits, obs) {
   });
 }
 
-/**
- * @param {{features:number[][],ridge:number}} similarity
- * @param {CreatorSimilarity|null} credits @param {number[]} obs @param {number[]} residuals
- * @returns {(i:number) => number}
- */
-function similarityTransfer(similarity, credits, obs, residuals) {
-  const { features, ridge } = similarity;
-  const rows = obs.map((i) => features[i]);
+// Use the smaller feature or observation system. A separate shared-credit
+// kernel requires observation space, including its original diagonal convention.
+function similarityFactor({ features, ridge }, credits, obs) {
+  const rows = obs.map(i => features[i]);
   const extra = credits ? creditSimilarities(credits, obs) : null;
-  // With ordinary dense features, solve in the smaller of feature and observation
-  // space. Shared credit adds a sparse kernel, making the observation system exact.
   const dual = extra !== null || rows.length <= rows[0].length;
-  const basis = dual ? rows : rows[0].map((_, j) => rows.map((row) => row[j]));
-  const gram = basis.map((a, i) =>
-    basis.map((b, j) => dot(a, b) + (i === j ? ridge : 0) + (extra?.[i][obs[j]] ?? 0)),
-  );
-  const solved = solveSimilarity(gram, dual ? residuals : basis.map((col) => dot(col, residuals)));
+  const basis = dual ? rows : rows[0].map((_, j) => rows.map(row => row[j]));
+  const factor = cholesky(basis.map((a, i) => basis.map((b, j) =>
+    dot(a, b) + (i === j ? ridge : 0) + (extra?.[i][obs[j]] ?? 0))));
+  requireValue(factor, 'Could not factor the similarity ridge system.');
+  return { rows, basis, extra, dual, factor };
+}
+
+function similarityTransfer(similarity, credits, obs, residuals) {
+  const { features } = similarity;
+  const { rows, basis, extra, dual, factor } = similarityFactor(similarity, credits, obs);
+  const right = dual ? residuals : basis.map(col => dot(col, residuals));
+  const solved = solveTransposedFactor(factor, forward(factor, right));
   const beta = dual ? rows[0].map((_, j) => rows.reduce((s, row, i) => s + solved[i] * row[j], 0)) : solved;
   return (i) =>
     dot(features[i], beta) + (extra ? extra.reduce((sum, row, h) => sum + row[i] * solved[h], 0) : 0);
+}
+
+// Summing finite evidence separately lets a held-out structural zero restore a class.
+function classEvidence(model, items, obs, values, inputModels, choice, volunteered) {
+  const logs = model.components.map((component, k) =>
+    obs.map((i, j) => {
+      const distribution = (inputModels?.[j]?.components[k] ?? component).probabilities[i];
+      const title =
+        choice && volunteered.has(items[i].itemId) ? choice.strength * choice.logRatios[k][i] : 0;
+      return Math.log(distribution[values[j]]) + title;
+    }),
+  );
+  const sums = logs.map((row, k) =>
+    row.reduce((s, x) => (x === -Infinity ? s : s + x), Math.log(model.components[k].weight)),
+  );
+  const zeros = logs.map((row) => row.filter((x) => x === -Infinity).length);
+  return (first = -1, second = -1) =>
+    classMasses(
+      sums.map((sum, k) => {
+        let count = zeros[k];
+        for (const j of [first, second]) {
+          if (j < 0) continue;
+          if (logs[k][j] === -Infinity) count--;
+          else sum -= logs[k][j];
+        }
+        return count ? -Infinity : sum;
+      }),
+    );
+}
+
+function classForecast(model, weights, i, scale, tilt) {
+  const probs = scale.map((_, j) =>
+    weights.reduce((sum, w, k) => sum + w * model.components[k].probabilities[i][j], 0),
+  );
+  if (tilt) {
+    const center = (scale[0] + scale.at(-1)) / 2;
+    const tilted = probs.map(
+      (p, j) => p * Math.exp(Math.min(50, Math.max(-50, tilt * (scale[j] - center)))),
+    );
+    const sum = tilted.reduce((a, b) => a + b, 0);
+    return tilted.map((p) => p / sum);
+  }
+  return probs;
 }
 
 function predictLatentClass(
@@ -396,23 +433,15 @@ function predictLatentClass(
   obs,
   values,
   threshold,
+  targets,
   similarity = null,
   choice = null,
   volunteered = new Set(),
   inputModels = null,
   credits = null,
 ) {
-  const evidence = model.components.map((c, k) =>
-    obs.map((i, j) => {
-      const distribution = (inputModels?.[j]?.components[k] ?? c).probabilities[i];
-      const stars = Math.log(distribution[values[j]]);
-      return choice && volunteered.has(items[i].itemId)
-        ? stars + choice.strength * choice.logRatios[k][i]
-        : stars;
-    }),
-  );
-  const logWeights = model.components.map((c, k) => evidence[k].reduce((s, v) => s + v, Math.log(c.weight)));
-  const post = classMasses(logWeights);
+  const posterior = classEvidence(model, items, obs, values, inputModels, choice, volunteered);
+  const post = posterior();
   const weights = model.components.map((c, k) => ({
     prior: c.weight,
     posterior: post[k],
@@ -421,16 +450,7 @@ function predictLatentClass(
   let transfer;
   if (similarity && obs.length && obs.length < items.length) {
     const residuals = obs.map((i, j) => {
-      const leaveOneOut = classMasses(
-        logWeights.map((v, k) => {
-          if (evidence[k][j] !== -Infinity) return v - evidence[k][j];
-          // Imported categorical fits can contain structural zeros.
-          return evidence[k].reduce(
-            (sum, logp, t) => (t === j ? sum : sum + logp),
-            Math.log(model.components[k].weight),
-          );
-        }),
-      );
+      const leaveOneOut = posterior(j);
       const mean = model.components.reduce(
         (sum, c, k) =>
           sum + leaveOneOut[k] * dot((inputModels?.[j]?.components[k] ?? c).probabilities[i], scale),
@@ -442,25 +462,11 @@ function predictLatentClass(
   }
   const observed = new Set(obs);
   const predictions = [];
-  for (const [i, item] of items.entries()) {
+  for (const i of targets) {
     if (observed.has(i)) continue;
-    const probs = scale.map(() => 0);
-    let prior = 0;
-    for (const [g, c] of model.components.entries()) {
-      const distribution = c.probabilities[i];
-      prior += c.weight * dot(distribution, scale);
-      for (let j = 0; j < scale.length; j++) probs[j] += weights[g].posterior * distribution[j];
-    }
-    if (transfer) {
-      const tilt = similarity.strength * transfer(i);
-      const center = (scale[0] + scale.at(-1)) / 2;
-      let sum = 0;
-      for (let j = 0; j < scale.length; j++) {
-        probs[j] *= Math.exp(Math.min(50, Math.max(-50, tilt * (scale[j] - center))));
-        sum += probs[j];
-      }
-      for (let j = 0; j < scale.length; j++) probs[j] /= sum;
-    }
+    const item = items[i];
+    const probs = classForecast(model, post, i, scale, transfer ? similarity.strength * transfer(i) : 0);
+    const prior = model.components.reduce((sum, c) => sum + c.weight * dot(c.probabilities[i], scale), 0);
     predictions.push(summarize(item, probs, prior, obs.length > 0, scale, threshold));
   }
   return { scale, threshold, weights, predictions: predictions.sort((a, b) => b.expected - a.expected) };
@@ -484,7 +490,7 @@ function accumulateNormal(probs, cuts, mean, sd, weight) {
 
 /** Predict with a previously validated catalog. Each observation is an itemId → rating pair.
  * @param {Catalog} catalog @param {Request} request */
-export function predict(
+function predictionInputs(
   catalog,
   {
     model: key = catalog.defaultModel,
@@ -493,6 +499,7 @@ export function predict(
     ratedOn = {},
     threshold = defaultCutoff(catalog.scale),
     samples = 256,
+    targetId,
   },
 ) {
   const { items, scale } = catalog;
@@ -525,6 +532,29 @@ export function predict(
   );
   const obs = items.flatMap((it, i) => (Object.hasOwn(ratings, it.itemId) ? [i] : []));
   const values = obs.map((i) => scale.indexOf(ratings[items[i].itemId]));
+  requireValue(
+    targetId === undefined || (indices.has(targetId) && !Object.hasOwn(ratings, targetId)),
+    'The forecast target must be an unrated catalog item.',
+  );
+  return {
+    items,
+    scale,
+    model,
+    obs,
+    values,
+    ratedOn,
+    volunteered,
+    threshold,
+    samples,
+    ratings,
+    targets: targetId === undefined ? items.keys() : [indices.get(targetId)],
+  };
+}
+
+/** @param {Catalog} catalog @param {Request} request */
+export function predict(catalog, request) {
+  const {items, scale, model, obs, values, ratedOn, volunteered, threshold, samples, ratings, targets} =
+    predictionInputs(catalog, request);
   if (model.kind === 'class-similarity') {
     const date = model.ratingYear ? latestRatingDate(ratedOn) : '';
     return predictLatentClass(
@@ -534,6 +564,7 @@ export function predict(
       obs,
       values,
       threshold,
+      targets,
       model.similarityFrom !== undefined ? catalog.models[model.similarityFrom] : model,
       modelEvidence(catalog, model, 'titleChoice'),
       new Set(volunteered),
@@ -541,7 +572,7 @@ export function predict(
       model.creatorSimilarity,
     );
   }
-  if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold);
+  if (model.kind === 'latent-class') return predictLatentClass(model, items, scale, obs, values, threshold, targets);
   const uniform = model.kind === 'ordinal-probit' ? uniforms(samples, obs.length) : [];
   const blocks = model.components.map((c) => {
     const L = cholesky(obs.map((i) => obs.map((j) => c.covariance[i][j])));
@@ -554,7 +585,7 @@ export function predict(
   const total = masses.reduce((a, b) => a + b, 0);
   const cuts = [-Infinity, ...model.cuts, Infinity];
   const predictions = [];
-  for (let i = 0; i < items.length; i++) {
+  for (const i of targets) {
     if (Object.hasOwn(ratings, items[i].itemId)) continue;
     const probs = scale.map(() => 0);
     let prior = 0;
@@ -591,9 +622,99 @@ export function predict(
   };
 }
 
+// Kernel ridge regression after omitting row i. The cross-weights are
+// -P[i,j]/P[i,i] in the dual system, or H[i,j]/(1-H[i,i]) in feature space.
+function heldOutKernel(similarity, credits, obs) {
+  const {rows, dual, factor} = similarityFactor(similarity, credits, obs);
+  if (!dual) {
+    const whitened = rows.map(row => forward(factor, row));
+    return i => {
+      const denom = 1 - dot(whitened[i], whitened[i]);
+      requireValue(denom > 0, 'Unresolved held-out ridge leverage.');
+      return j => dot(whitened[i], whitened[j]) / denom;
+    };
+  }
+  return (i) => {
+    const unit = obs.map((_, j) => Number(i === j));
+    const column = solveTransposedFactor(factor, forward(factor, unit));
+    return (j) => -column[j] / column[i];
+  };
+}
+
+/** Score applied ratings from their remaining answers. The reported gap is observed minus predicted.
+ * @param {Catalog} catalog @param {Request} request */
+export function heldOutRatings(catalog, request = {}) {
+  const { items, scale, model, obs, values, ratings, ratedOn, volunteered } = predictionInputs(
+    catalog,
+    request,
+  );
+  if (!obs.length) return [];
+  const makeRow = (j, probs) => {
+    const { itemId, title } = items[obs[j]],
+      observed = scale[values[j]],
+      expected = dot(probs, scale);
+    return { itemId, title, observed, expected, gap: observed - expected, probability: probs[values[j]] };
+  };
+  if (!['latent-class', 'class-similarity'].includes(model.kind)) {
+    return obs.map((i, j) => {
+      const targetId = items[i].itemId,
+        remaining = { ...ratings },
+        dates = { ...ratedOn };
+      delete remaining[targetId];
+      delete dates[targetId];
+      const p = predict(catalog, {
+        ...request,
+        targetId,
+        ratings: remaining,
+        ratedOn: dates,
+        volunteered: volunteered.filter((id) => id !== targetId),
+      }).predictions[0];
+      return makeRow(j, p.probabilities);
+    });
+  }
+  const base = populationModel(catalog, model);
+  const dates = model.ratingYear ? obs.map((i) => ratedOn[items[i].itemId] ?? '') : [];
+  const latest = [...dates].sort().reverse().slice(0, 2);
+  const inputModels = dates.length ? dates.map((date) => populationModel(catalog, model, date)) : null;
+  const posterior = classEvidence(
+    base,
+    items,
+    obs,
+    values,
+    inputModels,
+    modelEvidence(catalog, model, 'titleChoice'),
+    new Set(volunteered),
+  );
+  const similarity =
+    model.kind === 'class-similarity' ? (catalog.models[model.similarityFrom] ?? model) : null;
+  const kernel =
+    similarity && obs.length > 1 ? heldOutKernel(similarity, model.creatorSimilarity, obs) : null;
+  const means = kernel
+    ? obs.map((i, j) => (inputModels?.[j] ?? base).components.map((c) => dot(c.probabilities[i], scale)))
+    : null;
+  return obs.map((i, j) => {
+    let transfer = 0;
+    if (kernel) {
+      const weight = kernel(j);
+      for (let h = 0; h < obs.length; h++) {
+        if (h === j) continue;
+        // The residual at h must itself be predicted without either h or j.
+        const forecast = dot(posterior(j, h), means[h]);
+        transfer += weight(h) * (scale[values[h]] - forecast);
+      }
+    }
+    const date = dates[j] === latest[0] ? latest[1] : latest[0];
+    const targetModel = populationModel(catalog, model, date);
+    return makeRow(
+      j,
+      classForecast(targetModel, posterior(j), i, scale, similarity ? similarity.strength * transfer : 0),
+    );
+  });
+}
+
 /** @param {Request & {catalog:Catalog}} input */
 export function submit(input) {
-  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'volunteered', 'ratedOn', 'threshold', 'samples']);
+  checkRequestKeys(input, ['catalog', 'model', 'ratings', 'volunteered', 'ratedOn', 'threshold', 'samples', 'targetId']);
   const { catalog, ...request } = input;
   return predict(validateCatalog(catalog), request);
 }

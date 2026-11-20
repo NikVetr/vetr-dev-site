@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { submit, gaussianProjection, rankChanges } from './core.mjs';
+import { submit, predict, heldOutRatings, gaussianProjection, rankChanges } from './core.mjs';
 import { tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { describeAxes, minimumAxisShare } from './axis-annotations.mjs';
@@ -44,6 +44,73 @@ function catalog(components) {
     models: { ordinal: { kind: 'ordinal-probit', cuts: [0], components } },
   };
 }
+function checkHeldOut(catalog, request) {
+  const rows = heldOutRatings(catalog, request);
+  assert.equal(rows.length, Object.keys(request.ratings).length);
+  for (const row of rows) {
+    const ratings = { ...request.ratings },
+      ratedOn = { ...request.ratedOn };
+    delete ratings[row.itemId];
+    delete ratedOn[row.itemId];
+    const remaining = {
+      ...request,
+      ratings,
+      ratedOn,
+      volunteered: (request.volunteered ?? []).filter((id) => id !== row.itemId),
+    };
+    const all = predict(catalog, remaining).predictions.find((x) => x.itemId === row.itemId);
+    assert.deepEqual(predict(catalog, { ...remaining, targetId: row.itemId }).predictions, [all]);
+    close(row.expected, all.expected);
+    close(row.observed, row.gap + row.expected);
+    close(row.probability, all.probabilities[catalog.scale.indexOf(row.observed)]);
+  }
+}
+
+test('batch held-out scores restore classes with structural zeros and retain direction', () => {
+  const items = ['a', 'b', 'c'].map((itemId) => ({ itemId, title: itemId }));
+  const components = [
+    {
+      weight: 0.75,
+      probabilities: [
+        [1, 0],
+        [0.1, 0.9],
+        [0.6, 0.4],
+      ],
+    },
+    {
+      weight: 0.25,
+      probabilities: [
+        [0.5, 0.5],
+        [0.3, 0.7],
+        [0.4, 0.6],
+      ],
+    },
+  ];
+  const base = { kind: 'latent-class', components };
+  for (const features of [
+    [[1], [0.4], [-0.8]],
+    [
+      [1, 0, 0],
+      [0.4, 0.5, 0],
+      [-0.8, 0.2, 1],
+    ],
+  ]) {
+    const hybrid = { kind: 'class-similarity', base: 'base', ridge: 1, strength: 0.8, features };
+    const cat = { name: 'Games', scale: [0, 1], items, models: { base, hybrid } };
+    for (const model of ['base', 'hybrid']) {
+      checkHeldOut(cat, { model, ratings: { a: 1, b: 1, c: 0 } });
+      checkHeldOut(cat, { model, ratings: { a: 1 } });
+      checkHeldOut(cat, { model, ratings: {} });
+    }
+  }
+});
+test('held-out Gaussian mixture forecasts match separate interval integrations', () => {
+  checkHeldOut(catalog([component(0.7, [0, 1], 0.3), component(0.3, [-1, 0], -0.4)]), {
+    model: 'ordinal',
+    ratings: { a: 5, b: 1 },
+  });
+});
+
 test('a class match requires evidence and a unique leader; affinities use the recorded scale', () => {
   const genres = ['History', 'History', 'Fantasy', 'Fantasy'];
   const books = {
@@ -621,6 +688,7 @@ test('submission-year calibration conditions on each dated answer and compares t
   assert.deepEqual(submit({ catalog: films, ratings }), submit({ catalog: films, ratings, model: 'hybrid' }));
   const jointProfile = preferenceFingerprint(films, { ratings, ratedOn, volunteered: ['a'] });
   close(jointProfile.classes.find((c) => c.index === 0).probability, combined.weights[0].posterior);
+  checkHeldOut(films,{ratings:{a:5,b:1,c:5},ratedOn:{a:'2000-02-01',c:'2001-08-07'},volunteered:['c','b']});
   models.both.ratingYear = 'both';
   assert.throws(() => submit(both), /category counts/);
   models.both.ratingYear = 'date';
