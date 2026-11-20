@@ -817,13 +817,13 @@ body {
   color: var(--muted);
   font-weight: 500;
 }
-.information .board-head {
+.information .board-head, .review-context .board-head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   column-gap: 0.45rem;
 }
-.familiarity-option {
+.ranking-weight {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -836,24 +836,24 @@ body {
   font-weight: 500;
   color: var(--muted);
 }
-.information .familiarity-option { width: clamp(9.9rem, 48cqi, 14rem); }
-.familiarity-option output { font-variant-numeric: tabular-nums; color: var(--text); }
-.familiarity-scale {
+.board .ranking-weight { width: clamp(9.9rem, 48cqi, 14rem); }
+.ranking-weight output { font-variant-numeric: tabular-nums; color: var(--text); }
+.weight-scale {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: .3rem;
 }
-.familiarity-scale button {
+.weight-scale button {
   border: 0;
   background: transparent;
   padding: .25rem 0;
   font: inherit;
   color: inherit;
 }
-.familiarity-scale button:is(:hover, :focus-visible) { color: var(--taste-ink); text-decoration: underline; }
-.familiarity-scale input {
+.weight-scale button:is(:hover, :focus-visible) { color: var(--taste-ink); text-decoration: underline; }
+.weight-scale input {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -862,6 +862,7 @@ body {
   accent-color: var(--taste-ink);
   cursor: pointer;
 }
+.review-context .weight-scale input { accent-color: var(--accent); }
 .shift-directions {
   display: inline-grid;
   place-content: center;

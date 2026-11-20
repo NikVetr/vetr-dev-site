@@ -2,7 +2,8 @@ import { recommendationFilters } from './filters.mjs';
 import { openRapidRating } from './rapid.mjs';
 import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
-import { familiarityControl } from './question-control.mjs';
+import { rankingWeightControl } from './question-control.mjs';
+import { discoveryRanking } from './discovery.mjs';
 import { projectClasses, tasteProfile, questionScores } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
 import { renderTaste } from './charts.mjs';
@@ -20,7 +21,7 @@ import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-const api = { submit, tasteProfile, questionScores, rankChanges, preferenceFingerprint, gaussianProjection,
+const api = { submit, tasteProfile, questionScores, discoveryRanking, rankChanges, preferenceFingerprint, gaussianProjection,
   importRatings, importRatingEntries, importForecasts, ratingsCSV, forecastsCSV };
 Object.assign(window, { RatingPrediction: api, MediaRatings: api });
 const states = new Map();
@@ -28,6 +29,7 @@ let active,
   state,
   catalog,
   result,
+  reviewView,
   baseline,
   baselineModel,
   titles,
@@ -97,6 +99,9 @@ function useState(data, key) {
     model: Object.hasOwn(data.models, model) ? model : Object.keys(data.models)[0],
     threshold: defaultCutoff(data.scale),
     familiarityWeight: 0.5,
+    reviewWeight: key === 'games' ? 0.75 : 0,
+    reviewContext: !data.activityCountLabel && data.domain !== 'cities' && !data.name?.startsWith('Stravl') &&
+      data.items.every(it => Number.isSafeInteger(it.annotations?.ratingCount)),
     directions: { ratingChange: 'up', rankChange: 'up' },
     fingerprintViews: new Map(),
     draftDates: Object.create(null),
@@ -222,6 +227,18 @@ function install(key, next) {
     catalog.responsePrompt ??
     (catalog.scaleLabels ? catalog.scale.map((v) => scaleLabel(v) + ' = ' + v).join(' · ') : '');
   input('search').value = '';
+  const contextGuide = el('about-discovery');
+  contextGuide.hidden = !state.reviewContext;
+  contextGuide.replaceChildren();
+  if (state.reviewContext) {
+    contextGuide.append('Match my picks changes the order using the titles you chose to rate. Both likes and dislikes count as choices. App suggestions and imports with unknown sources contribute only their ratings. At 0% the list ranks by predicted rating.');
+    if (key === 'games') {
+      contextGuide.append(' At 100% it ranks by shared Steam reviewers and review frequency. Steam records posted reviews. The approval interval estimates the share of reviewers who recommend each game.');
+      const study = node('a', 'Steam ranking evaluation');
+      study.href = 'https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/discovery-study.md';
+      contextGuide.append(' ', study);
+    } else contextGuide.append(' At 100% it uses similarities among your picks and how often each item was rated.');
+  }
   el('boards').replaceChildren();
   setupFilters();
   input('quick-session').disabled = false;
@@ -268,6 +285,22 @@ function showValidation(selection) {
       ' separate users. The original four-fold comparison selected K on the 1/32 sample.';
   const tables = el('scores');
   tables.replaceChildren();
+  const pooling = selection.pooling;
+  if (pooling?.holdout?.allSparseTargets) {
+    const table = node('table'), head = node('tr');
+    table.append(node('caption', 'Steam approval · held-out review predictions'));
+    for (const name of ['Prior', 'Player log loss', 'Sparse-game log loss', 'Sparse-game Brier'])
+      head.append(node('th', name));
+    table.createTHead().append(head);
+    const body = table.createTBody();
+    for (const [name, stats] of [['Fixed', pooling.baseline], ['Learned from games', pooling.holdout]]) {
+      const row = body.insertRow();
+      row.insertCell().textContent = name;
+      for (const value of [stats.playerLogLoss, stats.allSparseTargets.gameLogLoss, stats.allSparseTargets.gameBrier])
+        row.insertCell().textContent = value.toFixed(4);
+    }
+    tables.append(table);
+  }
   for (const [title, rows] of [
     ...(full
       ? [
@@ -688,7 +721,7 @@ input('quick-session').onclick = () => {
     rank,
     familiarity: taste?.familiarity ? {
       weight: opened.familiarityWeight,
-      set(weight) { opened.familiarityWeight = weight; renderBoards(true); },
+      set(weight) { opened.familiarityWeight = weight; renderBoards('information'); },
     } : null,
     save(answers) {
       if (!answers.size) return;
@@ -743,7 +776,20 @@ select('sort').onchange = sortCatalog;
 function selectVisibleItem() {
   if (state.inspectFromShelf && titles.has(selected)) return;
   if (!result.predictions.some((p) => p.itemId === selected && filters.matches(p.itemId)))
-    setSelection(result.predictions.find((p) => filters.matches(p.itemId))?.itemId, false);
+    setSelection((reviewView?.rows ?? result.predictions).find((p) => filters.matches(p.itemId))?.itemId, false);
+}
+
+function refreshDiscovery() {
+  reviewView = null;
+  if (!state.reviewContext || !state.reviewWeight || state.discoveryError) return;
+  const volunteered = Object.keys(state.applied).filter(id => state.appliedSources[id] === 'volunteered');
+  if (!volunteered.length) return;
+  try {
+    reviewView = discoveryRanking(catalog, { predictions: result.predictions, ratings: state.applied,
+      volunteered, weight: state.reviewWeight, discovery: state.discovery });
+  } catch (error) {
+    state.discoveryError = error.message;
+  }
 }
 
 function setSelection(id, fromShelf) {
@@ -837,6 +883,7 @@ function update(applyDraft = true) {
       result.weights.some((w) => w.posterior > 0.01 && w.effectiveSamples !== null && w.effectiveSamples < 20)
     )
       el('weights').textContent += ' Integration is imprecise for these ratings.';
+    refreshDiscovery();
     selectVisibleItem();
     const usesClasses = model.kind === 'latent-class' || model.kind === 'class-similarity';
     const classKey = usesClasses
@@ -940,11 +987,18 @@ function recommendationHeader(spec, title, count, isShift) {
     head.append(button);
   }
   if (spec.key === 'information') {
-    if (taste?.familiarity) head.append(familiarityControl('weight-familiarity', state.familiarityWeight, weight => {
+    if (taste?.familiarity) head.append(rankingWeightControl('weight-familiarity', state.familiarityWeight, weight => {
       state.familiarityWeight = weight;
-      renderBoards(true);
+      renderBoards('information');
       el('weight-familiarity').focus({ preventScroll: true });
     }));
+  } else if (spec.key === 'expected' && state.reviewContext && !state.discoveryError) {
+    head.append(rankingWeightControl('review-weight', state.reviewWeight, weight => {
+      state.reviewWeight = weight;
+      refreshDiscovery();
+      renderBoards('expected');
+      el('review-weight')?.focus({ preventScroll: true });
+    }, 'discovery'));
   } else head.append(node('small', count + ' · ' + spec.hint));
   return head;
 }
@@ -1014,7 +1068,7 @@ function recommendationRow(p, index, spec, isShift, ranks) {
   return row;
 }
 const fillRankings = new WeakMap();
-function renderBoards(informationOnly = false) {
+function renderBoards(only = '') {
   closeRatingChoices();
   const host = el('boards');
   const positions = new Map(
@@ -1023,9 +1077,9 @@ function renderBoards(informationOnly = false) {
       { top: list.scrollTop, count: list.children.length },
     ]),
   );
-  ratingObserver?.disconnect();
-  const visible = informationOnly ? [] : result.predictions.filter((p) => filters.matches(p.itemId));
-  const rankMovements = informationOnly ? null : rankChanges(visible);
+  if (only !== 'expected') ratingObserver?.disconnect();
+  const visible = only === 'information' ? [] : result.predictions.filter((p) => filters.matches(p.itemId));
+  const rankMovements = only ? null : rankChanges(visible);
   const weighted = Boolean(taste?.familiarity && state.familiarityWeight > 0);
   const questions = weighted ? questionScores(taste, state.familiarityWeight) : taste?.information;
   const fragment = document.createDocumentFragment();
@@ -1054,7 +1108,7 @@ function renderBoards(informationOnly = false) {
     : panels;
   host.classList.toggle('activity-boards', activity);
   for (const original of shown) {
-    if (informationOnly && original.key !== 'information') continue;
+    if (only && original.key !== only) continue;
     const spec = original.key === 'information' ? {
       ...original,
       score: p => questions?.get(p.itemId) ?? 0,
@@ -1068,7 +1122,10 @@ function renderBoards(informationOnly = false) {
     const direction = state.directions[spec.key];
     const isShift = Boolean(direction);
     const ranks = spec.key === 'rankChange' ? rankMovements : null;
-    const title = spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
+    const reviewBoard = spec.key === 'expected' && state.reviewContext;
+    const matched = reviewBoard && reviewView?.mode === 'context';
+    const title = matched ? 'Recommended for you' : spec.key === 'chance' ? 'Chance of ≥ ' + scaleLabel(state.threshold) : spec.title;
+    if (reviewBoard) board.classList.add('review-context');
     if (spec.key === 'information') {
       board.classList.add('information');
     }
@@ -1088,12 +1145,22 @@ function renderBoards(informationOnly = false) {
       );
       why.className = 'info-note';
       board.append(why);
+    } else if (reviewBoard) {
+      const why = node('p', state.discoveryError ? 'Review context unavailable. ' + state.discoveryError
+        : matched ? (reviewView.source === 'coReview' ? 'Ordered using games reviewed by the same players.'
+          : 'Ordered using item similarity and rating counts.') + (activity ? ' Scores show predicted approval.' : ' Scores show predicted ratings.')
+        : !state.reviewWeight ? 'Ordered by predicted rating alone.'
+        : reviewView?.anchors ? 'No related reviews found. Ordered by predicted rating.'
+        : 'Choose a title yourself in Your ratings to match recommendations to your picks.');
+      why.className = 'info-note';
+      board.append(why);
     }
     const orderScore = (p) => {
       const delta = ranks ? ranks.get(p.itemId).change : spec.score(p);
       return direction === 'down' ? -delta : delta;
     };
-    const items = (spec.key === 'information' ? result.predictions : visible)
+    const items = matched ? reviewView.rows.filter(p => filters.matches(p.itemId))
+      : (spec.key === 'information' ? result.predictions : visible)
       .filter((p) =>
         isShift
           ? orderScore(p) > 0
@@ -1133,7 +1200,7 @@ function renderBoards(informationOnly = false) {
       list.append(rows);
       if (rendered === items.length) list.onscroll = null;
     }
-    const position = informationOnly ? null : positions.get(spec.key);
+    const position = only ? null : positions.get(spec.key);
     fill(items.length <= 600 ? items.length : position?.top ? Math.max(100, position.count) : 100);
     if (rendered < items.length) {
       fillRankings.set(list, fill);
@@ -1143,10 +1210,11 @@ function renderBoards(informationOnly = false) {
     }
     fragment.append(board);
   }
-  if (informationOnly) host.querySelector('.information').replaceWith(fragment);
+  if (only) host.querySelector('.ranks[data-key="' + only + '"]').closest('.board').replaceWith(fragment);
   else host.replaceChildren(fragment);
-  for (const list of informationOnly ? [] : host.querySelectorAll('.ranks'))
+  for (const list of only ? [] : host.querySelectorAll('.ranks'))
     list.scrollTop = positions.get(list.getAttribute('data-key'))?.top ?? 0;
+  if (only === 'expected') return;
   const info = host.querySelector('.information .ranks');
   ratingObserver = new IntersectionObserver(
     (records) => {
@@ -1463,8 +1531,8 @@ async function openCatalog(key, file = null, replace = false) {
     if (!s) {
       el('status').textContent = 'Loading catalog…';
       const creditsFile = { expanded: 'film-creators', tv: 'tv-creators', anime: 'anime-credits', books: 'books-credits' }[key];
-      const [data, references, context, credits] = file
-        ? [JSON.parse(await file.text()), null, null, null]
+      const [data, references, context, credits, discovery] = file
+        ? [JSON.parse(await file.text()), null, null, null, null]
         : await Promise.all([
             readJSON(key + '.json'),
             key === 'expanded'
@@ -1474,6 +1542,7 @@ async function openCatalog(key, file = null, replace = false) {
                 : null,
             key === 'expanded' ? readOptionalJSON('film-context.json') : null,
             creditsFile ? readOptionalJSON(creditsFile + '.json') : null,
+            key === 'games' ? readOptionalJSON('steam-discovery.json') : null,
           ]);
       if (seq !== revision) return;
       if (key === 'expanded') {
@@ -1500,6 +1569,8 @@ async function openCatalog(key, file = null, replace = false) {
         }
       }
       s = useState(data, key);
+      s.discovery = discovery?.data;
+      s.discoveryError = discovery?.error;
       s.links = references?.data;
       if (!file && data.sourceLabel && !s.links) {
         s.links = Object.fromEntries(

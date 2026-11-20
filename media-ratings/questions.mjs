@@ -39,6 +39,7 @@ const fields = [
   'region',
   'developers',
   'publishers',
+  'platforms',
   'directors',
   'cast',
   'studios',

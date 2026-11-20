@@ -1,4 +1,4 @@
-import { familiarityControl } from './question-control.mjs';
+import { rankingWeightControl } from './question-control.mjs';
 import { node, shortAnnotations } from './detail.mjs';
 import { recognitionLink as link, showRecognition } from './recognition.mjs';
 
@@ -32,7 +32,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
   const balance = el('rapid-balance');
   balance.replaceChildren();
   balance.hidden = !familiarity || picker.value !== 'info';
-  if (familiarity) balance.append(familiarityControl('rapid-familiarity', familiarity.weight, weight => {
+  if (familiarity) balance.append(rankingWeightControl('rapid-familiarity', familiarity.weight, weight => {
     familiarity.set(weight);
     order = null;
     advance();

@@ -123,7 +123,7 @@ function distribution(scale, label, baseline, forecast, counts, source, otherRat
   details.append(node('summary', 'View probabilities'), table);
   const note = node(
     'p',
-    'Probability from 0 to ' + percent(cap) + (observed ? ' · ' + observed + ' observed ratings' : ''),
+    'Probability from 0 to ' + percent(cap) + (observed ? ' · ' + observed.toLocaleString() + ' observed ratings' : ''),
   );
   note.className = 'evidence-note';
   el('distribution').replaceChildren(note, chart, details);
@@ -427,7 +427,7 @@ export function showDetail({
     ? [
         ['Catalog probability', percent(p.prior)],
         [otherRatings ? 'From your other answers' : 'With your answers', percent(p.expected)],
-        ['Probability change', signed(p.shift * 100) + ' percentage points'],
+        ['Probability change', signed(p.shift * 100) + ' pp'],
       ]
     : [
         ['Catalog expectation', numeric(p.prior)],
@@ -440,6 +440,10 @@ export function showDetail({
   for (const [name, value] of rows) {
     const row = node('div');
     const amount = node('dd', value);
+    if (name === 'Probability change') {
+      amount.title = signed(p.shift * 100) + ' percentage points';
+      amount.setAttribute('aria-label', amount.title);
+    }
     if (['Rating change', 'Probability change'].includes(name) && p.shift)
       amount.className = 'shift-delta ' + (p.shift > 0 ? 'rise' : 'fall');
     row.append(node('dt', name), amount);

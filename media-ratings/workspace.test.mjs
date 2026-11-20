@@ -4,8 +4,9 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { openPage } from '../scripts/landing-art/browser.mjs';
 import { predict, rankChanges } from './core.mjs';
+import { discoveryRanking } from './discovery.mjs';
 import { importForecasts, importRatingEntries, ratingsCSV } from './exchange.mjs';
-import { jointCounts } from './detail.mjs';
+import { jointCounts, percent } from './detail.mjs';
 
 async function yearFilter(page, year) {
   await page.locator('#facet').click();
@@ -887,7 +888,7 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
       await p.locator('#rapid-skip').click();
       const id = await p.locator('#rapid-card').getAttribute('data-id');
       await p.getByRole('button', { name: 'Rate ' + data.scaleLabels[0], exact: true }).click();
-      await p.getByRole('button', { name: 'Done', exact: true }).click();
+      await p.locator('#rapid-rating').getByRole('button', { name: 'Done', exact: true }).click();
       assert.equal(await p.locator('#rated-list .entry').count(), 1);
       assert.equal(await p.locator('#rated-list input:checked').inputValue(), '0');
       assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
@@ -919,7 +920,7 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
   }
 });
 
-test('Metacritic scores include both endpoints and stay separate from Steam votes', async () => {
+test('Steam votes, Metacritic endpoint scores and Amazon edition stars keep separate shelves', async () => {
   const app = await openPage('rating-prediction/', { width: 390, height: 844 });
   const p = app.page;
   try {
@@ -939,9 +940,56 @@ test('Metacritic scores include both endpoints and stay separate from Steam vote
     await p.locator('#game-dataset').selectOption('games');
     await p.getByRole('heading', { name: 'Chance of thumbs up' }).waitFor();
     assert.deepEqual(await values(), []);
+    await p.locator('#game-dataset').selectOption('amazon-games');
+    await p.waitForFunction(() => location.search.includes('catalog=amazon-games'));
+    assert.equal(await p.locator('#library .entry').count(), 1184);
+    const stars = p.locator('#library .entry').first().getByRole('radio');
+    assert.equal(await stars.count(), 5);
+    await stars.nth(1).check();
+    assert.deepEqual(await values(), ['2']);
+    await p.locator('#comparison .heat').waitFor();
+    assert.equal(await p.locator('#detail-kind').innerText(), 'Video Game Information');
+    assert.match(await p.locator('#external').getAttribute('href'), /^https:\/\/www\.amazon\.com\/dp\//);
+    assert.equal(await p.locator('#detail-image figcaption').count(), 0);
     await p.locator('#game-dataset').selectOption('metacritic');
     await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
     assert.deepEqual(await values(), ['0', '10']);
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});
+
+test('Steam review context moves shared-audience games up without changing the displayed approval', async () => {
+  const app = await openPage('rating-prediction/?catalog=games');
+  const {page} = app;
+  const load = name => JSON.parse(readFileSync(new URL(name + '.json', import.meta.url), 'utf8'));
+  const catalog = load('games'), discovery = load('steam-discovery');
+  const ids = ['400', '620', '220', '420', '49520', '3240220'];
+  const ratings = Object.fromEntries(ids.map(id => [id, 1]));
+  const raw = predict(catalog, {ratings}).predictions;
+  const ranked = weight => discoveryRanking(catalog, {ratings, volunteered: ids, predictions: raw, weight, discovery}).rows;
+  const board = page.locator('.review-context');
+  const top = () => board.locator('.rank').evaluateAll(rows => rows.slice(0, 5).map(row => row.dataset.id));
+  try {
+    await page.locator('#auto').uncheck();
+    await page.getByRole('heading', {name:'Chance of thumbs up'}).waitFor();
+    const slider = board.getByRole('slider', {name:'Match my picks'});
+    assert.equal(await slider.inputValue(), '75');
+    for (const id of ids) {
+      const title = catalog.items.find(i => i.itemId === id).title;
+      await page.locator('#search').fill(title);
+      await page.locator('#library .entry[data-id="' + id + '"]').getByRole('radio', {name:'Thumbs up', exact:true}).check();
+    }
+    await page.locator('#apply').click();
+    await board.getByRole('heading', {name:'Recommended for you'}).waitFor();
+    const expected = ranked(.75);
+    assert.deepEqual(await top(), expected.slice(0, 5).map(p => p.itemId));
+    assert.equal(await board.locator('.score').first().innerText(), percent(expected[0].expected));
+    assert.ok(expected.slice(0, 5).some(p => p.itemId === '550')); // Left 4 Dead 2
+    await slider.press('Home');
+    await board.getByRole('heading', {name:'Chance of thumbs up'}).waitFor();
+    assert.deepEqual(await top(), raw.slice(0, 5).map(p => p.itemId));
+    await slider.press('End');
+    assert.deepEqual(await top(), ranked(1).slice(0, 5).map(p => p.itemId));
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });
@@ -1072,9 +1120,13 @@ test('either ratings shelf opens item information and predicts a rated title fro
   const portal = catalog.items.find(i => i.itemId === '400');
   try {
     const shelf = (id) => page.locator(`#library .entry[data-id="${id}"]`);
+    let evidenceRequests = 0;
+    await page.route('**/games-evidence.bin.gz', route =>
+      ++evidenceRequests === 1 ? route.abort('connectionreset') : route.continue());
     await page.route('**/steam/**/header*.jpg*', route => route.fulfill({
       contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215"></svg>',
     }));
+    await page.reload();
     await page.locator('#search').fill('Portal');
     await shelf('400').getByRole('button', { name: 'Portal', exact: true }).press('Enter');
     assert.equal(await page.locator('#detail-kind').innerText(), 'Video Game Information');
@@ -1090,6 +1142,7 @@ test('either ratings shelf opens item information and predicts a rated title fro
     assert.equal(await metrics.getByText('From your other answers').locator('..').locator('dd').innerText(), (expected.expected * 100).toFixed(1) + '%');
     assert.match(await page.locator('#record-count').innerText(), /Steam reviews/);
     assert.equal(await page.locator('#comparison select').inputValue(), '620');
+    assert.equal(evidenceRequests, 2);
 
     await page.locator('#facet').click();
     const min = page.getByRole('spinbutton', { name: 'Minimum review count' });
