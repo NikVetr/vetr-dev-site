@@ -1,0 +1,408 @@
+{
+  "trainingPlayers": 8343234,
+  "validationPlayers": 4000,
+  "testPlayers": 8000,
+  "catalogGames": 1136,
+  "given": 4,
+  "cutoff": 20,
+  "selectedAnchors": "all",
+  "defaultMix": 0.75,
+  "selection": {
+    "minimumMeanModelApproval": 0.95,
+    "eligibleMixes": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "criterion": "highest validation positive-review recall at 20"
+  },
+  "confirmationPlayers": 8000,
+  "confirmation": {
+    "approval": {
+      "recallAt20": 0.03770069988662512,
+      "positiveRecallAt20": 0.040950606356423135,
+      "modelApprovalAt20": 0.9886583128169644,
+      "hitRateAt20": 0.106375,
+      "retrievedReviews": 989,
+      "retrievedPositiveReviews": 970
+    },
+    "popularity": {
+      "recallAt20": 0.251914142937177,
+      "positiveRecallAt20": 0.2495275302695033,
+      "modelApprovalAt20": 0.8728990375658747,
+      "hitRateAt20": 0.5235,
+      "retrievedReviews": 6770,
+      "retrievedPositiveReviews": 5943
+    },
+    "all 0.75": {
+      "recallAt20": 0.24261508860866007,
+      "positiveRecallAt20": 0.26280709598808427,
+      "modelApprovalAt20": 0.9656549672234637,
+      "hitRateAt20": 0.505125,
+      "retrievedReviews": 7020,
+      "retrievedPositiveReviews": 6706
+    },
+    "all 1": {
+      "recallAt20": 0.36021790737491927,
+      "positiveRecallAt20": 0.3636989296821771,
+      "modelApprovalAt20": 0.8736258209249029,
+      "hitRateAt20": 0.65025,
+      "retrievedReviews": 9707,
+      "retrievedPositiveReviews": 8670
+    }
+  },
+  "confirmedDefaultMinus": {
+    "approval": {
+      "recallAt20": {
+        "difference": 0.20491438872203496,
+        "ci95": [
+          0.19809775135306593,
+          0.211731026091004
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": 0.22185648963166113,
+        "ci95": [
+          0.2145151167587922,
+          0.22919786250453006
+        ]
+      }
+    },
+    "popularity": {
+      "recallAt20": {
+        "difference": -0.009299054328516965,
+        "ci95": [
+          -0.017283968534299136,
+          -0.0013141401227347912
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": 0.013279565718580966,
+        "ci95": [
+          0.0049630221411612625,
+          0.02159610929600067
+        ]
+      }
+    }
+  },
+  "hierarchicalApproval": {
+    "classPriorStrength": 0.25,
+    "validation": {
+      "approval": {
+        "recallAt20": 0.01968301341160543,
+        "positiveRecallAt20": 0.021988061143690514,
+        "modelApprovalAt20": 0.9913190937355498,
+        "hitRateAt20": 0.064,
+        "retrievedReviews": 309,
+        "retrievedPositiveReviews": 305
+      },
+      "popularity": {
+        "recallAt20": 0.24711871373080077,
+        "positiveRecallAt20": 0.24770100992469035,
+        "modelApprovalAt20": 0.8721160216694852,
+        "hitRateAt20": 0.512,
+        "retrievedReviews": 3344,
+        "retrievedPositiveReviews": 2900
+      },
+      "all 0.25": {
+        "recallAt20": 0.15250231543568304,
+        "positiveRecallAt20": 0.16688063285923208,
+        "modelApprovalAt20": 0.973676907447903,
+        "hitRateAt20": 0.35375,
+        "retrievedReviews": 2164,
+        "retrievedPositiveReviews": 2089
+      },
+      "all 0.5": {
+        "recallAt20": 0.20046896734214142,
+        "positiveRecallAt20": 0.2184377082700574,
+        "modelApprovalAt20": 0.9691280156276573,
+        "hitRateAt20": 0.43275,
+        "retrievedReviews": 2894,
+        "retrievedPositiveReviews": 2768
+      },
+      "all 0.75": {
+        "recallAt20": 0.23853314745960727,
+        "positiveRecallAt20": 0.2601671414242648,
+        "modelApprovalAt20": 0.9651033180882278,
+        "hitRateAt20": 0.4945,
+        "retrievedReviews": 3421,
+        "retrievedPositiveReviews": 3258
+      },
+      "all 1": {
+        "recallAt20": 0.3591401156545895,
+        "positiveRecallAt20": 0.36438479302254795,
+        "modelApprovalAt20": 0.8727027516693456,
+        "hitRateAt20": 0.64525,
+        "retrievedReviews": 4711,
+        "retrievedPositiveReviews": 4181
+      }
+    },
+    "confirmation": {
+      "approval": {
+        "recallAt20": 0.02295375222049662,
+        "positiveRecallAt20": 0.025105963613543752,
+        "modelApprovalAt20": 0.9913581367636409,
+        "hitRateAt20": 0.067875,
+        "retrievedReviews": 617,
+        "retrievedPositiveReviews": 605
+      },
+      "popularity": {
+        "recallAt20": 0.251914142937177,
+        "positiveRecallAt20": 0.2495275302695033,
+        "modelApprovalAt20": 0.87311215263254,
+        "hitRateAt20": 0.5235,
+        "retrievedReviews": 6770,
+        "retrievedPositiveReviews": 5943
+      },
+      "all 0.75": {
+        "recallAt20": 0.2421965066074827,
+        "positiveRecallAt20": 0.2621060796578637,
+        "modelApprovalAt20": 0.9655793687558674,
+        "hitRateAt20": 0.50525,
+        "retrievedReviews": 7003,
+        "retrievedPositiveReviews": 6685
+      },
+      "all 1": {
+        "recallAt20": 0.36021790737491927,
+        "positiveRecallAt20": 0.3636989296821771,
+        "modelApprovalAt20": 0.8738140840458313,
+        "hitRateAt20": 0.65025,
+        "retrievedReviews": 9707,
+        "retrievedPositiveReviews": 8670
+      }
+    },
+    "confirmedDefaultMinus": {
+      "approval": {
+        "recallAt20": {
+          "difference": 0.21924275438698612,
+          "ci95": [
+            0.21233889814005022,
+            0.22614661063392202
+          ]
+        },
+        "positiveRecallAt20": {
+          "difference": 0.23700011604431995,
+          "ci95": [
+            0.22958163768980264,
+            0.24441859439883726
+          ]
+        }
+      },
+      "popularity": {
+        "recallAt20": {
+          "difference": -0.009717636329694329,
+          "ci95": [
+            -0.017737167393977536,
+            -0.0016981052654111237
+          ]
+        },
+        "positiveRecallAt20": {
+          "difference": 0.012578549388360364,
+          "ci95": [
+            0.004216959872596708,
+            0.020940138904124023
+          ]
+        }
+      }
+    }
+  },
+  "validation": {
+    "approval": {
+      "recallAt20": 0.03184305106015879,
+      "positiveRecallAt20": 0.03576133427971347,
+      "modelApprovalAt20": 0.9886038280245387,
+      "hitRateAt20": 0.098,
+      "retrievedReviews": 489,
+      "retrievedPositiveReviews": 483
+    },
+    "popularity": {
+      "recallAt20": 0.24711871373080077,
+      "positiveRecallAt20": 0.24770100992469035,
+      "modelApprovalAt20": 0.8718813899378373,
+      "hitRateAt20": 0.512,
+      "retrievedReviews": 3344,
+      "retrievedPositiveReviews": 2900
+    },
+    "all 0.25": {
+      "recallAt20": 0.15532576247177876,
+      "positiveRecallAt20": 0.16947397885140414,
+      "modelApprovalAt20": 0.9742191479670222,
+      "hitRateAt20": 0.359,
+      "retrievedReviews": 2198,
+      "retrievedPositiveReviews": 2126
+    },
+    "all 0.5": {
+      "recallAt20": 0.20074731399519896,
+      "positiveRecallAt20": 0.2185483248871807,
+      "modelApprovalAt20": 0.9697026880110747,
+      "hitRateAt20": 0.42975,
+      "retrievedReviews": 2910,
+      "retrievedPositiveReviews": 2795
+    },
+    "all 0.75": {
+      "recallAt20": 0.24071295808370366,
+      "positiveRecallAt20": 0.2619751062232832,
+      "modelApprovalAt20": 0.9651710514800378,
+      "hitRateAt20": 0.49825,
+      "retrievedReviews": 3426,
+      "retrievedPositiveReviews": 3263
+    },
+    "all 1": {
+      "recallAt20": 0.3591401156545895,
+      "positiveRecallAt20": 0.36438479302254795,
+      "modelApprovalAt20": 0.8725026588583537,
+      "hitRateAt20": 0.64525,
+      "retrievedReviews": 4711,
+      "retrievedPositiveReviews": 4181
+    },
+    "favorable 0.25": {
+      "recallAt20": 0.15482056236143163,
+      "positiveRecallAt20": 0.16879647321984956,
+      "modelApprovalAt20": 0.9753357237379291,
+      "hitRateAt20": 0.3575,
+      "retrievedReviews": 2187,
+      "retrievedPositiveReviews": 2119
+    },
+    "favorable 0.5": {
+      "recallAt20": 0.2000715439187564,
+      "positiveRecallAt20": 0.21758806755294363,
+      "modelApprovalAt20": 0.971259014202971,
+      "hitRateAt20": 0.427,
+      "retrievedReviews": 2892,
+      "retrievedPositiveReviews": 2785
+    },
+    "favorable 0.75": {
+      "recallAt20": 0.24010092879354938,
+      "positiveRecallAt20": 0.2607935111535904,
+      "modelApprovalAt20": 0.9671944332404021,
+      "hitRateAt20": 0.49575,
+      "retrievedReviews": 3399,
+      "retrievedPositiveReviews": 3250
+    },
+    "favorable 1": {
+      "recallAt20": 0.35239007507360887,
+      "positiveRecallAt20": 0.35971668575985594,
+      "modelApprovalAt20": 0.8787260428993211,
+      "hitRateAt20": 0.6365,
+      "retrievedReviews": 4611,
+      "retrievedPositiveReviews": 4137
+    }
+  },
+  "test": {
+    "approval": {
+      "recallAt20": 0.03749207651666036,
+      "positiveRecallAt20": 0.04136997186729492,
+      "modelApprovalAt20": 0.9886378433163476,
+      "hitRateAt20": 0.113,
+      "retrievedReviews": 1077,
+      "retrievedPositiveReviews": 1072
+    },
+    "popularity": {
+      "recallAt20": 0.25835832690843474,
+      "positiveRecallAt20": 0.25560275967123713,
+      "modelApprovalAt20": 0.872763173436078,
+      "hitRateAt20": 0.536,
+      "retrievedReviews": 7050,
+      "retrievedPositiveReviews": 6125
+    },
+    "all 0.25": {
+      "recallAt20": 0.16268888948757382,
+      "positiveRecallAt20": 0.17808240404816417,
+      "modelApprovalAt20": 0.9745482369382388,
+      "hitRateAt20": 0.3825,
+      "retrievedReviews": 4736,
+      "retrievedPositiveReviews": 4602
+    },
+    "all 0.5": {
+      "recallAt20": 0.20669889593667284,
+      "positiveRecallAt20": 0.22606279650649777,
+      "modelApprovalAt20": 0.9701022055053308,
+      "hitRateAt20": 0.455875,
+      "retrievedReviews": 6124,
+      "retrievedPositiveReviews": 5913
+    },
+    "all 0.75": {
+      "recallAt20": 0.24612666843539907,
+      "positiveRecallAt20": 0.26773925930849074,
+      "modelApprovalAt20": 0.9657095074609806,
+      "hitRateAt20": 0.51725,
+      "retrievedReviews": 7199,
+      "retrievedPositiveReviews": 6891
+    },
+    "all 1": {
+      "recallAt20": 0.3626084626971905,
+      "positiveRecallAt20": 0.36513244061778255,
+      "modelApprovalAt20": 0.8735407598206226,
+      "hitRateAt20": 0.657,
+      "retrievedReviews": 9902,
+      "retrievedPositiveReviews": 8788
+    }
+  },
+  "paired": {
+    "all 1 minus approval": {
+      "recallAt20": {
+        "difference": 0.32511638618053007,
+        "ci95": [
+          0.316812180784071,
+          0.33342059157698917
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": 0.32376246875048764,
+        "ci95": [
+          0.3150182295264203,
+          0.332506707974555
+        ]
+      }
+    },
+    "all 1 minus popularity": {
+      "recallAt20": {
+        "difference": 0.10425013578875572,
+        "ci95": [
+          0.09850783224777337,
+          0.10999243932973807
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": 0.10952968094654539,
+        "ci95": [
+          0.10347620304556879,
+          0.11558315884752199
+        ]
+      }
+    },
+    "all 0.5 minus approval": {
+      "recallAt20": {
+        "difference": 0.1692068194200125,
+        "ci95": [
+          0.16291519724565548,
+          0.17549844159436953
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": 0.18469282463920283,
+        "ci95": [
+          0.17790261670032106,
+          0.1914830325780846
+        ]
+      }
+    },
+    "all 0.5 minus popularity": {
+      "recallAt20": {
+        "difference": -0.051659430971761844,
+        "ci95": [
+          -0.059651137710966584,
+          -0.043667724232557104
+        ]
+      },
+      "positiveRecallAt20": {
+        "difference": -0.029539963164739395,
+        "ci95": [
+          -0.037822672256068085,
+          -0.021257254073410704
+        ]
+      }
+    }
+  }
+}
