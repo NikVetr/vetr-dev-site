@@ -22,7 +22,8 @@ Counts include identity-matched Wikipedia recognition cards for films and destin
 | Films | 500 | 500 |
 | Destinations | 1,014 | 1,419 |
 | TV | 383 | 383 |
-| Books | 1,369 | 1,369 |
+| Goodreads books | 1,369 | 1,369 |
+| Book-Crossing editions | 1,000 | 1,000 |
 | Anime | 1,487 | 1,487 |
 | Podcasts | 3,267 | 3,670 |
 | Albums | 2,042 | 2,057 |
@@ -33,7 +34,7 @@ Counts include identity-matched Wikipedia recognition cards for films and destin
 | Food.com recipes | 1,575 | 1,600 |
 | Taste of Home recipes | 95 | 100 |
 | Cocktails | 1,571 | 1,777 |
-| Royal Road Kindle editions | 258 | 258 |
+| Royal Road Kindle editions | 577 | 577 |
 | AO3 original web fiction | 0 | 320 |
 | AO3 fanfiction | 0 | 10,466 |
 | Subreddits | 451 | 500 |

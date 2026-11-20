@@ -472,6 +472,7 @@ function facets(a) {
     Format: a.format ? [a.format] : [],
     Certificate: a.certificate ? [a.certificate] : [],
     Collection: a.collection ? [a.collection] : [],
+    Volume: catalog.domain === 'royalroad' && a.releaseOrder ? ['Volume ' + a.releaseOrder] : [],
     Series: a.series,
     'Production budget': moneyBand(a.budget),
     'Reported box office': moneyBand(a.revenue),

@@ -11,7 +11,7 @@ import numpy as np
 import pyarrow.parquet as pq
 from scipy.sparse import csr_matrix
 
-from fit_catalog import fit_catalog, write_evidence
+from fit_catalog import fit_catalog, fit_mixture, score_model, summary, write_evidence
 
 
 SCALE = [1, 2, 3, 4, 5]
@@ -37,6 +37,25 @@ def crosswalk(path):
     if not pairs:
         raise ValueError('The edition crosswalk is empty')
     return pairs
+
+
+def numbered_editions(anchors, path):
+    """Add reviewed installments and retain the published order where it is known."""
+    links = dict(anchors)
+    anchor_by_serial = {fid: asin for asin, fid in anchors.items()}
+    positions = {}
+    with path.open(newline='') as f:
+        for row in csv.DictReader(f):
+            fid, volume, asin = int(row['fiction_id']), int(row['volume']), row['parent_asin']
+            if (fid not in anchor_by_serial or volume < 1 or not re.fullmatch(r'[A-Z0-9]{10}', asin)
+                    or asin in positions or links.get(asin, fid) != fid):
+                raise ValueError(f'Invalid or repeated numbered edition: {fid}, {volume}, {asin}')
+            links[asin], positions[asin] = fid, volume
+    for fid in {links[asin] for asin in positions}:
+        positions.setdefault(anchor_by_serial[fid], 1)
+    if len({(links[asin], pos) for asin, pos in positions.items()}) != len(positions):
+        raise ValueError('Two editions occupy the same numbered volume of a serial')
+    return links, positions
 
 
 def selected_editions(path, keep):
@@ -89,7 +108,7 @@ def review_profiles(path, asins):
     return profile, repeated
 
 
-def item(asin, book, serial, count):
+def item(asin, book, serial, count, volume=None):
     tags = json.loads(serial['tags'] or '[]')
     if serial['is_original'] != 1 or not book['title'] or not serial['title'] or not isinstance(tags, list):
         raise ValueError(f'Invalid or non-original Royal Road match for {asin}')
@@ -98,6 +117,8 @@ def item(asin, book, serial, count):
     a = dict(authors=[author], collection=serial['title'], genres=tags,
              sourceUrl='https://www.amazon.com/dp/' + asin, royalRoadUrl=f'https://www.royalroad.com/fiction/{aid}',
              ratingCount=int(count))
+    if volume is not None:
+        a['releaseOrder'] = volume
     if serial['author'] != author:
         a['serialAuthor'] = serial['author']
     pub = book['details'].get('Publisher')
@@ -116,29 +137,77 @@ def item(asin, book, serial, count):
     return dict(itemId=asin, title=book['title'], annotations=a)
 
 
-def build(meta_rr, meta_kindle, ratings, pairs, out):
+def distinct_serial_cases(profile, serial_ids, people, rng):
+    """Four different serials supplied, one rating per different target serial."""
+    cases = []
+    for person in people:
+        start, end = profile.indptr[person:person + 2]
+        if end - start < 5:
+            continue
+        by_serial = {}
+        for pos in range(start, end):
+            by_serial.setdefault(serial_ids[profile.indices[pos]], []).append(pos)
+        if len(by_serial) < 5:
+            continue
+        selected = rng.choice(list(by_serial), size=min(16, len(by_serial)), replace=False)
+        positions = [rng.choice(by_serial[k]) for k in selected]
+        idx, val = profile.indices[positions], profile.data[positions] - 1
+        cases.append((idx[:4], val[:4], idx[4:], val[4:]))
+    return cases
+
+
+def cross_serial_holdout(profile, serial_ids, evaluation):
+    seed = evaluation['finalFit']['seed']
+    order = np.random.default_rng(seed).permutation(profile.shape[0])
+    split = len(order) - evaluation['developmentUsers']
+    cases = distinct_serial_cases(profile, serial_ids, order[:split], np.random.default_rng(seed + 1))
+    if not cases:
+        raise ValueError('No holdout readers with five distinct Royal Road serials')
+    scores, losses = [], []
+    for k in sorted({1, evaluation['selectedK']}):
+        model = fit_mixture(profile[order[split:]], len(SCALE), k, seed)
+        metrics = score_model(model, cases, np.asarray(SCALE), evaluation['brierThreshold'])
+        scores.append(summary(k, metrics))
+        losses.append(metrics[:, 0])
+    result = dict(testUsers=len(cases), testRatings=sum(len(c[3]) for c in cases), holdout=scores)
+    if len(losses) == 2:
+        gain = losses[0] - losses[1]
+        rng = np.random.default_rng(seed + 2)
+        means = [rng.choice(gain, size=len(gain), replace=True).mean() for _ in range(2000)]
+        result['pairedLogLossGain'] = dict(mean=float(gain.mean()), interval95=np.quantile(means, [.025, .975]).tolist())
+    return result
+
+
+def build(meta_rr, meta_kindle, ratings, pairs, out, volumes=None):
+    volumes = volumes or {}
     asins = sorted(pairs)
     cols = ['fiction_id', 'title', 'author', 'tags', 'is_original']
     rr = pq.read_table(meta_rr, columns=cols, filters=[('fiction_id', 'in', list(pairs.values()))]).to_pylist()
     serials = {x['fiction_id']: x for x in rr}
-    if len(rr) != len(pairs) or set(serials) != set(pairs.values()):
+    if len(rr) != len(serials) or set(serials) != set(pairs.values()):
         raise ValueError('Missing or ambiguous Royal Road IDs in the metadata snapshot')
     books = selected_editions(meta_kindle, asins)
     profile, repeated = review_profiles(ratings, asins)
     counts = np.bincount(profile.indices, minlength=len(asins))
     support = np.flatnonzero(counts)
-    items = [item(asins[i], books[asins[i]], serials[pairs[asins[i]]], counts[i]) for i in support]
+    items = [item(asins[i], books[asins[i]], serials[pairs[asins[i]]], counts[i], volumes.get(asins[i]))
+             for i in support]
     profile = profile[:, support].tocsr()
     profile.sort_indices()
     sizes = np.diff(profile.indptr)
-    audit = dict(matchedEditions=len(asins), editionsWithRatings=len(items), respondents=len(sizes),
-                 ratings=profile.nnz, readersWithTwoWorks=int((sizes >= 2).sum()),
-                 readersWithFiveWorks=int((sizes >= 5).sum()), repeatedReviewRows=repeated)
+    serial_ids = np.array([pairs[asins[i]] for i in support])
+    distinct = np.array([len(set(serial_ids[profile.indices[start:end]]))
+                         for start, end in zip(profile.indptr[:-1], profile.indptr[1:])])
+    audit = dict(matchedEditions=len(asins), editionsWithRatings=len(items), serialsWithRatings=len(set(serial_ids)),
+                 respondents=len(sizes), ratings=profile.nnz, readersWithTwoWorks=int((distinct >= 2).sum()),
+                 readersWithFiveWorks=int((distinct >= 5).sum()), readersWithFiveEditions=int((sizes >= 5).sum()),
+                 repeatedReviewRows=repeated)
     print(json.dumps(audit), flush=True)
     catalog, evaluation = fit_catalog(NAME, items, SCALE, profile, validation_limit=None)
     catalog.update(domain='royalroad', linkLabel='Kindle edition', sourceLabel=SOURCE['title'],
                    sourceUrl=SOURCE['url'], source=SOURCE)
-    report = dict(**evaluation, sourceCounts=audit, serialSnapshot=RR_SNAPSHOT)
+    report = dict(**evaluation, sourceCounts=audit, serialSnapshot=RR_SNAPSHOT,
+                  crossSerial=cross_serial_holdout(profile, serial_ids, evaluation))
     out.mkdir(exist_ok=True, parents=True)
     for name, value in [('royalroad-kindle.json', catalog), ('validation/royalroad-kindle.json', report)]:
         target = out / name
@@ -155,5 +224,7 @@ if __name__ == '__main__':
     parser.add_argument('ratings', type=Path, help='Kindle_Store.csv.gz, 0-core rating-only edition')
     parser.add_argument('out', type=Path)
     parser.add_argument('--crosswalk', type=Path, default=Path(__file__).with_name('royalroad-kindle-crosswalk.csv'))
+    parser.add_argument('--volumes', type=Path, default=Path(__file__).with_name('royalroad-kindle-volumes.csv'))
     args = parser.parse_args()
-    build(args.rr_meta, args.kindle_meta, args.ratings, crosswalk(args.crosswalk), args.out)
+    links, positions = numbered_editions(crosswalk(args.crosswalk), args.volumes)
+    build(args.rr_meta, args.kindle_meta, args.ratings, links, args.out, positions)

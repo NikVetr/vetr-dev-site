@@ -344,7 +344,9 @@ export function showDetail({
     (catalog.activityCountLabel?.toLocaleLowerCase() ?? (domain === 'games' ? 'Steam reviews' : 'ratings'));
   const more = /** @type {HTMLDetailsElement} */ (el('more-metadata'));
   const facts = [
-    ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
+    [catalog.domain === 'royalroad' ? 'Serial' : 'Collection',
+      a.collection && a.collection + (a.releaseOrder
+        ? (catalog.domain === 'royalroad' ? ' · volume ' : ' · release ') + a.releaseOrder : '')],
     ['Series', a.series?.join(' · ')],
     ['Year', a.year],
     ['Episodes', a.episodes],

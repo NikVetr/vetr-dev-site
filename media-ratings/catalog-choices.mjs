@@ -1,4 +1,8 @@
 const sources = {
+  books: [
+    { value: 'book-crossing', label: 'Book-Crossing', note: '1–10', description: '1–10 reader scores · 2004 snapshot' },
+    { value: 'books', label: 'Goodreads', note: '1–5 stars' },
+  ],
   games: [
     { value: 'metacritic', label: 'Metacritic', note: '0–10' },
     {

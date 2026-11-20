@@ -4,6 +4,8 @@ The catalog covers 1,419 destinations across 140 country and area labels. It use
 
 Stravl recorded three lists per respondent. Repeating an answer counts once. A destination with conflicting answers from one person is omitted for that person. The release names 1,486 places, 1,452 of which have at least one unambiguous response. Blank entries represent missing data. The fit uses only the three swipe lists because Stravl collected subsequent feedback on recommended destinations separately. Each item ID is the original zero-based line number in `destination_ids.txt`. This preserves the identity and answer scale of the 12 places in older exported ratings.
 
+Stravl supplies three explicit answers for named destinations. A finer-scale lead, Spain's 2024 Residents Travel Survey, supplies satisfaction scores, but its public trip file groups destinations into provinces and broad foreign regions. Among 61,129 trip records, no respondent within a survey month rated four distinct destination groups. The finer trip-stage geography requires a separate microdata request. [INE survey files and access](https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&cid=1254736176990&idp=1254735576863&menu=resultados&secc=1254736195369)
+
 ## How well the model predicts a new traveler
 
 Given four swipes, the predictor updates the probabilities that a traveler belongs to each of eight learned preference classes. Each class has its own smoothed No/Maybe/Yes distribution for each destination. Three-fold cross-validation with respondent-disjoint folds compared 1, 2, 4, 8 and 16 classes. Eight had the lowest mean category log loss. The final fit used all 61,130 respondents. [Training code](fit_catalog.py) · [Validation records](validation/destinations.json)

@@ -829,6 +829,7 @@ test('new catalogs use their native scales, source links, observed pairs and ind
   const p = app.page;
   try {
     for (const [key, fingerprint, midpoint, source] of [
+      ['book-crossing', 'Book', '6', 'Book-Crossing'],
       ['books', 'Book', '3 ★', 'Goodreads'],
       ['anime', 'Anime', '6', 'MyAnimeList'],
       ['podcasts', 'Podcast', '3 ★', 'Apple Podcasts'],
@@ -840,7 +841,8 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       ['cocktails', 'Cocktail', '3 ★', 'Food.com'],
     ]) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
-      if (key === 'recipes') await choose(p, 'catalog-source', 'recipes');
+      if (key === 'book-crossing') await p.locator('#domains [data-key=books]').click();
+      else if (['recipes', 'books'].includes(key)) await choose(p, 'catalog-source', key);
       else await p.locator('#domains [data-key="' + key + '"]').click();
       await p.waitForFunction(
         (name) => document.querySelector('#context').textContent.startsWith(name),
@@ -1141,6 +1143,21 @@ test('Royal Road Kindle editions have a separate whole-star shelf, serial links 
     await page.goBack();
     await page.locator('#rated-list .entry').waitFor();
     assert.equal(await choiceValue(page, 'catalog-source'), 'royalroad-kindle');
+    const volume = catalog.items.find(it => it.annotations.releaseOrder === 2);
+    await page.locator('#library .entry[data-id="' + volume.itemId + '"] .entry-title').click();
+    assert.equal(await page.locator('#external').getAttribute('href'), volume.annotations.sourceUrl);
+    assert.equal(await page.locator('#item-links').getByRole('link', { name: /^Royal Road/ }).getAttribute('href'),
+      volume.annotations.royalRoadUrl);
+    await page.locator('#more-metadata summary').click();
+    assert.match(await page.locator('#more-metadata dl').innerText(), /volume 2/);
+    await page.locator('#facet').click();
+    await page.locator('#filter-fields summary').filter({ hasText: /^Volume$/ }).click();
+    await page.locator('#filter-fields').getByRole('checkbox', { name: /^Volume 2 / }).check();
+    await page.locator('#filter-apply').click();
+    const seconds = new Set(catalog.items.filter(it => it.annotations.releaseOrder === 2).map(it => it.itemId));
+    const visible = await page.locator('#boards [data-key=expected] .rank').evaluateAll(
+      rows => rows.map(row => row.getAttribute('data-id')));
+    assert.ok(visible.length > 0 && visible.every(id => seconds.has(id)));
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });
