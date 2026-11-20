@@ -21,6 +21,11 @@ const sources = {
     { value: 'royalroad-kindle', label: 'Royal Road', note: 'Kindle · 1–5 stars' },
     { value: 'webfiction', label: 'AO3', note: 'Kudos' },
   ],
+  fanfiction: [
+    { value: 'goodreads-fanfiction', label: 'Goodreads', note: '1–5 stars' },
+    { value: 'kindle-worlds', label: 'Licensed worlds', note: 'Kindle · 1–5', description: 'Licensed fanfiction editions · 1–5 Kindle stars' },
+    { value: 'fanfiction', label: 'AO3', note: 'Kudos' },
+  ],
 };
 
 export const sourceDomains = new Map();

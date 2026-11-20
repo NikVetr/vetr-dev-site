@@ -884,7 +884,7 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
     for (const key of ['subreddits', 'fanfiction', 'webfiction', 'games']) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
       await p.locator('header #domains button[data-key="' + key + '"]').click();
-      if (['games', 'webfiction'].includes(key)) {
+      if (['games', 'webfiction', 'fanfiction'].includes(key)) {
         await p.locator('#domains [data-key="' + key + '"][aria-pressed=true]').waitFor();
         await choose(p, 'catalog-source', key);
       }
@@ -1255,4 +1255,44 @@ test('the recommendation scatterplot and held-out rating list open the correspon
   } finally {
     await app.close();
   }
+});
+
+test('fanfiction opens whole stars and keeps graded editions and kudos on separate shelves', async () => {
+  const session = await openPage('rating-prediction/', { width: 390, height: 844 });
+  const p = session.page;
+  const read = key => JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
+  try {
+    const data = read('goodreads-fanfiction');
+    await p.locator('#domains [data-key=fanfiction]').click();
+    await p.getByRole('heading', { name: 'Fanfiction preference fingerprint' }).waitFor();
+    assert.equal(await choiceValue(p, 'catalog-source'), 'goodreads-fanfiction');
+    assert.equal(await p.locator('#library .entry').count(), data.items.length);
+    for (const [host, text] of [['archiveofourown.org', 'AO3'], ['www.fanfiction.net', 'FanFiction.net']]) {
+      const item = data.items.find(it => new URL(it.annotations.storyUrl).hostname === host);
+      await p.locator('#library .entry[data-id="' + item.itemId + '"] .entry-title').click();
+      assert.equal(await p.locator('#external').getAttribute('href'), item.annotations.sourceUrl);
+      assert.equal(await p.locator('#item-links').getByRole('link', { name: text + ' ↗', exact: true }).getAttribute('href'), item.annotations.storyUrl);
+    }
+    await p.locator('#quick-session').click();
+    const choice = await p.locator('#rapid-card').getAttribute('data-id');
+    const story = data.items.find(it => it.itemId === choice).annotations.storyUrl;
+    assert.equal(await p.locator('#rapid-article a').last().getAttribute('href'), story);
+    await p.getByRole('button', { name: 'Rate 3 ★', exact: true }).click();
+    await p.locator('#rapid-rating form button').click();
+    await p.locator('#rated-list .entry').waitFor();
+    assert.equal(await p.locator('#comparison .evidence-note').innerText(), data.observationsNote);
+    await choose(p, 'catalog-source', 'kindle-worlds');
+    await p.waitForFunction(n => document.querySelector('#context').textContent.startsWith(n), read('kindle-worlds').name);
+    assert.equal(await p.locator('#rated-list .entry').count(), 0);
+    await p.locator('#quick-session').click();
+    await p.getByRole('button', { name: 'Rate 4 ★', exact: true }).click();
+    await p.locator('#rapid-rating form button').click();
+    await p.locator('#comparison .heat').waitFor();
+    await choose(p, 'catalog-source', 'fanfiction');
+    await p.getByRole('heading', { name: 'Chance of kudos' }).waitFor();
+    assert.equal(await p.locator('#rated-list .entry').count(), 0);
+    await choose(p, 'catalog-source', 'goodreads-fanfiction');
+    await p.locator('#rated-list .entry').waitFor();
+    assert.deepEqual(session.errors, []);
+  } finally { await session.close(); }
 });

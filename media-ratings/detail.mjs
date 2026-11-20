@@ -398,6 +398,9 @@ export function showDetail({
   links.replaceChildren(link);
   for (const [key, label] of [
     ['royalRoad', 'Royal Road'],
+    ['ao3', 'AO3'],
+    ['ffn', 'FanFiction.net'],
+    ['fanProgram', 'Fanfiction program'],
     ['rottenTomatoes', 'Rotten Tomatoes'],
     ['wikipedia', 'Wikipedia'],
     ['googleMaps', 'Google Maps'],

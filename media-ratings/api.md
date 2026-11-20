@@ -66,6 +66,8 @@ This is a proxy for what a person might recognize. MovieLens measures submitted 
 
 ## Aggregate co-ratings
 
-The `<catalog>-evidence.json` manifest lists the item IDs, scale and per-item marginal counts. For zero-based item indices `lo < hi`, pair `hi * (hi - 1) / 2 + lo` stores rows for the lower index and columns for the higher index. Dense grids use little-endian unsigned 16-bit counts. Large catalogs split them across `packedFiles` at `pairsPerFile` pair boundaries. The browser fetches the blocks for the selected comparisons on demand. Small catalogs use one `packedFile` or inline `pairs`.
+The built-in Goodreads fanfiction catalog ships fitted probabilities and an `observationsNote` that the browser displays in the co-rating panel.
+
+For catalogs with observed tables, the `<catalog>-evidence.json` manifest lists the item IDs, scale and per-item marginal counts. For zero-based item indices `lo < hi`, pair `hi * (hi - 1) / 2 + lo` stores rows for the lower index and columns for the higher index. Dense grids use little-endian unsigned 16-bit counts. Large catalogs split them across `packedFiles` at `pairsPerFile` pair boundaries. The browser fetches the blocks for the selected comparisons on demand. Small catalogs use one `packedFile` or inline `pairs`.
 
 Complete binary cohorts can specify `packedLayout: "binary-overlap"` and `cohortSize`. Each pair then stores only the count of people positive on both entries. The two one-sided positive counts follow by subtracting the overlap from each positive marginal. Subtracting the positive union from the cohort size gives the double-negative count, which can exceed 65,535. This encoding applies to the complete AO3 activity cohort. Missing explicit reviews on Steam remain unobserved.

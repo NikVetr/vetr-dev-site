@@ -36,6 +36,8 @@ Counts include identity-matched Wikipedia recognition cards for films and destin
 | Cocktails | 1,571 | 1,777 |
 | Royal Road Kindle editions | 577 | 577 |
 | AO3 original web fiction | 0 | 320 |
+| Goodreads fanfiction | 0 | 365 |
+| Licensed fanfiction Kindle editions | 508 | 508 |
 | AO3 fanfiction | 0 | 10,466 |
 | Subreddits | 451 | 500 |
 

@@ -238,7 +238,7 @@ export function renderTaste(
       recipes: 'Recipe preference',
       tv: 'TV preference',
       cocktails: 'Cocktail preference',
-      fanfiction: 'Fanfiction kudos',
+      fanfiction: catalog.responsePrompt && catalog.scale.length === 2 ? 'Fanfiction kudos' : 'Fanfiction preference',
       webfiction: 'Web fiction kudos',
       royalroad: 'Web fiction preference',
       subreddits: 'Community activity',

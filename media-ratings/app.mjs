@@ -205,11 +205,17 @@ function install(key, next) {
     if (source.notes) attribution.append(node('p', source.notes));
   }
   const creditDocs = { expanded: 'creator-credits.md', tv: 'creator-credits.md', anime: 'book-anime-data.md', books: 'book-anime-data.md' };
-  if (Object.hasOwn(creditDocs, key)) {
-    const credits = node('a', 'Creator credit sources and coverage');
-    credits.href = 'https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/' + creditDocs[key];
+  const catalogGuides = {
+    'book-crossing': 'book-crossing.md',
+    'royalroad-kindle': 'royalroad-data.md',
+    'goodreads-fanfiction': 'granular-source-audit.md',
+    'kindle-worlds': 'kindle-worlds.md',
+  };
+  if (Object.hasOwn(creditDocs, key) || Object.hasOwn(catalogGuides, key)) {
+    const guide = node('a', creditDocs[key] ? 'Creator credit sources and coverage' : 'Catalog coverage and held-out evaluation');
+    guide.href = 'https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/' + (creditDocs[key] ?? catalogGuides[key]);
     const sources = node('p');
-    sources.append(credits);
+    sources.append(guide);
     attribution.append(sources);
   }
   el('distribution-title').textContent = catalog.responsePrompt
@@ -1629,6 +1635,9 @@ async function openCatalog(key, file = null, replace = false) {
                 label: it.annotations.linkLabel ?? data.linkLabel ?? data.sourceLabel,
                 sourceUrl: it.annotations.sourceUrl,
                 royalRoad: /^https:\/\/www\.royalroad\.com\/fiction\/[1-9]\d*$/.test(it.annotations.royalRoadUrl) ? it.annotations.royalRoadUrl : null,
+                ao3: /^https:\/\/archiveofourown\.org\/works\/[1-9]\d*$/.test(it.annotations.storyUrl) ? it.annotations.storyUrl : null,
+                ffn: /^https:\/\/www\.fanfiction\.net\/s\/[1-9]\d*$/.test(it.annotations.storyUrl) ? it.annotations.storyUrl : null,
+                fanProgram: it.annotations.worldUrl?.startsWith('https://') ? it.annotations.worldUrl : null,
                 imageUrl: it.annotations.imageUrl?.startsWith('https://') ? it.annotations.imageUrl : null,
                 imageSourceUrl: it.annotations.imageSourceUrl ?? it.annotations.imageRightsUrl,
                 imageCredit: it.annotations.imageCredit,
@@ -1645,7 +1654,8 @@ async function openCatalog(key, file = null, replace = false) {
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';
         el('custom-domain').hidden = false;
-      } else void loadEvidence(key, s);
+      } else if (data.observationsNote) s.evidenceMessage = data.observationsNote;
+      else void loadEvidence(key, s);
       if (seq !== revision) return;
       states.set(key, s);
     }
