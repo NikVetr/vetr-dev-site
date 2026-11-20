@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
+from typing import Any
 import unittest
 
 import numpy as np
@@ -11,10 +12,45 @@ from scipy.sparse import csr_matrix
 from fit_catalog import fit_mixture
 
 from fit_games import RIDGE, similarity_scores
+from game_scores import recorded_scores, sparse_contexts
+from game_pooling import approval_prior, attach_approval, class_prior
+from evaluate_game_extremes import pool_class_odds
 from prepare_games import collect
 
 
 class GamesTests(unittest.TestCase):
+    def test_unanimous_sparse_votes_shrink_more_and_have_wider_intervals(self):
+        counts = np.array([[4, 15], [8, 11], [19, 9], [12, 39], [0, 25], [0, 250]])
+        items: list[dict[str, Any]] = [dict(annotations=dict(ratingCount=int(n))) for n in counts.sum(axis=1)]
+        fit = {}
+        shapes = approval_prior(counts)
+        attach_approval(dict(items=items, fit=fit), counts, shapes)
+        small, large = [it['annotations']['approval'] for it in items[-2:]]
+        self.assertLess(small['mean'], large['mean'])
+        self.assertGreater(small['upper']-small['lower'], large['upper']-large['lower'])
+        self.assertLess(large['upper'], 1.)
+        prior_counts = class_prior(counts, shapes, 16)
+        np.testing.assert_allclose(prior_counts.sum(axis=1), 16)
+        np.testing.assert_allclose(prior_counts[-1, 1]/16, large['mean'], atol=1e-9)
+        self.assertEqual(small['negative'], 0)
+
+    def test_targeted_evaluation_keeps_each_sparse_vote_out_of_its_own_context(self):
+        profiles = csr_matrix([[2, 1, 0, 0, 0, 0], [0, 2, 0, 0, 0, 0], [2, 2, 2, 1, 2, 1]])
+        cases = sparse_contexts(profiles, np.array([True, True, False, False, False, False]), 42)
+        self.assertEqual([len(group) for group in cases], [1, 2, 0, 0, 2])
+        for group in cases:
+            for given, _, target, _ in group:
+                self.assertNotIn(target[0], given)
+
+    def test_unanimity_cannot_identify_a_within_game_class_contrast(self):
+        counts = np.array([[0, 40], [10000, 40000]])
+        positive = np.array([[.8, .7], [.99, .9]])
+        model = (np.array([.4, .6]), np.stack([1-positive, positive], axis=2), 3)
+        self.assertIs(pool_class_odds(model, counts, (6, 2), 0), model)
+        _, emissions, _ = pool_class_odds(model, counts, (6, 2), 4)
+        np.testing.assert_allclose(emissions[:, 0, 1], 46/48)
+        np.testing.assert_allclose(emissions[:, 1, 1], positive[:, 1], atol=.0002)
+
     def test_duplicate_review_ids_and_conflicting_pairs_never_contribute_a_vote(self):
         players = ['100', '101']
         edges = {players[0]: [[11, 20], [12, 21], [13, 22], [14, 22]],
@@ -50,6 +86,9 @@ class GamesTests(unittest.TestCase):
         features = np.array([[1, 0], [.8, .6], [0, 1], [-.8, .6], [-1, 0], [-.6, -.8]])
         cases = [(np.arange(4), np.array([0, 1, 1, 0]), np.array([4, 5]), np.array([1, 0]))]
         offline = similarity_scores((weights, emissions, 1), cases, {'reviews': features @ features.T}, [2])
+        batch = recorded_scores(cases*2, features @ features.T, (weights, emissions, 1))
+        original = similarity_scores((weights, emissions, 1), cases, {'reviews': features @ features.T}, [1])
+        np.testing.assert_allclose([batch[0].mean(), batch[1].mean()], original['reviews', 1][0, :2])
         catalog = dict(name='Fixture', defaultModel='adjusted', scale=[0, 1],
                        items=[dict(itemId=str(i), title=str(i)) for i in range(6)],
                        models=dict(base=dict(kind='latent-class', components=[

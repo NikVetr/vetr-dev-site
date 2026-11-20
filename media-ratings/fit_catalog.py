@@ -16,7 +16,7 @@ def category_design(profiles, levels):
                               profiles.indptr), shape=(profiles.shape[0], profiles.shape[1] * levels))
 
 
-def fit_mixture(profiles, levels, k, seed, initial_classes=None, frequencies=None):
+def fit_mixture(profiles, levels, k, seed, initial_classes=None, frequencies=None, *, item_prior=None):
     """Fit EM with optional positive counts for repeated identical profiles."""
     x = category_design(profiles, levels)
     n = profiles.shape[0]
@@ -31,10 +31,15 @@ def fit_mixture(profiles, levels, k, seed, initial_classes=None, frequencies=Non
         counts = (x.T @ frequencies).reshape(-1, levels)
         total_users = frequencies.sum()
         total_ratings = counts.sum()
-    global_counts = counts.sum(axis=0) + 0.5
-    pooled = counts + 5 * global_counts / global_counts.sum()
-    pooled /= pooled.sum(axis=1, keepdims=True)
-    prior = 16 * pooled
+    if item_prior is None:
+        global_counts = counts.sum(axis=0) + 0.5
+        pooled = counts + 5 * global_counts / global_counts.sum()
+        pooled /= pooled.sum(axis=1, keepdims=True)
+        prior = 16 * pooled
+    else:
+        prior = np.asarray(item_prior, dtype=float)
+        if prior.shape != counts.shape or not np.all(np.isfinite(prior) & (prior > 0)):
+            raise ValueError('Expected positive finite item-by-category prior counts')
     rng = np.random.default_rng(seed)
     if initial_classes is None:
         resp = rng.exponential(size=(n, k))

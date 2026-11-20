@@ -30,7 +30,31 @@ Cross-validation selected 16 classes with review and metadata similarity (streng
 | --- | ---: | ---: |
 | Game approval rate | 0.34306 | 0.10094 |
 | 16 taste classes | 0.31328 | 0.09279 |
-| 16 taste classes, review similarity and game metadata (default) | 0.31179 | 0.09223 |
+| 16 taste classes, review similarity and game metadata | 0.31179 | 0.09223 |
+
+### Sparse games and unanimous reviews
+
+Five games have exclusively positive reviews in this snapshot. Of the 1,136 games, 165 have at most 100 reviews and 251 have at most 250. Each game has a public estimate of approval among its reviewers. A shared beta prior fitted across games by beta-binomial marginal likelihood gives an estimated 6.414 positive and 1.380 negative prior votes. With `u` thumbs up and `d` thumbs down, the posterior mean is `(u + 6.414) / (u + d + 7.794)`. The displayed interval spans the 2.5th and 97.5th percentiles of that posterior, conditional on the fitted prior. It describes uncertainty about the population rate of *recorded* thumbs up under a stable rate and independent review draws. Who buys or reviews a title, when they play it, and how their tastes differ can all affect that rate. [Beta-binomial likelihood](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.betabinom.html)
+
+| Game | Positive / total reviews | Estimated approval | 95% credible interval |
+| --- | ---: | ---: | ---: |
+| Seafrog | 45 / 45 | 97.39% | 91.74–99.84% |
+| Meddl Dash | 235 / 235 | 99.43% | 98.18–99.97% |
+| Shooters, Ready! | 484 / 484 | 99.72% | 99.10–99.98% |
+| A Short Hike | 19,819 / 19,983 | 99.17% | 99.04–99.29% |
+
+The personalized model uses the game's posterior mean as the center of each taste class's binary distribution. The class pseudo-count controls how far a class can depart from that estimate. We fit the 16-class mixture anew for seven candidate strengths from 0.0625 to 256, an additional count-dependent strength, and the earlier fixed prior. All model and prior fits used training reviewers alone. The validation and test groups each contain 20% of respondents. After four supplied reviews, validation compared the mean per-player log loss, then the mean per-game loss for titles with at most 250 training reviews among models within one paired standard error of the best overall score. This selected a class strength of 0.25. The release refits that model on all 16.65 million reviews.
+
+| Independent test measure | Earlier model | Updated model |
+| --- | ---: | ---: |
+| Mean player log loss, 79,372 players and 289,294 reviews | 0.30907 | 0.30879 |
+| Mean player Brier score | 0.09139 | 0.09126 |
+| Mean game log loss, 699 held-out votes on 203 sparse games after four supplied reviews | 0.57548 | 0.54662 |
+| Mean game log loss, all 5,517 held-out votes on 267 sparse games with zero to four other reviews available | 0.52453 | 0.50387 |
+
+The paired standard error was 0.000086 for the overall log-loss difference and 0.01442 for the four-input sparse-game difference. This comparison drew fresh four-review contexts for the original test respondents. A further experiment on separate reviewers used the number of votes on the less common side to attenuate taste-class differences. All five positive attenuation strengths worsened validation log loss for the 150 games with at most ten minority votes, from 0.45085 to 0.45245–0.46418. The deployed model uses the unattenuated class estimates. [Pooling study](validation/games-pooling.json) · [Minority-vote study](validation/games-extremes.json)
+
+**Highest expected** orders games by the personalized probability of a positive review. Someone giving six positive votes can still see unanimously praised niche titles first. For example, positive votes on Portal, Portal 2, Half-Life 2, Half-Life 2: Episode Two, Borderlands 2 and Grand Theft Auto V Enhanced give Shooters, Ready! a 99.998% forecast and A Short Hike a 99.686% forecast. The forecasts concern the direction of a hypothetical submitted thumb. The review counts and intervals above show how much direct evidence supports a game's marginal approval rate.
 
 ## Reproduce
 
@@ -47,6 +71,7 @@ curl -fL "$store/6c21457b9ebf0a6a7f5b91e11281d65d456ea30e/data/train-00000-of-00
 curl -fL "$store/1143d95ec71f34f1bed06d4f3a5d8ff513e810fc/data/train-00000-of-00001-e2ed184370a06932.parquet" -o "$game_dir/metadata-old.parquet"
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/prepare_games.py prepare "$game_dir"
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/prepare_games.py fit "$game_dir" --out media-ratings
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 media-ratings/evaluate_game_extremes.py "$game_dir" media-ratings/games.json media-ratings/validation/games-extremes.json
 ```
 
 | Source file | SHA-256 |

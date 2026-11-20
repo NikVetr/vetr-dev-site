@@ -161,10 +161,12 @@ def prepare(raw):
 
 
 def fit(raw, output):
+    from evaluate_game_pooling import select_and_fit
     from fit_games import fit_games
     data = json.loads((raw / 'inventory.json').read_text())
     profiles = sparse.load_npz(raw / 'profiles.npz').tocsr()
     catalog, report = fit_games(data['items'], profiles)
+    pooling = select_and_fit(catalog, profiles)
     catalog.update(name='Steam · player recommendations', domain='games', scaleLabels=['Thumbs down', 'Thumbs up'],
                    sourceLabel='Steam reviews', linkLabel='Steam',
                    responsePrompt='Would you recommend this game?',
@@ -174,7 +176,8 @@ def fit(raw, output):
     report['sourceCounts'] = data['audit']
     output.mkdir(parents=True, exist_ok=True)
     (output / 'validation').mkdir(exist_ok=True)
-    for path, obj in [(output / 'games.json', catalog), (output / 'validation' / 'games.json', report)]:
+    for path, obj in [(output / 'games.json', catalog), (output / 'validation' / 'games.json', report),
+                      (output / 'validation' / 'games-pooling.json', pooling)]:
         path.write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n')
     write_evidence(output / 'games-evidence.json', profiles, data['items'], [0, 1])
     print(report['holdout'], flush=True)

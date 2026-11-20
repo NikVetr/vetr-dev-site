@@ -80,9 +80,9 @@ def describe(label, metrics):
     return result
 
 
-def fit_classes(train, k, seed):
+def fit_classes(train, k, seed, item_prior=None):
     if k == 1:
-        return fit_mixture(train, 2, 1, seed)
+        return fit_mixture(train, 2, 1, seed, item_prior=item_prior)
     # Random near-identical classes can satisfy the EM convergence criterion before
     # separating on sparse binary data. Seed soft groups by noisy approval tendency.
     count = np.diff(train.indptr)
@@ -102,7 +102,8 @@ def fit_classes(train, k, seed):
     distinct = sparse.vstack([train[~singleton], single_rows], format='csr')
     labels = np.r_[initial[~singleton], codes % k]
     frequencies = np.r_[np.ones(np.count_nonzero(~singleton), dtype=int), totals[codes]]
-    return fit_mixture(distinct, 2, k, seed, initial_classes=labels, frequencies=frequencies)
+    return fit_mixture(distinct, 2, k, seed, initial_classes=labels, frequencies=frequencies,
+                       item_prior=item_prior)
 
 
 def fit_games(items, profiles, seed=42):
@@ -189,5 +190,5 @@ def fit_games(items, profiles, seed=42):
                   selectedStrength=(strength if use_similarity else 0), developmentUsers=len(development),
                   testPoolUsers=len(test), suppliedRatings=4, maxTargetRatings=12, brierThreshold=1,
                   similarityMinusClassLoss=float(delta.mean()), pairedPlayerSE=float(delta.std(ddof=1)/np.sqrt(len(delta))),
-                  trainingSizeComparison=size_check, finalFit=catalog['fit'])
+                  trainingSizeComparison=size_check, finalFit=catalog['fit'].copy())
     return catalog, report
