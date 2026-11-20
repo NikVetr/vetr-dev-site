@@ -3,9 +3,28 @@ import assert from 'node:assert/strict';
 import { submit, gaussianProjection, rankChanges } from './core.mjs';
 import { tasteProfile } from './taste.mjs';
 import { preferenceFingerprint } from './fingerprint.mjs';
+import { describeAxes, minimumAxisShare } from './axis-annotations.mjs';
 import { latentPairs } from './latent.mjs';
 import { pnorm } from '../intuitions/lib/normal.js';
 const close = (x, y, tol = 1e-8) => assert.ok(Math.abs(x - y) < tol, x + ' ≠ ' + y);
+test('fingerprint labels require distinct recurring traits and meaningful variance', () => {
+  const items = Array.from({ length: 16 }, (_, i) => ({
+    title: 'Title ' + i, annotations: { genres: [i < 8 ? 'Mystery' : 'Comedy'], tags: [i < 8 ? 'Title 0' : 'Title 1'] },
+  }));
+  const cat = { items, scale: [0, 1] };
+  const component = (fraction, loadings) => ({
+    fraction, loadings, low: loadings.indexOf(Math.min(...loadings)), high: loadings.indexOf(Math.max(...loadings)),
+  });
+  const ordered = items.map((_, i) => i - 7.5);
+  const axes = [component(.6, ordered), component(.3, ordered.map(v => -v)), component(minimumAxisShare / 2, ordered)];
+  const uniform = items.map(() => .5);
+  const labels = describeAxes(cat, axes, uniform, uniform);
+  assert.deepEqual([labels[0].low, labels[0].high], ['Mystery', 'Comedy']);
+  assert.match(labels[0].evidence, /8 entries/);
+  assert.ok(labels.slice(1).every(axis => !axis.interpretable && axis.low === null && axis.high === null));
+  const unannotated = { ...cat, items: items.map(({title}) => ({title})) };
+  assert.equal(describeAxes(unannotated, axes, uniform, uniform).some(axis => axis.interpretable), false);
+});
 const component = (weight, mean, r = 0) => ({
   weight,
   mean,

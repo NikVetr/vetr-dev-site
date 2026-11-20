@@ -1,6 +1,7 @@
 // Title loadings and viewer positions use different PCA coordinates. The two
 // scales share their poles and zero, so a title can illustrate either direction.
 const loadingOrder = new WeakMap();
+const share = new Intl.NumberFormat(undefined, {style: 'percent', maximumFractionDigits: 1});
 function nearestTitles(axis, titles, position) {
   let order = loadingOrder.get(axis.loadings);
   if (!order) {
@@ -23,8 +24,9 @@ function nearestTitles(axis, titles, position) {
 
 export function renderAxisRails(host, summaries, axes, items, rated, continuous) {
   const rows = document.createDocumentFragment();
-  summaries.forEach((summary, i) => {
-    const axis = axes[i];
+  const byIndex = new Map(axes.map(axis => [axis.index, axis]));
+  summaries.forEach(summary => {
+    const axis = byIndex.get(summary.index);
     const row = document.createElement('div');
     row.className = 'axis-row';
     const number = document.createElement('small');
@@ -32,12 +34,13 @@ export function renderAxisRails(host, summaries, axes, items, rated, continuous)
     number.textContent = 'PC' + (axis.index + 1);
     const variance = document.createElement('small');
     variance.className = 'axis-fraction';
-    variance.textContent = new Intl.NumberFormat(undefined, {style: 'percent', maximumFractionDigits: 1}).format(axis.fraction);
+    variance.textContent = share.format(axis.fraction);
     variance.title = 'Share of ' + (continuous ? 'latent variance' : 'between-group variance');
     const [left, right] = [summary.low, summary.high].map(text => {
       const pole = document.createElement('span');
       pole.className = 'axis-pole';
-      pole.textContent = pole.title = text;
+      pole.textContent = text;
+      pole.title = summary.evidence;
       return pole;
     });
     const track = document.createElement('div');
@@ -80,5 +83,5 @@ export function renderAxisRails(host, summaries, axes, items, rated, continuous)
     rows.append(row);
   });
   host.replaceChildren(rows);
-  if (!summaries.length) host.textContent = 'No measurable variation on these axes.';
+  if (!summaries.length) host.textContent = 'The catalog has too little evidence to label a component explaining at least 1% of the variation.';
 }

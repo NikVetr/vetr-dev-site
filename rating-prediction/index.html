@@ -16,7 +16,7 @@
     <header class="site-header">
       <div class="header-row tool-header-row">
         <h1>Rating Prediction</h1>
-        <nav id="domains" aria-label="Choose dataset">
+        <nav id="domains" aria-label="Rating categories">
           <button type="button" data-key="expanded"><i aria-hidden="true">&#xe29b;</i>Films</button>
           <button type="button" data-key="tv"><i aria-hidden="true">&#xe195;</i>TV shows</button>
           <button type="button" data-key="anime"><i aria-hidden="true">&#xe412;</i>Anime</button>
@@ -46,21 +46,10 @@
             <h2>Your ratings</h2>
             <button id="quick-session" disabled>Quick rate</button>
           </div>
-          <label data-source-domain="food" id="recipe-source" hidden>Recipe catalog
-            <select id="recipe-dataset"><option value="food">Food.com</option><option value="recipes">Taste of Home</option></select>
-          </label>
-          <label data-source-domain="games" hidden>Game ratings
-            <select id="game-dataset"><option value="games">Steam · thumbs up or down</option><option value="metacritic">Metacritic · 0–10</option><option value="amazon-games">Amazon editions · 1–5 stars</option></select>
-          </label>
-          <label data-source-domain="webfiction" hidden>Web fiction source
-            <select id="webfiction-dataset"><option value="webfiction">AO3 · kudos</option><option value="royalroad-kindle">Royal Road · Kindle edition stars</option></select>
-          </label>
+          <div id="source-choices" hidden></div>
           <p id="scale-help"></p>
           <input id="search" type="search" aria-label="Search catalog" placeholder="Search titles" />
-          <div class="catalog-tools">
-            <label for="sort">Sort by</label>
-            <select id="sort"></select>
-          </div>
+          <div class="catalog-tools" id="sort-choice"></div>
         </div>
         <a class="skip" href="#recommendations">Skip to recommendations</a>
         <div id="shelves">
@@ -115,7 +104,7 @@
           </div>
           <div class="model-controls">
             <button id="facet" aria-haspopup="dialog" aria-controls="recommendation-filters" disabled>Filters</button>
-            <label>Prediction model<select id="model"></select></label>
+            <div id="model-choice" hidden></div>
           </div>
         </div>
         <p id="status" role="status"></p>
@@ -166,7 +155,7 @@
           </div>
           <section class="fingerprint-axes" aria-labelledby="axis-heading">
             <div class="fingerprint-axes-head"><h3 id="axis-heading">Preference axes</h3><label><input type="checkbox" id="center-profile" checked /> Remove overall rating level</label></div>
-            <p id="axis-guide">Each dot shows your position from the catalog average (center) to three standard deviations in either direction. Hover, tap, or use the arrow keys to find titles most associated with each part of a line.</p>
+            <p id="axis-guide">Each line explains at least 1% of the variation. The dot marks your position relative to the catalog average (±3 SD). Explore a line for example titles.</p>
             <div id="axes"></div>
           </section>
           <div class="taste-layout">
@@ -174,6 +163,7 @@
               <h3>Preference map</h3>
               <div id="map-axes"></div>
               <div id="taste-plot"></div>
+              <label class="minor-components"><input type="checkbox" id="small-components" /> Include map components below 1%</label>
             </section>
             <section id="taste-patterns"></section>
             <section id="class-signature"></section>

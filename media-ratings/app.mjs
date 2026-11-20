@@ -1,4 +1,6 @@
 import { recommendationFilters } from './filters.mjs';
+import { catalogForDomain, renderChoice, showSources, sourceDomains } from './catalog-choices.mjs';
+import { minimumAxisShare } from './axis-annotations.mjs';
 import { openRapidRating } from './rapid.mjs';
 import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
@@ -131,8 +133,6 @@ function revealCatalogButton() {
   else if (button.right > bounds.right) nav.scrollLeft += button.right - bounds.right;
 }
 new ResizeObserver(revealCatalogButton).observe(el('domains'));
-const sourceMenus = [...document.querySelectorAll('[data-source-domain] > select')]
-  .filter(menu => menu instanceof HTMLSelectElement);
 function install(key, next) {
   for (const dialog of document.querySelectorAll('dialog[open]'))
     /** @type {HTMLDialogElement} */ (dialog).close();
@@ -141,15 +141,8 @@ function install(key, next) {
   catalog = state.data;
   selected = state.selection;
   titles = new Map(catalog.items.map((it) => [it.itemId, titleOf(it)]));
-  let domain = key;
-  for (const menu of sourceMenus) {
-    const label = menu.parentElement;
-    label.hidden = ![...menu.options].some(option => option.value === key);
-    if (!label.hidden) {
-      menu.value = key;
-      domain = label.dataset.sourceDomain;
-    }
-  }
+  const domain = sourceDomains.get(key) ?? key;
+  showSources(el('source-choices'), key, openCatalog);
   for (const btn of el('domains').querySelectorAll('button'))
     btn.setAttribute('aria-pressed', String(btn.dataset.key === domain));
   const domainButton = el('domains').querySelector('button[aria-pressed=true]');
@@ -157,8 +150,7 @@ function install(key, next) {
   el('recommendation-icon').textContent = domainButton.querySelector('i').textContent;
   input('about-open').disabled = false;
   revealCatalogButton();
-  select('model').replaceChildren(
-    ...Object.entries(catalog.models)
+  const modelChoices = Object.entries(catalog.models)
       .filter(
         ([k]) =>
           !isFilm(key) ||
@@ -180,18 +172,16 @@ function install(key, next) {
                     : (m.kind === 'latent-class' ? 'Latent class' : 'Ordinal probit') +
                       ' · K=' +
                       m.components.length;
-        return new Option(
-          name +
-            (k === catalog.defaultModel
-              ? ' · default'
-              : !catalog.defaultModel && k === catalog.selection?.model
-                ? ' · CV pick'
-                : ''),
-          k,
-        );
-      }),
-  );
-  select('model').value = state.model;
+        const description = name + (k === catalog.defaultModel ? ' · default' :
+          !catalog.defaultModel && k === catalog.selection?.model ? ' · CV pick' : '');
+        return { value: k, label: name, description };
+      });
+  state.modelChoices = modelChoices;
+  renderChoice(el('model-choice'), 'model', 'Prediction model', modelChoices, state.model, value => {
+    state.model = value;
+    rebuildBaseline();
+    update(input('auto').checked);
+  });
   const attribution = el('dataset-source');
   attribution.replaceChildren();
   const source =
@@ -463,6 +453,7 @@ function facets(a) {
       cocktails: 'Base spirit',
       boardgames: 'Game type',
       podcasts: 'Topic',
+      subreddits: 'Topic',
     }[catalog.domain] ?? 'Genre']: a.genres,
     Tag: a.tags,
     [creditLabel('authors')]:
@@ -479,6 +470,7 @@ function facets(a) {
     Format: a.format ? [a.format] : [],
     Certificate: a.certificate ? [a.certificate] : [],
     Collection: a.collection ? [a.collection] : [],
+    Series: a.series,
     'Production budget': moneyBand(a.budget),
     'Reported box office': moneyBand(a.revenue),
     Country: a.country ? [a.country] : [],
@@ -512,9 +504,9 @@ function setupFilters() {
     },
     () => result?.predictions.map((p) => p.itemId) ?? [],
   );
-  select('sort').replaceChildren(new Option('Catalog mean', 'mean'), new Option('Title A–Z', 'title'));
+  const sorts = [{label:'Catalog mean', value:'mean'}, {label:'Title A–Z', value:'title'}];
   if (catalog.items.some((it) => it.annotations?.year))
-    select('sort').add(new Option('Newest first', 'year'));
+    sorts.push({label:'Newest first', value:'year'});
   for (const [key, label] of [
     ['wordCount', 'Longest first'],
     ['chapterCount', 'Most chapters'],
@@ -527,15 +519,20 @@ function setupFilters() {
     ['precipitation', 'Wettest first'],
   ])
     if (catalog.items.some((it) => Number.isFinite(it.annotations?.[key])))
-      select('sort').add(new Option(label, key));
+      sorts.push({label, value:key});
   for (const key of Object.keys(creditSorts)) {
     if (catalog.items.some(it => creditValues(it.annotations ?? {}, key).length))
-      select('sort').add(new Option(creditLabel(key) + ' A–Z', key));
+      sorts.push({label:creditLabel(key) + ' A–Z', value:key});
   }
+  state.sortKey ??= 'mean';
+  renderChoice(el('sort-choice'), 'sort', 'Sort by', sorts, state.sortKey, value => {
+    state.sortKey = value;
+    sortCatalog();
+  });
 }
 const creditSorts = {
   authors: 'Author', directors: 'Director', cast: 'Cast', studios: 'Studio', publishers: 'Publisher',
-  creators: 'Creator', illustrators: 'Illustrator', translators: 'Translator', editors: 'Editor',
+  creators: 'Creator', illustrators: 'Illustrator', translators: 'Translator', editors: 'Editor', developers: 'Developer',
 };
 function creditLabel(key) {
   if (key === 'authors') return { albums: 'Artist', boardgames: 'Brand' }[active] ?? 'Author';
@@ -546,7 +543,7 @@ function creditValues(annotations, key) {
   return annotations[key] ?? (key === 'authors' && annotations.author ? [annotations.author] : []);
 }
 function sortCatalog() {
-  const key = select('sort').value;
+  const key = state.sortKey;
   const sorted = [...entries.keys()].sort((a, b) => {
     if (key === 'title') return titles.get(a).localeCompare(titles.get(b));
     if (key === 'mean') return baseline.get(b).expected - baseline.get(a).expected;
@@ -772,7 +769,6 @@ el('shelves').onclick = (event) => {
   }
 };
 input('search').oninput = filterRows;
-select('sort').onchange = sortCatalog;
 function selectVisibleItem() {
   if (state.inspectFromShelf && titles.has(selected)) return;
   if (!result.predictions.some((p) => p.itemId === selected && filters.matches(p.itemId)))
@@ -843,7 +839,7 @@ function update(applyDraft = true) {
       result.predictions.length +
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
-    el('about-model').textContent = select('model').selectedOptions[0].textContent + '. ' +
+    el('about-model').textContent = state.modelChoices.find(option => option.value === state.model).description + '. ' +
       (model.kind === 'class-similarity' ? 'Your responses update learned taste classes. Similar items also influence each forecast.' + (isFilm(active) && state.model === 'personalized' ? ' Film similarity uses ratings, tags and shared cast, directors and studios.' : '')
       : model.kind === 'latent-class' ? 'Your answers update the probability of each learned taste class. Their rating distributions combine into each forecast.'
       : model.kind === 'logit-point' ? 'The model conditions a multivariate Gaussian on your transformed ratings.'
@@ -921,7 +917,7 @@ function renderFingerprint() {
   const categorical = ['latent-class', 'class-similarity'].includes(model.kind);
   let prefs = state.fingerprintViews.get(state.model);
   if (!prefs) {
-    prefs = { axes: undefined, pinned: null, centerClassMeans: true };
+    prefs = { axes: undefined, pinned: null, centerClassMeans: true, includeSmall: false };
     state.fingerprintViews.set(state.model, prefs);
   }
   const request = {
@@ -930,13 +926,15 @@ function renderFingerprint() {
     ratedOn: state.appliedDates,
     axisIndices: prefs.axes,
     centerClassMeans: prefs.centerClassMeans, overview: true,
+    minimumMapShare: prefs.includeSmall ? 0 : minimumAxisShare,
   };
   let view;
   if (categorical) {
     const all = prefs.centerClassMeans
       ? taste.projection
       : projectClasses(baselineModel, catalog.scale, false);
-    const indices = prefs.axes ?? all.slice(0, 2).map((axis) => axis.index);
+    const indices = prefs.axes ?? all.slice(0, 2)
+      .filter(axis => axis.index === 0 || axis.fraction >= request.minimumMapShare).map(axis => axis.index);
     view = { ...taste, allAxes: all, projection: indices.map((i) => all[i]), spectrum: all.map((a) => a.fraction) };
   } else view = gaussianProjection(catalog, request);
   const fp = preferenceFingerprint(catalog, request, view);
@@ -1456,11 +1454,6 @@ el('boards').onchange = (event) => {
     rated = el('rated-list');
   rated.scrollTop += copy.getBoundingClientRect().top - rated.getBoundingClientRect().top;
 };
-select('model').onchange = () => {
-  state.model = select('model').value;
-  rebuildBaseline();
-  update(input('auto').checked);
-};
 function setCutoff(value) {
   state.threshold = value;
   if (!result) return;
@@ -1484,6 +1477,16 @@ async function readOptionalJSON(path) {
   } catch (error) {
     return { data: null, error: error.message };
   }
+}
+const sharedArtworkCatalogs = new Set(['subreddits', 'recipes', 'books', 'royalroad-kindle', 'albums', 'games', 'tv']);
+let sharedArtwork;
+async function artworkFor(key) {
+  if (key === 'metacritic') return readOptionalJSON('metacritic-artwork.json');
+  if (!sharedArtworkCatalogs.has(key)) return null;
+  sharedArtwork ??= readOptionalJSON('catalog-artwork.json');
+  const {data, error} = await sharedArtwork;
+  if (error) sharedArtwork = undefined;
+  return {data: data?.[key], error};
 }
 async function loadEvidence(key, s) {
   try {
@@ -1509,7 +1512,7 @@ async function loadEvidence(key, s) {
 }
 const publicCatalogs = new Set([
   ...Array.from(el('domains').querySelectorAll('button[data-key]:not(#custom-domain)'), btn => btn.getAttribute('data-key')),
-  ...sourceMenus.flatMap(menu => Array.from(menu.options, option => option.value)),
+  ...sourceDomains.keys(),
 ]);
 function catalogFromAddress() {
   const key = new URL(location.href).searchParams.get('catalog');
@@ -1531,8 +1534,8 @@ async function openCatalog(key, file = null, replace = false) {
     if (!s) {
       el('status').textContent = 'Loading catalog…';
       const creditsFile = { expanded: 'film-creators', tv: 'tv-creators', anime: 'anime-credits', books: 'books-credits' }[key];
-      const [data, references, context, credits, discovery] = file
-        ? [JSON.parse(await file.text()), null, null, null, null]
+      const [data, references, context, credits, discovery, artwork] = file
+        ? [JSON.parse(await file.text()), null, null, null, null, null]
         : await Promise.all([
             readJSON(key + '.json'),
             key === 'expanded'
@@ -1543,6 +1546,7 @@ async function openCatalog(key, file = null, replace = false) {
             key === 'expanded' ? readOptionalJSON('film-context.json') : null,
             creditsFile ? readOptionalJSON(creditsFile + '.json') : null,
             key === 'games' ? readOptionalJSON('steam-discovery.json') : null,
+            artworkFor(key),
           ]);
       if (seq !== revision) return;
       if (key === 'expanded') {
@@ -1562,10 +1566,11 @@ async function openCatalog(key, file = null, replace = false) {
             it.annotations = { ...it.annotations, certificate };
         }
       }
-      if (credits?.data) {
+      if (credits?.data || artwork?.data) {
         for (const item of data.items) {
-          const credit = credits.data[item.itemId];
-          if (credit) item.annotations = { ...item.annotations, ...credit };
+          const credit = credits?.data?.[item.itemId];
+          const art = artwork?.data?.[item.itemId];
+          if (credit || art) item.annotations = { ...item.annotations, ...credit, ...art };
         }
       }
       s = useState(data, key);
@@ -1583,12 +1588,18 @@ async function openCatalog(key, file = null, replace = false) {
                 sourceUrl: it.annotations.sourceUrl,
                 royalRoad: /^https:\/\/www\.royalroad\.com\/fiction\/[1-9]\d*$/.test(it.annotations.royalRoadUrl) ? it.annotations.royalRoadUrl : null,
                 imageUrl: it.annotations.imageUrl?.startsWith('https://') ? it.annotations.imageUrl : null,
+                imageSourceUrl: it.annotations.imageSourceUrl ?? it.annotations.imageRightsUrl,
+                imageCredit: it.annotations.imageCredit,
+                imageLicense: it.annotations.imageLicense,
+                imageLicenseUrl: it.annotations.imageLicenseUrl,
+                imageCaption: it.annotations.imageCaption,
               },
             ]),
         );
       }
       s.linkError = references?.error;
-      s.contextError = [context?.error && 'Film finances and familiarity counts unavailable.', credits?.error && 'Creator credits unavailable.'].filter(Boolean).join(' ');
+      s.contextError = [context?.error && 'Film finances and familiarity counts unavailable.',
+        credits?.error && 'Creator credits unavailable.', artwork?.error && 'Supplemental catalog artwork unavailable.'].filter(Boolean).join(' ');
       if (file) {
         s.evidenceMessage = 'This fitted catalog includes model probabilities only.';
         el('custom-domain').hidden = false;
@@ -1601,17 +1612,18 @@ async function openCatalog(key, file = null, replace = false) {
       setCatalogAddress(key, replace);
     }
   } catch (e) {
-    if (seq === revision) el('status').textContent = 'Could not open catalog. ' + e.message;
+    if (seq === revision) {
+      if (active) showSources(el('source-choices'), active, openCatalog);
+      el('status').textContent = 'Could not open catalog. ' + e.message;
+    }
   }
 }
 el('domains').onclick = (event) => {
   const btn = /** @type {HTMLElement} */ (event.target).closest('[data-key]');
   if (btn instanceof HTMLButtonElement) {
-    const menu = sourceMenus.find(menu => menu.parentElement.dataset.sourceDomain === btn.dataset.key);
-    void openCatalog(menu?.value ?? btn.dataset.key);
+    void openCatalog(catalogForDomain(btn.dataset.key));
   }
 };
-for (const menu of sourceMenus) menu.onchange = () => void openCatalog(menu.value);
 input('file').onchange = () => {
   const f = input('file').files[0];
   input('file').value = '';
@@ -1622,7 +1634,10 @@ window.addEventListener('popstate', () => {
   if (key !== active) void openCatalog(key, null, true);
   else {
     ++revision; // A back navigation can cancel an in-flight switch.
-    if (el('status').textContent === 'Loading catalog…') el('status').textContent = '';
+    if (el('status').textContent === 'Loading catalog…') {
+      el('status').textContent = '';
+      showSources(el('source-choices'), active, openCatalog);
+    }
   }
 });
 void openCatalog(catalogFromAddress(), null, true);

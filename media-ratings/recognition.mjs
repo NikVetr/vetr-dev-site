@@ -43,7 +43,9 @@ export function showRecognition(figure, reference, title, describe = undefined, 
   figure.replaceChildren();
   if (!reference) return;
   const direct = reference.imageUrl && reference.sourceUrl ? [{
-    url: reference.imageUrl, sourceUrl: reference.sourceUrl, title, credit: reference.label,
+    url: reference.imageUrl, sourceUrl: reference.imageSourceUrl ?? reference.sourceUrl, title,
+    credit: reference.imageCredit ?? (reference.imageSourceUrl ? null : reference.label),
+    license: reference.imageLicense, licenseUrl: reference.imageLicenseUrl, caption: reference.imageCaption,
   }] : [];
   const current = () => displayed.get(figure) === selection;
   function show(photos, poster = null) {
@@ -66,7 +68,7 @@ export function showRecognition(figure, reference, title, describe = undefined, 
     source.append(img);
     const credit = document.createElement('figcaption');
     if (photo.caption) credit.append(photo.caption);
-    const duplicatesSource = direct.includes(photo) && photo.sourceUrl === linkedSource;
+    const duplicatesSource = direct.includes(photo) && !reference.imageCredit && photo.sourceUrl === linkedSource;
     if (photo.credit && photo.credit !== 'Poster file and rights' && !duplicatesSource) {
       if (credit.hasChildNodes()) credit.append(' · ');
       credit.append(recognitionLink(photo.credit, photo.sourceUrl));

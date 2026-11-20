@@ -1,4 +1,5 @@
 import { renderAxisRails } from './axis-rails.mjs';
+import { comparisonGroups, minimumAxisShare } from './axis-annotations.mjs';
 function shape(tag, attrs, text = '') {
   const n = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
@@ -161,24 +162,8 @@ function classDetails(fp, catalog, inspected, ratings, baseline, clearGroup) {
 // Compare the same unrated items on both sides, centering out a person's general rating level.
 function tastePatterns(catalog, predictions, count) {
   const host = document.getElementById('taste-patterns');
-  const films = catalog.items.some((it) => it.annotations?.genres?.length);
-  const regions = catalog.items.some((it) => it.annotations?.region);
-  host.replaceChildren(
-    html(
-      'h3',
-      films
-        ? ({
-            fanfiction: 'Fandom preferences',
-            recipes: 'Course preferences',
-            cocktails: 'Base spirit preferences',
-            boardgames: 'Game type preferences',
-            podcasts: 'Topic preferences',
-          }[catalog.domain] ?? 'Genre preferences')
-        : regions
-          ? 'Regional preferences'
-          : 'Forecast changes',
-    ),
-  );
+  const {heading, groups} = comparisonGroups(catalog);
+  host.replaceChildren(html('h3', heading));
   if (!count || !predictions.length) {
     host.append(
       html(
@@ -190,28 +175,17 @@ function tastePatterns(catalog, predictions, count) {
   }
   const byId = new Map(predictions.map((p) => [p.itemId, p]));
   const overall = predictions.reduce((sum, p) => sum + p.shift, 0) / predictions.length;
-  const groups = new Map();
-  for (const it of catalog.items) {
-    const p = byId.get(it.itemId);
-    if (!p) continue;
-    const labels = it.annotations?.genres ?? (it.annotations?.region ? [it.annotations.region] : []);
-    for (const k of new Set(labels)) {
-      if (!groups.has(k)) groups.set(k, []);
-      groups.get(k).push(p);
-    }
-  }
   const summaries = [];
-  for (const [label, rows] of groups) {
-    if (rows.length < (catalog.items.length >= 100 ? 10 : 2) || rows.length === predictions.length) continue;
+  for (const {name: label, members} of groups) {
+    const rows = members.map(i => byId.get(catalog.items[i].itemId)).filter(Boolean);
+    if (rows.length < 2 || rows.length === predictions.length) continue;
     const shift = rows.reduce((sum, p) => sum + p.shift, 0) / rows.length;
     const example = rows.reduce((a, b) => (Math.abs(a.shift - shift) <= Math.abs(b.shift - shift) ? a : b));
     summaries.push({ label, change: shift - overall, example: example.title });
   }
-  const grouped = summaries.length > 1;
-  if (!grouped) {
-    host.firstElementChild.textContent = 'Forecast changes';
-    summaries.length = 0;
-    for (const p of predictions) summaries.push({ label: p.title, change: p.shift, example: '' });
+  if (summaries.length < 2) {
+    host.append(html('p', 'Too few shared categories among the remaining entries for a comparison.'));
+    return;
   }
   summaries.sort((a, b) => b.change - a.change);
   const extremes = [summaries[0], summaries.at(-1)].filter(
@@ -230,14 +204,7 @@ function tastePatterns(catalog, predictions, count) {
     if (row.example) line.append(html('small', 'e.g. ' + row.example));
     host.append(line);
   }
-  host.append(
-    html(
-      'p',
-      grouped
-        ? 'Average change on the rating scale, relative to your overall shift.'
-        : 'Change from the catalog mean on the rating scale.',
-    ),
-  );
+  host.append(html('p', 'Average change on the rating scale, relative to your overall shift.'));
 }
 export function renderTaste(
   profile,
@@ -322,13 +289,23 @@ export function renderTaste(
   const selectors = document.getElementById('map-axes');
   selectors.replaceChildren();
   const numbers = axes.map((a) => a.index);
-  if (profile.spectrum.length > 1) {
+  const includeSmall = /** @type {HTMLInputElement} */ (document.getElementById('small-components'));
+  includeSmall.parentElement.hidden = !profile.spectrum.some((fraction, i) => i > 0 && fraction < minimumAxisShare);
+  includeSmall.checked = prefs.includeSmall;
+  includeSmall.onchange = () => {
+    prefs.includeSmall = includeSmall.checked;
+    prefs.axes = undefined;
+    onAxesChange();
+  };
+  const available = profile.spectrum.flatMap((fraction, i) =>
+    prefs.includeSmall || i === 0 || fraction >= minimumAxisShare ? [i] : []);
+  if (available.length > 1) {
     numbers.forEach((selected, slot) => {
       const label = html('label', slot === 0 ? 'X' : 'Y');
       const select = /** @type {HTMLSelectElement} */ (html('select'));
       select.ariaLabel = (slot === 0 ? 'Horizontal' : 'Vertical') + ' principal component';
-      profile.spectrum.forEach((fraction, i) => {
-        select.add(new Option('PC' + (i + 1) + ' · ' + varianceShare(fraction), String(i)));
+      available.forEach(i => {
+        select.add(new Option('PC' + (i + 1) + ' · ' + varianceShare(profile.spectrum[i]), String(i)));
       });
       select.value = String(selected);
       select.onchange = () => {
@@ -353,7 +330,7 @@ export function renderTaste(
     onAxesChange();
   };
   inspect(prefs.pinned);
-  renderAxisRails(legend, fp.allAxes, profile.allAxes ?? axes, catalog.items, fp.ratedCount, continuous);
+  renderAxisRails(legend, fp.displayAxes, profile.allAxes ?? axes, catalog.items, fp.ratedCount, continuous);
   plot.replaceChildren();
   document.getElementById('profile-help').textContent =
     'Hover or focus a class to inspect it. Select a group to keep its details open. Class probabilities describe similarities in how respondents scored titles. The category comparisons use personalized forecasts across unrated titles. ' +

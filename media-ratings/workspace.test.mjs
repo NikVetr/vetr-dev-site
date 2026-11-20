@@ -4,9 +4,23 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { openPage } from '../scripts/landing-art/browser.mjs';
 import { predict, rankChanges } from './core.mjs';
+import { preferenceFingerprint } from './fingerprint.mjs';
 import { discoveryRanking } from './discovery.mjs';
 import { importForecasts, importRatingEntries, ratingsCSV } from './exchange.mjs';
 import { jointCounts, percent } from './detail.mjs';
+
+async function choose(page, id, value) {
+  const host = page.locator('#' + id);
+  await host.waitFor();
+  if (await host.evaluate(node => node instanceof HTMLSelectElement)) await host.selectOption(value);
+  else await host.locator('input[value="' + value + '"]').check();
+  if (id === 'catalog-source') await page.waitForURL(url => url.searchParams.get('catalog') === value);
+}
+
+function choiceValue(page, id) {
+  return page.locator('#' + id).evaluate(node =>
+    node instanceof HTMLSelectElement ? node.value : node.querySelector('input:checked').value);
+}
 
 async function yearFilter(page, year) {
   await page.locator('#facet').click();
@@ -92,8 +106,8 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
     await page.locator('#library .entry').first().waitFor();
     assert.equal(await page.locator('#projection-title').innerText(), 'Movie preference fingerprint');
     assert.equal(await page.locator('#profile-count').innerText(), 'Catalog baseline');
-    assert.equal(await page.locator('#model option[value=reference]').count(), 0);
-    await page.locator('#model').selectOption('ratingsTags');
+    assert.equal(await page.locator('#model [value=reference]').count(), 0);
+    await choose(page, 'model', 'ratingsTags');
     const rows = page.locator('#library .entry');
     await rows.first().waitFor();
     const ids = await rows.evaluateAll((els) => els.map((el) => el.dataset.id));
@@ -199,7 +213,7 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       /^https:\/\/en\.wikipedia\.org\/wiki\//,
     );
     assert.equal(await page.locator('#projection-title').innerText(), 'City preference fingerprint');
-    await page.locator('#model').selectOption('latentClass');
+    assert.equal(await page.locator('#model-choice').isHidden(), true); // Destinations has one fitted model.
     await page.locator('#profile-method summary').click();
     assert.match(await page.locator('#weights').innerText(), /Taste components/);
     await page.setViewportSize({ width: 320, height: 844 });
@@ -285,7 +299,7 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
   const p = app.page;
   try {
     await p.locator('#library .entry').first().waitFor();
-    assert.equal(await p.locator('#model').inputValue(), 'personalized');
+    assert.equal(await choiceValue(p, 'model'), 'personalized');
     assert.equal(await p.locator('#library .entry').count(), 500);
     await p.locator('.ranks[data-key=expected] .rank[data-id="50"]').click();
     assert.equal(
@@ -375,25 +389,27 @@ test('expanded catalog, information ratings, sampled scatter, projections, and e
     await p.locator('#rated-list .entry').waitFor();
     assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
     const hybrid = await p.locator('[data-key=expected] .rank').first().innerText();
-    await p.locator('#model').selectOption('latentClass');
+    await choose(p, 'model', 'latentClass');
     assert.equal(await p.locator('#rated-list .entry').getAttribute('data-id'), id);
     assert.match(await p.locator('#axes .axis-fraction').first().getAttribute('title'), /between-group variance/);
-    await p.locator('#model').selectOption('personalized');
+    await choose(p, 'model', 'personalized');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), hybrid);
     assert.match(await p.locator('#formula').innerText(), /similar films/);
     // The 500-axis reference remains usable when explicitly supplied in an imported catalog.
     await p.locator('#file').setInputFiles(fileURLToPath(new URL('expanded.json', import.meta.url)));
     await p.locator('#domains [data-key=custom][aria-pressed=true]').waitFor();
-    await p.locator('#model').selectOption('reference');
+    await choose(p, 'model', 'reference');
     await p
       .locator('#library .entry[data-id="' + id + '"]')
       .getByRole('radio', { name: '4.5 stars', exact: true })
       .check();
-    assert.equal(await p.locator('#axes .axis-row').count(), 499);
+    const shares = await p.locator('#axes .axis-fraction').allTextContents();
+    assert.ok(shares.length < 499 && shares.every(value => parseFloat(value) >= 1));
     await p.getByRole('checkbox', { name: 'Remove overall rating level' }).uncheck();
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
+    await p.locator('#small-components').check();
     await p.getByLabel('Vertical principal component').selectOption('499');
-    assert.match(await p.locator('#axes').innerText(), /PC500/);
+    assert.match(await p.locator('#taste-plot svg').getAttribute('aria-label'), /PC500/);
     assert.equal(await p.locator('#taste-plot polyline').count(), 2);
     assert.deepEqual(app.errors, []);
   } finally {
@@ -453,7 +469,7 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     assert.ok(await metric.evaluate((e) => e === document.activeElement));
     const cutoffHeading = p.locator('h3:has(#threshold)');
     assert.match(await cutoffHeading.innerText(), /Chance of ≥\s*\(4\)/);
-    await p.locator('#model').selectOption('ratingsTags'); // Reproduce the all-rising two-film baseline.
+    await choose(p, 'model', 'ratingsTags'); // Reproduce the all-rising two-film baseline.
     for (const id of ['2571', '5618'])
       await p
         .locator('#library .entry[data-id="' + id + '"]')
@@ -476,18 +492,21 @@ test('familiar next ratings, rank drops and in-place rating work across recommen
     await direction('Rating change').click();
     const horizontal = p.getByLabel('Horizontal principal component');
     const vertical = p.getByLabel('Vertical principal component');
+    if (await p.locator('#small-components').isVisible()) await p.locator('#small-components').check();
     assert.equal(await horizontal.locator('option').count(), 7);
     await horizontal.selectOption('6');
     await vertical.selectOption('6');
     assert.equal(await horizontal.inputValue(), '1'); // selecting the other axis swaps positions
-    assert.match(await p.locator('#axes').innerText(), /PC7/);
+    assert.match(await p.locator('#taste-plot svg').getAttribute('aria-label'), /PC7/);
     const center = p.getByRole('checkbox', { name: 'Remove overall rating level' });
     const expectedFirst = await p.locator('[data-key=expected] .rank').first().innerText();
     assert.ok(await center.isChecked());
     await center.uncheck();
     assert.equal(await horizontal.inputValue(), '0');
     assert.equal(await p.locator('[data-key=expected] .rank').first().innerText(), expectedFirst);
-    assert.equal(await p.locator('#axes .axis-row').count(), 7);
+    const labels = await p.locator('#axes .axis-pole').allTextContents();
+    assert.ok(labels.length > 0);
+    assert.equal(new Set(labels).size, labels.length);
     const rail = p.locator('#axes input').first(), examples = p.locator('#axes .axis-examples').first();
     await rail.focus();
     await rail.press('Home');
@@ -570,10 +589,9 @@ test('volunteered and prompted film ratings keep their source through model swit
   const app = await openPage('rating-prediction/');
   const p = app.page;
   try {
-    const model = p.locator('#model');
     await p.locator('#library .entry').first().waitFor();
-    assert.equal(await model.inputValue(), 'personalized');
-    await model.selectOption('ratingsTags');
+    assert.equal(await choiceValue(p, 'model'), 'personalized');
+    await choose(p, 'model', 'ratingsTags');
     const shelf = (id) => p.locator('#library .entry[data-id="' + id + '"]');
     const rated = (id) => p.locator('#rated-list .entry[data-id="' + id + '"]');
     await p.locator('#exchange summary').click();
@@ -589,7 +607,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     const prompt = p.locator('.info-row').first();
     const suggested = await prompt.getAttribute('data-id');
     await stars(prompt, 4);
-    await model.selectOption('personalized');
+    await choose(p, 'model', 'personalized');
     const note = p.locator('#choice-note');
     assert.match(await note.innerText(), /picked 1 of 2/);
     assert.equal((await sources())['2571'], 'volunteered');
@@ -603,9 +621,9 @@ test('volunteered and prompted film ratings keep their source through model swit
     assert.equal((await sources())[followed], 'suggested');
     await p.locator('#auto').uncheck();
     await load(Buffer.from('itemId,rating,source\n' + followed + ',4,volunteered\n'));
-    await model.selectOption('latentClass');
+    await choose(p, 'model', 'latentClass');
     assert.equal(await note.evaluate(el => el.hidden), true);
-    await model.selectOption('personalized');
+    await choose(p, 'model', 'personalized');
     assert.ok(await p.locator('#pending').isVisible());
     assert.match(await note.innerText(), /picked 1 of 3/);
     await p.locator('#apply').click();
@@ -634,7 +652,7 @@ test('volunteered and prompted film ratings keep their source through model swit
     assert.equal((await sources())[quickId], 'suggested');
     await p.locator('#domains [data-key=destinations]').click();
     await p.locator('#projection-title').getByText('City preference fingerprint').waitFor();
-    assert.equal(await model.locator('option[value=titleChoice]').count(), 0);
+    assert.equal(await p.locator('#model [value=titleChoice]').count(), 0);
     assert.equal(await note.evaluate(el => el.hidden), true);
     assert.deepEqual(app.errors, []);
   } finally {
@@ -650,12 +668,11 @@ test('dated ratings round-trip and update the catalog prior, rankings and automa
     const file = (buffer) =>
       p.locator('#rating-file').setInputFiles({ name: 'ratings.csv', mimeType: 'text/csv', buffer });
     await p.locator('#library .entry').first().waitFor();
-    const model = p.locator('#model');
     await p
       .locator('#library .entry[data-id="2571"]')
       .getByRole('radio', { name: '5 stars', exact: true })
       .click();
-    await model.selectOption('personalized');
+    await choose(p, 'model', 'personalized');
     await p.locator('#exchange summary').click();
     const films = JSON.parse(readFileSync(new URL('expanded.json', import.meta.url), 'utf8'));
     const dates = async () => importRatingEntries(await exportedRatings(p), films).ratedOn;
@@ -823,7 +840,7 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       ['cocktails', 'Cocktail', '3 ★', 'Food.com'],
     ]) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
-      if (key === 'recipes') await p.locator('#recipe-dataset').selectOption('recipes');
+      if (key === 'recipes') await choose(p, 'catalog-source', 'recipes');
       else await p.locator('#domains [data-key="' + key + '"]').click();
       await p.waitForFunction(
         (name) => document.querySelector('#context').textContent.startsWith(name),
@@ -865,6 +882,10 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
     for (const key of ['subreddits', 'fanfiction', 'webfiction', 'games']) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
       await p.locator('header #domains button[data-key="' + key + '"]').click();
+      if (['games', 'webfiction'].includes(key)) {
+        await p.locator('#domains [data-key="' + key + '"][aria-pressed=true]').waitFor();
+        await choose(p, 'catalog-source', key);
+      }
       await p
         .getByRole('heading', {
           name:
@@ -924,11 +945,23 @@ test('Steam votes, Metacritic endpoint scores and Amazon edition stars keep sepa
   const app = await openPage('rating-prediction/', { width: 390, height: 844 });
   const p = app.page;
   try {
+    const artwork = JSON.parse(readFileSync(new URL('metacritic-artwork.json', import.meta.url), 'utf8'));
+    const imageURLs = new Set(Object.values(artwork).map(record => record.imageUrl));
+    await p.route(url => imageURLs.has(url.href), route => route.fulfill({
+      contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"/>',
+    }));
     await p.locator('#domains [data-key="games"]').click();
-    await p.getByRole('heading', { name: 'Chance of thumbs up' }).waitFor();
-    await p.locator('#game-dataset').selectOption('metacritic');
+    await p.waitForURL(/catalog=metacritic/);
+    assert.equal(await choiceValue(p, 'catalog-source'), 'metacritic');
+    assert.equal(await p.locator('#catalog-source input').count(), 3);
     await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
+    const id = await p.locator('#detail').getAttribute('data-id');
+    assert.equal(await p.locator('#detail-image img').getAttribute('src'), artwork[id].imageUrl);
+    assert.equal(await p.locator('#detail-image a').first().getAttribute('href'), artwork[id].imageRightsUrl);
+    assert.equal(await p.locator('#external').getAttribute('href'), artwork[id].sourceUrl);
     await p.locator('#quick-session').click();
+    const quickId = await p.locator('#rapid-card').getAttribute('data-id');
+    assert.equal(await p.locator('#rapid-image img').getAttribute('src'), artwork[quickId].imageUrl);
     assert.equal(await p.locator('#rapid-values button').count(), 11);
     assert.equal(await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'), 'Rate 5');
     await p.keyboard.press('0');
@@ -937,10 +970,10 @@ test('Steam votes, Metacritic endpoint scores and Amazon edition stars keep sepa
     const values = () => p.locator('#rated-list input:checked').evaluateAll(inputs => inputs.map(input => input.value).sort());
     assert.deepEqual(await values(), ['0', '10']);
     await p.locator('#comparison .heat').waitFor();
-    await p.locator('#game-dataset').selectOption('games');
+    await choose(p, 'catalog-source', 'games');
     await p.getByRole('heading', { name: 'Chance of thumbs up' }).waitFor();
     assert.deepEqual(await values(), []);
-    await p.locator('#game-dataset').selectOption('amazon-games');
+    await choose(p, 'catalog-source', 'amazon-games');
     await p.waitForFunction(() => location.search.includes('catalog=amazon-games'));
     assert.equal(await p.locator('#library .entry').count(), 1184);
     const stars = p.locator('#library .entry').first().getByRole('radio');
@@ -951,7 +984,7 @@ test('Steam votes, Metacritic endpoint scores and Amazon edition stars keep sepa
     assert.equal(await p.locator('#detail-kind').innerText(), 'Video Game Information');
     assert.match(await p.locator('#external').getAttribute('href'), /^https:\/\/www\.amazon\.com\/dp\//);
     assert.equal(await p.locator('#detail-image figcaption').count(), 0);
-    await p.locator('#game-dataset').selectOption('metacritic');
+    await choose(p, 'catalog-source', 'metacritic');
     await p.getByRole('heading', { name: 'Highest expected' }).waitFor();
     assert.deepEqual(await values(), ['0', '10']);
     assert.deepEqual(app.errors, []);
@@ -1002,18 +1035,18 @@ test('a legacy catalog address redirects and Back restores the ratings entered t
     await active('games');
     assert.equal(new URL(page.url()).pathname, '/rating-prediction/');
     assert.ok(page.url().endsWith('?catalog=metacritic&from=test#top'));
-    assert.equal(await page.locator('#game-dataset').inputValue(), 'metacritic');
+    assert.equal(await choiceValue(page, 'catalog-source'), 'metacritic');
     await page.locator('#quick-session').click();
     await page.keyboard.press('5');
     await page.locator('#rapid-rating form button').click();
     await page.locator('#rated-list .entry').first().waitFor();
     await page.locator('#domains [data-key="webfiction"]').click();
     await active('webfiction');
-    assert.equal(new URL(page.url()).searchParams.get('catalog'), 'webfiction');
+    assert.equal(new URL(page.url()).searchParams.get('catalog'), 'royalroad-kindle');
     assert.ok(page.url().endsWith('&from=test#top'));
     await page.goBack();
     await active('games');
-    assert.equal(await page.locator('#game-dataset').inputValue(), 'metacritic');
+    assert.equal(await choiceValue(page, 'catalog-source'), 'metacritic');
     assert.equal(await page.locator('#rated-list .entry').count(), 1);
     await page.goForward();
     await active('webfiction');
@@ -1084,9 +1117,8 @@ test('Royal Road Kindle editions have a separate whole-star shelf, serial links 
   const { page } = app;
   const catalog = JSON.parse(readFileSync(new URL('royalroad-kindle.json', import.meta.url), 'utf8'));
   try {
-    const source = page.locator('#webfiction-dataset');
     await page.locator('#domains [data-key=webfiction][aria-pressed=true]').waitFor();
-    assert.equal(await source.inputValue(), 'royalroad-kindle');
+    assert.equal(await choiceValue(page, 'catalog-source'), 'royalroad-kindle');
     assert.equal(await page.locator('#library .entry').count(), catalog.items.length);
     const first = page.locator('[data-key=expected] .rank').first();
     await first.click();
@@ -1102,13 +1134,13 @@ test('Royal Road Kindle editions have a separate whole-star shelf, serial links 
     await quick.locator('form button').click();
     await page.locator('#rated-list .entry').waitFor();
     await page.locator('#comparison select').waitFor();
-    assert.equal(await page.locator('#axes .axis-row').count(), catalog.models[catalog.defaultModel].components.length - 1);
-    await source.selectOption('webfiction');
+    assert.equal(await page.locator('#axes .axis-row').count(), preferenceFingerprint(catalog).displayAxes.length);
+    await choose(page, 'catalog-source', 'webfiction');
     await page.waitForURL(/catalog=webfiction/);
     assert.equal(await page.locator('#rated-list .entry').count(), 0);
     await page.goBack();
     await page.locator('#rated-list .entry').waitFor();
-    assert.equal(await source.inputValue(), 'royalroad-kindle');
+    assert.equal(await choiceValue(page, 'catalog-source'), 'royalroad-kindle');
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });

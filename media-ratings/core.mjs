@@ -603,7 +603,7 @@ export function submit(input) {
 const gaussianAxes = new WeakMap();
 export function gaussianProjection(
   catalog,
-  { model: key, ratings = {}, samples = 256, axisIndices = undefined, centerClassMeans = false, overview = false },
+  { model: key, ratings = {}, samples = 256, axisIndices = undefined, centerClassMeans = false, overview = false, minimumMapShare = 0 },
 ) {
   const { components, kind } = catalog.models[key],
     model = catalog.models[key];
@@ -645,7 +645,8 @@ export function gaussianProjection(
     cached.set(centerClassMeans, basis);
   }
   // Only the chosen map axes need full conditional covariance products.
-  const indices = axisIndices ?? basis.all.slice(0, 2).map(axis => axis.index);
+  const indices = axisIndices ?? basis.all.slice(0, 2)
+    .filter(axis => axis.index === 0 || axis.fraction >= minimumMapShare).map(axis => axis.index);
   requireValue(
     Array.isArray(indices) &&
       (indices.length >= 1 || !basis.all.length) &&

@@ -3,24 +3,10 @@ import { dot } from '../intuitions/lib/linalg.js';
 import { pnormInterval } from '../intuitions/lib/normal.js';
 import { gaussianProjection } from './core.mjs';
 import { tasteProfile } from './taste.mjs';
+import { comparisonGroups, describeAxes } from './axis-annotations.mjs';
 
 const average = (values) => values.reduce((sum, x) => sum + x, 0) / values.length;
 const cache = new WeakMap();
-
-function ratingGroups(items) {
-  const groups = new Map();
-  items.forEach((it, i) => {
-    const a = it.annotations;
-    const labels = a?.genres ?? (a?.region ? [a.region] : []);
-    for (const label of new Set(labels)) {
-      if (!groups.has(label)) groups.set(label, []);
-      groups.get(label).push(i);
-    }
-  });
-  return [...groups].filter(
-    ([, ids]) => ids.length >= (items.length >= 100 ? 10 : 2) && ids.length < items.length,
-  );
-}
 
 function describeClass(catalog, profile, populationMean, groups, usesHalfStars) {
   const scale = catalog.scale,
@@ -70,7 +56,9 @@ function classSignatures(catalog, model) {
   }
   if (byModel.has(model)) return byModel.get(model);
   const { items, scale } = catalog;
-  const groups = ratingGroups(items);
+  const secondMoments = items.map(() => 0);
+  const squaredScale = scale.map(x => x*x);
+  const groups = comparisonGroups(catalog).groups.map(group => [group.name, group.members]);
   const profiles = model.components.map((c) => {
     const mass = scale.map(() => 0);
     const means = items.map((_, i) => {
@@ -87,6 +75,7 @@ function classSignatures(catalog, model) {
       row.forEach((p, j) => {
         mass[j] += p / items.length;
       });
+      secondMoments[i] += c.weight * dot(row, squaredScale);
       return dot(row, scale);
     });
     return { mass, means, mean: average(means), prior: c.weight };
@@ -109,60 +98,10 @@ function classSignatures(catalog, model) {
       affinities,
     };
   });
-  const signature = { groups, classes, usesHalfStars };
+  const spread = secondMoments.map((m,i) => Math.sqrt(Math.max(0, m-baseline[i]**2)));
+  const signature = { groups, classes, usesHalfStars, baseline, spread };
   byModel.set(model, signature);
   return signature;
-}
-
-// Use actual tags or examples from the fitted catalog. Weak group averages
-// should not lend a psychological name to a direction defined by individual works.
-const axisDescriptions = new WeakMap();
-const axisGroups = new WeakMap();
-function annotatedGroups(catalog) {
-  if (axisGroups.has(catalog)) return axisGroups.get(catalog);
-  const groups = new Map();
-  for (const [i, { annotations: a = {} }] of catalog.items.entries()) {
-    const labels = new Set([...(a.genres ?? []), ...(a.tags ?? []), a.region, a.country, a.format]);
-    if (Number.isInteger(a.year)) labels.add(Math.floor(a.year / 10) * 10 + 's');
-    for (const label of labels) {
-      if (!label) continue;
-      if (!groups.has(label)) groups.set(label, []);
-      groups.get(label).push(i);
-    }
-  }
-  const n = catalog.items.length;
-  const supported = [...groups].filter(([, ids]) => ids.length >= (n >= 100 ? 10 : 2) && ids.length < n);
-  axisGroups.set(catalog, supported);
-  return supported;
-}
-function axisDescription(catalog, axis) {
-  if (axisDescriptions.has(axis.loadings)) return axisDescriptions.get(axis.loadings);
-  const lo = axis.loadings[axis.low], hi = axis.loadings[axis.high];
-  let low = catalog.items[axis.low].title, high = catalog.items[axis.high].title;
-  let label = 'Title contrast';
-  if (lo > 0 || hi < 0) {
-    label = 'Overall rating';
-    low = lo > 0 ? 'Lower scores' : 'Higher scores';
-    high = lo > 0 ? 'Higher scores' : 'Lower scores';
-  } else {
-    const groups = annotatedGroups(catalog);
-    const n = axis.loadings.length;
-    const mean = average(axis.loadings);
-    const norm = Math.sqrt(axis.loadings.reduce((sum, v) => sum + (v - mean) ** 2, 0));
-    // Point-biserial correlation between a tag and item loading balances both
-    // contrast and coverage. An unsupported pole keeps its actual extreme title.
-    let lowest = -.15, highest = .15;
-    for (const [name, ids] of groups) {
-      const groupMean = ids.reduce((sum, i) => sum + axis.loadings[i], 0) / ids.length;
-      const r = (groupMean - mean) * Math.sqrt(n * ids.length / (n - ids.length)) / norm;
-      if (r < lowest && groupMean < 0) { lowest = r; low = name; }
-      if (r > highest && groupMean > 0) { highest = r; high = name; }
-    }
-    if (low !== catalog.items[axis.low].title || high !== catalog.items[axis.high].title) label = 'Preference contrast';
-  }
-  const description = {label, low, high};
-  axisDescriptions.set(axis.loadings, description);
-  return description;
 }
 
 export function preferenceFingerprint(
@@ -193,7 +132,7 @@ export function preferenceFingerprint(
       ? tasteProfile(catalog, ratings, key, null, centerClassMeans, volunteered, ratedOn)
       : gaussianProjection(catalog, { model: key, ratings, samples, axisIndices, centerClassMeans, overview: true }));
   const { weights } = view;
-  const { classes, groups, usesHalfStars } = classSignatures(catalog, model);
+  const { classes, groups, usesHalfStars, baseline, spread } = classSignatures(catalog, model);
   const positions = view.mean ?? view.projection.map((axis) => dot(axis.scores, weights));
   const evidence = catalog.items.flatMap((it, i) => {
     if (!categorical || !Object.hasOwn(ratings, it.itemId)) return [];
@@ -234,8 +173,9 @@ export function preferenceFingerprint(
     .sort((a, b) => b.shift - a.shift);
   const all = view.allAxes ?? view.projection;
   const allScores = view.allScores ?? (view.allAxes ? all.map(axis => dot(axis.scores, weights)) : positions);
+  const descriptions = describeAxes(catalog, all, baseline, spread);
   const allAxes = all.map((axis, i) => ({
-    ...axisDescription(catalog, axis),
+    ...descriptions[i],
     index: axis.index, score: allScores[i], fraction: axis.fraction,
     standardScore: axis.variance > 0 ? allScores[i] / Math.sqrt(axis.variance) : 0,
   }));
@@ -249,6 +189,7 @@ export function preferenceFingerprint(
     match: ratedCount && uniqueLeader ? types[0] : null,
     axes,
     allAxes,
+    displayAxes: allAxes.filter(axis => axis.interpretable),
     affinities,
     mean: dot(mass, catalog.scale),
     populationMean: classes.reduce((s, p) => s + p.mean * p.prior, 0),

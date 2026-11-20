@@ -345,6 +345,7 @@ export function showDetail({
   const more = /** @type {HTMLDetailsElement} */ (el('more-metadata'));
   const facts = [
     ['Collection', a.collection && a.collection + (a.releaseOrder ? ' · release ' + a.releaseOrder : '')],
+    ['Series', a.series?.join(' · ')],
     ['Year', a.year],
     ['Episodes', a.episodes],
     ['Words', a.wordCount?.toLocaleString()],
