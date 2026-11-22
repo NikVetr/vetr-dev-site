@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" data-period="16" focusable="false">
+<style>
+[data-art="travel-prompt"] {--surround:#c5d4b9;--ticket:#f1edda;--stamp:#285646;--ink:#173f37;background:var(--surround);container:trip-brief / size}
+:root[data-theme="dark"] [data-art="travel-prompt"] {--surround:#22362e;--ticket:#e0dfcc;--stamp:#214e41}
+[data-art="travel-prompt"] .ticket {position:absolute;inset:7% 5%;overflow:hidden;background:var(--ticket);border-radius:4px;color:var(--ink);font:normal 1em/1.18 system-ui,sans-serif}
+[data-art="travel-prompt"] .ticket::after {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at left center,var(--surround) 0 1.65cqw,transparent 1.8cqw),radial-gradient(circle at right center,var(--surround) 0 1.65cqw,transparent 1.8cqw)}
+[data-art="travel-prompt"] .brief {position:absolute;inset:0;display:grid;grid-template:"stamp request" minmax(0,1fr) "stamp outcome" auto / 28% minmax(0,1fr)}
+[data-art="travel-prompt"] .brief:not(.brief-0) {opacity:0}
+[data-art="travel-prompt"] .stamp {grid-area:stamp;display:grid;place-items:center;background:var(--stamp);color:#f1d295}
+[data-art="travel-prompt"] .stamp svg {width:min(70%,35cqh);height:auto;max-height:85%}
+[data-art="travel-prompt"] .request {grid-area:request;display:flex;justify-content:center;flex-direction:column;gap:1cqh;margin:0 6cqw;font-size:clamp(10px,min(5cqw,9cqh),26px);line-height:1.2}
+[data-art="travel-prompt"] .request b {font-size:clamp(14px,min(7.5cqw,14cqh),40px);line-height:1.08;letter-spacing:-.035em;margin-bottom:1cqh}
+[data-art="travel-prompt"] .outcome {grid-area:outcome;margin:0 6cqw;padding:2.8cqh 0 4cqh;border-top:1px dashed #82977f;font-size:clamp(10px,min(4.3cqw,8.5cqh),23px);font-weight:650}
+@container trip-brief (min-aspect-ratio:3/1) {
+ [data-art="travel-prompt"] .brief {grid-template:"stamp request outcome" minmax(0,1fr) / 19% minmax(0,1fr) 29%}
+ [data-art="travel-prompt"] .request {margin:0 3cqw;gap:1cqh;font-size:clamp(9px,13cqh,24px)}
+ [data-art="travel-prompt"] .request b {font-size:clamp(12px,21cqh,32px)}
+ [data-art="travel-prompt"] .outcome {align-self:stretch;display:grid;align-content:center;border:0;border-left:1px dashed #82977f;padding:0 1.6cqw;margin:7cqh 0;font-size:clamp(9px,min(12cqh,3.1cqw),18px)}
+}
+@container trip-brief (max-aspect-ratio:1.12/1) {
+ [data-art="travel-prompt"] .brief {grid-template:"stamp" minmax(0,.78fr) "request" minmax(0,1fr) "outcome" auto / minmax(0,1fr)}
+ [data-art="travel-prompt"] .stamp svg {height:68%;width:auto}
+ [data-art="travel-prompt"] .request {margin:0 8cqw;font-size:clamp(11px,6cqw,24px)}
+ [data-art="travel-prompt"] .request b {font-size:clamp(15px,8.5cqw,35px)}
+ [data-art="travel-prompt"] .outcome {margin:0 8cqw}
+}
+[data-art="travel-prompt"][data-started] .brief-0{animation:travel-prompt-slide 16s -16s infinite}
+[data-art="travel-prompt"][data-started] .brief-1{animation:travel-prompt-slide 16s -12s infinite}
+[data-art="travel-prompt"][data-started] .brief-2{animation:travel-prompt-slide 16s -8s infinite}
+[data-art="travel-prompt"][data-started] .brief-3{animation:travel-prompt-slide 16s -4s infinite}
+@keyframes travel-prompt-slide{0%,21%{opacity:1}25%,96%{opacity:0}100%{opacity:1}}
+</style>
+<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="ticket"><div class="brief brief-0">
+      <div class="stamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 19V6m20 13v-7H2m0 5h20M4 12V8h5v4m2-4h7a3 3 0 0 1 3 3v1h-10z" />
+      </svg></div>
+      <div class="request"><b>Find lodging</b><span>Kyoto Station</span><span>Quiet at night</span></div>
+      <div class="outcome">Research 3 options →</div></div><div class="brief brief-1">
+      <div class="stamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 3v5c0 3 6 3 6 0V3M7 3v18M18 21V3c-4 2-5 7-4 10h4" />
+      </svg></div>
+      <div class="request"><b>Find a table</b><span>Kyoto Station</span><span>Regional specialties</span></div>
+      <div class="outcome">Research 3 options →</div></div><div class="brief brief-2">
+      <div class="stamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m2 8 10-5 10 5H2Zm3 3v7m5-7v7m4-7v7m5-7v7M3 21h18" />
+      </svg></div>
+      <div class="request"><b>Plan an outing</b><span>Kyoto Station</span><span>Gardens and galleries</span></div>
+      <div class="outcome">Research 3 options →</div></div><div class="brief brief-3">
+      <div class="stamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M3 5c3-1 6-.5 9 1 3-1.5 6-2 9-1v14c-3-1-6-.5-9 1-3-1.5-6-2-9-1zM12 6v14M6 9l3 1m6 0 3-1m-12 4 3 1m6 0 3-1"
+        />
+      </svg></div>
+      <div class="request"><b>Read a menu</b><span>Menu photos</span><span>Food and drinks</span></div>
+      <div class="outcome">Recommend 3 options →</div></div></div></foreignObject>
+</svg>

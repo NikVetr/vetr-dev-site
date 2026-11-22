@@ -55,9 +55,15 @@ export async function openPage(path, { width = 1440, height = 900, scheme = 'lig
   const errors = [];
   page.on('pageerror', (/** @type {Error} */ e) => errors.push(e.message));
   await page.goto(path === 'about:blank' ? path : `http://127.0.0.1:${port}/${path}`, { waitUntil: 'networkidle' });
+  function stopServing() {
+    if (!server.listening) return;
+    server.close();
+    server.closeAllConnections();
+  }
   return {
     page,
     errors,
-    close: async () => { await browser.close(); server.close(); },
+    stopServing,
+    close: async () => { await browser.close(); stopServing(); },
   };
 }

@@ -12,7 +12,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Tools by Nik Vetr for statistics, visual work, and everyday tasks.">
+  <meta name="description" content="Tools by Nik Vetr for everyday tasks, academic work, and art.">
   <link rel="icon" href="/favicon.svg">
   <title>vetr.dev</title>
   <link rel="stylesheet" href="style.css">
@@ -37,11 +37,11 @@
   <header class="site-header">
     <div class="container masthead" id="intro">
       <h1>vetr.dev</h1>
-      <p class="tagline">Tools for statistics, graphics, and everyday tasks.</p>
+      <p class="tagline">Tools for everyday tasks, academic work, and art.</p>
       <div class="category-names" aria-hidden="true">
-        <span id="category-statistics">Statistics</span>
-        <span id="category-art">Art</span>
         <span id="category-everyday">Everyday tools</span>
+        <span id="category-academic">Academic tools</span>
+        <span id="category-art">Art</span>
       </div>
     </div>
   </header>
@@ -57,6 +57,38 @@
             <h3 id="pocket-language-guide-title">Wanderwart (Pocket Language Guide)</h3>
             <p id="pocket-language-guide-desc">Have conversations with translated question and reply buttons, or print a pocket language guide.</p>
             <time class="project-date" datetime="2026-08-31">2026-08-31</time>
+          </a>
+        </li>
+        <li data-mosaic-key="travel-prompt" data-category="everyday" data-size="2x2">
+          <a class="project-card" href="/travel-prompt/" aria-labelledby="travel-prompt-title" aria-describedby="travel-prompt-desc category-everyday">
+            <div class="card-art" data-art="travel-prompt" aria-hidden="true"></div>
+            <h3 id="travel-prompt-title">Travel Prompt</h3>
+            <p id="travel-prompt-desc">Build a brief for your chat assistant to find a table, read a menu, choose lodging, or plan an outing.</p>
+            <time class="project-date" datetime="2026-11-22">2026-11-22</time>
+          </a>
+        </li>
+        <li data-mosaic-key="stretch-snack" data-category="everyday" data-size="2x2">
+          <a class="project-card" href="/stretch-snack/" aria-labelledby="stretch-snack-title" aria-describedby="stretch-snack-desc category-everyday">
+            <div class="card-art" data-art="stretch-snack" aria-hidden="true"></div>
+            <h3 id="stretch-snack-title">Complimentary Stretch Snack</h3>
+            <p id="stretch-snack-desc">Plan a movement break for the space and time you have, then follow it offline.</p>
+            <time class="project-date" datetime="2026-11-22">2026-11-22</time>
+          </a>
+        </li>
+        <li data-mosaic-key="media-ratings" data-category="everyday" data-size="2x2">
+          <a class="project-card" href="/rating-prediction/" aria-labelledby="media-ratings-title" aria-describedby="media-ratings-desc category-everyday">
+            <div class="card-art" data-art="media-ratings" aria-hidden="true"></div>
+            <h3 id="media-ratings-title">Rating Prediction</h3>
+            <p id="media-ratings-desc">Rate games, recipes, destinations and more to see which ones you might like next.</p>
+            <time class="project-date" datetime="2019-10-22">2019-10-22</time>
+          </a>
+        </li>
+        <li data-mosaic-key="sankey" data-category="everyday" data-size="3x3">
+          <a class="project-card" href="/sankey/" aria-labelledby="sankey-title" aria-describedby="sankey-desc category-everyday">
+            <div class="card-art" data-art="sankey" aria-hidden="true"></div>
+            <h3 id="sankey-title">Sankey Diagrams</h3>
+            <p id="sankey-desc">Draw flows from data tables, trace their pathways, and export SVG, PNG or R code.</p>
+            <time class="project-date" datetime="2024-06-19">2024-06-19</time>
           </a>
         </li>
         <li data-mosaic-key="ceo-salary-benchmark" data-category="everyday" data-size="2x3">
@@ -91,52 +123,36 @@
             <time class="project-date" datetime="2026-09-14">2026-09-14</time>
           </a>
         </li>
-        <li data-mosaic-key="intuitions" data-category="statistics" id="statistics" tabindex="-1" data-size="3x3">
-          <a class="project-card" href="/intuitions/" aria-labelledby="intuitions-title" aria-describedby="intuitions-desc category-statistics">
+        <li data-mosaic-key="intuitions" data-category="academic" id="academic" tabindex="-1" data-size="3x3">
+          <a class="project-card" id="statistics" href="/intuitions/" aria-labelledby="intuitions-title" aria-describedby="intuitions-desc category-academic">
             <div class="card-art" data-art="intuitions" aria-hidden="true"></div>
             <h3 id="intuitions-title">Statistical Intuitions</h3>
             <p id="intuitions-desc">Explore statistical ideas with interactive figures. Move a parameter and see what changes.</p>
             <time class="project-date" datetime="2019-10-22">2019-10-22</time>
           </a>
         </li>
-        <li data-mosaic-key="color-optimization" data-category="statistics" id="stats-art" tabindex="-1" data-size="3x3">
-          <a class="project-card" href="/color-optimization/" aria-labelledby="color-optimization-title" aria-describedby="color-optimization-desc category-statistics">
+        <li data-mosaic-key="color-optimization" data-category="academic" id="stats-art" tabindex="-1" data-size="3x3">
+          <a class="project-card" href="/color-optimization/" aria-labelledby="color-optimization-title" aria-describedby="color-optimization-desc category-academic">
             <div class="card-art" data-art="color-optimization" aria-hidden="true"></div>
             <h3 id="color-optimization-title">Palette Town (Color Palette Extender)</h3>
             <p id="color-optimization-desc">Extend discrete color palettes with colorblind-aware optimization.</p>
             <time class="project-date" datetime="2021-07-14">2021-07-14</time>
           </a>
         </li>
-        <li data-mosaic-key="layout-gui" data-category="statistics" data-size="2x2">
-          <a class="project-card" href="/layout-gui/" aria-labelledby="layout-gui-title" aria-describedby="layout-gui-desc category-statistics">
+        <li data-mosaic-key="layout-gui" data-category="academic" data-size="2x2">
+          <a class="project-card" href="/layout-gui/" aria-labelledby="layout-gui-title" aria-describedby="layout-gui-desc category-academic">
             <div class="card-art" data-art="layout-gui" aria-hidden="true"></div>
             <h3 id="layout-gui-title">Multipanel Figure Editor</h3>
             <p id="layout-gui-desc">Arrange figure panels and export layout code for R, Python and other plotting tools.</p>
             <time class="project-date" datetime="2025-07-30">2025-07-30</time>
           </a>
         </li>
-        <li data-mosaic-key="sankey" data-category="statistics" data-size="3x3">
-          <a class="project-card" href="/sankey/" aria-labelledby="sankey-title" aria-describedby="sankey-desc category-statistics">
-            <div class="card-art" data-art="sankey" aria-hidden="true"></div>
-            <h3 id="sankey-title">Sankey Diagrams</h3>
-            <p id="sankey-desc">Draw flows from data tables, trace their pathways, and export SVG, PNG or R code.</p>
-            <time class="project-date" datetime="2024-06-19">2024-06-19</time>
-          </a>
-        </li>
-        <li data-mosaic-key="stan2r" data-category="statistics" data-size="2x2">
-          <a class="project-card" href="/stan2r/" aria-labelledby="stan2r-title" aria-describedby="stan2r-desc category-statistics">
+        <li data-mosaic-key="stan2r" data-category="academic" data-size="2x2">
+          <a class="project-card" href="/stan2r/" aria-labelledby="stan2r-title" aria-describedby="stan2r-desc category-academic">
             <div class="card-art" data-art="stan2r" aria-hidden="true"></div>
             <h3 id="stan2r-title">Stan Studio (Model Explorer)</h3>
             <p id="stan2r-desc">Explore model dependencies and prior predictions, adjust priors, and export R, Python or LaTeX.</p>
             <time class="project-date" datetime="2024-01-13">2024-01-13</time>
-          </a>
-        </li>
-        <li data-mosaic-key="media-ratings" data-category="statistics" data-size="2x2">
-          <a class="project-card" href="/rating-prediction/" aria-labelledby="media-ratings-title" aria-describedby="media-ratings-desc category-statistics">
-            <div class="card-art" data-art="media-ratings" aria-hidden="true"></div>
-            <h3 id="media-ratings-title">Rating Prediction</h3>
-            <p id="media-ratings-desc">Rate games, recipes, destinations and more to see which ones you might like next.</p>
-            <time class="project-date" datetime="2019-10-22">2019-10-22</time>
           </a>
         </li>
         <li data-mosaic-key="text-in-image" data-category="art" id="art" tabindex="-1" data-size="2x3">

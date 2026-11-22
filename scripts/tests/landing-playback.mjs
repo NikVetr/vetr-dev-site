@@ -17,7 +17,7 @@ test('CSS previews keep their frame on exit and resume their original clocks', a
   const { page, errors } = browser;
   try {
     // Both continuously interpolated and stacked-frame animations are covered.
-    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'media-ratings', 'message-collage', 'photomosaic']) {
+    for (const name of ['b64', 'raster-to-vector', 'text-in-image', 'media-ratings', 'message-collage', 'photomosaic', 'travel-prompt']) {
       const art = page.locator(`[data-art="${name}"]`);
       await art.scrollIntoViewIfNeeded(); await art.locator(':scope > svg').waitFor();
       assert.equal((await times(art)).length, 0, `${name}: starts still`);

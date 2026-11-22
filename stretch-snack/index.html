@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#24483a" />
+    <title>Complimentary Stretch Snack · vetr.dev</title>
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="../shared/theme.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-icon" src="./icon.svg" width="34" height="34" alt="" />
+        <h1>Complimentary <strong>Stretch Snack</strong></h1>
+      </div>
+      <nav>
+        <a href="../">vetr.dev</a
+        ><button type="button" id="theme-toggle" aria-label="Switch theme">Theme</button>
+      </nav>
+    </header>
+    <main class="studio">
+      <aside class="setup panel" aria-labelledby="setup-title">
+        <div class="section-title">
+          <div>
+            <h2 id="setup-title">Your space</h2>
+            <p id="space-summary" hidden></p>
+          </div>
+          <button type="button" id="toggle-settings" aria-controls="settings" aria-expanded="true" hidden>
+            Edit
+          </button>
+        </div>
+        <form id="settings">
+          <label class="field">Where are you?<select id="location"></select></label>
+          <fieldset>
+            <legend>Time available</legend>
+            <div class="time-row" id="time-options"></div>
+            <label class="custom-time" hidden
+              >Seconds <input id="custom-time" type="number" min="15" max="900" step="1" value="120"
+            /></label>
+          </fieldset>
+          <fieldset>
+            <legend>Where do you feel stiff?</legend>
+            <div id="targets" class="chips"></div>
+          </fieldset>
+          <fieldset>
+            <legend>How discreet?</legend>
+            <select id="discretion" aria-label="How discreet?">
+              <option value="quiet">Quiet · small movements</option>
+              <option value="moderate">Moderately noticeable</option>
+              <option value="any">Any visibility</option>
+            </select>
+          </fieldset>
+          <details id="fit">
+            <summary>Space, equipment &amp; mobility</summary>
+            <div class="details-body">
+              <fieldset>
+                <legend>Mobility preferences</legend>
+                <div class="check-list" id="limitations"></div>
+              </fieldset>
+              <fieldset>
+                <legend>Equipment within reach</legend>
+                <div class="check-list" id="equipment"></div>
+              </fieldset>
+              <label class="check"><input type="checkbox" id="allow-floor" /> I can use the floor here</label>
+              <fieldset>
+                <legend>Measurements <small>optional · cm</small></legend>
+                <div class="measurements">
+                  <label>Height<input id="heightCm" type="number" min="1" step="any" /></label
+                  ><label>Armspan<input id="armspanCm" type="number" min="1" step="any" /></label>
+                  <label>Room ahead of knees<input id="forwardCm" type="number" min="0" step="any" /></label
+                  ><label
+                    >Room beside each shoulder<input id="sideCm" type="number" min="0" step="any"
+                  /></label>
+                </div>
+              </fieldset>
+            </div>
+          </details>
+          <details id="places">
+            <summary>Other available locations</summary>
+            <div class="details-body">
+              <p class="hint">
+                Select only places you can safely reach and use now. Follow crew instructions and the
+                seat-belt sign.
+              </p>
+              <div id="available" class="check-list"></div>
+            </div>
+          </details>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </form>
+        <div class="settings-actions">
+          <button type="button" id="save-profile">Save my defaults</button
+          ><button type="button" id="load-profile" hidden>Restore defaults</button>
+        </div>
+        <output id="profile-status" role="status"></output>
+        <output id="offline-status" role="status">Preparing offline access…</output>
+      </aside>
+      <section class="workspace" aria-label="Routine planner">
+        <section class="panel routine-panel" aria-labelledby="routine-title">
+          <div class="routine-heading">
+            <div>
+              <h2 id="routine-title">Your routine</h2>
+              <p id="routine-summary"></p>
+            </div>
+            <div class="routine-actions">
+              <button id="open-routines" type="button">Saved routines</button>
+              <button class="primary" id="start" type="button">
+                <span aria-hidden="true">▶</span> Start session
+              </button>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div>
+              <ol id="steps"></ol>
+              <button type="button" id="add-step" hidden>+ Add movement</button>
+            </div>
+            <section class="preview" id="preview" aria-labelledby="preview-name">
+              <div class="illustration">
+                <canvas id="preview-canvas" width="480" height="260" aria-hidden="true"></canvas
+                ><button type="button" class="animation-switch" id="animate" aria-label="Pause demonstration">
+                  Ⅱ
+                </button>
+              </div>
+              <div class="preview-copy">
+                <h3 id="preview-name"></h3>
+                <p id="preview-cue"></p>
+                <details id="evidence">
+                  <summary>Technique &amp; evidence</summary>
+                  <div id="source-info"></div>
+                </details>
+              </div>
+            </section>
+          </div>
+          <div id="plan-note" class="note" hidden></div>
+          <div id="alternatives" hidden></div>
+        </section>
+        <div class="library-link panel">
+          <div>
+            <h2>Movement library</h2>
+            <p id="library-description">Choose favorites or leave movements out of your routines.</p>
+          </div>
+          <button id="open-library" type="button">Browse movements <span aria-hidden="true">↗</span></button>
+        </div>
+        <section class="panel" id="later" hidden aria-labelledby="later-title">
+          <h2 id="later-title">How are you feeling now?</h2>
+          <p id="later-context"></p>
+          <div id="later-buttons" class="actions"></div>
+        </section>
+        <p class="safety-note">
+          For everyday travel stiffness. Stay within a comfortable range and stop a movement if it hurts.
+          These routines haven’t been clinically reviewed.
+        </p>
+      </section>
+    </main>
+    <dialog id="library" aria-labelledby="library-title">
+      <div class="dialog-head">
+        <h2 id="library-title">Movement library</h2>
+        <button type="button" data-close="library" aria-label="Close movement library">✕</button>
+      </div>
+      <label class="field"
+        >Find a movement<input type="search" id="library-query" placeholder="Movement or body area"
+      /></label>
+      <div id="library-items" class="library-items"></div>
+    </dialog>
+    <dialog id="saved-routines" aria-labelledby="saved-title">
+      <div class="dialog-head">
+        <h2 id="saved-title">Saved routines</h2>
+        <button type="button" data-close="saved-routines" aria-label="Close saved routines">✕</button>
+      </div>
+      <div class="time-row routine-modes" aria-label="Saved routine actions" role="group">
+        <button type="button" id="browse-routines">Use saved</button>
+        <button type="button" id="name-routine">Save current</button>
+      </div>
+      <form id="save-routine-form" hidden>
+        <label class="field">Routine name<input id="routine-name" type="text" maxlength="64" required placeholder="e.g. Window seat" /></label>
+        <p class="hint" id="save-routine-summary"></p>
+        <button class="primary" id="save-routine" type="submit">Save on this device</button>
+      </form>
+      <section id="routine-recall">
+        <label class="field">Choose a routine<select id="routine-choice"></select></label>
+        <p class="hint" id="review-context"></p>
+        <ol id="review-steps"></ol>
+        <p class="hint" id="review-fit" role="status"></p>
+        <div class="recall-actions">
+          <button type="button" id="delete-routine" aria-label="Delete saved routine">Delete</button>
+          <button type="button" class="primary" id="use-routine">Use routine</button>
+        </div>
+      </section>
+      <output id="saved-notice" role="status"></output>
+    </dialog>
+    <dialog id="edit" aria-labelledby="edit-title">
+      <div class="dialog-head">
+        <h2 id="edit-title">Edit movement</h2>
+        <button type="button" data-close="edit" aria-label="Close movement editor">✕</button>
+      </div>
+      <form id="edit-form">
+        <label class="field">Movement<select id="edit-move"></select></label>
+        <p id="edit-cue" class="hint"></p>
+        <label class="field"
+          >Seconds<input id="edit-seconds" type="number" min="5" max="180" step="1" required /></label
+        ><label class="field"
+          >Repetitions <small>Optional target at a comfortable pace</small
+          ><input id="edit-reps" type="number" min="1" max="100" step="1"
+        /></label>
+        <p class="hint" id="edit-max"></p>
+        <p id="edit-error" class="error" role="alert"></p>
+        <div class="actions">
+          <button type="button" id="remove-step">Remove</button
+          ><button type="submit" class="primary">Apply</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="player" id="player" aria-labelledby="player-name">
+      <div class="player-inner">
+        <div class="player-bar">
+          <span id="player-progress"></span><button id="finish" type="button">End session</button>
+        </div>
+        <div class="progress-track" aria-hidden="true"><i id="progress-fill"></i></div>
+        <div class="player-scene">
+          <canvas id="player-canvas" width="720" height="430" aria-hidden="true"></canvas>
+        </div>
+        <section class="player-reading">
+          <div class="player-heading">
+            <h2 id="player-name" aria-live="polite"></h2>
+            <div class="clock">
+              <strong id="step-clock"></strong><span id="total-clock"></span>
+              <div class="clock-adjust" role="group" aria-label="Adjust this movement">
+                <button type="button" id="shorten" aria-label="Shorten this movement by 10 seconds">−10 s</button>
+                <button type="button" id="extend" aria-label="Extend this movement by 10 seconds">+10 s</button>
+              </div>
+            </div>
+          </div>
+          <p id="player-cue"></p>
+          <p id="player-next"></p>
+          <div class="player-controls">
+            <button id="previous" type="button">Previous</button>
+            <button id="pause" class="primary" type="button">Pause</button
+            ><button id="skip" type="button">Next</button
+            ><label class="audio-label"
+              >Audio<select id="audio">
+                <option value="silent">Silent</option>
+                <option value="tones">Countdown tones</option>
+                <option value="voice">Spoken guidance</option>
+              </select></label
+            >
+          </div>
+          <output id="audio-status" role="status"></output>
+        </section>
+      </div>
+    </dialog>
+    <dialog id="feedback" aria-labelledby="feedback-title">
+      <div class="dialog-head">
+        <h2 id="feedback-title">Your session</h2>
+        <button type="button" data-close="feedback" aria-label="Close session summary">✕</button>
+      </div>
+      <p id="completed-info"></p>
+      <fieldset>
+        <legend>How do you feel?</legend>
+        <div class="chips" id="immediate"></div>
+      </fieldset>
+      <div id="feedback-items"></div>
+      <fieldset class="reminder">
+        <legend>Optional check-in</legend>
+        <label class="field"
+          >Remind me after<select id="delay">
+            <option value="0">No reminder</option>
+            <option value="30">30 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="120">2 hours</option>
+          </select></label
+        >
+        <div id="reminder-options" hidden>
+          <p class="hint">
+            Check in here when you return. Set a calendar reminder to get an alert with the app closed.
+          </p>
+          <div class="actions">
+            <button id="calendar" type="button">Save calendar reminder</button
+            ><button id="notify" type="button" hidden>Notify while open</button>
+          </div>
+        </div>
+      </fieldset>
+      <output id="feedback-status" role="status"></output
+      ><button type="button" class="primary" data-close="feedback">Done</button>
+    </dialog>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

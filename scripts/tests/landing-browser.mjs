@@ -34,7 +34,7 @@ try {
   assert.equal(await page.locator('.card-player, [data-playing]').count(), 0);
   await page.unroute('**/hypercube/plans/k4.json');
 
-  for (const [width, height] of [[390, 844], [844, 390], [640, 900], [768, 1024], [1000, 900], [1200, 900], [1366, 768], [1440, 900], [1700, 1000], [1920, 1080], [2560, 1080], [720, 450], [1440, 900]]) {
+  for (const [width, height] of [[390, 844], [844, 390], [640, 900], [768, 1024], [1000, 900], [1200, 900], [1366, 768], [1440, 900], [1700, 1000], [1920, 1080], [2560, 1080], [1000, 450], [2560, 450], [720, 450], [1440, 900]]) {
     await page.setViewportSize({ width, height });
     await page.evaluate(async () => {
       scrollTo(0, 0);
@@ -111,7 +111,7 @@ try {
     assert.equal(result.paths, 3, `${width}×${height}: missing category contours`);
     assert.deepEqual(result.contourErrors, [], `${width}×${height}: contours must surround only their own cards`);
     assert.deepEqual(result.labelOverlaps, [], `${width}×${height}: category labels cover cards`);
-    if (height > 500 && result.columns >= 4) assert.equal(result.labels, 3, `${width}×${height}: fragmented desktop clusters`);
+    assert.equal(result.labels, 3, `${width}×${height}: a category has disconnected tiles`);
     const minimumFullCards = width === 1366 ? 4 : width === 1440 ? 6 : width === 1920 ? 8 : 0;
     assert.ok(result.fullCards >= minimumFullCards, `${width}×${height}: only ${result.fullCards} full cards visible`);
     if ([390, 1366, 1440, 1920].includes(width)) {
@@ -138,15 +138,27 @@ try {
   assert.ok(fills[0].every((/** @type {string} */ color, /** @type {number} */ i) => color !== fills[1][i]), 'section fills follow the theme');
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
-  assert.equal(await page.locator('.project-card').count(), 20);
+  assert.equal(await page.locator('.project-card').count(), 22);
+  for (const app of ['stretch-snack', 'travel-prompt', 'rating-prediction', 'sankey']) {
+    assert.equal(await page.locator(`[data-category="everyday"] a[href="/${app}/"]`).count(), 1);
+  }
+  for (const app of ['color-optimization', 'layout-gui', 'intuitions', 'stan2r']) {
+    const card = page.locator(`[data-category="academic"] a[href="/${app}/"]`);
+    assert.equal(await card.count(), 1);
+    assert.match(await card.getAttribute('aria-describedby'), /\bcategory-academic\b/);
+  }
   assert.equal(await page.locator('#projects > .grid').count(), 1);
   assert.equal(await page.locator('#projects > .grid > li').first().getAttribute('data-category'), 'everyday');
   assert.equal(await page.locator('[data-mosaic-key=helix]').count(), 0);
-  assert.equal(await page.locator('#intro .tagline').textContent(), 'Tools for statistics, graphics, and everyday tasks.');
+  assert.equal(await page.locator('#intro .tagline').textContent(), 'Tools for everyday tasks, academic work, and art.');
   assert.equal(await page.locator('.theme-links').count(), 0);
   assert.equal(await page.locator('#projects a[href="/forecast-calibration/"]').count(), 0);
-  for (const id of ['statistics', 'art', 'everyday']) {
-    assert.ok(await page.locator(`#category-${id}`).textContent(), 'each contour retains its accessible category name');
+  for (const [id, label] of [['everyday', 'Everyday tools'], ['academic', 'Academic tools'], ['art', 'Art']]) {
+    assert.equal(await page.locator(`#category-${id}`).textContent(), label);
+  }
+  for (const [hash, expected] of [['academic','intuitions'], ['statistics','intuitions'], ['stats-art','color-optimization']]) {
+    await page.evaluate(hash => { location.hash = hash; }, hash);
+    assert.equal(await page.locator(':target').evaluate(el => el.closest('li')?.dataset.mosaicKey), expected);
   }
   assert.equal(await page.locator('[data-mosaic-key=ceo-salary-benchmark]').getAttribute('data-category'), 'everyday');
   assert.equal(await page.locator('[data-category=stats-art]').count(), 0);
@@ -174,7 +186,7 @@ try {
   assert.equal(await page.locator('[data-art="stan2r"] .model-edges > path').count(), 2, 'Stan Studio preview shows the actual model dependencies');
   assert.equal(await page.locator('[data-art="stan2r"] [data-draws="1024"] [data-variable]').count(), 2, 'Stan Studio preview includes prior and predictive Monte Carlo histograms');
   assert.deepEqual(errors, []);
-  console.log('Landing: reduced motion, 13 resize states, flush packing/reading order, category contour coverage, clear labels, density, text fit, accessible categories and focus pass.');
+  console.log('Landing: reduced motion, responsive packing and reading order, category contours and labels, density, text fit, section bookmarks and keyboard focus pass.');
 } finally {
   await session.close();
 }

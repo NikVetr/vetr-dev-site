@@ -6,6 +6,8 @@ Each entry links the tool's API description: request and result schema, errors, 
 
 ## Tools with an API
 
+- [Complimentary Stretch Snack](https://vetr.dev/stretch-snack/api.md) builds a timed routine for the traveler's space, available equipment, and movement preferences. Browser `window.StretchSnack.submit` and `window.StretchSnack.reviewRoutine`. CLI `node stretch-snack/cli.mjs [--review] request.json`.
+- [Travel Prompt](https://vetr.dev/travel-prompt/api.md) generates a restaurant, menu, lodging or sightseeing prompt for one traveler or a group. Browser `window.TravelPrompt.submit`. CLI `node travel-prompt/cli.mjs request.json`.
 - [Matrix Rain](https://vetr.dev/matrix-rain/api.md) samples reproducible opening and rain frames, with local image, PNG and video support in the browser. CLI `node matrix-rain/cli.mjs request.json`.
 - [Rating Prediction](https://vetr.dev/rating-prediction/) conditions a fitted ratings catalog on a user's observations and reports star probabilities, shifts and posterior mixture weights. [API](https://vetr.dev/media-ratings/api.md) and CLI `node media-ratings/cli.mjs request.json`.
 

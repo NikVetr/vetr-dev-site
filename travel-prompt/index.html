@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Find restaurants, choose from a menu, compare lodging, or plan an outing with a personal brief for your preferred assistant."
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Travel Prompt</title>
+    <link rel="icon" href="compass.svg" type="image/svg+xml" />
+    <script src="../shared/theme.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.mjs"></script>
+  </head>
+  <body>
+    <svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="dining-icon" viewBox="0 0 24 24">
+        <path d="M4 3v5c0 3 6 3 6 0V3M7 3v18M18 21V3c-4 2-5 7-4 10h4" />
+      </symbol>
+      <symbol id="menu-icon" viewBox="0 0 24 24">
+        <path
+          d="M3 5c3-1 6-.5 9 1 3-1.5 6-2 9-1v14c-3-1-6-.5-9 1-3-1.5-6-2-9-1zM12 6v14M6 9l3 1m6 0 3-1m-12 4 3 1m6 0 3-1"
+        />
+      </symbol>
+      <symbol id="bed-icon" viewBox="0 0 24 24">
+        <path d="M2 19V6m20 13v-7H2m0 5h20M4 12V8h5v4m2-4h7a3 3 0 0 1 3 3v1h-10z" />
+      </symbol>
+      <symbol id="sights-icon" viewBox="0 0 24 24">
+        <path d="m2 8 10-5 10 5H2Zm3 3v7m5-7v7m4-7v7m5-7v7M3 21h18" />
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 24 24">
+        <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </symbol>
+      <symbol id="people-icon" viewBox="0 0 24 24">
+        <circle cx="10" cy="8" r="3.1" />
+        <path d="M3 20v-2a7 7 0 0 1 14 0v2M17 5a3 3 0 0 1 0 6m2 2c2 1 3 3 3 6" />
+      </symbol>
+      <symbol id="note-icon" viewBox="0 0 24 24">
+        <path d="M5 3h9l5 5v13H5zM14 3v6h5M8 13h8m-8 4h6" />
+      </symbol>
+    </svg>
+    <header class="mast">
+      <div class="mast-inner">
+        <div class="brand">
+          <img src="compass.svg" alt="" width="38" height="38" />
+          <h1>Travel Prompt</h1>
+        </div>
+        <div class="mast-links">
+          <a href="../">vetr.dev</a>
+          <button id="theme-toggle" type="button"></button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="workflow">
+        <nav class="modes" aria-label="Request type">
+          <button type="button" data-mode="restaurant" aria-pressed="true">
+            <svg aria-hidden="true"><use href="#dining-icon" /></svg>
+            Find a table
+          </button>
+          <button type="button" data-mode="menu" aria-pressed="false">
+            <svg aria-hidden="true"><use href="#menu-icon" /></svg>
+            Read a menu
+          </button>
+          <button type="button" data-mode="lodging" aria-pressed="false">
+            <svg aria-hidden="true"><use href="#bed-icon" /></svg>
+            Find lodging
+          </button>
+          <button type="button" data-mode="outing" aria-pressed="false">
+            <svg aria-hidden="true"><use href="#sights-icon" /></svg>
+            Plan an outing
+          </button>
+        </nav>
+        <a class="preview-link" href="#output">Preview prompt ↓</a>
+      </div>
+
+      <div class="workspace">
+        <div class="builder">
+          <section class="panel" aria-labelledby="trip-title">
+            <div class="section-head">
+              <svg aria-hidden="true"><use id="mode-icon" href="#pin-icon" /></svg>
+              <h2 id="trip-title">Find a restaurant</h2>
+            </div>
+            <div class="fields">
+              <div data-modes="restaurant lodging outing">
+                <label for="place">Where?</label>
+                <div class="location-row">
+                  <input
+                    id="place"
+                    type="text"
+                    placeholder="City, neighborhood, landmark, or address"
+                  />
+                  <button id="locate" type="button" aria-label="Use my location">
+                    ◎
+                    <span class="gps-long">Use my location</span>
+                    <span class="gps-short" aria-hidden="true">GPS</span>
+                  </button>
+                </div>
+                <div id="gps-line" hidden>
+                  <span id="gps-coords"></span>
+                  <button type="button" id="remove-location" class="link-btn">
+                    Remove location
+                  </button>
+                </div>
+                <div id="location-status" role="status" class="status"></div>
+              </div>
+              <details data-modes="restaurant lodging outing">
+                <summary>Compare my shortlist</summary>
+                <label class="sr" for="shortlist">Places to compare</label>
+                <textarea
+                  id="shortlist"
+                  rows="2"
+                  placeholder="Paste the names or links of places you're considering"
+                ></textarea>
+              </details>
+              <div data-modes="menu" class="photo-block">
+                <label>Menu pages</label>
+                <div class="photo-tools">
+                  <label class="button" for="camera">Take photo</label>
+                  <input
+                    id="camera"
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    class="file-input"
+                  />
+                  <label class="button" for="photos">Add photos</label>
+                  <input id="photos" type="file" accept="image/*" multiple class="file-input" />
+                </div>
+                <div id="photo-list"></div>
+                <div id="photo-pdf-tools" class="photo-tools" hidden>
+                  <button type="button" id="prepare-pdf">Make one PDF</button>
+                  <a id="save-pdf" download="menu-pages.pdf" hidden>Save menu PDF</a>
+                  <button type="button" id="share-pdf" hidden>Share prompt + PDF…</button>
+                </div>
+                <div id="photo-status" class="status" role="status"></div>
+                <details>
+                  <summary>Paste menu text</summary>
+                  <label class="sr" for="menuText">Menu text</label>
+                  <textarea
+                    id="menuText"
+                    rows="3"
+                    placeholder="Menu items, prices, or an excerpt"
+                  ></textarea>
+                </details>
+              </div>
+              <div class="pair" data-modes="lodging">
+                <label>
+                  Check-in
+                  <input type="date" id="checkIn" />
+                </label>
+                <label>
+                  Check-out
+                  <input type="date" id="checkOut" />
+                </label>
+              </div>
+              <div class="pair" data-modes="lodging">
+                <label>
+                  Property type
+                  <input id="property" placeholder="Hotel, hostel, apartment…" />
+                </label>
+                <label>
+                  Room and bed needs
+                  <input id="room" placeholder="e.g. Twin beds, adjoining rooms" />
+                </label>
+              </div>
+              <details data-modes="lodging" hidden>
+                <summary>Guests and rooms</summary>
+                <div class="extra">
+                  <div class="pair">
+                    <label>Adults <input id="adults" type="number" inputmode="numeric" min="0" step="1" /></label>
+                    <label>Children <input id="children" type="number" inputmode="numeric" min="0" step="1" /></label>
+                  </div>
+                  <div class="pair">
+                    <label>Rooms <input id="roomCount" type="number" inputmode="numeric" min="1" step="1" /></label>
+                    <label>Child ages at check-in (optional)
+                      <input id="childAges" placeholder="e.g. 3, 8" autocomplete="off" />
+                    </label>
+                  </div>
+                  <p id="guests-status" class="status" role="status"></p>
+                </div>
+              </details>
+              <div class="pair" data-modes="outing" hidden>
+                <label>
+                  Visit date
+                  <input id="visitDate" type="date" />
+                </label>
+                <label>
+                  Time window
+                  <input id="outing-time" placeholder="e.g. 2–5 pm, before the train" />
+                </label>
+              </div>
+              <label data-modes="outing" hidden>
+                Time available, including travel
+                <input id="visitLength" placeholder="e.g. 90 minutes round trip" />
+              </label>
+              <div class="pair budget-fields">
+                <label>
+                  <span id="budget-label">Budget per person</span>
+                  <input id="budget" placeholder="Amount and currency" />
+                </label>
+                <label data-modes="lodging" hidden>
+                  Budget period
+                  <select id="budgetBasis">
+                    <option value="night">Per night</option>
+                    <option value="stay">Whole stay</option>
+                  </select>
+                </label>
+                <label>
+                  Price flexibility
+                  <select id="flexibility">
+                    <option value="">No preference</option>
+                    <option>Firm limit</option>
+                    <option>Flexible for a good fit</option>
+                    <option>Happy to splurge</option>
+                  </select>
+                </label>
+              </div>
+              <div class="pair" data-modes="restaurant menu">
+                <label>
+                  Appetite or occasion
+                  <input id="hunger" placeholder="e.g. Light lunch, drinks only" />
+                </label>
+                <label data-modes="menu">
+                  Recommend
+                  <select id="focus">
+                    <option>Food and drinks</option>
+                    <option>Food</option>
+                    <option>Drinks</option>
+                  </select>
+                </label>
+                <label data-modes="restaurant">
+                  When?
+                  <input id="restaurant-time" placeholder="e.g. Tonight, arrive by 7" />
+                </label>
+              </div>
+              <details data-modes="restaurant lodging outing">
+                <summary>Transport, access and other requirements</summary>
+                <div class="extra">
+                  <fieldset>
+                    <legend>Travel modes</legend>
+                    <div id="travel-modes" class="chips"></div>
+                  </fieldset>
+                  <label>
+                    Travel time limit
+                    <input id="travelTime" placeholder="e.g. Within a 15-minute walk" />
+                  </label>
+                  <label data-modes="lodging">
+                    Timing or itinerary
+                    <input id="lodging-time" placeholder="e.g. Arriving after midnight" />
+                  </label>
+                  <label>
+                    Requirements for this request
+                    <input id="needs" placeholder="e.g. Walk-in, parking, step-free entrance" />
+                  </label>
+                </div>
+              </details>
+              <label>
+                Anything else today?
+                <textarea
+                  id="notes"
+                  rows="2"
+                  placeholder="e.g. No pizza tonight, I had it yesterday"
+                ></textarea>
+              </label>
+            </div>
+          </section>
+          <section class="panel" aria-labelledby="people-title">
+            <div class="section-head">
+              <svg aria-hidden="true"><use href="#people-icon" /></svg>
+              <h2 id="people-title">Travelers &amp; preferences</h2>
+              <button type="button" id="open-profiles" class="minor">Saved profiles</button>
+            </div>
+            <div class="fields">
+              <div class="party-row">
+                <fieldset>
+                  <legend id="party-label">Who’s going?</legend>
+                  <div class="seg" id="party">
+                    <button type="button" data-party="solo" aria-pressed="true">Just me</button>
+                    <button type="button" data-party="group" aria-pressed="false">Group</button>
+                  </div>
+                </fieldset>
+                <fieldset id="ordering-field" hidden>
+                  <legend>At the table</legend>
+                  <div class="seg" id="ordering">
+                    <button type="button" data-order="separate" aria-pressed="true">
+                      Order separately
+                    </button>
+                    <button type="button" data-order="shared" aria-pressed="false">
+                      Share dishes
+                    </button>
+                  </div>
+                </fieldset>
+              </div>
+              <div id="travelers"></div>
+              <button type="button" id="add-person" class="add-button" hidden>
+                + Add traveler
+              </button>
+            </div>
+          </section>
+        </div>
+        <aside class="preview panel" id="output" tabindex="-1" aria-labelledby="preview-title">
+          <div class="section-head">
+            <svg aria-hidden="true"><use href="#note-icon" /></svg>
+            <h2 id="preview-title">Your prompt</h2>
+            <label class="count-label">
+              Results
+              <select id="results" aria-label="Number of recommendations"></select>
+            </label>
+          </div>
+          <div class="preview-body">
+            <p class="hint" id="share-hint">Preview what you’ll send to your assistant.</p>
+            <label for="prompt" class="sr">Generated prompt</label>
+            <textarea id="prompt" readonly spellcheck="false"></textarea>
+            <div class="actions">
+              <button id="copy" class="primary" type="button">Copy prompt</button>
+              <button id="share" type="button">Share…</button>
+            </div>
+            <p id="output-status" class="status" role="status"></p>
+            <div class="assistant-links">
+              <span>Open assistant</span>
+              <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">
+                ChatGPT ↗
+              </a>
+              <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">
+                Claude ↗
+              </a>
+              <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">
+                Gemini ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <dialog id="page-review" aria-labelledby="page-heading">
+      <div class="dialog-header">
+        <h2 id="page-heading">Menu page</h2>
+        <button type="button" id="close-page" aria-label="Close menu page">×</button>
+      </div>
+      <div class="page-frame"><img id="review-image" alt="Selected menu page" /></div>
+      <p id="review-image-status" class="status" role="status"></p>
+      <div class="photo-tools">
+        <button type="button" id="previous-page">Previous</button>
+        <button type="button" id="next-page">Next</button>
+        <button type="button" id="zoom-page" aria-pressed="false">Actual size</button>
+        <label class="button" for="replace-page">Replace photo</label>
+        <input type="file" id="replace-page" class="file-input" accept="image/*" />
+      </div>
+    </dialog>
+    <dialog id="profiles">
+      <form method="dialog" class="dialog-header">
+        <h2>Saved profiles</h2>
+        <button aria-label="Close saved profiles">×</button>
+      </form>
+      <p class="hint">
+        Save this set of travelers and preferences on this device. Locations, dates, menu photos and
+        one-time requests stay out of the profile.
+      </p>
+      <div id="saved-list"></div>
+      <label>
+        Profile name
+        <input id="profile-name" maxlength="60" placeholder="e.g. Family trip" />
+      </label>
+      <div class="actions">
+        <button id="save-profile" class="primary" type="button">Save current preferences</button>
+      </div>
+      <p id="profile-status" role="status" class="status"></p>
+    </dialog>
+    <datalist id="diets">
+      <option value="Vegan"></option>
+      <option value="Lacto-ovo vegetarian"></option>
+      <option value="Lacto-vegetarian"></option>
+      <option value="Ovo-vegetarian"></option>
+      <option value="Ostro-vegan"></option>
+      <option value="Pescatarian"></option>
+      <option value="Halal"></option>
+      <option value="Kosher"></option>
+      <option value="Gluten-free"></option>
+    </datalist>
+    <noscript>This app needs JavaScript to generate a prompt on your device.</noscript>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+# Complimentary Stretch Snack planner
+
+The page, `window.StretchSnack.submit(request)`, and the Node CLI use the same synchronous planner. To import it directly, use `submit` from `core/plan.js`. The catalog, movement descriptions, sources, supported option IDs and labels are named exports in `core/catalog.js`. All calculation is local and deterministic.
+
+```sh
+node stretch-snack/cli.mjs request.json
+# or
+echo '{"location":"plane-seat","seconds":30,"targets":["calves"]}' | node stretch-snack/cli.mjs
+```
+
+The example selects `seated-heel-lift` for 30 seconds. Its result also includes compatible swaps and any unmet requests.
+
+## Request
+
+All fields are optional. Unknown fields and invalid IDs produce errors.
+
+| Field | Accepted values or units |
+| --- | --- |
+| `location` | `plane-seat` (default), `train-seat`, `roomy-seat`, `plane-lavatory`, `stall`, `open-area`. The `roomy-seat` and `open-area` presets assume a stationary surface. |
+| `seconds` | Integer 15–900, default 120, including planned changes of posture. |
+| `targets` | List drawn from `neck`, `shoulders`, `upper-back`, `chest`, `hands` (and forearms), `hips`, `knees` (and thighs), `calves` (and feet), `lower-back`. Empty requests a mixed routine. |
+| `discretion` | `quiet` (default), `moderate`, `any`. A ceiling on how conspicuous a movement may be. |
+| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. |
+| `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. A mat is optional. |
+| `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements. |
+| `heightCm`, `armspanCm` | Optional measurements in cm, 50–280 and 40–300, both default 170. Used to scale estimated movement clearance. |
+| `forwardCm`, `sideCm` | Optional measurements in cm, 0–1,000. Free space in front of the knees and on each side beyond the shoulder. Overrides the preset at the current location. Use the smaller of unequal clearances. |
+| `availableLocations` | Locations the traveler considers reachable **now**. The planner checks compatible locations on that route, e.g. a lavatory from an airplane seat. Empty by default. |
+| `avoidIds`, `favoriteIds` | Movement ID lists. An avoided movement is ineligible. Favorites take priority among eligible movements. |
+| `feedback` | Map of movement ID to `helped`, `poor-fit`, or `uncomfortable`. The first two influence ranking. Uncomfortable excludes the movement until the feedback is changed. |
+| `steps` | Optional ordered list of `{id, seconds, reps?}` to validate a custom routine. Step seconds are integers 5–180. Optional target repetitions are integers 1–100. A posture change reserves 15 seconds within the destination step, which needs at least 20 seconds. Repeated movements are allowed. An empty list explicitly empties the routine. |
+
+## Result
+
+- `steps` and `totalSeconds` give the sequence and its duration. Short routines aim to cover requested areas. Each automatic step lasts at most 45 seconds. A restrictive setting or a long budget can return a shorter routine. If all requested movements are ineligible, it returns an empty sequence.
+- `transitionSeconds` gives the portion of each step reserved for a posture change. Setup before the first step is untimed. The player can be paused if a transfer needs longer.
+- `eligibleIds` lists every movement that fits the current space, equipment, limits and exclusions. It can include movements outside the target areas for manual swaps.
+- `unmetTargets` and `unmetFavorites` identify requests the routine could not include.
+- `alternatives` lists `{location, additionalIds}` for confirmed reachable locations with additional movements or equipment variants. A posture-only alternative appears when explicitly favorited. Selecting an available location leaves the current routine in place until the traveler chooses to move. Permission and actual clearance must still be checked on site.
+- Invalid requests throw `invalid_request` with `issues: [{code, path, message}]`. The CLI prints JSON errors to stderr and exits 1 for invalid requests and 2 for usage or I/O errors.
+
+## During a session
+
+Use **Previous** or **Next** to revisit or skip a movement. Returning to an earlier movement restarts its timer. Changes of posture get transfer time in either direction. You can pause first to browse through the sequence at your own pace.
+
+Use **−10 s** or **+10 s** under the clock to adjust the current movement for this session. Both clocks update immediately. The player preserves at least five seconds of movement time after a transfer. The feedback screen lists movements whose active timer ran for at least one second.
+
+## Saved routines
+
+In **Your routine → Saved routines**, save an ordered sequence with a name, step times and repetition targets on this device. Reopen it to compare each movement with your current space, mobility settings, equipment, feedback and time. You can choose a compatible substitute, omit a step, or edit its time before selecting **Use routine**. Substituting clears that step’s original repetition target. To keep the adaptation permanently, save it under a new name or explicitly replace the saved copy. Profile defaults and session check-ins are stored separately.
+
+To inspect a proposed sequence programmatically, pass the planner request including `steps` to `window.StretchSnack.reviewRoutine(request)`, the named export from `core/plan.js`, or the CLI:
+
+```sh
+echo '{"location":"plane-seat","seconds":30,"limitations":["no-leg-movement"],"steps":[{"id":"seated-heel-lift","seconds":40}]}' | node stretch-snack/cli.mjs --review
+```
+
+The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `eligibleIds`, and ordered `rows` with each step’s `issues` and `needsTransferTime`. Retired movement IDs are reported as unavailable. Malformed inputs still produce structured request errors. Use the standard planner to validate a revised sequence before starting it.
+
+## Interpretation and sources
+
+Each of the 39 posture/equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
+
+A small crossover trial found less immediate discomfort when seated office workers interrupted four hours of sitting with hourly standing or pedaling. The study did not test individual in-seat stretches or these short routines. Feedback records personal preference and experience. [Benzo et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29608539/)
+
+Instructions are written for this catalog. The original clinical guidance and movement demonstrations are linked in the movement details. [NHS sitting exercises](https://www.nhs.uk/live-well/exercise/sitting-exercises/) · [Newcastle Hospitals' workplace mobility guidance](https://www.newcastle-hospitals.nhs.uk/services/newcastle-occupational-health-service/information-for-staff/physiotherapy/self-help-leaflets/1-minute-body-check/) · [NHS inform back exercises](https://www.nhsinform.scot/illnesses-and-conditions/muscle-bone-and-joints/neck-and-back-problems-and-conditions/exercises-for-back-pain)

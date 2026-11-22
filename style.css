@@ -132,10 +132,10 @@ h1 {
 
 /* The legend, contours and their labels share category colours in either theme. */
 [data-category] { --category-fill: color-mix(in srgb, var(--category-color) var(--category-tint), var(--bg)); }
-[data-category="statistics"] { --category-color: #267b70; }
+[data-category="academic"] { --category-color: #267b70; }
 [data-category="art"] { --category-color: #a85e28; }
 [data-category="everyday"] { --category-color: #376fa9; }
-:root[data-theme="dark"] [data-category="statistics"] { --category-color: #76c9b8; }
+:root[data-theme="dark"] [data-category="academic"] { --category-color: #76c9b8; }
 :root[data-theme="dark"] [data-category="art"] { --category-color: #e8ab73; }
 :root[data-theme="dark"] [data-category="everyday"] { --category-color: #88b8e8; }
 
