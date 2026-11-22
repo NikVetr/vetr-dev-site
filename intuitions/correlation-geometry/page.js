@@ -1,4 +1,4 @@
-// Page wiring for the geometry of correlation: five panels over compute(), each
+// Page wiring for the geometry of correlation: panels over compute(), each
 // with its own controls and figures. Every number shown comes from compute.js.
 
 import { attachRotation, orientation } from '../lib/geom3d.js';
@@ -7,10 +7,11 @@ import { bindPair, draggable, installApi, onWidth, setInvalid } from '../lib/pag
 import { IntuitionsError } from '../lib/params.js';
 import { swatch } from '../lib/plot.js';
 import {
-  arrowOf, circleAngle, circleArrow, compute, cosineRuleInterval, det3, DEFAULTS, ENTRY, LIMITS, resolveParams, sampleMatrix, uniformMatrix,
+  arrowOf, circleAngle, circleArrow, compute, cosineRuleInterval, det3, DEFAULTS, ENTRY, LIMITS, recovery, resolveParams, sampleMatrix, uniformMatrix, VIEWS,
 } from './compute.js';
+import { explainedLevels, neighborNs } from './recovery-grid.js';
 import {
-  arrowsScene, coneScene, cosineScene, eigenFigure, intervalFigure, scatterFigure, sceneCamera, simplexScene, twoObservationsFigure, widthCurveFigure, zeroPairFigure,
+  arrowsScene, coneScene, cosineScene, eigenFigure, intervalFigure, recoveryFigure, recoverySeries, scatterFigure, sceneCamera, simplexScene, twoObservationsFigure, widthCurveFigure, zeroPairFigure,
 } from './figure.js';
 
 /** @typedef {import('./compute.js').View} View */
@@ -31,6 +32,7 @@ const fresh = () => ({
   cone: { angleB: 60, angleA: 150, rBC: /** @type {number} */ (DEFAULTS.cone.rBC) },
   cosine: { rAB: /** @type {number} */ (DEFAULTS['cosine-rule'].rAB), rBC: /** @type {number} */ (DEFAULTS['cosine-rule'].rBC), phi: 120 },
   equi: { zeroPair: false, k: /** @type {number} */ (DEFAULTS.equicorrelation.k), r: /** @type {number} */ (DEFAULTS.equicorrelation.r), c: 0.5 },
+  recovery: /** @type {import('./compute.js').RecoveryParams} */ ({ view: 'recovery', ...DEFAULTS.recovery }),
   entry: {
     matrix: DEFAULTS['entry-range'].matrix.map((row) => [...row]),
     cell: /** @type {[number, number]} */ ([...DEFAULTS['entry-range'].cell]),
@@ -39,7 +41,9 @@ const fresh = () => ({
     seed: 1,
   },
 });
-const state = { view: /** @type {View} */ ('arrows'), ...fresh() };
+const linkedView = () => VIEWS.find((view) => location.hash === '#' + view);
+const state = { view: linkedView() ?? /** @type {View} */ ('arrows'), ...fresh() };
+window.addEventListener('hashchange', () => { state.view = linkedView() ?? state.view; });
 
 /** The request params a panel's controls describe. @param {View} view */
 function paramsFor(view) {
@@ -47,11 +51,12 @@ function paramsFor(view) {
   if (view === 'cone') return { view, b: circleArrow(state.cone.angleB).map(r6), a: circleArrow(state.cone.angleA).map(r6), rBC: state.cone.rBC };
   if (view === 'cosine-rule') return { view, rAB: state.cosine.rAB, rBC: state.cosine.rBC, rAC: cosineValue() };
   if (view === 'equicorrelation') return { view, k: state.equi.k, r: state.equi.zeroPair ? state.equi.c : state.equi.r, zeroPair: state.equi.zeroPair };
+  if (view === 'recovery') return { ...state.recovery };
   return { view, matrix: state.entry.matrix, cell: state.entry.cell, observations: state.entry.observations };
 }
 
 // Whichever panel was used last is the one window.Intuitions.getRequest() reports.
-for (const view of /** @type {View[]} */ (['arrows', 'cone', 'cosine-rule', 'equicorrelation', 'entry-range'])) {
+for (const view of VIEWS) {
   for (const type of ['input', 'pointerdown', 'keydown']) $(view).addEventListener(type, () => { state.view = view; });
 }
 
@@ -550,6 +555,49 @@ function showEntryControls() {
 onWidth($('entry-interval'), () => renderEntry());
 onWidth($('entry-curve'), () => renderEntry());
 
+// ---------- 6. Estimating a noisy pair ----------
+
+const neighborSlider = input('recovery-n'), strengthSlider = input('recovery-strength');
+neighborSlider.max = String(neighborNs.length - 1);
+strengthSlider.max = String(explainedLevels.length - 1);
+let recoveryResult = recovery(state.recovery);
+const drawRecovery = onWidth($('recovery-plot'), (width) => {
+  $('recovery-plot').innerHTML = recoveryFigure(recoveryResult, width);
+});
+function renderRecovery() {
+  recoveryResult = recovery(state.recovery);
+  const { selected, example, interval, replicates } = recoveryResult;
+  const pct = Math.round(100 * selected.explained) + '%';
+  neighborSlider.value = String(neighborNs.indexOf(selected.neighborN));
+  strengthSlider.value = String(explainedLevels.indexOf(selected.explained));
+  neighborSlider.setAttribute('aria-valuetext', selected.neighborN + ' observations');
+  strengthSlider.setAttribute('aria-valuetext', pct);
+  $('recovery-n-value').textContent = String(selected.neighborN);
+  $('recovery-strength-value').textContent = pct;
+  $('recovery-scores').innerHTML = recoverySeries.map((s) =>
+    `<div><dt>${swatch(s)}${s.label}</dt><dd>${formatNumber(selected[s.key], 3)}</dd></div>`).join('');
+  const gain = selected.pairwise - selected.weighted;
+  const change = gain === 0 ? 'The weighted fit leaves target RMSE unchanged.'
+    : `The weighted fit ${gain > 0 ? 'reduces' : 'increases'} target RMSE by ${(100 * Math.abs(gain) / selected.pairwise).toFixed(1)}%.`;
+  $('recovery-outcome').textContent = `${change} ${selected.indefinite} of ${replicates} pairwise matrices violated the PSD constraint.`;
+  $('recovery-geometry').textContent = `If the other correlations were known exactly, A–C could range from ${formatNumber(interval[0])} to ${formatNumber(interval[1])}. Here the other pairs are estimated too. The change in RMSE (pairwise minus weighted) is ${formatNumber(gain, 4)}, with Monte Carlo standard error ${formatNumber(selected.gainSE, 4)}.`;
+  $('recovery-spectrum').innerHTML = example.spectrum.map((s, i) =>
+    `<div><span>${(100 * s).toFixed(1)}%</span><i style="height:${(200 * s).toFixed(3)}px"></i><small>λ${'₁₂₃₄₅₆₇₈'[i]}</small></div>`).join('');
+  const ac = example.population[0][2];
+  $('recovery-spectrum-note').textContent = `This example uses R² = ${pct} and zero residual correlation. ${ac
+    ? `Reversing C changes the A–C correlation from ${formatNumber(ac)} to ${formatNumber(-ac)} and preserves every eigenvalue. The direction associated with each eigenvalue matters for recovering individual pairs.`
+    : 'The matrix is the identity. Each direction accounts for one eighth of its variance.'}`;
+  drawRecovery();
+}
+neighborSlider.addEventListener('input', () => {
+  state.recovery.neighborN = neighborNs[Number(neighborSlider.value)];
+  renderRecovery();
+});
+strengthSlider.addEventListener('input', () => {
+  state.recovery.explained = explainedLevels[Number(strengthSlider.value)];
+  renderRecovery();
+});
+
 // ---------- Start ----------
 
 buildArrowsTable();
@@ -559,10 +607,11 @@ showEquiControls();
 showEntryControls();
 buildEntryGrid();
 renderEntry();
+renderRecovery();
 onWidth(arrowsPanel.scatter, () => renderArrows());
 renderCone();
 
-installApi({
+const api = installApi({
   presentation: {
     capture: () => sceneHistory.map((scene) => scene.capture()),
     restore: (saved) => sceneHistory.forEach((scene, i) => scene.restore(saved[i])),
@@ -596,6 +645,9 @@ installApi({
       else state.equi.r = p.r;
       showEquiControls();
       renderEqui();
+    } else if (p.view === 'recovery') {
+      state.recovery = { ...p };
+      renderRecovery();
     } else {
       state.entry.matrix = p.matrix.map((/** @type {number[]} */ row) => [...row]);
       state.entry.cell = /** @type {[number, number]} */ ([...p.cell]);
@@ -608,4 +660,10 @@ installApi({
     $(p.view).scrollIntoView({ block: 'start' });
   },
   getParams: () => resolveParams(paramsFor(state.view)),
+});
+
+$('recovery-inspect').addEventListener('click', () => {
+  api.submit({ entry: ENTRY, params: { view: 'entry-range', matrix: recoveryResult.example.population, cell: [0, 2] } });
+  $('entry-heading').tabIndex = -1;
+  $('entry-heading').focus({ preventScroll: true });
 });

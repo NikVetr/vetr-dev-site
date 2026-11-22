@@ -385,6 +385,26 @@ dl.stats dd small { font-size: 0.85rem; color: var(--muted); }
 .panel-side { display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
 .panel-side .control:first-child { border-top: 0; }
 .panel-side .readout { margin: 0.3rem 0 0; }
+@media (min-width: 900px) {
+  .panel-body.recovery-layout { grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.35fr); }
+}
+.recovery-layout output { font-weight: 650; font-variant-numeric: tabular-nums; color: var(--primary); }
+.recovery-layout .control-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+.recovery-readings h3, .recovery-detail h3 { font-size: 1rem; margin: 0.6rem 0 0.4rem; }
+.recovery-readings dl { margin: 0; }
+.recovery-readings dl > div { display: flex; justify-content: space-between; gap: 0.4rem; border-bottom: 1px solid var(--grid); padding: 0.3rem 0; }
+.recovery-readings dt { display: flex; gap: 0.45rem; align-items: center; }
+.recovery-readings dt svg { flex: none; }
+.plot .recovery-pairwise { stroke-dasharray: 2 3; }
+.plot .recovery-equal { stroke-dasharray: 6 3; }
+.recovery-readings dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+.recovery-detail { border-top: 1px solid var(--border); margin-top: 0.7rem; }
+.recovery-detail summary { padding: 0.6rem 0; cursor: pointer; font-weight: 600; }
+.recovery-detail p { max-width: var(--prose-width); margin: 0.3rem 0 0.8rem; }
+.recovery-spectrum { display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); max-width: 34rem; gap: 0.2rem; margin: 0.7rem 0; }
+.recovery-spectrum div { display: flex; flex-direction: column; align-items: center; justify-content: end; gap: 0.2rem; }
+.recovery-spectrum span, .recovery-spectrum small { font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+.recovery-spectrum i { background: var(--a); width: min(65%,2.4rem); }
 .side-heading { margin: 0.6rem 0 0; font-size: 1rem; }
 .curve-block { margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--grid); }
 .curve-block h3 { margin: 0; }

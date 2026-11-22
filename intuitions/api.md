@@ -6,7 +6,7 @@ The entries are:
 
 - [`zscore-outliers`](#zscore-outliers): pooled vs stratified z-score outlier removal for two normal groups.
 - [`threshold-model`](#threshold-model): discrete traits from a hidden normal liability, one or two traits, and the polychoric fit of a contingency table.
-- [`correlation-geometry`](#correlation-geometry): correlations as angles between arrows, in five views: data as arrows, the cone of fixed correlation, the cosine-rule range of a third correlation, how far apart *k* arrows can be, and one matrix entry's feasible interval (a feasible-correlation calculator).
+- [`correlation-geometry`](#correlation-geometry) covers correlations as angles between arrows, the feasible range of a matrix entry, and recovery of a weakly measured correlation from noisy pairwise studies.
 - [`typical-set`](#typical-set): where the probability mass is, in four views: the chi distribution as density × volume, the original script's cube criterion for six families against sampled radii, one-dimensional mixtures with their highest-density region at a water level, and one coordinate of a uniform point on the sphere.
 - [`dag-adjustment`](#dag-adjustment): adjustment sets in linear-Gaussian causal graphs: the regression coefficient each set gives against the causal effect, the adjustment criterion, every path, the front-door estimate, and what conditioning on many colliders does.
 - [`null-pvalues`](#null-pvalues): ways to break a p-value: under a true null, the p-values of a common shortcut beside a sound analysis, and the realised false-positive rate at α, in seven scenarios (a batch regressed out first, covariates removed one at a time, a t-test on bootstrap means, autocorrelated series, two-step filtering, paired data tested as independent, and pathway tests kept only where a pathway has a hit).
@@ -157,11 +157,11 @@ For a table, `{mode: "table", fit}`. A fit has:
 
 ## correlation-geometry
 
-Centre a variable's observations and scale them to length 1: the variable is an arrow, and the correlation of two variables is the cosine of the angle between their arrows. A correlation matrix is valid (positive semidefinite) exactly when some unit arrows have those angles. `params.view` picks one of five computations, all in closed form; the other fields depend on the view. Angles are in degrees.
+Centre a variable's observations and scale them to length 1: the variable is an arrow, and the correlation of two variables is the cosine of the angle between their arrows. A correlation matrix is valid (positive semidefinite) exactly when some unit arrows have those angles. The first five views compute the geometry directly. The sixth compares estimates in a seeded simulation. Angles are in degrees.
 
 | Field | Type | Default | Meaning |
 | --- | --- | --- | --- |
-| `view` | `"arrows"`, `"cone"`, `"cosine-rule"`, `"equicorrelation"` or `"entry-range"` | `"arrows"` | Which computation. |
+| `view` | `"arrows"`, `"cone"`, `"cosine-rule"`, `"equicorrelation"`, `"entry-range"` or `"recovery"` | `"arrows"` | Which computation. |
 
 ### view "arrows"
 
@@ -208,6 +208,18 @@ Result: `range`, the values of `r` for which the matrix is PSD: [−1/(*k* − 1
 | `observations` | integer 3–200 | `6` | *n* for the sample curve in `expectedWidth`. |
 
 With every other entry fixed, entry (*i*, *j*) can take any value in an interval: centre *c* = *r*ᵢᵀ*S*⁺*r*ⱼ ± √((1 − *r*ᵢᵀ*S*⁺*r*ᵢ)(1 − *r*ⱼᵀ*S*⁺*r*ⱼ)), where *S* is the correlation matrix of the other variables, *r*ᵢ and *r*ⱼ their correlations with *i* and *j*, and *S*⁺ the (pseudo-)inverse. Result: `p`; `cell`; `value`; `eigenvalues` (largest first) and `det` of the matrix; `singular` (smallest eigenvalue below 1e-9); `interval`, `centre` (the value that maximises det *R*), `width`, and `position` of `value` in the interval (0 at the lower end, `null` if the width is 0); `unexplained`, the shares of *i* and *j* the other variables leave unexplained (1 − *r*ᵢᵀ*S*⁺*r*ᵢ, 1 − *r*ⱼᵀ*S*⁺*r*ⱼ); `detOthers` (det *S*) and `detMax` (det *R* at the centre), so det *R* = `detOthers` × ((`width`/2)² − (*r* − `centre`)²); `widths`, every entry's interval width (`null` on the diagonal) and their `meanWidth`; and `expectedWidth`: `{observations, dimensions, uniform, sample}`, the expected width of one entry's interval for each *p* from 2 to 200, for a matrix drawn uniformly from all correlation matrices (LKJ, η = 1) and for the sample correlation matrix of `observations` observations of independent normal variables.
+
+### view "recovery"
+
+```json
+{"entry":"correlation-geometry","params":{"view":"recovery","explained":0.9,"neighborN":400}}
+```
+
+The A–C study has 12 observations. `neighborN` selects 12, 25, 50, 100, 200 or 400 observations for each of the other 27 independent bivariate Gaussian studies. `explained` selects the population R² for each target against the six neighbors, from 0 to 0.9 in increments of 0.1. Defaults are shown above.
+
+`selected` gives target RMSE for the raw pairwise estimate (`pairwise`), the nearest correlation matrix (`equal`) and the nearest matrix weighted by each pair's *n* − 3 (`weighted`). Both projections minimize squared changes on the correlation scale with a PSD constraint and unit diagonal. The weights are a sample-size heuristic. `indefinite` counts raw matrices with a negative eigenvalue. `gainSE` is the paired delta-method Monte Carlo SE of pairwise minus weighted RMSE. `curve` gives these results at each neighbor sample size. The UI and CLI read the same 60 precomputed designs, with `replicates` = 512 and `seed` = 1729. Regenerate them with NumPy using `OPENBLAS_NUM_THREADS=1 python3 intuitions/correlation-geometry/simulate_recovery.py` from the site root.
+
+The neighbors are independent standardized variables. The directions of the two targets' loadings have cosine 0.5. Independent simulations vary the residual correlation uniformly from −0.8 to 0.8. Within a replicate the same residual and Gaussian noise are reused across settings, with nested cohorts when sample sizes increase. The `interval` is the population PSD range with other entries fixed. `example.population` is one such matrix with zero residual correlation and A–C at cell [0, 2]. `example.spectrum` gives its ordered eigenvalues divided by eight. These shares lie on a simplex and can be given a prior in a Bayesian model. The three estimators here are prior-free.
 
 ### Method
 

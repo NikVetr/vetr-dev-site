@@ -38,6 +38,7 @@
           <li><a href="#cosine-rule">The cosine rule</a></li>
           <li><a href="#equicorrelation">How far apart can k arrows be?</a></li>
           <li><a href="#entry-range">One entry's room to move</a></li>
+          <li><a href="#recovery">Estimating a noisy pair</a></li>
         </ol>
       </nav>
     </div>
@@ -247,6 +248,46 @@
         <div id="entry-curve" class="plot-box"></div>
         <p class="caption">Expected width of one entry's interval in a <var>p</var> × <var>p</var> matrix, both scales logarithmic. Drawn uniformly from all correlation matrices (LKJ with <var>η</var> = 1), the room shrinks steadily as the other variables explain more of each arrow. The sample correlation matrix of <var>n</var> observations of independent variables shrinks faster: its arrows live in <var>n</var> − 1 dimensions, so it is singular once <var>p</var> ≥ <var>n</var>. At <var>p</var> = <var>n</var> every entry sits at one end of its interval, and from <var>p</var> = <var>n</var> + 1 every interval has width 0: each entry is fixed by the rest. The diamond is the matrix above (its mean width over all cells).</p>
       </div>
+    </section>
+
+    <section class="card panel" id="recovery" aria-labelledby="recovery-heading">
+      <h2 id="recovery-heading"><span class="panel-number">6</span> Estimating a noisy pair</h2>
+      <p class="panel-intro">Only 12 people have both A and C measured. Can six other variables help recover their correlation? Vary how precisely the other pairs are measured and how much the neighbors explain about A and C.</p>
+      <div class="panel-body recovery-layout">
+        <div class="panel-side">
+          <div class="control">
+            <div class="control-head"><label for="recovery-n">Observations per other pair</label><output id="recovery-n-value" for="recovery-n"></output></div>
+            <input id="recovery-n" type="range" min="0" step="1">
+          </div>
+          <div class="control">
+            <div class="control-head"><label for="recovery-strength">Variance explained per target (R²)</label><output id="recovery-strength-value" for="recovery-strength"></output></div>
+            <input id="recovery-strength" type="range" min="0" step="1">
+          </div>
+          <div class="recovery-readings">
+            <h3>Target error at the selected sample size</h3>
+            <dl id="recovery-scores"></dl>
+          </div>
+          <p class="hint" id="recovery-outcome" aria-live="polite"></p>
+        </div>
+        <figure>
+          <div id="recovery-plot" class="plot-box"></div>
+          <figcaption>Root mean squared error (RMSE) in the A–C correlation across 512 simulated datasets. Lower is better. Each pair is measured in a separate group. The shaded column marks the selected sample size.</figcaption>
+        </figure>
+      </div>
+      <details class="recovery-detail">
+        <summary>How the estimates are fitted</summary>
+        <p>The pairwise estimate uses only the 12 A–C observations. The two joint estimates find the closest positive-semidefinite correlation matrix by minimizing squared changes to all 28 sample correlations. One weights every pair equally. The other weights each pair by its sample size minus three, so a well-measured pair is more costly to move. At equal sample sizes the two fits coincide.</p>
+        <p id="recovery-geometry"></p>
+        <p>The six neighbors are independent Gaussian variables. A and C each have the selected R² against them. Their residual correlation varies uniformly from −0.8 to 0.8 across populations. Increasing sample size adds respondents to the other pair studies and keeps the target observations fixed.</p>
+      </details>
+      <details class="recovery-detail" id="recovery-priors">
+        <summary>What would an informative spectral prior add?</summary>
+        <p>The fits above use the PSD constraint alone. A Bayesian model can also express how much variation a few directions are likely to explain. The eight eigenvalues of a correlation matrix sum to eight, so dividing each by eight gives eight shares on a simplex. A prior on the ordered shares can favor one dominant direction, several, or a flatter spectrum. LKJ(1) gives equal density to valid correlation matrices and induces its own distribution on those shares.</p>
+        <h3>Variance by direction</h3>
+        <div class="recovery-spectrum" id="recovery-spectrum"></div>
+        <p id="recovery-spectrum-note"></p>
+        <button type="button" id="recovery-inspect">Inspect this matrix in panel 5</button>
+      </details>
     </section>
 
     <section class="notes card" aria-labelledby="notes-heading">

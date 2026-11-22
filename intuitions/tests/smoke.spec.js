@@ -163,6 +163,34 @@ test('correlation geometry: panels respond to controls, rotation, cell choice an
   expect(errors).toEqual([]);
 });
 
+test('correlation recovery: sliders, joint fits and the spectral example share API and history state', async ({ page }) => {
+  const errors = await open(page, 'correlation-geometry/#recovery');
+  expect(await page.evaluate(() => /** @type {any} */ (window).Intuitions.getRequest().params.view)).toBe('recovery');
+  const n = page.getByRole('slider', { name: 'Observations per other pair' });
+  const strength = page.getByRole('slider', { name: 'Variance explained per target (R²)' });
+  const scores = page.locator('#recovery-scores dd');
+  await expect(scores.nth(2)).toHaveText('0.102');
+  await n.press('Home');
+  await expect(n).toHaveAttribute('aria-valuetext', '12 observations');
+  expect(await scores.nth(1).innerText()).toBe(await scores.nth(2).innerText());
+  await strength.press('Home');
+  await expect(strength).toHaveAttribute('aria-valuetext', '0%');
+  const result = await page.evaluate(() => {
+    const app = /** @type {any} */ (window).Intuitions;
+    return app.submit({ entry: 'correlation-geometry', params: { view: 'recovery', explained: 0.2, neighborN: 400 } });
+  });
+  await expect(scores.nth(2)).toHaveText(result.result.selected.weighted.toFixed(3));
+  await page.locator('#recovery-priors summary').click();
+  await expect(page.locator('#recovery-spectrum div')).toHaveCount(8);
+  await page.getByRole('button', { name: 'Inspect this matrix in panel 5' }).click();
+  await expect(page.locator('#entry-heading')).toBeFocused();
+  await expect(page.locator('#entry-readout')).toContainText('AC');
+  await page.getByRole('button', { name: 'Undo', exact: true }).click();
+  await expect(strength).toHaveAttribute('aria-valuetext', '20%');
+  expect(await page.evaluate(() => /** @type {any} */ (window).Intuitions.getRequest().params)).toEqual(result.params);
+  expect(errors).toEqual([]);
+});
+
 test('probability mass: the shell, the cube, the water level and the sphere respond, and invalid fields are marked', async ({ page }) => {
   const errors = await open(page, 'typical-set/');
   await expect(page.locator('#shell-readout')).toContainText('between r = 1.99 and 4.28');

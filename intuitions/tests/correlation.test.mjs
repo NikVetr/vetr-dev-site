@@ -11,6 +11,36 @@ import {
 const cg = (params) => computeCorrelation(params);
 const close = (/** @type {number} */ a, /** @type {number} */ b, tol = 1e-12) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
 const minEig = (/** @type {number[][]} */ R) => symmetricEigen(R).values[R.length - 1];
+
+test('recovery compares the same noisy target at every neighbor sample size on the full design grid', () => {
+  for (let k = 0; k <= 9; k++) {
+    const q = k / 10;
+    const result = cg({ view: 'recovery', explained: q });
+    close(result.interval[0], q / 2 - (1 - q));
+    close(result.interval[1], q / 2 + (1 - q));
+    assert.equal(result.targetN, 12);
+    assert.equal(result.curve.length, 6);
+    assert.equal(result.curve[0].weighted, result.curve[0].equal);
+    for (const row of result.curve) {
+      assert.equal(row.pairwise, result.selected.pairwise);
+      assert.equal(cg({ view: 'recovery', neighborN: row.neighborN, explained: q }).selected.weighted, row.weighted);
+      assert.ok(row.indefinite >= 0 && row.indefinite <= result.replicates);
+    }
+    const { population, spectrum } = /** @type {{population:number[][], spectrum:number[]}} */ (result.example);
+    const flip = population.map((row, i) => row.map((v, j) => (i === 2) !== (j === 2) ? -v : v));
+    close(flip[0][2], -q / 2);
+    close(spectrum.reduce((a, b) => a + b, 0), 1);
+    symmetricEigen(flip).values.forEach((v, i) => close(v / 8, spectrum[i]));
+  }
+  const strong = cg({ view: 'recovery' }).selected;
+  const weak = cg({ view: 'recovery', explained: 0.2 }).selected;
+  // Independent NumPy reference (different Monte Carlo draw) in the original experiment.
+  close(strong.weighted, 0.1077, 0.02);
+  assert.ok(strong.weighted < strong.pairwise / 2);
+  assert.ok(Math.abs(weak.weighted - weak.pairwise) < 0.01);
+  assert.deepEqual(issues({ view: 'recovery', neighborN: 13, explained: '0.2' }),
+    ['wrong_type params.explained', 'out_of_range params.neighborN']);
+});
 /** The entry's interval by bisection on the smallest eigenvalue, independent of the formula. @param {number[][]} R @param {number} i @param {number} j */
 function bruteInterval(R, i, j) {
   const at = (/** @type {number} */ r) => {

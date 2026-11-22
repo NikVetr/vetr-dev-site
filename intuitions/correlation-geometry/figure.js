@@ -8,6 +8,35 @@ import { cross, normalize, scale } from '../lib/linalg.js';
 import { axisBottom, axisLeft, el, linePath, marker, niceTicks, scaleLinear, scaleLog, svgRoot, text } from '../lib/plot.js';
 import { det3, LIMITS, PLANE_BASIS, zeroPairRange } from './compute.js';
 
+export const recoverySeries = /** @type {const} */ ([
+  { key: 'pairwise', label: 'Pairwise', line: 'ink-line recovery-pairwise', shape: 'circle', mark: 'ink-mark' },
+  { key: 'equal', label: 'Equal-weight PSD', line: 'b-line recovery-equal', shape: 'diamond', mark: 'b-mark' },
+  { key: 'weighted', label: 'Sample-size-weighted PSD', line: 'a-line', shape: 'triangle', mark: 'a-mark' },
+]);
+
+/** @param {ReturnType<typeof import('./compute.js').recovery>} result @param {number} width */
+export function recoveryFigure({ curve, selected }, width) {
+  const height = 240, left = 37, right = width - 18, bottom = height - 41;
+  const sizes = curve.map((row) => row.neighborN);
+  const x = scaleLog([sizes[0], sizes[sizes.length - 1]], [left, right]);
+  const y = scaleLinear([0, 0.30], [bottom, 23]);
+  const selectedX = x(selected.neighborN);
+  const parts = [
+    el('rect', { x: selectedX - 6, width: 12, y: 18, height: bottom - 18, class: 'a-soft' }),
+    axisLeft({ scale: y, x: left, ticks: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3], format: (v) => v.toFixed(2), gridTo: right }),
+    axisBottom({ scale: x, y: bottom, ticks: sizes, label: 'Observations per other pair (log scale)' }),
+    text(left, 11, 'Target RMSE', { class: 'axis-label' }),
+  ];
+  for (const [i, { key, line, shape, mark }] of recoverySeries.entries()) {
+    const points = curve.map((row) => /** @type {[number, number]} */ ([x(row.neighborN), y(row[key])]));
+    parts.push(el('path', { d: linePath(points), class: line }));
+    for (const [j, [px, py]] of points.entries()) {
+      parts.push(marker(shape, px, py, (sizes[j] === selected.neighborN ? 6 : 3.8) - 0.6 * i, mark));
+    }
+  }
+  return svgRoot({ width, height, label: `Target RMSE by sample size at R squared ${selected.explained}. Selected scores are listed beside the plot.` }, parts);
+}
+
 /** @typedef {import('../lib/geom3d.js').Vec3} Vec3 */
 /** @typedef {import('../lib/geom3d.js').Quat} Quat */
 /** @typedef {import('../lib/geom3d.js').Camera} Camera */

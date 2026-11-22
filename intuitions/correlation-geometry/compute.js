@@ -2,8 +2,7 @@
 // to length 1: the variable becomes an arrow in n-dimensional observation space,
 // and the correlation of two variables is the cosine of the angle between their
 // arrows. A correlation matrix is then the table of cosines of a set of arrows, so
-// it is positive semidefinite (PSD) exactly when such arrows exist. Five views,
-// each in closed form:
+// it is positive semidefinite (PSD) exactly when such arrows exist. The views:
 //   arrows           data with 2 or 3 observations as arrows; r = cos θ
 //   cone             fixing r_BC puts arrow C on a cone around B; with 3
 //                    observations it meets the circle of possible arrows twice
@@ -12,6 +11,7 @@
 //                    positive when one pair is held at 0
 //   entry-range      one entry's interval given the rest of a matrix, and its
 //                    expected width as the dimension grows
+//   recovery         pairwise and PSD-constrained estimates in unequal-sized studies
 // The original R scripts are in ~/repos/minor_scripts/postdoc/ and
 // ~/repos/dissertation_work/one-off_scripts/; see api.md for what was corrected.
 
@@ -20,22 +20,24 @@ import { standardNormal } from '../lib/normal.js';
 import { checkInteger, checkNumber, invalidRequest, isObject, rejectUnknown } from '../lib/params.js';
 import { halfGammaRatio } from '../lib/special.js';
 import { mulberry32 } from '../../shared/rng.js';
+import { designs, explainedLevels, neighborNs, replicates, seed, targetN } from './recovery-grid.js';
 
 /** @typedef {import('../lib/params.js').Issue} Issue */
 /** @typedef {import('../lib/linalg.js').Vector} Vector */
 /** @typedef {[number, number, number]} Vec3 */
-/** @typedef {'arrows' | 'cone' | 'cosine-rule' | 'equicorrelation' | 'entry-range'} View */
+/** @typedef {'arrows' | 'cone' | 'cosine-rule' | 'equicorrelation' | 'entry-range' | 'recovery'} View */
 /**
  * @typedef {{ view: 'arrows', a: number[], b: number[] }} ArrowsParams
  * @typedef {{ view: 'cone', b: number[], a: number[], rBC: number }} ConeParams
  * @typedef {{ view: 'cosine-rule', rAB: number, rBC: number, rAC: number | null }} CosineParams
  * @typedef {{ view: 'equicorrelation', k: number, r: number, zeroPair: boolean }} EquiParams
  * @typedef {{ view: 'entry-range', matrix: number[][], cell: [number, number], observations: number }} EntryParams
- * @typedef {ArrowsParams | ConeParams | CosineParams | EquiParams | EntryParams} Params
+ * @typedef {{ view: 'recovery', explained: number, neighborN: number }} RecoveryParams
+ * @typedef {ArrowsParams | ConeParams | CosineParams | EquiParams | EntryParams | RecoveryParams} Params
  */
 
 export const ENTRY = 'correlation-geometry';
-export const VIEWS = /** @type {const} */ (['arrows', 'cone', 'cosine-rule', 'equicorrelation', 'entry-range']);
+export const VIEWS = /** @type {const} */ (['arrows', 'cone', 'cosine-rule', 'equicorrelation', 'entry-range', 'recovery']);
 
 export const LIMITS = Object.freeze({
   value: 1000, // largest |data value|
@@ -55,6 +57,7 @@ export const DEFAULTS = Object.freeze({
   cone: Object.freeze({ b: Object.freeze([1, 0, -1]), a: Object.freeze([-1, 2, -1]), rBC: 0.6 }),
   'cosine-rule': Object.freeze({ rAB: 0.8, rBC: 0.7, rAC: null }),
   equicorrelation: Object.freeze({ k: 3, r: -0.25, zeroPair: false }),
+  recovery: Object.freeze({ explained: 0.9, neighborN: 400 }),
   'entry-range': Object.freeze({
     matrix: Object.freeze([[1, 0.7, 0.5, 0.3], [0.7, 1, 0.6, 0.2], [0.5, 0.6, 1, 0.4], [0.3, 0.2, 0.4, 1]].map((row) => Object.freeze(row))),
     cell: Object.freeze([0, 3]),
@@ -67,6 +70,7 @@ const FIELDS = {
   cone: ['view', 'b', 'a', 'rBC'],
   'cosine-rule': ['view', 'rAB', 'rBC', 'rAC'],
   equicorrelation: ['view', 'k', 'r', 'zeroPair'],
+  recovery: ['view', 'explained', 'neighborN'],
   'entry-range': ['view', 'matrix', 'cell', 'observations'],
 };
 
@@ -117,6 +121,16 @@ export function resolveParams(params = {}) {
     const k = has('k') ? checkInteger(params.k, 'params.k', 2, LIMITS.maxK, d.k, issues) : d.k;
     if (zeroPair && k < 3) issues.push({ code: 'out_of_range', path: 'params.k', message: 'must be at least 3 when one pair is held at 0' });
     resolved = { view: v, k, r: correlation('r'), zeroPair };
+  } else if (v === 'recovery') {
+    /** @param {string} key @param {number[]} choices */
+    const setting = (key, choices) => {
+      if (!has(key)) return d[key];
+      if (choices.includes(params[key])) return params[key];
+      issues.push({ code: typeof params[key] === 'number' ? 'out_of_range' : 'wrong_type',
+        path: `params.${key}`, message: `must be one of ${choices.join(', ')}` });
+      return d[key];
+    };
+    resolved = { view: v, explained: setting('explained', explainedLevels), neighborN: setting('neighborN', neighborNs) };
   } else {
     const matrix = has('matrix') ? checkMatrix(params.matrix, issues) : d.matrix.map((/** @type {number[]} */ row) => [...row]);
     const p = matrix.length;
@@ -469,6 +483,25 @@ function entryRange({ matrix, cell, observations }) {
 
 // ---------- Matrices for the page ----------
 
+/** Paired simulation scores and a population example with zero residual correlation.
+ * @param {RecoveryParams} p */
+export function recovery({ explained, neighborN }) {
+  const curve = designs.filter((row) => row.explained === explained).map((row) => ({ ...row }));
+  const selected = curve.find((row) => row.neighborN === neighborN);
+  if (!selected) throw new Error('Missing correlation recovery design');
+  const population = Array.from({ length: 8 }, (_, i) => Array.from({ length: 8 }, (_, j) => Number(i === j)));
+  const loading = Math.sqrt(explained / 6);
+  [1, 3, 4, 5, 6, 7].forEach((j, k) => {
+    population[0][j] = population[j][0] = loading;
+    population[2][j] = population[j][2] = loading * (0.5 + (k < 3 ? 1 : -1) * Math.sqrt(0.75));
+  });
+  population[0][2] = population[2][0] = explained / 2;
+  const interval = entryInterval(population, 0, 2);
+  const spectrum = symmetricEigen(population).values.map((eigenvalue) => eigenvalue / population.length);
+  return { view: 'recovery', targetN, replicates, seed, selected, curve, interval: [interval.lo, interval.hi],
+    example: { population, spectrum } };
+}
+
 /** A Beta(a, b) draw for 2a and 2b whole numbers, as a ratio of sums of squared normals. @param {() => number} rng @param {number} a @param {number} b */
 function betaHalfInteger(rng, a, b) {
   const chi = (/** @type {number} */ dof) => {
@@ -530,5 +563,6 @@ export function compute(params) {
   if (p.view === 'cone') return cone(p);
   if (p.view === 'cosine-rule') return cosineRule(p);
   if (p.view === 'equicorrelation') return equicorrelation(p);
+  if (p.view === 'recovery') return recovery(p);
   return entryRange(p);
 }
