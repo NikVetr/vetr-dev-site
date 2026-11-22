@@ -10,6 +10,7 @@ let scene,
   picture,
   focalPoint,
   playing = false,
+  showingPoster = true,
   start = 0,
   raf = 0,
   recorder,
@@ -64,6 +65,7 @@ function tick(now) {
   else raf = requestAnimationFrame(tick);
 }
 function begin(t) {
+  showingPoster = false;
   show(t);
   start = performance.now() - t * 1000;
   playing = true;
@@ -71,8 +73,9 @@ function begin(t) {
   raf = requestAnimationFrame(tick);
 }
 play.onclick = () =>
-  playing ? stop() : begin(input('time').valueAsNumber === duration ? 0 : input('time').valueAsNumber);
+  playing ? stop() : begin(showingPoster || input('time').valueAsNumber === duration ? 0 : input('time').valueAsNumber);
 input('time').oninput = () => {
+  showingPoster = false;
   stop();
   show(input('time').valueAsNumber);
 };
@@ -143,7 +146,7 @@ const mime =
   ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/mp4', 'video/webm'].find((type) =>
     MediaRecorder.isTypeSupported(type),
   );
-video.title = mime ? 'Record the full 16-second sequence' : 'Video recording is unavailable in this browser';
+video.title = mime ? `Record the full ${duration}-second sequence` : 'Video recording is unavailable in this browser';
 video.onclick = () => {
   stop();
   let stream;
@@ -175,7 +178,7 @@ video.onclick = () => {
     show(0);
     recorder.start();
     lock(true);
-    status.textContent = 'Recording the 16-second sequence…';
+    status.textContent = `Recording the ${duration}-second sequence…`;
     begin(0);
   } catch (e) {
     stream?.getTracks().forEach((t) => t.stop());

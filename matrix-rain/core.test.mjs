@@ -7,7 +7,7 @@ test('frames are reproducible across seeking, with independent rain and opening 
   const opening = frame(scene, 11.2);
   assert.deepEqual(submit({ seed: 83, title: 'WAKE UP', time: 11.2 }), opening);
   assert.ok(opening.zoom > 2.9 && openTitle(opening) === 'WAKE UP');
-  assert.ok(frame(scene, 16).zoom > 11 && frame(scene, 16).imageAlpha > 0.99);
+  assert.ok(frame(scene, 16).zoom > 11 && frame(scene, 16).imageAlpha === 0);
   assert.deepEqual(frame(scene, 11.2), opening);
   const rain = submit({ mode: 'rain', time: 16 });
   assert.equal(rain.zoom, 1);
@@ -17,7 +17,7 @@ test('frames are reproducible across seeking, with independent rain and opening 
 });
 function openTitle(f) {
   return f.glyphs
-    .filter((g) => g.hot && g.y === 270)
+    .filter((g) => g.kind === 'title')
     .map((g) => g.char)
     .join('');
 }
@@ -26,34 +26,22 @@ test('invalid time, controls and unknown fields produce request errors', () => {
     assert.throws(() => submit(v), { code: 'invalid_request' });
 });
 
-test('the title centers on the optical axis; outline precedes focus and the mask follows the image', () => {
-  for (const title of ['The Extracellular Matrix', 'The Correlation Matrix', 'ODD', 'Q'.repeat(40)]) {
-    const s = makeScene({ title });
-    const f = frame(s, 11.15);
-    const line = [...title].map((char, i) => {
-      const x = 480 + (i - (title.length - 1) / 2) * (960 / 84) * f.zoom;
-      return f.glyphs.find((g) => g.char === char && g.y === 270 && Math.abs(g.x - x) < 1e-9);
-    });
-    assert.ok(line.every(Boolean));
-    const outline = frame(s, 13.5),
-      midway = frame(s, 15),
-      end = frame(s, 16);
-    assert.equal(f.imageAlpha + f.outlineAlpha, 0);
-    assert.ok(outline.outlineAlpha > 0 && outline.imageAlpha === 0 && outline.zoom > f.zoom);
-    assert.ok(outline.imageZoom >= 0.75 && outline.imageZoom < 0.85);
-    assert.ok(midway.imageZoom > outline.imageZoom && midway.imageZoom < end.imageZoom);
-    assert.ok(0.09 * 810 * end.imageZoom > 800, 'one lens nearly spans the film');
-    assert.equal(frame(s, 15.55).blackout, 0);
-    assert.ok(frame(s, 15.75).blackout > 0 && frame(s, 15.75).blackout < 1);
-    assert.equal(end.blackout, 1);
-    assert.ok(midway.imageAlpha > 0 && midway.rainBlur > 0 && midway.zoom > outline.zoom);
-    assert.equal(end.imageAlpha, 1);
-    assert.ok(frame(s, 14.2).rainAlpha > end.rainAlpha);
-    const progress = (t) => frame(s, t).cameraProgress;
-    assert.ok(progress(14.85) - progress(14.35) > 2 * (progress(14.0) - progress(13.5)));
-    for (const shot of [midway, end])
-      assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - outline.maskPitch / outline.imageZoom) < 1e-10);
+test('the original portrait envelope precedes both logistic title moves', () => {
+  const scene = makeScene();
+  for (const [time, alpha] of [[0,0],[.25,0],[.875,.5],[1.5,1],[1.75,1],[3.25,.5],[4.75,0],[14.75,0]]) {
+    const shot = frame(scene, time);
+    assert.equal(shot.imageAlpha, alpha);
+    if (time > 0 && time < 5) assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - 1.25/.78) < 1e-10);
+    if (time < 8) assert.equal(openTitle(shot), '');
   }
+  assert.ok(Math.abs(frame(scene, 8).zoom - 2) < 1e-6);
+  assert.ok(Math.abs(frame(scene, 14.75).zoom - 7.5) < 1e-4);
+  for (const title of ['The Extracellular Matrix','The Correlation Matrix','ODD','Q'.repeat(40)]) {
+    const shot = frame(makeScene({title}), 11.15);
+    assert.equal(openTitle(shot), title);
+    assert.equal(shot.outlineAlpha + shot.imageAlpha, 0);
+  }
+  assert.equal(frame(scene, 15.5).blackout, 1);
 });
 test('each hidden phrase is readable top to bottom during an early drop in both modes', () => {
   for (const mode of ['opening', 'rain']) {
@@ -91,13 +79,14 @@ test('rain becomes the title at impact, clears before blinking, and the last let
       assert.ok(at.every(g => g.kind !== 'rain' || g.y < midY));
     }
     assert.ok(frame(scene, 3, aspect).zoom > frame(scene, 1, aspect).zoom);
-    for (const t of [10.86, 11.8, 12.42, 13.5])
+    const others = titles.filter(s => !['G','O'].includes(s.letter) || Math.abs(s.i+.5-scene.targetColumn)>1);
+    const afterOthers = Math.max(...others.map(s=>s.fade)) + .25;
+    for (const t of [12.3,13.5,afterOthers])
       assert.ok(frame(scene, t, aspect).glyphs.every(g => g.kind === 'title'));
-    const pair = frame(scene, 12.42, aspect).glyphs;
-    assert.equal(pair.map(g => g.char).join(''), 'GO');
-    assert.equal(frame(scene, 12.8, aspect).glyphs.length, 0);
+    assert.equal(openTitle(frame(scene, afterOthers, aspect)).trim(), 'GO');
+    assert.equal(frame(scene, 15.4, aspect).glyphs.length, 0);
     const z = t => frame(scene, t, aspect).zoom;
-    assert.ok(z(12.15) - z(12) > z(11.43) - z(11.28));
+    assert.ok(z(14.75) - z(14.5) > z(13.75) - z(13.5));
   }
   for (const title of ['', '  ', 'X', '𐐷 Y']) assert.doesNotThrow(() => frame(makeScene({ title }), 12.4));
 });

@@ -1,16 +1,14 @@
 // Coordinates are in a 960 × 540 view. Seeking a frame never advances shared state.
 import { checkRequestKeys, invalidRequest } from '../shared/request.js';
 import { mulberry32 } from '../shared/rng.js';
-export const duration = 16;
+export const duration = 15.5;
 const clamp = (x) => Math.max(0, Math.min(1, x));
 function ease(time, start, end) {
   const x = clamp((time - start) / (end - start));
   return x * x * (3 - 2 * x);
 }
-// Integrating a sinusoidal speed gives a smooth push with parked endpoints.
-function push(time, start, end) {
-  return (1 - Math.cos(Math.PI * clamp((time - start) / (end - start)))) / 2;
-}
+// The two camera moves in Matrix_GreenRain.R use logistic curves.
+const logistic = x => 1 / (1 + Math.exp(-x));
 function lastLetters(letters) {
   const historic = letters.join('').toUpperCase() === 'THE MONTGOMERY LAB';
   if (historic) {
@@ -32,7 +30,7 @@ const columns = 84,
   dy = 540 / rows;
 const finalZoom = 12;
 const outlineScale = 0.78;
-const closeupScale = 11.5;
+
 
 export function makeScene({
   title = 'The Correlation Matrix',
@@ -90,8 +88,8 @@ export function makeScene({
   const survivors = lastLetters(letters);
   const streams = Array.from({ length: columns }, (_, i) => {
     const word = planted.get(i) ?? [];
-    const lock = 7.1 + 3.2 * rand(),
-      blink = 11.45 + 0.64 * rand(),
+    const lock = 8 + 3 * rand(),
+      blink = 13 + 2 * rand(),
       length = Math.max(9 + Math.floor(rand() * 16), word.length + 5);
     const start = 0.1 + rand() * 0.9,
       period = rows + length + 4;
@@ -100,7 +98,7 @@ export function makeScene({
     return {
       word,
       lock,
-      fade: survivors.includes(i - first) ? 12.43 + .16 * survivors.indexOf(i - first) : blink,
+      fade: blink,
       length,
       start,
       speed,
@@ -110,6 +108,11 @@ export function makeScene({
       sequence: Array.from({ length: 149 }, () => glyphs[Math.floor(rand() * glyphs.length)]),
     };
   });
+  const lastFade = Math.max(...streams.filter(s => s.letter.trim()).map(s => s.fade));
+  for (const [i, stream] of streams.entries()) {
+    const survivor = survivors.indexOf(i - first);
+    stream.fade = survivor < 0 ? stream.fade - .25 : lastFade + (survivor - .5) * .125;
+  }
   return {
     title,
     mode,
@@ -122,7 +125,7 @@ export function makeScene({
 }
 /** @param {ReturnType<typeof makeScene>} scene @param {number} time */
 export function frame(scene, time, aspect = 16 / 9) {
-  if (!Number.isFinite(time) || time < 0 || time > duration)
+  if (!Number.isFinite(time) || time < 0 || time > 16)
     throw invalidRequest('time', 'Frame time must be between 0 and 16 seconds.');
   if (!Number.isFinite(aspect) || aspect <= 0) throw invalidRequest('aspect', 'Aspect ratio must be positive.');
   const viewHeight = 960 / aspect, midY = viewHeight / 2;
@@ -130,15 +133,10 @@ export function frame(scene, time, aspect = 16 / 9) {
   const rowCount = middleRow * 2, rowStep = midY / middleRow;
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
-  const focus = opening ? ease(time, 13.5, 14.75) : 0;
-  const approach = opening ? push(time, 5.4, 10.5) : 0;
-  const intoTitle = opening ? push(time, 11.28, 12.83) : 0;
-  const travel = opening ? push(time, 13.5, 15.55) : 0;
-  const drift = opening ? 0.32 * Math.min(time / 10.5, 1) : 0;
-  const titleCamera = 1 + drift + (titleZoom - 1.32) * approach;
-  const lastZoom = 7.5;
-  const zoom = titleCamera + (lastZoom - titleZoom) * intoTitle + (finalZoom - lastZoom) * travel;
-  const glassZoom = zoom * (closeupScale / outlineScale * lastZoom / finalZoom) ** travel;
+  const portrait = opening ? clamp((time - .25) / 1.25) * (1 - clamp((time - 1.75) / 3)) : 0;
+  const approach = opening ? logistic(2 * (time - 8)) : 0;
+  const intoTitle = opening ? logistic(4 * (time - 14.75)) : 0;
+  const zoom = 1 + (titleZoom - 1) * approach + (finalZoom - titleZoom) * intoTitle;
   const center = columns / 2 + (scene.centerColumn - columns / 2) * approach +
     (scene.targetColumn - scene.centerColumn) * intoTitle;
   const glyphs = [];
@@ -148,13 +146,13 @@ export function frame(scene, time, aspect = 16 / 9) {
     const period = rowCount + s.length + 4;
     const speed = opening && s.letter ? (period + middleRow) / (s.lock - s.start) : s.speed;
     const phase = (time - s.start) * speed;
-    if (phase < 0) continue;
+    if (phase < 0 || (opening && !s.letter && phase >= 2 * period)) continue;
     const locked = opening && s.letter && time >= s.lock;
     // A title stream makes one pass, then its next head lands on the title.
     // Subsequent tail glyphs are absorbed at that cell, never restarting below it.
     const head = locked ? middleRow + (time - s.lock) * speed : phase % period;
-    const fade = locked ? 1 - ease(time, s.fade, s.fade + .12) : 0;
-    const rain = opening ? (1 - ease(time, 10.22, 10.85)) * (locked ? 1 - ease(time, s.lock, s.lock + .65) : 1) : 1;
+    const fade = locked ? 1 - clamp((time - s.fade) / .25) : 0;
+    const rain = opening ? (1 - ease(time, 11, 12.25)) * (locked ? 1 - ease(time, s.lock, s.lock + .65) : 1) : 1;
     for (let tail = 0; rain > 0 && tail < s.length; tail++) {
       const row = head - tail;
       if (row < 0 || row >= rowCount || (locked && row >= middleRow - .001)) continue;
@@ -187,14 +185,14 @@ export function frame(scene, time, aspect = 16 / 9) {
     glyphs,
     crt: scene.crt,
     size: dy * zoom,
-    outlineAlpha: opening ? 0.62 * ease(time, 12.8, 13.42) * (1 - focus) : 0,
-    imageAlpha: focus,
-    cameraProgress: travel,
-    blackout: opening ? Math.max(1 - ease(time, 0, .15), ease(time, 15.55, 15.92)) : 0,
-    imageZoom: opening ? (glassZoom / lastZoom) * outlineScale : 1 / 8,
-    maskPitch: 1.25 * glassZoom,
-    rainAlpha: 1 - 0.84 * focus,
-    rainBlur: 8 * focus,
+    outlineAlpha: .62 * portrait * (1 - clamp((time - .25) / 1.25)),
+    imageAlpha: portrait,
+    cameraProgress: 0,
+    blackout: opening ? Math.max(1 - ease(time, 0, .15), ease(time, 15.32, duration)) : 0,
+    imageZoom: opening ? outlineScale * zoom : 1 / 8,
+    maskPitch: 1.25 * zoom,
+    rainAlpha: 1,
+    rainBlur: 0,
   };
 }
 
