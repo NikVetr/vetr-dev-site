@@ -57,27 +57,27 @@
     <main>
       <div class="workflow">
         <nav class="modes" aria-label="Request type">
-          <button type="button" data-mode="restaurant" aria-pressed="true">
+          <a class="button" href="?mode=restaurant" data-mode="restaurant" aria-current="page">
             <svg aria-hidden="true"><use href="#dining-icon" /></svg>
             Find a table
-          </button>
-          <button type="button" data-mode="menu" aria-pressed="false">
+          </a>
+          <a class="button" href="?mode=menu" data-mode="menu">
             <svg aria-hidden="true"><use href="#menu-icon" /></svg>
             Read a menu
-          </button>
-          <button type="button" data-mode="lodging" aria-pressed="false">
+          </a>
+          <a class="button" href="?mode=lodging" data-mode="lodging">
             <svg aria-hidden="true"><use href="#bed-icon" /></svg>
             Find lodging
-          </button>
-          <button type="button" data-mode="outing" aria-pressed="false">
+          </a>
+          <a class="button" href="?mode=outing" data-mode="outing">
             <svg aria-hidden="true"><use href="#sights-icon" /></svg>
             Plan an outing
-          </button>
+          </a>
         </nav>
         <a class="preview-link" href="#output">Preview prompt ↓</a>
       </div>
 
-      <div class="workspace">
+      <div class="workspace" inert aria-busy="true">
         <div class="builder">
           <section class="panel" aria-labelledby="trip-title">
             <div class="section-head">

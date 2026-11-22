@@ -9,7 +9,11 @@ const field = (id) =>
 const button = (id) => /** @type {HTMLButtonElement} */ (byId(id));
 const promptBox = /** @type {HTMLTextAreaElement} */ (byId('prompt'));
 const status = byId('output-status');
-let mode = 'restaurant';
+function linkedMode() {
+  const value = new URLSearchParams(location.search).get('mode');
+  return value && Object.hasOwn(modes, value) ? value : 'restaurant';
+}
+let mode = linkedMode();
 const drafts = Object.fromEntries(
   Object.keys(modes).map((key) => [key, { ...newRequest(), mode: key }])
 );
@@ -95,9 +99,10 @@ function displayMode() {
   const d = drafts[mode];
   document
     .querySelectorAll('[data-mode]')
-    .forEach((el) =>
-      el.setAttribute('aria-pressed', String(el.getAttribute('data-mode') === mode))
-    );
+    .forEach(el => {
+      if (el.getAttribute('data-mode') === mode) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
+    });
   document.querySelectorAll('[data-modes]').forEach((/** @type {HTMLElement} */ el) => {
     el.hidden = !el.dataset.modes.split(' ').includes(mode);
   });
@@ -146,12 +151,23 @@ for (const id of [...ids, ...bookingCounts, 'childAges', 'restaurant-time', 'lod
   const control = field(id);
   control.addEventListener(control instanceof HTMLSelectElement ? 'change' : 'input', refresh);
 }
-document.querySelectorAll('[data-mode]').forEach((el) =>
-  el.addEventListener('click', () => {
-    mode = el.getAttribute('data-mode');
-    displayMode();
+function followLocation() {
+  const next = linkedMode();
+  if (next === mode) return;
+  mode = next;
+  displayMode();
+}
+document.querySelectorAll('a[data-mode]').forEach((/** @type {HTMLAnchorElement} */ link) =>
+  link.addEventListener('click', event => {
+    if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (link.dataset.mode !== mode) {
+      history.pushState(null, '', link.href);
+      followLocation();
+    }
   })
 );
+window.addEventListener('popstate', followLocation);
 button('locate').addEventListener('click', () => {
   const key = mode,
     d = drafts[key];
@@ -217,3 +233,6 @@ button('share').addEventListener('click', async () => {
 });
 Object.assign(window, { TravelPrompt: { submit } });
 displayMode();
+const workspace = /** @type {HTMLElement} */ (document.querySelector('.workspace'));
+workspace.inert = false;
+workspace.removeAttribute('aria-busy');

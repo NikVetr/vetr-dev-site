@@ -181,7 +181,8 @@ main {
   padding: 0.25rem;
   gap: 0.2rem;
 }
-.modes button {
+.modes a {
+  text-decoration: none;
   background: transparent;
   border-color: transparent;
   gap: 0.55rem;
@@ -198,7 +199,7 @@ svg:not(.symbols) {
   stroke-linejoin: round;
   flex: none;
 }
-.modes button[aria-pressed='true'],
+.modes a[aria-current='page'],
 .primary {
   background: var(--accent);
   color: var(--accent-ink);
@@ -623,7 +624,7 @@ dialog::backdrop {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
   }
-  .modes button {
+  .modes a {
     padding: 0.45rem 0.15rem;
     flex-direction: column;
     gap: 0.2rem;
@@ -641,7 +642,7 @@ dialog::backdrop {
   .modes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .modes button {
+  .modes a {
     flex-direction: row;
     gap: 0.45rem;
   }

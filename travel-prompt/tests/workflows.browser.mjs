@@ -278,3 +278,30 @@ test('one tap after editing a destination shares the current prompt', async () =
     await app.close();
   }
 });
+
+test('a workflow chosen before startup opens directly and Back restores the trip draft', async () => {
+  const app = await open();
+  const {page} = app;
+  try {
+    await page.route('**/travel-prompt/app.mjs', route => route.abort());
+    await page.reload();
+    assert.equal(await page.locator('.workspace').getAttribute('inert'), '');
+    const lodging = page.getByRole('link', {name: 'Find lodging'});
+    assert.equal(await lodging.getAttribute('href'), '?mode=lodging');
+    await page.unroute('**/travel-prompt/app.mjs');
+    await lodging.click();
+    await page.waitForSelector('.workspace:not([inert])');
+    assert.equal(await page.locator('#trip-title').innerText(), 'Find somewhere to stay');
+    assert.equal(await lodging.getAttribute('aria-current'), 'page');
+    await page.locator('#place').fill('Kyoto');
+    await page.getByRole('link', {name: 'Plan an outing'}).click();
+    assert.equal(new URL(page.url()).search, '?mode=outing');
+    assert.equal(await page.locator('#place').inputValue(), '');
+    await page.goBack();
+    await page.waitForSelector('a[data-mode="lodging"][aria-current="page"]');
+    assert.equal(await page.locator('#place').inputValue(), 'Kyoto');
+    assert.deepEqual(app.errors, []);
+  } finally {
+    await app.close();
+  }
+});

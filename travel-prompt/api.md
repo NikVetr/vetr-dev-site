@@ -1,6 +1,6 @@
 # Travel Prompt
 
-The browser and CLI compose a plain-text request for the user's preferred chat assistant. Open `/travel-prompt/` from a local HTTP server serving the site root. Choose a workflow, fill in the request, then copy or share the preview. The app does not call a chat, mapping, or booking API.
+The browser and CLI compose a plain-text request for the user's preferred chat assistant. Open `/travel-prompt/` from a local HTTP server serving the site root. Choose a workflow, fill in the request, then copy or share the preview. Each workflow has a direct link, such as `/travel-prompt/?mode=lodging`. The URL identifies only the workflow. The app does not call a chat, mapping, or booking API.
 
 Use `window.TravelPrompt.submit(request)`, import `submit` from `core/prompt.mjs`, or run `node travel-prompt/cli.mjs request.json`. The CLI accepts JSON from stdin when invoked without a file and prints one JSON result. Unknown fields and invalid values raise `invalid_request` with an issues array containing the offending field path. CLI exit status 1 indicates invalid input and 2 indicates a usage or file error.
 
